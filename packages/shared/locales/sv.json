@@ -76,7 +76,7 @@
             "body1": "Ange ditt lösenord för att säkerhetskopiera dina plånböcker till en Stronghold-fil. Ditt lösenord används för att kryptera säkerhetskopian.",
             "body2": "Anledningar till varför digitala säkerhetskopior är viktiga:",
             "reason1": "Enkelt att återställa dina plånböcker utan att skriva in din återställningsfras",
-            "reason2": "Import your wallets on other devices",
+            "reason2": "Importera dina plånböcker på andra enheter",
             "reason3": "Återställ hela din transaktionshistorik"
         },
         "recoveryPhraseSaved": {
@@ -96,7 +96,7 @@
             "importSeed": "Jag har en 81 tecken lång seed",
             "importSeedDescription": "Ange en seed och migrera IOTA till Chrysalis",
             "importMnemonic": "Jag har en Firefly återställningsfras",
-            "importMnemonicDescription": "Enter your recovery phrase to recover your wallets",
+            "importMnemonicDescription": "Ange din återställningsfras för att återställa dina plånböcker",
             "importFile": "Jag har en digital säkerhetskopia",
             "importFileDescription": "Ladda upp en Seedvault- eller Stronghold-fil"
         },
@@ -147,6 +147,7 @@
             "restoringWallet": "Återställer plånboken...",
             "findingBalance": "Söker saldo...",
             "incorrectSeedVaultPassword": "Felaktigt lösenord för SeedVault.",
+            "noDataSeedVault": "No data could be found in the SeedVault.",
             "signingBundle": "Signerar bundle",
             "broadcastingBundle": "Sänder bundle",
             "miningBundle": "Utvinner säker bundle",
@@ -245,7 +246,9 @@
             },
             "appLock": {
                 "title": "Automatiskt lås",
-                "description": "Inaktivitetstid innan din plånbok låses och du loggas ut"
+                "description": "Inaktivitetstid innan din plånbok låses och du loggas ut",
+                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
+                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
             },
             "changePassword": {
                 "title": "Ändra lösenord",
@@ -461,8 +464,8 @@
         },
         "balanceFinder": {
             "title": "Hitta saldo",
-            "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
-            "totalWalletBalance": "Total balance",
+            "body": "Utför en mer uttömmande sökning av adresser för att hitta saknade saldon. Detta kan ta ett tag.",
+            "totalWalletBalance": "Totalt saldo",
             "typePassword": "Ange ditt lösenord för att tillåta sökning."
         },
         "riskFunds": {
@@ -697,7 +700,8 @@
         "receivedTo": "Mottaget till {account}",
         "sentFrom": "Skickat från {account}",
         "receiving": "Tar emot",
-        "sending": "Skickar"
+        "sending": "Skickar",
+        "legacyNetwork": "Legacy Network"
     },
     "dates": {
         "today": "Idag",

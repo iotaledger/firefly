@@ -2,7 +2,7 @@
     "views": {
         "onboarding1": {
             "title": "发送，接收&管理您的IOTA",
-            "body": "Firefly is the official wallet software of IOTA."
+            "body": "Firefly 是IOTA的官方钱包软件。"
         },
         "legal": {
             "title": "隐私政策和服务条款",
@@ -11,7 +11,7 @@
         },
         "appearance": {
             "title": "外观",
-            "body": "Choose your app theme."
+            "body": "选择您的App主题"
         },
         "profile": {
             "title": "新建配置文件",
@@ -28,7 +28,7 @@
         "secure": {
             "title": "保障钱包的安全",
             "body1": "保存和打印Recovery Kit PDF模板。",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallets."
+            "body2": "如果您填写Recovery Kit并安全存储它，您就能够恢复您的钱包。"
         },
         "password": {
             "title": "设置密码",
@@ -37,7 +37,7 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your profile.",
+            "body1": "设置登录 PIN 码，确保只有您能访问您的钱包。",
             "body2": "请安全保管您的 PIN 码！"
         },
         "pin": {
@@ -73,10 +73,10 @@
         },
         "backupWallet": {
             "title": "备份到 Stronghold 文件",
-            "body1": "Enter your password to backup your wallets to a Stronghold file. Your password is used to encrypt the backup.",
+            "body1": "请输入您的密码来备份您的钱包到一个Stronghold文件。您的密码将用来加密这个备份文件。",
             "body2": "数字备份很重要的原因：",
-            "reason1": "Easily recover your wallets without typing in your recovery phrase",
-            "reason2": "Import your wallets on other devices",
+            "reason1": "不需要输入您的恢复密语就能轻松恢复您的钱包",
+            "reason2": "导入你的钱包到其他设备",
             "reason3": "恢复您的全部交易记录"
         },
         "recoveryPhraseSaved": {
@@ -92,41 +92,41 @@
         },
         "import": {
             "title": "恢复或迁移资金",
-            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
-            "importSeed": "I have an 81 character seed",
-            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
-            "importMnemonic": "I have a Firefly recovery phrase",
-            "importMnemonicDescription": "Enter your recovery phrase to recover your wallets",
-            "importFile": "I have a file backup",
-            "importFileDescription": "Upload a Seedvault or Stronghold file"
+            "body": "如果您已经有一个seed或钱包备份文件，你可以在这里导入。 如果您在旧的IOTA主网持有资金，您将会通过迁移步骤将资金转移到Chrysalis网络。",
+            "importSeed": "我有一个81个字符的seed",
+            "importSeedDescription": "输入seed并将资金迁移到Chrysalis",
+            "importMnemonic": "我有一个Fifrefly恢复密语",
+            "importMnemonicDescription": "输入恢复密语来找回您的钱包",
+            "importFile": "我有一个备份文件",
+            "importFileDescription": "上传Seedvault或Stronghold 文件"
         },
         "importFromText": {
             "seed": {
-                "title": "Type your seed to commence migration",
-                "body": "A seed consists of 81 characters. This is used to recover from the older Trinity app.",
-                "enter": "Enter your seed"
+                "title": "键入您的seed以开始迁移",
+                "body": "一个seed由81个字符组成。它用于从旧的的 Trinity 钱包中进行恢复。",
+                "enter": "输入您的seed"
             },
             "mnemonic": {
-                "title": "Type your recovery phrase",
-                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly wallets.",
-                "enter": "Enter your secret recovery phrase"
+                "title": "输入您的恢复密语",
+                "body": "恢复密语长度为24个单词，单词全部为小写，单词间由空格隔开。这个密语可用于恢复已有的Firefly钱包。",
+                "enter": "请输入您的seed或恢复密语"
             },
             "seedDetected": "检测到81个字符种子",
             "phraseDetected": "检测到24个单词恢复密语",
             "checksum": "校验和"
         },
         "importFromFile": {
-            "title": "Restore your wallets using a backup file",
-            "body": "Import a backup file to restore your wallets. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+            "title": "使用备份文件恢复你的钱包",
+            "body": "导入备份文件以恢复您的钱包。备份可以是 Stronghold (.stronghold) 或 Trinity SeedVault (.kdbx)格式。"
         },
         "importBackupPassword": {
-            "title": "Restore your wallets from a SeedVault or Stronghold",
+            "title": "使用SeedVault或Stronghold文件恢复你的钱包",
             "body1": "请输入您的备份密码。",
             "body2": "这是您首次创建备份时设置的密码。"
         },
         "importSuccess": {
             "title": "您已成功恢复您的备份。",
-            "body": "You can now set up your new profile.",
+            "body": "您现在可以设置新的配置文件。",
             "seedvaultTitle": "导入成功",
             "seedvaultBody": "您的密码正确，您现在可以继续。",
             "strongholdTitle": "导入成功",
@@ -147,10 +147,11 @@
             "restoringWallet": "正在恢复钱包...",
             "findingBalance": "正在寻找余额...",
             "incorrectSeedVaultPassword": "SeedVault 密码不正确。",
+            "noDataSeedVault": "No data could be found in the SeedVault.",
             "signingBundle": "签名包",
             "broadcastingBundle": "广播包",
             "miningBundle": "签名包",
-            "problemRestoringWallet": "There was a network error restoring your wallet. Please try again.",
+            "problemRestoringWallet": "恢复钱包出现网络异常，请重试。",
             "minimumMigrationAmountSpentAddresses": "每个已花费地址的最小迁移金额为1Mi，请再次检查你的余额是否符合。",
             "tooManyAddressesToMigrate": "你有太多的低余额地址需要迁移，如果您的余额看起来不对，请再次检查。",
             "cannotMigrateAllYourFunds": "我们不能迁移您的所有资金，因为某些地址的价值太低。您仍然可以继续，但是 {value} 将会丢失。",
@@ -201,7 +202,7 @@
             "settings": "设置",
             "generalSettings": {
                 "title": "常规设置",
-                "description": "Configure your app's appearance and other general settings"
+                "description": "配置您的应用外观和其他常规设置"
             },
             "security": {
                 "title": "安全设置",
@@ -220,7 +221,7 @@
                 "description": "更改您的账户名称或设置头像"
             },
             "sync": {
-                "title": "Sync wallets",
+                "title": "同步钱包",
                 "description": ""
             },
             "theme": {
@@ -241,15 +242,17 @@
             },
             "exportStronghold": {
                 "title": "导出备份",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history."
+                "description": "导出到 Stronghold文件 - 完整加密备份您的钱包及其最新交易记录。"
             },
             "appLock": {
                 "title": "自动锁定",
-                "description": "Inactivity time before your wallets lock and you are logged out"
+                "description": "自动锁定钱包并登出的待机时间",
+                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
+                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
             },
             "changePassword": {
                 "title": "修改密码",
-                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds."
+                "description": "您的密码是用来保护您的钱包的。您必须使用一个强有力的密码来保护您的资金。"
             },
             "changePincode": {
                 "title": "修改 PIN 码",
@@ -260,16 +263,16 @@
                 "action": "更改 PIN 码"
             },
             "balanceFinder": {
-                "title": "Balance finder",
-                "description": "Perform an extended search of your addresses for tokens."
+                "title": "余额搜索器",
+                "description": "对您的币地址进行扩展搜索。"
             },
             "hiddenAccounts": {
-                "title": "Hidden wallets",
-                "description": "Selecting this options will show wallets that were previously hidden."
+                "title": "隐藏钱包列表",
+                "description": "选择此选项将显示以前隐藏的钱包。"
             },
             "deleteProfile": {
                 "title": "删除配置文件",
-                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup."
+                "description": "删除您的整个账户信息、钱包和交易历史。请确保您有一个备份。"
             },
             "deepLinks": {
                 "title": "深链接",
@@ -285,7 +288,7 @@
             },
             "configureNodeList": {
                 "title": "选择节点",
-                "description": "Manage the list of IOTA network nodes you connect to.",
+                "description": "管理您连接的 IOTA网络节点列表。",
                 "primaryNode": "主节点",
                 "excludeNode": "排除此节点",
                 "includeNode": "包含此节点",
@@ -354,8 +357,8 @@
                 },
                 "strongholdStatus": {
                     "title": "钱包状态",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "locked": "锁定",
+                    "unlocked": "解锁"
                 },
                 "strongholdBackup": {
                     "title": "钱包备份",
@@ -379,7 +382,7 @@
     "popups": {
         "password": {
             "title": "需要输入密码",
-            "subtitle": "Please enter your password to unlock your wallets",
+            "subtitle": "请输入您的密码来解锁您的钱包",
             "backup": "请输入您的密码以导出备份"
         },
         "qr": {
@@ -391,34 +394,34 @@
             "upToDateDescription": "你正在运行的Firefly是最新的，最安全的版本。",
             "updateAvailable": "Firefly有可用的更新",
             "updateDetails": "版本{version} - {date}",
-            "noAutoUpdate": "Auto-update is disabled in this Windows version, please go to https://firefly.iota.org to download the update."
+            "noAutoUpdate": "此Windows版本禁用自动更新，请访问 https://firefly.iota.org 下载更新。"
         },
         "backup": {
             "title": "上次备份: {date}",
             "lastBackup": "您上次的备份 {date}",
-            "backupDescription": "It is important to back up regularly to ensure you have a copy of your wallets and transaction history.",
+            "backupDescription": "定期备份您的钱包和交易记录是非常重要的。",
             "backupWarning": "如果您丢失了备份文件和恢复短语，您将再也不能访问您的资金",
             "notBackedUp": "没有备份",
-            "notBackedUpDescription": "You have not backed up your wallets",
+            "notBackedUpDescription": "您还未备份您的钱包",
             "saving": "正在保存..."
         },
         "deleteAccount": {
             "title": "删除{name}?",
-            "body": "This wallet has no transaction history. It can safely be deleted.",
+            "body": "此钱包没有交易历史。它可以被安全地删除。",
             "typePassword": "请输入您的钱包密码进行确认。",
-            "hideAccount": "Delete wallet",
+            "hideAccount": "删除钱包",
             "errorTitle": "无法删除 {name}",
-            "errorBody1": "You cannot delete this wallet, you must have at least one."
+            "errorBody1": "您不能删除这个钱包，您必须至少有一个钱包"
         },
         "hideAccount": {
             "title": "是否隐藏 {name}？",
-            "body": "You can find this wallet later by enabling \"Show hidden wallets\" in Advanced Settings.",
+            "body": "您可以稍后通过在高级设置中启用\"显示隐藏账户\"来查找此钱包。",
             "typePassword": "请输入您的钱包密码进行确认。",
-            "hideAccount": "Hide wallet",
+            "hideAccount": "隐藏钱包",
             "errorTitle": "无法隐藏 {name}",
-            "errorBody1": "To hide a wallet it must have 0 balance.",
-            "errorBody2": "You currently have {balance} remaining on this wallet. Please move these funds to a different wallet and try again.",
-            "errorBody3": "You cannot hide this wallet, you must have at least one."
+            "errorBody1": "你只能隐藏余额为0的钱包",
+            "errorBody2": "目前你的这个账户还有 {balance} 余额. 请把这些资金移动到另一个钱包后重试。",
+            "errorBody3": "您不能隐藏这个钱包，您必须至少有一个钱包"
         },
         "addressHistory": {
             "title": "{name} 地址历史记录",
@@ -460,10 +463,10 @@
             "body": "您将要发送 {amount} 到"
         },
         "balanceFinder": {
-            "title": "Balance finder",
-            "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
-            "totalWalletBalance": "Total balance",
-            "typePassword": "Type your password to allow searching."
+            "title": "寻找余额",
+            "body": "对地址进行更详尽的搜索以找到缺失的余额。此操作可能需要一段时间。",
+            "totalWalletBalance": "总余额",
+            "typePassword": "输入您的密码以允许搜索。"
         },
         "riskFunds": {
             "title": "警告：迁移过程面临风险的资金",
@@ -477,19 +480,19 @@
             "proceed": "我已经了解风险"
         },
         "snapshot": {
-            "title": "Ongoing network upgrade",
-            "body": "The Chrysalis network upgrade has begun.",
-            "bodyMigration": "Migration is disabled until it is complete.",
-            "bodyFirefly": "Firefly is disabled until it is complete. Token migration will still be possible afterwards."
+            "title": "正在进行网络升级",
+            "body": "Chrysalis网络升级已经开始。",
+            "bodyMigration": "在维护完成之前暂不支持迁移功能。",
+            "bodyFirefly": "在完成之前Firefly将被暂停使用。完成之后您仍然可以进行代币迁移。"
         }
     },
     "charts": {
-        "incomingMi": "Incoming {value}",
-        "outgoingMi": "Outgoing {value}",
+        "incomingMi": "转入 {value}",
+        "outgoingMi": "发送 {value}",
         "portoflio": "资产组合",
         "token": "Token",
-        "accountValue": "Wallet Value",
-        "accountActivity": "Wallet Activity",
+        "accountValue": "钱包金额",
+        "accountActivity": "钱包活动",
         "timeframe1Hour": "1 小时",
         "timeframe1Day": "1 天",
         "timeframe1Week": "1 周",
@@ -543,11 +546,11 @@
         "updateFirefly": "更新Firefly",
         "restartNow": "立即重启",
         "saveBackup": "保存Stronghold备份",
-        "customizeAcount": "Customise wallet",
+        "customizeAcount": "自定义钱包",
         "viewAddressHistory": "显示地址历史记录",
-        "hideAccount": "Hide wallet",
-        "showAccount": "Unhide wallet",
-        "deleteAccount": "Delete wallet",
+        "hideAccount": "隐藏钱包",
+        "showAccount": "取消隐藏该钱包",
+        "deleteAccount": "删除钱包",
         "max": "最大",
         "addNode": "添加节点",
         "updateNode": "更新节点",
@@ -563,7 +566,7 @@
         "copy": "复制",
         "paste": "粘贴",
         "selectAll": "全选",
-        "addAccount": "Add Wallet",
+        "addAccount": "添加钱包",
         "checkForUpdates": "检查更新",
         "reportAnIssue": "反馈问题",
         "clear": "清除",
@@ -578,13 +581,13 @@
         "readDocumentation": "阅读文档",
         "visitFaq": "访问常见问题",
         "viewStatus": "查看状态",
-        "showHiddenAccounts": "Show hidden wallets",
+        "showHiddenAccounts": "显示隐藏钱包",
         "confirm": "确认",
-        "findBalances": "Find balances",
-        "searchBalances": "Search for balances",
-        "searchAgain": "Search again",
-        "searching": "Searching...",
-        "closeFirefly": "Close Firefly"
+        "findBalances": "寻找余额",
+        "searchBalances": "搜索余额",
+        "searchAgain": "重新搜索",
+        "searching": "搜索中...",
+        "closeFirefly": "关闭Firefly"
     },
     "general": {
         "password": "密码",
@@ -602,10 +605,10 @@
         "sendFunds": "发送资金",
         "sendToAddress": "发送至地址",
         "scanQrOrPaste": "扫描二维码或粘贴地址",
-        "moveFundsBetweenAccounts": "Move funds between wallets",
+        "moveFundsBetweenAccounts": "钱包间资金互转",
         "sendTokensToAddress": "发送Token到另一个地址",
-        "manageAccount": "Manage Wallet",
-        "customizeAcount": "Customize your wallet",
+        "manageAccount": "管理钱包",
+        "customizeAcount": "自定义你的钱包",
         "account": "钱包",
         "sendingToAddress": "发送至地址",
         "amount": "金额",
@@ -627,25 +630,25 @@
         "lightTheme": "浅色主题",
         "darkTheme": "深色主题",
         "balance": "余额",
-        "accountBalance": "Wallet Balance",
+        "accountBalance": "钱包余额",
         "incoming": "收到",
         "outgoing": "转出",
         "totalIn": "收入总计",
         "totalOut": "支出总计",
-        "accounts": "Wallets",
-        "myAccounts": "My Wallets",
+        "accounts": "钱包列表",
+        "myAccounts": "我的钱包",
         "automaticNodeSelection": "自动选择节点",
         "manualNodeSelection": "手动选择节点",
         "profiles": "用户配置",
         "developerProfile": "开发者模式",
         "developerProfileDescription": "允许您连接到测试网",
         "dev": "开发者",
-        "createAccount": "Create a Wallet",
-        "accountName": "Wallet name",
+        "createAccount": "创建钱包",
+        "accountName": "钱包名称",
         "latestTransactions": "最新交易",
         "transactions": "交易",
         "security": "安全设置",
-        "accountAddress": "Wallet Address",
+        "accountAddress": "钱包地址",
         "nodes": "节点",
         "wallet": "钱包",
         "help": "帮助",
@@ -657,26 +660,26 @@
         "status": "状态",
         "confirmed": "已确认",
         "pending": "正在处理",
-        "noAccounts": "You have no wallets, please create one.",
+        "noAccounts": "您还没有钱包，请创建一个。",
         "loadingAccounts": "加载中，请稍候...",
         "addProfile": "添加个人档案",
         "noRecentHistory": "没有最近的历史记录",
-        "firstSync": "Syncing history, this may take a while...",
-        "transferSyncing": "Syncing wallet",
+        "firstSync": "同步历史记录，可能需要一段时间...",
+        "transferSyncing": "正在同步钱包",
         "transferSelectingInputs": "选择输入",
         "transferRemainderAddress": "生成剩余的存款地址",
         "transferSigning": "签名交易",
         "transferPow": "执行PoW",
         "transferBroadcasting": "正在广播交易...",
         "transferComplete": "转账完毕",
-        "creatingAccount": "Creating wallet, please wait...",
-        "updatingAccount": "Updating wallet, please wait...",
-        "accountSyncing": "Wallet is syncing",
-        "accountSyncComplete": "Wallet sync complete",
+        "creatingAccount": "正在创建钱包，请稍候...",
+        "updatingAccount": "正在更新钱包，请稍候...",
+        "accountSyncing": "正在同步钱包",
+        "accountSyncComplete": "钱包同步完成",
         "passwordUpdating": "正在更新密码...",
         "passwordSuccess": "密码更新成功",
         "passwordFailed": "更新密码失败",
-        "syncingAccounts": "Syncing wallets...",
+        "syncingAccounts": "正在同步钱包...",
         "exportingStronghold": "导出Stronghold...",
         "exportingStrongholdSuccess": "Stronghold导出成功",
         "exportingStrongholdFailed": "Stronghold导出失败",
@@ -691,13 +694,14 @@
         "passwordStrength4": "强壮的",
         "creatingProfile": "正在创建帐户，请稍候...",
         "fundMigration": "资金迁移",
-        "accountRemoved": "This wallet is hidden. Unhide it to perform transfers.",
-        "receivingTo": "Receiving to {account}",
-        "sendingFrom": "Sending from {account}",
-        "receivedTo": "Received to {account}",
-        "sentFrom": "Sent from {account}",
-        "receiving": "Receiving",
-        "sending": "Sending"
+        "accountRemoved": "此钱包被隐藏。请取消隐藏以执行转账。",
+        "receivingTo": "正在接收到 {account}",
+        "sendingFrom": "正在从 {account} 发送",
+        "receivedTo": "已接收至 {account}",
+        "sentFrom": "已从 {account} 发送",
+        "receiving": "接收",
+        "sending": "发送",
+        "legacyNetwork": "Legacy Network"
     },
     "dates": {
         "today": "今日",
@@ -720,7 +724,7 @@
         "calcMinutesRemaining": "正在计算剩余分钟...",
         "minutesRemaining": "{minutes, plural, one {还剩最后一分钟...} other {还剩余 # 分钟...}}",
         "copiedToClipboard": "复制到剪贴板",
-        "accountsSynchronized": "Wallet synchronization complete",
+        "accountsSynchronized": "钱包同步完成",
         "migratedAccountChrysalisDown": "您的资金将在4月28日Chrysalis升级完成后可用",
         "migratedAccountChrysalisUp": "您的资金将很快就可用。"
     },
@@ -752,10 +756,10 @@
             "incorrect": "您当前的 PIN 码不正确。"
         },
         "account": {
-            "length": "Your wallet name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "empty": "You must use your latest wallet before creating a new one.",
-            "notEmpty": "You must transfer your balance before deleting this wallet.",
-            "duplicate": "A wallet with this name already exists.",
+            "length": "您的钱包名称不能超过 {length, plural, one {1 个字符} other {# 字符}}。",
+            "empty": "您必须先使用您最新的钱包之后才能创建一个新钱包。",
+            "notEmpty": "您必须在删除此帐户之前转移您的余额。",
+            "duplicate": "此名称的钱包已经存在",
             "tilde": "配置名称不能以“~”字符开头。",
             "control": "配置名称不能包含控制字符。",
             "startDot": "配置名称不能以 '.' 字符开头。",
@@ -770,8 +774,8 @@
             "wrongAddressPrefix": "地址以前缀 {prefix} 开始。",
             "wrongAddressFormat": "地址格式不正确。",
             "invalidAddress": "地址无效的",
-            "insufficientFunds": "This wallet has insufficient funds.",
-            "noToAccount": "You have not selected a wallet to send the funds to.",
+            "insufficientFunds": "该账户资金不足。",
+            "noToAccount": "您尚未选择一个收款账户来发送资金。",
             "sendingDust": "您的发送不能小于 1 Mi。",
             "leavingDust": "您的地址余额不能少于1Mi。"
         },

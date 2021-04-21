@@ -11,7 +11,7 @@
         },
         "appearance": {
             "title": "Voorkoms",
-            "body": "Kies u apptema."
+            "body": "Kies jou apptema."
         },
         "profile": {
             "title": "Skep 'n Profiel",
@@ -76,7 +76,7 @@
             "body1": "Voer jou wagwoord in om you beursie na 'n Stronghold lêer te back-up. Jou wagwoord word gebruik om die back-up te enkripteer.",
             "body2": "Redes waarom digitale back-ups belangrik is:",
             "reason1": "Herwin jou beursie maklik sonder om jou herstelfrase in te tik",
-            "reason2": "Import your wallets on other devices",
+            "reason2": "Voer jou beursies op ander toestelle in",
             "reason3": "Besigtig jou transaksie geskiedenis"
         },
         "recoveryPhraseSaved": {
@@ -96,7 +96,7 @@
             "importSeed": "Ek het 'n seed van 81 karakters",
             "importSeedDescription": "Voer 'n seed in en migreer fondse na Chrysalis",
             "importMnemonic": "Ek het 'n Firefly herstel frase",
-            "importMnemonicDescription": "Enter your recovery phrase to recover your wallets",
+            "importMnemonicDescription": "Voer jou geheime frase in om jou beursie te herstel",
             "importFile": "Ek het 'n lêer back-up",
             "importFileDescription": "Laai 'n Seedvault of Stronghold-lêer op"
         },
@@ -147,6 +147,7 @@
             "restoringWallet": "Beursie hersteling...",
             "findingBalance": "Bevinding van balans...",
             "incorrectSeedVaultPassword": "Verkeerde SeedVault wagwoord.",
+            "noDataSeedVault": "Geen data kon in die SeedVault gevind word nie.",
             "signingBundle": "Signing bundle",
             "broadcastingBundle": "Uitsaaibondel",
             "miningBundle": "Bondelmynbou",
@@ -245,7 +246,9 @@
             },
             "appLock": {
                 "title": "Sluit outomaties",
-                "description": "Onaktiwiteitstyd voordat jou beursies sluit en jou uitgeteken"
+                "description": "Onaktiwiteitstyd voordat jou beursies sluit en jou uitgeteken",
+                "durationMinute": "{time, plural, one {1 minuut} other {# minute}}",
+                "durationHour": "{time, plural, one {1 huur} other {# ure}}"
             },
             "changePassword": {
                 "title": "Verander wagwoord",
@@ -461,8 +464,8 @@
         },
         "balanceFinder": {
             "title": "Balans-finder",
-            "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
-            "totalWalletBalance": "Total balance",
+            "body": "Doen 'n meer volledige soektog na adresse om ontbrekende saldo's te vind. Dit kan 'n rukkie neem.",
+            "totalWalletBalance": "Totale balans",
             "typePassword": "Tik jou wagwoord in om te begin soek."
         },
         "riskFunds": {
@@ -584,7 +587,7 @@
         "searchBalances": "Soek na balanse",
         "searchAgain": "Soek weer",
         "searching": "Soek tans...",
-        "closeFirefly": "Close Firefly"
+        "closeFirefly": "Maak Firefly toe"
     },
     "general": {
         "password": "Wagwoord",
@@ -602,10 +605,10 @@
         "sendFunds": "Stuur fondse",
         "sendToAddress": "Stuur na 'n adres",
         "scanQrOrPaste": "Skandeer 'n QR-kode of plak 'n adres",
-        "moveFundsBetweenAccounts": "Move funds between wallets",
+        "moveFundsBetweenAccounts": "Skuif fondse tussen jou beursies",
         "sendTokensToAddress": "Stuur tokens na 'n adres",
-        "manageAccount": "Manage Wallet",
-        "customizeAcount": "Customize your wallet",
+        "manageAccount": "Bestuur beursie",
+        "customizeAcount": "Pas you beursie aan",
         "account": "Beursie",
         "sendingToAddress": "Oppad na adres",
         "amount": "Bedrag",
@@ -627,25 +630,25 @@
         "lightTheme": "Ligte tema",
         "darkTheme": "Donker tema",
         "balance": "Balans",
-        "accountBalance": "Wallet Balance",
+        "accountBalance": "Beursie Waarde",
         "incoming": "Inkomende",
         "outgoing": "Uitgaande",
         "totalIn": "Totaal in",
         "totalOut": "Totaak uit",
-        "accounts": "Wallets",
-        "myAccounts": "My Wallets",
+        "accounts": "Beursies",
+        "myAccounts": "My Beursie",
         "automaticNodeSelection": "Outomatiese node seleksie",
         "manualNodeSelection": "Manuele node seleksie",
         "profiles": "Profiel",
         "developerProfile": "Ontwikkelaarsprofiel",
         "developerProfileDescription": "Hiermee kan jy verbind met testnets",
         "dev": "Dev",
-        "createAccount": "Create a Wallet",
-        "accountName": "Wallet name",
+        "createAccount": "Skep 'n Beursie",
+        "accountName": "Beursie naam",
         "latestTransactions": "Nuutste transaksie",
         "transactions": "Transaksies",
         "security": "Sekuriteit",
-        "accountAddress": "Wallet Address",
+        "accountAddress": "Beursie se Adres",
         "nodes": "Nodes",
         "wallet": "Beursie",
         "help": "Hulp",
@@ -657,26 +660,26 @@
         "status": "Status",
         "confirmed": "Bevestig",
         "pending": "Hangende",
-        "noAccounts": "You have no wallets, please create one.",
+        "noAccounts": "Jy het geen beursies nie, skep asseblief een.",
         "loadingAccounts": "Wag asseblief terwyl dit laai...",
         "addProfile": "Voeg profiel by",
         "noRecentHistory": "Geen onlangse geskiedenis nie",
-        "firstSync": "Syncing history, this may take a while...",
-        "transferSyncing": "Syncing wallet",
+        "firstSync": "Gesinkroniseer geskiedenis, dit kan 'n rukkie neem...",
+        "transferSyncing": "Sinkroniseer beursie",
         "transferSelectingInputs": "Kies inputs",
         "transferRemainderAddress": "Genereer oorblyfsel deposito adres",
         "transferSigning": "Onderteken die transaksie",
         "transferPow": "Uitvoering van PoW",
         "transferBroadcasting": "Uitsaai van die transaksie",
         "transferComplete": "Oordrag voltooi",
-        "creatingAccount": "Creating wallet, please wait...",
-        "updatingAccount": "Updating wallet, please wait...",
-        "accountSyncing": "Wallet is syncing",
-        "accountSyncComplete": "Wallet sync complete",
+        "creatingAccount": "Skep tans beursie, wag asseblief...",
+        "updatingAccount": "Opdatering van beursie, wag asseblief...",
+        "accountSyncing": "Die beursie word tans gesinkroniseer",
+        "accountSyncComplete": "Sinkronisering van beursie is voltooi",
         "passwordUpdating": "Wagwoord opdatering aan die gang...",
         "passwordSuccess": "Wagwoord suksesvol opgedateer",
         "passwordFailed": "Kon nie wagwoord opdateer nie",
-        "syncingAccounts": "Syncing wallets...",
+        "syncingAccounts": "Sinkroniseer beursie...",
         "exportingStronghold": "Voer Stronghold uit...",
         "exportingStrongholdSuccess": "Die Stronghold is suksesvol uitgevoer",
         "exportingStrongholdFailed": "Uitgevoer van Stronghold het misluk",
@@ -691,13 +694,14 @@
         "passwordStrength4": "Sterk",
         "creatingProfile": "Skep tans profiel op, wag asseblief...",
         "fundMigration": "Fondsmigrasie",
-        "accountRemoved": "This wallet is hidden. Unhide it to perform transfers.",
+        "accountRemoved": "Hierdie beursie is versteek. Wys dit om oordragte uit te kan voer.",
         "receivingTo": "Ontvangs na {account}",
         "sendingFrom": "Stuur vanaf {account}",
         "receivedTo": "Ontvangs na {account}",
         "sentFrom": "Stuur vanaf {account}",
         "receiving": "Ontvangs",
-        "sending": "Besig om te stuur"
+        "sending": "Besig om te stuur",
+        "legacyNetwork": "Erfenisnetwerk"
     },
     "dates": {
         "today": "Vandag",
@@ -720,13 +724,13 @@
         "calcMinutesRemaining": "Bereken oorblywende minute...",
         "minutesRemaining": "{minutes, plural, one {1 minuut oor} other {# minute oor}}",
         "copiedToClipboard": "Kopieer na knipbord",
-        "accountsSynchronized": "Wallet synchronization complete",
+        "accountsSynchronized": "Beursie sinchronisasie voltooi",
         "migratedAccountChrysalisDown": "Jou fondse sal na Chrysalis op 28 April beskikbaar wees",
         "migratedAccountChrysalisUp": "Jou fondse sal binnekort beskikbaar wees"
     },
     "error": {
         "profile": {
-            "length": "Jou profielnaam mag nie langer as {length, plural, karakter {1 karakter} other {# karakters}}.",
+            "length": "Jou profielnaam mag nie langer as {length, plural, one {1 karakter} other {# karakters}}.",
             "duplicate": "Daar bestaan ​​reeds 'n profiel met hierdie naam."
         },
         "password": {
@@ -752,10 +756,10 @@
             "incorrect": "Jou huidige PIN is verkeerd."
         },
         "account": {
-            "length": "Your wallet name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "empty": "You must use your latest wallet before creating a new one.",
-            "notEmpty": "You must transfer your balance before deleting this wallet.",
-            "duplicate": "A wallet with this name already exists.",
+            "length": "Jou beursie naam mag nie langer as {length, plural, one {1 karakter} other {# karakters}}.",
+            "empty": "Jy moet jou nuutste beursie gebruik voordat jy 'n nuwe een skep.",
+            "notEmpty": "Jy moet jou balans oordra voordat jy hierdie beursie uitvee.",
+            "duplicate": "Daar bestaan ​​reeds 'n beursie met hierdie naam.",
             "tilde": "'N Profielnaam kan nie met die' ~ 'karakter begin nie.",
             "control": "'N Profielnaam kan nie 'n beheerkarakter bevat nie.",
             "startDot": "'N Profielnaam kan nie begin met die'. ' karakter.",
@@ -770,8 +774,8 @@
             "wrongAddressPrefix": "Adresse begin met die voorvoegsel {prefix}.",
             "wrongAddressFormat": "Die adres is nie korrek geformateer nie.",
             "invalidAddress": "Die adres is nie geldig nie.",
-            "insufficientFunds": "This wallet has insufficient funds.",
-            "noToAccount": "You have not selected a wallet to send the funds to.",
+            "insufficientFunds": "Hierdie beursie het onvoldoende fondse.",
+            "noToAccount": "Jy het nie 'n beursie gekies om die fondse na te stuur nie.",
             "sendingDust": "Jy kan nie minder as 1 Mi. stuur nie.",
             "leavingDust": "Jy kan nie minder as 1 Mi op jou adres los nie."
         },

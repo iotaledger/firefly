@@ -221,10 +221,15 @@
                 },
                 onError(err) {
                     isGeneratingAddress = false
-                    showAppNotification({
+
+                    const shouldHideErrorNotification = err && err.type === 'ClientError' && err.error === 'error.node.chrysalisNodeInactive'
+
+                    if (!shouldHideErrorNotification) {
+                        showAppNotification({
                         type: 'error',
                         message: locale(err.error),
-                    })
+                        })
+                    }
                 },
             })
         }

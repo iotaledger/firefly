@@ -2,7 +2,7 @@
     "views": {
         "onboarding1": {
             "title": "Envía, recibe y gestiona tus tokens IOTA",
-            "body": "Firefly is the official wallet software of IOTA."
+            "body": "Firefly es el software oficial de billetera de IOTA."
         },
         "legal": {
             "title": "Política de privacidad y términos de servicio",
@@ -11,24 +11,24 @@
         },
         "appearance": {
             "title": "Apariencia",
-            "body": "Choose your app theme."
+            "body": "Elije el tema de tu app."
         },
         "profile": {
             "title": "Crear un perfil",
-            "body1": "Puedes crear varios perfiles de usuario para organizar tus carteras y mejorar la privacidad.",
+            "body1": "Puedes crear varios perfiles de usuario para organizar tus billeteras y mejorar la privacidad.",
             "body2": "Por ahora, empieza nombrando tu primer perfil de usuario. Puedes añadir más perfiles luego.",
             "profileName": "Nombre del perfil"
         },
         "setup": {
-            "title": "Configurar una cartera",
+            "title": "Configurar una billetera",
             "chrysalisTitle": "Actualización de red Chrysalis",
             "chrysalisBody": "Desde el 21 de Abril, los usuarios podrán migrar sus tokens a la nueva red Chrysalis. Te recomendamos migrar tus tokens existentes lo antes posible.",
             "learnMore": "Aprende acerca de la migración"
         },
         "secure": {
-            "title": "Asegure su cartera",
+            "title": "Asegure su billetera",
             "body1": "Guarda e imprime la plantilla PDF del Kit de Recuperación.",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallets."
+            "body2": "Si rellenas el Kit de Recuperación y lo almacenas de forma segura, siempres podrás recuperar tus billeteras."
         },
         "password": {
             "title": "Crea una contraseña",
@@ -37,7 +37,7 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your profile.",
+            "body1": "Configura un PIN de inicio de sesión para asegurarte de que sólo tú puedes acceder a tu perfil.",
             "body2": "¡Mantén tu PIN seguro!"
         },
         "pin": {
@@ -73,19 +73,19 @@
         },
         "backupWallet": {
             "title": "Respaldar en un archivo Stronghold",
-            "body1": "Enter your password to backup your wallets to a Stronghold file. Your password is used to encrypt the backup.",
+            "body1": "Introduce tu contraseña para realizar una copia de seguridad de tus billeteras un archivo Stronghold. Tu contraseña es utlizada para encriptar la copia de seguridad.",
             "body2": "Razones por las que las copias de seguridad digitales son importantes:",
-            "reason1": "Easily recover your wallets without typing in your recovery phrase",
-            "reason2": "Import your wallets on other devices",
+            "reason1": "Recupera fácilmente tus billeteras sin escribir tu frase de recuperación",
+            "reason2": "Importa tus billeteras a otros dispositivos",
             "reason3": "Recuperar todo tu historial de transacciones"
         },
         "recoveryPhraseSaved": {
             "title": "Respaldado con éxito",
-            "body": "You have backed up your wallets to a Stronghold."
+            "body": "Has realizado una copia de seguridad de tus billeteras a un Stronghold."
         },
         "congratulations": {
             "title": "Configuración del monedero completada",
-            "body": "Su nueva cartera está lista para usar.",
+            "body": "Su nueva billetera está lista para usar.",
             "fundsMigrated": "Fondos migrados",
             "success": "Tus fondos han sido migrados con éxito a la nueva red",
             "exportMigration": "Exportar registro de migración y finalizar la configuración"
@@ -96,19 +96,19 @@
             "importSeed": "Tengo el seed the 81 caracteres",
             "importSeedDescription": "Ingresa un seed y migra fondos a Chrysalis",
             "importMnemonic": "Tengo una frase the recuperación de Firefly",
-            "importMnemonicDescription": "Enter your recovery phrase to recover your wallets",
+            "importMnemonicDescription": "Introduce tu frase de recuperación para recuperar tus billeteras",
             "importFile": "Tengo un archivo de respaldo",
             "importFileDescription": "Subir un archivo Seedvault o Stronghold"
         },
         "importFromText": {
             "seed": {
                 "title": "Escribe tu seed para iniciar la migración",
-                "body": "A seed consists of 81 characters. This is used to recover from the older Trinity app.",
+                "body": "Una seed consta de 81 caracteres. Ésta se usa para la recuperación desde una app Trinity más antigua.",
                 "enter": "Ingresa tu seed"
             },
             "mnemonic": {
                 "title": "Escribe tu frase de recuperación",
-                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly wallets.",
+                "body": "Una frase de recuperación tiene una longitud de 24 palabras, todas en minúsculas, con espacios entre ellas. Ésta se emplea para recuperar billeteras Firefly existentes.",
                 "enter": "Ingresa tu frase de recuperación secreta"
             },
             "seedDetected": "Semilla de 81 caracteres detectada",
@@ -116,17 +116,17 @@
             "checksum": "Código de Verificación"
         },
         "importFromFile": {
-            "title": "Restore your wallets using a backup file",
-            "body": "Import a backup file to restore your wallets. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+            "title": "Restaura tus billeteras usando un archivo de copia de seguridad",
+            "body": "Importa un archivo de copia de seguridad para restaurar tus billeteras. Las copias de seguridad pueden ser Stronghold (.stronghold) o Trinity SeedVault (.kdbx)."
         },
         "importBackupPassword": {
-            "title": "Restore your wallets from a SeedVault or Stronghold",
+            "title": "Restaura tus billeteras desde un SeedVault o Stronghold",
             "body1": "Por favor, introduce tu contraseña de respaldo.",
             "body2": "Esta es la contraseña que configuraste cuando creaste por primera vez tu respaldo."
         },
         "importSuccess": {
             "title": "Has recuperado con éxito tu respaldo",
-            "body": "You can now set up your new profile.",
+            "body": "Ahora puede configurar su nuevo perfil.",
             "seedvaultTitle": "Importado con éxito",
             "seedvaultBody": "Tu contraseña es correcta, ahora puedes continuar.",
             "strongholdTitle": "Importado con éxito",
@@ -134,7 +134,7 @@
         },
         "migrate": {
             "title": "Migrar tus fondos",
-            "body1": "Éste es un proceso automatizado para transferir tus fondos a tu nueva cartera.",
+            "body1": "Éste es un proceso automatizado para transferir tus fondos a tu nueva billetera.",
             "body2": "Puede tardar un tiempo. No apagues tu dispositivo durante la migración.",
             "existing": "Tu antigua billetera",
             "new": "Tu nueva billetera",
@@ -147,10 +147,11 @@
             "restoringWallet": "Restaurando la billetera...",
             "findingBalance": "Buscando saldo...",
             "incorrectSeedVaultPassword": "Clave de SeedVault incorrecta.",
+            "noDataSeedVault": "No se encontraron datos en la SeedVault.",
             "signingBundle": "Paquete de firmas",
             "broadcastingBundle": "Transmitiendo paquete",
             "miningBundle": "Minando paquete",
-            "problemRestoringWallet": "There was a network error restoring your wallet. Please try again.",
+            "problemRestoringWallet": "Se ha producido un error de red restaurando tu billetera. Por favor inténtalo de nuevo.",
             "minimumMigrationAmountSpentAddresses": "El monto mínimo es de 1 Mi para cada dirección de pago. Revisa, otra vez, si tu saldo no parece correcto.",
             "tooManyAddressesToMigrate": "Tu tienes muchas direcciones con un saldo bajo para migrar. Revisa de nuevo si tu saldo no parece estar correcto.",
             "cannotMigrateAllYourFunds": "No podemos migrar todos los fondos, ya que, algunas direcciones tienen un saldo muy bajo. Tu puedes continuar de todos modos. Se perderá {value}.",
@@ -201,7 +202,7 @@
             "settings": "Ajustes",
             "generalSettings": {
                 "title": "Ajustes generales",
-                "description": "Configure your app's appearance and other general settings"
+                "description": "Configura la apariencia de la app y otros ajustes generales"
             },
             "security": {
                 "title": "Seguridad",
@@ -220,7 +221,7 @@
                 "description": "Cambiar el nombre de tu perfil o establecer un avatar"
             },
             "sync": {
-                "title": "Sync wallets",
+                "title": "Sincronizar billeteras",
                 "description": ""
             },
             "theme": {
@@ -241,15 +242,17 @@
             },
             "exportStronghold": {
                 "title": "Exportar copia de seguridad",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history."
+                "description": "Exportar a un archivo Stronghold - una copia de seguridad completa encriptada de tus billeteras y último historial de transacciones."
             },
             "appLock": {
                 "title": "Bloqueo automático",
-                "description": "Inactivity time before your wallets lock and you are logged out"
+                "description": "Tiempo de inactividad antes de que se bloqueen tus billeteras y se te cierre la sesión",
+                "durationMinute": "{time, plural, one {1 minuto} other {# minutos}}",
+                "durationHour": "{time, plural, one {1 hora} other {# horas}}"
             },
             "changePassword": {
                 "title": "Cambiar contraseña",
-                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds."
+                "description": "Tu contraseña se utiliza para proteger tus billeteras. Debes usr una contraseña segura para proteger tus fondos."
             },
             "changePincode": {
                 "title": "Cambiar código PIN",
@@ -264,12 +267,12 @@
                 "description": "Realizar una búsqueda extensa de tokens en tus direcciones."
             },
             "hiddenAccounts": {
-                "title": "Hidden wallets",
-                "description": "Selecting this options will show wallets that were previously hidden."
+                "title": "Billeteras ocultas",
+                "description": "Seleccionando estas opciones se mostrarán billeteras que antes estaban ocultas."
             },
             "deleteProfile": {
                 "title": "Eliminar perfil",
-                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup."
+                "description": "Elimina por completo tu perfil, billeteras e historial de transacciones. Asegúrate de que tienes una copia de seguridad."
             },
             "deepLinks": {
                 "title": "Enlaces profundos",
@@ -285,7 +288,7 @@
             },
             "configureNodeList": {
                 "title": "Selecciona un nodo",
-                "description": "Manage the list of IOTA network nodes you connect to.",
+                "description": "Administra la lista de nodos de red IOTA a los que te conectas.",
                 "primaryNode": "Nodo principal",
                 "excludeNode": "Excluir nodo",
                 "includeNode": "Incluir nodo",
@@ -353,12 +356,12 @@
                     "noneDetected": "Ninguna detectada"
                 },
                 "strongholdStatus": {
-                    "title": "Estado de la cartera",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "title": "Estado de la billetera",
+                    "locked": "Bloqueado",
+                    "unlocked": "Desbloqueado"
                 },
                 "strongholdBackup": {
-                    "title": "Copia de seguridad de la cartera",
+                    "title": "Copia de seguridad de la billetera",
                     "weeksAgo": "hace {weeks, plural,one {# semana} other {# semanas}}"
                 }
             },
@@ -379,7 +382,7 @@
     "popups": {
         "password": {
             "title": "Contraseña requerida",
-            "subtitle": "Please enter your password to unlock your wallets",
+            "subtitle": "Por favor introduce tu contraseña para desbloquear tus billeteras",
             "backup": "Por favor, introduce tu contraseña para exportar una copia de seguridad"
         },
         "qr": {
@@ -391,34 +394,34 @@
             "upToDateDescription": "Estás ejecutando la última y más segura versión de Firefly.",
             "updateAvailable": "Actualización de Firefly disponible",
             "updateDetails": "Versión {version} - {date}",
-            "noAutoUpdate": "Auto-update is disabled in this Windows version, please go to https://firefly.iota.org to download the update."
+            "noAutoUpdate": "La auto-actualización está desactivada en esta versión de Windows, por favor ve a https://firefly.iota.org para descargar la actualización."
         },
         "backup": {
             "title": "Última copia de seguridad: {date}",
             "lastBackup": "Tu última copia de seguridad {date}",
-            "backupDescription": "It is important to back up regularly to ensure you have a copy of your wallets and transaction history.",
+            "backupDescription": "Es importante realizar copias de seguridad con regularidad para asegurar que tienes una copia de tus billeteras e historial de transacciones.",
             "backupWarning": "Si pierde su copia de seguridad y su frase de recuperación perderá el acceso a sus fondos.",
             "notBackedUp": "No está respaldado",
-            "notBackedUpDescription": "You have not backed up your wallets",
+            "notBackedUpDescription": "No has realizado copia de seguridad de tus billeteras",
             "saving": "Guardando..."
         },
         "deleteAccount": {
             "title": "¿Eliminar {name}?",
-            "body": "This wallet has no transaction history. It can safely be deleted.",
-            "typePassword": "Escribe la contraseña de tu cartera para confirmar.",
-            "hideAccount": "Delete wallet",
+            "body": "Esta billetera no tiene historial de transacciones. Puede ser eliminada con seguridad.",
+            "typePassword": "Escribe la contraseña de tu billetera para confirmar.",
+            "hideAccount": "Eliminar billetera",
             "errorTitle": "No se puede eliminar {name}",
-            "errorBody1": "You cannot delete this wallet, you must have at least one."
+            "errorBody1": "No puedes eliminar esta billetera, debes tener al menos una."
         },
         "hideAccount": {
             "title": "¿Ocultar {name}?",
-            "body": "You can find this wallet later by enabling \"Show hidden wallets\" in Advanced Settings.",
-            "typePassword": "Escribe la contraseña de tu cartera para confirmar.",
-            "hideAccount": "Hide wallet",
+            "body": "Puedes encontrar esta billetera más tarde activando \"Mostrar billeteras ocultas\" en Configuración Avanzada.",
+            "typePassword": "Escribe la contraseña de tu billetera para confirmar.",
+            "hideAccount": "Ocultar billetera",
             "errorTitle": "No es posible ocultar {name}",
-            "errorBody1": "To hide a wallet it must have 0 balance.",
-            "errorBody2": "You currently have {balance} remaining on this wallet. Please move these funds to a different wallet and try again.",
-            "errorBody3": "You cannot hide this wallet, you must have at least one."
+            "errorBody1": "Para ocultar una billetera debe tener balance 0.",
+            "errorBody2": "Actualmente tienes {balance} restantes en esta billetera. Por favor mueve estos fondos a una billetera distinta y prueba de nuevo.",
+            "errorBody3": "No puedes ocultar esta billetera, debes tener al menos una."
         },
         "addressHistory": {
             "title": "{name} historial de direcciones",
@@ -461,8 +464,8 @@
         },
         "balanceFinder": {
             "title": "Buscador de balances",
-            "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
-            "totalWalletBalance": "Total balance",
+            "body": "Realizar una búsqueda más exhaustiva de direcciones para encontrar balances perdidos. Puede llevar un tiempo.",
+            "totalWalletBalance": "Balance total",
             "typePassword": "Escribe tu contraseña para permitir la búsqueda."
         },
         "riskFunds": {
@@ -477,10 +480,10 @@
             "proceed": "Entiendo el riesgo"
         },
         "snapshot": {
-            "title": "Ongoing network upgrade",
-            "body": "The Chrysalis network upgrade has begun.",
-            "bodyMigration": "Migration is disabled until it is complete.",
-            "bodyFirefly": "Firefly is disabled until it is complete. Token migration will still be possible afterwards."
+            "title": "Mejora de red en marcha",
+            "body": "La mejora de la red Chrysalis ha empezado.",
+            "bodyMigration": "La migración está desactivada hasta que esté completada.",
+            "bodyFirefly": "Firefly está desactivado hasta que esté completado. La migración seguirá siendo posible después."
         }
     },
     "charts": {
@@ -488,8 +491,8 @@
         "outgoingMi": "{value} saliente",
         "portoflio": "Portafolio",
         "token": "Token",
-        "accountValue": "Wallet Value",
-        "accountActivity": "Wallet Activity",
+        "accountValue": "Valor de Billetera",
+        "accountActivity": "Actividad de la Billetera",
         "timeframe1Hour": "1 hora",
         "timeframe1Day": "1 día",
         "timeframe1Week": "1 semana",
@@ -543,11 +546,11 @@
         "updateFirefly": "Actualizar Firefly",
         "restartNow": "Reiniciar ahora",
         "saveBackup": "Guardar copia de seguridad de Stronghold",
-        "customizeAcount": "Customise wallet",
+        "customizeAcount": "Personalizar billetera",
         "viewAddressHistory": "Ver historial de direcciones",
-        "hideAccount": "Hide wallet",
-        "showAccount": "Unhide wallet",
-        "deleteAccount": "Delete wallet",
+        "hideAccount": "Ocultar billetera",
+        "showAccount": "Mostrar billetera",
+        "deleteAccount": "Eliminar billetera",
         "max": "Máx",
         "addNode": "Añadir nodo",
         "updateNode": "Actualizar nodo",
@@ -563,7 +566,7 @@
         "copy": "Copiar",
         "paste": "Pegar",
         "selectAll": "Seleccionar todo",
-        "addAccount": "Add Wallet",
+        "addAccount": "Añadir Billetera",
         "checkForUpdates": "Buscar actualizaciones",
         "reportAnIssue": "Reportar un problema",
         "clear": "Limpiar",
@@ -578,13 +581,13 @@
         "readDocumentation": "Leer la documentación",
         "visitFaq": "Ver las preguntas frecuentes",
         "viewStatus": "Ver estado",
-        "showHiddenAccounts": "Show hidden wallets",
+        "showHiddenAccounts": "Mostrar billeteras ocultas",
         "confirm": "Confirmar",
         "findBalances": "Encontrar balances",
         "searchBalances": "Buscar balances",
         "searchAgain": "Buscar de nuevo",
         "searching": "Buscando...",
-        "closeFirefly": "Close Firefly"
+        "closeFirefly": "Cerrar Firefly"
     },
     "general": {
         "password": "Contraseña",
@@ -602,11 +605,11 @@
         "sendFunds": "Enviar fondos",
         "sendToAddress": "Enviar a la dirección",
         "scanQrOrPaste": "Escanea un código QR o pega una dirección",
-        "moveFundsBetweenAccounts": "Move funds between wallets",
+        "moveFundsBetweenAccounts": "Mover fondos entre billeteras",
         "sendTokensToAddress": "Enviar tokens a una dirección",
-        "manageAccount": "Manage Wallet",
-        "customizeAcount": "Customize your wallet",
-        "account": "Cartera",
+        "manageAccount": "Administrar Billetera",
+        "customizeAcount": "Personaliza tu billetera",
+        "account": "Billetera",
         "sendingToAddress": "Mandar a la dirección",
         "amount": "Cantidad",
         "addAddress": "Añadir dirección",
@@ -627,27 +630,27 @@
         "lightTheme": "Tema claro",
         "darkTheme": "Tema oscuro",
         "balance": "Balance",
-        "accountBalance": "Wallet Balance",
+        "accountBalance": "Balance de Billetera",
         "incoming": "Entrante",
         "outgoing": "Saliente",
         "totalIn": "Total recibido",
         "totalOut": "Total enviado",
-        "accounts": "Wallets",
-        "myAccounts": "My Wallets",
+        "accounts": "Billeteras",
+        "myAccounts": "Mis Billeteras",
         "automaticNodeSelection": "Selección automática de nodo",
         "manualNodeSelection": "Selección manual de nodo",
         "profiles": "Perfiles",
         "developerProfile": "Perfil de desarrollador",
         "developerProfileDescription": "Permite conectarte a redes de prueba",
         "dev": "Dev",
-        "createAccount": "Create a Wallet",
-        "accountName": "Wallet name",
+        "createAccount": "Crear una Billetera",
+        "accountName": "Nombre de billetera",
         "latestTransactions": "Últimas transacciones",
         "transactions": "Transacciones",
         "security": "Seguridad",
-        "accountAddress": "Wallet Address",
+        "accountAddress": "Dirección de Billetera",
         "nodes": "Nodos",
-        "wallet": "Cartera",
+        "wallet": "Billetera",
         "help": "Ayuda",
         "you": "Tú",
         "messageId": "ID del mensaje",
@@ -657,29 +660,29 @@
         "status": "Estado",
         "confirmed": "Confirmado",
         "pending": "Pendiente",
-        "noAccounts": "You have no wallets, please create one.",
+        "noAccounts": "No tienes billeteras, por favor crea una.",
         "loadingAccounts": "Cargando, por favor espere...",
         "addProfile": "Añadir perfil",
         "noRecentHistory": "No hay historial reciente",
-        "firstSync": "Syncing history, this may take a while...",
-        "transferSyncing": "Syncing wallet",
+        "firstSync": "Sincronizando historial, puede tardar un rato...",
+        "transferSyncing": "Sincronizando billetera",
         "transferSelectingInputs": "Seleccionando entradas",
         "transferRemainderAddress": "Generando dirección de depósito restante",
         "transferSigning": "Firmando la transacción",
         "transferPow": "Ejecutando PoW",
         "transferBroadcasting": "Promoviendo la transacción",
         "transferComplete": "Transferencia completada",
-        "creatingAccount": "Creating wallet, please wait...",
-        "updatingAccount": "Updating wallet, please wait...",
-        "accountSyncing": "Wallet is syncing",
-        "accountSyncComplete": "Wallet sync complete",
+        "creatingAccount": "Creando billetera, por favor espera...",
+        "updatingAccount": "Actualizando billetera, por favor espera...",
+        "accountSyncing": "La billetera está sincronizándose",
+        "accountSyncComplete": "Sincronización de billetera completada",
         "passwordUpdating": "Actualizando contraseña...",
         "passwordSuccess": "Contraseña actualizada correctamente",
         "passwordFailed": "Error al actualizar la contraseña",
-        "syncingAccounts": "Syncing wallets...",
+        "syncingAccounts": "Sincronizando billeteras...",
         "exportingStronghold": "Exportando Stronghold...",
-        "exportingStrongholdSuccess": "Exported Stronghold successfully",
-        "exportingStrongholdFailed": "Exporting Stronghold failed",
+        "exportingStrongholdSuccess": "Stronghold exportado con éxito",
+        "exportingStrongholdFailed": "Error al exportar Stronghold",
         "pinCodeUpdating": "Actualizando código PIN...",
         "pinCodeSuccess": "Código PIN actualizado correctamente",
         "pinCodeFailed": "Error al actualizar el código PIN",
@@ -690,14 +693,15 @@
         "passwordStrength3": "Promedio",
         "passwordStrength4": "Fuerte",
         "creatingProfile": "Creando perfil, por favor espere...",
-        "fundMigration": "Fund migration",
-        "accountRemoved": "This wallet is hidden. Unhide it to perform transfers.",
-        "receivingTo": "Receiving to {account}",
-        "sendingFrom": "Sending from {account}",
-        "receivedTo": "Received to {account}",
-        "sentFrom": "Sent from {account}",
-        "receiving": "Receiving",
-        "sending": "Sending"
+        "fundMigration": "Migración de fondos",
+        "accountRemoved": "Esta billetera está oculta. Descúbrela para realizar transferencias.",
+        "receivingTo": "Recibiendo desde {account}",
+        "sendingFrom": "Enviando desde {account}",
+        "receivedTo": "Recibido desde {account}",
+        "sentFrom": "Enviado desde {account}",
+        "receiving": "Recibiendo",
+        "sending": "Enviando",
+        "legacyNetwork": "Red heredada"
     },
     "dates": {
         "today": "Hoy",
@@ -711,7 +715,7 @@
         "valueTx": "Recibiendo {{value}} a {{account}}",
         "confirmed": "Se ha confirmado la salida de {{value}} desde {{account}}",
         "confirmedInternal": "Se ha confirmado {{value}} desde {{senderAccount}} a {{receiverAccount}}",
-        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
+        "confirmedInternalNoAccounts": "{{value}} transferencia interna confirmada",
         "failed": "Ha fallado la salida de {{value}} desde {{account}}",
         "downloadingUpdate": "Descargando actualización",
         "updateReady": "Actualización lista",
@@ -720,9 +724,9 @@
         "calcMinutesRemaining": "Calculando minutos restantes...",
         "minutesRemaining": "{minutes, plural, one {1 minuto restante} other {# minutos restantes}}",
         "copiedToClipboard": "Copiado al portapapeles",
-        "accountsSynchronized": "Wallet synchronization complete",
-        "migratedAccountChrysalisDown": "Your funds will become available after Chrysalis on 28th April",
-        "migratedAccountChrysalisUp": "Your funds will become available shortly"
+        "accountsSynchronized": "Sincronización de billetera completada",
+        "migratedAccountChrysalisDown": "Tus fondos estarán disponibles después de Chrysalis el 28 de Abril",
+        "migratedAccountChrysalisUp": "Tus fondos estarán disponibles en breve"
     },
     "error": {
         "profile": {
@@ -752,10 +756,10 @@
             "incorrect": "El PIN actual es incorrecto."
         },
         "account": {
-            "length": "Your wallet name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "empty": "You must use your latest wallet before creating a new one.",
-            "notEmpty": "You must transfer your balance before deleting this wallet.",
-            "duplicate": "A wallet with this name already exists.",
+            "length": "El nombre de tu billetera no puede tener una longitud mayor que {length, plural, one {1 carácter} other {# caracteres}}.",
+            "empty": "Debes utilizar tu última billetera antes de crear una nueva.",
+            "notEmpty": "Debes transferir tu balance antes de eliminar esta billetera.",
+            "duplicate": "Ya existe una billetera con este nombre.",
             "tilde": "El nombre de perfil no puede empezar con el carácter '~'.",
             "control": "El nombre de perfil no puede contener un caracter de control.",
             "startDot": "El nombre de perfil no puede empezar con el carácter '.'",
@@ -768,10 +772,10 @@
             "amountInvalidFormat": "La cantidad parece ser un número no válido.",
             "amountZero": "La cantidad debe ser mayor que 0.",
             "wrongAddressPrefix": "Las direcciones comienzan con el prefijo {prefix}.",
-            "wrongAddressFormat": "The address is not correctly formatted.",
-            "invalidAddress": "The address is not valid.",
-            "insufficientFunds": "This wallet has insufficient funds.",
-            "noToAccount": "You have not selected a wallet to send the funds to.",
+            "wrongAddressFormat": "La dirección no tiene el formato correcto.",
+            "invalidAddress": "La dirección no es válida.",
+            "insufficientFunds": "Esta billetera tiene fondos insuficientes.",
+            "noToAccount": "No has seleccionado una billetera a la que enviar los fondos.",
             "sendingDust": "No puedes enviar menos de 1 Mi.",
             "leavingDust": "No puede dejar menos de 1 Mi en su dirección."
         },
@@ -793,17 +797,17 @@
             "seedCharacters": "La semilla sólo debe contener caracteres A-Z ó 9",
             "phraseWordCount": "Debería haber 24 palabras en su frase de recuperación, ahora mismo {length, plural, one {es 1} other {son #}}.",
             "phraseUnrecognizedWord": "No se reconoce la palabra \"{word}\" en su frase de recuperación",
-            "phraseCaseWord": "The word \"{word}\" should be lower case"
+            "phraseCaseWord": "La palabra \"{word}\" debe estar en minúsculas"
         }
     },
     "tooltips": {
         "risk": {
-            "title": "Risk level: {risk}",
-            "veryHigh": "Very high",
-            "high": "High",
-            "medium": "Medium",
-            "low": "Low",
-            "veryLow": "Very low"
+            "title": "Nivel de riesgo: {risk}",
+            "veryHigh": "Muy alto",
+            "high": "Alto",
+            "medium": "Medio",
+            "low": "Bajo",
+            "veryLow": "Muy bajo"
         }
     }
 }

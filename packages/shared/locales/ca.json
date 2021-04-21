@@ -1,67 +1,67 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Enviar, rebre i gestionar eIs teus IOTA",
-            "body": "Firefly is the official wallet software of IOTA."
+            "title": "Enviar, rebre i gestionar eIs vostres tokens IOTA",
+            "body": "Firefly és el programari del moneder oficial de IOTA."
         },
         "legal": {
-            "title": "Plítica de Privacitat i Condicions de Servei",
-            "body": "Consulteu la Política de privacitat i els Termes i condicions.",
+            "title": "Política de Privacitat i Condicions de Servei",
+            "body": "Consulteu la Política de privacitat i les Condicions del servei.",
             "checkbox": "He llegit i accepto la Política de Privadesa i les Condicions de Servei"
         },
         "appearance": {
             "title": "Aspecte",
-            "body": "Choose your app theme."
+            "body": "Trieu l'aparença de l'aplicació."
         },
         "profile": {
-            "title": "Crear perfil",
-            "body1": "Pots crear diversos perfils d'usuari per mantenir separats els vostres toquens i millorar la privacitat.",
-            "body2": "De moment, comencem pel teu primer nom de perfil. Podrás afegir altres perfils més endavant.",
+            "title": "Crear un perfil",
+            "body1": "Podeu crear diversos perfils d'usuari per mantenir separats els vostres criptovalors i millorar la privacitat.",
+            "body2": "De moment, comencem pel vostre primer nom de perfil. Podreu afegir altres perfils més endavant.",
             "profileName": "Nom del perfil"
         },
         "setup": {
-            "title": "Configura la cartera",
+            "title": "Configura el criptomoneder",
             "chrysalisTitle": "Actualizació a la Xarxa Chrysalis",
-            "chrysalisBody": "A partir del 21 d'Abril, els usuaris podran migrar els seus tokens a la nova xarxa Chrysalis. Us recomanem que migreu els vostres tokens tan aviat com sigui possible.",
-            "learnMore": "Informat sobre la migració"
+            "chrysalisBody": "A partir del 21 d'Abril, els usuaris podran migrar els seus criptovalors a la nova xarxa Chrysalis. Us recomanem que migreu els vostres criptovalors tan aviat com sigui possible.",
+            "learnMore": "Aprendre sobre la migració"
         },
         "secure": {
-            "title": "Assegura la cartera",
-            "body1": "Desar i imprimir la plantilla de recuperació en PDF.",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallets."
+            "title": "Assegura el criptomoneder",
+            "body1": "Desa i imprimeix el Kit de recuperació en PDF.",
+            "body2": "Si ompliu el Kit de Recuperació i el deseu en un lloc segur, sempre podreu recuperar els vostres moneders."
         },
         "password": {
-            "title": "Crear una contrasenya",
+            "title": "Crea una contrasenya",
             "body1": "Necessiteu una contrasenya segura per protegir els vostres fons. Utilitzeu una combinació de paraules i eviteu frases, noms o dates habituals.",
-            "body2": "Es recomana escriure la contrasenya en la plantilla de recuperació."
+            "body2": "Es recomana escriure la contrasenya al Kit de recuperació."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your profile.",
+            "body1": "Establiu un PIN d'accés per assegurar què només vostè pot entrar al seu moneder.",
             "body2": "Guardeu el vostre PIN en un lloc segur!"
         },
         "pin": {
             "title": "Configureu el codi PIN",
-            "body1": "Introdueix un PIN de 6 dígits a continuació. Se us demanarà que introduïu el vostre PIN per iniciar la sessió a la cartera.",
-            "body2": "Utilitza només números"
+            "body1": "A continuació, introduïu un PIN de 6 dígits. Se us demanarà el PIN per iniciar la sessió al criptomoneder.",
+            "body2": "Utilitzeu només números"
         },
         "confirmPin": {
-            "title": "Verifica el teu codi PIN",
-            "body1": "El teu PIN manté el saldo i les transaccions privades.",
-            "body2": "Torna a introduir el teu codi PIN per continuar. "
+            "title": "Verifiqueu el codi PIN",
+            "body1": "El PIN manté el saldo i les transaccions privades.",
+            "body2": "Torneu a introduir el codi PIN per continuar. "
         },
         "backup": {
-            "title": "Feu una còpia de seguretat de la cartera",
-            "body1": "Ara es mostrarà la frase de recuperació. Escriu-ho al teu kit de recuperació.",
-            "body2": "No comparteixis la frase de recuperació amb ningú. Es pot utilitzar per accedir als teus tokens des de qualsevol lloc.",
+            "title": "Feu una còpia de seguretat del criptomoneder",
+            "body1": "Ara es mostrarà la frase de recuperació. Escriviu-la al vostre Kit de recuperació.",
+            "body2": "No compartiu la frase de recuperació amb ningú. Es pot utilitzar per accedir als vostres criptovalors des de qualsevol lloc.",
             "body3": "Si perdeu la frase de recuperació, és possible que perdeu els vostres fons."
         },
         "recoveryPhrase": {
             "title": "Frase de recuperació",
-            "body1": "Escriu les paraules l'ordre exacte que mostrat en el kit de recuperació.",
-            "body2": "Guarda-ho de forma segura i privada.",
+            "body1": "Escriviu les paraules en l'ordre exacte que es mostren, al vostre Kit de recuperació.",
+            "body2": "Guardeu-ho de forma segura i privada.",
             "body3": "És important tenir una còpia de seguretat per escrit. Els ordinadors solen fallar i els fitxers es poden corrompre.",
-            "revealRecoveryPhrase": "Mostrar la frase de recuperación",
+            "revealRecoveryPhrase": "Mostra la frase de recuperació",
             "hideRecoveryPhrase": "Amaga la frase de recuperació"
         },
         "verifyRecoveryPhrase": {
@@ -69,88 +69,89 @@
             "body": "Anem a comprovar que heu escrit correctament la frase. Seleccioneu les paraules en l'ordre correcte.",
             "word": "Paraula",
             "verified": "S'ha verificat la frase de recuperació",
-            "verifiedBody": "Recorda mantenir-ho guardat de forma segura i privada."
+            "verifiedBody": "Recordeu-vos de mantenir-ho guardat de forma segura i privada."
         },
         "backupWallet": {
             "title": "Feu una còpia de seguretat en un fitxer Stronghold",
-            "body1": "Enter your password to backup your wallets to a Stronghold file. Your password is used to encrypt the backup.",
+            "body1": "Introduïu la vostra contrasenya per fer una còpia de seguretat del moneder en un fitxer Stronghold. La vostra contrasenya s’utilitza per xifrar la còpia de seguretat.",
             "body2": "Motius pels quals les còpies de seguretat digitals són importants:",
-            "reason1": "Easily recover your wallets without typing in your recovery phrase",
-            "reason2": "Import your wallets on other devices",
-            "reason3": "Recupera el teu historial de transaccions"
+            "reason1": "Recupereu el moneder fàcilment sense escriure la vostra frase de recuperació",
+            "reason2": "Importeu els vostres moneders a altres dispositius",
+            "reason3": "Recupera el vostre historial de transaccions"
         },
         "recoveryPhraseSaved": {
-            "title": "S'ha fet la còpia de seguretat amb èxit",
-            "body": "You have backed up your wallets to a Stronghold."
+            "title": "La còpia de seguretat s'ha fet correctament",
+            "body": "Heu fet una còpia de seguretat dels vostres moneders a Stronghold."
         },
         "congratulations": {
-            "title": "S'ha completat la configuració de la cartera",
-            "body": "La vostra cartera ja es pot utilitzar.",
+            "title": "S'ha completat la configuració del criptomoneder",
+            "body": "Ja es pot utilitzar el criptomoneder nou.",
             "fundsMigrated": "Fons migrats",
             "success": "Heu migrat els vostres fons amb èxit a la nova xarxa",
             "exportMigration": "Exporta el registre de migració i finalitza la configuració"
         },
         "import": {
-            "title": "Recover or migrate funds",
-            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
-            "importSeed": "I have an 81 character seed",
-            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
-            "importMnemonic": "I have a Firefly recovery phrase",
-            "importMnemonicDescription": "Enter your recovery phrase to recover your wallets",
-            "importFile": "I have a file backup",
-            "importFileDescription": "Upload a Seedvault or Stronghold file"
+            "title": "Recupera o migra els fons",
+            "body": "Si teniu una llavor o un fitxer de còpia de seguretat, podeu importar-lo des d'aquí. Si manteniu fons a la xarxa antiga, haureu de seguir les passes per migrar-los a la xarxa Chrysalis.",
+            "importSeed": "Tinc una llavor de 81 caràcters",
+            "importSeedDescription": "Introduïu una llavor i migreu els fons a Chrysalis",
+            "importMnemonic": "Tinc una frase de recuperació de Firefly",
+            "importMnemonicDescription": "Introduïu la vostra frase de recuperació per recuperar els vostres moneders",
+            "importFile": "Tinc un fitxer de còpia de seguretat",
+            "importFileDescription": "Pugeu un fitxer SeedVault o Stronghold"
         },
         "importFromText": {
             "seed": {
-                "title": "Type your seed to commence migration",
-                "body": "A seed consists of 81 characters. This is used to recover from the older Trinity app.",
-                "enter": "Enter your seed"
+                "title": "Introduïu la vostra llavor per començar la migració",
+                "body": "Una llavor consisteix en 81 caràcterds. S'utilitza per recuperar des de l'antiga aplicació Trinity.",
+                "enter": "Introduïu la vostra llavor"
             },
             "mnemonic": {
-                "title": "Type your recovery phrase",
-                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly wallets.",
-                "enter": "Enter your secret recovery phrase"
+                "title": "Entreu la vostra frase de recuperació",
+                "body": "Una frase de recuperació té 24 paraules, totes minúscules i amb espais entre mig. S’utilitza per recuperar un moneder Firefly existent.",
+                "enter": "Introduïu la vostra frase secreta de recuperació"
             },
             "seedDetected": "S'ha detectat una llavor de 81 caràcters",
-            "phraseDetected": "Frase de 24 paraules detectada",
+            "phraseDetected": "S'ha detectat una frase de 24 paraules",
             "checksum": "Suma de verificació"
         },
         "importFromFile": {
-            "title": "Restore your wallets using a backup file",
-            "body": "Import a backup file to restore your wallets. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+            "title": "Recupereu els vostres moneders utilitzant un fitxer de còpia de seguretat",
+            "body": "Importeu un fitxer de còpia de seguretat per recuperar el moneder. Les còpies de seguretat poden ser Stronghold (.stronghold) o Trinity SeedVault (.kdbx)."
         },
         "importBackupPassword": {
-            "title": "Restore your wallets from a SeedVault or Stronghold",
+            "title": "Recupereu els vostres moneders des de fitxers SeedVault o Stronghold",
             "body1": "Introduïu la contrasenya de la vostra còpia de seguretat.",
             "body2": "Aquesta és la contrasenya que vau definir quan vau crear la còpia de seguretat per primera vegada."
         },
         "importSuccess": {
             "title": "Heu recuperat amb èxit la vostra còpia de seguretat",
-            "body": "You can now set up your new profile.",
+            "body": "Ara podeu configurar el vostre perfil nou.",
             "seedvaultTitle": "S'ha importat correctament",
             "seedvaultBody": "La vostra contrasenya és correcta, podeu continuar.",
             "strongholdTitle": "S'ha importat correctament",
             "strongholdBody": "La vostra contrasenya és correcta, podeu continuar."
         },
         "migrate": {
-            "title": "Migra els teus fons",
-            "body1": "Aquest és un procés automatitzat per transferir els vostres fons a la vostra cartera nova.",
+            "title": "Migreu els vostres fons",
+            "body1": "Aquest és un procés automatitzat per transferir els fons al vostre criptomoneder nou.",
             "body2": "Pot trigar una mica. No apagueu el dispositiu durant la migració.",
-            "existing": "La teva vella cartera",
-            "new": "La vostra nova cartera",
-            "learn": "Informat sobre la migració",
+            "existing": "El vostre criptomoneder antic",
+            "new": "El vostre criptomoneder nou",
+            "learn": "Aprendre sobre la migració",
             "beginMigration": "Comença la migració",
             "migrating": "S'estan migrant els fons...",
-            "migrated": "{balance} migrat",
+            "migrated": "Migrat {balance}",
             "migrationFailed": "Ha fallat la migració",
             "noAddressesForMigration": "Seleccioneu les adreces que vulgueu protegir.",
-            "restoringWallet": "S'està restaurant la cartera...",
-            "findingBalance": "Cercant el banlaç...",
+            "restoringWallet": "S'està restaurant el criptomoneder...",
+            "findingBalance": "Cercant el balanç...",
             "incorrectSeedVaultPassword": "La contrasenya del SeedVault és incorrecta.",
+            "noDataSeedVault": "No data could be found in the SeedVault.",
             "signingBundle": "Firmant el paquet",
             "broadcastingBundle": "Difonent el paquet",
             "miningBundle": "Minant el paquet",
-            "problemRestoringWallet": "There was a network error restoring your wallet. Please try again.",
+            "problemRestoringWallet": "Hi ha hagut un error de xarxa recuperant el vostre moneder. Si us plau, torneu-ho a provar.",
             "minimumMigrationAmountSpentAddresses": "L’import mínim de migració per a cada adreça és d’1 Mi. Torneu a comprovar si el vostre saldo no sembla correcte.",
             "tooManyAddressesToMigrate": "Hi ha massa adreces amb poc saldo per migrar. Torneu a comprovar si el vostre saldo no sembla correcte.",
             "cannotMigrateAllYourFunds": "No podem migrar tots els vostres fons perquè algunes adreces tenen un valor massa baix. Podeu continuar igualment. {value} es perdrà.",
@@ -201,7 +202,7 @@
             "settings": "Preferències",
             "generalSettings": {
                 "title": "Configuració General",
-                "description": "Configure your app's appearance and other general settings"
+                "description": "Configureu l'aparença de l'aplicació i altres paràmetres generals"
             },
             "security": {
                 "title": "Seguretat",
@@ -220,7 +221,7 @@
                 "description": "Canvieu el nom del vostre perfil o configureu un avatar"
             },
             "sync": {
-                "title": "Sync wallets",
+                "title": "Sincronitza moneders",
                 "description": ""
             },
             "theme": {
@@ -241,15 +242,17 @@
             },
             "exportStronghold": {
                 "title": "Exportar còpia de seguretat",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history."
+                "description": "Exporteu a un fitxer Stronghold - una còpia de seguretat xifrada del vostre moneder i l'historial de transaccions."
             },
             "appLock": {
                 "title": "Bloquejar automàticament",
-                "description": "Inactivity time before your wallets lock and you are logged out"
+                "description": "Temps d'inactivitat abans que els moneders es bloquegin i us tanqui la sessió",
+                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
+                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
             },
             "changePassword": {
                 "title": "Canviar contrasenya",
-                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds."
+                "description": "La contrasenya s’utilitza per protegir el moneder. Utilitzeu una contrasenya segura per protegir els vostres fons."
             },
             "changePincode": {
                 "title": "Canvia el codi PIN",
@@ -260,16 +263,16 @@
                 "action": "Canvia el PIN"
             },
             "balanceFinder": {
-                "title": "Balance finder",
-                "description": "Perform an extended search of your addresses for tokens."
+                "title": "Cercador de balanços",
+                "description": "Realitzeu una cerca extensa de tokens per les vostres adreces."
             },
             "hiddenAccounts": {
-                "title": "Hidden wallets",
-                "description": "Selecting this options will show wallets that were previously hidden."
+                "title": "Moneders amagats",
+                "description": "Seleccionant aquestes opcions, es mostraran els comptes que anteriorment estaven ocults."
             },
             "deleteProfile": {
                 "title": "Suprimeix el perfil",
-                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup."
+                "description": "Elimineu el vostre perfil complet, moneders i llistat de transaccions. Assegureu-vos de tenir una còpia de seguretat."
             },
             "deepLinks": {
                 "title": "Enllaços profunds",
@@ -285,7 +288,7 @@
             },
             "configureNodeList": {
                 "title": "Selecciona el node",
-                "description": "Manage the list of IOTA network nodes you connect to.",
+                "description": "Gestioneu la llista de nodes de la xarxa IOTA on us voleu connectar.",
                 "primaryNode": "Node primari",
                 "excludeNode": "Excloure node",
                 "includeNode": "Incloure node",
@@ -354,8 +357,8 @@
                 },
                 "strongholdStatus": {
                     "title": "Estat de la cartera",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "locked": "Blocat",
+                    "unlocked": "Desblocat"
                 },
                 "strongholdBackup": {
                     "title": "Còpia de seguretat de la cartera",
@@ -379,7 +382,7 @@
     "popups": {
         "password": {
             "title": "Es requereix la contrasenya",
-            "subtitle": "Please enter your password to unlock your wallets",
+            "subtitle": "Si us plau, introduïu la vostra contrasenya per desblocar els vostres moneders",
             "backup": "Introdueix la teva contrasenya per exportar una còpia de seguretat"
         },
         "qr": {
@@ -391,34 +394,34 @@
             "upToDateDescription": "Esteu executant la versió més recent i segura de Firefly.",
             "updateAvailable": "Actualització de Firefly disponible",
             "updateDetails": "Versió {version} - {date}",
-            "noAutoUpdate": "Auto-update is disabled in this Windows version, please go to https://firefly.iota.org to download the update."
+            "noAutoUpdate": "L'actualització automàtica està deshabilitada en aquesta versió de Windows. Si us plau, aneu a https://firefly.iota.org per baixar l'actualització."
         },
         "backup": {
             "title": "Darrera còpia de seguretat: {date}",
             "lastBackup": "La teva última còpia de seguretat {date}",
-            "backupDescription": "It is important to back up regularly to ensure you have a copy of your wallets and transaction history.",
+            "backupDescription": "És important fer una còpia de seguretat periòdicament per assegurar-vos que teniu una còpia dels vostres moneders i de l'historial de transaccions.",
             "backupWarning": "Si perdeu la frase de còpia de seguretat i recuperació, perdrà l'accés als vostres fons.",
             "notBackedUp": "No s'ha fet una còpia de seguretat",
-            "notBackedUpDescription": "You have not backed up your wallets",
+            "notBackedUpDescription": "No heu fet cap còpia de seguretat dels vostres moneders",
             "saving": "Desant..."
         },
         "deleteAccount": {
             "title": "Eliminar {name}?",
-            "body": "This wallet has no transaction history. It can safely be deleted.",
+            "body": "Aquest moneder no té historial de transaccions. Es pot esborrar amb seguretat.",
             "typePassword": "Escriu la contrasenya de la teva cartera per confirmar-la.",
-            "hideAccount": "Delete wallet",
+            "hideAccount": "Esborra el moneder",
             "errorTitle": "No s'ha pogut eliminar {name}",
-            "errorBody1": "You cannot delete this wallet, you must have at least one."
+            "errorBody1": "No podeu esborrar aquest moneder, n'heu de tenir un, com a mínim."
         },
         "hideAccount": {
             "title": "Amagar {name}?",
-            "body": "You can find this wallet later by enabling \"Show hidden wallets\" in Advanced Settings.",
+            "body": "Després, podreu trobar aquest moneder habilitant \"Mostra els moneders amagats\" als Paràmetres Avançats.",
             "typePassword": "Escriu la contrasenya de la teva cartera per confirmar-la.",
-            "hideAccount": "Hide wallet",
+            "hideAccount": "Amaga el moneder",
             "errorTitle": "No s'ha pogut ocultar {name}",
-            "errorBody1": "To hide a wallet it must have 0 balance.",
-            "errorBody2": "You currently have {balance} remaining on this wallet. Please move these funds to a different wallet and try again.",
-            "errorBody3": "You cannot hide this wallet, you must have at least one."
+            "errorBody1": "Per amagar un moneder, cal que tingui balanç 0.",
+            "errorBody2": "Actualment, teniu un balanç {balance} en aquest moneder. Moveu aquests fons a un moneder diferent i torneu-ho a provar.",
+            "errorBody3": "No podeu amagar aquest moneder, n'heu de tenir un, com a mínim."
         },
         "addressHistory": {
             "title": "Historial d'adreces de {name}",
@@ -460,10 +463,10 @@
             "body": "Estàs a punt d'enviar {amount} a"
         },
         "balanceFinder": {
-            "title": "Balance finder",
-            "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
-            "totalWalletBalance": "Total balance",
-            "typePassword": "Type your password to allow searching."
+            "title": "Cercador de balanços",
+            "body": "Realitzar una cerca més exhaustiva d'adreces per trobar balanços perduts. Això pot tardar una estona.",
+            "totalWalletBalance": "Balanç total",
+            "typePassword": "Escriviu la vostra contrasenya per pemetre la cerca."
         },
         "riskFunds": {
             "title": "Advertència: fons en risc durant la migració",
@@ -477,19 +480,19 @@
             "proceed": "Sí, entenc els riscos"
         },
         "snapshot": {
-            "title": "Ongoing network upgrade",
-            "body": "The Chrysalis network upgrade has begun.",
-            "bodyMigration": "Migration is disabled until it is complete.",
-            "bodyFirefly": "Firefly is disabled until it is complete. Token migration will still be possible afterwards."
+            "title": "Actualització de xarxa en marxa",
+            "body": "L'actualització de la xarxa Chrysalis ha començat.",
+            "bodyMigration": "La migració esta deshabilitada fins que s'hagi completat.",
+            "bodyFirefly": "Firefly està deshabilitat fins que s'hagi completat. La migració dels tokens, després encara serà possible."
         }
     },
     "charts": {
-        "incomingMi": "Incoming {value}",
-        "outgoingMi": "Outgoing {value}",
+        "incomingMi": "Entrant {value}",
+        "outgoingMi": "Sortint {value}",
         "portoflio": "Portafoli",
         "token": "Token",
-        "accountValue": "Wallet Value",
-        "accountActivity": "Wallet Activity",
+        "accountValue": "Valor del moneder",
+        "accountActivity": "Activitat del moneder",
         "timeframe1Hour": "1 hora",
         "timeframe1Day": "1 dia",
         "timeframe1Week": "1 setmana",
@@ -543,11 +546,11 @@
         "updateFirefly": "Actualitza Firefly",
         "restartNow": "Reiniciar ara",
         "saveBackup": "Guarda una còpia de seguretat Stronghold",
-        "customizeAcount": "Customise wallet",
+        "customizeAcount": "Personalitza el moneder",
         "viewAddressHistory": "Veure l'historial d'adreces",
-        "hideAccount": "Hide wallet",
-        "showAccount": "Unhide wallet",
-        "deleteAccount": "Delete wallet",
+        "hideAccount": "Amaga el moneder",
+        "showAccount": "Mostra el moneder",
+        "deleteAccount": "Esborra el moneder",
         "max": "Màxim",
         "addNode": "Afegeix un node",
         "updateNode": "Actualitzar el node",
@@ -563,7 +566,7 @@
         "copy": "Copiar",
         "paste": "Enganxar",
         "selectAll": "Selecciona-ho tot",
-        "addAccount": "Add Wallet",
+        "addAccount": "Afegeix moneder",
         "checkForUpdates": "Cerca actualitzacions",
         "reportAnIssue": "Notifica un problema",
         "clear": "Neteja",
@@ -578,13 +581,13 @@
         "readDocumentation": "Llegeix la documentació",
         "visitFaq": "Visita les FAQ",
         "viewStatus": "Mostra l'estat",
-        "showHiddenAccounts": "Show hidden wallets",
+        "showHiddenAccounts": "Mostra els moneders amagats",
         "confirm": "Confirmar",
-        "findBalances": "Find balances",
-        "searchBalances": "Search for balances",
-        "searchAgain": "Search again",
-        "searching": "Searching...",
-        "closeFirefly": "Close Firefly"
+        "findBalances": "Troba balanços",
+        "searchBalances": "Cerca balanços",
+        "searchAgain": "Cerca de nou",
+        "searching": "Cercant...",
+        "closeFirefly": "Tanca Firefly"
     },
     "general": {
         "password": "Contrasenya",
@@ -602,10 +605,10 @@
         "sendFunds": "Enviar fons",
         "sendToAddress": "Enviar a l’adreça",
         "scanQrOrPaste": "Escaneja un codi QR o enganxa una adreça",
-        "moveFundsBetweenAccounts": "Move funds between wallets",
+        "moveFundsBetweenAccounts": "Mou fons entre moneders",
         "sendTokensToAddress": "Enviar fitxes a una adreça",
-        "manageAccount": "Manage Wallet",
-        "customizeAcount": "Customize your wallet",
+        "manageAccount": "Gestiona moneder",
+        "customizeAcount": "Personalitzeu el vostre moneder",
         "account": "Cartera",
         "sendingToAddress": "Enviant a l’adreça",
         "amount": "Quantitat",
@@ -627,25 +630,25 @@
         "lightTheme": "Tema clar",
         "darkTheme": "Tema fosc",
         "balance": "Balanç",
-        "accountBalance": "Wallet Balance",
+        "accountBalance": "Balanç del moneder",
         "incoming": "Entrant",
         "outgoing": "Sortint",
         "totalIn": "Total entrant",
         "totalOut": "Total sortint",
-        "accounts": "Wallets",
-        "myAccounts": "My Wallets",
+        "accounts": "Moneders",
+        "myAccounts": "Els meus moneders",
         "automaticNodeSelection": "Selecció automàtica de nodes",
         "manualNodeSelection": "Selecció manual de nodes",
         "profiles": "Perfils",
         "developerProfile": "Mode de desenvolupador",
         "developerProfileDescription": "Us permet connectar-vos a les testnets",
         "dev": "Dev",
-        "createAccount": "Create a Wallet",
-        "accountName": "Wallet name",
+        "createAccount": "Crea un moneder",
+        "accountName": "Nom del moneder",
         "latestTransactions": "Últimes transaccions",
         "transactions": "Transaccions",
         "security": "Seguretat",
-        "accountAddress": "Wallet Address",
+        "accountAddress": "Adreça del moneder",
         "nodes": "Nodes",
         "wallet": "Cartera",
         "help": "Ajuda",
@@ -657,26 +660,26 @@
         "status": "Estat",
         "confirmed": "Confirmat",
         "pending": "Pendent",
-        "noAccounts": "You have no wallets, please create one.",
+        "noAccounts": "No teniu moneders, si us plau, creeu-ne un.",
         "loadingAccounts": "Carregant, espereu...",
         "addProfile": "Afegeix un perfil",
         "noRecentHistory": "No hi ha història recent",
-        "firstSync": "Syncing history, this may take a while...",
-        "transferSyncing": "Syncing wallet",
+        "firstSync": "Sinconitzant l'historial, això pot durar una estona...",
+        "transferSyncing": "Sincronitzant moneder",
         "transferSelectingInputs": "Selecció d’entrades",
         "transferRemainderAddress": "S'està generant l'adreça de dipòsit restant",
         "transferSigning": "Signatura de la transacció",
         "transferPow": "Realització de la PoW",
         "transferBroadcasting": "Promocionant transacció",
         "transferComplete": "Transferència completada",
-        "creatingAccount": "Creating wallet, please wait...",
-        "updatingAccount": "Updating wallet, please wait...",
-        "accountSyncing": "Wallet is syncing",
-        "accountSyncComplete": "Wallet sync complete",
+        "creatingAccount": "Creant moneder, si us plau, espereu...",
+        "updatingAccount": "Actualitzant moneder, si us plau, espereu...",
+        "accountSyncing": "El moneder s'està actualitzant",
+        "accountSyncComplete": "Sincronització completa del moneder",
         "passwordUpdating": "S'està actualitzant la contrasenya...",
         "passwordSuccess": "S'ha actualitzat correctament la contrasenya",
         "passwordFailed": "No s'ha pogut actualitzar la contrasenya",
-        "syncingAccounts": "Syncing wallets...",
+        "syncingAccounts": "Sincronitzant moneders...",
         "exportingStronghold": "Exportant Stronghold...",
         "exportingStrongholdSuccess": "Stronghold exportat amb èxit",
         "exportingStrongholdFailed": "No s'ha pogut exportar el Stronghold",
@@ -691,13 +694,14 @@
         "passwordStrength4": "Forta",
         "creatingProfile": "S'està creant un compte, espereu...",
         "fundMigration": "Migració de fons",
-        "accountRemoved": "This wallet is hidden. Unhide it to perform transfers.",
-        "receivingTo": "Receiving to {account}",
-        "sendingFrom": "Sending from {account}",
-        "receivedTo": "Received to {account}",
-        "sentFrom": "Sent from {account}",
-        "receiving": "Receiving",
-        "sending": "Sending"
+        "accountRemoved": "Aquest moneder està amagat. Mostreu-lo per realitzar transferències.",
+        "receivingTo": "Rebent a {account}",
+        "sendingFrom": "Enviant des de {account}",
+        "receivedTo": "Rebut a {account}",
+        "sentFrom": "Enviat des de {account}",
+        "receiving": "Rebent",
+        "sending": "Enviant",
+        "legacyNetwork": "Legacy Network"
     },
     "dates": {
         "today": "Avui",
@@ -720,7 +724,7 @@
         "calcMinutesRemaining": "S'estan calculant els minuts restants...",
         "minutesRemaining": "{minutes, plural, one {1 minut restant} other {# minuts restants}}",
         "copiedToClipboard": "Copiat al porta-retalls",
-        "accountsSynchronized": "Wallet synchronization complete",
+        "accountsSynchronized": "Sincronització completa del moneder",
         "migratedAccountChrysalisDown": "Els teus fons estaran disponibles després de Chrysalis el 28 d'abril",
         "migratedAccountChrysalisUp": "Els teus fons estaran disponibles en breu"
     },
@@ -752,10 +756,10 @@
             "incorrect": "El vostre PIN actual és incorrecte."
         },
         "account": {
-            "length": "Your wallet name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "empty": "You must use your latest wallet before creating a new one.",
-            "notEmpty": "You must transfer your balance before deleting this wallet.",
-            "duplicate": "A wallet with this name already exists.",
+            "length": "El nom del moneder no pot superar els {length, plural, one {1 caràcter} other {# caràcters}}.",
+            "empty": "Cal que utilitzeu el darrer moneder, abans de crear-ne un de nou.",
+            "notEmpty": "Cal que transferiu el saldo del moneder, abans d'eliminar-lo.",
+            "duplicate": "Ja existeix un moneder amb aquest nom.",
             "tilde": "El nom de perfil no pot començar amb el caràcter '~'.",
             "control": "Un nom de perfil no pot contenir cap caràcter de control.",
             "startDot": "Un nom de perfil no pot començar amb el caràcter '.'.",
@@ -770,8 +774,8 @@
             "wrongAddressPrefix": "Les adreces comencen amb el prefix {prefix}.",
             "wrongAddressFormat": "L'adreça no està en el format correcte.",
             "invalidAddress": "L'adreça no és vàlida.",
-            "insufficientFunds": "This wallet has insufficient funds.",
-            "noToAccount": "You have not selected a wallet to send the funds to.",
+            "insufficientFunds": "Aquest moneder no té prou fons.",
+            "noToAccount": "No heu seleccionat cap moneder on enviar els fons.",
             "sendingDust": "No es possible enviar menys d'1 Mi.",
             "leavingDust": "No és possible deixar menys d'1 Mi a la teva adreça."
         },

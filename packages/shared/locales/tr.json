@@ -2,7 +2,7 @@
     "views": {
         "onboarding1": {
             "title": "IOTA Gönder, Al ve Yönet",
-            "body": "Firefly is the official wallet software of IOTA."
+            "body": "Firefly, IOTA'nın resmi cüzdan yazılımıdır."
         },
         "legal": {
             "title": "Gizlilik Politikası ve Kullanım Şartları",
@@ -11,7 +11,7 @@
         },
         "appearance": {
             "title": "Görünüm",
-            "body": "Choose your app theme."
+            "body": "Uygulama temanızı seçin."
         },
         "profile": {
             "title": "Profil oluştur",
@@ -28,7 +28,7 @@
         "secure": {
             "title": "Cüzdanınızı güvence altına alın",
             "body1": "Kaydedin ve Kurtarma Kiti PDF taslağını çıktı alın.",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallets."
+            "body2": "Kurtarma kitini doldurur ve güvenli bir şekilde saklarsanız, cüzdanlarınızı her zaman kurtarabilirsiniz."
         },
         "password": {
             "title": "Şifre oluşturun",
@@ -37,7 +37,7 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your profile.",
+            "body1": "Profilinize yalnızca sizin girebileceğinizden emin olmak için bir oturum açma PIN'i ayarlayın.",
             "body2": "PIN'inizi güvende saklayın!"
         },
         "pin": {
@@ -73,15 +73,15 @@
         },
         "backupWallet": {
             "title": "Bir Stronghold dosyasına yedekleyin",
-            "body1": "Enter your password to backup your wallets to a Stronghold file. Your password is used to encrypt the backup.",
+            "body1": "Cüzdanlarınızı bir Stronghold dosyasına yedeklemek için parolanızı girin. Parolanız yedek dosyasını şifrelemek için kullanılır.",
             "body2": "Dijital yedeklemenin önemli olmasının nedenleri:",
-            "reason1": "Easily recover your wallets without typing in your recovery phrase",
-            "reason2": "Import your wallets on other devices",
+            "reason1": "Kurtarma ifadenizi yazmadan cüzdanlarınızı kolayca kurtarın",
+            "reason2": "Cüzdanlarınızı diğer cihazlara aktarın",
             "reason3": "Tüm işlem geçmişinizi kurtarın"
         },
         "recoveryPhraseSaved": {
             "title": "Başarı ile yedeklendi",
-            "body": "You have backed up your wallets to a Stronghold."
+            "body": "Cüzdanlarınızı Stronghold'a yedeklediniz."
         },
         "congratulations": {
             "title": "Cüzdan kurulumu tamamlandı",
@@ -96,19 +96,19 @@
             "importSeed": "81 karakter seed'im var",
             "importSeedDescription": "Bir seed girin ve bakiyeyi Chrysalis'e taşıyın",
             "importMnemonic": "Firefly kurtarma ifadem var",
-            "importMnemonicDescription": "Enter your recovery phrase to recover your wallets",
+            "importMnemonicDescription": "Cüzdanlarınızı kurtarmak için gizli ifadenizi girin",
             "importFile": "Dosya yedeğim var",
             "importFileDescription": "Bir Seedvault veya Stronghold dosyası yükleyin"
         },
         "importFromText": {
             "seed": {
                 "title": "Taşımayı başlatmak için seed'inizi girin",
-                "body": "A seed consists of 81 characters. This is used to recover from the older Trinity app.",
+                "body": "Bir seed 81 karakterden oluşur. Bu, eski Trinity cüzdanından kurtarmak için kullanılır.",
                 "enter": "Seed'inizi girin"
             },
             "mnemonic": {
                 "title": "Kurtarma ifadenizi girin",
-                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly wallets.",
+                "body": "Kurtarma ifadesi, aralarında boşluklar bulunan tümü küçük harf olmak üzere 24 kelime uzunluğundadır. Bu, mevcut Firefly cüzdanlarını kurtarmak için kullanılır.",
                 "enter": "Gizli kurtarma ifadenizi girin"
             },
             "seedDetected": "81 karakter seed tespit edilmiştir",
@@ -116,17 +116,17 @@
             "checksum": "Sağlama"
         },
         "importFromFile": {
-            "title": "Restore your wallets using a backup file",
-            "body": "Import a backup file to restore your wallets. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+            "title": "Cüzdanlarınızı bir yedekleme dosyasından geri yükleyin",
+            "body": "Cüzdanlarınızı geri yüklemek için bir yedekleme dosyasını içe aktarın. Yedekleme dosyaları Stronghold (.stronghold) veya Trinity SeedVault (.kdbx) olabilir."
         },
         "importBackupPassword": {
-            "title": "Restore your wallets from a SeedVault or Stronghold",
+            "title": "Cüzdanlarınızı SeedVault veya Stronghold ile geri yükleyin",
             "body1": "Lütfen yedekleme şifrenizi girin.",
             "body2": "Bu, yedeğinizi ilk oluşturduğunuzda belirlediğiniz şifredir."
         },
         "importSuccess": {
             "title": "Yedeklemenizi başarıyla geri yüklediniz",
-            "body": "You can now set up your new profile.",
+            "body": "Artık yeni profilinizi oluşturabilirsiniz.",
             "seedvaultTitle": "Başarıyla içeri aktarıldı",
             "seedvaultBody": "Şifreniz doğru, şimdi devam edebilirsiniz.",
             "strongholdTitle": "Başarıyla içeri aktarıldı",
@@ -147,10 +147,11 @@
             "restoringWallet": "Cüzdan geri yükleniyor...",
             "findingBalance": "Bakiye bulunuyor...",
             "incorrectSeedVaultPassword": "Hatalı SeedVault şifresi.",
+            "noDataSeedVault": "No data could be found in the SeedVault.",
             "signingBundle": "Paket imzalanıyor",
             "broadcastingBundle": "Paket yayınlanıyor",
             "miningBundle": "Paket işleniyor",
-            "problemRestoringWallet": "There was a network error restoring your wallet. Please try again.",
+            "problemRestoringWallet": "Cüzdanınızı geri yüklerken bir ağ hatası oluştu. Lütfen tekrar deneyin.",
             "minimumMigrationAmountSpentAddresses": "Harcama yapılmış her adres için minimum geçiş miktarı 1 Mi'dir. Bakiyeniz doğru görünmüyorsa tekrar kontrol edin.",
             "tooManyAddressesToMigrate": "Düşük bakiyeli adres sayınız taşımak için çok fazla. Eğer bakiyeniz doğru görünmüyorsa lütfen tekrar kontrol ediniz.",
             "cannotMigrateAllYourFunds": "Bazı adreslerin değeri çok düşük olduğu için bütün bakiyenizi taşıyamıyoruz. İşleminize bu şekilde de devam edebilirsiniz. {value} kaybolacaktır.",
@@ -201,7 +202,7 @@
             "settings": "Ayarlar",
             "generalSettings": {
                 "title": "Genel ayarlar",
-                "description": "Configure your app's appearance and other general settings"
+                "description": "Uygulamanızın görünümünü ve diğer genel ayarları düzenleyin"
             },
             "security": {
                 "title": "Güvenlik",
@@ -220,7 +221,7 @@
                 "description": "Profil isminizi değiştirin veya bir avatar ayarlayın"
             },
             "sync": {
-                "title": "Sync wallets",
+                "title": "Cüzdanları senkronize et",
                 "description": ""
             },
             "theme": {
@@ -241,15 +242,17 @@
             },
             "exportStronghold": {
                 "title": "Yedeği dışa aktar",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history."
+                "description": "Bir Stronghold dosyasına aktarın - cüzdanlarınızın ve en son işlem geçmişinizin şifrelenmiş tam yedeği."
             },
             "appLock": {
                 "title": "Otomatik Kilitleme",
-                "description": "Inactivity time before your wallets lock and you are logged out"
+                "description": "Cüzdanlarınız kilitlenmeden ve çıkış yapılmadan önce hareketsizlik süresi",
+                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
+                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
             },
             "changePassword": {
                 "title": "Şifre Değiştir",
-                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds."
+                "description": "Parolanız, cüzdanlarınızın güvenliğini sağlamak için kullanılır. Bakiyenizi korumak için güçlü bir parola kullanın."
             },
             "changePincode": {
                 "title": "PIN kodunu değiştir",
@@ -264,12 +267,12 @@
                 "description": "Tokenlar için detaylı bir adres araması yapın."
             },
             "hiddenAccounts": {
-                "title": "Hidden wallets",
-                "description": "Selecting this options will show wallets that were previously hidden."
+                "title": "Gizli cüzdanlar",
+                "description": "Bu seçeneğin seçilmesi, önceden gizlenmiş cüzdanları gösterecektir."
             },
             "deleteProfile": {
                 "title": "Profili sil",
-                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup."
+                "description": "Tüm profilinizi, cüzdanlarınızı ve işlem geçmişinizi siler. Bir yedeğiniz olduğundan emin olun."
             },
             "deepLinks": {
                 "title": "Derin Bağlantılar",
@@ -285,7 +288,7 @@
             },
             "configureNodeList": {
                 "title": "Seçilmiş Sayfa",
-                "description": "Manage the list of IOTA network nodes you connect to.",
+                "description": "Bağlandığınız IOTA ağ nodelarının listesini yönetin.",
                 "primaryNode": "Birincil düğüm",
                 "excludeNode": "Düğümü hariç tut",
                 "includeNode": "Düğümü dahil et",
@@ -354,8 +357,8 @@
                 },
                 "strongholdStatus": {
                     "title": "Cüzdan durumu",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "locked": "Kilitli",
+                    "unlocked": "Kilidi Açık"
                 },
                 "strongholdBackup": {
                     "title": "Cüzdan yedeği",
@@ -379,7 +382,7 @@
     "popups": {
         "password": {
             "title": "Parola gerekli",
-            "subtitle": "Please enter your password to unlock your wallets",
+            "subtitle": "Cüzdanlarınızın kilidini açmak için lütfen şifrenizi girin",
             "backup": "Bir yedeği dışa aktarmak için lütfen şifrenizi girin"
         },
         "qr": {
@@ -391,34 +394,34 @@
             "upToDateDescription": "En son ve güvenli Firefly sürümünü kullanıyorsunuz.",
             "updateAvailable": "Firefly güncellemesi mevcut",
             "updateDetails": "Sürüm {version} - {date}",
-            "noAutoUpdate": "Auto-update is disabled in this Windows version, please go to https://firefly.iota.org to download the update."
+            "noAutoUpdate": "Uygulamanın bu Windows sürümünde otomatik güncelleme devre dışıdır, lütfen güncellemeyi indirmek için https://firefly.iota.org adresine gidin."
         },
         "backup": {
             "title": "Son Yedekleme: {date}",
             "lastBackup": "Aldığınız son yedek {date}",
-            "backupDescription": "It is important to back up regularly to ensure you have a copy of your wallets and transaction history.",
+            "backupDescription": "Cüzdanlarınızın ve işlem geçmişinizin bir kopyasına sahip olduğunuzdan emin olmak için düzenli olarak yedekleme yapmanız önemlidir.",
             "backupWarning": "Eğer yedeğinizi ve kurtarma şifrenizi kaybederseniz, hesabınıza erişimi kaybedeceksiniz.",
             "notBackedUp": "Yedeklenmedi",
-            "notBackedUpDescription": "You have not backed up your wallets",
+            "notBackedUpDescription": "Cüzdanlarınızı yedeklemediniz",
             "saving": "Kaydediliyor..."
         },
         "deleteAccount": {
             "title": "Sil {name}?",
-            "body": "This wallet has no transaction history. It can safely be deleted.",
+            "body": "Bu cüzdanın işlem geçmişi bulunmamaktadır. Güvenle silinebilir.",
             "typePassword": "Doğrulama için lütfen cüzdan parolanızı giriniz.",
-            "hideAccount": "Delete wallet",
+            "hideAccount": "Cüzdanı sil",
             "errorTitle": "Silinemedi: {name}",
-            "errorBody1": "You cannot delete this wallet, you must have at least one."
+            "errorBody1": "Bu cüzdanı silemezsiniz, en az bir cüzdana sahip olmanız gerekmektedir."
         },
         "hideAccount": {
             "title": "Gizle {name}?",
-            "body": "You can find this wallet later by enabling \"Show hidden wallets\" in Advanced Settings.",
+            "body": "Bu cüzdanı daha sonra Gelişmiş Ayarlar'da \"Gizli cüzdanları göster\" seçeneğini etkinleştirerek bulabilirsiniz.",
             "typePassword": "Doğrulama için lütfen cüzdan parolanızı giriniz.",
-            "hideAccount": "Hide wallet",
+            "hideAccount": "Cüzdanı gizle",
             "errorTitle": "Gizlenemedi: {name}",
-            "errorBody1": "To hide a wallet it must have 0 balance.",
-            "errorBody2": "You currently have {balance} remaining on this wallet. Please move these funds to a different wallet and try again.",
-            "errorBody3": "You cannot hide this wallet, you must have at least one."
+            "errorBody1": "Bir cüzdanı gizlemek için bakiyesi olmamalıdır.",
+            "errorBody2": "Cüzdanınızda {balance} tutarında bakiye bulunmaktadır. Lütfen bakiyeyi başka bir cüzdana taşıyıp tekrar deneyiniz.",
+            "errorBody3": "Bu cüzdanı gizleyemezsiniz, en az bir cüzdanınız bulunmalıdır."
         },
         "addressHistory": {
             "title": "{name} Adres geçmişi",
@@ -461,8 +464,8 @@
         },
         "balanceFinder": {
             "title": "Bakiye bulucu",
-            "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
-            "totalWalletBalance": "Total balance",
+            "body": "Eksik bakiyeleri bulmak için daha kapsamlı bir adres araması yapın. Bu işlem biraz zaman alabilir.",
+            "totalWalletBalance": "Toplam bakiye",
             "typePassword": "Aramaya izin vermek için şifrenizi girin."
         },
         "riskFunds": {
@@ -477,10 +480,10 @@
             "proceed": "Riski göze alıyorum"
         },
         "snapshot": {
-            "title": "Ongoing network upgrade",
-            "body": "The Chrysalis network upgrade has begun.",
-            "bodyMigration": "Migration is disabled until it is complete.",
-            "bodyFirefly": "Firefly is disabled until it is complete. Token migration will still be possible afterwards."
+            "title": "Ağ güncellemesi devam etmekte",
+            "body": "Chrysalis ağ güncellemesi başladı.",
+            "bodyMigration": "İşlem tamamlanana kadar taşıma devre dışı bırakıldı.",
+            "bodyFirefly": "İşlem tamamlanana kadar Firefly devre dışı bırakıldı. Token taşıma daha sonra hala mümkün olacak."
         }
     },
     "charts": {
@@ -488,8 +491,8 @@
         "outgoingMi": "Giden {value}",
         "portoflio": "Portföy",
         "token": "Token",
-        "accountValue": "Wallet Value",
-        "accountActivity": "Wallet Activity",
+        "accountValue": "Cüzdan Değeri",
+        "accountActivity": "Cüzdan Aktivitesi",
         "timeframe1Hour": "1 saat",
         "timeframe1Day": "1 gün",
         "timeframe1Week": "1 hafta",
@@ -543,11 +546,11 @@
         "updateFirefly": "Firefly'ı güncelle",
         "restartNow": "Şimdi yeniden başlat",
         "saveBackup": "Stronghold yedeklemeyi kaydet",
-        "customizeAcount": "Customise wallet",
+        "customizeAcount": "Cüzdanı özelleştir",
         "viewAddressHistory": "Adres geçmişini göster",
-        "hideAccount": "Hide wallet",
-        "showAccount": "Unhide wallet",
-        "deleteAccount": "Delete wallet",
+        "hideAccount": "Cüzdanı gizle",
+        "showAccount": "Cüzdanı göster",
+        "deleteAccount": "Cüzdanı sil",
         "max": "En yüksek",
         "addNode": "Düğüm ekle",
         "updateNode": "Düğümü güncelle",
@@ -563,7 +566,7 @@
         "copy": "Kopyala",
         "paste": "Yapıştır",
         "selectAll": "Hepsini seç",
-        "addAccount": "Add Wallet",
+        "addAccount": "Cüzdan Ekle",
         "checkForUpdates": "Güncellemeleri Denetle",
         "reportAnIssue": "Sorun bildir",
         "clear": "Temizle",
@@ -578,13 +581,13 @@
         "readDocumentation": "Dokümantasyonu oku",
         "visitFaq": "FAQ ziyaret et",
         "viewStatus": "Durumu görüntüle",
-        "showHiddenAccounts": "Show hidden wallets",
+        "showHiddenAccounts": "Gizli cüzdanları göster",
         "confirm": "Onayla",
         "findBalances": "Bakiyeleri bul",
         "searchBalances": "Bakiyeleri ara",
         "searchAgain": "Tekrar ara",
         "searching": "Aranıyor...",
-        "closeFirefly": "Close Firefly"
+        "closeFirefly": "Firefly'ı Kapat"
     },
     "general": {
         "password": "Parola",
@@ -602,10 +605,10 @@
         "sendFunds": "Para gönderin",
         "sendToAddress": "Adresini Gönder",
         "scanQrOrPaste": "Bir QR kodunu tarayın veya bir Adres yapıştırın",
-        "moveFundsBetweenAccounts": "Move funds between wallets",
+        "moveFundsBetweenAccounts": "Cüzdanlarınız arasında bakiye aktarın",
         "sendTokensToAddress": "Bir adrese Iota gönder",
-        "manageAccount": "Manage Wallet",
-        "customizeAcount": "Customize your wallet",
+        "manageAccount": "Cüzdanı Yönet",
+        "customizeAcount": "Cüzdanınızı özelleştirin",
         "account": "Cüzdan",
         "sendingToAddress": "Adrese gönderiliyor",
         "amount": "Tutar",
@@ -627,25 +630,25 @@
         "lightTheme": "Aydınlık tema",
         "darkTheme": "Karanlık tema",
         "balance": "Bakiye",
-        "accountBalance": "Wallet Balance",
+        "accountBalance": "Cüzdan Bakiyesi",
         "incoming": "Gelen",
         "outgoing": "Giden",
         "totalIn": "Toplam giriş",
         "totalOut": "Toplam çıkış",
-        "accounts": "Wallets",
-        "myAccounts": "My Wallets",
+        "accounts": "Cüzdanlar",
+        "myAccounts": "Cüzdanlarım",
         "automaticNodeSelection": "Otomatik düğüm seçimi",
         "manualNodeSelection": "Manuel seçim",
         "profiles": "Profiller",
         "developerProfile": "Geliştirici hesabı",
         "developerProfileDescription": "Test ağlarına bağlanmanıza izin verir",
         "dev": "Geliştirici",
-        "createAccount": "Create a Wallet",
-        "accountName": "Wallet name",
+        "createAccount": "Cüzdan Oluştur",
+        "accountName": "Cüzdan adı",
         "latestTransactions": "Son transferler",
         "transactions": "Transferler",
         "security": "Güvenlik",
-        "accountAddress": "Wallet Address",
+        "accountAddress": "Cüzdan Adresi",
         "nodes": "Düğümler",
         "wallet": "Cüzdan",
         "help": "Yardım",
@@ -657,26 +660,26 @@
         "status": "Durum",
         "confirmed": "Onaylandı",
         "pending": "Bekleniyor",
-        "noAccounts": "You have no wallets, please create one.",
+        "noAccounts": "Cüzdanınız yok, lütfen bir tane oluşturun.",
         "loadingAccounts": "Yükleniyor, lütfen bekleyin...",
         "addProfile": "Profil Ekle",
         "noRecentHistory": "Geçmiş bulunamadı",
-        "firstSync": "Syncing history, this may take a while...",
-        "transferSyncing": "Syncing wallet",
+        "firstSync": "Geçmiş senkronize ediliyor, bu biraz zaman alabilir...",
+        "transferSyncing": "Cüzdan senkronize ediliyor",
         "transferSelectingInputs": "Girişlerin seçimi",
         "transferRemainderAddress": "Kalan mevduat adresi oluşturuluyor",
         "transferSigning": "İşlemin imzalanması",
         "transferPow": "PoW yapılıyor",
         "transferBroadcasting": "İşlem yayınlanıyor",
         "transferComplete": "Transfer tamamlandı",
-        "creatingAccount": "Creating wallet, please wait...",
-        "updatingAccount": "Updating wallet, please wait...",
-        "accountSyncing": "Wallet is syncing",
-        "accountSyncComplete": "Wallet sync complete",
+        "creatingAccount": "Cüzdan oluşturuluyor, lütfen bekleyin...",
+        "updatingAccount": "Cüzdan güncelleniyor, lütfen bekleyin...",
+        "accountSyncing": "Cüzdan senkronize ediliyor",
+        "accountSyncComplete": "Cüzdan senkronizasyonu tamamlandı",
         "passwordUpdating": "Şifre güncelleniyor...",
         "passwordSuccess": "Şifre başarıyla güncellendi",
         "passwordFailed": "Şifre güncellemesi yapılamadı",
-        "syncingAccounts": "Syncing wallets...",
+        "syncingAccounts": "Cüzdanlar senkronize ediliyor...",
         "exportingStronghold": "Stronghold Aktarılıyor...",
         "exportingStrongholdSuccess": "Stronghold başarıyla dışa aktarıldı",
         "exportingStrongholdFailed": "Stronghold dışa aktarımı başarısız oldu",
@@ -691,13 +694,14 @@
         "passwordStrength4": "Güçlü",
         "creatingProfile": "Yeni bir hesap oluşturuluyor, lütfen bekleyin...",
         "fundMigration": "Bakiye taşıma",
-        "accountRemoved": "This wallet is hidden. Unhide it to perform transfers.",
+        "accountRemoved": "Bu cüzdan gizlidir. Havale işlemlerini gerçekleştirmek için görünür hale getirin.",
         "receivingTo": "{account}'e alınıyor",
         "sendingFrom": "{account}'dan gönderiliyor",
         "receivedTo": "{account}'a alındı",
         "sentFrom": "{account}'dan gönderildi",
         "receiving": "Alınıyor",
-        "sending": "Gönderiliyor"
+        "sending": "Gönderiliyor",
+        "legacyNetwork": "Legacy Network"
     },
     "dates": {
         "today": "Bugün",
@@ -720,7 +724,7 @@
         "calcMinutesRemaining": "Kalan dakikalar hesaplanıyor...",
         "minutesRemaining": "{minutes, plural, one {1 dakika kaldı} other {# dakika kaldı}}",
         "copiedToClipboard": "Panoya kopyalandı",
-        "accountsSynchronized": "Wallet synchronization complete",
+        "accountsSynchronized": "Cüzdan senkronizasyonu tamamlandı",
         "migratedAccountChrysalisDown": "Bakiyeniz 28 Nisan'da Chrysalis'ten sonra kullanılabilir olacaktır",
         "migratedAccountChrysalisUp": "Bakiyeniz kısa süre içinde kullanılabilir hale gelecektir"
     },
@@ -752,10 +756,10 @@
             "incorrect": "Mevcut şifreniz yanlış."
         },
         "account": {
-            "length": "Your wallet name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "empty": "You must use your latest wallet before creating a new one.",
-            "notEmpty": "You must transfer your balance before deleting this wallet.",
-            "duplicate": "A wallet with this name already exists.",
+            "length": "Cüzdanınızın adı {length, plural, one {1 karakter} other {# karakter}}den uzun olamaz.",
+            "empty": "Yenisini oluşturmadan önce en son cüzdanınızı kullanmalısınız.",
+            "notEmpty": "Bu cüzdanı silmeden önce bakiyenizi transfer etmelisiniz.",
+            "duplicate": "Bu isimde bir cüzdan zaten var.",
             "tilde": "Profile ismi '~' karakteri ile başlayamaz.",
             "control": "Profil ismi bir kontrol karakteri içermemeli.",
             "startDot": "Profile ismi '.' karakteri ile başlayamaz.",
@@ -770,8 +774,8 @@
             "wrongAddressPrefix": "Adresler {prefix} ön eki ile başlar.",
             "wrongAddressFormat": "Adres doğru şekilde biçimlendirilmemiş.",
             "invalidAddress": "Adres geçerli değil.",
-            "insufficientFunds": "This wallet has insufficient funds.",
-            "noToAccount": "You have not selected a wallet to send the funds to.",
+            "insufficientFunds": "Cüzdan bakiyesi yetersiz.",
+            "noToAccount": "Bakiyeyi göndermek için bir cüzdan seçmediniz.",
             "sendingDust": "1 Mi den daha az gönderim yapamazsınız.",
             "leavingDust": "Adresinizde 1 Mi'den az bırakamazsınız."
         },

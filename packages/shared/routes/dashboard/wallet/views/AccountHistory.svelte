@@ -25,10 +25,16 @@
                 },
                 onError(err) {
                     $isSyncing = false
-                    showAppNotification({
-                        type: 'error',
-                        message: locale(err.error),
-                    })
+
+                    const shouldHideErrorNotification =
+                        err && err.type === 'ClientError' && err.error === 'error.node.chrysalisNodeInactive'
+
+                    if (!shouldHideErrorNotification) {
+                        showAppNotification({
+                            type: 'error',
+                            message: locale(err.error),
+                        })
+                    }
                 },
             })
         }

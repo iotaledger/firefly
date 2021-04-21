@@ -76,8 +76,8 @@
             "body1": "Syötä salasanasi varmuuskopioidaksesi lompakkosi Stronghold-tiedostoon. Salasanaasi käytetään varmuuskopion salaukseen.",
             "body2": "Syitä, miksi digitaaliset varmuuskopiot ovat tärkeitä:",
             "reason1": "Palauta lompakkosi helposti kirjoittamatta palautuslausekettasi",
-            "reason2": "Import your wallets on other devices",
-            "reason3": "Palauta maksutapahtumiesi koko historia"
+            "reason2": "Tuo lompakkosi muissa laitteissa",
+            "reason3": "Palauta transaktioidesi koko historia"
         },
         "recoveryPhraseSaved": {
             "title": "Varmuuskopiointi onnistui",
@@ -96,7 +96,7 @@
             "importSeed": "Minulla on 81 merkkiä pitkä seed-merkkijono",
             "importSeedDescription": "Syötä seed-merkkijono ja siirrä varasi Chrysalis-verkkoon",
             "importMnemonic": "Minulla on Fireflyn palautuslauseke",
-            "importMnemonicDescription": "Enter your recovery phrase to recover your wallets",
+            "importMnemonicDescription": "Syötä palautuslausekkeesi palauttaaksesi lompakkosi",
             "importFile": "Minulla on tiedostomuotoinen varmuuskopio",
             "importFileDescription": "Lataa SeedVault- tai Stronghold-tiedosto"
         },
@@ -147,6 +147,7 @@
             "restoringWallet": "Palautetaan lompakkoa...",
             "findingBalance": "Etsitään saldoa...",
             "incorrectSeedVaultPassword": "Väärä SeedVault-salasana.",
+            "noDataSeedVault": "SeedVaultista ei löytynyt tietoja.",
             "signingBundle": "Allekirjoitetaan bundlea",
             "broadcastingBundle": "Lähetetään bundlea",
             "miningBundle": "Louhitaan bundlea",
@@ -237,7 +238,7 @@
             },
             "notifications": {
                 "title": "Ilmoitukset",
-                "description": "Järjestelmäilmoitukset maksutapahtumista"
+                "description": "Järjestelmäilmoitukset transaktiotapahtumista"
             },
             "exportStronghold": {
                 "title": "Vie varmuuskopio",
@@ -245,7 +246,9 @@
             },
             "appLock": {
                 "title": "Automaattinen lukitus",
-                "description": "Käyttämättömyysaika ennen kuin lompakkosi lukittuvat ja sinut kirjataan ulos"
+                "description": "Käyttämättömyysaika ennen kuin lompakkosi lukittuvat ja sinut kirjataan ulos",
+                "durationMinute": "{time, plural, one {1 minuutti} other {# minuuttia}}",
+                "durationHour": "{time, plural, one {1 tunti} other {# tuntia}}"
             },
             "changePassword": {
                 "title": "Vaihda salasana",
@@ -273,7 +276,7 @@
             },
             "deepLinks": {
                 "title": "Syvälinkit",
-                "description": "Täytä maksutapahtumatiedot automaattisesti Fireflyssa, kun klikkaat iota://-linkkiä"
+                "description": "Täytä transaktiotiedot automaattisesti Fireflyssa, kun klikkaat iota://-linkkiä"
             },
             "developerMode": {
                 "title": "Kehittäjätila",
@@ -309,7 +312,7 @@
             },
             "stateExport": {
                 "title": "Tilan vienti",
-                "description": "Vie tapahtumahistoriasi .csv-tiedostoon"
+                "description": "Vie transaktiohistoriasi .csv-tiedostoon"
             },
             "troubleshoot": {
                 "title": "Vianmääritys",
@@ -456,13 +459,13 @@
             "userPath": "Käyttäjän polku"
         },
         "transaction": {
-            "title": "Vahvista siirtotapahtuma",
+            "title": "Vahvista transaktio",
             "body": "Olet lähettämässä {amount} osoitteeseen"
         },
         "balanceFinder": {
             "title": "Saldon etsijä",
-            "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
-            "totalWalletBalance": "Total balance",
+            "body": "Suorita kattavampi haku osoitteistasi löytämään puuttuvia saldoja. Tämä voi kestää jonkin aikaa.",
+            "totalWalletBalance": "Kokonaissaldo",
             "typePassword": "Kirjoita salasanasi salliaksesi haun."
         },
         "riskFunds": {
@@ -665,9 +668,9 @@
         "transferSyncing": "Synkronoidaan lompakkoa",
         "transferSelectingInputs": "Valitaan syötteet",
         "transferRemainderAddress": "Luodaan jäljellä olevaa talletusosoitetta",
-        "transferSigning": "Allekirjoitetaan siirtoa",
+        "transferSigning": "Allekirjoitetaan transaktiota",
         "transferPow": "Suoritetaan PoW",
-        "transferBroadcasting": "Lähetetään siirtoa",
+        "transferBroadcasting": "Lähetetään transaktiota",
         "transferComplete": "Siirto valmis",
         "creatingAccount": "Luodaan lompakkoa, odota hetki...",
         "updatingAccount": "Päivitetään lompakkoa, odota hetki...",
@@ -697,7 +700,8 @@
         "receivedTo": "Vastaanotettu lompakkoon {account}",
         "sentFrom": "Lähetetty lompakosta {account}",
         "receiving": "Vastaanotetaan",
-        "sending": "Lähetetään"
+        "sending": "Lähetetään",
+        "legacyNetwork": "Vanha verkko"
     },
     "dates": {
         "today": "Tänään",
@@ -710,9 +714,9 @@
     "notifications": {
         "valueTx": "Vastaanotetaan {{value}} lompakkoon {{account}}",
         "confirmed": "Lähtevä {{value}} lompakosta {{account}} on vahvistettu",
-        "confirmedInternal": "{{value}} tililtä {{senderAccount}} tilille {{receiverAccount}} on vahvistettu",
+        "confirmedInternal": "{{value}} lompakosta {{senderAccount}} lompakkoon {{receiverAccount}} on vahvistettu",
         "confirmedInternalNoAccounts": "{{value}} sisäinen siirto on vahvistettu",
-        "failed": "Lähtevä {{value}} tililtä {{account}} on epäonnistunut",
+        "failed": "Lähtevä {{value}} lompakosta {{account}} on epäonnistunut",
         "downloadingUpdate": "Ladataan päivitystä",
         "updateReady": "Päivitys valmis",
         "updateError": "Päivityksen aikana tapahtui virhe, yritä uudelleen",

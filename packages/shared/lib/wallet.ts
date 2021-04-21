@@ -4,7 +4,7 @@ import { stripTrailingSlash } from 'shared/lib/helpers'
 import { localize } from 'shared/lib/i18n'
 import type { PriceData } from 'shared/lib/marketData'
 import { HistoryDataProps } from 'shared/lib/marketData'
-import { getOfficialNodes, network } from 'shared/lib/network'
+import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
 import { showAppNotification, showSystemNotification } from 'shared/lib/notifications'
 import { activeProfile, isStrongholdLocked, updateProfile } from 'shared/lib/profile'
 import type { Account, Account as BaseAccount, AccountToCreate, Balance, SyncedAccount } from 'shared/lib/typings/account'
@@ -409,13 +409,14 @@ export const asyncRestoreBackup = (importFilePath, password) => {
 export const asyncCreateAccount = () => {
     return new Promise<void>((resolve, reject) => {
         const officialNodes = getOfficialNodes()
+        const officialNetwork = getOfficialNetwork()
         api.createAccount(
             {
                 signerType: { type: 'Stronghold' },
                 clientOptions: {
                     nodes: officialNodes,
                     node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
-                    network: get(network),
+                    network: officialNetwork
                 },
                 alias: `${localize('general.account')} 1`
             },
@@ -1460,10 +1461,16 @@ export const updateAccountNetworkSettings = async (automaticNodeSelection, inclu
                 )
             },
             onError(err) {
-                showAppNotification({
-                    type: 'error',
-                    message: localize(err.error),
-                })
+                const shouldHideErrorNotification =
+                    err && err.type === 'ClientError' && err.error === 'error.node.chrysalisNodeInactive'
+
+                if (!shouldHideErrorNotification) {
+                    showAppNotification({
+                        type: 'error',
+                        message: localize(err.error),
+                    })
+                }
+
             },
         }
     )
@@ -1561,9 +1568,9 @@ export const getMilestoneMessageValue = (payload: Payload, accounts) => {
  * Get incoming flag from message
  * @returns 
  */
- export const getIncomingFlag = (payload: Payload) => {
+export const getIncomingFlag = (payload: Payload) => {
     if (payload?.type === "Transaction") {
-       return payload.data.essence.data.incoming
+        return payload.data.essence.data.incoming
     }
 
     return undefined
@@ -1573,19 +1580,19 @@ export const getMilestoneMessageValue = (payload: Payload, accounts) => {
  * Set incoming flag on the message
  * @returns 
  */
- export const setIncomingFlag = (payload: Payload, incoming: boolean) => {
+export const setIncomingFlag = (payload: Payload, incoming: boolean) => {
     if (payload?.type === "Transaction") {
-       payload.data.essence.data.incoming = incoming
+        payload.data.essence.data.incoming = incoming
     }
- }
+}
 
- /**
- * Get internal flag from message
- * @returns 
- */
-  export const getInternalFlag = (payload: Payload) => {
+/**
+* Get internal flag from message
+* @returns 
+*/
+export const getInternalFlag = (payload: Payload) => {
     if (payload?.type === "Transaction") {
-       return payload.data.essence.data.internal
+        return payload.data.essence.data.internal
     }
 
     return undefined

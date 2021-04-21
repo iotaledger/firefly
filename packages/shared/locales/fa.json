@@ -2,16 +2,16 @@
     "views": {
         "onboarding1": {
             "title": "ارسال، دریافت و مدیریت توکن های آیوتا",
-            "body": "Firefly is the official wallet software of IOTA."
+            "body": "Firefly کیف پول رسمی آیوتا است."
         },
         "legal": {
             "title": "حریم خصوصی و شرایط استفاده",
-            "body": "لطفا قوانین استفاده از سرویس و سیاست حریم خصوصی را بررسی نمایید.",
+            "body": "لطفا قوانین استفاده از خدمات و سیاست حریم خصوصی را بررسی نمایید.",
             "checkbox": "من سیاست حریم خصوصی و شرایط استفاده را مطالعه کرده و میپذیرم"
         },
         "appearance": {
             "title": "ظاهر",
-            "body": "Choose your app theme."
+            "body": "طرح زمینه خود را انتخاب کنید."
         },
         "profile": {
             "title": "ایجاد پروفایل",
@@ -28,7 +28,7 @@
         "secure": {
             "title": "ایمن سازی کیف پول",
             "body1": "قالب PDF کیت بازیابی را ذخیره و پرینت کنید.",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallets."
+            "body2": "اگر کیت بازیابی خود را پر کرده و در جایی امن نگهداری کنید، همیشه می توانید کیف پول خود را بازیابی کنید."
         },
         "password": {
             "title": "ایجاد رمز عبور",
@@ -37,7 +37,7 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your profile.",
+            "body1": "برای اطمینان از اینکه فقط شما می توانید نمایه خود را وارد کنید ، پین ورود به سیستم را راه اندازی کنید.",
             "body2": "PIN خود را امن نگه دارید!"
         },
         "pin": {
@@ -73,15 +73,15 @@
         },
         "backupWallet": {
             "title": "بک آپ به صورت یک فایل Stronghold",
-            "body1": "Enter your password to backup your wallets to a Stronghold file. Your password is used to encrypt the backup.",
+            "body1": "گذرواژه خود را وارد کنید تا از کیف پولهای خود در یک فایل Stronghold بک آپ تهیه شود. از رمز ورود شما برای رمزگذاری بک آپ استفاده می شود.",
             "body2": "دلایلی که چرا گرفتن بک آپ دیجیتال مهم است:",
-            "reason1": "Easily recover your wallets without typing in your recovery phrase",
-            "reason2": "Import your wallets on other devices",
+            "reason1": "بازیابی کیف پول شما به راحتی و بدون وارد کردن عبارت بازیابی",
+            "reason2": "وارد کردن کیف پول خود به دستگاه های دیگر",
             "reason3": "بازیابی پیشینه‌ی کامل تراکنش شما"
         },
         "recoveryPhraseSaved": {
             "title": "بک آپ با موفقیت انجام شد",
-            "body": "You have backed up your wallets to a Stronghold."
+            "body": "شما از کیف پول خود یک بک آپ به صورت فایل Stronghold گرفته اید."
         },
         "congratulations": {
             "title": "راه اندازی کیف پول کامل شد",
@@ -96,19 +96,19 @@
             "importSeed": "من سید ٨١ کاراکتری دارم",
             "importSeedDescription": "عبارات seed خود را وارد کنید تا وجوه شما به شبکه Chrysalis منتقل شود",
             "importMnemonic": "عبارت بازیابی Firefly را در اختیار دارم",
-            "importMnemonicDescription": "Enter your recovery phrase to recover your wallets",
+            "importMnemonicDescription": "جهت بازگردانی کیف پول های خود عبارت بازیابی را وارد کنید",
             "importFile": "فایل پشتیبان در اختیار دارم",
             "importFileDescription": "فایل SeedVault یا Stronghold را ارسال کنید"
         },
         "importFromText": {
             "seed": {
                 "title": "برای شروع انتقال عبارت seed خود را وارد کنید",
-                "body": "A seed consists of 81 characters. This is used to recover from the older Trinity app.",
+                "body": "یک seed از ٨١ حرف تشکیل شده و از آن جهت بازیابی کیف پول قدیمی Trinity استفاده می‌شود.",
                 "enter": "عبارت seed خود را وارد کنید"
             },
             "mnemonic": {
                 "title": "عبارت بازیابی خود را وارد کنید",
-                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly wallets.",
+                "body": "عبارت بازیابی 24 کلمه می باشد که تماما با حروف کوچک و با فاصله می باشند. این عبارت برای بازیابی کیف پول Firefly که قبلا ایجاد شده است، استفاده می شود.",
                 "enter": "عبارت بازیابی خود را وارد کنید"
             },
             "seedDetected": "سید 81 کاراکتری یافت شد",
@@ -116,17 +116,17 @@
             "checksum": "کد اعتبارسنجی"
         },
         "importFromFile": {
-            "title": "Restore your wallets using a backup file",
-            "body": "Import a backup file to restore your wallets. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+            "title": "بازگردانی کیف پول توسط فایل بک آپ",
+            "body": "جهت بازگردانی کیف پول های خود، فایل بک آپ را وارد کنید. فایل بک آپ میتواند یک استرانگ هُلد (stronghold.) و یا ترینیتی سیدوالت (kdbx.) باشد."
         },
         "importBackupPassword": {
-            "title": "Restore your wallets from a SeedVault or Stronghold",
+            "title": "بازگردانی کیف پول توسط SeedVault یا Stronghold",
             "body1": "لطفا رمز عبور بک آپ خود را وارد کنید.",
             "body2": "این رمز عبوریست که برای اولین بار در گرفتن بک آپ آن را وارد کردید."
         },
         "importSuccess": {
             "title": "شما با موفقیت بک آپ خود را بازیابی کردید",
-            "body": "You can now set up your new profile.",
+            "body": "اکنون میتوانید کیف پول جدید خود را راه اندازی کنید.",
             "seedvaultTitle": "با موفقیت وارد شد",
             "seedvaultBody": "رمز عبور شما درست است٬ میتوانید ادامه دهید.",
             "strongholdTitle": "با موفقیت وارد شد",
@@ -147,10 +147,11 @@
             "restoringWallet": "بازگردانی کیف پول...",
             "findingBalance": "پیدا کردن موجودی...",
             "incorrectSeedVaultPassword": "رمز SeedVault اشتباه است.",
+            "noDataSeedVault": "هیچ داده‌ای در SeedVault پیدا نشد.",
             "signingBundle": "در حال تایید دسته تراکنش ها",
             "broadcastingBundle": "پخش بسته",
             "miningBundle": "در حال استخراج دسته تراکنش ها",
-            "problemRestoringWallet": "There was a network error restoring your wallet. Please try again.",
+            "problemRestoringWallet": "بازیابی کیف پول شما با مشکل مواجه شد. لطفا دوباره سعی کنید.",
             "minimumMigrationAmountSpentAddresses": "حداقل مبلغ انتقال برای هر آدرس 1 Mi است. موجودی خود را دوباره کنترل کنید.",
             "tooManyAddressesToMigrate": "تعداد آدرس‌های با موجودی پایین شما جهت انتقال، بیش از حد است. موجودی خود را دوباره کنترل کنید.",
             "cannotMigrateAllYourFunds": "امکان انتقال تمام وجوه شما به دلیل موجودی بسیار کم بعضی از آدرس‌ها وجود ندارد. با این حال می‌توانید ادامه دهید. مقدار {value} از دست خواهد رفت.",
@@ -201,7 +202,7 @@
             "settings": "تنظیمات",
             "generalSettings": {
                 "title": "تنظیمات عمومی",
-                "description": "Configure your app's appearance and other general settings"
+                "description": "تنظیمات ظاهری و عمومی کیف پول خود را پیکربندی کنید"
             },
             "security": {
                 "title": "امنیت",
@@ -220,7 +221,7 @@
                 "description": "تغییر اسم پروفایل یا انتخاب ظاهر"
             },
             "sync": {
-                "title": "Sync wallets",
+                "title": "همگام سازی کیف پول ها",
                 "description": ""
             },
             "theme": {
@@ -241,15 +242,17 @@
             },
             "exportStronghold": {
                 "title": "استخراج بک آپ",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history."
+                "description": "استخراج به صورت فایل Stronghold - یک بک آپ گیری کامل و رمزگذاری شده از کیف پول شما به همراه آخرین تاریخچه تراکنش ها."
             },
             "appLock": {
                 "title": "ﻗﻔﻞ ﺧﻮﺩﮐﺎﺭ",
-                "description": "Inactivity time before your wallets lock and you are logged out"
+                "description": "مدت زمان عدم فعالیت قبل از قفل شدن کیف پول و خارج شدن از سیستم",
+                "durationMinute": "{time, plural, one {۱ دقیقه} other {# دقیقه}}",
+                "durationHour": "{time, plural, one {۱ ساعت} other {# ساعت}}"
             },
             "changePassword": {
                 "title": "تغییر رمز عبور",
-                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds."
+                "description": "رمز عبور برای امنیت کیف پول شما استفاده میشود. برای حفاظت از وجوه خود باید از رمز عبور قوی استفاده کنید."
             },
             "changePincode": {
                 "title": "تغییر PIN کد",
@@ -264,12 +267,12 @@
                 "description": "انجام جستجو گسترده در آدرس‌های شما برای پیدا کردن توکن‌ها."
             },
             "hiddenAccounts": {
-                "title": "Hidden wallets",
-                "description": "Selecting this options will show wallets that were previously hidden."
+                "title": "کیف پول های مخفی",
+                "description": "با انتخاب این گزینه حساب هایی که قبلا پنهان بوده است، نمایش داده می شود."
             },
             "deleteProfile": {
                 "title": "حذف پروفایل",
-                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup."
+                "description": "کل پروفایل ، کیف پول ها و سابقه معاملات شما را پاک می کند. حتماً نسخه بک آپ تهیه کنید."
             },
             "deepLinks": {
                 "title": "لینک عمیق",
@@ -285,7 +288,7 @@
             },
             "configureNodeList": {
                 "title": "انتخاب نود",
-                "description": "Manage the list of IOTA network nodes you connect to.",
+                "description": "لیست نودهای شبکه IOTA را که به آنها متصل می شوید را مدیریت کنید.",
                 "primaryNode": "گره اصلی",
                 "excludeNode": "حذف گره",
                 "includeNode": "اضافه کردن گره",
@@ -354,8 +357,8 @@
                 },
                 "strongholdStatus": {
                     "title": "وضعیت کیف پول",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "locked": "قفل شد",
+                    "unlocked": "باز شد"
                 },
                 "strongholdBackup": {
                     "title": "بک آپ کیف پول",
@@ -379,7 +382,7 @@
     "popups": {
         "password": {
             "title": "رمز عبور مورد نیاز است",
-            "subtitle": "Please enter your password to unlock your wallets",
+            "subtitle": "لطفا رمز عبور خود را وارد کنید تا قفل کیف پول باز شود",
             "backup": "لطفا رمز عبور خود را وارد کنید تا یک پشتیبان دریافت کنید"
         },
         "qr": {
@@ -391,34 +394,34 @@
             "upToDateDescription": "شما از به روزترین و امن ترین نسخه Firefly استفاده میکنید.",
             "updateAvailable": "نسخه به روز شده Firefly قابل دسترس است",
             "updateDetails": "نسخه {version} - {date}",
-            "noAutoUpdate": "Auto-update is disabled in this Windows version, please go to https://firefly.iota.org to download the update."
+            "noAutoUpdate": "بروزرسانی خودکار در این نسخه ویندوز غیرفعال است، لطفاً جهت بروزرسانی به https://firefly.iota.org مراجعه کنید."
         },
         "backup": {
             "title": "آخرین به روز رسانی: {date}",
             "lastBackup": "آخرین به روز رسانی در تاریخ {date}",
-            "backupDescription": "It is important to back up regularly to ensure you have a copy of your wallets and transaction history.",
+            "backupDescription": "مهم است که به طور مرتب بک آپ تهیه کنید تا اطمینان حاصل کنید که یک کپی از کیف پول و سوابق معاملات خود را در اختیار دارید.",
             "backupWarning": "در صورت گم کردن بک آپ و عبارت بازیابی، دسترسی شما به وجوه خود از دست خواهد رفت.",
             "notBackedUp": "بک آپ گرفته نشده",
-            "notBackedUpDescription": "You have not backed up your wallets",
+            "notBackedUpDescription": "شما از کیف پول خود بک آپ نگرفته اید",
             "saving": "درحال ذخیره..."
         },
         "deleteAccount": {
             "title": "حذف { name} ?",
-            "body": "This wallet has no transaction history. It can safely be deleted.",
+            "body": "این حساب هیچ تاریخچه تراکنشی ندارد. با خیال راحت قابل حذف است.",
             "typePassword": "برای تایید رمز عبور کیف پول خود را وارد کنید.",
-            "hideAccount": "Delete wallet",
+            "hideAccount": "حذف کیف پول",
             "errorTitle": "امکان حذف {name} وجود ندارد",
-            "errorBody1": "You cannot delete this wallet, you must have at least one."
+            "errorBody1": "شما نمیتوانید این حساب را حذف کنید، باید حداقل یک کیف پول داشته باشید."
         },
         "hideAccount": {
             "title": "پنهان سازی {name}?",
-            "body": "You can find this wallet later by enabling \"Show hidden wallets\" in Advanced Settings.",
+            "body": "بعداً می توانید با فعال کردن \"نمایش کیف پول های پنهان\" در تنظیمات پیشرفته ، این کیف پول را پیدا کنید.",
             "typePassword": "برای تایید رمز کیف پول خود را وارد کنید.",
-            "hideAccount": "Hide wallet",
+            "hideAccount": "کیف پول مخفی",
             "errorTitle": "امکان پنهان سازی {name} وجود ندارد",
-            "errorBody1": "To hide a wallet it must have 0 balance.",
-            "errorBody2": "You currently have {balance} remaining on this wallet. Please move these funds to a different wallet and try again.",
-            "errorBody3": "You cannot hide this wallet, you must have at least one."
+            "errorBody1": "برای مخفی کردن یک کیف پول می بایست موجودی آن 0 باشد.",
+            "errorBody2": "در حال حاضر مانده حساب شما {balance} میباشد. لطفا این مبلغ را به کیف پول دیگری انتقال داده و دوباره امتحان کنید.",
+            "errorBody3": "شما نمیتوانید این حساب را حذف کنید، باید حداقل یک کیف پول داشته باشید."
         },
         "addressHistory": {
             "title": "تاریخچه آدرس {name}",
@@ -461,8 +464,8 @@
         },
         "balanceFinder": {
             "title": "یابنده موجودی",
-            "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
-            "totalWalletBalance": "Total balance",
+            "body": "جستجو دقیق تر در آدرس ها برای یافتن وجوه از دست رفته. این ممکن است مدتی طول بکشد.",
+            "totalWalletBalance": "موجودی کل",
             "typePassword": "برای شروع جستجو، رمز خود را وارد کنید."
         },
         "riskFunds": {
@@ -477,10 +480,10 @@
             "proceed": "از این ریسک اطلاع دارم"
         },
         "snapshot": {
-            "title": "Ongoing network upgrade",
-            "body": "The Chrysalis network upgrade has begun.",
-            "bodyMigration": "Migration is disabled until it is complete.",
-            "bodyFirefly": "Firefly is disabled until it is complete. Token migration will still be possible afterwards."
+            "title": "در حال ارتقا شبکه",
+            "body": "بروزرسانی شبکه Chrysalis آغاز شده است.",
+            "bodyMigration": "نقل و انتقال تا تکمیل آن غیرفعال است.",
+            "bodyFirefly": "Firefly تا زمان تکمیل آن غیرفعال شده است. پس از آن انتقال توکن امکان پذیر است."
         }
     },
     "charts": {
@@ -488,8 +491,8 @@
         "outgoingMi": "خروجی {value} Mi",
         "portoflio": "سبد سهام",
         "token": "توکن",
-        "accountValue": "Wallet Value",
-        "accountActivity": "Wallet Activity",
+        "accountValue": "مقدار کیف پول",
+        "accountActivity": "فعالیت کیف پول",
         "timeframe1Hour": "۱ ساعت",
         "timeframe1Day": "۱ روز",
         "timeframe1Week": "۱ هفته",
@@ -543,11 +546,11 @@
         "updateFirefly": "به روز رسانی Firefly",
         "restartNow": "بستن و باز کردن مجدد",
         "saveBackup": "ذخیره بک آپ Stronghold",
-        "customizeAcount": "Customise wallet",
+        "customizeAcount": "کیف پول سفارشی",
         "viewAddressHistory": "نمایش سوابق آدرس",
-        "hideAccount": "Hide wallet",
-        "showAccount": "Unhide wallet",
-        "deleteAccount": "Delete wallet",
+        "hideAccount": "کیف پول مخفی",
+        "showAccount": "کیف پول آشکار",
+        "deleteAccount": "حذف کیف پول",
         "max": "حداکثر",
         "addNode": "اضافه کردن نود",
         "updateNode": "بروزرسانی گره",
@@ -563,7 +566,7 @@
         "copy": "کپی",
         "paste": "جای‌گذاری",
         "selectAll": "انتخاب همه",
-        "addAccount": "Add Wallet",
+        "addAccount": "اضافه کردن کیف پول",
         "checkForUpdates": "بررسی برای بروزرسانی",
         "reportAnIssue": "گزارش مشکل",
         "clear": "پاک کردن",
@@ -578,13 +581,13 @@
         "readDocumentation": "مستندات را بخوانید",
         "visitFaq": "بخش سوالات متداول را ببینید",
         "viewStatus": "نشان دادن موقعیت",
-        "showHiddenAccounts": "Show hidden wallets",
+        "showHiddenAccounts": "نمایش کیف پول های مخفی",
         "confirm": "تایید",
         "findBalances": "پیدا کردن موجودی",
         "searchBalances": "جستجو برای موجودی",
         "searchAgain": "جستجوی مجدد",
         "searching": "درحال جستجو...",
-        "closeFirefly": "Close Firefly"
+        "closeFirefly": "بستن Firefly"
     },
     "general": {
         "password": "رمز عبور",
@@ -602,10 +605,10 @@
         "sendFunds": "ارسال وجه",
         "sendToAddress": "ارسال به آدرس",
         "scanQrOrPaste": "کد QR یا آدرس را وارد کنید",
-        "moveFundsBetweenAccounts": "Move funds between wallets",
+        "moveFundsBetweenAccounts": "جابجایی وجه بین حساب ها",
         "sendTokensToAddress": "ارسال توکن به یک آدرس",
-        "manageAccount": "Manage Wallet",
-        "customizeAcount": "Customize your wallet",
+        "manageAccount": "مدیریت کیف پول",
+        "customizeAcount": "شخصی سازی حساب خود",
         "account": "کیف پول",
         "sendingToAddress": "ارسال به آدرس",
         "amount": "مقدار",
@@ -627,25 +630,25 @@
         "lightTheme": "تم روشن",
         "darkTheme": "تم تاریک",
         "balance": "موجودی",
-        "accountBalance": "Wallet Balance",
+        "accountBalance": "موجودی کیف پول",
         "incoming": "ورودی",
         "outgoing": "خروجی",
         "totalIn": "کل دریافتی",
         "totalOut": "کل ارسالی",
-        "accounts": "Wallets",
-        "myAccounts": "My Wallets",
+        "accounts": "کیف پول ها",
+        "myAccounts": "کیف پول من",
         "automaticNodeSelection": "انتخاب اتوماتیک نُد",
         "manualNodeSelection": "انتخاب دستی نُد",
         "profiles": "پروفایل ها",
         "developerProfile": "پروفایل برنامه نویسی",
         "developerProfileDescription": "به شما اجازه اتصال به شبکه آزمایشی را میدهد",
         "dev": "برنامه نویس",
-        "createAccount": "Create a Wallet",
-        "accountName": "Wallet name",
+        "createAccount": "ايجاد كيف پول",
+        "accountName": "نام کیف پول",
         "latestTransactions": "آخرین تراکنش ها",
         "transactions": "تراکنش ها",
         "security": "امنیت",
-        "accountAddress": "Wallet Address",
+        "accountAddress": "آدرس کیف پول",
         "nodes": "نودها",
         "wallet": "کیف پول",
         "help": "راهنما",
@@ -657,26 +660,26 @@
         "status": "وضعیت",
         "confirmed": "تایید شده",
         "pending": "در حال بررسی",
-        "noAccounts": "You have no wallets, please create one.",
+        "noAccounts": "شما حساب کاربری ندارید. لطفا یکی بسازید.",
         "loadingAccounts": "درحال بارگذاری، لطفاً صبر کنید...",
         "addProfile": "افزودن پروفایل",
         "noRecentHistory": "تاریخچه اخیر وجود ندارد",
-        "firstSync": "Syncing history, this may take a while...",
-        "transferSyncing": "Syncing wallet",
+        "firstSync": "همگام سازی تاریخچه، ممکن است مدتی طول بکشد...",
+        "transferSyncing": "همگام سازی کیف پول",
         "transferSelectingInputs": "در حال انتخاب ورودی ها",
         "transferRemainderAddress": "در حال تولید آدرس موجودی باقیمانده",
         "transferSigning": "در حال صحه گذاری تراکنش",
         "transferPow": "در حال انجام اثبات کار",
         "transferBroadcasting": "در حال انتشار تراکنش",
         "transferComplete": "انتقال کامل شد",
-        "creatingAccount": "Creating wallet, please wait...",
-        "updatingAccount": "Updating wallet, please wait...",
-        "accountSyncing": "Wallet is syncing",
-        "accountSyncComplete": "Wallet sync complete",
+        "creatingAccount": "در حال ساختن کیف پول، لطفا صبر کنید...",
+        "updatingAccount": "در حال بروزرسانی کیف پول، لطفا صبر کنید...",
+        "accountSyncing": "کیف پول در حال همگام سازی است",
+        "accountSyncComplete": "همگام سازی کیف پول انجام شد",
         "passwordUpdating": "در حال به روز رسانی رمز عبور...",
         "passwordSuccess": "به روز رسانی رمز عبور کامل شد",
         "passwordFailed": "به روز رسانی رمز عبور ناموفق بود",
-        "syncingAccounts": "Syncing wallets...",
+        "syncingAccounts": "همگام سازی کیف پول ها...",
         "exportingStronghold": "استخراج قلعه...",
         "exportingStrongholdSuccess": "استخراج قلعه با موفقیت انجام شد",
         "exportingStrongholdFailed": "استخراج قلعه ناموفق بود",
@@ -691,13 +694,14 @@
         "passwordStrength4": "قوی",
         "creatingProfile": "در حال ساختن پروفایل، لطفا صبر کنید...",
         "fundMigration": "انتقال وجوه",
-        "accountRemoved": "This wallet is hidden. Unhide it to perform transfers.",
+        "accountRemoved": "این کیف پول مخفی است. برای انجام نقل و انتقالات آنرا آشکار کنید.",
         "receivingTo": "در حال دریافت در {account}",
         "sendingFrom": "در حال ارسال به {account}",
         "receivedTo": "دریافت شده در {account}",
         "sentFrom": "فرستاده شده از {account}",
         "receiving": "در حال دریافت",
-        "sending": "در حال ارسال"
+        "sending": "در حال ارسال",
+        "legacyNetwork": "شبکه قدیمی"
     },
     "dates": {
         "today": "امروز",
@@ -720,7 +724,7 @@
         "calcMinutesRemaining": "در حال شمارش زمان باقیمانده...",
         "minutesRemaining": "{minutes, plural, one {1 دقیقه باقی مانده } other {# دقیقه باقی مانده}}",
         "copiedToClipboard": "در کلیپ‌بورد کپی شد",
-        "accountsSynchronized": "Wallet synchronization complete",
+        "accountsSynchronized": "همگام سازی حساب کامل شد",
         "migratedAccountChrysalisDown": "وجوه شما از ۲۸ آوریل بر روی Chrysalis قابل دسترس میباشد.",
         "migratedAccountChrysalisUp": "وجوه شما به زودی قابل استفاده خواهد شد"
     },
@@ -752,10 +756,10 @@
             "incorrect": "PIN فعلی شما اشتباه است."
         },
         "account": {
-            "length": "Your wallet name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "empty": "You must use your latest wallet before creating a new one.",
-            "notEmpty": "You must transfer your balance before deleting this wallet.",
-            "duplicate": "A wallet with this name already exists.",
+            "length": "نام کیف پول شما نمیتواند بیشتر از {length, plural, one {1 کاراکتر} other {# کاراکتر}} باشد.",
+            "empty": "باید از آخرین کیف پول خود قبل از ایجاد کیف پول جدید استفاده کنید.",
+            "notEmpty": "شما باید قبل از حذف این کیف پول، موجودی خود را انتقال دهید.",
+            "duplicate": "کیف پولی با این نام وجود دارد.",
             "tilde": "اسم پروفایل نمیتواند با کاراکتر '~' شروع شود.",
             "control": "اسم پروفایل نمیتواند از کاراکتر کنترلی تشکیل شده باشد.",
             "startDot": "اسم پروفایل نمیتواند با کاراکتر '.' شروع شود.",
@@ -770,8 +774,8 @@
             "wrongAddressPrefix": "آدرس ها با پیشوند {prefix} شروع میشوند.",
             "wrongAddressFormat": "این آدرس به درستی فرمت نشده.",
             "invalidAddress": "آدرس معتبر نیست.",
-            "insufficientFunds": "This wallet has insufficient funds.",
-            "noToAccount": "You have not selected a wallet to send the funds to.",
+            "insufficientFunds": "این کیف پول موجودی کافی ندارد.",
+            "noToAccount": "کیف پول مقصد را انتخاب نکرده‌اید.",
             "sendingDust": "شما کمتر از 1Mi نمیتوانید ارسال کنید.",
             "leavingDust": "در آدرس شما کمتر از 1Mi نمیتواند باشد."
         },
