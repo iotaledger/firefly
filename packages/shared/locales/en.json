@@ -697,7 +697,8 @@
         "receivedTo": "Received to {account}",
         "sentFrom": "Sent from {account}",
         "receiving": "Receiving",
-        "sending": "Sending"
+        "sending": "Sending",
+        "legacyNetwork": "Legacy Network"
     },
     "dates": {
         "today": "Today",
