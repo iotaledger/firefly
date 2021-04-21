@@ -250,8 +250,10 @@ export const formatCurrency = (value: number, currency: string | undefined = und
     // the
     const curIndex = parts.findIndex(p => p.type === "currency")
     if (curIndex >= 0) {
-        if (curIndex === 0 && parts[curIndex + 1].type !== "literal") {
-            parts.splice(curIndex + 1, 0, { type: "literal", value: " " })
+        if (curIndex === 0) {
+            if (parts[curIndex + 1].type !== "literal") {
+                parts.splice(curIndex + 1, 0, { type: "literal", value: " " })
+            }
         } else if (parts[curIndex - 1].type !== "literal") {
             parts.splice(curIndex, 0, { type: "literal", value: " " })
         }
