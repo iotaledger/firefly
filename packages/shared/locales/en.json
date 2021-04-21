@@ -147,6 +147,7 @@
             "restoringWallet": "Restoring wallet...",
             "findingBalance": "Finding balance...",
             "incorrectSeedVaultPassword": "Incorrect SeedVault password.",
+            "noDataSeedVault": "No data could be found in the SeedVault.",
             "signingBundle": "Signing bundle",
             "broadcastingBundle": "Broadcasting bundle",
             "miningBundle": "Mining bundle",
