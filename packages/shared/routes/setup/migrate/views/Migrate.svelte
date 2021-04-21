@@ -91,7 +91,7 @@
 
     //TODO: complete function functionality
     function learnAboutMigrationsClick() {
-        Electron.openUrl('https://firefly.iota.org/faq#spent-addresses')
+        Electron.openUrl('https://blog.iota.org/firefly-token-migration/')
     }
 
     onDestroy(() => {
