@@ -4,6 +4,6 @@
 
 <div class="w-full h-full flex justify-center items-center bg-white dark:bg-gray-900">
     <div class="w-1/3">
-        <Animation classes="h-36 w-auto" animation="splashscreen-desktop" loop={false} renderer="canvas" />
+        <Animation classes="relative w-full h-auto" animation="splashscreen-desktop" loop={false} renderer="canvas" />  
     </div>
 </div>
