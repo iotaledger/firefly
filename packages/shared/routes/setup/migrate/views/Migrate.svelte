@@ -8,6 +8,7 @@
         exchangeRates,
         formatCurrency,
     } from 'shared/lib/currency'
+    import { Electron } from 'shared/lib/electron'
     import {
         confirmedBundles,
         createMigrationBundle,
@@ -90,7 +91,7 @@
 
     //TODO: complete function functionality
     function learnAboutMigrationsClick() {
-        console.log('Learn about migration clicked')
+        Electron.openUrl('https://firefly.iota.org/faq#spent-addresses')
     }
 
     onDestroy(() => {
