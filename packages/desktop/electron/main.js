@@ -89,6 +89,7 @@ function isUrlAllowed(targetUrl) {
         'github.com/iotaledger/firefly/issues',
         'discord.iota.org',
         'chrysalis.iota.org',
+        'chrysalis.docs.iota.org',
         'firefly.iota.org',
     ]
 

@@ -104,7 +104,7 @@ export enum AdvancedSettingsNoProfile {
 }
 
 export enum HelpAndInfo {
-    Troubleshoot = 'troubleshoot',
+    //Troubleshoot = 'troubleshoot',
     Documentation = 'documentation',
     FAQ = 'faq',
     Discord = 'discord',

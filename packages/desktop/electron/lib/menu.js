@@ -181,26 +181,25 @@ const buildTemplate = () => {
     template.push({
         label: state.strings.help,
         submenu: [
-            /** TODO: Add help links     
-            {
-                label: state.strings.troubleshoot,
-                click: function () {
-                    // TODO: Replace with real help links
-                    shell.openExternal('https://iota.org')
-                },
-            },
+            // {
+            //     label: state.strings.troubleshoot,
+            //     click: function () {
+            //         // TODO: Replace with real help links
+            //         shell.openExternal('https://iota.org')
+            //     },
+            // },
             {
                 label: state.strings.faq,
                 click: function () {
-                    shell.openExternal('https://iota.org')
+                    shell.openExternal('https://firefly.iota.org/faq')
                 },
             },
             {
                 label: state.strings.documentation,
                 click: function () {
-                    shell.openExternal('https://iota.org')
+                    shell.openExternal('https://chrysalis.docs.iota.org/')
                 },
-            }**/
+            },
             {
                 label: state.strings.discord,
                 click: function () {
