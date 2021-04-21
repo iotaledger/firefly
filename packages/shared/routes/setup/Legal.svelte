@@ -407,10 +407,9 @@
 
                     <Text type="h2" classes="mt-8 mb-5">12. Contact</Text>
                     <Text type="p" secondary classes="mb-4">
-                        The IOTA Foundation provides the following service numbers and email addresses to users to contact the
-                        IOTA Foundation in individual cases:
+                        The IOTA Foundation provides the following email address to users to contact the IOTA Foundation in
+                        individual cases: contact@iota.org
                     </Text>
-                    <Text type="p" secondary classes="mb-4">Phone: +49 30 549 091 35; Email: contact@iota.org</Text>
 
                     <Text type="h2" classes="mt-8 mb-5">13. Applicable law</Text>
                     <Text type="p" secondary classes="mb-4">
