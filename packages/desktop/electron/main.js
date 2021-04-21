@@ -82,14 +82,15 @@ if (app.isPackaged) {
  * Check URL against allowlist
  */
 function isUrlAllowed(targetUrl) {
-    // TODO: Add links for T&C, privacy policy and help
     const externalAllowlist = [
         'privacy@iota.org',
         'iota.org',
         'github.com/iotaledger/firefly/issues',
         'discord.iota.org',
         'chrysalis.iota.org',
+        'chrysalis.docs.iota.org',
         'firefly.iota.org',
+        'blog.iota.org'
     ]
 
     const url = new URL(targetUrl)

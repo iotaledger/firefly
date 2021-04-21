@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { Button, Text, Link } from 'shared/components'
+    import { Electron } from 'shared/lib/electron'
     import { closePopup } from 'shared/lib/popup'
 
     export let locale
@@ -9,16 +10,12 @@
     function handleCancelClick() {
         closePopup()
     }
-
-    function handleLearnMoreClick() {
-        // TODO: add external link
-    }
 </script>
 
 <div class="mb-8">
     <Text type="h4" classes="mb-5">{locale('popups.missingBundle.title')}</Text>
     <Text type="p" classes="mb-2" secondary>{locale('popups.missingBundle.body', { values: { value: balance } })}</Text>
-    <Link onClick={handleLearnMoreClick}>{locale('popups.missingBundle.learnMore')}</Link>
+    <Link onClick={() => Electron.openUrl('https://firefly.iota.org/faq#spent-addresses')}>{locale('popups.missingBundle.learnMore')}</Link>
 </div>
 <div class="flex flex-row justify-between w-full space-x-4 px-8">
     <Button secondary classes="w-full" onClick={handleCancelClick}>{locale('actions.cancel')}</Button>
