@@ -11,7 +11,7 @@
         },
         "appearance": {
             "title": "Izgled",
-            "body": "Izaberite temu aplikacije."
+            "body": "Odaberite temu aplikacije."
         },
         "profile": {
             "title": "Stvori novi profil",
@@ -76,7 +76,7 @@
             "body1": "Unesite svoju lozinku kako biste spremili pričuvne kopije svojih novčanika u Stronghold datoteku. Vašu lozinku koristimo za enkripciju pričuvne kopije.",
             "body2": "Zašto su digitalne pričuvne kopije tako važne:",
             "reason1": "Jednostavno oporavite svoje novčanike bez upisivanja fraze za oporavak",
-            "reason2": "Import your wallets on other devices",
+            "reason2": "Uvezite svoje novčanike s drugih uređaja",
             "reason3": "Oporavite povijest svojih transakcija"
         },
         "recoveryPhraseSaved": {
@@ -96,7 +96,7 @@
             "importSeed": "Imam seed koji se sastoji od 81 znaka",
             "importSeedDescription": "Unesite seed i preselite sredstva na Chrysalis",
             "importMnemonic": "Imam Firefly frazu za oporavak",
-            "importMnemonicDescription": "Enter your recovery phrase to recover your wallets",
+            "importMnemonicDescription": "Za oporavak novčanika unesite svoju frazu za oporavak",
             "importFile": "Imam datoteku s pričuvnom kopijom",
             "importFileDescription": "Uvezite Seedvault ili Stronghold datoteku"
         },
@@ -147,6 +147,7 @@
             "restoringWallet": "Vraćanje novčanika...",
             "findingBalance": "Dohvaćam stanje...",
             "incorrectSeedVaultPassword": "Netočna SeedVault lozinka.",
+            "noDataSeedVault": "No data could be found in the SeedVault.",
             "signingBundle": "Potpisujem skup",
             "broadcastingBundle": "Odašiljem skup",
             "miningBundle": "Rudarim skup",
@@ -245,7 +246,9 @@
             },
             "appLock": {
                 "title": "Automatsko zaključavanje",
-                "description": "Vrijeme neaktivnosti preostalo do zaključavanja novčanika i odjave iz sustava"
+                "description": "Vrijeme neaktivnosti preostalo do zaključavanja novčanika i odjave iz sustava",
+                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
+                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
             },
             "changePassword": {
                 "title": "Promijenite lozinku",
@@ -461,8 +464,8 @@
         },
         "balanceFinder": {
             "title": "Pronalazak sredstava",
-            "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
-            "totalWalletBalance": "Total balance",
+            "body": "Izvršite detaljniju pretragu adresa u potrazi za stedstvima koja vam nedostaju.",
+            "totalWalletBalance": "Ukupno stanje",
             "typePassword": "Za pretraživanje morate unijeti lozinku."
         },
         "riskFunds": {
@@ -671,12 +674,12 @@
         "transferComplete": "Transakcija dovršena",
         "creatingAccount": "Stvaram novčanik, molim pričekajte...",
         "updatingAccount": "Usklađujem novčanik, molim pričekajte...",
-        "accountSyncing": "Wallet is syncing",
-        "accountSyncComplete": "Wallet sync complete",
+        "accountSyncing": "Novčanik se sinkronizira",
+        "accountSyncComplete": "Sinkronizacija novčanika je završena",
         "passwordUpdating": "Ažuriram lozinku...",
         "passwordSuccess": "Lozinka je uspješno ažurirana",
         "passwordFailed": "Ažuriranje lozinke nije uspjelo",
-        "syncingAccounts": "Syncing wallets...",
+        "syncingAccounts": "Sinkronizacija novčanika...",
         "exportingStronghold": "Izvozim Stronghold...",
         "exportingStrongholdSuccess": "Stronghold je uspješno izvezen",
         "exportingStrongholdFailed": "Izvoz Strongholda nije uspio",
@@ -691,13 +694,14 @@
         "passwordStrength4": "Jako",
         "creatingProfile": "Stvaram račun, molim pričekajte...",
         "fundMigration": "Prebacivanje sredstava",
-        "accountRemoved": "This wallet is hidden. Unhide it to perform transfers.",
+        "accountRemoved": "Ovaj je novčanik skriven. Kako biste mogli raditi transfere prvo ga morate prikazati.",
         "receivingTo": "U dolasku na {account}",
         "sendingFrom": "Šalje se sa {account}",
         "receivedTo": "Primljeno na {account} račun",
         "sentFrom": "Poslano sa {account} računa",
         "receiving": "Primanje u tijeku",
-        "sending": "Slanje u tijeku"
+        "sending": "Slanje u tijeku",
+        "legacyNetwork": "Legacy Network"
     },
     "dates": {
         "today": "Danas",
@@ -720,7 +724,7 @@
         "calcMinutesRemaining": "Računam preostalo vrijeme...",
         "minutesRemaining": "{minutes, plural, one {minuta} few {# minute} other {# minuta}}",
         "copiedToClipboard": "Kopirano u međuspremnik",
-        "accountsSynchronized": "Wallet synchronization complete",
+        "accountsSynchronized": "Sinkronizacija novčanika je završena",
         "migratedAccountChrysalisDown": "Vaša će sredstva biti dostupna nakon Chrysalisa, 28. travnja",
         "migratedAccountChrysalisUp": "Vaša će sredstva biti dostupna uskoro"
     },
@@ -752,10 +756,10 @@
             "incorrect": "Vaš trenutni PIN je netočan."
         },
         "account": {
-            "length": "Your wallet name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "empty": "You must use your latest wallet before creating a new one.",
-            "notEmpty": "You must transfer your balance before deleting this wallet.",
-            "duplicate": "A wallet with this name already exists.",
+            "length": "Ime novčanika ne smije biti dulje od {length, plural, one {1 znaka} few {# znaka} other {# znakova}}.",
+            "empty": "Morate upotrijebiti najnoviji novčanik prije no što možete stvoriti još jedan.",
+            "notEmpty": "Morate prebaciti sredstva drugdje prije no što možete obrisati novčanik.",
+            "duplicate": "Novčanik s ovim imenom već postoji.",
             "tilde": "Ime profila ne može početi znakom '~'.",
             "control": "Ime profila ne smije sadržavati Ctrl znak.",
             "startDot": "Ime profila ne može početi točkom.",
@@ -770,8 +774,8 @@
             "wrongAddressPrefix": "Adrese započinju prefiksom {prefix}.",
             "wrongAddressFormat": "Adresa nije u ispravnom formatu.",
             "invalidAddress": "Adresa nije valjana.",
-            "insufficientFunds": "This wallet has insufficient funds.",
-            "noToAccount": "You have not selected a wallet to send the funds to.",
+            "insufficientFunds": "Ovaj novčanik nema dovoljno sredstava.",
+            "noToAccount": "Niste odabrali novčanik na koji želite poslati sredstva.",
             "sendingDust": "Ne možete slati manje od 1 Mi.",
             "leavingDust": "Ne možet ostaviti manje od 1 Mi na svojoj adresi."
         },

@@ -147,6 +147,7 @@
             "restoringWallet": "Gendanner wallet...",
             "findingBalance": "Finder saldo...",
             "incorrectSeedVaultPassword": "Forkert SeedVault adgangskode.",
+            "noDataSeedVault": "No data could be found in the SeedVault.",
             "signingBundle": "Signerer pakke",
             "broadcastingBundle": "Udsender pakke",
             "miningBundle": "Miner pakke",
@@ -245,7 +246,9 @@
             },
             "appLock": {
                 "title": "Automatisk lås",
-                "description": "Inactivity time before your wallets lock and you are logged out"
+                "description": "Inactivity time before your wallets lock and you are logged out",
+                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
+                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
             },
             "changePassword": {
                 "title": "Skift adgangskode",
@@ -697,7 +700,8 @@
         "receivedTo": "Modtaget til {account}",
         "sentFrom": "Sendt fra {account}",
         "receiving": "Modtager",
-        "sending": "Sender"
+        "sending": "Sender",
+        "legacyNetwork": "Legacy Network"
     },
     "dates": {
         "today": "I dag",

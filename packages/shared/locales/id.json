@@ -147,6 +147,7 @@
             "restoringWallet": "Mengembalikan dompet...",
             "findingBalance": "Menemukan keseimbangan...",
             "incorrectSeedVaultPassword": "Kata sandi SeedVault salah.",
+            "noDataSeedVault": "No data could be found in the SeedVault.",
             "signingBundle": "Menandatangani bundel",
             "broadcastingBundle": "Paket penyiaran",
             "miningBundle": "Bundel penambangan",
@@ -245,7 +246,9 @@
             },
             "appLock": {
                 "title": "Automatic Lock",
-                "description": "Inactivity time before your wallets lock and you are logged out"
+                "description": "Inactivity time before your wallets lock and you are logged out",
+                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
+                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
             },
             "changePassword": {
                 "title": "Ubah kata sandinya",
@@ -697,7 +700,8 @@
         "receivedTo": "Diterima ke {account}",
         "sentFrom": "Dikirim dari {account}",
         "receiving": "Menerima",
-        "sending": "Mengirim"
+        "sending": "Mengirim",
+        "legacyNetwork": "Legacy Network"
     },
     "dates": {
         "today": "Hari ini",

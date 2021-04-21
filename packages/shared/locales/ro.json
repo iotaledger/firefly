@@ -2,7 +2,7 @@
     "views": {
         "onboarding1": {
             "title": "Trimite, Primește și Administrează-ți monezile IOTA",
-            "body": "Firefly is the official wallet software of IOTA."
+            "body": "Firefly este portofelul digital oficial al IOTA."
         },
         "legal": {
             "title": "Politica de confidențialitate & Termenii de utilizare",
@@ -11,7 +11,7 @@
         },
         "appearance": {
             "title": "Afișare",
-            "body": "Choose your app theme."
+            "body": "Alegeți tema aplicației."
         },
         "profile": {
             "title": "Crează un profil",
@@ -28,7 +28,7 @@
         "secure": {
             "title": "Securizează-ți portofelul",
             "body1": "Salvează și printează șablonul PDF al kitului de recuperare.",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallets."
+            "body2": "Dacă completați Kit-ul de recuperare și îl stocați în siguranță, veți putea întotdeauna să recuperați portofelele."
         },
         "password": {
             "title": "Creează o parolă",
@@ -37,7 +37,7 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your profile.",
+            "body1": "Configurați un cod PIN de conectare pentru a vă asigura că numai dvs. puteți introduce profilul.",
             "body2": "Păstrează codul PIN în siguranță!"
         },
         "pin": {
@@ -73,15 +73,15 @@
         },
         "backupWallet": {
             "title": "Fă o copie de rezervă într-un fișier Stronghold",
-            "body1": "Enter your password to backup your wallets to a Stronghold file. Your password is used to encrypt the backup.",
+            "body1": "Introdu parola pentru a face copii de rezerva la portofelele personale într-un fișier Stronghold. Parola ta este folosită pentru a cripta copiile de rezervă.",
             "body2": "Motivele pentru care copiile de rezervă digitale sunt importante:",
-            "reason1": "Easily recover your wallets without typing in your recovery phrase",
-            "reason2": "Import your wallets on other devices",
+            "reason1": "Recuperează cu ușurință portofelele personale fără a tasta fraza de recuperare",
+            "reason2": "Importa portofelele personale pe alte dispozitive",
             "reason3": "Recuperează istoricul complet al tranzacțiilor"
         },
         "recoveryPhraseSaved": {
             "title": "Copie de rezervă reușită",
-            "body": "You have backed up your wallets to a Stronghold."
+            "body": "Ați făcut o copie de rezervă a portofelelor personale în Stronghold."
         },
         "congratulations": {
             "title": "Configurarea portofelului finalizată",
@@ -92,18 +92,18 @@
         },
         "import": {
             "title": "Recuperează sau migrează fonduri",
-            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
+            "body": "Dacă ai deja un seed sau un portofel de rezervă existent, îl poți importa aici. Dacă deții fonduri de rețea mai vechi, vei fi trecut prin pașii de migrare pentru a trece la rețeaua Chrysalis.",
             "importSeed": "Am un seed de 81 de caractere",
             "importSeedDescription": "Introduceți un seed și migrați fonduri catre Chrysalis",
-            "importMnemonic": "I have a Firefly recovery phrase",
-            "importMnemonicDescription": "Enter your recovery phrase to recover your wallets",
+            "importMnemonic": "Am o frază de recuperare Firefly",
+            "importMnemonicDescription": "Introduceți fraza de recuperare pentru a recupera portofelele",
             "importFile": "Am o copie de rezervă a fișierului",
-            "importFileDescription": "Upload a Seedvault or Stronghold file"
+            "importFileDescription": "Încarcă un Seedvault sau un fișier Stronghold"
         },
         "importFromText": {
             "seed": {
                 "title": "Tastează seed-ul pentru a începe migrarea",
-                "body": "A seed consists of 81 characters. This is used to recover from the older Trinity app.",
+                "body": "Un seed este format din 81 de caractere. Acesta este folosit pentru a recupera din vechea aplicație Trinity.",
                 "enter": "Enter your seed"
             },
             "mnemonic": {
@@ -147,6 +147,7 @@
             "restoringWallet": "Restaurare portofel...",
             "findingBalance": "Se caută soldul...",
             "incorrectSeedVaultPassword": "Parolă SeedVault incorectă.",
+            "noDataSeedVault": "No data could be found in the SeedVault.",
             "signingBundle": "Semnare pachet",
             "broadcastingBundle": "Pachet difuzare",
             "miningBundle": "Semnare pachet",
@@ -245,7 +246,9 @@
             },
             "appLock": {
                 "title": "Blocare automată",
-                "description": "Inactivity time before your wallets lock and you are logged out"
+                "description": "Inactivity time before your wallets lock and you are logged out",
+                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
+                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
             },
             "changePassword": {
                 "title": "Schimbă parola",
@@ -697,7 +700,8 @@
         "receivedTo": "Received to {account}",
         "sentFrom": "Sent from {account}",
         "receiving": "Se primește",
-        "sending": "Se trimite"
+        "sending": "Se trimite",
+        "legacyNetwork": "Legacy Network"
     },
     "dates": {
         "today": "Today",

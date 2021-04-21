@@ -2,7 +2,7 @@
     "views": {
         "onboarding1": {
             "title": "IOTAトークンの送金、受取、管理",
-            "body": "Firefly is the official wallet software of IOTA."
+            "body": "FireflyはIOTAの公式ウォレットソフトウェアです。"
         },
         "legal": {
             "title": "プライバシーポリシーと利用規約",
@@ -11,7 +11,7 @@
         },
         "appearance": {
             "title": "テーマ",
-            "body": "Choose your app theme."
+            "body": "アプリのテーマを選択してください。"
         },
         "profile": {
             "title": "プロファイルを作成",
@@ -28,7 +28,7 @@
         "secure": {
             "title": "ウォレットの保護",
             "body1": "Recovery Kit PDF テンプレートを保存し、印刷します。",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallets."
+            "body2": "Recovery Kit を記入して安全に保管すると、いつでもウォレットを復元できます。"
         },
         "password": {
             "title": "パスワードを作成します",
@@ -37,7 +37,7 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your profile.",
+            "body1": "ログインPINを設定して、あなただけがウォレットに入ることができるようにします。",
             "body2": "PINを安全に保管してください！"
         },
         "pin": {
@@ -73,15 +73,15 @@
         },
         "backupWallet": {
             "title": "Stronghold ファイルにバックアップする",
-            "body1": "Enter your password to backup your wallets to a Stronghold file. Your password is used to encrypt the backup.",
+            "body1": "ウォレットを Stronghold ファイルにバックアップするためにパスワードを入力してください。パスワードはバックアップの暗号化に使用されます。",
             "body2": "デジタルバックアップが重要な理由:",
-            "reason1": "Easily recover your wallets without typing in your recovery phrase",
-            "reason2": "Import your wallets on other devices",
+            "reason1": "復元フレーズを入力せずにウォレットを簡単に復元できます",
+            "reason2": "他のデバイスでウォレットをインポートする",
             "reason3": "完全な取引履歴を回復する"
         },
         "recoveryPhraseSaved": {
             "title": "バックアップが完了しました",
-            "body": "You have backed up your wallets to a Stronghold."
+            "body": "ウォレットを Stronghold にバックアップしました"
         },
         "congratulations": {
             "title": "ウォレットのセットアップが完了しました",
@@ -96,19 +96,19 @@
             "importSeed": "私は81文字のシードを持っています",
             "importSeedDescription": "シードを入力してChrysalisに資金を移行する",
             "importMnemonic": "Firefly の復元フレーズがあります",
-            "importMnemonicDescription": "Enter your recovery phrase to recover your wallets",
+            "importMnemonicDescription": "ウォレットを復元するために復元フレーズを入力してください",
             "importFile": "ファイルのバックアップがあります",
             "importFileDescription": "SeedvaultまたはStrongholdをアップロード"
         },
         "importFromText": {
             "seed": {
                 "title": "シードを入力して移行を開始します",
-                "body": "A seed consists of 81 characters. This is used to recover from the older Trinity app.",
+                "body": "シードは81文字で構成されています。これは以前のTrinityアプリから復元するために使用されます。",
                 "enter": "シードを入力してください"
             },
             "mnemonic": {
                 "title": "復元フレーズを入力してください",
-                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly wallets.",
+                "body": "復元フレーズは小文字24単語で構成され、単語と単語の間にはスペースを含みます。これは既存のFireflyウォレットを復元するために使用されます。",
                 "enter": "秘密の復元フレーズを入力してください"
             },
             "seedDetected": "81文字のシードを検出しました",
@@ -116,17 +116,17 @@
             "checksum": "Checksum"
         },
         "importFromFile": {
-            "title": "Restore your wallets using a backup file",
-            "body": "Import a backup file to restore your wallets. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+            "title": "バックアップファイルを使用してウォレットを復元する",
+            "body": "ウォレットを復元するためにバックアップファイルをインポートします。バックアップは、Stronghold(.stronghold)またはTrinity SeedVault(.kdbx)のいずれかにすることができます。"
         },
         "importBackupPassword": {
-            "title": "Restore your wallets from a SeedVault or Stronghold",
+            "title": "SeedVaultまたはStrongholdからウォレットを復元する",
             "body1": "パスワードを入力してください。",
             "body2": "このパスワードは、バックアップを最初に作成したときに設定したものです。"
         },
         "importSuccess": {
             "title": "バックアップを正常に復元しました",
-            "body": "You can now set up your new profile.",
+            "body": "新しいプロフィールを設定できます。",
             "seedvaultTitle": "インポートに成功しました。",
             "seedvaultBody": "パスワードが正しいです。続行できます。",
             "strongholdTitle": "インポートに成功しました。",
@@ -147,32 +147,33 @@
             "restoringWallet": "ウォレットを復元しています...",
             "findingBalance": "残高を検索しています...",
             "incorrectSeedVaultPassword": "SeedVault のパスワードが正しくありません。",
+            "noDataSeedVault": "No data could be found in the SeedVault.",
             "signingBundle": "バンドル署名",
             "broadcastingBundle": "ブロードキャストバンドル",
             "miningBundle": "マイニングバンドル",
-            "problemRestoringWallet": "There was a network error restoring your wallet. Please try again.",
+            "problemRestoringWallet": "ウォレットの復元中にネットワークエラーが発生しました。もう一度やり直してください。",
             "minimumMigrationAmountSpentAddresses": "送金先アドレスごとの最小移行額は1Miです。残高が正しくない場合は再度確認してください。",
             "tooManyAddressesToMigrate": "残高が少ないアドレスが多すぎます。残高が正しくない場合は、もう一度確認してください。",
-            "cannotMigrateAllYourFunds": "We cannot migrate all of your funds because some addresses are too low in value. You can proceed anyway. {value} will be lost.",
-            "error": "There was an error migrating your funds. Please try again."
+            "cannotMigrateAllYourFunds": "いくつかのアドレスの価値が低すぎるため、すべての資金を移行することはできません。続行できますが、 {value} は失われます。",
+            "error": "資金の移行中にエラーが発生しました。もう一度やり直してください。"
         },
         "bundleMiningWarning": {
             "title": "警告",
-            "body1": "You have funds on one or more spent addresses.",
-            "body2": "We recommend you run an automated process to help secure and transfer these funds safely.",
-            "body3": "If you close the app you will need to restart the whole migration.",
+            "body1": "1つ以上の使用済みアドレスに資金があります。",
+            "body2": "これらの資金を安全に送金するために自動化されたプロセスを実行することをお勧めします。",
+            "body3": "アプリを閉じると、移行全体を再起動する必要があります。",
             "learn": "使用済みアドレスについて詳しく見る"
         },
         "secureSpentAddresses": {
-            "title": "Secure spent addresses",
-            "body1": "You have funds detected on {number, plural, one {# spent address} other {# spent addresses}}.",
-            "body2": "We recommend you run an automated process to help secure and transfer your funds safely.",
-            "error": "You can’t migrate spent addresses with less than 1 Mi"
+            "title": "使用済みアドレスを保護しています",
+            "body1": "{number, plural, one {# 使用済みアドレス} other {# 使用済みアドレス}}で資金が検出されました。",
+            "body2": "お客様の資金を安全に送金するために、自動化されたプロセスを実行することをお勧めします。",
+            "error": "1 Mi 未満の使用済みアドレスは移行できません"
         },
         "securityCheckCompleted": {
             "title": "セキュリティチェックが完了しました",
-            "body1": "We have calculated the security risk level. Running this process again may lower your risk level.",
-            "body2": "When you are happy with the risk level(s) press continue.",
+            "body1": "セキュリティリスクレベルを計算しました。 このプロセスを再度実行すると、リスクレベルが下がる可能性があります。",
+            "body2": "リスクレベルに満足していれば、続行を押してください。",
             "rerun": "選択したアドレスの再実行プロセス",
             "continueMigration": "移行を続ける"
         },
@@ -193,15 +194,15 @@
         },
         "balance": {
             "title": "残高",
-            "body": "Make sure your balance is correct before continuing. You can check again if things don't look correct.",
-            "error": "The minimum migration amount is 1 Mi. Check again if your balance doesn't look right.",
-            "zeroBalance": "Try checking again. If you still can't find your balance you might have entered your seed incorrectly."
+            "body": "続行する前に、残高が正しいことを確認してください。正しくない場合は、もう一度確認できます。",
+            "error": "最小移行金額は1Miです。残高が正しくない場合は、もう一度確認してください。",
+            "zeroBalance": "もう一度確認してください。 それでも残高が見つからない場合は、シードを間違って入力した可能性があります。"
         },
         "settings": {
             "settings": "設定",
             "generalSettings": {
                 "title": "全般設定",
-                "description": "Configure your app's appearance and other general settings"
+                "description": "アプリのテーマ やその他の一般的な設定をします"
             },
             "security": {
                 "title": "セキュリティ",
@@ -220,7 +221,7 @@
                 "description": "プロファイル名を変更するか、アバターを設定します"
             },
             "sync": {
-                "title": "Sync wallets",
+                "title": "ウォレットを同期",
                 "description": ""
             },
             "theme": {
@@ -233,7 +234,7 @@
             },
             "currency": {
                 "title": "通貨：",
-                "description": "Adjusts balance conversion and updates chart options"
+                "description": "残高変換を調整し、チャートオプションを更新します"
             },
             "notifications": {
                 "title": "通知の設定",
@@ -241,15 +242,17 @@
             },
             "exportStronghold": {
                 "title": "バックアップのエクスポート",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history."
+                "description": "Stronghold ファイルへのエクスポート - ウォレットと最新の取引履歴の暗号化されたバックアップです。"
             },
             "appLock": {
                 "title": "自動ロック",
-                "description": "Inactivity time before your wallets lock and you are logged out"
+                "description": "ウォレットがロックされ、ログアウトされるまでの非アクティブ時間",
+                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
+                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
             },
             "changePassword": {
                 "title": "パスワードの変更",
-                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds."
+                "description": "パスワードはウォレットを保護するために使用されます。資金を保護するためには強力なパスワードを使用する必要があります。"
             },
             "changePincode": {
                 "title": "PINコードを変更",
@@ -264,28 +267,28 @@
                 "description": "Perform an extended search of your addresses for tokens."
             },
             "hiddenAccounts": {
-                "title": "Hidden wallets",
-                "description": "Selecting this options will show wallets that were previously hidden."
+                "title": "非表示のウォレット",
+                "description": "このオプションを選択すると、以前に非表示になっていたウォレットが表示されます。"
             },
             "deleteProfile": {
                 "title": "プロファイルを削除",
-                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup."
+                "description": "プロファイル、ウォレット、取引履歴全体を削除します。バックアップがあることを確認してください。"
             },
             "deepLinks": {
                 "title": "ディープ リンク",
-                "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
+                "description": "iota://リンクをクリックするとFireflyの取引履歴が自動的に入力されます"
             },
             "developerMode": {
                 "title": "開発者モード",
-                "description": "Connect to testnets and other developer features"
+                "description": "テストネットやその他の開発者向け機能に接続します"
             },
             "nodeSettings": {
                 "title": "ノードの設定",
-                "description": "Select Manual to configure the node settings and connect to your own node"
+                "description": "「手動」を選択してノード設定を構成し、あなた自身 のノードに接続します"
             },
             "configureNodeList": {
                 "title": "ノードを選択",
-                "description": "Manage the list of IOTA network nodes you connect to.",
+                "description": "接続先のIOTAネットワークノードのリストを管理します。",
                 "primaryNode": "プライマリノード",
                 "excludeNode": "ノードを除外する",
                 "includeNode": "ノードを含める",
@@ -293,7 +296,7 @@
                 "setAsPrimary": "プライマリとして設定",
                 "removeNode": "ノードを削除",
                 "includeOfficialNodeList": "公式ノードリストを含める",
-                "noNodes": "There are no nodes, automatic selection will be used instead."
+                "noNodes": "ノードがありません。自動選択が代わりに使用されます。"
             },
             "proofOfWork": {
                 "title": "プルーフ・オブ・ワーク",
@@ -354,12 +357,12 @@
                 },
                 "strongholdStatus": {
                     "title": "ウォレットのステータス",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "locked": "ロック中",
+                    "unlocked": "ロック解除"
                 },
                 "strongholdBackup": {
                     "title": "ウォレットのバックアップ",
-                    "weeksAgo": "{weeks, plural, one {# week} other {# weeks}} ago"
+                    "weeksAgo": "{weeks, plural, one {# 週間} other {# 週間}} 前"
                 }
             },
             "network": {
@@ -379,8 +382,8 @@
     "popups": {
         "password": {
             "title": "パスワードが必要です",
-            "subtitle": "Please enter your password to unlock your wallets",
-            "backup": "Please enter your password to export a backup"
+            "subtitle": "ウォレットのロックを解除するにはパスワードを入力してください",
+            "backup": "バックアップをエクスポートするにはパスワードを入力してください"
         },
         "qr": {
             "title": "あなた のQR コード"
@@ -388,33 +391,33 @@
         "version": {
             "title": "現在のバージョン: {version}",
             "upToDateTitle": "Firefly は最新です",
-            "upToDateDescription": "You are running the latest and safest version of Firefly.",
+            "upToDateDescription": "あなたはFireflyの最新かつ安全なバージョンを実行しています。",
             "updateAvailable": "Firefly の更新が利用可能",
             "updateDetails": "バージョン {version} - {date}",
-            "noAutoUpdate": "Auto-update is disabled in this Windows version, please go to https://firefly.iota.org to download the update."
+            "noAutoUpdate": "この Windows バージョンでは自動更新は無効になっています。https://phofiry.iota.org にアクセスして更新をダウンロードしてください。"
         },
         "backup": {
             "title": "前回のバックアップ: {date}",
             "lastBackup": "最後に {date} をバックアップしました",
-            "backupDescription": "It is important to back up regularly to ensure you have a copy of your wallets and transaction history.",
-            "backupWarning": "If you lose your backup and recovery phrase you will lose access to your funds.",
+            "backupDescription": "ウォレットとトランザクション履歴のコピーがあることを確認するために、定期的にバックアップすることが重要です。",
+            "backupWarning": "バックアップと復元フレーズを失うと、資金へのアクセスが失われます。",
             "notBackedUp": "バックアップされていません",
-            "notBackedUpDescription": "You have not backed up your wallets",
+            "notBackedUpDescription": "ウォレットをバックアップしていません",
             "saving": "保存中..."
         },
         "deleteAccount": {
             "title": "{name} を削除しますか？",
-            "body": "This wallet has no transaction history. It can safely be deleted.",
+            "body": "このウォレットには取引履歴はありません。安全に削除できます。",
             "typePassword": "ウォレットパスワードを入力して確認してください。",
-            "hideAccount": "Delete wallet",
+            "hideAccount": "ウォレットを削除",
             "errorTitle": "{name} を削除できません",
             "errorBody1": "You cannot delete this wallet, you must have at least one."
         },
         "hideAccount": {
             "title": "{name} を非表示にしますか？",
-            "body": "You can find this wallet later by enabling \"Show hidden wallets\" in Advanced Settings.",
+            "body": "詳細設定で「非表示のウォレットを表示」を有効にすると、後でこのウォレットを見つけることができます。",
             "typePassword": "ウォレットパスワードを入力して確認してください。",
-            "hideAccount": "Hide wallet",
+            "hideAccount": "ウォレットの非表示",
             "errorTitle": "{name} を非表示にできません",
             "errorBody1": "To hide a wallet it must have 0 balance.",
             "errorBody2": "You currently have {balance} remaining on this wallet. Please move these funds to a different wallet and try again.",
@@ -462,7 +465,7 @@
         "balanceFinder": {
             "title": "Balance finder",
             "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
-            "totalWalletBalance": "Total balance",
+            "totalWalletBalance": "合計残高",
             "typePassword": "検索できるようにパスワードを入力してください。"
         },
         "riskFunds": {
@@ -488,8 +491,8 @@
         "outgoingMi": "{value} 出金",
         "portoflio": "ポートフォリオ",
         "token": "トークン",
-        "accountValue": "Wallet Value",
-        "accountActivity": "Wallet Activity",
+        "accountValue": "ウォレットの価値",
+        "accountActivity": "ウォレットのアクティビティ",
         "timeframe1Hour": "1時間",
         "timeframe1Day": "1日",
         "timeframe1Week": "1 週間",
@@ -501,7 +504,7 @@
         "cancel": "キャンセル",
         "close": "閉じる",
         "dismiss": "拒否する",
-        "proceedAnyway": "Proceed anyway",
+        "proceedAnyway": "とにかく続けます",
         "save": "保存",
         "importSeed": "既存のシードをインポート",
         "restoreWallet": "ウォレットの移行または復元",
@@ -543,11 +546,11 @@
         "updateFirefly": "Firefly を更新",
         "restartNow": "今すぐ再起動",
         "saveBackup": "Stronghold のバックアップを保存",
-        "customizeAcount": "Customise wallet",
+        "customizeAcount": "ウォレットをカスタマイズ",
         "viewAddressHistory": "アドレス履歴を表示",
-        "hideAccount": "Hide wallet",
-        "showAccount": "Unhide wallet",
-        "deleteAccount": "Delete wallet",
+        "hideAccount": "ウォレットの非表示",
+        "showAccount": "ウォレットの表示",
+        "deleteAccount": "ウォレットを削除",
         "max": "Max",
         "addNode": "ノードの追加",
         "updateNode": "ノードを更新",
@@ -563,7 +566,7 @@
         "copy": "コピー",
         "paste": "貼り付け",
         "selectAll": "すべてを選択",
-        "addAccount": "Add Wallet",
+        "addAccount": "ウォレットを追加",
         "checkForUpdates": "アップデートの確認",
         "reportAnIssue": "問題を報告",
         "clear": "消去",
@@ -578,13 +581,13 @@
         "readDocumentation": "ドキュメントを読む",
         "visitFaq": "よくある質問を見る",
         "viewStatus": "ステータスを表示",
-        "showHiddenAccounts": "Show hidden wallets",
+        "showHiddenAccounts": "非表示ウォレットを表示",
         "confirm": "確定",
         "findBalances": "Find balances",
         "searchBalances": "残高を検索",
         "searchAgain": "再検索",
         "searching": "検索しています...",
-        "closeFirefly": "Close Firefly"
+        "closeFirefly": "Firefly を閉じる"
     },
     "general": {
         "password": "パスワード",
@@ -602,10 +605,10 @@
         "sendFunds": "資金を送金",
         "sendToAddress": "アドレスへ送金する",
         "scanQrOrPaste": "QRコードをスキャンするかアドレスを貼り付けてください",
-        "moveFundsBetweenAccounts": "Move funds between wallets",
+        "moveFundsBetweenAccounts": "ウォレット間で資金を移動する",
         "sendTokensToAddress": "トークンをアドレスに送金",
-        "manageAccount": "Manage Wallet",
-        "customizeAcount": "Customize your wallet",
+        "manageAccount": "ウォレットの管理",
+        "customizeAcount": "ウォレットをカスタマイズする",
         "account": "ウォレット",
         "sendingToAddress": "アドレスへ送金中",
         "amount": "合計",
@@ -627,25 +630,25 @@
         "lightTheme": "ライトテーマ",
         "darkTheme": "ダークテーマ",
         "balance": "残高",
-        "accountBalance": "Wallet Balance",
+        "accountBalance": "ウォレットの残高",
         "incoming": "入金",
         "outgoing": "出金",
         "totalIn": "Total in",
         "totalOut": "Total out",
-        "accounts": "Wallets",
-        "myAccounts": "My Wallets",
+        "accounts": "ウォレット",
+        "myAccounts": "マイウォレット",
         "automaticNodeSelection": "ノードを自動選択",
         "manualNodeSelection": "ノードを手動選択",
         "profiles": "プロフィール",
         "developerProfile": "開発者プロフィール",
         "developerProfileDescription": "テストネットに接続することができます",
         "dev": "開発者",
-        "createAccount": "Create a Wallet",
-        "accountName": "Wallet name",
+        "createAccount": "ウォレットを作成",
+        "accountName": "ウォレット名",
         "latestTransactions": "最新の取引",
         "transactions": "取引履歴",
         "security": "セキュリティ",
-        "accountAddress": "Wallet Address",
+        "accountAddress": "ウォレットアドレス",
         "nodes": "ノード",
         "wallet": "ウォレット",
         "help": "ヘルプ",
@@ -657,26 +660,26 @@
         "status": "ステータス",
         "confirmed": "承認済み",
         "pending": "保留中",
-        "noAccounts": "You have no wallets, please create one.",
+        "noAccounts": "ウォレットがありません。ウォレットを作成してください。",
         "loadingAccounts": "読み込んでいます。お待ちください...",
         "addProfile": "プロファイルを追加",
         "noRecentHistory": "最近の履歴はありません",
-        "firstSync": "Syncing history, this may take a while...",
-        "transferSyncing": "Syncing wallet",
+        "firstSync": "履歴を同期中、しばらく時間がかかることがあります...",
+        "transferSyncing": "ウォレットを同期中",
         "transferSelectingInputs": "Selecting inputs",
         "transferRemainderAddress": "Generating remainder deposit address",
         "transferSigning": "Signing the transaction",
         "transferPow": "PoW（プルーフ・オブ・ワーク）の実行",
         "transferBroadcasting": "Broadcasting transaction",
         "transferComplete": "転送完了",
-        "creatingAccount": "Creating wallet, please wait...",
-        "updatingAccount": "Updating wallet, please wait...",
-        "accountSyncing": "Wallet is syncing",
-        "accountSyncComplete": "Wallet sync complete",
+        "creatingAccount": "ウォレットを作成しています。しばらくお待ちください...",
+        "updatingAccount": "ウォレットを更新しています。お待ちください...",
+        "accountSyncing": "ウォレットを同期しています",
+        "accountSyncComplete": "ウォレット同期が完了しました",
         "passwordUpdating": "パスワードを更新しています...",
         "passwordSuccess": "パスワードを更新しました",
         "passwordFailed": "パスワードの更新に失敗しました",
-        "syncingAccounts": "Syncing wallets...",
+        "syncingAccounts": "ウォレットを同期中...",
         "exportingStronghold": "Strongholdのエクスポート中...",
         "exportingStrongholdSuccess": "Strongholdのエクスポートに成功しました",
         "exportingStrongholdFailed": "Strongholdのエクスポートに失敗しました",
@@ -690,14 +693,15 @@
         "passwordStrength3": "普通",
         "passwordStrength4": "とても強い",
         "creatingProfile": "プロファイルを作成しています。お待ちください...",
-        "fundMigration": "Fund migration",
-        "accountRemoved": "This wallet is hidden. Unhide it to perform transfers.",
+        "fundMigration": "資金の移行",
+        "accountRemoved": "このウォレットは非表示になっています。表示にすると転送ができます。",
         "receivingTo": "Receiving to {account}",
-        "sendingFrom": "Sending from {account}",
+        "sendingFrom": "{account} から送金中",
         "receivedTo": "Received to {account}",
         "sentFrom": "Sent from {account}",
         "receiving": "Receiving",
-        "sending": "Sending"
+        "sending": "送金中",
+        "legacyNetwork": "Legacy Network"
     },
     "dates": {
         "today": "今日",
@@ -720,8 +724,8 @@
         "calcMinutesRemaining": "残り時間を計算しています...",
         "minutesRemaining": "{minutes, plural, one { 残り1分 } other {# 残り分 }}",
         "copiedToClipboard": "クリップボードにコピーしました",
-        "accountsSynchronized": "Wallet synchronization complete",
-        "migratedAccountChrysalisDown": "Your funds will become available after Chrysalis on 28th April",
+        "accountsSynchronized": "ウォレット同期が完了しました",
+        "migratedAccountChrysalisDown": "あなたの資金は4月28日に Chrysalis の後に利用可能になります",
         "migratedAccountChrysalisUp": "資金はまもなく利用可能になります"
     },
     "error": {
@@ -740,7 +744,7 @@
             "sequence": "Sequences of characters are easy to guess.",
             "years": "Recent years are easy to guess.",
             "dates": "Dates are easy to guess.",
-            "common": "This is a very common password.",
+            "common": "これは非常によく使われているパスワードです。",
             "similar": "This is similar to a common password.",
             "word": "A single word is easy to guess.",
             "incorrect": "パスワードが正しくありません。",

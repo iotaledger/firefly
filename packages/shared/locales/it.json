@@ -76,7 +76,7 @@
             "body1": "Enter your password to backup your wallets to a Stronghold file. Your password is used to encrypt the backup.",
             "body2": "Motivi per cui i backup digitali sono importanti:",
             "reason1": "Easily recover your wallets without typing in your recovery phrase",
-            "reason2": "Import your wallets on other devices",
+            "reason2": "Importa i tuoi wallet su altri dispositivi",
             "reason3": "Recupera la cronologia completa delle transazioni"
         },
         "recoveryPhraseSaved": {
@@ -96,7 +96,7 @@
             "importSeed": "Ho un seed di 81 caratteri",
             "importSeedDescription": "Inserisci un seed e migra fondi in Crisalide",
             "importMnemonic": "Ho una frase di recupero di Firefly",
-            "importMnemonicDescription": "Enter your recovery phrase to recover your wallets",
+            "importMnemonicDescription": "Inserisci la tua frase segreta per recuperare i tuoi wallet",
             "importFile": "Ho un file di backup",
             "importFileDescription": "Carica un file Seedvault o Stronghold"
         },
@@ -147,6 +147,7 @@
             "restoringWallet": "Ripristino del wallet...",
             "findingBalance": "Ricerca del saldo...",
             "incorrectSeedVaultPassword": "Password del SeedVault non corretta.",
+            "noDataSeedVault": "No data could be found in the SeedVault.",
             "signingBundle": "Firma del bundle",
             "broadcastingBundle": "Trasmissione del bundle",
             "miningBundle": "Mining del bundle",
@@ -245,7 +246,9 @@
             },
             "appLock": {
                 "title": "Blocco Automatico",
-                "description": "Tempo di inattività prima del blocco dei wallet e disconnessione"
+                "description": "Tempo di inattività prima del blocco dei wallet e disconnessione",
+                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
+                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
             },
             "changePassword": {
                 "title": "Cambia password",
@@ -461,8 +464,8 @@
         },
         "balanceFinder": {
             "title": "Rivaluta il saldo",
-            "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
-            "totalWalletBalance": "Total balance",
+            "body": "Eseguire una ricerca più esaustiva degli indirizzi per trovare i fondi mancanti. Potrebbe volerci un po' di tempo.",
+            "totalWalletBalance": "Saldo totale",
             "typePassword": "Digita la password per consentire la ricerca."
         },
         "riskFunds": {
@@ -697,7 +700,8 @@
         "receivedTo": "Ricevuto in {account}",
         "sentFrom": "Inviato da {account}",
         "receiving": "Ricezione",
-        "sending": "Invio"
+        "sending": "Invio",
+        "legacyNetwork": "Legacy Network"
     },
     "dates": {
         "today": "Oggi",

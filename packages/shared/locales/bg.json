@@ -16,14 +16,14 @@
         "profile": {
             "title": "Създаване на профил",
             "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
+            "body2": "Нека да започнем с Вашият първи профил. Можете да добавяте още профили по-късно.",
             "profileName": "Име на профил"
         },
         "setup": {
             "title": "Създаване на портфейл",
             "chrysalisTitle": "Chrysalis Network Update",
             "chrysalisBody": "From April 21st, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
-            "learnMore": "Learn about the migration"
+            "learnMore": "Научете повече за миграцията"
         },
         "secure": {
             "title": "Защитете портфейла си",
@@ -53,7 +53,7 @@
         "backup": {
             "title": "Бекъп на портфейл",
             "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
-            "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
+            "body2": "Не споделяйте Вашата фраза за възстановяване с никого. Може да бъде използвана за достъп до вашите средства от всякъде.",
             "body3": "Ако загубите фразата си за възстановяване, може да загубите средствата си."
         },
         "recoveryPhrase": {
@@ -67,25 +67,25 @@
         "verifyRecoveryPhrase": {
             "title": "Верифициране на фраза за възстановяване",
             "body": "Нека проверим дали сте записали правилно фразата. Изберете думите в правилния ред.",
-            "word": "Word",
-            "verified": "Recovery phrase verified",
+            "word": "Дума",
+            "verified": "Фраза за възстановяване потвърдена",
             "verifiedBody": "Remember to keep it private and safely stored."
         },
         "backupWallet": {
             "title": "Бекъп към Stronghold файл",
-            "body1": "Enter your password to backup your wallets to a Stronghold file. Your password is used to encrypt the backup.",
-            "body2": "Reasons why digital backups are important:",
-            "reason1": "Easily recover your wallets without typing in your recovery phrase",
-            "reason2": "Import your wallets on other devices",
-            "reason3": "Recover your full transaction history"
+            "body1": "Въведете паролата си за бекъп на вашия портфейл към Stronghold файл. Паролата ви се използва за криптиране на бекъпа.",
+            "body2": "Причини, поради които резервните копия са важни:",
+            "reason1": "Лесно възстановяване на портфейла без въвеждане на фраза за възстановяване",
+            "reason2": "Импортиране на портфейла на други устройства",
+            "reason3": "Възстановяване на пълна история на трансакциите"
         },
         "recoveryPhraseSaved": {
             "title": "Успешен бекъп",
-            "body": "You have backed up your wallets to a Stronghold."
+            "body": "Създадохте резервно копие на Вашите портфейли в Stronghold."
         },
         "congratulations": {
-            "title": "Wallet setup completed",
-            "body": "Your new wallet is ready to use.",
+            "title": "Настройка на портфейла завършена",
+            "body": "Вашият нов портфейл е готов за използване.",
             "fundsMigrated": "Funds migrated",
             "success": "You have successfully migrated your funds to the new network",
             "exportMigration": "Export migration log and finish setup"
@@ -93,60 +93,61 @@
         "import": {
             "title": "Recover or migrate funds",
             "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
-            "importSeed": "I have an 81 character seed",
-            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
+            "importSeed": "Имам 81 символа seed",
+            "importSeedDescription": "Моля въведете seed и мигрирайте към Chrysalis",
             "importMnemonic": "I have a Firefly recovery phrase",
-            "importMnemonicDescription": "Enter your recovery phrase to recover your wallets",
-            "importFile": "I have a file backup",
+            "importMnemonicDescription": "Въведете фраза за възстановяване, за да възстановите своите портфейли",
+            "importFile": "Имам бекъп файл",
             "importFileDescription": "Upload a Seedvault or Stronghold file"
         },
         "importFromText": {
             "seed": {
                 "title": "Type your seed to commence migration",
-                "body": "A seed consists of 81 characters. This is used to recover from the older Trinity app.",
-                "enter": "Enter your seed"
+                "body": "Seed се състои от 81 знака. Използва се за възстановяване от по-стар Trinity портфейл.",
+                "enter": "Въведете Вашият Seed"
             },
             "mnemonic": {
-                "title": "Type your recovery phrase",
+                "title": "Въведете фраза за възстановяване",
                 "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly wallets.",
-                "enter": "Enter your secret recovery phrase"
+                "enter": "Въведете фраза за възстановяване"
             },
-            "seedDetected": "81 character seed detected",
+            "seedDetected": "81 символа seed разпознат",
             "phraseDetected": "24 word recovery phrase detected",
             "checksum": "Checksum"
         },
         "importFromFile": {
-            "title": "Restore your wallets using a backup file",
+            "title": "Възстановяване на портфейл чрез бекъп файл",
             "body": "Import a backup file to restore your wallets. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
         },
         "importBackupPassword": {
-            "title": "Restore your wallets from a SeedVault or Stronghold",
-            "body1": "Please enter your backup password.",
-            "body2": "This is the password you set when you first created your backup."
+            "title": "Възстановяване на портфейл чрез Seed vault или Stronghold",
+            "body1": "Моля въведете паролата за възстановяване.",
+            "body2": "Това е паролата, въведена при създаването на бекъп файла."
         },
         "importSuccess": {
-            "title": "You have successfully recovered your backup",
+            "title": "Успешно възстановихте от бекъп",
             "body": "You can now set up your new profile.",
-            "seedvaultTitle": "Successfully imported",
-            "seedvaultBody": "Your password is correct, you can now continue.",
-            "strongholdTitle": "Successfully imported",
-            "strongholdBody": "Your password is correct, you can now continue."
+            "seedvaultTitle": "Импортирането успешно",
+            "seedvaultBody": "Паролата е потвърдена, можете да продължите.",
+            "strongholdTitle": "Импортирането успешно",
+            "strongholdBody": "Паролата е потвърдена, можете да продължите."
         },
         "migrate": {
             "title": "Migrate your funds",
             "body1": "This is an automated process to transfer your funds to your new wallet.",
             "body2": "It may take some time. Do not turn off your device during the migration.",
-            "existing": "Your old wallet",
-            "new": "Your new wallet",
-            "learn": "Learn about the migration",
+            "existing": "Стар портфейл",
+            "new": "Нов портфейл",
+            "learn": "Научете повече за миграцията",
             "beginMigration": "Begin Migration",
             "migrating": "Migrating funds...",
             "migrated": "{balance} migrated",
-            "migrationFailed": "Migration Failed",
+            "migrationFailed": "Грешка при миграция",
             "noAddressesForMigration": "Please select the addresses you wish to secure.",
             "restoringWallet": "Restoring wallet...",
             "findingBalance": "Finding balance...",
-            "incorrectSeedVaultPassword": "Incorrect SeedVault password.",
+            "incorrectSeedVaultPassword": "Грешна парола за Seedvault.",
+            "noDataSeedVault": "No data could be found in the SeedVault.",
             "signingBundle": "Signing bundle",
             "broadcastingBundle": "Broadcasting bundle",
             "miningBundle": "Mining bundle",
@@ -154,7 +155,7 @@
             "minimumMigrationAmountSpentAddresses": "The minimum migration amount for each spent address is 1 Mi. Check again if your balance doesn't look right.",
             "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
             "cannotMigrateAllYourFunds": "We cannot migrate all of your funds because some addresses are too low in value. You can proceed anyway. {value} will be lost.",
-            "error": "There was an error migrating your funds. Please try again."
+            "error": "Възникна грешка при мигриране на средствата. Моля опитайте отново."
         },
         "bundleMiningWarning": {
             "title": "Warning",
@@ -174,7 +175,7 @@
             "body1": "We have calculated the security risk level. Running this process again may lower your risk level.",
             "body2": "When you are happy with the risk level(s) press continue.",
             "rerun": "Rerun process for selected addresses",
-            "continueMigration": "Continue migration"
+            "continueMigration": "Продължи миграцията"
         },
         "securingSpentAddresses": {
             "title": "Securing spent addresses...",
@@ -184,23 +185,23 @@
         "transferFragmentedFunds": {
             "body1": "Firefly will now proceed to migrate your funds. This may take a while.",
             "migrate": "Migrate funds",
-            "transaction": "Transaction {number}",
-            "rerun": "Try again"
+            "transaction": "Трансакция {number}",
+            "rerun": "Опитайте отново"
         },
         "migrateFailed": {
             "title": "To do",
             "body": "To do"
         },
         "balance": {
-            "title": "Your balance",
+            "title": "Балансът ви е",
             "body": "Make sure your balance is correct before continuing. You can check again if things don't look correct.",
             "error": "The minimum migration amount is 1 Mi. Check again if your balance doesn't look right.",
             "zeroBalance": "Try checking again. If you still can't find your balance you might have entered your seed incorrectly."
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "Настройки",
             "generalSettings": {
-                "title": "General Settings",
+                "title": "Общи настройки",
                 "description": "Configure your app's appearance and other general settings"
             },
             "security": {
@@ -245,7 +246,9 @@
             },
             "appLock": {
                 "title": "Automatic Lock",
-                "description": "Inactivity time before your wallets lock and you are logged out"
+                "description": "Inactivity time before your wallets lock and you are logged out",
+                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
+                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
             },
             "changePassword": {
                 "title": "Change password",
@@ -461,8 +464,8 @@
         },
         "balanceFinder": {
             "title": "Balance finder",
-            "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
-            "totalWalletBalance": "Total balance",
+            "body": "Започни пълно търсене на адреси, за да откриете липсващи средства. Може да отнеме време.",
+            "totalWalletBalance": "Общо салдо",
             "typePassword": "Type your password to allow searching."
         },
         "riskFunds": {
@@ -697,7 +700,8 @@
         "receivedTo": "Received to {account}",
         "sentFrom": "Sent from {account}",
         "receiving": "Receiving",
-        "sending": "Sending"
+        "sending": "Sending",
+        "legacyNetwork": "Legacy Network"
     },
     "dates": {
         "today": "Today",

@@ -147,6 +147,7 @@
             "restoringWallet": "지갑 복원 중...",
             "findingBalance": "잔고 찾는 중...",
             "incorrectSeedVaultPassword": "잘못된 SeedVault 비밀번호입니다.",
+            "noDataSeedVault": "No data could be found in the SeedVault.",
             "signingBundle": "Signing 번들",
             "broadcastingBundle": "Broadcasting 번들",
             "miningBundle": "Mining 번들",
@@ -245,7 +246,9 @@
             },
             "appLock": {
                 "title": "자동 잠금",
-                "description": "Inactivity time before your wallets lock and you are logged out"
+                "description": "Inactivity time before your wallets lock and you are logged out",
+                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
+                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
             },
             "changePassword": {
                 "title": "비밀번호 변경하기",
@@ -697,7 +700,8 @@
         "receivedTo": "{account} 계정으로 받음",
         "sentFrom": "{account} 계정으로 보냄",
         "receiving": "받는 중",
-        "sending": "보내는 중"
+        "sending": "보내는 중",
+        "legacyNetwork": "Legacy Network"
     },
     "dates": {
         "today": "오늘",

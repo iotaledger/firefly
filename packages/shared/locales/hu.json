@@ -2,7 +2,7 @@
     "views": {
         "onboarding1": {
             "title": "Küldje, fogadja és kezelje IOTA tokenjeit",
-            "body": "Firefly is the official wallet software of IOTA."
+            "body": "A Firefly a hivatalos IOTA tárca."
         },
         "legal": {
             "title": "Adatvédelmi irányelvek és Felhasználási feltételek",
@@ -28,7 +28,7 @@
         "secure": {
             "title": "Tárca biztonsága",
             "body1": "Mentse el és nyomtassa ki a helyreállítási lap PDF-sablonját.",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallets."
+            "body2": "Ha kitölti és biztonságosan tárolja a helyreállítási lapot, akkor mindig helyre tudja állítani a tárcáit."
         },
         "password": {
             "title": "Jelszó létrehozása",
@@ -37,7 +37,7 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your profile.",
+            "body1": "Állítson be egy PIN-kódot a bejelentkezéshez, amellyel csak Ön férhet hozzá a tárcájához.",
             "body2": "A PIN-kódot tartsa biztonságban!"
         },
         "pin": {
@@ -73,10 +73,10 @@
         },
         "backupWallet": {
             "title": "Stronghold biztonsági mentés",
-            "body1": "Enter your password to backup your wallets to a Stronghold file. Your password is used to encrypt the backup.",
+            "body1": "Tárcáinak Stronghold fájlba történő mentéséhez adja meg jelszavát. A jelszó a biztonsági mentés titkosítására szolgál.",
             "body2": "A digitális biztonsági mentés az alábbiak miatt fontos:",
-            "reason1": "Easily recover your wallets without typing in your recovery phrase",
-            "reason2": "Import your wallets on other devices",
+            "reason1": "Egyszerűen helyreállíthatja tárcáit anélkül, hogy beírná a helyreállítási szavakat",
+            "reason2": "Könnyen importálhatja tárcáit más eszközökre",
             "reason3": "Helyreállíthatja tranzakcióinak előzményeit"
         },
         "recoveryPhraseSaved": {
@@ -92,23 +92,23 @@
         },
         "import": {
             "title": "Egyenleg helyreállítása vagy migrálása",
-            "body": "Ha rendelkezik tárca biztonsági mentéssel vagy seed-del, itt importálhatja. Ha van tokenje a régi Iota hálózatról, migrálhatja őket az új Chrysalis hálózatra.",
+            "body": "Ha rendelkezik tárca biztonsági mentéssel vagy seed-del, itt importálhatja. Ha van tokenje a régi hálózatról, migrálhatja őket az új Chrysalis hálózatra.",
             "importSeed": "81 karakter hosszú seed-em van",
             "importSeedDescription": "Adja meg seed-jét és migrálja tokenjeit a Chrysalis hálózatra",
             "importMnemonic": "Firefly helyreállítási szavakkal rendelkezem",
-            "importMnemonicDescription": "Enter your recovery phrase to recover your wallets",
+            "importMnemonicDescription": "Adja meg a helyreállítási szavakat tárcái helyreállításához",
             "importFile": "Biztonsági mentésem van",
             "importFileDescription": "Importálja Seedvault vagy Stronghold mentését"
         },
         "importFromText": {
             "seed": {
                 "title": "Adja meg seed-jét a migráció elindításához",
-                "body": "A seed consists of 81 characters. This is used to recover from the older Trinity app.",
+                "body": "A seed 81 karakterből áll. Régebbi, Trinity tárcából történő helyreállításra szolgál.",
                 "enter": "Adja meg seed-jét"
             },
             "mnemonic": {
                 "title": "Adja meg a helyreállítási szavakat",
-                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly wallets.",
+                "body": "A helyreállítási szavak 24 kisbetűs, szóközökkel elválasztott szóból állnak, melyek már meglévő Firefly tárcák helyreállítására szolgálnak.",
                 "enter": "Adja meg a titkos helyreállítási szavakat"
             },
             "seedDetected": "81 karakterből álló seed észlelve",
@@ -116,17 +116,17 @@
             "checksum": "Ellenőrző összeg"
         },
         "importFromFile": {
-            "title": "Restore your wallets using a backup file",
-            "body": "Import a backup file to restore your wallets. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+            "title": "Tárcák helyreállítása biztonsági mentésből",
+            "body": "Tárcáit importálhatja egy meglévő biztonsági mentésből, mely lehet Stronghold (.stronghold) vagy Trinity SeedVault (.kdbx)."
         },
         "importBackupPassword": {
-            "title": "Restore your wallets from a SeedVault or Stronghold",
+            "title": "Állítsa helyre tárcáit SeedVault- vagy Stronghold-fájlból",
             "body1": "Kérjük, adja meg a biztonsági mentés titkosításának feloldására szolgáló jelszavát!",
             "body2": "Ez az a jelszó, amelyet a biztonsági mentés első létrehozásakor adott meg."
         },
         "importSuccess": {
             "title": "Sikeresen helyreállította tárcáját a biztonsági mentésből",
-            "body": "You can now set up your new profile.",
+            "body": "Most már beállíthatja profilját.",
             "seedvaultTitle": "Sikeresen importálva",
             "seedvaultBody": "A jelszó helyes.",
             "strongholdTitle": "Sikeresen importálva",
@@ -147,6 +147,7 @@
             "restoringWallet": "Tárca helyreállítása...",
             "findingBalance": "Egyenleg keresése...",
             "incorrectSeedVaultPassword": "Helytelen SeedVault jelszó.",
+            "noDataSeedVault": "No data could be found in the SeedVault.",
             "signingBundle": "Kötegtranzakció aláírása",
             "broadcastingBundle": "Kötegtranzakció kiküldése",
             "miningBundle": "Kötegtranzakció bányászása",
@@ -201,7 +202,7 @@
             "settings": "Beállítások",
             "generalSettings": {
                 "title": "Általános beállítások",
-                "description": "Configure your app's appearance and other general settings"
+                "description": "Applikáció megjelenésének és általános beállításainak módosítása"
             },
             "security": {
                 "title": "Biztonság",
@@ -245,7 +246,9 @@
             },
             "appLock": {
                 "title": "Automatikus zárolás",
-                "description": "Tétlenség ideje, mielőtt tárcája automatikusan zárolódik és kilépteti Önt"
+                "description": "Tétlenség ideje, mielőtt tárcája automatikusan zárolódik és kilépteti Önt",
+                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
+                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
             },
             "changePassword": {
                 "title": "Jelszó módosítása",
@@ -461,8 +464,8 @@
         },
         "balanceFinder": {
             "title": "Egyenlegkereső",
-            "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
-            "totalWalletBalance": "Total balance",
+            "body": "Alaposan átnézi és összegyűjti címeiről a hiányzó tokenjeit. Ez eltarthat egy ideig.",
+            "totalWalletBalance": "Összesített egyenleg",
             "typePassword": "Adja meg jelszavát a keresés engedélyezéséhez."
         },
         "riskFunds": {
@@ -488,7 +491,7 @@
         "outgoingMi": "Küldött: {value}",
         "portoflio": "Portfólió",
         "token": "Token",
-        "accountValue": "Tárca értéke",
+        "accountValue": "Tárca egyenleg",
         "accountActivity": "Tárca előzmények",
         "timeframe1Hour": "1 óra",
         "timeframe1Day": "1 nap",
@@ -602,10 +605,10 @@
         "sendFunds": "Átutalás",
         "sendToAddress": "Küldés a következő címre",
         "scanQrOrPaste": "QR-kód beolvasása vagy cím beillesztése",
-        "moveFundsBetweenAccounts": "Move funds between wallets",
+        "moveFundsBetweenAccounts": "Egyenleg átvezetése tárcák között",
         "sendTokensToAddress": "Tokenek küldése",
-        "manageAccount": "Manage Wallet",
-        "customizeAcount": "Customize your wallet",
+        "manageAccount": "Tárca kezelése",
+        "customizeAcount": "Tárca testre szabása",
         "account": "Tárca",
         "sendingToAddress": "Címre utalás",
         "amount": "Összeg",
@@ -627,25 +630,25 @@
         "lightTheme": "Világos megjelenés",
         "darkTheme": "Sötét megjelenés",
         "balance": "Egyenleg",
-        "accountBalance": "Wallet Balance",
+        "accountBalance": "Tárca egyenleg",
         "incoming": "Bejövő",
         "outgoing": "Kimenő",
         "totalIn": "Összes beérkező",
         "totalOut": "Összes kimenő",
-        "accounts": "Wallets",
-        "myAccounts": "My Wallets",
+        "accounts": "Tárcák",
+        "myAccounts": "Tárcáim",
         "automaticNodeSelection": "Automatikus csomópont kiválasztás",
         "manualNodeSelection": "Kézi csomópont kiválasztás",
         "profiles": "Profilok",
         "developerProfile": "Fejlesztői profil",
         "developerProfileDescription": "Lehetővé teszi a csatlakozást teszthálózatokhoz",
         "dev": "Fejlesztő",
-        "createAccount": "Create a Wallet",
-        "accountName": "Wallet name",
+        "createAccount": "Tárca létrehozása",
+        "accountName": "Tárca neve",
         "latestTransactions": "Legutóbbi tranzakciók",
         "transactions": "Tranzakciók",
         "security": "Biztonság",
-        "accountAddress": "Wallet Address",
+        "accountAddress": "Tárca címei",
         "nodes": "Csomópontok",
         "wallet": "Tárca",
         "help": "Segítség",
@@ -657,26 +660,26 @@
         "status": "Állapot",
         "confirmed": "Megerősítve",
         "pending": "Függőben lévő",
-        "noAccounts": "You have no wallets, please create one.",
+        "noAccounts": "Még nincsen tárcája, kérjük hozzon létre egyet.",
         "loadingAccounts": "Betöltés folyamatban. Kérjük, várjon...",
         "addProfile": "Profil hozzáadása",
         "noRecentHistory": "Nincsenek előzmények",
-        "firstSync": "Syncing history, this may take a while...",
-        "transferSyncing": "Syncing wallet",
+        "firstSync": "Tranzakciós lista szinkronizálása folyamatban. Ez eltarthat egy ideig...",
+        "transferSyncing": "Tárca szinkronizálása",
         "transferSelectingInputs": "Bemenetek kiválasztása",
         "transferRemainderAddress": "Cím létrehozása a fennmaradó egyenleg számára",
         "transferSigning": "Tranzakció hitelesítése",
         "transferPow": "Kiszabott munka elvégzése folyamatban",
         "transferBroadcasting": "Tranzakció elküldése",
         "transferComplete": "Utalás végrehajtva",
-        "creatingAccount": "Creating wallet, please wait...",
-        "updatingAccount": "Updating wallet, please wait...",
-        "accountSyncing": "Wallet is syncing",
-        "accountSyncComplete": "Wallet sync complete",
+        "creatingAccount": "Tárca létrehozása folyamatban. Kérjük, várjon...",
+        "updatingAccount": "Tárca frissítése folyamatban. Kérjük, várjon...",
+        "accountSyncing": "Tárca szinkronizása folyamatban",
+        "accountSyncComplete": "Tárca szinkronizálva",
         "passwordUpdating": "Jelszó frissítése...",
         "passwordSuccess": "A jelszó sikeresen frissítve",
         "passwordFailed": "A jelszó frissítése sikertelen",
-        "syncingAccounts": "Syncing wallets...",
+        "syncingAccounts": "Tárcák szinkronizálása...",
         "exportingStronghold": "Stronghold exportálása...",
         "exportingStrongholdSuccess": "Stronghold sikeresen exportálva",
         "exportingStrongholdFailed": "Stronghold exportálása sikertelen",
@@ -691,13 +694,14 @@
         "passwordStrength4": "Erős",
         "creatingProfile": "Profil létrehozása folyamatban, kérjük várjon...",
         "fundMigration": "Egyenleg migrálása",
-        "accountRemoved": "This wallet is hidden. Unhide it to perform transfers.",
+        "accountRemoved": "Rejtett tárcából nem tud küldeni. Állítsa be előbb a rejtett tárcák megjelenítését.",
         "receivingTo": "{account} számlára érkezik...",
         "sendingFrom": "Küldés {account} számláról...",
         "receivedTo": "{account} számlára érkezett",
         "sentFrom": "{account} számláról elküldve",
         "receiving": "Fogadás...",
-        "sending": "Küldés..."
+        "sending": "Küldés...",
+        "legacyNetwork": "Legacy Network"
     },
     "dates": {
         "today": "Ma",
@@ -720,7 +724,7 @@
         "calcMinutesRemaining": "Hátralévő idő kiszámítása...",
         "minutesRemaining": "{minutes, plural, one {1 perc van hátra} other {# perc van hátra}}",
         "copiedToClipboard": "A vágólapra másolva",
-        "accountsSynchronized": "Wallet synchronization complete",
+        "accountsSynchronized": "Tárca szinkronizálva",
         "migratedAccountChrysalisDown": "Egyenlege a Chrysalis migráció után lesz elérhető 2021. április 28-án",
         "migratedAccountChrysalisUp": "Egyenlege hamarosan elérhető lesz"
     },
@@ -752,10 +756,10 @@
             "incorrect": "Jelenlegi PIN-kódja helytelen."
         },
         "account": {
-            "length": "Your wallet name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "empty": "You must use your latest wallet before creating a new one.",
-            "notEmpty": "You must transfer your balance before deleting this wallet.",
-            "duplicate": "A wallet with this name already exists.",
+            "length": "A tárca neve nem lehet {length, plural, one {1 karakternél} other {# karakternél}} hosszabb.",
+            "empty": "Új tárcát csak akkor hozhat létre, ha már legalább egyszer használta a legutóbb létrehozott tárcáját.",
+            "notEmpty": "A tárca törlése előtt a teljes egyenlegét át kell küldenie egy másik tárcába.",
+            "duplicate": "Már létezik ilyen nevű tárca.",
             "tilde": "A profilnév nem kezdődhet “~” karakterrel.",
             "control": "A profilnév csak nyomtatható karaktereket tartalmazhat.",
             "startDot": "A profilnév nem kezdődhet “.” karakterrel.",
@@ -770,8 +774,8 @@
             "wrongAddressPrefix": "A címeknek {prefix} előtaggal kell kezdődniük.",
             "wrongAddressFormat": "A cím nem megfelelő formátumú.",
             "invalidAddress": "Helytelen cím.",
-            "insufficientFunds": "This wallet has insufficient funds.",
-            "noToAccount": "You have not selected a wallet to send the funds to.",
+            "insufficientFunds": "Nincs elég összeg a tárcájában a tranzakció végrehajtásához.",
+            "noToAccount": "Nem választotta ki melyik tárcájába szeretne küldeni.",
             "sendingDust": "1 Mi-nél kevesebbet nem lehet elküldeni.",
             "leavingDust": "Minimum 1 Mi-nek maradnia kell a számláján."
         },

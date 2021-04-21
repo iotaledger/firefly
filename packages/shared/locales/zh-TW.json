@@ -147,6 +147,7 @@
             "restoringWallet": "恢復錢包...",
             "findingBalance": "尋找餘額...",
             "incorrectSeedVaultPassword": "SeedVault 密碼錯誤",
+            "noDataSeedVault": "No data could be found in the SeedVault.",
             "signingBundle": "簽發交易組",
             "broadcastingBundle": "廣播交易組",
             "miningBundle": "挖掘交易組",
@@ -245,7 +246,9 @@
             },
             "appLock": {
                 "title": "自動鎖定",
-                "description": "Inactivity time before your wallets lock and you are logged out"
+                "description": "Inactivity time before your wallets lock and you are logged out",
+                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
+                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
             },
             "changePassword": {
                 "title": "修改密碼",
@@ -697,7 +700,8 @@
         "receivedTo": "Received to {account}",
         "sentFrom": "Sent from {account}",
         "receiving": "Receiving",
-        "sending": "Sending"
+        "sending": "Sending",
+        "legacyNetwork": "Legacy Network"
     },
     "dates": {
         "today": "今天",
