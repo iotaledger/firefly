@@ -147,7 +147,7 @@
             "restoringWallet": "والیٹ بحال کیا جا ریا ہے...",
             "findingBalance": "بیلینس معلوم کیا جا رہا ہے...",
             "incorrectSeedVaultPassword": "غلط سیڈ والٹ پاس ورڈ.",
-            "noDataSeedVault": "No data could be found in the SeedVault.",
+            "noDataSeedVault": "سیڈ والٹ میں کوئی ڈیٹا نہیں ملا.",
             "signingBundle": "بنڈل پر دستخط کیا جا رہا ہے",
             "broadcastingBundle": "بنڈل براڈکاسٹ کیا جا رہا ہے",
             "miningBundle": "بنڈل کو تصدیق شدہ کیا جا رہا ہے",
@@ -247,8 +247,8 @@
             "appLock": {
                 "title": "خودکار لاک",
                 "description": "غیر فعال ہونے کا وقت جب آپ کے والیٹس لاک ہوجاتے ہیں اور آپ لاگ آؤٹ ہوجاتے ہیں",
-                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
-                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
+                "durationMinute": "{time, plural, one {1 منٹ} other {# منٹ}}",
+                "durationHour": "{time, plural, one {1 گھنٹہ} other {# گھنٹے}}"
             },
             "changePassword": {
                 "title": "پاس ورڈ تبدیل کریں",
@@ -701,7 +701,7 @@
         "sentFrom": "{account} سے بھیجا گیا",
         "receiving": "وصول پزیر",
         "sending": "بھیجے جا رہے",
-        "legacyNetwork": "Legacy Network"
+        "legacyNetwork": "لیگیسی نیٹ ورک"
     },
     "dates": {
         "today": "آج",

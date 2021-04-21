@@ -147,7 +147,7 @@
             "restoringWallet": "Vraćanje novčanika...",
             "findingBalance": "Dohvaćam stanje...",
             "incorrectSeedVaultPassword": "Netočna SeedVault lozinka.",
-            "noDataSeedVault": "No data could be found in the SeedVault.",
+            "noDataSeedVault": "Ne možemo pronaći podatke unutar SeedVaulta.",
             "signingBundle": "Potpisujem skup",
             "broadcastingBundle": "Odašiljem skup",
             "miningBundle": "Rudarim skup",
@@ -247,8 +247,8 @@
             "appLock": {
                 "title": "Automatsko zaključavanje",
                 "description": "Vrijeme neaktivnosti preostalo do zaključavanja novčanika i odjave iz sustava",
-                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
-                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
+                "durationMinute": "{time, plural, one {# minuta} few {# minute} other {# minuta}}",
+                "durationHour": "{time, plural, one {# sat} few {# sata} other {# sati}}"
             },
             "changePassword": {
                 "title": "Promijenite lozinku",
@@ -701,7 +701,7 @@
         "sentFrom": "Poslano sa {account} računa",
         "receiving": "Primanje u tijeku",
         "sending": "Slanje u tijeku",
-        "legacyNetwork": "Legacy Network"
+        "legacyNetwork": "Stara mreža"
     },
     "dates": {
         "today": "Danas",

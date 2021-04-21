@@ -147,7 +147,7 @@
             "restoringWallet": "بازگردانی کیف پول...",
             "findingBalance": "پیدا کردن موجودی...",
             "incorrectSeedVaultPassword": "رمز SeedVault اشتباه است.",
-            "noDataSeedVault": "No data could be found in the SeedVault.",
+            "noDataSeedVault": "هیچ داده‌ای در SeedVault پیدا نشد.",
             "signingBundle": "در حال تایید دسته تراکنش ها",
             "broadcastingBundle": "پخش بسته",
             "miningBundle": "در حال استخراج دسته تراکنش ها",
@@ -247,8 +247,8 @@
             "appLock": {
                 "title": "ﻗﻔﻞ ﺧﻮﺩﮐﺎﺭ",
                 "description": "مدت زمان عدم فعالیت قبل از قفل شدن کیف پول و خارج شدن از سیستم",
-                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
-                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
+                "durationMinute": "{time, plural, one {۱ دقیقه} other {# دقیقه}}",
+                "durationHour": "{time, plural, one {۱ ساعت} other {# ساعت}}"
             },
             "changePassword": {
                 "title": "تغییر رمز عبور",
@@ -701,7 +701,7 @@
         "sentFrom": "فرستاده شده از {account}",
         "receiving": "در حال دریافت",
         "sending": "در حال ارسال",
-        "legacyNetwork": "Legacy Network"
+        "legacyNetwork": "شبکه قدیمی"
     },
     "dates": {
         "today": "امروز",

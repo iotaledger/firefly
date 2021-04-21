@@ -147,7 +147,7 @@
             "restoringWallet": "Przywracanie portfela...",
             "findingBalance": "Wyszukiwanie środków...",
             "incorrectSeedVaultPassword": "Nieprawidłowe hasło SeedVault.",
-            "noDataSeedVault": "No data could be found in the SeedVault.",
+            "noDataSeedVault": "Nie znaleziono danych w pliku SeedVault.",
             "signingBundle": "Podpisywanie pakietu",
             "broadcastingBundle": "Nadawanie pakietu",
             "miningBundle": "Wydobywanie pakietu",
@@ -247,8 +247,8 @@
             "appLock": {
                 "title": "Automatyczna blokada ekranu",
                 "description": "Czas bezczynności przed zablokowaniem ekranu aplikacji i wylogowaniem z portfeli",
-                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
-                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
+                "durationMinute": "{time, plural, one {1 minuta} few {# minuty} many {# minut} other {# minuty}}",
+                "durationHour": "{time, plural, one {1 godzina} few {# godziny} many {# godzin} other {# godziny}}"
             },
             "changePassword": {
                 "title": "Zmiana hasła",
@@ -701,7 +701,7 @@
         "sentFrom": "Wysłano z portfela {account}",
         "receiving": "Odbieranie",
         "sending": "Wysyłanie",
-        "legacyNetwork": "Legacy Network"
+        "legacyNetwork": "Stara sieć IOTA"
     },
     "dates": {
         "today": "Dzisiaj",

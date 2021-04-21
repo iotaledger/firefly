@@ -2,7 +2,7 @@
     "views": {
         "onboarding1": {
             "title": "Kirim, Terima & Kelola IOTA Anda",
-            "body": "Firefly is the official wallet software of IOTA."
+            "body": "Firefly adalah dompet resmi IOTA."
         },
         "legal": {
             "title": "Kebijakan Privasi dan Persyaratan Layanan",
@@ -11,7 +11,7 @@
         },
         "appearance": {
             "title": "Tampilan",
-            "body": "Choose your app theme."
+            "body": "Pilihlah tema aplikasi Anda."
         },
         "profile": {
             "title": "Buat Profil",
@@ -28,7 +28,7 @@
         "secure": {
             "title": "Amankan dompet Anda",
             "body1": "Simpan dan cetak template PDF dokumen pemulihan.",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallets."
+            "body2": "Jika Anda mengisi dokumen pemulihan dan menyimpannya dengan aman, Anda akan selalu dapat memulihkan dompet Anda."
         },
         "password": {
             "title": "Buat kata sandi",
@@ -37,7 +37,7 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your profile.",
+            "body1": "Silahkan atur kode PIN login untuk memastikan bahwa hanya Anda yang dapat masuk ke dalam profil Anda.",
             "body2": "Amankan PIN Anda!"
         },
         "pin": {
@@ -73,15 +73,15 @@
         },
         "backupWallet": {
             "title": "Cadangkan ke file Stronghold",
-            "body1": "Enter your password to backup your wallets to a Stronghold file. Your password is used to encrypt the backup.",
+            "body1": "Masukkan kata sandi Anda untuk mencadangkan dompet anda ke Stronghold. Kata sandi Anda digunakan untuk mengenkripsi cadangan.",
             "body2": "Alasan mengapa backup digital itu penting:",
-            "reason1": "Easily recover your wallets without typing in your recovery phrase",
-            "reason2": "Import your wallets on other devices",
+            "reason1": "Pulihkan dompet Anda dengan mudah tanpa harus mengetikkan frase pemulihan Anda",
+            "reason2": "Impor dompet Anda ke perangkat lain",
             "reason3": "Pulihkan riwayat transaksi lengkap Anda"
         },
         "recoveryPhraseSaved": {
             "title": "Berhasil dicadangkan",
-            "body": "You have backed up your wallets to a Stronghold."
+            "body": "Anda telah mencadangkan dompet anda ke Stronghold."
         },
         "congratulations": {
             "title": "Penyiapan dompet selesai",
@@ -96,19 +96,19 @@
             "importSeed": "Saya memiliki seed 81 karakter",
             "importSeedDescription": "Masukkan seed dan pindahkan dana ke Chrysalis",
             "importMnemonic": "Saya memiliki frase pemulihan Firefly",
-            "importMnemonicDescription": "Enter your recovery phrase to recover your wallets",
+            "importMnemonicDescription": "Silahkan masukkan frase rahasia Anda untuk mengembalikan dompet Anda",
             "importFile": "Saya memiliki cadangan file",
             "importFileDescription": "Unggah file Seedvault atau Stronghold"
         },
         "importFromText": {
             "seed": {
                 "title": "Ketik seed Anda untuk memulai migrasi",
-                "body": "A seed consists of 81 characters. This is used to recover from the older Trinity app.",
+                "body": "Sebuah seed terdiri dari 81 karakter. Seed dipakai untuk pemulihan dompet lama Trinity.",
                 "enter": "Masukan Seed Anda"
             },
             "mnemonic": {
                 "title": "Masukan kata pemulihan",
-                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly wallets.",
+                "body": "Frasa pemulihan terdiri dari 24 kata, semuanya huruf kecil, dengan spasi di antaranya. Ini digunakan untuk memulihkan dompet Firefly yang ada.",
                 "enter": "Masukkan frase pemulihan rahasia Anda"
             },
             "seedDetected": "Seed dengan 81 karakter terdeteksi",
@@ -116,17 +116,17 @@
             "checksum": "checksum"
         },
         "importFromFile": {
-            "title": "Restore your wallets using a backup file",
-            "body": "Import a backup file to restore your wallets. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+            "title": "Kembalikan dompet Anda menggunakan file cadangan",
+            "body": "Impor cadangan buat memulihkan dompet. Pencadangan bisa berupa file Stronghold (.stronghold) atau SeedVault Trinity (.kdbx)."
         },
         "importBackupPassword": {
-            "title": "Restore your wallets from a SeedVault or Stronghold",
+            "title": "Pulihkan dompet dari SeedVault atau Stronghold",
             "body1": "Harap masukkan kata sandi cadangan.",
             "body2": "Ini adalah kata sandi yang dibuat saat pencadangan pertama Anda."
         },
         "importSuccess": {
             "title": "Anda telah berhasil memulihkan pencadangan",
-            "body": "You can now set up your new profile.",
+            "body": "Anda sudah bisa membuat profil baru.",
             "seedvaultTitle": "Berhasil diimpor",
             "seedvaultBody": "Kata sandi Anda benar, sekarang Anda dapat melanjutkan.",
             "strongholdTitle": "Berhasil diimpor",
@@ -147,11 +147,11 @@
             "restoringWallet": "Mengembalikan dompet...",
             "findingBalance": "Menemukan keseimbangan...",
             "incorrectSeedVaultPassword": "Kata sandi SeedVault salah.",
-            "noDataSeedVault": "No data could be found in the SeedVault.",
+            "noDataSeedVault": "Tidak ada data yang bisa ditemukan di SeedVault.",
             "signingBundle": "Menandatangani bundel",
             "broadcastingBundle": "Paket penyiaran",
             "miningBundle": "Bundel penambangan",
-            "problemRestoringWallet": "There was a network error restoring your wallet. Please try again.",
+            "problemRestoringWallet": "Terjadi masalah jaringan saat memulihkan dompet Anda. Silahkan coba lagi.",
             "minimumMigrationAmountSpentAddresses": "Jumlah migrasi minimum untuk setiap alamat yang dibelanjakan adalah 1 Mi. Periksa lagi apakah saldo Anda terlihat tidak benar.",
             "tooManyAddressesToMigrate": "Anda memiliki terlalu banyak alamat dengan saldo rendah untuk dimigrasi. Periksa lagi apakah saldo Anda terlihat tidak benar.",
             "cannotMigrateAllYourFunds": "Kami tidak dapat memindahkan semua dana Anda karena beberapa alamat nilainya terlalu rendah. Anda tetap dapat melanjutkan. {value} akan hilang.",
@@ -195,33 +195,33 @@
         "balance": {
             "title": "Saldo Anda",
             "body": "Pastikan saldo Anda benar sebelum melanjutkan. Anda dapat memeriksa lagi jika ada yang tidak beres.",
-            "error": "The minimum migration amount is 1 Mi. Check again if your balance doesn't look right.",
-            "zeroBalance": "Try checking again. If you still can't find your balance you might have entered your seed incorrectly."
+            "error": "Jumlah migrasi minimum adalah 1 Mi. Periksa lagi apabila saldo Anda terlihat tidak benar.",
+            "zeroBalance": "Cobalah periksa lagi. Jika Anda masih tidak bisa menemukan saldo Anda mungkin Anda salah memasukkan seed Anda."
         },
         "settings": {
             "settings": "Pengaturan",
             "generalSettings": {
                 "title": "Pengaturan Umum",
-                "description": "Configure your app's appearance and other general settings"
+                "description": "Atur penampilan aplikasi Anda dan pengaturan umum lainnya"
             },
             "security": {
                 "title": "Keamanan",
-                "description": "Change your password and adjust security-related settings"
+                "description": "Ganti kata sandi Anda dan atur pengaturan terkait keamanan"
             },
             "advancedSettings": {
                 "title": "Pengaturan Lanjutan",
-                "description": "Tools and manual settings for technical users"
+                "description": "Alat dan pengaturan manual untuk pengguna teknis"
             },
             "helpAndInfo": {
                 "title": "Bantuan dan Informasi",
-                "description": "Find the answer to a question or get help with an issue"
+                "description": "Temukan jawaban dari pertanyaan atau cari bantuan"
             },
             "profile": {
                 "title": "Profil",
-                "description": "Change your profile name or set an avatar"
+                "description": "Ubahlah nama profil Anda atau mengatur avatar"
             },
             "sync": {
-                "title": "Sync wallets",
+                "title": "Sinkronisasi dompet",
                 "description": ""
             },
             "theme": {
@@ -234,7 +234,7 @@
             },
             "currency": {
                 "title": "Mata uang",
-                "description": "Adjusts balance conversion and updates chart options"
+                "description": "Menyesuaikan konversi saldo dan memperbarui opsi chart"
             },
             "notifications": {
                 "title": "Notifikasi",
@@ -480,7 +480,7 @@
             "proceed": "I understand the risk"
         },
         "snapshot": {
-            "title": "Ongoing network upgrade",
+            "title": "Sedang meningkatkan jaringan",
             "body": "The Chrysalis network upgrade has begun.",
             "bodyMigration": "Migration is disabled until it is complete.",
             "bodyFirefly": "Firefly is disabled until it is complete. Token migration will still be possible afterwards."

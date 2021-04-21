@@ -147,7 +147,7 @@
             "restoringWallet": "वॉलेट फिर से तैयार हो रहा है...",
             "findingBalance": "शेष राशि ढूँढना...",
             "incorrectSeedVaultPassword": "सीड़वॉल्ट पासवर्ड गलत है|",
-            "noDataSeedVault": "No data could be found in the SeedVault.",
+            "noDataSeedVault": "सीडवॉल्ट में कोई डेटा नहीं मिला।",
             "signingBundle": "साइनिंग बंडल",
             "broadcastingBundle": "प्रसारण बंडल",
             "miningBundle": "माइनिंग बंडल",
@@ -247,8 +247,8 @@
             "appLock": {
                 "title": "स्वचालित लॉक",
                 "description": "आपकी जेब लॉक होने से पहले निष्क्रियता का समय और आप लॉग आउट हो गए हैं",
-                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
-                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
+                "durationMinute": "{time, plural, one {1 मिनट} other {# मिनट}}",
+                "durationHour": "{time, plural, one {1 घंटा} other {# घंटे}}"
             },
             "changePassword": {
                 "title": "पासवर्ड परिवर्तित करें",
@@ -701,7 +701,7 @@
         "sentFrom": "{account} से भेजा गया",
         "receiving": "प्राप्त हो रहा है",
         "sending": "भेज रहे है",
-        "legacyNetwork": "Legacy Network"
+        "legacyNetwork": "विरासत नेटवर्क"
     },
     "dates": {
         "today": "आज",

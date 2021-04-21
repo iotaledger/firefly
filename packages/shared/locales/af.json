@@ -147,7 +147,7 @@
             "restoringWallet": "Beursie hersteling...",
             "findingBalance": "Bevinding van balans...",
             "incorrectSeedVaultPassword": "Verkeerde SeedVault wagwoord.",
-            "noDataSeedVault": "No data could be found in the SeedVault.",
+            "noDataSeedVault": "Geen data kon in die SeedVault gevind word nie.",
             "signingBundle": "Signing bundle",
             "broadcastingBundle": "Uitsaaibondel",
             "miningBundle": "Bondelmynbou",
@@ -247,8 +247,8 @@
             "appLock": {
                 "title": "Sluit outomaties",
                 "description": "Onaktiwiteitstyd voordat jou beursies sluit en jou uitgeteken",
-                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
-                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
+                "durationMinute": "{time, plural, one {1 minuut} other {# minute}}",
+                "durationHour": "{time, plural, one {1 huur} other {# ure}}"
             },
             "changePassword": {
                 "title": "Verander wagwoord",
@@ -701,7 +701,7 @@
         "sentFrom": "Stuur vanaf {account}",
         "receiving": "Ontvangs",
         "sending": "Besig om te stuur",
-        "legacyNetwork": "Legacy Network"
+        "legacyNetwork": "Erfenisnetwerk"
     },
     "dates": {
         "today": "Vandag",

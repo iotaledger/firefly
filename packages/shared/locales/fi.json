@@ -147,7 +147,7 @@
             "restoringWallet": "Palautetaan lompakkoa...",
             "findingBalance": "Etsitään saldoa...",
             "incorrectSeedVaultPassword": "Väärä SeedVault-salasana.",
-            "noDataSeedVault": "No data could be found in the SeedVault.",
+            "noDataSeedVault": "SeedVaultista ei löytynyt tietoja.",
             "signingBundle": "Allekirjoitetaan bundlea",
             "broadcastingBundle": "Lähetetään bundlea",
             "miningBundle": "Louhitaan bundlea",
@@ -247,8 +247,8 @@
             "appLock": {
                 "title": "Automaattinen lukitus",
                 "description": "Käyttämättömyysaika ennen kuin lompakkosi lukittuvat ja sinut kirjataan ulos",
-                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
-                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
+                "durationMinute": "{time, plural, one {1 minuutti} other {# minuuttia}}",
+                "durationHour": "{time, plural, one {1 tunti} other {# tuntia}}"
             },
             "changePassword": {
                 "title": "Vaihda salasana",
@@ -701,7 +701,7 @@
         "sentFrom": "Lähetetty lompakosta {account}",
         "receiving": "Vastaanotetaan",
         "sending": "Lähetetään",
-        "legacyNetwork": "Legacy Network"
+        "legacyNetwork": "Vanha verkko"
     },
     "dates": {
         "today": "Tänään",
