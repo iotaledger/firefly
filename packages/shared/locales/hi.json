@@ -1,150 +1,132 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Send, Receive & Manage your IOTA tokens",
-            "body": "Firefly is the official wallet of IOTA."
+            "title": "भेजे, प्राप्त करे तथा प्रबंधन करे अपने आयोटा!",
+            "body": "फायरफ्लाई आयोटा का आधिकारिक वॉलेट सॉफ्टवेयर है|"
         },
         "legal": {
-            "title": "Privacy Policy & Terms of Service",
+            "title": "गोपनीयता नीति और सेवा की शर्तें",
             "body": "कृपया समीक्षा करे प्राइवेसी पॉलिसी तथा सेवा की शर्तें|",
-            "privacyPolicy": {
-                "title": "प्राइवेसी पॉलिसी",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
-            "termsOfService": {
-                "title": "सेवा की शर्तें",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
-            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
+            "checkbox": "मैंने पढ़ा है और मैं गोपनीयता नीति और सेवा की शर्तें स्वीकार करता हूं"
         },
         "appearance": {
             "title": "दिखावट",
-            "body": "Choose your wallet’s theme."
+            "body": "अपनी ऐप थीम चुनें"
         },
         "profile": {
-            "title": "Create a profile",
-            "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
-            "profileName": "Profile Name"
+            "title": "प्रोफ़ाइल बनाएँ",
+            "body1": "आप अपने वॉलेट को व्यवस्थित करने और गोपनीयता में सुधार करने के लिए कई उपयोगकर्ता प्रोफ़ाइल बना सकते हैं",
+            "body2": "अभी के लिए, पहले प्रोफ़ाइल नाम से शुरू करते हैं। आप बाद में और प्रोफाइल जोड़ सकते हैं",
+            "profileName": "प्रोफ़ाइल नाम"
         },
         "setup": {
-            "title": "Set up a wallet",
-            "chrysalisTitle": "Chrysalis Network Update",
-            "chrysalisBody": "From April 21st, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
-            "learnMore": "Learn about the migration"
+            "title": "वॉलेट सेट करें",
+            "chrysalisTitle": "क्रिसलिस नेटवर्क अपडेट",
+            "chrysalisBody": "21 अप्रैल से, उपयोगकर्ता नए क्रिसलिस नेटवर्क में अपने टोकन स्थानांतरित कर सकते हैं। हम आपको जल्द से जल्द अपने मौजूदा टोकन को स्थानांतरित करने की सलाह देते हैं|",
+            "learnMore": "प्रवास के बारे में जानें"
         },
         "secure": {
-            "title": "Secure your wallet",
-            "body1": "Save and print the Recovery Kit PDF template.",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallet."
+            "title": "अपना वॉलेट सुरक्षित करें|",
+            "body1": "पुनर्प्राप्ति किट PDF टेम्पलेट को सहेजें और प्रिंट करें",
+            "body2": "यदि आप पुनर्प्राप्ति किट भरते हैं और इसे सुरक्षित रूप से संग्रहीत करते हैं, तो आप हमेशा अपने वॉलेट को पुनर्प्राप्त करने में सक्षम होंगे"
         },
         "password": {
             "title": "एक पासवर्ड बनाएं",
-            "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
-            "body2": "It is recommended that you write down your password in your Recovery Kit."
+            "body1": "आपको अपने फंड की सुरक्षा के लिए एक मजबूत पासवर्ड की आवश्यकता है। शब्दों के संयोजन का उपयोग करें, और सामान्य वाक्यांशों, नामों या तिथियों से बचें",
+            "body2": "यह अनुशंसा की जाती है कि आप अपने पासवर्ड को अपने रिकवरी किट में लिखें।"
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body2": "Keep your PIN safe!"
+            "body1": "यह सुनिश्चित करने के लिए एक लॉगिन पिन सेट करें कि केवल आप ही अपना प्रोफ़ाइल दर्ज कर सकें",
+            "body2": "अपना पिन सुरक्षित रखें|"
         },
         "pin": {
             "title": "पिन कोड सेट करें",
-            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
-            "body2": "Use numbers only"
+            "body1": "नीचे छह अंकों का पिन दर्ज करें। वॉलेट लॉग इन करने के लिए अपना पिन दर्ज करने के लिए कहा जाएगा|",
+            "body2": "केवल संख्या का उपयोग करें"
         },
         "confirmPin": {
             "title": "अपना पिन कोड सत्यापित करें",
-            "body1": "Your PIN keeps your balance and transactions private.",
-            "body2": "Re-enter your PIN code to proceed. "
+            "body1": "आपका पिन आपके बैलेंस और लेनदेन को निजी रखता है",
+            "body2": "आगे बढ़ने के लिए अपना पिन कोड पुनः दर्ज करें "
         },
         "backup": {
             "title": "अपने वॉलेट का बैकअप लें",
-            "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
-            "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
+            "body1": "अब आपको एक पुनर्प्राप्ति वाक्यांश दिखाया जाएगा। इसे अपने रिकवरी किट में लिखें।",
+            "body2": "अपने पुनर्प्राप्ति वाक्यांश को किसी के साथ साझा न करें। इसका उपयोग आपके टोकन को कहीं से भी एक्सेस करने के लिए किया जा सकता है।",
             "body3": "यदि आप अपना पुनर्प्राप्ति वाक्यांश खो देते हैं, तो आप अपने धन को खो सकते हैं।"
         },
         "recoveryPhrase": {
             "title": "वसूली वाक्यांश",
-            "body1": "In your Recovery Kit, write down the words in the exact order shown.",
-            "body2": "Keep this private and safely stored.",
-            "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
+            "body1": "अपने रिकवरी किट में, दिखाए गए सटीक क्रम में शब्दों को लिखें।",
+            "body2": "इस निजी और सुरक्षित रूप से संग्रहीत रखें",
+            "body3": "लिखित बैकअप होना जरूरी है। कंप्यूटर अक्सर विफल हो जाते हैं और फ़ैल दूषित हो सकती हैं।",
             "revealRecoveryPhrase": "पुनर्प्राप्ति वाक्यांश प्रकट करें",
             "hideRecoveryPhrase": "अपने वसूली वाक्यांश को छुपाये"
         },
         "verifyRecoveryPhrase": {
             "title": "वसूली वाक्यांश सत्यापित करें",
-            "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
-            "word": "Word",
-            "verified": "Recovery phrase verified",
-            "verifiedBody": "Remember to keep it private and safely stored."
+            "body": "चलिए चेक करते हैं कि आपने वाक्यांश को सही ढंग से लिखा है। सही क्रम में शब्दों का चयन करें|",
+            "word": "शब्द",
+            "verified": "वसूली वाक्यांश सत्यापित",
+            "verifiedBody": "इसे निजी और सुरक्षित रूप से संग्रहीत रखने के लिए याद रखें"
         },
         "backupWallet": {
             "title": "बैक अप लें स्ट्रॉन्गहोल्ड फाइल में|",
-            "body1": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup.",
-            "body2": "Reasons why digital backups are important:",
-            "reason1": "Easily recover your wallet without typing in your recovery phrase",
-            "reason2": "Import your wallet to other devices",
-            "reason3": "Recover your full transaction history"
+            "body1": "अपने वॉलेट को एक स्ट्रॉन्गहोल्ड फाइल में बैकअप करने के लिए अपना पासवर्ड दर्ज करें। आपका पासवर्ड बैकअप एन्क्रिप्ट करने के लिए उपयोग किया जाता है।",
+            "body2": "डिजिटल बैकअप क्यों महत्वपूर्ण हैं इसके कारण:",
+            "reason1": "अपने पुनर्प्राप्ति वाक्यांश में टाइप किए बिना आसानी से अपने वॉलेट को पुनर्प्राप्त करें",
+            "reason2": "Import your wallets on other devices",
+            "reason3": "अपना पूरा लेन-देन इतिहास पुनर्प्राप्त करें"
         },
         "recoveryPhraseSaved": {
             "title": "सफलतापूर्वक बैकअप होगया",
             "body": "आपने अपना वॉलेट स्ट्रॉन्गहोल्ड में बैकअप कर लिया है"
         },
         "congratulations": {
-            "title": "Wallet setup completed",
-            "body": "Your new wallet is ready to use.",
-            "fundsMigrated": "Funds migrated",
-            "success": "You have successfully migrated your funds to the new network",
-            "exportMigration": "Export migration log and finish setup"
+            "title": "वॉलेट सेटअप पूरा हुआ",
+            "body": "आपका वॉलेट उपयोग के लिए तैयार है",
+            "fundsMigrated": "फंड्स माइग्रेट हुए",
+            "success": "आपने अपने धन को नए नेटवर्क में सफलतापूर्वक स्थानांतरित कर दिया है",
+            "exportMigration": "निर्यात माइग्रेशन लॉग और सेटअप फिनिश करिए"
         },
         "import": {
-            "title": "Recover or migrate funds",
-            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
-            "importSeed": "I have an 81 character seed",
-            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
-            "importMnemonic": "I have a Firefly recovery phrase",
-            "importMnemonicDescription": "Enter your secret phrase to recover your wallet",
-            "importFile": "I have a file backup",
-            "importFileDescription": "Upload a Seedvault or Stronghold file"
+            "title": "धनराशि का पुनर्प्राप्ति या विस्थापित करे",
+            "body": "यदि आपके पास मौजूदा सीड या वॉलेट बैकअप फ़ाइल है, तो आप इसे यहाँ आयात कर सकते हैं। यदि आप पुराने नेटवर्क फंड रखते हैं, तो आपको क्रिसलिस नेटवर्क में जाने के लिए माइग्रेशन चरणों के माध्यम से लिया जाएगा।",
+            "importSeed": "मेरे पास 81 वर्णों का सीड है",
+            "importSeedDescription": "एक सीड दर्ज करें और क्रिसलिस के लिए धन स्थानांतरित करें",
+            "importMnemonic": "मेरे पास फायरफ्लाई वसूली वाक्यांश है",
+            "importMnemonicDescription": "Enter your recovery phrase to recover your wallets",
+            "importFile": "मेरे पास एक फाइल में बैकअप है",
+            "importFileDescription": "एक सीड़वॉल्ट या स्ट्रॉन्गहोल्ड फ़ाइल अपलोड करें"
         },
         "importFromText": {
             "seed": {
-                "title": "Type your seed to commence migration",
-                "body": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
-                "enter": "Enter your seed"
+                "title": "माइग्रेशन प्रारंभ करने के लिए अपना सीड लिखें",
+                "body": "एक सीड में 81 वर्ण होते हैं। इसका उपयोग पुराने ट्रिनिटी वॉलेट से पुनर्प्राप्त करने के लिए किया जाता है।",
+                "enter": "अपना सीड डालें"
             },
             "mnemonic": {
-                "title": "Type your recovery phrase",
-                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
-                "enter": "Enter your secret recovery phrase"
+                "title": "अपना पुनर्प्राप्ति वाक्यांश लिखें",
+                "body": "एक पुनर्प्राप्ति वाक्यांश 24 शब्द लंबा है, सभी निचले मामले, बीच के रिक्त स्थान के साथ। इसका उपयोग मौजूदा फायरफ्लाई वॉलेट को पुनर्प्राप्त करने के लिए किया जाता है।",
+                "enter": "अपना सीड या पुनर्प्राप्ति वाक्यांश दर्ज करें"
             },
-            "seedDetected": "81 character seed detected",
-            "phraseDetected": "24 word recovery phrase detected",
-            "checksum": "Checksum"
+            "seedDetected": "81 वर्ण सीड प्राप्त हुए",
+            "phraseDetected": "24 शब्द रिकवरी वाक्यांश प्राप्त हुए",
+            "checksum": "चेकसम"
         },
         "importFromFile": {
-            "title": "Restore your wallet using a backup file",
-            "body": "अपने बटुए को पुनर्स्थापित करने के लिए एक बैकअप फ़ाइल आयात करें। बैकअप या तो एक स्ट्रॉन्गहोल्ड फाइल (.stronghold) या एक ट्रिनिटी सीड़वॉल्ट फाइल (.kdbx) हो सकते हैं।"
+            "title": "Restore your wallets using a backup file",
+            "body": "Import a backup file to restore your wallets. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
         },
         "importBackupPassword": {
-            "title": "एक सीड़वॉल्ट या स्ट्रॉन्गहोल्ड से अपने वॉलेट को पुनर्स्थापित करें",
+            "title": "Restore your wallets from a SeedVault or Stronghold",
             "body1": "कृपया अपना बैकअप पासवर्ड डालें",
             "body2": "यह वह पासवर्ड है जिसे आपने पहली बार अपना बैकअप बनाते समय सेट किया था।"
         },
         "importSuccess": {
             "title": "आपने अपना बैकअप सफलतापूर्वक प्राप्त कर लिया है",
-            "body": "अब आप अपना नया वॉलेट सेट कर सकते हैं।",
+            "body": "You can now set up your new profile.",
             "seedvaultTitle": "Successfully imported",
             "seedvaultBody": "Your password is correct, you can now continue.",
             "strongholdTitle": "Successfully imported",
@@ -156,7 +138,7 @@
             "body2": "इसमें कुछ समय लग सकता है। प्रवास के दौरान अपने डिवाइस को बंद न करें।",
             "existing": "आपका पराना वालेट",
             "new": "आपका नए वालेट",
-            "learn": "Learn about the migration",
+            "learn": "प्रवास के बारे में जानें",
             "beginMigration": "Begin Migration",
             "migrating": "Migrating funds...",
             "migrated": "{balance} migrated",
@@ -168,7 +150,7 @@
             "signingBundle": "Signing bundle",
             "broadcastingBundle": "Broadcasting bundle",
             "miningBundle": "Mining bundle",
-            "problemRestoringWallet": "There was a problem restoring your wallet. Please try again.",
+            "problemRestoringWallet": "There was a network error restoring your wallet. Please try again.",
             "minimumMigrationAmountSpentAddresses": "The minimum migration amount for each spent address is 1 Mi. Check again if your balance doesn't look right.",
             "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
             "cannotMigrateAllYourFunds": "We cannot migrate all of your funds because some addresses are too low in value. You can proceed anyway. {value} will be lost.",
@@ -219,7 +201,7 @@
             "settings": "सैटिन्ग्स",
             "generalSettings": {
                 "title": "सामान्य सेटिंग्स",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Configure your app's appearance and other general settings"
             },
             "security": {
                 "title": "सुरक्षा",
@@ -238,7 +220,7 @@
                 "description": "Change your profile name or set an avatar"
             },
             "sync": {
-                "title": "खाता को सिंक करें",
+                "title": "Sync wallets",
                 "description": ""
             },
             "theme": {
@@ -259,15 +241,15 @@
             },
             "exportStronghold": {
                 "title": "Export Backup",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallet and latest transaction history."
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history."
             },
             "appLock": {
                 "title": "Automatic Lock",
-                "description": "Time elapsed before your wallet locks and logs you out"
+                "description": "Inactivity time before your wallets lock and you are logged out"
             },
             "changePassword": {
                 "title": "पासवर्ड परिवर्तित करें",
-                "description": "Your password is used to secure your wallet. You must use a strong password to protect your funds."
+                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds."
             },
             "changePincode": {
                 "title": "पिन कोड बदलें",
@@ -282,12 +264,12 @@
                 "description": "Perform an extended search of your addresses for tokens."
             },
             "hiddenAccounts": {
-                "title": "Hidden accounts",
-                "description": "Selecting this options will show accounts that were previously hidden."
+                "title": "Hidden wallets",
+                "description": "Selecting this options will show wallets that were previously hidden."
             },
             "deleteProfile": {
                 "title": "Delete profile",
-                "description": "Deletes your entire wallet, profile and transaction history. Make sure you have a backup."
+                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup."
             },
             "deepLinks": {
                 "title": "डीप लिंक्स",
@@ -303,7 +285,7 @@
             },
             "configureNodeList": {
                 "title": "Select a node",
-                "description": "Manage the list of nodes your wallet connects to.",
+                "description": "Manage the list of IOTA network nodes you connect to.",
                 "primaryNode": "Primary node",
                 "excludeNode": "Exclude node",
                 "includeNode": "Include node",
@@ -372,8 +354,8 @@
                 },
                 "strongholdStatus": {
                     "title": "Wallet Status",
-                    "locked": "Stronghold locked",
-                    "unlocked": "Stronghold unlocked"
+                    "locked": "Locked",
+                    "unlocked": "Unlocked"
                 },
                 "strongholdBackup": {
                     "title": "Wallet Backup",
@@ -397,7 +379,7 @@
     "popups": {
         "password": {
             "title": "पासवर्ड अपेक्षित है",
-            "subtitle": "Please enter your password to unlock Stronghold",
+            "subtitle": "Please enter your password to unlock your wallets",
             "backup": "Please enter your password to export a backup"
         },
         "qr": {
@@ -408,34 +390,35 @@
             "upToDateTitle": "फायरफ्लाई नवीनतम है",
             "upToDateDescription": "आप फायरफ्लाई का नवीनतम और सबसे सुरक्षित संस्करण चला रहे हैं",
             "updateAvailable": "फायरफ्लाई अपडेट उपलब्ध है",
-            "updateDetails": "संस्करण {version} - {date}"
+            "updateDetails": "संस्करण {version} - {date}",
+            "noAutoUpdate": "Auto-update is disabled in this Windows version, please go to https://firefly.iota.org to download the update."
         },
         "backup": {
             "title": "पिछला बैकअप: {date}",
             "lastBackup": "आपका पिछला बैकअप {date}",
-            "backupDescription": "यह सुनिश्चित करने के लिए नियमित रूप से बैकअप लेना महत्वपूर्ण है कि आपके पास अपने खातों और लेनदेन के इतिहास की एक प्रति है",
+            "backupDescription": "It is important to back up regularly to ensure you have a copy of your wallets and transaction history.",
             "backupWarning": "यदि आप अपना बैकअप और पुनर्प्राप्ति वाक्यांश खो देते हैं तो आप अपने फंड तक पहुंच खो देंगे",
             "notBackedUp": "बैकअप नहीं है",
-            "notBackedUpDescription": "आपने अपने स्ट्रॉन्गहोल्ड का बैकअप नहीं किया है",
+            "notBackedUpDescription": "You have not backed up your wallets",
             "saving": "Saving..."
         },
         "deleteAccount": {
             "title": "Delete {name}?",
-            "body": "This account has no transaction history. It can safely be deleted.",
+            "body": "This wallet has no transaction history. It can safely be deleted.",
             "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Delete account",
+            "hideAccount": "Delete wallet",
             "errorTitle": "Unable to delete {name}",
-            "errorBody1": "You cannot delete this account, you must have at least one."
+            "errorBody1": "You cannot delete this wallet, you must have at least one."
         },
         "hideAccount": {
             "title": "Hide {name}?",
-            "body": "You can find this account later by enabling \"Show hidden accounts\" in Advanced Settings.",
+            "body": "You can find this wallet later by enabling \"Show hidden wallets\" in Advanced Settings.",
             "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Hide account",
+            "hideAccount": "Hide wallet",
             "errorTitle": "Unable to hide {name}",
-            "errorBody1": "To hide an account it must have 0 balance.",
-            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
-            "errorBody3": "You cannot hide this account, you must have at least one."
+            "errorBody1": "To hide a wallet it must have 0 balance.",
+            "errorBody2": "You currently have {balance} remaining on this wallet. Please move these funds to a different wallet and try again.",
+            "errorBody3": "You cannot hide this wallet, you must have at least one."
         },
         "addressHistory": {
             "title": "{name} address history",
@@ -478,8 +461,8 @@
         },
         "balanceFinder": {
             "title": "Balance finder",
-            "body": "Perform a more exhaustive search of addresses to find missing balances.",
-            "totalWalletBalance": "Total wallet balance",
+            "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
+            "totalWalletBalance": "Total balance",
             "typePassword": "Type your password to allow searching."
         },
         "riskFunds": {
@@ -492,6 +475,12 @@
             "body": "You have funds on spent addresses, but the information needed to secure them was not found. This can happen if you made transactions a long time ago. You can proceed but {value} are at risk during migration.",
             "learnMore": "Learn more about spent addresses",
             "proceed": "I understand the risk"
+        },
+        "snapshot": {
+            "title": "Ongoing network upgrade",
+            "body": "The Chrysalis network upgrade has begun.",
+            "bodyMigration": "Migration is disabled until it is complete.",
+            "bodyFirefly": "Firefly is disabled until it is complete. Token migration will still be possible afterwards."
         }
     },
     "charts": {
@@ -499,8 +488,8 @@
         "outgoingMi": "Outgoing {value}",
         "portoflio": "Portfolio",
         "token": "Token",
-        "accountValue": "Account Value",
-        "accountActivity": "Account Activity",
+        "accountValue": "Wallet Value",
+        "accountActivity": "Wallet Activity",
         "timeframe1Hour": "1 hour",
         "timeframe1Day": "1 day",
         "timeframe1Week": "1 week",
@@ -554,11 +543,11 @@
         "updateFirefly": "अपडेट फायरफ्लाई",
         "restartNow": "Restart now",
         "saveBackup": "Save Stronghold backup",
-        "customizeAcount": "Customise account",
+        "customizeAcount": "Customise wallet",
         "viewAddressHistory": "एड्रेस का इतिहास देखें",
-        "hideAccount": "Hide account",
-        "showAccount": "Unhide account",
-        "deleteAccount": "Delete account",
+        "hideAccount": "Hide wallet",
+        "showAccount": "Unhide wallet",
+        "deleteAccount": "Delete wallet",
         "max": "अधिकतम",
         "addNode": "नया नोड जोड़ें",
         "updateNode": "Update node",
@@ -574,7 +563,7 @@
         "copy": "Copy",
         "paste": "Paste",
         "selectAll": "Select All",
-        "addAccount": "Add Account",
+        "addAccount": "Add Wallet",
         "checkForUpdates": "Check for Updates",
         "reportAnIssue": "Report an Issue",
         "clear": "Clear",
@@ -589,12 +578,13 @@
         "readDocumentation": "Read the documentation",
         "visitFaq": "Visit FAQ",
         "viewStatus": "View status",
-        "showHiddenAccounts": "Show hidden accounts",
+        "showHiddenAccounts": "Show hidden wallets",
         "confirm": "Confirm",
         "findBalances": "Find balances",
         "searchBalances": "Search for balances",
         "searchAgain": "Search again",
-        "searching": "Searching..."
+        "searching": "Searching...",
+        "closeFirefly": "Close Firefly"
     },
     "general": {
         "password": "पासवर्ड",
@@ -612,11 +602,11 @@
         "sendFunds": "धनराशि भेजें",
         "sendToAddress": "Send to address",
         "scanQrOrPaste": "QR कोड स्कैन करें या एक पता पेस्ट करें",
-        "moveFundsBetweenAccounts": "अपने खातों के बीच धन ले जाएँ",
+        "moveFundsBetweenAccounts": "Move funds between wallets",
         "sendTokensToAddress": "एक पते पर टोकन भेजें",
-        "manageAccount": "खाते का प्रबंधन",
-        "customizeAcount": "Customize your account",
-        "account": "खाता",
+        "manageAccount": "Manage Wallet",
+        "customizeAcount": "Customize your wallet",
+        "account": "Wallet",
         "sendingToAddress": "स्वयं के पते पर भेजा जा रहा है",
         "amount": "रकम",
         "addAddress": "पता जोड़े",
@@ -637,25 +627,25 @@
         "lightTheme": "लाइट थीम",
         "darkTheme": "डार्क थीम",
         "balance": "Balance",
-        "accountBalance": "खाते की बैलेंस राशि",
+        "accountBalance": "Wallet Balance",
         "incoming": "आने वाला",
         "outgoing": "बाहर जाने वाले",
         "totalIn": "Total in",
         "totalOut": "Total out",
-        "accounts": "खाता",
-        "myAccounts": "My Accounts",
+        "accounts": "Wallets",
+        "myAccounts": "My Wallets",
         "automaticNodeSelection": "स्वचालित नोड चयन",
         "manualNodeSelection": "मैन्युअली नोड चुनना",
         "profiles": "प्रोफाइल्स",
         "developerProfile": "डेवलपर मोड",
         "developerProfileDescription": "Allows you to connect to testnets",
         "dev": "देव",
-        "createAccount": "Create an Account",
-        "accountName": "अकाउंट नाम",
+        "createAccount": "Create a Wallet",
+        "accountName": "Wallet name",
         "latestTransactions": "नवीनतम ट्रांसक्शन्स",
         "transactions": "ट्रांसक्शन्स",
         "security": "सुरक्षा",
-        "accountAddress": "खाते का पता",
+        "accountAddress": "Wallet Address",
         "nodes": "नोड्स",
         "wallet": "Wallet",
         "help": "Help",
@@ -667,25 +657,26 @@
         "status": "स्टेटस",
         "confirmed": "Confirmed",
         "pending": "Pending",
-        "noAccounts": "You have no accounts, please create one.",
+        "noAccounts": "You have no wallets, please create one.",
         "loadingAccounts": "Loading, please wait...",
         "addProfile": "Add Profile",
         "noRecentHistory": "No recent history",
-        "transferSyncing": "Syncing account",
+        "firstSync": "Syncing history, this may take a while...",
+        "transferSyncing": "Syncing wallet",
         "transferSelectingInputs": "Selecting inputs",
         "transferRemainderAddress": "Generating remainder deposit address",
         "transferSigning": "Signing the transaction",
         "transferPow": "Performing PoW",
         "transferBroadcasting": "Broadcasting transaction",
         "transferComplete": "Transfer complete",
-        "creatingAccount": "Creating account, please wait...",
-        "updatingAccount": "Updating account, please wait...",
-        "accountSyncing": "Account is syncing",
-        "accountSyncComplete": "Account sync complete",
+        "creatingAccount": "Creating wallet, please wait...",
+        "updatingAccount": "Updating wallet, please wait...",
+        "accountSyncing": "Wallet is syncing",
+        "accountSyncComplete": "Wallet sync complete",
         "passwordUpdating": "Updating password...",
         "passwordSuccess": "Updated password successfully",
         "passwordFailed": "Updating password failed",
-        "syncingAccounts": "Syncing accounts...",
+        "syncingAccounts": "Syncing wallets...",
         "exportingStronghold": "Exporting Stronghold...",
         "exportingStrongholdSuccess": "Exported Stronghold successfully",
         "exportingStrongholdFailed": "Exporting Stronghold failed",
@@ -700,7 +691,7 @@
         "passwordStrength4": "Strong",
         "creatingProfile": "Creating profile, please wait...",
         "fundMigration": "Fund migration",
-        "accountRemoved": "This account is hidden. Unhide it to perform transfers.",
+        "accountRemoved": "This wallet is hidden. Unhide it to perform transfers.",
         "receivingTo": "Receiving to {account}",
         "sendingFrom": "Sending from {account}",
         "receivedTo": "Received to {account}",
@@ -729,7 +720,7 @@
         "calcMinutesRemaining": "Calculating minutes remaining...",
         "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "Copied to clipboard",
-        "accountsSynchronized": "Account synchronization complete",
+        "accountsSynchronized": "Wallet synchronization complete",
         "migratedAccountChrysalisDown": "Your funds will become available after Chrysalis on 28th April",
         "migratedAccountChrysalisUp": "Your funds will become available shortly"
     },
@@ -761,10 +752,10 @@
             "incorrect": "Your current PIN is incorrect."
         },
         "account": {
-            "length": "Your account name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "empty": "You must use your latest account before creating a new one.",
-            "notEmpty": "You must transfer your balance before deleting this account.",
-            "duplicate": "An account with this name already exists.",
+            "length": "Your wallet name can't be longer than {length, plural, one {1 character} other {# characters}}.",
+            "empty": "You must use your latest wallet before creating a new one.",
+            "notEmpty": "You must transfer your balance before deleting this wallet.",
+            "duplicate": "A wallet with this name already exists.",
             "tilde": "A profile name can't start with the '~' character.",
             "control": "A profile name can't contain a control character.",
             "startDot": "A profile name can't start with the '.' character.",
@@ -779,8 +770,8 @@
             "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
             "wrongAddressFormat": "The address is not correctly formatted.",
             "invalidAddress": "The address is not valid.",
-            "insufficientFunds": "This account has insufficient funds.",
-            "noToAccount": "You have not selected an account to send the funds to.",
+            "insufficientFunds": "This wallet has insufficient funds.",
+            "noToAccount": "You have not selected a wallet to send the funds to.",
             "sendingDust": "You cannot send less than 1 Mi.",
             "leavingDust": "You cannot leave less than 1 Mi on your address."
         },

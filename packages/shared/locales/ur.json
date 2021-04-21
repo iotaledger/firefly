@@ -1,497 +1,486 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Send, Receive & Manage your IOTA tokens",
-            "body": "Firefly is the official wallet of IOTA."
+            "title": "آیوٹا ٹوکن بھیجیں، وصول کریں اور ان کا نظم کریں",
+            "body": "Firefly is the official wallet software of IOTA."
         },
         "legal": {
-            "title": "Privacy Policy & Terms of Service",
-            "body": "Please review the Privacy Policy and Terms of Service.",
-            "privacyPolicy": {
-                "title": "Privacy Policy",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
-            "termsOfService": {
-                "title": "Terms of Service",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
-            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
+            "title": "رازداری کی پالیسی اور خدمات کی شرائط",
+            "body": "براہ کرم رازداری کی پالیسی اور خدمات کی شرائط کا جائزہ لیں.",
+            "checkbox": "میں نے نجی معلومات کی حفاظتی پالیسی اور خدمات کی شرائط کو قبول کرلیا ہے"
         },
         "appearance": {
-            "title": "Appearance",
-            "body": "Choose your wallet’s theme."
+            "title": "وضع",
+            "body": "اپنی ایپ کے تھیم کا انتخاب کریں."
         },
         "profile": {
-            "title": "Create a profile",
-            "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
-            "profileName": "Profile Name"
+            "title": "ایک پروفائل بنائیں",
+            "body1": "آپ اپنے والٹ کو منظم کرنے اور رازداری کو بہتر بنانے کے لئے متعدد صارف پروفائلز تشکیل دے سکتے ہیں.",
+            "body2": "ابھی کے لئے ، آئیے اپنے پہلے پروفائل نام کے ساتھ شروع کریں۔ آپ بعد میں مزید پروفائلز شامل کرسکتے ہیں.",
+            "profileName": "پروفائل کا نام"
         },
         "setup": {
-            "title": "Set up a wallet",
-            "chrysalisTitle": "Chrysalis Network Update",
-            "chrysalisBody": "From April 21st, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
-            "learnMore": "Learn about the migration"
+            "title": "ایک والٹ بنائیں",
+            "chrysalisTitle": "کریسالیس نیٹ ورک اپ ڈیٹ",
+            "chrysalisBody": "۲۱ اپریل سے ، صارفین اپنے ٹوکن نئے کرسالیس نیٹ ورک میں منتقل کرسکتے ہیں۔ ہم آپ کو مشورہ دیتے ہیں کہ جتنی جلدی ممکن ہو اپنے موجودہ ٹوکن منتقل کریں.",
+            "learnMore": "منتقلی کے عمل کے بارے میں جانیں"
         },
         "secure": {
-            "title": "Secure your wallet",
-            "body1": "Save and print the Recovery Kit PDF template.",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallet."
+            "title": "اپنا والٹ محفوظ بنائیں",
+            "body1": "ریکوری کٹ پی ڈی ایف ٹیمپلیٹ کو محفوظ اور پرنٹ کریں.",
+            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallets."
         },
         "password": {
-            "title": "Create a password",
-            "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
-            "body2": "It is recommended that you write down your password in your Recovery Kit."
+            "title": "پاس ورڈ تخلیق کریں",
+            "body1": "اپنے فنڈز کی حفاظت کے لیئے آپ کو ایک مضبوط پاس ورڈ کی ضرورت ہے. الفاظ کا ایک مجموعہ استعمال کریں ، اور عام جملے ، نام یا تاریخوں سے پرہیز کریں.",
+            "body2": "تجویز ہے کہ آپ اپنی ریکوری کٹ میں اپنا پاس ورڈ لکھ لیں."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body2": "Keep your PIN safe!"
+            "body1": "Set up a login PIN to make sure that only you can enter your profile.",
+            "body2": "اپنا پن محفوظ رکھیں!"
         },
         "pin": {
-            "title": "Set up PIN code",
-            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
-            "body2": "Use numbers only"
+            "title": "پن کوڈ مرتب کریں",
+            "body1": "نیچے ۶ ہندسوں کا پن درج کریں۔ اپنی پروفائل تک رسائی حاصل کرنے کے لیئے آپ سے آپ کا PIN پوچھا جائے گا.",
+            "body2": "صرف نمبر استعمال کریں"
         },
         "confirmPin": {
-            "title": "Verify your PIN code",
-            "body1": "Your PIN keeps your balance and transactions private.",
-            "body2": "Re-enter your PIN code to proceed. "
+            "title": "اپنے پن کوڈ کی تصدیق کریں",
+            "body1": "آپ کا پن آپ کے بیلنس اور لین دین کو نجی رکھتا ہے.",
+            "body2": "آگے بڑھنے کے لئے اپنا پن کوڈ دوبارہ درج کریں."
         },
         "backup": {
-            "title": "Back up your wallet",
-            "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
-            "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
-            "body3": "If you lose your recovery phrase, you may lose your funds."
+            "title": "اپنے والٹ کا بیک اپ بنائیں",
+            "body1": "اب آپ کو ریکوری کے لیئے استعمال ہونے والا جملہ دکھایا جائے گا۔ اسے اپنی ریکوری کٹ میں لکھ لیں.",
+            "body2": "کسی کے ساتھ اپنے ریکوری کے فقرے کا اشتراک نہ کریں۔ اسے کہیں سے بھی آپ کے ٹوکن تک رسائی حاصل کرنے کیلئے استعمال کیا جاسکتا ہے.",
+            "body3": "اگر آپ اپنا ریکوری کا جملہ کھو دیتے ہیں تو ، آپ اپنے فنڈز کھو سکتے ہیں."
         },
         "recoveryPhrase": {
-            "title": "Recovery phrase",
-            "body1": "In your Recovery Kit, write down the words in the exact order shown.",
-            "body2": "Keep this private and safely stored.",
-            "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
-            "revealRecoveryPhrase": "Reveal recovery phrase",
-            "hideRecoveryPhrase": "Hide recovery phrase"
+            "title": "ریکوری کا جملہ",
+            "body1": "اپنی ریکوری کٹ میں ، دکھاے گئے الفاظ عین مطابق لکھیں.",
+            "body2": "اسے نجی اور محفوظ طریقے سے محفوظ رکھیں.",
+            "body3": "تحریری بیک اپ رکھنا ضروری ہے۔ کمپیوٹر اکثر ناکام ہوجاتے ہیں اور فائلیں خراب ہوسکتی ہیں.",
+            "revealRecoveryPhrase": "ریکوری کا جملہ افشا کریں",
+            "hideRecoveryPhrase": "ریکوری کا جملہ چھپائیں"
         },
         "verifyRecoveryPhrase": {
-            "title": "Verify recovery phrase",
-            "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
-            "word": "Word",
-            "verified": "Recovery phrase verified",
-            "verifiedBody": "Remember to keep it private and safely stored."
+            "title": "ریکوری کے جملے کی تصدیق کریں",
+            "body": "آئیں چیک کریں آیا کہ آپ نے فقرے کو صحیح لکھا ہے۔ براہ کرم ہر ایک لفظ کو نمبر کے مطابق منتخب کریں.",
+            "word": "لفظ",
+            "verified": "ریکوری جملے کی توثیق ہو چکی",
+            "verifiedBody": "اسے نجی اور محفوظ طریقے سے محفوظ رکھنا یاد رکھیں."
         },
         "backupWallet": {
-            "title": "Back up to a Stronghold file",
-            "body1": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup.",
-            "body2": "Reasons why digital backups are important:",
-            "reason1": "Easily recover your wallet without typing in your recovery phrase",
-            "reason2": "Import your wallet to other devices",
-            "reason3": "Recover your full transaction history"
+            "title": "ایک سٹرونگ ہولڈ فائل پر بیک اپ بنائیں",
+            "body1": "Enter your password to backup your wallets to a Stronghold file. Your password is used to encrypt the backup.",
+            "body2": "ڈیجیٹل بیک اپ اہم ہونے کی وجوہات:",
+            "reason1": "Easily recover your wallets without typing in your recovery phrase",
+            "reason2": "Import your wallets on other devices",
+            "reason3": "اپنی لین دین کی مکمل تاریخ ریکور کریں"
         },
         "recoveryPhraseSaved": {
-            "title": "Successfully backed up",
-            "body": "You have backed up your wallet to a Stronghold."
+            "title": "کامیابی کے ساتھ بیک اپ لیا گیا",
+            "body": "آپ نے اہنے والٹس کو ایک سٹرانگ ہولڈ پر بیک اپ کر لیا ہے."
         },
         "congratulations": {
-            "title": "Wallet setup completed",
-            "body": "Your new wallet is ready to use.",
-            "fundsMigrated": "Funds migrated",
-            "success": "You have successfully migrated your funds to the new network",
-            "exportMigration": "Export migration log and finish setup"
+            "title": "والٹ کا سیٹ اپ مکمل ہوگیا",
+            "body": "آپ کا نیا والٹ استعمال کرنے کے لئے تیار ہے.",
+            "fundsMigrated": "فنڈز منتقل ہو چکے",
+            "success": "آپ نے اپنے فنڈز کو کامیابی کے ساتھ نئے نیٹ ورک پر منتقل کردیا ہے",
+            "exportMigration": "منتقلی لاگ برآمد اور سیٹ اپ ختم کریں"
         },
         "import": {
-            "title": "Recover or migrate funds",
-            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
-            "importSeed": "I have an 81 character seed",
-            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
-            "importMnemonic": "I have a Firefly recovery phrase",
-            "importMnemonicDescription": "Enter your secret phrase to recover your wallet",
-            "importFile": "I have a file backup",
-            "importFileDescription": "Upload a Seedvault or Stronghold file"
+            "title": "فنڈز ریکور یا منتقل کریں",
+            "body": "اگر آپ کے پاس موجودہ سییڈ یا والٹ کی بیک اپ فائل ہے تو ، آپ اسے یہاں درآمد کرسکتے ہیں۔ اگر آپ کے پاس نیٹ ورک کے پرانے فنڈز ہیں تو آپ کو کرسالیس نیٹ ورک پر منتقل کرنے کے اقدامات سے گزارا جائے گا.",
+            "importSeed": "میرے پاس ۸۱ کرداروں کا سییڈ ہے",
+            "importSeedDescription": "سیڈ درج کریں اور کرسالیس میں فنڈ منتقل کریں",
+            "importMnemonic": "میرے پاس فائر فلائی کا ریکوری کا جملہ ہے",
+            "importMnemonicDescription": "Enter your recovery phrase to recover your wallets",
+            "importFile": "میرے پاس فائل بیک اپ ہے",
+            "importFileDescription": "سیڈ والؐٹ یا سٹرانگ ہولڈ کی فائل اپ لوڈ کریں"
         },
         "importFromText": {
             "seed": {
-                "title": "Type your seed to commence migration",
-                "body": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
-                "enter": "Enter your seed"
+                "title": "منتقلی کا عمل شروع کرنے کے لئے اپنا سیڈ ٹائپ کریں",
+                "body": "A seed consists of 81 characters. This is used to recover from the older Trinity app.",
+                "enter": "اپنا سیڈ داخل کریں"
             },
             "mnemonic": {
-                "title": "Type your recovery phrase",
-                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
-                "enter": "Enter your secret recovery phrase"
+                "title": "اپنا ریکوری کا فقرا ٹائپ کریں",
+                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly wallets.",
+                "enter": "اپنا خفیہ ریکوری کا جملہ درج کریں"
             },
-            "seedDetected": "81 character seed detected",
-            "phraseDetected": "24 word recovery phrase detected",
-            "checksum": "Checksum"
+            "seedDetected": "۸۱ حروف کا سیڈ مل چکا",
+            "phraseDetected": "۲۴ الفاظ کس ریکوری کا جملہ مل چکا",
+            "checksum": "چیک سَم"
         },
         "importFromFile": {
-            "title": "Restore your wallet using a backup file",
-            "body": "Import a backup file to restore your wallet. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+            "title": "Restore your wallets using a backup file",
+            "body": "Import a backup file to restore your wallets. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
         },
         "importBackupPassword": {
-            "title": "Restore your wallet from a SeedVault or Stronghold",
-            "body1": "Please enter your backup password.",
-            "body2": "This is the password you set when you first created your backup."
+            "title": "Restore your wallets from a SeedVault or Stronghold",
+            "body1": "براہ کرم اپنا بیک اپ پاس ورڈ درج کریں.",
+            "body2": "یہ پاس ورڈ ہے آپ نے اس وقت ترتیب دیا تھا جب آپ نے پہلی بار اپنا بیک اپ بنایا تھا."
         },
         "importSuccess": {
-            "title": "You have successfully recovered your backup",
-            "body": "You can now set up your new wallet.",
-            "seedvaultTitle": "Successfully imported",
-            "seedvaultBody": "Your password is correct, you can now continue.",
-            "strongholdTitle": "Successfully imported",
-            "strongholdBody": "Your password is correct, you can now continue."
+            "title": "آپ نے کامیابی سے اپنا بیک اپ ریکور کرلیا ہے",
+            "body": "You can now set up your new profile.",
+            "seedvaultTitle": "کامیابی کے ساتھ درآمد کر لیا گیا",
+            "seedvaultBody": "آپ کا پاس ورڈ درست ہے ، اب آپ جاری رکھ سکتے ہیں.",
+            "strongholdTitle": "کامیابی کے ساتھ درآمد کر لیا گیا",
+            "strongholdBody": "آپ کا پاس ورڈ درست ہے ، اب آپ جاری رکھ سکتے ہیں."
         },
         "migrate": {
-            "title": "Migrate your funds",
-            "body1": "This is an automated process to transfer your funds to your new wallet.",
-            "body2": "It may take some time. Do not turn off your device during the migration.",
-            "existing": "Your old wallet",
-            "new": "Your new wallet",
-            "learn": "Learn about the migration",
-            "beginMigration": "Begin Migration",
-            "migrating": "Migrating funds...",
-            "migrated": "{balance} migrated",
-            "migrationFailed": "Migration Failed",
-            "noAddressesForMigration": "Please select the addresses you wish to secure.",
-            "restoringWallet": "Restoring wallet...",
-            "findingBalance": "Finding balance...",
-            "incorrectSeedVaultPassword": "Incorrect SeedVault password.",
-            "signingBundle": "Signing bundle",
-            "broadcastingBundle": "Broadcasting bundle",
-            "miningBundle": "Mining bundle",
-            "problemRestoringWallet": "There was a problem restoring your wallet. Please try again.",
-            "minimumMigrationAmountSpentAddresses": "The minimum migration amount for each spent address is 1 Mi. Check again if your balance doesn't look right.",
-            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
-            "cannotMigrateAllYourFunds": "We cannot migrate all of your funds because some addresses are too low in value. You can proceed anyway. {value} will be lost.",
-            "error": "There was an error migrating your funds. Please try again."
+            "title": "اپنے فنڈز منتقل کریں",
+            "body1": "آپ کے فنڈز کو آپکے نئے والٹ میں منتقل کرنے کے لئے یہ ایک خودکار عمل ہے.",
+            "body2": "اس میں کچھ وقت لگ سکتا ہے۔ منتقلی کے دوران اپنے آلے کو بند نہ کریں.",
+            "existing": "آپکا پرانا والٹ",
+            "new": "آپکا نیا والٹ",
+            "learn": "منتقلی کے عمل کے بارے میں جانیں",
+            "beginMigration": "منتقلی شروع کریں",
+            "migrating": "فنڈز منتقل ہو رہے ہیں...",
+            "migrated": "{balance} منتقل ہوچکا",
+            "migrationFailed": "منتقلی ناکام ہو گئی",
+            "noAddressesForMigration": "برائے کرم ان ایڈریسز کو منتخب کریں جن کی آپ حفاظت کرنا چاہتے ہیں.",
+            "restoringWallet": "والٹ بحال کیا جا ریا ہے...",
+            "findingBalance": "بیلینس معلوم کیا جا رہا ہے...",
+            "incorrectSeedVaultPassword": "غلط سیڈ والٗٹ پاس ورڈ.",
+            "signingBundle": "بنڈل پر دستخط کیا جا رہا ہے",
+            "broadcastingBundle": "بنڈل براڈکاسٹ کیا جا رہا ہے",
+            "miningBundle": "بنڈل کو تصدیق شدہ کیا جا رہا ہے",
+            "problemRestoringWallet": "آپ کے والٹ کو بحال کرنے میں نیٹورک کا مسئلہ تھا۔ براہ کرم دوبارہ کوشش کریں.",
+            "minimumMigrationAmountSpentAddresses": "ہر خرچ شدہ ایڈریس کے لئے منتقلی کی کم سے کم رقم ۱Mi ہے۔ اگر آپ کا بیلینس ٹھیک نہیں لگتا ہے تو دوبارہ جانچ کریں.",
+            "tooManyAddressesToMigrate": "آپ کے پاس منتقلی کے لیئے کم بیلنس والے ایڈریس بہت زیادہ ہیں۔ اگر آپ کا بیلینس ٹھیک نہیں لگتا ہے تو دوبارہ جانچ کریں.",
+            "cannotMigrateAllYourFunds": "ہم آپ کے تمام فنڈز کو منتقل نہیں کرسکتے ہیں کیونکہ کچھ ایڈریس کی قیمت بہت کم ہے۔ آپ بہرحال آگے بڑھ سکتے ہیں۔ {value} کھو دیا جائے گا.",
+            "error": "آپ کے فنڈز کو منتقل کرنے میں ایک مسئلہ تھا۔ براہ کرم دوبارہ کوشش کریں."
         },
         "bundleMiningWarning": {
-            "title": "Warning",
-            "body1": "You have funds on one or more spent addresses.",
-            "body2": "We recommend you run an automated process to help secure and transfer these funds safely.",
-            "body3": "If you close the app you will need to restart the whole migration.",
-            "learn": "Learn about spent addresses"
+            "title": "انتباہ",
+            "body1": "آپ کے پاس ایک یا زیادہ خرچ شدہ ایڈریس پر فنڈز ہیں.",
+            "body2": "ہماری تجویز ہے کہ آپ ان فنڈز کو محفوظ طریقے سے منتقل کرنے میں مدد کے لئے ایک خودکار عمل چلائیں.",
+            "body3": "اگر آپ ایپ کو بند کرتے ہیں تو آپ کو پوری منتقلی دوبارہ شروع کرنے کی ضرورت ہوگی.",
+            "learn": "خرچ شدہ ایڈریسز کے بارے میں جانیں"
         },
         "secureSpentAddresses": {
-            "title": "Secure spent addresses",
-            "body1": "You have funds detected on {number, plural, one {# spent address} other {# spent addresses}}.",
-            "body2": "We recommend you run an automated process to help secure and transfer your funds safely.",
-            "error": "You can’t migrate spent addresses with less than 1 Mi"
+            "title": "محفوظ خرچ شدہ ایڈریسز",
+            "body1": "آپکے فنڈز {number, plural, one {# خرچ شدہ ایڈریس} other {# خرچ شدہ ایڈریسز}} پر پائے گئے.",
+            "body2": "ہم آپ کو مشورہ دیتے ہیں کہ اپنے فنڈز کو محفوظ طریقے سے منتقل کرنے میں مدد کے لئے آپ خودکار عمل چلائیں.",
+            "error": "آپ ۱Mi سے کم خرچ شدہ ایڈریس کو منتقل نہیں کرسکتے ہیں"
         },
         "securityCheckCompleted": {
-            "title": "Security check completed",
-            "body1": "We have calculated the security risk level. Running this process again may lower your risk level.",
-            "body2": "When you are happy with the risk level(s) press continue.",
-            "rerun": "Rerun process for selected addresses",
-            "continueMigration": "Continue migration"
+            "title": "سیکیورٹی چیک مکمل ہوا",
+            "body1": "ہم نے حفاظتی رسک کی شدت کا حساب لگایا ہے۔ اس عمل کو دوبارہ چلانے سے آپ کے خطرے کی شدت کم ہوسکتی ہے.",
+            "body2": "جب آپ خطرے کی سطح سے مطمئن ہوں تو جاری کو دبائیں.",
+            "rerun": "منتخب ایڈریسز کے لئے عمل دوبارہ شروع کریں",
+            "continueMigration": "منتقلی جاری رکھیں"
         },
         "securingSpentAddresses": {
-            "title": "Securing spent addresses...",
-            "body1": "This process will take {minutes, plural, one {1 minute} other {# minutes}}.",
-            "body2": "Your computer will run at full capacity, you may wish to do something else while you wait for this to complete."
+            "title": "خرچ شدہ ایڈریسز کی حفاظت...",
+            "body1": "اس عمل کو {minutes, plural, one {1 منٹ درکار ہوگا} other {# منٹ درکار ہوں گے}}.",
+            "body2": "آپ کا کمپیوٹر پوری صلاحیت سے چلایا جائے گا ، آپ اس کے مکمل ہونے کا انتظار کرتے ہوئے کچھ اور کر سکتے ہیں."
         },
         "transferFragmentedFunds": {
-            "body1": "Firefly will now proceed to migrate your funds. This may take a while.",
-            "migrate": "Migrate funds",
-            "transaction": "Transaction {number}",
-            "rerun": "Try again"
+            "body1": "فائر فلائی اب آپ کے فنڈز کو منتقل کرنے کے لئے آگے بڑھے گی۔ اس میں کچھ وقت لگ سکتا ہے.",
+            "migrate": "فنڈز منتقل کریں",
+            "transaction": "ٹرانزیکشن {number}",
+            "rerun": "دوبارہ کوشش کریں"
         },
         "migrateFailed": {
             "title": "To do",
             "body": "To do"
         },
         "balance": {
-            "title": "Your balance",
-            "body": "Make sure your balance is correct before continuing. You can check again if things don't look correct.",
-            "error": "The minimum migration amount is 1 Mi. Check again if your balance doesn't look right.",
-            "zeroBalance": "Try checking again. If you still can't find your balance you might have entered your seed incorrectly."
+            "title": "آپکا بیلینس",
+            "body": "یقینی بنائیں کہ جاری رکھنے سے پہلے آپ کا بیلینس درست ہے۔ اگر کوئی چیز ٹھیک نہیں لگتی ہیں تو آپ دوبارہ جانچ کرسکتے ہیں.",
+            "error": "کم سے کم منتقلی کی رقم ۱Mi ہے۔ اگر آپ کا بیلینس ٹھیک نہیں لگتا ہے تو دوبارہ جانچ کریں.",
+            "zeroBalance": "دوبارہ جانچ کرنے کی کوشش کریں۔ اگر آپ اب بھی اپنا بیلینس نہیں ڈھونڈ سکتے ہیں تو آپ نے اپنے سیڈ کو غلط طریقے سے داخل کیا ہوگ."
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "ترتیبات",
             "generalSettings": {
-                "title": "General Settings",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "title": "عام ترتیبات",
+                "description": "Configure your app's appearance and other general settings"
             },
             "security": {
-                "title": "Security",
-                "description": "Change your password and adjust security-related settings"
+                "title": "سیکورٹی",
+                "description": "اپنا پاس ورڈ تبدیل کریں اور سیکیورٹی سے متعلق ترتیبات کو ایڈجسٹ کریں"
             },
             "advancedSettings": {
-                "title": "Advanced Settings",
-                "description": "Tools and manual settings for technical users"
+                "title": "اعلی درجے کی ترتیبات",
+                "description": "تکنیکی صارفین کے لیئے ٹولز اور دستی ترتیبات"
             },
             "helpAndInfo": {
-                "title": "Help & Information",
-                "description": "Find the answer to a question or get help with an issue"
+                "title": "مدد اور معلومات",
+                "description": "کسی سوال کا جواب تلاش کریں یا کسی مسئلے میں مدد حاصل کریں"
             },
             "profile": {
-                "title": "Profile",
-                "description": "Change your profile name or set an avatar"
+                "title": "پروفائل",
+                "description": "اپنا پروفائل نام تبدیل کریں یا اوتار سیٹ کریں"
             },
             "sync": {
-                "title": "Sync accounts",
+                "title": "والٹس کی ہم آہنگی",
                 "description": ""
             },
             "theme": {
-                "title": "Theme",
+                "title": "تھیم",
                 "description": ""
             },
             "language": {
-                "title": "Language",
+                "title": "زبان",
                 "description": ""
             },
             "currency": {
-                "title": "Currency",
-                "description": "Adjusts balance conversion and updates chart options"
+                "title": "کرنسی",
+                "description": "بیلینس کی تبدیلی اور چارٹ کے آپشنز کو اپ ڈیٹ کرتا ہے"
             },
             "notifications": {
-                "title": "Notifications",
-                "description": "System notifications for transaction events"
+                "title": "اطلاعات",
+                "description": "ٹرانزیکشن کے واقعات کیلئے سسٹم کی اطلاعات"
             },
             "exportStronghold": {
-                "title": "Export Backup",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallet and latest transaction history."
+                "title": "بیک اپ برآمد کریں",
+                "description": "ایک سٹرانگ ہولڈ کی فائل میں برآمد کریں - آپ کے والٹ اور ٹرانزیکشن کی تازہ ترین تاریخ کا ایک مکمل مرموز کردہ بیک اپ."
             },
             "appLock": {
-                "title": "Automatic Lock",
-                "description": "Time elapsed before your wallet locks and logs you out"
+                "title": "خودکار لاک",
+                "description": "غیر فعال ہونے کا وقت جب آپ کے والٹس لاک ہوجاتے ہیں اور آپ لاگ آؤٹ ہوجاتے ہیں"
             },
             "changePassword": {
-                "title": "Change password",
-                "description": "Your password is used to secure your wallet. You must use a strong password to protect your funds."
+                "title": "پاس ورڈ تبدیل کریں",
+                "description": "آپ کا پاس ورڈ آپ کے والٹ کو محفوظ بنانے کے لئے استعمال ہوتا ہے۔ اپنے فنڈز کی حفاظت کے لیئے آپ کو ایک مضبوط پاس ورڈ استعمال کرنا چاہئے."
             },
             "changePincode": {
-                "title": "Change PIN code",
-                "description": "Your PIN keeps your balance and transactions private",
-                "currentPincode": "Current PIN",
-                "newPincode": "New PIN",
-                "confirmNewPincode": "Confirm new PIN",
-                "action": "Change PIN"
+                "title": "پن کوڈ تبدیل کریں",
+                "description": "آپ کا پن آپ کے بیلنس اور ٹرانزیکشن کو نجی رکھتا ہے",
+                "currentPincode": "‏موجودہ پن",
+                "newPincode": "‏نیا پن",
+                "confirmNewPincode": "‏نئے پن کی توثیق کریں",
+                "action": "‏پن تبدیل کریں"
             },
             "balanceFinder": {
-                "title": "Balance finder",
-                "description": "Perform an extended search of your addresses for tokens."
+                "title": "بلینس کا متلاشی",
+                "description": "ٹوکنز کے لیئے اپنے ایڈریسز کی ایک توسیع تلاش کریں."
             },
             "hiddenAccounts": {
-                "title": "Hidden accounts",
-                "description": "Selecting this options will show accounts that were previously hidden."
+                "title": "پوشیدہ والٹس",
+                "description": "ان آپشنز کو منتخب کرنے سے ایسے والٹس دکھائے جائیں گے جو پہلے چھپے ہوئے تھے."
             },
             "deleteProfile": {
-                "title": "Delete profile",
-                "description": "Deletes your entire wallet, profile and transaction history. Make sure you have a backup."
+                "title": "پروفائل حذف کریں",
+                "description": "آپ کا پورا والٹس، پروفائل اور ٹرانزیکشن کی تاریخ کو حذف کرتا ہے۔ یقینی بنائیں کہ آپ کا بیک اپ موجود ہے."
             },
             "deepLinks": {
-                "title": "Deep links",
-                "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
+                "title": "گہرے لنکس",
+                "description": "//:iota لنک پر کلک کرنے پر فائر فلی میں ٹرانزیکشن کا ڈیٹا خود بخود پُر کریں"
             },
             "developerMode": {
-                "title": "Developer mode",
-                "description": "Connect to testnets and other developer features"
+                "title": "ڈویلپر موڈ",
+                "description": "ٹیسٹ نیٹس اور دیگر ڈویلپر خصوصیات سے کنکٹ کریں"
             },
             "nodeSettings": {
-                "title": "Node settings",
-                "description": "Select Manual to configure the node settings and connect to your own node"
+                "title": "نوڈ کی ترتیبات",
+                "description": "نوڈ کی ترتیبات کو تشکیل دینے اور اپنے اپنے نوڈ سے جڑنے کے لیئے مینول کا انتخاب کریں"
             },
             "configureNodeList": {
-                "title": "Select a node",
-                "description": "Manage the list of nodes your wallet connects to.",
-                "primaryNode": "Primary node",
-                "excludeNode": "Exclude node",
-                "includeNode": "Include node",
-                "viewDetails": "View details",
-                "setAsPrimary": "Set as primary",
-                "removeNode": "Remove node",
-                "includeOfficialNodeList": "Include official node list",
-                "noNodes": "There are no nodes, automatic selection will be used instead."
+                "title": "نوڈ منتخب کریں",
+                "description": "IOTA نیٹ ورک کے نوڈذ کی فہرست کا نظم کریں جس سے آپ کنکٹ ہوتے ہیں.",
+                "primaryNode": "بنیادی نوڈ",
+                "excludeNode": "نوڈ خارج کریں",
+                "includeNode": "نوڈ شامل کریں",
+                "viewDetails": "تفصیلات دیکھیں",
+                "setAsPrimary": "بنیادی نوڈ کے طور پر سیٹ کریں",
+                "removeNode": "نوڈ ہٹائیں",
+                "includeOfficialNodeList": "آفیشیل نوڈ لسٹ شامل کریں",
+                "noNodes": "کوئی نوڈز نہیں ہیں ، اس کی بجائے خودکار انتخاب کا استعمال کیا جائے گا."
             },
             "proofOfWork": {
-                "title": "Proof of work",
-                "description": "Complete proof of work locally on your device or outsource to the node"
+                "title": "کام کا ثبوت",
+                "description": "اپنے آلہ پر مقامی طور پر کام کا ثبوت کریں یا نوڈ کو دے دیں"
             },
             "errorLog": {
-                "title": "Error log",
-                "description": "View errors to debug an issue"
+                "title": "خرابی کا لاگ",
+                "description": "کسی مسئلے کو ڈیبگ کرنے کیلئے غلطیاں دیکھیں"
             },
             "diagnostics": {
-                "title": "Diagnostics",
-                "description": "View system and application information"
+                "title": "تشخیص",
+                "description": "نظام اور ایپلیکیشن کی معلومات دیکھیں"
             },
             "stateExport": {
-                "title": "State export",
-                "description": "Export your transaction history to a .csv file"
+                "title": "حالت کی برآمد",
+                "description": "اپنی ٹرانزیکشن ہسٹری کو csv. فائل میں ایکسپورٹ کریں"
             },
             "troubleshoot": {
-                "title": "Troubleshoot",
-                "description": "Use the troubleshooting wizard to solve common problems"
+                "title": "دشواری کا حل",
+                "description": "عام مسائل کو حل کرنے کے لئے خرابیوں کا سراغ لگانے والا وزرڈ استعمال کریں"
             },
             "documentation": {
-                "title": "Documentation",
-                "description": "View the documentation for in depth explanations of how things work"
+                "title": "دستاویزات",
+                "description": "چیزیں کیسے کام کرتی ہیں اس کی گہرائی میں وضاحت کے لئے دستاویزات دیکھیں"
             },
             "faq": {
-                "title": "FAQ",
-                "title2": "Frequently Asked Questions",
-                "description": "View the FAQs to get help with a common problem or question"
+                "title": "عمومی سوالات",
+                "title2": "اکثر پوچھے گئے سوالات",
+                "description": "عام پریشانی یا سوال سے متعلق مدد حاصل کرنے کے لئے عمومی سوالنامہ دیکھیں"
             },
             "discord": {
-                "title": "Discord",
-                "description": "Get help from the IOTA community on Discord"
+                "title": "ڈسکورڈ",
+                "description": "ڈسکارڈ پر IOTA کمیونٹی سے مدد حاصل کریں"
             },
             "about": {
-                "title": "About",
+                "title": "تعارف",
                 "description": ""
             },
             "reportAnIssue": {
-                "title": "Report an issue",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported."
+                "title": "مسئلہ کی رپورٹ کریں",
+                "description": "ڈویلپرز کو بگ کی اطلاع دیں۔ یہ یقینی بنانے کے لئے چیک کریں کہ اس کی اطلاع پہلے ہی نہیں دی گئی ہے."
             }
         },
         "login": {
-            "pleaseWait": "Please wait {time, plural, one {1 second} other {# seconds}}",
-            "incorrectAttempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+            "pleaseWait": "براہ کرم {time, plural, one {1 سیکنڈ} other {# سیکنڈذ}} انتظار کریں",
+            "incorrectAttempts": "{attempts, plural, one {1غلط کوشش} other {# غلط کوششیں}}"
         },
         "dashboard": {
             "security": {
                 "version": {
-                    "title": "Firefly v{version}",
-                    "upToDate": "Up to date",
-                    "outOfDate": "Out of date"
+                    "title": "فائرفلائی ورژن{version}",
+                    "upToDate": "تازہ ترین",
+                    "outOfDate": "فرسودہ"
                 },
                 "hardwareDevice": {
-                    "title": "Hardware Device",
-                    "noneDetected": "None detected"
+                    "title": "ہارڈ ویئر ڈیوائس",
+                    "noneDetected": "کسی کا پتہ نہیں چل سکا"
                 },
                 "strongholdStatus": {
-                    "title": "Wallet Status",
-                    "locked": "Stronghold locked",
-                    "unlocked": "Stronghold unlocked"
+                    "title": "والٹ کی صورتحال",
+                    "locked": "مقفل",
+                    "unlocked": "غیر مقفل"
                 },
                 "strongholdBackup": {
-                    "title": "Wallet Backup",
-                    "weeksAgo": "{weeks, plural, one {# week} other {# weeks}} ago"
+                    "title": "والٹ کا بیک اپ",
+                    "weeksAgo": "{weeks, plural, one {# ہفتہ} other {# ہفتے}} پہلے"
                 }
             },
             "network": {
-                "networkOperational": "Network Operational",
-                "networkDegraded": "Network Degraded",
-                "networkDown": "Network Disconnected",
-                "status": "Status",
-                "messagesPerSecond": "Messages per second",
-                "confirmationRate": "Confirmation rate"
+                "networkOperational": "نیٹ ورک کام کر رہا ہے",
+                "networkDegraded": "نیٹ ورک کمزور ہے",
+                "networkDown": "نیٹ ورک منقطع ہے",
+                "status": "حالت",
+                "messagesPerSecond": "میسجز فی سیکنڈ",
+                "confirmationRate": "تصدیق کی رفتار"
             },
             "profileModal": {
-                "allSettings": "All settings",
-                "logout": "Log out"
+                "allSettings": "تمام ترتیبات",
+                "logout": "لاگ آؤٹ"
             }
         }
     },
     "popups": {
         "password": {
-            "title": "Password required",
-            "subtitle": "Please enter your password to unlock Stronghold",
-            "backup": "Please enter your password to export a backup"
+            "title": "پاس ورڈ ضروری ہے",
+            "subtitle": "براہ کرم اپنے والٹس کو غیر مقفل کرنے کے لئے اپنا پاس ورڈ درج کریں",
+            "backup": "براہ کرم بیک اپ برآمد کرنے کے لئے اپنا پاس ورڈ درج کریں"
         },
         "qr": {
-            "title": "Your QR code"
+            "title": "آپ کا QR کوڈ"
         },
         "version": {
-            "title": "Current version: {version}",
-            "upToDateTitle": "Firefly is up to date",
-            "upToDateDescription": "You are running the latest and safest version of Firefly.",
-            "updateAvailable": "Firefly update available",
-            "updateDetails": "Version {version} - {date}"
+            "title": "موجودہ ورژن: {version}",
+            "upToDateTitle": "فائر فلائی جدید ہے",
+            "upToDateDescription": "آپ فائر فلائی کا تازہ ترین اور محفوظ ترین ورژن چلا رہے ہیں.",
+            "updateAvailable": "فائر فلائی اپ ڈیٹ دستیاب ہے",
+            "updateDetails": "ورژن {version} ۔ {date}",
+            "noAutoUpdate": "اس ونڈوز ورژن میں آٹو اپ ڈیٹ غیر فعال ہے ، براہ کرم اپ ڈیٹ ڈاؤن لوڈ کرنے کے لئے https://firefly.iota.org پر جائیں."
         },
         "backup": {
-            "title": "Last backup: {date}",
-            "lastBackup": "You last backed up {date}",
-            "backupDescription": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
-            "backupWarning": "If you lose your backup and recovery phrase you will lose access to your funds.",
-            "notBackedUp": "Not backed up",
-            "notBackedUpDescription": "You have not backed up your Stronghold",
-            "saving": "Saving..."
+            "title": "آخری بیک اپ: {date}",
+            "lastBackup": "آپ نے آخری بیک اپ {date} کو کیا",
+            "backupDescription": "یہ یقینی بنانے کے لئے باقاعدگی سے بیک اپ رکھنا ضروری ہے کہ آپ کے پاس اپنے والٹس اور ٹرانزیکشن کی تاریخ موجود ہے.",
+            "backupWarning": "اگر آپ اپنا بیک اپ اور ریکوری کا فقرہ گنوا دیتے ہیں تو آپ اپنے فنڈز تک رسائی سے محروم ہوجائیں گے.",
+            "notBackedUp": "بیک اپ نہیں بنایا گیا",
+            "notBackedUpDescription": "آپ نے اپنے والٹس کا بیک اپ نہیں لیا ہے",
+            "saving": "محفوظ ہو رہا ہے..."
         },
         "deleteAccount": {
-            "title": "Delete {name}?",
-            "body": "This account has no transaction history. It can safely be deleted.",
-            "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Delete account",
-            "errorTitle": "Unable to delete {name}",
-            "errorBody1": "You cannot delete this account, you must have at least one."
+            "title": "{name} کو حذف کریں؟",
+            "body": "اس والٹ میں ٹرانزیکشن کی کوئی تاریخ نہیں ہے۔ اسے محفوظ طریقے سے حذف کیا جاسکتا ہے.",
+            "typePassword": "تصدیق کے لئے اپنے والٹ کا پاس ورڈ ٹائپ کریں.",
+            "hideAccount": "والٹ حذف کریں",
+            "errorTitle": "{name} کو حزف نہیں کیا جا سکا",
+            "errorBody1": "آپ یہ والٹ حذف نہیں کرسکتے ، آپ کے پاس کم از کم ایک والٹ ہونا ضروری ہے."
         },
         "hideAccount": {
-            "title": "Hide {name}?",
-            "body": "You can find this account later by enabling \"Show hidden accounts\" in Advanced Settings.",
-            "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Hide account",
-            "errorTitle": "Unable to hide {name}",
-            "errorBody1": "To hide an account it must have 0 balance.",
-            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
-            "errorBody3": "You cannot hide this account, you must have at least one."
+            "title": "{name} چھبائیں؟",
+            "body": "اعلی درجے کی ترتیبات میں \"خفیہ والٹس دکھائیں\" کو چالو کرکے ، آپ یہ والٹ بعد میں ڈھونڈ سکتے ہیں.",
+            "typePassword": "تصدیق کے لئے اپنے والٹ کا پاس ورڈ ٹائپ کریں.",
+            "hideAccount": "والٹ چھپائیں",
+            "errorTitle": "{name} کو پوشیدہ نہیں کیا جا سکا",
+            "errorBody1": "والٹ چھپانے کے لئے اس میں 0 بیلنس ہونا ضروری ہے.",
+            "errorBody2": "اس والٹ پر آپ کے پاس فی الحال {balance} باقی ہے۔ براہ کرم ان فنڈز کو کسی دوسرے والٹ میں منتقل کریں اور دوبارہ کوشش کریں.",
+            "errorBody3": "آپ یہ والٹ چھپا نہیں کرسکتے ، آپ کے پاس کم از کم ایک والٹ ہونا ضروری ہے."
         },
         "addressHistory": {
-            "title": "{name} address history",
-            "currentBalance": "Current balance: {balance}"
+            "title": "{name} کے ایڈریسس کی تاریخ",
+            "currentBalance": "موجودہ بیلینس: {balance}"
         },
         "node": {
-            "titleAdd": "Add a node",
-            "titleUpdate": "Update a node",
-            "titleRemove": "Remove a node",
-            "titleDetails": "Node details",
-            "nodeAddress": "Node address",
-            "optionalUsername": "Username (optional)",
-            "optionalPassword": "Password (optional)",
-            "setAsPrimaryNode": "Set as primary node",
-            "removeConfirmation": "Are you sure you want to remove this node?"
+            "titleAdd": "ایک نوڈ شامل کریں",
+            "titleUpdate": "ایک نوڈ کو اپ ڈیٹ کریں",
+            "titleRemove": "ایک نوڈ کو ہٹائیں",
+            "titleDetails": "نوڈ کی تفصیلات",
+            "nodeAddress": "نوڈ ایڈریس",
+            "optionalUsername": "صارفی نام (اختیاری)",
+            "optionalPassword": "پاس ورڈ (اختیاری)",
+            "setAsPrimaryNode": "بنیادی نوڈ کے طور پر سیٹ کریں",
+            "removeConfirmation": "کیا آپ یقین کے ساتھ اس نوڈ کو مٹانا چاہتے ہیں؟"
         },
         "errorLog": {
-            "title": "Error Log",
-            "empty": "The error log is empty."
+            "title": "خرابی کا لاگ",
+            "empty": "خرابی کا لاگ خالی ہے."
         },
         "deleteProfile": {
-            "title": "Delete profile",
-            "confirmation": "Are you sure you want to delete this profile? This operation cannot be undone.",
-            "typePassword": "Type your password to confirm."
+            "title": "پروفائل حذف کریں",
+            "confirmation": "کیا آپ مطمئن ہیں کہ آپ اس پروفائل کو حذف کرنا چاہتے ہیں؟ یہ حرکت واپس نہیں ہو سکتی.",
+            "typePassword": "تصدیق کے لئے اپنا پاس ورڈ ٹائپ کریں."
         },
         "diagnostics": {
-            "title": "Diagnostics",
-            "node": "Node",
-            "platform": "Platform",
-            "platformVersion": "Platform Version",
-            "platformArchitecture": "Platform Architecture",
-            "cpuCount": "CPU Count",
-            "totalMem": "Total Memory",
-            "freeMem": "Free Memory",
-            "userPath": "User Path"
+            "title": "تشخیص",
+            "node": "نوڈ",
+            "platform": "پلیٹ فارم",
+            "platformVersion": "پلیٹ فارم ورژن",
+            "platformArchitecture": "پلیٹ فارم کا ڈھانچہ",
+            "cpuCount": "CPU کی تعداد",
+            "totalMem": "کل میموری",
+            "freeMem": "دستیاب میموری",
+            "userPath": "صارف کا زیراستعمال راستہ"
         },
         "transaction": {
-            "title": "Confirm transaction",
-            "body": "You’re about to send {amount} to"
+            "title": "ٹرانزیکشن کی تصدیق",
+            "body": "آپ مندرجہ ذیل کو {amount} بھیجنے لگے ہیں"
         },
         "balanceFinder": {
-            "title": "Balance finder",
-            "body": "Perform a more exhaustive search of addresses to find missing balances.",
-            "totalWalletBalance": "Total wallet balance",
-            "typePassword": "Type your password to allow searching."
+            "title": "بلینس کا متلاشی",
+            "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
+            "totalWalletBalance": "Total balance",
+            "typePassword": "تلاش کرنے کی اجازت دینے کے لئے اپنا پاس ورڈ ٹائپ کریں."
         },
         "riskFunds": {
-            "title": "Warning: funds at risk during migration",
-            "body1": "It is strongly recommended that you secure all your funds before proceeding with migration. Your funds are at risk of theft if you do not secure them.",
+            "title": "انتباہ: منتقلی کے دوران فنڈز خطرے میں ہیں",
+            "body1": "یہ سختی سے تجویز کی جاتی ہے کہ آپ منتقلی کے عمل میں آگے بڑھنے سے پہلے اپنے تمام فنڈز محفوظ رکھیں۔ اگر آپ ان کو محفوظ نہیں رکھتے ہیں تو آپ کے فنڈز میں چوری کا خطرہ ہے.",
             "body2": "It is recommended that you rerun the process for addresses with a medium risk level or above."
         },
         "missingBundle": {
-            "title": "Warning: funds at risk during migration",
+            "title": "انتباہ: منتقلی کے دوران فنڈز خطرے میں ہیں",
             "body": "You have funds on spent addresses, but the information needed to secure them was not found. This can happen if you made transactions a long time ago. You can proceed but {value} are at risk during migration.",
             "learnMore": "Learn more about spent addresses",
             "proceed": "I understand the risk"
+        },
+        "snapshot": {
+            "title": "Ongoing network upgrade",
+            "body": "The Chrysalis network upgrade has begun.",
+            "bodyMigration": "Migration is disabled until it is complete.",
+            "bodyFirefly": "Firefly is disabled until it is complete. Token migration will still be possible afterwards."
         }
     },
     "charts": {
@@ -499,8 +488,8 @@
         "outgoingMi": "Outgoing {value}",
         "portoflio": "Portfolio",
         "token": "Token",
-        "accountValue": "Account Value",
-        "accountActivity": "Account Activity",
+        "accountValue": "Wallet Value",
+        "accountActivity": "Wallet Activity",
         "timeframe1Hour": "1 hour",
         "timeframe1Day": "1 day",
         "timeframe1Week": "1 week",
@@ -521,20 +510,20 @@
         "createWalletDescription": "Create a fresh wallet running on Chrysalis",
         "savePassword": "Save password",
         "useBiometric": "Use biometric security",
-        "setupPin": "Set up PIN code",
+        "setupPin": "پن کوڈ مرتب کریں",
         "setPin": "Set PIN code",
         "confirmPin": "Confirm PIN code",
         "enterYourPin": "Enter your PIN",
         "saveBackupFile": "Save backup file",
         "iveWrittenRecoveryPhrase": "I’ve written down my recovery phrase",
-        "verifyRecoveryPhrase": "Verify recovery phrase",
-        "revealRecoveryPhrase": "Reveal recovery phrase",
+        "verifyRecoveryPhrase": "ریکوری کے جملے کی تصدیق کریں",
+        "revealRecoveryPhrase": "ریکوری کا جملہ افشا کریں",
         "importSeedvault": "Import SeedVault",
         "checkAgain": "Check Again",
         "importFromFile": "Import from a file",
         "send": "Send",
         "receive": "Receive",
-        "create": "Create",
+        "create": "تخلیق کریں",
         "beginTransfer": "Begin Transfer",
         "tryAgain": "Try again",
         "visitDiscord": "Visit Discord",
@@ -554,11 +543,11 @@
         "updateFirefly": "Update Firefly",
         "restartNow": "Restart now",
         "saveBackup": "Save Stronghold backup",
-        "customizeAcount": "Customise account",
+        "customizeAcount": "Customise wallet",
         "viewAddressHistory": "View address history",
-        "hideAccount": "Hide account",
-        "showAccount": "Unhide account",
-        "deleteAccount": "Delete account",
+        "hideAccount": "والٹ چھپائیں",
+        "showAccount": "Unhide wallet",
+        "deleteAccount": "والٹ حذف کریں",
         "max": "Max",
         "addNode": "Add node",
         "updateNode": "Update node",
@@ -574,7 +563,7 @@
         "copy": "Copy",
         "paste": "Paste",
         "selectAll": "Select All",
-        "addAccount": "Add Account",
+        "addAccount": "Add Wallet",
         "checkForUpdates": "Check for Updates",
         "reportAnIssue": "Report an Issue",
         "clear": "Clear",
@@ -589,12 +578,13 @@
         "readDocumentation": "Read the documentation",
         "visitFaq": "Visit FAQ",
         "viewStatus": "View status",
-        "showHiddenAccounts": "Show hidden accounts",
+        "showHiddenAccounts": "Show hidden wallets",
         "confirm": "Confirm",
         "findBalances": "Find balances",
         "searchBalances": "Search for balances",
         "searchAgain": "Search again",
-        "searching": "Searching..."
+        "searching": "Searching...",
+        "closeFirefly": "Close Firefly"
     },
     "general": {
         "password": "Password",
@@ -612,11 +602,11 @@
         "sendFunds": "Send funds",
         "sendToAddress": "Send to address",
         "scanQrOrPaste": "Scan a QR code or paste an Address",
-        "moveFundsBetweenAccounts": "Move funds between accounts",
+        "moveFundsBetweenAccounts": "Move funds between wallets",
         "sendTokensToAddress": "Send tokens to an address",
-        "manageAccount": "Manage Account",
-        "customizeAcount": "Customize your account",
-        "account": "Account",
+        "manageAccount": "Manage Wallet",
+        "customizeAcount": "Customize your wallet",
+        "account": "Wallet",
         "sendingToAddress": "Sending to address",
         "amount": "Amount",
         "addAddress": "Add Address",
@@ -637,25 +627,25 @@
         "lightTheme": "Light theme",
         "darkTheme": "Dark theme",
         "balance": "Balance",
-        "accountBalance": "Account Balance",
+        "accountBalance": "Wallet Balance",
         "incoming": "Incoming",
         "outgoing": "Outgoing",
         "totalIn": "Total in",
         "totalOut": "Total out",
-        "accounts": "Accounts",
-        "myAccounts": "My Accounts",
+        "accounts": "Wallets",
+        "myAccounts": "My Wallets",
         "automaticNodeSelection": "Automatic node selection",
         "manualNodeSelection": "Manual node selection",
         "profiles": "Profiles",
         "developerProfile": "Developer Profile",
         "developerProfileDescription": "Allows you to connect to testnets",
         "dev": "Dev",
-        "createAccount": "Create an Account",
-        "accountName": "Account name",
+        "createAccount": "Create a Wallet",
+        "accountName": "Wallet name",
         "latestTransactions": "Latest Transactions",
         "transactions": "Transactions",
-        "security": "Security",
-        "accountAddress": "Account Address",
+        "security": "سیکورٹی",
+        "accountAddress": "Wallet Address",
         "nodes": "Nodes",
         "wallet": "Wallet",
         "help": "Help",
@@ -664,28 +654,29 @@
         "inputAddress": "Send Address",
         "receiveAddress": "Receive Address",
         "date": "Date",
-        "status": "Status",
+        "status": "حالت",
         "confirmed": "Confirmed",
         "pending": "Pending",
-        "noAccounts": "You have no accounts, please create one.",
+        "noAccounts": "You have no wallets, please create one.",
         "loadingAccounts": "Loading, please wait...",
         "addProfile": "Add Profile",
         "noRecentHistory": "No recent history",
-        "transferSyncing": "Syncing account",
+        "firstSync": "Syncing history, this may take a while...",
+        "transferSyncing": "Syncing wallet",
         "transferSelectingInputs": "Selecting inputs",
         "transferRemainderAddress": "Generating remainder deposit address",
         "transferSigning": "Signing the transaction",
         "transferPow": "Performing PoW",
         "transferBroadcasting": "Broadcasting transaction",
         "transferComplete": "Transfer complete",
-        "creatingAccount": "Creating account, please wait...",
-        "updatingAccount": "Updating account, please wait...",
-        "accountSyncing": "Account is syncing",
-        "accountSyncComplete": "Account sync complete",
+        "creatingAccount": "Creating wallet, please wait...",
+        "updatingAccount": "Updating wallet, please wait...",
+        "accountSyncing": "Wallet is syncing",
+        "accountSyncComplete": "Wallet sync complete",
         "passwordUpdating": "Updating password...",
         "passwordSuccess": "Updated password successfully",
         "passwordFailed": "Updating password failed",
-        "syncingAccounts": "Syncing accounts...",
+        "syncingAccounts": "Syncing wallets...",
         "exportingStronghold": "Exporting Stronghold...",
         "exportingStrongholdSuccess": "Exported Stronghold successfully",
         "exportingStrongholdFailed": "Exporting Stronghold failed",
@@ -700,7 +691,7 @@
         "passwordStrength4": "Strong",
         "creatingProfile": "Creating profile, please wait...",
         "fundMigration": "Fund migration",
-        "accountRemoved": "This account is hidden. Unhide it to perform transfers.",
+        "accountRemoved": "This wallet is hidden. Unhide it to perform transfers.",
         "receivingTo": "Receiving to {account}",
         "sendingFrom": "Sending from {account}",
         "receivedTo": "Received to {account}",
@@ -729,7 +720,7 @@
         "calcMinutesRemaining": "Calculating minutes remaining...",
         "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "Copied to clipboard",
-        "accountsSynchronized": "Account synchronization complete",
+        "accountsSynchronized": "Wallet synchronization complete",
         "migratedAccountChrysalisDown": "Your funds will become available after Chrysalis on 28th April",
         "migratedAccountChrysalisUp": "Your funds will become available shortly"
     },
@@ -761,10 +752,10 @@
             "incorrect": "Your current PIN is incorrect."
         },
         "account": {
-            "length": "Your account name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "empty": "You must use your latest account before creating a new one.",
-            "notEmpty": "You must transfer your balance before deleting this account.",
-            "duplicate": "An account with this name already exists.",
+            "length": "Your wallet name can't be longer than {length, plural, one {1 character} other {# characters}}.",
+            "empty": "You must use your latest wallet before creating a new one.",
+            "notEmpty": "You must transfer your balance before deleting this wallet.",
+            "duplicate": "A wallet with this name already exists.",
             "tilde": "A profile name can't start with the '~' character.",
             "control": "A profile name can't contain a control character.",
             "startDot": "A profile name can't start with the '.' character.",
@@ -779,8 +770,8 @@
             "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
             "wrongAddressFormat": "The address is not correctly formatted.",
             "invalidAddress": "The address is not valid.",
-            "insufficientFunds": "This account has insufficient funds.",
-            "noToAccount": "You have not selected an account to send the funds to.",
+            "insufficientFunds": "This wallet has insufficient funds.",
+            "noToAccount": "You have not selected a wallet to send the funds to.",
             "sendingDust": "You cannot send less than 1 Mi.",
             "leavingDust": "You cannot leave less than 1 Mi on your address."
         },
@@ -797,22 +788,22 @@
         "backup": {
             "invalid": "The backup file was not recognised.",
             "destination": "The backup destination was not valid.",
-            "mnemonic": "The mnemonic is not valid.",
-            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is 1} other {is #}}",
-            "seedCharacters": "The seed should only contain characters A-Z or 9",
-            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
-            "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase",
-            "phraseCaseWord": "The word \"{word}\" should be lower case"
+            "mnemonic": "یادداشت درست نہیں ہے.",
+            "seedTooShort": "سیڈ 81 کردار لمبا ہونا چاہئے",
+            "seedCharacters": "سیڈ میں صرف حرف A سے Z کے کردار یا 9 ہونا چاہئے",
+            "phraseWordCount": "آپ کے ریکوری کے فقرے میں 24 الفاظ ہونا چاہئے ، فی الحال اس میں {length, plural, one {ایک ہے} other {ہیں #}}.",
+            "phraseUnrecognizedWord": "آپ کے ریکوری کے فقرے میں غیر تسلیم شدہ لفظ \"{word}\" موجود ہے",
+            "phraseCaseWord": "لفظ \"{word}\" لوئر کیسس ہونا چاہئے"
         }
     },
     "tooltips": {
         "risk": {
-            "title": "Risk level: {risk}",
-            "veryHigh": "Very high",
-            "high": "High",
-            "medium": "Medium",
-            "low": "Low",
-            "veryLow": "Very low"
+            "title": "رسک لیول:{risk}",
+            "veryHigh": "بہت زیادہ",
+            "high": "زیادہ",
+            "medium": "درمیانہ",
+            "low": "کم",
+            "veryLow": "بہت کم"
         }
     }
 }
