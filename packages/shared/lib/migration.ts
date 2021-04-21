@@ -715,7 +715,9 @@ export async function checkChrysalisSnapshot(): Promise<void> {
     const requestOptions: RequestInit = {
         headers: {
             Accept: 'application/json',
-        },
+			pragma: 'no-cache',
+			'cache-control': 'no-cache',
+        }
     }
     const endpoint = CHRYSALIS_VARIABLES_ENDPOINT
     try {
