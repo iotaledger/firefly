@@ -84,7 +84,7 @@
         // especially if there was a remainder, so if any account addresses match
         // we need to find the account details for our address match
         if (getIncomingFlag(txPayload) || getInternalFlag(txPayload)) {
-            return findAccountWithAnyAddress(receiverAddresses)
+            return findAccountWithAnyAddress(receiverAddresses, senderAccount)
         }
 
         return null

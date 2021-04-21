@@ -59,7 +59,7 @@
     // especially if there was a remainder, so if any account addresses match
     // we need to find the account details for our address match
     $: receiverAccount =
-        getIncomingFlag(txPayload) || getInternalFlag(txPayload) ? findAccountWithAnyAddress(receiverAddresses) : null
+        getIncomingFlag(txPayload) || getInternalFlag(txPayload) ? findAccountWithAnyAddress(receiverAddresses, senderAccount) : null
 
     let initialsColor
     let accountAlias = ''
