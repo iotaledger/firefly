@@ -163,7 +163,7 @@ export const sendMigrationBundle = (bundleHash: string, mwm = MINIMUM_WEIGHT_MAG
             openSnapshotPopup()
         }
         else {
-            api.sendMigrationBundle([MIGRATION_NODE], bundleHash, mwm, {
+            api.sendMigrationBundle(MIGRATION_NODES, bundleHash, mwm, {
                 onSuccess(response) {
                     const { bundles } = get(migration);
 
