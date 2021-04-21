@@ -1591,3 +1591,28 @@ export const getMilestoneMessageValue = (payload: Payload, accounts) => {
     return undefined
 }
 
+/**
+ * Find an address in one of our accounts
+ * @param address The address to find
+ * @returns The wallet account matching the address or undefined if not found
+ */
+export const findAccountWithAddress = (address: string): WalletAccount | undefined => {
+    if (!address) {
+        return
+    }
+    const accounts = get(get(wallet).accounts)
+    return accounts.find((acc) => acc.addresses.some((add) => address === add.address))
+}
+
+/**
+ * Find an address in one of our accounts
+ * @param addresses The addresses to find
+ * @returns The wallet account matching the address or undefined if not found
+ */
+ export const findAccountWithAnyAddress = (addresses: string[]): WalletAccount | undefined => {
+    if (!addresses || addresses.length === 0) {
+        return
+    }
+    const accounts = get(get(wallet).accounts)
+    return accounts.find((acc) => acc.addresses.some((add) => addresses.includes(add.address)))
+}

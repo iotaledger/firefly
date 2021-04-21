@@ -1,14 +1,17 @@
 <script lang="typescript">
-    import { Unit } from '@iota/unit-converter'
     import { Icon, Text } from 'shared/components'
     import { convertToFiat, currencies, CurrencyTypes, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { getInitials, truncateString } from 'shared/lib/helpers'
     import { formatDate } from 'shared/lib/i18n'
     import { activeProfile } from 'shared/lib/profile'
     import type { Milestone, Payload, Transaction } from 'shared/lib/typings/message'
-    import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
+    import { formatUnitBestMatch } from 'shared/lib/units'
     import { setClipboard } from 'shared/lib/utils'
     import {
+        findAccountWithAddress,
+        findAccountWithAnyAddress,
+        getIncomingFlag,
+        getInternalFlag,
         getMilestoneMessageValue,
         receiverAddressesFromTransactionPayload,
         sendAddressFromTransactionPayload,
@@ -25,6 +28,7 @@
     export let onBackClick = () => {}
     export let balance // migration tx
 
+    let cachedMigrationTx = !payload
     let milestonePayload = payload?.type === 'Milestone' ? (payload as Milestone) : undefined
     let txPayload = payload?.type === 'Transaction' ? (payload as Transaction) : undefined
 
@@ -37,7 +41,7 @@
         if (txPayload) {
             return sendAddressFromTransactionPayload(txPayload)
         } else if (milestonePayload) {
-            return 'Legacy Network'
+            return locale('general.legacyNetwork')
         }
 
         return null
@@ -64,9 +68,8 @@
 
     const prepareSenderAccount = () => {
         if (txPayload) {
-            return txPayload.data.essence.data.internal
-                ? $accounts.find((acc) => acc.addresses.some((add) => senderAddress === add.address))
-                : null
+            // There can only be one sender address which either belongs to us or not
+            return findAccountWithAddress(senderAddress)
         }
 
         return null
@@ -77,10 +80,11 @@
             return $accounts.find((acc) => acc.index === 0)
         }
 
-        if (txPayload) {
-            return txPayload.data.essence.data.internal
-                ? $accounts.find((acc) => acc.addresses.some((add) => receiverAddresses.includes(add.address)))
-                : null
+        // For an incoming transaction there might be multiple receiver addresses
+        // especially if there was a remainder, so if any account addresses match
+        // we need to find the account details for our address match
+        if (getIncomingFlag(txPayload) || getInternalFlag(txPayload)) {
+            return findAccountWithAnyAddress(receiverAddresses)
         }
 
         return null
@@ -88,19 +92,21 @@
 
     let senderAddress: string = prepareSenderAddress()
     let receiverAddresses: string[] = prepareReceiverAddresses()
+    let receiverAddressesYou: WalletAccount[] = receiverAddresses.map((a) => findAccountWithAddress(a))
 
     $: senderAccount = prepareSenderAccount()
     $: receiverAccount = prepareReceiverAccount()
-    $: value = milestonePayload
-        ? getMilestoneMessageValue(milestonePayload, $accounts)
-        : txPayload
-        ? txPayload.data.essence.data.value
-        : 0
-    $: currencyValue = convertToFiat(value, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings.currency])
-
-    function isAccountYours(account) {
-        return account && $accounts.find((a) => a.id === account.id)
+    let value = 0
+    $: {
+        if (cachedMigrationTx) {
+            value = balance
+        } else if (milestonePayload) {
+            value = getMilestoneMessageValue(milestonePayload, $accounts)
+        } else if (txPayload) {
+            value = txPayload.data.essence.data.value
+        }
     }
+    $: currencyValue = convertToFiat(value, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings.currency])
 </script>
 
 <style type="text/scss">
@@ -118,9 +124,7 @@
                     class="flex items-center justify-center w-8 h-8 rounded-xl p-2 mb-2 text-12 leading-100 font-bold text-center bg-{senderAccount?.color ?? 'blue'}-500 text-white">
                     {getInitials(senderAccount.alias, 2)}
                 </div>
-                {#if isAccountYours(senderAccount)}
-                    <Text smaller>{locale('general.you')}</Text>
-                {/if}
+                <Text smaller>{locale('general.you')}</Text>
             {:else}
                 <Text smaller>{truncateString(senderAddress, 3, 3, 3)}</Text>
             {/if}
@@ -134,8 +138,6 @@
                     class="flex items-center justify-center w-8 h-8 rounded-xl p-2 mb-2 text-12 leading-100 font-bold bg-{receiverAccount?.color ?? 'blue'}-500 text-white">
                     {getInitials(receiverAccount.alias, 2)}
                 </div>
-            {/if}
-            {#if isAccountYours(receiverAccount)}
                 <Text smaller>{locale('general.you')}</Text>
             {:else}
                 {#each receiverAddresses as address}
@@ -175,16 +177,22 @@
             <div class="mb-5">
                 <Text secondary>{locale('general.inputAddress')}</Text>
                 <button class="text-left" on:click={() => setClipboard(senderAddress.toLowerCase())}>
-                    <Text type="pre">{senderAddress}</Text>
+                    <Text type="pre">
+                        {senderAddress}
+                        {#if senderAccount}&nbsp;({senderAccount.alias}){/if}
+                    </Text>
                 </button>
             </div>
         {/if}
         {#if receiverAddresses.length > 0}
             <div class="mb-5">
                 <Text secondary>{locale('general.receiveAddress')}</Text>
-                {#each receiverAddresses as receiver}
+                {#each receiverAddresses as receiver, idx}
                     <button class="text-left" on:click={() => setClipboard(receiver.toLowerCase())}>
-                        <Text type="pre" classes="mb-2">{receiver}</Text>
+                        <Text type="pre" classes="mb-2">
+                            {receiver}
+                            {#if receiverAddressesYou[idx]}&nbsp;({receiverAddressesYou[idx].alias}){/if}
+                        </Text>
                     </button>
                 {/each}
             </div>

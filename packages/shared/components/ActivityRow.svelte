@@ -1,13 +1,18 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
+    import { truncateString } from 'shared/lib/helpers'
     import { formatDate } from 'shared/lib/i18n'
     import type { Milestone, Payload, Transaction } from 'shared/lib/typings/message'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import type { WalletAccount } from 'shared/lib/wallet'
     import {
+        findAccountWithAddress,
+        findAccountWithAnyAddress,
+        getIncomingFlag,
+        getInternalFlag,
         getMilestoneMessageValue,
         receiverAddressesFromTransactionPayload,
         sendAddressFromTransactionPayload,
+        WalletAccount,
     } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Writable } from 'svelte/store'
@@ -47,13 +52,14 @@
     $: senderAddress = sendAddressFromTransactionPayload(payload)
     $: receiverAddresses = receiverAddressesFromTransactionPayload(payload)
 
-    $: senderAccount = senderAddress
-        ? $accounts?.find((acc) => acc.addresses.some((add) => senderAddress === add.address)) ?? null
-        : null
+    // There can only be one sender address which either belongs to us or not
+    $: senderAccount = findAccountWithAddress(senderAddress)
 
-    $: receiverAccount = receiverAddresses?.length
-        ? $accounts.find((acc) => acc.addresses.some((add) => receiverAddresses.includes(add.address))) ?? null
-        : null
+    // For an incoming transaction there might be multiple receiver addresses
+    // especially if there was a remainder, so if any account addresses match
+    // we need to find the account details for our address match
+    $: receiverAccount =
+        getIncomingFlag(txPayload) || getInternalFlag(txPayload) ? findAccountWithAnyAddress(receiverAddresses) : null
 
     let initialsColor
     let accountAlias = ''
@@ -62,12 +68,23 @@
         if (txPayload) {
             const acc = txPayload.data.essence.data.incoming ? receiverAccount : senderAccount
 
+            // The address in the payload was one of our accounts so grab
+            // the account alias to display
             if (acc) {
                 if (includeFullSender) {
                     accountAlias = acc.alias
                 }
                 if (txPayload.data.essence.data.internal) {
                     initialsColor = acc.color
+                }
+            } else {
+                // We can't find the address in our accounts so just display the abbreviated address
+                if (includeFullSender) {
+                    accountAlias = truncateString(
+                        txPayload.data.essence.data.incoming ? receiverAddresses[0] : senderAddress,
+                        3,
+                        3
+                    )
                 }
             }
         }
