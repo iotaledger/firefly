@@ -4,7 +4,7 @@ import { stripTrailingSlash } from 'shared/lib/helpers'
 import { localize } from 'shared/lib/i18n'
 import type { PriceData } from 'shared/lib/marketData'
 import { HistoryDataProps } from 'shared/lib/marketData'
-import { getOfficialNodes, network } from 'shared/lib/network'
+import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
 import { showAppNotification, showSystemNotification } from 'shared/lib/notifications'
 import { activeProfile, isStrongholdLocked, updateProfile } from 'shared/lib/profile'
 import type { Account, Account as BaseAccount, AccountToCreate, Balance, SyncedAccount } from 'shared/lib/typings/account'
@@ -409,13 +409,14 @@ export const asyncRestoreBackup = (importFilePath, password) => {
 export const asyncCreateAccount = () => {
     return new Promise<void>((resolve, reject) => {
         const officialNodes = getOfficialNodes()
+        const officialNetwork = getOfficialNetwork()
         api.createAccount(
             {
                 signerType: { type: 'Stronghold' },
                 clientOptions: {
                     nodes: officialNodes,
                     node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
-                    network: get(network),
+                    network: officialNetwork
                 },
                 alias: `${localize('general.account')} 1`
             },
