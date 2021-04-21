@@ -80,11 +80,9 @@ export const ongoingSnapshot = writable<Boolean>(false)
  */
 export const getMigrationData = (migrationSeed: string, initialAddressIndex = 0): Promise<void> => {
     return new Promise(async (resolve, reject) => {
-        // Migration: snapshot check
-        await checkChrysalisSnapshot()
         if (get(ongoingSnapshot) === true) {
             reject({ snapshot: true })
-            console.error('Ongoing network upgrade. Migration is disabled until it is complete.')
+            openSnapshotPopup()
         }
         else {
             api.getMigrationData(
@@ -160,11 +158,9 @@ export const createMigrationBundle = (inputAddressIndexes: number[], offset: num
  */
 export const sendMigrationBundle = (bundleHash: string, mwm = MINIMUM_WEIGHT_MAGNITUDE): Promise<void> => {
     return new Promise(async (resolve, reject) => {
-        // Migration: snapshot check
-        await checkChrysalisSnapshot()
         if (get(ongoingSnapshot) === true) {
             reject({ snapshot: true })
-            console.error('Ongoing network upgrade. Migration is disabled until it is complete.')
+            openSnapshotPopup()
         }
         else {
             api.sendMigrationBundle([MIGRATION_NODE], bundleHash, mwm, {
@@ -708,18 +704,14 @@ export type ChrysalisVariablesValidationResponse = {
     payload: ChrysalisVariables
 }
 
-let snapshotIntervalID = null
-
 /**
  * Fetches Chrysalis snapshot state
  *
  * @method checkChrysalisSnapshot
- *
- * @param {boolean} stopPoll if true it will automatically stop the interval when the snapshot is over
- *
+*
  * @returns {Promise<void>}
  */
-export async function checkChrysalisSnapshot(stopPoll: boolean = true): Promise<void> {
+export async function checkChrysalisSnapshot(): Promise<void> {
     const requestOptions: RequestInit = {
         headers: {
             Accept: 'application/json',
@@ -752,15 +744,6 @@ export async function checkChrysalisSnapshot(stopPoll: boolean = true): Promise<
             const _ongoingSnapshot = jsonResponse.snapshot
             if (get(ongoingSnapshot) === true && _ongoingSnapshot === false) { // snapshot finished
                 closePopup()
-                if (stopPoll) {
-                    stopChrysalisSnapshotPoll()
-                }
-            }
-            else if (get(ongoingSnapshot) === false && _ongoingSnapshot === true) { // snapshot started
-                openSnapshotPopup()
-                if (!snapshotIntervalID) { // if there is no polling active, activate it
-                    pollChrysalisSnapshot()
-                }
             }
             ongoingSnapshot.set(_ongoingSnapshot)
         } else {
@@ -776,17 +759,7 @@ export async function checkChrysalisSnapshot(stopPoll: boolean = true): Promise<
  */
 export async function pollChrysalisSnapshot(stopPoll: boolean = true): Promise<void> {
     await checkChrysalisSnapshot()
-    snapshotIntervalID = setInterval(async () => checkChrysalisSnapshot(stopPoll), DEFAULT_CHRYSALIS_VARIABLES_POLL_INTERVAL)
-}
-
-/**
- * Stops Chrysalis snapshot state poll
- */
-export function stopChrysalisSnapshotPoll(): void {
-    if (snapshotIntervalID) {
-        clearInterval(snapshotIntervalID)
-        snapshotIntervalID = null
-    }
+    setInterval(async () => checkChrysalisSnapshot(), DEFAULT_CHRYSALIS_VARIABLES_POLL_INTERVAL)
 }
 
 export function openSnapshotPopup(): void {
@@ -794,7 +767,7 @@ export function openSnapshotPopup(): void {
         type: 'snapshot',
         hideClose: true,
         props: {
-            dashboard: get(appRoute) === AppRoute.Dashboard
+            dashboard: get(appRoute) === AppRoute.Dashboard || get(appRoute) === AppRoute.Login
         }
     })
 }

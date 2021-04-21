@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Icon, Pin, Profile, Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
+    import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { activeProfile } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'
@@ -9,7 +10,8 @@
     import { get } from 'svelte/store'
 
     export let locale
-
+    export let mobile 
+    
     let attempts = 0
     let pinCode = ''
     let isBusy = false
@@ -59,6 +61,9 @@
     }
 
     async function onSubmit() {
+        if (get(ongoingSnapshot) === true) {
+            return openSnapshotPopup()
+        }
         if (!hasReachedMaxAttempts) {
             const profile = get(activeProfile)
 
