@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { BundleMiningLayout, Button, Icon, Text } from 'shared/components'
+    import { Electron } from 'shared/lib/electron'
     import { createEventDispatcher } from 'svelte'
 
     export let locale
@@ -7,10 +8,6 @@
 
     const dispatch = createEventDispatcher()
 
-    // TODO:
-    const learnClick = () => {
-        console.log('Learn more clicked')
-    }
     const handleContinueClick = () => {
         dispatch('next')
     }
@@ -33,7 +30,7 @@
             <Text type="p" secondary classes="mb-4 text-center">{locale('views.bundleMiningWarning.body1')}</Text>
             <Text type="p" secondary classes="mb-8 text-center">{locale('views.bundleMiningWarning.body2')}</Text>
             <div class="flex flex-col flex-grow items-center">
-                <Button secondary classes="w-56" onClick={() => learnClick()}>{locale('views.bundleMiningWarning.learn')}</Button>
+                <Button secondary classes="w-56" onClick={() => Electron.openUrl('https://firefly.iota.org/faq#spent-addresses')}>{locale('views.bundleMiningWarning.learn')}</Button>
             </div>
         </div>
         <div slot="actions">

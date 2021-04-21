@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { Animation, Button, Link, Logo, OnboardingLayout, Text } from 'shared/components'
+    import { Electron } from 'shared/lib/electron'
     import { SetupType } from 'shared/lib/typings/routes'
     import { createEventDispatcher } from 'svelte'
 
@@ -28,8 +29,9 @@
                 </div>
                 <Text type="h3" classes="mb-6 text-center">{locale('views.setup.chrysalisTitle')}</Text>
                 <Text type="p" secondary classes="mb-8">{locale('views.setup.chrysalisBody')}</Text>
-                <!-- TODO: add link -->
-                <Link>{locale('views.setup.learnMore')}</Link>
+                <Link onClick={() => Electron.openUrl('https://blog.iota.org/firefly-token-migration/')}>
+                    {locale('views.setup.learnMore')}
+                </Link>
             </div>
         </div>
         <div slot="leftpane__action" class="flex flex-col space-y-4">
