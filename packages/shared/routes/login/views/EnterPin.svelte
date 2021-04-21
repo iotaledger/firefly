@@ -9,7 +9,8 @@
     import { get } from 'svelte/store'
 
     export let locale
-
+    export let mobile 
+    
     let attempts = 0
     let pinCode = ''
     let isBusy = false
