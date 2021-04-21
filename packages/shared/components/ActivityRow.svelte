@@ -4,13 +4,15 @@
     import { formatDate } from 'shared/lib/i18n'
     import type { Milestone, Payload, Transaction } from 'shared/lib/typings/message'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import type { WalletAccount } from 'shared/lib/wallet'
     import {
         findAccountWithAddress,
         findAccountWithAnyAddress,
+        getIncomingFlag,
+        getInternalFlag,
         getMilestoneMessageValue,
         receiverAddressesFromTransactionPayload,
         sendAddressFromTransactionPayload,
+        WalletAccount,
     } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Writable } from 'svelte/store'
@@ -57,9 +59,7 @@
     // especially if there was a remainder, so if any account addresses match
     // we need to find the account details for our address match
     $: receiverAccount =
-        txPayload.data.essence.data.internal || txPayload.data.essence.data.incoming
-            ? findAccountWithAnyAddress(receiverAddresses)
-            : null
+        getIncomingFlag(txPayload) || getInternalFlag(txPayload) ? findAccountWithAnyAddress(receiverAddresses) : null
 
     let initialsColor
     let accountAlias = ''

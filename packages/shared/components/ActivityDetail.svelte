@@ -10,6 +10,8 @@
     import {
         findAccountWithAddress,
         findAccountWithAnyAddress,
+        getIncomingFlag,
+        getInternalFlag,
         getMilestoneMessageValue,
         receiverAddressesFromTransactionPayload,
         sendAddressFromTransactionPayload,
@@ -81,7 +83,7 @@
         // For an incoming transaction there might be multiple receiver addresses
         // especially if there was a remainder, so if any account addresses match
         // we need to find the account details for our address match
-        if (txPayload && (txPayload.data.essence.data.internal || txPayload.data.essence.data.incoming)) {
+        if (getIncomingFlag(txPayload) || getInternalFlag(txPayload)) {
             return findAccountWithAnyAddress(receiverAddresses)
         }
 
