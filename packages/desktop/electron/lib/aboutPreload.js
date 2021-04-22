@@ -1,5 +1,16 @@
-const { contextBridge } = require('electron')
+const { contextBridge, ipcRenderer } = require('electron')
 const { version, build: { productName } } = require('../../package.json')
-import { menuState } from './menuState'
 
-contextBridge.exposeInMainWorld('app', { appName: productName, version: `${menuState.strings.version} ${version}`, iconPath: './assets/logos/firefly_logo.svg' })
+contextBridge.exposeInMainWorld('about', {
+    getData: (callback) => {
+        ipcRenderer.invoke('menu-data').then(data => {
+            const aboutData = {
+                appName: productName,
+                version: data.strings.version.replace('{version}', version),
+                iconPath: './assets/logos/firefly_logo.svg'
+            }
+            
+            callback(aboutData)
+        })
+    }
+})

@@ -702,7 +702,7 @@
         "receiving": "Receiving",
         "sending": "Sending",
         "legacyNetwork": "Legacy Network",
-        "version": "Version"
+        "version": "Version {version}"
     },
     "dates": {
         "today": "Today",
