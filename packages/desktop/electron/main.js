@@ -30,12 +30,44 @@ if (
  */
 app.commandLine.appendSwitch('js-flags', '--expose-gc')
 
+let lastError = {}
+
+/**
+ * Setup the error handlers early so they catch any issues
+ */
+const handleError = (errorType, error, isRenderProcessError) => {
+    if (app.isPackaged) {
+        lastError = {
+            diagnostics: getDiagnostics(),
+            errorType,
+            error
+        }
+
+        openErrorWindow()
+    } else {
+        // In dev mode there is no need to log errors from the render
+        // process as they will already appear in the dev console
+        if (!isRenderProcessError) {
+            console.error(error)
+        }
+    }
+}
+
+process.on('uncaughtException', error => {
+    handleError('Unhandled Error', error)
+});
+
+process.on('unhandledRejection', error => {
+    handleError('Unhandled Promise Rejection', error)
+});
+
 /**
  * Define wallet windows
  */
 const windows = {
     main: null,
     about: null,
+    error: null
 }
 
 let paths = {
@@ -43,6 +75,8 @@ let paths = {
     html: '',
     aboutHtml: '',
     aboutPreload: '',
+    errorHtml: '',
+    errorPreload: '',
 }
 
 /**
@@ -64,12 +98,16 @@ if (app.isPackaged) {
     paths.html = path.join(app.getAppPath(), '/public/index.html')
     paths.aboutPreload = path.join(app.getAppPath(), '/public/build/lib/aboutPreload.js')
     paths.aboutHtml = path.join(app.getAppPath(), '/public/about.html')
+    paths.errorPreload = path.join(app.getAppPath(), '/public/build/lib/errorPreload.js')
+    paths.errorHtml = path.join(app.getAppPath(), '/public/error.html')
 } else {
     // __dirname is desktop/public/build
     paths.preload = path.join(__dirname, 'preload.js')
     paths.html = path.join(__dirname, '../index.html')
     paths.aboutPreload = path.join(__dirname, 'lib/aboutPreload.js')
     paths.aboutHtml = path.join(__dirname, '../about.html')
+    paths.errorPreload = path.join(__dirname, 'lib/errorPreload.js')
+    paths.errorHtml = path.join(__dirname, '../error.html')
 }
 
 /**
@@ -178,6 +216,7 @@ function createWindow() {
 
     windows.main.on('close', () => {
         closeAboutWindow()
+        closeErrorWindow()
     })
 
     windows.main.on('closed', () => {
@@ -223,6 +262,9 @@ export const getOrInitWindow = (windowName) => {
         if (windowName === 'about') {
             return openAboutWindow()
         }
+        if (windowName === 'error') {
+            return openErrorWindow()
+        }
     }
     return windows[windowName]
 }
@@ -249,6 +291,10 @@ app.on('activate', function () {
     if (BrowserWindow.getAllWindows().length === 0) {
         createWindow()
     }
+})
+
+app.once('ready', () => {
+    ipcMain.handle('error-data', () => lastError)
 })
 
 // IPC handlers for APIs exposed from main proces
@@ -290,8 +336,8 @@ ipcMain.handle('get-path', (_e, path) => {
 })
 
 // Diagnostics
-ipcMain.handle('diagnostics', (_e) => {
-    const diagnostics = [
+const getDiagnostics = () => {
+    return [
         { label: 'popups.diagnostics.platform', value: os.platform() },
         { label: 'popups.diagnostics.platformVersion', value: os.release() },
         { label: 'popups.diagnostics.platformArchitecture', value: os.arch() },
@@ -300,7 +346,14 @@ ipcMain.handle('diagnostics', (_e) => {
         { label: 'popups.diagnostics.freeMem', value: `${(os.freemem() / 1048576).toFixed(1)} MB` },
         { label: 'popups.diagnostics.userPath', value: app.getPath('userData') },
     ]
-    return diagnostics
+}
+
+ipcMain.handle('diagnostics', (_e) => {
+    return getDiagnostics()
+})
+
+ipcMain.handle('handle-error', (_e, errorType, error) => {
+    handleError(errorType, error, true)
 })
 
 // Os
@@ -427,6 +480,52 @@ export const closeAboutWindow = () => {
         windows.about = null
     }
 }
+
+/**
+ * Create error window
+ * @returns {BrowserWindow} Error window
+ */
+export const openErrorWindow = () => {
+    if (windows.error !== null) {
+        windows.error.focus()
+        return windows.error
+    }
+
+    windows.error = new BrowserWindow({
+        useContentSize: true,
+        titleBarStyle: 'hidden',
+        show: false,
+        fullscreenable: false,
+        resizable: true,
+        minimizable: false,
+        webPreferences: {
+            ...defaultWebPreferences,
+            preload: paths.errorPreload,
+        },
+    })
+
+    windows.error.once('closed', () => {
+        windows.error = null
+    })
+
+    windows.error.loadFile(paths.errorHtml)
+
+    windows.error.once('ready-to-show', () => {
+        windows.error.show()
+    })
+
+    windows.error.setMenu(null)
+
+    return windows.error
+}
+
+export const closeErrorWindow = () => {
+    if (windows.error) {
+        windows.error.close()
+        windows.error = null
+    }
+}
+
 
 function windowStateKeeper(windowName, settingsFilename) {
     let window, windowState;
