@@ -8,6 +8,7 @@
 <p align="center">
   <a href="https://discord.iota.org/" style="text-decoration:none;"><img src="https://img.shields.io/badge/Discord-9cf.svg?logo=discord" alt="Discord"></a>
     <a href="https://iota.stackexchange.com/" style="text-decoration:none;"><img src="https://img.shields.io/badge/StackExchange-9cf.svg?logo=stackexchange" alt="StackExchange"></a>
+<a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fiotaledger%2Ffirefly?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fiotaledger%2Ffirefly.svg?type=shield"/></a>
     <a href="https://github.com/iotaledger/firefly/blob/develop/LICENSE" style="text-decoration:none;"><img src="https://img.shields.io/badge/License-Apache%202.0-green.svg" alt="Apache 2.0 license"></a>
 </p>
       
@@ -19,6 +20,9 @@
 </p>
 
 ---
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fiotaledger%2Ffirefly.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fiotaledger%2Ffirefly?ref=badge_large)
 
 ## About
 
