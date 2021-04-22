@@ -4,13 +4,13 @@ const { ipcRenderer, contextBridge } = require('electron')
 window.addEventListener('error', event => {
     ipcRenderer.invoke('handle-error', "Render Context Error", event.error || event)
     event.preventDefault();
-    console.error(event)
+    console.error(event.error || event)
 })
 
 window.addEventListener('unhandledrejection', event => {
     ipcRenderer.invoke('handle-error', "Render Context Unhandled Rejection", event.reason)
     event.preventDefault();
-    console.error(event)
+    console.error(event.reason)
 });
 
 try {
@@ -245,6 +245,14 @@ try {
             ipcRenderer.invoke('open-url', url)
         },
         /**
+         * Log unhandled exception
+         * @param {string} errorType The type of eerror
+         * @param {Errir} error The error
+         */
+        unhandledException: (errorType, error) => {
+            ipcRenderer.invoke('handle-error', errorType, error)
+        },
+        /**
          * Add native window wallet event listener
          * @param {string} event - Target event name
          * @param {function} callback - Event trigger callback
@@ -302,5 +310,5 @@ try {
     contextBridge.exposeInMainWorld('Electron', Electron)
 } catch (error) {
     ipcRenderer.invoke('handle-error', "Preload Error", error)
-    console.log(error)
+    console.log("poop3", error)
 }

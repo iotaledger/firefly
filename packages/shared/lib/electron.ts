@@ -76,6 +76,8 @@ export interface IElectron {
     updateCancel(): Promise<void>
     updateDownload(): Promise<void>
 
+    unhandledException(title: string, err: Error): Promise<void>
+
     // SeedVault API methods
     importLegacySeed(buffer: any, password: string): Promise<string>;
     validateSeedVault(buffer: any): Promise<boolean>;
