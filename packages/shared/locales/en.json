@@ -701,7 +701,8 @@
         "sentFrom": "Sent from {account}",
         "receiving": "Receiving",
         "sending": "Sending",
-        "legacyNetwork": "Legacy Network"
+        "legacyNetwork": "Legacy Network",
+        "version": "Version"
     },
     "dates": {
         "today": "Today",

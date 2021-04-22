@@ -38,6 +38,7 @@ export const getLocalisedMenuItems = (locale) => {
         faq: locale('views.settings.faq.title'),
         documentation: locale('views.settings.documentation.title'),
         discord: locale('views.settings.discord.title'),
-        reportAnIssue: locale('actions.reportAnIssue')
+        reportAnIssue: locale('actions.reportAnIssue'),
+        version: locale('general.version')
     }
 }
