@@ -12,7 +12,7 @@
     import { LOG_FILE_NAME, migration, resetMigrationState, totalMigratedBalance } from 'shared/lib/migration'
     import { activeProfile, newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { getStoragePath } from 'shared/lib/wallet'
+    import { getStoragePathParts } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
 
@@ -50,11 +50,9 @@
 
     const handleContinueClick = () => {
         if (wasMigrated) {
-            Electron.getUserDataPath()
-                .then((path) => {
-                    const source = getStoragePath(path, $activeProfile.name)
-
-                    return Electron.exportMigrationLog(`${source}/${LOG_FILE_NAME}`, `${$activeProfile.name}-${LOG_FILE_NAME}`)
+            getStoragePathParts($activeProfile.name)
+                .then((storagePathParts) => {
+                    return Electron.exportMigrationLog(`${storagePathParts.path}${storagePathParts.sep}${LOG_FILE_NAME}`, `${$activeProfile.name}-${LOG_FILE_NAME}`)
                 })
                 .then((result) => {
                     if (result) {

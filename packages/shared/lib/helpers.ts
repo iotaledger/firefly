@@ -227,25 +227,36 @@ export const stripSpaces = (str) => {
  * @returns The copied object
  */
 export function deepCopy(obj) {
-    if(typeof obj !== 'object' || obj === null) {
+    if (typeof obj !== 'object' || obj === null) {
         return obj;
     }
 
-    if(obj instanceof Date) {
+    if (obj instanceof Date) {
         return new Date(obj.getTime());
     }
 
-    if(obj instanceof Array) {
+    if (obj instanceof Array) {
         return obj.reduce((arr, item, i) => {
             arr[i] = deepCopy(item);
             return arr;
         }, []);
     }
 
-    if(obj instanceof Object) {
+    if (obj instanceof Object) {
         return Object.keys(obj).reduce((newObj, key) => {
             newObj[key] = deepCopy(obj[key]);
             return newObj;
         }, {})
     }
+}
+
+/**
+ * Encode Non ASCII characters to escaped characters.
+ * @param value The value to encode.
+ * @returns The encoded value.
+ */
+export function encodeNonASCII(value: string): string | undefined {
+    return typeof value === "string"
+        ? value.replace(/[\u007F-\uFFFF]/g, chr => `${(`0000${chr.charCodeAt(0).toString(16)}`).slice(-4)}`)
+        : undefined;
 }

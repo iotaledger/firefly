@@ -5,13 +5,13 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { activeProfile } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'
-    import { api, getStoragePath, initialise } from 'shared/lib/wallet'
+    import { api, getStoragePathParts, initialise } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
 
     export let locale
-    export let mobile 
-    
+    export let mobile
+
     let attempts = 0
     let pinCode = ''
     let isBusy = false
@@ -72,21 +72,24 @@
             Electron.PincodeManager.verify(profile.id, pinCode)
                 .then((verified) => {
                     if (verified === true) {
-                        return Electron.getUserDataPath().then((path) => {
-                            initialise(profile.id, getStoragePath(path, profile.name))
-                            api.setStoragePassword(pinCode, {
-                                onSuccess() {
-                                    dispatch('next')
-                                },
-                                onError(err) {
-                                    isBusy = false
-                                    showAppNotification({
-                                        type: 'error',
-                                        message: locale(err.error),
-                                    })
-                                },
+                        return getStoragePathParts(profile.name)
+                            .then((storagePathParts) => {
+                                initialise(profile.id, storagePathParts.path)
                             })
-                        })
+                            .then(() => {
+                                api.setStoragePassword(pinCode, {
+                                    onSuccess() {
+                                        dispatch('next')
+                                    },
+                                    onError(err) {
+                                        isBusy = false
+                                        showAppNotification({
+                                            type: 'error',
+                                            message: locale(err.error),
+                                        })
+                                    },
+                                })
+                            })
                     } else {
                         shake = true
                         shakeTimeout = setTimeout(() => {

@@ -1,6 +1,6 @@
 import { mnemonic } from 'shared/lib/app'
 import { convertToFiat, currencies, CurrencyTypes, exchangeRates, formatCurrency } from 'shared/lib/currency'
-import { stripTrailingSlash } from 'shared/lib/helpers'
+import { encodeNonASCII, stripTrailingSlash } from 'shared/lib/helpers'
 import { localize } from 'shared/lib/i18n'
 import type { PriceData } from 'shared/lib/marketData'
 import { HistoryDataProps } from 'shared/lib/marketData'
@@ -25,6 +25,7 @@ import type { Message, Payload, Transaction } from 'shared/lib/typings/message'
 import type { MigrationBundle, MigrationData, SendMigrationBundleResponse } from 'shared/lib/typings/migration'
 import { formatUnitBestMatch } from 'shared/lib/units'
 import { get, writable, Writable } from 'svelte/store'
+import { Electron } from './electron'
 import type { ClientOptions } from './typings/client'
 import type { Duration, NodeInfo, StrongholdStatus } from './typings/wallet'
 
@@ -225,8 +226,26 @@ export const api: {
     ),
 } = window['__WALLET_API__']
 
-export const getStoragePath = (appPath: string, profileName: string): string => {
-    return `${appPath}/${WALLET_STORAGE_DIRECTORY}/${profileName}`
+export const getStoragePathParts = async (profileName: string): Promise<{
+    path: string
+    sep: string
+}> => {
+    const userDataPath = await Electron.getUserDataPath()
+    const os = await Electron.getOS()
+    let profileDirName = profileName
+    let sep;
+
+    if (os === 'win32') {
+        sep = '\\'
+        profileDirName = encodeNonASCII(profileDirName)
+    } else {
+        sep = '/'
+    }
+
+    return {
+        path: `${userDataPath}${sep}${WALLET_STORAGE_DIRECTORY}${sep}${profileDirName}`,
+        sep
+    }
 }
 
 export const initialise = (id: string, storagePath: string): void => {
@@ -1617,7 +1636,7 @@ export const findAccountWithAddress = (address: string): WalletAccount | undefin
  * @param excludeFirst A wallet to exclude on first pass
  * @returns The wallet account matching the address or undefined if not found
  */
- export const findAccountWithAnyAddress = (addresses: string[], excludeFirst?: WalletAccount): WalletAccount | undefined => {
+export const findAccountWithAnyAddress = (addresses: string[], excludeFirst?: WalletAccount): WalletAccount | undefined => {
     if (!addresses || addresses.length === 0) {
         return
     }

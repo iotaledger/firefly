@@ -13,7 +13,7 @@
         profileInProgress,
         profiles,
     } from 'shared/lib/profile'
-    import { destroyActor, getStoragePath, initialise, MAX_PROFILE_NAME_LENGTH } from 'shared/lib/wallet'
+    import { destroyActor, getStoragePathParts, initialise, MAX_PROFILE_NAME_LENGTH } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
 
@@ -72,8 +72,8 @@
                     profile = createProfile(trimmedProfileName, false)
                     profileInProgress.set(trimmedProfileName)
 
-                    const userDataPath = await Electron.getUserDataPath()
-                    initialise($newProfile.id, getStoragePath(userDataPath, $newProfile.name))
+                    const storagePathParts = await getStoragePathParts($newProfile.name)
+                    initialise($newProfile.id, storagePathParts.path)
 
                     initialiseMigrationListeners()
                 }

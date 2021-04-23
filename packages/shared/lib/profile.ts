@@ -1,7 +1,7 @@
 import { AvailableExchangeRates } from 'shared/lib/currency'
 import { persistent } from 'shared/lib/helpers'
 import { generateRandomId } from 'shared/lib/utils'
-import { asyncRemoveStorage, destroyActor, getStoragePath } from 'shared/lib/wallet'
+import { destroyActor, getStoragePathParts } from 'shared/lib/wallet'
 import { derived, get, Readable, writable } from 'svelte/store'
 import type { ChartSelectors } from './chart'
 import { Electron } from './electron'
@@ -252,9 +252,8 @@ export const cleanupInProgressProfiles = async () => {
  */
 export const removeProfileFolder = async (profileName) => {
     try {
-        const userDataPath = await Electron.getUserDataPath()
-        const profileStoragePath = getStoragePath(userDataPath, profileName)
-        await Electron.removeProfileFolder(profileStoragePath)
+        const storagePathParts = await getStoragePathParts(profileName)
+        await Electron.removeProfileFolder(storagePathParts.path)
     } catch (err) {
         console.error(err)
     }
