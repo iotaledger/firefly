@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Error } from 'shared/components'
+    import { Error, Text } from 'shared/components'
     import { formatNumber, getAllDecimalSeparators, getDecimalSeparator, parseCurrency } from 'shared/lib/currency'
     import { onMount } from 'svelte'
 
@@ -19,13 +19,21 @@
     export let isFocused = false
     export let maxDecimals = undefined
     export let disableContextMenu = false
+    export let locale = undefined
+    export let capsLockWarning = false
 
     let inputElement
     let allDecimalSeparators = getAllDecimalSeparators()
     let decimalSeparator = getDecimalSeparator()
+    let capsLockOn = false
+    let hasFocus = false
 
     const handleInput = (e) => {
         value = e.target.value
+    }
+
+    const onKeyDown = (e) => {
+        capsLockOn = e.getModifierState('CapsLock')
     }
 
     const onKeyPress = (e) => {
@@ -186,8 +194,11 @@
             class:floating-active={value && label}
             on:input={handleInput}
             on:keypress={onKeyPress}
+            on:keydown={onKeyDown}
             on:paste={onPaste}
             on:contextmenu={handleContextMenu}
+            on:focus={() => hasFocus = true}
+            on:blur={() => hasFocus = false}
             {disabled}
             {...$$restProps}
             {placeholder}
@@ -197,6 +208,9 @@
             <floating-label class:floating-active={value && label}>{label}</floating-label>
         {/if}
     </div>
+    {#if capsLockWarning && hasFocus && capsLockOn}
+        <Text smaller overrideColor classes="mt-1 text-orange-500">{locale('general.capsLock')}</Text>
+    {/if}
     {#if error}
         <Error {error} />
     {/if}
