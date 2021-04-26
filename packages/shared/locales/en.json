@@ -702,7 +702,8 @@
         "receiving": "Receiving",
         "sending": "Sending",
         "legacyNetwork": "Legacy Network",
-        "capsLock": "Caps Lock is on"
+        "capsLock": "Caps Lock is on",
+        "version": "Version {version}"
     },
     "dates": {
         "today": "Today",
