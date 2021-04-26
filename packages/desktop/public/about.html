@@ -72,7 +72,7 @@
     <script>var exports = exports || {};</script>
 
     <script>
-        window.about.getData((aboutData) => {
+        window.about.getData().then((aboutData) => {
           document.getElementById('title').textContent = aboutData.appName
           document.getElementById('app-icon').src = aboutData.iconPath
           document.getElementById('app-version').textContent = aboutData.version
