@@ -1,4 +1,5 @@
 mod actors;
+mod extension;
 use actors::{dispatch, DispatchMessage, WalletActor, WalletActorMsg};
 
 use iota::common::logger::logger_init;
@@ -16,6 +17,8 @@ use iota_wallet::{
         remove_transfer_progress_listener, EventId,
     },
 };
+use extension::{extension_dispatch, ExtensionActor, ExtensionActorMsg};
+use glow::message::{DispatchMessage as ExtensionDispatchMessage};
 use once_cell::sync::Lazy;
 use riker::actors::*;
 use serde::{Deserialize, Serialize};
@@ -37,6 +40,7 @@ struct WalletActorData {
 type WalletActors = Arc<AsyncMutex<HashMap<String, WalletActorData>>>;
 type MessageReceiver = Box<dyn Fn(String) + Send + Sync + 'static>;
 type MessageReceivers = Arc<Mutex<HashMap<String, MessageReceiver>>>;
+type ExtensionActors = Arc<AsyncMutex<HashMap<String, ActorRef<ExtensionActorMsg>>>>;
 
 fn wallet_actors() -> &'static WalletActors {
     static ACTORS: Lazy<WalletActors> = Lazy::new(Default::default);
@@ -46,6 +50,11 @@ fn wallet_actors() -> &'static WalletActors {
 fn message_receivers() -> &'static MessageReceivers {
     static RECEIVERS: Lazy<MessageReceivers> = Lazy::new(Default::default);
     &RECEIVERS
+}
+
+pub(crate) fn extension_actors() -> &'static ExtensionActors {
+    static EXTENSION_ACTORS: Lazy<ExtensionActors> = Lazy::new(Default::default);
+    &EXTENSION_ACTORS
 }
 
 #[derive(Serialize, Deserialize, Copy, Clone)]
@@ -90,6 +99,7 @@ pub async fn init<A: Into<String>, F: Fn(String) + Send + Sync + 'static>(
     let actor_id = actor_id.into();
 
     let mut actors = wallet_actors().lock().await;
+    let mut extension_actors = extension_actors().lock().await;
 
     let manager = AccountManager::builder()
         .with_storage(
@@ -117,6 +127,13 @@ pub async fn init<A: Into<String>, F: Fn(String) + Send + Sync + 'static>(
                 listeners: Vec::new(),
                 actor: wallet_actor,
             },
+        );
+
+        let extension_actor_name = "extenstion-actor-".to_string() + actor_id.as_str();
+        let extension_actor = sys.actor_of_args::<ExtensionActor, _>(extension_actor_name.as_str(), actor_id.clone()).unwrap();
+        extension_actors.insert(
+            actor_id.to_string(),
+            extension_actor
         );
 
         let mut message_receivers = message_receivers()
@@ -177,6 +194,15 @@ pub async fn destroy<A: Into<String>>(actor_id: A) {
             .expect("Failed to lock message_receivers: respond()");
         message_receivers.remove(&actor_id);
     }
+
+    let mut extension_actors = extension_actors().lock().await;
+    if let Some(actor) = extension_actors.remove(&actor_id) {
+        actor.tell(actors::KillMessage, None);
+        iota_wallet::with_actor_system(|sys| {
+            sys.stop(&actor);
+        })
+        .await;
+    }
 }
 
 pub fn init_logger(config: LoggerConfigBuilder) {
@@ -191,6 +217,7 @@ pub(crate) struct MessageFallback {
 }
 
 pub async fn send_message(serialized_message: String) {
+    println!("SEND MESSAGE {:?}", serialized_message);
     let data = match serde_json::from_str::<DispatchMessage>(&serialized_message) {
         Ok(message) => {
             let actors = wallet_actors().lock().await;
@@ -212,30 +239,50 @@ pub async fn send_message(serialized_message: String) {
             }
         }
         Err(error) => {
-            if let Ok(message) = serde_json::from_str::<MessageFallback>(&serialized_message) {
-                Some((
-                    Some(format!(
-                        r#"{{
-                            "type": "Error",
-                            "id": {},
-                            "payload": {{ 
-                                "type": "InvalidMessage",
-                                "message": {},
-                                "error": {}
-                             }}
-                        }}"#,
-                        match message.id {
-                            Some(id) => serde_json::Value::String(id),
-                            None => serde_json::Value::Null,
-                        },
-                        serialized_message,
-                        serde_json::Value::String(error.to_string()),
-                    )),
-                    message.actor_id,
-                ))
+            // check extension
+            if let Ok(message) = serde_json::from_str::<ExtensionDispatchMessage>(&serialized_message) {
+                let ext_actors = extension_actors().lock().await;
+                let actor_id = message.actor_id.to_string();
+                if let Some(extension_actor) = ext_actors.get(&actor_id) {
+                    match extension_dispatch(extension_actor, message).await {
+                        Ok(response) => Some((response, actor_id)),
+                        Err(e) => Some((Some(e), actor_id)),
+                    }
+                } else {
+                    Some((
+                        Some(format!(
+                            r#"{{ "type": "ActorNotInitialised", "payload": "{}" }}"#,
+                            message.actor_id
+                        )),
+                        message.actor_id,
+                    ))
+                }
             } else {
-                log::error!("[FIREFLY] backend sendMessage error: {:?}", error);
-                None
+                if let Ok(message) = serde_json::from_str::<MessageFallback>(&serialized_message) {
+                    Some((
+                        Some(format!(
+                            r#"{{
+                                "type": "Error",
+                                "id": {},
+                                "payload": {{ 
+                                    "type": "InvalidMessage",
+                                    "message": {},
+                                    "error": {}
+                                }}
+                            }}"#,
+                            match message.id {
+                                Some(id) => serde_json::Value::String(id),
+                                None => serde_json::Value::Null,
+                            },
+                            serialized_message,
+                            serde_json::Value::String(error.to_string()),
+                        )),
+                        message.actor_id,
+                    ))
+                } else {
+                    log::error!("[FIREFLY] backend sendMessage error: {:?}", error);
+                    None
+                }
             }
         }
     };

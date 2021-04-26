@@ -21,6 +21,7 @@
     import Transaction from './Transaction.svelte'
     import Version from './Version.svelte'
     import Snapshot from './Snapshot.svelte'
+    import Glow from './Glow.svelte'
 
     export let locale = 'en'
     export let type = undefined
@@ -50,6 +51,7 @@
         missingBundle: MissingBundle,
         balanceFinder: BalanceFinder,
         snapshot: Snapshot,
+        glow: Glow,
     }
 
     const onkey = (e) => {

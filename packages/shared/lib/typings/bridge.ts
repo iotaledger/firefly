@@ -71,6 +71,7 @@ export enum ResponseTypes {
     SentMigrationBundle = 'SentMigrationBundle',
     LegacySeedChecksum = 'SeedChecksum',
     NodeInfo = 'NodeInfo',
+    CalledPlugin = 'CalledPlugin'
 }
 
 export enum Actions {

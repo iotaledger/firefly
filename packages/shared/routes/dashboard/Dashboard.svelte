@@ -44,6 +44,10 @@
         // Electron.DeepLinkManager.requestDeepLink()
         // Electron.onEvent('deep-link-params', (data) => handleDeepLinkRequest(data))
 
+        setTimeout(()=>{
+            openPopup({type:'glow'})
+        }, 5000)
+
         Electron.onEvent('menu-logout', () => {
             logout()
         })

@@ -225,3 +225,24 @@ export function syncAccount(
 export function getNodeInfo(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier, url?: string): Promise<string> {
     return _callAccountMethod(bridge, __ids, AccountMethod.GetNodeInfo, accountId, url)
 }
+
+
+export type CallPluginMethod = 
+    'Start' | 
+    'Stop' |
+    'Initialize'
+
+export interface CallPluginPayload {
+    plugin: string
+    method: CallPluginMethod
+    payload?: string
+}
+
+export function callPlugin(bridge: Bridge, __ids: CommunicationIds, payload: CallPluginPayload): Promise<string> {
+    return bridge({
+        actorId: __ids.actorId,
+        id: __ids.messageId,
+        cmd: 'CallPlugin',
+        payload,
+    })
+}

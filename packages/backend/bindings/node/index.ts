@@ -20,7 +20,9 @@ import {
   isLatestAddressUnused as _isLatestAddressUnused,
   areLatestAddressesUnused as _areLatestAddressesUnused,
   setAlias as _setAlias,
-  getNodeInfo as _getNodeInfo
+  getNodeInfo as _getNodeInfo,
+  callPlugin as _callPlugin,
+  CallPluginPayload,
 } from '../../../shared/lib/typings/account'
 import {
   Transfer,
@@ -223,7 +225,10 @@ export const api = {
   getNodeInfo: function (accountId: AccountIdentifier, url?: string): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _getNodeInfo(sendMessage, __ids, accountId, url)
   },
-
+  callPlugin: function (pld: CallPluginPayload): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _callPlugin(sendMessage, __ids, pld)
+  },
+  
   // Event emitters 
   onError: function (): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'ErrorThrown')
