@@ -701,7 +701,8 @@
         "sentFrom": "Sent from {account}",
         "receiving": "Receiving",
         "sending": "Sending",
-        "legacyNetwork": "Legacy Network"
+        "legacyNetwork": "Legacy Network",
+        "capsLock": "Caps Lock is on"
     },
     "dates": {
         "today": "Today",
