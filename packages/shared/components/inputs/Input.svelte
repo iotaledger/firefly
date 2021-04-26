@@ -32,7 +32,7 @@
         value = e.target.value
     }
 
-    const onKeyDown = (e) => {
+    const onKeyCaps = (e) => {
         capsLockOn = e.getModifierState('CapsLock')
     }
 
@@ -194,7 +194,8 @@
             class:floating-active={value && label}
             on:input={handleInput}
             on:keypress={onKeyPress}
-            on:keydown={onKeyDown}
+            on:keydown={onKeyCaps}
+            on:keyup={onKeyCaps}
             on:paste={onPaste}
             on:contextmenu={handleContextMenu}
             on:focus={() => hasFocus = true}
