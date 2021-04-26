@@ -1,9 +1,9 @@
 <h1 align="center">
   <br>
-  <a href=""><img src="header-beta.png"></a>
+  <a href=""><img src="header.png"></a>
 </h1>
 
-<h2 align="center">IOTA's upcoming wallet</h2>
+<h2 align="center">IOTA's wallet</h2>
 
 <p align="center">
   <a href="https://discord.iota.org/" style="text-decoration:none;"><img src="https://img.shields.io/badge/Discord-9cf.svg?logo=discord" alt="Discord"></a>
@@ -22,7 +22,7 @@
 
 ## About
 
-Firefly is IOTA's new official wallet for Chrysalis. It is currently in public beta.
+Firefly is IOTA's new official wallet for Chrysalis.
 
 
 ## Installation
