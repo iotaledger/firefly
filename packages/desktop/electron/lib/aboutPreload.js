@@ -13,4 +13,4 @@ contextBridge.exposeInMainWorld('about', {
             return aboutData
         })
     }
-)
+})
