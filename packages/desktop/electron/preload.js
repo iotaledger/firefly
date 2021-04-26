@@ -310,5 +310,4 @@ try {
     contextBridge.exposeInMainWorld('Electron', Electron)
 } catch (error) {
     ipcRenderer.invoke('handle-error', "Preload Error", error)
-    console.log("poop3", error)
 }
