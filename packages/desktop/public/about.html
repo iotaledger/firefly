@@ -72,10 +72,12 @@
     <script>var exports = exports || {};</script>
 
     <script>
-        document.getElementById('title').textContent = window.app.appName
-        document.getElementById('app-icon').src = window.app.iconPath
-        document.getElementById('app-version').textContent = `Version ${window.app.version}`
-        document.getElementById('footer').textContent = `IOTA Foundation ${new Date().getFullYear()}.`
+        window.about.getData().then((aboutData) => {
+          document.getElementById('title').textContent = aboutData.appName
+          document.getElementById('app-icon').src = aboutData.iconPath
+          document.getElementById('app-version').textContent = aboutData.version
+          document.getElementById('footer').textContent = `IOTA Foundation ${new Date().getFullYear()}`
+        })
     </script>
   </body>
 </html>
