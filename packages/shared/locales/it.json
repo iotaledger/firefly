@@ -242,7 +242,7 @@
             },
             "exportStronghold": {
                 "title": "Esporta Backup",
-                "description": "Esporta in un file Stronghold - un backup crittografato completo del tuo wallet e l'ultima cronologia delle transazioni."
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
             },
             "appLock": {
                 "title": "Blocco Automatico",
@@ -252,7 +252,7 @@
             },
             "changePassword": {
                 "title": "Cambia password",
-                "description": "La tua password è utilizzata per proteggere i tuoi wallet. Devi usare una password sicura per proteggere i tuoi fondi."
+                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
             },
             "changePincode": {
                 "title": "Cambia il PIN",
@@ -264,15 +264,15 @@
             },
             "balanceFinder": {
                 "title": "Rivaluta il saldo",
-                "description": "Esegui una ricerca estesa dei token nei tuoi indirizzi."
+                "description": "Perform an extended search of your addresses for tokens"
             },
             "hiddenAccounts": {
                 "title": "Wallet nascosti",
-                "description": "Selezionando questa opzione, verranno visualizzati i wallet precedentemente nascosti."
+                "description": "Selecting this options will show wallets that were previously hidden"
             },
             "deleteProfile": {
                 "title": "Elimina profilo",
-                "description": "Elimina l'intero profilo, wallet e cronologia delle transazioni. Assicurati di avere un backup."
+                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
             },
             "deepLinks": {
                 "title": "Deep link",
@@ -288,7 +288,7 @@
             },
             "configureNodeList": {
                 "title": "Seleziona un nodo",
-                "description": "Gestisce l'elenco dei nodi di rete IOTA a cui connettersi.",
+                "description": "Manage the list of IOTA network nodes you connect to",
                 "primaryNode": "Nodo primario",
                 "excludeNode": "Escludi nodo",
                 "includeNode": "Includi nodo",
@@ -296,7 +296,7 @@
                 "setAsPrimary": "Imposta come primario",
                 "removeNode": "Rimuovi Nodo",
                 "includeOfficialNodeList": "Includi la lista dei nodi ufficiali",
-                "noNodes": "Non ci sono nodi, verrà invece utilizzata la selezione automatica."
+                "noNodes": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "Proof of Work",
@@ -337,7 +337,7 @@
             },
             "reportAnIssue": {
                 "title": "Segnala un problema",
-                "description": "Segnala un bug agli sviluppatori. Controlla per assicurarti che non sia già stato segnalato."
+                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
             }
         },
         "login": {
@@ -701,7 +701,9 @@
         "sentFrom": "Inviato da {account}",
         "receiving": "Ricezione",
         "sending": "Invio",
-        "legacyNetwork": "Rete Legacy"
+        "legacyNetwork": "Rete Legacy",
+        "capsLock": "Caps Lock is on",
+        "version": "Version {version}"
     },
     "dates": {
         "today": "Oggi",

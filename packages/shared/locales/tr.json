@@ -1,7 +1,7 @@
 {
     "views": {
         "onboarding1": {
-            "title": "IOTA Gönder, Al ve Yönet",
+            "title": "IOTA tokenlerinizi gönderin, alın ve yönetin",
             "body": "Firefly, IOTA'nın resmi cüzdan yazılımıdır."
         },
         "legal": {
@@ -31,8 +31,8 @@
             "body2": "Kurtarma kitini doldurur ve güvenli bir şekilde saklarsanız, cüzdanlarınızı her zaman kurtarabilirsiniz."
         },
         "password": {
-            "title": "Şifre oluşturun",
-            "body1": "Bakiyeni koruyabilmek için daha güçlü bir şifreye ihtiyacın var. Kelime kombinasyonlarını kullanın ve yaygın cümle, isim ve tarihleri kullanmaktan kaçının.",
+            "title": "Bir şifre oluştur",
+            "body1": "Bakiyeni koruyabilmek için daha güçlü bir şifreye ihtiyacın var. Kelime kombinasyonlarını kullanın, ve yaygın cümle, isim ve tarihleri kullanmaktan kaçının.",
             "body2": "Şifrenizi kurtarma kitinin altına yazmanız önerilir."
         },
         "protect": {
@@ -41,7 +41,7 @@
             "body2": "PIN'inizi güvende saklayın!"
         },
         "pin": {
-            "title": "PIN kodunuzu ayarlayın",
+            "title": "PIN kodu oluşturunuz",
             "body1": "Aşağıya 6 haneli PIN kodunuzu girin. Profilinize girebilmek için PIN sorgulaması yapılacaktır.",
             "body2": "Sadece sayıları kullanın"
         },
@@ -54,7 +54,7 @@
             "title": "Cüzdanınızı yedekleyin",
             "body1": "Kurtarma cümlesi gösterilecektir. Kurtarma kitinize yazın.",
             "body2": "Kurtarma cümlenizi kimse ile paylaşmayınız. Herhangi bir yerden bakiyenize ulaşmak için kullanılabilir.",
-            "body3": "Eğer kurtarma cümlenizi kaybederseniz, varlıklarınızı da kaybedersiniz."
+            "body3": "Eğer kurtarma cümlenizi kaybederseniz, varlıklarınızı kaybedebilirsiniz."
         },
         "recoveryPhrase": {
             "title": "Kurtarma cümlesi",
@@ -65,7 +65,7 @@
             "hideRecoveryPhrase": "Kurtarma sözcüğünü gizle"
         },
         "verifyRecoveryPhrase": {
-            "title": "Kurtarma şifrenizi doğrulayın",
+            "title": "Kurtarma ifadenizi doğrulayın",
             "body": "Aşağıdaya yazmış olduğunuz cümleyi tekrardan kontrol edin. Lütfen her kelimeyi sıralı bir şekilde seçin.",
             "word": "Kelime",
             "verified": "Kurtarma cümlesi onaylandı",
@@ -147,7 +147,7 @@
             "restoringWallet": "Cüzdan geri yükleniyor...",
             "findingBalance": "Bakiye bulunuyor...",
             "incorrectSeedVaultPassword": "Hatalı SeedVault şifresi.",
-            "noDataSeedVault": "No data could be found in the SeedVault.",
+            "noDataSeedVault": "SeedVault'ta hiçbir veri bulunamadı.",
             "signingBundle": "Paket imzalanıyor",
             "broadcastingBundle": "Paket yayınlanıyor",
             "miningBundle": "Paket işleniyor",
@@ -242,17 +242,17 @@
             },
             "exportStronghold": {
                 "title": "Yedeği dışa aktar",
-                "description": "Bir Stronghold dosyasına aktarın - cüzdanlarınızın ve en son işlem geçmişinizin şifrelenmiş tam yedeği."
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
             },
             "appLock": {
                 "title": "Otomatik Kilitleme",
                 "description": "Cüzdanlarınız kilitlenmeden ve çıkış yapılmadan önce hareketsizlik süresi",
-                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
-                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
+                "durationMinute": "{time, plural,one {1 dakika}other {# dakikalar}}",
+                "durationHour": "{time, plural,one {1 saat}other {#saatler}}"
             },
             "changePassword": {
                 "title": "Şifre Değiştir",
-                "description": "Parolanız, cüzdanlarınızın güvenliğini sağlamak için kullanılır. Bakiyenizi korumak için güçlü bir parola kullanın."
+                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
             },
             "changePincode": {
                 "title": "PIN kodunu değiştir",
@@ -264,15 +264,15 @@
             },
             "balanceFinder": {
                 "title": "Bakiye bulucu",
-                "description": "Tokenlar için detaylı bir adres araması yapın."
+                "description": "Perform an extended search of your addresses for tokens"
             },
             "hiddenAccounts": {
                 "title": "Gizli cüzdanlar",
-                "description": "Bu seçeneğin seçilmesi, önceden gizlenmiş cüzdanları gösterecektir."
+                "description": "Selecting this options will show wallets that were previously hidden"
             },
             "deleteProfile": {
                 "title": "Profili sil",
-                "description": "Tüm profilinizi, cüzdanlarınızı ve işlem geçmişinizi siler. Bir yedeğiniz olduğundan emin olun."
+                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
             },
             "deepLinks": {
                 "title": "Derin Bağlantılar",
@@ -288,7 +288,7 @@
             },
             "configureNodeList": {
                 "title": "Seçilmiş Sayfa",
-                "description": "Bağlandığınız IOTA ağ nodelarının listesini yönetin.",
+                "description": "Manage the list of IOTA network nodes you connect to",
                 "primaryNode": "Birincil düğüm",
                 "excludeNode": "Düğümü hariç tut",
                 "includeNode": "Düğümü dahil et",
@@ -296,7 +296,7 @@
                 "setAsPrimary": "Birincil düğüm olarak ayarla",
                 "removeNode": "Düğüm kaldır",
                 "includeOfficialNodeList": "Resmi düğüm listesini dahil et",
-                "noNodes": "Düğüm yok, bunun yerine otomatik seçim kullanılacak."
+                "noNodes": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "İş Kanıtı",
@@ -337,7 +337,7 @@
             },
             "reportAnIssue": {
                 "title": "Sorun rapor et",
-                "description": "Geliştiricilere bir hata bildirin. Daha önce rapor edilmediğinden emin olmak için kontrol edin."
+                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
             }
         },
         "login": {
@@ -701,7 +701,9 @@
         "sentFrom": "{account}'dan gönderildi",
         "receiving": "Alınıyor",
         "sending": "Gönderiliyor",
-        "legacyNetwork": "Legacy Network"
+        "legacyNetwork": "Eski Ağ",
+        "capsLock": "Caps Lock is on",
+        "version": "Version {version}"
     },
     "dates": {
         "today": "Bugün",

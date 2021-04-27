@@ -242,7 +242,7 @@
             },
             "exportStronghold": {
                 "title": "백업 내보내기",
-                "description": "Stronghold 파일로 내보내기 - 지갑과 최신 거래 내역의 완전한 암호화 백업."
+                "description": "Stronghold 파일로 내보내기 - 지갑과 최신 거래 내역의 완전한 암호화 백업"
             },
             "appLock": {
                 "title": "자동 잠금",
@@ -252,7 +252,7 @@
             },
             "changePassword": {
                 "title": "비밀번호 변경하기",
-                "description": "비밀번호는 지갑을 보호하는 데 사용됩니다. 자금을 보호하려면 강력한 암호를 사용해야합니다."
+                "description": "비밀번호는 지갑을 보호하는 데 사용됩니다. 자금을 보호하려면 강력한 암호를 사용해야합니다"
             },
             "changePincode": {
                 "title": "PIN 코드 변경",
@@ -264,15 +264,15 @@
             },
             "balanceFinder": {
                 "title": "잔고 찾기",
-                "description": "토큰에 대한 주소의 확장 검색을 수행해주세요."
+                "description": "토큰에 대한 주소의 확장 검색을 수행해주세요"
             },
             "hiddenAccounts": {
                 "title": "숨겨진 지갑",
-                "description": "이 옵션을 선택하면 이전에 숨겨진 지갑이 표시됩니다."
+                "description": "이 옵션을 선택하면 이전에 숨겨진 지갑이 표시됩니다"
             },
             "deleteProfile": {
                 "title": "프로필 삭제",
-                "description": "전체 프로필, 지갑 및 거래 내역을 삭제합니다. 백업이 있는지 확인하십시오."
+                "description": "지갑, 프로필 및 거래 내역 전체를 삭제합니다. 삭제 전에 백업해 놓았는지 확인해주세요"
             },
             "deepLinks": {
                 "title": "딥 링크",
@@ -288,7 +288,7 @@
             },
             "configureNodeList": {
                 "title": "노드 선택",
-                "description": "연결하는 IOTA 네트워크 노드 목록을 관리합니다.",
+                "description": "연결하는 IOTA 네트워크 노드 목록을 관리합니다",
                 "primaryNode": "주 노드",
                 "excludeNode": "이 노드 제외하기",
                 "includeNode": "포함 노드",
@@ -296,7 +296,7 @@
                 "setAsPrimary": "주 노드로 설정",
                 "removeNode": "노드 삭제",
                 "includeOfficialNodeList": "공식 노드 목록 포함",
-                "noNodes": "노드가 없으며 대신 자동 선택이 사용됩니다."
+                "noNodes": "노드가 없으며 대신 자동 선택이 사용됩니다"
             },
             "proofOfWork": {
                 "title": "작업증명",
@@ -337,7 +337,7 @@
             },
             "reportAnIssue": {
                 "title": "오류 보고하기",
-                "description": "개발진에게 오류를 보고합니다. 보고하기 전에 이미 보고된 오류인지 다시 한번 확인해 주세요."
+                "description": "개발진에게 오류를 보고합니다. 보고하기 전에 이미 보고된 오류인지 다시 한번 확인해 주세요"
             }
         },
         "login": {
@@ -701,7 +701,9 @@
         "sentFrom": "{account} 계정으로 보냄",
         "receiving": "받는 중",
         "sending": "보내는 중",
-        "legacyNetwork": "예전 네트워크"
+        "legacyNetwork": "예전 네트워크",
+        "capsLock": "Caps Lock 켜짐",
+        "version": "{version} 버전"
     },
     "dates": {
         "today": "오늘",
