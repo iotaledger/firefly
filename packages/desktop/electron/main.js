@@ -356,8 +356,8 @@ const getDiagnostics = () => {
         [5, ['Puma', '10.1']]
     ]);
 
-    const platform = os.platform()
-    const platformVersion = os.release()
+    let platform = os.platform()
+    let platformVersion = os.release()
 
     if (platform === 'darwin') {
         platform = 'macOS'
