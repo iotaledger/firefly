@@ -242,7 +242,7 @@
             },
             "exportStronghold": {
                 "title": "Vie varmuuskopio",
-                "description": "Vie Stronghold-tiedostoon - täydellinen salattu varmuuskopio lompakoistasi ja viimeisimmästä transaktiohistoriasta."
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
             },
             "appLock": {
                 "title": "Automaattinen lukitus",
@@ -252,7 +252,7 @@
             },
             "changePassword": {
                 "title": "Vaihda salasana",
-                "description": "Salasanaasi käytetään lompakkojesi suojaamiseen. Sinun on käytettävä vahvaa salasanaa varojesi turvaamiseksi."
+                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
             },
             "changePincode": {
                 "title": "Vaihda PIN-koodi",
@@ -264,15 +264,15 @@
             },
             "balanceFinder": {
                 "title": "Saldon etsijä",
-                "description": "Suorita laajennettu haku osoitteistasi varoja varten."
+                "description": "Perform an extended search of your addresses for tokens"
             },
             "hiddenAccounts": {
                 "title": "Piilotetut lompakot",
-                "description": "Tämän asetuksen valitseminen näyttää aiemmin piilotetut lompakot."
+                "description": "Selecting this options will show wallets that were previously hidden"
             },
             "deleteProfile": {
                 "title": "Poista profiili",
-                "description": "Poistaa koko profiilisi, lompakkosi ja transaktiohistoriasi. Varmista, että sinulla on varmuuskopio."
+                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
             },
             "deepLinks": {
                 "title": "Syvälinkit",
@@ -288,7 +288,7 @@
             },
             "configureNodeList": {
                 "title": "Valitse solmu",
-                "description": "Hallitse listaa IOTA-verkon solmuista, joihin yhdistät.",
+                "description": "Manage the list of IOTA network nodes you connect to",
                 "primaryNode": "Ensisijainen solmu",
                 "excludeNode": "Hylkää solmu",
                 "includeNode": "Sisällytä solmu",
@@ -296,7 +296,7 @@
                 "setAsPrimary": "Aseta ensisijaiseksi",
                 "removeNode": "Poista solmu",
                 "includeOfficialNodeList": "Sisällytä virallinen solmulista",
-                "noNodes": "Ei solmuja, sen sijaan käytetään automaattista valintaa."
+                "noNodes": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "Todiste työstä (PoW)",
@@ -337,7 +337,7 @@
             },
             "reportAnIssue": {
                 "title": "Ilmoita ongelmasta",
-                "description": "Ilmoista virheestä kehittäjille. Tarkista varmistaaksesi, ettei sitä ole jo raportoitu."
+                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
             }
         },
         "login": {
@@ -701,7 +701,9 @@
         "sentFrom": "Lähetetty lompakosta {account}",
         "receiving": "Vastaanotetaan",
         "sending": "Lähetetään",
-        "legacyNetwork": "Vanha verkko"
+        "legacyNetwork": "Vanha verkko",
+        "capsLock": "Caps Lock is on",
+        "version": "Version {version}"
     },
     "dates": {
         "today": "Tänään",

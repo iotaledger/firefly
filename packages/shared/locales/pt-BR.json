@@ -147,7 +147,7 @@
             "restoringWallet": "Restaurando a carteira...",
             "findingBalance": "Procurando saldo...",
             "incorrectSeedVaultPassword": "Senha SeedVault incorreta.",
-            "noDataSeedVault": "No data could be found in the SeedVault.",
+            "noDataSeedVault": "Nenhum dado foi encontrado no SeedVault.",
             "signingBundle": "Assinando pacote",
             "broadcastingBundle": "Transmitindo pacote",
             "miningBundle": "Minerando pacote",
@@ -242,17 +242,17 @@
             },
             "exportStronghold": {
                 "title": "Exportar Backup",
-                "description": "Exportar arquivo Stronghold - um backup completo criptografado da sua carteira e do histórico recente de transações."
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
             },
             "appLock": {
                 "title": "Bloqueio Automático",
                 "description": "Tempo de inatividade antes do bloqueio de suas carteiras e você ser desconectado",
-                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
-                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
+                "durationMinute": "{time, plural, one {1 minuto} other {# minutos}}",
+                "durationHour": "{time, plural, one {1 hora} other {# horas}}"
             },
             "changePassword": {
                 "title": "Alterar Senha",
-                "description": "Sua senha é usada para proteger sua carteira. Você deve usar uma senha forte para proteger seus fundos."
+                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
             },
             "changePincode": {
                 "title": "Alterar código PIN",
@@ -264,15 +264,15 @@
             },
             "balanceFinder": {
                 "title": "Localizador de saldo",
-                "description": "Faça uma pesquisa estendida de seus endereços por tokens."
+                "description": "Perform an extended search of your addresses for tokens"
             },
             "hiddenAccounts": {
                 "title": "Carteiras ocultas",
-                "description": "Mostrar carteiras ocultas."
+                "description": "Selecting this options will show wallets that were previously hidden"
             },
             "deleteProfile": {
                 "title": "Excluir perfil",
-                "description": "Exclui seu perfil inteiro, carteiras e histórico de transações. Certifique-se de ter um backup."
+                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
             },
             "deepLinks": {
                 "title": "Links Profundos",
@@ -288,7 +288,7 @@
             },
             "configureNodeList": {
                 "title": "Selecionar um servidor",
-                "description": "Gerencie a lista de nodes da rede IOTA aos quais você se conecta.",
+                "description": "Manage the list of IOTA network nodes you connect to",
                 "primaryNode": "Servidor primário",
                 "excludeNode": "Excluir servidor",
                 "includeNode": "Incluir servidor",
@@ -296,7 +296,7 @@
                 "setAsPrimary": "Definir como principal",
                 "removeNode": "Remover servidor",
                 "includeOfficialNodeList": "Incluir a lista de servidores oficiais",
-                "noNodes": "Não há servidores, a seleção automática será usada."
+                "noNodes": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "Prova de Trabalho",
@@ -337,7 +337,7 @@
             },
             "reportAnIssue": {
                 "title": "Reportar um problema",
-                "description": "Relate um erro para os desenvolvedores. Verifique se o mesmo ainda não foi relatado."
+                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
             }
         },
         "login": {
@@ -701,7 +701,9 @@
         "sentFrom": "Enviado de {account}",
         "receiving": "Recebendo",
         "sending": "Enviando",
-        "legacyNetwork": "Legacy Network"
+        "legacyNetwork": "Rede Legada",
+        "capsLock": "Caps Lock is on",
+        "version": "Version {version}"
     },
     "dates": {
         "today": "Hoje",

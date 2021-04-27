@@ -151,7 +151,7 @@
             "signingBundle": "Lot de signature",
             "broadcastingBundle": "Lot de diffusion",
             "miningBundle": "Lot de signature",
-            "problemRestoringWallet": "There was a network error restoring your wallet. Please try again.",
+            "problemRestoringWallet": "Une erreur réseau s'est produite lors de la restauration de votre portefeuille. Veuillez réessayer.",
             "minimumMigrationAmountSpentAddresses": "Le montant minimum nécessaire pour déplacer vos fonds est de 1 Mi pour chaque adresse. Merci de vérifier le montant de votre portefeuille.",
             "tooManyAddressesToMigrate": "Vous avez trop d'adresses avec un solde insuffisant pour déplacer vos fonds. Vérifiez à nouveau si votre solde ne semble pas correct.",
             "cannotMigrateAllYourFunds": "Nous ne pouvons pas transférer tous vos fonds parce que certaines adresses ont trop de valeur. Vous pouvez néanmoins continuer. {value} seront perdues.",
@@ -184,7 +184,7 @@
         },
         "transferFragmentedFunds": {
             "body1": "Firefly va maintenant procéder au transfert de vos fonds. Cela peut prendre un certain temps.",
-            "migrate": "Les fonds sont en train d'être transférés",
+            "migrate": "Migrer les fonds",
             "transaction": "Transaction {number}",
             "rerun": "Réessayez"
         },
@@ -221,7 +221,7 @@
                 "description": "Changer le nom de votre profil ou définir un avatar"
             },
             "sync": {
-                "title": "Sync wallets",
+                "title": "Synchroniser les portefeuilles",
                 "description": ""
             },
             "theme": {
@@ -242,17 +242,17 @@
             },
             "exportStronghold": {
                 "title": "Exportation de la sauvegarde",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history."
+                "description": "Exporter vers un fichier Stronghold - une sauvegarde chiffrée complète de vos portefeuilles et l'historique récent des transactions"
             },
             "appLock": {
                 "title": "Verrouillage automatique",
-                "description": "Inactivity time before your wallets lock and you are logged out",
+                "description": "Temps d'inactivité avant le verrouillage de vos portefeuilles et vous êtes déconnecté",
                 "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
                 "durationHour": "{time, plural, one {1 heure} other {# heures}}"
             },
             "changePassword": {
                 "title": "Modifier le mot de passe",
-                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds."
+                "description": "Votre mot de passe est utilisé pour sécuriser vos portefeuilles. Utilisez un mot de passe fort pour protéger vos fonds"
             },
             "changePincode": {
                 "title": "Modifier le code PIN",
@@ -264,15 +264,15 @@
             },
             "balanceFinder": {
                 "title": "Retrouvez vos fonds",
-                "description": "Effectuez une recherche étendue sur l'ensemble de vos adresses pour retrouver vos jetons."
+                "description": "Effectuer une recherche étendue sur l'ensemble de vos adresses pour retrouver vos jetons"
             },
             "hiddenAccounts": {
-                "title": "Hidden wallets",
-                "description": "Selecting this options will show wallets that were previously hidden."
+                "title": "Portefeuilles cachés",
+                "description": "La sélection de ces options affichera les comptes qui étaient précédemment cachés"
             },
             "deleteProfile": {
                 "title": "Supprimer le profil",
-                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup."
+                "description": "Supprime l'intégralité de votre profil, de vos portefeuilles et de l'historique des transactions. Assurez-vous d'avoir une sauvegarde"
             },
             "deepLinks": {
                 "title": "Liens profonds",
@@ -288,7 +288,7 @@
             },
             "configureNodeList": {
                 "title": "Sélectionner un serveur",
-                "description": "Manage the list of IOTA network nodes you connect to.",
+                "description": "Gérer la liste des nœuds réseau IOTA auxquels vous vous connectez",
                 "primaryNode": "Noeud principal",
                 "excludeNode": "Exclure le noeud",
                 "includeNode": "Inclure le noeud",
@@ -296,7 +296,7 @@
                 "setAsPrimary": "Définir comme noeud principal",
                 "removeNode": "Supprimer le noeud",
                 "includeOfficialNodeList": "Inclure la liste officielle des nœuds",
-                "noNodes": "Il n'y a pas de nœud, la sélection automatique sera utilisée à la place."
+                "noNodes": "Il n'y a pas de nœud, la sélection automatique sera utilisée à la place"
             },
             "proofOfWork": {
                 "title": "Preuve de travail",
@@ -337,7 +337,7 @@
             },
             "reportAnIssue": {
                 "title": "Signaler un problème",
-                "description": "Signaler un bug aux développeurs. Vérifiez pour vous assurer qu'il n'a pas déjà été signalé."
+                "description": "Signaler un bug aux développeurs. Vérifiez bien qu'il n'a pas déjà été signalé"
             }
         },
         "login": {
@@ -357,8 +357,8 @@
                 },
                 "strongholdStatus": {
                     "title": "Statut du portefeuille",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "locked": "Verrouillé",
+                    "unlocked": "Déverrouillé"
                 },
                 "strongholdBackup": {
                     "title": "Copie de Sauvegarde du Portefeuille",
@@ -382,7 +382,7 @@
     "popups": {
         "password": {
             "title": "Mot de passe obligatoire",
-            "subtitle": "Please enter your password to unlock your wallets",
+            "subtitle": "Veuillez saisir votre mot de passe pour déverrouiller vos portefeuilles",
             "backup": "Veuillez saisir votre mot de passe pour exporter une sauvegarde"
         },
         "qr": {
@@ -394,34 +394,34 @@
             "upToDateDescription": "Vous utilisez la dernière et la plus sûre version de Firefly.",
             "updateAvailable": "Mise à jour de Firefly disponible",
             "updateDetails": "Version {version} - {date}",
-            "noAutoUpdate": "Auto-update is disabled in this Windows version, please go to https://firefly.iota.org to download the update."
+            "noAutoUpdate": "La mise à jour automatique est désactivée dans cette version de Windows, veuillez vous rendre sur https://firefly.iota.org pour télécharger la mise à jour."
         },
         "backup": {
             "title": "Dernière sauvegarde : {date}",
             "lastBackup": "Vous avez sauvegardé la dernière fois le {date}",
-            "backupDescription": "It is important to back up regularly to ensure you have a copy of your wallets and transaction history.",
+            "backupDescription": "Il est important de procéder régulièrement à une sauvegarde afin de vous assurer que vous avez une copie de vos portefeuilles et de l'historique de vos transactions.",
             "backupWarning": "Si vous perdez votre sauvegarde et votre phrase de récupération, vous perdrez l'accès à vos fonds.",
             "notBackedUp": "Non sauvegardé",
-            "notBackedUpDescription": "You have not backed up your wallets",
+            "notBackedUpDescription": "Vous n'avez pas sauvegardé vos portefeuilles",
             "saving": "Enregistrement..."
         },
         "deleteAccount": {
             "title": "Supprimer {name} ?",
-            "body": "This wallet has no transaction history. It can safely be deleted.",
+            "body": "Ce portefeuille n'a pas d'historique de transaction. Il peut être supprimé en toute sécurité.",
             "typePassword": "Saisissez le mot de passe de votre portefeuille pour confirmer.",
-            "hideAccount": "Delete wallet",
+            "hideAccount": "Supprimer le portefeuille",
             "errorTitle": "Impossible de supprimer {name}",
-            "errorBody1": "You cannot delete this wallet, you must have at least one."
+            "errorBody1": "Vous ne pouvez pas supprimer ce portefeuille, vous devez en posséder au moins un."
         },
         "hideAccount": {
             "title": "Cacher {name} ?",
-            "body": "You can find this wallet later by enabling \"Show hidden wallets\" in Advanced Settings.",
+            "body": "Vous pourrez retrouver ce portefeuille plus tard en activant \"Afficher les portefeuilles cachés\" dans les Paramètres Avancés.",
             "typePassword": "Saisissez le mot de passe de votre portefeuille pour confirmer.",
-            "hideAccount": "Hide wallet",
+            "hideAccount": "Cacher le portefeuille",
             "errorTitle": "Impossible de masquer {name}",
-            "errorBody1": "To hide a wallet it must have 0 balance.",
-            "errorBody2": "You currently have {balance} remaining on this wallet. Please move these funds to a different wallet and try again.",
-            "errorBody3": "You cannot hide this wallet, you must have at least one."
+            "errorBody1": "Pour cacher un portefeuille, il doit avoir un solde de 0.",
+            "errorBody2": "Il vous reste actuellement {balance} sur ce portefeuille. Veuillez déplacer ces fonds vers un portefeuille différent et réessayez.",
+            "errorBody3": "Vous ne pouvez pas cacher ce portefeuille, vous devez en posséder au moins un."
         },
         "addressHistory": {
             "title": "Historique de l'adresse {name}",
@@ -480,10 +480,10 @@
             "proceed": "Je comprends le risque"
         },
         "snapshot": {
-            "title": "Ongoing network upgrade",
-            "body": "The Chrysalis network upgrade has begun.",
-            "bodyMigration": "Migration is disabled until it is complete.",
-            "bodyFirefly": "Firefly is disabled until it is complete. Token migration will still be possible afterwards."
+            "title": "Mise à jour du réseau en cours",
+            "body": "La mise à niveau du réseau Chrysalis a commencé.",
+            "bodyMigration": "La migration est désactivée jusqu'à ce qu'elle soit terminée.",
+            "bodyFirefly": "Firefly est désactivé jusqu'à ce qu'elle soit terminée. La migration des jetons sera possible ensuite."
         }
     },
     "charts": {
@@ -491,8 +491,8 @@
         "outgoingMi": "{value} Mi sortants",
         "portoflio": "Portefeuille",
         "token": "Jeton",
-        "accountValue": "Wallet Value",
-        "accountActivity": "Wallet Activity",
+        "accountValue": "Valeur du Portefeuille",
+        "accountActivity": "Activité du Portefeuille",
         "timeframe1Hour": "1 heure",
         "timeframe1Day": "1 jour",
         "timeframe1Week": "1 semaine",
@@ -546,11 +546,11 @@
         "updateFirefly": "Mettre à jour Firefly",
         "restartNow": "Redémarrer maintenant",
         "saveBackup": "Enregistrer la sauvegarde de Stronghold",
-        "customizeAcount": "Customise wallet",
+        "customizeAcount": "Personnaliser le portefeuille",
         "viewAddressHistory": "Voir l'historique des adresses",
-        "hideAccount": "Hide wallet",
-        "showAccount": "Unhide wallet",
-        "deleteAccount": "Delete wallet",
+        "hideAccount": "Cacher le portefeuille",
+        "showAccount": "Afficher le portefeuille",
+        "deleteAccount": "Supprimer le portefeuille",
         "max": "Maximum",
         "addNode": "Ajouter un nœud",
         "updateNode": "Mettre à jour le noeud",
@@ -566,7 +566,7 @@
         "copy": "Copier",
         "paste": "Coller",
         "selectAll": "Tout Sélectionner",
-        "addAccount": "Add Wallet",
+        "addAccount": "Ajouter un Portefeuille",
         "checkForUpdates": "Rechercher des Mises à jour",
         "reportAnIssue": "Signaler une Anomalie",
         "clear": "Effacer",
@@ -581,13 +581,13 @@
         "readDocumentation": "Consulter la documentation",
         "visitFaq": "Visitez la FAQ",
         "viewStatus": "Voir le statut",
-        "showHiddenAccounts": "Show hidden wallets",
+        "showHiddenAccounts": "Afficher les portefeuilles cachés",
         "confirm": "Confirmer",
         "findBalances": "Trouvez vos fonds",
         "searchBalances": "Recherches des fonds",
         "searchAgain": "Chercher encore",
         "searching": "Recherche en cours...",
-        "closeFirefly": "Close Firefly"
+        "closeFirefly": "Fermer Firefly"
     },
     "general": {
         "password": "Mot de passe",
@@ -605,10 +605,10 @@
         "sendFunds": "Envoyer des fonds",
         "sendToAddress": "Envoyer à l'adresse",
         "scanQrOrPaste": "Scannez un QR code ou collez une Adresse",
-        "moveFundsBetweenAccounts": "Move funds between wallets",
+        "moveFundsBetweenAccounts": "Déplacer des fonds entre portefeuilles",
         "sendTokensToAddress": "Envoyer des jetons à une adresse",
-        "manageAccount": "Manage Wallet",
-        "customizeAcount": "Customize your wallet",
+        "manageAccount": "Gérer le Portefeuille",
+        "customizeAcount": "Personnaliser votre portefeuille",
         "account": "Portefeuille",
         "sendingToAddress": "Envoi vers l'adresse",
         "amount": "Montant",
@@ -630,25 +630,25 @@
         "lightTheme": "Thème Clair",
         "darkTheme": "Thème Sombre",
         "balance": "Solde",
-        "accountBalance": "Wallet Balance",
+        "accountBalance": "Solde du Portefeuille",
         "incoming": "Entrant",
         "outgoing": "Sortant",
         "totalIn": "Total entrées",
         "totalOut": "Total sorties",
-        "accounts": "Wallets",
-        "myAccounts": "My Wallets",
+        "accounts": "Portefeuilles",
+        "myAccounts": "Mes Portefeuilles",
         "automaticNodeSelection": "Sélection de nœud automatique",
         "manualNodeSelection": "Sélection de nœud manuelle",
         "profiles": "Profils",
         "developerProfile": "Profil Développeur",
         "developerProfileDescription": "Vous permet de vous connecter aux réseaux de test",
         "dev": "Dév",
-        "createAccount": "Create a Wallet",
-        "accountName": "Wallet name",
+        "createAccount": "Créer un Portefeuille",
+        "accountName": "Nom du portefeuille",
         "latestTransactions": "Dernières Transactions",
         "transactions": "Transactions",
         "security": "Sécurité",
-        "accountAddress": "Wallet Address",
+        "accountAddress": "Adresse du Portefeuille",
         "nodes": "Nœuds",
         "wallet": "Portefeuille",
         "help": "Aide",
@@ -660,26 +660,26 @@
         "status": "État",
         "confirmed": "Confirmé",
         "pending": "En cours",
-        "noAccounts": "You have no wallets, please create one.",
+        "noAccounts": "Vous n'avez aucun portefeuille, veuillez en créer un.",
         "loadingAccounts": " Chargement, veuillez patienter...",
         "addProfile": "Ajouter Profil",
         "noRecentHistory": "Aucun historique récent",
-        "firstSync": "Syncing history, this may take a while...",
-        "transferSyncing": "Syncing wallet",
+        "firstSync": "Synchronisation de l'historique, cela peut prendre un certain temps...",
+        "transferSyncing": "Synchronisation du portefeuille",
         "transferSelectingInputs": "Choisir entrée",
         "transferRemainderAddress": "Génération de l'adresse de dépôt restante",
         "transferSigning": "Signature de la transaction",
         "transferPow": "Exécution de la preuve de travail",
         "transferBroadcasting": "Diffusion de la transaction",
         "transferComplete": "Transfert terminé",
-        "creatingAccount": "Creating wallet, please wait...",
-        "updatingAccount": "Updating wallet, please wait...",
-        "accountSyncing": "Wallet is syncing",
-        "accountSyncComplete": "Wallet sync complete",
+        "creatingAccount": "Création du portefeuille en cours, veuillez patienter...",
+        "updatingAccount": "Mise à jour du portefeuille en cours, veuillez patienter...",
+        "accountSyncing": "Le portefeuille est en cours de synchronisation",
+        "accountSyncComplete": "Synchronisation du portefeuille terminée",
         "passwordUpdating": "Mise à jour du mot de passe...",
         "passwordSuccess": "Mot de passe mis à jour avec succès",
         "passwordFailed": "La mise à jour du mot de passe a échoué",
-        "syncingAccounts": "Syncing wallets...",
+        "syncingAccounts": "Synchronisation des portefeuilles en cours...",
         "exportingStronghold": "Export Stronghold en cours...",
         "exportingStrongholdSuccess": "Stronghold exporté avec succès",
         "exportingStrongholdFailed": "L'export Stronghold a échoué",
@@ -694,14 +694,16 @@
         "passwordStrength4": "Robuste",
         "creatingProfile": "Création du profile, veuillez patienter...",
         "fundMigration": "Migration des fonds",
-        "accountRemoved": "This wallet is hidden. Unhide it to perform transfers.",
+        "accountRemoved": "Ce portefeuille est caché. Affichez-le pour effectuer des transferts.",
         "receivingTo": "Réception sur {account}",
         "sendingFrom": "Envoi depuis {account}",
         "receivedTo": "Reçu sur {account}",
         "sentFrom": "Envoyé depuis {account}",
         "receiving": "Réception en cours",
         "sending": "Envoi en cours",
-        "legacyNetwork": "Ancien Réseau"
+        "legacyNetwork": "Ancien Réseau",
+        "capsLock": "Majuscules activées",
+        "version": "Version {version}"
     },
     "dates": {
         "today": "Aujourd'hui",
@@ -724,7 +726,7 @@
         "calcMinutesRemaining": "Calcul des minutes restantes...",
         "minutesRemaining": "{minutes, plural, one {Il reste 1 minute} other {# minutes restantes}}",
         "copiedToClipboard": "Copié dans le presse-papier",
-        "accountsSynchronized": "Wallet synchronization complete",
+        "accountsSynchronized": "Synchronisation du portefeuille terminée",
         "migratedAccountChrysalisDown": "Vos fonds seront disponibles après Chrysalis le 28 avril",
         "migratedAccountChrysalisUp": "Vos fonds seront bientôt disponibles"
     },
@@ -756,10 +758,10 @@
             "incorrect": "Votre code PIN actuel est incorrect."
         },
         "account": {
-            "length": "Your wallet name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "empty": "You must use your latest wallet before creating a new one.",
-            "notEmpty": "You must transfer your balance before deleting this wallet.",
-            "duplicate": "A wallet with this name already exists.",
+            "length": "Le nom de votre portefeuille ne peut pas contenir plus de {length, plural, one {1 caractère} other {# caractères}}.",
+            "empty": "Vous devez utiliser votre dernier portefeuille avant d'en créer un nouveau.",
+            "notEmpty": "Vous devez transférer votre solde avant de supprimer ce portefeuille.",
+            "duplicate": "Un portefeuille avec ce nom existe déjà.",
             "tilde": "Un nom de profil ne peut pas commencer par le caractère '~'.",
             "control": "Un nom de profil ne peut pas contenir de caractère de contrôle.",
             "startDot": "Un nom de profil ne peut pas commencer par un point.",
@@ -774,8 +776,8 @@
             "wrongAddressPrefix": "Les adresses commencent par le préfixe {prefix}.",
             "wrongAddressFormat": "L'adresse n'est pas correctement formatée.",
             "invalidAddress": "Cette adresse n'est pas valide.",
-            "insufficientFunds": "This wallet has insufficient funds.",
-            "noToAccount": "You have not selected a wallet to send the funds to.",
+            "insufficientFunds": "Ce portefeuille a des fonds insuffisants.",
+            "noToAccount": "Vous n'avez pas sélectionné de portefeuille vers lequel envoyer les fonds.",
             "sendingDust": "Vous ne pouvez pas envoyer moins de 1 Mi.",
             "leavingDust": "Vous ne pouvez pas laisser moins de 1 Mi sur votre adresse."
         },

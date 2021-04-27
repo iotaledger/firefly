@@ -242,7 +242,7 @@
             },
             "exportStronghold": {
                 "title": "بیک اپ برآمد کریں",
-                "description": "ایک سٹرانگ ہولڈ کی فائل میں برآمد کریں - آپ کے والیٹ اور ٹرانزیکشن کی تازہ ترین تاریخ کا ایک مکمل مرموز کردہ بیک اپ."
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
             },
             "appLock": {
                 "title": "خودکار لاک",
@@ -252,7 +252,7 @@
             },
             "changePassword": {
                 "title": "پاس ورڈ تبدیل کریں",
-                "description": "آپ کا پاس ورڈ آپ کے والیٹ کو محفوظ بنانے کے لئے استعمال ہوتا ہے۔ اپنے فنڈز کی حفاظت کے لیئے آپ کو ایک مضبوط پاس ورڈ استعمال کرنا چاہئے."
+                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
             },
             "changePincode": {
                 "title": "پن کوڈ تبدیل کریں",
@@ -264,15 +264,15 @@
             },
             "balanceFinder": {
                 "title": "بلینس کا متلاشی",
-                "description": "ٹوکنز کے لیئے اپنے ایڈریسز کی ایک توسیع تلاش کریں."
+                "description": "Perform an extended search of your addresses for tokens"
             },
             "hiddenAccounts": {
                 "title": "پوشیدہ والٹس",
-                "description": "ان آپشنز کو منتخب کرنے سے ایسے والٹس دکھائے جائیں گے جو پہلے چھپے ہوئے تھے."
+                "description": "Selecting this options will show wallets that were previously hidden"
             },
             "deleteProfile": {
                 "title": "پروفائل حذف کریں",
-                "description": "آپ کا پورا والٹس، پروفائل اور ٹرانزیکشن کی تاریخ کو حذف کرتا ہے۔ یقینی بنائیں کہ آپ کا بیک اپ موجود ہے."
+                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
             },
             "deepLinks": {
                 "title": "گہرے لنکس",
@@ -288,7 +288,7 @@
             },
             "configureNodeList": {
                 "title": "نوڈ منتخب کریں",
-                "description": "IOTA نیٹ ورک کے نوڈذ کی فہرست کا نظم کریں جس سے آپ کنکٹ ہوتے ہیں.",
+                "description": "Manage the list of IOTA network nodes you connect to",
                 "primaryNode": "بنیادی نوڈ",
                 "excludeNode": "نوڈ خارج کریں",
                 "includeNode": "نوڈ شامل کریں",
@@ -296,7 +296,7 @@
                 "setAsPrimary": "بنیادی نوڈ کے طور پر سیٹ کریں",
                 "removeNode": "نوڈ ہٹائیں",
                 "includeOfficialNodeList": "آفیشیل نوڈ لسٹ شامل کریں",
-                "noNodes": "کوئی نوڈز نہیں ہیں ، اس کی بجائے خودکار انتخاب کا استعمال کیا جائے گا."
+                "noNodes": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "پروف آف ورک",
@@ -337,7 +337,7 @@
             },
             "reportAnIssue": {
                 "title": "مسئلہ کی رپورٹ کریں",
-                "description": "ڈویلپرز کو بگ کی اطلاع دیں۔ یہ یقینی بنانے کے لئے چیک کریں کہ اس کی اطلاع پہلے ہی نہیں دی گئی ہے."
+                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
             }
         },
         "login": {
@@ -701,7 +701,9 @@
         "sentFrom": "{account} سے بھیجا گیا",
         "receiving": "وصول پزیر",
         "sending": "بھیجے جا رہے",
-        "legacyNetwork": "لیگیسی نیٹ ورک"
+        "legacyNetwork": "لیگیسی نیٹ ورک",
+        "capsLock": "Caps Lock is on",
+        "version": "Version {version}"
     },
     "dates": {
         "today": "آج",

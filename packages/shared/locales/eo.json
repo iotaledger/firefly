@@ -242,7 +242,7 @@
             },
             "exportStronghold": {
                 "title": "Export Backup",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history."
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
             },
             "appLock": {
                 "title": "Automatic Lock",
@@ -252,7 +252,7 @@
             },
             "changePassword": {
                 "title": "Change password",
-                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds."
+                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
             },
             "changePincode": {
                 "title": "Change PIN code",
@@ -264,15 +264,15 @@
             },
             "balanceFinder": {
                 "title": "Balance finder",
-                "description": "Perform an extended search of your addresses for tokens."
+                "description": "Perform an extended search of your addresses for tokens"
             },
             "hiddenAccounts": {
                 "title": "Hidden wallets",
-                "description": "Selecting this options will show wallets that were previously hidden."
+                "description": "Selecting this options will show wallets that were previously hidden"
             },
             "deleteProfile": {
                 "title": "Delete profile",
-                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup."
+                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
             },
             "deepLinks": {
                 "title": "Profundaj ligiloj",
@@ -288,7 +288,7 @@
             },
             "configureNodeList": {
                 "title": "Elektu nodon",
-                "description": "Administru la liston de IOTA ret-nodoj, al kiuj vi konektas.",
+                "description": "Manage the list of IOTA network nodes you connect to",
                 "primaryNode": "Ĉefa nodo",
                 "excludeNode": "Ekskluzivi nodon",
                 "includeNode": "Inkluzivi nodon",
@@ -296,7 +296,7 @@
                 "setAsPrimary": "Agordi kiel la ĉefa",
                 "removeNode": "Forigi nodon",
                 "includeOfficialNodeList": "Inkluzivi oficialan nod-liston",
-                "noNodes": "Ne ekzistas nodoj, aŭtomata elektado estos uzata anstataŭe."
+                "noNodes": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "Proof of work",
@@ -337,7 +337,7 @@
             },
             "reportAnIssue": {
                 "title": "Report an issue",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported."
+                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
             }
         },
         "login": {
@@ -701,7 +701,9 @@
         "sentFrom": "Sent from {account}",
         "receiving": "Receiving",
         "sending": "Sending",
-        "legacyNetwork": "Legacy Network"
+        "legacyNetwork": "Legacy Network",
+        "capsLock": "Caps Lock is on",
+        "version": "Version {version}"
     },
     "dates": {
         "today": "Hodiaŭ",

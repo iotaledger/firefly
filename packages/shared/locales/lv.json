@@ -1,33 +1,33 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Send, Receive & Manage your IOTA tokens",
-            "body": "Firefly is the official wallet software of IOTA."
+            "title": "Nosūtīt, saņemt un pārvaldīt savus IOTA līdzekļus",
+            "body": "Firefly ir IOTA oficiālā maka programmatūra."
         },
         "legal": {
-            "title": "Privacy Policy & Terms of Service",
-            "body": "Please review the Privacy Policy and Terms of Service.",
-            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
+            "title": "Privātuma politika un Lietošanas noteikumi",
+            "body": "Lūdzu iepazīstieties ar Privātuma politiku un Lietošanas noteikumiem.",
+            "checkbox": "Esmu izlasījis un piekrītu Privātuma politikai un Lietošanas noteikumiem"
         },
         "appearance": {
-            "title": "Appearance",
-            "body": "Choose your app theme."
+            "title": "Izskats",
+            "body": "Izvēlies savas aplikācijas motīvu."
         },
         "profile": {
-            "title": "Create a profile",
-            "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
-            "profileName": "Profile Name"
+            "title": "Izveido profilu",
+            "body1": "Jūs varat izveidot vairākus lietotāja profilus, lai pārvaldītu savus makus un uzlabotu privātumu.",
+            "body2": "Sāksim ar Jūsu profila nosaukumu. Jūs varat pievienot citus profilus velāk.",
+            "profileName": "Profila nosaukums"
         },
         "setup": {
-            "title": "Set up a wallet",
-            "chrysalisTitle": "Chrysalis Network Update",
-            "chrysalisBody": "From April 21st, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
-            "learnMore": "Learn about the migration"
+            "title": "Uzstādi maku",
+            "chrysalisTitle": "Chrysalis tīmekļa uzlabojumi",
+            "chrysalisBody": "No 21. aprīļa lietotāji var pārcelt savus līdzekļus uz Chrysalis tīmekli. Mēs rekomendējam nekavēties ar Jūsu līdzekļu pārcelšanu.",
+            "learnMore": "Uzzini vairāk par pārcelšanu"
         },
         "secure": {
-            "title": "Secure your wallet",
-            "body1": "Save and print the Recovery Kit PDF template.",
+            "title": "Pasargā savu maku",
+            "body1": "Saglabā un izprintē Recovery Kit PDF paraugu.",
             "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallets."
         },
         "password": {
@@ -138,7 +138,7 @@
             "body2": "It may take some time. Do not turn off your device during the migration.",
             "existing": "Your old wallet",
             "new": "Your new wallet",
-            "learn": "Learn about the migration",
+            "learn": "Uzzini vairāk par pārcelšanu",
             "beginMigration": "Begin Migration",
             "migrating": "Migrating funds...",
             "migrated": "{balance} migrated",
@@ -242,7 +242,7 @@
             },
             "exportStronghold": {
                 "title": "Export Backup",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history."
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
             },
             "appLock": {
                 "title": "Automatic Lock",
@@ -252,7 +252,7 @@
             },
             "changePassword": {
                 "title": "Change password",
-                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds."
+                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
             },
             "changePincode": {
                 "title": "Change PIN code",
@@ -264,15 +264,15 @@
             },
             "balanceFinder": {
                 "title": "Balance finder",
-                "description": "Perform an extended search of your addresses for tokens."
+                "description": "Perform an extended search of your addresses for tokens"
             },
             "hiddenAccounts": {
                 "title": "Hidden wallets",
-                "description": "Selecting this options will show wallets that were previously hidden."
+                "description": "Selecting this options will show wallets that were previously hidden"
             },
             "deleteProfile": {
                 "title": "Delete profile",
-                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup."
+                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
             },
             "deepLinks": {
                 "title": "Deep links",
@@ -288,7 +288,7 @@
             },
             "configureNodeList": {
                 "title": "Select a node",
-                "description": "Manage the list of IOTA network nodes you connect to.",
+                "description": "Manage the list of IOTA network nodes you connect to",
                 "primaryNode": "Primary node",
                 "excludeNode": "Exclude node",
                 "includeNode": "Include node",
@@ -296,7 +296,7 @@
                 "setAsPrimary": "Set as primary",
                 "removeNode": "Remove node",
                 "includeOfficialNodeList": "Include official node list",
-                "noNodes": "There are no nodes, automatic selection will be used instead."
+                "noNodes": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "Proof of work",
@@ -337,7 +337,7 @@
             },
             "reportAnIssue": {
                 "title": "Report an issue",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported."
+                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
             }
         },
         "login": {
@@ -701,7 +701,9 @@
         "sentFrom": "Sent from {account}",
         "receiving": "Receiving",
         "sending": "Sending",
-        "legacyNetwork": "Legacy Network"
+        "legacyNetwork": "Legacy Network",
+        "capsLock": "Caps Lock is on",
+        "version": "Version {version}"
     },
     "dates": {
         "today": "Today",

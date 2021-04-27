@@ -242,7 +242,7 @@
             },
             "exportStronghold": {
                 "title": "Экспорт резервной копии",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history."
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
             },
             "appLock": {
                 "title": "Автоматическая блокировка",
@@ -252,7 +252,7 @@
             },
             "changePassword": {
                 "title": "Изменить пароль",
-                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds."
+                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
             },
             "changePincode": {
                 "title": "Изменить PIN-код",
@@ -264,15 +264,15 @@
             },
             "balanceFinder": {
                 "title": "Balance finder",
-                "description": "Perform an extended search of your addresses for tokens."
+                "description": "Perform an extended search of your addresses for tokens"
             },
             "hiddenAccounts": {
                 "title": "Hidden wallets",
-                "description": "Selecting this options will show wallets that were previously hidden."
+                "description": "Selecting this options will show wallets that were previously hidden"
             },
             "deleteProfile": {
                 "title": "Удалить профиль",
-                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup."
+                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
             },
             "deepLinks": {
                 "title": "Умные ссылки",
@@ -288,7 +288,7 @@
             },
             "configureNodeList": {
                 "title": "Выберите узел",
-                "description": "Manage the list of IOTA network nodes you connect to.",
+                "description": "Manage the list of IOTA network nodes you connect to",
                 "primaryNode": "Основной узел",
                 "excludeNode": "Исключить узел",
                 "includeNode": "Включить узел",
@@ -296,7 +296,7 @@
                 "setAsPrimary": "Установить как основной",
                 "removeNode": "Удалить узел",
                 "includeOfficialNodeList": "Включить список официальных узлов",
-                "noNodes": "Узлы не выбраны, вместо этого узлы будут выбираться автоматически."
+                "noNodes": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "Доказательство Работы (PoW)",
@@ -337,7 +337,7 @@
             },
             "reportAnIssue": {
                 "title": "Сообщить об ошибке",
-                "description": "Сообщи об ошибке разработчикам. Убедись что об этом еще не сообщили."
+                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
             }
         },
         "login": {
@@ -701,7 +701,9 @@
         "sentFrom": "Sent from {account}",
         "receiving": "Receiving",
         "sending": "Sending",
-        "legacyNetwork": "Legacy Network"
+        "legacyNetwork": "Legacy Network",
+        "capsLock": "Caps Lock is on",
+        "version": "Version {version}"
     },
     "dates": {
         "today": "Сегодня",

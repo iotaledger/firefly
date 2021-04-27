@@ -11,7 +11,7 @@
         },
         "appearance": {
             "title": "Изглед",
-            "body": "Choose your app theme."
+            "body": "Одбери си ја темата."
         },
         "profile": {
             "title": "Креирај профил",
@@ -242,7 +242,7 @@
             },
             "exportStronghold": {
                 "title": "Export Backup",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history."
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
             },
             "appLock": {
                 "title": "Автоматско заклучување",
@@ -252,7 +252,7 @@
             },
             "changePassword": {
                 "title": "Промени ја лозинката",
-                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds."
+                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
             },
             "changePincode": {
                 "title": "Променете го PIN кодот",
@@ -264,15 +264,15 @@
             },
             "balanceFinder": {
                 "title": "Пронаоѓач на салдото",
-                "description": "Perform an extended search of your addresses for tokens."
+                "description": "Perform an extended search of your addresses for tokens"
             },
             "hiddenAccounts": {
                 "title": "Hidden wallets",
-                "description": "Selecting this options will show wallets that were previously hidden."
+                "description": "Selecting this options will show wallets that were previously hidden"
             },
             "deleteProfile": {
                 "title": "Избриши го профилот",
-                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup."
+                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
             },
             "deepLinks": {
                 "title": "Длабоки врски",
@@ -288,7 +288,7 @@
             },
             "configureNodeList": {
                 "title": "Избери јазол",
-                "description": "Manage the list of IOTA network nodes you connect to.",
+                "description": "Manage the list of IOTA network nodes you connect to",
                 "primaryNode": "Примарен јазол",
                 "excludeNode": "Exclude node",
                 "includeNode": "Include node",
@@ -296,7 +296,7 @@
                 "setAsPrimary": "Постави како примарно",
                 "removeNode": "Отстрани го јазолот",
                 "includeOfficialNodeList": "Include official node list",
-                "noNodes": "There are no nodes, automatic selection will be used instead."
+                "noNodes": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "Proof of Work",
@@ -337,7 +337,7 @@
             },
             "reportAnIssue": {
                 "title": "Report an issue",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported."
+                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
             }
         },
         "login": {
@@ -701,7 +701,9 @@
         "sentFrom": "Sent from {account}",
         "receiving": "Receiving",
         "sending": "Sending",
-        "legacyNetwork": "Legacy Network"
+        "legacyNetwork": "Legacy Network",
+        "capsLock": "Caps Lock is on",
+        "version": "Version {version}"
     },
     "dates": {
         "today": "Денес",
