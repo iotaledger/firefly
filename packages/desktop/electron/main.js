@@ -54,11 +54,11 @@ const handleError = (errorType, error, isRenderProcessError) => {
 }
 
 process.on('uncaughtException', error => {
-    handleError('Unhandled Error', error)
+    handleError('Main Unhandled Error', error)
 });
 
 process.on('unhandledRejection', error => {
-    handleError('Unhandled Promise Rejection', error)
+    handleError('Main Unhandled Promise Rejection', error)
 });
 
 /**
