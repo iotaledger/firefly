@@ -159,14 +159,14 @@
       document.getElementById('version').textContent = `App Version: ${errorData.version}`
       document.getElementById('diagnostics').textContent = errorData.diagnostics
       document.getElementById('errorType').textContent = `Error Type: ${errorData.errorType}`
-      document.getElementById('details').textContent = (errorData.error || "").toString()
+      document.getElementById('details').textContent = JSON.stringify(errorData.error || "")
     })
 
     function copy() {
       let content = `App Version: ${errorData.version}\r\n\r\n`
       content += errorData.diagnostics + "\r\n\r\n"
       content += `Error Type: ${errorData.errorType}` + "\r\n\r\n"
-      content += (errorData.error || "").toString()
+      content += JSON.stringify(errorData.error || "")
       copyToClipboard(content)
     }
 

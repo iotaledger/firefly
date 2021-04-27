@@ -54,11 +54,11 @@ const handleError = (errorType, error, isRenderProcessError) => {
 }
 
 process.on('uncaughtException', error => {
-    handleError('Unhandled Error', error)
+    handleError('Main Unhandled Error', error)
 });
 
 process.on('unhandledRejection', error => {
-    handleError('Unhandled Promise Rejection', error)
+    handleError('Main Unhandled Promise Rejection', error)
 });
 
 /**
@@ -337,9 +337,43 @@ ipcMain.handle('get-path', (_e, path) => {
 
 // Diagnostics
 const getDiagnostics = () => {
+    const osXNameMap = new Map([
+        [20, ['Big Sur', '11']],
+        [19, ['Catalina', '10.15']],
+        [18, ['Mojave', '10.14']],
+        [17, ['High Sierra', '10.13']],
+        [16, ['Sierra', '10.12']],
+        [15, ['El Capitan', '10.11']],
+        [14, ['Yosemite', '10.10']],
+        [13, ['Mavericks', '10.9']],
+        [12, ['Mountain Lion', '10.8']],
+        [11, ['Lion', '10.7']],
+        [10, ['Snow Leopard', '10.6']],
+        [9, ['Leopard', '10.5']],
+        [8, ['Tiger', '10.4']],
+        [7, ['Panther', '10.3']],
+        [6, ['Jaguar', '10.2']],
+        [5, ['Puma', '10.1']]
+    ]);
+
+    let platform = os.platform()
+    let platformVersion = os.release()
+
+    if (platform === 'darwin') {
+        platform = 'macOS'
+        const verSplit = platformVersion.split('.')
+        const num = Number.parseInt(verSplit[0], 10)
+        if (!Number.isNaN(num)) {
+            const [_, version] = osXNameMap.get(num)
+            if (version) {
+               platformVersion = version
+            }
+        }
+    }
+
     return [
-        { label: 'popups.diagnostics.platform', value: os.platform() },
-        { label: 'popups.diagnostics.platformVersion', value: os.release() },
+        { label: 'popups.diagnostics.platform', value: platform },
+        { label: 'popups.diagnostics.platformVersion', value: platformVersion },
         { label: 'popups.diagnostics.platformArchitecture', value: os.arch() },
         { label: 'popups.diagnostics.cpuCount', value: os.cpus().length },
         { label: 'popups.diagnostics.totalMem', value: `${(os.totalmem() / 1048576).toFixed(1)} MB` },
