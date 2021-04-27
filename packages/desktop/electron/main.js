@@ -359,13 +359,13 @@ const getDiagnostics = () => {
     const platform = os.platform()
     const platformVersion = os.release()
 
-    if (platform === "darwin") {
+    if (platform === 'darwin') {
+        platform = 'macOS'
         const verSplit = platformVersion.split('.')
         const num = Number.parseInt(verSplit[0], 10)
         if (!Number.isNaN(num)) {
             const lookup = osXNameMap[num]
             if (lookup) {
-               platform = lookup[0]
                platformVersion = lookup[1]
             }
         }
