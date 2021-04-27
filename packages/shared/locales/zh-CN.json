@@ -147,7 +147,7 @@
             "restoringWallet": "正在恢复钱包...",
             "findingBalance": "正在寻找余额...",
             "incorrectSeedVaultPassword": "SeedVault 密码不正确。",
-            "noDataSeedVault": "No data could be found in the SeedVault.",
+            "noDataSeedVault": "SeedVault文件中没有找到数据。",
             "signingBundle": "签名包",
             "broadcastingBundle": "广播包",
             "miningBundle": "签名包",
@@ -242,17 +242,17 @@
             },
             "exportStronghold": {
                 "title": "导出备份",
-                "description": "导出到 Stronghold文件 - 完整加密备份您的钱包及其最新交易记录。"
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
             },
             "appLock": {
                 "title": "自动锁定",
                 "description": "自动锁定钱包并登出的待机时间",
-                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
-                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
+                "durationMinute": "{time, plural, one {1分钟} other {# 分钟}}",
+                "durationHour": "{time, plural, one {1小时} other {# 小时}}"
             },
             "changePassword": {
                 "title": "修改密码",
-                "description": "您的密码是用来保护您的钱包的。您必须使用一个强有力的密码来保护您的资金。"
+                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
             },
             "changePincode": {
                 "title": "修改 PIN 码",
@@ -264,15 +264,15 @@
             },
             "balanceFinder": {
                 "title": "余额搜索器",
-                "description": "对您的币地址进行扩展搜索。"
+                "description": "Perform an extended search of your addresses for tokens"
             },
             "hiddenAccounts": {
                 "title": "隐藏钱包列表",
-                "description": "选择此选项将显示以前隐藏的钱包。"
+                "description": "Selecting this options will show wallets that were previously hidden"
             },
             "deleteProfile": {
                 "title": "删除配置文件",
-                "description": "删除您的整个账户信息、钱包和交易历史。请确保您有一个备份。"
+                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
             },
             "deepLinks": {
                 "title": "深链接",
@@ -288,7 +288,7 @@
             },
             "configureNodeList": {
                 "title": "选择节点",
-                "description": "管理您连接的 IOTA网络节点列表。",
+                "description": "Manage the list of IOTA network nodes you connect to",
                 "primaryNode": "主节点",
                 "excludeNode": "排除此节点",
                 "includeNode": "包含此节点",
@@ -296,7 +296,7 @@
                 "setAsPrimary": "设为主要节点",
                 "removeNode": "删除节点",
                 "includeOfficialNodeList": "包含官方节点列表",
-                "noNodes": "尚未配置节点，将使用节点自动选择功能。"
+                "noNodes": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "工作量证明",
@@ -337,7 +337,7 @@
             },
             "reportAnIssue": {
                 "title": "反馈问题",
-                "description": "向开发者反馈错误。请检查以确保它尚未被报告过。"
+                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
             }
         },
         "login": {
@@ -701,7 +701,9 @@
         "sentFrom": "已从 {account} 发送",
         "receiving": "接收",
         "sending": "发送",
-        "legacyNetwork": "Legacy Network"
+        "legacyNetwork": "旧的网络",
+        "capsLock": "Caps Lock is on",
+        "version": "Version {version}"
     },
     "dates": {
         "today": "今日",

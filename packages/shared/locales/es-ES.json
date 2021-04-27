@@ -22,7 +22,7 @@
         "setup": {
             "title": "Despliega una cartera",
             "chrysalisTitle": "Actualización de red Chrysalis",
-            "chrysalisBody": "Desde el 21 de sbril, los usuarios podrán migrar sus tokens a la nueva red Chrysalis. Te recomendamos migrar tus tokens existentes lo antes posible.",
+            "chrysalisBody": "Desde el 21 de abril, los usuarios podrán migrar sus tokens a la nueva red Chrysalis. Te recomendamos migrar tus tokens existentes lo antes posible.",
             "learnMore": "Aprende acerca de la migración"
         },
         "secure": {
@@ -53,7 +53,7 @@
         "backup": {
             "title": "Respaldar tu cartera",
             "body1": "Ahora se te mostrará una frase de recuperación. Escríbela en tu Kit de Recuperación.",
-            "body2": "No compartas tu frase de recuperación con nadie. Puede utilizarse para acceder a sus tokens desde cualquier lugar.",
+            "body2": "No compartas tu frase de recuperación con nadie. Puede utilizarse para acceder a tus tokens desde cualquier lugar.",
             "body3": "Si pierdes tu frase de recuperación, puedes perder tus fondos."
         },
         "recoveryPhrase": {
@@ -147,7 +147,7 @@
             "restoringWallet": "Restaurando cartera...",
             "findingBalance": "Buscando balance...",
             "incorrectSeedVaultPassword": "Contraseña de SeedVault incorrecta.",
-            "noDataSeedVault": "No se han encontrado datos en SeedVault.",
+            "noDataSeedVault": "No se han encontrado datos en el SeedVault.",
             "signingBundle": "Firmando paquete",
             "broadcastingBundle": "Transmitiendo paquete",
             "miningBundle": "Minando paquete",
@@ -242,7 +242,7 @@
             },
             "exportStronghold": {
                 "title": "Exportar Copia de Seguridad",
-                "description": "Exportar a un archivo Stronghold - una copia de seguridad completa encriptada de tus carteras y último historial de transacciones."
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
             },
             "appLock": {
                 "title": "Bloqueo Automático",
@@ -252,7 +252,7 @@
             },
             "changePassword": {
                 "title": "Modificar contraseña",
-                "description": "Tu contraseña se utiliza para proteger tus carteras. Debes usr una contraseña segura para proteger tus fondos."
+                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
             },
             "changePincode": {
                 "title": "Cambiar código PIN",
@@ -264,15 +264,15 @@
             },
             "balanceFinder": {
                 "title": "Buscador de balances",
-                "description": "Realizar una búsqueda extensa de tokens en tus direcciones."
+                "description": "Perform an extended search of your addresses for tokens"
             },
             "hiddenAccounts": {
                 "title": "Carteras ocultas",
-                "description": "Seleccionando estas opciones se mostrarán carteras que antes estaban ocultas."
+                "description": "Selecting this options will show wallets that were previously hidden"
             },
             "deleteProfile": {
                 "title": "Eliminar perfil",
-                "description": "Elimina por completo tu perfil, carteras e historial de transacciones. Asegúrate de que tienes una copia de seguridad."
+                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
             },
             "deepLinks": {
                 "title": "Enlaces profundos",
@@ -288,7 +288,7 @@
             },
             "configureNodeList": {
                 "title": "Seleccionar un nodo",
-                "description": "Administra la lista de nodos de red IOTA a los que te conectas.",
+                "description": "Manage the list of IOTA network nodes you connect to",
                 "primaryNode": "Nodo primario",
                 "excludeNode": "Excluir nodo",
                 "includeNode": "Incluir nodo",
@@ -296,7 +296,7 @@
                 "setAsPrimary": "Establecer como primaria",
                 "removeNode": "Eliminar nodo",
                 "includeOfficialNodeList": "Incluir la lista oficial de nodos",
-                "noNodes": "No hay nodos, se utilizará la selección automática en su lugar."
+                "noNodes": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "Prueba de trabajo",
@@ -337,7 +337,7 @@
             },
             "reportAnIssue": {
                 "title": "Informar de un problema",
-                "description": "Informar de un error a los desarrolladores. Comprueba que no haya sido reportado previamente."
+                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
             }
         },
         "login": {
@@ -701,7 +701,9 @@
         "sentFrom": "Enviado desde {account}",
         "receiving": "Recibiendo",
         "sending": "Enviando",
-        "legacyNetwork": "Red Legacy"
+        "legacyNetwork": "Red Legacy",
+        "capsLock": "Caps Lock is on",
+        "version": "Version {version}"
     },
     "dates": {
         "today": "Hoy",

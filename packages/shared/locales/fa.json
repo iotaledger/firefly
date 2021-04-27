@@ -242,7 +242,7 @@
             },
             "exportStronghold": {
                 "title": "استخراج بک آپ",
-                "description": "استخراج به صورت فایل Stronghold - یک بک آپ گیری کامل و رمزگذاری شده از کیف پول شما به همراه آخرین تاریخچه تراکنش ها."
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
             },
             "appLock": {
                 "title": "ﻗﻔﻞ ﺧﻮﺩﮐﺎﺭ",
@@ -252,7 +252,7 @@
             },
             "changePassword": {
                 "title": "تغییر رمز عبور",
-                "description": "رمز عبور برای امنیت کیف پول شما استفاده میشود. برای حفاظت از وجوه خود باید از رمز عبور قوی استفاده کنید."
+                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
             },
             "changePincode": {
                 "title": "تغییر PIN کد",
@@ -264,15 +264,15 @@
             },
             "balanceFinder": {
                 "title": "یابنده موجودی",
-                "description": "انجام جستجو گسترده در آدرس‌های شما برای پیدا کردن توکن‌ها."
+                "description": "Perform an extended search of your addresses for tokens"
             },
             "hiddenAccounts": {
                 "title": "کیف پول های مخفی",
-                "description": "با انتخاب این گزینه حساب هایی که قبلا پنهان بوده است، نمایش داده می شود."
+                "description": "Selecting this options will show wallets that were previously hidden"
             },
             "deleteProfile": {
                 "title": "حذف پروفایل",
-                "description": "کل پروفایل ، کیف پول ها و سابقه معاملات شما را پاک می کند. حتماً نسخه بک آپ تهیه کنید."
+                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
             },
             "deepLinks": {
                 "title": "لینک عمیق",
@@ -288,7 +288,7 @@
             },
             "configureNodeList": {
                 "title": "انتخاب نود",
-                "description": "لیست نودهای شبکه IOTA را که به آنها متصل می شوید را مدیریت کنید.",
+                "description": "Manage the list of IOTA network nodes you connect to",
                 "primaryNode": "گره اصلی",
                 "excludeNode": "حذف گره",
                 "includeNode": "اضافه کردن گره",
@@ -296,7 +296,7 @@
                 "setAsPrimary": "تنظیم به عنوان اصلی",
                 "removeNode": "حذف نود",
                 "includeOfficialNodeList": "اضافه کردن لیست گره های رسمی",
-                "noNodes": "گره ای وجود ندارد، به جای آن انتخاب اتوماتیک استفاده می شود."
+                "noNodes": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "اثبات کار",
@@ -337,7 +337,7 @@
             },
             "reportAnIssue": {
                 "title": "گزارش یک مشکل",
-                "description": "گزارش یک باگ به توسعه دهندگان. اول چک کنید تا مطمئن شوید که قبلا گزارش نشده باشد."
+                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
             }
         },
         "login": {
@@ -701,7 +701,9 @@
         "sentFrom": "فرستاده شده از {account}",
         "receiving": "در حال دریافت",
         "sending": "در حال ارسال",
-        "legacyNetwork": "شبکه قدیمی"
+        "legacyNetwork": "شبکه قدیمی",
+        "capsLock": "Caps Lock is on",
+        "version": "Version {version}"
     },
     "dates": {
         "today": "امروز",

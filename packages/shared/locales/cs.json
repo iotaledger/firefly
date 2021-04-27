@@ -5,13 +5,13 @@
             "body": "Firefly je oficiální peněženka IOTA."
         },
         "legal": {
-            "title": "Ochrana osobních údajů a smluvní podmínky",
-            "body": "Zkontrolujte zásady ochrany osobních údajů a podmínky služby.",
-            "checkbox": "Četl jsem a souhlasím se Zásadami ochrany osobních údajů a podmínkami služby"
+            "title": "Zásady ochrany osobních údajů a smluvní podmínky",
+            "body": "Zkontrolujte Zásady ochrany osobních údajů a Smluvní podmínky.",
+            "checkbox": "Četl jsem a souhlasím se Zásadami ochrany osobních údajů a Smluvními podmínkami"
         },
         "appearance": {
             "title": "Vzhled",
-            "body": "Vybrat vzhled applikace."
+            "body": "Vyberte vzhled aplikace."
         },
         "profile": {
             "title": "Vytvořit profil",
@@ -20,7 +20,7 @@
             "profileName": "Název profilu"
         },
         "setup": {
-            "title": "Nastavit peněženku",
+            "title": "Nastavení peněženky",
             "chrysalisTitle": "Aktualizace sítě Chrysalis",
             "chrysalisBody": "Od 21. dubna mohou uživatelé migrovat své tokeny do nové sítě Chrysalis. Doporučujeme vám co nejdříve migrovat vaše stávající tokeny.",
             "learnMore": "Přečtěte si o migraci"
@@ -147,7 +147,7 @@
             "restoringWallet": "Obnovuji peněženku...",
             "findingBalance": "Hledání zůstatku...",
             "incorrectSeedVaultPassword": "Nesprávné heslo k SeedVaultu.",
-            "noDataSeedVault": "No data could be found in the SeedVault.",
+            "noDataSeedVault": "V SeedVaultu nebyla nalezena žádná data.",
             "signingBundle": "Podepisování balíčku",
             "broadcastingBundle": "Posílání balíčku",
             "miningBundle": "Těžení balíčku",
@@ -242,37 +242,37 @@
             },
             "exportStronghold": {
                 "title": "Exportovat zálohu",
-                "description": "Exportovat do Stronghold souboru - kompletní šifrovaná záloha vašich peněženek a poslední historie transakcí."
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
             },
             "appLock": {
                 "title": "Automatický zámek",
                 "description": "Čas nečinnosti před uzamknutím peněženek a odhlášeni",
-                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
-                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
+                "durationMinute": "{time, plural, one {1 minuta} other {# minut}}",
+                "durationHour": "{time, plural, one {# hodina} other {# hodin}}"
             },
             "changePassword": {
                 "title": "Změna hesla",
-                "description": "Vaše heslo se používá k zabezpečení peněženek. Musíte použít silné heslo k ochraně prostředků."
+                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
             },
             "changePincode": {
                 "title": "Změnit PIN kód",
                 "description": "Váš PIN udržuje Váš zůstatek a transakce soukromé",
-                "currentPincode": "Aktuální PIN kód",
+                "currentPincode": "Aktuální PIN",
                 "newPincode": "Nový PIN",
                 "confirmNewPincode": "Potvrďte nový PIN",
                 "action": "Změnit PIN"
             },
             "balanceFinder": {
                 "title": "Hledač zůstatku",
-                "description": "Provést rozšířené vyhledávání tokenů napříč adresami."
+                "description": "Perform an extended search of your addresses for tokens"
             },
             "hiddenAccounts": {
                 "title": "Skryté peněženky",
-                "description": "Výběrem možnosti se zobrazí peněženky, které byly dříve skryty."
+                "description": "Selecting this options will show wallets that were previously hidden"
             },
             "deleteProfile": {
                 "title": "Smazat profil",
-                "description": "Odstraní celou historii profilu, peněženek a transakcí. Ujistěte se, že máte zálohu."
+                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
             },
             "deepLinks": {
                 "title": "Hluboké odkazy",
@@ -288,7 +288,7 @@
             },
             "configureNodeList": {
                 "title": "Vybrat Node",
-                "description": "Spravujte list IOTA nodes, ke kterým se připojujete.",
+                "description": "Manage the list of IOTA network nodes you connect to",
                 "primaryNode": "Primární Node",
                 "excludeNode": "Vyloučit node",
                 "includeNode": "Zahrnout node",
@@ -296,7 +296,7 @@
                 "setAsPrimary": "Nastavit jako hlavní",
                 "removeNode": "Odstranit uzel",
                 "includeOfficialNodeList": "Zahrnout oficiální seznam node",
-                "noNodes": "Neexistují žádné Nodes, bude použit automatický výběr."
+                "noNodes": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "Proof of Work",
@@ -337,7 +337,7 @@
             },
             "reportAnIssue": {
                 "title": "Nahlásit problém",
-                "description": "Nahlásit chybu vývojářům. Zkontrolujte, zda již nebyla nahlášena."
+                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
             }
         },
         "login": {
@@ -701,7 +701,9 @@
         "sentFrom": "Odesláno z {account}",
         "receiving": "Přijímání",
         "sending": "Odesílání",
-        "legacyNetwork": "Legacy Network"
+        "legacyNetwork": "Zastaralá síť",
+        "capsLock": "Caps Lock is on",
+        "version": "Version {version}"
     },
     "dates": {
         "today": "Dnes",

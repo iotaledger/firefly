@@ -242,7 +242,7 @@
             },
             "exportStronghold": {
                 "title": "Exportovať zálohu",
-                "description": "Exportovať do Stronghold súboru - kompletná zašifrovaná záloha vašich peňaženiek a najnovšej histórie transakcii."
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
             },
             "appLock": {
                 "title": "Automatické uzamknutie",
@@ -252,7 +252,7 @@
             },
             "changePassword": {
                 "title": "Zmeniť heslo",
-                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds."
+                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
             },
             "changePincode": {
                 "title": "Zmeniť PIN kód",
@@ -264,15 +264,15 @@
             },
             "balanceFinder": {
                 "title": "Balance finder",
-                "description": "Perform an extended search of your addresses for tokens."
+                "description": "Perform an extended search of your addresses for tokens"
             },
             "hiddenAccounts": {
                 "title": "Skryté peňaženky",
-                "description": "Selecting this options will show wallets that were previously hidden."
+                "description": "Selecting this options will show wallets that were previously hidden"
             },
             "deleteProfile": {
                 "title": "Odstrániť profil",
-                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup."
+                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
             },
             "deepLinks": {
                 "title": "Deep linky",
@@ -288,7 +288,7 @@
             },
             "configureNodeList": {
                 "title": "Zvoliť uzol",
-                "description": "Manage the list of IOTA network nodes you connect to.",
+                "description": "Manage the list of IOTA network nodes you connect to",
                 "primaryNode": "Hlavný uzol",
                 "excludeNode": "Vylúčiť uzol",
                 "includeNode": "Zahrnúť uzol",
@@ -296,7 +296,7 @@
                 "setAsPrimary": "Nastaviť ako hlavný",
                 "removeNode": "Odstrániť uzol",
                 "includeOfficialNodeList": "Zahrnúť oficiálny zoznam uzlov",
-                "noNodes": "There are no nodes, automatic selection will be used instead."
+                "noNodes": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "Proof of Work",
@@ -337,7 +337,7 @@
             },
             "reportAnIssue": {
                 "title": "Nahlásiť problém",
-                "description": "Nahlásiť chybu vývojárom. Pozrite sa však či už nebola nahlásená."
+                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
             }
         },
         "login": {
@@ -701,7 +701,9 @@
         "sentFrom": "Sent from {account}",
         "receiving": "Prijímané",
         "sending": "Odosielané",
-        "legacyNetwork": "Legacy Network"
+        "legacyNetwork": "Legacy Network",
+        "capsLock": "Caps Lock is on",
+        "version": "Version {version}"
     },
     "dates": {
         "today": "Dnes",

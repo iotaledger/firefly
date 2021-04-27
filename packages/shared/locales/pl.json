@@ -234,7 +234,7 @@
             },
             "currency": {
                 "title": "Waluta",
-                "description": "Dostosuj kurs przeliczeniowy oraz opcje wykresu"
+                "description": "Wybierz główny przelicznik walutowy używany w portfelu oraz na wykresach"
             },
             "notifications": {
                 "title": "Powiadomienia",
@@ -242,7 +242,7 @@
             },
             "exportStronghold": {
                 "title": "Eksportuj kopię zapasową",
-                "description": "Eksport do pliku Stronghold - kompletna zaszyfrowana kopia zapasowa portfeli wraz z ostatnią historią transakcji."
+                "description": "Eksport do pliku Stronghold - kompletna zaszyfrowana kopia zapasowa portfeli wraz z ostatnią historią transakcji"
             },
             "appLock": {
                 "title": "Automatyczna blokada ekranu",
@@ -252,7 +252,7 @@
             },
             "changePassword": {
                 "title": "Zmiana hasła",
-                "description": "Twoje hasło jest używane do zabezpieczania Twoich portfeli. Musisz użyć silnego hasła, aby chronić swoje środki."
+                "description": "Twoje hasło jest używane do zabezpieczania Twoich portfeli. Musisz użyć silnego hasła, aby chronić swoje środki"
             },
             "changePincode": {
                 "title": "Zmiana kodu PIN",
@@ -264,15 +264,15 @@
             },
             "balanceFinder": {
                 "title": "Wyszukiwarka środków",
-                "description": "Wykonaj rozszerzone przeszukanie adresów pod kątem tokenów."
+                "description": "Wykonaj rozszerzone przeszukanie adresów pod kątem tokenów"
             },
             "hiddenAccounts": {
                 "title": "Ukryte portfele",
-                "description": "Wybranie tych opcji pokaże portfele, które były wcześniej ukryte."
+                "description": "Wybranie tej opcji pokaże portfele, które były wcześniej ukryte"
             },
             "deleteProfile": {
                 "title": "Usuwanie profilu",
-                "description": "Ta opcja usuwa cały Twój profil, portfele oraz historie transakcji. Upewnij się, że posiadasz kopię zapasową."
+                "description": "Ta opcja usuwa cały Twój profil, portfele oraz historię transakcji. Upewnij się, że posiadasz kopię zapasową"
             },
             "deepLinks": {
                 "title": "Deep linki",
@@ -288,7 +288,7 @@
             },
             "configureNodeList": {
                 "title": "Wybierz serwer",
-                "description": "Zarządzaj listą serwerów sieciowych IOTA, z którymi się łączysz.",
+                "description": "Zarządzaj listą serwerów sieciowych IOTA, z którymi się łączysz",
                 "primaryNode": "Serwer główny",
                 "excludeNode": "Wyklucz serwer",
                 "includeNode": "Uwzględnij serwer",
@@ -296,11 +296,11 @@
                 "setAsPrimary": "Ustaw jako główny",
                 "removeNode": "Usuń serwer",
                 "includeOfficialNodeList": "Uwzględnij oficjalną listę serwerów",
-                "noNodes": "Brak serwerów, zamiast tego zostanie użyty automatyczny wybór."
+                "noNodes": "Brak serwerów, zamiast tego zostanie użyty automatyczny wybór"
             },
             "proofOfWork": {
                 "title": "Proof of work",
-                "description": "Wykonaj proof of work lokalnie na swoim urządzeniu lub zleć to serwerowi"
+                "description": "Wykonaj proof of work lokalnie na swoim urządzeniu lub zleć tę operację zewnętrznemu serwerowi"
             },
             "errorLog": {
                 "title": "Dziennik błędów",
@@ -329,7 +329,7 @@
             },
             "discord": {
                 "title": "Discord",
-                "description": "Uzyskaj pomoc od społeczności IOTA na Discordzie"
+                "description": "Uzyskaj pomoc od społeczności IOTA na platformie Discord"
             },
             "about": {
                 "title": "O aplikacji",
@@ -337,7 +337,7 @@
             },
             "reportAnIssue": {
                 "title": "Zgłoś problem",
-                "description": "Zgłoś błąd deweloperom. Upewnij się, że problem nie został już wcześniej zgłoszony."
+                "description": "Zgłoś błąd deweloperom. Upewnij się, że problem nie został już wcześniej zgłoszony"
             }
         },
         "login": {
@@ -541,7 +541,7 @@
         "enableDeveloperMode": "Włącz tryb deweloperski",
         "enableSystemNotifications": "Włącz powiadomienia systemowe",
         "exportState": "Eksportuj stan",
-        "localProofOfWork": "Lokalny proof of work",
+        "localProofOfWork": "Lokalny tryb proof of work",
         "unlock": "Odblokuj",
         "updateFirefly": "Zaktualizuj Firefly",
         "restartNow": "Uruchom ponownie teraz",
@@ -695,13 +695,15 @@
         "creatingProfile": "Tworzenie profilu, proszę czekać...",
         "fundMigration": "Migracja środków",
         "accountRemoved": "Ten portfel jest ukryty. Odkryj go, aby wykonywać transfery.",
-        "receivingTo": "Odbieranie na portfel {account}",
-        "sendingFrom": "Wysyłanie z portfela {account}",
-        "receivedTo": "Odebrano na portfel {account}",
-        "sentFrom": "Wysłano z portfela {account}",
+        "receivingTo": "Odbieranie na {account}",
+        "sendingFrom": "Wysyłanie z {account}",
+        "receivedTo": "Odebrano na {account}",
+        "sentFrom": "Wysłano z {account}",
         "receiving": "Odbieranie",
         "sending": "Wysyłanie",
-        "legacyNetwork": "Stara sieć IOTA"
+        "legacyNetwork": "Poprzednia sieć",
+        "capsLock": "Caps Lock jest włączony",
+        "version": "Wersja {version}"
     },
     "dates": {
         "today": "Dzisiaj",
@@ -714,8 +716,8 @@
     "notifications": {
         "valueTx": "Odbieranie {{value}} na portfel {{account}}",
         "confirmed": "Transakcja wychodząca {{value}} z portfela {{account}} została potwierdzona",
-        "confirmedInternal": "Transfer {{value}} z portfela {{senderAccount}} na portfel {{receiverAccount}} został potwierdzony",
-        "confirmedInternalNoAccounts": "{{value}} wewnętrzny transfer został potwierdzony",
+        "confirmedInternal": "Transfer {{value}} z {{senderAccount}} na {{receiverAccount}} został potwierdzony",
+        "confirmedInternalNoAccounts": "Wewnętrzny transfer {{value}} został potwierdzony",
         "failed": "Wysyłka {{value}} z portfela {{account}} nie powiodła się",
         "downloadingUpdate": "Pobieranie aktualizacji",
         "updateReady": "Aktualizacja jest gotowa",
@@ -725,7 +727,7 @@
         "minutesRemaining": "{minutes, plural, one {pozostała 1 minuta} few {pozostały # minuty} many {pozostało # minut} other {pozostało # minut}}",
         "copiedToClipboard": "Skopiowano do schowka",
         "accountsSynchronized": "Synchronizacja portfela ukończona",
-        "migratedAccountChrysalisDown": "Twoje środki staną się dostępne po aktualizacji Chrysalis (28 kwietnia)",
+        "migratedAccountChrysalisDown": "Środki pojawią się na Twoim koncie po aktualizacji Chrysalis, w dniu 28 kwietnia",
         "migratedAccountChrysalisUp": "Twoje środki wkrótce staną się dostępne"
     },
     "error": {

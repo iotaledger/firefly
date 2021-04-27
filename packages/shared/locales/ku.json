@@ -147,7 +147,7 @@
             "restoringWallet": "Paşbarkirina cuzdankê...",
             "findingBalance": "Mayîn tê dîtin...",
             "incorrectSeedVaultPassword": "Çewtîya pêborîna SeedVault'ê.",
-            "noDataSeedVault": "No data could be found in the SeedVault.",
+            "noDataSeedVault": "Di SeedVault de ti daneyek nehat dîtin.",
             "signingBundle": "Şanenavkirina bestekê",
             "broadcastingBundle": "Bestek tê weşandin",
             "miningBundle": "Şanenav tê xebitandin",
@@ -242,17 +242,17 @@
             },
             "exportStronghold": {
                 "title": "Cîgirê bikşîne derve",
-                "description": "Barê dosyayek Stronghold bikin\n- cîhgira hatî pêborîkirin cuzdank û bûyerên kiryarên we yên dawî."
+                "description": "Barê dosyayek Stronghold bikin\n- cîhgira hatî pêborîkirin cuzdank û bûyerên kiryarên we yên dawî"
             },
             "appLock": {
                 "title": "Kilîda Otomatîk",
                 "description": "Dema bêçalaktiyê berî ku çenteyên we kilît bibin û hûn ji nav derkevin",
-                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
-                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
+                "durationMinute": "Berî {time, plural, one {1 xulek} other {# xulek}}",
+                "durationHour": "{time, plural, one {1 demjimêr} other {# demjimêr}}"
             },
             "changePassword": {
                 "title": "Pêborînê biguherînê",
-                "description": "Pêborîn jibo ewlehîya hesaba we biparêze tê karanîn. Jibo parastina mayînên xwe pêborînek xurt bikarbînin."
+                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
             },
             "changePincode": {
                 "title": "Qoda PIN'ê biguherîne",
@@ -264,15 +264,15 @@
             },
             "balanceFinder": {
                 "title": "Gerdîta mayîna",
-                "description": "Jibo tokena lêgerînek berfireh bikin."
+                "description": "Perform an extended search of your addresses for tokens"
             },
             "hiddenAccounts": {
                 "title": "Cuzdankên veşartî",
-                "description": "Ev jêgirtin hesabên berîya niha hatîn veşartin dê bidê nîşan."
+                "description": "Selecting this options will show wallets that were previously hidden"
             },
             "deleteProfile": {
                 "title": "Profîlê jêbibe",
-                "description": "Cuzdanka we, bûyerên kirarîyê dê ji bin bibe. Piştrast bin ko cîhgirkirek yê we heye."
+                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
             },
             "deepLinks": {
                 "title": "Girêdanên kûr",
@@ -288,7 +288,7 @@
             },
             "configureNodeList": {
                 "title": "Girêkê jêbigir",
-                "description": "Navnîşa girêkên torgiloka IOTA ya ku hûn pê ve girêdidin birêve bibin.",
+                "description": "Manage the list of IOTA network nodes you connect to",
                 "primaryNode": "Girêdana yekemîn",
                 "excludeNode": "Girêdanê lê neke",
                 "includeNode": "Girêdanê lê bike",
@@ -296,7 +296,7 @@
                 "setAsPrimary": "Wekî yekemîn bihesibîn",
                 "removeNode": "Girêdanê jêbibe",
                 "includeOfficialNodeList": "Lîsteya girêdanên fermî tevil bike",
-                "noNodes": "Node tune, li şûna wê hilbijartina otomatîkî tê bikar anîn."
+                "noNodes": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "Delîlên kar",
@@ -337,7 +337,7 @@
             },
             "reportAnIssue": {
                 "title": "Pirsgirêkê ragehîne",
-                "description": "Çewtiyek ji pêşdebiran re ragihînin. Vê kontrol bikin ku hûn pê ew nehatiye raporkirin."
+                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
             }
         },
         "login": {
@@ -701,7 +701,9 @@
         "sentFrom": "Ji {account} tê şandin",
         "receiving": "Tê standin",
         "sending": "Tê şandin",
-        "legacyNetwork": "Legacy Network"
+        "legacyNetwork": "Tora Kevn",
+        "capsLock": "Caps Lock is on",
+        "version": "Version {version}"
     },
     "dates": {
         "today": "Evro",

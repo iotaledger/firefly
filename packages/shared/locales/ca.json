@@ -147,7 +147,7 @@
             "restoringWallet": "S'està restaurant el criptomoneder...",
             "findingBalance": "Cercant el balanç...",
             "incorrectSeedVaultPassword": "La contrasenya del SeedVault és incorrecta.",
-            "noDataSeedVault": "No data could be found in the SeedVault.",
+            "noDataSeedVault": "Al SeedVault no s'ha trobat cap dada.",
             "signingBundle": "Firmant el paquet",
             "broadcastingBundle": "Difonent el paquet",
             "miningBundle": "Minant el paquet",
@@ -242,17 +242,17 @@
             },
             "exportStronghold": {
                 "title": "Exportar còpia de seguretat",
-                "description": "Exporteu a un fitxer Stronghold - una còpia de seguretat xifrada del vostre moneder i l'historial de transaccions."
+                "description": "Exporta a un fitxer Stronghold - una còpia completa de seguretat xifrada dels vostres moneders i l'historial de les darreres transaccions"
             },
             "appLock": {
                 "title": "Bloquejar automàticament",
                 "description": "Temps d'inactivitat abans que els moneders es bloquegin i us tanqui la sessió",
-                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
-                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
+                "durationMinute": "{time, plural, one {1 minut} other {# minuts}}",
+                "durationHour": "{time, plural, one {1 hora} other {# hores}}"
             },
             "changePassword": {
                 "title": "Canviar contrasenya",
-                "description": "La contrasenya s’utilitza per protegir el moneder. Utilitzeu una contrasenya segura per protegir els vostres fons."
+                "description": "La contrasenya s’utilitza per protegir els moneders. Utilitzeu una contrasenya forta per protegir els vostres fons"
             },
             "changePincode": {
                 "title": "Canvia el codi PIN",
@@ -264,15 +264,15 @@
             },
             "balanceFinder": {
                 "title": "Cercador de balanços",
-                "description": "Realitzeu una cerca extensa de tokens per les vostres adreces."
+                "description": "Realitzeu una cerca extensa de criptovalors a les vostres adreces"
             },
             "hiddenAccounts": {
                 "title": "Moneders amagats",
-                "description": "Seleccionant aquestes opcions, es mostraran els comptes que anteriorment estaven ocults."
+                "description": "Seleccionant aquestes opcions, es mostraran els moneders que anteriorment estaven ocults"
             },
             "deleteProfile": {
                 "title": "Suprimeix el perfil",
-                "description": "Elimineu el vostre perfil complet, moneders i llistat de transaccions. Assegureu-vos de tenir una còpia de seguretat."
+                "description": "Elimineu el vostre perfil complet, moneders i llistat de transaccions. Assegureu-vos de tenir una còpia de seguretat"
             },
             "deepLinks": {
                 "title": "Enllaços profunds",
@@ -288,7 +288,7 @@
             },
             "configureNodeList": {
                 "title": "Selecciona el node",
-                "description": "Gestioneu la llista de nodes de la xarxa IOTA on us voleu connectar.",
+                "description": "Gestioneu la llista de nodes de la xarxa IOTA on us voleu connectar",
                 "primaryNode": "Node primari",
                 "excludeNode": "Excloure node",
                 "includeNode": "Incloure node",
@@ -296,7 +296,7 @@
                 "setAsPrimary": "Estableix com a primari",
                 "removeNode": "Elimina el node",
                 "includeOfficialNodeList": "Afegir llista oficial de nodes",
-                "noNodes": "No hi ha nodes, en lloc d'això s'utilitzarà la selecció automàtica."
+                "noNodes": "No hi ha nodes, en lloc d'això s'utilitzarà la selecció automàtica"
             },
             "proofOfWork": {
                 "title": "Prova de Treball",
@@ -337,7 +337,7 @@
             },
             "reportAnIssue": {
                 "title": "Notificar una incidència",
-                "description": "Notificar un error als desenvolupadors. Comprova que no s’hagi informat de l'error anteriorment."
+                "description": "Notifica un error als desenvolupadors. Comproveu que no s’hagi informat de l'error anteriorment"
             }
         },
         "login": {
@@ -701,7 +701,9 @@
         "sentFrom": "Enviat des de {account}",
         "receiving": "Rebent",
         "sending": "Enviant",
-        "legacyNetwork": "Legacy Network"
+        "legacyNetwork": "Xarxa Legacy",
+        "capsLock": "El bloqueig de majúscules està activat",
+        "version": "Versió {version}"
     },
     "dates": {
         "today": "Avui",
