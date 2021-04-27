@@ -364,9 +364,9 @@ const getDiagnostics = () => {
         const verSplit = platformVersion.split('.')
         const num = Number.parseInt(verSplit[0], 10)
         if (!Number.isNaN(num)) {
-            const lookup = osXNameMap[num]
-            if (lookup) {
-               platformVersion = lookup[1]
+            const [_, version] = osXNameMap.get(num)
+            if (version) {
+               platformVersion = version
             }
         }
     }
