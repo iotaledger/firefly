@@ -74,9 +74,7 @@
                 if (includeFullSender) {
                     accountAlias = acc.alias
                 }
-                if (txPayload.data.essence.data.internal) {
-                    initialsColor = acc.color
-                }
+                initialsColor = acc.color
             } else {
                 // We can't find the address in our accounts so just display the abbreviated address
                 if (includeFullSender) {
@@ -127,7 +125,7 @@
         {:else}
             <Icon
                 boxed
-                classes="text-white dark:text-{txPayload.data.essence.data.internal ? 'gray-500' : `${color}-${txPayload.data.essence.data.incoming ? '500' : '600'}`}"
+                classes={`text-white dark:text-${initialsColor}-600`}
                 boxClasses="bg-{initialsColor ? `${initialsColor}-500` : txPayload.data.essence.data.internal ? 'gray-500' : `${color}-${txPayload.data.essence.data.internal ? '500' : '600'}`} dark:bg-gray-900"
                 icon={txPayload.data.essence.data.internal ? 'transfer' : txPayload.data.essence.data.incoming ? 'chevron-down' : 'chevron-up'} />
         {/if}

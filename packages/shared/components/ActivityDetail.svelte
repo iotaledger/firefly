@@ -121,7 +121,7 @@
         <div class="flex flex-col flex-wrap justify-center items-center text-center">
             {#if senderAccount}
                 <div
-                    class="flex items-center justify-center w-8 h-8 rounded-xl p-2 mb-2 text-12 leading-100 font-bold text-center bg-{senderAccount?.color ?? 'blue'}-500 text-white">
+                    class="flex items-center justify-center w-8 h-8 rounded-xl p-2 mb-2 text-12 leading-100 font-bold text-center bg-{senderAccount?.color ?? 'blue'}-500 text-white dark:text-gray-900">
                     {getInitials(senderAccount.alias, 2)}
                 </div>
                 <Text smaller>{locale('general.you')}</Text>
@@ -135,7 +135,7 @@
         <div class="flex flex-col flex-wrap justify-center items-center text-center">
             {#if receiverAccount}
                 <div
-                    class="flex items-center justify-center w-8 h-8 rounded-xl p-2 mb-2 text-12 leading-100 font-bold bg-{receiverAccount?.color ?? 'blue'}-500 text-white">
+                    class="flex items-center justify-center w-8 h-8 rounded-xl p-2 mb-2 text-12 leading-100 font-bold bg-{receiverAccount?.color ?? 'blue'}-500 text-white dark:text-gray-900">
                     {getInitials(receiverAccount.alias, 2)}
                 </div>
                 <Text smaller>{locale('general.you')}</Text>
