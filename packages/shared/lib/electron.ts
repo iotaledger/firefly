@@ -55,6 +55,7 @@ export interface IElectron {
     getOS(): Promise<string>;
     updateActiveProfile(id: string): void;
     removeProfileFolder(profilePath: string): Promise<void>;
+    listProfileFolders(profileStoragePath: string): Promise<string[]>;
     updateMenu(attribute: string, value: unknown): void;
     popupMenu(): void;
     maximize(): Promise<boolean>;
@@ -75,6 +76,8 @@ export interface IElectron {
     updateInstall(): Promise<void>
     updateCancel(): Promise<void>
     updateDownload(): Promise<void>
+
+    unhandledException(title: string, err: Error): Promise<void>
 
     // SeedVault API methods
     importLegacySeed(buffer: any, password: string): Promise<string>;

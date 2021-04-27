@@ -31,6 +31,7 @@ export let menuState = {
         faq: "FAQ",
         documentation: "Documentation",
         discord: "Discord",
-        reportAnIssue: "Report an Issue"
+        reportAnIssue: "Report an Issue",
+        version: "Version {version}"
     }
 }
