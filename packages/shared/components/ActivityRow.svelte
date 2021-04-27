@@ -74,9 +74,7 @@
                 if (includeFullSender) {
                     accountAlias = acc.alias
                 }
-                if (txPayload.data.essence.data.internal) {
-                    initialsColor = acc.color
-                }
+                initialsColor = acc.color
             } else {
                 // We can't find the address in our accounts so just display the abbreviated address
                 if (includeFullSender) {
