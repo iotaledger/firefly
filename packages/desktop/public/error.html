@@ -168,7 +168,7 @@
       let formatted = []
 
       if (errorData.error) {
-        if (errorData.error instanceof Error) {
+        if (errorData.error instanceof Error || errorData.error.stack || errorData.error.message) {
           if (errorData.error.stack) {
             formatted.push(errorData.error.stack)
           } else if (errorData.error.message) {
