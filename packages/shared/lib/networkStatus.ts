@@ -4,8 +4,8 @@ import { writable } from 'svelte/store'
  * Network status endpoints list
  */
 export const NETWORK_STATUS_ENDPOINTS = [
-    'https://explorer-api.iota.org/stats/chrysalis',
-    'https://explorer-api.iota.works/stats/chrysalis',
+    'https://explorer-api.iota.org/stats/mainnet',
+    'https://explorer-api.iota.works/stats/mainnet',
 ]
 
 /**
