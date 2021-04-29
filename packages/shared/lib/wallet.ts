@@ -1282,7 +1282,7 @@ export const processMigratedTransactions = (accountId: string, messages: Message
     const accounts = get(wallet).accounts
 
     messages.forEach((message: Message) => {
-        if (message.payload.type === 'Milestone') {
+        if (message.payload?.type === 'Milestone') {
             const account = get(accounts).find((account) => account.id === accountId);
 
             // Only check migrated messages for first account as the migrated messages are sent there
