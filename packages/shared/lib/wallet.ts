@@ -875,7 +875,7 @@ export const getAccountMessages = (account: WalletAccount): AccountMessage[] => 
 
     account.messages.forEach((message) => {
         let extraId = ''
-        if (message.payload.type === "Transaction") {
+        if (message.payload?.type === "Transaction") {
             extraId = getIncomingFlag(message.payload) ? 'in' : 'out'
         }
         messages[message.id + extraId] = {
@@ -886,7 +886,7 @@ export const getAccountMessages = (account: WalletAccount): AccountMessage[] => 
 
     return Object.values(messages)
         .sort((a, b) => {
-            if (a.id === b.id && a.payload.type == "Transaction") {
+            if (a.id === b.id && a.payload?.type == "Transaction") {
                 return getIncomingFlag(a.payload) ? -1 : 1
             }
             return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
@@ -911,7 +911,7 @@ export const getTransactions = (accounts: WalletAccount[], count = 10): AccountM
     accounts.forEach((account) => {
         account.messages.forEach((message) => {
             let extraId = ''
-            if (message.payload.type === "Transaction") {
+            if (message.payload?.type === "Transaction") {
                 extraId = getIncomingFlag(message.payload) ? 'in' : 'out'
             }
             messages[account.index + message.id + extraId] = {
@@ -1133,7 +1133,7 @@ export const getAccountsBalanceHistory = (accounts: WalletAccount[], priceData: 
                 [HistoryDataProps.ONE_MONTH]: [],
             }
             let messages: Message[] = account?.messages?.slice()
-                ?.filter((message) => !isSelfTransaction(message.payload, account)) // Remove self transactions
+                ?.filter((message) => message.payload && !isSelfTransaction(message.payload, account)) // Remove self transactions and messages with no payload
                 ?.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()) ?? [] // Sort messages from last to newest
             // Calculate the variations for each account
             var trackedBalance = account.rawIotaBalance;
@@ -1282,7 +1282,7 @@ export const processMigratedTransactions = (accountId: string, messages: Message
     const accounts = get(wallet).accounts
 
     messages.forEach((message: Message) => {
-        if (message.payload.type === 'Milestone') {
+        if (message.payload?.type === 'Milestone') {
             const account = get(accounts).find((account) => account.id === accountId);
 
             // Only check migrated messages for first account as the migrated messages are sent there
@@ -1621,7 +1621,7 @@ export const findAccountWithAddress = (address: string): WalletAccount | undefin
  * @param excludeFirst A wallet to exclude on first pass
  * @returns The wallet account matching the address or undefined if not found
  */
- export const findAccountWithAnyAddress = (addresses: string[], excludeFirst?: WalletAccount): WalletAccount | undefined => {
+export const findAccountWithAnyAddress = (addresses: string[], excludeFirst?: WalletAccount): WalletAccount | undefined => {
     if (!addresses || addresses.length === 0) {
         return
     }
