@@ -142,7 +142,7 @@ export const getAccountActivityData = (account: WalletAccount) => {
     let outgoing: ChartData = { data: [], tooltips: [], label: localize('general.outgoing'), color: 'gray' } // TODO: profile colors
     let labels: string[] = []
     let messages: Message[] = account.messages.slice()
-        ?.filter(({ payload }) => !isSelfTransaction(payload, account)) // Remove self transactions
+        ?.filter((message) => message.payload && !isSelfTransaction(message.payload, account)) // Remove self transactions and messages with no payload
         ?.sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()) ?? []
     for (var i = 0; i < BAR_CHART_ACTIVITY_MONTHS; i++) {
         let start: number = new Date(now.getFullYear(), now.getMonth() - i, 1).getTime();
