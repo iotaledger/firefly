@@ -2,45 +2,33 @@
     "views": {
         "onboarding1": {
             "title": "Invia, Ricevi e Gestisci i tuoi token IOTA",
-            "body": "Firefly è il wallet ufficiale IOTA."
+            "body": "Firefly è il wallet ufficiale di IOTA."
         },
         "legal": {
             "title": "Informativa sulla Privacy e Termini di Servizio",
             "body": "Si prega di prendere visione dell'Informativa sulla privacy e i termini di servizio.",
-            "privacyPolicy": {
-                "title": "Informativa Privacy",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
-            "termsOfService": {
-                "title": "Termini di Servizio",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
             "checkbox": "Ho letto e accetto l'Informativa sulla Privacy ed i Termini di Servizio"
         },
         "appearance": {
             "title": "Aspetto",
-            "body": "Scegli il tema del tuo wallet."
+            "body": "Scegli il tema dell'app."
+        },
+        "profile": {
+            "title": "Crea un profilo",
+            "body1": "È possibile creare più profili utente per organizzare i wallet e migliorare la privacy.",
+            "body2": "Per ora, iniziamo con il nome del tuo primo profilo. Puoi aggiungere più profili più tardi.",
+            "profileName": "Nome del profilo"
         },
         "setup": {
-            "title": "Configura il tuo portafoglio",
-            "body1": "È possibile creare più profili utente per mantenere i tuoi token separati e migliorare la privacy.",
-            "body2": "Per ora, iniziamo con il nome del tuo primo profilo. Puoi aggiungere più profili più tardi.",
-            "profileName": "Nome Profilo"
+            "title": "Configura un wallet",
+            "chrysalisTitle": "Chrysalis Network Update",
+            "chrysalisBody": "Dal 21 aprile, gli utenti possono migrare i loro token alla nuova rete Chrysalis. Si consiglia di migrare i tuoi token esistenti il prima possibile.",
+            "learnMore": "Approfondimenti sulla migrazione"
         },
         "secure": {
             "title": "Proteggi il tuo wallet",
             "body1": "Salva e stampa il modello PDF Recovery Kit.",
-            "body2": "Se si compila il Recovery kit e lo si conserva in modo sicuro, si sarà sempre in grado di recuperare il wallet."
+            "body2": "Se si compila il Recovery kit e lo si conserva in modo sicuro, si sarà sempre in grado di recuperare i wallet."
         },
         "password": {
             "title": "Scegli una password",
@@ -49,7 +37,7 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Imposta un PIN di accesso per assicurarsi che solo tu possa entrare nel tuo portafoglio.",
+            "body1": "Imposta un PIN di accesso per assicurarti che solo tu possa accedere al tuo profilo.",
             "body2": "Mantieni il tuo PIN al sicuro!"
         },
         "pin": {
@@ -85,44 +73,60 @@
         },
         "backupWallet": {
             "title": "Esegui il backup di un file Stronghold",
-            "body1": "Inserisci la tua password per eseguire il backup del tuo portafoglio su un file Stronghold. La tua password sarà utilizzata per crittografare il backup.",
+            "body1": "Inserisci la tua password per eseguire il backup del tuo wallet in un file Stronghold. La tua password viene utilizzata per crittografare il backup.",
             "body2": "Motivi per cui i backup digitali sono importanti:",
-            "reason1": "Recupera facilmente il tuo portafoglio senza digitare la tua frase di recupero",
-            "reason2": "Importa il tuo portafoglio su altri dispositivi",
+            "reason1": "Recupera facilmente i tuoi wallet senza digitare la tua frase di recupero",
+            "reason2": "Importa i tuoi wallet su altri dispositivi",
             "reason3": "Recupera la cronologia completa delle transazioni"
         },
         "recoveryPhraseSaved": {
             "title": "Backup effettuato correttamente",
-            "body": "Hai eseguito il backup del tuo portafoglio su uno Stronghold."
+            "body": "Hai eseguito il backup del tuo wallet in uno Stronghold."
         },
         "congratulations": {
             "title": "Impostazione portafoglio completata",
-            "body": "Il tuo portafoglio è pronto all'uso."
+            "body": "Il tuo portafoglio è pronto all'uso.",
+            "fundsMigrated": "Fondi migrati",
+            "success": "Hai migrato con successo i tuoi fondi alla nuova rete",
+            "exportMigration": "Esporta il log di migrazione e termina la configurazione"
         },
         "import": {
-            "title": "Importa un portafoglio",
-            "body": "Se hai una frase di recupero o un backup Stronghold, puoi importarli qui."
+            "title": "Recuperare o migrare fondi",
+            "body": "Se hai un seed esistente o un file di backup del wallet, puoi importarlo qui. Se disponi di fondi di rete più vecchi, verranno effettuati i passaggi di migrazione per passare alla rete Chrysalis.",
+            "importSeed": "Ho un seed di 81 caratteri",
+            "importSeedDescription": "Inserisci un seed e migra fondi in Crisalide",
+            "importMnemonic": "Ho una frase di recupero di Firefly",
+            "importMnemonicDescription": "Inserisci la tua frase segreta per recuperare i tuoi wallet",
+            "importFile": "Ho un file di backup",
+            "importFileDescription": "Carica un file Seedvault o Stronghold"
         },
         "importFromText": {
-            "title": "Ripristina il tuo portafoglio con una frase di recupero o un seed",
-            "body1": "Un seed è composto da 81 caratteri. E' utilizzato per recuperare un portafoglio da un vecchio portafoglio Trinity.",
-            "body2": "Una frase di recupero è lunga 24 parole, tutte minuscole, con spazi. Viene utilizzata per recuperare un wallet Firefly.",
-            "body3": "Inserisci il tuo seed o la frase di recupero",
+            "seed": {
+                "title": "Digita il tuo seed per iniziare la migrazione",
+                "body": "Un seed è composto da 81 caratteri. Questo è usato per recuperare dati da un portafoglio Trinity.",
+                "enter": "Inserisci il tuo seed"
+            },
+            "mnemonic": {
+                "title": "Digita la frase di recupero",
+                "body": "Una frase di recupero è lunga 24 parole, tutte minuscole, con spazi. Viene utilizzata per recuperare un wallet Firefly.",
+                "enter": "Inserisci la tua frase segreta di recupero"
+            },
             "seedDetected": "Rilevato seed di 81 caratteri",
-            "phraseDetected": "Rilevata frase di recupero da 24 parole"
+            "phraseDetected": "Rilevata frase di recupero da 24 parole",
+            "checksum": "Codice di verifica"
         },
         "importFromFile": {
-            "title": "Ripristina un portafoglio utilizzando il tuo file di backup",
-            "body": "Importa un file di backup per ripristinare il tuo portafoglio. I backup possono essere o una Stronghold (.stronghold) o una Trinity SeedVault (.kdbx)."
+            "title": "Ripristina il tuo wallet da un file di backup",
+            "body": "Importa un file di backup per ripristinare il tuo wallet. I backup possono essere o una Stronghold (.stronghold) od un Trinity SeedVault (.kdbx)."
         },
         "importBackupPassword": {
-            "title": "Ripristina il tuo portafoglio da un SeedVault o Stronghold",
+            "title": "Ripristina il tuo wallet da un SeedVault o Stronghold",
             "body1": "Per favore inserisci la tua password di backup.",
             "body2": "Questa è la password impostata quando hai creato per la prima volta il backup."
         },
         "importSuccess": {
             "title": "Hai recuperato con successo il backup",
-            "body": "Ora puoi configurare il tuo nuovo portafoglio.",
+            "body": "Ora puoi configurare il tuo nuovo profilo.",
             "seedvaultTitle": "Importazione riuscita",
             "seedvaultBody": "La password è corretta, ora puoi continuare.",
             "strongholdTitle": "Importazione riuscita",
@@ -130,10 +134,59 @@
         },
         "migrate": {
             "title": "Trasferisci i tuoi fondi",
-            "body1": "Questo è un processo automatico per trasferire i tuoi fondi al tuo nuovo portafoglio. Verificheremo gli indirizzi spesi che indeboliscono la tua sicurezza.",
+            "body1": "Questo è un processo automatizzato per trasferire i tuoi fondi al tuo nuovo wallet.",
             "body2": "Potrebbe volerci del tempo. Non spegnere il dispositivo durante il trasferimento.",
             "existing": "Il tuo vecchio portafoglio",
-            "new": "Il tuo nuovo portafoglio"
+            "new": "Il tuo nuovo portafoglio",
+            "learn": "Informazioni sulla migrazione",
+            "beginMigration": "Inizia la Migrazione",
+            "migrating": "Migrazione fondi...",
+            "migrated": "{balance} migrato",
+            "migrationFailed": "Migrazione non riuscita",
+            "noAddressesForMigration": "Seleziona gli indirizzi che desideri proteggere.",
+            "restoringWallet": "Ripristino del wallet...",
+            "findingBalance": "Ricerca del saldo...",
+            "incorrectSeedVaultPassword": "Password del SeedVault non corretta.",
+            "noDataSeedVault": "Non è stato possibile trovare dati nel SeedVault.",
+            "signingBundle": "Firma del bundle",
+            "broadcastingBundle": "Trasmissione del bundle",
+            "miningBundle": "Mining del bundle",
+            "problemRestoringWallet": "Si è verificato un errore di rete nel ripristino del wallet. Riprova.",
+            "minimumMigrationAmountSpentAddresses": "L'importo minimo di migrazione per ogni indirizzo speso è 1 Mi. Controlla di nuovo se il tuo saldo non è corretto.",
+            "tooManyAddressesToMigrate": "Hai troppi indirizzi con un saldo basso per migrare. Controlla di nuovo se il tuo saldo non sembra corretto.",
+            "cannotMigrateAllYourFunds": "Non possiamo migrare tutti i tuoi fondi perché alcuni indirizzi sono troppo bassi. Puoi procedere comunque. {value} andrà perso.",
+            "error": "Si è verificato un errore durante la migrazione dei fondi. Per favore riprova."
+        },
+        "bundleMiningWarning": {
+            "title": "Attenzione",
+            "body1": "Hai fondi su uno o più indirizzi spesi.",
+            "body2": "Si consiglia di eseguire un processo automatizzato per aiutare a proteggere e trasferire questi fondi in modo sicuro.",
+            "body3": "Se chiudi l'app dovrai riavviare l'intera migrazione.",
+            "learn": "Informazioni sugli indirizzi spesi"
+        },
+        "secureSpentAddresses": {
+            "title": "Indirizzi spesi sicuri",
+            "body1": "Hai fondi su {number, plural, one {# indirizzo speso} other {# indirizzi spesi}}.",
+            "body2": "Si consiglia di eseguire un processo automatizzato per aiutare a proteggere e trasferire questi fondi in modo sicuro.",
+            "error": "Non puoi migrare gli indirizzi spesi con meno di 1 Mi"
+        },
+        "securityCheckCompleted": {
+            "title": "Controllo di sicurezza completato",
+            "body1": "Abbiamo calcolato il livello di rischio per la sicurezza. L'esecuzione di questo processo potrebbe ridurre il livello di rischio.",
+            "body2": "Quando si è soddisfatti del livello di rischio (s) premere continua.",
+            "rerun": "Ripeti il processo per gli indirizzi selezionati",
+            "continueMigration": "Continua la migrazione"
+        },
+        "securingSpentAddresses": {
+            "title": "Protezione degli indirizzi spesi...",
+            "body1": "Questo processo richiederà {minutes, plural, one {1 minuto} other {# minuti}}.",
+            "body2": "Il computer verrà utilizzato alla massima capacità, potresti fare qualcos'altro mentre attendi."
+        },
+        "transferFragmentedFunds": {
+            "body1": "Firefly ora procederà alla migrazione dei tuoi fondi. Questo potrebbe richiedere un po' di tempo.",
+            "migrate": "Migrazione fondi",
+            "transaction": "Transazione {number}",
+            "rerun": "Riprova"
         },
         "migrateFailed": {
             "title": "To do",
@@ -141,13 +194,15 @@
         },
         "balance": {
             "title": "Il tuo saldo",
-            "body": "Il tuo saldo è corretto?"
+            "body": "Assicurati che il tuo saldo sia corretto prima di continuare. Puoi controllare di nuovo se le cose non sembrano corrette.",
+            "error": "L'importo minimo di migrazione è 1 Mi. Controlla di nuovo se il tuo saldo non sembra corretto.",
+            "zeroBalance": "Prova a controllare di nuovo. Se ancora non riesci a trovare il tuo saldo potresti aver inserito il tuo seed in modo errato."
         },
         "settings": {
             "settings": "Impostazioni",
             "generalSettings": {
                 "title": "Impostazioni Generali",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Configura l'aspetto della tua app ed altre impostazioni generali"
             },
             "security": {
                 "title": "Sicurezza",
@@ -166,7 +221,7 @@
                 "description": "Cambia il nome del tuo profilo o imposta un avatar"
             },
             "sync": {
-                "title": "Sincronizza il conto",
+                "title": "Sincronizza wallet",
                 "description": ""
             },
             "theme": {
@@ -187,15 +242,17 @@
             },
             "exportStronghold": {
                 "title": "Esporta Backup",
-                "description": "Esporta in un file Stronghold - un backup crittografato completo del tuo portafoglio e l'ultima cronologia delle transazioni."
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
             },
             "appLock": {
                 "title": "Blocco Automatico",
-                "description": "Tempo trascorso prima che il tuo portafoglio si blocchi ed effettui il logout"
+                "description": "Tempo di inattività prima del blocco dei wallet e disconnessione",
+                "durationMinute": "{time, plural, one {1 minuto} other {# minuti}}",
+                "durationHour": "{time, plural, one {1 ora} other {# ore}}"
             },
             "changePassword": {
                 "title": "Cambia password",
-                "description": "La tua password viene utilizzata per proteggere il tuo portafoglio. Devi usare una password forte per proteggere i tuoi fondi."
+                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
             },
             "changePincode": {
                 "title": "Cambia il PIN",
@@ -205,17 +262,17 @@
                 "confirmNewPincode": "Conferma il nuovo PIN",
                 "action": "Cambia PIN"
             },
-            "resyncAccounts": {
-                "title": "Risincronizza gli account",
-                "description": "Avvia un'attività in background per assicurarsi che i tuoi account siano aggiornati."
+            "balanceFinder": {
+                "title": "Rivaluta il saldo",
+                "description": "Perform an extended search of your addresses for tokens"
             },
             "hiddenAccounts": {
-                "title": "Account nascosti",
-                "description": "Selezionando questa opzione, verranno visualizzati gli account precedentemente nascosti."
+                "title": "Wallet nascosti",
+                "description": "Selecting this options will show wallets that were previously hidden"
             },
             "deleteProfile": {
                 "title": "Elimina profilo",
-                "description": "Elimina l'intero portafoglio, profilo e cronologia delle transazioni. Assicurati di avere un backup."
+                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
             },
             "deepLinks": {
                 "title": "Deep link",
@@ -231,7 +288,7 @@
             },
             "configureNodeList": {
                 "title": "Seleziona un nodo",
-                "description": "Gestisci l'elenco dei nodi a cui si connette il tuo wallet.",
+                "description": "Manage the list of IOTA network nodes you connect to",
                 "primaryNode": "Nodo primario",
                 "excludeNode": "Escludi nodo",
                 "includeNode": "Includi nodo",
@@ -239,7 +296,7 @@
                 "setAsPrimary": "Imposta come primario",
                 "removeNode": "Rimuovi Nodo",
                 "includeOfficialNodeList": "Includi la lista dei nodi ufficiali",
-                "noNodes": "Non ci sono nodi, verrà invece utilizzata la selezione automatica."
+                "noNodes": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "Proof of Work",
@@ -280,7 +337,7 @@
             },
             "reportAnIssue": {
                 "title": "Segnala un problema",
-                "description": "Segnala un bug agli sviluppatori. Controlla per assicurarti che non sia già stato segnalato."
+                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
             }
         },
         "login": {
@@ -300,8 +357,8 @@
                 },
                 "strongholdStatus": {
                     "title": "Stato Portafoglio",
-                    "locked": "Stronghold bloccata",
-                    "unlocked": "Stronghold sbloccata"
+                    "locked": "Bloccato",
+                    "unlocked": "Sbloccato"
                 },
                 "strongholdBackup": {
                     "title": "Backup Portafoglio",
@@ -325,7 +382,7 @@
     "popups": {
         "password": {
             "title": "Password necessaria",
-            "subtitle": "Si prega di inserire la password del wallet per sbloccare lo Stronghold",
+            "subtitle": "Inserisci la tua password per sbloccare i tuoi wallet",
             "backup": "Inserisci la tua password per esportare un backup"
         },
         "qr": {
@@ -336,34 +393,35 @@
             "upToDateTitle": "Firefly è aggiornato",
             "upToDateDescription": "Stai utilizzando la versione più recente e sicura di Firefly.",
             "updateAvailable": "Aggiornamento Firefly disponibile",
-            "updateDetails": "Versione {version} - {date}"
+            "updateDetails": "Versione {version} - {date}",
+            "noAutoUpdate": "L'aggiornamento automatico è disabilitato in questa versione di Windows, vai su https://firefly.iota.org per scaricare l'aggiornamento."
         },
         "backup": {
             "title": "Ultimo backup: {date}",
             "lastBackup": "L'ultimo backup risale al {date}",
-            "backupDescription": "È importante eseguire regolarmente il backup per assicurarsi di avere una copia dei tuoi account e della cronologia delle transazioni.",
+            "backupDescription": "È importante eseguire regolarmente il backup per assicurarsi di avere una copia dei tuoi wallet e della cronologia delle transazioni.",
             "backupWarning": "Se perdi la tua frase di backup e recupero perderai l'accesso ai tuoi fondi.",
             "notBackedUp": "Backup non eseguito",
-            "notBackedUpDescription": "Non hai eseguito il backup del tuo Stronghold",
+            "notBackedUpDescription": "Non hai eseguito il backup dei tuoi wallet",
             "saving": "Salvataggio..."
         },
         "deleteAccount": {
             "title": "Eliminare {name}?",
-            "body": "Questo account non ha una cronologia delle transazioni. Può essere eliminato in tutta sicurezza.",
+            "body": "Questo wallet non ha una cronologia delle transazioni. Può essere eliminato in sicurezza.",
             "typePassword": "Digita la password del tuo wallet per confermare.",
-            "hideAccount": "Cancella conto",
+            "hideAccount": "Elimina wallet",
             "errorTitle": "Impossibile eliminare {name}",
-            "errorBody1": "Non puoi eliminare questo account, devi averne almeno uno."
+            "errorBody1": "Non puoi eliminare questo wallet, è necessario averne almeno uno."
         },
         "hideAccount": {
             "title": "Nascondere {name}?",
-            "body": "Puoi trovare questo account in seguito abilitando \"Mostra account nascosti\" nelle impostazioni avanzate.",
+            "body": "Puoi trovare questo wallet in seguito abilitando \"Mostra wallet nascosti\" in Impostazioni avanzate.",
             "typePassword": "Digita la password del tuo wallet per confermare.",
-            "hideAccount": "Nascondi questo account",
+            "hideAccount": "Nascondi wallet",
             "errorTitle": "Impossibile nascondere {name}",
-            "errorBody1": "Per nascondere un account deve avere saldo 0.",
-            "errorBody2": "Al momento hai {balance} rimanenti su questo account. Si prega di spostare questi fondi su un altro account e riprovare.",
-            "errorBody3": "Non puoi nascondere questo account, devi averne almeno uno."
+            "errorBody1": "Per nascondere un wallet, deve avere il saldo a 0.",
+            "errorBody2": "Al momento hai {balance} rimanenti in questo wallet. Per favore sposta questi fondi in un wallet diverso e riprova.",
+            "errorBody3": "Non puoi nascondere questo wallet, è necessario averne almeno uno."
         },
         "addressHistory": {
             "title": "cronologia degli indirizzi di {name}",
@@ -403,19 +461,42 @@
         "transaction": {
             "title": "Conferma la transazione",
             "body": "Stai per inviare {amount} a"
+        },
+        "balanceFinder": {
+            "title": "Rivaluta il saldo",
+            "body": "Eseguire una ricerca più esaustiva degli indirizzi per trovare i fondi mancanti. Potrebbe volerci un po' di tempo.",
+            "totalWalletBalance": "Saldo totale",
+            "typePassword": "Digita la password per consentire la ricerca."
+        },
+        "riskFunds": {
+            "title": "Attenzione: fondi a rischio durante la migrazione",
+            "body1": "Si raccomanda vivamente di proteggere tutti i tuoi fondi prima di procedere con la migrazione. I tuoi fondi sono a rischio di furto se non li proteggi.",
+            "body2": "Si consiglia di ripetere il processo per gli indirizzi con un livello di rischio medio o superiore."
+        },
+        "missingBundle": {
+            "title": "Attenzione: fondi a rischio durante la migrazione",
+            "body": "Hai fondi sugli indirizzi spesi, ma le informazioni necessarie per assicurarli non sono state trovate. Questo può accadere se hai effettuato transazioni molto tempo fa. Puoi procedere, ma {value} sono a rischio durante la migrazione.",
+            "learnMore": "Informazioni sugli indirizzi spesi",
+            "proceed": "Sono consapevole del rischio"
+        },
+        "snapshot": {
+            "title": "Aggiornamento della rete in corso",
+            "body": "L'aggiornamento della rete Chrysalis è iniziato.",
+            "bodyMigration": "La migrazione è disabilitata fino al completamento.",
+            "bodyFirefly": "Firefly è disabilitato fino a quando non sarà completato. La migrazione del token sarà ancora possibile in seguito."
         }
     },
     "charts": {
-        "incomingMi": "{value} Mi in arrivo",
-        "outgoingMi": "{value} Mi in uscita",
+        "incomingMi": "In ingresso {value}",
+        "outgoingMi": "In uscita {value}",
         "portoflio": "Portafoglio",
         "token": "Token",
-        "accountValue": "Valore dell'conto",
-        "accountActivity": "Attività del conto",
-        "timeframe1Hour": "1 hour",
-        "timeframe1Day": "1 day",
-        "timeframe1Week": "1 week",
-        "timeframe1Month": "1 month"
+        "accountValue": "Valore Wallet",
+        "accountActivity": "Attività Wallet",
+        "timeframe1Hour": "1 ora",
+        "timeframe1Day": "1 giorno",
+        "timeframe1Week": "1 settimana",
+        "timeframe1Month": "1 mese"
     },
     "actions": {
         "continue": "Continua",
@@ -423,10 +504,13 @@
         "cancel": "Annulla",
         "close": "Chiudi",
         "dismiss": "Ignora",
+        "proceedAnyway": "Procedi comunque",
         "save": "Salva",
         "importSeed": "Importa un seed esistente",
-        "importWallet": "Importa un portafoglio esistente",
+        "restoreWallet": "Migra o ripristina un wallet",
+        "restoreWalletDescription": "Migrare a Chrysalis o ripristinare un portafoglio esistente",
         "createWallet": "Crea nuovo portafoglio",
+        "createWalletDescription": "Crea un nuovo wallet per la rete Chrysalis",
         "savePassword": "Salva password",
         "useBiometric": "Usa sicurezza biometrica",
         "setupPin": "Imposta un codice PIN",
@@ -438,7 +522,7 @@
         "verifyRecoveryPhrase": "Verifica la frase di recupero",
         "revealRecoveryPhrase": "Rivela frase di recupero",
         "importSeedvault": "Importa un SeedVault",
-        "checkAgain": "No, Controlla Di Nuovo",
+        "checkAgain": "Controlla ancora",
         "importFromFile": "Importare da un file",
         "send": "Invia",
         "receive": "Ricevi",
@@ -462,11 +546,11 @@
         "updateFirefly": "Aggiorna Firefly",
         "restartNow": "Riavvia ora",
         "saveBackup": "Salva un backup di Stronghold",
-        "customizeAcount": "Personalizza il conto",
+        "customizeAcount": "Personalizza wallet",
         "viewAddressHistory": "Visualizza cronologia indirizzi",
-        "hideAccount": "Nascondi questo account",
-        "showAccount": "Mostra account",
-        "deleteAccount": "Cancella conto",
+        "hideAccount": "Nascondi wallet",
+        "showAccount": "Svela wallet",
+        "deleteAccount": "Elimina wallet",
         "max": "Massimo",
         "addNode": "Aggiungi nodo",
         "updateNode": "Aggiorna nodo",
@@ -482,21 +566,28 @@
         "copy": "Copia",
         "paste": "Incolla",
         "selectAll": "Seleziona tutto",
-        "addAccount": "Aggiungi un account",
+        "addAccount": "Aggiungi Wallet",
         "checkForUpdates": "Controlla Aggiornamenti",
         "reportAnIssue": "Segnala un problema",
         "clear": "Pulisci",
         "hideDetails": "Nascondi Dettagli",
         "yes": "Sì",
         "no": "No",
+        "skip": "Salta",
         "reset": "Reimposta",
         "downloadRecoveryKit": "Salva un esempio di Kit di Recupero",
         "skipBackup": "Salta il file di backup",
         "finishSetup": "Termina la configurazione",
         "readDocumentation": "Leggi la documentazione",
         "visitFaq": "Visita le Domande Frequenti",
-        "showHiddenAccounts": "Mostra account nascosti",
-        "confirm": "Conferma"
+        "viewStatus": "Visualizza stato",
+        "showHiddenAccounts": "Mostra wallet nascosti",
+        "confirm": "Conferma",
+        "findBalances": "Trova fondi",
+        "searchBalances": "Cerca fondi",
+        "searchAgain": "Nuova ricerca",
+        "searching": "Ricerca...",
+        "closeFirefly": "Chiudi Firefly"
     },
     "general": {
         "password": "Password",
@@ -514,11 +605,11 @@
         "sendFunds": "Invia fondi",
         "sendToAddress": "Invia all’indirizzo",
         "scanQrOrPaste": "Scansiona un codice QR o incolla un indirizzo",
-        "moveFundsBetweenAccounts": "Sposta fondi tra account",
+        "moveFundsBetweenAccounts": "Sposta fondi tra wallet",
         "sendTokensToAddress": "Invia token ad un indirizzo",
-        "manageAccount": "Gestisci account",
-        "customizeAcount": "Personalizza il tuo account",
-        "account": "Account",
+        "manageAccount": "Gestisci Wallet",
+        "customizeAcount": "Personalizza il tuo wallet",
+        "account": "Portafoglio",
         "sendingToAddress": "Invio all'indirizzo",
         "amount": "Importo",
         "addAddress": "Aggiungi Indirizzo",
@@ -531,10 +622,6 @@
         "yourAddress": "Il tuo indirizzo",
         "generateNewAddress": "Genera un nuovo indirizzo",
         "copyAddress": "Copia indirizzo",
-        "haveTextBackup": "Ho un backup di testo",
-        "haveFileBackup": "Ho un backup dei file",
-        "enterSeedOrPhrase": "Inserisci una frase di recupero o un seed",
-        "uploadSeedvaultOrStronghold": "Importa un file Stronghold o SeedVault",
         "import": "Importa",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -543,24 +630,25 @@
         "lightTheme": "Tema chiaro",
         "darkTheme": "Tema Scuro",
         "balance": "Saldo",
-        "accountBalance": "Saldo account",
+        "accountBalance": "Saldo Wallet",
         "incoming": "In entrata",
         "outgoing": "In uscita",
         "totalIn": "Totale in",
         "totalOut": "Totale out",
-        "accounts": "Accounts",
-        "myAccounts": "I Miei Account",
+        "accounts": "Wallet",
+        "myAccounts": "I Miei Wallet",
         "automaticNodeSelection": "Selezione automatica del nodo",
         "manualNodeSelection": "Selezione manuale del nodo",
         "profiles": "Profili",
         "developerProfile": "Profilo Sviluppatore",
+        "developerProfileDescription": "Consente di connettersi alla rete testnet",
         "dev": "Dev",
-        "createAccount": "Crea un account",
-        "accountName": "Nome account",
+        "createAccount": "Crea un wallet",
+        "accountName": "Nome wallet",
         "latestTransactions": "Ultime Transazioni",
         "transactions": "Transazioni",
         "security": "Sicurezza",
-        "accountAddress": "Indirizzo Account",
+        "accountAddress": "Indirizzo Wallet",
         "nodes": "Nodi",
         "wallet": "Portafoglio",
         "help": "Aiuto",
@@ -572,25 +660,26 @@
         "status": "Stato",
         "confirmed": "Confermato",
         "pending": "In attesa",
-        "noAccounts": "Se non hai alcun account, creane uno per favore.",
+        "noAccounts": "Non hai wallet, creane uno per favore.",
         "loadingAccounts": "Caricamento in corso attendere prego...",
         "addProfile": "Aggiungi Profilo",
         "noRecentHistory": "Nessun elemento recente",
-        "transferSyncing": "Sincronizzazione account in corso",
+        "firstSync": "Sincronizzazione della cronologia, questo richiederà del tempo...",
+        "transferSyncing": "Sincronizzazione wallet",
         "transferSelectingInputs": "Selezione degli input",
         "transferRemainderAddress": "Generazione dell'indirizzo della somma residua",
         "transferSigning": "Firma la transazione",
         "transferPow": "Esecuzione del PoW",
         "transferBroadcasting": "Trasmissione della transazione",
         "transferComplete": "Trasferimento completato",
-        "creatingAccount": "Creazione dell'account, attendere prego...",
-        "updatingAccount": "Aggiornamento dell'account, attendere prego...",
-        "accountSyncing": "L'account è in sincronizzazione",
-        "accountSyncComplete": "Sincronizzazione account completata",
+        "creatingAccount": "Creazione del wallet, attendere prego...",
+        "updatingAccount": "Wallet in aggiornamento, attendere prego...",
+        "accountSyncing": "Sincronizzazione wallet",
+        "accountSyncComplete": "Sincronizzazione wallet completata",
         "passwordUpdating": "Aggiornamento password...",
         "passwordSuccess": "Password aggiornata con successo",
         "passwordFailed": "Aggiornamento password non riuscito",
-        "syncingAccounts": "Sincronizzazione account in corso...",
+        "syncingAccounts": "Sincronizzazione wallet...",
         "exportingStronghold": "Esportazione stronghold...",
         "exportingStrongholdSuccess": "Stronghold esportato con successo",
         "exportingStrongholdFailed": "Esportazione di Stroghold fallita",
@@ -604,7 +693,17 @@
         "passwordStrength3": "Media",
         "passwordStrength4": "Sicura",
         "creatingProfile": "Creazione profilo, attendere prego...",
-        "accountRemoved": "Questo account è nascosto. Mostralo per eseguire i trasferimenti."
+        "fundMigration": "Fondi dei migrati",
+        "accountRemoved": "Questo wallet è nascosto. Mostralo per eseguire dei trasferimenti.",
+        "receivingTo": "Ricezione in {account}",
+        "sendingFrom": "Invio da {account}",
+        "receivedTo": "Ricevuto in {account}",
+        "sentFrom": "Inviato da {account}",
+        "receiving": "Ricezione",
+        "sending": "Invio",
+        "legacyNetwork": "Rete Legacy",
+        "capsLock": "Caps Lock is on",
+        "version": "Version {version}"
     },
     "dates": {
         "today": "Oggi",
@@ -627,7 +726,9 @@
         "calcMinutesRemaining": "Calcolo dei minuti rimanenti...",
         "minutesRemaining": "{minutes, plural, one {1 minuto rimanente} other {# minuti rimanenti}}",
         "copiedToClipboard": "Copiato negli appunti",
-        "accountsSynchronized": "Sincronizzazione completata"
+        "accountsSynchronized": "Sincronizzazione wallet completata",
+        "migratedAccountChrysalisDown": "I tuoi fondi saranno disponibili su rete Chrysalis dopo il 28 Aprile",
+        "migratedAccountChrysalisUp": "I tuoi fondi saranno disponibili a breve"
     },
     "error": {
         "profile": {
@@ -657,10 +758,10 @@
             "incorrect": "Il tuo PIN attuale non è corretto."
         },
         "account": {
-            "length": "Il nome del tuo account non può essere più lungo di {length, plural, one {1 carattere} other {# caratteri}}.",
-            "empty": "Devi usare il tuo conto più recente prima di crearne uno nuovo.",
-            "notEmpty": "Devi trasferire il tuo saldo prima di eliminare questo conto.",
-            "duplicate": "Esiste già un account con questo nome.",
+            "length": "Il nome del wallet non può essere più lungo di {length, plural, one {1 carattere} other {# caratteri}}.",
+            "empty": "Devi usare il tuo ultimo wallet prima di crearne uno nuovo.",
+            "notEmpty": "Devi trasferire il tuo saldo prima di eliminare questo wallet.",
+            "duplicate": "Un wallet con questo nome esiste già.",
             "tilde": "Un nome del profilo non può iniziare con il carattere '~'.",
             "control": "Un nome del profilo non può contenere un carattere di controllo.",
             "startDot": "Un nome del profilo non può iniziare con il carattere '.'",
@@ -675,8 +776,8 @@
             "wrongAddressPrefix": "Gli indirizzi iniziano con il prefisso {prefix}.",
             "wrongAddressFormat": "L'indirizzo non è formattato correttamente.",
             "invalidAddress": "L'indirizzo non è valido.",
-            "insufficientFunds": "Questo conto non ha sufficienti fondi.",
-            "noToAccount": "Non è stato selezionato un account a cui inviare i fondi.",
+            "insufficientFunds": "Questo wallet non ha fondi sufficienti.",
+            "noToAccount": "Non hai selezionato un wallet a cui inviare i fondi.",
             "sendingDust": "Non puoi inviare meno di 1 Mi.",
             "leavingDust": "Non puoi lasciare meno di 1 Mi sul tuo indirizzo."
         },
@@ -699,6 +800,16 @@
             "phraseWordCount": "Ci dovrebbero essere 24 parole nella tua frase di recupero, attualmente ci sono {length, plural, one {è 1} other {sono #}}.",
             "phraseUnrecognizedWord": "Parola \"{word}\" non riconosciuta nella tua frase di recupero",
             "phraseCaseWord": "La parola \"{word}\" dovrebbe essere minuscola"
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "Livello di rischio: {risk}",
+            "veryHigh": "Molto alto",
+            "high": "Alto",
+            "medium": "Medio",
+            "low": "Basso",
+            "veryLow": "Molto basso"
         }
     }
 }

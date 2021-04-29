@@ -2,45 +2,33 @@
     "views": {
         "onboarding1": {
             "title": "ارسال، دریافت و مدیریت توکن های آیوتا",
-            "body": "فایرفلای کیف پول رسمی آیوتا می باشد."
+            "body": "Firefly کیف پول رسمی آیوتا است."
         },
         "legal": {
             "title": "حریم خصوصی و شرایط استفاده",
-            "body": "لطفا قوانین استفاده از سرویس و سیاست حریم خصوصی را بررسی نمایید.",
-            "privacyPolicy": {
-                "title": "سیاست حفظ حریم خصوصی",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
-            "termsOfService": {
-                "title": "قوانین",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
+            "body": "لطفا قوانین استفاده از خدمات و سیاست حریم خصوصی را بررسی نمایید.",
             "checkbox": "من سیاست حریم خصوصی و شرایط استفاده را مطالعه کرده و میپذیرم"
         },
         "appearance": {
             "title": "ظاهر",
-            "body": "تم کیف پول خود را انتخاب کنید."
+            "body": "طرح زمینه خود را انتخاب کنید."
+        },
+        "profile": {
+            "title": "ایجاد پروفایل",
+            "body1": "شما میتوانید برای نگهداری توکن های خود به صورت جداگانه و ارتقای حریم خصوصی، چندین پروفایل کاربری درست کنید.",
+            "body2": "فعلا با نام اولین پروفایل خود شروع کنید، شما بعدا میتوانید پروفایل های بیشتری اضافه کنید.",
+            "profileName": "نام پروفایل"
         },
         "setup": {
             "title": "راه اندازی کیف پول",
-            "body1": "شما میتوانید برای نگهداری توکن های خود به صورت جداگانه و ارتقای حریم خصوصی، چندین پروفایل کاربری درست کنید.",
-            "body2": "برای الان٬ از نام اولین پروفایل خود شروع کنید. شما میتوانید پروفایل های بیشتری را بعدا اضافه کنید.",
-            "profileName": "نام پروفایل"
+            "chrysalisTitle": "بروزرسانی شبکه Chrysalis",
+            "chrysalisBody": "از 21 آوریل، کاربران می‌توانند توکن های خود را به شبکه جدید Chrysalis منتقل کنند. توصیه ما این است که هرچه زودتر توکن های خود را انتقال دهید.",
+            "learnMore": "کسب اطلاعات در مورد انتقال"
         },
         "secure": {
             "title": "ایمن سازی کیف پول",
             "body1": "قالب PDF کیت بازیابی را ذخیره و پرینت کنید.",
-            "body2": "اگر کیت بازیابی خود را پر کرده و در جایی امن نگهداری کنید٬ میتوانید در آینده کیف پول خود را بازیابی کنید."
+            "body2": "اگر کیت بازیابی خود را پر کرده و در جایی امن نگهداری کنید، همیشه می توانید کیف پول خود را بازیابی کنید."
         },
         "password": {
             "title": "ایجاد رمز عبور",
@@ -49,7 +37,7 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "PIN ورود خود را راه اندازی کنید تا اطمینان حاصل کنید که تنها خودتان میتوانید به کیف پول خود وارد شوید.",
+            "body1": "برای اطمینان از اینکه فقط شما می توانید نمایه خود را وارد کنید ، پین ورود به سیستم را راه اندازی کنید.",
             "body2": "PIN خود را امن نگه دارید!"
         },
         "pin": {
@@ -85,44 +73,60 @@
         },
         "backupWallet": {
             "title": "بک آپ به صورت یک فایل Stronghold",
-            "body1": "برای گرفتن بک آپ از کیف پول خود به صورت فایل Stronghold رمز عبور خود را وارد کنید. رمز عبور برای رمزگذاری بک آپ شما استفاده میشود.",
+            "body1": "گذرواژه خود را وارد کنید تا از کیف پولهای خود در یک فایل Stronghold بک آپ تهیه شود. از رمز ورود شما برای رمزگذاری بک آپ استفاده می شود.",
             "body2": "دلایلی که چرا گرفتن بک آپ دیجیتال مهم است:",
-            "reason1": "بازیابی کیف پول شما به راحتی و بدون تایپ کردن عبارت بازیابی",
+            "reason1": "بازیابی کیف پول شما به راحتی و بدون وارد کردن عبارت بازیابی",
             "reason2": "وارد کردن کیف پول خود به دستگاه های دیگر",
             "reason3": "بازیابی پیشینه‌ی کامل تراکنش شما"
         },
         "recoveryPhraseSaved": {
             "title": "بک آپ با موفقیت انجام شد",
-            "body": "شما از کیف پول خود یک بک آپ به صورت یک فایل Stronghold گرفته اید."
+            "body": "شما از کیف پول خود یک بک آپ به صورت فایل Stronghold گرفته اید."
         },
         "congratulations": {
             "title": "راه اندازی کیف پول کامل شد",
-            "body": "کیف پول جدید شما آماده استفاده میباشد."
+            "body": "کیف پول جدید شما آماده استفاده میباشد.",
+            "fundsMigrated": "وجوه منتقل شد",
+            "success": "شما با موفقیت وجوه خود را به شبکه جدید منتقل کردید",
+            "exportMigration": "گرفتن گزارش انتقال و اتمام راه اندازی"
         },
         "import": {
-            "title": "یک کیف پول وارد کنید",
-            "body": "اگر عبارت بازیابی یا بک آپ Stronghold دارید٬ میتوانید اینجا وارد کنید."
+            "title": "بازیابی یا انتقال وجوه",
+            "body": "اگر نسخه پشتیبان از seed یا کیف پول خود دارید، می‌توانید آنرا در اینجا وارد کنید. اگر وجوه شبکه قدیمی را در اختیار دارید، شما را در مراحل انتقال آنها به شبکه Chrysalis همراهی خواهیم کرد.",
+            "importSeed": "من سید ٨١ کاراکتری دارم",
+            "importSeedDescription": "عبارات seed خود را وارد کنید تا وجوه شما به شبکه Chrysalis منتقل شود",
+            "importMnemonic": "عبارت بازیابی Firefly را در اختیار دارم",
+            "importMnemonicDescription": "جهت بازگردانی کیف پول های خود عبارت بازیابی را وارد کنید",
+            "importFile": "فایل پشتیبان در اختیار دارم",
+            "importFileDescription": "فایل SeedVault یا Stronghold را ارسال کنید"
         },
         "importFromText": {
-            "title": "بازگردانی کیف پول توسط عبارت بازیابی یا سید",
-            "body1": "یک سید از 81 کاراکتر تشکیل شده که برای بازیابی کیف پول قدیمی تر ترینیتی استفاده میشود.",
-            "body2": "عبارت بازیابی 24 کلمه می باشد، تماما حروف کوچک، با جدا کننده فاصله بین آنها. این عبارت برای بازیابی کیف پول فایرفلای که قبلا ایجاد شده است استفاده می شود.",
-            "body3": "سید یا عبارت بازیابی خود را وارد کنید.",
+            "seed": {
+                "title": "برای شروع انتقال عبارت seed خود را وارد کنید",
+                "body": "یک seed از ٨١ حرف تشکیل شده و از آن جهت بازیابی کیف پول قدیمی Trinity استفاده می‌شود.",
+                "enter": "عبارت seed خود را وارد کنید"
+            },
+            "mnemonic": {
+                "title": "عبارت بازیابی خود را وارد کنید",
+                "body": "عبارت بازیابی 24 کلمه می باشد که تماما با حروف کوچک و با فاصله می باشند. این عبارت برای بازیابی کیف پول Firefly که قبلا ایجاد شده است، استفاده می شود.",
+                "enter": "عبارت بازیابی خود را وارد کنید"
+            },
             "seedDetected": "سید 81 کاراکتری یافت شد",
-            "phraseDetected": "عبارت بازیابی 24 کلمه ای یافت شد"
+            "phraseDetected": "عبارت بازیابی 24 کلمه ای یافت شد",
+            "checksum": "کد اعتبارسنجی"
         },
         "importFromFile": {
-            "title": "بازگرداندنی کیف پول توسط فایل بک آپ",
-            "body": "فایل بک آپ را برای بازگرداندن کیف پول خود وارد کنید. بک آپ میتواند یک استرانگ هُلد (stronghold.) و یا ترینیتی سیدوالت (kdbx.) باشد."
+            "title": "بازگردانی کیف پول توسط فایل بک آپ",
+            "body": "جهت بازگردانی کیف پول های خود، فایل بک آپ را وارد کنید. فایل بک آپ میتواند یک استرانگ هُلد (stronghold.) و یا ترینیتی سیدوالت (kdbx.) باشد."
         },
         "importBackupPassword": {
-            "title": "بازگردانی کیف پول خود توسط SeedVault یا Stronghold",
+            "title": "بازگردانی کیف پول توسط SeedVault یا Stronghold",
             "body1": "لطفا رمز عبور بک آپ خود را وارد کنید.",
             "body2": "این رمز عبوریست که برای اولین بار در گرفتن بک آپ آن را وارد کردید."
         },
         "importSuccess": {
             "title": "شما با موفقیت بک آپ خود را بازیابی کردید",
-            "body": "هم اکنون میتوانید کیف پول جدید خود را راه اندازی کنید.",
+            "body": "اکنون میتوانید کیف پول جدید خود را راه اندازی کنید.",
             "seedvaultTitle": "با موفقیت وارد شد",
             "seedvaultBody": "رمز عبور شما درست است٬ میتوانید ادامه دهید.",
             "strongholdTitle": "با موفقیت وارد شد",
@@ -130,10 +134,59 @@
         },
         "migrate": {
             "title": "توکن های خود را انتقال دائمی دهید",
-            "body1": "این یک فرایند خودکار میباشد تا توکن های شما به والت جدید منتقل شود. ما آدرس هایی را که قبلا استفاده شده و امنیت شما را پایین می آورد٬ چک میکنیم.",
+            "body1": "این یک فرایند خودکار است برای انتقال وجوه شما به کیف پول جدیدتان.",
             "body2": "این فرایند زمان بر میباشد. دستگاه خود را حین انتقال دائمی خاموش نکنید.",
             "existing": "کیف پول قدیمی شما",
-            "new": "کیف پول جدید شما"
+            "new": "کیف پول جدید شما",
+            "learn": "کسب اطلاعات در مورد انتقال",
+            "beginMigration": "شروع انتقال",
+            "migrating": "درحال انتقال وجوه...",
+            "migrated": "{balance} منتقل شد",
+            "migrationFailed": "انتقال انجام نشد",
+            "noAddressesForMigration": "لطفا آدرسهایی را که می‌خواهید ایمن سازی شود، انتخاب کنید.",
+            "restoringWallet": "بازگردانی کیف پول...",
+            "findingBalance": "پیدا کردن موجودی...",
+            "incorrectSeedVaultPassword": "رمز SeedVault اشتباه است.",
+            "noDataSeedVault": "هیچ داده‌ای در SeedVault پیدا نشد.",
+            "signingBundle": "در حال تایید دسته تراکنش ها",
+            "broadcastingBundle": "پخش بسته",
+            "miningBundle": "در حال استخراج دسته تراکنش ها",
+            "problemRestoringWallet": "بازیابی کیف پول شما با مشکل مواجه شد. لطفا دوباره سعی کنید.",
+            "minimumMigrationAmountSpentAddresses": "حداقل مبلغ انتقال برای هر آدرس 1 Mi است. موجودی خود را دوباره کنترل کنید.",
+            "tooManyAddressesToMigrate": "تعداد آدرس‌های با موجودی پایین شما جهت انتقال، بیش از حد است. موجودی خود را دوباره کنترل کنید.",
+            "cannotMigrateAllYourFunds": "امکان انتقال تمام وجوه شما به دلیل موجودی بسیار کم بعضی از آدرس‌ها وجود ندارد. با این حال می‌توانید ادامه دهید. مقدار {value} از دست خواهد رفت.",
+            "error": "انتقال وجوه شما با مشکل مواجه شد. لطفا دوباره سعی کنید."
+        },
+        "bundleMiningWarning": {
+            "title": "هشدار",
+            "body1": "شما در یک یا چند آدرس وجوهی دارید.",
+            "body2": "پیشنهاد میشود از فرایند خودکار برای انتقال امن این وجوه استفاده کنید.",
+            "body3": "اگر برنامه را ببندید، لازم اسم که تمام فرایند انتقال را دوباره از اول شروع کنید.",
+            "learn": "کسب اطلاعات در مورد آدرس‌ها"
+        },
+        "secureSpentAddresses": {
+            "title": "آدرس‌های امن",
+            "body1": "وجوه شما در {number, plural, one {#} other {#}} آدرس شناسایی شده است.",
+            "body2": "پیشنهاد میشود از فرایند خودکار برای انتقال امن وجوه تان استفاده کنید.",
+            "error": "آدرس‌هایی که موجودی شان از 1 Mi کمتر است، قابل انتقال نیستند"
+        },
+        "securityCheckCompleted": {
+            "title": "کنترل‌های امنیتی انجام شد",
+            "body1": "ما سطح خطرات امنیتی را محاسبه کرده‌ایم. اجرای دوباره این فرایند ممکن است این خطرات را کاهش دهد.",
+            "body2": "زمانی که از سطح خطر(ات) راضی بودید، دکمه ادامه را فشار دهید.",
+            "rerun": "اجرای دوباره فرایند برای آدرس‌‌های انتخاب شده",
+            "continueMigration": "ادامه روند انتقال"
+        },
+        "securingSpentAddresses": {
+            "title": "درحال ایمن سازی آدرس‌ها...",
+            "body1": "این فرایند {minutes, plural, one {1 دقیقه} other {# دقیقه}} طول خواهد کشید.",
+            "body2": "کامپیوتر شما با تمام ظرفیت مشغول به کار خواهد شد، بهتر است مشغول کار دیگری شوید تا این عملیات تمام شود."
+        },
+        "transferFragmentedFunds": {
+            "body1": "اکنون Firefly برای انتقال وجوه شما اقدام می‌کند. این کار ممکن است مدتی طول بکشد.",
+            "migrate": "انتقال وجوه",
+            "transaction": "تراکنش {number}",
+            "rerun": "تلاش مجدد"
         },
         "migrateFailed": {
             "title": "To do",
@@ -141,13 +194,15 @@
         },
         "balance": {
             "title": "موجودی شما",
-            "body": "آیا موجودی شما درست است؟"
+            "body": "پیش از ادامه از موجودی خود مطمئن شوید. اگر مواردی صحیح نبود می‌توانید دوباره بررسی کنید.",
+            "error": "حداقل مبلغ انتقال برای هر آدرس 1 Mi است. اگر موجودی شما صحیح نیست، دوباره کنترل کنید.",
+            "zeroBalance": "دوباره کنترل کنید. اگر کماکان موجودی شما صحیح نیست احتمالا seed را اشتباه وارد کرده‌اید."
         },
         "settings": {
             "settings": "تنظیمات",
             "generalSettings": {
                 "title": "تنظیمات عمومی",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "تنظیمات ظاهری و عمومی کیف پول خود را پیکربندی کنید"
             },
             "security": {
                 "title": "امنیت",
@@ -166,7 +221,7 @@
                 "description": "تغییر اسم پروفایل یا انتخاب ظاهر"
             },
             "sync": {
-                "title": "همگام سازی حساب ها",
+                "title": "همگام سازی کیف پول ها",
                 "description": ""
             },
             "theme": {
@@ -187,15 +242,17 @@
             },
             "exportStronghold": {
                 "title": "استخراج بک آپ",
-                "description": "استخراج به صورت فایل Stronghold ٬بک آپی کامل و رمزنگاری شده از کیف پول شما به همراه سوابق آخرین تراکنش ها."
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
             },
             "appLock": {
                 "title": "ﻗﻔﻞ ﺧﻮﺩﮐﺎﺭ",
-                "description": "زمان قبل از اینکه کیف پول شما قفل شود و شما را از سیستم خارج کند، سپری شده است"
+                "description": "مدت زمان عدم فعالیت قبل از قفل شدن کیف پول و خارج شدن از سیستم",
+                "durationMinute": "{time, plural, one {۱ دقیقه} other {# دقیقه}}",
+                "durationHour": "{time, plural, one {۱ ساعت} other {# ساعت}}"
             },
             "changePassword": {
                 "title": "تغییر رمز عبور",
-                "description": "رمز عبور برای امنیت کیف پول شما استفاده میشود. برای حفاظت از وجوه خود باید از رمز عبور قوی استفاده کنید."
+                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
             },
             "changePincode": {
                 "title": "تغییر PIN کد",
@@ -205,21 +262,21 @@
                 "confirmNewPincode": "تایید PIN جدید",
                 "action": "تغییر PIN"
             },
-            "resyncAccounts": {
-                "title": "همگام سازی مجدد حساب ها",
-                "description": "یک عملیات پشت زمینه آغاز می شود تا اطمینان حاصل نماید که نام های کاربری شما به روز می باشد."
+            "balanceFinder": {
+                "title": "یابنده موجودی",
+                "description": "Perform an extended search of your addresses for tokens"
             },
             "hiddenAccounts": {
-                "title": "حساب های پنهان",
-                "description": "با انتخاب این گزینه حساب هایی نمایش داده می شود که قبلا پنهان بوده است."
+                "title": "کیف پول های مخفی",
+                "description": "Selecting this options will show wallets that were previously hidden"
             },
             "deleteProfile": {
                 "title": "حذف پروفایل",
-                "description": "تمام کیف پول، پروفایل و سوابق تراکنش ها را حذف میکند. از داشتن بک آپ مطمئن شوید."
+                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
             },
             "deepLinks": {
                 "title": "لینک عمیق",
-                "description": "با کلیک بر لینک //:iota به صورت خودکار اطلاعات تراکنش را در فایرفلای وارد کنید"
+                "description": "با کلیک بر لینک //:iota به صورت خودکار اطلاعات تراکنش را در Firefly وارد کنید"
             },
             "developerMode": {
                 "title": "حالت برنامه نویسی",
@@ -231,7 +288,7 @@
             },
             "configureNodeList": {
                 "title": "انتخاب نود",
-                "description": "لیست گره هایی که کیف پول شما به آن متصل می شود را مدیریت کنید.",
+                "description": "Manage the list of IOTA network nodes you connect to",
                 "primaryNode": "گره اصلی",
                 "excludeNode": "حذف گره",
                 "includeNode": "اضافه کردن گره",
@@ -239,7 +296,7 @@
                 "setAsPrimary": "تنظیم به عنوان اصلی",
                 "removeNode": "حذف نود",
                 "includeOfficialNodeList": "اضافه کردن لیست گره های رسمی",
-                "noNodes": "گره ای وجود ندارد، به جای آن انتخاب اتوماتیک استفاده می شود."
+                "noNodes": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "اثبات کار",
@@ -280,7 +337,7 @@
             },
             "reportAnIssue": {
                 "title": "گزارش یک مشکل",
-                "description": "گزارش یک باگ به توسعه دهندگان. اول چک کنید تا مطمئن شوید که قبلا گزارش نشده باشد."
+                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
             }
         },
         "login": {
@@ -290,7 +347,7 @@
         "dashboard": {
             "security": {
                 "version": {
-                    "title": "فایرفلای v {version}",
+                    "title": "Firefly v {version}",
                     "upToDate": "به روزرسانی شده",
                     "outOfDate": "قدیمی"
                 },
@@ -300,8 +357,8 @@
                 },
                 "strongholdStatus": {
                     "title": "وضعیت کیف پول",
-                    "locked": "Stronghold قفل شد",
-                    "unlocked": "Stronghold باز شد"
+                    "locked": "قفل شد",
+                    "unlocked": "باز شد"
                 },
                 "strongholdBackup": {
                     "title": "بک آپ کیف پول",
@@ -325,7 +382,7 @@
     "popups": {
         "password": {
             "title": "رمز عبور مورد نیاز است",
-            "subtitle": "لطفا رمز عبور خود را وارد کنید تا قلعه را باز کنید",
+            "subtitle": "لطفا رمز عبور خود را وارد کنید تا قفل کیف پول باز شود",
             "backup": "لطفا رمز عبور خود را وارد کنید تا یک پشتیبان دریافت کنید"
         },
         "qr": {
@@ -333,37 +390,38 @@
         },
         "version": {
             "title": "نسخه فعلی: {version}",
-            "upToDateTitle": "فایرفلای به روز رسانی شده",
-            "upToDateDescription": "شما از به روزترین و امن ترین نسخه فایرفلای استفاده میکنید.",
-            "updateAvailable": "نسخه به روز شده فایرفلای قابل دسترس است",
-            "updateDetails": "نسخه {version} - {date}"
+            "upToDateTitle": "Firefly به روز رسانی شده",
+            "upToDateDescription": "شما از به روزترین و امن ترین نسخه Firefly استفاده میکنید.",
+            "updateAvailable": "نسخه به روز شده Firefly قابل دسترس است",
+            "updateDetails": "نسخه {version} - {date}",
+            "noAutoUpdate": "بروزرسانی خودکار در این نسخه ویندوز غیرفعال است، لطفاً جهت بروزرسانی به https://firefly.iota.org مراجعه کنید."
         },
         "backup": {
             "title": "آخرین به روز رسانی: {date}",
             "lastBackup": "آخرین به روز رسانی در تاریخ {date}",
-            "backupDescription": "گرفتن بک آپ مهم میباشد، زیرا به شما اطمینان میدهد که کپی حساب ها و سوابق معاملات خود را داشته باشید.",
+            "backupDescription": "مهم است که به طور مرتب بک آپ تهیه کنید تا اطمینان حاصل کنید که یک کپی از کیف پول و سوابق معاملات خود را در اختیار دارید.",
             "backupWarning": "در صورت گم کردن بک آپ و عبارت بازیابی، دسترسی شما به وجوه خود از دست خواهد رفت.",
             "notBackedUp": "بک آپ گرفته نشده",
-            "notBackedUpDescription": "شما از استرانگ هُلد خود بک آپ نگرفته اید",
+            "notBackedUpDescription": "شما از کیف پول خود بک آپ نگرفته اید",
             "saving": "درحال ذخیره..."
         },
         "deleteAccount": {
             "title": "حذف { name} ?",
-            "body": "این حساب هیچ تاریخچه تراکنشی ندارد. می تواند به طور امن حذف شود.",
+            "body": "این حساب هیچ تاریخچه تراکنشی ندارد. با خیال راحت قابل حذف است.",
             "typePassword": "برای تایید رمز عبور کیف پول خود را وارد کنید.",
-            "hideAccount": "حذف حساب",
+            "hideAccount": "حذف کیف پول",
             "errorTitle": "امکان حذف {name} وجود ندارد",
-            "errorBody1": "شما نمیتوانید این حساب را حذف کنید، شما حداقل به یک حساب نیاز دارید."
+            "errorBody1": "شما نمیتوانید این حساب را حذف کنید، باید حداقل یک کیف پول داشته باشید."
         },
         "hideAccount": {
             "title": "پنهان سازی {name}?",
-            "body": "شما می توانید این حساب را بعدا با فعال سازی گزینه \"نمایش حساب های پنهان \" در تنظیمات پیشرفته پیدا کنید.",
+            "body": "بعداً می توانید با فعال کردن \"نمایش کیف پول های پنهان\" در تنظیمات پیشرفته ، این کیف پول را پیدا کنید.",
             "typePassword": "برای تایید رمز کیف پول خود را وارد کنید.",
-            "hideAccount": "پنهان سازی حساب",
+            "hideAccount": "کیف پول مخفی",
             "errorTitle": "امکان پنهان سازی {name} وجود ندارد",
-            "errorBody1": "برای پنهان سازی یک حساب می بایست موجودی آن ۰ باشد.",
-            "errorBody2": "در حال حاضر {balance} در حساب شما باقی مانده است. لطفا این موجودی را به یک حساب دیگر منتقل کنید و سپس مجددا تلاش نمایید.",
-            "errorBody3": "شما نمی توانید این حساب را پنهان کنید، می بایست حداقل یک حساب داشته باشید."
+            "errorBody1": "برای مخفی کردن یک کیف پول می بایست موجودی آن 0 باشد.",
+            "errorBody2": "در حال حاضر مانده حساب شما {balance} میباشد. لطفا این مبلغ را به کیف پول دیگری انتقال داده و دوباره امتحان کنید.",
+            "errorBody3": "شما نمیتوانید این حساب را حذف کنید، باید حداقل یک کیف پول داشته باشید."
         },
         "addressHistory": {
             "title": "تاریخچه آدرس {name}",
@@ -403,6 +461,29 @@
         "transaction": {
             "title": "تایید تراکنش",
             "body": "شما در حال انتقال مقدار {amount} هستید به"
+        },
+        "balanceFinder": {
+            "title": "یابنده موجودی",
+            "body": "جستجو دقیق تر در آدرس ها برای یافتن وجوه از دست رفته. این ممکن است مدتی طول بکشد.",
+            "totalWalletBalance": "موجودی کل",
+            "typePassword": "برای شروع جستجو، رمز خود را وارد کنید."
+        },
+        "riskFunds": {
+            "title": "هشدار: خطر از دست رفتن موجودی",
+            "body1": "توصیه می‌شود قبل از انتقال، تمامی موجودی ‌های خود را ایمن سازی کنید. در غیر این صورت موجودی شما در معرض خطر سرقت خواهد بود.",
+            "body2": "پیشنهاد میشود این فرایند را برای تمامی آدرس‌هایی که سطح خطر متوسط و بالاتر دارند، تکرار شود."
+        },
+        "missingBundle": {
+            "title": "هشدار: خطر از دست رفتن موجودی",
+            "body": "شما وجوهی در آدرسهای خرج شده داريد، اما اطلاعات مورد نياز برای امنيت آنها يافت نشد. اين اتفاق ممکن است به دليل اينکه شما تراکنشی را در گذشته ی دور انجام داديد افتاده باشد. شما ميتوانيد ادامه دهيد اما مقدار {value} در هنگام انتقال در خطر قرار ميگيرد.",
+            "learnMore": "کسب اطلاعات بيشتر درباره آدرسهای خرج شده",
+            "proceed": "از این ریسک اطلاع دارم"
+        },
+        "snapshot": {
+            "title": "در حال ارتقا شبکه",
+            "body": "بروزرسانی شبکه Chrysalis آغاز شده است.",
+            "bodyMigration": "نقل و انتقال تا تکمیل آن غیرفعال است.",
+            "bodyFirefly": "Firefly تا زمان تکمیل آن غیرفعال شده است. پس از آن انتقال توکن امکان پذیر است."
         }
     },
     "charts": {
@@ -410,12 +491,12 @@
         "outgoingMi": "خروجی {value} Mi",
         "portoflio": "سبد سهام",
         "token": "توکن",
-        "accountValue": "ارزش حساب",
-        "accountActivity": "فعالیت حساب",
-        "timeframe1Hour": "1 hour",
-        "timeframe1Day": "1 day",
-        "timeframe1Week": "1 week",
-        "timeframe1Month": "1 month"
+        "accountValue": "مقدار کیف پول",
+        "accountActivity": "فعالیت کیف پول",
+        "timeframe1Hour": "۱ ساعت",
+        "timeframe1Day": "۱ روز",
+        "timeframe1Week": "۱ هفته",
+        "timeframe1Month": "۱ ماه"
     },
     "actions": {
         "continue": "ادامه",
@@ -423,10 +504,13 @@
         "cancel": "لغو",
         "close": "بستن",
         "dismiss": "نادیده گرفتن",
+        "proceedAnyway": "در هر صورت انجام شود",
         "save": "ذخیره",
         "importSeed": "وارد کردن سید موجود",
-        "importWallet": "وارد کردن کیف پول موجود",
+        "restoreWallet": "انتقال يا بازگردانی کيف پول",
+        "restoreWalletDescription": "انتقال به Chrysalis یا بازگردانی کیف پول فعلی",
         "createWallet": "ایجاد کیف پول جدید",
+        "createWalletDescription": "يک کيف پول جديد بر پايه Chrysalis درست کن",
         "savePassword": "ذخیره رمزعبور",
         "useBiometric": "استفاده از امنیت بیومتریک",
         "setupPin": "تنظیم PIN کد",
@@ -438,7 +522,7 @@
         "verifyRecoveryPhrase": "عبارت بازیابی را تایید کنید",
         "revealRecoveryPhrase": "عبارت بازیابی را نشان بده",
         "importSeedvault": "وارد کردن SeedVault",
-        "checkAgain": "خیر، بررسی دوباره",
+        "checkAgain": "بررسی دوباره",
         "importFromFile": "وارد کردن از یک فایل",
         "send": "ارسال",
         "receive": "دریافت",
@@ -459,14 +543,14 @@
         "exportState": "استخراج وضعیت",
         "localProofOfWork": "اثبات کار محلی",
         "unlock": "بازکردن",
-        "updateFirefly": "به روز رسانی فایرفلای",
-        "restartNow": "شروع مجدد فوری",
+        "updateFirefly": "به روز رسانی Firefly",
+        "restartNow": "بستن و باز کردن مجدد",
         "saveBackup": "ذخیره بک آپ Stronghold",
-        "customizeAcount": "شخصی سازی حساب",
+        "customizeAcount": "کیف پول سفارشی",
         "viewAddressHistory": "نمایش سوابق آدرس",
-        "hideAccount": "پنهان سازی حساب",
-        "showAccount": "نمایان سازی حساب",
-        "deleteAccount": "حذف حساب",
+        "hideAccount": "کیف پول مخفی",
+        "showAccount": "کیف پول آشکار",
+        "deleteAccount": "حذف کیف پول",
         "max": "حداکثر",
         "addNode": "اضافه کردن نود",
         "updateNode": "بروزرسانی گره",
@@ -482,21 +566,28 @@
         "copy": "کپی",
         "paste": "جای‌گذاری",
         "selectAll": "انتخاب همه",
-        "addAccount": "افزودن حساب",
+        "addAccount": "اضافه کردن کیف پول",
         "checkForUpdates": "بررسی برای بروزرسانی",
         "reportAnIssue": "گزارش مشکل",
         "clear": "پاک کردن",
         "hideDetails": "پنهان کردن جزئیات",
         "yes": "بله",
         "no": "نه",
+        "skip": "رد شدن",
         "reset": "بازنشانی",
         "downloadRecoveryKit": "ذخیره قالب کیت بازیابی",
         "skipBackup": "رد شدن از بک آپ گیری فایل",
         "finishSetup": "پایان راه اندازی",
         "readDocumentation": "مستندات را بخوانید",
         "visitFaq": "بخش سوالات متداول را ببینید",
-        "showHiddenAccounts": "نمایش حساب های پنهان شده",
-        "confirm": "تایید"
+        "viewStatus": "نشان دادن موقعیت",
+        "showHiddenAccounts": "نمایش کیف پول های مخفی",
+        "confirm": "تایید",
+        "findBalances": "پیدا کردن موجودی",
+        "searchBalances": "جستجو برای موجودی",
+        "searchAgain": "جستجوی مجدد",
+        "searching": "درحال جستجو...",
+        "closeFirefly": "بستن Firefly"
     },
     "general": {
         "password": "رمز عبور",
@@ -516,9 +607,9 @@
         "scanQrOrPaste": "کد QR یا آدرس را وارد کنید",
         "moveFundsBetweenAccounts": "جابجایی وجه بین حساب ها",
         "sendTokensToAddress": "ارسال توکن به یک آدرس",
-        "manageAccount": "مدیریت حساب",
+        "manageAccount": "مدیریت کیف پول",
         "customizeAcount": "شخصی سازی حساب خود",
-        "account": "حساب",
+        "account": "کیف پول",
         "sendingToAddress": "ارسال به آدرس",
         "amount": "مقدار",
         "addAddress": "اضافه کردن آدرس",
@@ -531,10 +622,6 @@
         "yourAddress": "آدرس شما",
         "generateNewAddress": "تولید آدرس جدید",
         "copyAddress": "کپی کردن آدرس",
-        "haveTextBackup": "من یک فایل متنی بک آپ دارم",
-        "haveFileBackup": "من یک فایل بک آپ دارم",
-        "enterSeedOrPhrase": "عبارت بازیابی یا سید خود را وارد کنید",
-        "uploadSeedvaultOrStronghold": "یک فایل Stronghold یا SeedVault وارد کنید",
         "import": "وارد کردن",
         "seedvault": "SeedVault",
         "stronghold": "استرانگ هُلد",
@@ -543,24 +630,25 @@
         "lightTheme": "تم روشن",
         "darkTheme": "تم تاریک",
         "balance": "موجودی",
-        "accountBalance": "موجودی حساب",
+        "accountBalance": "موجودی کیف پول",
         "incoming": "ورودی",
         "outgoing": "خروجی",
         "totalIn": "کل دریافتی",
         "totalOut": "کل ارسالی",
-        "accounts": "حساب ها",
-        "myAccounts": "حساب کاربری من",
+        "accounts": "کیف پول ها",
+        "myAccounts": "کیف پول من",
         "automaticNodeSelection": "انتخاب اتوماتیک نُد",
         "manualNodeSelection": "انتخاب دستی نُد",
         "profiles": "پروفایل ها",
         "developerProfile": "پروفایل برنامه نویسی",
+        "developerProfileDescription": "به شما اجازه اتصال به شبکه آزمایشی را میدهد",
         "dev": "برنامه نویس",
-        "createAccount": "ایجاد یک حساب کاربری",
-        "accountName": "نام حساب",
+        "createAccount": "ايجاد كيف پول",
+        "accountName": "نام کیف پول",
         "latestTransactions": "آخرین تراکنش ها",
         "transactions": "تراکنش ها",
         "security": "امنیت",
-        "accountAddress": "آدرس حساب",
+        "accountAddress": "آدرس کیف پول",
         "nodes": "نودها",
         "wallet": "کیف پول",
         "help": "راهنما",
@@ -576,21 +664,22 @@
         "loadingAccounts": "درحال بارگذاری، لطفاً صبر کنید...",
         "addProfile": "افزودن پروفایل",
         "noRecentHistory": "تاریخچه اخیر وجود ندارد",
-        "transferSyncing": "همگام سازی حساب",
+        "firstSync": "همگام سازی تاریخچه، ممکن است مدتی طول بکشد...",
+        "transferSyncing": "همگام سازی کیف پول",
         "transferSelectingInputs": "در حال انتخاب ورودی ها",
         "transferRemainderAddress": "در حال تولید آدرس موجودی باقیمانده",
         "transferSigning": "در حال صحه گذاری تراکنش",
         "transferPow": "در حال انجام اثبات کار",
         "transferBroadcasting": "در حال انتشار تراکنش",
         "transferComplete": "انتقال کامل شد",
-        "creatingAccount": "در حال ساختن حساب، لطفا صبر کنید...",
-        "updatingAccount": "در حال به روز رسانی حساب، لطفا صبر کنید...",
-        "accountSyncing": "حساب در حال همگام سازی است",
-        "accountSyncComplete": "همگام سازی حساب انجام شد",
+        "creatingAccount": "در حال ساختن کیف پول، لطفا صبر کنید...",
+        "updatingAccount": "در حال بروزرسانی کیف پول، لطفا صبر کنید...",
+        "accountSyncing": "کیف پول در حال همگام سازی است",
+        "accountSyncComplete": "همگام سازی کیف پول انجام شد",
         "passwordUpdating": "در حال به روز رسانی رمز عبور...",
         "passwordSuccess": "به روز رسانی رمز عبور کامل شد",
         "passwordFailed": "به روز رسانی رمز عبور ناموفق بود",
-        "syncingAccounts": "همگام سازی حساب ها...",
+        "syncingAccounts": "همگام سازی کیف پول ها...",
         "exportingStronghold": "استخراج قلعه...",
         "exportingStrongholdSuccess": "استخراج قلعه با موفقیت انجام شد",
         "exportingStrongholdFailed": "استخراج قلعه ناموفق بود",
@@ -604,7 +693,17 @@
         "passwordStrength3": "متوسط",
         "passwordStrength4": "قوی",
         "creatingProfile": "در حال ساختن پروفایل، لطفا صبر کنید...",
-        "accountRemoved": "این حساب پنهان شده است. آن را نمایان کنید تا عملیات های انتقال انجام شود."
+        "fundMigration": "انتقال وجوه",
+        "accountRemoved": "این کیف پول مخفی است. برای انجام نقل و انتقالات آنرا آشکار کنید.",
+        "receivingTo": "در حال دریافت در {account}",
+        "sendingFrom": "در حال ارسال به {account}",
+        "receivedTo": "دریافت شده در {account}",
+        "sentFrom": "فرستاده شده از {account}",
+        "receiving": "در حال دریافت",
+        "sending": "در حال ارسال",
+        "legacyNetwork": "شبکه قدیمی",
+        "capsLock": "Caps Lock is on",
+        "version": "Version {version}"
     },
     "dates": {
         "today": "امروز",
@@ -627,7 +726,9 @@
         "calcMinutesRemaining": "در حال شمارش زمان باقیمانده...",
         "minutesRemaining": "{minutes, plural, one {1 دقیقه باقی مانده } other {# دقیقه باقی مانده}}",
         "copiedToClipboard": "در کلیپ‌بورد کپی شد",
-        "accountsSynchronized": "همگام سازی حساب تمام شد"
+        "accountsSynchronized": "همگام سازی حساب کامل شد",
+        "migratedAccountChrysalisDown": "وجوه شما از ۲۸ آوریل بر روی Chrysalis قابل دسترس میباشد.",
+        "migratedAccountChrysalisUp": "وجوه شما به زودی قابل استفاده خواهد شد"
     },
     "error": {
         "profile": {
@@ -657,10 +758,10 @@
             "incorrect": "PIN فعلی شما اشتباه است."
         },
         "account": {
-            "length": "نام حساب شما نمیتواند بیشتر از {length, plural, one {1 کاراکتر} other {# کاراکتر}} باشد.",
-            "empty": "قبل از ایجاد یک حساب جدید، باید از حساب اخیر خود استفاده کنید.",
-            "notEmpty": "شما باید قبل از حذف این حساب، موجودی خود را انتقال دهید.",
-            "duplicate": "حسابی با همین نام از قبل وجود دارد.",
+            "length": "نام کیف پول شما نمیتواند بیشتر از {length, plural, one {1 کاراکتر} other {# کاراکتر}} باشد.",
+            "empty": "باید از آخرین کیف پول خود قبل از ایجاد کیف پول جدید استفاده کنید.",
+            "notEmpty": "شما باید قبل از حذف این کیف پول، موجودی خود را انتقال دهید.",
+            "duplicate": "کیف پولی با این نام وجود دارد.",
             "tilde": "اسم پروفایل نمیتواند با کاراکتر '~' شروع شود.",
             "control": "اسم پروفایل نمیتواند از کاراکتر کنترلی تشکیل شده باشد.",
             "startDot": "اسم پروفایل نمیتواند با کاراکتر '.' شروع شود.",
@@ -675,8 +776,8 @@
             "wrongAddressPrefix": "آدرس ها با پیشوند {prefix} شروع میشوند.",
             "wrongAddressFormat": "این آدرس به درستی فرمت نشده.",
             "invalidAddress": "آدرس معتبر نیست.",
-            "insufficientFunds": "این حساب موجودی کافی ندارد.",
-            "noToAccount": "شما حساب دریافت کننده را انتخاب نکرده اید.",
+            "insufficientFunds": "این کیف پول موجودی کافی ندارد.",
+            "noToAccount": "کیف پول مقصد را انتخاب نکرده‌اید.",
             "sendingDust": "شما کمتر از 1Mi نمیتوانید ارسال کنید.",
             "leavingDust": "در آدرس شما کمتر از 1Mi نمیتواند باشد."
         },
@@ -699,6 +800,16 @@
             "phraseWordCount": "عبارت بازیابی شما باید 24 کلمه ای باشد٬ در حال حاضر {length, plural, one {1 کلمه ایست} other {کلمه ایست #}}.",
             "phraseUnrecognizedWord": "کلمه نا آشنا \"{word}\" در عبارت بازیابی شما یافت شد",
             "phraseCaseWord": "کلمه \"{word} \" می بایست حروف کوچک باشد"
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "درجه ریسک: {risk}",
+            "veryHigh": "خیلی بالا",
+            "high": "بالا",
+            "medium": "متوسط",
+            "low": "پایین",
+            "veryLow": "خیلی پایین"
         }
     }
 }

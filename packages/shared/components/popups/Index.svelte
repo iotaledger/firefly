@@ -8,16 +8,19 @@
     import Backup from './Backup.svelte'
     import BalanceFinder from './BalanceFinder.svelte'
     import Busy from './Busy.svelte'
-    import HideAccount from './HideAccount.svelte'
     import DeleteAccount from './DeleteAccount.svelte'
     import DeleteProfile from './DeleteProfile.svelte'
     import Diagnostics from './Diagnostics.svelte'
     import ErrorLog from './ErrorLog.svelte'
+    import HideAccount from './HideAccount.svelte'
+    import MissingBundle from './MissingBundle.svelte'
     import Password from './Password.svelte'
     import QR from './QR.svelte'
     import RemoveNode from './RemoveNode.svelte'
-    import Version from './Version.svelte'
+    import RiskFunds from './RiskFunds.svelte'
     import Transaction from './Transaction.svelte'
+    import Version from './Version.svelte'
+    import Snapshot from './Snapshot.svelte'
 
     export let locale = 'en'
     export let type = undefined
@@ -43,7 +46,10 @@
         deleteProfile: DeleteProfile,
         diagnostics: Diagnostics,
         transaction: Transaction,
-        balanceFinder: BalanceFinder
+        riskFunds: RiskFunds,
+        missingBundle: MissingBundle,
+        balanceFinder: BalanceFinder,
+        snapshot: Snapshot,
     }
 
     const onkey = (e) => {

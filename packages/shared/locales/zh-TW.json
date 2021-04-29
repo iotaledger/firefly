@@ -1,41 +1,29 @@
 {
     "views": {
         "onboarding1": {
-            "title": "傳送、接收與管理您的 IOTA",
+            "title": "傳送、接收與管理您的 IOTA 代幣",
             "body": "Firefly是IOTA的官方錢包。"
         },
         "legal": {
             "title": "隱私政策和服務條款",
             "body": "請仔細檢閱「隱私權政策」與「服務條款」",
-            "privacyPolicy": {
-                "title": "隱私權政策",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
-            "termsOfService": {
-                "title": "服務條款",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
             "checkbox": "我已經閱讀並且接受隱私政策和服務條款"
         },
         "appearance": {
             "title": "界面外觀",
-            "body": "選擇你錢包的樣式。"
+            "body": "選擇您的主題。"
+        },
+        "profile": {
+            "title": "創建個人資料",
+            "body1": "你可以創建多個使用者檔案來組織您的錢包並加強隱私。",
+            "body2": "現在，讓我們開始建立第一個使用者檔案，您可以稍後添加更多檔案。",
+            "profileName": "使用者檔案名稱"
         },
         "setup": {
-            "title": "設定您的錢包",
-            "body1": "你可以創建多個用戶資料來儲存您的代幣並加強隱私。",
-            "body2": "現在，讓我們開始建立第一個帳號，您可以稍後添加更多帳號。",
-            "profileName": "設定檔名稱"
+            "title": "設定一個錢包",
+            "chrysalisTitle": "Chrysalis網路升級",
+            "chrysalisBody": "從四月21日開始，使用者可以將他們的代幣遷移到Chrysalis網路．我們建議您儘早遷移您的既存代幣",
+            "learnMore": "學習更多關於「遷移」"
         },
         "secure": {
             "title": "保護你的錢包",
@@ -49,7 +37,7 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "設置登錄 PIN 碼，以確保只有您可以登入錢包。",
+            "body1": "設置登錄 PIN 碼，以確保只有您可以登入您的檔案。",
             "body2": "確保您的 PIN 碼安全！"
         },
         "pin": {
@@ -64,30 +52,30 @@
         },
         "backup": {
             "title": "備份您的錢包",
-            "body1": "現在將顯示一個助記詞。 將其紀錄在您的 Recovery Kit 裡。",
-            "body2": "不要與任何人分享您的助記詞。 它可用於從任何地方訪問您的令牌。",
-            "body3": "一旦復原詞遺失，您的代幣也會遺失"
+            "body1": "現在將顯示一個註記詞。 將其紀錄在您的 Recovery Kit 裡。",
+            "body2": "不要與任何人分享您的註記詞。 它可用於從任何地方訪問您的代幣。",
+            "body3": "一旦註記詞遺失，您的代幣也會遺失"
         },
         "recoveryPhrase": {
             "title": "註記詞",
             "body1": "在 Recovery Kit 中，按照顯示的確切順序寫下單字。",
             "body2": "將此內容保密並安全地存儲。",
             "body3": "進行書面備份很重要。 電腦通常會發生故障，文件可能會損壞。",
-            "revealRecoveryPhrase": "揭示恢復詞組",
+            "revealRecoveryPhrase": "揭示註記詞",
             "hideRecoveryPhrase": "隱藏註記詞"
         },
         "verifyRecoveryPhrase": {
-            "title": "驗證種子助記詞",
-            "body": "讓我們檢查一下您是否正確記錄助記詞。 請按編號順序選擇每個單字。",
+            "title": "驗證註記詞",
+            "body": "讓我們檢查一下您是否正確記錄註記詞。 請按編號順序選擇每個單字。",
             "word": "單字",
-            "verified": "助記詞已驗證",
+            "verified": "註記詞已驗證",
             "verifiedBody": "請記住將其保密並安全地存儲。"
         },
         "backupWallet": {
             "title": "備份至一個 Stronghold 檔案",
             "body1": "輸入密碼以將您的錢包備份至 Stronghold 檔案。您的密碼將用於加密此備份檔案。",
             "body2": "數位備份之所以重要的原因：",
-            "reason1": "無需輸入助記詞即可輕鬆恢復錢包",
+            "reason1": "無需輸入註記詞即可輕鬆恢復錢包",
             "reason2": "將您的錢包導入其他設備",
             "reason3": "恢復您的完整交易記錄"
         },
@@ -97,32 +85,48 @@
         },
         "congratulations": {
             "title": "錢包設置完成",
-            "body": "您的新錢包可以使用了。"
+            "body": "您的新錢包可以使用了。",
+            "fundsMigrated": "資金遷移",
+            "success": "您已經成功將您的資金遷移到新網路",
+            "exportMigration": "導出遷移紀錄檔並結束設定"
         },
         "import": {
-            "title": "匯入錢包",
-            "body": "如果您有 恢復詞組(註記詞) 或 Stronghold 備份，您可以在此處輸入。"
+            "title": "還原或轉移資金",
+            "body": "如果您有現有的種子或錢包備份文件，您可以在此處導入。 如果您持有較舊的網絡資金，則將完成遷移步驟，以遷移到 Chrysalis 網絡。",
+            "importSeed": "我有一個 81 個字符的種子",
+            "importSeedDescription": "輸入種子並將資金遷移到 Chrysalis",
+            "importMnemonic": "我有一組 Firefly 還原助記詞",
+            "importMnemonicDescription": "輸入您的還原助記詞來還原您的錢包",
+            "importFile": "我有檔案備份",
+            "importFileDescription": "上傳 Seedvault 或 Stronghold 文件"
         },
         "importFromText": {
-            "title": "使用恢復詞組或種子恢復您的錢包",
-            "body1": "種子由 81 個字符組成。 這用於重新載入較舊的 Trinity 錢包。",
-            "body2": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
-            "body3": "輸入您的種子或恢復詞組",
+            "seed": {
+                "title": "輸入您的種子開始遷移",
+                "body": "種子由 81 個字符組成。 這用於重新載入較舊的 Trinity 錢包。",
+                "enter": "輸入您的種子碼"
+            },
+            "mnemonic": {
+                "title": "輸入您的還原助記詞",
+                "body": "助記詞的長度為 24 個字（帶空格）。這用於恢復既存的 Firefly 錢包。",
+                "enter": "輸入您的私人還原註記詞"
+            },
             "seedDetected": "檢測到81個字符的種子",
-            "phraseDetected": "檢測到 24 個單字的助記詞"
+            "phraseDetected": "檢測到 24 個單字的註記詞",
+            "checksum": "檢查碼"
         },
         "importFromFile": {
             "title": "使用備份文件還原您的錢包",
-            "body": "輸入備份檔案以恢復您的錢包。備份可以是Stronghold（.stronghold）或Trinity SeedVault（.kdbx）。"
+            "body": "輸入備份檔案以恢復您的錢包。備份可以是 Stronghold（.stronghold）或 Trinity SeedVault（.kdbx）。"
         },
         "importBackupPassword": {
-            "title": "從SeedVault或Stronghold恢復錢包",
+            "title": "載入 SeedVault 或 Stronghold 以還原您的錢包",
             "body1": "請輸入您的備份密碼。",
             "body2": "這是您首次備份時設置的密碼。"
         },
         "importSuccess": {
             "title": "您已成功恢復備份",
-            "body": "您可以建立您的新錢包了。",
+            "body": "現在，您可以設置新的個人資料。",
             "seedvaultTitle": "成功匯入",
             "seedvaultBody": "您的密碼是正確的，您現在可以繼續。",
             "strongholdTitle": "成功匯入",
@@ -130,10 +134,59 @@
         },
         "migrate": {
             "title": "轉移您的資金",
-            "body1": "這是將資金轉移到新錢包的自動過程。我們將檢查削弱您安全性的已用地址。",
+            "body1": "這是個自動將您的資金轉移到您新錢包的過程",
             "body2": "可能需要一段時間。不要關掉你的裝置。",
             "existing": "您的舊錢包",
-            "new": "您的新錢包"
+            "new": "您的新錢包",
+            "learn": "學習更多關於「遷移」",
+            "beginMigration": "遷移開始",
+            "migrating": "遷移資金中...",
+            "migrated": "{balance} 遷移完成",
+            "migrationFailed": "遷移失敗",
+            "noAddressesForMigration": "請選擇您想要確保安全的地址",
+            "restoringWallet": "恢復錢包...",
+            "findingBalance": "尋找餘額...",
+            "incorrectSeedVaultPassword": "SeedVault 密碼錯誤",
+            "noDataSeedVault": "在 SeedVault 中找不到資料。",
+            "signingBundle": "簽發交易組",
+            "broadcastingBundle": "廣播交易組",
+            "miningBundle": "挖掘交易組",
+            "problemRestoringWallet": "載入您的錢包時出現網絡錯誤。 請再試一次。",
+            "minimumMigrationAmountSpentAddresses": "每個「已支出地址」的最小遷移數量是 1Mi．如果您的餘額看似錯誤請再次檢查．",
+            "tooManyAddressesToMigrate": "如果您有太多地址需要遷移．請再次檢查如果您的餘額看似錯誤．",
+            "cannotMigrateAllYourFunds": "我們沒有辦法遷移您所有的資金因為有些地址的金額太低．您仍舊可以進行遷移但是 {value} 將會遺失．",
+            "error": "遷移您的資金時產生錯誤，請重試。"
+        },
+        "bundleMiningWarning": {
+            "title": "警告",
+            "body1": "您在一個或更多「已支出地址」中擁有資金",
+            "body2": "我們建議您運行自動化過程來幫助您安全地轉移這些資金",
+            "body3": "如果您關閉應用程式，則您將必須重新開始整個遷移過程",
+            "learn": "學習更多關於「已支出地址」"
+        },
+        "secureSpentAddresses": {
+            "title": "確保「已支出地址」安全",
+            "body1": "您有資金被偵測到在 {number, plural, one {# spent address} other {# 「已支出地址」}}.",
+            "body2": "我們建議您運行自動化過程來幫助您安全地轉移這些資金",
+            "error": "您將無法遷移這些低於1Mi的「已支出地址」"
+        },
+        "securityCheckCompleted": {
+            "title": "安全檢查已完成",
+            "body1": "我們已經計算出安全風險層級．再度運行這個步驟可以降低您的風險層級",
+            "body2": "當您對風險層級滿意時可以繼續下個步驟",
+            "rerun": "重新執行所選的地址",
+            "continueMigration": "繼續遷移"
+        },
+        "securingSpentAddresses": {
+            "title": "搜尋「已支出地址」...",
+            "body1": "這個步驟將會花費 {minutes, plural, one {1 minute} other {# 分鐘}}.",
+            "body2": "您的電腦將會全速運轉，您在等待此步驟完成前可以做些其他的事情．"
+        },
+        "transferFragmentedFunds": {
+            "body1": "Fireflt 錢包將要遷移您的資金．這可能需要一點時間．",
+            "migrate": "遷移資金",
+            "transaction": "交易編號 {number}",
+            "rerun": "重新嘗試"
         },
         "migrateFailed": {
             "title": "To do",
@@ -141,13 +194,15 @@
         },
         "balance": {
             "title": "您的餘額",
-            "body": "您的餘額正確嗎？"
+            "body": "繼續前請先確認您的帳戶餘額正確．如果餘額看似錯誤你可以再檢查一次．",
+            "error": "最小遷移數量是 1Mi．如果您的餘額看似錯誤請再次檢查．",
+            "zeroBalance": "請再次檢查．如果您仍舊無法找到您的餘額，那可能代表您的註記詞輸入錯誤．"
         },
         "settings": {
             "settings": "設定",
             "generalSettings": {
                 "title": "一般設定",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "設定您的應用程式外觀和其他一般設定"
             },
             "security": {
                 "title": "安全性",
@@ -166,7 +221,7 @@
                 "description": "更改您的設定檔名稱或設置頭像"
             },
             "sync": {
-                "title": "同步帳戶",
+                "title": "同步錢包",
                 "description": ""
             },
             "theme": {
@@ -187,15 +242,17 @@
             },
             "exportStronghold": {
                 "title": "導出備份",
-                "description": "匯出到 Stronghold 文件 - 您的錢包和最新交易歷史記錄的完整加密備份。"
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
             },
             "appLock": {
                 "title": "自動鎖定",
-                "description": "錢包鎖定並登出之前所經過的時間"
+                "description": "錢包鎖定並退出之前的閒置時間",
+                "durationMinute": "{time, plural, one {1 分鐘} other {# 分鐘}}",
+                "durationHour": "{time, plural, one {1 小時} other {# 小時}}"
             },
             "changePassword": {
                 "title": "修改密碼",
-                "description": "您的密碼用於保護您的錢包。 您必須使用高強度密碼保護您的資金。"
+                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
             },
             "changePincode": {
                 "title": "修改 PIN 碼",
@@ -205,17 +262,17 @@
                 "confirmNewPincode": "確認新的 Pin 碼",
                 "action": "變更 PIN 碼"
             },
-            "resyncAccounts": {
-                "title": "重新同步帳戶",
-                "description": "啟動後台任務，以確保您的帳戶是最新的。"
+            "balanceFinder": {
+                "title": "餘額查詢",
+                "description": "Perform an extended search of your addresses for tokens"
             },
             "hiddenAccounts": {
-                "title": "隱藏帳戶",
-                "description": "選擇此選項將顯示以前隱藏的帳戶。"
+                "title": "隱藏錢包",
+                "description": "Selecting this options will show wallets that were previously hidden"
             },
             "deleteProfile": {
                 "title": "刪除設定檔",
-                "description": "刪除您的整個錢包，設定檔和交易記錄。 確保您已備份。"
+                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
             },
             "deepLinks": {
                 "title": "深層連結",
@@ -231,7 +288,7 @@
             },
             "configureNodeList": {
                 "title": "選擇一個節點",
-                "description": "管理您的錢包連接到的節點列表。",
+                "description": "Manage the list of IOTA network nodes you connect to",
                 "primaryNode": "主節點",
                 "excludeNode": "排除節點",
                 "includeNode": "包含節點",
@@ -239,10 +296,10 @@
                 "setAsPrimary": "設為主要選項",
                 "removeNode": "移除節點",
                 "includeOfficialNodeList": "包括官方節點列表",
-                "noNodes": "沒有節點，將自動選擇節點。"
+                "noNodes": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
-                "title": "工作量證明",
+                "title": "工作證明",
                 "description": "在您的設備上本地完整工作證明或將資源外包給節點"
             },
             "errorLog": {
@@ -280,7 +337,7 @@
             },
             "reportAnIssue": {
                 "title": "回報問題",
-                "description": "向開發人員回報錯誤。 請檢查以確保此問題尚未回報。"
+                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
             }
         },
         "login": {
@@ -300,8 +357,8 @@
                 },
                 "strongholdStatus": {
                     "title": "錢包狀態",
-                    "locked": "Stronghold 被鎖定",
-                    "unlocked": "Stronghold 已解鎖"
+                    "locked": "鎖定",
+                    "unlocked": "解鎖"
                 },
                 "strongholdBackup": {
                     "title": "錢包備份",
@@ -325,7 +382,7 @@
     "popups": {
         "password": {
             "title": "必須輸入密碼",
-            "subtitle": "請輸入密碼以解鎖 Stronghold",
+            "subtitle": "請輸入密碼以解鎖您的錢包",
             "backup": "請輸入密碼以導出備份"
         },
         "qr": {
@@ -336,34 +393,35 @@
             "upToDateTitle": "Firefly 已是最新版本",
             "upToDateDescription": "您目前正在運行的 Firefly 是最新也是最安全的版本。",
             "updateAvailable": "Firefly 有可用的更新",
-            "updateDetails": "版本 {version} - {date}"
+            "updateDetails": "版本 {version} - {date}",
+            "noAutoUpdate": "在此 Windows 版本中，自動更新已禁用，請連結到 https://firefly.iota.org 下載更新。"
         },
         "backup": {
             "title": "上次備份: {date}",
             "lastBackup": "您上次的備份是在 {date}",
-            "backupDescription": "定期備份您的帳號以及交易紀錄是非常重要的。",
+            "backupDescription": "定期備份您的錢包以及交易紀錄是非常重要的。",
             "backupWarning": "如果您遺失了備份以及註記詞，您將無法存取您的資金。",
             "notBackedUp": "沒有備份",
-            "notBackedUpDescription": "您還沒有備份您的 Stronghold",
+            "notBackedUpDescription": "您還沒有備份您的錢包",
             "saving": "儲存中…"
         },
         "deleteAccount": {
             "title": "刪除 {name}?",
-            "body": "該帳戶沒有交易記錄。 可以安全地刪除它。",
+            "body": "這個錢包沒有交易記錄。 可以安全地刪除它。",
             "typePassword": "輸入您的錢包密碼進行確認。",
-            "hideAccount": "刪除帳戶",
+            "hideAccount": "刪除錢包",
             "errorTitle": "無法刪除 {name}",
-            "errorBody1": "您無法刪除此帳戶，您必須至少擁有一個帳戶。"
+            "errorBody1": "您無法刪除此錢包，您必須至少擁有一個錢包。"
         },
         "hideAccount": {
             "title": "隱藏 {name}？",
-            "body": "您可以稍後通過在“高級設置”中啟用“顯示隱藏的帳戶”來找到此帳戶。",
+            "body": "您可以稍後通過在“進階設定”中啟用“顯示隱藏的錢包”來找到此錢包。",
             "typePassword": "輸入您的錢包密碼進行確認。",
-            "hideAccount": "隱藏帳號",
+            "hideAccount": "隱藏錢包",
             "errorTitle": "無法隱藏 {name}",
-            "errorBody1": "要隱藏一個帳戶，它必須有 0 餘額。",
-            "errorBody2": "目前您在這個帳號仍擁有 {balance} 餘額。請將這些資金移至另一個帳號後再重試。",
-            "errorBody3": "您無法隱藏此帳戶，您必須至少擁有一個帳戶。"
+            "errorBody1": "要隱藏一個帳戶，它必須要有 0 餘額。",
+            "errorBody2": "目前您在這個錢包仍擁有 {balance} 餘額。請將這些資金移至另一個錢包後再重試。",
+            "errorBody3": "您無法隱藏此錢包，您必須至少擁有一個錢包。"
         },
         "addressHistory": {
             "title": "{name} 地址記錄",
@@ -403,19 +461,42 @@
         "transaction": {
             "title": "確認交易",
             "body": "您即將發送 {amount} 到"
+        },
+        "balanceFinder": {
+            "title": "餘額查詢",
+            "body": "對地址執行更詳盡的搜索，以查找餘額不足的情況。 可能還要再等一下。",
+            "totalWalletBalance": "總餘額",
+            "typePassword": "輸入您的密碼以允許搜索。"
+        },
+        "riskFunds": {
+            "title": "警告：資金在轉移中有風險",
+            "body1": "強烈建議您在轉移前保管好資金．如果您沒有安全保管資金則其會處於竊盜風險中．",
+            "body2": "建議您為了處於中級風險以上的地址重新運行此步驟"
+        },
+        "missingBundle": {
+            "title": "警告：資金在轉移中有風險",
+            "body": "您有資金處於「已支出地址」中，但是無法搜尋到能確保他們安全的資訊．這可能是發生如果您在很久以前發送交易．您仍舊可以繼續但{value} 在遷移過程中具有風險．",
+            "learnMore": "學習更多關於「已支出地址」",
+            "proceed": "我了解此風險"
+        },
+        "snapshot": {
+            "title": "正在進行網絡升級",
+            "body": "Chrysalis 網絡升級已經開始。",
+            "bodyMigration": "遷移被禁用，直到網路升級完成。",
+            "bodyFirefly": "在網路更新完成之前 Firefly 被禁止使用。 網路更新之後仍可以進行資金遷移。"
         }
     },
     "charts": {
-        "incomingMi": "傳入 {value} Mi",
-        "outgoingMi": "支出  {value} Mi",
+        "incomingMi": "傳入 {value}",
+        "outgoingMi": "支出  {value}",
         "portoflio": "資料夾",
         "token": "代幣",
-        "accountValue": "賬戶餘額",
-        "accountActivity": "啟用帳戶",
-        "timeframe1Hour": "1 hour",
-        "timeframe1Day": "1 day",
-        "timeframe1Week": "1 week",
-        "timeframe1Month": "1 month"
+        "accountValue": "錢包資金",
+        "accountActivity": "錢包活動",
+        "timeframe1Hour": "一小時",
+        "timeframe1Day": "一天",
+        "timeframe1Week": "一星期",
+        "timeframe1Month": "一個月"
     },
     "actions": {
         "continue": "繼續",
@@ -423,10 +504,13 @@
         "cancel": "取消",
         "close": "關閉",
         "dismiss": "取消",
+        "proceedAnyway": "不論如何，就是執行",
         "save": "儲存",
         "importSeed": "匯入現有的種子",
-        "importWallet": "匯入現有錢包",
+        "restoreWallet": "遷移或恢復一個錢包",
+        "restoreWalletDescription": "遷移至Chrysalis 或恢復一個既存錢包",
         "createWallet": "建立新錢包",
+        "createWalletDescription": "創建一個運行在Chrysalis的新錢包",
         "savePassword": "儲存密碼",
         "useBiometric": "使用生物識別安全",
         "setupPin": "設置 PIN 碼",
@@ -434,11 +518,11 @@
         "confirmPin": "確認 PIN 碼",
         "enterYourPin": "請輸入您的 PIN",
         "saveBackupFile": "儲存備份檔案",
-        "iveWrittenRecoveryPhrase": "我已經寫下了恢復詞組",
+        "iveWrittenRecoveryPhrase": "我已經寫下了註記詞",
         "verifyRecoveryPhrase": "驗證種子助記詞",
-        "revealRecoveryPhrase": "揭示恢復詞組",
+        "revealRecoveryPhrase": "揭示註記詞",
         "importSeedvault": "匯入 SeedVault",
-        "checkAgain": "再次檢查",
+        "checkAgain": "請再次檢查",
         "importFromFile": "從檔案匯入",
         "send": "傳送",
         "receive": "收款",
@@ -462,11 +546,11 @@
         "updateFirefly": "更新 Firefly",
         "restartNow": "立即重新啟動",
         "saveBackup": "保存 Stronghold 備份",
-        "customizeAcount": "自定義帳號",
+        "customizeAcount": "自定義錢包",
         "viewAddressHistory": "檢視地址歷史紀錄",
-        "hideAccount": "隱藏帳號",
-        "showAccount": "取消隱藏帳戶",
-        "deleteAccount": "刪除帳戶",
+        "hideAccount": "隱藏錢包",
+        "showAccount": "取消隱藏錢包",
+        "deleteAccount": "刪除錢包",
         "max": "最大",
         "addNode": "增加節點",
         "updateNode": "更新節點",
@@ -482,21 +566,28 @@
         "copy": "複製",
         "paste": "貼上",
         "selectAll": "選擇全部",
-        "addAccount": "新增帳戶",
+        "addAccount": "新增錢包",
         "checkForUpdates": "檢查更新",
         "reportAnIssue": "回報問題",
         "clear": "清除",
         "hideDetails": "隱藏詳細資訊",
         "yes": "是",
         "no": "否",
+        "skip": "跳過",
         "reset": "重置",
         "downloadRecoveryKit": "保存 Recovery Kit 範本",
         "skipBackup": "跳過文件備份",
         "finishSetup": "設置完成",
         "readDocumentation": "閱讀文檔",
         "visitFaq": "訪問常見問題解答",
-        "showHiddenAccounts": "顯示隱藏的帳戶",
-        "confirm": "確認"
+        "viewStatus": "查看狀態",
+        "showHiddenAccounts": "顯示隱藏錢包",
+        "confirm": "確認",
+        "findBalances": "尋找餘額",
+        "searchBalances": "搜索餘額",
+        "searchAgain": "重新搜尋",
+        "searching": "搜尋中...",
+        "closeFirefly": "關閉 Firefly"
     },
     "general": {
         "password": "密碼",
@@ -505,7 +596,7 @@
         "newPassword": "新密碼",
         "confirmNewPassword": "確認新密碼",
         "yourSeed": "您的種子",
-        "recoveryPhrase": "恢復詞組",
+        "recoveryPhrase": "註記詞",
         "recentActivity": "近期活動",
         "sent": "已支出",
         "received": "已接收",
@@ -514,13 +605,13 @@
         "sendFunds": "發送資金",
         "sendToAddress": "發送到地址",
         "scanQrOrPaste": "掃描QR碼 或 貼上地址",
-        "moveFundsBetweenAccounts": "在帳戶間轉移資產",
+        "moveFundsBetweenAccounts": "在錢包間轉移資產",
         "sendTokensToAddress": "發送代幣至另一個地址",
-        "manageAccount": "管理帳戶",
-        "customizeAcount": "自定義您的帳戶",
-        "account": "帳戶",
+        "manageAccount": "管理錢包",
+        "customizeAcount": "自定義您的錢包",
+        "account": "錢包",
         "sendingToAddress": "正傳送到地址",
-        "amount": "金額",
+        "amount": "數量",
         "addAddress": "添加地址",
         "reference": "參照",
         "from": "由",
@@ -531,10 +622,6 @@
         "yourAddress": "您的地址",
         "generateNewAddress": "產生新地址",
         "copyAddress": "複製地址",
-        "haveTextBackup": "我有文字備份",
-        "haveFileBackup": "我有檔案備份",
-        "enterSeedOrPhrase": "輸入恢復詞組或種子",
-        "uploadSeedvaultOrStronghold": "匯入 Stronghold 或 SeedVault 檔案",
         "import": "匯入",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -543,24 +630,25 @@
         "lightTheme": "淺色主題",
         "darkTheme": "深色主題",
         "balance": "餘額",
-        "accountBalance": "帳號餘額",
+        "accountBalance": "錢包餘額",
         "incoming": "傳入",
         "outgoing": "傳出",
         "totalIn": "合計",
         "totalOut": "總支出",
-        "accounts": "帳戶",
-        "myAccounts": "我的帳戶",
+        "accounts": "錢包",
+        "myAccounts": "我的錢包",
         "automaticNodeSelection": "自動選取節點",
         "manualNodeSelection": "手動選取節點",
         "profiles": "設定檔",
         "developerProfile": "開發者資料",
+        "developerProfileDescription": "允許您連結到測試網",
         "dev": "開發者",
-        "createAccount": "建立帳戶",
-        "accountName": "帳戶名稱",
+        "createAccount": "建立一個錢包",
+        "accountName": "錢包名稱",
         "latestTransactions": "最新交易",
         "transactions": "交易紀錄",
         "security": "安全性",
-        "accountAddress": "帳戶地址",
+        "accountAddress": "錢包位置",
         "nodes": "節點",
         "wallet": "錢包",
         "help": "幫助",
@@ -572,28 +660,29 @@
         "status": "狀態",
         "confirmed": "已確認",
         "pending": "確認中",
-        "noAccounts": "您沒有帳戶，請創建一個。",
+        "noAccounts": "您沒有錢包，請創建一個。",
         "loadingAccounts": "加載請稍候...",
         "addProfile": "添加個人檔案",
         "noRecentHistory": "沒有最近的歷史紀錄",
-        "transferSyncing": "同步帳號",
+        "firstSync": "正在同步歷史記錄，這可能需要一段時間...",
+        "transferSyncing": "同步錢包",
         "transferSelectingInputs": "選擇輸入",
         "transferRemainderAddress": "生成剩餘存款地址",
         "transferSigning": "簽署交易",
-        "transferPow": "執行 PoW",
+        "transferPow": "執行 工作證明（PoW）",
         "transferBroadcasting": "廣播交易",
         "transferComplete": "轉移完成",
-        "creatingAccount": "正在創建帳戶，請稍候...",
-        "updatingAccount": "正在更新帳戶，請稍候...",
-        "accountSyncing": "帳戶正在同步",
-        "accountSyncComplete": "帳戶同步完成",
+        "creatingAccount": "正在創建錢包，請稍候...",
+        "updatingAccount": "正在更新錢包，請稍候...",
+        "accountSyncing": "錢包正在同步",
+        "accountSyncComplete": "錢包同步完成",
         "passwordUpdating": "正在更新密碼...",
         "passwordSuccess": "成功更新密碼",
         "passwordFailed": "更新密碼失敗",
-        "syncingAccounts": "Syncing accounts...",
-        "exportingStronghold": "Exporting Stronghold...",
-        "exportingStrongholdSuccess": "Exported Stronghold successfully",
-        "exportingStrongholdFailed": "Exporting Stronghold failed",
+        "syncingAccounts": "同步錢包...",
+        "exportingStronghold": "導出 Stronghold...",
+        "exportingStrongholdSuccess": "導出 Stronghold成功",
+        "exportingStrongholdFailed": "導出 Stronghold失敗",
         "pinCodeUpdating": "正在更新 PIN 碼...",
         "pinCodeSuccess": "更新 PIN 碼成功",
         "pinCodeFailed": "更 PIN 碼失敗",
@@ -604,7 +693,17 @@
         "passwordStrength3": "平均",
         "passwordStrength4": "強",
         "creatingProfile": "正在創建設定檔，請稍候...",
-        "accountRemoved": "此帳戶是隱藏的。 取消隱藏即可執行傳送。"
+        "fundMigration": "資金遷移",
+        "accountRemoved": "此錢包是隱藏的。 取消隱藏即可執行傳送。",
+        "receivingTo": "接收中 {account}",
+        "sendingFrom": "從 {account} 轉帳",
+        "receivedTo": "已收到 {account}",
+        "sentFrom": "轉帳自 {account}",
+        "receiving": "收款中",
+        "sending": "轉帳中",
+        "legacyNetwork": "舊版網絡",
+        "capsLock": "Caps Lock is on",
+        "version": "Version {version}"
     },
     "dates": {
         "today": "今天",
@@ -627,11 +726,13 @@
         "calcMinutesRemaining": "正在計算剩餘時間...",
         "minutesRemaining": "分鐘, 複數, 一 剩下一分鐘 其他 剩下一分鐘",
         "copiedToClipboard": "複製到剪貼簿",
-        "accountsSynchronized": "帳戶同步完成"
+        "accountsSynchronized": "錢包同步完成",
+        "migratedAccountChrysalisDown": "您的資金將在四月28日Chrysalis後可以被使用",
+        "migratedAccountChrysalisUp": "您的資金將很快可以被使用"
     },
     "error": {
         "profile": {
-            "length": "您的設定檔名稱不能超過 {length, plural, one {1 character} other {# 字符}}.",
+            "length": "您的使用者檔案稱不能超過 {length, plural, one {1 character} other {# 字符}}.",
             "duplicate": "以此為名的設定檔已存在"
         },
         "password": {
@@ -657,10 +758,10 @@
             "incorrect": "您輸入的 PIN 碼不正確"
         },
         "account": {
-            "length": "你的帳號長度不能超過 {length, plural, one {1 character} other {# 字符}}.",
-            "empty": "您必須使用最後存在的帳戶，在您創建新的帳戶之前。",
-            "notEmpty": "您必須先轉移餘額，才能刪除該帳戶。",
-            "duplicate": "相同名稱的帳戶已存在。",
+            "length": "您的錢包名稱長度不能超過 {length, plural, one {1 character} other {# 字符}}.",
+            "empty": "在您創建新的錢包之前，您必須使用最後存在的錢包。",
+            "notEmpty": "您必須先轉移餘額，才能刪除此錢包。",
+            "duplicate": "具有相同名稱的錢包已經存在。",
             "tilde": "文件名稱不能以“〜”字符開頭。",
             "control": "文件名稱不能包含控製字符。",
             "startDot": "檔案名稱不能以 “.” 開頭。",
@@ -674,9 +775,9 @@
             "amountZero": "金額必須大於0。",
             "wrongAddressPrefix": "地址必須以 {prefix} 為字首。",
             "wrongAddressFormat": "地址格式不正確。",
-            "invalidAddress": "The address is not valid.",
-            "insufficientFunds": "該帳戶資金不足。",
-            "noToAccount": "您尚未選擇要向其匯款的帳戶。",
+            "invalidAddress": "此地址無效",
+            "insufficientFunds": "這個錢包資金不足。",
+            "noToAccount": "您尚未選擇匯款的目標錢包。",
             "sendingDust": "您無法發送少於1 Mi。",
             "leavingDust": "您的地址不能少於1Mi。"
         },
@@ -694,11 +795,21 @@
             "invalid": "無法識別備份文件。",
             "destination": "備份目標無效。",
             "mnemonic": "助記詞無效。",
-            "seedTooShort": "種子 (Sees) 長度必須為 81個字符長, 目前 {length, plural, one {is 1} other {長度 #}}",
+            "seedTooShort": "種子 (Seed) 長度必須為 81個字符長, 目前 {length, plural, one {is 1} other {長度 #}}",
             "seedCharacters": "種子 (Seed) 應僅包含字符 A-Z 或 9",
             "phraseWordCount": "您的恢復助記詞中應該有24個單字 {length, plural, one {is 1} other {目前有 #}}.",
             "phraseUnrecognizedWord": "恢復短語中無法識別的單詞“ {word}”",
-            "phraseCaseWord": "The word \"{word}\" should be lower case"
+            "phraseCaseWord": "這個字\"{word}\" 應該要是小寫"
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "風險水準: {risk}",
+            "veryHigh": "非常高",
+            "high": "高",
+            "medium": "中等",
+            "low": "低",
+            "veryLow": "非常低"
         }
     }
 }

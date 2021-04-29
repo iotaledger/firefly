@@ -185,7 +185,7 @@ export const getDecimalSeparator = (currency: string | undefined = undefined) =>
     })
         .formatToParts(1.1)
         .find(part => part.type === 'decimal')
-        .value;
+        ?.value ?? '.';
 }
 
 export const getCurrencyPosition = (): "left" | "right" => {
@@ -210,9 +210,9 @@ export const getGroupSeparator = (currency: string | undefined = undefined) => {
         style: 'currency',
         currency: currency ?? 'USD',
     })
-        .formatToParts(1111)
+        .formatToParts(1111111)
         .find(part => part.type === 'group')
-        .value;
+        ?.value ?? ',';
 }
 
 
@@ -250,8 +250,10 @@ export const formatCurrency = (value: number, currency: string | undefined = und
     // the
     const curIndex = parts.findIndex(p => p.type === "currency")
     if (curIndex >= 0) {
-        if (curIndex === 0 && parts[curIndex + 1].type !== "literal") {
-            parts.splice(curIndex + 1, 0, { type: "literal", value: " " })
+        if (curIndex === 0) {
+            if (parts[curIndex + 1].type !== "literal") {
+                parts.splice(curIndex + 1, 0, { type: "literal", value: " " })
+            }
         } else if (parts[curIndex - 1].type !== "literal") {
             parts.splice(curIndex, 0, { type: "literal", value: " " })
         }
@@ -276,6 +278,13 @@ export const ensureZeros = (val: string, maxZeros: number): string => {
     const decimalSeparator = getDecimalSeparator()
 
     const parts = val.split(decimalSeparator)
+
+    if (parts.length === 1) {
+        parts[1] = ''
+        if (maxZeros > 0) {
+            parts[1].padEnd(maxZeros, '0')
+        }
+    }
 
     // If there are more then decimal places and it is just 0s remove them
     if (parts[1].length > maxZeros) {

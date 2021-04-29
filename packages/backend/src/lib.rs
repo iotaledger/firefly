@@ -5,15 +5,16 @@ use iota::common::logger::logger_init;
 pub use iota::common::logger::LoggerConfigBuilder;
 use iota_wallet::{
     account_manager::{AccountManager, DEFAULT_STORAGE_FOLDER},
+    client::drop_all as drop_clients,
     event::{
         on_balance_change, on_broadcast, on_confirmation_state_change, on_error,
-        on_new_transaction, on_reattachment, on_stronghold_status_change, on_transfer_progress,
-        remove_balance_change_listener, remove_broadcast_listener,
+        on_migration_progress, on_new_transaction, on_reattachment, on_stronghold_status_change,
+        on_transfer_progress, remove_balance_change_listener, remove_broadcast_listener,
         remove_confirmation_state_change_listener, remove_error_listener,
-        remove_new_transaction_listener, remove_reattachment_listener,
-        remove_stronghold_status_change_listener, remove_transfer_progress_listener, EventId,
+        remove_migration_progress_listener, remove_new_transaction_listener,
+        remove_reattachment_listener, remove_stronghold_status_change_listener,
+        remove_transfer_progress_listener, EventId,
     },
-    client::drop_all as drop_clients,
 };
 use once_cell::sync::Lazy;
 use riker::actors::*;
@@ -58,6 +59,7 @@ pub enum EventType {
     Broadcast,
     StrongholdStatusChange,
     TransferProgress,
+    MigrationProgress,
 }
 
 impl TryFrom<&str> for EventType {
@@ -73,6 +75,7 @@ impl TryFrom<&str> for EventType {
             "Broadcast" => EventType::Broadcast,
             "StrongholdStatusChange" => EventType::StrongholdStatusChange,
             "TransferProgress" => EventType::TransferProgress,
+            "MigrationProgress" => EventType::MigrationProgress,
             _ => return Err(format!("invalid event name {}", value)),
         };
         Ok(event_type)
@@ -134,21 +137,22 @@ pub async fn remove_event_listeners<A: Into<String>>(actor_id: A) {
 
 async fn remove_event_listeners_internal(listeners: &[(EventId, EventType)]) {
     for (event_id, event_type) in listeners.iter() {
-            match event_type {
-                &EventType::ErrorThrown => remove_error_listener(event_id),
-                &EventType::BalanceChange => remove_balance_change_listener(event_id).await,
-                &EventType::NewTransaction => remove_new_transaction_listener(event_id).await,
-                &EventType::ConfirmationStateChange => {
-                    remove_confirmation_state_change_listener(event_id).await
-                }
-                &EventType::Reattachment => remove_reattachment_listener(event_id).await,
-                &EventType::Broadcast => remove_broadcast_listener(event_id).await,
-                &EventType::StrongholdStatusChange => {
-                    remove_stronghold_status_change_listener(event_id).await
-                }
-                &EventType::TransferProgress => remove_transfer_progress_listener(event_id).await,
-            };
-        }
+        match event_type {
+            &EventType::ErrorThrown => remove_error_listener(event_id),
+            &EventType::BalanceChange => remove_balance_change_listener(event_id).await,
+            &EventType::NewTransaction => remove_new_transaction_listener(event_id).await,
+            &EventType::ConfirmationStateChange => {
+                remove_confirmation_state_change_listener(event_id).await
+            }
+            &EventType::Reattachment => remove_reattachment_listener(event_id).await,
+            &EventType::Broadcast => remove_broadcast_listener(event_id).await,
+            &EventType::StrongholdStatusChange => {
+                remove_stronghold_status_change_listener(event_id).await
+            }
+            &EventType::TransferProgress => remove_transfer_progress_listener(event_id).await,
+            &EventType::MigrationProgress => remove_migration_progress_listener(event_id).await,
+        };
+    }
 }
 
 pub async fn destroy<A: Into<String>>(actor_id: A) {
@@ -332,6 +336,12 @@ pub async fn listen<A: Into<String>, S: Into<String>>(actor_id: A, id: S, event_
         }
         EventType::TransferProgress => {
             on_transfer_progress(move |event| {
+                let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &event));
+            })
+            .await
+        }
+        EventType::MigrationProgress => {
+            on_migration_progress(move |event| {
                 let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &event));
             })
             .await

@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Illustration, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
     import { createEventDispatcher } from 'svelte'
     import { ImportType } from '../Import.svelte'
 
@@ -38,8 +38,8 @@
                 <Text type="p" secondary smaller>{locale('views.import.importFileDescription')}</Text>
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-end items-center bg-purple-green dark:bg-gray-900">
-            <Illustration width="100%" height="auto" illustration="import-desktop" />
+        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-purple dark:bg-gray-900">
+            <Animation animation="import-desktop" />
         </div>
     </OnboardingLayout>
 {/if}

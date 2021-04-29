@@ -7,40 +7,28 @@
         "legal": {
             "title": "Privaatheidsbeleid en diensvoorwaardes",
             "body": "Lees die privaatheidsbeleid en diensvoorwaardes.",
-            "privacyPolicy": {
-                "title": "Privaatheidsbeleid",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
-            "termsOfService": {
-                "title": "Diensvoorwaardes",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
             "checkbox": "Ek het die privaatheidsbeleid en diensvoorwaardes gelees en aanvaar"
         },
         "appearance": {
             "title": "Voorkoms",
-            "body": "Kies jou beursie se tema."
+            "body": "Kies jou apptema."
         },
-        "setup": {
-            "title": "Stel u beursie op",
-            "body1": "U kan verskeie gebruikersprofiele skep om u tokens apart te hou en privaatheid te verbeter.",
+        "profile": {
+            "title": "Skep 'n Profiel",
+            "body1": "Jy kan verskeie gebruikersprofiele skep om jou tokens apart te hou en privaatheid te verbeter.",
             "body2": "Kom ons begin nou met jou eerste profielnaam. Jy kan later nog profiele byvoeg.",
             "profileName": "Profiel Naam"
+        },
+        "setup": {
+            "title": "Stel jou beursie op",
+            "chrysalisTitle": "Chrysalis-netwerkopdatering",
+            "chrysalisBody": "Vanaf 21 April kan gebruikers hul tokens migreer na die nuwe Chrysalis-netwerk. Ons beveel aan dat jy jou bestaande tokens so gou as moontlik migreer.",
+            "learnMore": "Leer meer oor die migrasie"
         },
         "secure": {
             "title": "Beveilig U beursie",
             "body1": "Stoor en druk die Recovery Kit PDF form uit.",
-            "body2": "As U die Recovery Kit invul en veilig stoor, sal U jou beursie altyd kan herwin."
+            "body2": "As jy die Recovery Kit invul en veilig stoor, sal jy jou beursie altyd kan herwin."
         },
         "password": {
             "title": "Skep 'n wagwoord",
@@ -49,7 +37,7 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Stel 'n login PIN op om seker te maak dat net jy jou beursie kan toegang.",
+            "body1": "Stel 'n login PIN op om seker te maak dat net jy jou profiel kan toegang.",
             "body2": "Hou U PIN veilig!"
         },
         "pin": {
@@ -59,7 +47,7 @@
         },
         "confirmPin": {
             "title": "Verifieer jou PIN-kode",
-            "body1": "Jou PIN hou jou saldo en transaksies privaat.",
+            "body1": "Jou PIN hou jou balans en transaksies privaat.",
             "body2": "Voer weer jou PIN-kode in om voort te gaan. "
         },
         "backup": {
@@ -88,7 +76,7 @@
             "body1": "Voer jou wagwoord in om you beursie na 'n Stronghold lêer te back-up. Jou wagwoord word gebruik om die back-up te enkripteer.",
             "body2": "Redes waarom digitale back-ups belangrik is:",
             "reason1": "Herwin jou beursie maklik sonder om jou herstelfrase in te tik",
-            "reason2": "Verbind jou beursie na ander toestelle",
+            "reason2": "Voer jou beursies op ander toestelle in",
             "reason3": "Besigtig jou transaksie geskiedenis"
         },
         "recoveryPhraseSaved": {
@@ -97,23 +85,39 @@
         },
         "congratulations": {
             "title": "Wallet-opstelling is voltooi",
-            "body": "Jou nuwe beursie is gereed om te gebruik."
+            "body": "Jou nuwe beursie is gereed om te gebruik.",
+            "fundsMigrated": "Fondse migreer",
+            "success": "Jy het jou fondse suksesvol na die nuwe netwerk gemigreer",
+            "exportMigration": "Voer migrasielogboek uit en voltooi die opstelling"
         },
         "import": {
-            "title": "Verbind 'n beursie",
-            "body": "As jy 'n herstelfrase of 'n Stronghold back-up het, kan jy dit hier invoer."
+            "title": "Herstel of migreer fondse",
+            "body": "As jy 'n bestaande seed of beursies back-up het, kan jy dit hier invoer. As jy ouer netwerkfondse besit, sal jy deur die migrasiestappe geneem word om na die Chrysalis-netwerk te migreer.",
+            "importSeed": "Ek het 'n seed van 81 karakters",
+            "importSeedDescription": "Voer 'n seed in en migreer fondse na Chrysalis",
+            "importMnemonic": "Ek het 'n Firefly herstel frase",
+            "importMnemonicDescription": "Voer jou geheime frase in om jou beursie te herstel",
+            "importFile": "Ek het 'n lêer back-up",
+            "importFileDescription": "Laai 'n Seedvault of Stronghold-lêer op"
         },
         "importFromText": {
-            "title": "Herstel jou beursie met 'n herstelfrase of seed",
-            "body1": "'N seed bestaan uit 81 karakters. Dit word gebruik om van 'n ouer Trinity beursie te herstel.",
-            "body2": "'N Herstelfrase is 24 woorde lank net kleinletters met spasies tussen. Dit word gebruik om 'n bestaande Firefly beursie te herstel.",
-            "body3": "Voer you seed of herstelfrase in",
+            "seed": {
+                "title": "Tik jou seed in om migrasie te begin",
+                "body": "'N seed bestaan uit 81 karakters. Dit word gebruik om van 'n ouer Trinity app.",
+                "enter": "Tik you seed in"
+            },
+            "mnemonic": {
+                "title": "Tik jou herstelfrase in",
+                "body": "'N Herstelfrase is 24 woorde lank net kleinletters met spasies tussen. Dit word gebruik om 'n bestaande Firefly beursie te herstel.",
+                "enter": "Voer jou geheime herstelfrase in"
+            },
             "seedDetected": "81 karakter seed bespeur",
-            "phraseDetected": "24 woord frase bespeur"
+            "phraseDetected": "24 woord frase bespeur",
+            "checksum": "Checksum"
         },
         "importFromFile": {
             "title": "Herstel jou beursie uit 'n back-up lêer",
-            "body": "Voer 'n rugsteunlêer in om jou beursie te herstel. Back-up kan 'n Stronghold (.stronghold) of 'n Trinity SeedVault (.kdbx) wees."
+            "body": "Voer 'n back-up in om jou beursie te herstel. Back-up kan 'n Stronghold (.stronghold) of 'n Trinity SeedVault (.kdbx) wees."
         },
         "importBackupPassword": {
             "title": "Herstel jou beursie vanaf 'n SeedVault of 'n Stronghold",
@@ -130,10 +134,59 @@
         },
         "migrate": {
             "title": "Migreer jou fondse",
-            "body1": "Hierdie is 'n outomatiese proses om jou fondse na jou nuwe beursie oor te dra. Ons sal kyk na spandeerde adresse wat jou sekuriteit verswak.",
+            "body1": "Dit is 'n outomatiese proses om jou fondse na jou nuwe beursie oor te plaas.",
             "body2": "Dit kan 'n rukkie neem. Moenie jou toestel tydens die migrasie afskakel nie.",
             "existing": "Jou ou beursie",
-            "new": "Jou nuwe beursie"
+            "new": "Jou nuwe beursie",
+            "learn": "Leer meer oor die migrasie",
+            "beginMigration": "Begin migrasie",
+            "migrating": "Fondse migrasie aan die gang...",
+            "migrated": "{balance} gemigreer",
+            "migrationFailed": "Migrasie het misluk",
+            "noAddressesForMigration": "Kies asseblief die adresse wat jy wil beveilig.",
+            "restoringWallet": "Beursie hersteling...",
+            "findingBalance": "Bevinding van balans...",
+            "incorrectSeedVaultPassword": "Verkeerde SeedVault wagwoord.",
+            "noDataSeedVault": "Geen data kon in die SeedVault gevind word nie.",
+            "signingBundle": "Signing bundle",
+            "broadcastingBundle": "Uitsaaibondel",
+            "miningBundle": "Bondelmynbou",
+            "problemRestoringWallet": "Daar was 'n network probleem om jou beursie te herstel. Probeer asseblief weer.",
+            "minimumMigrationAmountSpentAddresses": "Die minimum migrasiebedrag vir elke spandeerde adres is 1 Mi. Kyk weer of jou balans nie reg lyk nie.",
+            "tooManyAddressesToMigrate": "Jy het te veel adresse met 'n lae balans om te migreer. Kyk weer of jou balans nie reg lyk nie.",
+            "cannotMigrateAllYourFunds": "Ons kan nie al jou fondse migreer nie, sommige adresse is the min. Jy kan in elk geval voortgaan. {value} sal verlore gaan.",
+            "error": "Daar was 'n fout tydens die migrasie van jou fondse. Probeer asseblief weer."
+        },
+        "bundleMiningWarning": {
+            "title": "Waarskuwing",
+            "body1": "Jy het geld op een of meer spandeerde adresse.",
+            "body2": "Ons beveel aan dat jy die outomatiese proses uitvoer om hierdie fondse veilig te beveilig en oor te dra.",
+            "body3": "As jy die program toemaak, moet jy die hele migrasie weer oor begin.",
+            "learn": "Leer oor spandeerde adresse"
+        },
+        "secureSpentAddresses": {
+            "title": "Veilige spandeerde adresse",
+            "body1": "Jou fondse was opgespoor op {number, plural, one {# spandeerde adres} other {# spandeerde adresse}}.",
+            "body2": "Ons beveel aan dat jy die outomatiese proses uitvoer om hierdie fondse the beveilig en veilig oor te dra.",
+            "error": "Jy kan nie spandeerde adresse met minder as 1 Mi migreer nie"
+        },
+        "securityCheckCompleted": {
+            "title": "Veiligheidskontrole voltooi",
+            "body1": "Ons het die veiligheidsrisikovlak bereken. As jy hierdie proses weer uitvoer, kan jy die risiko verlaag.",
+            "body2": "As jy tevrede is met die risiko vlakke, kies gaan voort.",
+            "rerun": "Herhaal proses vir geselekteerde adresse",
+            "continueMigration": "Gaan voort met migrasie"
+        },
+        "securingSpentAddresses": {
+            "title": "Beveilig tans spandeerde adresse...",
+            "body1": "Hierdie proses sal {minutes, plural, one {1 minuut} other {# minute}} vat.",
+            "body2": "Jou rekenaar sal op volle kapasiteit werk, jy wil dalk iets anders doen terwyl jy wag totdat dit voltooi is."
+        },
+        "transferFragmentedFunds": {
+            "body1": "Firefly sal nou jou fondse migreer. Dit kan 'n rukkie neem.",
+            "migrate": "Migreer fondse",
+            "transaction": "Transaksie {number}",
+            "rerun": "Probeer weer"
         },
         "migrateFailed": {
             "title": "To do",
@@ -141,13 +194,15 @@
         },
         "balance": {
             "title": "Jou balans",
-            "body": "Is jou balans korrek?"
+            "body": "Maak seker dat jou balans reg is voordat jy voortgaan. Jy kan weer probeer as dinge nie reg lyk nie.",
+            "error": "Die minimum migrasiebedrag is 1 Mi. Probeer weer as jou balans nie reg lyk nie.",
+            "zeroBalance": "Probeer weer. As jy steeds nie jou balans kan vind nie, het jy dalk jou seedd verkeerd ingevoer."
         },
         "settings": {
             "settings": "Instellings",
             "generalSettings": {
                 "title": "Algemene instellings",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Steljou app se voorkoms en ander algemene instellings op"
             },
             "security": {
                 "title": "Sekuriteit",
@@ -166,7 +221,7 @@
                 "description": "Verander jou profielnaam of stel 'n avatar in"
             },
             "sync": {
-                "title": "Sinkroniseer rekening",
+                "title": "Sinkroniseer beursies",
                 "description": ""
             },
             "theme": {
@@ -187,35 +242,37 @@
             },
             "exportStronghold": {
                 "title": "Voer back-up uit",
-                "description": "Voer uit na 'n Stronghold-lêer - 'n volledige geënkripteerde back-up van jou beursie en die nuutste transaksiegeskiedenis."
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
             },
             "appLock": {
                 "title": "Sluit outomaties",
-                "description": "Die tyd wat verloop het voordat jou beursie sluit en jou uitlog"
+                "description": "Onaktiwiteitstyd voordat jou beursies sluit en jou uitgeteken",
+                "durationMinute": "{time, plural, one {1 minuut} other {# minute}}",
+                "durationHour": "{time, plural, one {1 huur} other {# ure}}"
             },
             "changePassword": {
                 "title": "Verander wagwoord",
-                "description": "Jou wagwoord word gebruik om jou beursie te beveilig. Ju moet 'n sterk wagwoord gebruik om jou fondse te beskerm."
+                "description": "Jou wagwoord word gebruik om jou beursies te beveilig. Jy moet 'n sterk wagwoord gebruik om jou fondse te beskerm"
             },
             "changePincode": {
                 "title": "Verander PIN-kode",
-                "description": "Jou PIN hou jou saldo en transaksies privaat",
+                "description": "Jou PIN hou jou balans en transaksies privaat",
                 "currentPincode": "Huidige PIN",
                 "newPincode": "Nuwe PIN",
                 "confirmNewPincode": "Bevestig nuwe PIN",
                 "action": "Verander PIN"
             },
-            "resyncAccounts": {
-                "title": "Hersinkroniseer rekeninge",
-                "description": "Begin 'n agtergrondtaak om seker te maak dat jou rekeninge op datum is."
+            "balanceFinder": {
+                "title": "Balans-finder",
+                "description": "Doen 'n uitgebreide soektog na jou adresse vir tokens"
             },
             "hiddenAccounts": {
-                "title": "Versteekte rekeninge",
-                "description": "As jy hierdie opsies kies, word rekeninge wat voorheen weggesteek was, vertoon."
+                "title": "Steek beursie weg",
+                "description": "As jy hierdie opsies kies, word rekeninge wat voorheen weggesteek was, vertoon"
             },
             "deleteProfile": {
                 "title": "Vee profiel uit",
-                "description": "Verwyder jou hele beursie, profiel en transaksiegeskiedenis. Maak seker dat jy 'n back-up het."
+                "description": "Verwyder jou hele profiel, beursie en transaksiegeskiedenis. Maak seker dat jy 'n back-up het"
             },
             "deepLinks": {
                 "title": "Deep links",
@@ -231,7 +288,7 @@
             },
             "configureNodeList": {
                 "title": "Kies 'n node",
-                "description": "Bestuur die lys met nodes waaraan jou beursie koppel.",
+                "description": "Bestuur die lys van IOTA-netwerk nodes waarmee jy verbind is",
                 "primaryNode": "Primêre node",
                 "excludeNode": "Exclude node",
                 "includeNode": "Include node",
@@ -239,7 +296,7 @@
                 "setAsPrimary": "Stel as primêre Node",
                 "removeNode": "Verwyder node",
                 "includeOfficialNodeList": "Sluit die amptelike nodelys in",
-                "noNodes": "Daar is geen nodes, outomatiese seleksie sal eerder gebruik word."
+                "noNodes": "Daar is geen nodes, outomatiese seleksie sal eerder gebruik word"
             },
             "proofOfWork": {
                 "title": "Proof of work",
@@ -280,7 +337,7 @@
             },
             "reportAnIssue": {
                 "title": "Rapporteer 'n probleem",
-                "description": "Rapporteer 'n fout by die ontwikkelaars. Kyk eers om seker te maak dat dit nog nie gerapporteer is nie."
+                "description": "Rapporteer 'n fout by die ontwikkelaars. Kyk eers om seker te maak dat dit nog nie gerapporteer is nie"
             }
         },
         "login": {
@@ -300,8 +357,8 @@
                 },
                 "strongholdStatus": {
                     "title": "Beursie status",
-                    "locked": "Stronghold gesluit",
-                    "unlocked": "Stronghold oopgesluit"
+                    "locked": "Gesluit",
+                    "unlocked": "Oopgesluit"
                 },
                 "strongholdBackup": {
                     "title": "Beursie Back-up",
@@ -325,7 +382,7 @@
     "popups": {
         "password": {
             "title": "Wagwoord benodig",
-            "subtitle": "Voer asseblief you beursie-wagwoord in om Stronghold te ontsluit",
+            "subtitle": "Voer asseblief you wagwoord in om jou beursie te ontsluit",
             "backup": "Voer asseblief you wagwoord in om you back-up export"
         },
         "qr": {
@@ -336,34 +393,35 @@
             "upToDateTitle": "Firefly is op datum",
             "upToDateDescription": "Jy gebruik die nuutste en veiligste weergawe van Firefly.",
             "updateAvailable": "Firefly update beskikbaar",
-            "updateDetails": "Weergawe {version} - {date}"
+            "updateDetails": "Weergawe {version} - {date}",
+            "noAutoUpdate": "Outo-opdatering is in hierdie Windows-weergawe gedeaktiveer. Gaan na https://firefly.iota.org om die opdatering af te laai."
         },
         "backup": {
             "title": "Laaste backup: {date}",
             "lastBackup": "Jy het laas 'n backup op {date} gemaak",
-            "backupDescription": "Dit is belangrik om gereeld 'n backup te maak om te verseker dat jy 'n afskrif van jou rekeninge en transaksiegeskiedenis het.",
+            "backupDescription": "Dit is belangrik om gereeld 'n back-up te maak om te verseker dat jy 'n afskrif van jou beursies en transaksiegeskiedenis het.",
             "backupWarning": "As jy jou backup en herstelfrase verloor, verloor jy toegang tot jou fondse.",
             "notBackedUp": "Nie gebackup",
-            "notBackedUpDescription": "Jy het nie jou Stronghold gebackup nie",
+            "notBackedUpDescription": "Jy het nie jou beursie gebackup nie",
             "saving": "Saving..."
         },
         "deleteAccount": {
             "title": "Vee {name} uit?",
-            "body": "Hierdie rekening het geen transaksiegeskiedenis nie. Dit kan veilig verwyder word.",
+            "body": "Hierdie beursie het geen transaksiegeskiedenis nie. Dit kan veilig verwyder word.",
             "typePassword": "Voer die wagwoord van jou beursie in om te bevestig.",
-            "hideAccount": "Verwyder rekening",
+            "hideAccount": "Vee beursie uit",
             "errorTitle": "Kan nie {name} verwyder nie",
-            "errorBody1": "Jy kan nie hierdie rekening verwyder nie, jy moet ten minste een hê."
+            "errorBody1": "Jy kan nie hierdie beursie verwyder nie, jy moet ten minste een hê."
         },
         "hideAccount": {
             "title": "Versteek {name}?",
-            "body": "Jy kan hierdie rekening later vind deur \"Wys versteekte rekeninge\" aan te skakel in Gevorderde instellings.",
+            "body": "Jy kan hierdie beursie later vind deur \"Wys versteekte beursies\" aan te skakel in Gevorderde Instellings.",
             "typePassword": "Voer die wagwoord van jou beursie in om te bevestig.",
-            "hideAccount": "Versteekte rekening",
+            "hideAccount": "Steek beursie weg",
             "errorTitle": "Kan nie {name} versteek nie",
-            "errorBody1": "Om 'n rekening te versteek, moet jy 0 balans hê.",
-            "errorBody2": "Jy het tans {balance} op hierdie rekening oor. Skuif hierdie fondse na 'n ander rekening en probeer weer.",
-            "errorBody3": "Jy kan nie hierdie rekening versteek nie, jy moet ten minste een hê."
+            "errorBody1": "Om 'n beursie te versteek, moet jy 0 balans hê.",
+            "errorBody2": "Jy het tans {balance} op hierdie beursie oor. Skuif hierdie fondse na 'n ander beursie en probeer weer.",
+            "errorBody3": "Jy kan nie hierdie beursie versteek nie, jy moet ten minste een hê."
         },
         "addressHistory": {
             "title": "{name} adresgeskiedenis",
@@ -403,19 +461,42 @@
         "transaction": {
             "title": "Bevestig die transaksie",
             "body": "Jy is op die punt om {amount} na"
+        },
+        "balanceFinder": {
+            "title": "Balans-finder",
+            "body": "Doen 'n meer volledige soektog na adresse om ontbrekende saldo's te vind. Dit kan 'n rukkie neem.",
+            "totalWalletBalance": "Totale balans",
+            "typePassword": "Tik jou wagwoord in om te begin soek."
+        },
+        "riskFunds": {
+            "title": "Waarskuwing: fondse in gevaar tydens migrasie",
+            "body1": "Dit word sterk aanbeveel dat jy al jou fondse beveilig voordat jy verder gaan met migrasie. Jou fondse is in gevaar as jy dit nie beveilig nie.",
+            "body2": "Dit word aanbeveel dat jy die proses herhaal vir adresse met 'n medium risikovlak of hoër."
+        },
+        "missingBundle": {
+            "title": "Waarskuwing: fondse in gevaar tydens migrasie",
+            "body": "Jy het geld op spandeerde adresse, maar die nodige inligting is nie gevind om dit te beveilig nie. Dit kan gebeur as jy lank gelede transaksies gedoen het. Jy kan voortgaan, maar {value} loop 'n risiko tydens migrasie.",
+            "learnMore": "Kom meer te wete oor spandeerde adresse",
+            "proceed": "Ek verstaan ​​die risiko"
+        },
+        "snapshot": {
+            "title": "Deurlopende netwerkopgradering",
+            "body": "Die opgradering van die Chrysalis-netwerk het begin.",
+            "bodyMigration": "Migrasie is uitgeskakel totdat dit voltooi is.",
+            "bodyFirefly": "Firefly is uitgeskakel totdat dit voltooi is. Token migrasie sal daarna steeds moontlik wees."
         }
     },
     "charts": {
-        "incomingMi": "Inkomende {value} Mi",
-        "outgoingMi": "Uitgaande {value} Mi",
+        "incomingMi": "Inkomende {value}",
+        "outgoingMi": "Uitgaande {value}",
         "portoflio": "Portefeulje",
         "token": "Tokenprys",
-        "accountValue": "Rekening Balans",
-        "accountActivity": "Rekeningaktiwiteit",
-        "timeframe1Hour": "1 hour",
-        "timeframe1Day": "1 day",
+        "accountValue": "Beursie Waarde",
+        "accountActivity": "Beursie Aktiwiteit",
+        "timeframe1Hour": "1 huur",
+        "timeframe1Day": "1 dag",
         "timeframe1Week": "1 week",
-        "timeframe1Month": "1 month"
+        "timeframe1Month": "1 maand"
     },
     "actions": {
         "continue": "Gaan voort",
@@ -423,10 +504,13 @@
         "cancel": "Kanselleer",
         "close": "Maak toe",
         "dismiss": "Ontslaan",
+        "proceedAnyway": "Gaan tog voort",
         "save": "Stoor",
         "importSeed": "Voer 'n bestaande seed in",
-        "importWallet": "Voer bestaande beursie in",
+        "restoreWallet": "Migreer of herstel 'n beursie",
+        "restoreWalletDescription": "Migreer na Chrysalis of herstel 'n bestaande beursie",
         "createWallet": "Skep 'n nuwe beursie",
+        "createWalletDescription": "Skep 'n vars beursie wat op Chrysalis",
         "savePassword": "Stoor wagwoord",
         "useBiometric": "Gebruik biometriese sekuriteit",
         "setupPin": "Stel PIN-kode op",
@@ -438,7 +522,7 @@
         "verifyRecoveryPhrase": "Verifieer herstelfrase",
         "revealRecoveryPhrase": "Openbaar herstelfrase",
         "importSeedvault": "Voer SeedVault in",
-        "checkAgain": "Nee, kyk weer",
+        "checkAgain": "Nee, probeer weer",
         "importFromFile": "Invoer vanaf 'n lêer",
         "send": "Stuur",
         "receive": "Ontvang",
@@ -462,11 +546,11 @@
         "updateFirefly": "Update Firefly",
         "restartNow": "Herlaai nou",
         "saveBackup": "Stoor Stronghold Back-up",
-        "customizeAcount": "Pas rekening aan",
+        "customizeAcount": "Aanpas Beursie",
         "viewAddressHistory": "Bekyk adresgeskiedenis",
-        "hideAccount": "Versteek rekening",
-        "showAccount": "Wys Rekening",
-        "deleteAccount": "Verwyder rekening",
+        "hideAccount": "Steek beursie weg",
+        "showAccount": "Wys versteekte beursie",
+        "deleteAccount": "Vee beursie uit",
         "max": "Max",
         "addNode": "Add Node",
         "updateNode": "Dateer node op",
@@ -482,21 +566,28 @@
         "copy": "Kopieër",
         "paste": "Plak",
         "selectAll": "Kies Alles",
-        "addAccount": "Voeg Rekening By",
+        "addAccount": "Voeg beursie toe",
         "checkForUpdates": "Soek vir opgraderings",
         "reportAnIssue": "Rapporteer 'n probleem",
         "clear": "Maak skoon",
         "hideDetails": "Versteek besonderhede",
         "yes": "Ja",
         "no": "Nee",
+        "skip": "Slaan oor",
         "reset": "Stel terug",
         "downloadRecoveryKit": "Stoor die Recovery Kit vorm",
         "skipBackup": "Slaan lêer-Back-up oor",
         "finishSetup": "Voltooi die opstelling",
         "readDocumentation": "Lees die dokumentasie",
         "visitFaq": "Besoek FAQ",
-        "showHiddenAccounts": "Wys Versteekte rekeninge",
-        "confirm": "Bevestig"
+        "viewStatus": "Sien status",
+        "showHiddenAccounts": "Wys versteekte beursie",
+        "confirm": "Bevestig",
+        "findBalances": "Vind balanse",
+        "searchBalances": "Soek na balanse",
+        "searchAgain": "Soek weer",
+        "searching": "Soek tans...",
+        "closeFirefly": "Maak Firefly toe"
     },
     "general": {
         "password": "Wagwoord",
@@ -514,11 +605,11 @@
         "sendFunds": "Stuur fondse",
         "sendToAddress": "Stuur na 'n adres",
         "scanQrOrPaste": "Skandeer 'n QR-kode of plak 'n adres",
-        "moveFundsBetweenAccounts": "Skuif fondse tussen jou rekeninge",
+        "moveFundsBetweenAccounts": "Skuif fondse tussen jou beursies",
         "sendTokensToAddress": "Stuur tokens na 'n adres",
-        "manageAccount": "Bestuur rekeninge",
-        "customizeAcount": "Pas jou rekening aan",
-        "account": "Rekening",
+        "manageAccount": "Bestuur beursie",
+        "customizeAcount": "Pas you beursie aan",
+        "account": "Beursie",
         "sendingToAddress": "Oppad na adres",
         "amount": "Bedrag",
         "addAddress": "Adres byvoeg",
@@ -531,10 +622,6 @@
         "yourAddress": "Jou adres",
         "generateNewAddress": "Genereer nuwe adres",
         "copyAddress": "Kopieer Adres",
-        "haveTextBackup": "Ek het 'n teks back-up",
-        "haveFileBackup": "Ek het 'n lêer back-up",
-        "enterSeedOrPhrase": "Voer 'n herstelfrase of seed in",
-        "uploadSeedvaultOrStronghold": "Voer 'n Stronghold of SeedVault lêer in",
         "import": "Invoer",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -543,24 +630,25 @@
         "lightTheme": "Ligte tema",
         "darkTheme": "Donker tema",
         "balance": "Balans",
-        "accountBalance": "Rekening balans",
+        "accountBalance": "Beursie Waarde",
         "incoming": "Inkomende",
         "outgoing": "Uitgaande",
         "totalIn": "Totaal in",
         "totalOut": "Totaak uit",
-        "accounts": "Rekeninge",
-        "myAccounts": "My Rekeninge",
+        "accounts": "Beursies",
+        "myAccounts": "My Beursie",
         "automaticNodeSelection": "Outomatiese node seleksie",
         "manualNodeSelection": "Manuele node seleksie",
         "profiles": "Profiel",
         "developerProfile": "Ontwikkelaarsprofiel",
+        "developerProfileDescription": "Hiermee kan jy verbind met testnets",
         "dev": "Dev",
-        "createAccount": "Skep 'n rekening",
-        "accountName": "Rekening naam",
+        "createAccount": "Skep 'n Beursie",
+        "accountName": "Beursie naam",
         "latestTransactions": "Nuutste transaksie",
         "transactions": "Transaksies",
         "security": "Sekuriteit",
-        "accountAddress": "Rekeningadres",
+        "accountAddress": "Beursie se Adres",
         "nodes": "Nodes",
         "wallet": "Beursie",
         "help": "Hulp",
@@ -572,25 +660,26 @@
         "status": "Status",
         "confirmed": "Bevestig",
         "pending": "Hangende",
-        "noAccounts": "Jy het geen rekeninge nie, skep asseblief een.",
+        "noAccounts": "Jy het geen beursies nie, skep asseblief een.",
         "loadingAccounts": "Wag asseblief terwyl dit laai...",
         "addProfile": "Voeg profiel by",
         "noRecentHistory": "Geen onlangse geskiedenis nie",
-        "transferSyncing": "Sinkroniseer rekening",
+        "firstSync": "Gesinkroniseer geskiedenis, dit kan 'n rukkie neem...",
+        "transferSyncing": "Sinkroniseer beursie",
         "transferSelectingInputs": "Kies inputs",
         "transferRemainderAddress": "Genereer oorblyfsel deposito adres",
         "transferSigning": "Onderteken die transaksie",
         "transferPow": "Uitvoering van PoW",
         "transferBroadcasting": "Uitsaai van die transaksie",
         "transferComplete": "Oordrag voltooi",
-        "creatingAccount": "Skep tans rekening, wag asseblief...",
-        "updatingAccount": "Opdatering van rekening, wag asseblief...",
-        "accountSyncing": "Rekening word tans gesinkroniseer",
-        "accountSyncComplete": "Sinkronisering van rekening voltooi",
+        "creatingAccount": "Skep tans beursie, wag asseblief...",
+        "updatingAccount": "Opdatering van beursie, wag asseblief...",
+        "accountSyncing": "Die beursie word tans gesinkroniseer",
+        "accountSyncComplete": "Sinkronisering van beursie is voltooi",
         "passwordUpdating": "Wagwoord opdatering aan die gang...",
         "passwordSuccess": "Wagwoord suksesvol opgedateer",
         "passwordFailed": "Kon nie wagwoord opdateer nie",
-        "syncingAccounts": "Sinkroniseer rekening...",
+        "syncingAccounts": "Sinkroniseer beursie...",
         "exportingStronghold": "Voer Stronghold uit...",
         "exportingStrongholdSuccess": "Die Stronghold is suksesvol uitgevoer",
         "exportingStrongholdFailed": "Uitgevoer van Stronghold het misluk",
@@ -604,7 +693,17 @@
         "passwordStrength3": "Gemiddeld",
         "passwordStrength4": "Sterk",
         "creatingProfile": "Skep tans profiel op, wag asseblief...",
-        "accountRemoved": "Hierdie rekening is versteek. Wys dit om oordragte uit te voer."
+        "fundMigration": "Fondsmigrasie",
+        "accountRemoved": "Hierdie beursie is versteek. Wys dit om oordragte uit te kan voer.",
+        "receivingTo": "Ontvangs na {account}",
+        "sendingFrom": "Stuur vanaf {account}",
+        "receivedTo": "Ontvangs na {account}",
+        "sentFrom": "Stuur vanaf {account}",
+        "receiving": "Ontvangs",
+        "sending": "Besig om te stuur",
+        "legacyNetwork": "Erfenisnetwerk",
+        "capsLock": "Hoofletterslot is aan",
+        "version": "Weergawe {version}"
     },
     "dates": {
         "today": "Vandag",
@@ -627,11 +726,13 @@
         "calcMinutesRemaining": "Bereken oorblywende minute...",
         "minutesRemaining": "{minutes, plural, one {1 minuut oor} other {# minute oor}}",
         "copiedToClipboard": "Kopieer na knipbord",
-        "accountsSynchronized": "Rekeningsinkronisering voltooi"
+        "accountsSynchronized": "Beursie sinchronisasie voltooi",
+        "migratedAccountChrysalisDown": "Jou fondse sal na Chrysalis op 28 April beskikbaar wees",
+        "migratedAccountChrysalisUp": "Jou fondse sal binnekort beskikbaar wees"
     },
     "error": {
         "profile": {
-            "length": "Jou profielnaam mag nie langer as {length, plural, karakter {1 karakter} other {# karakters}}.",
+            "length": "Jou profielnaam mag nie langer as {length, plural, one {1 karakter} other {# karakters}}.",
             "duplicate": "Daar bestaan ​​reeds 'n profiel met hierdie naam."
         },
         "password": {
@@ -657,10 +758,10 @@
             "incorrect": "Jou huidige PIN is verkeerd."
         },
         "account": {
-            "length": "Jou rekeningnaam mag nie langer as {length, plural, one {1 karakter} other {# karakters}} wees nie.",
-            "empty": "Jy moet jou nuutste rekening gebruik voordat jy 'n nuwe een skep.",
-            "notEmpty": "Jy moet jou saldo oordra voordat jy hierdie rekening uitvee.",
-            "duplicate": "'n Rekening met hierdie naam bestaan alreeds.",
+            "length": "Jou beursie naam mag nie langer as {length, plural, one {1 karakter} other {# karakters}}.",
+            "empty": "Jy moet jou nuutste beursie gebruik voordat jy 'n nuwe een skep.",
+            "notEmpty": "Jy moet jou balans oordra voordat jy hierdie beursie uitvee.",
+            "duplicate": "Daar bestaan ​​reeds 'n beursie met hierdie naam.",
             "tilde": "'N Profielnaam kan nie met die' ~ 'karakter begin nie.",
             "control": "'N Profielnaam kan nie 'n beheerkarakter bevat nie.",
             "startDot": "'N Profielnaam kan nie begin met die'. ' karakter.",
@@ -675,8 +776,8 @@
             "wrongAddressPrefix": "Adresse begin met die voorvoegsel {prefix}.",
             "wrongAddressFormat": "Die adres is nie korrek geformateer nie.",
             "invalidAddress": "Die adres is nie geldig nie.",
-            "insufficientFunds": "Hierdie rekening het onvoldoende fondse.",
-            "noToAccount": "Jy het nie 'n rekening gekies om die fondse na te stuur nie.",
+            "insufficientFunds": "Hierdie beursie het onvoldoende fondse.",
+            "noToAccount": "Jy het nie 'n beursie gekies om die fondse na te stuur nie.",
             "sendingDust": "Jy kan nie minder as 1 Mi. stuur nie.",
             "leavingDust": "Jy kan nie minder as 1 Mi op jou adres los nie."
         },
@@ -699,6 +800,16 @@
             "phraseWordCount": "Daar moet 24 woorde in jou herstelfase voorkom, tans is daar {length, plural, one {1} other {#}}.",
             "phraseUnrecognizedWord": "Onherkenbare woord \"{word}\" in jou herstelfrase",
             "phraseCaseWord": "Die woord \"{word}\" moet kleinletters wees"
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "Risikovlak: {risk}",
+            "veryHigh": "Baie hoog",
+            "high": "Hoog",
+            "medium": "Gemiddeld",
+            "low": "Laag",
+            "veryLow": "Baie laag"
         }
     }
 }

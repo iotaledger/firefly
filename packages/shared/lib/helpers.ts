@@ -222,17 +222,30 @@ export const stripSpaces = (str) => {
 }
 
 /**
- * Get the sender address from a payload.
+ * Create a deep copy of an object
+ * @param obj The object to copy
+ * @returns The copied object
  */
-export const sendAddressFromPayload = (payload: Payload): string => {
-    return payload?.data?.essence?.data?.inputs?.find((input) => /utxo/i.test(input?.type))?.data?.metadata?.address ?? null
-}
+export function deepCopy(obj) {
+    if(typeof obj !== 'object' || obj === null) {
+        return obj;
+    }
 
-/**
- * Get the receiver addresses from the payload.
- */
-export const receiverAddressesFromPayload = (payload: Payload): string[] => {
-    return payload?.data?.essence?.data?.outputs
-        ?.filter((output) => output?.data?.remainder === false)
-        ?.map((output) => output?.data?.address) ?? []
+    if(obj instanceof Date) {
+        return new Date(obj.getTime());
+    }
+
+    if(obj instanceof Array) {
+        return obj.reduce((arr, item, i) => {
+            arr[i] = deepCopy(item);
+            return arr;
+        }, []);
+    }
+
+    if(obj instanceof Object) {
+        return Object.keys(obj).reduce((newObj, key) => {
+            newObj[key] = deepCopy(obj[key]);
+            return newObj;
+        }, {})
+    }
 }

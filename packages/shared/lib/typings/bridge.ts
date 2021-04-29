@@ -1,7 +1,8 @@
-import type { ErrorEventPayload } from './events'
+import type { Account, AccountIdentifier, Balance, SyncedAccount } from './account'
 import type { Address } from './address'
-import type { AccountIdentifier, Account, Balance, SyncedAccount } from './account'
+import type { ErrorEventPayload } from './events'
 import type { Message } from './message'
+import type { MigrationBundle, MigrationData, SendMigrationBundleResponse } from './migration'
 import type { NodeInfo, StrongholdStatus } from './wallet'
 
 export interface Actor {
@@ -50,6 +51,7 @@ export enum ResponseTypes {
     Broadcast = 'Broadcast',
     StrongholdStatusChange = 'StrongholdStatusChange',
     TransferProgress = 'TransferProgress',
+    MigrationProgress = 'MigrationProgress',
     GeneratedMnemonic = 'GeneratedMnemonic',
     StoredMnemonic = 'StoredMnemonic',
     VerifiedMnemonic = 'VerifiedMnemonic',
@@ -64,6 +66,10 @@ export enum ResponseTypes {
     StrongholdPasswordChanged = 'StrongholdPasswordChanged',
     UpdatedAllClientOptions = 'UpdatedAllClientOptions',
     StrongholdPasswordClearIntervalSet = 'StrongholdPasswordClearIntervalSet',
+    MigrationData = 'MigrationData',
+    CreatedMigrationBundle = 'CreatedMigrationBundle',
+    SentMigrationBundle = 'SentMigrationBundle',
+    LegacySeedChecksum = 'SeedChecksum',
     NodeInfo = 'NodeInfo',
 }
 
@@ -103,6 +109,14 @@ export type DeleteStorageResponse = Response<ResponseTypes.DeletedStorage, void>
 export type LockStrongholdResponse = Response<ResponseTypes.LockedStronghold, void>
 export type StrongholdPasswordChangeResponse = Response<ResponseTypes.StrongholdPasswordChanged, void>
 export type UpdatedAllClientOptions = Response<ResponseTypes.UpdatedAllClientOptions, void>
+export type LegacySeedChecksum = Response<ResponseTypes.LegacySeedChecksum, string>
+
+/**
+ * Migration responses
+ */
+export type MigrationDataResponse = Response<ResponseTypes.MigrationData, MigrationData>
+export type CreatedMigrationBundleResponse = Response<ResponseTypes.CreatedMigrationBundle, MigrationBundle>
+export type SentMigrationBundleResponse = Response<ResponseTypes.SentMigrationBundle, SendMigrationBundleResponse>
 export type GetNodeInfoResponse = Response<ResponseTypes.NodeInfo, NodeInfo>
 
 export type MessageResponse =
@@ -137,6 +151,11 @@ export type MessageResponse =
     | LockStrongholdResponse
     | StrongholdStatusResponse
     | UpdatedAllClientOptions
+    | LegacySeedChecksum
+    // Migration types
+    | MigrationDataResponse
+    | CreatedMigrationBundleResponse
+    | SentMigrationBundleResponse
     | GetNodeInfoResponse
 
 export type Bridge = (message: BridgeMessage) => Promise<string>

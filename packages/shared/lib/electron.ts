@@ -49,11 +49,13 @@ interface ElectronEventMap {
 
 export interface IElectron {
     getStrongholdBackupDestination(defaultPath: string): Promise<string | null>;
+    exportMigrationLog(sourcePath: string, defaultFileName: string): Promise<boolean | null>;
     getUserDataPath(): Promise<string>;
     getDiagnostics(): Promise<{ label: string; value: string; }[]>;
     getOS(): Promise<string>;
     updateActiveProfile(id: string): void;
     removeProfileFolder(profilePath: string): Promise<void>;
+    listProfileFolders(profileStoragePath: string): Promise<string[]>;
     updateMenu(attribute: string, value: unknown): void;
     popupMenu(): void;
     maximize(): Promise<boolean>;
@@ -69,12 +71,17 @@ export interface IElectron {
     DeepLinkManager: IDeepLinkManager;
 
     PincodeManager: IPincodeManager;
-
     getVersionDetails(): Promise<VersionDetails>;
     updateCheck(): Promise<void>
     updateInstall(): Promise<void>
     updateCancel(): Promise<void>
     updateDownload(): Promise<void>
+
+    unhandledException(title: string, err: Error): Promise<void>
+
+    // SeedVault API methods
+    importLegacySeed(buffer: any, password: string): Promise<string>;
+    validateSeedVault(buffer: any): Promise<boolean>;
 
     onEvent<K extends keyof ElectronEventMap>(eventName: K, callback: (param: ElectronEventMap[K]) => void);
 }

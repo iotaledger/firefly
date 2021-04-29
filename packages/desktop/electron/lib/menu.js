@@ -1,6 +1,6 @@
-import { app, Menu, ipcMain, shell } from 'electron'
-import { getOrInitWindow, openAboutWindow } from '../main'
+import { app, ipcMain, Menu, shell } from 'electron'
 import { WalletRoutes } from 'shared/lib/typings/routes'
+import { closeAboutWindow, getOrInitWindow, openAboutWindow } from '../main'
 import { menuState as state } from './menuState'
 /**
  * Creates a native menu tree and applies it to the application window
@@ -12,6 +12,12 @@ export const initMenu = () => {
         const template = buildTemplate()
         const applicationMenu = Menu.buildFromTemplate(template)
         Menu.setApplicationMenu(applicationMenu)
+
+        // setApplicationMenu sets the menu for all top level windows
+        // which breaks the about window, if we try and set the about
+        // window menu to null it resizes. We would also need to re-apply
+        // the localisation, so just close it
+        closeAboutWindow()
 
         return applicationMenu
     }
@@ -25,6 +31,8 @@ export const initMenu = () => {
         ipcMain.handle('menu-popup', () => {
             mainMenu.popup(getOrInitWindow('main'))
         })
+
+        ipcMain.handle('menu-data', () => state)
 
         ipcMain.handle('maximize', () => {
             const isMaximized = getOrInitWindow('main').isMaximized()
@@ -85,21 +93,29 @@ const buildTemplate = () => {
                     label: state.strings.diagnostics,
                     click: () => getOrInitWindow('main').webContents.send('menu-diagnostics'),
                 },
-                {
-                    // TODO: Remove before stable release
-                    label: "Developer Tools",
-                    role: 'toggleDevTools'
-                },
-                {
-                    label: state.strings.errorLog,
-                    click: () => getOrInitWindow('main').webContents.send('menu-error-log')
-                },
-                {
-                    type: 'separator',
-                },
             ]
         }
     ]
+
+    if (!app.isPackaged) {
+        template[0].submenu.push(
+            {
+                label: "Developer Tools",
+                role: 'toggleDevTools'
+            }
+        )
+    }
+
+    template[0].submenu = template[0].submenu.concat([
+        {
+            label: state.strings.errorLog,
+            click: () => getOrInitWindow('main').webContents.send('menu-error-log')
+        },
+        {
+            type: 'separator',
+        },
+    ]
+    )
 
     if (process.platform === 'darwin') {
         template[0].submenu = template[0].submenu.concat([
@@ -181,26 +197,25 @@ const buildTemplate = () => {
     template.push({
         label: state.strings.help,
         submenu: [
-            /** TODO: Add help links     
-            {
-                label: state.strings.troubleshoot,
-                click: function () {
-                    // TODO: Replace with real help links
-                    shell.openExternal('https://iota.org')
-                },
-            },
+            // {
+            //     label: state.strings.troubleshoot,
+            //     click: function () {
+            //         // TODO: Replace with real help links
+            //         shell.openExternal('https://iota.org')
+            //     },
+            // },
             {
                 label: state.strings.faq,
                 click: function () {
-                    shell.openExternal('https://iota.org')
+                    shell.openExternal('https://firefly.iota.org/faq')
                 },
             },
             {
                 label: state.strings.documentation,
                 click: function () {
-                    shell.openExternal('https://iota.org')
+                    shell.openExternal('https://chrysalis.docs.iota.org/')
                 },
-            }**/
+            },
             {
                 label: state.strings.discord,
                 click: function () {

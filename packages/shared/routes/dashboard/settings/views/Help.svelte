@@ -4,16 +4,16 @@
 
     export let locale
 
-    const handleTroubleshootClick = () => {
-        Electron.openUrl('https://iota.org')
-    }
+    // const handleTroubleshootClick = () => {
+    //     Electron.openUrl('https://iota.org')
+    // }
 
     const handleDocumentationClick = () => {
-        Electron.openUrl('https://iota.org')
+        Electron.openUrl('https://chrysalis.docs.iota.org/')
     }
 
     const handleFaqClick = () => {
-        Electron.openUrl('https://iota.org')
+        Electron.openUrl('https://firefly.iota.org/faq')
     }
 
     const handleDiscordClick = () => {
@@ -26,27 +26,26 @@
 </script>
 
 <div>
-    <!-- TODO: Add help links -->
-    <section id="troubleshoot" class="w-3/4 opacity-50">
+    <!-- <section id="troubleshoot" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.troubleshoot.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.troubleshoot.description')}</Text>
-        <Button medium inlineStyle="min-width: 156px;" classes="pointer-events-none" onClick={() => handleTroubleshootClick()}>
+        <Button medium inlineStyle="min-width: 156px;" onClick={() => handleTroubleshootClick()}>
             {locale('views.settings.troubleshoot.title')}
         </Button>
     </section>
-    <HR classes="pb-5 mt-5 justify-center" />
-    <section id="documentation" class="w-3/4 opacity-50">
+    <HR classes="pb-5 mt-5 justify-center" /> -->
+    <section id="documentation" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.documentation.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.documentation.description')}</Text>
-        <Button medium inlineStyle="min-width: 156px;" classes="pointer-events-none" onClick={() => handleDocumentationClick()}>
+        <Button medium inlineStyle="min-width: 156px;" onClick={() => handleDocumentationClick()}>
             {locale('actions.readDocumentation')}
         </Button>
     </section>
     <HR classes="pb-5 mt-5 justify-center" />
-    <section id="faq" class="w-3/4 opacity-50">
+    <section id="faq" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.faq.title2')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.faq.description')}</Text>
-        <Button medium inlineStyle="min-width: 156px;" classes="pointer-events-none" onClick={() => handleFaqClick()}>
+        <Button medium inlineStyle="min-width: 156px;" onClick={() => handleFaqClick()}>
             {locale('actions.visitFaq')}
         </Button>
     </section>

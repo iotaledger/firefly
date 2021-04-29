@@ -7,40 +7,28 @@
         "legal": {
             "title": "Integritetspolicy och användarvillkor",
             "body": "Läs igenom sekretesspolicyn och användarvillkoren.",
-            "privacyPolicy": {
-                "title": "Sekretesspolicy",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
-            "termsOfService": {
-                "title": "Användarvillkor",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
             "checkbox": "Jag har läst och accepterar integritetspolicyn och användarvillkoren"
         },
         "appearance": {
             "title": "Utseende",
-            "body": "Välj din plånboks tema."
+            "body": "Välj ditt tema."
         },
-        "setup": {
-            "title": "Ställ in din plånbok",
-            "body1": "Du kan skapa flera användarprofiler för att hålla dina tokens separata och förbättra sekretessen.",
+        "profile": {
+            "title": "Skapa en profil",
+            "body1": "Du kan skapa flera användarprofiler för att organisera dina plånböcker och förbättra sekretessen.",
             "body2": "Låt oss börja med ditt första profilnamn. Du kan lägga till fler profiler senare.",
             "profileName": "Profilnamn"
+        },
+        "setup": {
+            "title": "Konfigurera en plånbok",
+            "chrysalisTitle": "Chrysalis nätverksuppdatering",
+            "chrysalisBody": "Från och med den 21 april kan man migrera sina tokens till det nya Chrysalis-nätverket. Vi rekommenderar att du migrerar dina befintliga tokens så snart som möjligt.",
+            "learnMore": "Läs mer om migreringen"
         },
         "secure": {
             "title": "Säkra din plånbok",
             "body1": "Spara och skriv ut PDF-mallen för återställningsbladet.",
-            "body2": "Om du fyller i återställningsbladet och lagrar det på ett säkert sätt, kommer du alltid att kunna återställa din plånbok."
+            "body2": "Om du fyller i återställningsbladet och lagrar det på ett säkert sätt, kommer du alltid att kunna återställa dina plånböcker."
         },
         "password": {
             "title": "Skapa ett lösenord",
@@ -49,7 +37,7 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Ställ in en PIN-kod så att bara du har åtkomst till din plånbok.",
+            "body1": "Ställ in en PIN-kod så att bara du har åtkomst till din profil.",
             "body2": "Håll din PIN-kod säker!"
         },
         "pin": {
@@ -85,44 +73,60 @@
         },
         "backupWallet": {
             "title": "Säkerhetskopiera till en Stronghold-fil",
-            "body1": "Ange ditt lösenord för att säkerhetskopiera din plånbok till en Stronghold-fil. Ditt lösenord används för att kryptera säkerhetskopian.",
+            "body1": "Ange ditt lösenord för att säkerhetskopiera dina plånböcker till en Stronghold-fil. Ditt lösenord används för att kryptera säkerhetskopian.",
             "body2": "Anledningar till varför digitala säkerhetskopior är viktiga:",
-            "reason1": "Enkelt att återställa din plånbok utan att skriva in din återställningsfras",
-            "reason2": "Importera din plånbok till andra enheter",
+            "reason1": "Enkelt att återställa dina plånböcker utan att skriva in din återställningsfras",
+            "reason2": "Importera dina plånböcker på andra enheter",
             "reason3": "Återställ hela din transaktionshistorik"
         },
         "recoveryPhraseSaved": {
             "title": "Säkerhetskopiering lyckades",
-            "body": "Du har säkerhetskopierat din plånbok till en Stronghold."
+            "body": "Du har säkerhetskopierat dina plånböcker till en Stronghold."
         },
         "congratulations": {
             "title": "Installationen av plånboken slutförd",
-            "body": "Din nya plånbok är redo att användas."
+            "body": "Din nya plånbok är redo att användas.",
+            "fundsMigrated": "Tokens migrerade",
+            "success": "Du har framgångsrikt migrerat dina IOTA till det nya nätverket",
+            "exportMigration": "Exportera migrationslogg och avsluta installationen"
         },
         "import": {
-            "title": "Importera en plånbok",
-            "body": "Om du har en återställningsfras eller Stronghold -fil så kan du importera den här."
+            "title": "Återställ eller migrera tillgångar",
+            "body": "Om du har en befintlig seed eller digital säkerhetskopia kan du importera den här. Om du har IOTA på det gamla nätverket kommer du att gå igenom en migrering för att flytta till dessa till Chrysalis-nätverket.",
+            "importSeed": "Jag har en 81 tecken lång seed",
+            "importSeedDescription": "Ange en seed och migrera IOTA till Chrysalis",
+            "importMnemonic": "Jag har en Firefly återställningsfras",
+            "importMnemonicDescription": "Ange din återställningsfras för att återställa dina plånböcker",
+            "importFile": "Jag har en digital säkerhetskopia",
+            "importFileDescription": "Ladda upp en Seedvault- eller Stronghold-fil"
         },
         "importFromText": {
-            "title": "Återställ din plånbok med en återställningsfras eller seed",
-            "body1": "En seed består av 81 tecken. Denna används för att återställa plånboken från en äldre Trinity-plånbok.",
-            "body2": "En återställningsfras är 24 ord lång, endast små bokstäver och mellanrum mellan varje ord. Denna används för att återställa en befintlig Firefly-plånbok.",
-            "body3": "Ange din seed eller återställningsfras",
+            "seed": {
+                "title": "Skriv din seed för att börja migrera",
+                "body": "En seed består av 81 tecken. Denna används för att återställa plånböckerna från en äldre Trinity-plånbok.",
+                "enter": "Ange din seed"
+            },
+            "mnemonic": {
+                "title": "Skriv in din återställningsfras",
+                "body": "En återställningsfras är 24 ord lång, endast små bokstäver och mellanrum mellan varje ord. Denna används för att återställa befintliga Firefly-plånböcker.",
+                "enter": "Ange din hemliga återställningsfras"
+            },
             "seedDetected": "81 tecken lång seed upptäckt",
-            "phraseDetected": "24 ord lång återställningsfras upptäckt"
+            "phraseDetected": "24 ord lång återställningsfras upptäckt",
+            "checksum": "Kontrollnummer"
         },
         "importFromFile": {
-            "title": "Återställ din plånbok från en säkerhetskopia",
-            "body": "Importera en säkerhetskopia för att återställa din plånbok. Säkerhetskopior kan antingen vara en Stronghold (.stronghold) eller en Trinity SeedVault (.kdbx)."
+            "title": "Återställ dina plånböcker från en säkerhetskopia",
+            "body": "Importera en säkerhetskopia för att återställa dina plånböcker. Säkerhetskopior kan antingen vara en Stronghold (.stronghold) eller en Trinity SeedVault (.kdbx)."
         },
         "importBackupPassword": {
-            "title": "Återställ din plånbok från en SeedVault eller Stronghold",
+            "title": "Återställ dina plånböcker från en SeedVault eller Stronghold",
             "body1": "Ange lösenordet för din säkerhetskopia.",
             "body2": "Detta är lösenordet du valde när du skapade din säkerhetskopia."
         },
         "importSuccess": {
             "title": "Du har framgångsrikt återställt din säkerhetskopia",
-            "body": "Du kan nu ställa in din nya plånbok.",
+            "body": "Du kan nu ställa in din nya profil.",
             "seedvaultTitle": "Importen lyckades",
             "seedvaultBody": "Ditt lösenord är korrekt, du kan nu fortsätta.",
             "strongholdTitle": "Importen lyckades",
@@ -130,10 +134,59 @@
         },
         "migrate": {
             "title": "Migrera dina tillgångar",
-            "body1": "Detta är en automatiserad process för att överföra dina tillgångar till din nya plånbok. Vi kommer att kontrollera eventuella förbrukade adresser som försvagar din säkerhet.",
+            "body1": "Detta är en automatiserad process för att överföra dina IOTA till din nya plånbok.",
             "body2": "Det kan ta lite tid. Stäng inte av enheten under migreringen.",
             "existing": "Din gamla plånbok",
-            "new": "Din nya plånbok"
+            "new": "Din nya plånbok",
+            "learn": "Läs mer om migreringen",
+            "beginMigration": "Påbörja migrering",
+            "migrating": "Migrerar tillgångar...",
+            "migrated": "{balance} migrerade",
+            "migrationFailed": "Migrering misslyckades",
+            "noAddressesForMigration": "Vänligen välj de adresser du vill säkra.",
+            "restoringWallet": "Återställer plånboken...",
+            "findingBalance": "Söker saldo...",
+            "incorrectSeedVaultPassword": "Felaktigt lösenord för SeedVault.",
+            "noDataSeedVault": "Ingen data kunde hittas i denna SeedVault.",
+            "signingBundle": "Signerar bundle",
+            "broadcastingBundle": "Sänder bundle",
+            "miningBundle": "Utvinner säker bundle",
+            "problemRestoringWallet": "Det uppstod ett nätverksfel när din plånbok skulle återställas. Försök igen.",
+            "minimumMigrationAmountSpentAddresses": "Minsta migreringsbelopp för varje förbrukad adress är 1 Mi. Kontrollera igen om ditt saldo inte ser rätt ut.",
+            "tooManyAddressesToMigrate": "Du har för många adresser med lågt saldo för att migrera. Kontrollera igen om ditt saldo inte ser rätt ut.",
+            "cannotMigrateAllYourFunds": "Vi kan inte migrera alla dina tillgångar eftersom vissa adresser är för låga i värde. Du kan fortsätta ändå. {value} kommer att gå förlorad.",
+            "error": "Det gick inte att migrera dina tillgångar. Försök igen."
+        },
+        "bundleMiningWarning": {
+            "title": "Varning",
+            "body1": "Du har IOTA på en eller flera förbrukade adresser.",
+            "body2": "Vi rekommenderar att du kör en automatiserad process för att säkra och överföra dessa IOTA på ett säkert sätt.",
+            "body3": "Om du stänger appen måste du starta om hela migreringen.",
+            "learn": "Läs mer om förbrukade adresser"
+        },
+        "secureSpentAddresses": {
+            "title": "Säkra förbrukade adresser",
+            "body1": "Firefly har upptäckt IOTA på {number, plural, one {# förbrukade adresser} other {# förbrukade adresser}}.",
+            "body2": "Vi rekommenderar att du kör en automatiserad process för att säkra och överföra dessa IOTA på ett säkert sätt.",
+            "error": "Du kan inte migrera förbrukade adresser med mindre än 1 Mi"
+        },
+        "securityCheckCompleted": {
+            "title": "Säkerhetskontroll slutförd",
+            "body1": "Vi har beräknat risknivån. Att köra denna process igen kan sänka din risknivå.",
+            "body2": "När du är nöjd med risknivåerna klickar du på fortsätt.",
+            "rerun": "Kör processen igen för valda adresser",
+            "continueMigration": "Fortsätt migrera"
+        },
+        "securingSpentAddresses": {
+            "title": "Säkrar förbrukade adresser...",
+            "body1": "Denna process tar {minutes, plural, one {1 minut} other {# minuter}}.",
+            "body2": "Din dator kommer att köras på full kapacitet, du kanske vill göra något annat medan du väntar på att detta ska slutföras."
+        },
+        "transferFragmentedFunds": {
+            "body1": "Firefly kommer nu att fortsätta migrera dina IOTA. Detta kan ta ett tag.",
+            "migrate": "Migrera tillgångar",
+            "transaction": "Transaktion {number}",
+            "rerun": "Försök igen"
         },
         "migrateFailed": {
             "title": "To do",
@@ -141,13 +194,15 @@
         },
         "balance": {
             "title": "Ditt saldo",
-            "body": "Är ditt saldo korrekt?"
+            "body": "Se till att ditt saldo är korrekt innan du fortsätter. Du kan kontrollera igen om det inte ser rätt ut.",
+            "error": "Minsta migreringsbelopp är 1 Mi. Kontrollera igen om ditt saldo inte ser rätt ut.",
+            "zeroBalance": "Försök kontrollera igen. Om du fortfarande inte hittar ditt saldo kan du ha angett din seed felaktigt."
         },
         "settings": {
             "settings": "Inställningar",
             "generalSettings": {
                 "title": "Allmänna inställningar",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Konfigurera appens utseende och andra allmänna inställningar"
             },
             "security": {
                 "title": "Säkerhet",
@@ -166,7 +221,7 @@
                 "description": "Ändra ditt profilnamn eller välj en avatar"
             },
             "sync": {
-                "title": "Synkronisera konton",
+                "title": "Synkronisera plånböcker",
                 "description": ""
             },
             "theme": {
@@ -187,15 +242,17 @@
             },
             "exportStronghold": {
                 "title": "Exportera säkerhetskopian",
-                "description": "Exportera till en Stronghold-fil - en komplett krypterad säkerhetskopia av din plånbok och senaste transaktionshistorik."
+                "description": "Exportera till en Stronghold-fil - en komplett krypterad säkerhetskopia av dina plånböcker och senaste transaktionshistorik"
             },
             "appLock": {
                 "title": "Automatiskt lås",
-                "description": "Tid som förflutit innan plånboken låser och loggar ut dig"
+                "description": "Inaktivitetstid innan din plånbok låses och du loggas ut",
+                "durationMinute": "{time, plural, one {1 minut} other {# minuter}}",
+                "durationHour": "{time, plural, one {1 timme} other {# timmar}}"
             },
             "changePassword": {
                 "title": "Ändra lösenord",
-                "description": "Ditt lösenord används för att säkra din plånbok. Du måste använda ett starkt lösenord för att skydda dina tillgångar."
+                "description": "Ditt lösenord används för att säkra dina plånböcker. Du måste använda ett starkt lösenord för att skydda dina tillgångar"
             },
             "changePincode": {
                 "title": "Ändra PIN-kod",
@@ -205,17 +262,17 @@
                 "confirmNewPincode": "Bekräfta ny PIN-kod",
                 "action": "Ändra PIN-kod"
             },
-            "resyncAccounts": {
-                "title": "Synkronisera om konton",
-                "description": "Startar en bakgrundsprocess för att se till att dina konton är uppdaterade."
+            "balanceFinder": {
+                "title": "Hitta saldo",
+                "description": "Utför en utökad sökning av dina adresser efter tokens"
             },
             "hiddenAccounts": {
-                "title": "Dolda konton",
-                "description": "Genom att välja detta alternativ visas konton som tidigare varit dolda."
+                "title": "Dolda plånböcker",
+                "description": "Genom att välja detta alternativ visas plånböcker som tidigare varit dolda"
             },
             "deleteProfile": {
                 "title": "Ta bort profil",
-                "description": "Tar bort hela din plånbok, profil och transaktionshistorik. Se till att du har en säkerhetskopia."
+                "description": "Tar bort hela din profil, dina plånböcker samt transaktionshistorik. Se till att du har en säkerhetskopia"
             },
             "deepLinks": {
                 "title": "Hyperlänkar",
@@ -231,7 +288,7 @@
             },
             "configureNodeList": {
                 "title": "Välj en nod",
-                "description": "Hantera listan över noder som din plånbok ansluter till.",
+                "description": "Hantera listan över IOTA-nätverksnoder som du ansluter till",
                 "primaryNode": "Primär nod",
                 "excludeNode": "Exkludera nod",
                 "includeNode": "Inkludera nod",
@@ -239,7 +296,7 @@
                 "setAsPrimary": "Ange som primär",
                 "removeNode": "Ta bort nod",
                 "includeOfficialNodeList": "Inkludera officiell nodlista",
-                "noNodes": "Det finns inga noder, val av nod kommer ske automatiskt istället."
+                "noNodes": "Det finns inga noder, val av nod kommer ske automatiskt istället"
             },
             "proofOfWork": {
                 "title": "Proof of work",
@@ -280,7 +337,7 @@
             },
             "reportAnIssue": {
                 "title": "Rapportera ett fel",
-                "description": "Rapportera ett fel till utvecklarna. Kolla igenom för att se till att det inte redan har rapporterats."
+                "description": "Rapportera ett fel till utvecklarna. Kolla igenom för att se till att det inte redan har rapporterats"
             }
         },
         "login": {
@@ -300,8 +357,8 @@
                 },
                 "strongholdStatus": {
                     "title": "Firefly status",
-                    "locked": "Stronghold låst",
-                    "unlocked": "Stronghold upplåst"
+                    "locked": "Låst",
+                    "unlocked": "Upplåst"
                 },
                 "strongholdBackup": {
                     "title": "Säkerhetskopia",
@@ -325,7 +382,7 @@
     "popups": {
         "password": {
             "title": "Lösenord krävs",
-            "subtitle": "Ange ditt lösenord för att låsa upp Stronghold",
+            "subtitle": "Ange ditt lösenord för att låsa upp dina plånböcker",
             "backup": "Ange ditt lösenord för att exportera en säkerhetskopia"
         },
         "qr": {
@@ -336,34 +393,35 @@
             "upToDateTitle": "Firefly är uppdaterad",
             "upToDateDescription": "Du kör den senaste och säkraste versionen av Firefly.",
             "updateAvailable": "Firefly-uppdatering tillgänglig",
-            "updateDetails": "Version {version} - {date}"
+            "updateDetails": "Version {version} - {date}",
+            "noAutoUpdate": "Automatisk uppdatering är inaktiverad i denna Windows-version, gå till https://firefly.iota.org för att ladda ner uppdateringen."
         },
         "backup": {
             "title": "Senaste säkerhetskopian: {date}",
             "lastBackup": "Du säkerhetskopierade senast {date}",
-            "backupDescription": "Det är viktigt att säkerhetskopiera regelbundet för att säkerställa att du har en kopia av dina konton och transaktionshistorik.",
+            "backupDescription": "Det är viktigt att säkerhetskopiera regelbundet för att säkerställa att du har en kopia av dina plånböcker och transaktionshistorik.",
             "backupWarning": "Om du förlorar din backup och återställningsfras förlorar du åtkomst till dina tillgångar.",
             "notBackedUp": "Inte säkerhetskopierad",
-            "notBackedUpDescription": "Du har inte säkerhetskopierat din Stronghold",
+            "notBackedUpDescription": "Du har inte säkerhetskopierat dina plånböcker",
             "saving": "Sparar..."
         },
         "deleteAccount": {
             "title": "Ta bort {name}?",
-            "body": "Detta konto har ingen transaktionshistorik. Det kan tas bort på ett säkert sätt.",
+            "body": "Denna plånbok har ingen transaktionshistorik. Du kan känna dig trygg med att radera den.",
             "typePassword": "Ange plånbokens lösenord för att bekräfta.",
-            "hideAccount": "Ta bort konto",
+            "hideAccount": "Ta bort plånbok",
             "errorTitle": "Det gick inte att ta bort {name}",
-            "errorBody1": "Du kan inte ta bort detta konto, du måste ha minst ett."
+            "errorBody1": "Du kan inte ta bort denna plånbok, du måste ha minst en."
         },
         "hideAccount": {
             "title": "Dölj {name}?",
-            "body": "Du hittar detta konto senare genom att aktivera \"Visa dolda konton\" i Avancerade inställningar.",
+            "body": "Du hittar denna plånbok senare genom att aktivera \"Visa dolda plånböcker\" i Avancerade inställningar.",
             "typePassword": "Ange plånbokens lösenord för att bekräfta.",
-            "hideAccount": "Dölj konto",
+            "hideAccount": "Dölj plånbok",
             "errorTitle": "Det går inte att dölja {name}",
-            "errorBody1": "För att dölja ett konto måste det ha 0 i saldo.",
-            "errorBody2": "Du har för närvarande {balance} kvar på detta konto. Vänligen flytta dessa IOTA till ett annat konto och försök igen.",
-            "errorBody3": "Du kan inte dölja detta konto, du måste ha minst ett."
+            "errorBody1": "För att dölja en plånbok måste den ha 0 i saldo.",
+            "errorBody2": "Du har för närvarande {balance} kvar i denna plånbok. Vänligen flytta dessa IOTA till en annan plånbok och försök igen.",
+            "errorBody3": "Du kan inte dölja denna plånbok, du måste ha minst en."
         },
         "addressHistory": {
             "title": "{name} adresshistorik",
@@ -403,19 +461,42 @@
         "transaction": {
             "title": "Bekräfta transaktion",
             "body": "Du håller på att skicka {amount} till"
+        },
+        "balanceFinder": {
+            "title": "Hitta saldo",
+            "body": "Utför en mer uttömmande sökning av adresser för att hitta saknade saldon. Detta kan ta ett tag.",
+            "totalWalletBalance": "Totalt saldo",
+            "typePassword": "Ange ditt lösenord för att tillåta sökning."
+        },
+        "riskFunds": {
+            "title": "Varning: Tillgångar i riskzonen vid migrering",
+            "body1": "Det rekommenderas starkt att du säkrar alla dina IOTA innan du fortsätter med migration. Dina pengar riskerar att stjälas om du inte säkrar dem.",
+            "body2": "Det rekommenderas att du kör processen igen för adresser med en risknivå på medel eller högre."
+        },
+        "missingBundle": {
+            "title": "Varning: Tillgångar i riskzonen vid migrering",
+            "body": "Du har IOTA på förbrukade adresser, men den information som behövdes för att säkra dem hittades inte. Detta kan hända om du gjorde transaktioner för länge sedan. Du kan fortsätta men {value} är i riskzonen vid migrering.",
+            "learnMore": "Läs mer om förbrukade adresser",
+            "proceed": "Jag förstår riskerna"
+        },
+        "snapshot": {
+            "title": "Pågående nätverksuppgradering",
+            "body": "Uppgraderingen av Chrysalis-nätverket har börjat.",
+            "bodyMigration": "Migrering är inaktiverad tills den är klar.",
+            "bodyFirefly": "Firefly är inaktiverad tills det är klart. Token-migrering kommer fortfarande att vara möjlig efteråt."
         }
     },
     "charts": {
-        "incomingMi": "Inkommande {value} Mi",
-        "outgoingMi": "Utgående {value} Mi",
+        "incomingMi": "Inkommande {value}",
+        "outgoingMi": "Utgående {value}",
         "portoflio": "Portfölj",
         "token": "Token",
-        "accountValue": "Kontovärde",
-        "accountActivity": "Kontoaktivitet",
-        "timeframe1Hour": "1 hour",
-        "timeframe1Day": "1 day",
-        "timeframe1Week": "1 week",
-        "timeframe1Month": "1 month"
+        "accountValue": "Plånboksvärde",
+        "accountActivity": "Plånboksaktivitet",
+        "timeframe1Hour": "1 timme",
+        "timeframe1Day": "1 dag",
+        "timeframe1Week": "1 vecka",
+        "timeframe1Month": "1 månad"
     },
     "actions": {
         "continue": "Fortsätt",
@@ -423,10 +504,13 @@
         "cancel": "Avbryt",
         "close": "Stäng",
         "dismiss": "Avfärda",
+        "proceedAnyway": "Fortsätt ändå",
         "save": "Spara",
         "importSeed": "Importera en befintlig seed",
-        "importWallet": "Importera befintlig plånbok",
+        "restoreWallet": "Migrera eller återställ en plånbok",
+        "restoreWalletDescription": "Migrera till Chrysalis eller återställ en befintlig plånbok",
         "createWallet": "Skapa ny plånbok",
+        "createWalletDescription": "Skapa en ny plånbok som körs på Chrysalis",
         "savePassword": "Spara lösenord",
         "useBiometric": "Använd biometrisk säkerhet",
         "setupPin": "Ställ in PIN-kod",
@@ -438,7 +522,7 @@
         "verifyRecoveryPhrase": "Verifiera återställningsfras",
         "revealRecoveryPhrase": "Visa återställningsfras",
         "importSeedvault": "Importera SeedVault",
-        "checkAgain": "Nej, kontrollera igen",
+        "checkAgain": "Kontrollera igen",
         "importFromFile": "Importera från en fil",
         "send": "Skicka",
         "receive": "Ta emot",
@@ -462,11 +546,11 @@
         "updateFirefly": "Uppdatera Firefly",
         "restartNow": "Starta om nu",
         "saveBackup": "Spara Stronghold säkerhetskopia",
-        "customizeAcount": "Hantera ditt konto",
+        "customizeAcount": "Anpassa plånbok",
         "viewAddressHistory": "Visa adresshistorik",
-        "hideAccount": "Dölj konto",
-        "showAccount": "Visa konto",
-        "deleteAccount": "Ta bort konto",
+        "hideAccount": "Dölj plånbok",
+        "showAccount": "Visa plånbok",
+        "deleteAccount": "Ta bort plånbok",
         "max": "Max",
         "addNode": "Lägg till nod",
         "updateNode": "Uppdatera nod",
@@ -482,21 +566,28 @@
         "copy": "Kopiera",
         "paste": "Klistra in",
         "selectAll": "Välj alla",
-        "addAccount": "Skapa ett konto",
+        "addAccount": "Lägg till plånbok",
         "checkForUpdates": "Sök efter uppdateringar",
         "reportAnIssue": "Rapportera ett fel",
         "clear": "Rensa",
         "hideDetails": "Dölj detaljer",
         "yes": "Ja",
         "no": "Nej",
+        "skip": "Hoppa över",
         "reset": "Återställ",
         "downloadRecoveryKit": "Spara återställningsblad",
         "skipBackup": "Hoppa över säkerhetskopiering",
         "finishSetup": "Slutför installationen",
         "readDocumentation": "Läs dokumentationen",
         "visitFaq": "Besök FAQ",
-        "showHiddenAccounts": "Visa dolda konton",
-        "confirm": "Bekräfta"
+        "viewStatus": "Visa status",
+        "showHiddenAccounts": "Visa dolda plånböcker",
+        "confirm": "Bekräfta",
+        "findBalances": "Hitta saldo",
+        "searchBalances": "Sök efter saldo",
+        "searchAgain": "Sök igen",
+        "searching": "Söker...",
+        "closeFirefly": "Stäng Firefly"
     },
     "general": {
         "password": "Lösenord",
@@ -507,18 +598,18 @@
         "yourSeed": "Din Seed",
         "recoveryPhrase": "Återställningsfras",
         "recentActivity": "Senaste aktivitet",
-        "sent": "Skickad",
+        "sent": "Skickat",
         "received": "Mottaget",
         "sendPayment": "Skicka IOTA",
         "moveFunds": "Intern överföring",
         "sendFunds": "Skicka IOTA",
         "sendToAddress": "Skicka till adress",
         "scanQrOrPaste": "Skanna en QR-kod eller klistra in en adress",
-        "moveFundsBetweenAccounts": "Flytta IOTA mellan dina konton",
+        "moveFundsBetweenAccounts": "Flytta IOTA mellan dina plånböcker",
         "sendTokensToAddress": "Skicka tokens till en adress",
-        "manageAccount": "Hantera konto",
-        "customizeAcount": "Hantera ditt konto",
-        "account": "Konto",
+        "manageAccount": "Hantera plånbok",
+        "customizeAcount": "Anpassa din plånbok",
+        "account": "Plånbok",
         "sendingToAddress": "Skickar till adress",
         "amount": "Belopp",
         "addAddress": "Lägg till adress",
@@ -531,10 +622,6 @@
         "yourAddress": "Din adress",
         "generateNewAddress": "Skapa ny adress",
         "copyAddress": "Kopiera adress",
-        "haveTextBackup": "Jag har en säkerhetskopia-fras",
-        "haveFileBackup": "Jag har en säkerhetskopia-fil",
-        "enterSeedOrPhrase": "Ange en återställningsfras eller seed",
-        "uploadSeedvaultOrStronghold": "Importera en Stronghold eller SeedVault-fil",
         "import": "Importera",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -543,24 +630,25 @@
         "lightTheme": "Ljust tema",
         "darkTheme": "Mörkt tema",
         "balance": "Saldo",
-        "accountBalance": "Kontosaldo",
+        "accountBalance": "Plånbokssaldo",
         "incoming": "Inkommande",
         "outgoing": "Utgående",
         "totalIn": "Totalt in",
         "totalOut": "Totalt ut",
-        "accounts": "Konton",
-        "myAccounts": "Mina konton",
+        "accounts": "Plånböcker",
+        "myAccounts": "Mina plånböcker",
         "automaticNodeSelection": "Automatiskt val av nod",
         "manualNodeSelection": "Manuellt val av nod",
         "profiles": "Profiler",
         "developerProfile": "Utvecklarprofil",
+        "developerProfileDescription": "Låter dig ansluta till testnät",
         "dev": "Utvecklare",
-        "createAccount": "Skapa ett konto",
-        "accountName": "Kontonamn",
+        "createAccount": "Skapa en plånbok",
+        "accountName": "Plånboksnamn",
         "latestTransactions": "Senaste transaktionerna",
         "transactions": "Transaktioner",
         "security": "Säkerhet",
-        "accountAddress": "Konto-adress",
+        "accountAddress": "Plånbokens adress",
         "nodes": "Noder",
         "wallet": "Plånbok",
         "help": "Hjälp",
@@ -572,25 +660,26 @@
         "status": "Status",
         "confirmed": "Bekräftad",
         "pending": "Väntar",
-        "noAccounts": "Du har inga konton, vänligen skapa ett.",
+        "noAccounts": "Du har inga plånböcker, vänligen skapa en.",
         "loadingAccounts": "Laddar, vänligen vänta...",
         "addProfile": "Lägg till profil",
         "noRecentHistory": "Ingen historik",
-        "transferSyncing": "Synkroniserar konto",
+        "firstSync": "Synkroniserar historik, detta kan ta ett tag...",
+        "transferSyncing": "Synkroniserar plånbok",
         "transferSelectingInputs": "Väljer inmatning",
         "transferRemainderAddress": "Genererar insättningsadress för resterande",
         "transferSigning": "Signerar transaktionen",
         "transferPow": "Utför PoW",
         "transferBroadcasting": "Sänder transaktion",
         "transferComplete": "Överföring slutförd",
-        "creatingAccount": "Skapar konto, vänligen vänta...",
-        "updatingAccount": "Uppdaterar konto, vänligen vänta...",
-        "accountSyncing": "Kontot synkroniseras",
-        "accountSyncComplete": "Kontosynkronisering slutförd",
+        "creatingAccount": "Skapar plånbok, vänligen vänta...",
+        "updatingAccount": "Uppdaterar plånbok, vänligen vänta...",
+        "accountSyncing": "Plånboken synkroniseras",
+        "accountSyncComplete": "Plånbokssynkronisering slutförd",
         "passwordUpdating": "Uppdaterar lösenord...",
         "passwordSuccess": "Lösenordet har uppdaterats",
         "passwordFailed": "Det gick inte att uppdatera lösenord",
-        "syncingAccounts": "Synkroniserar konton...",
+        "syncingAccounts": "Synkroniserar plånböcker...",
         "exportingStronghold": "Exporterar Stronghold...",
         "exportingStrongholdSuccess": "Exportering av Stronghold lyckades",
         "exportingStrongholdFailed": "Exportering av Stronghold misslyckades",
@@ -604,7 +693,17 @@
         "passwordStrength3": "Medel",
         "passwordStrength4": "Starkt",
         "creatingProfile": "Skapar profil, vänligen vänta...",
-        "accountRemoved": "Detta konto är dolt. Avtäck kontot för att utföra överföringar."
+        "fundMigration": "Token-migration",
+        "accountRemoved": "Denna plånbok är dold. Visa den igen för att utföra överföringar.",
+        "receivingTo": "Tar emot till {account}",
+        "sendingFrom": "Skickar från {account}",
+        "receivedTo": "Mottaget till {account}",
+        "sentFrom": "Skickat från {account}",
+        "receiving": "Tar emot",
+        "sending": "Skickar",
+        "legacyNetwork": "Ursprungliga nätverket",
+        "capsLock": "Caps Lock är på",
+        "version": "Version {version}"
     },
     "dates": {
         "today": "Idag",
@@ -627,7 +726,9 @@
         "calcMinutesRemaining": "Beräknar minuter kvar...",
         "minutesRemaining": "{minutes, plural, one {1 minut kvar} other {# minuter kvar}}",
         "copiedToClipboard": "Kopierad till urklipp",
-        "accountsSynchronized": "Kontosynkronisering slutförd"
+        "accountsSynchronized": "Plånbokssynkronisering slutförd",
+        "migratedAccountChrysalisDown": "Dina IOTA kommer att bli tillgängliga efter Chrysalis den 28 april",
+        "migratedAccountChrysalisUp": "Dina IOTA kommer inom kort att bli tillgängliga"
     },
     "error": {
         "profile": {
@@ -657,10 +758,10 @@
             "incorrect": "Din nuvarande PIN-kod är felaktig."
         },
         "account": {
-            "length": "Ditt kontonamn kan inte vara längre än {length, plural, one {1 tecken} other {# tecken}}.",
-            "empty": "Du måste använda ditt senaste konto innan du kan skapa ett nytt.",
-            "notEmpty": "Du måste överföra ditt saldo innan du kan ta bort detta konto.",
-            "duplicate": "Ett konto med detta namn finns redan.",
+            "length": "Ditt plånboksnamn kan inte vara längre än {length, plural, one {1 tecken} other {# tecken}}.",
+            "empty": "Du måste använda din senaste plånbok innan du skapar en ny.",
+            "notEmpty": "Du måste överföra ditt saldo innan du tar bort denna plånbok.",
+            "duplicate": "En plånbok med detta namn finns redan.",
             "tilde": "Ett profilnamn kan inte börja med '~' tecken.",
             "control": "Ett profilnamn får inte innehålla ett kontrolltecken (TAB, ny rad et cetera).",
             "startDot": "Ett profilnamn kan inte börja med en punkt.",
@@ -675,8 +776,8 @@
             "wrongAddressPrefix": "Adresser börjar med prefixet {prefix}.",
             "wrongAddressFormat": "Adressen är inte korrekt formaterad.",
             "invalidAddress": "Adressen är inte giltig.",
-            "insufficientFunds": "Detta konto har inte tillräckligt med tillgångar.",
-            "noToAccount": "Du har inte valt ett konto att skicka IOTA till.",
+            "insufficientFunds": "Denna plånbok har inte tillräckligt med tillgångar.",
+            "noToAccount": "Du har inte valt en plånbok att skicka IOTA till.",
             "sendingDust": "Du kan inte skicka mindre än 1 Mi.",
             "leavingDust": "Du kan inte lämna mindre än 1 Mi på din adress."
         },
@@ -699,6 +800,16 @@
             "phraseWordCount": "Det ska finnas 24 ord i din återställningsfras, just nu är det {length, plural, one {är 1} other {är #}}.",
             "phraseUnrecognizedWord": "Okänt ord \"{word}\" i din återställningsfras",
             "phraseCaseWord": "Ordet \"{word}\" ska vara skrivet med små bokstäver"
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "Risknivå: {risk}",
+            "veryHigh": "Mycket hög",
+            "high": "Hög",
+            "medium": "Medel",
+            "low": "Låg",
+            "veryLow": "Mycket låg"
         }
     }
 }

@@ -9,7 +9,7 @@
     import { dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
     import { pollMarketData } from 'shared/lib/marketData'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { cleanupInProgressProfiles } from 'shared/lib/profile'
+    import { cleanupEmptyProfiles, cleanupInProgressProfiles } from 'shared/lib/profile'
     import { dashboardRoute, initRouter, routerNext, routerPrevious, walletRoute } from 'shared/lib/router'
     import { AppRoute, Tabs } from 'shared/lib/typings/routes'
     import {
@@ -27,6 +27,7 @@
         Secure,
         Settings,
         Setup,
+        Profile,
         Splash,
         Welcome,
     } from 'shared/routes'
@@ -56,7 +57,7 @@
         setTimeout(() => {
             splash = false
             initRouter()
-        }, 2000)
+        }, 3000)
 
         await pollMarketData()
 
@@ -99,6 +100,7 @@
         })
 
         await cleanupInProgressProfiles()
+        await cleanupEmptyProfiles()
     })
 </script>
 
@@ -149,6 +151,12 @@
             }
         }
 
+        .scroll-quaternary {
+            &::-webkit-scrollbar-thumb {
+                @apply border-gray-100;
+            }
+        }
+
         &.scheme-dark {
             @apply bg-gray-900;
             :global(::-webkit-scrollbar-thumb) {
@@ -167,6 +175,18 @@
                     @apply border-gray-900;
                 }
             }
+
+            .scroll-quaternary {
+                &::-webkit-scrollbar-thumb {
+                    @apply border-gray-900;
+                }
+            }
+        }
+
+        .multiwrap-line2 {
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            display: -webkit-box;
         }
     }
     @layer utilities {
@@ -205,6 +225,9 @@
         <Route route={AppRoute.Appearance}>
             <Appearance on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
         </Route>
+        <Route route={AppRoute.Profile}>
+            <Profile on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        </Route>
         <Route route={AppRoute.Setup}>
             <Setup on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
         </Route>
@@ -227,7 +250,7 @@
             <Balance on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
         </Route>
         <Route route={AppRoute.Migrate}>
-            <Migrate on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
+            <Migrate on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} {goto} />
         </Route>
         <Route route={AppRoute.Congratulations}>
             <Congratulations on:next={routerNext} mobile={$mobile} locale={$_} {goto} />

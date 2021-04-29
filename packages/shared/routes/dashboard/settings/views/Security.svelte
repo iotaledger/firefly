@@ -10,21 +10,17 @@
     import { get } from 'svelte/store'
     import zxcvbn from 'zxcvbn'
 
-    function assignTimeoutOptionLabel(timeInMinutes) {
-        let label = ''
+    export let locale
 
+    function assignTimeoutOptionLabel(timeInMinutes) {
         if (timeInMinutes >= 60) {
-            label = `${timeInMinutes / 60} hour`
+            return locale('views.settings.appLock.durationHour', { values: { time: timeInMinutes / 60 } })
         }
 
-        label = `${timeInMinutes} minute`
-
-        return label.includes('1') ? label : `${label}s`
+        return locale('views.settings.appLock.durationMinute', { values: { time: timeInMinutes } })
     }
 
     const lockScreenTimeoutOptions = [1, 5, 10, 30, 60].map((time) => ({ value: time, label: assignTimeoutOptionLabel(time) }))
-
-    export let locale
 
     let exportStrongholdChecked
     let currentPassword = ''

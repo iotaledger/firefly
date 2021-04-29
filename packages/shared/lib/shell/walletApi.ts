@@ -39,6 +39,7 @@ const eventsApiToResponseTypeMap = {
     onBroadcast: ResponseTypes.Broadcast,
     onStrongholdStatusChange: ResponseTypes.StrongholdStatusChange,
     onTransferProgress: ResponseTypes.TransferProgress,
+    onMigrationProgress: ResponseTypes.MigrationProgress,
 }
 
 const apiToResponseTypeMap = {
@@ -70,6 +71,7 @@ const apiToResponseTypeMap = {
     lockStronghold: ResponseTypes.LockedStronghold,
     changeStrongholdPassword: ResponseTypes.StrongholdPasswordChanged,
     setStrongholdPasswordClearInterval: ResponseTypes.StrongholdPasswordClearIntervalSet,
+    getLegacySeedChecksum: ResponseTypes.LegacySeedChecksum,
     getNodeInfo: ResponseTypes.NodeInfo,
     ...eventsApiToResponseTypeMap
 }
@@ -221,6 +223,7 @@ const storeCallbacks = (__id: string, type: ResponseTypes, callbacks?: Callbacks
  */
 const handleError = (type: ErrorType | ValidatorErrorTypes, error: string): { type: ErrorType | ValidatorErrorTypes, error: string } => {
     const newError = { type, message: error, time: Date.now() };
+
     logError(newError)
 
     // TODO: Add full type list to remove this temporary fix
@@ -233,6 +236,9 @@ const handleError = (type: ErrorType | ValidatorErrorTypes, error: string): { ty
         }
         if (error.includes('No synced node')) {
             return ('error.node.noSynced')
+        }
+        if (error.includes('dns error')) {
+            return ('error.node.chrysalisNodeInactive')
         }
 
         return getErrorMessage(type)

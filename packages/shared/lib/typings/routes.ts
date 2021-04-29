@@ -2,6 +2,7 @@ export enum AppRoute {
     Welcome = 'welcome',
     Legal = 'legal',
     Appearance = 'appearance',
+    Profile = 'profile',
     Setup = 'setup',
     Secure = 'secure',
     Password = 'password',
@@ -86,8 +87,8 @@ export enum SecuritySettings {
 export enum AdvancedSettings {
     NodeSettings = 'nodeSettings',
     ProofOfWork = 'proofOfWork',
-    DeveloperMode = 'developerMode',
-    DeepLinks = 'deepLinks',
+    //DeveloperMode = 'developerMode',
+    //DeepLinks = 'deepLinks',
     BalanceFinder = 'balanceFinder',
     HiddenAccounts = 'hiddenAccounts',
     ErrorLog = 'errorLog',
@@ -97,14 +98,14 @@ export enum AdvancedSettings {
 }
 
 export enum AdvancedSettingsNoProfile {
-    DeveloperMode = 'developerMode',
-    DeepLinks = 'deepLinks',
+    //DeveloperMode = 'developerMode',
+    //DeepLinks = 'deepLinks',
     ErrorLog = 'errorLog',
     Diagnostics = 'diagnostics',
 }
 
 export enum HelpAndInfo {
-    Troubleshoot = 'troubleshoot',
+    //Troubleshoot = 'troubleshoot',
     Documentation = 'documentation',
     FAQ = 'faq',
     Discord = 'discord',

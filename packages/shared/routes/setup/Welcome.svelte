@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Dropdown, Illustration, Logo, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, Button, Dropdown, Logo, OnboardingLayout, Text } from 'shared/components'
     import { appSettings } from 'shared/lib/appSettings'
     import { locales, setLanguage, _ } from 'shared/lib/i18n'
     import { createEventDispatcher } from 'svelte'
@@ -37,7 +37,7 @@
             <Button onClick={() => handleContinueClick()} classes="w-full">{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            <Illustration illustration="welcome-desktop" width="100%" height="auto" />
+            <Animation animation="welcome-desktop" />
         </div>
     </OnboardingLayout>
 {/if}

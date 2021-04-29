@@ -1,11 +1,11 @@
 <script lang="typescript">
-    import { Logo, Text } from 'shared/components'
+    import { Animation, Text } from 'shared/components'
 
     export let statusMessage = ''
 </script>
 
 <div class={"flex flex-col justify-center align-center items-center"}>
-    <Logo width="50%" classes="pt-8" logo="logo-firefly-full" />
+    <Animation classes='h-64 w-64' animation="loading-desktop" loop={true} renderer="canvas" />
     {#if statusMessage}
         <Text type="p" classes="pt-8">{statusMessage}</Text>
     {/if}

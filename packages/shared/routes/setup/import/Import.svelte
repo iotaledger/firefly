@@ -11,6 +11,9 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
     import { mnemonic } from 'shared/lib/app'
+    import { Electron } from 'shared/lib/electron'
+    import { getMigrationData } from 'shared/lib/migration'
+    import { showAppNotification } from 'shared/lib/notifications'
     import { newProfile } from 'shared/lib/profile'
     import { asyncRestoreBackup } from 'shared/lib/wallet'
     import { createEventDispatcher, setContext } from 'svelte'
@@ -19,6 +22,8 @@
 
     export let locale
     export let mobile
+
+    let isGettingMigrationData = false
 
     enum ImportState {
         Init = 'init',
@@ -58,7 +63,21 @@
             case ImportState.TextImport:
                 const { input } = params
                 if (get(importType) === ImportType.Seed) {
-                    dispatch('next', { importType: get(importType) })
+                    isGettingMigrationData = true
+                    getMigrationData(input)
+                        .then(() => {
+                            isGettingMigrationData = false
+                            dispatch('next', { importType: get(importType) })
+                        })
+                        .catch((err) => {
+                            if (!err?.snapshot) {
+                                showAppNotification({
+                                    type: 'error',
+                                    message: locale('views.migrate.problemRestoringWallet'),
+                                })
+                            }
+                            isGettingMigrationData = false
+                        })
                 } else if (get(importType) === ImportType.Mnemonic) {
                     mnemonic.set(input.split(' '))
                     nextState = ImportState.Success
@@ -83,14 +102,40 @@
                 const { password } = params
                 busy = true
 
+                error = ''
+
                 try {
-                    await asyncRestoreBackup(importFilePath, password)
-                    $newProfile.lastStrongholdBackupTime = new Date()
+                    if (get(importType) === ImportType.SeedVault) {
+                        // Instead of using "busy", we are deliberately using "isGettingMigrationData"
+                        // We do not want to display the spinner in FileImport if stronghold is being imported.
+                        isGettingMigrationData = true
+
+                        const legacySeed = await Electron.importLegacySeed(importFile, password)
+
+                        if (legacySeed) {
+                            await getMigrationData(legacySeed)
+                        }
+
+                        isGettingMigrationData = false
+                    } else {
+                        await asyncRestoreBackup(importFilePath, password)
+                        $newProfile.lastStrongholdBackupTime = new Date()
+                    }
+
                     nextState = ImportState.Success
                 } catch (err) {
-                    error = locale(err.error)
+                    if (!err?.snapshot) {
+                        if (err && err.name === 'KdbxError' && err.code === 'InvalidKey') {
+                            error = locale('views.migrate.incorrectSeedVaultPassword')
+                        } else if (err && err.name === 'KdbxError' && err.code === 'FileCorrupt') {
+                            error = locale('views.migrate.noDataSeedVault')
+                        } else {
+                            error = locale(err.error)
+                        }
+                    }
                 } finally {
                     busy = false
+                    isGettingMigrationData = false
                 }
                 break
 
@@ -120,7 +165,7 @@
     </Transition>
 {:else if state === ImportState.TextImport}
     <Transition>
-        <TextImport on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <TextImport {isGettingMigrationData} on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
 {:else if state === ImportState.FileImport}
     <Transition>
@@ -128,7 +173,15 @@
     </Transition>
 {:else if state === ImportState.BackupPassword}
     <Transition>
-        <BackupPassword on:next={_next} on:previous={_previous} {error} {locale} {mobile} {busy} />
+        <BackupPassword
+            on:next={_next}
+            on:previous={_previous}
+            {isGettingMigrationData}
+            {importType}
+            {error}
+            {locale}
+            {mobile}
+            {busy} />
     </Transition>
 {:else if state === ImportState.Success}
     <Transition>

@@ -1,6 +1,6 @@
 <script lang="typescript">
+    import { Animation, Button, Dropzone, OnboardingLayout, Text } from 'shared/components'
     import { createEventDispatcher } from 'svelte'
-    import { OnboardingLayout, Illustration, Text, Dropzone, Button } from 'shared/components'
 
     export let locale
     export let mobile
@@ -46,18 +46,12 @@
                 {locale}
                 extentionsLabel={locale('actions.importExtentions')}
                 allowedExtensions={['kdbx', 'stronghold']} />
-            {#if isSeedVault}
-                <!-- TODO: remove this when enabling seed support -->
-                <Text type="p" error secondary classes="mt-4">Seed Vaults are not currently supported.</Text>
-            {/if}
         </div>
         <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-            <Button classes="flex-1" disabled={!file || isSeedVault} onClick={() => handleContinueClick()}>
-                {locale('actions.continue')}
-            </Button>
+            <Button classes="flex-1" disabled={!file} onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            <Illustration illustration="import-from-file-desktop" width="100%" height="auto" />
+            <Animation animation="import-from-file-desktop" />
         </div>
     </OnboardingLayout>
 {/if}

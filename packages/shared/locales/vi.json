@@ -2,127 +2,131 @@
     "views": {
         "onboarding1": {
             "title": "Gửi, Nhận và Lưu giữ IOTA của bạn",
-            "body": "Firefly là ví chính thức của IOTA."
+            "body": "Firefly là phần mềm ví chính thức của IOTA."
         },
         "legal": {
             "title": "Chính sách Riêng tư & Điều khoản Dịch vụ",
             "body": "Vui lòng xem lại Chính sách Bảo mật và Điều khoản Dịch vụ.",
-            "privacyPolicy": {
-                "title": "Chính sách Bảo mật",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
-            "termsOfService": {
-                "title": "Điều khoản Dịch vụ",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
             "checkbox": "Tôi đã đọc và tôi chấp nhận Chính sách Riêng tư & Điều khoản Dịch vụ"
         },
         "appearance": {
             "title": "Giao diện",
-            "body": "Chọn chủ đề cho ví của bạn."
+            "body": "Chọn chủ đề cho ứng dụng của bạn."
         },
-        "setup": {
-            "title": "Thiết lập Ví của bạn",
+        "profile": {
+            "title": "Tạo một hồ sơ",
             "body1": "Bạn có thể tạo nhiều hồ sơ người dùng để giữ các mã token của bạn riêng biệt và cải thiện quyền riêng tư.",
             "body2": "Bây giờ, hãy bắt đầu với tên hồ sơ đầu tiên của bạn. Bạn có thể thêm nhiều hồ sơ sau này.",
             "profileName": "Tên hồ sơ"
         },
+        "setup": {
+            "title": "Thiết lập một ví",
+            "chrysalisTitle": "Cập nhật mạng lưới Chrysalis",
+            "chrysalisBody": "Từ ngày 21/4, người dùng có thể di chuyển token của họ sang mạng lưới mới Chrysalis. Chúng tôi khuyên bạn hãy di chuyển token của bạn sớm nhất có thể.",
+            "learnMore": "Tìm hiểu về quá trình di chuyển token"
+        },
         "secure": {
             "title": "Bảo mật ví của bạn",
             "body1": "Lưu và in mẫu PDF của Bộ Khôi phục.",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallet."
+            "body2": "Nếu bạn đã điền vào Bộ Khôi phục và cất giữ nó một cách an toàn, bạn sẽ luôn luôn có thể khôi phục các ví của bạn."
         },
         "password": {
             "title": "Tạo mật khẩu",
-            "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
-            "body2": "It is recommended that you write down your password in your Recovery Kit."
+            "body1": "Bạn cần một mật khẩu mạnh để bảo vệ tiền của mình. Sử dụng kết hợp giữa các từ, và tránh dùng những cụm từ phổ biến, tên hoặc ngày tháng.",
+            "body2": "Nên viết mật khẩu của bạn xuống trong Bộ Khôi phục."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body2": "Keep your PIN safe!"
+            "body1": "Thiết lập mật mã cá nhân (PIN) để chắc chắn rằng chỉ có bạn mới có thể vào hồ sơ của mình.",
+            "body2": "Giữ mã PIN của bạn an toàn!"
         },
         "pin": {
             "title": "Thiết lập mã PIN",
-            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
-            "body2": "Use numbers only"
+            "body1": "Nhập mã PIN có 6 kí tự vào ô bên dưới. Bạn sẽ được yêu cầu nhập mã PIN để có thể truy cập vào hồ sơ của mình.",
+            "body2": "Chỉ sử dụng số"
         },
         "confirmPin": {
             "title": "Xác thực mã PIN của bạn",
-            "body1": "Your PIN keeps your balance and transactions private.",
-            "body2": "Re-enter your PIN code to proceed. "
+            "body1": "Mã PIN của bạn giúp giữ số dư và các giao dịch trong tài khoản của bạn một cách riêng tư.",
+            "body2": "Nhập lại mã PIN của bạn để tiếp tục. "
         },
         "backup": {
             "title": "Sao lưu ví của bạn",
-            "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
-            "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
+            "body1": "Bây giờ bạn sẽ được xem cụm từ khôi phục. Viết chúng xuống trong Bộ Khôi phục của bạn.",
+            "body2": "Không chia sẻ cụm từ khôi phục của bạn với bất kỳ ai. Cụm từ này được sử dụng để truy cập vào token của bạn từ bất kỳ nơi nào.",
             "body3": "Nếu bạn làm mất cụm từ khôi phục tài khoản ví, bạn có thể sẽ bị mất tiền của mình."
         },
         "recoveryPhrase": {
             "title": "Cụm từ hồi phục tài khoản ví",
-            "body1": "In your Recovery Kit, write down the words in the exact order shown.",
-            "body2": "Keep this private and safely stored.",
-            "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
+            "body1": "Trong Bộ Khôi phục, viết các từ xuống chính xác theo đúng thứ tự của chúng.",
+            "body2": "Cất giữ cụm từ này một cách riêng tư và an toàn.",
+            "body3": "Rất là quan trọng để viết tay các sao lưu xuống. Máy tính đôi khi bị hỏng hóc và các tập tin có thể bị hư hại.",
             "revealRecoveryPhrase": "Hiển thị cụm từ khôi phục ví",
             "hideRecoveryPhrase": "Ẩn cụm từ khôi phục ví"
         },
         "verifyRecoveryPhrase": {
             "title": "Xác thực cụm từ phục hồi tài khoản ví",
-            "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
-            "word": "Word",
-            "verified": "Recovery phrase verified",
+            "body": "Hãy kiểm tra lại cụm từ đã được viết xuống một cách chính xác. Chọn các từ theo đúng thứ tự của chúng.",
+            "word": "Từ",
+            "verified": "Cụm từ khôi phục đã được xác thực",
             "verifiedBody": "Remember to keep it private and safely stored."
         },
         "backupWallet": {
             "title": "Sao lưu vào tập tin Stronghold",
-            "body1": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup.",
+            "body1": "Enter your password to backup your wallets to a Stronghold file. Your password is used to encrypt the backup.",
             "body2": "Reasons why digital backups are important:",
-            "reason1": "Easily recover your wallet without typing in your recovery phrase",
-            "reason2": "Import your wallet to other devices",
+            "reason1": "Easily recover your wallets without typing in your recovery phrase",
+            "reason2": "Import your wallets on other devices",
             "reason3": "Recover your full transaction history"
         },
         "recoveryPhraseSaved": {
             "title": "Sao lưu thành công",
-            "body": "Bạn vừa sao lưu tài khoản ví của mình vào Stronghold."
+            "body": "You have backed up your wallets to a Stronghold."
         },
         "congratulations": {
             "title": "Wallet setup completed",
-            "body": "Your new wallet is ready to use."
+            "body": "Your new wallet is ready to use.",
+            "fundsMigrated": "Funds migrated",
+            "success": "You have successfully migrated your funds to the new network",
+            "exportMigration": "Export migration log and finish setup"
         },
         "import": {
-            "title": "Nhập tài khoản vào ví",
-            "body": "Nếu bạn có một cụm từ để phục hồi tài khoản ví hoặc một sao lưu Stronghold, bạn có thể nhập nó ở đây."
+            "title": "Recover or migrate funds",
+            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
+            "importSeed": "I have an 81 character seed",
+            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
+            "importMnemonic": "I have a Firefly recovery phrase",
+            "importMnemonicDescription": "Enter your recovery phrase to recover your wallets",
+            "importFile": "I have a file backup",
+            "importFileDescription": "Upload a Seedvault or Stronghold file"
         },
         "importFromText": {
-            "title": "Khôi phục tài khoản ví của bạn với cụm từ hoặc với seed",
-            "body1": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body2": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
-            "body3": "Nhập vào seed hoặc cụm từ khôi phục của bạn",
+            "seed": {
+                "title": "Type your seed to commence migration",
+                "body": "A seed consists of 81 characters. This is used to recover from the older Trinity app.",
+                "enter": "Enter your seed"
+            },
+            "mnemonic": {
+                "title": "Type your recovery phrase",
+                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly wallets.",
+                "enter": "Enter your secret recovery phrase"
+            },
             "seedDetected": "81 character seed detected",
-            "phraseDetected": "24 word recovery phrase detected"
+            "phraseDetected": "24 word recovery phrase detected",
+            "checksum": "Checksum"
         },
         "importFromFile": {
-            "title": "Restore your wallet using a backup file",
-            "body": "Nhập vào một file sao lưu để khôi phục tài khoản ví của bạn. Sao lưu cũng có thể là một tập tin Stronghold (.stronghold) hoặc một tập tin Trinity SeedVault (.kdbx)."
+            "title": "Restore your wallets using a backup file",
+            "body": "Import a backup file to restore your wallets. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
         },
         "importBackupPassword": {
-            "title": "Khôi phục tài khoản ví của bạn từ SeedVault hoặc Stronghold",
+            "title": "Restore your wallets from a SeedVault or Stronghold",
             "body1": "Vui lòng nhập mật khẩu sao lưu của bạn.",
             "body2": "Đây là mật khẩu bạn đã đặt khi tạo bản sao lưu lần đầu tiên."
         },
         "importSuccess": {
             "title": "Bạn đã khôi phục sao lưu của mình thành công",
-            "body": "Bây giờ bạn có thể thiết lập một tài khoản ví mới.",
+            "body": "You can now set up your new profile.",
             "seedvaultTitle": "Successfully imported",
             "seedvaultBody": "Your password is correct, you can now continue.",
             "strongholdTitle": "Successfully imported",
@@ -130,10 +134,59 @@
         },
         "migrate": {
             "title": "Chuyền tiền của bạn",
-            "body1": "Đây là một tiến trình tự động để chuyển tiền của bạn sang ví mới. Chúng tôi sẽ kiểm tra các địa chỉ đã sử dụng làm suy yếu bảo mật của bạn.",
+            "body1": "This is an automated process to transfer your funds to your new wallet.",
             "body2": "Nó có thể mất một khoảng thời gian. Không tắt thiết bị của bạn trong quá trình chuyển tiền.",
             "existing": "Ví cũ của bạn",
-            "new": "Ví mới của bạn"
+            "new": "Ví mới của bạn",
+            "learn": "Tìm hiểu về quá trình di chuyển token",
+            "beginMigration": "Begin Migration",
+            "migrating": "Migrating funds...",
+            "migrated": "{balance} migrated",
+            "migrationFailed": "Migration Failed",
+            "noAddressesForMigration": "Please select the addresses you wish to secure.",
+            "restoringWallet": "Restoring wallet...",
+            "findingBalance": "Finding balance...",
+            "incorrectSeedVaultPassword": "Incorrect SeedVault password.",
+            "noDataSeedVault": "No data could be found in the SeedVault.",
+            "signingBundle": "Signing bundle",
+            "broadcastingBundle": "Broadcasting bundle",
+            "miningBundle": "Mining bundle",
+            "problemRestoringWallet": "There was a network error restoring your wallet. Please try again.",
+            "minimumMigrationAmountSpentAddresses": "The minimum migration amount for each spent address is 1 Mi. Check again if your balance doesn't look right.",
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
+            "cannotMigrateAllYourFunds": "We cannot migrate all of your funds because some addresses are too low in value. You can proceed anyway. {value} will be lost.",
+            "error": "There was an error migrating your funds. Please try again."
+        },
+        "bundleMiningWarning": {
+            "title": "Warning",
+            "body1": "You have funds on one or more spent addresses.",
+            "body2": "We recommend you run an automated process to help secure and transfer these funds safely.",
+            "body3": "If you close the app you will need to restart the whole migration.",
+            "learn": "Learn about spent addresses"
+        },
+        "secureSpentAddresses": {
+            "title": "Secure spent addresses",
+            "body1": "You have funds detected on {number, plural, one {# spent address} other {# spent addresses}}.",
+            "body2": "We recommend you run an automated process to help secure and transfer your funds safely.",
+            "error": "You can’t migrate spent addresses with less than 1 Mi"
+        },
+        "securityCheckCompleted": {
+            "title": "Security check completed",
+            "body1": "We have calculated the security risk level. Running this process again may lower your risk level.",
+            "body2": "When you are happy with the risk level(s) press continue.",
+            "rerun": "Rerun process for selected addresses",
+            "continueMigration": "Continue migration"
+        },
+        "securingSpentAddresses": {
+            "title": "Securing spent addresses...",
+            "body1": "This process will take {minutes, plural, one {1 minute} other {# minutes}}.",
+            "body2": "Your computer will run at full capacity, you may wish to do something else while you wait for this to complete."
+        },
+        "transferFragmentedFunds": {
+            "body1": "Firefly will now proceed to migrate your funds. This may take a while.",
+            "migrate": "Migrate funds",
+            "transaction": "Transaction {number}",
+            "rerun": "Thử lại"
         },
         "migrateFailed": {
             "title": "To do",
@@ -141,13 +194,15 @@
         },
         "balance": {
             "title": "Số dư của bạn",
-            "body": "Số dư tài khoản của bạn có chính xác không?"
+            "body": "Make sure your balance is correct before continuing. You can check again if things don't look correct.",
+            "error": "The minimum migration amount is 1 Mi. Check again if your balance doesn't look right.",
+            "zeroBalance": "Try checking again. If you still can't find your balance you might have entered your seed incorrectly."
         },
         "settings": {
             "settings": "Cấu hình",
             "generalSettings": {
                 "title": "Thiết lập chung",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Configure your app's appearance and other general settings"
             },
             "security": {
                 "title": "Bảo mật",
@@ -166,7 +221,7 @@
                 "description": "Change your profile name or set an avatar"
             },
             "sync": {
-                "title": "Đồng bộ tài khoản",
+                "title": "Sync wallets",
                 "description": ""
             },
             "theme": {
@@ -187,15 +242,17 @@
             },
             "exportStronghold": {
                 "title": "Export Backup",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallet and latest transaction history."
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
             },
             "appLock": {
                 "title": "Automatic Lock",
-                "description": "Time elapsed before your wallet locks and logs you out"
+                "description": "Inactivity time before your wallets lock and you are logged out",
+                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
+                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
             },
             "changePassword": {
                 "title": "Đổi mật khẩu",
-                "description": "Your password is used to secure your wallet. You must use a strong password to protect your funds."
+                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
             },
             "changePincode": {
                 "title": "Thay đổi mã PIN",
@@ -205,17 +262,17 @@
                 "confirmNewPincode": "Xác nhận mã PIN mới",
                 "action": "Thay đổi mã PIN"
             },
-            "resyncAccounts": {
-                "title": "Đồng bộ lại các tài khoản",
-                "description": "Starts a background task to make sure your accounts are up to date."
+            "balanceFinder": {
+                "title": "Balance finder",
+                "description": "Perform an extended search of your addresses for tokens"
             },
             "hiddenAccounts": {
-                "title": "Hidden accounts",
-                "description": "Selecting this options will show accounts that were previously hidden."
+                "title": "Hidden wallets",
+                "description": "Selecting this options will show wallets that were previously hidden"
             },
             "deleteProfile": {
                 "title": "Delete profile",
-                "description": "Deletes your entire wallet, profile and transaction history. Make sure you have a backup."
+                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
             },
             "deepLinks": {
                 "title": "Các liên kết sâu",
@@ -231,7 +288,7 @@
             },
             "configureNodeList": {
                 "title": "Select a node",
-                "description": "Manage the list of nodes your wallet connects to.",
+                "description": "Manage the list of IOTA network nodes you connect to",
                 "primaryNode": "Primary node",
                 "excludeNode": "Exclude node",
                 "includeNode": "Include node",
@@ -239,7 +296,7 @@
                 "setAsPrimary": "Set as primary",
                 "removeNode": "Remove node",
                 "includeOfficialNodeList": "Include official node list",
-                "noNodes": "There are no nodes, automatic selection will be used instead."
+                "noNodes": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "Bằng chứng công việc (PoW)",
@@ -280,7 +337,7 @@
             },
             "reportAnIssue": {
                 "title": "Report an issue",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported."
+                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
             }
         },
         "login": {
@@ -300,8 +357,8 @@
                 },
                 "strongholdStatus": {
                     "title": "Wallet Status",
-                    "locked": "Stronghold locked",
-                    "unlocked": "Stronghold unlocked"
+                    "locked": "Locked",
+                    "unlocked": "Unlocked"
                 },
                 "strongholdBackup": {
                     "title": "Wallet Backup",
@@ -325,7 +382,7 @@
     "popups": {
         "password": {
             "title": "Yêu cầu mật khẩu",
-            "subtitle": "Please enter your password to unlock Stronghold",
+            "subtitle": "Please enter your password to unlock your wallets",
             "backup": "Please enter your password to export a backup"
         },
         "qr": {
@@ -336,34 +393,35 @@
             "upToDateTitle": "Firefly đã cập nhật mới nhất",
             "upToDateDescription": "Bạn đang chạy trên phiên bản Firefly mới nhất và an toàn nhất.",
             "updateAvailable": "Phiên bản cập nhật Firefly đang hiện hữu",
-            "updateDetails": "Phiên bản {version} - {date}"
+            "updateDetails": "Phiên bản {version} - {date}",
+            "noAutoUpdate": "Auto-update is disabled in this Windows version, please go to https://firefly.iota.org to download the update."
         },
         "backup": {
             "title": "Bản sao lưu mới nhất: {date}",
             "lastBackup": "Bạn đã thực hiện sau lưu lần cuối vào ngày {date}",
-            "backupDescription": "Điểm quan trọng là cần sao lưu thường xuyên để chắc chắn rằng bạn có lưu giữ một bản sao các tài khoản của mình và lịch sử giao dịch.",
+            "backupDescription": "It is important to back up regularly to ensure you have a copy of your wallets and transaction history.",
             "backupWarning": "Nếu bạn mất bản sao lưu của mình và cụm từ khôi phục bạn sẽ mất quyền truy cập vào các tài khoản của mình.",
             "notBackedUp": "Chưa được sao lưu",
-            "notBackedUpDescription": "Bạn đã không thực hiện sao lưu Stronghold của bạn",
+            "notBackedUpDescription": "You have not backed up your wallets",
             "saving": "Saving..."
         },
         "deleteAccount": {
             "title": "Delete {name}?",
-            "body": "This account has no transaction history. It can safely be deleted.",
+            "body": "This wallet has no transaction history. It can safely be deleted.",
             "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Delete account",
+            "hideAccount": "Delete wallet",
             "errorTitle": "Unable to delete {name}",
-            "errorBody1": "You cannot delete this account, you must have at least one."
+            "errorBody1": "You cannot delete this wallet, you must have at least one."
         },
         "hideAccount": {
             "title": "Hide {name}?",
-            "body": "You can find this account later by enabling \"Show hidden accounts\" in Advanced Settings.",
+            "body": "You can find this wallet later by enabling \"Show hidden wallets\" in Advanced Settings.",
             "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Hide account",
+            "hideAccount": "Hide wallet",
             "errorTitle": "Unable to hide {name}",
-            "errorBody1": "To hide an account it must have 0 balance.",
-            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
-            "errorBody3": "You cannot hide this account, you must have at least one."
+            "errorBody1": "To hide a wallet it must have 0 balance.",
+            "errorBody2": "You currently have {balance} remaining on this wallet. Please move these funds to a different wallet and try again.",
+            "errorBody3": "You cannot hide this wallet, you must have at least one."
         },
         "addressHistory": {
             "title": "{name} address history",
@@ -403,15 +461,38 @@
         "transaction": {
             "title": "Confirm transaction",
             "body": "You’re about to send {amount} to"
+        },
+        "balanceFinder": {
+            "title": "Balance finder",
+            "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
+            "totalWalletBalance": "Total balance",
+            "typePassword": "Type your password to allow searching."
+        },
+        "riskFunds": {
+            "title": "Warning: funds at risk during migration",
+            "body1": "It is strongly recommended that you secure all your funds before proceeding with migration. Your funds are at risk of theft if you do not secure them.",
+            "body2": "It is recommended that you rerun the process for addresses with a medium risk level or above."
+        },
+        "missingBundle": {
+            "title": "Warning: funds at risk during migration",
+            "body": "You have funds on spent addresses, but the information needed to secure them was not found. This can happen if you made transactions a long time ago. You can proceed but {value} are at risk during migration.",
+            "learnMore": "Learn more about spent addresses",
+            "proceed": "I understand the risk"
+        },
+        "snapshot": {
+            "title": "Ongoing network upgrade",
+            "body": "The Chrysalis network upgrade has begun.",
+            "bodyMigration": "Migration is disabled until it is complete.",
+            "bodyFirefly": "Firefly is disabled until it is complete. Token migration will still be possible afterwards."
         }
     },
     "charts": {
-        "incomingMi": "Incoming {value} Mi",
-        "outgoingMi": "Outgoing {value} Mi",
+        "incomingMi": "Incoming {value}",
+        "outgoingMi": "Outgoing {value}",
         "portoflio": "Portfolio",
         "token": "Token",
-        "accountValue": "Account Value",
-        "accountActivity": "Account Activity",
+        "accountValue": "Wallet Value",
+        "accountActivity": "Wallet Activity",
         "timeframe1Hour": "1 hour",
         "timeframe1Day": "1 day",
         "timeframe1Week": "1 week",
@@ -423,10 +504,13 @@
         "cancel": "Hủy",
         "close": "Đóng",
         "dismiss": "Bỏ qua",
+        "proceedAnyway": "Proceed anyway",
         "save": "Lưu",
         "importSeed": "Nhập vào một seed hiện có",
-        "importWallet": "Nhập vào một ví hiện có",
+        "restoreWallet": "Migrate or restore a wallet",
+        "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
         "createWallet": "Khởi tạo ví mới",
+        "createWalletDescription": "Create a fresh wallet running on Chrysalis",
         "savePassword": "Lưu mật khẩu",
         "useBiometric": "Sử dụng bảo mật sinh trắc học",
         "setupPin": "Thiết lập mã PIN",
@@ -438,7 +522,7 @@
         "verifyRecoveryPhrase": "Xác thực cụm từ phục hồi tài khoản ví",
         "revealRecoveryPhrase": "Hiển thị cụm từ khôi phục ví",
         "importSeedvault": "Nhập vào SeedVault",
-        "checkAgain": "Không, Kiểm tra lại",
+        "checkAgain": "Check Again",
         "importFromFile": "Nhập từ tập tin",
         "send": "Gửi",
         "receive": "Nhận",
@@ -462,11 +546,11 @@
         "updateFirefly": "Cập nhật ví Firefly",
         "restartNow": "Khởi động lại ngay",
         "saveBackup": "Save Stronghold backup",
-        "customizeAcount": "Customise account",
+        "customizeAcount": "Customise wallet",
         "viewAddressHistory": "Hiển thị lịch sử địa chỉ ví",
-        "hideAccount": "Hide account",
-        "showAccount": "Unhide account",
-        "deleteAccount": "Delete account",
+        "hideAccount": "Hide wallet",
+        "showAccount": "Unhide wallet",
+        "deleteAccount": "Delete wallet",
         "max": "Tối đa",
         "addNode": "Thêm Node",
         "updateNode": "Update node",
@@ -482,21 +566,28 @@
         "copy": "Sao chép",
         "paste": "Dán",
         "selectAll": "Chọn tất cả",
-        "addAccount": "Thêm tài khoản",
+        "addAccount": "Add Wallet",
         "checkForUpdates": "Kiểm tra cập nhật",
         "reportAnIssue": "Báo cáo sự cố",
         "clear": "Clear",
         "hideDetails": "Hide Details",
         "yes": "Yes",
         "no": "No",
+        "skip": "Skip",
         "reset": "Reset",
         "downloadRecoveryKit": "Save Recovery Kit template",
         "skipBackup": "Skip file backup",
         "finishSetup": "Finish setup",
         "readDocumentation": "Read the documentation",
         "visitFaq": "Visit FAQ",
-        "showHiddenAccounts": "Show hidden accounts",
-        "confirm": "Confirm"
+        "viewStatus": "View status",
+        "showHiddenAccounts": "Show hidden wallets",
+        "confirm": "Confirm",
+        "findBalances": "Find balances",
+        "searchBalances": "Search for balances",
+        "searchAgain": "Search again",
+        "searching": "Searching...",
+        "closeFirefly": "Close Firefly"
     },
     "general": {
         "password": "Mật khẩu",
@@ -514,11 +605,11 @@
         "sendFunds": "Gửi tiền",
         "sendToAddress": "Send to address",
         "scanQrOrPaste": "Quét mã QR hoặc dán vào một địa chỉ ví",
-        "moveFundsBetweenAccounts": "Di chuyển tiền giữa các tài khoản của bạn",
+        "moveFundsBetweenAccounts": "Move funds between wallets",
         "sendTokensToAddress": "Gửi các token tới một địa chỉ ví",
-        "manageAccount": "Quản lý tài khoản",
-        "customizeAcount": "Customize your account",
-        "account": "Tài khoản",
+        "manageAccount": "Manage Wallet",
+        "customizeAcount": "Customize your wallet",
+        "account": "Ví tiền",
         "sendingToAddress": "Gửi đến địa chỉ",
         "amount": "Số tiền",
         "addAddress": "Thêm địa chỉ",
@@ -531,10 +622,6 @@
         "yourAddress": "Địa chỉ ví của bạn",
         "generateNewAddress": "Tạo địa chỉ ví mới",
         "copyAddress": "Sao chép địa chỉ",
-        "haveTextBackup": "Tôi có một văn bản sao lưu",
-        "haveFileBackup": "Tôi có một tập tin sao lưu",
-        "enterSeedOrPhrase": "Nhập vào cụm từ khôi phục tài khoản ví hoặc seed",
-        "uploadSeedvaultOrStronghold": "Nhập vào một tập tin Stronghold hoặc SeedVault",
         "import": "Nhập vào",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -543,24 +630,25 @@
         "lightTheme": "Tông màu sáng",
         "darkTheme": "Tông màu tối",
         "balance": "Balance",
-        "accountBalance": "Số dư tài khoản",
+        "accountBalance": "Wallet Balance",
         "incoming": "Tiền chuyển đến",
         "outgoing": "Tiền chuyển đi",
         "totalIn": "Total in",
         "totalOut": "Total out",
-        "accounts": "Tài khoản",
-        "myAccounts": "My Accounts",
+        "accounts": "Wallets",
+        "myAccounts": "My Wallets",
         "automaticNodeSelection": "Chọn node tự động",
         "manualNodeSelection": "Chọn node thủ công",
         "profiles": "Hồ sơ cá nhân",
         "developerProfile": "Chế độ nhà phát triển",
+        "developerProfileDescription": "Allows you to connect to testnets",
         "dev": "Nhà phát triển",
-        "createAccount": "Create an Account",
-        "accountName": "Tên tài khoản",
+        "createAccount": "Create a Wallet",
+        "accountName": "Wallet name",
         "latestTransactions": "Các giao dịch mới nhất",
         "transactions": "Các giao dịch",
         "security": "Bảo mật",
-        "accountAddress": "Địa chỉ",
+        "accountAddress": "Wallet Address",
         "nodes": "Các node",
         "wallet": "Ví tiền",
         "help": "Trợ giúp",
@@ -572,25 +660,26 @@
         "status": "Trạng thái",
         "confirmed": "Confirmed",
         "pending": "Pending",
-        "noAccounts": "Bạn không có tài khoản, xin vui lòng hãy tạo tài khoản.",
+        "noAccounts": "You have no wallets, please create one.",
         "loadingAccounts": "Loading, please wait...",
         "addProfile": "Thêm cấu hình",
         "noRecentHistory": "No recent history",
-        "transferSyncing": "Syncing account",
+        "firstSync": "Syncing history, this may take a while...",
+        "transferSyncing": "Syncing wallet",
         "transferSelectingInputs": "Selecting inputs",
         "transferRemainderAddress": "Generating remainder deposit address",
         "transferSigning": "Signing the transaction",
         "transferPow": "Performing PoW",
         "transferBroadcasting": "Broadcasting transaction",
         "transferComplete": "Transfer complete",
-        "creatingAccount": "Creating account, please wait...",
-        "updatingAccount": "Updating account, please wait...",
-        "accountSyncing": "Account is syncing",
-        "accountSyncComplete": "Account sync complete",
+        "creatingAccount": "Creating wallet, please wait...",
+        "updatingAccount": "Updating wallet, please wait...",
+        "accountSyncing": "Wallet is syncing",
+        "accountSyncComplete": "Wallet sync complete",
         "passwordUpdating": "Updating password...",
         "passwordSuccess": "Updated password successfully",
         "passwordFailed": "Updating password failed",
-        "syncingAccounts": "Syncing accounts...",
+        "syncingAccounts": "Syncing wallets...",
         "exportingStronghold": "Exporting Stronghold...",
         "exportingStrongholdSuccess": "Exported Stronghold successfully",
         "exportingStrongholdFailed": "Exporting Stronghold failed",
@@ -604,7 +693,17 @@
         "passwordStrength3": "Average",
         "passwordStrength4": "Strong",
         "creatingProfile": "Creating profile, please wait...",
-        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
+        "fundMigration": "Fund migration",
+        "accountRemoved": "This wallet is hidden. Unhide it to perform transfers.",
+        "receivingTo": "Receiving to {account}",
+        "sendingFrom": "Sending from {account}",
+        "receivedTo": "Received to {account}",
+        "sentFrom": "Sent from {account}",
+        "receiving": "Receiving",
+        "sending": "Sending",
+        "legacyNetwork": "Legacy Network",
+        "capsLock": "Caps Lock is on",
+        "version": "Version {version}"
     },
     "dates": {
         "today": "Ngày hôm nay",
@@ -627,7 +726,9 @@
         "calcMinutesRemaining": "Đang tính toán số phút còn lại...",
         "minutesRemaining": "{minutes, plural, one {1 phút còn lại} other {# số phút còn lại}}",
         "copiedToClipboard": "Copied to clipboard",
-        "accountsSynchronized": "Account synchronization complete"
+        "accountsSynchronized": "Wallet synchronization complete",
+        "migratedAccountChrysalisDown": "Your funds will become available after Chrysalis on 28th April",
+        "migratedAccountChrysalisUp": "Your funds will become available shortly"
     },
     "error": {
         "profile": {
@@ -657,10 +758,10 @@
             "incorrect": "Your current PIN is incorrect."
         },
         "account": {
-            "length": "Your account name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "empty": "You must use your latest account before creating a new one.",
-            "notEmpty": "You must transfer your balance before deleting this account.",
-            "duplicate": "An account with this name already exists.",
+            "length": "Your wallet name can't be longer than {length, plural, one {1 character} other {# characters}}.",
+            "empty": "You must use your latest wallet before creating a new one.",
+            "notEmpty": "You must transfer your balance before deleting this wallet.",
+            "duplicate": "A wallet with this name already exists.",
             "tilde": "A profile name can't start with the '~' character.",
             "control": "A profile name can't contain a control character.",
             "startDot": "A profile name can't start with the '.' character.",
@@ -675,8 +776,8 @@
             "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
             "wrongAddressFormat": "The address is not correctly formatted.",
             "invalidAddress": "The address is not valid.",
-            "insufficientFunds": "This account has insufficient funds.",
-            "noToAccount": "You have not selected an account to send the funds to.",
+            "insufficientFunds": "This wallet has insufficient funds.",
+            "noToAccount": "You have not selected a wallet to send the funds to.",
             "sendingDust": "You cannot send less than 1 Mi.",
             "leavingDust": "You cannot leave less than 1 Mi on your address."
         },
@@ -699,6 +800,16 @@
             "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
             "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase",
             "phraseCaseWord": "The word \"{word}\" should be lower case"
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "Risk level: {risk}",
+            "veryHigh": "Very high",
+            "high": "High",
+            "medium": "Medium",
+            "low": "Low",
+            "veryLow": "Very low"
         }
     }
 }

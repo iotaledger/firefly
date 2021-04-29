@@ -1,7 +1,7 @@
 {
     "name": "desktop",
-    "productName": "Firefly Beta",
-    "version": "0.4.0",
+    "productName": "Firefly",
+    "version": "1.1.1",
     "description": "IOTA wallet desktop",
     "main": "public/build/main.js",
     "repository": "git@github.com:iotaledger/new-wallet.git",
@@ -18,8 +18,10 @@
         "compile:win": "electron-builder --win --x64"
     },
     "dependencies": {
+        "argon2": "^0.27.1",
         "electron-log": "^4.3.1",
         "electron-updater": "^4.3.5",
+        "kdbxweb": "^1.14.4",
         "keytar": "^7.3.0",
         "shared": "0.0.0",
         "wallet-nodejs-binding": "0.1.0"
@@ -45,7 +47,7 @@
         "webpack-dev-server": "^3.11.2"
     },
     "build": {
-        "productName": "Firefly Beta",
+        "productName": "Firefly",
         "artifactName": "firefly-desktop-${version}.${ext}",
         "copyright": "IOTA Foundation",
         "directories": {

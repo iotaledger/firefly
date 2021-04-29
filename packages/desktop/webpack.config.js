@@ -146,11 +146,15 @@ module.exports = [
         },
     },
     {
+        externals: {
+            argon2: 'commonjs argon2'
+        },
         target: 'electron-main',
         entry: {
             'build/main': ['./electron/main.js'],
             'build/preload': ['./electron/preload.js'],
             'build/lib/aboutPreload': ['./electron/lib/aboutPreload.js'],
+            'build/lib/errorPreload': ['./electron/lib/errorPreload.js'],
         },
         resolve,
         output,

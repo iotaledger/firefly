@@ -1,13 +1,12 @@
-import { writable } from 'svelte/store'
 import type { Node } from './typings/client'
-import { Network } from './typings/client'
 import { isValidHttpsUrl, isValidUrl } from './utils'
 
+const DEFAULT_NETWORK = 'chrysalis-mainnet'
+
+// TODO: Update default nodes
 const DEFAULT_NODES: Node[] = [
-    'https://api.hornet-0.testnet.chrysalis2.com',
-    'https://api.hornet-1.testnet.chrysalis2.com',
-    'https://api.hornet-2.testnet.chrysalis2.com',
-    'https://api.hornet-3.testnet.chrysalis2.com',
+    'https://chrysalis-nodes.iota.org',
+    'https://chrysalis-nodes.iota.cafe'
 ].map((url) => ({
     url,
     auth: {
@@ -15,11 +14,6 @@ const DEFAULT_NODES: Node[] = [
         password: ''
     }
 }))
-
-/**
- * Selected network during profile creation
- */
-export const network = writable<Network>(Network.Testnet)
 
 /**
  * Check if a node url is valid
@@ -58,4 +52,13 @@ export const isNodeUrlValid = (nodesList: Node[], newUrl: string): string | unde
  */
 export const getOfficialNodes = () => {
     return DEFAULT_NODES
+}
+
+
+/**
+ * Get the official network
+ * @returns The official network
+ */
+export const getOfficialNetwork = () => {
+    return DEFAULT_NETWORK
 }

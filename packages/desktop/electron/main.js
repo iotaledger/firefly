@@ -30,24 +30,53 @@ if (
  */
 app.commandLine.appendSwitch('js-flags', '--expose-gc')
 
+let lastError = {}
+
+/**
+ * Setup the error handlers early so they catch any issues
+ */
+const handleError = (errorType, error, isRenderProcessError) => {
+    if (app.isPackaged) {
+        lastError = {
+            diagnostics: getDiagnostics(),
+            errorType,
+            error
+        }
+
+        openErrorWindow()
+    } else {
+        // In dev mode there is no need to log errors from the render
+        // process as they will already appear in the dev console
+        if (!isRenderProcessError) {
+            console.error(error)
+        }
+    }
+}
+
+process.on('uncaughtException', error => {
+    handleError('Main Unhandled Error', error)
+});
+
+process.on('unhandledRejection', error => {
+    handleError('Main Unhandled Promise Rejection', error)
+});
+
 /**
  * Define wallet windows
  */
 const windows = {
     main: null,
     about: null,
+    error: null
 }
-
-/**
- * Set environment mode
- */
-const devMode = process.env.NODE_ENV === 'development'
 
 let paths = {
     preload: '',
     html: '',
     aboutHtml: '',
     aboutPreload: '',
+    errorHtml: '',
+    errorPreload: '',
 }
 
 /**
@@ -61,8 +90,7 @@ const defaultWebPreferences = {
     disableBlinkFeatures: 'Auxclick',
     webviewTag: false,
     enableWebSQL: false,
-    // TODO: Remove before stable
-    devTools: true,
+    devTools: !app.isPackaged,
 }
 
 if (app.isPackaged) {
@@ -70,20 +98,32 @@ if (app.isPackaged) {
     paths.html = path.join(app.getAppPath(), '/public/index.html')
     paths.aboutPreload = path.join(app.getAppPath(), '/public/build/lib/aboutPreload.js')
     paths.aboutHtml = path.join(app.getAppPath(), '/public/about.html')
+    paths.errorPreload = path.join(app.getAppPath(), '/public/build/lib/errorPreload.js')
+    paths.errorHtml = path.join(app.getAppPath(), '/public/error.html')
 } else {
     // __dirname is desktop/public/build
     paths.preload = path.join(__dirname, 'preload.js')
     paths.html = path.join(__dirname, '../index.html')
     paths.aboutPreload = path.join(__dirname, 'lib/aboutPreload.js')
     paths.aboutHtml = path.join(__dirname, '../about.html')
+    paths.errorPreload = path.join(__dirname, 'lib/errorPreload.js')
+    paths.errorHtml = path.join(__dirname, '../error.html')
 }
 
 /**
  * Check URL against allowlist
  */
 function isUrlAllowed(targetUrl) {
-    // TODO: Add links for T&C, privacy policy and help
-    const externalAllowlist = ['privacy@iota.org', 'iota.org', 'github.com/iotaledger/firefly/issues', 'discord.iota.org']
+    const externalAllowlist = [
+        'privacy@iota.org',
+        'iota.org',
+        'github.com/iotaledger/firefly/issues',
+        'discord.iota.org',
+        'chrysalis.iota.org',
+        'chrysalis.docs.iota.org',
+        'firefly.iota.org',
+        'blog.iota.org'
+    ]
 
     const url = new URL(targetUrl)
     const domain = url.hostname.replace('www.', '').replace('mailto:', '')
@@ -147,12 +187,10 @@ function createWindow() {
 
     mainWindowState.track(windows.main);
 
-    if (devMode) {
+    if (!app.isPackaged) {
         // Enable dev tools only in developer mode
         windows.main.webContents.openDevTools()
-    }
 
-    if (devMode) {
         windows.main.loadURL('http://localhost:8080')
     } else {
         initAutoUpdate(windows.main)
@@ -178,6 +216,7 @@ function createWindow() {
 
     windows.main.on('close', () => {
         closeAboutWindow()
+        closeErrorWindow()
     })
 
     windows.main.on('closed', () => {
@@ -223,6 +262,9 @@ export const getOrInitWindow = (windowName) => {
         if (windowName === 'about') {
             return openAboutWindow()
         }
+        if (windowName === 'error') {
+            return openErrorWindow()
+        }
     }
     return windows[windowName]
 }
@@ -249,6 +291,10 @@ app.on('activate', function () {
     if (BrowserWindow.getAllWindows().length === 0) {
         createWindow()
     }
+})
+
+app.once('ready', () => {
+    ipcMain.handle('error-data', () => lastError)
 })
 
 // IPC handlers for APIs exposed from main proces
@@ -290,17 +336,58 @@ ipcMain.handle('get-path', (_e, path) => {
 })
 
 // Diagnostics
-ipcMain.handle('diagnostics', (_e) => {
-    const diagnostics = [
-        { label: 'popups.diagnostics.platform', value: os.platform() },
-        { label: 'popups.diagnostics.platformVersion', value: os.release() },
+const getDiagnostics = () => {
+    const osXNameMap = new Map([
+        [20, ['Big Sur', '11']],
+        [19, ['Catalina', '10.15']],
+        [18, ['Mojave', '10.14']],
+        [17, ['High Sierra', '10.13']],
+        [16, ['Sierra', '10.12']],
+        [15, ['El Capitan', '10.11']],
+        [14, ['Yosemite', '10.10']],
+        [13, ['Mavericks', '10.9']],
+        [12, ['Mountain Lion', '10.8']],
+        [11, ['Lion', '10.7']],
+        [10, ['Snow Leopard', '10.6']],
+        [9, ['Leopard', '10.5']],
+        [8, ['Tiger', '10.4']],
+        [7, ['Panther', '10.3']],
+        [6, ['Jaguar', '10.2']],
+        [5, ['Puma', '10.1']]
+    ]);
+
+    let platform = os.platform()
+    let platformVersion = os.release()
+
+    if (platform === 'darwin') {
+        platform = 'macOS'
+        const verSplit = platformVersion.split('.')
+        const num = Number.parseInt(verSplit[0], 10)
+        if (!Number.isNaN(num)) {
+            const [_, version] = osXNameMap.get(num)
+            if (version) {
+               platformVersion = version
+            }
+        }
+    }
+
+    return [
+        { label: 'popups.diagnostics.platform', value: platform },
+        { label: 'popups.diagnostics.platformVersion', value: platformVersion },
         { label: 'popups.diagnostics.platformArchitecture', value: os.arch() },
         { label: 'popups.diagnostics.cpuCount', value: os.cpus().length },
         { label: 'popups.diagnostics.totalMem', value: `${(os.totalmem() / 1048576).toFixed(1)} MB` },
         { label: 'popups.diagnostics.freeMem', value: `${(os.freemem() / 1048576).toFixed(1)} MB` },
         { label: 'popups.diagnostics.userPath', value: app.getPath('userData') },
     ]
-    return diagnostics
+}
+
+ipcMain.handle('diagnostics', (_e) => {
+    return getDiagnostics()
+})
+
+ipcMain.handle('handle-error', (_e, errorType, error) => {
+    handleError(errorType, error, true)
 })
 
 // Os
@@ -338,39 +425,40 @@ app.on('second-instance', (_e, args) => {
     }
 })
 
+// TODO: re-enable deep links
 /**
  * Register iota:// protocol for deep links
  * Set Firefly as the default handler for iota:// protocol
  */
-protocol.registerSchemesAsPrivileged([{ scheme: 'iota', privileges: { secure: true, standard: true } }])
-if (process.defaultApp) {
-    if (process.argv.length >= 2) {
-        app.setAsDefaultProtocolClient('iota', process.execPath, [path.resolve(process.argv[1])])
-    }
-} else {
-    app.setAsDefaultProtocolClient('iota')
-}
+// protocol.registerSchemesAsPrivileged([{ scheme: 'iota', privileges: { secure: true, standard: true } }])
+// if (process.defaultApp) {
+//     if (process.argv.length >= 2) {
+//         app.setAsDefaultProtocolClient('iota', process.execPath, [path.resolve(process.argv[1])])
+//     }
+// } else {
+//     app.setAsDefaultProtocolClient('iota')
+// }
 
-/**
- * Proxy deep link event to the wallet application
- */
-app.on('open-url', (event, url) => {
-    event.preventDefault()
-    deepLinkUrl = url
-    if (windows.main) {
-        windows.main.webContents.send('deep-link-params', url)
-    }
-})
+// /**
+//  * Proxy deep link event to the wallet application
+//  */
+// app.on('open-url', (event, url) => {
+//     event.preventDefault()
+//     deepLinkUrl = url
+//     if (windows.main) {
+//         windows.main.webContents.send('deep-link-params', url)
+//     }
+// })
 
-/**
- * Proxy deep link event to the wallet application
- */
-ipcMain.on('deep-link-request', () => {
-    if (deepLinkUrl) {
-        windows.main.webContents.send('deep-link-params', deepLinkUrl)
-        deepLinkUrl = null
-    }
-})
+// /**
+//  * Proxy deep link event to the wallet application
+//  */
+// ipcMain.on('deep-link-request', () => {
+//     if (deepLinkUrl) {
+//         windows.main.webContents.send('deep-link-params', deepLinkUrl)
+//         deepLinkUrl = null
+//     }
+// })
 
 /**
  * Proxy notification activated to the wallet application
@@ -426,6 +514,52 @@ export const closeAboutWindow = () => {
         windows.about = null
     }
 }
+
+/**
+ * Create error window
+ * @returns {BrowserWindow} Error window
+ */
+export const openErrorWindow = () => {
+    if (windows.error !== null) {
+        windows.error.focus()
+        return windows.error
+    }
+
+    windows.error = new BrowserWindow({
+        useContentSize: true,
+        titleBarStyle: 'hidden',
+        show: false,
+        fullscreenable: false,
+        resizable: true,
+        minimizable: false,
+        webPreferences: {
+            ...defaultWebPreferences,
+            preload: paths.errorPreload,
+        },
+    })
+
+    windows.error.once('closed', () => {
+        windows.error = null
+    })
+
+    windows.error.loadFile(paths.errorHtml)
+
+    windows.error.once('ready-to-show', () => {
+        windows.error.show()
+    })
+
+    windows.error.setMenu(null)
+
+    return windows.error
+}
+
+export const closeErrorWindow = () => {
+    if (windows.error) {
+        windows.error.close()
+        windows.error = null
+    }
+}
+
 
 function windowStateKeeper(windowName, settingsFilename) {
     let window, windowState;
