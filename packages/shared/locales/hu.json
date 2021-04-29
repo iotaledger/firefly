@@ -240,6 +240,10 @@
                 "title": "Értesítések",
                 "description": "Rendszer értesítések a tranzakciós eseményekről"
             },
+            "networkStatus": {
+                "title": "Network status",
+                "description": "Displays the status of the node you are currently connected to."
+            },
             "exportStronghold": {
                 "title": "Biztonsági mentés",
                 "description": "Biztonsági mentés Stronghold-ba: a tárcák és a legutóbbi tranzakciók titkosított fájlba mentése"
@@ -371,7 +375,7 @@
                 "networkDown": "A hálózat nem elérhető",
                 "status": "Állapot",
                 "messagesPerSecond": "Üzenet / másodperc",
-                "confirmationRate": "Visszaigazolási arány"
+                "referencedRate": "Referenced rate"
             },
             "profileModal": {
                 "allSettings": "Beállítások",
@@ -583,6 +587,7 @@
         "viewStatus": "Állapot megtekintése",
         "showHiddenAccounts": "Rejtett tárcák megjelenítése",
         "confirm": "Megerősít",
+        "hideNetworkStatistics": "Hide network statistics",
         "findBalances": "Egyenleg keresése",
         "searchBalances": "Egyenleg keresése",
         "searchAgain": "Keresés újra",

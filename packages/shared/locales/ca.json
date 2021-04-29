@@ -240,6 +240,10 @@
                 "title": "Notificacions",
                 "description": "Notificacions del sistema per a transaccions"
             },
+            "networkStatus": {
+                "title": "Network status",
+                "description": "Displays the status of the node you are currently connected to."
+            },
             "exportStronghold": {
                 "title": "Exportar còpia de seguretat",
                 "description": "Exporta a un fitxer Stronghold - una còpia completa de seguretat xifrada dels vostres moneders i l'historial de les darreres transaccions"
@@ -371,7 +375,7 @@
                 "networkDown": "Xarxa Desconectada",
                 "status": "Estat",
                 "messagesPerSecond": "Missatges per segon",
-                "confirmationRate": "Taxa de confirmació"
+                "referencedRate": "Referenced rate"
             },
             "profileModal": {
                 "allSettings": "Tots els paràmetres",
@@ -583,6 +587,7 @@
         "viewStatus": "Mostra l'estat",
         "showHiddenAccounts": "Mostra els moneders amagats",
         "confirm": "Confirmar",
+        "hideNetworkStatistics": "Hide network statistics",
         "findBalances": "Troba balanços",
         "searchBalances": "Cerca balanços",
         "searchAgain": "Cerca de nou",

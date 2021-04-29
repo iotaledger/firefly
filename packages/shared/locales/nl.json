@@ -240,6 +240,10 @@
                 "title": "Meldingen",
                 "description": "Systeemmeldingen voor transactie activiteiten"
             },
+            "networkStatus": {
+                "title": "Network status",
+                "description": "Displays the status of the node you are currently connected to."
+            },
             "exportStronghold": {
                 "title": "Back-up exporteren",
                 "description": "Exporteren naar een Stronghold bestand - een complete versleutelde back-up van uw portemonnees en de nieuwste transactiegeschiedenis"
@@ -371,7 +375,7 @@
                 "networkDown": "Netwerk verbinding verbroken",
                 "status": "Status",
                 "messagesPerSecond": "Berichten per seconde",
-                "confirmationRate": "Bevestigingssnelheid"
+                "referencedRate": "Referenced rate"
             },
             "profileModal": {
                 "allSettings": "Alle instellingen",
@@ -583,6 +587,7 @@
         "viewStatus": "Bekijk status",
         "showHiddenAccounts": "Toon verborgen portemonnees",
         "confirm": "Bevestig",
+        "hideNetworkStatistics": "Hide network statistics",
         "findBalances": "Saldi zoeken",
         "searchBalances": "Zoeken naar saldi",
         "searchAgain": "Opnieuw zoeken",

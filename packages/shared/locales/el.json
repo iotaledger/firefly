@@ -240,6 +240,10 @@
                 "title": "Ειδοποιήσεις",
                 "description": "Ειδοποιήσεις συστήματος για συμβάντα συναλλαγών"
             },
+            "networkStatus": {
+                "title": "Network status",
+                "description": "Displays the status of the node you are currently connected to."
+            },
             "exportStronghold": {
                 "title": "Εξαγωγή Αντιγράφου Ασφαλείας",
                 "description": "Εξαγωγή σε ένα αρχείο Stronghold - ένα πλήρες κρυπτογραφημένο αντίγραφο ασφαλείας των πορτοφολιών σας και το τελευταίο ιστορικό συναλλαγών"
@@ -371,7 +375,7 @@
                 "networkDown": "Αποσύνδεση Δικτύου",
                 "status": "Κατάσταση",
                 "messagesPerSecond": "Μηνύματα ανά δευτερόλεπτο",
-                "confirmationRate": "Ποσοστό επιβεβαίωσης"
+                "referencedRate": "Referenced rate"
             },
             "profileModal": {
                 "allSettings": "Όλες οι ρυθμίσεις",
@@ -583,6 +587,7 @@
         "viewStatus": "Προβολή κατάστασης",
         "showHiddenAccounts": "Εμφάνιση κρυφών πορτοφολιών",
         "confirm": "Επιβεβαίωση",
+        "hideNetworkStatistics": "Hide network statistics",
         "findBalances": "Βρείτε υπόλοιπα",
         "searchBalances": "Αναζήτηση υπολοίπων",
         "searchAgain": "Αναζήτηση Ξανά",

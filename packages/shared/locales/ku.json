@@ -240,6 +240,10 @@
                 "title": "Hişyarî",
                 "description": "Jibo bûyerên kirarîyê hişyariyên sîstemî"
             },
+            "networkStatus": {
+                "title": "Network status",
+                "description": "Displays the status of the node you are currently connected to."
+            },
             "exportStronghold": {
                 "title": "Cîgirê bikşîne derve",
                 "description": "Barê dosyayek Stronghold bikin\n- cîhgira hatî pêborîkirin cuzdank û bûyerên kiryarên we yên dawî"
@@ -371,7 +375,7 @@
                 "networkDown": "Girêdana Networkê Qeta",
                 "status": "Hal",
                 "messagesPerSecond": "Peyam di sanîyek de",
-                "confirmationRate": "Rêjeya Piştrastîyê"
+                "referencedRate": "Referenced rate"
             },
             "profileModal": {
                 "allSettings": "Hemu dilkirin",
@@ -583,6 +587,7 @@
         "viewStatus": "Rewşê bibîn",
         "showHiddenAccounts": "Cuzdankê veşartî nîşan bidin",
         "confirm": "Tomarkirin",
+        "hideNetworkStatistics": "Hide network statistics",
         "findBalances": "Mayîna bibîne",
         "searchBalances": "Mayîna bigere",
         "searchAgain": "Dîsa lê bigere",

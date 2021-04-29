@@ -240,6 +240,10 @@
                 "title": "Varslinger",
                 "description": "Systemvarsler for transaksjonshendelser"
             },
+            "networkStatus": {
+                "title": "Network status",
+                "description": "Displays the status of the node you are currently connected to."
+            },
             "exportStronghold": {
                 "title": "Eksporter sikkerhetskopi",
                 "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
@@ -371,7 +375,7 @@
                 "networkDown": "Nettverket er frakoblet",
                 "status": "Status",
                 "messagesPerSecond": "Meldinger per sekund",
-                "confirmationRate": "Bekreftelsesrate"
+                "referencedRate": "Referenced rate"
             },
             "profileModal": {
                 "allSettings": "Alle innstillinger",
@@ -583,6 +587,7 @@
         "viewStatus": "Vis status",
         "showHiddenAccounts": "Vis skjulte lommebøker",
         "confirm": "Bekreft",
+        "hideNetworkStatistics": "Hide network statistics",
         "findBalances": "Finn saldoer",
         "searchBalances": "Søk etter saldoer",
         "searchAgain": "Søk på nytt",

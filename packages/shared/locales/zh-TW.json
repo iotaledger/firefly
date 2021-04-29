@@ -240,6 +240,10 @@
                 "title": "通知",
                 "description": "交易記錄系統通知"
             },
+            "networkStatus": {
+                "title": "Network status",
+                "description": "Displays the status of the node you are currently connected to."
+            },
             "exportStronghold": {
                 "title": "導出備份",
                 "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
@@ -371,7 +375,7 @@
                 "networkDown": "未連接網路",
                 "status": "狀態",
                 "messagesPerSecond": "每秒訊息量",
-                "confirmationRate": "確認率"
+                "referencedRate": "Referenced rate"
             },
             "profileModal": {
                 "allSettings": "所有設定",
@@ -583,6 +587,7 @@
         "viewStatus": "查看狀態",
         "showHiddenAccounts": "顯示隱藏錢包",
         "confirm": "確認",
+        "hideNetworkStatistics": "Hide network statistics",
         "findBalances": "尋找餘額",
         "searchBalances": "搜索餘額",
         "searchAgain": "重新搜尋",

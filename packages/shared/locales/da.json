@@ -240,9 +240,13 @@
                 "title": "Notifikationer",
                 "description": "Systemnotifikationer for transaktionsbegivenheder"
             },
+            "networkStatus": {
+                "title": "Netværksstatus",
+                "description": "Viser status for den node du er forbundet til lige nu."
+            },
             "exportStronghold": {
                 "title": "Eksporter sikkerhedskopi",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
+                "description": "Eksporter til en Stronghold fil - en komplet krypteret sikkerhedskopi af dine wallets og den seneste transaktionshistorik"
             },
             "appLock": {
                 "title": "Automatisk lås",
@@ -252,7 +256,7 @@
             },
             "changePassword": {
                 "title": "Skift adgangskode",
-                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
+                "description": "Din adgangskode bruges til at sikre dine wallets. Du skal bruge en stærk adgangskode for at beskytte dine midler"
             },
             "changePincode": {
                 "title": "Skift pinkode",
@@ -264,15 +268,15 @@
             },
             "balanceFinder": {
                 "title": "Saldo finder",
-                "description": "Perform an extended search of your addresses for tokens"
+                "description": "Udfør en udvidet søgning af dine adresser efter tokens"
             },
             "hiddenAccounts": {
                 "title": "Skjulte wallets",
-                "description": "Selecting this options will show wallets that were previously hidden"
+                "description": "Valg af denne indstilling vil vise wallets, der tidligere var skjult"
             },
             "deleteProfile": {
                 "title": "Slet profil",
-                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
+                "description": "Sletter hele din profil, wallets og transaktionshistorik. Sørg for at du har en sikkerhedskopi"
             },
             "deepLinks": {
                 "title": "Dybe Links",
@@ -288,7 +292,7 @@
             },
             "configureNodeList": {
                 "title": "Vælg en node",
-                "description": "Manage the list of IOTA network nodes you connect to",
+                "description": "Administrer listen over IOTA netværksnoder, du opretter forbindelse til",
                 "primaryNode": "Primær node",
                 "excludeNode": "Udeluk node",
                 "includeNode": "Inkludér node",
@@ -296,7 +300,7 @@
                 "setAsPrimary": "Sæt som primær",
                 "removeNode": "Fjern node",
                 "includeOfficialNodeList": "Inkludér den officielle node-liste",
-                "noNodes": "There are no nodes, automatic selection will be used instead"
+                "noNodes": "Der er ingen noder, automatisk valg vil blive foretaget i stedet"
             },
             "proofOfWork": {
                 "title": "Bevis for arbejde",
@@ -337,7 +341,7 @@
             },
             "reportAnIssue": {
                 "title": "Rapporter et problem",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
+                "description": "Rapporter en fejl til udviklerne. Tjek igennem for at sikre, at den ikke allerede er blevet rapporteret"
             }
         },
         "login": {
@@ -371,7 +375,7 @@
                 "networkDown": "Netværket er frakoblet",
                 "status": "Status",
                 "messagesPerSecond": "Beskeder pr. sekund",
-                "confirmationRate": "Bekræftelsesrate"
+                "referencedRate": "Refereret sats"
             },
             "profileModal": {
                 "allSettings": "Alle indstillinger",
@@ -583,6 +587,7 @@
         "viewStatus": "Vis Status",
         "showHiddenAccounts": "Vis skjulte wallets",
         "confirm": "Bekræft",
+        "hideNetworkStatistics": "Skjul netværksstatistik",
         "findBalances": "Find saldi",
         "searchBalances": "Søg efter saldi",
         "searchAgain": "Søg igen",
@@ -702,7 +707,7 @@
         "receiving": "Modtager",
         "sending": "Sender",
         "legacyNetwork": "Legacy Netværk",
-        "capsLock": "Caps Lock is on",
+        "capsLock": "Caps Lock er slået til",
         "version": "Version {version}"
     },
     "dates": {

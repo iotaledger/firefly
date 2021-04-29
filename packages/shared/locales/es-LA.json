@@ -240,6 +240,10 @@
                 "title": "Notificaciones",
                 "description": "Notificaciones del sistema para eventos de transacción"
             },
+            "networkStatus": {
+                "title": "Network status",
+                "description": "Displays the status of the node you are currently connected to."
+            },
             "exportStronghold": {
                 "title": "Exportar copia de seguridad",
                 "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
@@ -371,7 +375,7 @@
                 "networkDown": "Red desconectada",
                 "status": "Estado",
                 "messagesPerSecond": "Mensajes por segundo",
-                "confirmationRate": "Tasa de confirmación"
+                "referencedRate": "Referenced rate"
             },
             "profileModal": {
                 "allSettings": "Todos los ajustes",
@@ -583,6 +587,7 @@
         "viewStatus": "Ver estado",
         "showHiddenAccounts": "Mostrar billeteras ocultas",
         "confirm": "Confirmar",
+        "hideNetworkStatistics": "Hide network statistics",
         "findBalances": "Encontrar balances",
         "searchBalances": "Buscar balances",
         "searchAgain": "Buscar de nuevo",
