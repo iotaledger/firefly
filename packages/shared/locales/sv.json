@@ -240,6 +240,10 @@
                 "title": "Aviseringar",
                 "description": "Systemaviseringar för transaktionshändelser"
             },
+            "networkStatus": {
+                "title": "Nätverksstatus",
+                "description": "Visar status för noden du är ansluten till."
+            },
             "exportStronghold": {
                 "title": "Exportera säkerhetskopian",
                 "description": "Exportera till en Stronghold-fil - en komplett krypterad säkerhetskopia av dina plånböcker och senaste transaktionshistorik"
@@ -371,7 +375,7 @@
                 "networkDown": "Nätverk frånkopplat",
                 "status": "Status",
                 "messagesPerSecond": "Meddelanden per sekund",
-                "confirmationRate": "Bekräftade meddelanden"
+                "referencedRate": "Refererad hastighet"
             },
             "profileModal": {
                 "allSettings": "Alla inställningar",
@@ -583,6 +587,7 @@
         "viewStatus": "Visa status",
         "showHiddenAccounts": "Visa dolda plånböcker",
         "confirm": "Bekräfta",
+        "hideNetworkStatistics": "Dölj nätverksstatistik",
         "findBalances": "Hitta saldo",
         "searchBalances": "Sök efter saldo",
         "searchAgain": "Sök igen",

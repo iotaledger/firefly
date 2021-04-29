@@ -240,6 +240,10 @@
                 "title": "Notifikasi",
                 "description": "Pemberitahuan sistem untuk transaksi"
             },
+            "networkStatus": {
+                "title": "Network status",
+                "description": "Displays the status of the node you are currently connected to."
+            },
             "exportStronghold": {
                 "title": "Ekspor Cadangan",
                 "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
@@ -371,7 +375,7 @@
                 "networkDown": "Jaringan Terputus",
                 "status": "Status",
                 "messagesPerSecond": "Pesan per detik",
-                "confirmationRate": "Menilai konfirmasi"
+                "referencedRate": "Referenced rate"
             },
             "profileModal": {
                 "allSettings": "Semua pengaturan",
@@ -583,6 +587,7 @@
         "viewStatus": "View status",
         "showHiddenAccounts": "Show hidden wallets",
         "confirm": "Confirm",
+        "hideNetworkStatistics": "Hide network statistics",
         "findBalances": "Find balances",
         "searchBalances": "Search for balances",
         "searchAgain": "Search again",

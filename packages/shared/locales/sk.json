@@ -240,6 +240,10 @@
                 "title": "Notifikácie",
                 "description": "Systémové notifikácie pre transakčné udalosti"
             },
+            "networkStatus": {
+                "title": "Network status",
+                "description": "Displays the status of the node you are currently connected to."
+            },
             "exportStronghold": {
                 "title": "Exportovať zálohu",
                 "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
@@ -371,7 +375,7 @@
                 "networkDown": "Sieť odpojená",
                 "status": "Stav",
                 "messagesPerSecond": "Správy za sekundu",
-                "confirmationRate": "Miera potvrdení"
+                "referencedRate": "Referenced rate"
             },
             "profileModal": {
                 "allSettings": "Všetky nastavenia",
@@ -583,6 +587,7 @@
         "viewStatus": "Zobrazenie stavu",
         "showHiddenAccounts": "Show hidden wallets",
         "confirm": "Potvrdiť",
+        "hideNetworkStatistics": "Hide network statistics",
         "findBalances": "Vyhľadať zostatky",
         "searchBalances": "Search for balances",
         "searchAgain": "Search again",

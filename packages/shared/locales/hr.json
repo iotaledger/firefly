@@ -240,6 +240,10 @@
                 "title": "Obavijesti",
                 "description": "Obavijesti sustava o provedenim transakcijama"
             },
+            "networkStatus": {
+                "title": "Network status",
+                "description": "Displays the status of the node you are currently connected to."
+            },
             "exportStronghold": {
                 "title": "Izvezi sigurnosnu kopiju",
                 "description": "Izvoz u Stronghold datoteku - potpunu enkriptiranu kopiju vaših novčanika i najnovijih transakcija"
@@ -371,7 +375,7 @@
                 "networkDown": "Mreža nije funkcionalna",
                 "status": "Stanje",
                 "messagesPerSecond": "Poruka u sekundi",
-                "confirmationRate": "Postotak potvrda"
+                "referencedRate": "Referenced rate"
             },
             "profileModal": {
                 "allSettings": "Sve postavke",
@@ -583,6 +587,7 @@
         "viewStatus": "Vidi status",
         "showHiddenAccounts": "Prikaži skrivene novčanike",
         "confirm": "Potvrdi",
+        "hideNetworkStatistics": "Hide network statistics",
         "findBalances": "Pronalazak sredstava",
         "searchBalances": "Traži sredstva",
         "searchAgain": "Traži ponovno",

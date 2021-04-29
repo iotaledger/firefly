@@ -240,6 +240,10 @@
                 "title": "Оповещения",
                 "description": "Уведомления системы для транзакций"
             },
+            "networkStatus": {
+                "title": "Network status",
+                "description": "Displays the status of the node you are currently connected to."
+            },
             "exportStronghold": {
                 "title": "Экспорт резервной копии",
                 "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
@@ -371,7 +375,7 @@
                 "networkDown": "Сеть отключена",
                 "status": "Статус",
                 "messagesPerSecond": "Сообщений в секунду",
-                "confirmationRate": "Уровень подтверждения"
+                "referencedRate": "Referenced rate"
             },
             "profileModal": {
                 "allSettings": "Все настройки",
@@ -583,6 +587,7 @@
         "viewStatus": "Просмотр статуса",
         "showHiddenAccounts": "Show hidden wallets",
         "confirm": "Подтвердить",
+        "hideNetworkStatistics": "Hide network statistics",
         "findBalances": "Find balances",
         "searchBalances": "Search for balances",
         "searchAgain": "Search again",

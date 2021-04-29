@@ -240,9 +240,13 @@
                 "title": "通知の設定",
                 "description": "取引履歴のシステム通知"
             },
+            "networkStatus": {
+                "title": "Network status",
+                "description": "Displays the status of the node you are currently connected to."
+            },
             "exportStronghold": {
                 "title": "バックアップのエクスポート",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
+                "description": "Stronghold ファイルへのエクスポート - ウォレットと最新の取引履歴の暗号化されたバックアップです"
             },
             "appLock": {
                 "title": "自動ロック",
@@ -252,7 +256,7 @@
             },
             "changePassword": {
                 "title": "パスワードの変更",
-                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
+                "description": "パスワードはウォレットを保護するために使用されます。資金を保護するためには強力なパスワードを使用する必要があります"
             },
             "changePincode": {
                 "title": "PINコードを変更",
@@ -264,15 +268,15 @@
             },
             "balanceFinder": {
                 "title": "残高を検索する",
-                "description": "Perform an extended search of your addresses for tokens"
+                "description": "トークンのアドレスを拡張検索します"
             },
             "hiddenAccounts": {
                 "title": "非表示のウォレット",
-                "description": "Selecting this options will show wallets that were previously hidden"
+                "description": "このオプションを選択すると、以前に非表示になっていたウォレットが表示されます"
             },
             "deleteProfile": {
                 "title": "プロファイルを削除",
-                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
+                "description": "プロファイル、ウォレット、取引履歴全体を削除します。バックアップがあることを確認してください"
             },
             "deepLinks": {
                 "title": "ディープ リンク",
@@ -288,7 +292,7 @@
             },
             "configureNodeList": {
                 "title": "ノードを選択",
-                "description": "Manage the list of IOTA network nodes you connect to",
+                "description": "接続先のIOTAネットワークノードのリストを管理します",
                 "primaryNode": "プライマリノード",
                 "excludeNode": "ノードを除外する",
                 "includeNode": "ノードを含める",
@@ -296,7 +300,7 @@
                 "setAsPrimary": "プライマリとして設定",
                 "removeNode": "ノードを削除",
                 "includeOfficialNodeList": "公式ノードリストを含める",
-                "noNodes": "There are no nodes, automatic selection will be used instead"
+                "noNodes": "ノードがありません。自動選択が代わりに使用されます"
             },
             "proofOfWork": {
                 "title": "プルーフ・オブ・ワーク",
@@ -337,7 +341,7 @@
             },
             "reportAnIssue": {
                 "title": "問題を報告",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
+                "description": "バグを開発者に報告します。報告されていないことを確認してください"
             }
         },
         "login": {
@@ -371,7 +375,7 @@
                 "networkDown": "ネットワーク接続が切断されました",
                 "status": "ステータス",
                 "messagesPerSecond": "毎秒あたりのメッセージ",
-                "confirmationRate": "承認されたレート"
+                "referencedRate": "Referenced rate"
             },
             "profileModal": {
                 "allSettings": "すべての設定",
@@ -583,6 +587,7 @@
         "viewStatus": "ステータスを表示",
         "showHiddenAccounts": "非表示ウォレットを表示",
         "confirm": "確定",
+        "hideNetworkStatistics": "Hide network statistics",
         "findBalances": "残高検索",
         "searchBalances": "残高を検索",
         "searchAgain": "再検索",
@@ -702,8 +707,8 @@
         "receiving": "着金中",
         "sending": "送金中",
         "legacyNetwork": "レガシーネットワーク",
-        "capsLock": "Caps Lock is on",
-        "version": "Version {version}"
+        "capsLock": "Caps Lock キーが有効になっています",
+        "version": "バージョン {version}"
     },
     "dates": {
         "today": "今日",

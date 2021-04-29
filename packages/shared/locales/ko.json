@@ -240,6 +240,10 @@
                 "title": "알림",
                 "description": "거래 발생에 대한 시스템 알림"
             },
+            "networkStatus": {
+                "title": "Network status",
+                "description": "Displays the status of the node you are currently connected to."
+            },
             "exportStronghold": {
                 "title": "백업 내보내기",
                 "description": "Stronghold 파일로 내보내기 - 지갑과 최신 거래 내역의 완전한 암호화 백업"
@@ -371,7 +375,7 @@
                 "networkDown": "네트워크 연결 끊김",
                 "status": "상태",
                 "messagesPerSecond": "초당 메세지",
-                "confirmationRate": "승인율"
+                "referencedRate": "Referenced rate"
             },
             "profileModal": {
                 "allSettings": "전체 설정",
@@ -583,6 +587,7 @@
         "viewStatus": "상태 보기",
         "showHiddenAccounts": "숨김 지갑 표시",
         "confirm": "확인",
+        "hideNetworkStatistics": "Hide network statistics",
         "findBalances": "잔고 찾기",
         "searchBalances": "잔고 검색",
         "searchAgain": "다시 검색",

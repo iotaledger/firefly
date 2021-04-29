@@ -165,10 +165,10 @@
             "learn": "למד עוד אודות כתובות משומשות (\"spent addresses\")"
         },
         "secureSpentAddresses": {
-            "title": "Secure spent addresses",
-            "body1": "You have funds detected on {number, plural, one {# spent address} other {# spent addresses}}.",
-            "body2": "We recommend you run an automated process to help secure and transfer your funds safely.",
-            "error": "You can’t migrate spent addresses with less than 1 Mi"
+            "title": "אבטח כתובות משומשות (\"spent addresses\")",
+            "body1": "יש לך כספים שגולו ב {number, plural, one {# spent address} other {# spent addresses}}.",
+            "body2": "אנו ממליצים לך לבצע תהליך אוטומטי כדי לעזור לאבטח ולהעביר את הכספים שלך בבטחה.",
+            "error": "לא לניתן להגר כתובות משומשות (\"spent addresses\") עם פחות מ 1MI"
         },
         "securityCheckCompleted": {
             "title": "Security check completed",
@@ -239,6 +239,10 @@
             "notifications": {
                 "title": "התראות",
                 "description": "System notifications for transaction events"
+            },
+            "networkStatus": {
+                "title": "Network status",
+                "description": "Displays the status of the node you are currently connected to."
             },
             "exportStronghold": {
                 "title": "ייצא גיבוי",
@@ -371,7 +375,7 @@
                 "networkDown": "Network Disconnected",
                 "status": "סטטוס",
                 "messagesPerSecond": "Messages per second",
-                "confirmationRate": "Confirmation rate"
+                "referencedRate": "Referenced rate"
             },
             "profileModal": {
                 "allSettings": "כל ההגדרות",
@@ -583,6 +587,7 @@
         "viewStatus": "View status",
         "showHiddenAccounts": "Show hidden wallets",
         "confirm": "אשר",
+        "hideNetworkStatistics": "Hide network statistics",
         "findBalances": "Find balances",
         "searchBalances": "Search for balances",
         "searchAgain": "Search again",

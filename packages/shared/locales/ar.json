@@ -240,6 +240,10 @@
                 "title": "التنبيهات",
                 "description": "إشعارات النظام لأحداث المعاملات"
             },
+            "networkStatus": {
+                "title": "Network status",
+                "description": "Displays the status of the node you are currently connected to."
+            },
             "exportStronghold": {
                 "title": "تصدير النسخ الاحتياطي",
                 "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
@@ -371,7 +375,7 @@
                 "networkDown": "تم قطع اتصال الشبكة",
                 "status": "الحالة",
                 "messagesPerSecond": "الرسائل في الثانية",
-                "confirmationRate": "معدل التأكيد"
+                "referencedRate": "Referenced rate"
             },
             "profileModal": {
                 "allSettings": "جميع الإعدادات",
@@ -583,6 +587,7 @@
         "viewStatus": "عرض الحالة",
         "showHiddenAccounts": "Show hidden wallets",
         "confirm": "تأكيد",
+        "hideNetworkStatistics": "Hide network statistics",
         "findBalances": "Find balances",
         "searchBalances": "Search for balances",
         "searchAgain": "Search again",

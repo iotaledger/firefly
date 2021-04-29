@@ -240,9 +240,13 @@
                 "title": "اعلان‌ها",
                 "description": "اعلانات سیستم برای تراکنش ها"
             },
+            "networkStatus": {
+                "title": "Network status",
+                "description": "Displays the status of the node you are currently connected to."
+            },
             "exportStronghold": {
                 "title": "استخراج بک آپ",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
+                "description": "استخراج به صورت فایل Stronghold - یک بک آپ گیری کامل و رمزگذاری شده از کیف پول های شما به همراه آخرین تاریخچه تراکنش ها"
             },
             "appLock": {
                 "title": "ﻗﻔﻞ ﺧﻮﺩﮐﺎﺭ",
@@ -252,7 +256,7 @@
             },
             "changePassword": {
                 "title": "تغییر رمز عبور",
-                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
+                "description": "رمز عبور برای امنیت کیف پول های شما استفاده میشود. برای حفاظت از وجوه خود باید از رمز عبور قوی استفاده کنید"
             },
             "changePincode": {
                 "title": "تغییر PIN کد",
@@ -264,15 +268,15 @@
             },
             "balanceFinder": {
                 "title": "یابنده موجودی",
-                "description": "Perform an extended search of your addresses for tokens"
+                "description": "انجام جستجو گسترده در آدرس‌های شما برای پیدا کردن توکن‌ها"
             },
             "hiddenAccounts": {
                 "title": "کیف پول های مخفی",
-                "description": "Selecting this options will show wallets that were previously hidden"
+                "description": "با انتخاب این گزینه کیف پول هایی که قبلا پنهان بوده است، نمایش داده می شود"
             },
             "deleteProfile": {
                 "title": "حذف پروفایل",
-                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
+                "description": "کل پروفایل ، کیف پول ها و سابقه تراکنش های شما را حذف می کند. از داشتن نسخه بک آپ مطمئن شوید"
             },
             "deepLinks": {
                 "title": "لینک عمیق",
@@ -288,7 +292,7 @@
             },
             "configureNodeList": {
                 "title": "انتخاب نود",
-                "description": "Manage the list of IOTA network nodes you connect to",
+                "description": "لیست نودهای شبکه آیوتا را که به آنها متصل می شوید مدیریت کنید",
                 "primaryNode": "گره اصلی",
                 "excludeNode": "حذف گره",
                 "includeNode": "اضافه کردن گره",
@@ -296,7 +300,7 @@
                 "setAsPrimary": "تنظیم به عنوان اصلی",
                 "removeNode": "حذف نود",
                 "includeOfficialNodeList": "اضافه کردن لیست گره های رسمی",
-                "noNodes": "There are no nodes, automatic selection will be used instead"
+                "noNodes": "نودی وجود ندارد، به جای آن انتخاب اتوماتیک استفاده می شود"
             },
             "proofOfWork": {
                 "title": "اثبات کار",
@@ -337,7 +341,7 @@
             },
             "reportAnIssue": {
                 "title": "گزارش یک مشکل",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
+                "description": "گزارش یک باگ به برنامه نویسان. اول چک کنید تا مطمئن شوید که قبلا گزارش نشده باشد"
             }
         },
         "login": {
@@ -371,7 +375,7 @@
                 "networkDown": "شبکه قطع شد",
                 "status": "وضعیت",
                 "messagesPerSecond": "پیام ها در ثانیه",
-                "confirmationRate": "سرعت تاییدیه"
+                "referencedRate": "Referenced rate"
             },
             "profileModal": {
                 "allSettings": "همه تنظیمات",
@@ -583,6 +587,7 @@
         "viewStatus": "نشان دادن موقعیت",
         "showHiddenAccounts": "نمایش کیف پول های مخفی",
         "confirm": "تایید",
+        "hideNetworkStatistics": "Hide network statistics",
         "findBalances": "پیدا کردن موجودی",
         "searchBalances": "جستجو برای موجودی",
         "searchAgain": "جستجوی مجدد",
@@ -702,8 +707,8 @@
         "receiving": "در حال دریافت",
         "sending": "در حال ارسال",
         "legacyNetwork": "شبکه قدیمی",
-        "capsLock": "Caps Lock is on",
-        "version": "Version {version}"
+        "capsLock": "کلید caps lock روشن است",
+        "version": "نسخه {version}"
     },
     "dates": {
         "today": "امروز",
