@@ -241,8 +241,8 @@
                 "description": "Systembenachrichtigungen bei Transaktionen"
             },
             "networkStatus": {
-                "title": "Network status",
-                "description": "Displays the status of the node you are currently connected to."
+                "title": "Netzwerkstatus",
+                "description": "Zeigt den Status des Nodes an, mit welchem du gerade verbunden bist."
             },
             "exportStronghold": {
                 "title": "Backup exportieren",
@@ -375,7 +375,7 @@
                 "networkDown": "Netzwerk nicht verbunden",
                 "status": "Status",
                 "messagesPerSecond": "Nachrichten pro Sekunde",
-                "referencedRate": "Referenced rate"
+                "referencedRate": "Bestätigungsrate"
             },
             "profileModal": {
                 "allSettings": "Alle Einstellungen",
@@ -587,7 +587,7 @@
         "viewStatus": "Status ansehen",
         "showHiddenAccounts": "Ausgeblendete Wallets anzeigen",
         "confirm": "Bestätigen",
-        "hideNetworkStatistics": "Hide network statistics",
+        "hideNetworkStatistics": "Netzwerk Statistiken verbergen",
         "findBalances": "Guthaben suchen",
         "searchBalances": "Nach Guthaben suchen",
         "searchAgain": "Erneut suchen",

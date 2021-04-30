@@ -241,8 +241,8 @@
                 "description": "Rendszer értesítések a tranzakciós eseményekről"
             },
             "networkStatus": {
-                "title": "Network status",
-                "description": "Displays the status of the node you are currently connected to."
+                "title": "Hálózat állapota",
+                "description": "A jelenleg használt csomópont állapotát jeleníti meg."
             },
             "exportStronghold": {
                 "title": "Biztonsági mentés",
@@ -375,7 +375,7 @@
                 "networkDown": "A hálózat nem elérhető",
                 "status": "Állapot",
                 "messagesPerSecond": "Üzenet / másodperc",
-                "referencedRate": "Referenced rate"
+                "referencedRate": "Hivatkozási arány"
             },
             "profileModal": {
                 "allSettings": "Beállítások",
@@ -587,7 +587,7 @@
         "viewStatus": "Állapot megtekintése",
         "showHiddenAccounts": "Rejtett tárcák megjelenítése",
         "confirm": "Megerősít",
-        "hideNetworkStatistics": "Hide network statistics",
+        "hideNetworkStatistics": "Hálózati statisztika elrejtése",
         "findBalances": "Egyenleg keresése",
         "searchBalances": "Egyenleg keresése",
         "searchAgain": "Keresés újra",

@@ -241,8 +241,8 @@
                 "description": "Уведомления системы для транзакций"
             },
             "networkStatus": {
-                "title": "Network status",
-                "description": "Displays the status of the node you are currently connected to."
+                "title": "Статус сети",
+                "description": "Отображает стутус узла, к которому вы в данный момент подключены."
             },
             "exportStronghold": {
                 "title": "Экспорт резервной копии",
@@ -587,7 +587,7 @@
         "viewStatus": "Просмотр статуса",
         "showHiddenAccounts": "Show hidden wallets",
         "confirm": "Подтвердить",
-        "hideNetworkStatistics": "Hide network statistics",
+        "hideNetworkStatistics": "Скрыть статистику сети",
         "findBalances": "Find balances",
         "searchBalances": "Search for balances",
         "searchAgain": "Search again",

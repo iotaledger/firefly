@@ -1,7 +1,7 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Испрати, Прими и Управувај со твоите IOTA токени",
+            "title": "Испраќајте, Примајте и Управувајте со вашите IOTA токени",
             "body": "Firefly е официјалниот софтвер за паричник на IOTA."
         },
         "legal": {
@@ -11,7 +11,7 @@
         },
         "appearance": {
             "title": "Изглед",
-            "body": "Одбери си ја темата."
+            "body": "Одберете ја темата на апликацијата."
         },
         "profile": {
             "title": "Креирај профил",
@@ -148,42 +148,42 @@
             "findingBalance": "Пронаоѓање на балансот...",
             "incorrectSeedVaultPassword": "Погрешна SeedVault лозинка.",
             "noDataSeedVault": "Во SeedVault-от не можеа да се пронајдат податоци.",
-            "signingBundle": "Signing bundle",
-            "broadcastingBundle": "Трансмисија на пакет",
-            "miningBundle": "Mining bundle",
-            "problemRestoringWallet": "There was a network error restoring your wallet. Please try again.",
-            "minimumMigrationAmountSpentAddresses": "The minimum migration amount for each spent address is 1 Mi. Check again if your balance doesn't look right.",
-            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
-            "cannotMigrateAllYourFunds": "We cannot migrate all of your funds because some addresses are too low in value. You can proceed anyway. {value} will be lost.",
-            "error": "There was an error migrating your funds. Please try again."
+            "signingBundle": "Потпишување збирка",
+            "broadcastingBundle": "Трансмисија на збирка",
+            "miningBundle": "Рударење збирка",
+            "problemRestoringWallet": "Се случи грешка на мрежата при опоравувањето на вашиот паричник. Ве молиме пробајте повторно.",
+            "minimumMigrationAmountSpentAddresses": "Минималната сума за миграција за секоја искористена адреса е 1 Mi. Проверете повторно ако вашиот биланс не изгледа како што треба.",
+            "tooManyAddressesToMigrate": "Имате премногу адреси со мал биланс за мигрирање. Проверете повторно ако вашиот биланс не изгледа како што треба.",
+            "cannotMigrateAllYourFunds": "Не можеме да ги мигрираме сите ваши средства затоа што некои адреси имаат премала вредност на нив. Сепак можете да продолжите. {value} ќе бидат изгубени.",
+            "error": "Се случи грешка при мигрирањето на вашите средства. Ве молиме пробајте повторно."
         },
         "bundleMiningWarning": {
             "title": "Предупредување",
-            "body1": "You have funds on one or more spent addresses.",
-            "body2": "We recommend you run an automated process to help secure and transfer these funds safely.",
-            "body3": "If you close the app you will need to restart the whole migration.",
+            "body1": "Имате средства на една или повеќе искористени адреси.",
+            "body2": "Препорачуваме да го извршите автоматизираниот процес за безбедно да ги резервирате и пренесете овие средства.",
+            "body3": "Ако ја затворите апликацијата ќе треба да ја почнете целата миграција одново.",
             "learn": "Дознајте повеќе за искористените адреси"
         },
         "secureSpentAddresses": {
-            "title": "Secure spent addresses",
-            "body1": "You have funds detected on {number, plural, one {# spent address} other {# spent addresses}}.",
-            "body2": "We recommend you run an automated process to help secure and transfer your funds safely.",
-            "error": "You can’t migrate spent addresses with less than 1 Mi"
+            "title": "Обезбедете ги искористените адреси",
+            "body1": "Имате средства кои се детектирани на {number, plural, one {# искористена адреса} other {# искористени адреси}}.",
+            "body2": "Препорачуваме да извршите автоматизиран процес за безбедно да ги резервирате и пренесете вашите средства.",
+            "error": "Не можете да мигрирате искористени адреси со помалку од 1 Mi"
         },
         "securityCheckCompleted": {
             "title": "Сигурносната проверка е завршена",
-            "body1": "We have calculated the security risk level. Running this process again may lower your risk level.",
-            "body2": "When you are happy with the risk level(s) press continue.",
-            "rerun": "Rerun process for selected addresses",
+            "body1": "Го имаме пресметано нивото на ризик. Извршувањето на овој процес повторно може да го намали нивото на ризик.",
+            "body2": "Кога ќе бидете задоволни со нивото на ризик, притиснете продолжи.",
+            "rerun": "Повторно изврешете го процесот за избраните адреси",
             "continueMigration": "Продолжи ја миграцијата"
         },
         "securingSpentAddresses": {
-            "title": "Securing spent addresses...",
-            "body1": "This process will take {minutes, plural, one {1 minute} other {# minutes}}.",
-            "body2": "Your computer will run at full capacity, you may wish to do something else while you wait for this to complete."
+            "title": "Обезбедување на искористените адреси...",
+            "body1": "Овој процес ќе трае {minutes, plural, one {1 минута} other {# минути}}.",
+            "body2": "Вашиот компјутер ќе работи со целосен капацитет, можеби би сакале да правите нешто друго додека чекате ова да заврши."
         },
         "transferFragmentedFunds": {
-            "body1": "Firefly will now proceed to migrate your funds. This may take a while.",
+            "body1": "Firefly сега ќе продолжи со мигрирањето на вашите средства. Ова може да трае подолго.",
             "migrate": "Мигрирајте ги средствата",
             "transaction": "Трансакција {number}",
             "rerun": "Обиди се повторно"
@@ -194,23 +194,23 @@
         },
         "balance": {
             "title": "Ваш баланс",
-            "body": "Make sure your balance is correct before continuing. You can check again if things don't look correct.",
-            "error": "The minimum migration amount is 1 Mi. Check again if your balance doesn't look right.",
-            "zeroBalance": "Try checking again. If you still can't find your balance you might have entered your seed incorrectly."
+            "body": "Осигурајте се дека вашиот биланс е точен пред да продолжите. Можете да проверите повторно ако нешто не изгледа како што треба.",
+            "error": "Минималната сума за миграција е 1 Mi. Проверете повторно ако вашиот биланс не изгледа како што треба.",
+            "zeroBalance": "Пробајте да проверите повторно. Ако сè уште не можете да го пронајдете билансот, можеби го имате внесено вашиот seed погрешно."
         },
         "settings": {
-            "settings": "Поставувања",
+            "settings": "Подесувања",
             "generalSettings": {
-                "title": "Општи поставувања",
-                "description": "Configure your app's appearance and other general settings"
+                "title": "Општи подесувања",
+                "description": "Конфигурирајте го изгледот на вашата апликација и други општи подесувања"
             },
             "security": {
                 "title": "Безбедност",
-                "description": "Change your password and adjust security-related settings"
+                "description": "Променете ја вашата лозинка и подесете ги подесувањата за безбедност"
             },
             "advancedSettings": {
                 "title": "Напредни подесувања",
-                "description": "Алатки и рачни поставувања за корисници со технички познавања"
+                "description": "Алатки и рачни подесувања за корисници со технички познавања"
             },
             "helpAndInfo": {
                 "title": "Помош и информации",
@@ -241,8 +241,8 @@
                 "description": "Системски известувања за трансакциски настани"
             },
             "networkStatus": {
-                "title": "Network status",
-                "description": "Displays the status of the node you are currently connected to."
+                "title": "Статус на мрежата",
+                "description": "Го прикажува статусот на јазолот со кој моментално сте поврзани."
             },
             "exportStronghold": {
                 "title": "Експортирај ја резервната копија",
@@ -287,7 +287,7 @@
                 "description": "Поврзете се со тест-мрежи и други функционалности за девелопери"
             },
             "nodeSettings": {
-                "title": "Поставувања на јазолот",
+                "title": "Подесувања на јазолот",
                 "description": "Изберете Рачно за да ги поставите својствата на јазолот и да се поврзете со вашиот јазол"
             },
             "configureNodeList": {
@@ -304,49 +304,49 @@
             },
             "proofOfWork": {
                 "title": "Proof of Work",
-                "description": "Complete proof of work locally on your device or outsource to the node"
+                "description": "Изврешете proof of work локално на вашиот уред или пренасочете го тоа кон јазолот"
             },
             "errorLog": {
                 "title": "Записник на грешки",
-                "description": "View errors to debug an issue"
+                "description": "Прегледајте ги грешките за да дијагностицирате проблем"
             },
             "diagnostics": {
                 "title": "Дијагностика",
-                "description": "View system and application information"
+                "description": "Погледнете ги информациите за системот и апликацијата"
             },
             "stateExport": {
                 "title": "Експорт на состојбата",
-                "description": "Export your transaction history to a .csv file"
+                "description": "Експортирајте ја вашата историјата на трансакции во .csv датотека"
             },
             "troubleshoot": {
                 "title": "Дијагностика",
-                "description": "Use the troubleshooting wizard to solve common problems"
+                "description": "Искористете го волшебникот за решавање проблеми за да решите некој чест проблем"
             },
             "documentation": {
                 "title": "Документација",
-                "description": "View the documentation for in depth explanations of how things work"
+                "description": "Погледнете ја документацијата за детални објаснувања за тоа како нештата функционираат"
             },
             "faq": {
                 "title": "ЧПП",
                 "title2": "Често поставувани прашања",
-                "description": "View the FAQs to get help with a common problem or question"
+                "description": "Погледнете ги ЧПП за да добиете помош во врска со чест проблем или прашање"
             },
             "discord": {
                 "title": "Discord",
-                "description": "Get help from the IOTA community on Discord"
+                "description": "Добијте помош од IOTA заедницата на Discord"
             },
             "about": {
                 "title": "Информации",
                 "description": ""
             },
             "reportAnIssue": {
-                "title": "Report an issue",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
+                "title": "Пријавете проблем",
+                "description": "Пријавете баг на девелоперите. Прво проверете за да се осигурате дека не бил веќе пријавен"
             }
         },
         "login": {
-            "pleaseWait": "Please wait {time, plural, one {1 second} other {# seconds}}",
-            "incorrectAttempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+            "pleaseWait": "Ве молиме почекајте {time, plural, one {1 секунда} other {# секунди}}",
+            "incorrectAttempts": "{attempts, plural, one {1 неточен обид} other {# неточни обиди}}"
         },
         "dashboard": {
             "security": {
@@ -357,7 +357,7 @@
                 },
                 "hardwareDevice": {
                     "title": "Хардверски уред",
-                    "noneDetected": "None detected"
+                    "noneDetected": "Ниеден не е детектиран"
                 },
                 "strongholdStatus": {
                     "title": "Статус на паричникот",
@@ -366,16 +366,16 @@
                 },
                 "strongholdBackup": {
                     "title": "Бекап на паричникот",
-                    "weeksAgo": "{weeks, plural, one {# week} other {# weeks}} ago"
+                    "weeksAgo": "пред {weeks, plural, one {# седмица} other {# седмици}}"
                 }
             },
             "network": {
-                "networkOperational": "Network Operational",
-                "networkDegraded": "Network Degraded",
-                "networkDown": "Network Disconnected",
+                "networkOperational": "Мрежата е функционална",
+                "networkDegraded": "Мрежата е со намалена функционалност",
+                "networkDown": "Мрежата е исклучена",
                 "status": "Статус",
                 "messagesPerSecond": "Пораки во секунда",
-                "referencedRate": "Referenced rate"
+                "referencedRate": "Стапка на референцирање"
             },
             "profileModal": {
                 "allSettings": "Сите поставки",
@@ -386,50 +386,50 @@
     "popups": {
         "password": {
             "title": "Потребна е лозинка",
-            "subtitle": "Please enter your password to unlock your wallets",
-            "backup": "Please enter your password to export a backup"
+            "subtitle": "Ве молиме внесете ја вашата лозинка за да ги отклучите вашите паричници",
+            "backup": "Ве молиме внесете ја вашата лозинка за да експортирате резервна копија"
         },
         "qr": {
-            "title": "Your QR code"
+            "title": "Вашиот QR код"
         },
         "version": {
             "title": "Тековна верзија: {version}",
-            "upToDateTitle": "Firefly is up to date",
-            "upToDateDescription": "You are running the latest and safest version of Firefly.",
-            "updateAvailable": "Firefly update available",
-            "updateDetails": "Version {version} - {date}",
-            "noAutoUpdate": "Auto-update is disabled in this Windows version, please go to https://firefly.iota.org to download the update."
+            "upToDateTitle": "Firefly е ажуриран",
+            "upToDateDescription": "Ја користите најновата и најбезбедна верзија на Firefly.",
+            "updateAvailable": "Достапно е ажурирање за Firefly",
+            "updateDetails": "Верзија {version} - {date}",
+            "noAutoUpdate": "Автоматското ажурирање е оневозможено на оваа Windows верзија, ве молиме посетете ја страната https://firefly.iota.org за да го преземете ажурирањето."
         },
         "backup": {
             "title": "Последна резервна копиај: {date}",
             "lastBackup": "Последно направивте резервна копија на {date}",
-            "backupDescription": "It is important to back up regularly to ensure you have a copy of your wallets and transaction history.",
-            "backupWarning": "If you lose your backup and recovery phrase you will lose access to your funds.",
+            "backupDescription": "Битно е редовно да правите резервни копии за да се осигурате дека имате копија од вашите паричници и историја на трансакции.",
+            "backupWarning": "Ако ја изгубите вашата резервна копија и фраза за опоравување, ќе го изгубите пристапот до вашите срества.",
             "notBackedUp": "Не е направена резервна копија",
-            "notBackedUpDescription": "You have not backed up your wallets",
+            "notBackedUpDescription": "Немате направено резервна копија од вашите паричници",
             "saving": "Зачувување..."
         },
         "deleteAccount": {
             "title": "Избриши го {name}?",
-            "body": "This wallet has no transaction history. It can safely be deleted.",
-            "typePassword": "Type your wallet password to confirm.",
+            "body": "Овој паричник нема историја на трансакции. Може да биде безбедно избришан.",
+            "typePassword": "Внесете ја лозинката на вашиот паричник за да потврдите.",
             "hideAccount": "Избриши го паричникот",
             "errorTitle": "Не може да се избрише {name}",
-            "errorBody1": "You cannot delete this wallet, you must have at least one."
+            "errorBody1": "Не можете да го избришете овој паричник, морате да имате барем еден."
         },
         "hideAccount": {
             "title": "Скриј го {name}?",
-            "body": "You can find this wallet later by enabling \"Show hidden wallets\" in Advanced Settings.",
-            "typePassword": "Type your wallet password to confirm.",
+            "body": "Можете да го пронајдете овој паричник подоцна со овозможување на \"Прикажи скриени паричници\" во Напредни поставувања.",
+            "typePassword": "Внесете ја лозинката на вашиот паричник за да потврдите.",
             "hideAccount": "Сокриј го паричникот",
-            "errorTitle": "Unable to hide {name}",
-            "errorBody1": "To hide a wallet it must have 0 balance.",
-            "errorBody2": "You currently have {balance} remaining on this wallet. Please move these funds to a different wallet and try again.",
-            "errorBody3": "You cannot hide this wallet, you must have at least one."
+            "errorTitle": "Не може да се сокрие {name}",
+            "errorBody1": "За да го сокриете паричникот, мора билансот да му е 0.",
+            "errorBody2": "Моментално имате преостанати {balance} на овој паричник. Ве молиме преместете ги овие средства во друг паричник и пробајте повторно.",
+            "errorBody3": "Не можете да го скриете овој паричник, морате да имате барем еден."
         },
         "addressHistory": {
             "title": "Историја на адресата на {name}",
-            "currentBalance": "Current balance: {balance}"
+            "currentBalance": "Актуелен биланс: {balance}"
         },
         "node": {
             "titleAdd": "Додај јазол",
@@ -444,12 +444,12 @@
         },
         "errorLog": {
             "title": "Записник на грешки",
-            "empty": "The error log is empty."
+            "empty": "Записникот на грешки е празен."
         },
         "deleteProfile": {
             "title": "Избриши го профилот",
-            "confirmation": "Are you sure you want to delete this profile? This operation cannot be undone.",
-            "typePassword": "Type your password to confirm."
+            "confirmation": "Дали сте сигурни дека сакате да го избришете овој профил? Оваа операција не може да се поништи.",
+            "typePassword": "Внесете ја вашата лозинка за да потврдите."
         },
         "diagnostics": {
             "title": "Дијагностика",
@@ -464,39 +464,39 @@
         },
         "transaction": {
             "title": "Потврди ја трансакцијата",
-            "body": "You’re about to send {amount} to"
+            "body": "Ќе испратите {amount} до"
         },
         "balanceFinder": {
             "title": "Пронаоѓач на салдото",
-            "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
-            "totalWalletBalance": "Total balance",
-            "typePassword": "Type your password to allow searching."
+            "body": "Извршете подетално пребарување на адреси за да најдете биланси кои недостигаат. Ова може да потрае подолго.",
+            "totalWalletBalance": "Вкупен биланс",
+            "typePassword": "Внесете ја вашата лозинка за да дозволите пребарување."
         },
         "riskFunds": {
-            "title": "Warning: funds at risk during migration",
-            "body1": "It is strongly recommended that you secure all your funds before proceeding with migration. Your funds are at risk of theft if you do not secure them.",
-            "body2": "It is recommended that you rerun the process for addresses with a medium risk level or above."
+            "title": "Внимание: средствата се изложени на ризик за време на миграцијата",
+            "body1": "Силно се препорачува да ги обезбедите сите ваши средства пред да продолжите со миграцијата. Вашите средства се изложени на ризик од кражба ако не ги обезбедите.",
+            "body2": "Препорачано е да го извршите процесот повторно за адресите со средно или повисоко ниво на ризик."
         },
         "missingBundle": {
-            "title": "Warning: funds at risk during migration",
-            "body": "You have funds on spent addresses, but the information needed to secure them was not found. This can happen if you made transactions a long time ago. You can proceed but {value} are at risk during migration.",
+            "title": "Внимание: средствата се изложени на ризик за време на миграцијата",
+            "body": "Имате средства на искористени адреси, но не беа пронајдени информациите потребни за да се обезбедат. Ова може да се случи доколку имате направено трансакции многу одамна. Можете да продолжите, но {value} ќе бидат изложени на ризик за време на миграцијата.",
             "learnMore": "Дознајте повеќе за искористените адреси",
             "proceed": "Ги разбирам ризиците"
         },
         "snapshot": {
-            "title": "Ongoing network upgrade",
-            "body": "The Chrysalis network upgrade has begun.",
-            "bodyMigration": "Migration is disabled until it is complete.",
-            "bodyFirefly": "Firefly is disabled until it is complete. Token migration will still be possible afterwards."
+            "title": "Надградбата на мрежата е во тек",
+            "body": "Надградбата на Chrysalis мрежата започна.",
+            "bodyMigration": "Миграцијата е оневозможена додека ова не е завршено.",
+            "bodyFirefly": "Firefly е оневозможен додека тоа не заврши. Миграцијата на токени ќе биде можна и потоа."
         }
     },
     "charts": {
-        "incomingMi": "Incoming {value}",
-        "outgoingMi": "Outgoing {value}",
+        "incomingMi": "Дојдовни {value}",
+        "outgoingMi": "Појдовни {value}",
         "portoflio": "Портфолио",
         "token": "Токен",
-        "accountValue": "Wallet Value",
-        "accountActivity": "Wallet Activity",
+        "accountValue": "Вредност на паричникот",
+        "accountActivity": "Активност на паричникот",
         "timeframe1Hour": "1 час",
         "timeframe1Day": "1 ден",
         "timeframe1Week": "1 недела",
@@ -507,53 +507,53 @@
         "back": "Назад",
         "cancel": "Откажи",
         "close": "Затвори",
-        "dismiss": "Dismiss",
-        "proceedAnyway": "Proceed anyway",
+        "dismiss": "Отфрли",
+        "proceedAnyway": "Продолжи и покрај ова",
         "save": "Зачувај",
-        "importSeed": "Import an existing seed",
-        "restoreWallet": "Migrate or restore a wallet",
-        "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
-        "createWallet": "Create new wallet",
-        "createWalletDescription": "Create a fresh wallet running on Chrysalis",
+        "importSeed": "Импортирање на постоечки seed",
+        "restoreWallet": "Мигрирајте или обновете паричник",
+        "restoreWalletDescription": "Мигрирајте на Chrysalis или обновете постоечки паричник",
+        "createWallet": "Креирајте нов паричник",
+        "createWalletDescription": "Креирајте нов паричник на мрежата Chrysalis",
         "savePassword": "Зачувај ја лозинката",
-        "useBiometric": "Use biometric security",
+        "useBiometric": "Користи биометриска безбедност",
         "setupPin": "Конфигурирај PIN код",
-        "setPin": "Set PIN code",
-        "confirmPin": "Confirm PIN code",
-        "enterYourPin": "Enter your PIN",
+        "setPin": "Поставете PIN код",
+        "confirmPin": "Потврдете го PIN кодот",
+        "enterYourPin": "Внесете го вашиот PIN",
         "saveBackupFile": "Зачувај го фајлот на бекапот",
-        "iveWrittenRecoveryPhrase": "I’ve written down my recovery phrase",
+        "iveWrittenRecoveryPhrase": "Ја имам запишано мојата фраза за опоравување",
         "verifyRecoveryPhrase": "Потврди ја фразата за опоравување",
         "revealRecoveryPhrase": "Откриј ја фразата за опоравување",
-        "importSeedvault": "Import SeedVault",
+        "importSeedvault": "Импортирајте SeedVault",
         "checkAgain": "Провери повторно",
-        "importFromFile": "Import from a file",
+        "importFromFile": "Импортирајте од датотека",
         "send": "Испрати",
         "receive": "Прими",
         "create": "Креирај",
-        "beginTransfer": "Begin Transfer",
+        "beginTransfer": "Започни го трансферот",
         "tryAgain": "Обиди се повторно",
         "visitDiscord": "Посети го Discord",
         "dragDrop": "Drag & Drop",
-        "importExtentions": ".kdbx or .stronghold file",
-        "chooseFile": "Choose a File",
-        "dropHere": "Drop your file here",
+        "importExtentions": ".kdbx или .stronghold датотека",
+        "chooseFile": "Изберете датотека",
+        "dropHere": "Спуштете ја вашата дадотека овде",
         "syncAll": "Синхронизирај сè",
         "export": "Експортирај",
-        "exportNewStronghold": "Export a new Stronghold",
+        "exportNewStronghold": "Експортирајте нов Stronghold",
         "enableDeepLinks": "Овозможи длабоки врски",
         "enableDeveloperMode": "Овозможи режим за девелопери",
-        "enableSystemNotifications": "Enable system notifications",
-        "exportState": "Export state",
-        "localProofOfWork": "Local proof of work",
+        "enableSystemNotifications": "Овозможете системски известувања",
+        "exportState": "Експортирај состојба",
+        "localProofOfWork": "Локален proof of work",
         "unlock": "Отклучи",
         "updateFirefly": "Ажурирај го Firefly",
         "restartNow": "Рестартирај сега",
-        "saveBackup": "Save Stronghold backup",
-        "customizeAcount": "Customise wallet",
-        "viewAddressHistory": "View address history",
+        "saveBackup": "Зачувајте ја Stronghold резервната копија",
+        "customizeAcount": "Прилагоди го паричникот",
+        "viewAddressHistory": "Погледни ја историјата на адресата",
         "hideAccount": "Сокриј го паричникот",
-        "showAccount": "Unhide wallet",
+        "showAccount": "Прикажи паричник",
         "deleteAccount": "Избриши го паричникот",
         "max": "Максимум",
         "addNode": "Додај го јазолот",
@@ -587,7 +587,7 @@
         "viewStatus": "Погледни го статусот",
         "showHiddenAccounts": "Прикажи скриени паричници",
         "confirm": "Потврди",
-        "hideNetworkStatistics": "Hide network statistics",
+        "hideNetworkStatistics": "Скриј ја статистиката на мрежата",
         "findBalances": "Пронајдете ги билансите",
         "searchBalances": "Пребарајте биланси",
         "searchAgain": "Пребарај повторно",
@@ -607,15 +607,15 @@
         "received": "Примено",
         "sendPayment": "Испрати плаќање",
         "moveFunds": "Интерен трансфер",
-        "sendFunds": "Send funds",
-        "sendToAddress": "Send to address",
-        "scanQrOrPaste": "Scan a QR code or paste an Address",
-        "moveFundsBetweenAccounts": "Move funds between wallets",
-        "sendTokensToAddress": "Send tokens to an address",
-        "manageAccount": "Manage Wallet",
-        "customizeAcount": "Customize your wallet",
+        "sendFunds": "Прати средства",
+        "sendToAddress": "Прати на адреса",
+        "scanQrOrPaste": "Скенирајте QR код или залепете адреса",
+        "moveFundsBetweenAccounts": "Преместете ги средствата помеѓу паричниците",
+        "sendTokensToAddress": "Испратете токени на адреса",
+        "manageAccount": "Управувај со паричникот",
+        "customizeAcount": "Прилагодете го вашиот паричник",
         "account": "Паричник",
-        "sendingToAddress": "Sending to address",
+        "sendingToAddress": "Праќање на адреса",
         "amount": "Износ",
         "addAddress": "Додај адреса",
         "reference": "Референца",
@@ -638,15 +638,15 @@
         "accountBalance": "Биланс на паричникот",
         "incoming": "Дојдовни",
         "outgoing": "Појдовни",
-        "totalIn": "Total in",
-        "totalOut": "Total out",
+        "totalIn": "Вкупно дојдовни",
+        "totalOut": "Вкупно појдовни",
         "accounts": "Паричници",
         "myAccounts": "Мои паричници",
         "automaticNodeSelection": "Автоматски избор на јазол",
         "manualNodeSelection": "Рачен избор на јазол",
         "profiles": "Профили",
         "developerProfile": "Профил на девелопер",
-        "developerProfileDescription": "Allows you to connect to testnets",
+        "developerProfileDescription": "Овозможува да се поврзувате со тест-мрежи",
         "dev": "Девелопер",
         "createAccount": "Креирај паричник",
         "accountName": "Име на паричник",
@@ -675,10 +675,10 @@
         "transferRemainderAddress": "Генерирање адреса за депонирање остаток",
         "transferSigning": "Потпишување на трансакцијата",
         "transferPow": "Правење PoW",
-        "transferBroadcasting": "Broadcasting transaction",
+        "transferBroadcasting": "Емитување трансакција",
         "transferComplete": "Трансферот е завршен",
-        "creatingAccount": "Creating wallet, please wait...",
-        "updatingAccount": "Updating wallet, please wait...",
+        "creatingAccount": "Креирање паричник, ве молиме почекајте...",
+        "updatingAccount": "Ажурирање на паричникот, ве молиме почекајте...",
         "accountSyncing": "Паричникот се синхронизира",
         "accountSyncComplete": "Синхронизацијата на паричникот е завршена",
         "passwordUpdating": "Се ажурира лозинката...",
@@ -687,22 +687,22 @@
         "syncingAccounts": "Синхронизација на паричниците...",
         "exportingStronghold": "Експортирање на Stronghold...",
         "exportingStrongholdSuccess": "Експортирањето на Stronghold беше успешно",
-        "exportingStrongholdFailed": "Exporting Stronghold failed",
-        "pinCodeUpdating": "Updating PIN code...",
-        "pinCodeSuccess": "Updated PIN code successfully",
-        "pinCodeFailed": "Updating PIN code failed",
+        "exportingStrongholdFailed": "Експортирањето на Stronghold не успеа",
+        "pinCodeUpdating": "Ажурирање на PIN кодот...",
+        "pinCodeSuccess": "Успешно ажурирање на PIN кодот",
+        "pinCodeFailed": "Ажурирањето на PIN кодот не успеа",
         "passwordStrength": "Јачина на лозинката",
         "passwordStrength0": "Лошо",
         "passwordStrength1": "Слабо",
         "passwordStrength2": "Слабо",
         "passwordStrength3": "Просечно",
         "passwordStrength4": "Силна",
-        "creatingProfile": "Creating profile, please wait...",
+        "creatingProfile": "Креирање на профилот, ве молиме почекајте...",
         "fundMigration": "Миграција на средствата",
-        "accountRemoved": "This wallet is hidden. Unhide it to perform transfers.",
-        "receivingTo": "Receiving to {account}",
-        "sendingFrom": "Sending from {account}",
-        "receivedTo": "Received to {account}",
+        "accountRemoved": "Паричникот е скриен. Откријте го за да вршите трансфер.",
+        "receivingTo": "Примање на {account}",
+        "sendingFrom": "Праќање од {account}",
+        "receivedTo": "Примено на {account}",
         "sentFrom": "Испратено од {account}",
         "receiving": "Се прима",
         "sending": "Се испраќа",
@@ -714,16 +714,16 @@
         "today": "Денес",
         "yesterday": "Вчера",
         "daysAgo": "пред {time, plural, one {# ден} other {# дена}}",
-        "weeksAgo": "пред {time, plural, one {# недела} other {# недели}}",
+        "weeksAgo": "пред {time, plural, one {# седмица} other {# седмици}}",
         "monthsAgo": "пред {time, plural, one {# месец} other {# месеци}}",
         "yearsAgo": "пред {time, plural, one {# година} other {# години}}"
     },
     "notifications": {
         "valueTx": "Примање {{value}} на {{account}}",
-        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
-        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
-        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
-        "failed": "Outgoing {{value}} from {{account}} has failed",
+        "confirmed": "Испраќањето на {{value}} од {{account}} беше потврдено",
+        "confirmedInternal": "{{value}} од {{senderAccount}} до {{receiverAccount}} е потврдено",
+        "confirmedInternalNoAccounts": "Интерниот пренос на {{value}} беше потврден",
+        "failed": "Испраќањето на {{value}} од {{account}} не беше успешно",
         "downloadingUpdate": "Преземање на ажурирањето",
         "updateReady": "Спремно ажурирање",
         "updateError": "Се случи грешка за време на ажурирањето, ве молиме пробајте повторно",

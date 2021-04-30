@@ -241,12 +241,12 @@
                 "description": "Systemvarsler for transaksjonshendelser"
             },
             "networkStatus": {
-                "title": "Network status",
-                "description": "Displays the status of the node you are currently connected to."
+                "title": "Nettverksstatus",
+                "description": "Viser statusen til noden du er koblet til."
             },
             "exportStronghold": {
                 "title": "Eksporter sikkerhetskopi",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
+                "description": "Eksporter til en Stronghold-fil - en fullstendig kryptert sikkerhetskopi av lommeboken din og den seneste transaksjonshistorikken"
             },
             "appLock": {
                 "title": "Automatisk lås",
@@ -256,7 +256,7 @@
             },
             "changePassword": {
                 "title": "Endre passord",
-                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
+                "description": "Passordet ditt brukes til å sikre lommeboken. Du må bruke et sterkt passord for å beskytte midlene dine"
             },
             "changePincode": {
                 "title": "Endre PIN-kode",
@@ -268,15 +268,15 @@
             },
             "balanceFinder": {
                 "title": "Saldo-finner",
-                "description": "Perform an extended search of your addresses for tokens"
+                "description": "Utfør et utvidet søk av adressene dine for å finne midler"
             },
             "hiddenAccounts": {
                 "title": "Skjulte lommebøker",
-                "description": "Selecting this options will show wallets that were previously hidden"
+                "description": "Ved å velge dette alternativet vises lommebøker som tidligere var skjult"
             },
             "deleteProfile": {
                 "title": "Slett profil",
-                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
+                "description": "Sletter hele lommeboken, profilen og transaksjonshistorikken. Pass på at du har en sikkerhetskopi"
             },
             "deepLinks": {
                 "title": "Dyplenker",
@@ -292,7 +292,7 @@
             },
             "configureNodeList": {
                 "title": "Velg en node",
-                "description": "Manage the list of IOTA network nodes you connect to",
+                "description": "Administrer listen over IOTA nettverksnoder du kobler til",
                 "primaryNode": "Primær node",
                 "excludeNode": "Ekskluder node",
                 "includeNode": "Inkluder node",
@@ -300,7 +300,7 @@
                 "setAsPrimary": "Sett som primær",
                 "removeNode": "Fjern node",
                 "includeOfficialNodeList": "Inkluder offisiell liste over noder",
-                "noNodes": "There are no nodes, automatic selection will be used instead"
+                "noNodes": "Ingen noder, automatisk selektering brukes i stedet"
             },
             "proofOfWork": {
                 "title": "Proof of work",
@@ -341,7 +341,7 @@
             },
             "reportAnIssue": {
                 "title": "Rapporter et problem",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
+                "description": "Rapporter en feil til utviklerne. Sjekk gjennom for å forsikre deg om at den ikke allerede er rapportert"
             }
         },
         "login": {
@@ -587,7 +587,7 @@
         "viewStatus": "Vis status",
         "showHiddenAccounts": "Vis skjulte lommebøker",
         "confirm": "Bekreft",
-        "hideNetworkStatistics": "Hide network statistics",
+        "hideNetworkStatistics": "Skjul nettverksstatistikk",
         "findBalances": "Finn saldoer",
         "searchBalances": "Søk etter saldoer",
         "searchAgain": "Søk på nytt",
@@ -707,8 +707,8 @@
         "receiving": "Mottar",
         "sending": "Sender",
         "legacyNetwork": "Gammelt Nettverk",
-        "capsLock": "Caps Lock is on",
-        "version": "Version {version}"
+        "capsLock": "Caps Lock er på",
+        "version": "Versjon {version}"
     },
     "dates": {
         "today": "I dag",

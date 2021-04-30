@@ -241,8 +241,8 @@
                 "description": "Notifiche di sistema per eventi delle transazione"
             },
             "networkStatus": {
-                "title": "Network status",
-                "description": "Displays the status of the node you are currently connected to."
+                "title": "Stato della rete",
+                "description": "Visualizza lo stato del nodo a cui sei attualmente connesso."
             },
             "exportStronghold": {
                 "title": "Esporta Backup",
@@ -375,7 +375,7 @@
                 "networkDown": "Rete disconnessa",
                 "status": "Stato",
                 "messagesPerSecond": "Messaggi al secondo",
-                "referencedRate": "Referenced rate"
+                "referencedRate": "Tasso di riferimento"
             },
             "profileModal": {
                 "allSettings": "Tutte le impostazioni",
@@ -587,7 +587,7 @@
         "viewStatus": "Visualizza stato",
         "showHiddenAccounts": "Mostra wallet nascosti",
         "confirm": "Conferma",
-        "hideNetworkStatistics": "Hide network statistics",
+        "hideNetworkStatistics": "Nascondi le statistiche della rete",
         "findBalances": "Trova fondi",
         "searchBalances": "Cerca fondi",
         "searchAgain": "Nuova ricerca",
