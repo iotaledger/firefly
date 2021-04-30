@@ -241,8 +241,8 @@
                 "description": "اعلانات سیستم برای تراکنش ها"
             },
             "networkStatus": {
-                "title": "Network status",
-                "description": "Displays the status of the node you are currently connected to."
+                "title": "وضعیت شبکه",
+                "description": "وضعیت نودی که در حال حاضر به آن متصل هستید را نشان می دهد."
             },
             "exportStronghold": {
                 "title": "استخراج بک آپ",
@@ -587,7 +587,7 @@
         "viewStatus": "نشان دادن موقعیت",
         "showHiddenAccounts": "نمایش کیف پول های مخفی",
         "confirm": "تایید",
-        "hideNetworkStatistics": "Hide network statistics",
+        "hideNetworkStatistics": "مخفی کردن آمار شبکه",
         "findBalances": "پیدا کردن موجودی",
         "searchBalances": "جستجو برای موجودی",
         "searchAgain": "جستجوی مجدد",

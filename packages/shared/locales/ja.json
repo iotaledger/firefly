@@ -241,7 +241,7 @@
                 "description": "取引履歴のシステム通知"
             },
             "networkStatus": {
-                "title": "Network status",
+                "title": "ネットワークのステータス",
                 "description": "Displays the status of the node you are currently connected to."
             },
             "exportStronghold": {

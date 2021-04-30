@@ -375,7 +375,7 @@
                 "networkDown": "Nätverk frånkopplat",
                 "status": "Status",
                 "messagesPerSecond": "Meddelanden per sekund",
-                "referencedRate": "Refererad hastighet"
+                "referencedRate": "Bekräftade meddelanden"
             },
             "profileModal": {
                 "allSettings": "Alla inställningar",
