@@ -1,6 +1,6 @@
 <script lang="typescript">
-    import { selectedAccountId, wallet, isTransferring, api } from 'shared/lib/wallet'
-    import { Button, Dropdown, Text } from 'shared/components'
+    import { wallet, api } from 'shared/lib/wallet'
+    import { Button, Checkbox, Text, ButtonCheckbox } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
     import { isStrongholdLocked } from 'shared/lib/profile'
     import { randomEmojis } from 'shared/lib/emojiList'
@@ -21,13 +21,17 @@
     }
 
     $: accountsDropdownItems = $accounts.map((acc) => format(acc))
-    $: account = $accounts.find(a=> a.id === $selectedAccountId)
+    $: accountsToLink = []
 
-    $: accountToLink = account ? format(account) : (accountsDropdownItems && accountsDropdownItems[0])
-
-    const handleFromSelect = (item) => {
-        accountToLink = item
+    function handleAccountClick(acc) {
+        if(accountsToLink.findIndex(a=>a.id===acc.id) > -1) {
+            accountsToLink = accountsToLink.filter(a=> a.id!==acc.id)
+        } else {
+            accountsToLink = [...accountsToLink, acc]
+        }
     }
+
+    $: timeHasPassed = false
 
     function startLink() {
         emojis = randomEmojis(4)
@@ -39,7 +43,7 @@
                 method:'Start',
                 payload: JSON.stringify({
                     emojis,
-                    accounts: [{id:accountToLink.id}],
+                    accounts: accountsToLink,
                     id: ap.id,
                     name: ap.name,
                 })
@@ -47,6 +51,9 @@
                 onSuccess: r=> console.log("SUCCESS1!", r),
                 onError: r=> console.log("ONERROR", r)
             })
+            setTimeout(()=>{
+                timeHasPassed = true
+            }, 2500)
         } else {
             api.callPlugin({
                 plugin:'glow',
@@ -71,29 +78,34 @@
 
 </script>
 
-<Text type="h4" classes="mb-5">Link Glow</Text>
+<Text type="h4" classes="mb-5">Connect Firefly to Glow</Text>
 
 {#if !emojis}
     {#if $isStrongholdLocked}
         <div class="w-full h-full mb-5">
-            <Text>Your Stronghold must be unlocked to use Glow</Text>
+            <Text>Choose which accounts you want to connect to Glow</Text>
         </div>
     {/if}
-    <div class={"flex flex-col justify-center align-center items-center"}>
-        {#if accountToLink && !$selectedAccountId}
-            <div class="block mb-5">
-                <Dropdown
-                    value={accountToLink?.label || ''}
-                    label={'Account to Link'}
-                    items={accountsDropdownItems}
-                    onSelect={handleFromSelect}
-                    disabled={$accounts.length === 1 || $isTransferring} />
-            </div>
-        {/if}
+    <div class={"overflow-y-auto max-h-80"}>
+        <div class={"flex flex-col justify-center align-center items-center"}>
+            {#each accountsDropdownItems as acc}
+                <button
+                    on:click={()=> handleAccountClick(acc)}
+                    type="button"
+                    class="w-full flex flex-row p-4 mb-4 rounded-2xl border border-1 border-solid items-center justify-between border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-gray-500 focus:hover:border-gray-700"
+                    style="height: 64px">
+                    <div class="flex flex-row items-center justify-between w-full pr-5">
+                        <Text smaller classes="ml-3">{acc.alias}</Text>
+                        <Text smaller classes="ml-3">{acc.balance}</Text>
+                    </div>
+                    <Checkbox checked={accountsToLink.findIndex(a=>a.id===acc.id) > -1} classes="mb-0 pointer-events-none" tabindex={-1} />
+                </button>   
+            {/each}
+        </div>
     </div>
     <div class="flex flex-row justify-between w-full space-x-4 px-8">
         <Button secondary classes="w-1/2" onClick={closePopup}>{locale('actions.cancel')}</Button>
-        <Button classes="w-1/2" onClick={startLink} disabled={!accountToLink}>
+        <Button classes="w-1/2" onClick={startLink} disabled={!accountsToLink.length}>
             {'Link Glow'}
         </Button>
     </div>
@@ -110,7 +122,7 @@
     </div>
     <div class="flex flex-row justify-between w-full space-x-4 px-8">
         <Button secondary classes="w-1/2" onClick={closePopup}>{locale('actions.cancel')}</Button>
-        <Button classes="w-1/2" onClick={finishLink} disabled={!accountToLink}>
+        <Button classes="w-1/2" onClick={finishLink} disabled={!accountsToLink.length || !timeHasPassed}>
             {'They Match! Link Now'}
         </Button>
     </div>
@@ -132,5 +144,13 @@
     line-height: 28px;
     padding-top: 6px;
     transition: 0.3s;
+}
+.acc {
+    border-radius: 10px;
+    cursor:pointer;
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 </style>
