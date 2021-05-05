@@ -17,14 +17,14 @@
     const openLedgerNotConnectedPopup = () => {
         openPopup({
             type: 'ledgerNotConnected',
+            hideClose: true,
             props: {
                 message: locale('views.setup_ledger.connect'),
-                closable: false
-            }
+            },
         })
     }
 
-    const unsubscribe = popupState.subscribe(state => {
+    const unsubscribe = popupState.subscribe((state) => {
         if (!(state.active || isLedgerConnected)) {
             checkIfLedgerIsConnected = false
             handleBackClick()
@@ -59,7 +59,7 @@
             },
             onError() {
                 handleLedgerDeviceNotConnected()
-            }
+            },
         })
     }
 
@@ -74,7 +74,7 @@
                     nodes: nodes.map((node) => node.url),
                     network: $network,
                 },
-                signerType: { type: simulator ? 'LedgerNanoSimulator' : 'LedgerNano' }
+                signerType: { type: simulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
             },
             {
                 onSuccess(createAccountResponse) {
@@ -83,8 +83,8 @@
                 },
                 onError(error) {
                     creatingAccount = false
-                    console.error(error);
-                }
+                    console.error(error)
+                },
             }
         )
     }
@@ -95,23 +95,26 @@
 </script>
 
 {#if mobile}
-<div>foo</div>
+    <div>foo</div>
 {:else}
-<OnboardingLayout onBackClick={handleBackClick}>
-    <div slot="leftpane__content">
-        <Text type="h2" classes="mb-5">{locale('views.setup_ledger.title')}</Text>
-        <Text type="p" secondary classes="mb-8">{locale('views.setup_ledger.body_1')}</Text>
-        <Text type="p" secondary classes="mb-8">{locale('views.setup_ledger.body_2')}</Text>
-        <Text type="p" secondary classes="mb-8">{locale('views.setup_ledger.body_3')}</Text>
-    </div>
-    <div slot="leftpane__action">
-        <Button classes="w-full" disabled={creatingAccount} onClick={createAccount}>
-            {locale(creatingAccount ? 'actions.continue' : 'actions.continue')}
-        </Button>
-    </div>
-    <div slot="rightpane" class="w-full h-full flex justify-end items-center">
-        <Illustration illustration="import-from-firefly-ledger-desktop" height="100%" width="auto"
-            classes="h-full object-cover object-left" />
-    </div>
-</OnboardingLayout>
+    <OnboardingLayout onBackClick={handleBackClick}>
+        <div slot="leftpane__content">
+            <Text type="h2" classes="mb-5">{locale('views.setup_ledger.title')}</Text>
+            <Text type="p" secondary classes="mb-8">{locale('views.setup_ledger.body_1')}</Text>
+            <Text type="p" secondary classes="mb-8">{locale('views.setup_ledger.body_2')}</Text>
+            <Text type="p" secondary classes="mb-8">{locale('views.setup_ledger.body_3')}</Text>
+        </div>
+        <div slot="leftpane__action">
+            <Button classes="w-full" disabled={creatingAccount} onClick={createAccount}>
+                {locale(creatingAccount ? 'actions.continue' : 'actions.continue')}
+            </Button>
+        </div>
+        <div slot="rightpane" class="w-full h-full flex justify-end items-center">
+            <Illustration
+                illustration="import-from-firefly-ledger-desktop"
+                height="100%"
+                width="auto"
+                classes="h-full object-cover object-left" />
+        </div>
+    </OnboardingLayout>
 {/if}

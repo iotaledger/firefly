@@ -1,28 +1,32 @@
 <script lang="typescript">
-    import { get } from 'svelte/store'
-    import { createEventDispatcher } from 'svelte'
     import { Transition } from 'shared/components'
-    import { api } from 'shared/lib/wallet'
+    import { Electron } from 'shared/lib/electron'
     import { activeProfile } from 'shared/lib/profile'
-
-    import { Protect, Pin } from './views/'
     import { validatePinFormat } from 'shared/lib/utils'
+    import { api, asyncSetStoragePassword, asyncVerifyMnemonic, asyncStoreMnemonic, asyncCreateAccount } from 'shared/lib/wallet'
+    import { createEventDispatcher } from 'svelte'
+    import { get } from 'svelte/store'
+    import { Pin, Protect, RepeatPin } from './views/'
+    import { showAppNotification } from 'shared/lib/notifications'
+    import { walletSetupType } from 'shared/lib/router'
+    import { mnemonic } from 'shared/lib/app'
+    import { SetupType } from 'shared/lib/typings/routes'
 
     export let locale
     export let mobile
 
-    const PincodeManager = window['Electron']['PincodeManager']
+    let busy = false
 
     enum ProtectState {
         Init = 'init',
         Biometric = 'biometric',
         Pin = 'pin',
-        Confirm = 'confirm',
+        RepeatPin = 'repeatPin',
     }
 
     const dispatch = createEventDispatcher()
 
-    let state: ProtectState = ProtectState.Init
+    let state: ProtectState = ProtectState.Pin
     let stateHistory = []
 
     let pin = null
@@ -50,27 +54,44 @@
             case ProtectState.Pin:
                 const { pinCandidate } = params
                 pin = pinCandidate
-                nextState = ProtectState.Confirm
+                nextState = ProtectState.RepeatPin
                 break
-            case ProtectState.Confirm:
+            case ProtectState.RepeatPin:
                 try {
+                    busy = true
+
                     if (!validatePinFormat(pin)) {
                         throw new Error('Invalid pin code!')
                     }
 
-                    await PincodeManager.set(get(activeProfile).id, pin)
+                    await Electron.PincodeManager.set(get(activeProfile)?.id, pin)
+                    await asyncSetStoragePassword(pin)
 
-                    api.setStoragePassword(pin, {
-                        onSuccess() {
-                            dispatch('next', { pin })
-                        },
-                        onError(error) {
-                            console.error(error)
-                        },
-                    })
+                    if ($walletSetupType === SetupType.Mnemonic) {
+                        // Initialises wallet from imported mnemonic
+                        // Verifies mnemonic syntactically
+                        // Stores mnemonic
+                        // Creates first account
+
+                        const m = get(mnemonic).join(' ')
+                        await asyncVerifyMnemonic(m)
+                        await asyncStoreMnemonic(m)
+                        await asyncCreateAccount()
+
+                        // Clear mnemonic
+                        mnemonic.set(null)
+                        dispatch('next', { pin })
+                    } else {
+                        dispatch('next', { pin })
+                    }
                     break
-                } catch (error) {
-                    console.error(error)
+                } catch (err) {
+                    showAppNotification({
+                        type: 'error',
+                        message: locale(err.error),
+                    })
+                } finally {
+                    busy = false
                 }
         }
         if (nextState) {
@@ -90,12 +111,20 @@
     }
 </script>
 
-{#if state === ProtectState.Init || state === ProtectState.Biometric}
+<!-- TODO: Readd Protect Init page
+    
+#if state === ProtectState.Init || state === ProtectState.Biometric}
     <Transition>
         <Protect on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
-{:else if state === ProtectState.Pin || state === ProtectState.Confirm}
+{/if}-->
+
+{#if state === ProtectState.Pin}
     <Transition>
-        <Pin on:next={_next} on:previous={_previous} pinCandidate={pin} {locale} {mobile} />
+        <Pin {busy} on:next={_next} on:previous={_previous} {locale} {mobile} />
+    </Transition>
+{:else if state === ProtectState.RepeatPin}
+    <Transition>
+        <RepeatPin {busy} on:next={_next} on:previous={_previous} pinCandidate={pin} {locale} {mobile} />
     </Transition>
 {/if}

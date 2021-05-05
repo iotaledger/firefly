@@ -1,150 +1,227 @@
 {
     "views": {
-        "onboarding_1": {
-            "title": "Send, Modtag & Administrer dine IOTA",
-            "body": "Firefly er en sikker og let anvendelig IOTA-tegnebog."
+        "onboarding1": {
+            "title": "Send, Modtag & Håndtér dine IOTA-tokens",
+            "body": "Firefly er den officielle wallet fra IOTA."
         },
         "legal": {
-            "title": "Jura",
+            "title": "Privatlivspolitik & Servicevilkår",
             "body": "Gennemgå venligst privatlivspolitikken samt vilkår og betingelser.",
-            "privacy_policy": {
-                "title": "Privatlivspolitik",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
-            "terms_of_service": {
-                "title": "Vilkår og Betingelser",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
-            "checkbox": "I have read and I accept the Privacy policy & ToS"
+            "checkbox": "Jeg har læst og jeg accepterer privatlivspolitiken og servicevilkårene"
         },
-        "language": {
-            "title": "Sprog og udseende",
-            "body": "Vælg din tegnebogs sprog og tema"
+        "appearance": {
+            "title": "Udseende",
+            "body": "Vælg dit app-tema."
+        },
+        "profile": {
+            "title": "Opret en profil",
+            "body1": "Du kan oprette flere brugerprofiler for at organisere dine wallets og øge din fortrolighed.",
+            "body2": "For nu, lad os starte med dit profilnavn. Du kan tilføje flere profiler senere.",
+            "profileName": "Profilnavn"
         },
         "setup": {
-            "title": "Konfigurer din tegnebog",
-            "body": "Du kan oprette en ny tegnebog eller importere en eksisterende.",
-            "profile_name": "Profile Name"
+            "title": "Konfigurér en wallet",
+            "chrysalisTitle": "Chrysalis Netværksopdatering",
+            "chrysalisBody": "Fra d. 21. april kan brugere overføre deres tokens til det nye Chrysalis-netværk. Vi anbefaler, at du migrerer dine eksisterende tokens så hurtigt som muligt.",
+            "learnMore": "Lær om migrationen"
+        },
+        "secure": {
+            "title": "Gør din wallet sikker",
+            "body1": "Gem og udskriv Recovery Kit PDF-skabelonen.",
+            "body2": "Hvis du udfylder Recovery Kit og gemme det forsvarligt, vil du altid være i stand til at gendanne dine wallets."
         },
         "password": {
             "title": "Opret en adgangskode",
-            "body": "Du vil blive bedt om at indtaste din adgangskode for at du kan sende tokens fra din tegnebog. Du har brug for en stærk adgangskode for at beskytte dine penge."
+            "body1": "Du skal bruge en stærk adgangskode til at beskytte dine midler. Brug en kombination af ord, og undgå almindelige sætninger, navne eller datoer.",
+            "body2": "Det anbefales, at du skriver din adgangskode ned i dit Recovery Kit."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body_1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body_2": "Keep your PIN safe!"
+            "body1": "Konfigurer en login-pinkode for at sikre, at det kun er dig som kan tilgå din profil.",
+            "body2": "Hold din pinkode sikker!"
         },
         "pin": {
             "title": "Vælg en PIN-kode",
-            "body_1": "Indtast en 6-cifret PIN-kode nedenfor. Du vil blive bedt om at indtaste din pinkode, når du skal logge ind på din tegnebog.",
-            "body_2": "Du kan kun bruge tal."
+            "body1": "Indtast en 6-cifret pinkode nedenfor. Du vil blive bedt om din pinkode for at få adgang til din profil.",
+            "body2": "Brug kun tal"
         },
-        "confirm_pin": {
+        "confirmPin": {
             "title": "Bekræft din PIN-kode",
-            "body": "Indtast din PIN-kode igen for at fortsætte."
+            "body1": "Din pinkode holder din saldo og transaktioner private.",
+            "body2": "Indtast din pinkode igen for at fortsætte. "
         },
         "backup": {
-            "title": "Sikkerhedskopier din tegnebog",
-            "body_1": "Du vil nu blive vist en gendannelsessætning.",
-            "body_2": "Del ikke denne sætning med nogen. Din gendannelsessætning kan bruges til at få adgang til dine tokens.",
-            "body_3": "Hvis du mister din gendannelsessætning, kan du miste dine penge."
+            "title": "Sikkerhedskopier din wallet",
+            "body1": "Du vil nu få vist dine gendannelsesord. Skriv den ned i dit Recovery Kit.",
+            "body2": "Del ikke dine gendannelsesord med andre. Den kan bruges til at tilgå dine tokens alle steder fra.",
+            "body3": "Hvis du mister dine gendannelsesord, kan du miste dine midler."
         },
-        "recovery_phrase": {
+        "recoveryPhrase": {
             "title": "Gendannelsesssætning",
-            "body_1": "Skriv omhyggeligt ordene ned i den rigtige rækkefølge.",
-            "body_2": "Hold din genoprettelsessætning hemmelig og gem den et sikkert sted. Del den ikke med nogen.",
-            "reveal_recovery_phrase": "Vis gendannelsessætning",
-            "hide_recovery_phrase": "Hide recovery phrase"
+            "body1": "Skriv dine gendannelsesord ned i dit Recovery Kit, i den nøjagtige rækkefølge, der vises.",
+            "body2": "Hold dette fortroligt og sikkert gemt.",
+            "body3": "Det er vigtigt at have en skriftlig sikkerhedskopi. Computere fejler tit og filer kan mistes.",
+            "revealRecoveryPhrase": "Vis gendannelsessætning",
+            "hideRecoveryPhrase": "Skjul gendannelsesord"
         },
-        "verify_recovery_phrase": {
+        "verifyRecoveryPhrase": {
             "title": "Bekræft gendannelsessætning",
-            "body": "Lad os tjekke om du skrev sætningen korrekt ned. Vælg ordene i den rigtige rækkefølge."
+            "body": "Lad os tjekke om du har skrevet ordene rigtigt ned. Vælg hvert ord i den rigtige rækkefølge.",
+            "word": "Ord",
+            "verified": "Gendannelsesord bekræftet",
+            "verifiedBody": "Husk at holde det fortroligt og sikkert gemt."
         },
-        "backup_wallet": {
+        "backupWallet": {
             "title": "Sikkerhedskopiér til en Stronghold fil",
-            "body": "Indtast din adgangskode for at sikkerhedskopiere din tegnebog til en Stronghold fil. Din adgangskode bruges til at kryptere sikkerhedskopien."
+            "body1": "Indtast din adgangskode for at sikkerhedskopiere dine wallets til en Stronghold fil. Din adgangskode bruges til at kryptere sikkerhedskopien.",
+            "body2": "Grunde til at digitale sikkerhedskopier er vigtige:",
+            "reason1": "Gendan nemt dine wallets uden at skrive i dine gendannelsesord",
+            "reason2": "Importer dine wallets på andre enheder",
+            "reason3": "Gendan din fulde transaktionshistorik"
         },
-        "recovery_phrase_saved": {
+        "recoveryPhraseSaved": {
             "title": "Sikkerhedskopiering lykkedes",
-            "body": "Du har sikkerhedskopieret din tegnebog til Stronghold."
+            "body": "Du har sikkerhedskopieret dine wallets til et Stronghold."
         },
         "congratulations": {
-            "title": "Tillykke",
-            "body": "Din tegnebog er klar til brug."
+            "title": "Opsætning af wallet fuldført",
+            "body": "Din nye wallet er klar til brug.",
+            "fundsMigrated": "Midler migreret",
+            "success": "Du har nu migreret dine midler til det nye netværk",
+            "exportMigration": "Eksportér migrationslog og afslut opsætning"
         },
         "import": {
-            "title": "Importér en tegnebog",
-            "body": "Hvis du har en gendannelsessætning eller Stronghold backup, kan du importere den her."
+            "title": "Gendan eller migrér midler",
+            "body": "Hvis du har et eksisterende seed eller wallet sikkerhedskopi fil, kan du importere den her. Hvis du har ældre netværksmidler, vil du blive taget gennem migrationstrinnene for at flytte til Chrysalis-netværket.",
+            "importSeed": "Jeg har et 81 tegn seed",
+            "importSeedDescription": "Indtast et seed og migrer midler til Chrysalis",
+            "importMnemonic": "Jeg har gendannelsesord til Firefly",
+            "importMnemonicDescription": "Indtast dine gendannelsesord for at gendanne dine wallets",
+            "importFile": "Jeg har en sikkerhedskopi fil",
+            "importFileDescription": "Upload en Seedvault eller Stronghold fil"
         },
-        "import_from_text": {
-            "title": "Gendan din tegnebog med en gendannelsessætning eller et seed",
-            "body_1": "En gendannelsessætning er 24 ord lang. Den kan bruges til at gendanne en eksisterende Firefly tegnebog.",
-            "body_2": "Et seed består af 81 tegn. Dette bruges til at gendanne fra en ældre Trinity tegnebog.",
-            "body_3": "Indtast dit seed eller din gendannelsessætning"
+        "importFromText": {
+            "seed": {
+                "title": "Skriv dit seed for at begynde migration",
+                "body": "Et seed består af 81 tegn. Dette bruges til at gendanne fra den ældre Trinity app.",
+                "enter": "Indtast dit seed"
+            },
+            "mnemonic": {
+                "title": "Skriv dine gendannelsesord",
+                "body": "En gendannelsessætning er 24 ord lang, alle små bogstaver, med mellemrum imellem. Dette bruges til at gendanne eksisterende Firefly wallets.",
+                "enter": "Indtast dine hemmelige gendannelsesord"
+            },
+            "seedDetected": "81 tegns seed fundet",
+            "phraseDetected": "24 ordgendannelsessætning fundet",
+            "checksum": "Kontrolsum"
         },
-        "import_from_file": {
-            "title": "Gendan din tegnebog fra en backupfil",
-            "body": "Importer en backupfil for at gendanne din tegnebog. Backups kan enten være en Stronghold-fil (.stronghold) eller en Trinity SeedVault (.kdbx)."
+        "importFromFile": {
+            "title": "Gendan dine wallets ved hjælp af en sikkerhedskopi fil",
+            "body": "Importer en sikkerhedskopi fil for at gendanne dine wallets. Sikkerhedskopier kan enten være et Stronghold (.stronghold) eller en Trinity SeedVault (.kdbx)."
         },
-        "import_backup_password": {
-            "title": "Gendan din tegnebog fra en SeedVault eller Stronghold",
-            "body_1": "Indtast venligst adgangskoden til din sikkerhedskopi.",
-            "body_2": "Dette er den adgangskode du angav, da du først oprettede din backup."
+        "importBackupPassword": {
+            "title": "Gendan dine wallets fra en SeedVault eller Stronghold",
+            "body1": "Indtast venligst adgangskoden til din sikkerhedskopi.",
+            "body2": "Dette er den adgangskode du angav, da du først oprettede din backup."
         },
-        "import_success": {
+        "importSuccess": {
             "title": "Du har gendannet din sikkerhedskopi med succes",
-            "body": "Du kan nu konfigurere din nye tegnebog."
+            "body": "Du kan nu konfigurere din nye profil.",
+            "seedvaultTitle": "Import lykkedes",
+            "seedvaultBody": "Din adgangskode er korrekt, du kan nu fortsætte.",
+            "strongholdTitle": "Import lykkedes",
+            "strongholdBody": "Din adgangskode er korrekt, du kan nu fortsætte."
         },
         "migrate": {
-            "title": "Migrér dine penge",
-            "body_1": "Dette er en automatiseret proces til at overføre dine penge til din nye tegnebog. Vi tjekker samtidigt for brugte adresser, der svækker din sikkerhed.",
-            "body_2": "Det kan tage nogen tid. Sluk ikke din enhed under migrationen.",
-            "existing": "Din gamle tegnebog",
-            "new": "Din nye tegnebog"
+            "title": "Migrér dine midler",
+            "body1": "Dette er en automatiseret proces til at overføre dine midler til din nye wallet.",
+            "body2": "Det kan tage lidt tid. Sluk ikke din enhed under migrationen.",
+            "existing": "Din gamle wallet",
+            "new": "Din nye wallet",
+            "learn": "Lær om migrationen",
+            "beginMigration": "Begynd Migration",
+            "migrating": "Migrerer midler...",
+            "migrated": "{balance} migreret",
+            "migrationFailed": "Migration mislykkedes",
+            "noAddressesForMigration": "Vælg venligst de adresser, du ønsker at sikre.",
+            "restoringWallet": "Gendanner wallet...",
+            "findingBalance": "Finder saldo...",
+            "incorrectSeedVaultPassword": "Forkert SeedVault adgangskode.",
+            "noDataSeedVault": "Ingen data fundet i SeedVault.",
+            "signingBundle": "Signerer pakke",
+            "broadcastingBundle": "Udsender pakke",
+            "miningBundle": "Miner pakke",
+            "problemRestoringWallet": "Der opstod en netværksfejl under gendannelse af din wallet. Prøv igen.",
+            "minimumMigrationAmountSpentAddresses": "Det mindste migrationsbeløb for hver brugt adresse er 1 Mi. Tjek igen, hvis din saldo ikke ser rigtig ud.",
+            "tooManyAddressesToMigrate": "Du har for mange adresser med lav saldo til at migrere. Tjek igen, hvis din saldo ikke ser rigtigt ud.",
+            "cannotMigrateAllYourFunds": "Vi kan ikke migrere alle dine midler, fordi nogle adresser har for lav værdi. Du kan fortsætte alligevel. {value} vil gå tabt.",
+            "error": "Der opstod en fejl under migrering af dine midler. Prøv igen."
         },
-        "migrate_failed": {
+        "bundleMiningWarning": {
+            "title": "Advarsel",
+            "body1": "Du har midler på en eller flere brugte adresser.",
+            "body2": "Vi anbefaler, at du kører en automatiseret proces for at hjælpe med at sikre og overføre disse midler sikkert.",
+            "body3": "Hvis du lukker appen, skal du genstarte hele migrationen.",
+            "learn": "Læs mere om brugte adresser"
+        },
+        "secureSpentAddresses": {
+            "title": "Gør dine brugte adresser sikre",
+            "body1": "Du har midler på {number, plural, one {# brugt adresse} other {# brugte adresser}}.",
+            "body2": "Vi anbefaler, at du kører en automatiseret proces for at hjælpe med at sikre og overføre dine midler sikkert.",
+            "error": "Du kan ikke migrere brugte adresser med mindre end 1 Mi"
+        },
+        "securityCheckCompleted": {
+            "title": "Sikkerhedstjek fuldført",
+            "body1": "Vi har beregnet sikkerhedsrisikoen. At køre denne proces igen kan sænke dit risikoniveau.",
+            "body2": "Når du er tilfreds med risikoniveauet/risikoniveauerne, tryk forsæt.",
+            "rerun": "Genkør proces for valgte adresser",
+            "continueMigration": "Fortsæt migration"
+        },
+        "securingSpentAddresses": {
+            "title": "Sikring af brugte adresser...",
+            "body1": "Denne proces vil tage {minutes, plural, one {1 minut} other {# minutter}}.",
+            "body2": "Din computer vil køre på fuld kapacitet, lav eventuelt noget andet, mens du venter på at dette er fuldendt."
+        },
+        "transferFragmentedFunds": {
+            "body1": "Firefly vil nu fortsætte med at migrere dine midler. Dette kan tage et stykke tid.",
+            "migrate": "Migrér midler",
+            "transaction": "Transaktion {number}",
+            "rerun": "Prøv igen"
+        },
+        "migrateFailed": {
             "title": "To do",
             "body": "To do"
         },
         "balance": {
             "title": "Din saldo",
-            "body": "Er din saldo korrekt?"
+            "body": "Sørg for at din saldo er korrekt, før du fortsætter. Du kan tjekke igen, hvis tingene ikke ser korrekt ud.",
+            "error": "Det mindste migrationsbeløb er 1 Mi. Tjek igen, hvis din saldo ikke ser rigtig ud.",
+            "zeroBalance": "Prøv at tjekke igen. Hvis du stadig ikke kan finde din saldo, har du måske indtastet dit seed forkert."
         },
         "settings": {
             "settings": "Indstillinger",
             "generalSettings": {
                 "title": "Generelle indstillinger",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Konfigurer din app's udseende og andre generelle indstillinger"
             },
             "security": {
                 "title": "Sikkerhed",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Skift din adgangskode og justér sikkerhedsrelaterede indstillinger"
             },
             "advancedSettings": {
                 "title": "Avancerede Indstillinger",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Værktøjer og manuelle indstillinger for tekniske brugere"
             },
             "helpAndInfo": {
                 "title": "Hjælp & Information",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Find svaret på et spørgsmål eller få hjælp med et problem"
             },
             "profile": {
                 "title": "Profil",
-                "description": ""
+                "description": "Skift dit profilnavn eller tilføj en avatar"
             },
             "sync": {
-                "title": "Synkronisér konti",
+                "title": "Synkroniser wallets",
                 "description": ""
             },
             "theme": {
@@ -157,303 +234,587 @@
             },
             "currency": {
                 "title": "Valuta",
-                "description": ""
+                "description": "Justerer saldo konvertering og opdaterer diagram indstillinger"
             },
             "notifications": {
                 "title": "Notifikationer",
-                "description": ""
+                "description": "Systemnotifikationer for transaktionsbegivenheder"
+            },
+            "networkStatus": {
+                "title": "Netværksstatus",
+                "description": "Viser status for den node du er forbundet til lige nu."
             },
             "exportStronghold": {
-                "title": "Eksporter Stronghold",
-                "description": ""
+                "title": "Eksporter sikkerhedskopi",
+                "description": "Eksporter til en Stronghold fil - en komplet krypteret sikkerhedskopi af dine wallets og den seneste transaktionshistorik"
             },
             "appLock": {
-                "title": "App Lås",
-                "description": ""
+                "title": "Automatisk lås",
+                "description": "Inaktivitetstid før dine tegnebøger låses, og du bliver logget ud",
+                "durationMinute": "{time, plural, one {# måned} other {# måneder}} siden",
+                "durationHour": "{time, plural, one {1 time} other {# timer}}"
             },
             "changePassword": {
                 "title": "Skift adgangskode",
-                "description": ""
+                "description": "Din adgangskode bruges til at sikre dine wallets. Du skal bruge en stærk adgangskode for at beskytte dine midler"
             },
             "changePincode": {
-                "title": "Change PIN code",
-                "description": "",
-                "currentPincode": "Current PIN",
-                "newPincode": "New PIN",
-                "confirmNewPincode": "Confirm new PIN",
-                "action": "Change PIN"
+                "title": "Skift pinkode",
+                "description": "Din pinkode holder din saldo og transaktioner fortrolige",
+                "currentPincode": "Nuværende Pinkode",
+                "newPincode": "Ny Pinkode",
+                "confirmNewPincode": "Bekræft ny Pinkode",
+                "action": "Skift Pinkode"
             },
-            "resyncAccounts": {
-                "title": "Synkronisér konti",
-                "description": ""
+            "balanceFinder": {
+                "title": "Saldo finder",
+                "description": "Udfør en udvidet søgning af dine adresser efter tokens"
             },
-            "resetWallet": {
-                "title": "Nulstil tegnebog",
-                "description": ""
+            "hiddenAccounts": {
+                "title": "Skjulte wallets",
+                "description": "Valg af denne indstilling vil vise wallets, der tidligere var skjult"
+            },
+            "deleteProfile": {
+                "title": "Slet profil",
+                "description": "Sletter hele din profil, wallets og transaktionshistorik. Sørg for at du har en sikkerhedskopi"
             },
             "deepLinks": {
                 "title": "Dybe Links",
-                "description": ""
+                "description": "Udfyld automatisk transaktionsdata i Firefly ved at klikke på et iota:// link"
             },
             "developerMode": {
                 "title": "Udviklertilstand",
-                "description": ""
+                "description": "Opret forbindelse til testnet og andre udviklerfunktioner"
             },
             "nodeSettings": {
                 "title": "Nodeindstillinger",
-                "description": ""
+                "description": "Vælg Manuel for at konfigurere nodeindstillingerne og oprette forbindelse til din egen node"
             },
             "configureNodeList": {
-                "title": "Configure node list",
-                "description": ""
+                "title": "Vælg en node",
+                "description": "Administrer listen over IOTA netværksnoder, du opretter forbindelse til",
+                "primaryNode": "Primær node",
+                "excludeNode": "Udeluk node",
+                "includeNode": "Inkludér node",
+                "viewDetails": "Vis detaljer",
+                "setAsPrimary": "Sæt som primær",
+                "removeNode": "Fjern node",
+                "includeOfficialNodeList": "Inkludér den officielle node-liste",
+                "noNodes": "Der er ingen noder, automatisk valg vil blive foretaget i stedet"
             },
             "proofOfWork": {
                 "title": "Bevis for arbejde",
-                "description": ""
+                "description": "Udfør proof of work lokalt på din enhed eller outsource til noden"
             },
             "errorLog": {
                 "title": "Fejllog",
-                "description": ""
+                "description": "Vis fejl for at fejlfinde et problem"
+            },
+            "diagnostics": {
+                "title": "Diagnostik",
+                "description": "Vis system og applikationsinformation"
             },
             "stateExport": {
                 "title": "Eksportér tilstand",
-                "description": ""
+                "description": "Eksporter din transaktionshistorik til en .csv-fil"
             },
             "troubleshoot": {
                 "title": "Fejlfinding",
-                "description": ""
+                "description": "Brug fejlfindingsguiden til at løse almindelige problemer"
             },
             "documentation": {
                 "title": "Dokumentation",
-                "description": ""
+                "description": "Se dokumentationen for dybdegående forklaringer om hvordan tingene fungerer"
             },
             "faq": {
                 "title": "FAQ",
-                "description": ""
+                "title2": "Ofte Stillede Spørgsmål",
+                "description": "Se ofte stillede spørgsmål for at få hjælp til et typisk problem eller spørgsmål"
             },
             "discord": {
                 "title": "Discord",
-                "description": ""
+                "description": "Få hjælp fra IOTA-fællesskabet på Discord"
             },
             "about": {
                 "title": "Om",
                 "description": ""
+            },
+            "reportAnIssue": {
+                "title": "Rapporter et problem",
+                "description": "Rapporter en fejl til udviklerne. Tjek igennem for at sikre, at den ikke allerede er blevet rapporteret"
             }
         },
         "login": {
-            "please_wait": "Vent venligst {time, plural, one {1 sekund} other {# sekunder}}",
-            "incorrect_attempts": "{attempts, plural, one {1 forkert forsøg} other {# forkerte forsøg}}"
+            "pleaseWait": "Vent venligst {time, plural, one {1 sekund} other {# sekunder}}",
+            "incorrectAttempts": "{attempts, plural, one {1 forkert forsøg} other {# forkerte forsøg}}"
         },
         "dashboard": {
             "security": {
                 "version": {
                     "title": "Firefly v{version}",
-                    "up_to_date": "Up to date",
-                    "out_of_date": "Out of date"
+                    "upToDate": "Ajourført",
+                    "outOfDate": "Forældet"
                 },
-                "hardware_device": {
-                    "title": "Hardware Device",
-                    "none_detected": "None detected"
+                "hardwareDevice": {
+                    "title": "Hardware-enhed",
+                    "noneDetected": "Ingen fundet"
                 },
-                "stronghold_status": {
-                    "title": "Stronghold Status",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                "strongholdStatus": {
+                    "title": "Wallet Status",
+                    "locked": "Låst",
+                    "unlocked": "Oplåst"
                 },
-                "stronghold_backup": {
-                    "title": "Stronghold Backup",
-                    "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
+                "strongholdBackup": {
+                    "title": "Wallet sikkerhedskopi",
+                    "weeksAgo": "{weeks, plural, one {# uge} other {# uger}} siden"
                 }
             },
             "network": {
-                "network_operational": "Network Operational",
-                "network_degraded": "Network Degraded",
-                "network_down": "Network Down",
+                "networkOperational": "Netværket er operationelt",
+                "networkDegraded": "Netværk er forringet",
+                "networkDown": "Netværket er frakoblet",
                 "status": "Status",
-                "messages_per_second": "Messages per second",
-                "confirmation_rate": "Confirmation rate"
+                "messagesPerSecond": "Beskeder pr. sekund",
+                "referencedRate": "Refereret sats"
             },
-            "profile_modal": {
-                "all_settings": "All settings",
-                "logout": "Log out"
+            "profileModal": {
+                "allSettings": "Alle indstillinger",
+                "logout": "Log ud"
             }
         }
     },
     "popups": {
         "password": {
             "title": "Adgangskode påkrævet",
-            "subtitle": "Please enter your wallet password to unlock Stronghold"
+            "subtitle": "Indtast din adgangskode for at låse dine wallets op",
+            "backup": "Indtast din adgangskode for at eksportere en sikkerhedskopi"
         },
         "qr": {
             "title": "Din QR-kode"
         },
         "version": {
-            "title": "Current version: {version}",
-            "up_to_date_title": "Firefly is up to date",
-            "up_to_date_description": "You are running the latest and safest version of Firefly.",
-            "update_available": "Firefly update available",
-            "update_details": "Version {version} - {date}"
+            "title": "Nuværende version: {version}",
+            "upToDateTitle": "Firefly er opdateret",
+            "upToDateDescription": "Du kører den nyeste og sikreste version af Firefly.",
+            "updateAvailable": "Firefly opdatering tilgængelig",
+            "updateDetails": "Version {version} - {date}",
+            "noAutoUpdate": "Auto-opdatering er deaktiveret i denne Windows-version, gå til https://firefly.iota.org for at downloade opdateringen."
         },
         "backup": {
-            "title": "Last backup: {date}",
-            "last_backup": "You last backed up {date}",
-            "backup_description": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
-            "backup_warning": "If you lose your backup and recovery phrase you will lose access to your funds.",
-            "not_backed_up": "Not backed up",
-            "not_backed_up_description": "You have not backed up your Stronghold"
+            "title": "Seneste sikkerhedskopi: {date}",
+            "lastBackup": "Du har sidst sikkerhedskopieret {date}",
+            "backupDescription": "Det er vigtigt at sikkerhedskopiere regelmæssigt for at sikre, at du har en kopi af dine wallets og transaktionshistorik.",
+            "backupWarning": "Hvis du mister din backup og dine gendannelsesord vil du miste adgang til dine midler.",
+            "notBackedUp": "Ikke sikkerhedskopieret",
+            "notBackedUpDescription": "Du har ikke sikkerhedskopieret dine wallets",
+            "saving": "Gemmer..."
         },
-        "delete_account": {
-            "title": "Delete {name}?",
-            "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "type_password": "Type your wallet’s password to confirm.",
-            "delete_account": "Delete account",
-            "error_title": "Unable to delete {name}",
-            "error_body_1": "To delete an account you must have 0 balance.",
-            "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again."
+        "deleteAccount": {
+            "title": "Slet {name}?",
+            "body": "Denne wallet har ingen transaktionshistorik. Den kan slettes.",
+            "typePassword": "Indtast din wallet adgangskode for at bekræfte.",
+            "hideAccount": "Slet wallet",
+            "errorTitle": "Kan ikke slette {name}",
+            "errorBody1": "Du kan ikke slette denne wallet, du skal have mindst en."
         },
-        "address_history": {
-            "title": "{name} account address history",
-            "current_balance": "Current balance: {balance}"
+        "hideAccount": {
+            "title": "Skjul {name}?",
+            "body": "Du kan finde denne wallet senere ved at aktivere \"Vis skjulte wallets\" i Avancerede Indstillinger.",
+            "typePassword": "Indtast din wallet adgangskode for at bekræfte.",
+            "hideAccount": "Skjul wallet",
+            "errorTitle": "Kan ikke skjule {name}",
+            "errorBody1": "For at skjule en wallet skal den have en saldo på 0.",
+            "errorBody2": "Du har i øjeblikket {balance} tilbage på denne wallet. Flyt disse midler til en anden wallet og prøv igen.",
+            "errorBody3": "Du kan ikke skjule denne wallet, du skal have mindst en."
+        },
+        "addressHistory": {
+            "title": "{name} adresse historik",
+            "currentBalance": "Nuværende saldo: {balance}"
         },
         "node": {
-            "title_add": "Add a node",
-            "title_details": "Node details",
-            "node_address": "Node address",
-            "optional_username": "Username (optional)",
-            "optional_password": "Password (optional)",
-            "set_as_primary_node": "Set as primary node"
+            "titleAdd": "Tilføj en node",
+            "titleUpdate": "Opdater en node",
+            "titleRemove": "Fjern en node",
+            "titleDetails": "Node detaljer",
+            "nodeAddress": "Node addresse",
+            "optionalUsername": "Brugernavn (valgfrit)",
+            "optionalPassword": "Adgangskode (valgfrit)",
+            "setAsPrimaryNode": "Sæt som primær node",
+            "removeConfirmation": "Er du sikker på, at du vil du fjerne denne node?"
+        },
+        "errorLog": {
+            "title": "Fejllog",
+            "empty": "Fejlloggen er tom."
+        },
+        "deleteProfile": {
+            "title": "Slet profil",
+            "confirmation": "Er du sikker på, at du vil slette denne profil? Denne handling kan ikke fortrydes.",
+            "typePassword": "Indtast din adgangskode for at bekræfte."
+        },
+        "diagnostics": {
+            "title": "Diagnostik",
+            "node": "Node",
+            "platform": "Platform",
+            "platformVersion": "Platformsversion",
+            "platformArchitecture": "Platform Arkitektur",
+            "cpuCount": "CPU Antal",
+            "totalMem": "Samlet hukommelse",
+            "freeMem": "Ledig hukommelse",
+            "userPath": "Bruger Sti"
+        },
+        "transaction": {
+            "title": "Bekræft transaktion",
+            "body": "Du er ved at sende {amount} til"
+        },
+        "balanceFinder": {
+            "title": "Saldo finder",
+            "body": "Udfør en mere grundig søgning af adresser for at finde manglende saldo. Dette kan tage et stykke tid.",
+            "totalWalletBalance": "Samlet saldo",
+            "typePassword": "Indtast din adgangskode for at tillade søgning."
+        },
+        "riskFunds": {
+            "title": "Advarsel: midler i fare under migrationen",
+            "body1": "Det anbefales kraftigt, at du sikrer alle dine midler, før du fortsætter med migration. Dine midler er i fare for tyveri, hvis du ikke sikrer dem.",
+            "body2": "Det anbefales, at du genstarter processen for adresser med et middel risikoniveau eller højere."
+        },
+        "missingBundle": {
+            "title": "Advarsel: midler, i fare under migrationen",
+            "body": "Du har midler på brugte adresser, men informationen for at sikre dem blev ikke fundet. Dette kan ske, hvis du har foretaget transaktioner for længe siden. Du kan fortsætte, men {value} er i fare under migrationen.",
+            "learnMore": "Læs mere om brugte adresser",
+            "proceed": "Jeg forstår risikoen"
+        },
+        "snapshot": {
+            "title": "Igangværende netværksopgradering",
+            "body": "Chrysalis netværksopgradering er begyndt.",
+            "bodyMigration": "Migration er deaktiveret indtil den er færdig.",
+            "bodyFirefly": "Firefly er deaktiveret, indtil den er færdig. Token migration vil stadig være mulig efterfølgende."
         }
+    },
+    "charts": {
+        "incomingMi": "Indgående {value}",
+        "outgoingMi": "Udgående {value}",
+        "portoflio": "Portefølje",
+        "token": "Token",
+        "accountValue": "Wallet Værdi",
+        "accountActivity": "Wallet Aktivitet",
+        "timeframe1Hour": "1 time",
+        "timeframe1Day": "1 dag",
+        "timeframe1Week": "1 uge",
+        "timeframe1Month": "1 måned"
     },
     "actions": {
         "continue": "Fortsæt",
         "back": "Tilbage",
         "cancel": "Annullér",
         "close": "Luk",
-        "dismiss": "Dismiss",
+        "dismiss": "Afvis",
+        "proceedAnyway": "Fortsæt alligevel",
         "save": "Gem",
-        "import_seed": "Importer et eksisterende seed",
-        "import_wallet": "Importer eksisterende tegnebog",
-        "create_wallet": "Opret ny tegnebog",
-        "save_password": "Gem adgangskode",
-        "use_biometric": "Brug biometrisk sikkerhed",
-        "setup_pin": "Vælg en PIN-kode",
-        "set_pin": "Angiv pinkode",
-        "confirm_pin": "Bekræft pinkode",
-        "enter_your_pin": "Indtast din PIN-kode",
-        "save_backup_file": "Gem backupfil",
-        "ive_written_recovery_phrase": "Jeg har skrevet min gendannelsessætning ned",
-        "verify_recovery_phrase": "Bekræft gendannelsessætning",
-        "reveal_recovery_phrase": "Vis gendannelsessætning",
-        "import_seedvault": "Importér SeedVault",
-        "check_again": "Nej, Kontroller Igen",
-        "import_from_file": "Importer fra en fil",
+        "importSeed": "Importer et eksisterende seed",
+        "restoreWallet": "Migrér eller gendan en wallet",
+        "restoreWalletDescription": "Migrér til Chrysalis eller gendan en eksisterende wallet",
+        "createWallet": "Opret ny wallet",
+        "createWalletDescription": "Opret en frisk wallet, der kører på Chrysalis",
+        "savePassword": "Gem adgangskode",
+        "useBiometric": "Brug biometrisk sikkerhed",
+        "setupPin": "Vælg en PIN-kode",
+        "setPin": "Angiv pinkode",
+        "confirmPin": "Bekræft pinkode",
+        "enterYourPin": "Indtast din PIN-kode",
+        "saveBackupFile": "Gem backupfil",
+        "iveWrittenRecoveryPhrase": "Jeg har skrevet min gendannelsessætning ned",
+        "verifyRecoveryPhrase": "Bekræft gendannelsessætning",
+        "revealRecoveryPhrase": "Vis gendannelsessætning",
+        "importSeedvault": "Importér SeedVault",
+        "checkAgain": "Kontrollér igen",
+        "importFromFile": "Importer fra en fil",
         "send": "Send",
         "receive": "Modtag",
         "create": "Opret",
-        "begin_transfer": "Begynd Overførsel",
-        "try_again": "Prøv igen",
-        "visit_discord": "Besøg Discord",
-        "drag_drop": "Træk Og Slip",
-        "import_extentions": ".stronghold eller .kdbx fil",
-        "choose_file": "Vælg fil",
-        "drop_here": "Slip din fil her",
+        "beginTransfer": "Begynd Overførsel",
+        "tryAgain": "Prøv igen",
+        "visitDiscord": "Besøg Discord",
+        "dragDrop": "Træk Og Slip",
+        "importExtentions": ".kdbx eller .stronghold fil",
+        "chooseFile": "Vælg fil",
+        "dropHere": "Slip din fil her",
         "syncAll": "Synkronisér alle",
         "export": "Eksportér",
         "exportNewStronghold": "Eksportér en ny Stronghold",
         "enableDeepLinks": "Aktivér dybe links",
         "enableDeveloperMode": "Aktiver udviklertilstand",
-        "enableSystemNotifications": "Enable system notifications",
+        "enableSystemNotifications": "Aktiver notifikationer",
         "exportState": "Eksportér tilstand",
-        "outsourceProofOfWork": "Outsource bevis for arbejde",
+        "localProofOfWork": "Lokal proof of work",
         "unlock": "Lås op",
-        "update_firefly": "Update Firefly",
-        "restart_now": "Restart now",
-        "save_backup": "Save backup",
-        "customize_account": "Customise account",
-        "sync_account": "Sync account",
-        "view_address_history": "View address history",
-        "delete_account": "Delete account",
-        "max": "Max",
-        "add_node": "Add node"
+        "updateFirefly": "Opdater Firefly",
+        "restartNow": "Genstart nu",
+        "saveBackup": "Gem Stronghold sikkerhedskopi",
+        "customizeAcount": "Tilpas wallet",
+        "viewAddressHistory": "Se historik for addresse",
+        "hideAccount": "Skjul wallet",
+        "showAccount": "Vis wallet",
+        "deleteAccount": "Slet wallet",
+        "max": "Maks",
+        "addNode": "Tilføj node",
+        "updateNode": "Opdater node",
+        "removeNode": "Fjern node",
+        "hide": "Skjul",
+        "hideOthers": "Skjul øvrige",
+        "showAll": "Vis alle",
+        "quit": "Afslut",
+        "edit": "Rediger",
+        "undo": "Fortryd",
+        "redo": "Omgør",
+        "cut": "Klip",
+        "copy": "Kopiér",
+        "paste": "Indsæt",
+        "selectAll": "Vælg alle",
+        "addAccount": "Tilføj Wallet",
+        "checkForUpdates": "Tjek for opdateringer",
+        "reportAnIssue": "Rapportér et problem",
+        "clear": "Ryd",
+        "hideDetails": "Skjul detaljer",
+        "yes": "Ja",
+        "no": "Nej",
+        "skip": "Spring over",
+        "reset": "Nulstil",
+        "downloadRecoveryKit": "Gem Recovery Kit skabelon",
+        "skipBackup": "Spring sikkerhedskopi af fil over",
+        "finishSetup": "Afslut opsætning",
+        "readDocumentation": "Læs dokumentationen",
+        "visitFaq": "Besøg FAQ",
+        "viewStatus": "Vis Status",
+        "showHiddenAccounts": "Vis skjulte wallets",
+        "confirm": "Bekræft",
+        "hideNetworkStatistics": "Skjul netværksstatistik",
+        "findBalances": "Find saldi",
+        "searchBalances": "Søg efter saldi",
+        "searchAgain": "Søg igen",
+        "searching": "Søger...",
+        "closeFirefly": "Luk Firefly"
     },
     "general": {
         "password": "Adgangskode",
-        "confirm_password": "Bekræft adgangskode",
+        "confirmPassword": "Bekræft adgangskode",
         "currentPassword": "Nuværende adgangskode",
         "newPassword": "Ny adgangskode",
         "confirmNewPassword": "Bekræft ny adgangskode",
-        "your_seed": "Dit seed",
-        "recovery_phrase": "Gendannelsesssætning",
-        "recent_activity": "Seneste Aktivitet",
+        "yourSeed": "Dit seed",
+        "recoveryPhrase": "Gendannelsesssætning",
+        "recentActivity": "Seneste Aktivitet",
         "sent": "Sendt",
         "received": "Modtaget",
-        "send_payment": "Send payment",
-        "move_funds": "Move funds",
-        "send_funds": "Send penge",
-        "send_to_address": "Send til en adresse",
-        "scan_qr_or_paste": "Scan en QR-kode eller indsæt en adresse",
-        "move_funds_between_accounts": "Flyt midler mellem konti",
-        "send_tokens_to_address": "Send tokens to an address",
-        "manage_account": "Administrér konto",
-        "customize_account": "Tilpas din konto",
-        "account": "Konto",
-        "sending_to_address": "Sender til adresse",
+        "sendPayment": "Send Betaling",
+        "moveFunds": "Intern Overførsel",
+        "sendFunds": "Send midler",
+        "sendToAddress": "Send til adresse",
+        "scanQrOrPaste": "Scan en QR-kode eller indsæt en adresse",
+        "moveFundsBetweenAccounts": "Flyt midler mellem wallets",
+        "sendTokensToAddress": "Send tokens til en adresse",
+        "manageAccount": "Håndtér Wallet",
+        "customizeAcount": "Tilpas din wallet",
+        "account": "Wallet",
+        "sendingToAddress": "Sender til adresse",
         "amount": "Beløb",
-        "add_address": "Tilføj adresse",
+        "addAddress": "Tilføj adresse",
         "reference": "Reference",
         "from": "Fra",
         "to": "Til",
-        "receive_funds": "Modtag penge",
-        "my_address": "My Address",
-        "share_address": "Del en adresse",
-        "your_address": "Din adresse",
-        "generate_new_address": "Generér ny adresse",
-        "copy_address": "Kopiér adresse",
-        "have_text_backup": "Jeg har en tekst sikkerhedskopi",
-        "have_file_backup": "Jeg har en fil sikkerhedskopi",
-        "enter_seed_or_phrase": "Indtast en gendannelsessætning eller seed",
-        "upload_seedvault_or_stronghold": "Importér en Stronghold - eller SeedVault- fil",
+        "receiveFunds": "Modtag Midler",
+        "myAddress": "Min Adresse",
+        "shareAddress": "Del en adresse",
+        "yourAddress": "Din adresse",
+        "generateNewAddress": "Generér ny adresse",
+        "copyAddress": "Kopiér adresse",
         "import": "Importér",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
         "language": "Sprog",
         "appearance": "Udseende",
-        "light_theme": "Lyst tema",
-        "dark_theme": "Mørkt tema",
-        "total_balance": "Saldo I Alt",
-        "account_balance": "Account Balance",
+        "lightTheme": "Lyst tema",
+        "darkTheme": "Mørkt tema",
+        "balance": "Saldo",
+        "accountBalance": "Wallet Saldo",
         "incoming": "Indgående",
         "outgoing": "Udgående",
-        "accounts": "Konti",
+        "totalIn": "I alt indgående",
+        "totalOut": "I alt udgående",
+        "accounts": "Wallets",
+        "myAccounts": "Mine Wallets",
         "automaticNodeSelection": "Automatisk valg af node",
         "manualNodeSelection": "Manuelt valg af node",
         "profiles": "Profiler",
-        "developerProfile": "Developer Profile",
-        "dev": "Dev",
-        "create_account": "Opret en konto",
-        "account_name": "Kontonavn",
-        "latest_transactions": "Seneste transaktioner",
+        "developerProfile": "Udvikler Profil",
+        "developerProfileDescription": "Tillader dig at oprette forbindelse til testnet",
+        "dev": "Udvikler",
+        "createAccount": "Opret ny Wallet",
+        "accountName": "Wallet navn",
+        "latestTransactions": "Seneste transaktioner",
         "transactions": "Transaktioner",
         "security": "Sikkerhed",
-        "account_address": "Konto adresse",
-        "nodes": "Nodes"
+        "accountAddress": "Wallet-adresse",
+        "nodes": "Noder",
+        "wallet": "Wallet",
+        "help": "Hjælp",
+        "you": "Dig",
+        "messageId": "Besked ID",
+        "inputAddress": "Send Adresse",
+        "receiveAddress": "Modtag Adresse",
+        "date": "Dato",
+        "status": "Status",
+        "confirmed": "Bekræftet",
+        "pending": "Afventer",
+        "noAccounts": "Du har ingen wallets, opret venligst en.",
+        "loadingAccounts": "Indlæser, vent venligst...",
+        "addProfile": "Tilføj Profil",
+        "noRecentHistory": "Ingen nylig historik",
+        "firstSync": "Synkroniserer historie, dette kan tage et stykke tid...",
+        "transferSyncing": "Synkroniserer wallet",
+        "transferSelectingInputs": "Vælger input",
+        "transferRemainderAddress": "Genererer restdeponeringsadresse",
+        "transferSigning": "Underskriver transaktionen",
+        "transferPow": "Udfører PoW",
+        "transferBroadcasting": "Udsender transaktion",
+        "transferComplete": "Overførsel gennemført",
+        "creatingAccount": "Opretter wallet, vent venligst...",
+        "updatingAccount": "Opdaterer wallet, vent venligst...",
+        "accountSyncing": "Wallet synkroniserer",
+        "accountSyncComplete": "Wallet-synkronisering fuldført",
+        "passwordUpdating": "Opdaterer adgangskode...",
+        "passwordSuccess": "Adgangskode opdateret",
+        "passwordFailed": "Opdatering af adgangskode mislykkedes",
+        "syncingAccounts": "Synkroniserer wallets...",
+        "exportingStronghold": "Eksporterer Stronghold...",
+        "exportingStrongholdSuccess": "Eksport af Stronghold lykkedes",
+        "exportingStrongholdFailed": "Eksport af Stronghold mislykkedes",
+        "pinCodeUpdating": "Opdaterer pinkode...",
+        "pinCodeSuccess": "Opdatering af pinkode lykkedes",
+        "pinCodeFailed": "Opdatering af pinkode mislykkedes",
+        "passwordStrength": "Adgangskodens styrke",
+        "passwordStrength0": "Dårlig",
+        "passwordStrength1": "Ringe",
+        "passwordStrength2": "Svag",
+        "passwordStrength3": "Gennemsnitlig",
+        "passwordStrength4": "Stærk",
+        "creatingProfile": "Opretter profil. Vent venligst...",
+        "fundMigration": "Migration af midler",
+        "accountRemoved": "Denne wallet er skjult. Vis den for at udføre overførsler.",
+        "receivingTo": "Modtager til {account}",
+        "sendingFrom": "Sender fra {account}",
+        "receivedTo": "Modtaget til {account}",
+        "sentFrom": "Sendt fra {account}",
+        "receiving": "Modtager",
+        "sending": "Sender",
+        "legacyNetwork": "Legacy Netværk",
+        "capsLock": "Caps Lock er slået til",
+        "version": "Version {version}"
     },
     "dates": {
-        "today": "Today",
-        "days_ago": "{time, plural, one {# day} other {# days}} ago",
-        "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
-        "months_ago": "{time, plural, one {# month} other {# months}} ago",
-        "years_ago": "{time, plural, one {# year} other {# years}} ago"
+        "today": "I dag",
+        "yesterday": "I går",
+        "daysAgo": "{time, plural, one {# dag} other {# dage}} siden",
+        "weeksAgo": "{time, plural, one {# uge} other {# uger}} siden",
+        "monthsAgo": "{time, plural, one {# måned} other {# måneder}} siden",
+        "yearsAgo": "{time, plural, one {# år} other {# år}} siden"
     },
     "notifications": {
-        "valueTx": "Receiving {{value}} to {{account}}",
-        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
-        "failed": "Outgoing {{value}} from {{account}} has failed",
-        "downloading_update": "Downloading update",
-        "update_ready": "Update ready",
-        "update_error": "An error occurred during the update, please try again",
-        "restart_install": "Restart to install",
-        "calc_minutes_remaining": "Calculating minutes remaining...",
-        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
+        "valueTx": "Modtager {{value}} til {{account}}",
+        "confirmed": "Udgående {{value}} fra {{account}} er gennemført",
+        "confirmedInternal": "{{value}} fra {{senderAccount}} til {{receiverAccount}} er gennemført",
+        "confirmedInternalNoAccounts": "{{value}} intern overførsel er gennemført",
+        "failed": "Udgående {{value}} fra {{account}} mislykkedes",
+        "downloadingUpdate": "Downloader opdatering",
+        "updateReady": "Opdatering klar",
+        "updateError": "Der opstod en fejl under opdateringen, prøv igen",
+        "restartInstall": "Genstart for at installere",
+        "calcMinutesRemaining": "Beregner minutter tilbage...",
+        "minutesRemaining": "{minutes, plural, one {1 minut tilbage} other {# minutter tilbage}}",
+        "copiedToClipboard": "Kopieret til udklipsholder",
+        "accountsSynchronized": "Synkronisering af wallet fuldført",
+        "migratedAccountChrysalisDown": "Dine midler vil blive tilgængelige efter Chrysalis den 28. april",
+        "migratedAccountChrysalisUp": "Dine midler vil snart være tilgængelige"
+    },
+    "error": {
+        "profile": {
+            "length": "Dit profilnavn kan ikke være længere end {length, plural, one {1 tegn} other {# tegn}}.",
+            "duplicate": "En profil med dette navn findes allerede."
+        },
+        "password": {
+            "doNotMatch": "Adgangskoderne er ikke ens.",
+            "tooWeak": "Din nye adgangskode er for svag.",
+            "row": "Lige rækker af taster er nemme at gætte.",
+            "pattern": "Korte tastaturmønstre er nemme at gætte.",
+            "names": "Almindelige navne og efternavne er nemme at gætte.",
+            "repeats": "Gentagelser som 'aaa' er nemme at gætte.",
+            "repeats2": "Gentagelser som 'abcabcabc' er nemme at gætte.",
+            "sequence": "Sekvenser af tegn er nemme at gætte.",
+            "years": "De seneste år er nemme at gætte.",
+            "dates": "Datoer er nemme at gætte.",
+            "common": "Dette er en meget almindelig adgangskode.",
+            "similar": "Dette ligner en almen anvendt adgangskode.",
+            "word": "Et enkelt ord er nemt at gætte.",
+            "incorrect": "Adgangskoden er forkert.",
+            "length": "Dit profilnavn kan ikke være længere end {length, plural, one {1 tegn} other {# tegn}}."
+        },
+        "pincode": {
+            "length": "Din pinkode skal være {length, plural, one {1 ciffer} other {# cifre}} lang.",
+            "match": "Pinkoderne stemmer ikke overens.",
+            "incorrect": "Din nuværende pinkode er forkert."
+        },
+        "account": {
+            "length": "Din wallets navn kan ikke være længere end {length, plural, one {1 tegn} other {# tegn}}.",
+            "empty": "Du skal bruge din seneste wallet før du opretter en ny.",
+            "notEmpty": "Du skal overføre din saldo før du sletter denne wallet.",
+            "duplicate": "En wallet med dette navn findes allerede.",
+            "tilde": "Et profilnavn kan ikke starte med '~'.",
+            "control": "Et profilnavn kan ikke indeholde et kontroltegn.",
+            "startDot": "Et profilnavn kan ikke starte med '.'.",
+            "chars": "Et profilnavn kan ikke indeholde følgende tegn <>:\"/\\|?*"
+        },
+        "send": {
+            "addressLength": "Adresser skal være {length, plural, one {1 tegn} other {# tegn}} langt.",
+            "amountTooHigh": "Dette er større end din tilgængelige saldo.",
+            "amountNoFloat": "Hvis enheder er `i` kan du ikke bruge decimaler.",
+            "amountInvalidFormat": "Beløbet ser ud til at være et ugyldigt tal.",
+            "amountZero": "Beløb skal være større end 0.",
+            "wrongAddressPrefix": "Adresser starter med præfikset {prefix}.",
+            "wrongAddressFormat": "Adressen er ikke formateret korrekt.",
+            "invalidAddress": "Adressen er ikke gyldig.",
+            "insufficientFunds": "Denne wallet har ikke tilstrækkelige midler.",
+            "noToAccount": "Du har ikke valgt en wallet at sende midlerne til.",
+            "sendingDust": "Du kan ikke sende mindre end 1 Mi.",
+            "leavingDust": "Du kan ikke forlade mindre end 1 Mi på din adresse."
+        },
+        "node": {
+            "invalid": "Indtast venligst en gyldig URL.",
+            "https": "HTTPS er påkrævet. Opsæt en udviklerprofil for at bruge usikrede HTTP-forbindelser.",
+            "duplicate": "Denne node er allerede blevet tilføjet.",
+            "unsynced": "Noden er ikke synkroniseret.",
+            "noSynced": "Ingen synkroniserede noder er tilgængelige."
+        },
+        "global": {
+            "generic": "Noget gik galt."
+        },
+        "backup": {
+            "invalid": "Sikkerhedskopifilen blev ikke genkendt.",
+            "destination": "Backup-destinationen var ikke gyldig.",
+            "mnemonic": "Gendannelsesordene var ikke gyldige.",
+            "seedTooShort": "Seedet skal være 81 tegn langt, det {length, plural, one {er 1} other {er #}}",
+            "seedCharacters": "Seedet må kun indeholder tegn A-Z eller 9",
+            "phraseWordCount": "Der bør være 24 ord i dine gendannelsesord, i øjeblikket der {length, plural, one {er 1} other {er #}}.",
+            "phraseUnrecognizedWord": "Ordet \"{word}\" blev ikke genkendt i dine gendannelsesord",
+            "phraseCaseWord": "Ordet \"{word}\" skal være små bogstaver"
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "Risiko niveau: {risk}",
+            "veryHigh": "Meget høj",
+            "high": "Høj",
+            "medium": "Mellem",
+            "low": "Lav",
+            "veryLow": "Meget lav"
+        }
     }
 }

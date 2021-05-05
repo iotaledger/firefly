@@ -16,7 +16,8 @@ export const getLocalisedMenuItems = (locale) => {
         security: locale('views.settings.security.title'),
         advancedSettings: locale('views.settings.advancedSettings.title'),
         errorLog: locale('views.settings.errorLog.title'),
-        logout: locale('views.dashboard.profile_modal.logout'),
+        diagnostics: locale('views.settings.diagnostics.title'),
+        logout: locale('views.dashboard.profileModal.logout'),
         hide: locale('actions.hide'),
         hideOthers: locale('actions.hideOthers'),
         showAll: locale('actions.showAll'),
@@ -37,6 +38,7 @@ export const getLocalisedMenuItems = (locale) => {
         faq: locale('views.settings.faq.title'),
         documentation: locale('views.settings.documentation.title'),
         discord: locale('views.settings.discord.title'),
-        reportAnIssue: locale('actions.reportAnIssue')
+        reportAnIssue: locale('actions.reportAnIssue'),
+        version: locale('general.version')
     }
 }

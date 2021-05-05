@@ -19,14 +19,21 @@ import {
   syncAccount as _syncAccount,
   isLatestAddressUnused as _isLatestAddressUnused,
   areLatestAddressesUnused as _areLatestAddressesUnused,
-  setAlias as _setAlias
+  setAlias as _setAlias,
+  getNodeInfo as _getNodeInfo
 } from '../../../shared/lib/typings/account'
 import {
   Transfer,
   reattach as _reattach
 } from '../../../shared/lib/typings/message'
 import {
+  getMigrationData as _getMigrationData,
+  createMigrationBundle as _createMigrationBundle,
+  sendMigrationBundle as _sendMigrationBundle,
+} from '../../../shared/lib/typings/migration'
+import {
   LoggerConfig,
+  Duration,
   backup as _backup,
   restoreBackup as _restoreBackup,
   setStrongholdPassword as _setStrongholdPassword,
@@ -41,6 +48,8 @@ import {
   changeStrongholdPassword as _changeStrongholdPassword,
   setClientOptions as _setClientOptions,
   getLedgerDeviceStatus as _getLedgerDeviceStatus
+  setStrongholdPasswordClearInterval as _setStrongholdPasswordClearInterval,
+  getLegacySeedChecksum as _getLegacySeedChecksum
 } from '../../../shared/lib/typings/wallet'
 import { ClientOptions } from '../../../shared/lib/typings/client'
 
@@ -75,6 +84,9 @@ export function init(id: string, storagePath?: string) {
     destroy() {
       destroyed = true
       runtime.destroy()
+    },
+    removeEventListeners() {
+      runtime.removeEventListeners()
     }
   }
 }
@@ -121,8 +133,8 @@ export const api = {
   getAccounts: function (): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _getAccounts(sendMessage, __ids)
   },
-  syncAccounts: function (): ((__ids: CommunicationIds) => Promise<string>) {
-    return (__ids: CommunicationIds) => _syncAccounts(sendMessage, __ids)
+  syncAccounts: function (addressIndex?: number, gapLimit?: number, accountDiscoveryThreshold?: number): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _syncAccounts(sendMessage, __ids, addressIndex, gapLimit, accountDiscoveryThreshold)
   },
   areLatestAddressesUnused: function (): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _areLatestAddressesUnused(sendMessage, __ids)
@@ -154,8 +166,8 @@ export const api = {
   reattach: function (accountId: AccountIdentifier, messageId: string): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _reattach(sendMessage, __ids, accountId, messageId)
   },
-  backup: function (destinationPath: string): ((__ids: CommunicationIds) => Promise<string>) {
-    return (__ids: CommunicationIds) => _backup(sendMessage, __ids, destinationPath)
+  backup: function (destinationPath: string, password: string): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _backup(sendMessage, __ids, destinationPath, password)
   },
   restoreBackup: function (backupPath: string, password: string): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _restoreBackup(sendMessage, __ids, backupPath, password)
@@ -181,6 +193,39 @@ export const api = {
   setClientOptions: function (options: ClientOptions): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _setClientOptions(sendMessage, __ids, options)
   },
+  setStrongholdPasswordClearInterval: function (interval: Duration): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _setStrongholdPasswordClearInterval(sendMessage, __ids, interval)
+  },
+  getLegacySeedChecksum: function (seed: string): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _getLegacySeedChecksum(sendMessage, __ids, seed)
+  },
+
+  // Migration related methods
+  getMigrationData: function (seed: string, nodes: string[], securityLevel?: number, initialAddressIndex?: number, permanode?: string):
+    ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _getMigrationData(
+      sendMessage,
+      __ids,
+      seed,
+      nodes,
+      securityLevel,
+      initialAddressIndex,
+      permanode,
+    )
+  },
+  createMigrationBundle: function (seed: string, inputAddressIndexes: number[], mine: boolean, timeoutSeconds: number, offset: number, logFileName: string):
+    ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _createMigrationBundle(sendMessage, __ids, seed, inputAddressIndexes, mine, timeoutSeconds, offset, logFileName)
+  },
+  sendMigrationBundle: function (nodes: string[], bundleHash: string, mwm: number):
+    ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _sendMigrationBundle(sendMessage, __ids, nodes, bundleHash, mwm)
+  },
+  getNodeInfo: function (accountId: AccountIdentifier, url?: string): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _getNodeInfo(sendMessage, __ids, accountId, url)
+  },
+
+  // Event emitters 
   onError: function (): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'ErrorThrown')
   },
@@ -207,5 +252,8 @@ export const api = {
   },
   getLedgerDeviceStatus: function (isSimulator: boolean): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _getLedgerDeviceStatus(sendMessage, __ids, isSimulator)
+  },
+  onMigrationProgress: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'MigrationProgress')
   },
 };

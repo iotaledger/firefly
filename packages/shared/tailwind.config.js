@@ -10,9 +10,9 @@ module.exports = {
         // purgeLayersByDefault: true,
     },
     purge: {
-        enabled: true,
         content: ['../shared/**/*.svelte', '../shared/**/*.scss'],
         options: {
+            // Needed to prevent purgecss from removing classes declared with string concatenation
             safelist: [
                 // `from-${color}` (gradients)
                 /^from-/,
@@ -20,9 +20,18 @@ module.exports = {
                 /^to-/,
                 // `bg-${color}`
                 /^bg-/,
+                /^hover:bg-/,
+                /^dark:bg-/,
                 // `text-${color}`
                 /^text-/,
+                /^hover:text-/,
+                /^dark:text-/,
                 /^grid-cols-/,
+                // `p-${size}`
+                /^p-/,
+                'scheme-dark',
+                'fill-current',
+                'stroke-current',
             ],
         },
     },
@@ -144,13 +153,21 @@ module.exports = {
                 400: '#C4D1E8',
                 500: '#9AADCE',
                 600: '#7587AB',
-                700: '#4B5F84',
+                700: '#405985',
                 800: '#25395F',
                 900: '#192742',
             },
             transparent: 'transparent',
             black: '#000',
             white: '#fff',
+            pastel: {
+                blue: '#EEFBFF',
+                orange: '#FFF8EF',
+                green: '#F7FFED',
+                yellow: '#FFF9EF',
+                pink: '#FFF3F8',
+                purple: '#EFF0FE',
+            },
         },
         extend: {
             fontSize: {
@@ -164,6 +181,7 @@ module.exports = {
                 20: pxToRem(20),
                 22: pxToRem(22),
                 24: pxToRem(24),
+                28: pxToRem(28),
                 30: pxToRem(30),
                 32: pxToRem(32),
                 36: pxToRem(36),
@@ -194,6 +212,37 @@ module.exports = {
                 800: '800',
                 900: '900',
             },
+            keyframes: {
+                spinReverse: {
+                    from: {
+                        transform: 'rotate(360deg)',
+                    },
+                    to: {
+                        transform: 'rotate(0deg)',
+                    },
+                },
+                shake: {
+                    '8%, 41%': {
+                        transform: 'translateX(-10px)',
+                    },
+                    '25%, 58%': {
+                        transform: 'translateX(10px)',
+                    },
+                    '75%': {
+                        transform: 'translateX(-5px)',
+                    },
+                    '92%': {
+                        transform: 'translateX(5px)',
+                    },
+                    '0%, 100%': {
+                        transform: 'translateX(0)',
+                    },
+                },
+            },
+            animation: {
+                'spin-reverse': 'spinReverse 1s linear infinite;',
+                shake: 'shake .5s linear;',
+            },
         },
     },
     variants: {
@@ -205,8 +254,50 @@ module.exports = {
         cursor: ['responsive', 'disabled'],
     },
     plugins: [
-        // Reference: https://dev.to/smartmointy/tailwind-css-dark-mode-switch-with-javascript-2kl9
-        plugin(function ({ addVariant, prefix }) {
+        // Add individual border colors
+        // Source: https://github.com/tailwindlabs/tailwindcss/issues/559#issuecomment-639118372
+        plugin(function({ addUtilities, theme, config }) {
+            const themeColors = theme('colors')
+            const individualBorderColors = Object.keys(themeColors).map((colorName) => {
+                if (typeof themeColors[colorName] === 'string') {
+                    return {
+                        [`.border-b-${colorName}`]: {
+                            borderBottomColor: themeColors[colorName],
+                        },
+                        [`.border-t-${colorName}`]: {
+                            borderTopColor: themeColors[colorName],
+                        },
+                        [`.border-l-${colorName}`]: {
+                            borderLeftColor: themeColors[colorName],
+                        },
+                        [`.border-r-${colorName}`]: {
+                            borderRightColor: themeColors[colorName],
+                        },
+                    }
+                } else if (typeof themeColors[colorName] === 'object') {
+                    return Object.keys(themeColors[colorName]).map((colorTint) => {
+                        return {
+                            [`.border-b-${colorName}-${colorTint}`]: {
+                                borderBottomColor: themeColors[colorName][colorTint],
+                            },
+                            [`.border-t-${colorName}-${colorTint}`]: {
+                                borderTopColor: themeColors[colorName][colorTint],
+                            },
+                            [`.border-l-${colorName}-${colorTint}`]: {
+                                borderLeftColor: themeColors[colorName][colorTint],
+                            },
+                            [`.border-r-${colorName}-${colorTint}`]: {
+                                borderRightColor: themeColors[colorName][colorTint],
+                            },
+                        }
+                    })
+                }
+            })
+            addUtilities(individualBorderColors)
+        }),
+        // Add darkmode
+        // Source: https://dev.to/smartmointy/tailwind-css-dark-mode-switch-with-javascript-2kl9
+        plugin(function({ addVariant, prefix }) {
             addVariant('dark', ({ modifySelectors, separator }) => {
                 modifySelectors(({ selector }) => {
                     return selectorParser((selectors) => {
@@ -218,7 +309,7 @@ module.exports = {
                 })
             })
         }),
-        plugin(function ({ addVariant, e }) {
+        plugin(function({ addVariant, e }) {
             addVariant('dark-hover', ({ modifySelectors, separator }) => {
                 modifySelectors(({ className }) => {
                     return `.scheme-dark .${e(`dark\:hover${separator}${className}`)}:hover`

@@ -1,40 +1,34 @@
 <script lang="typescript">
-    import { onMount, onDestroy } from 'svelte'
+    import { logout } from 'shared/lib/app'
     import { activeProfile } from 'shared/lib/profile'
-    import { api, destroyActor, resetWallet } from 'shared/lib/wallet'
-    import { resetRouter } from 'shared/lib/router'
+    import { debounce } from 'shared/lib/utils'
+    import { onDestroy } from 'svelte'
+    import { get } from 'svelte/store'
 
     let timeout
+    let isDestroyed = false
 
-    function debounce(callback, wait = 500) {
-        let _timeout
-        return (...args) => {
-            const context = this
-            clearTimeout(_timeout)
-            _timeout = setTimeout(() => callback.apply(context, args), wait)
+    function handleEvent() {
+        // The events are debounced so the component can get onDestroy
+        // called and be followed by a debounced handleEvent so
+        // make sure the idle doesn't get triggered again when its
+        // already destroyed
+        if (!isDestroyed) {
+            clearTimeout(timeout)
+
+            const ap = get(activeProfile)
+            if (ap) {
+                timeout = setTimeout(lock, ap.settings.lockScreenTimeout * 60 * 1000)
+            }
         }
     }
 
-    function handleEvent() {
-        clearTimeout(timeout)
-
-        timeout = setTimeout(lock, $activeProfile.settings.lockScreenTimeout * 60 * 1000)
-    }
-
     function lock() {
-        api.lockStronghold({
-            onSuccess() {
-                destroyActor($activeProfile.id)
-                resetWallet()
-                resetRouter()
-            },
-            onError(error) {
-                console.error(error)
-            },
-        })
+        logout()
     }
 
     onDestroy(() => {
+        isDestroyed = true
         clearTimeout(timeout)
     })
 </script>

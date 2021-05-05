@@ -4,14 +4,16 @@ use actors::{dispatch, DispatchMessage, WalletActor, WalletActorMsg};
 use iota::common::logger::logger_init;
 pub use iota::common::logger::LoggerConfigBuilder;
 use iota_wallet::{
-    account_manager::{AccountManager, ManagerStorage, DEFAULT_STORAGE_FOLDER},
+    account_manager::{AccountManager, DEFAULT_STORAGE_FOLDER},
+    client::drop_all as drop_clients,
     event::{
         on_balance_change, on_broadcast, on_confirmation_state_change, on_error,
-        on_new_transaction, on_reattachment, on_stronghold_status_change, on_transfer_progress,
-        remove_balance_change_listener, remove_broadcast_listener,
+        on_migration_progress, on_new_transaction, on_reattachment, on_stronghold_status_change,
+        on_transfer_progress, remove_balance_change_listener, remove_broadcast_listener,
         remove_confirmation_state_change_listener, remove_error_listener,
-        remove_new_transaction_listener, remove_reattachment_listener,
-        remove_stronghold_status_change_listener, remove_transfer_progress_listener, EventId,
+        remove_migration_progress_listener, remove_new_transaction_listener,
+        remove_reattachment_listener, remove_stronghold_status_change_listener,
+        remove_transfer_progress_listener, EventId,
     },
 };
 use once_cell::sync::Lazy;
@@ -57,6 +59,7 @@ pub enum EventType {
     Broadcast,
     StrongholdStatusChange,
     TransferProgress,
+    MigrationProgress,
 }
 
 impl TryFrom<&str> for EventType {
@@ -72,6 +75,7 @@ impl TryFrom<&str> for EventType {
             "Broadcast" => EventType::Broadcast,
             "StrongholdStatusChange" => EventType::StrongholdStatusChange,
             "TransferProgress" => EventType::TransferProgress,
+            "MigrationProgress" => EventType::MigrationProgress,
             _ => return Err(format!("invalid event name {}", value)),
         };
         Ok(event_type)
@@ -93,11 +97,11 @@ pub async fn init<A: Into<String>, F: Fn(String) + Send + Sync + 'static>(
                 Some(path) => path.as_ref().to_path_buf(),
                 None => PathBuf::from(DEFAULT_STORAGE_FOLDER),
             },
-            ManagerStorage::Sqlite,
             None,
         )
         .unwrap() //safe to unwrap, the storage password is None ^
         .with_polling_interval(Duration::from_millis(POLLING_INTERVAL_MS))
+        .with_sync_spent_outputs()
         .finish()
         .await
         .expect("failed to init account manager");
@@ -123,33 +127,50 @@ pub async fn init<A: Into<String>, F: Fn(String) + Send + Sync + 'static>(
     .await;
 }
 
+pub async fn remove_event_listeners<A: Into<String>>(actor_id: A) {
+    let mut actors = wallet_actors().lock().await;
+    if let Some(actor_data) = actors.get_mut(&actor_id.into()) {
+        remove_event_listeners_internal(&actor_data.listeners).await;
+        actor_data.listeners = Vec::new();
+    }
+}
+
+async fn remove_event_listeners_internal(listeners: &[(EventId, EventType)]) {
+    for (event_id, event_type) in listeners.iter() {
+        match event_type {
+            &EventType::ErrorThrown => remove_error_listener(event_id),
+            &EventType::BalanceChange => remove_balance_change_listener(event_id).await,
+            &EventType::NewTransaction => remove_new_transaction_listener(event_id).await,
+            &EventType::ConfirmationStateChange => {
+                remove_confirmation_state_change_listener(event_id).await
+            }
+            &EventType::Reattachment => remove_reattachment_listener(event_id).await,
+            &EventType::Broadcast => remove_broadcast_listener(event_id).await,
+            &EventType::StrongholdStatusChange => {
+                remove_stronghold_status_change_listener(event_id).await
+            }
+            &EventType::TransferProgress => remove_transfer_progress_listener(event_id).await,
+            &EventType::MigrationProgress => remove_migration_progress_listener(event_id).await,
+        };
+    }
+}
+
 pub async fn destroy<A: Into<String>>(actor_id: A) {
     let mut actors = wallet_actors().lock().await;
     let actor_id = actor_id.into();
 
     if let Some(actor_data) = actors.remove(&actor_id) {
-        for (event_id, event_type) in &actor_data.listeners {
-            match event_type {
-                &EventType::ErrorThrown => remove_error_listener(event_id),
-                &EventType::BalanceChange => remove_balance_change_listener(event_id).await,
-                &EventType::NewTransaction => remove_new_transaction_listener(event_id).await,
-                &EventType::ConfirmationStateChange => {
-                    remove_confirmation_state_change_listener(event_id).await
-                }
-                &EventType::Reattachment => remove_reattachment_listener(event_id).await,
-                &EventType::Broadcast => remove_broadcast_listener(event_id).await,
-                &EventType::StrongholdStatusChange => {
-                    remove_stronghold_status_change_listener(event_id).await
-                }
-                &EventType::TransferProgress => remove_transfer_progress_listener(event_id).await,
-            };
-        }
+        remove_event_listeners_internal(&actor_data.listeners).await;
 
         actor_data.actor.tell(actors::KillMessage, None);
         iota_wallet::with_actor_system(|sys| {
             sys.stop(&actor_data.actor);
         })
         .await;
+
+        // delay to wait for the actor to be killed
+        tokio::time::sleep(Duration::from_millis(500)).await;
+        drop_clients().await;
 
         let mut message_receivers = message_receivers()
             .lock()
@@ -315,6 +336,12 @@ pub async fn listen<A: Into<String>, S: Into<String>>(actor_id: A, id: S, event_
         }
         EventType::TransferProgress => {
             on_transfer_progress(move |event| {
+                let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &event));
+            })
+            .await
+        }
+        EventType::MigrationProgress => {
+            on_migration_progress(move |event| {
                 let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &event));
             })
             .await

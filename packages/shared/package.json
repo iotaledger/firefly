@@ -5,7 +5,9 @@
     "license": "Apache-2.0",
     "dependencies": {
         "@iota/unit-converter": "^1.0.0-beta.30",
+        "big.js": "^6.0.3",
         "chart.js": "^2.9.3",
+        "lottie-web": "^5.7.8",
         "qr.js": "0.0.0",
         "svelte": "^3.30.1",
         "svelte-i18n": "^3.0.4",

@@ -37,12 +37,40 @@ export interface StrongholdPasswordChange {
     newPassword: string
 }
 
-export function backup(bridge: Bridge, __ids: CommunicationIds, destinationPath: string) {
+export interface Duration {
+    secs: number
+    nanos: number
+}
+
+export interface NodeInfo {
+    nodeinfo: {
+        name: string;
+        version: string;
+        isHealthy: boolean;
+        networkId: string;
+        minPoWScore: number;
+        bech32HRP: string;
+        latestMilestoneIndex: number;
+        latestMilestoneTimestamp: number;
+        confirmedMilestoneIndex: number;
+        pruningIndex: number;
+        features: string[];
+        messagesPerSecond: number;
+        referencedMessagesPerSecond: number;
+        referencedRate: number;
+    }
+    url: string
+}
+
+export function backup(bridge: Bridge, __ids: CommunicationIds, destinationPath: string, password: string) {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
         cmd: 'Backup',
-        payload: destinationPath,
+        payload: {
+            destination: destinationPath,
+            password,
+        }
     })
 }
 
@@ -162,5 +190,23 @@ export function getLedgerDeviceStatus(bridge: Bridge, __ids: CommunicationIds, i
         id: __ids.messageId,
         cmd: 'GetLedgerStatus',
         payload: isSimulator
+    })
+}
+
+export function setStrongholdPasswordClearInterval(bridge: Bridge, __ids: CommunicationIds, payload: Duration) {
+    return bridge({
+        actorId: __ids.actorId,
+        id: __ids.messageId,
+        cmd: 'SetStrongholdPasswordClearInterval',
+        payload,
+    })
+}
+
+export function getLegacySeedChecksum(bridge: Bridge, __ids: CommunicationIds, payload: string) {
+    return bridge({
+        actorId: __ids.actorId,
+        id: __ids.messageId,
+        cmd: 'GetSeedChecksum',
+        payload,
     })
 }

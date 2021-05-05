@@ -2,17 +2,27 @@
     import { onMount } from 'svelte'
     import { createEventDispatcher } from 'svelte'
     import { validatePinFormat, PIN_LENGTH } from 'shared/lib/utils'
+    import { Error, Icon } from 'shared/components'
 
     const dispatch = createEventDispatcher()
 
     export let value = undefined
     export let classes = ''
     export let disabled = false
+    export let autofocus = false
+    export let glimpse = false
+    export let smaller = false
+    export let error
 
     let inputs = new Array(PIN_LENGTH)
-    $: value = inputs.join('')
+    $: {
+        if (!value) {
+            inputs = new Array(PIN_LENGTH)
+        }
+    }
 
     let root
+    let inputElements = []
 
     const KEYBOARD = {
         BACKSPACE: 8,
@@ -21,26 +31,29 @@
     }
 
     onMount(async () => {
-        document.getElementById('input-0').focus()
+        if (autofocus) {
+            focus()
+        }
     })
+
+    const handleBackspace = () => {
+        // Search for the last child with a value
+        // and remove it
+        for (let j = 1; j <= PIN_LENGTH; j++) {
+            if (j === PIN_LENGTH || !inputs[j]) {
+                inputs[j - 1] = ''
+                inputElements[j - 1].focus()
+                break
+            }
+        }
+        value = inputs.join('')
+    }
 
     const changeHandler = function (e, i) {
         let regex = new RegExp(/^\d+$/)
 
         if (e.keyCode == KEYBOARD.BACKSPACE) {
-            // Search for the last child with a value
-            // and remove it
-            let sibling = e.target.parentNode.firstChild
-            for (let j = 0; j <= PIN_LENGTH; j++) {
-                if (j === PIN_LENGTH || !inputs[j]) {
-                    inputs[j - 1] = ''
-                    if (sibling) {
-                        sibling.focus()
-                    }
-                    break
-                }
-                sibling = sibling.nextElementSibling
-            }
+            handleBackspace()
         } else if (e.keyCode == KEYBOARD.ENTER) {
             if (validatePinFormat(inputs.join(''))) {
                 dispatch('submit')
@@ -54,31 +67,27 @@
             if (regex.test(e.key)) {
                 // Search from the first child to find the first
                 // empty value and start filling from there
-                let sibling = e.target.parentNode.firstChild
                 for (let j = 0; j < PIN_LENGTH; j++) {
-                    let nextInput = sibling.nextElementSibling
                     if (!inputs[j]) {
                         inputs[j] = e.key
-                        if (nextInput) {
-                            nextInput.focus()
+                        if (j < PIN_LENGTH - 1) {
+                            inputElements[j + 1].focus()
                         }
                         break
                     }
-                    sibling = nextInput
                 }
+                value = inputs.join('')
             }
         }
         e.preventDefault()
     }
 
     const selectFirstEmpty = () => {
-        let sibling = root.firstChild.firstChild
         for (let j = 0; j < PIN_LENGTH; j++) {
             if (!inputs[j] || j === PIN_LENGTH - 1) {
-                sibling.focus()
+                inputElements[j].focus()
                 return
             }
-            sibling = sibling.nextElementSibling
         }
     }
 
@@ -89,91 +98,127 @@
     }
 
     export function focus() {
-        selectFirstEmpty()
+        if (!disabled) {
+            selectFirstEmpty()
+        }
+    }
+
+    export function resetAndFocus() {
+        if (!disabled) {
+            inputs = new Array(PIN_LENGTH)
+            selectFirstEmpty()
+        } else {
+            setTimeout(() => resetAndFocus(), 100)
+        }
     }
 </script>
 
 <style type="text/scss">
     pin-input {
-        height: 80px;
         @apply cursor-pointer;
-        user-select: none;
-        transition: border-color 0.25s;
+        @apply select-none;
 
         &:not(.disabled):focus-within,
         &:not(.disabled):hover {
             @apply border-gray-500;
         }
-
         &.disabled {
-            @apply cursor-default;
+            @apply pointer-events-none;
+            @apply opacity-50;
+        }
+        .inputs-wrapper {
+            height: 27px;
         }
         .input-wrapper {
             max-width: 204px;
+            height: 27px;
 
             input {
                 -webkit-text-security: none;
-                width: 14px;
-                height: 14px;
-                opacity: 0;
+                @apply w-4;
                 @apply bg-transparent;
+                @apply opacity-0;
                 @apply text-transparent;
                 @apply cursor-pointer;
+                @apply text-center;
+                @apply text-18;
+                caret-color: transparent;
+                transition: opacity 1s, color 1s;
+
+                &.active {
+                    border-bottom-width: 1px;
+                    border-bottom-style: solid;
+                    @apply border-blue-500;
+                    @apply cursor-text;
+                    @apply opacity-100;
+
+                    &.glimpse {
+                        @apply text-blue-500;
+                    }
+                }
 
                 &:focus {
-                    outline: none;
-                }
-                &:disabled {
-                    @apply cursor-default;
+                    @apply outline-none;
                 }
             }
         }
         .input-decorator-wrapper {
             z-index: -1;
             max-width: 204px;
+            height: 27px;
             input-decorator {
-                width: 14px;
-                height: 14px;
-                @apply bg-gray-400;
+                @apply w-4;
+                @apply h-4;
+                @apply rounded-full;
+                @apply bg-blue-500;
+                @apply opacity-0;
                 &.active {
-                    @apply bg-blue-500;
-                }
-                &.disabled {
-                    @apply bg-gray-600;
+                    transition: opacity 1s;
+                    @apply opacity-100;
                 }
             }
         }
     }
 </style>
 
-<pin-input
-    style="--pin-input-size: {PIN_LENGTH}"
-    class={`flex items-center justify-center w-full relative z-0 bg-gray-50 border border-solid border-gray-300 rounded-xl ${classes}`}
-    class:disabled
-    bind:this={root}
-    on:click={selectFirstEmptyRoot}
-    on:focus={selectFirstEmptyRoot}
-    tabindex="0">
-    {#if inputs.length}
-        <div class="input-wrapper absolute items-center w-full flex flex-row flex-no-wrap justify-between">
-            {#each inputs as item, i}
-                <input
-                    bind:value={inputs[i]}
-                    maxLength="1"
-                    id={`input-${i}`}
-                    type="password"
-                    pattern="\d{1}"
-                    maxlength="1"
-                    {disabled}
-                    on:keydown={(event) => changeHandler(event, i)}
-                    on:contextmenu|preventDefault
-                    placeholder="" />
-            {/each}
+<div class="w-full {classes}">
+    <pin-input
+        style="--pin-input-size: {PIN_LENGTH}"
+        class={`flex items-center justify-between w-full relative z-0 rounded-xl border border-solid
+            bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-700
+            ${smaller ? 'h-14 pl-6 pr-4' : 'h-20 pl-12 pr-8'}`}
+        class:disabled
+        bind:this={root}
+        on:click={selectFirstEmptyRoot}
+        on:focus={selectFirstEmptyRoot}
+        tabindex="0">
+        <div class="flex flex-row inputs-wrapper">
+            <div class="input-wrapper absolute items-center w-full flex flex-row flex-no-wrap justify-between">
+                {#each inputs as item, i}
+                    <input
+                        bind:value={inputs[i]}
+                        maxLength="1"
+                        id={`input-${i}`}
+                        type="text"
+                        bind:this={inputElements[i]}
+                        class:active={!inputs[i] || inputs[i].length === 0}
+                        class:glimpse
+                        {disabled}
+                        on:keydown={(event) => changeHandler(event, i)}
+                        on:contextmenu|preventDefault />
+                {/each}
+            </div>
+            <div class="input-decorator-wrapper items-center absolute w-full flex flex-row flex-no-wrap justify-between">
+                {#each inputs as item, i}
+                    <input-decorator class:active={inputs[i] && inputs[i].length !== 0} class:disabled />
+                {/each}
+            </div>
         </div>
-        <div class="input-decorator-wrapper absolute w-full flex flex-row flex-no-wrap justify-between">
-            {#each inputs as item, i}
-                <input-decorator class="rounded-full" class:active={inputs[i] && inputs[i].length !== 0} class:disabled />
-            {/each}
-        </div>
+        <button type="button" on:click={handleBackspace} {disabled} tabindex="-1">
+            <Icon icon="backspace" classes={smaller ? 'text-blue-500' : 'text-gray-500'} />
+        </button>
+    </pin-input>
+    {#if error}
+        <Error {error} />
     {/if}
-</pin-input>
+</div>

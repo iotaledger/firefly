@@ -1,19 +1,23 @@
 <script lang="typescript">
     import { AccountTile, Button, Text } from 'shared/components'
+    import { activeProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { selectedAccountId, WalletAccount } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
-    import type { Writable } from 'svelte/store'
+    import type { Readable } from 'svelte/store'
     import { Receive, Send } from '.'
 
     export let locale
     export let send
     export let internalTransfer
     export let generateAddress
+    export let isGeneratingAddress
 
-    const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
-    const accountsLoaded = getContext<Writable<boolean>>('walletAccountsLoaded')
+    const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
+    const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
+
+    $: waitingChrysalis = $activeProfile?.migratedTransactions?.length
 
     function handleAccountClick(accountId) {
         selectedAccountId.set(accountId)
@@ -23,53 +27,39 @@
     function handleCreateClick() {
         walletRoute.set(WalletRoutes.CreateAccount)
     }
-    function handleSendClick() {
-        walletRoute.set(WalletRoutes.Send)
-    }
-    function handleReceiveClick() {
-        walletRoute.set(WalletRoutes.Receive)
-    }
 </script>
 
 {#if $walletRoute === WalletRoutes.Init}
     <div class="p-8 pt-4 flex flex-col h-full justify-between">
-        <div data-label="accounts" class="w-full h-full flex flex-col flex-no-wrap justify-start mb-6">
-            <div class="flex flex-row mb-6 justify-between items-center">
-                <Text type="h5">{locale('general.accounts')}</Text>
-                <Button onClick={handleCreateClick} secondary small icon="plus" disabled={!$accountsLoaded}>
+        <div data-label="accounts" class="w-full h-full flex flex-col flex-no-wrap justify-start">
+            <div class="flex flex-row mb-4 justify-between items-center">
+                <Text type="h5">{locale('general.myAccounts')}</Text>
+                <Button disabled={waitingChrysalis} onClick={handleCreateClick} secondary small showHoverText icon="plus">
                     {locale('actions.create')}
                 </Button>
             </div>
-            {#if !$accountsLoaded}
-                <Text overrideColor classes={'text-gray-600'}>{locale('general.loading_accounts')}</Text>
-            {:else if $accounts.length > 0}
-                <div class="grid grid-cols-{$accounts.length <= 2 ? $accounts.length : '3'} gap-2 w-full flex-auto">
-                    {#each $accounts as account}
+            {#if $viewableAccounts.length > 0}
+                <div
+                    class="grid {$viewableAccounts.length === 1 ? 'grid-cols-1' : 'grid-cols-2'} auto-rows-max gap-4 flex-auto overflow-y-auto h-1 -mr-2 pr-2 scroll-secondary">
+                    {#each $viewableAccounts as account}
                         <AccountTile
                             color={account.color}
                             name={account.alias}
                             balance={account.balance}
                             balanceEquiv={account.balanceEquiv}
-                            size={$accounts.length >= 3 ? 's' : $accounts.length === 2 ? 'm' : 'l'}
+                            size={$viewableAccounts.length === 1 ? 'l' : 'm'}
+                            hidden={hiddenAccounts.includes(account.id)}
+                            disabled={waitingChrysalis}
                             onClick={() => handleAccountClick(account.id)} />
                     {/each}
                 </div>
             {:else}
-                <Text>{locale('general.no_accounts')}</Text>
+                <Text>{locale('general.noAccounts')}</Text>
             {/if}
         </div>
-        {#if $accounts.length > 0}
-            <!-- Action Send / Receive -->
-            <div class="flex flex-row justify-between space-x-4">
-                <Button xl secondary icon="receive" classes="w-1/2" onClick={handleReceiveClick}>
-                    {locale('actions.receive')}
-                </Button>
-                <Button xl secondary icon="transfer" classes="w-1/2" onClick={handleSendClick}>{locale('actions.send')}</Button>
-            </div>
-        {/if}
     </div>
 {:else if $walletRoute === WalletRoutes.Send}
     <Send {send} {internalTransfer} {locale} />
 {:else if $walletRoute === WalletRoutes.Receive}
-    <Receive {generateAddress} {locale} />
+    <Receive {isGeneratingAddress} {generateAddress} {locale} />
 {/if}

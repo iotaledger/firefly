@@ -1,19 +1,28 @@
 <script lang="typescript">
-    import { SettingsRoutes, GeneralSettings, SecuritySettings, AdvancedSettings, HelpAndInfo } from 'shared/lib/typings/routes'
+    import { SettingsMenu, Text } from 'shared/components'
+    import { loggedIn } from 'shared/lib/app'
+    import { settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import { SettingsIcons } from 'shared/lib/typings/icons'
-    import { Text, SettingsMenu } from 'shared/components'
-    import { settingsRoute } from 'shared/lib/router';
-    import { profileType, ProfileType } from 'shared/lib/wallet';
+    import {
+        AdvancedSettings,
+        AdvancedSettingsNoProfile,
+        GeneralSettings,
+        GeneralSettingsNoProfile,
+        HelpAndInfo,
+        SecuritySettings,
+        SettingsRoutes,
+    } from 'shared/lib/typings/routes'
+    import { profileType, ProfileType } from 'shared/lib/wallet'
 
     export let locale
     export let mobile
 
     const securitySettings = Object.assign({}, SecuritySettings)
+    // TODO: ledger, The operand of a 'delete' operator cannot be a read-only property
     if ($profileType !== ProfileType.Software) {
         delete securitySettings.ExportStronghold
         delete securitySettings.ChangePassword
     }
-
 </script>
 
 {#if mobile}
@@ -27,36 +36,52 @@
                 iconColor="bg-blue-500"
                 icons={SettingsIcons}
                 settings={GeneralSettings}
+                activeSettings={$loggedIn ? GeneralSettings : GeneralSettingsNoProfile}
                 title={locale('views.settings.generalSettings.title')}
                 description={locale('views.settings.generalSettings.description')}
-                onClick={() => settingsRoute.set(SettingsRoutes.GeneralSettings)}
+                onClick={(setting) => {
+                    settingsRoute.set(SettingsRoutes.GeneralSettings)
+                    settingsChildRoute.set(setting)
+                }}
                 {locale} />
             <SettingsMenu
                 icon="security"
                 iconColor="bg-yellow-500"
                 icons={SettingsIcons}
                 settings={securitySettings}
+                activeSettings={$loggedIn ? SecuritySettings : undefined}
                 title={locale('views.settings.security.title')}
                 description={locale('views.settings.security.description')}
-                onClick={() => settingsRoute.set(SettingsRoutes.Security)}
+                onClick={(setting) => {
+                    settingsRoute.set(SettingsRoutes.Security)
+                    settingsChildRoute.set(setting)
+                }}
                 {locale} />
             <SettingsMenu
                 icon="tools"
                 iconColor="bg-green-600"
                 icons={SettingsIcons}
                 settings={AdvancedSettings}
+                activeSettings={$loggedIn ? AdvancedSettings : AdvancedSettingsNoProfile}
                 title={locale('views.settings.advancedSettings.title')}
                 description={locale('views.settings.advancedSettings.description')}
-                onClick={() => settingsRoute.set(SettingsRoutes.AdvancedSettings)}
+                onClick={(setting) => {
+                    settingsRoute.set(SettingsRoutes.AdvancedSettings)
+                    settingsChildRoute.set(setting)
+                }}
                 {locale} />
             <SettingsMenu
                 icon="info"
                 iconColor="bg-purple-500"
                 icons={SettingsIcons}
                 settings={HelpAndInfo}
+                activeSettings={HelpAndInfo}
                 title={locale('views.settings.helpAndInfo.title')}
                 description={locale('views.settings.helpAndInfo.description')}
-                onClick={() => settingsRoute.set(SettingsRoutes.HelpAndInfo)}
+                onClick={(setting) => {
+                    settingsRoute.set(SettingsRoutes.HelpAndInfo)
+                    settingsChildRoute.set(setting)
+                }}
                 {locale} />
         </div>
     </div>

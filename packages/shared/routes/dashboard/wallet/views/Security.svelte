@@ -1,18 +1,22 @@
 <script lang="typescript">
-    import { get } from 'svelte/store'
-    import { onMount, onDestroy } from 'svelte'
-    import { Text, SecurityTile } from 'shared/components'
-    import { diffDates, getBackupWarningColor } from 'shared/lib/helpers'
-    import { activeProfile, profiles } from 'shared/lib/profile'
+    import { SecurityTile, Text } from 'shared/components'
+    import { versionDetails } from 'shared/lib/appUpdater'
+    import { diffDates, getBackupWarningColor, isRecentDate } from 'shared/lib/helpers'
+    import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { api, profileType, ProfileType } from 'shared/lib/wallet'
     import { versionDetails } from 'shared/lib/appUpdater'
     import { LedgerStatus } from 'shared/lib/typings/wallet'
+    import { activeProfile, isStrongholdLocked, profiles } from 'shared/lib/profile'
+    import { api } from 'shared/lib/wallet'
+    import { onDestroy, onMount } from 'svelte'
+    import { get } from 'svelte/store'
 
     export let locale
 
     let lastBackupDate
     let lastBackupDateFormatted
+    let backupSafe
     let color
     let strongholdStatusMessage
     let isDestroyed = false
@@ -22,11 +26,12 @@
     let isSoftwareAccountProfile = true
 
     function setup() {
-        const { isStrongholdLocked, lastStrongholdBackupTime } = get(activeProfile)
+        const ap = get(activeProfile)
+        const lastStrongholdBackupTime = ap?.lastStrongholdBackupTime
         lastBackupDate = lastStrongholdBackupTime ? new Date(lastStrongholdBackupTime) : null
         lastBackupDateFormatted = diffDates(lastBackupDate, new Date())
+        backupSafe = lastBackupDate && isRecentDate(lastBackupDate)?.lessThanAMonth
         color = getBackupWarningColor(lastBackupDate)
-        strongholdStatusMessage = isStrongholdLocked ? 'locked' : 'unlocked'
     }
 
     function handleSecurityTileClick(popupType) {
@@ -36,16 +41,19 @@
                 currentVersion: $versionDetails.currentVersion,
                 lastBackupDate,
                 lastBackupDateFormatted,
-                isStrongholdLocked: get(activeProfile).isStrongholdLocked,
+                isStrongholdLocked: $isStrongholdLocked,
             },
         })
     }
 
     function lockStronghold() {
         api.lockStronghold({
-            onSuccess() { },
-            onError(error) {
-                console.error(error)
+            onSuccess() {},
+            onError(err) {
+                showAppNotification({
+                    type: 'error',
+                    message: locale(err.error),
+                })
             },
         })
     }
@@ -60,7 +68,7 @@
                 onError(e) {
                     ledgerDeviceStatus = LedgerStatus.Disconnected
                     reject(e)
-                }
+                },
             })
         })
     }
@@ -108,35 +116,49 @@
     })
 </script>
 
-<div data-label="security" class="p-8 flex-grow flex flex-col">
-    <Text type="h4" classes="mb-5">{locale('general.security')}</Text>
-    <div class="grid grid-cols-2 gap-2">
-        <!-- Firefly version -->
-        <SecurityTile title={locale('views.dashboard.security.version.title', { values: { version:
-            $versionDetails.currentVersion } })}
-            message={locale(`views.dashboard.security.version.${$versionDetails.upToDate ? 'up_to_date' : 'out_of_date'
-            }`)} color={$versionDetails.upToDate ? 'green' : 'red' } icon="firefly" onClick={()=>
-            handleSecurityTileClick('version')} />
+<div data-label="security" class="pt-6 pb-8 px-8 flex-grow flex flex-col h-full">
+    <Text type="h5" classes="mb-5">{locale('general.security')}</Text>
+    <div class="grid grid-cols-2 gap-3 auto-rows-max w-full overflow-y-auto flex-auto h-1 -mr-2 pr-2 scroll-secondary">
+        <!-- TODO: ledger, fix UI -->
+        {#if isSoftwareAccountProfile}
+            <!-- Stronghold backup -->
+            <SecurityTile
+                title={locale('views.dashboard.security.strongholdBackup.title')}
+                message={$activeProfile?.lastStrongholdBackupTime ? locale(`dates.${lastBackupDateFormatted.unit}`, {
+                          values: { time: lastBackupDateFormatted.value },
+                      }) : locale('popups.backup.notBackedUp')}
+                onClick={() => handleSecurityTileClick('backup')}
+                icon="shield"
+                warning={!backupSafe}
+                {color} />
+            <!-- Firefly version -->
+        {:else}
             <!-- Hardware Device -->
-            {#if !isSoftwareAccountProfile}
-            <SecurityTile onClick={checkLedgerConnection}
+            <SecurityTile
+                onClick={checkLedgerConnection}
                 title={locale('views.dashboard.security.hardware_device.title')}
-                message={locale(`views.dashboard.security.hardware_device.${hardwareDeviceMessage}`)} color="gray"
+                message={locale(`views.dashboard.security.hardware_device.${hardwareDeviceMessage}`)}
+                color="gray"
                 icon="chip" />
-            {/if}
-            {#if isSoftwareAccountProfile}
+        {/if}
+        <SecurityTile
+            title={locale('views.dashboard.security.version.title', { values: { version: $versionDetails.currentVersion } })}
+            message={locale(`views.dashboard.security.version.${$versionDetails.upToDate ? 'upToDate' : 'outOfDate'}`)}
+            color={$versionDetails.upToDate ? 'blue' : 'yellow'}
+            warning={!$versionDetails.upToDate}
+            icon="firefly"
+            onClick={() => handleSecurityTileClick('version')} />
+        {#if isSoftwareAccountProfile}
             <!-- Stronghold status -->
-            <SecurityTile title={locale('views.dashboard.security.stronghold_status.title')}
-                message={locale(`views.dashboard.security.stronghold_status.${strongholdStatusMessage}`)}
-                color={$activeProfile.isStrongholdLocked ? 'blue' : 'red' } icon="lock" onClick={()=>
-                (get(activeProfile).isStrongholdLocked ? handleSecurityTileClick('password') : lockStronghold())} />
-                <!-- Stronghold backup -->
-                <SecurityTile title={locale('views.dashboard.security.stronghold_backup.title')}
-                    message={$activeProfile.lastStrongholdBackupTime ? locale(`dates.${lastBackupDateFormatted.unit}`, {
-                    values: { time: lastBackupDateFormatted.value }, }) : locale('popups.backup.not_backed_up')}
-                    onClick={()=> handleSecurityTileClick('backup')}
-                    icon="shield"
-                    {color} />
-                    {/if}
+            <SecurityTile
+                title={locale('views.dashboard.security.strongholdStatus.title')}
+                message={locale(`views.dashboard.security.strongholdStatus.${$isStrongholdLocked ? 'locked' : 'unlocked'}`)}
+                color="yellow"
+                icon={$isStrongholdLocked ? 'lock' : 'unlock'}
+                onClick={() => ($isStrongholdLocked ? handleSecurityTileClick('password') : lockStronghold())}
+                classes="col-span-2"
+                toggle
+                toggleActive={!$isStrongholdLocked} />
+        {/if}
     </div>
 </div>

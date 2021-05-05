@@ -1,38 +1,33 @@
 ---
-name: Report a bug in wallet
+name: Report an issue in wallet
 about: Create a report to help us improve
 title: ""
-labels: c-bug
+labels: bug
 ---
 
-## Bug description
+## Issue description
 
-Briefly describe the bug.
+Briefly describe the issue.
 
-## Rust version
-
-Which version of Rust are you running?
-
-- Rust version:
-
-## wallet version
+## Wallet version
 
 Which version of wallet are you using?
 
 - wallet version (version number, commit, or branch):
 
-## Hardware specification
+## System specification
 
-What hardware are you using?
+What is your operating system?
 
-- Operating system:
-- RAM:
-- Cores:
-- Device:
+Mac/Win/Linux (+Version and or Distro if possible)
 
-## Steps To reproduce the bug
+## Is it a repeatable issue?
 
-Explain how the maintainer can reproduce the bug.
+Y/N
+
+## Steps To reproduce the issue
+
+Explain how the maintainer can reproduce the issue.
 
 1.
 2.
@@ -48,4 +43,4 @@ Describe what actually happens.
 
 ## Errors
 
-Paste any errors that you see, including logs, errors, or screenshots.
+Paste any errors that you see from the Error Log in the Firefly menu or share screenshots of the issue.

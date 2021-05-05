@@ -1,19 +1,35 @@
 <script lang="typescript">
-    import { date } from 'svelte-i18n'
+    import { Button, Logo, Text } from 'shared/components'
+    import { getVersionDetails, updateBusy, updateCheck, updateDownload, versionDetails } from 'shared/lib/appUpdater'
     import { closePopup } from 'shared/lib/popup'
-    import { Text, Button } from 'shared/components'
-
-    import { versionDetails, updateDownload, updateBusy } from 'shared/lib/appUpdater'
+    import { onMount } from 'svelte'
+    import { formatDate } from 'shared/lib/i18n'
+    import { Electron } from 'shared/lib/electron';
 
     export let locale
+    let hasAutoUpdate = true
 
     function handleDownload() {
-        updateDownload()
+        if (hasAutoUpdate) {
+            updateDownload()
+        } else {
+            Electron.openUrl('https://firefly.iota.org')
+        }
         closePopup()
     }
     function handleCancelClick() {
         closePopup()
     }
+
+    onMount(async () => {
+        // @ts-ignore: This value is replaced by Webpack DefinePlugin
+        if (!devMode) {
+            await getVersionDetails()
+            await updateCheck()
+        }
+        const os = await Electron.getOS()
+        hasAutoUpdate = os !== "win32"
+    })
 </script>
 
 <style type="text/scss">
@@ -27,14 +43,14 @@
 
 <Text type="h4" classes="mb-5">{locale('popups.version.title', { values: { version: $versionDetails.currentVersion } })}</Text>
 <div class="flex w-full flex-row flex-wrap">
-    <div class="w-full p-4 bg-gray-50 flex justify-center content-center">
-        <img src="assets/logos/firefly_logo_full.svg" alt="" />
+    <div class="w-full p-4 bg-gray-50 dark:bg-gray-800 flex justify-center content-center">
+        <Logo width="50%" logo="logo-firefly-full" />
     </div>
     {#if $versionDetails.upToDate}
         <div class="w-full text-center my-6 px-8">
-            <Text type="h5" highlighted classes="mb-2">{locale('popups.version.up_to_date_title')}</Text>
+            <Text type="h5" highlighted classes="mb-2">{locale('popups.version.upToDateTitle')}</Text>
             <Text smaller secondary>
-                {locale('popups.version.up_to_date_description', { values: { version: $versionDetails.currentVersion } })}
+                {locale('popups.version.upToDateDescription', { values: { version: $versionDetails.currentVersion } })}
             </Text>
         </div>
         <div class="flex flex-row justify-center w-full">
@@ -43,24 +59,27 @@
     {:else}
         <div class="my-6">
             <Text smaller highlighted classes="mb-2">
-                {locale('popups.version.update_available', { values: { version: $versionDetails.currentVersion } })}
+                {locale('popups.version.updateAvailable', { values: { version: $versionDetails.currentVersion } })}
             </Text>
             <Text type="h5" classes="mb-2">
-                {locale('popups.version.update_details', {
+                {locale('popups.version.updateDetails', {
                     values: {
                         version: $versionDetails.newVersion,
-                        date: $date($versionDetails.newVersionReleaseDate, { format: 'long' }),
+                        date: formatDate($versionDetails.newVersionReleaseDate, { format: 'long' }),
                     },
                 })}
             </Text>
             <div class="changelog overflow-y-auto">
                 <Text secondary classes="whitespace-pre-wrap">{$versionDetails.changelog}</Text>
             </div>
+            {#if !hasAutoUpdate}
+                <Text error classes="mt-4">{locale('popups.version.noAutoUpdate')}</Text>
+            {/if}
         </div>
         <div class="flex flex-row justify-between space-x-4 w-full px-8">
             <Button secondary classes="w-1/2" onClick={() => handleCancelClick()}>{locale('actions.cancel')}</Button>
-            <Button classes="w-1/2" onClick={() => handleDownload()} bind:disabled={$updateBusy}>
-                {locale('actions.update_firefly')}
+            <Button classes="w-1/2" onClick={() => handleDownload()} disabled={$updateBusy}>
+                {locale('actions.updateFirefly')}
             </Button>
         </div>
     {/if}

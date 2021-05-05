@@ -1,45 +1,89 @@
 <script lang="typescript">
-    import { SettingsRoutes, GeneralSettings, SecuritySettings, AdvancedSettings, HelpAndInfo } from 'shared/lib/typings/routes'
+    import { Icon, Scroller, SettingsNavigator, Text } from 'shared/components'
+    import { loggedIn } from 'shared/lib/app'
+    import { settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import { SettingsIcons } from 'shared/lib/typings/icons'
-    import { settingsRoute } from 'shared/lib/router'
-    import { SettingsNavigator, Text, Scroller } from 'shared/components'
+    import {
+        AdvancedSettings,
+        AdvancedSettingsNoProfile,
+        GeneralSettings,
+        GeneralSettingsNoProfile,
+        HelpAndInfo,
+        SecuritySettings,
+        SettingsRoutes,
+        SettingsRoutesNoProfile,
+    } from 'shared/lib/typings/routes'
     import { profileType, ProfileType } from 'shared/lib/wallet'
-    import { General, Security, Advanced } from './'
+    import { onMount } from 'svelte'
+    import { Advanced, General, Help, Security } from './'
 
     export let locale
     export let mobile
 
-    export let navigate
-
     let scroller
     let index
 
-    const routes = Object.values(SettingsRoutes).filter((route) => route !== SettingsRoutes.Init)
+    const routes = Object.values($loggedIn ? SettingsRoutes : SettingsRoutesNoProfile).filter(
+        (route) => route !== SettingsRoutes.Init
+    )
+
+    let settings
 
     const securitySettings = Object.assign({}, SecuritySettings)
-        if ($profileType !== ProfileType.Software) {
-            delete securitySettings.ExportStronghold
-            delete securitySettings.ChangePassword
-        }
-
-    const settings = {
-        generalSettings: GeneralSettings,
-        security: securitySettings,
-        advancedSettings: AdvancedSettings,
-        helpAndInfo: HelpAndInfo,
+    // TODO: ledger, The operand of a 'delete' operator cannot be a read-only property
+    if ($profileType !== ProfileType.Software) {
+        delete securitySettings.ExportStronghold
+        delete securitySettings.ChangePassword
     }
 
-    function scrollIntoView(id) {
+    if ($loggedIn) {
+        settings = {
+            generalSettings: GeneralSettings,
+            security: securitySettings,
+            advancedSettings: AdvancedSettings,
+            helpAndInfo: HelpAndInfo,
+        }
+    } else {
+        settings = {
+            generalSettings: GeneralSettingsNoProfile,
+            advancedSettings: AdvancedSettingsNoProfile,
+            helpAndInfo: HelpAndInfo,
+        }
+    }
+
+    function scrollIntoView(id, options = null) {
         if (id) {
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' })
+            const elem = document.getElementById(id)
+            if (elem) {
+                elem.scrollIntoView(options ?? { behavior: 'smooth' })
+            } else {
+                console.error(`Element with id "${id}" missing in scrollIntoView`)
+            }
         }
     }
+
+    function handleBackClick() {
+        settingsRoute.set(SettingsRoutes.Init)
+    }
+    onMount(() => {
+        const child = $settingsChildRoute
+        settingsChildRoute.set(null)
+        if (child) {
+            scrollIntoView(child, { behavior: 'auto' })
+        }
+    })
 </script>
 
 {#if mobile}
     <div>foo</div>
 {:else}
     <div class="flex flex-1 flex-row items-start">
+        <button data-label="back-button" class="absolute top-8 left-8" on:click={handleBackClick}>
+            <div class="flex items-center space-x-3">
+                <Icon icon="arrow-left" classes="text-blue-500" />
+                <Text type="h5">{locale('actions.back')}</Text>
+            </div>
+        </button>
         <SettingsNavigator
             {routes}
             onSettingClick={(id) => scrollIntoView(id)}
@@ -59,11 +103,11 @@
                     {#if $settingsRoute === 'generalSettings'}
                         <General {locale} />
                     {:else if $settingsRoute === 'security'}
-                        <Security {navigate} {locale} />
+                        <Security {locale} />
                     {:else if $settingsRoute === 'advancedSettings'}
                         <Advanced {locale} />
                     {:else if $settingsRoute === 'helpAndInfo'}
-                        <div />
+                        <Help {locale} />
                     {/if}
                 </div>
             </Scroller>

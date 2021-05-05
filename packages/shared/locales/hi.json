@@ -1,150 +1,227 @@
 {
     "views": {
-        "onboarding_1": {
+        "onboarding1": {
             "title": "भेजे, प्राप्त करे तथा प्रबंधन करे अपने आयोटा!",
-            "body": "फायरफ्लाई एक सुरक्षित और प्रयोग करने में आसान आयोटा वॉलेट है।"
+            "body": "फायरफ्लाई आयोटा का आधिकारिक वॉलेट सॉफ्टवेयर है|"
         },
         "legal": {
-            "title": "कानूनी",
+            "title": "गोपनीयता नीति और सेवा की शर्तें",
             "body": "कृपया समीक्षा करे प्राइवेसी पॉलिसी तथा सेवा की शर्तें|",
-            "privacy_policy": {
-                "title": "प्राइवेसी पॉलिसी",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
-            "terms_of_service": {
-                "title": "सेवा की शर्तें",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
-            "checkbox": "I have read and I accept the Privacy policy & ToS"
+            "checkbox": "मैंने पढ़ा है और मैं गोपनीयता नीति और सेवा की शर्तें स्वीकार करता हूं"
         },
-        "language": {
-            "title": "भाषा और प्रकटन|",
-            "body": "अपने वॉलेट की भाषा और विषय चुनें|"
+        "appearance": {
+            "title": "दिखावट",
+            "body": "अपनी ऐप थीम चुनें"
+        },
+        "profile": {
+            "title": "प्रोफ़ाइल बनाएँ",
+            "body1": "आप अपने वॉलेट को व्यवस्थित करने और गोपनीयता में सुधार करने के लिए कई उपयोगकर्ता प्रोफ़ाइल बना सकते हैं",
+            "body2": "अभी के लिए, पहले प्रोफ़ाइल नाम से शुरू करते हैं। आप बाद में और प्रोफाइल जोड़ सकते हैं",
+            "profileName": "प्रोफ़ाइल नाम"
         },
         "setup": {
-            "title": "अपना वॉलेट सेट करें|",
-            "body": "आप एक नया वॉलेट बना सकते हैं या एक मौजूदा आयात कर सकते हैं।",
-            "profile_name": "प्रोफ़ाइल नाम"
+            "title": "वॉलेट सेट करें",
+            "chrysalisTitle": "क्रिसलिस नेटवर्क अपडेट",
+            "chrysalisBody": "21 अप्रैल से, उपयोगकर्ता नए क्रिसलिस नेटवर्क में अपने टोकन स्थानांतरित कर सकते हैं। हम आपको जल्द से जल्द अपने मौजूदा टोकन को स्थानांतरित करने की सलाह देते हैं|",
+            "learnMore": "प्रवास के बारे में जानें"
+        },
+        "secure": {
+            "title": "अपना वॉलेट सुरक्षित करें|",
+            "body1": "पुनर्प्राप्ति किट PDF टेम्पलेट को सहेजें और प्रिंट करें",
+            "body2": "यदि आप पुनर्प्राप्ति किट भरते हैं और इसे सुरक्षित रूप से संग्रहीत करते हैं, तो आप हमेशा अपने वॉलेट को पुनर्प्राप्त करने में सक्षम होंगे"
         },
         "password": {
             "title": "एक पासवर्ड बनाएं",
-            "body": "आपको अपने वॉलेट से टोकन भेजने के लिए अपना पासवर्ड दर्ज करने के लिए कहा जाएगा। अपने धन की सुरक्षा के लिए आपको एक मजबूत पासवर्ड की आवश्यकता है|"
+            "body1": "आपको अपने फंड की सुरक्षा के लिए एक मजबूत पासवर्ड की आवश्यकता है। शब्दों के संयोजन का उपयोग करें, और सामान्य वाक्यांशों, नामों या तिथियों से बचें",
+            "body2": "यह अनुशंसा की जाती है कि आप अपने पासवर्ड को अपने रिकवरी किट में लिखें।"
         },
         "protect": {
             "title": "Protect your wallet",
-            "body_1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body_2": "Keep your PIN safe!"
+            "body1": "यह सुनिश्चित करने के लिए एक लॉगिन पिन सेट करें कि केवल आप ही अपना प्रोफ़ाइल दर्ज कर सकें",
+            "body2": "अपना पिन सुरक्षित रखें|"
         },
         "pin": {
             "title": "पिन कोड सेट करें",
-            "body_1": "नीचे छह अंकों का पिन दर्ज करें। वॉलेट लॉग इन करने के लिए अपना पिन दर्ज करने के लिए कहा जाएगा|",
-            "body_2": "केवल संख्याओं का उपयोग करे|"
+            "body1": "नीचे छह अंकों का पिन दर्ज करें। वॉलेट लॉग इन करने के लिए अपना पिन दर्ज करने के लिए कहा जाएगा|",
+            "body2": "केवल संख्या का उपयोग करें"
         },
-        "confirm_pin": {
+        "confirmPin": {
             "title": "अपना पिन कोड सत्यापित करें",
-            "body": "आगे बढ़ने के लिए अपना पिन कोड पुनः दर्ज करें"
+            "body1": "आपका पिन आपके बैलेंस और लेनदेन को निजी रखता है",
+            "body2": "आगे बढ़ने के लिए अपना पिन कोड पुनः दर्ज करें "
         },
         "backup": {
             "title": "अपने वॉलेट का बैकअप लें",
-            "body_1": "अब आपको एक पुनर्प्राप्ति वाक्यांश दिखाया जाएगा",
-            "body_2": "इस वाक्यांश को किसी के साथ साझा न करें। आपके पुनर्प्राप्ति वाक्यांश का उपयोग आपके टोकन को कहीं से भी एक्सेस करने के लिए किया जा सकता है|",
-            "body_3": "यदि आप अपना पुनर्प्राप्ति वाक्यांश खो देते हैं, तो आप अपने धन को खो सकते हैं।"
+            "body1": "अब आपको एक पुनर्प्राप्ति वाक्यांश दिखाया जाएगा। इसे अपने रिकवरी किट में लिखें।",
+            "body2": "अपने पुनर्प्राप्ति वाक्यांश को किसी के साथ साझा न करें। इसका उपयोग आपके टोकन को कहीं से भी एक्सेस करने के लिए किया जा सकता है।",
+            "body3": "यदि आप अपना पुनर्प्राप्ति वाक्यांश खो देते हैं, तो आप अपने धन को खो सकते हैं।"
         },
-        "recovery_phrase": {
+        "recoveryPhrase": {
             "title": "वसूली वाक्यांश",
-            "body_1": "सटीक क्रम में शब्दों को सावधानीपूर्वक लिखें|",
-            "body_2": "अपने पुनर्प्राप्ति वाक्यांश को निजी और सुरक्षित रूप से संग्रहीत रखें। इसे किसी के साथ साझा न करें।",
-            "reveal_recovery_phrase": "पुनर्प्राप्ति वाक्यांश प्रकट करें",
-            "hide_recovery_phrase": "अपने वसूली वाक्यांश को छुपाये"
+            "body1": "अपने रिकवरी किट में, दिखाए गए सटीक क्रम में शब्दों को लिखें।",
+            "body2": "इस निजी और सुरक्षित रूप से संग्रहीत रखें",
+            "body3": "लिखित बैकअप होना जरूरी है। कंप्यूटर अक्सर विफल हो जाते हैं और फ़ैल दूषित हो सकती हैं।",
+            "revealRecoveryPhrase": "पुनर्प्राप्ति वाक्यांश प्रकट करें",
+            "hideRecoveryPhrase": "अपने वसूली वाक्यांश को छुपाये"
         },
-        "verify_recovery_phrase": {
+        "verifyRecoveryPhrase": {
             "title": "वसूली वाक्यांश सत्यापित करें",
-            "body": "चलिए चेक करते हैं कि आपने वाक्यांश को सही ढंग से लिखा है। सही क्रम में शब्दों का चयन करें|"
+            "body": "चलिए चेक करते हैं कि आपने वाक्यांश को सही ढंग से लिखा है। सही क्रम में शब्दों का चयन करें|",
+            "word": "शब्द",
+            "verified": "वसूली वाक्यांश सत्यापित",
+            "verifiedBody": "इसे निजी और सुरक्षित रूप से संग्रहीत रखने के लिए याद रखें"
         },
-        "backup_wallet": {
+        "backupWallet": {
             "title": "बैक अप लें स्ट्रॉन्गहोल्ड फाइल में|",
-            "body": "अपने वॉलेट को एक स्ट्रॉन्गहोल्ड फाइल में बैकअप करने के लिए अपना पासवर्ड दर्ज करें। आपका पासवर्ड बैकअप एन्क्रिप्ट करने के लिए उपयोग किया जाता है।"
+            "body1": "अपने वॉलेट को एक स्ट्रॉन्गहोल्ड फाइल में बैकअप करने के लिए अपना पासवर्ड दर्ज करें। आपका पासवर्ड बैकअप एन्क्रिप्ट करने के लिए उपयोग किया जाता है।",
+            "body2": "डिजिटल बैकअप क्यों महत्वपूर्ण हैं इसके कारण:",
+            "reason1": "अपने पुनर्प्राप्ति वाक्यांश में टाइप किए बिना आसानी से अपने वॉलेट को पुनर्प्राप्त करें",
+            "reason2": "अन्य उपकरणों पर अपने वॉलेट आयात करें",
+            "reason3": "अपना पूरा लेन-देन इतिहास पुनर्प्राप्त करें"
         },
-        "recovery_phrase_saved": {
+        "recoveryPhraseSaved": {
             "title": "सफलतापूर्वक बैकअप होगया",
             "body": "आपने अपना वॉलेट स्ट्रॉन्गहोल्ड में बैकअप कर लिया है"
         },
         "congratulations": {
-            "title": "बधाई हो",
-            "body": "आपका वॉलेट उपयोग के लिए तैयार है"
+            "title": "वॉलेट सेटअप पूरा हुआ",
+            "body": "आपका वॉलेट उपयोग के लिए तैयार है",
+            "fundsMigrated": "फंड्स माइग्रेट हुए",
+            "success": "आपने अपने धन को नए नेटवर्क में सफलतापूर्वक स्थानांतरित कर दिया है",
+            "exportMigration": "निर्यात माइग्रेशन लॉग और सेटअप फिनिश करिए"
         },
         "import": {
-            "title": "वॉलेट आयात करें",
-            "body": "यदि आपके पास एक पुनर्प्राप्ति वाक्यांश या स्ट्रॉन्गहोल्ड बैकअप है, तो आप इसे यहां आयात कर सकते हैं।"
+            "title": "धनराशि का पुनर्प्राप्ति या विस्थापित करे",
+            "body": "यदि आपके पास मौजूदा सीड या वॉलेट बैकअप फ़ाइल है, तो आप इसे यहाँ आयात कर सकते हैं। यदि आप पुराने नेटवर्क फंड रखते हैं, तो आपको क्रिसलिस नेटवर्क में जाने के लिए माइग्रेशन चरणों के माध्यम से लिया जाएगा।",
+            "importSeed": "मेरे पास 81 वर्णों का सीड है",
+            "importSeedDescription": "एक सीड दर्ज करें और क्रिसलिस के लिए धन स्थानांतरित करें",
+            "importMnemonic": "मेरे पास फायरफ्लाई वसूली वाक्यांश है",
+            "importMnemonicDescription": "अपने वॉलेट को पुनर्प्राप्त करने के लिए अपना गुप्त वाक्यांश दर्ज करें",
+            "importFile": "मेरे पास एक फाइल में बैकअप है",
+            "importFileDescription": "एक सीड़वॉल्ट या स्ट्रॉन्गहोल्ड फ़ाइल अपलोड करें"
         },
-        "import_from_text": {
-            "title": "एक पुनर्प्राप्ति वाक्यांश या सीड के साथ अपने वॉलेट को पुनर्स्थापित करें",
-            "body_1": "एक पुनर्प्राप्ति वाक्यांश चौबीस शब्द लंबा होता है। इसका उपयोग मौजूदा फायरफ्लाई वॉलेट को पुनर्प्राप्त करने के लिए किया जाता है।",
-            "body_2": "एक सीड में इक्यासी वर्ण होते हैं। इसका उपयोग पुराने ट्रिनिटी वॉलेट से पुनर्प्राप्त करने के लिए किया जाता है।",
-            "body_3": "अपना सीड या पुनर्प्राप्ति वाक्यांश दर्ज करें"
+        "importFromText": {
+            "seed": {
+                "title": "माइग्रेशन प्रारंभ करने के लिए अपना सीड लिखें",
+                "body": "एक सीड में 81 वर्ण होते हैं। इसका उपयोग पुराने ट्रिनिटी वॉलेट से पुनर्प्राप्त करने के लिए किया जाता है।",
+                "enter": "अपना सीड डालें"
+            },
+            "mnemonic": {
+                "title": "अपना पुनर्प्राप्ति वाक्यांश लिखें",
+                "body": "एक पुनर्प्राप्ति वाक्यांश 24 शब्द लंबा है, सभी निचले मामले, बीच के रिक्त स्थान के साथ। इसका उपयोग मौजूदा फायरफ्लाई वॉलेट को पुनर्प्राप्त करने के लिए किया जाता है।",
+                "enter": "अपना सीड या पुनर्प्राप्ति वाक्यांश दर्ज करें"
+            },
+            "seedDetected": "81 वर्ण सीड प्राप्त हुए",
+            "phraseDetected": "24 शब्द रिकवरी वाक्यांश प्राप्त हुए",
+            "checksum": "चेकसम"
         },
-        "import_from_file": {
+        "importFromFile": {
             "title": "एक बैकअप फ़ाइल से अपने वॉलेट को पुनर्स्थापित करें",
-            "body": "अपने बटुए को पुनर्स्थापित करने के लिए एक बैकअप फ़ाइल आयात करें। बैकअप या तो एक स्ट्रॉन्गहोल्ड फाइल (.stronghold) या एक ट्रिनिटी सीड़वॉल्ट फाइल (.kdbx) हो सकते हैं।"
+            "body": "अपने वॉलेट को पुनर्स्थापित करने के लिए एक बैकअप फ़ाइल आयात करें। बैकअप या तो एक स्ट्रॉन्गहोल्ड फाइल (.stronghold) या एक ट्रिनिटी सीड़वॉल्ट फाइल (.kdbx) हो सकते हैं।"
         },
-        "import_backup_password": {
+        "importBackupPassword": {
             "title": "एक सीड़वॉल्ट या स्ट्रॉन्गहोल्ड से अपने वॉलेट को पुनर्स्थापित करें",
-            "body_1": "कृपया अपना बैकअप पासवर्ड डालें",
-            "body_2": "यह वह पासवर्ड है जिसे आपने पहली बार अपना बैकअप बनाते समय सेट किया था।"
+            "body1": "कृपया अपना बैकअप पासवर्ड डालें",
+            "body2": "यह वह पासवर्ड है जिसे आपने पहली बार अपना बैकअप बनाते समय सेट किया था।"
         },
-        "import_success": {
+        "importSuccess": {
             "title": "आपने अपना बैकअप सफलतापूर्वक प्राप्त कर लिया है",
-            "body": "अब आप अपना नया वॉलेट सेट कर सकते हैं।"
+            "body": "अब आप अपना नया वॉलेट सेट कर सकते हैं।",
+            "seedvaultTitle": "सफलतापूर्वक आयात किया गया है",
+            "seedvaultBody": "आपका पासवर्ड सही है, अब आप आगे भर सकते हैं।",
+            "strongholdTitle": "सफलतापूर्वक आयात किया गया है",
+            "strongholdBody": "आपका पासवर्ड सही है, अब आप आगे भर सकते हैं।"
         },
         "migrate": {
             "title": "अपने निधि को विस्थापित करें",
-            "body_1": "यह आपके फंड को आपके नए वॉलेट में स्थानांतरित करने की एक स्वचालित प्रक्रिया है। हम खर्च किए गए पतों की जांच करेंगे जो आपकी सुरक्षा को कमजोर करते हैं।",
-            "body_2": "इसमें कुछ समय लग सकता है। प्रवास के दौरान अपने डिवाइस को बंद न करें।",
+            "body1": "यह आपके फंड को आपके नए वॉलेट में स्थानांतरित करने की एक स्वचालित प्रक्रिया है",
+            "body2": "इसमें कुछ समय लग सकता है। प्रवास के दौरान अपने डिवाइस को बंद न करें।",
             "existing": "आपका पराना वालेट",
-            "new": "आपका नए वालेट"
+            "new": "आपका नए वालेट",
+            "learn": "प्रवास के बारे में जानें",
+            "beginMigration": "प्रवास शुरू करें",
+            "migrating": "माइग्रेटिंग फंड...",
+            "migrated": "{balance} मीग्रेटेड",
+            "migrationFailed": "प्रवासन विफल",
+            "noAddressesForMigration": "कृपया उन एड्रेस्सेस का चयन करें जिन्हें आप सुरक्षित करना चाहते हैं",
+            "restoringWallet": "वॉलेट फिर से तैयार हो रहा है...",
+            "findingBalance": "शेष राशि ढूँढना...",
+            "incorrectSeedVaultPassword": "सीड़वॉल्ट पासवर्ड गलत है|",
+            "noDataSeedVault": "सीडवॉल्ट में कोई डेटा नहीं मिला।",
+            "signingBundle": "साइनिंग बंडल",
+            "broadcastingBundle": "प्रसारण बंडल",
+            "miningBundle": "माइनिंग बंडल",
+            "problemRestoringWallet": "आपके बटुए को पुनर्स्थापित करने में एक नेटवर्क त्रुटि थी। कृपया पुन: प्रयास करें।",
+            "minimumMigrationAmountSpentAddresses": "प्रत्येक खर्च किए गए पते की न्यूनतम प्रवास राशि 1 Mi है। यदि आपका बैलेंस सही नहीं दिखता है तो फिर से जांचें।",
+            "tooManyAddressesToMigrate": "आपके पास माइग्रेट करने के लिए कम बैलेंस वाले कई पते हैं। यदि आपका बैलेंस सही नहीं दिखता है तो फिर से जांचें।",
+            "cannotMigrateAllYourFunds": "हम आपके सभी फंडों को स्थानांतरित नहीं कर सकते हैं क्योंकि कुछ पते मूल्य में बहुत कम हैं। आप वैसे भी आगे बढ़ सकते हैं। {value} खो जाएगा।",
+            "error": "आपके फंड्स को माइग्रेट करने में समस्या थी। कृपया पुन: प्रयास करें"
         },
-        "migrate_failed": {
+        "bundleMiningWarning": {
+            "title": "चेतावनी",
+            "body1": "आपके पास एक या अधिक खर्च किए गए पते पर धन है।",
+            "body2": "हम आपको इन निधियों को सुरक्षित रूप से स्थानांतरित करने और सुरक्षित रूप से स्थानांतरित करने में मदद करने के लिए एक स्वचालित प्रक्रिया चलाने की सलाह देते हैं।",
+            "body3": "यदि आप ऐप को बंद करते हैं तो आपको संपूर्ण माइग्रेशन को पुनरारंभ करना होगा।",
+            "learn": "खर्च किए गए पतों के बारे में जानें"
+        },
+        "secureSpentAddresses": {
+            "title": "सुरक्षित करे खर्च किए गए एड्रेस",
+            "body1": "आपके पास धन का पता लगाया गया है {number, plural, one {# खर्च पते पर} other {# खर्च पते पर}}.",
+            "body2": "हम आपको इन निधियों को सुरक्षित रूप से स्थानांतरित करने और सुरक्षित रूप से स्थानांतरित करने में मदद करने के लिए एक स्वचालित प्रक्रिया चलाने की सलाह देते हैं।",
+            "error": "आप 1 Mi से कम के खर्च किए गए पतों को माइग्रेट नहीं कर सकते"
+        },
+        "securityCheckCompleted": {
+            "title": "सुरक्षा जांच पूरी",
+            "body1": "हमने सुरक्षा जोखिम स्तर की गणना की है। इस प्रक्रिया को फिर से चलाने से आपका जोखिम स्तर कम हो सकता है।",
+            "body2": "जब आप जोखिम के स्तर से संतुष्ट होते हैं तो प्रस्थान कर सकते हैं",
+            "rerun": "चयनित एड्रेस्सेस के लिए फिर से प्रक्रिया",
+            "continueMigration": "प्रवास जारी रखें"
+        },
+        "securingSpentAddresses": {
+            "title": "सुरक्षित हो रहा है खर्च किए गए एड्रेस...",
+            "body1": "इस प्रक्रिया में {minutes, plural, one {1 मिनट का समय लगेगा} other {# मिनट्स का समय लगेगा}}.",
+            "body2": "आपका कंप्यूटर पूरी क्षमता से चलेगा, आप इसे पूरा करने के लिए प्रतीक्षा करते समय कुछ और करने की इच्छा कर सकते हैं।"
+        },
+        "transferFragmentedFunds": {
+            "body1": "फायरफ्लाई अब आपके धन को स्थानांतरित करने के लिए आगे बढ़ेगा। इसमें थोड़ा सा समय लग सकता है।",
+            "migrate": "मीग्रेटेड फंड",
+            "transaction": "ट्रांसक्शन {number}",
+            "rerun": "फिर कोशिश करें"
+        },
+        "migrateFailed": {
             "title": "To do",
             "body": "To do"
         },
         "balance": {
             "title": "आपका बैलेंस",
-            "body": "क्या आपका बैलेंस सही है?"
+            "body": "सुनिश्चित करें कि जारी रखने से पहले आपका बैलेंस सही है। अगर चीजें सही नहीं दिखती हैं तो आप फिर से जांच कर सकते हैं।",
+            "error": "प्रत्येक खर्च किए गए पते की न्यूनतम प्रवास राशि 1 Mi है। यदि आपका बैलेंस सही नहीं दिखता है तो फिर से जांचें।",
+            "zeroBalance": "फिर से जाँच करने का प्रयास करें। यदि आपको अभी भी अपना बैलेंस नहीं मिल रहा है तो आप गलत तरीके से अपना सीड दर्ज कर रहे हैं।"
         },
         "settings": {
             "settings": "सैटिन्ग्स",
             "generalSettings": {
                 "title": "सामान्य सेटिंग्स",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "अपने ऐप की उपस्थिति और अन्य सामान्य सेटिंग्स कॉन्फ़िगर करें"
             },
             "security": {
                 "title": "सुरक्षा",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "अपना पासवर्ड बदलें और सुरक्षा-संबंधी सेटिंग्स समायोजित करें"
             },
             "advancedSettings": {
                 "title": "उच्च सेटिंग्स",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "उपकरण और तकनीकी उपयोगकर्ताओं के लिए मैनुअल सेटिंग्स"
             },
             "helpAndInfo": {
                 "title": "मदद सूचना",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "किसी प्रश्न का उत्तर ढूंढें या किसी मुद्दे पर मदद लें"
             },
             "profile": {
                 "title": "प्रोफाइल",
-                "description": ""
+                "description": "अपना प्रोफ़ाइल नाम बदलें या अवतार सेट करें"
             },
             "sync": {
-                "title": "खाता को सिंक करें",
+                "title": "सिंक वॉलेट",
                 "description": ""
             },
             "theme": {
@@ -157,124 +234,151 @@
             },
             "currency": {
                 "title": "मुद्रा",
-                "description": ""
+                "description": "बैलेंस रूपांतरण और अपडेट चार्ट विकल्पों को समायोजित करता है"
             },
             "notifications": {
                 "title": "नोटिफिकेशन",
-                "description": ""
+                "description": "लेन-देन की घटनाओं के लिए सिस्टम सूचनाएं"
+            },
+            "networkStatus": {
+                "title": "Network status",
+                "description": "Displays the status of the node you are currently connected to."
             },
             "exportStronghold": {
-                "title": "निर्यात स्ट्रॉन्गहोल्ड",
-                "description": ""
+                "title": "एक्सपोर्ट बैकअप",
+                "description": "एक स्ट्रॉन्गहोल्ड फ़ाइल में निर्यात करें - अपने वॉलेट और नवीनतम लेनदेन इतिहास का एक पूर्ण एन्क्रिप्टेड बैकअप।"
             },
             "appLock": {
-                "title": "ऐप लॉक",
-                "description": ""
+                "title": "स्वचालित लॉक",
+                "description": "आपकी जेब लॉक होने से पहले निष्क्रियता का समय और आप लॉग आउट हो गए हैं",
+                "durationMinute": "{time, plural, one {1 मिनट} other {# मिनट}}",
+                "durationHour": "{time, plural, one {1 घंटा} other {# घंटे}}"
             },
             "changePassword": {
                 "title": "पासवर्ड परिवर्तित करें",
-                "description": ""
+                "description": "आपके पासवर्ड का उपयोग आपके वॉलेट को सुरक्षित करने के लिए किया जाता है। अपने धन की सुरक्षा के लिए आपको एक मजबूत पासवर्ड का उपयोग करना चाहिए।"
             },
             "changePincode": {
                 "title": "पिन कोड बदलें",
-                "description": "",
+                "description": "आपका पिन आपके बैलेंस और लेनदेन को निजी रखता है",
                 "currentPincode": "वर्तमान पिन",
                 "newPincode": "नया पिन",
                 "confirmNewPincode": "पिन की पुष्टि करें",
                 "action": "पिन बदलें"
             },
-            "resyncAccounts": {
-                "title": "खाता को फिर से सिंक करें",
-                "description": ""
+            "balanceFinder": {
+                "title": "बैलेंस खोजने वाला",
+                "description": "टोकन के लिए अपने पते की विस्तारित खोज करें।"
             },
-            "resetWallet": {
-                "title": "वॉलेट रिसेट",
-                "description": ""
+            "hiddenAccounts": {
+                "title": "छुपे हुए वॉलेट",
+                "description": "इस विकल्प का चयन उन वॉलेट को दिखाएगा जो पहले छिपे हुए थे।"
+            },
+            "deleteProfile": {
+                "title": "प्रोफ़ाइल हटाएँ",
+                "description": "आपके पूरे प्रोफ़ाइल, वॉलेट और लेनदेन के इतिहास को हटाता है। सुनिश्चित करें कि आपके पास एक बैकअप है।"
             },
             "deepLinks": {
                 "title": "डीप लिंक्स",
-                "description": ""
+                "description": "Iota: // लिंक पर क्लिक करने पर फायरफ्लाई में लेनदेन डेटा को स्वचालित रूप से भरें"
             },
             "developerMode": {
                 "title": "डेवलपर मोड",
-                "description": ""
+                "description": "टेस्टनेट और अन्य डेवलपर सुविधाओं से कनेक्ट करें"
             },
             "nodeSettings": {
                 "title": "नोड सेटिंग्स",
-                "description": ""
+                "description": "नोड सेटिंग्स को कॉन्फ़िगर करने और अपने स्वयं के नोड से कनेक्ट करने के लिए मैनुअल का चयन करें"
             },
             "configureNodeList": {
-                "title": "नोड कॉन्फ़िगर करें",
-                "description": ""
+                "title": "नोड चुने",
+                "description": "IOTA नेटवर्क नोड्स की सूची प्रबंधित करें जिनसे आप कनेक्ट होते हैं।",
+                "primaryNode": "प्राथमिक नोड",
+                "excludeNode": "नोड को बाहर करें",
+                "includeNode": "नोड शामिल करें",
+                "viewDetails": "विवरण देखें",
+                "setAsPrimary": "प्राथमिक के रूप में सेट करें",
+                "removeNode": "नोड निकालें",
+                "includeOfficialNodeList": "आधिकारिक नोड सूची शामिल करें",
+                "noNodes": "कोई नोड नहीं हैं, इसके बजाय स्वचालित चयन का उपयोग किया जाएगा।"
             },
             "proofOfWork": {
                 "title": "प्रूफ ऑफ़ वर्क",
-                "description": ""
+                "description": "अपने डिवाइस पर स्थानीय रूप से PoW का पूरा प्रमाण या नोड को आउटसोर्स करें"
             },
             "errorLog": {
                 "title": "त्रुटि लॉग",
-                "description": ""
+                "description": "किसी समस्या को डीबग करने के लिए त्रुटियाँ देखें"
+            },
+            "diagnostics": {
+                "title": "विश्लेषण",
+                "description": "सिस्टम और एप्लिकेशन की जानकारी देखें"
             },
             "stateExport": {
                 "title": "स्टेट एक्सपोर्ट",
-                "description": ""
+                "description": "अपने लेनदेन इतिहास को एक .csv फ़ाइल में निर्यात करें"
             },
             "troubleshoot": {
                 "title": "समस्या निवारण",
-                "description": ""
+                "description": "सामान्य समस्याओं को हल करने के लिए समस्या निवारण विज़ार्ड का उपयोग करें"
             },
             "documentation": {
                 "title": "प्रलेखन",
-                "description": ""
+                "description": "चीजें कैसे काम करती हैं, इसकी गहन व्याख्या के लिए प्रलेखन देखें"
             },
             "faq": {
                 "title": "FAQ",
-                "description": ""
+                "title2": "अक्सर पूछे जाने वाले प्रश्न",
+                "description": "सामान्य समस्या या प्रश्न की सहायता लेने के लिए अक्सर पूछे जाने वाले प्रश्न देखें"
             },
             "discord": {
                 "title": "डिस्कोर्ड",
-                "description": ""
+                "description": "Discord पर IOTA समुदाय की मदद लें"
             },
             "about": {
                 "title": "विवरण",
                 "description": ""
+            },
+            "reportAnIssue": {
+                "title": "मामले की रिपोर्ट करें",
+                "description": "डेवलपर्स के लिए बग की रिपोर्ट करें। यह सुनिश्चित करने के लिए जाँच करें कि यह पहले से रिपोर्ट नहीं किया गया है।"
             }
         },
         "login": {
-            "please_wait": "कृपया {time, plural, one {1 सेकंड} other {# सेकंड}} प्रतीक्षा करें",
-            "incorrect_attempts": "{attempts, plural, one {1 गलत प्रयास} other {# गलत प्रयास}}"
+            "pleaseWait": "कृपया {time, plural, one {1 सेकंड} other {# सेकंड}} प्रतीक्षा करें",
+            "incorrectAttempts": "{attempts, plural, one {1 गलत प्रयास} other {# गलत प्रयास}}"
         },
         "dashboard": {
             "security": {
                 "version": {
                     "title": "फायरफ्लाई v{version}",
-                    "up_to_date": "आधुनिक",
-                    "out_of_date": "अप्रचलित"
+                    "upToDate": "आधुनिक",
+                    "outOfDate": "अप्रचलित"
                 },
-                "hardware_device": {
+                "hardwareDevice": {
                     "title": "हार्डवेयर उपकरण",
-                    "none_detected": "किसी का पता नहीं चला"
+                    "noneDetected": "किसी का पता नहीं चला"
                 },
-                "stronghold_status": {
-                    "title": "स्ट्रॉन्गहोल्ड स्टेटस",
+                "strongholdStatus": {
+                    "title": "वॉलेट की स्थिति",
                     "locked": "लॉक्ड",
                     "unlocked": "खुला"
                 },
-                "stronghold_backup": {
-                    "title": "स्ट्रॉन्गहोल्ड बैकअप",
-                    "weeks_ago": "{weeks, plural, one {# सप्ताह} other {# सप्ताह}} पहले"
+                "strongholdBackup": {
+                    "title": "वॉलेट बैकअप",
+                    "weeksAgo": "{weeks, plural, one {# सप्ताह} other {# सप्ताह}} पहले"
                 }
             },
             "network": {
-                "network_operational": "नेटवर्क प्रचालन",
-                "network_degraded": "नेटवर्क पदावनत",
-                "network_down": "नेटवर्क डाउन",
+                "networkOperational": "नेटवर्क प्रचालन",
+                "networkDegraded": "नेटवर्क पदावनत",
+                "networkDown": "नेटवर्क डिस्कनेक्ट हो गया।",
                 "status": "स्टेटस",
-                "messages_per_second": "मेस्सगेस प्रति सेकंड",
-                "confirmation_rate": "पुष्टि दर"
+                "messagesPerSecond": "मेस्सगेस प्रति सेकंड",
+                "referencedRate": "Referenced rate"
             },
-            "profile_modal": {
-                "all_settings": "सभी सेटिंग्स",
+            "profileModal": {
+                "allSettings": "सभी सेटिंग्स",
                 "logout": "लॉग आउट"
             }
         }
@@ -282,47 +386,121 @@
     "popups": {
         "password": {
             "title": "पासवर्ड अपेक्षित है",
-            "subtitle": "कृपया अपने वॉलेट का पासवर्ड स्ट्रॉन्गहोल्ड अनलॉक करने के लिए प्रदान करें"
+            "subtitle": "कृपया अपने वॉलेट के लिए पासवर्ड दर्ज करें",
+            "backup": "कृपया बैकअप निर्यात करने के लिए अपना पासवर्ड दर्ज करें"
         },
         "qr": {
             "title": "आपका QR कोड"
         },
         "version": {
             "title": "वर्तमान संस्करण: {version}",
-            "up_to_date_title": "फायरफ्लाई नवीनतम है",
-            "up_to_date_description": "आप फायरफ्लाई का नवीनतम और सबसे सुरक्षित संस्करण चला रहे हैं",
-            "update_available": "फायरफ्लाई अपडेट उपलब्ध है",
-            "update_details": "संस्करण {version} - {date}"
+            "upToDateTitle": "फायरफ्लाई नवीनतम है",
+            "upToDateDescription": "आप फायरफ्लाई का नवीनतम और सबसे सुरक्षित संस्करण चला रहे हैं",
+            "updateAvailable": "फायरफ्लाई अपडेट उपलब्ध है",
+            "updateDetails": "संस्करण {version} - {date}",
+            "noAutoUpdate": "इस विंडोज संस्करण में ऑटो-अपडेट अक्षम है, कृपया अपडेट डाउनलोड करने के लिए https://firefly.iota.org पर जाएं।"
         },
         "backup": {
             "title": "पिछला बैकअप: {date}",
-            "last_backup": "आपका पिछला बैकअप {date}",
-            "backup_description": "यह सुनिश्चित करने के लिए नियमित रूप से बैकअप लेना महत्वपूर्ण है कि आपके पास अपने खातों और लेनदेन के इतिहास की एक प्रति है",
-            "backup_warning": "यदि आप अपना बैकअप और पुनर्प्राप्ति वाक्यांश खो देते हैं तो आप अपने फंड तक पहुंच खो देंगे",
-            "not_backed_up": "बैकअप नहीं है",
-            "not_backed_up_description": "आपने अपने स्ट्रॉन्गहोल्ड का बैकअप नहीं किया है"
+            "lastBackup": "आपका पिछला बैकअप {date}",
+            "backupDescription": "यह सुनिश्चित करने के लिए नियमित रूप से बैकअप लेना महत्वपूर्ण है कि आपके पास अपने खातों और लेनदेन के इतिहास की एक प्रति है",
+            "backupWarning": "यदि आप अपना बैकअप और पुनर्प्राप्ति वाक्यांश खो देते हैं तो आप अपने फंड तक पहुंच खो देंगे",
+            "notBackedUp": "बैकअप नहीं है",
+            "notBackedUpDescription": "आपने अपने स्ट्रॉन्गहोल्ड का बैकअप नहीं किया है",
+            "saving": "सेव हो रहा है..."
         },
-        "delete_account": {
+        "deleteAccount": {
             "title": "हटाएँ {name}?",
-            "body": "आप स्थायी रूप से अपना लेन-देन इतिहास खो देंगे और शायद कुछ और भी",
-            "type_password": "पुष्टि करने के लिए अपने वॉलेट का पासवर्ड टाइप करें",
-            "delete_account": "खाता नष्ट करें",
-            "error_title": "{name} हटाने में असमर्थ",
-            "error_body_1": "खाता हटाने के लिए आपके पास 0 बैलेंस होना चाहिए",
-            "error_body_2": "वर्तमान में आपके पास इस खाते पर {balance} बैलेंस है। कृपया इन निधियों को एक अलग खाते में ले जाएँ और पुनः प्रयास करें"
+            "body": "इस वॉलेट का कोई लेन-देन इतिहास नहीं है। इसे सुरक्षित रूप से हटाया जा सकता है।",
+            "typePassword": "पुष्टि करने के लिए अपने वॉलेट का पासवर्ड टाइप करें",
+            "hideAccount": "वॉलेट नष्ट करें",
+            "errorTitle": "{name} हटाने में असमर्थ",
+            "errorBody1": "आप इस वॉलेट को नहीं हटा सकते, आपके पास कम से कम एक होना चाहिए।"
         },
-        "address_history": {
+        "hideAccount": {
+            "title": "{name} छुपाये?",
+            "body": "आप उन्नत सेटिंग्स में \"छिपे हुए वॉलेट दिखाएँ\" को सक्षम करके इस वॉलेट को बाद में पा सकते हैं।",
+            "typePassword": "पुष्टि करने के लिए अपने वॉलेट का पासवर्ड टाइप करें",
+            "hideAccount": "वॉलेट छुपाये",
+            "errorTitle": "{name} हटाने में असमर्थ",
+            "errorBody1": "वॉलेट को छिपाने के लिए इसमें 0 बैलेंस होना चाहिए।",
+            "errorBody2": "वर्तमान में आपके पास इस खाते पर {balance} बैलेंस है। कृपया इन निधियों को एक अलग खाते में ले जाएँ और पुनः प्रयास करें",
+            "errorBody3": "आप इस वॉलेट को नहीं हटा सकते, आपके पास कम से कम एक होना चाहिए।"
+        },
+        "addressHistory": {
             "title": "{name} खाता पता इतिहास",
-            "current_balance": "वर्तमान बैलेंस: {balance}"
+            "currentBalance": "वर्तमान बैलेंस: {balance}"
         },
         "node": {
-            "title_add": "नया नोड जोड़ें",
-            "title_details": "नोड विवरण",
-            "node_address": "नोड एड्रेस",
-            "optional_username": "यूजरनाम (वैकल्पिक)",
-            "optional_password": "पासवर्ड (वैकल्पिक)",
-            "set_as_primary_node": "प्राथमिक नोड के रूप में सेट करें"
+            "titleAdd": "नया नोड जोड़ें",
+            "titleUpdate": "अपडेट नोड",
+            "titleRemove": "नोड निकालें",
+            "titleDetails": "नोड विवरण",
+            "nodeAddress": "नोड एड्रेस",
+            "optionalUsername": "यूजरनाम (वैकल्पिक)",
+            "optionalPassword": "पासवर्ड (वैकल्पिक)",
+            "setAsPrimaryNode": "प्राथमिक नोड के रूप में सेट करें",
+            "removeConfirmation": "क्या आप सुनिश्चित हैं और इस नोड को हटाना चाहते हैं?"
+        },
+        "errorLog": {
+            "title": "त्रुटि लॉग",
+            "empty": "त्रुटि लॉग खाली है"
+        },
+        "deleteProfile": {
+            "title": "प्रोफ़ाइल हटाएँ",
+            "confirmation": "क्या आप वाकई इस प्रोफाइल को हटाना चाहते हैं? इस एक्शन को वापस नहीं किया जा सकता है।",
+            "typePassword": "पुष्टि करने के लिए अपना पासवर्ड डालें"
+        },
+        "diagnostics": {
+            "title": "विश्लेषण",
+            "node": "नोड",
+            "platform": "प्लेटफार्म",
+            "platformVersion": "प्लेटफ़ॉर्म संस्करण",
+            "platformArchitecture": "पोल्काडॉट आर्किटेक्चर",
+            "cpuCount": "CPU गणना",
+            "totalMem": "कुल मेमोरी",
+            "freeMem": "फ्री मेमरी",
+            "userPath": "उपयोक्ता पथ"
+        },
+        "transaction": {
+            "title": "ट्रांसक्शन कन्फर्म करे",
+            "body": "आप {amount} को भेजने वाले हैं"
+        },
+        "balanceFinder": {
+            "title": "बैलेंस खोजने वाला",
+            "body": "लापता शेष राशि को खोजने के लिए पतों की अधिक संपूर्ण खोज करें। इसमें थोड़ा सा समय लग सकता है।",
+            "totalWalletBalance": "कुल शेष",
+            "typePassword": "खोज की अनुमति देने के लिए अपना पासवर्ड टाइप करें।"
+        },
+        "riskFunds": {
+            "title": "चेतावनी: प्रवास के दौरान धन जोखिम में",
+            "body1": "यह दृढ़ता से अनुशंसा की जाती है कि आप माइग्रेशन के साथ आगे बढ़ने से पहले अपने सभी फंडों को सुरक्षित करें। यदि आप उन्हें सुरक्षित नहीं करते हैं तो आपके धन की चोरी का खतरा है।",
+            "body2": "यह अनुशंसा की जाती है कि आप मध्यम जोखिम स्तर या उससे ऊपर के पते की प्रक्रिया को फिर से चलाएँ।"
+        },
+        "missingBundle": {
+            "title": "चेतावनी: प्रवास के दौरान धन जोखिम में",
+            "body": "आपके पास खर्च किए गए पतों पर धन है, लेकिन उन्हें सुरक्षित करने के लिए आवश्यक जानकारी नहीं मिली। यह तब हो सकता है जब आपने बहुत समय पहले लेन-देन किया हो। आप आगे बढ़ सकते हैं लेकिन प्रवास के दौरान {value} जोखिम में हैं।",
+            "learnMore": "खर्च किए गए पतों के बारे में जानें",
+            "proceed": "मैं जोखिम को समझता हूं"
+        },
+        "snapshot": {
+            "title": "चल रहे नेटवर्क का उन्नयन",
+            "body": "क्रिसलिस नेटवर्क अपग्रेड शुरू हो गया है",
+            "bodyMigration": "पूर्ण होने तक माइग्रेशन अक्षम है",
+            "bodyFirefly": "फायरफ्लाई पूर्ण होने तक अक्षम है। टोकन प्रवास अभी भी बाद में संभव होगा।"
         }
+    },
+    "charts": {
+        "incomingMi": "आने वाली {value}",
+        "outgoingMi": "निवर्तमान {value}",
+        "portoflio": "पोर्टफोलियो",
+        "token": "टोकन",
+        "accountValue": "वॉलेट शेष राशि",
+        "accountActivity": "वॉलेट गतिविधि",
+        "timeframe1Hour": "1 घंटा",
+        "timeframe1Day": "1 दिन",
+        "timeframe1Week": "1 सप्ताह",
+        "timeframe1Month": "1 महीना"
     },
     "actions": {
         "continue": "जारी रखें",
@@ -330,130 +508,313 @@
         "cancel": "रद्द करें",
         "close": "बंद करें",
         "dismiss": "रद्द करें",
+        "proceedAnyway": "कोई बात नहीं आगे बढें",
         "save": "सेव करें",
-        "import_seed": "एक मौजूदा सीड आयात करें",
-        "import_wallet": "मौजूदा वॉलेट आयात करें",
-        "create_wallet": "नया वॉलेट बनाएं",
-        "save_password": "पासवर्ड सहेजें",
-        "use_biometric": "बायोमेट्रिक सुरक्षा का उपयोग करें",
-        "setup_pin": "पिन कोड सेट करें",
-        "set_pin": "पिन कोड सेट करें",
-        "confirm_pin": "पिन कोड की पुष्टि करें",
-        "enter_your_pin": "अपना पिन डालें",
-        "save_backup_file": "बैकअप फाइल सहेजें",
-        "ive_written_recovery_phrase": "मैंने अपना पुनर्प्राप्ति वाक्यांश लिख लिया है",
-        "verify_recovery_phrase": "वसूली वाक्यांश सत्यापित करें",
-        "reveal_recovery_phrase": "पुनर्प्राप्ति वाक्यांश प्रकट करें",
-        "import_seedvault": "सीडवॉल्ट आयात करे",
-        "check_again": "नहीं, फिर से जाँच करें",
-        "import_from_file": "फ़ाइल से आयात करें",
+        "importSeed": "एक मौजूदा सीड आयात करें",
+        "restoreWallet": "वॉलेट को माइग्रेट या पुनर्स्थापित करें",
+        "restoreWalletDescription": "क्रिसलिस में प्रवास करें या किसी मौजूदा वॉलेट को पुनर्स्थापित करें",
+        "createWallet": "नया वॉलेट बनाएं",
+        "createWalletDescription": "क्रिसलिस पर चलने वाला एक ताजा वॉलेट बनाएं",
+        "savePassword": "पासवर्ड सहेजें",
+        "useBiometric": "बायोमेट्रिक सुरक्षा का उपयोग करें",
+        "setupPin": "पिन कोड सेट करें",
+        "setPin": "पिन कोड सेट करें",
+        "confirmPin": "पिन कोड की पुष्टि करें",
+        "enterYourPin": "अपना पिन डालें",
+        "saveBackupFile": "बैकअप फाइल सहेजें",
+        "iveWrittenRecoveryPhrase": "मैंने अपना पुनर्प्राप्ति वाक्यांश लिख लिया है",
+        "verifyRecoveryPhrase": "वसूली वाक्यांश सत्यापित करें",
+        "revealRecoveryPhrase": "पुनर्प्राप्ति वाक्यांश प्रकट करें",
+        "importSeedvault": "सीडवॉल्ट आयात करे",
+        "checkAgain": "फिर से जांचें",
+        "importFromFile": "फ़ाइल से आयात करें",
         "send": "भेजें",
         "receive": "प्राप्त करें",
         "create": "बनाएं",
-        "begin_transfer": "स्थानांतरण शुरू करें",
-        "try_again": "फिर कोशिश करें",
-        "visit_discord": "डिस्कॉर्ड पर जाएँ",
-        "drag_drop": "खींचें और छोड़ें",
-        "import_extentions": ".stronghold या .kdbx फाइल",
-        "choose_file": "फ़ाइल चुनें",
-        "drop_here": "अपनी फाइल को यहां छोड़ें",
+        "beginTransfer": "स्थानांतरण शुरू करें",
+        "tryAgain": "फिर कोशिश करें",
+        "visitDiscord": "डिस्कॉर्ड पर जाएँ",
+        "dragDrop": "खींचें और छोड़ें",
+        "importExtentions": ".kdbx या .stronghold फ़ाइल",
+        "chooseFile": "फ़ाइल चुनें",
+        "dropHere": "अपनी फाइल को यहां छोड़ें",
         "syncAll": "सभी सिंक करें",
         "export": "एक्सपोर्ट करे",
         "exportNewStronghold": "एक नया स्ट्रॉन्गहोल्ड निर्यात करें",
         "enableDeepLinks": "डीप लिंक्स सक्षम करें",
         "enableDeveloperMode": "डेवलपर मोड सक्षम करें",
-        "enableSystemNotifications": "Enable system notifications",
+        "enableSystemNotifications": "नोटिफिकेशंस सक्षम करें",
         "exportState": "स्थिति निर्यात करें",
-        "outsourceProofOfWork": "आउटसोर्स प्रूफ ऑफ़ वर्क",
+        "localProofOfWork": "स्थानीय प्रूफ ऑफ़ वर्क",
         "unlock": "अनलॉक करें",
-        "update_firefly": "अपडेट फायरफ्लाई",
-        "restart_now": "Restart now",
-        "save_backup": "बैकअप सहेजें",
-        "customize_account": "अनुकूलित करें अपना खाता",
-        "sync_account": "खाता को सिंक करें",
-        "view_address_history": "एड्रेस का इतिहास देखें",
-        "delete_account": "खाता नष्ट करें",
+        "updateFirefly": "अपडेट फायरफ्लाई",
+        "restartNow": "अभी रीस्टार्ट करें",
+        "saveBackup": "स्ट्रॉन्गहोल्ड बैकअप को सेव करे",
+        "customizeAcount": "अनुकूलित करें अपना खाता",
+        "viewAddressHistory": "एड्रेस का इतिहास देखें",
+        "hideAccount": "वॉलेट छुपाये",
+        "showAccount": "वॉलेट अनहाइड करें",
+        "deleteAccount": "वॉलेट नष्ट करें",
         "max": "अधिकतम",
-        "add_node": "नया नोड जोड़ें"
+        "addNode": "नया नोड जोड़ें",
+        "updateNode": "अपडेट नोड",
+        "removeNode": "नोड निकालें",
+        "hide": "छिपाएँ",
+        "hideOthers": "बाकियों को छुपाएं",
+        "showAll": "सभी दिखाएँ",
+        "quit": "बंद करें",
+        "edit": "संपादित",
+        "undo": "पूर्ववत",
+        "redo": "फिर से",
+        "cut": "कट",
+        "copy": "कॉपी",
+        "paste": "पेस्ट",
+        "selectAll": "सभी का चयन करें",
+        "addAccount": "वॉलेट जोड़ें",
+        "checkForUpdates": "अपडेट के लिए जाँचें",
+        "reportAnIssue": "मामले की रिपोर्ट करें",
+        "clear": "हटाएं",
+        "hideDetails": "विवरण छुपाएँ",
+        "yes": "हाँ",
+        "no": "नहीं",
+        "skip": "छोड़ें",
+        "reset": "रीसेट",
+        "downloadRecoveryKit": "पुनर्प्राप्ति किट टेम्पलेट सहेजें",
+        "skipBackup": "फ़ाइल बैकअप छोड़ें",
+        "finishSetup": "सेटअप खत्म करें",
+        "readDocumentation": "दस्तावेज़ पढ़ें",
+        "visitFaq": "अक्सर पूछे FAQ",
+        "viewStatus": "स्थिति देखें",
+        "showHiddenAccounts": "छुपे हुए वॉलेट दिखाएँ",
+        "confirm": "पुष्टि करें",
+        "hideNetworkStatistics": "Hide network statistics",
+        "findBalances": "शेष राशि का पता लगाएं",
+        "searchBalances": "बालनेस के लिए खोजें",
+        "searchAgain": "फिर से सर्च करें",
+        "searching": "खोज रहे हैं...",
+        "closeFirefly": "फायरफ्लाई बंद करे"
     },
     "general": {
         "password": "पासवर्ड",
-        "confirm_password": "पासवर्ड की पुष्टि करें",
+        "confirmPassword": "पासवर्ड की पुष्टि करें",
         "currentPassword": "वर्तमान पासवर्ड",
         "newPassword": "नया पासवर्ड",
         "confirmNewPassword": "नए पासवर्ड की पुष्टि करें",
-        "your_seed": "आपका सीड",
-        "recovery_phrase": "पुनर्प्राप्ति वाक्यांश",
-        "recent_activity": "हाल की गतिविधि",
+        "yourSeed": "आपका सीड",
+        "recoveryPhrase": "पुनर्प्राप्ति वाक्यांश",
+        "recentActivity": "हाल की गतिविधि",
         "sent": "भेजे गए",
         "received": "प्राप्त हुआ",
-        "send_payment": "भुगतान भेजें",
-        "move_funds": "फंड्स भेजे",
-        "send_funds": "धनराशि भेजें",
-        "send_to_address": "स्वयं के पते पर भेजा जा रहा है",
-        "scan_qr_or_paste": "QR कोड स्कैन करें या एक पता पेस्ट करें",
-        "move_funds_between_accounts": "अपने खातों के बीच धन ले जाएँ",
-        "send_tokens_to_address": "एक पते पर टोकन भेजें",
-        "manage_account": "खाते का प्रबंधन",
-        "customize_account": "अनुकूलित करें अपना खाता",
-        "account": "खाता",
-        "sending_to_address": "स्वयं के पते पर भेजा जा रहा है",
+        "sendPayment": "भुगतान भेजें",
+        "moveFunds": "आंतरिक स्थानांतरण",
+        "sendFunds": "धनराशि भेजें",
+        "sendToAddress": "पते पर भेजें",
+        "scanQrOrPaste": "QR कोड स्कैन करें या एक पता पेस्ट करें",
+        "moveFundsBetweenAccounts": "अपने खातों के बीच धन ले जाएँ",
+        "sendTokensToAddress": "एक पते पर टोकन भेजें",
+        "manageAccount": "वॉलेट प्रबंधित करें",
+        "customizeAcount": "अनुकूलित करें अपना खाता",
+        "account": "वॉलेट",
+        "sendingToAddress": "स्वयं के पते पर भेजा जा रहा है",
         "amount": "रकम",
-        "add_address": "पता जोड़े",
+        "addAddress": "पता जोड़े",
         "reference": "संदर्भ",
         "from": "से",
         "to": "को",
-        "receive_funds": "पैसे प्राप्त करे",
-        "my_address": "मेरा पता:",
-        "share_address": "पता साझा करें",
-        "your_address": "आपका पता",
-        "generate_new_address": "नया पता उत्पन्न करें",
-        "copy_address": "पता कॉपी करें",
-        "have_text_backup": "मेरे पास एक लिखित में बैकअप है",
-        "have_file_backup": "मेरे पास एक फाइल में बैकअप है",
-        "enter_seed_or_phrase": "एक पुनर्प्राप्ति वाक्यांश या सीड दर्ज करें",
-        "upload_seedvault_or_stronghold": "एक स्ट्रॉन्गहोल्ड या सीड़वॉल्ट फ़ाइल आयात करें",
+        "receiveFunds": "पैसे प्राप्त करे",
+        "myAddress": "मेरा पता:",
+        "shareAddress": "पता साझा करें",
+        "yourAddress": "आपका पता",
+        "generateNewAddress": "नया पता उत्पन्न करें",
+        "copyAddress": "पता कॉपी करें",
         "import": "आयात करना",
         "seedvault": "सीड़वॉल्ट",
         "stronghold": "स्ट्रॉन्गहोल्ड",
         "language": "भाषा ",
         "appearance": "दिखावट",
-        "light_theme": "लाइट थीम",
-        "dark_theme": "डार्क थीम",
-        "total_balance": "कुल शेष",
-        "account_balance": "खाते की बैलेंस राशि",
+        "lightTheme": "लाइट थीम",
+        "darkTheme": "डार्क थीम",
+        "balance": "बैलेंस",
+        "accountBalance": "वॉलेट शेष राशि",
         "incoming": "आने वाला",
         "outgoing": "बाहर जाने वाले",
-        "accounts": "खाता",
+        "totalIn": "कुल प्राप्त",
+        "totalOut": "कुल खर्च",
+        "accounts": "वॉलेट्स",
+        "myAccounts": "मेरा वॉलेट",
         "automaticNodeSelection": "स्वचालित नोड चयन",
         "manualNodeSelection": "मैन्युअली नोड चुनना",
         "profiles": "प्रोफाइल्स",
         "developerProfile": "डेवलपर मोड",
+        "developerProfileDescription": "आपको टेस्टनेट से कनेक्ट करने की अनुमति देता है",
         "dev": "देव",
-        "create_account": "खाता बनाएं",
-        "account_name": "अकाउंट नाम",
-        "latest_transactions": "नवीनतम ट्रांसक्शन्स",
+        "createAccount": "वॉलेट बनाएं",
+        "accountName": "वॉलेट का नाम",
+        "latestTransactions": "नवीनतम ट्रांसक्शन्स",
         "transactions": "ट्रांसक्शन्स",
         "security": "सुरक्षा",
-        "account_address": "खाते का पता",
-        "nodes": "नोड्स"
+        "accountAddress": "वॉलेट का पता",
+        "nodes": "नोड्स",
+        "wallet": "वॉलेट",
+        "help": "मदद",
+        "you": "आप",
+        "messageId": "संदेश ID",
+        "inputAddress": "भेजने वाला पता",
+        "receiveAddress": "प्राप्त करने वाला पता",
+        "date": "तिथि",
+        "status": "स्टेटस",
+        "confirmed": "पूर्ण पुष्टि",
+        "pending": "अपूर्ण",
+        "noAccounts": "आपके पास कोई वॉलेट नहीं है, कृपया एक बनाएं।",
+        "loadingAccounts": "लोड हो रहा है, कृपया प्रतीक्षा करें...",
+        "addProfile": "प्रोफ़ाइल जोड़ें",
+        "noRecentHistory": "हाल का कोई इतिहास नहीं",
+        "firstSync": "इतिहास को समन्‍वयित करते हुए, इसमें कुछ समय लग सकता है...",
+        "transferSyncing": "सिंकिंग वॉलेट",
+        "transferSelectingInputs": "इनपुट का चयन करना",
+        "transferRemainderAddress": "शेष जमा पता जनरेट करना",
+        "transferSigning": "लेन-देन पर हस्ताक्षर करना",
+        "transferPow": "PoW करना",
+        "transferBroadcasting": "प्रोमोटिंग ट्रांसक्शन",
+        "transferComplete": "ट्रांसफर कम्पलीट",
+        "creatingAccount": "वॉलेट बन रहा है, कृपया प्रतीक्षा करें...",
+        "updatingAccount": "वॉलेट अपडेट हो रहा है, कृपया प्रतीक्षा करें...",
+        "accountSyncing": "वॉलेट सिंक हो रहा है",
+        "accountSyncComplete": "वॉलेट सिंक पूरा हुआ",
+        "passwordUpdating": "पासवर्ड अपडेट हो रहा है...",
+        "passwordSuccess": "पासवर्ड सफलतापूर्वक अपडेट किया गया",
+        "passwordFailed": "पासवर्ड अपडेट करना विफल",
+        "syncingAccounts": "सिंकिंग वॉलेट...",
+        "exportingStronghold": "निर्यात स्ट्रॉन्गहोल्ड...",
+        "exportingStrongholdSuccess": "निर्यातित स्ट्रॉन्गहोल्ड सफलतापूर्वक",
+        "exportingStrongholdFailed": "निर्यात स्ट्रॉन्गहोल्ड विफल रहा",
+        "pinCodeUpdating": "पिन कोड अपडेट हो रहा है...",
+        "pinCodeSuccess": "पासवर्ड सफलतापूर्वक अपडेट किया गया",
+        "pinCodeFailed": "पिन कोड अपडेट करना विफल रहा",
+        "passwordStrength": "पासवर्ड क्षमता",
+        "passwordStrength0": "खराब",
+        "passwordStrength1": "बुरा",
+        "passwordStrength2": "कमज़ोर",
+        "passwordStrength3": "औसत",
+        "passwordStrength4": "मजबूत",
+        "creatingProfile": "प्रोफ़ाइल बन रहा है, कृपया प्रतीक्षा करें...",
+        "fundMigration": "फंड्स माइग्रेशन",
+        "accountRemoved": "यह वॉलेट छिपा है। स्थानांतरण करने के लिए इसे अनहाइड करें",
+        "receivingTo": "{account} को प्राप्त हो रहा है",
+        "sendingFrom": "{account} से भेजा जा रहा है",
+        "receivedTo": "{account} को प्राप्त हुआ",
+        "sentFrom": "{account} से भेजा गया",
+        "receiving": "प्राप्त हो रहा है",
+        "sending": "भेज रहे है",
+        "legacyNetwork": "विरासत नेटवर्क",
+        "capsLock": "कैप्स लॉक ऑन है",
+        "version": "संस्करण {version}"
     },
     "dates": {
         "today": "आज",
-        "days_ago": "{time, plural, one {# दिन} other {# दिन}} पहले",
-        "weeks_ago": "{time, plural, one {# सप्ताह} other {# सप्ताह}} पहले",
-        "months_ago": "{time, plural, one {# महीना} other {# महीना}} पहले",
-        "years_ago": "{time, plural, one {# साल} other {# साल}} पहले"
+        "yesterday": "बीता कल",
+        "daysAgo": "{time, plural, one {# दिन} other {# दिन}} पहले",
+        "weeksAgo": "{time, plural, one {# सप्ताह} other {# सप्ताह}} पहले",
+        "monthsAgo": "{time, plural, one {# महीना} other {# महीना}} पहले",
+        "yearsAgo": "{time, plural, one {# साल} other {# साल}} पहले"
     },
     "notifications": {
         "valueTx": "{{value}} में {{account}} रिसीव हो रहा है",
         "confirmed": "{{account}} से आउटगोइंग {{value}} की पुष्टि हो गयी है",
+        "confirmedInternal": "{{value}} राशि {{senderAccount}} एड्रेस से {{receiverAccount}} एड्रेस को पुष्टि की गई है",
+        "confirmedInternalNoAccounts": "{{value}} आंतरिक स्थानांतरण की पुष्टि की गई है",
         "failed": "{{account}} से आउटगोइंग {{value}} फ़ैल हो गयी है",
-        "downloading_update": "Downloading update",
-        "update_ready": "Update ready",
-        "update_error": "An error occurred during the update, please try again",
-        "restart_install": "Restart to install",
-        "calc_minutes_remaining": "Calculating minutes remaining...",
-        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
+        "downloadingUpdate": "अपडेट डाउनलोड हो रहा है...",
+        "updateReady": "अपडेट तैयार है",
+        "updateError": "अपडेट के दौरान एक त्रुटि हुई, कृपया पुनः प्रयास करें",
+        "restartInstall": "स्थापित करने के लिए पुनरारंभ करें",
+        "calcMinutesRemaining": "शेष मिनटों की गणना कर रहा है...",
+        "minutesRemaining": "{minutes, plural, one {1 मिनट बचा हुआ} other {# मिनट्स बचा हुआ}}",
+        "copiedToClipboard": "क्लिपबोर्ड में कॉपी हो गया",
+        "accountsSynchronized": "वॉलेट तुल्यकालन पूरा",
+        "migratedAccountChrysalisDown": "28 अप्रैल को क्रिसलिस के बाद आपके फंड उपलब्ध हो जाएंगे",
+        "migratedAccountChrysalisUp": "जल्द ही आपके फंड उपलब्ध हो जाएंगे"
+    },
+    "error": {
+        "profile": {
+            "length": "आपका प्रोफ़ाइल नाम {length, plural, one {1 अक्षर} other {# अक्षर}} से अधिक लंबा नहीं हो सकता है|",
+            "duplicate": "इस नाम का प्रोफ़ाइल पहले से मौजूद है।"
+        },
+        "password": {
+            "doNotMatch": "पासवर्ड मैच नहीं करता है।",
+            "tooWeak": "आपका नया पासवर्ड बहुत कमजोर है।",
+            "row": "कीबोर्ड की सीधी पंक्तियाँ अनुमान लगाना आसान है",
+            "pattern": "लघु कीबोर्ड पैटर्न का अनुमान लगाना आसान है।",
+            "names": "आम नाम और उपनाम का अनुमान लगाना आसान है",
+            "repeats": "\"aaa\" जैसे लगातार अनुमान लगाना आसान है।",
+            "repeats2": "\"abcabcabc\" जैसे लगातार अनुमान लगाना आसान है।",
+            "sequence": "एबीसी या जैसे अनुक्रम अनुमान लगाना आसान है",
+            "years": "हाल के वर्षों का अनुमान लगाना आसान है",
+            "dates": "तिथियाँ अक्सर अनुमान करने के लिए आसान हैं",
+            "common": "यह एक आम पासवर्ड है",
+            "similar": "यह आमतौर पर उपयोग किए जाने वाले पासवर्ड के समान है",
+            "word": "अकेले शब्द का अनुमान लगाना आसान है",
+            "incorrect": "आपका पासवर्ड गलत है।",
+            "length": "आपका पासवर्ड {length, plural, one {1 वर्ण} other {# अक्षर}} से अधिक लंबा नहीं हो सकता है"
+        },
+        "pincode": {
+            "length": "आपका पिन {length, plural, one {1 अंक} other {# अंक}} लम्बा होना चाहिए",
+            "match": "पिन मेल नहीं खाता",
+            "incorrect": "आपका वर्तमान पिन गलत है"
+        },
+        "account": {
+            "length": "आपका वॉलेट नाम {length, plural, one {1 वर्ण} other {# अक्षर}} से अधिक लंबा नहीं हो सकता है",
+            "empty": "नया बनाने से पहले आपको अपने नवीनतम वॉलेट का उपयोग करना चाहिए।",
+            "notEmpty": "इस वॉलेट को हटाने से पहले आपको अपना बैलेंस ट्रांसफर करना होगा।",
+            "duplicate": "इस नाम का एक वॉलेट पहले से मौजूद है।",
+            "tilde": "एक प्रोफ़ाइल नाम '~' वर्ण से शुरू नहीं हो सकता।",
+            "control": "एक प्रोफ़ाइल नाम में कोई नियंत्रण वर्ण नहीं हो सकता है।",
+            "startDot": "एक प्रोफ़ाइल नाम '.' वर्ण से शुरू नहीं हो सकता।",
+            "chars": "एक प्रोफ़ाइल नाम '<>:\"/\\|?*' वर्ण से शुरू नहीं हो सकता।"
+        },
+        "send": {
+            "addressLength": "पते {length, plural, one {1 वर्ण} other {# वर्ण}} लम्बे होने चाहिए",
+            "amountTooHigh": "यह आपके उपलब्ध बैलेंस से अधिक है।",
+            "amountNoFloat": "यदि इकाइयाँ `i` हैं तो आप दशमलव स्थानों का उपयोग नहीं कर सकते।",
+            "amountInvalidFormat": "राशि अमान्य संख्या प्रतीत होती है",
+            "amountZero": "ट्रांसफ़र राशि शून्य से अधिक होनी चाहिए",
+            "wrongAddressPrefix": "पते {prefix} उपसर्ग से शुरू होते हैं",
+            "wrongAddressFormat": "पता सही रूप से स्वरूपित नहीं है।",
+            "invalidAddress": "पता मान्य नहीं है",
+            "insufficientFunds": "इस वॉलेट में अपर्याप्त राशि है।",
+            "noToAccount": "आपने फंड भेजने के लिए वॉलेट का चयन नहीं किया है।",
+            "sendingDust": "आप 1 Mi से कम नहीं भेज सकते",
+            "leavingDust": "आप अपने पते पर 1 Mi से कम नहीं छोड़ सकते।"
+        },
+        "node": {
+            "invalid": "मान्य URL दर्ज करे",
+            "https": "HTTPS की आवश्यकता है। असुरक्षित HTTP कनेक्शन का उपयोग करने के लिए एक डेवलपर प्रोफ़ाइल सेट करें।",
+            "duplicate": "उस नोड को पहले से जोड़ा गया है",
+            "unsynced": "नोड सिंक में नहीं है",
+            "noSynced": "कोई सिंक किए गए नोड उपलब्ध नहीं हैं"
+        },
+        "global": {
+            "generic": "कुछ गलत हो गया"
+        },
+        "backup": {
+            "invalid": "बैकअप फ़ाइल को पहचाना नहीं गया था।",
+            "destination": "बैकअप गंतव्य मान्य नहीं था।",
+            "mnemonic": "अक्षर मान्य नहीं है",
+            "seedTooShort": "बीज 81 वर्ण लंबा होना चाहिए, यह {length, plural, one {1} other {#}} वर्ण लंबा है",
+            "seedCharacters": "सीड में केवल अक्षर A-Z या 9 होना चाहिए",
+            "phraseWordCount": "आपके पुनर्प्राप्ति वाक्यांश में वर्तमान में 24 शब्द होने चाहिए, और अभी सिर्फ {length, plural, one {1} other {#}} शब्द है",
+            "phraseUnrecognizedWord": "आपके पुनर्प्राप्ति वाक्यांश में अपरिचित शब्द {word} पाया गया",
+            "phraseCaseWord": "शब्द {word} कम मामला होना चाहिए"
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "जोखिम का स्तर: {risk}",
+            "veryHigh": "बहुत ऊँचा",
+            "high": "उच्च",
+            "medium": "मध्यम",
+            "low": "कम",
+            "veryLow": "बहुत कम"
+        }
     }
 }

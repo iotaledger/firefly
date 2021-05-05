@@ -1,11 +1,38 @@
+<script context="module" lang="typescript">
+    export enum ImportType {
+        Seed = 'seed',
+        Mnemonic = 'mnemonic',
+        File = 'file',
+        SeedVault = 'seedvault',
+        Stronghold = 'stronghold',
+    }
+</script>
+
 <script lang="typescript">
-    import { createEventDispatcher } from 'svelte'
     import { Transition } from 'shared/components'
-    import { Import, TextImport, FileImport, LedgerImport, FireflyLedgerImport, ConfirmBalance, BackupPassword, Success } from './views/'
-    import { api } from 'shared/lib/wallet'
+    import { mnemonic } from 'shared/lib/app'
+    import { Electron } from 'shared/lib/electron'
+    import { getMigrationData } from 'shared/lib/migration'
+    import { showAppNotification } from 'shared/lib/notifications'
+    import { newProfile } from 'shared/lib/profile'
+    import { asyncRestoreBackup } from 'shared/lib/wallet'
+    import { createEventDispatcher, setContext } from 'svelte'
+    import { get, Writable, writable } from 'svelte/store'
+    import {
+        BackupPassword,
+        ConfirmBalance,
+        FileImport,
+        FireflyLedgerImport,
+        Import,
+        LedgerImport,
+        Success,
+        TextImport,
+    } from './views/'
 
     export let locale
     export let mobile
+
+    let isGettingMigrationData = false
 
     enum ImportState {
         Init = 'init',
@@ -21,11 +48,15 @@
 
     const dispatch = createEventDispatcher()
 
-    let importType
+    let importType: Writable<ImportType> = writable(null)
+    setContext<Writable<ImportType>>('importType', importType)
+
     let importFile
     let importFilePath
     let balance
-    
+
+    let busy = false
+
     let error = ''
 
     let state: ImportState = ImportState.Init
@@ -37,9 +68,10 @@
         switch (state) {
             case ImportState.Init:
                 const { type } = params
-                if (type === 'text') {
+                importType.set(type)
+                if (type === ImportType.Seed || type === ImportType.Mnemonic) {
                     nextState = ImportState.TextImport
-                } else if (type === 'file') {
+                } else if (type === ImportType.File) {
                     nextState = ImportState.FileImport
                 } else if (type === 'ledger') {
                     nextState = ImportState.LedgerImport
@@ -47,12 +79,24 @@
                 break
             case ImportState.TextImport:
                 const { input } = params
-                // Dummy
-                if (input.length === 81) {
-                    importType = 'seed'
-                    dispatch('next', { importType })
-                } else {
-                    importType = 'mnemonic'
+                if (get(importType) === ImportType.Seed) {
+                    isGettingMigrationData = true
+                    getMigrationData(input)
+                        .then(() => {
+                            isGettingMigrationData = false
+                            dispatch('next', { importType: get(importType) })
+                        })
+                        .catch((err) => {
+                            if (!err?.snapshot) {
+                                showAppNotification({
+                                    type: 'error',
+                                    message: locale('views.migrate.problemRestoringWallet'),
+                                })
+                            }
+                            isGettingMigrationData = false
+                        })
+                } else if (get(importType) === ImportType.Mnemonic) {
+                    mnemonic.set(input.split(' '))
                     nextState = ImportState.Success
                 }
                 break
@@ -64,12 +108,11 @@
                 importFilePath = filePath
 
                 if (seedvaultRegex.test(fileName)) {
-                    importType = 'seedvault'
+                    importType.set(ImportType.SeedVault)
                 } else if (strongholdRegex.test(fileName)) {
-                    importType = 'stronghold'
+                    importType.set(ImportType.Stronghold)
                 }
                 nextState = ImportState.BackupPassword
-
                 break
             case ImportState.LedgerImport:
                 const { app } = params
@@ -88,30 +131,50 @@
             case ImportState.ConfirmBalance:
                 nextState = ImportState.Success
                 break
+
             case ImportState.BackupPassword:
                 const { password } = params
+                busy = true
+
+                error = ''
 
                 try {
-                    await new Promise<void>((resolve, reject) => {
-                        api.restoreBackup(importFilePath, password, {
-                            onSuccess() {
-                                resolve()
-                            },
-                            onError(err) {
-                                reject(err)
-                            },
-                        })
-                    })
+                    if (get(importType) === ImportType.SeedVault) {
+                        // Instead of using "busy", we are deliberately using "isGettingMigrationData"
+                        // We do not want to display the spinner in FileImport if stronghold is being imported.
+                        isGettingMigrationData = true
+
+                        const legacySeed = await Electron.importLegacySeed(importFile, password)
+
+                        if (legacySeed) {
+                            await getMigrationData(legacySeed)
+                        }
+
+                        isGettingMigrationData = false
+                    } else {
+                        await asyncRestoreBackup(importFilePath, password)
+                        $newProfile.lastStrongholdBackupTime = new Date()
+                    }
+
                     nextState = ImportState.Success
                 } catch (err) {
-                    // TODO: Add proper error handling
-                    if (err.payload.error.includes('try another password')){
-                        error = locale('error.password.incorrect')
+                    if (!err?.snapshot) {
+                        if (err && err.name === 'KdbxError' && err.code === 'InvalidKey') {
+                            error = locale('views.migrate.incorrectSeedVaultPassword')
+                        } else if (err && err.name === 'KdbxError' && err.code === 'FileCorrupt') {
+                            error = locale('views.migrate.noDataSeedVault')
+                        } else {
+                            error = locale(err.error)
+                        }
                     }
+                } finally {
+                    busy = false
+                    isGettingMigrationData = false
                 }
                 break
+
             case ImportState.Success:
-                dispatch('next', { importType })
+                dispatch('next', { importType: get(importType) })
                 break
         }
         if (nextState) {
@@ -131,35 +194,44 @@
 </script>
 
 {#if state === ImportState.Init}
-<Transition>
-    <Import on:next={_next} on:previous={_previous} {locale} {mobile} />
-</Transition>
+    <Transition>
+        <Import on:next={_next} on:previous={_previous} {locale} {mobile} />
+    </Transition>
 {:else if state === ImportState.TextImport}
-<Transition>
-    <TextImport on:next={_next} on:previous={_previous} {locale} {mobile} />
-</Transition>
+    <Transition>
+        <TextImport {isGettingMigrationData} on:next={_next} on:previous={_previous} {locale} {mobile} />
+    </Transition>
 {:else if state === ImportState.FileImport}
-<Transition>
-    <FileImport on:next={_next} on:previous={_previous} {locale} {mobile} />
-</Transition>
+    <Transition>
+        <FileImport on:next={_next} on:previous={_previous} {locale} {mobile} />
+    </Transition>
 {:else if state === ImportState.LedgerImport}
-<Transition>
-    <LedgerImport on:next={_next} on:previous={_previous} {locale} {mobile} />
-</Transition>
+    <Transition>
+        <LedgerImport on:next={_next} on:previous={_previous} {locale} {mobile} />
+    </Transition>
 {:else if state === ImportState.FireflyLedgerImport}
-<Transition>
-    <FireflyLedgerImport on:next={_next} on:previous={_previous} {locale} {mobile} />
-</Transition>
+    <Transition>
+        <FireflyLedgerImport on:next={_next} on:previous={_previous} {locale} {mobile} />
+    </Transition>
 {:else if state === ImportState.ConfirmBalance}
-<Transition>
-    <ConfirmBalance on:next={_next} on:previous={_previous} {importType} {balance} {locale} {mobile} />
-</Transition>
+    <Transition>
+        <ConfirmBalance on:next={_next} on:previous={_previous} {importType} {balance} {locale} {mobile} />
+    </Transition>
 {:else if state === ImportState.BackupPassword}
     <Transition>
-        <BackupPassword on:next={_next} on:previous={_previous} {importType} {error} {locale} {mobile}/>
+        <BackupPassword
+            on:next={_next}
+            on:previous={_previous}
+            {isGettingMigrationData}
+            {importType}
+            {error}
+            {locale}
+            {mobile}
+            {busy} />
     </Transition>
 {:else if state === ImportState.Success}
-<Transition>
-    <Success on:next={_next} on:previous={_previous} {importType} {locale} {mobile} />
-</Transition>
+    <Transition>
+        <!-- TODO: ledger, check importType usage -->
+        <Success on:next={_next} on:previous={_previous} {locale} {mobile} {importType} />
+    </Transition>
 {/if}

@@ -1,99 +1,79 @@
 <script lang="typescript">
-    import type { ClientOptions, Node } from 'lib/typings/client'
-    import { Text, Input, Button, Password, Checkbox } from 'shared/components'
+    import { Button, Input, Password, Text } from 'shared/components'
+    import { stripSpaces, stripTrailingSlash } from 'shared/lib/helpers'
+    import { isNodeUrlValid } from 'shared/lib/network'
+    import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
-    import { activeProfile, updateProfile } from 'shared/lib/profile'
-    import { isNodeValid, DEFAULT_NODES as nodes } from 'shared/lib/network'
-    import { api, wallet, WalletAccount } from 'shared/lib/wallet'
-
+    
     export let locale
+    export let onSuccess
+    export let node
+    export let nodes
 
-    const { accounts } = $wallet
-
-    let url = ''
-    let username = ''
-    let password = ''
-    let primary = false
+    let url = node?.url ?? ''
+    let username = node?.auth?.username ?? ''
+    let password = node?.auth?.password ?? ''
     let addressError = ''
     let authError = ''
+    let isBusy = false
 
-    function addCustomNode(node: Node, primary = false) {
-        if (isNewNodeValid([...$activeProfile.settings.customNodes, ...DEFAULT_NODES], node)) {
-            const options: ClientOptions = primary
-                ? {
-                      ...$accounts[0].clientOptions,
-                      node: node.url,
-                      nodes: [],
-                  }
-                : {
-                      ...$accounts[0].clientOptions,
-                      nodes: [...$accounts[0].clientOptions.nodes, node.url],
-                  }
+    async function addCustomNode() {
+        try {
+            isBusy = true
+            addressError = ''
 
-            api.setClientOptions(options, {
-                onSuccess() {
-                    updateProfile('settings.customNodes', [...$activeProfile.settings.customNodes, DEFAULT_NODE])
+            url = stripSpaces(url)
+            url = stripTrailingSlash(url)
 
-                    if (primary) {
-                        updateProfile('settings.node', node)
-                    }
-
-                    accounts.update((_accounts) =>
-                        _accounts.map((_account) => {
-                            if (primary) {
-                                return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                                    {} as WalletAccount,
-                                    _account,
-                                    {
-                                        clientOptions: Object.assign<ClientOptions, ClientOptions, ClientOptions>(
-                                            {},
-                                            _account.clientOptions,
-                                            { node: node.url, nodes: [] }
-                                        ),
-                                    }
-                                )
-                            }
-
-                            return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                                {} as WalletAccount,
-                                _account,
-                                {
-                                    clientOptions: Object.assign<ClientOptions, ClientOptions, ClientOptions>(
-                                        {},
-                                        _account.clientOptions,
-                                        {
-                                            nodes: [..._account.clientOptions.nodes, node.url],
-                                        }
-                                    ),
-                                }
-                            )
-                        })
-                    )
-
-                    closePopup()
-                },
-                onError(error) {
-                    // TODO: Add auth error handling
-                    console.error(error)
-                },
+            let allNodes = nodes ?? []
+            // If this is an update not an add then remove the current node from the list
+            // before checking for dupes
+            if (node) {
+                allNodes = allNodes.filter((n) => n.url !== node.url)
+            }
+            const validErr = isNodeUrlValid(allNodes, url)
+            if (validErr) {
+                addressError = locale(validErr)
+            }
+        } catch (err) {
+            showAppNotification({
+                type: 'error',
+                message: locale(err.error),
             })
-        } else {
-            console.error('Node is not valid')
+        } finally {
+            isBusy = false
+
+            if (!addressError) {
+                closePopup()
+
+                if (onSuccess) {
+                    onSuccess({
+                        url,
+                        auth: {
+                            username,
+                            password
+                        }
+                    })
+                }
+            }
         }
     }
 </script>
 
-<Text type="h4" classes="mb-5">{locale('popups.node.title_add')}</Text>
+<Text type="h4" classes="mb-5">{locale(`popups.node.title${node ? 'Update' : 'Add'}`)}</Text>
 <div class="w-full h-full">
-    <Input bind:value={url} placeholder={locale('popups.node.node_address')} error={addressError} />
-    <Input classes="mt-3" bind:value={username} placeholder={locale('popups.node.optional_username')}
-        error={authError} />
-    <Password classes="mt-3" bind:value={password} placeholder={locale('popups.node.optional_password')} />
-    <Checkbox classes="my-8" label={locale('popups.node.set_as_primary_node')} bind:checked={primary} />
+    <Input bind:value={url} placeholder={locale('popups.node.nodeAddress')} error={addressError} disabled={isBusy} autofocus />
+    <Input
+        classes="mt-3"
+        bind:value={username}
+        placeholder={locale('popups.node.optionalUsername')}
+        error={authError}
+        disabled={isBusy} />
+    <Password classes="mt-3 mb-8" bind:value={password} placeholder={locale('popups.node.optionalPassword')} disabled={isBusy} />
 </div>
 <div class="flex flex-row justify-between space-x-4 w-full px-8 ">
-    <Button secondary classes="w-1/2" onClick={()=> closePopup()}>{locale('actions.cancel')}</Button>
-    <Button disabled={!url} classes="w-1/2" onClick={()=> addCustomNode({ url, username, password }, primary)}>
-        {locale('actions.add_node')}
+    <Button secondary classes="w-1/2" onClick={() => closePopup()} disabled={isBusy}>{locale('actions.cancel')}</Button>
+    <Button disabled={!url || isBusy} classes="w-1/2" onClick={() => addCustomNode()}>
+        {locale(`actions.${node ? 'updateNode' : 'addNode'}`)}
     </Button>
 </div>

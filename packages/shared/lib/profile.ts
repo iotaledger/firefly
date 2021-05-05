@@ -1,27 +1,29 @@
-import { get, derived, writable } from 'svelte/store'
+import { AvailableExchangeRates } from 'shared/lib/currency'
 import { persistent } from 'shared/lib/helpers'
 import { generateRandomId } from 'shared/lib/utils'
-import { AvailableExchangeRates } from 'shared/lib/currency'
-import { DEFAULT_NODE } from 'shared/lib/network'
+import { asyncRemoveStorage, destroyActor, getStoragePath, getWalletStoragePath } from 'shared/lib/wallet'
+import { derived, get, Readable, writable } from 'svelte/store'
+import type { ChartSelectors } from './chart'
+import { Electron } from './electron'
+import {
+    HistoryDataProps
+} from './marketData'
 import type { Node } from './typings/client'
 
-/**
- * Base profile interface —
- */
-interface BaseProfile {
-    name: string
-    id: string
-    active: boolean
+export interface MigratedTransaction {
+    address: string;
+    balance: number;
+    timestamp: string
+    account: number;
+    tailTransactionHash: string;
 }
 
 /**
- * Extended profile interface (Extra properties associated with a profile)
+ * Profile
  */
-interface ExtendedProfile {
-    /**
-     * Determines if stronghold is locked
-     */
-    isStrongholdLocked: boolean
+export interface Profile {
+    id: string
+    name: string
     /**
      * Time for most recent stronghold back up
      */
@@ -30,49 +32,51 @@ interface ExtendedProfile {
      * User settings
      */
     settings: UserSettings
+    hiddenAccounts?: string[],
+    migratedTransactions?: MigratedTransaction[]
+    isDeveloperProfile: boolean
+    gapLimit?: number
 }
 
 /**
  * User Settings
  */
 export interface UserSettings {
-    deepLinking: boolean
-    outsourcePow: boolean
-    language: string
     currency: AvailableExchangeRates
-    notifications: boolean
-    node: Node
-    customNodes: Node[]
+    automaticNodeSelection: boolean
+    includeOfficialNodes: boolean
+    disabledNodes: string[] | undefined
     /** Lock screen timeout in minutes */
     lockScreenTimeout: number
-    automaticNodeSelection: boolean
+    showHiddenAccounts?: boolean
+    chartSelectors: ChartSelectors
+    hideNetworkStatistics?: boolean
 }
 
-/**
- * Profile interface
- */
-interface Profile extends BaseProfile, ExtendedProfile {
-    isDeveloperProfile: boolean
-}
+export const activeProfileId = writable<string | null>(null)
 
 export const profiles = persistent<Profile[]>('profiles', [])
 
+export const profileInProgress = persistent<string | undefined>('profileInProgress', undefined)
+
 export const newProfile = writable<Profile | null>(null)
+
+export const isStrongholdLocked = writable<boolean>(true)
 
 /**
  * Currently active profile
  */
-export const activeProfile = derived(
-    [profiles, newProfile],
-    ([$profiles, $newProfile]) =>
+export const activeProfile: Readable<Profile | undefined> = derived(
+    [profiles, newProfile, activeProfileId],
+    ([$profiles, $newProfile, $activeProfileId]) =>
         $newProfile ||
         $profiles.find((_profile) => {
-            return _profile.active === true
+            return _profile.id === $activeProfileId
         })
 )
 
-activeProfile.subscribe((profile) => {
-    window['Electron'].updateActiveProfile(profile ? profile.id : null)
+activeProfileId.subscribe((profileId) => {
+    Electron.updateActiveProfile(profileId)
 })
 
 /**
@@ -100,33 +104,27 @@ export const saveProfile = (profile: Profile): Profile => {
  * @returns {Profile}
  */
 export const createProfile = (profileName, isDeveloperProfile): Profile => {
-    if (get(profiles).some((profile) => profile.name === profileName)) {
-        throw new Error(`Profile with name ${profileName} already exists.`)
-    }
-
-    const profile = {
+    const profile: Profile = {
         id: generateRandomId(),
         name: profileName,
-        active: true,
-        isStrongholdLocked: true,
         lastStrongholdBackupTime: null,
         isDeveloperProfile,
-        // Settings
+        gapLimit: 10,
         settings: {
-            deepLinking: false,
-            language: 'en',
-            outsourcePow: false,
             currency: AvailableExchangeRates.USD,
-            notifications: true,
-            node: DEFAULT_NODE,
-            customNodes: [],
-            // Minutes
-            lockScreenTimeout: 5,
             automaticNodeSelection: true,
+            includeOfficialNodes: true,
+            disabledNodes: undefined,
+            lockScreenTimeout: 5,
+            chartSelectors: {
+                currency: AvailableExchangeRates.USD,
+                timeframe: HistoryDataProps.SEVEN_DAYS
+            }
         },
     }
 
     newProfile.set(profile)
+    activeProfileId.set(profile.id)
 
     return profile
 }
@@ -138,8 +136,18 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
  *
  * @returns {void}
  */
-export const disposeNewProfile = (): void => {
+export const disposeNewProfile = async () => {
+    const np = get(newProfile)
+    if (np) {
+        try {
+            await removeProfileFolder(np.name)
+        } catch (err) {
+            console.error(err)
+        }
+        destroyActor(np.id)
+    }
     newProfile.set(null)
+    activeProfileId.set(null)
 }
 
 /**
@@ -152,7 +160,18 @@ export const disposeNewProfile = (): void => {
  * @returns {void}
  */
 export const setActiveProfile = (id: string): void => {
-    profiles.update((_profiles) => _profiles.map((profile) => Object.assign({}, profile, { active: id === profile.id })))
+    activeProfileId.set(id)
+}
+
+/**
+ * Clears the active profile
+ *
+ * @method clearActiveProfile
+ *
+ * @returns {void}
+ */
+export const clearActiveProfile = (): void => {
+    activeProfileId.set(null)
 }
 
 /**
@@ -179,11 +198,12 @@ export const removeProfile = (id: string): void => {
  *
  * @returns {void}
  */
-export const updateProfile = (path: string, value: string | boolean | Date | AvailableExchangeRates | Node | Node[]) => {
+export const updateProfile = (
+    path: string, value: string | string[] | boolean | Date | number | AvailableExchangeRates | Node | Node[] | ChartSelectors | HistoryDataProps | MigratedTransaction[]) => {
     const _update = (_profile) => {
         const pathList = path.split('.')
 
-        pathList.reduce((a, b: keyof ExtendedProfile | keyof UserSettings, level: number) => {
+        pathList.reduce((a, b: keyof Profile | keyof UserSettings, level: number) => {
             if (level === pathList.length - 1) {
                 a[b] = value
                 return value
@@ -199,12 +219,72 @@ export const updateProfile = (path: string, value: string | boolean | Date | Ava
     } else {
         profiles.update((_profiles) => {
             return _profiles.map((_profile) => {
-                if (_profile.id === get(activeProfile).id) {
+                if (_profile.id === get(activeProfile)?.id) {
                     return _update(_profile)
                 }
 
                 return _profile
             })
         })
+    }
+}
+
+/**
+ * Cleanup any in progress profiles
+ *
+ * @method cleanupInProgressProfiles
+ *
+ * @returns {void}
+ */
+export const cleanupInProgressProfiles = async () => {
+    const inProgressProfile = get(profileInProgress)
+    if (inProgressProfile) {
+        profileInProgress.update(() => undefined)
+        await removeProfileFolder(inProgressProfile)
+    }
+}
+
+/**
+ * Remove the profile folder from storage
+ *
+ * @method removeProfileFolder
+ *
+ * @returns {void}
+ */
+export const removeProfileFolder = async (profileName) => {
+    try {
+        const userDataPath = await Electron.getUserDataPath()
+        const profileStoragePath = getStoragePath(userDataPath, profileName)
+        await Electron.removeProfileFolder(profileStoragePath)
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+/**
+ * Cleanup profile listed that have nothing stored and stored profiles not in app.
+ * 
+ * @method cleanupEmptyProfiles
+ *
+ * @returns {void}
+ */
+export const cleanupEmptyProfiles = async() => {
+    try {
+        const userDataPath = await Electron.getUserDataPath()
+        const profileStoragePath = getWalletStoragePath(userDataPath)
+        const storedProfiles = await Electron.listProfileFolders(profileStoragePath)
+
+        profiles.update((_profiles) => {
+            return _profiles.filter(p => storedProfiles.includes(p.name))
+        })
+
+        const appProfiles = get(profiles).map(p => p.name)
+        for (const storedProfile of storedProfiles) {
+            if (!appProfiles.includes(storedProfile)) {
+                await removeProfileFolder(storedProfile) 
+            }
+        }
+    } catch (err) {
+        console.error(err)
     }
 }

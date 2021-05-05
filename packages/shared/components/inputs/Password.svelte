@@ -1,8 +1,5 @@
-
 <script lang="typescript">
-    import Input from './Input'
-    import { Icon } from 'shared/components'
-    import { onMount } from 'svelte'
+    import { Icon, Input, Text } from 'shared/components'
 
     export let value = ''
     export let classes = ''
@@ -14,8 +11,10 @@
     export let locale = undefined
     export let maxlength = undefined
     export let error = null
-    export let numeric = false
+    export let integer = false
     export let autofocus = false
+    export let submitHandler = undefined
+    export let disabled = false
 
     let revealed = false
     let type = 'password'
@@ -24,48 +23,58 @@
         type = type === 'password' ? 'text' : 'password'
         revealed = !revealed
     }
+
+    const STRENGTH_COLORS = ['gray-300', 'orange-500', 'yellow-600', 'yellow-300', 'green-700']
 </script>
 
 <style type="text/scss">
     div {
-        button {
-            right: 12px; // TODO: unable to use tailwind inset
+        &:disabled {
+            @apply pointer-events-none;
+            @apply opacity-50;
         }
         strength-meter {
             span {
                 width: 22px;
                 height: 4px;
-                &.weak {
-                    @apply bg-orange-500;
-                }
-                &.strong {
-                    @apply bg-green-500;
-                }
             }
         }
     }
 </style>
 
-<div class={classes}>
+<div class={classes} class:disabled>
     {#if showStrengthLevel}
-        <strength-meter class="flex flex-row justify-end mb-2">
-            {#each Array(strengthLevels) as _, i}
-                <span class="ml-1 w-1.5 h-0.5 rounded-lg bg-gray-300"class:strong={strength === 4} class:weak={i - strength < 0}/>
-            {/each}
+        <strength-meter class="flex flex-row justify-between items-center mb-2">
+            <div class="flex flex-row">
+                <Text smaller secondary>{locale('general.passwordStrength')}:</Text>
+                <Text smaller overrideColor classes={`text-${STRENGTH_COLORS[strength]} uppercase ml-2`}>
+                    {locale(`general.passwordStrength${strength}`)}
+                </Text>
+            </div>
+            <div class="flex flex-row justify-end">
+                {#each Array(strengthLevels) as _, i}
+                    <span class={`ml-1 w-1.5 h-0.5 rounded-lg bg-${STRENGTH_COLORS[strength > i ? i + 1 : 0]}`} />
+                {/each}
+            </div>
         </strength-meter>
     {/if}
-    <div class='flex w-full relative'>
+    <div class="flex  w-full relative">
         <Input
             {error}
             {type}
             bind:value
             {maxlength}
-            {numeric}
+            {integer}
             {autofocus}
-            placeholder={placeholder || locale('general.password')} 
-        />
-        {#if showRevealToggle === true}
-            <button type="button" on:click={() => revealToggle()} tabindex="-1" class="absolute top-3">
+            {disabled}
+            placeholder={placeholder || locale('general.password')}
+            {submitHandler}
+            disableContextMenu={true}
+            spellcheck="false"
+            {locale}
+            capsLockWarning={true} />
+        {#if showRevealToggle === true && !disabled}
+            <button type="button" on:click={() => revealToggle()} tabindex="-1" class="absolute top-3 right-3">
                 <Icon icon={revealed ? 'view' : 'hide'} classes="text-blue-500" />
             </button>
         {/if}

@@ -1,459 +1,820 @@
 {
     "views": {
-        "onboarding_1": {
-            "title": "Send, Receive & Manage your IOTA",
-            "body": "Firefly is a secure and easy-to-use IOTA wallet."
+        "onboarding1": {
+            "title": "שלח, קבל או נהל את אסימוני הIOTA שלך",
+            "body": "Firefly הוא הארנק הרשמי של IOTA."
         },
         "legal": {
-            "title": "Legal",
-            "body": "Please review the Privacy Policy and Terms of Service.",
-            "privacy_policy": {
-                "title": "Privacy Policy",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
-            "terms_of_service": {
-                "title": "Terms of Service",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
-            "checkbox": "I have read and I accept the Privacy policy & ToS"
+            "title": "מדיניות הפרטיות ותנאי השירות",
+            "body": "אנא קראו בעיון את מסמכי מדיניות הפרטיות שלנו.",
+            "checkbox": "קראתי, הבנתי והסכמתי עם מדיניות הפרטיות ותנאי השירות"
         },
-        "language": {
-            "title": "Language & appearance",
-            "body": "Choose your wallet’s language and theme"
+        "appearance": {
+            "title": "מראה",
+            "body": "בחר תבנית עיצוב"
+        },
+        "profile": {
+            "title": "צור פרופיל",
+            "body1": "ניתן ליצור פרופילים מרובים כדי לארגן את הארנקים שלך ולשפר פרטיות.",
+            "body2": "בינתיים, נתחיל עם פתיחת הפרופיל הראשון שלך. תוכל ליצור פרופילים נוספים בעתיד.",
+            "profileName": "שם הפרופיל"
         },
         "setup": {
-            "title": "Set up your wallet",
-            "body": "You can create a new wallet or import an existing one.",
-            "profile_name": "Profile Name"
+            "title": "הגדר ארנק",
+            "chrysalisTitle": "עדכון רשת הChrysalis",
+            "chrysalisBody": "החל מאפריל 21, משתמשים יכולים לבצע הגירה (migrate) של האסימונים שלהם לרשת הChrysalis החדשה. אנו ממליצים להעביר את כל האסימונים שלך בהקדם האפשרי.",
+            "learnMore": "למד אודות ההגירה"
+        },
+        "secure": {
+            "title": "אבטח את הארנק שלך",
+            "body1": "שמור והדפס את תבנית מסמך הPDF של ערכת השחזור.",
+            "body2": "אם תמלא את פרטי ערכת השחזור ותשמור אותם בבטחה, תוכל תמיד לשחזר את הארנקים שלך."
         },
         "password": {
-            "title": "Create a password",
-            "body": "You will be asked to enter your password to send tokens from your wallet. You need a strong password to protect your funds."
+            "title": "צור סיסמא חדשה",
+            "body1": "בחר סיסמה חזקה על מנת לאבטח את הארנק. מומלץ להימנע משימוש של מילים, שמות או תאריכים מוכרים.",
+            "body2": "מומלץ שתרשום את הסיסמה ושמור אותה במקום בטוח."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body_1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body_2": "Keep your PIN safe!"
+            "body1": "הגדר מספר זיהוי להתחברות כדי לוודא שרק אתה תוכל להיכנס לארנק.",
+            "body2": "שמור את מספר הזיהוי שלך בבטחה!"
         },
         "pin": {
-            "title": "Set up PIN code",
-            "body_1": "Enter a 6-digit PIN below. You will be asked to enter your pin to login to your wallet.",
-            "body_2": "You can use numbers only."
+            "title": "הגדר מספר זיהוי",
+            "body1": "הזן מספר זיהוי באורך 6 ספרות למטה. נדרש ממך להכניס את מספר הזיהוי כדי לגשת לפרופיל שלך.",
+            "body2": "השתמש במספרים בלבד"
         },
-        "confirm_pin": {
-            "title": "Verify your PIN code",
-            "body": "Re-enter your PIN code to proceed."
+        "confirmPin": {
+            "title": "אמת את מספר הזיהוי שלך",
+            "body1": "מספר הזיהוי שלך שומר על פרטיות המאזן והטרנזקציות שלך.",
+            "body2": "הזן שוב את מספר הזיהוי שלך כדי להמשיך. "
         },
         "backup": {
-            "title": "Back up your wallet",
-            "body_1": "You will now be shown a recovery phrase.",
-            "body_2": "Do not share this phrase with anyone. Your recovery phrase can be used to access your tokens from anywhere.",
-            "body_3": "If you lose your recovery phrase, you may lose your funds."
+            "title": "גבה את הארנק שלך",
+            "body1": "כעט יוצג לך ביטוי שחזור. רשום אותו בערכת השחזור שלך.",
+            "body2": "אל תשתף את ביטוי השחזור שלך עם אף אחד. ניתן להשתמש בו כדי לגשת לאסימונים שלך מכל מקום.",
+            "body3": "אם תאבד את ביטוי השחזור שלך, אתה עלול לאבד את כספים שלך."
         },
-        "recovery_phrase": {
-            "title": "Recovery phrase",
-            "body_1": "Carefully write down the words in the exact order.",
-            "body_2": "Keep your recovery phrase private and safely stored. Do not share it with anyone.",
-            "reveal_recovery_phrase": "Reveal recovery phrase",
-            "hide_recovery_phrase": "Hide recovery phrase"
+        "recoveryPhrase": {
+            "title": "ביטוי שחזור",
+            "body1": "בערכת השחזור שלך, רשום את המילים בסדר המדויק המוצג.",
+            "body2": "אחסן את זה באופן פרטי ובטוח.",
+            "body3": "חשוב שיהיה גיבוי בכתב יד. מחשבים עשויים לפשל וקבצים עשויים להיפגם.",
+            "revealRecoveryPhrase": "חשוף את ביטוי השחזור",
+            "hideRecoveryPhrase": "הסתר את ביטוי השחזור"
         },
-        "verify_recovery_phrase": {
-            "title": "Verify recovery phrase",
-            "body": "Let's check you wrote down the phrase correctly. Select the words in the correct order."
+        "verifyRecoveryPhrase": {
+            "title": "אמת את ביטוי השחזור",
+            "body": "נבדוק שכתבת את הביטוי בצורה הנכונה. נא לבחור כל מילה לפי הסדר הממוספר שלה.",
+            "word": "מילה",
+            "verified": "ביטוי השחזור אומת",
+            "verifiedBody": "זכור לאחסן אותו במקום פרטי ובטוח."
         },
-        "backup_wallet": {
-            "title": "Back up to a Stronghold file",
-            "body": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup."
+        "backupWallet": {
+            "title": "גבה לקובץ מבצר (Stronghold)",
+            "body1": "הזן את הסיסמה שלך כדי לגבות את הארנקים שלך לקובץ מבצר (Stronghold). יבוצע שימוש בסיסמא שלך כדי להצפין את הגיבוי.",
+            "body2": "סיבות לכך שגיבויים דיגיטליים הם חשובים:",
+            "reason1": "שחזר את הארנקים שלך בקלות מבלי לרשום את ביטוי השחזור שלך",
+            "reason2": "יבא את הארנקים שלך למכשירים אחרים",
+            "reason3": "שחזר את היסטוריית הטרנזקציות המלאה שלך"
         },
-        "recovery_phrase_saved": {
-            "title": "Successfully backed up",
-            "body": "You have backed up your wallet to a Stronghold."
+        "recoveryPhraseSaved": {
+            "title": "הגיבוי בוצע בהצלחה",
+            "body": "ביצעת גיבוי של הארנקים שלך למבצר (Stronghold)."
         },
         "congratulations": {
-            "title": "Congratulations",
-            "body": "Your wallet is ready to go."
+            "title": "הגדרת הארנק הושלמה",
+            "body": "הארנק שלך מוכן לשימוש.",
+            "fundsMigrated": "הגירת הכספים בוצעה",
+            "success": "ביצעת בהצלחה את הגירת הכספים שלך לרשת החדשה",
+            "exportMigration": "יצא דוח הגירה וסיים את התהליך"
         },
         "import": {
-            "title": "Import a wallet",
-            "body": "If you have a recovery phrase or Stronghold back up, you can import it here."
+            "title": "שחזר או הגר כספים",
+            "body": "אם יש ברשותך גרעין(seed) או קובץ גיבוי ארנק תוכל ליבא אותו כאן. אם אתה מחזיק כספי רשת ישנים, אתה תילקח דרך שלבי ההגירה כדי לעבור לרשת הChrysalis.",
+            "importSeed": "יש ברשותי גרעין(seed) באורך 81 תווים",
+            "importSeedDescription": "הכנס גרעין (seed) והגר כספים לChrysalis",
+            "importMnemonic": "יש ברשותי ביטוי שחזור של Firefly",
+            "importMnemonicDescription": "הזן את ביטוי השחזור שלך כדי לשחזר את הארנקים שלך",
+            "importFile": "יש לי קובץ גיבוי",
+            "importFileDescription": "תעלה קובץ Seedvault או Stronghold"
         },
-        "import_from_text": {
-            "title": "Restore your wallet with a recovery phrase or seed",
-            "body_1": "A recovery phrase is 24 words long. This is used to recover an existing Firefly wallet.",
-            "body_2": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body_3": "Enter your seed or recovery phrase"
+        "importFromText": {
+            "seed": {
+                "title": "הזן את הגרעין (seed) שלך כדי להתחיל הגירה",
+                "body": "Seed מכיל 81 תווים. זה משמש לשחזר מארנק Trinity הישן יותר.",
+                "enter": "הזן את הסיד שלך"
+            },
+            "mnemonic": {
+                "title": "הזן את ביטוי השחזור שלך",
+                "body": "ביטוי שחזר הינו באורך 24 מילים, כולן באותיות קטנות, עם רווחים ביניהם. זה משמש בכדי לשחזר ארנקי Firefly קיימים.",
+                "enter": "הזן את הגרעיון (seed) או ביטוי השחזור שלך"
+            },
+            "seedDetected": "זוהה seed באורך 81 תווים",
+            "phraseDetected": "זוהה ביטוי שחזור באורך 24 מילים",
+            "checksum": "סיכום ביקורת"
         },
-        "import_from_file": {
-            "title": "Restore your wallet from a backup file",
-            "body": "Import a backup file to restore your wallet. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+        "importFromFile": {
+            "title": "שחזר את הארנקים שלך בעזרת קובץ גיבוי",
+            "body": "יבא קובץ גיבוי כדי לשחזר את הארנקים שלך. גיבויים יכולים להיות קבצי (stronghold.) או (kdbx.)."
         },
-        "import_backup_password": {
-            "title": "Restore your wallet from a SeedVault or Stronghold",
-            "body_1": "Please enter your backup password.",
-            "body_2": "This is the password you set when you first created your backup."
+        "importBackupPassword": {
+            "title": "שחזר את הארנקים שלך מSeedVault או מStronghold",
+            "body1": "בבקשה הזן את סיסמאת הגיבוי שלך.",
+            "body2": "זו הסיסמא שהגדרת כאשר יצרת את הגיבוי שלך לראשונה."
         },
-        "import_success": {
-            "title": "You have successfully recovered your backup",
-            "body": "You can now set up your new wallet."
+        "importSuccess": {
+            "title": "שחזרת את הגיבוי שלך בהצלחה",
+            "body": "תוכל כעט להגדיר את הפרופיל החדש שלך.",
+            "seedvaultTitle": "יִבּוּא הושלם בהצלחה",
+            "seedvaultBody": "הסיסמא שלך נכונה, אתה יכול להמשיך עכשיו.",
+            "strongholdTitle": "יבוא המידע הושלם בהצלחה",
+            "strongholdBody": "הסיסמא שלך נכונה, אתה יכול להמשיך עכשיו."
         },
         "migrate": {
-            "title": "Migrate your funds",
-            "body_1": "This is an automated process to transfer your funds to your new wallet. We will check for spent addresses that weaken your security.",
-            "body_2": "It may take some time. Do not turn off your device during the migration.",
-            "existing": "Your old wallet",
-            "new": "Your new wallet"
+            "title": "הגר את הכספים שלך",
+            "body1": "זה הוא תהליך אוטומטי להעברת כספים לארנק החדש שלך.",
+            "body2": "זה עשוי לקחת זמן. אל תכבה את המכשיר בזמן ההגירה.",
+            "existing": "הארנק הישן שלך",
+            "new": "הארנק החדש שלך",
+            "learn": "למד אודות ההגירה",
+            "beginMigration": "התחל הגירה",
+            "migrating": "מבצע הגירת כספים...",
+            "migrated": "הוגרו {balance}",
+            "migrationFailed": "הגירה נכשלה",
+            "noAddressesForMigration": "אנא בחר את הכתובות שתרצה לאבטח.",
+            "restoringWallet": "משחזר ארנק...",
+            "findingBalance": "מוצא מאזן...",
+            "incorrectSeedVaultPassword": "סיסמאת SeedVault שגויה.",
+            "noDataSeedVault": "לא ניתן למצוא מידע בSeedVault.",
+            "signingBundle": "חותם חבילה",
+            "broadcastingBundle": "משדר חבילה",
+            "miningBundle": "כורה חבילה",
+            "problemRestoringWallet": "הרעה שגיאת רשת בזמן שחזור הארנק. אנא נסה שוב.",
+            "minimumMigrationAmountSpentAddresses": "הסכום המינימלי לביצוע הגירה עבור כתובת אחת הוא 1 Mi. בדוק שוב שהמאזן תקין.",
+            "tooManyAddressesToMigrate": "יש לך יותר מדי כתובות עם מאזן נמוך מדי מכדי ביצוע הגירה. בדוק שוב שהמאזן תקין.",
+            "cannotMigrateAllYourFunds": "איננו יכולים להגר את כל הכספים שלך בגלל שחלק מהכתובות שלך מכילות ערך נמוך מדי. תוכל להמשיך בכל מקרה. אך {value} יאבדו.",
+            "error": "הרעה שגיאה בהגירת הכספים, אנא נסה/י שוב."
         },
-        "migrate_failed": {
+        "bundleMiningWarning": {
+            "title": "אזהרה",
+            "body1": "יש לך כספים על אחד או כמה כתובות משומשות (\"spent addresses\").",
+            "body2": "אנו ממליצים לך לבצע תהליך אוטומטי כדי לעזור לאבטח ולהעביר את הכספים האלו בבטחה.",
+            "body3": "אם תסגור את האפלקציה תצטרך להתחיל מחדש את כל תהליך ההגירה.",
+            "learn": "למד עוד אודות כתובות משומשות (\"spent addresses\")"
+        },
+        "secureSpentAddresses": {
+            "title": "אבטח כתובות משומשות (\"spent addresses\")",
+            "body1": "יש לך כספים שגולו ב {number, plural, one {# spent address} other {# spent addresses}}.",
+            "body2": "אנו ממליצים לך לבצע תהליך אוטומטי כדי לעזור לאבטח ולהעביר את הכספים שלך בבטחה.",
+            "error": "לא לניתן להגר כתובות משומשות (\"spent addresses\") עם פחות מ 1MI"
+        },
+        "securityCheckCompleted": {
+            "title": "Security check completed",
+            "body1": "We have calculated the security risk level. Running this process again may lower your risk level.",
+            "body2": "When you are happy with the risk level(s) press continue.",
+            "rerun": "Rerun process for selected addresses",
+            "continueMigration": "Continue migration"
+        },
+        "securingSpentAddresses": {
+            "title": "Securing spent addresses...",
+            "body1": "This process will take {minutes, plural, one {1 minute} other {# minutes}}.",
+            "body2": "Your computer will run at full capacity, you may wish to do something else while you wait for this to complete."
+        },
+        "transferFragmentedFunds": {
+            "body1": "Firefly will now proceed to migrate your funds. This may take a while.",
+            "migrate": "Migrate funds",
+            "transaction": "Transaction {number}",
+            "rerun": "נסה שנית"
+        },
+        "migrateFailed": {
             "title": "To do",
             "body": "To do"
         },
         "balance": {
-            "title": "Your balance",
-            "body": "Is your balance correct?"
+            "title": "היתרה שלך:",
+            "body": "Make sure your balance is correct before continuing. You can check again if things don't look correct.",
+            "error": "The minimum migration amount is 1 Mi. Check again if your balance doesn't look right.",
+            "zeroBalance": "Try checking again. If you still can't find your balance you might have entered your seed incorrectly."
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "הגדרות",
             "generalSettings": {
-                "title": "General Settings",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "title": "הגדרות כלליות",
+                "description": "Configure your app's appearance and other general settings"
             },
             "security": {
-                "title": "Security",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "title": "אבטחה",
+                "description": "Change your password and adjust security-related settings"
             },
             "advancedSettings": {
-                "title": "Advanced Settings",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "title": "הגדרות מתקדמות",
+                "description": "Tools and manual settings for technical users"
             },
             "helpAndInfo": {
-                "title": "Help & Information",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "title": "עזרה ומידע",
+                "description": "חפש תשובה לשאלה או קבל עזרה בנושא"
             },
             "profile": {
-                "title": "Profile",
-                "description": ""
+                "title": "פרופיל",
+                "description": "שנה את שם או תמונת הפרופיל"
             },
             "sync": {
-                "title": "Sync accounts",
+                "title": "סנכרן ארנקים",
                 "description": ""
             },
             "theme": {
-                "title": "Theme",
+                "title": "עיצוב",
                 "description": ""
             },
             "language": {
-                "title": "Language",
+                "title": "שפה",
                 "description": ""
             },
             "currency": {
-                "title": "Currency",
-                "description": ""
+                "title": "מטבע",
+                "description": "Adjusts balance conversion and updates chart options"
             },
             "notifications": {
-                "title": "Notifications",
-                "description": ""
+                "title": "התראות",
+                "description": "System notifications for transaction events"
+            },
+            "networkStatus": {
+                "title": "Network status",
+                "description": "Displays the status of the node you are currently connected to."
             },
             "exportStronghold": {
-                "title": "Export Stronghold",
-                "description": ""
+                "title": "ייצא גיבוי",
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
             },
             "appLock": {
-                "title": "App Lock",
-                "description": ""
+                "title": "נעילה אוטומטית",
+                "description": "Inactivity time before your wallets lock and you are logged out",
+                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
+                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
             },
             "changePassword": {
-                "title": "Change password",
-                "description": ""
+                "title": "שנה סיסמא",
+                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
             },
             "changePincode": {
-                "title": "Change PIN code",
-                "description": "",
-                "currentPincode": "Current PIN",
-                "newPincode": "New PIN",
-                "confirmNewPincode": "Confirm new PIN",
-                "action": "Change PIN"
+                "title": "שנה קוד גישה",
+                "description": "Your PIN keeps your balance and transactions private",
+                "currentPincode": "קוד גישה נוכחי",
+                "newPincode": "קוד גישה חדש",
+                "confirmNewPincode": "אישור קוד גישה",
+                "action": "שינוי קוד גישה"
             },
-            "resyncAccounts": {
-                "title": "Resync accounts",
-                "description": ""
+            "balanceFinder": {
+                "title": "Balance finder",
+                "description": "Perform an extended search of your addresses for tokens"
             },
-            "resetWallet": {
-                "title": "Reset wallet",
-                "description": ""
+            "hiddenAccounts": {
+                "title": "Hidden wallets",
+                "description": "Selecting this options will show wallets that were previously hidden"
+            },
+            "deleteProfile": {
+                "title": "מחק פרופיל",
+                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
             },
             "deepLinks": {
                 "title": "Deep links",
-                "description": ""
+                "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
             },
             "developerMode": {
                 "title": "Developer mode",
-                "description": ""
+                "description": "Connect to testnets and other developer features"
             },
             "nodeSettings": {
                 "title": "Node settings",
-                "description": ""
+                "description": "Select Manual to configure the node settings and connect to your own node"
             },
             "configureNodeList": {
-                "title": "Configure node list",
-                "description": ""
+                "title": "Select a node",
+                "description": "Manage the list of IOTA network nodes you connect to",
+                "primaryNode": "Primary node",
+                "excludeNode": "Exclude node",
+                "includeNode": "Include node",
+                "viewDetails": "View details",
+                "setAsPrimary": "Set as primary",
+                "removeNode": "הסר צומת",
+                "includeOfficialNodeList": "Include official node list",
+                "noNodes": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "Proof of work",
-                "description": ""
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
-                "title": "Error log",
-                "description": ""
+                "title": "יומן שגיאות",
+                "description": "View errors to debug an issue"
+            },
+            "diagnostics": {
+                "title": "Diagnostics",
+                "description": "View system and application information"
             },
             "stateExport": {
                 "title": "State export",
-                "description": ""
+                "description": "Export your transaction history to a .csv file"
             },
             "troubleshoot": {
                 "title": "Troubleshoot",
-                "description": ""
+                "description": "Use the troubleshooting wizard to solve common problems"
             },
             "documentation": {
                 "title": "Documentation",
-                "description": ""
+                "description": "View the documentation for in depth explanations of how things work"
             },
             "faq": {
                 "title": "FAQ",
-                "description": ""
+                "title2": "Frequently Asked Questions",
+                "description": "View the FAQs to get help with a common problem or question"
             },
             "discord": {
                 "title": "Discord",
-                "description": ""
+                "description": "Get help from the IOTA community on Discord"
             },
             "about": {
-                "title": "About",
+                "title": "אודות",
                 "description": ""
+            },
+            "reportAnIssue": {
+                "title": "Report an issue",
+                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
             }
         },
         "login": {
-            "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
-            "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+            "pleaseWait": "Please wait {time, plural, one {1 second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
                 "version": {
                     "title": "Firefly v{version}",
-                    "up_to_date": "Up to date",
-                    "out_of_date": "Out of date"
+                    "upToDate": "Up to date",
+                    "outOfDate": "Out of date"
                 },
-                "hardware_device": {
+                "hardwareDevice": {
                     "title": "Hardware Device",
-                    "none_detected": "None detected"
+                    "noneDetected": "None detected"
                 },
-                "stronghold_status": {
-                    "title": "Stronghold Status",
-                    "locked": "Locked",
+                "strongholdStatus": {
+                    "title": "Wallet Status",
+                    "locked": "נעול",
                     "unlocked": "Unlocked"
                 },
-                "stronghold_backup": {
-                    "title": "Stronghold Backup",
-                    "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
+                "strongholdBackup": {
+                    "title": "Wallet Backup",
+                    "weeksAgo": "{weeks, plural, one {# week} other {# weeks}} ago"
                 }
             },
             "network": {
-                "network_operational": "Network Operational",
-                "network_degraded": "Network Degraded",
-                "network_down": "Network Down",
-                "status": "Status",
-                "messages_per_second": "Messages per second",
-                "confirmation_rate": "Confirmation rate"
+                "networkOperational": "Network Operational",
+                "networkDegraded": "Network Degraded",
+                "networkDown": "Network Disconnected",
+                "status": "סטטוס",
+                "messagesPerSecond": "Messages per second",
+                "referencedRate": "Referenced rate"
             },
-            "profile_modal": {
-                "all_settings": "All settings",
-                "logout": "Log out"
+            "profileModal": {
+                "allSettings": "כל ההגדרות",
+                "logout": "התנתק"
             }
         }
     },
     "popups": {
         "password": {
-            "title": "Password required",
-            "subtitle": "Please enter your wallet password to unlock Stronghold"
+            "title": "נדרשת סיסמא",
+            "subtitle": "Please enter your password to unlock your wallets",
+            "backup": "Please enter your password to export a backup"
         },
         "qr": {
             "title": "Your QR code"
         },
         "version": {
             "title": "Current version: {version}",
-            "up_to_date_title": "Firefly is up to date",
-            "up_to_date_description": "You are running the latest and safest version of Firefly.",
-            "update_available": "Firefly update available",
-            "update_details": "Version {version} - {date}"
+            "upToDateTitle": "Firefly is up to date",
+            "upToDateDescription": "You are running the latest and safest version of Firefly.",
+            "updateAvailable": "Firefly update available",
+            "updateDetails": "Version {version} - {date}",
+            "noAutoUpdate": "Auto-update is disabled in this Windows version, please go to https://firefly.iota.org to download the update."
         },
         "backup": {
             "title": "Last backup: {date}",
-            "last_backup": "You last backed up {date}",
-            "backup_description": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
-            "backup_warning": "If you lose your backup and recovery phrase you will lose access to your funds.",
-            "not_backed_up": "Not backed up",
-            "not_backed_up_description": "You have not backed up your Stronghold"
+            "lastBackup": "You last backed up {date}",
+            "backupDescription": "It is important to back up regularly to ensure you have a copy of your wallets and transaction history.",
+            "backupWarning": "If you lose your backup and recovery phrase you will lose access to your funds.",
+            "notBackedUp": "Not backed up",
+            "notBackedUpDescription": "You have not backed up your wallets",
+            "saving": "שומר..."
         },
-        "delete_account": {
+        "deleteAccount": {
             "title": "Delete {name}?",
-            "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "type_password": "Type your wallet’s password to confirm.",
-            "delete_account": "Delete account",
-            "error_title": "Unable to delete {name}",
-            "error_body_1": "To delete an account you must have 0 balance.",
-            "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again."
+            "body": "This wallet has no transaction history. It can safely be deleted.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "מחק ארנק",
+            "errorTitle": "Unable to delete {name}",
+            "errorBody1": "You cannot delete this wallet, you must have at least one."
         },
-        "address_history": {
-            "title": "{name} account address history",
-            "current_balance": "Current balance: {balance}"
+        "hideAccount": {
+            "title": "Hide {name}?",
+            "body": "You can find this wallet later by enabling \"Show hidden wallets\" in Advanced Settings.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Hide wallet",
+            "errorTitle": "Unable to hide {name}",
+            "errorBody1": "To hide a wallet it must have 0 balance.",
+            "errorBody2": "You currently have {balance} remaining on this wallet. Please move these funds to a different wallet and try again.",
+            "errorBody3": "You cannot hide this wallet, you must have at least one."
+        },
+        "addressHistory": {
+            "title": "{name} address history",
+            "currentBalance": "Current balance: {balance}"
         },
         "node": {
-            "title_add": "Add a node",
-            "title_details": "Node details",
-            "node_address": "Node address",
-            "optional_username": "Username (optional)",
-            "optional_password": "Password (optional)",
-            "set_as_primary_node": "Set as primary node"
+            "titleAdd": "הוסף צומת",
+            "titleUpdate": "עדכן צומת",
+            "titleRemove": "הסר צומת",
+            "titleDetails": "פרטי הצומת",
+            "nodeAddress": "כתובת הצומת",
+            "optionalUsername": "שם משתמש (אופציונלי)",
+            "optionalPassword": "סיסמא (אופציונלי)",
+            "setAsPrimaryNode": "Set as primary node",
+            "removeConfirmation": "Are you sure you want to remove this node?"
+        },
+        "errorLog": {
+            "title": "יומן שגיאות",
+            "empty": "יומן השגיאות ריק"
+        },
+        "deleteProfile": {
+            "title": "מחק פרופיל",
+            "confirmation": "האם אתה בטוח למחוק פרופיל זה? לא ניתן לבטל פעולה זו.",
+            "typePassword": "הקלד את הסיסמא שלך לאישור"
+        },
+        "diagnostics": {
+            "title": "Diagnostics",
+            "node": "Node",
+            "platform": "פלטפורמה",
+            "platformVersion": "גרסת פלטפורמה",
+            "platformArchitecture": "Platform Architecture",
+            "cpuCount": "CPU Count",
+            "totalMem": "סך כל הזיכרון",
+            "freeMem": "זכרון פנוי",
+            "userPath": "User Path"
+        },
+        "transaction": {
+            "title": "אימות העברה",
+            "body": "You’re about to send {amount} to"
+        },
+        "balanceFinder": {
+            "title": "Balance finder",
+            "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
+            "totalWalletBalance": "יתרה כוללת",
+            "typePassword": "Type your password to allow searching."
+        },
+        "riskFunds": {
+            "title": "Warning: funds at risk during migration",
+            "body1": "It is strongly recommended that you secure all your funds before proceeding with migration. Your funds are at risk of theft if you do not secure them.",
+            "body2": "It is recommended that you rerun the process for addresses with a medium risk level or above."
+        },
+        "missingBundle": {
+            "title": "Warning: funds at risk during migration",
+            "body": "You have funds on spent addresses, but the information needed to secure them was not found. This can happen if you made transactions a long time ago. You can proceed but {value} are at risk during migration.",
+            "learnMore": "Learn more about spent addresses",
+            "proceed": "אני מבין את הסיכונים"
+        },
+        "snapshot": {
+            "title": "Ongoing network upgrade",
+            "body": "The Chrysalis network upgrade has begun.",
+            "bodyMigration": "Migration is disabled until it is complete.",
+            "bodyFirefly": "Firefly is disabled until it is complete. Token migration will still be possible afterwards."
         }
     },
+    "charts": {
+        "incomingMi": "Incoming {value}",
+        "outgoingMi": "Outgoing {value}",
+        "portoflio": "Portfolio",
+        "token": "Token",
+        "accountValue": "Wallet Value",
+        "accountActivity": "Wallet Activity",
+        "timeframe1Hour": "שעה",
+        "timeframe1Day": "יום",
+        "timeframe1Week": "שבוע אחד",
+        "timeframe1Month": "חודש אחד"
+    },
     "actions": {
-        "continue": "Continue",
-        "back": "Back",
-        "cancel": "Cancel",
-        "close": "Close",
+        "continue": "המשך",
+        "back": "הקודם",
+        "cancel": "ביטול",
+        "close": "סגור",
         "dismiss": "Dismiss",
-        "save": "Save",
-        "import_seed": "Import an existing seed",
-        "import_wallet": "Import existing wallet",
-        "create_wallet": "Create new wallet",
-        "save_password": "Save password",
-        "use_biometric": "Use biometric security",
-        "setup_pin": "Set up PIN code",
-        "set_pin": "Set PIN code",
-        "confirm_pin": "Confirm PIN code",
-        "enter_your_pin": "Enter your PIN",
-        "save_backup_file": "Save backup file",
-        "ive_written_recovery_phrase": "I’ve written down my recovery phrase",
-        "verify_recovery_phrase": "Verify recovery phrase",
-        "reveal_recovery_phrase": "Reveal recovery phrase",
-        "import_seedvault": "Import SeedVault",
-        "check_again": "No, Check Again",
-        "import_from_file": "Import from a file",
-        "send": "Send",
-        "receive": "Receive",
-        "create": "Create",
-        "begin_transfer": "Begin Transfer",
-        "try_again": "Try again",
-        "visit_discord": "Visit Discord",
-        "drag_drop": "Drag & Drop",
-        "import_extentions": ".stronghold or .kdbx file",
-        "choose_file": "Choose a File",
-        "drop_here": "Drop your file here",
-        "syncAll": "Sync all",
-        "export": "Export",
+        "proceedAnyway": "המשך בכל זאת",
+        "save": "שמור",
+        "importSeed": "Import an existing seed",
+        "restoreWallet": "Migrate or restore a wallet",
+        "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
+        "createWallet": "Create new wallet",
+        "createWalletDescription": "Create a fresh wallet running on Chrysalis",
+        "savePassword": "Save password",
+        "useBiometric": "Use biometric security",
+        "setupPin": "הגדר מספר זיהוי",
+        "setPin": "Set PIN code",
+        "confirmPin": "Confirm PIN code",
+        "enterYourPin": "Enter your PIN",
+        "saveBackupFile": "Save backup file",
+        "iveWrittenRecoveryPhrase": "I’ve written down my recovery phrase",
+        "verifyRecoveryPhrase": "אמת את ביטוי השחזור",
+        "revealRecoveryPhrase": "חשוף את ביטוי השחזור",
+        "importSeedvault": "Import SeedVault",
+        "checkAgain": "בדוק שוב",
+        "importFromFile": "ייבוא מקובץ",
+        "send": "שלח",
+        "receive": "התקבל",
+        "create": "צור",
+        "beginTransfer": "Begin Transfer",
+        "tryAgain": "נסה שנית",
+        "visitDiscord": "Visit Discord",
+        "dragDrop": "Drag & Drop",
+        "importExtentions": ".kdbx or .stronghold file",
+        "chooseFile": "Choose a File",
+        "dropHere": "Drop your file here",
+        "syncAll": "סנכרן הכל",
+        "export": "ייצא",
         "exportNewStronghold": "Export a new Stronghold",
         "enableDeepLinks": "Enable deep links",
         "enableDeveloperMode": "Enable developer mode",
         "enableSystemNotifications": "Enable system notifications",
         "exportState": "Export state",
-        "outsourceProofOfWork": "Outsource proof of work",
-        "unlock": "Unlock",
-        "update_firefly": "Update Firefly",
-        "restart_now": "Restart now",
-        "save_backup": "Save backup",
-        "customize_account": "Customise account",
-        "sync_account": "Sync account",
-        "view_address_history": "View address history",
-        "delete_account": "Delete account",
-        "max": "Max",
-        "add_node": "Add node"
+        "localProofOfWork": "Local proof of work",
+        "unlock": "בטל נעילה",
+        "updateFirefly": "עדכן את הארנק",
+        "restartNow": "הפעל מחדש כעת",
+        "saveBackup": "Save Stronghold backup",
+        "customizeAcount": "Customise wallet",
+        "viewAddressHistory": "View address history",
+        "hideAccount": "Hide wallet",
+        "showAccount": "Unhide wallet",
+        "deleteAccount": "מחק ארנק",
+        "max": "מקסימום",
+        "addNode": "הוסף צומת",
+        "updateNode": "עדכן צומת",
+        "removeNode": "הסר צומת",
+        "hide": "הסתר",
+        "hideOthers": "הסתר אחרים",
+        "showAll": "הצג הכל",
+        "quit": "יציאה",
+        "edit": "ערוך",
+        "undo": "Undo",
+        "redo": "Redo",
+        "cut": "גזור",
+        "copy": "העתק",
+        "paste": "הדבק",
+        "selectAll": "בחר הכל",
+        "addAccount": "הוסף ארנק",
+        "checkForUpdates": "חפש עדכונים",
+        "reportAnIssue": "דווח על תקלה",
+        "clear": "נקה",
+        "hideDetails": "הסתר פרטים",
+        "yes": "כן",
+        "no": "לא",
+        "skip": "דלג",
+        "reset": "אפס",
+        "downloadRecoveryKit": "Save Recovery Kit template",
+        "skipBackup": "Skip file backup",
+        "finishSetup": "סיים את ההתקנה",
+        "readDocumentation": "Read the documentation",
+        "visitFaq": "Visit FAQ",
+        "viewStatus": "View status",
+        "showHiddenAccounts": "Show hidden wallets",
+        "confirm": "אשר",
+        "hideNetworkStatistics": "Hide network statistics",
+        "findBalances": "Find balances",
+        "searchBalances": "Search for balances",
+        "searchAgain": "Search again",
+        "searching": "Searching...",
+        "closeFirefly": "Close Firefly"
     },
     "general": {
         "password": "Password",
-        "confirm_password": "Confirm password",
-        "currentPassword": "Current password",
-        "newPassword": "New password",
-        "confirmNewPassword": "Confirm new password",
-        "your_seed": "Your Seed",
-        "recovery_phrase": "Recovery Phrase",
-        "recent_activity": "Recent Activity",
-        "sent": "Sent",
-        "received": "Received",
-        "send_payment": "Send payment",
-        "move_funds": "Move funds",
-        "send_funds": "Send funds",
-        "send_to_address": "Send to an Address",
-        "scan_qr_or_paste": "Scan a QR code or paste an Address",
-        "move_funds_between_accounts": "Move funds between accounts",
-        "send_tokens_to_address": "Send tokens to an address",
-        "manage_account": "Manage Account",
-        "customize_account": "Customize your account",
-        "account": "Account",
-        "sending_to_address": "Sending to address",
-        "amount": "Amount",
-        "add_address": "Add Address",
+        "confirmPassword": "Confirm password",
+        "currentPassword": "סיסמא נוכחית",
+        "newPassword": "סיסמה חדשה",
+        "confirmNewPassword": "אשר סיסמה חדשה",
+        "yourSeed": "Your Seed",
+        "recoveryPhrase": "Recovery Phrase",
+        "recentActivity": "Recent Activity",
+        "sent": "נשלח",
+        "received": "התקבל",
+        "sendPayment": "שלח תשלום",
+        "moveFunds": "Internal Transfer",
+        "sendFunds": "Send funds",
+        "sendToAddress": "Send to address",
+        "scanQrOrPaste": "Scan a QR code or paste an Address",
+        "moveFundsBetweenAccounts": "Move funds between wallets",
+        "sendTokensToAddress": "Send tokens to an address",
+        "manageAccount": "Manage Wallet",
+        "customizeAcount": "Customize your wallet",
+        "account": "ארנק",
+        "sendingToAddress": "Sending to address",
+        "amount": "כמות",
+        "addAddress": "הוסף כתובת",
         "reference": "Reference",
-        "from": "From",
-        "to": "To",
-        "receive_funds": "Receive funds",
-        "my_address": "My Address",
-        "share_address": "Share an address",
-        "your_address": "Your address",
-        "generate_new_address": "Generate new address",
-        "copy_address": "Copy Address",
-        "have_text_backup": "I have a text backup",
-        "have_file_backup": "I have a file backup",
-        "enter_seed_or_phrase": "Enter a recovery phrase or seed",
-        "upload_seedvault_or_stronghold": "Import a Stronghold or SeedVault file",
+        "from": "מ־",
+        "to": "ל-",
+        "receiveFunds": "Receive Funds",
+        "myAddress": "הכתובת שלי",
+        "shareAddress": "שתף כתובת",
+        "yourAddress": "הכתובות שלך",
+        "generateNewAddress": "צור כתובת חדשה",
+        "copyAddress": "העתק כתובת",
         "import": "Import",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
         "language": "Language",
         "appearance": "Appearance",
-        "light_theme": "Light theme",
-        "dark_theme": "Dark theme",
-        "total_balance": "Total Balance",
-        "account_balance": "Account Balance",
-        "incoming": "Incoming",
+        "lightTheme": "ערכת נושא בהירה",
+        "darkTheme": "ערכת נושא כהה",
+        "balance": "יתרה",
+        "accountBalance": "יתרת ארנק",
+        "incoming": "הכנסות",
         "outgoing": "Outgoing",
-        "accounts": "Accounts",
+        "totalIn": "Total in",
+        "totalOut": "Total out",
+        "accounts": "ארנקים",
+        "myAccounts": "הארנקים שלי",
         "automaticNodeSelection": "Automatic node selection",
         "manualNodeSelection": "Manual node selection",
-        "profiles": "Profiles",
+        "profiles": "פרופילים",
         "developerProfile": "Developer Profile",
+        "developerProfileDescription": "Allows you to connect to testnets",
         "dev": "Dev",
-        "create_account": "Create an account",
-        "account_name": "Account name",
-        "latest_transactions": "Latest Transactions",
-        "transactions": "Transactions",
-        "security": "Security",
-        "account_address": "Account Address",
-        "nodes": "Nodes"
+        "createAccount": "צור ארנק",
+        "accountName": "שם ארנק",
+        "latestTransactions": "תנועות אחרונות",
+        "transactions": "תנועות",
+        "security": "אבטחה",
+        "accountAddress": "כתובת הארנק",
+        "nodes": "צמתים",
+        "wallet": "ארנק",
+        "help": "עזרה",
+        "you": "אתה",
+        "messageId": "Message ID",
+        "inputAddress": "Send Address",
+        "receiveAddress": "Receive Address",
+        "date": "תאריך",
+        "status": "סטטוס",
+        "confirmed": "אושר",
+        "pending": "ממתין",
+        "noAccounts": "אין לך ארנק, אנא צור אחד",
+        "loadingAccounts": "טוען, אנא המתן...",
+        "addProfile": "הוסף פרופיל",
+        "noRecentHistory": "No recent history",
+        "firstSync": "Syncing history, this may take a while...",
+        "transferSyncing": "Syncing wallet",
+        "transferSelectingInputs": "Selecting inputs",
+        "transferRemainderAddress": "Generating remainder deposit address",
+        "transferSigning": "Signing the transaction",
+        "transferPow": "Performing PoW",
+        "transferBroadcasting": "Broadcasting transaction",
+        "transferComplete": "Transfer complete",
+        "creatingAccount": "Creating wallet, please wait...",
+        "updatingAccount": "Updating wallet, please wait...",
+        "accountSyncing": "Wallet is syncing",
+        "accountSyncComplete": "Wallet sync complete",
+        "passwordUpdating": "Updating password...",
+        "passwordSuccess": "Updated password successfully",
+        "passwordFailed": "Updating password failed",
+        "syncingAccounts": "Syncing wallets...",
+        "exportingStronghold": "Exporting Stronghold...",
+        "exportingStrongholdSuccess": "Exported Stronghold successfully",
+        "exportingStrongholdFailed": "Exporting Stronghold failed",
+        "pinCodeUpdating": "Updating PIN code...",
+        "pinCodeSuccess": "Updated PIN code successfully",
+        "pinCodeFailed": "Updating PIN code failed",
+        "passwordStrength": "Password strength",
+        "passwordStrength0": "רע",
+        "passwordStrength1": "דל",
+        "passwordStrength2": "חלש",
+        "passwordStrength3": "ממוצע",
+        "passwordStrength4": "חזק",
+        "creatingProfile": "Creating profile, please wait...",
+        "fundMigration": "Fund migration",
+        "accountRemoved": "This wallet is hidden. Unhide it to perform transfers.",
+        "receivingTo": "Receiving to {account}",
+        "sendingFrom": "Sending from {account}",
+        "receivedTo": "Received to {account}",
+        "sentFrom": "Sent from {account}",
+        "receiving": "Receiving",
+        "sending": "Sending",
+        "legacyNetwork": "Legacy Network",
+        "capsLock": "Caps Lock is on",
+        "version": "Version {version}"
     },
     "dates": {
         "today": "Today",
-        "days_ago": "{time, plural, one {# day} other {# days}} ago",
-        "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
-        "months_ago": "{time, plural, one {# month} other {# months}} ago",
-        "years_ago": "{time, plural, one {# year} other {# years}} ago"
+        "yesterday": "Yesterday",
+        "daysAgo": "{time, plural, one {# day} other {# days}} ago",
+        "weeksAgo": "{time, plural, one {# week} other {# weeks}} ago",
+        "monthsAgo": "{time, plural, one {# month} other {# months}} ago",
+        "yearsAgo": "{time, plural, one {# year} other {# years}} ago"
     },
     "notifications": {
         "valueTx": "Receiving {{value}} to {{account}}",
         "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
+        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
+        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
         "failed": "Outgoing {{value}} from {{account}} has failed",
-        "downloading_update": "Downloading update",
-        "update_ready": "Update ready",
-        "update_error": "An error occurred during the update, please try again",
-        "restart_install": "Restart to install",
-        "calc_minutes_remaining": "Calculating minutes remaining...",
-        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
+        "downloadingUpdate": "Downloading update",
+        "updateReady": "Update ready",
+        "updateError": "An error occurred during the update, please try again",
+        "restartInstall": "Restart to install",
+        "calcMinutesRemaining": "Calculating minutes remaining...",
+        "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}",
+        "copiedToClipboard": "Copied to clipboard",
+        "accountsSynchronized": "Wallet synchronization complete",
+        "migratedAccountChrysalisDown": "Your funds will become available after Chrysalis on 28th April",
+        "migratedAccountChrysalisUp": "Your funds will become available shortly"
+    },
+    "error": {
+        "profile": {
+            "length": "Your profile name can't be longer than {length, plural, one {1 character} other {# characters}}.",
+            "duplicate": "A profile with this name already exists."
+        },
+        "password": {
+            "doNotMatch": "Passwords do not match.",
+            "tooWeak": "Your new password is too weak.",
+            "row": "Straight rows of keys are easy to guess.",
+            "pattern": "Short keyboard patterns are easy to guess.",
+            "names": "Common names and surnames are easy to guess.",
+            "repeats": "Repeats like 'aaa' are easy to guess.",
+            "repeats2": "Repeats like 'abcabcabc' are easy to guess.",
+            "sequence": "Sequences of characters are easy to guess.",
+            "years": "Recent years are easy to guess.",
+            "dates": "Dates are easy to guess.",
+            "common": "This is a very common password.",
+            "similar": "This is similar to a common password.",
+            "word": "A single word is easy to guess.",
+            "incorrect": "Your password is incorrect.",
+            "length": "Your password can't be longer than {length, plural, one {1 character} other {# characters}}."
+        },
+        "pincode": {
+            "length": "Your PIN must be {length, plural, one {1 digit} other {# digits}} long.",
+            "match": "קוד זיהוי לא מתאים.",
+            "incorrect": "קוד הזיהוי הנוכחי שלך אינו תקין."
+        },
+        "account": {
+            "length": "שם הארנק שלך לא יכול להיות ארוך מ {length, plural, one {1 character} other {# characters}}.",
+            "empty": "אתה חייב להשתמש בארנק האחרון שלך לפני יצירת ארנק חדש.",
+            "notEmpty": "עליך להעביר את המאזן שלך לפני מחיקת הארנק.",
+            "duplicate": "קיים ארנק עם השם הזה כבר.",
+            "tilde": "שם הפרופיל לא יכול להתחיל עם תו '~'.",
+            "control": "שם פרופיל לא יכול להכיל תווים אשר מספרם 0 – 31 בטבלת הASCII.",
+            "startDot": "שם פרופיל לא יכול להתחיל ב'.'.",
+            "chars": "שם פרופיל לא יכול להכיל את התווים הבאים <>:\"/\\|?*"
+        },
+        "send": {
+            "addressLength": "כתובות צריכות להיות באורך {length, plural, one {1 character} other {# characters}}.",
+            "amountTooHigh": "זה גדול יותר מהמאזן הזמין שלך.",
+            "amountNoFloat": "אם יחידת המידה הינה `i` לא תוכל להשתמש בנקודה העשרונית.",
+            "amountInvalidFormat": "מספר הסכום אינו תקין.",
+            "amountZero": "הסכום חייב להיות גדול מ0.",
+            "wrongAddressPrefix": "כתובות מתחילות את התחילית {prefix}.",
+            "wrongAddressFormat": "הפורמט שהוזן אינו תקין.",
+            "invalidAddress": "הכתובת אינה תקינה.",
+            "insufficientFunds": "לארנק זה אין מספיק כספים.",
+            "noToAccount": "לא בחרת ארנק נמען להעברת הכספים.",
+            "sendingDust": "לא תוכל לשלוח פחות מ1 Mi.",
+            "leavingDust": "לא תוכל להשאיר פחות מ1Mi בכתובת שלך."
+        },
+        "node": {
+            "invalid": "אנא הזן כתובת אינטרנט חוקית.",
+            "https": "HTTPS is required. Set up a developer profile to use unsecured HTTP connections.",
+            "duplicate": "This node has already been added.",
+            "unsynced": "The node is not in sync.",
+            "noSynced": "No synced nodes are available."
+        },
+        "global": {
+            "generic": "Something went wrong."
+        },
+        "backup": {
+            "invalid": "The backup file was not recognised.",
+            "destination": "The backup destination was not valid.",
+            "mnemonic": "The mnemonic is not valid.",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is 1} other {is #}}",
+            "seedCharacters": "The seed should only contain characters A-Z or 9",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
+            "phraseUnrecognizedWord": "מילה לא מוכרת \"{word}\" בביטוי השחזור",
+            "phraseCaseWord": "המילה \"{word}\" צריכה להיות באותיות קטנות"
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "רמת סיכון: {risk}",
+            "veryHigh": "גבוה מאוד",
+            "high": "גבוה",
+            "medium": "בינוני",
+            "low": "נמוך",
+            "veryLow": "נמוך מאוד"
+        }
     }
 }

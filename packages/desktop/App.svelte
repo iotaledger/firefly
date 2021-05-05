@@ -1,39 +1,35 @@
 <script lang="typescript">
-    import { Popup, Route, ToastContainer, Toggle } from 'shared/components'
-    import { darkMode, loggedIn, mobile } from 'shared/lib/app'
-    import { refreshVersionDetails, versionDetails } from 'shared/lib/appUpdater'
+    import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
+    import { loggedIn, mobile } from 'shared/lib/app'
+    import { appSettings } from 'shared/lib/appSettings'
+    import { getVersionDetails, pollVersion, versionDetails } from 'shared/lib/appUpdater'
+    import { Electron } from 'shared/lib/electron'
+    import { addError } from 'shared/lib/errors'
     import { goto } from 'shared/lib/helpers'
-    import { activeLocale, dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
-    import { fetchMarketData } from 'shared/lib/marketData'
-    import { pollNetworkStatus } from 'shared/lib/networkStatus'
+    import { dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
+    import { pollMarketData } from 'shared/lib/marketData'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { activeProfile } from 'shared/lib/profile'
-    import {
-        dashboardRoute,
-        initRouter,
-        route as appRoute,
-        routerNext,
-        routerPrevious,
-        settingsRoute,
-        walletRoute,
-    } from 'shared/lib/router'
+    import { cleanupEmptyProfiles, cleanupInProgressProfiles } from 'shared/lib/profile'
+    import { dashboardRoute, initRouter, routerNext, routerPrevious, walletRoute } from 'shared/lib/router'
     import { AppRoute, Tabs } from 'shared/lib/typings/routes'
-    import { requestMnemonic } from 'shared/lib/wallet'
     import {
+        Appearance,
         Backup,
         Balance,
         Congratulations,
+        Create,
         Dashboard,
         Import,
-        Language,
+        Ledger,
         Legal,
         Login,
         Migrate,
         Password,
+        Profile,
         Protect,
+        Secure,
+        Settings,
         Setup,
-        Create,
-        Ledger,
         Splash,
         Welcome,
     } from 'shared/routes'
@@ -41,48 +37,53 @@
     import { get } from 'svelte/store'
     import { getLocalisedMenuItems } from './lib/helpers'
 
-    const locale = activeLocale
-
-    $: $darkMode ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')
-    $: if (activeLocale !== locale) {
-        window['Electron'].updateMenu('strings', getLocalisedMenuItems($_))
+    $: $appSettings.darkMode ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')
+    $: {
+        isLocaleLoaded.subscribe((loaded) => {
+            if (loaded) {
+                Electron.updateMenu('strings', getLocalisedMenuItems($_))
+            }
+        })
     }
-    $: window['Electron'].updateMenu('loggedIn', $loggedIn)
+    $: Electron.updateMenu('loggedIn', $loggedIn)
 
     $: if (document.dir !== $dir) {
         document.dir = $dir
     }
 
     let splash = true
-    setupI18n({ withLocale: get(activeProfile) ? get(activeProfile).settings.language : 'en' })
+    let settings = false
+
+    setupI18n({ withLocale: $appSettings.language })
     onMount(async () => {
         setTimeout(() => {
             splash = false
             initRouter()
-        }, 100)
+        }, 3000)
 
-        await fetchMarketData()
-        await pollNetworkStatus()
+        await pollMarketData()
 
         // @ts-ignore: This value is replaced by Webpack DefinePlugin
         if (!devMode) {
-            await refreshVersionDetails()
+            await getVersionDetails()
+            await pollVersion()
         }
-        window['Electron'].onEvent('menu-navigate-wallet', (route) => {
+        Electron.onEvent('menu-navigate-wallet', (route) => {
             if (get(dashboardRoute) !== Tabs.Wallet) {
                 dashboardRoute.set(Tabs.Wallet)
             }
             walletRoute.set(route)
         })
-        window['Electron'].onEvent('menu-navigate-settings', () => {
-            if (get(appRoute) !== AppRoute.Dashboard) {
-                // TODO: Add settings from login
-            } else if (get(dashboardRoute) !== Tabs.Settings) {
-                dashboardRoute.set(Tabs.Settings)
+        Electron.onEvent('menu-navigate-settings', () => {
+            if ($loggedIn) {
+                if (get(dashboardRoute) !== Tabs.Settings) {
+                    dashboardRoute.set(Tabs.Settings)
+                }
+            } else {
+                settings = true
             }
         })
-        window['Electron'].onEvent('menu-check-for-update', async () => {
-            await refreshVersionDetails()
+        Electron.onEvent('menu-check-for-update', async () => {
             openPopup({
                 type: 'version',
                 props: {
@@ -90,6 +91,18 @@
                 },
             })
         })
+        Electron.onEvent('menu-error-log', async () => {
+            openPopup({ type: 'errorLog' })
+        })
+        Electron.onEvent('menu-diagnostics', async () => {
+            openPopup({ type: 'diagnostics' })
+        })
+        Electron.hookErrorLogger((err) => {
+            addError(err)
+        })
+
+        await cleanupInProgressProfiles()
+        await cleanupEmptyProfiles()
     })
 </script>
 
@@ -98,89 +111,170 @@
     @tailwind components;
     @tailwind utilities;
     @import '../shared/style/style.scss';
-    // dummy toggles
-    .dummy-toggles {
-        position: absolute;
-        right: 5px;
-        top: 5px;
-        z-index: 10;
-        font-size: 12px;
-        display: flex;
-        padding: 5px;
-        background: #8080803d;
-        border-radius: 10px;
-    }
     html,
     body {
         @apply bg-white;
-        &.scheme-dark {
-            @apply bg-blue-900;
+        @apply select-none;
+        -webkit-user-drag: none;
+
+        ::-webkit-scrollbar {
+            @apply w-5;
+            @apply h-5;
         }
+
+        ::-webkit-scrollbar-track {
+            @apply bg-transparent;
+        }
+
+        ::-webkit-scrollbar-corner {
+            @apply bg-transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            @apply bg-gray-300;
+            @apply border-solid;
+            @apply rounded-2xl;
+            border-width: 7px;
+            /* This needs to match the background it is displayed on
+               and can be override in local components using the secondary 
+               and tertiary styles */
+            @apply border-white;
+        }
+
+        .scroll-secondary {
+            &::-webkit-scrollbar-thumb {
+                @apply border-white;
+            }
+        }
+
+        .scroll-tertiary {
+            &::-webkit-scrollbar-thumb {
+                @apply border-gray-50;
+            }
+        }
+
+        .scroll-quaternary {
+            &::-webkit-scrollbar-thumb {
+                @apply border-gray-100;
+            }
+        }
+
+        &.scheme-dark {
+            @apply bg-gray-900;
+            :global(::-webkit-scrollbar-thumb) {
+                @apply bg-gray-700;
+                @apply border-gray-900;
+            }
+
+            .scroll-secondary {
+                &::-webkit-scrollbar-thumb {
+                    @apply border-gray-800;
+                }
+            }
+
+            .scroll-tertiary {
+                &::-webkit-scrollbar-thumb {
+                    @apply border-gray-900;
+                }
+            }
+
+            .scroll-quaternary {
+                &::-webkit-scrollbar-thumb {
+                    @apply border-gray-900;
+                }
+            }
+        }
+
+        .multiwrap-line2 {
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            display: -webkit-box;
+        }
+    }
+    @layer utilities {
+        .scrollable-y {
+            @apply overflow-y-auto;
+            @apply -mr-2;
+            @apply pr-2;
+        }
+    }
+    img {
+        -webkit-user-drag: none;
     }
 </style>
 
-<!-- empty div to avoid auto-purge removing dark classes -->
-<div class="scheme-dark" />
-{#if !$isLocaleLoaded || splash}
-<Splash />
-{:else}
-    {#if $popupState.active}
-        <Popup type={$popupState.type} props={$popupState.props} locale={$_} />
+<TitleBar>
+    <!-- empty div to avoid auto-purge removing dark classes -->
+    <div class="scheme-dark" />
+    {#if !$isLocaleLoaded || splash}
+        <Splash />
+    {:else}
+        {#if $popupState.active}
+            <Popup
+                type={$popupState.type}
+                props={$popupState.props}
+                hideClose={$popupState.hideClose}
+                fullScreen={$popupState.fullScreen}
+                transition={$popupState.transition}
+                locale={$_} />
+        {/if}
+        <Route route={AppRoute.Welcome}>
+            <Welcome on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Legal}>
+            <Legal on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Appearance}>
+            <Appearance on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Profile}>
+            <Profile on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Setup}>
+            <Setup on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        </Route>
+        <!-- TODO: fix ledger -->
+        <Route route={AppRoute.Create}>
+            <Create on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        </Route>
+        <Route route={AppRoute.LedgerSetup}>
+            <Ledger on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        </Route>
+        <!--  -->
+        <Route route={AppRoute.Secure}>
+            <Secure on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Password}>
+            <Password on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Protect} transition={false}>
+            <Protect on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Backup} transition={false}>
+            <Backup on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Import} transition={false}>
+            <Import on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Balance}>
+            <Balance on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Migrate}>
+            <Migrate on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} {goto} />
+        </Route>
+        <Route route={AppRoute.Congratulations}>
+            <Congratulations on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
+        </Route>
+        <Route route={AppRoute.Dashboard}>
+            <Dashboard mobile={$mobile} locale={$_} {goto} />
+        </Route>
+        <Route route={AppRoute.Login}>
+            <Login on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} {goto} />
+        </Route>
+        {#if settings}
+            <Settings locale={$_} handleClose={() => (settings = false)} />
+        {/if}
+
+        <ToastContainer />
     {/if}
-    <!-- dummy toggles -->
-    <div class="dummy-toggles flex flex-row">
-        <Toggle storeItem={darkMode} />
-    </div>
-    <!--  -->
-    <Route route={AppRoute.Welcome}>
-        <Welcome on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-    </Route>
-    <Route route={AppRoute.Legal}>
-        <Legal on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-    </Route>
-    <Route route={AppRoute.Language}>
-        <Language on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-    </Route>
-    <Route route={AppRoute.Setup}>
-        <Setup on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-    </Route>
-    <Route route={AppRoute.Create}>
-        <Create on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-    </Route>
-    <Route route={AppRoute.LedgerSetup}>
-        <Ledger on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-    </Route>
-    <Route route={AppRoute.Password}>
-        <Password on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-    </Route>
-    <Route route={AppRoute.Protect} transition={false}>
-        <Protect on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-    </Route>
-    <Route route={AppRoute.Backup} transition={false}>
-        <Backup
-            on:next={routerNext}
-            on:previous={routerPrevious}
-            on:requestMnemonic={requestMnemonic}
-            mobile={$mobile}
-            locale={$_} />
-    </Route>
-    <Route route={AppRoute.Import} transition={false}>
-        <Import on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-    </Route>
-    <Route route={AppRoute.Balance}>
-        <Balance on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-    </Route>
-    <Route route={AppRoute.Migrate}>
-        <Migrate on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
-    </Route>
-    <Route route={AppRoute.Congratulations}>
-        <Congratulations on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
-    </Route>
-    <Route route={AppRoute.Dashboard}>
-        <Dashboard mobile={$mobile} locale={$_} {goto} />
-    </Route>
-    <Route route={AppRoute.Login}>
-        <Login on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} {goto} />
-    </Route>
-    <ToastContainer />
-{/if}
+</TitleBar>

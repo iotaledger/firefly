@@ -13,6 +13,11 @@ export const MARKETDATA_ENDPOINTS = ['https://nodes.iota.works/api/market']
  */
 const DEFAULT_MARKETDATA_ENDPOINT_TIMEOUT = 5000
 
+/**
+ * Default interval for polling the market data
+ */
+const DEFAULT_MARKETDATA_POLL_INTERVAL = 300000 // 5 minutes
+
 export enum HistoryDataProps {
     ONE_HOUR = '1h',
     TWENTY_FOUR_HOURS = '24h',
@@ -21,10 +26,10 @@ export enum HistoryDataProps {
 }
 
 enum Timeframes {
-    ONE_HOUR = '1 hour',
-    TWENTY_FOUR_HOURS = '1 day',
-    SEVEN_DAYS = '1 week',
-    ONE_MONTH = '1 month',
+    ONE_HOUR = '1Hour',
+    TWENTY_FOUR_HOURS = '1Day',
+    SEVEN_DAYS = '1Week',
+    ONE_MONTH = '1Month',
 }
 
 enum Histories {
@@ -143,6 +148,26 @@ export const TIMEFRAME_MAP = {
 }
 
 /**
+ * Poll the market data at an interval.
+ */
+export async function pollMarketData(): Promise<void> {
+    // Load any previously stored data in case the endpoints are not working
+    // these might be a bit out of date but they are better than no values at all
+    try {
+        const marketData = localStorage.getItem("marketData")
+        if (marketData) {
+            processMarketData(JSON.parse(marketData))
+        }
+    } catch {
+        // We don't want any errors from reading or parsing to disrupt
+        // the next process, just ignore any problems here
+    }
+
+    await fetchMarketData()
+    setInterval(async () => fetchMarketData(), DEFAULT_MARKETDATA_POLL_INTERVAL)
+}
+
+/**
  * Fetches market data
  *
  * @method fetchMarketData
@@ -176,43 +201,50 @@ export async function fetchMarketData(): Promise<void> {
 
             const marketData: MarketData = await response.json()
 
-            const { isValid, payload } = new Validator().performValidation({
-                type: 'MarketData',
-                payload: marketData,
-            })
+            processMarketData(marketData)
 
-            if (isValid) {
-                const _priceData = {} as PriceData
-
-                Object.keys(get(priceData)).forEach((currency: CurrencyTypes) => {
-                    if (marketData[`history-${currency}`]) {
-                        _priceData[currency] = marketData[`history-${currency}`].data
-                    }
-                })
-
-                // Store currencies
-                currencies.set(marketData.currencies)
-
-                // Store price data
-                priceData.set(_priceData)
-
-                // Store exchange rates in store
-                exchangeRates.set(marketData.rates)
-
-                // Store market statistics
-                mcap.set(marketData.market.usd_market_cap)
-                volume.set(marketData.market.usd_24h_vol)
-                change24h.set(marketData.market.usd_24h_change)
-
-                addProfileCurrencyPriceData()
-
-            } else {
-                throw new Error(payload.error)
-            }
+            // Successfully retrieved and processed the market data
+            // so store it in case the endpoint is down in the future
+            localStorage.setItem("marketData", JSON.stringify(marketData))
             break
         } catch (err) {
             console.error(err.name === "AbortError" ? new Error(`Could not fetch from ${endpoint}.`) : err)
         }
+    }
+}
+
+function processMarketData(marketData) {
+    const { isValid, payload } = new Validator().performValidation({
+        type: 'MarketData',
+        payload: marketData,
+    })
+
+    if (isValid) {
+        const _priceData = {} as PriceData
+
+        Object.keys(get(priceData)).forEach((currency: CurrencyTypes) => {
+            if (marketData[`history-${currency}`]) {
+                _priceData[currency] = marketData[`history-${currency}`].data
+            }
+        })
+
+        // Store currencies
+        currencies.set(marketData.currencies)
+
+        // Store price data
+        priceData.set(_priceData)
+
+        // Store exchange rates in store
+        exchangeRates.set(marketData.rates)
+
+        // Store market statistics
+        mcap.set(marketData.market.usd_market_cap)
+        volume.set(marketData.market.usd_24h_vol)
+        change24h.set(marketData.market.usd_24h_change)
+
+        addProfileCurrencyPriceData()
+    } else {
+        throw new Error(payload.error)
     }
 }
 
@@ -221,7 +253,7 @@ export async function addProfileCurrencyPriceData(): Promise<void> {
     if (profile) {
         // get selected profile currency and add its estimated history
         const profileCurrency: string = profile.settings.currency.toLowerCase()
-        if (!get(priceData)[profileCurrency.toLowerCase()]) {
+        if (!Object.values(CurrencyTypes.USD).includes(profileCurrency)) {
             const profileCurrencyRate: number = get(exchangeRates)[profileCurrency.toUpperCase()]
             const usdHistory = get(priceData)[CurrencyTypes.USD]
             let profileCurrencyHistory = {};

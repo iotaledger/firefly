@@ -1,150 +1,227 @@
 {
     "views": {
-        "onboarding_1": {
-            "title": "IOTA gönder, iste ve düzenle",
-            "body": "Firefly güvenli ve kullanımı kolay bir IOTA cüzdanıdır."
+        "onboarding1": {
+            "title": "IOTA tokenlerinizi gönderin, alın ve yönetin",
+            "body": "Firefly, IOTA'nın resmi cüzdan yazılımıdır."
         },
         "legal": {
-            "title": "Yasal",
-            "body": "Lütfen Gizlilik Politikası ve Hizmet Şartları'nı inceleyin.",
-            "privacy_policy": {
-                "title": "Gizlilik Politikası",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
-            "terms_of_service": {
-                "title": "Hizmet Şartları",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
-            "checkbox": "I have read and I accept the Privacy policy & ToS"
+            "title": "Gizlilik Politikası ve Kullanım Şartları",
+            "body": "Lütfen Gizlilik Politikası ve Hizmet Şartları'nı inceleyiniz.",
+            "checkbox": "Gizlilik Politikası ve Kullanım Şartları'nı okudum ve kabul ediyorum"
         },
-        "language": {
-            "title": "Dil & Görünüm",
-            "body": "Cüzdan dilini ve temasını seçin"
+        "appearance": {
+            "title": "Görünüm",
+            "body": "Uygulama temanızı seçin."
+        },
+        "profile": {
+            "title": "Profil oluştur",
+            "body1": "Cüzdanlarınızı düzenlemek ve gizliliği artırmak için birden fazla kullanıcı profili oluşturabilirsiniz.",
+            "body2": "Şimdilik ilk profil adınızla başlayalım. Daha sonra daha fazla profil ekleyebilirsiniz.",
+            "profileName": "Profil Adı"
         },
         "setup": {
-            "title": "Cüzdanınızı oluşturun",
-            "body": "Yeni bir cüzdan oluşturabilir veya zaten var olan cüzdanınızı ekleyebilirsiniz.",
-            "profile_name": "Profil ismi"
+            "title": "Bir cüzdan oluşturun",
+            "chrysalisTitle": "Chrysalis Ağ Güncellemesi",
+            "chrysalisBody": "21 Nisan'dan itibaren kullanıcılar tokenlerini yeni Chrysalis ağına taşıyabilir. Mevcut tokenlerinizi mümkün olan en kısa sürede taşımanızı öneririz.",
+            "learnMore": "Taşıma hakkında bilgi edinin"
+        },
+        "secure": {
+            "title": "Cüzdanınızı güvence altına alın",
+            "body1": "Kaydedin ve Kurtarma Kiti PDF taslağını çıktı alın.",
+            "body2": "Kurtarma kitini doldurur ve güvenli bir şekilde saklarsanız, cüzdanlarınızı her zaman kurtarabilirsiniz."
         },
         "password": {
-            "title": "Şifre oluşturun",
-            "body": "Cüzdanınızdaki varlıkları göndermek için parolaya ihtiyacınız vardır. Varlıklarınızın güvenliği için güçlü bir parola oluşturun."
+            "title": "Bir şifre oluştur",
+            "body1": "Bakiyeni koruyabilmek için daha güçlü bir şifreye ihtiyacın var. Kelime kombinasyonlarını kullanın, ve yaygın cümle, isim ve tarihleri kullanmaktan kaçının.",
+            "body2": "Şifrenizi kurtarma kitinin altına yazmanız önerilir."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body_1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body_2": "Keep your PIN safe!"
+            "body1": "Profilinize yalnızca sizin girebileceğinizden emin olmak için bir oturum açma PIN'i ayarlayın.",
+            "body2": "PIN'inizi güvende saklayın!"
         },
         "pin": {
-            "title": "PIN kodunuzu ayarlayın",
-            "body_1": "6 haneli PIN kodunuzu aşağıya girin. Cüzdanınıza girmek için PIN koduna ihtiyacınız vardır.",
-            "body_2": "Sadece sayı kullanabilirsiniz."
+            "title": "PIN kodu oluşturunuz",
+            "body1": "Aşağıya 6 haneli PIN kodunuzu girin. Profilinize girebilmek için PIN sorgulaması yapılacaktır.",
+            "body2": "Sadece sayıları kullanın"
         },
-        "confirm_pin": {
+        "confirmPin": {
             "title": "PIN kodunuzu doğrulayın",
-            "body": "Devam etmek için PIN kodunuzu tekrar girin."
+            "body1": "PIN bakiyenizi ve işlem gizliliğinizi korur.",
+            "body2": "İlerlemek için PIN kodunuzu tekrar girin. "
         },
         "backup": {
             "title": "Cüzdanınızı yedekleyin",
-            "body_1": "Şimdi bir kurtarma ifadesi gösterilecek.",
-            "body_2": "Bu cümleyi kimseyle paylaşmayın. Bu cümle varlıklarınıza herhangi bir yerden ulaşmak için kullanılabilir.",
-            "body_3": "Eğer kurtarma cümlenizi kaybederseniz, varlıklarınızı da kaybedersiniz."
+            "body1": "Kurtarma cümlesi gösterilecektir. Kurtarma kitinize yazın.",
+            "body2": "Kurtarma cümlenizi kimse ile paylaşmayınız. Herhangi bir yerden bakiyenize ulaşmak için kullanılabilir.",
+            "body3": "Eğer kurtarma cümlenizi kaybederseniz, varlıklarınızı kaybedebilirsiniz."
         },
-        "recovery_phrase": {
+        "recoveryPhrase": {
             "title": "Kurtarma cümlesi",
-            "body_1": "Carefully write down the words in the exact order.",
-            "body_2": "Kurtarma şifrenizi güvenli bir şekilde saklayın ve kimseyle paylaşmayın.",
-            "reveal_recovery_phrase": "Kurtarma ifadesini göster",
-            "hide_recovery_phrase": "Kurtarma sözcüğünü gizle"
+            "body1": "Kurtarma kitinde, kelimeleri gösterilen sıra ile yazınız.",
+            "body2": "Bunu gizli ve güvenli bir şekilde saklayın.",
+            "body3": "Yazılı yedekleme önemlidir. Bilgisayarlar genellikle hata verebilir ve dosyalar zarara uğrayabilir.",
+            "revealRecoveryPhrase": "Kurtarma ifadesini göster",
+            "hideRecoveryPhrase": "Kurtarma sözcüğünü gizle"
         },
-        "verify_recovery_phrase": {
-            "title": "Kurtarma şifrenizi doğrulayın",
-            "body": "İfadeyi doğru yazdığınızı kontrol edelim. Doğru sıradaki kelimeleri seçin."
+        "verifyRecoveryPhrase": {
+            "title": "Kurtarma ifadenizi doğrulayın",
+            "body": "Aşağıdaya yazmış olduğunuz cümleyi tekrardan kontrol edin. Lütfen her kelimeyi sıralı bir şekilde seçin.",
+            "word": "Kelime",
+            "verified": "Kurtarma cümlesi onaylandı",
+            "verifiedBody": "Gizli ve güvenli bir şekilde saklamayı unutmayın."
         },
-        "backup_wallet": {
+        "backupWallet": {
             "title": "Bir Stronghold dosyasına yedekleyin",
-            "body": "Cüzdanınızı bir Stronghold dosyasına yedeklemek için şifrenizi girin. Parolanız yedeklemeyi şifrelemek için kullanılır."
+            "body1": "Cüzdanlarınızı bir Stronghold dosyasına yedeklemek için parolanızı girin. Parolanız yedek dosyasını şifrelemek için kullanılır.",
+            "body2": "Dijital yedeklemenin önemli olmasının nedenleri:",
+            "reason1": "Kurtarma ifadenizi yazmadan cüzdanlarınızı kolayca kurtarın",
+            "reason2": "Cüzdanlarınızı diğer cihazlara aktarın",
+            "reason3": "Tüm işlem geçmişinizi kurtarın"
         },
-        "recovery_phrase_saved": {
+        "recoveryPhraseSaved": {
             "title": "Başarı ile yedeklendi",
-            "body": "Cüzdanınızı Stronghold'a yedeklediniz."
+            "body": "Cüzdanlarınızı Stronghold'a yedeklediniz."
         },
         "congratulations": {
-            "title": "Tebrikler",
-            "body": "Cüzdanınız kullanıma hazır."
+            "title": "Cüzdan kurulumu tamamlandı",
+            "body": "Yeni cüzdanınız kullanıma hazır.",
+            "fundsMigrated": "Bakiye taşındı",
+            "success": "Bakiyenizi başarılı bir şekilde yeni ağa aktardınız",
+            "exportMigration": "Taşıma kaydını dışa aktar ve yüklemeyi bitir"
         },
         "import": {
-            "title": "Cüzdanı içe aktar",
-            "body": "Bir kurtarma ifadeniz veya Stronghold yedeklemeniz varsa, buradan içe aktarabilirsiniz."
+            "title": "Bakiyeleri kurtar veya taşı",
+            "body": "Mevcut bir seed'iniz veya cüzdan yedekleme dosyanız varsa, buradan içe aktarabilirsiniz. Eski ağa ait bakiyeniz varsa, Chrysalis ağına taşımak için geçiş adımlarına yönlendirileceksiniz.",
+            "importSeed": "81 karakter seed'im var",
+            "importSeedDescription": "Bir seed girin ve bakiyeyi Chrysalis'e taşıyın",
+            "importMnemonic": "Firefly kurtarma ifadem var",
+            "importMnemonicDescription": "Cüzdanlarınızı kurtarmak için gizli ifadenizi girin",
+            "importFile": "Dosya yedeğim var",
+            "importFileDescription": "Bir Seedvault veya Stronghold dosyası yükleyin"
         },
-        "import_from_text": {
-            "title": "Cüzdanınızı bir kurtarma ifadesi veya kelimesi ile geri yükleyin",
-            "body_1": "Bir kurtarma ifadesi 24 kelime uzunluktadır. Bu, mevcut bir Firefly cüzdanını kurtarmak için kullanılır.",
-            "body_2": "Bir seed 81 karakterden oluşur. Bu eski bir Trinity cüzdanından kurtarmak için kullanılır.",
-            "body_3": "Seed veya kurtarma ifadenizi girin"
+        "importFromText": {
+            "seed": {
+                "title": "Taşımayı başlatmak için seed'inizi girin",
+                "body": "Bir seed 81 karakterden oluşur. Bu, eski Trinity cüzdanından kurtarmak için kullanılır.",
+                "enter": "Seed'inizi girin"
+            },
+            "mnemonic": {
+                "title": "Kurtarma ifadenizi girin",
+                "body": "Kurtarma ifadesi, aralarında boşluklar bulunan tümü küçük harf olmak üzere 24 kelime uzunluğundadır. Bu, mevcut Firefly cüzdanlarını kurtarmak için kullanılır.",
+                "enter": "Gizli kurtarma ifadenizi girin"
+            },
+            "seedDetected": "81 karakter seed tespit edilmiştir",
+            "phraseDetected": "24 kelime kurtarma cümlesi tespit edilmiştir",
+            "checksum": "Sağlama"
         },
-        "import_from_file": {
-            "title": "Cüzdanınızı bir yedekleme dosyasından geri yükleyin",
-            "body": "Cüzdanınızı geri yüklemek için bir yedekleme dosyasını içe aktarın. Yedekleme dosyaları Strongghold (.stronghold) veya Trinity SeedVault (.kdbx) olabilir."
+        "importFromFile": {
+            "title": "Cüzdanlarınızı bir yedekleme dosyasından geri yükleyin",
+            "body": "Cüzdanlarınızı geri yüklemek için bir yedekleme dosyasını içe aktarın. Yedekleme dosyaları Stronghold (.stronghold) veya Trinity SeedVault (.kdbx) olabilir."
         },
-        "import_backup_password": {
-            "title": "Cüzdanınızı SeedVault veya Stronghold ile geri yükleyin",
-            "body_1": "Lütfen yedek şifrenizi girin.",
-            "body_2": "Bu, yedeğinizi ilk oluşturduğunuzda belirlediğiniz paroladır."
+        "importBackupPassword": {
+            "title": "Cüzdanlarınızı SeedVault veya Stronghold ile geri yükleyin",
+            "body1": "Lütfen yedekleme şifrenizi girin.",
+            "body2": "Bu, yedeğinizi ilk oluşturduğunuzda belirlediğiniz şifredir."
         },
-        "import_success": {
+        "importSuccess": {
             "title": "Yedeklemenizi başarıyla geri yüklediniz",
-            "body": "Artık yeni cüzdanınızı kurabilirsiniz."
+            "body": "Artık yeni profilinizi oluşturabilirsiniz.",
+            "seedvaultTitle": "Başarıyla içeri aktarıldı",
+            "seedvaultBody": "Şifreniz doğru, şimdi devam edebilirsiniz.",
+            "strongholdTitle": "Başarıyla içeri aktarıldı",
+            "strongholdBody": "Şifreniz doğru, şimdi devam edebilirsiniz."
         },
         "migrate": {
             "title": "Varlıklarınızı taşıyın",
-            "body_1": "Bu, paranızı yeni cüzdanınıza aktarmak için otomatik bir işlemdir. Güvenliğinizi zayıflatan kullanılmış adresleri kontrol edeceğiz.",
-            "body_2": "Bu biraz zaman alabilir. Taşıma sırasında cihazınızı kapatmayın.",
+            "body1": "Bu bakiyenizi yeni cüzdanınıza otomatik olarak aktarmak için yapılacak bir işlemdir.",
+            "body2": "Bu biraz zaman alabilir. Taşıma sırasında cihazınızı kapatmayın.",
             "existing": "Eski cüzdanınız",
-            "new": "Yeni cüzdanınız"
+            "new": "Yeni cüzdanınız",
+            "learn": "Taşıma hakkında bilgi edinin",
+            "beginMigration": "Taşımaya başlayın",
+            "migrating": "Bakiye taşınıyor...",
+            "migrated": "{balance} taşındı",
+            "migrationFailed": "Taşıma başarısız",
+            "noAddressesForMigration": "Lütfen güvence altına almak istediğiniz adresleri seçin.",
+            "restoringWallet": "Cüzdan geri yükleniyor...",
+            "findingBalance": "Bakiye bulunuyor...",
+            "incorrectSeedVaultPassword": "Hatalı SeedVault şifresi.",
+            "noDataSeedVault": "SeedVault'ta hiçbir veri bulunamadı.",
+            "signingBundle": "Paket imzalanıyor",
+            "broadcastingBundle": "Paket yayınlanıyor",
+            "miningBundle": "Paket işleniyor",
+            "problemRestoringWallet": "Cüzdanınızı geri yüklerken bir ağ hatası oluştu. Lütfen tekrar deneyin.",
+            "minimumMigrationAmountSpentAddresses": "Harcama yapılmış her adres için minimum geçiş miktarı 1 Mi'dir. Bakiyeniz doğru görünmüyorsa tekrar kontrol edin.",
+            "tooManyAddressesToMigrate": "Düşük bakiyeli adres sayınız taşımak için çok fazla. Eğer bakiyeniz doğru görünmüyorsa lütfen tekrar kontrol ediniz.",
+            "cannotMigrateAllYourFunds": "Bazı adreslerin değeri çok düşük olduğu için bütün bakiyenizi taşıyamıyoruz. İşleminize bu şekilde de devam edebilirsiniz. {value} kaybolacaktır.",
+            "error": "Bakiyeniz taşınırken bir hata oluştu. Lütfen tekrar deneyin."
         },
-        "migrate_failed": {
+        "bundleMiningWarning": {
+            "title": "Uyarı",
+            "body1": "Daha önceden harcama yaptığınız bir veya birden fazla adreste bakiyeniz bulunmaktadır.",
+            "body2": "Bu fonların güvence altına alınmasına ve güvenli bir şekilde aktarılmasına yardımcı olmak için otomatik bir süreç çalıştırmanızı öneririz.",
+            "body3": "Eğer uygulamayı kapatırsanız, taşıma sürecine en baştan başlamanız gerekecektir.",
+            "learn": "Harcama yapılmış adresler hakkında daha fazla bilgi edinin"
+        },
+        "secureSpentAddresses": {
+            "title": "Kullanılmış adresleri güvence altına al",
+            "body1": "{number, plural, one {# kullanılmış adres} other {# kullanılmış adres}}te bakiyeniz tespit edilmiştir.",
+            "body2": "Bakiyenizin güvence altına alınmasına ve güvenli bir şekilde aktarılmasına yardımcı olmak için otomatik bir süreç çalıştırmanızı öneririz.",
+            "error": "1 Mi'den az olan kullanılmış adresleri taşıyamazsınız"
+        },
+        "securityCheckCompleted": {
+            "title": "Güvenlik kontrolü tamamlandı",
+            "body1": "Güvenlik risk seviyesini hesapladık. Bu işlemi tekrar çalıştırmak risk seviyenizi düşürebilir.",
+            "body2": "Risk seviyesi/seviyelerinden memnunsanız, devam tuşuna basınız.",
+            "rerun": "Seçilen adresler için süreci yeniden başlat",
+            "continueMigration": "Taşımaya devam et"
+        },
+        "securingSpentAddresses": {
+            "title": "Kullanılmış adreslerin güvenliği sağlanıyor...",
+            "body1": "Bu işlem {minutes, plural, one {1 dakika} other {# dakika}} sürecektir.",
+            "body2": "Bilgisayarınız tam kapasitede çalışacak, bu işlemin tamamlanmasını beklerken başka bir şeyler yapabilirsiniz."
+        },
+        "transferFragmentedFunds": {
+            "body1": "Firefly şimdi paranızı taşımaya başlayacak. Bu biraz zaman alabilir.",
+            "migrate": "Bakiyeyi taşı",
+            "transaction": "İşlem {number}",
+            "rerun": "Tekrar deneyin"
+        },
+        "migrateFailed": {
             "title": "To do",
             "body": "To do"
         },
         "balance": {
             "title": "Bakiyeniz",
-            "body": "Bakiyeniz doğru mu?"
+            "body": "Devam etmeden önce bakiyenizin doğru olduğundan emin olun. Eğer bazı şeyler doğru görünmüyorsa tekrar kontrol edebilirsin.",
+            "error": "Minimum taşıma miktarı 1 Mi'dir. Bakiyeniz doğru görünmüyorsa tekrar kontrol edin.",
+            "zeroBalance": "Tekrar kontrol etmeyi deneyin. Bakiyenizi hala bulamıyorsanız, seed'inizi yanlış girmiş olabilirsiniz."
         },
         "settings": {
             "settings": "Ayarlar",
             "generalSettings": {
                 "title": "Genel ayarlar",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Uygulamanızın görünümünü ve diğer genel ayarları düzenleyin"
             },
             "security": {
                 "title": "Güvenlik",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Parolanızı değiştirin ve güvenlikle ilgili ayarları yapın"
             },
             "advancedSettings": {
                 "title": "Gelişmiş Ayarlar",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Teknik kullanıcılar için araçlar ve manuel ayarlar"
             },
             "helpAndInfo": {
                 "title": "Yardım ve Bilgiler",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Bir sorunun cevabını bulun veya problem ile ilgili yardım alın"
             },
             "profile": {
                 "title": "Profil",
-                "description": ""
+                "description": "Profil isminizi değiştirin veya bir avatar ayarlayın"
             },
             "sync": {
-                "title": "Hesabı Eşitle",
+                "title": "Cüzdanları senkronize et",
                 "description": ""
             },
             "theme": {
@@ -157,172 +234,273 @@
             },
             "currency": {
                 "title": "Para Birimi",
-                "description": ""
+                "description": "Bakiye dönüşümünü ayarlar ve grafik ayarlarını günceller"
             },
             "notifications": {
                 "title": "Bildirimler",
-                "description": ""
+                "description": "İşlem olayları için sistem bildirimleri"
+            },
+            "networkStatus": {
+                "title": "Network status",
+                "description": "Displays the status of the node you are currently connected to."
             },
             "exportStronghold": {
-                "title": "Stronghold Aktar",
-                "description": ""
+                "title": "Yedeği dışa aktar",
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
             },
             "appLock": {
-                "title": "Uygulama Kilidi",
-                "description": ""
+                "title": "Otomatik Kilitleme",
+                "description": "Cüzdanlarınız kilitlenmeden ve çıkış yapılmadan önce hareketsizlik süresi",
+                "durationMinute": "{time, plural,one {1 dakika}other {# dakikalar}}",
+                "durationHour": "{time, plural,one {1 saat}other {#saatler}}"
             },
             "changePassword": {
-                "title": "Şifre Değişir",
-                "description": ""
+                "title": "Şifre Değiştir",
+                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
             },
             "changePincode": {
                 "title": "PIN kodunu değiştir",
-                "description": "",
+                "description": "PIN bakiyenizi ve işlem gizliliğinizi korur",
                 "currentPincode": "Mevcut PIN",
                 "newPincode": "Yeni PIN",
                 "confirmNewPincode": "Yeni PIN'i doğrulayın",
                 "action": "PIN'i değiştir"
             },
-            "resyncAccounts": {
-                "title": "Hesabı Yeniden Eşitle",
-                "description": ""
+            "balanceFinder": {
+                "title": "Bakiye bulucu",
+                "description": "Perform an extended search of your addresses for tokens"
             },
-            "resetWallet": {
-                "title": "Cüzdanı Resetle",
-                "description": ""
+            "hiddenAccounts": {
+                "title": "Gizli cüzdanlar",
+                "description": "Selecting this options will show wallets that were previously hidden"
+            },
+            "deleteProfile": {
+                "title": "Profili sil",
+                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
             },
             "deepLinks": {
                 "title": "Derin Bağlantılar",
-                "description": ""
+                "description": "Firefly’daki işlem bilgisini, iota:// linkine tıkladığında otomatik olarak doldur"
             },
             "developerMode": {
                 "title": "Geliştirici Modu",
-                "description": ""
+                "description": "Testnetlere ve diğer geliştirici özelliklerine bağlan"
             },
             "nodeSettings": {
                 "title": "Ağ Ayarları",
-                "description": ""
+                "description": "Düğüm ayarlarınızı yapmak ve kendi düğümünüze bağlanmak için Manual’i seçiniz"
             },
             "configureNodeList": {
-                "title": "Nodeları yapılandır",
-                "description": ""
+                "title": "Seçilmiş Sayfa",
+                "description": "Manage the list of IOTA network nodes you connect to",
+                "primaryNode": "Birincil düğüm",
+                "excludeNode": "Düğümü hariç tut",
+                "includeNode": "Düğümü dahil et",
+                "viewDetails": "Detayları göster",
+                "setAsPrimary": "Birincil düğüm olarak ayarla",
+                "removeNode": "Düğüm kaldır",
+                "includeOfficialNodeList": "Resmi düğüm listesini dahil et",
+                "noNodes": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "İş Kanıtı",
-                "description": ""
+                "description": "PoW'u cihazınızda lokal olarak tamamlayın veya Node'a yaptırın"
             },
             "errorLog": {
                 "title": "Hata Kaydı",
-                "description": ""
+                "description": "Bir sorunu gidermek için hataları görüntüleyin"
+            },
+            "diagnostics": {
+                "title": "Tanılama",
+                "description": "Sistem ve uygulama bilgilerini görüntüleyin"
             },
             "stateExport": {
                 "title": "State dışa aktar",
-                "description": ""
+                "description": "İşlem geçmişinizi bir .csv dosyasına aktarın"
             },
             "troubleshoot": {
                 "title": "Sorun giderme",
-                "description": ""
+                "description": "Yaygın sorunları çözmek için sorun giderme sihirbazını kullanın"
             },
             "documentation": {
                 "title": "Belgeler",
-                "description": ""
+                "description": "İşlerin nasıl yürüdüğüne dair ayrıntılı açıklamalar için dökümantasyonu görüntüleyin"
             },
             "faq": {
                 "title": "SSS",
-                "description": ""
+                "title2": "Sıkça Sorulan Sorular",
+                "description": "Yaygın bir sorun veya soru ile ilgili yardım almak için SSS'leri görüntüleyin"
             },
             "discord": {
                 "title": "Discord",
-                "description": ""
+                "description": "IOTA Discord topluluğundan yardım alın"
             },
             "about": {
                 "title": "Hakkında",
                 "description": ""
+            },
+            "reportAnIssue": {
+                "title": "Sorun rapor et",
+                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
             }
         },
         "login": {
-            "please_wait": "Lütfen bekleyin {time, plural,one {1 saniye} other {#saniye}}",
-            "incorrect_attempts": "{attempts, plural,one {1 yanlış deneme}other {yanlış deneme}}"
+            "pleaseWait": "Lütfen bekleyin {time, plural,one {1 saniye} other {#saniye}}",
+            "incorrectAttempts": "{attempts, plural,one {1 yanlış deneme}other {yanlış deneme}}"
         },
         "dashboard": {
             "security": {
                 "version": {
                     "title": "Firefly versiyonu {version}",
-                    "up_to_date": "Güncel",
-                    "out_of_date": "Güncelleme gerekli"
+                    "upToDate": "Güncel",
+                    "outOfDate": "Güncelleme gerekli"
                 },
-                "hardware_device": {
+                "hardwareDevice": {
                     "title": "Donanım Aygıtı",
-                    "none_detected": "Hiçbiri bulunamadı"
+                    "noneDetected": "Hiçbiri bulunamadı"
                 },
-                "stronghold_status": {
-                    "title": "Stronghold Durumu",
+                "strongholdStatus": {
+                    "title": "Cüzdan durumu",
                     "locked": "Kilitli",
                     "unlocked": "Kilidi Açık"
                 },
-                "stronghold_backup": {
-                    "title": "Stronghold Yedekleme",
-                    "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
+                "strongholdBackup": {
+                    "title": "Cüzdan yedeği",
+                    "weeksAgo": "{weeks, plural, one {# hafta} other {# hafta}} önce"
                 }
             },
             "network": {
-                "network_operational": "Network Aktif",
-                "network_degraded": "Network Performans Sorunu",
-                "network_down": "Network Aktif Değil",
+                "networkOperational": "Network Aktif",
+                "networkDegraded": "Network Performans Sorunu",
+                "networkDown": "Ağ bağlantısı kesildi",
                 "status": "Durum",
-                "messages_per_second": "Saniye başına mesaj sayısı",
-                "confirmation_rate": "Doğrulama Oranı"
+                "messagesPerSecond": "Saniye başına mesaj sayısı",
+                "referencedRate": "Referenced rate"
             },
-            "profile_modal": {
-                "all_settings": "Tüm ayarlar",
+            "profileModal": {
+                "allSettings": "Tüm ayarlar",
                 "logout": "Çıkış yap"
             }
         }
     },
     "popups": {
         "password": {
-            "title": "Lütfen Parolanızı Yazın",
-            "subtitle": "Stronghold'u açmak için lütfen cüzdan şifrenizi giriniz"
+            "title": "Parola gerekli",
+            "subtitle": "Cüzdanlarınızın kilidini açmak için lütfen şifrenizi girin",
+            "backup": "Bir yedeği dışa aktarmak için lütfen şifrenizi girin"
         },
         "qr": {
             "title": "QR Kodunuz"
         },
         "version": {
             "title": "Mevcut sürüm: {version}",
-            "up_to_date_title": "Firefly güncel",
-            "up_to_date_description": "En son ve güvenli Firefly sürümünü kullanıyorsunuz.",
-            "update_available": "Firefly güncellemesi mevcut",
-            "update_details": "Sürüm {version} - {date}"
+            "upToDateTitle": "Firefly güncel",
+            "upToDateDescription": "En son ve güvenli Firefly sürümünü kullanıyorsunuz.",
+            "updateAvailable": "Firefly güncellemesi mevcut",
+            "updateDetails": "Sürüm {version} - {date}",
+            "noAutoUpdate": "Uygulamanın bu Windows sürümünde otomatik güncelleme devre dışıdır, lütfen güncellemeyi indirmek için https://firefly.iota.org adresine gidin."
         },
         "backup": {
             "title": "Son Yedekleme: {date}",
-            "last_backup": "Aldığınız son yedek {date}",
-            "backup_description": "Hesap ve işlem geçmişinizin bir kopyasını alabilmeniz için düzenli olarak yedek almanız önemlidir.",
-            "backup_warning": "Eğer yedeğinizi ve kurtarma şifrenizi kaybederseniz, hesabınıza erişimi kaybedeceksiniz.",
-            "not_backed_up": "Yedeklenmedi",
-            "not_backed_up_description": "Stronghold'unuzu yedeklemediniz"
+            "lastBackup": "Aldığınız son yedek {date}",
+            "backupDescription": "Cüzdanlarınızın ve işlem geçmişinizin bir kopyasına sahip olduğunuzdan emin olmak için düzenli olarak yedekleme yapmanız önemlidir.",
+            "backupWarning": "Eğer yedeğinizi ve kurtarma şifrenizi kaybederseniz, hesabınıza erişimi kaybedeceksiniz.",
+            "notBackedUp": "Yedeklenmedi",
+            "notBackedUpDescription": "Cüzdanlarınızı yedeklemediniz",
+            "saving": "Kaydediliyor..."
         },
-        "delete_account": {
+        "deleteAccount": {
             "title": "Sil {name}?",
-            "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "type_password": "Doğrulama için lütfen cüzdan şifrenizi giriniz.",
-            "delete_account": "Hesabı sil",
-            "error_title": "Silinemedi: {name}",
-            "error_body_1": "Bir hesabı silebilmek için hesap balansınız sıfır olmalıdır.",
-            "error_body_2": "Hesabınızda {balance} tutarında bakiye bulunmaktadır. Lütfen bakiyeyi başka bir hesaba taşıyıp, tekrar deneyiniz."
+            "body": "Bu cüzdanın işlem geçmişi bulunmamaktadır. Güvenle silinebilir.",
+            "typePassword": "Doğrulama için lütfen cüzdan parolanızı giriniz.",
+            "hideAccount": "Cüzdanı sil",
+            "errorTitle": "Silinemedi: {name}",
+            "errorBody1": "Bu cüzdanı silemezsiniz, en az bir cüzdana sahip olmanız gerekmektedir."
         },
-        "address_history": {
-            "title": "{name} hesap adres geçmişi",
-            "current_balance": "Mevcut bakiye: {balance}"
+        "hideAccount": {
+            "title": "Gizle {name}?",
+            "body": "Bu cüzdanı daha sonra Gelişmiş Ayarlar'da \"Gizli cüzdanları göster\" seçeneğini etkinleştirerek bulabilirsiniz.",
+            "typePassword": "Doğrulama için lütfen cüzdan parolanızı giriniz.",
+            "hideAccount": "Cüzdanı gizle",
+            "errorTitle": "Gizlenemedi: {name}",
+            "errorBody1": "Bir cüzdanı gizlemek için bakiyesi olmamalıdır.",
+            "errorBody2": "Cüzdanınızda {balance} tutarında bakiye bulunmaktadır. Lütfen bakiyeyi başka bir cüzdana taşıyıp tekrar deneyiniz.",
+            "errorBody3": "Bu cüzdanı gizleyemezsiniz, en az bir cüzdanınız bulunmalıdır."
+        },
+        "addressHistory": {
+            "title": "{name} Adres geçmişi",
+            "currentBalance": "Mevcut bakiye: {balance}"
         },
         "node": {
-            "title_add": "Bir node ekle",
-            "title_details": "Node detayları",
-            "node_address": "Node adresi",
-            "optional_username": "Kullanıcı adı (opsiyonel)",
-            "optional_password": "Şifre (opsiyonel)",
-            "set_as_primary_node": "Birincil düğüm olarak ayarla"
+            "titleAdd": "Bir node ekle",
+            "titleUpdate": "Bir düğümü güncelleyin",
+            "titleRemove": "Düğüm kaldır",
+            "titleDetails": "Node detayları",
+            "nodeAddress": "Node adresi",
+            "optionalUsername": "Kullanıcı adı (opsiyonel)",
+            "optionalPassword": "Şifre (opsiyonel)",
+            "setAsPrimaryNode": "Birincil düğüm olarak ayarla",
+            "removeConfirmation": "Bu klasörü kaldırmak istediğinize emin misiniz?"
+        },
+        "errorLog": {
+            "title": "Hata Geçmişi",
+            "empty": "Hata geçmişi boş."
+        },
+        "deleteProfile": {
+            "title": "Profili sil",
+            "confirmation": "Bu dosyayı silmek istiyor musunuz? Bu işlem geri alınamaz.",
+            "typePassword": "Onaylamak için parolanızı girin."
+        },
+        "diagnostics": {
+            "title": "Tanılama",
+            "node": "Ağ",
+            "platform": "Platform",
+            "platformVersion": "Platform Sürümü",
+            "platformArchitecture": "Platform Mimarisi",
+            "cpuCount": "CPU Sayısı",
+            "totalMem": "Toplam Hafıza",
+            "freeMem": "Boş Hafıza",
+            "userPath": "Kullanıcı yolu"
+        },
+        "transaction": {
+            "title": "İşlemi onayla",
+            "body": "Bu kadar miktar göndermek üzeresiniz {amount}"
+        },
+        "balanceFinder": {
+            "title": "Bakiye bulucu",
+            "body": "Eksik bakiyeleri bulmak için daha kapsamlı bir adres araması yapın. Bu işlem biraz zaman alabilir.",
+            "totalWalletBalance": "Toplam bakiye",
+            "typePassword": "Aramaya izin vermek için şifrenizi girin."
+        },
+        "riskFunds": {
+            "title": "Uyarı: taşıma sırasında bakiye risk altında",
+            "body1": "Taşıma işlemine devam etmeden önce tüm paranızı güvence altına almanız şiddetle tavsiye edilir. Paranızı güvence altına almazsanız, paranız hırsızlık riski altındadır.",
+            "body2": "Orta veya daha yüksek risk düzeyine sahip adresler için işlemi yeniden başlatmanız önerilir."
+        },
+        "missingBundle": {
+            "title": "Uyarı: taşıma sırasında bakiye risk altında",
+            "body": "Kullanılmış adreslerde bakiyeniz bulunmakta fakat güvence altına almak için gereken bilgi bulunmamaktadır. Bu durum uzun zaman önce işlem yaptıysanız olabilmektedir. Devam edebilirsiniz ancak taşıma sırasında {value} risk altında olacaktır.",
+            "learnMore": "Kullanılmış adresler hakkında daha fazla bilgi edinin",
+            "proceed": "Riski göze alıyorum"
+        },
+        "snapshot": {
+            "title": "Ağ güncellemesi devam etmekte",
+            "body": "Chrysalis ağ güncellemesi başladı.",
+            "bodyMigration": "İşlem tamamlanana kadar taşıma devre dışı bırakıldı.",
+            "bodyFirefly": "İşlem tamamlanana kadar Firefly devre dışı bırakıldı. Token taşıma daha sonra hala mümkün olacak."
         }
+    },
+    "charts": {
+        "incomingMi": "Gelen {value}",
+        "outgoingMi": "Giden {value}",
+        "portoflio": "Portföy",
+        "token": "Token",
+        "accountValue": "Cüzdan Değeri",
+        "accountActivity": "Cüzdan Aktivitesi",
+        "timeframe1Hour": "1 saat",
+        "timeframe1Day": "1 gün",
+        "timeframe1Week": "1 hafta",
+        "timeframe1Month": "1 ay"
     },
     "actions": {
         "continue": "Devam Et",
@@ -330,130 +508,313 @@
         "cancel": "İptal",
         "close": "Çıkış",
         "dismiss": "Vazgeç",
+        "proceedAnyway": "Yine de devam et",
         "save": "Kaydet",
-        "import_seed": "Mevcut bir Seed'i içe aktarın",
-        "import_wallet": "Mevcut cüzdanı içe aktar",
-        "create_wallet": "Yeni cüzdan oluştur",
-        "save_password": "Parolayı kaydet",
-        "use_biometric": "Biyometrik güvenlik kullanın",
-        "setup_pin": "PIN kodunuzu ayarlayın",
-        "set_pin": "PIN kodunu ayarla",
-        "confirm_pin": "PIN kodunu onaylayın",
-        "enter_your_pin": "Pin'inizi girin",
-        "save_backup_file": "Yedek dosyasını kaydet",
-        "ive_written_recovery_phrase": "Kurtarma sözcüklerini not aldım",
-        "verify_recovery_phrase": "Kurtarma şifrenizi doğrulayın",
-        "reveal_recovery_phrase": "Kurtarma ifadesini göster",
-        "import_seedvault": "SeedVault'u içe aktar",
-        "check_again": "Tekrar kontrol ediniz",
-        "import_from_file": "Dosyadan İçe Aktar",
+        "importSeed": "Mevcut bir Seed'i içe aktarın",
+        "restoreWallet": "Bir cüzdanı taşı veya geri yükle",
+        "restoreWalletDescription": "Chrysalis'e geçiş yapın veya mevcut bir cüzdanı geri yükleyin",
+        "createWallet": "Yeni cüzdan oluştur",
+        "createWalletDescription": "Chrysalis'te çalışan yeni bir cüzdan oluşturun",
+        "savePassword": "Parolayı kaydet",
+        "useBiometric": "Biyometrik güvenlik kullanın",
+        "setupPin": "PIN kodunuzu ayarlayın",
+        "setPin": "PIN kodunu ayarla",
+        "confirmPin": "PIN kodunu onaylayın",
+        "enterYourPin": "Pin'inizi girin",
+        "saveBackupFile": "Yedek dosyasını kaydet",
+        "iveWrittenRecoveryPhrase": "Kurtarma sözcüklerini not aldım",
+        "verifyRecoveryPhrase": "Kurtarma şifrenizi doğrulayın",
+        "revealRecoveryPhrase": "Kurtarma ifadesini göster",
+        "importSeedvault": "SeedVault'u içe aktar",
+        "checkAgain": "Tekrar Kontrol Et",
+        "importFromFile": "Dosyadan İçe Aktar",
         "send": "Gönder",
         "receive": "Al",
         "create": "Oluştur",
-        "begin_transfer": "Transfere başla",
-        "try_again": "Tekrar deneyin",
-        "visit_discord": "Discord'a uğra",
-        "drag_drop": "Sürükle & Bırak",
-        "import_extentions": ".stronghold veya .kdbx dosyası",
-        "choose_file": "Bir dosya seçin",
-        "drop_here": "Dosyanızı buraya bırakın",
+        "beginTransfer": "Transfere başla",
+        "tryAgain": "Tekrar deneyin",
+        "visitDiscord": "Discord'a uğra",
+        "dragDrop": "Sürükle & Bırak",
+        "importExtentions": ".kdbx or .stronghold dosyası",
+        "chooseFile": "Bir dosya seçin",
+        "dropHere": "Dosyanızı buraya bırakın",
         "syncAll": "Tümünü eşitle",
         "export": "Dışarı Aktar",
         "exportNewStronghold": "Yeni bir Stronghold dışa aktarın",
         "enableDeepLinks": "Derin bağlantıları etkinleştir",
         "enableDeveloperMode": "Geliştirici modunu etkinleştir",
-        "enableSystemNotifications": "Enable system notifications",
+        "enableSystemNotifications": "Bildirimleri etkinleştir",
         "exportState": "State dışa aktarın",
-        "outsourceProofOfWork": "Dış kaynak iş gücü kanıtı",
+        "localProofOfWork": "Lokal iş kanıtı",
         "unlock": "Kilidi Aç",
-        "update_firefly": "Firefly'ı güncelle",
-        "restart_now": "Restart now",
-        "save_backup": "Yedeği kaydet",
-        "customize_account": "Hesabı özelleştir",
-        "sync_account": "Hesabı senkronize et",
-        "view_address_history": "View address history",
-        "delete_account": "Hesabı sil",
-        "max": "Max",
-        "add_node": "Add node"
+        "updateFirefly": "Firefly'ı güncelle",
+        "restartNow": "Şimdi yeniden başlat",
+        "saveBackup": "Stronghold yedeklemeyi kaydet",
+        "customizeAcount": "Cüzdanı özelleştir",
+        "viewAddressHistory": "Adres geçmişini göster",
+        "hideAccount": "Cüzdanı gizle",
+        "showAccount": "Cüzdanı göster",
+        "deleteAccount": "Cüzdanı sil",
+        "max": "En yüksek",
+        "addNode": "Düğüm ekle",
+        "updateNode": "Düğümü güncelle",
+        "removeNode": "Düğüm kaldır",
+        "hide": "Sakla",
+        "hideOthers": "Diğerlerini sakla",
+        "showAll": "Hepsini göster",
+        "quit": "Çıkış",
+        "edit": "Düzenle",
+        "undo": "Geri al",
+        "redo": "Tekrarla",
+        "cut": "Kes",
+        "copy": "Kopyala",
+        "paste": "Yapıştır",
+        "selectAll": "Hepsini seç",
+        "addAccount": "Cüzdan Ekle",
+        "checkForUpdates": "Güncellemeleri Denetle",
+        "reportAnIssue": "Sorun bildir",
+        "clear": "Temizle",
+        "hideDetails": "Detayları Gizle",
+        "yes": "Evet",
+        "no": "Hayır",
+        "skip": "Atla",
+        "reset": "Sıfırla",
+        "downloadRecoveryKit": "Kurtarma kit taslağını kaydet",
+        "skipBackup": "Kurtarma dosyasını geç",
+        "finishSetup": "Kurulumu Bitir",
+        "readDocumentation": "Dokümantasyonu oku",
+        "visitFaq": "FAQ ziyaret et",
+        "viewStatus": "Durumu görüntüle",
+        "showHiddenAccounts": "Gizli cüzdanları göster",
+        "confirm": "Onayla",
+        "hideNetworkStatistics": "Hide network statistics",
+        "findBalances": "Bakiyeleri bul",
+        "searchBalances": "Bakiyeleri ara",
+        "searchAgain": "Tekrar ara",
+        "searching": "Aranıyor...",
+        "closeFirefly": "Firefly'ı Kapat"
     },
     "general": {
         "password": "Parola",
-        "confirm_password": "Parolayı doğrula",
+        "confirmPassword": "Parolayı doğrula",
         "currentPassword": "Geçerli parola",
         "newPassword": "Yeni parola",
         "confirmNewPassword": "Yeni parolayı doğrula",
-        "your_seed": "Seed'iniz",
-        "recovery_phrase": "Kurtarma cümlesi",
-        "recent_activity": "Son Hareketler",
+        "yourSeed": "Seed'iniz",
+        "recoveryPhrase": "Kurtarma cümlesi",
+        "recentActivity": "Son Hareketler",
         "sent": "Gönderildi",
         "received": "Alındı",
-        "send_payment": "Send payment",
-        "move_funds": "Move funds",
-        "send_funds": "Para gönderin",
-        "send_to_address": "Adrese Gönder",
-        "scan_qr_or_paste": "Bir QR kodunu tarayın veya bir Adres yapıştırın",
-        "move_funds_between_accounts": "Hesaplarınız arasında para aktarın",
-        "send_tokens_to_address": "Send tokens to an address",
-        "manage_account": "Hesap Yönetimi",
-        "customize_account": "Hesabınızı özelleştirin",
-        "account": "Hesap",
-        "sending_to_address": "Adrese gönderiliyor",
+        "sendPayment": "Ödemeyi Gönder",
+        "moveFunds": "Dahili Aktarım",
+        "sendFunds": "Para gönderin",
+        "sendToAddress": "Adresini Gönder",
+        "scanQrOrPaste": "Bir QR kodunu tarayın veya bir Adres yapıştırın",
+        "moveFundsBetweenAccounts": "Cüzdanlarınız arasında bakiye aktarın",
+        "sendTokensToAddress": "Bir adrese Iota gönder",
+        "manageAccount": "Cüzdanı Yönet",
+        "customizeAcount": "Cüzdanınızı özelleştirin",
+        "account": "Cüzdan",
+        "sendingToAddress": "Adrese gönderiliyor",
         "amount": "Tutar",
-        "add_address": "Adres Ekle",
+        "addAddress": "Adres Ekle",
         "reference": "Referans",
         "from": "Gönderen",
         "to": "Kime",
-        "receive_funds": "Gelen varlıklar",
-        "my_address": "My Address",
-        "share_address": "Bir adres paylaşın",
-        "your_address": "Adresiniz",
-        "generate_new_address": "Yeni adres oluştur",
-        "copy_address": "Adresi Kopyala",
-        "have_text_backup": "Metin yedeğim var",
-        "have_file_backup": "Dosya yedeğim var",
-        "enter_seed_or_phrase": "Bir kurtarma ifadesi veya seed'i girin",
-        "upload_seedvault_or_stronghold": "Bir Stronghold veya SeedVault dosyasını içe aktarın",
+        "receiveFunds": "Gelen varlıklar",
+        "myAddress": "Adresim",
+        "shareAddress": "Bir adres paylaşın",
+        "yourAddress": "Adresiniz",
+        "generateNewAddress": "Yeni adres oluştur",
+        "copyAddress": "Adresi Kopyala",
         "import": "İçe aktar",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
         "language": "Dil",
         "appearance": "Görünüm",
-        "light_theme": "Aydınlık tema",
-        "dark_theme": "Karanlık tema",
-        "total_balance": "Toplam Bakiye",
-        "account_balance": "Hesap Bakiyesi",
+        "lightTheme": "Aydınlık tema",
+        "darkTheme": "Karanlık tema",
+        "balance": "Bakiye",
+        "accountBalance": "Cüzdan Bakiyesi",
         "incoming": "Gelen",
         "outgoing": "Giden",
-        "accounts": "Hesaplar",
+        "totalIn": "Toplam giriş",
+        "totalOut": "Toplam çıkış",
+        "accounts": "Cüzdanlar",
+        "myAccounts": "Cüzdanlarım",
         "automaticNodeSelection": "Otomatik düğüm seçimi",
         "manualNodeSelection": "Manuel seçim",
         "profiles": "Profiller",
         "developerProfile": "Geliştirici hesabı",
+        "developerProfileDescription": "Test ağlarına bağlanmanıza izin verir",
         "dev": "Geliştirici",
-        "create_account": "Bir hesap oluşturun",
-        "account_name": "Hesap adı",
-        "latest_transactions": "Son transferler",
+        "createAccount": "Cüzdan Oluştur",
+        "accountName": "Cüzdan adı",
+        "latestTransactions": "Son transferler",
         "transactions": "Transferler",
         "security": "Güvenlik",
-        "account_address": "Hesap adresi",
-        "nodes": "Düğümler"
+        "accountAddress": "Cüzdan Adresi",
+        "nodes": "Düğümler",
+        "wallet": "Cüzdan",
+        "help": "Yardım",
+        "you": "Sen",
+        "messageId": "Mesaj Kimliği",
+        "inputAddress": "Gönderim Adresi",
+        "receiveAddress": "Alım Adresi",
+        "date": "Tarih",
+        "status": "Durum",
+        "confirmed": "Onaylandı",
+        "pending": "Bekleniyor",
+        "noAccounts": "Cüzdanınız yok, lütfen bir tane oluşturun.",
+        "loadingAccounts": "Yükleniyor, lütfen bekleyin...",
+        "addProfile": "Profil Ekle",
+        "noRecentHistory": "Geçmiş bulunamadı",
+        "firstSync": "Geçmiş senkronize ediliyor, bu biraz zaman alabilir...",
+        "transferSyncing": "Cüzdan senkronize ediliyor",
+        "transferSelectingInputs": "Girişlerin seçimi",
+        "transferRemainderAddress": "Kalan mevduat adresi oluşturuluyor",
+        "transferSigning": "İşlemin imzalanması",
+        "transferPow": "PoW yapılıyor",
+        "transferBroadcasting": "İşlem yayınlanıyor",
+        "transferComplete": "Transfer tamamlandı",
+        "creatingAccount": "Cüzdan oluşturuluyor, lütfen bekleyin...",
+        "updatingAccount": "Cüzdan güncelleniyor, lütfen bekleyin...",
+        "accountSyncing": "Cüzdan senkronize ediliyor",
+        "accountSyncComplete": "Cüzdan senkronizasyonu tamamlandı",
+        "passwordUpdating": "Şifre güncelleniyor...",
+        "passwordSuccess": "Şifre başarıyla güncellendi",
+        "passwordFailed": "Şifre güncellemesi yapılamadı",
+        "syncingAccounts": "Cüzdanlar senkronize ediliyor...",
+        "exportingStronghold": "Stronghold Aktarılıyor...",
+        "exportingStrongholdSuccess": "Stronghold başarıyla dışa aktarıldı",
+        "exportingStrongholdFailed": "Stronghold dışa aktarımı başarısız oldu",
+        "pinCodeUpdating": "Pın kodu güncelleniyor...",
+        "pinCodeSuccess": "Şifre başarıyla güncellendi",
+        "pinCodeFailed": "Şifre güncellemesi yapılamadı",
+        "passwordStrength": "Parola gücü",
+        "passwordStrength0": "Kötü",
+        "passwordStrength1": "Kötü",
+        "passwordStrength2": "Zayıf",
+        "passwordStrength3": "Ortalama",
+        "passwordStrength4": "Güçlü",
+        "creatingProfile": "Yeni bir hesap oluşturuluyor, lütfen bekleyin...",
+        "fundMigration": "Bakiye taşıma",
+        "accountRemoved": "Bu cüzdan gizlidir. Havale işlemlerini gerçekleştirmek için görünür hale getirin.",
+        "receivingTo": "{account}'e alınıyor",
+        "sendingFrom": "{account}'dan gönderiliyor",
+        "receivedTo": "{account}'a alındı",
+        "sentFrom": "{account}'dan gönderildi",
+        "receiving": "Alınıyor",
+        "sending": "Gönderiliyor",
+        "legacyNetwork": "Eski Ağ",
+        "capsLock": "Caps Lock is on",
+        "version": "Version {version}"
     },
     "dates": {
         "today": "Bugün",
-        "days_ago": "{time, plural, one {# day} other {# days}} ago",
-        "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
-        "months_ago": "{time, plural, one {# month} other {# months}} ago",
-        "years_ago": "{time, plural, one {# year} other {# years}} ago"
+        "yesterday": "Dün",
+        "daysAgo": "{time, plural, one {# gün} other {# gün}} önce",
+        "weeksAgo": "{time, plural, one {# hafta} other {# haftalar}} önce",
+        "monthsAgo": "{time, plural, one {# ay} other {# ay}} önce",
+        "yearsAgo": "{time, plural, one {# yıl} other {# yıl}} önce"
     },
     "notifications": {
-        "valueTx": "Receiving {{value}} to {{account}}",
-        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
-        "failed": "Outgoing {{value}} from {{account}} has failed",
-        "downloading_update": "Downloading update",
-        "update_ready": "Update ready",
-        "update_error": "An error occurred during the update, please try again",
-        "restart_install": "Restart to install",
-        "calc_minutes_remaining": "Calculating minutes remaining...",
-        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
+        "valueTx": "{{account}} 'a {{value}} alınıyor",
+        "confirmed": "{{account}} hesabından giden {{value}} onaylandı",
+        "confirmedInternal": "{{senderAccount}} 'dan {{receiverAccount}} 'a {{value}} onaylandı",
+        "confirmedInternalNoAccounts": "{{value}} iç transfer onaylandı",
+        "failed": "{{account}} hesabından giden {{value}} onaylandı",
+        "downloadingUpdate": "Güncelleme indiriliyor",
+        "updateReady": "Güncelleme hazır",
+        "updateError": "Davetiye gönderilirken bir hata oluştu, lütfen tekrar deneyin",
+        "restartInstall": "Yüklemenizi yeniden başlatın",
+        "calcMinutesRemaining": "Kalan dakikalar hesaplanıyor...",
+        "minutesRemaining": "{minutes, plural, one {1 dakika kaldı} other {# dakika kaldı}}",
+        "copiedToClipboard": "Panoya kopyalandı",
+        "accountsSynchronized": "Cüzdan senkronizasyonu tamamlandı",
+        "migratedAccountChrysalisDown": "Bakiyeniz 28 Nisan'da Chrysalis'ten sonra kullanılabilir olacaktır",
+        "migratedAccountChrysalisUp": "Bakiyeniz kısa süre içinde kullanılabilir hale gelecektir"
+    },
+    "error": {
+        "profile": {
+            "length": "Profil adınız {length, plural, one {1 karakter} other {# karakter}} den uzun olamaz.",
+            "duplicate": "Bu isimde bir profil zaten var."
+        },
+        "password": {
+            "doNotMatch": "Parolalar eşleşmiyor.",
+            "tooWeak": "Yeni şifreniz çok zayıf.",
+            "row": "Düz tuş satırlarının tahmin edilmesi kolaydır.",
+            "pattern": "Kısa klavye kalıplarının tahmin edilmesi kolaydır.",
+            "names": "Yaygın adların ve soyadların tahmin edilmesi kolaydır.",
+            "repeats": "Aaa gibi tekrarların tahmin edilmesi kolaydır.",
+            "repeats2": "'abcabcabc' gibi tekrarların tahmin edilmesi kolaydır.",
+            "sequence": "Karakter dizilerinin tahmin edilmesi kolaydır.",
+            "years": "Yakın tarihleri tahmin etmek daha kolaydır.",
+            "dates": "Tarihlerin tahmin edilmesi kolaydır.",
+            "common": "Bu çok yaygın bir parola.",
+            "similar": "Bu, yaygın olarak kullanılan bir parolaya benziyor.",
+            "word": "Tek bir kelimenin tahmin edilmesi kolaydır.",
+            "incorrect": "Şifreniz doğru değil.",
+            "length": "Şifreniz {length, plural, one {1 karakter} other {# karakter}}den daha uzun olamaz."
+        },
+        "pincode": {
+            "length": "PINiniz {length, plural, one {1 digit} other {# digits}} uzunluğunda olmalıdır.",
+            "match": "PIN'ler eşleşmiyor.",
+            "incorrect": "Mevcut şifreniz yanlış."
+        },
+        "account": {
+            "length": "Cüzdanınızın adı {length, plural, one {1 karakter} other {# karakter}}den uzun olamaz.",
+            "empty": "Yenisini oluşturmadan önce en son cüzdanınızı kullanmalısınız.",
+            "notEmpty": "Bu cüzdanı silmeden önce bakiyenizi transfer etmelisiniz.",
+            "duplicate": "Bu isimde bir cüzdan zaten var.",
+            "tilde": "Profile ismi '~' karakteri ile başlayamaz.",
+            "control": "Profil ismi bir kontrol karakteri içermemeli.",
+            "startDot": "Profile ismi '.' karakteri ile başlayamaz.",
+            "chars": "Profil ismi belirtilen karakterlerden birini içeremez: <>:\"/\\|?*"
+        },
+        "send": {
+            "addressLength": "Adresler {length, plural, one {1 karakter} other {# karakter}} uzunluğunda olmalıdır.",
+            "amountTooHigh": "Bu, mevcut bakiyenizden daha büyüktür.",
+            "amountNoFloat": "Birimler \"i\" ise, ondalık basamakları kullanamazsınız.",
+            "amountInvalidFormat": "Miktar geçersiz görünüyor.",
+            "amountZero": "Miktar 0'dan büyük olmalıdır.",
+            "wrongAddressPrefix": "Adresler {prefix} ön eki ile başlar.",
+            "wrongAddressFormat": "Adres doğru şekilde biçimlendirilmemiş.",
+            "invalidAddress": "Adres geçerli değil.",
+            "insufficientFunds": "Cüzdan bakiyesi yetersiz.",
+            "noToAccount": "Bakiyeyi göndermek için bir cüzdan seçmediniz.",
+            "sendingDust": "1 Mi den daha az gönderim yapamazsınız.",
+            "leavingDust": "Adresinizde 1 Mi'den az bırakamazsınız."
+        },
+        "node": {
+            "invalid": "Lütfen geçerli bir URL giriniz.",
+            "https": "HTTPS gerekmektedir. Güvenli olmayan HTTP bağlantılarını kullanmak için bir geliştirici profili oluşturun.",
+            "duplicate": "Bu sunucu zaten eklenmiş.",
+            "unsynced": "Ağ senkronize değil.",
+            "noSynced": "Senkronize node bulunamadı."
+        },
+        "global": {
+            "generic": "Bir şeyler yanlış gitti."
+        },
+        "backup": {
+            "invalid": "Yedek dosyası okunamaz.",
+            "destination": "Yedekleme noktası geçerli değil.",
+            "mnemonic": "Hatırlatıcı geçerli değil.",
+            "seedTooShort": "Seed 81 karakter uzunluğunda olmalıdır, {length, plural, one {is 1} other {is #}}",
+            "seedCharacters": "Seed sadece A-Z veya 9 karakterlerini içeriyor olmalıdır",
+            "phraseWordCount": "Kurtarma cümleniz 24 kelimeden oluşmalıdır, şuan {length, plural, one {is 1} other { #}}.",
+            "phraseUnrecognizedWord": "Kurtarma cümlenizde \"{word}\" bilinmeyen kelime",
+            "phraseCaseWord": "Bu kelime \"{word}\" küçük harflerden oluşmalıdır"
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "Risk seviyesi: {risk}",
+            "veryHigh": "Çok yüksek",
+            "high": "Yüksek",
+            "medium": "Orta",
+            "low": "Düşük",
+            "veryLow": "Çok düşük"
+        }
     }
 }

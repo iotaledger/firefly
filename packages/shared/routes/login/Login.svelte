@@ -2,7 +2,6 @@
     import { createEventDispatcher } from 'svelte'
     import { Transition } from 'shared/components'
     import { SelectProfile, EnterPin } from './views/'
-    import { api } from 'shared/lib/wallet'
 
     export let locale
     export let mobile
@@ -13,10 +12,6 @@
     }
 
     const dispatch = createEventDispatcher()
-
-    let importType
-    let importFile
-    let importFilePath
 
     let state: LoginState = LoginState.Init
     let stateHistory = []

@@ -1,9 +1,12 @@
 export enum AppRoute {
     Welcome = 'welcome',
     Legal = 'legal',
-    Language = 'language',
+    Appearance = 'appearance',
+    Profile = 'profile',
     Setup = 'setup',
+    // TODO: ledger replace create
     Create = 'create',
+    Secure = 'secure',
     Password = 'password',
     LedgerSetup = 'ledgerSetup',
     Protect = 'protect',
@@ -14,7 +17,6 @@ export enum AppRoute {
     Congratulations = 'congratulations',
     Dashboard = 'dashboard',
     Login = 'login',
-    Settings = 'settings'
 }
 
 export enum SetupType {
@@ -61,11 +63,26 @@ export enum SettingsRoutes {
     HelpAndInfo = 'helpAndInfo',
 }
 
+export enum SettingsRoutesNoProfile {
+    Init = 'init',
+    GeneralSettings = 'generalSettings',
+    AdvancedSettings = 'advancedSettings',
+    HelpAndInfo = 'helpAndInfo',
+}
+
 export enum GeneralSettings {
-    Profile = 'profile',
+    // TODO: Implement and enable
+    // Profile = 'profile',
     Theme = 'theme',
     Language = 'language',
     Currency = 'currency',
+    Notifications = 'notifications',
+    NetworkStatus = 'networkStatus',
+}
+
+export enum GeneralSettingsNoProfile {
+    Theme = 'theme',
+    Language = 'language',
     Notifications = 'notifications',
 }
 
@@ -74,23 +91,33 @@ export enum SecuritySettings {
     AppLock = 'appLock',
     ChangePassword = 'changePassword',
     ChangePincode = 'changePincode',
-    ResetWallet = 'resetWallet',
+    DeleteProfile = 'deleteProfile',
 }
 
 export enum AdvancedSettings {
     NodeSettings = 'nodeSettings',
     ProofOfWork = 'proofOfWork',
-    DeveloperMode = 'developerMode',
-    DeepLinks = 'deepLinks',
-    ResyncAccounts = 'resyncAccounts',
+    //DeveloperMode = 'developerMode',
+    //DeepLinks = 'deepLinks',
+    BalanceFinder = 'balanceFinder',
+    HiddenAccounts = 'hiddenAccounts',
     ErrorLog = 'errorLog',
-    StateExport = 'stateExport',
+    Diagnostics = 'diagnostics',
+    // TODO: Implement and enable
+    //StateExport = 'stateExport',
+}
+
+export enum AdvancedSettingsNoProfile {
+    //DeveloperMode = 'developerMode',
+    //DeepLinks = 'deepLinks',
+    ErrorLog = 'errorLog',
+    Diagnostics = 'diagnostics',
 }
 
 export enum HelpAndInfo {
-    Troubleshoot = 'troubleshoot',
+    //Troubleshoot = 'troubleshoot',
     Documentation = 'documentation',
     FAQ = 'faq',
     Discord = 'discord',
-    About = 'about',
+    ReportAnIssue = 'reportAnIssue',
 }

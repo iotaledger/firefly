@@ -9,6 +9,7 @@ export let menuState = {
         security: "Security",
         advancedSettings: "Advanced Settings",
         errorLog: "Error Log",
+        diagnostics: "Diagnostics",
         logout: "Log Out",
         hide: "Hide",
         hideOthers: "Hide Others",
@@ -30,6 +31,7 @@ export let menuState = {
         faq: "FAQ",
         documentation: "Documentation",
         discord: "Discord",
-        reportAnIssue: "Report an Issue"
+        reportAnIssue: "Report an Issue",
+        version: "Version {version}"
     }
 }

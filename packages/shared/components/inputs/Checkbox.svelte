@@ -4,38 +4,45 @@
     export let label = undefined
     export let checked = false
     export let classes = ''
+    export let disabled = false
 </script>
 
 <style type="text/scss">
     button {
         @apply border-gray-500;
-        :global(svg path) {
-            stroke: var(--text-disabled-color);
+        :global(svg:not(.active) path) {
             fill: none;
+            @apply text-gray-500;
+            @apply stroke-current;
         }
         :global(svg.active path) {
-            stroke: white;
-            fill: var(--ui-blue-color);
+            @apply text-blue-500;
+            @apply fill-current;
         }
-
         &:hover,
         &:focus {
             :global(svg path) {
-                stroke: #9aadce;
+                @apply text-blue-500;
             }
-            :global(svg.active path) {
-                stroke: white;
-            }
+        }
+
+        &:disabled {
+            @apply pointer-events-none;
+            @apply opacity-50;
         }
     }
 </style>
 
 <button
     data-label="checkbox-input"
-    class={`flex items-center cursor-pointer ${classes}`}
+    class={`flex items-center text-left cursor-pointer ${classes}`}
+    type="button"
+    {disabled}
     on:click={() => {
         checked = !checked
     }}>
     <Icon icon={checked ? 'checkbox' : 'checkbox-unchecked'} classes={`mr-3 ${checked ? 'active' : ''}`} />
-    <Text type="p" secondary={!checked}>{label}</Text>
+    {#if label}
+        <Text type="p" secondary={!checked || disabled}>{label}</Text>
+    {/if}
 </button>

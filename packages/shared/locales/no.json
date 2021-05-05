@@ -1,150 +1,227 @@
 {
     "views": {
-        "onboarding_1": {
-            "title": "Send, motta & håndtere dine IOTA",
-            "body": "Firefly er en sikker og enkel å bruke IOTA-lommebok."
+        "onboarding1": {
+            "title": "Send, Motta og Håndter dine IOTA tokens",
+            "body": "Firefly er den offisielle IOTA-lommeboken."
         },
         "legal": {
-            "title": "Juridisk",
-            "body": "Vennligst se gjennom personvernerklæringen og vilkårene for bruk.",
-            "privacy_policy": {
-                "title": "Personvernerklæring",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
-            "terms_of_service": {
-                "title": "Vilkår for bruk",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
-            "checkbox": "I have read and I accept the Privacy policy & ToS"
+            "title": "Personvernerklæring & Vilkår for Bruk",
+            "body": "Vennligst gå gjennom Personvernerklæring og Vilkår for Bruk.",
+            "checkbox": "Jeg har lest og godtar retningslinjer for personvern og tjenestevilkår"
         },
-        "language": {
-            "title": "Språk & utseende",
-            "body": "Bestem språk og tema for lommebok"
+        "appearance": {
+            "title": "Utseende",
+            "body": "Velg app-tema."
+        },
+        "profile": {
+            "title": "Opprett profil",
+            "body1": "Du kan opprette flere brukerprofiler for å organisere lommebøkene dine og forbedre personvern.",
+            "body2": "La oss begynne med ditt første profilnavn. Du kan legge til flere profiler senere.",
+            "profileName": "Profilnavn"
         },
         "setup": {
-            "title": "Sett opp lommeboken din",
-            "body": "Du kan opprette en ny lommebok eller importere en eksisterende.",
-            "profile_name": "Profile Name"
+            "title": "Sett opp en lommebok",
+            "chrysalisTitle": "Chrysalis Nettverksoppdatering",
+            "chrysalisBody": "Fra 21. april kan brukere migrere tokens til det nye Chrysalis-nettverket. Vi anbefaler at du migrerer dine eksisterende tokens så fort som mulig.",
+            "learnMore": "Lær om migreringen"
+        },
+        "secure": {
+            "title": "Sikre lommeboken din",
+            "body1": "Last ned og skriv ut Recovery Kit PDF-malen.",
+            "body2": "Hvis du fyller ut Recovery Kit og oppbevarer det trygt, vil du alltid kunne gjenopprette lommebøkene dine."
         },
         "password": {
-            "title": "Opprett passord",
-            "body": "Du trenger passordet for å kunne sende midler fra lommeboken din. Et sterkt passord er viktig for å beskytte midlene dine."
+            "title": "Opprett et passord",
+            "body1": "Du trenger et sterkt passord for å beskytte midlene dine. Kombiner forskjellige ord, og unngå vanlige fraser, navn og datoer.",
+            "body2": "Det anbefales at du skriver ned passordet i ditt Recovery Kit."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body_1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body_2": "Keep your PIN safe!"
+            "body1": "Lag en PIN-kode for å være sikker på at bare du kan gå inn på profilen din.",
+            "body2": "Hold PIN-koden din trygg!"
         },
         "pin": {
             "title": "Opprett PIN-kode",
-            "body_1": "Skriv inn en 6-sifret PIN-kode nedenfor. Du vil bli bedt om å fylle inn din pin for å logge inn i din lommebok.",
-            "body_2": "Du kan kun bruke tall."
+            "body1": "Skriv inn en 6-sifret PIN-kode nedenfor. Du vil bli bedt om PIN-koden for å få tilgang til profilen din.",
+            "body2": "Bruk kun tall"
         },
-        "confirm_pin": {
+        "confirmPin": {
             "title": "Bekreft din PIN-kode",
-            "body": "Tast inn PIN-koden igjen for å fortsette."
+            "body1": "PIN-koden holder saldoen din og transaksjonene dine privat.",
+            "body2": "Skriv inn PIN-koden på nytt for å fortsette. "
         },
         "backup": {
             "title": "Sikkerhetskopier din lommebok",
-            "body_1": "Du vil nå bli vist en gjenopprettingsfrase.",
-            "body_2": "Ikke del denne frasen med noen. Din gjenopprettingsfrase kan brukes til å få tilgang til tokens fra hvor som helst.",
-            "body_3": "Hvis du mister gjenopprettingsfrasen, kan du miste midlene dine."
+            "body1": "Du vil nå bli vist en gjenopprettingsfrase. Skriv det ned i din Recovery Kit.",
+            "body2": "Ikke del din gjenopprettingsfrase med noen. Den kan brukes til å få tilgang til dine tokens fra hvor som helst.",
+            "body3": "Hvis du mister gjenopprettingsfrasen, kan du miste midlene dine."
         },
-        "recovery_phrase": {
+        "recoveryPhrase": {
             "title": "Gjenopprettingsfrase",
-            "body_1": "Skriv forsiktig ned ordene i riktig rekkefølge.",
-            "body_2": "Hold gjenopprettingsfrasen privat og trygt lagret. Ikke del den med noen.",
-            "reveal_recovery_phrase": "Vis gjenopprettingsfrasen",
-            "hide_recovery_phrase": "Skjul gjenoppretingsfrasen"
+            "body1": "I ditt Recovery Kit, skriv ned ordene i eksakt den rekkefølgen de vises i.",
+            "body2": "Oppbevar denne privat og trygt lagret.",
+            "body3": "Det er viktig å ha en skriftlig sikkerhetskopi. Datamaskiner feiler ofte og filer kan forsvinne.",
+            "revealRecoveryPhrase": "Vis gjenopprettingsfrasen",
+            "hideRecoveryPhrase": "Skjul gjenoppretingsfrasen"
         },
-        "verify_recovery_phrase": {
+        "verifyRecoveryPhrase": {
             "title": "Bekreft gjenopprettingsfrasen",
-            "body": "La oss sjekke at du skrev ned frasen riktig. Velg ordene i riktig rekkefølge."
+            "body": "La oss sjekke at du skrev ned frasen riktig. Vennligst velg hvert ord i riktig rekkefølge.",
+            "word": "Ord",
+            "verified": "Gjenopprettingsfrase bekreftet",
+            "verifiedBody": "Husk å holde den privat og trygt lagret."
         },
-        "backup_wallet": {
+        "backupWallet": {
             "title": "Sikkerhetskopier til en Stronghold-fil",
-            "body": "Skriv inn passordet for å sikkerhetskopiere lommeboken til en Stronghold-fil. Passordet brukes til å kryptere sikkerhetskopien."
+            "body1": "Skriv inn passordet ditt for å sikkerhetskopiere lommebøkene dine til en Stronghold-fil. Passordet brukes til å kryptere sikkerhetskopien.",
+            "body2": "Årsaker til at digitale sikkerhetskopier er viktig:",
+            "reason1": "Gjenopprett lommebøkene dine enkelt uten å skrive inn gjenopprettingsfrasen din",
+            "reason2": "Importer lommebøkene dine på andre enheter",
+            "reason3": "Gjenopprett hele transaksjonshistorikken"
         },
-        "recovery_phrase_saved": {
+        "recoveryPhraseSaved": {
             "title": "Vellykket sikkerhetskopiering",
-            "body": "Du har sikkerhetskopiert lommeboken til et Stronghold."
+            "body": "Du har sikkerhetskopiert lommebøkene dine til et Stronghold."
         },
         "congratulations": {
-            "title": "Gratulerer",
-            "body": "Lommeboken er klar til bruk."
+            "title": "Oppsett av lommebok fullført",
+            "body": "Din nye lommebok er klar til bruk.",
+            "fundsMigrated": "Midlene er migrert",
+            "success": "Migreringen av midlene dine til det nye nettverket var vellykket",
+            "exportMigration": "Eksporter migreringsloggen og fullfør oppsettet"
         },
         "import": {
-            "title": "Importer en lommebok",
-            "body": "Hvis du har en gjenopprettingsfrase eller en Stronghold-sikkerhetskopiering, kan du importere den her."
+            "title": "Gjenopprett eller migrer midler",
+            "body": "Hvis du har en eksisterende hovednøkkel eller sikkerhetskopi-fil, kan du importere den her. Hvis du holder midler fra det gamle nettverket, vil du bli tatt gjennom migreringsstegene for å flytte til Chrysalis-nettverket.",
+            "importSeed": "Jeg har en 81 tegns lang hovednøkkel",
+            "importSeedDescription": "Oppgi en hovednøkkel og migrerer midler til Chrysalis",
+            "importMnemonic": "Jeg har en Firefly gjenopprettingsfrase",
+            "importMnemonicDescription": "Skriv inn gjenopprettingsfrasen din for å gjenopprette lommebøkene dine",
+            "importFile": "Jeg har en sikkerhetskopi-fil",
+            "importFileDescription": "Last opp en Seedvault- eller Stronghold-fil"
         },
-        "import_from_text": {
-            "title": "Gjenopprette lommeboken med en gjenopprettingsfrase eller hovednøkkel",
-            "body_1": "En gjenopprettingsfrase er 24 ord. Dette er brukt for å gjenopprette en eksisterende Firefly-lommebok.",
-            "body_2": "Et hovednøkkel består av 81 tegn. Dette brukes for å gjenopprette fra en eldre Trinity lommebok.",
-            "body_3": "Angi hovednøkkel eller gjenopprettingsfrase"
+        "importFromText": {
+            "seed": {
+                "title": "Skriv inn hovednøkkelen din for å starte migreringen",
+                "body": "En hovednøkkel består av 81 tegn. Denne brukes til å gjenopprette fra den eldre Trinity-appen.",
+                "enter": "Angi din hovednøkkel"
+            },
+            "mnemonic": {
+                "title": "Skriv inn gjenopprettingsfrasen din",
+                "body": "En gjenopprettingsfrase består av 24 ord, med kun små bokstaver, hvor ordene er adskilt med mellomrom. Denne brukes for å gjenopprette eksisterende Firefly-lommebøker.",
+                "enter": "Skriv inn den hemmelige gjenopprettingsfrasen din"
+            },
+            "seedDetected": "Hovednøkkel med 81 tegn oppdaget",
+            "phraseDetected": "24 ords gjenopprettingsfrase oppdaget",
+            "checksum": "Sjekksum"
         },
-        "import_from_file": {
-            "title": "Gjenopprett lommeboken fra en sikkerhetskopi-fil",
-            "body": "Importer en sikkerhetskopifil for å gjenopprette lommeboken. Sikkerhetskopier kan enten være et Stronghold (.stronghold) eller et Trinity SeedVault (.kdbx)."
+        "importFromFile": {
+            "title": "Gjenopprett lommebøkene dine ved hjelp av en sikkerhetskopi-fil",
+            "body": "Importer en sikkerhetskopi-fil for å gjenopprette lommebøkene dine. Sikkerhetskopier kan enten være et Stronghold (.stronghold) eller et Trinity SeedVault (.kdbx)."
         },
-        "import_backup_password": {
-            "title": "Gjenopprett din lommebok fra et SeedVault eller Stronghold",
-            "body_1": "Vennligst angi passord for sikkerhetskopi.",
-            "body_2": "Dette er passordet du lagde når du først opprettet sikkerhetskopien."
+        "importBackupPassword": {
+            "title": "Gjenopprett lommebøkene dine fra et SeedVault eller Stronghold",
+            "body1": "Vennligst skriv inn passordet for sikkerhetskopien.",
+            "body2": "Dette er passordet du lagde når du først opprettet sikkerhetskopien."
         },
-        "import_success": {
-            "title": "Du har nå gjenopprettet sikkerhetskopien",
-            "body": "Du kan nå sette opp din nye lommebok."
+        "importSuccess": {
+            "title": "Gjenopprettingen av sikkerhetskopien var vellykket",
+            "body": "Du kan nå lage din nye profil.",
+            "seedvaultTitle": "Importering vellykket",
+            "seedvaultBody": "Passordet ditt er riktig, du kan nå fortsette.",
+            "strongholdTitle": "Importering vellykket",
+            "strongholdBody": "Passordet er riktig, du kan nå fortsette."
         },
         "migrate": {
             "title": "Overfør midlene dine",
-            "body_1": "Dette er en automatisert prosess for å overføre midlene dine til din nye lommebok. Vi vil se etter brukte adresser som svekker sikkerhet din.",
-            "body_2": "Dette kan ta litt tid. Ikke slå av enheten under overføringen.",
+            "body1": "Dette er en automatisk prosess for å overføre midlene dine til din nye lommebok.",
+            "body2": "Dette kan ta litt tid. Ikke slå av enheten under overføringen.",
             "existing": "Din gamle lommebok",
-            "new": "Din nye lommebok"
+            "new": "Din nye lommebok",
+            "learn": "Lær om migreringen",
+            "beginMigration": "Begynn migrering",
+            "migrating": "Migrerer midler...",
+            "migrated": "{balance} migrert",
+            "migrationFailed": "Migrering mislyktes",
+            "noAddressesForMigration": "Vennligst velg adressene du ønsker å sikre.",
+            "restoringWallet": "Gjenoppretter lommebok...",
+            "findingBalance": "Finner saldo...",
+            "incorrectSeedVaultPassword": "Feil passord for SeedVault.",
+            "noDataSeedVault": "Fant ingen data i SeedVault.",
+            "signingBundle": "Signerer bundle",
+            "broadcastingBundle": "Kringkaster bundle",
+            "miningBundle": "Utvinner bundle",
+            "problemRestoringWallet": "Det oppsto et tilkoblingsproblem under gjenopprettingen av lommeboken din. Vennligst prøv igjen.",
+            "minimumMigrationAmountSpentAddresses": "Minste overføringsbeløp for hver brukte adresse er 1 Mi. Sjekk igjen om din saldo ser riktig ut.",
+            "tooManyAddressesToMigrate": "Du har for mange adresser med lav saldo til å migrere. Sjekk igjen om din saldo ser riktig ut.",
+            "cannotMigrateAllYourFunds": "Vi kan ikke migrere alle dine midler fordi noen adresser har for lav verdi. Du kan allikevell fortsette. {value} vil gå tapt.",
+            "error": "Det oppsto en feil ved migreringen av dine midler. Vennligst prøv igjen."
         },
-        "migrate_failed": {
+        "bundleMiningWarning": {
+            "title": "Advarsel",
+            "body1": "Du har midler på én eller flere brukte adresser.",
+            "body2": "Vi anbefaler deg å kjøre en automatisert prosess for å hjelpe deg med å sikre og overføre disse midlene på en trygg måte.",
+            "body3": "Hvis du lukker appen, må du starte hele migreringen på nytt.",
+            "learn": "Lær om brukte adresser"
+        },
+        "secureSpentAddresses": {
+            "title": "Sikre brukte adresser",
+            "body1": "Det er oppdaget at du har midler på {number, plural, one {# brukt adresse} other {# brukte adresser}}.",
+            "body2": "Vi anbefaler deg å kjøre en automatisert prosess for å hjelpe deg med å sikre og overføre dine midler på en trygg måte.",
+            "error": "Du kan ikke migrere brukte adresser med mindre enn 1 Mi"
+        },
+        "securityCheckCompleted": {
+            "title": "Sikkerhetskontroll fullført",
+            "body1": "Vi har beregnet sikkerhetsrisikonivået. Å kjøre denne prosessen igjen kan redusere ditt risikonivå.",
+            "body2": "Når du er fornøyd med risikonivået/-nivåene trykker du på fortsett.",
+            "rerun": "Kjør prosessen for valgte adresser igjen",
+            "continueMigration": "Fortsett migrering"
+        },
+        "securingSpentAddresses": {
+            "title": "Sikrer brukte adresser...",
+            "body1": "Denne prosessen vil ta {minutes, plural, one {1 minutt} other {# minutter}}.",
+            "body2": "Datamaskinen din vil kjøre med full kapasitet, du kan kanskje ønske å gjøre noe annet mens du venter på at dette skal fullføres."
+        },
+        "transferFragmentedFunds": {
+            "body1": "Firefly vil nå gå videre med migreringen av dine midler. Dette kan ta en stund.",
+            "migrate": "Migrer midler",
+            "transaction": "Transaksjon {number}",
+            "rerun": "Prøv på nytt"
+        },
+        "migrateFailed": {
             "title": "To do",
             "body": "To do"
         },
         "balance": {
             "title": "Din saldo",
-            "body": "Er saldoen riktig?"
+            "body": "Kontroller at saldoen stemmer før du fortsetter. Du kan sjekke igjen om det ikke ser riktig ut.",
+            "error": "Minste migreringsbeløp er 1 Mi. Sjekk igjen om saldoen ikke ser riktig ut.",
+            "zeroBalance": "Prøv å sjekke igjen. Hvis du fortsatt ikke kan finne balansen din, kan det hende at du har skrevet inn din hovednøkkel feil."
         },
         "settings": {
             "settings": "Innstillinger",
             "generalSettings": {
                 "title": "Generelle innstillinger",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Konfigurer appens utseende og andre generelle innstillinger"
             },
             "security": {
                 "title": "Sikkerhet",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Endre passordet ditt og juster sikkerhetsrelaterte innstillinger"
             },
             "advancedSettings": {
                 "title": "Avanserte innstillinger",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Verktøy og manuelle innstillinger for tekniske brukere"
             },
             "helpAndInfo": {
                 "title": "Hjelp & Informasjon",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Finn svaret på et spørsmål eller få hjelp med et problem"
             },
             "profile": {
                 "title": "Profil",
-                "description": ""
+                "description": "Endre profilnavnet ditt eller velg en avatar"
             },
             "sync": {
-                "title": "Synkroniser kontoer",
+                "title": "Synkroniser lommebøker",
                 "description": ""
             },
             "theme": {
@@ -157,124 +234,151 @@
             },
             "currency": {
                 "title": "Valuta",
-                "description": ""
+                "description": "Justerer saldokonvertering og oppdater innstillinger for grafen"
             },
             "notifications": {
-                "title": "Notifikasjoner",
-                "description": ""
+                "title": "Varslinger",
+                "description": "Systemvarsler for transaksjonshendelser"
+            },
+            "networkStatus": {
+                "title": "Nettverksstatus",
+                "description": "Viser statusen til noden du er koblet til."
             },
             "exportStronghold": {
-                "title": "Eksporter Stronghold",
-                "description": ""
+                "title": "Eksporter sikkerhetskopi",
+                "description": "Eksporter til en Stronghold-fil - en fullstendig kryptert sikkerhetskopi av lommeboken din og den seneste transaksjonshistorikken"
             },
             "appLock": {
-                "title": "App-lås",
-                "description": ""
+                "title": "Automatisk lås",
+                "description": "Inaktivitetstid før lommeboken låses og du blir logget ut",
+                "durationMinute": "{time, plural, one {1 minutt} other {# minutter}}",
+                "durationHour": "{time, plural, one {1 time} other {# timer}}"
             },
             "changePassword": {
-                "title": "Bytt passord",
-                "description": ""
+                "title": "Endre passord",
+                "description": "Passordet ditt brukes til å sikre lommeboken. Du må bruke et sterkt passord for å beskytte midlene dine"
             },
             "changePincode": {
-                "title": "Endre PIN-koden",
-                "description": "",
+                "title": "Endre PIN-kode",
+                "description": "PIN-koden holder saldoen din og transaksjonene dine privat",
                 "currentPincode": "Gjeldende PIN-kode",
                 "newPincode": "Ny PIN-kode",
                 "confirmNewPincode": "Bekreft ny PIN-kode",
                 "action": "Endre PIN-koden"
             },
-            "resyncAccounts": {
-                "title": "Resynkroniser kontoene",
-                "description": ""
+            "balanceFinder": {
+                "title": "Saldo-finner",
+                "description": "Utfør et utvidet søk av adressene dine for å finne midler"
             },
-            "resetWallet": {
-                "title": "Tilbakestill lommeboken",
-                "description": ""
+            "hiddenAccounts": {
+                "title": "Skjulte lommebøker",
+                "description": "Ved å velge dette alternativet vises lommebøker som tidligere var skjult"
+            },
+            "deleteProfile": {
+                "title": "Slett profil",
+                "description": "Sletter hele lommeboken, profilen og transaksjonshistorikken. Pass på at du har en sikkerhetskopi"
             },
             "deepLinks": {
-                "title": "Dyp lenker",
-                "description": ""
+                "title": "Dyplenker",
+                "description": "Fyll automatisk inn transaksjonsdata i Firefly ved å klikke en iota:// lenke"
             },
             "developerMode": {
                 "title": "Utviklermodus",
-                "description": ""
+                "description": "Koble til testnett og andre utviklerfunksjoner"
             },
             "nodeSettings": {
-                "title": "Node innstillinger",
-                "description": ""
+                "title": "Node-innstillinger",
+                "description": "Velg Manuell for å konfigurere node-innstillinger og koble til din egen node"
             },
             "configureNodeList": {
-                "title": "Konfigurere node-listen",
-                "description": ""
+                "title": "Velg en node",
+                "description": "Administrer listen over IOTA nettverksnoder du kobler til",
+                "primaryNode": "Primær node",
+                "excludeNode": "Ekskluder node",
+                "includeNode": "Inkluder node",
+                "viewDetails": "Se detaljer",
+                "setAsPrimary": "Sett som primær",
+                "removeNode": "Fjern node",
+                "includeOfficialNodeList": "Inkluder offisiell liste over noder",
+                "noNodes": "Ingen noder, automatisk selektering brukes i stedet"
             },
             "proofOfWork": {
-                "title": "Bevis på arbeid",
-                "description": ""
+                "title": "Proof of work",
+                "description": "Fullfør proof of work lokalt på din enhet eller deleger arbeidet til noden"
             },
             "errorLog": {
                 "title": "Feilmeldingslogg",
-                "description": ""
+                "description": "Se feil for å feilsøke et problem"
+            },
+            "diagnostics": {
+                "title": "Diagnostikk",
+                "description": "Vis system- og applikasjonsinformasjon"
             },
             "stateExport": {
                 "title": "Tilstands-eksportering",
-                "description": ""
+                "description": "Eksporter transaksjonshistorikken til en .csv-fil"
             },
             "troubleshoot": {
                 "title": "Feilsøking",
-                "description": ""
+                "description": "Bruk feilsøkingsveiviseren for å løse vanlige problemer"
             },
             "documentation": {
                 "title": "Dokumentasjon",
-                "description": ""
+                "description": "Vis dokumentasjonen for grundig forklaring på hvordan ting fungerer"
             },
             "faq": {
                 "title": "FAQ",
-                "description": ""
+                "title2": "Ofte stilte spørsmål",
+                "description": "Se FAQ for å få hjelp med et vanlig problem eller spørsmål"
             },
             "discord": {
                 "title": "Discord",
-                "description": ""
+                "description": "Få hjelp fra IOTA-fellesskapet på Discord"
             },
             "about": {
                 "title": "Om",
                 "description": ""
+            },
+            "reportAnIssue": {
+                "title": "Rapporter et problem",
+                "description": "Rapporter en feil til utviklerne. Sjekk gjennom for å forsikre deg om at den ikke allerede er rapportert"
             }
         },
         "login": {
-            "please_wait": "Vennligst vent {time, plural, one {1 sekund} other {# sekunder}}",
-            "incorrect_attempts": "{attempts, plural, one {1 feil forsøk} other {# ugyldige forsøk}}"
+            "pleaseWait": "Vennligst vent {time, plural, one {1 sekund} other {# sekunder}}",
+            "incorrectAttempts": "{attempts, plural, one {1 feil forsøk} other {# ugyldige forsøk}}"
         },
         "dashboard": {
             "security": {
                 "version": {
                     "title": "Firefly v{version}",
-                    "up_to_date": "Up to date",
-                    "out_of_date": "Utløpt"
+                    "upToDate": "Siste versjon er installert",
+                    "outOfDate": "Utløpt"
                 },
-                "hardware_device": {
-                    "title": "Maskinvare enhet",
-                    "none_detected": "Ingen oppdaget"
+                "hardwareDevice": {
+                    "title": "Maskinvareenhet",
+                    "noneDetected": "Ingen oppdaget"
                 },
-                "stronghold_status": {
-                    "title": "Festning status",
+                "strongholdStatus": {
+                    "title": "Lommebok-status",
                     "locked": "Låst",
-                    "unlocked": "Åpen"
+                    "unlocked": "Ulåst"
                 },
-                "stronghold_backup": {
-                    "title": "Festning sikkerhetskopi",
-                    "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
+                "strongholdBackup": {
+                    "title": "Sikkerhetskopi av lommebok",
+                    "weeksAgo": "{weeks, plural, one {# uke} other {# uker}} siden"
                 }
             },
             "network": {
-                "network_operational": "Network Operational",
-                "network_degraded": "Nettverket er nedgradert",
-                "network_down": "Nettverket er nede",
+                "networkOperational": "Nettverket er operativt",
+                "networkDegraded": "Nettverket er ute av drift",
+                "networkDown": "Nettverket er frakoblet",
                 "status": "Status",
-                "messages_per_second": "Meldinger per sekund",
-                "confirmation_rate": "Bekreftelseshastighet"
+                "messagesPerSecond": "Meldinger per sekund",
+                "referencedRate": "Referenced rate"
             },
-            "profile_modal": {
-                "all_settings": "Alle innstillinger",
+            "profileModal": {
+                "allSettings": "Alle innstillinger",
                 "logout": "Logg ut"
             }
         }
@@ -282,178 +386,435 @@
     "popups": {
         "password": {
             "title": "Passord påkrevd",
-            "subtitle": "Vennligst skriv inn passordet for å låse opp Stronghold"
+            "subtitle": "Skriv inn passordet ditt for å låse opp lommebøkene dine",
+            "backup": "Vennligst skriv inn passordet ditt for å eksportere en sikkerhetskopi"
         },
         "qr": {
             "title": "Din QR-kode"
         },
         "version": {
             "title": "Gjeldende versjon: {version}",
-            "up_to_date_title": "Firefly er oppdatert",
-            "up_to_date_description": "Du kjører den siste og sikreste versjonen av Firefly.",
-            "update_available": "Firefly-oppdatering tilgjengelig",
-            "update_details": "Versjon {version} - {date}"
+            "upToDateTitle": "Firefly er oppdatert",
+            "upToDateDescription": "Du bruker den siste og sikreste versjonen av Firefly.",
+            "updateAvailable": "Firefly-oppdatering tilgjengelig",
+            "updateDetails": "Versjon {version} - {date}",
+            "noAutoUpdate": "Auto-oppdatering er deaktivert i denne Windows-versjonen, gå til https://firefly.iota.org for å laste ned oppdateringen."
         },
         "backup": {
             "title": "Siste sikkerhetskopi: {date}",
-            "last_backup": "Du sikkerhetskopierte sist {date}",
-            "backup_description": "Det er viktig å sikkerhetskopiere regelmessig for å sørge for at du har en kopi av kontoer og transaksjonshistorien.",
-            "backup_warning": "Hvis du mister din backup og gjenopprettingsfrase mister du tilgang til dine midler.",
-            "not_backed_up": "Ikke sikkerhetskopiert",
-            "not_backed_up_description": "Du har ikke sikkerhetskopiert din festning"
+            "lastBackup": "Du sikkerhetskopierte sist {date}",
+            "backupDescription": "Det er viktig å sikkerhetskopiere regelmessig slik at du har en kopi av lommebøker og transaksjonshistorie.",
+            "backupWarning": "Hvis du mister din backup og gjenopprettingsfrase mister du tilgang til dine midler.",
+            "notBackedUp": "Ikke sikkerhetskopiert",
+            "notBackedUpDescription": "Du har ikke sikkerhetskopiert lommebøkene dine",
+            "saving": "Lagrer..."
         },
-        "delete_account": {
+        "deleteAccount": {
             "title": "Slett {name}?",
-            "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "type_password": "Skriv passordet til lommeboken for å bekrefte.",
-            "delete_account": "Slett konto",
-            "error_title": "Kan ikke slette {name}",
-            "error_body_1": "For å slette kontoen må du ha 0 i saldo.",
-            "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again."
+            "body": "Denne lommeboken har ingen transaksjonshistorie. Den kan trygt slettes.",
+            "typePassword": "Skriv inn passordet til lommeboken for å bekrefte.",
+            "hideAccount": "Slett lommebok",
+            "errorTitle": "Kunne ikke slette {name}",
+            "errorBody1": "Du kan ikke slette denne lommeboken, du må ha minst én lommebok."
         },
-        "address_history": {
-            "title": "{name} account address history",
-            "current_balance": "Current balance: {balance}"
+        "hideAccount": {
+            "title": "Skjul {name}?",
+            "body": "Du kan finne denne lommeboken senere ved å aktivere \"Vis skjulte lommeboker\" i Avanserte innstillinger.",
+            "typePassword": "Skriv inn passordet til lommeboken for å bekrefte.",
+            "hideAccount": "Skjul lommebok",
+            "errorTitle": "Kunne ikke skjule {name}",
+            "errorBody1": "For å skjule en lommebok må den ha 0 saldo.",
+            "errorBody2": "Du har {balance} igjen i denne lommeboken. Vennligst flytt disse midlene til en annen lommebok og prøv igjen.",
+            "errorBody3": "Du kan ikke skjule denne lommeboken, du må ha minst én lommebok."
+        },
+        "addressHistory": {
+            "title": "{name} adressehistorikk",
+            "currentBalance": "Nåværende saldo: {balance}"
         },
         "node": {
-            "title_add": "Legg til Node",
-            "title_details": "Detaljer om node",
-            "node_address": "Node-adresse",
-            "optional_username": "Brukernavn (valgfritt)",
-            "optional_password": "Passord (valgfritt)",
-            "set_as_primary_node": "Velg som hoved-node"
+            "titleAdd": "Legg til en node",
+            "titleUpdate": "Oppdater en node",
+            "titleRemove": "Fjern en node",
+            "titleDetails": "Detaljer om node",
+            "nodeAddress": "Node-adresse",
+            "optionalUsername": "Brukernavn (valgfritt)",
+            "optionalPassword": "Passord (valgfritt)",
+            "setAsPrimaryNode": "Velg som hoved-node",
+            "removeConfirmation": "Er du sikker på at du ønsker å fjerne denne noden?"
+        },
+        "errorLog": {
+            "title": "Feilmeldingslogg",
+            "empty": "Feilmeldingsloggen er tom."
+        },
+        "deleteProfile": {
+            "title": "Slett profil",
+            "confirmation": "Er du sikker på at du vil slette denne profilen? Denne handlingen kan ikke angres.",
+            "typePassword": "Skriv inn passordet ditt for å bekrefte."
+        },
+        "diagnostics": {
+            "title": "Diagnostikk",
+            "node": "Node",
+            "platform": "Plattform",
+            "platformVersion": "Plattformversjon",
+            "platformArchitecture": "Plattform arkitektur",
+            "cpuCount": "Antall prosessorer",
+            "totalMem": "Totalt minne",
+            "freeMem": "Ledig minne",
+            "userPath": "Brukersti"
+        },
+        "transaction": {
+            "title": "Bekreft transaksjon",
+            "body": "Du er i ferd med å sende {amount} til"
+        },
+        "balanceFinder": {
+            "title": "Saldo-finner",
+            "body": "Utfør et mer utfyllende søk i adressene for å finne manglende midler. Dette kan ta en stund.",
+            "totalWalletBalance": "Total saldo",
+            "typePassword": "Skriv inn passordet ditt for å tillate søking."
+        },
+        "riskFunds": {
+            "title": "Advarsel: Midler er utsatt for risiko under migreringen",
+            "body1": "Det er sterkt anbefalt at du sikrer midlene dine før du går videre med migreringen. Midlene dine er utsatt for tyveri hvis du ikke sikrer dem.",
+            "body2": "Det anbefales at du gjentar prosessen for adresser med et middels risikonivå eller høyere."
+        },
+        "missingBundle": {
+            "title": "Advarsel: Midler er utsatt for risiko under migreringen",
+            "body": "Du har tilgjengelige midler på brukte adresser, men nødvendig informasjon for å sikre dem ble ikke funnet. Dette kan skje hvis du har utført transaksjoner for lenge siden. Du kan fortsette, men {value} er utsatt for risiko under migrasjonen.",
+            "learnMore": "Lær mer om brukte adresser",
+            "proceed": "Jeg forstår risikoen"
+        },
+        "snapshot": {
+            "title": "Pågående nettverksoppgradering",
+            "body": "Chrysalis nettverksoppgradering har begynt.",
+            "bodyMigration": "Migrering er deaktivert inntil den er ferdig.",
+            "bodyFirefly": "Firefly er deaktivert til det er fullført. Token migrering vil fortsatt bli mulig etterpå."
         }
+    },
+    "charts": {
+        "incomingMi": "Innkommende {value}",
+        "outgoingMi": "Utgående {value}",
+        "portoflio": "Portefølje",
+        "token": "Token",
+        "accountValue": "Lommebokens verdi",
+        "accountActivity": "Lommebokaktivitet",
+        "timeframe1Hour": "1 time",
+        "timeframe1Day": "1 dag",
+        "timeframe1Week": "1 uke",
+        "timeframe1Month": "1 måned"
     },
     "actions": {
         "continue": "Fortsett",
         "back": "Tilbake",
         "cancel": "Avbryt",
         "close": "Lukk",
-        "dismiss": "Dismiss",
+        "dismiss": "Avvis",
+        "proceedAnyway": "Fortsett likevel",
         "save": "Lagre",
-        "import_seed": "Importer en eksisterende hovednøkkel",
-        "import_wallet": "Importer eksisterende lommebok",
-        "create_wallet": "Opprette ny lommebok",
-        "save_password": "Lagre passord",
-        "use_biometric": "Bruk biometrisk sikkerhet",
-        "setup_pin": "Opprett PIN-kode",
-        "set_pin": "Angi PIN-kode",
-        "confirm_pin": "Bekreft PIN-kode",
-        "enter_your_pin": "Tast PIN",
-        "save_backup_file": "Lagre sikkerhetskopifilen",
-        "ive_written_recovery_phrase": "Jeg har skrevet ned gjenopprettingsfrasen",
-        "verify_recovery_phrase": "Bekreft gjenopprettingsfrasen",
-        "reveal_recovery_phrase": "Vis gjenopprettingsfrasen",
-        "import_seedvault": "Importer SeedVault",
-        "check_again": "Nei, sjekk igjen",
-        "import_from_file": "Importer fra fil",
+        "importSeed": "Importer en eksisterende hovednøkkel",
+        "restoreWallet": "Migrer eller gjenopprett en lommebok",
+        "restoreWalletDescription": "Migrer til Chrysalis eller gjenopprett en eksisterende lommebok",
+        "createWallet": "Opprett en ny lommebok",
+        "createWalletDescription": "Lag en fersk lommebok som kjører på Chrysalis",
+        "savePassword": "Lagre passord",
+        "useBiometric": "Bruk biometrisk sikkerhet",
+        "setupPin": "Opprett PIN-kode",
+        "setPin": "Angi PIN-kode",
+        "confirmPin": "Bekreft PIN-kode",
+        "enterYourPin": "Tast PIN",
+        "saveBackupFile": "Lagre sikkerhetskopifilen",
+        "iveWrittenRecoveryPhrase": "Jeg har skrevet ned gjenopprettingsfrasen",
+        "verifyRecoveryPhrase": "Bekreft gjenopprettingsfrasen",
+        "revealRecoveryPhrase": "Vis gjenopprettingsfrasen",
+        "importSeedvault": "Importer SeedVault",
+        "checkAgain": "Sjekk igjen",
+        "importFromFile": "Importer fra fil",
         "send": "Send",
         "receive": "Motta",
         "create": "Opprett",
-        "begin_transfer": "Begynn overføring",
-        "try_again": "Prøv på nytt",
-        "visit_discord": "Besøk Discord",
-        "drag_drop": "Dra & slipp",
-        "import_extentions": ".stronghold eller .kdbx fil",
-        "choose_file": "Velg en fil",
-        "drop_here": "Slipp filen her",
+        "beginTransfer": "Begynn overføring",
+        "tryAgain": "Prøv på nytt",
+        "visitDiscord": "Besøk Discord",
+        "dragDrop": "Dra & slipp",
+        "importExtentions": ".kdbx eller .stronghold fil",
+        "chooseFile": "Velg en fil",
+        "dropHere": "Slipp filen her",
         "syncAll": "Synkroniser alle",
         "export": "Eksporter",
         "exportNewStronghold": "Eksporter en ny Stronghold",
-        "enableDeepLinks": "Aktiver dype lenker",
+        "enableDeepLinks": "Tillat dype lenker.",
         "enableDeveloperMode": "Aktiver utviklermodus",
-        "enableSystemNotifications": "Enable system notifications",
+        "enableSystemNotifications": "Aktiver varsler",
         "exportState": "Eksporter status",
-        "outsourceProofOfWork": "Outsource bevis på arbeid",
+        "localProofOfWork": "Lokal proof of work",
         "unlock": "Lås opp",
-        "update_firefly": "Update Firefly",
-        "restart_now": "Restart now",
-        "save_backup": "Save backup",
-        "customize_account": "Customise account",
-        "sync_account": "Sync account",
-        "view_address_history": "View address history",
-        "delete_account": "Slett konto",
+        "updateFirefly": "Oppdater Firefly",
+        "restartNow": "Start på nytt nå",
+        "saveBackup": "Lagre Stronghold sikkerhetskopi",
+        "customizeAcount": "Tilpass lommebok",
+        "viewAddressHistory": "Vis adressehistorikk",
+        "hideAccount": "Skjul lommebok",
+        "showAccount": "Vis lommebok",
+        "deleteAccount": "Slett lommebok",
         "max": "Maks",
-        "add_node": "Legg til Node"
+        "addNode": "Legg til node",
+        "updateNode": "Oppdater node",
+        "removeNode": "Fjern node",
+        "hide": "Skjul",
+        "hideOthers": "Skjul andre",
+        "showAll": "Vis alle",
+        "quit": "Avslutt",
+        "edit": "Rediger",
+        "undo": "Angre",
+        "redo": "Gjør om",
+        "cut": "Klipp ut",
+        "copy": "Kopier",
+        "paste": "Lim inn",
+        "selectAll": "Velg alt",
+        "addAccount": "Legg til lommebok",
+        "checkForUpdates": "Søk etter oppdateringer",
+        "reportAnIssue": "Rapportér en feil",
+        "clear": "Tøm",
+        "hideDetails": "Skjul detaljer",
+        "yes": "Ja",
+        "no": "Nei",
+        "skip": "Hopp over",
+        "reset": "Tilbakestill",
+        "downloadRecoveryKit": "Lagre mal for Recovery Kit",
+        "skipBackup": "Hopp over filsikkerhetskopi",
+        "finishSetup": "Fullfør oppsett",
+        "readDocumentation": "Les dokumentasjonen",
+        "visitFaq": "Besøk FAQ",
+        "viewStatus": "Vis status",
+        "showHiddenAccounts": "Vis skjulte lommebøker",
+        "confirm": "Bekreft",
+        "hideNetworkStatistics": "Skjul nettverksstatistikk",
+        "findBalances": "Finn saldoer",
+        "searchBalances": "Søk etter saldoer",
+        "searchAgain": "Søk på nytt",
+        "searching": "Søker...",
+        "closeFirefly": "Lukk Firefly"
     },
     "general": {
         "password": "Passord",
-        "confirm_password": "Bekreft passord",
+        "confirmPassword": "Bekreft passord",
         "currentPassword": "Nåværende passord",
         "newPassword": "Nytt passord",
         "confirmNewPassword": "Bekreft nytt passord",
-        "your_seed": "Din hovednøkkel",
-        "recovery_phrase": "Gjenopprettingsfrase",
-        "recent_activity": "Nylig aktivitet",
+        "yourSeed": "Din hovednøkkel",
+        "recoveryPhrase": "Gjenopprettingsfrase",
+        "recentActivity": "Nylig aktivitet",
         "sent": "Sendt",
         "received": "Mottatt",
-        "send_payment": "Send payment",
-        "move_funds": "Move funds",
-        "send_funds": "Send midler",
-        "send_to_address": "Send til en adresse",
-        "scan_qr_or_paste": "Skann en QR-kode eller lim inn en adresse",
-        "move_funds_between_accounts": "Flytt midler mellom kontoer",
-        "send_tokens_to_address": "Send tokens to an address",
-        "manage_account": "Administrer konto",
-        "customize_account": "Tilpass din konto",
-        "account": "Konto",
-        "sending_to_address": "Sender til adresse",
+        "sendPayment": "Send betaling",
+        "moveFunds": "Intern Overføring",
+        "sendFunds": "Send midler",
+        "sendToAddress": "Send til adresse",
+        "scanQrOrPaste": "Skann en QR-kode eller lim inn en adresse",
+        "moveFundsBetweenAccounts": "Flytt midler mellom lommebøker",
+        "sendTokensToAddress": "Send tokens til en adresse",
+        "manageAccount": "Administrere lommebok",
+        "customizeAcount": "Tilpass lommebok",
+        "account": "Lommebok",
+        "sendingToAddress": "Sender til adresse",
         "amount": "Beløp",
-        "add_address": "Legg til adresse",
+        "addAddress": "Legg til adresse",
         "reference": "Referanse",
         "from": "Fra",
         "to": "Til",
-        "receive_funds": "Motta midler",
-        "my_address": "My Address",
-        "share_address": "Del en adresse",
-        "your_address": "Din adresse",
-        "generate_new_address": "Generer en ny adresse",
-        "copy_address": "Kopier adresse",
-        "have_text_backup": "Jeg har en nedskrevet hovednøkkel",
-        "have_file_backup": "Jeg har en sikkerhetskopi-fil",
-        "enter_seed_or_phrase": "Angi gjenopprettingsfrase eller hovednøkkel",
-        "upload_seedvault_or_stronghold": "Importer en Stronghold eller SeedVault-fil",
+        "receiveFunds": "Motta midler",
+        "myAddress": "Min adresse",
+        "shareAddress": "Del en adresse",
+        "yourAddress": "Din adresse",
+        "generateNewAddress": "Generer en ny adresse",
+        "copyAddress": "Kopier adresse",
         "import": "Importer",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
         "language": "Språk",
         "appearance": "Utseende",
-        "light_theme": "Lyst tema",
-        "dark_theme": "Mørkt tema",
-        "total_balance": "Samlet saldo",
-        "account_balance": "Account Balance",
+        "lightTheme": "Lyst tema",
+        "darkTheme": "Mørkt tema",
+        "balance": "Saldo",
+        "accountBalance": "Lommebokens saldo",
         "incoming": "Innkommende",
         "outgoing": "Utgående",
-        "accounts": "Konto",
+        "totalIn": "Totalt inn",
+        "totalOut": "Totalt ut",
+        "accounts": "Lommebøker",
+        "myAccounts": "Lommebøkene mine",
         "automaticNodeSelection": "Automatisk node selektering",
         "manualNodeSelection": "Manuell node selektering",
         "profiles": "Profiler",
-        "developerProfile": "Utviklermodus",
+        "developerProfile": "Utviklerprofil",
+        "developerProfileDescription": "Lar deg koble til testnett",
         "dev": "Utvikling",
-        "create_account": "Opprett en konto",
-        "account_name": "Kontonavn",
-        "latest_transactions": "Siste transaksjoner",
+        "createAccount": "Opprette lommebok",
+        "accountName": "Navn på lommebok",
+        "latestTransactions": "Siste transaksjoner",
         "transactions": "Transaksjoner",
         "security": "Sikkerhet",
-        "account_address": "Konto adresse",
-        "nodes": "Noder"
+        "accountAddress": "Adressen til lommeboken",
+        "nodes": "Noder",
+        "wallet": "Lommebok",
+        "help": "Hjelp",
+        "you": "Du",
+        "messageId": "Meldings-ID",
+        "inputAddress": "Avsenders adresse",
+        "receiveAddress": "Mottaksadresse",
+        "date": "Dato",
+        "status": "Status",
+        "confirmed": "Bekreftet",
+        "pending": "Venter",
+        "noAccounts": "Du har ingen lommebøker, vennligst lag en.",
+        "loadingAccounts": "Laster inn, vennligst vent...",
+        "addProfile": "Legg til profil",
+        "noRecentHistory": "Ingen nylig historie",
+        "firstSync": "Synkroniserer historikk, dette kan ta en stund...",
+        "transferSyncing": "Synkroniserer lommebok",
+        "transferSelectingInputs": "Velger inndata",
+        "transferRemainderAddress": "Genererer innskuddsadresse for overskudd",
+        "transferSigning": "Signerer transaksjonen",
+        "transferPow": "Utfører PoW",
+        "transferBroadcasting": "Promoterer transaksjonen",
+        "transferComplete": "Overføring fullført",
+        "creatingAccount": "Oppretter lommebok, vennligst vent...",
+        "updatingAccount": "Oppdaterer lommebok, vennligst vent...",
+        "accountSyncing": "Lommebok synkroniserer",
+        "accountSyncComplete": "Synkronisering av lommeboken er fullført",
+        "passwordUpdating": "Oppdaterer passord...",
+        "passwordSuccess": "Oppdatering av passord var vellykket",
+        "passwordFailed": "Oppdatering av passord mislyktes",
+        "syncingAccounts": "Synkroniserer lommeboken...",
+        "exportingStronghold": "Eksporterer Stronghold...",
+        "exportingStrongholdSuccess": "Eksporten av Stronghold var vellykket",
+        "exportingStrongholdFailed": "Eksport av Stronghold feilet",
+        "pinCodeUpdating": "Oppdaterer PIN-kode...",
+        "pinCodeSuccess": "Oppdatering av PIN-kode var vellykket",
+        "pinCodeFailed": "Oppdatering av PIN-kode feilet",
+        "passwordStrength": "Passordstyrke",
+        "passwordStrength0": "Dårlig",
+        "passwordStrength1": "Dårlig",
+        "passwordStrength2": "Svak",
+        "passwordStrength3": "Gjennomsnittlig",
+        "passwordStrength4": "Sterk",
+        "creatingProfile": "Oppretter profil, vennligst vent...",
+        "fundMigration": "Migrering av midler",
+        "accountRemoved": "Denne lommeboken er skjult. Vis den for å utføre overføringer.",
+        "receivingTo": "Mottar til {account}",
+        "sendingFrom": "Sender fra {account}",
+        "receivedTo": "Mottar til {account}",
+        "sentFrom": "Sendt fra {account}",
+        "receiving": "Mottar",
+        "sending": "Sender",
+        "legacyNetwork": "Gammelt Nettverk",
+        "capsLock": "Caps Lock er på",
+        "version": "Versjon {version}"
     },
     "dates": {
-        "today": "Today",
-        "days_ago": "{time, plural, one {# day} other {# days}} ago",
-        "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
-        "months_ago": "{time, plural, one {# month} other {# months}} ago",
-        "years_ago": "{time, plural, one {# year} other {# years}} ago"
+        "today": "I dag",
+        "yesterday": "I går",
+        "daysAgo": "{time, plural, one {# dag} other {# dager}} siden",
+        "weeksAgo": "{time, plural, one {# uke} other {# uker}} siden",
+        "monthsAgo": "{time, plural, one {# måned} other {# måneder}} siden",
+        "yearsAgo": "{time, plural, one {# år} other {# år}} siden"
     },
     "notifications": {
         "valueTx": "Mottar {{value}} til {{account}}",
         "confirmed": "Utgående {{value}} fra {{account}} er bekreftet",
+        "confirmedInternal": "{{value}} fra {{senderAccount}} til {{receiverAccount}} er bekreftet",
+        "confirmedInternalNoAccounts": "Intern overføring på {{value}} er bekreftet",
         "failed": "Utgående {{value}} fra {{account}} mislyktes",
-        "downloading_update": "Downloading update",
-        "update_ready": "Update ready",
-        "update_error": "An error occurred during the update, please try again",
-        "restart_install": "Restart to install",
-        "calc_minutes_remaining": "Calculating minutes remaining...",
-        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
+        "downloadingUpdate": "Laster ned oppdatering",
+        "updateReady": "Oppdatering klar",
+        "updateError": "Det oppsto en feil under oppdateringen, vennligst prøv igjen",
+        "restartInstall": "Start på nytt for å installere",
+        "calcMinutesRemaining": "Beregner minutter som gjenstår...",
+        "minutesRemaining": "{minutes, plural, one {1 minutt gjenstår} other {# minutter gjenstår}}",
+        "copiedToClipboard": "Kopiert til utklippstavle",
+        "accountsSynchronized": "Synkronisering av lommebok fullført",
+        "migratedAccountChrysalisDown": "Midlene dine vil bli tilgjengelig etter Chrysalis den 28. april",
+        "migratedAccountChrysalisUp": "Dine midler vil bli tilgjengelig snarlig"
+    },
+    "error": {
+        "profile": {
+            "length": "Profilnavnet ditt kan ikke være lenger enn {length, plural, one {1 tegn} other {# tegn}}.",
+            "duplicate": "En profil med dette navnet eksisterer allerede."
+        },
+        "password": {
+            "doNotMatch": "Passordene samsvarer ikke.",
+            "tooWeak": "Det nye passordet er for svakt.",
+            "row": "Rette rader av taster er enkle å gjette.",
+            "pattern": "Korte tastaturmønstre er enkle å gjette.",
+            "names": "Vanlige navn og etternavn er enkle å gjette.",
+            "repeats": "Gjentagelser som 'aaa' er enkle å gjette.",
+            "repeats2": "Gjentagelser som 'abcabcabc' er enkle å gjette.",
+            "sequence": "Sekvenser av tegn er enkle å gjette.",
+            "years": "Nyere årstall er enkle å gjette.",
+            "dates": "Datoer er enkle å gjette.",
+            "common": "Dette er et ofte brukt passord.",
+            "similar": "Dette ligner på et ofte brukt passord.",
+            "word": "Ett enkelt ord er enkelt å gjette.",
+            "incorrect": "Passordet er feil.",
+            "length": "Passordet ditt kan ikke være lenger enn {length, plural, one {1 tegn} other {# tegn}}."
+        },
+        "pincode": {
+            "length": "PIN-koden din må bestå av {length, plural, one {1 tall} other {# tall}}.",
+            "match": "PIN-kodene samsvarer ikke.",
+            "incorrect": "Gjeldende pinkode er feil."
+        },
+        "account": {
+            "length": "Lommeboknavnet ditt kan ikke være lenger enn {length, plural, one {1 tegn} other {# tegn}}.",
+            "empty": "Du må bruke den nyeste lommeboken før du lager en ny.",
+            "notEmpty": "Du må overføre midlene før du sletter denne lommeboken.",
+            "duplicate": "En lommebok med dette navnet eksisterer allerede.",
+            "tilde": "Et profilnavn kan ikke starte med '~'.",
+            "control": "Et profilnavn kan ikke inneholde et kontrolltegn.",
+            "startDot": "Et profilnavn kan ikke starte med '.'.",
+            "chars": "Et profilnavn kan ikke inneholde følgende tegn: <>:\"/\\|?*"
+        },
+        "send": {
+            "addressLength": "Adresser må bestå av {length, plural, one {1} other {#}} tegn.",
+            "amountTooHigh": "Dette er mer enn din nåværende balanse.",
+            "amountNoFloat": "Om enheter er `i` kan du ikke bruke desimaler.",
+            "amountInvalidFormat": "Beløpet ser ut til å være et ugyldig tall.",
+            "amountZero": "Beløpet må være større enn 0.",
+            "wrongAddressPrefix": "Adresser starter med prefikset {prefix}.",
+            "wrongAddressFormat": "Adressen er ikke riktig formatert.",
+            "invalidAddress": "Adressen er ugyldig.",
+            "insufficientFunds": "Denne lommeboken har ikke nok midler.",
+            "noToAccount": "Du har ikke valgt en lommebok for å sende pengene til.",
+            "sendingDust": "Du kan ikke sende mindre enn 1 Mi.",
+            "leavingDust": "Du kan ikke forlate mindre enn 1 Mi på adressen din."
+        },
+        "node": {
+            "invalid": "Vennligst angi en gyldig URL-adresse.",
+            "https": "HTTPS må fylles ut. Sett opp en utviklerprofil for å bruke usikrede HTTP-tilkoblinger.",
+            "duplicate": "Denne noden har allerede blitt lagt til.",
+            "unsynced": "Noden er ikke synkronisert.",
+            "noSynced": "Ingen synkroniserte noder er tilgjengelige."
+        },
+        "global": {
+            "generic": "Noe gikk galt."
+        },
+        "backup": {
+            "invalid": "Sikkerhetskopifilen ble ikke gjenkjent.",
+            "destination": "Målet for sikkerhetskopieringen var ikke gyldig.",
+            "mnemonic": "Huskeregelen er ugyldig.",
+            "seedTooShort": "Hovednøkkelen skal bestå av 81 tegn. Den {length, plural, one {inneholder nå 1} other {inneholder nå #}}",
+            "seedCharacters": "Hovednøkkelen skal kun inneholde bokstavene A-Z og tallet 9.",
+            "phraseWordCount": "Det skal være 24 ord i gjenopprettingsfrasen din, akkurat nå er det {length, plural, one {1} other {#}}.",
+            "phraseUnrecognizedWord": "Ukjent ord \"{word}\" i gjenopprettingsfrasen din.",
+            "phraseCaseWord": "Ordet \"{word}\" kan kun ha små bokstaver"
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "Risikonivå: {risk}",
+            "veryHigh": "Veldig høyt",
+            "high": "Høyt",
+            "medium": "Middels",
+            "low": "Lavt",
+            "veryLow": "Veldig lavt"
+        }
     }
 }

@@ -1,22 +1,16 @@
-import { writable, get } from 'svelte/store'
+import { get, writable } from 'svelte/store'
 import { persistent } from './helpers'
+import { localize } from './i18n'
+import { showAppNotification } from './notifications'
+import { closePopup } from './popup'
+import { activeProfile, clearActiveProfile, isStrongholdLocked } from './profile'
 import { resetRouter } from './router'
-import { activeProfile } from './profile'
-import { destroyActor, resetWallet } from './wallet'
-/**
- * Notification content
- */
-export const notification = writable<string>(null)
+import { api, destroyActor, resetWallet } from './wallet'
 
 /**
  * Mobile mode
  */
 export const mobile = writable<boolean>(false)
-
-/**
- * Dark mode enabled state
- */
-export const darkMode = persistent<boolean>('darkMode', false)
 
 /**
  * Wallet access pin
@@ -37,13 +31,14 @@ interface SendParams {
     amount: number
     address: string
     message: string
+    isInternal: boolean
 }
 
 /**
  * Input paramaters for sending transactions
  */
-export const sendParams = writable<SendParams>({ amount: 0, address: '', message: '' })
-export const clearSendParams = sendParams.set({ amount: 0, address: '', message: '' })
+export const sendParams = writable<SendParams>({ amount: 0, address: '', message: '', isInternal: false })
+export const clearSendParams = (isInternal = false) => sendParams.set({ amount: 0, address: '', message: '', isInternal })
 
 /**
  * Determines whether a user is logged in
@@ -51,16 +46,61 @@ export const clearSendParams = sendParams.set({ amount: 0, address: '', message:
 export const loggedIn = writable<boolean>(false)
 
 /**
- * Determines if user can make developer profiles
+ * Cleanup the signup vars
  */
-export const developerMode = persistent<boolean>('developerMode', false)
+export const cleanupSignup = () => {
+    mnemonic.set(null)
+    strongholdPassword.set(null)
+    walletPin.set(null)
+}
 
 /**
+ * Log in to the current profile
+ */
+export const login = () => {
+    loggedIn.set(true)
+}
+
+/**
+
  * Logout from current profile
  */
 export const logout = () => {
-    destroyActor(get(activeProfile).id)
-    resetWallet()
-    resetRouter()
-    loggedIn.set(false)
+    return new Promise<void>((resolve) => {
+        const ap = get(activeProfile);
+
+        const _cleanup = () => {
+            if (ap) {
+                destroyActor(ap.id)
+            }
+            isStrongholdLocked.set(true)
+            clearSendParams()
+            closePopup()
+            clearActiveProfile()
+            resetWallet()
+            resetRouter()
+            loggedIn.set(false)
+
+            resolve()
+        }
+
+        if (!get(isStrongholdLocked)) {
+            api.lockStronghold({
+                onSuccess() {
+                    _cleanup()
+                },
+                onError(err) {
+                    _cleanup()
+
+                    showAppNotification({
+                        type: 'error',
+                        message: localize(err.error),
+                    })
+
+                },
+            })
+        } else {
+            _cleanup()
+        }
+    })
 }

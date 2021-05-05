@@ -1,9 +1,14 @@
-import { Unit, convertUnits } from '@iota/unit-converter'
+import { Unit } from '@iota/unit-converter'
+import Big from 'big.js'
+import { getCurrencyPosition, formatNumber } from 'shared/lib/currency'
+
+// Set this to avoid small numbers switching to exponential format
+Big.NE = -20
 
 /**
  * IOTA Units Map
  */
-const UNIT_MAP: { [unit in Unit]: { val: number; dp: number } } = {
+export const UNIT_MAP: { [unit in Unit]: { val: number; dp: number } } = {
     i: { val: 1, dp: 0 },
     Ki: { val: 1000, dp: 3 },
     Mi: { val: 1000000, dp: 6 },
@@ -15,21 +20,46 @@ const UNIT_MAP: { [unit in Unit]: { val: number; dp: number } } = {
 /**
  * Formats IOTA value
  *
- * @method formatUnit
+ * @method formatUnitBestMatch
  *
  * @param {number} value
  * @param {number} decimalPlaces
+ * @param {boolean} includeUnits Include the units in the output
+ * @param {number} overrideDecimalPlaces Override the default decimal places.
  *
  * @returns {string}
  */
-export const formatUnit = (value: number, decimalPlaces = 2): string => {
-    const unit: Unit = getUnit(value)
+export const formatUnitBestMatch = (value: number, includeUnits: boolean = true, overrideDecimalPlaces?: number): string => {
+    return formatUnitPrecision(value, getUnit(value), includeUnits, false, overrideDecimalPlaces)
+}
 
-    if (!value) {
-        return `0 ${unit}`
+/**
+ * Format a value with the provided value precision
+ * @param valueRaw The raw value to format
+ * @param unit The unit precision
+ * @param includeUnits Include the units in the output
+ * @param overrideDecimalPlaces Override the default decimal places.
+ * @param grouped Group the thousands
+ */
+export function formatUnitPrecision(valueRaw: number, unit: Unit, includeUnits: boolean = true, grouped: boolean = false, overrideDecimalPlaces?: number): string {
+    // At the moment we have no symbol for IOTA so we always put the currency code
+    // at the end, in the future when we have a symbol this can be updated to position
+    // it correctly to the left when necessary
+    const currencyPosition = getCurrencyPosition()
+
+    if (!valueRaw) {
+        return includeUnits ? (currencyPosition === `left` ? `0 ${unit}` : `0 ${unit}`) : '0'
     }
 
-    return unit === Unit.i ? `${value} ${Unit.i}` : `${convertUnits(value, Unit.i, unit).toFixed(decimalPlaces)} ${unit}`
+    const converted = changeUnits(valueRaw, Unit.i, unit)
+
+    const formatted = formatNumber(converted, overrideDecimalPlaces ?? UNIT_MAP[unit].dp, overrideDecimalPlaces ?? UNIT_MAP[unit].dp, unit === Unit.i ? 0 : 2, grouped)
+
+    if (includeUnits) {
+        return currencyPosition === `left` ? `${formatted} ${unit}` : `${formatted} ${unit}`
+    } else {
+        return formatted
+    }
 }
 
 /**
@@ -44,8 +74,8 @@ export const formatUnit = (value: number, decimalPlaces = 2): string => {
 const getUnit = (value: number): Unit => {
     let bestUnits: Unit = Unit.i
 
-    if (!value) {
-        return bestUnits
+    if (!value || value === 0) {
+        return Unit.Mi
     }
 
     const checkLength = Math.abs(value).toString().length
@@ -63,4 +93,25 @@ const getUnit = (value: number): Unit => {
     }
 
     return bestUnits
+}
+
+/**
+ * Convert the value to different units.
+ * @param value The value to convert.
+ * @param fromUnit The form unit.
+ * @param toUnit The to unit.
+ * @returns The formatted unit.
+ */
+export const changeUnits = (value: number, fromUnit: Unit, toUnit: Unit): number => {
+    if (value === 0) {
+        return 0;
+    }
+
+    if (fromUnit === toUnit) {
+        return value;
+    }
+
+    const scaledValue = Number(new Big(value).times(UNIT_MAP[fromUnit].val).div(UNIT_MAP[toUnit].val))
+
+    return toUnit === Unit.i ? Math.round(scaledValue) : scaledValue
 }

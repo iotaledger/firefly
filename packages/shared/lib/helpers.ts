@@ -1,4 +1,5 @@
 import { writable, Writable } from 'svelte/store'
+import type { Payload } from './typings/message'
 
 /**
  * Update application path
@@ -25,21 +26,73 @@ export const persistent = <T>(key: string, initialValue: T): Writable<T> => {
     const state = writable(value)
 
     state.subscribe(($value): void => {
-        localStorage.setItem(key, JSON.stringify($value))
+        if ($value === undefined || $value === null) {
+            localStorage.removeItem(key)
+        } else {
+            localStorage.setItem(key, JSON.stringify($value))
+        }
     })
 
     return state
 }
 
 /**
+ * Get the length of a string after it has been trimmed supporting emojis
+ * @param name The string to get the length of
+ * @returns 
+ */
+export const getTrimmedLength = (name: string | undefined) => {
+    if (!name) {
+        return 0
+    }
+
+    return name.trim().match(/./gu)?.length ?? 0
+}
+
+/**
+ * Does the string contain invalid filename chars
+ * @param name The name to validate
+ * @returns 
+ */
+export const validateFilenameChars = (name: string | undefined) => {
+    if (!name) {
+        return
+    }
+    if (name.startsWith("~")) {
+        return 'tilde'
+    }
+    if (/[\u0000-\u001f\u0080-\u009f]/g.test(name)) {
+        return 'control'
+    }
+    if (/^\.\./.test(name)) {
+        return 'startDot';
+    }
+    if (/[<>:"/\\|?*]/g.test(name)) {
+        return 'chars'
+    }
+}
+
+/**
  * Extract initials from string
  */
-export const getInitials = (string: string, maxChars: number) => {
-    let initialsArray = string.split(' ').map(n => n[0].toUpperCase())
+export const getInitials = (name: string | undefined, maxChars: number) => {
+    if (!name || !name.trim()) {
+        return ""
+    }
+
+    let initialsArray = name
+        .trim()
+        .split(' ')
+        .filter(n => n)
+        .map(n => n.match(/./ug)) // match characters for emoji compatibility 
+        .filter(n => n)
+        .map(n => n[0])
+
     if (maxChars) {
         initialsArray = initialsArray.slice(0, maxChars)
     }
-    return initialsArray.join('')
+
+    return initialsArray.join('').toUpperCase()
 }
 
 /**
@@ -51,9 +104,9 @@ export const getInitials = (string: string, maxChars: number) => {
  * @param dotCount: Count of dots in between first and end portion. Default = 3
  */
 
-export const truncateString = (str: string, firstCharCount: number = 5, endCharCount: number = 5, dotCount: number = 3) => {
+export const truncateString = (str: string = '', firstCharCount: number = 5, endCharCount: number = 5, dotCount: number = 3) => {
     const MAX_LENGTH = 13
-    if (str.length <= MAX_LENGTH) {
+    if (!str || str.length <= MAX_LENGTH) {
         return str
     }
     let convertedStr = ''
@@ -61,36 +114,6 @@ export const truncateString = (str: string, firstCharCount: number = 5, endCharC
     convertedStr += '.'.repeat(dotCount)
     convertedStr += str.substring(str.length - endCharCount, str.length)
     return convertedStr
-}
-
-/**
- * Set text to clipboard
- */
-export const setClipboard = (input: string): boolean => {
-    try {
-        const textArea = document.createElement('textarea')
-        textArea.value = input
-        document.body.appendChild(textArea)
-
-        if (navigator.userAgent.match(/ipad|iphone/i)) {
-            const range = document.createRange()
-            range.selectNodeContents(textArea)
-            const selection = window.getSelection()
-            selection.removeAllRanges()
-            selection.addRange(range)
-            textArea.setSelectionRange(0, 999999)
-        } else {
-            textArea.select()
-        }
-
-        document.execCommand('copy')
-        document.body.removeChild(textArea)
-
-        return true
-    } catch (err) {
-        console.log(err)
-        return false
-    }
 }
 
 /**
@@ -111,16 +134,23 @@ export const diffDates = (firstDate: Date, secondDate: Date) => {
     const years = Math.floor(months / 12)
 
     if (years > 0) {
-        return { unit: 'years_ago', value: years }
-    } else if (months > 0) {
-        return { unit: 'months_ago', value: months }
-    } else if (weeks > 0) {
-        return { unit: 'weeks_ago', value: weeks }
-    } else if (days > 0) {
-        return { unit: 'days_ago', value: days }
-    } else {
-        return { unit: 'today' }
+        return { unit: 'yearsAgo', value: years }
     }
+    if (months > 0) {
+        return { unit: 'monthsAgo', value: months }
+    }
+    if (weeks > 0) {
+        return { unit: 'weeksAgo', value: weeks }
+    }
+    if (days > 0) {
+        return { unit: 'daysAgo', value: days }
+    }
+
+    if (firstDate.getDate() !== secondDate.getDate()) {
+        return { unit: 'yesterday' }
+    }
+
+    return { unit: 'today' }
 }
 
 /**
@@ -151,7 +181,7 @@ export const getBackupWarningColor = (lastBackupDate: Date) => {
     }
     const { lessThanAMonth, lessThanThreeMonths } = isRecentDate(lastBackupDate)
 
-    return lessThanAMonth ? 'blue' : lessThanThreeMonths ? 'yellow' : 'red'
+    return lessThanAMonth ? 'blue' : lessThanThreeMonths ? 'yellow' : 'orange'
 }
 
 /**
@@ -172,3 +202,50 @@ export const convertHexToRGBA = (hexCode: string, opacity: number = 100) => {
 
     return `rgba(${r},${g},${b},${opacity / 100})`;
 };
+
+/**
+ * Strip trailing slashes from the text
+ * @param str The text to strip the values from
+ * @returns The stripped text
+ */
+export const stripTrailingSlash = (str) => {
+    return str ? str.replace(/\/+$/, '') : ''
+}
+
+/**
+ * Strip spaces from the text
+ * @param str The text to strip the values from
+ * @returns The stripped text
+ */
+export const stripSpaces = (str) => {
+    return str ? str.replace(/ /g, '') : ''
+}
+
+/**
+ * Create a deep copy of an object
+ * @param obj The object to copy
+ * @returns The copied object
+ */
+export function deepCopy(obj) {
+    if(typeof obj !== 'object' || obj === null) {
+        return obj;
+    }
+
+    if(obj instanceof Date) {
+        return new Date(obj.getTime());
+    }
+
+    if(obj instanceof Array) {
+        return obj.reduce((arr, item, i) => {
+            arr[i] = deepCopy(item);
+            return arr;
+        }, []);
+    }
+
+    if(obj instanceof Object) {
+        return Object.keys(obj).reduce((newObj, key) => {
+            newObj[key] = deepCopy(obj[key]);
+            return newObj;
+        }, {})
+    }
+}

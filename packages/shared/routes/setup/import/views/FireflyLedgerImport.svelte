@@ -13,10 +13,10 @@
     const openLedgerNotConnectedPopup = () => {
         openPopup({
             type: 'ledgerNotConnected',
+            hideClose: true,
             props: {
                 message: locale('views.import_from_ledger.ledger_not_connected'),
-                closable: false
-            }
+            },
         })
     }
 
@@ -25,7 +25,7 @@
     let checkIfLedgerIsConnected = true
     let isLedgerConnected = true
 
-    const unsubscribe = popupState.subscribe(state => {
+    const unsubscribe = popupState.subscribe((state) => {
         if (!(state.active || isLedgerConnected)) {
             checkIfLedgerIsConnected = false
             handleBackClick()
@@ -60,7 +60,7 @@
             },
             onError() {
                 handleLedgerDeviceNotConnected()
-            }
+            },
         })
     }
 
@@ -70,12 +70,12 @@
         restoring = true
         api.createAccount(
             {
-               clientOptions: {
+                clientOptions: {
                     node: node.url,
                     nodes: nodes.map((node) => node.url),
                     network: $network,
                 },
-                signerType: { type: simulator ? 'LedgerNanoSimulator' : 'LedgerNano' }
+                signerType: { type: simulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
             },
             {
                 onSuccess(createAccountResponse) {
@@ -83,7 +83,10 @@
                         onSuccess(syncAccountsResponse) {
                             let balance = 0
                             for (const syncedAccount of syncAccountsResponse.payload) {
-                                const accountBalance = syncedAccount.addresses.reduce((total, address) => total + address.balance, 0)
+                                const accountBalance = syncedAccount.addresses.reduce(
+                                    (total, address) => total + address.balance,
+                                    0
+                                )
                                 balance += accountBalance
                             }
                             restoring = false
@@ -92,13 +95,13 @@
                         onError(error) {
                             restoring = false
                             console.error(error)
-                        }
+                        },
                     })
                 },
                 onError(error) {
                     restoring = false
-                    console.error(error);
-                }
+                    console.error(error)
+                },
             }
         )
     }
@@ -109,21 +112,24 @@
 </script>
 
 {#if mobile}
-<div>foo</div>
+    <div>foo</div>
 {:else}
-<OnboardingLayout onBackClick={handleBackClick}>
-    <div slot="leftpane__content">
-        <Text type="h2" classes="mb-5">{locale('views.import_from_firefly_ledger.title')}</Text>
-        <Text type="p" secondary classes="mb-8">{locale('views.import_from_firefly_ledger.body')}</Text>
-    </div>
-    <div slot="leftpane__action">
-        <Button classes="w-full" disabled={restoring} onClick={restore}>
-            {locale(restoring ? 'views.import_from_firefly_ledger.restoring' : 'actions.restore')}
-        </Button>
-    </div>
-    <div slot="rightpane" class="w-full h-full flex justify-end items-center">
-        <Illustration illustration="import-from-firefly-ledger-desktop" height="100%" width="auto"
-            classes="h-full object-cover object-left" />
-    </div>
-</OnboardingLayout>
+    <OnboardingLayout onBackClick={handleBackClick}>
+        <div slot="leftpane__content">
+            <Text type="h2" classes="mb-5">{locale('views.import_from_firefly_ledger.title')}</Text>
+            <Text type="p" secondary classes="mb-8">{locale('views.import_from_firefly_ledger.body')}</Text>
+        </div>
+        <div slot="leftpane__action">
+            <Button classes="w-full" disabled={restoring} onClick={restore}>
+                {locale(restoring ? 'views.import_from_firefly_ledger.restoring' : 'actions.restore')}
+            </Button>
+        </div>
+        <div slot="rightpane" class="w-full h-full flex justify-end items-center">
+            <Illustration
+                illustration="import-from-firefly-ledger-desktop"
+                height="100%"
+                width="auto"
+                classes="h-full object-cover object-left" />
+        </div>
+    </OnboardingLayout>
 {/if}

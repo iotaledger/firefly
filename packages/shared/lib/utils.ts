@@ -1,4 +1,8 @@
+import { Electron } from 'shared/lib/electron'
+import { localize } from 'shared/lib/i18n'
+import { showAppNotification } from 'shared/lib/notifications'
 import validUrl from 'valid-url'
+import { Bech32 } from "shared/lib/bech32"
 
 export const VALID_MAINNET_ADDRESS = /^iota1[02-9ac-hj-np-z]{59}$/
 export const VALID_DEVNET_ADDRESS = /^atoi1[02-9ac-hj-np-z]{59}$/
@@ -21,24 +25,7 @@ export function bindEvents(element, events) {
     }
 }
 
-/**
- * Validate seed format
- */
 
-export const validateSeed = (seed) => {
-    const REGEX = /^[a-z0-9]+$/i
-    const SEED_LENGTH = 81
-    return REGEX.test(seed) && seed.length == SEED_LENGTH
-}
-
-/**
- * Validate recovery phrase format
- */
-export const validateRecoveryPhrase = (phrase) => {
-    const RECOVERY_PHRASE_LENGTH = 24
-    const REGEX = /^[a-zA-Z ]*$/
-    return REGEX.test(phrase) && phrase.match(/\b(\w+)\b/g)?.length == RECOVERY_PHRASE_LENGTH
-}
 
 /**
  * Validate pincode format
@@ -92,7 +79,7 @@ export const parseAddress = (input) => {
         return null
     }
 
-    if (input.match(VALID_MAINNET_ADDRESS)) {
+    if (input.match(VALID_MAINNET_ADDRESS) || input.match(VALID_DEVNET_ADDRESS)) {
         result.address = input
         return result
     }
@@ -113,7 +100,7 @@ export const parseAddress = (input) => {
             parsed = JSON.parse(input)
         }
 
-        if (parsed.address.match(VALID_MAINNET_ADDRESS)) {
+        if (parsed.address.match(VALID_MAINNET_ADDRESS) || parsed.address.match(VALID_DEVNET_ADDRESS)) {
             result.address = parsed.address
         } else {
             return null
@@ -160,4 +147,101 @@ export const isValidHttpsUrl = (url) => {
         return true
     }
     return false
+}
+
+/**
+ * Validate an address given its prefix.
+ * @param prefix The bech32 hrp prefix to match.
+ * @param addr The address to validate.
+ * @returns The error string to use if it does not validate.
+ */
+export const validateBech32Address = (prefix, addr) => {
+    if (!addr || !addr.startsWith(prefix)) {
+        return localize('error.send.wrongAddressPrefix', {
+            values: {
+                prefix: prefix,
+            },
+        })
+    }
+    if (!new RegExp(`^${prefix}1[02-9ac-hj-np-z]{59}$`).test(addr)) {
+        return localize('error.send.wrongAddressFormat')
+    }
+
+    let isValid = false
+    try {
+        const decoded = Bech32.decode(addr)
+        isValid = decoded && decoded.humanReadablePart === prefix
+    } catch {
+    }
+
+    if (!isValid) {
+        return localize('error.send.invalidAddress')
+    }
+}
+
+/**
+ * Debounce the opertation
+ * @param callback The callback to call in completion
+ * @param wait How to long wait before calling callback
+ */
+export function debounce(callback, wait = 500) {
+    let _timeout
+    return (...args) => {
+        const context = this
+        clearTimeout(_timeout)
+        _timeout = setTimeout(() => callback.apply(context, args), wait)
+    }
+}
+
+/**
+ * Set text to clipboard
+ */
+export const setClipboard = (input: string): boolean => {
+    try {
+        const textArea = document.createElement('textarea')
+        textArea.value = input
+        document.body.appendChild(textArea)
+
+        if (navigator.userAgent.match(/ipad|iphone/i)) {
+            const range = document.createRange()
+            range.selectNodeContents(textArea)
+            const selection = window.getSelection()
+            selection.removeAllRanges()
+            selection.addRange(range)
+            textArea.setSelectionRange(0, 999999)
+        } else {
+            textArea.select()
+        }
+
+        document.execCommand('copy')
+        document.body.removeChild(textArea)
+
+        const notificationMessage = localize('notifications.copiedToClipboard')
+        showAppNotification({ type: "info", message: notificationMessage })
+
+        return true
+    } catch (err) {
+        console.log(err)
+        return false
+    }
+}
+
+export const getDefaultStrongholdName = (): string => {
+    // Match https://github.com/iotaledger/wallet.rs/blob/ffbeaa3466b44f79dd5f87e14ed1bdc4846d9e85/src/account_manager.rs#L1428
+    // Trim milliseconds and replace colons with dashes
+    const tzoffset = (new Date()).getTimezoneOffset() * 60000; // offset in milliseconds
+    const localISOTime = (new Date(Date.now() - tzoffset)).toISOString()
+    const date = localISOTime.slice(0, -5).replace(/:/g, "-")
+    return `firefly-backup-${date}.stronghold`
+}
+
+export const downloadRecoveryKit = () => {
+    fetch('assets/docs/recovery-kit.pdf')
+        .then((response) => response.arrayBuffer())
+        .then((data) => {
+            Electron.saveRecoveryKit(data)
+        })
+        .catch((err) => {
+            console.error(err)
+        })
 }

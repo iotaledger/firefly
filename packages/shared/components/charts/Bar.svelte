@@ -7,6 +7,8 @@
     export let labels = []
     export let datasets = []
     export let color = 'blue'
+    export let inlineStyle = 'height: calc(50vh - 130px);'
+    export let formatYAxis = (value) => Number(value.toString())
 
     let canvas
     let chart
@@ -122,6 +124,7 @@
                 }),
             },
             options: {
+                animation: false,
                 barRoundness: 1,
                 responsive: true,
                 maintainAspectRatio: false,
@@ -141,10 +144,18 @@
                     ],
                     yAxes: [
                         {
+                            gridLines: {
+                                display: false,
+                                drawBorder: false,
+                            },
                             ticks: {
+                                display: false,
                                 beginAtZero: true,
                                 autoSkip: true,
                                 maxTicksLimit: 4,
+                                callback: function (value, index, values) {
+                                    return formatYAxis(value)
+                                },
                             },
                         },
                     ],
@@ -157,8 +168,8 @@
                     displayColors: false,
                     titleFontSize: 12,
                     bodyFontSize: 11,
-                    titleFontFamily: 'DM Sans',
-                    bodyFontFamily: 'DM Sans',
+                    titleFontFamily: 'Inter',
+                    bodyFontFamily: 'Inter',
                     bodyFontColor: fullConfig.theme.colors[color]['200'],
                     callbacks: {
                         title: function ([tooltipItem]) {
@@ -194,4 +205,4 @@
     }
 </script>
 
-<div class="relative" style="height: calc(50vh - 130px);"><canvas bind:this={canvas} width="600" height="450" /></div>
+<div class="relative" style={inlineStyle}><canvas bind:this={canvas} width="600" height="450" /></div>

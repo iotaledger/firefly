@@ -1,52 +1,77 @@
 <script lang="typescript">
-    import { Button, Input, Text } from 'shared/components'
+    import { Button, Input, Spinner, Text } from 'shared/components'
+    import { getTrimmedLength } from 'shared/lib/helpers'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
+    import { MAX_ACCOUNT_NAME_LENGTH, wallet } from 'shared/lib/wallet'
 
     export let locale
     export let onCreate
     export let error = ''
 
-    let accountName
+    const { accounts } = $wallet
 
-    const MAX_ACCOUNT_NAME_LENGTH = 20
+    let accountAlias = ''
+    let isBusy = false
+
+    // This looks odd but sets a reactive dependency on accountAlias, so when it changes the error will clear
+    $: accountAlias, (error = '')
 
     const handleCreateClick = () => {
-        resetError()
-        if (accountName.length > MAX_ACCOUNT_NAME_LENGTH) {
-            return error = locale('error.account.length', { 
-                values: {
-                    length: MAX_ACCOUNT_NAME_LENGTH
-                }
+        const trimmedAccountAlias = accountAlias.trim()
+        if (trimmedAccountAlias) {
+            error = ''
+            if (getTrimmedLength(trimmedAccountAlias) > MAX_ACCOUNT_NAME_LENGTH) {
+                return (error = locale('error.account.length', {
+                    values: {
+                        length: MAX_ACCOUNT_NAME_LENGTH,
+                    },
+                }))
+            }
+            if ($accounts.find((a) => a.alias === trimmedAccountAlias)) {
+                return (error = locale('error.account.duplicate'))
+            }
+            isBusy = true
+            onCreate(trimmedAccountAlias, (err) => {
+                error = err || ''
+                isBusy = false
             })
-        }
-        if (accountName) {
-            onCreate(accountName)
         }
     }
     const handleCancelClick = () => {
-        resetError()
-        walletRoute.set(WalletRoutes.Init)
-    }
-    const resetError = () => {
         error = ''
+        walletRoute.set(WalletRoutes.Init)
     }
 </script>
 
 <div class="px-8 py-6 flex flex-col h-full justify-between">
     <div>
         <div class="flex flex-row mb-6">
-            <Text type="h5">{locale('general.create_account')}</Text>
+            <Text type="h5">{locale('general.createAccount')}</Text>
         </div>
         <div class="w-full h-full flex flex-col justify-between">
-            <Input {error} bind:value={accountName} placeholder={locale('general.account_name')} autofocus submitHandler={handleCreateClick}/>
+            <Input
+                {error}
+                bind:value={accountAlias}
+                placeholder={locale('general.accountName')}
+                autofocus
+                submitHandler={handleCreateClick}
+                disabled={isBusy} />
         </div>
     </div>
     <!-- Action -->
-    <div class="flex flex-row justify-between px-2">
-        <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()}>{locale('actions.cancel')}</Button>
-        <Button disabled={!accountName} classes="-mx-2 w-1/2" onClick={() => handleCreateClick()}>
-            {locale('actions.create')}
-        </Button>
-    </div>
+    {#if isBusy && !error}
+        <Spinner busy={true} message={locale('general.creatingAccount')} classes="justify-center mb-4" />
+    {/if}
+    {#if !isBusy}
+        <div class="flex flex-row justify-between px-2">
+            <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()}>{locale('actions.cancel')}</Button>
+            <Button
+                disabled={!getTrimmedLength(accountAlias) || isBusy}
+                classes="-mx-2 w-1/2"
+                onClick={() => handleCreateClick()}>
+                {locale('actions.create')}
+            </Button>
+        </div>
+    {/if}
 </div>

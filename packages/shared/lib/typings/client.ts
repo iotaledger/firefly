@@ -1,23 +1,16 @@
-export enum Network {
-    Mainnet = 'mainnet',
-    Testnet = 'testnet',
-    Devnet = 'devnet',
-    Comnet = 'comnet',
-}
-
-// TODO: use this interface when https://github.com/iotaledger/wallet.rs/pull/373 is merged
 export interface Node {
     url: string
     auth?: {
         password: string
         username: string
-    }
+    },
+    disabled?: boolean
 }
 
 export interface ClientOptions {
-    nodes?: string[]
-    node?: string
-    network?: Network
+    nodes?: Node[]
+    node?: Node
+    network?: string
     localPow?: boolean
     nodeSyncEnabled?: boolean
     nodePoolUrls?: string[]

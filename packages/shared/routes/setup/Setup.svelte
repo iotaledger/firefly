@@ -1,48 +1,18 @@
 <script lang="typescript">
-    import { createEventDispatcher } from 'svelte'
-    import { get } from 'svelte/store'
-    import { OnboardingLayout, Illustration, Text, Button, Input, Checkbox } from 'shared/components'
-    import { createProfile, disposeNewProfile, newProfile } from 'shared/lib/profile'
-    import { developerMode } from 'shared/lib/app'
-    import { initialise, getStoragePath } from 'shared/lib/wallet'
+    import { Animation, Button, Link, Logo, OnboardingLayout, Text } from 'shared/components'
+    import { Electron } from 'shared/lib/electron'
     import { SetupType } from 'shared/lib/typings/routes'
+    import { createEventDispatcher } from 'svelte'
 
     export let locale
     export let mobile
-    let error = ''
 
     const dispatch = createEventDispatcher()
 
-    let isDeveloperProfile = false
-    let profileName = get(newProfile)?.name ?? ''
-
-    const MAX_PROFILE_NAME_LENGTH = 20
-
     function handleContinueClick(setupType) {
-        let profile
-
-        if (profileName.length > MAX_PROFILE_NAME_LENGTH) {
-            error = locale('error.profile.length', {
-                values: {
-                    length: MAX_PROFILE_NAME_LENGTH
-                }
-            })
-        } else {
-            try {
-                profile = createProfile(profileName, isDeveloperProfile)
-
-                return window['Electron'].getUserDataPath().then((path) => {
-                    initialise(profile.id, getStoragePath(path, profile.name))
-                    dispatch('next', { setupType })
-                })
-            } catch (error) {
-                console.error(error)
-            }
-        }
+        dispatch('next', { setupType })
     }
-
     function handleBackClick() {
-        disposeNewProfile();
         dispatch('previous')
     }
 </script>
@@ -52,22 +22,30 @@
 {:else}
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
-            <Text type="h2" classes="mb-4">{locale('views.setup.title')}</Text>
-            <Input {error} bind:value={profileName} placeholder={locale('views.setup.profile_name')} classes="w-full" autofocus/>
-            {#if $developerMode}
-                <Checkbox label={locale('general.developerProfile')} bind:checked={isDeveloperProfile} />
-            {/if}
+            <Text type="h2">{locale('views.setup.title')}</Text>
+            <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-16 p-8 pt-16">
+                <div class="absolute -top-14">
+                    <Logo width="auto" height="auto" logo="logo-chrysalis-gem" />
+                </div>
+                <Text type="h3" classes="mb-6 text-center">{locale('views.setup.chrysalisTitle')}</Text>
+                <Text type="p" secondary classes="mb-8">{locale('views.setup.chrysalisBody')}</Text>
+                <Link onClick={() => Electron.openUrl('https://blog.iota.org/firefly-token-migration/')}>
+                    {locale('views.setup.learnMore')}
+                </Link>
+            </div>
         </div>
-        <div slot="leftpane__action" class="flex flex-row flex-wrap items-center space-x-4">
-            <Button secondary classes="flex-1" disabled={!profileName} onClick={() => handleContinueClick(SetupType.Import)}>
-                {locale('actions.import_wallet')}
+        <div slot="leftpane__action" class="flex flex-col space-y-4">
+            <Button icon="plus" classes="w-full" secondary onClick={() => handleContinueClick(SetupType.New)}>
+                {locale('actions.createWallet')}
+                <Text type="p" secondary smaller>{locale('actions.createWalletDescription')}</Text>
             </Button>
-            <Button classes="flex-1" disabled={!profileName} onClick={() => handleContinueClick(SetupType.New)}>
-                {locale('actions.create_wallet')}
+            <Button icon="transfer" classes="w-full" secondary onClick={() => handleContinueClick(SetupType.Import)}>
+                {locale('actions.restoreWallet')}
+                <Text type="p" secondary smaller>{locale('actions.restoreWalletDescription')}</Text>
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-end items-center">
-            <Illustration illustration="setup-desktop" height="100%" width="auto" classes="h-full object-cover object-left" />
+        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
+            <Animation animation="setup-desktop" />
         </div>
     </OnboardingLayout>
 {/if}

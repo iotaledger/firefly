@@ -84,8 +84,8 @@ export function getAccounts(): Promise<number> {
   return _getAccounts(sendMessage)
 }
 
-export function syncAccounts(): Promise<number> {
-  return _syncAccounts(sendMessage)
+export function syncAccounts(addressIndex?: number, gapLimit?: number, accountDiscoveryThreshold?: number): Promise<number> {
+  return _syncAccounts(sendMessage, addressIndex, gapLimit, accountDiscoveryThreshold)
 }
 
 export function generateAddress(accountId: AccountIdentifier): Promise<number> {
@@ -120,8 +120,8 @@ export function reattach(accountId: AccountIdentifier, messageId: string): Promi
   return _reattach(sendMessage, accountId, messageId)
 }
 
-export function backup(destinationPath: string): Promise<number> {
-  return _backup(sendMessage, destinationPath)
+export function backup(destinationPath: string, password: string): Promise<number> {
+  return _backup(sendMessage, destinationPath, password)
 }
 
 export function restoreBackup(backupPath: string, password: string): Promise<number> {

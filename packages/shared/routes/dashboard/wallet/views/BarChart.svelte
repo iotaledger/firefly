@@ -1,11 +1,13 @@
 <script lang="typescript">
     import { Chart, Text } from 'shared/components'
     import { getAccountActivityData } from 'shared/lib/chart'
+    import type { WalletAccount } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
+    import type { Readable } from 'svelte/store'
 
     export let locale
 
-    const selectedAccount = getContext('selectedAccount')
+    const selectedAccount = getContext<Readable<WalletAccount>>('selectedAccount')
 
     let chartData = {
         incoming: {},
@@ -24,9 +26,7 @@
     }
 </script>
 
-<div data-label="portfolio-token-chart" class="w-full h-full px-8 py-4">
-    <Text type="h4" classes="mb-4">{locale('charts.account_activity')}</Text>
-    <div class="flex-auto">
-        <Chart type="bar" {labels} datasets={[incoming, outgoing]} {color} />
-    </div>
+<div data-label="bar-chart" class="flex flex-col justify-between w-full h-full px-8 pt-6 pb-4">
+    <Text type="h5" classes="mb-4">{locale('charts.accountActivity')}</Text>
+    <Chart type="bar" {labels} datasets={[incoming, outgoing]} {color} formatYAxis={(value) => value.toFixed(2)} />
 </div>

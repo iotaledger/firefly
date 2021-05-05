@@ -1,29 +1,12 @@
-import { get, writable } from 'svelte/store'
+import { Electron, NativeProgress, VersionDetails } from 'shared/lib/electron'
+import { localize } from 'shared/lib/i18n'
 import {
-    showAppNotification,
-    removeDisplayNotification,
-    updateDisplayNotificationProgress,
-    updateDisplayNotification,
-    NOTIFICATION_TIMEOUT_NEVER,
-    NotificationData
+    NotificationData, NOTIFICATION_TIMEOUT_NEVER, removeDisplayNotification, showAppNotification,
+    updateDisplayNotification, updateDisplayNotificationProgress
 } from 'shared/lib/notifications'
-import { _ } from 'shared/lib/i18n'
+import { writable } from 'svelte/store'
 
-type VersionDetails = {
-    upToDate: boolean
-    currentVersion: string
-    newVersion: string
-    newVersionReleaseDate: Date
-    changelog: string
-}
-
-type NativeProgress = {
-    total: number
-    delta: number
-    transferred: number
-    percent: number
-    bytesPerSecond: number
-}
+const DEFAULT_APP_UPDATER_POLL_INTERVAL = 900000 // 15 Minutes
 
 export const versionDetails = writable<VersionDetails>({
     upToDate: true,
@@ -39,11 +22,11 @@ export const updateBusy = writable<boolean>(false)
 export const updateComplete = writable<boolean>(false)
 export const updateError = writable<boolean>(false)
 
-window['Electron'].onEvent('version-details', (nativeVersionDetails) => {
+Electron.onEvent('version-details', (nativeVersionDetails) => {
     versionDetails.set(nativeVersionDetails)
 })
 
-window['Electron'].onEvent('version-progress', (nativeVersionProgress: NativeProgress) => {
+Electron.onEvent('version-progress', (nativeVersionProgress: NativeProgress) => {
     updateProgress.set(nativeVersionProgress.percent)
 
     const bytesRemaining = ((100 - nativeVersionProgress.percent) / 100) * nativeVersionProgress.total;
@@ -52,14 +35,14 @@ window['Electron'].onEvent('version-progress', (nativeVersionProgress: NativePro
     }
 })
 
-window['Electron'].onEvent('version-complete', (nativeVersionComplete) => {
+Electron.onEvent('version-complete', () => {
     updateBusy.set(false)
     updateError.set(false)
     updateComplete.set(true)
     updateMinutesRemaining.set(0)
 })
 
-window['Electron'].onEvent('version-error', (nativeVersionError) => {
+Electron.onEvent('version-error', (nativeVersionError) => {
     console.log(nativeVersionError)
     updateError.set(true)
 })
@@ -70,8 +53,6 @@ export function updateDownload(): void {
     updateBusy.set(true)
     updateComplete.set(false)
     updateError.set(false)
-
-    const locale = get(_) as (string, values?) => string
 
     let progressSubscription;
     let minutesRemainingSubscription;
@@ -88,12 +69,12 @@ export function updateDownload(): void {
 
     const downloadingNotification: NotificationData = {
         type: "info",
-        message: locale('notifications.downloading_update'),
+        message: localize('notifications.downloadingUpdate'),
         progress: 0,
-        subMessage: locale('notifications.calc_minutes_remaining'),
+        subMessage: localize('notifications.calcMinutesRemaining'),
         actions: [
             {
-                label: locale('actions.cancel'),
+                label: localize('actions.cancel'),
                 callback: () => {
                     updateCancel()
                     cleanup();
@@ -114,9 +95,9 @@ export function updateDownload(): void {
             updateDisplayNotification(notificationId, {
                 ...downloadingNotification,
                 subMessage: minutesRemaining === -1
-                    ? locale('notifications.calc_minutes_remaining')
+                    ? localize('notifications.calcMinutesRemaining')
                     : (minutesRemaining < 1 ? "< " : "")
-                    + locale('notifications.minutes_remaining', {
+                    + localize('notifications.minutesRemaining', {
                         values: {
                             minutes: Math.ceil(minutesRemaining).toString()
                         }
@@ -130,13 +111,13 @@ export function updateDownload(): void {
             updateDisplayNotification(
                 notificationId,
                 {
-                    type: "info",
-                    message: locale('notifications.update_ready'),
-                    subMessage: locale('notifications.restart_install'),
+                    ...downloadingNotification,
+                    message: localize('notifications.updateReady'),
+                    subMessage: localize('notifications.restartInstall'),
                     progress: undefined,
                     actions: [
                         {
-                            label: locale('actions.restart_now'),
+                            label: localize('actions.restartNow'),
                             callback: () => {
                                 cleanup()
                                 updateInstall()
@@ -144,7 +125,7 @@ export function updateDownload(): void {
                             isPrimary: true
                         },
                         {
-                            label: locale('actions.dismiss'),
+                            label: localize('actions.dismiss'),
                             callback: () => cleanup()
                         }
                     ]
@@ -157,12 +138,13 @@ export function updateDownload(): void {
             updateDisplayNotification(
                 notificationId,
                 {
+                    ...downloadingNotification,
                     type: "error",
-                    message: locale('notifications.update_error'),
+                    message: localize('notifications.updateError'),
                     progress: undefined,
                     actions: [
                         {
-                            label: locale('actions.dismiss'),
+                            label: localize('actions.dismiss'),
                             callback: () => cleanup(),
                             isPrimary: true
                         }
@@ -171,11 +153,11 @@ export function updateDownload(): void {
         }
     });
 
-    window['Electron'].updateDownload()
+    Electron.updateDownload()
 }
 
 export function updateCancel(): void {
-    window['Electron'].updateCancel()
+    Electron.updateCancel()
     updateProgress.set(0)
     updateBusy.set(false)
     updateComplete.set(false)
@@ -184,11 +166,18 @@ export function updateCancel(): void {
 }
 
 export function updateInstall(): void {
-    window['Electron'].updateInstall()
+    Electron.updateInstall()
 }
 
-export async function refreshVersionDetails(): Promise<void> {
-    const verDetails = await window['Electron'].getVersionDetails();
-    console.log(verDetails);
+export function updateCheck(): void {
+    Electron.updateCheck()
+}
+
+export async function getVersionDetails(): Promise<void> {
+    const verDetails = await Electron.getVersionDetails();
     versionDetails.set(verDetails)
+}
+
+export async function pollVersion(): Promise<void> {
+    setInterval(async () => updateCheck(), DEFAULT_APP_UPDATER_POLL_INTERVAL)
 }

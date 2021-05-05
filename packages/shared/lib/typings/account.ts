@@ -21,6 +21,7 @@ export interface ListMessagesFilter {
 export interface SyncAccountOptions {
     addressIndex?: number
     gapLimit?: number
+    accountDiscoveryThreshold?: number
     skipPersistance?: boolean
 }
 
@@ -51,6 +52,7 @@ export interface AccountToCreate {
 }
 
 export interface SyncedAccount {
+    index: number
     id: string
     depositAddress: Address
     isEmpty: boolean
@@ -93,12 +95,12 @@ export function getAccounts(bridge: Bridge, __ids: CommunicationIds): Promise<st
     })
 }
 
-export function syncAccounts(bridge: Bridge, __ids: CommunicationIds): Promise<string> {
+export function syncAccounts(bridge: Bridge, __ids: CommunicationIds, addressIndex?: number, gapLimit?: number, accountDiscoveryThreshold?: number): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
         cmd: 'SyncAccounts',
-        payload: {}
+        payload: { addressIndex, gapLimit, accountDiscoveryThreshold }
     })
 }
 
@@ -139,6 +141,7 @@ enum AccountMethod {
     SyncAccount,
     IsLatestAddressUnused,
     SetAlias,
+    GetNodeInfo,
 }
 
 function _callAccountMethod(
@@ -215,4 +218,8 @@ export function syncAccount(
     options?: SyncAccountOptions
 ): Promise<string> {
     return _callAccountMethod(bridge, __ids, AccountMethod.SyncAccount, accountId, options || {})
+}
+
+export function getNodeInfo(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier, url?: string): Promise<string> {
+    return _callAccountMethod(bridge, __ids, AccountMethod.GetNodeInfo, accountId, url)
 }

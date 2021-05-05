@@ -1,459 +1,820 @@
 {
     "views": {
-        "onboarding_1": {
-            "title": "Send, Receive & Manage your IOTA",
-            "body": "Firefly is a secure and easy-to-use IOTA wallet."
+        "onboarding1": {
+            "title": "IOTA rêke, bistîn û rêvebibe",
+            "body": "Firefly Cuzdanka-Nermalava IOTA ya fermî ye."
         },
         "legal": {
-            "title": "Legal",
-            "body": "Please review the Privacy Policy and Terms of Service.",
-            "privacy_policy": {
-                "title": "Privacy Policy",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
-            "terms_of_service": {
-                "title": "Terms of Service",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
-            "checkbox": "I have read and I accept the Privacy policy & ToS"
+            "title": "Polîtîkayên Veşartinê û Mercên Bikaranînê",
+            "body": "Ji kerema xwe polîtîqaya taybetîtiyê û Mercên Karûbar binirxînin.",
+            "checkbox": "Min Polîtîkayên Veşartinê û Mercên Bikaranînê xwendin û dipêjirînim."
         },
-        "language": {
-            "title": "Language & appearance",
-            "body": "Choose your wallet’s language and theme"
+        "appearance": {
+            "title": "Xûyanîn",
+            "body": "Rûkera sepana xwe jê bigirin."
+        },
+        "profile": {
+            "title": "Profîlekê çêke",
+            "body1": "Jibo hûn tokenên xwe cuda bigirîn û ewlehîyê zêde bikîn, dikarîn profîlên bikarhênerên ciyawaz saz bikî.",
+            "body2": "Em sereke bi navê profîla we ya yekem destpê bikin. Paşê hûn dikarin hinek profîl lê zêdebikin.",
+            "profileName": "Navê Profîlê"
         },
         "setup": {
-            "title": "Set up your wallet",
-            "body": "You can create a new wallet or import an existing one.",
-            "profile_name": "Profile Name"
+            "title": "Cazdankekê saz bike",
+            "chrysalisTitle": "Nûjenkirina Tora Chrysalis'ê",
+            "chrysalisBody": "Piştî 21'ê avrêlê bikarhêner dikarin tokenên xwe bikşînin tora Chrysalis a nû. Em pêşnîyar dikin ko bi demekê zû hûn tokênên xwe yên heyî barbikin.",
+            "learnMore": "Jibo barkirinê zanyarî bistînin"
+        },
+        "secure": {
+            "title": "Cuzdanka xwe bikin ewlehiyê de.",
+            "body1": "Tomar bikin û kîta rizgarkirinê PDF çap bistînin.",
+            "body2": "Heke hûn kîta rizgarkirinê dagirîn û bi ewlehî veşêrin, hûn hertim dikarin cuzdanka xwe paş bistînin."
         },
         "password": {
-            "title": "Create a password",
-            "body": "You will be asked to enter your password to send tokens from your wallet. You need a strong password to protect your funds."
+            "title": "Şîfreyê pêk bîne",
+            "body1": "Jibo mayînên xwe biparêzî pêdivîya te şifreyek xurtir heye, kombînên pêyvan karbînin. Hevokên hêsan, nav û dîrokên rojmêrî birevin.",
+            "body2": "Tê pêşnîyar kirin ko hûn şifra xwe di bin kîta rizgarkirinê de binvîsin."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body_1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body_2": "Keep your PIN safe!"
+            "body1": "PIN-a têketinê saz bikin da ku pê ewle bibe ku tenê hûn dikarin profîla xwe têkevinê.",
+            "body2": "PIN'a xwe bi ewlehî veşêrin!"
         },
         "pin": {
-            "title": "Set up PIN code",
-            "body_1": "Enter a 6-digit PIN below. You will be asked to enter your pin to login to your wallet.",
-            "body_2": "You can use numbers only."
+            "title": "Qoda PIN saz bike",
+            "body1": "PIN'a xwe ya 6 hijmar bikevine jêr. Jibo têketina profîla we dê pirsxwestina PIN'a we bê kirin.",
+            "body2": "Tenê hijmara bikarbînin"
         },
-        "confirm_pin": {
-            "title": "Verify your PIN code",
-            "body": "Re-enter your PIN code to proceed."
+        "confirmPin": {
+            "title": "Koda Pîn-a xwe rast bikin",
+            "body1": "PIN mayîn û veşarîyên kirarîyê we diparêze.",
+            "body2": "Jibo kirarîyê PIN'a xwe cardî bikevinê. "
         },
         "backup": {
-            "title": "Back up your wallet",
-            "body_1": "You will now be shown a recovery phrase.",
-            "body_2": "Do not share this phrase with anyone. Your recovery phrase can be used to access your tokens from anywhere.",
-            "body_3": "If you lose your recovery phrase, you may lose your funds."
+            "title": "Berîka xa diberke. ",
+            "body1": "Dê hevoka rizgarkirinê werê nîşandan. Li ser kîta rizgarkirinê binvîsin.",
+            "body2": "Hevoka xwe ya rizgarkirinê tukesî re parve nekin. Çêdibe ji derek ne ewleh bigehin mayînên we.",
+            "body3": "Heke hûn hevoka rizgarkirinê wenda biki, dê mayînên we jî wenda bibin."
         },
-        "recovery_phrase": {
-            "title": "Recovery phrase",
-            "body_1": "Carefully write down the words in the exact order.",
-            "body_2": "Keep your recovery phrase private and safely stored. Do not share it with anyone.",
-            "reveal_recovery_phrase": "Reveal recovery phrase",
-            "hide_recovery_phrase": "Hide recovery phrase"
+        "recoveryPhrase": {
+            "title": "Hevoka rizgarkirinê",
+            "body1": "Li kîta rizgarkirinê de, pêyvan rêzêde binvîsin.",
+            "body2": "Vê bi ewlehî û veşartî hilnin.",
+            "body3": "Cîgirên nivîskî giringin. Gelemperî şaşîyên kompîturî çêdibin û dibe ev bibê sedema wendaakirina dosyayan.",
+            "revealRecoveryPhrase": "Hevoka rizgarkirinê nîşanbide",
+            "hideRecoveryPhrase": "Bêja Xilaskirinê veşartî bike. "
         },
-        "verify_recovery_phrase": {
-            "title": "Verify recovery phrase",
-            "body": "Let's check you wrote down the phrase correctly. Select the words in the correct order."
+        "verifyRecoveryPhrase": {
+            "title": "Şîfra Xilaskirinê rastke. ",
+            "body": "Li jêr hevoka we nivîsî dubare kontrol bikin. Ji  kerema xwe her peyvê bi rêzêde jêbigirin.",
+            "word": "Pêyv",
+            "verified": "Hevoka rizgarkirinê hat pêjirandin",
+            "verifiedBody": "Jibîr nekin bi ewlehî û veşartî hilnin."
         },
-        "backup_wallet": {
-            "title": "Back up to a Stronghold file",
-            "body": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup."
+        "backupWallet": {
+            "title": "Di dosyayêk Stronghold'ê cîhgir bikin",
+            "body1": "Wekî dosya Stronghold jibo cîhgirkirina cuzdankê pêborîna xwe têkevin. Pêborîn, dê jibo kirîptokirina dosya cîhgirkir bête karanîn.",
+            "body2": "Sedemên gringiya cîhgirîya dîjîtal:",
+            "reason1": "Hevoka rizgarkirinê ne nivîsandî bi hêsanî cuzdanka xwe rizgar bikin",
+            "reason2": "Cuzdanka xwe bixwazin mekinek din",
+            "reason3": "Tevahîya bûyerên kirarîyê xwe rizgar bikin"
         },
-        "recovery_phrase_saved": {
-            "title": "Successfully backed up",
-            "body": "You have backed up your wallet to a Stronghold."
+        "recoveryPhraseSaved": {
+            "title": "Bi serfirazî piştgirî kirin",
+            "body": "We cuzdanka xwe li Stronghold'ê hiland."
         },
         "congratulations": {
-            "title": "Congratulations",
-            "body": "Your wallet is ready to go."
+            "title": "Sazkirina cuzdankê dawî nehat",
+            "body": "Cuzdank amadeye jibo bikaranînê.",
+            "fundsMigrated": "Mayîn hat barkirin",
+            "success": "We mayînên xwe bi serkeftî barkirin tora nû",
+            "exportMigration": "Tomarkirinê transferê derve bike û barkirinê biqedîn"
         },
         "import": {
-            "title": "Import a wallet",
-            "body": "If you have a recovery phrase or Stronghold back up, you can import it here."
+            "title": "Dravî paş destbixin an jî barbikin",
+            "body": "Heke pelê weya hilanînê ya seed an bergê we heye, hûn dikarin wê ji vir bînin. Ger bîlançoya we ya ya tora kevn hebe, hûn ê bi gavên barkirinê rêve bibin ku wê wê bibin tora Chrysalis.",
+            "importSeed": "Seed'a min ya 81 rewişt heye",
+            "importSeedDescription": "Seed'ekê têkevin û vac'an barbikin li Chrysalis'ê",
+            "importMnemonic": "Min rewişta rizgarkirina Firefly heye",
+            "importMnemonicDescription": "Jibo rizgarkirina cuzdankê rewişta xwe ya veşartî têkevin",
+            "importFile": "Min cîhgira dosyayê heye",
+            "importFileDescription": "Dosyayêk SeedVault'ê an jî Stronghold'ê têkevin"
         },
-        "import_from_text": {
-            "title": "Restore your wallet with a recovery phrase or seed",
-            "body_1": "A recovery phrase is 24 words long. This is used to recover an existing Firefly wallet.",
-            "body_2": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body_3": "Enter your seed or recovery phrase"
+        "importFromText": {
+            "seed": {
+                "title": "Jibo destpêkirina transferê seed'a xwe binivîsin",
+                "body": "Yek seed ji 81 tîpan çêdibe. Ev, ji bo xilasbuna ji berikek Trinity a kevin tê bikaranîn.",
+                "enter": "Seed'a xwe têkeve"
+            },
+            "mnemonic": {
+                "title": "Rewişta xwe ya rizgarkirinê têkeve",
+                "body": "Vegotonek ya rizgarkirinê 24 peyva dirêje. Ev, jibo cuzdanek heyî ya Firefly tomar bikî tê karanîn.",
+                "enter": "Rewişta xwe ya rizgarkirinê têkeve"
+            },
+            "seedDetected": "Tîpek 81 seed hat dîtin",
+            "phraseDetected": "24 pêyva rizgarkirinê hat dîtin",
+            "checksum": "Pêkhatin"
         },
-        "import_from_file": {
-            "title": "Restore your wallet from a backup file",
-            "body": "Import a backup file to restore your wallet. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+        "importFromFile": {
+            "title": "Bikaranîna dosya cîgirî cuzdanka xwe rizgar bikin",
+            "body": "Pelê hilanînê ji bo vegerandina berîka xwe têxin hundurê. Piştgirî dikarin bibin Stronghold (.stronghold) an Trinity SeedVault (.kdbx)."
         },
-        "import_backup_password": {
-            "title": "Restore your wallet from a SeedVault or Stronghold",
-            "body_1": "Please enter your backup password.",
-            "body_2": "This is the password you set when you first created your backup."
+        "importBackupPassword": {
+            "title": "Berîka xwe ji SeedVault an jî ji Stronghold vegerînin",
+            "body1": "Ji kerema xwe şîfreya xweya hilanînê binivîsin.",
+            "body2": "Ev şîfreya we ye ku hûn danîn dema ku we yekem car hilanîna xwe afirandî ye."
         },
-        "import_success": {
-            "title": "You have successfully recovered your backup",
-            "body": "You can now set up your new wallet."
+        "importSuccess": {
+            "title": "We hilanîna xwe bi serfirazî vegerand",
+            "body": "Hun dikarin profile xwe a nû tomar bikî.",
+            "seedvaultTitle": "Tevilkirina hundir serkeft",
+            "seedvaultBody": "Pêborîna we raste, niha dikarin bidomînî.",
+            "strongholdTitle": "Tevilkirina hundir serkeft",
+            "strongholdBody": "Pêborîna we raste, niha dikarin bidomînî."
         },
         "migrate": {
-            "title": "Migrate your funds",
-            "body_1": "This is an automated process to transfer your funds to your new wallet. We will check for spent addresses that weaken your security.",
-            "body_2": "It may take some time. Do not turn off your device during the migration.",
-            "existing": "Your old wallet",
-            "new": "Your new wallet"
+            "title": "Hebûnên xwe bar bikin",
+            "body1": "Ev çalakîyek ya jibo mayînên we ye ko bi şêweyekî otomatîk barê cuzdanka nû bike ye.",
+            "body2": "Dibe ku demek bikişîne. Di dema barkirinê de amûrê xwe qut nekin.",
+            "existing": "Berîka tê a kevin",
+            "new": "Cizdan a te ya nu",
+            "learn": "Jibo barkirinê zanyarî bistînin",
+            "beginMigration": "Dest Barkirinê Bikin",
+            "migrating": "Mayîn tê barkirin...",
+            "migrated": "{balance} barbû",
+            "migrationFailed": "Barkirin Serneket",
+            "noAddressesForMigration": "Ji kere xwe navnîşanên ewle jê bigirin.",
+            "restoringWallet": "Paşbarkirina cuzdankê...",
+            "findingBalance": "Mayîn tê dîtin...",
+            "incorrectSeedVaultPassword": "Çewtîya pêborîna SeedVault'ê.",
+            "noDataSeedVault": "Di SeedVault de ti daneyek nehat dîtin.",
+            "signingBundle": "Şanenavkirina bestekê",
+            "broadcastingBundle": "Bestek tê weşandin",
+            "miningBundle": "Şanenav tê xebitandin",
+            "problemRestoringWallet": "Di paşbarkirina cuzdankê de pirsgirêkêk çêbû. Ji kerema xwe venêrîn.",
+            "minimumMigrationAmountSpentAddresses": "Jibo navnîşanên hatin sarfkirin kêmahiya veguhastina herî kêm 1 Mi ye. Heke hevsengiya we rast xuya nake, careke din venêrin.",
+            "tooManyAddressesToMigrate": "Hejmara navnîşana weya kêm-hevseng pir zêde ye ku hûn hilgirin. Ger bîlançoya we rast xuya nake, ji kerema xwe careke din venêrin.",
+            "cannotMigrateAllYourFunds": "Ji ber ku nirxê hin navnîşanan pir kêm e, em nikarin tevahiya bîlançoya we hilgirin. Hûn dikarin danûstendina xwe bi vî rengî jî bidomînin. {value} dê winda bibe.",
+            "error": "Di paşbarkirina cuzdankê de pirsgirêkêk çêbû. Ji kerema xwe venêrîn."
         },
-        "migrate_failed": {
+        "bundleMiningWarning": {
+            "title": "Hişyarî",
+            "body1": "Di yek an çend navnîşanên ku we berê lê derbas kirî de hevsengiyek we heye.",
+            "body2": "Em pêşniyar dikin ku pêvajoyek xweser bimeşînin da ku alîkariya ewledariyê û ewlehiya veguheztina van dravî bikin.",
+            "body3": "Ger hûn sepanê dadin, dê pêdiviya barkirina jinûve bike.",
+            "learn": "Zêdetir zanyarî yê navnîşanên karhatî agahdar bibin"
+        },
+        "secureSpentAddresses": {
+            "title": "Navnîşanên hatin bikaranîn bike ewlehî yê",
+            "body1": "{number, plural, one {# navnîşana hatî karanîn} other {# navnîşana hatî karanîn}} de mayînên we hatine tespîtkirin.",
+            "body2": "Em pêşniyar dikin ku pêvajoyek xweser bimeşînin da ku alîkariya ewlehî û veguhastina hevsengiya we bi ewlehî bikin.",
+            "error": "Hûn nikarin navnîşanên hatin bikaranîn yên ji 1 Mî kêmtir barbikin"
+        },
+        "securityCheckCompleted": {
+            "title": "Kontrola ewlehiyê serket",
+            "body1": "Me asta xetera ewlehiyê hesab kir. Dîsa meşandina vê pêvajoyê dikare asta xetereyê kêm bike.",
+            "body2": "Heke hûn ji asta (yên) rîskê piştrastîn, bişkoka berdewamiyê pitikînin.",
+            "rerun": "Jibo navnîşanên jêgirtî pêvajoyê ji nûve bide destpêkirin",
+            "continueMigration": "Barkirinê bidomîne"
+        },
+        "securingSpentAddresses": {
+            "title": "Navnîşanên hatin bikaranîn di ewlehîdene...",
+            "body1": "Ev kirarî {minutes, plural, one {1 xulek} other {# xulek}} dê bidome.",
+            "body2": "Dê komputera we bi kapasîteya tevahî bixebite, hûn dikarin li bendê nebin ko ev pêvajo xilas bibe tiştek din bikin."
+        },
+        "transferFragmentedFunds": {
+            "body1": "Firefly wê niha dest barkirina dirawê we bike. Dibe ko ev piçek dem bigire.",
+            "migrate": "Mayînê barbike",
+            "transaction": "Kirarî {number}",
+            "rerun": "Dîsa biceribîne"
+        },
+        "migrateFailed": {
             "title": "To do",
             "body": "To do"
         },
         "balance": {
-            "title": "Your balance",
-            "body": "Is your balance correct?"
+            "title": "Hevsenga te",
+            "body": "Berî ku bidomînin bila bîlançoya we rast be. Heke hin tişt rast xuya nekin, hûn dikarin dîsa kontrol bikin.",
+            "error": "Kêmahiya veguhastina herî kêm 1 Mi ye. Heke hevsengiya we rast xuya nake, careke din venêrin.",
+            "zeroBalance": "Dîsa biceribînin. Heke hûn hîn jî nekarin hevsengiya xwe bibînin, dibe ko hûn seed'a xwe nerast ketibînê."
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "Mîhengên",
             "generalSettings": {
-                "title": "General Settings",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "title": "Serdilkirinên tevayî",
+                "description": "Xûyakirina cuzdanka xwe biguherîne û mîhengên gelemperî serast bikin"
             },
             "security": {
-                "title": "Security",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "title": "Ewlehî",
+                "description": "Pêborîna xwe biguherîne û mihengên ewlehiyê çêbike"
             },
             "advancedSettings": {
-                "title": "Advanced Settings",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "title": "Sazkariyên pêşketî",
+                "description": "Jibo bikarhênerên teknîkî alav û mihengên dest"
             },
             "helpAndInfo": {
-                "title": "Help & Information",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "title": "Alîkarî & Agahî",
+                "description": "Bersiva pirsekê bibînin an jî derbarê pirsgirêkê arîkarî bistînin"
             },
             "profile": {
-                "title": "Profile",
-                "description": ""
+                "title": "Jînname",
+                "description": "Navê profîla xwe biguherîne an jî avatarekê sazbike"
             },
             "sync": {
-                "title": "Sync accounts",
+                "title": "Cuzdanka sekronîze bike",
                 "description": ""
             },
             "theme": {
-                "title": "Theme",
+                "title": "Mijad",
                 "description": ""
             },
             "language": {
-                "title": "Language",
+                "title": "Ziman",
                 "description": ""
             },
             "currency": {
-                "title": "Currency",
-                "description": ""
+                "title": "Diravcins",
+                "description": "Mayîn vergerê cih dike û mihengên girafîkî nûjen dike"
             },
             "notifications": {
-                "title": "Notifications",
-                "description": ""
+                "title": "Hişyarî",
+                "description": "Jibo bûyerên kirarîyê hişyariyên sîstemî"
+            },
+            "networkStatus": {
+                "title": "Network status",
+                "description": "Displays the status of the node you are currently connected to."
             },
             "exportStronghold": {
-                "title": "Export Stronghold",
-                "description": ""
+                "title": "Cîgirê bikşîne derve",
+                "description": "Barê dosyayek Stronghold bikin\n- cîhgira hatî pêborîkirin cuzdank û bûyerên kiryarên we yên dawî"
             },
             "appLock": {
-                "title": "App Lock",
-                "description": ""
+                "title": "Kilîda Otomatîk",
+                "description": "Dema bêçalaktiyê berî ku çenteyên we kilît bibin û hûn ji nav derkevin",
+                "durationMinute": "Berî {time, plural, one {1 xulek} other {# xulek}}",
+                "durationHour": "{time, plural, one {1 demjimêr} other {# demjimêr}}"
             },
             "changePassword": {
-                "title": "Change password",
-                "description": ""
+                "title": "Pêborînê biguherînê",
+                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
             },
             "changePincode": {
-                "title": "Change PIN code",
-                "description": "",
-                "currentPincode": "Current PIN",
-                "newPincode": "New PIN",
-                "confirmNewPincode": "Confirm new PIN",
-                "action": "Change PIN"
+                "title": "Qoda PIN'ê biguherîne",
+                "description": "PIN mayîn û veşarîyên kirarîyê we diparêze",
+                "currentPincode": "PIN'a heyî",
+                "newPincode": "PIN'a nû",
+                "confirmNewPincode": "PIN'a nû tomarbike",
+                "action": "PIN'ê biguherîne"
             },
-            "resyncAccounts": {
-                "title": "Resync accounts",
-                "description": ""
+            "balanceFinder": {
+                "title": "Gerdîta mayîna",
+                "description": "Perform an extended search of your addresses for tokens"
             },
-            "resetWallet": {
-                "title": "Reset wallet",
-                "description": ""
+            "hiddenAccounts": {
+                "title": "Cuzdankên veşartî",
+                "description": "Selecting this options will show wallets that were previously hidden"
+            },
+            "deleteProfile": {
+                "title": "Profîlê jêbibe",
+                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
             },
             "deepLinks": {
-                "title": "Deep links",
-                "description": ""
+                "title": "Girêdanên kûr",
+                "description": "Dema pêl iota:// girêdana bikê kiryarên Firefly otomatîk dadigire"
             },
             "developerMode": {
-                "title": "Developer mode",
-                "description": ""
+                "title": "Mode ya pêşdebir",
+                "description": "Girêdanê li testnest û taybetiyên pêşbirinê re bikin"
             },
             "nodeSettings": {
-                "title": "Node settings",
-                "description": ""
+                "title": "Sazkirina girêk",
+                "description": "Jibo mîhengên girêyê û girêdana mihengên xwe çêkî manûel jêbigire"
             },
             "configureNodeList": {
-                "title": "Configure node list",
-                "description": ""
+                "title": "Girêkê jêbigir",
+                "description": "Manage the list of IOTA network nodes you connect to",
+                "primaryNode": "Girêdana yekemîn",
+                "excludeNode": "Girêdanê lê neke",
+                "includeNode": "Girêdanê lê bike",
+                "viewDetails": "Hurgulîyan bibîn",
+                "setAsPrimary": "Wekî yekemîn bihesibîn",
+                "removeNode": "Girêdanê jêbibe",
+                "includeOfficialNodeList": "Lîsteya girêdanên fermî tevil bike",
+                "noNodes": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
-                "title": "Proof of work",
-                "description": ""
+                "title": "Delîlên kar",
+                "description": "Li ser cîhaza xwe proof of work biqedînin an xwe bavêjin Node"
             },
             "errorLog": {
-                "title": "Error log",
-                "description": ""
+                "title": "Têketina çewtiyê",
+                "description": "Jibo çareserkirina pirsgrêkekê şaşîtiyan bibînin"
+            },
+            "diagnostics": {
+                "title": "Pêderk",
+                "description": "Zanyarîyên sîstem û sazîyê bibînin"
             },
             "stateExport": {
-                "title": "State export",
-                "description": ""
+                "title": "Rewşê barbikê derve",
+                "description": "Bûyerên kiyarîyên xwe bar bikin dosyek .csv"
             },
             "troubleshoot": {
-                "title": "Troubleshoot",
-                "description": ""
+                "title": "Sererastkirin",
+                "description": "Sêrbazê Çareserkirina Pirsgirêkan bikar bînin ku pirsgirêkên hevpar çareser bikin"
             },
             "documentation": {
-                "title": "Documentation",
-                "description": ""
+                "title": "Belgekirin",
+                "description": "Jibo hînbûna rêveberin kar hemî hurgulîyan binêrin belgedankê"
             },
             "faq": {
-                "title": "FAQ",
-                "description": ""
+                "title": "Pirsên tê kirin",
+                "title2": "Pirsên Pir Tên Pirsîn",
+                "description": "PPP bibînin ku ji pirsgirêk an pirsek hevpar re bibin alîkar"
             },
             "discord": {
-                "title": "Discord",
-                "description": ""
+                "title": "Lihevnekirin",
+                "description": "Arîkarîyê ji civaka IOTA Discord bistînin"
             },
             "about": {
-                "title": "About",
+                "title": "Ji dor",
                 "description": ""
+            },
+            "reportAnIssue": {
+                "title": "Pirsgirêkê ragehîne",
+                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
             }
         },
         "login": {
-            "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
-            "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+            "pleaseWait": "Ji kerema xwe rawestin {time, plural, one {1 çîrik} other {# çîrik}}",
+            "incorrectAttempts": "{attempts, plural, one {1 ceribandina çewt} other {# ceribandinên çewt}}"
         },
         "dashboard": {
             "security": {
                 "version": {
                     "title": "Firefly v{version}",
-                    "up_to_date": "Up to date",
-                    "out_of_date": "Out of date"
+                    "upToDate": "Nutirîn",
+                    "outOfDate": "Pêdiviya nûjenkirinê heye"
                 },
-                "hardware_device": {
-                    "title": "Hardware Device",
-                    "none_detected": "None detected"
+                "hardwareDevice": {
+                    "title": "Pergala Arasteyî",
+                    "noneDetected": "Çi nehat dîtin"
                 },
-                "stronghold_status": {
-                    "title": "Stronghold Status",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                "strongholdStatus": {
+                    "title": "Rewşa Cuzdankê",
+                    "locked": "Kilîl kirî",
+                    "unlocked": "Kilîl vekirî"
                 },
-                "stronghold_backup": {
-                    "title": "Stronghold Backup",
-                    "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
+                "strongholdBackup": {
+                    "title": "Cîhgira Cuzdankê",
+                    "weeksAgo": "{weeks, plural, one {# hefte} other {# hefte}} berîya"
                 }
             },
             "network": {
-                "network_operational": "Network Operational",
-                "network_degraded": "Network Degraded",
-                "network_down": "Network Down",
-                "status": "Status",
-                "messages_per_second": "Messages per second",
-                "confirmation_rate": "Confirmation rate"
+                "networkOperational": "Network Çalake",
+                "networkDegraded": "Pirsgirêka Performansa Networkê",
+                "networkDown": "Girêdana Networkê Qeta",
+                "status": "Hal",
+                "messagesPerSecond": "Peyam di sanîyek de",
+                "referencedRate": "Referenced rate"
             },
-            "profile_modal": {
-                "all_settings": "All settings",
-                "logout": "Log out"
+            "profileModal": {
+                "allSettings": "Hemu dilkirin",
+                "logout": "Derkeve"
             }
         }
     },
     "popups": {
         "password": {
-            "title": "Password required",
-            "subtitle": "Please enter your wallet password to unlock Stronghold"
+            "title": "Nasnav pêwîste",
+            "subtitle": "Ji kerema xwe pêborînê bikevine ko kilîla cuzdanka we rabe",
+            "backup": "Ji kerema xwe şîfreya xwe binivîsin da ku hûn hilanînê bişînin"
         },
         "qr": {
-            "title": "Your QR code"
+            "title": "Nasnav a te ya QR"
         },
         "version": {
-            "title": "Current version: {version}",
-            "up_to_date_title": "Firefly is up to date",
-            "up_to_date_description": "You are running the latest and safest version of Firefly.",
-            "update_available": "Firefly update available",
-            "update_details": "Version {version} - {date}"
+            "title": "Versiona heman: {version}",
+            "upToDateTitle": "Firefly nûjene",
+            "upToDateDescription": "Hûn versîyona Firefly ya herî dawî û ewle kartînîn.",
+            "updateAvailable": "Nûjenîya Firefly heye",
+            "updateDetails": "Versîyon {version} - {date}",
+            "noAutoUpdate": "Di vê guhertoya Windows-ê de nûvekirina xweser qedexe ye, ji kerema xwe biçin https://firefly.iota.org ku nûvekirinê dakêşin."
         },
         "backup": {
-            "title": "Last backup: {date}",
-            "last_backup": "You last backed up {date}",
-            "backup_description": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
-            "backup_warning": "If you lose your backup and recovery phrase you will lose access to your funds.",
-            "not_backed_up": "Not backed up",
-            "not_backed_up_description": "You have not backed up your Stronghold"
+            "title": "Cîhgira dawî: {date}",
+            "lastBackup": "Cîhgira dawî we standî {date}",
+            "backupDescription": "Girîng e ku hûn bi rêkûpêk paşde biavêjin da ku hûn kopiyek hesab û dîroka danûstendina we hebe.",
+            "backupWarning": "Ger hûn hevoka xweya hilanînê û başbûnê winda bikin hûn ê têkevina dravên xwe winda bikin.",
+            "notBackedUp": "Nehat cîhgirkirin",
+            "notBackedUpDescription": "We cuzdanka xwe cîhgir nekir",
+            "saving": "Tomar dike..."
         },
-        "delete_account": {
-            "title": "Delete {name}?",
-            "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "type_password": "Type your wallet’s password to confirm.",
-            "delete_account": "Delete account",
-            "error_title": "Unable to delete {name}",
-            "error_body_1": "To delete an account you must have 0 balance.",
-            "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again."
+        "deleteAccount": {
+            "title": "Jêbibe {name}?",
+            "body": "Dîroka danûstendinê ya vê cudzdankê tune. Ew bi ewlehî dikare were jêbirin.",
+            "typePassword": "Jibo pêjirandinê pêborîna cuzdaneka xwe binivîse.",
+            "hideAccount": "Cuzdankê jêbibe",
+            "errorTitle": "Nayê jêbirin {name}",
+            "errorBody1": "Hûn nikarin vê cuzdankê jêbibin, divê bi kêmanî yek ya te hebe."
         },
-        "address_history": {
-            "title": "{name} account address history",
-            "current_balance": "Current balance: {balance}"
+        "hideAccount": {
+            "title": "Hilne {name}?",
+            "body": "Hûn dikarin vê cuzdankê paşê bi çalakkirina \"Nîşan hesabên veşartî\" di Mîhengên Pêşkeftî de bibînin.",
+            "typePassword": "Jibo pêjirandinê pêborîna cuzdaneka xwe binivîse.",
+            "hideAccount": "Cuzdankê veşêre",
+            "errorTitle": "Nayê jêbirin {name}",
+            "errorBody1": "Ji bo veşartina cuzdank divê 0 bîlançoya wê hebe.",
+            "errorBody2": "Niha we {balance} li ser vê cuzdank maye. Ji kerema xwe van dravî veguherînin hesabek cûda û dîsa biceribînin.",
+            "errorBody3": "Hûn nikarin vê cuzdankê jêbibin, divê bi kêmanî yek ya te hebe."
+        },
+        "addressHistory": {
+            "title": "{name} dîroka navnîşanê",
+            "currentBalance": "Mayîna niha: {balance}"
         },
         "node": {
-            "title_add": "Add a node",
-            "title_details": "Node details",
-            "node_address": "Node address",
-            "optional_username": "Username (optional)",
-            "optional_password": "Password (optional)",
-            "set_as_primary_node": "Set as primary node"
+            "titleAdd": "Girêkê zêde bike",
+            "titleUpdate": "Girêk nûjen",
+            "titleRemove": "Girêdanê jêbibe",
+            "titleDetails": "Derbarê girê",
+            "nodeAddress": "Navnîşana girê",
+            "optionalUsername": "Bikarhêner (optional)",
+            "optionalPassword": "Pêborîn (optional)",
+            "setAsPrimaryNode": "Wekî girêya yekemîn bihesibîn",
+            "removeConfirmation": "Tu jêbirana dosyê piştrastî?"
+        },
+        "errorLog": {
+            "title": "Bûyerên çewtîyê",
+            "empty": "Bûyerên çewtîyê valane."
+        },
+        "deleteProfile": {
+            "title": "Profîlê jêbibe",
+            "confirmation": "Ma hûn pê ewle ne ku hûn dixwazin vê profîlê jê bibin? Ev operasyon nayê paşve xistin.",
+            "typePassword": "Jibo pêjirandinê pêborîna xwe binivîse."
+        },
+        "diagnostics": {
+            "title": "Pêderk",
+            "node": "Girê",
+            "platform": "Platform",
+            "platformVersion": "Versîyona Platformê",
+            "platformArchitecture": "Platforma Erdezyar",
+            "cpuCount": "Hijmara CPU",
+            "totalMem": "Bîrkarîya Giştî",
+            "freeMem": "Bîrkarîya Vala",
+            "userPath": "Rêya bikarhêner"
+        },
+        "transaction": {
+            "title": "Kirarê bipêjirîn",
+            "body": "Wê tu ewqasî {amount} hinêrî"
+        },
+        "balanceFinder": {
+            "title": "Gerdîta mayîna",
+            "body": "Lêgerînek ya navnîşana berfirehtir pêk bînin da ku hevsengiyên wenda bibînin.",
+            "totalWalletBalance": "Krediya tevahî",
+            "typePassword": "Jibo destûra lêgerînê pêborîna xwe têkevin."
+        },
+        "riskFunds": {
+            "title": "Hişyarî: demê barkirinê mayîn dibin metirsî yê de ye",
+            "body1": "Berî ku hûn dest bi barkirinê bikin pir tê pêşniyar kirin ku hemî hûn dravê xwe ewleh bikin. Heke hûn dravê xwe ewle nekin, dravê we di bin xetera diziyê de bin.",
+            "body2": "Tête pêşniyar kirin ku pêvajo ji bo navnîşanên bi asta xetereya navîn an mezintir ji nû ve werin destpêkirin."
+        },
+        "missingBundle": {
+            "title": "Hişyarî: demê barkirinê mayîn dibin metirsî yê de ye",
+            "body": "Di navnîşanên karanîn de hevsengiyek we heye, lê ji bo ewlehiya wê ji bo agahdariyê hewce nake. Heke we demek dirêj berê bazirganî kiribe ev dikare pêk were. Hûn dikarin berdewam bikin lê dê {value} di dema barkirinê de bikeve bin metirsiyê.",
+            "learnMore": "Zêdetir zanyarî yê navnîşanên karhatî agahdar bibin",
+            "proceed": "Ez metirsî yê didim berçav"
+        },
+        "snapshot": {
+            "title": "Barkirina tora ongoing'ê bilind bike",
+            "body": "Nûvekirina torgiloka Chrysalis dest pê kir.",
+            "bodyMigration": "Koçberî heya ku xelas bibe seqet e.",
+            "bodyFirefly": "Firefly heya ku xelas bibe seqet e.\nKoçkirina Tokensd jî dê paşê gengaz be."
         }
     },
+    "charts": {
+        "incomingMi": "Yên hatî {value}",
+        "outgoingMi": "Yên çûyî {value}",
+        "portoflio": "Portfolio",
+        "token": "Token",
+        "accountValue": "Mayîna Cuzdankê",
+        "accountActivity": "Çalakîya Cuzdankê",
+        "timeframe1Hour": "1 demjimêr",
+        "timeframe1Day": "1 roj",
+        "timeframe1Week": "1 hefte",
+        "timeframe1Month": "1 mang"
+    },
     "actions": {
-        "continue": "Continue",
-        "back": "Back",
-        "cancel": "Cancel",
-        "close": "Close",
-        "dismiss": "Dismiss",
-        "save": "Save",
-        "import_seed": "Import an existing seed",
-        "import_wallet": "Import existing wallet",
-        "create_wallet": "Create new wallet",
-        "save_password": "Save password",
-        "use_biometric": "Use biometric security",
-        "setup_pin": "Set up PIN code",
-        "set_pin": "Set PIN code",
-        "confirm_pin": "Confirm PIN code",
-        "enter_your_pin": "Enter your PIN",
-        "save_backup_file": "Save backup file",
-        "ive_written_recovery_phrase": "I’ve written down my recovery phrase",
-        "verify_recovery_phrase": "Verify recovery phrase",
-        "reveal_recovery_phrase": "Reveal recovery phrase",
-        "import_seedvault": "Import SeedVault",
-        "check_again": "No, Check Again",
-        "import_from_file": "Import from a file",
-        "send": "Send",
-        "receive": "Receive",
-        "create": "Create",
-        "begin_transfer": "Begin Transfer",
-        "try_again": "Try again",
-        "visit_discord": "Visit Discord",
-        "drag_drop": "Drag & Drop",
-        "import_extentions": ".stronghold or .kdbx file",
-        "choose_file": "Choose a File",
-        "drop_here": "Drop your file here",
-        "syncAll": "Sync all",
-        "export": "Export",
-        "exportNewStronghold": "Export a new Stronghold",
-        "enableDeepLinks": "Enable deep links",
-        "enableDeveloperMode": "Enable developer mode",
-        "enableSystemNotifications": "Enable system notifications",
-        "exportState": "Export state",
-        "outsourceProofOfWork": "Outsource proof of work",
-        "unlock": "Unlock",
-        "update_firefly": "Update Firefly",
-        "restart_now": "Restart now",
-        "save_backup": "Save backup",
-        "customize_account": "Customise account",
-        "sync_account": "Sync account",
-        "view_address_history": "View address history",
-        "delete_account": "Delete account",
-        "max": "Max",
-        "add_node": "Add node"
+        "continue": "Berdewam",
+        "back": "Şûnde",
+        "cancel": "Betal",
+        "close": "Derkeve",
+        "dismiss": "Devjêberde",
+        "proceedAnyway": "Dîsa jî bidome",
+        "save": "Tomarkirin",
+        "importSeed": "Seed'ek heyî barbikê hundir",
+        "restoreWallet": "Cuzdankekê bar bikin an vegerînin",
+        "restoreWalletDescription": "Derbasê Chrysalis'ê bibin an jî cuzdankelê vegerînin",
+        "createWallet": "Cuzdanek nû çêke",
+        "createWalletDescription": "Cuzdankeke nû çêbikin ku bi Chrysalis'ê de bixebite",
+        "savePassword": "Pêborînê tomar bike",
+        "useBiometric": "Ewlehîya bîyometrîk bikarbînin",
+        "setupPin": "Qoda PIN saz bike",
+        "setPin": "Qoda PIN saz bike",
+        "confirmPin": "Qoda PIN'ê bipêjirîn",
+        "enterYourPin": "PIN'a xwe têkevê",
+        "saveBackupFile": "Dosya cîhgir tomar bike",
+        "iveWrittenRecoveryPhrase": "Min peyvên rizgarkirinê not stand",
+        "verifyRecoveryPhrase": "Şîfra Xilaskirinê rastke. ",
+        "revealRecoveryPhrase": "Hevoka rizgarkirinê nîşanbide",
+        "importSeedvault": "SeedVault barbikê hundir",
+        "checkAgain": "Dîsa kontrol bike",
+        "importFromFile": "Ji dosyayê barbikê hundir",
+        "send": "Rêke",
+        "receive": "Wergir",
+        "create": "Çêkê",
+        "beginTransfer": "Dest Hinartinê bike",
+        "tryAgain": "Dîsa biceribîne",
+        "visitDiscord": "Here Discord",
+        "dragDrop": "Bixişikîn û Berde",
+        "importExtentions": ".kdbx or .stronghold dosya",
+        "chooseFile": "Dosyayekê jêbigir",
+        "dropHere": "Dosya xwe berdim livir",
+        "syncAll": "Hemîyê bike wekhev",
+        "export": "Barkirina Derve",
+        "exportNewStronghold": "Stronghold'ek nû barbikê derve",
+        "enableDeepLinks": "Girêdanên kur çalak bike",
+        "enableDeveloperMode": "Moda pêkirinê çalak bike",
+        "enableSystemNotifications": "Danezanên sîstemî bigre",
+        "exportState": "Statê barbikê derve",
+        "localProofOfWork": "Birhana kar ya heremî",
+        "unlock": "Kilîlê Veke",
+        "updateFirefly": "Firefly nûjen bike",
+        "restartNow": "Aniha ji nûdestpêbike",
+        "saveBackup": "Cîhgira Stronghold'ê tomar bike",
+        "customizeAcount": "Taybetkirina cuzdankê",
+        "viewAddressHistory": "Bûyera navnîşanê nîşan bide",
+        "hideAccount": "Cuzdankê veşêre",
+        "showAccount": "Veşartina cuzdankê rake",
+        "deleteAccount": "Cuzdankê jêbibe",
+        "max": "Herî zêde",
+        "addNode": "Girêkê zêde bike",
+        "updateNode": "Girêk nûjen",
+        "removeNode": "Girê jêbibe",
+        "hide": "Veşartin\n",
+        "hideOthers": "Veşartinên Din\n",
+        "showAll": "Hemî nîşan bide\n",
+        "quit": "Derketin",
+        "edit": "Serastkirin",
+        "undo": "Vegerîne",
+        "redo": "Dûbare",
+        "cut": "Birrîn",
+        "copy": "kopî",
+        "paste": "tevlêkirin",
+        "selectAll": "Hemîyê Hilbjiêre ",
+        "addAccount": "Cuzdankî zêde",
+        "checkForUpdates": "Ji bo Nûvekirinan Kontrol bikin",
+        "reportAnIssue": "Pirsgirêkekê ragihînin\n",
+        "clear": "Paqij bike",
+        "hideDetails": "Derbarê dade",
+        "yes": "Erê",
+        "no": "Na",
+        "skip": "Hilavêje",
+        "reset": "Bîne serî",
+        "downloadRecoveryKit": "Kîta rizgarkirinê tomar bike",
+        "skipBackup": "Dosîya rizgarkirinê veke",
+        "finishSetup": "Sazîyê biqedîn",
+        "readDocumentation": "Belgenamê bixwîne",
+        "visitFaq": "Here PPP",
+        "viewStatus": "Rewşê bibîn",
+        "showHiddenAccounts": "Cuzdankê veşartî nîşan bidin",
+        "confirm": "Tomarkirin",
+        "hideNetworkStatistics": "Hide network statistics",
+        "findBalances": "Mayîna bibîne",
+        "searchBalances": "Mayîna bigere",
+        "searchAgain": "Dîsa lê bigere",
+        "searching": "Lêdigere...",
+        "closeFirefly": "Firefly bigire"
     },
     "general": {
-        "password": "Password",
-        "confirm_password": "Confirm password",
-        "currentPassword": "Current password",
-        "newPassword": "New password",
-        "confirmNewPassword": "Confirm new password",
-        "your_seed": "Your Seed",
-        "recovery_phrase": "Recovery Phrase",
-        "recent_activity": "Recent Activity",
-        "sent": "Sent",
-        "received": "Received",
-        "send_payment": "Send payment",
-        "move_funds": "Move funds",
-        "send_funds": "Send funds",
-        "send_to_address": "Send to an Address",
-        "scan_qr_or_paste": "Scan a QR code or paste an Address",
-        "move_funds_between_accounts": "Move funds between accounts",
-        "send_tokens_to_address": "Send tokens to an address",
-        "manage_account": "Manage Account",
-        "customize_account": "Customize your account",
-        "account": "Account",
-        "sending_to_address": "Sending to address",
-        "amount": "Amount",
-        "add_address": "Add Address",
-        "reference": "Reference",
-        "from": "From",
-        "to": "To",
-        "receive_funds": "Receive funds",
-        "my_address": "My Address",
-        "share_address": "Share an address",
-        "your_address": "Your address",
-        "generate_new_address": "Generate new address",
-        "copy_address": "Copy Address",
-        "have_text_backup": "I have a text backup",
-        "have_file_backup": "I have a file backup",
-        "enter_seed_or_phrase": "Enter a recovery phrase or seed",
-        "upload_seedvault_or_stronghold": "Import a Stronghold or SeedVault file",
-        "import": "Import",
+        "password": "Şîfre",
+        "confirmPassword": "Tesdîqkirin\nŞîfre",
+        "currentPassword": "Şîfreya heyî",
+        "newPassword": "Şîfreya nû",
+        "confirmNewPassword": "Tesdîqkirin Şîfreya nû",
+        "yourSeed": "Seed'a We",
+        "recoveryPhrase": "Fraza Vejandinê",
+        "recentActivity": "Çalakiya Dawîn",
+        "sent": "şandin",
+        "received": "Wergirtin",
+        "sendPayment": "Dravê bişînin",
+        "moveFunds": "Transfera dahîl",
+        "sendFunds": "Diraw hinêre",
+        "sendToAddress": "Navnîşana xwe hinêre",
+        "scanQrOrPaste": "Qodek QR-ê Scan bikin an navnîşanekê pêve bide",
+        "moveFundsBetweenAccounts": "Navbera Cuzdankê xwe diraw hinêre",
+        "sendTokensToAddress": "Tokena hinêre navnîşanekê",
+        "manageAccount": "Cuzdank birêve bibin",
+        "customizeAcount": "Taybetkirina cuzdankê",
+        "account": "Tûrik",
+        "sendingToAddress": "Dihênêrê navnîşanê",
+        "amount": "Hijmar",
+        "addAddress": "Navnîşanê zêde bike",
+        "reference": "Referans",
+        "from": "Şander",
+        "to": "Kî",
+        "receiveFunds": "Heyînên hatîn",
+        "myAddress": "Navnîşana Min",
+        "shareAddress": "Navnîşanekê parve bike",
+        "yourAddress": "Navnîşana we",
+        "generateNewAddress": "Navnîşanek nû çêke",
+        "copyAddress": "Kopîkirina Navnîşanê",
+        "import": "Barke hundir",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
-        "language": "Language",
-        "appearance": "Appearance",
-        "light_theme": "Light theme",
-        "dark_theme": "Dark theme",
-        "total_balance": "Total Balance",
-        "account_balance": "Account Balance",
-        "incoming": "Incoming",
-        "outgoing": "Outgoing",
-        "accounts": "Accounts",
-        "automaticNodeSelection": "Automatic node selection",
-        "manualNodeSelection": "Manual node selection",
-        "profiles": "Profiles",
-        "developerProfile": "Developer Profile",
-        "dev": "Dev",
-        "create_account": "Create an account",
-        "account_name": "Account name",
-        "latest_transactions": "Latest Transactions",
-        "transactions": "Transactions",
-        "security": "Security",
-        "account_address": "Account Address",
-        "nodes": "Nodes"
+        "language": "Ziman",
+        "appearance": "Dîtin",
+        "lightTheme": "Rûkara Ronî",
+        "darkTheme": "Rûkara tarî",
+        "balance": "Mayîn",
+        "accountBalance": "Mayîna Cuzdankê",
+        "incoming": "Yên hatî",
+        "outgoing": "Yên çûyî",
+        "totalIn": "Têketina giştî",
+        "totalOut": "Derçûna giştî",
+        "accounts": "Cuzdank",
+        "myAccounts": "Cuzdank",
+        "automaticNodeSelection": "Jêgirtina girê ya otomatîk",
+        "manualNodeSelection": "Jêgirtina node ya manuel",
+        "profiles": "Profîl",
+        "developerProfile": "Hesaba Pêşvebir",
+        "developerProfileDescription": "Destûrê dide ku hûn bi torên testê re têkilî daynin",
+        "dev": "Pêşvebir",
+        "createAccount": "Cuzdanek nû çêke",
+        "accountName": "Navê Cuzdankê",
+        "latestTransactions": "Transferên Dawî",
+        "transactions": "Lîsteya Transferan",
+        "security": "Ewlehî",
+        "accountAddress": "Navnîşana Cuzdankê",
+        "nodes": "Girê",
+        "wallet": "Cuzdank",
+        "help": "Alîkarî",
+        "you": "Tu",
+        "messageId": "Nasnameya Peyamê",
+        "inputAddress": "Navnîşanê Hinêre",
+        "receiveAddress": "Navnîşana Standinê",
+        "date": "Rojmêr",
+        "status": "Hal",
+        "confirmed": "Hat Pejirandin",
+        "pending": "Bendê ye",
+        "noAccounts": "Cuzdankê we tune, ji kerema xwe yêk çêbikin.",
+        "loadingAccounts": "Bardibe, ji kerema xwe re rawestin...",
+        "addProfile": "Profîlê zêde bikin\n",
+        "noRecentHistory": "Bûyer nîne",
+        "firstSync": "Dîroka hevdemkirinê, dibe ku ev demek bikişîne...",
+        "transferSyncing": "Cuzdanka sekronîze bike",
+        "transferSelectingInputs": "Hilbijartina têketinê",
+        "transferRemainderAddress": "Navnîşana spartina bermayî çêdike",
+        "transferSigning": "Îmzekirina danûstendinê",
+        "transferPow": "PoW çêdibe",
+        "transferBroadcasting": "Kiryar tê weşandin",
+        "transferComplete": "Transfer gehişt",
+        "creatingAccount": "Profîlek nû çêdibe, ji kerema xwe rawestin...",
+        "updatingAccount": "Cuzdank tê nûvekirin, ji kerema xwe bisekinin...",
+        "accountSyncing": "Cuzdank sekronîze dibe",
+        "accountSyncComplete": "Senkronîzekirina Cuzdank diqede",
+        "passwordUpdating": "Şifre nû dibe...",
+        "passwordSuccess": "Pêborîn bi serfirazî hat nûjenkirin",
+        "passwordFailed": "Pêborîn bi serfirazî nehat nûjenkirin",
+        "syncingAccounts": "Cuzdanka sekronîze bike...",
+        "exportingStronghold": "Stronghold barke...",
+        "exportingStrongholdSuccess": "Stronghold bi serfirazî hat şandin",
+        "exportingStrongholdFailed": "Barkirina Stronghold ya derve têk çû",
+        "pinCodeUpdating": "Koda PIN'ê tê nûjenkirin...",
+        "pinCodeSuccess": "Pêborîn bi serfirazî hat nûjenkirin",
+        "pinCodeFailed": "Pêborîn bi serfirazî nehat nûjenkirin",
+        "passwordStrength": "Hêza pêborînê",
+        "passwordStrength0": "Nebaş",
+        "passwordStrength1": "Qels",
+        "passwordStrength2": "Lawaz",
+        "passwordStrength3": "Nacîn",
+        "passwordStrength4": "Bihêze",
+        "creatingProfile": "Profîlek nû çêdibe, ji kerema xwe rawestin...",
+        "fundMigration": "Barkirina mayînan",
+        "accountRemoved": "Ev Cuzdank veşartî ye. Wê veke ku veguheztinan pêk bîne.",
+        "receivingTo": "Tê standin{account}",
+        "sendingFrom": "Ji {account} tê şandin",
+        "receivedTo": "{account} hat standin",
+        "sentFrom": "Ji {account} tê şandin",
+        "receiving": "Tê standin",
+        "sending": "Tê şandin",
+        "legacyNetwork": "Tora Kevn",
+        "capsLock": "Caps Lock is on",
+        "version": "Version {version}"
     },
     "dates": {
-        "today": "Today",
-        "days_ago": "{time, plural, one {# day} other {# days}} ago",
-        "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
-        "months_ago": "{time, plural, one {# month} other {# months}} ago",
-        "years_ago": "{time, plural, one {# year} other {# years}} ago"
+        "today": "Evro",
+        "yesterday": "Duh",
+        "daysAgo": "{time, plural, one {# roj} other {# roj}} berî",
+        "weeksAgo": "{time, plural, one {# hefte} other {# hefte}} berîya",
+        "monthsAgo": "{time, plural, one {# meh} other {# meh}} berî",
+        "yearsAgo": "{time, plural, one {# sal} other {# sal}} berî"
     },
     "notifications": {
-        "valueTx": "Receiving {{value}} to {{account}}",
-        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
-        "failed": "Outgoing {{value}} from {{account}} has failed",
-        "downloading_update": "Downloading update",
-        "update_ready": "Update ready",
-        "update_error": "An error occurred during the update, please try again",
-        "restart_install": "Restart to install",
-        "calc_minutes_remaining": "Calculating minutes remaining...",
-        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
+        "valueTx": "Distînê {{value}} di {{account}}",
+        "confirmed": "Ya {{value}} ji {{account}} hesabê çûyî hat pêjirandin",
+        "confirmedInternal": "{{value}} ji {{senderAccount}} çû {{receiverAccount}} hat pejirandin",
+        "confirmedInternalNoAccounts": "{{value}} veguheztina navxweyî pejirandiye",
+        "failed": "Ya {{value}} ji {{account}} hesabê çûyî hat pêjirandin",
+        "downloadingUpdate": "Nûjenkirin tê daxistin",
+        "updateReady": "Nûjenkirin amadeye",
+        "updateError": "Şanda vexwinê de pirsgirêkêk rûda. Ji kerema xwe dîsa biceribîn",
+        "restartInstall": "Destpêkirin a sazkirinê",
+        "calcMinutesRemaining": "Xulekên mayîn tên hesabkirin...",
+        "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# xulek maye}}",
+        "copiedToClipboard": "Li rûnûsgehê hate kopîkirin",
+        "accountsSynchronized": "Senkronîzekirina Cuzdankê serkeft",
+        "migratedAccountChrysalisDown": "Bîlançoya we dê piştî Chrysalis Ten di 28ê Nîsanê de hebe",
+        "migratedAccountChrysalisUp": "Bîlançoya we dê di demek kurt de peyda bibe"
+    },
+    "error": {
+        "profile": {
+            "length": "Navê profîla we {length, plural, one {1 character} other {# Tîpa}} zêdetir nabe.",
+            "duplicate": "Li ser vî navî jixwe bikarhênerek heye."
+        },
+        "password": {
+            "doNotMatch": "Pêborîn li hev nayên.",
+            "tooWeak": "Pêborîna te a nû lawaze.",
+            "row": "Zenkirina tîpên rasterast hêsane.",
+            "pattern": "Zenkirina qalikên kîbordê yên kurt hêsane.",
+            "names": "Zenkirina nav û paşnavên gelemperî hêsane.",
+            "repeats": "Zenkirina wekî dûbareyên 'aaa' hêsane.",
+            "repeats2": "Zenkirina wekî dûbareyên 'abcbcabc' hêsane.",
+            "sequence": "Zenkirina hevokên tîpa hêsan e.",
+            "years": "Zenkirina rojmêra nû hêsantire.",
+            "dates": "Zenkirina rojmêra hêsane.",
+            "common": "Ev pêborînek gelemperîye.",
+            "similar": "Ev dişibe pêborînek gelemperî.",
+            "word": "Zenkirina peyvekê hêsane.",
+            "incorrect": "Pêborîna we ne raste.",
+            "length": "Pêborîn {length, plural, one {1 character} other {# Tîpê}} zêdetir nabe."
+        },
+        "pincode": {
+            "length": "Divê PIN'a we {length, plural, one {1 digit} other {# dirêj}} bê.",
+            "match": "PIN ji hev nagirin.",
+            "incorrect": "Pêborîna heman çewte."
+        },
+        "account": {
+            "length": "Navê profîla we {length, plural, one {1 character} other {# Tîpa}} zêdetir nabe.",
+            "empty": "Berîya hûn yek nû çêkin, divê hûn Cuzdankê xwe ya kevin bikarbînin.",
+            "notEmpty": "Berîya hûn vê Cuzdankê binbibin, pêdiviye hûn transfera mayînên xwe bikin.",
+            "duplicate": "Li ser vî navî jixwe Cuzdank heye.",
+            "tilde": "Nabe navê profîlê bi qerekteran '~' destpêbike.",
+            "control": "Nabe navê profîlê qerekterek yê kontrolê destpêbike.",
+            "startDot": "Nabe navê profîlê bi qerekteran '.' destpêbike.",
+            "chars": "Nabe navê profîlê ji qerekterek <>:\"/\\|?* destpêbike"
+        },
+        "send": {
+            "addressLength": "Divê dirêjiya navnîşan {length, plural, one {1 character} other {# qerekter}} be.",
+            "amountTooHigh": "Ev ji mayînên we yên heman pirtire.",
+            "amountNoFloat": "Ger kit `i` be hûn nikarin dirinceyên dehan bikarbînin.",
+            "amountInvalidFormat": "Jimar ne erênî xûya dike.",
+            "amountZero": "Divê hijmara giştî ji 0 ê mezintir be.",
+            "wrongAddressPrefix": "Navnîşan bi pêveya pêşî {prefix} re destpêbike.",
+            "wrongAddressFormat": "Navnîşan şêweyek rast nehatiye çêkirin.",
+            "invalidAddress": "Navnîşan netêle.",
+            "insufficientFunds": "Mayîna Cuzdankê têrê nake.",
+            "noToAccount": "Jibo hinêrtina mayînê te Cuzdank jê ne girt.",
+            "sendingDust": "Hûn nikarin ji 1 Mi kêmtir hinêrin.",
+            "leavingDust": "Hûn nikarin di navnîşana xwe de ji 1 Mi kêmtir bêhêlîn."
+        },
+        "node": {
+            "invalid": "Ji kerema xwe URL'yeke derbasdar bikevê.",
+            "https": "Pêdiviya HTTPS ê heye. Jibo karanîna HTTP ko ne ewleh hesabekî pêşvebir çêkin.",
+            "duplicate": "Jixwe ev pêşkeşkar hatîye zêdekirin.",
+            "unsynced": "Girê ne sekronîzeye.",
+            "noSynced": "Çi girê ne amade ye."
+        },
+        "global": {
+            "generic": "Hinek tişt şaş çûn."
+        },
+        "backup": {
+            "invalid": "Pelê hilanînê nehat nas kirin.",
+            "destination": "Armanca hilanînê ne derbasdar bû.",
+            "mnemonic": "Sedem ne derbasdar e.",
+            "seedTooShort": "Divê tov 81 tîpan dirêj be, ew e {length, plural, one {is 1} other {is #}}",
+            "seedCharacters": "Divê tov tenê tîpên A-Z an 9 hebin",
+            "phraseWordCount": "Divê di hevoka başbûna we de 24 peyv hebin, ku niha li wir e {length, plural, one {is 1} other {are #}}.",
+            "phraseUnrecognizedWord": "Di hevoka başbûna we de peyva \"{word}\" a ku nayê nas kirin",
+            "phraseCaseWord": "Divê pêyv \"{word}\" bi tîpa piçûk be"
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "Asta metirsî yê:{risk}",
+            "veryHigh": "Pir bilind",
+            "high": "Bilind",
+            "medium": "Navîn",
+            "low": "Lawaz",
+            "veryLow": "Gelekî Nizm"
+        }
     }
 }
