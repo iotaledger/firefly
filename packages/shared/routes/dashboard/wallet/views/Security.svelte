@@ -4,11 +4,9 @@
     import { diffDates, getBackupWarningColor, isRecentDate } from 'shared/lib/helpers'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { api, profileType, ProfileType } from 'shared/lib/wallet'
-    import { versionDetails } from 'shared/lib/appUpdater'
-    import { LedgerStatus } from 'shared/lib/typings/wallet'
     import { activeProfile, isStrongholdLocked, profiles } from 'shared/lib/profile'
-    import { api } from 'shared/lib/wallet'
+    import { LedgerStatus } from 'shared/lib/typings/wallet'
+    import { api, profileType, ProfileType } from 'shared/lib/wallet'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
 
@@ -18,7 +16,6 @@
     let lastBackupDateFormatted
     let backupSafe
     let color
-    let strongholdStatusMessage
     let isDestroyed = false
     let isCheckingLedger
     let ledgerDeviceStatus
