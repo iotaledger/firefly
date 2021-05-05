@@ -11,7 +11,7 @@ use tokio::{
 };
 
 use crate::actors::KillMessage;
-use crate::{dispatch, wallet_actors, DispatchMessage as WalletDispatchMessage};
+use crate::{dispatch, wallet_actors, extension_actors, DispatchMessage as WalletDispatchMessage};
 use glow::{
     handler::{ExtensionHandler},
     message::{
@@ -22,7 +22,12 @@ use glow::{
 };
 pub use iota_wallet::actor::MessageType as WalletMessageType;
 
-#[actor(ExtensionMessage, KillMessage)]
+#[derive(Debug, Clone)]
+pub struct EventMessage {
+    Event: String
+}
+
+#[actor(ExtensionMessage, KillMessage, EventMessage)]
 pub struct ExtensionActor {
     runtime: Runtime,
     handler: Arc<Mutex<ExtensionHandler>>,
@@ -61,6 +66,18 @@ impl Receive<KillMessage> for ExtensionActor {
     }
 }
 
+impl Receive<EventMessage> for ExtensionActor {
+    type Msg = ExtensionActorMsg;
+    fn receive(&mut self, _ctx: &Context<Self::Msg>, _msg: EventMessage, _sender: Sender) {
+        // let message_handler = self.handler.clone();
+        self.runtime.spawn(async move {
+            // let message_handler = message_handler.lock().await;
+            // let quit_sender = message_handler.quit_sender.clone();
+            // let _ = quit_sender.send(());
+        });
+    }
+}
+
 // from browser
 async fn callback(message: String, actor_id: String) -> ExtensionResult<String> {
     // dispatch to WalletActor and return result
@@ -89,6 +106,19 @@ async fn callback(message: String, actor_id: String) -> ExtensionResult<String> 
         }
     } else {
         Err(ExtensionError::MessageError("actor not found".to_string()))
+    }
+}
+
+async fn _send_event_to_extension(actor_id: &str, message: String) -> Result<(), String> {
+    let ext_actors = extension_actors().lock().await;
+    let actor_id = actor_id.to_string();
+    if let Some(extension_actor) = ext_actors.get(&actor_id) {
+        extension_actor.tell(EventMessage{
+            Event: message
+        }, None);
+        Ok(())
+    } else {
+        Err("extension actor dropped".to_string())
     }
 }
 

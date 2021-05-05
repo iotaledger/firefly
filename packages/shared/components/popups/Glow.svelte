@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { wallet, api } from 'shared/lib/wallet'
-    import { Button, Checkbox, Text, ButtonCheckbox } from 'shared/components'
+    import { Button, Checkbox, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
     import { isStrongholdLocked } from 'shared/lib/profile'
     import { randomEmojis } from 'shared/lib/emojiList'
@@ -12,15 +12,7 @@
 
     let emojis = ''
 
-    function format(acc){
-        return {
-            ...acc,
-            label: `${acc.alias} • ${acc.balance}`,
-            balance: acc.rawIotaBalance,
-        }
-    }
-
-    $: accountsDropdownItems = $accounts.map((acc) => format(acc))
+    $: accountsDropdownItems = $accounts.map((acc) => acc)
     $: accountsToLink = []
 
     function handleAccountClick(acc) {
@@ -89,9 +81,8 @@
     <div class={"overflow-y-auto max-h-80"}>
         <div class={"flex flex-col justify-center align-center items-center"}>
             {#each accountsDropdownItems as acc}
-                <button
+                <button type="button"
                     on:click={()=> handleAccountClick(acc)}
-                    type="button"
                     class="w-full flex flex-row p-4 mb-4 rounded-2xl border border-1 border-solid items-center justify-between border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-gray-500 focus:hover:border-gray-700"
                     style="height: 64px">
                     <div class="flex flex-row items-center justify-between w-full pr-5">
@@ -99,7 +90,7 @@
                         <Text smaller classes="ml-3">{acc.balance}</Text>
                     </div>
                     <Checkbox checked={accountsToLink.findIndex(a=>a.id===acc.id) > -1} classes="mb-0 pointer-events-none" tabindex={-1} />
-                </button>   
+                </button>
             {/each}
         </div>
     </div>
@@ -144,13 +135,5 @@
     line-height: 28px;
     padding-top: 6px;
     transition: 0.3s;
-}
-.acc {
-    border-radius: 10px;
-    cursor:pointer;
-    width:100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 </style>

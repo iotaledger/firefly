@@ -52,7 +52,7 @@ fn message_receivers() -> &'static MessageReceivers {
     &RECEIVERS
 }
 
-pub(crate) fn extension_actors() -> &'static ExtensionActors {
+fn extension_actors() -> &'static ExtensionActors {
     static EXTENSION_ACTORS: Lazy<ExtensionActors> = Lazy::new(Default::default);
     &EXTENSION_ACTORS
 }
