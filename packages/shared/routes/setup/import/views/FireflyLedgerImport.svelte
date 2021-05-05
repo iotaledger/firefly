@@ -15,7 +15,7 @@
             type: 'ledgerNotConnected',
             hideClose: true,
             props: {
-                message: locale('views.import_from_ledger.ledger_not_connected'),
+                message: locale('views.importFromLedger.ledgerNotConnected'),
             },
         })
     }
@@ -116,12 +116,12 @@
 {:else}
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
-            <Text type="h2" classes="mb-5">{locale('views.import_from_firefly_ledger.title')}</Text>
-            <Text type="p" secondary classes="mb-8">{locale('views.import_from_firefly_ledger.body')}</Text>
+            <Text type="h2" classes="mb-5">{locale('views.importFromFireflyLedger.title')}</Text>
+            <Text type="p" secondary classes="mb-8">{locale('views.importFromFireflyLedger.body')}</Text>
         </div>
         <div slot="leftpane__action">
             <Button classes="w-full" disabled={restoring} onClick={restore}>
-                {locale(restoring ? 'views.import_from_firefly_ledger.restoring' : 'actions.restore')}
+                {locale(restoring ? 'views.importFromFireflyLedger.restoring' : 'actions.restore')}
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-end items-center">

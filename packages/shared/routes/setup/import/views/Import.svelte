@@ -38,9 +38,9 @@
                 <Text type="p" secondary smaller>{locale('views.import.importFileDescription')}</Text>
             </Button>
             <!-- TODO: ledger, fix button UI -->
-            <Button icon="settings" classes="w-full mb-8" secondary onClick={() => handleContinueClick('ledger')}>
-                {locale('general.have_ledger_backup')}
-                <Text type="p" secondary smaller>{locale('general.restore_from_ledger')}</Text>
+            <Button icon="chip" classes="w-full mb-8" secondary onClick={() => handleContinueClick(ImportType.Ledger)}>
+                {locale('views.import.importLedger')}
+                <Text type="p" secondary smaller>{locale('views.import.importLedgerDescription')}</Text>
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-purple dark:bg-gray-900">

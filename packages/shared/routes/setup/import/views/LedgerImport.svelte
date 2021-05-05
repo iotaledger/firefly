@@ -1,16 +1,12 @@
 <script lang="typescript">
+    import { Button, Illustration, OnboardingLayout, Text } from 'shared/components'
     import { createEventDispatcher } from 'svelte'
-    import { OnboardingLayout, Illustration, Text, Button } from 'shared/components'
+    import { LedgerApp } from '../Import.svelte'
 
     export let locale
     export let mobile
 
     const dispatch = createEventDispatcher()
-
-    enum LedgerApp {
-        Trinity = 'Trinity',
-        Firefly = 'Firefly'
-    }
 
     function handleContinueClick(app: LedgerApp) {
         dispatch('next', { app })
@@ -21,23 +17,23 @@
 </script>
 
 {#if mobile}
-<div>foo</div>
+    <div>foo</div>
 {:else}
-<OnboardingLayout onBackClick={handleBackClick}>
-    <div slot="leftpane__content">
-        <Text type="h2" classes="mb-5">{locale('views.import_from_ledger.title')}</Text>
-        <Text type="p" secondary classes="mb-8">{locale('views.import_from_ledger.body')}</Text>
-        <Button icon="settings" classes="w-full mb-5" secondary onClick={()=> handleContinueClick(LedgerApp.Firefly)}>
-            {locale('views.import_from_ledger.have_firefly_ledger')}
-            <Text type="p" secondary smaller>{locale('views.import_from_ledger.have_firefly_ledger_description')}</Text>
-        </Button>
-        <Button icon="settings" classes="w-full mb-8" secondary onClick={()=> handleContinueClick(LedgerApp.Trinity)}>
-            {locale('views.import_from_ledger.have_trinity_ledger')}
-            <Text type="p" secondary smaller>{locale('views.import_from_ledger.have_trinity_ledger_description')}</Text>
-        </Button>
-    </div>
-    <div slot="rightpane" class="w-full h-full flex justify-end items-center">
-        <Illustration width="100%" illustration="import-from-ledger-desktop" />
-    </div>
-</OnboardingLayout>
+    <OnboardingLayout onBackClick={handleBackClick}>
+        <div slot="leftpane__content">
+            <Text type="h2" classes="mb-5">{locale('views.importFromLedger.title')}</Text>
+            <Text type="p" secondary classes="mb-8">{locale('views.importFromLedger.body')}</Text>
+            <Button icon="settings" classes="w-full mb-5" secondary onClick={() => handleContinueClick(LedgerApp.Firefly)}>
+                {locale('views.importFromLedger.haveFireflyLedger')}
+                <Text type="p" secondary smaller>{locale('views.importFromLedger.haveFireflyLedgerDescription')}</Text>
+            </Button>
+            <Button icon="settings" classes="w-full mb-8" secondary onClick={() => handleContinueClick(LedgerApp.Trinity)}>
+                {locale('views.importFromLedger.haveTrinityLedger')}
+                <Text type="p" secondary smaller>{locale('views.importFromLedger.haveTrinityLedgerDescription')}</Text>
+            </Button>
+        </div>
+        <div slot="rightpane" class="w-full h-full flex justify-end items-center bg-pastel-blue dark:bg-gray-900">
+            <Illustration width="100%" illustration="import-from-ledger-desktop" />
+        </div>
+    </OnboardingLayout>
 {/if}

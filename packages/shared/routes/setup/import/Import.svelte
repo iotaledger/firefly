@@ -5,6 +5,14 @@
         File = 'file',
         SeedVault = 'seedvault',
         Stronghold = 'stronghold',
+        Ledger = 'ledger',
+        TrinityLedger = 'trinityLedger',
+        FireflyLedger = 'fireflyLedger',
+    }
+
+    export enum LedgerApp {
+        Trinity = 'Trinity',
+        Firefly = 'Firefly',
     }
 </script>
 
@@ -73,7 +81,7 @@
                     nextState = ImportState.TextImport
                 } else if (type === ImportType.File) {
                     nextState = ImportState.FileImport
-                } else if (type === 'ledger') {
+                } else if (type === ImportType.Ledger) {
                     nextState = ImportState.LedgerImport
                 }
                 break
@@ -116,11 +124,11 @@
                 break
             case ImportState.LedgerImport:
                 const { app } = params
-                if (app === 'Trinity') {
-                    importType = 'trinityLedger'
+                if (app === LedgerApp.Trinity) {
+                    importType.set(ImportType.TrinityLedger)
                     nextState = ImportState.TrinityLedgerImport
-                } else if (app === 'Firefly') {
-                    importType = 'fireflyLedger'
+                } else if (app === LedgerApp.Firefly) {
+                    importType.set(ImportType.FireflyLedger)
                     nextState = ImportState.FireflyLedgerImport
                 }
                 break
@@ -131,7 +139,6 @@
             case ImportState.ConfirmBalance:
                 nextState = ImportState.Success
                 break
-
             case ImportState.BackupPassword:
                 const { password } = params
                 busy = true
@@ -215,23 +222,14 @@
     </Transition>
 {:else if state === ImportState.ConfirmBalance}
     <Transition>
-        <ConfirmBalance on:next={_next} on:previous={_previous} {importType} {balance} {locale} {mobile} />
+        <ConfirmBalance on:next={_next} on:previous={_previous} {balance} {locale} {mobile} />
     </Transition>
 {:else if state === ImportState.BackupPassword}
     <Transition>
-        <BackupPassword
-            on:next={_next}
-            on:previous={_previous}
-            {isGettingMigrationData}
-            {importType}
-            {error}
-            {locale}
-            {mobile}
-            {busy} />
+        <BackupPassword on:next={_next} on:previous={_previous} {isGettingMigrationData} {error} {locale} {mobile} {busy} />
     </Transition>
 {:else if state === ImportState.Success}
     <Transition>
-        <!-- TODO: ledger, check importType usage -->
-        <Success on:next={_next} on:previous={_previous} {locale} {mobile} {importType} />
+        <Success on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
 {/if}

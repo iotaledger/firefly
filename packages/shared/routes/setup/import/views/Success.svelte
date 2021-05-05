@@ -35,6 +35,7 @@
             <Button classes="w-full" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-green dark:bg-gray-900">
+            <!-- TODO: ledger, add success for ledger -->
             <Animation
                 animation={$importType === ImportType.Seed || $importType === ImportType.Mnemonic ? 'import-from-text-success-desktop' : 'import-from-file-success-desktop'} />
         </div>
