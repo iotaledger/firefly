@@ -375,7 +375,7 @@
                 "networkDown": "Brak dostępu do sieci",
                 "status": "Status",
                 "messagesPerSecond": "Wiadomości na sekundę",
-                "referencedRate": "Potwierdzeń w sieci"
+                "referencedRate": "Ilość potwierdzeń"
             },
             "profileModal": {
                 "allSettings": "Wszystkie ustawienia",

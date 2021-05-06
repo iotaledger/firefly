@@ -241,7 +241,7 @@
                 "description": "Системни известия за трансакции"
             },
             "networkStatus": {
-                "title": "Network status",
+                "title": "Състояние на мрежата",
                 "description": "Displays the status of the node you are currently connected to."
             },
             "exportStronghold": {
