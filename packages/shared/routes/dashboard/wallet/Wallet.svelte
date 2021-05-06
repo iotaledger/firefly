@@ -112,72 +112,6 @@
     let isGeneratingAddress = false
     let isSoftwareProfile = true
 
-<<<<<<< HEAD
-    function getAccountMeta(
-        accountId: string,
-        callback: (
-            error: ErrorEventPayload,
-            meta?: {
-                balance: number
-                incoming: number
-                outgoing: number
-                depositAddress: string
-            }
-        ) => void
-    ) {
-        api.getBalance(accountId, {
-            onSuccess(balanceResponse) {
-                api.latestAddress(accountId, {
-                    onSuccess(latestAddressResponse) {
-                        callback(null, {
-                            balance: balanceResponse.payload.total,
-                            incoming: balanceResponse.payload.incoming,
-                            outgoing: balanceResponse.payload.outgoing,
-                            depositAddress: latestAddressResponse.payload.address,
-                        })
-                    },
-                    onError(error) {
-                        callback(error)
-                    },
-                })
-            },
-            onError(error) {
-                callback(error)
-            },
-        })
-    }
-
-    function prepareAccountInfo(
-        account: BaseAccount,
-        meta: {
-            balance: number
-            incoming: number
-            outgoing: number
-            depositAddress: string
-        }
-    ): WalletAccount {
-        const { id, index, alias, signerType } = account
-        const { balance, depositAddress } = meta
-
-        return Object.assign<WalletAccount, BaseAccount, Partial<WalletAccount>>({} as WalletAccount, account, {
-            id,
-            index,
-            depositAddress,
-            alias,
-            signerType,
-            rawIotaBalance: balance,
-            balance: formatUnit(balance, 0),
-            balanceEquiv: `${convertToFiat(
-                balance,
-                $currencies[CurrencyTypes.USD],
-                $exchangeRates[get(activeProfile).settings.currency]
-            )} ${$activeProfile.settings.currency}`,
-            color: AccountColors[index],
-        })
-    }
-
-=======
->>>>>>> origin/develop
     function getAccounts() {
         api.getAccounts({
             onSuccess(accountsResponse) {
@@ -201,16 +135,6 @@
                         outgoing: 0,
                     }
 
-<<<<<<< HEAD
-                                const account = prepareAccountInfo(storedAccount, meta)
-                            if (signerType === null) {
-                                signerType = account.signerType.type
-                                if (signerType === 'Stronghold') {
-                                    checkStrongholdStatus()
-                                }
-                            }
-                                accounts.update((accounts) => [...accounts, account])
-=======
                     let completeCount = 0
                     let newAccounts = []
                     for (const payloadAccount of accountsResponse.payload) {
@@ -234,7 +158,6 @@
                                 let pair = internalMessages.find(
                                     (m) => m.id === internalMessage.id && getIncomingFlag(m.payload) !== internalIncoming
                                 )
->>>>>>> origin/develop
 
                                 // Can't find the other side of the pair so clone the original
                                 // reverse its incoming flag and store it
@@ -315,7 +238,6 @@
             })
         }
 
-<<<<<<< HEAD
         if (isSoftwareProfile) {
             api.getStrongholdStatus({
                 onSuccess(strongholdStatusResponse) {
@@ -332,23 +254,6 @@
         } else {
             _generate()
         }
-=======
-        api.getStrongholdStatus({
-            onSuccess(strongholdStatusResponse) {
-                if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                    openPopup({ type: 'password', props: { onSuccess: _generate } })
-                } else {
-                    _generate()
-                }
-            },
-            onError(err) {
-                showAppNotification({
-                    type: 'error',
-                    message: locale(err.error),
-                })
-            },
-        })
->>>>>>> origin/develop
     }
 
     function findReuseAccount() {
@@ -380,39 +285,6 @@
         }
     }
 
-<<<<<<< HEAD
-    function onCreateAccount(alias) {
-        const _create = () =>
-            api.createAccount(
-                {
-                    alias,
-                    signerType: { type: 'Stronghold' },
-                    clientOptions: {
-                        node: $accounts.length > 0 ? $accounts[0].clientOptions.node : DEFAULT_NODE.url,
-                        nodes: $accounts.length > 0 ? $accounts[0].clientOptions.nodes : DEFAULT_NODES.map(n => n.url),
-                        // For subsequent accounts, use the network for any of the previous accounts
-                        network: $accounts.length > 0 ? $accounts[0].clientOptions.network : $network,
-                    },
-                    signerType: $accounts[0].signerType,
-                },
-                {
-                    onSuccess(createAccountResponse) {
-                        api.syncAccount(createAccountResponse.payload.id, {
-                            onSuccess(syncAccountResponse) {
-                                getAccountMeta(createAccountResponse.payload.id, (err, meta) => {
-                                    if (!err) {
-                                        const account = prepareAccountInfo(createAccountResponse.payload, meta)
-                                        accounts.update((accounts) => [...accounts, account])
-                                        walletRoute.set(WalletRoutes.Init)
-                                    } else {
-                                        console.error(err)
-                                    }
-                                })
-                            },
-                            onError(err) {
-                                console.error(err)
-                            },
-=======
     function onCreateAccount(alias, completeCallback) {
         const _create = () => {
             const reuseAccountId = findReuseAccount()
@@ -435,7 +307,6 @@
 
                                 return account
                             })
->>>>>>> origin/develop
                         })
 
                         // We didn't have the account in the list to update
@@ -471,7 +342,7 @@
                 api.createAccount(
                     {
                         alias,
-                        signerType: { type: 'Stronghold' },
+                        signerType: $accounts[0].signerType,
                         clientOptions: $accounts[0].clientOptions,
                     },
                     {
@@ -522,7 +393,6 @@
             }
         }
 
-<<<<<<< HEAD
         if (isSoftwareProfile) {
             api.getStrongholdStatus({
                 onSuccess(strongholdStatusResponse) {
@@ -539,20 +409,6 @@
         } else {
             _create()
         }
-=======
-        api.getStrongholdStatus({
-            onSuccess(strongholdStatusResponse) {
-                if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                    openPopup({ type: 'password', props: { onSuccess: _create, onCancelled: completeCallback } })
-                } else {
-                    _create()
-                }
-            },
-            onError(err) {
-                completeCallback(locale(err.error))
-            },
-        })
->>>>>>> origin/develop
     }
 
     function onSend(senderAccountId, receiveAddress, amount) {
@@ -604,7 +460,6 @@
             )
         }
 
-<<<<<<< HEAD
         if (isSoftwareProfile) {
             api.getStrongholdStatus({
                 onSuccess(strongholdStatusResponse) {
@@ -621,28 +476,6 @@
         } else {
             _send()
         }
-=======
-        api.getStrongholdStatus({
-            onSuccess(strongholdStatusResponse) {
-                if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                    openPopup({
-                        type: 'password',
-                        props: {
-                            onSuccess: _send,
-                        },
-                    })
-                } else {
-                    _send()
-                }
-            },
-            onError(err) {
-                showAppNotification({
-                    type: 'error',
-                    message: locale(err.error),
-                })
-            },
-        })
->>>>>>> origin/develop
     }
 
     function onInternalTransfer(senderAccountId, receiverAccountId, amount, internal) {
@@ -699,7 +532,6 @@
             })
         }
 
-<<<<<<< HEAD
         if (isSoftwareProfile) {
             api.getStrongholdStatus({
                 onSuccess(strongholdStatusResponse) {
@@ -716,23 +548,6 @@
         } else {
             _internalTransfer()
         }
-=======
-        api.getStrongholdStatus({
-            onSuccess(strongholdStatusResponse) {
-                if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                    openPopup({ type: 'password', props: { onSuccess: _internalTransfer } })
-                } else {
-                    _internalTransfer()
-                }
-            },
-            onError(err) {
-                showAppNotification({
-                    type: 'error',
-                    message: locale(err.error),
-                })
-            },
-        })
->>>>>>> origin/develop
     }
 
     onMount(async () => {
@@ -759,7 +574,6 @@
 
             addProfileCurrencyPriceData()
         }
-<<<<<<< HEAD
 
         initialiseListeners()
     })
@@ -786,9 +600,6 @@
     }
 
     $: isSoftwareProfile = $profileType === ProfileType.Software
-=======
-    })
->>>>>>> origin/develop
 </script>
 
 <style type="text/scss">
