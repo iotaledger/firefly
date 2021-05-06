@@ -27,7 +27,12 @@
                 {locale('views.importFromLedger.haveFireflyLedger')}
                 <Text type="p" secondary smaller>{locale('views.importFromLedger.haveFireflyLedgerDescription')}</Text>
             </Button>
-            <Button icon="settings" classes="w-full mb-8" secondary onClick={() => handleContinueClick(LedgerApp.Trinity)}>
+            <Button
+                icon="settings"
+                disabled
+                classes="w-full mb-8 pointer-events-none opacity-50"
+                secondary
+                onClick={() => handleContinueClick(LedgerApp.Trinity)}>
                 {locale('views.importFromLedger.haveTrinityLedger')}
                 <Text type="p" secondary smaller>{locale('views.importFromLedger.haveTrinityLedgerDescription')}</Text>
             </Button>

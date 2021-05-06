@@ -154,11 +154,6 @@
             "body": "Your wallet password is also used to encrypt a Stronghold backup. Enter your wallet password to save your recovery phrase backup to a file.",
             "restoring": "Restoring from ledger..."
         },
-        "import_backup_password": {
-            "title": "Restore your wallet from a SeedVault or Stronghold",
-            "body1": "Please enter your backup password.",
-            "body2": "This is the password you set when you first created your backup."
-        },
         "importBackupPassword": {
             "title": "Restore your wallets from a SeedVault or Stronghold",
             "body1": "Please enter your backup password.",
@@ -397,7 +392,6 @@
                 },
                 "hardwareDevice": {
                     "title": "Hardware Device",
-                    "none_detected": "None detected",
                     "detected": "Detected",
                     "locked": "Locked",
                     "noneDetected": "None detected"

@@ -1,11 +1,11 @@
 <script>
-    import { createEventDispatcher, onDestroy, setContext } from 'svelte'
-    import { writable, get } from 'svelte/store'
-    import { OnboardingLayout, Illustration, Text, Button, Popup } from 'shared/components'
-    import { api } from 'shared/lib/wallet'
-    import { DEFAULT_NODES as nodes, DEFAULT_NODE as node, network } from 'shared/lib/network'
-    import { popupState, openPopup, closePopup } from 'shared/lib/popup'
+    import { Button, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
+    import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
+    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { LedgerStatus } from 'shared/lib/typings/wallet'
+    import { api } from 'shared/lib/wallet'
+    import { createEventDispatcher, onDestroy } from 'svelte'
+    import { get } from 'svelte/store'
 
     export let locale
     export let mobile
@@ -68,13 +68,16 @@
 
     function restore() {
         restoring = true
+        const officialNodes = getOfficialNodes()
+        const officialNetwork = getOfficialNetwork()
         api.createAccount(
             {
                 clientOptions: {
-                    node: node.url,
-                    nodes: nodes.map((node) => node.url),
-                    network: $network,
+                    nodes: officialNodes,
+                    node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
+                    network: officialNetwork,
                 },
+                alias: `${locale('general.account')} 1`,
                 signerType: { type: simulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
             },
             {
@@ -121,15 +124,13 @@
         </div>
         <div slot="leftpane__action">
             <Button classes="w-full" disabled={restoring} onClick={restore}>
-                {locale(restoring ? 'views.importFromFireflyLedger.restoring' : 'actions.restore')}
+                {#if restoring}
+                    <Spinner busy message={locale('views.importFromFireflyLedger.restoring')} classes="justify-center" />
+                {:else}{locale('actions.restore')}{/if}
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-end items-center">
-            <Illustration
-                illustration="import-from-firefly-ledger-desktop"
-                height="100%"
-                width="auto"
-                classes="h-full object-cover object-left" />
+        <div slot="rightpane" class="w-full h-full flex justify-end items-center bg-pastel-blue dark:bg-gray-900">
+            <Illustration width="100%" illustration="import-from-ledger-desktop" />
         </div>
     </OnboardingLayout>
 {/if}

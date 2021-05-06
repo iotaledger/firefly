@@ -92,7 +92,7 @@
                 hardwareDeviceMessage = 'detected'
                 break
             case LedgerStatus.Disconnected:
-                hardwareDeviceMessage = 'none_detected'
+                hardwareDeviceMessage = 'noneDetected'
                 break
             case LedgerStatus.Locked:
                 hardwareDeviceMessage = 'locked'
