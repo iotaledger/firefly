@@ -1290,7 +1290,7 @@ export const prepareAccountInfo = (
         depositAddress: string
     }
 ) => {
-    const { id, index, alias } = account
+    const { id, index, alias, signerType } = account
     const { balance, depositAddress } = meta
 
     const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD
@@ -1301,6 +1301,7 @@ export const prepareAccountInfo = (
         depositAddress,
         alias,
         rawIotaBalance: balance,
+        signerType,
         balance: formatUnitBestMatch(balance, true, 3),
         balanceEquiv: formatCurrency(convertToFiat(
             balance,

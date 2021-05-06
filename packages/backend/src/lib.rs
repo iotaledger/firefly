@@ -1,8 +1,8 @@
 mod actors;
 use actors::{dispatch, DispatchMessage, WalletActor, WalletActorMsg};
 
-use iota::common::logger::logger_init;
-pub use iota::common::logger::LoggerConfigBuilder;
+use iota_client::common::logger::logger_init;
+pub use iota_client::common::logger::LoggerConfigBuilder;
 use iota_wallet::{
     account_manager::{AccountManager, DEFAULT_STORAGE_FOLDER},
     client::drop_all as drop_clients,
