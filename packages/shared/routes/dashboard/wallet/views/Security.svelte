@@ -57,6 +57,7 @@
 
     function checkLedgerConnection() {
         return new Promise((resolve, reject) => {
+            // TODO: ledger fix this
             api.getLedgerDeviceStatus($profileType === 'LedgerNanoSimulator', {
                 onSuccess(response) {
                     ledgerDeviceStatus = response.payload.type
