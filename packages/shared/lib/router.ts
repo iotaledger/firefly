@@ -134,18 +134,17 @@ export const routerNext = (event) => {
             if (setupType) {
                 walletSetupType.set(setupType)
                 if (setupType === SetupType.New) {
-                    nextRoute = AppRoute.Secure
+                    nextRoute = AppRoute.Create
                 } else if (setupType === SetupType.Import) {
                     nextRoute = AppRoute.Import
                 }
             }
             break
-        // TODO: Ledger remove create
         case AppRoute.Create:
             const { accountType } = params
             walletAccountType.set(accountType)
             if (accountType === AccountType.Software) {
-                nextRoute = AppRoute.Password
+                nextRoute = AppRoute.Secure
             } else if (accountType === AccountType.Ledger) {
                 nextRoute = AppRoute.LedgerSetup
             }
@@ -167,9 +166,10 @@ export const routerNext = (event) => {
             if (pin) {
                 walletPin.set(pin)
                 const walletSetupType_ = get(walletSetupType)
+                const walletAccountType_ = get(walletAccountType)
                 if (
                     [SetupType.Mnemonic, SetupType.Stronghold, SetupType.FireflyLedger, SetupType.TrinityLedger].includes(walletSetupType_) ||
-                    get(walletAccountType) === AccountType.Ledger
+                    walletAccountType_ === AccountType.Ledger
                 ) {
                     nextRoute = AppRoute.Congratulations
                 } else {

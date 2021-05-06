@@ -33,20 +33,20 @@
         "create": {
             "title": "Create a wallet",
             "body": "Something, something about wallet accounts and some important life advice",
-            "software_account": {
+            "softwareAccount": {
                 "title": "Create a regular software account",
                 "description": "Enter an IOTA seed or secret phrase"
             },
-            "ledger_account": {
+            "ledgerAccount": {
                 "title": "Create a fresh Ledger account",
                 "description": "Ledger Nano S or Nano X required"
             }
         },
-        "setup_ledger": {
+        "setupLedger": {
             "title": "Install the new IOTA Ledger app on your device",
-            "body_1": "1. Open Ledger Live and install New IOTA app",
-            "body_2": "2. Close Ledger Live desktop application",
-            "body_3": "3. Open the new app on your Ledger device",
+            "body1": "1. Open Ledger Live and install New IOTA app",
+            "body2": "2. Close Ledger Live desktop application",
+            "body3": "3. Open the new app on your Ledger device",
             "connect": "Connect your Ledger device to begin the setup process"
         },
         "password": {
@@ -156,8 +156,8 @@
         },
         "import_backup_password": {
             "title": "Restore your wallet from a SeedVault or Stronghold",
-            "body_1": "Please enter your backup password.",
-            "body_2": "This is the password you set when you first created your backup."
+            "body1": "Please enter your backup password.",
+            "body2": "This is the password you set when you first created your backup."
         },
         "importBackupPassword": {
             "title": "Restore your wallets from a SeedVault or Stronghold",

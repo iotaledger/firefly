@@ -28,12 +28,12 @@
             <Text type="h2" classes="mb-5">{locale('views.create.title')}</Text>
             <Text type="p" secondary classes="mb-8">{locale('views.create.body')}</Text>
             <Button icon="settings" classes="w-full mb-5" secondary onClick={() => handleContinueClick(AccountType.Software)}>
-                {locale('views.create.software_account.title')}
-                <Text type="p" secondary smaller>{locale('views.create.software_account.description')}</Text>
+                {locale('views.create.softwareAccount.title')}
+                <Text type="p" secondary smaller>{locale('views.create.softwareAccount.description')}</Text>
             </Button>
             <Button icon="settings" classes="w-full mb-8" secondary onClick={() => handleContinueClick(AccountType.Ledger)}>
-                {locale('views.create.ledger_account.title')}
-                <Text type="p" secondary smaller>{locale('views.create.ledger_account.description')}</Text>
+                {locale('views.create.ledgerAccount.title')}
+                <Text type="p" secondary smaller>{locale('views.create.ledgerAccount.description')}</Text>
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-end items-center bg-pastel-blue dark:bg-gray-900">

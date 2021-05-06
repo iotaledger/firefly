@@ -1,25 +1,28 @@
 <script lang="typescript">
-    import { createEventDispatcher, onDestroy } from 'svelte'
-    import { writable, get } from 'svelte/store'
-    import { OnboardingLayout, Illustration, Text, Button, Popup } from 'shared/components'
-    import { api } from 'shared/lib/wallet'
-    import { DEFAULT_NODES as nodes, DEFAULT_NODE as node, network } from 'shared/lib/network'
-    import { popupState, openPopup, closePopup } from 'shared/lib/popup'
+    import { Button, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
+    import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
+    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { LedgerStatus } from 'shared/lib/typings/wallet'
+    import { api } from 'shared/lib/wallet'
+    import { createEventDispatcher, onDestroy, onMount } from 'svelte'
+    import { get } from 'svelte/store'
 
     export let locale
     export let mobile
+
     let creatingAccount = false
     let simulator = false
     let checkIfLedgerIsConnected = true
     let isLedgerConnected = true
+
+    const dispatch = createEventDispatcher()
 
     const openLedgerNotConnectedPopup = () => {
         openPopup({
             type: 'ledgerNotConnected',
             hideClose: true,
             props: {
-                message: locale('views.setup_ledger.connect'),
+                message: locale('views.setupLedger.connect'),
             },
         })
     }
@@ -31,12 +34,14 @@
         }
     })
 
+    onMount(() => {
+        getLedgerDeviceStatus()
+    })
+
     onDestroy(() => {
         checkIfLedgerIsConnected = false
         unsubscribe()
     })
-
-    const dispatch = createEventDispatcher()
 
     function handleLedgerDeviceNotConnected() {
         if (checkIfLedgerIsConnected) {
@@ -63,17 +68,18 @@
         })
     }
 
-    getLedgerDeviceStatus()
-
     function createAccount() {
         creatingAccount = true
+        const officialNodes = getOfficialNodes()
+        const officialNetwork = getOfficialNetwork()
         api.createAccount(
             {
                 clientOptions: {
-                    node: node.url,
-                    nodes: nodes.map((node) => node.url),
-                    network: $network,
+                    nodes: officialNodes,
+                    node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
+                    network: officialNetwork,
                 },
+                alias: `${locale('general.account')} 1`,
                 signerType: { type: simulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
             },
             {
@@ -99,22 +105,20 @@
 {:else}
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
-            <Text type="h2" classes="mb-5">{locale('views.setup_ledger.title')}</Text>
-            <Text type="p" secondary classes="mb-8">{locale('views.setup_ledger.body_1')}</Text>
-            <Text type="p" secondary classes="mb-8">{locale('views.setup_ledger.body_2')}</Text>
-            <Text type="p" secondary classes="mb-8">{locale('views.setup_ledger.body_3')}</Text>
+            <Text type="h2" classes="mb-5">{locale('views.setupLedger.title')}</Text>
+            <Text type="p" secondary classes="mb-2">{locale('views.setupLedger.body1')}</Text>
+            <Text type="p" secondary classes="mb-2">{locale('views.setupLedger.body2')}</Text>
+            <Text type="p" secondary>{locale('views.setupLedger.body3')}</Text>
         </div>
         <div slot="leftpane__action">
             <Button classes="w-full" disabled={creatingAccount} onClick={createAccount}>
-                {locale(creatingAccount ? 'actions.continue' : 'actions.continue')}
+                {#if creatingAccount}
+                    <Spinner busy message={locale('general.creatingAccount')} classes="justify-center" />
+                {:else}{locale('actions.continue')}{/if}
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-end items-center">
-            <Illustration
-                illustration="import-from-firefly-ledger-desktop"
-                height="100%"
-                width="auto"
-                classes="h-full object-cover object-left" />
+        <div slot="rightpane" class="w-full h-full flex justify-end items-center bg-pastel-blue dark:bg-gray-900">
+            <Illustration width="100%" illustration="import-from-ledger-desktop" />
         </div>
     </OnboardingLayout>
 {/if}

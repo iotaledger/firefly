@@ -17,12 +17,12 @@
         },
         // TODO: ledger replace with animations
         'import-from-ledger-desktop': {
-            lightmode: 'import-from-ledger-desktop.svg',
-            darkmode: 'import-from-ledger-desktop.svg',
+            lightmode: 'onboarding/import-from-ledger-desktop.svg',
+            darkmode: 'onboarding/import-from-ledger-desktop.svg',
         },
         'import-from-firefly-ledger-desktop': {
-            lightmode: 'import-from-firefly-ledger-desktop.svg',
-            darkmode: 'import-from-firefly-ledger-desktop.svg',
+            lightmode: 'onboarding/import-from-firefly-ledger-desktop.svg',
+            darkmode: 'onboarding/import-from-firefly-ledger-desktop.svg',
         },
     }
 </script>
