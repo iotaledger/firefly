@@ -25,6 +25,7 @@ import type { Message, Payload, Transaction } from 'shared/lib/typings/message'
 import type { MigrationBundle, MigrationData, SendMigrationBundleResponse } from 'shared/lib/typings/migration'
 import { formatUnitBestMatch } from 'shared/lib/units'
 import { get, writable, Writable } from 'svelte/store'
+import { Electron } from 'shared/lib/electron'
 import type { ClientOptions } from './typings/client'
 import type { Duration, NodeInfo, StrongholdStatus } from './typings/wallet'
 
@@ -152,7 +153,7 @@ export const transferState = writable<TransferProgressEventType | "Complete" | n
 
 export const isSyncing = writable<boolean>(false)
 
-export const api: {
+interface IWalletApi {
     generateMnemonic(callbacks: { onSuccess: (response: Event<string>) => void, onError: (err: ErrorEventPayload) => void })
     storeMnemonic(mnemonic: string, callbacks: { onSuccess: (response: Event<string>) => void, onError: (err: ErrorEventPayload) => void })
     verifyMnemonic(mnemonic: string, callbacks: { onSuccess: (response: Event<string>) => void, onError: (err: ErrorEventPayload) => void })
@@ -223,7 +224,44 @@ export const api: {
         mwm: number,
         callbacks: { onSuccess: (response: Event<SendMigrationBundleResponse>) => void, onError: (err: ErrorEventPayload) => void }
     ),
-} = window['__WALLET_API__']
+}
+
+export const api: IWalletApi = new Proxy({ ...window['__WALLET_API__'] }, {
+    get: (target, propKey) => {
+        const origMethod = target[propKey];
+        return (...args) => {
+            for (let i = args.length - 1; i >= 0; i--) {
+                if (args[i]?.onSuccess) {
+                    const origSuccess = args[i].onSuccess;
+                    args[i].onSuccess = (payload) => {
+                        try {
+                            origSuccess(payload)
+                        } catch (err) {
+                            console.error(`Callback Error ${propKey.toString()}`, err)
+                            Electron.unhandledException(`Callback Error ${propKey.toString()}`, { message: err.message, stack: err.stack })
+                        }
+                    }
+                }
+                if (args[i]?.onError) {
+                    const origError = args[i].onError;
+                    args[i].onError = (payload) => {
+                        try {
+                            origError(payload)
+                        } catch (err) {
+                            console.error(`Callback Error ${propKey.toString()}`, err)
+                            Electron.unhandledException(`Callback Error ${propKey.toString()}`, { message: err.message, stack: err.stack })
+                        }
+                    }
+                }
+                if (args[i]?.onSuccess || args[i]?.onError) {
+                    break;
+                }
+            }
+            return origMethod.apply(target, args)
+        };
+    }
+})
+
 
 export const getWalletStoragePath = (appPath: string): string => {
     return `${appPath}/${WALLET_STORAGE_DIRECTORY}/`
