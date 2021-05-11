@@ -289,6 +289,7 @@ pub async fn send_message(serialized_message: String) {
 
     if let Some((message, actor_id)) = data {
         if let Some(message) = message {
+            println!("RESPONSE {:?}", message);
             respond(&actor_id, message).expect("actor dropped");
         } else {
             log::error!(
@@ -347,6 +348,7 @@ pub async fn listen<A: Into<String>, S: Into<String>>(actor_id: A, id: S, event_
         }),
         EventType::BalanceChange => {
             on_balance_change(move |event| {
+                println!("on_balance_change even {:?}", event);
                 let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &event));
             })
             .await
