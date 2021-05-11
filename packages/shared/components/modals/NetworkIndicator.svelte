@@ -1,13 +1,15 @@
 <script lang="typescript">
-    import { onDestroy } from 'svelte'
-    import { Text, Modal, HR } from 'shared/components'
+    import { HR, Modal, Text } from 'shared/components'
     import { networkStatus } from 'shared/lib/networkStatus'
+    import { activeProfile } from 'shared/lib/profile'
+    import { onDestroy } from 'svelte'
+
     export let isActive
     export let locale
     let healthStatus = 2
     let healthStatusText = 'networkOperational'
     let messagesPerSecond = 0
-    let confirmationRate = 0
+    let referencedRate = 0
 
     const NETWORK_HEALTH_COLORS = {
         0: 'red',
@@ -18,8 +20,8 @@
     const unsubscribe = networkStatus.subscribe((data) => {
         healthStatus = data.health ?? 0
         healthStatusText = healthStatus === 0 ? 'networkDown' : healthStatus === 1 ? 'networkDegraded' : 'networkOperational'
-        messagesPerSecond = data.itemsPerSecond ?? 0
-        confirmationRate = data.confirmationRate ?? 0
+        messagesPerSecond = data.messagesPerSecond ?? 0
+        referencedRate = data.referencedRate ?? 0
     })
 
     onDestroy(() => {
@@ -33,14 +35,16 @@
         <div class="px-7 pb-5 text-13 text-{NETWORK_HEALTH_COLORS[healthStatus]}-500">
             {locale(`views.dashboard.network.${healthStatusText}`)}
         </div>
-        <HR />
-        <div class="flex flex-row justify-between px-7 pt-5 pb-2">
-            <span class="text-12 text-gray-800 dark:text-white">{locale('views.dashboard.network.messagesPerSecond')}</span>
-            <span class="text-12 text-gray-500">{`${Math.round(messagesPerSecond)}`}</span>
-        </div>
-        <div class="flex flex-row justify-between px-7 pb-5">
-            <span class="text-12 text-gray-800 dark:text-white">{locale('views.dashboard.network.confirmationRate')}</span>
-            <span class="text-12 text-gray-500">{`${Math.round(confirmationRate)}%`}</span>
-        </div>
+        {#if !$activeProfile?.settings.hideNetworkStatistics}
+            <HR />
+            <div class="flex flex-row justify-between px-7 pt-5 pb-2">
+                <span class="text-12 text-gray-800 dark:text-white">{locale('views.dashboard.network.messagesPerSecond')}</span>
+                <span class="text-12 text-gray-500">{`${Math.round(messagesPerSecond)}`}</span>
+            </div>
+            <div class="flex flex-row justify-between px-7 pb-5">
+                <span class="text-12 text-gray-800 dark:text-white">{locale('views.dashboard.network.referencedRate')}</span>
+                <span class="text-12 text-gray-500">{`${Math.round(referencedRate)}%`}</span>
+            </div>
+        {/if}
     </network-indicator-content>
 </Modal>

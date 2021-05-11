@@ -58,7 +58,7 @@
             </div>
         </strength-meter>
     {/if}
-    <div class="flex w-full relative">
+    <div class="flex  w-full relative">
         <Input
             {error}
             {type}
@@ -70,7 +70,9 @@
             placeholder={placeholder || locale('general.password')}
             {submitHandler}
             disableContextMenu={true}
-            spellcheck="false" />
+            spellcheck="false"
+            {locale}
+            capsLockWarning={true} />
         {#if showRevealToggle === true && !disabled}
             <button type="button" on:click={() => revealToggle()} tabindex="-1" class="absolute top-3 right-3">
                 <Icon icon={revealed ? 'view' : 'hide'} classes="text-blue-500" />

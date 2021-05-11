@@ -147,7 +147,7 @@
             "restoringWallet": "Restaurando a carteira...",
             "findingBalance": "Procurando saldo...",
             "incorrectSeedVaultPassword": "Senha SeedVault incorreta.",
-            "noDataSeedVault": "No data could be found in the SeedVault.",
+            "noDataSeedVault": "Nenhum dado foi encontrado no SeedVault.",
             "signingBundle": "Assinando pacote",
             "broadcastingBundle": "Transmitindo pacote",
             "miningBundle": "Minerando pacote",
@@ -240,19 +240,23 @@
                 "title": "Notificações",
                 "description": "Notificações do sistema para eventos de transações"
             },
+            "networkStatus": {
+                "title": "Status da rede",
+                "description": "Exibe o status do servidor ao qual você está conectado no momento."
+            },
             "exportStronghold": {
                 "title": "Exportar Backup",
-                "description": "Exportar arquivo Stronghold - um backup completo criptografado da sua carteira e do histórico recente de transações."
+                "description": "Exportar para um arquivo Stronghold - um backup criptografado de suas carteiras e do histórico mais recente de transações"
             },
             "appLock": {
                 "title": "Bloqueio Automático",
                 "description": "Tempo de inatividade antes do bloqueio de suas carteiras e você ser desconectado",
-                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
-                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
+                "durationMinute": "{time, plural, one {1 minuto} other {# minutos}}",
+                "durationHour": "{time, plural, one {1 hora} other {# horas}}"
             },
             "changePassword": {
                 "title": "Alterar Senha",
-                "description": "Sua senha é usada para proteger sua carteira. Você deve usar uma senha forte para proteger seus fundos."
+                "description": "Sua senha é usada para proteger suas carteiras. Você deve usar uma senha forte para proteger seus fundos"
             },
             "changePincode": {
                 "title": "Alterar código PIN",
@@ -264,15 +268,15 @@
             },
             "balanceFinder": {
                 "title": "Localizador de saldo",
-                "description": "Faça uma pesquisa estendida de seus endereços por tokens."
+                "description": "Faça uma pesquisa estendida de seus endereços por tokens"
             },
             "hiddenAccounts": {
                 "title": "Carteiras ocultas",
-                "description": "Mostrar carteiras ocultas."
+                "description": "Selecionando estas opções mostrará carteiras que estavam ocultas anteriormente"
             },
             "deleteProfile": {
                 "title": "Excluir perfil",
-                "description": "Exclui seu perfil inteiro, carteiras e histórico de transações. Certifique-se de ter um backup."
+                "description": "Exclui seu perfil inteiro, carteiras e histórico de transações. Certifique-se de ter um backup"
             },
             "deepLinks": {
                 "title": "Links Profundos",
@@ -288,7 +292,7 @@
             },
             "configureNodeList": {
                 "title": "Selecionar um servidor",
-                "description": "Gerencie a lista de nodes da rede IOTA aos quais você se conecta.",
+                "description": "Gerencia a lista de servidores da rede IOTA que você se conecta",
                 "primaryNode": "Servidor primário",
                 "excludeNode": "Excluir servidor",
                 "includeNode": "Incluir servidor",
@@ -296,7 +300,7 @@
                 "setAsPrimary": "Definir como principal",
                 "removeNode": "Remover servidor",
                 "includeOfficialNodeList": "Incluir a lista de servidores oficiais",
-                "noNodes": "Não há servidores, a seleção automática será usada."
+                "noNodes": "Não há servidores, a seleção automática será usada"
             },
             "proofOfWork": {
                 "title": "Prova de Trabalho",
@@ -337,7 +341,7 @@
             },
             "reportAnIssue": {
                 "title": "Reportar um problema",
-                "description": "Relate um erro para os desenvolvedores. Verifique se o mesmo ainda não foi relatado."
+                "description": "Relate um erro aos desenvolvedores. Verifique para ter certeza que ainda não foi reportado"
             }
         },
         "login": {
@@ -371,7 +375,7 @@
                 "networkDown": "Rede Desconectada",
                 "status": "Status",
                 "messagesPerSecond": "Mensagens por segundo",
-                "confirmationRate": "Taxa de confirmação"
+                "referencedRate": "Taxa referenciada"
             },
             "profileModal": {
                 "allSettings": "Todas as configurações",
@@ -583,6 +587,7 @@
         "viewStatus": "Ver status",
         "showHiddenAccounts": "Mostrar carteiras ocultas",
         "confirm": "Confirmar",
+        "hideNetworkStatistics": "Ocultar estatísticas da rede",
         "findBalances": "Encontrar saldos",
         "searchBalances": "Pesquisa por saldos",
         "searchAgain": "Pesquisar novamente",
@@ -701,7 +706,9 @@
         "sentFrom": "Enviado de {account}",
         "receiving": "Recebendo",
         "sending": "Enviando",
-        "legacyNetwork": "Legacy Network"
+        "legacyNetwork": "Rede Legada",
+        "capsLock": "O Caps Lock está ativado",
+        "version": "Versão {version}"
     },
     "dates": {
         "today": "Hoje",

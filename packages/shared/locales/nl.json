@@ -147,7 +147,7 @@
             "restoringWallet": "Herstellen portemonnee...",
             "findingBalance": "Zoeken saldo...",
             "incorrectSeedVaultPassword": "Onjuist SeedVault wachtwoord.",
-            "noDataSeedVault": "No data could be found in the SeedVault.",
+            "noDataSeedVault": "Er konden geen gegevens worden gevonden in de SeedVault.",
             "signingBundle": "Tekenen bundel",
             "broadcastingBundle": "Uitzenden bundel",
             "miningBundle": "Mijnen bundel",
@@ -240,19 +240,23 @@
                 "title": "Meldingen",
                 "description": "Systeemmeldingen voor transactie activiteiten"
             },
+            "networkStatus": {
+                "title": "Netwerk status",
+                "description": "Toont de status van de node waarmee u momenteel verbonden bent."
+            },
             "exportStronghold": {
                 "title": "Back-up exporteren",
-                "description": "Exporteren naar een Stronghold bestand - een complete versleutelde back-up van uw portemonnees en de nieuwste transactiegeschiedenis."
+                "description": "Exporteren naar een Stronghold bestand - een complete versleutelde back-up van uw portemonnees en de nieuwste transactiegeschiedenis"
             },
             "appLock": {
                 "title": "Automatisch vergrendelen",
                 "description": "Inactiviteit tijd voordat uw portemonnees vergrendelen en u bent uitgelogd",
-                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
-                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
+                "durationMinute": "{time, plural, one {1 minuut} other {# minuten}}",
+                "durationHour": "{time, plural, one {1 uur} other {# uur}}"
             },
             "changePassword": {
                 "title": "Wachtwoord wijzigen",
-                "description": "Uw wachtwoord wordt gebruikt om uw portemonnees te beveiligen. Gebruik een sterk wachtwoord om uw tegoeden te beschermen."
+                "description": "Uw wachtwoord wordt gebruikt om uw portemonnees te beveiligen. Gebruik een sterk wachtwoord om uw tegoeden te beschermen"
             },
             "changePincode": {
                 "title": "Wijzig PIN code",
@@ -264,15 +268,15 @@
             },
             "balanceFinder": {
                 "title": "Saldo zoeker",
-                "description": "Voer een uitgebreide zoekopdracht uit op uw adressen voor tokens."
+                "description": "Voer een uitgebreide zoekopdracht uit op uw adressen voor tokens"
             },
             "hiddenAccounts": {
                 "title": "Verborgen portemonnees",
-                "description": "Door deze opties te selecteren, worden portefeuilles die voorheen verborgen waren getoond."
+                "description": "Door deze optie te selecteren, worden portefeuilles die voorheen verborgen waren getoond"
             },
             "deleteProfile": {
                 "title": "Profiel verwijderen",
-                "description": "Verwijdert uw hele profiel, portemonnees en transactiegeschiedenis. Zorg ervoor dat u een back-up hebt."
+                "description": "Verwijdert uw hele profiel, portemonnees en transactiegeschiedenis. Zorg ervoor dat u een back-up hebt"
             },
             "deepLinks": {
                 "title": "Diepe links",
@@ -288,7 +292,7 @@
             },
             "configureNodeList": {
                 "title": "Selecteer een node",
-                "description": "Beheer de lijst van IOTA-netwerkknooppunten waarmee u verbinding maakt.",
+                "description": "Beheer de lijst van IOTA-netwerkknooppunten waarmee u verbinding maakt",
                 "primaryNode": "Primaire node",
                 "excludeNode": "Node uitsluiten",
                 "includeNode": "Node toevoegen",
@@ -296,7 +300,7 @@
                 "setAsPrimary": "Instellen als primair",
                 "removeNode": "Verwijder node",
                 "includeOfficialNodeList": "Voeg officiële node lijst toe",
-                "noNodes": "Er zijn geen nodes, automatische selectie zal in plaats daarvan worden gebruikt."
+                "noNodes": "Er zijn geen nodes, automatische selectie zal in plaats daarvan worden gebruikt"
             },
             "proofOfWork": {
                 "title": "Proof of work",
@@ -337,7 +341,7 @@
             },
             "reportAnIssue": {
                 "title": "Meld een probleem",
-                "description": "Meld een probleem aan de ontwikkelaars. Controleer eerst of deze niet al eerder gemeld is."
+                "description": "Meld een probleem aan de ontwikkelaars. Controleer eerst of deze niet al eerder gemeld is"
             }
         },
         "login": {
@@ -371,7 +375,7 @@
                 "networkDown": "Netwerk verbinding verbroken",
                 "status": "Status",
                 "messagesPerSecond": "Berichten per seconde",
-                "confirmationRate": "Bevestigingssnelheid"
+                "referencedRate": "Bevestigings percentage"
             },
             "profileModal": {
                 "allSettings": "Alle instellingen",
@@ -583,6 +587,7 @@
         "viewStatus": "Bekijk status",
         "showHiddenAccounts": "Toon verborgen portemonnees",
         "confirm": "Bevestig",
+        "hideNetworkStatistics": "Netwerkstatistieken verbergen",
         "findBalances": "Saldi zoeken",
         "searchBalances": "Zoeken naar saldi",
         "searchAgain": "Opnieuw zoeken",
@@ -701,7 +706,9 @@
         "sentFrom": "Verzonden vanaf {account}",
         "receiving": "Ontvangen",
         "sending": "Verzenden",
-        "legacyNetwork": "Legacy Network"
+        "legacyNetwork": "Ouder netwerk",
+        "capsLock": "Caps Lock staat aan",
+        "version": "Versie {version}"
     },
     "dates": {
         "today": "Vandaag",

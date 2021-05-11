@@ -240,9 +240,13 @@
                 "title": "Kennisgewings",
                 "description": "Stelselkennisgewings vir transaksiegebeurtenisse"
             },
+            "networkStatus": {
+                "title": "Network status",
+                "description": "Displays the status of the node you are currently connected to."
+            },
             "exportStronghold": {
                 "title": "Voer back-up uit",
-                "description": "Voer uit na 'n Stronghold-lêer - 'n volledige geïnkripteerde back-up van u beursies en die nuutste transaksiegeskiedenis."
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
             },
             "appLock": {
                 "title": "Sluit outomaties",
@@ -252,7 +256,7 @@
             },
             "changePassword": {
                 "title": "Verander wagwoord",
-                "description": "Jou wagwoord word gebruik om jou beursies te beveilig. Jy moet 'n sterk wagwoord gebruik om jou fondse te beskerm."
+                "description": "Jou wagwoord word gebruik om jou beursies te beveilig. Jy moet 'n sterk wagwoord gebruik om jou fondse te beskerm"
             },
             "changePincode": {
                 "title": "Verander PIN-kode",
@@ -264,15 +268,15 @@
             },
             "balanceFinder": {
                 "title": "Balans-finder",
-                "description": "Doen 'n uitgebreide soektog na jou adresse vir tokens."
+                "description": "Doen 'n uitgebreide soektog na jou adresse vir tokens"
             },
             "hiddenAccounts": {
                 "title": "Steek beursie weg",
-                "description": "As jy hierdie opsies kies, word rekeninge wat voorheen weggesteek was, vertoon."
+                "description": "As jy hierdie opsies kies, word rekeninge wat voorheen weggesteek was, vertoon"
             },
             "deleteProfile": {
                 "title": "Vee profiel uit",
-                "description": "Verwyder jou hele profiel, beursie en transaksiegeskiedenis. Maak seker dat jy 'n back-up het."
+                "description": "Verwyder jou hele profiel, beursie en transaksiegeskiedenis. Maak seker dat jy 'n back-up het"
             },
             "deepLinks": {
                 "title": "Deep links",
@@ -288,7 +292,7 @@
             },
             "configureNodeList": {
                 "title": "Kies 'n node",
-                "description": "Bestuur die lys van IOTA-netwerk nodes waarmee jy verbind is.",
+                "description": "Bestuur die lys van IOTA-netwerk nodes waarmee jy verbind is",
                 "primaryNode": "Primêre node",
                 "excludeNode": "Exclude node",
                 "includeNode": "Include node",
@@ -296,7 +300,7 @@
                 "setAsPrimary": "Stel as primêre Node",
                 "removeNode": "Verwyder node",
                 "includeOfficialNodeList": "Sluit die amptelike nodelys in",
-                "noNodes": "Daar is geen nodes, outomatiese seleksie sal eerder gebruik word."
+                "noNodes": "Daar is geen nodes, outomatiese seleksie sal eerder gebruik word"
             },
             "proofOfWork": {
                 "title": "Proof of work",
@@ -337,7 +341,7 @@
             },
             "reportAnIssue": {
                 "title": "Rapporteer 'n probleem",
-                "description": "Rapporteer 'n fout by die ontwikkelaars. Kyk eers om seker te maak dat dit nog nie gerapporteer is nie."
+                "description": "Rapporteer 'n fout by die ontwikkelaars. Kyk eers om seker te maak dat dit nog nie gerapporteer is nie"
             }
         },
         "login": {
@@ -371,7 +375,7 @@
                 "networkDown": "Netwerk ontkoppel",
                 "status": "Status",
                 "messagesPerSecond": "Boodskappe per sekondes",
-                "confirmationRate": "Bevestig tempo"
+                "referencedRate": "Verwysde tempo"
             },
             "profileModal": {
                 "allSettings": "Alle instellings",
@@ -583,6 +587,7 @@
         "viewStatus": "Sien status",
         "showHiddenAccounts": "Wys versteekte beursie",
         "confirm": "Bevestig",
+        "hideNetworkStatistics": "Hide network statistics",
         "findBalances": "Vind balanse",
         "searchBalances": "Soek na balanse",
         "searchAgain": "Soek weer",
@@ -701,7 +706,9 @@
         "sentFrom": "Stuur vanaf {account}",
         "receiving": "Ontvangs",
         "sending": "Besig om te stuur",
-        "legacyNetwork": "Erfenisnetwerk"
+        "legacyNetwork": "Erfenisnetwerk",
+        "capsLock": "Hoofletterslot is aan",
+        "version": "Weergawe {version}"
     },
     "dates": {
         "today": "Vandag",

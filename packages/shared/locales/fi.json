@@ -240,9 +240,13 @@
                 "title": "Ilmoitukset",
                 "description": "Järjestelmäilmoitukset transaktiotapahtumista"
             },
+            "networkStatus": {
+                "title": "Verkon tila",
+                "description": "Näyttää tilan solmulle, johon olet tällä hetkellä yhteydessä."
+            },
             "exportStronghold": {
                 "title": "Vie varmuuskopio",
-                "description": "Vie Stronghold-tiedostoon - täydellinen salattu varmuuskopio lompakoistasi ja viimeisimmästä transaktiohistoriasta."
+                "description": "Vie Stronghold-tiedostoon - täydellinen salattu varmuuskopio lompakoistasi ja viimeisimmästä transaktiohistoriastasi"
             },
             "appLock": {
                 "title": "Automaattinen lukitus",
@@ -252,7 +256,7 @@
             },
             "changePassword": {
                 "title": "Vaihda salasana",
-                "description": "Salasanaasi käytetään lompakkojesi suojaamiseen. Sinun on käytettävä vahvaa salasanaa varojesi turvaamiseksi."
+                "description": "Salasanaasi käytetään lompakkojesi suojaamiseen. Sinun on käytettävä vahvaa salasanaa varojesi turvaamiseksi"
             },
             "changePincode": {
                 "title": "Vaihda PIN-koodi",
@@ -264,15 +268,15 @@
             },
             "balanceFinder": {
                 "title": "Saldon etsijä",
-                "description": "Suorita laajennettu haku osoitteistasi varoja varten."
+                "description": "Suorita laajennettu haku osoitteistasi tokeneita varten"
             },
             "hiddenAccounts": {
                 "title": "Piilotetut lompakot",
-                "description": "Tämän asetuksen valitseminen näyttää aiemmin piilotetut lompakot."
+                "description": "Tämän asetuksen valitseminen näyttää aiemmin piilotetut lompakot"
             },
             "deleteProfile": {
                 "title": "Poista profiili",
-                "description": "Poistaa koko profiilisi, lompakkosi ja transaktiohistoriasi. Varmista, että sinulla on varmuuskopio."
+                "description": "Poistaa koko profiilisi, lompakkosi ja transaktiohistoriasi. Varmista, että sinulla on varmuuskopio"
             },
             "deepLinks": {
                 "title": "Syvälinkit",
@@ -288,7 +292,7 @@
             },
             "configureNodeList": {
                 "title": "Valitse solmu",
-                "description": "Hallitse listaa IOTA-verkon solmuista, joihin yhdistät.",
+                "description": "Hallitse listaa IOTA-verkon solmuista, joihin yhdistät",
                 "primaryNode": "Ensisijainen solmu",
                 "excludeNode": "Hylkää solmu",
                 "includeNode": "Sisällytä solmu",
@@ -296,7 +300,7 @@
                 "setAsPrimary": "Aseta ensisijaiseksi",
                 "removeNode": "Poista solmu",
                 "includeOfficialNodeList": "Sisällytä virallinen solmulista",
-                "noNodes": "Ei solmuja, sen sijaan käytetään automaattista valintaa."
+                "noNodes": "Ei solmuja, sen sijaan käytetään automaattista valintaa"
             },
             "proofOfWork": {
                 "title": "Todiste työstä (PoW)",
@@ -337,7 +341,7 @@
             },
             "reportAnIssue": {
                 "title": "Ilmoita ongelmasta",
-                "description": "Ilmoista virheestä kehittäjille. Tarkista varmistaaksesi, ettei sitä ole jo raportoitu."
+                "description": "Ilmoista virheestä kehittäjille. Tarkista, ettei sitä ole jo raportoitu"
             }
         },
         "login": {
@@ -371,7 +375,7 @@
                 "networkDown": "Verkkoyhteys katkaistu",
                 "status": "Tila",
                 "messagesPerSecond": "Viestejä sekunnissa",
-                "confirmationRate": "Vahvistusaste"
+                "referencedRate": "Viittausaste"
             },
             "profileModal": {
                 "allSettings": "Kaikki asetukset",
@@ -583,6 +587,7 @@
         "viewStatus": "Näytä tila",
         "showHiddenAccounts": "Näytä piilotetut lompakot",
         "confirm": "Vahvista",
+        "hideNetworkStatistics": "Piilota verkkotilastot",
         "findBalances": "Etsi saldoja",
         "searchBalances": "Hae saldoja",
         "searchAgain": "Hae uudelleen",
@@ -701,7 +706,9 @@
         "sentFrom": "Lähetetty lompakosta {account}",
         "receiving": "Vastaanotetaan",
         "sending": "Lähetetään",
-        "legacyNetwork": "Vanha verkko"
+        "legacyNetwork": "Vanha verkko",
+        "capsLock": "Caps Lock on päällä",
+        "version": "Versio {version}"
     },
     "dates": {
         "today": "Tänään",

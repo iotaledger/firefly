@@ -238,21 +238,25 @@
             },
             "notifications": {
                 "title": "Notifikasi",
-                "description": "System notifications for transaction events"
+                "description": "Pemberitahuan sistem untuk transaksi"
+            },
+            "networkStatus": {
+                "title": "Network status",
+                "description": "Displays the status of the node you are currently connected to."
             },
             "exportStronghold": {
-                "title": "Export Backup",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history."
+                "title": "Ekspor Cadangan",
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
             },
             "appLock": {
-                "title": "Automatic Lock",
-                "description": "Inactivity time before your wallets lock and you are logged out",
+                "title": "Kunci Otomatis",
+                "description": "Waktu tidak aktif sebelum dompet Anda terkunci dan Anda keluar",
                 "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
                 "durationHour": "{time, plural, one {1 hour} other {# hours}}"
             },
             "changePassword": {
                 "title": "Ubah kata sandinya",
-                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds."
+                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
             },
             "changePincode": {
                 "title": "Ubah kode pin",
@@ -264,15 +268,15 @@
             },
             "balanceFinder": {
                 "title": "Balance finder",
-                "description": "Perform an extended search of your addresses for tokens."
+                "description": "Perform an extended search of your addresses for tokens"
             },
             "hiddenAccounts": {
                 "title": "Hidden wallets",
-                "description": "Selecting this options will show wallets that were previously hidden."
+                "description": "Selecting this options will show wallets that were previously hidden"
             },
             "deleteProfile": {
                 "title": "Hapus profil",
-                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup."
+                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
             },
             "deepLinks": {
                 "title": "Tautan Dalam",
@@ -288,7 +292,7 @@
             },
             "configureNodeList": {
                 "title": "Pilih node",
-                "description": "Manage the list of IOTA network nodes you connect to.",
+                "description": "Manage the list of IOTA network nodes you connect to",
                 "primaryNode": "Node utama",
                 "excludeNode": "Kecualikan node",
                 "includeNode": "Sertakan node",
@@ -296,7 +300,7 @@
                 "setAsPrimary": "Set sebagai utama",
                 "removeNode": "Menghapus Node",
                 "includeOfficialNodeList": "Sertakan daftar node resmi",
-                "noNodes": "Tidak ada node, pilihan otomatis akan digunakan sebagai gantinya."
+                "noNodes": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "Bukti kerja",
@@ -337,7 +341,7 @@
             },
             "reportAnIssue": {
                 "title": "Laporkan sebuah permasalahan",
-                "description": "Laporkan bug ke pengembang. Periksa untuk memastikan itu belum dilaporkan."
+                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
             }
         },
         "login": {
@@ -371,7 +375,7 @@
                 "networkDown": "Jaringan Terputus",
                 "status": "Status",
                 "messagesPerSecond": "Pesan per detik",
-                "confirmationRate": "Menilai konfirmasi"
+                "referencedRate": "Referenced rate"
             },
             "profileModal": {
                 "allSettings": "Semua pengaturan",
@@ -583,6 +587,7 @@
         "viewStatus": "View status",
         "showHiddenAccounts": "Show hidden wallets",
         "confirm": "Confirm",
+        "hideNetworkStatistics": "Hide network statistics",
         "findBalances": "Find balances",
         "searchBalances": "Search for balances",
         "searchAgain": "Search again",
@@ -701,7 +706,9 @@
         "sentFrom": "Dikirim dari {account}",
         "receiving": "Menerima",
         "sending": "Mengirim",
-        "legacyNetwork": "Legacy Network"
+        "legacyNetwork": "Legacy Network",
+        "capsLock": "Caps Lock is on",
+        "version": "Version {version}"
     },
     "dates": {
         "today": "Hari ini",

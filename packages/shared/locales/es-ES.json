@@ -22,7 +22,7 @@
         "setup": {
             "title": "Despliega una cartera",
             "chrysalisTitle": "Actualización de red Chrysalis",
-            "chrysalisBody": "Desde el 21 de sbril, los usuarios podrán migrar sus tokens a la nueva red Chrysalis. Te recomendamos migrar tus tokens existentes lo antes posible.",
+            "chrysalisBody": "Desde el 21 de abril, los usuarios podrán migrar sus tokens a la nueva red Chrysalis. Te recomendamos migrar tus tokens existentes lo antes posible.",
             "learnMore": "Aprende acerca de la migración"
         },
         "secure": {
@@ -53,7 +53,7 @@
         "backup": {
             "title": "Respaldar tu cartera",
             "body1": "Ahora se te mostrará una frase de recuperación. Escríbela en tu Kit de Recuperación.",
-            "body2": "No compartas tu frase de recuperación con nadie. Puede utilizarse para acceder a sus tokens desde cualquier lugar.",
+            "body2": "No compartas tu frase de recuperación con nadie. Puede utilizarse para acceder a tus tokens desde cualquier lugar.",
             "body3": "Si pierdes tu frase de recuperación, puedes perder tus fondos."
         },
         "recoveryPhrase": {
@@ -147,7 +147,7 @@
             "restoringWallet": "Restaurando cartera...",
             "findingBalance": "Buscando balance...",
             "incorrectSeedVaultPassword": "Contraseña de SeedVault incorrecta.",
-            "noDataSeedVault": "No se han encontrado datos en SeedVault.",
+            "noDataSeedVault": "No se han encontrado datos en el SeedVault.",
             "signingBundle": "Firmando paquete",
             "broadcastingBundle": "Transmitiendo paquete",
             "miningBundle": "Minando paquete",
@@ -240,9 +240,13 @@
                 "title": "Notificaciones",
                 "description": "Notificaciones del sistema para eventos de transacción"
             },
+            "networkStatus": {
+                "title": "Estado de la red",
+                "description": "Muestra el estado del nodo al que estás conectado actualmente."
+            },
             "exportStronghold": {
                 "title": "Exportar Copia de Seguridad",
-                "description": "Exportar a un archivo Stronghold - una copia de seguridad completa encriptada de tus carteras y último historial de transacciones."
+                "description": "Exportar a fichero de Stronghold - una copia completa y encriptada de tus billeteras y el historial de transacciones"
             },
             "appLock": {
                 "title": "Bloqueo Automático",
@@ -252,7 +256,7 @@
             },
             "changePassword": {
                 "title": "Modificar contraseña",
-                "description": "Tu contraseña se utiliza para proteger tus carteras. Debes usr una contraseña segura para proteger tus fondos."
+                "description": "Tu contraseña se utiliza para securizar tus billeteras. Debes utilizar una contraseña fuerte para proteger tus fondos"
             },
             "changePincode": {
                 "title": "Cambiar código PIN",
@@ -264,15 +268,15 @@
             },
             "balanceFinder": {
                 "title": "Buscador de balances",
-                "description": "Realizar una búsqueda extensa de tokens en tus direcciones."
+                "description": "Realizar una búsqueda ampliada de tus direcciones en busca de tokens"
             },
             "hiddenAccounts": {
                 "title": "Carteras ocultas",
-                "description": "Seleccionando estas opciones se mostrarán carteras que antes estaban ocultas."
+                "description": "Seleccionando estas opciones se mostrarán billeteras que previamente estaban ocultas"
             },
             "deleteProfile": {
                 "title": "Eliminar perfil",
-                "description": "Elimina por completo tu perfil, carteras e historial de transacciones. Asegúrate de que tienes una copia de seguridad."
+                "description": "Elimina todo tu perfil, billeteras y el historial de transacciones. Asegúrate de tener una copia de seguridad"
             },
             "deepLinks": {
                 "title": "Enlaces profundos",
@@ -288,7 +292,7 @@
             },
             "configureNodeList": {
                 "title": "Seleccionar un nodo",
-                "description": "Administra la lista de nodos de red IOTA a los que te conectas.",
+                "description": "Gestiona la lista de nodos de la red IOTA a los que te conectarás",
                 "primaryNode": "Nodo primario",
                 "excludeNode": "Excluir nodo",
                 "includeNode": "Incluir nodo",
@@ -296,7 +300,7 @@
                 "setAsPrimary": "Establecer como primaria",
                 "removeNode": "Eliminar nodo",
                 "includeOfficialNodeList": "Incluir la lista oficial de nodos",
-                "noNodes": "No hay nodos, se utilizará la selección automática en su lugar."
+                "noNodes": "No hay nodos, se utilizará la selección automática"
             },
             "proofOfWork": {
                 "title": "Prueba de trabajo",
@@ -337,7 +341,7 @@
             },
             "reportAnIssue": {
                 "title": "Informar de un problema",
-                "description": "Informar de un error a los desarrolladores. Comprueba que no haya sido reportado previamente."
+                "description": "Reportar un error a los desarrolladores. Asegúrate de que todavía no ha sido reportado"
             }
         },
         "login": {
@@ -371,7 +375,7 @@
                 "networkDown": "Red Desconectada",
                 "status": "Estado",
                 "messagesPerSecond": "Mensajes por segundo",
-                "confirmationRate": "Tasa de confirmación"
+                "referencedRate": "Tasa referenciada"
             },
             "profileModal": {
                 "allSettings": "Todos los ajustes",
@@ -583,6 +587,7 @@
         "viewStatus": "Ver estado",
         "showHiddenAccounts": "Mostrar carteras ocultas",
         "confirm": "Confirmar",
+        "hideNetworkStatistics": "Ocultar estadísticas de la red",
         "findBalances": "Encontrar balances",
         "searchBalances": "Buscar balances",
         "searchAgain": "Buscar de nuevo",
@@ -701,7 +706,9 @@
         "sentFrom": "Enviado desde {account}",
         "receiving": "Recibiendo",
         "sending": "Enviando",
-        "legacyNetwork": "Red Legacy"
+        "legacyNetwork": "Red Legacy",
+        "capsLock": "Bloqueo de mayúsculas activado",
+        "version": "Versión {version}"
     },
     "dates": {
         "today": "Hoy",

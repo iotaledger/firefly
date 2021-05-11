@@ -240,9 +240,13 @@
                 "title": "Obavijesti",
                 "description": "Obavijesti sustava o provedenim transakcijama"
             },
+            "networkStatus": {
+                "title": "Network status",
+                "description": "Displays the status of the node you are currently connected to."
+            },
             "exportStronghold": {
                 "title": "Izvezi sigurnosnu kopiju",
-                "description": "Izvoz u Stronghold datoteku - potpunu enkriptiranu kopiju vaših novčanika i najnovijih transakcija."
+                "description": "Izvoz u Stronghold datoteku - potpunu enkriptiranu kopiju vaših novčanika i najnovijih transakcija"
             },
             "appLock": {
                 "title": "Automatsko zaključavanje",
@@ -252,7 +256,7 @@
             },
             "changePassword": {
                 "title": "Promijenite lozinku",
-                "description": "Lozinka služi za zaštitu novčanika. Upotrijebite jaku lozinku kako biste zaštitili svoja sredstva."
+                "description": "Lozinka služi za zaštitu novčanika. Upotrijebite jaku lozinku kako biste zaštitili svoja sredstva"
             },
             "changePincode": {
                 "title": "Promijenite PIN kod",
@@ -264,15 +268,15 @@
             },
             "balanceFinder": {
                 "title": "Pronalazak sredstava",
-                "description": "Izvršite detaljnu pretragu svojih adresa kako bi pronašli tokene."
+                "description": "Izvršite detaljnu pretragu svojih adresa kako bi pronašli tokene"
             },
             "hiddenAccounts": {
                 "title": "Skriveni novčanici",
-                "description": "Odaberite ovu opciju za prikaz novčanika koji su ranije bili skriveni."
+                "description": "Odaberite ovu opciju za prikaz novčanika koji su ranije bili skriveni"
             },
             "deleteProfile": {
                 "title": "Izbrišite profil",
-                "description": "Brisanje čitavog profila, svih novčanika i povijesti transakcija. Uvjerite se da imate pričuvnu kopiju."
+                "description": "Brisanje čitavog profila, svih novčanika i povijesti transakcija. Uvjerite se da imate pričuvnu kopiju"
             },
             "deepLinks": {
                 "title": "Deep Links",
@@ -288,7 +292,7 @@
             },
             "configureNodeList": {
                 "title": "Odaberi node",
-                "description": "Upravljate popisom nodeova u IOTA mreži s kojima se spajate.",
+                "description": "Upravljate popisom IOTA mrežnih nodeova s kojima se spajate",
                 "primaryNode": "Primarni node",
                 "excludeNode": "Izuzmi node",
                 "includeNode": "Priključi node",
@@ -296,7 +300,7 @@
                 "setAsPrimary": "Koristi kao primarno",
                 "removeNode": "Ukloni node",
                 "includeOfficialNodeList": "Uključi popis službenih nodeova",
-                "noNodes": "Nema nodeova na raspolaganju. Upotrijebit ćemo automatski odabir."
+                "noNodes": "Nema nodeova na raspolaganju. Upotrijebit ćemo automatski odabir"
             },
             "proofOfWork": {
                 "title": "Proof of Work",
@@ -337,7 +341,7 @@
             },
             "reportAnIssue": {
                 "title": "Prijavi problem",
-                "description": "Prijavi bug developerima. Prvo provjeri nije li ista greška već prijavljena."
+                "description": "Prijavite bug developerima. Prvo provjerite je li ista greška već prijavljena"
             }
         },
         "login": {
@@ -371,7 +375,7 @@
                 "networkDown": "Mreža nije funkcionalna",
                 "status": "Stanje",
                 "messagesPerSecond": "Poruka u sekundi",
-                "confirmationRate": "Postotak potvrda"
+                "referencedRate": "Referenced rate"
             },
             "profileModal": {
                 "allSettings": "Sve postavke",
@@ -583,6 +587,7 @@
         "viewStatus": "Vidi status",
         "showHiddenAccounts": "Prikaži skrivene novčanike",
         "confirm": "Potvrdi",
+        "hideNetworkStatistics": "Hide network statistics",
         "findBalances": "Pronalazak sredstava",
         "searchBalances": "Traži sredstva",
         "searchAgain": "Traži ponovno",
@@ -701,7 +706,9 @@
         "sentFrom": "Poslano sa {account} računa",
         "receiving": "Primanje u tijeku",
         "sending": "Slanje u tijeku",
-        "legacyNetwork": "Stara mreža"
+        "legacyNetwork": "Stara mreža",
+        "capsLock": "Caps Lock je uključen",
+        "version": "Verzija {version}"
     },
     "dates": {
         "today": "Danas",

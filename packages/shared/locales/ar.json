@@ -2,7 +2,7 @@
     "views": {
         "onboarding1": {
             "title": "إرسال، تلقي وإدارة رموز IOTA الخاصة بك",
-            "body": "Firefly is the official wallet software of IOTA."
+            "body": "فايرفلاي هي المحفظة الرسمية لIOTA."
         },
         "legal": {
             "title": "سياسة الخصوصية وشروط الخدمة",
@@ -28,7 +28,7 @@
         "secure": {
             "title": "تأمين محفظتك",
             "body1": "حفظ وطباعة مجموعة الاسترداد PDF.",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallets."
+            "body2": "إذا قمت بملء مجموعة الاسترداد وتخزينها بأمان، سوف تكون دائماً قادراً على استرداد محفظتك."
         },
         "password": {
             "title": "إنشاء كلمة السر",
@@ -37,7 +37,7 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your profile.",
+            "body1": "قم بإعداد رمز PIN لتسجيل الدخول للتأكد من أنك الوحيد القادر على الدخول لمحفظتك.",
             "body2": "حافظ على رقم الPIN الخاص بك بأمان!"
         },
         "pin": {
@@ -240,9 +240,13 @@
                 "title": "التنبيهات",
                 "description": "إشعارات النظام لأحداث المعاملات"
             },
+            "networkStatus": {
+                "title": "Network status",
+                "description": "Displays the status of the node you are currently connected to."
+            },
             "exportStronghold": {
                 "title": "تصدير النسخ الاحتياطي",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history."
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
             },
             "appLock": {
                 "title": "قفل تلقائي",
@@ -252,7 +256,7 @@
             },
             "changePassword": {
                 "title": "تغيير كلمة المرور",
-                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds."
+                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
             },
             "changePincode": {
                 "title": "تغيير رمز PIN",
@@ -264,15 +268,15 @@
             },
             "balanceFinder": {
                 "title": "Balance finder",
-                "description": "Perform an extended search of your addresses for tokens."
+                "description": "Perform an extended search of your addresses for tokens"
             },
             "hiddenAccounts": {
                 "title": "Hidden wallets",
-                "description": "Selecting this options will show wallets that were previously hidden."
+                "description": "Selecting this options will show wallets that were previously hidden"
             },
             "deleteProfile": {
                 "title": "حذف الملف الشخصي",
-                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup."
+                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
             },
             "deepLinks": {
                 "title": "روابط عميقة",
@@ -288,7 +292,7 @@
             },
             "configureNodeList": {
                 "title": "اختر عقدة node",
-                "description": "Manage the list of IOTA network nodes you connect to.",
+                "description": "Manage the list of IOTA network nodes you connect to",
                 "primaryNode": "العقدة الرئيسية",
                 "excludeNode": "استبعاد العقدة",
                 "includeNode": "ضمن العدقة",
@@ -296,7 +300,7 @@
                 "setAsPrimary": "تعيين كعقدة أساسية",
                 "removeNode": "إزالة العقدة node",
                 "includeOfficialNodeList": "تضمين قائمة العقد الرسمية",
-                "noNodes": "لا توجد عقد، سيتم استخدام التحديد التلقائي بدلاً من ذلك."
+                "noNodes": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "إثبات العمل",
@@ -337,7 +341,7 @@
             },
             "reportAnIssue": {
                 "title": "الإبلاغ عن مشكلة",
-                "description": "أبلغ عن خطأ للمطورين. تحقق للتأكد من أنه لم يتم الإبلاغ عنه بالفعل."
+                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
             }
         },
         "login": {
@@ -371,7 +375,7 @@
                 "networkDown": "تم قطع اتصال الشبكة",
                 "status": "الحالة",
                 "messagesPerSecond": "الرسائل في الثانية",
-                "confirmationRate": "معدل التأكيد"
+                "referencedRate": "Referenced rate"
             },
             "profileModal": {
                 "allSettings": "جميع الإعدادات",
@@ -583,6 +587,7 @@
         "viewStatus": "عرض الحالة",
         "showHiddenAccounts": "Show hidden wallets",
         "confirm": "تأكيد",
+        "hideNetworkStatistics": "Hide network statistics",
         "findBalances": "Find balances",
         "searchBalances": "Search for balances",
         "searchAgain": "Search again",
@@ -701,7 +706,9 @@
         "sentFrom": "Sent from {account}",
         "receiving": "Receiving",
         "sending": "Sending",
-        "legacyNetwork": "Legacy Network"
+        "legacyNetwork": "Legacy Network",
+        "capsLock": "Caps Lock is on",
+        "version": "Version {version}"
     },
     "dates": {
         "today": "اليوم",

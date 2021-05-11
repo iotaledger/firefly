@@ -5,13 +5,13 @@
             "body": "Firefly je oficiální peněženka IOTA."
         },
         "legal": {
-            "title": "Ochrana osobních údajů a smluvní podmínky",
-            "body": "Zkontrolujte zásady ochrany osobních údajů a podmínky služby.",
-            "checkbox": "Četl jsem a souhlasím se Zásadami ochrany osobních údajů a podmínkami služby"
+            "title": "Zásady ochrany osobních údajů a smluvní podmínky",
+            "body": "Zkontrolujte Zásady ochrany osobních údajů a Smluvní podmínky.",
+            "checkbox": "Četl jsem a souhlasím se Zásadami ochrany osobních údajů a Smluvními podmínkami"
         },
         "appearance": {
             "title": "Vzhled",
-            "body": "Vybrat vzhled applikace."
+            "body": "Vyberte vzhled aplikace."
         },
         "profile": {
             "title": "Vytvořit profil",
@@ -20,7 +20,7 @@
             "profileName": "Název profilu"
         },
         "setup": {
-            "title": "Nastavit peněženku",
+            "title": "Nastavení peněženky",
             "chrysalisTitle": "Aktualizace sítě Chrysalis",
             "chrysalisBody": "Od 21. dubna mohou uživatelé migrovat své tokeny do nové sítě Chrysalis. Doporučujeme vám co nejdříve migrovat vaše stávající tokeny.",
             "learnMore": "Přečtěte si o migraci"
@@ -147,7 +147,7 @@
             "restoringWallet": "Obnovuji peněženku...",
             "findingBalance": "Hledání zůstatku...",
             "incorrectSeedVaultPassword": "Nesprávné heslo k SeedVaultu.",
-            "noDataSeedVault": "No data could be found in the SeedVault.",
+            "noDataSeedVault": "V SeedVaultu nebyla nalezena žádná data.",
             "signingBundle": "Podepisování balíčku",
             "broadcastingBundle": "Posílání balíčku",
             "miningBundle": "Těžení balíčku",
@@ -240,39 +240,43 @@
                 "title": "Oznámení",
                 "description": "Systémová oznámení o transakcích"
             },
+            "networkStatus": {
+                "title": "Stav sítě",
+                "description": "Zobrazuje stav Node, ke které jste aktuálně připojeni."
+            },
             "exportStronghold": {
                 "title": "Exportovat zálohu",
-                "description": "Exportovat do Stronghold souboru - kompletní šifrovaná záloha vašich peněženek a poslední historie transakcí."
+                "description": "Exportovat do Stronghold souboru - kompletní šifrovaná záloha vašich peněženek a poslední historie transakcí"
             },
             "appLock": {
                 "title": "Automatický zámek",
                 "description": "Čas nečinnosti před uzamknutím peněženek a odhlášeni",
-                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
-                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
+                "durationMinute": "{time, plural, one {1 minuta} other {# minut}}",
+                "durationHour": "{time, plural, one {# hodina} other {# hodin}}"
             },
             "changePassword": {
                 "title": "Změna hesla",
-                "description": "Vaše heslo se používá k zabezpečení peněženek. Musíte použít silné heslo k ochraně prostředků."
+                "description": "Vaše heslo se používá k zabezpečení peněženek. Musíte použít silné heslo k ochraně prostředků"
             },
             "changePincode": {
                 "title": "Změnit PIN kód",
                 "description": "Váš PIN udržuje Váš zůstatek a transakce soukromé",
-                "currentPincode": "Aktuální PIN kód",
+                "currentPincode": "Aktuální PIN",
                 "newPincode": "Nový PIN",
                 "confirmNewPincode": "Potvrďte nový PIN",
                 "action": "Změnit PIN"
             },
             "balanceFinder": {
                 "title": "Hledač zůstatku",
-                "description": "Provést rozšířené vyhledávání tokenů napříč adresami."
+                "description": "Provést rozšířené vyhledávání tokenů napříč adresami"
             },
             "hiddenAccounts": {
                 "title": "Skryté peněženky",
-                "description": "Výběrem možnosti se zobrazí peněženky, které byly dříve skryty."
+                "description": "Výběrem této možností se zobrazí peněženky, které byly dříve skryty"
             },
             "deleteProfile": {
                 "title": "Smazat profil",
-                "description": "Odstraní celou historii profilu, peněženek a transakcí. Ujistěte se, že máte zálohu."
+                "description": "Odstraní profil, peněženky a historii transakcí. Ujistěte se, že máte zálohu"
             },
             "deepLinks": {
                 "title": "Hluboké odkazy",
@@ -288,7 +292,7 @@
             },
             "configureNodeList": {
                 "title": "Vybrat Node",
-                "description": "Spravujte list IOTA nodes, ke kterým se připojujete.",
+                "description": "Spravujte list IOTA Nodes, ke kterým se připojujete",
                 "primaryNode": "Primární Node",
                 "excludeNode": "Vyloučit node",
                 "includeNode": "Zahrnout node",
@@ -296,7 +300,7 @@
                 "setAsPrimary": "Nastavit jako hlavní",
                 "removeNode": "Odstranit uzel",
                 "includeOfficialNodeList": "Zahrnout oficiální seznam node",
-                "noNodes": "Neexistují žádné Nodes, bude použit automatický výběr."
+                "noNodes": "Neexistují žádné Nodes, bude použit automatický výběr"
             },
             "proofOfWork": {
                 "title": "Proof of Work",
@@ -371,7 +375,7 @@
                 "networkDown": "Sít odpojena",
                 "status": "Stav",
                 "messagesPerSecond": "Zprávy za sekundu",
-                "confirmationRate": "Míra potvrzení"
+                "referencedRate": "Odkazovaná míra"
             },
             "profileModal": {
                 "allSettings": "Všechna nastavení",
@@ -583,6 +587,7 @@
         "viewStatus": "Zobrazit status",
         "showHiddenAccounts": "Zobrazit skryté peněženky",
         "confirm": "Potvrdit",
+        "hideNetworkStatistics": "Skrýt statistiky sítě",
         "findBalances": "Najít zůstatky",
         "searchBalances": "Najít zůstatky",
         "searchAgain": "Hledat znovu",
@@ -701,7 +706,9 @@
         "sentFrom": "Odesláno z {account}",
         "receiving": "Přijímání",
         "sending": "Odesílání",
-        "legacyNetwork": "Legacy Network"
+        "legacyNetwork": "Zastaralá síť",
+        "capsLock": "Caps Lock je zapnutý",
+        "version": "Verze {version}"
     },
     "dates": {
         "today": "Dnes",

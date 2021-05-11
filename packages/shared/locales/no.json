@@ -31,7 +31,7 @@
             "body2": "Hvis du fyller ut Recovery Kit og oppbevarer det trygt, vil du alltid kunne gjenopprette lommebøkene dine."
         },
         "password": {
-            "title": "Opprett passord",
+            "title": "Opprett et passord",
             "body1": "Du trenger et sterkt passord for å beskytte midlene dine. Kombiner forskjellige ord, og unngå vanlige fraser, navn og datoer.",
             "body2": "Det anbefales at du skriver ned passordet i ditt Recovery Kit."
         },
@@ -240,9 +240,13 @@
                 "title": "Varslinger",
                 "description": "Systemvarsler for transaksjonshendelser"
             },
+            "networkStatus": {
+                "title": "Nettverksstatus",
+                "description": "Viser statusen til noden du er koblet til."
+            },
             "exportStronghold": {
                 "title": "Eksporter sikkerhetskopi",
-                "description": "Eksporter til en Stronghold-fil - en komplett og kryptert sikkerhetskopi av dine lommebøker og seneste transaksjonshistorikk."
+                "description": "Eksporter til en Stronghold-fil - en fullstendig kryptert sikkerhetskopi av lommeboken din og den seneste transaksjonshistorikken"
             },
             "appLock": {
                 "title": "Automatisk lås",
@@ -251,11 +255,11 @@
                 "durationHour": "{time, plural, one {1 time} other {# timer}}"
             },
             "changePassword": {
-                "title": "Bytt passord",
-                "description": "Passordet ditt brukes til å sikre lommeboken. Du må bruke et sterkt passord for å beskytte midlene."
+                "title": "Endre passord",
+                "description": "Passordet ditt brukes til å sikre lommeboken. Du må bruke et sterkt passord for å beskytte midlene dine"
             },
             "changePincode": {
-                "title": "Endre PIN-koden",
+                "title": "Endre PIN-kode",
                 "description": "PIN-koden holder saldoen din og transaksjonene dine privat",
                 "currentPincode": "Gjeldende PIN-kode",
                 "newPincode": "Ny PIN-kode",
@@ -264,15 +268,15 @@
             },
             "balanceFinder": {
                 "title": "Saldo-finner",
-                "description": "Utfør et utvidet søk av adressene dine for å finne midler."
+                "description": "Utfør et utvidet søk av adressene dine for å finne midler"
             },
             "hiddenAccounts": {
                 "title": "Skjulte lommebøker",
-                "description": "Ved å velge dette alternativet vises lommebøker som tidligere var skjult."
+                "description": "Ved å velge dette alternativet vises lommebøker som tidligere var skjult"
             },
             "deleteProfile": {
                 "title": "Slett profil",
-                "description": "Sletter hele lommeboken, profilen og transaksjonshistorien. Pass på at du har en sikkerhetskopi."
+                "description": "Sletter hele lommeboken, profilen og transaksjonshistorikken. Pass på at du har en sikkerhetskopi"
             },
             "deepLinks": {
                 "title": "Dyplenker",
@@ -288,7 +292,7 @@
             },
             "configureNodeList": {
                 "title": "Velg en node",
-                "description": "Administrer listen over IOTA nettverksnoder du kobler til.",
+                "description": "Administrer listen over IOTA nettverksnoder du kobler til",
                 "primaryNode": "Primær node",
                 "excludeNode": "Ekskluder node",
                 "includeNode": "Inkluder node",
@@ -296,7 +300,7 @@
                 "setAsPrimary": "Sett som primær",
                 "removeNode": "Fjern node",
                 "includeOfficialNodeList": "Inkluder offisiell liste over noder",
-                "noNodes": "Ingen noder, automatisk selektering brukes i stedet."
+                "noNodes": "Ingen noder, automatisk selektering brukes i stedet"
             },
             "proofOfWork": {
                 "title": "Proof of work",
@@ -337,7 +341,7 @@
             },
             "reportAnIssue": {
                 "title": "Rapporter et problem",
-                "description": "Rapporter en feil til utviklerne. Sjekk gjennom for å forsikre deg om at den ikke allerede er rapportert."
+                "description": "Rapporter en feil til utviklerne. Sjekk gjennom for å forsikre deg om at den ikke allerede er rapportert"
             }
         },
         "login": {
@@ -356,7 +360,7 @@
                     "noneDetected": "Ingen oppdaget"
                 },
                 "strongholdStatus": {
-                    "title": "Lommebok status",
+                    "title": "Lommebok-status",
                     "locked": "Låst",
                     "unlocked": "Ulåst"
                 },
@@ -371,7 +375,7 @@
                 "networkDown": "Nettverket er frakoblet",
                 "status": "Status",
                 "messagesPerSecond": "Meldinger per sekund",
-                "confirmationRate": "Bekreftelsesrate"
+                "referencedRate": "Referenced rate"
             },
             "profileModal": {
                 "allSettings": "Alle innstillinger",
@@ -583,6 +587,7 @@
         "viewStatus": "Vis status",
         "showHiddenAccounts": "Vis skjulte lommebøker",
         "confirm": "Bekreft",
+        "hideNetworkStatistics": "Skjul nettverksstatistikk",
         "findBalances": "Finn saldoer",
         "searchBalances": "Søk etter saldoer",
         "searchAgain": "Søk på nytt",
@@ -701,7 +706,9 @@
         "sentFrom": "Sendt fra {account}",
         "receiving": "Mottar",
         "sending": "Sender",
-        "legacyNetwork": "Gammelt Nettverk"
+        "legacyNetwork": "Gammelt Nettverk",
+        "capsLock": "Caps Lock er på",
+        "version": "Versjon {version}"
     },
     "dates": {
         "today": "I dag",

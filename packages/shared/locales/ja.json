@@ -147,7 +147,7 @@
             "restoringWallet": "ウォレットを復元しています...",
             "findingBalance": "残高を検索しています...",
             "incorrectSeedVaultPassword": "SeedVault のパスワードが正しくありません。",
-            "noDataSeedVault": "No data could be found in the SeedVault.",
+            "noDataSeedVault": "SeedVaultにデータが見つかりませんでした。",
             "signingBundle": "バンドル署名",
             "broadcastingBundle": "ブロードキャストバンドル",
             "miningBundle": "マイニングバンドル",
@@ -180,7 +180,7 @@
         "securingSpentAddresses": {
             "title": "使用済みアドレスを保護しています...",
             "body1": "このプロセスには {minutes, plural, one {1 分} other {# 分}}かかります.",
-            "body2": "Your computer will run at full capacity, you may wish to do something else while you wait for this to complete."
+            "body2": "この作業中、コンピューターはフル稼働します。作業完了まで、時間を要するため、お待ちいただく間、何か他のことをされて構いません。"
         },
         "transferFragmentedFunds": {
             "body1": "Firefly はあなたの資金を移行します。しばらく時間がかかる場合があります。",
@@ -238,21 +238,25 @@
             },
             "notifications": {
                 "title": "通知の設定",
-                "description": "System notifications for transaction events"
+                "description": "取引履歴のシステム通知"
+            },
+            "networkStatus": {
+                "title": "ネットワークのステータス",
+                "description": "現在接続しているノードの状態を表示します。"
             },
             "exportStronghold": {
                 "title": "バックアップのエクスポート",
-                "description": "Stronghold ファイルへのエクスポート - ウォレットと最新の取引履歴の暗号化されたバックアップです。"
+                "description": "Stronghold ファイルへのエクスポート - ウォレットと最新の取引履歴の暗号化されたバックアップです"
             },
             "appLock": {
                 "title": "自動ロック",
                 "description": "ウォレットがロックされ、ログアウトされるまでの非アクティブ時間",
-                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
-                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
+                "durationMinute": "{time, plural, one {1 分} other {# 分}}",
+                "durationHour": "{time, plural, one {1 時間} other {# 時間}}"
             },
             "changePassword": {
                 "title": "パスワードの変更",
-                "description": "パスワードはウォレットを保護するために使用されます。資金を保護するためには強力なパスワードを使用する必要があります。"
+                "description": "パスワードはウォレットを保護するために使用されます。資金を保護するためには強力なパスワードを使用する必要があります"
             },
             "changePincode": {
                 "title": "PINコードを変更",
@@ -263,16 +267,16 @@
                 "action": "PINを変更"
             },
             "balanceFinder": {
-                "title": "Balance finder",
-                "description": "Perform an extended search of your addresses for tokens."
+                "title": "残高を検索する",
+                "description": "トークンのアドレスを拡張検索します"
             },
             "hiddenAccounts": {
                 "title": "非表示のウォレット",
-                "description": "このオプションを選択すると、以前に非表示になっていたウォレットが表示されます。"
+                "description": "このオプションを選択すると、以前に非表示になっていたウォレットが表示されます"
             },
             "deleteProfile": {
                 "title": "プロファイルを削除",
-                "description": "プロファイル、ウォレット、取引履歴全体を削除します。バックアップがあることを確認してください。"
+                "description": "プロファイル、ウォレット、取引履歴全体を削除します。バックアップがあることを確認してください"
             },
             "deepLinks": {
                 "title": "ディープ リンク",
@@ -288,7 +292,7 @@
             },
             "configureNodeList": {
                 "title": "ノードを選択",
-                "description": "接続先のIOTAネットワークノードのリストを管理します。",
+                "description": "接続先のIOTAネットワークノードのリストを管理します",
                 "primaryNode": "プライマリノード",
                 "excludeNode": "ノードを除外する",
                 "includeNode": "ノードを含める",
@@ -296,11 +300,11 @@
                 "setAsPrimary": "プライマリとして設定",
                 "removeNode": "ノードを削除",
                 "includeOfficialNodeList": "公式ノードリストを含める",
-                "noNodes": "ノードがありません。自動選択が代わりに使用されます。"
+                "noNodes": "ノードがありません。自動選択が代わりに使用されます"
             },
             "proofOfWork": {
                 "title": "プルーフ・オブ・ワーク",
-                "description": "Complete proof of work locally on your device or outsource to the node"
+                "description": "デバイス上ででプルーフオブワーク(POW)を完了するか、ノードにアウトソーシングします"
             },
             "errorLog": {
                 "title": "エラーログ",
@@ -316,20 +320,20 @@
             },
             "troubleshoot": {
                 "title": "トラブルシューティング",
-                "description": "Use the troubleshooting wizard to solve common problems"
+                "description": "トラブルシューティングウィザードを使用して一般的な問題を解決する"
             },
             "documentation": {
                 "title": "ドキュメント",
-                "description": "View the documentation for in depth explanations of how things work"
+                "description": "操作方法の説明については、ドキュメントをご参照ください"
             },
             "faq": {
                 "title": "よくある質問",
                 "title2": "よくある質問と回答(FAQ)",
-                "description": "View the FAQs to get help with a common problem or question"
+                "description": "よくある質問や質問のヘルプを表示する"
             },
             "discord": {
                 "title": "Discordにてお問い合わせください",
-                "description": "Get help from the IOTA community on Discord"
+                "description": "DiscordでIOTAコミュニティの助けを受ける"
             },
             "about": {
                 "title": "このプログラムについて",
@@ -337,7 +341,7 @@
             },
             "reportAnIssue": {
                 "title": "問題を報告",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported."
+                "description": "バグを開発者に報告します。報告されていないことを確認してください"
             }
         },
         "login": {
@@ -366,12 +370,12 @@
                 }
             },
             "network": {
-                "networkOperational": "Network Operational",
-                "networkDegraded": "Network Degraded",
-                "networkDown": "Network Disconnected",
+                "networkOperational": "ネットワークに接続されました",
+                "networkDegraded": "ネットワーク接続に問題があります",
+                "networkDown": "ネットワーク接続が切断されました",
                 "status": "ステータス",
-                "messagesPerSecond": "Messages per second",
-                "confirmationRate": "Confirmation rate"
+                "messagesPerSecond": "毎秒あたりのメッセージ",
+                "referencedRate": "参照元"
             },
             "profileModal": {
                 "allSettings": "すべての設定",
@@ -411,7 +415,7 @@
             "typePassword": "ウォレットパスワードを入力して確認してください。",
             "hideAccount": "ウォレットを削除",
             "errorTitle": "{name} を削除できません",
-            "errorBody1": "You cannot delete this wallet, you must have at least one."
+            "errorBody1": "このウォレットを削除することはできません。少なくとも 1 つのウォレットが必要です。"
         },
         "hideAccount": {
             "title": "{name} を非表示にしますか？",
@@ -419,9 +423,9 @@
             "typePassword": "ウォレットパスワードを入力して確認してください。",
             "hideAccount": "ウォレットの非表示",
             "errorTitle": "{name} を非表示にできません",
-            "errorBody1": "To hide a wallet it must have 0 balance.",
-            "errorBody2": "You currently have {balance} remaining on this wallet. Please move these funds to a different wallet and try again.",
-            "errorBody3": "You cannot hide this wallet, you must have at least one."
+            "errorBody1": "ウォレットを非表示にするには残高が0である必要があります。",
+            "errorBody2": "現在、このウォレットに残金 {balance} があります。これらの資金を別のウォレットに移動して、もう一度やり直してください。",
+            "errorBody3": "このウォレットを非表示にすることはできません。少なくとも 1 つのウォレットが必要です。"
         },
         "addressHistory": {
             "title": "{name} アドレス履歴",
@@ -444,7 +448,7 @@
         },
         "deleteProfile": {
             "title": "プロファイルを削除",
-            "confirmation": "Are you sure you want to delete this profile? This operation cannot be undone.",
+            "confirmation": "このプロファイルを削除してもよろしいですか？この操作を行うと元には 戻せません。",
             "typePassword": "パスワードを入力して確認してください。"
         },
         "diagnostics": {
@@ -463,8 +467,8 @@
             "body": "{amount} を送金しようとしています"
         },
         "balanceFinder": {
-            "title": "Balance finder",
-            "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
+            "title": "残高を検索する",
+            "body": "不足している残高を見つけるために、アドレスをより徹底的に検索します。これには時間がかかる場合があります。",
             "totalWalletBalance": "合計残高",
             "typePassword": "検索できるようにパスワードを入力してください。"
         },
@@ -475,15 +479,15 @@
         },
         "missingBundle": {
             "title": "警告：移行中にあなたの資金が危険にさらされています",
-            "body": "You have funds on spent addresses, but the information needed to secure them was not found. This can happen if you made transactions a long time ago. You can proceed but {value} are at risk during migration.",
+            "body": "使用済みアドレスに資金がありますが、それらを保護するために必要な情報が見つかりませんでした。この問題は、かなり前に取引を行った場合に発生する可能性があります。 続行できますが、移行中に{value}が危険にさらされます。",
             "learnMore": "使用済みアドレスについてもっと詳しく見る",
             "proceed": "はい 、リスクを理解しています。"
         },
         "snapshot": {
-            "title": "Ongoing network upgrade",
-            "body": "The Chrysalis network upgrade has begun.",
-            "bodyMigration": "Migration is disabled until it is complete.",
-            "bodyFirefly": "Firefly is disabled until it is complete. Token migration will still be possible afterwards."
+            "title": "ネットワークのアップグレード中",
+            "body": "Chrysalis のネットワークアップグレードが開始されました。",
+            "bodyMigration": "移行は、完了するまで無効になります。",
+            "bodyFirefly": "Firefly は完了するまで無効になります。トークンの移行はその後も可能です。"
         }
     },
     "charts": {
@@ -583,7 +587,8 @@
         "viewStatus": "ステータスを表示",
         "showHiddenAccounts": "非表示ウォレットを表示",
         "confirm": "確定",
-        "findBalances": "Find balances",
+        "hideNetworkStatistics": "ネットワークの統計情報を非表示にする",
+        "findBalances": "残高検索",
         "searchBalances": "残高を検索",
         "searchAgain": "再検索",
         "searching": "検索しています...",
@@ -633,8 +638,8 @@
         "accountBalance": "ウォレットの残高",
         "incoming": "入金",
         "outgoing": "出金",
-        "totalIn": "Total in",
-        "totalOut": "Total out",
+        "totalIn": "総入金額",
+        "totalOut": "総出金額",
         "accounts": "ウォレット",
         "myAccounts": "マイウォレット",
         "automaticNodeSelection": "ノードを自動選択",
@@ -666,11 +671,11 @@
         "noRecentHistory": "最近の履歴はありません",
         "firstSync": "履歴を同期中、しばらく時間がかかることがあります...",
         "transferSyncing": "ウォレットを同期中",
-        "transferSelectingInputs": "Selecting inputs",
-        "transferRemainderAddress": "Generating remainder deposit address",
-        "transferSigning": "Signing the transaction",
+        "transferSelectingInputs": "入力を選択",
+        "transferRemainderAddress": "残りの入金アドレスの作成中",
+        "transferSigning": "取引署名中",
         "transferPow": "PoW（プルーフ・オブ・ワーク）の実行",
-        "transferBroadcasting": "Broadcasting transaction",
+        "transferBroadcasting": "取引をブロードキャストしています",
         "transferComplete": "転送完了",
         "creatingAccount": "ウォレットを作成しています。しばらくお待ちください...",
         "updatingAccount": "ウォレットを更新しています。お待ちください...",
@@ -695,13 +700,15 @@
         "creatingProfile": "プロファイルを作成しています。お待ちください...",
         "fundMigration": "資金の移行",
         "accountRemoved": "このウォレットは非表示になっています。表示にすると転送ができます。",
-        "receivingTo": "Receiving to {account}",
+        "receivingTo": "{account} へ着金中",
         "sendingFrom": "{account} から送金中",
-        "receivedTo": "Received to {account}",
-        "sentFrom": "Sent from {account}",
-        "receiving": "Receiving",
+        "receivedTo": "{account} へ着金しました",
+        "sentFrom": "{account} から送金",
+        "receiving": "着金中",
         "sending": "送金中",
-        "legacyNetwork": "Legacy Network"
+        "legacyNetwork": "レガシーネットワーク",
+        "capsLock": "Caps Lock キーが有効になっています",
+        "version": "バージョン {version}"
     },
     "dates": {
         "today": "今日",
@@ -712,11 +719,11 @@
         "yearsAgo": "{time, plural, one {# 年 } other {# 年 }} 前"
     },
     "notifications": {
-        "valueTx": "Receiving {{value}} to {{account}}",
-        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
+        "valueTx": "{{account}}に{{value}}を着金中",
+        "confirmed": "{{account}}からの出金{{value}}が確定しました",
         "confirmedInternal": "{{value}} から {{senderAccount}} までの {{receiverAccount}} が確認されました",
         "confirmedInternalNoAccounts": "{{value}} 内部送金が確認されました",
-        "failed": "Outgoing {{value}} from {{account}} has failed",
+        "failed": "{{account}}からの出金{{value}}が失敗しました",
         "downloadingUpdate": "アップデートをダウンロードしています",
         "updateReady": "更新の準備ができました",
         "updateError": "更新中にエラーが発生しました。もう一度やり直してください。",
@@ -736,52 +743,52 @@
         "password": {
             "doNotMatch": "パスワードが一致しません。",
             "tooWeak": "新しいスワードは安全性が十分ではありません",
-            "row": "Straight rows of keys are easy to guess.",
-            "pattern": "Short keyboard patterns are easy to guess.",
-            "names": "Common names and surnames are easy to guess.",
-            "repeats": "Repeats like 'aaa' are easy to guess.",
-            "repeats2": "Repeats like 'abcabcabc' are easy to guess.",
-            "sequence": "Sequences of characters are easy to guess.",
-            "years": "Recent years are easy to guess.",
-            "dates": "Dates are easy to guess.",
+            "row": "キーボード上で直線に並んだ文字列は簡単に推測されてしまいます。",
+            "pattern": "短いキーボードパターンは簡単に推測されてしまいます。",
+            "names": "一般的な名前と名字は簡単に推測されてしまいます。",
+            "repeats": "「aaa」のような繰り返しは、簡単に推測されてしまいます。",
+            "repeats2": "「abcabcabc」のような繰り返しは、簡単に推測されてしまいます。",
+            "sequence": "「abc」のような順列は簡単に推測されてしまいます。",
+            "years": "西暦は簡単に推測されてしまいます。",
+            "dates": "日付は簡単に推測されてしまいます。",
             "common": "これは非常によく使われているパスワードです。",
-            "similar": "This is similar to a common password.",
-            "word": "A single word is easy to guess.",
+            "similar": "このパスワードはよく使われるパスワードに似ています。",
+            "word": "1つの単語によるパスワードは簡単に推測されてしまいます。",
             "incorrect": "パスワードが正しくありません。",
-            "length": "Your password can't be longer than {length, plural, one {1 character} other {# characters}}."
+            "length": "パスワードは{length, plural, one {1 文字} other {#文字 }}より長くすることはできません。"
         },
         "pincode": {
-            "length": "Your PIN must be {length, plural, one {1 digit} other {# digits}} long.",
+            "length": "PINは{length, plural, one {1 桁} other {# 桁}} でなければなりません。",
             "match": "PIN が一致しません",
             "incorrect": "PINが正しくありません。"
         },
         "account": {
-            "length": "Your wallet name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "empty": "You must use your latest wallet before creating a new one.",
-            "notEmpty": "You must transfer your balance before deleting this wallet.",
-            "duplicate": "A wallet with this name already exists.",
-            "tilde": "A profile name can't start with the '~' character.",
+            "length": "ウォレット名は{length, plural, one {1 文字} other {#文字 }}より長くすることはできません。",
+            "empty": "新しいウォレットを作成する前に、最新のウォレットを使用する必要があります。",
+            "notEmpty": "このウォレットを削除する前に残高を転送する必要があります。",
+            "duplicate": "この名前のウォレットは既に存在して います。",
+            "tilde": "プロファイル名は '~' 記号で始まることはできません。",
             "control": "プロファイル名に制御文字を含めることはできません。",
-            "startDot": "A profile name can't start with the '.' character.",
-            "chars": "A profile name can't contain the following characters <>:\"/\\|?*"
+            "startDot": "プロファイル名は '.' 記号で始まることはできません。",
+            "chars": "プロファイル名には次の記号を含めることはできません<>:\"/\\|?*"
         },
         "send": {
-            "addressLength": "Addresses should be {length, plural, one {1 character} other {# characters}} long.",
-            "amountTooHigh": "This is greater than your available balance.",
-            "amountNoFloat": "If units are `i` you cannot use decimal places.",
-            "amountInvalidFormat": "The amount appears to be an invalid number.",
+            "addressLength": "アドレスは {length, plural, one {1 文字} other {# 文字}}でなければなりません。",
+            "amountTooHigh": "この金額は、利用可能な残高を超えています。",
+            "amountNoFloat": "単位が `i` の場合、小数点以下は使用できません。",
+            "amountInvalidFormat": "金額には無効な数字があるようです。",
             "amountZero": "金額は0より大きくなければなりません。",
-            "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
+            "wrongAddressPrefix": "アドレスはプレフィックス{prefix}で始まります。",
             "wrongAddressFormat": "アドレスが正しくフォーマットされていません。",
             "invalidAddress": "アドレスが正しくありません",
-            "insufficientFunds": "This wallet has insufficient funds.",
-            "noToAccount": "You have not selected a wallet to send the funds to.",
+            "insufficientFunds": "このウォレットの残高が不足しています。",
+            "noToAccount": "資金を送金するウォレットが選択されていません。",
             "sendingDust": "1 Mi未満の送金はできません。",
             "leavingDust": "アドレスに1Mi 未満を残すことはできません。"
         },
         "node": {
             "invalid": "有効なURLを入力してください。",
-            "https": "HTTPS is required. Set up a developer profile to use unsecured HTTP connections.",
+            "https": "HTTPSが必要です。保護されていないHTTP接続を使用 できるように開発者プロファイルを設定します。",
             "duplicate": "このノードは既に追加されています。",
             "unsynced": "ノードは同期されていません。",
             "noSynced": "同期された利用可能なノードはありません。"
@@ -792,11 +799,11 @@
         "backup": {
             "invalid": "バックアップファイルが認識されませんでした。",
             "destination": "バックアップ先が無効です。",
-            "mnemonic": "The mnemonic is not valid.",
-            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is 1} other {is #}}",
-            "seedCharacters": "The seed should only contain characters A-Z or 9",
-            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
-            "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase",
+            "mnemonic": "ニーモニックが無効です。",
+            "seedTooShort": "シードの長さは81文字である必要があります, これ は{length, plural, one { です1} other { #です}}",
+            "seedCharacters": "シードはA〜Zまたは数字の9のみを含める必要があります",
+            "phraseWordCount": "復元フレーズには24単語が含まれているはずですが、現在は {length, plural, one {1です} other {#です}}.",
+            "phraseUnrecognizedWord": "復元フレーズの単語「{word}」が認識されません",
             "phraseCaseWord": "単語「{word}」は小文字でなければなりません"
         }
     },

@@ -131,7 +131,7 @@ const rendererPlugins = [
 module.exports = [
     {
         entry: {
-            'build/index': ['./main.js'],
+            'build/index': ['./index.js'],
         },
         resolve,
         output,
@@ -154,6 +154,7 @@ module.exports = [
             'build/main': ['./electron/main.js'],
             'build/preload': ['./electron/preload.js'],
             'build/lib/aboutPreload': ['./electron/lib/aboutPreload.js'],
+            'build/lib/errorPreload': ['./electron/lib/errorPreload.js'],
         },
         resolve,
         output,

@@ -104,29 +104,29 @@
             "seed": {
                 "title": "Tastează seed-ul pentru a începe migrarea",
                 "body": "Un seed este format din 81 de caractere. Acesta este folosit pentru a recupera din vechea aplicație Trinity.",
-                "enter": "Enter your seed"
+                "enter": "Introduceți seed-ul"
             },
             "mnemonic": {
-                "title": "Type your recovery phrase",
-                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly wallets.",
-                "enter": "Enter your secret recovery phrase"
+                "title": "Introduceți fraza de recuperare",
+                "body": "O frază de recuperare are 24 de cuvinte lungime, cu spații între ele, toate literele mici. Aceasta este folosită pentru a recupera portofele Firefly existente.",
+                "enter": "Introduceți fraza secretă de recuperare"
             },
             "seedDetected": "Seed de 81 de caractere detectat",
             "phraseDetected": "Frază de recuperare de 24 de cuvinte detectată",
             "checksum": "Suma de verificare"
         },
         "importFromFile": {
-            "title": "Restore your wallets using a backup file",
-            "body": "Import a backup file to restore your wallets. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+            "title": "Restaurați portofelele personale folosind un fișier de rezerva",
+            "body": "Importă un fişier de rezervă pentru a restaura portofelele personale. Fisierele de rezervă pot fi Stronghold (.stronghold) sau Trinity SeedVault (.kdbx)."
         },
         "importBackupPassword": {
-            "title": "Restore your wallets from a SeedVault or Stronghold",
+            "title": "Restaurați portofelele personale dintr-un SeedVault sau Stronghold",
             "body1": "Te rugăm să introduci parola de rezervă.",
             "body2": "Aceasta este parola pe care ai setat-o când ai creat prima dată copia de rezervă."
         },
         "importSuccess": {
             "title": "Ai recuperat cu succes copia de rezervă",
-            "body": "You can now set up your new profile.",
+            "body": "Acum vă puteți configura noul profil.",
             "seedvaultTitle": "Importat cu succes",
             "seedvaultBody": "Parola ta este corectă, poți continua.",
             "strongholdTitle": "Importat cu succes",
@@ -147,25 +147,25 @@
             "restoringWallet": "Restaurare portofel...",
             "findingBalance": "Se caută soldul...",
             "incorrectSeedVaultPassword": "Parolă SeedVault incorectă.",
-            "noDataSeedVault": "No data could be found in the SeedVault.",
+            "noDataSeedVault": "Nu au fost găsite date în SeedVault.",
             "signingBundle": "Semnare pachet",
             "broadcastingBundle": "Pachet difuzare",
             "miningBundle": "Semnare pachet",
-            "problemRestoringWallet": "There was a network error restoring your wallet. Please try again.",
+            "problemRestoringWallet": "A apărut o eroare de rețea la restaurarea portofelului. Vă rugăm să încercați din nou.",
             "minimumMigrationAmountSpentAddresses": "Suma minimă de migrare pentru fiecare adresă cheltuită este de 1 Mi. Verifică din nou dacă soldul tău nu arată corect.",
             "tooManyAddressesToMigrate": "Ai prea multe adrese cu sold mic pentru a migra. Verifică din nou dacă soldul tău nu arată corect.",
             "cannotMigrateAllYourFunds": "Nu putem migra toate fondurile pentru că unele adrese au o valoare prea mică. Poți continua oricum. {value} va fi pierdut.",
-            "error": "There was an error migrating your funds. Please try again."
+            "error": "A apărut o eroare la migrarea fondurilor tale. Te rugăm să încerci din nou."
         },
         "bundleMiningWarning": {
-            "title": "Warning",
-            "body1": "You have funds on one or more spent addresses.",
-            "body2": "We recommend you run an automated process to help secure and transfer these funds safely.",
-            "body3": "If you close the app you will need to restart the whole migration.",
-            "learn": "Learn about spent addresses"
+            "title": "Atenţie",
+            "body1": "Ai fonduri pentru una sau mai multe adrese cheltuite.",
+            "body2": "Îți recomandăm să rulezi un proces automatizat pentru a ajuta la securizarea și transferul acestor fonduri în siguranță.",
+            "body3": "Dacă închideți aplicația, va trebui să reporniți întreaga migrare.",
+            "learn": "Învață despre adresele cheltuite"
         },
         "secureSpentAddresses": {
-            "title": "Secure spent addresses",
+            "title": "Adrese cheltuite securizate",
             "body1": "You have funds detected on {number, plural, one {# spent address} other {# spent addresses}}.",
             "body2": "We recommend you run an automated process to help secure and transfer your funds safely.",
             "error": "You can’t migrate spent addresses with less than 1 Mi"
@@ -240,9 +240,13 @@
                 "title": "Notificări",
                 "description": "Notificări de sistem pentru evenimentele tranzacției"
             },
+            "networkStatus": {
+                "title": "Network status",
+                "description": "Displays the status of the node you are currently connected to."
+            },
             "exportStronghold": {
                 "title": "Exportă fișierul de rezervă",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history."
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
             },
             "appLock": {
                 "title": "Blocare automată",
@@ -252,7 +256,7 @@
             },
             "changePassword": {
                 "title": "Schimbă parola",
-                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds."
+                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
             },
             "changePincode": {
                 "title": "Schimbă codul PIN",
@@ -264,15 +268,15 @@
             },
             "balanceFinder": {
                 "title": "Balance finder",
-                "description": "Perform an extended search of your addresses for tokens."
+                "description": "Perform an extended search of your addresses for tokens"
             },
             "hiddenAccounts": {
                 "title": "Hidden wallets",
-                "description": "Selecting this options will show wallets that were previously hidden."
+                "description": "Selecting this options will show wallets that were previously hidden"
             },
             "deleteProfile": {
                 "title": "Șterge profilul",
-                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup."
+                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
             },
             "deepLinks": {
                 "title": "Legături profunde",
@@ -288,15 +292,15 @@
             },
             "configureNodeList": {
                 "title": "Selectează un nod",
-                "description": "Manage the list of IOTA network nodes you connect to.",
+                "description": "Manage the list of IOTA network nodes you connect to",
                 "primaryNode": "Primary node",
-                "excludeNode": "Exclude node",
+                "excludeNode": "Exclude nodul",
                 "includeNode": "Include node",
                 "viewDetails": "View details",
                 "setAsPrimary": "Set as primary",
                 "removeNode": "Remove node",
                 "includeOfficialNodeList": "Include official node list",
-                "noNodes": "There are no nodes, automatic selection will be used instead."
+                "noNodes": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "Dovadã de lucru",
@@ -337,7 +341,7 @@
             },
             "reportAnIssue": {
                 "title": "Raportează o problemă",
-                "description": "Raportează o eroare dezvoltatorilor. Verifică pentru a te asigura că nu a fost deja raportată."
+                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
             }
         },
         "login": {
@@ -371,7 +375,7 @@
                 "networkDown": "Rețea deconectată",
                 "status": "Stare",
                 "messagesPerSecond": "Mesaje pe secundă",
-                "confirmationRate": "Rată de confirmare"
+                "referencedRate": "Referenced rate"
             },
             "profileModal": {
                 "allSettings": "Toate setările",
@@ -398,28 +402,28 @@
         },
         "backup": {
             "title": "Last backup: {date}",
-            "lastBackup": "You last backed up {date}",
-            "backupDescription": "It is important to back up regularly to ensure you have a copy of your wallets and transaction history.",
-            "backupWarning": "If you lose your backup and recovery phrase you will lose access to your funds.",
-            "notBackedUp": "Not backed up",
+            "lastBackup": "Ultima {date} a copiei de rezervă",
+            "backupDescription": "Este important să faceți o copii de rezervă in mod regulat pentru a vă asigura că aveți o copie a portofelelor și a istoricului tranzacțiilor.",
+            "backupWarning": "Dacă vă pierdeți copia de rezervă și fraza de recuperare veți pierde accesul la fondurile personale.",
+            "notBackedUp": "Fara copie de rezerva",
             "notBackedUpDescription": "You have not backed up your wallets",
-            "saving": "Saving..."
+            "saving": "Salvare..."
         },
         "deleteAccount": {
-            "title": "Delete {name}?",
-            "body": "This wallet has no transaction history. It can safely be deleted.",
-            "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Delete wallet",
-            "errorTitle": "Unable to delete {name}",
-            "errorBody1": "You cannot delete this wallet, you must have at least one."
+            "title": "Ștergeți {name}?",
+            "body": "Acest portofel nu are istoric de tranzacții. Poate fi șters în siguranță.",
+            "typePassword": "Introduceți parola portofelului pentru a confirma.",
+            "hideAccount": "Ștergere portofel",
+            "errorTitle": "Imposibil de șters {name}",
+            "errorBody1": "Nu puteți șterge acest portofel, trebuie să aveți cel puțin unul."
         },
         "hideAccount": {
-            "title": "Hide {name}?",
-            "body": "You can find this wallet later by enabling \"Show hidden wallets\" in Advanced Settings.",
-            "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Hide wallet",
-            "errorTitle": "Unable to hide {name}",
-            "errorBody1": "To hide a wallet it must have 0 balance.",
+            "title": "Ascunde {name}?",
+            "body": "Poți găsi acest portofel mai târziu activând \"Arată portofelele ascunse\" în Setări Avansate.",
+            "typePassword": "Introduceți parola portofelului pentru a confirma.",
+            "hideAccount": "Ascunde portofelul",
+            "errorTitle": "Imposibil de ascuns {name}",
+            "errorBody1": "Pentru a ascunde un portofel trebuie să aibă sold 0.",
             "errorBody2": "You currently have {balance} remaining on this wallet. Please move these funds to a different wallet and try again.",
             "errorBody3": "You cannot hide this wallet, you must have at least one."
         },
@@ -450,16 +454,16 @@
         "diagnostics": {
             "title": "Diagnostice",
             "node": "Node",
-            "platform": "Platform",
-            "platformVersion": "Platform Version",
-            "platformArchitecture": "Platform Architecture",
-            "cpuCount": "CPU Count",
-            "totalMem": "Total Memory",
-            "freeMem": "Free Memory",
+            "platform": "Platformă",
+            "platformVersion": "Versiunea platformei",
+            "platformArchitecture": "Arhitectura platformei",
+            "cpuCount": "Numărul de procesoare",
+            "totalMem": "Memorie Totală",
+            "freeMem": "Memorie Liberă",
             "userPath": "User Path"
         },
         "transaction": {
-            "title": "Confirm transaction",
+            "title": "Confirmați tranzacția",
             "body": "You’re about to send {amount} to"
         },
         "balanceFinder": {
@@ -548,9 +552,9 @@
         "saveBackup": "Save Stronghold backup",
         "customizeAcount": "Customise wallet",
         "viewAddressHistory": "View address history",
-        "hideAccount": "Hide wallet",
+        "hideAccount": "Ascunde portofelul",
         "showAccount": "Unhide wallet",
-        "deleteAccount": "Delete wallet",
+        "deleteAccount": "Ștergere portofel",
         "max": "Max",
         "addNode": "Add node",
         "updateNode": "Update node",
@@ -583,6 +587,7 @@
         "viewStatus": "View status",
         "showHiddenAccounts": "Show hidden wallets",
         "confirm": "Confirm",
+        "hideNetworkStatistics": "Hide network statistics",
         "findBalances": "Găsește solduri",
         "searchBalances": "Search for balances",
         "searchAgain": "Caută din nou",
@@ -701,7 +706,9 @@
         "sentFrom": "Sent from {account}",
         "receiving": "Se primește",
         "sending": "Se trimite",
-        "legacyNetwork": "Legacy Network"
+        "legacyNetwork": "Legacy Network",
+        "capsLock": "Caps Lock is on",
+        "version": "Version {version}"
     },
     "dates": {
         "today": "Today",

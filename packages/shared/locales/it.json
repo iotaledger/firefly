@@ -240,9 +240,13 @@
                 "title": "Notifiche",
                 "description": "Notifiche di sistema per eventi delle transazione"
             },
+            "networkStatus": {
+                "title": "Stato della rete",
+                "description": "Visualizza lo stato del nodo a cui sei attualmente connesso."
+            },
             "exportStronghold": {
                 "title": "Esporta Backup",
-                "description": "Esporta in un file Stronghold - un backup crittografato completo del tuo wallet e l'ultima cronologia delle transazioni."
+                "description": "Esporta in un file Stronghold - un backup crittografato completo del tuo wallet e l'ultima cronologia delle transazioni"
             },
             "appLock": {
                 "title": "Blocco Automatico",
@@ -252,7 +256,7 @@
             },
             "changePassword": {
                 "title": "Cambia password",
-                "description": "La tua password è utilizzata per proteggere i tuoi wallet. Devi usare una password sicura per proteggere i tuoi fondi."
+                "description": "La tua password è utilizzata per proteggere i tuoi wallet. Devi usare una password sicura per proteggere i tuoi fondi"
             },
             "changePincode": {
                 "title": "Cambia il PIN",
@@ -264,15 +268,15 @@
             },
             "balanceFinder": {
                 "title": "Rivaluta il saldo",
-                "description": "Esegui una ricerca estesa dei token nei tuoi indirizzi."
+                "description": "Esegui una ricerca estesa di token nei tuoi indirizzi"
             },
             "hiddenAccounts": {
                 "title": "Wallet nascosti",
-                "description": "Selezionando questa opzione, verranno visualizzati i wallet precedentemente nascosti."
+                "description": "Selezionando questa opzione, verranno visualizzati i wallet precedentemente nascosti"
             },
             "deleteProfile": {
                 "title": "Elimina profilo",
-                "description": "Elimina l'intero profilo, wallet e cronologia delle transazioni. Assicurati di avere un backup."
+                "description": "Elimina l'intero profilo, wallet e cronologia delle transazioni. Assicurati di avere un backup"
             },
             "deepLinks": {
                 "title": "Deep link",
@@ -288,7 +292,7 @@
             },
             "configureNodeList": {
                 "title": "Seleziona un nodo",
-                "description": "Gestisce l'elenco dei nodi di rete IOTA a cui connettersi.",
+                "description": "Gestisci l'elenco dei nodi di rete IOTA a cui connettersi",
                 "primaryNode": "Nodo primario",
                 "excludeNode": "Escludi nodo",
                 "includeNode": "Includi nodo",
@@ -296,7 +300,7 @@
                 "setAsPrimary": "Imposta come primario",
                 "removeNode": "Rimuovi Nodo",
                 "includeOfficialNodeList": "Includi la lista dei nodi ufficiali",
-                "noNodes": "Non ci sono nodi, verrà invece utilizzata la selezione automatica."
+                "noNodes": "Non ci sono nodi, verrà utilizzata la selezione automatica"
             },
             "proofOfWork": {
                 "title": "Proof of Work",
@@ -337,7 +341,7 @@
             },
             "reportAnIssue": {
                 "title": "Segnala un problema",
-                "description": "Segnala un bug agli sviluppatori. Controlla per assicurarti che non sia già stato segnalato."
+                "description": "Segnala un bug agli sviluppatori. Controlla per assicurarti che non sia già stato segnalato"
             }
         },
         "login": {
@@ -371,7 +375,7 @@
                 "networkDown": "Rete disconnessa",
                 "status": "Stato",
                 "messagesPerSecond": "Messaggi al secondo",
-                "confirmationRate": "Tasso di conferma"
+                "referencedRate": "Tasso di riferimento"
             },
             "profileModal": {
                 "allSettings": "Tutte le impostazioni",
@@ -583,6 +587,7 @@
         "viewStatus": "Visualizza stato",
         "showHiddenAccounts": "Mostra wallet nascosti",
         "confirm": "Conferma",
+        "hideNetworkStatistics": "Nascondi le statistiche della rete",
         "findBalances": "Trova fondi",
         "searchBalances": "Cerca fondi",
         "searchAgain": "Nuova ricerca",
@@ -701,7 +706,9 @@
         "sentFrom": "Inviato da {account}",
         "receiving": "Ricezione",
         "sending": "Invio",
-        "legacyNetwork": "Rete Legacy"
+        "legacyNetwork": "Rete Legacy",
+        "capsLock": "Blocco maiuscole è attivo",
+        "version": "Versione {version}"
     },
     "dates": {
         "today": "Oggi",

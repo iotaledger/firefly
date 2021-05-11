@@ -240,9 +240,13 @@
                 "title": "Benachrichtigungen",
                 "description": "Systembenachrichtigungen bei Transaktionen"
             },
+            "networkStatus": {
+                "title": "Netzwerkstatus",
+                "description": "Zeigt den Status des Nodes an, mit welchem du gerade verbunden bist."
+            },
             "exportStronghold": {
                 "title": "Backup exportieren",
-                "description": "Exportiert ein vollständig verschlüsseltes Backup deiner Wallet und deiner Transaktionsverläufe in eine Stronghold-Datei."
+                "description": "In eine Stronghold-Datei exportieren - ein komplett verschlüsseltes Backup deiner Wallets und Transaktionsverläufe"
             },
             "appLock": {
                 "title": "Automatische Sperre",
@@ -252,7 +256,7 @@
             },
             "changePassword": {
                 "title": "Passwort ändern",
-                "description": "Dein Passwort wird verwendet um deine Wallets zu sichern. Du solltest ein starkes Passwort verwenden, damit dein Guthaben geschützt ist."
+                "description": "Dein Passwort wird zum Sichern deiner Wallets genutzt. Du solltest ein starkes Passwort verwenden um dein Guthaben zu schützen"
             },
             "changePincode": {
                 "title": "PIN ändern",
@@ -264,15 +268,15 @@
             },
             "balanceFinder": {
                 "title": "Guthaben suchen",
-                "description": "Führe eine erweiterte Suche nach Token auf deinen Adressen durch."
+                "description": "Führe eine erweiterte Suche nach Token auf deinen Adressen durch"
             },
             "hiddenAccounts": {
                 "title": "Ausgeblendete Wallets",
-                "description": "Wähle diese Option um ausgeblendete Wallets wieder anzuzeigen."
+                "description": "Wähle diese Option um zuvor ausgeblendete Wallets wieder anzuzeigen"
             },
             "deleteProfile": {
                 "title": "Profil löschen",
-                "description": "Löscht dein gesamtes Profil, inklusive Wallets und Transaktionsverläufen. Stelle sicher, dass du ein Backup besitzt."
+                "description": "Löscht dein gesamtes Profil, inklusive Wallets und Transaktionsverläufe. Stelle sicher, dass du ein Backup besitzt"
             },
             "deepLinks": {
                 "title": "Deep Links",
@@ -288,7 +292,7 @@
             },
             "configureNodeList": {
                 "title": "Wähle einen Node aus",
-                "description": "Verwalte die Liste der IOTA Nodes mit denen du dich verbinden kannst.",
+                "description": "Verwalte die Liste der IOTA Nodes mit denen du dich verbinden kannst",
                 "primaryNode": "Primärer Node",
                 "excludeNode": "Node ausschließen",
                 "includeNode": "Node einbeziehen",
@@ -296,7 +300,7 @@
                 "setAsPrimary": "Als Primäre festlegen",
                 "removeNode": "Node entfernen",
                 "includeOfficialNodeList": "Offizielle Node-Liste einbeziehen",
-                "noNodes": "Es sind keine Nodes vorhanden, automatische Auswahl wird stattdessen verwendet."
+                "noNodes": "Es sind keine Nodes vorhanden, stattdessen wird eine automatische Auswahl getroffen"
             },
             "proofOfWork": {
                 "title": "Proof of Work",
@@ -337,7 +341,7 @@
             },
             "reportAnIssue": {
                 "title": "Ein Problem melden",
-                "description": "Melde einen Fehler an die Entwickler. Überprüfe ob es nicht bereits gemeldet wurde."
+                "description": "Melde einen Fehler an die Entwickler. Überprüfe zunächst, ob dieser nicht bereits gemeldet wurde"
             }
         },
         "login": {
@@ -371,7 +375,7 @@
                 "networkDown": "Netzwerk nicht verbunden",
                 "status": "Status",
                 "messagesPerSecond": "Nachrichten pro Sekunde",
-                "confirmationRate": "Bestätigungsrate"
+                "referencedRate": "Bestätigungsrate"
             },
             "profileModal": {
                 "allSettings": "Alle Einstellungen",
@@ -583,6 +587,7 @@
         "viewStatus": "Status ansehen",
         "showHiddenAccounts": "Ausgeblendete Wallets anzeigen",
         "confirm": "Bestätigen",
+        "hideNetworkStatistics": "Netzwerk Statistiken verbergen",
         "findBalances": "Guthaben suchen",
         "searchBalances": "Nach Guthaben suchen",
         "searchAgain": "Erneut suchen",
@@ -701,7 +706,9 @@
         "sentFrom": "Gesendet von {account}",
         "receiving": "Empfange",
         "sending": "Sende",
-        "legacyNetwork": "Pre-Chrysalis Netzwerk"
+        "legacyNetwork": "Altes Netzwerk",
+        "capsLock": "Feststelltaste ist aktiviert",
+        "version": "Version {version}"
     },
     "dates": {
         "today": "Heute",
