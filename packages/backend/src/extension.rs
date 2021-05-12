@@ -24,7 +24,7 @@ pub use iota_wallet::actor::MessageType as WalletMessageType;
 
 #[derive(Debug, Clone)]
 pub struct EventMessage {
-    Event: String
+    event: String
 }
 
 #[actor(ExtensionMessage, KillMessage, EventMessage)]
@@ -68,12 +68,12 @@ impl Receive<KillMessage> for ExtensionActor {
 
 impl Receive<EventMessage> for ExtensionActor {
     type Msg = ExtensionActorMsg;
-    fn receive(&mut self, _ctx: &Context<Self::Msg>, _msg: EventMessage, _sender: Sender) {
-        // let message_handler = self.handler.clone();
+    fn receive(&mut self, _ctx: &Context<Self::Msg>, msg: EventMessage, _sender: Sender) {
+        let message_handler = self.handler.clone();
         self.runtime.spawn(async move {
-            // let message_handler = message_handler.lock().await;
-            // let quit_sender = message_handler.quit_sender.clone();
-            // let _ = quit_sender.send(());
+            let message_handler = message_handler.lock().await;
+            let quit_sender = message_handler.event_sender.clone();
+            let _ = quit_sender.send(msg.event);
         });
     }
 }
@@ -109,17 +109,14 @@ async fn callback(message: String, actor_id: String) -> ExtensionResult<String> 
     }
 }
 
-async fn _send_event_to_extension(actor_id: &str, message: String) -> Result<(), String> {
-    let ext_actors = extension_actors().lock().await;
-    let actor_id = actor_id.to_string();
-    if let Some(extension_actor) = ext_actors.get(&actor_id) {
-        extension_actor.tell(EventMessage{
-            Event: message
-        }, None);
-        Ok(())
-    } else {
-        Err("extension actor dropped".to_string())
-    }
+pub(crate) fn send_event_to_extension(
+    extension_actor: &ActorRef<ExtensionActorMsg>,
+    message: String
+) -> Result<(), String> {
+    extension_actor.tell(EventMessage{
+        event: message
+    }, None);
+    Ok(())
 }
 
 impl ActorFactoryArgs<String> for ExtensionActor {
@@ -135,10 +132,15 @@ impl ActorFactoryArgs<String> for ExtensionActor {
         let (quit_sender, quit_receiver): (BroadcastSender<()>, Receiver<()>) =
         broadcast_channel(1);
 
+        let (event_sender, event_receiver): (BroadcastSender<String>, Receiver<String>) =
+        broadcast_channel(99999999);
+
         let h = Arc::new(Mutex::new(ExtensionHandler {
             sender: tx,
             quit: Arc::new(Mutex::new(quit_receiver)),
             quit_sender: quit_sender,
+            event_receiver: Arc::new(Mutex::new(event_receiver)),
+            event_sender: event_sender,
             initialized: false,
         }));
 
@@ -174,12 +176,16 @@ impl Default for ExtensionActor {
     fn default() -> Self {
         let (quit_sender, quit_receiver): (BroadcastSender<()>, Receiver<()>) =
             broadcast_channel(1);
+        let (event_sender, event_receiver): (BroadcastSender<String>, Receiver<String>) =
+            broadcast_channel(1);
         Self {
             runtime: Runtime::new().expect("failed to create tokio runtime"),
             handler: Arc::new(Mutex::new(ExtensionHandler {
                 sender: unbounded_channel().0,
                 quit: Arc::new(Mutex::new(quit_receiver)),
                 quit_sender: quit_sender,
+                event_receiver: Arc::new(Mutex::new(event_receiver)),
+                event_sender: event_sender,
                 initialized: false,
             })),
         }

@@ -17,7 +17,7 @@ use iota_wallet::{
         remove_transfer_progress_listener, EventId,
     },
 };
-use extension::{extension_dispatch, ExtensionActor, ExtensionActorMsg};
+use extension::{extension_dispatch, ExtensionActor, ExtensionActorMsg, send_event_to_extension};
 use glow::message::{DispatchMessage as ExtensionDispatchMessage};
 use once_cell::sync::Lazy;
 use riker::actors::*;
@@ -132,7 +132,7 @@ pub async fn init<A: Into<String>, F: Fn(String) + Send + Sync + 'static>(
         let extension_actor_name = "extenstion-actor-".to_string() + actor_id.as_str();
         let extension_actor = sys.actor_of_args::<ExtensionActor, _>(extension_actor_name.as_str(), actor_id.clone()).unwrap();
         extension_actors.insert(
-            actor_id.to_string(),
+            actor_id.clone(),
             extension_actor
         );
 
@@ -342,14 +342,22 @@ pub async fn listen<A: Into<String>, S: Into<String>>(actor_id: A, id: S, event_
     let actor_id_ = actor_id.clone();
     let event_type_ = event_type.clone();
 
+    // let ext_actors = extension_actors().lock().await;
+    // let actor_id = actor_id.to_string();
+
     let event_id = match event_type {
         EventType::ErrorThrown => on_error(move |error| {
             let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &error));
         }),
         EventType::BalanceChange => {
             on_balance_change(move |event| {
-                println!("on_balance_change even {:?}", event);
+                println!("on_balance_change event {:?}", event);
                 let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &event));
+                // println!("OK TRY TO GET HE ACTOR");
+                // if let Some(extension_actor) = ext_actors.get(&actor_id) {
+                //     println!("GOT THE ACTOR");
+                //     let _ = send_event_to_extension(&extension_actor, serialize_event(id.clone(), event_type, &event));
+                // }
             })
             .await
         }
