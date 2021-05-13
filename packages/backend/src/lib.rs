@@ -1,5 +1,8 @@
 mod actors;
+
+#[cfg(any(feature = "extension"))]
 mod extension;
+
 use actors::{dispatch, DispatchMessage, WalletActor, WalletActorMsg};
 
 use iota_client::common::logger::logger_init;
@@ -17,8 +20,6 @@ use iota_wallet::{
         remove_transfer_progress_listener, EventId,
     },
 };
-use extension::{extension_dispatch, ExtensionActor, ExtensionActorMsg, send_event_to_extension};
-use glow::message::{DispatchMessage as ExtensionDispatchMessage};
 use once_cell::sync::Lazy;
 use riker::actors::*;
 use serde::{Deserialize, Serialize};
@@ -30,6 +31,9 @@ use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex};
 use std::time::Duration;
 
+#[cfg(any(feature = "extension"))]
+use extension::{extension_dispatch, ExtensionActor, ExtensionActorMsg, send_event_to_extension, check_extension_dispatch};
+
 const POLLING_INTERVAL_MS: u64 = 30_000;
 
 struct WalletActorData {
@@ -40,6 +44,8 @@ struct WalletActorData {
 type WalletActors = Arc<AsyncMutex<HashMap<String, WalletActorData>>>;
 type MessageReceiver = Box<dyn Fn(String) + Send + Sync + 'static>;
 type MessageReceivers = Arc<Mutex<HashMap<String, MessageReceiver>>>;
+
+#[cfg(any(feature = "extension"))]
 type ExtensionActors = Arc<AsyncMutex<HashMap<String, ActorRef<ExtensionActorMsg>>>>;
 
 fn wallet_actors() -> &'static WalletActors {
@@ -52,6 +58,7 @@ fn message_receivers() -> &'static MessageReceivers {
     &RECEIVERS
 }
 
+#[cfg(any(feature = "extension"))]
 fn extension_actors() -> &'static ExtensionActors {
     static EXTENSION_ACTORS: Lazy<ExtensionActors> = Lazy::new(Default::default);
     &EXTENSION_ACTORS
@@ -99,6 +106,8 @@ pub async fn init<A: Into<String>, F: Fn(String) + Send + Sync + 'static>(
     let actor_id = actor_id.into();
 
     let mut actors = wallet_actors().lock().await;
+
+    #[cfg(any(feature = "extension"))]
     let mut extension_actors = extension_actors().lock().await;
 
     let manager = AccountManager::builder()
@@ -129,12 +138,15 @@ pub async fn init<A: Into<String>, F: Fn(String) + Send + Sync + 'static>(
             },
         );
 
-        let extension_actor_name = "extenstion-actor-".to_string() + actor_id.as_str();
-        let extension_actor = sys.actor_of_args::<ExtensionActor, _>(extension_actor_name.as_str(), actor_id.clone()).unwrap();
-        extension_actors.insert(
-            actor_id.clone(),
-            extension_actor
-        );
+        #[cfg(any(feature = "extension"))]
+        {
+            let extension_actor_name = "extenstion-actor-".to_string() + actor_id.as_str();
+            let extension_actor = sys.actor_of_args::<ExtensionActor, _>(extension_actor_name.as_str(), actor_id.clone()).unwrap();
+            extension_actors.insert(
+                actor_id.clone(),
+                extension_actor
+            );
+        }
 
         let mut message_receivers = message_receivers()
             .lock()
@@ -195,13 +207,16 @@ pub async fn destroy<A: Into<String>>(actor_id: A) {
         message_receivers.remove(&actor_id);
     }
 
-    let mut extension_actors = extension_actors().lock().await;
-    if let Some(actor) = extension_actors.remove(&actor_id) {
-        actor.tell(actors::KillMessage, None);
-        iota_wallet::with_actor_system(|sys| {
-            sys.stop(&actor);
-        })
-        .await;
+    #[cfg(any(feature = "extension"))]
+    {
+        let mut extension_actors = extension_actors().lock().await;
+        if let Some(actor) = extension_actors.remove(&actor_id) {
+            actor.tell(actors::KillMessage, None);
+            iota_wallet::with_actor_system(|sys| {
+                sys.stop(&actor);
+            })
+            .await;
+        }
     }
 }
 
@@ -239,25 +254,17 @@ pub async fn send_message(serialized_message: String) {
             }
         }
         Err(error) => {
-            // check extension
-            if let Ok(message) = serde_json::from_str::<ExtensionDispatchMessage>(&serialized_message) {
-                let ext_actors = extension_actors().lock().await;
-                let actor_id = message.actor_id.to_string();
-                if let Some(extension_actor) = ext_actors.get(&actor_id) {
-                    match extension_dispatch(extension_actor, message).await {
-                        Ok(response) => Some((response, actor_id)),
-                        Err(e) => Some((Some(e), actor_id)),
-                    }
-                } else {
-                    Some((
-                        Some(format!(
-                            r#"{{ "type": "ActorNotInitialised", "payload": "{}" }}"#,
-                            message.actor_id
-                        )),
-                        message.actor_id,
-                    ))
-                }
-            } else {
+
+            // check extension and finally fallback
+            #[cfg(any(feature = "extension"))]
+            {
+                let res = check_extension_dispatch(serialized_message.clone(), error).await;
+                res
+            }
+
+            // only check fallback
+            #[cfg(not(feature = "extension"))]
+            {
                 if let Ok(message) = serde_json::from_str::<MessageFallback>(&serialized_message) {
                     Some((
                         Some(format!(

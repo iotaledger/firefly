@@ -6,7 +6,7 @@ edition = "2018"
 exclude = ["/bindings", "/api-wrapper"]
 
 [dependencies]
-glow = { path = "../../../glow/glow.rs" }
+glow = { path = "../../../glow/glow.rs", optional = true }
 tokio = { version = "1.3", features = ["full"] }
 once_cell = "1.5.0"
 iota-wallet = { git = "https://github.com/iotaledger/wallet.rs", branch = "develop", default-features = false, features = ["stronghold"] }
@@ -18,3 +18,8 @@ log = "0.4"
 
 [dev-dependencies]
 futures = "0.3"
+
+[features]
+default = []
+extension = ["glow"]
+

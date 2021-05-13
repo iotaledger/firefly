@@ -1,6 +1,10 @@
+#[cfg(any(feature = "extension"))]
 use riker::actors::*;
+#[cfg(any(feature = "extension"))]
 use std::default::Default;
+#[cfg(any(feature = "extension"))]
 use std::sync::Arc;
+#[cfg(any(feature = "extension"))]
 use tokio::{
     runtime::Runtime,
     sync::{
@@ -10,8 +14,13 @@ use tokio::{
     },
 };
 
+#[cfg(any(feature = "extension"))]
 use crate::actors::KillMessage;
-use crate::{dispatch, wallet_actors, extension_actors, DispatchMessage as WalletDispatchMessage};
+#[cfg(any(feature = "extension"))]
+use crate::{dispatch, wallet_actors, DispatchMessage as WalletDispatchMessage, MessageFallback};
+#[cfg(any(feature = "extension"))]
+use crate::{extension_actors};
+#[cfg(any(feature = "extension"))]
 use glow::{
     handler::{ExtensionHandler},
     message::{
@@ -20,19 +29,23 @@ use glow::{
         ResponseType as ExtensionResponseType, Result as ExtensionResult,
     },
 };
-pub use iota_wallet::actor::MessageType as WalletMessageType;
 
+// pub use iota_wallet::actor::MessageType as WalletMessageType;
+
+#[cfg(any(feature = "extension"))]
 #[derive(Debug, Clone)]
 pub struct EventMessage {
     event: String
 }
 
+#[cfg(any(feature = "extension"))]
 #[actor(ExtensionMessage, KillMessage, EventMessage)]
 pub struct ExtensionActor {
     runtime: Runtime,
     handler: Arc<Mutex<ExtensionHandler>>,
 }
 
+#[cfg(any(feature = "extension"))]
 impl Actor for ExtensionActor {
     type Msg = ExtensionActorMsg;
 
@@ -41,6 +54,7 @@ impl Actor for ExtensionActor {
     }
 }
 
+#[cfg(any(feature = "extension"))]
 impl Receive<ExtensionMessage> for ExtensionActor {
     type Msg = ExtensionActorMsg;
     fn receive(&mut self, _ctx: &Context<Self::Msg>, msg: ExtensionMessage, _sender: Sender) {
@@ -52,6 +66,7 @@ impl Receive<ExtensionMessage> for ExtensionActor {
     }
 }
 
+#[cfg(any(feature = "extension"))]
 impl Receive<KillMessage> for ExtensionActor {
     type Msg = ExtensionActorMsg;
     fn receive(&mut self, ctx: &Context<Self::Msg>, _msg: KillMessage, _sender: Sender) {
@@ -66,6 +81,7 @@ impl Receive<KillMessage> for ExtensionActor {
     }
 }
 
+#[cfg(any(feature = "extension"))]
 impl Receive<EventMessage> for ExtensionActor {
     type Msg = ExtensionActorMsg;
     fn receive(&mut self, _ctx: &Context<Self::Msg>, msg: EventMessage, _sender: Sender) {
@@ -79,6 +95,7 @@ impl Receive<EventMessage> for ExtensionActor {
 }
 
 // from browser
+#[cfg(any(feature = "extension"))]
 async fn callback(message: String, actor_id: String) -> ExtensionResult<String> {
     // dispatch to WalletActor and return result
     let actors = wallet_actors().lock().await;
@@ -109,6 +126,7 @@ async fn callback(message: String, actor_id: String) -> ExtensionResult<String> 
     }
 }
 
+#[cfg(any(feature = "extension"))]
 pub(crate) fn send_event_to_extension(
     extension_actor: &ActorRef<ExtensionActorMsg>,
     message: String
@@ -119,6 +137,7 @@ pub(crate) fn send_event_to_extension(
     Ok(())
 }
 
+#[cfg(any(feature = "extension"))]
 impl ActorFactoryArgs<String> for ExtensionActor {
     fn create_args(actor_id: String) -> Self {
         let run = Runtime::new().expect("failed to create tokio runtime");
@@ -172,6 +191,7 @@ impl ActorFactoryArgs<String> for ExtensionActor {
     }
 }
 
+#[cfg(any(feature = "extension"))]
 impl Default for ExtensionActor {
     fn default() -> Self {
         let (quit_sender, quit_receiver): (BroadcastSender<()>, Receiver<()>) =
@@ -192,6 +212,7 @@ impl Default for ExtensionActor {
     }
 }
 
+#[cfg(any(feature = "extension"))]
 pub(crate) async fn extension_dispatch(
     extension_actor: &ActorRef<ExtensionActorMsg>,
     message: ExtensionDispatchMessage,
@@ -214,5 +235,53 @@ pub(crate) async fn extension_dispatch(
             .unwrap()
         })?)),
         None => Ok(None),
+    }
+}
+
+#[cfg(any(feature = "extension"))]
+pub async fn check_extension_dispatch(serialized_message:String, error:serde_json::Error) -> Option<(Option<String>, String)> {
+    if let Ok(message) = serde_json::from_str::<ExtensionDispatchMessage>(&serialized_message) {
+        let ext_actors = extension_actors().lock().await;
+        let actor_id = message.actor_id.to_string();
+        if let Some(extension_actor) = ext_actors.get(&actor_id) {
+            match extension_dispatch(extension_actor, message).await {
+                Ok(response) => Some((response, actor_id)),
+                Err(e) => Some((Some(e), actor_id)),
+            }
+        } else {
+            Some((
+                Some(format!(
+                    r#"{{ "type": "ActorNotInitialised", "payload": "{}" }}"#,
+                    message.actor_id
+                )),
+                message.actor_id,
+            ))
+        }
+    } else {
+        if let Ok(message) = serde_json::from_str::<MessageFallback>(&serialized_message) {
+            Some((
+                Some(format!(
+                    r#"{{
+                        "type": "Error",
+                        "id": {},
+                        "payload": {{ 
+                            "type": "InvalidMessage",
+                            "message": {},
+                            "error": {}
+                        }}
+                    }}"#,
+                    match message.id {
+                        Some(id) => serde_json::Value::String(id),
+                        None => serde_json::Value::Null,
+                    },
+                    serialized_message,
+                    serde_json::Value::String(error.to_string()),
+                )),
+                message.actor_id,
+            ))
+        } else {
+            log::error!("[FIREFLY] backend sendMessage error: {:?}", error);
+            None
+        }
     }
 }
