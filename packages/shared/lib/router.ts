@@ -151,6 +151,7 @@ export const routerNext = (event) => {
             break
         case AppRoute.LedgerSetup:
             nextRoute = AppRoute.Protect
+            break
         case AppRoute.Secure:
             nextRoute = AppRoute.Password
             break
