@@ -147,7 +147,7 @@
             "haveFireflyLedgerDescription": "Create a fresh account",
             "haveTrinityLedger": "I have a Trinity ledger backup",
             "haveTrinityLedgerDescription": "Create a fresh Ledger account",
-            "ledgerNotConnected": "Connect your Ledger device"
+            "ledgerNotConnected": "Connect your Ledger device and open IOTA Firefly app"
         },
         "importFromFireflyLedger": {
             "title": "Restore from Ledger",

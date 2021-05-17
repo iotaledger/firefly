@@ -134,8 +134,8 @@
             <!-- Hardware Device -->
             <SecurityTile
                 onClick={checkLedgerConnection}
-                title={locale('views.dashboard.security.hardware_device.title')}
-                message={locale(`views.dashboard.security.hardware_device.${hardwareDeviceMessage}`)}
+                title={locale('views.dashboard.security.hardwareDevice.title')}
+                message={locale(`views.dashboard.security.hardwareDevice.${hardwareDeviceMessage}`)}
                 color="gray"
                 icon="chip" />
         {/if}
