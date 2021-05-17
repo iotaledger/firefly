@@ -1,6 +1,6 @@
 <!-- TODO: all this file is kind of duplicate of Setup > Balance.svelte -->
 <script>
-    import { Animation, Box, Button, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, Box, Button, OnboardingLayout, Spinner, Text } from 'shared/components'
     import {
         AvailableExchangeRates,
         convertToFiat,
@@ -11,15 +11,15 @@
     } from 'shared/lib/currency'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { createEventDispatcher } from 'svelte'
+    import { get } from 'svelte/store'
 
     export let locale
     export let mobile
     export let balance
 
     const dispatch = createEventDispatcher()
-    let formattedBalance = formatUnitBestMatch(balance, true, 3)
-    let fiatBalance = getFiatBalance(balance)
 
+    // TODO: missing check again for balance function
     function sync() {}
 
     const getFiatBalance = (balance) => {
@@ -34,6 +34,10 @@
         }
         return formatCurrency(balanceAsFiat, AvailableExchangeRates.USD)
     }
+
+    let formattedBalance = formatUnitBestMatch(balance, true, 3)
+    let fiatBalance = getFiatBalance(balance)
+    let isCheckingForBalance = false
 
     function handleContinueClick() {
         dispatch('next')
@@ -55,9 +59,18 @@
                 <Text type="p" highlighted classes="py-1 uppercase">{fiatBalance}</Text>
             </Box>
         </div>
-        <div slot="leftpane__action" class="flex flex-row justify-between items-center">
-            <Button secondary onClick={sync}>{locale('actions.checkAgain')}</Button>
-            <Button onClick={handleContinueClick}>{locale('actions.continue')}</Button>
+        <div slot="leftpane__action" class="flex flex-row justify-between items-center space-x-4">
+            <Button secondary classes="flex-1" disabled={isCheckingForBalance} onClick={sync}>
+                {#if isCheckingForBalance}
+                    <Spinner
+                        busy={isCheckingForBalance}
+                        message={locale('views.migrate.findingBalance')}
+                        classes="justify-center" />
+                {:else}{locale('actions.checkAgain')}{/if}
+            </Button>
+            <Button classes="flex-1" disabled={isCheckingForBalance} onClick={handleContinueClick}>
+                {locale('actions.continue')}
+            </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-yellow dark:bg-gray-900">
             <Animation animation="balance-desktop" />
