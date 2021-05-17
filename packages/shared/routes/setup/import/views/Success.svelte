@@ -23,12 +23,16 @@
 {:else}
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
-            <div class="flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-5">
+            <div class="flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-5 text-center">
                 <div class="bg-green-100 rounded-2xl relative -top-10">
                     <Icon icon="success-check" classes="text-white" />
                 </div>
-                <Text type="h2" classes="mb-5 text-center">{locale(`views.importSuccess.title`)}</Text>
-                <Text type="p" secondary classes="mb-2">{locale(`views.importSuccess.body`)}</Text>
+                <Text type="h2" classes="mb-5 text-center">
+                    {locale(`views.importSuccess.${$importType === ImportType.FireflyLedger ? 'fireflyLedgerTitle' : 'title'}`)}
+                </Text>
+                <Text type="p" secondary classes="mb-2">
+                    {locale(`views.importSuccess.${$importType === ImportType.FireflyLedger ? 'fireflyLedgerBody' : 'body'}`)}
+                </Text>
             </div>
         </div>
         <div slot="leftpane__action">

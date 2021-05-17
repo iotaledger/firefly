@@ -165,7 +165,9 @@
             "seedvaultTitle": "Successfully imported",
             "seedvaultBody": "Your password is correct, you can now continue.",
             "strongholdTitle": "Successfully imported",
-            "strongholdBody": "Your password is correct, you can now continue."
+            "strongholdBody": "Your password is correct, you can now continue.",
+            "fireflyLedgerTitle": "Successfully imported",
+            "fireflyLedgerBody": "Your Ledger account is successfully recovered and  you can now continue."
         },
         "migrate": {
             "title": "Migrate your funds",
