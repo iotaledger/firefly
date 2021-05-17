@@ -26,16 +26,7 @@
     import { asyncRestoreBackup } from 'shared/lib/wallet'
     import { createEventDispatcher, setContext } from 'svelte'
     import { get, Writable, writable } from 'svelte/store'
-    import {
-        BackupPassword,
-        ConfirmBalance,
-        FileImport,
-        FireflyLedgerImport,
-        Import,
-        LedgerImport,
-        Success,
-        TextImport,
-    } from './views/'
+    import { BackupPassword, Balance, FileImport, FireflyLedgerImport, Import, LedgerImport, Success, TextImport } from './views/'
 
     export let locale
     export let mobile
@@ -49,7 +40,7 @@
         LedgerImport = 'ledgerImport',
         TrinityLedgerImport = 'trinityLedgerImport',
         FireflyLedgerImport = 'fireflyLedgerImport',
-        ConfirmBalance = 'confirmBalance',
+        Balance = 'balance',
         BackupPassword = 'backupPassword',
         Success = 'Success',
     }
@@ -134,9 +125,9 @@
                 break
             case ImportState.FireflyLedgerImport:
                 balance = params.balance
-                nextState = ImportState.ConfirmBalance
+                nextState = ImportState.Balance
                 break
-            case ImportState.ConfirmBalance:
+            case ImportState.Balance:
                 nextState = ImportState.Success
                 break
             case ImportState.BackupPassword:
@@ -220,9 +211,9 @@
     <Transition>
         <FireflyLedgerImport on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
-{:else if state === ImportState.ConfirmBalance}
+{:else if state === ImportState.Balance}
     <Transition>
-        <ConfirmBalance on:next={_next} on:previous={_previous} {balance} {locale} {mobile} />
+        <Balance on:next={_next} on:previous={_previous} {balance} {locale} {mobile} />
     </Transition>
 {:else if state === ImportState.BackupPassword}
     <Transition>
