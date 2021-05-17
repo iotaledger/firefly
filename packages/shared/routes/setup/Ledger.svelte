@@ -22,17 +22,11 @@
             type: 'ledgerNotConnected',
             hideClose: true,
             props: {
+                handleClose: handleClosePopup,
                 message: locale('views.setupLedger.connect'),
             },
         })
     }
-
-    const unsubscribe = popupState.subscribe((state) => {
-        if (!(state.active || isLedgerConnected)) {
-            checkIfLedgerIsConnected = false
-            handleBackClick()
-        }
-    })
 
     onMount(() => {
         getLedgerDeviceStatus()
@@ -40,7 +34,6 @@
 
     onDestroy(() => {
         checkIfLedgerIsConnected = false
-        unsubscribe()
     })
 
     function handleLedgerDeviceNotConnected() {
@@ -93,6 +86,13 @@
                 },
             }
         )
+    }
+
+    function handleClosePopup() {
+        if (!isLedgerConnected) {
+            closePopup()
+            handleBackClick()
+        }
     }
 
     function handleBackClick() {
