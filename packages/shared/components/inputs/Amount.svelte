@@ -3,7 +3,8 @@
     import { Input, Text } from 'shared/components'
     import {
         AvailableExchangeRates,
-        convertToFiat,
+convertFromFiat,
+                convertToFiat,
         currencies,
         CurrencyTypes,
         exchangeRates,
@@ -35,7 +36,7 @@
     let unitsButton
     let focusedItem
 
-    $: fiatAmount = amountToFiat(amount)
+    $: amountForLabel = getFormattedLabel(amount)
     $: {
         if (amount.length > 0) {
             // TODO: Handle fiat here!
@@ -44,6 +45,8 @@
                 if (rawVal > MAX_VALUE) {
                     amount = formatUnitPrecision(MAX_VALUE, unit, false)
                 }
+            } else {
+                // TODO: write case here
             }
         }
     }
@@ -52,27 +55,16 @@
         dropdown = false
     }
 
-    const isFiatCurrency = (unitAsString): boolean => {
-        return !Object.values(Unit).includes(unitAsString);
-    }
-
     const onSelect = (index) => {
-        console.log(unit, index);
-
         if (amount.length > 0) {
             if(isFiatCurrency(index)) {
-                console.log("IOTA -> FIAT")
-
-                amount = amountToFiat(amount)
-            }
-            else {
+                amount = amountToFiat(amount).slice(2)
+            } else {
                 if(isFiatCurrency(unit)) {
                     console.log("FIAT -> IOTA")
 
-                    amount = "1000"
+                    amount = "1003"
                 } else {
-                    console.log("IOTA -> IOTA")
-
                     amount = formatUnitPrecision(changeUnits(parseCurrency(amount), unit, Unit.i), index, false)
                 }
             }
@@ -129,25 +121,50 @@
         }
     }
 
+    const isFiatCurrency = (unitAsString): boolean => {
+        return !Object.values(Unit).includes(unitAsString);
+    }
+
     const amountToFiat = (_amount) => {
-        if(isFiatCurrency(unit)) return _amount;
+        if(isFiatCurrency(unit)) return _amount
 
         if (!amount) return null
+
         const amountAsFloat = parseCurrency(_amount)
         if (amountAsFloat === 0 || Number.isNaN(amountAsFloat)) {
             return null
         } else {
             const amountAsI = changeUnits(amountAsFloat, unit, Unit.i)
             const amountasFiat = convertToFiat(amountAsI, $currencies[CurrencyTypes.USD], $exchangeRates[profileCurrency])
+            
             return amountasFiat === 0 ? replaceCurrencyDecimal(`< 0.01`) : formatCurrency(amountasFiat)
         }
     }
 
-    const getMaxDecimals = (unitAsString): number => {
-        if(isFiatCurrency(unitAsString))
-            return 2
-        else
-            return UNIT_MAP[unitAsString].dp;
+    const amountFromFiat = (_amount) => {
+        if(!isFiatCurrency(unit)) return _amount
+
+        if(!amount) return null
+
+        const amountAsFloat = parseCurrency(_amount, unit)
+        console.log(amountAsFloat)
+        if(amountAsFloat === 0 || Number.isNaN(amountAsFloat)) {
+            return null
+        } else {
+            const amountAsI = convertFromFiat(amountAsFloat, $currencies[CurrencyTypes.USD], $exchangeRates[profileCurrency])
+            const amountAsMi = changeUnits(amountAsI, Unit.i, Unit.Mi)
+
+            return `${amountAsMi} Mi`
+        }
+
+    }
+
+    const getFormattedLabel = (_amount) => {
+        return isFiatCurrency(unit) ? amountFromFiat(_amount) : amountToFiat(_amount)
+    }
+
+    const getMaxDecimals = (unitAsString) => {
+        return isFiatCurrency(unitAsString) ? 2 : UNIT_MAP[unitAsString].dp;
     }
 </script>
 
@@ -173,7 +190,7 @@
 <amount-input class:disabled class="relative block {classes}" on:keydown={handleKey}>
     <Input
         {error}
-        label={fiatAmount ?? (label || locale('general.amount'))}
+        label={amountForLabel ?? (label || locale('general.amount'))}
         placeholder={placeholder || locale('general.amount')}
         bind:value={amount}
         maxlength={17}

@@ -140,7 +140,7 @@ export const currencies = writable<Currencies>({} as Currencies)
  *
  * @method convertToFiat
  *
- * @param {number} amount
+ * @param {number} amount 
  * @param {number} usdPrice
  * @param {number} conversionRate
  *
@@ -148,6 +148,19 @@ export const currencies = writable<Currencies>({} as Currencies)
  */
 export const convertToFiat = (amount: number, usdPrice: number, conversionRate: number): number => {
     return +(((amount * usdPrice) / 1000000) * conversionRate).toFixed(2)
+}
+
+/**
+ * Converts fiat to iotas equivalent
+ * 
+ * @param {number} amount 
+ * @param {number} usdPrice 
+ * @param {number} conversionRate 
+ * 
+ * @returns {number}
+ */
+export const convertFromFiat = (amount: number, usdPrice: number, conversionRate: number): number => {
+    return +(((amount * conversionRate) / usdPrice) * 1000000).toFixed(0)
 }
 
 /**
