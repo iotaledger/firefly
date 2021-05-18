@@ -44,6 +44,11 @@
                 if (rawVal > MAX_VALUE) {
                     amount = formatUnitPrecision(MAX_VALUE, unit, false)
                 }
+            } else {
+                const amountAsI = convertFromFiat(amount, $currencies[CurrencyTypes.USD], $exchangeRates[profileCurrency])
+                if(amountAsI > MAX_VALUE) {
+                    amount = convertToFiat(MAX_VALUE, $currencies[CurrencyTypes.USD], $exchangeRates[profileCurrency]).toString()
+                }
             }
         }
     }
