@@ -25,7 +25,9 @@
     export let disabled = false
     export let autofocus = false
 
-    const Units = Object.values(Unit).filter((x) => x !== 'Pi')
+    let profileCurrency: AvailableExchangeRates = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
+
+    const Units = [profileCurrency as string].concat(Object.values(Unit).filter((x) => x !== 'Pi').map(x => x as string))
     const MAX_VALUE = 2779530283000000
 
     let dropdown = false
@@ -33,13 +35,15 @@
     let unitsButton
     let focusedItem
 
-    let profileCurrency: AvailableExchangeRates = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
     $: fiatAmount = amountToFiat(amount)
     $: {
         if (amount.length > 0) {
-            const rawVal = changeUnits(parseCurrency(amount), unit, Unit.i)
-            if (rawVal > MAX_VALUE) {
-                amount = formatUnitPrecision(MAX_VALUE, unit, false)
+            // TODO: Handle fiat here!
+            if(!isFiatCurrency(unit)) {
+                const rawVal = changeUnits(parseCurrency(amount), unit, Unit.i)
+                if (rawVal > MAX_VALUE) {
+                    amount = formatUnitPrecision(MAX_VALUE, unit, false)
+                }
             }
         }
     }
@@ -47,10 +51,33 @@
     const clickOutside = () => {
         dropdown = false
     }
+
+    const isFiatCurrency = (unitAsString): boolean => {
+        return !Object.values(Unit).includes(unitAsString);
+    }
+
     const onSelect = (index) => {
+        console.log(unit, index);
+
         if (amount.length > 0) {
-            amount = formatUnitPrecision(changeUnits(parseCurrency(amount), unit, Unit.i), index, false)
+            if(isFiatCurrency(index)) {
+                console.log("IOTA -> FIAT")
+
+                amount = amountToFiat(amount)
+            }
+            else {
+                if(isFiatCurrency(unit)) {
+                    console.log("FIAT -> IOTA")
+
+                    amount = "1000"
+                } else {
+                    console.log("IOTA -> IOTA")
+
+                    amount = formatUnitPrecision(changeUnits(parseCurrency(amount), unit, Unit.i), index, false)
+                }
+            }
         }
+
         unit = index
     }
 
@@ -103,6 +130,8 @@
     }
 
     const amountToFiat = (_amount) => {
+        if(isFiatCurrency(unit)) return _amount;
+
         if (!amount) return null
         const amountAsFloat = parseCurrency(_amount)
         if (amountAsFloat === 0 || Number.isNaN(amountAsFloat)) {
@@ -112,6 +141,13 @@
             const amountasFiat = convertToFiat(amountAsI, $currencies[CurrencyTypes.USD], $exchangeRates[profileCurrency])
             return amountasFiat === 0 ? replaceCurrencyDecimal(`< 0.01`) : formatCurrency(amountasFiat)
         }
+    }
+
+    const getMaxDecimals = (unitAsString): number => {
+        if(isFiatCurrency(unitAsString))
+            return 2
+        else
+            return UNIT_MAP[unitAsString].dp;
     }
 </script>
 
@@ -143,7 +179,7 @@
         maxlength={17}
         {disabled}
         {autofocus}
-        maxDecimals={UNIT_MAP[unit].dp}
+        maxDecimals={getMaxDecimals(unit)}
         integer={unit === Unit.i}
         float={unit !== Unit.i}
         style={dropdown ? 'border-bottom-right-radius: 0' : ''}
