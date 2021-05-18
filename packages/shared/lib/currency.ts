@@ -160,7 +160,7 @@ export const convertToFiat = (amount: number, usdPrice: number, conversionRate: 
  * @returns {number}
  */
 export const convertFromFiat = (amount: number, usdPrice: number, conversionRate: number): number => {
-    return +(((amount * conversionRate) / usdPrice) * 1000000).toFixed(0)
+    return +(((amount / conversionRate) / usdPrice) * 1000000).toFixed(0)
 }
 
 /**
