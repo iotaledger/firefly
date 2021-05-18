@@ -3,8 +3,8 @@
     import { Input, Text } from 'shared/components'
     import {
         AvailableExchangeRates,
-convertFromFiat,
-                convertToFiat,
+        convertFromFiat,
+        convertToFiat,
         currencies,
         CurrencyTypes,
         exchangeRates,
@@ -39,14 +39,11 @@ convertFromFiat,
     $: amountForLabel = getFormattedLabel(amount)
     $: {
         if (amount.length > 0) {
-            // TODO: Handle fiat here!
             if(!isFiatCurrency(unit)) {
                 const rawVal = changeUnits(parseCurrency(amount), unit, Unit.i)
                 if (rawVal > MAX_VALUE) {
                     amount = formatUnitPrecision(MAX_VALUE, unit, false)
                 }
-            } else {
-                // TODO: write case here
             }
         }
     }
@@ -61,9 +58,8 @@ convertFromFiat,
                 amount = amountToFiat(amount).slice(2)
             } else {
                 if(isFiatCurrency(unit)) {
-                    console.log("FIAT -> IOTA")
-
-                    amount = "1003"
+                    let inIotas = convertFromFiat(amount, $currencies[CurrencyTypes.USD], $exchangeRates[profileCurrency])
+                    amount = formatUnitPrecision(inIotas, index).replace(index, '')
                 } else {
                     amount = formatUnitPrecision(changeUnits(parseCurrency(amount), unit, Unit.i), index, false)
                 }
@@ -136,7 +132,7 @@ convertFromFiat,
         } else {
             const amountAsI = changeUnits(amountAsFloat, unit, Unit.i)
             const amountasFiat = convertToFiat(amountAsI, $currencies[CurrencyTypes.USD], $exchangeRates[profileCurrency])
-            
+
             return amountasFiat === 0 ? replaceCurrencyDecimal(`< 0.01`) : formatCurrency(amountasFiat)
         }
     }
@@ -147,7 +143,6 @@ convertFromFiat,
         if(!amount) return null
 
         const amountAsFloat = parseCurrency(_amount, unit)
-        console.log(amountAsFloat)
         if(amountAsFloat === 0 || Number.isNaN(amountAsFloat)) {
             return null
         } else {
