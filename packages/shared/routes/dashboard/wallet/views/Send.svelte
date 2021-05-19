@@ -2,7 +2,7 @@
     import { Unit } from '@iota/unit-converter'
     import { Address, Amount, Button, Dropdown, Icon, ProgressBar, Text } from 'shared/components'
     import { clearSendParams, sendParams } from 'shared/lib/app'
-    import { parseCurrency } from 'shared/lib/currency'
+    import { convertToFiat, currencies, CurrencyTypes, exchangeRates, parseCurrency } from 'shared/lib/currency'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import type { TransferProgressEventType } from 'shared/lib/typings/events'
@@ -216,7 +216,8 @@
         }
     }
     const handleMaxClick = () => {
-        amount = formatUnitPrecision(from.balance, unit, false)
+        const isFiat: boolean = !Object.values(Unit).includes(unit)
+        amount = isFiat ? convertToFiat(from.balance, $currencies[CurrencyTypes.USD], $exchangeRates[unit]).toString() : formatUnitPrecision(from.balance, unit, false)
     }
 
     const updateFromSendParams = (s) => {
