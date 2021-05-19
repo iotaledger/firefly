@@ -12,7 +12,7 @@
     } from 'shared/lib/currency'
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile } from 'shared/lib/profile'
-    import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
+    import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
     import { get } from 'svelte/store'
 
     export let locale
@@ -29,9 +29,9 @@
         const activeCurrency = get(activeProfile)?.settings.currency ?? AvailableExchangeRates.USD
 
         let valInFiat = formatCurrency(convertToFiat(amount, $currencies[CurrencyTypes.USD], $exchangeRates[activeCurrency]), activeCurrency)
-        let valInIotas = isFiat ? changeUnits(amount, Unit.i, Unit.Mi) : formatUnitPrecision(amount, unit)
+        let valInIotas = isFiat ? formatUnitBestMatch(amount) : formatUnitPrecision(amount, unit)
         
-        return isFiat ? `${valInFiat} (${valInIotas} Mi)` : `${valInIotas} (${valInFiat})` 
+        return isFiat ? `${valInFiat} (${valInIotas})` : `${valInIotas} (${valInFiat})` 
     }
 
     function handleCancelClick() {

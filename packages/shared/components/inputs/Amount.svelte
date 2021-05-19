@@ -14,7 +14,7 @@
         replaceCurrencyDecimal,
     } from 'shared/lib/currency'
     import { activeProfile } from 'shared/lib/profile'
-    import { changeUnits, formatUnitPrecision, UNIT_MAP } from 'shared/lib/units'
+    import { changeUnits, formatUnitBestMatch, formatUnitPrecision, UNIT_MAP } from 'shared/lib/units'
 
     export let amount = undefined
     export let unit = Unit.Mi
@@ -142,7 +142,7 @@
 
     const amountFromFiat = (_amount) => {
         if(!amount) return null
-        
+
         if(!isFiatCurrency(unit)) return _amount
 
         const amountAsFloat = parseCurrency(_amount, unit)
@@ -150,9 +150,8 @@
             return null
         } else {
             const amountAsI = convertFromFiat(amountAsFloat, $currencies[CurrencyTypes.USD], $exchangeRates[profileCurrency])
-            const amountAsMi = changeUnits(amountAsI, Unit.i, Unit.Mi)
 
-            return `${amountAsMi} Mi`
+            return formatUnitBestMatch(amountAsI)
         }
 
     }
