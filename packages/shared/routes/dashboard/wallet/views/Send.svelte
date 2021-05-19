@@ -216,7 +216,7 @@
         }
     }
     const handleMaxClick = () => {
-        const isFiat: boolean = !Object.values(Unit).includes(unit)
+        const isFiat = !Object.values(Unit).includes(unit)
         amount = isFiat ? convertToFiat(from.balance, $currencies[CurrencyTypes.USD], $exchangeRates[unit]).toString() : formatUnitPrecision(from.balance, unit, false)
     }
 
