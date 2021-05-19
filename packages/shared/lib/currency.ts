@@ -1,3 +1,4 @@
+import { Unit } from '@iota/unit-converter'
 import { get, writable } from 'svelte/store'
 import { appSettings } from './appSettings'
 import { activeProfile } from './profile'
@@ -163,6 +164,19 @@ export const convertToFiat = (amount: number, usdPrice: number, conversionRate: 
  */
 export const convertFromFiat = (amount: number, usdPrice: number, conversionRate: number): number => {
     return +(((amount / conversionRate) / usdPrice) * 1000000).toFixed(0)
+}
+
+/**
+ * Determines if a unit is a fiat currency or not
+ * 
+ * @method isFiatCurrency
+ * 
+ * @param {Unit | string} unit
+ * 
+ * @returns {boolean}
+ */
+export const isFiatCurrency = (unit: Unit | string): boolean => {
+    return !Object.values(Unit).map(x => x as string).includes(unit as string)
 }
 
 /**

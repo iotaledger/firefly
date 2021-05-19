@@ -9,6 +9,7 @@
         CurrencyTypes,
         exchangeRates,
         formatCurrency,
+        isFiatCurrency,
         parseCurrency,
         replaceCurrencyDecimal,
     } from 'shared/lib/currency'
@@ -64,8 +65,8 @@
                 amount = amountToFiat(amount).slice(2)
             } else {
                 if(isFiatCurrency(unit)) {
-                    let inIotas = convertFromFiat(amount, $currencies[CurrencyTypes.USD], $exchangeRates[profileCurrency])
-                    amount = formatUnitPrecision(inIotas, index).replace(index, '')
+                    let amountAsI = convertFromFiat(amount, $currencies[CurrencyTypes.USD], $exchangeRates[profileCurrency])
+                    amount = formatUnitPrecision(amountAsI, index).replace(index, '')
                 } else {
                     amount = formatUnitPrecision(changeUnits(parseCurrency(amount), unit, Unit.i), index, false)
                 }
@@ -123,14 +124,10 @@
         }
     }
 
-    const isFiatCurrency = (unitAsString) => {
-        return !Object.values(Unit).includes(unitAsString);
-    }
-
     const amountToFiat = (_amount) => {
-        if(isFiatCurrency(unit)) return _amount
-
         if (!amount) return null
+        
+        if(isFiatCurrency(unit)) return _amount
 
         const amountAsFloat = parseCurrency(_amount)
         if (amountAsFloat === 0 || Number.isNaN(amountAsFloat)) {
@@ -144,9 +141,9 @@
     }
 
     const amountFromFiat = (_amount) => {
-        if(!isFiatCurrency(unit)) return _amount
-
         if(!amount) return null
+        
+        if(!isFiatCurrency(unit)) return _amount
 
         const amountAsFloat = parseCurrency(_amount, unit)
         if(amountAsFloat === 0 || Number.isNaN(amountAsFloat)) {

@@ -2,7 +2,7 @@
     import { Unit } from '@iota/unit-converter'
     import { Address, Amount, Button, Dropdown, Icon, ProgressBar, Text } from 'shared/components'
     import { clearSendParams, sendParams } from 'shared/lib/app'
-    import { convertToFiat, currencies, CurrencyTypes, exchangeRates, parseCurrency } from 'shared/lib/currency'
+    import { convertFromFiat, convertToFiat, currencies, CurrencyTypes, exchangeRates, isFiatCurrency, parseCurrency } from 'shared/lib/currency'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import type { TransferProgressEventType } from 'shared/lib/typings/events'
@@ -143,11 +143,17 @@
         } else if (unit === Unit.i && Number.parseInt(amount, 10).toString() !== amount) {
             amountError = locale('error.send.amountNoFloat')
         } else {
-            let amountAsFloat = parseCurrency(amount)
+            let isFiat = isFiatCurrency(unit)
+            let amountAsFloat = isFiat ? parseCurrency(amount, unit) : parseCurrency(amount)
+
             if (Number.isNaN(amountAsFloat)) {
                 amountError = locale('error.send.amountInvalidFormat')
             } else {
-                amountRaw = changeUnits(amountAsFloat, unit, Unit.i)
+                amountRaw = isFiat ? convertFromFiat(amountAsFloat, $currencies[CurrencyTypes.USD], $exchangeRates[unit])
+                                   : changeUnits(amountAsFloat, unit, Unit.i)
+
+                amountRaw = handleMaxAmount(amountRaw)
+
                 if (amountRaw > from.balance) {
                     amountError = locale('error.send.amountTooHigh')
                 } else if (amountRaw <= 0) {
@@ -187,6 +193,23 @@
         }
     }
 
+    const handleMaxAmount = (_amount) => {
+        /**
+         * NOTE: Sometimes max values from fiat calculations aren't
+         * precise enough, so make sure that the max is truly the max
+         * if the user selected MAX.
+         */
+
+        let isFiat = isFiatCurrency(unit)
+        let isMaxAmount = amount === convertToFiat(from.balance, $currencies[CurrencyTypes.USD], $exchangeRates[unit]).toString()
+        let hasDustRemaining = Math.abs(from.balance - _amount) < 1000000
+        if(isFiat && isMaxAmount && hasDustRemaining) {
+            _amount = from.balance
+        }
+
+        return _amount
+    }
+
     const triggerSend = (internal) => {
         closePopup()
         if (internal) {
@@ -216,8 +239,8 @@
         }
     }
     const handleMaxClick = () => {
-        const isFiat = !Object.values(Unit).includes(unit)
-        amount = isFiat ? convertToFiat(from.balance, $currencies[CurrencyTypes.USD], $exchangeRates[unit]).toString() : formatUnitPrecision(from.balance, unit, false)
+        amount = isFiatCurrency(unit) ? convertToFiat(from.balance, $currencies[CurrencyTypes.USD], $exchangeRates[unit]).toString()
+                                             : formatUnitPrecision(from.balance, unit, false)
     }
 
     const updateFromSendParams = (s) => {

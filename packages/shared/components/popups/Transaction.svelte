@@ -8,10 +8,11 @@
         CurrencyTypes,
         exchangeRates,
         formatCurrency,
+        isFiatCurrency,
     } from 'shared/lib/currency'
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile } from 'shared/lib/profile'
-    import { formatUnitPrecision } from 'shared/lib/units'
+    import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
     import { get } from 'svelte/store'
 
     export let locale
@@ -21,11 +22,16 @@
     export let unit = Unit.i
     export let onConfirm = () => {}
 
-    let displayedAmount = `${formatUnitPrecision(amount, unit)} (${localConvertToFiat(amount)})`
-
-    function localConvertToFiat(amount) {
+    let displayedAmount = getDisplayAmount()
+    
+    function getDisplayAmount() {
+        const isFiat = isFiatCurrency(unit)
         const activeCurrency = get(activeProfile)?.settings.currency ?? AvailableExchangeRates.USD
-        return formatCurrency(convertToFiat(amount, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[activeCurrency]))
+
+        let valInFiat = formatCurrency(convertToFiat(amount, $currencies[CurrencyTypes.USD], $exchangeRates[activeCurrency]), activeCurrency)
+        let valInIotas = isFiat ? changeUnits(amount, Unit.i, Unit.Mi) : formatUnitPrecision(amount, unit)
+        
+        return isFiat ? `${valInFiat} (${valInIotas} Mi)` : `${valInIotas} (${valInFiat})` 
     }
 
     function handleCancelClick() {
