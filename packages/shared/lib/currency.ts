@@ -153,6 +153,8 @@ export const convertToFiat = (amount: number, usdPrice: number, conversionRate: 
 /**
  * Converts fiat to iotas equivalent
  * 
+ * @method convertFromFiat
+ * 
  * @param {number} amount 
  * @param {number} usdPrice 
  * @param {number} conversionRate 
