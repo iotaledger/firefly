@@ -9,11 +9,6 @@
         TrinityLedger = 'trinityLedger',
         FireflyLedger = 'fireflyLedger',
     }
-
-    export enum LedgerApp {
-        Trinity = 'Trinity',
-        Firefly = 'Firefly',
-    }
 </script>
 
 <script lang="typescript">
@@ -26,7 +21,7 @@
     import { asyncRestoreBackup } from 'shared/lib/wallet'
     import { createEventDispatcher, setContext } from 'svelte'
     import { get, Writable, writable } from 'svelte/store'
-    import { BackupPassword, Balance, FileImport, FireflyLedgerImport, Import, LedgerImport, Success, TextImport } from './views/'
+    import { BackupPassword, FileImport, Import, Ledger, Success, TextImport } from './views/'
 
     export let locale
     export let mobile
@@ -38,9 +33,6 @@
         TextImport = 'textImport',
         FileImport = 'fileImport',
         LedgerImport = 'ledgerImport',
-        TrinityLedgerImport = 'trinityLedgerImport',
-        FireflyLedgerImport = 'fireflyLedgerImport',
-        Balance = 'balance',
         BackupPassword = 'backupPassword',
         Success = 'Success',
     }
@@ -114,20 +106,6 @@
                 nextState = ImportState.BackupPassword
                 break
             case ImportState.LedgerImport:
-                const { app } = params
-                if (app === LedgerApp.Trinity) {
-                    importType.set(ImportType.TrinityLedger)
-                    nextState = ImportState.TrinityLedgerImport
-                } else if (app === LedgerApp.Firefly) {
-                    importType.set(ImportType.FireflyLedger)
-                    nextState = ImportState.FireflyLedgerImport
-                }
-                break
-            case ImportState.FireflyLedgerImport:
-                balance = params.balance
-                nextState = ImportState.Balance
-                break
-            case ImportState.Balance:
                 nextState = ImportState.Success
                 break
             case ImportState.BackupPassword:
@@ -205,15 +183,7 @@
     </Transition>
 {:else if state === ImportState.LedgerImport}
     <Transition>
-        <LedgerImport on:next={_next} on:previous={_previous} {locale} {mobile} />
-    </Transition>
-{:else if state === ImportState.FireflyLedgerImport}
-    <Transition>
-        <FireflyLedgerImport on:next={_next} on:previous={_previous} {locale} {mobile} />
-    </Transition>
-{:else if state === ImportState.Balance}
-    <Transition>
-        <Balance on:next={_next} on:previous={_previous} {balance} {locale} {mobile} />
+        <Ledger on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
 {:else if state === ImportState.BackupPassword}
     <Transition>

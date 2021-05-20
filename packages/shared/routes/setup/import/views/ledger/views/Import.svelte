@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, Illustration, OnboardingLayout, Text } from 'shared/components'
     import { createEventDispatcher } from 'svelte'
-    import { LedgerApp } from '../Import.svelte'
+    import { LedgerApp } from '../Ledger.svelte'
 
     export let locale
     export let mobile
