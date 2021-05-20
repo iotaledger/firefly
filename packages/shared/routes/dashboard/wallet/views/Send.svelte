@@ -240,7 +240,7 @@
     }
     const handleMaxClick = () => {
         amount = isFiatCurrency(unit) ? convertToFiat(from.balance, $currencies[CurrencyTypes.USD], $exchangeRates[unit]).toString()
-                                             : formatUnitPrecision(from.balance, unit, false)
+                                      : formatUnitPrecision(from.balance, unit, false)
     }
 
     const updateFromSendParams = (s) => {
