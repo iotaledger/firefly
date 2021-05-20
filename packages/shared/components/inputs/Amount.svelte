@@ -29,8 +29,8 @@
 
     let profileCurrency: AvailableExchangeRates = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
 
-    // NOTE: Units is used for the dropdown, so it must contain both IOTA denominations and the user's selected fiat currency
-    const Units = [profileCurrency as string].concat(Object.values(Unit).filter((x) => x !== 'Pi').map(x => x as string))
+    /** NOTE: Units is used for the dropdown, so it must contain both IOTA denominations and the user's selected fiat currency */
+    const Units = [profileCurrency as string].concat(Object.values(Unit).filter(x => x !== 'Pi').map(x => x as string))
     const MAX_VALUE = 2779530283000000
 
     let dropdown = false
@@ -62,6 +62,8 @@
     const onSelect = (index) => {
         if (amount.length > 0) {
             if(isFiatCurrency(index)) {
+                if(isFiatCurrency(unit)) return
+
                 amount = amountToFiat(amount).slice(2)
             } else {
                 if(isFiatCurrency(unit)) {

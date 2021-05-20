@@ -166,7 +166,7 @@ export const convertFromFiat = (amount: number, usdPrice: number, conversionRate
 }
 
 /**
- * Determines if a currency is fiat or not
+ * Determines if a currency is fiat or not via its ISO 4217 code
  * 
  * @method isFiatCurrency
  * 
