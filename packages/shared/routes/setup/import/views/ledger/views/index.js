@@ -1,3 +1,6 @@
 export { default as Balance } from './Balance.svelte'
 export { default as FireflyImport } from './FireflyImport.svelte'
 export { default as Import } from './Import.svelte'
+export { default as InstallLedgerApp } from './InstallLedgerApp.svelte'
+export { default as TrinityImport } from './TrinityImport.svelte'
+export { default as GenerateNewAddress } from './GenerateNewAddress.svelte'

@@ -10,15 +10,19 @@
     import { createEventDispatcher, getContext } from 'svelte'
     import type { Writable } from 'svelte/store'
     import { ImportType } from '../../Import.svelte'
-    import { Balance, FireflyImport, Import } from './views/'
+    import { Balance, FireflyImport, Import, InstallLedgerApp, TrinityImport, GenerateNewAddress } from './views/'
 
     export let locale
     export let mobile
 
     enum State {
         Init = 'init',
-        TrinityLedgerImport = 'trinityLedgerImport',
-        FireflyLedgerImport = 'fireflyLedgerImport',
+        FireflyImport = 'fireflyImport',
+        TrinityImport = 'trinityImport',
+        InstallLedgerApp = 'installLedgerApp',
+        GenerateAddress = 'generateAddress',
+        AccountIndex = 'accountIndex',
+        TransferFunds = 'transferFunds',
         Balance = 'balance',
     }
 
@@ -38,15 +42,24 @@
                 const { app } = params
                 if (app === LedgerApp.Trinity) {
                     importType.set(ImportType.TrinityLedger)
-                    nextState = State.TrinityLedgerImport
+                    nextState = State.TrinityImport
                 } else if (app === LedgerApp.Firefly) {
                     importType.set(ImportType.FireflyLedger)
-                    nextState = State.FireflyLedgerImport
+                    nextState = State.FireflyImport
                 }
                 break
-            case State.FireflyLedgerImport:
+            case State.FireflyImport:
                 balance = params.balance
                 nextState = State.Balance
+                break
+            case State.TrinityImport:
+                nextState = State.InstallLedgerApp
+                break
+            case State.InstallLedgerApp:
+                nextState = State.GenerateAddress
+                break
+            case State.GenerateAddress:
+                nextState = State.AccountIndex
                 break
             case State.Balance:
                 dispatch('next')
@@ -72,9 +85,21 @@
     <Transition>
         <Import on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
-{:else if state === State.FireflyLedgerImport}
+{:else if state === State.FireflyImport}
     <Transition>
         <FireflyImport on:next={_next} on:previous={_previous} {locale} {mobile} />
+    </Transition>
+{:else if state === State.TrinityImport}
+    <Transition>
+        <TrinityImport on:next={_next} on:previous={_previous} {locale} {mobile} />
+    </Transition>
+{:else if state === State.InstallLedgerApp}
+    <Transition>
+        <InstallLedgerApp on:next={_next} on:previous={_previous} {locale} {mobile} />
+    </Transition>
+{:else if state === State.GenerateAddress}
+    <Transition>
+        <GenerateNewAddress on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
 {:else if state === State.Balance}
     <Transition>

@@ -154,6 +154,16 @@
             "body": "Your wallet password is also used to encrypt a Stronghold backup. Enter your wallet password to save your recovery phrase backup to a file.",
             "restoring": "Restoring from ledger..."
         },
+        "importFromTrinityLedger": {
+            "title": "Trinity Ledger migration introduction screen",
+            "body": "This screen explains the main steps of this migration process and provides a step-by-step video guide."
+        },
+        "generateNewLedgerAddress": {
+            "body": "You need to generate new address in order to transfer your old Trinity account to Firefly.",
+            "generating": "Generating address",
+            "successTitle": "New address generated",
+            "successBody": "Your new Firefly Ledger address is successfully generated and you can now continue the migration process."
+        },
         "importBackupPassword": {
             "title": "Restore your wallets from a SeedVault or Stronghold",
             "body1": "Please enter your backup password.",
@@ -632,7 +642,8 @@
         "searchBalances": "Search for balances",
         "searchAgain": "Search again",
         "searching": "Searching...",
-        "closeFirefly": "Close Firefly"
+        "closeFirefly": "Close Firefly",
+        "generateAddress": "Generate address"
     },
     "general": {
         "password": "Password",
