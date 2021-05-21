@@ -152,8 +152,6 @@
                     amountError = locale('error.send.amountTooHigh')
                 } else if (amountRaw <= 0) {
                     amountError = locale('error.send.amountZero')
-                } else if (amountRaw < 1000000) {
-                    amountError = locale('error.send.sendingDust')
                 }
             }
         }
