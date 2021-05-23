@@ -164,20 +164,35 @@
             "successTitle": "New address generated",
             "successBody": "Your new Firefly Ledger address is successfully generated and you can now continue the migration process."
         },
+        "selectLedgerAccountIndex": {
+            "title": "Choose Ledger account index",
+            "body": "Choose your Ledger account index. Choose your Ledger account index. Choose your Ledger account index. Choose your Ledger account index."
+        },
+        "migrateLedgerFunds": {
+            "title": "Transfer your funds",
+            "body1": "This is an automated process to transfer your existing funds to your new wallet. In this process we will check for spent addresses that weaken your security.",
+            "body2": "It may take some time. Do not turn off your device during this process.",
+            "transfer": "Transfer funds",
+            "transfering": "Transferring funds..."
+        },
         "importBackupPassword": {
             "title": "Restore your wallets from a SeedVault or Stronghold",
             "body1": "Please enter your backup password.",
             "body2": "This is the password you set when you first created your backup."
         },
         "importSuccess": {
-            "title": "You have successfully recovered your backup",
-            "body": "You can now set up your new profile.",
-            "seedvaultTitle": "Successfully imported",
-            "seedvaultBody": "Your password is correct, you can now continue.",
-            "strongholdTitle": "Successfully imported",
-            "strongholdBody": "Your password is correct, you can now continue.",
-            "fireflyLedgerTitle": "Successfully imported",
-            "fireflyLedgerBody": "Your Ledger account is successfully recovered and  you can now continue."
+            "default": {
+                "title": "You have successfully recovered your backup",
+                "body": "You can now set up your new profile."
+            },
+            "fireflyLedger": {
+                "title": "Successfully imported",
+                "body": "Your Ledger account is successfully recovered and  you can now continue."
+            },
+            "trinityLedger": {
+                "title": "Funds successfully transferred",
+                "body": "Your Ledger account is successfully recovered and you can now remove the old IOTA leger app from your device."
+            }
         },
         "migrate": {
             "title": "Migrate your funds",

@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
-    import { createEventDispatcher, getContext } from 'svelte'
+    import { createEventDispatcher, getContext, onMount } from 'svelte'
     import type { Writable } from 'svelte/store'
     import { ImportType } from '../Import.svelte'
 
@@ -9,6 +9,19 @@
 
     const dispatch = createEventDispatcher()
     const importType = getContext<Writable<ImportType>>('importType')
+
+    let localizedGroup = 'default'
+
+    onMount(() => {
+        switch ($importType) {
+            case ImportType.FireflyLedger:
+                localizedGroup = 'fireflyLedger'
+                break
+            case ImportType.TrinityLedger:
+                localizedGroup = 'trinityLedger'
+                break
+        }
+    })
 
     function handleContinueClick() {
         dispatch('next')
@@ -27,12 +40,8 @@
                 <div class="bg-green-100 rounded-2xl relative -top-10">
                     <Icon icon="success-check" classes="text-white" />
                 </div>
-                <Text type="h2" classes="mb-5 text-center">
-                    {locale(`views.importSuccess.${$importType === ImportType.FireflyLedger ? 'fireflyLedgerTitle' : 'title'}`)}
-                </Text>
-                <Text type="p" secondary classes="mb-2">
-                    {locale(`views.importSuccess.${$importType === ImportType.FireflyLedger ? 'fireflyLedgerBody' : 'body'}`)}
-                </Text>
+                <Text type="h2" classes="mb-5 text-center">{locale(`views.importSuccess.${localizedGroup}.title`)}</Text>
+                <Text type="p" secondary classes="mb-2">{locale(`views.importSuccess.${localizedGroup}.body`)}</Text>
             </div>
         </div>
         <div slot="leftpane__action">
@@ -40,8 +49,10 @@
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-green dark:bg-gray-900">
             <!-- TODO: ledger, add success for ledger -->
-            <Animation
-                animation={$importType === ImportType.Seed || $importType === ImportType.Mnemonic ? 'import-from-text-success-desktop' : 'import-from-file-success-desktop'} />
+            {#if $importType !== ImportType.TrinityLedger}
+                <Animation
+                    animation={$importType === ImportType.Seed || $importType === ImportType.Mnemonic ? 'import-from-text-success-desktop' : 'import-from-file-success-desktop'} />
+            {/if}
         </div>
     </OnboardingLayout>
 {/if}

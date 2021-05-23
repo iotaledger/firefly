@@ -8,9 +8,19 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
     import { createEventDispatcher, getContext } from 'svelte'
+    import { get } from 'svelte/store'
     import type { Writable } from 'svelte/store'
     import { ImportType } from '../../Import.svelte'
-    import { Balance, FireflyImport, Import, InstallLedgerApp, TrinityImport, GenerateNewAddress } from './views/'
+    import {
+        AccountIndex,
+        Balance,
+        Migrate,
+        FireflyImport,
+        Import,
+        InstallLedgerApp,
+        TrinityImport,
+        GenerateNewAddress,
+    } from './views/'
 
     export let locale
     export let mobile
@@ -22,7 +32,7 @@
         InstallLedgerApp = 'installLedgerApp',
         GenerateAddress = 'generateAddress',
         AccountIndex = 'accountIndex',
-        TransferFunds = 'transferFunds',
+        Migrate = 'migrate',
         Balance = 'balance',
     }
 
@@ -61,7 +71,18 @@
             case State.GenerateAddress:
                 nextState = State.AccountIndex
                 break
+            case State.AccountIndex:
+                balance = params.balance
+                nextState = State.Balance
+                break
             case State.Balance:
+                if (get(importType) === ImportType.FireflyLedger) {
+                    dispatch('next')
+                } else if (get(importType) === ImportType.TrinityLedger) {
+                    nextState = State.Migrate
+                }
+                break
+            case State.Migrate:
                 dispatch('next')
                 break
         }
@@ -100,6 +121,14 @@
 {:else if state === State.GenerateAddress}
     <Transition>
         <GenerateNewAddress on:next={_next} on:previous={_previous} {locale} {mobile} />
+    </Transition>
+{:else if state === State.AccountIndex}
+    <Transition>
+        <AccountIndex on:next={_next} on:previous={_previous} {locale} {mobile} />
+    </Transition>
+{:else if state === State.Migrate}
+    <Transition>
+        <Migrate on:next={_next} on:previous={_previous} {balance} {locale} {mobile} />
     </Transition>
 {:else if state === State.Balance}
     <Transition>
