@@ -871,6 +871,9 @@
             "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
             "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase",
             "phraseCaseWord": "The word \"{word}\" should be lower case"
+        },
+        "ledger": {
+            "notFound": "Ledger device not found."
         }
     },
     "tooltips": {

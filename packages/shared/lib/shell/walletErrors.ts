@@ -51,7 +51,7 @@ const errorMessages: {
     'LedgerMiscError': 'error.global.generic',
     'LedgerDongleLocked': 'error.global.generic',
     'LedgerDeniedByUser': 'error.global.generic',
-    'LedgerDeviceNotFound': 'error.global.generic',
+    'LedgerDeviceNotFound': 'error.ledger.notFound',
     'LedgerEssenceTooLarge': 'error.global.generic',
     // Dust output
     'DustError': 'error.send.leavingDust',
