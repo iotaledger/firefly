@@ -35,7 +35,7 @@
         if (os) {
             openSnapshotPopup()
         }
-    });
+    })
 
     onMount(async () => {
         api.setStrongholdPasswordClearInterval({ secs: STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, nanos: 0 })

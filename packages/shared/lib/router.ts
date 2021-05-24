@@ -1,6 +1,6 @@
 import { cleanupSignup, login, strongholdPassword, walletPin } from 'shared/lib/app'
-import { profiles, updateProfile } from 'shared/lib/profile'
-import { AccountRoutes, AccountType, AppRoute, SettingsRoutes, SetupType, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
+import { activeProfile, profiles, ProfileType, updateProfile } from 'shared/lib/profile'
+import { AccountRoutes, AppRoute, SettingsRoutes, SetupType, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
 import { selectedAccountId } from 'shared/lib/wallet'
 import { get, readable, writable } from 'svelte/store'
 import { deepLinkRequestActive } from './deepLinking'
@@ -39,11 +39,6 @@ export const path = readable<string>(null, (set) => {
  * Onboarding/setup type
  */
 export const walletSetupType = writable<SetupType>(null)
-
-/**
- * Onboarding/setup account type
- */
-let walletAccountType = writable<AccountType>(null)
 
 /*
  * Current view
@@ -91,6 +86,7 @@ export const initRouter = () => {
     } else {
         setRoute(AppRoute.Welcome)
     }
+
 }
 
 // TODO: only handle route changes, not app variables
@@ -141,11 +137,10 @@ export const routerNext = (event) => {
             }
             break
         case AppRoute.Create:
-            const { accountType } = params
-            walletAccountType.set(accountType)
-            if (accountType === AccountType.Software) {
+            const profileType = get(activeProfile)?.profileType
+            if (profileType === ProfileType.Software) {
                 nextRoute = AppRoute.Secure
-            } else if (accountType === AccountType.Ledger) {
+            } else if (profileType === ProfileType.Ledger || ProfileType.LedgerSimulator) {
                 nextRoute = AppRoute.LedgerSetup
             }
             break
@@ -167,10 +162,10 @@ export const routerNext = (event) => {
             if (pin) {
                 walletPin.set(pin)
                 const walletSetupType_ = get(walletSetupType)
-                const walletAccountType_ = get(walletAccountType)
+                const profileType = get(activeProfile)?.profileType
                 if (
                     [SetupType.Mnemonic, SetupType.Stronghold, SetupType.FireflyLedger, SetupType.TrinityLedger].includes(walletSetupType_) ||
-                    walletAccountType_ === AccountType.Ledger
+                    (profileType === ProfileType.Ledger || ProfileType.LedgerSimulator)
                 ) {
                     nextRoute = AppRoute.Congratulations
                 } else {

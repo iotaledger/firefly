@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
+    import { ProfileType, setProfileType } from 'shared/lib/profile'
     import { createEventDispatcher } from 'svelte'
     import { ImportType } from '../Import.svelte'
 
@@ -8,7 +9,9 @@
 
     const dispatch = createEventDispatcher()
 
-    function handleContinueClick(type) {
+    function handleContinueClick(type: ImportType) {
+        const profileType = type === ImportType.Ledger ? ProfileType.Ledger : ProfileType.Software
+        setProfileType(profileType)
         dispatch('next', { type })
     }
     function handleBackClick() {

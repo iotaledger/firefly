@@ -21,7 +21,7 @@ import type {
 import type { Payload, Transaction } from 'shared/lib/typings/message'
 import type { MigrationBundle, MigrationData, SendMigrationBundleResponse } from 'shared/lib/typings/migration'
 import { formatUnitBestMatch } from 'shared/lib/units'
-import { derived, get, writable, Writable } from 'svelte/store'
+import { get, writable, Writable } from 'svelte/store'
 import type { Account, SyncedAccount } from './typings/account'
 import type { Address } from './typings/address'
 import type { Actor } from './typings/bridge'
@@ -82,12 +82,6 @@ type WalletState = {
     }>
 }
 
-export enum ProfileType {
-    Software = 'Software',
-    Ledger = 'Ledger',
-    LedgerSimulator = 'LedgerSimulator'
-}
-
 type BalanceTimestamp = {
     timestamp: number,
     balance: number
@@ -128,18 +122,6 @@ export const wallet = writable<WalletState>({
             to: string
         }
     }>({})
-})
-
-export const profileType = derived(wallet, $wallet => {
-    const accounts = get($wallet.accounts)
-    if (accounts.length === 0) {
-        return null
-    }
-    switch (accounts[0].signerType.type) {
-        case 'Stronghold': return ProfileType.Software
-        case 'LedgerNano': return ProfileType.Ledger
-        case 'LedgerNanoSimulator': return ProfileType.LedgerSimulator
-    }
 })
 
 export const resetWallet = () => {

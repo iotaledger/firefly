@@ -30,11 +30,6 @@ export enum SetupType {
     FireflyLedger = 'fireflyLedger',
 }
 
-export enum AccountType {
-    Software = 'Software',
-    Ledger = 'Ledger'
-}
-
 export enum WalletRoutes {
     Init = 'init',
     Account = 'account',

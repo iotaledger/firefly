@@ -2,6 +2,7 @@
     import { Button, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
+    import { ledgerSimulator } from 'shared/lib/profile'
     import { LedgerStatus } from 'shared/lib/typings/wallet'
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
@@ -11,7 +12,6 @@
     export let mobile
 
     let creatingAccount = false
-    let simulator = false
     let checkIfLedgerIsConnected = true
     let isLedgerConnected = true
 
@@ -46,7 +46,7 @@
     }
 
     function getLedgerDeviceStatus() {
-        api.getLedgerDeviceStatus(simulator, {
+        api.getLedgerDeviceStatus(ledgerSimulator, {
             onSuccess(response) {
                 isLedgerConnected = response.payload.type === LedgerStatus.Connected
                 if (isLedgerConnected) {
@@ -73,7 +73,7 @@
                     network: officialNetwork,
                 },
                 alias: `${locale('general.account')} 1`,
-                signerType: { type: simulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
+                signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
             },
             {
                 onSuccess(createAccountResponse) {

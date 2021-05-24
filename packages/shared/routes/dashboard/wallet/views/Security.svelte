@@ -4,9 +4,9 @@
     import { diffDates, getBackupWarningColor, isRecentDate } from 'shared/lib/helpers'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, isStrongholdLocked, profiles } from 'shared/lib/profile'
+    import { activeProfile, isStrongholdLocked, profiles, ProfileType } from 'shared/lib/profile'
     import { LedgerStatus } from 'shared/lib/typings/wallet'
-    import { api, profileType, ProfileType } from 'shared/lib/wallet'
+    import { api } from 'shared/lib/wallet'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
 
@@ -20,7 +20,8 @@
     let isCheckingLedger
     let ledgerDeviceStatus
     let hardwareDeviceMessage
-    let isSoftwareAccountProfile = true
+
+    $: isSoftwareProfile = $activeProfile?.profileType === ProfileType.Software
 
     function setup() {
         const ap = get(activeProfile)
@@ -58,7 +59,7 @@
     function checkLedgerConnection() {
         return new Promise((resolve, reject) => {
             // TODO: ledger fix this
-            api.getLedgerDeviceStatus($profileType === 'LedgerNanoSimulator', {
+            api.getLedgerDeviceStatus($activeProfile?.profileType === ProfileType.LedgerSimulator, {
                 onSuccess(response) {
                     ledgerDeviceStatus = response.payload.type
                     resolve()
@@ -82,7 +83,7 @@
     }
 
     $: {
-        if (!isCheckingLedger && $profileType !== ProfileType.Software) {
+        if (!isCheckingLedger && !isSoftwareProfile) {
             checkLedger()
         }
     }
@@ -101,8 +102,6 @@
         }
     }
 
-    $: isSoftwareAccountProfile = $profileType === ProfileType.Software
-
     const unsubscribe = profiles.subscribe(() => {
         setup()
     })
@@ -118,7 +117,7 @@
     <Text type="h5" classes="mb-5">{locale('general.security')}</Text>
     <div class="grid grid-cols-2 gap-3 auto-rows-max w-full overflow-y-auto flex-auto h-1 -mr-2 pr-2 scroll-secondary">
         <!-- TODO: ledger, fix UI -->
-        {#if isSoftwareAccountProfile}
+        {#if isSoftwareProfile}
             <!-- Stronghold backup -->
             <SecurityTile
                 title={locale('views.dashboard.security.strongholdBackup.title')}
@@ -146,7 +145,7 @@
             warning={!$versionDetails.upToDate}
             icon="firefly"
             onClick={() => handleSecurityTileClick('version')} />
-        {#if isSoftwareAccountProfile}
+        {#if isSoftwareProfile}
             <!-- Stronghold status -->
             <SecurityTile
                 title={locale('views.dashboard.security.strongholdStatus.title')}

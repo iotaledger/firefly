@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Icon, Scroller, SettingsNavigator, Text } from 'shared/components'
     import { loggedIn } from 'shared/lib/app'
+    import { activeProfile, ProfileType } from 'shared/lib/profile'
     import { settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import { SettingsIcons } from 'shared/lib/typings/icons'
     import {
@@ -13,7 +14,6 @@
         SettingsRoutes,
         SettingsRoutesNoProfile,
     } from 'shared/lib/typings/routes'
-    import { profileType, ProfileType } from 'shared/lib/wallet'
     import { onMount } from 'svelte'
     import { Advanced, General, Help, Security } from './'
 
@@ -30,8 +30,10 @@
     let settings
 
     const securitySettings = Object.assign({}, SecuritySettings)
+
+    $: isSoftwareProfile = $activeProfile?.profileType === ProfileType.Software
     // TODO: ledger, The operand of a 'delete' operator cannot be a read-only property
-    if ($profileType !== ProfileType.Software) {
+    $: if (!isSoftwareProfile) {
         delete securitySettings.ExportStronghold
         delete securitySettings.ChangePassword
     }

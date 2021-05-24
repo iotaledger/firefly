@@ -1,7 +1,8 @@
 import { AvailableExchangeRates } from 'shared/lib/currency'
 import { persistent } from 'shared/lib/helpers'
 import { generateRandomId } from 'shared/lib/utils'
-import { asyncRemoveStorage, destroyActor, getStoragePath, getWalletStoragePath } from 'shared/lib/wallet'
+import type { WalletAccount } from 'shared/lib/wallet'
+import { destroyActor, getStoragePath, getWalletStoragePath } from 'shared/lib/wallet'
 import { derived, get, Readable, writable } from 'svelte/store'
 import type { ChartSelectors } from './chart'
 import { Electron } from './electron'
@@ -32,10 +33,11 @@ export interface Profile {
      * User settings
      */
     settings: UserSettings
-    hiddenAccounts?: string[],
+    hiddenAccounts?: string[]
     migratedTransactions?: MigratedTransaction[]
     isDeveloperProfile: boolean
     gapLimit?: number
+    profileType?: ProfileType
 }
 
 /**
@@ -53,6 +55,15 @@ export interface UserSettings {
     hideNetworkStatistics?: boolean
 }
 
+/**
+ * Profile types
+ */
+export enum ProfileType {
+    Software = 'Software',
+    Ledger = 'Ledger',
+    LedgerSimulator = 'LedgerSimulator'
+}
+
 export const activeProfileId = writable<string | null>(null)
 
 export const profiles = persistent<Profile[]>('profiles', [])
@@ -62,6 +73,9 @@ export const profileInProgress = persistent<string | undefined>('profileInProgre
 export const newProfile = writable<Profile | null>(null)
 
 export const isStrongholdLocked = writable<boolean>(true)
+
+// Dev flag to create simulator ledger profiles
+export const ledgerSimulator = false
 
 /**
  * Currently active profile
@@ -121,6 +135,7 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
                 timeframe: HistoryDataProps.SEVEN_DAYS
             }
         },
+        profileType: null
     }
 
     newProfile.set(profile)
@@ -268,7 +283,7 @@ export const removeProfileFolder = async (profileName) => {
  *
  * @returns {void}
  */
-export const cleanupEmptyProfiles = async() => {
+export const cleanupEmptyProfiles = async () => {
     try {
         const userDataPath = await Electron.getUserDataPath()
         const profileStoragePath = getWalletStoragePath(userDataPath)
@@ -281,10 +296,57 @@ export const cleanupEmptyProfiles = async() => {
         const appProfiles = get(profiles).map(p => p.name)
         for (const storedProfile of storedProfiles) {
             if (!appProfiles.includes(storedProfile)) {
-                await removeProfileFolder(storedProfile) 
+                await removeProfileFolder(storedProfile)
             }
         }
     } catch (err) {
         console.error(err)
+    }
+}
+
+/**
+ * Set profile type if missing (for back compatibility purposes)
+ * 
+ * @method setProfileType
+ * 
+ * @param {WalletAccount[]} accounts 
+ * 
+ * @returns {void}
+ */
+export const setProfileType = (profileType: ProfileType) => {
+    if (ledgerSimulator && profileType === ProfileType.Ledger) {
+        updateProfile('settings.profileType', ProfileType.LedgerSimulator)
+    }
+    else {
+        updateProfile('settings.profileType', profileType)
+    }
+}
+
+/**
+ * Set profile type for back compatibility purposes
+ * 
+ * @method setMissingProfileType
+ * 
+ * @param {WalletAccount[]} accounts 
+ * 
+ * @returns {void}
+ */
+export const setMissingProfileType = (accounts: WalletAccount[] = []) => {
+    let accountType = null
+    if (accounts.length) {
+        switch (accounts[0]?.signerType?.type) {
+            case 'Stronghold':
+                accountType = ProfileType.Software
+                break
+            case 'LedgerNano':
+                accountType = ProfileType.Ledger
+                break
+            case 'LedgerNanoSimulator':
+                accountType = ProfileType.LedgerSimulator
+                break
+        }
+    }
+    if (accountType) {
+        updateProfile('profileType', accountType)
     }
 }
