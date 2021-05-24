@@ -165,7 +165,7 @@ export const routerNext = (event) => {
                 const profileType = get(activeProfile)?.profileType
                 if (
                     [SetupType.Mnemonic, SetupType.Stronghold, SetupType.FireflyLedger, SetupType.TrinityLedger].includes(walletSetupType_) ||
-                    (profileType === ProfileType.Ledger || ProfileType.LedgerSimulator)
+                    (profileType === ProfileType.Ledger || profileType === ProfileType.LedgerSimulator)
                 ) {
                     nextRoute = AppRoute.Congratulations
                 } else {
