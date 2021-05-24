@@ -309,7 +309,7 @@ export const cleanupEmptyProfiles = async () => {
  * 
  * @method setProfileType
  * 
- * @param {WalletAccount[]} accounts 
+ * @param {ProfileType} profileType 
  * 
  * @returns {void}
  */
