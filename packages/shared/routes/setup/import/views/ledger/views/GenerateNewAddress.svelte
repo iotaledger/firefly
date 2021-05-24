@@ -56,7 +56,7 @@
                 <Text type="h2" classes="mb-5">{locale('general.generateNewAddress')}</Text>
                 <Text type="p" secondary>{locale('views.generateNewLedgerAddress.body')}</Text>
                 {#if newAddress}
-                    <div class="mt-6 rounded-md bg-gray-50 dark:bg-gray-700 p-4 text-center">
+                    <div class="mt-6 rounded-lg bg-gray-50 dark:bg-gray-700 p-4 text-center">
                         <Text type="pre">{newAddress}</Text>
                     </div>
                 {/if}

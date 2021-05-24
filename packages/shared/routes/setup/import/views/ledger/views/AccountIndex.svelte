@@ -25,7 +25,7 @@
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-5">{locale('views.selectLedgerAccountIndex.title')}</Text>
             <Text type="p" secondary>{locale('views.selectLedgerAccountIndex.body')}</Text>
-            <Number bind:value={index} />
+            <Number bind:value={index} autofocus classes="mt-8" />
         </div>
         <div slot="leftpane__action" class="flex flex-col space-y-4">
             <Button classes="w-full" onClick={handleContinueClick}>{locale('actions.confirm')}</Button>
