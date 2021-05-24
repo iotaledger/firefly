@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { AccountTile, Button, Text } from 'shared/components'
-    import { activeProfile, ProfileType } from 'shared/lib/profile'
+    import { activeProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { selectedAccountId, WalletAccount } from 'shared/lib/wallet'
@@ -18,8 +18,6 @@
     const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
 
     $: waitingChrysalis = $activeProfile?.migratedTransactions?.length
-    $: isLedgerProfile =
-        $activeProfile?.profileType === ProfileType.Ledger || $activeProfile?.profileType === ProfileType.LedgerSimulator
 
     function handleAccountClick(accountId) {
         selectedAccountId.set(accountId)
@@ -53,7 +51,7 @@
                             hidden={hiddenAccounts.includes(account.id)}
                             disabled={waitingChrysalis}
                             onClick={() => handleAccountClick(account.id)}
-                            ledger={isLedgerProfile} />
+                            ledger={!$isSoftwareProfile} />
                     {/each}
                 </div>
             {:else}

@@ -4,7 +4,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import passwordInfo from 'shared/lib/password'
     import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, ProfileType, updateProfile } from 'shared/lib/profile'
+    import { activeProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
     import { getDefaultStrongholdName, PIN_LENGTH } from 'shared/lib/utils'
     import { api, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
@@ -44,7 +44,6 @@
     let passwordChangeMessage = ''
 
     $: passwordStrength = zxcvbn(newPassword)
-    $: isSoftwareProfile = $activeProfile?.profileType === ProfileType.Software
 
     function handleExportClick() {
         resetErrors()
@@ -266,7 +265,7 @@
 
 <div>
     <!-- TODO: ledger, remove this also from settings index -->
-    {#if isSoftwareProfile}
+    {#if $isSoftwareProfile}
         <section id="exportStronghold" class="w-3/4">
             <Text type="h4" classes="mb-3">{locale('views.settings.exportStronghold.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.exportStronghold.description')}</Text>
@@ -291,7 +290,7 @@
     </section>
     <HR classes="pb-5 mt-5 justify-center" />
     <!-- TODO: ledger, remove this also from settings index -->
-    {#if isSoftwareProfile}
+    {#if $isSoftwareProfile}
         <section id="changePassword" class="w-3/4">
             <form id="form-change-password" on:submit={changePassword}>
                 <Text type="h4" classes="mb-3">{locale('views.settings.changePassword.title')}</Text>

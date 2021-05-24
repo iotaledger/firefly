@@ -7,11 +7,11 @@
     import { openPopup } from 'shared/lib/popup'
     import {
         activeProfile,
+        isSoftwareProfile,
         isStrongholdLocked,
         MigratedTransaction,
-        ProfileType,
-        updateProfile,
         setMissingProfileType,
+        updateProfile,
     } from 'shared/lib/profile'
     import { walletRoute } from 'shared/lib/router'
     import type { Transaction } from 'shared/lib/typings/message'
@@ -117,7 +117,6 @@
     setContext<Readable<BalanceHistory>>('walletBalanceHistory', walletBalanceHistory)
 
     let isGeneratingAddress = false
-    $: isSoftwareProfile = $activeProfile?.profileType === ProfileType.Software
 
     $: if ($accountsLoaded) {
         // update profileType if it is missing
@@ -253,7 +252,7 @@
             })
         }
 
-        if (isSoftwareProfile) {
+        if ($isSoftwareProfile) {
             api.getStrongholdStatus({
                 onSuccess(strongholdStatusResponse) {
                     if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
@@ -408,7 +407,7 @@
             }
         }
 
-        if (isSoftwareProfile) {
+        if ($isSoftwareProfile) {
             api.getStrongholdStatus({
                 onSuccess(strongholdStatusResponse) {
                     if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
@@ -475,7 +474,7 @@
             )
         }
 
-        if (isSoftwareProfile) {
+        if ($isSoftwareProfile) {
             api.getStrongholdStatus({
                 onSuccess(strongholdStatusResponse) {
                     if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
@@ -547,7 +546,7 @@
             })
         }
 
-        if (isSoftwareProfile) {
+        if ($isSoftwareProfile) {
             api.getStrongholdStatus({
                 onSuccess(strongholdStatusResponse) {
                     if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {

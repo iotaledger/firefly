@@ -93,6 +93,10 @@ activeProfileId.subscribe((profileId) => {
     Electron.updateActiveProfile(profileId)
 })
 
+export const isSoftwareProfile: Readable<Boolean> = derived(activeProfile, $activeProfile => {
+    return $activeProfile?.profileType === ProfileType.Software
+})
+
 /**
  * Saves profile in persistent storage
  *
