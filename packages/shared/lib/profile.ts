@@ -315,10 +315,10 @@ export const cleanupEmptyProfiles = async () => {
  */
 export const setProfileType = (profileType: ProfileType) => {
     if (ledgerSimulator && profileType === ProfileType.Ledger) {
-        updateProfile('settings.profileType', ProfileType.LedgerSimulator)
+        updateProfile('profileType', ProfileType.LedgerSimulator)
     }
     else {
-        updateProfile('settings.profileType', profileType)
+        updateProfile('profileType', profileType)
     }
 }
 
