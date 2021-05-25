@@ -21,7 +21,6 @@
     let ledgerDeviceStatus
     let hardwareDeviceMessage
     let hardwareDeviceColor = 'gray'
-    let hardwareDeviceWarning = false
 
     function setup() {
         const ap = get(activeProfile)
@@ -93,22 +92,16 @@
             case LedgerStatus.Connected:
                 hardwareDeviceMessage = 'detected'
                 hardwareDeviceColor = 'blue'
-                hardwareDeviceWarning = false
                 break
             case LedgerStatus.Disconnected:
                 hardwareDeviceMessage = 'noneDetected'
-                hardwareDeviceColor = 'yellow'
-                hardwareDeviceWarning = true
+                hardwareDeviceColor = 'gray'
                 break
             case LedgerStatus.Locked:
                 hardwareDeviceMessage = 'locked'
-                hardwareDeviceColor = 'blue'
-                hardwareDeviceWarning = false
+                hardwareDeviceColor = 'gray'
                 break
         }
-        hardwareDeviceMessage = 'noneDetected'
-        hardwareDeviceColor = 'yellow'
-        hardwareDeviceWarning = true
     }
 
     const unsubscribe = profiles.subscribe(() => {
@@ -174,7 +167,6 @@
                 icon="chip"
                 onClick={checkLedgerConnection}
                 classes="col-span-2"
-                warning={hardwareDeviceWarning}
                 wide />
         {/if}
     </div>
