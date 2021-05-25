@@ -7,7 +7,7 @@
     import { chrysalisLive, ongoingSnapshot, openSnapshotPopup, pollChrysalisStatus } from 'shared/lib/migration'
     import { NOTIFICATION_TIMEOUT_NEVER, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup } from 'shared/lib/popup'
-    import { activeProfile } from 'shared/lib/profile'
+    import { activeProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { accountRoute, dashboardRoute, routerNext, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
     import { parseDeepLink } from 'shared/lib/utils'
@@ -38,7 +38,9 @@
     })
 
     onMount(async () => {
-        api.setStrongholdPasswordClearInterval({ secs: STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, nanos: 0 })
+        if ($isSoftwareProfile) {
+            api.setStrongholdPasswordClearInterval({ secs: STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, nanos: 0 })
+        }
 
         // TODO: Re-enable deep links
         // Electron.DeepLinkManager.requestDeepLink()
