@@ -61,23 +61,30 @@
     }
 
     const onSelect = (index) => {
-        if (amount.length > 0) {
-            if(isFiatCurrency(index)) {
-                if(isFiatCurrency(unit)) return
+        updateUnit(index)
+    }
 
-                amount = amountToFiat(amount).slice(2)
+    const updateUnit = (toUnit) => {
+        convertAmount(unit, toUnit)
+
+        unit = toUnit
+    }
+
+    const convertAmount = (fromUnit, toUnit) => {
+        if(amount.length <= 0 || fromUnit === toUnit) return
+
+        if(isFiatCurrency(toUnit)) {
+            amount = amountToFiat(amount).slice(2)
+        } else {
+            if(isFiatCurrency(fromUnit)) {
+                let amountAsI = convertFromFiat(amount, $currencies[CurrencyTypes.USD], $exchangeRates[profileCurrency])
+                amount = formatUnitPrecision(amountAsI, toUnit).replace(toUnit, '')
             } else {
-                if(isFiatCurrency(unit)) {
-                    let amountAsI = convertFromFiat(amount, $currencies[CurrencyTypes.USD], $exchangeRates[profileCurrency])
-                    amount = formatUnitPrecision(amountAsI, index).replace(index, '')
-                } else {
-                    amount = formatUnitPrecision(changeUnits(parseCurrency(amount), unit, Unit.i), index, false)
-                }
+                amount = formatUnitPrecision(changeUnits(parseCurrency(amount), fromUnit, Unit.i), toUnit, false)
             }
         }
-
-        unit = index
     }
+
 
     const focusItem = (itemId) => {
         let elem = document.getElementById(itemId)
