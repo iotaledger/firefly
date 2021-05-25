@@ -5,46 +5,45 @@
     import { ledgerSimulator } from 'shared/lib/profile'
     import { LedgerStatus } from 'shared/lib/typings/wallet'
     import { api } from 'shared/lib/wallet'
-    import { createEventDispatcher, onDestroy } from 'svelte'
+    import { createEventDispatcher, onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
 
     export let locale
     export let mobile
 
-    const openLedgerNotConnectedPopup = () => {
+    let restoring = false
+    let isLedgerConnected = true
+    let interval
+
+    const dispatch = createEventDispatcher()
+
+    onMount(() => {
+        getLedgerDeviceStatus()
+        interval = setInterval(() => {
+            getLedgerDeviceStatus()
+        }, 1000)
+    })
+
+    onDestroy(() => {
+        if (interval) {
+            clearTimeout(interval)
+        }
+    })
+
+    function openLedgerNotConnectedPopup() {
         openPopup({
             type: 'ledgerNotConnected',
             hideClose: true,
             props: {
+                handleClose: handleClosePopup,
                 message: locale('views.importFromLedger.ledgerNotConnected'),
             },
         })
     }
 
-    let restoring = false
-    let checkIfLedgerIsConnected = true
-    let isLedgerConnected = true
-
-    const unsubscribe = popupState.subscribe((state) => {
-        if (!(state.active || isLedgerConnected)) {
-            checkIfLedgerIsConnected = false
-            handleBackClick()
-        }
-    })
-
-    onDestroy(() => {
-        checkIfLedgerIsConnected = false
-        unsubscribe()
-    })
-
-    const dispatch = createEventDispatcher()
-
     function handleLedgerDeviceNotConnected() {
-        if (checkIfLedgerIsConnected) {
-            if (!get(popupState).active) {
-                openLedgerNotConnectedPopup()
-            }
-            setTimeout(getLedgerDeviceStatus, 1000)
+        if (!get(popupState).active) {
+            openLedgerNotConnectedPopup()
         }
     }
 
@@ -63,8 +62,6 @@
             },
         })
     }
-
-    getLedgerDeviceStatus()
 
     function restore() {
         restoring = true
@@ -107,6 +104,13 @@
                 },
             }
         )
+    }
+
+    function handleClosePopup() {
+        if (!isLedgerConnected) {
+            closePopup()
+            handleBackClick()
+        }
     }
 
     function handleBackClick() {

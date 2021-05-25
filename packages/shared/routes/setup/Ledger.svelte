@@ -12,12 +12,25 @@
     export let mobile
 
     let creatingAccount = false
-    let checkIfLedgerIsConnected = true
     let isLedgerConnected = true
+    let interval
 
     const dispatch = createEventDispatcher()
 
-    const openLedgerNotConnectedPopup = () => {
+    onMount(() => {
+        getLedgerDeviceStatus()
+        interval = setInterval(() => {
+            getLedgerDeviceStatus()
+        }, 1000)
+    })
+
+    onDestroy(() => {
+        if (interval) {
+            clearTimeout(interval)
+        }
+    })
+
+    function openLedgerNotConnectedPopup() {
         openPopup({
             type: 'ledgerNotConnected',
             hideClose: true,
@@ -28,20 +41,9 @@
         })
     }
 
-    onMount(() => {
-        getLedgerDeviceStatus()
-    })
-
-    onDestroy(() => {
-        checkIfLedgerIsConnected = false
-    })
-
     function handleLedgerDeviceNotConnected() {
-        if (checkIfLedgerIsConnected) {
-            if (!get(popupState).active) {
-                openLedgerNotConnectedPopup()
-            }
-            setTimeout(getLedgerDeviceStatus, 1000)
+        if (!get(popupState).active) {
+            openLedgerNotConnectedPopup()
         }
     }
 

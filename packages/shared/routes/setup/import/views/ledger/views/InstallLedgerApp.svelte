@@ -10,10 +10,23 @@
     export let locale
     export let mobile
 
-    let checkIfLedgerIsConnected = true
     let isLedgerConnected = true
+    let interval
 
     const dispatch = createEventDispatcher()
+
+    onMount(() => {
+        getLedgerDeviceStatus()
+        interval = setInterval(() => {
+            getLedgerDeviceStatus()
+        }, 1000)
+    })
+
+    onDestroy(() => {
+        if (interval) {
+            clearTimeout(interval)
+        }
+    })
 
     const openLedgerNotConnectedPopup = () => {
         openPopup({
@@ -26,20 +39,9 @@
         })
     }
 
-    onMount(() => {
-        getLedgerDeviceStatus()
-    })
-
-    onDestroy(() => {
-        checkIfLedgerIsConnected = false
-    })
-
     function handleLedgerDeviceNotConnected() {
-        if (checkIfLedgerIsConnected) {
-            if (!get(popupState).active) {
-                openLedgerNotConnectedPopup()
-            }
-            setTimeout(getLedgerDeviceStatus, 1000)
+        if (!get(popupState).active) {
+            openLedgerNotConnectedPopup()
         }
     }
 
