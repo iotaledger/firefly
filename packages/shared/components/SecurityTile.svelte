@@ -12,6 +12,8 @@
     export let warning = false
     export let disabled = false
     export let keepDarkThemeIconColor = false
+    export let refreshIcon = false
+    export let loading = false
     export let onClick = () => {}
 </script>
 
@@ -45,8 +47,9 @@
     </div>
     {#if toggle}
         <Toggle active={toggleActive} {color} />
-    {/if}
-    {#if !toggle && warning}
+    {:else if !toggle && warning}
         <Icon icon="warning-filled" classes="absolute right-4 top-5 {color ? `text-${color}-500` : 'text-yellow-500'}" />
+    {:else if refreshIcon}
+        <Icon icon="refresh" classes="{loading && 'animate-spin-reverse'} text-gray-500 dark:text-white" />
     {/if}
 </button>

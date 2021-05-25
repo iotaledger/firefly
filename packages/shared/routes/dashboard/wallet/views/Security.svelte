@@ -16,11 +16,48 @@
     let lastBackupDateFormatted
     let backupSafe
     let color
-    let isDestroyed = false
     let isCheckingLedger
     let ledgerDeviceStatus
     let hardwareDeviceMessage
     let hardwareDeviceColor = 'gray'
+    let interval
+
+    const unsubscribe = profiles.subscribe(() => {
+        setup()
+    })
+
+    onMount(() => {
+        setup()
+        if (!$isSoftwareProfile) {
+            getLedgerDeviceStatus()
+            interval = setInterval(() => {
+                getLedgerDeviceStatus()
+            }, 10000)
+        }
+    })
+    onDestroy(() => {
+        unsubscribe()
+        if (interval) {
+            clearTimeout(interval)
+        }
+    })
+
+    $: {
+        switch (ledgerDeviceStatus) {
+            case LedgerStatus.Connected:
+                hardwareDeviceMessage = 'detected'
+                hardwareDeviceColor = 'blue'
+                break
+            case LedgerStatus.Disconnected:
+                hardwareDeviceMessage = 'noneDetected'
+                hardwareDeviceColor = 'gray'
+                break
+            case LedgerStatus.Locked:
+                hardwareDeviceMessage = 'locked'
+                hardwareDeviceColor = 'gray'
+                break
+        }
+    }
 
     function setup() {
         const ap = get(activeProfile)
@@ -55,64 +92,23 @@
         })
     }
 
-    function checkLedgerConnection() {
-        return new Promise((resolve, reject) => {
-            // TODO: ledger fix this
-            api.getLedgerDeviceStatus($activeProfile?.profileType === ProfileType.LedgerSimulator, {
-                onSuccess(response) {
-                    ledgerDeviceStatus = response.payload.type
-                    resolve()
-                },
-                onError(e) {
-                    ledgerDeviceStatus = LedgerStatus.Disconnected
-                    reject(e)
-                },
-            })
+    function getLedgerDeviceStatus() {
+        isCheckingLedger = true
+        api.getLedgerDeviceStatus($activeProfile?.profileType === ProfileType.LedgerSimulator, {
+            onSuccess(response) {
+                ledgerDeviceStatus = response.payload.type
+                setTimeout(function () {
+                    isCheckingLedger = false
+                }, 500)
+            },
+            onError(e) {
+                ledgerDeviceStatus = LedgerStatus.Disconnected
+                setTimeout(function () {
+                    isCheckingLedger = false
+                }, 500)
+            },
         })
     }
-
-    function checkLedger() {
-        isCheckingLedger = true
-        const cb = () => {
-            if (!isDestroyed) {
-                setTimeout(checkLedger, 10000)
-            }
-        }
-        checkLedgerConnection().then(cb).catch(cb)
-    }
-
-    $: {
-        if (!isCheckingLedger && !$isSoftwareProfile) {
-            checkLedger()
-        }
-    }
-
-    $: {
-        switch (ledgerDeviceStatus) {
-            case LedgerStatus.Connected:
-                hardwareDeviceMessage = 'detected'
-                hardwareDeviceColor = 'blue'
-                break
-            case LedgerStatus.Disconnected:
-                hardwareDeviceMessage = 'noneDetected'
-                hardwareDeviceColor = 'gray'
-                break
-            case LedgerStatus.Locked:
-                hardwareDeviceMessage = 'locked'
-                hardwareDeviceColor = 'gray'
-                break
-        }
-    }
-
-    const unsubscribe = profiles.subscribe(() => {
-        setup()
-    })
-
-    onMount(setup)
-    onDestroy(() => {
-        unsubscribe()
-        isDestroyed = true
-    })
 </script>
 
 <div data-label="security" class="pt-6 pb-8 px-8 flex-grow flex flex-col h-full">
@@ -166,7 +162,9 @@
                 color={hardwareDeviceColor}
                 keepDarkThemeIconColor
                 icon="chip"
-                onClick={checkLedgerConnection}
+                onClick={getLedgerDeviceStatus}
+                refreshIcon
+                loading={isCheckingLedger}
                 classes="col-span-2"
                 wide />
         {/if}
