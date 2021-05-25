@@ -42,7 +42,8 @@
     $: {
         if (amount.length > 0) {
             if(!isFiatCurrency(unit)) {
-                const rawVal = changeUnits(parseCurrency(amount), unit, Unit.i)
+                const amountParsed = parseCurrency(amount)
+                const rawVal = changeUnits(Number.isNaN(amountParsed) ? 0 : amountParsed, unit, Unit.i)
                 if (rawVal > MAX_VALUE) {
                     amount = formatUnitPrecision(MAX_VALUE, unit, false)
                 }
