@@ -11,6 +11,7 @@
     export let toggleActive = undefined
     export let warning = false
     export let disabled = false
+    export let keepDarkThemeIconColor = false
     export let onClick = () => {}
 </script>
 
@@ -36,7 +37,7 @@
             boxed
             {icon}
             classes="text-white"
-            boxClasses="{toggle ? 'bg-gray-400' : `bg-${color}-500 ${!wide && 'mb-2'}`} dark:bg-gray-900" />
+            boxClasses="{toggle ? 'bg-gray-400' : `bg-${color}-500`}  {!keepDarkThemeIconColor && 'dark:bg-gray-900'}" />
         <div>
             <Text smaller bold>{title}</Text>
             <p class="text-10 leading-120 text-gray-500 {wide ? 'mt-1' : 'mt-1.5'}">{message}</p>

@@ -164,6 +164,7 @@
                 title={locale('views.dashboard.security.hardwareDevice.title')}
                 message={hardwareDeviceMessage ? locale(`views.dashboard.security.hardwareDevice.${hardwareDeviceMessage}`) : ''}
                 color={hardwareDeviceColor}
+                keepDarkThemeIconColor
                 icon="chip"
                 onClick={checkLedgerConnection}
                 classes="col-span-2"
