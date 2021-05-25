@@ -36,9 +36,9 @@
                 <Text type="h3" classes="text-white">{getInitials()}</Text>
             {/if}
         </div>
-        <div class="mt-5 flex flex-row items-center space-x-1.5">
+        <div class="mt-5 flex flex-row items-baseline space-x-1.5">
             {#if isLedgerProfile}
-                <Icon icon="ledger" classes="text-gray-400 dark:text-gray-700" width={14} height={14} />
+                <Icon icon="ledger" classes="text-gray-400 dark:text-gray-700 relative top-0.5" width={14} height={14} />
             {/if}
             <Text type="h5" classes="text-center">{name}</Text>
         </div>
