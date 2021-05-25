@@ -577,14 +577,16 @@
 
             initialiseListeners()
 
-            api.getStrongholdStatus({
-                onSuccess(strongholdStatusResponse) {
-                    isStrongholdLocked.set(strongholdStatusResponse.payload.snapshot.status === 'Locked')
-                },
-                onError(error) {
-                    console.error(error)
-                },
-            })
+            if ($isSoftwareProfile) {
+                api.getStrongholdStatus({
+                    onSuccess(strongholdStatusResponse) {
+                        isStrongholdLocked.set(strongholdStatusResponse.payload.snapshot.status === 'Locked')
+                    },
+                    onError(error) {
+                        console.error(error)
+                    },
+                })
+            }
 
             addProfileCurrencyPriceData()
         }
