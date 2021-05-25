@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Button, OnboardingLayout, Text } from 'shared/components'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
+    import { ledgerSimulator } from 'shared/lib/profile'
     import { LedgerStatus } from 'shared/lib/typings/wallet'
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
@@ -9,7 +10,6 @@
     export let locale
     export let mobile
 
-    let simulator = false
     let checkIfLedgerIsConnected = true
     let isLedgerConnected = true
 
@@ -44,7 +44,7 @@
     }
 
     function getLedgerDeviceStatus() {
-        api.getLedgerDeviceStatus(simulator, {
+        api.getLedgerDeviceStatus(ledgerSimulator, {
             onSuccess(response) {
                 isLedgerConnected = response.payload.type === LedgerStatus.Connected
                 if (isLedgerConnected) {
