@@ -588,8 +588,6 @@
 
             addProfileCurrencyPriceData()
         }
-
-        initialiseListeners()
     })
 
     function checkStrongholdStatus() {
