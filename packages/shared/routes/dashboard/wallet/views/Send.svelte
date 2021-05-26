@@ -344,6 +344,10 @@
         </div>
     {/if}
     {#if $isTransferring}
-        <ProgressBar secondary message={transferSteps[$transferState]?.label} percent={transferSteps[$transferState]?.percent} />
+        <ProgressBar
+            preloading={!$transferState}
+            secondary
+            message={transferSteps[$transferState]?.label}
+            percent={transferSteps[$transferState]?.percent} />
     {/if}
 </div>

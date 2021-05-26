@@ -1,9 +1,11 @@
 <script lang="typescript">
+    import { Spinner } from 'shared/components'
     export let percent = 0
     export let classes = ''
     export let message = ''
     export let secondary = false
     export let narrow = false
+    export let preloading = false
 </script>
 
 <style type="text/scss">
@@ -40,5 +42,11 @@
             style={`width:${Math.max(Math.min(percent, 100), 0)}%`} />
     </div>
     <span
-        class="font-bold text-12 {narrow ? 'text-gray-800 dark:text-white' : secondary ? 'text-blue-500' : 'text-white'} message">{message}</span>
+        class="font-bold text-12 {narrow ? 'text-gray-800 dark:text-white' : secondary ? 'text-blue-500' : 'text-white'} message">
+        {#if preloading}
+            <Spinner
+                busy={preloading}
+                classes={narrow ? 'text-gray-800 dark:text-white' : secondary ? 'text-blue-500' : 'text-white'} />
+        {:else}{message}{/if}
+    </span>
 </div>
