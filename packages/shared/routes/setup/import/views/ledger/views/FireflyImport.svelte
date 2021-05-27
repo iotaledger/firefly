@@ -67,43 +67,57 @@
         restoring = true
         const officialNodes = getOfficialNodes()
         const officialNetwork = getOfficialNetwork()
-        api.createAccount(
-            {
-                clientOptions: {
-                    nodes: officialNodes,
-                    node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
-                    network: officialNetwork,
-                },
-                alias: `${locale('general.account')} 1`,
-                signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
-            },
-            {
-                onSuccess(createAccountResponse) {
-                    api.syncAccounts({
-                        onSuccess(syncAccountsResponse) {
-                            let balance = 0
-                            for (const syncedAccount of syncAccountsResponse.payload) {
-                                const accountBalance = syncedAccount.addresses.reduce(
-                                    (total, address) => total + address.balance,
-                                    0
-                                )
-                                balance += accountBalance
-                            }
-                            restoring = false
-                            dispatch('next', { balance })
-                        },
-                        onError(error) {
-                            restoring = false
-                            console.error(error)
-                        },
-                    })
+
+        const _sync = () => {
+            api.syncAccounts({
+                onSuccess(syncAccountsResponse) {
+                    let balance = 0
+                    for (const syncedAccount of syncAccountsResponse.payload) {
+                        const accountBalance = syncedAccount.addresses.reduce((total, address) => total + address.balance, 0)
+                        balance += accountBalance
+                    }
+                    restoring = false
+                    dispatch('next', { balance })
                 },
                 onError(error) {
                     restoring = false
                     console.error(error)
                 },
-            }
-        )
+            })
+        }
+
+        api.getAccounts({
+            onSuccess(accountsResponse) {
+                if (accountsResponse.payload.length > 0) {
+                    _sync()
+                } else {
+                    api.createAccount(
+                        {
+                            clientOptions: {
+                                nodes: officialNodes,
+                                node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
+                                network: officialNetwork,
+                            },
+                            alias: `${locale('general.account')} 1`,
+                            signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
+                        },
+                        {
+                            onSuccess(createAccountResponse) {
+                                _sync()
+                            },
+                            onError(error) {
+                                restoring = false
+                                console.error(error)
+                            },
+                        }
+                    )
+                }
+            },
+            onError(errorResponse) {
+                restoring = false
+                console.error(error)
+            },
+        })
     }
 
     function handleClosePopup() {
