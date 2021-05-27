@@ -161,6 +161,26 @@
                             use:clickOutside={{ includeScroll: true }}
                             on:clickOutside={() => (nodeContextMenu = undefined)}
                             style={`left: ${contextPosition.x - 10}px; top: ${contextPosition.y - 10}px`}>
+                            {#if !nodeContextMenu.disabled}
+                                <button
+                                    on:click={() => {
+                                        primaryNodeUrl = nodeContextMenu.url
+                                        nodeContextMenu = undefined
+                                    }}
+                                    class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20">
+                                    <Text smaller>{locale('views.settings.configureNodeList.setAsPrimary')}</Text>
+                                </button>
+                            {/if}
+                            {#if nodeContextMenu.isCustom}
+                                <button
+                                    on:click={() => {
+                                        handlePropertiesNodeClick(nodeContextMenu)
+                                        nodeContextMenu = undefined
+                                    }}
+                                    class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20">
+                                    <Text smaller>{locale('views.settings.configureNodeList.viewDetails')}</Text>
+                                </button>
+                            {/if}
                             {#if nodeContextMenu.url !== primaryNodeUrl}
                                 <button
                                     on:click={() => {
@@ -174,26 +194,6 @@
                                     <Text smaller>
                                         {locale(nodeContextMenu.disabled ? 'views.settings.configureNodeList.includeNode' : 'views.settings.configureNodeList.excludeNode')}
                                     </Text>
-                                </button>
-                            {/if}
-                            {#if nodeContextMenu.isCustom}
-                                <button
-                                    on:click={() => {
-                                        handlePropertiesNodeClick(nodeContextMenu)
-                                        nodeContextMenu = undefined
-                                    }}
-                                    class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20">
-                                    <Text smaller>{locale('views.settings.configureNodeList.viewDetails')}</Text>
-                                </button>
-                            {/if}
-                            {#if !nodeContextMenu.disabled}
-                                <button
-                                    on:click={() => {
-                                        primaryNodeUrl = nodeContextMenu.url
-                                        nodeContextMenu = undefined
-                                    }}
-                                    class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20">
-                                    <Text smaller>{locale('views.settings.configureNodeList.setAsPrimary')}</Text>
                                 </button>
                             {/if}
                             {#if nodeContextMenu.isCustom && nodeContextMenu.url !== primaryNodeUrl}
