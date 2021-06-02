@@ -54,7 +54,8 @@ const errorMessages: {
     'LedgerDeviceNotFound': 'error.global.generic',
     'LedgerEssenceTooLarge': 'error.global.generic',
     // Dust output
-    'DustError': 'error.send.leavingDust',
+    'SendingDustError': 'error.send.sendingDust',
+    'LeavingDustError': 'error.send.leavingDust',
 }
 
 export const getErrorMessage = (type: ErrorType | ValidatorErrorTypes): string => {

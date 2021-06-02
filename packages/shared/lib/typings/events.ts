@@ -63,7 +63,8 @@ export enum ErrorType {
     LedgerEssenceTooLarge = 'LedgerEssenceTooLarge',
 
     // Dust output
-    DustError = 'DustError',
+    SendingDustError = 'SendingDustError',
+    LeavingDustError = 'LeavingDustError',
 }
 
 export type Callback<T> = (error: string, data: T) => void
