@@ -1,5 +1,5 @@
+import { isSoftwareProfile } from 'shared/lib/profile'
 import { get, writable } from 'svelte/store'
-import { persistent } from './helpers'
 import { localize } from './i18n'
 import { showAppNotification } from './notifications'
 import { closePopup } from './popup'
@@ -73,7 +73,9 @@ export const logout = () => {
             if (ap) {
                 destroyActor(ap.id)
             }
-            isStrongholdLocked.set(true)
+            if (get(isSoftwareProfile)) {
+                isStrongholdLocked.set(true)
+            }
             clearSendParams()
             closePopup()
             clearActiveProfile()
@@ -84,7 +86,7 @@ export const logout = () => {
             resolve()
         }
 
-        if (!get(isStrongholdLocked)) {
+        if (get(isSoftwareProfile) && !get(isStrongholdLocked)) {
             api.lockStronghold({
                 onSuccess() {
                     _cleanup()
@@ -99,7 +101,8 @@ export const logout = () => {
 
                 },
             })
-        } else {
+        }
+        else {
             _cleanup()
         }
     })
