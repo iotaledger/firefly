@@ -1,7 +1,7 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Verstuur, ontvang & beheer uw IOTA tokens",
+            "title": "Verstuur, Ontvang & Beheer uw IOTA tokens",
             "body": "Firefly is de officiële wallet software van IOTA."
         },
         "legal": {
@@ -758,7 +758,7 @@
             "length": "Uw wachtwoord kan niet langer zijn dan {length, plural, one {1 teken} other {# tekens}}."
         },
         "pincode": {
-            "length": "Je pincode moet {length, plural, one {1 cijfer} other {# cijfers}}",
+            "length": "Je pincode moet {length, plural, one {1 cijfer} other {# cijfers}} lang zijn.",
             "match": "Pincodes komen niet overeen.",
             "incorrect": "Uw huidige pincode is onjuist."
         },
