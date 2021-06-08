@@ -241,8 +241,8 @@
                 "description": "Systémová oznámení o transakcích"
             },
             "networkStatus": {
-                "title": "Network status",
-                "description": "Displays the status of the node you are currently connected to."
+                "title": "Stav sítě",
+                "description": "Zobrazuje stav Node, ke které jste aktuálně připojeni."
             },
             "exportStronghold": {
                 "title": "Exportovat zálohu",
@@ -375,7 +375,7 @@
                 "networkDown": "Sít odpojena",
                 "status": "Stav",
                 "messagesPerSecond": "Zprávy za sekundu",
-                "referencedRate": "Referenced rate"
+                "referencedRate": "Odkazovaná míra"
             },
             "profileModal": {
                 "allSettings": "Všechna nastavení",
@@ -587,7 +587,7 @@
         "viewStatus": "Zobrazit status",
         "showHiddenAccounts": "Zobrazit skryté peněženky",
         "confirm": "Potvrdit",
-        "hideNetworkStatistics": "Hide network statistics",
+        "hideNetworkStatistics": "Skrýt statistiky sítě",
         "findBalances": "Najít zůstatky",
         "searchBalances": "Najít zůstatky",
         "searchAgain": "Hledat znovu",

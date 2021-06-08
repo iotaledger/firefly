@@ -241,8 +241,8 @@
                 "description": "交易事件的系统通知"
             },
             "networkStatus": {
-                "title": "Network status",
-                "description": "Displays the status of the node you are currently connected to."
+                "title": "网络状态",
+                "description": "显示你现在所连接的节点状态。"
             },
             "exportStronghold": {
                 "title": "导出备份",
@@ -375,7 +375,7 @@
                 "networkDown": "网络已断开",
                 "status": "状态",
                 "messagesPerSecond": "每秒信息数",
-                "referencedRate": "Referenced rate"
+                "referencedRate": "确认率"
             },
             "profileModal": {
                 "allSettings": "所有设置",
@@ -587,7 +587,7 @@
         "viewStatus": "查看状态",
         "showHiddenAccounts": "显示隐藏钱包",
         "confirm": "确认",
-        "hideNetworkStatistics": "Hide network statistics",
+        "hideNetworkStatistics": "隐藏网络统计信息",
         "findBalances": "寻找余额",
         "searchBalances": "搜索余额",
         "searchAgain": "重新搜索",

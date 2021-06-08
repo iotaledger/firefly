@@ -241,8 +241,8 @@
                 "description": "Ειδοποιήσεις συστήματος για συμβάντα συναλλαγών"
             },
             "networkStatus": {
-                "title": "Network status",
-                "description": "Displays the status of the node you are currently connected to."
+                "title": "Κατάσταση δικτύου",
+                "description": "Εμφανίζει την κατάσταση του κόμβου στον οποίο είστε συνδεδεμένοι."
             },
             "exportStronghold": {
                 "title": "Εξαγωγή Αντιγράφου Ασφαλείας",
@@ -587,7 +587,7 @@
         "viewStatus": "Προβολή κατάστασης",
         "showHiddenAccounts": "Εμφάνιση κρυφών πορτοφολιών",
         "confirm": "Επιβεβαίωση",
-        "hideNetworkStatistics": "Hide network statistics",
+        "hideNetworkStatistics": "Απόκρυψη στατιστικών δικτύου",
         "findBalances": "Βρείτε υπόλοιπα",
         "searchBalances": "Αναζήτηση υπολοίπων",
         "searchAgain": "Αναζήτηση Ξανά",

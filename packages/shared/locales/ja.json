@@ -242,7 +242,7 @@
             },
             "networkStatus": {
                 "title": "ネットワークのステータス",
-                "description": "Displays the status of the node you are currently connected to."
+                "description": "現在接続しているノードの状態を表示します。"
             },
             "exportStronghold": {
                 "title": "バックアップのエクスポート",
@@ -375,7 +375,7 @@
                 "networkDown": "ネットワーク接続が切断されました",
                 "status": "ステータス",
                 "messagesPerSecond": "毎秒あたりのメッセージ",
-                "referencedRate": "Referenced rate"
+                "referencedRate": "参照元"
             },
             "profileModal": {
                 "allSettings": "すべての設定",
@@ -587,7 +587,7 @@
         "viewStatus": "ステータスを表示",
         "showHiddenAccounts": "非表示ウォレットを表示",
         "confirm": "確定",
-        "hideNetworkStatistics": "Hide network statistics",
+        "hideNetworkStatistics": "ネットワークの統計情報を非表示にする",
         "findBalances": "残高検索",
         "searchBalances": "残高を検索",
         "searchAgain": "再検索",

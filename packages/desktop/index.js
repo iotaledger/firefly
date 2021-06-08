@@ -15,7 +15,7 @@ window.addEventListener('error', event => {
 })
 
 window.addEventListener('unhandledrejection', event => {
-    // Electron.unhandledException("Render Context Unhandled Rejection", event.reason)
+    //Electron.unhandledException("Render Context Unhandled Rejection", event.reason)
     event.preventDefault();
     console.error(event.reason)
 });
