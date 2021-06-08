@@ -137,6 +137,9 @@
                     let completeCount = 0
                     let newAccounts = []
                     for (const payloadAccount of accountsResponse.payload) {
+                        // Only keep messages with a payload
+                        payloadAccount.messages = payloadAccount.messages.filter(m => m.payload)
+
                         // The wallet only returns one side of internal transfers
                         // to the same account, so create the other side by first finding
                         // the internal messages

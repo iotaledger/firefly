@@ -1,7 +1,7 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Envie, Receba e Gira as suas IOTAs",
+            "title": "Envie, Receba e Gira os seus tokens IOTA",
             "body": "Firefly é a carteira oficial da IOTA."
         },
         "legal": {
@@ -240,9 +240,13 @@
                 "title": "Notificações",
                 "description": "Notificações do sistema para eventos de transações"
             },
+            "networkStatus": {
+                "title": "Estado da rede",
+                "description": "Exibe o estado do servidor ao qual está conetado no momento."
+            },
             "exportStronghold": {
                 "title": "Exportar Backup",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
+                "description": "Exportar arquivo Stronghold - um backup completo encriptado da sua carteira e do histórico recente de transações"
             },
             "appLock": {
                 "title": "Bloqueio Automático",
@@ -252,7 +256,7 @@
             },
             "changePassword": {
                 "title": "Alterar Palavra-Passe",
-                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
+                "description": "A sua palavra-passe é usada para proteger a sua carteira. Deve usar uma palavra-passe forte para proteger os seus fundos"
             },
             "changePincode": {
                 "title": "Alterar código PIN",
@@ -264,15 +268,15 @@
             },
             "balanceFinder": {
                 "title": "Localizador de saldo",
-                "description": "Perform an extended search of your addresses for tokens"
+                "description": "Faça uma pesquisa extensa de tokens dos seus endereços"
             },
             "hiddenAccounts": {
                 "title": "Carteiras ocultas",
-                "description": "Selecting this options will show wallets that were previously hidden"
+                "description": "Ao selecionar estas opções, mostrará as carteiras que estavam ocultas, anteriormente"
             },
             "deleteProfile": {
                 "title": "Excluir perfil",
-                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
+                "description": "Exclui o seu perfil inteiro, carteiras e histórico de transações. Certifique-se que possui um backup"
             },
             "deepLinks": {
                 "title": "Links Profundos",
@@ -288,7 +292,7 @@
             },
             "configureNodeList": {
                 "title": "Selecionar um servidor",
-                "description": "Manage the list of IOTA network nodes you connect to",
+                "description": "Gerir a lista de servidores da rede IOTA aos quais se conecta",
                 "primaryNode": "Servidor primário",
                 "excludeNode": "Excluir servidor",
                 "includeNode": "Incluir servidor",
@@ -296,7 +300,7 @@
                 "setAsPrimary": "Definir como principal",
                 "removeNode": "Remover servidor",
                 "includeOfficialNodeList": "Incluir a lista de servidores oficiais",
-                "noNodes": "There are no nodes, automatic selection will be used instead"
+                "noNodes": "Não há servidores, a seleção automática será utilizada"
             },
             "proofOfWork": {
                 "title": "Prova de Trabalho",
@@ -337,7 +341,7 @@
             },
             "reportAnIssue": {
                 "title": "Reportar um problema",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
+                "description": "Reporte um erro para os desenvolvedores. Verifique se o mesmo ainda não foi reportado"
             }
         },
         "login": {
@@ -371,7 +375,7 @@
                 "networkDown": "Rede Desconectada",
                 "status": "Estado",
                 "messagesPerSecond": "Mensagens por segundo",
-                "confirmationRate": "Taxa de confirmação"
+                "referencedRate": "Taxa referenciada"
             },
             "profileModal": {
                 "allSettings": "Todas as configurações",
@@ -583,6 +587,7 @@
         "viewStatus": "Ver estado",
         "showHiddenAccounts": "Mostrar carteiras ocultas",
         "confirm": "Confirmar",
+        "hideNetworkStatistics": "Ocultar estatísticas da rede",
         "findBalances": "Encontrar saldos",
         "searchBalances": "Pesquisa por saldos",
         "searchAgain": "Pesquisar novamente",
@@ -702,8 +707,8 @@
         "receiving": "A receber",
         "sending": "A enviar",
         "legacyNetwork": "Rede Legada",
-        "capsLock": "Caps Lock is on",
-        "version": "Version {version}"
+        "capsLock": "O Caps Lock está ativado",
+        "version": "Versão {version}"
     },
     "dates": {
         "today": "Hoje",

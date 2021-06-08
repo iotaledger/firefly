@@ -1,7 +1,7 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Verstuur, ontvang & beheer uw IOTA tokens",
+            "title": "Verstuur, Ontvang & Beheer uw IOTA tokens",
             "body": "Firefly is de officiële wallet software van IOTA."
         },
         "legal": {
@@ -240,6 +240,10 @@
                 "title": "Meldingen",
                 "description": "Systeemmeldingen voor transactie activiteiten"
             },
+            "networkStatus": {
+                "title": "Netwerk status",
+                "description": "Toont de status van de node waarmee u momenteel verbonden bent."
+            },
             "exportStronghold": {
                 "title": "Back-up exporteren",
                 "description": "Exporteren naar een Stronghold bestand - een complete versleutelde back-up van uw portemonnees en de nieuwste transactiegeschiedenis"
@@ -371,7 +375,7 @@
                 "networkDown": "Netwerk verbinding verbroken",
                 "status": "Status",
                 "messagesPerSecond": "Berichten per seconde",
-                "confirmationRate": "Bevestigingssnelheid"
+                "referencedRate": "Bevestigings percentage"
             },
             "profileModal": {
                 "allSettings": "Alle instellingen",
@@ -583,6 +587,7 @@
         "viewStatus": "Bekijk status",
         "showHiddenAccounts": "Toon verborgen portemonnees",
         "confirm": "Bevestig",
+        "hideNetworkStatistics": "Netwerkstatistieken verbergen",
         "findBalances": "Saldi zoeken",
         "searchBalances": "Zoeken naar saldi",
         "searchAgain": "Opnieuw zoeken",
@@ -753,7 +758,7 @@
             "length": "Uw wachtwoord kan niet langer zijn dan {length, plural, one {1 teken} other {# tekens}}."
         },
         "pincode": {
-            "length": "Je pincode moet {length, plural, one {1 cijfer} other {# cijfers}}",
+            "length": "Je pincode moet {length, plural, one {1 cijfer} other {# cijfers}} lang zijn.",
             "match": "Pincodes komen niet overeen.",
             "incorrect": "Uw huidige pincode is onjuist."
         },

@@ -240,9 +240,13 @@
                 "title": "Notificações",
                 "description": "Notificações do sistema para eventos de transações"
             },
+            "networkStatus": {
+                "title": "Status da rede",
+                "description": "Exibe o status do servidor ao qual você está conectado no momento."
+            },
             "exportStronghold": {
                 "title": "Exportar Backup",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
+                "description": "Exportar para um arquivo Stronghold - um backup criptografado de suas carteiras e do histórico mais recente de transações"
             },
             "appLock": {
                 "title": "Bloqueio Automático",
@@ -252,7 +256,7 @@
             },
             "changePassword": {
                 "title": "Alterar Senha",
-                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
+                "description": "Sua senha é usada para proteger suas carteiras. Você deve usar uma senha forte para proteger seus fundos"
             },
             "changePincode": {
                 "title": "Alterar código PIN",
@@ -264,15 +268,15 @@
             },
             "balanceFinder": {
                 "title": "Localizador de saldo",
-                "description": "Perform an extended search of your addresses for tokens"
+                "description": "Faça uma pesquisa estendida de seus endereços por tokens"
             },
             "hiddenAccounts": {
                 "title": "Carteiras ocultas",
-                "description": "Selecting this options will show wallets that were previously hidden"
+                "description": "Selecionando estas opções mostrará carteiras que estavam ocultas anteriormente"
             },
             "deleteProfile": {
                 "title": "Excluir perfil",
-                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
+                "description": "Exclui seu perfil inteiro, carteiras e histórico de transações. Certifique-se de ter um backup"
             },
             "deepLinks": {
                 "title": "Links Profundos",
@@ -288,7 +292,7 @@
             },
             "configureNodeList": {
                 "title": "Selecionar um servidor",
-                "description": "Manage the list of IOTA network nodes you connect to",
+                "description": "Gerencia a lista de servidores da rede IOTA que você se conecta",
                 "primaryNode": "Servidor primário",
                 "excludeNode": "Excluir servidor",
                 "includeNode": "Incluir servidor",
@@ -296,7 +300,7 @@
                 "setAsPrimary": "Definir como principal",
                 "removeNode": "Remover servidor",
                 "includeOfficialNodeList": "Incluir a lista de servidores oficiais",
-                "noNodes": "There are no nodes, automatic selection will be used instead"
+                "noNodes": "Não há servidores, a seleção automática será usada"
             },
             "proofOfWork": {
                 "title": "Prova de Trabalho",
@@ -337,7 +341,7 @@
             },
             "reportAnIssue": {
                 "title": "Reportar um problema",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
+                "description": "Relate um erro aos desenvolvedores. Verifique para ter certeza que ainda não foi reportado"
             }
         },
         "login": {
@@ -371,7 +375,7 @@
                 "networkDown": "Rede Desconectada",
                 "status": "Status",
                 "messagesPerSecond": "Mensagens por segundo",
-                "confirmationRate": "Taxa de confirmação"
+                "referencedRate": "Taxa referenciada"
             },
             "profileModal": {
                 "allSettings": "Todas as configurações",
@@ -583,6 +587,7 @@
         "viewStatus": "Ver status",
         "showHiddenAccounts": "Mostrar carteiras ocultas",
         "confirm": "Confirmar",
+        "hideNetworkStatistics": "Ocultar estatísticas da rede",
         "findBalances": "Encontrar saldos",
         "searchBalances": "Pesquisa por saldos",
         "searchAgain": "Pesquisar novamente",
@@ -702,8 +707,8 @@
         "receiving": "Recebendo",
         "sending": "Enviando",
         "legacyNetwork": "Rede Legada",
-        "capsLock": "Caps Lock is on",
-        "version": "Version {version}"
+        "capsLock": "O Caps Lock está ativado",
+        "version": "Versão {version}"
     },
     "dates": {
         "today": "Hoje",

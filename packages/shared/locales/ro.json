@@ -240,6 +240,10 @@
                 "title": "Notificări",
                 "description": "Notificări de sistem pentru evenimentele tranzacției"
             },
+            "networkStatus": {
+                "title": "Network status",
+                "description": "Displays the status of the node you are currently connected to."
+            },
             "exportStronghold": {
                 "title": "Exportă fișierul de rezervă",
                 "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
@@ -371,7 +375,7 @@
                 "networkDown": "Rețea deconectată",
                 "status": "Stare",
                 "messagesPerSecond": "Mesaje pe secundă",
-                "confirmationRate": "Rată de confirmare"
+                "referencedRate": "Referenced rate"
             },
             "profileModal": {
                 "allSettings": "Toate setările",
@@ -583,6 +587,7 @@
         "viewStatus": "View status",
         "showHiddenAccounts": "Show hidden wallets",
         "confirm": "Confirm",
+        "hideNetworkStatistics": "Hide network statistics",
         "findBalances": "Găsește solduri",
         "searchBalances": "Search for balances",
         "searchAgain": "Caută din nou",

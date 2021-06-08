@@ -240,6 +240,10 @@
                 "title": "Kennisgewings",
                 "description": "Stelselkennisgewings vir transaksiegebeurtenisse"
             },
+            "networkStatus": {
+                "title": "Network status",
+                "description": "Displays the status of the node you are currently connected to."
+            },
             "exportStronghold": {
                 "title": "Voer back-up uit",
                 "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
@@ -371,7 +375,7 @@
                 "networkDown": "Netwerk ontkoppel",
                 "status": "Status",
                 "messagesPerSecond": "Boodskappe per sekondes",
-                "confirmationRate": "Bevestig tempo"
+                "referencedRate": "Verwysde tempo"
             },
             "profileModal": {
                 "allSettings": "Alle instellings",
@@ -583,6 +587,7 @@
         "viewStatus": "Sien status",
         "showHiddenAccounts": "Wys versteekte beursie",
         "confirm": "Bevestig",
+        "hideNetworkStatistics": "Hide network statistics",
         "findBalances": "Vind balanse",
         "searchBalances": "Soek na balanse",
         "searchAgain": "Soek weer",

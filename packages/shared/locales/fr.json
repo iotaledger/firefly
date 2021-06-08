@@ -240,6 +240,10 @@
                 "title": "Notifications",
                 "description": "Notifications système des transactions"
             },
+            "networkStatus": {
+                "title": "État du réseau",
+                "description": "Affiche le statut du noeud auquel vous êtes actuellement connecté."
+            },
             "exportStronghold": {
                 "title": "Exportation de la sauvegarde",
                 "description": "Exporter vers un fichier Stronghold - une sauvegarde chiffrée complète de vos portefeuilles et l'historique récent des transactions"
@@ -371,7 +375,7 @@
                 "networkDown": "Réseau déconnecté",
                 "status": "Statut",
                 "messagesPerSecond": "Messages par seconde",
-                "confirmationRate": "Taux de confirmation"
+                "referencedRate": "Taux référencé"
             },
             "profileModal": {
                 "allSettings": "Tous les paramètres",
@@ -583,6 +587,7 @@
         "viewStatus": "Voir le statut",
         "showHiddenAccounts": "Afficher les portefeuilles cachés",
         "confirm": "Confirmer",
+        "hideNetworkStatistics": "Masquer les statistiques du réseau",
         "findBalances": "Trouvez vos fonds",
         "searchBalances": "Recherches des fonds",
         "searchAgain": "Chercher encore",

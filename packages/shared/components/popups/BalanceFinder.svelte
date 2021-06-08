@@ -39,10 +39,12 @@
 <Text type="h4" classes="mb-6">{locale('popups.balanceFinder.title')}</Text>
 <Text type="p" secondary classes="mb-5">{locale('popups.balanceFinder.body')}</Text>
 <div class="flex w-full flex-row flex-wrap">
-    <div class="flex w-full flex-row flex-wrap mb-6 justify-between">
+    <div class="flex w-full flex-row flex-wrap mb-1 justify-between">
         <Text type="p">{locale('popups.balanceFinder.totalWalletBalance')}</Text>
         <Text type="p" highlighted>{$balanceOverview.balance}</Text>
-        <Text type="p" secondary classes="mb-6">{$balanceOverview.balanceFiat}</Text>
+        <Text type="p" secondary>{$balanceOverview.balanceFiat}</Text>
+    </div>
+    <div class="flex w-full flex-row flex-wrap mt-4 mb-6 justify-between">
         {#if $isStrongholdLocked}
             <Text type="p" secondary classes="mb-3">{locale('popups.balanceFinder.typePassword')}</Text>
             <Password

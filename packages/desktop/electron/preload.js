@@ -2,7 +2,14 @@ const { ipcRenderer, contextBridge } = require('electron')
 
 // Hook the error handlers as early as possible
 window.addEventListener('error', event => {
-    ipcRenderer.invoke('handle-error', "Preload Context Error", event.error || event)
+    if (event.error && event.error.message) {
+        ipcRenderer.invoke('handle-error', "Preload Context Error", {
+            message: event.error.message,
+            stack: event.error.stack
+        })    
+    } else {
+        ipcRenderer.invoke('handle-error', "Preload Context Error", event.error || event)
+    }
     event.preventDefault();
     console.error(event.error || event)
 })

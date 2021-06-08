@@ -240,9 +240,13 @@
                 "title": "Oznámení",
                 "description": "Systémová oznámení o transakcích"
             },
+            "networkStatus": {
+                "title": "Stav sítě",
+                "description": "Zobrazuje stav Node, ke které jste aktuálně připojeni."
+            },
             "exportStronghold": {
                 "title": "Exportovat zálohu",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
+                "description": "Exportovat do Stronghold souboru - kompletní šifrovaná záloha vašich peněženek a poslední historie transakcí"
             },
             "appLock": {
                 "title": "Automatický zámek",
@@ -252,7 +256,7 @@
             },
             "changePassword": {
                 "title": "Změna hesla",
-                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
+                "description": "Vaše heslo se používá k zabezpečení peněženek. Musíte použít silné heslo k ochraně prostředků"
             },
             "changePincode": {
                 "title": "Změnit PIN kód",
@@ -264,15 +268,15 @@
             },
             "balanceFinder": {
                 "title": "Hledač zůstatku",
-                "description": "Perform an extended search of your addresses for tokens"
+                "description": "Provést rozšířené vyhledávání tokenů napříč adresami"
             },
             "hiddenAccounts": {
                 "title": "Skryté peněženky",
-                "description": "Selecting this options will show wallets that were previously hidden"
+                "description": "Výběrem této možností se zobrazí peněženky, které byly dříve skryty"
             },
             "deleteProfile": {
                 "title": "Smazat profil",
-                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
+                "description": "Odstraní profil, peněženky a historii transakcí. Ujistěte se, že máte zálohu"
             },
             "deepLinks": {
                 "title": "Hluboké odkazy",
@@ -288,7 +292,7 @@
             },
             "configureNodeList": {
                 "title": "Vybrat Node",
-                "description": "Manage the list of IOTA network nodes you connect to",
+                "description": "Spravujte list IOTA Nodes, ke kterým se připojujete",
                 "primaryNode": "Primární Node",
                 "excludeNode": "Vyloučit node",
                 "includeNode": "Zahrnout node",
@@ -296,7 +300,7 @@
                 "setAsPrimary": "Nastavit jako hlavní",
                 "removeNode": "Odstranit uzel",
                 "includeOfficialNodeList": "Zahrnout oficiální seznam node",
-                "noNodes": "There are no nodes, automatic selection will be used instead"
+                "noNodes": "Neexistují žádné Nodes, bude použit automatický výběr"
             },
             "proofOfWork": {
                 "title": "Proof of Work",
@@ -337,7 +341,7 @@
             },
             "reportAnIssue": {
                 "title": "Nahlásit problém",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
+                "description": "Nahlásit chybu vývojářům. Zkontrolujte, zda již nebyla nahlášena."
             }
         },
         "login": {
@@ -371,7 +375,7 @@
                 "networkDown": "Sít odpojena",
                 "status": "Stav",
                 "messagesPerSecond": "Zprávy za sekundu",
-                "confirmationRate": "Míra potvrzení"
+                "referencedRate": "Odkazovaná míra"
             },
             "profileModal": {
                 "allSettings": "Všechna nastavení",
@@ -583,6 +587,7 @@
         "viewStatus": "Zobrazit status",
         "showHiddenAccounts": "Zobrazit skryté peněženky",
         "confirm": "Potvrdit",
+        "hideNetworkStatistics": "Skrýt statistiky sítě",
         "findBalances": "Najít zůstatky",
         "searchBalances": "Najít zůstatky",
         "searchAgain": "Hledat znovu",
@@ -702,8 +707,8 @@
         "receiving": "Přijímání",
         "sending": "Odesílání",
         "legacyNetwork": "Zastaralá síť",
-        "capsLock": "Caps Lock is on",
-        "version": "Version {version}"
+        "capsLock": "Caps Lock je zapnutý",
+        "version": "Verze {version}"
     },
     "dates": {
         "today": "Dnes",

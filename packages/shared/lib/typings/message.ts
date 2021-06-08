@@ -145,7 +145,7 @@ export interface Message {
     version: MessageVersion;
     parents: string[];
     payloadLength: number;
-    payload: Payload;
+    payload?: Payload;
     timestamp: string;
     nonce: number;
     confirmed?: boolean;

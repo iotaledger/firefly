@@ -240,6 +240,10 @@
                 "title": "Известия",
                 "description": "Системни известия за трансакции"
             },
+            "networkStatus": {
+                "title": "Състояние на мрежата",
+                "description": "Displays the status of the node you are currently connected to."
+            },
             "exportStronghold": {
                 "title": "Създаване резервно копие",
                 "description": "Експортиране в Stronghold файл - пълно криптирано резервно копие на портфейла и история на последните трансакции"
@@ -371,7 +375,7 @@
                 "networkDown": "Мрежата е прекъсната",
                 "status": "Статус",
                 "messagesPerSecond": "Съобщения/трансакции в секунда",
-                "confirmationRate": "Потвърждение Confirmation rate"
+                "referencedRate": "Referenced rate"
             },
             "profileModal": {
                 "allSettings": "Всички настройки",
@@ -583,6 +587,7 @@
         "viewStatus": "Покажи статус",
         "showHiddenAccounts": "Покажи скрити портфейли",
         "confirm": "Потвърждаване",
+        "hideNetworkStatistics": "Hide network statistics",
         "findBalances": "Търси налични средства",
         "searchBalances": "Търси налични средства",
         "searchAgain": "Повторно търсене",

@@ -240,6 +240,10 @@
                 "title": "Powiadomienia",
                 "description": "Powiadomienia systemowe dla transakcji"
             },
+            "networkStatus": {
+                "title": "Status sieci",
+                "description": "Wyświetla stan serwera, do którego jesteś obecnie podłączony."
+            },
             "exportStronghold": {
                 "title": "Eksportuj kopię zapasową",
                 "description": "Eksport do pliku Stronghold - kompletna zaszyfrowana kopia zapasowa portfeli wraz z ostatnią historią transakcji"
@@ -371,7 +375,7 @@
                 "networkDown": "Brak dostępu do sieci",
                 "status": "Status",
                 "messagesPerSecond": "Wiadomości na sekundę",
-                "confirmationRate": "Potwierdzenia"
+                "referencedRate": "Ilość potwierdzeń"
             },
             "profileModal": {
                 "allSettings": "Wszystkie ustawienia",
@@ -583,6 +587,7 @@
         "viewStatus": "Pokaż status",
         "showHiddenAccounts": "Pokaż ukryte portfele",
         "confirm": "Potwierdź",
+        "hideNetworkStatistics": "Ukryj statystyki sieci",
         "findBalances": "Znajdź środki",
         "searchBalances": "Szukaj środków",
         "searchAgain": "Szukaj ponownie",

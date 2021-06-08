@@ -240,6 +240,10 @@
                 "title": "Bildirimler",
                 "description": "İşlem olayları için sistem bildirimleri"
             },
+            "networkStatus": {
+                "title": "Network status",
+                "description": "Displays the status of the node you are currently connected to."
+            },
             "exportStronghold": {
                 "title": "Yedeği dışa aktar",
                 "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
@@ -371,7 +375,7 @@
                 "networkDown": "Ağ bağlantısı kesildi",
                 "status": "Durum",
                 "messagesPerSecond": "Saniye başına mesaj sayısı",
-                "confirmationRate": "Doğrulama Oranı"
+                "referencedRate": "Referenced rate"
             },
             "profileModal": {
                 "allSettings": "Tüm ayarlar",
@@ -583,6 +587,7 @@
         "viewStatus": "Durumu görüntüle",
         "showHiddenAccounts": "Gizli cüzdanları göster",
         "confirm": "Onayla",
+        "hideNetworkStatistics": "Hide network statistics",
         "findBalances": "Bakiyeleri bul",
         "searchBalances": "Bakiyeleri ara",
         "searchAgain": "Tekrar ara",
