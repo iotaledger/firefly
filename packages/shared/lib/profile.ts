@@ -94,7 +94,7 @@ export const newProfile = writable<Profile | null>(null)
 export const isStrongholdLocked = writable<boolean>(true)
 
 // Dev flag to create simulator ledger profiles
-export const ledgerSimulator = false
+export const ledgerSimulator = true
 
 /**
  * Currently active profile
