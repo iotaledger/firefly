@@ -105,9 +105,6 @@
                 }
                 nextState = ImportState.BackupPassword
                 break
-            case ImportState.LedgerImport:
-                nextState = ImportState.Success
-                break
             case ImportState.BackupPassword:
                 const { password } = params
                 busy = true
@@ -148,7 +145,11 @@
                     isGettingMigrationData = false
                 }
                 break
-
+            case ImportState.LedgerImport:
+                const { impType } = params
+                importType.set(impType)
+                dispatch('next', { importType: impType })
+                break
             case ImportState.Success:
                 dispatch('next', { importType: get(importType) })
                 break

@@ -1,15 +1,15 @@
 <script lang="typescript">
     import { Button, Illustration, OnboardingLayout, Text } from 'shared/components'
+    import { ImportType } from 'shared/lib/profile'
     import { createEventDispatcher } from 'svelte'
-    import { LedgerApp } from '../Ledger.svelte'
 
     export let locale
     export let mobile
 
     const dispatch = createEventDispatcher()
 
-    function handleContinueClick(app: LedgerApp) {
-        dispatch('next', { app })
+    function handleContinueClick(impType: ImportType) {
+        dispatch('next', { impType })
     }
     function handleBackClick() {
         dispatch('previous')
@@ -23,11 +23,11 @@
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-5">{locale('views.importFromLedger.title')}</Text>
             <Text type="p" secondary classes="mb-8">{locale('views.importFromLedger.body')}</Text>
-            <Button icon="settings" classes="w-full mb-5" secondary onClick={() => handleContinueClick(LedgerApp.Firefly)}>
+            <Button icon="settings" classes="w-full mb-5" secondary onClick={() => handleContinueClick(ImportType.FireflyLedger)}>
                 {locale('views.importFromLedger.haveFireflyLedger')}
                 <Text type="p" secondary smaller>{locale('views.importFromLedger.haveFireflyLedgerDescription')}</Text>
             </Button>
-            <Button icon="settings" classes="w-full mb-8" secondary onClick={() => handleContinueClick(LedgerApp.Trinity)}>
+            <Button icon="settings" classes="w-full mb-8" secondary onClick={() => handleContinueClick(ImportType.TrinityLedger)}>
                 {locale('views.importFromLedger.haveTrinityLedger')}
                 <Text type="p" secondary smaller>{locale('views.importFromLedger.haveTrinityLedgerDescription')}</Text>
             </Button>

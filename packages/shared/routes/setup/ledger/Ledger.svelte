@@ -1,32 +1,25 @@
-<script context="module" lang="typescript">
-    export enum LedgerApp {
-        Trinity = 'Trinity',
-        Firefly = 'Firefly',
-    }
-</script>
-
 <script lang="typescript">
     import { Transition } from 'shared/components'
-    import { createEventDispatcher, getContext } from 'svelte'
-    import { get } from 'svelte/store'
-    import type { Writable } from 'svelte/store'
-    import { ImportType } from '../../Import.svelte'
+    import { walletSetupType } from 'shared/lib/router'
+    import { SetupType } from 'shared/lib/typings/routes'
+    import { createEventDispatcher, onMount } from 'svelte'
     import {
         AccountIndex,
         Balance,
-        Migrate,
+        Create,
         FireflyImport,
-        Import,
-        InstallLedgerApp,
-        TrinityImport,
         GenerateNewAddress,
+        InstallLedgerApp,
+        Migrate,
+        Success,
+        TrinityImport,
     } from './views/'
 
     export let locale
     export let mobile
 
     enum State {
-        Init = 'init',
+        Create = 'create',
         FireflyImport = 'fireflyImport',
         TrinityImport = 'trinityImport',
         InstallLedgerApp = 'installLedgerApp',
@@ -34,29 +27,32 @@
         AccountIndex = 'accountIndex',
         Migrate = 'migrate',
         Balance = 'balance',
+        Success = 'success',
     }
 
     const dispatch = createEventDispatcher()
-    const importType = getContext<Writable<ImportType>>('importType')
 
     let balance
 
-    let state: State = State.Init
+    let state: State = State.Create
     let stateHistory = []
+
+    onMount(() => {
+        if ($walletSetupType === SetupType.New) {
+            state = State.Create
+        } else if ($walletSetupType === SetupType.TrinityLedger) {
+            state = State.TrinityImport
+        } else if ($walletSetupType === SetupType.FireflyLedger) {
+            state = State.FireflyImport
+        }
+    })
 
     const _next = async (event) => {
         let nextState
         let params = event.detail || {}
         switch (state) {
-            case State.Init:
-                const { app } = params
-                if (app === LedgerApp.Trinity) {
-                    importType.set(ImportType.TrinityLedger)
-                    nextState = State.TrinityImport
-                } else if (app === LedgerApp.Firefly) {
-                    importType.set(ImportType.FireflyLedger)
-                    nextState = State.FireflyImport
-                }
+            case State.Create:
+                dispatch('next')
                 break
             case State.FireflyImport:
                 balance = params.balance
@@ -76,13 +72,16 @@
                 nextState = State.Balance
                 break
             case State.Balance:
-                if (get(importType) === ImportType.FireflyLedger) {
-                    dispatch('next')
-                } else if (get(importType) === ImportType.TrinityLedger) {
+                if ($walletSetupType === SetupType.FireflyLedger) {
+                    nextState = State.Success
+                } else if ($walletSetupType === SetupType.TrinityLedger) {
                     nextState = State.Migrate
                 }
                 break
             case State.Migrate:
+                nextState = State.Success
+                break
+            case State.Success:
                 dispatch('next')
                 break
         }
@@ -102,9 +101,9 @@
     }
 </script>
 
-{#if state === State.Init}
+{#if state === State.Create}
     <Transition>
-        <Import on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <Create on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
 {:else if state === State.FireflyImport}
     <Transition>
@@ -133,5 +132,9 @@
 {:else if state === State.Balance}
     <Transition>
         <Balance on:next={_next} on:previous={_previous} {balance} {locale} {mobile} />
+    </Transition>
+{:else if state === State.Success}
+    <Transition>
+        <Success on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
 {/if}

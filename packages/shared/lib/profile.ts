@@ -64,6 +64,25 @@ export enum ProfileType {
     LedgerSimulator = 'LedgerSimulator'
 }
 
+/**
+ * Profile import types
+ */
+export enum ImportType {
+    Seed = 'seed',
+    Mnemonic = 'mnemonic',
+    File = 'file',
+    SeedVault = 'seedvault',
+    Stronghold = 'stronghold',
+    Ledger = 'ledger',
+    TrinityLedger = 'trinityLedger',
+    FireflyLedger = 'fireflyLedger',
+}
+
+export enum LedgerApp {
+    Trinity = 'Trinity',
+    Firefly = 'Firefly',
+}
+
 export const activeProfileId = writable<string | null>(null)
 
 export const profiles = persistent<Profile[]>('profiles', [])

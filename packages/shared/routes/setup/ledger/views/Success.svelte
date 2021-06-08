@@ -1,22 +1,23 @@
 <script lang="typescript">
-    import { Button, Icon, OnboardingLayout, Text } from 'shared/components'
-    import { walletSetupType } from 'shared/lib/router'
-    import { SetupType } from 'shared/lib/typings/routes'
-    import { createEventDispatcher, onMount } from 'svelte'
+    import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
+    import { ImportType } from 'shared/lib/profile'
+    import { createEventDispatcher, getContext, onMount } from 'svelte'
+    import type { Writable } from 'svelte/store'
 
     export let locale
     export let mobile
 
     const dispatch = createEventDispatcher()
+    const importType = getContext<Writable<ImportType>>('importType')
 
     let localizedGroup = 'default'
 
     onMount(() => {
-        switch ($walletSetupType) {
-            case SetupType.FireflyLedger:
+        switch ($importType) {
+            case ImportType.FireflyLedger:
                 localizedGroup = 'fireflyLedger'
                 break
-            case SetupType.TrinityLedger:
+            case ImportType.TrinityLedger:
                 localizedGroup = 'trinityLedger'
                 break
         }
@@ -47,7 +48,11 @@
             <Button classes="w-full" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-green dark:bg-gray-900">
-            <!-- TODO: animation -->
+            <!-- TODO: ledger, add success for ledger -->
+            {#if $importType !== ImportType.TrinityLedger}
+                <Animation
+                    animation={$importType === ImportType.Seed || $importType === ImportType.Mnemonic ? 'import-from-text-success-desktop' : 'import-from-file-success-desktop'} />
+            {/if}
         </div>
     </OnboardingLayout>
 {/if}

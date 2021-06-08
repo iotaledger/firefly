@@ -141,11 +141,8 @@ export const routerNext = (event) => {
             if (profileType === ProfileType.Software) {
                 nextRoute = AppRoute.Secure
             } else if (profileType === ProfileType.Ledger || ProfileType.LedgerSimulator) {
-                nextRoute = AppRoute.LedgerSetup
+                nextRoute = AppRoute.Protect
             }
-            break
-        case AppRoute.LedgerSetup:
-            nextRoute = AppRoute.Protect
             break
         case AppRoute.Secure:
             nextRoute = AppRoute.Password
@@ -164,10 +161,11 @@ export const routerNext = (event) => {
                 const walletSetupType_ = get(walletSetupType)
                 const profileType = get(activeProfile)?.profileType
                 if (
-                    [SetupType.Mnemonic, SetupType.Stronghold, SetupType.FireflyLedger, SetupType.TrinityLedger].includes(walletSetupType_) ||
-                    (profileType === ProfileType.Ledger || profileType === ProfileType.LedgerSimulator)
+                    [SetupType.Mnemonic, SetupType.Stronghold].includes(walletSetupType_)
                 ) {
                     nextRoute = AppRoute.Congratulations
+                } else if ([ProfileType.Ledger, ProfileType.LedgerSimulator].includes(profileType)) {
+                    nextRoute = AppRoute.LedgerSetup
                 } else {
                     nextRoute = AppRoute.Backup
                 }
@@ -186,7 +184,7 @@ export const routerNext = (event) => {
             walletSetupType.set(importType)
             if (importType === SetupType.Mnemonic) {
                 nextRoute = AppRoute.Secure
-            } else if (importType === SetupType.Stronghold || importType === SetupType.TrinityLedger || importType === SetupType.FireflyLedger) {
+            } else if ([SetupType.Stronghold, SetupType.TrinityLedger, SetupType.FireflyLedger].includes(importType)) {
                 nextRoute = AppRoute.Protect
             } else if (importType === SetupType.Seed || importType === SetupType.Seedvault) {
                 nextRoute = AppRoute.Balance
@@ -196,6 +194,9 @@ export const routerNext = (event) => {
             nextRoute = AppRoute.Password
             break
         case AppRoute.Migrate:
+            nextRoute = AppRoute.Congratulations
+            break
+        case AppRoute.LedgerSetup:
             nextRoute = AppRoute.Congratulations
             break
         case AppRoute.Congratulations:
