@@ -4,6 +4,7 @@
 
     export let locale
     export let mobile
+    export let steps
 
     const dispatch = createEventDispatcher()
 
@@ -19,7 +20,7 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout onBackClick={handleBackClick}>
+    <OnboardingLayout onBackClick={handleBackClick} {steps}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-5">{locale('views.importFromTrinityLedger.title')}</Text>
             <Text type="p" secondary classes="mb-8">{locale('views.importFromTrinityLedger.body')}</Text>

@@ -7,6 +7,7 @@
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
 
+    export let steps
     export let locale
     export let mobile
 
@@ -81,7 +82,7 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout onBackClick={handleBackClick}>
+    <OnboardingLayout onBackClick={handleBackClick} {steps}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-5">{locale('views.setupLedger.title')}</Text>
             <Text type="p" secondary classes="mb-2">{locale('views.setupLedger.body1')}</Text>

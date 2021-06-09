@@ -1,9 +1,10 @@
 <script lang="typescript">
-    import { Icon } from 'shared/components'
+    import { Icon, ProgressFlow } from 'shared/components'
 
     export let allowBack = true
     export let onBackClick = () => {}
     export let busy = false
+    export let steps = undefined
 </script>
 
 <!-- https://github.com/sveltejs/svelte/issues/4546 -->
@@ -31,7 +32,12 @@
             </div>
         </div>
     </div>
-    <div data-label="rightpane" style={`width: 62%;`} class="bg-gray-100 dark:bg-gray-900">
+    <div data-label="rightpane" style={`width: 62%;`} class="relative bg-gray-100 dark:bg-gray-900">
         <slot name="rightpane" />
+        {#if steps}
+            <div class="absolute transform bottom-8 left-1/2 -translate-x-1/2 w-full px-20">
+                <ProgressFlow {steps} />
+            </div>
+        {/if}
     </div>
 </div>

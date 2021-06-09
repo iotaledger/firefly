@@ -6,6 +6,7 @@
 
     export let locale
     export let mobile
+    export let steps
 
     const dispatch = createEventDispatcher()
     const importType = getContext<Writable<ImportType>>('importType')
@@ -34,7 +35,7 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout onBackClick={handleBackClick}>
+    <OnboardingLayout onBackClick={handleBackClick} {steps}>
         <div slot="leftpane__content">
             <div class="flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-5 text-center">
                 <div class="bg-green-100 rounded-2xl relative -top-10">

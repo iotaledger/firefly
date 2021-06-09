@@ -4,6 +4,7 @@
 
     export let locale
     export let mobile
+    export let steps
 
     let index = 0
 
@@ -21,7 +22,7 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout onBackClick={handleBackClick}>
+    <OnboardingLayout onBackClick={handleBackClick} {steps}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-5">{locale('views.selectLedgerAccountIndex.title')}</Text>
             <Text type="p" secondary>{locale('views.selectLedgerAccountIndex.body')}</Text>

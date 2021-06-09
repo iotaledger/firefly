@@ -4,6 +4,7 @@
 
     export let locale
     export let mobile
+    export let steps
 
     let newAddress = null
     let busy = false
@@ -42,7 +43,7 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout onBackClick={handleBackClick}>
+    <OnboardingLayout onBackClick={handleBackClick} {steps}>
         <div slot="leftpane__content">
             {#if confirmed}
                 <div class="flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-5 text-center">

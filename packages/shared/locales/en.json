@@ -47,7 +47,11 @@
             "body1": "1. Open Ledger Live and install New IOTA app",
             "body2": "2. Close Ledger Live desktop application",
             "body3": "3. Open the new app on your Ledger device",
-            "connect": "Connect your Ledger device to begin the setup process"
+            "connect": "Connect your Ledger device to begin the setup process",
+            "progress1": "Install ledger app",
+            "progress2": "Generate address",
+            "progress3": "Switch ledger app",
+            "progress4": "Transfer funds"
         },
         "password": {
             "title": "Create a password",

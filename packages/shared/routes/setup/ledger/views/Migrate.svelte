@@ -15,6 +15,7 @@
     export let locale
     export let mobile
     export let balance
+    export let steps
 
     const dispatch = createEventDispatcher()
 
@@ -46,7 +47,7 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout onBackClick={handleBackClick}>
+    <OnboardingLayout onBackClick={handleBackClick} {steps}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-5">{locale('views.migrateLedgerFunds.title')}</Text>
             <Text type="p" secondary classes="mb-4">{locale('views.migrateLedgerFunds.body1')}</Text>
