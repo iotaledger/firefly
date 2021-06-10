@@ -43,6 +43,7 @@
                         {
                             onSuccess(createAccountResponse) {
                                 newAddress = createAccountResponse.payload.addresses[0].address
+
                                 busy = false
                             },
                             onError(error) {

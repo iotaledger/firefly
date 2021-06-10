@@ -225,6 +225,17 @@ export const api: {
         mwm: number,
         callbacks: { onSuccess: (response: Event<SendMigrationBundleResponse>) => void, onError: (err: ErrorEventPayload) => void }
     ),
+    getMigrationAddress(
+        callbacks: { onSuccess: (response: Event<SendMigrationBundleResponse>) => void, onError: (err: ErrorEventPayload) => void }
+    ),
+    mineBundle(
+        bundle: string[],
+        spentBundleHashes: string[],
+        securityLevel: number,
+        timeout: number,
+        offset: number,
+        callbacks: { onSuccess: (response: Event<SendMigrationBundleResponse>) => void, onError: (err: ErrorEventPayload) => void }
+    ),
 } = window['__WALLET_API__']
 
 export const getWalletStoragePath = (appPath: string): string => {

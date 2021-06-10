@@ -30,6 +30,8 @@ import {
   getMigrationData as _getMigrationData,
   createMigrationBundle as _createMigrationBundle,
   sendMigrationBundle as _sendMigrationBundle,
+  getMigrationAddress as _getMigrationAddreess,
+  mineBundle as _mineBundle
 } from '../../../shared/lib/typings/migration'
 import {
   LoggerConfig,
@@ -221,6 +223,16 @@ export const api = {
     ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _sendMigrationBundle(sendMessage, __ids, nodes, bundleHash, mwm)
   },
+  getMigrationAddress: function ():
+    ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _getMigrationAddreess(sendMessage, __ids)
+  },
+  mineBundle: function (bundle: string[], spentBundleHashes: string[], securityLevel: number, timeout: number, offset: number):
+    ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _mineBundle(sendMessage, __ids, bundle, spentBundleHashes, securityLevel, timeout, offset)
+  },
+
+
   getNodeInfo: function (accountId: AccountIdentifier, url?: string): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _getNodeInfo(sendMessage, __ids, accountId, url)
   },

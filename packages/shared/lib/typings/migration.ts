@@ -144,3 +144,61 @@ export function sendMigrationBundle(
         },
     })
 }
+
+/**
+ * Gets migration address
+ * 
+ * @method getMigrationAddress
+ * 
+ * @param {Bridge} bridge 
+ * @param {CommunicationIds} __ids 
+ * 
+ * @returns {Promise}
+ */
+ export function getMigrationAddress(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+) {
+    return bridge({
+        actorId: __ids.actorId,
+        id: __ids.messageId,
+        cmd: 'GetMigrationAddress'
+    })
+}
+
+/**
+ * Gets migration address
+ * 
+ * @method getMigrationAddress
+ * 
+ * @param {Bridge} bridge 
+ * @param {CommunicationIds} __ids 
+ * @param {string[]} bundle
+ * @param {string[]} spentBundleHashes
+ * @param {number} timeout
+ * @param {number} offset
+ * 
+ * @returns {Promise}
+ */
+ export function mineBundle(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+    bundle: string[],
+    spentBundleHashes: string[],
+    securityLevel: number,
+    timeout: number,
+    offset: number
+) {
+    return bridge({
+        actorId: __ids.actorId,
+        id: __ids.messageId,
+        cmd: 'MineBundle',
+        payload: {
+            bundle,
+            spentBundleHashes,
+            securityLevel,
+            timeout,
+            offset
+        }
+    })
+}
