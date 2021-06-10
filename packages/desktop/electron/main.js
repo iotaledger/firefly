@@ -85,7 +85,7 @@ let paths = {
 const defaultWebPreferences = {
     nodeIntegration: false,
     contextIsolation: true,
-    enableRemoteModule: false,
+    enableRemoteModule: true,
     worldSafeExecuteJavaScript: true,
     disableBlinkFeatures: 'Auxclick',
     webviewTag: false,

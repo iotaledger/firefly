@@ -18,9 +18,11 @@
         "compile:win": "electron-builder --win --x64"
     },
     "dependencies": {
+        "@ledgerhq/hw-transport-node-hid": "^5.13.0",
         "argon2": "^0.27.1",
         "electron-log": "^4.3.1",
         "electron-updater": "^4.3.5",
+        "hw-app-iota": "0.6.1",
         "kdbxweb": "^1.14.4",
         "keytar": "^7.3.0",
         "shared": "0.0.0",

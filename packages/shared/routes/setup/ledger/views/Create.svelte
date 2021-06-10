@@ -7,6 +7,7 @@
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
+    import { Electron } from 'shared/lib/electron'
 
     export let locale
     export let mobile

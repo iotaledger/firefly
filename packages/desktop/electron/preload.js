@@ -30,6 +30,7 @@ try {
     const kdbx = require('./lib/kdbx')
     const { proxyApi } = require('shared/lib/shell/walletApi')
     const { hookErrorLogger } = require('shared/lib/shell/errorLogger')
+    const ledger = require('./lib/Ledger')
 
     let activeProfileId = null
 
@@ -319,7 +320,8 @@ try {
          * Hook the logger
          * @returns 
          */
-        hookErrorLogger
+        hookErrorLogger,
+        ledger
     }
 
     contextBridge.exposeInMainWorld('__WALLET_INIT__', {
@@ -329,6 +331,6 @@ try {
     contextBridge.exposeInMainWorld('__WALLET_API__', Wallet.api)
 
     contextBridge.exposeInMainWorld('Electron', Electron)
-} catch (error) {
+} catch (error) {    
     ipcRenderer.invoke('handle-error', "Preload Error", error)
 }
