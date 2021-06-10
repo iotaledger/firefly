@@ -30,8 +30,8 @@
         let glowInitted = false
         if (!glowInitted) {
             const ap = $activeProfile
-            api.callPlugin({
-                plugin:'glow',
+            api.callGlow({
+                coin:'IOTA',
                 method:'Start',
                 payload: JSON.stringify({
                     emojis,
@@ -47,8 +47,8 @@
                 timeHasPassed = true
             }, 2500)
         } else {
-            api.callPlugin({
-                plugin:'glow',
+            api.callGlow({
+                coin:'IOTA',
                 method:'Stop'
             }, {
                 onSuccess: r=> glowInitted=false,
@@ -58,8 +58,8 @@
     }
 
     function finishLink() {
-        api.callPlugin({
-            plugin:'glow',
+        api.callGlow({
+            coin:'IOTA',
             method:'Initialize',
             payload: ''
         }, {

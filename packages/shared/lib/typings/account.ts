@@ -227,22 +227,23 @@ export function getNodeInfo(bridge: Bridge, __ids: CommunicationIds, accountId: 
 }
 
 
-export type CallPluginMethod = 
+export type CallGlowMethod = 
     'Start' | 
     'Stop' |
     'Initialize'
 
-export interface CallPluginPayload {
-    plugin: string
-    method: CallPluginMethod
+type Coin = "IOTA"
+export interface CallGlowPayload {
+    coin: Coin
+    method: CallGlowMethod
     payload?: string
 }
 
-export function callPlugin(bridge: Bridge, __ids: CommunicationIds, payload: CallPluginPayload): Promise<string> {
+export function callGlow(bridge: Bridge, __ids: CommunicationIds, payload: CallGlowPayload): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
-        cmd: 'CallPlugin',
+        cmd: 'CallGlow',
         payload,
     })
 }

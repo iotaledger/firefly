@@ -749,7 +749,7 @@ export default class ValidatorService {
             [ResponseTypes.UpdatedAllClientOptions]: this.createBaseValidator().getFirst(),
             [ResponseTypes.StrongholdPasswordClearIntervalSet]: this.createBaseValidator().getFirst(),
             [ResponseTypes.NodeInfo]: this.createBaseValidator().add(new NodeInfoValidator()).getFirst(),
-            [ResponseTypes.CalledPlugin]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.CalledGlow]: this.createBaseValidator().getFirst(),
             [ResponseTypes.Error]: this.createBaseValidator().getFirst(),
             [ResponseTypes.Panic]: this.createBaseValidator().getFirst(),
 

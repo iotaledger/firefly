@@ -21,8 +21,8 @@ import {
   areLatestAddressesUnused as _areLatestAddressesUnused,
   setAlias as _setAlias,
   getNodeInfo as _getNodeInfo,
-  callPlugin as _callPlugin,
-  CallPluginPayload,
+  callGlow as _callGlow,
+  CallGlowPayload,
 } from '../../../shared/lib/typings/account'
 import {
   Transfer,
@@ -225,8 +225,8 @@ export const api = {
   getNodeInfo: function (accountId: AccountIdentifier, url?: string): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _getNodeInfo(sendMessage, __ids, accountId, url)
   },
-  callPlugin: function (pld: CallPluginPayload): ((__ids: CommunicationIds) => Promise<string>) {
-    return (__ids: CommunicationIds) => _callPlugin(sendMessage, __ids, pld)
+  callGlow: function (pld: CallGlowPayload): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _callGlow(sendMessage, __ids, pld)
   },
   
   // Event emitters 
