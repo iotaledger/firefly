@@ -1,6 +1,9 @@
 <script lang="typescript">
     import { Button, OnboardingLayout, Text, Spinner, Icon } from 'shared/components'
     import { createEventDispatcher, onDestroy } from 'svelte'
+    import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
+    import { api } from 'shared/lib/wallet'
+    import { ledgerSimulator } from 'shared/lib/profile'
 
     export let locale
     export let mobile
@@ -17,10 +20,44 @@
     function generateNewAddress() {
         busy = true
         newAddress = null
-        timeout = setTimeout(() => {
-            newAddress = 'iot1q9f0mlq8yxpx2nck8a0slxnzr4ef2ek8f5gqxlzd0wasgp73utryjtzcp98' // dummy
-            busy = false
-        }, 2000)
+
+        api.getAccounts({
+            onSuccess(getAccountsResponse) {
+                // If we have already created an account, just get the first address of the first account
+                if (getAccountsResponse.payload.length > 0) {
+                    newAddress = getAccountsResponse.payload[0].addresses[0].address
+                    busy = false
+                } else {
+                    const officialNodes = getOfficialNodes()
+                    const officialNetwork = getOfficialNetwork()
+                    api.createAccount(
+                        {
+                            clientOptions: {
+                                nodes: officialNodes,
+                                node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
+                                network: officialNetwork,
+                            },
+                            alias: `${locale('general.account')} 1`,
+                            signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
+                        },
+                        {
+                            onSuccess(createAccountResponse) {
+                                newAddress = createAccountResponse.payload.addresses[0].address
+                                busy = false
+                            },
+                            onError(error) {
+                                busy = false
+                                console.error(error)
+                            },
+                        }
+                    )
+                }
+            },
+            onError(getAccountsError) {
+                busy = false
+                console.error(getAccountsError)
+            },
+        })
     }
 
     function handleConfirmClick() {
