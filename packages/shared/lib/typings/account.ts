@@ -232,9 +232,7 @@ export type CallGlowMethod =
     'Stop' |
     'Initialize'
 
-type Coin = "IOTA"
 export interface CallGlowPayload {
-    coin: Coin
     method: CallGlowMethod
     payload?: string
 }

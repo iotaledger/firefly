@@ -31,7 +31,6 @@
         if (!glowInitted) {
             const ap = $activeProfile
             api.callGlow({
-                coin:'IOTA',
                 method:'Start',
                 payload: JSON.stringify({
                     emojis,
@@ -48,7 +47,6 @@
             }, 2500)
         } else {
             api.callGlow({
-                coin:'IOTA',
                 method:'Stop'
             }, {
                 onSuccess: r=> glowInitted=false,
@@ -59,7 +57,6 @@
 
     function finishLink() {
         api.callGlow({
-            coin:'IOTA',
             method:'Initialize',
             payload: ''
         }, {
