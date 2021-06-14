@@ -97,7 +97,24 @@ const rendererRules = [
 
 /// ------------------------ Plugins ------------------------
 
-const mainPlugins = []
+const mainPlugins = [
+    new CopyPlugin({
+        patterns: [
+            {
+                from: '../../node_modules/usb/build/Release/usb_bindings.node',
+                to() {
+                    return '../build/[name].[ext]'
+                },
+            },
+            {
+                from: '../../node_modules/node-hid/build/Release/HID.node',
+                to() {
+                    return '../build/[name].[ext]'
+                },
+            },
+        ],
+    })
+]
 
 const rendererPlugins = [
     new CopyPlugin({

@@ -332,5 +332,5 @@ try {
 
     contextBridge.exposeInMainWorld('Electron', Electron)
 } catch (error) {
-   ipcRenderer.invoke('handle-error', "Preload Error", error)
+    ipcRenderer.invoke('handle-error', "Preload Error", error)
 }
