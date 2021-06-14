@@ -9,6 +9,8 @@
         exchangeRates,
         formatCurrency,
     } from 'shared/lib/currency'
+    import { walletSetupType } from 'shared/lib/router'
+    import { SetupType } from 'shared/lib/typings/routes'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
@@ -51,7 +53,7 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout onBackClick={handleBackClick} {steps}>
+    <OnboardingLayout onBackClick={handleBackClick} steps={$walletSetupType === SetupType.TrinityLedger ? steps : undefined}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-3.5">{locale('views.balance.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.balance.body')}</Text>
