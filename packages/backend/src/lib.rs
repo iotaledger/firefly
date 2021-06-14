@@ -216,7 +216,7 @@ async fn dispatch(message: DispatchMessage, mut response_rx: UnboundedReceiver<R
                 message.message,
                 ResponseType::Error(e.into()),
             ))
-            .unwrap(),
+            .expect("The response is generated manually, so unwrap is safe."),
         };
         respond(&message.actor_id, msg).expect("actor dropped");
     }
