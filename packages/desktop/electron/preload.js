@@ -6,7 +6,7 @@ window.addEventListener('error', event => {
         ipcRenderer.invoke('handle-error', "Preload Context Error", {
             message: event.error.message,
             stack: event.error.stack
-        })    
+        })
     } else {
         ipcRenderer.invoke('handle-error', "Preload Context Error", event.error || event)
     }
@@ -30,6 +30,7 @@ try {
     const kdbx = require('./lib/kdbx')
     const { proxyApi } = require('shared/lib/shell/walletApi')
     const { hookErrorLogger } = require('shared/lib/shell/errorLogger')
+    const ledger = require('./lib/Ledger').default
 
     let activeProfileId = null
 
@@ -319,7 +320,8 @@ try {
          * Hook the logger
          * @returns 
          */
-        hookErrorLogger
+        hookErrorLogger,
+        ledger,
     }
 
     contextBridge.exposeInMainWorld('__WALLET_INIT__', {
@@ -330,5 +332,5 @@ try {
 
     contextBridge.exposeInMainWorld('Electron', Electron)
 } catch (error) {
-    ipcRenderer.invoke('handle-error', "Preload Error", error)
+   ipcRenderer.invoke('handle-error', "Preload Error", error)
 }

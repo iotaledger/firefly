@@ -47,7 +47,19 @@ interface ElectronEventMap {
     "notification-activated": any;
 }
 
+interface ILedger {
+    connected: boolean;
+    listeners: { (...data: any[]): void; }[];
+    selectSeed(index: number, page: number, security: number): Promise<void | null>;
+    awaitConnection(): Promise<void>;
+    awaitApplication(index: number, page: number, security: number): Promise<void>;
+    onMessage(...data: any[]): void;
+    addListener(...data: any[]): void;
+    removeListener(...data: any[]): void;
+}
+
 export interface IElectron {
+    ledger: ILedger;
     getStrongholdBackupDestination(defaultPath: string): Promise<string | null>;
     exportMigrationLog(sourcePath: string, defaultFileName: string): Promise<boolean | null>;
     getUserDataPath(): Promise<string>;

@@ -72,6 +72,8 @@ export enum ResponseTypes {
     SentMigrationBundle = 'SentMigrationBundle',
     LegacySeedChecksum = 'SeedChecksum',
     NodeInfo = 'NodeInfo',
+    MigrationAddress = 'MigrationAddress',
+    MinedBundle = 'MinedBundle'
 }
 
 export enum Actions {
@@ -120,6 +122,8 @@ export type MigrationDataResponse = Response<ResponseTypes.MigrationData, Migrat
 export type CreatedMigrationBundleResponse = Response<ResponseTypes.CreatedMigrationBundle, MigrationBundle>
 export type SentMigrationBundleResponse = Response<ResponseTypes.SentMigrationBundle, SendMigrationBundleResponse>
 export type GetNodeInfoResponse = Response<ResponseTypes.NodeInfo, NodeInfo>
+export type GetMigrationAddressResponse = Response<ResponseTypes.MigrationAddress, string>
+export type MinedBundleResponse = Response<ResponseTypes.MinedBundle, string[]>
 
 export type MessageResponse =
     RemovedAccountResponse
@@ -160,5 +164,7 @@ export type MessageResponse =
     | CreatedMigrationBundleResponse
     | SentMigrationBundleResponse
     | GetNodeInfoResponse
+    | GetMigrationAddressResponse 
+    | MinedBundleResponse
 
 export type Bridge = (message: BridgeMessage) => Promise<string>
