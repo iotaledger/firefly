@@ -98,8 +98,10 @@
         <div slot="leftpane__action" class="flex flex-col space-y-4">
             {#if confirmed}
                 <Button classes="w-full" onClick={handleContinueClick}>{locale('actions.continue')}</Button>
+            {:else if newAddress}
+                <Button classes="w-full" onClick={handleConfirmClick}>{locale('actions.confirm')}</Button>
             {:else}
-                <Button classes="w-full" disabled={busy} secondary={newAddress} onClick={generateNewAddress}>
+                <Button classes="w-full" disabled={busy} onClick={generateNewAddress}>
                     {#if busy}
                         <Spinner
                             busy={true}
@@ -107,9 +109,6 @@
                             classes="justify-center" />
                     {:else}{locale('actions.generateAddress')}{/if}
                 </Button>
-                {#if newAddress}
-                    <Button classes="w-full" onClick={handleConfirmClick}>{locale('actions.confirm')}</Button>
-                {/if}
             {/if}
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-end items-center bg-pastel-blue dark:bg-gray-900" />
