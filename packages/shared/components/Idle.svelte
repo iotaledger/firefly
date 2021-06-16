@@ -8,7 +8,7 @@
     let timeout
     let isDestroyed = false
 
-    function handleEvent() {
+    function handleEvent(): void {
         // The events are debounced so the component can get onDestroy
         // called and be followed by a debounced handleEvent so
         // make sure the idle doesn't get triggered again when its
@@ -18,22 +18,40 @@
 
             const ap = get(activeProfile)
             if (ap) {
-                const beginning = get(lastActiveAt)
-                lastActiveAt.set(new Date(Date.now()))
-                const end = get(lastActiveAt)
+                const now = new Date(Date.now())
+                const timeoutDuration = ap.settings.lockScreenTimeout * 60 * 1000
 
-                const idleDuration = end - beginning
-                const lockScreenTimeoutDuration = ap.settings.lockScreenTimeout * 60 * 1000
-                if(idleDuration >= lockScreenTimeoutDuration) {
-                    console.log("LOCK!")
-                }
+                if(!isIdleTimeValid(now, timeoutDuration))
+                    lockScreen()
 
-                timeout = setTimeout(lock, ap.settings.lockScreenTimeout * 60 * 1000)
+                timeout = setTimeout(lockScreen, timeoutDuration)
             }
         }
     }
 
-    function lock() {
+    function isIdleTimeValid(newLastActiveTime: Date, timeoutDuration: number): boolean {
+        /**
+         * CAUTION: An attacker can manipulate the date / time on his device, so it is necessary
+         * to ensure that the newLastActiveTime is actually "newer".
+         */
+        const oldLastActiveTime = get(lastActiveAt)
+        const isValidIdleTimestamp = newLastActiveTime >= oldLastActiveTime
+
+        const idleDuration = calculateUpdatedIdleTime(newLastActiveTime)
+        const isValidIdleDuration = idleDuration < timeoutDuration
+
+        return isValidIdleTimestamp && isValidIdleDuration
+    }
+
+    function calculateUpdatedIdleTime(newLastActiveTime: Date): number {
+        const oldLastActiveTime = get(lastActiveAt)
+
+        lastActiveAt.set(newLastActiveTime)
+
+        return newLastActiveTime - oldLastActiveTime
+    }
+
+    function lockScreen(): void {
         logout()
     }
 
@@ -44,8 +62,8 @@
 </script>
 
 <svelte:window
-    on:keydown={debounce(handleEvent)}
-    on:mousemove={debounce(handleEvent)}
-    on:mousedown={debounce(handleEvent)}
-    on:touchstart={debounce(handleEvent)}
-    on:scroll={debounce(handleEvent)} />
+        on:keydown={debounce(handleEvent)}
+        on:mousemove={debounce(handleEvent)}
+        on:mousedown={debounce(handleEvent)}
+        on:touchstart={debounce(handleEvent)}
+        on:scroll={debounce(handleEvent)} />

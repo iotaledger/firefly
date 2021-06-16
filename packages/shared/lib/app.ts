@@ -3,7 +3,7 @@ import { persistent } from './helpers'
 import { localize } from './i18n'
 import { showAppNotification } from './notifications'
 import { closePopup } from './popup'
-import { activeProfile, clearActiveProfile, isStrongholdLocked } from './profile'
+import { activeProfile, clearActiveProfile, isStrongholdLocked, lastActiveAt } from './profile'
 import { resetRouter } from './router'
 import { api, destroyActor, resetWallet } from './wallet'
 
@@ -74,11 +74,14 @@ export const logout = () => {
                 destroyActor(ap.id)
             }
             isStrongholdLocked.set(true)
+            lastActiveAt.set(new Date(Date.now()))
+
             clearSendParams()
             closePopup()
             clearActiveProfile()
             resetWallet()
             resetRouter()
+
             loggedIn.set(false)
 
             resolve()

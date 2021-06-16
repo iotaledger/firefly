@@ -63,6 +63,8 @@ export const newProfile = writable<Profile | null>(null)
 
 export const isStrongholdLocked = writable<boolean>(true)
 
+export const lastActiveAt = writable<Date>(new Date(Date.now()))
+
 /**
  * Currently active profile
  */
