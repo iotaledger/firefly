@@ -1,8 +1,10 @@
 <script lang="typescript">
     import { Animation, Button, OnboardingLayout, SpentAddress, Text } from 'shared/components'
-    import { spentAddressesFromBundles, toggleMiningSelection } from 'shared/lib/migration'
+    import { ledgerMigrationProgresses, spentAddressesFromBundles, toggleMiningSelection } from 'shared/lib/migration'
     import { closePopup, openPopup } from 'shared/lib/popup'
+    import { walletSetupType } from 'shared/lib/router'
     import { RiskLevel } from 'shared/lib/typings/migration'
+    import { SetupType } from 'shared/lib/typings/routes'
     import { createEventDispatcher } from 'svelte'
 
     export let locale
@@ -60,7 +62,10 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout allowBack={false} classes="relative">
+    <OnboardingLayout
+        allowBack={false}
+        classes="relative"
+        progress={$walletSetupType === SetupType.TrinityLedger ? $ledgerMigrationProgresses : undefined}>
         <div slot="leftpane__content" class="h-full flex flex-col flex-wrap">
             <Text type="h2" classes="mb-5">{locale('views.securityCheckCompleted.title')}</Text>
             <Text type="p" secondary classes="mb-4">{locale('views.securityCheckCompleted.body1')}</Text>

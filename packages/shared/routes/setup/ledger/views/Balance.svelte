@@ -9,6 +9,7 @@
         exchangeRates,
         formatCurrency,
     } from 'shared/lib/currency'
+    import { ledgerMigrationProgresses } from 'shared/lib/migration'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
     import { formatUnitBestMatch } from 'shared/lib/units'
@@ -18,7 +19,6 @@
     export let locale
     export let mobile
     export let balance
-    export let steps
 
     const dispatch = createEventDispatcher()
 
@@ -53,7 +53,9 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout onBackClick={handleBackClick} steps={$walletSetupType === SetupType.TrinityLedger ? steps : undefined}>
+    <OnboardingLayout
+        onBackClick={handleBackClick}
+        progress={$walletSetupType === SetupType.TrinityLedger ? $ledgerMigrationProgresses : undefined}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-3.5">{locale('views.balance.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.balance.body')}</Text>

@@ -8,6 +8,7 @@ import { AppRoute } from 'shared/lib/typings/routes'
 import Validator from 'shared/lib/validator'
 import { api } from 'shared/lib/wallet'
 import { derived, get, writable, Writable } from 'svelte/store'
+import { localize } from './i18n'
 
 export const LOG_FILE_NAME = 'migration.log'
 
@@ -45,6 +46,43 @@ interface MigrationState {
     seed: Writable<string>
     bundles: Writable<Bundle[]>
 }
+
+export enum LedgerMigrationProgress {
+    InstallLedgerApp,
+    GenerateAddress,
+    SwitchLedgerApp,
+    TransferFunds,
+}
+
+export const currentLedgerMigrationProgress = writable<LedgerMigrationProgress>(null)
+export const ledgerMigrationProgresses = derived(currentLedgerMigrationProgress, _currentLedgerMigrationProgress => {
+    // had to add this here otherwise it gives error
+    const LEDGER_MIGRATION_PROGRESSES = [
+        {
+            title: localize('views.setupLedger.progress1'),
+            state: LedgerMigrationProgress.InstallLedgerApp,
+        },
+        {
+            title: localize('views.setupLedger.progress2'),
+            state: LedgerMigrationProgress.GenerateAddress,
+        },
+        {
+            title: localize('views.setupLedger.progress3'),
+            state: LedgerMigrationProgress.SwitchLedgerApp,
+        },
+        {
+            title: localize('views.setupLedger.progress4'),
+            state: LedgerMigrationProgress.TransferFunds,
+        },
+    ]
+    return LEDGER_MIGRATION_PROGRESSES.map((step, index) => {
+        return ({
+            ...step,
+            ongoing: _currentLedgerMigrationProgress === index,
+            complete: index < _currentLedgerMigrationProgress,
+        })
+    })
+})
 
 /*
  * Migration state

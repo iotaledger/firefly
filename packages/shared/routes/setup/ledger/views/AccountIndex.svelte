@@ -1,10 +1,10 @@
 <script lang="typescript">
-    import { Button, OnboardingLayout, Text, Spinner, Icon, Number } from 'shared/components'
-    import { createEventDispatcher, onDestroy } from 'svelte'
+    import { Button, Number, OnboardingLayout, Text } from 'shared/components'
+    import { ledgerMigrationProgresses } from 'shared/lib/migration'
+    import { createEventDispatcher } from 'svelte'
 
     export let locale
     export let mobile
-    export let steps
 
     let index = 0
 
@@ -22,7 +22,7 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout onBackClick={handleBackClick} {steps}>
+    <OnboardingLayout onBackClick={handleBackClick} progress={$ledgerMigrationProgresses}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-5">{locale('views.selectLedgerAccountIndex.title')}</Text>
             <Text type="p" secondary>{locale('views.selectLedgerAccountIndex.body')}</Text>

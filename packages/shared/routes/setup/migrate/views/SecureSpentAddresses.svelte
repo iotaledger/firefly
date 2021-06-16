@@ -1,8 +1,15 @@
 <script lang="typescript">
     import { Animation, Button, Link, OnboardingLayout, SpentAddress, Text } from 'shared/components'
-    import { selectAllAddressesForMining, spentAddressesFromBundles, toggleMiningSelection } from 'shared/lib/migration'
+    import {
+        ledgerMigrationProgresses,
+        selectAllAddressesForMining,
+        spentAddressesFromBundles,
+        toggleMiningSelection,
+    } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup } from 'shared/lib/popup'
+    import { walletSetupType } from 'shared/lib/router'
+    import { SetupType } from 'shared/lib/typings/routes'
     import { createEventDispatcher } from 'svelte'
 
     export let locale
@@ -65,7 +72,9 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout onBackClick={handleBackClick}>
+    <OnboardingLayout
+        onBackClick={handleBackClick}
+        progress={$walletSetupType === SetupType.TrinityLedger ? $ledgerMigrationProgresses : undefined}>
         <div slot="leftpane__content" class="relative h-full flex flex-col flex-wrap">
             <Text type="h2" classes="mb-5">{locale('views.secureSpentAddresses.title')}</Text>
             <Text type="p mb-4" secondary>

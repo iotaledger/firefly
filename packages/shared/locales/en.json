@@ -108,9 +108,11 @@
         },
         "congratulations": {
             "title": "Wallet setup completed",
-            "body": "Your new wallet is ready to use.",
             "fundsMigrated": "Funds migrated",
-            "success": "You have successfully migrated your funds to the new network",
+            "body": "Your new wallet is ready to use.",
+            "softwareMigratedBody": "You have successfully migrated your funds to the new network",
+            "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
+            "trinityLedgerBody": "Your Ledger account is successfully recovered and you can now remove the old IOTA leger app from your device.",
             "exportMigration": "Export migration log and finish setup"
         },
         "import": {
@@ -166,7 +168,7 @@
             "body": "You need to generate new address in order to transfer your old Trinity account to Firefly.",
             "generating": "Generating address",
             "successTitle": "New address generated",
-            "successBody": "Your new Firefly Ledger address is successfully generated and you can now continue the migration process."
+            "successBody": "You have confirmed that your new Firefly Ledger address is successfully matched and you can now continue the migration process."
         },
         "selectLedgerAccountIndex": {
             "title": "Choose Ledger account index",
@@ -185,18 +187,8 @@
             "body2": "This is the password you set when you first created your backup."
         },
         "importSuccess": {
-            "default": {
-                "title": "You have successfully recovered your backup",
-                "body": "You can now set up your new profile."
-            },
-            "fireflyLedger": {
-                "title": "Successfully imported",
-                "body": "Your Ledger account is successfully recovered and  you can now continue."
-            },
-            "trinityLedger": {
-                "title": "Funds successfully transferred",
-                "body": "Your Ledger account is successfully recovered and you can now remove the old IOTA leger app from your device."
-            }
+            "title": "You have successfully recovered your backup",
+            "body": "You can now set up your new profile."
         },
         "migrate": {
             "title": "Migrate your funds",
