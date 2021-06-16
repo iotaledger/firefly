@@ -36,7 +36,7 @@
 
 <div class="relative progress-wrapper flex flex-col justify-center items-center w-full" class:narrow>
     <div
-        class="relative w-full flex justify-center items-center overflow-hidden  {secondary ? 'border border-solid border-gray-300' : 'bg-blue-500'} rounded-2xl {classes}">
+        class="relative w-full flex justify-center content-center overflow-hidden  {secondary ? 'border border-solid border-gray-300' : 'bg-blue-500'} rounded-2xl {classes}">
         <span
             class="absolute left-0 inline-block {secondary ? 'bg-blue-200' : 'bg-yellow-500'} progress rounded-2xl"
             style={`width:${Math.max(Math.min(percent, 100), 0)}%`} />
