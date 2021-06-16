@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { logout } from 'shared/lib/app'
-    import { activeProfile } from 'shared/lib/profile'
+    import { activeProfile, lastActiveAt } from 'shared/lib/profile'
     import { debounce } from 'shared/lib/utils'
     import { onDestroy } from 'svelte'
     import { get } from 'svelte/store'
@@ -18,6 +18,16 @@
 
             const ap = get(activeProfile)
             if (ap) {
+                const beginning = get(lastActiveAt)
+                lastActiveAt.set(new Date(Date.now()))
+                const end = get(lastActiveAt)
+
+                const idleDuration = end - beginning
+                const lockScreenTimeoutDuration = ap.settings.lockScreenTimeout * 60 * 1000
+                if(idleDuration >= lockScreenTimeoutDuration) {
+                    console.log("LOCK!")
+                }
+
                 timeout = setTimeout(lock, ap.settings.lockScreenTimeout * 60 * 1000)
             }
         }
