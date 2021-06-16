@@ -62,8 +62,8 @@
 </script>
 
 <svelte:window
-        on:keydown={debounce(handleEvent)}
-        on:mousemove={debounce(handleEvent)}
-        on:mousedown={debounce(handleEvent)}
-        on:touchstart={debounce(handleEvent)}
-        on:scroll={debounce(handleEvent)} />
+    on:keydown={debounce(handleEvent)}
+    on:mousemove={debounce(handleEvent)}
+    on:mousedown={debounce(handleEvent)}
+    on:touchstart={debounce(handleEvent)}
+    on:scroll={debounce(handleEvent)}/>
