@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Number, OnboardingLayout, Text } from 'shared/components'
+    import { Button, Number, OnboardingLayout, Text, Toggle } from 'shared/components'
     import { ledgerMigrationProgresses } from 'shared/lib/migration'
     import { createEventDispatcher } from 'svelte'
 
@@ -7,6 +7,8 @@
     export let mobile
 
     let index = 0
+    let page = 0
+    let expert = false
 
     const dispatch = createEventDispatcher()
 
@@ -26,7 +28,28 @@
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-5">{locale('views.selectLedgerAccountIndex.title')}</Text>
             <Text type="p" secondary>{locale('views.selectLedgerAccountIndex.body')}</Text>
-            <Number bind:value={index} autofocus classes="mt-8" />
+            <div class="flex flex-col space-y-4 mt-8">
+                <div class="flex row space-x-2 items-center">
+                    <Text type="p" smaller highlighted={!expert}>{locale('views.selectLedgerAccountIndex.standard')}</Text>
+                    <Toggle
+                        active={expert}
+                        onClick={() => {
+                            expert = !expert
+                        }}
+                        classes="cursor-pointer" />
+                    <Text type="p" smaller highlighted={expert}>{locale('views.selectLedgerAccountIndex.expert')}</Text>
+                </div>
+                <div>
+                    <Text type="p" secondary classes="mb-2">{locale('views.selectLedgerAccountIndex.accountIndex')}</Text>
+                    <Number bind:value={index} />
+                </div>
+                {#if expert}
+                    <div>
+                        <Text type="p" secondary classes="mb-2">{locale('views.selectLedgerAccountIndex.accountPage')}</Text>
+                        <Number bind:value={page} />
+                    </div>
+                {/if}
+            </div>
         </div>
         <div slot="leftpane__action" class="flex flex-col space-y-4">
             <Button classes="w-full" onClick={handleContinueClick}>{locale('actions.confirm')}</Button>

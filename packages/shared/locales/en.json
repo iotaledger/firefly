@@ -172,7 +172,11 @@
         },
         "selectLedgerAccountIndex": {
             "title": "Choose Ledger account index",
-            "body": "Choose your Ledger account index. Choose your Ledger account index. Choose your Ledger account index. Choose your Ledger account index."
+            "body": "Choose your Ledger account index. Choose your Ledger account index. Choose your Ledger account index. Choose your Ledger account index.",
+            "accountIndex": "Account Index",
+            "accountPage": "Account Page",
+            "standard": "Standard",
+            "expert": "Expert"
         },
         "migrateLedgerFunds": {
             "title": "Transfer your funds",
