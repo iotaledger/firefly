@@ -55,8 +55,8 @@
 <div class="flex flex-row {classes}">
     <button
         class="group flex items-center justify-center w-8 h-10 border border-solid border-gray-300 dark:border-gray-700"
-        on:click={() => validate(value + 1)}>
-        <Icon width={16} height={16} classes="text-gray-500 dark:text-gray-100 group-hover:text-blue-500" icon="plus" />
+        on:click={() => validate(value - 1)}>
+        <Icon width={16} height={16} classes="text-gray-500 dark:text-gray-100 group-hover:text-blue-500" icon="minus" />
     </button>
     <input
         class="px-4 text-center text-12 font-700 bg-transparent border-t border-b border-solid border-gray-300 dark:border-gray-700 text-gray-800 dark:text-white"
@@ -69,7 +69,7 @@
     <button
         disabled={typeof value !== 'number'}
         class="group flex items-center justify-center w-8 h-10 border border-solid border-gray-300 dark:border-gray-700"
-        on:click={() => validate(value - 1)}>
-        <Icon width={16} height={16} icon="minus" classes="text-gray-500 dark:text-gray-100 group-hover:text-blue-500" />
+        on:click={() => validate(value + 1)}>
+        <Icon width={16} height={16} icon="plus" classes="text-gray-500 dark:text-gray-100 group-hover:text-blue-500" />
     </button>
 </div>
