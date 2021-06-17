@@ -18,7 +18,7 @@
 
             const ap = get(activeProfile)
             if (ap) {
-                const now = new Date(Date.now())
+                const now = new Date()
                 const timeoutDuration = ap.settings.lockScreenTimeout * 60 * 1000
 
                 if(!isIdleTimeValid(now, timeoutDuration))
@@ -31,19 +31,19 @@
 
     function isIdleTimeValid(newLastActiveTime: Date, timeoutDuration: number): boolean {
         /**
-         * CAUTION: An attacker can manipulate the date / time on his device, so it is necessary
-         * to ensure that the newLastActiveTime is actually "newer".
+         * CAUTION: An attacker may be able to manipulate the date / time on his device, so
+         * it is necessary to ensure that the newLastActiveTime is really newer than the old one.
          */
         const oldLastActiveTime = get(lastActiveAt)
         const isValidIdleTimestamp = newLastActiveTime >= oldLastActiveTime
 
-        const idleDuration = calculateUpdatedIdleTime(newLastActiveTime)
+        const idleDuration = calculateUpdatedIdleDuration(newLastActiveTime)
         const isValidIdleDuration = idleDuration < timeoutDuration
 
         return isValidIdleTimestamp && isValidIdleDuration
     }
 
-    function calculateUpdatedIdleTime(newLastActiveTime: Date): number {
+    function calculateUpdatedIdleDuration(newLastActiveTime: Date): number {
         const oldLastActiveTime = get(lastActiveAt)
 
         lastActiveAt.set(newLastActiveTime)
