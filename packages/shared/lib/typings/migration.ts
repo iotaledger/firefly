@@ -1,5 +1,10 @@
 import type { Bridge, CommunicationIds } from './bridge'
 
+export interface AddressInput {
+    address: string;
+    index: number;
+}
+
 export interface Input {
     address: string;
     balance: number;
@@ -155,7 +160,7 @@ export function sendMigrationBundle(
  * 
  * @returns {Promise}
  */
- export function getMigrationAddress(
+export function getMigrationAddress(
     bridge: Bridge,
     __ids: CommunicationIds,
 ) {
@@ -180,7 +185,7 @@ export function sendMigrationBundle(
  * 
  * @returns {Promise}
  */
- export function mineBundle(
+export function mineBundle(
     bridge: Bridge,
     __ids: CommunicationIds,
     bundle: string[],
@@ -200,5 +205,41 @@ export function sendMigrationBundle(
             timeout,
             offset
         }
+    })
+}
+
+/**
+ * Gets transaction history and balance for ledger addresses
+ * 
+ * @method getLedgerMigrationData
+ * 
+ * @param {Bridge} bridge 
+ * @param {CommunicationIds} __ids 
+ * @param {string} seed 
+ * @param {string[]} nodes 
+ * @param {number} [securityLevel] 
+ * @param {number} [initialAddressIndex]
+ * @param {string} [permanode]
+ *  
+ * @returns {Promise}
+ */
+export function getLedgerMigrationData(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+    addresses: AddressInput[],
+    nodes: string[],
+    permanode: string,
+    securityLevel: number
+) {
+    return bridge({
+        actorId: __ids.actorId,
+        id: __ids.messageId,
+        cmd: 'GetLedgerMigrationData',
+        payload: {
+            addresses: addresses.map((object) => JSON.stringify(object)),
+            nodes,
+            permanode,
+            securityLevel
+        },
     })
 }

@@ -31,7 +31,9 @@ import {
   createMigrationBundle as _createMigrationBundle,
   sendMigrationBundle as _sendMigrationBundle,
   getMigrationAddress as _getMigrationAddreess,
-  mineBundle as _mineBundle
+  mineBundle as _mineBundle,
+  getLedgerMigrationData as _getLedgerMigrationData,
+  AddressInput
 } from '../../../shared/lib/typings/migration'
 import {
   LoggerConfig,
@@ -230,6 +232,17 @@ export const api = {
   mineBundle: function (bundle: string[], spentBundleHashes: string[], securityLevel: number, timeout: number, offset: number):
     ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _mineBundle(sendMessage, __ids, bundle, spentBundleHashes, securityLevel, timeout, offset)
+  },
+  getLedgerMigrationData: function (addresses: AddressInput[], nodes: string[], permanode: string, securityLevel: number):
+    ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _getLedgerMigrationData(
+      sendMessage,
+      __ids,
+      addresses,
+      nodes,
+      permanode,
+      securityLevel
+    )
   },
 
 

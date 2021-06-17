@@ -3,7 +3,7 @@ import { closePopup, openPopup } from 'shared/lib/popup'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
 import { appRoute } from 'shared/lib/router'
 import type { Address } from 'shared/lib/typings/address'
-import type { Input, MigrationBundle, MigrationData } from 'shared/lib/typings/migration'
+import type { Input, MigrationBundle, MigrationData, AddressInput } from 'shared/lib/typings/migration'
 import { AppRoute } from 'shared/lib/typings/routes'
 import Validator from 'shared/lib/validator'
 import { api } from 'shared/lib/wallet'
@@ -68,6 +68,7 @@ export const chrysalisLive = writable<Boolean>(false)
  * ongoingSnapshot
  */
 export const ongoingSnapshot = writable<Boolean>(false)
+
 /**
  * Gets migration data and sets it to state
  * 
@@ -117,6 +118,74 @@ export const getMigrationData = (migrationSeed: string, initialAddressIndex = 0)
             })
         }
 
+    })
+};
+
+/**
+ * Gets migration data for ledger accounts
+ * 
+ * @method getLedgerMigrationData
+ * 
+ * @returns {Promise<void>}
+ */
+export const getLedgerMigrationData = (getAddressFn: (index: number) => Promise<string>): Promise<any> => {
+    const _get = (addresses: AddressInput[]): Promise<any> => {
+        return new Promise((resolve, reject) => {
+            api.getLedgerMigrationData(
+                addresses,
+                MIGRATION_NODES,
+                PERMANODE,
+                ADDRESS_SECURITY_LEVEL,
+                {
+                    onSuccess(response) {
+                        resolve(response)
+                    },
+                    onError(error) {
+                        reject(error);
+                    }
+                }
+            )
+        })
+    }
+
+    const _generate = () => {
+        const { data } = get(migration)
+
+        return Array.from(Array(5), (_, i) => i).reduce((promise, index) =>
+            promise.then(acc => (
+                getAddressFn(index + get(data).lastCheckedAddressIndex).then(address => acc.concat({ address, index }))
+            )
+            ), Promise.resolve([]))
+    };
+
+    const _process = () => {
+        return _generate().then((addresses) => {
+            return _get(addresses)
+        }).then((response: any) => {
+            const { data } = get(migration)
+
+            if (get(data).lastCheckedAddressIndex === 0) {
+                data.set(response.payload)
+            } else {
+                data.update((_existingData) => {
+                    return Object.assign({}, _existingData, {
+                        balance: _existingData.balance + response.payload.balance,
+                        inputs: [..._existingData.inputs, ...response.payload.inputs],
+                        lastCheckedAddressIndex: response.payload.lastCheckedAddressIndex
+                    })
+                })
+            }
+
+            prepareBundles()
+
+            return get(data).inputs.length > 0;
+        });
+    }
+
+    return _process().then((shouldGenerateMore) => {
+        if (shouldGenerateMore) {
+            return _process();
+        }
     })
 };
 

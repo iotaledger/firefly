@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, OnboardingLayout, Text, Spinner, Icon } from 'shared/components'
-    import { createEventDispatcher, onDestroy } from 'svelte'
+    import { onMount, createEventDispatcher, onDestroy } from 'svelte'
     import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
     import { api } from 'shared/lib/wallet'
     import { ledgerSimulator } from 'shared/lib/profile'
@@ -15,6 +15,8 @@
     let timeout // dummy
 
     const dispatch = createEventDispatcher()
+
+
 
     // TODO: dummy
     function generateNewAddress() {
