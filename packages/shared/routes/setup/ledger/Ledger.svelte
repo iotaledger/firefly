@@ -1,19 +1,10 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
+    import { currentLedgerMigrationProgress, LedgerMigrationProgress } from 'shared/lib/migration'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
     import { createEventDispatcher, onMount } from 'svelte'
-    import {
-        AccountIndex,
-        Balance,
-        Create,
-        FireflyImport,
-        GenerateNewAddress,
-        InstallLedgerApp,
-        Migrate,
-        Success,
-        TrinityImport,
-    } from './views/'
+    import { AccountIndex, Balance, Create, FireflyImport, GenerateNewAddress, InstallLedgerApp, TrinityImport } from './views/'
 
     export let locale
     export let mobile
@@ -25,43 +16,8 @@
         InstallLedgerApp = 'installLedgerApp',
         GenerateAddress = 'generateAddress',
         AccountIndex = 'accountIndex',
-        Migrate = 'migrate',
         Balance = 'balance',
-        Success = 'success',
     }
-
-    let migrationSteps = [
-        {
-            title: locale('views.setupLedger.progress1'),
-            state: [State.InstallLedgerApp],
-        },
-        {
-            title: locale('views.setupLedger.progress2'),
-            state: [State.GenerateAddress],
-        },
-        {
-            title: locale('views.setupLedger.progress3'),
-            state: [State.AccountIndex],
-        },
-        {
-            title: locale('views.setupLedger.progress4'),
-            state: [State.Migrate, State.Balance, State.Success],
-        },
-    ]
-
-    $: state,
-        (migrationSteps = migrationSteps.map((step, index) => {
-            if ($walletSetupType === SetupType.TrinityLedger) {
-                let ongoingIndex = migrationSteps.findIndex((step) => step.state.includes(state))
-                return {
-                    ...step,
-                    ongoing: ongoingIndex === index,
-                    complete: index < ongoingIndex,
-                }
-            } else {
-                return step
-            }
-        }))
 
     const dispatch = createEventDispatcher()
 
@@ -78,7 +34,30 @@
         } else if ($walletSetupType === SetupType.FireflyLedger) {
             state = State.FireflyImport
         }
+        currentLedgerMigrationProgress.set(null)
     })
+
+    $: state, updateMigrationProgress()
+
+    const updateMigrationProgress = () => {
+        switch (state) {
+            case State.InstallLedgerApp:
+                currentLedgerMigrationProgress.set(LedgerMigrationProgress.InstallLedgerApp)
+                break
+            case State.GenerateAddress:
+                currentLedgerMigrationProgress.set(LedgerMigrationProgress.GenerateAddress)
+                break
+            case State.AccountIndex:
+                currentLedgerMigrationProgress.set(LedgerMigrationProgress.SwitchLedgerApp)
+                break
+            case State.Balance:
+                currentLedgerMigrationProgress.set(LedgerMigrationProgress.TransferFunds)
+                break
+            default:
+                currentLedgerMigrationProgress.set(null)
+                break
+        }
+    }
 
     const _next = async (event) => {
         let nextState
@@ -105,16 +84,6 @@
                 nextState = State.Balance
                 break
             case State.Balance:
-                if ($walletSetupType === SetupType.FireflyLedger) {
-                    nextState = State.Success
-                } else if ($walletSetupType === SetupType.TrinityLedger) {
-                    nextState = State.Migrate
-                }
-                break
-            case State.Migrate:
-                nextState = State.Success
-                break
-            case State.Success:
                 dispatch('next')
                 break
         }
@@ -144,35 +113,23 @@
     </Transition>
 {:else if state === State.TrinityImport}
     <Transition>
-        <TrinityImport steps={migrationSteps} on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <TrinityImport on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
 {:else if state === State.InstallLedgerApp}
     <Transition>
-        <InstallLedgerApp steps={migrationSteps} on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <InstallLedgerApp on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
 {:else if state === State.GenerateAddress}
     <Transition>
-        <GenerateNewAddress steps={migrationSteps} on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <GenerateNewAddress on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
 {:else if state === State.AccountIndex}
     <Transition>
-        <AccountIndex steps={migrationSteps} on:next={_next} on:previous={_previous} {locale} {mobile} />
-    </Transition>
-{:else if state === State.Migrate}
-    <Transition>
-        <Migrate steps={migrationSteps} on:next={_next} on:previous={_previous} {balance} {locale} {mobile} />
+        <AccountIndex on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
 {:else if state === State.Balance}
+    <!-- TODO: we could use the standalone balance view -->
     <Transition>
-        <Balance steps={migrationSteps} on:next={_next} on:previous={_previous} {balance} {locale} {mobile} />
-    </Transition>
-{:else if state === State.Success}
-    <Transition>
-        <Success
-            steps={$walletSetupType === SetupType.TrinityLedger ? migrationSteps : undefined}
-            on:next={_next}
-            on:previous={_previous}
-            {locale}
-            {mobile} />
+        <Balance on:next={_next} on:previous={_previous} {balance} {locale} {mobile} />
     </Transition>
 {/if}

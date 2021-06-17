@@ -11,6 +11,8 @@
     import { Electron } from 'shared/lib/electron'
     import { LOG_FILE_NAME, migration, resetMigrationState, totalMigratedBalance } from 'shared/lib/migration'
     import { activeProfile, newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
+    import { walletSetupType } from 'shared/lib/router'
+    import { SetupType } from 'shared/lib/typings/routes'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { getStoragePath } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
@@ -21,11 +23,15 @@
 
     const { didComplete } = $migration
 
-    // TODO: dummy
     let wasMigrated = $didComplete
+
+    let localizedBody = 'body'
 
     onMount(() => {
         if (!wasMigrated) {
+            if ($walletSetupType === SetupType.FireflyLedger) {
+                localizedBody = 'fireflyLedgerBody'
+            }
             // This is the last screen in onboarding for all flows i.e., if you create a new wallet or import stronghold
             // When this component mounts, ensure that the profile is persisted in the local storage.
             saveProfile($newProfile)
@@ -33,6 +39,12 @@
 
             profileInProgress.set(undefined)
             newProfile.set(null)
+        } else {
+            if ($walletSetupType === SetupType.TrinityLedger) {
+                localizedBody = 'trinityLedgerBody'
+            } else {
+                localizedBody = 'softwareMigratedBody'
+            }
         }
     })
 
@@ -85,7 +97,7 @@
                         <Icon icon="success-check" classes="text-white" />
                     </div>
                     <Text type="h2" classes="mb-6 text-center">{locale('views.congratulations.fundsMigrated')}</Text>
-                    <Text type="p" secondary classes="mb-6 text-center">{locale('views.congratulations.success')}</Text>
+                    <Text type="p" secondary classes="mb-6 text-center">{locale(`views.congratulations.${localizedBody}`)}</Text>
                     <Text type="h2">{formatUnitBestMatch($totalMigratedBalance, true, 3)}</Text>
                     <Text type="p" highlighted classes="py-1 uppercase">{fiatbalance}</Text>
                 </div>
@@ -95,7 +107,7 @@
                         <Icon icon="success-check" classes="text-white" />
                     </div>
                     <Text type="h2" classes="mb-5 text-center">{locale('views.congratulations.title')}</Text>
-                    <Text type="p" secondary classes="mb-2">{locale('views.congratulations.body')}</Text>
+                    <Text type="p" secondary classes="mb-2">{locale(`views.congratulations.${localizedBody}`)}</Text>
                 </div>
             {/if}
         </div>

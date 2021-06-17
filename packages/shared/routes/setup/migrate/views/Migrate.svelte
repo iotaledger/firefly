@@ -15,12 +15,15 @@
         getInputIndexesForBundle,
         hasBundlesWithSpentAddresses,
         hasSingleBundle,
+        ledgerMigrationProgresses,
         migration,
         sendMigrationBundle,
         unselectedInputs,
     } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
+    import { walletSetupType } from 'shared/lib/router'
+    import { SetupType } from 'shared/lib/typings/routes'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
@@ -102,7 +105,9 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout allowBack={false}>
+    <OnboardingLayout
+        allowBack={false}
+        progress={$walletSetupType === SetupType.TrinityLedger ? $ledgerMigrationProgresses : undefined}>
         <div slot="leftpane__content">
             <Text on:click={learnAboutMigrationsClick} type="h2" classes="mb-5">{locale('views.migrate.title')}</Text>
             <Text type="p" secondary classes="mb-4">{locale('views.migrate.body1')}</Text>

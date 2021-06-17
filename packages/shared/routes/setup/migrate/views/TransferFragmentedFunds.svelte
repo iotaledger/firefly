@@ -6,11 +6,14 @@
         getInputIndexesForBundle,
         hasMigratedAndConfirmedAllSelectedBundles,
         hasMigratedAnyBundle,
+        ledgerMigrationProgresses,
         migration,
         sendMigrationBundle,
         unmigratedBundles,
     } from 'shared/lib/migration'
     import { newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
+    import { walletSetupType } from 'shared/lib/router'
+    import { SetupType } from 'shared/lib/typings/routes'
     import { createEventDispatcher, onDestroy } from 'svelte'
 
     export let locale
@@ -243,7 +246,11 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout allowBack={!$hasMigratedAnyBundle} onBackClick={handleBackClick} class="">
+    <OnboardingLayout
+        allowBack={!$hasMigratedAnyBundle}
+        onBackClick={handleBackClick}
+        class=""
+        progress={$walletSetupType === SetupType.TrinityLedger ? $ledgerMigrationProgresses : undefined}>
         <div slot="leftpane__content" class="h-full flex flex-col flex-wrap">
             <Text type="h2" classes="mb-5">{locale('views.migrate.title')}</Text>
             <Text type="p" secondary classes="mb-4">{locale('views.transferFragmentedFunds.body1')}</Text>

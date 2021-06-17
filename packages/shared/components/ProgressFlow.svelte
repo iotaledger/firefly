@@ -10,7 +10,7 @@
     import { Icon } from 'shared/components'
     import { appSettings } from 'shared/lib/appSettings'
 
-    export let steps: ProgressStep[] = []
+    export let progress: ProgressStep[] = []
     export let classes = ''
 
     $: darkModeEnabled = $appSettings.darkMode
@@ -63,12 +63,12 @@
 </style>
 
 <div class={`flex flex-row items-center ${classes}`}>
-    {#each steps as { title, ongoing, complete }, index}
+    {#each progress as { title, ongoing, complete }, index}
         <div class="relative flex flex-col items-center justify-around w-full">
             <div
                 class={`circle-container z-0 flex items-center justify-center ${ongoing ? 'w-7 h-7' : 'w-6 h-6'}`}
                 class:completed-section={complete}
-                class:last={index === steps.length - 1}
+                class:last={index === progress.length - 1}
                 class:darkmode={darkModeEnabled}>
                 <div
                     class={`relative w-full h-full rounded-full border-solid border-2 border-gray-300 text-gray-500 flex items-center justify-center ${complete || ongoing ? 'bg-blue-500 dark:bg-blue-500' : 'bg-white dark:bg-gray-900'}`}

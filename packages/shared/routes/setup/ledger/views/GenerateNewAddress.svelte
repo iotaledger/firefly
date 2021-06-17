@@ -1,24 +1,20 @@
 <script lang="typescript">
-    import { Button, OnboardingLayout, Text, Spinner, Icon } from 'shared/components'
-    import { onMount, createEventDispatcher, onDestroy } from 'svelte'
+    import { Button, Icon, OnboardingLayout, Spinner, Text } from 'shared/components'
+    import { ledgerMigrationProgresses } from 'shared/lib/migration'
     import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
-    import { api } from 'shared/lib/wallet'
     import { ledgerSimulator } from 'shared/lib/profile'
+    import { api } from 'shared/lib/wallet'
+    import { createEventDispatcher } from 'svelte'
 
     export let locale
     export let mobile
-    export let steps
 
     let newAddress = null
     let busy = false
     let confirmed = false
-    let timeout // dummy
 
     const dispatch = createEventDispatcher()
 
-
-
-    // TODO: dummy
     function generateNewAddress() {
         busy = true
         newAddress = null
@@ -74,16 +70,12 @@
     function handleBackClick() {
         dispatch('previous')
     }
-
-    onDestroy(() => {
-        clearTimeout()
-    })
 </script>
 
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout onBackClick={handleBackClick} {steps}>
+    <OnboardingLayout onBackClick={handleBackClick} progress={$ledgerMigrationProgresses}>
         <div slot="leftpane__content">
             {#if confirmed}
                 <div class="flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-5 text-center">
@@ -106,8 +98,10 @@
         <div slot="leftpane__action" class="flex flex-col space-y-4">
             {#if confirmed}
                 <Button classes="w-full" onClick={handleContinueClick}>{locale('actions.continue')}</Button>
+            {:else if newAddress}
+                <Button classes="w-full" onClick={handleConfirmClick}>{locale('actions.confirm')}</Button>
             {:else}
-                <Button classes="w-full" disabled={busy} secondary={newAddress} onClick={generateNewAddress}>
+                <Button classes="w-full" disabled={busy} onClick={generateNewAddress}>
                     {#if busy}
                         <Spinner
                             busy={true}
@@ -115,9 +109,6 @@
                             classes="justify-center" />
                     {:else}{locale('actions.generateAddress')}{/if}
                 </Button>
-                {#if newAddress}
-                    <Button classes="w-full" onClick={handleConfirmClick}>{locale('actions.confirm')}</Button>
-                {/if}
             {/if}
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-end items-center bg-pastel-blue dark:bg-gray-900" />

@@ -197,7 +197,11 @@ export const routerNext = (event) => {
             nextRoute = AppRoute.Congratulations
             break
         case AppRoute.LedgerSetup:
-            nextRoute = AppRoute.Congratulations
+            if (get(walletSetupType) === SetupType.TrinityLedger) {
+                nextRoute = AppRoute.Migrate
+            } else {
+                nextRoute = AppRoute.Congratulations
+            }
             break
         case AppRoute.Congratulations:
             updateProfile('gapLimit', get(walletSetupType) === SetupType.New ? 10 : 50)
