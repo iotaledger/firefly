@@ -1,7 +1,8 @@
 <script lang="typescript">
     import { Button, Number, OnboardingLayout, Text, Toggle } from 'shared/components'
     import { ledgerMigrationProgresses } from 'shared/lib/migration'
-    import { createEventDispatcher } from 'svelte'
+    import { closePopup, openPopup } from 'shared/lib/popup'
+    import { createEventDispatcher, onMount } from 'svelte'
 
     export let locale
     export let mobile
@@ -10,7 +11,32 @@
     let page = 0
     let expert = false
 
+    let isLedgerConnected = true
+
     const dispatch = createEventDispatcher()
+
+    onMount(() => {
+        // dummy, just to show popup
+        openLegacyLedgerNotConnectedPopup()
+    })
+
+    function openLegacyLedgerNotConnectedPopup() {
+        openPopup({
+            type: 'ledgerNotConnected',
+            hideClose: true,
+            props: {
+                handleClose: handleClosePopup,
+                message: locale('views.setupLedger.connectLegacy'),
+            },
+        })
+    }
+
+    function handleClosePopup() {
+        if (!isLedgerConnected) {
+            closePopup()
+            handleBackClick()
+        }
+    }
 
     function handleContinueClick() {
         dispatch('next')
