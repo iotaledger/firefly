@@ -19,7 +19,7 @@ import type {
     TransferProgressEventPayload
 } from 'shared/lib/typings/events'
 import type { Payload, Transaction } from 'shared/lib/typings/message'
-import type { MigrationBundle, MigrationData, SendMigrationBundleResponse } from 'shared/lib/typings/migration'
+import type { MigrationBundle, MigrationData, SendMigrationBundleResponse, AddressInput } from 'shared/lib/typings/migration'
 import { formatUnitBestMatch } from 'shared/lib/units'
 import { get, writable, Writable } from 'svelte/store'
 import type { Account, SyncedAccount } from './typings/account'
@@ -235,6 +235,13 @@ export const api: {
         timeout: number,
         offset: number,
         callbacks: { onSuccess: (response: Event<SendMigrationBundleResponse>) => void, onError: (err: ErrorEventPayload) => void }
+    ),
+    getLedgerMigrationData(
+        addresses: AddressInput[],
+        nodes: string[],
+        permanode: string,
+        securityLevel: number,
+        callbacks: { onSuccess: (response: Event<MigrationData>) => void, onError: (err: ErrorEventPayload) => void }
     ),
 } = window['__WALLET_API__']
 

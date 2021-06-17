@@ -1,11 +1,15 @@
 <script lang="typescript">
-    import { Button, Number, OnboardingLayout, Text, Toggle } from 'shared/components'
-    import { ledgerMigrationProgresses } from 'shared/lib/migration'
-    import { closePopup, openPopup } from 'shared/lib/popup'
+    import { Button, Number, OnboardingLayout, Spinner, Text, Toggle } from 'shared/components'
+    import { Electron } from 'shared/lib/electron'
+    import { ADDRESS_SECURITY_LEVEL, getLedgerMigrationData, ledgerMigrationProgresses } from 'shared/lib/migration'
+    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { createEventDispatcher, onMount } from 'svelte'
+    import { get } from 'svelte/store'
 
     export let locale
     export let mobile
+
+    let loading = false
 
     let index = 0
     let page = 0
@@ -16,9 +20,18 @@
     const dispatch = createEventDispatcher()
 
     onMount(() => {
-        // dummy, just to show popup
-        openLegacyLedgerNotConnectedPopup()
+        Electron.ledger.addListener(ledgerListener)
     })
+
+    function ledgerListener(isConnected) {
+        console.log('Is connected', isConnected)
+        isLedgerConnected = isConnected
+        if (isLedgerConnected) {
+            closePopup()
+        } else {
+            handleLedgerDeviceNotConnected()
+        }
+    }
 
     function openLegacyLedgerNotConnectedPopup() {
         openPopup({
@@ -31,6 +44,12 @@
         })
     }
 
+    function handleLedgerDeviceNotConnected() {
+        if (!get(popupState).active) {
+            openLegacyLedgerNotConnectedPopup()
+        }
+    }
+
     function handleClosePopup() {
         if (!isLedgerConnected) {
             closePopup()
@@ -39,7 +58,21 @@
     }
 
     function handleContinueClick() {
-        dispatch('next')
+        loading = true
+
+        Electron.ledger
+            .selectSeed(index, page, ADDRESS_SECURITY_LEVEL)
+            .then((iota) => {
+                return getLedgerMigrationData(iota.getAddress)
+            })
+            .then(() => {
+                loading = false
+                dispatch('next')
+            })
+            .catch((error) => {
+                loading = false
+                console.error(error)
+            })
     }
 
     function handleBackClick() {
@@ -78,7 +111,11 @@
             </div>
         </div>
         <div slot="leftpane__action" class="flex flex-col space-y-4">
-            <Button classes="w-full" onClick={handleContinueClick}>{locale('actions.confirm')}</Button>
+            <Button classes="w-full" onClick={handleContinueClick}>
+                {#if loading}
+                    <Spinner busy={true} message={locale('views.generateNewLedgerAddress.generating')} classes="justify-center" />
+                {:else}{locale('actions.confirm')}{/if}
+            </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-end items-center bg-pastel-blue dark:bg-gray-900" />
     </OnboardingLayout>
