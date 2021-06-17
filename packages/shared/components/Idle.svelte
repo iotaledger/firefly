@@ -1,6 +1,6 @@
 <script lang="typescript">
-    import { logout } from 'shared/lib/app'
-    import { activeProfile, lastActiveAt } from 'shared/lib/profile'
+    import { logout, lastActiveAt } from 'shared/lib/app'
+    import { activeProfile } from 'shared/lib/profile'
     import { debounce } from 'shared/lib/utils'
     import { onDestroy } from 'svelte'
     import { get } from 'svelte/store'
@@ -22,9 +22,9 @@
                 const timeoutDuration = ap.settings.lockScreenTimeout * 60 * 1000
 
                 if(!isIdleTimeValid(now, timeoutDuration))
-                    lockScreen()
+                    lock()
 
-                timeout = setTimeout(lockScreen, timeoutDuration)
+                timeout = setTimeout(lock, timeoutDuration)
             }
         }
     }
@@ -51,7 +51,7 @@
         return newLastActiveTime - oldLastActiveTime
     }
 
-    function lockScreen(): void {
+    function lock(): void {
         logout()
     }
 

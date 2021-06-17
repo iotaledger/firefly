@@ -1,9 +1,8 @@
 import { get, writable } from 'svelte/store'
-import { persistent } from './helpers'
 import { localize } from './i18n'
 import { showAppNotification } from './notifications'
 import { closePopup } from './popup'
-import { activeProfile, clearActiveProfile, isStrongholdLocked, lastActiveAt } from './profile'
+import { activeProfile, clearActiveProfile, isStrongholdLocked } from './profile'
 import { resetRouter } from './router'
 import { api, destroyActor, resetWallet } from './wallet'
 
@@ -41,6 +40,11 @@ export const sendParams = writable<SendParams>({ amount: 0, address: '', message
 export const clearSendParams = (isInternal = false) => sendParams.set({ amount: 0, address: '', message: '', isInternal })
 
 /**
+ * The last timestamp that the application was active
+ */
+export const lastActiveAt = writable<Date>(new Date(Date.now()))
+
+/**
  * Determines whether a user is logged in
  */
 export const loggedIn = writable<boolean>(false)
@@ -58,6 +62,7 @@ export const cleanupSignup = () => {
  * Log in to the current profile
  */
 export const login = () => {
+    lastActiveAt.set(new Date(Date.now()))
     loggedIn.set(true)
 }
 

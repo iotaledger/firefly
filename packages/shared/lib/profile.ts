@@ -1,7 +1,7 @@
 import { AvailableExchangeRates } from 'shared/lib/currency'
 import { persistent } from 'shared/lib/helpers'
 import { generateRandomId } from 'shared/lib/utils'
-import { asyncRemoveStorage, destroyActor, getStoragePath, getWalletStoragePath } from 'shared/lib/wallet'
+import { destroyActor, getStoragePath, getWalletStoragePath } from 'shared/lib/wallet'
 import { derived, get, Readable, writable } from 'svelte/store'
 import type { ChartSelectors } from './chart'
 import { Electron } from './electron'
@@ -62,8 +62,6 @@ export const profileInProgress = persistent<string | undefined>('profileInProgre
 export const newProfile = writable<Profile | null>(null)
 
 export const isStrongholdLocked = writable<boolean>(true)
-
-export const lastActiveAt = writable<Date>(new Date(Date.now()))
 
 /**
  * Currently active profile
