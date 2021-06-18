@@ -11,7 +11,7 @@
     export let locale
     export let color = 'blue' // TODO: profiles will have different colors
 
-    $: darkModeEnabled = $appSettings.darkMode
+    $: darkModeEnabled = $appSettings.shouldBeDark
     $: waitingChrysalis = $activeProfile?.migratedTransactions?.length
 
     const balance = getContext<Readable<BalanceOverview>>('walletBalance')

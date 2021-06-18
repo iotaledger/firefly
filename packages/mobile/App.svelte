@@ -25,7 +25,7 @@
     } from 'shared/routes'
     import { onMount } from 'svelte'
 
-    $: $appSettings.darkMode ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')
+    $: $appSettings.shouldBeDark ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')
 
     $: if (document.dir !== $dir) {
         document.dir = $dir
@@ -86,7 +86,7 @@
     <!-- dummy toggles -->
     <div class="dummy-toggles flex flex-row">
         <div class="mr-4">
-            <Toggle on={$appSettings.darkMode} />
+            <Toggle on={$appSettings.shouldBeDark} />
         </div>
         <button on:click={() => loggedIn.update(() => false)}>reset</button>
     </div>

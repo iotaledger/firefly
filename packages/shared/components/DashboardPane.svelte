@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { appSettings } from 'shared/lib/appSettings'
     export let classes
-    $: darkModeEnabled = $appSettings.darkMode
+    $: darkModeEnabled = $appSettings.shouldBeDark
 </script>
 
 <style type="text/scss">

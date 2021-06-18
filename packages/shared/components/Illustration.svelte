@@ -6,7 +6,7 @@
     export let height = undefined
     export let classes = ''
 
-    $: darkModeEnabled = $appSettings.darkMode
+    $: darkModeEnabled = $appSettings.shouldBeDark
 
     $: selected = illustrations[illustration]?.[darkModeEnabled ? 'darkmode' : 'lightmode']
 
