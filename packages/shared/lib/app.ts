@@ -1,5 +1,4 @@
 import { get, writable } from 'svelte/store'
-import { persistent } from './helpers'
 import { localize } from './i18n'
 import { showAppNotification } from './notifications'
 import { closePopup } from './popup'
@@ -70,9 +69,14 @@ export const logout = () => {
         const ap = get(activeProfile);
 
         const _cleanup = () => {
+            /**
+             * CAUTION: Be sure to make any necessary API calls before
+             * the event actor is destroyed!
+             */
             if (ap) {
                 destroyActor(ap.id)
             }
+
             isStrongholdLocked.set(true)
             clearSendParams()
             closePopup()
