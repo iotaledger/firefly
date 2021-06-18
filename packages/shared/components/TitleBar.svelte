@@ -18,7 +18,7 @@
     let os = ''
     let isMaximized = false
 
-    $: darkModeEnabled = $appSettings.shouldBeDark
+    $: darkModeEnabled = $appSettings.darkMode
 
     const fullConfig = resolveConfig(tailwindConfig)
 

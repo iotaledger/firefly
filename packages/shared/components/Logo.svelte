@@ -6,7 +6,7 @@
     export let height = undefined
     export let classes = ''
 
-    $: darkModeEnabled = $appSettings.shouldBeDark
+    $: darkModeEnabled = $appSettings.darkMode
     $: selected = logos[logo]?.[darkModeEnabled ? 'darkmode' : 'lightmode']
 
     const logos = {

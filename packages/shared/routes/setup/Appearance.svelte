@@ -17,7 +17,7 @@
 
     let appTheme: AppTheme = $appSettings.theme
     $: $appSettings.theme = appTheme
-    $: $appSettings.shouldBeDark = shouldBeDark($appSettings.theme)
+    $: $appSettings.darkMode = shouldBeDark($appSettings.theme)
 
     $: if (_clonedVariable !== undefined && _clonedVariable !== appTheme) {
         _clonedVariable = appTheme // ghetto reactive implementation

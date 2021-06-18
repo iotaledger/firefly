@@ -10,7 +10,7 @@
     let top = 0
     let left = 0
 
-    $: darkModeEnabled = $appSettings.shouldBeDark
+    $: darkModeEnabled = $appSettings.darkMode
 
     onMount(() => {
         top = parentTop - tooltip.offsetHeight - 15

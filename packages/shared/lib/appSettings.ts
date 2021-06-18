@@ -12,7 +12,7 @@ export interface AppSettings {
     deepLinking: boolean
     language: string,
     theme: AppTheme,
-    shouldBeDark: boolean,
+    darkMode: boolean,
     notifications: boolean
 }
 
@@ -20,7 +20,7 @@ export const appSettings = persistent<AppSettings>('settings', {
     deepLinking: false,
     language: 'en',
     theme: 'light',
-    shouldBeDark: false,
+    darkMode: false,
     notifications: true
 })
 

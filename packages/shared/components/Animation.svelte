@@ -104,7 +104,7 @@
     let container
     let lottieAnimation
 
-    $: darkModeEnabled = $appSettings.shouldBeDark
+    $: darkModeEnabled = $appSettings.darkMode
     $: selected = animations[animation]?.[darkModeEnabled ? 'darkmode' : 'lightmode']
 
     $: if (selected && container) {

@@ -24,7 +24,7 @@
 
     let buttonElement
 
-    $: darkModeEnabled = $appSettings.shouldBeDark
+    $: darkModeEnabled = $appSettings.darkMode
 
     onMount(() => {
         if (autofocus) {

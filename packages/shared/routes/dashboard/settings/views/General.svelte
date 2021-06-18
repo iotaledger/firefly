@@ -15,7 +15,7 @@
 
     let appTheme: AppTheme = $appSettings.theme
     $: $appSettings.theme = appTheme
-    $: $appSettings.shouldBeDark = shouldBeDark($appSettings.theme)
+    $: $appSettings.darkMode = shouldBeDark($appSettings.theme)
 
     $: $appSettings.notifications = notificationsChecked
     $: updateProfile('settings.hideNetworkStatistics', hideNetworkStatistics)

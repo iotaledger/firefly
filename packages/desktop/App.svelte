@@ -35,7 +35,7 @@
     import { get } from 'svelte/store'
     import { getLocalisedMenuItems } from './lib/helpers'
 
-    $: $appSettings.shouldBeDark ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')
+    $: $appSettings.darkMode ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')
     $: {
         isLocaleLoaded.subscribe((loaded) => {
             if (loaded) {
