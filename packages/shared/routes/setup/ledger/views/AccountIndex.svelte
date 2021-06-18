@@ -1,7 +1,12 @@
 <script lang="typescript">
     import { Button, Number, OnboardingLayout, Spinner, Text, Toggle } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
-    import { ADDRESS_SECURITY_LEVEL, getLedgerMigrationData, ledgerMigrationProgresses } from 'shared/lib/migration'
+    import {
+        ADDRESS_SECURITY_LEVEL,
+        getLedgerMigrationData,
+        ledgerMigrationProgresses,
+        hardwareIndexes,
+    } from 'shared/lib/migration'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { createEventDispatcher, onMount } from 'svelte'
     import { get } from 'svelte/store'
@@ -65,9 +70,11 @@
             .then((iota) => {
                 return getLedgerMigrationData(iota.getAddress)
             })
-            .then(() => {
+            .then((data) => {
                 loading = false
-                dispatch('next')
+
+                hardwareIndexes.update((_indexes) => Object.assign({}, _indexes, { accountIndex: index, pageIndex: page }))
+                dispatch('next', { balance: data.balance })
             })
             .catch((error) => {
                 loading = false

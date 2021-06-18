@@ -4,6 +4,7 @@
     "author": "IOTA Foundation <contact@iota.org>",
     "license": "Apache-2.0",
     "dependencies": {
+        "@iota/transaction-converter": "^1.0.0-beta.30",
         "@iota/unit-converter": "^1.0.0-beta.30",
         "big.js": "^6.0.3",
         "chart.js": "^2.9.3",

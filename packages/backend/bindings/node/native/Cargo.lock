@@ -1723,7 +1723,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=migration-ledger#6470b57dbe79cd4f59e666bc6ab8ed0b9c95d579"
+source = "git+https://github.com/iotaledger/wallet.rs?branch=migration-ledger#4e63476667daaaec12927b206d4e581aff5a5caf"
 dependencies = [
  "async-trait",
  "backtrace",
@@ -3875,9 +3875,9 @@ dependencies = [
 
 [[package]]
 name = "vcpkg"
-version = "0.2.13"
+version = "0.2.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "025ce40a007e1907e58d5bc1a594def78e5573bb0b1160bc389634e8f12e4faa"
+checksum = "70455df2fdf4e9bf580a92e443f1eb0303c390d682e2ea817312c9e81f8c3399"
 
 [[package]]
 name = "version_check"

@@ -33,6 +33,7 @@ import {
   getMigrationAddress as _getMigrationAddreess,
   mineBundle as _mineBundle,
   getLedgerMigrationData as _getLedgerMigrationData,
+  sendLedgerMigrationBundle as _sendLedgerMigrationBundle,
   AddressInput
 } from '../../../shared/lib/typings/migration'
 import {
@@ -243,6 +244,10 @@ export const api = {
       permanode,
       securityLevel
     )
+  },
+  sendLedgerMigrationBundle: function (nodes: string[], bundle: string[], mwm: number):
+    ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _sendLedgerMigrationBundle(sendMessage, __ids, nodes, bundle, mwm)
   },
 
 

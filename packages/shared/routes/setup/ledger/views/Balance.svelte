@@ -1,4 +1,3 @@
-<!-- TODO: all this file is kind of duplicate of Setup > Balance.svelte -->
 <script>
     import { Animation, Box, Button, OnboardingLayout, Spinner, Text } from 'shared/components'
     import {
@@ -9,21 +8,24 @@
         exchangeRates,
         formatCurrency,
     } from 'shared/lib/currency'
-    import { ledgerMigrationProgresses } from 'shared/lib/migration'
+    import {
+        getLedgerMigrationData,
+        ledgerMigrationProgresses,
+        ADDRESS_SECURITY_LEVEL,
+        hardwareIndexes,
+    } from 'shared/lib/migration'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
+    import { Electron } from 'shared/lib/electron'
 
     export let locale
     export let mobile
     export let balance
 
     const dispatch = createEventDispatcher()
-
-    // TODO: missing check again for balance function
-    function sync() {}
 
     const getFiatBalance = (balance) => {
         const balanceAsFiat = convertToFiat(
@@ -38,7 +40,9 @@
         return formatCurrency(balanceAsFiat, AvailableExchangeRates.USD)
     }
 
-    let formattedBalance = formatUnitBestMatch(balance, true, 3)
+    const getFormattedBalance = (_balance) => formatUnitBestMatch(_balance, true, 3)
+
+    let formattedBalance = getFormattedBalance(balance)
     let fiatBalance = getFiatBalance(balance)
     let isCheckingForBalance = false
 
@@ -48,8 +52,30 @@
     function handleBackClick() {
         dispatch('previous')
     }
+
+    // TODO: missing check again for balance function
+    function sync() {
+        isCheckingForBalance = true
+
+        Electron.ledger
+            .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
+            .then((iota) => {
+                return getLedgerMigrationData(iota.getAddress)
+            })
+            .then((data) => {
+                isCheckingForBalance = false
+
+                formattedBalance = getFormattedBalance(data.balance)
+                fiatBalance = getFiatBalance(data.balance)
+            })
+            .catch((error) => {
+                isCheckingForBalance = false
+                console.error(error)
+            })
+    }
 </script>
 
+<!-- TODO: all this file is kind of duplicate of Setup > Balance.svelte -->
 {#if mobile}
     <div>foo</div>
 {:else}

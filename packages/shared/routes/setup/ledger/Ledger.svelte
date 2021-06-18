@@ -81,6 +81,7 @@
                 break
             case State.AccountIndex:
                 balance = params.balance
+        
                 nextState = State.Balance
                 break
             case State.Balance:

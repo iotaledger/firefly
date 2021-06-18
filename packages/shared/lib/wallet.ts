@@ -243,6 +243,12 @@ export const api: {
         securityLevel: number,
         callbacks: { onSuccess: (response: Event<MigrationData>) => void, onError: (err: ErrorEventPayload) => void }
     ),
+    sendLedgerMigrationBundle(
+        node: string[],
+        bundle: string[],
+        mwm: number,
+        callbacks: { onSuccess: (response: Event<SendMigrationBundleResponse>) => void, onError: (err: ErrorEventPayload) => void }
+    ),
 } = window['__WALLET_API__']
 
 export const getWalletStoragePath = (appPath: string): string => {

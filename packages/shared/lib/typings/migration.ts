@@ -243,3 +243,35 @@ export function getLedgerMigrationData(
         },
     })
 }
+
+/**
+ * Sends ledger migration bundle
+ * 
+ * @method sendLedgerMigrationBundle
+ * 
+ * @param {Bridge} bridge 
+ * @param {CommunicationIds} __ids 
+ * @param {string[]} node 
+ * @param {string[]} bundles
+ * @param {number} mwm 
+ * 
+ * @returns {Promise}
+ */
+ export function sendLedgerMigrationBundle(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+    nodes: string[],
+    bundle: string[],
+    mwm: number
+) {
+    return bridge({
+        actorId: __ids.actorId,
+        id: __ids.messageId,
+        cmd: 'SendLedgerMigrationBundle',
+        payload: {
+            nodes,
+            bundle,
+            mwm
+        },
+    })
+}
