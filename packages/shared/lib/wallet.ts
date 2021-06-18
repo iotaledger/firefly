@@ -190,7 +190,6 @@ export const api: {
     // Legacy seed APIs
     getLegacySeedChecksum(seed: string, callbacks: { onSuccess: (response: Event<string>) => void, onError: (err: ErrorEventPayload) => void })
 
-
     onStrongholdStatusChange(callbacks: { onSuccess: (response: Event<StrongholdStatus>) => void, onError: (err: ErrorEventPayload) => void })
     onNewTransaction(callbacks: { onSuccess: (response: Event<TransactionEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
     onReattachment(callbacks: { onSuccess: (response: Event<ReattachmentEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
@@ -434,6 +433,21 @@ export const asyncCreateAccount = () => {
             }
         )
     })
+}
+
+export const asyncRemoveWalletAccounts = (_accounts: WalletAccount[]) => {
+    return Promise.all(_accounts.map((wa: WalletAccount) =>
+        new Promise<void>((resolve, reject) => {
+            api.removeAccount(wa.id, {
+                onSuccess() {
+                    resolve()
+                },
+                onError(err) {
+                    reject(err)
+                }
+            })
+        }))
+    )
 }
 
 export const asyncRemoveStorage = () => {

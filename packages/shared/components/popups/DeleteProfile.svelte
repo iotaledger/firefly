@@ -6,7 +6,7 @@
     import { activeProfile, profiles, removeProfile, removeProfileFolder } from 'shared/lib/profile'
     import { setRoute } from 'shared/lib/router'
     import { AppRoute } from 'shared/lib/typings/routes'
-    import { api } from 'shared/lib/wallet'
+    import { api, asyncRemoveWalletAccounts, wallet } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
 
     export let locale
@@ -21,7 +21,9 @@
         api.setStrongholdPassword(password, {
             async onSuccess() {
                 try {
-                    const ap = get(activeProfile)
+                    const _activeProfile = get(activeProfile)
+                    const _activeAccounts = get(get(wallet).accounts)
+                    await asyncRemoveWalletAccounts(_activeAccounts)
 
                     // We have to logout before the profile is removed
                     // from the profile list otherwise the activeProfile which is
@@ -32,9 +34,9 @@
                     // Now that all the resources have been freed we try
                     // and remove the profile folder, this will retry until locks
                     // can be gained
-                    if (ap) {
+                    if (_activeProfile) {
                         // Remove the profile from the active list of profiles
-                        removeProfile(ap.id)
+                        removeProfile(_activeProfile.id)
 
                         // If after removing the profile there are none left
                         // we need to make sure the router gets reset to the welcome screen
@@ -45,7 +47,7 @@
 
                         // Remove the profile folder this will wait until it can get
                         // the lock on the resources
-                        await removeProfileFolder(ap.name)
+                        await removeProfileFolder(_activeProfile.name)
                     }
                 } catch (err) {
                     showAppNotification({
