@@ -26,7 +26,7 @@
 
                     // This function is a call to the wallet API, so it is
                     // necessary to call it before logout(), which destroys
-                    // the event actor ID.
+                    // the event actor
                     await asyncRemoveWalletAccounts(_activeAccounts)
 
                     // We have to logout before the profile is removed
