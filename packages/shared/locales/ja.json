@@ -227,7 +227,7 @@
             "theme": {
                 "title": "テーマ：",
                 "description": "",
-                "advice": "システムテーマの変更が効くため、Fireflyのアプリを閉じてください。"
+                "advice": "システムテーマの変更が効くため、Fireflyのアプリを閉じてください"
             },
             "language": {
                 "title": "言語:",
@@ -243,7 +243,7 @@
             },
             "networkStatus": {
                 "title": "ネットワークのステータス",
-                "description": "現在接続しているノードの状態を表示します。"
+                "description": "現在接続しているノードの状態を表示します"
             },
             "exportStronghold": {
                 "title": "バックアップのエクスポート",
