@@ -226,7 +226,8 @@
             },
             "theme": {
                 "title": "テーマ：",
-                "description": ""
+                "description": "",
+                "advice": "システムテーマの変更が効くため、Fireflyのアプリを閉じてください。"
             },
             "language": {
                 "title": "言語:",
@@ -634,6 +635,7 @@
         "appearance": "テーマ",
         "lightTheme": "ライトテーマ",
         "darkTheme": "ダークテーマ",
+        "systemTheme": "システムテーマ",
         "balance": "残高",
         "accountBalance": "ウォレットの残高",
         "incoming": "入金",

@@ -2,6 +2,9 @@
     import { onMount } from 'svelte'
     import { Animation } from 'shared/components'
     import { pollChrysalisSnapshot } from 'shared/lib/migration'
+    import { appSettings, shouldBeDarkMode } from 'shared/lib/appSettings';
+
+    $: $appSettings.darkMode = shouldBeDarkMode($appSettings.theme)
 
     onMount(() => pollChrysalisSnapshot())
 

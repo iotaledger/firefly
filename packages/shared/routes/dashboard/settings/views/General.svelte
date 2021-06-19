@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Checkbox, Dropdown, HR, Radio, Text } from 'shared/components'
     import { loggedIn } from 'shared/lib/app'
-    import { appSettings, AppTheme, shouldBeDark } from 'shared/lib/appSettings'
+    import { appSettings, AppTheme, shouldBeDarkMode } from 'shared/lib/appSettings'
     import { exchangeRates } from 'shared/lib/currency'
     import { locales, setLanguage, _ } from 'shared/lib/i18n'
     import { addProfileCurrencyPriceData } from 'shared/lib/marketData'
@@ -15,7 +15,7 @@
 
     let appTheme: AppTheme = $appSettings.theme
     $: $appSettings.theme = appTheme
-    $: $appSettings.darkMode = shouldBeDark($appSettings.theme)
+    $: $appSettings.darkMode = shouldBeDarkMode($appSettings.theme)
 
     $: $appSettings.notifications = notificationsChecked
     $: updateProfile('settings.hideNetworkStatistics', hideNetworkStatistics)
@@ -46,7 +46,10 @@
         <Text type="h4" classes="mb-3">{locale('views.settings.theme.title')}</Text>
         <Radio value={'light'} bind:group={appTheme} label={locale('general.lightTheme')} />
         <Radio value={'dark'} bind:group={appTheme} label={locale('general.darkTheme')} />
-        <Radio value={'system'} bind:group={appTheme} label='System default' />
+        <Radio value={'system'} bind:group={appTheme} label={locale('general.systemTheme')} />
+        {#if appTheme === 'system'}
+            <Text type="p" secondary classes="mb-5">{locale('views.settings.theme.advice')}</Text>
+        {/if}
     </section>
     <HR classes="pb-5 mt-5 justify-center" />
     <section id="language" class="w-3/4">

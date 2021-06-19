@@ -28,7 +28,7 @@ export const appSettings = persistent<AppSettings>('settings', {
  * Determines if the theme is dark or not based on the current
  * application settings
  */
-export const shouldBeDark = (theme: AppTheme): boolean => {
+export const shouldBeDarkMode = (theme: AppTheme): boolean => {
     if(theme === 'system')
         return window.matchMedia('(prefers-color-scheme: dark)').matches
     else

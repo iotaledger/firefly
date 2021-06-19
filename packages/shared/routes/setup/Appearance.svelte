@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Animation, Button, ButtonRadio, OnboardingLayout, Text } from 'shared/components'
-    import { appSettings, AppTheme, shouldBeDark } from 'shared/lib/appSettings'
+    import { appSettings, AppTheme, shouldBeDarkMode } from 'shared/lib/appSettings'
     import { createEventDispatcher, onMount } from 'svelte'
 
     export let locale
@@ -17,7 +17,7 @@
 
     let appTheme: AppTheme = $appSettings.theme
     $: $appSettings.theme = appTheme
-    $: $appSettings.darkMode = shouldBeDark($appSettings.theme)
+    $: $appSettings.darkMode = shouldBeDarkMode($appSettings.theme)
 
     $: if (_clonedVariable !== undefined && _clonedVariable !== appTheme) {
         _clonedVariable = appTheme // ghetto reactive implementation
@@ -48,7 +48,7 @@
             <Text type="p" secondary classes="mb-2 mt-4" smaller>{locale('general.appearance')}</Text>
             <ButtonRadio icon="theme-light" value={'light'} bind:group={appTheme}>{locale('general.lightTheme')}</ButtonRadio>
             <ButtonRadio icon="theme-dark" value={'dark'} bind:group={appTheme}>{locale('general.darkTheme')}</ButtonRadio>
-            <ButtonRadio icon="theme-light" value={'system'} bind:group={appTheme}>{'System default'}</ButtonRadio>
+            <ButtonRadio icon="theme-light" value={'system'} bind:group={appTheme}>{locale('general.systemTheme')}</ButtonRadio>
         </div>
         <div slot="leftpane__action">
             <Button onClick={() => handleContinueClick()} classes="w-full">{locale('actions.continue')}</Button>

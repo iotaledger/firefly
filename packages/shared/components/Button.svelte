@@ -23,7 +23,6 @@
     export let showHoverText = undefined
 
     let buttonElement
-
     $: darkModeEnabled = $appSettings.darkMode
 
     onMount(() => {
