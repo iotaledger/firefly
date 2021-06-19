@@ -4,6 +4,11 @@
     import { pollChrysalisSnapshot } from 'shared/lib/migration'
     import { appSettings, shouldBeDarkMode } from 'shared/lib/appSettings';
 
+    /**
+     * NOTE: This reactive dependency ensures that darkMode is set to the
+     * correct value in the case the the system's settings have changed since
+     * the app was last opened.
+     */
     $: $appSettings.darkMode = shouldBeDarkMode($appSettings.theme)
 
     onMount(() => pollChrysalisSnapshot())
