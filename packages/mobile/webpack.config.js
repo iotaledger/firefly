@@ -33,7 +33,11 @@ const output = {
 const rendererRules = [
     {
         test: /\.ts$/,
-        loader: 'ts-loader',
+        loader: prod ? 'ts-loader' : 'esbuild-loader',
+        options: !prod && {
+            loader: 'ts',
+            target: 'esnext',
+        },
         exclude: /node_modules/,
     },
     {

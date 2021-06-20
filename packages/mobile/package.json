@@ -20,6 +20,7 @@
     "@capacitor/cli": "^2.2.1",
     "@capacitor/core": "2.2.1",
     "@capacitor/ios": "2.2.1",
+    "esbuild-loader": "^2.13.1",
     "mini-css-extract-plugin": "^1.6.0",
     "webpack": "^5.38.1",
     "webpack-cli": "^4.7.2",
