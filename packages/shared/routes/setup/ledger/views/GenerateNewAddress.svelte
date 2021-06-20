@@ -1,6 +1,5 @@
 <script lang="typescript">
     import { Button, Icon, OnboardingLayout, Spinner, Text } from 'shared/components'
-    import { ledgerMigrationProgresses } from 'shared/lib/migration'
     import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
     import { ledgerSimulator } from 'shared/lib/profile'
     import { api } from 'shared/lib/wallet'
@@ -75,7 +74,7 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout onBackClick={handleBackClick} progress={$ledgerMigrationProgresses}>
+    <OnboardingLayout onBackClick={handleBackClick} {locale} showLedgerProgress showLedgerVideoButton>
         <div slot="leftpane__content">
             {#if confirmed}
                 <div class="flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-5 text-center">

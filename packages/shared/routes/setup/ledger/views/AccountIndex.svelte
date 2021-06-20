@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, Number, OnboardingLayout, Spinner, Text, Toggle } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
-    import { ADDRESS_SECURITY_LEVEL, getLedgerMigrationData, ledgerMigrationProgresses } from 'shared/lib/migration'
+    import { ADDRESS_SECURITY_LEVEL, getLedgerMigrationData } from 'shared/lib/migration'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { createEventDispatcher, onMount } from 'svelte'
     import { get } from 'svelte/store'
@@ -83,7 +83,7 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout onBackClick={handleBackClick} progress={$ledgerMigrationProgresses}>
+    <OnboardingLayout onBackClick={handleBackClick} {locale} showLedgerProgress showLedgerVideoButton>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-5">{locale('views.selectLedgerAccountIndex.title')}</Text>
             <Text type="p" secondary>{locale('views.selectLedgerAccountIndex.body')}</Text>

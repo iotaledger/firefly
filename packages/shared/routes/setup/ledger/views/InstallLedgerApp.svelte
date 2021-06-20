@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, OnboardingLayout, Text } from 'shared/components'
-    import { currentLedgerMigrationProgress, LedgerMigrationProgress, ledgerMigrationProgresses } from 'shared/lib/migration'
+    import { currentLedgerMigrationProgress, LedgerMigrationProgress } from 'shared/lib/migration'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { ledgerSimulator } from 'shared/lib/profile'
     import { LedgerStatus } from 'shared/lib/typings/wallet'
@@ -83,7 +83,7 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout onBackClick={handleBackClick} progress={$ledgerMigrationProgresses}>
+    <OnboardingLayout onBackClick={handleBackClick} {locale} showLedgerProgress showLedgerVideoButton>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-5">{locale('views.setupLedger.title')}</Text>
             <Text type="p" secondary classes="mb-2">{locale('views.setupLedger.body1')}</Text>

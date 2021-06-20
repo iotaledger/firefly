@@ -52,7 +52,8 @@
             "progress1": "Install ledger app",
             "progress2": "Generate address",
             "progress3": "Switch ledger app",
-            "progress4": "Transfer funds"
+            "progress4": "Transfer funds",
+            "watchVideo": "Watch video guide"
         },
         "password": {
             "title": "Create a password",

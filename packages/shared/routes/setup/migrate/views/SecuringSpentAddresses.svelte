@@ -4,7 +4,6 @@
     import {
         createMigrationBundle,
         getInputIndexesForBundle,
-        ledgerMigrationProgresses,
         MINING_TIMEOUT_SECONDS,
         selectedBundlesToMine,
     } from 'shared/lib/migration'
@@ -20,6 +19,8 @@
     let progressBarPercent = 0
     let progressBarMessage = `${progressBarPercent} % completed`
     let timeElapsed = 0
+
+    let legacyLedger = $walletSetupType === SetupType.TrinityLedger
 
     let timeout
     let interval
@@ -98,9 +99,7 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <BundleMiningLayout
-        allowBack={false}
-        progress={$walletSetupType === SetupType.TrinityLedger ? $ledgerMigrationProgresses : undefined}>
+    <BundleMiningLayout allowBack={false} {locale} showLedgerProgress={legacyLedger} showLedgerVideoButton={legacyLedger}>
         <div slot="icon_boxed">
             <div class="flex justify-center items-center rounded-2xl w-12 h-12 bg-blue-500 shadow-lg">
                 <Icon boxed="true" icon="history" classes="text-white" />

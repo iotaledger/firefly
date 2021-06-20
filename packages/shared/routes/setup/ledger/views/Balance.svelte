@@ -9,7 +9,6 @@
         exchangeRates,
         formatCurrency,
     } from 'shared/lib/currency'
-    import { ledgerMigrationProgresses } from 'shared/lib/migration'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
     import { formatUnitBestMatch } from 'shared/lib/units'
@@ -21,6 +20,8 @@
     export let balance
 
     const dispatch = createEventDispatcher()
+
+    let legacyLedger = $walletSetupType === SetupType.TrinityLedger
 
     // TODO: missing check again for balance function
     function sync() {}
@@ -55,7 +56,9 @@
 {:else}
     <OnboardingLayout
         onBackClick={handleBackClick}
-        progress={$walletSetupType === SetupType.TrinityLedger ? $ledgerMigrationProgresses : undefined}>
+        {locale}
+        showLedgerProgress={legacyLedger}
+        showLedgerVideoButton={legacyLedger}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-3.5">{locale('views.balance.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.balance.body')}</Text>

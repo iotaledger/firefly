@@ -22,6 +22,7 @@
     import Snapshot from './Snapshot.svelte'
     import Transaction from './Transaction.svelte'
     import Version from './Version.svelte'
+    import Video from './Video.svelte'
 
     export let locale = 'en'
     export let type = undefined
@@ -31,8 +32,6 @@
     export let transition = true
 
     let popupContent
-
-    let closable = true
 
     const types = {
         qr: QR,
@@ -54,6 +53,7 @@
         missingBundle: MissingBundle,
         balanceFinder: BalanceFinder,
         snapshot: Snapshot,
+        video: Video,
     }
 
     const onkey = (e) => {

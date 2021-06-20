@@ -1,11 +1,6 @@
 <script lang="typescript">
     import { Animation, Button, Link, OnboardingLayout, SpentAddress, Text } from 'shared/components'
-    import {
-        ledgerMigrationProgresses,
-        selectAllAddressesForMining,
-        spentAddressesFromBundles,
-        toggleMiningSelection,
-    } from 'shared/lib/migration'
+    import { selectAllAddressesForMining, spentAddressesFromBundles, toggleMiningSelection } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { walletSetupType } from 'shared/lib/router'
@@ -20,6 +15,8 @@
     let addresses = $spentAddressesFromBundles.map((address) => Object.assign({}, address, { id: address.index }))
 
     let selectedAddresses = addresses.filter((address) => address.selectedToMine === true)
+
+    let legacyLedger = $walletSetupType === SetupType.TrinityLedger
 
     function onAddressClick(address) {
         var index = selectedAddresses.findIndex((_address) => _address.id === address.id)
@@ -74,7 +71,9 @@
 {:else}
     <OnboardingLayout
         onBackClick={handleBackClick}
-        progress={$walletSetupType === SetupType.TrinityLedger ? $ledgerMigrationProgresses : undefined}>
+        {locale}
+        showLedgerProgress={legacyLedger}
+        showLedgerVideoButton={legacyLedger}>
         <div slot="leftpane__content" class="relative h-full flex flex-col flex-wrap">
             <Text type="h2" classes="mb-5">{locale('views.secureSpentAddresses.title')}</Text>
             <Text type="p mb-4" secondary>

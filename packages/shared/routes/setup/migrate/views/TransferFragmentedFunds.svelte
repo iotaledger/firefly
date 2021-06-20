@@ -6,7 +6,6 @@
         getInputIndexesForBundle,
         hasMigratedAndConfirmedAllSelectedBundles,
         hasMigratedAnyBundle,
-        ledgerMigrationProgresses,
         migration,
         sendMigrationBundle,
         unmigratedBundles,
@@ -23,6 +22,8 @@
     let migrated = false
     let migratingFundsMessage = ''
     let fullSuccess = $hasMigratedAndConfirmedAllSelectedBundles
+
+    let legacyLedger = $walletSetupType === SetupType.TrinityLedger
 
     let hasBroadcastAnyBundle = false
 
@@ -248,9 +249,11 @@
 {:else}
     <OnboardingLayout
         allowBack={!$hasMigratedAnyBundle}
+        {locale}
         onBackClick={handleBackClick}
         class=""
-        progress={$walletSetupType === SetupType.TrinityLedger ? $ledgerMigrationProgresses : undefined}>
+        showLedgerProgress={legacyLedger}
+        showLedgerVideoButton={legacyLedger}>
         <div slot="leftpane__content" class="h-full flex flex-col flex-wrap">
             <Text type="h2" classes="mb-5">{locale('views.migrate.title')}</Text>
             <Text type="p" secondary classes="mb-4">{locale('views.transferFragmentedFunds.body1')}</Text>
