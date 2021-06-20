@@ -1,6 +1,5 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
-    import { Electron } from 'shared/lib/electron'
     import { activeProfile } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'
     import { api, asyncSetStoragePassword, asyncVerifyMnemonic, asyncStoreMnemonic, asyncCreateAccount } from 'shared/lib/wallet'
@@ -64,7 +63,19 @@
                         throw new Error('Invalid pin code!')
                     }
 
-                    await Electron.PincodeManager.set(get(activeProfile)?.id, pin)
+                    if (mobile) {
+                        const { PincodeManager } = await import('Mobile/lib/pincodeManager')
+                        const saved = await PincodeManager.set(get(activeProfile)?.id || 'test', pin)
+                        // 
+                        console.log({ saved })
+                        const pincodeStored = await PincodeManager.get(get(activeProfile)?.id || 'test')
+                        console.log({ pincodeStored })
+                        
+                    } else {
+                        const { Electron } = await import('shared/lib/electron')
+                        await Electron.PincodeManager.set(get(activeProfile)?.id, pin)
+                    }
+                    
                     await asyncSetStoragePassword(pin)
 
                     if ($walletSetupType === SetupType.Mnemonic) {

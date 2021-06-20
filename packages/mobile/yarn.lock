@@ -31,6 +31,13 @@
   dependencies:
     tslib "^1.9.0"
 
+"@capacitor/core@^2.4.7":
+  version "2.4.7"
+  resolved "https://registry.yarnpkg.com/@capacitor/core/-/core-2.4.7.tgz#f3b4d5728db7e764c1153da5e67d369bda35b772"
+  integrity sha512-ZPzXXQ4EPwR/ZhNDkmlxyzw4FvquIl/ROj8HMMM0MEd4xZfM8ulNGPIL6br9TWdlFLGBKq40eymPZjKaivGnig==
+  dependencies:
+    tslib "^1.9.0"
+
 "@capacitor/core@latest":
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/@capacitor/core/-/core-3.0.1.tgz#9e4498034b9e23ac7f3fcfd395fe79185c5d7779"
@@ -611,6 +618,13 @@ caniuse-lite@^1.0.30001219:
   version "1.0.30001238"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001238.tgz#e6a8b45455c5de601718736d0242feef0ecdda15"
   integrity sha512-bZGam2MxEt7YNsa2VwshqWQMwrYs5tR5WZQRYSuFxsBQunWjBuXhN4cS9nV5FFb1Z9y+DoQcQ0COyQbv6A+CKw==
+
+capacitor-secure-storage-plugin@0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/capacitor-secure-storage-plugin/-/capacitor-secure-storage-plugin-0.5.1.tgz#b7842a77e3d0df15314ad3be4ea3488d03fc01ae"
+  integrity sha512-S5quWArigLLVVUYfgjwabXtKWtSgK+9UCOLnmcMrvbSeSSZjLmp+eE0Nz2rsv/GbS+F0pCUAcBkPMO5J2X/SWQ==
+  dependencies:
+    "@capacitor/core" "^2.4.7"
 
 chalk@^2.0.1, chalk@^2.1.0, chalk@^2.3.0, chalk@^2.4.2:
   version "2.4.2"

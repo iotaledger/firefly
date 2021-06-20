@@ -26,6 +26,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
+    "capacitor-secure-storage-plugin": "0.5.1",
     "shared-modules": "link:../shared",
     "wallet-actor-system-capacitor-binding": "link:../backend/bindings/capacitor"
   },

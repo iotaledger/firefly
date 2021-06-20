@@ -11,6 +11,7 @@ const prod = mode === 'production'
 const resolve = {
     alias: {
         svelte: path.dirname(require.resolve('svelte/package.json')),
+        Mobile: path.dirname(require.resolve('./package.json')),
     },
     extensions: ['.mjs', '.js', '.ts', '.svelte'],
     mainFields: ['svelte', 'browser', 'module', 'main'],

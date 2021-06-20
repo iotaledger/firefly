@@ -5,14 +5,16 @@
     import { Error, Icon } from 'shared/components'
 
     const dispatch = createEventDispatcher()
+    const isWide = () => window.matchMedia('(max-width: 360px)').matches ? true : false
 
     export let value = undefined
     export let classes = ''
     export let disabled = false
     export let autofocus = false
     export let glimpse = false
-    export let smaller = false
+    export let smaller = isWide()
     export let error
+    export let mobile = false
 
     let inputs = new Array(PIN_LENGTH)
     $: {
@@ -80,6 +82,23 @@
             }
         }
         e.preventDefault()
+    }
+
+     /**
+     * for android mobile we need both onkeydown and oninput 
+     * event listeners to the input and handle the old and the new value.
+     * the auto-suggest feature or other event might follow 
+     * the keydown event and invalidate it. 
+     * @todo on ios its not needed, so we can detect ios too and disable it.
+    */
+    const changeHandlerHelper = (e, i) => {
+        //e.preventDefault
+        //console.log({e})
+        if (!/^\d$/.test(e.data)) {
+            inputs[i] = ''
+        } else {
+            inputElements[i + 1].focus()
+        }
     }
 
     const selectFirstEmpty = () => {
@@ -199,11 +218,13 @@
                         bind:value={inputs[i]}
                         maxLength="1"
                         id={`input-${i}`}
-                        type="text"
+                        type="number"
+                        enterkeyhint="done"
                         bind:this={inputElements[i]}
                         class:active={!inputs[i] || inputs[i].length === 0}
                         class:glimpse
                         {disabled}
+                        on:input={(event) => mobile ? changeHandlerHelper(event, i) : undefined}
                         on:keydown={(event) => changeHandler(event, i)}
                         on:contextmenu|preventDefault />
                 {/each}
