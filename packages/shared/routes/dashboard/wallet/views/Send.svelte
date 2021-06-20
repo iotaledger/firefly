@@ -3,9 +3,10 @@
     import { Address, Amount, Button, Dropdown, Icon, ProgressBar, Text } from 'shared/components'
     import { clearSendParams, sendParams } from 'shared/lib/app'
     import { parseCurrency } from 'shared/lib/currency'
-    import { closePopup, openPopup } from 'shared/lib/popup'
+    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
+    import { isSoftwareProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
-    import type { TransferProgressEventType } from 'shared/lib/typings/events'
+    import { TransferProgressEventType } from 'shared/lib/typings/events'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
@@ -37,6 +38,8 @@
     let addressError = ''
     let toError = ''
     let amountRaw
+
+    let ledgerAwaitingConfirmation = false
 
     // This looks odd but sets a reactive dependency on amount, so when it changes the error will clear
     $: amount, (amountError = '')
@@ -92,6 +95,27 @@
         if (to) {
             to = accountsDropdownItems.find((a) => a.id === to.id)
         }
+    }
+
+    // Ledger confirmation popups
+    $: if (
+        !$isSoftwareProfile &&
+        ($transferState === TransferProgressEventType.SigningTransaction ||
+            $transferState === TransferProgressEventType.GeneratingRemainderDepositAddress)
+    ) {
+        ledgerAwaitingConfirmation = true
+        openPopup({
+            type: 'ledgerConfirmation',
+            hideClose: true,
+        })
+    } else {
+        if (ledgerAwaitingConfirmation) {
+            ledgerAwaitingConfirmation = false
+            closePopup()
+        }
+    }
+    $: if (!$isTransferring && ledgerAwaitingConfirmation) {
+        closePopup()
     }
 
     const clearErrors = () => {

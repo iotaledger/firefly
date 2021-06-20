@@ -13,6 +13,7 @@
     import Diagnostics from './Diagnostics.svelte'
     import ErrorLog from './ErrorLog.svelte'
     import HideAccount from './HideAccount.svelte'
+    import LedgerConfirmation from './LedgerConfirmation.svelte'
     import LedgerNotConnected from './LedgerNotConnected.svelte'
     import MissingBundle from './MissingBundle.svelte'
     import Password from './Password.svelte'
@@ -43,6 +44,7 @@
         addressHistory: AddressHistory,
         addNode: AddNode,
         ledgerNotConnected: LedgerNotConnected,
+        ledgerConfirmation: LedgerConfirmation,
         removeNode: RemoveNode,
         busy: Busy,
         errorLog: ErrorLog,

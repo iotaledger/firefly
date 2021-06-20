@@ -36,7 +36,7 @@
             hideClose: true,
             props: {
                 handleClose: handleClosePopup,
-                message: locale('views.setupLedger.connect'),
+                message: locale('popups.ledgerNotConnected.connect'),
             },
         })
     }
