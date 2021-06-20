@@ -4,7 +4,7 @@ const mode = process.env.NODE_ENV || 'development'
 
 module.exports = {
     plugins: [
-        require('tailwindcss')('./../shared/tailwind.config.js'),
+        require('@tailwindcss/jit')('./../shared/tailwind.config.js'),
         require('postcss-url')({
             url:
                 mode === 'production'
