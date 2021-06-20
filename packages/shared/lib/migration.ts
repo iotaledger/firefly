@@ -1,10 +1,11 @@
+import { asTransactionObject } from '@iota/transaction-converter'
 import { getOfficialNetwork } from 'shared/lib/network'
 import { closePopup, openPopup } from 'shared/lib/popup'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
-import { appRoute } from 'shared/lib/router'
+import { appRoute, walletSetupType } from 'shared/lib/router'
 import type { Address } from 'shared/lib/typings/address'
 import type { Input, MigrationBundle, MigrationData, AddressInput } from 'shared/lib/typings/migration'
-import { AppRoute } from 'shared/lib/typings/routes'
+import { AppRoute, SetupType } from 'shared/lib/typings/routes'
 import Validator from 'shared/lib/validator'
 import { api } from 'shared/lib/wallet'
 import { derived, get, writable, Writable } from 'svelte/store'
@@ -12,20 +13,37 @@ import { localize } from './i18n'
 
 export const LOG_FILE_NAME = 'migration.log'
 
-export const MIGRATION_NODES = ['https://nodes.iota.org', 'https://nodes.iota.cafe']
-export const PERMANODE = 'https://chronicle.iota.org/api'
+export const MIGRATION_NODES = ['https://nodes.devnet.iota.org']
+export const PERMANODE = undefined
 
 export const ADDRESS_SECURITY_LEVEL = 2
 
 /** Minimum migration balance */
-export const MINIMUM_MIGRATION_BALANCE = 1000000
+export const MINIMUM_MIGRATION_BALANCE = 100
 
 /** Bundle mining timeout for each bundle */
 export const MINING_TIMEOUT_SECONDS = 60 * 10
 
-export const MINIMUM_WEIGHT_MAGNITUDE = 14;
+export const MINIMUM_WEIGHT_MAGNITUDE = 9;
 
-const MAX_INPUTS_PER_BUNDLE = 10
+const SOFTWARE_MAX_INPUTS_PER_BUNDLE = 10
+
+const HARDWARE_MAX_INPUTS_PER_BUNDLE = 3
+
+const HARDWARE_ADDRESS_GAP = 4
+
+interface MigrationLog {
+    bundleHash: string;
+    trytes: string[];
+    receiveAddressTrytes: string;
+    receiveAddressBech32: string;
+    balance: number;
+    timestamp: string;
+    spentAddresses: string[];
+    spentBundleHashes: string[];
+    mine: boolean;
+    crackability: number | null
+}
 
 interface Bundle {
     index: number;
@@ -38,6 +56,11 @@ interface Bundle {
     inputs: Input[];
     miningRuns: number;
     confirmed: boolean;
+}
+
+interface HardwareIndexes {
+    accountIndex: number;
+    pageIndex: number;
 }
 
 interface MigrationState {
@@ -99,6 +122,13 @@ export const migration = writable<MigrationState>({
     seed: writable<string>(null),
     bundles: writable<Bundle[]>([])
 })
+
+export const hardwareIndexes = writable<HardwareIndexes>({
+    accountIndex: 0,
+    pageIndex: 0
+})
+
+export const migrationLog = writable<MigrationLog>(null);
 
 /*
  * Chrysalis status
@@ -162,6 +192,37 @@ export const getMigrationData = (migrationSeed: string, initialAddressIndex = 0)
 };
 
 /**
+ * Prepares migration log 
+ * 
+ * @method prepareMigrationLog
+ * 
+ * @param {string} bundleHash 
+ * @param {string[]} trytes 
+ * @param {number} balance 
+ * @param [boolean] mine 
+ * @param [number] crackability
+ * 
+ * @returns {void} 
+ */
+export const prepareMigrationLog = (bundleHash: string, trytes: string[], balance: number, mine?: boolean, crackability?: number) => {
+    const transactionObjects = trytes.map((tryteString) => asTransactionObject(tryteString));
+    const { bundles } = get(migration);
+
+    const bundle = get(bundles).find((bundle) => bundle.bundleHash === bundleHash);
+    const spentInputs = bundle.inputs.filter((input) => input.spent === true)
+
+    migrationLog.update((_log) => Object.assign({}, _log, {
+        bundleHash: transactionObjects[0].bundle,
+        trytes,
+        receiveAddressTrytes: transactionObjects.find((tx) => tx.address.startsWith('TRANSFER')).address,
+        balance,
+        spentAddresses: spentInputs.map((input) => input.address),
+        spentBundleHashes: spentInputs.map((input) => input.spentBundleHashes)
+    }))
+};
+
+
+/**
  * Gets migration data for ledger accounts
  * 
  * @method getLedgerMigrationData
@@ -170,6 +231,7 @@ export const getMigrationData = (migrationSeed: string, initialAddressIndex = 0)
  */
 export const getLedgerMigrationData = (getAddressFn: (index: number) => Promise<string>): Promise<any> => {
     const _get = (addresses: AddressInput[]): Promise<any> => {
+        console.log('Ledger generated addresses', addresses)
         return new Promise((resolve, reject) => {
             api.getLedgerMigrationData(
                 addresses,
@@ -191,11 +253,20 @@ export const getLedgerMigrationData = (getAddressFn: (index: number) => Promise<
     const _generate = () => {
         const { data } = get(migration)
 
-        return Array.from(Array(5), (_, i) => i).reduce((promise, index) =>
-            promise.then(acc => (
-                getAddressFn(index + get(data).lastCheckedAddressIndex).then(address => acc.concat({ address, index }))
+        return Array.from(Array(HARDWARE_ADDRESS_GAP), (_, i) => i).reduce((promise, index) => {
+            let idx = 0;
+            const lastCheckedAddressIndex = get(data).lastCheckedAddressIndex;
+            if (lastCheckedAddressIndex === 0) {
+                idx = index + lastCheckedAddressIndex
+            } else {
+                idx = index + lastCheckedAddressIndex + 1
+            }
+
+            return promise.then(acc => (
+                getAddressFn(idx).then(address => acc.concat({ address, index: idx }))
             )
-            ), Promise.resolve([]))
+            )
+        }, Promise.resolve([]))
     };
 
     const _process = () => {
@@ -226,6 +297,109 @@ export const getLedgerMigrationData = (getAddressFn: (index: number) => Promise<
         if (shouldGenerateMore) {
             return _process();
         }
+
+        return Promise.resolve(true);
+    }).then(() => get(get(migration).data))
+};
+
+/**
+ * Creates migration bundle for ledger
+ * 
+ * @method createLedgerMigrationBundle
+ * 
+ * @param {number} bundleIndex 
+ * @param {function} prepareTransfersFn 
+ * 
+ * @returns {Promise}
+ */
+export const createLedgerMigrationBundle = (bundleIndex: number, prepareTransfersFn: (transfers: {
+    address: string;
+    value: number;
+    tag: string;
+}[], inputs: Input[]) => Promise<string[]>): Promise<any> => {
+    return new Promise((resolve, reject) => {
+        api.getMigrationAddress({
+            onSuccess(response) {
+                resolve(response.payload);
+            },
+            onError(error) {
+                reject(error)
+            }
+        })
+    }).then((migrationAddress) => {
+        const { bundles } = get(migration);
+
+        const bundle = get(bundles).find((bundle) => bundle.index === bundleIndex);
+
+        const transfer = {
+            address: migrationAddress.toString(),
+            value: bundle.inputs.reduce((acc, input) => acc + input.balance, 0),
+            tag: 'U'.repeat(27)
+        }
+
+        return prepareTransfersFn([transfer], bundle.inputs.map((input) => Object.assign({}, input, { keyIndex: input.index }))).then((trytes) => {
+            assignBundleHashToLedgerBundles(bundleIndex, trytes);
+
+            return { trytes, bundleHash: asTransactionObject(trytes[0]).bundle }
+        });
+    });
+};
+
+/**
+ * Sends ledger migration bundle
+ * 
+ * @method sendLedgerMigrationBundle
+ * 
+ * @param {string[]} trytes
+ *  
+ * @returns {Promise}
+ */
+export const sendLedgerMigrationBundle = (bundleHash: string, trytes: string[]): Promise<any> => {
+    return new Promise((resolve, reject) => {
+        api.sendLedgerMigrationBundle(
+            MIGRATION_NODES,
+            trytes,
+            MINIMUM_WEIGHT_MAGNITUDE,
+            {
+                onSuccess(response) {
+                    // Store migration log so that we can export it later
+                    prepareMigrationLog(bundleHash, trytes, response.payload.value)
+
+                    const { bundles } = get(migration);
+
+                    // Update bundle and mark it as migrated
+                    bundles.update((_bundles) => {
+                        return _bundles.map((bundle) => {
+                            if (bundle.bundleHash === bundleHash) {
+                                return Object.assign({}, bundle, { migrated: true })
+                            }
+
+                            return bundle
+                        })
+                    })
+
+                    // Persist these bundles in local storage
+                    const _activeProfile = get(activeProfile)
+
+                    const migratedTransaction = {
+                        address: response.payload.address,
+                        balance: response.payload.value,
+                        tailTransactionHash: response.payload.tailTransactionHash,
+                        timestamp: new Date().toISOString(),
+                        // Account index. Since we migrate funds to account at 0th index
+                        account: 0
+                    }
+
+                    updateProfile(
+                        'migratedTransactions',
+                        _activeProfile.migratedTransactions ? [..._activeProfile.migratedTransactions, migratedTransaction] : [migratedTransaction]
+                    )
+
+                    resolve(response)
+                },
+                onError(error) { reject(error) }
+            }
+        )
     })
 };
 
@@ -353,6 +527,22 @@ export const assignBundleHash = (inputAddressIndexes: number[], migrationBundle:
     })
 };
 
+export const assignBundleHashToLedgerBundles = (bundleIndex: number, trytes: string[]) => {
+    const { bundles } = get(migration);
+
+    bundles.update((_bundles) => {
+        return _bundles.map((bundle) => {
+            if (bundle.index === bundleIndex) {
+                return Object.assign({}, bundle, {
+                    bundleHash: asTransactionObject(trytes[0]).bundle
+                })
+            }
+
+            return bundle
+        })
+    })
+};
+
 /**
  * Prepares inputs (as bundles) for unspent addresses.
  * Steps:
@@ -375,6 +565,8 @@ export const assignBundleHash = (inputAddressIndexes: number[], migrationBundle:
  * @returns {Input[][]}
  */
 const selectInputsForUnspentAddresses = (inputs: Input[]): Input[][] => {
+    const MAX_INPUTS_PER_BUNDLE = get(walletSetupType) === SetupType.TrinityLedger ? HARDWARE_MAX_INPUTS_PER_BUNDLE : SOFTWARE_MAX_INPUTS_PER_BUNDLE;
+
     const totalInputsBalance: number = inputs.reduce((acc, input) => acc + input.balance, 0);
 
     // If the total sum of unspent addresses is less than MINIMUM MIGRATION BALANCE, just return an empty array as these funds cannot be migrated
@@ -899,7 +1091,6 @@ export const initialiseMigrationListeners = () => {
                     return bundle
                 }))
             }
-            console.log('Response', response)
         }, onError(error) {
             console.log('Error', error)
         }

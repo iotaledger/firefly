@@ -63,7 +63,7 @@
         ],
         "appId": "org.iota.firefly",
         "afterSign": "./scripts/notarize.macos.js",
-        "asar": true,
+        "asar": false,
         "protocols": [
             {
                 "name": "IOTA URL Scheme",

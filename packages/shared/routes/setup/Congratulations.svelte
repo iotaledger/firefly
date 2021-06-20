@@ -9,7 +9,7 @@
         formatCurrency,
     } from 'shared/lib/currency'
     import { Electron } from 'shared/lib/electron'
-    import { LOG_FILE_NAME, migration, resetMigrationState, totalMigratedBalance } from 'shared/lib/migration'
+    import { LOG_FILE_NAME, migration, resetMigrationState, totalMigratedBalance, migrationLog } from 'shared/lib/migration'
     import { activeProfile, newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
@@ -66,7 +66,9 @@
                 .then((path) => {
                     const source = getStoragePath(path, $activeProfile.name)
 
-                    return Electron.exportMigrationLog(`${source}/${LOG_FILE_NAME}`, `${$activeProfile.name}-${LOG_FILE_NAME}`)
+                    return $walletSetupType === SetupType.TrinityLedger
+                        ? Electron.exportLedgerMigrationLog($migrationLog, `${$activeProfile.name}-${LOG_FILE_NAME}`)
+                        : Electron.exportMigrationLog(`${source}/${LOG_FILE_NAME}`, `${$activeProfile.name}-${LOG_FILE_NAME}`)
                 })
                 .then((result) => {
                     if (result) {

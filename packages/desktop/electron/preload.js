@@ -128,6 +128,47 @@ try {
         },
 
         /**
+         * Exports ledger migration log
+         * 
+         * @method exportLedgerMigrationLog
+         * 
+         * @param {string} content
+         * @param {string} defaultFileName 
+         * 
+         * @returns {Promise}
+         */
+        exportLedgerMigrationLog: (content, defaultFileName) => {
+            return ipcRenderer.invoke('show-save-dialog',
+                {
+                    properties: ['createDirectory', 'showOverwriteConfirmation'],
+                    defaultPath: defaultFileName,
+                    filters: [
+                        { name: 'Log Files', extensions: ['log'] }
+                    ]
+                }).then((result) => {
+                    if (result.canceled) {
+                        return null
+                    }
+
+                    return new Promise((resolve, reject) => {
+                        try {
+                            let payload = '';
+
+                            Object.keys(content).forEach((key) => {
+                                payload = `${payload}${[key]}: ${content[key] || 'undefined'} \r\n`
+                            })
+                          
+
+                            fs.writeFileSync(result.filePath, payload)
+                            resolve(true)
+                        } catch (err) {
+                            reject(err)
+                        }
+                    })
+                })
+        },
+
+        /**
          * Imports legacy IOTA seed
          * 
          * @method importLegacySeed

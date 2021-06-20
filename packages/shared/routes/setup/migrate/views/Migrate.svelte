@@ -11,6 +11,8 @@
     import { Electron } from 'shared/lib/electron'
     import {
         confirmedBundles,
+        createLedgerMigrationBundle,
+        sendLedgerMigrationBundle,
         createMigrationBundle,
         getInputIndexesForBundle,
         hasBundlesWithSpentAddresses,
@@ -18,6 +20,8 @@
         migration,
         sendMigrationBundle,
         unselectedInputs,
+        hardwareIndexes,
+        ADDRESS_SECURITY_LEVEL
     } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
@@ -64,7 +68,30 @@
         if ($hasSingleBundle && !$hasBundlesWithSpentAddresses) {
             loading = true
 
-            createMigrationBundle(getInputIndexesForBundle($bundles[0]), 0, false)
+            if ($walletSetupType === SetupType.TrinityLedger) {
+                 Electron.ledger
+                    .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
+                    .then((iota) => {
+                        return createLedgerMigrationBundle(0, iota.prepareTransfers)
+            })
+            .then(({ trytes, bundleHash }) => {
+                singleMigrationBundleHash = bundleHash
+                return sendLedgerMigrationBundle(bundleHash, trytes);
+            })
+            .then((data) => {
+                   // Save profile
+                        saveProfile($newProfile)
+                        setActiveProfile($newProfile.id)
+
+                        profileInProgress.set(undefined)
+                        newProfile.set(null)
+            })
+            .catch((error) => {
+                loading = false
+                console.error(error)
+            }) 
+        } else {
+                createMigrationBundle(getInputIndexesForBundle($bundles[0]), 0, false)
                 .then((response) => {
                     singleMigrationBundleHash = response.payload.bundleHash
                     return sendMigrationBundle(response.payload.bundleHash).then(() => {
@@ -85,6 +112,7 @@
                         })
                     }
                 })
+            }  
         } else {
             loading = true
             timeout = setTimeout(() => {
