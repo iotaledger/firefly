@@ -83,6 +83,8 @@ export const ledgerMigrationProgresses = derived(currentLedgerMigrationProgress,
         })
     })
 })
+// TODO: replace with final one
+export const LEDGER_MIGRATION_VIDEO = 'https://files.iota.org/firefly/test-video.mp4'
 
 /*
  * Migration state

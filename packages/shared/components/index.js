@@ -50,6 +50,7 @@ export { default as ButtonRadio } from './ButtonRadio.svelte'
 export { default as ButtonCheckbox } from './ButtonCheckbox.svelte'
 export { default as Animation } from './Animation.svelte'
 export { default as ProgressFlow } from './ProgressFlow.svelte'
+export { default as Video } from './Video.svelte'
 
 export * from './modals'
 // Charts
