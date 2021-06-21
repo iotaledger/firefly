@@ -227,7 +227,7 @@
             "theme": {
                 "title": "Theme",
                 "description": "",
-                "advice": "Close the Firefly application for system theme changes to take effect"
+                "advice": "Restart the Firefly application for changes to the system theme to take effect"
             },
             "language": {
                 "title": "Language",
@@ -633,9 +633,9 @@
         "stronghold": "Stronghold",
         "language": "Language",
         "appearance": "Appearance",
-        "lightTheme": "Light theme",
-        "darkTheme": "Dark theme",
-        "systemTheme": "System theme",
+        "lightTheme": "Light",
+        "darkTheme": "Dark",
+        "systemTheme": "System",
         "balance": "Balance",
         "accountBalance": "Wallet Balance",
         "incoming": "Incoming",

@@ -225,16 +225,15 @@
                 "description": ""
             },
             "theme": {
-                "title": "テーマ：",
-                "description": "",
-                "advice": "システムテーマの変更が効くため、Fireflyのアプリを閉じてください"
+                "title": "テーマ",
+                "description": ""
             },
             "language": {
-                "title": "言語:",
+                "title": "言語",
                 "description": ""
             },
             "currency": {
-                "title": "通貨：",
+                "title": "通貨",
                 "description": "残高変換を調整し、チャートオプションを更新します"
             },
             "notifications": {
@@ -635,7 +634,6 @@
         "appearance": "テーマ",
         "lightTheme": "ライトテーマ",
         "darkTheme": "ダークテーマ",
-        "systemTheme": "システムテーマ",
         "balance": "残高",
         "accountBalance": "ウォレットの残高",
         "incoming": "入金",

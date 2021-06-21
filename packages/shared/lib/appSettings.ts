@@ -27,7 +27,7 @@ export const appSettings = persistent<AppSettings>('settings', {
 /**
  * Determines if the theme is dark or not based on the current
  * application settings
- * @param theme the theme data to check against
+ * @param theme the theme to check against
  * @returns true if the app should be in dark mode according to the theme
  */
 export const shouldBeDarkMode = (theme: AppTheme): boolean => {

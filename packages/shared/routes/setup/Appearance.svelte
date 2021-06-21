@@ -48,7 +48,7 @@
             <Text type="p" secondary classes="mb-2 mt-4" smaller>{locale('general.appearance')}</Text>
             <ButtonRadio icon="theme-light" value={'light'} bind:group={appTheme}>{locale('general.lightTheme')}</ButtonRadio>
             <ButtonRadio icon="theme-dark" value={'dark'} bind:group={appTheme}>{locale('general.darkTheme')}</ButtonRadio>
-            <ButtonRadio icon="theme-light" value={'system'} bind:group={appTheme}>{locale('general.systemTheme')}</ButtonRadio>
+            <ButtonRadio icon="settings" value={'system'} bind:group={appTheme}>{locale('general.systemTheme')}</ButtonRadio>
         </div>
         <div slot="leftpane__action">
             <Button onClick={() => handleContinueClick()} classes="w-full">{locale('actions.continue')}</Button>

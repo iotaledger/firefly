@@ -6,7 +6,7 @@
 
     /**
      * NOTE: This reactive dependency ensures that darkMode is set to the
-     * correct value in the case the the system's settings have changed since
+     * correct value in the case that the system's settings have changed since
      * the app was last opened.
      */
     $: $appSettings.darkMode = shouldBeDarkMode($appSettings.theme)
