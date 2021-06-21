@@ -23,7 +23,7 @@
 
     let balance
 
-    let state: State = State.Create
+    let state: State
     let stateHistory = []
 
     onMount(() => {
