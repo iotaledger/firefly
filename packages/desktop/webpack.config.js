@@ -98,22 +98,9 @@ const rendererRules = [
 /// ------------------------ Plugins ------------------------
 
 const mainPlugins = [
-    new CopyPlugin({
-        patterns: [
-            {
-                from: '../../node_modules/usb/build/Release/usb_bindings.node',
-                to() {
-                    return '../build/[name].[ext]'
-                },
-            },
-            {
-                from: '../../node_modules/node-hid/build/Release/HID.node',
-                to() {
-                    return '../build/[name].[ext]'
-                },
-            },
-        ],
-    })
+    new DefinePlugin({
+        PLATFORM_LINUX: JSON.stringify(process.platform === 'linux'),
+    }),
 ]
 
 const rendererPlugins = [
@@ -183,7 +170,7 @@ module.exports = [
         devtool: prod ? false : 'cheap-module-source-map',
         optimization: {
             nodeEnv: hardcodeNodeEnv ? mode : false,
-            minimize: false
+            minimize: true
         },
     },
 ]
