@@ -50,11 +50,13 @@ export async function fetchNetworkStatus(): Promise<void> {
     if (accs.length > 0) {
         const account0 = accs[0]
         const clientOptions = account0.clientOptions
-        const node = clientOptions.node ?? getOfficialNodes()[0]
+        const node = {
+            ...(clientOptions.node ?? getOfficialNodes()[0]),
+            auth: null
+        }
 
         try {
-            // TODO add user/pass support when implemented in wallet.rs
-            const response = await asyncGetNodeInfo(account0.id, node.url)
+            const response = await asyncGetNodeInfo(account0.id, node.url, node.auth)
 
             const timeSinceLastMsInMinutes = (Date.now() - (response.nodeinfo.latestMilestoneTimestamp * 1000)) / 60000;
             let health = 0; //bad

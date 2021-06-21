@@ -1,15 +1,8 @@
-export interface Node {
-    url: string
-    auth?: {
-        password: string
-        username: string
-    },
-    disabled?: boolean
-}
+import type { Node } from './node';
 
 export interface ClientOptions {
-    nodes?: Node[]
-    node?: Node
+    nodes?: Node[],
+    node?: Node,
     network?: string
     localPow?: boolean
     nodeSyncEnabled?: boolean
