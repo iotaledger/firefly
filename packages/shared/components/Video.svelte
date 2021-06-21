@@ -36,7 +36,7 @@
                 controls
                 controlsList="nodownload"
                 disablePictureInPicture>
-                    <source src="${video}"" type="video/mp4" />
+                    <source src="${video}" type="video/mp4" />
             </video>
         `}
         {width}
@@ -47,5 +47,6 @@
         frameborder="0"
         title="video" />
 </div>
+
 
 
