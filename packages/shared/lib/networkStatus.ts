@@ -50,10 +50,7 @@ export async function fetchNetworkStatus(): Promise<void> {
     if (accs.length > 0) {
         const account0 = accs[0]
         const clientOptions = account0.clientOptions
-        const node = {
-            ...(clientOptions.node ?? getOfficialNodes()[0]),
-            auth: null
-        }
+        const node = clientOptions.node ?? getOfficialNodes()[0]
 
         try {
             const response = await asyncGetNodeInfo(account0.id, node.url, node.auth)
