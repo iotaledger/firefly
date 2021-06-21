@@ -29,10 +29,10 @@ export const appSettings = persistent<AppSettings>('settings', {
  * consistent across OS platforms. To be specific, it ensures that users
  * are required to restart Firefly for system theme changes to take effect.
  * This is because the behaviour of this media query is different among platforms,
- * e.g. MacOS allows for Firefly to update the app theme without the restart whereas
- * Linux-based platforms do require the app restart.
+ * e.g. queries on MacOS result in up-to-date information whereas Linux-based platforms
+ * result in stale information.
  */
-const _shouldBeDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+const isSystemInDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
 
 /**
  * Determines if the theme is dark or not based on the current
@@ -41,5 +41,5 @@ const _shouldBeDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matc
  * @returns true if the app should be in dark mode according to the theme
  */
 export const shouldBeDarkMode = (theme: AppTheme): boolean => {
-    return theme === 'system' ? _shouldBeDarkMode : theme === 'dark'
+    return theme === 'system' ? isSystemInDarkMode : theme === 'dark'
 }
