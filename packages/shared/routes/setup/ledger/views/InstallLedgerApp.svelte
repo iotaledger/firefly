@@ -1,74 +1,23 @@
 <script lang="typescript">
     import { Button, OnboardingLayout, Text } from 'shared/components'
+    import { isLedgerConnected, pollLedgerStatus, stopPollLedgerStatus } from 'shared/lib/ledger'
     import { currentLedgerMigrationProgress, LedgerMigrationProgress } from 'shared/lib/migration'
-    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-    import { ledgerSimulator } from 'shared/lib/profile'
-    import { LedgerStatus } from 'shared/lib/typings/wallet'
-    import { api } from 'shared/lib/wallet'
-    import { createEventDispatcher, onDestroy, onMount } from 'svelte'
-    import { get } from 'svelte/store'
+    import { popupState } from 'shared/lib/popup'
+    import { createEventDispatcher, onMount } from 'svelte'
 
     export let locale
     export let mobile
 
-    let isLedgerConnected = true
-    let interval
-
     const dispatch = createEventDispatcher()
+
+    $: if (!$isLedgerConnected && !$popupState?.active) {
+        handleBackClick()
+    }
 
     onMount(() => {
         currentLedgerMigrationProgress.set(LedgerMigrationProgress.InstallLedgerApp)
-        getLedgerDeviceStatus()
-        interval = setInterval(() => {
-            getLedgerDeviceStatus()
-        }, 1000)
+        pollLedgerStatus()
     })
-
-    onDestroy(() => {
-        if (interval) {
-            clearTimeout(interval)
-        }
-    })
-
-    const openLedgerNotConnectedPopup = () => {
-        openPopup({
-            type: 'ledgerNotConnected',
-            hideClose: true,
-            props: {
-                handleClose: handleClosePopup,
-                message: locale('popups.ledgerNotConnected.connect'),
-            },
-        })
-    }
-
-    function handleLedgerDeviceNotConnected() {
-        if (!get(popupState).active) {
-            openLedgerNotConnectedPopup()
-        }
-    }
-
-    function getLedgerDeviceStatus() {
-        api.getLedgerDeviceStatus(ledgerSimulator, {
-            onSuccess(response) {
-                isLedgerConnected = response.payload.type === LedgerStatus.Connected
-                if (isLedgerConnected) {
-                    closePopup()
-                } else {
-                    handleLedgerDeviceNotConnected()
-                }
-            },
-            onError() {
-                handleLedgerDeviceNotConnected()
-            },
-        })
-    }
-
-    function handleClosePopup() {
-        if (!isLedgerConnected) {
-            closePopup()
-            handleBackClick()
-        }
-    }
 
     // TODO: missing functionality
     function handleContinueClick() {
@@ -76,6 +25,7 @@
     }
 
     function handleBackClick() {
+        stopPollLedgerStatus()
         dispatch('previous')
     }
 </script>

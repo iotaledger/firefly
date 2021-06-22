@@ -9,6 +9,7 @@
         formatCurrency,
     } from 'shared/lib/currency'
     import { Electron } from 'shared/lib/electron'
+    import { stopPollLedgerLegacyStatus, stopPollLedgerStatus } from 'shared/lib/ledger'
     import { ADDRESS_SECURITY_LEVEL, getLedgerMigrationData, hardwareIndexes } from 'shared/lib/migration'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
@@ -44,6 +45,11 @@
     let isCheckingForBalance = false
 
     function handleContinueClick() {
+        if (!legacyLedger) {
+            stopPollLedgerStatus()
+        } else {
+            stopPollLedgerLegacyStatus()
+        }
         dispatch('next')
     }
     function handleBackClick() {

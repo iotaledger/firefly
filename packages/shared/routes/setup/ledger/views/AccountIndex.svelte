@@ -1,10 +1,10 @@
 <script lang="typescript">
     import { Button, Number, OnboardingLayout, Spinner, Text, Toggle } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
+    import { isLedgerLegacyConnected, pollLedgerLegacyStatus, stopPollLedgerLegacyStatus } from 'shared/lib/ledger'
     import { ADDRESS_SECURITY_LEVEL, getLedgerMigrationData, hardwareIndexes } from 'shared/lib/migration'
-    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
+    import { popupState } from 'shared/lib/popup'
     import { createEventDispatcher, onMount } from 'svelte'
-    import { get } from 'svelte/store'
 
     export let locale
     export let mobile
@@ -15,47 +15,15 @@
     let page = 0
     let expert = false
 
-    let isLedgerConnected = true
-
     const dispatch = createEventDispatcher()
 
+    $: if (!$isLedgerLegacyConnected && !$popupState?.active) {
+        handleBackClick()
+    }
+
     onMount(() => {
-        Electron.ledger.addListener(ledgerListener)
+        pollLedgerLegacyStatus()
     })
-
-    function ledgerListener(isConnected) {
-        console.log('Is connected', isConnected)
-        isLedgerConnected = isConnected
-        if (isLedgerConnected) {
-            closePopup()
-        } else {
-            handleLedgerDeviceNotConnected()
-        }
-    }
-
-    function openLegacyLedgerNotConnectedPopup() {
-        openPopup({
-            type: 'ledgerNotConnected',
-            hideClose: true,
-            props: {
-                handleClose: handleClosePopup,
-                message: locale('popups.ledgerNotConnected.connectLegacy'),
-            },
-        })
-    }
-
-    function handleLedgerDeviceNotConnected() {
-        if (!get(popupState).active) {
-            openLegacyLedgerNotConnectedPopup()
-        }
-    }
-
-    function handleClosePopup() {
-        if (!isLedgerConnected) {
-            closePopup()
-            handleBackClick()
-        }
-    }
 
     function handleContinueClick() {
         loading = true
@@ -78,6 +46,7 @@
     }
 
     function handleBackClick() {
+        stopPollLedgerLegacyStatus()
         dispatch('previous')
     }
 </script>
@@ -113,7 +82,7 @@
             </div>
         </div>
         <div slot="leftpane__action" class="flex flex-col space-y-4">
-            <Button classes="w-full" onClick={handleContinueClick}>
+            <Button classes="w-full" disabled={loading} onClick={handleContinueClick}>
                 {#if loading}
                     <Spinner busy={true} message={locale('views.generateNewLedgerAddress.generating')} classes="justify-center" />
                 {:else}{locale('actions.confirm')}{/if}
