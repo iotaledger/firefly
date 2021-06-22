@@ -9,7 +9,6 @@ const DEFAULT_NODES: Node[] = [
 ].map((url) => ({
     url,
     auth: {
-        jwt: '',
         username: '',
         password: ''
     }
