@@ -19,7 +19,7 @@ import type {
     TransferProgressEventPayload
 } from 'shared/lib/typings/events'
 import type { Payload, Transaction } from 'shared/lib/typings/message'
-import type { MigrationBundle, MigrationData, SendMigrationBundleResponse, AddressInput } from 'shared/lib/typings/migration'
+import type { AddressInput, MigrationBundle, MigrationData, SendMigrationBundleResponse } from 'shared/lib/typings/migration'
 import { formatUnitBestMatch } from 'shared/lib/units'
 import { get, writable, Writable } from 'svelte/store'
 import type { Account, SyncedAccount } from './typings/account'
@@ -28,7 +28,7 @@ import type { Actor } from './typings/bridge'
 import type { ClientOptions } from './typings/client'
 import type { TransferProgressEventType } from './typings/events'
 import type { Message } from './typings/message'
-import type { Duration, NodeInfo, StrongholdStatus } from './typings/wallet'
+import type { Duration, LedgerStatusPayload, NodeInfo, StrongholdStatus } from './typings/wallet'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -249,6 +249,10 @@ export const api: {
         mwm: number,
         callbacks: { onSuccess: (response: Event<SendMigrationBundleResponse>) => void, onError: (err: ErrorEventPayload) => void }
     ),
+    getLedgerDeviceStatus(
+        ledgerSimulator: boolean,
+        callbacks: { onSuccess: (response: Event<LedgerStatusPayload>) => void, onError: (err: ErrorEventPayload) => void }
+    )
 } = window['__WALLET_API__']
 
 export const getWalletStoragePath = (appPath: string): string => {
