@@ -54,7 +54,7 @@ const errorMessages: {
     'LedgerDeviceNotFound': 'error.global.generic',
     'LedgerEssenceTooLarge': 'error.global.generic',
     // Dust output
-    'SendingDustError': 'error.send.sendingDust',
+    'DustError': 'error.send.sendingDust',
     'LeavingDustError': 'error.send.leavingDust',
 }
 

@@ -63,7 +63,7 @@ export enum ErrorType {
     LedgerEssenceTooLarge = 'LedgerEssenceTooLarge',
 
     // Dust output
-    SendingDustError = 'SendingDustError',
+    DustError = 'DustError',
     LeavingDustError = 'LeavingDustError',
 }
 
