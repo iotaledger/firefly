@@ -162,9 +162,9 @@ function _callAccountMethod(
             accountId,
             method: {
                 name: AccountMethod[methodName],
-                ...data
-            },
-        },
+                data
+            }
+        }
     })
 }
 
@@ -224,5 +224,5 @@ export function syncAccount(
 }
 
 export function getNodeInfo(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier, url?: string, auth?: NodeAuth): Promise<string> {
-    return _callAccountMethod(bridge, __ids, AccountMethod.GetNodeInfo, accountId, { url: url, auth: auth })
+    return _callAccountMethod(bridge, __ids, AccountMethod.GetNodeInfo, accountId, [url, auth?.jwt, [auth?.username, auth?.password]])
 }

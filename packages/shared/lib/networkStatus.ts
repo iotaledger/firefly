@@ -2,6 +2,8 @@ import { get, writable } from 'svelte/store'
 import { asyncGetNodeInfo, wallet } from "shared/lib/wallet"
 import { getOfficialNodes } from 'shared/lib/network'
 
+import type { Node } from './typings/node';
+
 /**
  * Default interval for polling the network status
  */
@@ -50,7 +52,10 @@ export async function fetchNetworkStatus(): Promise<void> {
     if (accs.length > 0) {
         const account0 = accs[0]
         const clientOptions = account0.clientOptions
-        const node = clientOptions.node ?? getOfficialNodes()[0]
+        const node: Node = {
+            ...(clientOptions.node ?? getOfficialNodes()[0]),
+            auth: { username: '', password: '' }
+        }
 
         try {
             const response = await asyncGetNodeInfo(account0.id, node.url, node.auth)
