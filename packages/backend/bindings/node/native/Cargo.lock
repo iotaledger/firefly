@@ -1517,7 +1517,7 @@ dependencies = [
 [[package]]
 name = "iota-client"
 version = "0.5.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?branch=dev#779a4b485f1d437e752d1cd18228fa17a97c864a"
+source = "git+https://github.com/iotaledger/iota.rs?rev=57c5a33d83be4b8286a54156e9f0d2ac4345e9b9#57c5a33d83be4b8286a54156e9f0d2ac4345e9b9"
 dependencies = [
  "async-trait",
  "bee-common",
@@ -1529,34 +1529,10 @@ dependencies = [
  "iota-crypto 0.5.1",
  "log",
  "num_cpus",
+ "once_cell",
  "regex",
  "reqwest",
- "serde 1.0.126",
- "serde_json",
- "thiserror",
- "tokio",
- "url",
- "zeroize",
-]
-
-[[package]]
-name = "iota-client"
-version = "0.5.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?rev=07f4e420edfa1f48f90fc0e75cb7758f4a3c6e3f#07f4e420edfa1f48f90fc0e75cb7758f4a3c6e3f"
-dependencies = [
- "async-trait",
- "bee-common",
- "bee-message",
- "bee-pow",
- "bee-rest-api",
- "futures",
- "hex",
- "iota-bundle-miner",
- "iota-conversion 0.5.1",
- "iota-crypto 0.5.1",
- "iota-model",
- "num_cpus",
- "once_cell",
+ "rumqttc",
  "serde 1.0.126",
  "serde_json",
  "thiserror",
@@ -1591,6 +1567,31 @@ dependencies = [
  "slip10",
  "tokio",
  "ureq 2.1.1",
+]
+
+[[package]]
+name = "iota-client"
+version = "1.0.0"
+source = "git+https://github.com/iotaledger/iota.rs?branch=dev#b4e04e735b96c3345037a4106f5ab3877cdc9a30"
+dependencies = [
+ "async-trait",
+ "bee-common",
+ "bee-message",
+ "bee-pow",
+ "bee-rest-api",
+ "futures",
+ "hex",
+ "iota-crypto 0.5.1",
+ "log",
+ "num_cpus",
+ "regex",
+ "reqwest",
+ "serde 1.0.126",
+ "serde_json",
+ "thiserror",
+ "tokio",
+ "url",
+ "zeroize",
 ]
 
 [[package]]
@@ -1724,7 +1725,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=migration-ledger#b134aec19d2d10ec545d9d1b1e45447c8bee3903"
+source = "git+https://github.com/iotaledger/wallet.rs?branch=migration-ledger#5b5812bf1974193a98b9f306007adf9f24da7fee"
 dependencies = [
  "async-trait",
  "backtrace",
@@ -1737,6 +1738,7 @@ dependencies = [
  "iota-client 0.5.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?rev=57c5a33d83be4b8286a54156e9f0d2ac4345e9b9)",
  "iota-core",
  "iota-crypto 0.5.1",
+ "iota-ledger",
  "iota_stronghold",
  "log",
  "once_cell",
@@ -3906,7 +3908,7 @@ dependencies = [
 name = "wallet-actor-system"
 version = "0.1.0"
 dependencies = [
- "iota-client 0.5.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?branch=dev)",
+ "iota-client 1.0.0",
  "iota-wallet",
  "log",
  "once_cell",
