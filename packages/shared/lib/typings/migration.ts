@@ -172,9 +172,9 @@ export function getMigrationAddress(
 }
 
 /**
- * Gets migration address
+ * Mine bundle
  * 
- * @method getMigrationAddress
+ * @method mineBundle
  * 
  * @param {Bridge} bridge 
  * @param {CommunicationIds} __ids 
