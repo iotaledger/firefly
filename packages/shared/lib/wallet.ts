@@ -234,7 +234,7 @@ export const api: {
         securityLevel: number,
         timeout: number,
         offset: number,
-        callbacks: { onSuccess: (response: Event<SendMigrationBundleResponse>) => void, onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: Event<{ bundle: string[], crackability: number}>) => void, onError: (err: ErrorEventPayload) => void }
     ),
     getLedgerMigrationData(
         addresses: AddressInput[],

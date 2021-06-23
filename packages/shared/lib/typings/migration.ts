@@ -178,7 +178,7 @@ export function getMigrationAddress(
  * 
  * @param {Bridge} bridge 
  * @param {CommunicationIds} __ids 
- * @param {string[]} bundle
+ * @param {string[]} preparedBundle
  * @param {string[]} spentBundleHashes
  * @param {number} timeout
  * @param {number} offset
@@ -188,7 +188,7 @@ export function getMigrationAddress(
 export function mineBundle(
     bridge: Bridge,
     __ids: CommunicationIds,
-    bundle: string[],
+    preparedBundle: string[],
     spentBundleHashes: string[],
     securityLevel: number,
     timeout: number,
@@ -199,7 +199,7 @@ export function mineBundle(
         id: __ids.messageId,
         cmd: 'MineBundle',
         payload: {
-            bundle,
+            preparedBundle,
             spentBundleHashes,
             securityLevel,
             timeout,

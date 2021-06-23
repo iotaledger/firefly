@@ -73,7 +73,8 @@ export enum ResponseTypes {
     LegacySeedChecksum = 'SeedChecksum',
     NodeInfo = 'NodeInfo',
     MigrationAddress = 'MigrationAddress',
-    MinedBundle = 'MinedBundle'
+    MinedBundle = 'MinedBundle',
+    MineBundle = 'MineBundle',
 }
 
 export enum Actions {

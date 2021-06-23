@@ -22,7 +22,7 @@
         "argon2": "^0.27.1",
         "electron-log": "^4.3.1",
         "electron-updater": "^4.3.5",
-        "hw-app-iota": "0.6.1",
+        "hw-app-iota": "laumair/hw-app-iota.js#0fb06437422c12c17b8a3946955da939b2d3fb6a",
         "kdbxweb": "^1.14.4",
         "keytar": "^7.3.0",
         "shared": "0.0.0",

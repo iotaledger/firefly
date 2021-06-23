@@ -10,11 +10,17 @@
         migration,
         sendMigrationBundle,
         unmigratedBundles,
+        hardwareIndexes,
+        ADDRESS_SECURITY_LEVEL,
+        createMinedLedgerMigrationBundle,
+        sendLedgerMigrationBundle,
+        createLedgerMigrationBundle,
     } from 'shared/lib/migration'
     import { newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
     import { createEventDispatcher, onDestroy } from 'svelte'
+    import { Electron } from 'shared/lib/electron'
 
     export let locale
     export let mobile
@@ -114,6 +120,43 @@
                 // @ts-ignore
                 promise
                     .then((acc) => {
+                        const isMigratingFromTrinityLedger = $walletSetupType === SetupType.TrinityLedger
+
+                        if (isMigratingFromTrinityLedger) {
+                            if (transaction.trytes && transaction.trytes.length) {
+                                return Electron.ledger
+                                    .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
+                                    .then((iota) => {
+                                        return createMinedLedgerMigrationBundle(transaction.index, iota.prepareTransfers)
+                                    })
+                                    .then(({ trytes, bundleHash }) => {
+                                        return sendLedgerMigrationBundle(bundleHash, trytes)
+                                    })
+                                    .then(() => {
+                                        migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, transaction.bundleHash]
+                                    })
+                            }
+
+                            return Electron.ledger
+                                .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
+                                .then((iota) => {
+                                    return createLedgerMigrationBundle(transaction.index, iota.prepareTransfers)
+                                })
+                                .then(({ trytes, bundleHash }) => {
+                                    transactions = transactions.map((_transaction) => {
+                                        if (_transaction.index === transaction.index) {
+                                            return { ..._transaction, bundleHash }
+                                        }
+
+                                        return _transaction
+                                    })
+
+                                    return sendLedgerMigrationBundle(bundleHash, trytes).then(() => {
+                                        migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, bundleHash]
+                                    })
+                                })
+                        }
+
                         if (transaction.bundleHash) {
                             return sendMigrationBundle(transaction.bundleHash).then(() => {
                                 migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, transaction.bundleHash]
@@ -184,6 +227,63 @@
                 // @ts-ignore
                 promise
                     .then((acc) => {
+                        const isMigratingFromTrinityLedger = $walletSetupType === SetupType.TrinityLedger
+
+                        if (isMigratingFromTrinityLedger) {
+                            if (transaction.trytes && transaction.trytes.length) {
+                                return Electron.ledger
+                                    .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
+                                    .then((iota) => {
+                                        return createMinedLedgerMigrationBundle(transaction.index, iota.prepareTransfers)
+                                    })
+                                    .then(({ trytes, bundleHash }) => {
+                                        transactions = transactions.map((_transaction, i) => {
+                                            if (_transaction.index === transaction.index) {
+                                                return { ..._transaction, bundleHash }
+                                            }
+
+                                            return _transaction
+                                        })
+
+                                        return sendLedgerMigrationBundle(bundleHash, trytes)
+                                    })
+                                    .then(() => {
+                                        if (!hasBroadcastAnyBundle) {
+                                            hasBroadcastAnyBundle = true
+
+                                            persistProfile()
+                                        }
+
+                                        migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, transaction.bundleHash]
+                                    })
+                            }
+
+                            return Electron.ledger
+                                .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
+                                .then((iota) => {
+                                    return createLedgerMigrationBundle(transaction.index, iota.prepareTransfers)
+                                })
+                                .then(({ trytes, bundleHash }) => {
+                                    transactions = transactions.map((_transaction, i) => {
+                                        if (_transaction.index === transaction.index) {
+                                            return { ..._transaction, bundleHash }
+                                        }
+
+                                        return _transaction
+                                    })
+
+                                    return sendLedgerMigrationBundle(bundleHash, trytes).then(() => {
+                                        if (!hasBroadcastAnyBundle) {
+                                            hasBroadcastAnyBundle = true
+
+                                            persistProfile()
+                                        }
+
+                                        migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, bundleHash]
+                                    })
+                                })
+                        }
+
                         if (transaction.bundleHash) {
                             return sendMigrationBundle(transaction.bundleHash).then(() => {
                                 if (!hasBroadcastAnyBundle) {
@@ -216,7 +316,6 @@
                             })
                         })
                     })
-
                     .catch((error) => {
                         console.error(error)
 

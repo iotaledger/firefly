@@ -7,6 +7,9 @@
         ledgerMigrationProgresses,
         MINING_TIMEOUT_SECONDS,
         selectedBundlesToMine,
+        hardwareIndexes,
+        mineLedgerBundle,
+        ADDRESS_SECURITY_LEVEL,
     } from 'shared/lib/migration'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
@@ -29,31 +32,56 @@
     onMount(() => {
         $selectedBundlesToMine.reduce(
             (promise, bundle, idx) =>
-                promise.then((acc) =>
-                    createMigrationBundle(getInputIndexesForBundle(bundle), bundle.miningRuns * 10 ** 8, true)
+                promise.then((acc) => {
+                    const isMigratingLedger = $walletSetupType === SetupType.TrinityLedger
+
+                    const _updateOnSuccess = () => {
+                        timeElapsed = (idx + 1) * MINING_TIMEOUT_SECONDS
+                        updateProgress()
+
+                        if (idx === $selectedBundlesToMine.length - 1) {
+                            clearInterval(interval)
+
+                            redirectWithTimeout()
+                        }
+                    }
+
+                    const _updateOnError = () => {
+                        timeElapsed = (idx + 1) * MINING_TIMEOUT_SECONDS
+                        updateProgress()
+
+                        if (idx === $selectedBundlesToMine.length - 1) {
+                            clearInterval(interval)
+
+                            redirectWithTimeout()
+                        }
+                    }
+
+                    if (isMigratingLedger) {
+                        return Electron.ledger
+                            .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
+                            .then((iota) => {
+                                return mineLedgerBundle(bundle.index, bundle.miningRuns * 10 ** 8)
+                            })
+                            .then(() => {
+                                _updateOnSuccess()
+                            })
+                            .catch((error) => {
+                                console.error('E', error)
+                                _updateOnError()
+                            })
+                    }
+
+                    return createMigrationBundle(getInputIndexesForBundle(bundle), bundle.miningRuns * 10 ** 8, true)
                         .then((result) => {
-                            timeElapsed = (idx + 1) * MINING_TIMEOUT_SECONDS
-                            updateProgress()
-
-                            if (idx === $selectedBundlesToMine.length - 1) {
-                                clearInterval(interval)
-
-                                redirectWithTimeout()
-                            }
+                            _updateOnSuccess()
                         })
                         .catch((error) => {
                             console.error(error)
 
-                            timeElapsed = (idx + 1) * MINING_TIMEOUT_SECONDS
-                            updateProgress()
-
-                            if (idx === $selectedBundlesToMine.length - 1) {
-                                clearInterval(interval)
-
-                                redirectWithTimeout()
-                            }
+                            _updateOnError()
                         })
-                ),
+                }),
             Promise.resolve([])
         )
 

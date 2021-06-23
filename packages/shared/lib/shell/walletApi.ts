@@ -74,6 +74,7 @@ const apiToResponseTypeMap = {
     setStrongholdPasswordClearInterval: ResponseTypes.StrongholdPasswordClearIntervalSet,
     getLegacySeedChecksum: ResponseTypes.LegacySeedChecksum,
     getNodeInfo: ResponseTypes.NodeInfo,
+    mineBundle: ResponseTypes.MinedBundle,
     ...eventsApiToResponseTypeMap
 }
 
