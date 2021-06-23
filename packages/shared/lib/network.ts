@@ -1,9 +1,8 @@
-import type { Node } from './typings/client'
+import type { Node } from './typings/node'
 import { isValidHttpsUrl, isValidUrl } from './utils'
 
 const DEFAULT_NETWORK = 'testnet'
 
-// TODO: Update default nodes
 const DEFAULT_NODES: Node[] = [
     'https://api.lb-0.testnet.chrysalis2.com/'
 ].map((url) => ({

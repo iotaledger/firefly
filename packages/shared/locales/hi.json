@@ -241,8 +241,8 @@
                 "description": "लेन-देन की घटनाओं के लिए सिस्टम सूचनाएं"
             },
             "networkStatus": {
-                "title": "Network status",
-                "description": "Displays the status of the node you are currently connected to."
+                "title": "नेटवर्क स्थिति",
+                "description": "उस नोड की स्थिति प्रदर्शित करता है जिससे आप वर्तमान में जुड़े हुए हैं"
             },
             "exportStronghold": {
                 "title": "एक्सपोर्ट बैकअप",
@@ -375,7 +375,7 @@
                 "networkDown": "नेटवर्क डिस्कनेक्ट हो गया।",
                 "status": "स्टेटस",
                 "messagesPerSecond": "मेस्सगेस प्रति सेकंड",
-                "referencedRate": "Referenced rate"
+                "referencedRate": "संदर्भित दर"
             },
             "profileModal": {
                 "allSettings": "सभी सेटिंग्स",
@@ -587,7 +587,7 @@
         "viewStatus": "स्थिति देखें",
         "showHiddenAccounts": "छुपे हुए वॉलेट दिखाएँ",
         "confirm": "पुष्टि करें",
-        "hideNetworkStatistics": "Hide network statistics",
+        "hideNetworkStatistics": "नेटवर्क आँकड़े छिपाएँ",
         "findBalances": "शेष राशि का पता लगाएं",
         "searchBalances": "बालनेस के लिए खोजें",
         "searchAgain": "फिर से सर्च करें",

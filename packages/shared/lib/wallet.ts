@@ -7,7 +7,15 @@ import { HistoryDataProps } from 'shared/lib/marketData'
 import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
 import { showAppNotification, showSystemNotification } from 'shared/lib/notifications'
 import { activeProfile, isStrongholdLocked, updateProfile } from 'shared/lib/profile'
-import type { Account as BaseAccount, AccountToCreate, Balance } from 'shared/lib/typings/account'
+import type {
+    Account,
+    Account as BaseAccount,
+    AccountToCreate,
+    Balance,
+    SyncedAccount
+} from 'shared/lib/typings/account'
+import type { Address } from 'shared/lib/typings/address'
+import type { Actor } from 'shared/lib/typings/bridge'
 import type {
     BalanceChangeEventPayload,
     ConfirmationStateChangeEventPayload,
@@ -22,13 +30,11 @@ import type { Payload, Transaction } from 'shared/lib/typings/message'
 import type { AddressInput, MigrationBundle, MigrationData, SendMigrationBundleResponse } from 'shared/lib/typings/migration'
 import { formatUnitBestMatch } from 'shared/lib/units'
 import { get, writable, Writable } from 'svelte/store'
-import type { Account, SyncedAccount } from './typings/account'
-import type { Address } from './typings/address'
-import type { Actor } from './typings/bridge'
 import type { ClientOptions } from './typings/client'
 import type { TransferProgressEventType } from './typings/events'
 import type { Message } from './typings/message'
-import type { Duration, LedgerStatusPayload, NodeInfo, StrongholdStatus } from './typings/wallet'
+import type { Duration, LedgerStatusPayload, StrongholdStatus } from './typings/wallet'
+import type { NodeAuth, NodeInfo } from './typings/node'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -187,7 +193,7 @@ export const api: {
     removeStorage(callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
     setClientOptions(clientOptions: ClientOptions, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
     setStrongholdPasswordClearInterval(interval: Duration, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
-    getNodeInfo(accountId: string, url: string | undefined, callbacks: { onSuccess: (response: Event<NodeInfo>) => void, onError: (err: ErrorEventPayload) => void })
+    getNodeInfo(accountId: string, url: string | undefined, auth: NodeAuth | undefined, callbacks: { onSuccess: (response: Event<NodeInfo>) => void, onError: (err: ErrorEventPayload) => void })
 
     // Legacy seed APIs
     getLegacySeedChecksum(seed: string, callbacks: { onSuccess: (response: Event<string>) => void, onError: (err: ErrorEventPayload) => void })
@@ -514,9 +520,9 @@ export const asyncSyncAccounts = (addressIndex?, gapLimit?, accountDiscoveryThre
     })
 }
 
-export const asyncGetNodeInfo = (accountId, url) => {
+export const asyncGetNodeInfo = (accountId: string, url?: string, auth?: NodeAuth) => {
     return new Promise<NodeInfo>((resolve, reject) => {
-        api.getNodeInfo(accountId, url, {
+        api.getNodeInfo(accountId, url, auth, {
             onSuccess(response) {
                 resolve(response.payload)
             },

@@ -10,7 +10,7 @@ import { Electron } from './electron'
 import {
     HistoryDataProps
 } from './marketData'
-import type { Node } from './typings/client'
+import type { Node } from './typings/node'
 
 
 export interface MigratedTransaction {

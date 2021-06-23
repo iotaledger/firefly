@@ -11,7 +11,7 @@
         },
         "appearance": {
             "title": "المظهر",
-            "body": "Choose your app theme."
+            "body": "اختر مظهر التطبيق الخاص بك."
         },
         "profile": {
             "title": "إنشاء ملف شخصي",
@@ -73,15 +73,15 @@
         },
         "backupWallet": {
             "title": "النسخ الاحتياطي لملف محصّن",
-            "body1": "Enter your password to backup your wallets to a Stronghold file. Your password is used to encrypt the backup.",
+            "body1": "أدخل كلمة المرور الخاصة بك لنسخ محافظك إلى ملف Stronghold . يتم استخدام كلمة المرور لتشفير النسخة الاحتياطية.",
             "body2": "أسباب أهمية النسخ الاحتياطي الرقمي:",
-            "reason1": "Easily recover your wallets without typing in your recovery phrase",
-            "reason2": "Import your wallets on other devices",
+            "reason1": "استرد محافظك بسهولة دون كتابة عبارة الاسترداد الخاصة بك",
+            "reason2": "استيراد محافظك إلى أجهزة أخرى",
             "reason3": "استرداد سجل المعاملات الخاص بك بالكامل"
         },
         "recoveryPhraseSaved": {
             "title": "تم النسخ الاحتياطي بنجاح",
-            "body": "You have backed up your wallets to a Stronghold."
+            "body": "لقد قمت بنسخ محفظتك احتياطياً إلى ملف Stronghold."
         },
         "congratulations": {
             "title": "اكتمل إعداد المحفظة",
@@ -91,42 +91,42 @@
             "exportMigration": "تصدير سجل الترحيل وإنهاء الإعداد"
         },
         "import": {
-            "title": "Recover or migrate funds",
-            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
-            "importSeed": "I have an 81 character seed",
-            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
-            "importMnemonic": "I have a Firefly recovery phrase",
-            "importMnemonicDescription": "Enter your recovery phrase to recover your wallets",
-            "importFile": "I have a file backup",
-            "importFileDescription": "Upload a Seedvault or Stronghold file"
+            "title": "استرداد الأموال أو تحويلها",
+            "body": "إذا كان لديك seed موجودة أو ملف احتياطي لمحفظتك، يمكنك استيرادها هنا. إذا كان لديك أموال الشبكة القديمة، فسيتم شرح خطوات الترحيل للانتقال إلى شبكة كرايساليس.",
+            "importSeed": "لدي seed من 81 حرف",
+            "importSeedDescription": "أدخل seed وانقل الأموال إلى كريزاليس",
+            "importMnemonic": "لدي عبارة استرجاع الفايرفلاي",
+            "importMnemonicDescription": "أدخل عبارة الاسترداد الخاصة بك لاسترداد محافظك",
+            "importFile": "لدي نسخة احتياطية للملف",
+            "importFileDescription": "تحميل ملف Seedvault أو Stronghold"
         },
         "importFromText": {
             "seed": {
-                "title": "Type your seed to commence migration",
-                "body": "A seed consists of 81 characters. This is used to recover from the older Trinity app.",
-                "enter": "Enter your seed"
+                "title": "اكتب ال seed الخاصة بك لبدء الترحيل",
+                "body": "الseed مكونة من 81 حرف او رقم، يستخدم للاستعادة من محفظة الترينيتي القديمة.",
+                "enter": "أدخل الseed الخاص بك"
             },
             "mnemonic": {
-                "title": "Type your recovery phrase",
-                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly wallets.",
-                "enter": "Enter your secret recovery phrase"
+                "title": "اكتب عبارة الاسترداد",
+                "body": "عبارة الاسترداد هي ٢٤ كلمة ذات أحرف صغيرة مع المسافات الفاصلة بينها. هذه العبارة تستخدم لاستعادة محفظة Firefly الموجودة مسبقا.",
+                "enter": "أدخل عبارة الاسترداد السرية الخاصة بك"
             },
             "seedDetected": "تم اكتشاف seed مكون من 81 حرف",
             "phraseDetected": "تم اكتشاف عبارة استرداد مكونة من 24 كلمة",
             "checksum": "رمز التحقق"
         },
         "importFromFile": {
-            "title": "Restore your wallets using a backup file",
-            "body": "Import a backup file to restore your wallets. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+            "title": "استعادة محفظتك باستخدام ملف النسخ الاحتياطي",
+            "body": "قم باستيراد نسخة احتياطية لاسترداد محفظتك.\nالنسخ الاحتياطية هي إما ملف محصّن (stronghold.) او محفظة ترينيتي seedvault (.kdbx)."
         },
         "importBackupPassword": {
-            "title": "Restore your wallets from a SeedVault or Stronghold",
+            "title": "استعادة محفظاتك من SeedVault أو Stronghold",
             "body1": "الرجاء إدخال كلمة مرور النسخ الاحتياطي.",
             "body2": "هذه هي كلمة المرور التي قمت بتعيينها عند إنشاء النسخة الاحتياطية لأول مرة."
         },
         "importSuccess": {
             "title": "لقد قمت باستعادة النسخ الاحتياطي الخاص بك بنجاح",
-            "body": "You can now set up your new profile.",
+            "body": "يمكنك الآن إعداد ملفك الشخصي الجديد.",
             "seedvaultTitle": "تم الاستيراد بنجاح",
             "seedvaultBody": "كلمة المرور الخاصة بك صحيحة، يمكنك الآن المتابعة.",
             "strongholdTitle": "تم الاستيراد بنجاح",
@@ -147,11 +147,11 @@
             "restoringWallet": "استعادة المحفظة...",
             "findingBalance": "العثور على الرصيد...",
             "incorrectSeedVaultPassword": "كلمة المرور غير صحيحة.",
-            "noDataSeedVault": "No data could be found in the SeedVault.",
+            "noDataSeedVault": "لم يتم العثور على أي بيانات في SeedVault.",
             "signingBundle": "حزمة التوقيع",
             "broadcastingBundle": "حزمة البث",
-            "miningBundle": "Mining bundle",
-            "problemRestoringWallet": "There was a network error restoring your wallet. Please try again.",
+            "miningBundle": "حزمة التعدين",
+            "problemRestoringWallet": "حدث خطأ في الشبكة اثناء استعادة محفظتك. الرجاء المحاولة مرة أخرى.",
             "minimumMigrationAmountSpentAddresses": "الحد الأدنى القابل للترحيل لكل عنوان هو Mi 1. تحقق مرة أخرى من رصيدك.",
             "tooManyAddressesToMigrate": "لديك الكثير من العناوين مع رصيد منخفض للترحيل. تحقق مرة أخرى إذا كان رصيدك لا يبدو صحيحاً.",
             "cannotMigrateAllYourFunds": "لا يمكننا ترحيل جميع أموالك لأن بعض العناوين منخفضة جدا في القيمة. يمكنك المضي قدما على أي حال. سيتم فقدان {value}.",
@@ -159,16 +159,16 @@
         },
         "bundleMiningWarning": {
             "title": "تحذير",
-            "body1": "You have funds on one or more spent addresses.",
+            "body1": "لديك أموال منفقة على عنوان واحد أو أكثر.",
             "body2": "ننصحك بتشغيل عملية آلية للمساعدة في تأمين وتحويل هذه الأموال بأمان.",
             "body3": "إذا أغلقت التطبيق، ستحتاج إلى إعادة تشغيل الترحيل بأكمله.",
             "learn": "تعرف على العناوين المنفقة"
         },
         "secureSpentAddresses": {
-            "title": "Secure spent addresses",
-            "body1": "You have funds detected on {number, plural, one {# spent address} other {# spent addresses}}.",
+            "title": "العناوين المستهلكة الآمنة",
+            "body1": "لديك اموال تم اكتشافها على {number, plural, one {# عنوان مستهلك} other {# \nعناوين مستهلكة}}.",
             "body2": "ننصحك بتشغيل عملية آلية للمساعدة في تأمين وتحويل هذه الأموال بأمان.",
-            "error": "You can’t migrate spent addresses with less than 1 Mi"
+            "error": "لا يمكنك ترحيل العناوين المنفقة بأقل من 1 Mi"
         },
         "securityCheckCompleted": {
             "title": "اكتمل التحقق من الأمان",
@@ -178,8 +178,8 @@
             "continueMigration": "متابعة الترحيل"
         },
         "securingSpentAddresses": {
-            "title": "Securing spent addresses...",
-            "body1": "This process will take {minutes, plural, one {1 minute} other {# minutes}}.",
+            "title": "يتم تأمين العناوين المستهلكة...",
+            "body1": "هذه العملية سوف تستغرق {minutes, plural, one {1 دقيقة} other {# دقائق}}.",
             "body2": "سيتم تشغيل جهاز الكمبيوتر الخاص بك بكامل طاقته، قد ترغب في القيام بشيء آخر بينما تنتظر حتى يكتمل ذلك."
         },
         "transferFragmentedFunds": {
@@ -194,15 +194,15 @@
         },
         "balance": {
             "title": "رصيدك",
-            "body": "Make sure your balance is correct before continuing. You can check again if things don't look correct.",
-            "error": "The minimum migration amount is 1 Mi. Check again if your balance doesn't look right.",
-            "zeroBalance": "Try checking again. If you still can't find your balance you might have entered your seed incorrectly."
+            "body": "تأكد من أن رصيدك صحيح قبل المتابعة. يمكنك التحقق مرة أخرى إذا كانت الأمور لا تبدو صحيحة.",
+            "error": "الحد الأدنى القابل للترحيل هو 1 Mi. تحقق مرة أخرى إذا كان رصيدك لا يبدو صحيحاً.",
+            "zeroBalance": "حاول التحقق مرة أخرى. إذا كنت لا تزال غير قادر على العثور على رصيدك قد تكون أدخلت الseed الخاص بك بشكل غير صحيح."
         },
         "settings": {
             "settings": "الاعدادات",
             "generalSettings": {
                 "title": "الإعدادات العامة",
-                "description": "Configure your app's appearance and other general settings"
+                "description": "قم بتهيئة مظهر التطبيق الخاص بك والإعدادات العامة الأخرى"
             },
             "security": {
                 "title": "الحماية",
@@ -221,7 +221,7 @@
                 "description": "تغيير اسم ملفك الشخصي أو تعيين صورة شخصية"
             },
             "sync": {
-                "title": "Sync wallets",
+                "title": "مزامنة المحافظ",
                 "description": ""
             },
             "theme": {
@@ -241,22 +241,22 @@
                 "description": "إشعارات النظام لأحداث المعاملات"
             },
             "networkStatus": {
-                "title": "Network status",
-                "description": "Displays the status of the node you are currently connected to."
+                "title": "حالة الشبكة",
+                "description": "يعرض حالة الnode التي تتصل بها حاليًا."
             },
             "exportStronghold": {
                 "title": "تصدير النسخ الاحتياطي",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
+                "description": "تصدير إلى ملف Stronghold - نسخة احتياطية مشفرة كاملة من محفظاتك وأحدث سجل المعاملات"
             },
             "appLock": {
                 "title": "قفل تلقائي",
-                "description": "Inactivity time before your wallets lock and you are logged out",
-                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
-                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
+                "description": "فترة عدم النشاط قبل قفل محافظك وتسجيل الخروج",
+                "durationMinute": "{time, plural, one {1 دقيقة} other {# دقائق}}",
+                "durationHour": "{time, plural, one {1 ساعة} other {# ساعات}}"
             },
             "changePassword": {
                 "title": "تغيير كلمة المرور",
-                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
+                "description": "يتم استخدام كلمة المرور الخاصة بك لتأمين محافظك. يجب عليك استخدام كلمة مرور قوية لحماية أموالك"
             },
             "changePincode": {
                 "title": "تغيير رمز PIN",
@@ -267,16 +267,16 @@
                 "action": "تغيير رمز PIN"
             },
             "balanceFinder": {
-                "title": "Balance finder",
-                "description": "Perform an extended search of your addresses for tokens"
+                "title": "كشف الرصيد",
+                "description": "إجراء بحث موسع عن عناوينك للرموز Tokens"
             },
             "hiddenAccounts": {
-                "title": "Hidden wallets",
-                "description": "Selecting this options will show wallets that were previously hidden"
+                "title": "المحافظ المخفية",
+                "description": "تحديد هذا الخيار سيظهر المحافظ التي كانت مخفية سابقاً"
             },
             "deleteProfile": {
                 "title": "حذف الملف الشخصي",
-                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
+                "description": "يحذف كامل ملفك الشخصي ومحفظاتك وسجل المعاملات. تأكد من أن لديك نسخة احتياطية"
             },
             "deepLinks": {
                 "title": "روابط عميقة",
@@ -292,7 +292,7 @@
             },
             "configureNodeList": {
                 "title": "اختر عقدة node",
-                "description": "Manage the list of IOTA network nodes you connect to",
+                "description": "إدارة قائمة عقد شبكة IOTA التي تتصل بها",
                 "primaryNode": "العقدة الرئيسية",
                 "excludeNode": "استبعاد العقدة",
                 "includeNode": "ضمن العدقة",
@@ -300,7 +300,7 @@
                 "setAsPrimary": "تعيين كعقدة أساسية",
                 "removeNode": "إزالة العقدة node",
                 "includeOfficialNodeList": "تضمين قائمة العقد الرسمية",
-                "noNodes": "There are no nodes, automatic selection will be used instead"
+                "noNodes": "لا توجد عقد، سيتم استخدام التحديد التلقائي بدلاً من ذلك"
             },
             "proofOfWork": {
                 "title": "إثبات العمل",
@@ -341,7 +341,7 @@
             },
             "reportAnIssue": {
                 "title": "الإبلاغ عن مشكلة",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
+                "description": "أبلغ عن خطأ للمطورين. تحقق للتأكد من أنه لم يتم الإبلاغ عنه من قبل"
             }
         },
         "login": {
@@ -361,8 +361,8 @@
                 },
                 "strongholdStatus": {
                     "title": "حالة المحفظة",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "locked": "مقفل",
+                    "unlocked": "مفتوح"
                 },
                 "strongholdBackup": {
                     "title": "النسخ الاحتياطي للمحفظة",
@@ -375,7 +375,7 @@
                 "networkDown": "تم قطع اتصال الشبكة",
                 "status": "الحالة",
                 "messagesPerSecond": "الرسائل في الثانية",
-                "referencedRate": "Referenced rate"
+                "referencedRate": "المعدل المشار إليه"
             },
             "profileModal": {
                 "allSettings": "جميع الإعدادات",
@@ -386,7 +386,7 @@
     "popups": {
         "password": {
             "title": "كلمة المرور مطلوبة",
-            "subtitle": "Please enter your password to unlock your wallets",
+            "subtitle": "الرجاء إدخال كلمة المرور لفتح محافظك",
             "backup": "يرجى ادخال الكلمة السرية الخاصة بحسابك لإستيراد نسختك الإحتياطية"
         },
         "qr": {
@@ -398,34 +398,34 @@
             "upToDateDescription": "أنت تقوم بتشغيل أحدث وأكثر إصدار أماناََ من فايرفلاي.",
             "updateAvailable": "يوجد تحديث لمحفظة فايرفلاي",
             "updateDetails": "الإصدار {version} - {date}",
-            "noAutoUpdate": "Auto-update is disabled in this Windows version, please go to https://firefly.iota.org to download the update."
+            "noAutoUpdate": "التحديث التلقائي معطل في إصدار Windows هذا، يرجى الانتقال إلى https://firefly.iota.org لتحميل التحديث."
         },
         "backup": {
             "title": "آخر نسخة احتياطية: {date}",
             "lastBackup": "آخر نسخة احتياطية من {date}",
-            "backupDescription": "It is important to back up regularly to ensure you have a copy of your wallets and transaction history.",
+            "backupDescription": "من المهم النسخ الاحتياطي بانتظام للتأكد من أن لديك نسخة من محفظاتك وسجل المعاملات.",
             "backupWarning": "إذا فقدت النسخة الاحتياطية وعبارات الاسترداد الخاصة بك سوف تفقد الوصول إلى أموالك.",
             "notBackedUp": "لم يتم النسخ الاحتياطي",
-            "notBackedUpDescription": "You have not backed up your wallets",
+            "notBackedUpDescription": "لم تقم بنسخ محفظتك احتياطياً",
             "saving": "يتم الحفظ..."
         },
         "deleteAccount": {
             "title": "حذف {name}؟",
-            "body": "This wallet has no transaction history. It can safely be deleted.",
+            "body": "هذه المحفظة ليس لها سجل معاملات. يمكن حذفها بأمان.",
             "typePassword": "اكتب كلمة مرور محفظتك للتأكيد.",
-            "hideAccount": "Delete wallet",
+            "hideAccount": "حذف المحفظة",
             "errorTitle": "لا يمكن حذف الحساب {name}",
-            "errorBody1": "You cannot delete this wallet, you must have at least one."
+            "errorBody1": "لا يمكنك حذف هذه المحفظة، يجب أن يكون لديك واحدة على الأقل."
         },
         "hideAccount": {
             "title": "إخفاء {name}؟",
-            "body": "You can find this wallet later by enabling \"Show hidden wallets\" in Advanced Settings.",
+            "body": "يمكنك العثور على هذه المحفظة في وقت لاحق عن طريق تمكين \"إظهار المحافظ المخفية\" في الإعدادات المتقدمة.",
             "typePassword": "اكتب كلمة مرور محفظتك للتأكيد.",
-            "hideAccount": "Hide wallet",
+            "hideAccount": "إخفاء المحفظة",
             "errorTitle": "لا يمكن إخفاء {name}",
-            "errorBody1": "To hide a wallet it must have 0 balance.",
-            "errorBody2": "You currently have {balance} remaining on this wallet. Please move these funds to a different wallet and try again.",
-            "errorBody3": "You cannot hide this wallet, you must have at least one."
+            "errorBody1": "لإخفاء محفظة يجب أن يكون بها رصيد صفر.",
+            "errorBody2": "لديك حاليا {balance} متبقي على هذه المحفظة. الرجاء نقل هذه الأموال إلى محفظة مختلفة وحاول مرة أخرى.",
+            "errorBody3": "لا يمكنك إخفاء هذه المحفظة، يجب أن يكون لديك واحدة على الأقل."
         },
         "addressHistory": {
             "title": "عرض سجل عمليات العنوان {name}",
@@ -467,36 +467,36 @@
             "body": "أنت على وشك إرسال {amount} إلى"
         },
         "balanceFinder": {
-            "title": "Balance finder",
-            "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
-            "totalWalletBalance": "Total balance",
-            "typePassword": "Type your password to allow searching."
+            "title": "كشف الرصيد",
+            "body": "قم بإجراء بحث أكثر شمولاً للعناوين للعثور على الأرصدة الناقصة. قد يستغرق هذا بعض الوقت.",
+            "totalWalletBalance": "إجمالي الرصيد",
+            "typePassword": "اكتب كلمة المرور للسماح بالبحث."
         },
         "riskFunds": {
-            "title": "Warning: funds at risk during migration",
-            "body1": "It is strongly recommended that you secure all your funds before proceeding with migration. Your funds are at risk of theft if you do not secure them.",
-            "body2": "It is recommended that you rerun the process for addresses with a medium risk level or above."
+            "title": "تحذير: الأموال المعرضة للخطر أثناء الهجرة",
+            "body1": "يوصى بشدة بأن تؤمن جميع أموالك قبل الشروع في التحويل. أموالك معرضة لخطر السرقة إذا لم تقم بتأمينها.",
+            "body2": "من المستحسن أن تعيد تشغيل العملية لعناوين ذات مستوى خطر متوسط أو أعلى."
         },
         "missingBundle": {
-            "title": "Warning: funds at risk during migration",
-            "body": "You have funds on spent addresses, but the information needed to secure them was not found. This can happen if you made transactions a long time ago. You can proceed but {value} are at risk during migration.",
-            "learnMore": "Learn more about spent addresses",
-            "proceed": "I understand the risk"
+            "title": "تحذير: الأموال المعرضة للخطر أثناء التحويل",
+            "body": "لديك أموال على العناوين المستهلكة، ولكن لم يتم العثور على المعلومات المطلوبة لتأمين تلك العناوين. يمكن أن يحدث هذا إذا قمت بإجراء المعاملات منذ وقت طويل. يمكنك المضي قدما ولكن {value} معرض للخطر أثناء التحويل.",
+            "learnMore": "معرفة المزيد حول العناوين المنفقة",
+            "proceed": "أنا أفهم الخطر"
         },
         "snapshot": {
-            "title": "Ongoing network upgrade",
-            "body": "The Chrysalis network upgrade has begun.",
-            "bodyMigration": "Migration is disabled until it is complete.",
-            "bodyFirefly": "Firefly is disabled until it is complete. Token migration will still be possible afterwards."
+            "title": "جاري تحديث الشبكة",
+            "body": "لقد بدأ تحديث شبكة كريزاليس.",
+            "bodyMigration": "تم تعطيل التحويل إلى حين اكتمالها.",
+            "bodyFirefly": "يتم تعطيل الفايرفلاي حتى يتم اكتماله. سوف يبقى تحويل الرموز Tokens ممكن بعد ذلك."
         }
     },
     "charts": {
-        "incomingMi": "Incoming {value}",
-        "outgoingMi": "Outgoing {value}",
+        "incomingMi": "{value} الوارد",
+        "outgoingMi": "الصادر {value}",
         "portoflio": "الحافظة",
         "token": "رمز token",
-        "accountValue": "Wallet Value",
-        "accountActivity": "Wallet Activity",
+        "accountValue": "قيمة المحفظة",
+        "accountActivity": "نشاط المحفظة",
         "timeframe1Hour": "ساعة واحدة",
         "timeframe1Day": "يوم واحد",
         "timeframe1Week": "أسبوع واحد",
@@ -508,13 +508,13 @@
         "cancel": "إلغاء",
         "close": "إغلاق",
         "dismiss": "تجاهل",
-        "proceedAnyway": "Proceed anyway",
+        "proceedAnyway": "المتابعة على أية حال",
         "save": "حفظ",
         "importSeed": "استيراد seed موجودة",
-        "restoreWallet": "Migrate or restore a wallet",
-        "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
+        "restoreWallet": "ترحيل أو استعادة المحفظة",
+        "restoreWalletDescription": "قم بالترحيل إلى Chrysalis أو استعادة محفظة موجودة",
         "createWallet": "إنشاء محفظة جديدة",
-        "createWalletDescription": "Create a fresh wallet running on Chrysalis",
+        "createWalletDescription": "إنشاء محفظة جديدة تعمل على Chrysalis",
         "savePassword": "حفظ كلمة المرور",
         "useBiometric": "استخدام الأمن بالبصمة",
         "setupPin": "تعيين رمز PIN",
@@ -526,7 +526,7 @@
         "verifyRecoveryPhrase": "التحقق من عبارة الاسترداد",
         "revealRecoveryPhrase": "كشف عبارة الاسترداد",
         "importSeedvault": "استيراد SeedVault",
-        "checkAgain": "Check Again",
+        "checkAgain": "تحقق مرة أخرى",
         "importFromFile": "استيراد من ملف",
         "send": "إرسال",
         "receive": "استلام",
@@ -550,11 +550,11 @@
         "updateFirefly": "تحديث فايرفلاي",
         "restartNow": "إعادة التشغيل الآن",
         "saveBackup": "حفظ نسخة حصن Stronghold احتياطية",
-        "customizeAcount": "Customise wallet",
+        "customizeAcount": "تخصيص المحفظة",
         "viewAddressHistory": "عرض سجل العناوين",
-        "hideAccount": "Hide wallet",
-        "showAccount": "Unhide wallet",
-        "deleteAccount": "Delete wallet",
+        "hideAccount": "إخفاء المحفظة",
+        "showAccount": "فك اخفاء المحفظة",
+        "deleteAccount": "حذف المحفظة",
         "max": "الحد الأقصى",
         "addNode": "إضافة عقدة node",
         "updateNode": "تحديث العقدة",
@@ -570,7 +570,7 @@
         "copy": "نسخ",
         "paste": "لصق",
         "selectAll": "تحديد الكل",
-        "addAccount": "Add Wallet",
+        "addAccount": "إضافة محفظة",
         "checkForUpdates": "التحقق من التحديثات",
         "reportAnIssue": "الإبلاغ عن مشكلة",
         "clear": "مسح",
@@ -585,14 +585,14 @@
         "readDocumentation": "قراءة الوثائق",
         "visitFaq": "زيارة الأسئلة المكررة",
         "viewStatus": "عرض الحالة",
-        "showHiddenAccounts": "Show hidden wallets",
+        "showHiddenAccounts": "إظهار الملفات المخفية",
         "confirm": "تأكيد",
-        "hideNetworkStatistics": "Hide network statistics",
-        "findBalances": "Find balances",
-        "searchBalances": "Search for balances",
-        "searchAgain": "Search again",
-        "searching": "Searching...",
-        "closeFirefly": "Close Firefly"
+        "hideNetworkStatistics": "إخفاء إحصائيات الشبكة",
+        "findBalances": "العثور على الأرصدة",
+        "searchBalances": "البحث عن الأرصدة",
+        "searchAgain": "البحث مرة أخرى",
+        "searching": "جاري البحث...",
+        "closeFirefly": "إغلاق الفايرفلاي"
     },
     "general": {
         "password": "كلمة المرور",
@@ -610,10 +610,10 @@
         "sendFunds": "إرسال الأموال",
         "sendToAddress": "إرسال إلى العنوان",
         "scanQrOrPaste": "قراءة رمز QR أو لصق عنوان",
-        "moveFundsBetweenAccounts": "Move funds between wallets",
+        "moveFundsBetweenAccounts": "نقل الأموال بين المحافظ",
         "sendTokensToAddress": "إرسال التوكينز إلى عنوان",
-        "manageAccount": "Manage Wallet",
-        "customizeAcount": "Customize your wallet",
+        "manageAccount": "إدارة المحفظة",
+        "customizeAcount": "تخصيص محفظتك",
         "account": "المحفظة",
         "sendingToAddress": "إرسال إلى العنوان",
         "amount": "المبلغ",
@@ -635,25 +635,25 @@
         "lightTheme": "المظهر الفاتح",
         "darkTheme": "المظهر الداكن",
         "balance": "الرصيد",
-        "accountBalance": "Wallet Balance",
+        "accountBalance": "رصيد المحفظة",
         "incoming": "الواردة",
         "outgoing": "الصادرة",
         "totalIn": "مجموع المدخول",
         "totalOut": "إجمالي المدفوعات",
-        "accounts": "Wallets",
-        "myAccounts": "My Wallets",
+        "accounts": "المحافظ",
+        "myAccounts": "محافظي",
         "automaticNodeSelection": "اختيار تلقائي للعقدة node",
         "manualNodeSelection": "اختيار يدوي للعقدة node",
         "profiles": "الملفات الشخصية",
         "developerProfile": "الملف الشخصي للمبرمج",
         "developerProfileDescription": "يسمح لك بالاتصال بالشبكات التجريبية",
         "dev": "المطور",
-        "createAccount": "Create a Wallet",
-        "accountName": "Wallet name",
+        "createAccount": "إنشاء محفظة",
+        "accountName": "اسم المحفظة",
         "latestTransactions": "آخر المعاملات",
         "transactions": "المعاملات",
         "security": "الحماية",
-        "accountAddress": "Wallet Address",
+        "accountAddress": "عنوان المحفظة",
         "nodes": "العقد",
         "wallet": "المحفظة",
         "help": "مساعدة",
@@ -665,26 +665,26 @@
         "status": "الحالة",
         "confirmed": "مؤكد",
         "pending": "قيد الانتظار",
-        "noAccounts": "You have no wallets, please create one.",
+        "noAccounts": "ليس لديك محفظة، يرجى إنشاء محفظة.",
         "loadingAccounts": "جاري التحميل، الرجاء الانتظار...",
         "addProfile": "إضافة ملف شخصي",
         "noRecentHistory": "لا يوجد تاريخ حديث",
-        "firstSync": "Syncing history, this may take a while...",
-        "transferSyncing": "Syncing wallet",
+        "firstSync": "مزامنة التاريخ، قد يستغرق هذا بعض الوقت...",
+        "transferSyncing": "يتم مزامنة المحفظة",
         "transferSelectingInputs": "اختيار المدخلات inputs",
         "transferRemainderAddress": "توليد عنوان الإيداع المتبقي",
         "transferSigning": "توقيع المعاملة",
         "transferPow": "يتم القيام بعملية PoW",
         "transferBroadcasting": "يتم بث المعاملة",
         "transferComplete": "تم التحويل",
-        "creatingAccount": "Creating wallet, please wait...",
-        "updatingAccount": "Updating wallet, please wait...",
-        "accountSyncing": "Wallet is syncing",
-        "accountSyncComplete": "Wallet sync complete",
+        "creatingAccount": "يتم إنشاء المحفظة، يرجى الانتظار...",
+        "updatingAccount": "جارٍ تحديث المحفظة، الرجاء الانتظار...",
+        "accountSyncing": "جار مزامنة المحفظة",
+        "accountSyncComplete": "تمت مزامنة المحفظة",
         "passwordUpdating": "يتم تحديث كلمة المرور...",
         "passwordSuccess": "تم تحديث كلمة المرور بنجاح",
         "passwordFailed": "فشل تحديث كلمة المرور",
-        "syncingAccounts": "Syncing wallets...",
+        "syncingAccounts": "تتم مزامنة المحافظ...",
         "exportingStronghold": "يتم تصدير الملف المحصّن...",
         "exportingStrongholdSuccess": "تم تصدير الملف المحصّن بنجاح",
         "exportingStrongholdFailed": "فشل تصدير الملف المحصّن",
@@ -699,16 +699,16 @@
         "passwordStrength4": "قوي",
         "creatingProfile": "يتم إنشاء الملف الشخصي، الرجاء الانتظار...",
         "fundMigration": "ترحيل الأموال",
-        "accountRemoved": "This wallet is hidden. Unhide it to perform transfers.",
-        "receivingTo": "Receiving to {account}",
-        "sendingFrom": "Sending from {account}",
-        "receivedTo": "Received to {account}",
-        "sentFrom": "Sent from {account}",
-        "receiving": "Receiving",
-        "sending": "Sending",
-        "legacyNetwork": "Legacy Network",
-        "capsLock": "Caps Lock is on",
-        "version": "Version {version}"
+        "accountRemoved": "هذه المحفظة مخفية. قم بفك إخفائها لإجراء عمليات النقل.",
+        "receivingTo": "يتم الاستلام إلى {account}",
+        "sendingFrom": "يتم إرسال من {account}",
+        "receivedTo": "تم الاستلام إلى {account}",
+        "sentFrom": "تم الأرسال من {account}",
+        "receiving": "يتم الاستلام",
+        "sending": "جاري الارسال",
+        "legacyNetwork": "الشبكة القديمة",
+        "capsLock": "Caps Lock مفعل",
+        "version": "الإصدار {version}"
     },
     "dates": {
         "today": "اليوم",
@@ -731,7 +731,7 @@
         "calcMinutesRemaining": "يتم حساب الدقائق المتبقية...",
         "minutesRemaining": "{minutes, plural, one {1 دقيقة متبقية} other {# دقائق متبقية}}",
         "copiedToClipboard": "تم النسخ إلى الحافظة",
-        "accountsSynchronized": "Wallet synchronization complete",
+        "accountsSynchronized": "اكتملت مزامنة المحفظة",
         "migratedAccountChrysalisDown": "ستصبح أموالك متاحة بعد تحديث \"كريسالس\" في 28 أبريل",
         "migratedAccountChrysalisUp": "ستصبح أموالك متاحة قريبا"
     },
@@ -763,10 +763,10 @@
             "incorrect": "رقم الPIN الحالي غير صحيح."
         },
         "account": {
-            "length": "Your wallet name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "empty": "You must use your latest wallet before creating a new one.",
-            "notEmpty": "You must transfer your balance before deleting this wallet.",
-            "duplicate": "A wallet with this name already exists.",
+            "length": "يجب الا يكون اسم المحفظة اطول من {length, plural, one {1 حرف} other {# أحرف}}.",
+            "empty": "يجب عليك استخدام محفظتك الأخيرة قبل إنشاء محفظة جديدة.",
+            "notEmpty": "يجب عليك نقل رصيدك قبل حذف هذه المحفظة.",
+            "duplicate": "توجد بالفعل محفظة بهذا الاسم.",
             "tilde": "اسم الملف الشخصي لا يمكن أن يبدأ برمز '.'.",
             "control": "لا يمكن أن يحتوي اسم الملف الشخصي على حرف تحكم.",
             "startDot": "اسم الملف الشخصي لا يمكن أن يبدأ برمز '.'.",
@@ -781,8 +781,8 @@
             "wrongAddressPrefix": "العنواين تبدأ مسبوقة بـ{prefix}.",
             "wrongAddressFormat": "صياغة العنوان غير صحيحة.",
             "invalidAddress": "هذا العنوان غير صالح.",
-            "insufficientFunds": "This wallet has insufficient funds.",
-            "noToAccount": "You have not selected a wallet to send the funds to.",
+            "insufficientFunds": "هذه المحفظة لا تحتوي على أموال كافية.",
+            "noToAccount": "لم تقم باختيار محفظة لإرسال الأموال إليها.",
             "sendingDust": "لا يمكنك إرسال أقل من 1 Mi.",
             "leavingDust": "لا يمكنك ترك أقل من 1 Mi على عنوانك."
         },

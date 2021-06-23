@@ -135,7 +135,7 @@ const rendererPlugins = [
 module.exports = [
     {
         entry: {
-            'build/index': ['./main.js'],
+            'build/index': ['./index.js'],
         },
         resolve,
         output,
