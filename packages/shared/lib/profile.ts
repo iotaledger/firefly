@@ -1,5 +1,6 @@
 import { AvailableExchangeRates } from 'shared/lib/currency'
 import { persistent } from 'shared/lib/helpers'
+import { ledgerSimulator } from 'shared/lib/ledger'
 import { generateRandomId } from 'shared/lib/utils'
 import type { WalletAccount } from 'shared/lib/wallet'
 import { destroyActor, getStoragePath, getWalletStoragePath } from 'shared/lib/wallet'
@@ -9,7 +10,8 @@ import { Electron } from './electron'
 import {
     HistoryDataProps
 } from './marketData'
-import type { Node } from './typings/client'
+import type { Node } from './typings/node'
+
 
 export interface MigratedTransaction {
     address: string;
@@ -92,9 +94,6 @@ export const profileInProgress = persistent<string | undefined>('profileInProgre
 export const newProfile = writable<Profile | null>(null)
 
 export const isStrongholdLocked = writable<boolean>(true)
-
-// Dev flag to create simulator ledger profiles
-export const ledgerSimulator = true
 
 /**
  * Currently active profile

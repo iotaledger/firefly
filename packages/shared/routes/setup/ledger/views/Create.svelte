@@ -1,68 +1,29 @@
 <script lang="typescript">
     import { Button, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
+    import { isLedgerConnected, ledgerSimulator, pollLedgerStatus, stopPollLedgerStatus } from 'shared/lib/ledger'
     import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
-    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-    import { ledgerSimulator } from 'shared/lib/profile'
-    import { LedgerStatus } from 'shared/lib/typings/wallet'
+    import { popupState } from 'shared/lib/popup'
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
-    import { get } from 'svelte/store'
-    import { Electron } from 'shared/lib/electron'
 
     export let locale
     export let mobile
 
     let creatingAccount = false
-    let isLedgerConnected = true
-    let interval
 
     const dispatch = createEventDispatcher()
 
+    $: if (!$isLedgerConnected && !$popupState?.active) {
+        handleBackClick()
+    }
+
     onMount(() => {
-        getLedgerDeviceStatus()
-        interval = setInterval(() => {
-            getLedgerDeviceStatus()
-        }, 1000)
+        pollLedgerStatus()
     })
 
     onDestroy(() => {
-        if (interval) {
-            clearTimeout(interval)
-        }
+        stopPollLedgerStatus()
     })
-
-    function openLedgerNotConnectedPopup() {
-        openPopup({
-            type: 'ledgerNotConnected',
-            hideClose: true,
-            props: {
-                handleClose: handleClosePopup,
-                message: locale('views.setupLedger.connect'),
-            },
-        })
-    }
-
-    function handleLedgerDeviceNotConnected() {
-        if (!get(popupState).active) {
-            openLedgerNotConnectedPopup()
-        }
-    }
-
-    function getLedgerDeviceStatus() {
-        api.getLedgerDeviceStatus(ledgerSimulator, {
-            onSuccess(response) {
-                isLedgerConnected = response.payload.type === LedgerStatus.Connected
-                if (isLedgerConnected) {
-                    closePopup()
-                } else {
-                    handleLedgerDeviceNotConnected()
-                }
-            },
-            onError() {
-                handleLedgerDeviceNotConnected()
-            },
-        })
-    }
 
     function createAccount() {
         creatingAccount = true
@@ -89,13 +50,6 @@
                 },
             }
         )
-    }
-
-    function handleClosePopup() {
-        if (!isLedgerConnected) {
-            closePopup()
-            handleBackClick()
-        }
     }
 
     function handleBackClick() {

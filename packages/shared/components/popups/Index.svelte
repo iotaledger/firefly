@@ -13,6 +13,7 @@
     import Diagnostics from './Diagnostics.svelte'
     import ErrorLog from './ErrorLog.svelte'
     import HideAccount from './HideAccount.svelte'
+    import LedgerConfirmation from './LedgerConfirmation.svelte'
     import LedgerNotConnected from './LedgerNotConnected.svelte'
     import MissingBundle from './MissingBundle.svelte'
     import Password from './Password.svelte'
@@ -22,6 +23,7 @@
     import Snapshot from './Snapshot.svelte'
     import Transaction from './Transaction.svelte'
     import Version from './Version.svelte'
+    import Video from './Video.svelte'
 
     export let locale = 'en'
     export let type = undefined
@@ -31,8 +33,6 @@
     export let transition = true
 
     let popupContent
-
-    let closable = true
 
     const types = {
         qr: QR,
@@ -44,6 +44,7 @@
         addressHistory: AddressHistory,
         addNode: AddNode,
         ledgerNotConnected: LedgerNotConnected,
+        ledgerConfirmation: LedgerConfirmation,
         removeNode: RemoveNode,
         busy: Busy,
         errorLog: ErrorLog,
@@ -54,6 +55,7 @@
         missingBundle: MissingBundle,
         balanceFinder: BalanceFinder,
         snapshot: Snapshot,
+        video: Video,
     }
 
     const onkey = (e) => {

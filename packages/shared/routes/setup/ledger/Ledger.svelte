@@ -4,7 +4,7 @@
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
     import { createEventDispatcher, onMount } from 'svelte'
-    import { AccountIndex, Balance, Create, FireflyImport, GenerateNewAddress, InstallLedgerApp, TrinityImport } from './views/'
+    import { AccountIndex, Balance, Create, FireflyImport, GenerateNewAddress, InstallLedgerApp, LegacyIntro } from './views/'
 
     export let locale
     export let mobile
@@ -12,7 +12,7 @@
     enum State {
         Create = 'create',
         FireflyImport = 'fireflyImport',
-        TrinityImport = 'trinityImport',
+        LegacyIntro = 'legacyIntro',
         InstallLedgerApp = 'installLedgerApp',
         GenerateAddress = 'generateAddress',
         AccountIndex = 'accountIndex',
@@ -23,14 +23,14 @@
 
     let balance
 
-    let state: State = State.Create
+    let state: State
     let stateHistory = []
 
     onMount(() => {
         if ($walletSetupType === SetupType.New) {
             state = State.Create
         } else if ($walletSetupType === SetupType.TrinityLedger) {
-            state = State.TrinityImport
+            state = State.LegacyIntro
         } else if ($walletSetupType === SetupType.FireflyLedger) {
             state = State.FireflyImport
         }
@@ -70,7 +70,7 @@
                 balance = params.balance
                 nextState = State.Balance
                 break
-            case State.TrinityImport:
+            case State.LegacyIntro:
                 nextState = State.InstallLedgerApp
                 break
             case State.InstallLedgerApp:
@@ -81,7 +81,6 @@
                 break
             case State.AccountIndex:
                 balance = params.balance
-        
                 nextState = State.Balance
                 break
             case State.Balance:
@@ -112,9 +111,9 @@
     <Transition>
         <FireflyImport on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
-{:else if state === State.TrinityImport}
+{:else if state === State.LegacyIntro}
     <Transition>
-        <TrinityImport on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <LegacyIntro on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
 {:else if state === State.InstallLedgerApp}
     <Transition>

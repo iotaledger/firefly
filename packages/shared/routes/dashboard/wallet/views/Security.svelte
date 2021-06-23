@@ -38,7 +38,7 @@
     onDestroy(() => {
         unsubscribe()
         if (interval) {
-            clearTimeout(interval)
+            clearInterval(interval)
         }
     })
 

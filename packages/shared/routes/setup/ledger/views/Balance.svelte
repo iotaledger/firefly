@@ -8,24 +8,22 @@
         exchangeRates,
         formatCurrency,
     } from 'shared/lib/currency'
-    import {
-        getLedgerMigrationData,
-        ledgerMigrationProgresses,
-        ADDRESS_SECURITY_LEVEL,
-        hardwareIndexes,
-    } from 'shared/lib/migration'
+    import { Electron } from 'shared/lib/electron'
+    import { stopPollLedgerLegacyStatus, stopPollLedgerStatus } from 'shared/lib/ledger'
+    import { ADDRESS_SECURITY_LEVEL, getLedgerMigrationData, hardwareIndexes } from 'shared/lib/migration'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
-    import { Electron } from 'shared/lib/electron'
 
     export let locale
     export let mobile
     export let balance
 
     const dispatch = createEventDispatcher()
+
+    let legacyLedger = $walletSetupType === SetupType.TrinityLedger
 
     const getFiatBalance = (balance) => {
         const balanceAsFiat = convertToFiat(
@@ -47,6 +45,11 @@
     let isCheckingForBalance = false
 
     function handleContinueClick() {
+        if (!legacyLedger) {
+            stopPollLedgerStatus()
+        } else {
+            stopPollLedgerLegacyStatus()
+        }
         dispatch('next')
     }
     function handleBackClick() {
@@ -81,7 +84,9 @@
 {:else}
     <OnboardingLayout
         onBackClick={handleBackClick}
-        progress={$walletSetupType === SetupType.TrinityLedger ? $ledgerMigrationProgresses : undefined}>
+        {locale}
+        showLedgerProgress={legacyLedger}
+        showLedgerVideoButton={legacyLedger}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-3.5">{locale('views.balance.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.balance.body')}</Text>

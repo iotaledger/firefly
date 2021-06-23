@@ -241,8 +241,8 @@
                 "description": "Järjestelmäilmoitukset transaktiotapahtumista"
             },
             "networkStatus": {
-                "title": "Network status",
-                "description": "Displays the status of the node you are currently connected to."
+                "title": "Verkon tila",
+                "description": "Näyttää tilan solmulle, johon olet tällä hetkellä yhteydessä."
             },
             "exportStronghold": {
                 "title": "Vie varmuuskopio",
@@ -375,7 +375,7 @@
                 "networkDown": "Verkkoyhteys katkaistu",
                 "status": "Tila",
                 "messagesPerSecond": "Viestejä sekunnissa",
-                "referencedRate": "Referenced rate"
+                "referencedRate": "Viittausaste"
             },
             "profileModal": {
                 "allSettings": "Kaikki asetukset",
@@ -587,7 +587,7 @@
         "viewStatus": "Näytä tila",
         "showHiddenAccounts": "Näytä piilotetut lompakot",
         "confirm": "Vahvista",
-        "hideNetworkStatistics": "Hide network statistics",
+        "hideNetworkStatistics": "Piilota verkkotilastot",
         "findBalances": "Etsi saldoja",
         "searchBalances": "Hae saldoja",
         "searchAgain": "Hae uudelleen",

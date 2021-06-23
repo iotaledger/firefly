@@ -1,10 +1,10 @@
 <script lang="typescript">
     import { Button, Icon, OnboardingLayout, Spinner, Text } from 'shared/components'
-    import { ledgerMigrationProgresses } from 'shared/lib/migration'
+    import { isLedgerConnected, ledgerSimulator, pollLedgerStatus, stopPollLedgerStatus } from 'shared/lib/ledger'
     import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
-    import { ledgerSimulator } from 'shared/lib/profile'
+    import { popupState } from 'shared/lib/popup'
     import { api } from 'shared/lib/wallet'
-    import { createEventDispatcher } from 'svelte'
+    import { createEventDispatcher, onMount } from 'svelte'
 
     export let locale
     export let mobile
@@ -14,6 +14,14 @@
     let confirmed = false
 
     const dispatch = createEventDispatcher()
+
+    $: if (!$isLedgerConnected && !$popupState?.active) {
+        handleBackClick()
+    }
+
+    onMount(() => {
+        pollLedgerStatus()
+    })
 
     function generateNewAddress() {
         busy = true
@@ -64,6 +72,7 @@
     }
 
     function handleContinueClick() {
+        stopPollLedgerStatus()
         dispatch('next')
     }
 
@@ -75,7 +84,7 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout onBackClick={handleBackClick} progress={$ledgerMigrationProgresses}>
+    <OnboardingLayout onBackClick={handleBackClick} {locale} showLedgerProgress showLedgerVideoButton>
         <div slot="leftpane__content">
             {#if confirmed}
                 <div class="flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-5 text-center">

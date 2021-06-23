@@ -1,13 +1,14 @@
 <script lang="typescript">
     import { BundleMiningLayout, Button, Icon, Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
-    import { ledgerMigrationProgresses } from 'shared/lib/migration'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
     import { createEventDispatcher } from 'svelte'
 
     export let locale
     export let mobile
+
+    let legacyLedger = $walletSetupType === SetupType.TrinityLedger
 
     const dispatch = createEventDispatcher()
 
@@ -24,7 +25,9 @@
 {:else}
     <BundleMiningLayout
         onBackClick={handleBackClick}
-        progress={$walletSetupType === SetupType.TrinityLedger ? $ledgerMigrationProgresses : undefined}>
+        {locale}
+        showLedgerProgress={legacyLedger}
+        showLedgerVideoButton={legacyLedger}>
         <div slot="icon_boxed">
             <div class="flex justify-center items-center rounded-2xl w-12 h-12 bg-orange-600 shadow-lg">
                 <Icon boxed="true" icon="warning-filled" classes="text-white" />

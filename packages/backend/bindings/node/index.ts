@@ -57,6 +57,7 @@ import {
   getLegacySeedChecksum as _getLegacySeedChecksum
 } from '../../../shared/lib/typings/wallet'
 import { ClientOptions } from '../../../shared/lib/typings/client'
+import { NodeAuth } from '../../../shared/lib/typings/node'
 
 const addon = require('../index.node')
 const mailbox = []
@@ -249,12 +250,9 @@ export const api = {
     ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _sendLedgerMigrationBundle(sendMessage, __ids, nodes, bundle, mwm)
   },
-
-
-  getNodeInfo: function (accountId: AccountIdentifier, url?: string): ((__ids: CommunicationIds) => Promise<string>) {
-    return (__ids: CommunicationIds) => _getNodeInfo(sendMessage, __ids, accountId, url)
+  getNodeInfo: function (accountId: AccountIdentifier, url?: string, auth?: NodeAuth): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _getNodeInfo(sendMessage, __ids, accountId, url, auth)
   },
-
   // Event emitters 
   onError: function (): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'ErrorThrown')

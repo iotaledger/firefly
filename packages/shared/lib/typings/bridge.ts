@@ -2,8 +2,9 @@ import type { Account, AccountIdentifier, Balance, SyncedAccount } from './accou
 import type { Address } from './address'
 import type { ErrorEventPayload } from './events'
 import type { Message } from './message'
+import type { NodeInfo } from './node'
 import type { MigrationBundle, MigrationData, SendMigrationBundleResponse } from './migration'
-import type { LedgerStatusPayload, NodeInfo, StrongholdStatus } from './wallet'
+import type { LedgerStatusPayload, StrongholdStatus } from './wallet'
 
 export interface Actor {
     destroy(): void
@@ -156,7 +157,6 @@ export type MessageResponse =
     | SetAliasResponse
     | DeleteStorageResponse
     | LockStrongholdResponse
-    | StrongholdStatusResponse
     | UpdatedAllClientOptions
     | LedgerDeviceStatusResponse
     | LegacySeedChecksum
