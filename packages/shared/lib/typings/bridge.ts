@@ -3,7 +3,7 @@ import type { Address } from './address'
 import type { ErrorEventPayload } from './events'
 import type { Message } from './message'
 import type { NodeInfo } from './node'
-import type { MigrationBundle, MigrationData, SendMigrationBundleResponse } from './migration'
+import type { MigrationBundle, MigrationData, SendMigrationBundleResponse, MigrationAddress } from './migration'
 import type { LedgerStatusPayload, StrongholdStatus } from './wallet'
 
 export interface Actor {
@@ -124,7 +124,7 @@ export type MigrationDataResponse = Response<ResponseTypes.MigrationData, Migrat
 export type CreatedMigrationBundleResponse = Response<ResponseTypes.CreatedMigrationBundle, MigrationBundle>
 export type SentMigrationBundleResponse = Response<ResponseTypes.SentMigrationBundle, SendMigrationBundleResponse>
 export type GetNodeInfoResponse = Response<ResponseTypes.NodeInfo, NodeInfo>
-export type GetMigrationAddressResponse = Response<ResponseTypes.MigrationAddress, string>
+export type GetMigrationAddressResponse = Response<ResponseTypes.MigrationAddress, MigrationAddress>
 export type MinedBundleResponse = Response<ResponseTypes.MinedBundle, string[]>
 
 export type MessageResponse =

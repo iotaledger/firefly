@@ -7,7 +7,7 @@ import { closePopup, openPopup } from 'shared/lib/popup'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
 import { appRoute, walletSetupType } from 'shared/lib/router'
 import type { Address } from 'shared/lib/typings/address'
-import type { Input, MigrationBundle, MigrationData, AddressInput } from 'shared/lib/typings/migration'
+import type { Input, MigrationBundle, MigrationData, AddressInput, MigrationAddress } from 'shared/lib/typings/migration'
 import { AppRoute, SetupType } from 'shared/lib/typings/routes'
 import Validator from 'shared/lib/validator'
 import { api } from 'shared/lib/wallet'
@@ -359,7 +359,7 @@ export const mineLedgerBundle = (
     offset: number
 ): Promise<void> => {
     return new Promise((resolve, reject) => {
-        api.getMigrationAddress({
+        api.getMigrationAddress(false, {
             onSuccess(response) {
                 resolve(response.payload)
             },
@@ -367,7 +367,7 @@ export const mineLedgerBundle = (
                 reject(error)
             }
         })
-    }).then((migrationAddress: string) => {
+    }).then((address: MigrationAddress) => {
         const { bundles } = get(migration);
 
         const bundle = get(bundles).find((bundle) => bundle.index === bundleIndex);
@@ -377,7 +377,7 @@ export const mineLedgerBundle = (
         bundle.inputs.forEach((input) => spentBundleHashes.push(...input.spentBundleHashes))
 
         const unsignedBundle = createUnsignedBundle(
-            migrationAddress.slice(0, -9),
+            address.trytes.slice(0, -9),
             bundle.inputs.map((input) => input.address),
             bundle.inputs.reduce((acc, input) => acc + input.balance, 0),
             Math.floor(Date.now() / 1000),
@@ -482,7 +482,7 @@ export const createLedgerMigrationBundle = (
     ) => Promise<string[]>
 ): Promise<any> => {
     return new Promise((resolve, reject) => {
-        api.getMigrationAddress({
+        api.getMigrationAddress(false, {
             onSuccess(response) {
                 resolve(response.payload);
             },
@@ -490,13 +490,13 @@ export const createLedgerMigrationBundle = (
                 reject(error)
             }
         })
-    }).then((migrationAddress: string) => {
+    }).then((address: MigrationAddress) => {
         const { bundles } = get(migration);
 
         const bundle = get(bundles).find((bundle) => bundle.index === bundleIndex);
 
         const transfer = {
-            address: migrationAddress.toString(),
+            address: address.trytes.toString(),
             value: bundle.inputs.reduce((acc, input) => acc + input.balance, 0),
             tag: 'U'.repeat(27)
         }

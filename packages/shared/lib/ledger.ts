@@ -65,7 +65,7 @@ export function stopPollLedgerLegacyStatus(): void {
     Electron.ledger.removeListener(ledgerLegacyListener)
 }
 
-function ledgerLegacyListener(isConnected) {
+function ledgerLegacyListener(isConnected) {    
     isLedgerLegacyConnected.set(isConnected)
     if (isConnected) {
         closePopup()
