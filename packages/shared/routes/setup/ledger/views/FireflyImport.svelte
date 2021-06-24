@@ -1,6 +1,6 @@
 <script>
     import { Button, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
-    import { isLedgerConnected, ledgerSimulator, pollLedgerStatus, stopPollLedgerStatus } from 'shared/lib/ledger'
+    import { isLedgerConnected, ledgerSimulator, pollLedgerStatus } from 'shared/lib/ledger'
     import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
     import { popupState } from 'shared/lib/popup'
     import { api } from 'shared/lib/wallet'
@@ -79,7 +79,6 @@
     }
 
     function handleBackClick() {
-        stopPollLedgerStatus()
         dispatch('previous')
     }
 </script>

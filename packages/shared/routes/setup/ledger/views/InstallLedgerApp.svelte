@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, OnboardingLayout, Text } from 'shared/components'
-    import { isLedgerConnected, pollLedgerStatus, stopPollLedgerStatus } from 'shared/lib/ledger'
+    import { isLedgerConnected, checkLedgerStatus } from 'shared/lib/ledger'
     import { currentLedgerMigrationProgress, LedgerMigrationProgress } from 'shared/lib/migration'
     import { popupState } from 'shared/lib/popup'
     import { createEventDispatcher, onMount } from 'svelte'
@@ -16,16 +16,14 @@
 
     onMount(() => {
         currentLedgerMigrationProgress.set(LedgerMigrationProgress.InstallLedgerApp)
-        pollLedgerStatus()
     })
 
-    // TODO: missing functionality
     function handleContinueClick() {
+        checkLedgerStatus()
         dispatch('next')
     }
 
     function handleBackClick() {
-        stopPollLedgerStatus()
         dispatch('previous')
     }
 </script>

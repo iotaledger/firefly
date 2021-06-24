@@ -1,12 +1,14 @@
 <script>
     import { Button, Icon, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
+    import { stopPollingLedgerStatus } from 'shared/lib/ledger'
 
     export let message
     export let handleClose
     export let locale
 
     function handleCancelClick() {
+        stopPollingLedgerStatus()
         if ('function' === typeof handleClose) {
             handleClose()
         } else {

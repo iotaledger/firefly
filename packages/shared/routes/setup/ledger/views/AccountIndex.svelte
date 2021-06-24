@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, Number, OnboardingLayout, Spinner, Text, Toggle } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
-    import { isLedgerLegacyConnected, pollLedgerLegacyStatus, stopPollLedgerLegacyStatus } from 'shared/lib/ledger'
+    import { isLedgerLegacyConnected, pollLedgerLegacyStatus } from 'shared/lib/ledger'
     import { ADDRESS_SECURITY_LEVEL, getLedgerMigrationData, hardwareIndexes } from 'shared/lib/migration'
     import { popupState } from 'shared/lib/popup'
     import { createEventDispatcher, onMount } from 'svelte'
@@ -46,7 +46,6 @@
     }
 
     function handleBackClick() {
-        stopPollLedgerLegacyStatus()
         dispatch('previous')
     }
 </script>

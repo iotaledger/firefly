@@ -6,26 +6,42 @@ import { api } from 'shared/lib/wallet'
 import { get, writable } from 'svelte/store'
 import { localize } from './i18n'
 
-export const ledgerSimulator = true
+export const ledgerSimulator = false
 export const isLedgerConnected = writable<boolean>(true)
 export const isLedgerLegacyConnected = writable<boolean>(true)
 
-const DEFAULT_LEDGER_STATUS_POLL_INTERVAL = 1000
+const DEFAULT_LEDGER_STATUS_POLL_INTERVAL = 1500
 
-export function getLedgerDeviceStatus(): void {
-    api.getLedgerDeviceStatus(ledgerSimulator, {
-        onSuccess(response) {
-            let _isLedgerConnected = response.payload?.type === LedgerStatus.Connected
-            if (_isLedgerConnected) {
-                closePopup()
-            } else {
-                openLedgerNotConnectedPopup()
-            }
-            isLedgerConnected.set(_isLedgerConnected)
-        },
-        onError() {
-            openLedgerNotConnectedPopup()
-        },
+let polling = false
+let ledgerPollInterval
+
+export function getLedgerDeviceStatus(): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+        const pollLedgerStatus = () => api.getLedgerDeviceStatus(ledgerSimulator, {
+            onSuccess(response) {
+                let _isLedgerConnected = response.payload?.type === LedgerStatus.Connected
+                if (_isLedgerConnected) {
+                    stopPollingLedgerStatus()
+                    if (get(popupState).active) {
+                        closePopup()
+                    }
+                    resolve()
+                } else {
+                    if (!polling) {
+                        polling = true
+                        ledgerPollInterval = setInterval(async () => {
+                            pollLedgerStatus()
+                        }, DEFAULT_LEDGER_STATUS_POLL_INTERVAL)
+                        openLedgerNotConnectedPopup(false)
+                    }
+                }
+                isLedgerConnected.set(_isLedgerConnected)
+            },
+            onError(err) {
+                reject(err)
+            },
+        })
+        pollLedgerStatus()
     })
 }
 
@@ -35,22 +51,13 @@ function openLedgerNotConnectedPopup(legacy: boolean = false) {
             type: 'ledgerNotConnected',
             hideClose: true,
             props: {
-                message: localize(`popups.ledgerNotConnected.${legacy ? 'connectLegacy' : 'connect'}`),
+                message: localize(`popups.ledgerNotConnected.${legacy ? 'connectLegacy' : 'connect'}`)
             },
         })
     }
 }
 
-let ledgerPollInterval
-
-export function pollLedgerStatus(): void {
-    if (!ledgerPollInterval) {
-        getLedgerDeviceStatus()
-        ledgerPollInterval = setInterval(async () => getLedgerDeviceStatus(), DEFAULT_LEDGER_STATUS_POLL_INTERVAL)
-    }
-}
-
-export function stopPollLedgerStatus(): void {
+export function stopPollingLedgerStatus(): void {
     if (ledgerPollInterval) {
         clearInterval(ledgerPollInterval)
         ledgerPollInterval = null
@@ -61,7 +68,7 @@ export function pollLedgerLegacyStatus(): void {
     Electron.ledger.addListener(ledgerLegacyListener)
 }
 
-export function stopPollLedgerLegacyStatus(): void {
+export function stopPollingLedgerLegacyStatus(): void {
     Electron.ledger.removeListener(ledgerLegacyListener)
 }
 
