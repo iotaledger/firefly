@@ -2,9 +2,8 @@
     import { Button, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { getLedgerDeviceStatus, ledgerSimulator } from 'shared/lib/ledger'
     import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
-    import { popupState } from 'shared/lib/popup'
     import { api } from 'shared/lib/wallet'
-    import { createEventDispatcher, onDestroy, onMount } from 'svelte'
+    import { createEventDispatcher } from 'svelte'
 
     export let locale
     export let mobile

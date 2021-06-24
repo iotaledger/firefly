@@ -1,6 +1,6 @@
 <script>
     import { Button, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
-    import { isLedgerConnected, ledgerSimulator, pollLedgerStatus } from 'shared/lib/ledger'
+    import { getLedgerDeviceStatus, ledgerSimulator } from 'shared/lib/ledger'
     import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
     import { popupState } from 'shared/lib/popup'
     import { api } from 'shared/lib/wallet'
@@ -12,14 +12,6 @@
     let restoring = false
 
     const dispatch = createEventDispatcher()
-
-    $: if (!$isLedgerConnected && !$popupState?.active) {
-        handleBackClick()
-    }
-
-    onMount(() => {
-        pollLedgerStatus()
-    })
 
     function restore() {
         restoring = true
@@ -43,8 +35,7 @@
                 },
             })
         }
-
-        api.getAccounts({
+        const onSuccess = () => api.getAccounts({
             onSuccess(accountsResponse) {
                 if (accountsResponse.payload.length > 0) {
                     _sync()
@@ -76,6 +67,9 @@
                 console.error(error)
             },
         })
+        const onCancel = () => restoring = false
+        
+        getLedgerDeviceStatus(onSuccess, onCancel)
     }
 
     function handleBackClick() {
