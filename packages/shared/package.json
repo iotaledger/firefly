@@ -24,7 +24,7 @@
         "@rollup/plugin-typescript": "^6.0.0",
         "@tsconfig/svelte": "^1.0.10",
         "autoprefixer": "^10.0.2",
-        "postcss": "^8.1.10",
+        "postcss": "^8.2.10",
         "postcss-cli": "^8.0.0",
         "prettier": "^2.2.1",
         "prettier-plugin-svelte": "^1.4.2",

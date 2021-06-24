@@ -2,6 +2,7 @@ import type { Bridge, CommunicationIds } from './bridge'
 import type { Message } from './message'
 import type { Address } from './address'
 import type { ClientOptions } from './client'
+import type { NodeAuth } from './node'
 
 export enum MessageType {}
 
@@ -161,9 +162,9 @@ function _callAccountMethod(
             accountId,
             method: {
                 name: AccountMethod[methodName],
-                data,
-            },
-        },
+                data
+            }
+        }
     })
 }
 
@@ -222,6 +223,6 @@ export function syncAccount(
     return _callAccountMethod(bridge, __ids, AccountMethod.SyncAccount, accountId, options || {})
 }
 
-export function getNodeInfo(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier, url?: string): Promise<string> {
-    return _callAccountMethod(bridge, __ids, AccountMethod.GetNodeInfo, accountId, url)
+export function getNodeInfo(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier, url?: string, auth?: NodeAuth): Promise<string> {
+    return _callAccountMethod(bridge, __ids, AccountMethod.GetNodeInfo, accountId, [url, auth?.jwt, [auth?.username, auth?.password]])
 }
