@@ -11,9 +11,8 @@
         stopPollingLedgerStatus()
         if ('function' === typeof handleClose) {
             handleClose()
-        } else {
-            closePopup()
         }
+        closePopup()
     }
 </script>
 

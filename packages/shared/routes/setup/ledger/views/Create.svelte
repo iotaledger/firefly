@@ -17,9 +17,9 @@
         creatingAccount = true
         const officialNodes = getOfficialNodes()
         const officialNetwork = getOfficialNetwork()
-        getLedgerDeviceStatus()
-            .then(() => 
-                api.createAccount(
+
+        const onSuccess = () => {
+            api.createAccount(
                 {
                     clientOptions: {
                         nodes: officialNodes,
@@ -39,9 +39,9 @@
                         console.error(error)
                     },
                 })
-            ).catch((err) => 
-                creatingAccount = false
-            )
+        }
+        const onCancel = () => creatingAccount = false
+        getLedgerDeviceStatus(onSuccess, onCancel)
     }
 
     function handleBackClick() {
