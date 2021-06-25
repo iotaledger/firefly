@@ -10,10 +10,12 @@ Be sure to reference any related issues by adding `fixes issue #`.
 
 Choose a type of change, and delete any options that are not relevant.
 
-- Bug fix (a non-breaking change which fixes an issue)
-- Enhancement (a non-breaking change which adds functionality)
-- Breaking change (fix or feature that would cause existing functionality to not work as expected)
-- Documentation Fix
+- Breaking change (any change that would cause existing functionality to not work as expected)
+- Bug fix (a change which fixes an issue)
+- Chore (a change which maintains or updates existing functionality)
+- Documentation fix
+- Enhancement (a change which adds new functionality)
+- Refactor (a change which improves existing functionality)
 
 ## How the change has been tested
 
