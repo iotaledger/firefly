@@ -84,7 +84,7 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout onBackClick={handleBackClick} {locale} showLedgerProgress showLedgerVideoButton>
+    <OnboardingLayout onBackClick={handleBackClick} busy={busy} {locale} showLedgerProgress showLedgerVideoButton>
         <div slot="leftpane__content">
             {#if confirmed}
                 <div class="flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-5 text-center">
