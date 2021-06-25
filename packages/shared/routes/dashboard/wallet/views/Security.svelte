@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { getLedgerDeviceStatus, stopPollingLedgerStatus, isLedgerConnected, pollLedgerDeviceStatus } from 'shared/lib/ledger'
+    import { getLedgerDeviceStatus, isLedgerConnected, pollLedgerDeviceStatus } from 'shared/lib/ledger'
     import { SecurityTile, Text } from 'shared/components'
     import { versionDetails } from 'shared/lib/appUpdater'
     import { diffDates, getBackupWarningColor, isRecentDate } from 'shared/lib/helpers'
@@ -17,7 +17,7 @@
     let backupSafe
     let color
     let isCheckingLedger
-    let LEDGER_STATUS_POLL_INTERVAL = 100000
+    let LEDGER_STATUS_POLL_INTERVAL = 5000
 
     const unsubscribe = profiles.subscribe(() => {
         setup()
