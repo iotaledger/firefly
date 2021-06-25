@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
-    import { getLedgerDeviceStatus, ledgerSimulator } from 'shared/lib/ledger'
+    import { promptUserToConnectLedger, ledgerSimulator } from 'shared/lib/ledger'
     import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
@@ -17,7 +17,7 @@
         const officialNodes = getOfficialNodes()
         const officialNetwork = getOfficialNetwork()
 
-        const onSuccess = () => {
+        const _onConnected = () => {
             api.createAccount(
                 {
                     clientOptions: {
@@ -37,10 +37,11 @@
                         creatingAccount = false
                         console.error(error)
                     },
-                })
+                }
+            )
         }
-        const onCancel = () => creatingAccount = false
-        getLedgerDeviceStatus(onSuccess, onCancel)
+        const _onCancel = () => (creatingAccount = false)
+        promptUserToConnectLedger(_onConnected, _onCancel)
     }
 
     function handleBackClick() {
