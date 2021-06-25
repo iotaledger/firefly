@@ -1,26 +1,25 @@
 <script lang="typescript">
-    import { Button, OnboardingLayout, Text } from 'shared/components'
-    import { isLedgerConnected, checkLedgerStatus } from 'shared/lib/ledger'
+    import { Button, OnboardingLayout, Text, Spinner } from 'shared/components'
+    import { promptUserToConnectLedger } from 'shared/lib/ledger'
     import { currentLedgerMigrationProgress, LedgerMigrationProgress } from 'shared/lib/migration'
-    import { popupState } from 'shared/lib/popup'
     import { createEventDispatcher, onMount } from 'svelte'
 
     export let locale
     export let mobile
+    let checkingConnectionStatus = false
 
     const dispatch = createEventDispatcher()
-
-    $: if (!$isLedgerConnected && !$popupState?.active) {
-        handleBackClick()
-    }
 
     onMount(() => {
         currentLedgerMigrationProgress.set(LedgerMigrationProgress.InstallLedgerApp)
     })
 
     function handleContinueClick() {
-        checkLedgerStatus()
-        dispatch('next')
+        checkingConnectionStatus = true
+        promptUserToConnectLedger(
+            () => dispatch('next'),
+            () => (checkingConnectionStatus = false)
+        )
     }
 
     function handleBackClick() {
@@ -39,7 +38,11 @@
             <Text type="p" secondary>{locale('views.setupLedger.body3')}</Text>
         </div>
         <div slot="leftpane__action">
-            <Button classes="w-full" onClick={handleContinueClick}>{locale('actions.continue')}</Button>
+            <Button classes="w-full" onClick={handleContinueClick}>
+                {#if checkingConnectionStatus}
+                    <Spinner busy message={locale('views.setupLedger.checkingConnection')} classes="justify-center" />
+                {:else}{locale('actions.continue')}{/if}
+            </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-end items-center bg-pastel-blue dark:bg-gray-900" />
     </OnboardingLayout>
