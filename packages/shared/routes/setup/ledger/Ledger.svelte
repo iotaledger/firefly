@@ -67,8 +67,7 @@
                 dispatch('next')
                 break
             case State.FireflyImport:
-                balance = params.balance
-                nextState = State.Balance
+                dispatch('next')
                 break
             case State.LegacyIntro:
                 nextState = State.InstallLedgerApp

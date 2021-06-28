@@ -17,29 +17,10 @@
         const officialNodes = getOfficialNodes()
         const officialNetwork = getOfficialNetwork()
 
-        const _sync = () => {
-            api.syncAccounts({
-                onSuccess(syncAccountsResponse) {
-                    let balance = 0
-                    for (const syncedAccount of syncAccountsResponse.payload) {
-                        const accountBalance = syncedAccount.addresses.reduce((total, address) => total + address.balance, 0)
-                        balance += accountBalance
-                    }
-                    restoring = false
-                    dispatch('next', { balance })
-                },
-                onError(error) {
-                    restoring = false
-                    console.error(error)
-                },
-            })
-        }
         const _onConnected = () =>
             api.getAccounts({
                 onSuccess(accountsResponse) {
-                    if (accountsResponse.payload.length > 0) {
-                        _sync()
-                    } else {
+                    if (accountsResponse.payload.length === 0) {
                         api.createAccount(
                             {
                                 clientOptions: {
@@ -52,7 +33,8 @@
                             },
                             {
                                 onSuccess(createAccountResponse) {
-                                    _sync()
+                                    restoring = false
+                                    dispatch('next')
                                 },
                                 onError(error) {
                                     restoring = false
