@@ -62,7 +62,7 @@
                         )
                     }
                 },
-                _onError(error) {
+                onError(error) {
                     restoring = false
                     console.error(error)
                 },
