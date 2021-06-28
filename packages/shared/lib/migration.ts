@@ -1,13 +1,13 @@
 import { TRANSACTION_LENGTH } from '@iota/transaction'
 import { asTransactionObject } from '@iota/transaction-converter'
-import { addEntry, addSignatureOrMessage, finalizeBundle } from '@iota/bundle'
+import { addEntry, finalizeBundle } from '@iota/bundle'
 import { tritsToTrytes, trytesToTrits, valueToTrits } from '@iota/converter'
 import { getOfficialNetwork } from 'shared/lib/network'
 import { closePopup, openPopup } from 'shared/lib/popup'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
 import { appRoute, walletSetupType } from 'shared/lib/router'
 import type { Address } from 'shared/lib/typings/address'
-import type { Input, MigrationBundle, MigrationData, AddressInput } from 'shared/lib/typings/migration'
+import type { Input, MigrationBundle, MigrationData, AddressInput, MigrationAddress } from 'shared/lib/typings/migration'
 import { AppRoute, SetupType } from 'shared/lib/typings/routes'
 import Validator from 'shared/lib/validator'
 import { api } from 'shared/lib/wallet'
@@ -33,13 +33,12 @@ const SOFTWARE_MAX_INPUTS_PER_BUNDLE = 10
 
 const HARDWARE_MAX_INPUTS_PER_BUNDLE = 3
 
-const HARDWARE_ADDRESS_GAP = 2
+const HARDWARE_ADDRESS_GAP = 3
 
 interface MigrationLog {
     bundleHash: string;
     trytes: string[];
     receiveAddressTrytes: string;
-    receiveAddressBech32: string;
     balance: number;
     timestamp: string;
     spentAddresses: string[];
@@ -132,7 +131,7 @@ export const hardwareIndexes = writable<HardwareIndexes>({
     pageIndex: 0
 })
 
-export const migrationLog = writable<MigrationLog>(null);
+export const migrationLog = writable<MigrationLog[]>([]);
 
 /*
  * Chrysalis status
@@ -246,21 +245,35 @@ export const getMigrationData = (migrationSeed: string, initialAddressIndex = 0)
  * 
  * @returns {void} 
  */
-export const prepareMigrationLog = (bundleHash: string, trytes: string[], balance: number, mine?: boolean, crackability?: number) => {
+export const prepareMigrationLog = (bundleHash: string, trytes: string[], balance: number) => {
     const transactionObjects = trytes.map((tryteString) => asTransactionObject(tryteString));
     const { bundles } = get(migration);
 
     const bundle = get(bundles).find((bundle) => bundle.bundleHash === bundleHash);
     const spentInputs = bundle.inputs.filter((input) => input.spent === true)
 
-    migrationLog.update((_log) => Object.assign({}, _log, {
-        bundleHash: transactionObjects[0].bundle,
-        trytes,
-        receiveAddressTrytes: transactionObjects.find((tx) => tx.address.startsWith('TRANSFER')).address,
-        balance,
-        spentAddresses: spentInputs.map((input) => input.address),
-        spentBundleHashes: spentInputs.map((input) => input.spentBundleHashes)
-    }))
+    const spentBundleHashes = [];
+
+    spentInputs.forEach((input) => {
+        input.spentBundleHashes.forEach((bundleHash) => {
+            spentBundleHashes.push(bundleHash);
+        })
+    });
+
+    migrationLog.update((_log) => [
+        ..._log,
+        {
+            bundleHash: transactionObjects[0].bundle,
+            timestamp: new Date().toISOString(),
+            trytes,
+            receiveAddressTrytes: transactionObjects.find((tx) => tx.address.startsWith('TRANSFER')).address,
+            balance,
+            spentBundleHashes,
+            spentAddresses: bundle.inputs.filter((input) => input.spent === true).map((input) => input.address),
+            mine: bundle.miningRuns > 0,
+            crackability: bundle.crackability
+        }
+    ])
 };
 
 
@@ -359,7 +372,7 @@ export const mineLedgerBundle = (
     offset: number
 ): Promise<void> => {
     return new Promise((resolve, reject) => {
-        api.getMigrationAddress({
+        api.getMigrationAddress(false, {
             onSuccess(response) {
                 resolve(response.payload)
             },
@@ -367,7 +380,7 @@ export const mineLedgerBundle = (
                 reject(error)
             }
         })
-    }).then((migrationAddress: string) => {
+    }).then((address: MigrationAddress) => {
         const { bundles } = get(migration);
 
         const bundle = get(bundles).find((bundle) => bundle.index === bundleIndex);
@@ -377,7 +390,7 @@ export const mineLedgerBundle = (
         bundle.inputs.forEach((input) => spentBundleHashes.push(...input.spentBundleHashes))
 
         const unsignedBundle = createUnsignedBundle(
-            migrationAddress.slice(0, -9),
+            address.trytes.slice(0, -9),
             bundle.inputs.map((input) => input.address),
             bundle.inputs.reduce((acc, input) => acc + input.balance, 0),
             Math.floor(Date.now() / 1000),
@@ -408,6 +421,16 @@ export const mineLedgerBundle = (
     });
 };
 
+/**
+ * Create mined ledger migration bundle
+ * 
+ * @method createMinedLedgerMigrationBundle
+ * 
+ * @param {number} bundleIndex 
+ * @param {function} prepareTransfersFn 
+ * 
+ * @returns {Promise<void>}
+ */
 export const createMinedLedgerMigrationBundle = (
     bundleIndex: number,
     prepareTransfersFn: (
@@ -453,7 +476,7 @@ export const createMinedLedgerMigrationBundle = (
         })
     })
 
-    return prepareTransfersFn([transfer], inputs, undefined, () => txs[0].timestamp).then((trytes) => {
+    return prepareTransfersFn([transfer], inputs, undefined, () => txs[0].timestamp * 1000).then((trytes) => {
         updateLedgerBundleState(bundleIndex, trytes, false);
 
         return { trytes, bundleHash: asTransactionObject(trytes[0]).bundle }
@@ -482,7 +505,7 @@ export const createLedgerMigrationBundle = (
     ) => Promise<string[]>
 ): Promise<any> => {
     return new Promise((resolve, reject) => {
-        api.getMigrationAddress({
+        api.getMigrationAddress(false, {
             onSuccess(response) {
                 resolve(response.payload);
             },
@@ -490,13 +513,13 @@ export const createLedgerMigrationBundle = (
                 reject(error)
             }
         })
-    }).then((migrationAddress: string) => {
+    }).then((address: MigrationAddress) => {
         const { bundles } = get(migration);
 
         const bundle = get(bundles).find((bundle) => bundle.index === bundleIndex);
 
         const transfer = {
-            address: migrationAddress.toString(),
+            address: address.trytes.toString(),
             value: bundle.inputs.reduce((acc, input) => acc + input.balance, 0),
             tag: 'U'.repeat(27)
         }
@@ -712,8 +735,7 @@ export const updateLedgerBundleState = (bundleIndex: number, trytes: string[], d
             if (bundle.index === bundleIndex) {
                 const newBundleHash = asTransactionObject(trytes[0]).bundle
 
-                // If bundle hash is already set, that means bundle mining has already been performed for this
-                if (bundle.bundleHash) {
+                if (bundle.miningRuns > 0) {
                     const isNewCrackabilityScoreLowerThanPrevious = bundle.bundleHash && bundle.crackability && migrationBundleCrackability < bundle.crackability
 
                     return Object.assign({}, bundle, {

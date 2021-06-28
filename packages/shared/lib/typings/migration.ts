@@ -1,5 +1,10 @@
 import type { Bridge, CommunicationIds } from './bridge'
 
+export interface MigrationAddress {
+    bech32: string;
+    trytes: string;
+}
+
 export interface AddressInput {
     address: string;
     index: number;
@@ -157,17 +162,20 @@ export function sendMigrationBundle(
  * 
  * @param {Bridge} bridge 
  * @param {CommunicationIds} __ids 
+ * @param {boolean} prompt
  * 
  * @returns {Promise}
  */
 export function getMigrationAddress(
     bridge: Bridge,
     __ids: CommunicationIds,
+    prompt: boolean
 ) {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
-        cmd: 'GetMigrationAddress'
+        cmd: 'GetMigrationAddress',
+        payload: prompt
     })
 }
 

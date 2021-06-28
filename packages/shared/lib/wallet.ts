@@ -15,7 +15,7 @@ import type {
     SyncedAccount
 } from 'shared/lib/typings/account'
 import type { Address } from 'shared/lib/typings/address'
-import type { Actor } from 'shared/lib/typings/bridge'
+import type { Actor, GetMigrationAddressResponse } from 'shared/lib/typings/bridge'
 import type {
     BalanceChangeEventPayload,
     ConfirmationStateChangeEventPayload,
@@ -232,7 +232,8 @@ export const api: {
         callbacks: { onSuccess: (response: Event<SendMigrationBundleResponse>) => void, onError: (err: ErrorEventPayload) => void }
     ),
     getMigrationAddress(
-        callbacks: { onSuccess: (response: Event<SendMigrationBundleResponse>) => void, onError: (err: ErrorEventPayload) => void }
+        prompt: boolean,
+        callbacks: { onSuccess: (response: Event<GetMigrationAddressResponse>) => void, onError: (err: ErrorEventPayload) => void }
     ),
     mineBundle(
         bundle: string[],

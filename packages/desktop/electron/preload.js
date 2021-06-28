@@ -154,10 +154,14 @@ try {
                         try {
                             let payload = '';
 
-                            Object.keys(content).forEach((key) => {
-                                payload = `${payload}${[key]}: ${content[key] || 'undefined'} \r\n`
-                            })
-                          
+                            content.forEach((object) => {
+                                Object.keys(object).forEach((key) => {
+                                    payload = `${payload}${[key]}: ${object[key] || 'undefined'} \r\n`
+                                })
+
+                                payload = `${payload} \r\n`
+                            });
+
 
                             fs.writeFileSync(result.filePath, payload)
                             resolve(true)
