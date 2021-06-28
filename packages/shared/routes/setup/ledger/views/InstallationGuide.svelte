@@ -1,5 +1,6 @@
 <script lang="typescript">
-    import { Animation, Button, Icon, OnboardingLayout, Text, Tooltip } from '../../../../components';
+    import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components';
+    import { openPopup } from 'shared/lib/popup';
     import { createEventDispatcher } from 'svelte';
 
     export let locale
@@ -16,7 +17,9 @@
     }
 
     function handlePopupOpen() {
-        console.log('TODO: Make popup guide')
+        openPopup({
+            type: 'ledgerAppGuide'
+        })
     }
 </script>
 

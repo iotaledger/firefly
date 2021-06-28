@@ -560,6 +560,30 @@
         },
         "ledgerConfirmation": {
             "confirm": "To proceed, confirm the prompt displayed on your ledger device"
+        },
+        "ledgerAppGuide": {
+            "steps": [
+                {
+                    "illustration": "import-from-firefly-ledger-desktop",
+                    "text": "Install and open the Ledger Live application"
+                },
+                {
+                    "illustration": "balance-desktop",
+                    "text": "Ensure that your Ledger is connected"
+                },
+                {
+                    "illustration": "import-from-ledger-desktop",
+                    "text": "Search for apps: IOTA Legacy and IOTA (MIOTA)"
+                },
+                {
+                    "illustration": "import-from-firefly-ledger-desktop",
+                    "text": "Install both apps: IOTA Legacy and IOTA (MIOTA)"
+                },
+                {
+                    "illustration": "balance-desktop",
+                    "text": "Remember that it's important to close Ledger Live before returning to Firefly"
+                }
+            ]
         }
     },
     "charts": {
