@@ -1,10 +1,9 @@
 <script lang="typescript">
     import { Button, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
-    import { isLedgerConnected, ledgerSimulator, pollLedgerStatus, stopPollLedgerStatus } from 'shared/lib/ledger'
+    import { promptUserToConnectLedger, ledgerSimulator } from 'shared/lib/ledger'
     import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
-    import { popupState } from 'shared/lib/popup'
     import { api } from 'shared/lib/wallet'
-    import { createEventDispatcher, onDestroy, onMount } from 'svelte'
+    import { createEventDispatcher } from 'svelte'
 
     export let locale
     export let mobile
@@ -13,43 +12,36 @@
 
     const dispatch = createEventDispatcher()
 
-    $: if (!$isLedgerConnected && !$popupState?.active) {
-        handleBackClick()
-    }
-
-    onMount(() => {
-        pollLedgerStatus()
-    })
-
-    onDestroy(() => {
-        stopPollLedgerStatus()
-    })
-
     function createAccount() {
         creatingAccount = true
         const officialNodes = getOfficialNodes()
         const officialNetwork = getOfficialNetwork()
-        api.createAccount(
-            {
-                clientOptions: {
-                    nodes: officialNodes,
-                    node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
-                    network: officialNetwork,
+
+        const _onConnected = () => {
+            api.createAccount(
+                {
+                    clientOptions: {
+                        nodes: officialNodes,
+                        node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
+                        network: officialNetwork,
+                    },
+                    alias: `${locale('general.account')} 1`,
+                    signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
                 },
-                alias: `${locale('general.account')} 1`,
-                signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
-            },
-            {
-                onSuccess(createAccountResponse) {
-                    creatingAccount = false
-                    dispatch('next')
-                },
-                onError(error) {
-                    creatingAccount = false
-                    console.error(error)
-                },
-            }
-        )
+                {
+                    onSuccess() {
+                        creatingAccount = false
+                        dispatch('next')
+                    },
+                    onError(error) {
+                        creatingAccount = false
+                        console.error(error)
+                    },
+                }
+            )
+        }
+        const _onCancel = () => (creatingAccount = false)
+        promptUserToConnectLedger(_onConnected, _onCancel)
     }
 
     function handleBackClick() {

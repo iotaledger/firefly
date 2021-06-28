@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Icon, OnboardingLayout, Spinner, Text } from 'shared/components'
-    import { isLedgerConnected, ledgerSimulator, pollLedgerStatus, stopPollLedgerStatus } from 'shared/lib/ledger'
+    import { isLedgerConnected, ledgerSimulator } from 'shared/lib/ledger'
     import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
     import { popupState } from 'shared/lib/popup'
     import { api } from 'shared/lib/wallet'
@@ -18,10 +18,6 @@
     $: if (!$isLedgerConnected && !$popupState?.active) {
         handleBackClick()
     }
-
-    onMount(() => {
-        pollLedgerStatus()
-    })
 
     function generateNewAddress() {
         busy = true
@@ -72,7 +68,6 @@
     }
 
     function handleContinueClick() {
-        stopPollLedgerStatus()
         dispatch('next')
     }
 

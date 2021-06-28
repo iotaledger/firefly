@@ -4,14 +4,6 @@
 
     export let handleClose
     export let locale
-
-    function handleCancelClick() {
-        if ('function' === typeof handleClose) {
-            handleClose()
-        } else {
-            closePopup()
-        }
-    }
 </script>
 
 <div class="p-8 flex flex-col w-full items-center justify-center text-center">

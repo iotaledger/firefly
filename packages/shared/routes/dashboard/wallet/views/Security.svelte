@@ -1,11 +1,11 @@
 <script lang="typescript">
+    import { getLedgerDeviceStatus, isLedgerConnected, pollLedgerDeviceStatus } from 'shared/lib/ledger'
     import { SecurityTile, Text } from 'shared/components'
     import { versionDetails } from 'shared/lib/appUpdater'
     import { diffDates, getBackupWarningColor, isRecentDate } from 'shared/lib/helpers'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, isSoftwareProfile, isStrongholdLocked, profiles, ProfileType } from 'shared/lib/profile'
-    import { LedgerStatus } from 'shared/lib/typings/wallet'
+    import { activeProfile, isSoftwareProfile, isStrongholdLocked, profiles } from 'shared/lib/profile'
     import { api } from 'shared/lib/wallet'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
@@ -17,10 +17,8 @@
     let backupSafe
     let color
     let isCheckingLedger
-    let ledgerDeviceStatus
-    let hardwareDeviceMessage
-    let hardwareDeviceColor = 'gray'
-    let interval
+    let ledgerSpinnerTimeout
+    let LEDGER_STATUS_POLL_INTERVAL = 5000
 
     const unsubscribe = profiles.subscribe(() => {
         setup()
@@ -29,35 +27,14 @@
     onMount(() => {
         setup()
         if (!$isSoftwareProfile) {
-            getLedgerDeviceStatus()
-            interval = setInterval(() => {
-                getLedgerDeviceStatus()
-            }, 10000)
-        }
-    })
-    onDestroy(() => {
-        unsubscribe()
-        if (interval) {
-            clearInterval(interval)
+            pollLedgerDeviceStatus(LEDGER_STATUS_POLL_INTERVAL)
         }
     })
 
-    $: {
-        switch (ledgerDeviceStatus) {
-            case LedgerStatus.Connected:
-                hardwareDeviceMessage = 'detected'
-                hardwareDeviceColor = 'blue'
-                break
-            case LedgerStatus.Disconnected:
-                hardwareDeviceMessage = 'noneDetected'
-                hardwareDeviceColor = 'gray'
-                break
-            case LedgerStatus.Locked:
-                hardwareDeviceMessage = 'locked'
-                hardwareDeviceColor = 'gray'
-                break
-        }
-    }
+    onDestroy(() => {
+        clearTimeout(ledgerSpinnerTimeout)
+        unsubscribe()
+    })
 
     function setup() {
         const ap = get(activeProfile)
@@ -92,22 +69,10 @@
         })
     }
 
-    function getLedgerDeviceStatus() {
+    function syncLedgerDeviceStatus() {
         isCheckingLedger = true
-        api.getLedgerDeviceStatus($activeProfile?.profileType === ProfileType.LedgerSimulator, {
-            onSuccess(response) {
-                ledgerDeviceStatus = response.payload.type
-                setTimeout(function () {
-                    isCheckingLedger = false
-                }, 500)
-            },
-            onError(e) {
-                ledgerDeviceStatus = LedgerStatus.Disconnected
-                setTimeout(function () {
-                    isCheckingLedger = false
-                }, 500)
-            },
-        })
+        const _onComplete = () => ledgerSpinnerTimeout = setTimeout(() => (isCheckingLedger = false), 500)
+        getLedgerDeviceStatus(_onComplete, _onComplete, _onComplete)
     }
 </script>
 
@@ -158,11 +123,11 @@
             <!-- Hardware Device -->
             <SecurityTile
                 title={locale('views.dashboard.security.hardwareDevice.title')}
-                message={hardwareDeviceMessage ? locale(`views.dashboard.security.hardwareDevice.${hardwareDeviceMessage}`) : ''}
-                color={hardwareDeviceColor}
+                message={$isLedgerConnected ? locale('views.dashboard.security.hardwareDevice.detected') : locale('views.dashboard.security.hardwareDevice.noneDetected')}
+                color={$isLedgerConnected ? 'blue' : 'gray'}
                 keepDarkThemeIconColor
                 icon="chip"
-                onClick={getLedgerDeviceStatus}
+                onClick={syncLedgerDeviceStatus}
                 refreshIcon
                 loading={isCheckingLedger}
                 classes="col-span-2"

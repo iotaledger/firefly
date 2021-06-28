@@ -1,10 +1,9 @@
 <script>
     import { Button, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
-    import { isLedgerConnected, ledgerSimulator, pollLedgerStatus, stopPollLedgerStatus } from 'shared/lib/ledger'
+    import { promptUserToConnectLedger, ledgerSimulator } from 'shared/lib/ledger'
     import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
-    import { popupState } from 'shared/lib/popup'
     import { api } from 'shared/lib/wallet'
-    import { createEventDispatcher, onMount } from 'svelte'
+    import { createEventDispatcher } from 'svelte'
 
     export let locale
     export let mobile
@@ -12,14 +11,6 @@
     let restoring = false
 
     const dispatch = createEventDispatcher()
-
-    $: if (!$isLedgerConnected && !$popupState?.active) {
-        handleBackClick()
-    }
-
-    onMount(() => {
-        pollLedgerStatus()
-    })
 
     function restore() {
         restoring = true
@@ -43,43 +34,45 @@
                 },
             })
         }
+        const _onConnected = () =>
+            api.getAccounts({
+                onSuccess(accountsResponse) {
+                    if (accountsResponse.payload.length > 0) {
+                        _sync()
+                    } else {
+                        api.createAccount(
+                            {
+                                clientOptions: {
+                                    nodes: officialNodes,
+                                    node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
+                                    network: officialNetwork,
+                                },
+                                alias: `${locale('general.account')} 1`,
+                                signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
+                            },
+                            {
+                                onSuccess(createAccountResponse) {
+                                    _sync()
+                                },
+                                onError(error) {
+                                    restoring = false
+                                    console.error(error)
+                                },
+                            }
+                        )
+                    }
+                },
+                onError(error) {
+                    restoring = false
+                    console.error(error)
+                },
+            })
+        const _onCancel = () => (restoring = false)
 
-        api.getAccounts({
-            onSuccess(accountsResponse) {
-                if (accountsResponse.payload.length > 0) {
-                    _sync()
-                } else {
-                    api.createAccount(
-                        {
-                            clientOptions: {
-                                nodes: officialNodes,
-                                node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
-                                network: officialNetwork,
-                            },
-                            alias: `${locale('general.account')} 1`,
-                            signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
-                        },
-                        {
-                            onSuccess(createAccountResponse) {
-                                _sync()
-                            },
-                            onError(error) {
-                                restoring = false
-                                console.error(error)
-                            },
-                        }
-                    )
-                }
-            },
-            onError(errorResponse) {
-                restoring = false
-                console.error(errorResponse)
-            },
-        })
+        promptUserToConnectLedger(_onConnected, _onCancel)
     }
 
     function handleBackClick() {
-        stopPollLedgerStatus()
         dispatch('previous')
     }
 </script>
