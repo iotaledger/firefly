@@ -17,6 +17,7 @@
     let backupSafe
     let color
     let isCheckingLedger
+    let ledgerSpinnerTimeout
     let LEDGER_STATUS_POLL_INTERVAL = 5000
 
     const unsubscribe = profiles.subscribe(() => {
@@ -31,6 +32,7 @@
     })
 
     onDestroy(() => {
+        clearTimeout(ledgerSpinnerTimeout)
         unsubscribe()
     })
 
@@ -69,7 +71,7 @@
 
     function syncLedgerDeviceStatus() {
         isCheckingLedger = true
-        const _onComplete = () => (isCheckingLedger = false)
+        const _onComplete = () => ledgerSpinnerTimeout = setTimeout(() => (isCheckingLedger = false), 500)
         getLedgerDeviceStatus(_onComplete, _onComplete, _onComplete)
     }
 </script>
