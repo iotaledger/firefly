@@ -28,9 +28,7 @@
     }
 </style>
 
-<Text type="h4" classes="mb-6">
-    Guide to installing the Ledger apps
-</Text>
+<Text type="h4" classes="mb-6">{locale('popups.ledgerAppGuide.title')}</Text>
 <div class="w-full flex flex-row flex-wrap">
     <div class="illustration w-full bg-white dark:bg-gray-900 flex justify-center">
         <Illustration illustration={locale('popups.ledgerAppGuide.steps')[stepIndex].illustration} />
@@ -44,19 +42,19 @@
             secondary
             onClick={() => changeIndex(-1)}
             disabled={stepIndex === 0}
-        >Previous</Button>
+        >{locale('actions.previous')}</Button>
         {#if stepIndex < locale('popups.ledgerAppGuide.steps').length - 1}
             <Button
                 classes="w-1/3"
                 secondary
                 onClick={() => changeIndex(1)}
-            >Next</Button>
+            >{locale('actions.next')}</Button>
         {:else}
             <Button
                 classes="w-1/3"
                 primary
                 onClick={handleCloseClick}
-            >Close</Button>
+            >{locale('actions.close')}</Button>
         {/if}
     </div>
 </div>

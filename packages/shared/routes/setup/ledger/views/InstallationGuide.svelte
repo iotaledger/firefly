@@ -28,23 +28,15 @@
 {:else}
     <OnboardingLayout onBackClick={handleBackClick} {locale} showLedgerVideoButton>
         <div slot="leftpane__content">
-            <Text type="h2" classes="mb-5">Have you installed the necessary Ledger apps?</Text>
-            <Text type="p" classes="mb-2" secondary>
-                Before you proceed, you must use Ledger Live to find and install
-                both the IOTA Legacy app and the new IOTA (MIOTA) app. Any
-                pre-installed apps should be updated to their latest versions.
-            </Text>
+            <Text type="h2" classes="mb-5">{locale('views.ledgerInstallationGuide.title')}</Text>
+            <Text type="p" classes="mb-2" secondary>{locale('views.ledgerInstallationGuide.description')}</Text>
         </div>
         <div slot="leftpane__action">
             <div on:click={handlePopupOpen} class="mb-6 flex flex-row justify-center cursor-pointer">
                 <Icon icon="info" classes="mr-2 text-blue-500" />
-                <Text secondary highlighted>
-                    Guide to installing the Ledger apps
-                </Text>
+                <Text secondary highlighted>{locale('popups.ledgerAppGuide.title')}</Text>
             </div>
-            <Button classes="w-full" onClick="{handleContinueClick}">
-                Yes, I've installed these apps
-            </Button>
+            <Button classes="w-full" onClick="{handleContinueClick}">{locale('views.ledgerInstallationGuide.action')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-end items-center bg-pastel-blue dark:bg-gray-900">
             <Animation animation="profile-desktop" />
