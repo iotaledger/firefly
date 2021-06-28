@@ -4,7 +4,16 @@
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
     import { createEventDispatcher, onMount } from 'svelte'
-    import { AccountIndex, Balance, Create, FireflyImport, GenerateNewAddress, InstallLedgerApp, LegacyIntro } from './views/'
+    import {
+        AccountIndex,
+        Balance,
+        Create,
+        FireflyImport,
+        GenerateNewAddress,
+        InstallLedgerApp,
+        LegacyIntro
+    } from './views/'
+    import InstallationGuide from './views/InstallationGuide.svelte';
 
     export let locale
     export let mobile
@@ -13,6 +22,7 @@
         Create = 'create',
         FireflyImport = 'fireflyImport',
         LegacyIntro = 'legacyIntro',
+        InstallationGuide = 'installationGuide',
         InstallLedgerApp = 'installLedgerApp',
         GenerateAddress = 'generateAddress',
         AccountIndex = 'accountIndex',
@@ -71,6 +81,9 @@
                 nextState = State.Balance
                 break
             case State.LegacyIntro:
+                nextState = State.InstallationGuide
+                break
+            case State.InstallationGuide:
                 nextState = State.InstallLedgerApp
                 break
             case State.InstallLedgerApp:
@@ -114,6 +127,10 @@
 {:else if state === State.LegacyIntro}
     <Transition>
         <LegacyIntro on:next={_next} on:previous={_previous} {locale} {mobile} />
+    </Transition>
+{:else if state === State.InstallationGuide}
+    <Transition>
+        <InstallationGuide on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
 {:else if state === State.InstallLedgerApp}
     <Transition>
