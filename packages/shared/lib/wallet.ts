@@ -33,7 +33,7 @@ import { get, writable, Writable } from 'svelte/store'
 import type { ClientOptions } from './typings/client'
 import type { TransferProgressEventType } from './typings/events'
 import type { Message } from './typings/message'
-import type { Duration, LedgerStatusPayload, StrongholdStatus } from './typings/wallet'
+import type { Duration, LedgerAppInfo, LedgerStatusPayload, StrongholdStatus } from './typings/wallet'
 import type { NodeAuth, NodeInfo } from './typings/node'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
@@ -259,6 +259,10 @@ export const api: {
     getLedgerDeviceStatus(
         ledgerSimulator: boolean,
         callbacks: { onSuccess: (response: Event<LedgerStatusPayload>) => void, onError: (err: ErrorEventPayload) => void }
+    ),
+    getLedgerOpenedApp(
+        isSimulator: boolean,
+        callbacks: { onSuccess: (response: Event<LedgerAppInfo>) => void, onError: (err: ErrorEventPayload) => void }
     )
 } = window['__WALLET_API__']
 

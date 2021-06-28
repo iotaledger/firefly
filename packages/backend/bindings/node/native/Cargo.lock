@@ -1693,7 +1693,7 @@ dependencies = [
 [[package]]
 name = "iota-ledger"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/ledger.rs?branch=develop#d4538b54d922888ed087ca27bf6184f61f84b39c"
+source = "git+https://github.com/iotaledger/ledger.rs?rev=79153530377a4c0659e81ad2d5be749aedbf4a61#79153530377a4c0659e81ad2d5be749aedbf4a61"
 dependencies = [
  "bech32 0.7.3",
  "enum-iterator",
@@ -1725,7 +1725,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=dev#2320748d968ca634e2e321ff6bcfe10500887a67"
+source = "git+https://github.com/iotaledger/wallet.rs?branch=ledger_opened_app#554042b8eb6c9157064d2a31e996195f36b0f14b"
 dependencies = [
  "async-trait",
  "backtrace",
@@ -1842,13 +1842,13 @@ checksum = "830d08ce1d1d941e6b30645f1a0eb5643013d835ce3779a5fc208261dbe10f55"
 
 [[package]]
 name = "ledger-apdu"
-version = "0.7.0"
-source = "git+https://github.com/Zondax/ledger-rs?rev=27cb6bc#27cb6bcdf914f44effbfab40b793c670dfbb7705"
+version = "0.8.0"
+source = "git+https://github.com/iotaledger/ledger-rs?rev=2b0a4807e38313b08e55ac8c703f6bc4193503f0#2b0a4807e38313b08e55ac8c703f6bc4193503f0"
 
 [[package]]
 name = "ledger-transport"
-version = "0.7.0"
-source = "git+https://github.com/Zondax/ledger-rs?rev=27cb6bc#27cb6bcdf914f44effbfab40b793c670dfbb7705"
+version = "0.8.0"
+source = "git+https://github.com/iotaledger/ledger-rs?rev=2b0a4807e38313b08e55ac8c703f6bc4193503f0#2b0a4807e38313b08e55ac8c703f6bc4193503f0"
 dependencies = [
  "byteorder",
  "futures",
@@ -1866,8 +1866,8 @@ dependencies = [
 
 [[package]]
 name = "ledger-transport-hid"
-version = "0.7.0"
-source = "git+https://github.com/Zondax/ledger-rs?rev=27cb6bc#27cb6bcdf914f44effbfab40b793c670dfbb7705"
+version = "0.8.0"
+source = "git+https://github.com/iotaledger/ledger-rs?rev=2b0a4807e38313b08e55ac8c703f6bc4193503f0#2b0a4807e38313b08e55ac8c703f6bc4193503f0"
 dependencies = [
  "byteorder",
  "cfg-if 0.1.10",
@@ -1884,7 +1884,7 @@ dependencies = [
 [[package]]
 name = "ledger-transport-tcp"
 version = "0.0.1"
-source = "git+https://github.com/Zondax/ledger-rs?rev=27cb6bc#27cb6bcdf914f44effbfab40b793c670dfbb7705"
+source = "git+https://github.com/iotaledger/ledger-rs?rev=2b0a4807e38313b08e55ac8c703f6bc4193503f0#2b0a4807e38313b08e55ac8c703f6bc4193503f0"
 dependencies = [
  "hex",
  "ledger-apdu",

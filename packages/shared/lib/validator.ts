@@ -781,17 +781,18 @@ export default class ValidatorService {
             [ResponseTypes.NodeInfo]: this.createBaseValidator().add(new NodeInfoValidator()).getFirst(),
             [ResponseTypes.Error]: this.createBaseValidator().getFirst(),
             [ResponseTypes.Panic]: this.createBaseValidator().getFirst(),
-
-            // Legacy seed APIs
             [ResponseTypes.LegacySeedChecksum]: this.createBaseValidator().getFirst(),
 
-            // Migration
+            // Legacy seed APIs
             [ResponseTypes.MigrationData]: this.createBaseValidator().getFirst(),
+
+            // Migration
             [ResponseTypes.CreatedMigrationBundle]: this.createBaseValidator().getFirst(),
             [ResponseTypes.SentMigrationBundle]: this.createBaseValidator().getFirst(),
             [ResponseTypes.MigrationAddress]: this.createBaseValidator().getFirst(),
             [ResponseTypes.MinedBundle]: this.createBaseValidator().getFirst(),
             [ResponseTypes.MineBundle]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.LedgerOpenedApp]: this.createBaseValidator().getFirst(),
 
             // Events
             [ResponseTypes.StrongholdStatusChange]: this.createBaseEventValidator().getFirst(),
@@ -843,6 +844,7 @@ export default class ValidatorService {
      * @returns {ValidationResponse}
      */
     performValidation(response: MessageResponse | MarketDataValidationResponse | ChrysalisNodeDataValidationResponse | ChrysalisVariablesValidationResponse): ValidationResponse {
+        console.log(response, this.validators)
         return this.validators[response.type].isValid(response)
     }
 }

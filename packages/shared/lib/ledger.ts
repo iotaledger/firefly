@@ -1,12 +1,14 @@
 
 import { Electron } from 'shared/lib/electron'
 import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-import { LedgerStatus } from 'shared/lib/typings/wallet'
+import { LedgerAppInfo, LedgerStatus } from 'shared/lib/typings/wallet'
 import { api } from 'shared/lib/wallet'
 import { get, writable } from 'svelte/store'
 import { localize } from './i18n'
 
-export const ledgerSimulator = false
+import type { Event } from './typings/events';
+
+export const ledgerSimulator = true
 export const isLedgerConnected = writable<boolean>(true)
 export const isLedgerLegacyConnected = writable<boolean>(true)
 
@@ -29,6 +31,19 @@ export function getLedgerDeviceStatus(onConnected = () => { }, onDisconnected = 
         onError(err) {
             onError()
         }
+    })
+}
+
+export function asyncGetLedgerOpenedApp(isSimulator: boolean) {
+    return new Promise<LedgerAppInfo>((resolve, reject) => {
+        api.getLedgerOpenedApp(isSimulator, {
+            onSuccess(response: Event<LedgerAppInfo>) {
+                resolve(response.payload)
+            },
+            onError(err) {
+                reject(err)
+            }
+        })
     })
 }
 
