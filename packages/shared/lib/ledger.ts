@@ -58,6 +58,7 @@ export function promptUserToConnectLedger(
 
 export function pollLedgerDeviceStatus(pollInterval, _onConnected = () => { }, _onDisconnected = () => { }, _onCancel = () => { }) {
     if (!polling) {
+        getLedgerDeviceStatus(_onConnected, _onDisconnected, _onCancel)
         intervalTimer = setInterval(async () => {
             getLedgerDeviceStatus(_onConnected, _onDisconnected, _onCancel)
         }, pollInterval)
