@@ -107,10 +107,6 @@
             }
         }
     }
-
-    .ledgerNotConnected {
-        width: 360px;
-    }
 </style>
 
 <svelte:window on:keydown={onkey} />

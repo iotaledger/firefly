@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Animation, Button, OnboardingLayout, SpentAddress, Text } from 'shared/components'
+    import { Animation, Button, Illustration, OnboardingLayout, SpentAddress, Text } from 'shared/components'
     import { spentAddressesFromBundles, toggleMiningSelection } from 'shared/lib/migration'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { walletSetupType } from 'shared/lib/router'
@@ -94,7 +94,11 @@
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            <Animation animation="migrate-desktop" />
+            {#if legacyLedger}
+                <Illustration width="100%" illustration="ledger-migrate-desktop" />
+            {:else}
+                <Animation animation="migrate-desktop" />
+            {/if}
         </div>
     </OnboardingLayout>
 {/if}

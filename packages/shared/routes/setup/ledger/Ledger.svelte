@@ -4,17 +4,27 @@
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
     import { createEventDispatcher, onMount } from 'svelte'
-    import { AccountIndex, Balance, Create, FireflyImport, GenerateNewAddress, InstallLedgerApp, LegacyIntro } from './views/'
+    import {
+        AccountIndex,
+        Balance,
+        Connect,
+        GenerateNewAddress,
+        InstallLedgerApp,
+        LegacyIntro,
+        RestoreFromLedger,
+        SwitchApps,
+    } from './views/'
 
     export let locale
     export let mobile
 
     enum State {
-        Create = 'create',
-        FireflyImport = 'fireflyImport',
+        Connect = 'connect',
+        RestoreFromLedger = 'restoreFromLedger',
         LegacyIntro = 'legacyIntro',
         InstallLedgerApp = 'installLedgerApp',
         GenerateAddress = 'generateAddress',
+        SwitchApps = 'switchApps',
         AccountIndex = 'accountIndex',
         Balance = 'balance',
     }
@@ -27,12 +37,10 @@
     let stateHistory = []
 
     onMount(() => {
-        if ($walletSetupType === SetupType.New) {
-            state = State.Create
+        if ($walletSetupType === SetupType.New || $walletSetupType === SetupType.FireflyLedger) {
+            state = State.Connect
         } else if ($walletSetupType === SetupType.TrinityLedger) {
             state = State.LegacyIntro
-        } else if ($walletSetupType === SetupType.FireflyLedger) {
-            state = State.FireflyImport
         }
         currentLedgerMigrationProgress.set(null)
     })
@@ -63,10 +71,15 @@
         let nextState
         let params = event.detail || {}
         switch (state) {
-            case State.Create:
-                dispatch('next')
+            case State.Connect:
+                if ($walletSetupType === SetupType.New) {
+                    dispatch('next')
+                } else if ($walletSetupType === SetupType.FireflyLedger) {
+                    nextState = State.RestoreFromLedger
+                }
+                // TODO: add legacy
                 break
-            case State.FireflyImport:
+            case State.RestoreFromLedger:
                 dispatch('next')
                 break
             case State.LegacyIntro:
@@ -102,13 +115,13 @@
     }
 </script>
 
-{#if state === State.Create}
+{#if state === State.Connect}
     <Transition>
-        <Create on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <Connect on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
-{:else if state === State.FireflyImport}
+{:else if state === State.RestoreFromLedger}
     <Transition>
-        <FireflyImport on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <RestoreFromLedger on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
 {:else if state === State.LegacyIntro}
     <Transition>
@@ -121,6 +134,10 @@
 {:else if state === State.GenerateAddress}
     <Transition>
         <GenerateNewAddress on:next={_next} on:previous={_previous} {locale} {mobile} />
+    </Transition>
+{:else if state === State.SwitchApps}
+    <Transition>
+        <SwitchApps on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
 {:else if state === State.AccountIndex}
     <Transition>

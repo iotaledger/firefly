@@ -6,7 +6,7 @@ import { api } from 'shared/lib/wallet'
 import { get, writable } from 'svelte/store'
 import { localize } from './i18n'
 
-export const ledgerSimulator = false
+export const ledgerSimulator = true
 export const isLedgerConnected = writable<boolean>(true)
 export const isLedgerLegacyConnected = writable<boolean>(true)
 
@@ -72,7 +72,7 @@ function openLedgerNotConnectedPopup(legacy: boolean = false, cancel = () => { }
             type: 'ledgerNotConnected',
             hideClose: true,
             props: {
-                message: localize(`popups.ledgerNotConnected.${legacy ? 'connectLegacy' : 'connect'}`),
+                legacy,
                 handleClose: () => cancel()
             },
         })
@@ -95,7 +95,7 @@ export function stopPollingLedgerLegacyStatus(): void {
     Electron.ledger.removeListener(ledgerLegacyListener)
 }
 
-function ledgerLegacyListener(isConnected) {    
+function ledgerLegacyListener(isConnected) {
     isLedgerLegacyConnected.set(isConnected)
     if (isConnected) {
         closePopup()

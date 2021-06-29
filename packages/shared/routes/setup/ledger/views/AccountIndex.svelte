@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Number, OnboardingLayout, Spinner, Text, Toggle } from 'shared/components'
+    import { Button, Illustration, Number, OnboardingLayout, Spinner, Text, Toggle } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { isLedgerLegacyConnected, pollLedgerLegacyStatus } from 'shared/lib/ledger'
     import { ADDRESS_SECURITY_LEVEL, getLedgerMigrationData, hardwareIndexes } from 'shared/lib/migration'
@@ -87,6 +87,8 @@
                 {:else}{locale('actions.confirm')}{/if}
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-end items-center bg-pastel-blue dark:bg-gray-900" />
+        <div slot="rightpane" class="w-full h-full flex justify-end items-center bg-orange-50 dark:bg-gray-900">
+            <Illustration width="100%" illustration="ledger-choose-index-desktop" />
+        </div>
     </OnboardingLayout>
 {/if}

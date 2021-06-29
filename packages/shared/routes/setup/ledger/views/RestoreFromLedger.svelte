@@ -64,17 +64,17 @@
 {:else}
     <OnboardingLayout onBackClick={handleBackClick} busy={restoring}>
         <div slot="leftpane__content">
-            <Text type="h2" classes="mb-5">{locale('views.importFromFireflyLedger.title')}</Text>
-            <Text type="p" secondary classes="mb-8">{locale('views.importFromFireflyLedger.body')}</Text>
+            <Text type="h2" classes="mb-5">{locale('views.restoreFromFireflyLedger.title')}</Text>
+            <Text type="p" secondary classes="mb-8">{locale('views.restoreFromFireflyLedger.body')}</Text>
         </div>
         <div slot="leftpane__action">
             <Button classes="w-full" disabled={restoring} onClick={restore}>
                 {#if restoring}
-                    <Spinner busy message={locale('views.importFromFireflyLedger.restoring')} classes="justify-center" />
+                    <Spinner busy message={locale('views.restoreFromFireflyLedger.restoring')} classes="justify-center" />
                 {:else}{locale('actions.restore')}{/if}
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-end items-center bg-pastel-blue dark:bg-gray-900">
+        <div slot="rightpane" class="w-full h-full flex justify-end items-center bg-gray-50 dark:bg-gray-900">
             <Illustration width="100%" illustration="import-from-ledger-desktop" />
         </div>
     </OnboardingLayout>

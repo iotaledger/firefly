@@ -44,6 +44,6 @@
                 {:else}{locale('actions.continue')}{/if}
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-end items-center bg-pastel-blue dark:bg-gray-900" />
+        <div slot="rightpane" class="w-full h-full flex justify-end items-center bg-gray-50 dark:bg-gray-900" />
     </OnboardingLayout>
 {/if}
