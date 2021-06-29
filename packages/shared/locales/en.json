@@ -592,6 +592,14 @@
                 "Install both apps: IOTA Legacy and IOTA (MIOTA)",
                 "Remember that it's important to close Ledger Live before returning to Firefly"
             ]
+        },
+        "ledgerConnectionGuide": {
+            "title": "Tips if your Ledger isn’t connecting",
+            "steps": [
+                "Make sure Ledger Live isn't running in the background",
+                "Ensure you have your Ledger hardware fully unlocked with your PIN",
+                "Open the new IOTA (MIOTA) app on the Ledger hardware"
+            ]
         }
     },
     "charts": {

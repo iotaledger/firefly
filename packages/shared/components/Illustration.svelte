@@ -48,6 +48,38 @@
             lightmode: 'onboarding/ledger-migrate-desktop.svg',
             darkmode: 'onboarding/ledger-migrate-desktop.svg',
         },
+        'install-ledger-live-desktop': {
+            lightmode: 'onboarding/install-ledger-live-desktop.svg',
+            darkmode: 'onboarding/install-ledger-live-desktop.svg',
+        },
+        'ensure-ledger-connected-desktop': {
+            lightmode: 'onboarding/ensure-ledger-connected-desktop.svg',
+            darkmode: 'onboarding/ensure-ledger-connected-desktop.svg',
+        },
+        'seach-ledger-apps-desktop': {
+            lightmode: 'onboarding/seach-ledger-apps-desktop.svg',
+            darkmode: 'onboarding/seach-ledger-apps-desktop.svg',
+        },
+        'install-ledger-apps-desktop': {
+            lightmode: 'onboarding/install-ledger-apps-desktop.svg',
+            darkmode: 'onboarding/install-ledger-apps-desktop.svg',
+        },
+        'close-ledger-live-desktop': {
+            lightmode: 'onboarding/close-ledger-live-desktop.svg',
+            darkmode: 'onboarding/close-ledger-live-desktop.svg',
+        },
+        'background-ledger-live-desktop': {
+            lightmode: 'onboarding/background-ledger-live-desktop.svg',
+            darkmode: 'onboarding/background-ledger-live-desktop.svg',
+        },
+        'ledger-unlocked-desktop': {
+            lightmode: 'onboarding/ledger-unlocked-desktop.svg',
+            darkmode: 'onboarding/ledger-unlocked-desktop.svg',
+        },
+        'open-ledger-app-desktop': {
+            lightmode: 'onboarding/open-ledger-app-desktop.svg',
+            darkmode: 'onboarding/open-ledger-app-desktop.svg',
+        },
     }
 </script>
 
