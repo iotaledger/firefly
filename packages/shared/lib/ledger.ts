@@ -1,4 +1,3 @@
-
 import { Electron } from 'shared/lib/electron'
 import { closePopup, openPopup, popupState } from 'shared/lib/popup'
 import { LedgerStatus } from 'shared/lib/typings/wallet'
@@ -6,7 +5,7 @@ import { api } from 'shared/lib/wallet'
 import { get, writable } from 'svelte/store'
 import { localize } from './i18n'
 
-export const ledgerSimulator = true
+export const ledgerSimulator = false
 export const isLedgerConnected = writable<boolean>(true)
 export const isLedgerLegacyConnected = writable<boolean>(true)
 

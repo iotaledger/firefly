@@ -13,6 +13,7 @@
     import { isTransferring, transferState, wallet, WalletAccount } from 'shared/lib/wallet'
     import { getContext, onDestroy, onMount } from 'svelte'
     import type { Readable } from 'svelte/store'
+    import { promptUserToConnectLedger } from "../../../../lib/ledger";
 
     export let locale
     export let send
@@ -213,15 +214,22 @@
 
     const triggerSend = (internal) => {
         closePopup()
+
+        let sendFn;
         if (internal) {
             // We pass the original selectedSendType in case we are masquerading as
             // an internal transfer by a send to an address in one of our
             // other accounts. When the transfer completes it resets
             // the send params to where it was
-            internalTransfer(from.id, to.id, amountRaw, selectedSendType === SEND_TYPE.INTERNAL)
+            sendFn = () => internalTransfer(from.id, to.id, amountRaw, selectedSendType === SEND_TYPE.INTERNAL)
         } else {
-            send(from.id, address, amountRaw)
+            sendFn = () => send(from.id, address, amountRaw)
         }
+
+        if(!$isSoftwareProfile)
+            promptUserToConnectLedger(sendFn, () => { })
+        else
+            sendFn()
     }
 
     const handleBackClick = () => {
