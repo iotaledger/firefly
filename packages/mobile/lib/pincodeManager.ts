@@ -3,7 +3,7 @@ import { Plugins } from "@capacitor/core"
 
 const { SecureStoragePlugin } = Plugins
 
-function handle_keychain() {
+function handleKeychain() {
     
     function set(key: string, pincode: string): Promise<boolean> {
         return SecureStoragePlugin.set({ 
@@ -48,4 +48,4 @@ function handle_keychain() {
 }
 
 /** Mobile Pincode Manager  */
-export const PincodeManager = handle_keychain()
+export const PincodeManager = handleKeychain()
