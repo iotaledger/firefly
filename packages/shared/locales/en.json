@@ -898,7 +898,8 @@
             "phraseCaseWord": "The word \"{word}\" should be lower case"
         },
         "ledger": {
-            "notFound": "Ledger device not found."
+            "notFound": "Ledger device not found.",
+            "rejected": "The transaction was cancelled."
         }
     },
     "tooltips": {
