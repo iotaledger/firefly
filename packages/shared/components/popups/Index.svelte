@@ -15,6 +15,7 @@
     import HideAccount from './HideAccount.svelte'
     import LedgerConfirmation from './LedgerConfirmation.svelte'
     import LedgerNotConnected from './LedgerNotConnected.svelte'
+    import LedgerAppGuide from './LedgerAppGuide.svelte'
     import MissingBundle from './MissingBundle.svelte'
     import Password from './Password.svelte'
     import QR from './QR.svelte'
@@ -45,6 +46,7 @@
         addNode: AddNode,
         ledgerNotConnected: LedgerNotConnected,
         ledgerConfirmation: LedgerConfirmation,
+        ledgerAppGuide: LedgerAppGuide,
         removeNode: RemoveNode,
         busy: Busy,
         errorLog: ErrorLog,

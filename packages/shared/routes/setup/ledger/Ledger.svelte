@@ -14,6 +14,7 @@
         RestoreFromLedger,
         SwitchApps,
     } from './views/'
+    import InstallationGuide from './views/InstallationGuide.svelte'
 
     export let locale
     export let mobile
@@ -22,6 +23,7 @@
         Connect = 'connect',
         RestoreFromLedger = 'restoreFromLedger',
         LegacyIntro = 'legacyIntro',
+        InstallationGuide = 'installationGuide',
         InstallLedgerApp = 'installLedgerApp',
         GenerateAddress = 'generateAddress',
         SwitchApps = 'switchApps',
@@ -83,6 +85,9 @@
                 dispatch('next')
                 break
             case State.LegacyIntro:
+                nextState = State.InstallationGuide
+                break
+            case State.InstallationGuide:
                 nextState = State.InstallLedgerApp
                 break
             case State.InstallLedgerApp:
@@ -126,6 +131,10 @@
 {:else if state === State.LegacyIntro}
     <Transition>
         <LegacyIntro on:next={_next} on:previous={_previous} {locale} {mobile} />
+    </Transition>
+{:else if state === State.InstallationGuide}
+    <Transition>
+        <InstallationGuide on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
 {:else if state === State.InstallLedgerApp}
     <Transition>
