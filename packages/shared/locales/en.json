@@ -54,6 +54,11 @@
             "watchVideo": "Watch video guide",
             "checkingConnection": "Checking Ledger Connection"
         },
+        "ledgerInstallationGuide": {
+            "title": "Have you installed the necessary Ledger apps?",
+            "description": "Before you proceed, you must use Ledger Live to find and install both the IOTA Legacy app and the new IOTA (MIOTA) app. Any pre-installed apps should be updated to their latest versions.",
+            "action": "Yes, I've installed these apps"
+        },
         "password": {
             "title": "Create a password",
             "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
@@ -560,6 +565,16 @@
         },
         "ledgerConfirmation": {
             "confirm": "To proceed, confirm the prompt displayed on your ledger device"
+        },
+        "ledgerAppGuide": {
+            "title": "Guide to installing the Ledger apps",
+            "steps": [
+                "Install and open the Ledger Live application",
+                "Ensure that your Ledger is connected",
+                "Search for apps: IOTA Legacy and IOTA (MIOTA)",
+                "Install both apps: IOTA Legacy and IOTA (MIOTA)",
+                "Remember that it's important to close Ledger Live before returning to Firefly"
+            ]
         }
     },
     "charts": {
@@ -577,6 +592,8 @@
     "actions": {
         "continue": "Continue",
         "back": "Back",
+        "previous": "Previous",
+        "next": "Next",
         "cancel": "Cancel",
         "close": "Close",
         "dismiss": "Dismiss",
