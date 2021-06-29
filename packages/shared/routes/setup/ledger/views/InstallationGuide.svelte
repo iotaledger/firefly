@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
+    import { Button, Icon, Illustration, OnboardingLayout, Text } from 'shared/components'
     import { openPopup } from 'shared/lib/popup'
     import { createEventDispatcher } from 'svelte'
 
@@ -53,8 +53,8 @@
             </div>
             <Button classes="w-full" onClick={handleContinueClick}>{locale('views.ledgerInstallationGuide.action')}</Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-end items-center bg-pastel-blue dark:bg-gray-900">
-            <Animation animation="profile-desktop" />
+        <div slot="rightpane" class="w-full h-full flex justify-start items-center bg-gray-50 dark:bg-gray-900">
+            <Illustration width="95%" illustration="ledger-install-apps-desktop" />
         </div>
     </OnboardingLayout>
 {/if}

@@ -28,6 +28,10 @@
             lightmode: 'onboarding/ledger-connect-disconnected-desktop.svg',
             darkmode: 'onboarding/ledger-connect-disconnected-desktop.svg',
         },
+        'ledger-install-apps-desktop': {
+            lightmode: 'onboarding/ledger-install-apps-desktop.svg',
+            darkmode: 'onboarding/ledger-install-apps-desktop.svg',
+        },
         'ledger-generate-address-desktop': {
             lightmode: 'onboarding/ledger-generate-address-desktop.svg',
             darkmode: 'onboarding/ledger-generate-address-desktop.svg',

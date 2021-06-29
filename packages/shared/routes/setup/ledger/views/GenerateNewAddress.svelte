@@ -15,7 +15,7 @@
 
     const dispatch = createEventDispatcher()
 
-    $: illustration = confirmed ? 'ledger-generate-address-desktop' : 'ledger-generate-address-success-desktop'
+    $: illustration = confirmed ? 'ledger-generate-address-success-desktop' : 'ledger-generate-address-desktop'
 
     function generateNewAddress() {
         busy = true
