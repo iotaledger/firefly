@@ -15,11 +15,16 @@ use crate::{dispatch, wallet_actors, DispatchMessage as WalletDispatchMessage, M
 use crate::{extension_actors};
 use glow::{
     handler::{ExtensionHandler},
+    message::CallbackMessage as ExtensionCallbackMessage,
+};
+use glow_iota::{
     message::{
-        CallbackMessage as ExtensionCallbackMessage, DispatchMessage as ExtensionDispatchMessage,
+        MessageType as ExtensionMessageType,
+        DispatchMessage as ExtensionDispatchMessage,
         ExtensionError, Message as ExtensionMessage, Response as ExtensionResponse,
         ResponseType as ExtensionResponseType, Result as ExtensionResult,
     },
+    handler::translate_message,
 };
 
 // pub use iota_wallet::actor::MessageType as WalletMessageType;
@@ -49,7 +54,18 @@ impl Receive<ExtensionMessage> for ExtensionActor {
         let message_handler = self.handler.clone();
         self.runtime.spawn(async move {
             let mut message_handler = message_handler.lock().await;
-            message_handler.receive(msg).await;
+            let glow_msg = msg.message_type();
+            if let ExtensionMessageType::CallGlow{method, payload} = glow_msg {
+                let response = message_handler.receive_glow(method, payload).await;
+                let response = match response {
+                    Ok(r) => ExtensionResponseType::CalledGlow(r),
+                    Err(e) => ExtensionResponseType::Error(e.to_string()),
+                };
+                let mtype = msg.message_type();
+                let _ = msg
+                    .response_tx()
+                    .send(ExtensionResponse::new(msg.id().to_string(), mtype.clone(), response));
+            }
         });
     }
 }
@@ -152,14 +168,16 @@ impl ActorFactoryArgs<String> for ExtensionActor {
                 if let Ok(s) = r.payload.clone() {
                     let mut message_handler = message_handler.lock().await;
                     // only let ExtensionMessageType through
-                    let (msg, respond_directly) = message_handler.translate_message(s.as_str()).await;
-                    if let Ok(message) = msg {
-                        if respond_directly { // handler created the response
-                            let _ = r.response_tx.send(message);
-                        } else { // get the response from Wallet.rs
-                            let res = callback(message.clone(), aid.clone()).await;
-                            if let Ok(payload) = res {
-                                let _ = r.response_tx.send(payload);
+                    if message_handler.is_initialized() {
+                        let (msg, respond_directly) = translate_message(s.as_str());
+                        if let Ok(message) = msg {
+                            if respond_directly { // handler created the response
+                                let _ = r.response_tx.send(message);
+                            } else { // get the response from Wallet.rs
+                                let res = callback(message.clone(), aid.clone()).await;
+                                if let Ok(payload) = res {
+                                    let _ = r.response_tx.send(payload);
+                                }
                             }
                         }
                     }

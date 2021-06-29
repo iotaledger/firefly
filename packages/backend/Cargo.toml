@@ -7,6 +7,7 @@ exclude = ["/bindings", "/api-wrapper"]
 
 [dependencies]
 glow = { path = "../../../glow/glow.rs", optional = true }
+glow-iota = { path = "../../../glow/glow-iota.rs", optional = true }
 tokio = { version = "1.3", features = ["full"] }
 once_cell = "1.5.0"
 iota-wallet = { git = "https://github.com/iotaledger/wallet.rs", branch = "develop", default-features = false, features = ["stronghold"] }
@@ -21,5 +22,5 @@ futures = "0.3"
 
 [features]
 default = []
-extension = ["glow"]
+extension = ["glow", "glow-iota"]
 
