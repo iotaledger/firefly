@@ -22,7 +22,6 @@ const resolve = {
 }
 
 /// ------------------------ Output ------------------------
-console.log(path.join(__dirname, '/public'))
 const output = {
     publicPath: prod ? '../' : '/',
     path: path.join(__dirname, '/public'),

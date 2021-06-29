@@ -5,7 +5,7 @@
     import { Error, Icon } from 'shared/components'
 
     const dispatch = createEventDispatcher()
-    const isWide = () => window.matchMedia('(max-width: 360px)').matches ? true : false
+    const isWide = () => window.matchMedia('(max-width: 360px)').matches
 
     export let value = undefined
     export let classes = ''
@@ -92,8 +92,6 @@
      * @todo on ios its not needed, so we can detect ios too and disable it.
     */
     const changeHandlerHelper = (e, i) => {
-        //e.preventDefault
-        //console.log({e})
         if (!/^\d$/.test(e.data)) {
             inputs[i] = ''
         } else {
