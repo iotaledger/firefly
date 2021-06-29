@@ -47,7 +47,7 @@
             "body1": "1. Open Ledger Live and install New IOTA app",
             "body2": "2. Close Ledger Live desktop application",
             "body3": "3. Open the new app on your Ledger device",
-            "progress1": "Install ledger app",
+            "progress1": "Connect your Ledger",
             "progress2": "Generate address",
             "progress3": "Switch ledger app",
             "progress4": "Transfer funds",

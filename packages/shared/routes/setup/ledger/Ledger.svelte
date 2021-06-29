@@ -49,12 +49,16 @@
 
     const updateMigrationProgress = () => {
         switch (state) {
+            case State.Connect:
+                currentLedgerMigrationProgress.set(LedgerMigrationProgress.InstallLedgerApp)
+                break
             case State.GenerateAddress:
                 currentLedgerMigrationProgress.set(LedgerMigrationProgress.GenerateAddress)
                 break
-            case State.AccountIndex:
+            case State.SwitchApps:
                 currentLedgerMigrationProgress.set(LedgerMigrationProgress.SwitchLedgerApp)
                 break
+            case State.AccountIndex:
             case State.Balance:
                 currentLedgerMigrationProgress.set(LedgerMigrationProgress.TransferFunds)
                 break

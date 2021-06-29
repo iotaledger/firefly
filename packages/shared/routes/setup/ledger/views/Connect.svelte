@@ -21,6 +21,8 @@
     let appOpen
     let polling = false
 
+    let legacyLedger = $walletSetupType === SetupType.TrinityLedger
+
     // TODO: split logics when exposed
     $: connectedAndUnlocked = appOpen = $isLedgerConnected
     $: if ($isLedgerConnected) {
@@ -99,7 +101,11 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout onBackClick={handleBackClick}>
+    <OnboardingLayout
+        onBackClick={handleBackClick}
+        {locale}
+        showLedgerProgress={legacyLedger}
+        showLedgerVideoButton={legacyLedger}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-5">{locale('views.connectLedger.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.connectLedger.body')}</Text>
