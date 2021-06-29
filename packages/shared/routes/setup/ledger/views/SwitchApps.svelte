@@ -47,8 +47,8 @@
                 {locale('actions.continue')}
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-end items-center bg-gray-50 dark:bg-gray-900">
-            <Illustration width="100%" illustration="ledger-switch-app-desktop" />
+        <div slot="rightpane" class="w-full h-full flex justify-start items-center bg-gray-50 dark:bg-gray-900">
+            <Illustration width="95%" illustration="ledger-switch-app-desktop" />
         </div>
     </OnboardingLayout>
 {/if}

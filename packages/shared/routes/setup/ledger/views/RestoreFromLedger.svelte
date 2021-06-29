@@ -1,6 +1,6 @@
 <script>
-    import { Button, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
-    import { promptUserToConnectLedger, ledgerSimulator } from 'shared/lib/ledger'
+    import { Animation, Button, OnboardingLayout, Spinner, Text } from 'shared/components'
+    import { ledgerSimulator, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
@@ -74,8 +74,8 @@
                 {:else}{locale('actions.restore')}{/if}
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-end items-center bg-gray-50 dark:bg-gray-900">
-            <Illustration width="100%" illustration="import-from-ledger-desktop" />
+        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
+            <Animation animation="import-from-file-password-desktop" />
         </div>
     </OnboardingLayout>
 {/if}
