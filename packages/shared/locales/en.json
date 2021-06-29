@@ -875,7 +875,8 @@
             "insufficientFunds": "This wallet has insufficient funds.",
             "noToAccount": "You have not selected a wallet to send the funds to.",
             "sendingDust": "You cannot send less than 1 Mi.",
-            "leavingDust": "You cannot leave less than 1 Mi on your address."
+            "leavingDust": "You cannot leave less than 1 Mi on your address.",
+            "cancelled": "The transaction was cancelled."
         },
         "node": {
             "invalid": "Please enter a valid URL.",
@@ -898,8 +899,7 @@
             "phraseCaseWord": "The word \"{word}\" should be lower case"
         },
         "ledger": {
-            "notFound": "Ledger device not found.",
-            "rejected": "The transaction was cancelled."
+            "notFound": "Ledger device not found."
         }
     },
     "tooltips": {

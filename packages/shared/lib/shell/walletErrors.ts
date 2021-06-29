@@ -50,7 +50,7 @@ const errorMessages: {
     // Ledger
     'LedgerMiscError': 'error.global.generic',
     'LedgerDongleLocked': 'error.global.generic',
-    'LedgerDeniedByUser': 'error.ledger.rejected',
+    'LedgerDeniedByUser': 'error.send.cancelled',
     'LedgerDeviceNotFound': 'error.ledger.notFound',
     'LedgerEssenceTooLarge': 'error.global.generic',
     // Dust output
