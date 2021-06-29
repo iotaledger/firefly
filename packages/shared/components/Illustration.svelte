@@ -20,10 +20,6 @@
             lightmode: 'onboarding/import-from-ledger-desktop.svg',
             darkmode: 'onboarding/import-from-ledger-desktop.svg',
         },
-        'import-from-firefly-ledger-desktop': {
-            lightmode: 'onboarding/import-from-firefly-ledger-desktop.svg',
-            darkmode: 'onboarding/import-from-firefly-ledger-desktop.svg',
-        },
         'ledger-connect-connected-desktop': {
             lightmode: 'onboarding/ledger-connect-connected-desktop.svg',
             darkmode: 'onboarding/ledger-connect-connected-desktop.svg',
