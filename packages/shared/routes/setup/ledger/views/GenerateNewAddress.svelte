@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Icon, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
-    import { isLedgerConnected, ledgerSimulator } from 'shared/lib/ledger'
+    import { isLedgerConnected, ledgerSimulator, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
     import { popupState } from 'shared/lib/popup'
     import { api } from 'shared/lib/wallet'
@@ -15,55 +15,53 @@
 
     const dispatch = createEventDispatcher()
 
-    // TODO: remove this?
-    $: if (!$isLedgerConnected && !$popupState?.active) {
-        handleBackClick()
-    }
-
     $: illustration = confirmed ? 'ledger-generate-address-desktop' : 'ledger-generate-address-success-desktop'
 
     function generateNewAddress() {
         busy = true
         newAddress = null
 
-        api.getAccounts({
-            onSuccess(getAccountsResponse) {
-                // If we have already created an account, just get the first address of the first account
-                if (getAccountsResponse.payload.length > 0) {
-                    newAddress = getAccountsResponse.payload[0].addresses[0].address
-                    busy = false
-                } else {
-                    const officialNodes = getOfficialNodes()
-                    const officialNetwork = getOfficialNetwork()
-                    api.createAccount(
-                        {
-                            clientOptions: {
-                                nodes: officialNodes,
-                                node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
-                                network: officialNetwork,
+        const _onConnected = () =>
+            api.getAccounts({
+                onSuccess(getAccountsResponse) {
+                    // If we have already created an account, just get the first address of the first account
+                    if (getAccountsResponse.payload.length > 0) {
+                        newAddress = getAccountsResponse.payload[0].addresses[0].address
+                        busy = false
+                    } else {
+                        const officialNodes = getOfficialNodes()
+                        const officialNetwork = getOfficialNetwork()
+                        api.createAccount(
+                            {
+                                clientOptions: {
+                                    nodes: officialNodes,
+                                    node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
+                                    network: officialNetwork,
+                                },
+                                alias: `${locale('general.account')} 1`,
+                                signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
                             },
-                            alias: `${locale('general.account')} 1`,
-                            signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
-                        },
-                        {
-                            onSuccess(createAccountResponse) {
-                                newAddress = createAccountResponse.payload.addresses[0].address
+                            {
+                                onSuccess(createAccountResponse) {
+                                    newAddress = createAccountResponse.payload.addresses[0].address
 
-                                busy = false
-                            },
-                            onError(error) {
-                                busy = false
-                                console.error(error)
-                            },
-                        }
-                    )
-                }
-            },
-            onError(getAccountsError) {
-                busy = false
-                console.error(getAccountsError)
-            },
-        })
+                                    busy = false
+                                },
+                                onError(error) {
+                                    busy = false
+                                    console.error(error)
+                                },
+                            }
+                        )
+                    }
+                },
+                onError(getAccountsError) {
+                    busy = false
+                    console.error(getAccountsError)
+                },
+            })
+        const _onCancel = () => (busy = false)
+        promptUserToConnectLedger(_onConnected, _onCancel)
     }
 
     function handleConfirmClick() {
@@ -121,8 +119,8 @@
                 </Button>
             {/if}
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-end items-center bg-gray-50 dark:bg-gray-900">
-            <Illustration width="100%" {illustration} />
+        <div slot="rightpane" class="w-full h-full flex justify-start items-center bg-gray-50 dark:bg-gray-900">
+            <Illustration width="95%" {illustration} />
         </div>
     </OnboardingLayout>
 {/if}

@@ -9,7 +9,7 @@
         formatCurrency,
     } from 'shared/lib/currency'
     import { Electron } from 'shared/lib/electron'
-    import { stopPollingLedgerLegacyStatus } from 'shared/lib/ledger'
+    import { removeLedgerLegacyStatusListener } from 'shared/lib/ledger'
     import { ADDRESS_SECURITY_LEVEL, getLedgerMigrationData, hardwareIndexes } from 'shared/lib/migration'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
@@ -46,7 +46,7 @@
 
     function handleContinueClick() {
         if (legacyLedger) {
-            stopPollingLedgerLegacyStatus()
+            removeLedgerLegacyStatusListener()
         }
         dispatch('next')
     }

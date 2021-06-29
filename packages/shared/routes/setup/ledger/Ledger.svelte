@@ -9,12 +9,11 @@
         Balance,
         Connect,
         GenerateNewAddress,
-        InstallLedgerApp,
+        InstallationGuide,
         LegacyIntro,
         RestoreFromLedger,
         SwitchApps,
     } from './views/'
-    import InstallationGuide from './views/InstallationGuide.svelte'
 
     export let locale
     export let mobile
@@ -24,7 +23,6 @@
         RestoreFromLedger = 'restoreFromLedger',
         LegacyIntro = 'legacyIntro',
         InstallationGuide = 'installationGuide',
-        InstallLedgerApp = 'installLedgerApp',
         GenerateAddress = 'generateAddress',
         SwitchApps = 'switchApps',
         AccountIndex = 'accountIndex',
@@ -51,9 +49,6 @@
 
     const updateMigrationProgress = () => {
         switch (state) {
-            case State.InstallLedgerApp:
-                currentLedgerMigrationProgress.set(LedgerMigrationProgress.InstallLedgerApp)
-                break
             case State.GenerateAddress:
                 currentLedgerMigrationProgress.set(LedgerMigrationProgress.GenerateAddress)
                 break
@@ -78,8 +73,9 @@
                     dispatch('next')
                 } else if ($walletSetupType === SetupType.FireflyLedger) {
                     nextState = State.RestoreFromLedger
+                } else if ($walletSetupType === SetupType.TrinityLedger) {
+                    nextState = State.GenerateAddress
                 }
-                // TODO: add legacy
                 break
             case State.RestoreFromLedger:
                 dispatch('next')
@@ -88,12 +84,12 @@
                 nextState = State.InstallationGuide
                 break
             case State.InstallationGuide:
-                nextState = State.InstallLedgerApp
-                break
-            case State.InstallLedgerApp:
-                nextState = State.GenerateAddress
+                nextState = State.Connect
                 break
             case State.GenerateAddress:
+                nextState = State.SwitchApps
+                break
+            case State.SwitchApps:
                 nextState = State.AccountIndex
                 break
             case State.AccountIndex:
@@ -135,10 +131,6 @@
 {:else if state === State.InstallationGuide}
     <Transition>
         <InstallationGuide on:next={_next} on:previous={_previous} {locale} {mobile} />
-    </Transition>
-{:else if state === State.InstallLedgerApp}
-    <Transition>
-        <InstallLedgerApp on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
 {:else if state === State.GenerateAddress}
     <Transition>

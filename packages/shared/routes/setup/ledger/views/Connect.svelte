@@ -1,36 +1,56 @@
 <script>
     import { Button, Icon, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
-    import { ledgerSimulator, promptUserToConnectLedger } from 'shared/lib/ledger'
+    import {
+        isLedgerConnected,
+        ledgerSimulator,
+        pollLedgerDeviceStatus,
+        promptUserToConnectLedger,
+        stopPollingLedgerStatus,
+    } from 'shared/lib/ledger'
     import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
+    import { openPopup } from 'shared/lib/popup'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
     import { api } from 'shared/lib/wallet'
-    import { createEventDispatcher, onMount } from 'svelte'
+    import { createEventDispatcher, onDestroy, onMount } from 'svelte'
 
     export let locale
     export let mobile
 
-    // TODO: add connection logic
-    let connectedAndUnlocked = true
-    let appOpen = true
+    let connectedAndUnlocked
+    let appOpen
+    let polling = false
+
+    // TODO: split logics when exposed
+    $: connectedAndUnlocked = appOpen = $isLedgerConnected
+    $: if ($isLedgerConnected) {
+        stopPollingLedgerStatus()
+        polling = false
+    }
 
     let newLedgerProfile
     let creatingAccount = false
+
+    let LEDGER_STATUS_POLL_INTERVAL = 5000
 
     $: illustration = connectedAndUnlocked && appOpen ? 'ledger-connect-connected-desktop' : 'ledger-connect-disconnected-desktop'
 
     const dispatch = createEventDispatcher()
 
     onMount(() => {
+        pollLedgerDeviceStatus(LEDGER_STATUS_POLL_INTERVAL)
+        polling = true
         newLedgerProfile = $walletSetupType === SetupType.New
     })
+
+    onDestroy(stopPollingLedgerStatus)
 
     function createAccount() {
         creatingAccount = true
         const officialNodes = getOfficialNodes()
         const officialNetwork = getOfficialNetwork()
 
-        const _onConnected = () => {
+        const _onConnected = () =>
             api.createAccount(
                 {
                     clientOptions: {
@@ -52,20 +72,22 @@
                     },
                 }
             )
-        }
         const _onCancel = () => (creatingAccount = false)
         promptUserToConnectLedger(_onConnected, _onCancel)
     }
 
-    function handleTipsClick() {
-        // TODO
+    function handlePopupOpen() {
+        openPopup({
+            type: 'ledgerConnectionGuide',
+        })
     }
 
     function handleContinueClick() {
         if (newLedgerProfile) {
             createAccount()
         } else {
-            dispatch('next')
+            const _onConnected = () => dispatch('next')
+            promptUserToConnectLedger(_onConnected)
         }
     }
 
@@ -97,13 +119,13 @@
             </div>
         </div>
         <div slot="leftpane__action">
-            <Text on:click={handleTipsClick} highlighted classes="flex flex-row justify-center items-center cursor-pointer mb-10">
-                <Icon icon="info" classes="text-blue-500 mr-2" />
-                {locale('views.connectLedger.tips')}
-            </Text>
+            <div on:click={handlePopupOpen} class="mb-10 flex flex-row justify-center cursor-pointer">
+                <Icon icon="info" classes="mr-2 text-blue-500" />
+                <Text secondary highlighted>{locale('popups.ledgerConnectionGuide.title')}</Text>
+            </div>
             <Button
                 classes="w-full"
-                disabled={!connectedAndUnlocked || !appOpen || creatingAccount}
+                disabled={(polling && (!connectedAndUnlocked || !appOpen)) || creatingAccount}
                 onClick={handleContinueClick}>
                 {#if creatingAccount}
                     <Spinner busy message={locale('general.creatingAccount')} classes="justify-center" />
