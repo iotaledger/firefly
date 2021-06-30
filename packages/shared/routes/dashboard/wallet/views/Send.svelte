@@ -3,7 +3,7 @@
     import { Address, Amount, Button, Dropdown, Icon, ProgressBar, Text } from 'shared/components'
     import { clearSendParams, sendParams } from 'shared/lib/app'
     import { parseCurrency } from 'shared/lib/currency'
-    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
+    import { closePopup, openPopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { TransferProgressEventType } from 'shared/lib/typings/events'
@@ -13,7 +13,7 @@
     import { isTransferring, transferState, wallet, WalletAccount } from 'shared/lib/wallet'
     import { getContext, onDestroy, onMount } from 'svelte'
     import type { Readable } from 'svelte/store'
-    import { promptUserToConnectLedger } from "../../../../lib/ledger";
+    import { promptUserToConnectLedger } from "shared/lib/ledger";
 
     export let locale
     export let send
