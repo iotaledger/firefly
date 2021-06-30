@@ -1,12 +1,13 @@
 <script lang="typescript">
-    import { Icon } from 'shared/components'
+    import { Error, Icon } from 'shared/components'
     import { onMount } from 'svelte'
 
     export let value = 0
     export let autofocus = false
-    export let min = 0
-    export let max = 2147483647
     export let classes = ''
+    export let error = ''
+    export let min
+    export let max
 
     let input
 
@@ -18,22 +19,20 @@
 
     const handleInput = (e) => {
         const element = e.currentTarget as HTMLInputElement
+
         validate(element.value)
     }
 
-    function validate(_value) {
-        if (isNaN(_value)) {
-            value = value
-        }
-        _value = parseInt(_value)
+    const handleValueChange = (increment: number) => {
+        if('number' !== typeof value)
+            value = 0
+        else
+            value += increment
+    }
 
-        if (typeof min === 'number') {
-            _value = Math.max(_value, min)
-        }
-        if (typeof max === 'number') {
-            _value = Math.min(_value, max)
-        }
-        value = _value
+    function validate(_value) {
+        if(String(_value).length > 0)
+            value = Math.min(Math.max(_value, min), max)
     }
 </script>
 
@@ -54,8 +53,9 @@
 
 <div class="flex flex-row {classes}">
     <button
+        disabled={value <= min}
         class="group flex items-center justify-center w-8 h-10 border border-solid border-gray-300 dark:border-gray-700"
-        on:click={() => validate(value - 1)}>
+        on:click={() => handleValueChange(-1)}>
         <Icon width={16} height={16} classes="text-gray-500 dark:text-gray-100 group-hover:text-blue-500" icon="minus" />
     </button>
     <input
@@ -67,9 +67,13 @@
         {min}
         {max} />
     <button
-        disabled={typeof value !== 'number'}
+        disabled={value >= max}
         class="group flex items-center justify-center w-8 h-10 border border-solid border-gray-300 dark:border-gray-700"
-        on:click={() => validate(value + 1)}>
+        on:click={() => handleValueChange(1)}>
         <Icon width={16} height={16} icon="plus" classes="text-gray-500 dark:text-gray-100 group-hover:text-blue-500" />
     </button>
 </div>
+
+{#if error}
+    <Error {error} />
+{/if}

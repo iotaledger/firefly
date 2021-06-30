@@ -9,11 +9,27 @@
     export let locale
     export let mobile
 
+    let expert = false
     let loading = false
+
+    let min = 0
+    let max = 2147483647
 
     let index = 0
     let page = 0
-    let expert = false
+
+    $: {
+        if(!isWithinRange(index))
+            index = Math.min(Math.max(index, min), max)
+    }
+
+    $: {
+        if(!isWithinRange(page))
+            page = Math.min(Math.max(page, min), max)
+    }
+
+    let isDisabled = false
+    $: isDisabled = !isValidNumber(index) || !isValidNumber(page) || loading
 
     const dispatch = createEventDispatcher()
 
@@ -48,6 +64,18 @@
     function handleBackClick() {
         dispatch('previous')
     }
+
+    function isValidNumber(n: number): boolean {
+        return isPositiveInteger(n) && isWithinRange(n)
+    }
+
+    function isPositiveInteger(n: number): boolean {
+        return /^[0-9]+$/.test(String(n))
+    }
+
+    function isWithinRange(n: number): boolean {
+        return n >= min && n <= max
+    }
 </script>
 
 {#if mobile}
@@ -70,18 +98,18 @@
                 </div>
                 <div>
                     <Text type="p" secondary classes="mb-2">{locale('views.selectLedgerAccountIndex.accountIndex')}</Text>
-                    <Number bind:value={index} />
+                    <Number bind:value={index} {min} {max} />
                 </div>
                 {#if expert}
                     <div>
                         <Text type="p" secondary classes="mb-2">{locale('views.selectLedgerAccountIndex.accountPage')}</Text>
-                        <Number bind:value={page} />
+                        <Number bind:value={page} {min} {max} />
                     </div>
                 {/if}
             </div>
         </div>
         <div slot="leftpane__action" class="flex flex-col space-y-4">
-            <Button classes="w-full" disabled={loading} onClick={handleContinueClick}>
+            <Button classes="w-full" disabled={isDisabled} onClick={handleContinueClick}>
                 {#if loading}
                     <Spinner busy={true} message={locale('views.generateNewLedgerAddress.generating')} classes="justify-center" />
                 {:else}{locale('actions.confirm')}{/if}
