@@ -18,15 +18,8 @@
     let index = 0
     let page = 0
 
-    $: {
-        if(!isWithinRange(index))
-            index = Math.min(Math.max(index, min), max)
-    }
-
-    $: {
-        if(!isWithinRange(page))
-            page = Math.min(Math.max(page, min), max)
-    }
+    $: index = checkNumber(index)
+    $: page = checkNumber(page)
 
     let isDisabled = false
     $: isDisabled = !isValidNumber(index) || !isValidNumber(page) || loading
@@ -40,6 +33,25 @@
     onMount(() => {
         pollLedgerLegacyStatus()
     })
+
+    function checkNumber(n: number): number {
+        if(!isWithinRange(n))
+            n = Math.min(Math.max(n, min), max)
+
+        return n
+    }
+
+    function isValidNumber(n: number): boolean {
+        return isPositiveInteger(n) && isWithinRange(n)
+    }
+
+    function isPositiveInteger(n: number): boolean {
+        return /^[0-9]+$/.test(String(n))
+    }
+
+    function isWithinRange(n: number): boolean {
+        return n >= min && n <= max
+    }
 
     function handleContinueClick() {
         loading = true
@@ -63,18 +75,6 @@
 
     function handleBackClick() {
         dispatch('previous')
-    }
-
-    function isValidNumber(n: number): boolean {
-        return isPositiveInteger(n) && isWithinRange(n)
-    }
-
-    function isPositiveInteger(n: number): boolean {
-        return /^[0-9]+$/.test(String(n))
-    }
-
-    function isWithinRange(n: number): boolean {
-        return n >= min && n <= max
     }
 </script>
 

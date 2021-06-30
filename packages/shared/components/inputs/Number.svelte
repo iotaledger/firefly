@@ -52,7 +52,6 @@
 
 <div class="flex flex-row {classes}">
     <button
-        disabled={value <= min}
         class="group flex items-center justify-center w-8 h-10 border border-solid border-gray-300 dark:border-gray-700"
         on:click={() => handleValueChange(-1)}>
         <Icon width={16} height={16} classes="text-gray-500 dark:text-gray-100 group-hover:text-blue-500" icon="minus" />
@@ -66,7 +65,6 @@
         {min}
         {max} />
     <button
-        disabled={value >= max}
         class="group flex items-center justify-center w-8 h-10 border border-solid border-gray-300 dark:border-gray-700"
         on:click={() => handleValueChange(1)}>
         <Icon width={16} height={16} icon="plus" classes="text-gray-500 dark:text-gray-100 group-hover:text-blue-500" />
