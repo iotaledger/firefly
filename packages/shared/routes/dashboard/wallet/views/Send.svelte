@@ -13,7 +13,7 @@
     import { isTransferring, transferState, wallet, WalletAccount } from 'shared/lib/wallet'
     import { getContext, onDestroy, onMount } from 'svelte'
     import type { Readable } from 'svelte/store'
-    import { promptUserToConnectLedger } from "shared/lib/ledger";
+    import { promptUserToConnectLedger } from 'shared/lib/ledger'
 
     export let locale
     export let send
@@ -199,44 +199,45 @@
                 }
             }
 
-            handleFnForLedgerConnection(() => openPopup({
-                type: 'transaction',
-                props: {
-                    internal,
-                    amount: amountRaw,
-                    unit,
-                    to: internal ? to.alias : address,
-                    onConfirm: () => triggerSend(internal),
-                },
-            }))
+            handleLedgerConnection(() =>
+                openPopup({
+                    type: 'transaction',
+                    props: {
+                        internal,
+                        amount: amountRaw,
+                        unit,
+                        to: internal ? to.alias : address,
+                        onConfirm: () => triggerSend(internal),
+                    },
+                })
+            )
         }
     }
 
     const triggerSend = (isInternal) => {
         closePopup()
-
-        handleFnForLedgerConnection(composeSendFn(isInternal))
+        const _send = (isInternal: boolean): any => {
+            /**
+             * NOTE: selectedSendType is passed (only to the internalTransfer method) in the
+             * case that we are masquerading as an internal transfer by sending to an address
+             * in another account. Send parameters are reset once the transfer completes.
+             */
+            return () =>
+                isInternal
+                    ? internalTransfer(from.id, to.id, amountRaw, selectedSendType === SEND_TYPE.INTERNAL)
+                    : send(from.id, address, amountRaw)
+        }
+        handleLedgerConnection(_send(isInternal))
     }
 
-    const composeSendFn = (isInternal: boolean): any => {
-        /**
-         * NOTE: selectedSendType is passed (only to the internalTransfer method) in the
-         * case that we are masquerading as an internal transfer by sending to an address
-         * in another account. Send parameters are reset once the transfer completes.
-         */
-        return () => isInternal ? internalTransfer(from.id, to.id, amountRaw, selectedSendType === SEND_TYPE.INTERNAL) : send(from.id, address, amountRaw)
-    }
-
-    const handleFnForLedgerConnection = (sendFn: any) => {
+    const handleLedgerConnection = (onSuccess: any) => {
         /**
          * NOTE: Because the Ledger must be connected to send a transaction,
          * it is important to wrap the send function in the Ledger connection
          * prompt function (only for non-software profiles).
          */
-        if($isSoftwareProfile)
-            sendFn()
-        else
-            promptUserToConnectLedger(sendFn, () => { })
+        if ($isSoftwareProfile) onSuccess()
+        else promptUserToConnectLedger(onSuccess, () => {})
     }
 
     const handleBackClick = () => {
