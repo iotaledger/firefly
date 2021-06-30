@@ -6,8 +6,8 @@
     export let autofocus = false
     export let classes = ''
     export let error = ''
-    export let min
-    export let max
+    export let min = 0
+    export let max = 0
 
     let input
 
@@ -19,7 +19,6 @@
 
     const handleInput = (e) => {
         const element = e.currentTarget as HTMLInputElement
-
         validate(element.value)
     }
 
@@ -31,7 +30,7 @@
     }
 
     function validate(_value) {
-        if(String(_value).length > 0)
+        if('number' === typeof _value && String(_value).length >= 1)
             value = Math.min(Math.max(_value, min), max)
     }
 </script>
