@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Animation, Box, Button, OnboardingLayout, Spinner, Text } from 'shared/components'
+    import { Animation, Box, Button, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
     import {
         AvailableExchangeRates,
         convertToFiat,
@@ -10,18 +10,18 @@
     } from 'shared/lib/currency'
     import { Electron } from 'shared/lib/electron'
     import {
+        ADDRESS_SECURITY_LEVEL,
         confirmedBundles,
         createLedgerMigrationBundle,
-        sendLedgerMigrationBundle,
         createMigrationBundle,
         getInputIndexesForBundle,
+        hardwareIndexes,
         hasBundlesWithSpentAddresses,
         hasSingleBundle,
         migration,
+        sendLedgerMigrationBundle,
         sendMigrationBundle,
         unselectedInputs,
-        hardwareIndexes,
-        ADDRESS_SECURITY_LEVEL
     } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
@@ -69,32 +69,16 @@
             loading = true
 
             if ($walletSetupType === SetupType.TrinityLedger) {
-                 Electron.ledger
+                Electron.ledger
                     .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
                     .then((iota) => {
                         return createLedgerMigrationBundle(0, iota.prepareTransfers, 0, false)
-            })
-            .then(({ trytes, bundleHash }) => {
-                singleMigrationBundleHash = bundleHash
-                return sendLedgerMigrationBundle(bundleHash, trytes);
-            })
-            .then((data) => {
-                   // Save profile
-                        saveProfile($newProfile)
-                        setActiveProfile($newProfile.id)
-
-                        profileInProgress.set(undefined)
-                        newProfile.set(null)
-            })
-            .catch((error) => {
-                loading = false
-                console.error(error)
-            }) 
-        } else {
-                createMigrationBundle(getInputIndexesForBundle($bundles[0]), 0, false)
-                .then((response) => {
-                    singleMigrationBundleHash = response.payload.bundleHash
-                    return sendMigrationBundle(response.payload.bundleHash).then(() => {
+                    })
+                    .then(({ trytes, bundleHash }) => {
+                        singleMigrationBundleHash = bundleHash
+                        return sendLedgerMigrationBundle(bundleHash, trytes)
+                    })
+                    .then((data) => {
                         // Save profile
                         saveProfile($newProfile)
                         setActiveProfile($newProfile.id)
@@ -102,17 +86,33 @@
                         profileInProgress.set(undefined)
                         newProfile.set(null)
                     })
-                })
-                .catch((err) => {
-                    loading = false
-                    if (!err?.snapshot) {
-                        showAppNotification({
-                            type: 'error',
-                            message: locale('views.migrate.error'),
+                    .catch((error) => {
+                        loading = false
+                        console.error(error)
+                    })
+            } else {
+                createMigrationBundle(getInputIndexesForBundle($bundles[0]), 0, false)
+                    .then((response) => {
+                        singleMigrationBundleHash = response.payload.bundleHash
+                        return sendMigrationBundle(response.payload.bundleHash).then(() => {
+                            // Save profile
+                            saveProfile($newProfile)
+                            setActiveProfile($newProfile.id)
+
+                            profileInProgress.set(undefined)
+                            newProfile.set(null)
                         })
-                    }
-                })
-            }  
+                    })
+                    .catch((err) => {
+                        loading = false
+                        if (!err?.snapshot) {
+                            showAppNotification({
+                                type: 'error',
+                                message: locale('views.migrate.error'),
+                            })
+                        }
+                    })
+            }
         } else {
             loading = true
             timeout = setTimeout(() => {
@@ -155,7 +155,11 @@
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            <Animation animation="migrate-desktop" />
+            {#if legacyLedger}
+                <Illustration width="100%" illustration="ledger-migrate-desktop" />
+            {:else}
+                <Animation animation="migrate-desktop" />
+            {/if}
         </div>
     </OnboardingLayout>
 {/if}
