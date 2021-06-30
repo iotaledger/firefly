@@ -1,4 +1,3 @@
-
 import { Electron } from 'shared/lib/electron'
 import { closePopup, openPopup, popupState } from 'shared/lib/popup'
 import { LedgerStatus } from 'shared/lib/typings/wallet'
