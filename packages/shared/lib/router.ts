@@ -204,7 +204,7 @@ export const routerNext = (event) => {
             }
             break
         case AppRoute.Congratulations:
-            updateProfile('gapLimit', get(walletSetupType) === SetupType.New ? 10 : 50)
+            updateProfile('gapLimit', get(walletSetupType) === SetupType.New ? 10 : get(walletSetupType) === SetupType.FireflyLedger ? 10 : 50)
             cleanupSignup()
             login()
             nextRoute = AppRoute.Dashboard
