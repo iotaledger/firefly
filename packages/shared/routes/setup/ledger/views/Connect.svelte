@@ -30,7 +30,7 @@
         polling = false
     }
 
-    let newLedgerProfile
+    let newLedgerProfile = $walletSetupType === SetupType.New
     let creatingAccount = false
 
     let LEDGER_STATUS_POLL_INTERVAL = 5000
@@ -42,7 +42,6 @@
     onMount(() => {
         pollLedgerDeviceStatus(LEDGER_STATUS_POLL_INTERVAL)
         polling = true
-        newLedgerProfile = $walletSetupType === SetupType.New
     })
 
     onDestroy(stopPollingLedgerStatus)

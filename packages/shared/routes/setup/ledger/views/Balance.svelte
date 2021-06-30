@@ -45,9 +45,6 @@
     let isCheckingForBalance = false
 
     function handleContinueClick() {
-        if (legacyLedger) {
-            removeLedgerLegacyStatusListener()
-        }
         dispatch('next')
     }
     function handleBackClick() {
