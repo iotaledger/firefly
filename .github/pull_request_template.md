@@ -12,10 +12,9 @@ Choose a type of change, and delete any options that are not relevant.
 
 - Breaking change (any change that would cause existing functionality to not work as expected)
 - Bug fix (a change which fixes an issue)
-- Chore (a change which maintains or updates existing functionality)
-- Documentation fix
-- Enhancement (a change which adds new functionality)
-- Refactor (a change which improves existing functionality)
+- Docs (changes to the documentation)
+- Chore (refactoring, build scripts or anything else that isn't user-facing)
+- Enhancement (a change which updates or adds new functionality)
 
 ## How the change has been tested
 
