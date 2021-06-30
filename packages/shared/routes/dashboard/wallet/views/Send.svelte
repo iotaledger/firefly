@@ -199,7 +199,7 @@
                 }
             }
 
-            openPopup({
+            handleFnForLedgerConnection(() => openPopup({
                 type: 'transaction',
                 props: {
                     internal,
@@ -208,28 +208,35 @@
                     to: internal ? to.alias : address,
                     onConfirm: () => triggerSend(internal),
                 },
-            })
+            }))
         }
     }
 
-    const triggerSend = (internal) => {
+    const triggerSend = (isInternal) => {
         closePopup()
 
-        let sendFn;
-        if (internal) {
-            // We pass the original selectedSendType in case we are masquerading as
-            // an internal transfer by a send to an address in one of our
-            // other accounts. When the transfer completes it resets
-            // the send params to where it was
-            sendFn = () => internalTransfer(from.id, to.id, amountRaw, selectedSendType === SEND_TYPE.INTERNAL)
-        } else {
-            sendFn = () => send(from.id, address, amountRaw)
-        }
+        handleFnForLedgerConnection(composeSendFn(isInternal))
+    }
 
-        if(!$isSoftwareProfile)
-            promptUserToConnectLedger(sendFn, () => { })
-        else
+    const composeSendFn = (isInternal: boolean): any => {
+        /**
+         * NOTE: selectedSendType is passed (only to the internalTransfer method) in the
+         * case that we are masquerading as an internal transfer by sending to an address
+         * in another account. Send parameters are reset once the transfer completes.
+         */
+        return () => isInternal ? internalTransfer(from.id, to.id, amountRaw, selectedSendType === SEND_TYPE.INTERNAL) : send(from.id, address, amountRaw)
+    }
+
+    const handleFnForLedgerConnection = (sendFn: any) => {
+        /**
+         * NOTE: Because the Ledger must be connected to send a transaction,
+         * it is important to wrap the send function in the Ledger connection
+         * prompt function (only for non-software profiles).
+         */
+        if($isSoftwareProfile)
             sendFn()
+        else
+            promptUserToConnectLedger(sendFn, () => { })
     }
 
     const handleBackClick = () => {
