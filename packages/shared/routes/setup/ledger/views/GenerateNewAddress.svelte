@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Icon, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
-    import { isLedgerConnected, ledgerSimulator, promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { ledgerSimulator, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
     import { popupState } from 'shared/lib/popup'
     import { api } from 'shared/lib/wallet'

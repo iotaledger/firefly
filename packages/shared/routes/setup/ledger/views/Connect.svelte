@@ -1,7 +1,7 @@
 <script>
     import { Button, Icon, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
     import {
-        isLedgerConnected,
+        isLedgerConnected, LedgerDeviceState, ledgerDeviceState,
         ledgerSimulator,
         pollLedgerDeviceStatus,
         promptUserToConnectLedger,
@@ -24,7 +24,7 @@
     let legacyLedger = $walletSetupType === SetupType.TrinityLedger
 
     // TODO: split logics when exposed
-    $: connectedAndUnlocked = appOpen = $isLedgerConnected
+    $: connectedAndUnlocked = appOpen = $ledgerDeviceState === LedgerDeviceState.Connected
     $: if ($isLedgerConnected) {
         stopPollingLedgerStatus()
         polling = false

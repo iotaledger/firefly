@@ -1,5 +1,11 @@
 <script lang="typescript">
-    import { getLedgerDeviceStatus, isLedgerConnected, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
+    import {
+        getLedgerDeviceStatus,
+        ledgerDeviceState,
+        LedgerDeviceState,
+        pollLedgerDeviceStatus,
+        stopPollingLedgerStatus
+    } from 'shared/lib/ledger'
     import { SecurityTile, Text } from 'shared/components'
     import { versionDetails } from 'shared/lib/appUpdater'
     import { diffDates, getBackupWarningColor, isRecentDate } from 'shared/lib/helpers'
@@ -20,12 +26,29 @@
     let ledgerSpinnerTimeout
     let LEDGER_STATUS_POLL_INTERVAL = 5000
 
+    let hardwareDeviceColor = 'gray'
+    $: {
+        switch($ledgerDeviceState) {
+            default:
+            case LedgerDeviceState.Connected:
+                hardwareDeviceColor = 'blue'
+                break
+            case LedgerDeviceState.NotDetected:
+                hardwareDeviceColor = 'red'
+                break
+            case LedgerDeviceState.AppNotOpen:
+                hardwareDeviceColor = 'gray'
+                break
+        }
+    }
+
     const unsubscribe = profiles.subscribe(() => {
         setup()
     })
 
     onMount(() => {
         setup()
+
         if (!$isSoftwareProfile) {
             pollLedgerDeviceStatus(LEDGER_STATUS_POLL_INTERVAL)
         }
@@ -124,8 +147,8 @@
             <!-- Hardware Device -->
             <SecurityTile
                 title={locale('views.dashboard.security.hardwareDevice.title')}
-                message={$isLedgerConnected ? locale('views.dashboard.security.hardwareDevice.detected') : locale('views.dashboard.security.hardwareDevice.noneDetected')}
-                color={$isLedgerConnected ? 'blue' : 'gray'}
+                message={$ledgerDeviceState}
+                color={hardwareDeviceColor}
                 keepDarkThemeIconColor
                 icon="chip"
                 onClick={syncLedgerDeviceStatus}
