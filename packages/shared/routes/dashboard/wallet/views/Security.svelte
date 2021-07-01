@@ -4,7 +4,8 @@
         ledgerDeviceState,
         LedgerDeviceState,
         pollLedgerDeviceStatus,
-        stopPollingLedgerStatus
+        stopPollingLedgerStatus,
+        updateLedgerDeviceState
     } from 'shared/lib/ledger'
     import { SecurityTile, Text } from 'shared/components'
     import { versionDetails } from 'shared/lib/appUpdater'
@@ -50,7 +51,7 @@
         setup()
 
         if (!$isSoftwareProfile) {
-            pollLedgerDeviceStatus(LEDGER_STATUS_POLL_INTERVAL)
+            pollLedgerDeviceStatus(LEDGER_STATUS_POLL_INTERVAL, updateLedgerDeviceState, updateLedgerDeviceState)
         }
     })
 

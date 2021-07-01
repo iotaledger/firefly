@@ -40,10 +40,7 @@ export const isLedgerLegacyConnected = writable<boolean>(false)
 export function getLedgerDeviceStatus(onConnected = () => { }, onDisconnected = () => { }, onError = () => { }) {
     api.getLedgerDeviceStatus(ledgerSimulator, {
         onSuccess(response) {
-            updateLedgerDeviceState()
-
-            const isLedgerConnected = get(ledgerDeviceState) === LedgerDeviceState.Connected
-            if (isLedgerConnected) {
+            if (response.payload?.type === LedgerStatus.Connected) {
                 onConnected()
             } else {
                 onDisconnected()
@@ -55,7 +52,7 @@ export function getLedgerDeviceStatus(onConnected = () => { }, onDisconnected = 
     })
 }
 
-function updateLedgerDeviceState() {
+export function updateLedgerDeviceState() {
     asyncGetLedgerOpenedApp(false)
         .then((data: LedgerAppInfo) => {
             ledgerDeviceState.set(data.name === 'IOTA' ? LedgerDeviceState.Connected : LedgerDeviceState.AppNotOpen)
