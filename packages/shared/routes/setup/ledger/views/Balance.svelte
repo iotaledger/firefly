@@ -15,6 +15,7 @@
         getLedgerMigrationData,
         hardwareIndexes,
         legacyAddressForTesting,
+        resetMigrationState
     } from 'shared/lib/migration'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
@@ -54,7 +55,10 @@
         dispatch('next')
     }
     function handleBackClick() {
-        dispatch('previous')
+        if (!isCheckingForBalance) {
+            resetMigrationState()
+            dispatch('previous')
+        }
     }
 
     // TODO: missing check again for balance function
