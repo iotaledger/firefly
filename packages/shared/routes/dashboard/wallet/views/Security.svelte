@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { getLedgerDeviceStatus, isLedgerConnected, pollLedgerDeviceStatus } from 'shared/lib/ledger'
+    import { getLedgerDeviceStatus, isLedgerConnected, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { SecurityTile, Text } from 'shared/components'
     import { versionDetails } from 'shared/lib/appUpdater'
     import { diffDates, getBackupWarningColor, isRecentDate } from 'shared/lib/helpers'
@@ -33,6 +33,7 @@
 
     onDestroy(() => {
         clearTimeout(ledgerSpinnerTimeout)
+        stopPollingLedgerStatus()
         unsubscribe()
     })
 

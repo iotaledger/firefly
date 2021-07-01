@@ -47,7 +47,7 @@
             "body1": "1. Open Ledger Live and install New IOTA app",
             "body2": "2. Close Ledger Live desktop application",
             "body3": "3. Open the new app on your Ledger device",
-            "progress1": "Install ledger app",
+            "progress1": "Connect your Ledger",
             "progress2": "Generate address",
             "progress3": "Switch ledger app",
             "progress4": "Transfer funds",
@@ -158,23 +158,40 @@
             "haveFireflyLedger": "I have a Firefly ledger backup",
             "haveFireflyLedgerDescription": "Create a fresh account",
             "haveTrinityLedger": "I have a Trinity ledger backup",
-            "haveTrinityLedgerDescription": "Create a fresh Ledger account",
-            "ledgerNotConnected": "Connect your Ledger device and open IOTA Firefly app"
+            "haveTrinityLedgerDescription": "Create a fresh Ledger account"
         },
-        "importFromFireflyLedger": {
+        "connectLedger": {
+            "title": "Connect your Ledger to Firefly",
+            "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed and the following steps are followed.",
+            "trafficLight1": "Connect and unlock your Ledger with your PIN",
+            "trafficLight2": "Open the new IOTA (MIOTA) app on your Ledger",
+            "tips": "Tips if your Ledger isn’t connecting"
+        },
+        "restoreFromFireflyLedger": {
             "title": "Restore from Ledger",
             "body": "Your wallet password is also used to encrypt a Stronghold backup. Enter your wallet password to save your recovery phrase backup to a file.",
             "restoring": "Restoring from ledger..."
         },
-        "importFromTrinityLedger": {
-            "title": "Trinity Ledger migration introduction screen",
-            "body": "This screen explains the main steps of this migration process and provides a step-by-step video guide."
+        "legacyLedgerIntro": {
+            "title": "Start your IOTA Ledger migration using Firefly",
+            "body1": "Firefly will help you to transfer your tokens to the newer Chrysalis network, while ensuring your tokens remain securely on your Ledger device.",
+            "body2": "After your migration, you will be able to send and receive your tokens on Chrysalis network using Firefly with your Ledger.",
+            "readMore": "What to expect from the migration process"
         },
         "generateNewLedgerAddress": {
-            "body": "You need to generate new address in order to transfer your old Trinity account to Firefly.",
-            "generating": "Generating address",
-            "successTitle": "New address generated",
-            "successBody": "You have confirmed that your new Firefly Ledger address is successfully matched and you can now continue the migration process."
+            "title": "Generate new address",
+            "body": "You need to generate new address in order to transfer your old Trinity account to Firefly. Click the button below to continue.",
+            "confirmTitle": "Confirm the new address",
+            "confirmBody": "For security reasons, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger hardware as prompted.",
+            "confirmedTitle": "Address confirmed",
+            "confirmedBody": "You have confirmed that both addresses match in Firefly and your Ledger hardware.",
+            "generating": "Generating address"
+        },
+        "switchLedgerApps": {
+            "title": "Switch Ledger apps",
+            "body": "Please change to the IOTA Legacy app on your Ledger hardware to continue transfer of your funds. When ready, press continue.",
+            "ledgerApp": "IOTA (MIOTA)",
+            "ledgerLegacyApp": "IOTA Legacy"
         },
         "selectLedgerAccountIndex": {
             "title": "Choose Ledger account index",
@@ -560,8 +577,8 @@
             "bodyFirefly": "Firefly is disabled until it is complete. Token migration will still be possible afterwards."
         },
         "ledgerNotConnected": {
-            "connect": "Connect your Ledger device to begin the setup process",
-            "connectLegacy": "Open the old IOTA Ledger app to continue"
+            "connect": "Open the new IOTA (MIOTA) app to continue",
+            "connectLegacy": "Open the IOTA Legacy app on your Ledger device to continue"
         },
         "ledgerConfirmation": {
             "confirm": "To proceed, confirm the prompt displayed on your ledger device"
@@ -574,6 +591,14 @@
                 "Search for apps: IOTA Legacy and IOTA (MIOTA)",
                 "Install both apps: IOTA Legacy and IOTA (MIOTA)",
                 "Remember that it's important to close Ledger Live before returning to Firefly"
+            ]
+        },
+        "ledgerConnectionGuide": {
+            "title": "Tips if your Ledger isn’t connecting",
+            "steps": [
+                "Make sure Ledger Live isn't running in the background",
+                "Ensure you have your Ledger hardware fully unlocked with your PIN",
+                "Open the new IOTA (MIOTA) app on the Ledger hardware"
             ]
         }
     },
@@ -875,7 +900,8 @@
             "insufficientFunds": "This wallet has insufficient funds.",
             "noToAccount": "You have not selected a wallet to send the funds to.",
             "sendingDust": "You cannot send less than 1 Mi.",
-            "leavingDust": "You cannot leave less than 1 Mi on your address."
+            "leavingDust": "You cannot leave less than 1 Mi on your address.",
+            "cancelled": "The transaction was cancelled."
         },
         "node": {
             "invalid": "Please enter a valid URL.",

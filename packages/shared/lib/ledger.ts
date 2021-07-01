@@ -1,16 +1,14 @@
-
 import { Electron } from 'shared/lib/electron'
 import { closePopup, openPopup, popupState } from 'shared/lib/popup'
 import { LedgerAppInfo, LedgerStatus } from 'shared/lib/typings/wallet'
 import { api } from 'shared/lib/wallet'
 import { get, writable } from 'svelte/store'
-import { localize } from './i18n'
 
 import type { Event } from "./typings/events";
 
 export const ledgerSimulator = false
-export const isLedgerConnected = writable<boolean>(true)
-export const isLedgerLegacyConnected = writable<boolean>(true)
+export const isLedgerConnected = writable<boolean>(false)
+export const isLedgerLegacyConnected = writable<boolean>(false)
 
 const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
 
@@ -87,7 +85,7 @@ function openLedgerNotConnectedPopup(legacy: boolean = false, cancel = () => { }
             type: 'ledgerNotConnected',
             hideClose: true,
             props: {
-                message: localize(`popups.ledgerNotConnected.${legacy ? 'connectLegacy' : 'connect'}`),
+                legacy,
                 handleClose: () => cancel()
             },
         })
@@ -102,15 +100,15 @@ export function stopPollingLedgerStatus(): void {
     }
 }
 
-export function pollLedgerLegacyStatus(): void {
+export function addLedgerLegacyStatusListener(): void {
     Electron.ledger.addListener(ledgerLegacyListener)
 }
 
-export function stopPollingLedgerLegacyStatus(): void {
+export function removeLedgerLegacyStatusListener(): void {
     Electron.ledger.removeListener(ledgerLegacyListener)
 }
 
-function ledgerLegacyListener(isConnected) {    
+function ledgerLegacyListener(isConnected) {
     isLedgerLegacyConnected.set(isConnected)
     if (isConnected) {
         closePopup()

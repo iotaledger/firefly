@@ -56,7 +56,7 @@
             })
         } else {
             const gapLimit = $activeProfile?.gapLimit
-            asyncSyncAccounts(gapLimit === undefined ? undefined : 0, gapLimit, 1, false)
+            asyncSyncAccounts(gapLimit === undefined ? undefined : 0, gapLimit, 1)
             updateProfile('gapLimit', undefined)
         }
     }

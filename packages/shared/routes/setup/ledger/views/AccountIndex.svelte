@@ -1,10 +1,10 @@
 <script lang="typescript">
-    import { Button, Number, OnboardingLayout, Spinner, Text, Toggle } from 'shared/components'
+    import { Button, Illustration, Number, OnboardingLayout, Spinner, Text, Toggle } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
-    import { isLedgerLegacyConnected, pollLedgerLegacyStatus } from 'shared/lib/ledger'
+    import { isLedgerLegacyConnected, addLedgerLegacyStatusListener, removeLedgerLegacyStatusListener } from 'shared/lib/ledger'
     import { ADDRESS_SECURITY_LEVEL, getLedgerMigrationData, hardwareIndexes } from 'shared/lib/migration'
     import { popupState } from 'shared/lib/popup'
-    import { createEventDispatcher, onMount } from 'svelte'
+    import { createEventDispatcher, onDestroy, onMount } from 'svelte'
 
     export let locale
     export let mobile
@@ -17,13 +17,8 @@
 
     const dispatch = createEventDispatcher()
 
-    $: if (!$isLedgerLegacyConnected && !$popupState?.active) {
-        handleBackClick()
-    }
-
-    onMount(() => {
-        pollLedgerLegacyStatus()
-    })
+    onMount(addLedgerLegacyStatusListener)
+    onDestroy(removeLedgerLegacyStatusListener)
 
     function handleContinueClick() {
         loading = true
@@ -81,12 +76,14 @@
             </div>
         </div>
         <div slot="leftpane__action" class="flex flex-col space-y-4">
-            <Button classes="w-full" disabled={loading} onClick={handleContinueClick}>
+            <Button classes="w-full" disabled={loading || !$isLedgerLegacyConnected} onClick={handleContinueClick}>
                 {#if loading}
-                    <Spinner busy={true} message={locale('views.generateNewLedgerAddress.generating')} classes="justify-center" />
+                    <Spinner busy={true} message={locale('views.migrate.findingBalance')} classes="justify-center" />
                 {:else}{locale('actions.confirm')}{/if}
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-end items-center bg-pastel-blue dark:bg-gray-900" />
+        <div slot="rightpane" class="w-full h-full flex justify-end items-center bg-orange-50 dark:bg-gray-900">
+            <Illustration width="100%" illustration="ledger-choose-index-desktop" />
+        </div>
     </OnboardingLayout>
 {/if}

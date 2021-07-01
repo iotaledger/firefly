@@ -9,13 +9,19 @@
         formatCurrency,
     } from 'shared/lib/currency'
     import { Electron } from 'shared/lib/electron'
-    import { stopPollingLedgerLegacyStatus } from 'shared/lib/ledger'
-    import { ADDRESS_SECURITY_LEVEL, getLedgerMigrationData, hardwareIndexes } from 'shared/lib/migration'
+    import { removeLedgerLegacyStatusListener } from 'shared/lib/ledger'
+    import {
+        ADDRESS_SECURITY_LEVEL,
+        getLedgerMigrationData,
+        hardwareIndexes,
+        legacyAddressForTesting,
+    } from 'shared/lib/migration'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
+    import { setClipboard } from 'shared/lib/utils'
 
     export let locale
     export let mobile
@@ -45,9 +51,6 @@
     let isCheckingForBalance = false
 
     function handleContinueClick() {
-        if (legacyLedger) {
-            stopPollingLedgerLegacyStatus()
-        }
         dispatch('next')
     }
     function handleBackClick() {
@@ -92,6 +95,11 @@
                 <Text type="h2">{formattedBalance}</Text>
                 <Text type="p" highlighted classes="py-1 uppercase">{fiatBalance}</Text>
             </Box>
+            <div
+                on:click={() => setClipboard($legacyAddressForTesting)}
+                class="cursor-pointer flex mt-2 flex-col items-center bg-gray-50 dark:bg-gray-700 rounded-2xl p-5 text-center">
+                <Text type="pre">{$legacyAddressForTesting}</Text>
+            </div>
         </div>
         <div slot="leftpane__action" class="flex flex-row justify-between items-center space-x-4">
             <Button secondary classes="flex-1" disabled={isCheckingForBalance} onClick={sync}>

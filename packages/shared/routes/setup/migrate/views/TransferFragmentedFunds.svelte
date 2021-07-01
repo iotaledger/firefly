@@ -1,25 +1,25 @@
 <script lang="typescript">
-    import { Animation, Button, OnboardingLayout, Spinner, Text, TransactionItem } from 'shared/components'
+    import { Animation, Button, Illustration, OnboardingLayout, Spinner, Text, TransactionItem } from 'shared/components'
+    import { Electron } from 'shared/lib/electron'
     import {
+        ADDRESS_SECURITY_LEVEL,
         confirmedBundles,
+        createLedgerMigrationBundle,
         createMigrationBundle,
+        createMinedLedgerMigrationBundle,
         getInputIndexesForBundle,
+        hardwareIndexes,
         hasMigratedAndConfirmedAllSelectedBundles,
         hasMigratedAnyBundle,
         migration,
+        sendLedgerMigrationBundle,
         sendMigrationBundle,
         unmigratedBundles,
-        hardwareIndexes,
-        ADDRESS_SECURITY_LEVEL,
-        createMinedLedgerMigrationBundle,
-        sendLedgerMigrationBundle,
-        createLedgerMigrationBundle,
     } from 'shared/lib/migration'
     import { newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
     import { createEventDispatcher, onDestroy } from 'svelte'
-    import { Electron } from 'shared/lib/electron'
 
     export let locale
     export let mobile
@@ -377,7 +377,11 @@
             {/if}
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            <Animation animation="migrate-desktop" />
+            {#if legacyLedger}
+                <Illustration width="100%" illustration="ledger-migrate-desktop" />
+            {:else}
+                <Animation animation="migrate-desktop" />
+            {/if}
         </div>
     </OnboardingLayout>
 {/if}
