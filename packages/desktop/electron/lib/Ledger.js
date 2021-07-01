@@ -1,9 +1,5 @@
 const Transport = require('@ledgerhq/hw-transport-node-hid').default;
 const Iota = require('hw-app-iota').default
-const { ipcRenderer, remote } = require('electron')
-
-const ipc = ipcRenderer;
-const Wallet = remote.getCurrentWindow().webContents;
 
 const Errors = {
     LEDGER_CANCELLED: 'Transaction cancelled on Ledger device.',
@@ -37,9 +33,7 @@ class Ledger {
      */
     async selectSeed(index, page, security) {
         if (!this.connected) {
-            Wallet.send('ledger', { awaitConnection: true });
             await this.awaitConnection();
-            Wallet.send('ledger', { awaitConnection: false });
         }
 
         if (!this.connected) {
@@ -66,7 +60,6 @@ class Ledger {
                 if (connected) {
                     resolve();
                     this.removeListener(callbackSuccess);
-                    ipc.removeListener('ledger', callbackAbort);
                 }
             };
             this.addListener(callbackSuccess);
@@ -74,11 +67,9 @@ class Ledger {
             const callbackAbort = (e, message) => {
                 if (message && message.abort) {
                     this.removeListener(callbackSuccess);
-                    ipc.removeListener('ledger', callbackAbort);
                     reject(Errors.LEDGER_CANCELLED);
                 }
             };
-            ipc.on('ledger', callbackAbort);
         });
     }
 
@@ -101,7 +92,6 @@ class Ledger {
 
                     await this.iota.setActiveSeed(`44'/4218'/${index}'/${page}'`, security || 2);
 
-                    Wallet.send('ledger', { awaitApplication: false });
                     clearTimeout(timeout);
 
                     resolve(true);
@@ -111,7 +101,6 @@ class Ledger {
                     }
                     this.iota = null;
 
-                    Wallet.send('ledger', { awaitApplication: true });
 
                     if (rejected) {
                         return;
@@ -121,7 +110,6 @@ class Ledger {
                     if (error.statusCode === 0x6e00) {
                         timeout = setTimeout(() => callback(), 4000);
                     } else {
-                        Wallet.send('ledger', { awaitApplication: false });
                         reject(error);
                     }
                 }
@@ -133,8 +121,6 @@ class Ledger {
                 if (message && message.abort) {
                     rejected = true;
 
-                    ipc.removeListener('ledger', callbackAbort);
-
                     if (timeout) {
                         clearTimeout(timeout);
                     }
@@ -142,7 +128,6 @@ class Ledger {
                 }
             };
 
-            ipc.on('ledger', callbackAbort);
         });
     }
 
