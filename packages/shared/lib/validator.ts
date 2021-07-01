@@ -782,9 +782,9 @@ export default class ValidatorService {
             [ResponseTypes.NodeInfo]: this.createBaseValidator().add(new NodeInfoValidator()).getFirst(),
             [ResponseTypes.Error]: this.createBaseValidator().getFirst(),
             [ResponseTypes.Panic]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.LegacySeedChecksum]: this.createBaseValidator().getFirst(),
 
             // Legacy seed APIs
+            [ResponseTypes.LegacySeedChecksum]: this.createBaseValidator().getFirst(),
             [ResponseTypes.MigrationData]: this.createBaseValidator().getFirst(),
 
             // Migration
