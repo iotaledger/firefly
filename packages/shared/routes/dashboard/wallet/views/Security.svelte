@@ -2,7 +2,6 @@
     import {
         getLedgerDeviceStatus,
         ledgerDeviceState,
-        LedgerDeviceState,
         pollLedgerDeviceStatus,
         stopPollingLedgerStatus,
         updateLedgerDeviceState
@@ -16,6 +15,7 @@
     import { api } from 'shared/lib/wallet'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
+    import { LedgerDeviceState } from "shared/lib/typings/ledger";
 
     export let locale
 
@@ -148,7 +148,7 @@
             <!-- Hardware Device -->
             <SecurityTile
                 title={locale('views.dashboard.security.hardwareDevice.title')}
-                message={$ledgerDeviceState}
+                message={locale(`views.dashboard.security.hardwareDevice.statuses.${$ledgerDeviceState}`)}
                 color={hardwareDeviceColor}
                 keepDarkThemeIconColor
                 icon="chip"

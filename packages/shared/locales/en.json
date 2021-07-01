@@ -442,9 +442,12 @@
                 },
                 "hardwareDevice": {
                     "title": "Hardware Device",
-                    "detected": "Detected",
-                    "locked": "Locked",
-                    "noneDetected": "None detected"
+                    "statuses": {
+                        "connected": "Connected",
+                        "notDetected": "Not detected",
+                        "appNotOpen": "IOTA app not open",
+                        "mnemonicMismatch": "Mnemonic is mismatched"
+                    }
                 },
                 "strongholdStatus": {
                     "title": "Wallet Status",

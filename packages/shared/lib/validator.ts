@@ -5,7 +5,8 @@ import type { Address } from './typings/address'
 import type { MessageResponse } from './typings/bridge'
 import { ResponseTypes } from './typings/bridge'
 import type { Message } from './typings/message'
-import type { LedgerStatusPayload, StrongholdStatus } from './typings/wallet'
+import type { LedgerStatusPayload } from './typings/ledger'
+import type { StrongholdStatus } from './typings/wallet'
 import type { NodeInfo } from './typings/node'
 
 type Validators =

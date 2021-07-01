@@ -2,36 +2,15 @@ import { Electron } from 'shared/lib/electron'
 import { closePopup, openPopup, popupState } from 'shared/lib/popup'
 import { api } from 'shared/lib/wallet'
 import { get, writable } from 'svelte/store'
+import { ErrorType } from "./typings/events"
+import { LedgerAppInfo, LedgerDeviceState, LedgerStatus } from "./typings/ledger"
 
-import type { Event } from "./typings/events";
-import { ErrorType } from "./typings/events";
+import type { Event } from "./typings/events"
 
 const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
 
 let polling = false
 let intervalTimer
-
-export interface LedgerAppInfo {
-    name: string,
-    version: string
-}
-
-export interface LedgerStatusPayload {
-    type: LedgerStatus
-}
-
-export enum LedgerStatus {
-    Connected = 'Connected',
-    Disconnected = 'Disconnected',
-    Locked = 'Locked'
-}
-
-export enum LedgerDeviceState {
-    Connected = 'Connected',
-    NotDetected = 'Not detected',
-    AppNotOpen = 'IOTA app not open',
-    MnemonicMismatch = 'Mnemonic is mismatched'
-}
 
 export const ledgerSimulator = false
 export const ledgerDeviceState = writable<LedgerDeviceState>(LedgerDeviceState.NotDetected)

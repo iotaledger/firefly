@@ -1,10 +1,11 @@
 import type { Account, AccountIdentifier, Balance, SyncedAccount } from './account'
 import type { Address } from './address'
 import type { ErrorEventPayload } from './events'
+import type { LedgerAppInfo, LedgerStatusPayload } from './ledger'
 import type { Message } from './message'
 import type { NodeInfo } from './node'
 import type { MigrationBundle, MigrationData, SendMigrationBundleResponse, MigrationAddress } from './migration'
-import type { LedgerAppInfo, LedgerStatusPayload, StrongholdStatus } from './wallet'
+import type { StrongholdStatus } from './wallet'
 
 export interface Actor {
     destroy(): void

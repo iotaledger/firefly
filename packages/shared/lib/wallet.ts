@@ -32,8 +32,9 @@ import { formatUnitBestMatch } from 'shared/lib/units'
 import { get, writable, Writable } from 'svelte/store'
 import type { ClientOptions } from './typings/client'
 import type { TransferProgressEventType } from './typings/events'
+import type { LedgerAppInfo, LedgerStatusPayload } from './typings/ledger'
 import type { Message } from './typings/message'
-import type { Duration, LedgerAppInfo, LedgerStatusPayload, StrongholdStatus } from './typings/wallet'
+import type { Duration, StrongholdStatus } from './typings/wallet'
 import type { NodeAuth, NodeInfo } from './typings/node'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
