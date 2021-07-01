@@ -1,15 +1,17 @@
 <script>
     import { Button, Icon, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
     import {
-        isLedgerConnected, LedgerDeviceState, ledgerDeviceState,
+        ledgerDeviceState,
         ledgerSimulator,
         pollLedgerDeviceStatus,
         promptUserToConnectLedger,
         stopPollingLedgerStatus,
+        updateLedgerDeviceState,
     } from 'shared/lib/ledger'
     import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
     import { openPopup } from 'shared/lib/popup'
     import { walletSetupType } from 'shared/lib/router'
+    import { LedgerDeviceState } from "shared/lib/typings/ledger";
     import { SetupType } from 'shared/lib/typings/routes'
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
@@ -17,30 +19,31 @@
     export let locale
     export let mobile
 
-    let connectedAndUnlocked
-    let appOpen
     let polling = false
 
     let legacyLedger = $walletSetupType === SetupType.TrinityLedger
-
-    // TODO: split logics when exposed
-    $: connectedAndUnlocked = appOpen = $ledgerDeviceState === LedgerDeviceState.Connected
-    $: if ($isLedgerConnected) {
-        stopPollingLedgerStatus()
-        polling = false
-    }
 
     let newLedgerProfile = $walletSetupType === SetupType.New
     let creatingAccount = false
 
     let LEDGER_STATUS_POLL_INTERVAL = 5000
 
-    $: illustration = connectedAndUnlocked && appOpen ? 'ledger-connect-connected-desktop' : 'ledger-connect-disconnected-desktop'
+    let isConnected = false
+    let isAppOpen = false
+
+    $: isConnected = $ledgerDeviceState !== LedgerDeviceState.NotDetected
+    $: isAppOpen = $ledgerDeviceState === LedgerDeviceState.Connected
+    $: if (isConnected && isAppOpen) {
+        stopPollingLedgerStatus()
+        polling = false
+    }
+
+    $: illustration = isConnected && isAppOpen ? 'ledger-connect-connected-desktop' : 'ledger-connect-disconnected-desktop'
 
     const dispatch = createEventDispatcher()
 
     onMount(() => {
-        pollLedgerDeviceStatus(LEDGER_STATUS_POLL_INTERVAL)
+        pollLedgerDeviceStatus(LEDGER_STATUS_POLL_INTERVAL, updateLedgerDeviceState, updateLedgerDeviceState)
         polling = true
     })
 
@@ -111,14 +114,14 @@
             <div class="flex flex-col flex-nowrap space-y-2">
                 <div class="flex flex-row space-x-2">
                     <Icon
-                        icon={`status-${connectedAndUnlocked ? 'success' : 'error'}`}
-                        classes={`text-white bg-${connectedAndUnlocked ? 'green' : 'red'}-600 rounded-full`} />
+                        icon={`status-${isConnected ? 'success' : 'error'}`}
+                        classes={`text-white bg-${isConnected ? 'green' : 'red'}-600 rounded-full`} />
                     <Text type="p" secondary>{locale('views.connectLedger.trafficLight1')}</Text>
                 </div>
                 <div class="flex flex-row space-x-2">
                     <Icon
-                        icon={`status-${appOpen ? 'success' : 'error'}`}
-                        classes={`text-white bg-${appOpen ? 'green' : 'red'}-600 rounded-full`} />
+                        icon={`status-${isAppOpen ? 'success' : 'error'}`}
+                        classes={`text-white bg-${isAppOpen ? 'green' : 'red'}-600 rounded-full`} />
                     <Text type="p" secondary>{locale('views.connectLedger.trafficLight2')}</Text>
                 </div>
             </div>
@@ -130,7 +133,7 @@
             </div>
             <Button
                 classes="w-full"
-                disabled={(polling && (!connectedAndUnlocked || !appOpen)) || creatingAccount}
+                disabled={(polling && (!isConnected || !isAppOpen)) || creatingAccount}
                 onClick={handleContinueClick}>
                 {#if creatingAccount}
                     <Spinner busy message={locale('general.creatingAccount')} classes="justify-center" />
