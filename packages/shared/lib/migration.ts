@@ -381,8 +381,7 @@ export const getLedgerMigrationData = (getAddressFn: (index: number) => Promise<
  * 
  * @param {number} bundleIndex 
  * @param {number} offset 
- * @param {boolean} mine
- *  
+ *
  * @returns 
  */
 export const mineLedgerBundle = (
@@ -503,12 +502,12 @@ export const createMinedLedgerMigrationBundle = (
 
 /**
  * Creates migration bundle for ledger
- * 
+ *
  * @method createLedgerMigrationBundle
- * 
- * @param {number} bundleIndex 
- * @param {function} prepareTransfersFn 
- * 
+ *
+ * @param {number} bundleIndex
+ * @param {function} prepareTransfersFn
+ *
  * @returns {Promise}
  */
 export const createLedgerMigrationBundle = (

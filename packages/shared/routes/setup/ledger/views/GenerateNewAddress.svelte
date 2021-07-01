@@ -1,10 +1,10 @@
 <script lang="typescript">
     import { Button, Icon, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
-    import { isLedgerConnected, ledgerSimulator, promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { ledgerSimulator, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
-    import { popupState } from 'shared/lib/popup'
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
+    import { GetMigrationAddressResponse } from '../../../../lib/typings/bridge';
 
     export let locale
     export let mobile
@@ -21,13 +21,15 @@
         busy = true
         newAddress = null
 
-        const _onConnected = () =>
+        const _onConnected = () => {
             api.getAccounts({
                 onSuccess(getAccountsResponse) {
                     // If we have already created an account, just get the first address of the first account
                     if (getAccountsResponse.payload.length > 0) {
                         newAddress = getAccountsResponse.payload[0].addresses[0].address
                         busy = false
+
+                        displayAddress()
                     } else {
                         const officialNodes = getOfficialNodes()
                         const officialNetwork = getOfficialNetwork()
@@ -44,8 +46,9 @@
                             {
                                 onSuccess(createAccountResponse) {
                                     newAddress = createAccountResponse.payload.addresses[0].address
-
                                     busy = false
+
+                                    displayAddress()
                                 },
                                 onError(error) {
                                     busy = false
@@ -60,8 +63,22 @@
                     console.error(getAccountsError)
                 },
             })
+        }
+
+
         const _onCancel = () => (busy = false)
         promptUserToConnectLedger(_onConnected, _onCancel)
+    }
+
+    function displayAddress() {
+        api.getMigrationAddress(true, {
+            onSuccess() {
+                handleConfirmClick()
+            },
+            onError(err) {
+                console.error(err)
+            }
+        })
     }
 
     function handleConfirmClick() {
