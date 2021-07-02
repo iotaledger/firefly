@@ -924,7 +924,10 @@
             "phraseCaseWord": "The word \"{word}\" should be lower case"
         },
         "ledger": {
-            "notFound": "Ledger device not found."
+            "notFound": "Ledger device not found.",
+            "wrong": "You have connected the wrong Ledger device or the mnemonic has changed.",
+            "locked": "Please unlock your Ledger device by entering the PIN.",
+            "generic": "There was an error connecting to your Ledger device."
         }
     },
     "tooltips": {
