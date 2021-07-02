@@ -9,16 +9,17 @@
     export let mobile
 
     let newAddress = null
-    let busy = false
-    let confirmed = false
+
+    let isBusy = false
+    let isConfirmed = false
 
     const dispatch = createEventDispatcher()
 
-    $: illustration = confirmed ? 'ledger-generate-address-success-desktop' : 'ledger-generate-address-desktop'
+    $: illustration = isConfirmed ? 'ledger-generate-address-success-desktop' : 'ledger-generate-address-desktop'
 
     function generateNewAddress() {
-        busy = true
         newAddress = null
+        isBusy = true
 
         const _onConnected = () => {
             api.getAccounts({
@@ -26,7 +27,7 @@
                     // If we have already created an account, just get the first address of the first account
                     if (getAccountsResponse.payload.length > 0) {
                         newAddress = getAccountsResponse.payload[0].addresses[0].address
-                        busy = false
+                        isBusy = false
 
                         displayAddress()
                     } else {
@@ -45,12 +46,12 @@
                             {
                                 onSuccess(createAccountResponse) {
                                     newAddress = createAccountResponse.payload.addresses[0].address
-                                    busy = false
+                                    isBusy = false
 
                                     displayAddress()
                                 },
                                 onError(error) {
-                                    busy = false
+                                    isBusy = false
                                     console.error(error)
                                 },
                             }
@@ -58,14 +59,14 @@
                     }
                 },
                 onError(getAccountsError) {
-                    busy = false
+                    isBusy = false
                     console.error(getAccountsError)
                 },
             })
         }
 
 
-        const _onCancel = () => (busy = false)
+        const _onCancel = () => (isBusy = false)
         promptUserToConnectLedger(_onConnected, _onCancel)
     }
 
@@ -83,7 +84,7 @@
     }
 
     function handleConfirmClick() {
-        confirmed = true
+        isConfirmed = true
     }
 
     function handleContinueClick() {
@@ -98,12 +99,12 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout onBackClick={handleBackClick} {busy} {locale} showLedgerProgress showLedgerVideoButton>
+    <OnboardingLayout onBackClick={handleBackClick} {isBusy} {locale} showLedgerProgress showLedgerVideoButton>
         <div slot="leftpane__content">
             {#if !newAddress}
                 <Text type="h2" classes="mb-5">{locale('views.generateNewLedgerAddress.title')}</Text>
                 <Text type="p" secondary>{locale('views.generateNewLedgerAddress.body')}</Text>
-            {:else if !confirmed}
+            {:else if !isConfirmed}
                 <Text type="h2" classes="mb-5">{locale('views.generateNewLedgerAddress.confirmTitle')}</Text>
                 <Text type="p" secondary classes="mb-10">{locale('views.generateNewLedgerAddress.confirmBody')}</Text>
                 <div class="rounded-lg bg-gray-50 dark:bg-gray-700 p-4 text-center">
@@ -121,13 +122,11 @@
             {/if}
         </div>
         <div slot="leftpane__action" class="flex flex-col space-y-4">
-            {#if confirmed}
-                <Button classes="w-full" onClick={handleContinueClick}>{locale('actions.continue')}</Button>
-            {:else if newAddress}
-                <Button classes="w-full" onClick={handleConfirmClick}>{locale('actions.confirm')}</Button>
+            {#if newAddress}
+                <Button classes="w-full" disabled={!isConfirmed} onClick={handleContinueClick}>{locale('actions.continue')}</Button>
             {:else}
-                <Button classes="w-full" disabled={busy} onClick={generateNewAddress}>
-                    {#if busy}
+                <Button classes="w-full" disabled={isBusy} onClick={generateNewAddress}>
+                    {#if isBusy}
                         <Spinner
                             busy={true}
                             message={locale('views.generateNewLedgerAddress.generating')}
