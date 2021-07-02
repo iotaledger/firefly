@@ -26,7 +26,7 @@
     let newLedgerProfile = $walletSetupType === SetupType.New
     let creatingAccount = false
 
-    let LEDGER_STATUS_POLL_INTERVAL = 5000
+    let LEDGER_STATUS_POLL_INTERVAL = 1500
 
     let isConnected = false
     let isAppOpen = false
