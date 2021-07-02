@@ -32,13 +32,13 @@
         },
         "create": {
             "title": "Create a wallet",
-            "body": "Something, something about wallet accounts and some important life advice",
+            "body": "Create a new wallet. You can choose a regular software wallet or if you have a Ledger device you can set up a hardware wallet.",
             "softwareAccount": {
-                "title": "Create a regular software account",
-                "description": "Enter an IOTA seed or secret phrase"
+                "title": "I want a software wallet",
+                "description": "Create a 24-word Recovery Phrase"
             },
             "ledgerAccount": {
-                "title": "Create a fresh Ledger account",
+                "title": "I want a hardware wallet",
                 "description": "Ledger Nano S or Nano X required"
             }
         },
@@ -49,14 +49,14 @@
             "body3": "3. Open the new app on your Ledger device",
             "progress1": "Connect your Ledger",
             "progress2": "Generate address",
-            "progress3": "Switch ledger app",
+            "progress3": "Switch Ledger app",
             "progress4": "Transfer funds",
             "watchVideo": "Watch video guide",
             "checkingConnection": "Checking Ledger Connection"
         },
         "ledgerInstallationGuide": {
             "title": "Have you installed the necessary Ledger apps?",
-            "description": "Before you proceed, you must use Ledger Live to find and install both the IOTA Legacy app and the new IOTA (MIOTA) app. Any pre-installed apps should be updated to their latest versions.",
+            "description": "Before you proceed, you must use Ledger Live to find and install both the IOTA Legacy app and the new IOTA app. Any pre-installed apps should be updated to their latest versions.",
             "action": "Yes, I've installed these apps"
         },
         "password": {
@@ -131,7 +131,7 @@
             "importFile": "I have a file backup",
             "importFileDescription": "Upload a Seedvault or Stronghold file",
             "importLedger": "I have a Ledger backup",
-            "importLedgerDescription": "Restore using a seed from Ledger"
+            "importLedgerDescription": "Restore or migrate a Ledger profile"
         },
         "importFromText": {
             "seed": {
@@ -153,24 +153,24 @@
             "body": "Import a backup file to restore your wallets. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
         },
         "importFromLedger": {
-            "title": "Back up from a Ledger",
-            "body": "Something, something about Ledger backups and some important life advice",
-            "haveFireflyLedger": "I have a Firefly ledger backup",
-            "haveFireflyLedgerDescription": "Create a fresh account",
-            "haveTrinityLedger": "I have a Trinity ledger backup",
-            "haveTrinityLedgerDescription": "Create a fresh Ledger account"
+            "title": "Restore or Migrate your Ledger",
+            "body": "Restore an existing Firefly Ledger profile, or migrate your funds from Trinity.",
+            "haveFireflyLedger": "I have a Firefly Ledger backup",
+            "haveFireflyLedgerDescription": "Restore a Firefly profile",
+            "haveTrinityLedger": "I have a Trinity Ledger backup",
+            "haveTrinityLedgerDescription": "Migrate a Trinity profile"
         },
         "connectLedger": {
             "title": "Connect your Ledger to Firefly",
-            "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed and the following steps are followed.",
+            "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed.",
             "trafficLight1": "Connect and unlock your Ledger with your PIN",
-            "trafficLight2": "Open the new IOTA (MIOTA) app on your Ledger",
+            "trafficLight2": "Open the new IOTA app on your Ledger",
             "tips": "Tips if your Ledger isn’t connecting"
         },
         "restoreFromFireflyLedger": {
             "title": "Restore from Ledger",
             "body": "Your wallet password is also used to encrypt a Stronghold backup. Enter your wallet password to save your recovery phrase backup to a file.",
-            "restoring": "Restoring from ledger..."
+            "restoring": "Restoring from Ledger..."
         },
         "legacyLedgerIntro": {
             "title": "Start your IOTA Ledger migration using Firefly",
@@ -190,7 +190,7 @@
         "switchLedgerApps": {
             "title": "Switch Ledger apps",
             "body": "Please change to the IOTA Legacy app on your Ledger hardware to continue transfer of your funds. When ready, press continue.",
-            "ledgerApp": "IOTA (MIOTA)",
+            "ledgerApp": "IOTA",
             "ledgerLegacyApp": "IOTA Legacy"
         },
         "selectLedgerAccountIndex": {
@@ -580,11 +580,11 @@
             "bodyFirefly": "Firefly is disabled until it is complete. Token migration will still be possible afterwards."
         },
         "ledgerNotConnected": {
-            "connect": "Open the new IOTA (MIOTA) app to continue",
+            "connect": "Open the new IOTA app on your Ledger device to continue",
             "connectLegacy": "Open the IOTA Legacy app on your Ledger device to continue"
         },
         "ledgerConfirmation": {
-            "confirm": "To proceed, confirm the prompt displayed on your ledger device"
+            "confirm": "To proceed, confirm the prompt displayed on your Ledger device"
         },
         "ledgerAppGuide": {
             "title": "Guide to installing the Ledger apps",
@@ -599,9 +599,9 @@
         "ledgerConnectionGuide": {
             "title": "Tips if your Ledger isn’t connecting",
             "steps": [
-                "Make sure Ledger Live isn't running in the background",
-                "Ensure you have your Ledger hardware fully unlocked with your PIN",
-                "Open the new IOTA (MIOTA) app on the Ledger hardware"
+                "Make sure Ledger Live is not open on your computer",
+                "Ensure you have unlocked your Ledger device with your PIN",
+                "Open the new IOTA app on your Ledger device"
             ]
         }
     },
@@ -927,7 +927,10 @@
             "phraseCaseWord": "The word \"{word}\" should be lower case"
         },
         "ledger": {
-            "notFound": "Ledger device not found."
+            "notFound": "Ledger device not found.",
+            "wrong": "You have connected the wrong Ledger device or the mnemonic has changed.",
+            "locked": "Please unlock your Ledger device by entering the PIN.",
+            "generic": "There was an error connecting to your Ledger device."
         }
     },
     "tooltips": {

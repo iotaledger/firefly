@@ -61,6 +61,7 @@ export enum ErrorType {
     LedgerDeniedByUser = 'LedgerDeniedByUser',
     LedgerDeviceNotFound = 'LedgerDeviceNotFound',
     LedgerEssenceTooLarge = 'LedgerEssenceTooLarge',
+    WrongLedgerSeedError = 'WrongLedgerSeedError',
 
     // Dust output
     DustError = 'DustError',
