@@ -2,7 +2,7 @@
     import { Button, Password, Spinner, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
     import { asyncSetStrongholdPassword, asyncSyncAccounts, wallet } from 'shared/lib/wallet'
-    import { isStrongholdLocked } from 'shared/lib/profile'
+    import { isStrongholdLocked, isSoftwareProfile } from 'shared/lib/profile'
     
     export let locale
 
@@ -19,7 +19,7 @@
         try {
             error = ''
             isBusy = true
-            if ($isStrongholdLocked) {
+            if ($isSoftwareProfile && $isStrongholdLocked) {
                 await asyncSetStrongholdPassword(password)
             }
             await asyncSyncAccounts(addressIndex, gapIndex, accountDiscoveryThreshold, false)
@@ -45,7 +45,7 @@
         <Text type="p" secondary>{$balanceOverview.balanceFiat}</Text>
     </div>
     <div class="flex w-full flex-row flex-wrap mt-4 mb-6 justify-between">
-        {#if $isStrongholdLocked}
+        {#if $isSoftwareProfile && $isStrongholdLocked}
             <Text type="p" secondary classes="mb-3">{locale('popups.balanceFinder.typePassword')}</Text>
             <Password
                 {error}
@@ -61,7 +61,7 @@
     </div>
     <div class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" secondary onClick={handleCancelClick} disabled={isBusy}>{locale('actions.cancel')}</Button>
-        <Button classes="w-full" onClick={handleFindBalances} disabled={($isStrongholdLocked && password.length === 0) || isBusy}>
+        <Button classes="w-full" onClick={handleFindBalances} disabled={($isSoftwareProfile && $isStrongholdLocked && password.length === 0) || isBusy}>
             {#if isBusy}
                 <Spinner busy={true} message={locale(`actions.searching`)} classes="justify-center" />
             {:else}{locale(`actions.${addressIndex ? 'searchAgain' : 'searchBalances'}`)}{/if}
