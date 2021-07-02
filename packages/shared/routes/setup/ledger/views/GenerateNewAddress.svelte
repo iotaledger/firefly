@@ -4,7 +4,6 @@
     import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
-    import { GetMigrationAddressResponse } from '../../../../lib/typings/bridge';
 
     export let locale
     export let mobile
@@ -76,6 +75,8 @@
                 handleConfirmClick()
             },
             onError(err) {
+                newAddress = null
+
                 console.error(err)
             }
         })
@@ -99,7 +100,6 @@
 {:else}
     <OnboardingLayout onBackClick={handleBackClick} {busy} {locale} showLedgerProgress showLedgerVideoButton>
         <div slot="leftpane__content">
-            <!-- TODO: add ledger prompt confirmation logic and UI -->
             {#if !newAddress}
                 <Text type="h2" classes="mb-5">{locale('views.generateNewLedgerAddress.title')}</Text>
                 <Text type="p" secondary>{locale('views.generateNewLedgerAddress.body')}</Text>
