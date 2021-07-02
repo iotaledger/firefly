@@ -1,5 +1,5 @@
 import { cleanupSignup, login, strongholdPassword, walletPin } from 'shared/lib/app'
-import { activeProfile, profiles, ProfileType, updateProfile } from 'shared/lib/profile'
+import { activeProfile, isSoftwareProfile, profiles, ProfileType, updateProfile } from 'shared/lib/profile'
 import { AccountRoutes, AppRoute, SettingsRoutes, SetupType, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
 import { selectedAccountId } from 'shared/lib/wallet'
 import { get, readable, writable } from 'svelte/store'
@@ -204,7 +204,9 @@ export const routerNext = (event) => {
             }
             break
         case AppRoute.Congratulations:
-            updateProfile('gapLimit', get(walletSetupType) === SetupType.New ? 10 : get(walletSetupType) === SetupType.FireflyLedger ? 10 : 50)
+            const softwareGapLimit = get(walletSetupType) === SetupType.New ? 10 : 50
+            const ledgerGapLimit = get(walletSetupType) === SetupType.New ? 1 : 10
+            updateProfile('gapLimit', get(isSoftwareProfile) ? softwareGapLimit : ledgerGapLimit)
             cleanupSignup()
             login()
             nextRoute = AppRoute.Dashboard
