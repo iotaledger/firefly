@@ -1572,7 +1572,7 @@ dependencies = [
 [[package]]
 name = "iota-client"
 version = "1.0.1"
-source = "git+https://github.com/iotaledger/iota.rs?branch=dev#35aa507a264c9eb313cd73c3abcf1cb14e7eafcf"
+source = "git+https://github.com/iotaledger/iota.rs?branch=dev#4792a492c363b4f49033323d1eb5cc2eb48f8464"
 dependencies = [
  "async-trait",
  "bee-common",
@@ -1693,7 +1693,7 @@ dependencies = [
 [[package]]
 name = "iota-ledger"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/ledger.rs?rev=79153530377a4c0659e81ad2d5be749aedbf4a61#79153530377a4c0659e81ad2d5be749aedbf4a61"
+source = "git+https://github.com/iotaledger/ledger.rs?rev=dbf4b8ea3ba4c72ee4c88fe13e4ff72d53cd228f#dbf4b8ea3ba4c72ee4c88fe13e4ff72d53cd228f"
 dependencies = [
  "bech32 0.7.3",
  "enum-iterator",
@@ -1725,7 +1725,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=ledger_opened_app#e2a47992880527ef6b32a734ba86e2e3b1eeb72c"
+source = "git+https://github.com/iotaledger/wallet.rs?branch=ledger_opened_app#6c484ae2045844e4e1104f5cbba5603e0e1c6125"
 dependencies = [
  "async-trait",
  "backtrace",
@@ -2592,9 +2592,9 @@ dependencies = [
 
 [[package]]
 name = "plotters-backend"
-version = "0.3.1"
+version = "0.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fd8be10f7485c8a323ea100b20d6052c27cf5968f08f8e3a56ee9f0cf38ebd3d"
+checksum = "d88417318da0eaf0fdcdb51a0ee6c3bed624333bff8f946733049380be67ac1c"
 
 [[package]]
 name = "plotters-svg"
@@ -3765,9 +3765,9 @@ dependencies = [
 
 [[package]]
 name = "unicode-segmentation"
-version = "1.7.1"
+version = "1.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bb0d2e7be6ae3a5fa87eed5fb451aff96f2573d2694942e40543ae0bbe19c796"
+checksum = "8895849a949e7845e06bd6dc1aa51731a103c42707010a5b591c0038fb73385b"
 
 [[package]]
 name = "unicode-width"
