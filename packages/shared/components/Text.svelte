@@ -111,7 +111,7 @@
     </p>
 {:else if type === 'pre'}
     <pre
-        class={`text-11 leading-140 ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
+        class={`text-12 leading-140 ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
         class:secondary
         class:disabled
         class:highlighted
