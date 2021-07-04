@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Input, Spinner, Text, ColorPicker, PatternPicker } from 'shared/components'
+    import { Button, Input, Spinner, Text, AccountTile, ColorPicker, PatternPicker } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
@@ -93,6 +93,10 @@
             <Text type="h5">{locale('general.createAccount')}</Text>
         </div>
         <div class="w-full h-full flex flex-col justify-between">
+            <AccountTile
+                name={accountAlias || 'Wallet name'}
+                balance={'100 Mi'}
+                balanceEquiv={'US$ 0,00'} />
             <Input
                 {error}
                 bind:value={accountAlias}
