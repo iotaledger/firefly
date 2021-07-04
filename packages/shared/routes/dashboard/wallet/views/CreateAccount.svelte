@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Input, Spinner, Text } from 'shared/components'
+    import { Button, Input, Spinner, Text, ColorPicker, PatternPicker } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
@@ -100,6 +100,8 @@
                 autofocus
                 submitHandler={handleCreateClick}
                 disabled={isBusy} />
+            <ColorPicker title='Wallet color' />
+            <PatternPicker title='Wallet pattern' />
         </div>
     </div>
     <!-- Action -->
