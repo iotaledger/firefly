@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Input, Text } from 'shared/components'
+    import { Button, Input, Text, AccountTile } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
@@ -10,6 +10,7 @@
     export let locale: Locale
 
     export let alias
+    export let account
     export let error = ''
 
     const { accounts } = $wallet
@@ -79,6 +80,11 @@
             <Text type="h5">{locale('general.manageAccount')}</Text>
         </div>
         <div class="w-full h-full flex flex-col justify-between">
+            <AccountTile
+                color={account.color}
+                name={account.alias}
+                balance={account.balance}
+                balanceEquiv={account.balanceEquiv} />
             <Input
                 {error}
                 bind:value={accountAlias}
