@@ -58,6 +58,7 @@ export { default as WalletPill } from './WalletPill.svelte'
 export { default as DeveloperProfileIndicator } from './DeveloperProfileIndicator.svelte'
 export { default as CollapsibleBlock } from './CollapsibleBlock.svelte'
 export { default as ColorPicker } from './ColorPicker.svelte'
+export { default as PatternPicker } from './PatternPicker.svelte'
 
 export * from './modals'
 // Charts
