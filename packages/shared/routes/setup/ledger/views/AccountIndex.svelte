@@ -26,8 +26,10 @@
     $: index = checkNumber(index)
     $: page = checkNumber(page)
 
-    let isDisabled = false
-    $: isDisabled = !isValidNumber(index) || !isValidNumber(page)
+    let isValidAccountIndex = false
+    $: isValidAccountIndex = isValidNumber(index)
+    let isValidAccountPage = false
+    $: isValidAccountPage = isValidNumber(page)
 
     const dispatch = createEventDispatcher()
 
@@ -105,18 +107,18 @@
                 </div>
                 <div>
                     <Text type="p" secondary classes="mb-2">{locale('views.selectLedgerAccountIndex.accountIndex')}</Text>
-                    <Number bind:value={index} {min} {max} error={isDisabled ? locale('error.account.index') : ''}/>
+                    <Number bind:value={index} {min} {max} error={!isValidAccountIndex ? locale('error.account.index') : ''} />
                 </div>
                 {#if expert}
                     <div>
                         <Text type="p" secondary classes="mb-2">{locale('views.selectLedgerAccountIndex.accountPage')}</Text>
-                        <Number bind:value={page} {min} {max} />
+                        <Number bind:value={page} {min} {max} error={!isValidAccountPage ? locale('error.account.page') : ''} />
                     </div>
                 {/if}
             </div>
         </div>
         <div slot="leftpane__action" class="flex flex-col space-y-4">
-            <Button classes="w-full" disabled={isDisabled || loading} onClick={handleContinueClick}>
+            <Button classes="w-full" disabled={!isValidAccountIndex || !isValidAccountPage || loading} onClick={handleContinueClick}>
                 {#if loading}
                     <Spinner busy={true} message={locale('views.migrate.findingBalance')} classes="justify-center" />
                 {:else}{locale('actions.confirm')}{/if}
