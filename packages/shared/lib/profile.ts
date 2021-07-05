@@ -76,7 +76,7 @@ export const activeProfile: Readable<Profile | undefined> = derived(
 )
 
 activeProfileId.subscribe((profileId) => {
-    Electron.updateActiveProfile(profileId)
+    //Electron.updateActiveProfile(profileId)
 })
 
 /**
