@@ -27,7 +27,6 @@
                     // If we have already created an account, just get the first address of the first account
                     if (getAccountsResponse.payload.length > 0) {
                         newAddress = getAccountsResponse.payload[0].addresses[0].address
-                        busy = false
 
                         displayAddress()
                     } else {
@@ -46,7 +45,6 @@
                             {
                                 onSuccess(createAccountResponse) {
                                     newAddress = createAccountResponse.payload.addresses[0].address
-                                    busy = false
 
                                     displayAddress()
                                 },
@@ -73,10 +71,13 @@
     function displayAddress() {
         api.getMigrationAddress(true, {
             onSuccess() {
+                busy = false
+
                 handleConfirmClick()
             },
             onError(err) {
                 newAddress = null
+                busy = false
 
                 console.error(err)
             }
