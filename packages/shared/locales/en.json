@@ -861,7 +861,8 @@
             "tilde": "A profile name can't start with the '~' character.",
             "control": "A profile name can't contain a control character.",
             "startDot": "A profile name can't start with the '.' character.",
-            "chars": "A profile name can't contain the following characters <>:\"/\\|?*"
+            "chars": "A profile name can't contain the following characters <>:\"/\\|?*",
+            "index": "Your account index must be a number between 0 and 2,147,483,647."
         },
         "send": {
             "addressLength": "Addresses should be {length, plural, one {1 character} other {# characters}} long.",

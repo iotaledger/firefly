@@ -98,7 +98,7 @@
                 </div>
                 <div>
                     <Text type="p" secondary classes="mb-2">{locale('views.selectLedgerAccountIndex.accountIndex')}</Text>
-                    <Number bind:value={index} {min} {max} />
+                    <Number bind:value={index} {min} {max} error={isDisabled ? locale('error.account.index') : ''}/>
                 </div>
                 {#if expert}
                     <div>
