@@ -1,10 +1,10 @@
 <script lang="typescript">
-    import { Button, Icon, OnboardingLayout, Spinner, Text } from 'shared/components'
-    import { isLedgerConnected, ledgerSimulator } from 'shared/lib/ledger'
+    import { Button, Icon, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
+    import { isLedgerConnected, ledgerSimulator, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
     import { popupState } from 'shared/lib/popup'
     import { api } from 'shared/lib/wallet'
-    import { createEventDispatcher, onMount } from 'svelte'
+    import { createEventDispatcher } from 'svelte'
 
     export let locale
     export let mobile
@@ -15,52 +15,53 @@
 
     const dispatch = createEventDispatcher()
 
-    $: if (!$isLedgerConnected && !$popupState?.active) {
-        handleBackClick()
-    }
+    $: illustration = confirmed ? 'ledger-generate-address-success-desktop' : 'ledger-generate-address-desktop'
 
     function generateNewAddress() {
         busy = true
         newAddress = null
 
-        api.getAccounts({
-            onSuccess(getAccountsResponse) {
-                // If we have already created an account, just get the first address of the first account
-                if (getAccountsResponse.payload.length > 0) {
-                    newAddress = getAccountsResponse.payload[0].addresses[0].address
-                    busy = false
-                } else {
-                    const officialNodes = getOfficialNodes()
-                    const officialNetwork = getOfficialNetwork()
-                    api.createAccount(
-                        {
-                            clientOptions: {
-                                nodes: officialNodes,
-                                node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
-                                network: officialNetwork,
+        const _onConnected = () =>
+            api.getAccounts({
+                onSuccess(getAccountsResponse) {
+                    // If we have already created an account, just get the first address of the first account
+                    if (getAccountsResponse.payload.length > 0) {
+                        newAddress = getAccountsResponse.payload[0].addresses[0].address
+                        busy = false
+                    } else {
+                        const officialNodes = getOfficialNodes()
+                        const officialNetwork = getOfficialNetwork()
+                        api.createAccount(
+                            {
+                                clientOptions: {
+                                    nodes: officialNodes,
+                                    node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
+                                    network: officialNetwork,
+                                },
+                                alias: `${locale('general.account')} 1`,
+                                signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
                             },
-                            alias: `${locale('general.account')} 1`,
-                            signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
-                        },
-                        {
-                            onSuccess(createAccountResponse) {
-                                newAddress = createAccountResponse.payload.addresses[0].address
+                            {
+                                onSuccess(createAccountResponse) {
+                                    newAddress = createAccountResponse.payload.addresses[0].address
 
-                                busy = false
-                            },
-                            onError(error) {
-                                busy = false
-                                console.error(error)
-                            },
-                        }
-                    )
-                }
-            },
-            onError(getAccountsError) {
-                busy = false
-                console.error(getAccountsError)
-            },
-        })
+                                    busy = false
+                                },
+                                onError(error) {
+                                    busy = false
+                                    console.error(error)
+                                },
+                            }
+                        )
+                    }
+                },
+                onError(getAccountsError) {
+                    busy = false
+                    console.error(getAccountsError)
+                },
+            })
+        const _onCancel = () => (busy = false)
+        promptUserToConnectLedger(_onConnected, _onCancel)
     }
 
     function handleConfirmClick() {
@@ -79,24 +80,27 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout onBackClick={handleBackClick} busy={busy} {locale} showLedgerProgress showLedgerVideoButton>
+    <OnboardingLayout onBackClick={handleBackClick} {busy} {locale} showLedgerProgress showLedgerVideoButton>
         <div slot="leftpane__content">
-            {#if confirmed}
-                <div class="flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-5 text-center">
-                    <div class="bg-green-100 rounded-2xl relative -top-10">
-                        <Icon icon="success-check" classes="text-white" />
-                    </div>
-                    <Text type="h2" classes="mb-5 text-center">{locale('views.generateNewLedgerAddress.successTitle')}</Text>
-                    <Text type="p" secondary classes="mb-2">{locale('views.generateNewLedgerAddress.successBody')}</Text>
+            <!-- TODO: add ledger prompt confirmation logic and UI -->
+            {#if !newAddress}
+                <Text type="h2" classes="mb-5">{locale('views.generateNewLedgerAddress.title')}</Text>
+                <Text type="p" secondary>{locale('views.generateNewLedgerAddress.body')}</Text>
+            {:else if !confirmed}
+                <Text type="h2" classes="mb-5">{locale('views.generateNewLedgerAddress.confirmTitle')}</Text>
+                <Text type="p" secondary classes="mb-10">{locale('views.generateNewLedgerAddress.confirmBody')}</Text>
+                <div class="rounded-lg bg-gray-50 dark:bg-gray-700 p-4 text-center">
+                    <Text type="pre">{newAddress}</Text>
                 </div>
             {:else}
-                <Text type="h2" classes="mb-5">{locale('general.generateNewAddress')}</Text>
-                <Text type="p" secondary>{locale('views.generateNewLedgerAddress.body')}</Text>
-                {#if newAddress}
-                    <div class="mt-6 rounded-lg bg-gray-50 dark:bg-gray-700 p-4 text-center">
-                        <Text type="pre">{newAddress}</Text>
+                <Text type="h2" classes="mb-5">{locale('views.generateNewLedgerAddress.confirmedTitle')}</Text>
+                <Text type="p" secondary classes="mb-12">{locale('views.generateNewLedgerAddress.confirmedBody')}</Text>
+                <div class="flex flex-col items-center bg-gray-50 dark:bg-gray-700 rounded-2xl p-5 text-center">
+                    <div class="bg-green-100 rounded-2xl relative -mt-10 mb-5">
+                        <Icon icon="success-check" classes="text-white" />
                     </div>
-                {/if}
+                    <Text type="pre">{newAddress}</Text>
+                </div>
             {/if}
         </div>
         <div slot="leftpane__action" class="flex flex-col space-y-4">
@@ -115,6 +119,8 @@
                 </Button>
             {/if}
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-end items-center bg-pastel-blue dark:bg-gray-900" />
+        <div slot="rightpane" class="w-full h-full flex justify-start items-center bg-gray-50 dark:bg-gray-900">
+            <Illustration width="95%" {illustration} />
+        </div>
     </OnboardingLayout>
 {/if}

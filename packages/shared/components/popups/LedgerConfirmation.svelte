@@ -1,8 +1,6 @@
 <script>
     import { Icon, Text } from 'shared/components'
-    import { closePopup } from 'shared/lib/popup'
 
-    export let handleClose
     export let locale
 </script>
 

@@ -109,7 +109,7 @@
                         <Icon icon="success-check" classes="text-white" />
                     </div>
                     <Text type="h2" classes="mb-5 text-center">{locale('views.congratulations.title')}</Text>
-                    <Text type="p" secondary classes="mb-2">{locale(`views.congratulations.${localizedBody}`)}</Text>
+                    <Text type="p" secondary classes="mb-2 text-center">{locale(`views.congratulations.${localizedBody}`)}</Text>
                 </div>
             {/if}
         </div>

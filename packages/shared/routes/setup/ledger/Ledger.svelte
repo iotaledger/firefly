@@ -7,24 +7,24 @@
     import {
         AccountIndex,
         Balance,
-        Create,
-        FireflyImport,
+        Connect,
         GenerateNewAddress,
-        InstallLedgerApp,
-        LegacyIntro
+        InstallationGuide,
+        LegacyIntro,
+        RestoreFromLedger,
+        SwitchApps,
     } from './views/'
-    import InstallationGuide from './views/InstallationGuide.svelte';
 
     export let locale
     export let mobile
 
     enum State {
-        Create = 'create',
-        FireflyImport = 'fireflyImport',
+        Connect = 'connect',
+        RestoreFromLedger = 'restoreFromLedger',
         LegacyIntro = 'legacyIntro',
         InstallationGuide = 'installationGuide',
-        InstallLedgerApp = 'installLedgerApp',
         GenerateAddress = 'generateAddress',
+        SwitchApps = 'switchApps',
         AccountIndex = 'accountIndex',
         Balance = 'balance',
     }
@@ -37,12 +37,10 @@
     let stateHistory = []
 
     onMount(() => {
-        if ($walletSetupType === SetupType.New) {
-            state = State.Create
+        if ($walletSetupType === SetupType.New || $walletSetupType === SetupType.FireflyLedger) {
+            state = State.Connect
         } else if ($walletSetupType === SetupType.TrinityLedger) {
             state = State.LegacyIntro
-        } else if ($walletSetupType === SetupType.FireflyLedger) {
-            state = State.FireflyImport
         }
         currentLedgerMigrationProgress.set(null)
     })
@@ -51,15 +49,16 @@
 
     const updateMigrationProgress = () => {
         switch (state) {
-            case State.InstallLedgerApp:
+            case State.Connect:
                 currentLedgerMigrationProgress.set(LedgerMigrationProgress.InstallLedgerApp)
                 break
             case State.GenerateAddress:
                 currentLedgerMigrationProgress.set(LedgerMigrationProgress.GenerateAddress)
                 break
-            case State.AccountIndex:
+            case State.SwitchApps:
                 currentLedgerMigrationProgress.set(LedgerMigrationProgress.SwitchLedgerApp)
                 break
+            case State.AccountIndex:
             case State.Balance:
                 currentLedgerMigrationProgress.set(LedgerMigrationProgress.TransferFunds)
                 break
@@ -73,22 +72,28 @@
         let nextState
         let params = event.detail || {}
         switch (state) {
-            case State.Create:
-                dispatch('next')
+            case State.Connect:
+                if ($walletSetupType === SetupType.New) {
+                    dispatch('next')
+                } else if ($walletSetupType === SetupType.FireflyLedger) {
+                    nextState = State.RestoreFromLedger
+                } else if ($walletSetupType === SetupType.TrinityLedger) {
+                    nextState = State.GenerateAddress
+                }
                 break
-            case State.FireflyImport:
+            case State.RestoreFromLedger:
                 dispatch('next')
                 break
             case State.LegacyIntro:
                 nextState = State.InstallationGuide
                 break
             case State.InstallationGuide:
-                nextState = State.InstallLedgerApp
-                break
-            case State.InstallLedgerApp:
-                nextState = State.GenerateAddress
+                nextState = State.Connect
                 break
             case State.GenerateAddress:
+                nextState = State.SwitchApps
+                break
+            case State.SwitchApps:
                 nextState = State.AccountIndex
                 break
             case State.AccountIndex:
@@ -115,13 +120,13 @@
     }
 </script>
 
-{#if state === State.Create}
+{#if state === State.Connect}
     <Transition>
-        <Create on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <Connect on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
-{:else if state === State.FireflyImport}
+{:else if state === State.RestoreFromLedger}
     <Transition>
-        <FireflyImport on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <RestoreFromLedger on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
 {:else if state === State.LegacyIntro}
     <Transition>
@@ -131,13 +136,13 @@
     <Transition>
         <InstallationGuide on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
-{:else if state === State.InstallLedgerApp}
-    <Transition>
-        <InstallLedgerApp on:next={_next} on:previous={_previous} {locale} {mobile} />
-    </Transition>
 {:else if state === State.GenerateAddress}
     <Transition>
         <GenerateNewAddress on:next={_next} on:previous={_previous} {locale} {mobile} />
+    </Transition>
+{:else if state === State.SwitchApps}
+    <Transition>
+        <SwitchApps on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
 {:else if state === State.AccountIndex}
     <Transition>
