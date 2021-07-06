@@ -5,7 +5,7 @@
         addLedgerLegacyStatusListener,
         isLedgerLegacyConnected,
         pollLedgerLegacyStatus,
-        removeLedgerLegacyStatusListener
+        removeLedgerLegacyStatusListener,
     } from 'shared/lib/ledger'
     import { ADDRESS_SECURITY_LEVEL, getLedgerMigrationData, hardwareIndexes } from 'shared/lib/migration'
     import { popupState } from 'shared/lib/popup'
@@ -41,8 +41,7 @@
     onDestroy(removeLedgerLegacyStatusListener)
 
     function checkNumber(n: number): number {
-        if (!isWithinRange(n))
-            n = Math.min(Math.max(n, min), max)
+        if (!isWithinRange(n)) n = Math.min(Math.max(n, min), max)
 
         return n
     }
@@ -70,11 +69,12 @@
             .then((data) => {
                 loading = false
 
-                hardwareIndexes.update((_indexes) => Object.assign({}, _indexes, {
-                    accountIndex: index,
-                    pageIndex: page
-                }))
-                dispatch('next', {balance: data.balance})
+                hardwareIndexes.update((_indexes) =>
+                    Object.assign({}, _indexes, {
+                        accountIndex: index,
+                        pageIndex: page,
+                    })
+                dispatch('next')
             })
             .catch((error) => {
                 loading = false
@@ -118,7 +118,10 @@
             </div>
         </div>
         <div slot="leftpane__action" class="flex flex-col space-y-4">
-            <Button classes="w-full" disabled={!isValidAccountIndex || !isValidAccountPage || loading} onClick={handleContinueClick}>
+            <Button
+                classes="w-full"
+                disabled={!isValidAccountIndex || !isValidAccountPage || loading}
+                onClick={handleContinueClick}>
                 {#if loading}
                     <Spinner busy={true} message={locale('views.migrate.findingBalance')} classes="justify-center" />
                 {:else}{locale('actions.confirm')}{/if}
