@@ -7,6 +7,7 @@ export enum LedgerDeviceState {
     Connected = 'connected',
     NotDetected = 'notDetected',
     AppNotOpen = 'appNotOpen',
+    Locked = 'locked',
     MnemonicMismatch = 'mnemonicMismatch'
 }
 

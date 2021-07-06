@@ -1711,7 +1711,7 @@ dependencies = [
 [[package]]
 name = "iota-ledger"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/ledger.rs?branch=develop#dbf4b8ea3ba4c72ee4c88fe13e4ff72d53cd228f"
+source = "git+https://github.com/iotaledger/ledger.rs?rev=dbf4b8ea3ba4c72ee4c88fe13e4ff72d53cd228f#dbf4b8ea3ba4c72ee4c88fe13e4ff72d53cd228f"
 dependencies = [
  "bech32 0.7.3",
  "enum-iterator",
@@ -1743,7 +1743,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=dev#33581fa540ca1ebf6804f801555ee75e74518614"
+source = "git+https://github.com/iotaledger/wallet.rs?branch=ledger_opened_app#cd2630421d7e82526598ab836c64e127aee21670"
 dependencies = [
  "async-trait",
  "backtrace",

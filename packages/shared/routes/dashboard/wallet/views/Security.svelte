@@ -1,7 +1,7 @@
 <script lang="typescript">
     import {
         getLedgerDeviceStatus,
-        ledgerDeviceState,
+        ledgerDeviceState, ledgerStatus,
         pollLedgerDeviceStatus,
         stopPollingLedgerStatus,
         updateLedgerDeviceState
@@ -38,6 +38,7 @@
                 hardwareDeviceColor = 'red'
                 break
             case LedgerDeviceState.AppNotOpen:
+            case LedgerDeviceState.Locked:
                 hardwareDeviceColor = 'gray'
                 break
         }
