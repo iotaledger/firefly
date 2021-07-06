@@ -1,17 +1,16 @@
 <script>
     import { Button, Icon, Illustration, OnboardingLayout, Text } from 'shared/components'
+    import { promptUserToConnectLedger } from 'shared/lib/ledger'
     import { createEventDispatcher } from 'svelte'
 
     export let locale
     export let mobile
 
-    // TODO: add connection logic
-    let legacyAppDetected = true
-
     const dispatch = createEventDispatcher()
 
     function handleContinueClick() {
-        dispatch('next')
+        const _onConnected = () => dispatch('next')
+        promptUserToConnectLedger(true, _onConnected)
     }
 
     function handleBackClick() {
@@ -43,9 +42,7 @@
             </div>
         </div>
         <div slot="leftpane__action">
-            <Button classes="w-full" disabled={!legacyAppDetected} onClick={handleContinueClick}>
-                {locale('actions.continue')}
-            </Button>
+            <Button classes="w-full" onClick={handleContinueClick}>{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-start items-center bg-gray-50 dark:bg-gray-900">
             <Illustration width="95%" illustration="ledger-switch-app-desktop" />

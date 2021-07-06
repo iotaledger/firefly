@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Animation, Button, Illustration, OnboardingLayout, Spinner, Text, TransactionItem } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
+    import { promptUserToConnectLedger } from 'shared/lib/ledger'
     import {
         ADDRESS_SECURITY_LEVEL,
         confirmedBundles,
@@ -121,41 +122,52 @@
                 // @ts-ignore
                 promise
                     .then((acc) => {
-                        const isMigratingFromTrinityLedger = $walletSetupType === SetupType.TrinityLedger
-
-                        if (isMigratingFromTrinityLedger) {
+                        if (legacyLedger) {
                             if (transaction.trytes && transaction.trytes.length) {
-                                return Electron.ledger
-                                    .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
-                                    .then((iota) => {
-                                        return createMinedLedgerMigrationBundle(transaction.index, iota.prepareTransfers)
-                                    })
-                                    .then(({ trytes, bundleHash }) => {
-                                        return sendLedgerMigrationBundle(bundleHash, trytes)
-                                    })
-                                    .then(() => {
-                                        migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, transaction.bundleHash]
-                                    })
+                                const _onConnected = () => {
+                                    Electron.ledger
+                                        .selectSeed(
+                                            $hardwareIndexes.accountIndex,
+                                            $hardwareIndexes.pageIndex,
+                                            ADDRESS_SECURITY_LEVEL
+                                        )
+                                        .then((iota) => {
+                                            return createMinedLedgerMigrationBundle(transaction.index, iota.prepareTransfers)
+                                        })
+                                        .then(({ trytes, bundleHash }) => {
+                                            return sendLedgerMigrationBundle(bundleHash, trytes)
+                                        })
+                                        .then(() => {
+                                            migratedAndUnconfirmedBundles = [
+                                                ...migratedAndUnconfirmedBundles,
+                                                transaction.bundleHash,
+                                            ]
+                                        })
+                                }
+                                return promptUserToConnectLedger(true, _onConnected)
                             }
 
-                            return Electron.ledger
-                                .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
-                                .then((iota) => {
-                                    return createLedgerMigrationBundle(transaction.index, iota.prepareTransfers)
-                                })
-                                .then(({ trytes, bundleHash }) => {
-                                    transactions = transactions.map((_transaction) => {
-                                        if (_transaction.index === transaction.index) {
-                                            return { ..._transaction, bundleHash }
-                                        }
-
-                                        return _transaction
+                            const _onConnected = () => {
+                                Electron.ledger
+                                    .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
+                                    .then((iota) => {
+                                        return createLedgerMigrationBundle(transaction.index, iota.prepareTransfers)
                                     })
+                                    .then(({ trytes, bundleHash }) => {
+                                        transactions = transactions.map((_transaction) => {
+                                            if (_transaction.index === transaction.index) {
+                                                return { ..._transaction, bundleHash }
+                                            }
 
-                                    return sendLedgerMigrationBundle(bundleHash, trytes).then(() => {
-                                        migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, bundleHash]
+                                            return _transaction
+                                        })
+
+                                        return sendLedgerMigrationBundle(bundleHash, trytes).then(() => {
+                                            migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, bundleHash]
+                                        })
                                     })
-                                })
+                            }
+                            return promptUserToConnectLedger(true, _onConnected)
                         }
 
                         if (transaction.bundleHash) {
@@ -228,14 +240,50 @@
                 // @ts-ignore
                 promise
                     .then((acc) => {
-                        const isMigratingFromTrinityLedger = $walletSetupType === SetupType.TrinityLedger
-
-                        if (isMigratingFromTrinityLedger) {
+                        if (legacyLedger) {
                             if (transaction.trytes && transaction.trytes.length) {
-                                return Electron.ledger
+                                const _onConnected = () => {
+                                    Electron.ledger
+                                        .selectSeed(
+                                            $hardwareIndexes.accountIndex,
+                                            $hardwareIndexes.pageIndex,
+                                            ADDRESS_SECURITY_LEVEL
+                                        )
+                                        .then((iota) => {
+                                            return createMinedLedgerMigrationBundle(transaction.index, iota.prepareTransfers)
+                                        })
+                                        .then(({ trytes, bundleHash }) => {
+                                            transactions = transactions.map((_transaction, i) => {
+                                                if (_transaction.index === transaction.index) {
+                                                    return { ..._transaction, bundleHash }
+                                                }
+
+                                                return _transaction
+                                            })
+
+                                            return sendLedgerMigrationBundle(bundleHash, trytes)
+                                        })
+                                        .then(() => {
+                                            if (!hasBroadcastAnyBundle) {
+                                                hasBroadcastAnyBundle = true
+
+                                                persistProfile()
+                                            }
+
+                                            migratedAndUnconfirmedBundles = [
+                                                ...migratedAndUnconfirmedBundles,
+                                                transaction.bundleHash,
+                                            ]
+                                        })
+                                }
+                                return promptUserToConnectLedger(true, _onConnected)
+                            }
+
+                            const _onConnected = () => {
+                                Electron.ledger
                                     .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
                                     .then((iota) => {
-                                        return createMinedLedgerMigrationBundle(transaction.index, iota.prepareTransfers)
+                                        return createLedgerMigrationBundle(transaction.index, iota.prepareTransfers)
                                     })
                                     .then(({ trytes, bundleHash }) => {
                                         transactions = transactions.map((_transaction, i) => {
@@ -246,43 +294,18 @@
                                             return _transaction
                                         })
 
-                                        return sendLedgerMigrationBundle(bundleHash, trytes)
-                                    })
-                                    .then(() => {
-                                        if (!hasBroadcastAnyBundle) {
-                                            hasBroadcastAnyBundle = true
+                                        return sendLedgerMigrationBundle(bundleHash, trytes).then(() => {
+                                            if (!hasBroadcastAnyBundle) {
+                                                hasBroadcastAnyBundle = true
 
-                                            persistProfile()
-                                        }
+                                                persistProfile()
+                                            }
 
-                                        migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, transaction.bundleHash]
+                                            migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, bundleHash]
+                                        })
                                     })
                             }
-
-                            return Electron.ledger
-                                .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
-                                .then((iota) => {
-                                    return createLedgerMigrationBundle(transaction.index, iota.prepareTransfers)
-                                })
-                                .then(({ trytes, bundleHash }) => {
-                                    transactions = transactions.map((_transaction, i) => {
-                                        if (_transaction.index === transaction.index) {
-                                            return { ..._transaction, bundleHash }
-                                        }
-
-                                        return _transaction
-                                    })
-
-                                    return sendLedgerMigrationBundle(bundleHash, trytes).then(() => {
-                                        if (!hasBroadcastAnyBundle) {
-                                            hasBroadcastAnyBundle = true
-
-                                            persistProfile()
-                                        }
-
-                                        migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, bundleHash]
-                                    })
-                                })
+                            return promptUserToConnectLedger(true, _onConnected)
                         }
 
                         if (transaction.bundleHash) {

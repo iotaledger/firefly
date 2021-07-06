@@ -4,7 +4,7 @@
         ledgerDeviceState,
         pollLedgerDeviceStatus,
         stopPollingLedgerStatus,
-        updateLedgerDeviceState
+        updateLedgerDeviceState,
     } from 'shared/lib/ledger'
     import { SecurityTile, Text } from 'shared/components'
     import { versionDetails } from 'shared/lib/appUpdater'
@@ -15,7 +15,7 @@
     import { api } from 'shared/lib/wallet'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import { LedgerDeviceState } from "shared/lib/typings/ledger";
+    import { LedgerDeviceState } from 'shared/lib/typings/ledger'
 
     export let locale
 
@@ -29,7 +29,7 @@
 
     let hardwareDeviceColor = 'gray'
     $: {
-        switch($ledgerDeviceState) {
+        switch ($ledgerDeviceState) {
             default:
             case LedgerDeviceState.Connected:
                 hardwareDeviceColor = 'blue'
@@ -38,6 +38,7 @@
                 hardwareDeviceColor = 'red'
                 break
             case LedgerDeviceState.AppNotOpen:
+            case LedgerDeviceState.LegacyConnected:
                 hardwareDeviceColor = 'gray'
                 break
         }
@@ -96,7 +97,7 @@
 
     function syncLedgerDeviceStatus() {
         isCheckingLedger = true
-        const _onComplete = () => ledgerSpinnerTimeout = setTimeout(() => (isCheckingLedger = false), 500)
+        const _onComplete = () => (ledgerSpinnerTimeout = setTimeout(() => (isCheckingLedger = false), 500))
         getLedgerDeviceStatus(_onComplete, _onComplete, _onComplete)
     }
 </script>

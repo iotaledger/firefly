@@ -11,7 +11,7 @@
     import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
     import { openPopup } from 'shared/lib/popup'
     import { walletSetupType } from 'shared/lib/router'
-    import { LedgerDeviceState } from "shared/lib/typings/ledger";
+    import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { SetupType } from 'shared/lib/typings/routes'
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
@@ -77,7 +77,7 @@
                 }
             )
         const _onCancel = () => (creatingAccount = false)
-        promptUserToConnectLedger(_onConnected, _onCancel)
+        promptUserToConnectLedger(false, _onConnected, _onCancel)
     }
 
     function handlePopupOpen() {
@@ -91,7 +91,7 @@
             createAccount()
         } else {
             const _onConnected = () => dispatch('next')
-            promptUserToConnectLedger(_onConnected)
+            promptUserToConnectLedger(false, _onConnected)
         }
     }
 

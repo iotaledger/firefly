@@ -7,7 +7,8 @@ export enum LedgerDeviceState {
     Connected = 'connected',
     NotDetected = 'notDetected',
     AppNotOpen = 'appNotOpen',
-    MnemonicMismatch = 'mnemonicMismatch'
+    MnemonicMismatch = 'mnemonicMismatch',
+    LegacyConnected = 'legacyConnected',
 }
 
 export interface LedgerStatusPayload {
@@ -18,4 +19,9 @@ export enum LedgerStatus {
     Connected = 'Connected',
     Disconnected = 'Disconnected',
     Locked = 'Locked'
+}
+
+export enum LedgerApp {
+    IOTA = 'IOTA',
+    IOTALegacy = 'IOTA Legacy'
 }

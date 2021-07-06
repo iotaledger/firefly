@@ -1,15 +1,14 @@
 <script lang="typescript">
     import { Button, Illustration, Number, OnboardingLayout, Spinner, Text, Toggle } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
-    import { isLedgerLegacyConnected, addLedgerLegacyStatusListener, removeLedgerLegacyStatusListener } from 'shared/lib/ledger'
+    import { promptUserToConnectLedger } from 'shared/lib/ledger'
     import { ADDRESS_SECURITY_LEVEL, getLedgerMigrationData, hardwareIndexes } from 'shared/lib/migration'
-    import { popupState } from 'shared/lib/popup'
-    import { createEventDispatcher, onDestroy, onMount } from 'svelte'
+    import { createEventDispatcher } from 'svelte'
 
     export let locale
     export let mobile
 
-    let loading = false
+    let busy = false
 
     let index = 0
     let page = 0
@@ -17,27 +16,29 @@
 
     const dispatch = createEventDispatcher()
 
-    onMount(addLedgerLegacyStatusListener)
-    onDestroy(removeLedgerLegacyStatusListener)
-
     function handleContinueClick() {
-        loading = true
+        busy = true
+        const _onConnected = () => {
+            Electron.ledger
+                .selectSeed(index, page, ADDRESS_SECURITY_LEVEL)
+                .then((iota) => {
+                    return getLedgerMigrationData(iota.getAddress)
+                })
+                .then((data) => {
+                    busy = false
 
-        Electron.ledger
-            .selectSeed(index, page, ADDRESS_SECURITY_LEVEL)
-            .then((iota) => {
-                return getLedgerMigrationData(iota.getAddress)
-            })
-            .then((data) => {
-                loading = false
-
-                hardwareIndexes.update((_indexes) => Object.assign({}, _indexes, { accountIndex: index, pageIndex: page }))
-                dispatch('next', { balance: data.balance })
-            })
-            .catch((error) => {
-                loading = false
-                console.error(error)
-            })
+                    hardwareIndexes.update((_indexes) => Object.assign({}, _indexes, { accountIndex: index, pageIndex: page }))
+                    dispatch('next', { balance: data.balance })
+                })
+                .catch((error) => {
+                    busy = false
+                    console.error(error)
+                })
+        }
+        const _onCancel = () => {
+            busy = false
+        }
+        promptUserToConnectLedger(true, _onConnected, _onCancel)
     }
 
     function handleBackClick() {
@@ -48,7 +49,7 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout onBackClick={handleBackClick} {locale} showLedgerProgress showLedgerVideoButton>
+    <OnboardingLayout {busy} onBackClick={handleBackClick} {locale} showLedgerProgress showLedgerVideoButton>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-5">{locale('views.selectLedgerAccountIndex.title')}</Text>
             <Text type="p" secondary>{locale('views.selectLedgerAccountIndex.body')}</Text>
@@ -76,8 +77,8 @@
             </div>
         </div>
         <div slot="leftpane__action" class="flex flex-col space-y-4">
-            <Button classes="w-full" disabled={loading || !$isLedgerLegacyConnected} onClick={handleContinueClick}>
-                {#if loading}
+            <Button classes="w-full" disabled={busy} onClick={handleContinueClick}>
+                {#if busy}
                     <Spinner busy={true} message={locale('views.migrate.findingBalance')} classes="justify-center" />
                 {:else}{locale('actions.confirm')}{/if}
             </Button>

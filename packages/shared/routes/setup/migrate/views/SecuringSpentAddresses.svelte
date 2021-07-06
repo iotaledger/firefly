@@ -1,14 +1,15 @@
 <script lang="typescript">
     import { BundleMiningLayout, Button, Icon, ProgressBar, Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
+    import { promptUserToConnectLedger } from 'shared/lib/ledger'
     import {
+        ADDRESS_SECURITY_LEVEL,
         createMigrationBundle,
         getInputIndexesForBundle,
-        MINING_TIMEOUT_SECONDS,
-        selectedBundlesToMine,
         hardwareIndexes,
         mineLedgerBundle,
-        ADDRESS_SECURITY_LEVEL,
+        MINING_TIMEOUT_SECONDS,
+        selectedBundlesToMine,
     } from 'shared/lib/migration'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
@@ -34,8 +35,6 @@
         $selectedBundlesToMine.reduce(
             (promise, bundle, idx) =>
                 promise.then((acc) => {
-                    const isMigratingLedger = $walletSetupType === SetupType.TrinityLedger
-
                     const _updateOnSuccess = () => {
                         timeElapsed = (idx + 1) * MINING_TIMEOUT_SECONDS
                         updateProgress()
@@ -58,19 +57,22 @@
                         }
                     }
 
-                    if (isMigratingLedger) {
-                        return Electron.ledger
-                            .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
-                            .then((iota) => {
-                                return mineLedgerBundle(bundle.index, bundle.miningRuns * 10 ** 8)
-                            })
-                            .then(() => {
-                                _updateOnSuccess()
-                            })
-                            .catch((error) => {
-                                console.error('E', error)
-                                _updateOnError()
-                            })
+                    if (legacyLedger) {
+                        const _onConnected = () => {
+                            Electron.ledger
+                                .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
+                                .then((iota) => {
+                                    return mineLedgerBundle(bundle.index, bundle.miningRuns * 10 ** 8)
+                                })
+                                .then(() => {
+                                    _updateOnSuccess()
+                                })
+                                .catch((error) => {
+                                    console.error('E', error)
+                                    _updateOnError()
+                                })
+                        }
+                        return promptUserToConnectLedger(true, _onConnected)
                     }
 
                     return createMigrationBundle(getInputIndexesForBundle(bundle), bundle.miningRuns * 10 ** 8, true)
