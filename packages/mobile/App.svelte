@@ -6,7 +6,7 @@
     import { dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
     import { fetchMarketData } from 'shared/lib/marketData'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
-    import { initRouter, routerNext, routerPrevious } from 'shared/lib/router'
+    import { initRouter, routerNext, routerPrevious, setRoute } from 'shared/lib/router'
     import { AppRoute } from 'shared/lib/typings/routes'
     import {
         Backup,
@@ -25,19 +25,23 @@
     } from 'shared/routes'
     import { onMount } from 'svelte'
 
+    $mobile = true
+    
     $: $appSettings.darkMode ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')
 
     $: if (document.dir !== $dir) {
         document.dir = $dir
     }
-
+    
     let splash = true
 
     setupI18n()
     onMount(async () => {
         setTimeout(() => {
             splash = false
-            initRouter()
+            // changed temporarily by the sake of demonstration purposes
+            //initRouter()
+            setRoute(AppRoute.Protect)
         }, 2000)
 
         await fetchMarketData()
