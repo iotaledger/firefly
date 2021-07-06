@@ -2,7 +2,6 @@
     import { Button, Icon, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { ledgerSimulator, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
-    import { popupState } from 'shared/lib/popup'
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
 
@@ -10,6 +9,7 @@
     export let mobile
 
     let newAddress = null
+
     let busy = false
     let confirmed = false
 
@@ -18,16 +18,17 @@
     $: illustration = confirmed ? 'ledger-generate-address-success-desktop' : 'ledger-generate-address-desktop'
 
     function generateNewAddress() {
-        busy = true
         newAddress = null
+        busy = true
 
-        const _onConnected = () =>
+        const _onConnected = () => {
             api.getAccounts({
                 onSuccess(getAccountsResponse) {
                     // If we have already created an account, just get the first address of the first account
                     if (getAccountsResponse.payload.length > 0) {
                         newAddress = getAccountsResponse.payload[0].addresses[0].address
-                        busy = false
+
+                        displayAddress()
                     } else {
                         const officialNodes = getOfficialNodes()
                         const officialNetwork = getOfficialNetwork()
@@ -45,7 +46,7 @@
                                 onSuccess(createAccountResponse) {
                                     newAddress = createAccountResponse.payload.addresses[0].address
 
-                                    busy = false
+                                    displayAddress()
                                 },
                                 onError(error) {
                                     busy = false
@@ -60,8 +61,27 @@
                     console.error(getAccountsError)
                 },
             })
+        }
+
+
         const _onCancel = () => (busy = false)
         promptUserToConnectLedger(_onConnected, _onCancel)
+    }
+
+    function displayAddress() {
+        api.getMigrationAddress(true, {
+            onSuccess() {
+                busy = false
+
+                handleConfirmClick()
+            },
+            onError(err) {
+                newAddress = null
+                busy = false
+
+                console.error(err)
+            }
+        })
     }
 
     function handleConfirmClick() {
@@ -82,7 +102,6 @@
 {:else}
     <OnboardingLayout onBackClick={handleBackClick} {busy} {locale} showLedgerProgress showLedgerVideoButton>
         <div slot="leftpane__content">
-            <!-- TODO: add ledger prompt confirmation logic and UI -->
             {#if !newAddress}
                 <Text type="h2" classes="mb-5">{locale('views.generateNewLedgerAddress.title')}</Text>
                 <Text type="p" secondary>{locale('views.generateNewLedgerAddress.body')}</Text>
@@ -104,10 +123,8 @@
             {/if}
         </div>
         <div slot="leftpane__action" class="flex flex-col space-y-4">
-            {#if confirmed}
-                <Button classes="w-full" onClick={handleContinueClick}>{locale('actions.continue')}</Button>
-            {:else if newAddress}
-                <Button classes="w-full" onClick={handleConfirmClick}>{locale('actions.confirm')}</Button>
+            {#if newAddress}
+                <Button classes="w-full" disabled={!confirmed} onClick={handleContinueClick}>{locale('actions.continue')}</Button>
             {:else}
                 <Button classes="w-full" disabled={busy} onClick={generateNewAddress}>
                     {#if busy}
