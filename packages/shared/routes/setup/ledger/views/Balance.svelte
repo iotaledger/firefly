@@ -15,7 +15,7 @@
         getLedgerMigrationData,
         hardwareIndexes,
         legacyAddressForTesting,
-        resetMigrationState
+        resetMigrationState,
     } from 'shared/lib/migration'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
@@ -114,7 +114,7 @@
                         classes="justify-center" />
                 {:else}{locale('actions.checkAgain')}{/if}
             </Button>
-            <Button classes="flex-1" disabled={isCheckingForBalance} onClick={handleContinueClick}>
+            <Button classes="flex-1" disabled={isCheckingForBalance || balance === 0} onClick={handleContinueClick}>
                 {locale('actions.continue')}
             </Button>
         </div>
