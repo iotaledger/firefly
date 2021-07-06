@@ -1,4 +1,3 @@
-import { Electron } from 'shared/lib/electron'
 import { closePopup, openPopup, popupState } from 'shared/lib/popup'
 import { api } from 'shared/lib/wallet'
 import { get, writable } from 'svelte/store'
@@ -15,7 +14,6 @@ let intervalTimerLegacy
 
 export const ledgerSimulator = false
 export const ledgerDeviceState = writable<LedgerDeviceState>(LedgerDeviceState.NotDetected)
-export const isLedgerLegacyConnected = writable<boolean>(false)
 
 export function getLedgerDeviceStatus(onConnected = () => { }, onDisconnected = () => { }, onError = () => { }) {
     api.getLedgerDeviceStatus(ledgerSimulator, {
@@ -74,7 +72,6 @@ export function promptUserToConnectLedger(
     const _onCancel = () => {
         if (legacy) {
             stopPollingLedgerLegacyStatus()
-            removeLedgerLegacyStatusListener()
         } else {
             stopPollingLedgerStatus()
         }
@@ -83,7 +80,6 @@ export function promptUserToConnectLedger(
     const _onConnected = () => {
         if (legacy) {
             stopPollingLedgerLegacyStatus()
-            removeLedgerLegacyStatusListener()
         } else {
             stopPollingLedgerStatus()
         }
@@ -101,8 +97,6 @@ export function promptUserToConnectLedger(
         }
     }
     if (legacy) {
-        removeLedgerLegacyStatusListener()
-        addLedgerLegacyStatusListener()
         pollLedgerLegacyDeviceStatus(LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT, _onConnected, _onDisconnected)
     } else {
         getLedgerDeviceStatus(_onConnected, _onDisconnected, _onCancel)
@@ -142,7 +136,8 @@ export function stopPollingLedgerStatus(): void {
 
 function checkLegacyConnection(onConnected = () => { }, onDisconnected = () => { }) {
     const _callBack = () => {
-        if (get(ledgerDeviceState) === LedgerDeviceState.LegacyConnected && get(isLedgerLegacyConnected)) {
+        // TODO: missing open app but locked
+        if (get(ledgerDeviceState) === LedgerDeviceState.LegacyConnected) {
             onConnected()
         }
         else {
@@ -168,16 +163,4 @@ export function stopPollingLedgerLegacyStatus(): void {
         intervalTimerLegacy = null
         pollingLegacy = false
     }
-}
-
-export function addLedgerLegacyStatusListener(): void {
-    Electron.ledger.addListener(ledgerLegacyListener)
-}
-
-export function removeLedgerLegacyStatusListener(): void {
-    Electron.ledger.removeListener(ledgerLegacyListener)
-}
-
-function ledgerLegacyListener(isConnected) {
-    isLedgerLegacyConnected.set(isConnected)
 }
