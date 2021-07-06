@@ -7,6 +7,7 @@ import { ResponseTypes } from './typings/bridge'
 import type { Message } from './typings/message'
 import type { LedgerStatusPayload, StrongholdStatus } from './typings/wallet'
 import type { NodeInfo } from './typings/node'
+import type { MigrationData } from './typings/migration';
 
 type Validators =
     | IdValidator
@@ -541,6 +542,33 @@ class LedgerDeviceStatusValidator extends Validator {
 }
 
 /**
+ * Validation for responses with Ledger migration data
+ */
+class MigrationDataValidator extends Validator {
+    /**
+     * Checks if migration data response is valid
+     * 
+     * @method isValid
+     * 
+     * @param {MessageResponse} response
+     * 
+     * @returns {ValidationResponse}
+     */
+    isValid(response: MessageResponse): ValidationResponse {
+        const payload = response.payload as MigrationData
+
+        if('number' !== typeof payload.lastCheckedAddressIndex) {
+            return super.createResponse(false, {
+                type: ErrorTypes.InvalidType,
+                error: 'Invalid type of address index'
+            })
+        }
+        
+        return super.isValid(response);
+    }
+}
+
+/**
  * Validation for type of response object
  * Type should be the very first thing that gets validated
  */
@@ -786,7 +814,7 @@ export default class ValidatorService {
             [ResponseTypes.LegacySeedChecksum]: this.createBaseValidator().getFirst(),
 
             // Migration
-            [ResponseTypes.MigrationData]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.MigrationData]: this.createBaseValidator().add(new MigrationDataValidator()).getFirst(),
             [ResponseTypes.CreatedMigrationBundle]: this.createBaseValidator().getFirst(),
             [ResponseTypes.SentMigrationBundle]: this.createBaseValidator().getFirst(),
             [ResponseTypes.MigrationAddress]: this.createBaseValidator().getFirst(),
