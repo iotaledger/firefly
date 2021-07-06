@@ -13,7 +13,7 @@
     </div>
     <div class="flex flex-row justify-between">
         {#each colors as color}
-            <div class='w-6 h-6 bg-{color}-500 hover:bg-{color}-600 rounded-lg ring-{color}-100 hover:ring-{color}-200 cursor-pointer' class:ring-4="{color === active}"></div>
+            <div class='w-8 h-8 bg-{color}-500 hover:bg-{color}-600 rounded-lg ring-{color}-100 hover:ring-{color}-200 cursor-pointer' class:ring-4="{color === active}"></div>
         {/each}
     </div>
 </div>

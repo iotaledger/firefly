@@ -12,7 +12,7 @@
     </div>
     <div class="grid grid-cols-4 grid-rows-2 gap-4">
         {#each patterns as pattern}
-            <div class="w-16 h-16 bg-gray-500 rounded-lg flex justify-center items-center">{pattern}</div>
+            <div class="h-20 bg-gray-500 rounded-lg flex justify-center items-center">{pattern}</div>
         {/each}
     </div>
 </div>
