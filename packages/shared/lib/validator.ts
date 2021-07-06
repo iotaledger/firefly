@@ -845,7 +845,6 @@ export default class ValidatorService {
      * @returns {ValidationResponse}
      */
     performValidation(response: MessageResponse | MarketDataValidationResponse | ChrysalisNodeDataValidationResponse | ChrysalisVariablesValidationResponse): ValidationResponse {
-        console.log(response, this.validators)
         return this.validators[response.type].isValid(response)
     }
 }
