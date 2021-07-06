@@ -94,8 +94,8 @@
         </div>
         <div class="w-full h-full flex flex-col justify-between">
             <AccountTile
-                name={accountAlias || 'Wallet name'}
-                balance={'100 Mi'}
+                name={accountAlias || locale('general.accountName')}
+                balance={'0 Mi'}
                 balanceEquiv={'US$ 0,00'} />
             <Input
                 {error}
