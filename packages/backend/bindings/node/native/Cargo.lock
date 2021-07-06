@@ -123,7 +123,7 @@ dependencies = [
  "futures-sink",
  "futures-task",
  "pharos",
- "rustc_version",
+ "rustc_version 0.3.3",
  "tokio",
 ]
 
@@ -470,11 +470,11 @@ checksum = "631ae5198c9be5e753e5cc215e1bd73c2b466a3565173db433f52bb9d3e66dba"
 
 [[package]]
 name = "cast"
-version = "0.2.6"
+version = "0.2.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "57cdfa5d50aad6cb4d44dcab6101a7f79925bd59d82ca42f38a9856a28865374"
+checksum = "4c24dab4283a142afa2fdca129b80ad2c6284e073930f964c3a1293c225ee39a"
 dependencies = [
- "rustc_version",
+ "rustc_version 0.4.0",
 ]
 
 [[package]]
@@ -1251,8 +1251,10 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7fcd999463524c52659517fe2cea98493cfe485d10565e7b0fb07dbba7ad2753"
 dependencies = [
  "cfg-if 1.0.0",
+ "js-sys",
  "libc",
  "wasi 0.10.2+wasi-snapshot-preview1",
+ "wasm-bindgen",
 ]
 
 [[package]]
@@ -1572,7 +1574,7 @@ dependencies = [
 [[package]]
 name = "iota-client"
 version = "1.0.1"
-source = "git+https://github.com/iotaledger/iota.rs?branch=dev#4792a492c363b4f49033323d1eb5cc2eb48f8464"
+source = "git+https://github.com/iotaledger/iota.rs?branch=dev#9e706691e1f1d41aae222bbd36528d29241c79d6"
 dependencies = [
  "async-trait",
  "bee-common",
@@ -1581,7 +1583,7 @@ dependencies = [
  "bee-rest-api",
  "futures",
  "hex",
- "iota-crypto 0.5.1",
+ "iota-crypto 0.6.0",
  "log",
  "num_cpus",
  "regex",
@@ -1691,9 +1693,25 @@ dependencies = [
 ]
 
 [[package]]
+name = "iota-crypto"
+version = "0.6.0"
+source = "git+https://github.com/iotaledger/crypto.rs?rev=e42be4d#e42be4d028edc520a3d71b5f37bf37f5a128dc32"
+dependencies = [
+ "blake2",
+ "digest 0.9.0",
+ "ed25519-zebra",
+ "getrandom 0.2.3",
+ "hmac 0.11.0",
+ "pbkdf2",
+ "serde 1.0.126",
+ "sha2 0.9.5",
+ "unicode-normalization",
+]
+
+[[package]]
 name = "iota-ledger"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/ledger.rs?rev=dbf4b8ea3ba4c72ee4c88fe13e4ff72d53cd228f#dbf4b8ea3ba4c72ee4c88fe13e4ff72d53cd228f"
+source = "git+https://github.com/iotaledger/ledger.rs?branch=develop#dbf4b8ea3ba4c72ee4c88fe13e4ff72d53cd228f"
 dependencies = [
  "bech32 0.7.3",
  "enum-iterator",
@@ -1725,7 +1743,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=ledger_opened_app#6c484ae2045844e4e1104f5cbba5603e0e1c6125"
+source = "git+https://github.com/iotaledger/wallet.rs?branch=dev#33581fa540ca1ebf6804f801555ee75e74518614"
 dependencies = [
  "async-trait",
  "backtrace",
@@ -3067,6 +3085,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "rustc_version"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bfa0f585226d2e68097d4f95d113b15b83a82e819ab25717ec0590d9584ef366"
+dependencies = [
+ "semver 1.0.3",
+]
+
+[[package]]
 name = "rustls"
 version = "0.19.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3171,6 +3198,12 @@ checksum = "f301af10236f6df4160f7c3f04eec6dbc70ace82d23326abad5edee88801c6b6"
 dependencies = [
  "semver-parser 0.10.2",
 ]
+
+[[package]]
+name = "semver"
+version = "1.0.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5f3aac57ee7f3272d8395c6e4f502f434f0e289fcd62876f70daa008c20dcabe"
 
 [[package]]
 name = "semver-parser"
@@ -3544,18 +3577,18 @@ dependencies = [
 
 [[package]]
 name = "thiserror"
-version = "1.0.25"
+version = "1.0.26"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fa6f76457f59514c7eeb4e59d891395fab0b2fd1d40723ae737d64153392e9c6"
+checksum = "93119e4feac1cbe6c798c34d3a53ea0026b0b1de6a120deef895137c0529bfe2"
 dependencies = [
  "thiserror-impl",
 ]
 
 [[package]]
 name = "thiserror-impl"
-version = "1.0.25"
+version = "1.0.26"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8a36768c0fbf1bb15eca10defa29526bda730a2376c2ab4393ccfa16fb1a318d"
+checksum = "060d69a0afe7796bf42e9e2ff91f5ee691fb15c53d38b4b62a9a53eb23164745"
 dependencies = [
  "proc-macro2 1.0.27",
  "quote 1.0.9",
@@ -3608,9 +3641,9 @@ checksum = "cda74da7e1a664f795bb1f8a87ec406fb89a02522cf6e50620d016add6dbbf5c"
 
 [[package]]
 name = "tokio"
-version = "1.7.1"
+version = "1.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5fb2ed024293bb19f7a5dc54fe83bf86532a44c12a2bb8ba40d64a4509395ca2"
+checksum = "570c2eb13b3ab38208130eccd41be92520388791207fde783bda7c1e8ace28d4"
 dependencies = [
  "autocfg",
  "bytes 1.0.1",
@@ -4126,7 +4159,7 @@ dependencies = [
  "futures-sink",
  "log",
  "pharos",
- "rustc_version",
+ "rustc_version 0.3.3",
  "tokio",
  "tungstenite",
 ]
