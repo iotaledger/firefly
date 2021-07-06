@@ -732,6 +732,8 @@
         "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "Copied to clipboard",
         "accountsSynchronized": "Wallet synchronization complete",
+        "deepLinkingIsNotEnabled": "Deep linking is not enable for the wallet.",
+        "deepLinkingInvalidFormat": "The format of the deep link was invalid.",
         "migratedAccountChrysalisDown": "Your funds will become available after Chrysalis on 28th April",
         "migratedAccountChrysalisUp": "Your funds will become available shortly"
     },

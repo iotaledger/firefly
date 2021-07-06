@@ -88,7 +88,7 @@ export enum AdvancedSettings {
     NodeSettings = 'nodeSettings',
     ProofOfWork = 'proofOfWork',
     //DeveloperMode = 'developerMode',
-    //DeepLinks = 'deepLinks',
+    DeepLinks = 'deepLinks',
     BalanceFinder = 'balanceFinder',
     HiddenAccounts = 'hiddenAccounts',
     ErrorLog = 'errorLog',
@@ -99,7 +99,7 @@ export enum AdvancedSettings {
 
 export enum AdvancedSettingsNoProfile {
     //DeveloperMode = 'developerMode',
-    //DeepLinks = 'deepLinks',
+    DeepLinks = 'deepLinks',
     ErrorLog = 'errorLog',
     Diagnostics = 'diagnostics',
 }

@@ -1480,31 +1480,6 @@ dependencies = [
 [[package]]
 name = "iota-client"
 version = "0.5.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?branch=dev#779a4b485f1d437e752d1cd18228fa17a97c864a"
-dependencies = [
- "async-trait",
- "bee-common",
- "bee-message",
- "bee-pow",
- "bee-rest-api",
- "futures",
- "hex",
- "iota-crypto 0.5.1",
- "log",
- "num_cpus",
- "regex",
- "reqwest",
- "serde 1.0.126",
- "serde_json",
- "thiserror",
- "tokio",
- "url",
- "zeroize",
-]
-
-[[package]]
-name = "iota-client"
-version = "0.5.0-alpha.3"
 source = "git+https://github.com/iotaledger/iota.rs?rev=07f4e420edfa1f48f90fc0e75cb7758f4a3c6e3f#07f4e420edfa1f48f90fc0e75cb7758f4a3c6e3f"
 dependencies = [
  "bee-common",
@@ -1549,6 +1524,31 @@ dependencies = [
  "regex",
  "reqwest",
  "rumqttc",
+ "serde 1.0.126",
+ "serde_json",
+ "thiserror",
+ "tokio",
+ "url",
+ "zeroize",
+]
+
+[[package]]
+name = "iota-client"
+version = "0.5.0-alpha.3"
+source = "git+https://github.com/iotaledger/iota.rs?branch=dev#779a4b485f1d437e752d1cd18228fa17a97c864a"
+dependencies = [
+ "async-trait",
+ "bee-common",
+ "bee-message",
+ "bee-pow",
+ "bee-rest-api",
+ "futures",
+ "hex",
+ "iota-crypto 0.5.1",
+ "log",
+ "num_cpus",
+ "regex",
+ "reqwest",
  "serde 1.0.126",
  "serde_json",
  "thiserror",
