@@ -6,11 +6,11 @@
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
-    import { TransferProgressEventType } from 'shared/lib/typings/events'
+    import { Event, TransferProgressEventType } from 'shared/lib/typings/events'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
-    import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
+    import { changeUnits, formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
-    import { isTransferring, transferState, wallet, WalletAccount } from 'shared/lib/wallet'
+    import { api, asyncGetUnusedAddress, isTransferring, transferState, wallet, WalletAccount } from 'shared/lib/wallet'
     import { getContext, onDestroy, onMount } from 'svelte'
     import type { Readable } from 'svelte/store'
     import { promptUserToConnectLedger } from 'shared/lib/ledger'
@@ -101,13 +101,21 @@
     // Ledger confirmation popups
     $: if (
         !$isSoftwareProfile &&
-        ($transferState === TransferProgressEventType.SigningTransaction ||
-            $transferState === TransferProgressEventType.GeneratingRemainderDepositAddress)
+        ($transferState === TransferProgressEventType.SigningTransaction
+            || $transferState === TransferProgressEventType.GeneratingRemainderDepositAddress)
     ) {
         ledgerAwaitingConfirmation = true
+
         openPopup({
             type: 'ledgerConfirmation',
             hideClose: true,
+            props: {
+                fromAlias: from.alias,
+                toAddress: to.depositAddress,
+                toAmount: amount,
+                remainderAddress: 'TODO',
+                remainderAmount: 100
+            }
         })
     } else {
         if (ledgerAwaitingConfirmation) {
@@ -216,6 +224,7 @@
 
     const triggerSend = (isInternal) => {
         closePopup()
+
         const _send = (isInternal: boolean): any => {
             /**
              * NOTE: selectedSendType is passed (only to the internalTransfer method) in the
@@ -227,6 +236,7 @@
                     ? internalTransfer(from.id, to.id, amountRaw, selectedSendType === SEND_TYPE.INTERNAL)
                     : send(from.id, address, amountRaw)
         }
+
         handleLedgerConnection(_send(isInternal))
     }
 
