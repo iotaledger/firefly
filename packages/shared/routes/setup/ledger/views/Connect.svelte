@@ -35,7 +35,7 @@
 
     let LEDGER_STATUS_POLL_INTERVAL = 5000
 
-    $: illustration = connectedAndUnlocked && appOpen ? 'ledger-connect-connected-desktop' : 'ledger-connect-disconnected-desktop'
+    $: illustration = connectedAndUnlocked && appOpen ? 'ledger-connected-desktop' : 'ledger-disconnected-desktop'
 
     const dispatch = createEventDispatcher()
 

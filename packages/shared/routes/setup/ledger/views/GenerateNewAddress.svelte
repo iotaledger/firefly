@@ -15,7 +15,11 @@
 
     const dispatch = createEventDispatcher()
 
-    $: illustration = confirmed ? 'ledger-generate-address-success-desktop' : 'ledger-generate-address-desktop'
+    $: illustration = !newAddress
+        ? 'ledger-generate-address-desktop'
+        : confirmed
+        ? 'ledger-address-confirmed-desktop'
+        : 'ledger-confirm-address-desktop'
 
     function generateNewAddress() {
         newAddress = null
@@ -63,7 +67,6 @@
             })
         }
 
-
         const _onCancel = () => (busy = false)
         promptUserToConnectLedger(_onConnected, _onCancel)
     }
@@ -80,7 +83,7 @@
                 busy = false
 
                 console.error(err)
-            }
+            },
         })
     }
 
@@ -136,8 +139,8 @@
                 </Button>
             {/if}
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-start items-center bg-gray-50 dark:bg-gray-900">
-            <Illustration width="95%" {illustration} />
+        <div slot="rightpane" class="w-full h-full flex justify-center items-center bg-gray-50 dark:bg-gray-900">
+            <Illustration width="100%" {illustration} />
         </div>
     </OnboardingLayout>
 {/if}

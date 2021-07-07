@@ -6,11 +6,11 @@
 
     let stepIndex = 0
     let stepAnimations = [
-        'install-ledger-live-desktop',
-        'ensure-ledger-connected-desktop',
-        'seach-ledger-apps-desktop',
-        'install-ledger-apps-desktop',
-        'close-ledger-live-desktop',
+        'ledger-live-updated-desktop',
+        'ledger-connected-2-desktop',
+        'ledger-search-apps-desktop',
+        'ledger-install-apps-desktop',
+        'ledger-close-live-desktop',
     ]
 
     function changeIndex(increment) {
