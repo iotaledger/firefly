@@ -59,6 +59,7 @@ export { default as DeveloperProfileIndicator } from './DeveloperProfileIndicato
 export { default as CollapsibleBlock } from './CollapsibleBlock.svelte'
 export { default as ColorPicker } from './ColorPicker.svelte'
 export { default as PatternPicker } from './PatternPicker.svelte'
+export { default as Pattern } from './Pattern.svelte'
 
 export * from './modals'
 // Charts
