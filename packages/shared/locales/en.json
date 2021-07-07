@@ -446,7 +446,8 @@
                         "connected": "Connected",
                         "notDetected": "Not detected",
                         "appNotOpen": "IOTA app not open",
-                        "mnemonicMismatch": "Mnemonic is mismatched"
+                        "mnemonicMismatch": "Mnemonic is mismatched",
+                        "legacyConnected": "IOTA Legacy app open"
                     }
                 },
                 "strongholdStatus": {
