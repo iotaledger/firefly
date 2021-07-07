@@ -35,7 +35,7 @@
 
     let LEDGER_STATUS_POLL_INTERVAL = 5000
 
-    $: illustration = connectedAndUnlocked && appOpen ? 'ledger-connect-connected-desktop' : 'ledger-connect-disconnected-desktop'
+    $: illustration = connectedAndUnlocked && appOpen ? 'ledger-connected-desktop' : 'ledger-disconnected-desktop'
 
     const dispatch = createEventDispatcher()
 
@@ -109,16 +109,22 @@
             <Text type="h2" classes="mb-5">{locale('views.connectLedger.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.connectLedger.body')}</Text>
             <div class="flex flex-col flex-nowrap space-y-2">
-                <div class="flex flex-row space-x-2">
-                    <Icon
-                        icon={`status-${connectedAndUnlocked ? 'success' : 'error'}`}
-                        classes={`text-white bg-${connectedAndUnlocked ? 'green' : 'red'}-600 rounded-full`} />
+                <div class="flex flex-row items-center space-x-2">
+                    <div
+                        class={`w-4 h-4 flex justify-center items-center bg-${connectedAndUnlocked ? 'green' : 'red'}-600 rounded-full overflow-hidden`}>
+                        <Icon
+                            width="24"
+                            height="24"
+                            icon={`status-${connectedAndUnlocked ? 'success' : 'error'}`}
+                            classes="text-white" />
+                    </div>
                     <Text type="p" secondary>{locale('views.connectLedger.trafficLight1')}</Text>
                 </div>
-                <div class="flex flex-row space-x-2">
-                    <Icon
-                        icon={`status-${appOpen ? 'success' : 'error'}`}
-                        classes={`text-white bg-${appOpen ? 'green' : 'red'}-600 rounded-full`} />
+                <div class="flex flex-row items-center space-x-2">
+                    <div
+                        class={`w-4 h-4 flex justify-center items-center bg-${appOpen ? 'green' : 'red'}-600 rounded-full overflow-hidden`}>
+                        <Icon icon={`status-${appOpen ? 'success' : 'error'}`} classes="text-white" />
+                    </div>
                     <Text type="p" secondary>{locale('views.connectLedger.trafficLight2')}</Text>
                 </div>
             </div>
