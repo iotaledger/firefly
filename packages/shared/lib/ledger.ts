@@ -3,8 +3,7 @@ import { closePopup, openPopup, popupState } from 'shared/lib/popup'
 import { api } from 'shared/lib/wallet'
 import { get, writable } from 'svelte/store'
 import type { Event } from "./typings/events"
-import { ErrorType } from "./typings/events"
-import { LedgerAppInfo, LedgerDeviceState, LedgerStatus, LedgerStatusPayload } from "./typings/ledger"
+import { LedgerDeviceState, LedgerStatus } from "./typings/ledger"
 
 const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
 
@@ -12,16 +11,15 @@ let polling = false
 let intervalTimer
 
 export const ledgerSimulator = false
-export const ledgerStatus = writable<LedgerStatus>(LedgerStatus.Disconnected)
 export const ledgerDeviceState = writable<LedgerDeviceState>(LedgerDeviceState.NotDetected)
 export const isLedgerLegacyConnected = writable<boolean>(false)
 
 export function getLedgerDeviceStatus(onConnected = () => { }, onDisconnected = () => { }, onError = () => { }) {
     api.getLedgerDeviceStatus(ledgerSimulator, {
-        onSuccess(response: Event<LedgerStatusPayload>) {
-            ledgerStatus.set(response.payload?.type)
+        onSuccess(response: Event<LedgerStatus>) {
+            ledgerDeviceState.set(calculateLedgerDeviceState(response.payload))
 
-            if (response.payload?.type === LedgerStatus.Connected) {
+            if (response.payload?.connected) {
                 onConnected()
             } else {
                 onDisconnected()
@@ -33,37 +31,15 @@ export function getLedgerDeviceStatus(onConnected = () => { }, onDisconnected = 
     })
 }
 
-export function updateLedgerDeviceState(): void {
-    asyncGetLedgerOpenedApp(false)
-        .then((data: LedgerAppInfo) => {
-            ledgerDeviceState.set(calculateLedgerDeviceState(get(ledgerStatus), data))
-        })
-        .catch((err) => {
-            if(err.type === ErrorType.LedgerDeviceNotFound)
-                ledgerDeviceState.set(LedgerDeviceState.NotDetected)
-            else
-                console.error(err)
-        })
-}
-
-export function asyncGetLedgerOpenedApp(isSimulator: boolean): Promise<LedgerAppInfo> {
-    return new Promise<LedgerAppInfo>((resolve, reject) => {
-        api.getLedgerOpenedApp(isSimulator, {
-            onSuccess(response: Event<LedgerAppInfo>) {
-                resolve(response.payload)
-            },
-            onError(err) {
-                reject(err)
-            }
-        })
-    })
-}
-
-export function calculateLedgerDeviceState(status: LedgerStatus, appInfo: LedgerAppInfo): LedgerDeviceState {
-    if(status === LedgerStatus.Locked) {
+export function calculateLedgerDeviceState(status: LedgerStatus): LedgerDeviceState {
+    if(status.locked) {
         return LedgerDeviceState.Locked
     } else {
-        return appInfo.name === 'IOTA' ? LedgerDeviceState.Connected : LedgerDeviceState.AppNotOpen
+        if(status.connected) {
+            return status.appName === 'IOTA' ? LedgerDeviceState.Connected : LedgerDeviceState.AppNotOpen
+        } else {
+            return LedgerDeviceState.NotDetected
+        }
     }
 }
 

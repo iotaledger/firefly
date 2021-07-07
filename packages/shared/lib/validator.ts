@@ -5,7 +5,7 @@ import type { Address } from './typings/address'
 import type { MessageResponse } from './typings/bridge'
 import { ResponseTypes } from './typings/bridge'
 import type { Message } from './typings/message'
-import type { LedgerStatusPayload } from './typings/ledger'
+import type { LedgerStatus } from './typings/ledger'
 import type { StrongholdStatus } from './typings/wallet'
 import type { NodeInfo } from './typings/node'
 
@@ -528,9 +528,9 @@ class LedgerDeviceStatusValidator extends Validator {
      * @returns {ValidationResponse}
      */
     isValid(response: MessageResponse): ValidationResponse {
-        const payload = response.payload as LedgerStatusPayload
+        const payload = response.payload as LedgerStatus
 
-        if ('Connected' !== payload.type && 'Disconnected' !== payload.type && 'Locked' !== payload.type) {
+        if (!payload.hasOwnProperty('connected') || !payload.hasOwnProperty('locked')) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of status received.',

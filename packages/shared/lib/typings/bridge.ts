@@ -1,7 +1,7 @@
 import type { Account, AccountIdentifier, Balance, SyncedAccount } from './account'
 import type { Address } from './address'
 import type { ErrorEventPayload } from './events'
-import type { LedgerAppInfo, LedgerStatusPayload } from './ledger'
+import type { LedgerApp, LedgerStatus } from './ledger'
 import type { Message } from './message'
 import type { NodeInfo } from './node'
 import type { MigrationBundle, MigrationData, SendMigrationBundleResponse, MigrationAddress } from './migration'
@@ -127,8 +127,8 @@ export type SentMigrationBundleResponse = Response<ResponseTypes.SentMigrationBu
 export type GetNodeInfoResponse = Response<ResponseTypes.NodeInfo, NodeInfo>
 export type GetMigrationAddressResponse = Response<ResponseTypes.MigrationAddress, MigrationAddress>
 export type MinedBundleResponse = Response<ResponseTypes.MinedBundle, string[]>
-export type LedgerDeviceStatusResponse = Response<ResponseTypes.LedgerStatus, LedgerStatusPayload>
-export type LedgerOpenedAppResponse = Response<ResponseTypes.LedgerOpenedApp, LedgerAppInfo>
+export type LedgerDeviceStatusResponse = Response<ResponseTypes.LedgerStatus, LedgerStatus>
+export type LedgerOpenedAppResponse = Response<ResponseTypes.LedgerOpenedApp, LedgerApp>
 
 export type MessageResponse =
     RemovedAccountResponse
