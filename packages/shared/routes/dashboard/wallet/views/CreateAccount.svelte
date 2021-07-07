@@ -20,6 +20,8 @@
 
     let accountAlias = ''
     let isBusy = false
+    let color = ''
+    let pattern = ''
 
     // This looks odd but sets a reactive dependency on accountAlias, so when it changes the error will clear
     $: accountAlias, (error = '')
@@ -96,7 +98,8 @@
             <AccountTile
                 name={accountAlias || locale('general.accountName')}
                 balance={'0 Mi'}
-                balanceEquiv={'US$ 0,00'} />
+                balanceEquiv={'US$ 0,00'}
+                {color} />
             <Input
                 {error}
                 bind:value={accountAlias}
@@ -104,8 +107,8 @@
                 autofocus
                 submitHandler={handleCreateClick}
                 disabled={isBusy} />
-            <ColorPicker title='Wallet color' />
-            <PatternPicker title='Wallet pattern' />
+            <ColorPicker title='Wallet color' bind:active={color} />
+            <PatternPicker title='Wallet pattern' bind:color bind:active={pattern} />
         </div>
     </div>
     <!-- Action -->
