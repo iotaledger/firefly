@@ -98,7 +98,7 @@
     function syncLedgerDeviceStatus() {
         isCheckingLedger = true
         const _onComplete = () => (ledgerSpinnerTimeout = setTimeout(() => (isCheckingLedger = false), 500))
-        getLedgerDeviceStatus(_onComplete, _onComplete, _onComplete)
+        getLedgerDeviceStatus(false, _onComplete, _onComplete, _onComplete)
     }
 </script>
 

@@ -43,7 +43,7 @@
     const dispatch = createEventDispatcher()
 
     onMount(() => {
-        pollLedgerDeviceStatus(LEDGER_STATUS_POLL_INTERVAL, updateLedgerDeviceState, updateLedgerDeviceState)
+        pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL, updateLedgerDeviceState, updateLedgerDeviceState)
         polling = true
     })
 
