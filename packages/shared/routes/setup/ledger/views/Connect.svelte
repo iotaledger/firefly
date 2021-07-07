@@ -110,21 +110,15 @@
             <Text type="p" secondary classes="mb-5">{locale('views.connectLedger.body')}</Text>
             <div class="flex flex-col flex-nowrap space-y-2">
                 <div class="flex flex-row items-center space-x-2">
-                    <div
-                        class={`w-4 h-4 flex justify-center items-center bg-${connectedAndUnlocked ? 'green' : 'red'}-600 rounded-full overflow-hidden`}>
-                        <Icon
-                            width="24"
-                            height="24"
-                            icon={`status-${connectedAndUnlocked ? 'success' : 'error'}`}
-                            classes="text-white" />
-                    </div>
+                    <Icon
+                        icon={`status-${!connectedAndUnlocked ? 'success' : 'error'}`}
+                        classes={`text-white bg-${!connectedAndUnlocked ? 'green' : 'red'}-600 rounded-full`} />
                     <Text type="p" secondary>{locale('views.connectLedger.trafficLight1')}</Text>
                 </div>
                 <div class="flex flex-row items-center space-x-2">
-                    <div
-                        class={`w-4 h-4 flex justify-center items-center bg-${appOpen ? 'green' : 'red'}-600 rounded-full overflow-hidden`}>
-                        <Icon icon={`status-${appOpen ? 'success' : 'error'}`} classes="text-white" />
-                    </div>
+                    <Icon
+                        icon={`status-${appOpen ? 'success' : 'error'}`}
+                        classes={`text-white bg-${appOpen ? 'green' : 'red'}-600 rounded-full`} />
                     <Text type="p" secondary>{locale('views.connectLedger.trafficLight2')}</Text>
                 </div>
             </div>
