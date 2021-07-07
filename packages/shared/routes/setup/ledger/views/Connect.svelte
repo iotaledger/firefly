@@ -111,8 +111,8 @@
             <div class="flex flex-col flex-nowrap space-y-2">
                 <div class="flex flex-row items-center space-x-2">
                     <Icon
-                        icon={`status-${!connectedAndUnlocked ? 'success' : 'error'}`}
-                        classes={`text-white bg-${!connectedAndUnlocked ? 'green' : 'red'}-600 rounded-full`} />
+                        icon={`status-${connectedAndUnlocked ? 'success' : 'error'}`}
+                        classes={`text-white bg-${connectedAndUnlocked ? 'green' : 'red'}-600 rounded-full`} />
                     <Text type="p" secondary>{locale('views.connectLedger.trafficLight1')}</Text>
                 </div>
                 <div class="flex flex-row items-center space-x-2">
