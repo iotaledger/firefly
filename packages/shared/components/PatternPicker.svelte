@@ -1,9 +1,10 @@
 <script lang="typescript">
-    import { Text } from "shared/components"
+    import { Text, Pattern } from "shared/components"
 
     export let title = "Pattern picker"
+    export let color = "turquoise"
 
-    const patterns = [0, 1, 2, 3, 4, 5, 6, 7]
+    const patterns = ["", "circles", "clouds", "clover", "organic", "rain", "shapes", "wind"]
 </script>
 
 <div>
@@ -12,7 +13,7 @@
     </div>
     <div class="grid grid-cols-4 grid-rows-2 gap-4">
         {#each patterns as pattern}
-            <div class="h-20 bg-gray-500 rounded-lg flex justify-center items-center">{pattern}</div>
+            <Pattern classes='h-20 rounded-lg bg-{color}-500' {pattern} />
         {/each}
     </div>
 </div>
