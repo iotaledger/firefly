@@ -105,6 +105,9 @@
             elems[hideClose || elems.length === 1 ? 0 : 1].focus()
         }
         switch (type) {
+            default:
+                size = PopupSize.Medium
+                break
             case 'ledgerNotConnected':
                 size = PopupSize.Small
                 break
@@ -112,9 +115,6 @@
             case 'ledgerAppGuide':
             case 'ledgerConnectionGuide':
                 size = PopupSize.Large
-                break
-            default:
-                size = PopupSize.Medium
                 break
         }
     })
