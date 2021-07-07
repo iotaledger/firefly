@@ -130,7 +130,6 @@
 
                 if (parsedData && parsedData.context === 'wallet' && parsedData.operation === 'send') {
                     _redirect(Tabs.Wallet)
-                    console.log(parsedData)
                     sendParams.set({
                         ...parsedData.params,
                         isInternal: false,
