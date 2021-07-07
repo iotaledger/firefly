@@ -21,10 +21,9 @@ export function getLedgerDeviceStatus(
 ) {
     api.getLedgerDeviceStatus(ledgerSimulator, {
         onSuccess(response) {
-            const _status = response.payload?.type ?? LedgerStatus.Disconnected
             if (legacy) {
                 const _callBack = () => {
-                    if (_status !== LedgerStatus.Locked && get(ledgerDeviceState) === LedgerDeviceState.LegacyConnected) {
+                    if (response.payload?.type !== LedgerStatus.Locked && get(ledgerDeviceState) === LedgerDeviceState.LegacyConnected) {
                         onConnected()
                     } else {
                         onDisconnected()
