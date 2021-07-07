@@ -42,6 +42,20 @@
 
     let size: PopupSize = PopupSize.Medium
 
+    $: switch (type) {
+        case 'ledgerNotConnected':
+            size = PopupSize.Small
+            break
+        case 'video':
+        case 'ledgerAppGuide':
+        case 'ledgerConnectionGuide':
+            size = PopupSize.Large
+            break
+        default:
+            size = PopupSize.Medium
+            break
+    }
+
     let popupContent
 
     const types = {
@@ -103,19 +117,6 @@
         const elems = focusableElements()
         if (elems && elems.length > 0) {
             elems[hideClose || elems.length === 1 ? 0 : 1].focus()
-        }
-        switch (type) {
-            default:
-                size = PopupSize.Medium
-                break
-            case 'ledgerNotConnected':
-                size = PopupSize.Small
-                break
-            case 'video':
-            case 'ledgerAppGuide':
-            case 'ledgerConnectionGuide':
-                size = PopupSize.Large
-                break
         }
     })
 </script>
