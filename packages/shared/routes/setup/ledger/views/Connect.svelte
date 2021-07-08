@@ -134,7 +134,7 @@
             </div>
             <Button classes="w-full" disabled={(polling && (!isConnected || !isAppOpen)) || busy} onClick={handleContinueClick}>
                 {#if busy}
-                    <Spinner busy message={locale('general.busy')} classes="justify-center" />
+                    <Spinner busy message={locale('general.creatingAccount')} classes="justify-center" />
                 {:else}{locale('actions.continue')}{/if}
             </Button>
         </div>
