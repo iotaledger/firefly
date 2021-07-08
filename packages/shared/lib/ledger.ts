@@ -36,7 +36,7 @@ export function calculateLedgerDeviceState(status: LedgerStatus): LedgerDeviceSt
         return LedgerDeviceState.Locked
     } else {
         if(status.connected) {
-            return status.appName === 'IOTA' ? LedgerDeviceState.Connected : LedgerDeviceState.AppNotOpen
+            return status.app.name === 'IOTA' ? LedgerDeviceState.Connected : LedgerDeviceState.AppNotOpen
         } else {
             return LedgerDeviceState.NotDetected
         }

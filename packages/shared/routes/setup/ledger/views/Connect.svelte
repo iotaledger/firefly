@@ -1,12 +1,12 @@
 <script>
     import { Button, Icon, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
     import {
+        getLedgerDeviceStatus,
         ledgerDeviceState,
         ledgerSimulator,
         pollLedgerDeviceStatus,
         promptUserToConnectLedger,
         stopPollingLedgerStatus,
-        updateLedgerDeviceState,
     } from 'shared/lib/ledger'
     import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
     import { openPopup } from 'shared/lib/popup'
@@ -33,17 +33,13 @@
 
     $: isConnected = $ledgerDeviceState !== LedgerDeviceState.NotDetected
     $: isAppOpen = $ledgerDeviceState === LedgerDeviceState.Connected
-    $: if (isConnected && isAppOpen) {
-        stopPollingLedgerStatus()
-        polling = false
-    }
 
     $: illustration = isConnected && isAppOpen ? 'ledger-connect-connected-desktop' : 'ledger-connect-disconnected-desktop'
 
     const dispatch = createEventDispatcher()
 
     onMount(() => {
-        pollLedgerDeviceStatus(LEDGER_STATUS_POLL_INTERVAL, updateLedgerDeviceState, updateLedgerDeviceState)
+        pollLedgerDeviceStatus(LEDGER_STATUS_POLL_INTERVAL, getLedgerDeviceStatus)
         polling = true
     })
 
