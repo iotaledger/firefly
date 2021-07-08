@@ -2,8 +2,7 @@ import { closePopup, openPopup, popupState } from 'shared/lib/popup'
 import { api } from 'shared/lib/wallet'
 import { get, writable } from 'svelte/store'
 import type { Event } from "./typings/events"
-import { ErrorType } from "./typings/events"
-import { LedgerApp, LedgerAppInfo, LedgerDeviceState, LedgerStatus } from "./typings/ledger"
+import { AppName, LedgerDeviceState, LedgerStatus } from "./typings/ledger"
 
 const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
 
@@ -20,23 +19,12 @@ export function getLedgerDeviceStatus(
     onError: () => void = () => { }
 ) {
     api.getLedgerDeviceStatus(ledgerSimulator, {
-        onSuccess(response) {
-            if (legacy) {
-                const _callBack = () => {
-                    if (response.payload?.type !== LedgerStatus.Locked && get(ledgerDeviceState) === LedgerDeviceState.LegacyConnected) {
-                        onConnected()
-                    } else {
-                        onDisconnected()
-                    }
-                }
-                updateLedgerDeviceState(_callBack, _callBack)
-
+        onSuccess(response: Event<LedgerStatus>) {
+            ledgerDeviceState.set(calculateLedgerDeviceState(response.payload))
+            if ((legacy && get(ledgerDeviceState) === LedgerDeviceState.LegacyConnected) || (!legacy && get(ledgerDeviceState) === LedgerDeviceState.Connected)) {
+                onConnected()
             } else {
-                if (response.payload?.type === LedgerStatus.Connected) {
-                    onConnected()
-                } else {
-                    onDisconnected()
-                }
+                onDisconnected()
             }
         },
         onError(err) {
@@ -45,38 +33,20 @@ export function getLedgerDeviceStatus(
     })
 }
 
-export function updateLedgerDeviceState(onSuccess: () => void = () => { }, onError: () => void = () => { }) {
-    asyncGetLedgerOpenedApp(ledgerSimulator)
-        .then((data: LedgerAppInfo) => {
-            let _state = LedgerDeviceState.AppNotOpen
-            if (data.name === LedgerApp.IOTA) {
-                _state = LedgerDeviceState.Connected
-            } else if (data.name === LedgerApp.IOTALegacy) {
-                _state = LedgerDeviceState.LegacyConnected
-            }
-            ledgerDeviceState.set(_state)
-            onSuccess()
-        })
-        .catch((err) => {
-            if (err.type === ErrorType.LedgerDeviceNotFound)
-                ledgerDeviceState.set(LedgerDeviceState.NotDetected)
-            else
-                console.error(err)
-            onError()
-        })
-}
-
-export function asyncGetLedgerOpenedApp(isSimulator: boolean) {
-    return new Promise<LedgerAppInfo>((resolve, reject) => {
-        api.getLedgerOpenedApp(isSimulator, {
-            onSuccess(response: Event<LedgerAppInfo>) {
-                resolve(response.payload)
-            },
-            onError(err) {
-                reject(err)
-            }
-        })
-    })
+export function calculateLedgerDeviceState(status: LedgerStatus): LedgerDeviceState {
+    const { locked, connected, appName } = status
+    if (locked) {
+        return LedgerDeviceState.Locked
+    } else {
+        if (appName === AppName.IOTA) {
+            return LedgerDeviceState.Connected
+        }
+        else if (appName === AppName.IOTALegacy) {
+            return LedgerDeviceState.LegacyConnected
+        } else {
+            return connected ? LedgerDeviceState.AppNotOpen : LedgerDeviceState.NotDetected
+        }
+    }
 }
 
 export function promptUserToConnectLedger(

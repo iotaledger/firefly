@@ -443,10 +443,11 @@
                 "hardwareDevice": {
                     "title": "Hardware Device",
                     "statuses": {
-                        "connected": "Connected",
-                        "notDetected": "Not detected",
                         "appNotOpen": "IOTA app not open",
+                        "connected": "Connected",
+                        "locked": "Locked",
                         "mnemonicMismatch": "Mnemonic is mismatched",
+                        "notDetected": "Not detected",
                         "legacyConnected": "IOTA Legacy app open"
                     }
                 },

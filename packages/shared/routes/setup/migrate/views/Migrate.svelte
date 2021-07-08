@@ -74,7 +74,7 @@
                     Electron.ledger
                         .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
                         .then((iota) => {
-                            return createLedgerMigrationBundle(0, iota.prepareTransfers, 0, false)
+                            return createLedgerMigrationBundle(0, iota.prepareTransfers)
                         })
                         .then(({ trytes, bundleHash }) => {
                             singleMigrationBundleHash = bundleHash
