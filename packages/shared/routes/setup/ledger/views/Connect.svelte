@@ -24,7 +24,7 @@
     let legacyLedger = $walletSetupType === SetupType.TrinityLedger
 
     let newLedgerProfile = $walletSetupType === SetupType.New
-    let creatingAccount = false
+    let busy = false
 
     let LEDGER_STATUS_POLL_INTERVAL = 1500
 
@@ -50,7 +50,6 @@
     onDestroy(stopPollingLedgerStatus)
 
     function createAccount() {
-        creatingAccount = true
         const officialNodes = getOfficialNodes()
         const officialNetwork = getOfficialNetwork()
 
@@ -67,16 +66,16 @@
                 },
                 {
                     onSuccess() {
-                        creatingAccount = false
+                        busy = false
                         dispatch('next')
                     },
                     onError(error) {
-                        creatingAccount = false
+                        busy = false
                         console.error(error)
                     },
                 }
             )
-        const _onCancel = () => (creatingAccount = false)
+        const _onCancel = () => (busy = false)
         promptUserToConnectLedger(false, _onConnected, _onCancel)
     }
 
@@ -87,11 +86,13 @@
     }
 
     function handleContinueClick() {
+        busy = true
         if (newLedgerProfile) {
             createAccount()
         } else {
             const _onConnected = () => dispatch('next')
-            promptUserToConnectLedger(false, _onConnected)
+            const _onCancel = () => (busy = false)
+            promptUserToConnectLedger(false, _onConnected, _onCancel)
         }
     }
 
@@ -131,12 +132,9 @@
                 <Icon icon="info" classes="mr-2 text-blue-500" />
                 <Text secondary highlighted>{locale('popups.ledgerConnectionGuide.title')}</Text>
             </div>
-            <Button
-                classes="w-full"
-                disabled={(polling && (!isConnected || !isAppOpen)) || creatingAccount}
-                onClick={handleContinueClick}>
-                {#if creatingAccount}
-                    <Spinner busy message={locale('general.creatingAccount')} classes="justify-center" />
+            <Button classes="w-full" disabled={(polling && (!isConnected || !isAppOpen)) || busy} onClick={handleContinueClick}>
+                {#if busy}
+                    <Spinner busy message={locale('general.busy')} classes="justify-center" />
                 {:else}{locale('actions.continue')}{/if}
             </Button>
         </div>

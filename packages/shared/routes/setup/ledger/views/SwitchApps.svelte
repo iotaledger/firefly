@@ -6,11 +6,15 @@
     export let locale
     export let mobile
 
+    export let busy = false
+
     const dispatch = createEventDispatcher()
 
     function handleContinueClick() {
+        busy = true
         const _onConnected = () => dispatch('next')
-        promptUserToConnectLedger(true, _onConnected)
+        const _onCancel = () => (busy = false)
+        promptUserToConnectLedger(true, _onConnected, _onCancel)
     }
 
     function handleBackClick() {
@@ -42,7 +46,7 @@
             </div>
         </div>
         <div slot="leftpane__action">
-            <Button classes="w-full" onClick={handleContinueClick}>{locale('actions.continue')}</Button>
+            <Button classes="w-full" disabled={busy} onClick={handleContinueClick}>{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-start items-center bg-gray-50 dark:bg-gray-900">
             <Illustration width="95%" illustration="ledger-switch-app-desktop" />
