@@ -6,11 +6,11 @@
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
-    import { Event, TransferProgressEventType } from 'shared/lib/typings/events'
+    import { TransferProgressEventType } from 'shared/lib/typings/events'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
-    import { changeUnits, formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
+    import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
-    import { api, asyncGetUnusedAddress, isTransferring, transferState, wallet, WalletAccount } from 'shared/lib/wallet'
+    import { isTransferring, transferState, wallet, WalletAccount } from 'shared/lib/wallet'
     import { getContext, onDestroy, onMount } from 'svelte'
     import type { Readable } from 'svelte/store'
     import { promptUserToConnectLedger } from 'shared/lib/ledger'
@@ -48,22 +48,26 @@
     $: address, (addressError = '')
 
     let transferSteps: {
-        [key in TransferProgressEventType | 'Complete']: {
+        [key in TransferProgressEventType]: {
             label: string
             percent: number
         }
     } = {
         SyncingAccount: {
             label: locale('general.transferSyncing'),
-            percent: 30,
+            percent: 20,
         },
         SelectingInputs: {
             label: locale('general.transferSelectingInputs'),
-            percent: 40,
+            percent: 30,
         },
         GeneratingRemainderDepositAddress: {
             label: locale('general.transferRemainderAddress'),
-            percent: 50,
+            percent: 40,
+        },
+        PreparedTransaction: {
+            label: locale('general.transferSyncing'),
+            percent: 50
         },
         SigningTransaction: {
             label: locale('general.transferSigning'),
@@ -98,31 +102,64 @@
         }
     }
 
-    // Ledger confirmation popups
-    $: if (
-        !$isSoftwareProfile &&
-        ($transferState === TransferProgressEventType.SigningTransaction
-            || $transferState === TransferProgressEventType.GeneratingRemainderDepositAddress)
-    ) {
-        ledgerAwaitingConfirmation = true
+    const handleTransferState = (state: TransferProgressEventType) => {
+        console.log("STATE: ", state)
 
-        openPopup({
-            type: 'ledgerConfirmation',
-            hideClose: true,
-            props: {
-                fromAlias: from.alias,
-                toAddress: to.depositAddress,
-                toAmount: amount,
-                remainderAddress: 'TODO',
-                remainderAmount: 100
+        if(state === TransferProgressEventType.PreparedTransaction
+            || state === TransferProgressEventType.GeneratingRemainderDepositAddress
+            || state === TransferProgressEventType.SigningTransaction)
+        {
+            ledgerAwaitingConfirmation = true
+
+            openPopup({
+                type: 'ledgerConfirmation',
+                hideClose: true,
+                props: {
+                    fromAlias: from.alias,
+                    toAddress: to.depositAddress,
+                    toAmount: amount,
+                    remainderAddress: 'TODO',
+                    remainderAmount: 100
+                }
+            })
+        } else {
+            if(ledgerAwaitingConfirmation) {
+                ledgerAwaitingConfirmation = false
+
+                closePopup()
             }
-        })
-    } else {
-        if (ledgerAwaitingConfirmation) {
-            ledgerAwaitingConfirmation = false
-            closePopup()
         }
     }
+
+    $: if(!$isSoftwareProfile)
+        handleTransferState($transferState)
+
+    // $: if (
+    //     !$isSoftwareProfile &&
+    //     ($transferState === TransferProgressEventType.SigningTransaction
+    //         || $transferState === TransferProgressEventType.SelectingInputs
+    //         || $transferState === TransferProgressEventType.GeneratingRemainderDepositAddress)
+    // ) {
+    //     ledgerAwaitingConfirmation = true
+    //
+    //     openPopup({
+    //         type: 'ledgerConfirmation',
+    //         hideClose: true,
+    //         props: {
+    //             fromAlias: from.alias,
+    //             toAddress: to.depositAddress,
+    //             toAmount: amount,
+    //             remainderAddress: 'TODO',
+    //             remainderAmount: 100
+    //         }
+    //     })
+    // } else {
+    //     if (ledgerAwaitingConfirmation) {
+    //         ledgerAwaitingConfirmation = false
+    //         closePopup()
+    //     }
+    // }
+
     $: if (!$isTransferring && ledgerAwaitingConfirmation) {
         closePopup()
     }

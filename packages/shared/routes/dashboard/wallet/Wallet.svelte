@@ -15,7 +15,7 @@
     } from 'shared/lib/profile'
     import { walletRoute, walletSetupType } from 'shared/lib/router'
     import type { Transaction } from 'shared/lib/typings/message'
-    import { WalletRoutes, SetupType } from 'shared/lib/typings/routes'
+    import { SetupType, WalletRoutes } from 'shared/lib/typings/routes'
     import {
         AccountMessage,
         AccountsBalanceHistory,
@@ -44,8 +44,9 @@
         WalletAccount,
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
-    import { derived, Readable, Writable, get } from 'svelte/store'
+    import { derived, get, Readable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
+    import { TransferProgressEventType } from "../../../lib/typings/events";
 
     export let locale
 
@@ -460,7 +461,7 @@
                             })
                         })
 
-                        transferState.set('Complete')
+                        transferState.set(TransferProgressEventType.Complete)
 
                         setTimeout(() => {
                             clearSendParams()
@@ -533,7 +534,7 @@
                         })
                     })
 
-                    transferState.set('Complete')
+                    transferState.set(TransferProgressEventType.Complete)
 
                     setTimeout(() => {
                         clearSendParams(internal)

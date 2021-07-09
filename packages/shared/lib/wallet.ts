@@ -751,7 +751,11 @@ export const initialiseListeners = () => {
      */
     api.onTransferProgress({
         onSuccess(response) {
-            transferState.set(response.payload.event.type)
+            console.log("EVENT: ", response.payload.event)
+
+            const { event } = response.payload
+            if(event.hasOwnProperty('type'))
+                transferState.set(response.payload.event.type as TransferProgressEventType)
         },
         onError(error) {
             console.error(error)
