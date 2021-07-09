@@ -1,12 +1,9 @@
 <script lang="typescript">
     import { BundleMiningLayout, Button, Icon, ProgressBar, Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
-    import { promptUserToConnectLedger } from 'shared/lib/ledger'
     import {
-        ADDRESS_SECURITY_LEVEL,
         createMigrationBundle,
         getInputIndexesForBundle,
-        hardwareIndexes,
         mineLedgerBundle,
         MINING_TIMEOUT_SECONDS,
         selectedBundlesToMine,
@@ -58,23 +55,15 @@
                     }
 
                     if (legacyLedger) {
-                        const _onConnected = () => {
-                            Electron.ledger
-                                .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
-                                .then((iota) => {
-                                    return mineLedgerBundle(bundle.index, bundle.miningRuns * 10 ** 8)
-                                })
-                                .then(() => {
-                                    _updateOnSuccess()
-                                })
-                                .catch((error) => {
-                                    console.error('E', error)
-                                    _updateOnError()
-                                })
-                        }
-                        return promptUserToConnectLedger(true, _onConnected)
+                        return mineLedgerBundle(bundle.index, bundle.miningRuns * 10 ** 8)
+                            .then(() => {
+                                _updateOnSuccess()
+                            })
+                            .catch((error) => {
+                                console.error('E', error)
+                                _updateOnError()
+                            })
                     }
-
                     return createMigrationBundle(getInputIndexesForBundle(bundle), bundle.miningRuns * 10 ** 8, true)
                         .then((result) => {
                             _updateOnSuccess()
@@ -87,10 +76,8 @@
                 }),
             Promise.resolve([])
         )
-
         initiateProgressBar()
     })
-
     function redirectWithTimeout(_timeout = 1500) {
         timeout = setTimeout(() => {
             dispatch('next')
@@ -108,16 +95,6 @@
 
             updateProgress()
         }, 2000)
-    }
-
-    function handleBackClick() {
-        dispatch('previous')
-    }
-
-    //TODO:
-    const handleCancelClick = () => {
-        console.log('Cancel clicked')
-        // dispatch('previous')
     }
 
     onDestroy(() => {
