@@ -9,20 +9,20 @@
         formatCurrency,
     } from 'shared/lib/currency'
     import { Electron } from 'shared/lib/electron'
-    import { removeLedgerLegacyStatusListener } from 'shared/lib/ledger'
+    import { promptUserToConnectLedger } from 'shared/lib/ledger'
     import {
         ADDRESS_SECURITY_LEVEL,
         getLedgerMigrationData,
         hardwareIndexes,
         legacyAddressForTesting,
-        resetMigrationState
+        resetMigrationState,
     } from 'shared/lib/migration'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
     import { formatUnitBestMatch } from 'shared/lib/units'
+    import { setClipboard } from 'shared/lib/utils'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
-    import { setClipboard } from 'shared/lib/utils'
 
     export let locale
     export let mobile
@@ -64,22 +64,25 @@
     // TODO: missing check again for balance function
     function sync() {
         isCheckingForBalance = true
+        const _onConnected = () => {
+            Electron.ledger
+                .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
+                .then((iota) => {
+                    return getLedgerMigrationData(iota.getAddress)
+                })
+                .then((data) => {
+                    isCheckingForBalance = false
 
-        Electron.ledger
-            .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
-            .then((iota) => {
-                return getLedgerMigrationData(iota.getAddress)
-            })
-            .then((data) => {
-                isCheckingForBalance = false
-
-                formattedBalance = getFormattedBalance(data.balance)
-                fiatBalance = getFiatBalance(data.balance)
-            })
-            .catch((error) => {
-                isCheckingForBalance = false
-                console.error(error)
-            })
+                    formattedBalance = getFormattedBalance(data.balance)
+                    fiatBalance = getFiatBalance(data.balance)
+                })
+                .catch((error) => {
+                    isCheckingForBalance = false
+                    console.error(error)
+                })
+        }
+        const _onCancel = () => (isCheckingForBalance = false)
+        promptUserToConnectLedger(true, _onConnected, _onCancel)
     }
 </script>
 
@@ -88,6 +91,7 @@
     <div>foo</div>
 {:else}
     <OnboardingLayout
+        busy={isCheckingForBalance}
         onBackClick={handleBackClick}
         {locale}
         showLedgerProgress={legacyLedger}

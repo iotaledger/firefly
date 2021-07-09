@@ -11,7 +11,7 @@
     import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
     import { openPopup } from 'shared/lib/popup'
     import { walletSetupType } from 'shared/lib/router'
-    import { LedgerDeviceState } from "shared/lib/typings/ledger";
+    import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { SetupType } from 'shared/lib/typings/routes'
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
@@ -24,7 +24,7 @@
     let legacyLedger = $walletSetupType === SetupType.TrinityLedger
 
     let newLedgerProfile = $walletSetupType === SetupType.New
-    let creatingAccount = false
+    let busy = false
 
     let LEDGER_STATUS_POLL_INTERVAL = 1500
 
@@ -39,14 +39,13 @@
     const dispatch = createEventDispatcher()
 
     onMount(() => {
-        pollLedgerDeviceStatus(LEDGER_STATUS_POLL_INTERVAL, getLedgerDeviceStatus)
+        pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL, getLedgerDeviceStatus, getLedgerDeviceStatus)
         polling = true
     })
 
     onDestroy(stopPollingLedgerStatus)
 
     function createAccount() {
-        creatingAccount = true
         const officialNodes = getOfficialNodes()
         const officialNetwork = getOfficialNetwork()
 
@@ -63,17 +62,17 @@
                 },
                 {
                     onSuccess() {
-                        creatingAccount = false
+                        busy = false
                         dispatch('next')
                     },
                     onError(error) {
-                        creatingAccount = false
+                        busy = false
                         console.error(error)
                     },
                 }
             )
-        const _onCancel = () => (creatingAccount = false)
-        promptUserToConnectLedger(_onConnected, _onCancel)
+        const _onCancel = () => (busy = false)
+        promptUserToConnectLedger(false, _onConnected, _onCancel)
     }
 
     function handlePopupOpen() {
@@ -83,11 +82,13 @@
     }
 
     function handleContinueClick() {
+        busy = true
         if (newLedgerProfile) {
             createAccount()
         } else {
             const _onConnected = () => dispatch('next')
-            promptUserToConnectLedger(_onConnected)
+            const _onCancel = () => (busy = false)
+            promptUserToConnectLedger(false, _onConnected, _onCancel)
         }
     }
 
@@ -127,11 +128,8 @@
                 <Icon icon="info" classes="mr-2 text-blue-500" />
                 <Text secondary highlighted>{locale('popups.ledgerConnectionGuide.title')}</Text>
             </div>
-            <Button
-                classes="w-full"
-                disabled={(polling && (!isConnected || !isAppOpen)) || creatingAccount}
-                onClick={handleContinueClick}>
-                {#if creatingAccount}
+            <Button classes="w-full" disabled={(polling && (!isConnected || !isAppOpen)) || busy} onClick={handleContinueClick}>
+                {#if busy}
                     <Spinner busy message={locale('general.creatingAccount')} classes="justify-center" />
                 {:else}{locale('actions.continue')}{/if}
             </Button>
