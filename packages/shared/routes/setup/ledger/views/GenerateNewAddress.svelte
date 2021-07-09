@@ -65,7 +65,7 @@
 
 
         const _onCancel = () => (busy = false)
-        promptUserToConnectLedger(_onConnected, _onCancel)
+        promptUserToConnectLedger(false, _onConnected, _onCancel)
     }
 
     function displayAddress() {

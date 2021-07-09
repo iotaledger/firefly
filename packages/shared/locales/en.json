@@ -168,8 +168,8 @@
             "tips": "Tips if your Ledger isn’t connecting"
         },
         "restoreFromFireflyLedger": {
-            "title": "Restore from Ledger",
-            "body": "Your wallet password is also used to encrypt a Stronghold backup. Enter your wallet password to save your recovery phrase backup to a file.",
+            "title": "Restore Your Ledger Profile",
+            "body": "Press restore to complete the setup process and restore your wallets, balances and transaction history.",
             "restoring": "Restoring from Ledger..."
         },
         "legacyLedgerIntro": {
@@ -442,9 +442,14 @@
                 },
                 "hardwareDevice": {
                     "title": "Hardware Device",
-                    "detected": "Detected",
-                    "locked": "Locked",
-                    "noneDetected": "None detected"
+                    "statuses": {
+                        "appNotOpen": "IOTA App Not Open",
+                        "connected": "Connected",
+                        "locked": "Locked",
+                        "mnemonicMismatch": "Wrong Ledger or Mnemonic",
+                        "notDetected": "Not detected",
+                        "legacyConnected": "IOTA Legacy app open"
+                    }
                 },
                 "strongholdStatus": {
                     "title": "Wallet Status",
