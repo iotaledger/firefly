@@ -585,7 +585,8 @@
             "connectLegacy": "Open the IOTA Legacy app on your Ledger device to continue"
         },
         "ledgerConfirmation": {
-            "confirm": "To proceed, confirm the prompt displayed on your Ledger device"
+            "confirm": "To proceed, confirm the prompt displayed on your Ledger device",
+            "transactionConfirm": "To proceed, confirm the following details with those prompted on your Ledger device:"
         },
         "ledgerAppGuide": {
             "title": "Guide to installing the Ledger apps",
@@ -727,6 +728,7 @@
         "received": "Received",
         "sendPayment": "Send Payment",
         "moveFunds": "Internal Transfer",
+        "sendTo": "Send To",
         "sendFunds": "Send funds",
         "sendToAddress": "Send to address",
         "scanQrOrPaste": "Scan a QR code or paste an Address",
@@ -745,6 +747,7 @@
         "myAddress": "My Address",
         "shareAddress": "Share an address",
         "yourAddress": "Your address",
+        "remainderAddress": "Remainder",
         "generateNewAddress": "Generate new address",
         "copyAddress": "Copy Address",
         "import": "Import",
@@ -793,6 +796,7 @@
         "transferSyncing": "Syncing wallet",
         "transferSelectingInputs": "Selecting inputs",
         "transferRemainderAddress": "Generating remainder deposit address",
+        "preparedTransaction": "Preparing transaction",
         "transferSigning": "Signing the transaction",
         "transferPow": "Performing PoW",
         "transferBroadcasting": "Broadcasting transaction",

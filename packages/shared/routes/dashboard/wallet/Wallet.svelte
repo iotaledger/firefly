@@ -461,7 +461,9 @@
                             })
                         })
 
-                        transferState.set(TransferProgressEventType.Complete)
+                        transferState.set({
+                            type: TransferProgressEventType.Complete
+                        })
 
                         setTimeout(() => {
                             clearSendParams()
@@ -534,7 +536,9 @@
                         })
                     })
 
-                    transferState.set(TransferProgressEventType.Complete)
+                    transferState.set({
+                        type: TransferProgressEventType.Complete
+                    })
 
                     setTimeout(() => {
                         clearSendParams(internal)

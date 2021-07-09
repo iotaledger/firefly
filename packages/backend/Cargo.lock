@@ -46,9 +46,9 @@ dependencies = [
 
 [[package]]
 name = "anyhow"
-version = "1.0.41"
+version = "1.0.42"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "15af2628f6890fe2609a3b91bef4c83450512802e59489f9c1cb1fa5df064a61"
+checksum = "595d3cfa7a60d4555cb5067b99f07142a08ea778de5cf993f7b75c7d8fabc486"
 
 [[package]]
 name = "arc-swap"
@@ -1706,7 +1706,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=ledger/display-change-address-and-PreparedTransactionData#441b47b9d7932c1377cd3fc93ddf6c9022036e7b"
+source = "git+https://github.com/iotaledger/wallet.rs?branch=ledger/display-change-address-and-PreparedTransactionData#466755eac5c7a176ddb9f28c54a9653da94a8540"
 dependencies = [
  "async-trait",
  "backtrace",

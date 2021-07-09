@@ -111,7 +111,7 @@ export interface ReattachmentEventPayload {
 }
 
 export enum TransferProgressEventType {
-    // Syncing account.
+    /// Syncing account.
     SyncingAccount = 'SyncingAccount',
     /// Performing input selection.
     SelectingInputs = 'SelectingInputs',
@@ -129,6 +129,13 @@ export enum TransferProgressEventType {
     Complete = 'Complete'
 }
 
+export interface TransferState {
+    /// The transfer progress event type.
+    type: TransferProgressEventType
+
+    data?: any
+}
+
 export interface TransferProgressEvent {
     /// The transfer progress event type.
     type: TransferProgressEventType
@@ -137,10 +144,8 @@ export interface TransferProgressEvent {
 export interface PreparedTransactionEvent extends TransferProgressEvent {
     /// Transaction inputs. [address, amount][]
     inputs: any[][]
-
     /// Transaction outputs. [address, amount, remainder][]
     outputs: any[][]
-
     /// The indexation data.
     data: string
 }

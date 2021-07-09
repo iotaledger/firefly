@@ -6,7 +6,7 @@
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
-    import { TransferProgressEventType } from 'shared/lib/typings/events'
+    import { TransferProgressEventType, TransferState } from 'shared/lib/typings/events'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
@@ -66,7 +66,7 @@
             percent: 40,
         },
         PreparedTransaction: {
-            label: locale('general.transferSyncing'),
+            label: locale('general.preparedTransaction'),
             percent: 50
         },
         SigningTransaction: {
@@ -102,13 +102,23 @@
         }
     }
 
-    const handleTransferState = (state: TransferProgressEventType) => {
-        console.log("STATE: ", state)
+    const handleTransferState = (state: TransferState) => {
+        if(!state) return
+        console.log('STATE :', state)
 
-        if(state === TransferProgressEventType.PreparedTransaction
-            || state === TransferProgressEventType.GeneratingRemainderDepositAddress
-            || state === TransferProgressEventType.SigningTransaction)
-        {
+        const { data, type } = state
+        if(type === TransferProgressEventType.GeneratingRemainderDepositAddress) {
+            ledgerAwaitingConfirmation = true
+
+            openPopup({
+                type: 'ledgerConfirmation',
+                hideClose: true,
+                props: {
+                    remainderAddress: data?.address,
+                    remainderAmount: amount
+                }
+            })
+        } else if(type === TransferProgressEventType.PreparedTransaction || type === TransferProgressEventType.SigningTransaction) {
             ledgerAwaitingConfirmation = true
 
             openPopup({
@@ -117,9 +127,7 @@
                 props: {
                     fromAlias: from.alias,
                     toAddress: to.depositAddress,
-                    toAmount: amount,
-                    remainderAddress: 'TODO',
-                    remainderAmount: 100
+                    toAmount: amount
                 }
             })
         } else {
@@ -133,32 +141,6 @@
 
     $: if(!$isSoftwareProfile)
         handleTransferState($transferState)
-
-    // $: if (
-    //     !$isSoftwareProfile &&
-    //     ($transferState === TransferProgressEventType.SigningTransaction
-    //         || $transferState === TransferProgressEventType.SelectingInputs
-    //         || $transferState === TransferProgressEventType.GeneratingRemainderDepositAddress)
-    // ) {
-    //     ledgerAwaitingConfirmation = true
-    //
-    //     openPopup({
-    //         type: 'ledgerConfirmation',
-    //         hideClose: true,
-    //         props: {
-    //             fromAlias: from.alias,
-    //             toAddress: to.depositAddress,
-    //             toAmount: amount,
-    //             remainderAddress: 'TODO',
-    //             remainderAmount: 100
-    //         }
-    //     })
-    // } else {
-    //     if (ledgerAwaitingConfirmation) {
-    //         ledgerAwaitingConfirmation = false
-    //         closePopup()
-    //     }
-    // }
 
     $: if (!$isTransferring && ledgerAwaitingConfirmation) {
         closePopup()
@@ -434,7 +416,7 @@
         <ProgressBar
             preloading={!$transferState}
             secondary
-            message={transferSteps[$transferState]?.label}
-            percent={transferSteps[$transferState]?.percent} />
+            message={transferSteps[$transferState?.type || TransferProgressEventType.SyncingAccount]?.label}
+            percent={transferSteps[$transferState?.type || TransferProgressEventType.SyncingAccount]?.percent} />
     {/if}
 </div>
