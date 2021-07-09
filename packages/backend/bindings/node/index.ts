@@ -53,7 +53,6 @@ import {
     changeStrongholdPassword as _changeStrongholdPassword,
     setClientOptions as _setClientOptions,
     getLedgerDeviceStatus as _getLedgerDeviceStatus,
-    getLedgerOpenedApp as _getLedgerOpenedApp,
     setStrongholdPasswordClearInterval as _setStrongholdPasswordClearInterval,
     getLegacySeedChecksum as _getLegacySeedChecksum
 } from '../../../shared/lib/typings/wallet'
@@ -284,9 +283,6 @@ export const api = {
     },
     getLedgerDeviceStatus: function (isSimulator: boolean): ((__ids: CommunicationIds) => Promise<string>) {
         return (__ids: CommunicationIds) => _getLedgerDeviceStatus(sendMessage, __ids, isSimulator)
-    },
-    getLedgerOpenedApp: function (isSimulator: boolean): ((__ids: CommunicationIds) => Promise<string>) {
-        return (__ids: CommunicationIds) => _getLedgerOpenedApp(sendMessage, __ids, isSimulator)
     },
     onMigrationProgress: function (): ((__ids: CommunicationIds) => Promise<string>) {
         return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'MigrationProgress')

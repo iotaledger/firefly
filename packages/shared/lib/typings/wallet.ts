@@ -163,15 +163,6 @@ export function getLedgerDeviceStatus(bridge: Bridge, __ids: CommunicationIds, i
     })
 }
 
-export function getLedgerOpenedApp(bridge: Bridge, __ids: CommunicationIds, isSimulator: boolean) {
-    return bridge({
-        actorId: __ids.actorId,
-        id: __ids.messageId,
-        cmd: 'GetLedgerOpenedApp',
-        payload: isSimulator
-    })
-}
-
 export function setStrongholdPasswordClearInterval(bridge: Bridge, __ids: CommunicationIds, payload: Duration) {
     return bridge({
         actorId: __ids.actorId,
