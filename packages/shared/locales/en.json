@@ -168,8 +168,8 @@
             "tips": "Tips if your Ledger isn’t connecting"
         },
         "restoreFromFireflyLedger": {
-            "title": "Restore from Ledger",
-            "body": "Your wallet password is also used to encrypt a Stronghold backup. Enter your wallet password to save your recovery phrase backup to a file.",
+            "title": "Restore Your Ledger Profile",
+            "body": "Press restore to complete the setup process and restore your wallets, balances and transaction history.",
             "restoring": "Restoring from Ledger..."
         },
         "legacyLedgerIntro": {
@@ -442,9 +442,13 @@
                 },
                 "hardwareDevice": {
                     "title": "Hardware Device",
-                    "detected": "Detected",
-                    "locked": "Locked",
-                    "noneDetected": "None detected"
+                    "statuses": {
+                        "appNotOpen": "IOTA app not open",
+                        "connected": "Connected",
+                        "locked": "Locked",
+                        "mnemonicMismatch": "Mnemonic is mismatched",
+                        "notDetected": "Not detected"
+                    }
                 },
                 "strongholdStatus": {
                     "title": "Wallet Status",
@@ -886,7 +890,9 @@
             "tilde": "A profile name can't start with the '~' character.",
             "control": "A profile name can't contain a control character.",
             "startDot": "A profile name can't start with the '.' character.",
-            "chars": "A profile name can't contain the following characters <>:\"/\\|?*"
+            "chars": "A profile name can't contain the following characters <>:\"/\\|?*",
+            "index": "Your account index must be a number between 0 and 2,147,483,647.",
+            "page": "Your account page must be a number between 0 and 2,147,483,647."
         },
         "send": {
             "addressLength": "Addresses should be {length, plural, one {1 character} other {# characters}} long.",

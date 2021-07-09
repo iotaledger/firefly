@@ -1,10 +1,11 @@
 import type { Account, AccountIdentifier, Balance, SyncedAccount } from './account'
 import type { Address } from './address'
 import type { ErrorEventPayload } from './events'
+import type { LedgerApp, LedgerStatus } from './ledger'
 import type { Message } from './message'
 import type { NodeInfo } from './node'
 import type { MigrationBundle, MigrationData, SendMigrationBundleResponse, MigrationAddress } from './migration'
-import type { LedgerStatusPayload, StrongholdStatus } from './wallet'
+import type { StrongholdStatus } from './wallet'
 
 export interface Actor {
     destroy(): void
@@ -67,6 +68,7 @@ export enum ResponseTypes {
     StrongholdPasswordChanged = 'StrongholdPasswordChanged',
     UpdatedAllClientOptions = 'UpdatedAllClientOptions',
     LedgerStatus = 'LedgerStatus',
+    LedgerOpenedApp = 'LedgerOpenedApp',
     StrongholdPasswordClearIntervalSet = 'StrongholdPasswordClearIntervalSet',
     MigrationData = 'MigrationData',
     CreatedMigrationBundle = 'CreatedMigrationBundle',
@@ -114,7 +116,6 @@ export type DeleteStorageResponse = Response<ResponseTypes.DeletedStorage, void>
 export type LockStrongholdResponse = Response<ResponseTypes.LockedStronghold, void>
 export type StrongholdPasswordChangeResponse = Response<ResponseTypes.StrongholdPasswordChanged, void>
 export type UpdatedAllClientOptions = Response<ResponseTypes.UpdatedAllClientOptions, void>
-export type LedgerDeviceStatusResponse = Response<ResponseTypes.LedgerStatus, LedgerStatusPayload>
 export type LegacySeedChecksum = Response<ResponseTypes.LegacySeedChecksum, string>
 
 /**
@@ -126,6 +127,8 @@ export type SentMigrationBundleResponse = Response<ResponseTypes.SentMigrationBu
 export type GetNodeInfoResponse = Response<ResponseTypes.NodeInfo, NodeInfo>
 export type GetMigrationAddressResponse = Response<ResponseTypes.MigrationAddress, MigrationAddress>
 export type MinedBundleResponse = Response<ResponseTypes.MinedBundle, string[]>
+export type LedgerDeviceStatusResponse = Response<ResponseTypes.LedgerStatus, LedgerStatus>
+export type LedgerOpenedAppResponse = Response<ResponseTypes.LedgerOpenedApp, LedgerApp>
 
 export type MessageResponse =
     RemovedAccountResponse
@@ -165,7 +168,8 @@ export type MessageResponse =
     | CreatedMigrationBundleResponse
     | SentMigrationBundleResponse
     | GetNodeInfoResponse
-    | GetMigrationAddressResponse 
+    | GetMigrationAddressResponse
     | MinedBundleResponse
+    | LedgerOpenedAppResponse
 
 export type Bridge = (message: BridgeMessage) => Promise<string>

@@ -80,11 +80,6 @@ export enum ImportType {
     FireflyLedger = 'fireflyLedger',
 }
 
-export enum LedgerApp {
-    Trinity = 'Trinity',
-    Firefly = 'Firefly',
-}
-
 export const activeProfileId = writable<string | null>(null)
 
 export const profiles = persistent<Profile[]>('profiles', [])

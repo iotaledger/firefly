@@ -1,24 +1,25 @@
 import { Electron } from 'shared/lib/electron'
 import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-import { LedgerStatus } from 'shared/lib/typings/wallet'
 import { api } from 'shared/lib/wallet'
 import { get, writable } from 'svelte/store'
-
-export const ledgerSimulator = false
-export const isLedgerConnected = writable<boolean>(false)
-export const isLedgerLegacyConnected = writable<boolean>(false)
+import type { Event } from "./typings/events"
+import { LedgerDeviceState, LedgerStatus } from "./typings/ledger"
 
 const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
 
 let polling = false
 let intervalTimer
 
+export const ledgerSimulator = false
+export const ledgerDeviceState = writable<LedgerDeviceState>(LedgerDeviceState.NotDetected)
+export const isLedgerLegacyConnected = writable<boolean>(false)
+
 export function getLedgerDeviceStatus(onConnected = () => { }, onDisconnected = () => { }, onError = () => { }) {
     api.getLedgerDeviceStatus(ledgerSimulator, {
-        onSuccess(response) {
-            let _isLedgerConnected = response.payload?.type === LedgerStatus.Connected
-            isLedgerConnected.set(_isLedgerConnected)
-            if (_isLedgerConnected) {
+        onSuccess(response: Event<LedgerStatus>) {
+            ledgerDeviceState.set(calculateLedgerDeviceState(response.payload))
+
+            if (response.payload?.connected) {
                 onConnected()
             } else {
                 onDisconnected()
@@ -28,6 +29,18 @@ export function getLedgerDeviceStatus(onConnected = () => { }, onDisconnected = 
             onError()
         }
     })
+}
+
+export function calculateLedgerDeviceState(status: LedgerStatus): LedgerDeviceState {
+    if(status.locked) {
+        return LedgerDeviceState.Locked
+    } else {
+        if(status.connected) {
+            return status.app.name === 'IOTA' ? LedgerDeviceState.Connected : LedgerDeviceState.AppNotOpen
+        } else {
+            return LedgerDeviceState.NotDetected
+        }
+    }
 }
 
 export function promptUserToConnectLedger(

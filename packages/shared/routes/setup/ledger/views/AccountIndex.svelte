@@ -1,7 +1,12 @@
 <script lang="typescript">
     import { Button, Illustration, Number, OnboardingLayout, Spinner, Text, Toggle } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
-    import { isLedgerLegacyConnected, addLedgerLegacyStatusListener, removeLedgerLegacyStatusListener } from 'shared/lib/ledger'
+    import {
+        addLedgerLegacyStatusListener,
+        isLedgerLegacyConnected,
+        pollLedgerLegacyStatus,
+        removeLedgerLegacyStatusListener
+    } from 'shared/lib/ledger'
     import { ADDRESS_SECURITY_LEVEL, getLedgerMigrationData, hardwareIndexes } from 'shared/lib/migration'
     import { popupState } from 'shared/lib/popup'
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
@@ -9,16 +14,50 @@
     export let locale
     export let mobile
 
+    let expert = false
     let loading = false
+
+    let min = 0
+    let max = 2147483647
 
     let index = 0
     let page = 0
-    let expert = false
+
+    $: index = checkNumber(index)
+    $: page = checkNumber(page)
+
+    let isValidAccountIndex = false
+    $: isValidAccountIndex = isValidNumber(index)
+    let isValidAccountPage = false
+    $: isValidAccountPage = isValidNumber(page)
 
     const dispatch = createEventDispatcher()
 
+    $: if (!$isLedgerLegacyConnected && !$popupState?.active) {
+        handleBackClick()
+    }
+
     onMount(addLedgerLegacyStatusListener)
     onDestroy(removeLedgerLegacyStatusListener)
+
+    function checkNumber(n: number): number {
+        if (!isWithinRange(n))
+            n = Math.min(Math.max(n, min), max)
+
+        return n
+    }
+
+    function isValidNumber(n: number): boolean {
+        return isPositiveInteger(n) && isWithinRange(n)
+    }
+
+    function isPositiveInteger(n: number): boolean {
+        return /^[0-9]+$/.test(String(n))
+    }
+
+    function isWithinRange(n: number): boolean {
+        return n >= min && n <= max
+    }
 
     function handleContinueClick() {
         loading = true
@@ -31,8 +70,11 @@
             .then((data) => {
                 loading = false
 
-                hardwareIndexes.update((_indexes) => Object.assign({}, _indexes, { accountIndex: index, pageIndex: page }))
-                dispatch('next', { balance: data.balance })
+                hardwareIndexes.update((_indexes) => Object.assign({}, _indexes, {
+                    accountIndex: index,
+                    pageIndex: page
+                }))
+                dispatch('next', {balance: data.balance})
             })
             .catch((error) => {
                 loading = false
@@ -65,18 +107,18 @@
                 </div>
                 <div>
                     <Text type="p" secondary classes="mb-2">{locale('views.selectLedgerAccountIndex.accountIndex')}</Text>
-                    <Number bind:value={index} />
+                    <Number bind:value={index} {min} {max} error={!isValidAccountIndex ? locale('error.account.index') : ''} />
                 </div>
                 {#if expert}
                     <div>
                         <Text type="p" secondary classes="mb-2">{locale('views.selectLedgerAccountIndex.accountPage')}</Text>
-                        <Number bind:value={page} />
+                        <Number bind:value={page} {min} {max} error={!isValidAccountPage ? locale('error.account.page') : ''} />
                     </div>
                 {/if}
             </div>
         </div>
         <div slot="leftpane__action" class="flex flex-col space-y-4">
-            <Button classes="w-full" disabled={loading || !$isLedgerLegacyConnected} onClick={handleContinueClick}>
+            <Button classes="w-full" disabled={!isValidAccountIndex || !isValidAccountPage || loading} onClick={handleContinueClick}>
                 {#if loading}
                     <Spinner busy={true} message={locale('views.migrate.findingBalance')} classes="justify-center" />
                 {:else}{locale('actions.confirm')}{/if}
