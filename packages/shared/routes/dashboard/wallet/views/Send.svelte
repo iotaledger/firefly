@@ -221,7 +221,7 @@
 
     const updateFromSendParams = (s) => {
         selectedSendType = s.isInternal && $liveAccounts.length > 1 ? SEND_TYPE.INTERNAL : SEND_TYPE.EXTERNAL
-        unit = s.unit ?? s.amount === 0 ? Unit.Mi : Unit.i
+        unit = s.unit ?? (s.amount === 0 ? Unit.Mi : Unit.i)
         amount = s.amount === 0 ? '' : formatUnitPrecision(s.amount, Unit.i, false)
         address = s.address
         if (from && accountsDropdownItems) {
