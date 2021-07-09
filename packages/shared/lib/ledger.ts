@@ -34,13 +34,13 @@ export function getLedgerDeviceStatus(
 }
 
 export function calculateLedgerDeviceState(status: LedgerStatus): LedgerDeviceState {
-    const { locked, connected, appName } = status
+    const { locked, connected, app } = status
     if (locked) {
         return LedgerDeviceState.Locked
     } else {
-        if (appName === AppName.IOTA) {
+        if (app?.name === AppName.IOTA) {
             return LedgerDeviceState.Connected
-        } else if (appName === AppName.IOTALegacy) {
+        } else if (app?.name === AppName.IOTALegacy) {
             return LedgerDeviceState.LegacyConnected
         } else {
             return connected ? LedgerDeviceState.AppNotOpen : LedgerDeviceState.NotDetected

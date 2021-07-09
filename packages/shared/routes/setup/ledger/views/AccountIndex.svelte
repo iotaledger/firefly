@@ -9,12 +9,41 @@
     export let mobile
 
     let busy = false
+    let expert = false
+
+    let min = 0
+    let max = 2147483647
 
     let index = 0
     let page = 0
-    let expert = false
+
+    $: index = checkNumber(index)
+    $: page = checkNumber(page)
+
+    let isValidAccountIndex = false
+    $: isValidAccountIndex = isValidNumber(index)
+    let isValidAccountPage = false
+    $: isValidAccountPage = isValidNumber(page)
 
     const dispatch = createEventDispatcher()
+
+    function checkNumber(n: number): number {
+        if (!isWithinRange(n)) n = Math.min(Math.max(n, min), max)
+
+        return n
+    }
+
+    function isValidNumber(n: number): boolean {
+        return isPositiveInteger(n) && isWithinRange(n)
+    }
+
+    function isPositiveInteger(n: number): boolean {
+        return /^[0-9]+$/.test(String(n))
+    }
+
+    function isWithinRange(n: number): boolean {
+        return n >= min && n <= max
+    }
 
     function handleContinueClick() {
         busy = true
@@ -66,18 +95,18 @@
                 </div>
                 <div>
                     <Text type="p" secondary classes="mb-2">{locale('views.selectLedgerAccountIndex.accountIndex')}</Text>
-                    <Number bind:value={index} />
+                    <Number bind:value={index} {min} {max} error={!isValidAccountIndex ? locale('error.account.index') : ''} />
                 </div>
                 {#if expert}
                     <div>
                         <Text type="p" secondary classes="mb-2">{locale('views.selectLedgerAccountIndex.accountPage')}</Text>
-                        <Number bind:value={page} />
+                        <Number bind:value={page} {min} {max} error={!isValidAccountPage ? locale('error.account.page') : ''} />
                     </div>
                 {/if}
             </div>
         </div>
         <div slot="leftpane__action" class="flex flex-col space-y-4">
-            <Button classes="w-full" disabled={busy} onClick={handleContinueClick}>
+            <Button classes="w-full" disabled={busy || !isValidAccountIndex || !isValidAccountPage} onClick={handleContinueClick}>
                 {#if busy}
                     <Spinner busy={true} message={locale('views.migrate.findingBalance')} classes="justify-center" />
                 {:else}{locale('actions.confirm')}{/if}

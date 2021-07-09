@@ -6,11 +6,7 @@ export interface LedgerApp {
 export interface LedgerStatus {
     connected: boolean,
     locked: boolean,
-
-    // TODO: Fix parsing of the API data
-    // app?: LedgerApp
-    appName?: string,
-    appVersion?: string,
+    app?: LedgerApp
 }
 
 export enum LedgerDeviceState {
