@@ -101,6 +101,15 @@
     }
 
     function handleRerunClick() {
+        if (legacyLedger) {
+            const _onConnected = () => rerunMigration()
+            promptUserToConnectLedger(true, _onConnected)
+        } else {
+            rerunMigration()
+        }
+    }
+
+    function rerunMigration() {
         const _unmigratedBundles = $unmigratedBundles
         const unmigratedBundleIndexes = _unmigratedBundles.map((_bundle) => _bundle.index)
 
@@ -124,50 +133,37 @@
                     .then((acc) => {
                         if (legacyLedger) {
                             if (transaction.trytes && transaction.trytes.length) {
-                                const _onConnected = () => {
-                                    Electron.ledger
-                                        .selectSeed(
-                                            $hardwareIndexes.accountIndex,
-                                            $hardwareIndexes.pageIndex,
-                                            ADDRESS_SECURITY_LEVEL
-                                        )
-                                        .then((iota) => {
-                                            return createMinedLedgerMigrationBundle(transaction.index, iota.prepareTransfers)
-                                        })
-                                        .then(({ trytes, bundleHash }) => {
-                                            return sendLedgerMigrationBundle(bundleHash, trytes)
-                                        })
-                                        .then(() => {
-                                            migratedAndUnconfirmedBundles = [
-                                                ...migratedAndUnconfirmedBundles,
-                                                transaction.bundleHash,
-                                            ]
-                                        })
-                                }
-                                return promptUserToConnectLedger(true, _onConnected)
-                            }
-
-                            const _onConnected = () => {
-                                Electron.ledger
+                                return Electron.ledger
                                     .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
                                     .then((iota) => {
-                                        return createLedgerMigrationBundle(transaction.index, iota.prepareTransfers)
+                                        return createMinedLedgerMigrationBundle(transaction.index, iota.prepareTransfers)
                                     })
                                     .then(({ trytes, bundleHash }) => {
-                                        transactions = transactions.map((_transaction) => {
-                                            if (_transaction.index === transaction.index) {
-                                                return { ..._transaction, bundleHash }
-                                            }
-
-                                            return _transaction
-                                        })
-
-                                        return sendLedgerMigrationBundle(bundleHash, trytes).then(() => {
-                                            migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, bundleHash]
-                                        })
+                                        return sendLedgerMigrationBundle(bundleHash, trytes)
+                                    })
+                                    .then(() => {
+                                        migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, transaction.bundleHash]
                                     })
                             }
-                            return promptUserToConnectLedger(true, _onConnected)
+
+                            return Electron.ledger
+                                .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
+                                .then((iota) => {
+                                    return createLedgerMigrationBundle(transaction.index, iota.prepareTransfers)
+                                })
+                                .then(({ trytes, bundleHash }) => {
+                                    transactions = transactions.map((_transaction) => {
+                                        if (_transaction.index === transaction.index) {
+                                            return { ..._transaction, bundleHash }
+                                        }
+
+                                        return _transaction
+                                    })
+
+                                    return sendLedgerMigrationBundle(bundleHash, trytes).then(() => {
+                                        migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, bundleHash]
+                                    })
+                                })
                         }
 
                         if (transaction.bundleHash) {
@@ -228,6 +224,15 @@
 
     onDestroy(unsubscribe)
 
+    function handleMigrateClick() {
+        if (legacyLedger) {
+            const _onConnected = () => migrateFunds()
+            promptUserToConnectLedger(true, _onConnected)
+        } else {
+            migrateFunds()
+        }
+    }
+
     function migrateFunds() {
         // TODO: Rethink if we need to only update status of the transaction we are actually sending
         transactions = transactions.map((item) => ({ ...item, status: 1 }))
@@ -242,48 +247,10 @@
                     .then((acc) => {
                         if (legacyLedger) {
                             if (transaction.trytes && transaction.trytes.length) {
-                                const _onConnected = () => {
-                                    Electron.ledger
-                                        .selectSeed(
-                                            $hardwareIndexes.accountIndex,
-                                            $hardwareIndexes.pageIndex,
-                                            ADDRESS_SECURITY_LEVEL
-                                        )
-                                        .then((iota) => {
-                                            return createMinedLedgerMigrationBundle(transaction.index, iota.prepareTransfers)
-                                        })
-                                        .then(({ trytes, bundleHash }) => {
-                                            transactions = transactions.map((_transaction, i) => {
-                                                if (_transaction.index === transaction.index) {
-                                                    return { ..._transaction, bundleHash }
-                                                }
-
-                                                return _transaction
-                                            })
-
-                                            return sendLedgerMigrationBundle(bundleHash, trytes)
-                                        })
-                                        .then(() => {
-                                            if (!hasBroadcastAnyBundle) {
-                                                hasBroadcastAnyBundle = true
-
-                                                persistProfile()
-                                            }
-
-                                            migratedAndUnconfirmedBundles = [
-                                                ...migratedAndUnconfirmedBundles,
-                                                transaction.bundleHash,
-                                            ]
-                                        })
-                                }
-                                return promptUserToConnectLedger(true, _onConnected)
-                            }
-
-                            const _onConnected = () => {
-                                Electron.ledger
+                                return Electron.ledger
                                     .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
                                     .then((iota) => {
-                                        return createLedgerMigrationBundle(transaction.index, iota.prepareTransfers)
+                                        return createMinedLedgerMigrationBundle(transaction.index, iota.prepareTransfers)
                                     })
                                     .then(({ trytes, bundleHash }) => {
                                         transactions = transactions.map((_transaction, i) => {
@@ -294,18 +261,43 @@
                                             return _transaction
                                         })
 
-                                        return sendLedgerMigrationBundle(bundleHash, trytes).then(() => {
-                                            if (!hasBroadcastAnyBundle) {
-                                                hasBroadcastAnyBundle = true
+                                        return sendLedgerMigrationBundle(bundleHash, trytes)
+                                    })
+                                    .then(() => {
+                                        if (!hasBroadcastAnyBundle) {
+                                            hasBroadcastAnyBundle = true
 
-                                                persistProfile()
-                                            }
+                                            persistProfile()
+                                        }
 
-                                            migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, bundleHash]
-                                        })
+                                        migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, transaction.bundleHash]
                                     })
                             }
-                            return promptUserToConnectLedger(true, _onConnected)
+
+                            return Electron.ledger
+                                .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
+                                .then((iota) => {
+                                    return createLedgerMigrationBundle(transaction.index, iota.prepareTransfers)
+                                })
+                                .then(({ trytes, bundleHash }) => {
+                                    transactions = transactions.map((_transaction, i) => {
+                                        if (_transaction.index === transaction.index) {
+                                            return { ..._transaction, bundleHash }
+                                        }
+
+                                        return _transaction
+                                    })
+
+                                    return sendLedgerMigrationBundle(bundleHash, trytes).then(() => {
+                                        if (!hasBroadcastAnyBundle) {
+                                            hasBroadcastAnyBundle = true
+
+                                            persistProfile()
+                                        }
+
+                                        migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, bundleHash]
+                                    })
+                                })
                         }
 
                         if (transaction.bundleHash) {
@@ -387,7 +379,7 @@
         </div>
         <div slot="leftpane__action" class="flex flex-col items-center space-y-4">
             {#if !migrated}
-                <Button disabled={busy} classes="w-full py-3 mt-2 text-white" onClick={() => migrateFunds()}>
+                <Button disabled={busy} classes="w-full py-3 mt-2 text-white" onClick={() => handleMigrateClick()}>
                     <Spinner {busy} message={migratingFundsMessage} classes="justify-center" />
                     {#if !busy && !migrated}{locale('views.transferFragmentedFunds.migrate')}{/if}
                 </Button>
