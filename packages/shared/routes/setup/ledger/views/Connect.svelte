@@ -109,13 +109,13 @@
             <Text type="h2" classes="mb-5">{locale('views.connectLedger.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.connectLedger.body')}</Text>
             <div class="flex flex-col flex-nowrap space-y-2">
-                <div class="flex flex-row space-x-2">
+                <div class="flex flex-row items-center space-x-2">
                     <Icon
                         icon={`status-${isConnected ? 'success' : 'error'}`}
                         classes={`text-white bg-${isConnected ? 'green' : 'red'}-600 rounded-full`} />
                     <Text type="p" secondary>{locale('views.connectLedger.trafficLight1')}</Text>
                 </div>
-                <div class="flex flex-row space-x-2">
+                <div class="flex flex-row items-center space-x-2">
                     <Icon
                         icon={`status-${isAppOpen ? 'success' : 'error'}`}
                         classes={`text-white bg-${isAppOpen ? 'green' : 'red'}-600 rounded-full`} />
