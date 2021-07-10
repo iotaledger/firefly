@@ -4,11 +4,9 @@
     import {
         createMigrationBundle,
         getInputIndexesForBundle,
+        mineLedgerBundle,
         MINING_TIMEOUT_SECONDS,
         selectedBundlesToMine,
-        hardwareIndexes,
-        mineLedgerBundle,
-        ADDRESS_SECURITY_LEVEL,
     } from 'shared/lib/migration'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
@@ -34,8 +32,6 @@
         $selectedBundlesToMine.reduce(
             (promise, bundle, idx) =>
                 promise.then((acc) => {
-                    const isMigratingLedger = $walletSetupType === SetupType.TrinityLedger
-
                     const _updateOnSuccess = () => {
                         timeElapsed = (idx + 1) * MINING_TIMEOUT_SECONDS
                         updateProgress()
@@ -58,12 +54,8 @@
                         }
                     }
 
-                    if (isMigratingLedger) {
-                        return Electron.ledger
-                            .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
-                            .then((iota) => {
-                                return mineLedgerBundle(bundle.index, bundle.miningRuns * 10 ** 8)
-                            })
+                    if (legacyLedger) {
+                        return mineLedgerBundle(bundle.index, bundle.miningRuns * 10 ** 8)
                             .then(() => {
                                 _updateOnSuccess()
                             })
@@ -72,7 +64,6 @@
                                 _updateOnError()
                             })
                     }
-
                     return createMigrationBundle(getInputIndexesForBundle(bundle), bundle.miningRuns * 10 ** 8, true)
                         .then((result) => {
                             _updateOnSuccess()
@@ -85,10 +76,8 @@
                 }),
             Promise.resolve([])
         )
-
         initiateProgressBar()
     })
-
     function redirectWithTimeout(_timeout = 1500) {
         timeout = setTimeout(() => {
             dispatch('next')
@@ -106,16 +95,6 @@
 
             updateProgress()
         }, 2000)
-    }
-
-    function handleBackClick() {
-        dispatch('previous')
-    }
-
-    //TODO:
-    const handleCancelClick = () => {
-        console.log('Cancel clicked')
-        // dispatch('previous')
     }
 
     onDestroy(() => {
