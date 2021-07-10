@@ -9,6 +9,7 @@
         formatCurrency,
     } from 'shared/lib/currency'
     import { Electron } from 'shared/lib/electron'
+    import { promptUserToConnectLedger } from 'shared/lib/ledger'
     import {
         ADDRESS_SECURITY_LEVEL,
         bundlesWithUnspentAddresses,
@@ -169,18 +170,22 @@
         isCheckingForBalance = true
         if (legacyLedger) {
             // TODO: add ledger legacy popup when PR merged
-            Electron.ledger
-                .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
-                .then((iota) => {
-                    return getLedgerMigrationData(iota.getAddress)
-                })
-                .then((data) => {
-                    isCheckingForBalance = false
-                })
-                .catch((error) => {
-                    isCheckingForBalance = false
-                    console.error(error)
-                })
+            const _onConnected = () => {
+                Electron.ledger
+                    .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
+                    .then((iota) => {
+                        return getLedgerMigrationData(iota.getAddress)
+                    })
+                    .then((data) => {
+                        isCheckingForBalance = false
+                    })
+                    .catch((error) => {
+                        isCheckingForBalance = false
+                        console.error(error)
+                    })
+            }
+            const _onCancel = () => (isCheckingForBalance = false)
+            promptUserToConnectLedger(true, _onConnected, _onCancel)
         } else {
             getMigrationData($seed, $data.lastCheckedAddressIndex)
                 .then(() => {
@@ -200,6 +205,7 @@
     <div>not yet implemented</div>
 {:else}
     <OnboardingLayout
+        busy={isCheckingForBalance}
         onBackClick={handleBackClick}
         {locale}
         showLedgerProgress={legacyLedger}
