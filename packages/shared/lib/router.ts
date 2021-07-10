@@ -191,14 +191,18 @@ export const routerNext = (event) => {
             }
             break
         case AppRoute.Balance:
-            nextRoute = AppRoute.Password
+            if (get(walletSetupType) === SetupType.TrinityLedger) {
+                nextRoute = AppRoute.Migrate
+            } else {
+                nextRoute = AppRoute.Password
+            }
             break
         case AppRoute.Migrate:
             nextRoute = AppRoute.Congratulations
             break
         case AppRoute.LedgerSetup:
             if (get(walletSetupType) === SetupType.TrinityLedger) {
-                nextRoute = AppRoute.Migrate
+                nextRoute = AppRoute.Balance
             } else {
                 nextRoute = AppRoute.Congratulations
             }

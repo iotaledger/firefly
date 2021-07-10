@@ -8,11 +8,17 @@
         exchangeRates,
         formatCurrency,
     } from 'shared/lib/currency'
+    import { Electron } from 'shared/lib/electron'
+    import { promptUserToConnectLedger } from 'shared/lib/ledger'
     import {
+        ADDRESS_SECURITY_LEVEL,
         bundlesWithUnspentAddresses,
+        getLedgerMigrationData,
         getMigrationData,
+        hardwareIndexes,
         hasAnySpentAddressWithNoBundleHashes,
         hasLowBalanceOnAllSpentAddresses,
+        legacyAddressForTesting,
         migration,
         MINIMUM_MIGRATION_BALANCE,
         resetMigrationState,
@@ -20,7 +26,10 @@
         unselectedInputs,
     } from 'shared/lib/migration'
     import { closePopup, openPopup } from 'shared/lib/popup'
+    import { walletSetupType } from 'shared/lib/router'
+    import { SetupType } from 'shared/lib/typings/routes'
     import { formatUnitBestMatch } from 'shared/lib/units'
+    import { setClipboard } from 'shared/lib/utils'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
 
@@ -56,6 +65,8 @@
     let error = getError(balance)
     let formattedBalance = formatUnitBestMatch(balance, true, 3)
 
+    let legacyLedger = $walletSetupType === SetupType.TrinityLedger
+
     bundles.subscribe((updatedBundles) => {
         _bundles = updatedBundles
         error = getError(_data.balance)
@@ -77,7 +88,7 @@
         if (_balance === 0) {
             return {
                 allowToProceed: false,
-                text: locale('views.balance.zeroBalance'),
+                text: locale(`views.balance.${legacyLedger ? 'zeroBalanceLedgerLegacy' : 'zeroBalance'}`),
             }
         }
 
@@ -157,14 +168,34 @@
 
     function checkAgain() {
         isCheckingForBalance = true
-        getMigrationData($seed, $data.lastCheckedAddressIndex)
-            .then(() => {
-                isCheckingForBalance = false
-            })
-            .catch((error) => {
-                isCheckingForBalance = false
-                console.error(error)
-            })
+        if (legacyLedger) {
+            // TODO: add ledger legacy popup when PR merged
+            const _onConnected = () => {
+                Electron.ledger
+                    .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
+                    .then((iota) => {
+                        return getLedgerMigrationData(iota.getAddress)
+                    })
+                    .then((data) => {
+                        isCheckingForBalance = false
+                    })
+                    .catch((error) => {
+                        isCheckingForBalance = false
+                        console.error(error)
+                    })
+            }
+            const _onCancel = () => (isCheckingForBalance = false)
+            promptUserToConnectLedger(true, _onConnected, _onCancel)
+        } else {
+            getMigrationData($seed, $data.lastCheckedAddressIndex)
+                .then(() => {
+                    isCheckingForBalance = false
+                })
+                .catch((error) => {
+                    isCheckingForBalance = false
+                    console.error(error)
+                })
+        }
     }
 
     onDestroy(unsubscribe)
@@ -173,7 +204,12 @@
 {#if mobile}
     <div>not yet implemented</div>
 {:else}
-    <OnboardingLayout onBackClick={handleBackClick}>
+    <OnboardingLayout
+        busy={isCheckingForBalance}
+        onBackClick={handleBackClick}
+        {locale}
+        showLedgerProgress={legacyLedger}
+        showLedgerVideoButton={legacyLedger}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-3.5">{locale('views.balance.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.balance.body')}</Text>
@@ -183,6 +219,13 @@
             </Box>
             {#if error.text}
                 <Toast classes="mt-4" type="error" message={error.text} />
+            {/if}
+            {#if legacyLedger}
+                <div
+                    on:click={() => setClipboard($legacyAddressForTesting)}
+                    class="cursor-pointer flex mt-2 flex-col items-center bg-gray-50 dark:bg-gray-700 rounded-2xl p-5 text-center">
+                    <Text type="pre">{$legacyAddressForTesting}</Text>
+                </div>
             {/if}
         </div>
         <div slot="leftpane__action" class="flex flex-row justify-between items-center space-x-4">

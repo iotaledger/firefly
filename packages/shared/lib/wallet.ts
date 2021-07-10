@@ -32,8 +32,9 @@ import { formatUnitBestMatch } from 'shared/lib/units'
 import { get, writable, Writable } from 'svelte/store'
 import type { ClientOptions } from './typings/client'
 import type { TransferProgressEventType } from './typings/events'
+import type { LedgerApp, LedgerStatus } from './typings/ledger'
 import type { Message } from './typings/message'
-import type { Duration, LedgerStatusPayload, StrongholdStatus } from './typings/wallet'
+import type { Duration, StrongholdStatus } from './typings/wallet'
 import type { NodeAuth, NodeInfo } from './typings/node'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
@@ -258,7 +259,7 @@ export const api: {
     ),
     getLedgerDeviceStatus(
         ledgerSimulator: boolean,
-        callbacks: { onSuccess: (response: Event<LedgerStatusPayload>) => void, onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: Event<LedgerStatus>) => void, onError: (err: ErrorEventPayload) => void }
     )
 } = window['__WALLET_API__']
 
