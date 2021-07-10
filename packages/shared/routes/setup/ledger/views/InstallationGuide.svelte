@@ -53,8 +53,8 @@
             </div>
             <Button classes="w-full" onClick={handleContinueClick}>{locale('views.ledgerInstallationGuide.action')}</Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-start items-center bg-gray-50 dark:bg-gray-900">
-            <Illustration width="95%" illustration="ledger-install-apps-desktop" />
+        <div slot="rightpane" class="w-full h-full flex justify-center items-center bg-gray-50 dark:bg-gray-900">
+            <Illustration width="100%" illustration="ledger-install-new-app-desktop" />
         </div>
     </OnboardingLayout>
 {/if}
