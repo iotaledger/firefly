@@ -20,7 +20,7 @@
 
     let accountAlias = ''
     let isBusy = false
-    let color = ''
+    let color = 'blue'
     let pattern = ''
 
     // This looks odd but sets a reactive dependency on accountAlias, so when it changes the error will clear
@@ -96,10 +96,13 @@
         </div>
         <div class="w-full h-full flex flex-col justify-between">
             <AccountTile
-                name={accountAlias || locale('general.accountName')}
                 balance={'0 Mi'}
                 balanceEquiv={'US$ 0,00'}
-                {color} />
+                {color}
+                disabledHover=true
+                name={accountAlias || locale('general.accountName')}
+                {pattern}
+                size='l' />
             <Input
                 {error}
                 bind:value={accountAlias}

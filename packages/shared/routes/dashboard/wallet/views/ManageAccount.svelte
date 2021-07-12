@@ -83,10 +83,13 @@
         </div>
         <div class="w-full h-full flex flex-col justify-between">
             <AccountTile
-                {color}
-                name={account.alias}
                 balance={account.balance}
-                balanceEquiv={account.balanceEquiv} />
+                balanceEquiv={account.balanceEquiv}
+                {color}
+                disabledHover=true
+                name={accountAlias || account.alias}
+                {pattern}
+                size='l' />
             <Input
                 {error}
                 bind:value={accountAlias}
