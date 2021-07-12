@@ -21,7 +21,7 @@
 <div class="p-8 flex flex-col w-full items-center justify-center text-center">
     <Icon icon="ledger" width="48" height="48" classes="mb-6 text-gray-800 dark:text-white" />
     {#if shouldDisplayRemainderAddress || shouldDisplaySendTo}
-        <Text type="p" classes="mb-6 px-16">{locale('popups.ledgerConfirmation.transactionConfirm')}</Text>
+        <Text type="p" classes="mb-9 px-16">{locale('popups.ledgerConfirmation.transactionConfirm')}</Text>
         {#if shouldDisplaySendTo}
             <div>
                 <Text type="h5" highlighted classes="mb-3">{locale('general.sendTo')}</Text>

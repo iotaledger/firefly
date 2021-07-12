@@ -588,7 +588,7 @@
         },
         "ledgerConfirmation": {
             "confirm": "To proceed, confirm the prompt displayed on your Ledger device",
-            "transactionConfirm": "To proceed, confirm the following details with those prompted on your Ledger device:"
+            "transactionConfirm": "To proceed, confirm the following details with those displayed on your Ledger device:"
         },
         "ledgerAppGuide": {
             "title": "Guide to installing the Ledger apps",
@@ -941,7 +941,7 @@
             "wrong": "You have connected the wrong Ledger device or the mnemonic has changed.",
             "locked": "Please unlock your Ledger device by entering the PIN.",
             "generic": "There was an error connecting to your Ledger device.",
-            "appNotOpen": "You must open the IOTA app on your Ledger device."
+            "appNotOpen": "The IOTA app on your Ledger device must be open."
         }
     },
     "tooltips": {
