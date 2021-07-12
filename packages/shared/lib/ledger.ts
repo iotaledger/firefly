@@ -13,12 +13,20 @@ export const ledgerSimulator = false
 export const ledgerDeviceState = writable<LedgerDeviceState>(LedgerDeviceState.NotDetected)
 export const isLedgerLegacyConnected = writable<boolean>(false)
 
-export function getLedgerDeviceStatus(onConnected = () => { }, onDisconnected = () => { }, onError = () => { }, legacy: boolean = false) {
+export function getLedgerDeviceStatus(
+    legacy: boolean = false,
+    onConnected = () => { },
+    onDisconnected = () => { },
+    onError = () => { }
+) {
     api.getLedgerDeviceStatus(ledgerSimulator, {
         onSuccess(response: Event<LedgerStatus>) {
             ledgerDeviceState.set(calculateLedgerDeviceState(response.payload))
 
-            if (response.payload?.connected) {
+            const state = get(ledgerDeviceState)
+            const isConnected = (legacy && state === LedgerDeviceState.LegacyConnected)
+                            || (!legacy && state === LedgerDeviceState.Connected)
+            if (isConnected) {
                 onConnected()
             } else {
                 onDisconnected()
@@ -67,7 +75,7 @@ export function promptUserToConnectLedger(
             openLedgerNotConnectedPopup(legacy, onCancel)
         }
     }
-    getLedgerDeviceStatus(_onConnected, _onDisconnected, _onCancel, legacy)
+    getLedgerDeviceStatus(legacy, _onConnected, _onDisconnected, _onCancel)
 }
 
 export function pollLedgerDeviceStatus(
@@ -78,9 +86,9 @@ export function pollLedgerDeviceStatus(
     _onCancel: () => void = () => { }
 ) {
     if (!polling) {
-        getLedgerDeviceStatus(_onConnected, _onDisconnected, _onCancel, legacy)
+        getLedgerDeviceStatus(legacy, _onConnected, _onDisconnected, _onCancel)
         intervalTimer = setInterval(async () => {
-            getLedgerDeviceStatus(_onConnected, _onDisconnected, _onCancel, legacy)
+            getLedgerDeviceStatus(legacy, _onConnected, _onDisconnected, _onCancel)
         }, pollInterval)
     }
     polling = true

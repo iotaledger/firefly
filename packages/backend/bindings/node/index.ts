@@ -53,7 +53,6 @@ import {
     changeStrongholdPassword as _changeStrongholdPassword,
     setClientOptions as _setClientOptions,
     getLedgerDeviceStatus as _getLedgerDeviceStatus,
-    getLedgerOpenedApp as _getLedgerOpenedApp,
     setStrongholdPasswordClearInterval as _setStrongholdPasswordClearInterval,
     getLegacySeedChecksum as _getLegacySeedChecksum
 } from '../../../shared/lib/typings/wallet'

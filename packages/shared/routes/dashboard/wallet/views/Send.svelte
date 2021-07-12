@@ -337,6 +337,7 @@
 
     const handleBackClick = () => {
         clearSendParams()
+
         accountRoute.set(AccountRoutes.Init)
         if (!$account) {
             walletRoute.set(WalletRoutes.Init)
@@ -370,11 +371,13 @@
 
     onMount(() => {
         pollLedgerDeviceStatus(false, 500, getLedgerDeviceStatus, getLedgerDeviceStatus, getLedgerDeviceStatus)
+
         updateFromSendParams($sendParams)
     })
 
     onDestroy(() => {
         stopPollingLedgerStatus()
+
         sendSubscription()
     })
 </script>
