@@ -1,7 +1,8 @@
 <script lang="typescript">
     import { Text, Pattern } from "shared/components"
 
-    export let title = "Pattern picker"
+    export let locale
+    export let title = locale('views.pickers.pattern')
     export let color = "turquoise"
     export let active = ""
 

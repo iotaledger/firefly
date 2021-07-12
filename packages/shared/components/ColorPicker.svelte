@@ -1,7 +1,8 @@
 <script lang="typescript">
     import { Text } from 'shared/components'
 
-    export let title = 'Color picker'
+    export let locale
+    export let title = locale('views.pickers.color')
     export let active = 'green'
 
     const colors = ['blue', 'lightblue', 'turquoise', 'green', 'yellow', 'orange', 'red', 'purple']

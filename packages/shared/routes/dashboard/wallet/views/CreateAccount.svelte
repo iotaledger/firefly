@@ -110,8 +110,8 @@
                 autofocus
                 submitHandler={handleCreateClick}
                 disabled={isBusy} />
-            <ColorPicker title='Wallet color' bind:active={color} />
-            <PatternPicker title='Wallet pattern' bind:color bind:active={pattern} />
+            <ColorPicker title={locale('general.accountColor')} bind:active={color} {locale} />
+            <PatternPicker title={locale('general.accountPattern')} bind:color bind:active={pattern} {locale} />
         </div>
     </div>
     <!-- Action -->
