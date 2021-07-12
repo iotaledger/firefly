@@ -3,8 +3,13 @@
 
     export let title = "Pattern picker"
     export let color = "turquoise"
+    export let active = ""
 
-    const patterns = ["", "circles", "clouds", "clover", "organic", "rain", "shapes", "wind"]
+    const patterns = ["", "clover", "circles", "clouds", "shapes", "wind", "rain", "organic"]
+
+    const handleClick = pattern => {
+        active = pattern;
+    }
 </script>
 
 <div>
@@ -13,7 +18,7 @@
     </div>
     <div class="grid grid-cols-4 grid-rows-2 gap-4">
         {#each patterns as pattern}
-            <Pattern classes='h-20 rounded-lg bg-{color}-500' {pattern} />
+            <Pattern classes='h-20 rounded-lg {pattern === active ? `bg-${color}-500 opacity-100 ring-${color}-500 ring-4 ring-opacity-30 hover:ring-opacity-40` : 'bg-gray-300 hover:bg-{color}-500 opacity-80 hover:opacity-100'}' {pattern} onClick={() => handleClick(pattern)} />
         {/each}
     </div>
 </div>
