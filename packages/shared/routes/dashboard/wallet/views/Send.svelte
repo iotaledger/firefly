@@ -329,7 +329,7 @@
             } else {
                 showAppNotification({
                     type: 'error',
-                    message: locale('error.ledger.transaction')
+                    message: locale('error.ledger.appNotOpen')
                 })
             }
         }
