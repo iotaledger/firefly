@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Text, Pattern } from "shared/components"
+    import { Text, Icon } from "shared/components"
 
     export let locale
     export let title = locale('views.pickers.pattern')
@@ -19,7 +19,12 @@
     </div>
     <div class="grid grid-cols-4 grid-rows-2 gap-4">
         {#each patterns as pattern}
-            <Pattern classes='h-20 rounded-lg {pattern === active ? `bg-${color}-500 opacity-100 ring-${color}-500 ring-4 ring-opacity-30 hover:ring-opacity-40` : 'bg-gray-300 hover:bg-{color}-500 opacity-80 hover:opacity-100'}' {pattern} onClick={() => handleClick(pattern)} />
+            <div
+                class="h-20 rounded-lg {pattern === active ? `bg-${color}-500 opacity-100 ring-${color}-500 ring-4 ring-opacity-30 hover:ring-opacity-40` : 'bg-gray-300 hover:bg-{color}-500 opacity-80 hover:opacity-100'} bg-no-repeat bg-center bg-cover bg cursor-pointer flex justify-center items-center"
+                style={`background-image: url("assets/patterns/${pattern}.svg");`}
+                on:click={() => handleClick(pattern)}>
+                {#if pattern === active}<Icon icon="checkmark" classes="bg-green-600 text-white rounded-full" />{/if}
+            </div>
         {/each}
     </div>
 </div>

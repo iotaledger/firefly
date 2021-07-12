@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Text } from 'shared/components'
+    import { Text, Icon } from 'shared/components'
 
     export let locale
     export let title = locale('views.pickers.color')
@@ -18,7 +18,9 @@
     </div>
     <div class="flex flex-row justify-between">
         {#each colors as color}
-            <div class='w-8 h-8 bg-{color}-500 hover:bg-{color}-600 rounded-lg ring-{color}-500 ring-opacity-30 hover:ring-opacity-40 cursor-pointer' class:ring-4="{color === active}" on:click={() => handleClick(color)}></div>
+            <div class='w-8 h-8 bg-{color}-500 hover:bg-{color}-600 rounded-lg ring-{color}-500 ring-opacity-30 hover:ring-opacity-40 cursor-pointer flex justify-center items-center' class:ring-4="{color === active}" on:click={() => handleClick(color)}>
+                {#if color === active}<Icon icon="checkmark" classes="text-white" />{/if}
+            </div>
         {/each}
     </div>
 </div>
