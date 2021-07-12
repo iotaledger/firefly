@@ -11,7 +11,7 @@
 
     export let toAddress = ''
     export let toAmount = -1
-    let shouldDisplaySendTo = toAddress && toAmount !== -1
+    let shouldDisplaySendTo = Boolean(toAddress) && toAmount !== -1
 
     const formatAmount = (amountRaw: number): string => {
         return formatUnitBestMatch(amountRaw)
