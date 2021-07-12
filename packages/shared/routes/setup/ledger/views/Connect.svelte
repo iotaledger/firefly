@@ -24,7 +24,7 @@
     let legacyLedger = $walletSetupType === SetupType.TrinityLedger
 
     let newLedgerProfile = $walletSetupType === SetupType.New
-    let busy = false
+    let creatingAccount = false
 
     let LEDGER_STATUS_POLL_INTERVAL = 1500
 
@@ -46,6 +46,8 @@
     onDestroy(stopPollingLedgerStatus)
 
     function createAccount() {
+        creatingAccount = true
+
         const officialNodes = getOfficialNodes()
         const officialNetwork = getOfficialNetwork()
 
@@ -62,16 +64,18 @@
                 },
                 {
                     onSuccess() {
-                        busy = false
+                        creatingAccount = false
+
                         dispatch('next')
                     },
                     onError(error) {
-                        busy = false
+                        creatingAccount = false
+
                         console.error(error)
                     },
                 }
             )
-        const _onCancel = () => (busy = false)
+        const _onCancel = () => (creatingAccount = false)
         promptUserToConnectLedger(false, _onConnected, _onCancel)
     }
 
@@ -82,12 +86,13 @@
     }
 
     function handleContinueClick() {
-        busy = true
+        creatingAccount = true
+
         if (newLedgerProfile) {
             createAccount()
         } else {
             const _onConnected = () => dispatch('next')
-            const _onCancel = () => (busy = false)
+            const _onCancel = () => (creatingAccount = false)
             promptUserToConnectLedger(false, _onConnected, _onCancel)
         }
     }
