@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Animation, Button, Illustration, OnboardingLayout, Spinner, Text, TransactionItem } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
+    import { promptUserToConnectLedger } from 'shared/lib/ledger'
     import {
         ADDRESS_SECURITY_LEVEL,
         confirmedBundles,
@@ -100,6 +101,15 @@
     }
 
     function handleRerunClick() {
+        if (legacyLedger) {
+            const _onConnected = () => rerunMigration()
+            promptUserToConnectLedger(true, _onConnected)
+        } else {
+            rerunMigration()
+        }
+    }
+
+    function rerunMigration() {
         const _unmigratedBundles = $unmigratedBundles
         const unmigratedBundleIndexes = _unmigratedBundles.map((_bundle) => _bundle.index)
 
@@ -121,9 +131,7 @@
                 // @ts-ignore
                 promise
                     .then((acc) => {
-                        const isMigratingFromTrinityLedger = $walletSetupType === SetupType.TrinityLedger
-
-                        if (isMigratingFromTrinityLedger) {
+                        if (legacyLedger) {
                             if (transaction.trytes && transaction.trytes.length) {
                                 return Electron.ledger
                                     .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
@@ -216,6 +224,15 @@
 
     onDestroy(unsubscribe)
 
+    function handleMigrateClick() {
+        if (legacyLedger) {
+            const _onConnected = () => migrateFunds()
+            promptUserToConnectLedger(true, _onConnected)
+        } else {
+            migrateFunds()
+        }
+    }
+
     function migrateFunds() {
         // TODO: Rethink if we need to only update status of the transaction we are actually sending
         transactions = transactions.map((item) => ({ ...item, status: 1 }))
@@ -228,9 +245,7 @@
                 // @ts-ignore
                 promise
                     .then((acc) => {
-                        const isMigratingFromTrinityLedger = $walletSetupType === SetupType.TrinityLedger
-
-                        if (isMigratingFromTrinityLedger) {
+                        if (legacyLedger) {
                             if (transaction.trytes && transaction.trytes.length) {
                                 return Electron.ledger
                                     .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
@@ -364,7 +379,7 @@
         </div>
         <div slot="leftpane__action" class="flex flex-col items-center space-y-4">
             {#if !migrated}
-                <Button disabled={busy} classes="w-full py-3 mt-2 text-white" onClick={() => migrateFunds()}>
+                <Button disabled={busy} classes="w-full py-3 mt-2 text-white" onClick={() => handleMigrateClick()}>
                     <Spinner {busy} message={migratingFundsMessage} classes="justify-center" />
                     {#if !busy && !migrated}{locale('views.transferFragmentedFunds.migrate')}{/if}
                 </Button>

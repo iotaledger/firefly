@@ -155,6 +155,21 @@ export interface GeneratingRemainderDepositAddressEvent extends TransferProgress
     address: string
 }
 
+/// Prepared the transaction.
+export interface PreparedTransactionEvent {
+    /// The type of the transfer progress event.
+    type: TransferProgressEventType
+
+    /// Transaction inputs. [address, amount][]
+    inputs: any[][]
+
+    /// Transaction outputs. [address, amount, remainder][]
+    outputs: any[][]
+
+    /// The indexation data.
+    data: string
+}
+
 export interface TransferProgressEventPayload {
     accountId: string
     event: TransferProgressEvent | PreparedTransactionEvent | GeneratingRemainderDepositAddressEvent

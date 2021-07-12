@@ -11,7 +11,7 @@
     import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
     import { openPopup } from 'shared/lib/popup'
     import { walletSetupType } from 'shared/lib/router'
-    import { LedgerDeviceState } from "shared/lib/typings/ledger";
+    import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { SetupType } from 'shared/lib/typings/routes'
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
@@ -24,7 +24,7 @@
     let legacyLedger = $walletSetupType === SetupType.TrinityLedger
 
     let newLedgerProfile = $walletSetupType === SetupType.New
-    let creatingAccount = false
+    let busy = false
 
     let LEDGER_STATUS_POLL_INTERVAL = 1500
 
@@ -39,14 +39,13 @@
     const dispatch = createEventDispatcher()
 
     onMount(() => {
-        pollLedgerDeviceStatus(LEDGER_STATUS_POLL_INTERVAL, getLedgerDeviceStatus)
+        pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL, getLedgerDeviceStatus, getLedgerDeviceStatus)
         polling = true
     })
 
     onDestroy(stopPollingLedgerStatus)
 
     function createAccount() {
-        creatingAccount = true
         const officialNodes = getOfficialNodes()
         const officialNetwork = getOfficialNetwork()
 
@@ -63,17 +62,17 @@
                 },
                 {
                     onSuccess() {
-                        creatingAccount = false
+                        busy = false
                         dispatch('next')
                     },
                     onError(error) {
-                        creatingAccount = false
+                        busy = false
                         console.error(error)
                     },
                 }
             )
-        const _onCancel = () => (creatingAccount = false)
-        promptUserToConnectLedger(_onConnected, _onCancel)
+        const _onCancel = () => (busy = false)
+        promptUserToConnectLedger(false, _onConnected, _onCancel)
     }
 
     function handlePopupOpen() {
@@ -83,11 +82,13 @@
     }
 
     function handleContinueClick() {
+        busy = true
         if (newLedgerProfile) {
             createAccount()
         } else {
             const _onConnected = () => dispatch('next')
-            promptUserToConnectLedger(_onConnected)
+            const _onCancel = () => (busy = false)
+            promptUserToConnectLedger(false, _onConnected, _onCancel)
         }
     }
 
@@ -108,13 +109,13 @@
             <Text type="h2" classes="mb-5">{locale('views.connectLedger.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.connectLedger.body')}</Text>
             <div class="flex flex-col flex-nowrap space-y-2">
-                <div class="flex flex-row space-x-2">
+                <div class="flex flex-row items-center space-x-2">
                     <Icon
                         icon={`status-${isConnected ? 'success' : 'error'}`}
                         classes={`text-white bg-${isConnected ? 'green' : 'red'}-600 rounded-full`} />
                     <Text type="p" secondary>{locale('views.connectLedger.trafficLight1')}</Text>
                 </div>
-                <div class="flex flex-row space-x-2">
+                <div class="flex flex-row items-center space-x-2">
                     <Icon
                         icon={`status-${isAppOpen ? 'success' : 'error'}`}
                         classes={`text-white bg-${isAppOpen ? 'green' : 'red'}-600 rounded-full`} />

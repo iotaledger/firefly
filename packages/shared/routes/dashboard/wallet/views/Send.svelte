@@ -369,7 +369,7 @@
     })
 
     onMount(() => {
-        pollLedgerDeviceStatus(500, getLedgerDeviceStatus, getLedgerDeviceStatus, getLedgerDeviceStatus)
+        pollLedgerDeviceStatus(false, 500, getLedgerDeviceStatus, getLedgerDeviceStatus, getLedgerDeviceStatus)
         updateFromSendParams($sendParams)
     })
 

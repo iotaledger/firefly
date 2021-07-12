@@ -1,9 +1,8 @@
-import { Electron } from 'shared/lib/electron'
 import { closePopup, openPopup, popupState } from 'shared/lib/popup'
 import { api } from 'shared/lib/wallet'
 import { get, writable } from 'svelte/store'
 import type { Event } from "./typings/events"
-import { LedgerDeviceState, LedgerStatus } from "./typings/ledger"
+import { AppName, LedgerDeviceState, LedgerStatus } from "./typings/ledger"
 
 const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
 
@@ -14,7 +13,7 @@ export const ledgerSimulator = false
 export const ledgerDeviceState = writable<LedgerDeviceState>(LedgerDeviceState.NotDetected)
 export const isLedgerLegacyConnected = writable<boolean>(false)
 
-export function getLedgerDeviceStatus(onConnected = () => { }, onDisconnected = () => { }, onError = () => { }) {
+export function getLedgerDeviceStatus(onConnected = () => { }, onDisconnected = () => { }, onError = () => { }, legacy: boolean = false) {
     api.getLedgerDeviceStatus(ledgerSimulator, {
         onSuccess(response: Event<LedgerStatus>) {
             ledgerDeviceState.set(calculateLedgerDeviceState(response.payload))
@@ -32,20 +31,24 @@ export function getLedgerDeviceStatus(onConnected = () => { }, onDisconnected = 
 }
 
 export function calculateLedgerDeviceState(status: LedgerStatus): LedgerDeviceState {
-    if(status.locked) {
+    const { locked, connected, app } = status
+    if (locked) {
         return LedgerDeviceState.Locked
     } else {
-        if(status.connected) {
-            return status.app.name === 'IOTA' ? LedgerDeviceState.Connected : LedgerDeviceState.AppNotOpen
+        if (app?.name === AppName.IOTA) {
+            return LedgerDeviceState.Connected
+        } else if (app?.name === AppName.IOTALegacy) {
+            return LedgerDeviceState.LegacyConnected
         } else {
-            return LedgerDeviceState.NotDetected
+            return connected ? LedgerDeviceState.AppNotOpen : LedgerDeviceState.NotDetected
         }
     }
 }
 
 export function promptUserToConnectLedger(
-    onConnected = () => { },
-    onCancel = () => { },
+    legacy: boolean = false,
+    onConnected: () => void = () => { },
+    onCancel: () => void = () => { },
 ) {
     const _onCancel = () => {
         stopPollingLedgerStatus()
@@ -59,25 +62,34 @@ export function promptUserToConnectLedger(
         onConnected()
     }
     const _onDisconnected = () => {
-        pollLedgerDeviceStatus(LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT, _onConnected, _onDisconnected, _onCancel)
+        pollLedgerDeviceStatus(legacy, LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT, _onConnected, _onDisconnected, _onCancel)
         if (!get(popupState).active) {
-            openLedgerNotConnectedPopup(false, onCancel)
+            openLedgerNotConnectedPopup(legacy, onCancel)
         }
     }
-    getLedgerDeviceStatus(_onConnected, _onDisconnected, _onCancel)
+    getLedgerDeviceStatus(_onConnected, _onDisconnected, _onCancel, legacy)
 }
 
-export function pollLedgerDeviceStatus(pollInterval, _onConnected = () => { }, _onDisconnected = () => { }, _onCancel = () => { }) {
+export function pollLedgerDeviceStatus(
+    legacy: boolean = false,
+    pollInterval: number = 1000,
+    _onConnected: () => void = () => { },
+    _onDisconnected: () => void = () => { },
+    _onCancel: () => void = () => { }
+) {
     if (!polling) {
-        getLedgerDeviceStatus(_onConnected, _onDisconnected, _onCancel)
+        getLedgerDeviceStatus(_onConnected, _onDisconnected, _onCancel, legacy)
         intervalTimer = setInterval(async () => {
-            getLedgerDeviceStatus(_onConnected, _onDisconnected, _onCancel)
+            getLedgerDeviceStatus(_onConnected, _onDisconnected, _onCancel, legacy)
         }, pollInterval)
     }
     polling = true
 }
 
-function openLedgerNotConnectedPopup(legacy: boolean = false, cancel = () => { }) {
+function openLedgerNotConnectedPopup(
+    legacy: boolean = false,
+    cancel: () => void = () => { }
+) {
     if (!get(popupState).active) {
         openPopup({
             type: 'ledgerNotConnected',
@@ -95,22 +107,5 @@ export function stopPollingLedgerStatus(): void {
         clearInterval(intervalTimer)
         intervalTimer = null
         polling = false
-    }
-}
-
-export function addLedgerLegacyStatusListener(): void {
-    Electron.ledger.addListener(ledgerLegacyListener)
-}
-
-export function removeLedgerLegacyStatusListener(): void {
-    Electron.ledger.removeListener(ledgerLegacyListener)
-}
-
-function ledgerLegacyListener(isConnected) {
-    isLedgerLegacyConnected.set(isConnected)
-    if (isConnected) {
-        closePopup()
-    } else {
-        openLedgerNotConnectedPopup(true)
     }
 }

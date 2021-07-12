@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Illustration, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
     import { ImportType } from 'shared/lib/profile'
     import { createEventDispatcher } from 'svelte'
 
@@ -32,8 +32,8 @@
                 <Text type="p" secondary smaller>{locale('views.importFromLedger.haveTrinityLedgerDescription')}</Text>
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-end items-center bg-pastel-blue dark:bg-gray-900">
-            <Illustration width="100%" illustration="import-from-ledger-desktop" />
+        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-purple dark:bg-gray-900">
+            <Animation animation="import-desktop" />
         </div>
     </OnboardingLayout>
 {/if}

@@ -51,7 +51,7 @@
             })
         const _onCancel = () => (restoring = false)
 
-        promptUserToConnectLedger(_onConnected, _onCancel)
+        promptUserToConnectLedger(false, _onConnected, _onCancel)
     }
 
     function handleBackClick() {

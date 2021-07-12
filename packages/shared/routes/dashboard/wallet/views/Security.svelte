@@ -37,6 +37,7 @@
                 hardwareDeviceColor = 'red'
                 break
             case LedgerDeviceState.AppNotOpen:
+            case LedgerDeviceState.LegacyConnected:
             case LedgerDeviceState.Locked:
                 hardwareDeviceColor = 'gray'
                 break
@@ -51,7 +52,7 @@
         setup()
 
         if (!$isSoftwareProfile) {
-            pollLedgerDeviceStatus(LEDGER_STATUS_POLL_INTERVAL, getLedgerDeviceStatus)
+            pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL, getLedgerDeviceStatus)
         }
     })
 
@@ -96,8 +97,8 @@
 
     function syncLedgerDeviceStatus() {
         isCheckingLedger = true
-        const _onComplete = () => ledgerSpinnerTimeout = setTimeout(() => (isCheckingLedger = false), 500)
-        getLedgerDeviceStatus(_onComplete, _onComplete, _onComplete)
+        const _onComplete = () => (ledgerSpinnerTimeout = setTimeout(() => (isCheckingLedger = false), 500))
+        getLedgerDeviceStatus(_onComplete, _onComplete, _onComplete, false)
     }
 </script>
 
