@@ -1,11 +1,10 @@
 <script lang="typescript">
-    export let pattern, classes, width, height
+    export let pattern, classes, width, height, onClick
 </script>
 
-<img
-    data-label="pattern"
-    class={classes}
+<div
+    class="{classes} bg-no-repeat bg-center bg-cover bg cursor-pointer"
     width={width || '100%'}
     height={height || '100%'}
-    src={`assets/patterns/${pattern}.svg`}
-    alt="{pattern}" />
+    style={`background-image: url("assets/patterns/${pattern}.svg");`}
+    on:click={onClick}></div>
