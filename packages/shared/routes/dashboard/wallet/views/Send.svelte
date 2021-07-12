@@ -3,17 +3,25 @@
     import { Address, Amount, Button, Dropdown, Icon, ProgressBar, Text } from 'shared/components'
     import { clearSendParams, sendParams } from 'shared/lib/app'
     import { parseCurrency } from 'shared/lib/currency'
-    import { closePopup, openPopup } from 'shared/lib/popup'
+    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
-    import { TransferProgressEventType, TransferState } from 'shared/lib/typings/events'
+    import { PreparedTransactionEvent, TransferProgressEventType, TransferState } from 'shared/lib/typings/events'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
     import { isTransferring, transferState, wallet, WalletAccount } from 'shared/lib/wallet'
     import { getContext, onDestroy, onMount } from 'svelte'
     import type { Readable } from 'svelte/store'
-    import { promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { get } from 'svelte/store';
+    import {
+        getLedgerDeviceStatus,
+        ledgerDeviceState,
+        pollLedgerDeviceStatus,
+        stopPollingLedgerStatus
+    } from 'shared/lib/ledger'
+    import { LedgerDeviceState } from 'shared/lib/typings/ledger';
+    import { showAppNotification } from 'shared/lib/notifications';
 
     export let locale
     export let send
@@ -41,6 +49,8 @@
     let amountRaw
 
     let ledgerAwaitingConfirmation = false
+
+    let transactionEventData: PreparedTransactionEvent = null
 
     // This looks odd but sets a reactive dependency on amount, so when it changes the error will clear
     $: amount, (amountError = '')
@@ -102,42 +112,88 @@
         }
     }
 
-    const handleTransferState = (state: TransferState) => {
-        if(!state) return
-        console.log('STATE :', state)
+    const handleTransactionEventData = (txEventData: PreparedTransactionEvent): any => {
+        if(!txEventData || (txEventData?.inputs.length <= 0 || txEventData?.outputs.length <= 0))
+            return { }
 
-        const { data, type } = state
-        if(type === TransferProgressEventType.GeneratingRemainderDepositAddress) {
-            ledgerAwaitingConfirmation = true
+        /**
+         * CAUTION: The API returns raw IOTA amounts for the inputs and outputs,
+         * so be sure to handle the data appropriately.
+         */
 
-            openPopup({
-                type: 'ledgerConfirmation',
-                hideClose: true,
-                props: {
-                    remainderAddress: data?.address,
-                    remainderAmount: amount
-                }
-            })
-        } else if(type === TransferProgressEventType.PreparedTransaction || type === TransferProgressEventType.SigningTransaction) {
-            ledgerAwaitingConfirmation = true
-
-            openPopup({
-                type: 'ledgerConfirmation',
-                hideClose: true,
-                props: {
-                    fromAlias: from.alias,
-                    toAddress: to.depositAddress,
-                    toAmount: amount
-                }
-            })
-        } else {
-            if(ledgerAwaitingConfirmation) {
-                ledgerAwaitingConfirmation = false
-
-                closePopup()
+        const numOutputs = txEventData.outputs.length
+        if(numOutputs === 1) {
+            return {
+                toAddress: txEventData.outputs[0][0],
+                toAmount: txEventData.outputs[0][1]
             }
+        } else if(numOutputs > 1) {
+            return {
+                toAddress: txEventData.outputs[0][0],
+                toAmount: txEventData.outputs[0][1],
+
+                remainderAddress: txEventData.outputs[1][0],
+                remainderAmount: txEventData.outputs[1][1]
+            }
+        } else {
+            return txEventData
         }
     }
+
+    const handleTransferState = (state: TransferState) => {
+        if(!state) return
+
+        const { data, type } = state
+        switch(type) {
+            default:
+                if(ledgerAwaitingConfirmation) {
+                    ledgerAwaitingConfirmation = false
+
+                    closePopup()
+                }
+
+                break
+            case TransferProgressEventType.GeneratingRemainderDepositAddress:
+                ledgerAwaitingConfirmation = true
+
+                openPopup({
+                    type: 'ledgerConfirmation',
+                    hideClose: true,
+                    props: {
+                        remainderAddress: data?.address,
+                    }
+                })
+
+                break
+            case TransferProgressEventType.PreparedTransaction:
+                /**
+                 * CAUTION: The Ledger confirmation doesn't always trigger
+                 * the popup to close, so it is programmatically enforced here.
+                 */
+                if(get(popupState).active)
+                    closePopup()
+
+                transactionEventData = data
+
+                break
+            case TransferProgressEventType.SigningTransaction:
+                ledgerAwaitingConfirmation = true
+
+                openPopup({
+                    type: 'ledgerConfirmation',
+                    hideClose: true,
+                    props: {
+                        unit: Unit.i,
+                        ...handleTransactionEventData(transactionEventData)
+                    }
+                })
+
+                break
+        }
+    }
+
+    let _ledgerDeviceState
+    $: _ledgerDeviceState = $ledgerDeviceState
 
     $: if(!$isSoftwareProfile)
         handleTransferState($transferState)
@@ -265,8 +321,18 @@
          * it is important to wrap the send function in the Ledger connection
          * prompt function (only for non-software profiles).
          */
-        if ($isSoftwareProfile) onSuccess()
-        else promptUserToConnectLedger(onSuccess, () => {})
+        if ($isSoftwareProfile) {
+            onSuccess()
+        } else {
+            if(_ledgerDeviceState === LedgerDeviceState.Connected) {
+                onSuccess()
+            } else {
+                showAppNotification({
+                    type: 'error',
+                    message: locale('error.ledger.transaction')
+                })
+            }
+        }
     }
 
     const handleBackClick = () => {
@@ -303,9 +369,12 @@
     })
 
     onMount(() => {
+        pollLedgerDeviceStatus(500, getLedgerDeviceStatus, getLedgerDeviceStatus, getLedgerDeviceStatus)
         updateFromSendParams($sendParams)
     })
+
     onDestroy(() => {
+        stopPollingLedgerStatus()
         sendSubscription()
     })
 </script>

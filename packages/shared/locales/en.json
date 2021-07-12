@@ -747,6 +747,7 @@
         "myAddress": "My Address",
         "shareAddress": "Share an address",
         "yourAddress": "Your address",
+        "newRemainderAddress": "New Remainder",
         "remainderAddress": "Remainder",
         "generateNewAddress": "Generate new address",
         "copyAddress": "Copy Address",
@@ -937,7 +938,8 @@
             "notFound": "Ledger device not found.",
             "wrong": "You have connected the wrong Ledger device or the mnemonic has changed.",
             "locked": "Please unlock your Ledger device by entering the PIN.",
-            "generic": "There was an error connecting to your Ledger device."
+            "generic": "There was an error connecting to your Ledger device.",
+            "transaction": "The IOTA app on your Ledger device must be open to send transactions."
         }
     },
     "tooltips": {
