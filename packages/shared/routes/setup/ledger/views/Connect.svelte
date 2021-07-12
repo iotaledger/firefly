@@ -34,7 +34,7 @@
     $: isConnected = $ledgerDeviceState !== LedgerDeviceState.NotDetected
     $: isAppOpen = $ledgerDeviceState === LedgerDeviceState.Connected
 
-    $: illustration = connectedAndUnlocked && appOpen ? 'ledger-connected-desktop' : 'ledger-disconnected-desktop'
+    $: illustration = isConnected && isAppOpen ? 'ledger-connected-desktop' : 'ledger-disconnected-desktop'
 
     const dispatch = createEventDispatcher()
 
