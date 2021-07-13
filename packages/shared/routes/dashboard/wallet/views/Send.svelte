@@ -27,7 +27,6 @@
     } from 'shared/lib/ledger'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger';
     import { showAppNotification } from 'shared/lib/notifications';
-    import { NotificationType } from '../../../../lib/typings/notification';
 
     export let locale
     export let send
@@ -119,7 +118,7 @@
     }
 
     const handleTransactionEventData = (eventData: PreparedTransactionEvent | GeneratingRemainderDepositAddressEvent): any => {
-        if(!txData)
+        if(!eventData)
             return {}
 
         const remainderData = eventData as GeneratingRemainderDepositAddressEvent
@@ -128,12 +127,7 @@
 
         const txData = eventData as PreparedTransactionEvent
         if(!(txData?.inputs && txData?.outputs) || (txData?.inputs.length <= 0 || txData?.outputs.length <= 0))
-            return { }
-
-        /**
-         * CAUTION: The API returns raw IOTA amounts for the inputs and outputs,
-         * so be sure to handle the data appropriately.
-         */
+            return {}
 
         const numOutputs = txData.outputs.length
         if(numOutputs === 1) {
@@ -185,8 +179,8 @@
                 transactionEventData = data
 
                 /**
-                 * NOTE: The break statement is omitted in this case to also cause a
-                 * popup to open.
+                 * NOTE: The break statement is omitted in this case to allow the next block of code
+                 * (under SigningTransaction) to be executed.
                  */
 
             case TransferProgressEventType.SigningTransaction:
