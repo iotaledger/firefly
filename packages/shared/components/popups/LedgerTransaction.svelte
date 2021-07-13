@@ -1,8 +1,8 @@
 <script lang="ts">
     import { Illustration, Text } from 'shared/components'
+    import { showAppNotification } from 'shared/lib/notifications';
+    import { closePopup } from 'shared/lib/popup';
     import { formatUnitBestMatch } from 'shared/lib/units';
-    import { showAppNotification } from '../../lib/notifications';
-    import { closePopup } from '../../lib/popup';
 
     export let locale
 
@@ -33,8 +33,6 @@
                 message: locale('error.send.transaction'),
             })
         }
-
-        closePopup()
         onCancel()
     }
 
@@ -67,27 +65,21 @@
 
 {#if shouldDisplaySendTo}
     <div class={`rounded-lg bg-gray-50 dark:bg-gray-700 p-4 ${shouldDisplayRemainderAddress ? 'mb-4' : ''}`}>
-        <div>
-            <Text type="h5" highlighted classes="mb-3">{locale('general.sendTo')}</Text>
-            <Text type="pre" classes="mb-6">{toAddress}</Text>
-        </div>
-        <div>
-            <Text type="h5" highlighted classes="mb-3">{locale('general.amount')}</Text>
-            <Text type="pre">{formatAmount(toAmount)}</Text>
-        </div>
+        <Text type="h5" highlighted classes="mb-3">{locale('general.sendTo')}</Text>
+        <Text type="pre" classes="mb-6">{toAddress}</Text>
+
+        <Text type="h5" highlighted classes="mb-3">{locale('general.amount')}</Text>
+        <Text type="pre">{formatAmount(toAmount)}</Text>
     </div>
 {/if}
 {#if shouldDisplayRemainderAddress}
     <div class="rounded-lg bg-gray-50 dark:bg-gray-700 p-4">
-        <div>
-            <Text type="h5" highlighted classes="mb-3">{locale(`general.${shouldDisplayRemainderAmount ? 'r' : 'newR'}emainderAddress`)}</Text>
-            <Text type="pre" classes={shouldDisplayRemainderAmount ? 'mb-6' : ''}>{remainderAddress}</Text>
-        </div>
+        <Text type="h5" highlighted classes="mb-3">{locale(`general.${shouldDisplayRemainderAmount ? 'r' : 'newR'}emainderAddress`)}</Text>
+        <Text type="pre" classes={shouldDisplayRemainderAmount ? 'mb-6' : ''}>{remainderAddress}</Text>
+
         {#if shouldDisplayRemainderAmount}
-            <div>
-                <Text type="h5" highlighted classes="mb-3">{locale('general.amount')}</Text>
-                <Text type="pre">{formatAmount(remainderAmount)}</Text>
-            </div>
+            <Text type="h5" highlighted classes="mb-3">{locale('general.amount')}</Text>
+            <Text type="pre">{formatAmount(remainderAmount)}</Text>
         {/if}
     </div>
 {/if}

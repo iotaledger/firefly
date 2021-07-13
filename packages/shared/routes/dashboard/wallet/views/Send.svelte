@@ -6,7 +6,12 @@
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
-    import { PreparedTransactionEvent, TransferProgressEventType, TransferState } from 'shared/lib/typings/events'
+    import {
+        GeneratingRemainderDepositAddressEvent,
+        PreparedTransactionEvent,
+        TransferProgressEventType,
+        TransferState
+    } from 'shared/lib/typings/events'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
@@ -112,8 +117,16 @@
         }
     }
 
-    const handleTransactionEventData = (txEventData: PreparedTransactionEvent): any => {
-        if(!txEventData || (txEventData?.inputs.length <= 0 || txEventData?.outputs.length <= 0))
+    const handleTransactionEventData = (txData: PreparedTransactionEvent | GeneratingRemainderDepositAddressEvent): any => {
+        if(!txData)
+            return {}
+
+        const remainderData = txData as GeneratingRemainderDepositAddressEvent
+        if(remainderData?.address)
+            return { remainderAddress: remainderData?.address }
+
+        txData = txData as PreparedTransactionEvent
+        if(!(txData?.inputs && txData?.outputs) || (txData?.inputs.length <= 0 || txData?.outputs.length <= 0))
             return { }
 
         /**
@@ -121,27 +134,39 @@
          * so be sure to handle the data appropriately.
          */
 
-        const numOutputs = txEventData.outputs.length
+        const numOutputs = txData.outputs.length
         if(numOutputs === 1) {
             return {
-                toAddress: txEventData.outputs[0][0],
-                toAmount: txEventData.outputs[0][1]
+                toAddress: txData.outputs[0][0],
+                toAmount: txData.outputs[0][1]
             }
         } else if(numOutputs > 1) {
             return {
-                toAddress: txEventData.outputs[0][0],
-                toAmount: txEventData.outputs[0][1],
+                toAddress: txData.outputs[0][0],
+                toAmount: txData.outputs[0][1],
 
-                remainderAddress: txEventData.outputs[1][0],
-                remainderAmount: txEventData.outputs[1][1]
+                remainderAddress: txData.outputs[1][0],
+                remainderAmount: txData.outputs[1][1]
             }
         } else {
-            return txEventData
+            return txData
         }
     }
 
     const handleTransferState = (state: TransferState) => {
         if(!state) return
+
+        const _onCancel = () => {
+            isTransferring.set(false)
+            transferState.set(null)
+
+            clearSendParams(selectedSendType === SEND_TYPE.INTERNAL)
+            closePopup()
+            showAppNotification({
+                type: 'error',
+                message: locale('error.send.transaction'),
+            })
+        }
 
         const { data, type } = state
         switch(type) {
@@ -153,18 +178,29 @@
                 }
 
                 break
+
             case TransferProgressEventType.GeneratingRemainderDepositAddress:
+                transactionEventData = data
+
+                /**
+                 * NOTE: The break statement is omitted in this case to also cause a
+                 * popup to open.
+                 */
+
+            case TransferProgressEventType.SigningTransaction:
                 ledgerAwaitingConfirmation = true
 
                 openPopup({
                     type: 'ledgerTransaction',
+                    hideClose: true,
                     props: {
-                        onCancel: () => handleBackClick(),
-                        remainderAddress: data?.address,
+                        onCancel: _onCancel,
+                        ...handleTransactionEventData(transactionEventData)
                     }
                 })
 
                 break
+
             case TransferProgressEventType.PreparedTransaction:
                 /**
                  * CAUTION: The Ledger confirmation doesn't always trigger
@@ -174,18 +210,6 @@
                     closePopup()
 
                 transactionEventData = data
-
-                break
-            case TransferProgressEventType.SigningTransaction:
-                ledgerAwaitingConfirmation = true
-
-                openPopup({
-                    type: 'ledgerTransaction',
-                    props: {
-                        onCancel: () => handleBackClick(),
-                        ...handleTransactionEventData(transactionEventData)
-                    }
-                })
 
                 break
         }
