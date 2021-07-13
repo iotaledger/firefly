@@ -1,7 +1,6 @@
 <script lang="ts">
     import { Illustration, Text } from 'shared/components'
     import { showAppNotification } from 'shared/lib/notifications';
-    import { closePopup } from 'shared/lib/popup';
     import { formatUnitBestMatch } from 'shared/lib/units';
 
     export let locale
@@ -64,7 +63,7 @@
 </div>
 
 {#if shouldDisplaySendTo}
-    <div class={`rounded-lg bg-gray-50 dark:bg-gray-700 p-4 ${shouldDisplayRemainderAddress ? 'mb-4' : ''}`}>
+    <div class={`rounded-lg bg-gray-50 dark:bg-gray-800 p-4 ${shouldDisplayRemainderAddress ? 'mb-4' : ''}`}>
         <Text type="h5" highlighted classes="mb-3">{locale('general.sendTo')}</Text>
         <Text type="pre" classes="mb-6">{toAddress}</Text>
 
@@ -73,7 +72,7 @@
     </div>
 {/if}
 {#if shouldDisplayRemainderAddress}
-    <div class="rounded-lg bg-gray-50 dark:bg-gray-700 p-4">
+    <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-4">
         <Text type="h5" highlighted classes="mb-3">{locale(`general.${shouldDisplayRemainderAmount ? 'r' : 'newR'}emainderAddress`)}</Text>
         <Text type="pre" classes={shouldDisplayRemainderAmount ? 'mb-6' : ''}>{remainderAddress}</Text>
 

@@ -948,11 +948,14 @@
             "phraseCaseWord": "The word \"{word}\" should be lower case"
         },
         "ledger": {
-            "notFound": "Ledger device not found.",
-            "wrong": "You have connected the wrong Ledger device or the mnemonic has changed.",
-            "locked": "Please unlock your Ledger device by entering the PIN.",
+            "appNotOpen": "The IOTA app on your Ledger device must be open.",
             "generic": "There was an error connecting to your Ledger device.",
-            "appNotOpen": "The IOTA app on your Ledger device must be open."
+            "legacyConnected": "The wrong app is open on your Ledger device.",
+            "locked": "Please unlock your Ledger device by entering the PIN.",
+            "mnemonicMismatch": "The connected Ledger device is using a mismatched mnemonic.",
+            "notDetected": "Your Ledger device is not detected.",
+            "notFound": "Your Ledger device was not found.",
+            "wrong": "You have connected the wrong Ledger device or the mnemonic has changed."
         }
     },
     "tooltips": {

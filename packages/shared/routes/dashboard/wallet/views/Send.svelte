@@ -27,6 +27,7 @@
     } from 'shared/lib/ledger'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger';
     import { showAppNotification } from 'shared/lib/notifications';
+    import { NotificationType } from '../../../../lib/typings/notification';
 
     export let locale
     export let send
@@ -117,15 +118,15 @@
         }
     }
 
-    const handleTransactionEventData = (txData: PreparedTransactionEvent | GeneratingRemainderDepositAddressEvent): any => {
+    const handleTransactionEventData = (eventData: PreparedTransactionEvent | GeneratingRemainderDepositAddressEvent): any => {
         if(!txData)
             return {}
 
-        const remainderData = txData as GeneratingRemainderDepositAddressEvent
+        const remainderData = eventData as GeneratingRemainderDepositAddressEvent
         if(remainderData?.address)
             return { remainderAddress: remainderData?.address }
 
-        txData = txData as PreparedTransactionEvent
+        const txData = eventData as PreparedTransactionEvent
         if(!(txData?.inputs && txData?.outputs) || (txData?.inputs.length <= 0 || txData?.outputs.length <= 0))
             return { }
 
@@ -154,7 +155,8 @@
     }
 
     const handleTransferState = (state: TransferState) => {
-        if(!state) return
+        if(!state)
+            return
 
         const _onCancel = () => {
             isTransferring.set(false)
@@ -215,15 +217,24 @@
         }
     }
 
-    let _ledgerDeviceState
-    $: _ledgerDeviceState = $ledgerDeviceState
-
     $: if(!$isSoftwareProfile)
         handleTransferState($transferState)
 
     $: if (!$isTransferring && ledgerAwaitingConfirmation) {
         closePopup()
     }
+
+    const checkLedgerDeviceState = (state: LedgerDeviceState): void => {
+        if(state !== LedgerDeviceState.Connected) {
+            showAppNotification({
+                type: 'error',
+                message: locale(`error.ledger.${state}`)
+            })
+        }
+    }
+
+    let _ledgerDeviceState
+    $: _ledgerDeviceState = $ledgerDeviceState
 
     const clearErrors = () => {
         amountError = ''
@@ -350,10 +361,7 @@
             if(_ledgerDeviceState === LedgerDeviceState.Connected) {
                 onSuccess()
             } else {
-                showAppNotification({
-                    type: 'error',
-                    message: locale('error.ledger.appNotOpen')
-                })
+                checkLedgerDeviceState(_ledgerDeviceState)
             }
         }
     }
