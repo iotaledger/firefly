@@ -92,6 +92,19 @@ export const STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS = 0
 
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
+export interface WalletAccount extends Account {
+    depositAddress: string;
+    rawIotaBalance: number;
+    balance: string;
+    balanceEquiv: string;
+    color: string;
+    pattern: string;
+}
+
+export interface AccountMessage extends Message {
+    account: number;
+}
+
 interface ActorState {
     [id: string]: Actor
 }

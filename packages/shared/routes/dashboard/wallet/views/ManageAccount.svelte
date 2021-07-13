@@ -18,7 +18,7 @@
     let accountAlias = alias
     let isBusy = false
     let color = account.color
-    let pattern = ''
+    let pattern = account.pattern
 
     // This looks odd but sets a reactive dependency on accountAlias, so when it changes the error will clear
     $: accountAlias, (error = '')
@@ -45,16 +45,19 @@
             isBusy = true
             api.setAlias($selectedAccountId, trimmedAccountAlias, {
                 onSuccess(res) {
-                    accounts.update((_accounts) => _accounts.map((account) => {
-                        if (account.id === $selectedAccountId) {
-                            return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                                {} as WalletAccount,
-                                account,
-                                {
-                                    alias: trimmedAccountAlias,
-                                }
-                            )
-                        }
+                    accounts.update((_accounts) => {
+                        return _accounts.map((account) => {
+                            if (account.id === $selectedAccountId) {
+                                return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
+                                    {} as WalletAccount,
+                                    account,
+                                    {
+                                        alias: trimmedAccountAlias,
+                                        color,
+                                        pattern,
+                                    }
+                                )
+                            }
 
                         return account
                     }))

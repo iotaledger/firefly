@@ -48,6 +48,7 @@
                     {#each $viewableAccounts as account}
                         <AccountTile
                             color={account.color}
+                            pattern={account.pattern}
                             name={account.alias}
                             balance={account.balance}
                             balanceEquiv={account.balanceEquiv}
