@@ -71,7 +71,6 @@ const apiToResponseTypeMap = {
     lockStronghold: ResponseTypes.LockedStronghold,
     changeStrongholdPassword: ResponseTypes.StrongholdPasswordChanged,
     getLedgerDeviceStatus: ResponseTypes.LedgerStatus,
-    getLedgerOpenedApp: ResponseTypes.LedgerOpenedApp,
     setStrongholdPasswordClearInterval: ResponseTypes.StrongholdPasswordClearIntervalSet,
     getLegacySeedChecksum: ResponseTypes.LegacySeedChecksum,
     getNodeInfo: ResponseTypes.NodeInfo,

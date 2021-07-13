@@ -15,9 +15,9 @@ export const isLedgerLegacyConnected = writable<boolean>(false)
 
 export function getLedgerDeviceStatus(
     legacy: boolean = false,
-    onConnected = () => { },
-    onDisconnected = () => { },
-    onError = () => { }
+    onConnected: () => void = () => { },
+    onDisconnected: () => void = () => { },
+    onError: () => void = () => { }
 ) {
     api.getLedgerDeviceStatus(ledgerSimulator, {
         onSuccess(response: Event<LedgerStatus>) {

@@ -68,7 +68,6 @@ export enum ResponseTypes {
     StrongholdPasswordChanged = 'StrongholdPasswordChanged',
     UpdatedAllClientOptions = 'UpdatedAllClientOptions',
     LedgerStatus = 'LedgerStatus',
-    LedgerOpenedApp = 'LedgerOpenedApp',
     StrongholdPasswordClearIntervalSet = 'StrongholdPasswordClearIntervalSet',
     MigrationData = 'MigrationData',
     CreatedMigrationBundle = 'CreatedMigrationBundle',
