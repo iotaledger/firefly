@@ -157,9 +157,9 @@
                 ledgerAwaitingConfirmation = true
 
                 openPopup({
-                    type: 'ledgerConfirmation',
-                    hideClose: true,
+                    type: 'ledgerTransaction',
                     props: {
+                        onCancel: () => handleBackClick(),
                         remainderAddress: data?.address,
                     }
                 })
@@ -180,10 +180,9 @@
                 ledgerAwaitingConfirmation = true
 
                 openPopup({
-                    type: 'ledgerConfirmation',
-                    hideClose: true,
+                    type: 'ledgerTransaction',
                     props: {
-                        unit: Unit.i,
+                        onCancel: () => handleBackClick(),
                         ...handleTransactionEventData(transactionEventData)
                     }
                 })
