@@ -449,7 +449,8 @@
                         "legacyConnected": "IOTA Legacy App Open",
                         "locked": "Locked",
                         "mnemonicMismatch": "Wrong Ledger or Mnemonic",
-                        "notDetected": "Not Detected"
+                        "notDetected": "Not Detected",
+                        "otherConnected": "Other App Open"
                     }
                 },
                 "strongholdStatus": {

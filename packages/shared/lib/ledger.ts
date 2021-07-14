@@ -43,12 +43,21 @@ export function calculateLedgerDeviceState(status: LedgerStatus): LedgerDeviceSt
     if (locked) {
         return LedgerDeviceState.Locked
     } else {
-        if (app?.name === LedgerAppName.IOTA) {
-            return LedgerDeviceState.Connected
-        } else if (app?.name === LedgerAppName.IOTALegacy) {
-            return LedgerDeviceState.LegacyConnected
-        } else {
-            return connected ? LedgerDeviceState.AppNotOpen : LedgerDeviceState.NotDetected
+        switch(app?.name) {
+            default:
+                if(connected) {
+                    /**
+                     * NOTE: "BOLOS" is the name of the Ledger operating system and is
+                     * sometimes registered as an app.
+                     */
+                    return (app?.name && app?.name !== 'BOLOS') ? LedgerDeviceState.OtherConnected : LedgerDeviceState.AppNotOpen
+                } else {
+                    return LedgerDeviceState.NotDetected
+                }
+            case LedgerAppName.IOTA:
+                return LedgerDeviceState.Connected
+            case LedgerAppName.IOTALegacy:
+                return LedgerDeviceState.LegacyConnected
         }
     }
 }

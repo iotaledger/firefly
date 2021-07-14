@@ -39,6 +39,7 @@
             case LedgerDeviceState.AppNotOpen:
             case LedgerDeviceState.LegacyConnected:
             case LedgerDeviceState.Locked:
+            case LedgerDeviceState.OtherConnected:
                 hardwareDeviceColor = 'gray'
                 break
         }

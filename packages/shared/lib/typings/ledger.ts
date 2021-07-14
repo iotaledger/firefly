@@ -15,7 +15,8 @@ export enum LedgerDeviceState {
     LegacyConnected = 'legacyConnected',
     Locked = 'locked',
     MnemonicMismatch = 'mnemonicMismatch',
-    NotDetected = 'notDetected'
+    NotDetected = 'notDetected',
+    OtherConnected = 'otherConnected'
 }
 
 export enum LedgerAppName {
