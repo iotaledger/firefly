@@ -5,8 +5,10 @@ import type { Address } from './typings/address'
 import type { MessageResponse } from './typings/bridge'
 import { ResponseTypes } from './typings/bridge'
 import type { Message } from './typings/message'
-import type { LedgerStatusPayload, StrongholdStatus } from './typings/wallet'
+import type { LedgerStatus } from './typings/ledger'
+import type { StrongholdStatus } from './typings/wallet'
 import type { NodeInfo } from './typings/node'
+import type { MigrationData } from './typings/migration';
 
 type Validators =
     | IdValidator
@@ -527,9 +529,9 @@ class LedgerDeviceStatusValidator extends Validator {
      * @returns {ValidationResponse}
      */
     isValid(response: MessageResponse): ValidationResponse {
-        const payload = response.payload as LedgerStatusPayload
+        const payload = response.payload as LedgerStatus
 
-        if ('Connected' !== payload.type && 'Disconnected' !== payload.type && 'Locked' !== payload.type) {
+        if ('boolean' !== typeof payload.connected && 'boolean' !== typeof payload.locked) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of status received.',
@@ -537,6 +539,33 @@ class LedgerDeviceStatusValidator extends Validator {
         }
 
         return super.isValid(response)
+    }
+}
+
+/**
+ * Validation for responses with Ledger migration data
+ */
+class MigrationDataValidator extends Validator {
+    /**
+     * Checks if migration data response is valid
+     * 
+     * @method isValid
+     * 
+     * @param {MessageResponse} response
+     * 
+     * @returns {ValidationResponse}
+     */
+    isValid(response: MessageResponse): ValidationResponse {
+        const payload = response.payload as MigrationData
+
+        if('number' !== typeof payload.lastCheckedAddressIndex) {
+            return super.createResponse(false, {
+                type: ErrorTypes.InvalidType,
+                error: 'Invalid type of address index'
+            })
+        }
+        
+        return super.isValid(response);
     }
 }
 
@@ -786,7 +815,7 @@ export default class ValidatorService {
             [ResponseTypes.LegacySeedChecksum]: this.createBaseValidator().getFirst(),
 
             // Migration
-            [ResponseTypes.MigrationData]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.MigrationData]: this.createBaseValidator().add(new MigrationDataValidator()).getFirst(),
             [ResponseTypes.CreatedMigrationBundle]: this.createBaseValidator().getFirst(),
             [ResponseTypes.SentMigrationBundle]: this.createBaseValidator().getFirst(),
             [ResponseTypes.MigrationAddress]: this.createBaseValidator().getFirst(),

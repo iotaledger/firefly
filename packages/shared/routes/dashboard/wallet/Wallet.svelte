@@ -13,9 +13,9 @@
         setMissingProfileType,
         updateProfile,
     } from 'shared/lib/profile'
-    import { walletRoute } from 'shared/lib/router'
+    import { walletRoute, walletSetupType } from 'shared/lib/router'
     import type { Transaction } from 'shared/lib/typings/message'
-    import { WalletRoutes } from 'shared/lib/typings/routes'
+    import { WalletRoutes, SetupType } from 'shared/lib/typings/routes'
     import {
         AccountMessage,
         AccountsBalanceHistory,
@@ -44,7 +44,7 @@
         WalletAccount,
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
-    import { derived, Readable, Writable } from 'svelte/store'
+    import { derived, Readable, Writable, get } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
 
     export let locale
@@ -130,13 +130,17 @@
             onSuccess(accountsResponse) {
                 const _continue = async () => {
                     accountsLoaded.set(true)
-                    const gapLimit = $activeProfile?.gapLimit ?? 10
+                    const isNewProfile = get(walletSetupType) === SetupType.New
+                    const softwareGapLimit = isNewProfile ? 10 : 50
+                    const ledgerGapLimit = isNewProfile ? 1 : 10
+                    const accountDiscovery = isNewProfile ? 1 : 0
+                    const gapLimit = $activeProfile?.gapLimit ?? (get(isSoftwareProfile) ? softwareGapLimit : ledgerGapLimit)
                     try {
-                        await asyncSyncAccounts(0, gapLimit, 1, false)
+                        await asyncSyncAccounts(0, gapLimit, accountDiscovery, false)
                     } catch (err) {
                         console.error(err)
                     }
-                    updateProfile('gapLimit', 10)
+                    updateProfile('gapLimit', get(isSoftwareProfile) ? 10 : 1)
                 }
 
                 if (accountsResponse.payload.length === 0) {

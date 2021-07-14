@@ -3998,9 +3998,10 @@ human-signals@^2.1.0:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-2.1.0.tgz#dc91fcba42e4d06e4abaed33b3e7a3c02f514ea0"
   integrity sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==
 
-hw-app-iota@laumair/hw-app-iota.js#0fb06437422c12c17b8a3946955da939b2d3fb6a:
-  version "0.6.4"
-  resolved "https://codeload.github.com/laumair/hw-app-iota.js/tar.gz/0fb06437422c12c17b8a3946955da939b2d3fb6a"
+hw-app-iota@0.6.5:
+  version "0.6.5"
+  resolved "https://registry.yarnpkg.com/hw-app-iota/-/hw-app-iota-0.6.5.tgz#6078f31ec865dc94ea3d9488063136790a4f2cad"
+  integrity sha512-o4vcNS9sjo6aSE9k7EgH/gWDzjINyFFwryOScP08ljNtbV4K9mmf/12VKEteAHRHDmctT/kUpy6x3gjqbeq6fw==
   dependencies:
     bip32-path "^0.4.2"
     iota.lib.js "^0.5.3"

@@ -61,6 +61,7 @@ export enum ErrorType {
     LedgerDeniedByUser = 'LedgerDeniedByUser',
     LedgerDeviceNotFound = 'LedgerDeviceNotFound',
     LedgerEssenceTooLarge = 'LedgerEssenceTooLarge',
+    WrongLedgerSeedError = 'WrongLedgerSeedError',
 
     // Dust output
     DustError = 'DustError',
@@ -124,9 +125,24 @@ export enum TransferProgressEventType {
     Broadcasting = 'Broadcasting',
 }
 
+/// Prepared the transaction.
+export interface PreparedTransactionEvent {
+    /// The type of the transfer progress event.
+    type: TransferProgressEventType
+
+    /// Transaction inputs. [address, amount][]
+    inputs: any[][]
+
+    /// Transaction outputs. [address, amount, remainder][]
+    outputs: any[][]
+
+    /// The indexation data.
+    data: string
+}
+
 export interface TransferProgressEventPayload {
     accountId: string
-    event: { type: TransferProgressEventType }
+    event: PreparedTransactionEvent
 }
 
 export enum MigrationProgressEventType {

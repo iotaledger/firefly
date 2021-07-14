@@ -30,6 +30,7 @@
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
+    import { promptUserToConnectLedger } from 'shared/lib/ledger'
 
     export let locale
     export let mobile
@@ -68,28 +69,34 @@
         if ($hasSingleBundle && !$hasBundlesWithSpentAddresses) {
             loading = true
 
-            if ($walletSetupType === SetupType.TrinityLedger) {
-                Electron.ledger
-                    .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
-                    .then((iota) => {
-                        return createLedgerMigrationBundle(0, iota.prepareTransfers, 0, false)
-                    })
-                    .then(({ trytes, bundleHash }) => {
-                        singleMigrationBundleHash = bundleHash
-                        return sendLedgerMigrationBundle(bundleHash, trytes)
-                    })
-                    .then((data) => {
-                        // Save profile
-                        saveProfile($newProfile)
-                        setActiveProfile($newProfile.id)
+            if (legacyLedger) {
+                const _onConnected = () => {
+                    Electron.ledger
+                        .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
+                        .then((iota) => {
+                            return createLedgerMigrationBundle(0, iota.prepareTransfers)
+                        })
+                        .then(({ trytes, bundleHash }) => {
+                            singleMigrationBundleHash = bundleHash
+                            return sendLedgerMigrationBundle(bundleHash, trytes)
+                        })
+                        .then((data) => {
+                            // Save profile
+                            saveProfile($newProfile)
+                            setActiveProfile($newProfile.id)
 
-                        profileInProgress.set(undefined)
-                        newProfile.set(null)
-                    })
-                    .catch((error) => {
-                        loading = false
-                        console.error(error)
-                    })
+                            profileInProgress.set(undefined)
+                            newProfile.set(null)
+                        })
+                        .catch((error) => {
+                            loading = false
+                            console.error(error)
+                        })
+                }
+                const _onCancel = () => {
+                    loading = false
+                }
+                promptUserToConnectLedger(true, _onConnected, _onCancel)
             } else {
                 createMigrationBundle(getInputIndexesForBundle($bundles[0]), 0, false)
                     .then((response) => {

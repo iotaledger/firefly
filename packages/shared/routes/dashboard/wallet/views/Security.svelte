@@ -1,11 +1,12 @@
 <script lang="typescript">
-    import { getLedgerDeviceStatus, isLedgerConnected, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { SecurityTile, Text } from 'shared/components'
     import { versionDetails } from 'shared/lib/appUpdater'
     import { diffDates, getBackupWarningColor, isRecentDate } from 'shared/lib/helpers'
+    import { getLedgerDeviceStatus, ledgerDeviceState, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, isSoftwareProfile, isStrongholdLocked, profiles } from 'shared/lib/profile'
+    import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { api } from 'shared/lib/wallet'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
@@ -20,14 +21,33 @@
     let ledgerSpinnerTimeout
     let LEDGER_STATUS_POLL_INTERVAL = 5000
 
+    let hardwareDeviceColor = 'gray'
+    $: {
+        switch ($ledgerDeviceState) {
+            default:
+            case LedgerDeviceState.Connected:
+                hardwareDeviceColor = 'blue'
+                break
+            case LedgerDeviceState.NotDetected:
+                hardwareDeviceColor = 'red'
+                break
+            case LedgerDeviceState.AppNotOpen:
+            case LedgerDeviceState.LegacyConnected:
+            case LedgerDeviceState.Locked:
+                hardwareDeviceColor = 'gray'
+                break
+        }
+    }
+
     const unsubscribe = profiles.subscribe(() => {
         setup()
     })
 
     onMount(() => {
         setup()
+
         if (!$isSoftwareProfile) {
-            pollLedgerDeviceStatus(LEDGER_STATUS_POLL_INTERVAL)
+            pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL, getLedgerDeviceStatus)
         }
     })
 
@@ -72,8 +92,8 @@
 
     function syncLedgerDeviceStatus() {
         isCheckingLedger = true
-        const _onComplete = () => ledgerSpinnerTimeout = setTimeout(() => (isCheckingLedger = false), 500)
-        getLedgerDeviceStatus(_onComplete, _onComplete, _onComplete)
+        const _onComplete = () => (ledgerSpinnerTimeout = setTimeout(() => (isCheckingLedger = false), 500))
+        getLedgerDeviceStatus(false, _onComplete, _onComplete, _onComplete)
     }
 </script>
 
@@ -124,8 +144,8 @@
             <!-- Hardware Device -->
             <SecurityTile
                 title={locale('views.dashboard.security.hardwareDevice.title')}
-                message={$isLedgerConnected ? locale('views.dashboard.security.hardwareDevice.detected') : locale('views.dashboard.security.hardwareDevice.noneDetected')}
-                color={$isLedgerConnected ? 'blue' : 'gray'}
+                message={locale(`views.dashboard.security.hardwareDevice.statuses.${$ledgerDeviceState}`)}
+                color={hardwareDeviceColor}
                 keepDarkThemeIconColor
                 icon="chip"
                 onClick={syncLedgerDeviceStatus}
