@@ -140,10 +140,10 @@
                                         return createMinedLedgerMigrationBundle(transaction.index, iota.prepareTransfers)
                                     })
                                     .then(({ trytes, bundleHash }) => {
+                                        closePopup() // close transaction popup
                                         return sendLedgerMigrationBundle(bundleHash, trytes)
                                     })
                                     .then(() => {
-                                        closePopup() // close transaction popup
                                         migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, transaction.bundleHash]
                                     })
                             }
@@ -154,6 +154,7 @@
                                     return createLedgerMigrationBundle(transaction.index, iota.prepareTransfers)
                                 })
                                 .then(({ trytes, bundleHash }) => {
+                                    closePopup() // close transaction popup
                                     transactions = transactions.map((_transaction) => {
                                         if (_transaction.index === transaction.index) {
                                             return { ..._transaction, bundleHash }
@@ -165,9 +166,6 @@
                                     return sendLedgerMigrationBundle(bundleHash, trytes).then(() => {
                                         migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, bundleHash]
                                     })
-                                })
-                                .then(() => {
-                                    closePopup() // close transaction popup
                                 })
                         }
 
@@ -290,6 +288,7 @@
                                     return createLedgerMigrationBundle(transaction.index, iota.prepareTransfers)
                                 })
                                 .then(({ trytes, bundleHash }) => {
+                                    closePopup() // close transaction popup
                                     transactions = transactions.map((_transaction, i) => {
                                         if (_transaction.index === transaction.index) {
                                             return { ..._transaction, bundleHash }
@@ -307,9 +306,6 @@
 
                                         migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, bundleHash]
                                     })
-                                })
-                                .then(() => {
-                                    closePopup() // close transaction popup
                                 })
                         }
 
