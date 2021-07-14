@@ -450,7 +450,7 @@
                         "locked": "Locked",
                         "mnemonicMismatch": "Wrong Ledger or Mnemonic",
                         "notDetected": "Not Detected",
-                        "otherConnected": "Other App Open"
+                        "otherConnected": "App Open"
                     }
                 },
                 "strongholdStatus": {

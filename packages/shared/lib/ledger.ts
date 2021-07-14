@@ -2,7 +2,7 @@ import { closePopup, openPopup, popupState } from 'shared/lib/popup'
 import { api } from 'shared/lib/wallet'
 import { get, writable } from 'svelte/store'
 import type { Event } from "./typings/events"
-import { LedgerAppName, LedgerDeviceState, LedgerStatus } from "./typings/ledger"
+import { LedgerApp, LedgerAppName, LedgerDeviceState, LedgerStatus } from "./typings/ledger"
 
 const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
 
@@ -60,6 +60,19 @@ export function calculateLedgerDeviceState(status: LedgerStatus): LedgerDeviceSt
                 return LedgerDeviceState.LegacyConnected
         }
     }
+}
+
+export function getLedgerOpenedAppName(): Promise<LedgerApp> {
+    return new Promise<LedgerApp>((resolve, reject) => {
+        api.getLedgerDeviceStatus(ledgerSimulator, {
+            onSuccess(response: Event<LedgerStatus>) {
+                resolve(response.payload?.app)
+            },
+            onError(err) {
+                reject(err)
+            }
+        })
+    })
 }
 
 export function promptUserToConnectLedger(
