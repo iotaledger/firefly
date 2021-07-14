@@ -285,8 +285,8 @@
     class:airdrop
     class:hidden-wallet={hidden}
     class:darkmode={darkModeEnabled}
-    style={`background-image: url("assets/patterns/${pattern}-gradient.svg")`}>
-    {disabled}
+    style={pattern ? `background-image: url("assets/patterns/${pattern}-gradient.svg")` : null}
+    {disabled}>
     <div class="mb-2 w-full flex flex-row justify-between items-start space-x-1.5">
         <div class="flex flex-row space-x-1.5 items-start w-full whitespace-nowrap">
             {#if showWarningState}

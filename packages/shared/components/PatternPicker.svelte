@@ -21,7 +21,7 @@
         {#each patterns as pattern}
             <div
                 class="h-20 rounded-lg {pattern === active ? `bg-${color}-500 opacity-100 ring-${color}-500 ring-4 ring-opacity-30 hover:ring-opacity-40` : 'bg-gray-300 hover:bg-{color}-500 opacity-80 hover:opacity-100'} bg-no-repeat bg-center bg-cover bg cursor-pointer flex justify-center items-center"
-                style={`background-image: url("assets/patterns/${pattern}.svg");`}
+                style={pattern ? `background-image: url("assets/patterns/${pattern}.svg");` : null}
                 on:click={() => handleClick(pattern)}>
                 {#if pattern === active}<Icon icon="checkmark" classes="bg-green-600 text-white rounded-full" />{/if}
             </div>
