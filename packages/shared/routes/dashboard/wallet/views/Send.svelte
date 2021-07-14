@@ -159,10 +159,12 @@
 
             clearSendParams(selectedSendType === SEND_TYPE.INTERNAL)
             closePopup()
-            showAppNotification({
-                type: 'error',
-                message: locale('error.send.transaction'),
-            })
+
+            if(get(displayNotifications).length === 0)
+                showAppNotification({
+                    type: 'error',
+                    message: locale('error.send.transaction'),
+                })
         }
 
         const { data, type } = state
@@ -234,7 +236,7 @@
                 if(ignoreNotDetected)
                     break
             default:
-                if(get(displayNotifications).length < 3)
+                if(get(displayNotifications).length < 2)
                     showAppNotification({
                         type: notificationType,
                         message: locale(`error.ledger.${state}`)
