@@ -81,7 +81,7 @@
             percent: 40,
         },
         PreparedTransaction: {
-            label: locale('general.preparedTransaction'),
+            label: locale('general.transferPreparedTransaction'),
             percent: 50
         },
         SigningTransaction: {
