@@ -9,13 +9,13 @@
     export let onCancel = () => {}
 
     export let remainderAddress = ''
-    export let remainderAmount = -1
-    let shouldDisplayRemainderAddress = Boolean(remainderAddress)
-    let shouldDisplayRemainderAmount = remainderAmount !== -1
+    export let remainderAmount = null
+    let shouldDisplayRemainderAddress = remainderAddress.length > 0
+    let shouldDisplayRemainderAmount = remainderAmount !== null
 
     export let toAddress = ''
-    export let toAmount = -1
-    let shouldDisplaySendTo = Boolean(toAddress) && toAmount !== -1
+    export let toAmount = null
+    let shouldDisplaySendTo = toAddress.length > 0 && toAmount !== null
 
     let isInvalid = false
 
