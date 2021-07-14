@@ -615,7 +615,10 @@
             },
             "transaction": {
                 "title": "Confirm transaction",
-                "info": "Compare and confirm the transaction information displayed on your Ledger device against the information displayed below."
+                "info": "Compare and confirm the transaction information displayed on your Ledger device against the information displayed below.",
+                "input": "Input [{index}]",
+                "output": "Output",
+                "checksum": "Chk: {checksum}"
             }
         }
     },

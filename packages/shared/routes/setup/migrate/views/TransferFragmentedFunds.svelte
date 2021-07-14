@@ -17,6 +17,7 @@
         sendMigrationBundle,
         unmigratedBundles,
     } from 'shared/lib/migration'
+    import { closePopup } from 'shared/lib/popup'
     import { newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
@@ -142,6 +143,7 @@
                                         return sendLedgerMigrationBundle(bundleHash, trytes)
                                     })
                                     .then(() => {
+                                        closePopup() // close transaction popup
                                         migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, transaction.bundleHash]
                                     })
                             }
@@ -163,6 +165,9 @@
                                     return sendLedgerMigrationBundle(bundleHash, trytes).then(() => {
                                         migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, bundleHash]
                                     })
+                                })
+                                .then(() => {
+                                    closePopup() // close transaction popup
                                 })
                         }
 
@@ -188,7 +193,9 @@
                     })
                     .catch((error) => {
                         console.error(error)
-
+                        if (legacyLedger) {
+                            closePopup() // close transaction popup
+                        }
                         transactions = transactions.map((_transaction, i) => {
                             if (_transaction.index === transaction.index) {
                                 return { ..._transaction, status: -1, errorText: locale('views.migrate.migrationFailed') }
@@ -272,6 +279,9 @@
 
                                         migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, transaction.bundleHash]
                                     })
+                                    .then(() => {
+                                        closePopup() // close transaction popup
+                                    })
                             }
 
                             return Electron.ledger
@@ -297,6 +307,9 @@
 
                                         migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, bundleHash]
                                     })
+                                })
+                                .then(() => {
+                                    closePopup() // close transaction popup
                                 })
                         }
 
@@ -334,7 +347,9 @@
                     })
                     .catch((error) => {
                         console.error(error)
-
+                        if (legacyLedger) {
+                            closePopup() // close transaction popup
+                        }
                         transactions = transactions.map((_transaction, i) => {
                             if (_transaction.index === transaction.index) {
                                 return { ..._transaction, status: -1, errorText: 'Migration failed' }
