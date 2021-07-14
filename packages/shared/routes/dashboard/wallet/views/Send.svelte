@@ -26,7 +26,8 @@
         stopPollingLedgerStatus
     } from 'shared/lib/ledger'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger';
-    import { showAppNotification } from 'shared/lib/notifications';
+    import { displayNotifications, showAppNotification } from 'shared/lib/notifications';
+    import { NotificationType } from '../../../../lib/typings/notification';
 
     export let locale
     export let send
@@ -148,7 +149,7 @@
         }
     }
 
-    const handleTransferState = (state: TransferState) => {
+    const handleTransferState = (state: TransferState): void => {
         if(!state)
             return
 
@@ -218,17 +219,35 @@
         closePopup()
     }
 
-    const checkLedgerDeviceState = (state: LedgerDeviceState): void => {
-        if(state !== LedgerDeviceState.Connected) {
-            showAppNotification({
-                type: 'error',
-                message: locale(`error.ledger.${state}`)
-            })
+    const checkLedgerDeviceState = (state: LedgerDeviceState, notificationType: NotificationType = 'error', ignoreNotDetected: boolean = false): void => {
+        /**
+         * NOTE: The NotDetected state is another state to not show notifications for
+         * because the Ledger app assumes this state upon entering / exiting apps for a
+         * miniscule amount of time (but still enough to read as "Not Detected"), resulting
+         * in lots of unnecessary errors. The logic here is a little hard to reason, but it
+         * accomodates for if we want to ignore the NotDetected state.
+         */
+        switch(state) {
+            case LedgerDeviceState.Connected:
+                break
+            case LedgerDeviceState.NotDetected:
+                if(ignoreNotDetected)
+                    break
+            default:
+                if(get(displayNotifications).length < 3)
+                    showAppNotification({
+                        type: notificationType,
+                        message: locale(`error.ledger.${state}`)
+                    })
+                break
         }
     }
 
     let _ledgerDeviceState
     $: _ledgerDeviceState = $ledgerDeviceState
+    $: {
+        checkLedgerDeviceState($ledgerDeviceState, 'warning', true)
+    }
 
     const clearErrors = () => {
         amountError = ''
