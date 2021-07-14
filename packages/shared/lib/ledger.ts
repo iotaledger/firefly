@@ -2,7 +2,7 @@ import { closePopup, openPopup, popupState } from 'shared/lib/popup'
 import { api } from 'shared/lib/wallet'
 import { get, writable } from 'svelte/store'
 import type { Event } from "./typings/events"
-import { AppName, LedgerDeviceState, LedgerStatus } from "./typings/ledger"
+import { LedgerAppName, LedgerDeviceState, LedgerStatus } from "./typings/ledger"
 
 const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
 
@@ -43,9 +43,9 @@ export function calculateLedgerDeviceState(status: LedgerStatus): LedgerDeviceSt
     if (locked) {
         return LedgerDeviceState.Locked
     } else {
-        if (app?.name === AppName.IOTA) {
+        if (app?.name === LedgerAppName.IOTA) {
             return LedgerDeviceState.Connected
-        } else if (app?.name === AppName.IOTALegacy) {
+        } else if (app?.name === LedgerAppName.IOTALegacy) {
             return LedgerDeviceState.LegacyConnected
         } else {
             return connected ? LedgerDeviceState.AppNotOpen : LedgerDeviceState.NotDetected

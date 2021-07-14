@@ -18,7 +18,7 @@ export enum LedgerDeviceState {
     NotDetected = 'notDetected'
 }
 
-export enum AppName {
+export enum LedgerAppName {
     IOTA = 'IOTA',
     IOTALegacy = 'IOTA Legacy'
 }
