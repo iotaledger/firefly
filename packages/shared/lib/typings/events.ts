@@ -121,18 +121,18 @@ export enum TransferProgressEventType {
     PreparedTransaction = 'PreparedTransaction',
     /// Signing the transaction.
     SigningTransaction = 'SigningTransaction',
-    /// Proof of work is being performed.
+    /// Performing PoW.
     PerformingPoW = 'PerformingPoW',
-    /// Transaction is being broadcasted.
+    /// Broadcasting.
     Broadcasting = 'Broadcasting',
-    /// Transaction is complete.
+    /// Complete.
     Complete = 'Complete'
 }
 
 export interface TransferState {
-    /// The transfer progress event type.
+    /// Transfer progress event type.
     type: TransferProgressEventType
-
+    /// Relevant data for this type of transfer progress event.
     data?: any
 }
 
@@ -146,12 +146,12 @@ export interface PreparedTransactionEvent extends TransferProgressEvent {
     inputs: any[][]
     /// Transaction outputs. [address, amount, remainder][]
     outputs: any[][]
-    /// The indexation data.
+    /// Indexation data.
     data: string
 }
 
 export interface GeneratingRemainderDepositAddressEvent extends TransferProgressEvent {
-    /// The string representation of the remainder address.
+    /// Bech32 representation of remainder address.
     address: string
 }
 
@@ -159,13 +159,10 @@ export interface GeneratingRemainderDepositAddressEvent extends TransferProgress
 export interface PreparedTransactionEvent {
     /// The type of the transfer progress event.
     type: TransferProgressEventType
-
     /// Transaction inputs. [address, amount][]
     inputs: any[][]
-
     /// Transaction outputs. [address, amount, remainder][]
     outputs: any[][]
-
     /// The indexation data.
     data: string
 }

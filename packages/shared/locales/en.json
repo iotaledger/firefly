@@ -587,8 +587,7 @@
             "connectLegacy": "Open the IOTA Legacy app on your Ledger device to continue"
         },
         "ledgerConfirmation": {
-            "confirm": "To proceed, confirm the prompt displayed on your Ledger device",
-            "transactionConfirm": "To proceed, confirm the following details with those displayed on your Ledger device:"
+            "confirm": "To proceed, confirm the prompt displayed on your Ledger device"
         },
         "ledgerAppGuide": {
             "title": "Guide to installing the Ledger apps",
@@ -759,8 +758,8 @@
         "myAddress": "My Address",
         "shareAddress": "Share an address",
         "yourAddress": "Your address",
-        "newRemainderAddress": "New Remainder",
-        "remainderAddress": "Remainder",
+        "newRemainder": "New Remainder",
+        "remainder": "Remainder",
         "generateNewAddress": "Generate new address",
         "copyAddress": "Copy Address",
         "import": "Import",
@@ -952,10 +951,9 @@
             "generic": "There was an error connecting to your Ledger device.",
             "legacyConnected": "The wrong app is open on your Ledger device.",
             "locked": "Please unlock your Ledger device by entering the PIN.",
-            "mnemonicMismatch": "The connected Ledger device is using a mismatched mnemonic.",
+            "mnemonicMismatch": "You have connected the wrong Ledger device or the mnemonic has changed.",
             "notDetected": "Your Ledger device is not detected.",
-            "notFound": "Your Ledger device was not found.",
-            "wrong": "You have connected the wrong Ledger device or the mnemonic has changed."
+            "notFound": "Ledger device not found."
         }
     },
     "tooltips": {

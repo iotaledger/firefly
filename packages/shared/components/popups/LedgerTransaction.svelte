@@ -75,7 +75,7 @@
 {/if}
 {#if shouldDisplayRemainderAddress}
     <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-4">
-        <Text type="h5" highlighted classes="mb-2">{locale(`general.${shouldDisplayRemainderAmount ? 'r' : 'newR'}emainderAddress`)}</Text>
+        <Text type="h5" highlighted classes="mb-2">{locale(`general.${shouldDisplayRemainderAmount ? 'r' : 'newR'}emainder`)}</Text>
         <Text type="pre" classes={shouldDisplayRemainderAmount ? 'mb-3' : ''}>{remainderAddress}</Text>
 
         {#if shouldDisplayRemainderAmount}
