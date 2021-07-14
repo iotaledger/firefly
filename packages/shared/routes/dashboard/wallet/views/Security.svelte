@@ -58,12 +58,14 @@
          */
         if(state === LedgerDeviceState.OtherConnected) {
             getLedgerOpenedAppName()
-            .then((la: LedgerApp) => {
-                hardwareDeviceStatus = `${la.name} ${text}`
-            })
-            .catch((err) => {
-                console.error(err)
-            })
+                .then((la: LedgerApp) => {
+                    hardwareDeviceStatus = `${la.name} ${text}`
+                })
+                .catch((err) => {
+                    ledgerDeviceState.set(LedgerDeviceState.NotDetected)
+
+                    console.error(err)
+                })
         } else {
             hardwareDeviceStatus = text
         }
