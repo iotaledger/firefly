@@ -37,6 +37,7 @@
     export let mobile
 
     let isCheckingForBalance
+    let legacyLedger = $walletSetupType === SetupType.TrinityLedger
 
     const { seed, data, bundles } = $migration
 
@@ -64,8 +65,6 @@
 
     let error = getError(balance)
     let formattedBalance = formatUnitBestMatch(balance, true, 3)
-
-    let legacyLedger = $walletSetupType === SetupType.TrinityLedger
 
     bundles.subscribe((updatedBundles) => {
         _bundles = updatedBundles
