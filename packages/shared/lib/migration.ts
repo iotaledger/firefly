@@ -7,7 +7,7 @@ import { closePopup, openPopup } from 'shared/lib/popup'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
 import { appRoute, walletSetupType } from 'shared/lib/router'
 import type { Address } from 'shared/lib/typings/address'
-import type { Input, MigrationBundle, MigrationData, AddressInput, MigrationAddress } from 'shared/lib/typings/migration'
+import type { Input, MigrationBundle, MigrationData, AddressInput, MigrationAddress, Transfer } from 'shared/lib/typings/migration'
 import { AppRoute, SetupType } from 'shared/lib/typings/routes'
 import Validator from 'shared/lib/validator'
 import { api } from 'shared/lib/wallet'
@@ -451,11 +451,7 @@ export const mineLedgerBundle = (
 export const createMinedLedgerMigrationBundle = (
     bundleIndex: number,
     prepareTransfersFn: (
-        transfers: {
-            address: string;
-            value: number;
-            tag: string;
-        }[],
+        transfers: Transfer[],
         inputs: Input[],
         remainder: undefined,
         now: () => number
@@ -514,11 +510,7 @@ export const createMinedLedgerMigrationBundle = (
 export const createLedgerMigrationBundle = (
     bundleIndex: number,
     prepareTransfersFn: (
-        transfers: {
-            address: string;
-            value: number;
-            tag: string;
-        }[],
+        transfers: Transfer[],
         inputs: Input[],
     ) => Promise<string[]>
 ): Promise<any> => {
@@ -1332,17 +1324,14 @@ export const initialiseMigrationListeners = () => {
     })
 }
 
-function openLedgerLegacyTransactionPopup(_transfer, _inputs) {
+export const getAddressChecksum = (address: string = ''): string => address.slice(-9)
 
-    const getChecksum = (address: string = '') => address.slice(-9)
-    const output = { ..._transfer, checksum: getChecksum(_transfer.address) }
-    const inputs = _inputs.map(_input => ({ ..._input, checksum: getChecksum(_input.address) }))
-
+function openLedgerLegacyTransactionPopup(transfer: Transfer, inputs: Input[]): void {
     openPopup({
         type: 'ledgerLegacyTransaction',
         hideClose: true,
         props: {
-            output, inputs
+            transfer, inputs
         }
     })
 }

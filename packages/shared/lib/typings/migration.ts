@@ -36,6 +36,12 @@ export interface SendMigrationBundleResponse {
     tailTransactionHash: string;
 }
 
+export interface Transfer {
+    address: string;
+    value: number;
+    tag: string;
+}
+
 export enum RiskLevel {
     VERYHIGH = 10 ** -13,
     HIGH = 10 ** -15,
@@ -265,7 +271,7 @@ export function getLedgerMigrationData(
  * 
  * @returns {Promise}
  */
- export function sendLedgerMigrationBundle(
+export function sendLedgerMigrationBundle(
     bridge: Bridge,
     __ids: CommunicationIds,
     nodes: string[],
