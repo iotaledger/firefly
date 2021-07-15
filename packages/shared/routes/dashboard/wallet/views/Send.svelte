@@ -57,6 +57,7 @@
     let ledgerAwaitingConfirmation = false
 
     let transactionEventData: PreparedTransactionEvent = null
+    let transactionTimeoutId = null
 
     // This looks odd but sets a reactive dependency on amount, so when it changes the error will clear
     $: amount, (amountError = '')
@@ -232,14 +233,24 @@
         switch(state) {
             case LedgerDeviceState.Connected:
                 break
+
             case LedgerDeviceState.NotDetected:
                 if(ignoreNotDetected)
                     break
+
+            case LedgerDeviceState.Locked:
+                if(transactionTimeoutId)
+                    clearTimeout(transactionTimeoutId)
+
+                transactionTimeoutId = setTimeout(() => checkLedgerDeviceState(get(ledgerDeviceState), notificationType, ignoreNotDetected), 10000)
+
             default:
+                const message = locale(`error.ledger.${state}`)
+
                 if(get(displayNotifications).length < 2)
                     showAppNotification({
                         type: notificationType,
-                        message: locale(`error.ledger.${state}`)
+                        message: message
                     })
                 break
         }
@@ -422,6 +433,9 @@
     })
 
     onDestroy(() => {
+        if(transactionTimeoutId)
+            clearTimeout(transactionTimeoutId)
+
         stopPollingLedgerStatus()
 
         sendSubscription()
