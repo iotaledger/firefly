@@ -4,7 +4,7 @@
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { get } from 'svelte/store'
     import { onMount } from 'svelte'
-    import { closePopup, popupState } from 'shared/lib/popup';
+    import { closePopup, popupState } from 'shared/lib/popup'
 
     export let locale
 
