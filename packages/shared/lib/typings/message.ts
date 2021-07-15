@@ -34,6 +34,10 @@ export type Essence = {
     data: RegularEssence
 }
 
+/**
+ * Describes an input which references an unspent
+ * transaction output to consume.
+ */
 export interface UTXOInput {
     input: string
     metadata?: {
@@ -49,17 +53,29 @@ export interface UTXOInput {
 
 export type Input = { type: 'UTXO', data: UTXOInput }
 
-export interface SignatureLockedSingleInput {
-    address: string
-    amount: number
-}
-
+/**
+ * A deposit to a single address, which is unlocked
+ * via a signature.
+ */
 export interface SignatureLockedSingleOutput {
     address: string
     amount: number
     remainder: boolean
 }
 
+/**
+ * A single referenced output of a previous transaction,
+ * used as an input for the transaction that is referencing it.
+ */
+export interface ReferencedSignatureLockedSingleOutput {
+    address: string
+    amount: number
+}
+
+/**
+ * A deposit that alters the dust allowance of the
+ * target address via a special property.
+ */
 export interface SignatureLockedDustAllowance {
     address: string
     amount: number

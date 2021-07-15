@@ -1,8 +1,8 @@
 import type { ResponseTypes } from './bridge'
 import type {
     Message,
+    ReferencedSignatureLockedSingleOutput,
     SignatureLockedDustAllowance,
-    SignatureLockedSingleInput,
     SignatureLockedSingleOutput
 } from './message'
 
@@ -146,7 +146,7 @@ export interface GeneratingRemainderDepositAddressEvent extends TransferProgress
 
 export interface PreparedTransactionEvent extends TransferProgressEvent {
     /// Transaction inputs.
-    inputs: SignatureLockedSingleInput[]
+    inputs: ReferencedSignatureLockedSingleOutput[]
     /// Transaction outputs.
     outputs: (SignatureLockedSingleOutput | SignatureLockedDustAllowance)[]
     /// Indexation data.
