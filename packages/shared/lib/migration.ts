@@ -1335,7 +1335,9 @@ export const getAddressChecksum = (address: string = '', legacy: boolean = false
             }
         })
     }
-    return checksum(address)
+    else {
+        return checksum(address)
+    }
 }
 
 function openLedgerLegacyTransactionPopup(transfer: Transfer, inputs: Input[]): void {
