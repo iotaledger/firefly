@@ -77,6 +77,7 @@ export enum ResponseTypes {
     MigrationAddress = 'MigrationAddress',
     MinedBundle = 'MinedBundle',
     MineBundle = 'MineBundle',
+    LegacyAddressWithChecksum = 'LegacyAddressWithChecksum',
 }
 
 export enum Actions {
@@ -127,6 +128,7 @@ export type GetNodeInfoResponse = Response<ResponseTypes.NodeInfo, NodeInfo>
 export type GetMigrationAddressResponse = Response<ResponseTypes.MigrationAddress, MigrationAddress>
 export type MinedBundleResponse = Response<ResponseTypes.MinedBundle, string[]>
 export type LedgerDeviceStatusResponse = Response<ResponseTypes.LedgerStatus, LedgerStatus>
+export type GetLegacyAddressWithChecksumResponse = Response<ResponseTypes.LegacyAddressWithChecksum, string>
 
 export type MessageResponse =
     RemovedAccountResponse
@@ -168,5 +170,6 @@ export type MessageResponse =
     | GetNodeInfoResponse
     | GetMigrationAddressResponse
     | MinedBundleResponse
+    | GetLegacyAddressWithChecksumResponse
 
 export type Bridge = (message: BridgeMessage) => Promise<string>

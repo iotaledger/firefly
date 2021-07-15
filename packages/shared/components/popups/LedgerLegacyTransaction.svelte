@@ -41,7 +41,9 @@
             <Text type="pre">{formatUnitBestMatch(balance)}</Text>
             <Text type="pre">{address}</Text>
             <Text type="pre">
-                {locale('popups.ledgerTransaction.transaction.checksum', { values: { checksum: getAddressChecksum(address) } })}
+                {locale('popups.ledgerTransaction.transaction.checksum', {
+                    values: { checksum: getAddressChecksum(address, true) },
+                })}
             </Text>
         </div>
     {/each}

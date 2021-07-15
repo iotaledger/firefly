@@ -260,6 +260,10 @@ export const api: {
     getLedgerDeviceStatus(
         ledgerSimulator: boolean,
         callbacks: { onSuccess: (response: Event<LedgerStatus>) => void, onError: (err: ErrorEventPayload) => void }
+    ),
+    getLegacyAddressChecksum(
+        address: string,
+        callbacks: { onSuccess: (response: Event<string>) => void, onError: (err: ErrorEventPayload) => void }
     )
 } = window['__WALLET_API__']
 
