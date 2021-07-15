@@ -15,10 +15,12 @@ export enum LedgerDeviceState {
     LegacyConnected = 'legacyConnected',
     Locked = 'locked',
     MnemonicMismatch = 'mnemonicMismatch',
-    NotDetected = 'notDetected'
+    NotDetected = 'notDetected',
+    OtherConnected = 'otherConnected'
 }
 
-export enum AppName {
+export enum LedgerAppName {
+    BOLOS = 'BOLOS',
     IOTA = 'IOTA',
     IOTALegacy = 'IOTA Legacy'
 }

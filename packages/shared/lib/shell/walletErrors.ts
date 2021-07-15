@@ -49,7 +49,7 @@ const errorMessages: {
     'NodesNotSynced': 'error.node.unsynced',
     // Ledger
     'LedgerMiscError': 'error.ledger.generic',
-    'WrongLedgerSeedError': 'error.ledger.wrong',
+    'WrongLedgerSeedError': 'error.ledger.mnemonicMismatch',
     'LedgerDongleLocked': 'error.ledger.locked',
     'LedgerDeniedByUser': 'error.send.cancelled',
     'LedgerDeviceNotFound': 'error.ledger.notFound',

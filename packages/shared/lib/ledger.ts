@@ -1,8 +1,8 @@
 import { closePopup, openPopup, popupState } from 'shared/lib/popup'
 import { api } from 'shared/lib/wallet'
 import { get, writable } from 'svelte/store'
-import type { Event } from "./typings/events"
-import { AppName, LedgerDeviceState, LedgerStatus } from "./typings/ledger"
+import type { Event } from './typings/events'
+import { LedgerApp, LedgerAppName, LedgerDeviceState, LedgerStatus } from './typings/ledger'
 
 const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
 
@@ -43,14 +43,36 @@ export function calculateLedgerDeviceState(status: LedgerStatus): LedgerDeviceSt
     if (locked) {
         return LedgerDeviceState.Locked
     } else {
-        if (app?.name === AppName.IOTA) {
-            return LedgerDeviceState.Connected
-        } else if (app?.name === AppName.IOTALegacy) {
-            return LedgerDeviceState.LegacyConnected
-        } else {
-            return connected ? LedgerDeviceState.AppNotOpen : LedgerDeviceState.NotDetected
+        switch(app?.name) {
+            default:
+                if(connected) {
+                    /**
+                     * NOTE: "BOLOS" is the name of the Ledger operating system and is
+                     * sometimes registered as an app.
+                     */
+                    return (app?.name && app?.name !== LedgerAppName.BOLOS) ? LedgerDeviceState.OtherConnected : LedgerDeviceState.AppNotOpen
+                } else {
+                    return LedgerDeviceState.NotDetected
+                }
+            case LedgerAppName.IOTA:
+                return LedgerDeviceState.Connected
+            case LedgerAppName.IOTALegacy:
+                return LedgerDeviceState.LegacyConnected
         }
     }
+}
+
+export function getLedgerOpenedApp(): Promise<LedgerApp> {
+    return new Promise<LedgerApp>((resolve, reject) => {
+        api.getLedgerDeviceStatus(ledgerSimulator, {
+            onSuccess(response: Event<LedgerStatus>) {
+                resolve(response.payload?.app)
+            },
+            onError(err) {
+                reject(err)
+            }
+        })
+    })
 }
 
 export function promptUserToConnectLedger(

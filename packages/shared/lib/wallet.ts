@@ -24,7 +24,8 @@ import type {
     MigrationProgressEventPayload,
     ReattachmentEventPayload,
     TransactionEventPayload,
-    TransferProgressEventPayload, TransferState
+    TransferProgressEventPayload,
+    TransferState
 } from 'shared/lib/typings/events'
 import type { Payload, Transaction } from 'shared/lib/typings/message'
 import type { AddressInput, MigrationBundle, MigrationData, SendMigrationBundleResponse } from 'shared/lib/typings/migration'

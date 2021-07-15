@@ -46,7 +46,7 @@
     import { onMount, setContext } from 'svelte'
     import { derived, get, Readable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
-    import { TransferProgressEventType } from "../../../lib/typings/events";
+    import { TransferProgressEventType } from 'shared/lib/typings/events'
 
     export let locale
 

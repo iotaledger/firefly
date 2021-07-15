@@ -1,5 +1,6 @@
 import type { ResponseTypes } from './bridge'
 import type { Message } from './message'
+import type { UTXOInput, UTXOOutput } from './utxo'
 
 // Reference: https://github.com/iotaledger/wallet.rs/blob/develop/src/error.rs
 export enum ErrorType {
@@ -121,19 +122,12 @@ export enum TransferProgressEventType {
     PreparedTransaction = 'PreparedTransaction',
     /// Signing the transaction.
     SigningTransaction = 'SigningTransaction',
-    /// Proof of work is being performed.
+    /// Performing PoW.
     PerformingPoW = 'PerformingPoW',
-    /// Transaction is being broadcasted.
+    /// Broadcasting.
     Broadcasting = 'Broadcasting',
-    /// Transaction is complete.
+    /// Complete.
     Complete = 'Complete'
-}
-
-export interface TransferState {
-    /// The transfer progress event type.
-    type: TransferProgressEventType
-
-    data?: any
 }
 
 export interface TransferProgressEvent {
@@ -141,38 +135,30 @@ export interface TransferProgressEvent {
     type: TransferProgressEventType
 }
 
-export interface PreparedTransactionEvent extends TransferProgressEvent {
-    /// Transaction inputs. [address, amount][]
-    inputs: any[][]
-    /// Transaction outputs. [address, amount, remainder][]
-    outputs: any[][]
-    /// The indexation data.
-    data: string
-}
-
 export interface GeneratingRemainderDepositAddressEvent extends TransferProgressEvent {
-    /// The string representation of the remainder address.
+    /// Bech32 representation of remainder address.
     address: string
 }
 
-/// Prepared the transaction.
-export interface PreparedTransactionEvent {
-    /// The type of the transfer progress event.
-    type: TransferProgressEventType
+export interface PreparedTransactionEvent extends TransferProgressEvent {
+    /// Transaction inputs.
+    inputs: UTXOInput[]
+    /// Transaction outputs.
+    outputs: UTXOOutput[]
+    /// Indexation data.
+    data?: string
+}
 
-    /// Transaction inputs. [address, amount][]
-    inputs: any[][]
+export type TransferProgressEventData = TransferProgressEvent | GeneratingRemainderDepositAddressEvent | PreparedTransactionEvent
 
-    /// Transaction outputs. [address, amount, remainder][]
-    outputs: any[][]
-
-    /// The indexation data.
-    data: string
+export interface TransferState extends TransferProgressEvent {
+    /// Relevant data for this type of transfer progress event.
+    data?: TransferProgressEventData
 }
 
 export interface TransferProgressEventPayload {
     accountId: string
-    event: TransferProgressEvent | PreparedTransactionEvent | GeneratingRemainderDepositAddressEvent
+    event: TransferProgressEventData
 }
 
 export enum MigrationProgressEventType {
