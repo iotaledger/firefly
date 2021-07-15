@@ -1,7 +1,7 @@
 import { closePopup, openPopup, popupState } from 'shared/lib/popup'
 import { api } from 'shared/lib/wallet'
 import { get, writable } from 'svelte/store'
-import type { Event } from "./typings/events"
+import type { Event } from './typings/events'
 import { LedgerApp, LedgerAppName, LedgerDeviceState, LedgerStatus } from './typings/ledger'
 
 const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
