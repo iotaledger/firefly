@@ -28,7 +28,7 @@
     } from 'shared/lib/ledger'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { displayNotifications, showAppNotification } from 'shared/lib/notifications'
-    import { NotificationType } from 'shared/lib/typings/notification'
+    import { NotificationData, NotificationType } from 'shared/lib/typings/notification'
 
     export let locale
     export let send
@@ -135,16 +135,16 @@
         const numOutputs = txData.outputs.length
         if(numOutputs === 1) {
             return {
-                toAddress: txData.outputs[0][0],
-                toAmount: txData.outputs[0][1]
+                toAddress: txData.outputs[0].address,
+                toAmount: txData.outputs[0].amount
             }
         } else if(numOutputs > 1) {
             return {
-                toAddress: txData.outputs[0][0],
-                toAmount: txData.outputs[0][1],
+                toAddress: txData.outputs[0].address,
+                toAmount: txData.outputs[0].amount,
 
-                remainderAddress: txData.outputs[1][0],
-                remainderAmount: txData.outputs[1][1]
+                remainderAddress: txData.outputs[1].address,
+                remainderAmount: txData.outputs[1].amount
             }
         } else {
             return txData
@@ -248,7 +248,8 @@
             default:
                 const message = locale(`error.ledger.${state}`)
 
-                if(get(displayNotifications).length < 2)
+                const numSimilarNotifications = get(displayNotifications).filter((nd: NotificationData) => nd.type === notificationType).length
+                if(numSimilarNotifications === 0)
                     showAppNotification({
                         type: notificationType,
                         message: message

@@ -49,6 +49,11 @@ export interface UTXOInput {
 
 export type Input = { type: 'UTXO', data: UTXOInput }
 
+export interface SignatureLockedSingleInput {
+    address: string
+    amount: number
+}
+
 export interface SignatureLockedSingleOutput {
     address: string
     amount: number
