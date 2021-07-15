@@ -1,5 +1,6 @@
 import type { ResponseTypes } from './bridge'
 import type { Message } from './message'
+import type { UTXOInput, UTXOOutput } from './utxo';
 
 // Reference: https://github.com/iotaledger/wallet.rs/blob/develop/src/error.rs
 export enum ErrorType {
@@ -129,25 +130,9 @@ export enum TransferProgressEventType {
     Complete = 'Complete'
 }
 
-export interface TransferState {
-    /// Transfer progress event type.
-    type: TransferProgressEventType
-    /// Relevant data for this type of transfer progress event.
-    data?: any
-}
-
 export interface TransferProgressEvent {
     /// The transfer progress event type.
     type: TransferProgressEventType
-}
-
-export interface PreparedTransactionEvent extends TransferProgressEvent {
-    /// Transaction inputs. [address, amount][]
-    inputs: any[][]
-    /// Transaction outputs. [address, amount, remainder][]
-    outputs: any[][]
-    /// Indexation data.
-    data: string
 }
 
 export interface GeneratingRemainderDepositAddressEvent extends TransferProgressEvent {
@@ -155,21 +140,25 @@ export interface GeneratingRemainderDepositAddressEvent extends TransferProgress
     address: string
 }
 
-/// Prepared the transaction.
-export interface PreparedTransactionEvent {
-    /// The type of the transfer progress event.
-    type: TransferProgressEventType
-    /// Transaction inputs. [address, amount][]
-    inputs: any[][]
-    /// Transaction outputs. [address, amount, remainder][]
-    outputs: any[][]
-    /// The indexation data.
-    data: string
+export interface PreparedTransactionEvent extends TransferProgressEvent {
+    /// Transaction inputs.
+    inputs: UTXOInput[]
+    /// Transaction outputs.
+    outputs: UTXOOutput[]
+    /// Indexation data.
+    data?: string
+}
+
+export type TransferProgressEventData = TransferProgressEvent | GeneratingRemainderDepositAddressEvent | PreparedTransactionEvent
+
+export interface TransferState extends TransferProgressEvent {
+    /// Relevant data for this type of transfer progress event.
+    data?: TransferProgressEventData
 }
 
 export interface TransferProgressEventPayload {
     accountId: string
-    event: TransferProgressEvent | PreparedTransactionEvent | GeneratingRemainderDepositAddressEvent
+    event: TransferProgressEventData
 }
 
 export enum MigrationProgressEventType {

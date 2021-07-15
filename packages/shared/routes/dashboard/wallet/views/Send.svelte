@@ -9,6 +9,7 @@
     import {
         GeneratingRemainderDepositAddressEvent,
         PreparedTransactionEvent,
+        TransferProgressEventData,
         TransferProgressEventType,
         TransferState
     } from 'shared/lib/typings/events'
@@ -18,16 +19,16 @@
     import { isTransferring, transferState, wallet, WalletAccount } from 'shared/lib/wallet'
     import { getContext, onDestroy, onMount } from 'svelte'
     import type { Readable } from 'svelte/store'
-    import { get } from 'svelte/store';
+    import { get } from 'svelte/store'
     import {
         getLedgerDeviceStatus,
         ledgerDeviceState,
         pollLedgerDeviceStatus,
         stopPollingLedgerStatus
     } from 'shared/lib/ledger'
-    import { LedgerDeviceState } from 'shared/lib/typings/ledger';
-    import { displayNotifications, showAppNotification } from 'shared/lib/notifications';
-    import { NotificationType } from '../../../../lib/typings/notification';
+    import { LedgerDeviceState } from 'shared/lib/typings/ledger'
+    import { displayNotifications, showAppNotification } from 'shared/lib/notifications'
+    import { NotificationType } from 'shared/lib/typings/notification'
 
     export let locale
     export let send
@@ -56,7 +57,7 @@
 
     let ledgerAwaitingConfirmation = false
 
-    let transactionEventData: PreparedTransactionEvent = null
+    let transactionEventData: TransferProgressEventData = null
     let transactionTimeoutId = null
 
     // This looks odd but sets a reactive dependency on amount, so when it changes the error will clear
@@ -119,7 +120,7 @@
         }
     }
 
-    const handleTransactionEventData = (eventData: PreparedTransactionEvent | GeneratingRemainderDepositAddressEvent): any => {
+    const handleTransactionEventData = (eventData: TransferProgressEventData): any => {
         if(!eventData)
             return {}
 

@@ -1,8 +1,10 @@
 <script lang="ts">
     import { Illustration, Text } from 'shared/components'
-    import { displayNotifications, showAppNotification } from 'shared/lib/notifications';
-    import { formatUnitBestMatch } from 'shared/lib/units';
-    import { get } from "svelte/store";
+    import { showAppNotification } from 'shared/lib/notifications'
+    import { formatUnitBestMatch } from 'shared/lib/units'
+    import { get } from 'svelte/store'
+    import { onMount } from 'svelte'
+    import { closePopup, popupState } from 'shared/lib/popup';
 
     export let locale
 
@@ -10,42 +12,26 @@
 
     export let remainderAddress = ''
     export let remainderAmount = null
-    let shouldDisplayRemainderAddress = remainderAddress.length > 0
+    let shouldDisplayRemainderAddress = remainderAddress?.length > 0
     let shouldDisplayRemainderAmount = remainderAmount !== null
 
     export let toAddress = ''
     export let toAmount = null
-    let shouldDisplaySendTo = toAddress.length > 0 && toAmount !== null
-
-    let isInvalid = false
+    let shouldDisplaySendTo = toAddress?.length > 0 && toAmount !== null
 
     const onInvalid = () => {
-        /**
-         * NOTE: Because getLocaleData is used multiple times, we need to make sure
-         * that the user isn't spammed with error messages for when the transaction data
-         * is invalid.
-         */
-        if(!isInvalid) {
-            isInvalid = true
+        showAppNotification({
+            type: 'error',
+            message: locale('error.send.transaction'),
+        })
 
-            if(get(displayNotifications).length === 0)
-                showAppNotification({
-                    type: 'error',
-                    message: locale('error.send.transaction'),
-                })
-        }
         onCancel()
+
+        if(get(popupState).active)
+            closePopup()
     }
 
     const getPopupLocaleData = (prop: string): string => {
-        /**
-         * CAUTION: If neither the sendTo nor remainderAddress contain
-         * valid information then Firefly should cancel the transaction
-         * (to be retried) and notify the user.
-         */
-        if(!shouldDisplaySendTo && !shouldDisplayRemainderAddress)
-            onInvalid()
-
         const basePath = 'popups.ledgerTransaction'
         const popupType = shouldDisplaySendTo ? 'transaction' : 'remainderAddress'
 
@@ -53,8 +39,21 @@
     }
 
     const formatAmount = (amountRaw: number): string => {
+        if(amountRaw <= 0)
+            onInvalid()
+
         return formatUnitBestMatch(amountRaw)
     }
+
+    onMount(() => {
+        /**
+         * CAUTION: If neither the sendTo nor remainderAddress contain
+         * valid information then Firefly should cancel the transaction
+         * (to be retried) and notify the user.
+         */
+        if(!shouldDisplaySendTo && !shouldDisplayRemainderAddress)
+            onInvalid()
+    })
 </script>
 
 <Text type="h4" classes="mb-6">{locale(getPopupLocaleData('title'))}</Text>

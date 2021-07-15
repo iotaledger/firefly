@@ -1,6 +1,7 @@
 <script lang="typescript">
     import {
-        getLedgerDeviceStatus, getLedgerOpenedAppName,
+        getLedgerDeviceStatus,
+        getLedgerOpenedApp,
         ledgerDeviceState,
         pollLedgerDeviceStatus,
         stopPollingLedgerStatus
@@ -14,7 +15,7 @@
     import { api } from 'shared/lib/wallet'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import { LedgerApp, LedgerDeviceState } from "shared/lib/typings/ledger";
+    import { LedgerApp, LedgerDeviceState } from 'shared/lib/typings/ledger'
 
     export let locale
 
@@ -57,7 +58,7 @@
          * requires an app name to be prepended or else the text won't make sense.
          */
         if(state === LedgerDeviceState.OtherConnected) {
-            getLedgerOpenedAppName()
+            getLedgerOpenedApp()
                 .then((la: LedgerApp) => {
                     hardwareDeviceStatus = `${la.name} ${text}`
                 })

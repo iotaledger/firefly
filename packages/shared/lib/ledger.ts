@@ -2,7 +2,7 @@ import { closePopup, openPopup, popupState } from 'shared/lib/popup'
 import { api } from 'shared/lib/wallet'
 import { get, writable } from 'svelte/store'
 import type { Event } from "./typings/events"
-import { LedgerApp, LedgerAppName, LedgerDeviceState, LedgerStatus } from "./typings/ledger"
+import { LedgerApp, LedgerAppName, LedgerDeviceState, LedgerStatus } from './typings/ledger'
 
 const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
 
@@ -50,7 +50,7 @@ export function calculateLedgerDeviceState(status: LedgerStatus): LedgerDeviceSt
                      * NOTE: "BOLOS" is the name of the Ledger operating system and is
                      * sometimes registered as an app.
                      */
-                    return (app?.name && app?.name !== 'BOLOS') ? LedgerDeviceState.OtherConnected : LedgerDeviceState.AppNotOpen
+                    return (app?.name && app?.name !== LedgerAppName.BOLOS) ? LedgerDeviceState.OtherConnected : LedgerDeviceState.AppNotOpen
                 } else {
                     return LedgerDeviceState.NotDetected
                 }
@@ -62,7 +62,7 @@ export function calculateLedgerDeviceState(status: LedgerStatus): LedgerDeviceSt
     }
 }
 
-export function getLedgerOpenedAppName(): Promise<LedgerApp> {
+export function getLedgerOpenedApp(): Promise<LedgerApp> {
     return new Promise<LedgerApp>((resolve, reject) => {
         api.getLedgerDeviceStatus(ledgerSimulator, {
             onSuccess(response: Event<LedgerStatus>) {
