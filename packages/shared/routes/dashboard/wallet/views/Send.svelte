@@ -143,8 +143,8 @@
                 toAddress: txData.outputs[0].address,
                 toAmount: txData.outputs[0].amount,
 
-                remainderAddress: txData.outputs[1].address,
-                remainderAmount: txData.outputs[1].amount
+                remainderAddress: txData.outputs[numOutputs - 1].address,
+                remainderAmount: txData.outputs[numOutputs - 1].amount
             }
         } else {
             return txData
