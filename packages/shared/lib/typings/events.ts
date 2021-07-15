@@ -1,9 +1,7 @@
 import type { ResponseTypes } from './bridge'
 import type {
     Message,
-    ReferencedSignatureLockedSingleOutput,
-    SignatureLockedDustAllowance,
-    SignatureLockedSingleOutput
+    UTXOEventData
 } from './message'
 
 // Reference: https://github.com/iotaledger/wallet.rs/blob/develop/src/error.rs
@@ -146,9 +144,9 @@ export interface GeneratingRemainderDepositAddressEvent extends TransferProgress
 
 export interface PreparedTransactionEvent extends TransferProgressEvent {
     /// Transaction inputs.
-    inputs: ReferencedSignatureLockedSingleOutput[]
+    inputs: UTXOEventData[]
     /// Transaction outputs.
-    outputs: (SignatureLockedSingleOutput | SignatureLockedDustAllowance)[]
+    outputs: UTXOEventData[]
     /// Indexation data.
     data?: string
 
