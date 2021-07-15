@@ -1,0 +1,4 @@
+**/node_modules/*
+
+packages/desktop/out/*
+packages/desktop/public/*

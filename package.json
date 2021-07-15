@@ -5,13 +5,30 @@
         "packages/shared",
         "packages/backend/bindings/node"
     ],
-    "devDependencies": {
-        "patch-package": "^6.2.2"
-    },
     "scripts": {
+        "lint:desktop": "./node_modules/.bin/eslint packages/desktop",
+        "lint:mobile": "./node_modules/.bin/eslint packages/mobile",
+        "lint:shared": "./node_modules/.bin/eslint packages/shared",
+        "lint": "yarn run lint:shared && yarn run lint:desktop",
         "postinstall": "patch-package"
+    },
+    "lint-staged": {
+        "*.{ts,js,json}": [
+            "prettier --write"
+        ]
     },
     "resolutions": {
         "lodash": ">=4.17.21"
+    },
+    "dependencies": {
+        "babel-eslint": "^10.1.0",
+        "eslint": "^7.30.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-babel": "^5.3.1",
+        "eslint-plugin-prettier": "^3.4.0",
+        "eslint-plugin-svelte3": "^3.2.0"
+    },
+    "devDependencies": {
+        "patch-package": "^6.2.2"
     }
 }
