@@ -3,7 +3,7 @@
     import { clearSendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
     import { addProfileCurrencyPriceData, priceData } from 'shared/lib/marketData'
-    import { showAppNotification } from 'shared/lib/notifications'
+    import { displayNotifications, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import {
         activeProfile,
@@ -50,6 +50,7 @@
     import { onMount, onDestroy, setContext } from 'svelte'
     import { derived, get, Readable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
+    import { NotificationData } from "../../../lib/typings/notification";
 
     export let locale
 
@@ -265,9 +266,9 @@
                         })
                     )
                     closePopup()
+
                     isGeneratingAddress = false
                     hasGeneratedALedgerReceiveAddress.set(true)
-                    console.log($hasGeneratedALedgerReceiveAddress)
                 },
                 onError(err) {
                     closePopup()
@@ -275,8 +276,9 @@
 
                     const shouldHideErrorNotification =
                         err && err.type === 'ClientError' && err.error === 'error.node.chrysalisNodeInactive'
-
-                    if (!shouldHideErrorNotification) {
+                    const isNotificationNew =
+                        get(displayNotifications).filter((nd: NotificationData) => nd.type === 'error').length === 0
+                    if (!shouldHideErrorNotification && isNotificationNew) {
                         showAppNotification({
                             type: 'error',
                             message: locale(err.error),

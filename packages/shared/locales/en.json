@@ -610,7 +610,7 @@
         },
         "ledgerTransaction": {
             "remainderAddress": {
-                "title": "Confirm new remainder address",
+                "title": "Confirm remainder address",
                 "info": "Confirm that the remainder address displayed on your ledger device matches the one displayed below."
             },
             "transaction": {
@@ -619,7 +619,7 @@
             }
         },
         "ledgerAddress": {
-            "title": "Confirm Receive Address",
+            "title": "Confirm receive address",
             "body": "Confirm that the receive address displayed on your ledger device matches the one displayed below."
         }
     },
@@ -801,6 +801,7 @@
         "messageId": "Message ID",
         "inputAddress": "Send Address",
         "receiveAddress": "Receive Address",
+        "newAddress": "New Address",
         "date": "Date",
         "status": "Status",
         "confirmed": "Confirmed",
