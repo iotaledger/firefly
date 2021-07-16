@@ -1324,7 +1324,7 @@ export const initialiseMigrationListeners = () => {
     })
 }
 
-export const asyncGetLegacyAddressChecksum = (address: string = '', legacy: boolean = false): Promise<string> => {
+export const asyncGetAddressChecksum = (address: string = '', legacy: boolean = false): Promise<string> => {
     const _checksum = (_address: string = '') => _address.slice(-9)
     return new Promise<string>((resolve, reject) => {
         if (legacy) {
