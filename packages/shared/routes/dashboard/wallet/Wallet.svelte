@@ -631,27 +631,6 @@
     })
 
     onDestroy(() => clearTimeout(ledgerAddressGenerationTimeout))
-
-    function checkStrongholdStatus() {
-        api.getStrongholdStatus({
-            onSuccess(strongholdStatusResponse) {
-                updateProfile('isStrongholdLocked', strongholdStatusResponse.payload.snapshot.status === 'Locked')
-                api.areLatestAddressesUnused({
-                    onSuccess(response) {
-                        if (!response.payload) {
-                            openPopup({ type: 'password', props: { onSuccess: syncAccounts } })
-                        }
-                    },
-                    onError(error) {
-                        console.error(error)
-                    },
-                })
-            },
-            onError(error) {
-                console.error(error)
-            },
-        })
-    }
 </script>
 
 <style type="text/scss">
