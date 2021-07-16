@@ -53,6 +53,7 @@ export enum ResponseTypes {
     Broadcast = 'Broadcast',
     StrongholdStatusChange = 'StrongholdStatusChange',
     TransferProgress = 'TransferProgress',
+    LedgerAddressGeneration = "LedgerAddressGeneration",
     MigrationProgress = 'MigrationProgress',
     GeneratedMnemonic = 'GeneratedMnemonic',
     StoredMnemonic = 'StoredMnemonic',

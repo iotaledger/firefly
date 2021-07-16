@@ -285,6 +285,9 @@ export const api = {
     onTransferProgress: function (): ((__ids: CommunicationIds) => Promise<string>) {
         return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'TransferProgress')
     },
+    onLedgerAddressGeneration: function (): ((__ids: CommunicationIds) => Promise<string>) {
+        return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'LedgerAddressGeneration')
+    },
     getLedgerDeviceStatus: function (isSimulator: boolean): ((__ids: CommunicationIds) => Promise<string>) {
         return (__ids: CommunicationIds) => _getLedgerDeviceStatus(sendMessage, __ids, isSimulator)
     },

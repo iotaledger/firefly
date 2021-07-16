@@ -1862,7 +1862,7 @@ dependencies = [
 [[package]]
 name = "iota-client"
 version = "1.0.1"
-source = "git+https://github.com/iotaledger/iota.rs?branch=dev#7407b957efe0136e04c61eef1b30f6873ee3eb67"
+source = "git+https://github.com/iotaledger/iota.rs?branch=dev#b0eb2b3ff6388188cd580cf765dc0b8963eb7dcd"
 dependencies = [
  "async-trait",
  "bee-common 0.4.1 (git+https://github.com/iotaledger/bee.git?branch=dev)",
@@ -2042,7 +2042,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=ledger/display-change-address-and-PreparedTransactionData#931ebdf9e63f897e70be21c88acf621237ae59d6"
+source = "git+https://github.com/iotaledger/wallet.rs?branch=ledger/address-generation-event#637f7cc9d12321d1607d2d2963348fc49f76ea34"
 dependencies = [
  "async-trait",
  "backtrace",
