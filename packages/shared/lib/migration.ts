@@ -1324,20 +1324,24 @@ export const initialiseMigrationListeners = () => {
     })
 }
 
-export const getAddressChecksum = (address: string = '', legacy: boolean = false): string => {
-    const checksum = (address) => address.slice(-9)
-    if (legacy) {
-        api.getLegacyAddressChecksum(address, {
-            onSuccess(response) {
-                return checksum(response.payload)
-            }, onError(error) {
-                console.log('Error', error)
-            }
-        })
-    }
-    else {
-        return checksum(address)
-    }
+export const asyncGetLegacyAddressChecksum = (address: string = '', legacy: boolean = false): Promise<string> => {
+    const _checksum = (_address: string = '') => _address.slice(-9)
+    return new Promise<string>((resolve, reject) => {
+        if (legacy) {
+            api.getLegacyAddressChecksum(address, {
+                onSuccess(response) {
+                    const checksum = _checksum(response.payload)
+                    resolve(checksum)
+                },
+                onError(err) {
+                    reject(err)
+                },
+            })
+        } else {
+            const checksum = _checksum(address)
+            resolve(checksum)
+        }
+    })
 }
 
 function openLedgerLegacyTransactionPopup(transfer: Transfer, inputs: Input[]): void {

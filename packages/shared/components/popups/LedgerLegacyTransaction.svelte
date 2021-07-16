@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Illustration, Text } from 'shared/components'
-    import { getAddressChecksum } from 'shared/lib/migration'
+    import { asyncGetLegacyAddressChecksum } from 'shared/lib/migration'
     import type { Input, Transfer } from 'shared/lib/typings/migration'
     import { formatUnitBestMatch } from 'shared/lib/units'
 
@@ -28,9 +28,11 @@
         <Text type="pre">{formatUnitBestMatch(transfer.value)}</Text>
         <Text type="pre">{transfer.address}</Text>
         <Text type="pre">
-            {locale('popups.ledgerTransaction.transaction.checksum', {
-                values: { checksum: getAddressChecksum(transfer.address) },
-            })}
+            {#await asyncGetLegacyAddressChecksum(transfer.address)}
+                ...
+            {:then checksum}
+                {locale('popups.ledgerTransaction.transaction.checksum', { values: { checksum } })}
+            {/await}
         </Text>
     </div>
     {#each inputs as { address, balance, index }}
@@ -41,9 +43,11 @@
             <Text type="pre">{formatUnitBestMatch(balance)}</Text>
             <Text type="pre">{address}</Text>
             <Text type="pre">
-                {locale('popups.ledgerTransaction.transaction.checksum', {
-                    values: { checksum: getAddressChecksum(address, true) },
-                })}
+                {#await asyncGetLegacyAddressChecksum(address, true)}
+                    ...
+                {:then checksum}
+                    {locale('popups.ledgerTransaction.transaction.checksum', { values: { checksum } })}
+                {/await}
             </Text>
         </div>
     {/each}
