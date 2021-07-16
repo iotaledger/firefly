@@ -7,7 +7,7 @@ import { closePopup, openPopup } from 'shared/lib/popup'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
 import { appRoute, walletSetupType } from 'shared/lib/router'
 import type { Address } from 'shared/lib/typings/address'
-import type { Input, MigrationBundle, MigrationData, AddressInput, MigrationAddress } from 'shared/lib/typings/migration'
+import type { Input, MigrationBundle, MigrationData, AddressInput, MigrationAddress, Transfer } from 'shared/lib/typings/migration'
 import { AppRoute, SetupType } from 'shared/lib/typings/routes'
 import Validator from 'shared/lib/validator'
 import { api } from 'shared/lib/wallet'
@@ -453,11 +453,7 @@ export const mineLedgerBundle = (
 export const createMinedLedgerMigrationBundle = (
     bundleIndex: number,
     prepareTransfersFn: (
-        transfers: {
-            address: string;
-            value: number;
-            tag: string;
-        }[],
+        transfers: Transfer[],
         inputs: Input[],
         remainder: undefined,
         now: () => number
@@ -495,9 +491,10 @@ export const createMinedLedgerMigrationBundle = (
         })
     })
 
+    openLedgerLegacyTransactionPopup(transfer, inputs)
+
     return prepareTransfersFn([transfer], inputs, undefined, () => txs[0].timestamp * 1000).then((trytes) => {
         updateLedgerBundleState(bundleIndex, trytes, false);
-
         return { trytes, bundleHash: asTransactionObject(trytes[0]).bundle }
     });
 };
@@ -515,11 +512,7 @@ export const createMinedLedgerMigrationBundle = (
 export const createLedgerMigrationBundle = (
     bundleIndex: number,
     prepareTransfersFn: (
-        transfers: {
-            address: string;
-            value: number;
-            tag: string;
-        }[],
+        transfers: Transfer[],
         inputs: Input[],
     ) => Promise<string[]>
 ): Promise<any> => {
@@ -543,9 +536,10 @@ export const createLedgerMigrationBundle = (
             tag: 'U'.repeat(27)
         }
 
+        openLedgerLegacyTransactionPopup(transfer, bundle.inputs)
+
         return prepareTransfersFn([transfer], bundle.inputs.map((input) => Object.assign({}, input, { keyIndex: input.index }))).then((trytes) => {
             updateLedgerBundleState(bundleIndex, trytes, false);
-
             return { trytes, bundleHash: asTransactionObject(trytes[0]).bundle }
         });
     });
@@ -1332,4 +1326,32 @@ export const initialiseMigrationListeners = () => {
     })
 }
 
+export const asyncGetAddressChecksum = (address: string = '', legacy: boolean = false): Promise<string> => {
+    const _checksum = (_address: string = '') => _address.slice(-9)
+    return new Promise<string>((resolve, reject) => {
+        if (legacy) {
+            api.getLegacyAddressChecksum(address, {
+                onSuccess(response) {
+                    const checksum = _checksum(response.payload)
+                    resolve(checksum)
+                },
+                onError(err) {
+                    reject(err)
+                },
+            })
+        } else {
+            const checksum = _checksum(address)
+            resolve(checksum)
+        }
+    })
+}
 
+function openLedgerLegacyTransactionPopup(transfer: Transfer, inputs: Input[]): void {
+    openPopup({
+        type: 'ledgerLegacyTransaction',
+        hideClose: true,
+        props: {
+            transfer, inputs
+        }
+    })
+}

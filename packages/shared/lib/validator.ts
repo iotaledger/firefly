@@ -821,6 +821,7 @@ export default class ValidatorService {
             [ResponseTypes.MigrationAddress]: this.createBaseValidator().getFirst(),
             [ResponseTypes.MinedBundle]: this.createBaseValidator().getFirst(),
             [ResponseTypes.MineBundle]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.LegacyAddressChecksum]: this.createBaseValidator().getFirst(),
 
             // Events
             [ResponseTypes.StrongholdStatusChange]: this.createBaseEventValidator().getFirst(),
