@@ -39,6 +39,7 @@ const eventsApiToResponseTypeMap = {
     onBroadcast: ResponseTypes.Broadcast,
     onStrongholdStatusChange: ResponseTypes.StrongholdStatusChange,
     onTransferProgress: ResponseTypes.TransferProgress,
+    onLedgerAddressGeneration: ResponseTypes.LedgerAddressGeneration,
     onMigrationProgress: ResponseTypes.MigrationProgress,
 }
 

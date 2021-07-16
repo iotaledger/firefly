@@ -4,9 +4,10 @@
     import { deepCopy } from 'shared/lib/helpers'
     import { addProfileCurrencyPriceData, priceData } from 'shared/lib/marketData'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { openPopup } from 'shared/lib/popup'
+    import { closePopup, openPopup } from 'shared/lib/popup'
     import {
         activeProfile,
+        isLedgerProfile,
         isSoftwareProfile,
         isStrongholdLocked,
         MigratedTransaction,
@@ -14,8 +15,10 @@
         updateProfile,
     } from 'shared/lib/profile'
     import { walletRoute, walletSetupType } from 'shared/lib/router'
+    import { TransferProgressEventType } from 'shared/lib/typings/events'
     import type { Transaction } from 'shared/lib/typings/message'
     import { SetupType, WalletRoutes } from 'shared/lib/typings/routes'
+    import { promptUserToConnectLedger } from 'shared/lib/ledger'
     import {
         AccountMessage,
         AccountsBalanceHistory,
@@ -30,6 +33,7 @@
         getInternalFlag,
         getTransactions,
         getWalletBalanceHistory,
+        hasGeneratedALedgerReceiveAddress,
         initialiseListeners,
         isSelfTransaction,
         isTransferring,
@@ -43,10 +47,9 @@
         wallet,
         WalletAccount,
     } from 'shared/lib/wallet'
-    import { onMount, setContext } from 'svelte'
+    import { onMount, onDestroy, setContext } from 'svelte'
     import { derived, get, Readable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
-    import { TransferProgressEventType } from 'shared/lib/typings/events'
 
     export let locale
 
@@ -118,6 +121,16 @@
     setContext<Readable<BalanceHistory>>('walletBalanceHistory', walletBalanceHistory)
 
     let isGeneratingAddress = false
+    let ledgerAddressGenerationTimeout
+
+    // If wallet route or account changes force regeneration of Ledger receive address
+    $: {
+        $walletRoute
+        $selectedAccountId
+        if ($isLedgerProfile) {
+            hasGeneratedALedgerReceiveAddress.set(false)
+        }
+    }
 
     $: if ($accountsLoaded) {
         // update profileType if it is missing
@@ -224,6 +237,18 @@
     function onGenerateAddress(accountId) {
         const _generate = () => {
             isGeneratingAddress = true
+
+            if ($isLedgerProfile) {
+                // Delay opening the popup to allow time for address generation
+                ledgerAddressGenerationTimeout = setTimeout(() => {
+                    isGeneratingAddress = false
+                    openPopup({
+                        type: 'ledgerAddress',
+                        hideClose: true,
+                    })
+                }, 1500)
+            }
+
             api.getUnusedAddress(accountId, {
                 onSuccess(response) {
                     accounts.update((accounts) =>
@@ -239,9 +264,13 @@
                             return account
                         })
                     )
+                    closePopup()
                     isGeneratingAddress = false
+                    hasGeneratedALedgerReceiveAddress.set(true)
+                    console.log($hasGeneratedALedgerReceiveAddress)
                 },
                 onError(err) {
+                    closePopup()
                     isGeneratingAddress = false
 
                     const shouldHideErrorNotification =
@@ -271,7 +300,7 @@
                 },
             })
         } else {
-            _generate()
+            promptUserToConnectLedger(false, () => _generate())
         }
     }
 
@@ -462,7 +491,7 @@
                         })
 
                         transferState.set({
-                            type: TransferProgressEventType.Complete
+                            type: TransferProgressEventType.Complete,
                         })
 
                         setTimeout(() => {
@@ -537,7 +566,7 @@
                     })
 
                     transferState.set({
-                        type: TransferProgressEventType.Complete
+                        type: TransferProgressEventType.Complete,
                     })
 
                     setTimeout(() => {
@@ -600,6 +629,8 @@
             addProfileCurrencyPriceData()
         }
     })
+
+    onDestroy(() => clearTimeout(ledgerAddressGenerationTimeout))
 
     function checkStrongholdStatus() {
         api.getStrongholdStatus({

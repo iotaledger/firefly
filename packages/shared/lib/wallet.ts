@@ -25,7 +25,8 @@ import type {
     ReattachmentEventPayload,
     TransactionEventPayload,
     TransferProgressEventPayload,
-    TransferState
+    TransferState,
+    LedgerAddressGenerationEventPayload
 } from 'shared/lib/typings/events'
 import type { Payload, Transaction } from 'shared/lib/typings/message'
 import type { AddressInput, MigrationBundle, MigrationData, SendMigrationBundleResponse } from 'shared/lib/typings/migration'
@@ -34,8 +35,8 @@ import { get, writable, Writable } from 'svelte/store'
 import type { ClientOptions } from './typings/client'
 import type { LedgerStatus } from './typings/ledger'
 import type { Message } from './typings/message'
-import type { Duration, StrongholdStatus } from './typings/wallet'
 import type { NodeAuth, NodeInfo } from './typings/node'
+import type { Duration, StrongholdStatus } from './typings/wallet'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -149,6 +150,8 @@ export const resetWallet = () => {
     selectedMessage.set(null)
     isTransferring.set(false)
     transferState.set(null)
+    ledgerReceiveAddress.set(null)
+    hasGeneratedALedgerReceiveAddress.set(false)
     isSyncing.set(null)
 }
 
@@ -158,6 +161,9 @@ export const selectedMessage = writable<Message | null>(null)
 
 export const isTransferring = writable<boolean>(false)
 export const transferState = writable<TransferState | null>(null)
+
+export const ledgerReceiveAddress = writable<string | null>(null)
+export const hasGeneratedALedgerReceiveAddress = writable<boolean | null>(false)
 
 export const isSyncing = writable<boolean>(false)
 
@@ -206,6 +212,7 @@ export const api: {
     onConfirmationStateChange(callbacks: { onSuccess: (response: Event<ConfirmationStateChangeEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
     onBalanceChange(callbacks: { onSuccess: (response: Event<BalanceChangeEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
     onTransferProgress(callbacks: { onSuccess: (response: Event<TransferProgressEventPayload>) => void, onError: (err: ErrorEventPayload) => void }),
+    onLedgerAddressGeneration(callbacks: { onSuccess: (response: Event<LedgerAddressGenerationEventPayload>) => void, onError: (err: ErrorEventPayload) => void }),
     onMigrationProgress(callbacks: { onSuccess: (response: Event<MigrationProgressEventPayload>) => void, onError: (err: ErrorEventPayload) => void }),
 
     // Migration
@@ -242,7 +249,7 @@ export const api: {
         securityLevel: number,
         timeout: number,
         offset: number,
-        callbacks: { onSuccess: (response: Event<{ bundle: string[], crackability: number}>) => void, onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: Event<{ bundle: string[], crackability: number }>) => void, onError: (err: ErrorEventPayload) => void }
     ),
     getLedgerMigrationData(
         addresses: AddressInput[],
@@ -752,13 +759,26 @@ export const initialiseListeners = () => {
     api.onTransferProgress({
         onSuccess(response) {
             const { event } = response.payload
-            if(event.hasOwnProperty('type')) {
+            if (event.hasOwnProperty('type')) {
                 transferState.set({
                     type: event.type,
                     data: { ...event }
                 })
             }
 
+        },
+        onError(error) {
+            console.error(error)
+        }
+    })
+
+    /**
+     * Event listener for Ledger receive address generation
+     */
+     api.onLedgerAddressGeneration({
+        onSuccess(response) {
+            const { event } = response.payload
+            ledgerReceiveAddress.set(event.address)
         },
         onError(error) {
             console.error(error)

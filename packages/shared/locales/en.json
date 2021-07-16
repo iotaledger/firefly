@@ -118,7 +118,7 @@
             "body": "Your new wallet is ready to use.",
             "softwareMigratedBody": "You have successfully migrated your funds to the new network",
             "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
-            "trinityLedgerBody": "Your Ledger account is successfully recovered and you can now remove the old IOTA leger app from your device.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to Firefly. You can now remove the IOTA Legacy app from your device.",
             "exportMigration": "Export migration log and finish setup"
         },
         "import": {
@@ -617,6 +617,10 @@
                 "title": "Confirm transaction",
                 "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below."
             }
+        },
+        "ledgerAddress": {
+            "title": "Confirm Receive Address",
+            "body": "Confirm that the receive address displayed on your ledger device matches the one displayed below."
         }
     },
     "charts": {
@@ -814,6 +818,7 @@
         "transferPow": "Performing PoW",
         "transferBroadcasting": "Broadcasting transaction",
         "transferComplete": "Transfer complete",
+        "generatingReceiveAddress": "Generating receive address",
         "creatingAccount": "Creating wallet, please wait...",
         "updatingAccount": "Updating wallet, please wait...",
         "accountSyncing": "Wallet is syncing",

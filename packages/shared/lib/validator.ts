@@ -830,6 +830,7 @@ export default class ValidatorService {
             [ResponseTypes.BalanceChange]: this.createBaseEventValidator().getFirst(),
             [ResponseTypes.ConfirmationStateChange]: this.createBaseEventValidator().getFirst(),
             [ResponseTypes.TransferProgress]: this.createBaseEventValidator().getFirst(),
+            [ResponseTypes.LedgerAddressGeneration]: this.createBaseEventValidator().getFirst(),
             [ResponseTypes.MigrationProgress]: this.createBaseEventValidator().getFirst(),
             // Market data
             MarketData: new ValidatorChainBuilder().add(new TypeValidator()).getFirst(),

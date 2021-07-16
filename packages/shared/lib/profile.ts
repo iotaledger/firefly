@@ -110,6 +110,10 @@ export const isSoftwareProfile: Readable<Boolean> = derived(activeProfile, $acti
     return $activeProfile?.profileType === ProfileType.Software
 })
 
+export const isLedgerProfile: Readable<Boolean> = derived(activeProfile, $activeProfile => {
+    return $activeProfile?.profileType === ProfileType.Ledger || $activeProfile?.profileType === ProfileType.LedgerSimulator
+})
+
 /**
  * Saves profile in persistent storage
  *
