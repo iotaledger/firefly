@@ -291,13 +291,13 @@ export function sendLedgerMigrationBundle(
 }
 
 /**
- * Gets the checksum for a legacy address.
+ * Gets a legacy address with checksum.
  * 
  * @method getLegacyAddressChecksum
  * 
  * @param {Bridge} bridge 
  * @param {CommunicationIds} __ids 
- * @param {string} prompt
+ * @param {string} address
  * 
  * @returns {Promise}
  */
