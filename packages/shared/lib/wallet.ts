@@ -73,6 +73,7 @@ import type {
     WalletAccount,
     WalletState,
 } from './typings/wallet'
+import { setAccountTheme } from 'shared/lib/accountsTheme'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -669,7 +670,7 @@ export const asyncRestoreBackup = (importFilePath: string, password: string): Pr
         })
     })
 
-export const asyncCreateAccount = (alias?: string): Promise<WalletAccount> =>
+export const asyncCreateAccount = (alias?: string, color?: string, pattern?: string): Promise<WalletAccount> =>
     new Promise<WalletAccount>((resolve, reject) => {
         const accounts = get(get(wallet)?.accounts)
         api.createAccount(
@@ -689,6 +690,7 @@ export const asyncCreateAccount = (alias?: string): Promise<WalletAccount> =>
                         depositAddress: response.payload.addresses[0].address,
                     }) as WalletAccount
                     get(wallet)?.accounts.update((_accounts) => [..._accounts, preparedAccount])
+                    setAccountTheme(preparedAccount.id, color, pattern)
 
                     resolve(preparedAccount)
                 },

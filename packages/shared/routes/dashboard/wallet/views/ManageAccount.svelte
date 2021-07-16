@@ -5,6 +5,7 @@
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccountId, wallet } from 'shared/lib/wallet'
     import { Locale } from 'shared/lib/typings/i18n'
+    import { setAccountTheme } from 'shared/lib/accountsTheme'
     import { WalletAccount } from 'shared/lib/typings/wallet'
 
     export let locale: Locale
@@ -24,6 +25,7 @@
     $: accountAlias, (error = '')
 
     const handleSaveClick = () => {
+        setAccountTheme($selectedAccountId, color, pattern)
         const trimmedAccountAlias = accountAlias.trim()
         if (trimmedAccountAlias === alias) {
             selectedAccountId.set(null)

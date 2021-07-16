@@ -59,7 +59,7 @@
 
             const _cancel = () => (isBusy = false)
             const _create = () =>
-                onCreate(trimmedAccountAlias, (err) => {
+                onCreate(trimmedAccountAlias, color, pattern, (err) => {
                     isBusy = false
 
                     if(err) {
