@@ -1,15 +1,21 @@
 <script lang="typescript">
+    import {
+        getLedgerDeviceStatus,
+        getLedgerOpenedApp,
+        ledgerDeviceState,
+        pollLedgerDeviceStatus,
+        stopPollingLedgerStatus
+    } from 'shared/lib/ledger'
     import { SecurityTile, Text } from 'shared/components'
     import { versionDetails } from 'shared/lib/appUpdater'
     import { diffDates, getBackupWarningColor, isRecentDate } from 'shared/lib/helpers'
-    import { getLedgerDeviceStatus, ledgerDeviceState, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, isSoftwareProfile, isStrongholdLocked, profiles } from 'shared/lib/profile'
-    import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { api } from 'shared/lib/wallet'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
+    import { LedgerApp, LedgerDeviceState } from 'shared/lib/typings/ledger'
 
     export let locale
 
@@ -23,7 +29,7 @@
 
     let hardwareDeviceColor = 'gray'
     $: {
-        switch ($ledgerDeviceState) {
+        switch($ledgerDeviceState) {
             default:
             case LedgerDeviceState.Connected:
                 hardwareDeviceColor = 'blue'
@@ -34,6 +40,7 @@
             case LedgerDeviceState.AppNotOpen:
             case LedgerDeviceState.LegacyConnected:
             case LedgerDeviceState.Locked:
+            case LedgerDeviceState.OtherConnected:
                 hardwareDeviceColor = 'gray'
                 break
         }
@@ -42,6 +49,31 @@
     const unsubscribe = profiles.subscribe(() => {
         setup()
     })
+
+    const checkHardwareDeviceStatus = (state: LedgerDeviceState): void => {
+        const text = locale(`views.dashboard.security.hardwareDevice.statuses.${state}`)
+
+        /**
+         * NOTE: The text for when another app (besides IOTA or IOTA Legacy) is open
+         * requires an app name to be prepended or else the text won't make sense.
+         */
+        if(state === LedgerDeviceState.OtherConnected) {
+            getLedgerOpenedApp()
+                .then((la: LedgerApp) => {
+                    hardwareDeviceStatus = `${la.name} ${text}`
+                })
+                .catch((err) => {
+                    ledgerDeviceState.set(LedgerDeviceState.NotDetected)
+
+                    console.error(err)
+                })
+        } else {
+            hardwareDeviceStatus = text
+        }
+    }
+
+    let hardwareDeviceStatus
+    $: checkHardwareDeviceStatus($ledgerDeviceState)
 
     onMount(() => {
         setup()
@@ -144,7 +176,7 @@
             <!-- Hardware Device -->
             <SecurityTile
                 title={locale('views.dashboard.security.hardwareDevice.title')}
-                message={locale(`views.dashboard.security.hardwareDevice.statuses.${$ledgerDeviceState}`)}
+                message={hardwareDeviceStatus}
                 color={hardwareDeviceColor}
                 keepDarkThemeIconColor
                 icon="chip"

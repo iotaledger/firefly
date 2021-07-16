@@ -446,10 +446,11 @@
                     "statuses": {
                         "appNotOpen": "IOTA App Not Open",
                         "connected": "Connected",
+                        "legacyConnected": "IOTA Legacy App Open",
                         "locked": "Locked",
                         "mnemonicMismatch": "Wrong Ledger or Mnemonic",
-                        "notDetected": "Not detected",
-                        "legacyConnected": "IOTA Legacy app open"
+                        "notDetected": "Not Detected",
+                        "otherConnected": "App Open"
                     }
                 },
                 "strongholdStatus": {
@@ -606,6 +607,16 @@
                 "Ensure you have unlocked your Ledger device with your PIN",
                 "Open the new IOTA app on your Ledger device"
             ]
+        },
+        "ledgerTransaction": {
+            "remainderAddress": {
+                "title": "Confirm new remainder address",
+                "info": "Confirm that the remainder address displayed on your ledger device matches the one displayed below."
+            },
+            "transaction": {
+                "title": "Confirm transaction",
+                "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below."
+            }
         }
     },
     "charts": {
@@ -729,6 +740,7 @@
         "received": "Received",
         "sendPayment": "Send Payment",
         "moveFunds": "Internal Transfer",
+        "sendTo": "Send To",
         "sendFunds": "Send funds",
         "sendToAddress": "Send to address",
         "scanQrOrPaste": "Scan a QR code or paste an Address",
@@ -747,6 +759,8 @@
         "myAddress": "My Address",
         "shareAddress": "Share an address",
         "yourAddress": "Your address",
+        "newRemainder": "New Remainder",
+        "remainder": "Remainder",
         "generateNewAddress": "Generate new address",
         "copyAddress": "Copy Address",
         "import": "Import",
@@ -794,7 +808,8 @@
         "firstSync": "Syncing history, this may take a while...",
         "transferSyncing": "Syncing wallet",
         "transferSelectingInputs": "Selecting inputs",
-        "transferRemainderAddress": "Generating remainder deposit address",
+        "transferRemainderAddress": "Generating remainder address",
+        "transferPreparedTransaction": "Preparing transaction",
         "transferSigning": "Signing the transaction",
         "transferPow": "Performing PoW",
         "transferBroadcasting": "Broadcasting transaction",
@@ -909,7 +924,8 @@
             "noToAccount": "You have not selected a wallet to send the funds to.",
             "sendingDust": "You cannot send less than 1 Mi.",
             "leavingDust": "You cannot leave less than 1 Mi on your address.",
-            "cancelled": "The transaction was cancelled."
+            "cancelled": "The transaction was cancelled.",
+            "transaction": "There was an error sending your transaction. Please try again."
         },
         "node": {
             "invalid": "Please enter a valid URL.",
@@ -932,10 +948,14 @@
             "phraseCaseWord": "The word \"{word}\" should be lower case"
         },
         "ledger": {
-            "notFound": "Ledger device not found.",
-            "wrong": "You have connected the wrong Ledger device or the mnemonic has changed.",
+            "appNotOpen": "You must open the IOTA app on your Ledger device.",
+            "generic": "There was an error connecting to your Ledger device.",
+            "legacyConnected": "The wrong app is open on your Ledger device.",
             "locked": "Please unlock your Ledger device by entering the PIN.",
-            "generic": "There was an error connecting to your Ledger device."
+            "mnemonicMismatch": "You have connected the wrong Ledger device or the mnemonic has changed.",
+            "notDetected": "No Ledger device detected.",
+            "notFound": "Ledger device not found.",
+            "otherConnected": "The wrong app is open on your Ledger device."
         }
     },
     "tooltips": {
