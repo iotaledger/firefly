@@ -4,7 +4,7 @@
     import { clearSendParams, sendParams } from 'shared/lib/app'
     import { parseCurrency } from 'shared/lib/currency'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-    import { isSoftwareProfile } from 'shared/lib/profile'
+    import { isSoftwareProfile, isLedgerProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import {
         GeneratingRemainderDepositAddressEvent,
@@ -206,7 +206,7 @@
         }
     }
 
-    $: if (!get(isSoftwareProfile)) handleTransferState($transferState)
+    $: if (get(isLedgerProfile)) handleTransferState($transferState)
 
     $: if (!$isTransferring && ledgerAwaitingConfirmation) {
         closePopup()
