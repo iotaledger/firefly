@@ -4,7 +4,7 @@
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { setClipboard } from 'shared/lib/utils'
-    import { WalletAccount, hasGeneratedALedgerReceiveAddress } from 'shared/lib/wallet'
+    import { WalletAccount, hasGeneratedALedgerReceiveAddress, isSyncing } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable } from 'svelte/store'
 
@@ -55,7 +55,7 @@
         {/if}
         {#if $isLedgerProfile && !$hasGeneratedALedgerReceiveAddress}
             <div class="flex w-full h-full items-end">
-                <Button disabled={isGeneratingAddress} classes="w-full" onClick={() => generateNewAddress()}>
+                <Button disabled={isGeneratingAddress || isSyncing} classes="w-full" onClick={() => generateNewAddress()}>
                     {#if isGeneratingAddress}
                         <Spinner
                             busy={isGeneratingAddress}
