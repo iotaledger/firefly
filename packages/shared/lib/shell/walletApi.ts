@@ -75,6 +75,7 @@ const apiToResponseTypeMap = {
     getLegacySeedChecksum: ResponseTypes.LegacySeedChecksum,
     getNodeInfo: ResponseTypes.NodeInfo,
     mineBundle: ResponseTypes.MinedBundle,
+    getLegacyAddressChecksum: ResponseTypes.LegacyAddressChecksum,
     ...eventsApiToResponseTypeMap
 }
 
