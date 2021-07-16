@@ -16,7 +16,8 @@ import { localize } from './i18n'
 
 export const LOG_FILE_NAME = 'migration.log'
 
-export const MIGRATION_NODES = ['https://nodes.devnet.iota.org']
+// TODO: Change back temp migration nodes (previously https://nodes.devnet.iota.org)
+export const MIGRATION_NODES = ['https://nodes-legacy.ledgermigration1.net']
 export const PERMANODE = undefined
 
 export const ADDRESS_SECURITY_LEVEL = 2
@@ -27,7 +28,8 @@ export const MINIMUM_MIGRATION_BALANCE = 100
 /** Bundle mining timeout for each bundle */
 export const MINING_TIMEOUT_SECONDS = 10
 
-export const MINIMUM_WEIGHT_MAGNITUDE = 9;
+// TODO: Change back temp mwm (previously 9)
+export const MINIMUM_WEIGHT_MAGNITUDE = 14;
 
 const SOFTWARE_MAX_INPUTS_PER_BUNDLE = 10
 
