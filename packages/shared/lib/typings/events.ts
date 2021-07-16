@@ -164,6 +164,14 @@ export interface TransferProgressEventPayload {
     event: TransferProgressEventData
 }
 
+export interface LedgerAddressGenerationEventPayload {
+    event: LedgerAddressGenerationEvent;
+}
+
+export interface LedgerAddressGenerationEvent {
+    address: string;
+}
+
 export enum MigrationProgressEventType {
     // Syncing account.
     SyncingAccount = 'SyncingAccount',
