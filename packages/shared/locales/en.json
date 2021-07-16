@@ -195,7 +195,7 @@
         },
         "selectLedgerAccountIndex": {
             "title": "Choose Ledger account index",
-            "body": "Choose your Ledger account index. Choose your Ledger account index. Choose your Ledger account index. Choose your Ledger account index.",
+            "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
             "accountIndex": "Account Index",
             "accountPage": "Account Page",
             "standard": "Standard",
