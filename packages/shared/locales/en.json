@@ -611,11 +611,11 @@
         "ledgerTransaction": {
             "remainderAddress": {
                 "title": "Confirm new remainder address",
-                "info": "Compare and confirm the remainder address displayed on your Ledger device against the address displayed below."
+                "info": "Confirm that the remainder address displayed on your ledger device matches the one displayed below."
             },
             "transaction": {
                 "title": "Confirm transaction",
-                "info": "Compare and confirm the transaction information displayed on your Ledger device against the information displayed below.",
+                "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below.",
                 "input": "Input [{index}]",
                 "output": "Output",
                 "checksum": "Chk: {checksum}"
@@ -928,7 +928,7 @@
             "sendingDust": "You cannot send less than 1 Mi.",
             "leavingDust": "You cannot leave less than 1 Mi on your address.",
             "cancelled": "The transaction was cancelled.",
-            "transaction": "There was an error in generating a transaction. Please try again."
+            "transaction": "There was an error sending your transaction. Please try again."
         },
         "node": {
             "invalid": "Please enter a valid URL.",
@@ -951,12 +951,12 @@
             "phraseCaseWord": "The word \"{word}\" should be lower case"
         },
         "ledger": {
-            "appNotOpen": "The IOTA app on your Ledger device must be open.",
+            "appNotOpen": "You must open the IOTA app on your Ledger device.",
             "generic": "There was an error connecting to your Ledger device.",
             "legacyConnected": "The wrong app is open on your Ledger device.",
             "locked": "Please unlock your Ledger device by entering the PIN.",
             "mnemonicMismatch": "You have connected the wrong Ledger device or the mnemonic has changed.",
-            "notDetected": "Your Ledger device is not detected.",
+            "notDetected": "No Ledger device detected.",
             "notFound": "Ledger device not found.",
             "otherConnected": "The wrong app is open on your Ledger device."
         }

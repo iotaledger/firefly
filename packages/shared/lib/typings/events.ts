@@ -1,6 +1,5 @@
 import type { ResponseTypes } from './bridge'
-import type { Message } from './message'
-import type { UTXOInput, UTXOOutput } from './utxo'
+import type { Message, UTXOEventData } from './message'
 
 // Reference: https://github.com/iotaledger/wallet.rs/blob/develop/src/error.rs
 export enum ErrorType {
@@ -142,11 +141,12 @@ export interface GeneratingRemainderDepositAddressEvent extends TransferProgress
 
 export interface PreparedTransactionEvent extends TransferProgressEvent {
     /// Transaction inputs.
-    inputs: UTXOInput[]
+    inputs: UTXOEventData[]
     /// Transaction outputs.
-    outputs: UTXOOutput[]
+    outputs: UTXOEventData[]
     /// Indexation data.
     data?: string
+
 }
 
 export type TransferProgressEventData = TransferProgressEvent | GeneratingRemainderDepositAddressEvent | PreparedTransactionEvent

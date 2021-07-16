@@ -9,4 +9,4 @@ import * as ledger from './ledger'
 import * as utxo from './utxo'
 import * as wallet from './wallet'
 
-export { account, address, bridge, client, events, ledger, message, notification, utxo, wallet }
+export { account, address, bridge, client, events, ledger, message, notification, wallet }
