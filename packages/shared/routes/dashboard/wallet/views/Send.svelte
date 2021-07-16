@@ -3,8 +3,6 @@
     import { Address, Amount, Button, Dropdown, Icon, ProgressBar, Text } from 'shared/components'
     import { clearSendParams, sendParams } from 'shared/lib/app'
     import { parseCurrency } from 'shared/lib/currency'
-    import { getLedgerDeviceStatus, ledgerDeviceState, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
-    import { displayNotifications, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
@@ -15,8 +13,6 @@
         TransferProgressEventType,
         TransferState,
     } from 'shared/lib/typings/events'
-    import { LedgerDeviceState } from 'shared/lib/typings/ledger'
-    import type { NotificationData, NotificationType } from 'shared/lib/typings/notification'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
@@ -24,6 +20,10 @@
     import { getContext, onDestroy, onMount } from 'svelte'
     import type { Readable } from 'svelte/store'
     import { get } from 'svelte/store'
+    import { getLedgerDeviceStatus, ledgerDeviceState, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
+    import { LedgerDeviceState } from 'shared/lib/typings/ledger'
+    import { displayNotifications, showAppNotification } from 'shared/lib/notifications'
+    import type { NotificationData, NotificationType } from 'shared/lib/typings/notification'
 
     export let locale
     export let send

@@ -1,10 +1,10 @@
 <script lang="ts">
     import { Illustration, Text } from 'shared/components'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { closePopup, popupState } from 'shared/lib/popup'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { onMount } from 'svelte'
     import { get } from 'svelte/store'
+    import { onMount } from 'svelte'
+    import { closePopup, popupState } from 'shared/lib/popup'
 
     export let locale
 
@@ -27,7 +27,8 @@
 
         onCancel()
 
-        if (get(popupState).active) closePopup()
+        if(get(popupState).active)
+            closePopup()
     }
 
     const getPopupLocaleData = (prop: string): string => {
@@ -38,7 +39,8 @@
     }
 
     const formatAmount = (amountRaw: number): string => {
-        if (amountRaw <= 0) onInvalid()
+        if(amountRaw <= 0)
+            onInvalid()
 
         return formatUnitBestMatch(amountRaw)
     }
@@ -49,7 +51,8 @@
          * valid information then Firefly should cancel the transaction
          * (to be retried) and notify the user.
          */
-        if (!shouldDisplaySendTo && !shouldDisplayRemainderAddress) onInvalid()
+        if(!shouldDisplaySendTo && !shouldDisplayRemainderAddress)
+            onInvalid()
     })
 </script>
 
@@ -71,9 +74,7 @@
 {/if}
 {#if shouldDisplayRemainderAddress}
     <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-4">
-        <Text type="h5" highlighted classes="mb-2">
-            {locale(`general.${shouldDisplayRemainderAmount ? 'r' : 'newR'}emainder`)}
-        </Text>
+        <Text type="h5" highlighted classes="mb-2">{locale(`general.${shouldDisplayRemainderAmount ? 'r' : 'newR'}emainder`)}</Text>
         <Text type="pre" classes={shouldDisplayRemainderAmount ? 'mb-3' : ''}>{remainderAddress}</Text>
 
         {#if shouldDisplayRemainderAmount}

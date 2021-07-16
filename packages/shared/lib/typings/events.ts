@@ -1,5 +1,8 @@
 import type { ResponseTypes } from './bridge'
-import type { Message, UTXOEventData } from './message'
+import type {
+    Message,
+    UTXOEventData
+} from './message'
 
 // Reference: https://github.com/iotaledger/wallet.rs/blob/develop/src/error.rs
 export enum ErrorType {

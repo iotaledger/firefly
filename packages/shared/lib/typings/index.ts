@@ -6,7 +6,6 @@ import * as events from './events'
 import * as message from './message'
 import * as notification from './notification'
 import * as ledger from './ledger'
-import * as utxo from './utxo'
 import * as wallet from './wallet'
 
 export { account, address, bridge, client, events, ledger, message, notification, wallet }
