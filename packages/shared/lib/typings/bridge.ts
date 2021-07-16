@@ -128,6 +128,7 @@ export type GetNodeInfoResponse = Response<ResponseTypes.NodeInfo, NodeInfo>
 export type GetMigrationAddressResponse = Response<ResponseTypes.MigrationAddress, MigrationAddress>
 export type MinedBundleResponse = Response<ResponseTypes.MinedBundle, string[]>
 export type LedgerDeviceStatusResponse = Response<ResponseTypes.LedgerStatus, LedgerStatus>
+export type LegacyAddressChecksumResponse = Response<ResponseTypes.LegacyAddressChecksum, string>
 
 export type MessageResponse =
     RemovedAccountResponse
@@ -169,5 +170,6 @@ export type MessageResponse =
     | GetNodeInfoResponse
     | GetMigrationAddressResponse
     | MinedBundleResponse
+    | LegacyAddressChecksumResponse
 
 export type Bridge = (message: BridgeMessage) => Promise<string>
