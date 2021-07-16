@@ -289,3 +289,27 @@ export function sendLedgerMigrationBundle(
         },
     })
 }
+
+/**
+ * Gets the checksum for a legacy address.
+ * 
+ * @method getLegacyAddressChecksum
+ * 
+ * @param {Bridge} bridge 
+ * @param {CommunicationIds} __ids 
+ * @param {string} prompt
+ * 
+ * @returns {Promise}
+ */
+export function getLegacyAddressChecksum(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+    address: string
+) {
+    return bridge({
+        actorId: __ids.actorId,
+        id: __ids.messageId,
+        cmd: 'GetLegacyAddressChecksum',
+        payload: address
+    })
+}
