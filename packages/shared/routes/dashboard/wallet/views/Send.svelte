@@ -11,7 +11,7 @@
         PreparedTransactionEvent,
         TransferProgressEventData,
         TransferProgressEventType,
-        TransferState
+        TransferState,
     } from 'shared/lib/typings/events'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
@@ -20,15 +20,10 @@
     import { getContext, onDestroy, onMount } from 'svelte'
     import type { Readable } from 'svelte/store'
     import { get } from 'svelte/store'
-    import {
-        getLedgerDeviceStatus,
-        ledgerDeviceState,
-        pollLedgerDeviceStatus,
-        stopPollingLedgerStatus
-    } from 'shared/lib/ledger'
+    import { getLedgerDeviceStatus, ledgerDeviceState, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { displayNotifications, showAppNotification } from 'shared/lib/notifications'
-    import { NotificationData, NotificationType } from 'shared/lib/typings/notification'
+    import type { NotificationData, NotificationType } from 'shared/lib/typings/notification'
 
     export let locale
     export let send
@@ -85,7 +80,7 @@
         },
         PreparedTransaction: {
             label: locale('general.transferPreparedTransaction'),
-            percent: 50
+            percent: 50,
         },
         SigningTransaction: {
             label: locale('general.transferSigning'),
@@ -121,30 +116,27 @@
     }
 
     const handleTransactionEventData = (eventData: TransferProgressEventData): any => {
-        if(!eventData)
-            return {}
+        if (!eventData) return {}
 
         const remainderData = eventData as GeneratingRemainderDepositAddressEvent
-        if(remainderData?.address)
-            return { remainderAddress: remainderData?.address }
+        if (remainderData?.address) return { remainderAddress: remainderData?.address }
 
         const txData = eventData as PreparedTransactionEvent
-        if(!(txData?.inputs && txData?.outputs) || (txData?.inputs.length <= 0 || txData?.outputs.length <= 0))
-            return {}
+        if (!(txData?.inputs && txData?.outputs) || txData?.inputs.length <= 0 || txData?.outputs.length <= 0) return {}
 
         const numOutputs = txData.outputs.length
-        if(numOutputs === 1) {
+        if (numOutputs === 1) {
             return {
                 toAddress: txData.outputs[0].address,
-                toAmount: txData.outputs[0].amount
+                toAmount: txData.outputs[0].amount,
             }
-        } else if(numOutputs > 1) {
+        } else if (numOutputs > 1) {
             return {
                 toAddress: txData.outputs[0].address,
                 toAmount: txData.outputs[0].amount,
 
                 remainderAddress: txData.outputs[numOutputs - 1].address,
-                remainderAmount: txData.outputs[numOutputs - 1].amount
+                remainderAmount: txData.outputs[numOutputs - 1].amount,
             }
         } else {
             return txData
@@ -152,8 +144,7 @@
     }
 
     const handleTransferState = (state: TransferState): void => {
-        if(!state)
-            return
+        if (!state) return
 
         const _onCancel = () => {
             isTransferring.set(false)
@@ -162,7 +153,7 @@
             clearSendParams(selectedSendType === SEND_TYPE.INTERNAL)
             closePopup()
 
-            if(get(displayNotifications).length === 0)
+            if (get(displayNotifications).length === 0)
                 showAppNotification({
                     type: 'error',
                     message: locale('error.send.transaction'),
@@ -170,9 +161,9 @@
         }
 
         const { data, type } = state
-        switch(type) {
+        switch (type) {
             default:
-                if(ledgerAwaitingConfirmation) {
+                if (ledgerAwaitingConfirmation) {
                     ledgerAwaitingConfirmation = false
 
                     closePopup()
@@ -183,10 +174,10 @@
             case TransferProgressEventType.GeneratingRemainderDepositAddress:
                 transactionEventData = data
 
-                /**
-                 * NOTE: The break statement is omitted in this case to allow the next block of code
-                 * (under SigningTransaction) to be executed.
-                 */
+            /**
+             * NOTE: The break statement is omitted in this case to allow the next block of code
+             * (under SigningTransaction) to be executed.
+             */
 
             case TransferProgressEventType.SigningTransaction:
                 ledgerAwaitingConfirmation = true
@@ -196,8 +187,8 @@
                     hideClose: true,
                     props: {
                         onCancel: _onCancel,
-                        ...handleTransactionEventData(transactionEventData)
-                    }
+                        ...handleTransactionEventData(transactionEventData),
+                    },
                 })
 
                 break
@@ -207,8 +198,7 @@
                  * CAUTION: The Ledger confirmation doesn't always trigger
                  * the popup to close, so it is programmatically enforced here.
                  */
-                if(get(popupState).active)
-                    closePopup()
+                if (get(popupState).active) closePopup()
 
                 transactionEventData = data
 
@@ -216,14 +206,17 @@
         }
     }
 
-    $: if(!get(isSoftwareProfile))
-        handleTransferState($transferState)
+    $: if (!get(isSoftwareProfile)) handleTransferState($transferState)
 
     $: if (!$isTransferring && ledgerAwaitingConfirmation) {
         closePopup()
     }
 
-    const checkLedgerDeviceState = (state: LedgerDeviceState, notificationType: NotificationType = 'error', ignoreNotDetected: boolean = false): void => {
+    const checkLedgerDeviceState = (
+        state: LedgerDeviceState,
+        notificationType: NotificationType = 'error',
+        ignoreNotDetected: boolean = false
+    ): void => {
         /**
          * NOTE: The NotDetected state is another state to not show notifications for
          * because the Ledger app assumes this state upon entering / exiting apps for a
@@ -231,28 +224,30 @@
          * in lots of unnecessary errors. The logic here is a little hard to reason, but it
          * accomodates for if we want to ignore the NotDetected state.
          */
-        switch(state) {
+        switch (state) {
             case LedgerDeviceState.Connected:
                 break
 
             case LedgerDeviceState.NotDetected:
-                if(ignoreNotDetected)
-                    break
+                if (ignoreNotDetected) break
 
             case LedgerDeviceState.Locked:
-                if(transactionTimeoutId)
-                    clearTimeout(transactionTimeoutId)
+                if (transactionTimeoutId) clearTimeout(transactionTimeoutId)
 
-                transactionTimeoutId = setTimeout(() => checkLedgerDeviceState(get(ledgerDeviceState), notificationType, ignoreNotDetected), 10000)
+                transactionTimeoutId = setTimeout(
+                    () => checkLedgerDeviceState(get(ledgerDeviceState), notificationType, ignoreNotDetected),
+                    10000
+                )
 
             default:
                 const message = locale(`error.ledger.${state}`)
 
-                const numSimilarNotifications = get(displayNotifications).filter((nd: NotificationData) => nd.type === notificationType).length
-                if(numSimilarNotifications === 0)
+                const isNotificationNew =
+                    get(displayNotifications).filter((nd: NotificationData) => nd.type === notificationType).length === 0
+                if (isNotificationNew)
                     showAppNotification({
                         type: notificationType,
-                        message: message
+                        message: message,
                     })
                 break
         }
@@ -386,7 +381,7 @@
         if ($isSoftwareProfile) {
             onSuccess()
         } else {
-            if(_ledgerDeviceState === LedgerDeviceState.Connected) {
+            if (_ledgerDeviceState === LedgerDeviceState.Connected) {
                 onSuccess()
             } else {
                 checkLedgerDeviceState(_ledgerDeviceState)
@@ -435,8 +430,7 @@
     })
 
     onDestroy(() => {
-        if(transactionTimeoutId)
-            clearTimeout(transactionTimeoutId)
+        if (transactionTimeoutId) clearTimeout(transactionTimeoutId)
 
         stopPollingLedgerStatus()
 
