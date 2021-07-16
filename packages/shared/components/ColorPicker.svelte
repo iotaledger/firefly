@@ -19,13 +19,13 @@
     <div class="flex flex-row mb-4">
         <Text type="h5">{title}</Text>
     </div>
-    <div class="flex flex-row justify-between">
+    <ul class="flex flex-row justify-between">
         {#each colors as color}
-            <div tabindex="0" class='w-8 h-8 bg-{color}-500 hover:bg-{color}-600 focus:bg-{color}-600 rounded-lg ring-{color}-500 ring-opacity-30 hover:ring-opacity-40 cursor-pointer flex justify-center items-center' class:ring-4="{color === active}"
+            <li tabindex="0" class='w-8 h-8 bg-{color}-500 hover:bg-{color}-600 focus:bg-{color}-600 rounded-lg ring-{color}-500 ring-opacity-30 hover:ring-opacity-40 cursor-pointer flex justify-center items-center' class:ring-4="{color === active}"
             on:click={() => handleClick(color)} on:keypress={(event) => handleKeyPress(event, color)}
             aria-label={color}>
                 {#if color === active}<Icon icon="checkmark" classes="text-white" />{/if}
-            </div>
+            </li>
         {/each}
-    </div>
+        </ul>
 </div>
