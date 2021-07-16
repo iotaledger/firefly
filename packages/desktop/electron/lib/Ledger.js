@@ -4,7 +4,7 @@ const Iota = require('hw-app-iota').default
 const { ipcRenderer, remote } = require('electron')
 
 const USE_SIMULATOR = false
-const SIMULATOR_PORT = 4000;
+const SIMULATOR_PORT = 9999;
 
 const ipc = ipcRenderer;
 const Wallet = remote.getCurrentWindow().webContents;
