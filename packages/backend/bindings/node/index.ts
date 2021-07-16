@@ -34,6 +34,7 @@ import {
     mineBundle as _mineBundle,
     getLedgerMigrationData as _getLedgerMigrationData,
     sendLedgerMigrationBundle as _sendLedgerMigrationBundle,
+    getLegacyAddressChecksum as _getLegacyAddressChecksum,
     AddressInput
 } from '../../../shared/lib/typings/migration'
 import {
@@ -255,6 +256,9 @@ export const api = {
     },
     getNodeInfo: function (accountId: AccountIdentifier, url?: string, auth?: NodeAuth): ((__ids: CommunicationIds) => Promise<string>) {
         return (__ids: CommunicationIds) => _getNodeInfo(sendMessage, __ids, accountId, url, auth)
+    },
+    getLegacyAddressChecksum: function (address: string): ((__ids: CommunicationIds) => Promise<string>) {
+        return (__ids: CommunicationIds) => _getLegacyAddressChecksum(sendMessage, __ids, address)
     },
     // Event emitters
     onError: function (): ((__ids: CommunicationIds) => Promise<string>) {
