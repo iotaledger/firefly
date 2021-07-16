@@ -216,7 +216,7 @@
         }
     }
 
-    $: if(!$isSoftwareProfile)
+    $: if(!get(isSoftwareProfile))
         handleTransferState($transferState)
 
     $: if (!$isTransferring && ledgerAwaitingConfirmation) {
