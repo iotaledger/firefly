@@ -22,8 +22,8 @@
     import { get } from 'svelte/store'
     import { getLedgerDeviceStatus, ledgerDeviceState, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
-    import { displayNotifications, showAppNotification } from 'shared/lib/notifications'
-    import type { NotificationData, NotificationType } from 'shared/lib/typings/notification'
+    import { displayNotifications, isNewNotification, showAppNotification } from 'shared/lib/notifications'
+    import type { NotificationType } from 'shared/lib/typings/notification'
 
     export let locale
     export let send
@@ -242,9 +242,7 @@
             default:
                 const message = locale(`error.ledger.${state}`)
 
-                const isNotificationNew =
-                    get(displayNotifications).filter((nd: NotificationData) => nd.type === notificationType).length === 0
-                if (isNotificationNew)
+                if (isNewNotification('error'))
                     showAppNotification({
                         type: notificationType,
                         message: message,

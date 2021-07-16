@@ -3,7 +3,7 @@
     import { clearSendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
     import { addProfileCurrencyPriceData, priceData } from 'shared/lib/marketData'
-    import { displayNotifications, showAppNotification } from 'shared/lib/notifications'
+    import { isNewNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import {
         activeProfile,
@@ -276,9 +276,7 @@
 
                     const shouldHideErrorNotification =
                         err && err.type === 'ClientError' && err.error === 'error.node.chrysalisNodeInactive'
-                    const isNotificationNew =
-                        get(displayNotifications).filter((nd: NotificationData) => nd.type === 'error').length === 0
-                    if (!shouldHideErrorNotification && isNotificationNew) {
+                    if (!shouldHideErrorNotification && isNewNotification('error')) {
                         showAppNotification({
                             type: 'error',
                             message: locale(err.error),

@@ -13,7 +13,7 @@
 </div>
 <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-4">
     <Text type="h5" highlighted classes="mb-2">
-        {locale('general.newAddress')}
+        {locale('general.receiveAddress')}
     </Text>
     <Text type="pre">{$ledgerReceiveAddress}</Text>
 </div>
