@@ -17,6 +17,7 @@
     import LedgerConfirmation from './LedgerConfirmation.svelte'
     import LedgerConnectionGuide from './LedgerConnectionGuide.svelte'
     import LedgerNotConnected from './LedgerNotConnected.svelte'
+    import LedgerTransaction from './LedgerTransaction.svelte'
     import MissingBundle from './MissingBundle.svelte'
     import Password from './Password.svelte'
     import QR from './QR.svelte'
@@ -42,6 +43,20 @@
 
     let size: PopupSize = PopupSize.Medium
 
+    $: switch (type) {
+        case 'ledgerNotConnected':
+            size = PopupSize.Small
+            break
+        case 'video':
+        case 'ledgerAppGuide':
+        case 'ledgerConnectionGuide':
+            size = PopupSize.Large
+            break
+        default:
+            size = PopupSize.Medium
+            break
+    }
+
     let popupContent
 
     const types = {
@@ -57,6 +72,7 @@
         ledgerConfirmation: LedgerConfirmation,
         ledgerAppGuide: LedgerAppGuide,
         ledgerConnectionGuide: LedgerConnectionGuide,
+        ledgerTransaction: LedgerTransaction,
         removeNode: RemoveNode,
         busy: Busy,
         errorLog: ErrorLog,
@@ -103,19 +119,6 @@
         const elems = focusableElements()
         if (elems && elems.length > 0) {
             elems[hideClose || elems.length === 1 ? 0 : 1].focus()
-        }
-        switch (type) {
-            case 'ledgerNotConnected':
-                size = PopupSize.Small
-                break
-            case 'video':
-            case 'ledgerAppGuide':
-            case 'ledgerConnectionGuide':
-                size = PopupSize.Large
-                break
-            default:
-                size = PopupSize.Medium
-                break
         }
     })
 </script>

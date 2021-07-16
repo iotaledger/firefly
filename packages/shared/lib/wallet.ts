@@ -24,16 +24,17 @@ import type {
     MigrationProgressEventPayload,
     ReattachmentEventPayload,
     TransactionEventPayload,
-    TransferProgressEventPayload
+    TransferProgressEventPayload,
+    TransferState
 } from 'shared/lib/typings/events'
 import type { Payload, Transaction } from 'shared/lib/typings/message'
 import type { AddressInput, MigrationBundle, MigrationData, SendMigrationBundleResponse } from 'shared/lib/typings/migration'
 import { formatUnitBestMatch } from 'shared/lib/units'
 import { get, writable, Writable } from 'svelte/store'
 import type { ClientOptions } from './typings/client'
-import type { TransferProgressEventType } from './typings/events'
+import type { LedgerStatus } from './typings/ledger'
 import type { Message } from './typings/message'
-import type { Duration, LedgerStatusPayload, StrongholdStatus } from './typings/wallet'
+import type { Duration, StrongholdStatus } from './typings/wallet'
 import type { NodeAuth, NodeInfo } from './typings/node'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
@@ -156,7 +157,7 @@ export const selectedAccountId = writable<string | null>(null)
 export const selectedMessage = writable<Message | null>(null)
 
 export const isTransferring = writable<boolean>(false)
-export const transferState = writable<TransferProgressEventType | "Complete" | null>(null)
+export const transferState = writable<TransferState | null>(null)
 
 export const isSyncing = writable<boolean>(false)
 
@@ -258,7 +259,7 @@ export const api: {
     ),
     getLedgerDeviceStatus(
         ledgerSimulator: boolean,
-        callbacks: { onSuccess: (response: Event<LedgerStatusPayload>) => void, onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: Event<LedgerStatus>) => void, onError: (err: ErrorEventPayload) => void }
     )
 } = window['__WALLET_API__']
 
@@ -750,7 +751,14 @@ export const initialiseListeners = () => {
      */
     api.onTransferProgress({
         onSuccess(response) {
-            transferState.set(response.payload.event.type)
+            const { event } = response.payload
+            if(event.hasOwnProperty('type')) {
+                transferState.set({
+                    type: event.type,
+                    data: { ...event }
+                })
+            }
+
         },
         onError(error) {
             console.error(error)

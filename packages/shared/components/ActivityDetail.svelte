@@ -200,7 +200,7 @@
         {#if txPayload || milestonePayload}
             <div class="mb-5">
                 <Text secondary>{locale('general.amount')}</Text>
-                <div class="flex flex-row mt-2">
+                <div class="flex flex-row">
                     <button class="text-left" on:click={() => setClipboard(formatUnitBestMatch(value))}>
                         <Text>{formatUnitBestMatch(value)}</Text>
                     </button>

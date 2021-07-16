@@ -30,7 +30,7 @@
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-5">{locale('views.ledgerInstallationGuide.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.ledgerInstallationGuide.description')}</Text>
-            <div class="flex flex-row flex-nowrap items-center justify-center space-x-4 mt-28">
+            <div class="flex flex-row flex-nowrap items-center justify-center space-x-4 text-center mt-28">
                 <div class="flex flex-col flex-wrap space-y-2">
                     <div class="bg-blue-400 rounded-2xl w-20 h-20 flex justify-center items-center">
                         <Icon icon="ledger-app-legacy" width="32" height="32" classes="text-white" />
@@ -53,8 +53,8 @@
             </div>
             <Button classes="w-full" onClick={handleContinueClick}>{locale('views.ledgerInstallationGuide.action')}</Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-start items-center bg-gray-50 dark:bg-gray-900">
-            <Illustration width="95%" illustration="ledger-install-apps-desktop" />
+        <div slot="rightpane" class="w-full h-full flex justify-center items-center bg-gray-50 dark:bg-gray-900">
+            <Illustration width="100%" illustration="ledger-install-new-app-desktop" />
         </div>
     </OnboardingLayout>
 {/if}

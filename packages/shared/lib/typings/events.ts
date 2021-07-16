@@ -1,5 +1,8 @@
 import type { ResponseTypes } from './bridge'
-import type { Message } from './message'
+import type {
+    Message,
+    UTXOEventData
+} from './message'
 
 // Reference: https://github.com/iotaledger/wallet.rs/blob/develop/src/error.rs
 export enum ErrorType {
@@ -111,23 +114,54 @@ export interface ReattachmentEventPayload {
 }
 
 export enum TransferProgressEventType {
-    // Syncing account.
+    /// Syncing account.
     SyncingAccount = 'SyncingAccount',
     /// Performing input selection.
     SelectingInputs = 'SelectingInputs',
-    /// Generating remainder value deposit address.
+    /// Generating address for remainder funds.
     GeneratingRemainderDepositAddress = 'GeneratingRemainderDepositAddress',
+    /// Preparing the transaction data.
+    PreparedTransaction = 'PreparedTransaction',
     /// Signing the transaction.
     SigningTransaction = 'SigningTransaction',
     /// Performing PoW.
     PerformingPoW = 'PerformingPoW',
     /// Broadcasting.
     Broadcasting = 'Broadcasting',
+    /// Complete.
+    Complete = 'Complete'
+}
+
+export interface TransferProgressEvent {
+    /// The transfer progress event type.
+    type: TransferProgressEventType
+}
+
+export interface GeneratingRemainderDepositAddressEvent extends TransferProgressEvent {
+    /// Bech32 representation of remainder address.
+    address: string
+}
+
+export interface PreparedTransactionEvent extends TransferProgressEvent {
+    /// Transaction inputs.
+    inputs: UTXOEventData[]
+    /// Transaction outputs.
+    outputs: UTXOEventData[]
+    /// Indexation data.
+    data?: string
+
+}
+
+export type TransferProgressEventData = TransferProgressEvent | GeneratingRemainderDepositAddressEvent | PreparedTransactionEvent
+
+export interface TransferState extends TransferProgressEvent {
+    /// Relevant data for this type of transfer progress event.
+    data?: TransferProgressEventData
 }
 
 export interface TransferProgressEventPayload {
     accountId: string
-    event: { type: TransferProgressEventType }
+    event: TransferProgressEventData
 }
 
 export enum MigrationProgressEventType {

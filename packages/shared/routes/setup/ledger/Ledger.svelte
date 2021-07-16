@@ -6,7 +6,6 @@
     import { createEventDispatcher, onMount } from 'svelte'
     import {
         AccountIndex,
-        Balance,
         Connect,
         GenerateNewAddress,
         InstallationGuide,
@@ -26,12 +25,9 @@
         GenerateAddress = 'generateAddress',
         SwitchApps = 'switchApps',
         AccountIndex = 'accountIndex',
-        Balance = 'balance',
     }
 
     const dispatch = createEventDispatcher()
-
-    let balance
 
     let state: State
     let stateHistory = []
@@ -59,7 +55,6 @@
                 currentLedgerMigrationProgress.set(LedgerMigrationProgress.SwitchLedgerApp)
                 break
             case State.AccountIndex:
-            case State.Balance:
                 currentLedgerMigrationProgress.set(LedgerMigrationProgress.TransferFunds)
                 break
             default:
@@ -70,7 +65,6 @@
 
     const _next = async (event) => {
         let nextState
-        let params = event.detail || {}
         switch (state) {
             case State.Connect:
                 if ($walletSetupType === SetupType.New) {
@@ -97,10 +91,6 @@
                 nextState = State.AccountIndex
                 break
             case State.AccountIndex:
-                balance = params.balance
-                nextState = State.Balance
-                break
-            case State.Balance:
                 dispatch('next')
                 break
         }
@@ -147,10 +137,5 @@
 {:else if state === State.AccountIndex}
     <Transition>
         <AccountIndex on:next={_next} on:previous={_previous} {locale} {mobile} />
-    </Transition>
-{:else if state === State.Balance}
-    <!-- TODO: we could use the standalone balance view -->
-    <Transition>
-        <Balance on:next={_next} on:previous={_previous} {balance} {locale} {mobile} />
     </Transition>
 {/if}
