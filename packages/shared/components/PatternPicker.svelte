@@ -30,5 +30,5 @@
                 {#if pattern === active}<Icon icon="checkmark" classes="bg-green-600 text-white rounded-full" />{/if}
             </li>
         {/each}
-        </ul>
+    </ul>
 </div>

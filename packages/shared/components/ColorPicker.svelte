@@ -27,5 +27,5 @@
                 {#if color === active}<Icon icon="checkmark" classes="text-white" />{/if}
             </li>
         {/each}
-        </ul>
+    </ul>
 </div>
