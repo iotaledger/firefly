@@ -1,8 +1,26 @@
 <script lang="ts">
     import { Illustration, Text } from 'shared/components'
+    import { showAppNotification } from 'shared/lib/notifications'
+    import { get } from 'svelte/store'
+    import { closePopup, popupState } from 'shared/lib/popup'
+    import { onMount } from 'svelte'
     import { ledgerReceiveAddress } from 'shared/lib/wallet'
 
     export let locale
+
+    const onInvalid = () => {
+        showAppNotification({
+            type: 'error',
+            message: locale('error.ledger.generateAddress')
+        })
+
+        if (get(popupState).active) closePopup()
+    }
+
+    onMount(() => {
+        if(!$ledgerReceiveAddress)
+            onInvalid()
+    })
 </script>
 
 <Text type="h4" classes="mb-6">{locale('popups.ledgerAddress.title')}</Text>
