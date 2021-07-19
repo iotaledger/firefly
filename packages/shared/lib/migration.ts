@@ -555,7 +555,6 @@ export const createLedgerMigrationBundle = (
  * @returns {Promise}
  */
 export const sendLedgerMigrationBundle = (bundleHash: string, trytes: string[]): Promise<any> => {
-
     return new Promise((resolve, reject) => {
         api.sendLedgerMigrationBundle(
             MIGRATION_NODES,
