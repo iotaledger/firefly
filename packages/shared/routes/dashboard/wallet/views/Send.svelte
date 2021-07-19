@@ -20,7 +20,7 @@
     import { getContext, onDestroy, onMount } from 'svelte'
     import type { Readable } from 'svelte/store'
     import { get } from 'svelte/store'
-    import { getLedgerDeviceStatus, ledgerDeviceState, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
+    import { ledgerDeviceState, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { displayNotifications, isNewNotification, showAppNotification } from 'shared/lib/notifications'
     import type { NotificationType } from 'shared/lib/typings/notification'
@@ -422,7 +422,7 @@
     })
 
     onMount(() => {
-        pollLedgerDeviceStatus(false, 500, getLedgerDeviceStatus, getLedgerDeviceStatus, getLedgerDeviceStatus)
+        pollLedgerDeviceStatus(false, 500)
 
         updateFromSendParams($sendParams)
     })

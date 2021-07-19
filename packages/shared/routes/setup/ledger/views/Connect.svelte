@@ -1,7 +1,6 @@
 <script>
     import { Button, Icon, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
     import {
-        getLedgerDeviceStatus,
         ledgerDeviceState,
         ledgerSimulator,
         pollLedgerDeviceStatus,
@@ -39,7 +38,7 @@
     const dispatch = createEventDispatcher()
 
     onMount(() => {
-        pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL, getLedgerDeviceStatus, getLedgerDeviceStatus)
+        pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL)
         polling = true
     })
 

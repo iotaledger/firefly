@@ -79,7 +79,7 @@
         setup()
 
         if (!$isSoftwareProfile) {
-            pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL, getLedgerDeviceStatus)
+            pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL)
         }
     })
 
