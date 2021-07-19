@@ -2,6 +2,7 @@
     import { DashboardPane } from 'shared/components'
     import { clearSendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
+    import { promptUserToConnectLedger } from 'shared/lib/ledger'
     import { addProfileCurrencyPriceData, priceData } from 'shared/lib/marketData'
     import { isNewNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup } from 'shared/lib/popup'
@@ -18,7 +19,6 @@
     import { TransferProgressEventType } from 'shared/lib/typings/events'
     import type { Transaction } from 'shared/lib/typings/message'
     import { SetupType, WalletRoutes } from 'shared/lib/typings/routes'
-    import { promptUserToConnectLedger } from 'shared/lib/ledger'
     import {
         AccountMessage,
         AccountsBalanceHistory,
@@ -47,10 +47,9 @@
         wallet,
         WalletAccount,
     } from 'shared/lib/wallet'
-    import { onMount, onDestroy, setContext } from 'svelte'
+    import { onMount, setContext } from 'svelte'
     import { derived, get, Readable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
-    import { NotificationData } from 'shared/lib/typings/notification'
 
     export let locale
 
@@ -122,7 +121,6 @@
     setContext<Readable<BalanceHistory>>('walletBalanceHistory', walletBalanceHistory)
 
     let isGeneratingAddress = false
-    let ledgerAddressGenerationTimeout
 
     // If wallet route or account changes force regeneration of Ledger receive address
     $: {
@@ -239,17 +237,6 @@
         const _generate = () => {
             isGeneratingAddress = true
 
-            if ($isLedgerProfile) {
-                // Delay opening the popup to allow time for address generation
-                ledgerAddressGenerationTimeout = setTimeout(() => {
-                    isGeneratingAddress = false
-                    openPopup({
-                        type: 'ledgerAddress',
-                        hideClose: true,
-                    })
-                }, 1500)
-            }
-
             api.getUnusedAddress(accountId, {
                 onSuccess(response) {
                     accounts.update((accounts) =>
@@ -272,14 +259,20 @@
                 },
                 onError(err) {
                     closePopup()
+
                     isGeneratingAddress = false
 
-                    const shouldHideErrorNotification =
-                        err && err.type === 'ClientError' && err.error === 'error.node.chrysalisNodeInactive'
+                    const isClientError = err && err.type === 'ClientError'
+                    const shouldHideErrorNotification = isClientError && err.error === 'error.node.chrysalisNodeInactive'
                     if (!shouldHideErrorNotification && isNewNotification('error')) {
+                        /**
+                         * NOTE: To ensure a clear error message (for Ledger users),
+                         * we need to update the locale path.
+                         */
+                        const localePath = isClientError && $isLedgerProfile ? 'error.ledger.generateAddress' : err.error
                         showAppNotification({
                             type: 'error',
-                            message: locale(err.error),
+                            message: locale(localePath),
                         })
                     }
                 },
@@ -629,8 +622,6 @@
             addProfileCurrencyPriceData()
         }
     })
-
-    onDestroy(() => clearTimeout(ledgerAddressGenerationTimeout))
 </script>
 
 <style type="text/scss">
