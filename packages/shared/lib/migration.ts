@@ -292,7 +292,7 @@ export const prepareMigrationLog = (bundleHash: string, trytes: string[], balanc
  * 
  * @returns {Promise<void>}
  */
-export const getLedgerMigrationData = (getAddressFn: (index: number) => Promise<string>): Promise<any> => {
+export const getLedgerMigrationData = (getAddressFn: (index: number) => Promise<string>, callback: () => void): Promise<any> => {
     const _get = (addresses: AddressInput[]): Promise<any> => {
         return new Promise((resolve, reject) => {
             api.getLedgerMigrationData(
@@ -362,7 +362,6 @@ export const getLedgerMigrationData = (getAddressFn: (index: number) => Promise<
             }
 
             prepareBundles()
-
             return get(data).inputs.length > 0;
         });
     }
@@ -371,9 +370,11 @@ export const getLedgerMigrationData = (getAddressFn: (index: number) => Promise<
         if (shouldGenerateMore) {
             return _process();
         }
-
         return Promise.resolve(true);
-    }).then(() => get(get(migration).data))
+    }).then(() => {
+        callback()
+        return get(get(migration).data)
+    })
 };
 
 /**
