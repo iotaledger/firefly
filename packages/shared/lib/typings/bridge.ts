@@ -78,7 +78,7 @@ export enum ResponseTypes {
     MigrationAddress = 'MigrationAddress',
     MinedBundle = 'MinedBundle',
     MineBundle = 'MineBundle',
-    LegacyAddressChecksum = 'LegacyAddressChecksum'
+    LegacyAddressChecksum = 'GetLegacyAddressChecksum'
 }
 
 export enum Actions {

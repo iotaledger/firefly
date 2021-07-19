@@ -42,14 +42,13 @@
             </Text>
             <Text type="pre">{formatUnitBestMatch(balance)}</Text>
             <Text type="pre">{address}</Text>
-            <!-- TODO: uncomment this when getLegacyAddressChecksum works well -->
-            <!-- <Text type="pre">
+            <Text type="pre">
                 {#await asyncGetAddressChecksum(address, true)}
                     ...
                 {:then checksum}
                     {locale('popups.ledgerTransaction.transaction.checksum', { values: { checksum } })}
                 {/await}
-            </Text> -->
+            </Text>
         </div>
     {/each}
 </div>
