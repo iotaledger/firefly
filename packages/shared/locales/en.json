@@ -965,7 +965,7 @@
             "notDetected": "No Ledger device detected.",
             "notFound": "Ledger device not found.",
             "otherConnected": "The wrong app is open on your Ledger device.",
-            "generateAddress": "There was an error generating an address on your Ledger device."
+            "generateAddress": "There was an error generating an address."
         }
     },
     "tooltips": {
