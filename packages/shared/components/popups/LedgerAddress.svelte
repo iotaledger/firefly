@@ -4,9 +4,10 @@
     import { get } from 'svelte/store'
     import { closePopup, popupState } from 'shared/lib/popup'
     import { onMount } from 'svelte'
-    import { ledgerReceiveAddress } from 'shared/lib/wallet'
 
     export let locale
+
+    export let address = ''
 
     const onInvalid = () => {
         showAppNotification({
@@ -18,7 +19,7 @@
     }
 
     onMount(() => {
-        if(!$ledgerReceiveAddress)
+        if(!address)
             onInvalid()
     })
 </script>
@@ -33,5 +34,5 @@
     <Text type="h5" highlighted classes="mb-2">
         {locale('general.receiveAddress')}
     </Text>
-    <Text type="pre">{$ledgerReceiveAddress}</Text>
+    <Text type="pre">{address}</Text>
 </div>

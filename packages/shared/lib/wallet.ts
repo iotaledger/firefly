@@ -37,6 +37,7 @@ import type { LedgerStatus } from './typings/ledger'
 import type { Message } from './typings/message'
 import type { NodeAuth, NodeInfo } from './typings/node'
 import type { Duration, StrongholdStatus } from './typings/wallet'
+import { openPopup } from './popup'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -150,7 +151,6 @@ export const resetWallet = () => {
     selectedMessage.set(null)
     isTransferring.set(false)
     transferState.set(null)
-    ledgerReceiveAddress.set(null)
     hasGeneratedALedgerReceiveAddress.set(false)
     isSyncing.set(null)
 }
@@ -162,7 +162,6 @@ export const selectedMessage = writable<Message | null>(null)
 export const isTransferring = writable<boolean>(false)
 export const transferState = writable<TransferState | null>(null)
 
-export const ledgerReceiveAddress = writable<string | null>(null)
 export const hasGeneratedALedgerReceiveAddress = writable<boolean | null>(false)
 
 export const isSyncing = writable<boolean>(false)
@@ -782,7 +781,13 @@ export const initialiseListeners = () => {
      api.onLedgerAddressGeneration({
         onSuccess(response) {
             const { event } = response.payload
-            ledgerReceiveAddress.set(event.address)
+            openPopup({
+                type: 'ledgerAddress',
+                hideClose: true,
+                props: {
+                    address: event.address
+                }
+            })
         },
         onError(error) {
             console.error(error)

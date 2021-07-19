@@ -272,14 +272,21 @@
                 },
                 onError(err) {
                     closePopup()
+
                     isGeneratingAddress = false
 
+                    const isClientError = err && err.type === 'ClientError'
                     const shouldHideErrorNotification =
-                        err && err.type === 'ClientError' && err.error === 'error.node.chrysalisNodeInactive'
+                        isClientError && err.error === 'error.node.chrysalisNodeInactive'
                     if (!shouldHideErrorNotification && isNewNotification('error')) {
+                        /**
+                         * NOTE: To ensure a clear error message (for Ledger users),
+                         * we need to update the locale path.
+                         */
+                        const localePath = (isClientError && $isLedgerProfile) ? 'error.ledger.generateAddress' : err.error
                         showAppNotification({
                             type: 'error',
-                            message: locale(err.error),
+                            message: locale(localePath),
                         })
                     }
                 },
