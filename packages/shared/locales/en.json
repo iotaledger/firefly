@@ -56,7 +56,8 @@
         },
         "ledgerInstallationGuide": {
             "title": "Have you installed the necessary Ledger apps?",
-            "description": "Before you proceed, you must find and install both the IOTA Legacy app and the new IOTA app through Ledger Live. Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
+            "body1": "Before you proceed, you must find and install both the IOTA Legacy app and the new IOTA app through Ledger Live.",
+            "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
             "action": "Yes, I've installed these apps"
         },
         "password": {
