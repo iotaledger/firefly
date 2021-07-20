@@ -142,7 +142,6 @@ export function stopPollingLedgerStatus(): void {
 
 export function getLegacyErrorMessage(error: any): string {
     let errorMessage = 'error.global.generic'
-    // Legacy
     switch (error?.name) {
         case LegacyLedgerErrorName.TransportStatusError:
             if (error?.statusCode === LegacyLedgerErrorCode.DeniedByTheUser) {
