@@ -46,39 +46,18 @@
 
     onDestroy(stopPollingLedgerStatus)
 
+    function notifyLedgerState(state: LedgerDeviceState) {
+        showAppNotification({
+            type: 'error',
+            message: locale(`error.ledger.${state}`)
+        })
+    }
+
     function createAccount() {
         creatingAccount = true
 
         const officialNodes = getOfficialNodes()
         const officialNetwork = getOfficialNetwork()
-
-        // const _onConnected = () =>
-        //     api.createAccount(
-        //         {
-        //             clientOptions: {
-        //                 nodes: officialNodes,
-        //                 node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
-        //                 network: officialNetwork,
-        //             },
-        //             alias: `${locale('general.account')} 1`,
-        //             signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
-        //         },
-        //         {
-        //             onSuccess() {
-        //                 creatingAccount = false
-        //
-        //                 dispatch('next')
-        //             },
-        //             onError(error) {
-        //                 creatingAccount = false
-        //
-        //                 console.log(error)
-        //                 console.error(error)
-        //             },
-        //         }
-        //     )
-        // const _onCancel = () => (creatingAccount = false)
-        // promptUserToConnectLedger(false, _onConnected, _onCancel)
 
         api.createAccount(
             {
@@ -101,11 +80,6 @@
 
                     console.error(error)
 
-                    const _notify = (state: LedgerDeviceState) =>
-                        showAppNotification({
-                            type: 'error',
-                            message: locale(`error.ledger.${state}`)
-                        })
                     /**
                      * CAUTION: It is possible that the Ledger is read as "Connected"
                      * here, so it is necessary to update the device state and then fire
@@ -114,15 +88,15 @@
                     getLedgerDeviceStatus(
                         false,
                         () => {},
-                        () => _notify($ledgerDeviceState),
-                        () => _notify($ledgerDeviceState)
+                        () => notifyLedgerState($ledgerDeviceState),
+                        () => notifyLedgerState($ledgerDeviceState)
                     )
                 }
             }
         )
     }
 
-    function handlePopupOpen() {
+    function handleGuidePopup() {
         openPopup({
             type: 'ledgerConnectionGuide',
         })
@@ -134,9 +108,19 @@
         if (newLedgerProfile) {
             createAccount()
         } else {
-            const _onConnected = () => dispatch('next')
-            const _onCancel = () => (creatingAccount = false)
-            promptUserToConnectLedger(false, _onConnected, _onCancel)
+            const _continue = () => dispatch('next')
+            const _cancel = () => {
+                creatingAccount = false
+
+                notifyLedgerState($ledgerDeviceState)
+            }
+
+            getLedgerDeviceStatus(
+                false,
+                _continue,
+                _cancel,
+                _cancel
+            )
         }
     }
 
@@ -172,7 +156,7 @@
             </div>
         </div>
         <div slot="leftpane__action">
-            <div on:click={handlePopupOpen} class="mb-10 flex flex-row justify-center cursor-pointer">
+            <div on:click={handleGuidePopup} class="mb-10 flex flex-row justify-center cursor-pointer">
                 <Icon icon="info" classes="mr-2 text-blue-500" />
                 <Text secondary highlighted>{locale('popups.ledgerConnectionGuide.title')}</Text>
             </div>
