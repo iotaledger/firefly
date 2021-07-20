@@ -5,7 +5,6 @@
         ledgerDeviceState,
         ledgerSimulator,
         pollLedgerDeviceStatus,
-        promptUserToConnectLedger,
         stopPollingLedgerStatus,
     } from 'shared/lib/ledger'
     import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
