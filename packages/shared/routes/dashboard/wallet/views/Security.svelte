@@ -29,13 +29,11 @@
                 hardwareDeviceColor = 'blue'
                 break
             case LedgerDeviceState.NotDetected:
-                hardwareDeviceColor = 'red'
-                break
             case LedgerDeviceState.AppNotOpen:
             case LedgerDeviceState.LegacyConnected:
             case LedgerDeviceState.Locked:
             case LedgerDeviceState.OtherConnected:
-                hardwareDeviceColor = 'gray'
+                hardwareDeviceColor = 'red'
                 break
         }
     }
