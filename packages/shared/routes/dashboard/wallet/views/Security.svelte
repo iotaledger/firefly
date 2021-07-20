@@ -19,7 +19,7 @@
     let color
     let isCheckingLedger
     let ledgerSpinnerTimeout
-    let LEDGER_STATUS_POLL_INTERVAL = 5000
+    let LEDGER_STATUS_POLL_INTERVAL = 2000
 
     let hardwareDeviceColor = 'gray'
     $: {
