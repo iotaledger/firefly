@@ -1,6 +1,7 @@
-<script>
+<script type="typescript">
     import { Button, Icon, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
     import {
+        getLedgerDeviceStatus,
         ledgerDeviceState,
         ledgerSimulator,
         pollLedgerDeviceStatus,
@@ -14,6 +15,7 @@
     import { SetupType } from 'shared/lib/typings/routes'
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
+    import { showAppNotification } from 'shared/lib/notifications'
 
     export let locale
     export let mobile
@@ -50,32 +52,74 @@
         const officialNodes = getOfficialNodes()
         const officialNetwork = getOfficialNetwork()
 
-        const _onConnected = () =>
-            api.createAccount(
-                {
-                    clientOptions: {
-                        nodes: officialNodes,
-                        node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
-                        network: officialNetwork,
-                    },
-                    alias: `${locale('general.account')} 1`,
-                    signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
+        // const _onConnected = () =>
+        //     api.createAccount(
+        //         {
+        //             clientOptions: {
+        //                 nodes: officialNodes,
+        //                 node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
+        //                 network: officialNetwork,
+        //             },
+        //             alias: `${locale('general.account')} 1`,
+        //             signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
+        //         },
+        //         {
+        //             onSuccess() {
+        //                 creatingAccount = false
+        //
+        //                 dispatch('next')
+        //             },
+        //             onError(error) {
+        //                 creatingAccount = false
+        //
+        //                 console.log(error)
+        //                 console.error(error)
+        //             },
+        //         }
+        //     )
+        // const _onCancel = () => (creatingAccount = false)
+        // promptUserToConnectLedger(false, _onConnected, _onCancel)
+
+        api.createAccount(
+            {
+                clientOptions: {
+                    nodes: officialNodes,
+                    node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
+                    network: officialNetwork,
                 },
-                {
-                    onSuccess() {
-                        creatingAccount = false
+                alias: `${locale('general.account')} 1`,
+                signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
+            },
+            {
+                onSuccess() {
+                    creatingAccount = false
 
-                        dispatch('next')
-                    },
-                    onError(error) {
-                        creatingAccount = false
+                    dispatch('next')
+                },
+                onError(error) {
+                    creatingAccount = false
 
-                        console.error(error)
-                    },
+                    console.error(error)
+
+                    const _notify = (state: LedgerDeviceState) =>
+                        showAppNotification({
+                            type: 'error',
+                            message: locale(`error.ledger.${state}`)
+                        })
+                    /**
+                     * CAUTION: It is possible that the Ledger is read as "Connected"
+                     * here, so it is necessary to update the device state and then fire
+                     * a notification so that the error message is correct.
+                     */
+                    getLedgerDeviceStatus(
+                        false,
+                        () => {},
+                        () => _notify($ledgerDeviceState),
+                        () => _notify($ledgerDeviceState)
+                    )
                 }
-            )
-        const _onCancel = () => (creatingAccount = false)
-        promptUserToConnectLedger(false, _onConnected, _onCancel)
+            }
+        )
     }
 
     function handlePopupOpen() {
