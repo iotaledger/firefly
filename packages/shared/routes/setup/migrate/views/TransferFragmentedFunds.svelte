@@ -136,8 +136,8 @@
                             if (transaction.trytes && transaction.trytes.length) {
                                 return Electron.ledger
                                     .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
-                                    .then((iota) => {
-                                        return createMinedLedgerMigrationBundle(transaction.index, iota.prepareTransfers)
+                                    .then(({ iota, callback }) => {
+                                        return createMinedLedgerMigrationBundle(transaction.index, iota.prepareTransfers, callback)
                                     })
                                     .then(({ trytes, bundleHash }) => {
                                         closePopup() // close transaction popup
@@ -150,8 +150,8 @@
 
                             return Electron.ledger
                                 .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
-                                .then((iota) => {
-                                    return createLedgerMigrationBundle(transaction.index, iota.prepareTransfers)
+                                .then(({ iota, callback }) => {
+                                    return createLedgerMigrationBundle(transaction.index, iota.prepareTransfers, callback)
                                 })
                                 .then(({ trytes, bundleHash }) => {
                                     closePopup() // close transaction popup
@@ -254,8 +254,8 @@
                             if (transaction.trytes && transaction.trytes.length) {
                                 return Electron.ledger
                                     .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
-                                    .then((iota) => {
-                                        return createMinedLedgerMigrationBundle(transaction.index, iota.prepareTransfers)
+                                    .then(({ iota, callback }) => {
+                                        return createMinedLedgerMigrationBundle(transaction.index, iota.prepareTransfers, callback)
                                     })
                                     .then(({ trytes, bundleHash }) => {
                                         transactions = transactions.map((_transaction, i) => {
@@ -284,8 +284,8 @@
 
                             return Electron.ledger
                                 .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
-                                .then((iota) => {
-                                    return createLedgerMigrationBundle(transaction.index, iota.prepareTransfers)
+                                .then(({ iota, callback }) => {
+                                    return createLedgerMigrationBundle(transaction.index, iota.prepareTransfers, callback)
                                 })
                                 .then(({ trytes, bundleHash }) => {
                                     closePopup() // close transaction popup

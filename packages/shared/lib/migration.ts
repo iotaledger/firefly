@@ -458,7 +458,8 @@ export const createMinedLedgerMigrationBundle = (
         inputs: Input[],
         remainder: undefined,
         now: () => number
-    ) => Promise<string[]>
+    ) => Promise<string[]>,
+    callback: () => void
 ) => {
     const { bundles } = get(migration);
 
@@ -496,6 +497,7 @@ export const createMinedLedgerMigrationBundle = (
 
     return prepareTransfersFn([transfer], inputs, undefined, () => txs[0].timestamp * 1000).then((trytes) => {
         updateLedgerBundleState(bundleIndex, trytes, false);
+        callback()
         return { trytes, bundleHash: asTransactionObject(trytes[0]).bundle }
     });
 };
@@ -515,7 +517,8 @@ export const createLedgerMigrationBundle = (
     prepareTransfersFn: (
         transfers: Transfer[],
         inputs: Input[],
-    ) => Promise<string[]>
+    ) => Promise<string[]>,
+    callback: () => void
 ): Promise<any> => {
     return new Promise((resolve, reject) => {
         api.getMigrationAddress(false, {
@@ -541,6 +544,7 @@ export const createLedgerMigrationBundle = (
 
         return prepareTransfersFn([transfer], bundle.inputs.map((input) => Object.assign({}, input, { keyIndex: input.index }))).then((trytes) => {
             updateLedgerBundleState(bundleIndex, trytes, false);
+            callback()
             return { trytes, bundleHash: asTransactionObject(trytes[0]).bundle }
         });
     });
