@@ -2004,8 +2004,8 @@ dependencies = [
 
 [[package]]
 name = "iota-wallet"
-version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=ledger/display-change-address-and-PreparedTransactionData#ecceddce200b3788972da42e5e0c4b9d2d5afc69"
+version = "0.2.0"
+source = "git+https://github.com/iotaledger/wallet.rs?branch=firefly-testing#b1c38814ce58f0e658318c3c4f0e11295c01eb1c"
 dependencies = [
  "async-trait",
  "backtrace",
