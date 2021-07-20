@@ -9,7 +9,7 @@ pub use iota_wallet::{
 use riker::actors::*;
 
 use super::RUNTIME;
-use std::{sync::Arc, time::Duration};
+use std::{sync::Arc};
 #[derive(Clone, Debug)]
 pub struct KillMessage;
 
@@ -33,7 +33,7 @@ impl Default for WalletActor {
                 AccountManager::builder()
                     .with_storage(DEFAULT_STORAGE_FOLDER, None)
                     .unwrap() //safe to unwrap, the storage password is None ^
-                    .with_polling_interval(Duration::from_millis(crate::POLLING_INTERVAL_MS))
+                    .with_skip_polling()
                     .finish()
                     .await
                     .unwrap(),
