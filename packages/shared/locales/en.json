@@ -56,7 +56,7 @@
         },
         "ledgerInstallationGuide": {
             "title": "Have you installed the necessary Ledger apps?",
-            "description": "Before you proceed, you must use Ledger Live to find and install both the IOTA Legacy app and the new IOTA app. Any pre-installed apps should be updated to their latest versions.",
+            "description": "Before you proceed, you must find and install both the IOTA Legacy app and the new IOTA app through Ledger Live. Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
             "action": "Yes, I've installed these apps"
         },
         "password": {
@@ -173,23 +173,23 @@
             "restoring": "Restoring from Ledger..."
         },
         "legacyLedgerIntro": {
-            "title": "Start your IOTA Ledger migration using Firefly",
-            "body1": "Firefly will help you to transfer your tokens to the newer Chrysalis network, while ensuring your tokens remain securely on your Ledger device.",
-            "body2": "After your migration, you will be able to send and receive your tokens on Chrysalis network using Firefly with your Ledger.",
+            "title": "Start your Ledger migration using Firefly",
+            "body1": "Firefly will help you to transfer your tokens to the new Chrysalis network.",
+            "body2": "After you migration, you will be able to send and receive your tokens using your Ledger with Firefly.",
             "readMore": "What to expect from the migration process"
         },
         "generateNewLedgerAddress": {
             "title": "Generate new address",
-            "body": "You need to generate new address in order to transfer your old Trinity account to Firefly. Click the button below to continue.",
+            "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
             "confirmTitle": "Confirm the new address",
-            "confirmBody": "For security reasons, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger hardware as prompted.",
+            "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
             "confirmedTitle": "Address confirmed",
-            "confirmedBody": "You have confirmed that both addresses match in Firefly and your Ledger hardware.",
+            "confirmedBody": "You have confirmed that the address in Firefly matches the one on your Ledger device.",
             "generating": "Generating address"
         },
         "switchLedgerApps": {
             "title": "Switch Ledger apps",
-            "body": "Please change to the IOTA Legacy app on your Ledger hardware to continue transfer of your funds. When ready, press continue.",
+            "body": "Please switch to the IOTA Legacy app on your Ledger device to continue migration. When ready, press continue.",
             "ledgerApp": "IOTA",
             "ledgerLegacyApp": "IOTA Legacy"
         },
@@ -200,13 +200,6 @@
             "accountPage": "Account Page",
             "standard": "Standard",
             "expert": "Expert"
-        },
-        "migrateLedgerFunds": {
-            "title": "Transfer your funds",
-            "body1": "This is an automated process to transfer your existing funds to your new wallet. In this process we will check for spent addresses that weaken your security.",
-            "body2": "It may take some time. Do not turn off your device during this process.",
-            "transfer": "Transfer funds",
-            "transfering": "Transferring funds..."
         },
         "importBackupPassword": {
             "title": "Restore your wallets from a SeedVault or Stronghold",
@@ -611,11 +604,11 @@
         "ledgerTransaction": {
             "remainderAddress": {
                 "title": "Confirm remainder address",
-                "info": "Confirm that the remainder address displayed on your ledger device matches the one displayed below."
+                "info": "Confirm that the remainder address displayed on your ledger device matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
             },
             "transaction": {
                 "title": "Confirm transaction",
-                "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below.",
+                "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted.",
                 "input": "Input [{index}]",
                 "output": "Output",
                 "checksum": "Chk: {checksum}"
@@ -623,7 +616,7 @@
         },
         "ledgerAddress": {
             "title": "Confirm receive address",
-            "body": "Confirm that the receive address displayed on your ledger device matches the one displayed below."
+            "body": "Confirm that the receive address displayed on your ledger device matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
         }
     },
     "charts": {
