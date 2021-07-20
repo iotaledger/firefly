@@ -5,10 +5,6 @@ const Iota = require('hw-app-iota').default
 const USE_SIMULATOR = false
 const SIMULATOR_PORT = 9999;
 
-const Errors = {
-    LEDGER_CANCELLED: 'Transaction cancelled on Ledger device.',
-}
-
 async function createTransport() {
     if (USE_SIMULATOR) {
         return await TransportSpeculos.open({
