@@ -605,7 +605,7 @@
         "ledgerTransaction": {
             "remainderAddress": {
                 "title": "Confirm remainder address",
-                "info": "Confirm that the remainder address displayed on your ledger device matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+                "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
             },
             "transaction": {
                 "title": "Confirm transaction",
@@ -617,7 +617,7 @@
         },
         "ledgerAddress": {
             "title": "Confirm receive address",
-            "body": "Confirm that the receive address displayed on your ledger device matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+            "body": "Confirm that the receive address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
         }
     },
     "charts": {
