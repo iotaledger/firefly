@@ -258,6 +258,7 @@
                                         return createMinedLedgerMigrationBundle(transaction.index, iota.prepareTransfers, callback)
                                     })
                                     .then(({ trytes, bundleHash }) => {
+                                        closePopup() // close transaction popup
                                         transactions = transactions.map((_transaction, i) => {
                                             if (_transaction.index === transaction.index) {
                                                 return { ..._transaction, bundleHash }
@@ -276,9 +277,6 @@
                                         }
 
                                         migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, transaction.bundleHash]
-                                    })
-                                    .then(() => {
-                                        closePopup() // close transaction popup
                                     })
                             }
 
