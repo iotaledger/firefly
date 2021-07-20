@@ -2,8 +2,11 @@
     import { Button, Password, Spinner, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
     import { asyncSetStrongholdPassword, asyncSyncAccounts, wallet } from 'shared/lib/wallet'
-    import { isStrongholdLocked, isSoftwareProfile } from 'shared/lib/profile'
-    
+    import { isLedgerProfile, isSoftwareProfile, isStrongholdLocked } from 'shared/lib/profile'
+    import { ledgerDeviceState } from 'shared/lib/ledger'
+    import { LedgerDeviceState } from 'shared/lib/typings/ledger'
+    import { isNewNotification, showAppNotification } from 'shared/lib/notifications'
+
     export let locale
 
     const { balanceOverview } = $wallet
@@ -19,13 +22,38 @@
         try {
             error = ''
             isBusy = true
+
             if ($isSoftwareProfile && $isStrongholdLocked) {
                 await asyncSetStrongholdPassword(password)
             }
-            await asyncSyncAccounts(addressIndex, gapIndex, accountDiscoveryThreshold, false)
-            addressIndex += gapIndex
+
+            const _onFindBalances = async () => {
+                await asyncSyncAccounts(addressIndex, gapIndex, accountDiscoveryThreshold, false)
+
+                addressIndex += gapIndex
+            }
+
+            if($isLedgerProfile) {
+                if($ledgerDeviceState === LedgerDeviceState.Connected) {
+                    await _onFindBalances()
+                }
+                else {
+                    if(isNewNotification('error'))
+                        showAppNotification({
+                            type: 'error',
+                            message: locale(`error.ledger.${$ledgerDeviceState}`)
+                        })
+                }
+            } else {
+                await _onFindBalances()
+            }
         } catch (err) {
             error = locale(err.error)
+
+            showAppNotification({
+                type: 'error',
+                message: locale(err.error)
+            })
         } finally {
             isBusy = false
         }
