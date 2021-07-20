@@ -1,6 +1,10 @@
 <script lang="typescript">
     import { Button, Icon, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
-    import { ledgerSimulator, promptUserToConnectLedger } from 'shared/lib/ledger'
+    import {
+        ledgerSimulator,
+        notifyLedgerDeviceState,
+        promptUserToConnectLedger
+    } from 'shared/lib/ledger'
     import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
@@ -54,7 +58,10 @@
                                 },
                                 onError(error) {
                                     busy = false
+
                                     console.error(error)
+
+                                    notifyLedgerDeviceState('error', true, true)
                                 },
                             }
                         )
@@ -83,6 +90,8 @@
                 busy = false
 
                 console.error(err)
+
+                notifyLedgerDeviceState('error', true, true)
             },
         })
     }

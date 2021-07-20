@@ -3,9 +3,9 @@
     import { closePopup } from 'shared/lib/popup'
     import { asyncSetStrongholdPassword, asyncSyncAccounts, wallet } from 'shared/lib/wallet'
     import { isLedgerProfile, isSoftwareProfile, isStrongholdLocked } from 'shared/lib/profile'
-    import { ledgerDeviceState } from 'shared/lib/ledger'
+    import { ledgerDeviceState, notifyLedgerDeviceState } from 'shared/lib/ledger'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
-    import { isNewNotification, showAppNotification } from 'shared/lib/notifications'
+    import { showAppNotification } from 'shared/lib/notifications'
 
     export let locale
 
@@ -38,11 +38,7 @@
                     await _onFindBalances()
                 }
                 else {
-                    if(isNewNotification('error'))
-                        showAppNotification({
-                            type: 'error',
-                            message: locale(`error.ledger.${$ledgerDeviceState}`)
-                        })
+                    notifyLedgerDeviceState('error', false)
                 }
             } else {
                 await _onFindBalances()

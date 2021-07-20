@@ -3,6 +3,9 @@ import { api } from 'shared/lib/wallet'
 import { get, writable } from 'svelte/store'
 import type { Event } from './typings/events'
 import { LedgerApp, LedgerAppName, LedgerDeviceState, LedgerStatus } from './typings/ledger'
+import { isNewNotification, showAppNotification } from './notifications'
+import { localize } from './i18n'
+import type { NotificationType } from './typings/notification'
 
 const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
 
@@ -98,6 +101,41 @@ export function promptUserToConnectLedger(
         }
     }
     getLedgerDeviceStatus(legacy, _onConnected, _onDisconnected, _onCancel)
+}
+
+export function notifyLedgerDeviceState(
+    notificationType: NotificationType = 'error',
+    allowMultiple: boolean = true,
+    checkDeviceStatus: boolean = false,
+    ignoreNotDetected: boolean = false,
+    legacy: boolean = false
+): void {
+    const _notify = () => {
+        const state = get(ledgerDeviceState)
+
+        const allowedToNotify = allowMultiple ? true : isNewNotification(notificationType)
+        const canNotify = allowedToNotify && (ignoreNotDetected ? state !== LedgerDeviceState.NotDetected : true)
+        const shouldNotify = (!legacy && state !== LedgerDeviceState.Connected) ||
+                              (legacy && state !== LedgerDeviceState.LegacyConnected)
+
+        if(canNotify && shouldNotify) {
+            showAppNotification({
+                type: notificationType,
+                message: localize(`error.ledger.${state}`)
+            })
+        }
+    }
+
+    if(checkDeviceStatus) {
+        getLedgerDeviceStatus(
+            false,
+            () => {},
+            () => _notify(),
+            () => _notify()
+        )
+    } else {
+        _notify()
+    }
 }
 
 export function pollLedgerDeviceStatus(

@@ -4,6 +4,7 @@
         getLedgerDeviceStatus,
         ledgerDeviceState,
         ledgerSimulator,
+        notifyLedgerDeviceState,
         pollLedgerDeviceStatus,
         stopPollingLedgerStatus,
     } from 'shared/lib/ledger'
@@ -14,7 +15,7 @@
     import { SetupType } from 'shared/lib/typings/routes'
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
-    import { showAppNotification } from 'shared/lib/notifications'
+    import { busy } from './SwitchApps.svelte'
 
     export let locale
     export let mobile
@@ -45,19 +46,11 @@
 
     onDestroy(stopPollingLedgerStatus)
 
-    function notifyLedgerState(state: LedgerDeviceState) {
-        showAppNotification({
-            type: 'error',
-            message: locale(`error.ledger.${state}`)
-        })
-    }
-
     function createAccount() {
         creatingAccount = true
 
         const officialNodes = getOfficialNodes()
         const officialNetwork = getOfficialNetwork()
-
         api.createAccount(
             {
                 clientOptions: {
@@ -79,17 +72,7 @@
 
                     console.error(error)
 
-                    /**
-                     * CAUTION: It is possible that the Ledger is read as "Connected"
-                     * here, so it is necessary to update the device state and then fire
-                     * a notification so that the error message is correct.
-                     */
-                    getLedgerDeviceStatus(
-                        false,
-                        () => {},
-                        () => notifyLedgerState($ledgerDeviceState),
-                        () => notifyLedgerState($ledgerDeviceState)
-                    )
+                    notifyLedgerDeviceState('error', true, true)
                 }
             }
         )
@@ -107,18 +90,21 @@
         if (newLedgerProfile) {
             createAccount()
         } else {
-            const _continue = () => dispatch('next')
-            const _cancel = () => {
+            const _onCancel = () => {
                 creatingAccount = false
 
-                notifyLedgerState($ledgerDeviceState)
+                notifyLedgerDeviceState('error', true)
+            }
+            const _onConnected = () => {
+                if ($ledgerDeviceState !== LedgerDeviceState.Connected) _onCancel()
+                else dispatch('next')
             }
 
             getLedgerDeviceStatus(
                 false,
-                _continue,
-                _cancel,
-                _cancel
+                _onConnected,
+                _onCancel,
+                _onCancel
             )
         }
     }

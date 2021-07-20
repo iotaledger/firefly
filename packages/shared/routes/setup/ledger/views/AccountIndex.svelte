@@ -2,6 +2,7 @@
     import { Button, Illustration, Number, OnboardingLayout, Spinner, Text, Toggle } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import {
+        notifyLedgerDeviceState,
         promptUserToConnectLedger,
     } from 'shared/lib/ledger'
     import { ADDRESS_SECURITY_LEVEL, getLedgerMigrationData, hardwareIndexes } from 'shared/lib/migration'
@@ -63,7 +64,10 @@
                 })
                 .catch((error) => {
                     busy = false
+
                     console.error(error)
+
+                    notifyLedgerDeviceState('error', true, true, false, true)
                 })
         }
         const _onCancel = () => {
