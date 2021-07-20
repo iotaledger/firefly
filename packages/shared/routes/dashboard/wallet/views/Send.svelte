@@ -3,7 +3,7 @@
     import { Address, Amount, Button, Dropdown, Icon, ProgressBar, Text } from 'shared/components'
     import { clearSendParams, sendParams } from 'shared/lib/app'
     import { parseCurrency } from 'shared/lib/currency'
-    import { ledgerDeviceState } from 'shared/lib/ledger'
+    import { ledgerDeviceState, notifyLedgerDeviceState } from 'shared/lib/ledger'
     import { displayNotifications, isNewNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
@@ -225,11 +225,13 @@
          * accomodates for if we want to ignore the NotDetected state.
          */
         switch (state) {
-            case LedgerDeviceState.Connected:
+            default:
+                notifyLedgerDeviceState('error', false, false, ignoreNotDetected)
+
                 break
 
-            case LedgerDeviceState.NotDetected:
-                if (ignoreNotDetected) break
+            case LedgerDeviceState.Connected:
+                break
 
             case LedgerDeviceState.Locked:
                 if (transactionTimeoutId) clearTimeout(transactionTimeoutId)
@@ -238,16 +240,6 @@
                     () => checkLedgerDeviceState(get(ledgerDeviceState), notificationType, ignoreNotDetected),
                     10000
                 )
-
-            default:
-                const message = locale(`error.ledger.${state}`)
-
-                if (isNewNotification('error'))
-                    showAppNotification({
-                        type: notificationType,
-                        message: message,
-                    })
-                break
         }
     }
 
