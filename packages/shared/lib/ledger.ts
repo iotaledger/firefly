@@ -1,8 +1,8 @@
 import { closePopup, openPopup, popupState } from 'shared/lib/popup'
 import { api } from 'shared/lib/wallet'
 import { get, writable } from 'svelte/store'
-import type { Event } from "./typings/events"
-import { AppName, LedgerDeviceState, LedgerStatus } from "./typings/ledger"
+import type { Event } from './typings/events'
+import { LedgerApp, LedgerAppName, LedgerDeviceState, LedgerStatus, LegacyLedgerErrorCode, LegacyLedgerErrorName } from './typings/ledger'
 
 const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
 
@@ -11,6 +11,7 @@ let intervalTimer
 
 export const ledgerSimulator = false
 export const ledgerDeviceState = writable<LedgerDeviceState>(LedgerDeviceState.NotDetected)
+export const isLedgerLegacyConnected = writable<boolean>(false)
 
 export function getLedgerDeviceStatus(
     legacy: boolean = false,
@@ -21,7 +22,11 @@ export function getLedgerDeviceStatus(
     api.getLedgerDeviceStatus(ledgerSimulator, {
         onSuccess(response: Event<LedgerStatus>) {
             ledgerDeviceState.set(calculateLedgerDeviceState(response.payload))
-            if ((legacy && get(ledgerDeviceState) === LedgerDeviceState.LegacyConnected) || (!legacy && get(ledgerDeviceState) === LedgerDeviceState.Connected)) {
+
+            const state = get(ledgerDeviceState)
+            const isConnected = (legacy && state === LedgerDeviceState.LegacyConnected)
+                            || (!legacy && state === LedgerDeviceState.Connected)
+            if (isConnected) {
                 onConnected()
             } else {
                 onDisconnected()
@@ -38,14 +43,36 @@ export function calculateLedgerDeviceState(status: LedgerStatus): LedgerDeviceSt
     if (locked) {
         return LedgerDeviceState.Locked
     } else {
-        if (app?.name === AppName.IOTA) {
-            return LedgerDeviceState.Connected
-        } else if (app?.name === AppName.IOTALegacy) {
-            return LedgerDeviceState.LegacyConnected
-        } else {
-            return connected ? LedgerDeviceState.AppNotOpen : LedgerDeviceState.NotDetected
+        switch(app?.name) {
+            default:
+                if(connected) {
+                    /**
+                     * NOTE: "BOLOS" is the name of the Ledger operating system and is
+                     * sometimes registered as an app.
+                     */
+                    return (app?.name && app?.name !== LedgerAppName.BOLOS) ? LedgerDeviceState.OtherConnected : LedgerDeviceState.AppNotOpen
+                } else {
+                    return LedgerDeviceState.NotDetected
+                }
+            case LedgerAppName.IOTA:
+                return LedgerDeviceState.Connected
+            case LedgerAppName.IOTALegacy:
+                return LedgerDeviceState.LegacyConnected
         }
     }
+}
+
+export function getLedgerOpenedApp(): Promise<LedgerApp> {
+    return new Promise<LedgerApp>((resolve, reject) => {
+        api.getLedgerDeviceStatus(ledgerSimulator, {
+            onSuccess(response: Event<LedgerStatus>) {
+                resolve(response.payload?.app)
+            },
+            onError(err) {
+                reject(err)
+            }
+        })
+    })
 }
 
 export function promptUserToConnectLedger(
@@ -111,4 +138,23 @@ export function stopPollingLedgerStatus(): void {
         intervalTimer = null
         polling = false
     }
+}
+
+export function getLegacyErrorMessage(error: any): string {
+    let errorMessage = 'error.global.generic'
+    switch (error?.name) {
+        case LegacyLedgerErrorName.TransportStatusError:
+            if (error?.statusCode === LegacyLedgerErrorCode.DeniedByTheUser) {
+                errorMessage = 'error.send.cancelled'
+                break
+            } else if (error?.statusCode === LegacyLedgerErrorCode.TimeoutExceeded) {
+                errorMessage = 'error.ledger.timeout'
+            }
+            break
+        case LegacyLedgerErrorName.DisconnectedDevice:
+        case LegacyLedgerErrorName.DisconnectedDeviceDuringOperation:
+            errorMessage = 'error.ledger.disconnected'
+            break
+    }
+    return errorMessage
 }

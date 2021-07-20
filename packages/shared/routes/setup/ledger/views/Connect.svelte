@@ -1,7 +1,6 @@
 <script>
     import { Button, Icon, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
     import {
-        getLedgerDeviceStatus,
         ledgerDeviceState,
         ledgerSimulator,
         pollLedgerDeviceStatus,
@@ -24,7 +23,7 @@
     let legacyLedger = $walletSetupType === SetupType.TrinityLedger
 
     let newLedgerProfile = $walletSetupType === SetupType.New
-    let busy = false
+    let creatingAccount = false
 
     let LEDGER_STATUS_POLL_INTERVAL = 1500
 
@@ -39,13 +38,15 @@
     const dispatch = createEventDispatcher()
 
     onMount(() => {
-        pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL, getLedgerDeviceStatus, getLedgerDeviceStatus)
+        pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL)
         polling = true
     })
 
     onDestroy(stopPollingLedgerStatus)
 
     function createAccount() {
+        creatingAccount = true
+
         const officialNodes = getOfficialNodes()
         const officialNetwork = getOfficialNetwork()
 
@@ -62,16 +63,18 @@
                 },
                 {
                     onSuccess() {
-                        busy = false
+                        creatingAccount = false
+
                         dispatch('next')
                     },
                     onError(error) {
-                        busy = false
+                        creatingAccount = false
+
                         console.error(error)
                     },
                 }
             )
-        const _onCancel = () => (busy = false)
+        const _onCancel = () => (creatingAccount = false)
         promptUserToConnectLedger(false, _onConnected, _onCancel)
     }
 
@@ -82,12 +85,13 @@
     }
 
     function handleContinueClick() {
-        busy = true
+        creatingAccount = true
+
         if (newLedgerProfile) {
             createAccount()
         } else {
             const _onConnected = () => dispatch('next')
-            const _onCancel = () => (busy = false)
+            const _onCancel = () => (creatingAccount = false)
             promptUserToConnectLedger(false, _onConnected, _onCancel)
         }
     }
@@ -128,8 +132,11 @@
                 <Icon icon="info" classes="mr-2 text-blue-500" />
                 <Text secondary highlighted>{locale('popups.ledgerConnectionGuide.title')}</Text>
             </div>
-            <Button classes="w-full" disabled={(polling && (!isConnected || !isAppOpen)) || busy} onClick={handleContinueClick}>
-                {#if busy}
+            <Button
+                classes="w-full"
+                disabled={(polling && (!isConnected || !isAppOpen)) || creatingAccount}
+                onClick={handleContinueClick}>
+                {#if creatingAccount}
                     <Spinner busy message={locale('general.creatingAccount')} classes="justify-center" />
                 {:else}{locale('actions.continue')}{/if}
             </Button>

@@ -7,7 +7,7 @@ import { closePopup, openPopup } from 'shared/lib/popup'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
 import { appRoute, walletSetupType } from 'shared/lib/router'
 import type { Address } from 'shared/lib/typings/address'
-import type { Input, MigrationBundle, MigrationData, AddressInput, MigrationAddress } from 'shared/lib/typings/migration'
+import type { Input, MigrationBundle, MigrationData, AddressInput, MigrationAddress, Transfer } from 'shared/lib/typings/migration'
 import { AppRoute, SetupType } from 'shared/lib/typings/routes'
 import Validator from 'shared/lib/validator'
 import { api } from 'shared/lib/wallet'
@@ -16,8 +16,9 @@ import { localize } from './i18n'
 
 export const LOG_FILE_NAME = 'migration.log'
 
-export const MIGRATION_NODES = ['https://nodes.devnet.iota.org']
-export const PERMANODE = undefined
+// TODO: Change back temp migration nodes (previously https://nodes.devnet.iota.org)
+export const MIGRATION_NODES = ['https://nodes-legacy.ledgermigration1.net']
+export const PERMANODE = "http://permanode.ledgermigration1.net:4000/api"
 
 export const ADDRESS_SECURITY_LEVEL = 2
 
@@ -27,7 +28,8 @@ export const MINIMUM_MIGRATION_BALANCE = 100
 /** Bundle mining timeout for each bundle */
 export const MINING_TIMEOUT_SECONDS = 10
 
-export const MINIMUM_WEIGHT_MAGNITUDE = 9;
+// TODO: Change back temp mwm (previously 9)
+export const MINIMUM_WEIGHT_MAGNITUDE = 14;
 
 const SOFTWARE_MAX_INPUTS_PER_BUNDLE = 10
 
@@ -290,7 +292,7 @@ export const prepareMigrationLog = (bundleHash: string, trytes: string[], balanc
  * 
  * @returns {Promise<void>}
  */
-export const getLedgerMigrationData = (getAddressFn: (index: number) => Promise<string>): Promise<any> => {
+export const getLedgerMigrationData = (getAddressFn: (index: number) => Promise<string>, callback: () => void): Promise<any> => {
     const _get = (addresses: AddressInput[]): Promise<any> => {
         return new Promise((resolve, reject) => {
             api.getLedgerMigrationData(
@@ -360,7 +362,6 @@ export const getLedgerMigrationData = (getAddressFn: (index: number) => Promise<
             }
 
             prepareBundles()
-
             return get(data).inputs.length > 0;
         });
     }
@@ -369,9 +370,11 @@ export const getLedgerMigrationData = (getAddressFn: (index: number) => Promise<
         if (shouldGenerateMore) {
             return _process();
         }
-
         return Promise.resolve(true);
-    }).then(() => get(get(migration).data))
+    }).then(() => {
+        callback()
+        return get(get(migration).data)
+    })
 };
 
 /**
@@ -451,15 +454,12 @@ export const mineLedgerBundle = (
 export const createMinedLedgerMigrationBundle = (
     bundleIndex: number,
     prepareTransfersFn: (
-        transfers: {
-            address: string;
-            value: number;
-            tag: string;
-        }[],
+        transfers: Transfer[],
         inputs: Input[],
         remainder: undefined,
         now: () => number
-    ) => Promise<string[]>
+    ) => Promise<string[]>,
+    callback: () => void
 ) => {
     const { bundles } = get(migration);
 
@@ -493,9 +493,11 @@ export const createMinedLedgerMigrationBundle = (
         })
     })
 
+    openLedgerLegacyTransactionPopup(transfer, inputs)
+
     return prepareTransfersFn([transfer], inputs, undefined, () => txs[0].timestamp * 1000).then((trytes) => {
         updateLedgerBundleState(bundleIndex, trytes, false);
-
+        callback()
         return { trytes, bundleHash: asTransactionObject(trytes[0]).bundle }
     });
 };
@@ -513,13 +515,10 @@ export const createMinedLedgerMigrationBundle = (
 export const createLedgerMigrationBundle = (
     bundleIndex: number,
     prepareTransfersFn: (
-        transfers: {
-            address: string;
-            value: number;
-            tag: string;
-        }[],
+        transfers: Transfer[],
         inputs: Input[],
-    ) => Promise<string[]>
+    ) => Promise<string[]>,
+    callback: () => void
 ): Promise<any> => {
     return new Promise((resolve, reject) => {
         api.getMigrationAddress(false, {
@@ -541,9 +540,11 @@ export const createLedgerMigrationBundle = (
             tag: 'U'.repeat(27)
         }
 
+        openLedgerLegacyTransactionPopup(transfer, bundle.inputs)
+
         return prepareTransfersFn([transfer], bundle.inputs.map((input) => Object.assign({}, input, { keyIndex: input.index }))).then((trytes) => {
             updateLedgerBundleState(bundleIndex, trytes, false);
-
+            callback()
             return { trytes, bundleHash: asTransactionObject(trytes[0]).bundle }
         });
     });
@@ -559,7 +560,6 @@ export const createLedgerMigrationBundle = (
  * @returns {Promise}
  */
 export const sendLedgerMigrationBundle = (bundleHash: string, trytes: string[]): Promise<any> => {
-
     return new Promise((resolve, reject) => {
         api.sendLedgerMigrationBundle(
             MIGRATION_NODES,
@@ -1330,4 +1330,32 @@ export const initialiseMigrationListeners = () => {
     })
 }
 
+export const asyncGetAddressChecksum = (address: string = '', legacy: boolean = false): Promise<string> => {
+    const _checksum = (_address: string = '') => _address.slice(-9)
+    return new Promise<string>((resolve, reject) => {
+        if (legacy) {
+            api.getLegacyAddressChecksum(address, {
+                onSuccess(response) {
+                    const checksum = _checksum(response.payload)
+                    resolve(checksum)
+                },
+                onError(err) {
+                    reject(err)
+                },
+            })
+        } else {
+            const checksum = _checksum(address)
+            resolve(checksum)
+        }
+    })
+}
 
+function openLedgerLegacyTransactionPopup(transfer: Transfer, inputs: Input[]): void {
+    openPopup({
+        type: 'ledgerLegacyTransaction',
+        hideClose: true,
+        props: {
+            transfer, inputs
+        }
+    })
+}

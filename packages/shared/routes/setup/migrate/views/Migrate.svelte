@@ -9,6 +9,7 @@
         formatCurrency,
     } from 'shared/lib/currency'
     import { Electron } from 'shared/lib/electron'
+    import { getLegacyErrorMessage, promptUserToConnectLedger } from 'shared/lib/ledger'
     import {
         ADDRESS_SECURITY_LEVEL,
         confirmedBundles,
@@ -24,13 +25,13 @@
         unselectedInputs,
     } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
+    import { closePopup } from 'shared/lib/popup'
     import { newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
-    import { promptUserToConnectLedger } from 'shared/lib/ledger'
 
     export let locale
     export let mobile
@@ -73,10 +74,11 @@
                 const _onConnected = () => {
                     Electron.ledger
                         .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
-                        .then((iota) => {
-                            return createLedgerMigrationBundle(0, iota.prepareTransfers)
+                        .then(({ iota, callback }) => {
+                            return createLedgerMigrationBundle(0, iota.prepareTransfers, callback)
                         })
                         .then(({ trytes, bundleHash }) => {
+                            closePopup() // close transaction popup
                             singleMigrationBundleHash = bundleHash
                             return sendLedgerMigrationBundle(bundleHash, trytes)
                         })
@@ -90,6 +92,11 @@
                         })
                         .catch((error) => {
                             loading = false
+                            closePopup() // close transaction popup
+                            showAppNotification({
+                                type: 'error',
+                                message: locale(getLegacyErrorMessage(error)),
+                            })
                             console.error(error)
                         })
                 }

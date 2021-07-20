@@ -2,11 +2,13 @@
     import { DashboardPane } from 'shared/components'
     import { clearSendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
+    import { promptUserToConnectLedger } from 'shared/lib/ledger'
     import { addProfileCurrencyPriceData, priceData } from 'shared/lib/marketData'
-    import { showAppNotification } from 'shared/lib/notifications'
-    import { openPopup } from 'shared/lib/popup'
+    import { isNewNotification, showAppNotification } from 'shared/lib/notifications'
+    import { closePopup, openPopup } from 'shared/lib/popup'
     import {
         activeProfile,
+        isLedgerProfile,
         isSoftwareProfile,
         isStrongholdLocked,
         MigratedTransaction,
@@ -14,8 +16,9 @@
         updateProfile,
     } from 'shared/lib/profile'
     import { walletRoute, walletSetupType } from 'shared/lib/router'
+    import { TransferProgressEventType } from 'shared/lib/typings/events'
     import type { Transaction } from 'shared/lib/typings/message'
-    import { WalletRoutes, SetupType } from 'shared/lib/typings/routes'
+    import { SetupType, WalletRoutes } from 'shared/lib/typings/routes'
     import {
         AccountMessage,
         AccountsBalanceHistory,
@@ -30,6 +33,7 @@
         getInternalFlag,
         getTransactions,
         getWalletBalanceHistory,
+        hasGeneratedALedgerReceiveAddress,
         initialiseListeners,
         isSelfTransaction,
         isTransferring,
@@ -44,7 +48,7 @@
         WalletAccount,
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
-    import { derived, Readable, Writable, get } from 'svelte/store'
+    import { derived, get, Readable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
 
     export let locale
@@ -117,6 +121,15 @@
     setContext<Readable<BalanceHistory>>('walletBalanceHistory', walletBalanceHistory)
 
     let isGeneratingAddress = false
+
+    // If wallet route or account changes force regeneration of Ledger receive address
+    $: {
+        $walletRoute
+        $selectedAccountId
+        if ($isLedgerProfile) {
+            hasGeneratedALedgerReceiveAddress.set(false)
+        }
+    }
 
     $: if ($accountsLoaded) {
         // update profileType if it is missing
@@ -223,6 +236,7 @@
     function onGenerateAddress(accountId) {
         const _generate = () => {
             isGeneratingAddress = true
+
             api.getUnusedAddress(accountId, {
                 onSuccess(response) {
                     accounts.update((accounts) =>
@@ -238,18 +252,27 @@
                             return account
                         })
                     )
+                    closePopup()
+
                     isGeneratingAddress = false
+                    hasGeneratedALedgerReceiveAddress.set(true)
                 },
                 onError(err) {
+                    closePopup()
+
                     isGeneratingAddress = false
 
-                    const shouldHideErrorNotification =
-                        err && err.type === 'ClientError' && err.error === 'error.node.chrysalisNodeInactive'
-
-                    if (!shouldHideErrorNotification) {
+                    const isClientError = err && err.type === 'ClientError'
+                    const shouldHideErrorNotification = isClientError && err.error === 'error.node.chrysalisNodeInactive'
+                    if (!shouldHideErrorNotification && isNewNotification('error')) {
+                        /**
+                         * NOTE: To ensure a clear error message (for Ledger users),
+                         * we need to update the locale path.
+                         */
+                        const localePath = isClientError && $isLedgerProfile ? 'error.ledger.generateAddress' : err.error
                         showAppNotification({
                             type: 'error',
-                            message: locale(err.error),
+                            message: locale(localePath),
                         })
                     }
                 },
@@ -270,7 +293,7 @@
                 },
             })
         } else {
-            _generate()
+            promptUserToConnectLedger(false, () => _generate())
         }
     }
 
@@ -460,7 +483,9 @@
                             })
                         })
 
-                        transferState.set('Complete')
+                        transferState.set({
+                            type: TransferProgressEventType.Complete,
+                        })
 
                         setTimeout(() => {
                             clearSendParams()
@@ -533,7 +558,9 @@
                         })
                     })
 
-                    transferState.set('Complete')
+                    transferState.set({
+                        type: TransferProgressEventType.Complete,
+                    })
 
                     setTimeout(() => {
                         clearSendParams(internal)
@@ -595,27 +622,6 @@
             addProfileCurrencyPriceData()
         }
     })
-
-    function checkStrongholdStatus() {
-        api.getStrongholdStatus({
-            onSuccess(strongholdStatusResponse) {
-                updateProfile('isStrongholdLocked', strongholdStatusResponse.payload.snapshot.status === 'Locked')
-                api.areLatestAddressesUnused({
-                    onSuccess(response) {
-                        if (!response.payload) {
-                            openPopup({ type: 'password', props: { onSuccess: syncAccounts } })
-                        }
-                    },
-                    onError(error) {
-                        console.error(error)
-                    },
-                })
-            },
-            onError(error) {
-                console.error(error)
-            },
-        })
-    }
 </script>
 
 <style type="text/scss">

@@ -118,7 +118,7 @@
             "body": "Your new wallet is ready to use.",
             "softwareMigratedBody": "You have successfully migrated your funds to the new network",
             "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
-            "trinityLedgerBody": "Your Ledger account is successfully recovered and you can now remove the old IOTA leger app from your device.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to Firefly. You can now remove the IOTA Legacy app from your device.",
             "exportMigration": "Export migration log and finish setup"
         },
         "import": {
@@ -195,7 +195,7 @@
         },
         "selectLedgerAccountIndex": {
             "title": "Choose Ledger account index",
-            "body": "Choose your Ledger account index. Choose your Ledger account index. Choose your Ledger account index. Choose your Ledger account index.",
+            "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
             "accountIndex": "Account Index",
             "accountPage": "Account Page",
             "standard": "Standard",
@@ -446,10 +446,11 @@
                     "statuses": {
                         "appNotOpen": "IOTA App Not Open",
                         "connected": "Connected",
+                        "legacyConnected": "IOTA Legacy App Open",
                         "locked": "Locked",
                         "mnemonicMismatch": "Wrong Ledger or Mnemonic",
-                        "notDetected": "Not detected",
-                        "legacyConnected": "IOTA Legacy app open"
+                        "notDetected": "Not Detected",
+                        "otherConnected": "App Open"
                     }
                 },
                 "strongholdStatus": {
@@ -606,6 +607,23 @@
                 "Ensure you have unlocked your Ledger device with your PIN",
                 "Open the new IOTA app on your Ledger device"
             ]
+        },
+        "ledgerTransaction": {
+            "remainderAddress": {
+                "title": "Confirm remainder address",
+                "info": "Confirm that the remainder address displayed on your ledger device matches the one displayed below."
+            },
+            "transaction": {
+                "title": "Confirm transaction",
+                "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below.",
+                "input": "Input [{index}]",
+                "output": "Output",
+                "checksum": "Chk: {checksum}"
+            }
+        },
+        "ledgerAddress": {
+            "title": "Confirm receive address",
+            "body": "Confirm that the receive address displayed on your ledger device matches the one displayed below."
         }
     },
     "charts": {
@@ -729,6 +747,7 @@
         "received": "Received",
         "sendPayment": "Send Payment",
         "moveFunds": "Internal Transfer",
+        "sendTo": "Send To",
         "sendFunds": "Send funds",
         "sendToAddress": "Send to address",
         "scanQrOrPaste": "Scan a QR code or paste an Address",
@@ -747,6 +766,8 @@
         "myAddress": "My Address",
         "shareAddress": "Share an address",
         "yourAddress": "Your address",
+        "newRemainder": "New Remainder",
+        "remainder": "Remainder",
         "generateNewAddress": "Generate new address",
         "copyAddress": "Copy Address",
         "import": "Import",
@@ -783,6 +804,7 @@
         "messageId": "Message ID",
         "inputAddress": "Send Address",
         "receiveAddress": "Receive Address",
+        "newAddress": "New Address",
         "date": "Date",
         "status": "Status",
         "confirmed": "Confirmed",
@@ -794,11 +816,13 @@
         "firstSync": "Syncing history, this may take a while...",
         "transferSyncing": "Syncing wallet",
         "transferSelectingInputs": "Selecting inputs",
-        "transferRemainderAddress": "Generating remainder deposit address",
+        "transferRemainderAddress": "Generating remainder address",
+        "transferPreparedTransaction": "Preparing transaction",
         "transferSigning": "Signing the transaction",
         "transferPow": "Performing PoW",
         "transferBroadcasting": "Broadcasting transaction",
         "transferComplete": "Transfer complete",
+        "generatingReceiveAddress": "Generating receive address",
         "creatingAccount": "Creating wallet, please wait...",
         "updatingAccount": "Updating wallet, please wait...",
         "accountSyncing": "Wallet is syncing",
@@ -894,7 +918,8 @@
             "startDot": "A profile name can't start with the '.' character.",
             "chars": "A profile name can't contain the following characters <>:\"/\\|?*",
             "index": "Your account index must be a number between 0 and 2,147,483,647.",
-            "page": "Your account page must be a number between 0 and 2,147,483,647."
+            "page": "Your account page must be a number between 0 and 2,147,483,647.",
+            "syncing": "There was an error syncing your wallets."
         },
         "send": {
             "addressLength": "Addresses should be {length, plural, one {1 character} other {# characters}} long.",
@@ -909,7 +934,8 @@
             "noToAccount": "You have not selected a wallet to send the funds to.",
             "sendingDust": "You cannot send less than 1 Mi.",
             "leavingDust": "You cannot leave less than 1 Mi on your address.",
-            "cancelled": "The transaction was cancelled."
+            "cancelled": "The transaction was cancelled.",
+            "transaction": "There was an error sending your transaction. Please try again."
         },
         "node": {
             "invalid": "Please enter a valid URL.",
@@ -932,10 +958,17 @@
             "phraseCaseWord": "The word \"{word}\" should be lower case"
         },
         "ledger": {
-            "notFound": "Ledger device not found.",
-            "wrong": "You have connected the wrong Ledger device or the mnemonic has changed.",
+            "appNotOpen": "You must open the IOTA app on your Ledger device.",
+            "generic": "There was an error connecting to your Ledger device.",
+            "legacyConnected": "The wrong app is open on your Ledger device.",
             "locked": "Please unlock your Ledger device by entering the PIN.",
-            "generic": "There was an error connecting to your Ledger device."
+            "mnemonicMismatch": "You have connected the wrong Ledger device or the mnemonic has changed.",
+            "notDetected": "No Ledger device detected.",
+            "notFound": "Ledger device not found.",
+            "otherConnected": "The wrong app is open on your Ledger device.",
+            "generateAddress": "There was an error generating an address.",
+            "timeout": "Timeout exceeded",
+            "disconnected": "Device disconnected"
         }
     },
     "tooltips": {

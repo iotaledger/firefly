@@ -16,7 +16,10 @@
     import LedgerAppGuide from './LedgerAppGuide.svelte'
     import LedgerConfirmation from './LedgerConfirmation.svelte'
     import LedgerConnectionGuide from './LedgerConnectionGuide.svelte'
+    import LedgerLegacyTransaction from './LedgerLegacyTransaction.svelte'
     import LedgerNotConnected from './LedgerNotConnected.svelte'
+    import LedgerTransaction from './LedgerTransaction.svelte'
+    import LedgerAddress from './LedgerAddress.svelte'
     import MissingBundle from './MissingBundle.svelte'
     import Password from './Password.svelte'
     import QR from './QR.svelte'
@@ -71,6 +74,9 @@
         ledgerConfirmation: LedgerConfirmation,
         ledgerAppGuide: LedgerAppGuide,
         ledgerConnectionGuide: LedgerConnectionGuide,
+        ledgerTransaction: LedgerTransaction,
+        ledgerLegacyTransaction: LedgerLegacyTransaction,
+        ledgerAddress: LedgerAddress,
         removeNode: RemoveNode,
         busy: Busy,
         errorLog: ErrorLog,

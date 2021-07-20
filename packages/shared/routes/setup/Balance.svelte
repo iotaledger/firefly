@@ -9,7 +9,7 @@
         formatCurrency,
     } from 'shared/lib/currency'
     import { Electron } from 'shared/lib/electron'
-    import { promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { getLegacyErrorMessage, promptUserToConnectLedger } from 'shared/lib/ledger'
     import {
         ADDRESS_SECURITY_LEVEL,
         bundlesWithUnspentAddresses,
@@ -25,6 +25,7 @@
         spentAddressesWithNoBundleHashes,
         unselectedInputs,
     } from 'shared/lib/migration'
+    import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
@@ -37,6 +38,7 @@
     export let mobile
 
     let isCheckingForBalance
+    let legacyLedger = $walletSetupType === SetupType.TrinityLedger
 
     const { seed, data, bundles } = $migration
 
@@ -64,8 +66,6 @@
 
     let error = getError(balance)
     let formattedBalance = formatUnitBestMatch(balance, true, 3)
-
-    let legacyLedger = $walletSetupType === SetupType.TrinityLedger
 
     bundles.subscribe((updatedBundles) => {
         _bundles = updatedBundles
@@ -173,15 +173,19 @@
             const _onConnected = () => {
                 Electron.ledger
                     .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
-                    .then((iota) => {
-                        return getLedgerMigrationData(iota.getAddress)
+                    .then(({ iota, callback }) => {
+                        return getLedgerMigrationData(iota.getAddress, callback)
                     })
-                    .then((data) => {
+                    .then(() => {
                         isCheckingForBalance = false
                     })
                     .catch((error) => {
                         isCheckingForBalance = false
                         console.error(error)
+                        showAppNotification({
+                            type: 'error',
+                            message: locale(getLegacyErrorMessage(error)),
+                        })
                     })
             }
             const _onCancel = () => (isCheckingForBalance = false)

@@ -24,18 +24,20 @@ import type {
     MigrationProgressEventPayload,
     ReattachmentEventPayload,
     TransactionEventPayload,
-    TransferProgressEventPayload
+    TransferProgressEventPayload,
+    TransferState,
+    LedgerAddressGenerationEventPayload
 } from 'shared/lib/typings/events'
 import type { Payload, Transaction } from 'shared/lib/typings/message'
 import type { AddressInput, MigrationBundle, MigrationData, SendMigrationBundleResponse } from 'shared/lib/typings/migration'
 import { formatUnitBestMatch } from 'shared/lib/units'
 import { get, writable, Writable } from 'svelte/store'
 import type { ClientOptions } from './typings/client'
-import type { TransferProgressEventType } from './typings/events'
-import type { LedgerApp, LedgerStatus } from './typings/ledger'
+import type { LedgerStatus } from './typings/ledger'
 import type { Message } from './typings/message'
-import type { Duration, StrongholdStatus } from './typings/wallet'
 import type { NodeAuth, NodeInfo } from './typings/node'
+import type { Duration, StrongholdStatus } from './typings/wallet'
+import { openPopup } from './popup'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -149,6 +151,7 @@ export const resetWallet = () => {
     selectedMessage.set(null)
     isTransferring.set(false)
     transferState.set(null)
+    hasGeneratedALedgerReceiveAddress.set(false)
     isSyncing.set(null)
 }
 
@@ -157,7 +160,9 @@ export const selectedAccountId = writable<string | null>(null)
 export const selectedMessage = writable<Message | null>(null)
 
 export const isTransferring = writable<boolean>(false)
-export const transferState = writable<TransferProgressEventType | "Complete" | null>(null)
+export const transferState = writable<TransferState | null>(null)
+
+export const hasGeneratedALedgerReceiveAddress = writable<boolean | null>(false)
 
 export const isSyncing = writable<boolean>(false)
 
@@ -173,6 +178,7 @@ export const api: {
     getStrongholdStatus(callbacks: { onSuccess: (response: Event<StrongholdStatus>) => void, onError: (err: ErrorEventPayload) => void })
     syncAccounts(addressIndex: number, gapLimit: number, accountDiscoveryThreshold: number, callbacks: { onSuccess: (response: Event<SyncedAccount[]>) => void, onError: (err: ErrorEventPayload) => void })
     syncAccount(accountId: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
+    startBackgroundSync(pollingInterval: Duration, automaticOutputConsolidation: boolean, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
     createAccount(account: AccountToCreate, callbacks: { onSuccess: (response: Event<Account>) => void, onError: (err: ErrorEventPayload) => void })
     send(accountId: string, transfer: {
         amount: number,
@@ -206,6 +212,7 @@ export const api: {
     onConfirmationStateChange(callbacks: { onSuccess: (response: Event<ConfirmationStateChangeEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
     onBalanceChange(callbacks: { onSuccess: (response: Event<BalanceChangeEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
     onTransferProgress(callbacks: { onSuccess: (response: Event<TransferProgressEventPayload>) => void, onError: (err: ErrorEventPayload) => void }),
+    onLedgerAddressGeneration(callbacks: { onSuccess: (response: Event<LedgerAddressGenerationEventPayload>) => void, onError: (err: ErrorEventPayload) => void }),
     onMigrationProgress(callbacks: { onSuccess: (response: Event<MigrationProgressEventPayload>) => void, onError: (err: ErrorEventPayload) => void }),
 
     // Migration
@@ -242,7 +249,7 @@ export const api: {
         securityLevel: number,
         timeout: number,
         offset: number,
-        callbacks: { onSuccess: (response: Event<{ bundle: string[], crackability: number}>) => void, onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: Event<{ bundle: string[], crackability: number }>) => void, onError: (err: ErrorEventPayload) => void }
     ),
     getLedgerMigrationData(
         addresses: AddressInput[],
@@ -260,6 +267,10 @@ export const api: {
     getLedgerDeviceStatus(
         ledgerSimulator: boolean,
         callbacks: { onSuccess: (response: Event<LedgerStatus>) => void, onError: (err: ErrorEventPayload) => void }
+    ),
+    getLegacyAddressChecksum(
+        address: string,
+        callbacks: { onSuccess: (response: Event<string>) => void, onError: (err: ErrorEventPayload) => void }
     )
 } = window['__WALLET_API__']
 
@@ -751,7 +762,33 @@ export const initialiseListeners = () => {
      */
     api.onTransferProgress({
         onSuccess(response) {
-            transferState.set(response.payload.event.type)
+            const { event } = response.payload
+            if (event.hasOwnProperty('type')) {
+                transferState.set({
+                    type: event.type,
+                    data: { ...event }
+                })
+            }
+
+        },
+        onError(error) {
+            console.error(error)
+        }
+    })
+
+    /**
+     * Event listener for Ledger receive address generation
+     */
+    api.onLedgerAddressGeneration({
+        onSuccess(response) {
+            const { event } = response.payload
+            openPopup({
+                type: 'ledgerAddress',
+                hideClose: true,
+                props: {
+                    address: event.address
+                }
+            })
         },
         onError(error) {
             console.error(error)

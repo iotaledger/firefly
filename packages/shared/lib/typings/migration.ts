@@ -36,6 +36,12 @@ export interface SendMigrationBundleResponse {
     tailTransactionHash: string;
 }
 
+export interface Transfer {
+    address: string;
+    value: number;
+    tag: string;
+}
+
 export enum RiskLevel {
     VERYHIGH = 10 ** -13,
     HIGH = 10 ** -15,
@@ -265,7 +271,7 @@ export function getLedgerMigrationData(
  * 
  * @returns {Promise}
  */
- export function sendLedgerMigrationBundle(
+export function sendLedgerMigrationBundle(
     bridge: Bridge,
     __ids: CommunicationIds,
     nodes: string[],
@@ -281,5 +287,29 @@ export function getLedgerMigrationData(
             bundle,
             mwm
         },
+    })
+}
+
+/**
+ * Gets a legacy address with checksum.
+ * 
+ * @method getLegacyAddressChecksum
+ * 
+ * @param {Bridge} bridge 
+ * @param {CommunicationIds} __ids 
+ * @param {string} address
+ * 
+ * @returns {Promise}
+ */
+export function getLegacyAddressChecksum(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+    address: string
+) {
+    return bridge({
+        actorId: __ids.actorId,
+        id: __ids.messageId,
+        cmd: 'GetLegacyAddressChecksum',
+        payload: address
     })
 }

@@ -1,10 +1,9 @@
 <script lang="typescript">
     import { Button, Illustration, Number, OnboardingLayout, Spinner, Text, Toggle } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
-    import {
-        promptUserToConnectLedger,
-    } from 'shared/lib/ledger'
+    import { getLegacyErrorMessage, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { ADDRESS_SECURITY_LEVEL, getLedgerMigrationData, hardwareIndexes } from 'shared/lib/migration'
+    import { showAppNotification } from 'shared/lib/notifications'
     import { createEventDispatcher } from 'svelte'
 
     export let locale
@@ -52,8 +51,8 @@
         const _onConnected = () => {
             Electron.ledger
                 .selectSeed(index, page, ADDRESS_SECURITY_LEVEL)
-                .then((iota) => {
-                    return getLedgerMigrationData(iota.getAddress)
+                .then(({ iota, callback }) => {
+                    return getLedgerMigrationData(iota.getAddress, callback)
                 })
                 .then((data) => {
                     busy = false
@@ -64,6 +63,10 @@
                 .catch((error) => {
                     busy = false
                     console.error(error)
+                    showAppNotification({
+                        type: 'error',
+                        message: locale(getLegacyErrorMessage(error)),
+                    })
                 })
         }
         const _onCancel = () => {

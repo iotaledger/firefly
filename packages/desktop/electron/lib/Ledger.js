@@ -1,8 +1,22 @@
-const Transport = require('@ledgerhq/hw-transport-node-hid').default;
+const TransportHid = require('@ledgerhq/hw-transport-node-hid').default;
+const TransportSpeculos = require('@ledgerhq/hw-transport-node-speculos').default;
 const Iota = require('hw-app-iota').default
+
+const USE_SIMULATOR = false
+const SIMULATOR_PORT = 9999;
 
 const Errors = {
     LEDGER_CANCELLED: 'Transaction cancelled on Ledger device.',
+}
+
+async function createTransport() {
+    if (USE_SIMULATOR) {
+        return await TransportSpeculos.open({
+            apduPort: SIMULATOR_PORT
+        })
+    }
+
+    return await TransportHid.create();
 }
 
 class Ledger {
@@ -10,7 +24,7 @@ class Ledger {
         this.connected = false;
         this.listeners = [];
 
-        this.subscription = Transport.listen({
+        this.subscription = TransportHid.listen({
             next: (e) => {
                 this.onMessage(e.type);
             }
@@ -47,7 +61,7 @@ class Ledger {
 
         await this.awaitApplication(index, page, security);
 
-        return this.iota;
+        return { iota: this.iota, callback: () => this.transport.close() };
     }
 
     /**
@@ -55,7 +69,7 @@ class Ledger {
      * @returns {promise}
      */
     async awaitConnection() {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             const callbackSuccess = (connected) => {
                 if (connected) {
                     resolve();
@@ -63,13 +77,6 @@ class Ledger {
                 }
             };
             this.addListener(callbackSuccess);
-
-            const callbackAbort = (e, message) => {
-                if (message && message.abort) {
-                    this.removeListener(callbackSuccess);
-                    reject(Errors.LEDGER_CANCELLED);
-                }
-            };
         });
     }
 
@@ -87,7 +94,8 @@ class Ledger {
 
             const callback = async () => {
                 try {
-                    this.transport = await Transport.create();
+                    this.transport = await createTransport();
+
                     this.iota = new Iota(this.transport);
 
                     // TODO: Remove this before release.
@@ -121,18 +129,6 @@ class Ledger {
             };
 
             callback();
-
-            const callbackAbort = (_e, message) => {
-                if (message && message.abort) {
-                    rejected = true;
-
-                    if (timeout) {
-                        clearTimeout(timeout);
-                    }
-                    reject(Errors.LEDGER_CANCELLED);
-                }
-            };
-
         });
     }
 
@@ -164,6 +160,7 @@ class Ledger {
      */
     addListener(callback) {
         this.listeners.push(callback);
+
         if (this.connected) {
             callback(this.connected);
         }
@@ -182,4 +179,15 @@ class Ledger {
     }
 }
 
-export default new Ledger();
+class LedgerSpeculos extends Ledger {
+    async awaitConnection() {
+        return new Promise((resolve) => {
+            this.connected = true;
+            resolve()
+        });
+    }
+}
+
+const _ledger = USE_SIMULATOR ? new LedgerSpeculos() : new Ledger();
+
+export default _ledger;

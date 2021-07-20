@@ -20,7 +20,8 @@ import {
     isLatestAddressUnused as _isLatestAddressUnused,
     areLatestAddressesUnused as _areLatestAddressesUnused,
     setAlias as _setAlias,
-    getNodeInfo as _getNodeInfo
+    getNodeInfo as _getNodeInfo,
+    startBackgroundSync as _startBackgroundSync
 } from '../../../shared/lib/typings/account'
 import {
     Transfer,
@@ -34,6 +35,7 @@ import {
     mineBundle as _mineBundle,
     getLedgerMigrationData as _getLedgerMigrationData,
     sendLedgerMigrationBundle as _sendLedgerMigrationBundle,
+    getLegacyAddressChecksum as _getLegacyAddressChecksum,
     AddressInput
 } from '../../../shared/lib/typings/migration'
 import {
@@ -120,7 +122,7 @@ export const api = {
     },
     storeMnemonic: function (mnemonic?: string): ((__ids: CommunicationIds) => Promise<string>) {
         return (__ids: CommunicationIds) => _storeMnemonic(sendMessage, __ids, {
-            signerType: {type: 'Stronghold'},
+            signerType: { type: 'Stronghold' },
             mnemonic: mnemonic || null
         })
     },
@@ -141,6 +143,9 @@ export const api = {
     },
     syncAccounts: function (addressIndex?: number, gapLimit?: number, accountDiscoveryThreshold?: number): ((__ids: CommunicationIds) => Promise<string>) {
         return (__ids: CommunicationIds) => _syncAccounts(sendMessage, __ids, addressIndex, gapLimit, accountDiscoveryThreshold)
+    },
+    startBackgroundSync: function (pollingInterval: Duration, automaticOutputConsolidation: boolean): ((__ids: CommunicationIds) => Promise<string>) {
+        return (__ids: CommunicationIds) => _startBackgroundSync(sendMessage, __ids, pollingInterval, automaticOutputConsolidation)
     },
     areLatestAddressesUnused: function (): ((__ids: CommunicationIds) => Promise<string>) {
         return (__ids: CommunicationIds) => _areLatestAddressesUnused(sendMessage, __ids)
@@ -256,6 +261,9 @@ export const api = {
     getNodeInfo: function (accountId: AccountIdentifier, url?: string, auth?: NodeAuth): ((__ids: CommunicationIds) => Promise<string>) {
         return (__ids: CommunicationIds) => _getNodeInfo(sendMessage, __ids, accountId, url, auth)
     },
+    getLegacyAddressChecksum: function (address: string): ((__ids: CommunicationIds) => Promise<string>) {
+        return (__ids: CommunicationIds) => _getLegacyAddressChecksum(sendMessage, __ids, address)
+    },
     // Event emitters
     onError: function (): ((__ids: CommunicationIds) => Promise<string>) {
         return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'ErrorThrown')
@@ -280,6 +288,9 @@ export const api = {
     },
     onTransferProgress: function (): ((__ids: CommunicationIds) => Promise<string>) {
         return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'TransferProgress')
+    },
+    onLedgerAddressGeneration: function (): ((__ids: CommunicationIds) => Promise<string>) {
+        return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'LedgerAddressGeneration')
     },
     getLedgerDeviceStatus: function (isSimulator: boolean): ((__ids: CommunicationIds) => Promise<string>) {
         return (__ids: CommunicationIds) => _getLedgerDeviceStatus(sendMessage, __ids, isSimulator)
