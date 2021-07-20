@@ -33,6 +33,7 @@
     let fullSuccess = $hasMigratedAndConfirmedAllSelectedBundles
 
     let legacyLedger = $walletSetupType === SetupType.TrinityLedger
+    let closeTransport = () => {}
 
     let hasBroadcastAnyBundle = false
 
@@ -138,7 +139,12 @@
                                 return Electron.ledger
                                     .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
                                     .then(({ iota, callback }) => {
-                                        return createMinedLedgerMigrationBundle(transaction.index, iota.prepareTransfers, callback)
+                                        closeTransport = callback
+                                        return createMinedLedgerMigrationBundle(
+                                            transaction.index,
+                                            iota.prepareTransfers,
+                                            callback
+                                        )
                                     })
                                     .then(({ trytes, bundleHash }) => {
                                         closePopup() // close transaction popup
@@ -152,6 +158,7 @@
                             return Electron.ledger
                                 .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
                                 .then(({ iota, callback }) => {
+                                    closeTransport = callback
                                     return createLedgerMigrationBundle(transaction.index, iota.prepareTransfers, callback)
                                 })
                                 .then(({ trytes, bundleHash }) => {
@@ -193,6 +200,7 @@
                     .catch((error) => {
                         console.error(error)
                         if (legacyLedger) {
+                            closeTransport()
                             closePopup() // close transaction popup
                             showAppNotification({
                                 type: 'error',
@@ -260,7 +268,12 @@
                                 return Electron.ledger
                                     .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
                                     .then(({ iota, callback }) => {
-                                        return createMinedLedgerMigrationBundle(transaction.index, iota.prepareTransfers, callback)
+                                        closeTransport = callback
+                                        return createMinedLedgerMigrationBundle(
+                                            transaction.index,
+                                            iota.prepareTransfers,
+                                            callback
+                                        )
                                     })
                                     .then(({ trytes, bundleHash }) => {
                                         closePopup() // close transaction popup
@@ -288,6 +301,7 @@
                             return Electron.ledger
                                 .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
                                 .then(({ iota, callback }) => {
+                                    closeTransport = callback
                                     return createLedgerMigrationBundle(transaction.index, iota.prepareTransfers, callback)
                                 })
                                 .then(({ trytes, bundleHash }) => {
@@ -347,6 +361,7 @@
                     .catch((error) => {
                         console.error(error)
                         if (legacyLedger) {
+                            closeTransport()
                             closePopup() // close transaction popup
                             showAppNotification({
                                 type: 'error',
