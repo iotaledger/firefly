@@ -172,10 +172,10 @@
             const _onConnected = () => {
                 Electron.ledger
                     .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
-                    .then((iota) => {
-                        return getLedgerMigrationData(iota.getAddress)
+                    .then(({ iota, callback }) => {
+                        return getLedgerMigrationData(iota.getAddress, callback)
                     })
-                    .then((data) => {
+                    .then(() => {
                         isCheckingForBalance = false
                     })
                     .catch((error) => {

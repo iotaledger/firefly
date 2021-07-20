@@ -74,8 +74,8 @@
                 const _onConnected = () => {
                     Electron.ledger
                         .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
-                        .then((iota) => {
-                            return createLedgerMigrationBundle(0, iota.prepareTransfers)
+                        .then(({ iota, callback }) => {
+                            return createLedgerMigrationBundle(0, iota.prepareTransfers, callback)
                         })
                         .then(({ trytes, bundleHash }) => {
                             closePopup() // close transaction popup

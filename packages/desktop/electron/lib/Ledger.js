@@ -57,7 +57,7 @@ class Ledger {
 
         await this.awaitApplication(index, page, security);
 
-        return this.iota;
+        return { iota: this.iota, callback: () => this.transport.close() };
     }
 
     /**

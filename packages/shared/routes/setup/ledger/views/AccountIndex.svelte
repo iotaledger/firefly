@@ -52,8 +52,8 @@
         const _onConnected = () => {
             Electron.ledger
                 .selectSeed(index, page, ADDRESS_SECURITY_LEVEL)
-                .then((iota) => {
-                    return getLedgerMigrationData(iota.getAddress)
+                .then(({ iota, callback }) => {
+                    return getLedgerMigrationData(iota.getAddress, callback)
                 })
                 .then((data) => {
                     busy = false
