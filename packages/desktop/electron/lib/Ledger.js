@@ -3,7 +3,7 @@ const TransportSpeculos = require('@ledgerhq/hw-transport-node-speculos').defaul
 const Iota = require('hw-app-iota').default
 const { ipcRenderer, remote } = require('electron')
 
-const USE_SIMULATOR = true
+const USE_SIMULATOR = false
 const SIMULATOR_PORT = 9999;
 
 const ipc = ipcRenderer;
