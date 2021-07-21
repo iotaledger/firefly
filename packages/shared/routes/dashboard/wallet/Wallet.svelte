@@ -153,7 +153,7 @@
                         console.error(err)
                     }
 
-                    updateProfile('gapLimit', get(isSoftwareProfile) ? 10 : 1)
+                    updateProfile('gapLimit', gapLimit)
                 }
 
                 if (accountsResponse.payload.length === 0) {
