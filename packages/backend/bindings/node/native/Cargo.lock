@@ -40,9 +40,9 @@ dependencies = [
 
 [[package]]
 name = "aes-gcm"
-version = "0.9.2"
+version = "0.9.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bc3be92e19a7ef47457b8e6f90707e12b6ac5d20c6f3866584fa3be0787d839f"
+checksum = "b2a930fd487faaa92a30afa92cc9dd1526a5cff67124abbbb1c617ce070f4dcf"
 dependencies = [
  "aead",
  "aes",
@@ -259,7 +259,7 @@ dependencies = [
 [[package]]
 name = "bee-common"
 version = "0.4.1"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#aba384b293a350be2ca6cb783b37cf4189254fc6"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#9a6de1fd7d1cdf0a23c45b195647e0dbba8182fb"
 dependencies = [
  "autocfg",
  "chrono",
@@ -295,7 +295,7 @@ dependencies = [
 [[package]]
 name = "bee-crypto"
 version = "0.2.1-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#aba384b293a350be2ca6cb783b37cf4189254fc6"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#9a6de1fd7d1cdf0a23c45b195647e0dbba8182fb"
 dependencies = [
  "bee-ternary 0.4.2-alpha (git+https://github.com/iotaledger/bee.git?branch=dev)",
  "byteorder",
@@ -318,7 +318,7 @@ dependencies = [
 [[package]]
 name = "bee-ledger"
 version = "0.4.0"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#aba384b293a350be2ca6cb783b37cf4189254fc6"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#9a6de1fd7d1cdf0a23c45b195647e0dbba8182fb"
 dependencies = [
  "bee-common 0.4.1 (git+https://github.com/iotaledger/bee.git?branch=dev)",
  "bee-message 0.1.5 (git+https://github.com/iotaledger/bee.git?branch=dev)",
@@ -346,7 +346,7 @@ dependencies = [
 [[package]]
 name = "bee-message"
 version = "0.1.5"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#aba384b293a350be2ca6cb783b37cf4189254fc6"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#9a6de1fd7d1cdf0a23c45b195647e0dbba8182fb"
 dependencies = [
  "bech32 0.8.1",
  "bee-common 0.4.1 (git+https://github.com/iotaledger/bee.git?branch=dev)",
@@ -372,7 +372,7 @@ dependencies = [
 [[package]]
 name = "bee-network"
 version = "0.2.1"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#aba384b293a350be2ca6cb783b37cf4189254fc6"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#9a6de1fd7d1cdf0a23c45b195647e0dbba8182fb"
 dependencies = [
  "async-trait",
  "bee-runtime",
@@ -404,7 +404,7 @@ dependencies = [
 [[package]]
 name = "bee-pow"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#aba384b293a350be2ca6cb783b37cf4189254fc6"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#9a6de1fd7d1cdf0a23c45b195647e0dbba8182fb"
 dependencies = [
  "bee-crypto 0.2.1-alpha (git+https://github.com/iotaledger/bee.git?branch=dev)",
  "bee-ternary 0.4.2-alpha (git+https://github.com/iotaledger/bee.git?branch=dev)",
@@ -466,7 +466,7 @@ dependencies = [
 [[package]]
 name = "bee-runtime"
 version = "0.1.1-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#aba384b293a350be2ca6cb783b37cf4189254fc6"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#9a6de1fd7d1cdf0a23c45b195647e0dbba8182fb"
 dependencies = [
  "async-trait",
  "bee-storage",
@@ -478,7 +478,7 @@ dependencies = [
 [[package]]
 name = "bee-storage"
 version = "0.9.0"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#aba384b293a350be2ca6cb783b37cf4189254fc6"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#9a6de1fd7d1cdf0a23c45b195647e0dbba8182fb"
 dependencies = [
  "bee-common 0.4.1 (git+https://github.com/iotaledger/bee.git?branch=dev)",
  "serde 1.0.126",
@@ -499,7 +499,7 @@ dependencies = [
 [[package]]
 name = "bee-ternary"
 version = "0.4.2-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#aba384b293a350be2ca6cb783b37cf4189254fc6"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#9a6de1fd7d1cdf0a23c45b195647e0dbba8182fb"
 dependencies = [
  "autocfg",
  "num-traits 0.2.14",
@@ -712,9 +712,9 @@ dependencies = [
 
 [[package]]
 name = "chacha20poly1305"
-version = "0.8.0"
+version = "0.8.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1580317203210c517b6d44794abfbe600698276db18127e37ad3e69bf5e848e5"
+checksum = "175a11316f33592cf2b71416ee65283730b5b7849813c4891d02a12906ed9acc"
 dependencies = [
  "aead",
  "chacha20",
@@ -1047,9 +1047,9 @@ dependencies = [
 
 [[package]]
 name = "crypto-mac"
-version = "0.11.0"
+version = "0.11.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "25fab6889090c8133f3deb8f73ba3c65a7f456f66436fc012a1b1e272b1e103e"
+checksum = "b1d1a86f49236c215f271d40892d5fc950490551400b02ef360692c29815c714"
 dependencies = [
  "generic-array 0.14.4",
  "subtle 2.4.1",
@@ -1085,9 +1085,9 @@ dependencies = [
 
 [[package]]
 name = "ctr"
-version = "0.7.0"
+version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a232f92a03f37dd7d7dd2adc67166c77e9cd88de5b019b9a9eecfaeaf7bfd481"
+checksum = "049bb91fb4aaf0e3c7efa6cd5ef877dbbbd15b39dad06d9948de4ec8a75761ea"
 dependencies = [
  "cipher",
 ]
@@ -1493,9 +1493,9 @@ dependencies = [
 
 [[package]]
 name = "ghash"
-version = "0.4.2"
+version = "0.4.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7bbd60caa311237d508927dbba7594b483db3ef05faa55172fcf89b1bcda7853"
+checksum = "b442c439366184de619215247d24e908912b175e824a530253845ac4c251a5c1"
 dependencies = [
  "opaque-debug 0.3.0",
  "polyval",
@@ -1618,7 +1618,7 @@ version = "0.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2a2a2320eb7ec0ebe8da8f744d7812d9fc4cb4d09344ac01898dbcb6a20ae69b"
 dependencies = [
- "crypto-mac 0.11.0",
+ "crypto-mac 0.11.1",
  "digest 0.9.0",
 ]
 
@@ -1862,7 +1862,7 @@ dependencies = [
 [[package]]
 name = "iota-client"
 version = "1.0.1"
-source = "git+https://github.com/iotaledger/iota.rs?branch=dev#b0eb2b3ff6388188cd580cf765dc0b8963eb7dcd"
+source = "git+https://github.com/iotaledger/iota.rs?branch=dev#9e71e53ac7a2a6fc122bf560618f4b969203572d"
 dependencies = [
  "async-trait",
  "bee-common 0.4.1 (git+https://github.com/iotaledger/bee.git?branch=dev)",
@@ -2041,8 +2041,8 @@ dependencies = [
 
 [[package]]
 name = "iota-wallet"
-version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=ledger/display-change-address-and-PreparedTransactionData#ecceddce200b3788972da42e5e0c4b9d2d5afc69"
+version = "0.2.0"
+source = "git+https://github.com/iotaledger/wallet.rs?branch=firefly-testing#b1c38814ce58f0e658318c3c4f0e11295c01eb1c"
 dependencies = [
  "async-trait",
  "backtrace",
@@ -2564,9 +2564,9 @@ dependencies = [
 
 [[package]]
 name = "libsecp256k1-core"
-version = "0.2.1"
+version = "0.2.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4ee11012b293ea30093c129173cac4335513064094619f4639a25b310fd33c11"
+checksum = "d0f6ab710cec28cef759c5f18671a27dae2a5f952cdaaee1d8e2908cb2478a80"
 dependencies = [
  "crunchy",
  "digest 0.9.0",
@@ -2575,18 +2575,18 @@ dependencies = [
 
 [[package]]
 name = "libsecp256k1-gen-ecmult"
-version = "0.2.0"
+version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "32239626ffbb6a095b83b37a02ceb3672b2443a87a000a884fc3c4d16925c9c0"
+checksum = "ccab96b584d38fac86a83f07e659f0deafd0253dc096dab5a36d53efe653c5c3"
 dependencies = [
  "libsecp256k1-core",
 ]
 
 [[package]]
 name = "libsecp256k1-gen-genmult"
-version = "0.2.0"
+version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "76acb433e21d10f5f9892b1962c2856c58c7f39a9e4bd68ac82b9436a0ffd5b9"
+checksum = "67abfe149395e3aa1c48a2beb32b068e2334402df8181f818d3aee2b304c4f5d"
 dependencies = [
  "libsecp256k1-core",
 ]
@@ -3107,7 +3107,7 @@ version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d95f5254224e617595d2cc3cc73ff0a5eaf2637519e25f03388154e9378b6ffa"
 dependencies = [
- "crypto-mac 0.11.0",
+ "crypto-mac 0.11.1",
 ]
 
 [[package]]
@@ -3245,9 +3245,9 @@ checksum = "bb20dcc30536a1508e75d47dd0e399bb2fe7354dcf35cda9127f2bf1ed92e30e"
 
 [[package]]
 name = "poly1305"
-version = "0.7.0"
+version = "0.7.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4fe800695325da85083cd23b56826fccb2e2dc29b218e7811a6f33bc93f414be"
+checksum = "9fcffab1f78ebbdf4b93b68c1ffebc24037eedf271edaca795732b24e5e4e349"
 dependencies = [
  "cpufeatures",
  "opaque-debug 0.3.0",
@@ -3256,9 +3256,9 @@ dependencies = [
 
 [[package]]
 name = "polyval"
-version = "0.5.1"
+version = "0.5.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e597450cbf209787f0e6de80bf3795c6b2356a380ee87837b545aded8dbc1823"
+checksum = "a6ba6a405ef63530d6cb12802014b22f9c5751bd17cdcddbe9e46d5c8ae83287"
 dependencies = [
  "cfg-if 1.0.0",
  "cpufeatures",
@@ -4348,9 +4348,9 @@ dependencies = [
 
 [[package]]
 name = "tinyvec"
-version = "1.2.0"
+version = "1.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5b5220f05bb7de7f3f53c7c065e1199b3172696fe2db9f9c4d8ad9b4ee74c342"
+checksum = "4ac2e1d4bd0f75279cfd5a076e0d578bbf02c22b7c39e766c437dd49b3ec43e0"
 dependencies = [
  "tinyvec_macros",
 ]
@@ -4363,9 +4363,9 @@ checksum = "cda74da7e1a664f795bb1f8a87ec406fb89a02522cf6e50620d016add6dbbf5c"
 
 [[package]]
 name = "tokio"
-version = "1.8.1"
+version = "1.8.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "98c8b05dc14c75ea83d63dd391100353789f5f24b8b3866542a5e85c8be8e985"
+checksum = "c2602b8af3767c285202012822834005f596c811042315fa7e9f5b12b2a43207"
 dependencies = [
  "autocfg",
  "bytes 1.0.1",
@@ -4600,9 +4600,9 @@ checksum = "8ccb82d61f80a663efe1f787a51b16b5a51e3314d6ac365b08639f52387b33f3"
 
 [[package]]
 name = "universal-hash"
-version = "0.4.0"
+version = "0.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8326b2c654932e3e4f9196e69d08fdf7cfd718e1dc6f66b347e6024a0c961402"
+checksum = "9f214e8f697e925001e66ec2c6e37a4ef93f0f78c2eed7814394e10c62025b05"
 dependencies = [
  "generic-array 0.14.4",
  "subtle 2.4.1",
@@ -4997,9 +4997,9 @@ dependencies = [
 
 [[package]]
 name = "zeroize"
-version = "1.4.0"
+version = "1.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "eeafe61337cb2c879d328b74aa6cd9d794592c82da6be559fdf11493f02a2d18"
+checksum = "4756f7db3f7b5574938c3eb1c117038b8e07f95ee6718c0efad4ac21508f1efd"
 dependencies = [
  "zeroize_derive",
 ]

@@ -2,7 +2,7 @@
     import { DashboardPane } from 'shared/components'
     import { clearSendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
-    import { promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { getLedgerDeviceStatus, notifyLedgerDeviceState, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { addProfileCurrencyPriceData, priceData } from 'shared/lib/marketData'
     import { isNewNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup } from 'shared/lib/popup'
@@ -237,6 +237,8 @@
         const _generate = () => {
             isGeneratingAddress = true
 
+            notifyLedgerDeviceState('error', true, true, false, false)
+
             api.getUnusedAddress(accountId, {
                 onSuccess(response) {
                     accounts.update((accounts) =>
@@ -293,7 +295,18 @@
                 },
             })
         } else {
-            promptUserToConnectLedger(false, () => _generate())
+            const _cancel = () => {
+                isGeneratingAddress = false
+
+                notifyLedgerDeviceState('error', true)
+            }
+
+            getLedgerDeviceStatus(
+                false,
+                _generate,
+                _cancel,
+                _cancel
+            )
         }
     }
 

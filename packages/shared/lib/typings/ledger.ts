@@ -24,3 +24,14 @@ export enum LedgerAppName {
     IOTA = 'IOTA',
     IOTALegacy = 'IOTA Legacy'
 }
+
+export enum LegacyLedgerErrorName {
+    DisconnectedDeviceDuringOperation = 'DisconnectedDeviceDuringOperation',
+    DisconnectedDevice = 'DisconnectedDevice',
+    TransportStatusError = 'TransportStatusError'
+}
+
+export enum LegacyLedgerErrorCode {
+    DeniedByTheUser = 27013, // 0x6985
+    TimeoutExceeded = 25601 // 0x6401
+}

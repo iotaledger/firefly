@@ -558,13 +558,13 @@ class MigrationDataValidator extends Validator {
     isValid(response: MessageResponse): ValidationResponse {
         const payload = response.payload as MigrationData
 
-        if('number' !== typeof payload.lastCheckedAddressIndex) {
+        if ('number' !== typeof payload.lastCheckedAddressIndex) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of address index'
             })
         }
-        
+
         return super.isValid(response);
     }
 }
@@ -789,6 +789,7 @@ export default class ValidatorService {
             [ResponseTypes.StoredMnemonic]: this.createBaseValidator().getFirst(),
             [ResponseTypes.VerifiedMnemonic]: this.createBaseValidator().getFirst(),
             [ResponseTypes.SyncedAccounts]: this.createBaseValidator().add(new SyncedAccountListValidator()).getFirst(),
+            [ResponseTypes.Ok]: this.createBaseValidator().getFirst(),
             [ResponseTypes.SentTransfer]: this.createBaseValidator().add(new MessageValidator()).getFirst(),
             [ResponseTypes.StoragePasswordSet]: this.createBaseValidator().getFirst(),
             [ResponseTypes.StrongholdStatus]: this.createBaseValidator().add(new StrongholdStatusValidator()).getFirst(),

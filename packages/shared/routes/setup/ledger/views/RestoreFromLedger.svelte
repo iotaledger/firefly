@@ -41,7 +41,7 @@
 
                                     console.error(error)
 
-                                    notifyLedgerDeviceState('error', true, true)
+                                    notifyLedgerDeviceState('error', true, true, false, false, error)
                                 },
                             }
                         )

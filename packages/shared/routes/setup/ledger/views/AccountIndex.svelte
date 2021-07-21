@@ -1,10 +1,7 @@
 <script lang="typescript">
     import { Button, Illustration, Number, OnboardingLayout, Spinner, Text, Toggle } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
-    import {
-        notifyLedgerDeviceState,
-        promptUserToConnectLedger,
-    } from 'shared/lib/ledger'
+    import { notifyLedgerDeviceState, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { ADDRESS_SECURITY_LEVEL, getLedgerMigrationData, hardwareIndexes } from 'shared/lib/migration'
     import { createEventDispatcher } from 'svelte'
 
@@ -67,12 +64,10 @@
 
                     console.error(error)
 
-                    notifyLedgerDeviceState('error', true, true, false, true)
+                    notifyLedgerDeviceState('error', true, true, false, true, error)
                 })
         }
-        const _onCancel = () => {
-            busy = false
-        }
+        const _onCancel = () => (busy = false)
         promptUserToConnectLedger(true, _onConnected, _onCancel)
     }
 

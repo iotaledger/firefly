@@ -226,7 +226,7 @@
          */
         switch (state) {
             default:
-                notifyLedgerDeviceState('error', false, false, ignoreNotDetected)
+                notifyLedgerDeviceState(notificationType, false, false, ignoreNotDetected)
 
                 break
 

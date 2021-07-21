@@ -9,7 +9,7 @@
         formatCurrency,
     } from 'shared/lib/currency'
     import { Electron } from 'shared/lib/electron'
-    import { promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { getLegacyErrorMessage, promptUserToConnectLedger } from 'shared/lib/ledger'
     import {
         ADDRESS_SECURITY_LEVEL,
         confirmedBundles,
@@ -55,6 +55,7 @@
     let singleMigrationBundleHash
 
     let legacyLedger = $walletSetupType === SetupType.TrinityLedger
+    let closeTransport = () => {}
 
     confirmedBundles.subscribe((newConfirmedBundles) => {
         newConfirmedBundles.forEach((bundle) => {
@@ -75,6 +76,7 @@
                     Electron.ledger
                         .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
                         .then(({ iota, callback }) => {
+                            closeTransport = callback
                             return createLedgerMigrationBundle(0, iota.prepareTransfers, callback)
                         })
                         .then(({ trytes, bundleHash }) => {
@@ -93,6 +95,11 @@
                         .catch((error) => {
                             loading = false
                             closePopup() // close transaction popup
+                            closeTransport()
+                            showAppNotification({
+                                type: 'error',
+                                message: locale(getLegacyErrorMessage(error)),
+                            })
                             console.error(error)
                         })
                 }

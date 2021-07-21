@@ -2,7 +2,14 @@ import { closePopup, openPopup, popupState } from 'shared/lib/popup'
 import { api } from 'shared/lib/wallet'
 import { get, writable } from 'svelte/store'
 import type { Event } from './typings/events'
-import { LedgerApp, LedgerAppName, LedgerDeviceState, LedgerStatus } from './typings/ledger'
+import {
+    LedgerApp,
+    LedgerAppName,
+    LedgerDeviceState,
+    LedgerStatus,
+    LegacyLedgerErrorCode,
+    LegacyLedgerErrorName
+} from './typings/ledger'
 import { isNewNotification, showAppNotification } from './notifications'
 import { localize } from './i18n'
 import type { NotificationType } from './typings/notification'
@@ -108,20 +115,25 @@ export function notifyLedgerDeviceState(
     allowMultiple: boolean = true,
     checkDeviceStatus: boolean = false,
     ignoreNotDetected: boolean = false,
-    legacy: boolean = false
+    legacy: boolean = false,
+    error: any = null
 ): void {
     const _notify = () => {
         const state = get(ledgerDeviceState)
 
         const allowedToNotify = allowMultiple ? true : isNewNotification(notificationType)
         const canNotify = allowedToNotify && (ignoreNotDetected ? state !== LedgerDeviceState.NotDetected : true)
-        const shouldNotify = (!legacy && state !== LedgerDeviceState.Connected) ||
-                              (legacy && state !== LedgerDeviceState.LegacyConnected)
+
+        const isConnected =  (!legacy && state === LedgerDeviceState.Connected)
+        const isLegacyConnected = (legacy && state === LedgerDeviceState.LegacyConnected)
+        const shouldNotify = (!isConnected && !isLegacyConnected) || error
 
         if(canNotify && shouldNotify) {
+            const message = error ? isConnected ? localize(error?.error) : localize(getLegacyErrorMessage(error))
+                                  : localize(`error.ledger.${state}`)
             showAppNotification({
                 type: notificationType,
-                message: localize(`error.ledger.${state}`)
+                message: message
             })
         }
     }
@@ -176,4 +188,23 @@ export function stopPollingLedgerStatus(): void {
         intervalTimer = null
         polling = false
     }
+}
+
+export function getLegacyErrorMessage(error: any): string {
+    let errorMessage = 'error.global.generic'
+    switch (error?.name) {
+        case LegacyLedgerErrorName.TransportStatusError:
+            if (error?.statusCode === LegacyLedgerErrorCode.DeniedByTheUser) {
+                errorMessage = 'error.send.cancelled'
+                break
+            } else if (error?.statusCode === LegacyLedgerErrorCode.TimeoutExceeded) {
+                errorMessage = 'error.ledger.timeout'
+            }
+            break
+        case LegacyLedgerErrorName.DisconnectedDevice:
+        case LegacyLedgerErrorName.DisconnectedDeviceDuringOperation:
+            errorMessage = 'error.ledger.disconnected'
+            break
+    }
+    return errorMessage
 }

@@ -19,7 +19,7 @@
     let color
     let isCheckingLedger
     let ledgerSpinnerTimeout
-    let LEDGER_STATUS_POLL_INTERVAL = 5000
+    let LEDGER_STATUS_POLL_INTERVAL = 2000
 
     let hardwareDeviceColor = 'gray'
     $: {
@@ -29,13 +29,11 @@
                 hardwareDeviceColor = 'blue'
                 break
             case LedgerDeviceState.NotDetected:
-                hardwareDeviceColor = 'red'
-                break
             case LedgerDeviceState.AppNotOpen:
             case LedgerDeviceState.LegacyConnected:
             case LedgerDeviceState.Locked:
             case LedgerDeviceState.OtherConnected:
-                hardwareDeviceColor = 'gray'
+                hardwareDeviceColor = 'red'
                 break
         }
     }

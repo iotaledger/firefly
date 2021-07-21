@@ -178,6 +178,7 @@ export const api: {
     getStrongholdStatus(callbacks: { onSuccess: (response: Event<StrongholdStatus>) => void, onError: (err: ErrorEventPayload) => void })
     syncAccounts(addressIndex: number, gapLimit: number, accountDiscoveryThreshold: number, callbacks: { onSuccess: (response: Event<SyncedAccount[]>) => void, onError: (err: ErrorEventPayload) => void })
     syncAccount(accountId: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
+    startBackgroundSync(pollingInterval: Duration, automaticOutputConsolidation: boolean, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
     createAccount(account: AccountToCreate, callbacks: { onSuccess: (response: Event<Account>) => void, onError: (err: ErrorEventPayload) => void })
     send(accountId: string, transfer: {
         amount: number,
@@ -778,7 +779,7 @@ export const initialiseListeners = () => {
     /**
      * Event listener for Ledger receive address generation
      */
-     api.onLedgerAddressGeneration({
+    api.onLedgerAddressGeneration({
         onSuccess(response) {
             const { event } = response.payload
             openPopup({
