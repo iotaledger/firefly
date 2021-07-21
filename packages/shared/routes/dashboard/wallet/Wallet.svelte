@@ -295,18 +295,7 @@
                 },
             })
         } else {
-            const _cancel = () => {
-                isGeneratingAddress = false
-
-                notifyLedgerDeviceState('error', true)
-            }
-
-            getLedgerDeviceStatus(
-                false,
-                _generate,
-                _cancel,
-                _cancel
-            )
+            promptUserToConnectLedger(false, () => _generate())
         }
     }
 
