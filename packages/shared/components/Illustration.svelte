@@ -19,10 +19,6 @@
             lightmode: 'onboarding/ledger-install-new-app-desktop.svg',
             darkmode: 'onboarding/ledger-install-new-app-desktop.svg',
         },
-        'ledger-generate-address-desktop': {
-            lightmode: 'onboarding/ledger-generate-address-desktop.svg',
-            darkmode: 'onboarding/ledger-generate-address-desktop-darkmode.svg',
-        },
         'ledger-live-updated-desktop': {
             lightmode: 'onboarding/ledger-live-updated-desktop.svg',
             darkmode: 'onboarding/ledger-live-updated-desktop-darkmode.svg',
