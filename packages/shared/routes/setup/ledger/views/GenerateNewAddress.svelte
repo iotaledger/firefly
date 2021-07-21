@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { Button, Icon, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
     import {
-        formatToLedgerDisplay,
         ledgerSimulator,
         notifyLedgerDeviceState,
         promptUserToConnectLedger

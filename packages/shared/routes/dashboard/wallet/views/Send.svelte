@@ -3,8 +3,8 @@
     import { Address, Amount, Button, Dropdown, Icon, ProgressBar, Text } from 'shared/components'
     import { clearSendParams, sendParams } from 'shared/lib/app'
     import { parseCurrency } from 'shared/lib/currency'
-    import { ledgerDeviceState, notifyLedgerDeviceState } from 'shared/lib/ledger'
-    import { displayNotifications, isNewNotification, showAppNotification } from 'shared/lib/notifications'
+    import { ledgerDeviceState, notifyLedgerDeviceState, promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { displayNotifications, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
@@ -162,15 +162,6 @@
 
         const { data, type } = state
         switch (type) {
-            default:
-                if (ledgerAwaitingConfirmation) {
-                    ledgerAwaitingConfirmation = false
-
-                    closePopup()
-                }
-
-                break
-
             case TransferProgressEventType.GeneratingRemainderDepositAddress:
                 transactionEventData = data
 
@@ -201,6 +192,15 @@
                 if (get(popupState).active) closePopup()
 
                 transactionEventData = data
+
+                break
+
+            default:
+                if (ledgerAwaitingConfirmation) {
+                    ledgerAwaitingConfirmation = false
+
+                    closePopup()
+                }
 
                 break
         }
@@ -368,15 +368,8 @@
          * it is important to wrap the send function in the Ledger connection
          * prompt function (only for non-software profiles).
          */
-        if ($isSoftwareProfile) {
-            onSuccess()
-        } else {
-            if (_ledgerDeviceState === LedgerDeviceState.Connected) {
-                onSuccess()
-            } else {
-                checkLedgerDeviceState(_ledgerDeviceState)
-            }
-        }
+        if ($isSoftwareProfile) onSuccess()
+        else promptUserToConnectLedger(false, onSuccess)
     }
 
     const handleBackClick = () => {

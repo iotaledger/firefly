@@ -22,7 +22,8 @@ export interface Input {
 export interface MigrationData {
     lastCheckedAddressIndex: number;
     balance: number;
-    inputs: Input[]
+    inputs: Input[];
+    spentAddresses?: boolean;
 }
 
 export interface MigrationBundle {
