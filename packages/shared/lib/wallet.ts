@@ -1762,8 +1762,5 @@ export const getSyncAccountOptions = (activeProfile?: Profile): SyncAccountOptio
         activeProfile?.gapLimit ?? isSoftwareProfile ? (isNewProfile ? 10 : 50) : (isNewProfile ? 1 : 10)
     const accountDiscoveryThreshold = isNewProfile ? 1 : 0
 
-    return {
-        gapLimit,
-        accountDiscoveryThreshold
-    }
+    return { gapLimit, accountDiscoveryThreshold }
 }
