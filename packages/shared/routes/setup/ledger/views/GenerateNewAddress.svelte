@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Button, Icon, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
     import {
+        formatToLedgerDisplay,
         ledgerSimulator,
         notifyLedgerDeviceState,
         promptUserToConnectLedger
@@ -120,17 +121,19 @@
             {:else if !confirmed}
                 <Text type="h2" classes="mb-5">{locale('views.generateNewLedgerAddress.confirmTitle')}</Text>
                 <Text type="p" secondary classes="mb-10">{locale('views.generateNewLedgerAddress.confirmBody')}</Text>
-                <div class="rounded-lg bg-gray-50 dark:bg-gray-700 p-4 text-center">
-                    <Text type="pre">{newAddress}</Text>
+                <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-5 text-center">
+                    <Text type="h5" highlighted classes="mb-2">{locale('general.newAddress')}</Text>
+                    <Text type="pre">{formatToLedgerDisplay(newAddress)}</Text>
                 </div>
             {:else}
                 <Text type="h2" classes="mb-5">{locale('views.generateNewLedgerAddress.confirmedTitle')}</Text>
                 <Text type="p" secondary classes="mb-12">{locale('views.generateNewLedgerAddress.confirmedBody')}</Text>
-                <div class="flex flex-col items-center bg-gray-50 dark:bg-gray-700 rounded-2xl p-5 text-center">
-                    <div class="bg-green-100 rounded-2xl relative -mt-10 mb-5">
+                <div class="flex flex-col items-center bg-gray-50 dark:bg-gray-800 rounded-lg p-5 text-center">
+                    <div class="bg-green-100 rounded-2xl relative -mt-10 mb-4">
                         <Icon icon="success-check" classes="text-white" />
                     </div>
-                    <Text type="pre">{newAddress}</Text>
+                    <Text type="h5" highlighted classes="mb-2">{locale('general.newAddress')}</Text>
+                    <Text type="pre">{formatToLedgerDisplay(newAddress)}</Text>
                 </div>
             {/if}
         </div>

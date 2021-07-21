@@ -1,5 +1,6 @@
 <script lang="ts">
     import { Illustration, Text } from 'shared/components'
+    import { formatToLedgerDisplay } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { get } from 'svelte/store'
     import { closePopup, popupState } from 'shared/lib/popup'
@@ -30,9 +31,9 @@
 <div class="illustration w-full h-1/2 bg-white dark:bg-gray-900 flex justify-center content-center">
     <Illustration illustration="ledger-confirm-address-desktop" />
 </div>
-<div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-4">
+<div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-5 text-center">
     <Text type="h5" highlighted classes="mb-2">
         {locale('general.receiveAddress')}
     </Text>
-    <Text type="pre">{address}</Text>
+    <Text type="pre">{formatToLedgerDisplay(address)}</Text>
 </div>

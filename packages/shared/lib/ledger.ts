@@ -150,6 +150,10 @@ export function notifyLedgerDeviceState(
     }
 }
 
+export function formatToLedgerDisplay(s: string): string {
+    return s.match(/.{1,16}/g).join('\n')
+}
+
 export function pollLedgerDeviceStatus(
     legacy: boolean = false,
     pollInterval: number = 1000,
