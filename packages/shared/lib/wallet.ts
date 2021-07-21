@@ -785,6 +785,7 @@ export const initialiseListeners = () => {
             openPopup({
                 type: 'ledgerAddress',
                 hideClose: true,
+                preventClose: true,
                 props: {
                     address: event.address
                 }

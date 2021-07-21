@@ -15,7 +15,7 @@
             message: locale('error.ledger.generateAddress')
         })
 
-        if (get(popupState).active) closePopup()
+        if (get(popupState).active) closePopup(true)
     }
 
     onMount(() => {

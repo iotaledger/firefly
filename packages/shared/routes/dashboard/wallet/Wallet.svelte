@@ -254,19 +254,19 @@
                             return account
                         })
                     )
-                    closePopup()
+                    closePopup(true)
 
                     isGeneratingAddress = false
                     hasGeneratedALedgerReceiveAddress.set(true)
                 },
                 onError(err) {
-                    closePopup()
+                    closePopup(true)
 
                     isGeneratingAddress = false
 
                     const isClientError = err && err.type === 'ClientError'
                     const shouldHideErrorNotification = isClientError && err.error === 'error.node.chrysalisNodeInactive'
-                    if (!shouldHideErrorNotification && isNewNotification('error')) {
+                    if (!shouldHideErrorNotification) {
                         /**
                          * NOTE: To ensure a clear error message (for Ledger users),
                          * we need to update the locale path.
