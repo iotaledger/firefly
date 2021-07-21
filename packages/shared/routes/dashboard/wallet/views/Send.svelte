@@ -4,7 +4,7 @@
     import { clearSendParams, sendParams } from 'shared/lib/app'
     import { parseCurrency } from 'shared/lib/currency'
     import { ledgerDeviceState, notifyLedgerDeviceState, promptUserToConnectLedger } from 'shared/lib/ledger'
-    import { displayNotifications, showAppNotification } from 'shared/lib/notifications'
+    import { displayNotifications, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
@@ -54,6 +54,7 @@
 
     let transactionEventData: TransferProgressEventData = null
     let transactionTimeoutId = null
+    let transactionNotificationId = null
 
     // This looks odd but sets a reactive dependency on amount, so when it changes the error will clear
     $: amount, (amountError = '')
@@ -151,7 +152,7 @@
             transferState.set(null)
 
             clearSendParams(selectedSendType === SEND_TYPE.INTERNAL)
-            closePopup()
+            closePopup(true)
 
             if (get(displayNotifications).length === 0)
                 showAppNotification({
@@ -176,6 +177,7 @@
                 openPopup({
                     type: 'ledgerTransaction',
                     hideClose: true,
+                    preventClose: true,
                     props: {
                         onCancel: _onCancel,
                         ...handleTransactionEventData(transactionEventData),
@@ -189,7 +191,7 @@
                  * CAUTION: The Ledger confirmation doesn't always trigger
                  * the popup to close, so it is programmatically enforced here.
                  */
-                if (get(popupState).active) closePopup()
+                if (get(popupState).active) closePopup(true)
 
                 transactionEventData = data
 
@@ -199,7 +201,7 @@
                 if (ledgerAwaitingConfirmation) {
                     ledgerAwaitingConfirmation = false
 
-                    closePopup()
+                    closePopup(true)
                 }
 
                 break
@@ -209,7 +211,7 @@
     $: if (get(isLedgerProfile)) handleTransferState($transferState)
 
     $: if (!$isTransferring && ledgerAwaitingConfirmation) {
-        closePopup()
+        closePopup(true)
     }
 
     const checkLedgerDeviceState = (
@@ -225,12 +227,13 @@
          * accomodates for if we want to ignore the NotDetected state.
          */
         switch (state) {
-            default:
-                notifyLedgerDeviceState(notificationType, false, false, ignoreNotDetected)
-
-                break
-
             case LedgerDeviceState.Connected:
+                if(transactionNotificationId) {
+                    removeDisplayNotification(transactionNotificationId)
+
+                    transactionNotificationId = null
+                }
+
                 break
 
             case LedgerDeviceState.Locked:
@@ -240,6 +243,13 @@
                     () => checkLedgerDeviceState(get(ledgerDeviceState), notificationType, ignoreNotDetected),
                     10000
                 )
+
+                break
+
+            default:
+                transactionNotificationId = notifyLedgerDeviceState(notificationType, false, false, ignoreNotDetected)
+
+                break
         }
     }
 

@@ -117,7 +117,9 @@ export function notifyLedgerDeviceState(
     ignoreNotDetected: boolean = false,
     legacy: boolean = false,
     error: any = null
-): void {
+): string {
+    let notificationId
+
     const _notify = () => {
         const state = get(ledgerDeviceState)
 
@@ -128,17 +130,17 @@ export function notifyLedgerDeviceState(
         const isLegacyConnected = (legacy && state === LedgerDeviceState.LegacyConnected)
         const shouldNotify = (!isConnected && !isLegacyConnected) || error
 
-        if(canNotify && shouldNotify) {
+        if (canNotify && shouldNotify) {
             const message = error ? isConnected ? localize(error?.error) : localize(getLegacyErrorMessage(error))
                                   : localize(`error.ledger.${state}`)
-            showAppNotification({
+            notificationId = showAppNotification({
                 type: notificationType,
                 message: message
             })
         }
     }
 
-    if(checkDeviceStatus) {
+    if (checkDeviceStatus) {
         getLedgerDeviceStatus(
             false,
             () => {},
@@ -148,6 +150,8 @@ export function notifyLedgerDeviceState(
     } else {
         _notify()
     }
+
+    return notificationId
 }
 
 export function pollLedgerDeviceStatus(

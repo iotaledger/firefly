@@ -27,7 +27,7 @@
 
         onCancel()
 
-        if (get(popupState).active) closePopup()
+        if (get(popupState).active) closePopup(true)
     }
 
     const getPopupLocaleData = (prop: string): string => {
