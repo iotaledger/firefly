@@ -33,7 +33,6 @@ use std::convert::TryFrom;
 use std::path::{Path, PathBuf};
 use std::sync::{mpsc::Sender, Arc, Mutex};
 use std::time::Duration;
-const POLLING_INTERVAL_MS: u64 = 30_000;
 
 struct WalletActorData {
     listeners: Vec<(EventId, EventType)>,
@@ -117,7 +116,7 @@ pub async fn init<A: Into<String>>(
             None,
         )
         .expect("safe to unwrap, the storage password is None")
-        .with_polling_interval(Duration::from_millis(POLLING_INTERVAL_MS))
+        .with_skip_polling()
         .with_sync_spent_outputs()
         .finish()
         .await

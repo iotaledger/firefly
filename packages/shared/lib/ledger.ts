@@ -2,7 +2,7 @@ import { closePopup, openPopup, popupState } from 'shared/lib/popup'
 import { api } from 'shared/lib/wallet'
 import { get, writable } from 'svelte/store'
 import type { Event } from './typings/events'
-import { LedgerApp, LedgerAppName, LedgerDeviceState, LedgerStatus } from './typings/ledger'
+import { LedgerApp, LedgerAppName, LedgerDeviceState, LedgerStatus, LegacyLedgerErrorCode, LegacyLedgerErrorName } from './typings/ledger'
 
 const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
 
@@ -138,4 +138,23 @@ export function stopPollingLedgerStatus(): void {
         intervalTimer = null
         polling = false
     }
+}
+
+export function getLegacyErrorMessage(error: any): string {
+    let errorMessage = 'error.global.generic'
+    switch (error?.name) {
+        case LegacyLedgerErrorName.TransportStatusError:
+            if (error?.statusCode === LegacyLedgerErrorCode.DeniedByTheUser) {
+                errorMessage = 'error.send.cancelled'
+                break
+            } else if (error?.statusCode === LegacyLedgerErrorCode.TimeoutExceeded) {
+                errorMessage = 'error.ledger.timeout'
+            }
+            break
+        case LegacyLedgerErrorName.DisconnectedDevice:
+        case LegacyLedgerErrorName.DisconnectedDeviceDuringOperation:
+            errorMessage = 'error.ledger.disconnected'
+            break
+    }
+    return errorMessage
 }

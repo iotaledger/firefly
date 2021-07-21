@@ -29,7 +29,8 @@
     <OnboardingLayout onBackClick={handleBackClick} {locale} showLedgerVideoButton>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-5">{locale('views.ledgerInstallationGuide.title')}</Text>
-            <Text type="p" secondary classes="mb-5">{locale('views.ledgerInstallationGuide.description')}</Text>
+            <Text type="p" secondary classes="mb-5">{locale('views.ledgerInstallationGuide.body1')}</Text>
+            <Text type="p" secondary classes="mb-5">{locale('views.ledgerInstallationGuide.body2')}</Text>
             <div class="flex flex-row flex-nowrap items-center justify-center space-x-4 text-center mt-28">
                 <div class="flex flex-col flex-wrap space-y-2">
                     <div class="bg-blue-400 rounded-2xl w-20 h-20 flex justify-center items-center">
