@@ -107,10 +107,9 @@
             lightmode: 'ledger-migrate-desktop.json',
             darkmode: 'ledger-migrate-desktop-darkmode.json',
         },
-        // TODO: missing darkmode
         'ledger-bg-desktop': {
             lightmode: 'ledger-bg-desktop.json',
-            darkmode: 'ledger-bg-desktop.json',
+            darkmode: 'ledger-bg-desktop-darkmode.json',
         },
         'ledger-switch-app-desktop': {
             lightmode: 'ledger-switch-app-desktop.json',
@@ -128,7 +127,6 @@
             lightmode: 'ledger-confirm-address-desktop.json',
             darkmode: 'ledger-confirm-address-desktop.json',
         },
-        // TODO: remove bg
         'ledger-connected-desktop': {
             lightmode: 'ledger-connected-desktop.json',
             darkmode: 'ledger-connected-desktop.json',
