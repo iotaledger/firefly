@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Animation, Box, Button, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
+    import { Animation, Box, Button, OnboardingLayout, Spinner, Text } from 'shared/components'
     import {
         AvailableExchangeRates,
         convertToFiat,
@@ -55,6 +55,8 @@
     let singleMigrationBundleHash
 
     let legacyLedger = $walletSetupType === SetupType.TrinityLedger
+    $: animation = legacyLedger ? 'ledger-migrate-desktop' : 'migrate-desktop'
+
     let closeTransport = () => {}
 
     confirmedBundles.subscribe((newConfirmedBundles) => {
@@ -172,11 +174,7 @@
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            {#if legacyLedger}
-                <Illustration width="100%" illustration="ledger-migrate-desktop" />
-            {:else}
-                <Animation animation="migrate-desktop" />
-            {/if}
+            <Animation {animation} />
         </div>
     </OnboardingLayout>
 {/if}

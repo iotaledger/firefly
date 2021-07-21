@@ -1,11 +1,6 @@
 <script>
-    import { Button, Icon, Illustration, OnboardingLayout, Text } from 'shared/components'
-    import {
-        ledgerDeviceState,
-        notifyLedgerDeviceState,
-        promptUserToConnectLedger
-    } from 'shared/lib/ledger'
-    import { LedgerDeviceState } from 'shared/lib/typings/ledger'
+    import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
+    import { promptUserToConnectLedger, notifyLedgerDeviceState } from 'shared/lib/ledger'
     import { createEventDispatcher } from 'svelte'
 
     export let locale
@@ -63,7 +58,11 @@
             <Button classes="w-full" disabled={busy} onClick={handleContinueClick}>{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center items-center bg-gray-50 dark:bg-gray-900">
-            <Illustration width="100%" illustration="ledger-switch-app-desktop" />
+            <Animation
+                width="100%"
+                animation="ledger-bg-desktop"
+                classes="absolute transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+            <Animation width="100%" animation="ledger-switch-app-desktop" />
         </div>
     </OnboardingLayout>
 {/if}
