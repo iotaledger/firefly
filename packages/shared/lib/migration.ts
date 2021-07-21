@@ -122,7 +122,7 @@ export const migration = writable<MigrationState>({
     data: writable<MigrationData>({
         lastCheckedAddressIndex: 0,
         balance: 0,
-        inputs: []
+        inputs: [],
     }),
     seed: writable<string>(null),
     bundles: writable<Bundle[]>([])
@@ -362,7 +362,7 @@ export const getLedgerMigrationData = (getAddressFn: (index: number) => Promise<
             }
 
             prepareBundles()
-            return get(data).inputs.length > 0;
+            return response.payload.spentAddresses === true || response.payload.inputs.length > 0 || response.payload.balance > 0;
         });
     }
 
@@ -370,6 +370,7 @@ export const getLedgerMigrationData = (getAddressFn: (index: number) => Promise<
         if (shouldGenerateMore) {
             return _process();
         }
+
         return Promise.resolve(true);
     }).then(() => {
         callback()

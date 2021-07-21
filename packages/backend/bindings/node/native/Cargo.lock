@@ -700,9 +700,9 @@ checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 
 [[package]]
 name = "chacha20"
-version = "0.7.1"
+version = "0.7.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fee7ad89dc1128635074c268ee661f90c3f7e83d9fd12910608c36b47d6c3412"
+checksum = "ea8756167ea0aca10e066cdbe7813bd71d2f24e69b0bc7b50509590cef2ce0b9"
 dependencies = [
  "cfg-if 1.0.0",
  "cipher",
@@ -1791,7 +1791,7 @@ dependencies = [
 [[package]]
 name = "iota-bundle-miner"
 version = "0.1.0-alpha.0"
-source = "git+https://github.com/iotaledger/iota.rs?rev=c9509f8c911ef0dcca70dda83247e2dcbd85aa81#c9509f8c911ef0dcca70dda83247e2dcbd85aa81"
+source = "git+https://github.com/iotaledger/iota.rs?rev=d0692bc5db07b13b8448ba797e1c61dd93413fea#d0692bc5db07b13b8448ba797e1c61dd93413fea"
 dependencies = [
  "bee-ternary 0.4.2-alpha (registry+https://github.com/rust-lang/crates.io-index)",
  "bee-transaction",
@@ -1834,7 +1834,7 @@ dependencies = [
 [[package]]
 name = "iota-client"
 version = "0.5.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?rev=c9509f8c911ef0dcca70dda83247e2dcbd85aa81#c9509f8c911ef0dcca70dda83247e2dcbd85aa81"
+source = "git+https://github.com/iotaledger/iota.rs?rev=d0692bc5db07b13b8448ba797e1c61dd93413fea#d0692bc5db07b13b8448ba797e1c61dd93413fea"
 dependencies = [
  "bee-common 0.4.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "bee-common-derive",
@@ -1862,7 +1862,7 @@ dependencies = [
 [[package]]
 name = "iota-client"
 version = "1.0.1"
-source = "git+https://github.com/iotaledger/iota.rs?branch=dev#9e71e53ac7a2a6fc122bf560618f4b969203572d"
+source = "git+https://github.com/iotaledger/iota.rs?branch=dev#40355f430f706c000b3b03f39ba09515fa69d6ee"
 dependencies = [
  "async-trait",
  "bee-common 0.4.1 (git+https://github.com/iotaledger/bee.git?branch=dev)",
@@ -1919,12 +1919,12 @@ dependencies = [
 [[package]]
 name = "iota-core"
 version = "0.2.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?rev=c9509f8c911ef0dcca70dda83247e2dcbd85aa81#c9509f8c911ef0dcca70dda83247e2dcbd85aa81"
+source = "git+https://github.com/iotaledger/iota.rs?rev=d0692bc5db07b13b8448ba797e1c61dd93413fea#d0692bc5db07b13b8448ba797e1c61dd93413fea"
 dependencies = [
  "bee-ternary 0.4.2-alpha (registry+https://github.com/rust-lang/crates.io-index)",
  "bee-transaction",
  "iota-bundle-miner",
- "iota-client 0.5.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?rev=c9509f8c911ef0dcca70dda83247e2dcbd85aa81)",
+ "iota-client 0.5.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?rev=d0692bc5db07b13b8448ba797e1c61dd93413fea)",
  "iota-crypto 0.5.1",
 ]
 
@@ -2042,7 +2042,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.2.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=firefly-testing#b1c38814ce58f0e658318c3c4f0e11295c01eb1c"
+source = "git+https://github.com/iotaledger/wallet.rs?branch=firefly-testing#fdafe73f2a2d5e657639a5e462ec2d0d6dcaacd2"
 dependencies = [
  "async-trait",
  "backtrace",
