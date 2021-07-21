@@ -27,7 +27,7 @@
 
         onCancel()
 
-        if (get(popupState).active) closePopup()
+        if (get(popupState).active) closePopup(true)
     }
 
     const getPopupLocaleData = (prop: string): string => {
@@ -65,20 +65,22 @@
 </div>
 
 {#if shouldDisplaySendTo}
-    <div class={`rounded-lg bg-gray-50 dark:bg-gray-800 p-4 ${shouldDisplayRemainderAddress ? 'mb-6' : ''}`}>
+    <div class={`rounded-lg bg-gray-50 dark:bg-gray-800 p-5 text-center ${shouldDisplayRemainderAddress ? 'mb-6' : ''}`}>
         <Text type="h5" highlighted classes="mb-2">{locale('general.sendTo')}</Text>
-        <Text type="pre" classes="mb-3">{toAddress}</Text>
+        <Text type="pre" classes="mb-4">{toAddress}</Text>
 
         <Text type="h5" highlighted classes="mb-2">{locale('general.amount')}</Text>
         <Text type="pre">{formatAmount(toAmount)}</Text>
     </div>
 {/if}
 {#if shouldDisplayRemainderAddress}
-    <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-4">
+    <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-5 text-center">
         <Text type="h5" highlighted classes="mb-2">
             {locale(`general.${shouldDisplayRemainderAmount ? 'r' : 'newR'}emainder`)}
         </Text>
-        <Text type="pre" classes={shouldDisplayRemainderAmount ? 'mb-3' : ''}>{remainderAddress}</Text>
+        <Text type="pre" classes={shouldDisplayRemainderAmount ? 'mb-4' : ''}>
+            {remainderAddress}
+        </Text>
 
         {#if shouldDisplayRemainderAmount}
             <Text type="h5" highlighted classes="mb-2">{locale('general.amount')}</Text>

@@ -1,10 +1,11 @@
 <script>
     import { Animation, Button, Icon, OnboardingLayout, Spinner, Text } from 'shared/components'
     import {
+        getLedgerDeviceStatus,
         ledgerDeviceState,
         ledgerSimulator,
+        notifyLedgerDeviceState,
         pollLedgerDeviceStatus,
-        promptUserToConnectLedger,
         stopPollingLedgerStatus,
     } from 'shared/lib/ledger'
     import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
@@ -53,36 +54,34 @@
 
         const officialNodes = getOfficialNodes()
         const officialNetwork = getOfficialNetwork()
-
-        const _onConnected = () =>
-            api.createAccount(
-                {
-                    clientOptions: {
-                        nodes: officialNodes,
-                        node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
-                        network: officialNetwork,
-                    },
-                    alias: `${locale('general.account')} 1`,
-                    signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
+        api.createAccount(
+            {
+                clientOptions: {
+                    nodes: officialNodes,
+                    node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
+                    network: officialNetwork,
                 },
-                {
-                    onSuccess() {
-                        creatingAccount = false
+                alias: `${locale('general.account')} 1`,
+                signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
+            },
+            {
+                onSuccess() {
+                    creatingAccount = false
 
-                        dispatch('next')
-                    },
-                    onError(error) {
-                        creatingAccount = false
+                    dispatch('next')
+                },
+                onError(error) {
+                    creatingAccount = false
 
-                        console.error(error)
-                    },
-                }
-            )
-        const _onCancel = () => (creatingAccount = false)
-        promptUserToConnectLedger(false, _onConnected, _onCancel)
+                    console.error(error)
+
+                    notifyLedgerDeviceState('error', true, true, false, false, error)
+                },
+            }
+        )
     }
 
-    function handlePopupOpen() {
+    function handleGuidePopup() {
         openPopup({
             type: 'ledgerConnectionGuide',
         })
@@ -94,9 +93,17 @@
         if (newLedgerProfile) {
             createAccount()
         } else {
-            const _onConnected = () => dispatch('next')
-            const _onCancel = () => (creatingAccount = false)
-            promptUserToConnectLedger(false, _onConnected, _onCancel)
+            const _onCancel = () => {
+                creatingAccount = false
+
+                notifyLedgerDeviceState('error', true)
+            }
+            const _onConnected = () => {
+                if ($ledgerDeviceState !== LedgerDeviceState.Connected) _onCancel()
+                else dispatch('next')
+            }
+
+            getLedgerDeviceStatus(false, _onConnected, _onCancel, _onCancel)
         }
     }
 
@@ -132,7 +139,7 @@
             </div>
         </div>
         <div slot="leftpane__action">
-            <div on:click={handlePopupOpen} class="mb-10 flex flex-row justify-center cursor-pointer">
+            <div on:click={handleGuidePopup} class="mb-10 flex flex-row justify-center cursor-pointer">
                 <Icon icon="info" classes="mr-2 text-blue-500" />
                 <Text secondary highlighted>{locale('popups.ledgerConnectionGuide.title')}</Text>
             </div>

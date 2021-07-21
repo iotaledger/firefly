@@ -2,9 +2,9 @@
     import { DashboardPane } from 'shared/components'
     import { clearSendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
-    import { promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { getLedgerDeviceStatus, notifyLedgerDeviceState, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { addProfileCurrencyPriceData, priceData } from 'shared/lib/marketData'
-    import { isNewNotification, showAppNotification } from 'shared/lib/notifications'
+    import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import {
         activeProfile,
@@ -237,6 +237,8 @@
         const _generate = () => {
             isGeneratingAddress = true
 
+            notifyLedgerDeviceState('error', true, true, false, false)
+
             api.getUnusedAddress(accountId, {
                 onSuccess(response) {
                     accounts.update((accounts) =>
@@ -252,19 +254,19 @@
                             return account
                         })
                     )
-                    closePopup()
+                    closePopup(true)
 
                     isGeneratingAddress = false
                     hasGeneratedALedgerReceiveAddress.set(true)
                 },
                 onError(err) {
-                    closePopup()
+                    closePopup(true)
 
                     isGeneratingAddress = false
 
                     const isClientError = err && err.type === 'ClientError'
                     const shouldHideErrorNotification = isClientError && err.error === 'error.node.chrysalisNodeInactive'
-                    if (!shouldHideErrorNotification && isNewNotification('error')) {
+                    if (!shouldHideErrorNotification) {
                         /**
                          * NOTE: To ensure a clear error message (for Ledger users),
                          * we need to update the locale path.

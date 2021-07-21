@@ -1,9 +1,8 @@
 <script lang="typescript">
     import { Animation, Button, Number, OnboardingLayout, Spinner, Text, Toggle } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
-    import { getLegacyErrorMessage, promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { notifyLedgerDeviceState, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { ADDRESS_SECURITY_LEVEL, getLedgerMigrationData, hardwareIndexes } from 'shared/lib/migration'
-    import { showAppNotification } from 'shared/lib/notifications'
     import { createEventDispatcher } from 'svelte'
 
     export let locale
@@ -62,16 +61,13 @@
                 })
                 .catch((error) => {
                     busy = false
+
                     console.error(error)
-                    showAppNotification({
-                        type: 'error',
-                        message: locale(getLegacyErrorMessage(error)),
-                    })
+
+                    notifyLedgerDeviceState('error', true, true, false, true, error)
                 })
         }
-        const _onCancel = () => {
-            busy = false
-        }
+        const _onCancel = () => (busy = false)
         promptUserToConnectLedger(true, _onConnected, _onCancel)
     }
 

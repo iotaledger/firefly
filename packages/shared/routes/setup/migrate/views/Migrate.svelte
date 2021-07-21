@@ -82,7 +82,7 @@
                             return createLedgerMigrationBundle(0, iota.prepareTransfers, callback)
                         })
                         .then(({ trytes, bundleHash }) => {
-                            closePopup() // close transaction popup
+                            closePopup(true) // close transaction popup
                             singleMigrationBundleHash = bundleHash
                             return sendLedgerMigrationBundle(bundleHash, trytes)
                         })
@@ -96,7 +96,7 @@
                         })
                         .catch((error) => {
                             loading = false
-                            closePopup() // close transaction popup
+                            closePopup(true) // close transaction popup
                             closeTransport()
                             showAppNotification({
                                 type: 'error',

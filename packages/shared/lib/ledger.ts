@@ -2,7 +2,17 @@ import { closePopup, openPopup, popupState } from 'shared/lib/popup'
 import { api } from 'shared/lib/wallet'
 import { get, writable } from 'svelte/store'
 import type { Event } from './typings/events'
-import { LedgerApp, LedgerAppName, LedgerDeviceState, LedgerStatus, LegacyLedgerErrorCode, LegacyLedgerErrorName } from './typings/ledger'
+import {
+    LedgerApp,
+    LedgerAppName,
+    LedgerDeviceState,
+    LedgerStatus,
+    LegacyLedgerErrorCode,
+    LegacyLedgerErrorName
+} from './typings/ledger'
+import { isNewNotification, showAppNotification } from './notifications'
+import { localize } from './i18n'
+import type { NotificationType } from './typings/notification'
 
 const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
 
@@ -98,6 +108,50 @@ export function promptUserToConnectLedger(
         }
     }
     getLedgerDeviceStatus(legacy, _onConnected, _onDisconnected, _onCancel)
+}
+
+export function notifyLedgerDeviceState(
+    notificationType: NotificationType = 'error',
+    allowMultiple: boolean = true,
+    checkDeviceStatus: boolean = false,
+    ignoreNotDetected: boolean = false,
+    legacy: boolean = false,
+    error: any = null
+): string {
+    let notificationId
+
+    const _notify = () => {
+        const state = get(ledgerDeviceState)
+
+        const allowedToNotify = allowMultiple ? true : isNewNotification(notificationType)
+        const canNotify = allowedToNotify && (ignoreNotDetected ? state !== LedgerDeviceState.NotDetected : true)
+
+        const isConnected =  (!legacy && state === LedgerDeviceState.Connected)
+        const isLegacyConnected = (legacy && state === LedgerDeviceState.LegacyConnected)
+        const shouldNotify = (!isConnected && !isLegacyConnected) || error
+
+        if (canNotify && shouldNotify) {
+            const message = error ? isConnected ? localize(error?.error) : localize(getLegacyErrorMessage(error))
+                                  : localize(`error.ledger.${state}`)
+            notificationId = showAppNotification({
+                type: notificationType,
+                message: message
+            })
+        }
+    }
+
+    if (checkDeviceStatus) {
+        getLedgerDeviceStatus(
+            false,
+            () => {},
+            () => _notify(),
+            () => _notify()
+        )
+    } else {
+        _notify()
+    }
+
+    return notificationId
 }
 
 export function pollLedgerDeviceStatus(
