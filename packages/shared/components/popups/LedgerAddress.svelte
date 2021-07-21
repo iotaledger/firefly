@@ -1,5 +1,6 @@
 <script lang="ts">
     import { Illustration, Text } from 'shared/components'
+    import { formatAddressForLedger } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { get } from 'svelte/store'
     import { closePopup, popupState } from 'shared/lib/popup'
@@ -34,5 +35,5 @@
     <Text type="h5" highlighted classes="mb-2">
         {locale('general.receiveAddress')}
     </Text>
-    <Text type="pre">{address}</Text>
+    <Text type="pre">{formatAddressForLedger(address)}</Text>
 </div>

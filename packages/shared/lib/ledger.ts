@@ -13,6 +13,7 @@ import {
 import { isNewNotification, showAppNotification } from './notifications'
 import { localize } from './i18n'
 import type { NotificationType } from './typings/notification'
+import { Address } from './typings/address'
 
 const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
 
@@ -211,4 +212,9 @@ export function getLegacyErrorMessage(error: any): string {
             break
     }
     return errorMessage
+}
+
+export function formatAddressForLedger(address: string): string {
+    const len = address.length
+    return `${address.slice(0, len / 2)}\n${address.slice(len / 2, len)}`
 }

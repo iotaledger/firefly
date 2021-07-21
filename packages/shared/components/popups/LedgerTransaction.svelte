@@ -1,5 +1,6 @@
 <script lang="ts">
     import { Illustration, Text } from 'shared/components'
+    import { formatAddressForLedger } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { get } from 'svelte/store'
@@ -60,10 +61,11 @@
     <Illustration illustration="ledger-confirm-address-desktop" />
 </div>
 
+<div class="transaction flex flex-col space-y-4">
 {#if shouldDisplaySendTo}
-    <div class={`rounded-lg bg-gray-50 dark:bg-gray-800 p-5 text-center ${shouldDisplayRemainderAddress ? 'mb-6' : ''}`}>
+    <div class={`rounded-lg bg-gray-50 dark:bg-gray-800 p-5 text-center ${shouldDisplayRemainderAddress ? 'mb-4' : ''}`}>
         <Text type="h5" highlighted classes="mb-2">{locale('general.sendTo')}</Text>
-        <Text type="pre" classes="mb-4">{toAddress}</Text>
+        <Text type="pre" classes="mb-4">{formatAddressForLedger(toAddress)}</Text>
 
         <Text type="h5" highlighted classes="mb-2">{locale('general.amount')}</Text>
         <Text type="pre">{formatAmount(toAmount)}</Text>
@@ -75,7 +77,7 @@
             {locale(`general.${shouldDisplayRemainderAmount ? 'r' : 'newR'}emainder`)}
         </Text>
         <Text type="pre" classes={shouldDisplayRemainderAmount ? 'mb-4' : ''}>
-            {remainderAddress}
+            {formatAddressForLedger(remainderAddress)}
         </Text>
 
         {#if shouldDisplayRemainderAmount}
@@ -84,3 +86,4 @@
         {/if}
     </div>
 {/if}
+</div>
