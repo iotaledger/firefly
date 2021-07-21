@@ -3,8 +3,8 @@
     import { Address, Amount, Button, Dropdown, Icon, ProgressBar, Text } from 'shared/components'
     import { clearSendParams, sendParams } from 'shared/lib/app'
     import { parseCurrency } from 'shared/lib/currency'
-    import { ledgerDeviceState } from 'shared/lib/ledger'
-    import { displayNotifications, isNewNotification, showAppNotification } from 'shared/lib/notifications'
+    import { ledgerDeviceState, notifyLedgerDeviceState, promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { displayNotifications, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
@@ -162,15 +162,6 @@
 
         const { data, type } = state
         switch (type) {
-            default:
-                if (ledgerAwaitingConfirmation) {
-                    ledgerAwaitingConfirmation = false
-
-                    closePopup()
-                }
-
-                break
-
             case TransferProgressEventType.GeneratingRemainderDepositAddress:
                 transactionEventData = data
 
@@ -203,6 +194,15 @@
                 transactionEventData = data
 
                 break
+
+            default:
+                if (ledgerAwaitingConfirmation) {
+                    ledgerAwaitingConfirmation = false
+
+                    closePopup()
+                }
+
+                break
         }
     }
 
@@ -225,11 +225,13 @@
          * accomodates for if we want to ignore the NotDetected state.
          */
         switch (state) {
-            case LedgerDeviceState.Connected:
+            default:
+                notifyLedgerDeviceState(notificationType, false, false, ignoreNotDetected)
+
                 break
 
-            case LedgerDeviceState.NotDetected:
-                if (ignoreNotDetected) break
+            case LedgerDeviceState.Connected:
+                break
 
             case LedgerDeviceState.Locked:
                 if (transactionTimeoutId) clearTimeout(transactionTimeoutId)
@@ -238,16 +240,6 @@
                     () => checkLedgerDeviceState(get(ledgerDeviceState), notificationType, ignoreNotDetected),
                     10000
                 )
-
-            default:
-                const message = locale(`error.ledger.${state}`)
-
-                if (isNewNotification('error'))
-                    showAppNotification({
-                        type: notificationType,
-                        message: message,
-                    })
-                break
         }
     }
 
@@ -376,15 +368,8 @@
          * it is important to wrap the send function in the Ledger connection
          * prompt function (only for non-software profiles).
          */
-        if ($isSoftwareProfile) {
-            onSuccess()
-        } else {
-            if (_ledgerDeviceState === LedgerDeviceState.Connected) {
-                onSuccess()
-            } else {
-                checkLedgerDeviceState(_ledgerDeviceState)
-            }
-        }
+        if ($isSoftwareProfile) onSuccess()
+        else promptUserToConnectLedger(false, onSuccess)
     }
 
     const handleBackClick = () => {

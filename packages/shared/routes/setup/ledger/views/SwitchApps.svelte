@@ -1,6 +1,11 @@
 <script>
     import { Button, Icon, Illustration, OnboardingLayout, Text } from 'shared/components'
-    import { promptUserToConnectLedger } from 'shared/lib/ledger'
+    import {
+        ledgerDeviceState,
+        notifyLedgerDeviceState,
+        promptUserToConnectLedger
+    } from 'shared/lib/ledger'
+    import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { createEventDispatcher } from 'svelte'
 
     export let locale
@@ -12,8 +17,17 @@
 
     function handleContinueClick() {
         busy = true
-        const _onConnected = () => dispatch('next')
-        const _onCancel = () => (busy = false)
+
+        const _onCancel = () => {
+            busy = false
+
+            notifyLedgerDeviceState('error', true, true, false, true)
+        }
+        const _onConnected = () => {
+            if ($ledgerDeviceState !== LedgerDeviceState.LegacyConnected) _onCancel()
+            else dispatch('next')
+        }
+
         promptUserToConnectLedger(true, _onConnected, _onCancel)
     }
 

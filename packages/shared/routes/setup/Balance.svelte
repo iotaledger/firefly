@@ -9,7 +9,7 @@
         formatCurrency,
     } from 'shared/lib/currency'
     import { Electron } from 'shared/lib/electron'
-    import { getLegacyErrorMessage, promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { getLegacyErrorMessage, notifyLedgerDeviceState, promptUserToConnectLedger } from 'shared/lib/ledger'
     import {
         ADDRESS_SECURITY_LEVEL,
         bundlesWithUnspentAddresses,
@@ -181,11 +181,10 @@
                     })
                     .catch((error) => {
                         isCheckingForBalance = false
+
                         console.error(error)
-                        showAppNotification({
-                            type: 'error',
-                            message: locale(getLegacyErrorMessage(error)),
-                        })
+
+                        notifyLedgerDeviceState('error', true, true, false, true, error)
                     })
             }
             const _onCancel = () => (isCheckingForBalance = false)

@@ -961,8 +961,8 @@
             "notFound": "Ledger device not found.",
             "otherConnected": "The wrong app is open on your Ledger device.",
             "generateAddress": "There was an error generating an address.",
-            "timeout": "Timeout exceeded",
-            "disconnected": "Device disconnected"
+            "timeout": "Your Ledger device timed out.",
+            "disconnected": "Your Ledger device was disconnected."
         }
     },
     "tooltips": {
