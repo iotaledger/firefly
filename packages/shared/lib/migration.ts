@@ -1355,6 +1355,7 @@ function openLedgerLegacyTransactionPopup(transfer: Transfer, inputs: Input[]): 
     openPopup({
         type: 'ledgerLegacyTransaction',
         hideClose: true,
+        preventClose: true,
         props: {
             transfer, inputs
         }
