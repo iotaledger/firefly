@@ -17,7 +17,7 @@
         },
         'ledger-install-new-app-desktop': {
             lightmode: 'onboarding/ledger-install-new-app-desktop.svg',
-            darkmode: 'onboarding/ledger-install-new-app-desktop.svg',
+            darkmode: 'onboarding/ledger-install-new-app-desktop-darkmode.svg',
         },
         'ledger-live-updated-desktop': {
             lightmode: 'onboarding/ledger-live-updated-desktop.svg',
