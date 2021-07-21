@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Animation, Button, Illustration, OnboardingLayout, Spinner, Text, TransactionItem } from 'shared/components'
+    import { Animation, Button, OnboardingLayout, Spinner, Text, TransactionItem } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { promptUserToConnectLedger } from 'shared/lib/ledger'
     import {
@@ -32,6 +32,7 @@
     let fullSuccess = $hasMigratedAndConfirmedAllSelectedBundles
 
     let legacyLedger = $walletSetupType === SetupType.TrinityLedger
+    $: animation = legacyLedger ? 'ledger-migrate-desktop' : 'migrate-desktop'
 
     let hasBroadcastAnyBundle = false
 
@@ -137,7 +138,11 @@
                                 return Electron.ledger
                                     .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
                                     .then(({ iota, callback }) => {
-                                        return createMinedLedgerMigrationBundle(transaction.index, iota.prepareTransfers, callback)
+                                        return createMinedLedgerMigrationBundle(
+                                            transaction.index,
+                                            iota.prepareTransfers,
+                                            callback
+                                        )
                                     })
                                     .then(({ trytes, bundleHash }) => {
                                         closePopup() // close transaction popup
@@ -255,7 +260,11 @@
                                 return Electron.ledger
                                     .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
                                     .then(({ iota, callback }) => {
-                                        return createMinedLedgerMigrationBundle(transaction.index, iota.prepareTransfers, callback)
+                                        return createMinedLedgerMigrationBundle(
+                                            transaction.index,
+                                            iota.prepareTransfers,
+                                            callback
+                                        )
                                     })
                                     .then(({ trytes, bundleHash }) => {
                                         closePopup() // close transaction popup
@@ -401,11 +410,7 @@
             {/if}
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            {#if legacyLedger}
-                <Illustration width="100%" illustration="ledger-migrate-desktop" />
-            {:else}
-                <Animation animation="migrate-desktop" />
-            {/if}
+            <Animation {animation} />
         </div>
     </OnboardingLayout>
 {/if}

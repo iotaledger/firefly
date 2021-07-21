@@ -1,5 +1,5 @@
 <script>
-    import { Button, Icon, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
+    import { Animation, Button, Icon, OnboardingLayout, Spinner, Text } from 'shared/components'
     import {
         ledgerDeviceState,
         ledgerSimulator,
@@ -33,7 +33,11 @@
     $: isConnected = $ledgerDeviceState !== LedgerDeviceState.NotDetected
     $: isAppOpen = $ledgerDeviceState === LedgerDeviceState.Connected
 
-    $: illustration = isConnected && isAppOpen ? 'ledger-connected-desktop' : 'ledger-disconnected-desktop'
+    $: animation = !isConnected
+        ? 'ledger-disconnected-desktop'
+        : isAppOpen
+        ? 'ledger-connected-desktop'
+        : 'ledger-app-closed-desktop'
 
     const dispatch = createEventDispatcher()
 
@@ -141,8 +145,12 @@
                 {:else}{locale('actions.continue')}{/if}
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-end items-center bg-gray-50 dark:bg-gray-900">
-            <Illustration width="100%" {illustration} />
+        <div slot="rightpane" class="w-full h-full flex justify-center items-center bg-gray-50 dark:bg-gray-900">
+            <Animation
+                width="100%"
+                animation="ledger-bg-desktop"
+                classes="absolute transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+            <Animation width="100%" {animation} />
         </div>
     </OnboardingLayout>
 {/if}

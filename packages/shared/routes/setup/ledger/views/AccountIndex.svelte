@@ -1,9 +1,7 @@
 <script lang="typescript">
-    import { Button, Illustration, Number, OnboardingLayout, Spinner, Text, Toggle } from 'shared/components'
+    import { Animation, Button, Number, OnboardingLayout, Spinner, Text, Toggle } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
-    import {
-        promptUserToConnectLedger,
-    } from 'shared/lib/ledger'
+    import { promptUserToConnectLedger } from 'shared/lib/ledger'
     import { ADDRESS_SECURITY_LEVEL, getLedgerMigrationData, hardwareIndexes } from 'shared/lib/migration'
     import { createEventDispatcher } from 'svelte'
 
@@ -114,8 +112,8 @@
                 {:else}{locale('actions.confirm')}{/if}
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-end items-center bg-orange-50 dark:bg-gray-900">
-            <Illustration width="100%" illustration="ledger-choose-index-desktop" />
+        <div slot="rightpane" class="w-full h-full flex justify-center items-center bg-orange-50 dark:bg-gray-900">
+            <Animation width="100%" animation="ledger-choose-index-desktop" />
         </div>
     </OnboardingLayout>
 {/if}
