@@ -1,5 +1,6 @@
 import { get, writable } from 'svelte/store'
 import { showAppNotification } from './notifications'
+import { localize } from './i18n'
 
 interface PopupState {
     active: boolean
@@ -35,12 +36,12 @@ const modifyPopupState = (state: PopupState, forceClose: boolean = false) => {
      * trying to perhaps close it or open another one. This is accomplished
      * by the preventClose prop on the PopupState object, which if true
      * will not allow the popup to be closed. Remember that it will have to
-     * be closed at some point though so we force it.
+     * be closed at some point though so we have the argument forceClose.
      */
     if (get(popupState).preventClose && !forceClose) {
         showAppNotification({
             type: 'error',
-            message: 'Unable to close this popup.'
+            message: localize('error.popup.preventClose')
         })
     }
     else {

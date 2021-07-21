@@ -6,7 +6,6 @@
     import { ledgerDeviceState, notifyLedgerDeviceState } from 'shared/lib/ledger'
     import {
         displayNotifications,
-        isNewNotification,
         removeDisplayNotification,
         showAppNotification
     } from 'shared/lib/notifications'

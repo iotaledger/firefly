@@ -963,6 +963,9 @@
             "generateAddress": "There was an error generating an address.",
             "timeout": "Your Ledger device timed out.",
             "disconnected": "Your Ledger device was disconnected."
+        },
+        "popup": {
+            "preventClose": "This popup is unable to be closed."
         }
     },
     "tooltips": {
