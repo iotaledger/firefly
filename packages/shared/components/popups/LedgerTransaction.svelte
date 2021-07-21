@@ -1,10 +1,10 @@
 <script lang="ts">
-    import { Illustration, Text } from 'shared/components'
+    import { Animation, Text } from 'shared/components'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { formatUnitBestMatch } from 'shared/lib/units'
-    import { get } from 'svelte/store'
-    import { onMount } from 'svelte'
     import { closePopup, popupState } from 'shared/lib/popup'
+    import { formatUnitBestMatch } from 'shared/lib/units'
+    import { onMount } from 'svelte'
+    import { get } from 'svelte/store'
 
     export let locale
 
@@ -56,8 +56,12 @@
 <Text type="h4" classes="mb-6">{locale(getPopupLocaleData('title'))}</Text>
 <Text type="p" classes="mb-6" secondary>{locale(getPopupLocaleData('info'))}</Text>
 
-<div class="illustration w-full h-1/2 bg-white dark:bg-gray-900 flex justify-center content-center">
-    <Illustration illustration="ledger-confirm-address-desktop" />
+<div class="relative w-full h-1/2 bg-white dark:bg-gray-900 flex justify-center content-center">
+    <Animation
+        width="100%"
+        animation="ledger-bg-desktop"
+        classes="absolute transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+    <Animation animation="ledger-confirm-address-desktop" />
 </div>
 
 {#if shouldDisplaySendTo}

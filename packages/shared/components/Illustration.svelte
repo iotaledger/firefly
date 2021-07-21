@@ -23,10 +23,6 @@
             lightmode: 'onboarding/ledger-generate-address-desktop.svg',
             darkmode: 'onboarding/ledger-generate-address-desktop-darkmode.svg',
         },
-        'ledger-confirm-address-desktop': {
-            lightmode: 'onboarding/ledger-confirm-address-desktop.svg',
-            darkmode: 'onboarding/ledger-confirm-address-desktop-darkmode.svg',
-        },
         'ledger-live-updated-desktop': {
             lightmode: 'onboarding/ledger-live-updated-desktop.svg',
             darkmode: 'onboarding/ledger-live-updated-desktop-darkmode.svg',
