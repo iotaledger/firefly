@@ -1,7 +1,7 @@
 import { cleanupSignup, login, strongholdPassword, walletPin } from 'shared/lib/app'
-import { activeProfile, isSoftwareProfile, profiles, ProfileType, updateProfile } from 'shared/lib/profile'
+import { activeProfile, profiles, ProfileType, updateProfile } from 'shared/lib/profile'
 import { AccountRoutes, AppRoute, SettingsRoutes, SetupType, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
-import { selectedAccountId } from 'shared/lib/wallet'
+import { getSyncAccountOptions, selectedAccountId } from 'shared/lib/wallet'
 import { get, readable, writable } from 'svelte/store'
 import { deepLinkRequestActive } from './deepLinking'
 
@@ -208,12 +208,12 @@ export const routerNext = (event) => {
             }
             break
         case AppRoute.Congratulations:
-            const softwareGapLimit = get(walletSetupType) === SetupType.New ? 10 : 50
-            const ledgerGapLimit = get(walletSetupType) === SetupType.New ? 1 : 10
-            updateProfile('gapLimit', get(isSoftwareProfile) ? softwareGapLimit : ledgerGapLimit)
+            updateProfile('gapLimit', getSyncAccountOptions().gapLimit)
             cleanupSignup()
             login()
+
             nextRoute = AppRoute.Dashboard
+
             break
     }
 
