@@ -23,7 +23,7 @@ export const PERMANODE = "http://permanode.ledgermigration1.net:4000/api"
 export const ADDRESS_SECURITY_LEVEL = 2
 
 /** Minimum migration balance */
-export const MINIMUM_MIGRATION_BALANCE = 100
+export const MINIMUM_MIGRATION_BALANCE = 1000000
 
 /** Bundle mining timeout for each bundle */
 export const MINING_TIMEOUT_SECONDS = 10
