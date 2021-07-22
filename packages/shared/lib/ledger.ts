@@ -165,7 +165,7 @@ export function notifyLedgerDeviceState(
 }
 
 export function isLedgerError(error: any): boolean {
-    const type: string = error?.type || error
+    const type: string = error?.type || 'string' === typeof error ? error : ''
 
     return type.slice(0, 6) === "Ledger"
 }

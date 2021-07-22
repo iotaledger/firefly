@@ -5,9 +5,9 @@
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import { MAX_ACCOUNT_NAME_LENGTH, wallet } from 'shared/lib/wallet'
     import { isLedgerError, notifyLedgerDeviceState } from 'shared/lib/ledger'
-    import { isLedgerProfile } from '../../../../lib/profile'
-    import { showAppNotification } from '../../../../lib/notifications'
-    import { localize } from '../../../../lib/i18n'
+    import { isLedgerProfile } from 'shared/lib/profile'
+    import { showAppNotification } from 'shared/lib/notifications'
+    import { localize } from 'shared/lib/i18n'
 
     export let locale
     export let onCreate

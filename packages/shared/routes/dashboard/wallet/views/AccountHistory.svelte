@@ -2,7 +2,7 @@
     import { ActivityDetail, ActivityRow, Icon, Text } from 'shared/components'
     import { showAppNotification } from 'shared/lib/notifications'
     import { api, isSyncing, selectedAccountId, selectedMessage } from 'shared/lib/wallet'
-    import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
+    import { isLedgerProfile } from 'shared/lib/profile'
     import { isLedgerError, notifyLedgerDeviceState } from 'shared/lib/ledger'
 
     export let locale
