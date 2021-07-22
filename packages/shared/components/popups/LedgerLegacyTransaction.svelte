@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { Animation, Text } from 'shared/components'
     import { formatAddressForLedger } from 'shared/lib/ledger'
     import { asyncGetAddressChecksum } from 'shared/lib/migration'
     import type { Input, Transfer } from 'shared/lib/typings/migration'
