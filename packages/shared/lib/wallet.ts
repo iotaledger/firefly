@@ -11,6 +11,7 @@ import {
     isLedgerProfile,
     isSoftwareProfile,
     isStrongholdLocked,
+    Profile,
     updateProfile
 } from 'shared/lib/profile'
 import type {
@@ -18,6 +19,7 @@ import type {
     Account as BaseAccount,
     AccountToCreate,
     Balance,
+    SyncAccountOptions,
     SyncedAccount
 } from 'shared/lib/typings/account'
 import type { Address } from 'shared/lib/typings/address'
@@ -27,23 +29,30 @@ import type {
     ConfirmationStateChangeEventPayload,
     ErrorEventPayload,
     Event,
+    LedgerAddressGenerationEventPayload,
     MigrationProgressEventPayload,
     ReattachmentEventPayload,
     TransactionEventPayload,
     TransferProgressEventPayload,
-    TransferState,
-    LedgerAddressGenerationEventPayload
+    TransferState
 } from 'shared/lib/typings/events'
 import type { Payload, Transaction } from 'shared/lib/typings/message'
-import type { AddressInput, MigrationBundle, MigrationData, SendMigrationBundleResponse } from 'shared/lib/typings/migration'
+import type {
+    AddressInput,
+    MigrationBundle,
+    MigrationData,
+    SendMigrationBundleResponse
+} from 'shared/lib/typings/migration'
 import { formatUnitBestMatch } from 'shared/lib/units'
 import { get, writable, Writable } from 'svelte/store'
+import { openPopup } from './popup'
+import { walletSetupType } from './router'
 import type { ClientOptions } from './typings/client'
 import type { LedgerStatus } from './typings/ledger'
 import type { Message } from './typings/message'
 import type { NodeAuth, NodeInfo } from './typings/node'
+import { SetupType } from './typings/routes'
 import type { Duration, StrongholdStatus } from './typings/wallet'
-import { openPopup } from './popup'
 import { notifyLedgerDeviceState } from './ledger'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
@@ -1746,4 +1755,20 @@ export const findAccountWithAnyAddress = (addresses: string[], excludeFirst?: Wa
             return res[0]
         }
     }
+}
+
+/**
+ * Get the sync options for an account
+ * @param activeProfile The active profile containing gap limit information (optional)
+ * @returns The sync options for an account, which contains data for the gap limit and account discovery threshold
+ */
+export const getSyncAccountOptions = (activeProfile?: Profile): SyncAccountOptions => {
+    const _isSoftwareProfile = get(isSoftwareProfile)
+    const _isNewProfile = get(walletSetupType) === SetupType.New
+
+    const gapLimit =
+        activeProfile?.gapLimit ?? _isSoftwareProfile ? (_isNewProfile ? 10 : 50) : (_isNewProfile ? 1 : 10)
+    const accountDiscoveryThreshold = _isNewProfile ? 1 : 0
+
+    return { gapLimit, accountDiscoveryThreshold }
 }

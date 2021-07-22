@@ -15,10 +15,10 @@
         setMissingProfileType,
         updateProfile,
     } from 'shared/lib/profile'
-    import { walletRoute, walletSetupType } from 'shared/lib/router'
+    import { walletRoute } from 'shared/lib/router'
     import { TransferProgressEventType } from 'shared/lib/typings/events'
     import type { Transaction } from 'shared/lib/typings/message'
-    import { SetupType, WalletRoutes } from 'shared/lib/typings/routes'
+    import { WalletRoutes } from 'shared/lib/typings/routes'
     import {
         AccountMessage,
         AccountsBalanceHistory,
@@ -31,6 +31,7 @@
         getAccountsBalanceHistory,
         getIncomingFlag,
         getInternalFlag,
+        getSyncAccountOptions,
         getTransactions,
         getWalletBalanceHistory,
         hasGeneratedALedgerReceiveAddress,
@@ -156,17 +157,16 @@
             onSuccess(accountsResponse) {
                 const _continue = async () => {
                     accountsLoaded.set(true)
-                    const isNewProfile = get(walletSetupType) === SetupType.New
-                    const softwareGapLimit = isNewProfile ? 10 : 50
-                    const ledgerGapLimit = isNewProfile ? 1 : 10
-                    const accountDiscovery = isNewProfile ? 1 : 0
-                    const gapLimit = $activeProfile?.gapLimit ?? (get(isSoftwareProfile) ? softwareGapLimit : ledgerGapLimit)
+
+                    const { gapLimit, accountDiscoveryThreshold } = getSyncAccountOptions($activeProfile)
+
                     try {
-                        await asyncSyncAccounts(0, gapLimit, accountDiscovery, false)
+                        await asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
                     } catch (err) {
                         _onError(err)
                     }
-                    updateProfile('gapLimit', get(isSoftwareProfile) ? 10 : 1)
+
+                    updateProfile('gapLimit', gapLimit)
                 }
 
                 if (accountsResponse.payload.length === 0) {
