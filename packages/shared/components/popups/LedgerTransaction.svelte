@@ -1,5 +1,6 @@
 <script lang="ts">
     import { Animation, Text } from 'shared/components'
+    import { formatAddressForLedger } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup, popupState } from 'shared/lib/popup'
     import { formatUnitBestMatch } from 'shared/lib/units'
@@ -53,6 +54,12 @@
     })
 </script>
 
+<style>
+    .transaction {
+        max-height: 30vh;
+    }
+</style>
+
 <Text type="h4" classes="mb-6">{locale(getPopupLocaleData('title'))}</Text>
 <Text type="p" classes="mb-6" secondary>{locale(getPopupLocaleData('info'))}</Text>
 
@@ -64,27 +71,29 @@
     <Animation animation="ledger-confirm-address-desktop" />
 </div>
 
-{#if shouldDisplaySendTo}
-    <div class={`rounded-lg bg-gray-50 dark:bg-gray-800 p-5 text-center ${shouldDisplayRemainderAddress ? 'mb-6' : ''}`}>
-        <Text type="h5" highlighted classes="mb-2">{locale('general.sendTo')}</Text>
-        <Text type="pre" classes="mb-4">{toAddress}</Text>
+<div class="transaction flex flex-col space-y-4">
+    {#if shouldDisplaySendTo}
+        <div class={`rounded-lg bg-gray-50 dark:bg-gray-800 p-5 text-center ${shouldDisplayRemainderAddress ? 'mb-4' : ''}`}>
+            <Text type="h5" highlighted classes="mb-2">{locale('general.sendTo')}</Text>
+            <Text type="pre" classes="mb-4">{formatAddressForLedger(toAddress)}</Text>
 
-        <Text type="h5" highlighted classes="mb-2">{locale('general.amount')}</Text>
-        <Text type="pre">{formatAmount(toAmount)}</Text>
-    </div>
-{/if}
-{#if shouldDisplayRemainderAddress}
-    <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-5 text-center">
-        <Text type="h5" highlighted classes="mb-2">
-            {locale(`general.${shouldDisplayRemainderAmount ? 'r' : 'newR'}emainder`)}
-        </Text>
-        <Text type="pre" classes={shouldDisplayRemainderAmount ? 'mb-4' : ''}>
-            {remainderAddress}
-        </Text>
-
-        {#if shouldDisplayRemainderAmount}
             <Text type="h5" highlighted classes="mb-2">{locale('general.amount')}</Text>
-            <Text type="pre">{formatAmount(remainderAmount)}</Text>
-        {/if}
-    </div>
-{/if}
+            <Text type="pre">{formatAmount(toAmount)}</Text>
+        </div>
+    {/if}
+    {#if shouldDisplayRemainderAddress}
+        <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-5 text-center">
+            <Text type="h5" highlighted classes="mb-2">
+                {locale(`general.${shouldDisplayRemainderAmount ? 'r' : 'newR'}emainder`)}
+            </Text>
+            <Text type="pre" classes={shouldDisplayRemainderAmount ? 'mb-4' : ''}>
+                {formatAddressForLedger(remainderAddress)}
+            </Text>
+
+            {#if shouldDisplayRemainderAmount}
+                <Text type="h5" highlighted classes="mb-2">{locale('general.amount')}</Text>
+                <Text type="pre">{formatAmount(remainderAmount)}</Text>
+            {/if}
+        </div>
+    {/if}
+</div>
