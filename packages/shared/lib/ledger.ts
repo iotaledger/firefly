@@ -13,7 +13,6 @@ import {
 import { isNewNotification, showAppNotification } from './notifications'
 import { localize } from './i18n'
 import type { NotificationType } from './typings/notification'
-import { ErrorType } from './typings/events'
 
 const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
 
