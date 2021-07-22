@@ -1,10 +1,10 @@
 <script lang="typescript">
-    import { Button, Icon, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
+    import { Animation, Button, Icon, OnboardingLayout, Spinner, Text } from 'shared/components'
     import {
         formatAddressForLedger,
         ledgerSimulator,
         notifyLedgerDeviceState,
-        promptUserToConnectLedger
+        promptUserToConnectLedger,
     } from 'shared/lib/ledger'
     import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
     import { api } from 'shared/lib/wallet'
@@ -20,7 +20,7 @@
 
     const dispatch = createEventDispatcher()
 
-    $: illustration = !newAddress
+    $: animation = !newAddress
         ? 'ledger-generate-address-desktop'
         : confirmed
         ? 'ledger-address-confirmed-desktop'
@@ -152,7 +152,11 @@
             {/if}
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center items-center bg-gray-50 dark:bg-gray-900">
-            <Illustration width="100%" {illustration} />
+            <Animation
+                width="100%"
+                animation="ledger-bg-desktop"
+                classes="absolute transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+            <Animation width="100%" {animation} />
         </div>
     </OnboardingLayout>
 {/if}

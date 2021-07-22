@@ -1,5 +1,5 @@
 <script>
-    import { Button, Illustration, Text } from 'shared/components'
+    import { Animation, Button, Illustration, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
 
     export let locale
@@ -23,20 +23,27 @@
 </script>
 
 <style type="text/scss">
-    .illustration {
+    .illustration-wrapper {
         height: 320px;
-
+        .animation {
+            width: 117%;
+            height: 117%;
+        }
         :global(img) {
             min-height: 280px;
             max-width: 100%;
             object-position: 0 -3px;
+            z-index: 1;
         }
     }
 </style>
 
 <Text type="h4" classes="mb-6">{locale('popups.ledgerAppGuide.title')}</Text>
 <div class="w-full flex flex-row flex-wrap">
-    <div class="illustration w-full bg-white dark:bg-gray-900 flex justify-center">
+    <div class="illustration-wrapper relative w-full bg-white dark:bg-gray-900 flex justify-center items-center">
+        <div class="animation absolute transform top-2 left-1/2 -translate-x-1/2 z-0">
+            <Animation animation="ledger-bg-desktop" />
+        </div>
         <Illustration illustration={stepAnimations[stepIndex]} />
     </div>
     <div class="w-full text-center my-9 px-10">

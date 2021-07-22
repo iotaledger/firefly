@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Animation, Button, Illustration, OnboardingLayout, Spinner, Text, TransactionItem } from 'shared/components'
+    import { Animation, Button, OnboardingLayout, Spinner, Text, TransactionItem } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { getLegacyErrorMessage, promptUserToConnectLedger } from 'shared/lib/ledger'
     import {
@@ -33,6 +33,8 @@
     let fullSuccess = $hasMigratedAndConfirmedAllSelectedBundles
 
     let legacyLedger = $walletSetupType === SetupType.TrinityLedger
+    $: animation = legacyLedger ? 'ledger-migrate-desktop' : 'migrate-desktop'
+
     let closeTransport = () => {}
 
     let hasBroadcastAnyBundle = false
@@ -425,11 +427,7 @@
             {/if}
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            {#if legacyLedger}
-                <Illustration width="100%" illustration="ledger-migrate-desktop" />
-            {:else}
-                <Animation animation="migrate-desktop" />
-            {/if}
+            <Animation {animation} />
         </div>
     </OnboardingLayout>
 {/if}

@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Animation, Button, Illustration, Link, OnboardingLayout, SpentAddress, Text } from 'shared/components'
+    import { Animation, Button, Link, OnboardingLayout, SpentAddress, Text } from 'shared/components'
     import { selectAllAddressesForMining, spentAddressesFromBundles, toggleMiningSelection } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup } from 'shared/lib/popup'
@@ -17,6 +17,7 @@
     let selectedAddresses = addresses.filter((address) => address.selectedToMine === true)
 
     let legacyLedger = $walletSetupType === SetupType.TrinityLedger
+    $: animation = legacyLedger ? 'ledger-migrate-desktop' : 'migrate-desktop'
 
     function onAddressClick(address) {
         var index = selectedAddresses.findIndex((_address) => _address.id === address.id)
@@ -96,11 +97,7 @@
             <Button classes="w-full" onClick={() => secureAddresses()}>{locale('views.secureSpentAddresses.title')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            {#if legacyLedger}
-                <Illustration width="100%" illustration="ledger-migrate-desktop" />
-            {:else}
-                <Animation animation="migrate-desktop" />
-            {/if}
+            <Animation {animation} />
         </div>
     </OnboardingLayout>
 {/if}
