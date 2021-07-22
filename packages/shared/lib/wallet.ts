@@ -52,7 +52,7 @@ import type { Message } from './typings/message'
 import type { NodeAuth, NodeInfo } from './typings/node'
 import { SetupType } from './typings/routes'
 import type { Duration, StrongholdStatus } from './typings/wallet'
-Í
+
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
 export const MAX_PROFILE_NAME_LENGTH = 20
