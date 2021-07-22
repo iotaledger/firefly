@@ -1,6 +1,9 @@
+import { removeAddressChecksum } from 'shared/lib/migration'
 import { closePopup, openPopup, popupState } from 'shared/lib/popup'
 import { api } from 'shared/lib/wallet'
 import { get, writable } from 'svelte/store'
+import { localize } from './i18n'
+import { isNewNotification, showAppNotification } from './notifications'
 import type { Event } from './typings/events'
 import {
     LedgerApp,
@@ -10,10 +13,7 @@ import {
     LegacyLedgerErrorCode,
     LegacyLedgerErrorName
 } from './typings/ledger'
-import { isNewNotification, showAppNotification } from './notifications'
-import { localize } from './i18n'
 import type { NotificationType } from './typings/notification'
-import { Address } from './typings/address'
 
 const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
 
@@ -214,7 +214,10 @@ export function getLegacyErrorMessage(error: any): string {
     return errorMessage
 }
 
-export function formatAddressForLedger(address: string): string {
+export function formatAddressForLedger(address: string, removeChecksum: boolean = false): string {
+    if (removeChecksum) {
+        address = removeAddressChecksum(address)
+    }
     const len = address.length
     return `${address.slice(0, len / 2)}\n${address.slice(len / 2, len)}`
 }
