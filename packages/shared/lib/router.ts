@@ -1,6 +1,6 @@
 import { cleanupSignup, login, strongholdPassword, walletPin } from 'shared/lib/app'
 import { activeProfile, profiles, ProfileType, updateProfile } from 'shared/lib/profile'
-import { AccountRoutes, AppRoute, SettingsRoutes, SetupType, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
+import { AccountRoutes, AppRoute, SettingsRoutes, SetupType, Tabs, WalletRoutes, LedgerRoutes } from 'shared/lib/typings/routes'
 import { getSyncAccountOptions, selectedAccountId } from 'shared/lib/wallet'
 import { get, readable, writable } from 'svelte/store'
 import { deepLinkRequestActive } from './deepLinking'
@@ -54,6 +54,16 @@ const history = writable<Array<string>>([])
  * Active dashboard tab
  */
 export const dashboardRoute = writable<Tabs>(Tabs.Wallet)
+
+/**
+ * Ledger setup route
+ */
+export const ledgerRoute = writable<LedgerRoutes>(get(walletSetupType) === SetupType.New || get(walletSetupType) === SetupType.FireflyLedger ? LedgerRoutes.Connect : LedgerRoutes.LegacyIntro)
+
+/**
+ * Ledger setup routing history
+ */
+export const ledgerRouteHistory = writable<Array<string>>([])
 
 /**
  * Wallet view route

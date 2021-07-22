@@ -30,6 +30,16 @@ export enum SetupType {
     FireflyLedger = 'fireflyLedger',
 }
 
+export enum LedgerRoutes {
+    Connect = 'connect',
+    RestoreFromLedger = 'restoreFromLedger',
+    LegacyIntro = 'legacyIntro',
+    InstallationGuide = 'installationGuide',
+    GenerateAddress = 'generateAddress',
+    SwitchApps = 'switchApps',
+    AccountIndex = 'accountIndex',
+}
+
 export enum WalletRoutes {
     Init = 'init',
     Account = 'account',
