@@ -143,9 +143,9 @@
         const _onError = (error: any = null) => {
             console.error(error)
 
-            if($isLedgerProfile) {
+            if ($isLedgerProfile) {
                 notifyLedgerDeviceState('error', true, true)
-            } else if($isSoftwareProfile) {
+            } else {
                 showAppNotification({
                     type: 'error',
                     message: locale(error?.error || 'error.global.generic')

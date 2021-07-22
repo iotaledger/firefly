@@ -536,7 +536,7 @@ export const asyncSyncAccounts = (addressIndex?, gapLimit?, accountDiscoveryThre
                 isSyncing.set(false)
 
                 if (showErrorNotification) {
-                    if(get(isLedgerProfile)) {
+                    if (get(isLedgerProfile)) {
                         notifyLedgerDeviceState('error', true, true)
                     } else {
                         showAppNotification({

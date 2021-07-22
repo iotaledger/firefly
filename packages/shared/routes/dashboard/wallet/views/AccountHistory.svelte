@@ -32,13 +32,13 @@
                         err && err.type === 'ClientError' && err.error === 'error.node.chrysalisNodeInactive'
 
                     if (!shouldHideErrorNotification) {
-                        if ($isSoftwareProfile) {
+                        if ($isLedgerProfile) {
+                            notifyLedgerDeviceState('error', true)
+                        } else {
                             showAppNotification({
                                 type: 'error',
                                 message: locale(err.error),
                             })
-                        } else if ($isLedgerProfile) {
-                            notifyLedgerDeviceState('error', true)
                         }
                     }
                 }
