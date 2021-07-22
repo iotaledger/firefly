@@ -1,7 +1,8 @@
 <script>
     import { Button, Icon, Text } from 'shared/components'
-    import { closePopup } from 'shared/lib/popup'
     import { stopPollingLedgerStatus } from 'shared/lib/ledger'
+    import { closePopup } from 'shared/lib/popup'
+    import { LedgerAppName } from 'shared/lib/typings/ledger'
     import { onDestroy } from 'svelte'
 
     export let legacy
@@ -25,6 +26,10 @@
     <div class="bg-blue-400 rounded-2xl w-20 h-20 flex justify-center items-center mb-7">
         <Icon icon={legacy ? 'ledger-app-legacy' : 'ledger-app'} width="32" height="32" classes="text-white" />
     </div>
-    <Text type="p" classes="mb-6">{locale(`popups.ledgerNotConnected.${legacy ? 'connectLegacy' : 'connect'}`)}</Text>
+    <Text type="p" classes="mb-6">
+        {locale(`popups.ledgerNotConnected.${legacy ? 'connectLegacy' : 'connect'}`, {
+            values: legacy ? { legacy: LedgerAppName.IOTALegacy } : {},
+        })}
+    </Text>
     <Button secondary classes="w-1/2" onClick={handleCancelClick}>{locale('actions.cancel')}</Button>
 </div>

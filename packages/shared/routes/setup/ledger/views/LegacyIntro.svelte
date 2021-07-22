@@ -1,7 +1,8 @@
 <script>
-    import { Button, OnboardingLayout, Text, Video } from 'shared/components'
+    import { Button, Link, OnboardingLayout, Text, Video } from 'shared/components'
     import { LEDGER_MIGRATION_VIDEO } from 'shared/lib/migration'
     import { createEventDispatcher } from 'svelte'
+    import { Electron } from 'shared/lib/electron'
 
     export let locale
     export let mobile
@@ -9,7 +10,7 @@
     const dispatch = createEventDispatcher()
 
     function handleReadMoreClick() {
-        // TODO: add link
+        Electron.openUrl('https://firefly.iota.org/faq#migration')
     }
 
     function handleNextClick() {
@@ -37,9 +38,9 @@
             slot="rightpane"
             class="w-full h-full px-32 flex flex-col flex-wrap justify-center items-center bg-gray-50 dark:bg-gray-900">
             <Video video={LEDGER_MIGRATION_VIDEO} />
-            <Text onClick={handleReadMoreClick} type="p" highlighted classes="cursor-pointer mt-7 text-center">
+            <Link onClick={handleReadMoreClick}>
                 {locale('views.legacyLedgerIntro.readMore')}
-            </Text>
+            </Link>
         </div>
     </OnboardingLayout>
 {/if}

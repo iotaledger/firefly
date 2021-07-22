@@ -9,9 +9,10 @@
         formatCurrency,
     } from 'shared/lib/currency'
     import { Electron } from 'shared/lib/electron'
-    import { LOG_FILE_NAME, migration, resetMigrationState, totalMigratedBalance, migrationLog } from 'shared/lib/migration'
+    import { LOG_FILE_NAME, migration, migrationLog, resetMigrationState, totalMigratedBalance } from 'shared/lib/migration'
     import { activeProfile, newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
     import { walletSetupType } from 'shared/lib/router'
+    import { LedgerAppName } from 'shared/lib/typings/ledger'
     import { SetupType } from 'shared/lib/typings/routes'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { getStoragePath } from 'shared/lib/wallet'
@@ -26,11 +27,13 @@
     let wasMigrated = $didComplete
 
     let localizedBody = 'body'
+    let localizedValues = {}
 
     onMount(() => {
         if (!wasMigrated) {
             if ($walletSetupType === SetupType.FireflyLedger) {
                 localizedBody = 'fireflyLedgerBody'
+                localizedValues = { legacy: LedgerAppName.IOTALegacy }
             }
             // This is the last screen in onboarding for all flows i.e., if you create a new wallet or import stronghold
             // When this component mounts, ensure that the profile is persisted in the local storage.
@@ -99,7 +102,9 @@
                         <Icon icon="success-check" classes="text-white" />
                     </div>
                     <Text type="h2" classes="mb-6 text-center">{locale('views.congratulations.fundsMigrated')}</Text>
-                    <Text type="p" secondary classes="mb-6 text-center">{locale(`views.congratulations.${localizedBody}`)}</Text>
+                    <Text type="p" secondary classes="mb-6 text-center">
+                        {locale(`views.congratulations.${localizedBody}`, { values: localizedValues })}
+                    </Text>
                     <Text type="h2">{formatUnitBestMatch($totalMigratedBalance, true, 3)}</Text>
                     <Text type="p" highlighted classes="py-1 uppercase">{fiatbalance}</Text>
                 </div>

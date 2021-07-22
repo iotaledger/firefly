@@ -1,7 +1,7 @@
 <script>
     import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
     import { promptUserToConnectLedger, displayNotificationForLedgerProfile, ledgerDeviceState } from 'shared/lib/ledger'
-    import { LedgerDeviceState } from 'shared/lib/typings/ledger'
+    import { LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { createEventDispatcher } from 'svelte'
 
     export let locale
@@ -38,20 +38,22 @@
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-5">{locale('views.switchLedgerApps.title')}</Text>
-            <Text type="p" secondary classes="mb-5">{locale('views.switchLedgerApps.body')}</Text>
+            <Text type="p" secondary classes="mb-5">
+                {locale('views.switchLedgerApps.body', { values: { legacy: LedgerAppName.IOTALegacy } })}
+            </Text>
             <div class="flex flex-row flex-nowrap items-center justify-center space-x-4 text-center mt-40">
                 <div class="flex flex-col flex-wrap space-y-2">
                     <div class="bg-blue-400 rounded-2xl w-20 h-20 flex justify-center items-center">
                         <Icon icon="ledger-app" width="32" height="32" classes="text-white" />
                     </div>
-                    <Text type="p" secondary>{locale('views.switchLedgerApps.ledgerApp')}</Text>
+                    <Text type="p" secondary>{LedgerAppName.IOTA}</Text>
                 </div>
                 <Icon icon="chevron-right" classes="-mt-6 text-blue-400" />
                 <div class="flex flex-col flex-wrap space-y-2">
                     <div class="bg-blue-400 rounded-2xl w-20 h-20 flex justify-center items-center">
                         <Icon icon="ledger-app-legacy" width="32" height="32" classes="text-white" />
                     </div>
-                    <Text type="p" secondary>{locale('views.switchLedgerApps.ledgerLegacyApp')}</Text>
+                    <Text type="p" secondary>{LedgerAppName.IOTALegacy}</Text>
                 </div>
             </div>
         </div>
