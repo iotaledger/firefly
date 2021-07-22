@@ -8,7 +8,7 @@ import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
 import { showAppNotification, showSystemNotification } from 'shared/lib/notifications'
 import {
     activeProfile,
-    isLedgerProfile,
+    isSoftwareProfile,
     isStrongholdLocked, Profile,
     updateProfile
 } from 'shared/lib/profile'
@@ -1755,12 +1755,12 @@ export const findAccountWithAnyAddress = (addresses: string[], excludeFirst?: Wa
  * @returns The sync options for an account, which contains data for the gap limit and account discovery threshold
  */
 export const getSyncAccountOptions = (activeProfile?: Profile): SyncAccountOptions => {
-    const isSoftwareProfile = !get(isLedgerProfile)
-    const isNewProfile = get(walletSetupType) === SetupType.New
+    const _isSoftwareProfile = get(isSoftwareProfile)
+    const _isNewProfile = get(walletSetupType) === SetupType.New
 
     const gapLimit =
-        activeProfile?.gapLimit ?? isSoftwareProfile ? (isNewProfile ? 10 : 50) : (isNewProfile ? 1 : 10)
-    const accountDiscoveryThreshold = isNewProfile ? 1 : 0
+        activeProfile?.gapLimit ?? _isSoftwareProfile ? (_isNewProfile ? 10 : 50) : (_isNewProfile ? 1 : 10)
+    const accountDiscoveryThreshold = _isNewProfile ? 1 : 0
 
     return { gapLimit, accountDiscoveryThreshold }
 }
