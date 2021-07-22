@@ -13,6 +13,7 @@ import {
 import { isNewNotification, showAppNotification } from './notifications'
 import { localize } from './i18n'
 import type { NotificationType } from './typings/notification'
+import { ErrorType } from './typings/events'
 
 const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
 
@@ -115,7 +116,7 @@ export function promptUserToConnectLedger(
     getLedgerDeviceStatus(legacy, _onConnected, _onDisconnected, _onCancel)
 }
 
-export function notifyLedgerDeviceState(
+export function displayNotificationForLedgerProfile(
     notificationType: NotificationType = 'error',
     allowMultiple: boolean = true,
     checkDeviceStatus: boolean = false,
@@ -137,15 +138,12 @@ export function notifyLedgerDeviceState(
 
         if (canNotify && shouldNotify) {
             const stateErrorMessage = localize(`error.ledger.${state}`)
-            const errorMessage = legacy ? getLegacyErrorMessage(error) : error?.error ? localize(error.error) : error
+            const errorMessage = legacy ? getLegacyErrorMessage(error, true) : error?.error ? localize(error.error) : error
 
-            const message = error ? errorMessage : stateErrorMessage
-            const subMessage = error ? stateErrorMessage : ''
-
+            const message = error ? isLedgerError(error) ? stateErrorMessage : errorMessage : stateErrorMessage
             notificationId = showAppNotification({
                 type: notificationType,
-                message,
-                subMessage
+                message
             })
         }
     }
@@ -165,8 +163,19 @@ export function notifyLedgerDeviceState(
 }
 
 export function isLedgerError(error: any): boolean {
-    const type: string = error?.type || 'string' === typeof error ? error : ''
-    return type.slice(0, 6) === "Ledger"
+    if(!error) return false
+
+    let errorType: string = ''
+    switch(typeof error) {
+        case 'object':
+            errorType = error.type || error.name
+            break
+        case 'string':
+            errorType = error
+            break
+    }
+
+    return errorType?.slice(0, 6) === "Ledger"
 }
 
 export function pollLedgerDeviceStatus(
@@ -209,7 +218,7 @@ export function stopPollingLedgerStatus(): void {
     }
 }
 
-export function getLegacyErrorMessage(error: any): string {
+export function getLegacyErrorMessage(error: any, shouldLocalize: boolean = false): string {
     let errorMessage = 'error.global.generic'
     switch (error?.name) {
         case LegacyLedgerErrorName.TransportStatusError:
@@ -225,7 +234,8 @@ export function getLegacyErrorMessage(error: any): string {
             errorMessage = 'error.ledger.disconnected'
             break
     }
-    return errorMessage
+
+    return shouldLocalize ? localize(errorMessage) : errorMessage
 }
 
 export function formatAddressForLedger(address: string): string {

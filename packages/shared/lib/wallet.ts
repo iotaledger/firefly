@@ -53,7 +53,7 @@ import type { Message } from './typings/message'
 import type { NodeAuth, NodeInfo } from './typings/node'
 import { SetupType } from './typings/routes'
 import type { Duration, StrongholdStatus } from './typings/wallet'
-import { isLedgerError, notifyLedgerDeviceState } from './ledger'
+import { isLedgerError, displayNotificationForLedgerProfile } from './ledger'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -536,8 +536,8 @@ export const asyncSyncAccounts = (addressIndex?, gapLimit?, accountDiscoveryThre
                 isSyncing.set(false)
 
                 if (showErrorNotification) {
-                    if (get(isLedgerProfile) && isLedgerError(err)) {
-                        notifyLedgerDeviceState('error', true, true, false, false, err)
+                    if (get(isLedgerProfile)) {
+                        displayNotificationForLedgerProfile('error', true, true, false, false, err)
                     } else {
                         showAppNotification({
                             type: 'error',

@@ -3,7 +3,7 @@
     import {
         formatAddressForLedger,
         ledgerSimulator,
-        notifyLedgerDeviceState,
+        displayNotificationForLedgerProfile,
         promptUserToConnectLedger,
     } from 'shared/lib/ledger'
     import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
@@ -62,7 +62,7 @@
 
                                     console.error(error)
 
-                                    notifyLedgerDeviceState('error', true, true, false, false, error)
+                                    displayNotificationForLedgerProfile('error', true, true, false, false, error)
                                 },
                             }
                         )
@@ -92,7 +92,7 @@
 
                 console.error(err)
 
-                notifyLedgerDeviceState('error', true, true)
+                displayNotificationForLedgerProfile('error', true, true, false, false, err)
             },
         })
     }

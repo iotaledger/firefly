@@ -4,7 +4,7 @@
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import { MAX_ACCOUNT_NAME_LENGTH, wallet } from 'shared/lib/wallet'
-    import { isLedgerError, notifyLedgerDeviceState } from 'shared/lib/ledger'
+    import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { isLedgerProfile } from 'shared/lib/profile'
     import { showAppNotification } from 'shared/lib/notifications'
     import { localize } from 'shared/lib/i18n'
@@ -40,22 +40,30 @@
 
             isBusy = true
 
-            onCreate(trimmedAccountAlias, (err) => {
-                isBusy = false
+            const _cancel = () => (isBusy = false)
+            const _create = () =>
+                onCreate(trimmedAccountAlias, (err) => {
+                    isBusy = false
 
-                if(err) {
-                    console.error(err?.error || err)
+                    if(err) {
+                        console.error(err?.error || err)
 
-                    if($isLedgerProfile && isLedgerError(err)) {
-                        notifyLedgerDeviceState('error', true, true, false, false, err)
-                    } else {
-                        showAppNotification({
-                            type: 'error',
-                            message: localize(err?.error || err)
-                        })
+                        if($isLedgerProfile) {
+                            displayNotificationForLedgerProfile('error', true, true, false, false, err)
+                        } else {
+                            showAppNotification({
+                                type: 'error',
+                                message: localize(err?.error || err)
+                            })
+                        }
                     }
-                }
-            })
+                })
+
+            if($isLedgerProfile) {
+                promptUserToConnectLedger(false, _create, _cancel)
+            } else {
+                _create()
+            }
         }
     }
     const handleCancelClick = () => {
