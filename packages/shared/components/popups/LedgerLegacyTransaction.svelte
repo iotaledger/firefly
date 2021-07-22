@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { Animation, Text } from 'shared/components'
     import { formatAddressForLedger } from 'shared/lib/ledger'
     import { asyncGetAddressChecksum } from 'shared/lib/migration'
     import type { Input, Transfer } from 'shared/lib/typings/migration'
@@ -30,7 +31,7 @@
     <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-5 mb-4 flex flex-col space-y-1 text-center">
         <Text type="h5" highlighted classes="mb-2">{locale('popups.ledgerTransaction.transaction.output')}</Text>
         <Text type="pre">{formatUnitBestMatch(transfer.value)}</Text>
-        <Text type="pre">{formatAddressForLedger(transfer.address)}</Text>
+        <Text type="pre">{formatAddressForLedger(transfer.address, true)}</Text>
         <Text type="pre">
             {#await asyncGetAddressChecksum(transfer.address)}
                 ...

@@ -23,7 +23,7 @@ export const PERMANODE = "http://permanode.ledgermigration1.net:4000/api"
 export const ADDRESS_SECURITY_LEVEL = 2
 
 /** Minimum migration balance */
-export const MINIMUM_MIGRATION_BALANCE = 100
+export const MINIMUM_MIGRATION_BALANCE = 1000000
 
 /** Bundle mining timeout for each bundle */
 export const MINING_TIMEOUT_SECONDS = 10
@@ -36,6 +36,8 @@ const SOFTWARE_MAX_INPUTS_PER_BUNDLE = 10
 const HARDWARE_MAX_INPUTS_PER_BUNDLE = 3
 
 const HARDWARE_ADDRESS_GAP = 3
+
+const CHECKSUM_LENGTH = 9
 
 interface MigrationLog {
     bundleHash: string;
@@ -80,6 +82,10 @@ export enum LedgerMigrationProgress {
     GenerateAddress,
     SwitchLedgerApp,
     TransferFunds,
+}
+
+export const removeAddressChecksum = (address: string = '') => {
+    return address.slice(0, -CHECKSUM_LENGTH)
 }
 
 export const currentLedgerMigrationProgress = writable<LedgerMigrationProgress>(null)
@@ -411,7 +417,7 @@ export const mineLedgerBundle = (
         bundle.inputs.forEach((input) => spentBundleHashes.push(...input.spentBundleHashes))
 
         const unsignedBundle = createUnsignedBundle(
-            address.trytes.slice(0, -9),
+            removeAddressChecksum(address.trytes),
             bundle.inputs.map((input) => input.address),
             bundle.inputs.reduce((acc, input) => acc + input.balance, 0),
             Math.floor(Date.now() / 1000),
@@ -1332,7 +1338,7 @@ export const initialiseMigrationListeners = () => {
 }
 
 export const asyncGetAddressChecksum = (address: string = '', legacy: boolean = false): Promise<string> => {
-    const _checksum = (_address: string = '') => _address.slice(-9)
+    const _checksum = (_address: string = '') => _address.slice(-CHECKSUM_LENGTH)
     return new Promise<string>((resolve, reject) => {
         if (legacy) {
             api.getLegacyAddressChecksum(address, {
