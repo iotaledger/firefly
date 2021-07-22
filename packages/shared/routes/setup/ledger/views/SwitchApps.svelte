@@ -1,6 +1,7 @@
 <script>
     import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
-    import { promptUserToConnectLedger, notifyLedgerDeviceState } from 'shared/lib/ledger'
+    import { promptUserToConnectLedger, notifyLedgerDeviceState, ledgerDeviceState } from 'shared/lib/ledger'
+    import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { createEventDispatcher } from 'svelte'
 
     export let locale
