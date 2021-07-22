@@ -8,6 +8,11 @@
     export let locale
     export let transfer: Transfer
     export let inputs: Input[]
+
+    // Hardcoded strings because Ledger does not translate them
+    const checksumString = (checksum): string => `Chk: ${checksum}`
+    const inputString = (index): string => `Input [${index}]`
+    const outputString = 'Output'
 </script>
 
 <style>
@@ -29,30 +34,20 @@
 
 <div class="transaction flex flex-col space-y-4 scrollable-y">
     <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-5 mb-4 flex flex-col space-y-1 text-center">
-        <Text type="h5" highlighted classes="mb-2">{locale('popups.ledgerTransaction.transaction.output')}</Text>
+        <Text type="h5" highlighted classes="mb-2">{outputString}</Text>
         <Text type="pre">{formatUnitBestMatch(transfer.value)}</Text>
         <Text type="pre">{formatAddressForLedger(transfer.address, true)}</Text>
         <Text type="pre">
-            {#await asyncGetAddressChecksum(transfer.address)}
-                ...
-            {:then checksum}
-                {locale('popups.ledgerTransaction.transaction.checksum', { values: { checksum } })}
-            {/await}
+            {#await asyncGetAddressChecksum(transfer.address)}...{:then checksum}{checksumString(checksum)}{/await}
         </Text>
     </div>
     {#each inputs as { address, balance, index }}
         <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-5 mb-4 flex flex-col space-y-1 text-center">
-            <Text type="h5" highlighted classes="mb-2">
-                {locale('popups.ledgerTransaction.transaction.input', { values: { index } })}
-            </Text>
+            <Text type="h5" highlighted classes="mb-2">{inputString(index)}</Text>
             <Text type="pre">{formatUnitBestMatch(balance)}</Text>
             <Text type="pre">{formatAddressForLedger(address)}</Text>
             <Text type="pre">
-                {#await asyncGetAddressChecksum(address, true)}
-                    ...
-                {:then checksum}
-                    {locale('popups.ledgerTransaction.transaction.checksum', { values: { checksum } })}
-                {/await}
+                {#await asyncGetAddressChecksum(address, true)}...{:then checksum}{checksumString(checksum)}{/await}
             </Text>
         </div>
     {/each}

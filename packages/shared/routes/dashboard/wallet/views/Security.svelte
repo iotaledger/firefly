@@ -6,7 +6,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, isSoftwareProfile, isStrongholdLocked, profiles } from 'shared/lib/profile'
-    import { LedgerApp, LedgerDeviceState } from 'shared/lib/typings/ledger'
+    import { LedgerApp, LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { api } from 'shared/lib/wallet'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
@@ -43,7 +43,8 @@
     })
 
     const checkHardwareDeviceStatus = (state: LedgerDeviceState): void => {
-        const text = locale(`views.dashboard.security.hardwareDevice.statuses.${state}`)
+        const values = state === LedgerDeviceState.LegacyConnected ? { legacy: LedgerAppName.IOTALegacy } : {}
+        const text = locale(`views.dashboard.security.hardwareDevice.statuses.${state}`, { values })
 
         /**
          * NOTE: The text for when another app (besides IOTA or IOTA Legacy) is open
