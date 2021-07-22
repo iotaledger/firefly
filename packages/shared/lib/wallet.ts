@@ -6,7 +6,13 @@ import type { PriceData } from 'shared/lib/marketData'
 import { HistoryDataProps } from 'shared/lib/marketData'
 import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
 import { showAppNotification, showSystemNotification } from 'shared/lib/notifications'
-import { activeProfile, isStrongholdLocked, updateProfile } from 'shared/lib/profile'
+import {
+    activeProfile,
+    isLedgerProfile,
+    isSoftwareProfile,
+    isStrongholdLocked,
+    updateProfile
+} from 'shared/lib/profile'
 import type {
     Account,
     Account as BaseAccount,
@@ -38,6 +44,7 @@ import type { Message } from './typings/message'
 import type { NodeAuth, NodeInfo } from './typings/node'
 import type { Duration, StrongholdStatus } from './typings/wallet'
 import { openPopup } from './popup'
+import { notifyLedgerDeviceState } from './ledger'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -520,10 +527,15 @@ export const asyncSyncAccounts = (addressIndex?, gapLimit?, accountDiscoveryThre
                 isSyncing.set(false)
 
                 if (showErrorNotification) {
-                    showAppNotification({
-                        type: 'error',
-                        message: localize(err.error),
-                    })
+                    if(get(isLedgerProfile)) {
+                        notifyLedgerDeviceState('error', true, true)
+                    } else {
+                        showAppNotification({
+                            type: 'error',
+                            message: localize(err.error),
+                        })
+                    }
+
                     resolve()
                 } else {
                     reject(err)

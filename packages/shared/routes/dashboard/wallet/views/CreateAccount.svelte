@@ -4,6 +4,7 @@
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import { MAX_ACCOUNT_NAME_LENGTH, wallet } from 'shared/lib/wallet'
+    import { notifyLedgerDeviceState, promptUserToConnectLedger } from 'shared/lib/ledger'
 
     export let locale
     export let onCreate
@@ -21,6 +22,7 @@
         const trimmedAccountAlias = accountAlias.trim()
         if (trimmedAccountAlias) {
             error = ''
+
             if (getTrimmedLength(trimmedAccountAlias) > MAX_ACCOUNT_NAME_LENGTH) {
                 return (error = locale('error.account.length', {
                     values: {
@@ -28,13 +30,19 @@
                     },
                 }))
             }
+
             if ($accounts.find((a) => a.alias === trimmedAccountAlias)) {
                 return (error = locale('error.account.duplicate'))
             }
+
             isBusy = true
+
             onCreate(trimmedAccountAlias, (err) => {
-                error = err || ''
                 isBusy = false
+
+                console.error(err?.error)
+
+                notifyLedgerDeviceState('error', true, true)
             })
         }
     }

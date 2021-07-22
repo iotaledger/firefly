@@ -2,6 +2,8 @@
     import { ActivityDetail, ActivityRow, Icon, Text } from 'shared/components'
     import { showAppNotification } from 'shared/lib/notifications'
     import { api, isSyncing, selectedAccountId, selectedMessage } from 'shared/lib/wallet'
+    import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
+    import { notifyLedgerDeviceState } from 'shared/lib/ledger'
 
     export let locale
     export let transactions = []
@@ -30,12 +32,16 @@
                         err && err.type === 'ClientError' && err.error === 'error.node.chrysalisNodeInactive'
 
                     if (!shouldHideErrorNotification) {
-                        showAppNotification({
-                            type: 'error',
-                            message: locale(err.error),
-                        })
+                        if ($isSoftwareProfile) {
+                            showAppNotification({
+                                type: 'error',
+                                message: locale(err.error),
+                            })
+                        } else if ($isLedgerProfile) {
+                            notifyLedgerDeviceState('error', true)
+                        }
                     }
-                },
+                }
             })
         }
     }

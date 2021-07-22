@@ -13,7 +13,6 @@ import {
 import { isNewNotification, showAppNotification } from './notifications'
 import { localize } from './i18n'
 import type { NotificationType } from './typings/notification'
-import { Address } from './typings/address'
 
 const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
 
@@ -47,6 +46,11 @@ export function getLedgerDeviceStatus(
             onError()
         }
     })
+}
+
+export function isLedgerConnected(legacy: boolean = false): boolean {
+    const state = get(ledgerDeviceState)
+    return legacy ? state === LedgerDeviceState.LegacyConnected : state === LedgerDeviceState.Connected
 }
 
 export function calculateLedgerDeviceState(status: LedgerStatus): LedgerDeviceState {
@@ -132,7 +136,7 @@ export function notifyLedgerDeviceState(
         const shouldNotify = (!isConnected && !isLegacyConnected) || error
 
         if (canNotify && shouldNotify) {
-            const message = error ? isConnected ? localize(error?.error) : localize(getLegacyErrorMessage(error))
+            const message = error ? isConnected ? localize(error?.error || error) : localize(getLegacyErrorMessage(error))
                                   : localize(`error.ledger.${state}`)
             notificationId = showAppNotification({
                 type: notificationType,
