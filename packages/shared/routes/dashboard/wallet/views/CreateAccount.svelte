@@ -4,7 +4,10 @@
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import { MAX_ACCOUNT_NAME_LENGTH, wallet } from 'shared/lib/wallet'
-    import { notifyLedgerDeviceState, promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { isLedgerError, notifyLedgerDeviceState } from 'shared/lib/ledger'
+    import { isLedgerProfile } from '../../../../lib/profile'
+    import { showAppNotification } from '../../../../lib/notifications'
+    import { localize } from '../../../../lib/i18n'
 
     export let locale
     export let onCreate
@@ -40,9 +43,18 @@
             onCreate(trimmedAccountAlias, (err) => {
                 isBusy = false
 
-                console.error(err?.error)
+                if(err) {
+                    console.error(err?.error || err)
 
-                notifyLedgerDeviceState('error', true, true)
+                    if($isLedgerProfile && isLedgerError(err)) {
+                        notifyLedgerDeviceState('error', true, true, false, false, err)
+                    } else {
+                        showAppNotification({
+                            type: 'error',
+                            message: localize(err?.error || err)
+                        })
+                    }
+                }
             })
         }
     }

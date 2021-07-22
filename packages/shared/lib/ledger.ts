@@ -136,11 +136,16 @@ export function notifyLedgerDeviceState(
         const shouldNotify = (!isConnected && !isLegacyConnected) || error
 
         if (canNotify && shouldNotify) {
-            const message = error ? isConnected ? localize(error?.error || error) : localize(getLegacyErrorMessage(error))
-                                  : localize(`error.ledger.${state}`)
+            const stateErrorMessage = localize(`error.ledger.${state}`)
+            const errorMessage = legacy ? getLegacyErrorMessage(error) : error?.error ? localize(error.error) : error
+
+            const message = error ? errorMessage : stateErrorMessage
+            const subMessage = error ? stateErrorMessage : ''
+
             notificationId = showAppNotification({
                 type: notificationType,
-                message: message
+                message,
+                subMessage
             })
         }
     }
@@ -157,6 +162,12 @@ export function notifyLedgerDeviceState(
     }
 
     return notificationId
+}
+
+export function isLedgerError(error: any): boolean {
+    const type: string = error?.type || error
+
+    return type.slice(0, 6) === "Ledger"
 }
 
 export function pollLedgerDeviceStatus(

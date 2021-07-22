@@ -2,7 +2,7 @@
     import { DashboardPane } from 'shared/components'
     import { clearSendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
-    import { notifyLedgerDeviceState, promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { isLedgerError, notifyLedgerDeviceState, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { addProfileCurrencyPriceData, priceData } from 'shared/lib/marketData'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup } from 'shared/lib/popup'
@@ -143,8 +143,8 @@
         const _onError = (error: any = null) => {
             console.error(error)
 
-            if ($isLedgerProfile) {
-                notifyLedgerDeviceState('error', true, true)
+            if ($isLedgerProfile && isLedgerError(error)) {
+                notifyLedgerDeviceState('error', true, true, false, false, error)
             } else {
                 showAppNotification({
                     type: 'error',
@@ -272,6 +272,8 @@
                 onError(err) {
                     closePopup(true)
 
+                    console.error(err)
+
                     isGeneratingAddress = false
 
                     const isClientError = err && err.type === 'ClientError'
@@ -388,7 +390,7 @@
                         completeCallback()
                     },
                     onError(err) {
-                        completeCallback(locale(err.error))
+                        completeCallback(err)
                     },
                 })
             } else {
@@ -439,7 +441,7 @@
                             })
                         },
                         onError(err) {
-                            completeCallback(locale(err.error))
+                            completeCallback(err)
                         },
                     }
                 )

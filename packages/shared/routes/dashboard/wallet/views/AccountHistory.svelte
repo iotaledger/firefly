@@ -3,7 +3,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { api, isSyncing, selectedAccountId, selectedMessage } from 'shared/lib/wallet'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
-    import { notifyLedgerDeviceState } from 'shared/lib/ledger'
+    import { isLedgerError, notifyLedgerDeviceState } from 'shared/lib/ledger'
 
     export let locale
     export let transactions = []
@@ -32,8 +32,8 @@
                         err && err.type === 'ClientError' && err.error === 'error.node.chrysalisNodeInactive'
 
                     if (!shouldHideErrorNotification) {
-                        if ($isLedgerProfile) {
-                            notifyLedgerDeviceState('error', true)
+                        if ($isLedgerProfile && isLedgerError(err)) {
+                            notifyLedgerDeviceState('error', true, true, false, false, err)
                         } else {
                             showAppNotification({
                                 type: 'error',
