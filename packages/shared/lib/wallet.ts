@@ -9,7 +9,8 @@ import { showAppNotification, showSystemNotification } from 'shared/lib/notifica
 import {
     activeProfile,
     isSoftwareProfile,
-    isStrongholdLocked, Profile,
+    isStrongholdLocked,
+    Profile,
     updateProfile
 } from 'shared/lib/profile'
 import type {
@@ -17,6 +18,7 @@ import type {
     Account as BaseAccount,
     AccountToCreate,
     Balance,
+    SyncAccountOptions,
     SyncedAccount
 } from 'shared/lib/typings/account'
 import type { Address } from 'shared/lib/typings/address'
@@ -42,16 +44,15 @@ import type {
 } from 'shared/lib/typings/migration'
 import { formatUnitBestMatch } from 'shared/lib/units'
 import { get, writable, Writable } from 'svelte/store'
+import { openPopup } from './popup'
+import { walletSetupType } from './router'
 import type { ClientOptions } from './typings/client'
 import type { LedgerStatus } from './typings/ledger'
 import type { Message } from './typings/message'
 import type { NodeAuth, NodeInfo } from './typings/node'
-import type { Duration, StrongholdStatus } from './typings/wallet'
-import { openPopup } from './popup'
-import { walletSetupType } from './router'
 import { SetupType } from './typings/routes'
-import type { SyncAccountOptions } from 'shared/lib/typings/account'
-
+import type { Duration, StrongholdStatus } from './typings/wallet'
+Í
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
 export const MAX_PROFILE_NAME_LENGTH = 20
