@@ -9,7 +9,7 @@
         formatCurrency,
     } from 'shared/lib/currency'
     import { Electron } from 'shared/lib/electron'
-    import { getLegacyErrorMessage, notifyLedgerDeviceState, promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { notifyLedgerDeviceState, promptUserToConnectLedger } from 'shared/lib/ledger'
     import {
         ADDRESS_SECURITY_LEVEL,
         bundlesWithUnspentAddresses,
@@ -25,7 +25,6 @@
         spentAddressesWithNoBundleHashes,
         unselectedInputs,
     } from 'shared/lib/migration'
-    import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
