@@ -30,6 +30,36 @@
             "body1": "Tomar bikin û kîta rizgarkirinê PDF çap bistînin.",
             "body2": "Heke hûn kîta rizgarkirinê dagirîn û bi ewlehî veşêrin, hûn hertim dikarin cuzdanka xwe paş bistînin."
         },
+        "create": {
+            "title": "Cuzdanek nû çêke",
+            "body": "Create a new wallet. You can choose a regular software wallet or if you have a Ledger device you can set up a hardware wallet.",
+            "softwareAccount": {
+                "title": "Ez cuzdanek nermalavê dixwazim",
+                "description": "Hevokek Vejînê ya 24-bêjeyî biafirînin"
+            },
+            "ledgerAccount": {
+                "title": "Ez cuzdanek hardwarî dixwazim",
+                "description": "Ledger Nano S or Nano X required"
+            }
+        },
+        "setupLedger": {
+            "title": "Install the new IOTA Ledger app on your device",
+            "body1": "1. Open Ledger Live and install New IOTA app",
+            "body2": "2. Close Ledger Live desktop application",
+            "body3": "3. Open the new app on your Ledger device",
+            "progress1": "Ledgera xwe re were girêdan",
+            "progress2": "Navnîşanekê çêke",
+            "progress3": "Switch Ledger app",
+            "progress4": "Transfer funds",
+            "watchVideo": "Watch video guide",
+            "checkingConnection": "Checking Ledger Connection"
+        },
+        "ledgerInstallationGuide": {
+            "title": "Have you installed the necessary Ledger apps?",
+            "body1": "Before you proceed, you must find and install both the IOTA Legacy app and the new IOTA app through Ledger Live.",
+            "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
+            "action": "Yes, I've installed these apps"
+        },
         "password": {
             "title": "Şîfreyê pêk bîne",
             "body1": "Jibo mayînên xwe biparêzî pêdivîya te şifreyek xurtir heye, kombînên pêyvan karbînin. Hevokên hêsan, nav û dîrokên rojmêrî birevin.",
@@ -85,9 +115,11 @@
         },
         "congratulations": {
             "title": "Sazkirina cuzdankê dawî nehat",
-            "body": "Cuzdank amadeye jibo bikaranînê.",
             "fundsMigrated": "Mayîn hat barkirin",
-            "success": "We mayînên xwe bi serkeftî barkirin tora nû",
+            "body": "Cuzdank amadeye jibo bikaranînê.",
+            "softwareMigratedBody": "You have successfully migrated your funds to the new network",
+            "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the IOTA Legacy app from your device.",
             "exportMigration": "Tomarkirinê transferê derve bike û barkirinê biqedîn"
         },
         "import": {
@@ -98,7 +130,9 @@
             "importMnemonic": "Min rewişta rizgarkirina Firefly heye",
             "importMnemonicDescription": "Jibo rizgarkirina cuzdankê rewişta xwe ya veşartî têkevin",
             "importFile": "Min cîhgira dosyayê heye",
-            "importFileDescription": "Dosyayêk SeedVault'ê an jî Stronghold'ê têkevin"
+            "importFileDescription": "Dosyayêk SeedVault'ê an jî Stronghold'ê têkevin",
+            "importLedger": "I have a Ledger backup",
+            "importLedgerDescription": "Restore or migrate a Ledger profile"
         },
         "importFromText": {
             "seed": {
@@ -119,6 +153,55 @@
             "title": "Bikaranîna dosya cîgirî cuzdanka xwe rizgar bikin",
             "body": "Pelê hilanînê ji bo vegerandina berîka xwe têxin hundurê. Piştgirî dikarin bibin Stronghold (.stronghold) an Trinity SeedVault (.kdbx)."
         },
+        "importFromLedger": {
+            "title": "Restore or Migrate your Ledger",
+            "body": "Restore an existing Firefly Ledger profile, or migrate your funds from Trinity.",
+            "haveFireflyLedger": "I have a Firefly Ledger backup",
+            "haveFireflyLedgerDescription": "Restore a Firefly profile",
+            "haveTrinityLedger": "I have a Trinity Ledger backup",
+            "haveTrinityLedgerDescription": "Migrate a Trinity profile"
+        },
+        "connectLedger": {
+            "title": "Connect your Ledger to Firefly",
+            "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed.",
+            "trafficLight1": "Connect and unlock your Ledger with your PIN",
+            "trafficLight2": "Open the new IOTA app on your Ledger",
+            "tips": "Tips if your Ledger isn’t connecting"
+        },
+        "restoreFromFireflyLedger": {
+            "title": "Restore Your Ledger Profile",
+            "body": "Press restore to complete the setup process and restore your wallets, balances and transaction history.",
+            "restoring": "Restoring from Ledger..."
+        },
+        "legacyLedgerIntro": {
+            "title": "Start your Ledger migration using Firefly",
+            "body1": "Firefly will help you to transfer your tokens to the new Chrysalis network.",
+            "body2": "After you migration, you will be able to send and receive your tokens using your Ledger with Firefly.",
+            "readMore": "What to expect from the migration process"
+        },
+        "generateNewLedgerAddress": {
+            "title": "Navnîşanek nû çêke",
+            "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
+            "confirmTitle": "Confirm the new address",
+            "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
+            "confirmedTitle": "Address confirmed",
+            "confirmedBody": "You have confirmed that the address in Firefly matches the one on your Ledger device.",
+            "generating": "Generating address"
+        },
+        "switchLedgerApps": {
+            "title": "Switch Ledger apps",
+            "body": "Please switch to the IOTA Legacy app on your Ledger device to continue migration. When ready, press continue.",
+            "ledgerApp": "IOTA",
+            "ledgerLegacyApp": "IOTA Legacy"
+        },
+        "selectLedgerAccountIndex": {
+            "title": "Choose Ledger account index",
+            "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
+            "accountIndex": "Account Index",
+            "accountPage": "Account Page",
+            "standard": "Standard",
+            "expert": "Expert"
+        },
         "importBackupPassword": {
             "title": "Berîka xwe ji SeedVault an jî ji Stronghold vegerînin",
             "body1": "Ji kerema xwe şîfreya xweya hilanînê binivîsin.",
@@ -126,11 +209,7 @@
         },
         "importSuccess": {
             "title": "We hilanîna xwe bi serfirazî vegerand",
-            "body": "Hun dikarin profile xwe a nû tomar bikî.",
-            "seedvaultTitle": "Tevilkirina hundir serkeft",
-            "seedvaultBody": "Pêborîna we raste, niha dikarin bidomînî.",
-            "strongholdTitle": "Tevilkirina hundir serkeft",
-            "strongholdBody": "Pêborîna we raste, niha dikarin bidomînî."
+            "body": "Hun dikarin profile xwe a nû tomar bikî."
         },
         "migrate": {
             "title": "Hebûnên xwe bar bikin",
@@ -196,7 +275,8 @@
             "title": "Hevsenga te",
             "body": "Berî ku bidomînin bila bîlançoya we rast be. Heke hin tişt rast xuya nekin, hûn dikarin dîsa kontrol bikin.",
             "error": "Kêmahiya veguhastina herî kêm 1 Mi ye. Heke hevsengiya we rast xuya nake, careke din venêrin.",
-            "zeroBalance": "Dîsa biceribînin. Heke hûn hîn jî nekarin hevsengiya xwe bibînin, dibe ko hûn seed'a xwe nerast ketibînê."
+            "zeroBalance": "Dîsa biceribînin. Heke hûn hîn jî nekarin hevsengiya xwe bibînin, dibe ko hûn seed'a xwe nerast ketibînê.",
+            "zeroBalanceLedgerLegacy": "Try checking again. If you still can't find your balance you might have selected the wrong account index."
         },
         "settings": {
             "settings": "Mîhengên",
@@ -357,7 +437,15 @@
                 },
                 "hardwareDevice": {
                     "title": "Pergala Arasteyî",
-                    "noneDetected": "Çi nehat dîtin"
+                    "statuses": {
+                        "appNotOpen": "IOTA App Not Open",
+                        "connected": "Connected",
+                        "legacyConnected": "IOTA Legacy App Open",
+                        "locked": "Kilîl kirî",
+                        "mnemonicMismatch": "Wrong Ledger or Mnemonic",
+                        "notDetected": "Not Detected",
+                        "otherConnected": "App Open"
+                    }
                 },
                 "strongholdStatus": {
                     "title": "Rewşa Cuzdankê",
@@ -488,6 +576,48 @@
             "body": "Nûvekirina torgiloka Chrysalis dest pê kir.",
             "bodyMigration": "Koçberî heya ku xelas bibe seqet e.",
             "bodyFirefly": "Firefly heya ku xelas bibe seqet e.\nKoçkirina Tokensd jî dê paşê gengaz be."
+        },
+        "ledgerNotConnected": {
+            "connect": "Open the new IOTA app on your Ledger device to continue",
+            "connectLegacy": "Open the IOTA Legacy app on your Ledger device to continue"
+        },
+        "ledgerConfirmation": {
+            "confirm": "To proceed, confirm the prompt displayed on your Ledger device"
+        },
+        "ledgerAppGuide": {
+            "title": "Guide to installing the Ledger apps",
+            "steps": [
+                "Install and open the Ledger Live application",
+                "Ensure that your Ledger is connected",
+                "Search for apps: IOTA Legacy and IOTA (MIOTA)",
+                "Install both apps: IOTA Legacy and IOTA (MIOTA)",
+                "Remember that it's important to close Ledger Live before returning to Firefly"
+            ]
+        },
+        "ledgerConnectionGuide": {
+            "title": "Tips if your Ledger isn’t connecting",
+            "steps": [
+                "Make sure Ledger Live is not open on your computer",
+                "Ensure you have unlocked your Ledger device with your PIN",
+                "Open the new IOTA app on your Ledger device"
+            ]
+        },
+        "ledgerTransaction": {
+            "remainderAddress": {
+                "title": "Confirm remainder address",
+                "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+            },
+            "transaction": {
+                "title": "Kirarê bipêjirîn",
+                "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted.",
+                "input": "Input [{index}]",
+                "output": "Output",
+                "checksum": "Chk: {checksum}"
+            }
+        },
+        "ledgerAddress": {
+            "title": "Confirm receive address",
+            "body": "Confirm that the receive address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
         }
     },
     "charts": {
@@ -505,6 +635,8 @@
     "actions": {
         "continue": "Berdewam",
         "back": "Şûnde",
+        "previous": "Previous",
+        "next": "Next",
         "cancel": "Betal",
         "close": "Derkeve",
         "dismiss": "Devjêberde",
@@ -573,6 +705,7 @@
         "addAccount": "Cuzdankî zêde",
         "checkForUpdates": "Ji bo Nûvekirinan Kontrol bikin",
         "reportAnIssue": "Pirsgirêkekê ragihînin\n",
+        "restore": "Restore",
         "clear": "Paqij bike",
         "hideDetails": "Derbarê dade",
         "yes": "Erê",
@@ -592,7 +725,8 @@
         "searchBalances": "Mayîna bigere",
         "searchAgain": "Dîsa lê bigere",
         "searching": "Lêdigere...",
-        "closeFirefly": "Firefly bigire"
+        "closeFirefly": "Firefly bigire",
+        "generateAddress": "Navnîşanekê çêke"
     },
     "general": {
         "password": "Şîfre",
@@ -607,6 +741,7 @@
         "received": "Wergirtin",
         "sendPayment": "Dravê bişînin",
         "moveFunds": "Transfera dahîl",
+        "sendTo": "Send To",
         "sendFunds": "Diraw hinêre",
         "sendToAddress": "Navnîşana xwe hinêre",
         "scanQrOrPaste": "Qodek QR-ê Scan bikin an navnîşanekê pêve bide",
@@ -625,6 +760,8 @@
         "myAddress": "Navnîşana Min",
         "shareAddress": "Navnîşanekê parve bike",
         "yourAddress": "Navnîşana we",
+        "newRemainder": "New Remainder",
+        "remainder": "Remainder",
         "generateNewAddress": "Navnîşanek nû çêke",
         "copyAddress": "Kopîkirina Navnîşanê",
         "import": "Barke hundir",
@@ -661,6 +798,7 @@
         "messageId": "Nasnameya Peyamê",
         "inputAddress": "Navnîşanê Hinêre",
         "receiveAddress": "Navnîşana Standinê",
+        "newAddress": "New Address",
         "date": "Rojmêr",
         "status": "Hal",
         "confirmed": "Hat Pejirandin",
@@ -672,11 +810,13 @@
         "firstSync": "Dîroka hevdemkirinê, dibe ku ev demek bikişîne...",
         "transferSyncing": "Cuzdanka sekronîze bike",
         "transferSelectingInputs": "Hilbijartina têketinê",
-        "transferRemainderAddress": "Navnîşana spartina bermayî çêdike",
+        "transferRemainderAddress": "Generating remainder address",
+        "transferPreparedTransaction": "Preparing transaction",
         "transferSigning": "Îmzekirina danûstendinê",
         "transferPow": "PoW çêdibe",
         "transferBroadcasting": "Kiryar tê weşandin",
         "transferComplete": "Transfer gehişt",
+        "generatingReceiveAddress": "Generating receive address",
         "creatingAccount": "Profîlek nû çêdibe, ji kerema xwe rawestin...",
         "updatingAccount": "Cuzdank tê nûvekirin, ji kerema xwe bisekinin...",
         "accountSyncing": "Cuzdank sekronîze dibe",
@@ -770,7 +910,10 @@
             "tilde": "Nabe navê profîlê bi qerekteran '~' destpêbike.",
             "control": "Nabe navê profîlê qerekterek yê kontrolê destpêbike.",
             "startDot": "Nabe navê profîlê bi qerekteran '.' destpêbike.",
-            "chars": "Nabe navê profîlê ji qerekterek <>:\"/\\|?* destpêbike"
+            "chars": "Nabe navê profîlê ji qerekterek <>:\"/\\|?* destpêbike",
+            "index": "Your account index must be a number between 0 and 2,147,483,647.",
+            "page": "Your account page must be a number between 0 and 2,147,483,647.",
+            "syncing": "There was an error syncing your wallets."
         },
         "send": {
             "addressLength": "Divê dirêjiya navnîşan {length, plural, one {1 character} other {# qerekter}} be.",
@@ -784,7 +927,9 @@
             "insufficientFunds": "Mayîna Cuzdankê têrê nake.",
             "noToAccount": "Jibo hinêrtina mayînê te Cuzdank jê ne girt.",
             "sendingDust": "Hûn nikarin ji 1 Mi kêmtir hinêrin.",
-            "leavingDust": "Hûn nikarin di navnîşana xwe de ji 1 Mi kêmtir bêhêlîn."
+            "leavingDust": "Hûn nikarin di navnîşana xwe de ji 1 Mi kêmtir bêhêlîn.",
+            "cancelled": "The transaction was cancelled.",
+            "transaction": "There was an error sending your transaction. Please try again."
         },
         "node": {
             "invalid": "Ji kerema xwe URL'yeke derbasdar bikevê.",
@@ -805,6 +950,19 @@
             "phraseWordCount": "Divê di hevoka başbûna we de 24 peyv hebin, ku niha li wir e {length, plural, one {is 1} other {are #}}.",
             "phraseUnrecognizedWord": "Di hevoka başbûna we de peyva \"{word}\" a ku nayê nas kirin",
             "phraseCaseWord": "Divê pêyv \"{word}\" bi tîpa piçûk be"
+        },
+        "ledger": {
+            "appNotOpen": "You must open the IOTA app on your Ledger device.",
+            "generic": "There was an error connecting to your Ledger device.",
+            "legacyConnected": "The wrong app is open on your Ledger device.",
+            "locked": "Please unlock your Ledger device by entering the PIN.",
+            "mnemonicMismatch": "You have connected the wrong Ledger device or the mnemonic has changed.",
+            "notDetected": "No Ledger device detected.",
+            "notFound": "Ledger device not found.",
+            "otherConnected": "The wrong app is open on your Ledger device.",
+            "generateAddress": "There was an error generating an address.",
+            "timeout": "Timeout exceeded",
+            "disconnected": "Device disconnected"
         }
     },
     "tooltips": {

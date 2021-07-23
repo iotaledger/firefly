@@ -30,6 +30,36 @@
             "body1": "保存和打印Recovery Kit PDF模板。",
             "body2": "如果您填写Recovery Kit并安全存储它，您就能够恢复您的钱包。"
         },
+        "create": {
+            "title": "Create a wallet",
+            "body": "Create a new wallet. You can choose a regular software wallet or if you have a Ledger device you can set up a hardware wallet.",
+            "softwareAccount": {
+                "title": "I want a software wallet",
+                "description": "Create a 24-word Recovery Phrase"
+            },
+            "ledgerAccount": {
+                "title": "I want a hardware wallet",
+                "description": "Ledger Nano S or Nano X required"
+            }
+        },
+        "setupLedger": {
+            "title": "Install the new IOTA Ledger app on your device",
+            "body1": "1. Open Ledger Live and install New IOTA app",
+            "body2": "2. Close Ledger Live desktop application",
+            "body3": "3. Open the new app on your Ledger device",
+            "progress1": "Connect your Ledger",
+            "progress2": "Generate address",
+            "progress3": "Switch Ledger app",
+            "progress4": "Transfer funds",
+            "watchVideo": "Watch video guide",
+            "checkingConnection": "Checking Ledger Connection"
+        },
+        "ledgerInstallationGuide": {
+            "title": "Have you installed the necessary Ledger apps?",
+            "body1": "Before you proceed, you must find and install both the IOTA Legacy app and the new IOTA app through Ledger Live.",
+            "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
+            "action": "Yes, I've installed these apps"
+        },
         "password": {
             "title": "设置密码",
             "body1": "您需要一个强大的密码来保护您的资金。可使用一些单词的组合，并避免常见的短语，名称或日期。",
@@ -85,9 +115,11 @@
         },
         "congratulations": {
             "title": "钱包设置完成",
-            "body": "您的新钱包已准备使用。",
             "fundsMigrated": "资金已迁移",
-            "success": "您已成功地将您的资金迁移到新的网络",
+            "body": "您的新钱包已准备使用。",
+            "softwareMigratedBody": "You have successfully migrated your funds to the new network",
+            "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the IOTA Legacy app from your device.",
             "exportMigration": "导出迁移日志并完成设置"
         },
         "import": {
@@ -98,7 +130,9 @@
             "importMnemonic": "我有一个Fifrefly恢复密语",
             "importMnemonicDescription": "输入恢复密语来找回您的钱包",
             "importFile": "我有一个备份文件",
-            "importFileDescription": "上传Seedvault或Stronghold 文件"
+            "importFileDescription": "上传Seedvault或Stronghold 文件",
+            "importLedger": "I have a Ledger backup",
+            "importLedgerDescription": "Restore or migrate a Ledger profile"
         },
         "importFromText": {
             "seed": {
@@ -119,6 +153,55 @@
             "title": "使用备份文件恢复你的钱包",
             "body": "导入备份文件以恢复您的钱包。备份可以是 Stronghold (.stronghold) 或 Trinity SeedVault (.kdbx)格式。"
         },
+        "importFromLedger": {
+            "title": "Restore or Migrate your Ledger",
+            "body": "Restore an existing Firefly Ledger profile, or migrate your funds from Trinity.",
+            "haveFireflyLedger": "I have a Firefly Ledger backup",
+            "haveFireflyLedgerDescription": "Restore a Firefly profile",
+            "haveTrinityLedger": "I have a Trinity Ledger backup",
+            "haveTrinityLedgerDescription": "Migrate a Trinity profile"
+        },
+        "connectLedger": {
+            "title": "Connect your Ledger to Firefly",
+            "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed.",
+            "trafficLight1": "Connect and unlock your Ledger with your PIN",
+            "trafficLight2": "Open the new IOTA app on your Ledger",
+            "tips": "Tips if your Ledger isn’t connecting"
+        },
+        "restoreFromFireflyLedger": {
+            "title": "Restore Your Ledger Profile",
+            "body": "Press restore to complete the setup process and restore your wallets, balances and transaction history.",
+            "restoring": "Restoring from Ledger..."
+        },
+        "legacyLedgerIntro": {
+            "title": "Start your Ledger migration using Firefly",
+            "body1": "Firefly will help you to transfer your tokens to the new Chrysalis network.",
+            "body2": "After you migration, you will be able to send and receive your tokens using your Ledger with Firefly.",
+            "readMore": "What to expect from the migration process"
+        },
+        "generateNewLedgerAddress": {
+            "title": "生成新地址",
+            "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
+            "confirmTitle": "Confirm the new address",
+            "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
+            "confirmedTitle": "Address confirmed",
+            "confirmedBody": "You have confirmed that the address in Firefly matches the one on your Ledger device.",
+            "generating": "Generating address"
+        },
+        "switchLedgerApps": {
+            "title": "Switch Ledger apps",
+            "body": "Please switch to the IOTA Legacy app on your Ledger device to continue migration. When ready, press continue.",
+            "ledgerApp": "IOTA",
+            "ledgerLegacyApp": "IOTA Legacy"
+        },
+        "selectLedgerAccountIndex": {
+            "title": "Choose Ledger account index",
+            "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
+            "accountIndex": "Account Index",
+            "accountPage": "Account Page",
+            "standard": "Standard",
+            "expert": "Expert"
+        },
         "importBackupPassword": {
             "title": "使用SeedVault或Stronghold文件恢复你的钱包",
             "body1": "请输入您的备份密码。",
@@ -126,11 +209,7 @@
         },
         "importSuccess": {
             "title": "您已成功恢复您的备份。",
-            "body": "您现在可以设置新的配置文件。",
-            "seedvaultTitle": "导入成功",
-            "seedvaultBody": "您的密码正确，您现在可以继续。",
-            "strongholdTitle": "导入成功",
-            "strongholdBody": "您的密码正确，您现在可以继续。"
+            "body": "您现在可以设置新的配置文件。"
         },
         "migrate": {
             "title": "迁移您的资金",
@@ -196,7 +275,8 @@
             "title": "您的余额",
             "body": "在继续之前请确保您的余额是正确的。如果它看起来不正确，您可以再次检查。",
             "error": "最小迁移金额是 1 Mi。请再次检查您的余额是否正确。",
-            "zeroBalance": "请再试一次。如果您仍然找不到您的余额，您输入的种子可能不正确。"
+            "zeroBalance": "请再试一次。如果您仍然找不到您的余额，您输入的种子可能不正确。",
+            "zeroBalanceLedgerLegacy": "Try checking again. If you still can't find your balance you might have selected the wrong account index."
         },
         "settings": {
             "settings": "设置",
@@ -357,7 +437,15 @@
                 },
                 "hardwareDevice": {
                     "title": "硬件设备",
-                    "noneDetected": "没有检测到"
+                    "statuses": {
+                        "appNotOpen": "IOTA App Not Open",
+                        "connected": "Connected",
+                        "legacyConnected": "IOTA Legacy App Open",
+                        "locked": "锁定",
+                        "mnemonicMismatch": "Wrong Ledger or Mnemonic",
+                        "notDetected": "Not Detected",
+                        "otherConnected": "App Open"
+                    }
                 },
                 "strongholdStatus": {
                     "title": "钱包状态",
@@ -488,6 +576,48 @@
             "body": "Chrysalis网络升级已经开始。",
             "bodyMigration": "在维护完成之前暂不支持迁移功能。",
             "bodyFirefly": "在完成之前Firefly将被暂停使用。完成之后您仍然可以进行代币迁移。"
+        },
+        "ledgerNotConnected": {
+            "connect": "Open the new IOTA app on your Ledger device to continue",
+            "connectLegacy": "Open the IOTA Legacy app on your Ledger device to continue"
+        },
+        "ledgerConfirmation": {
+            "confirm": "To proceed, confirm the prompt displayed on your Ledger device"
+        },
+        "ledgerAppGuide": {
+            "title": "Guide to installing the Ledger apps",
+            "steps": [
+                "Install and open the Ledger Live application",
+                "Ensure that your Ledger is connected",
+                "Search for apps: IOTA Legacy and IOTA (MIOTA)",
+                "Install both apps: IOTA Legacy and IOTA (MIOTA)",
+                "Remember that it's important to close Ledger Live before returning to Firefly"
+            ]
+        },
+        "ledgerConnectionGuide": {
+            "title": "Tips if your Ledger isn’t connecting",
+            "steps": [
+                "Make sure Ledger Live is not open on your computer",
+                "Ensure you have unlocked your Ledger device with your PIN",
+                "Open the new IOTA app on your Ledger device"
+            ]
+        },
+        "ledgerTransaction": {
+            "remainderAddress": {
+                "title": "Confirm remainder address",
+                "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+            },
+            "transaction": {
+                "title": "确认交易",
+                "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted.",
+                "input": "Input [{index}]",
+                "output": "Output",
+                "checksum": "Chk: {checksum}"
+            }
+        },
+        "ledgerAddress": {
+            "title": "Confirm receive address",
+            "body": "Confirm that the receive address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
         }
     },
     "charts": {
@@ -505,6 +635,8 @@
     "actions": {
         "continue": "继续",
         "back": "返回",
+        "previous": "Previous",
+        "next": "Next",
         "cancel": "取消",
         "close": "关闭",
         "dismiss": "取消",
@@ -573,6 +705,7 @@
         "addAccount": "添加钱包",
         "checkForUpdates": "检查更新",
         "reportAnIssue": "反馈问题",
+        "restore": "Restore",
         "clear": "清除",
         "hideDetails": "隐藏详情",
         "yes": "是",
@@ -592,7 +725,8 @@
         "searchBalances": "搜索余额",
         "searchAgain": "重新搜索",
         "searching": "搜索中...",
-        "closeFirefly": "关闭Firefly"
+        "closeFirefly": "关闭Firefly",
+        "generateAddress": "Generate address"
     },
     "general": {
         "password": "密码",
@@ -607,6 +741,7 @@
         "received": "已收到",
         "sendPayment": "发送资金",
         "moveFunds": "内部转账",
+        "sendTo": "Send To",
         "sendFunds": "发送资金",
         "sendToAddress": "发送至地址",
         "scanQrOrPaste": "扫描二维码或粘贴地址",
@@ -625,6 +760,8 @@
         "myAddress": "我的地址",
         "shareAddress": "分享地址",
         "yourAddress": "您的地址",
+        "newRemainder": "New Remainder",
+        "remainder": "Remainder",
         "generateNewAddress": "生成新地址",
         "copyAddress": "复制地址",
         "import": "导入",
@@ -661,6 +798,7 @@
         "messageId": "消息 ID",
         "inputAddress": "发送地址",
         "receiveAddress": "接收地址",
+        "newAddress": "New Address",
         "date": "日期",
         "status": "状态",
         "confirmed": "已确认",
@@ -672,11 +810,13 @@
         "firstSync": "同步历史记录，可能需要一段时间...",
         "transferSyncing": "正在同步钱包",
         "transferSelectingInputs": "选择输入",
-        "transferRemainderAddress": "生成剩余的存款地址",
+        "transferRemainderAddress": "Generating remainder address",
+        "transferPreparedTransaction": "Preparing transaction",
         "transferSigning": "签名交易",
         "transferPow": "执行PoW",
         "transferBroadcasting": "正在广播交易...",
         "transferComplete": "转账完毕",
+        "generatingReceiveAddress": "Generating receive address",
         "creatingAccount": "正在创建钱包，请稍候...",
         "updatingAccount": "正在更新钱包，请稍候...",
         "accountSyncing": "正在同步钱包",
@@ -770,7 +910,10 @@
             "tilde": "配置名称不能以“~”字符开头。",
             "control": "配置名称不能包含控制字符。",
             "startDot": "配置名称不能以 '.' 字符开头。",
-            "chars": "配置名称不能包含以下字符 <>:\"/\\|?*"
+            "chars": "配置名称不能包含以下字符 <>:\"/\\|?*",
+            "index": "Your account index must be a number between 0 and 2,147,483,647.",
+            "page": "Your account page must be a number between 0 and 2,147,483,647.",
+            "syncing": "There was an error syncing your wallets."
         },
         "send": {
             "addressLength": "地址的长度应该是 {length, plural,one {1 个字符} other {# 个字符}}。",
@@ -784,7 +927,9 @@
             "insufficientFunds": "该账户资金不足。",
             "noToAccount": "您尚未选择一个收款账户来发送资金。",
             "sendingDust": "您的发送不能小于 1 Mi。",
-            "leavingDust": "您的地址余额不能少于1Mi。"
+            "leavingDust": "您的地址余额不能少于1Mi。",
+            "cancelled": "The transaction was cancelled.",
+            "transaction": "There was an error sending your transaction. Please try again."
         },
         "node": {
             "invalid": "请输入有效的URL",
@@ -805,6 +950,19 @@
             "phraseWordCount": "您的恢复密语中应该有24个单词，目前 {length, plural, one {只有 1}other {是 #}} 个单词。",
             "phraseUnrecognizedWord": "恢复短语中无法识别的单词“{word}”",
             "phraseCaseWord": "单词 \"{word}\" 应为小写"
+        },
+        "ledger": {
+            "appNotOpen": "You must open the IOTA app on your Ledger device.",
+            "generic": "There was an error connecting to your Ledger device.",
+            "legacyConnected": "The wrong app is open on your Ledger device.",
+            "locked": "Please unlock your Ledger device by entering the PIN.",
+            "mnemonicMismatch": "You have connected the wrong Ledger device or the mnemonic has changed.",
+            "notDetected": "No Ledger device detected.",
+            "notFound": "Ledger device not found.",
+            "otherConnected": "The wrong app is open on your Ledger device.",
+            "generateAddress": "There was an error generating an address.",
+            "timeout": "Timeout exceeded",
+            "disconnected": "Device disconnected"
         }
     },
     "tooltips": {
