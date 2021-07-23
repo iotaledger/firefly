@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" xmlns="http://www.w3.org/1999/html">
     import { Animation, Text } from 'shared/components'
     import { formatAddressForLedger } from 'shared/lib/ledger'
     import { asyncGetAddressChecksum } from 'shared/lib/migration'
@@ -33,22 +33,26 @@
 </div>
 
 <div class="transaction flex flex-col space-y-4 scrollable-y">
-    <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-5 mb-4 flex flex-col space-y-1 text-center">
-        <Text type="h5" highlighted classes="mb-2">{outputString}</Text>
-        <Text type="pre">{formatUnitBestMatch(transfer.value)}</Text>
-        <Text type="pre">{formatAddressForLedger(transfer.address, true)}</Text>
-        <Text type="pre">
-            {#await asyncGetAddressChecksum(transfer.address)}...{:then checksum}{checksumString(checksum)}{/await}
-        </Text>
+    <div class="mb-4">
+        <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-5 text-center">
+            <Text type="h5" highlighted classes="mb-2">{outputString}</Text>
+            <Text type="pre">{formatUnitBestMatch(transfer.value)}</Text>
+            <Text type="pre">{formatAddressForLedger(transfer.address, true)}</Text>
+            <Text type="pre">
+                {#await asyncGetAddressChecksum(transfer.address)}...{:then checksum}{checksumString(checksum)}{/await}
+            </Text>
+        </div>
     </div>
     {#each inputs as { address, balance, index }}
-        <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-5 mb-4 flex flex-col space-y-1 text-center">
-            <Text type="h5" highlighted classes="mb-2">{inputString(index)}</Text>
-            <Text type="pre">{formatUnitBestMatch(balance)}</Text>
-            <Text type="pre">{formatAddressForLedger(address)}</Text>
-            <Text type="pre">
-                {#await asyncGetAddressChecksum(address, true)}...{:then checksum}{checksumString(checksum)}{/await}
-            </Text>
+        <div class="mb-4">
+            <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-5 text-center {index < inputs.length ? 'mb-4' : ''}">
+                <Text type="h5" highlighted classes="mb-2">{inputString(index)}</Text>
+                <Text type="pre">{formatUnitBestMatch(balance)}</Text>
+                <Text type="pre">{formatAddressForLedger(address)}</Text>
+                <Text type="pre">
+                    {#await asyncGetAddressChecksum(address, true)}...{:then checksum}{checksumString(checksum)}{/await}
+                </Text>
+            </div>
         </div>
     {/each}
 </div>

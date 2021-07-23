@@ -32,6 +32,7 @@ export enum LegacyLedgerErrorName {
 }
 
 export enum LegacyLedgerErrorCode {
-    DeniedByTheUser = 27013, // 0x6985
-    TimeoutExceeded = 25601 // 0x6401
+    DeniedByTheUser = 27013,    // 0x6985
+    TimeoutExceeded = 25601,    // 0x6401
+    Unknown         = 28161     // 0x6e01
 }

@@ -224,9 +224,10 @@ export function getLegacyErrorMessage(error: any, shouldLocalize: boolean = fals
         case LegacyLedgerErrorName.TransportStatusError:
             if (error?.statusCode === LegacyLedgerErrorCode.DeniedByTheUser) {
                 errorMessage = 'error.send.cancelled'
-                break
             } else if (error?.statusCode === LegacyLedgerErrorCode.TimeoutExceeded) {
                 errorMessage = 'error.ledger.timeout'
+            } else if (error?.statusCode === LegacyLedgerErrorCode.Unknown) {
+                errorMessage = 'error.ledger.generic'
             }
             break
         case LegacyLedgerErrorName.DisconnectedDevice:
