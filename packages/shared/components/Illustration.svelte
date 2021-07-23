@@ -17,7 +17,7 @@
         },
         'ledger-install-new-app-desktop': {
             lightmode: 'onboarding/ledger-install-new-app-desktop.svg',
-            darkmode: 'onboarding/ledger-install-new-app-desktop-darkmode.svg',
+            darkmode: 'onboarding/ledger-install-new-app-desktop.svg',
         },
         'ledger-live-updated-desktop': {
             lightmode: 'onboarding/ledger-live-updated-desktop.svg',
@@ -33,7 +33,7 @@
         },
         'ledger-install-apps-desktop': {
             lightmode: 'onboarding/ledger-install-apps-desktop.svg',
-            darkmode: 'onboarding/ledger-install-apps-desktop-darkmode.svg',
+            darkmode: 'onboarding/ledger-install-apps-desktop.svg',
         },
         'ledger-close-live-desktop': {
             lightmode: 'onboarding/ledger-close-live-desktop.svg',
@@ -45,11 +45,11 @@
         },
         'ledger-pin-desktop': {
             lightmode: 'onboarding/ledger-pin-desktop.svg',
-            darkmode: 'onboarding/ledger-pin-desktop-darkmode.svg',
+            darkmode: 'onboarding/ledger-pin-desktop.svg',
         },
         'ledger-open-app-desktop': {
             lightmode: 'onboarding/ledger-open-app-desktop.svg',
-            darkmode: 'onboarding/ledger-open-app-desktop-darkmode.svg',
+            darkmode: 'onboarding/ledger-open-app-desktop.svg',
         },
     }
 </script>
