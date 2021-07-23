@@ -247,7 +247,7 @@
         const _generate = () => {
             isGeneratingAddress = true
 
-            displayNotificationForLedgerProfile('error', true, true)
+            if($isLedgerProfile) displayNotificationForLedgerProfile('error', true, true)
 
             api.getUnusedAddress(accountId, {
                 onSuccess(response) {
