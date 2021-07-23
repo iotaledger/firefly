@@ -51,7 +51,9 @@
             </div>
         </div>
         <div slot="leftpane__action">
-            <Link icon="info" onClick={handlePopupOpen} classes="mb-10">{locale('popups.ledgerAppGuide.title')}</Link>
+            <Link icon="info" onClick={handlePopupOpen} classes="mb-10 justify-center">
+                {locale('popups.ledgerAppGuide.title')}
+            </Link>
             <Button classes="w-full" onClick={handleContinueClick}>{locale('views.ledgerInstallationGuide.action')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center items-center bg-gray-50 dark:bg-gray-900">

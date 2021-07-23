@@ -139,7 +139,9 @@
             </div>
         </div>
         <div slot="leftpane__action">
-            <Link icon="info" onClick={handleGuidePopup} classes="mb-10">{locale('popups.ledgerConnectionGuide.title')}</Link>
+            <Link icon="info" onClick={handleGuidePopup} classes="mb-10 justify-center">
+                {locale('popups.ledgerConnectionGuide.title')}
+            </Link>
             <Button
                 classes="w-full"
                 disabled={(polling && (!isConnected || !isAppOpen)) || creatingAccount}
