@@ -41,7 +41,7 @@
         <Illustration illustration={stepAnimations[stepIndex]} />
     </div>
     <div class="w-full text-center my-9 px-10">
-        <Text secondary>{locale('popups.ledgerConnectionGuide.steps')[stepIndex]}</Text>
+        <Text secondary>{locale(`popups.ledgerConnectionGuide.steps.${stepIndex}`)}</Text>
     </div>
     <div class="w-full flex flex-row flex-nowrap space-x-4">
         <Button classes="w-1/2" secondary onClick={() => changeIndex(-1)} disabled={stepIndex === 0}>
