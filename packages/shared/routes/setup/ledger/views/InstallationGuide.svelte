@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Animation, Button, Icon, Illustration, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, Button, Icon, Illustration, Link, OnboardingLayout, Text } from 'shared/components'
     import { openPopup } from 'shared/lib/popup'
     import { LedgerAppName } from 'shared/lib/typings/ledger'
     import { createEventDispatcher } from 'svelte'
@@ -51,10 +51,7 @@
             </div>
         </div>
         <div slot="leftpane__action">
-            <div on:click={handlePopupOpen} class="mb-10 flex flex-row justify-center cursor-pointer">
-                <Icon icon="info" classes="mr-2 text-blue-500" />
-                <Text secondary highlighted>{locale('popups.ledgerAppGuide.title')}</Text>
-            </div>
+            <Link icon="info" onClick={handlePopupOpen} classes="mb-10">{locale('popups.ledgerAppGuide.title')}</Link>
             <Button classes="w-full" onClick={handleContinueClick}>{locale('views.ledgerInstallationGuide.action')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center items-center bg-gray-50 dark:bg-gray-900">
