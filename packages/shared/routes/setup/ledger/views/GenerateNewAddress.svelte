@@ -123,7 +123,7 @@
                 <Text type="p" secondary classes="mb-10">{locale('views.generateNewLedgerAddress.confirmBody')}</Text>
                 <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-5 text-center">
                     <Text type="h5" highlighted classes="mb-2">{locale('general.newAddress')}</Text>
-                    <Text type="pre">{formatAddressForLedger(newAddress)}</Text>
+                    <Text type="pre" bigger>{formatAddressForLedger(newAddress)}</Text>
                 </div>
             {:else}
                 <Text type="h2" classes="mb-5">{locale('views.generateNewLedgerAddress.confirmedTitle')}</Text>
@@ -133,7 +133,7 @@
                         <Icon icon="success-check" classes="text-white" />
                     </div>
                     <Text type="h5" highlighted classes="mb-2">{locale('general.newAddress')}</Text>
-                    <Text type="pre">{formatAddressForLedger(newAddress)}</Text>
+                    <Text type="pre" bigger>{formatAddressForLedger(newAddress)}</Text>
                 </div>
             {/if}
         </div>
