@@ -33,7 +33,6 @@
         if (!wasMigrated) {
             if ($walletSetupType === SetupType.FireflyLedger) {
                 localizedBody = 'fireflyLedgerBody'
-                localizedValues = { legacy: LedgerAppName.IOTALegacy }
             }
             // This is the last screen in onboarding for all flows i.e., if you create a new wallet or import stronghold
             // When this component mounts, ensure that the profile is persisted in the local storage.
@@ -45,6 +44,7 @@
         } else {
             if ($walletSetupType === SetupType.TrinityLedger) {
                 localizedBody = 'trinityLedgerBody'
+                localizedValues = { legacy: LedgerAppName.IOTALegacy }
             } else {
                 localizedBody = 'softwareMigratedBody'
             }
