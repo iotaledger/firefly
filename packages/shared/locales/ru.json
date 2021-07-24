@@ -2,7 +2,7 @@
     "views": {
         "onboarding1": {
             "title": "Отправляй, получай и управляй своими токенами IOTA",
-            "body": "Firefly is the official wallet software of IOTA."
+            "body": "Firefly - это официальное программное обеспечение кошелька IOTA."
         },
         "legal": {
             "title": "Политика конфиденциальности и условия обслуживания",
@@ -11,7 +11,7 @@
         },
         "appearance": {
             "title": "Внешний вид",
-            "body": "Choose your app theme."
+            "body": "Выберите тему приложения."
         },
         "profile": {
             "title": "Создать профиль",
@@ -28,7 +28,37 @@
         "secure": {
             "title": "Защити твой кошелек",
             "body1": "Сохранить и распечатать PDF документ для восстановление.",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallets."
+            "body2": "Если вы заполните Recovery Kit и будете хранить его в защищенном месте, вы всегда сможете восстановить свои кошельки."
+        },
+        "create": {
+            "title": "Создайте кошелек",
+            "body": "Создайте новый кошелек. Вы можете выбрать обычный программный кошелек или, если у вас есть устройство Ledger, настроить аппаратный кошелек.",
+            "softwareAccount": {
+                "title": "Мне нужен программный кошелек",
+                "description": "Создать фразу восстановления из 24 слов"
+            },
+            "ledgerAccount": {
+                "title": "Я хочу аппаратный кошелек",
+                "description": "Требуется Ledger Nano S или Nano X"
+            }
+        },
+        "setupLedger": {
+            "title": "Установите новое приложение IOTA Ledger на ваше устройство",
+            "body1": "1. Откройте Ledger Live и установите новое приложение IOTA",
+            "body2": "2. Закройте настольное приложение Ledger Live",
+            "body3": "3. Откройте новое приложение на своем устройстве Ledger",
+            "progress1": "Подключите ваш Ledger",
+            "progress2": "Сгенерировать адрес",
+            "progress3": "Переключить приложение Ledger",
+            "progress4": "Перевести средства",
+            "watchVideo": "Смотреть видеогид",
+            "checkingConnection": "Проверка подключения к Ledger"
+        },
+        "ledgerInstallationGuide": {
+            "title": "Вы установили необходимые Ledger приложения?",
+            "body1": "Before you proceed, you must find and install both the IOTA Legacy app and the new IOTA app through Ledger Live.",
+            "body2": "Убедитесь, что прошивка Ledger актуальна. Любые предварительно установленные приложения должны быть обновлены до их последних версий.",
+            "action": "Да, я установил эти приложения"
         },
         "password": {
             "title": "Придумайте пароль",
@@ -37,7 +67,7 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your profile.",
+            "body1": "Установите PIN-код для доступа, чтобы убедиться, что только вы можете войти в свой профиль.",
             "body2": "Держи PIN-код в безопасности!"
         },
         "pin": {
@@ -73,32 +103,36 @@
         },
         "backupWallet": {
             "title": "Сделайте резервную копию в файл Stronghold",
-            "body1": "Enter your password to backup your wallets to a Stronghold file. Your password is used to encrypt the backup.",
+            "body1": "Введите пароль для резервного копирования кошельков в файл Stronghold. Ваш пароль будет использован для шифрования резервной копии.",
             "body2": "Причины, по которым важны цифровые резервные копии:",
-            "reason1": "Easily recover your wallets without typing in your recovery phrase",
-            "reason2": "Import your wallets on other devices",
+            "reason1": "Просто восстанавливайте кошельки, без ввода фразы восстановления",
+            "reason2": "Импортируйте свои кошельки на другие устройства",
             "reason3": "Восстановление всей историй транзакций"
         },
         "recoveryPhraseSaved": {
             "title": "Резервная копия сделано успешно",
-            "body": "You have backed up your wallets to a Stronghold."
+            "body": "Вы сделали резервную копию своих кошельков в Stronghold."
         },
         "congratulations": {
             "title": "Настройка кошелька завершена",
-            "body": "Твой новый кошелек готов к использованию.",
             "fundsMigrated": "Средства перенесены",
-            "success": "Вы успешно перевели свои средства в новую сеть",
+            "body": "Твой новый кошелек готов к использованию.",
+            "softwareMigratedBody": "Вы успешно мигрировали свои средства в новую сеть",
+            "fireflyLedgerBody": "Ваш Ledger аккаунт успешно восстановлен, и вы можете продолжить.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the IOTA Legacy app from your device.",
             "exportMigration": "Экспорт журнала миграции и завершение настройки"
         },
         "import": {
-            "title": "Recover or migrate funds",
+            "title": "Восстановить или мигрировать средства",
             "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
             "importSeed": "I have an 81 character seed",
             "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
             "importMnemonic": "I have a Firefly recovery phrase",
             "importMnemonicDescription": "Enter your recovery phrase to recover your wallets",
             "importFile": "I have a file backup",
-            "importFileDescription": "Upload a Seedvault or Stronghold file"
+            "importFileDescription": "Upload a Seedvault or Stronghold file",
+            "importLedger": "I have a Ledger backup",
+            "importLedgerDescription": "Restore or migrate a Ledger profile"
         },
         "importFromText": {
             "seed": {
@@ -119,6 +153,55 @@
             "title": "Restore your wallets using a backup file",
             "body": "Import a backup file to restore your wallets. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
         },
+        "importFromLedger": {
+            "title": "Restore or Migrate your Ledger",
+            "body": "Restore an existing Firefly Ledger profile, or migrate your funds from Trinity.",
+            "haveFireflyLedger": "I have a Firefly Ledger backup",
+            "haveFireflyLedgerDescription": "Restore a Firefly profile",
+            "haveTrinityLedger": "I have a Trinity Ledger backup",
+            "haveTrinityLedgerDescription": "Migrate a Trinity profile"
+        },
+        "connectLedger": {
+            "title": "Connect your Ledger to Firefly",
+            "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed.",
+            "trafficLight1": "Connect and unlock your Ledger with your PIN",
+            "trafficLight2": "Open the new IOTA app on your Ledger",
+            "tips": "Tips if your Ledger isn’t connecting"
+        },
+        "restoreFromFireflyLedger": {
+            "title": "Restore Your Ledger Profile",
+            "body": "Press restore to complete the setup process and restore your wallets, balances and transaction history.",
+            "restoring": "Restoring from Ledger..."
+        },
+        "legacyLedgerIntro": {
+            "title": "Start your Ledger migration using Firefly",
+            "body1": "Firefly will help you to transfer your tokens to the new Chrysalis network.",
+            "body2": "After you migration, you will be able to send and receive your tokens using your Ledger with Firefly.",
+            "readMore": "What to expect from the migration process"
+        },
+        "generateNewLedgerAddress": {
+            "title": "Создать новый адрес",
+            "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
+            "confirmTitle": "Confirm the new address",
+            "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
+            "confirmedTitle": "Address confirmed",
+            "confirmedBody": "You have confirmed that the address in Firefly matches the one on your Ledger device.",
+            "generating": "Generating address"
+        },
+        "switchLedgerApps": {
+            "title": "Switch Ledger apps",
+            "body": "Please switch to the IOTA Legacy app on your Ledger device to continue migration. When ready, press continue.",
+            "ledgerApp": "IOTA",
+            "ledgerLegacyApp": "IOTA Legacy"
+        },
+        "selectLedgerAccountIndex": {
+            "title": "Choose Ledger account index",
+            "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
+            "accountIndex": "Account Index",
+            "accountPage": "Account Page",
+            "standard": "Standard",
+            "expert": "Expert"
+        },
         "importBackupPassword": {
             "title": "Restore your wallets from a SeedVault or Stronghold",
             "body1": "Пожалуйста, введите ваш пароль от резервной копии.",
@@ -126,11 +209,7 @@
         },
         "importSuccess": {
             "title": "Вы успешно восстановили вашу резервную копию",
-            "body": "You can now set up your new profile.",
-            "seedvaultTitle": "Успешно импортировано",
-            "seedvaultBody": "Твой пароль правильный, ты можешь продолжить.",
-            "strongholdTitle": "Успешно импортировано",
-            "strongholdBody": "Твой пароль правильный, ты можешь продолжить."
+            "body": "You can now set up your new profile."
         },
         "migrate": {
             "title": "Мигрируйте свои средства",
@@ -196,7 +275,8 @@
             "title": "Ваш баланс",
             "body": "Убедитесь, что баланс правильный, прежде чем продолжить. Вы можете проверить ещё раз, если что-то выглядит неправильно.",
             "error": "Минимальная сумма миграции составляет 1 мега айота. Проверьте снова, если ваш баланс неправильный.",
-            "zeroBalance": "Попробуйте проверить снова. Если вы все ещё не нашли ваш баланс, возможно, вы ввели ваш сид неправильно."
+            "zeroBalance": "Попробуйте проверить снова. Если вы все ещё не нашли ваш баланс, возможно, вы ввели ваш сид неправильно.",
+            "zeroBalanceLedgerLegacy": "Try checking again. If you still can't find your balance you might have selected the wrong account index."
         },
         "settings": {
             "settings": "Настройки",
@@ -357,7 +437,15 @@
                 },
                 "hardwareDevice": {
                     "title": "Устройства",
-                    "noneDetected": "Не обнаружено"
+                    "statuses": {
+                        "appNotOpen": "IOTA App Not Open",
+                        "connected": "Connected",
+                        "legacyConnected": "IOTA Legacy App Open",
+                        "locked": "Locked",
+                        "mnemonicMismatch": "Wrong Ledger or Mnemonic",
+                        "notDetected": "Not Detected",
+                        "otherConnected": "App Open"
+                    }
                 },
                 "strongholdStatus": {
                     "title": "Статус кошелька",
@@ -488,6 +576,48 @@
             "body": "The Chrysalis network upgrade has begun.",
             "bodyMigration": "Migration is disabled until it is complete.",
             "bodyFirefly": "Firefly is disabled until it is complete. Token migration will still be possible afterwards."
+        },
+        "ledgerNotConnected": {
+            "connect": "Open the new IOTA app on your Ledger device to continue",
+            "connectLegacy": "Open the IOTA Legacy app on your Ledger device to continue"
+        },
+        "ledgerConfirmation": {
+            "confirm": "To proceed, confirm the prompt displayed on your Ledger device"
+        },
+        "ledgerAppGuide": {
+            "title": "Guide to installing the Ledger apps",
+            "steps": [
+                "Install and open the Ledger Live application",
+                "Ensure that your Ledger is connected",
+                "Search for apps: IOTA Legacy and IOTA (MIOTA)",
+                "Install both apps: IOTA Legacy and IOTA (MIOTA)",
+                "Remember that it's important to close Ledger Live before returning to Firefly"
+            ]
+        },
+        "ledgerConnectionGuide": {
+            "title": "Tips if your Ledger isn’t connecting",
+            "steps": [
+                "Make sure Ledger Live is not open on your computer",
+                "Ensure you have unlocked your Ledger device with your PIN",
+                "Open the new IOTA app on your Ledger device"
+            ]
+        },
+        "ledgerTransaction": {
+            "remainderAddress": {
+                "title": "Confirm remainder address",
+                "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+            },
+            "transaction": {
+                "title": "Подтвердить транзакцию",
+                "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted.",
+                "input": "Input [{index}]",
+                "output": "Output",
+                "checksum": "Chk: {checksum}"
+            }
+        },
+        "ledgerAddress": {
+            "title": "Confirm receive address",
+            "body": "Confirm that the receive address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
         }
     },
     "charts": {
@@ -505,6 +635,8 @@
     "actions": {
         "continue": "Продолжить",
         "back": "Назад",
+        "previous": "Previous",
+        "next": "Next",
         "cancel": "Отменить",
         "close": "Закрыть",
         "dismiss": "Отклонить",
@@ -573,6 +705,7 @@
         "addAccount": "Add Wallet",
         "checkForUpdates": "Проверять обновления",
         "reportAnIssue": "Сообщить об ошибке",
+        "restore": "Restore",
         "clear": "Очистить",
         "hideDetails": "Скрыть подробности",
         "yes": "Да",
@@ -592,7 +725,8 @@
         "searchBalances": "Search for balances",
         "searchAgain": "Search again",
         "searching": "Searching...",
-        "closeFirefly": "Close Firefly"
+        "closeFirefly": "Close Firefly",
+        "generateAddress": "Сгенерировать адрес"
     },
     "general": {
         "password": "Пароль",
@@ -607,6 +741,7 @@
         "received": "Получено",
         "sendPayment": "Отправить платёж",
         "moveFunds": "Внутренний перевод",
+        "sendTo": "Send To",
         "sendFunds": "Отправить средства",
         "sendToAddress": "Отправить на адрес",
         "scanQrOrPaste": "Сканировать QR-код или вставить Адрес",
@@ -625,6 +760,8 @@
         "myAddress": "Мой адрес",
         "shareAddress": "Поделиться адресом",
         "yourAddress": "Ваш адрес",
+        "newRemainder": "New Remainder",
+        "remainder": "Remainder",
         "generateNewAddress": "Создать новый адрес",
         "copyAddress": "Скопировать адрес",
         "import": "Импорт",
@@ -661,6 +798,7 @@
         "messageId": "ID сообщения",
         "inputAddress": "Адрес отправителя",
         "receiveAddress": "Адрес получателя",
+        "newAddress": "New Address",
         "date": "Дата",
         "status": "Статус",
         "confirmed": "Подтверждено",
@@ -672,11 +810,13 @@
         "firstSync": "Syncing history, this may take a while...",
         "transferSyncing": "Syncing wallet",
         "transferSelectingInputs": "Выбор входов",
-        "transferRemainderAddress": "Генерация адреса депозита",
+        "transferRemainderAddress": "Generating remainder address",
+        "transferPreparedTransaction": "Preparing transaction",
         "transferSigning": "Подписание транзакции",
         "transferPow": "Выполнение PoW",
         "transferBroadcasting": "Отправка транзакции",
         "transferComplete": "Передача завершена",
+        "generatingReceiveAddress": "Generating receive address",
         "creatingAccount": "Creating wallet, please wait...",
         "updatingAccount": "Updating wallet, please wait...",
         "accountSyncing": "Wallet is syncing",
@@ -770,7 +910,10 @@
             "tilde": "Имя профиля не может начинаться с символа '~'.",
             "control": "Имя профиля не может содержать управляющий символ.",
             "startDot": "Имя профиля не может начинаться с символа '.'.",
-            "chars": "Имя профиля не может содержать символы <>:\"/\\|?*"
+            "chars": "Имя профиля не может содержать символы <>:\"/\\|?*",
+            "index": "Your account index must be a number between 0 and 2,147,483,647.",
+            "page": "Your account page must be a number between 0 and 2,147,483,647.",
+            "syncing": "There was an error syncing your wallets."
         },
         "send": {
             "addressLength": "Длина адресов должна быть {length, plural, one {1 символ} other {# символов}}.",
@@ -784,7 +927,9 @@
             "insufficientFunds": "This wallet has insufficient funds.",
             "noToAccount": "You have not selected a wallet to send the funds to.",
             "sendingDust": "Вы не можете отправить менее 1 Mi.",
-            "leavingDust": "Вы не можете оставить менее 1 Mi на вашем адресе."
+            "leavingDust": "Вы не можете оставить менее 1 Mi на вашем адресе.",
+            "cancelled": "The transaction was cancelled.",
+            "transaction": "There was an error sending your transaction. Please try again."
         },
         "node": {
             "invalid": "Пожалуйста, введите правильный адрес.",
@@ -805,6 +950,19 @@
             "phraseWordCount": "В твоей фразе восстановления должно быть 24 слов, сейчас здесь {length, plural, one {1} few {#} many {#} other {#}}.",
             "phraseUnrecognizedWord": "Нераспознанное слово \"{word}\" в твоей фразе восстановления",
             "phraseCaseWord": "Слово \"{word}\" должно быть строчным регистром"
+        },
+        "ledger": {
+            "appNotOpen": "You must open the IOTA app on your Ledger device.",
+            "generic": "There was an error connecting to your Ledger device.",
+            "legacyConnected": "The wrong app is open on your Ledger device.",
+            "locked": "Please unlock your Ledger device by entering the PIN.",
+            "mnemonicMismatch": "You have connected the wrong Ledger device or the mnemonic has changed.",
+            "notDetected": "No Ledger device detected.",
+            "notFound": "Ledger device not found.",
+            "otherConnected": "The wrong app is open on your Ledger device.",
+            "generateAddress": "There was an error generating an address.",
+            "timeout": "Timeout exceeded",
+            "disconnected": "Device disconnected"
         }
     },
     "tooltips": {
