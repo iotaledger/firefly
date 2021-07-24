@@ -2,7 +2,7 @@
     import { DashboardPane } from 'shared/components'
     import { clearSendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
-    import { notifyLedgerDeviceState, promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { isLedgerError, displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { addProfileCurrencyPriceData, priceData } from 'shared/lib/marketData'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup } from 'shared/lib/popup'
@@ -140,6 +140,19 @@
     }
 
     function getAccounts() {
+        const _onError = (error: any = null) => {
+            console.error(error)
+
+            if ($isLedgerProfile) {
+                displayNotificationForLedgerProfile('error', true, true, false, false, error)
+            } else {
+                showAppNotification({
+                    type: 'error',
+                    message: locale(error?.error || 'error.global.generic')
+                })
+            }
+        }
+
         api.getAccounts({
             onSuccess(accountsResponse) {
                 const _continue = async () => {
@@ -150,7 +163,7 @@
                     try {
                         await asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
                     } catch (err) {
-                        console.error(err)
+                        _onError(err)
                     }
 
                     updateProfile('gapLimit', gapLimit)
@@ -209,7 +222,7 @@
                                 const account = prepareAccountInfo(payloadAccount, meta)
                                 newAccounts.push(account)
                             } else {
-                                console.error(err)
+                                _onError(err)
                             }
 
                             completeCount++
@@ -225,10 +238,7 @@
                 }
             },
             onError(err) {
-                showAppNotification({
-                    type: 'error',
-                    message: locale(err.error),
-                })
+                _onError(err)
             },
         })
     }
@@ -237,7 +247,7 @@
         const _generate = () => {
             isGeneratingAddress = true
 
-            notifyLedgerDeviceState('error', true, true, false, false)
+            if($isLedgerProfile) displayNotificationForLedgerProfile('error', true, true)
 
             api.getUnusedAddress(accountId, {
                 onSuccess(response) {
@@ -261,6 +271,8 @@
                 },
                 onError(err) {
                     closePopup(true)
+
+                    console.error(err)
 
                     isGeneratingAddress = false
 
@@ -378,7 +390,7 @@
                         completeCallback()
                     },
                     onError(err) {
-                        completeCallback(locale(err.error))
+                        completeCallback(err)
                     },
                 })
             } else {
@@ -429,7 +441,7 @@
                             })
                         },
                         onError(err) {
-                            completeCallback(locale(err.error))
+                            completeCallback(err)
                         },
                     }
                 )

@@ -4,7 +4,7 @@
         getLedgerDeviceStatus,
         ledgerDeviceState,
         ledgerSimulator,
-        notifyLedgerDeviceState,
+        displayNotificationForLedgerProfile,
         pollLedgerDeviceStatus,
         stopPollingLedgerStatus,
     } from 'shared/lib/ledger'
@@ -75,7 +75,7 @@
 
                     console.error(error)
 
-                    notifyLedgerDeviceState('error', true, true, false, false, error)
+                    displayNotificationForLedgerProfile('error', true, true, false, false, error)
                 },
             }
         )
@@ -96,7 +96,7 @@
             const _onCancel = () => {
                 creatingAccount = false
 
-                notifyLedgerDeviceState('error', true)
+                displayNotificationForLedgerProfile('error', true)
             }
             const _onConnected = () => {
                 if ($ledgerDeviceState !== LedgerDeviceState.Connected) _onCancel()
