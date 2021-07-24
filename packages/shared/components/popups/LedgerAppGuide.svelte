@@ -49,7 +49,7 @@
     </div>
     <div class="w-full text-center my-9 px-10">
         <Text secondary>
-            {locale('popups.ledgerAppGuide.steps', { values: { legacy: LedgerAppName.IOTALegacy } })[stepIndex]}
+            {locale(`popups.ledgerAppGuide.steps.${stepIndex}`, { values: { legacy: LedgerAppName.IOTALegacy } })}
         </Text>
     </div>
     <div class="w-full flex flex-row flex-nowrap space-x-4">
