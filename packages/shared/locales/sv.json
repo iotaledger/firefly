@@ -56,7 +56,7 @@
         },
         "ledgerInstallationGuide": {
             "title": "Har du installerat de nödvändiga Ledger apparna?",
-            "body1": "Before you proceed, you must find and install both the IOTA Legacy app and the new IOTA app through Ledger Live.",
+            "body1": "Innan du fortsätter måste du hitta och installera både IOTA Legacy-appen och den nya IOTA-appen via Ledger Live.",
             "body2": "Se till att din firmware från Ledger är uppdaterad. Alla förinstallerade appar bör uppdateras till sina senaste versioner.",
             "action": "Ja, jag har installerat dessa appar"
         },
@@ -119,7 +119,7 @@
             "body": "Din nya plånbok är redo att användas.",
             "softwareMigratedBody": "Du har framgångsrikt migrerat dina IOTA till det nya nätverket",
             "fireflyLedgerBody": "Ditt Ledger-konto har återställts och du kan nu fortsätta.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the IOTA Legacy app from your device.",
+            "trinityLedgerBody": "Du har migrerat din Ledger till det nya nätverket. Du kan nu ta bort IOTA Legacy-appen från enheten.",
             "exportMigration": "Exportera migrationslogg och avsluta installationen"
         },
         "import": {
@@ -190,7 +190,7 @@
         },
         "switchLedgerApps": {
             "title": "Växla Ledger app",
-            "body": "Please switch to the IOTA Legacy app on your Ledger device to continue migration. When ready, press continue.",
+            "body": "Växla till IOTA Legacy-appen på din Ledger-enhet för att fortsätta migreringen. Tryck på fortsätt.",
             "ledgerApp": "IOTA",
             "ledgerLegacyApp": "IOTA Legacy"
         },
@@ -440,7 +440,7 @@
                     "statuses": {
                         "appNotOpen": "IOTA-appen är inte öppen",
                         "connected": "Ansluten",
-                        "legacyConnected": "IOTA Legacy App Open",
+                        "legacyConnected": "IOTA Legacy-appen öppen",
                         "locked": "Låst",
                         "mnemonicMismatch": "Fel Ledger eller Mnemonik",
                         "notDetected": "Inte upptäckt",
@@ -579,7 +579,7 @@
         },
         "ledgerNotConnected": {
             "connect": "Öppna den nya IOTA-appen på din Ledger-enhet för att fortsätta",
-            "connectLegacy": "Open the IOTA Legacy app on your Ledger device to continue"
+            "connectLegacy": "Öppna IOTA Legacy-appen på din Ledger-enhet för att fortsätta"
         },
         "ledgerConfirmation": {
             "confirm": "För att fortsätta, bekräfta uppmaningen som visas på din Ledger-enhet"
@@ -589,8 +589,8 @@
             "steps": [
                 "Installera och öppna programmet Ledger Live",
                 "Se till att din Ledger är ansluten",
-                "Search for apps: IOTA Legacy and IOTA (MIOTA)",
-                "Install both apps: IOTA Legacy and IOTA (MIOTA)",
+                "Sök efter appar: IOTA Legacy och IOTA (MIOTA)",
+                "Installera båda apparna: IOTA Legacy och IOTA (MIOTA)",
                 "Kom ihåg att det är viktigt att stänga Ledger Live innan du återvänder till Firefly"
             ]
         },
@@ -610,8 +610,8 @@
             "transaction": {
                 "title": "Bekräfta transaktion",
                 "info": "Bekräfta att transaktionsinformationen som visas på din Ledger-enhet matchar informationen som visas nedan. Om de matchar, tryck på båda knapparna på din Ledger enligt uppmaning.",
-                "input": "Input [{index}]",
-                "output": "Output",
+                "input": "Indata [{index}]",
+                "output": "Utdata",
                 "checksum": "Chk: {checksum}"
             }
         },
@@ -961,8 +961,8 @@
             "notFound": "Ledger-enheten hittades inte.",
             "otherConnected": "Fel app är öppen på din Ledger-enhet.",
             "generateAddress": "Det gick inte att generera en adress.",
-            "timeout": "Timeout exceeded",
-            "disconnected": "Device disconnected"
+            "timeout": "Timeout överskriden",
+            "disconnected": "Enheten frånkopplad"
         }
     },
     "tooltips": {

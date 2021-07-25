@@ -31,34 +31,34 @@
             "body2": "Ako ispunite Recovery Kit i spremite ga na sigurno, uvijek možete izvršiti oporavak svojih novčanika."
         },
         "create": {
-            "title": "Create a wallet",
-            "body": "Create a new wallet. You can choose a regular software wallet or if you have a Ledger device you can set up a hardware wallet.",
+            "title": "Stvori novčanik",
+            "body": "Stvori novi novčanik. Možeš odabrati običan softver novčanik, ili postavi hardverski novčanik ukoliko imaš Ledger uređaj.",
             "softwareAccount": {
-                "title": "I want a software wallet",
-                "description": "Create a 24-word Recovery Phrase"
+                "title": "Želim softverski novčanik",
+                "description": "Stvori frazu za oporavak od 24 riječi"
             },
             "ledgerAccount": {
-                "title": "I want a hardware wallet",
-                "description": "Ledger Nano S or Nano X required"
+                "title": "Želim hardverski novčanik",
+                "description": "Potreban je Ledger Nano S ili Ledger Nano X"
             }
         },
         "setupLedger": {
-            "title": "Install the new IOTA Ledger app on your device",
-            "body1": "1. Open Ledger Live and install New IOTA app",
-            "body2": "2. Close Ledger Live desktop application",
-            "body3": "3. Open the new app on your Ledger device",
-            "progress1": "Connect your Ledger",
-            "progress2": "Generate address",
+            "title": "Instaliraj novu IOTA Ledger aplikaciju na uređaj",
+            "body1": "1. Otvori Ledger Live instaliraj novu IOTA aplikaciju",
+            "body2": "2. Zatvori Ledger Live desktop aplikaciju",
+            "body3": "3. Pokreni novu aplikaciju na svojem Ledger uređaju",
+            "progress1": "Spoji svoj Ledger",
+            "progress2": "Generiraj adresu",
             "progress3": "Switch Ledger app",
-            "progress4": "Transfer funds",
-            "watchVideo": "Watch video guide",
-            "checkingConnection": "Checking Ledger Connection"
+            "progress4": "Prebaci sredstva",
+            "watchVideo": "Pogledaj video s uputama",
+            "checkingConnection": "Provjeravam vezu s Ledgerom"
         },
         "ledgerInstallationGuide": {
-            "title": "Have you installed the necessary Ledger apps?",
-            "body1": "Before you proceed, you must find and install both the IOTA Legacy app and the new IOTA app through Ledger Live.",
-            "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
-            "action": "Yes, I've installed these apps"
+            "title": "Jesi li instalirao potrebne Ledger aplikacije?",
+            "body1": "Prije nastavka potrebno je kroz Ledger Live pronaći i instalirati obje aplikacije: staru IOTA Legacy aplikaciju i novu IOTA aplikaciju.",
+            "body2": "Uvjeri se da je tvoj Ledger na najnovijoj verziji firmwarea. Sve predinstalirane aplikacije trebaju biti na najnovijim verzijama.",
+            "action": "Da, instalirao sam sve potrebne aplikacije"
         },
         "password": {
             "title": "Stvorite lozinku",
@@ -117,7 +117,7 @@
             "title": "Postavljanje novčanika je završeno",
             "fundsMigrated": "Sredstva su prebačena",
             "body": "Vaš novi novčanik spreman je za upotrebu.",
-            "softwareMigratedBody": "You have successfully migrated your funds to the new network",
+            "softwareMigratedBody": "Sredstva su uspješno prebačena na novu mrežu",
             "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
             "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the IOTA Legacy app from your device.",
             "exportMigration": "Izvezite detalje o migraciji i dovršite postupak"
@@ -176,7 +176,7 @@
         "legacyLedgerIntro": {
             "title": "Start your Ledger migration using Firefly",
             "body1": "Firefly will help you to transfer your tokens to the new Chrysalis network.",
-            "body2": "After you migration, you will be able to send and receive your tokens using your Ledger with Firefly.",
+            "body2": "Nakon migracije moći ćete slati i primati tokene koristeći Ledger i Firefly.",
             "readMore": "What to expect from the migration process"
         },
         "generateNewLedgerAddress": {
@@ -726,7 +726,7 @@
         "searchAgain": "Traži ponovno",
         "searching": "Pretraga...",
         "closeFirefly": "Zatvori Firefly",
-        "generateAddress": "Generate address"
+        "generateAddress": "Generiraj adresu"
     },
     "general": {
         "password": "Lozinka",

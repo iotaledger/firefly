@@ -56,7 +56,7 @@
         },
         "ledgerInstallationGuide": {
             "title": "Oletko asentanut tarvittavat Ledger-sovellukset?",
-            "body1": "Before you proceed, you must find and install both the IOTA Legacy app and the new IOTA app through Ledger Live.",
+            "body1": "Ennen kuin jatkat, sinun on löydettävä ja asennettava sekä IOTA Legacy -sovellus että uusi IOTA-sovellus Ledger Liven kautta.",
             "body2": "Varmista, että Ledger-laitteesi laiteohjelmisto on ajan tasalla. Kaikki valmiiksi asennetut sovellukset tulee päivittää uusimpiin versioihin.",
             "action": "Kyllä, olen asentanut nämä sovellukset"
         },
@@ -119,7 +119,7 @@
             "body": "Uusi lompakkosi on käyttövalmis.",
             "softwareMigratedBody": "Olet onnistuneesti siirtänyt varasi uuteen verkkoon",
             "fireflyLedgerBody": "Ledger-tilisi on onnistuneesti palautettu ja voit nyt jatkaa.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the IOTA Legacy app from your device.",
+            "trinityLedgerBody": "Olet onnistuneesti siirtänyt Ledger-laitteesi uuteen verkkoon. Voit nyt poistaa IOTA Legacy -sovelluksen laitteestasi.",
             "exportMigration": "Vie migraatioloki ja viimeistele määritys"
         },
         "import": {
@@ -190,7 +190,7 @@
         },
         "switchLedgerApps": {
             "title": "Vaihda Ledger-sovelluksia",
-            "body": "Please switch to the IOTA Legacy app on your Ledger device to continue migration. When ready, press continue.",
+            "body": "Ole hyvä ja vaihda IOTA Legacy -sovellukseen Ledger-laitteellasi jatkaaksesi migraatiota. Kun olet valmis, paina jatka.",
             "ledgerApp": "IOTA",
             "ledgerLegacyApp": "IOTA Legacy"
         },
@@ -440,7 +440,7 @@
                     "statuses": {
                         "appNotOpen": "IOTA-sovellus ei ole auki",
                         "connected": "Yhdistetty",
-                        "legacyConnected": "IOTA Legacy App Open",
+                        "legacyConnected": "IOTA Legacy -sovellus auki",
                         "locked": "Lukittu",
                         "mnemonicMismatch": "Väärä Ledger tai Mnemonic-fraasi",
                         "notDetected": "Ei havaittu",
@@ -579,7 +579,7 @@
         },
         "ledgerNotConnected": {
             "connect": "Avaa uusi IOTA-sovellus Ledger-laitteellasi jatkaaksesi",
-            "connectLegacy": "Open the IOTA Legacy app on your Ledger device to continue"
+            "connectLegacy": "Avaa IOTA Legacy -sovellus Ledger-laitteellasi jatkaaksesi"
         },
         "ledgerConfirmation": {
             "confirm": "Jatkaaksesi, vahvista Ledger-laitteellasi näkyvä kehotus"
@@ -589,8 +589,8 @@
             "steps": [
                 "Asenna ja avaa Ledger Live -sovellus",
                 "Varmista, että Ledger-laitteesi on yhdistetty",
-                "Search for apps: IOTA Legacy and IOTA (MIOTA)",
-                "Install both apps: IOTA Legacy and IOTA (MIOTA)",
+                "Etsi sovelluksia: IOTA Legacy ja IOTA (MIOTA)",
+                "Asenna molemmat sovellukset: IOTA Legacy ja IOTA (MIOTA)",
                 "Muista, että on tärkeää sulkea Ledger Live ennen Fireflyhyn palaamista"
             ]
         },
@@ -610,8 +610,8 @@
             "transaction": {
                 "title": "Vahvista transaktio",
                 "info": "Vahvista, että Ledger-laitteellasi näkyvät transaktion tiedot täsmäävät alla näkyviin tietoihin. Jos ne täsmäävät, paina molempia painikkeita Ledger-laitteellasi kehotuksen mukaisesti.",
-                "input": "Input [{index}]",
-                "output": "Output",
+                "input": "Tulo [{index}]",
+                "output": "Lähtö",
                 "checksum": "Chk: {checksum}"
             }
         },
@@ -961,8 +961,8 @@
             "notFound": "Ledger-laitetta ei löydy.",
             "otherConnected": "Väärä sovellus on auki Ledger-laitteellasi.",
             "generateAddress": "Osoitetta luotaessa tapahtui virhe.",
-            "timeout": "Timeout exceeded",
-            "disconnected": "Device disconnected"
+            "timeout": "Aikakatkaisu ylitetty",
+            "disconnected": "Yhteys laitteeseen katkaistu"
         }
     },
     "tooltips": {

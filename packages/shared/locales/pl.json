@@ -56,7 +56,7 @@
         },
         "ledgerInstallationGuide": {
             "title": "Czy zainstalowałeś niezbędne aplikacje Ledger?",
-            "body1": "Before you proceed, you must find and install both the IOTA Legacy app and the new IOTA app through Ledger Live.",
+            "body1": "Zanim przejdziesz dalej, musisz odnaleźć i zainstalować zarówno starą aplikację IOTA Legacy, jak i nową aplikację IOTA poprzez Ledger Live.",
             "body2": "Upewnij się, że oprogramowanie Ledger jest aktualne. Wszystkie zainstalowane aplikacje powinny być zaktualizowane do najnowszych wersji.",
             "action": "Tak, zainstalowałem te aplikacje"
         },
@@ -119,7 +119,7 @@
             "body": "Twój nowy portfel jest już gotowy do użycia.",
             "softwareMigratedBody": "Twoje środki zostały pomyślnie przeniesione do nowej sieci",
             "fireflyLedgerBody": "Twoje konto Ledger zostało pomyślnie odzyskane. Możesz kontynuować.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the IOTA Legacy app from your device.",
+            "trinityLedgerBody": "Pomyślnie przeniosłeś swój Ledger do nowej sieci. Teraz możesz usunąć aplikację IOTA Legacy ze swojego urządzenia.",
             "exportMigration": "Eksportuj dziennik migracji i zakończ konfigurację"
         },
         "import": {
@@ -176,7 +176,7 @@
         "legacyLedgerIntro": {
             "title": "Rozpocznij migrację Ledger używając Firefly",
             "body1": "Firefly pomoże Ci przenieść tokeny do nowej sieci Chrysalis.",
-            "body2": "Po migracji będziesz mógł wysyłać i odbierać tokeny używając po portfela sprzętowego Ledger z Firefly.",
+            "body2": "Po migracji będziesz mógł wysyłać i odbierać tokeny używając urządzenia Ledger z Firefly.",
             "readMore": "Czego można oczekiwać od procesu migracji"
         },
         "generateNewLedgerAddress": {
@@ -190,7 +190,7 @@
         },
         "switchLedgerApps": {
             "title": "Przełącz aplikacje Ledger",
-            "body": "Please switch to the IOTA Legacy app on your Ledger device to continue migration. When ready, press continue.",
+            "body": "Przełącz się na aplikację IOTA Legacy na urządzeniu Ledger, aby kontynuować migrację. Gdy będziesz gotowy, naciśnij przycisk Kontynuuj.",
             "ledgerApp": "IOTA",
             "ledgerLegacyApp": "IOTA Legacy"
         },
@@ -440,7 +440,7 @@
                     "statuses": {
                         "appNotOpen": "Aplikacja IOTA nie jest otwarta",
                         "connected": "Połączono",
-                        "legacyConnected": "IOTA Legacy App Open",
+                        "legacyConnected": "Aplikacja IOTA Legacy otwarta",
                         "locked": "Zablokowany",
                         "mnemonicMismatch": "Nieprawidłowy Ledger lub wyrazy ratunkowe",
                         "notDetected": "Nie wykryto",
@@ -579,7 +579,7 @@
         },
         "ledgerNotConnected": {
             "connect": "Otwórz nową aplikację IOTA na swoim urządzeniu Ledger, aby kontynuować",
-            "connectLegacy": "Open the IOTA Legacy app on your Ledger device to continue"
+            "connectLegacy": "Otwórz aplikację IOTA Legacy na swoim urządzeniu Ledger, aby kontynuować"
         },
         "ledgerConfirmation": {
             "confirm": "Aby kontynuować, potwierdź informację wyświetlaną na urządzeniu Ledger"
@@ -589,8 +589,8 @@
             "steps": [
                 "Zainstaluj i otwórz aplikację Ledger Live",
                 "Upewnij się, że Twój Ledger jest połączony",
-                "Search for apps: IOTA Legacy and IOTA (MIOTA)",
-                "Install both apps: IOTA Legacy and IOTA (MIOTA)",
+                "Wyszukaj aplikacje: IOTA Legacy oraz IOTA (MIOTA)",
+                "Zainstaluj obie aplikacje: IOTA Legacy oraz IOTA (MIOTA)",
                 "Pamiętaj, żeby zamknąć aplikację Ledger Live przed powrotem do Firefly"
             ]
         },
@@ -610,9 +610,9 @@
             "transaction": {
                 "title": "Potwierdź transakcję",
                 "info": "Potwierdź, że informacje o transakcjach wyświetlane na Twoim urządzeniu Ledger pasują do informacji wyświetlanych poniżej. Jeśli wszystko się zgadza, naciśnij oba przyciski na Ledger zgodnie z instrukcją.",
-                "input": "Input [{index}]",
-                "output": "Output",
-                "checksum": "Chk: {checksum}"
+                "input": "Dane wejściowe [{index}]",
+                "output": "Dane wyjściowe",
+                "checksum": "Suma kontrolna: {checksum}"
             }
         },
         "ledgerAddress": {
@@ -961,8 +961,8 @@
             "notFound": "Nie znaleziono urządzenia Ledger.",
             "otherConnected": "Na Twoim urządzeniu Ledger otwarto nieprawidłową aplikację.",
             "generateAddress": "Podczas generowania adresu wystąpił błąd.",
-            "timeout": "Timeout exceeded",
-            "disconnected": "Device disconnected"
+            "timeout": "Przekroczony limit czasu",
+            "disconnected": "Urządzenie odłączone"
         }
     },
     "tooltips": {
