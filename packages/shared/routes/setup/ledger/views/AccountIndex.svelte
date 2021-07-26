@@ -1,15 +1,20 @@
 <script lang="typescript">
-    import { Animation, Button, Number, OnboardingLayout, Spinner, Text, Toggle } from 'shared/components'
+    import { Animation, Button, Number, OnboardingLayout, Spinner, Text, Toggle, Tooltip, Icon } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { ADDRESS_SECURITY_LEVEL, getLedgerMigrationData, hardwareIndexes } from 'shared/lib/migration'
-    import { createEventDispatcher } from 'svelte'
+    import { onDestroy, createEventDispatcher } from 'svelte'
+    import { LedgerAppName } from 'shared/lib/typings/ledger'
 
     export let locale
     export let mobile
 
     let busy = false
     let expert = false
+    let showTooltip = false
+    let isTakingAWhile = false
+    let toolTip
+    let toolTipTimeout
 
     let min = 0
     let max = 2147483647
@@ -20,12 +25,16 @@
     $: index = checkNumber(index)
     $: page = checkNumber(page)
 
+    $: if (!isTakingAWhile) showTooltip = false
+
     let isValidAccountIndex = false
     $: isValidAccountIndex = isValidNumber(index)
     let isValidAccountPage = false
     $: isValidAccountPage = isValidNumber(page)
 
     const dispatch = createEventDispatcher()
+
+    onDestroy(() => clearTimeout(toolTipTimeout))
 
     function checkNumber(n: number): number {
         if (!isWithinRange(n)) n = Math.min(Math.max(n, min), max)
@@ -48,6 +57,7 @@
     function handleContinueClick() {
         busy = true
         const _onConnected = () => {
+            toolTipTimeout = setTimeout(() => (isTakingAWhile = true), 300000)
             Electron.ledger
                 .selectSeed(index, page, ADDRESS_SECURITY_LEVEL)
                 .then(({ iota, callback }) => {
@@ -61,10 +71,12 @@
                 })
                 .catch((error) => {
                     busy = false
+                    displayNotificationForLedgerProfile('error', true, true, false, true, error)
+
+                    isTakingAWhile = false
+                    clearTimeout(toolTipTimeout)
 
                     console.error(error)
-
-                    displayNotificationForLedgerProfile('error', true, true, false, true, error)
                 })
         }
         const _onCancel = () => (busy = false)
@@ -73,6 +85,10 @@
 
     function handleBackClick() {
         dispatch('previous')
+    }
+
+    function toggleTooltip() {
+        showTooltip = !showTooltip
     }
 </script>
 
@@ -107,6 +123,29 @@
             </div>
         </div>
         <div slot="leftpane__action" class="flex flex-col space-y-4">
+            {#if isTakingAWhile}
+                <div
+                    class="flex flex-row w-full mb-4 justify-center"
+                    on:mouseenter={() => toggleTooltip()}
+                    on:mouseleave={() => toggleTooltip()}
+                    bind:this={toolTip}>
+                    <Icon icon="info" classes="mr-1 text-gray-800 dark:text-white" width={20} height={20} />
+                    <Text>{locale('views.selectLedgerAccountIndex.takingAWhile')}</Text>
+                </div>
+            {/if}
+            {#if showTooltip}
+                <Tooltip
+                    parentTop={toolTip.getBoundingClientRect().top - 20}
+                    parentLeft={toolTip.getBoundingClientRect().left}
+                    parentWidth={toolTip.offsetWidth / 2}
+                    classes="max-w-md">
+                    <Text classes="break-words">
+                        {locale('views.selectLedgerAccountIndex.reinstallLegacy', {
+                            values: { legacy: LedgerAppName.IOTALegacy },
+                        })}
+                    </Text>
+                </Tooltip>
+            {/if}
             <Button classes="w-full" disabled={busy || !isValidAccountIndex || !isValidAccountPage} onClick={handleContinueClick}>
                 {#if busy}
                     <Spinner busy={true} message={locale('views.migrate.findingBalance')} classes="justify-center" />

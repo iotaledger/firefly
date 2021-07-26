@@ -198,7 +198,9 @@
             "accountIndex": "Account Index",
             "accountPage": "Account Page",
             "standard": "Standard",
-            "expert": "Expert"
+            "expert": "Expert",
+            "takingAWhile": "This seems to be taking a while...",
+            "reinstallLegacy": "If your Ledger is not generating addresses you may need to reinstall the {legacy} app and try again."
         },
         "importBackupPassword": {
             "title": "Restore your wallets from a SeedVault or Stronghold",
