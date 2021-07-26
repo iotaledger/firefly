@@ -58,7 +58,7 @@ export const dashboardRoute = writable<Tabs>(Tabs.Wallet)
 /**
  * Ledger setup route
  */
-export const ledgerRoute = writable<LedgerRoutes>(get(walletSetupType) === SetupType.New || get(walletSetupType) === SetupType.FireflyLedger ? LedgerRoutes.Connect : LedgerRoutes.LegacyIntro)
+export const ledgerRoute = writable<LedgerRoutes>(LedgerRoutes.LegacyIntro)
 
 /**
  * Ledger setup routing history
