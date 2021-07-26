@@ -394,6 +394,10 @@
                 "title": "Diagnostics",
                 "description": "View system and application information"
             },
+            "migrateLedgerIndex": {
+                "title": "Migrate Ledger Index",
+                "description": "Migrate another ledger account index into this profile"
+            },
             "stateExport": {
                 "title": "State export",
                 "description": "Export your transaction history to a .csv file"
