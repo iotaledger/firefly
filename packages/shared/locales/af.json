@@ -30,6 +30,36 @@
             "body1": "Stoor en druk die Recovery Kit PDF form uit.",
             "body2": "As jy die Recovery Kit invul en veilig stoor, sal jy jou beursie altyd kan herwin."
         },
+        "create": {
+            "title": "Create a wallet",
+            "body": "Create a new wallet. You can choose a regular software wallet or if you have a Ledger device you can set up a hardware wallet.",
+            "softwareAccount": {
+                "title": "I want a software wallet",
+                "description": "Create a 24-word Recovery Phrase"
+            },
+            "ledgerAccount": {
+                "title": "I want a hardware wallet",
+                "description": "Ledger Nano S or Nano X required"
+            }
+        },
+        "setupLedger": {
+            "title": "Install the new IOTA Ledger app on your device",
+            "body1": "1. Open Ledger Live and install New IOTA app",
+            "body2": "2. Close Ledger Live desktop application",
+            "body3": "3. Open the new app on your Ledger device",
+            "progress1": "Connect your Ledger",
+            "progress2": "Genereer nuwe adres",
+            "progress3": "Switch Ledger app",
+            "progress4": "Transfer funds",
+            "watchVideo": "Watch video guide",
+            "checkingConnection": "Checking Ledger Connection"
+        },
+        "ledgerInstallationGuide": {
+            "title": "Have you installed the necessary Ledger apps?",
+            "body1": "Voordat jy voortgaan, moet jy beide die IOTA Legacy app en die nuwe IOTA app deur Ledger Live vind en installeer.",
+            "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
+            "action": "Yes, I've installed these apps"
+        },
         "password": {
             "title": "Skep 'n wagwoord",
             "body1": "U het 'n sterk wagwoord nodig om U fondse te beskerm. Gebruik 'n kombinasie van woorde en vermy algemene frases, name of datums.",
@@ -85,9 +115,11 @@
         },
         "congratulations": {
             "title": "Wallet-opstelling is voltooi",
+            "fundsMigrated": "Fondsmigrasie",
             "body": "Jou nuwe beursie is gereed om te gebruik.",
-            "fundsMigrated": "Fondse migreer",
-            "success": "Jy het jou fondse suksesvol na die nuwe netwerk gemigreer",
+            "softwareMigratedBody": "Jy het jou fondse suksesvol na die nuwe netwerk gemigreer",
+            "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
+            "trinityLedgerBody": "Jy het jou Ledger suksesvol na die nuwe netwerk gemigreer. Jy kan nou die IOTA Legacy app van jou toestel verwyder.",
             "exportMigration": "Voer migrasielogboek uit en voltooi die opstelling"
         },
         "import": {
@@ -98,7 +130,9 @@
             "importMnemonic": "Ek het 'n Firefly herstel frase",
             "importMnemonicDescription": "Voer jou geheime frase in om jou beursie te herstel",
             "importFile": "Ek het 'n lêer back-up",
-            "importFileDescription": "Laai 'n Seedvault of Stronghold-lêer op"
+            "importFileDescription": "Laai 'n Seedvault of Stronghold-lêer op",
+            "importLedger": "I have a Ledger backup",
+            "importLedgerDescription": "Herstel of migreer 'n Ledger-profiel"
         },
         "importFromText": {
             "seed": {
@@ -119,6 +153,55 @@
             "title": "Herstel jou beursie uit 'n back-up lêer",
             "body": "Voer 'n back-up in om jou beursie te herstel. Back-up kan 'n Stronghold (.stronghold) of 'n Trinity SeedVault (.kdbx) wees."
         },
+        "importFromLedger": {
+            "title": "Herstel of migreer jou Ledger",
+            "body": "Herstel jou bestaande Firefly Ledger-profiel, of migreer jou fondse vanaf Trinity.",
+            "haveFireflyLedger": "I have a Firefly Ledger backup",
+            "haveFireflyLedgerDescription": "Restore a Firefly profile",
+            "haveTrinityLedger": "I have a Trinity Ledger backup",
+            "haveTrinityLedgerDescription": "Migreer jou Trinity-profiel"
+        },
+        "connectLedger": {
+            "title": "Connect your Ledger to Firefly",
+            "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed.",
+            "trafficLight1": "Connect and unlock your Ledger with your PIN",
+            "trafficLight2": "Open the new IOTA app on your Ledger",
+            "tips": "Tips if your Ledger isn’t connecting"
+        },
+        "restoreFromFireflyLedger": {
+            "title": "Restore Your Ledger Profile",
+            "body": "Press restore to complete the setup process and restore your wallets, balances and transaction history.",
+            "restoring": "Restoring from Ledger..."
+        },
+        "legacyLedgerIntro": {
+            "title": "Start your Ledger migration using Firefly",
+            "body1": "Firefly will help you to transfer your tokens to the new Chrysalis network.",
+            "body2": "After the migration, you will be able to send and receive your tokens using your Ledger with Firefly.",
+            "readMore": "What to expect from the migration process"
+        },
+        "generateNewLedgerAddress": {
+            "title": "Genereer nuwe adres",
+            "body": "Jy moet jou nuwe adres genereer om jou tokens met Firefly te migreer. Klik op die knoppie hieronder om voort te gaan.",
+            "confirmTitle": "Bevestig die nuwe adres",
+            "confirmBody": "Ter wille van veiligheid, vergelyk asseblief die adres wat op jou Ledger gegenereer is, met die adres hieronder. As hulle ooreenstem, druk albei knoppies op jou Ledger soos gevra.",
+            "confirmedTitle": "Adres bevestig",
+            "confirmedBody": "Jy het bevestig dat die adres in Firefly ooreenstem met die adres op jou Ledger.",
+            "generating": "Genereer nuwe adres"
+        },
+        "switchLedgerApps": {
+            "title": "Switch Ledger apps",
+            "body": "Skakel asseblief oor na die IOTA Legacy app op jou Ledger om voort te gaan met migrasie. Wanneer gereed, druk voort.",
+            "ledgerApp": "IOTA",
+            "ledgerLegacyApp": "IOTA Legacy"
+        },
+        "selectLedgerAccountIndex": {
+            "title": "Choose Ledger account index",
+            "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
+            "accountIndex": "Account Index",
+            "accountPage": "Account Page",
+            "standard": "Standard",
+            "expert": "Expert"
+        },
         "importBackupPassword": {
             "title": "Herstel jou beursie vanaf 'n SeedVault of 'n Stronghold",
             "body1": "Sleutel asb jou back-up wagwoord in.",
@@ -126,11 +209,7 @@
         },
         "importSuccess": {
             "title": "Jy het jou back-up suksesvol herwin",
-            "body": "Jy kan nou jou nuwe beursie instel.",
-            "seedvaultTitle": "Suksesvol ingevoer",
-            "seedvaultBody": "Jou wagwoord is korrek, ju kan nou voortgaan.",
-            "strongholdTitle": "Suksesvol ingevoer",
-            "strongholdBody": "Jou wagwoord is korrek, ju kan nou voortgaan."
+            "body": "Jy kan nou jou nuwe beursie instel."
         },
         "migrate": {
             "title": "Migreer jou fondse",
@@ -196,7 +275,8 @@
             "title": "Jou balans",
             "body": "Maak seker dat jou balans reg is voordat jy voortgaan. Jy kan weer probeer as dinge nie reg lyk nie.",
             "error": "Die minimum migrasiebedrag is 1 Mi. Probeer weer as jou balans nie reg lyk nie.",
-            "zeroBalance": "Probeer weer. As jy steeds nie jou balans kan vind nie, het jy dalk jou seedd verkeerd ingevoer."
+            "zeroBalance": "Probeer weer. As jy steeds nie jou balans kan vind nie, het jy dalk jou seedd verkeerd ingevoer.",
+            "zeroBalanceLedgerLegacy": "Try checking again. If you still can't find your balance you might have selected the wrong account index."
         },
         "settings": {
             "settings": "Instellings",
@@ -357,7 +437,15 @@
                 },
                 "hardwareDevice": {
                     "title": "Hardeware-toestel",
-                    "noneDetected": "Nie bespeur nie"
+                    "statuses": {
+                        "appNotOpen": "IOTA App Not Open",
+                        "connected": "Connected",
+                        "legacyConnected": "IOTA Legacy App Open",
+                        "locked": "Gesluit",
+                        "mnemonicMismatch": "Wrong Ledger or Mnemonic",
+                        "notDetected": "Not Detected",
+                        "otherConnected": "App Open"
+                    }
                 },
                 "strongholdStatus": {
                     "title": "Beursie status",
@@ -488,6 +576,48 @@
             "body": "Die opgradering van die Chrysalis-netwerk het begin.",
             "bodyMigration": "Migrasie is uitgeskakel totdat dit voltooi is.",
             "bodyFirefly": "Firefly is uitgeskakel totdat dit voltooi is. Token migrasie sal daarna steeds moontlik wees."
+        },
+        "ledgerNotConnected": {
+            "connect": "Open the new IOTA app on your Ledger device to continue",
+            "connectLegacy": "Maak die IOTA Legacy-l app op jou Ledger oop om voort te gaan"
+        },
+        "ledgerConfirmation": {
+            "confirm": "To proceed, confirm the prompt displayed on your Ledger device"
+        },
+        "ledgerAppGuide": {
+            "title": "Guide to installing the Ledger apps",
+            "steps": [
+                "Install and open the Ledger Live application",
+                "Ensure that your Ledger is connected",
+                "Soek vir programme: IOTA Legacy en IOTA (MIOTA)",
+                "Installeer beide programme: IOTA Legacy en IOTA (MIOTA)",
+                "Remember that it's important to close Ledger Live before returning to Firefly"
+            ]
+        },
+        "ledgerConnectionGuide": {
+            "title": "Tips if your Ledger isn’t connecting",
+            "steps": [
+                "Make sure Ledger Live is not open on your computer",
+                "Ensure you have unlocked your Ledger device with your PIN",
+                "Open the new IOTA app on your Ledger device"
+            ]
+        },
+        "ledgerTransaction": {
+            "remainderAddress": {
+                "title": "Confirm remainder address",
+                "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+            },
+            "transaction": {
+                "title": "Bevestig die transaksie",
+                "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted.",
+                "input": "Input [{index}]",
+                "output": "Output",
+                "checksum": "Chk: {checksum}"
+            }
+        },
+        "ledgerAddress": {
+            "title": "Confirm receive address",
+            "body": "Confirm that the receive address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
         }
     },
     "charts": {
@@ -505,6 +635,8 @@
     "actions": {
         "continue": "Gaan voort",
         "back": "Terug",
+        "previous": "Previous",
+        "next": "Next",
         "cancel": "Kanselleer",
         "close": "Maak toe",
         "dismiss": "Ontslaan",
@@ -573,6 +705,7 @@
         "addAccount": "Voeg beursie toe",
         "checkForUpdates": "Soek vir opgraderings",
         "reportAnIssue": "Rapporteer 'n probleem",
+        "restore": "Restore",
         "clear": "Maak skoon",
         "hideDetails": "Versteek besonderhede",
         "yes": "Ja",
@@ -592,7 +725,8 @@
         "searchBalances": "Soek na balanse",
         "searchAgain": "Soek weer",
         "searching": "Soek tans...",
-        "closeFirefly": "Maak Firefly toe"
+        "closeFirefly": "Maak Firefly toe",
+        "generateAddress": "Genereer nuwe adres"
     },
     "general": {
         "password": "Wagwoord",
@@ -607,6 +741,7 @@
         "received": "Ontvang",
         "sendPayment": "Stuur betaling",
         "moveFunds": "Interne oordrag",
+        "sendTo": "Send To",
         "sendFunds": "Stuur fondse",
         "sendToAddress": "Stuur na 'n adres",
         "scanQrOrPaste": "Skandeer 'n QR-kode of plak 'n adres",
@@ -625,6 +760,8 @@
         "myAddress": "My adres",
         "shareAddress": "Deel 'n adres",
         "yourAddress": "Jou adres",
+        "newRemainder": "New Remainder",
+        "remainder": "Remainder",
         "generateNewAddress": "Genereer nuwe adres",
         "copyAddress": "Kopieer Adres",
         "import": "Invoer",
@@ -661,6 +798,7 @@
         "messageId": "Message ID",
         "inputAddress": "Stuur adres",
         "receiveAddress": "Ontvangs Adres",
+        "newAddress": "New Address",
         "date": "Datum",
         "status": "Status",
         "confirmed": "Bevestig",
@@ -672,11 +810,13 @@
         "firstSync": "Gesinkroniseer geskiedenis, dit kan 'n rukkie neem...",
         "transferSyncing": "Sinkroniseer beursie",
         "transferSelectingInputs": "Kies inputs",
-        "transferRemainderAddress": "Genereer oorblyfsel deposito adres",
+        "transferRemainderAddress": "Generating remainder address",
+        "transferPreparedTransaction": "Preparing transaction",
         "transferSigning": "Onderteken die transaksie",
         "transferPow": "Uitvoering van PoW",
         "transferBroadcasting": "Uitsaai van die transaksie",
         "transferComplete": "Oordrag voltooi",
+        "generatingReceiveAddress": "Generating receive address",
         "creatingAccount": "Skep tans beursie, wag asseblief...",
         "updatingAccount": "Opdatering van beursie, wag asseblief...",
         "accountSyncing": "Die beursie word tans gesinkroniseer",
@@ -770,7 +910,10 @@
             "tilde": "'N Profielnaam kan nie met die' ~ 'karakter begin nie.",
             "control": "'N Profielnaam kan nie 'n beheerkarakter bevat nie.",
             "startDot": "'N Profielnaam kan nie begin met die'. ' karakter.",
-            "chars": "'N Profielnaam kan nie die volgende karakters bevat nie <>: \"/ \\ |? *"
+            "chars": "'N Profielnaam kan nie die volgende karakters bevat nie <>: \"/ \\ |? *",
+            "index": "Your account index must be a number between 0 and 2,147,483,647.",
+            "page": "Your account page must be a number between 0 and 2,147,483,647.",
+            "syncing": "There was an error syncing your wallets."
         },
         "send": {
             "addressLength": "Adresse moet {length, plural, one {1 karakter} other {# karakters}} lank wees.",
@@ -784,7 +927,9 @@
             "insufficientFunds": "Hierdie beursie het onvoldoende fondse.",
             "noToAccount": "Jy het nie 'n beursie gekies om die fondse na te stuur nie.",
             "sendingDust": "Jy kan nie minder as 1 Mi. stuur nie.",
-            "leavingDust": "Jy kan nie minder as 1 Mi op jou adres los nie."
+            "leavingDust": "Jy kan nie minder as 1 Mi op jou adres los nie.",
+            "cancelled": "The transaction was cancelled.",
+            "transaction": "There was an error sending your transaction. Please try again."
         },
         "node": {
             "invalid": "Sleutel 'n geldige URL in.",
@@ -805,6 +950,19 @@
             "phraseWordCount": "Daar moet 24 woorde in jou herstelfase voorkom, tans is daar {length, plural, one {1} other {#}}.",
             "phraseUnrecognizedWord": "Onherkenbare woord \"{word}\" in jou herstelfrase",
             "phraseCaseWord": "Die woord \"{word}\" moet kleinletters wees"
+        },
+        "ledger": {
+            "appNotOpen": "You must open the IOTA app on your Ledger device.",
+            "generic": "There was an error connecting to your Ledger device.",
+            "legacyConnected": "The wrong app is open on your Ledger device.",
+            "locked": "Please unlock your Ledger device by entering the PIN.",
+            "mnemonicMismatch": "You have connected the wrong Ledger device or the mnemonic has changed.",
+            "notDetected": "No Ledger device detected.",
+            "notFound": "Ledger device not found.",
+            "otherConnected": "The wrong app is open on your Ledger device.",
+            "generateAddress": "Kon nie 'n adres genereer nie.",
+            "timeout": "Timeout exceeded",
+            "disconnected": "Toestel gediskonnekteer"
         }
     },
     "tooltips": {

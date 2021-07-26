@@ -30,6 +30,36 @@
             "body1": "पुनर्प्राप्ति किट PDF टेम्पलेट को सहेजें और प्रिंट करें",
             "body2": "यदि आप पुनर्प्राप्ति किट भरते हैं और इसे सुरक्षित रूप से संग्रहीत करते हैं, तो आप हमेशा अपने वॉलेट को पुनर्प्राप्त करने में सक्षम होंगे"
         },
+        "create": {
+            "title": "वॉलेट बनाएं",
+            "body": "Create a new wallet. You can choose a regular software wallet or if you have a Ledger device you can set up a hardware wallet.",
+            "softwareAccount": {
+                "title": "I want a software wallet",
+                "description": "Create a 24-word Recovery Phrase"
+            },
+            "ledgerAccount": {
+                "title": "I want a hardware wallet",
+                "description": "Ledger Nano S or Nano X required"
+            }
+        },
+        "setupLedger": {
+            "title": "Install the new IOTA Ledger app on your device",
+            "body1": "1. Open Ledger Live and install New IOTA app",
+            "body2": "2. Close Ledger Live desktop application",
+            "body3": "3. Open the new app on your Ledger device",
+            "progress1": "Connect your Ledger",
+            "progress2": "Generate address",
+            "progress3": "Switch Ledger app",
+            "progress4": "Transfer funds",
+            "watchVideo": "Watch video guide",
+            "checkingConnection": "Checking Ledger Connection"
+        },
+        "ledgerInstallationGuide": {
+            "title": "Have you installed the necessary Ledger apps?",
+            "body1": "Before you proceed, you must find and install both the IOTA Legacy app and the new IOTA app through Ledger Live.",
+            "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
+            "action": "Yes, I've installed these apps"
+        },
         "password": {
             "title": "एक पासवर्ड बनाएं",
             "body1": "आपको अपने फंड की सुरक्षा के लिए एक मजबूत पासवर्ड की आवश्यकता है। शब्दों के संयोजन का उपयोग करें, और सामान्य वाक्यांशों, नामों या तिथियों से बचें",
@@ -85,9 +115,11 @@
         },
         "congratulations": {
             "title": "वॉलेट सेटअप पूरा हुआ",
-            "body": "आपका वॉलेट उपयोग के लिए तैयार है",
             "fundsMigrated": "फंड्स माइग्रेट हुए",
-            "success": "आपने अपने धन को नए नेटवर्क में सफलतापूर्वक स्थानांतरित कर दिया है",
+            "body": "आपका वॉलेट उपयोग के लिए तैयार है",
+            "softwareMigratedBody": "You have successfully migrated your funds to the new network",
+            "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the IOTA Legacy app from your device.",
             "exportMigration": "निर्यात माइग्रेशन लॉग और सेटअप फिनिश करिए"
         },
         "import": {
@@ -98,7 +130,9 @@
             "importMnemonic": "मेरे पास फायरफ्लाई वसूली वाक्यांश है",
             "importMnemonicDescription": "अपने वॉलेट को पुनर्प्राप्त करने के लिए अपना गुप्त वाक्यांश दर्ज करें",
             "importFile": "मेरे पास एक फाइल में बैकअप है",
-            "importFileDescription": "एक सीड़वॉल्ट या स्ट्रॉन्गहोल्ड फ़ाइल अपलोड करें"
+            "importFileDescription": "एक सीड़वॉल्ट या स्ट्रॉन्गहोल्ड फ़ाइल अपलोड करें",
+            "importLedger": "I have a Ledger backup",
+            "importLedgerDescription": "Restore or migrate a Ledger profile"
         },
         "importFromText": {
             "seed": {
@@ -119,6 +153,55 @@
             "title": "एक बैकअप फ़ाइल से अपने वॉलेट को पुनर्स्थापित करें",
             "body": "अपने वॉलेट को पुनर्स्थापित करने के लिए एक बैकअप फ़ाइल आयात करें। बैकअप या तो एक स्ट्रॉन्गहोल्ड फाइल (.stronghold) या एक ट्रिनिटी सीड़वॉल्ट फाइल (.kdbx) हो सकते हैं।"
         },
+        "importFromLedger": {
+            "title": "Restore or Migrate your Ledger",
+            "body": "Restore an existing Firefly Ledger profile, or migrate your funds from Trinity.",
+            "haveFireflyLedger": "I have a Firefly Ledger backup",
+            "haveFireflyLedgerDescription": "Restore a Firefly profile",
+            "haveTrinityLedger": "I have a Trinity Ledger backup",
+            "haveTrinityLedgerDescription": "Migrate a Trinity profile"
+        },
+        "connectLedger": {
+            "title": "Connect your Ledger to Firefly",
+            "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed.",
+            "trafficLight1": "Connect and unlock your Ledger with your PIN",
+            "trafficLight2": "Open the new IOTA app on your Ledger",
+            "tips": "Tips if your Ledger isn’t connecting"
+        },
+        "restoreFromFireflyLedger": {
+            "title": "Restore Your Ledger Profile",
+            "body": "Press restore to complete the setup process and restore your wallets, balances and transaction history.",
+            "restoring": "Restoring from Ledger..."
+        },
+        "legacyLedgerIntro": {
+            "title": "Start your Ledger migration using Firefly",
+            "body1": "Firefly will help you to transfer your tokens to the new Chrysalis network.",
+            "body2": "After the migration, you will be able to send and receive your tokens using your Ledger with Firefly.",
+            "readMore": "What to expect from the migration process"
+        },
+        "generateNewLedgerAddress": {
+            "title": "नया पता उत्पन्न करें",
+            "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
+            "confirmTitle": "Confirm the new address",
+            "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
+            "confirmedTitle": "Address confirmed",
+            "confirmedBody": "You have confirmed that the address in Firefly matches the one on your Ledger device.",
+            "generating": "Generating address"
+        },
+        "switchLedgerApps": {
+            "title": "Switch Ledger apps",
+            "body": "Please switch to the IOTA Legacy app on your Ledger device to continue migration. When ready, press continue.",
+            "ledgerApp": "IOTA",
+            "ledgerLegacyApp": "IOTA Legacy"
+        },
+        "selectLedgerAccountIndex": {
+            "title": "Choose Ledger account index",
+            "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
+            "accountIndex": "Account Index",
+            "accountPage": "Account Page",
+            "standard": "Standard",
+            "expert": "Expert"
+        },
         "importBackupPassword": {
             "title": "एक सीड़वॉल्ट या स्ट्रॉन्गहोल्ड से अपने वॉलेट को पुनर्स्थापित करें",
             "body1": "कृपया अपना बैकअप पासवर्ड डालें",
@@ -126,11 +209,7 @@
         },
         "importSuccess": {
             "title": "आपने अपना बैकअप सफलतापूर्वक प्राप्त कर लिया है",
-            "body": "अब आप अपना नया वॉलेट सेट कर सकते हैं।",
-            "seedvaultTitle": "सफलतापूर्वक आयात किया गया है",
-            "seedvaultBody": "आपका पासवर्ड सही है, अब आप आगे भर सकते हैं।",
-            "strongholdTitle": "सफलतापूर्वक आयात किया गया है",
-            "strongholdBody": "आपका पासवर्ड सही है, अब आप आगे भर सकते हैं।"
+            "body": "अब आप अपना नया वॉलेट सेट कर सकते हैं।"
         },
         "migrate": {
             "title": "अपने निधि को विस्थापित करें",
@@ -196,7 +275,8 @@
             "title": "आपका बैलेंस",
             "body": "सुनिश्चित करें कि जारी रखने से पहले आपका बैलेंस सही है। अगर चीजें सही नहीं दिखती हैं तो आप फिर से जांच कर सकते हैं।",
             "error": "प्रत्येक खर्च किए गए पते की न्यूनतम प्रवास राशि 1 Mi है। यदि आपका बैलेंस सही नहीं दिखता है तो फिर से जांचें।",
-            "zeroBalance": "फिर से जाँच करने का प्रयास करें। यदि आपको अभी भी अपना बैलेंस नहीं मिल रहा है तो आप गलत तरीके से अपना सीड दर्ज कर रहे हैं।"
+            "zeroBalance": "फिर से जाँच करने का प्रयास करें। यदि आपको अभी भी अपना बैलेंस नहीं मिल रहा है तो आप गलत तरीके से अपना सीड दर्ज कर रहे हैं।",
+            "zeroBalanceLedgerLegacy": "Try checking again. If you still can't find your balance you might have selected the wrong account index."
         },
         "settings": {
             "settings": "सैटिन्ग्स",
@@ -357,7 +437,15 @@
                 },
                 "hardwareDevice": {
                     "title": "हार्डवेयर उपकरण",
-                    "noneDetected": "किसी का पता नहीं चला"
+                    "statuses": {
+                        "appNotOpen": "IOTA App Not Open",
+                        "connected": "Connected",
+                        "legacyConnected": "IOTA Legacy App Open",
+                        "locked": "लॉक्ड",
+                        "mnemonicMismatch": "Wrong Ledger or Mnemonic",
+                        "notDetected": "Not Detected",
+                        "otherConnected": "App Open"
+                    }
                 },
                 "strongholdStatus": {
                     "title": "वॉलेट की स्थिति",
@@ -488,6 +576,48 @@
             "body": "क्रिसलिस नेटवर्क अपग्रेड शुरू हो गया है",
             "bodyMigration": "पूर्ण होने तक माइग्रेशन अक्षम है",
             "bodyFirefly": "फायरफ्लाई पूर्ण होने तक अक्षम है। टोकन प्रवास अभी भी बाद में संभव होगा।"
+        },
+        "ledgerNotConnected": {
+            "connect": "Open the new IOTA app on your Ledger device to continue",
+            "connectLegacy": "Open the IOTA Legacy app on your Ledger device to continue"
+        },
+        "ledgerConfirmation": {
+            "confirm": "To proceed, confirm the prompt displayed on your Ledger device"
+        },
+        "ledgerAppGuide": {
+            "title": "Guide to installing the Ledger apps",
+            "steps": [
+                "Install and open the Ledger Live application",
+                "Ensure that your Ledger is connected",
+                "Search for apps: IOTA Legacy and IOTA (MIOTA)",
+                "Install both apps: IOTA Legacy and IOTA (MIOTA)",
+                "Remember that it's important to close Ledger Live before returning to Firefly"
+            ]
+        },
+        "ledgerConnectionGuide": {
+            "title": "Tips if your Ledger isn’t connecting",
+            "steps": [
+                "Make sure Ledger Live is not open on your computer",
+                "Ensure you have unlocked your Ledger device with your PIN",
+                "Open the new IOTA app on your Ledger device"
+            ]
+        },
+        "ledgerTransaction": {
+            "remainderAddress": {
+                "title": "Confirm remainder address",
+                "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+            },
+            "transaction": {
+                "title": "ट्रांसक्शन कन्फर्म करे",
+                "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted.",
+                "input": "Input [{index}]",
+                "output": "Output",
+                "checksum": "Chk: {checksum}"
+            }
+        },
+        "ledgerAddress": {
+            "title": "Confirm receive address",
+            "body": "Confirm that the receive address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
         }
     },
     "charts": {
@@ -505,6 +635,8 @@
     "actions": {
         "continue": "जारी रखें",
         "back": "पीछे",
+        "previous": "Previous",
+        "next": "Next",
         "cancel": "रद्द करें",
         "close": "बंद करें",
         "dismiss": "रद्द करें",
@@ -573,6 +705,7 @@
         "addAccount": "वॉलेट जोड़ें",
         "checkForUpdates": "अपडेट के लिए जाँचें",
         "reportAnIssue": "मामले की रिपोर्ट करें",
+        "restore": "Restore",
         "clear": "हटाएं",
         "hideDetails": "विवरण छुपाएँ",
         "yes": "हाँ",
@@ -592,7 +725,8 @@
         "searchBalances": "बालनेस के लिए खोजें",
         "searchAgain": "फिर से सर्च करें",
         "searching": "खोज रहे हैं...",
-        "closeFirefly": "फायरफ्लाई बंद करे"
+        "closeFirefly": "फायरफ्लाई बंद करे",
+        "generateAddress": "Generate address"
     },
     "general": {
         "password": "पासवर्ड",
@@ -607,6 +741,7 @@
         "received": "प्राप्त हुआ",
         "sendPayment": "भुगतान भेजें",
         "moveFunds": "आंतरिक स्थानांतरण",
+        "sendTo": "Send To",
         "sendFunds": "धनराशि भेजें",
         "sendToAddress": "पते पर भेजें",
         "scanQrOrPaste": "QR कोड स्कैन करें या एक पता पेस्ट करें",
@@ -625,6 +760,8 @@
         "myAddress": "मेरा पता:",
         "shareAddress": "पता साझा करें",
         "yourAddress": "आपका पता",
+        "newRemainder": "New Remainder",
+        "remainder": "Remainder",
         "generateNewAddress": "नया पता उत्पन्न करें",
         "copyAddress": "पता कॉपी करें",
         "import": "आयात करना",
@@ -661,6 +798,7 @@
         "messageId": "संदेश ID",
         "inputAddress": "भेजने वाला पता",
         "receiveAddress": "प्राप्त करने वाला पता",
+        "newAddress": "New Address",
         "date": "तिथि",
         "status": "स्टेटस",
         "confirmed": "पूर्ण पुष्टि",
@@ -672,11 +810,13 @@
         "firstSync": "इतिहास को समन्‍वयित करते हुए, इसमें कुछ समय लग सकता है...",
         "transferSyncing": "सिंकिंग वॉलेट",
         "transferSelectingInputs": "इनपुट का चयन करना",
-        "transferRemainderAddress": "शेष जमा पता जनरेट करना",
+        "transferRemainderAddress": "Generating remainder address",
+        "transferPreparedTransaction": "Preparing transaction",
         "transferSigning": "लेन-देन पर हस्ताक्षर करना",
         "transferPow": "PoW करना",
         "transferBroadcasting": "प्रोमोटिंग ट्रांसक्शन",
         "transferComplete": "ट्रांसफर कम्पलीट",
+        "generatingReceiveAddress": "Generating receive address",
         "creatingAccount": "वॉलेट बन रहा है, कृपया प्रतीक्षा करें...",
         "updatingAccount": "वॉलेट अपडेट हो रहा है, कृपया प्रतीक्षा करें...",
         "accountSyncing": "वॉलेट सिंक हो रहा है",
@@ -770,7 +910,10 @@
             "tilde": "एक प्रोफ़ाइल नाम '~' वर्ण से शुरू नहीं हो सकता।",
             "control": "एक प्रोफ़ाइल नाम में कोई नियंत्रण वर्ण नहीं हो सकता है।",
             "startDot": "एक प्रोफ़ाइल नाम '.' वर्ण से शुरू नहीं हो सकता।",
-            "chars": "एक प्रोफ़ाइल नाम '<>:\"/\\|?*' वर्ण से शुरू नहीं हो सकता।"
+            "chars": "एक प्रोफ़ाइल नाम '<>:\"/\\|?*' वर्ण से शुरू नहीं हो सकता।",
+            "index": "Your account index must be a number between 0 and 2,147,483,647.",
+            "page": "Your account page must be a number between 0 and 2,147,483,647.",
+            "syncing": "There was an error syncing your wallets."
         },
         "send": {
             "addressLength": "पते {length, plural, one {1 वर्ण} other {# वर्ण}} लम्बे होने चाहिए",
@@ -784,7 +927,9 @@
             "insufficientFunds": "इस वॉलेट में अपर्याप्त राशि है।",
             "noToAccount": "आपने फंड भेजने के लिए वॉलेट का चयन नहीं किया है।",
             "sendingDust": "आप 1 Mi से कम नहीं भेज सकते",
-            "leavingDust": "आप अपने पते पर 1 Mi से कम नहीं छोड़ सकते।"
+            "leavingDust": "आप अपने पते पर 1 Mi से कम नहीं छोड़ सकते।",
+            "cancelled": "The transaction was cancelled.",
+            "transaction": "There was an error sending your transaction. Please try again."
         },
         "node": {
             "invalid": "मान्य URL दर्ज करे",
@@ -805,6 +950,19 @@
             "phraseWordCount": "आपके पुनर्प्राप्ति वाक्यांश में वर्तमान में 24 शब्द होने चाहिए, और अभी सिर्फ {length, plural, one {1} other {#}} शब्द है",
             "phraseUnrecognizedWord": "आपके पुनर्प्राप्ति वाक्यांश में अपरिचित शब्द {word} पाया गया",
             "phraseCaseWord": "शब्द {word} कम मामला होना चाहिए"
+        },
+        "ledger": {
+            "appNotOpen": "You must open the IOTA app on your Ledger device.",
+            "generic": "There was an error connecting to your Ledger device.",
+            "legacyConnected": "The wrong app is open on your Ledger device.",
+            "locked": "Please unlock your Ledger device by entering the PIN.",
+            "mnemonicMismatch": "You have connected the wrong Ledger device or the mnemonic has changed.",
+            "notDetected": "No Ledger device detected.",
+            "notFound": "Ledger device not found.",
+            "otherConnected": "The wrong app is open on your Ledger device.",
+            "generateAddress": "There was an error generating an address.",
+            "timeout": "Timeout exceeded",
+            "disconnected": "Device disconnected"
         }
     },
     "tooltips": {
