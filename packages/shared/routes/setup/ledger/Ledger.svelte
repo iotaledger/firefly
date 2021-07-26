@@ -3,7 +3,7 @@
     import { currentLedgerMigrationProgress, LedgerMigrationProgress } from 'shared/lib/migration'
     import { ledgerRoute, ledgerRouteHistory, walletSetupType } from 'shared/lib/router'
     import { LedgerRoutes, SetupType } from 'shared/lib/typings/routes'
-    import { createEventDispatcher } from 'svelte'
+    import { createEventDispatcher, onMount } from 'svelte'
     import { get } from 'svelte/store'
     import {
         AccountIndex,
@@ -21,6 +21,14 @@
     const dispatch = createEventDispatcher()
 
     $: $ledgerRoute, updateMigrationProgress()
+
+    onMount(() => {
+        if ($walletSetupType === SetupType.New || $walletSetupType === SetupType.FireflyLedger) {
+            ledgerRoute.set(LedgerRoutes.Connect)
+        } else {
+            ledgerRoute.set(LedgerRoutes.LegacyIntro)
+        }
+    })
 
     const updateMigrationProgress = () => {
         switch (get(ledgerRoute)) {
