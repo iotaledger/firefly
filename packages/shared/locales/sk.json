@@ -176,7 +176,7 @@
         "legacyLedgerIntro": {
             "title": "Spusťte Ledger migráciu pomocou Firefly",
             "body1": "Firefly vám pomôže previesť vaše tokeny do novej Chrysalis siete.",
-            "body2": "Po dokončení migrácie budene schopný posielať a prijímať tokeny za použitia vášho Ledgeru s Firefly.",
+            "body2": "After the migration, you will be able to send and receive your tokens using your Ledger with Firefly.",
             "readMore": "Čo očakávať od procesu migrácie"
         },
         "generateNewLedgerAddress": {

@@ -56,7 +56,7 @@
         },
         "ledgerInstallationGuide": {
             "title": "Heeft u de benodigde Ledger apps geïnstalleerd?",
-            "body1": "Before you proceed, you must find and install both the IOTA Legacy app and the new IOTA app through Ledger Live.",
+            "body1": "Voordat je doorgaat, moet je zowel de IOTA Legacy app als de nieuwe IOTA app vinden en installeren via Ledger Live.",
             "body2": "Zorg ervoor dat uw Ledger firmware up-to-date is. Alle vooraf geïnstalleerde apps moeten worden bijgewerkt naar de nieuwste versies.",
             "action": "Ja, ik heb deze apps geïnstalleerd"
         },
@@ -119,7 +119,7 @@
             "body": "Uw nieuwe portemonnee is klaar voor gebruik.",
             "softwareMigratedBody": "U heeft uw saldo met succes gemigreerd naar het nieuwe netwerk",
             "fireflyLedgerBody": "Uw Ledger-account is succesvol hersteld en u kunt nu verdergaan.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the IOTA Legacy app from your device.",
+            "trinityLedgerBody": "Je hebt je Ledger met succes gemigreerd naar het nieuwe netwerk. Je kunt nu de IOTA Legacy app van je apparaat verwijderen.",
             "exportMigration": "Exporteer migratielogboek en maak set-up af"
         },
         "import": {
@@ -176,7 +176,7 @@
         "legacyLedgerIntro": {
             "title": "Start je Ledger migratie met Firefly",
             "body1": "Firefly helpt je om je tokens over te dragen naar het nieuwe Chrysalis-netwerk.",
-            "body2": "Na je migratie kun je jouw tokens verzenden en ontvangen door gebruik te maken van je Ledger en Firefly.",
+            "body2": "Na de migratie kun je Iota verzenden en ontvangen door gebruik te maken van je Ledger en Firefly.",
             "readMore": "Wat je kunt verwachten van het migratieproces"
         },
         "generateNewLedgerAddress": {
@@ -190,7 +190,7 @@
         },
         "switchLedgerApps": {
             "title": "Wissel Ledger apps",
-            "body": "Please switch to the IOTA Legacy app on your Ledger device to continue migration. When ready, press continue.",
+            "body": "Schakel over naar de IOTA Legacy app op je Ledger apparaat om door te gaan met migreren. Overgeschakeld? Druk dan op Doorgaan.",
             "ledgerApp": "IOTA",
             "ledgerLegacyApp": "IOTA Legacy"
         },
@@ -440,7 +440,7 @@
                     "statuses": {
                         "appNotOpen": "IOTA App niet geopend",
                         "connected": "Verbonden",
-                        "legacyConnected": "IOTA Legacy App Open",
+                        "legacyConnected": "IOTA Legacy App geopend",
                         "locked": "Vergrendeld",
                         "mnemonicMismatch": "Verkeerde Ledger of Mnemonic",
                         "notDetected": "Niet gedetecteerd",
@@ -579,7 +579,7 @@
         },
         "ledgerNotConnected": {
             "connect": "Open de nieuwe IOTA app op uw Ledger apparaat om door te gaan",
-            "connectLegacy": "Open the IOTA Legacy app on your Ledger device to continue"
+            "connectLegacy": "Open de IOTA Legacy app op je Ledger apparaat om door te gaan"
         },
         "ledgerConfirmation": {
             "confirm": "Om door te gaan, bevestig de prompt die wordt weergegeven op uw Ledger apparaat"
@@ -589,8 +589,8 @@
             "steps": [
                 "Installeer en open de Ledger Live applicatie",
                 "Zorg ervoor dat uw Ledger is verbonden",
-                "Search for apps: IOTA Legacy and IOTA (MIOTA)",
-                "Install both apps: IOTA Legacy and IOTA (MIOTA)",
+                "Zoek naar apps: IOTA Legacy en IOTA (MIOTA)",
+                "Installeer beide apps: IOTA Legacy en IOTA (MIOTA)",
                 "Vergeet niet dat het belangrijk is om Ledger Live te sluiten voordat je terugkeert naar Firefly"
             ]
         },
@@ -610,8 +610,8 @@
             "transaction": {
                 "title": "Bevestig transactie",
                 "info": "Bevestig dat de transactieinformatie die op uw Ledger wordt getoond overeenkomt met de onderstaande informatie. Als ze overeenkomen, druk dan op beide knoppen op je Ledger zoals gevraagd.",
-                "input": "Input [{index}]",
-                "output": "Output",
+                "input": "Invoer [{index}]",
+                "output": "Uitvoer",
                 "checksum": "Chk: {checksum}"
             }
         },
@@ -961,8 +961,8 @@
             "notFound": "Ledger apparaat niet gevonden.",
             "otherConnected": "De verkeerde app staat open op uw Ledger apparaat.",
             "generateAddress": "Er is iets misgegaan bij het genereren van je adres.",
-            "timeout": "Timeout exceeded",
-            "disconnected": "Device disconnected"
+            "timeout": "Tijdsduur overschreden",
+            "disconnected": "Verbinding verbroken"
         }
     },
     "tooltips": {

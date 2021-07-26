@@ -56,7 +56,7 @@
         },
         "ledgerInstallationGuide": {
             "title": "Avez-vous installé les applications Ledger nécessaires ?",
-            "body1": "Before you proceed, you must find and install both the IOTA Legacy app and the new IOTA app through Ledger Live.",
+            "body1": "Avant de continuer, vous devez trouver et installer à la fois l'application IOTA Legacy et la nouvelle application IOTA via Ledger Live.",
             "body2": "Assurez-vous que votre firmware Ledger est à jour. Toutes les applications pré-installées doivent être mises à jour avec leurs dernières versions.",
             "action": "Oui, j'ai installé ces applications"
         },
@@ -119,7 +119,7 @@
             "body": "Votre nouveau portefeuille est prêt à être utilisé.",
             "softwareMigratedBody": "Vous avez déplacé vos fonds vers le nouveau réseau avec succès",
             "fireflyLedgerBody": "Votre compte Ledger a été récupéré avec succès et vous pouvez maintenant continuer.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the IOTA Legacy app from your device.",
+            "trinityLedgerBody": "Vous avez fait migrer votre Ledger vers le nouveau réseau. Vous pouvez maintenant supprimer l'application IOTA Legacy de votre appareil.",
             "exportMigration": "Exporter le registre de migration et terminer l'installation"
         },
         "import": {
@@ -176,7 +176,7 @@
         "legacyLedgerIntro": {
             "title": "Commencez votre migration de Ledger en utilisant Firefly",
             "body1": "Firefly vous aidera à transférer vos fonds sur le nouveau réseau Chrysalis.",
-            "body2": "Après votre migration, vous pourrez envoyer et recevoir vos jetons en utilisant votre Ledger avec Firefly.",
+            "body2": "Après la migration, vous pourrez effectuer des transactions en utilisant votre Ledger avec Firefly.",
             "readMore": "À quoi s'attendre du processus de migration"
         },
         "generateNewLedgerAddress": {
@@ -189,8 +189,8 @@
             "generating": "Génération de l'adresse"
         },
         "switchLedgerApps": {
-            "title": "Switch Ledger apps",
-            "body": "Please switch to the IOTA Legacy app on your Ledger device to continue migration. When ready, press continue.",
+            "title": "Changer d'application sur la Ledger",
+            "body": "Veuillez passer à l'application IOTA Legacy de votre appareil Ledger pour continuer la migration. Une fois prêt, appuyez sur continuer.",
             "ledgerApp": "IOTA",
             "ledgerLegacyApp": "IOTA Legacy"
         },
@@ -440,7 +440,7 @@
                     "statuses": {
                         "appNotOpen": "L'application IOTA n'est pas ouverte",
                         "connected": "Connecté",
-                        "legacyConnected": "IOTA Legacy App Open",
+                        "legacyConnected": "Application IOTA Legacy ouverte",
                         "locked": "Verrouillé",
                         "mnemonicMismatch": "Mauvais Ledger ou Mnémonique",
                         "notDetected": "Non Détecté",
@@ -579,7 +579,7 @@
         },
         "ledgerNotConnected": {
             "connect": "Ouvrez la nouvelle application IOTA sur votre appareil Ledger pour continuer",
-            "connectLegacy": "Open the IOTA Legacy app on your Ledger device to continue"
+            "connectLegacy": "Ouvrez l'application IOTA Legacy sur votre Ledger pour continuer"
         },
         "ledgerConfirmation": {
             "confirm": "Pour continuer, confirmez l'invite affichée sur votre appareil Ledger"
@@ -589,8 +589,8 @@
             "steps": [
                 "Installez et ouvrez l'application Ledger Live",
                 "Assurez-vous que votre Ledger est connecté",
-                "Search for apps: IOTA Legacy and IOTA (MIOTA)",
-                "Install both apps: IOTA Legacy and IOTA (MIOTA)",
+                "Recherche d'applications : IOTA Legacy et IOTA (MIOTA)",
+                "Installer les deux applications : IOTA Legacy et IOTA (MIOTA)",
                 "Rappelez-vous qu'il est important de fermer Ledger Live avant de retourner à Firefly"
             ]
         },
@@ -604,20 +604,20 @@
         },
         "ledgerTransaction": {
             "remainderAddress": {
-                "title": "Confirm remainder address",
-                "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+                "title": "Confirmer l'adresse restante",
+                "info": "Pour des raisons de sécurité, veuillez comparer l'adresse générée sur votre Ledger avec celle affichée ci-dessous. Si elles correspondent, appuyez sur les deux boutons de votre Ledger comme demandé."
             },
             "transaction": {
                 "title": "Confirmer la transaction",
-                "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted.",
-                "input": "Input [{index}]",
-                "output": "Output",
+                "info": "Pour des raisons de sécurité, veuillez comparer les informations générées sur votre Ledger avec celles affichées ci-dessous. Si elles correspondent, appuyez sur les deux boutons de votre Ledger comme demandé.",
+                "input": "Entrée [{index}]",
+                "output": "Sortie",
                 "checksum": "Chk: {checksum}"
             }
         },
         "ledgerAddress": {
-            "title": "Confirm receive address",
-            "body": "Confirm that the receive address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+            "title": "Confirmer l'adresse de réception",
+            "body": "Veuillez comparer l'adresse générée sur votre Ledger avec celle affichée ci-dessous. Si elles correspondent, appuyez sur les deux boutons de votre Ledger comme demandé."
         }
     },
     "charts": {
@@ -635,8 +635,8 @@
     "actions": {
         "continue": "Continuer",
         "back": "Retour",
-        "previous": "Previous",
-        "next": "Next",
+        "previous": "Précédent",
+        "next": "Suivant",
         "cancel": "Annuler",
         "close": "Fermer",
         "dismiss": "Ignorer",
@@ -705,7 +705,7 @@
         "addAccount": "Ajouter un Portefeuille",
         "checkForUpdates": "Rechercher des Mises à jour",
         "reportAnIssue": "Signaler une Anomalie",
-        "restore": "Restore",
+        "restore": "Restaurer",
         "clear": "Effacer",
         "hideDetails": "Cacher détails",
         "yes": "Oui",
@@ -741,7 +741,7 @@
         "received": "Reçu",
         "sendPayment": "Envoyer le paiement",
         "moveFunds": "Transfert interne",
-        "sendTo": "Send To",
+        "sendTo": "Envoyer à",
         "sendFunds": "Envoyer des fonds",
         "sendToAddress": "Envoyer à l'adresse",
         "scanQrOrPaste": "Scannez un QR code ou collez une Adresse",
@@ -760,8 +760,8 @@
         "myAddress": "Mon Adresse",
         "shareAddress": "Partager une adresse",
         "yourAddress": "Votre adresse",
-        "newRemainder": "New Remainder",
-        "remainder": "Remainder",
+        "newRemainder": "Nouveau Reliquat",
+        "remainder": "Reliquat",
         "generateNewAddress": "Générer une nouvelle adresse",
         "copyAddress": "Copier Adresse",
         "import": "Importer",
@@ -798,7 +798,7 @@
         "messageId": "ID du message",
         "inputAddress": "Adresse d'envoi",
         "receiveAddress": "Adresse de réception",
-        "newAddress": "New Address",
+        "newAddress": "Nouvelle adresse",
         "date": "Date",
         "status": "État",
         "confirmed": "Confirmé",
@@ -810,13 +810,13 @@
         "firstSync": "Synchronisation de l'historique, cela peut prendre un certain temps...",
         "transferSyncing": "Synchronisation du portefeuille",
         "transferSelectingInputs": "Choisir entrée",
-        "transferRemainderAddress": "Generating remainder address",
-        "transferPreparedTransaction": "Preparing transaction",
+        "transferRemainderAddress": "Génération d'une adresse de reliquat",
+        "transferPreparedTransaction": "Préparer la transaction",
         "transferSigning": "Signature de la transaction",
         "transferPow": "Exécution de la preuve de travail",
         "transferBroadcasting": "Diffusion de la transaction",
         "transferComplete": "Transfert terminé",
-        "generatingReceiveAddress": "Generating receive address",
+        "generatingReceiveAddress": "Génération d'une adresse de réception",
         "creatingAccount": "Création du portefeuille en cours, veuillez patienter...",
         "updatingAccount": "Mise à jour du portefeuille en cours, veuillez patienter...",
         "accountSyncing": "Le portefeuille est en cours de synchronisation",
@@ -911,9 +911,9 @@
             "control": "Un nom de profil ne peut pas contenir de caractère de contrôle.",
             "startDot": "Un nom de profil ne peut pas commencer par un point.",
             "chars": "Un nom de profil ne peut pas contenir les caractères suivants <>:\"/\\|?*",
-            "index": "Your account index must be a number between 0 and 2,147,483,647.",
-            "page": "Your account page must be a number between 0 and 2,147,483,647.",
-            "syncing": "There was an error syncing your wallets."
+            "index": "L'indice de votre compte doit être un nombre compris entre 0 et 2 147 483 647.",
+            "page": "La page de votre compte doit être un nombre compris entre 0 et 2 147 483 647.",
+            "syncing": "Une erreur est survenue lors de la synchronisation de vos comptes."
         },
         "send": {
             "addressLength": "Les adresses devraient comporter {length, plural, one {1 caractère} other {# caractères}}.",
@@ -928,8 +928,8 @@
             "noToAccount": "Vous n'avez pas sélectionné de portefeuille vers lequel envoyer les fonds.",
             "sendingDust": "Vous ne pouvez pas envoyer moins de 1 Mi.",
             "leavingDust": "Vous ne pouvez pas laisser moins de 1 Mi sur votre adresse.",
-            "cancelled": "The transaction was cancelled.",
-            "transaction": "There was an error sending your transaction. Please try again."
+            "cancelled": "La transaction a été annulée.",
+            "transaction": "Une erreur s'est produite lors de l'envoi de votre transaction. Veuillez réessayer."
         },
         "node": {
             "invalid": "Veuillez saisir une URL valide.",
@@ -952,17 +952,17 @@
             "phraseCaseWord": "Le mot \"{word}\" doit être écrit en minuscules"
         },
         "ledger": {
-            "appNotOpen": "You must open the IOTA app on your Ledger device.",
-            "generic": "There was an error connecting to your Ledger device.",
-            "legacyConnected": "The wrong app is open on your Ledger device.",
-            "locked": "Please unlock your Ledger device by entering the PIN.",
-            "mnemonicMismatch": "You have connected the wrong Ledger device or the mnemonic has changed.",
-            "notDetected": "No Ledger device detected.",
-            "notFound": "Ledger device not found.",
-            "otherConnected": "The wrong app is open on your Ledger device.",
-            "generateAddress": "There was an error generating an address.",
-            "timeout": "Timeout exceeded",
-            "disconnected": "Device disconnected"
+            "appNotOpen": "Vous devez ouvrir l'application sur votre Ledger.",
+            "generic": "Une erreur s'est produite lors de la connexion à votre Ledger.",
+            "legacyConnected": "La mauvaise application est ouverte sur votre Ledger.",
+            "locked": "Veuillez déverrouiller votre Ledger.",
+            "mnemonicMismatch": "Vous avez connecté le mauvais Ledger ou le mnémonique a changé.",
+            "notDetected": "Aucun appareil Ledger détecté.",
+            "notFound": "Appareil Ledger introuvable.",
+            "otherConnected": "La mauvaise application est ouverte sur votre Ledger.",
+            "generateAddress": "Une erreur s'est produite lors de la génération d'une adresse.",
+            "timeout": "Délai limite dépassé",
+            "disconnected": "L'appareil est déconnecté"
         }
     },
     "tooltips": {

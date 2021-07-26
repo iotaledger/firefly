@@ -43,22 +43,22 @@
             }
         },
         "setupLedger": {
-            "title": "Install the new IOTA Ledger app on your device",
-            "body1": "1. Open Ledger Live and install New IOTA app",
-            "body2": "2. Close Ledger Live desktop application",
-            "body3": "3. Open the new app on your Ledger device",
+            "title": "Инсталиране на новото приложение IOTA Ledger на Вашето устройство",
+            "body1": "1. Отворете Ledger Live и инсталирайте новото IOTA приложение",
+            "body2": "2. Затворете Ledger Live desktop приложението",
+            "body3": "3. Отворете новото приложение на Ledger устройството",
             "progress1": "Свържете своя Ledger",
             "progress2": "Генериране на адрес",
-            "progress3": "Switch Ledger app",
+            "progress3": "Смяна на Ledger приложение",
             "progress4": "Прехвърляне на средства",
-            "watchVideo": "Watch video guide",
+            "watchVideo": "Виж видео обяснение",
             "checkingConnection": "Проверка на връзката с Ledger"
         },
         "ledgerInstallationGuide": {
-            "title": "Have you installed the necessary Ledger apps?",
-            "body1": "Before you proceed, you must find and install both the IOTA Legacy app and the new IOTA app through Ledger Live.",
-            "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
-            "action": "Yes, I've installed these apps"
+            "title": "Инсталирахте ли необходимите Ledger приложения?",
+            "body1": "Преди да продължите трябва да намерите и инсталирате двете IOTA Legacy и новото IOTA приложение чрез Ledger Live.",
+            "body2": "Уверете се, че Ledger фърмуерът е обновен. Всички вече инсталирани приложения следва да са обновени до последна версия.",
+            "action": "Да, инсталирани са тези приложения"
         },
         "password": {
             "title": "Създаване на парола",
@@ -118,8 +118,8 @@
             "fundsMigrated": "Средставата са мигрирани",
             "body": "Вашият нов портфейл е готов за използване.",
             "softwareMigratedBody": "Успешно мигрирахте средствата си в новата мрежа",
-            "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the IOTA Legacy app from your device.",
+            "fireflyLedgerBody": "Вашият Ledger акаунт е успешно възстановен и можете да продължите.",
+            "trinityLedgerBody": "Успешно мигрирахте Ledger към новата мрежа. Можете да премахнете IOTA Legacy приложението от устройството.",
             "exportMigration": "Експортиране на информация от миграцията и приключване на настройките"
         },
         "import": {
@@ -131,8 +131,8 @@
             "importMnemonicDescription": "Въведете фраза за възстановяване, за да възстановите своите портфейли",
             "importFile": "Имам бекъп файл",
             "importFileDescription": "Качване на Seedvault или Stronghold файл",
-            "importLedger": "I have a Ledger backup",
-            "importLedgerDescription": "Restore or migrate a Ledger profile"
+            "importLedger": "Имам Ledger бекъп",
+            "importLedgerDescription": "Възстановяване или мигриране на Ledger профил"
         },
         "importFromText": {
             "seed": {
@@ -154,53 +154,53 @@
             "body": "Импортиране на резервно копие от файл за възстановяване на портфейл. Резервните копия могат да бъдат файлове Stronghold (.stronghold) или Trinity SeedVault (.kdbx)."
         },
         "importFromLedger": {
-            "title": "Restore or Migrate your Ledger",
-            "body": "Restore an existing Firefly Ledger profile, or migrate your funds from Trinity.",
-            "haveFireflyLedger": "I have a Firefly Ledger backup",
+            "title": "Възстановяване или миграране на Ledger",
+            "body": "Възстановяване на съществуващ Firefly Ledger профил или мигриране на средста от Trinity.",
+            "haveFireflyLedger": "Имам Firefly Ledger бекъп",
             "haveFireflyLedgerDescription": "Възстановяване на Firefly профил",
-            "haveTrinityLedger": "I have a Trinity Ledger backup",
-            "haveTrinityLedgerDescription": "Migrate a Trinity profile"
+            "haveTrinityLedger": "Имам Trinity Ledger бекъп",
+            "haveTrinityLedgerDescription": "Мигриране на Trinity профил"
         },
         "connectLedger": {
-            "title": "Connect your Ledger to Firefly",
-            "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed.",
-            "trafficLight1": "Connect and unlock your Ledger with your PIN",
-            "trafficLight2": "Open the new IOTA app on your Ledger",
-            "tips": "Tips if your Ledger isn’t connecting"
+            "title": "Свързване на Ledger към Firefly",
+            "body": "За да бъде Ledger устройството разпознато от Firefly, моля уверете се, че официалното Ledger Live приложение е затворено.",
+            "trafficLight1": "Свързване и отключване на Ledger с PIN",
+            "trafficLight2": "Отворете новото IOTA приложение от Ledger устройството",
+            "tips": "Съвети, ако Вашият Ledger не се свързва"
         },
         "restoreFromFireflyLedger": {
-            "title": "Restore Your Ledger Profile",
-            "body": "Press restore to complete the setup process and restore your wallets, balances and transaction history.",
-            "restoring": "Restoring from Ledger..."
+            "title": "Възстановяване на Ledger профил",
+            "body": "Изберете възстанови за да завършите процеса по настройка и възстановяване на портфейли, средства и история на транзакциите.",
+            "restoring": "Възстановяне от Ledger..."
         },
         "legacyLedgerIntro": {
-            "title": "Start your Ledger migration using Firefly",
-            "body1": "Firefly will help you to transfer your tokens to the new Chrysalis network.",
-            "body2": "After you migration, you will be able to send and receive your tokens using your Ledger with Firefly.",
-            "readMore": "What to expect from the migration process"
+            "title": "Стартирайте Ledger миграция чрез Firefly",
+            "body1": "Firefly ще Ви помогне да трансферирате средствата си към новата Chrysalis мрежа.",
+            "body2": "After the migration, you will be able to send and receive your tokens using your Ledger with Firefly.",
+            "readMore": "Какво да очаквате от процеса по миграция"
         },
         "generateNewLedgerAddress": {
             "title": "Генериране на нов адрес",
-            "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
-            "confirmTitle": "Confirm the new address",
-            "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
-            "confirmedTitle": "Address confirmed",
-            "confirmedBody": "You have confirmed that the address in Firefly matches the one on your Ledger device.",
-            "generating": "Generating address"
+            "body": "Трябва да генерирате нов адрес за мигриране на средствата към Firefly. Натиснете долния бутон, за да продължите.",
+            "confirmTitle": "Потвърдете новия адрес",
+            "confirmBody": "За сигурност моля сверете адреса, който е генериран от Ledger устройството, с адреса визуализиран долу. Ако адресите съвпадат натиснете двата бутона на Ledger устройството, когато го изисква.",
+            "confirmedTitle": "Адресът е потвърден",
+            "confirmedBody": "Вие потвърдихте, че адресът във Firefly съвпада с този в Ledger устройството.",
+            "generating": "Генериране на адрес"
         },
         "switchLedgerApps": {
-            "title": "Switch Ledger apps",
-            "body": "Please switch to the IOTA Legacy app on your Ledger device to continue migration. When ready, press continue.",
+            "title": "Смяна на Ledger приложение",
+            "body": "Моля превключете към IOTA Legacy приложението на Ledger устройството, за да продължите с миграцията. Натиснете готово, за да продължите.",
             "ledgerApp": "IOTA",
             "ledgerLegacyApp": "IOTA Legacy"
         },
         "selectLedgerAccountIndex": {
-            "title": "Choose Ledger account index",
-            "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
+            "title": "Изберете Ledger индекс на акаунт-account index",
+            "body": "Изберете Ledger акаунт индекс, който е използван в Trinity. За повечето потребители стандартния индекс е 0.",
             "accountIndex": "Account Index",
             "accountPage": "Account Page",
-            "standard": "Standard",
-            "expert": "Expert"
+            "standard": "Стандартен",
+            "expert": "Експертен"
         },
         "importBackupPassword": {
             "title": "Възстановяване на портфейл чрез Seed vault или Stronghold",
@@ -276,7 +276,7 @@
             "body": "Уверете се, че стойността е точна преди да продължите. Можете да проверите отново, ако не изглежда коректна.",
             "error": "Минималната наличност за миграция е 1 Mi. Проверете отново дали салдото е вярно.",
             "zeroBalance": "Опитайте да проверите отново. Ако все още не успявате да намерите наличните средства, възможно е да сте въвели грешен seed.",
-            "zeroBalanceLedgerLegacy": "Try checking again. If you still can't find your balance you might have selected the wrong account index."
+            "zeroBalanceLedgerLegacy": "Опитайте да проверите отново. Ако все още не успявате да намерите наличните средства, възможно е да сте въвели грешен account index."
         },
         "settings": {
             "settings": "Настройки",
@@ -438,13 +438,13 @@
                 "hardwareDevice": {
                     "title": "Устройство",
                     "statuses": {
-                        "appNotOpen": "IOTA App Not Open",
-                        "connected": "Connected",
-                        "legacyConnected": "IOTA Legacy App Open",
+                        "appNotOpen": "Приложението IOTA не е отворено",
+                        "connected": "Свързан",
+                        "legacyConnected": "Приложението IOTA Legacy отворено",
                         "locked": "Заключен",
-                        "mnemonicMismatch": "Wrong Ledger or Mnemonic",
-                        "notDetected": "Not Detected",
-                        "otherConnected": "App Open"
+                        "mnemonicMismatch": "Грешен Ledger или фраза за възстановяване",
+                        "notDetected": "Не е открит",
+                        "otherConnected": "Отворено приложение"
                     }
                 },
                 "strongholdStatus": {
@@ -578,46 +578,46 @@
             "bodyFirefly": "Firefly е неактивен, докато не завърши процеса. Миграцията на token монетите ще е възможна след това."
         },
         "ledgerNotConnected": {
-            "connect": "Open the new IOTA app on your Ledger device to continue",
-            "connectLegacy": "Open the IOTA Legacy app on your Ledger device to continue"
+            "connect": "За да продължите отворете новото IOTA приложение на Ledger устройството",
+            "connectLegacy": "За да продължите отворете старото-Legacy IOTA приложение на Ledger устройството"
         },
         "ledgerConfirmation": {
-            "confirm": "To proceed, confirm the prompt displayed on your Ledger device"
+            "confirm": "За да продължите потвърдете запитването на Вашето Ledger устройство"
         },
         "ledgerAppGuide": {
-            "title": "Guide to installing the Ledger apps",
+            "title": "Наръчник за инсталиране на Ledger приложения",
             "steps": [
-                "Install and open the Ledger Live application",
-                "Ensure that your Ledger is connected",
-                "Search for apps: IOTA Legacy and IOTA (MIOTA)",
-                "Install both apps: IOTA Legacy and IOTA (MIOTA)",
-                "Remember that it's important to close Ledger Live before returning to Firefly"
+                "Инсталиране и отваряне на Ledger Live приложение",
+                "Уверете се, че Ledger е свързан",
+                "Търсене на приложение: IOTA Legacy и IOTA(MIOTA)",
+                "Инсталиране на двете приложения: IOTA Legacy и IOTA(MIOTA)",
+                "Запомнете, че е важно да затворите Ledger Live преди да се върнете към Firefly"
             ]
         },
         "ledgerConnectionGuide": {
-            "title": "Tips if your Ledger isn’t connecting",
+            "title": "Съвети, ако Вашият Ledger не се свързва",
             "steps": [
-                "Make sure Ledger Live is not open on your computer",
-                "Ensure you have unlocked your Ledger device with your PIN",
-                "Open the new IOTA app on your Ledger device"
+                "Уверете се, че Ledger Live не е отворено на Вашият компютър",
+                "Уверете се, че сте отключили Ledger устройството чрез PIN",
+                "Отворете новото приложение на Ledger устройството"
             ]
         },
         "ledgerTransaction": {
             "remainderAddress": {
-                "title": "Confirm remainder address",
-                "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+                "title": "Потвърдете остатъчен адрес",
+                "info": "Потвърдете, че остатъчния адрес визуализиран на Ledger устройството съвпада с този визуализиран долу. Ако адресите съвпадат, натиснете двата бутона на Ledger устройството, когато го изисква."
             },
             "transaction": {
                 "title": "Потвърдете Транзакция",
-                "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted.",
-                "input": "Input [{index}]",
-                "output": "Output",
+                "info": "Потвърдете, че информацията за транзакцията визуализирана на Ledger устройството съвпада с тази визуализирана долу. Ако съвпадат, натиснете двата бутона на Ledger устройството, когато го изисква.",
+                "input": "Входящи [{index}]",
+                "output": "Изходящи",
                 "checksum": "Chk: {checksum}"
             }
         },
         "ledgerAddress": {
-            "title": "Confirm receive address",
-            "body": "Confirm that the receive address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+            "title": "Потвърдете адреса за получаване",
+            "body": "Потвърдете, че адреса за получаване визуализиран на Ledger устройството съвпада с този визуализиран долу. Ако адресите съвпадат, натиснете двата бутона на Ledger устройството, когато го изисква."
         }
     },
     "charts": {
@@ -635,8 +635,8 @@
     "actions": {
         "continue": "Продължаване",
         "back": "Назад",
-        "previous": "Previous",
-        "next": "Next",
+        "previous": "Назад",
+        "next": "Напред",
         "cancel": "Отказ",
         "close": "Затваряне",
         "dismiss": "Пропусни",
@@ -705,7 +705,7 @@
         "addAccount": "Добави портфейл",
         "checkForUpdates": "Проверка за обновления",
         "reportAnIssue": "Подайте сигнал за проблем",
-        "restore": "Restore",
+        "restore": "Възстановяване",
         "clear": "Изчистване",
         "hideDetails": "Скрий Детайлите",
         "yes": "Да",
@@ -741,7 +741,7 @@
         "received": "Получен",
         "sendPayment": "Изпрати плащане",
         "moveFunds": "Вътрешен трансфер",
-        "sendTo": "Send To",
+        "sendTo": "Изпрати до",
         "sendFunds": "Изпрати средства",
         "sendToAddress": "Изпращане към адрес",
         "scanQrOrPaste": "Сканирайте QR код или въведете адрес",
@@ -760,8 +760,8 @@
         "myAddress": "Моят адрес",
         "shareAddress": "Сподели адрес",
         "yourAddress": "Вашият адрес",
-        "newRemainder": "New Remainder",
-        "remainder": "Remainder",
+        "newRemainder": "Нов остатък",
+        "remainder": "Остатък",
         "generateNewAddress": "Генериране на нов адрес",
         "copyAddress": "Копиране на адрес",
         "import": "Импорт",
@@ -798,7 +798,7 @@
         "messageId": "ID на съобщението",
         "inputAddress": "Адрес изпращане",
         "receiveAddress": "Адрес за получаване",
-        "newAddress": "New Address",
+        "newAddress": "Нов адрес",
         "date": "Дата",
         "status": "Статус",
         "confirmed": "Потвърден",
@@ -810,13 +810,13 @@
         "firstSync": "Синхронизация на историята, ще отнеме време...",
         "transferSyncing": "Синхронизиране на портфейла",
         "transferSelectingInputs": "Избор на източник",
-        "transferRemainderAddress": "Generating remainder address",
-        "transferPreparedTransaction": "Preparing transaction",
+        "transferRemainderAddress": "Създаване на остатъчен адрес",
+        "transferPreparedTransaction": "Подготвяне на транзакция",
         "transferSigning": "Подписване на трансакцията",
         "transferPow": "Осъществи PoW",
         "transferBroadcasting": "Излъчване на транзакция",
         "transferComplete": "Прехвърлянето е завършено",
-        "generatingReceiveAddress": "Generating receive address",
+        "generatingReceiveAddress": "Генериране на адрес за получаване",
         "creatingAccount": "Създаване на портфейл, моля изчакайте...",
         "updatingAccount": "Актуализиране на портфейла, моля изчакайте...",
         "accountSyncing": "Портфейлът се синхронизира",
@@ -911,9 +911,9 @@
             "control": "Името на профила не може да съдържа \"празни\" символи.",
             "startDot": "Името на профила не може да започва с \".\".",
             "chars": "Името на профила не може да съдържа следните символи <>:\"/\\|?*",
-            "index": "Your account index must be a number between 0 and 2,147,483,647.",
-            "page": "Your account page must be a number between 0 and 2,147,483,647.",
-            "syncing": "There was an error syncing your wallets."
+            "index": "Индексът на акаунта трябва да бъде между 0 и 2,147,483,647.",
+            "page": "Вашият account page трябва да бъде число между 0 и 2,147,483,647.",
+            "syncing": "Възникна грешка при синхронизиране на портфейлите."
         },
         "send": {
             "addressLength": "Адресите трябва да съдържат {length, plural, one {1 символ} other {# символа}}.",
@@ -928,8 +928,8 @@
             "noToAccount": "Не сте избрали портфейл, където да се изпрати сумата.",
             "sendingDust": "Не може да изпращате по-малко от 1 Mi.",
             "leavingDust": "Не може да оставяте по-малко от 1Mi във Вашият адрес.",
-            "cancelled": "The transaction was cancelled.",
-            "transaction": "There was an error sending your transaction. Please try again."
+            "cancelled": "Транзакцията е отменена.",
+            "transaction": "Възникна грешка при изпращането на транзакцията. Моля опитайте отново."
         },
         "node": {
             "invalid": "Моля, въведете валиден URL адрес.",
@@ -952,17 +952,17 @@
             "phraseCaseWord": "Думата \"{word}\" трябва да бъде с малки букви"
         },
         "ledger": {
-            "appNotOpen": "You must open the IOTA app on your Ledger device.",
-            "generic": "There was an error connecting to your Ledger device.",
-            "legacyConnected": "The wrong app is open on your Ledger device.",
-            "locked": "Please unlock your Ledger device by entering the PIN.",
-            "mnemonicMismatch": "You have connected the wrong Ledger device or the mnemonic has changed.",
-            "notDetected": "No Ledger device detected.",
-            "notFound": "Ledger device not found.",
-            "otherConnected": "The wrong app is open on your Ledger device.",
-            "generateAddress": "There was an error generating an address.",
-            "timeout": "Timeout exceeded",
-            "disconnected": "Device disconnected"
+            "appNotOpen": "Трябва да отворите IOTA приложението на Вашето Ledger устройство.",
+            "generic": "Възникна грешка при свързването с Ledger устройството.",
+            "legacyConnected": "Грешно приложение е отворено на Ledger устройството.",
+            "locked": "Моля отключете Ledger устройството чрез въвеждане на PIN.",
+            "mnemonicMismatch": "Свързано е грешно Ledger устройство или фразата за възстановяване е променена.",
+            "notDetected": "Не е раззпознато Ledger устройство.",
+            "notFound": "Ledger устройството не е намерено.",
+            "otherConnected": "Грешно приложение е отворено на Ledger устройството.",
+            "generateAddress": "Възникна грешка при генерирането на адрес.",
+            "timeout": "Сесията изтече",
+            "disconnected": "Устройството не е свързано"
         }
     },
     "tooltips": {

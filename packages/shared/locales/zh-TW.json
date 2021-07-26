@@ -56,7 +56,7 @@
         },
         "ledgerInstallationGuide": {
             "title": "你是否已經裝好必須的Ledger軟體？",
-            "body1": "Before you proceed, you must find and install both the IOTA Legacy app and the new IOTA app through Ledger Live.",
+            "body1": "您必須先經由Ledger Live把舊版的IOTA Legacy app和新版的IOTA app都安裝好，才能繼續。",
             "body2": "請確認您的Ledger韌體是最新版本。所有已安裝的軟體都必須更新至最新版本。",
             "action": "是，我已安裝這些軟體。"
         },
@@ -119,7 +119,7 @@
             "body": "您的新錢包可以使用了。",
             "softwareMigratedBody": "您已成功將資金遷移到新網路",
             "fireflyLedgerBody": "您的 Ledger 帳號已成功還原，現在可以繼續使用。",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the IOTA Legacy app from your device.",
+            "trinityLedgerBody": "您已成功將Ledger遷移至新網路。您現在可以把 IOTA Legacy app 從裝置中移除。",
             "exportMigration": "導出遷移紀錄檔並結束設定"
         },
         "import": {
@@ -166,7 +166,7 @@
             "body": "請確定官方Ledger Live軟體已關閉，使Firefly能找到您的Ledger裝置。",
             "trafficLight1": "使用PIN碼連接並解鎖您的Ledger。",
             "trafficLight2": "在您的Ledger上啟動新版的IOTA app",
-            "tips": "Ledger無法連結時的處理方式"
+            "tips": "Ledger無法連結時的處理技巧"
         },
         "restoreFromFireflyLedger": {
             "title": "還原您的Ledger設定檔",
@@ -176,7 +176,7 @@
         "legacyLedgerIntro": {
             "title": "用Firefly啟動您的Ledger遷移程序",
             "body1": "Firefly將協助您把代幣轉移至新的Chrysalis網路。",
-            "body2": "遷移完成後，您就能夠使用Ledger，透過Firefly發送或接收代幣。",
+            "body2": "遷移完成後，您就能透過Firefly，在Ledger上發送或接收代幣。",
             "readMore": "遷移過程應該預期的事項"
         },
         "generateNewLedgerAddress": {
@@ -190,7 +190,7 @@
         },
         "switchLedgerApps": {
             "title": "切換 Ledger app",
-            "body": "Please switch to the IOTA Legacy app on your Ledger device to continue migration. When ready, press continue.",
+            "body": "請把Ledger裝置切換到 IOTA Legacy app以便繼續進行遷移。準備好時，請按「繼續」。",
             "ledgerApp": "IOTA",
             "ledgerLegacyApp": "IOTA Legacy"
         },
@@ -403,8 +403,8 @@
                 "description": "透過疑難排解員解決常見問題"
             },
             "documentation": {
-                "title": "文件",
-                "description": "查看文件以獲取工作原理的深入說明"
+                "title": "文獻資料",
+                "description": "查看文獻以獲取工作原理的深入說明"
             },
             "faq": {
                 "title": "常見問題",
@@ -440,11 +440,11 @@
                     "statuses": {
                         "appNotOpen": "尚未開啟 IOTA App",
                         "connected": "已連接",
-                        "legacyConnected": "IOTA Legacy App Open",
+                        "legacyConnected": "IOTA Legacy 應用程式已開啟",
                         "locked": "鎖定",
                         "mnemonicMismatch": "Ledger 或助記詞錯誤",
                         "notDetected": "未偵測",
-                        "otherConnected": "開啟的 app"
+                        "otherConnected": "App 已開啟"
                     }
                 },
                 "strongholdStatus": {
@@ -458,7 +458,7 @@
                 }
             },
             "network": {
-                "networkOperational": "網路運行",
+                "networkOperational": "網路正常運行",
                 "networkDegraded": "網路訊號不佳",
                 "networkDown": "未連接網路",
                 "status": "狀態",
@@ -579,7 +579,7 @@
         },
         "ledgerNotConnected": {
             "connect": "在您的 Ledger 裝置上開啟新版 IOTA app 來接續下一步",
-            "connectLegacy": "Open the IOTA Legacy app on your Ledger device to continue"
+            "connectLegacy": "在您的 Ledger 裝置上開啟 IOTA Legacy app 來接續下一步"
         },
         "ledgerConfirmation": {
             "confirm": "請確認在 Ledger 裝置上的通知再繼續"
@@ -589,13 +589,13 @@
             "steps": [
                 "安裝並開啟 Ledger Live 軟體",
                 "確保您的 Ledger 裝置已連上",
-                "Search for apps: IOTA Legacy and IOTA (MIOTA)",
-                "Install both apps: IOTA Legacy and IOTA (MIOTA)",
+                "搜尋應用程式：IOTA Legacy 和 IOTA (MIOTA)",
+                "同時安裝：IOTA Legacy 與 IOTA (MIOTA)",
                 "重要：再返回 Firefly 之前，記得先關閉 Ledger Live"
             ]
         },
         "ledgerConnectionGuide": {
-            "title": "Ledger無法連結時的處理方式",
+            "title": "Ledger無法連結時的處理技巧",
             "steps": [
                 "確保 Ledger Live 尚未於您的電腦上開啟",
                 "確認您已經輸入 PIN 碼來解鎖您的 Ledger 裝置",
@@ -610,9 +610,9 @@
             "transaction": {
                 "title": "確認交易",
                 "info": "請確認Ledger顯示的交易明細和下方顯示的明細相同。若相同，請依提示把Ledger上的兩個按鈕一起按下。",
-                "input": "Input [{index}]",
-                "output": "Output",
-                "checksum": "Chk: {checksum}"
+                "input": "輸入 [{index}]",
+                "output": "輸出",
+                "checksum": "檢查碼：{checksum}"
             }
         },
         "ledgerAddress": {
@@ -961,8 +961,8 @@
             "notFound": "找不到 Ledger 裝置",
             "otherConnected": "您的Ledger裝置開啟了錯誤的應用程式",
             "generateAddress": "產生地址時發生錯誤",
-            "timeout": "Timeout exceeded",
-            "disconnected": "Device disconnected"
+            "timeout": "已經逾時。",
+            "disconnected": "裝置已斷線。"
         }
     },
     "tooltips": {
