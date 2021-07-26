@@ -69,6 +69,10 @@
         if (wasMigrated) {
             const _continue = () => {
                 if ($walletSetupType === SetupType.TrinityLedger) {
+                    /**
+                     * We check for the new Ledger IOTA app to be connected after migration
+                     * because the last app the user had open was the legacy one
+                     */
                     promptUserToConnectLedger(false, () => dispatch('next'))
                 } else {
                     dispatch('next')
