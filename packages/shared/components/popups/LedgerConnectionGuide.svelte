@@ -47,7 +47,7 @@
         <Button classes="w-1/2" secondary onClick={() => changeIndex(-1)} disabled={stepIndex === 0}>
             {locale('actions.previous')}
         </Button>
-        {#if stepIndex < locale('popups.ledgerConnectionGuide.steps').length - 1}
+        {#if stepIndex < Object.keys(locale('popups.ledgerConnectionGuide.steps')).length - 1}
             <Button classes="w-1/2" secondary onClick={() => changeIndex(1)}>{locale('actions.next')}</Button>
         {:else}
             <Button classes="w-1/2" primary onClick={handleCloseClick}>{locale('actions.close')}</Button>
