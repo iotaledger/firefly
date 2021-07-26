@@ -177,7 +177,7 @@
             "title": "Start your Ledger migration using Firefly",
             "body1": "Firefly will help you to transfer your tokens to the new Chrysalis network.",
             "body2": "After you migration, you will be able to send and receive your tokens using your Ledger with Firefly.",
-            "readMore": "What to expect from the migration process"
+            "readMore": "Read the migration FAQs"
         },
         "generateNewLedgerAddress": {
             "title": "Generate new address",
@@ -584,21 +584,21 @@
         },
         "ledgerAppGuide": {
             "title": "Guide to installing the Ledger apps",
-            "steps": [
-                "Install and open the Ledger Live application",
-                "Ensure that your Ledger is connected",
-                "Search for apps: {legacy} and IOTA (MIOTA)",
-                "Install both apps: {legacy} and IOTA (MIOTA)",
-                "Remember that it's important to close Ledger Live before returning to Firefly"
-            ]
+            "steps": {
+                "0": "Install and open the Ledger Live application",
+                "1": "Ensure that your Ledger is connected",
+                "2": "Search for apps: {legacy} and IOTA (MIOTA)",
+                "3": "Install both apps: {legacy} and IOTA (MIOTA)",
+                "4": "Remember that it's important to close Ledger Live before returning to Firefly"
+            }
         },
         "ledgerConnectionGuide": {
             "title": "Tips if your Ledger isn’t connecting",
-            "steps": [
-                "Make sure Ledger Live is not open on your computer",
-                "Ensure you have unlocked your Ledger device with your PIN",
-                "Open the new IOTA app on your Ledger device"
-            ]
+            "steps": {
+                "0": "Make sure Ledger Live is not open on your computer",
+                "1": "Ensure you have unlocked your Ledger device with your PIN",
+                "2": "Open the new IOTA app on your Ledger device"
+            }
         },
         "ledgerTransaction": {
             "remainderAddress": {

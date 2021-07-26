@@ -52,7 +52,7 @@
         }
     }
     pre {
-        font-family: 'DM Mono';
+        font-family: 'IBM Plex Mono', monospace;
         @apply font-normal;
         @apply break-all;
         @apply whitespace-pre-line;
@@ -118,7 +118,7 @@
     </p>
 {:else if type === 'pre'}
     <pre
-        class={`text-11 leading-140 ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
+        class={`text-12 leading-140 ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
         class:secondary
         class:disabled
         class:highlighted

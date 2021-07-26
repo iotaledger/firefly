@@ -1,7 +1,10 @@
 <script lang="typescript">
     import { Animation, Button, OnboardingLayout, Spinner, Text, TransactionItem } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
-    import { getLegacyErrorMessage, promptUserToConnectLedger } from 'shared/lib/ledger'
+    import {
+        displayNotificationForLedgerProfile,
+        promptUserToConnectLedger
+    } from 'shared/lib/ledger'
     import {
         ADDRESS_SECURITY_LEVEL,
         confirmedBundles,
@@ -17,7 +20,6 @@
         sendMigrationBundle,
         unmigratedBundles,
     } from 'shared/lib/migration'
-    import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
     import { newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
     import { walletSetupType } from 'shared/lib/router'
@@ -201,14 +203,13 @@
                     })
                     .catch((error) => {
                         console.error(error)
+
                         if (legacyLedger) {
                             closeTransport()
                             closePopup(true) // close transaction popup
-                            showAppNotification({
-                                type: 'error',
-                                message: locale(getLegacyErrorMessage(error)),
-                            })
+                            displayNotificationForLedgerProfile('error', false, true, false, true, error)
                         }
+
                         transactions = transactions.map((_transaction, i) => {
                             if (_transaction.index === transaction.index) {
                                 return { ..._transaction, status: -1, errorText: locale('views.migrate.migrationFailed') }
@@ -362,14 +363,13 @@
                     })
                     .catch((error) => {
                         console.error(error)
+
                         if (legacyLedger) {
                             closeTransport()
                             closePopup(true) // close transaction popup
-                            showAppNotification({
-                                type: 'error',
-                                message: locale(getLegacyErrorMessage(error)),
-                            })
+                            displayNotificationForLedgerProfile('error', false, true, false, true, error)
                         }
+
                         transactions = transactions.map((_transaction, i) => {
                             if (_transaction.index === transaction.index) {
                                 return { ..._transaction, status: -1, errorText: 'Migration failed' }

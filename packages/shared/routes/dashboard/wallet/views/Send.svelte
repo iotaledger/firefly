@@ -3,7 +3,7 @@
     import { Address, Amount, Button, Dropdown, Icon, ProgressBar, Text } from 'shared/components'
     import { clearSendParams, sendParams } from 'shared/lib/app'
     import { parseCurrency } from 'shared/lib/currency'
-    import { ledgerDeviceState, notifyLedgerDeviceState, promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { ledgerDeviceState, displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { displayNotifications, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
@@ -247,7 +247,7 @@
                 break
 
             default:
-                transactionNotificationId = notifyLedgerDeviceState(notificationType, false, false, ignoreNotDetected)
+                transactionNotificationId = displayNotificationForLedgerProfile(notificationType, false, false, ignoreNotDetected)
 
                 break
         }

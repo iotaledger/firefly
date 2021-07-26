@@ -3,9 +3,8 @@
     import { closePopup } from 'shared/lib/popup'
     import { asyncSetStrongholdPassword, asyncSyncAccounts, wallet } from 'shared/lib/wallet'
     import { isLedgerProfile, isSoftwareProfile, isStrongholdLocked } from 'shared/lib/profile'
-    import { ledgerDeviceState, notifyLedgerDeviceState } from 'shared/lib/ledger'
-    import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
+    import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
 
     export let locale
 
@@ -25,31 +24,28 @@
 
             if ($isSoftwareProfile && $isStrongholdLocked) {
                 await asyncSetStrongholdPassword(password)
+            } else if($isLedgerProfile && !isLedgerConnected()) {
+                isBusy = false
+
+                displayNotificationForLedgerProfile('warning')
+
+                return
             }
 
-            const _onFindBalances = async () => {
-                await asyncSyncAccounts(addressIndex, gapIndex, accountDiscoveryThreshold, false)
+            await asyncSyncAccounts(addressIndex, gapIndex, accountDiscoveryThreshold, false)
 
-                addressIndex += gapIndex
-            }
-
-            if($isLedgerProfile) {
-                if($ledgerDeviceState === LedgerDeviceState.Connected) {
-                    await _onFindBalances()
-                }
-                else {
-                    notifyLedgerDeviceState('error', false)
-                }
-            } else {
-                await _onFindBalances()
-            }
+            addressIndex += gapIndex
         } catch (err) {
             error = locale(err.error)
 
-            showAppNotification({
-                type: 'error',
-                message: locale(err.error)
-            })
+            if($isLedgerProfile) {
+                displayNotificationForLedgerProfile('error', true, true, false, false, err)
+            } else {
+                showAppNotification({
+                    type: 'error',
+                    message: locale(err.error)
+                })
+            }
         } finally {
             isBusy = false
         }
