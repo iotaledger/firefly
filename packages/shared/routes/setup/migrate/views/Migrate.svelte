@@ -26,7 +26,7 @@
     } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
-    import { newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
+    import { activeProfile,  newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
     import { formatUnitBestMatch } from 'shared/lib/units'
@@ -87,18 +87,14 @@
                             return sendLedgerMigrationBundle(bundleHash, trytes)
                         })
                         .then((data) => {
-                            newProfile.update((profile) => {
-                                return Object.assign({}, profile, {
-                                    ledgerMigrationCount: profile.ledgerMigrationCount ? profile.ledgerMigrationCount + 1 : 1
-                                })
-                            })
-
-                            // Save profile
-                            saveProfile($newProfile)
-                            setActiveProfile($newProfile.id)
-
-                            profileInProgress.set(undefined)
-                            newProfile.set(null)
+                            if ($newProfile) {
+                             // Save profile
+                                saveProfile($newProfile)
+                                setActiveProfile($newProfile.id)
+                                              
+                                profileInProgress.set(undefined)
+                                newProfile.set(null)
+                            }
                         })
                         .catch((error) => {
                             loading = false

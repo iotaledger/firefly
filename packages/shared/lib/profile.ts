@@ -40,7 +40,6 @@ export interface Profile {
     isDeveloperProfile: boolean
     gapLimit?: number
     profileType?: ProfileType
-    ledgerMigrationCount?: number
     hasVisitedDashboard?: boolean
 }
 

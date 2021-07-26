@@ -232,12 +232,8 @@
     }
 
     function persistProfile() {
-        if (legacyLedger) {
-            newProfile.update((profile) => {
-                return Object.assign({}, profile, {
-                    ledgerMigrationCount: profile.ledgerMigrationCount ? profile.ledgerMigrationCount + 1 : 1,
-                })
-            })
+        if (legacyLedger && !$newProfile) {
+            return;
         }
         
         // When the first migration bundle is broadcast, then persist profile

@@ -159,8 +159,9 @@
         }
     }
     $: if ($activeProfile) {
-        if (!$isSoftwareProfile && !$activeProfile.hasVisitedDashboard && $activeProfile.ledgerMigrationCount === 1) {
+        if (!$isSoftwareProfile && !$activeProfile.hasVisitedDashboard) {
             updateProfile('hasVisitedDashboard', true)
+
             openPopup({
                 type: 'ledgerMigrateIndex',
             })
