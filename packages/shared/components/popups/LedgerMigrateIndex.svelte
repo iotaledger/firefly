@@ -1,15 +1,13 @@
 <script lang="typescript">
     import { Button, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
-    import { setRoute, walletSetupType } from 'shared/lib/router'
-    import { AppRoute, SetupType } from 'shared/lib/typings/routes'
+    import { navigateToNewIndexMigration } from 'shared/lib/ledger'
 
     export let locale
 
     function handleYesClick() {
         closePopup()
-        walletSetupType.set(SetupType.TrinityLedger)
-        setRoute(AppRoute.LedgerSetup)
+        navigateToNewIndexMigration()
     }
 
     function handleNoClick() {
