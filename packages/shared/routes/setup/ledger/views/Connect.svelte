@@ -1,10 +1,10 @@
 <script>
-    import { Animation, Button, Icon, OnboardingLayout, Spinner, Text } from 'shared/components'
+    import { Animation, Button, Icon, Link, OnboardingLayout, Spinner, Text } from 'shared/components'
     import {
         getLedgerDeviceStatus,
         ledgerDeviceState,
         ledgerSimulator,
-        notifyLedgerDeviceState,
+        displayNotificationForLedgerProfile,
         pollLedgerDeviceStatus,
         stopPollingLedgerStatus,
     } from 'shared/lib/ledger'
@@ -75,7 +75,7 @@
 
                     console.error(error)
 
-                    notifyLedgerDeviceState('error', true, true, false, false, error)
+                    displayNotificationForLedgerProfile('error', true, true, false, false, error)
                 },
             }
         )
@@ -96,7 +96,7 @@
             const _onCancel = () => {
                 creatingAccount = false
 
-                notifyLedgerDeviceState('error', true)
+                displayNotificationForLedgerProfile('error', true)
             }
             const _onConnected = () => {
                 if ($ledgerDeviceState !== LedgerDeviceState.Connected) _onCancel()
@@ -139,10 +139,9 @@
             </div>
         </div>
         <div slot="leftpane__action">
-            <div on:click={handleGuidePopup} class="mb-10 flex flex-row justify-center cursor-pointer">
-                <Icon icon="info" classes="mr-2 text-blue-500" />
-                <Text secondary highlighted>{locale('popups.ledgerConnectionGuide.title')}</Text>
-            </div>
+            <Link icon="info" onClick={handleGuidePopup} classes="mb-10 justify-center">
+                {locale('popups.ledgerConnectionGuide.title')}
+            </Link>
             <Button
                 classes="w-full"
                 disabled={(polling && (!isConnected || !isAppOpen)) || creatingAccount}

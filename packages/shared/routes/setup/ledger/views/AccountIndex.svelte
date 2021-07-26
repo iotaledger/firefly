@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Animation, Button, Number, OnboardingLayout, Spinner, Text, Toggle, Tooltip, Icon } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
-    import { notifyLedgerDeviceState, promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { ADDRESS_SECURITY_LEVEL, getLedgerMigrationData, hardwareIndexes } from 'shared/lib/migration'
     import { onDestroy, createEventDispatcher } from 'svelte'
     import { LedgerAppName } from 'shared/lib/typings/ledger'
@@ -71,7 +71,7 @@
                 })
                 .catch((error) => {
                     busy = false
-                    notifyLedgerDeviceState('error', true, true, false, true, error)
+                    displayNotificationForLedgerProfile('error', true, true, false, true, error)
 
                     isTakingAWhile = false
                     clearTimeout(toolTipTimeout)

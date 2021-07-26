@@ -1,6 +1,6 @@
 <script>
     import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
-    import { ledgerDeviceState, notifyLedgerDeviceState, promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { promptUserToConnectLedger, displayNotificationForLedgerProfile, ledgerDeviceState } from 'shared/lib/ledger'
     import { LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { createEventDispatcher } from 'svelte'
 
@@ -17,7 +17,7 @@
         const _onCancel = () => {
             busy = false
 
-            notifyLedgerDeviceState('error', true, true, false, true)
+            displayNotificationForLedgerProfile('error', true, true, false, true)
         }
         const _onConnected = () => {
             if ($ledgerDeviceState !== LedgerDeviceState.LegacyConnected) _onCancel()

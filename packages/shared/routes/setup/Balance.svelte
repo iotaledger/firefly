@@ -9,7 +9,7 @@
         formatCurrency,
     } from 'shared/lib/currency'
     import { Electron } from 'shared/lib/electron'
-    import { notifyLedgerDeviceState, promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import {
         ADDRESS_SECURITY_LEVEL,
         bundlesWithUnspentAddresses,
@@ -183,7 +183,7 @@
 
                         console.error(error)
 
-                        notifyLedgerDeviceState('error', true, true, false, true, error)
+                        displayNotificationForLedgerProfile('error', true, true, false, true, error)
                     })
             }
             const _onCancel = () => (isCheckingForBalance = false)

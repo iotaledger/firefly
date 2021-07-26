@@ -242,7 +242,7 @@
             },
             "networkStatus": {
                 "title": "Състояние на мрежата",
-                "description": "Displays the status of the node you are currently connected to."
+                "description": "Показване на статуса на node сървъра, към който сте свързани."
             },
             "exportStronghold": {
                 "title": "Създаване резервно копие",
@@ -587,7 +587,7 @@
         "viewStatus": "Покажи статус",
         "showHiddenAccounts": "Покажи скрити портфейли",
         "confirm": "Потвърждаване",
-        "hideNetworkStatistics": "Hide network statistics",
+        "hideNetworkStatistics": "Скриване на статистическите данни за мрежата",
         "findBalances": "Търси налични средства",
         "searchBalances": "Търси налични средства",
         "searchAgain": "Повторно търсене",
