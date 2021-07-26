@@ -1,9 +1,10 @@
 import type { Account, AccountIdentifier, Balance, SyncedAccount } from './account'
 import type { Address } from './address'
 import type { ErrorEventPayload } from './events'
+import type { LedgerApp, LedgerStatus } from './ledger'
 import type { Message } from './message'
 import type { NodeInfo } from './node'
-import type { MigrationBundle, MigrationData, SendMigrationBundleResponse } from './migration'
+import type { MigrationBundle, MigrationData, SendMigrationBundleResponse, MigrationAddress } from './migration'
 import type { StrongholdStatus } from './wallet'
 
 export interface Actor {
@@ -36,6 +37,7 @@ export enum ResponseTypes {
     LatestAddress = 'LatestAddress',
     Balance = 'Balance',
     SyncedAccounts = 'SyncedAccounts',
+    Ok = 'Ok',
     SyncedAccount = 'SyncedAccount',
     Reattached = 'Reattached',
     BackupSuccessful = 'BackupSuccessful',
@@ -52,6 +54,7 @@ export enum ResponseTypes {
     Broadcast = 'Broadcast',
     StrongholdStatusChange = 'StrongholdStatusChange',
     TransferProgress = 'TransferProgress',
+    LedgerAddressGeneration = "LedgerAddressGeneration",
     MigrationProgress = 'MigrationProgress',
     GeneratedMnemonic = 'GeneratedMnemonic',
     StoredMnemonic = 'StoredMnemonic',
@@ -66,12 +69,17 @@ export enum ResponseTypes {
     LockedStronghold = 'LockedStronghold',
     StrongholdPasswordChanged = 'StrongholdPasswordChanged',
     UpdatedAllClientOptions = 'UpdatedAllClientOptions',
+    LedgerStatus = 'LedgerStatus',
     StrongholdPasswordClearIntervalSet = 'StrongholdPasswordClearIntervalSet',
     MigrationData = 'MigrationData',
     CreatedMigrationBundle = 'CreatedMigrationBundle',
     SentMigrationBundle = 'SentMigrationBundle',
     LegacySeedChecksum = 'SeedChecksum',
     NodeInfo = 'NodeInfo',
+    MigrationAddress = 'MigrationAddress',
+    MinedBundle = 'MinedBundle',
+    MineBundle = 'MineBundle',
+    LegacyAddressChecksum = 'GetLegacyAddressChecksum'
 }
 
 export enum Actions {
@@ -89,6 +97,7 @@ export type GeneratedAddressResponse = Response<ResponseTypes.GeneratedAddress, 
 export type LatestAddressResponse = Response<ResponseTypes.LatestAddress, Address>
 export type BalanceResponse = Response<ResponseTypes.Balance, Balance>
 export type SyncAccountsResponse = Response<ResponseTypes.SyncedAccounts, SyncedAccount[]>
+export type StartBackgroundSyncResponse = Response<ResponseTypes.Ok, void>
 export type SyncAccountResponse = Response<ResponseTypes.SyncedAccount, SyncedAccount>
 export type ReattachResponse = Response<ResponseTypes.Reattached, string> // message id
 export type BackupSuccessfulResponse = Response<ResponseTypes.BackupSuccessful, void>
@@ -119,6 +128,10 @@ export type MigrationDataResponse = Response<ResponseTypes.MigrationData, Migrat
 export type CreatedMigrationBundleResponse = Response<ResponseTypes.CreatedMigrationBundle, MigrationBundle>
 export type SentMigrationBundleResponse = Response<ResponseTypes.SentMigrationBundle, SendMigrationBundleResponse>
 export type GetNodeInfoResponse = Response<ResponseTypes.NodeInfo, NodeInfo>
+export type GetMigrationAddressResponse = Response<ResponseTypes.MigrationAddress, MigrationAddress>
+export type MinedBundleResponse = Response<ResponseTypes.MinedBundle, string[]>
+export type LedgerDeviceStatusResponse = Response<ResponseTypes.LedgerStatus, LedgerStatus>
+export type LegacyAddressChecksumResponse = Response<ResponseTypes.LegacyAddressChecksum, string>
 
 export type MessageResponse =
     RemovedAccountResponse
@@ -131,6 +144,7 @@ export type MessageResponse =
     | LatestAddressResponse
     | BalanceResponse
     | SyncAccountsResponse
+    | StartBackgroundSyncResponse
     | SyncAccountResponse
     | ReattachResponse
     | BackupSuccessfulResponse
@@ -151,11 +165,15 @@ export type MessageResponse =
     | DeleteStorageResponse
     | LockStrongholdResponse
     | UpdatedAllClientOptions
+    | LedgerDeviceStatusResponse
     | LegacySeedChecksum
     // Migration types
     | MigrationDataResponse
     | CreatedMigrationBundleResponse
     | SentMigrationBundleResponse
     | GetNodeInfoResponse
+    | GetMigrationAddressResponse
+    | MinedBundleResponse
+    | LegacyAddressChecksumResponse
 
 export type Bridge = (message: BridgeMessage) => Promise<string>

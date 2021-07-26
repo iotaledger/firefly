@@ -9,18 +9,26 @@
         formatCurrency,
     } from 'shared/lib/currency'
     import { Electron } from 'shared/lib/electron'
+    import { getLegacyErrorMessage, promptUserToConnectLedger } from 'shared/lib/ledger'
     import {
+        ADDRESS_SECURITY_LEVEL,
         confirmedBundles,
+        createLedgerMigrationBundle,
         createMigrationBundle,
         getInputIndexesForBundle,
+        hardwareIndexes,
         hasBundlesWithSpentAddresses,
         hasSingleBundle,
         migration,
+        sendLedgerMigrationBundle,
         sendMigrationBundle,
         unselectedInputs,
     } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
+    import { closePopup } from 'shared/lib/popup'
     import { newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
+    import { walletSetupType } from 'shared/lib/router'
+    import { SetupType } from 'shared/lib/typings/routes'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
@@ -46,6 +54,11 @@
 
     let singleMigrationBundleHash
 
+    let legacyLedger = $walletSetupType === SetupType.TrinityLedger
+    $: animation = legacyLedger ? 'ledger-migrate-desktop' : 'migrate-desktop'
+
+    let closeTransport = () => {}
+
     confirmedBundles.subscribe((newConfirmedBundles) => {
         newConfirmedBundles.forEach((bundle) => {
             if (bundle.bundleHash && bundle.bundleHash === singleMigrationBundleHash && bundle.confirmed) {
@@ -60,27 +73,65 @@
         if ($hasSingleBundle && !$hasBundlesWithSpentAddresses) {
             loading = true
 
-            createMigrationBundle(getInputIndexesForBundle($bundles[0]), 0, false)
-                .then((response) => {
-                    singleMigrationBundleHash = response.payload.bundleHash
-                    return sendMigrationBundle(response.payload.bundleHash).then(() => {
-                        // Save profile
-                        saveProfile($newProfile)
-                        setActiveProfile($newProfile.id)
-
-                        profileInProgress.set(undefined)
-                        newProfile.set(null)
-                    })
-                })
-                .catch((err) => {
-                    loading = false
-                    if (!err?.snapshot) {
-                        showAppNotification({
-                            type: 'error',
-                            message: locale('views.migrate.error'),
+            if (legacyLedger) {
+                const _onConnected = () => {
+                    Electron.ledger
+                        .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
+                        .then(({ iota, callback }) => {
+                            closeTransport = callback
+                            return createLedgerMigrationBundle(0, iota.prepareTransfers, callback)
                         })
-                    }
-                })
+                        .then(({ trytes, bundleHash }) => {
+                            closePopup(true) // close transaction popup
+                            singleMigrationBundleHash = bundleHash
+                            return sendLedgerMigrationBundle(bundleHash, trytes)
+                        })
+                        .then((data) => {
+                            // Save profile
+                            saveProfile($newProfile)
+                            setActiveProfile($newProfile.id)
+
+                            profileInProgress.set(undefined)
+                            newProfile.set(null)
+                        })
+                        .catch((error) => {
+                            loading = false
+                            closePopup(true) // close transaction popup
+                            closeTransport()
+                            showAppNotification({
+                                type: 'error',
+                                message: locale(getLegacyErrorMessage(error)),
+                            })
+                            console.error(error)
+                        })
+                }
+                const _onCancel = () => {
+                    loading = false
+                }
+                promptUserToConnectLedger(true, _onConnected, _onCancel)
+            } else {
+                createMigrationBundle(getInputIndexesForBundle($bundles[0]), 0, false)
+                    .then((response) => {
+                        singleMigrationBundleHash = response.payload.bundleHash
+                        return sendMigrationBundle(response.payload.bundleHash).then(() => {
+                            // Save profile
+                            saveProfile($newProfile)
+                            setActiveProfile($newProfile.id)
+
+                            profileInProgress.set(undefined)
+                            newProfile.set(null)
+                        })
+                    })
+                    .catch((err) => {
+                        loading = false
+                        if (!err?.snapshot) {
+                            showAppNotification({
+                                type: 'error',
+                                message: locale('views.migrate.error'),
+                            })
+                        }
+                    })
+            }
         } else {
             loading = true
             timeout = setTimeout(() => {
@@ -102,7 +153,7 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout allowBack={false}>
+    <OnboardingLayout allowBack={false} {locale} showLedgerProgress={legacyLedger} showLedgerVideoButton={legacyLedger}>
         <div slot="leftpane__content">
             <Text on:click={learnAboutMigrationsClick} type="h2" classes="mb-5">{locale('views.migrate.title')}</Text>
             <Text type="p" secondary classes="mb-4">{locale('views.migrate.body1')}</Text>
@@ -123,7 +174,7 @@
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            <Animation animation="migrate-desktop" />
+            <Animation {animation} />
         </div>
     </OnboardingLayout>
 {/if}

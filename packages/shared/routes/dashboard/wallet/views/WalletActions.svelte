@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { AccountTile, Button, Text } from 'shared/components'
-    import { activeProfile } from 'shared/lib/profile'
+    import { activeProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { selectedAccountId, WalletAccount } from 'shared/lib/wallet'
@@ -50,7 +50,8 @@
                             size={$viewableAccounts.length === 1 ? 'l' : 'm'}
                             hidden={hiddenAccounts.includes(account.id)}
                             disabled={waitingChrysalis}
-                            onClick={() => handleAccountClick(account.id)} />
+                            onClick={() => handleAccountClick(account.id)}
+                            ledger={!$isSoftwareProfile} />
                     {/each}
                 </div>
             {:else}

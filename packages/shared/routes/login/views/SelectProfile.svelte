@@ -2,6 +2,7 @@
     import { Icon, Logo, Profile } from 'shared/components'
     import { profiles, setActiveProfile } from 'shared/lib/profile'
     import { createEventDispatcher } from 'svelte'
+    import { ProfileType } from 'shared/lib/profile'
 
     export let locale
     export let mobile
@@ -33,6 +34,7 @@
                         name={profile.name}
                         id={profile.id}
                         isDeveloper={profile.isDeveloperProfile}
+                        isLedgerProfile={profile?.profileType === ProfileType.Ledger || profile?.profileType === ProfileType.LedgerSimulator}
                         classes="cursor-pointer" />
                 </div>
             {/each}

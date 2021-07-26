@@ -13,14 +13,22 @@
     import Diagnostics from './Diagnostics.svelte'
     import ErrorLog from './ErrorLog.svelte'
     import HideAccount from './HideAccount.svelte'
+    import LedgerAppGuide from './LedgerAppGuide.svelte'
+    import LedgerConfirmation from './LedgerConfirmation.svelte'
+    import LedgerConnectionGuide from './LedgerConnectionGuide.svelte'
+    import LedgerLegacyTransaction from './LedgerLegacyTransaction.svelte'
+    import LedgerNotConnected from './LedgerNotConnected.svelte'
+    import LedgerTransaction from './LedgerTransaction.svelte'
+    import LedgerAddress from './LedgerAddress.svelte'
     import MissingBundle from './MissingBundle.svelte'
     import Password from './Password.svelte'
     import QR from './QR.svelte'
     import RemoveNode from './RemoveNode.svelte'
     import RiskFunds from './RiskFunds.svelte'
+    import Snapshot from './Snapshot.svelte'
     import Transaction from './Transaction.svelte'
     import Version from './Version.svelte'
-    import Snapshot from './Snapshot.svelte'
+    import Video from './Video.svelte'
 
     export let locale = 'en'
     export let type = undefined
@@ -28,6 +36,28 @@
     export let hideClose = undefined
     export let fullScreen = undefined
     export let transition = true
+
+    enum PopupSize {
+        Small = 'small',
+        Medium = 'medium',
+        Large = 'large',
+    }
+
+    let size: PopupSize = PopupSize.Medium
+
+    $: switch (type) {
+        case 'ledgerNotConnected':
+            size = PopupSize.Small
+            break
+        case 'video':
+        case 'ledgerAppGuide':
+        case 'ledgerConnectionGuide':
+            size = PopupSize.Large
+            break
+        default:
+            size = PopupSize.Medium
+            break
+    }
 
     let popupContent
 
@@ -40,6 +70,13 @@
         hideAccount: HideAccount,
         addressHistory: AddressHistory,
         addNode: AddNode,
+        ledgerNotConnected: LedgerNotConnected,
+        ledgerConfirmation: LedgerConfirmation,
+        ledgerAppGuide: LedgerAppGuide,
+        ledgerConnectionGuide: LedgerConnectionGuide,
+        ledgerTransaction: LedgerTransaction,
+        ledgerLegacyTransaction: LedgerLegacyTransaction,
+        ledgerAddress: LedgerAddress,
         removeNode: RemoveNode,
         busy: Busy,
         errorLog: ErrorLog,
@@ -50,6 +87,7 @@
         missingBundle: MissingBundle,
         balanceFinder: BalanceFinder,
         snapshot: Snapshot,
+        video: Video,
     }
 
     const onkey = (e) => {
@@ -94,8 +132,15 @@
         popup-content {
             box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
             width: 100%;
-            max-width: 480px;
-
+            &.small {
+                max-width: 360px;
+            }
+            &.medium {
+                max-width: 480px;
+            }
+            &.large {
+                max-width: 630px;
+            }
             &.full-screen {
                 box-shadow: none;
             }
@@ -111,7 +156,7 @@
     <div tabindex="0" on:focus={handleFocusFirst} />
     <popup-content
         bind:this={popupContent}
-        class={`bg-white rounded-xl pt-6 px-8 pb-8 relative ${fullScreen ? 'full-screen dark:bg-gray-900' : 'dark:bg-gray-900'}`}>
+        class={`${size} bg-white rounded-xl pt-6 px-8 pb-8 relative ${fullScreen ? 'full-screen dark:bg-gray-900' : 'dark:bg-gray-900'}`}>
         {#if !hideClose}
             <button on:click={closePopup} class="absolute top-6 right-8 text-gray-800 dark:text-white focus:text-blue-500">
                 <Icon icon="close" />

@@ -12,8 +12,7 @@
 </script>
 
 <style type="text/scss">
-    p,
-    pre {
+    p {
         &.smaller {
             @apply text-12;
             @apply leading-120;
@@ -21,6 +20,14 @@
         &.bigger {
             @apply text-16;
             @apply leading-140;
+        }
+    }
+    pre {
+        &.smaller {
+            @apply text-11;
+        }
+        &.bigger {
+            @apply text-13;
         }
     }
     h1,

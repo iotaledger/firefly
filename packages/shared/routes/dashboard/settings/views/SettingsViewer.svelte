@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Icon, Scroller, SettingsNavigator, Text } from 'shared/components'
     import { loggedIn } from 'shared/lib/app'
+    import { isSoftwareProfile } from 'shared/lib/profile'
     import { settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import { SettingsIcons } from 'shared/lib/typings/icons'
     import {
@@ -14,7 +15,7 @@
         SettingsRoutesNoProfile,
     } from 'shared/lib/typings/routes'
     import { onMount } from 'svelte'
-    import { Advanced, General, Security, Help } from './'
+    import { Advanced, General, Help, Security } from './'
 
     export let locale
     export let mobile
@@ -28,10 +29,18 @@
 
     let settings
 
+    const securitySettings = Object.assign({}, SecuritySettings)
+
+    // TODO: ledger, The operand of a 'delete' operator cannot be a read-only property
+    $: if (!$isSoftwareProfile) {
+        delete securitySettings.ExportStronghold
+        delete securitySettings.ChangePassword
+    }
+
     if ($loggedIn) {
         settings = {
             generalSettings: GeneralSettings,
-            security: SecuritySettings,
+            security: securitySettings,
             advancedSettings: AdvancedSettings,
             helpAndInfo: HelpAndInfo,
         }

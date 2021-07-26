@@ -5,8 +5,10 @@ import type { Address } from './typings/address'
 import type { MessageResponse } from './typings/bridge'
 import { ResponseTypes } from './typings/bridge'
 import type { Message } from './typings/message'
-import type { NodeInfo } from './typings/node'
+import type { LedgerStatus } from './typings/ledger'
 import type { StrongholdStatus } from './typings/wallet'
+import type { NodeInfo } from './typings/node'
+import type { MigrationData } from './typings/migration';
 
 type Validators =
     | IdValidator
@@ -512,6 +514,61 @@ class StrongholdStatusValidator extends Validator {
         return super.isValid(response)
     }
 }
+
+/**
+ * Validation for ledger device status
+ */
+class LedgerDeviceStatusValidator extends Validator {
+    /**
+     * Checks if response is valid
+     *
+     * @method isValid
+     *
+     * @param {MessageResponse} response
+     *
+     * @returns {ValidationResponse}
+     */
+    isValid(response: MessageResponse): ValidationResponse {
+        const payload = response.payload as LedgerStatus
+
+        if ('boolean' !== typeof payload.connected && 'boolean' !== typeof payload.locked) {
+            return super.createResponse(false, {
+                type: ErrorTypes.InvalidType,
+                error: 'Invalid type of status received.',
+            })
+        }
+
+        return super.isValid(response)
+    }
+}
+
+/**
+ * Validation for responses with Ledger migration data
+ */
+class MigrationDataValidator extends Validator {
+    /**
+     * Checks if migration data response is valid
+     * 
+     * @method isValid
+     * 
+     * @param {MessageResponse} response
+     * 
+     * @returns {ValidationResponse}
+     */
+    isValid(response: MessageResponse): ValidationResponse {
+        const payload = response.payload as MigrationData
+
+        if ('number' !== typeof payload.lastCheckedAddressIndex) {
+            return super.createResponse(false, {
+                type: ErrorTypes.InvalidType,
+                error: 'Invalid type of address index'
+            })
+        }
+
+        return super.isValid(response);
+    }
+}
+
 /**
  * Validation for type of response object
  * Type should be the very first thing that gets validated
@@ -732,6 +789,7 @@ export default class ValidatorService {
             [ResponseTypes.StoredMnemonic]: this.createBaseValidator().getFirst(),
             [ResponseTypes.VerifiedMnemonic]: this.createBaseValidator().getFirst(),
             [ResponseTypes.SyncedAccounts]: this.createBaseValidator().add(new SyncedAccountListValidator()).getFirst(),
+            [ResponseTypes.Ok]: this.createBaseValidator().getFirst(),
             [ResponseTypes.SentTransfer]: this.createBaseValidator().add(new MessageValidator()).getFirst(),
             [ResponseTypes.StoragePasswordSet]: this.createBaseValidator().getFirst(),
             [ResponseTypes.StrongholdStatus]: this.createBaseValidator().add(new StrongholdStatusValidator()).getFirst(),
@@ -748,6 +806,7 @@ export default class ValidatorService {
             [ResponseTypes.LockedStronghold]: this.createBaseValidator().getFirst(),
             [ResponseTypes.StrongholdPasswordChanged]: this.createBaseValidator().getFirst(),
             [ResponseTypes.UpdatedAllClientOptions]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.LedgerStatus]: this.createBaseValidator().add(new LedgerDeviceStatusValidator()).getFirst(),
             [ResponseTypes.StrongholdPasswordClearIntervalSet]: this.createBaseValidator().getFirst(),
             [ResponseTypes.NodeInfo]: this.createBaseValidator().add(new NodeInfoValidator()).getFirst(),
             [ResponseTypes.Error]: this.createBaseValidator().getFirst(),
@@ -755,11 +814,15 @@ export default class ValidatorService {
 
             // Legacy seed APIs
             [ResponseTypes.LegacySeedChecksum]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.LegacyAddressChecksum]: this.createBaseValidator().getFirst(),
 
             // Migration
-            [ResponseTypes.MigrationData]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.MigrationData]: this.createBaseValidator().add(new MigrationDataValidator()).getFirst(),
             [ResponseTypes.CreatedMigrationBundle]: this.createBaseValidator().getFirst(),
             [ResponseTypes.SentMigrationBundle]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.MigrationAddress]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.MinedBundle]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.MineBundle]: this.createBaseValidator().getFirst(),
 
             // Events
             [ResponseTypes.StrongholdStatusChange]: this.createBaseEventValidator().getFirst(),
@@ -769,6 +832,7 @@ export default class ValidatorService {
             [ResponseTypes.BalanceChange]: this.createBaseEventValidator().getFirst(),
             [ResponseTypes.ConfirmationStateChange]: this.createBaseEventValidator().getFirst(),
             [ResponseTypes.TransferProgress]: this.createBaseEventValidator().getFirst(),
+            [ResponseTypes.LedgerAddressGeneration]: this.createBaseEventValidator().getFirst(),
             [ResponseTypes.MigrationProgress]: this.createBaseEventValidator().getFirst(),
             // Market data
             MarketData: new ValidatorChainBuilder().add(new TypeValidator()).getFirst(),

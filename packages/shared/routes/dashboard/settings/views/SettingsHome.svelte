@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { SettingsMenu, Text } from 'shared/components'
     import { loggedIn } from 'shared/lib/app'
+    import { isSoftwareProfile } from 'shared/lib/profile'
     import { settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import { SettingsIcons } from 'shared/lib/typings/icons'
     import {
@@ -15,6 +16,14 @@
 
     export let locale
     export let mobile
+
+    const securitySettings = Object.assign({}, SecuritySettings)
+
+    // TODO: ledger, The operand of a 'delete' operator cannot be a read-only property
+    $: if (!$isSoftwareProfile) {
+        delete securitySettings.ExportStronghold
+        delete securitySettings.ChangePassword
+    }
 </script>
 
 {#if mobile}
@@ -40,7 +49,7 @@
                 icon="security"
                 iconColor="bg-yellow-500"
                 icons={SettingsIcons}
-                settings={SecuritySettings}
+                settings={securitySettings}
                 activeSettings={$loggedIn ? SecuritySettings : undefined}
                 title={locale('views.settings.security.title')}
                 description={locale('views.settings.security.description')}

@@ -15,6 +15,42 @@
             lightmode: 'balance-desktop.svg',
             darkmode: 'balance-desktop-darkmode.svg',
         },
+        'ledger-install-new-app-desktop': {
+            lightmode: 'onboarding/ledger-install-new-app-desktop.svg',
+            darkmode: 'onboarding/ledger-install-new-app-desktop.svg',
+        },
+        'ledger-live-updated-desktop': {
+            lightmode: 'onboarding/ledger-live-updated-desktop.svg',
+            darkmode: 'onboarding/ledger-live-updated-desktop-darkmode.svg',
+        },
+        'ledger-connected-2-desktop': {
+            lightmode: 'onboarding/ledger-connected-2-desktop.svg',
+            darkmode: 'onboarding/ledger-connected-2-desktop.svg',
+        },
+        'ledger-search-apps-desktop': {
+            lightmode: 'onboarding/ledger-search-apps-desktop.svg',
+            darkmode: 'onboarding/ledger-search-apps-desktop.svg',
+        },
+        'ledger-install-apps-desktop': {
+            lightmode: 'onboarding/ledger-install-apps-desktop.svg',
+            darkmode: 'onboarding/ledger-install-apps-desktop.svg',
+        },
+        'ledger-close-live-desktop': {
+            lightmode: 'onboarding/ledger-close-live-desktop.svg',
+            darkmode: 'onboarding/ledger-close-live-desktop.svg',
+        },
+        'ledger-background-live-desktop': {
+            lightmode: 'onboarding/ledger-background-live-desktop.svg',
+            darkmode: 'onboarding/ledger-background-live-desktop.svg',
+        },
+        'ledger-pin-desktop': {
+            lightmode: 'onboarding/ledger-pin-desktop.svg',
+            darkmode: 'onboarding/ledger-pin-desktop.svg',
+        },
+        'ledger-open-app-desktop': {
+            lightmode: 'onboarding/ledger-open-app-desktop.svg',
+            darkmode: 'onboarding/ledger-open-app-desktop.svg',
+        },
     }
 </script>
 

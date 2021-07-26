@@ -9,8 +9,11 @@
         formatCurrency,
     } from 'shared/lib/currency'
     import { Electron } from 'shared/lib/electron'
-    import { LOG_FILE_NAME, migration, resetMigrationState, totalMigratedBalance } from 'shared/lib/migration'
+    import { LOG_FILE_NAME, migration, migrationLog, resetMigrationState, totalMigratedBalance } from 'shared/lib/migration'
     import { activeProfile, newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
+    import { walletSetupType } from 'shared/lib/router'
+    import { LedgerAppName } from 'shared/lib/typings/ledger'
+    import { SetupType } from 'shared/lib/typings/routes'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { getStoragePath } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
@@ -21,11 +24,16 @@
 
     const { didComplete } = $migration
 
-    // TODO: dummy
     let wasMigrated = $didComplete
+
+    let localizedBody = 'body'
+    let localizedValues = {}
 
     onMount(() => {
         if (!wasMigrated) {
+            if ($walletSetupType === SetupType.FireflyLedger) {
+                localizedBody = 'fireflyLedgerBody'
+            }
             // This is the last screen in onboarding for all flows i.e., if you create a new wallet or import stronghold
             // When this component mounts, ensure that the profile is persisted in the local storage.
             saveProfile($newProfile)
@@ -33,6 +41,13 @@
 
             profileInProgress.set(undefined)
             newProfile.set(null)
+        } else {
+            if ($walletSetupType === SetupType.TrinityLedger) {
+                localizedBody = 'trinityLedgerBody'
+                localizedValues = { legacy: LedgerAppName.IOTALegacy }
+            } else {
+                localizedBody = 'softwareMigratedBody'
+            }
         }
     })
 
@@ -54,7 +69,9 @@
                 .then((path) => {
                     const source = getStoragePath(path, $activeProfile.name)
 
-                    return Electron.exportMigrationLog(`${source}/${LOG_FILE_NAME}`, `${$activeProfile.name}-${LOG_FILE_NAME}`)
+                    return $walletSetupType === SetupType.TrinityLedger
+                        ? Electron.exportLedgerMigrationLog($migrationLog, `${$activeProfile.name}-${LOG_FILE_NAME}`)
+                        : Electron.exportMigrationLog(`${source}/${LOG_FILE_NAME}`, `${$activeProfile.name}-${LOG_FILE_NAME}`)
                 })
                 .then((result) => {
                     if (result) {
@@ -85,7 +102,9 @@
                         <Icon icon="success-check" classes="text-white" />
                     </div>
                     <Text type="h2" classes="mb-6 text-center">{locale('views.congratulations.fundsMigrated')}</Text>
-                    <Text type="p" secondary classes="mb-6 text-center">{locale('views.congratulations.success')}</Text>
+                    <Text type="p" secondary classes="mb-6 text-center">
+                        {locale(`views.congratulations.${localizedBody}`, { values: localizedValues })}
+                    </Text>
                     <Text type="h2">{formatUnitBestMatch($totalMigratedBalance, true, 3)}</Text>
                     <Text type="p" highlighted classes="py-1 uppercase">{fiatbalance}</Text>
                 </div>
@@ -95,7 +114,7 @@
                         <Icon icon="success-check" classes="text-white" />
                     </div>
                     <Text type="h2" classes="mb-5 text-center">{locale('views.congratulations.title')}</Text>
-                    <Text type="p" secondary classes="mb-2">{locale('views.congratulations.body')}</Text>
+                    <Text type="p" secondary classes="mb-2 text-center">{locale(`views.congratulations.${localizedBody}`)}</Text>
                 </div>
             {/if}
         </div>

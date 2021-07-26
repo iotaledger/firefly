@@ -154,6 +154,15 @@ export function setClientOptions(bridge: Bridge, __ids: CommunicationIds, payloa
     })
 }
 
+export function getLedgerDeviceStatus(bridge: Bridge, __ids: CommunicationIds, isSimulator: boolean) {
+    return bridge({
+        actorId: __ids.actorId,
+        id: __ids.messageId,
+        cmd: 'GetLedgerStatus',
+        payload: isSimulator
+    })
+}
+
 export function setStrongholdPasswordClearInterval(bridge: Bridge, __ids: CommunicationIds, payload: Duration) {
     return bridge({
         actorId: __ids.actorId,
@@ -162,7 +171,6 @@ export function setStrongholdPasswordClearInterval(bridge: Bridge, __ids: Commun
         payload,
     })
 }
-
 
 export function getLegacySeedChecksum(bridge: Bridge, __ids: CommunicationIds, payload: string) {
     return bridge({

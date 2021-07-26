@@ -1,11 +1,10 @@
 import type { Node } from './typings/node'
 import { isValidHttpsUrl, isValidUrl } from './utils'
 
-const DEFAULT_NETWORK = 'chrysalis-mainnet'
+const DEFAULT_NETWORK = 'testnet'
 
 const DEFAULT_NODES: Node[] = [
-    'https://chrysalis-nodes.iota.org',
-    'https://chrysalis-nodes.iota.cafe'
+    'https://api.lb-1.h.ledgermigration1.ledgermigration1.net/'
 ].map((url) => ({
     url,
     auth: {

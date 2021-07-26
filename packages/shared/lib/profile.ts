@@ -1,6 +1,8 @@
 import { AvailableExchangeRates } from 'shared/lib/currency'
 import { persistent } from 'shared/lib/helpers'
+import { ledgerSimulator } from 'shared/lib/ledger'
 import { generateRandomId } from 'shared/lib/utils'
+import type { WalletAccount } from 'shared/lib/wallet'
 import { destroyActor, getStoragePath, getWalletStoragePath } from 'shared/lib/wallet'
 import { derived, get, Readable, writable } from 'svelte/store'
 import type { ChartSelectors } from './chart'
@@ -9,6 +11,7 @@ import {
     HistoryDataProps
 } from './marketData'
 import type { Node } from './typings/node'
+
 
 export interface MigratedTransaction {
     address: string;
@@ -32,10 +35,11 @@ export interface Profile {
      * User settings
      */
     settings: UserSettings
-    hiddenAccounts?: string[],
+    hiddenAccounts?: string[]
     migratedTransactions?: MigratedTransaction[]
     isDeveloperProfile: boolean
     gapLimit?: number
+    profileType?: ProfileType
 }
 
 /**
@@ -51,6 +55,29 @@ export interface UserSettings {
     showHiddenAccounts?: boolean
     chartSelectors: ChartSelectors
     hideNetworkStatistics?: boolean
+}
+
+/**
+ * Profile types
+ */
+export enum ProfileType {
+    Software = 'Software',
+    Ledger = 'Ledger',
+    LedgerSimulator = 'LedgerSimulator'
+}
+
+/**
+ * Profile import types
+ */
+export enum ImportType {
+    Seed = 'seed',
+    Mnemonic = 'mnemonic',
+    File = 'file',
+    SeedVault = 'seedvault',
+    Stronghold = 'stronghold',
+    Ledger = 'ledger',
+    TrinityLedger = 'trinityLedger',
+    FireflyLedger = 'fireflyLedger',
 }
 
 export const activeProfileId = writable<string | null>(null)
@@ -77,6 +104,14 @@ export const activeProfile: Readable<Profile | undefined> = derived(
 
 activeProfileId.subscribe((profileId) => {
     Electron.updateActiveProfile(profileId)
+})
+
+export const isSoftwareProfile: Readable<Boolean> = derived(activeProfile, $activeProfile => {
+    return $activeProfile?.profileType === ProfileType.Software
+})
+
+export const isLedgerProfile: Readable<Boolean> = derived(activeProfile, $activeProfile => {
+    return $activeProfile?.profileType === ProfileType.Ledger || $activeProfile?.profileType === ProfileType.LedgerSimulator
 })
 
 /**
@@ -121,6 +156,7 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
                 timeframe: HistoryDataProps.SEVEN_DAYS
             }
         },
+        profileType: null
     }
 
     newProfile.set(profile)
@@ -268,7 +304,7 @@ export const removeProfileFolder = async (profileName) => {
  *
  * @returns {void}
  */
-export const cleanupEmptyProfiles = async() => {
+export const cleanupEmptyProfiles = async () => {
     try {
         const userDataPath = await Electron.getUserDataPath()
         const profileStoragePath = getWalletStoragePath(userDataPath)
@@ -281,10 +317,57 @@ export const cleanupEmptyProfiles = async() => {
         const appProfiles = get(profiles).map(p => p.name)
         for (const storedProfile of storedProfiles) {
             if (!appProfiles.includes(storedProfile)) {
-                await removeProfileFolder(storedProfile) 
+                await removeProfileFolder(storedProfile)
             }
         }
     } catch (err) {
         console.error(err)
+    }
+}
+
+/**
+ * Set profile type if missing (for back compatibility purposes)
+ * 
+ * @method setProfileType
+ * 
+ * @param {ProfileType} profileType 
+ * 
+ * @returns {void}
+ */
+export const setProfileType = (profileType: ProfileType) => {
+    if (ledgerSimulator && profileType === ProfileType.Ledger) {
+        updateProfile('profileType', ProfileType.LedgerSimulator)
+    }
+    else {
+        updateProfile('profileType', profileType)
+    }
+}
+
+/**
+ * Set profile type for back compatibility purposes
+ * 
+ * @method setMissingProfileType
+ * 
+ * @param {WalletAccount[]} accounts 
+ * 
+ * @returns {void}
+ */
+export const setMissingProfileType = (accounts: WalletAccount[] = []) => {
+    let accountType = null
+    if (accounts.length) {
+        switch (accounts[0]?.signerType?.type) {
+            case 'Stronghold':
+                accountType = ProfileType.Software
+                break
+            case 'LedgerNano':
+                accountType = ProfileType.Ledger
+                break
+            case 'LedgerNanoSimulator':
+                accountType = ProfileType.LedgerSimulator
+                break
+        }
+    }
+    if (accountType) {
+        updateProfile('profileType', accountType)
     }
 }

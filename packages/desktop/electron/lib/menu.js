@@ -82,6 +82,11 @@ const buildTemplate = () => {
                 {
                     type: 'separator',
                 },
+                {        
+                    // TODO: Remove before Ledger release
+                    label:  "Developer Tools",
+                    role: 'toggleDevTools'
+                },
                 {
                     label: state.strings.settings,
                     click: () => getOrInitWindow('main').webContents.send('menu-navigate-settings'),

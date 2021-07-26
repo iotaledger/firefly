@@ -1,16 +1,13 @@
 <script lang="typescript">
     import { Idle, Sidebar } from 'shared/components'
-    import { loggedIn, logout, sendParams } from 'shared/lib/app'
-    import { appSettings } from 'shared/lib/appSettings'
-    import { deepLinkRequestActive } from 'shared/lib/deepLinking'
+    import { loggedIn, logout } from 'shared/lib/app'
     import { Electron } from 'shared/lib/electron'
     import { chrysalisLive, ongoingSnapshot, openSnapshotPopup, pollChrysalisStatus } from 'shared/lib/migration'
     import { NOTIFICATION_TIMEOUT_NEVER, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup } from 'shared/lib/popup'
-    import { activeProfile } from 'shared/lib/profile'
+    import { activeProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { accountRoute, dashboardRoute, routerNext, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
-    import { parseDeepLink } from 'shared/lib/utils'
     import { api, selectedAccountId, STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, wallet } from 'shared/lib/wallet'
     import { Settings, Wallet } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'
@@ -35,10 +32,29 @@
         if (os) {
             openSnapshotPopup()
         }
-    });
+    })
 
     onMount(async () => {
-        api.setStrongholdPasswordClearInterval({ secs: STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, nanos: 0 })
+        if ($isSoftwareProfile) {
+            api.setStrongholdPasswordClearInterval({ secs: STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, nanos: 0 })
+        }
+
+        api.startBackgroundSync(
+            {
+                secs: 30,
+                nanos: 0,
+            },
+            true,
+            {
+                onSuccess() {},
+                onError(err) {
+                    showAppNotification({
+                        type: 'error',
+                        message: locale('error.account.syncing'),
+                    })
+                },
+            }
+        )
 
         // TODO: Re-enable deep links
         // Electron.DeepLinkManager.requestDeepLink()
