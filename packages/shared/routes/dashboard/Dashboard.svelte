@@ -157,6 +157,9 @@
         if (get(activeProfile)?.migratedTransactions?.length) {
             handleChrysalisStatusNotifications()
         }
+        openPopup({
+            type: 'ledgerMigrateIndex',
+        })
     }
     $: if ($activeProfile) {
         if (!get(activeProfile)?.migratedTransactions?.length && migrationNotificationId) {
