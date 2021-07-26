@@ -22,7 +22,7 @@
     class:disabled
     class:ghost>
     {#if icon}
-        <Icon {icon} classes="text-blue-500 mr-2" />
+        <Icon {icon} width={20} height={20} classes="text-blue-500 mr-1" />
     {/if}
     <slot />
 </a>
