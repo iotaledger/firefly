@@ -87,6 +87,12 @@
                             return sendLedgerMigrationBundle(bundleHash, trytes)
                         })
                         .then((data) => {
+                            newProfile.update((profile) => {
+                                return Object.assign({}, profile, {
+                                    ledgerMigrationCount: profile.ledgerMigrationCount ? profile.ledgerMigrationCount + 1 : 1
+                                })
+                            })
+
                             // Save profile
                             saveProfile($newProfile)
                             setActiveProfile($newProfile.id)
