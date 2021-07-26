@@ -43,16 +43,11 @@
             }
         },
         "setupLedger": {
-            "title": "Install the new IOTA Ledger app on your device",
-            "body1": "1. Open Ledger Live and install New IOTA app",
-            "body2": "2. Close Ledger Live desktop application",
-            "body3": "3. Open the new app on your Ledger device",
             "progress1": "Connect your Ledger",
             "progress2": "Generate address",
             "progress3": "Switch Ledger app",
             "progress4": "Transfer funds",
             "watchVideo": "Watch video guide",
-            "checkingConnection": "Checking Ledger Connection"
         },
         "ledgerInstallationGuide": {
             "title": "Have you installed the necessary Ledger apps?",
@@ -203,7 +198,6 @@
             "reinstallLegacy": "If your Ledger is not generating addresses you may need to reinstall the {legacy} app and try again."
         },
         "importBackupPassword": {
-            "title": "Restore your wallets from a SeedVault or Stronghold",
             "body1": "Please enter your backup password.",
             "body2": "This is the password you set when you first created your backup."
         },
