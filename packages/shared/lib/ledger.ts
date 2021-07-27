@@ -1,5 +1,7 @@
 import { removeAddressChecksum } from 'shared/lib/migration'
 import { closePopup, openPopup, popupState } from 'shared/lib/popup'
+import { forceNextRoute, walletSetupType } from 'shared/lib/router'
+import { AppRoute, SetupType } from 'shared/lib/typings/routes'
 import { api } from 'shared/lib/wallet'
 import { get, writable } from 'svelte/store'
 import { localize } from './i18n'
@@ -245,4 +247,9 @@ export function formatAddressForLedger(address: string, removeChecksum: boolean 
     }
     const len = address.length
     return `${address.slice(0, len / 2)}\n${address.slice(len / 2, len)}`
+}
+
+export function navigateToNewIndexMigration() {
+    walletSetupType.set(SetupType.TrinityLedger)
+    forceNextRoute(AppRoute.LedgerSetup)
 }

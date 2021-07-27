@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
-    import { currentLedgerMigrationProgress, LedgerMigrationProgress } from 'shared/lib/migration'
+    import { currentLedgerMigrationProgress, LedgerMigrationProgress, initialiseMigrationListeners } from 'shared/lib/migration'
     import { ledgerRoute, ledgerRouteHistory, walletSetupType } from 'shared/lib/router'
     import { LedgerRoutes, SetupType } from 'shared/lib/typings/routes'
     import { createEventDispatcher, onMount } from 'svelte'
@@ -23,13 +23,12 @@
     $: $ledgerRoute, updateMigrationProgress()
 
     onMount(() => {
-        // reinitialize the init view only if we are not in the middle of a ledger flow
-        if (!$ledgerRouteHistory.length) {
-            if ($walletSetupType === SetupType.New || $walletSetupType === SetupType.FireflyLedger) {
-                ledgerRoute.set(LedgerRoutes.Connect)
-            } else {
-                ledgerRoute.set(LedgerRoutes.LegacyIntro)
-            }
+        initialiseMigrationListeners();
+
+        if ($walletSetupType === SetupType.New || $walletSetupType === SetupType.FireflyLedger) {
+            ledgerRoute.set(LedgerRoutes.Connect)
+        } else {
+            ledgerRoute.set(LedgerRoutes.LegacyIntro)
         }
     })
 

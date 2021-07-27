@@ -394,6 +394,10 @@
                 "title": "Diagnostics",
                 "description": "View system and application information"
             },
+            "migrateLedgerIndex": {
+                "title": "Migrate Ledger Index",
+                "description": "Migrate another ledger account index into this profile"
+            },
             "stateExport": {
                 "title": "State export",
                 "description": "Export your transaction history to a .csv file"
@@ -615,6 +619,10 @@
         "ledgerAddress": {
             "title": "Confirm receive address",
             "body": "Confirm that the receive address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+        },
+        "ledgerMigrateIndex": {
+            "title": "Do you need to migrate another Trinity account index?",
+            "body": "You can also migrate another account index later from the Settings."
         }
     },
     "charts": {

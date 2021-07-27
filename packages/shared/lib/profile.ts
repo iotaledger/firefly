@@ -40,6 +40,7 @@ export interface Profile {
     isDeveloperProfile: boolean
     gapLimit?: number
     profileType?: ProfileType
+    hasVisitedDashboard?: boolean
 }
 
 /**
