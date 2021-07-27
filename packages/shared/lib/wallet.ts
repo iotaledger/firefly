@@ -257,6 +257,7 @@ export const api: {
     ),
     getMigrationAddress(
         prompt: boolean,
+        accountIndex: number,
         callbacks: { onSuccess: (response: Event<GetMigrationAddressResponse>) => void, onError: (err: ErrorEventPayload) => void }
     ),
     mineBundle(

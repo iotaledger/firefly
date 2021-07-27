@@ -21,7 +21,14 @@
         unmigratedBundles,
     } from 'shared/lib/migration'
     import { closePopup } from 'shared/lib/popup'
-    import { newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
+    import {
+        activeProfile,
+        newProfile,
+        profileInProgress,
+        saveProfile,
+        setActiveProfile,
+        updateProfile,
+    } from 'shared/lib/profile'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
     import { createEventDispatcher, onDestroy } from 'svelte'
@@ -235,6 +242,11 @@
     }
 
     function persistProfile() {
+        if (legacyLedger && !$newProfile) {
+            updateProfile('ledgerMigrationCount', $activeProfile.ledgerMigrationCount + 1)
+            return
+        }
+
         // When the first migration bundle is broadcast, then persist profile
         saveProfile($newProfile)
         setActiveProfile($newProfile.id)
