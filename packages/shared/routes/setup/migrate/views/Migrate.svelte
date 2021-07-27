@@ -26,7 +26,7 @@
     } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
-    import { activeProfile,  newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
+    import { activeProfile,  newProfile, profileInProgress, saveProfile, setActiveProfile, updateProfile } from 'shared/lib/profile'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
     import { formatUnitBestMatch } from 'shared/lib/units'

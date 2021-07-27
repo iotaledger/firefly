@@ -235,9 +235,9 @@ export const api = {
         ((__ids: CommunicationIds) => Promise<string>) {
         return (__ids: CommunicationIds) => _sendMigrationBundle(sendMessage, __ids, nodes, bundleHash, mwm)
     },
-    getMigrationAddress: function (prompt: boolean):
+    getMigrationAddress: function (prompt: boolean, accountIndex: number):
         ((__ids: CommunicationIds) => Promise<string>) {
-        return (__ids: CommunicationIds) => _getMigrationAddreess(sendMessage, __ids, prompt)
+        return (__ids: CommunicationIds) => _getMigrationAddreess(sendMessage, __ids, prompt, accountIndex)
     },
     mineBundle: function (bundle: string[], spentBundleHashes: string[], securityLevel: number, timeout: number, offset: number):
         ((__ids: CommunicationIds) => Promise<string>) {

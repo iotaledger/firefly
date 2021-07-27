@@ -398,10 +398,10 @@ export const getLedgerMigrationData = (getAddressFn: (index: number) => Promise<
  */
 export const mineLedgerBundle = (
     bundleIndex: number,
-    offset: number
+    offset: number,
 ): Promise<void> => {
     return new Promise((resolve, reject) => {
-        api.getMigrationAddress(false, {
+        api.getMigrationAddress(false, get(activeProfile).ledgerMigrationCount, {
             onSuccess(response) {
                 resolve(response.payload)
             },
@@ -530,7 +530,7 @@ export const createLedgerMigrationBundle = (
     callback: () => void
 ): Promise<any> => {
     return new Promise((resolve, reject) => {
-        api.getMigrationAddress(false, {
+        api.getMigrationAddress(false, get(activeProfile).ledgerMigrationCount, {
             onSuccess(response) {
                 resolve(response.payload);
             },
