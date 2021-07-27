@@ -275,3 +275,8 @@ export const resetWalletRoute = () => {
     accountRoute.set(AccountRoutes.Init)
     selectedAccountId.set(null)
 }
+
+export const resetLedgerRoute = () => {
+    ledgerRoute.set(LedgerRoutes.LegacyIntro)
+    ledgerRouteHistory.set([])
+}

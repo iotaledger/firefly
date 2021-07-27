@@ -11,7 +11,7 @@
     import { Electron } from 'shared/lib/electron'
     import { LOG_FILE_NAME, migration, migrationLog, resetMigrationState, totalMigratedBalance } from 'shared/lib/migration'
     import { activeProfile, newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
-    import { walletSetupType } from 'shared/lib/router'
+    import { resetLedgerRoute, walletSetupType } from 'shared/lib/router'
     import { LedgerAppName } from 'shared/lib/typings/ledger'
     import { SetupType } from 'shared/lib/typings/routes'
     import { formatUnitBestMatch } from 'shared/lib/units'
@@ -88,6 +88,7 @@
         if (wasMigrated) {
             resetMigrationState()
         }
+        resetLedgerRoute()
     })
 </script>
 
