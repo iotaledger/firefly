@@ -267,6 +267,8 @@ export const resetRouter = () => {
     settingsRoute.set(SettingsRoutes.Init)
     dashboardRoute.set(Tabs.Wallet)
     deepLinkRequestActive.set(false)
+
+    resetLedgerRoute()
 }
 
 export const resetWalletRoute = () => {
@@ -274,4 +276,9 @@ export const resetWalletRoute = () => {
     walletRoute.set(WalletRoutes.Init)
     accountRoute.set(AccountRoutes.Init)
     selectedAccountId.set(null)
+}
+
+export const resetLedgerRoute = () => {
+    ledgerRoute.set(LedgerRoutes.LegacyIntro)
+    ledgerRouteHistory.set([])
 }
