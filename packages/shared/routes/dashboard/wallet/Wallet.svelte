@@ -2,7 +2,7 @@
     import { DashboardPane } from 'shared/components'
     import { clearSendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
-    import { isLedgerError, displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { addProfileCurrencyPriceData, priceData } from 'shared/lib/marketData'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup } from 'shared/lib/popup'
@@ -16,7 +16,7 @@
         updateProfile,
     } from 'shared/lib/profile'
     import { walletRoute } from 'shared/lib/router'
-    import { TransferProgressEventType } from 'shared/lib/typings/events'
+    import { TransferProgressEventType, ErrorType } from 'shared/lib/typings/events'
     import type { Transaction } from 'shared/lib/typings/message'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import {
@@ -49,7 +49,7 @@
         WalletAccount,
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
-    import { derived, get, Readable, Writable } from 'svelte/store'
+    import { derived, Readable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
 
     export let locale
@@ -143,11 +143,13 @@
             console.error(error)
 
             if ($isLedgerProfile) {
-                displayNotificationForLedgerProfile('error', true, true, false, false, error)
+                if (error.type !== ErrorType.LedgerDeviceNotFound) {
+                    displayNotificationForLedgerProfile('error', true, true, false, false, error)
+                }
             } else {
                 showAppNotification({
                     type: 'error',
-                    message: locale(error?.error || 'error.global.generic')
+                    message: locale(error?.error || 'error.global.generic'),
                 })
             }
         }
@@ -246,7 +248,7 @@
         const _generate = () => {
             isGeneratingAddress = true
 
-            if($isLedgerProfile) displayNotificationForLedgerProfile('error', true, true)
+            if ($isLedgerProfile) displayNotificationForLedgerProfile('error', true, true)
 
             api.getUnusedAddress(accountId, {
                 onSuccess(response) {
