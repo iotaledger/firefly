@@ -250,6 +250,7 @@ export function formatAddressForLedger(address: string, removeChecksum: boolean 
 }
 
 export function navigateToNewIndexMigration() {
+    resetWalletRoute()
     walletSetupType.set(SetupType.TrinityLedger)
     forceNextRoute(AppRoute.LedgerSetup)
 }
