@@ -26,7 +26,7 @@
             "learnMore": "Learn about the migration"
         },
         "secure": {
-            "title": "Secure your wallet",
+            "title": "Zaščiti svojo denarnico",
             "body1": "Save and print the Recovery Kit PDF template.",
             "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallets."
         },
@@ -61,27 +61,27 @@
             "action": "Yes, I've installed these apps"
         },
         "password": {
-            "title": "Create a password",
+            "title": "Ustvari geslo",
             "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
             "body2": "It is recommended that you write down your password in your Recovery Kit."
         },
         "protect": {
             "title": "Protect your wallet",
             "body1": "Set up a login PIN to make sure that only you can enter your profile.",
-            "body2": "Keep your PIN safe!"
+            "body2": "Ohranite vašo PIN kodo varno!"
         },
         "pin": {
             "title": "Nastavi PIN kodo",
             "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
-            "body2": "Use numbers only"
+            "body2": "Uporabi samo števila"
         },
         "confirmPin": {
-            "title": "Verify your PIN code",
+            "title": "Preveri tvojo PIN kodo",
             "body1": "Your PIN keeps your balance and transactions private.",
             "body2": "Re-enter your PIN code to proceed. "
         },
         "backup": {
-            "title": "Back up your wallet",
+            "title": "Shrani tvojo denarnico",
             "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
             "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
             "body3": "If you lose your recovery phrase, you may lose your funds."
@@ -97,7 +97,7 @@
         "verifyRecoveryPhrase": {
             "title": "Verify recovery phrase",
             "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
-            "word": "Word",
+            "word": "Beseda",
             "verified": "Recovery phrase verified",
             "verifiedBody": "Remember to keep it private and safely stored."
         },
@@ -180,13 +180,13 @@
             "readMore": "What to expect from the migration process"
         },
         "generateNewLedgerAddress": {
-            "title": "Generate new address",
+            "title": "Ustvari nov naslov",
             "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
-            "confirmTitle": "Confirm the new address",
+            "confirmTitle": "Potrditev novega naslova",
             "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
-            "confirmedTitle": "Address confirmed",
+            "confirmedTitle": "Naslov potrjen",
             "confirmedBody": "You have confirmed that the address in Firefly matches the one on your Ledger device.",
-            "generating": "Generating address"
+            "generating": "Ustvarjanje naslova"
         },
         "switchLedgerApps": {
             "title": "Switch Ledger apps",
@@ -195,7 +195,7 @@
             "ledgerLegacyApp": "IOTA Legacy"
         },
         "selectLedgerAccountIndex": {
-            "title": "Choose Ledger account index",
+            "title": "Izberite indeks Ledger računa",
             "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
             "accountIndex": "Indeks računa",
             "accountPage": "Stran računa",
@@ -215,8 +215,8 @@
             "title": "Migrate your funds",
             "body1": "This is an automated process to transfer your funds to your new wallet.",
             "body2": "It may take some time. Do not turn off your device during the migration.",
-            "existing": "Your old wallet",
-            "new": "Your new wallet",
+            "existing": "Vaša stara denarnica",
+            "new": "Vaša nova denarnica",
             "learn": "Learn about the migration",
             "beginMigration": "Begin Migration",
             "migrating": "Migrating funds...",
@@ -224,8 +224,8 @@
             "migrationFailed": "Migration Failed",
             "noAddressesForMigration": "Please select the addresses you wish to secure.",
             "restoringWallet": "Restoring wallet...",
-            "findingBalance": "Finding balance...",
-            "incorrectSeedVaultPassword": "Incorrect SeedVault password.",
+            "findingBalance": "Iskanje sredstev...",
+            "incorrectSeedVaultPassword": "Nepravilno SeedVault geslo.",
             "noDataSeedVault": "No data could be found in the SeedVault.",
             "signingBundle": "Signing bundle",
             "broadcastingBundle": "Broadcasting bundle",
@@ -237,7 +237,7 @@
             "error": "There was an error migrating your funds. Please try again."
         },
         "bundleMiningWarning": {
-            "title": "Warning",
+            "title": "Opozorilo",
             "body1": "You have funds on one or more spent addresses.",
             "body2": "We recommend you run an automated process to help secure and transfer these funds safely.",
             "body3": "If you close the app you will need to restart the whole migration.",
@@ -293,7 +293,7 @@
                 "description": "Tools and manual settings for technical users"
             },
             "helpAndInfo": {
-                "title": "Help & Information",
+                "title": "Pomoč in Informacije",
                 "description": "Find the answer to a question or get help with an issue"
             },
             "profile": {
@@ -301,7 +301,7 @@
                 "description": "Change your profile name or set an avatar"
             },
             "sync": {
-                "title": "Sync wallets",
+                "title": "Sinhroniziraj denarnice",
                 "description": ""
             },
             "theme": {
@@ -321,7 +321,7 @@
                 "description": "System notifications for transaction events"
             },
             "networkStatus": {
-                "title": "Network status",
+                "title": "Stanje omrežja",
                 "description": "Displays the status of the node you are currently connected to."
             },
             "exportStronghold": {
@@ -339,23 +339,23 @@
                 "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
             },
             "changePincode": {
-                "title": "Change PIN code",
+                "title": "Spremeni PIN kodo",
                 "description": "Your PIN keeps your balance and transactions private",
-                "currentPincode": "Current PIN",
-                "newPincode": "New PIN",
-                "confirmNewPincode": "Confirm new PIN",
-                "action": "Change PIN"
+                "currentPincode": "Trenutna koda PIN",
+                "newPincode": "Nova koda PIN",
+                "confirmNewPincode": "Potrdi novo kodo PIN",
+                "action": "Zamenjaj kodo PIN"
             },
             "balanceFinder": {
                 "title": "Balance finder",
                 "description": "Perform an extended search of your addresses for tokens"
             },
             "hiddenAccounts": {
-                "title": "Hidden wallets",
+                "title": "Skrite denarnice",
                 "description": "Selecting this options will show wallets that were previously hidden"
             },
             "deleteProfile": {
-                "title": "Delete profile",
+                "title": "Izbriši profil",
                 "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
             },
             "deepLinks": {
@@ -367,18 +367,18 @@
                 "description": "Connect to testnets and other developer features"
             },
             "nodeSettings": {
-                "title": "Node settings",
+                "title": "Node nastavitve",
                 "description": "Select Manual to configure the node settings and connect to your own node"
             },
             "configureNodeList": {
-                "title": "Select a node",
+                "title": "Izberi Node",
                 "description": "Manage the list of IOTA network nodes you connect to",
-                "primaryNode": "Primary node",
-                "excludeNode": "Exclude node",
-                "includeNode": "Include node",
+                "primaryNode": "Primarni node",
+                "excludeNode": "Izključi node",
+                "includeNode": "Vključi node",
                 "viewDetails": "Poglej podrobnosti",
-                "setAsPrimary": "Set as primary",
-                "removeNode": "Remove node",
+                "setAsPrimary": "Nastavi kot primaren",
+                "removeNode": "Izbriši node",
                 "includeOfficialNodeList": "Include official node list",
                 "noNodes": "There are no nodes, automatic selection will be used instead"
             },
@@ -444,13 +444,13 @@
                         "locked": "Zaklenjeno",
                         "mnemonicMismatch": "Wrong Ledger or Mnemonic",
                         "notDetected": "Not Detected",
-                        "otherConnected": "App Open"
+                        "otherConnected": "Aplikacija odprta"
                     }
                 },
                 "strongholdStatus": {
-                    "title": "Wallet Status",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "title": "Stanje Denarnice",
+                    "locked": "Zaklenjeno",
+                    "unlocked": "Odklenjeno"
                 },
                 "strongholdBackup": {
                     "title": "Wallet Backup",
@@ -461,7 +461,7 @@
                 "networkOperational": "Network Operational",
                 "networkDegraded": "Network Degraded",
                 "networkDown": "Network Disconnected",
-                "status": "Status",
+                "status": "Stanje",
                 "messagesPerSecond": "Messages per second",
                 "referencedRate": "Referenced rate"
             },
@@ -501,7 +501,7 @@
             "title": "Delete {name}?",
             "body": "This wallet has no transaction history. It can safely be deleted.",
             "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Delete wallet",
+            "hideAccount": "Izbriši denarnico",
             "errorTitle": "Unable to delete {name}",
             "errorBody1": "You cannot delete this wallet, you must have at least one."
         },
@@ -509,7 +509,7 @@
             "title": "Hide {name}?",
             "body": "You can find this wallet later by enabling \"Show hidden wallets\" in Advanced Settings.",
             "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Hide wallet",
+            "hideAccount": "Skrij denarnico",
             "errorTitle": "Unable to hide {name}",
             "errorBody1": "To hide a wallet it must have 0 balance.",
             "errorBody2": "You currently have {balance} remaining on this wallet. Please move these funds to a different wallet and try again.",
@@ -520,10 +520,10 @@
             "currentBalance": "Current balance: {balance}"
         },
         "node": {
-            "titleAdd": "Add a node",
-            "titleUpdate": "Update a node",
-            "titleRemove": "Remove a node",
-            "titleDetails": "Node details",
+            "titleAdd": "Dodaj Node",
+            "titleUpdate": "Obnovi Node",
+            "titleRemove": "Izbriši Node",
+            "titleDetails": "Podrobnosti Node",
             "nodeAddress": "Node address",
             "optionalUsername": "Username (optional)",
             "optionalPassword": "Password (optional)",
@@ -535,7 +535,7 @@
             "empty": "The error log is empty."
         },
         "deleteProfile": {
-            "title": "Delete profile",
+            "title": "Izbriši profil",
             "confirmation": "Are you sure you want to delete this profile? This operation cannot be undone.",
             "typePassword": "Type your password to confirm."
         },
@@ -628,8 +628,8 @@
         "accountValue": "Wallet Value",
         "accountActivity": "Wallet Activity",
         "timeframe1Hour": "1 ura",
-        "timeframe1Day": "1 day",
-        "timeframe1Week": "1 week",
+        "timeframe1Day": "1 dan",
+        "timeframe1Week": "1 teden",
         "timeframe1Month": "1 month"
     },
     "actions": {
@@ -650,27 +650,27 @@
         "savePassword": "Save password",
         "useBiometric": "Use biometric security",
         "setupPin": "Nastavi PIN kodo",
-        "setPin": "Set PIN code",
-        "confirmPin": "Confirm PIN code",
-        "enterYourPin": "Enter your PIN",
-        "saveBackupFile": "Save backup file",
+        "setPin": "Nastavi PIN kodo",
+        "confirmPin": "Potrdi PIN kodo",
+        "enterYourPin": "Vnesi PIN kodo",
+        "saveBackupFile": "Shrani varnostno kopijo datoteke",
         "iveWrittenRecoveryPhrase": "I’ve written down my recovery phrase",
         "verifyRecoveryPhrase": "Verify recovery phrase",
         "revealRecoveryPhrase": "Reveal recovery phrase",
         "importSeedvault": "Import SeedVault",
-        "checkAgain": "Check Again",
+        "checkAgain": "Preveri Znova",
         "importFromFile": "Import from a file",
         "send": "Pošlji",
         "receive": "Prejmi",
         "create": "Ustvari",
         "beginTransfer": "Begin Transfer",
         "tryAgain": "Poskusi znova",
-        "visitDiscord": "Visit Discord",
-        "dragDrop": "Drag & Drop",
-        "importExtentions": ".kdbx or .stronghold file",
-        "chooseFile": "Choose a File",
-        "dropHere": "Drop your file here",
-        "syncAll": "Sync all",
+        "visitDiscord": "Obišči Discord",
+        "dragDrop": "Povleci in spusti",
+        "importExtentions": ".kdbx ali .stronghold datoteka",
+        "chooseFile": "Izberi datoteko",
+        "dropHere": "Spusti datoteko tukaj",
+        "syncAll": "Sinhr. vse",
         "export": "Izvoz",
         "exportNewStronghold": "Export a new Stronghold",
         "enableDeepLinks": "Enable deep links",
@@ -679,25 +679,25 @@
         "exportState": "Export state",
         "localProofOfWork": "Local proof of work",
         "unlock": "Odkleni",
-        "updateFirefly": "Update Firefly",
-        "restartNow": "Restart now",
+        "updateFirefly": "Posodobi Firefly",
+        "restartNow": "Ponovno zaženi zdaj",
         "saveBackup": "Save Stronghold backup",
         "customizeAcount": "Customise wallet",
         "viewAddressHistory": "View address history",
-        "hideAccount": "Hide wallet",
-        "showAccount": "Unhide wallet",
-        "deleteAccount": "Delete wallet",
-        "max": "Max",
-        "addNode": "Add node",
-        "updateNode": "Update node",
-        "removeNode": "Remove node",
-        "hide": "Hide",
-        "hideOthers": "Hide Others",
-        "showAll": "Show All",
-        "quit": "Quit",
-        "edit": "Edit",
-        "undo": "Undo",
-        "redo": "Redo",
+        "hideAccount": "Skrij denarnico",
+        "showAccount": "Prikaži denarnico",
+        "deleteAccount": "Izbriši denarnico",
+        "max": "Največ",
+        "addNode": "Dodaj Node",
+        "updateNode": "Posodobi Node",
+        "removeNode": "Izbriši node",
+        "hide": "Skrij",
+        "hideOthers": "Skrij ostale",
+        "showAll": "Prikaži vse",
+        "quit": "Izhod",
+        "edit": "Uredi",
+        "undo": "Razveljavi",
+        "redo": "Ponovi",
         "cut": "Izreži",
         "copy": "Kopiraj",
         "paste": "Prilepi",
@@ -714,8 +714,8 @@
         "reset": "Ponastavi",
         "downloadRecoveryKit": "Save Recovery Kit template",
         "skipBackup": "Skip file backup",
-        "finishSetup": "Finish setup",
-        "readDocumentation": "Read the documentation",
+        "finishSetup": "Zaključi nastavitev",
+        "readDocumentation": "Preberi dokumentacijo",
         "visitFaq": "Visit FAQ",
         "viewStatus": "View status",
         "showHiddenAccounts": "Show hidden wallets",
@@ -750,59 +750,59 @@
         "manageAccount": "Manage Wallet",
         "customizeAcount": "Customize your wallet",
         "account": "Denarnica",
-        "sendingToAddress": "Sending to address",
-        "amount": "Amount",
-        "addAddress": "Add Address",
-        "reference": "Reference",
-        "from": "From",
-        "to": "To",
+        "sendingToAddress": "Pošiljanje na naslov",
+        "amount": "Količina",
+        "addAddress": "Dodaj naslov",
+        "reference": "Sklic",
+        "from": "Od",
+        "to": "Za",
         "receiveFunds": "Receive Funds",
-        "myAddress": "My Address",
-        "shareAddress": "Share an address",
-        "yourAddress": "Your address",
+        "myAddress": "Moj Naslov",
+        "shareAddress": "Delite naslov",
+        "yourAddress": "Vaš naslov",
         "newRemainder": "New Remainder",
         "remainder": "Remainder",
-        "generateNewAddress": "Generate new address",
-        "copyAddress": "Copy Address",
-        "import": "Import",
+        "generateNewAddress": "Ustvari nov naslov",
+        "copyAddress": "Kopiraj naslov",
+        "import": "Uvozi",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
-        "language": "Language",
-        "appearance": "Appearance",
-        "lightTheme": "Light theme",
-        "darkTheme": "Dark theme",
-        "balance": "Balance",
-        "accountBalance": "Wallet Balance",
-        "incoming": "Incoming",
-        "outgoing": "Outgoing",
+        "language": "Jezik",
+        "appearance": "Videz",
+        "lightTheme": "Svetla tema",
+        "darkTheme": "Temna tema",
+        "balance": "Stanje",
+        "accountBalance": "Stanje denarnice",
+        "incoming": "Prihodna",
+        "outgoing": "Odhodna",
         "totalIn": "Total in",
         "totalOut": "Total out",
-        "accounts": "Wallets",
-        "myAccounts": "My Wallets",
-        "automaticNodeSelection": "Automatic node selection",
-        "manualNodeSelection": "Manual node selection",
-        "profiles": "Profiles",
-        "developerProfile": "Developer Profile",
+        "accounts": "Denarnice",
+        "myAccounts": "Moje denarnice",
+        "automaticNodeSelection": "Avtomatski izbor Node",
+        "manualNodeSelection": "Ročna izbira Node",
+        "profiles": "Profili",
+        "developerProfile": "Profil razvijalca",
         "developerProfileDescription": "Allows you to connect to testnets",
         "dev": "Dev",
-        "createAccount": "Create a Wallet",
-        "accountName": "Wallet name",
-        "latestTransactions": "Latest Transactions",
-        "transactions": "Transactions",
+        "createAccount": "Ustvari denarnico",
+        "accountName": "Ime denarnice",
+        "latestTransactions": "Zadnje transakcije",
+        "transactions": "Transakcije",
         "security": "Varnost",
-        "accountAddress": "Wallet Address",
+        "accountAddress": "Naslov Denarnice",
         "nodes": "Nodes",
-        "wallet": "Wallet",
-        "help": "Help",
-        "you": "You",
-        "messageId": "Message ID",
+        "wallet": "Denarnica",
+        "help": "Pomoč",
+        "you": "Vi",
+        "messageId": "ID sporočila",
         "inputAddress": "Send Address",
         "receiveAddress": "Receive Address",
         "newAddress": "New Address",
-        "date": "Date",
-        "status": "Status",
-        "confirmed": "Confirmed",
-        "pending": "Pending",
+        "date": "Datum",
+        "status": "Stanje",
+        "confirmed": "Potrjeno",
+        "pending": "Na čakanju",
         "noAccounts": "You have no wallets, please create one.",
         "loadingAccounts": "Loading, please wait...",
         "addProfile": "Add Profile",
