@@ -22,7 +22,7 @@ const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
 let polling = false
 let intervalTimer
 
-export const ledgerSimulator = false
+export const ledgerSimulator = true
 export const ledgerDeviceState = writable<LedgerDeviceState>(LedgerDeviceState.NotDetected)
 export const isLedgerLegacyConnected = writable<boolean>(false)
 

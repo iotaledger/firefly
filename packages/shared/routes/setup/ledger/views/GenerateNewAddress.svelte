@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { activeProfile } from 'shared/lib/profile'
     import { Animation, Button, Icon, OnboardingLayout, Spinner, Text } from 'shared/components'
     import {
         formatAddressForLedger,
@@ -30,42 +31,49 @@
         newAddress = null
         busy = true
 
+        const _createAccount = (idx) => {
+            const officialNodes = getOfficialNodes()
+            const officialNetwork = getOfficialNetwork()
+            api.createAccount(
+                {
+                    clientOptions: {
+                        nodes: officialNodes,
+                        node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
+                        network: officialNetwork,
+                    },
+                    alias: `${locale('general.account')} ${idx}`,
+                    signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
+                },
+                {
+                    onSuccess(createAccountResponse) {
+                        newAddress = createAccountResponse.payload.addresses[0].address
+
+                        displayAddress()
+                    },
+                    onError(error) {
+                        busy = false
+
+                        console.error(error)
+
+                        displayNotificationForLedgerProfile('error', true, true, false, false, error)
+                    },
+                }
+            )
+        }
+
         const _onConnected = () => {
             api.getAccounts({
                 onSuccess(getAccountsResponse) {
-                    // If we have already created an account, just get the first address of the first account
+                    console.log('Active profile', $activeProfile)
                     if (getAccountsResponse.payload.length > 0) {
-                        newAddress = getAccountsResponse.payload[0].addresses[0].address
-
-                        displayAddress()
+                        if (getAccountsResponse.payload[$activeProfile.ledgerMigrationCount]) {
+                            newAddress = getAccountsResponse.payload[0].addresses[0].address
+                            displayAddress()
+                        } else {
+                            _createAccount($activeProfile.ledgerMigrationCount + 1)
+                        }
                     } else {
-                        const officialNodes = getOfficialNodes()
-                        const officialNetwork = getOfficialNetwork()
-                        api.createAccount(
-                            {
-                                clientOptions: {
-                                    nodes: officialNodes,
-                                    node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
-                                    network: officialNetwork,
-                                },
-                                alias: `${locale('general.account')} 1`,
-                                signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
-                            },
-                            {
-                                onSuccess(createAccountResponse) {
-                                    newAddress = createAccountResponse.payload.addresses[0].address
-
-                                    displayAddress()
-                                },
-                                onError(error) {
-                                    busy = false
-
-                                    console.error(error)
-
-                                    displayNotificationForLedgerProfile('error', true, true, false, false, error)
-                                },
-                            }
-                        )
+                        _createAccount(1)
                     }
                 },
                 onError(getAccountsError) {
@@ -80,7 +88,7 @@
     }
 
     function displayAddress() {
-        api.getMigrationAddress(true, {
+        api.getMigrationAddress(true, $activeProfile.ledgerMigrationCount, {
             onSuccess() {
                 busy = false
 

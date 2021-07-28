@@ -23,12 +23,13 @@
     $: $ledgerRoute, updateMigrationProgress()
 
     onMount(() => {
-        initialiseMigrationListeners();
-
-        if ($walletSetupType === SetupType.New || $walletSetupType === SetupType.FireflyLedger) {
-            ledgerRoute.set(LedgerRoutes.Connect)
-        } else {
-            ledgerRoute.set(LedgerRoutes.LegacyIntro)
+        // reinitialize the init view only if we are not in the middle of a ledger flow
+        if (!$ledgerRouteHistory.length) {
+            if ($walletSetupType === SetupType.New || $walletSetupType === SetupType.FireflyLedger) {
+                ledgerRoute.set(LedgerRoutes.Connect)
+            } else {
+                ledgerRoute.set(LedgerRoutes.LegacyIntro)
+            }
         }
     })
 

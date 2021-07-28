@@ -176,13 +176,17 @@ export function sendMigrationBundle(
 export function getMigrationAddress(
     bridge: Bridge,
     __ids: CommunicationIds,
-    prompt: boolean
+    ledgerPrompt: boolean,
+    accountIndex: number
 ) {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
         cmd: 'GetMigrationAddress',
-        payload: prompt
+        payload: {
+            ledger_prompt: ledgerPrompt,
+            account_id: accountIndex
+        }
     })
 }
 

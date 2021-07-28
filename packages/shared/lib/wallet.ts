@@ -257,6 +257,7 @@ export const api: {
     ),
     getMigrationAddress(
         prompt: boolean,
+        accountIndex: number,
         callbacks: { onSuccess: (response: Event<GetMigrationAddressResponse>) => void, onError: (err: ErrorEventPayload) => void }
     ),
     mineBundle(
@@ -522,9 +523,9 @@ export const asyncSyncAccounts = (addressIndex?, gapLimit?, accountDiscoveryThre
             onSuccess(response) {
                 const syncedAccounts = response.payload
 
-                const firstAccount = syncedAccounts.find(account => account.index === 0)
-
-                processMigratedTransactions(firstAccount.id, firstAccount.messages, firstAccount.addresses)
+                syncedAccounts.forEach((account) => {
+                    processMigratedTransactions(account.id, account.messages, account.addresses)
+                })
 
                 updateAccounts(syncedAccounts)
 
@@ -1396,8 +1397,7 @@ export const processMigratedTransactions = (accountId: string, messages: Message
         if (message.payload?.type === 'Milestone') {
             const account = get(accounts).find((account) => account.id === accountId);
 
-            // Only check migrated messages for first account as the migrated messages are sent there
-            if (account && account.index === 0) {
+            if (account) {
                 const _activeProfile = get(activeProfile)
 
                 if (_activeProfile.migratedTransactions && _activeProfile.migratedTransactions.length) {

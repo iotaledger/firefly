@@ -118,6 +118,7 @@ pub async fn init<A: Into<String>>(
         .expect("safe to unwrap, the storage password is None")
         .with_skip_polling()
         .with_sync_spent_outputs()
+        .with_multiple_empty_accounts()
         .finish()
         .await
         .expect("failed to init account manager");
