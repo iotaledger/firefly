@@ -5,7 +5,7 @@
     import { chrysalisLive, ongoingSnapshot, openSnapshotPopup, pollChrysalisStatus } from 'shared/lib/migration'
     import { NOTIFICATION_TIMEOUT_NEVER, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-    import { activeProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
+    import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
     import { accountRoute, dashboardRoute, routerNext, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
     import { api, selectedAccountId, STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, wallet } from 'shared/lib/wallet'
@@ -159,10 +159,9 @@
         }
     }
     $: if ($activeProfile) {
-        if (!$isSoftwareProfile &&
-            !$activeProfile.hasVisitedDashboard &&
-            !$popupState.active
-        ) {
+        const shouldDisplayMigrationPopup =
+            $isLedgerProfile && !$activeProfile.hasVisitedDashboard && !$popupState.active
+        if (shouldDisplayMigrationPopup) {
             updateProfile('hasVisitedDashboard', true)
 
             openPopup({
