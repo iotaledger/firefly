@@ -51,7 +51,7 @@
     }
 </style>
 
-<div class="flex flex-row {classes}">
+<div class="flex flex-row {disabled && 'opacity-50'} {classes}">
     <button
         {disabled}
         class="group flex items-center justify-center w-8 h-10 border border-solid border-gray-300 dark:border-gray-700"
