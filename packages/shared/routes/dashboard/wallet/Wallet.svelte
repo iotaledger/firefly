@@ -2,7 +2,7 @@
     import { DashboardPane } from 'shared/components'
     import { clearSendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
-    import { isLedgerError, displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { addProfileCurrencyPriceData, priceData } from 'shared/lib/marketData'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup } from 'shared/lib/popup'
@@ -49,7 +49,7 @@
         WalletAccount,
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
-    import { derived, get, Readable, Writable } from 'svelte/store'
+    import { derived, Readable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
 
     export let locale
@@ -122,6 +122,7 @@
     setContext<Readable<BalanceHistory>>('walletBalanceHistory', walletBalanceHistory)
 
     let isGeneratingAddress = false
+    let ledgerLoadError: any = null
 
     // If wallet route or account changes force regeneration of Ledger receive address
     $: {
@@ -143,8 +144,12 @@
         const _onError = (error: any = null) => {
             console.error(error)
 
-            if ($isLedgerProfile) {
-                displayNotificationForLedgerProfile('error', true, true, false, false, error)
+            if($isLedgerProfile) {
+                if(ledgerLoadError === null) {
+                    ledgerLoadError = error
+                } else {
+                    displayNotificationForLedgerProfile('error', true, true, false, false, error)
+                }
             } else {
                 showAppNotification({
                     type: 'error',
