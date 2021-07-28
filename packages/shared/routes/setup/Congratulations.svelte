@@ -9,6 +9,7 @@
         formatCurrency,
     } from 'shared/lib/currency'
     import { Electron } from 'shared/lib/electron'
+    import { promptUserToConnectLedger } from 'shared/lib/ledger'
     import { LOG_FILE_NAME, migration, migrationLog, resetMigrationState, totalMigratedBalance } from 'shared/lib/migration'
     import { activeProfile, newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
     import { resetLedgerRoute, walletSetupType } from 'shared/lib/router'
@@ -28,6 +29,7 @@
 
     let localizedBody = 'body'
     let localizedValues = {}
+    let logExported = false
 
     onMount(() => {
         if (!wasMigrated) {
@@ -65,20 +67,39 @@
 
     const handleContinueClick = () => {
         if (wasMigrated) {
-            Electron.getUserDataPath()
-                .then((path) => {
-                    const source = getStoragePath(path, $activeProfile.name)
+            const _continue = () => {
+                if ($walletSetupType === SetupType.TrinityLedger) {
+                    /**
+                     * We check for the new Ledger IOTA app to be connected after migration
+                     * because the last app the user had open was the legacy one
+                     */
+                    promptUserToConnectLedger(false, () => dispatch('next'))
+                } else {
+                    dispatch('next')
+                }
+            }
+            const _exportMigrationLog = () => {
+                Electron.getUserDataPath()
+                    .then((path) => {
+                        const source = getStoragePath(path, $activeProfile.name)
 
-                    return $walletSetupType === SetupType.TrinityLedger
-                        ? Electron.exportLedgerMigrationLog($migrationLog, `${$activeProfile.name}-${LOG_FILE_NAME}`)
-                        : Electron.exportMigrationLog(`${source}/${LOG_FILE_NAME}`, `${$activeProfile.name}-${LOG_FILE_NAME}`)
-                })
-                .then((result) => {
-                    if (result) {
-                        dispatch('next')
-                    }
-                })
-                .catch(console.error)
+                        return $walletSetupType === SetupType.TrinityLedger
+                            ? Electron.exportLedgerMigrationLog($migrationLog, `${$activeProfile.name}-${LOG_FILE_NAME}`)
+                            : Electron.exportMigrationLog(`${source}/${LOG_FILE_NAME}`, `${$activeProfile.name}-${LOG_FILE_NAME}`)
+                    })
+                    .then((result) => {
+                        if (result) {
+                            logExported = true
+                            _continue()
+                        }
+                    })
+                    .catch(console.error)
+            }
+            if (logExported) {
+                _continue()
+            } else {
+                _exportMigrationLog()
+            }
         } else {
             dispatch('next')
         }
@@ -121,7 +142,7 @@
         </div>
         <div slot="leftpane__action">
             <Button classes="w-full" onClick={() => handleContinueClick()}>
-                {locale(`${wasMigrated ? 'views.congratulations.exportMigration' : 'actions.finishSetup'}`)}
+                {locale(`${wasMigrated && !logExported ? 'views.congratulations.exportMigration' : 'actions.finishSetup'}`)}
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
