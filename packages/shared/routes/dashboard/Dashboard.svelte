@@ -4,7 +4,7 @@
     import { Electron } from 'shared/lib/electron'
     import { chrysalisLive, ongoingSnapshot, openSnapshotPopup, pollChrysalisStatus } from 'shared/lib/migration'
     import { NOTIFICATION_TIMEOUT_NEVER, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
-    import { closePopup, openPopup } from 'shared/lib/popup'
+    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isSoftwareProfile, updateProfile, isLedgerProfile } from 'shared/lib/profile'
     import { accountRoute, dashboardRoute, routerNext, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
@@ -159,14 +159,17 @@
         }
     }
     $: if ($activeProfile) {
-        if ($isLedgerProfile && !$activeProfile.hasVisitedDashboard) {
+        const shouldDisplayMigrationPopup =
+            $isLedgerProfile && !$activeProfile.hasVisitedDashboard && !$popupState.active
+        if (shouldDisplayMigrationPopup) {
             updateProfile('hasVisitedDashboard', true)
 
             openPopup({
                 type: 'ledgerMigrateIndex',
+                preventClose: true
             })
         }
-       
+
         if (!get(activeProfile)?.migratedTransactions?.length && migrationNotificationId) {
             removeDisplayNotification(migrationNotificationId)
             migrationNotificationId = null

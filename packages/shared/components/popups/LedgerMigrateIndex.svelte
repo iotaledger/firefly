@@ -6,12 +6,12 @@
     export let locale
 
     function handleYesClick() {
-        closePopup()
+        closePopup(true)
         navigateToNewIndexMigration()
     }
 
     function handleNoClick() {
-        closePopup()
+        closePopup(true)
     }
 </script>
 
