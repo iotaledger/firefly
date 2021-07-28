@@ -47,7 +47,7 @@
             "progress2": "Generate address",
             "progress3": "Switch Ledger app",
             "progress4": "Transfer funds",
-            "watchVideo": "Watch video guide",
+            "watchVideo": "Watch video guide"
         },
         "ledgerInstallationGuide": {
             "title": "Have you installed the necessary Ledger apps?",
