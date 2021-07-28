@@ -176,7 +176,7 @@
      * but there is an active "funds available soon" notification,
      * then we close it
      */
-    $: if (!$activeProfile?.migratedTransactions?.length && fundsSoonNotificationId) {
+    $: if ($activeProfile && !$activeProfile?.migratedTransactions?.length && fundsSoonNotificationId) {
         removeDisplayNotification(fundsSoonNotificationId)
         fundsSoonNotificationId = null
     }
