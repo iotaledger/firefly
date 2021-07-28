@@ -1666,11 +1666,14 @@ export const getMilestoneMessageValue = (payload: Payload, accounts) => {
     if (payload?.type === "Milestone") {
         const funds = payload.data.essence.receipt.data.funds
 
-        const firstAccount = accounts.find((acc) => acc.index === 0)
-        const firstAccountAddresses = firstAccount.addresses.map((address) => address.address)
+        const addresses = [];
+
+        accounts.forEach((account) => {
+            account.addresses.forEach((address) => addresses.push(address.address))
+        })
 
         const totalValue = funds
-            .filter((fund) => firstAccountAddresses.includes(fund.output.address))
+            .filter((fund) => addresses.includes(fund.output.address))
             .reduce((acc, fund) => acc + fund.output.amount, 0)
 
         return totalValue

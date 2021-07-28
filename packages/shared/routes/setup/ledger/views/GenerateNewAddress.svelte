@@ -43,6 +43,9 @@
                     },
                     alias: `${locale('general.account')} ${idx}`,
                     signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
+                    // Only allow for ledger accounts and only for subsequent accounts
+                    // Does not make sense to allow it for first account
+                    allowCreateMultipleEmptyAccounts: ledgerSimulator && idx > 1
                 },
                 {
                     onSuccess(createAccountResponse) {
@@ -64,7 +67,6 @@
         const _onConnected = () => {
             api.getAccounts({
                 onSuccess(getAccountsResponse) {
-                    console.log('Active profile', $activeProfile)
                     if (getAccountsResponse.payload.length > 0) {
                         if (getAccountsResponse.payload[$activeProfile.ledgerMigrationCount]) {
                             newAddress = getAccountsResponse.payload[0].addresses[0].address

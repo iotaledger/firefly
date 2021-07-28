@@ -51,6 +51,7 @@ export interface AccountToCreate {
     signerType: SignerType
     alias?: string
     createdAt?: string
+    allowCreateMultipleEmptyAccounts?: boolean
 }
 
 export interface SyncedAccount {
