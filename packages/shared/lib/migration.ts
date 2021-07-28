@@ -1,13 +1,12 @@
-import { TRANSACTION_LENGTH } from '@iota/transaction'
-import { asTransactionObject } from '@iota/transaction-converter'
 import { addEntry, finalizeBundle } from '@iota/bundle'
 import { tritsToTrytes, trytesToTrits, valueToTrits } from '@iota/converter'
-import { getOfficialNetwork } from 'shared/lib/network'
+import { TRANSACTION_LENGTH } from '@iota/transaction'
+import { asTransactionObject } from '@iota/transaction-converter'
 import { closePopup, openPopup } from 'shared/lib/popup'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
 import { appRoute, walletSetupType } from 'shared/lib/router'
 import type { Address } from 'shared/lib/typings/address'
-import type { Input, MigrationBundle, MigrationData, AddressInput, MigrationAddress, Transfer } from 'shared/lib/typings/migration'
+import type { AddressInput, Input, MigrationAddress, MigrationBundle, MigrationData, Transfer } from 'shared/lib/typings/migration'
 import { AppRoute, SetupType } from 'shared/lib/typings/routes'
 import Validator from 'shared/lib/validator'
 import { api } from 'shared/lib/wallet'
@@ -147,10 +146,6 @@ export const migrationLog = writable<MigrationLog[]>([]);
  */
 export const legacyAddressForTesting = writable<string>(null);
 
-/*
- * Chrysalis status
- */
-export const chrysalisLive = writable<Boolean>(false)
 /*
  * ongoingSnapshot
  */
@@ -1125,112 +1120,6 @@ export const confirmedBundles = derived(get(migration).bundles, (_bundles) => _b
     bundle.selected === true &&
     bundle.confirmed === true
 ))
-
-/**
- * List of chrysalis node endpoints to detect when is live
- */
-export const CHRYSALIS_NODE_ENDPOINTS = ['https://chrysalis-nodes.iota.org/api/v1/info', 'https://chrysalis-nodes.iota.cafe/api/v1/info']
-
-/**
-* Default timeout for a request made to an endpoint
-*/
-const DEFAULT_CHRYSALIS_NODE_ENDPOINT_TIMEOUT = 5000
-/**
- * Default interval for polling the market data
- */
-const DEFAULT_CHRYSALIS_NODE_POLL_INTERVAL = 300000 // 5 minutes
-
-/**
-* Mainnet ID used in a chrysalis node 
-*/
-// TODO: Update to 'mainnet'
-const MAINNET_ID = getOfficialNetwork()
-
-type ChrysalisNode = {
-    data: ChrysalisNodeData
-}
-
-type ChrysalisNodeData = {
-    networkId: string
-}
-
-export type ChrysalisNodeDataValidationResponse = {
-    type: 'ChrysalisNode'
-    payload: ChrysalisNode
-}
-
-let chrysalisStatusIntervalID = null
-
-/**
- * Poll the Chrysalis mainnet status at an interval
- */
-export async function pollChrysalisStatus(): Promise<void> {
-    await checkChrysalisStatus()
-    chrysalisStatusIntervalID = setInterval(async () => checkChrysalisStatus(), DEFAULT_CHRYSALIS_NODE_POLL_INTERVAL)
-}
-
-/**
- * Stops Chrysalis mainnet poll
- */
-function stopChrysalisStatusPoll(): void {
-    if (chrysalisStatusIntervalID) {
-        clearInterval(chrysalisStatusIntervalID)
-    }
-}
-
-/**
- * Fetches Chrysalis mainnet status
- *
- * @method fetchMarketData
- *
- * @returns {Promise<void>}
- */
-export async function checkChrysalisStatus(): Promise<void> {
-    const requestOptions: RequestInit = {
-        headers: {
-            Accept: 'application/json',
-        },
-    }
-    for (let index = 0; index < CHRYSALIS_NODE_ENDPOINTS.length; index++) {
-        const endpoint = CHRYSALIS_NODE_ENDPOINTS[index]
-        try {
-            const abortController = new AbortController()
-            const timerId = setTimeout(
-                () => {
-                    if (abortController) {
-                        abortController.abort();
-                    }
-                },
-                DEFAULT_CHRYSALIS_NODE_ENDPOINT_TIMEOUT);
-
-            requestOptions.signal = abortController.signal;
-
-            const response = await fetch(endpoint, requestOptions);
-
-            clearTimeout(timerId)
-
-            const jsonResponse: ChrysalisNode = await response.json()
-
-            const { isValid, payload } = new Validator().performValidation({
-                type: 'ChrysalisNode',
-                payload: jsonResponse,
-            })
-            if (isValid) {
-                const nodeData: ChrysalisNodeData = jsonResponse?.data
-                if (nodeData?.networkId === MAINNET_ID) {
-                    chrysalisLive.set(true)
-                    stopChrysalisStatusPoll()
-                    break
-                }
-            } else {
-                throw new Error(payload.error)
-            }
-            break
-        } catch (err) {
-            console.error(err.name === "AbortError" ? new Error(`Could not fetch from ${endpoint}.`) : err)
-        }
-    }
-}
 
 const CHRYSALIS_VARIABLES_ENDPOINT = 'https://raw.githubusercontent.com/iotaledger/firefly/develop/packages/shared/lib/chrysalis.json'
 const DEFAULT_CHRYSALIS_VARIABLES_ENDPOINT_TIMEOUT = 5000
