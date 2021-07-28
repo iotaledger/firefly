@@ -43,6 +43,7 @@
                     },
                     alias: `${locale('general.account')} ${idx}`,
                     signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
+                    allowCreateMultipleEmptyAccounts: true,
                 },
                 {
                     onSuccess(createAccountResponse) {
@@ -64,7 +65,6 @@
         const _onConnected = () => {
             api.getAccounts({
                 onSuccess(getAccountsResponse) {
-                    console.log('Active profile', $activeProfile)
                     if (getAccountsResponse.payload.length > 0) {
                         if (getAccountsResponse.payload[$activeProfile.ledgerMigrationCount]) {
                             newAddress = getAccountsResponse.payload[0].addresses[0].address

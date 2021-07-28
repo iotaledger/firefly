@@ -1,6 +1,6 @@
 import { removeAddressChecksum } from 'shared/lib/migration'
 import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-import { forceNextRoute, walletSetupType } from 'shared/lib/router'
+import { forceNextRoute, resetWalletRoute, walletSetupType } from 'shared/lib/router'
 import { AppRoute, SetupType } from 'shared/lib/typings/routes'
 import { api } from 'shared/lib/wallet'
 import { get, writable } from 'svelte/store'
@@ -17,12 +17,13 @@ import {
 } from './typings/ledger'
 import type { NotificationType } from './typings/notification'
 
+
 const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
 
 let polling = false
 let intervalTimer
 
-export const ledgerSimulator = true
+export const ledgerSimulator = false
 export const ledgerDeviceState = writable<LedgerDeviceState>(LedgerDeviceState.NotDetected)
 export const isLedgerLegacyConnected = writable<boolean>(false)
 
@@ -38,7 +39,7 @@ export function getLedgerDeviceStatus(
 
             const state = get(ledgerDeviceState)
             const isConnected = (legacy && state === LedgerDeviceState.LegacyConnected)
-                            || (!legacy && state === LedgerDeviceState.Connected)
+                || (!legacy && state === LedgerDeviceState.Connected)
             if (isConnected) {
                 onConnected()
             } else {
@@ -61,9 +62,9 @@ export function calculateLedgerDeviceState(status: LedgerStatus): LedgerDeviceSt
     if (locked) {
         return LedgerDeviceState.Locked
     } else {
-        switch(app?.name) {
+        switch (app?.name) {
             default:
-                if(connected) {
+                if (connected) {
                     /**
                      * NOTE: "BOLOS" is the name of the Ledger operating system and is
                      * sometimes registered as an app.
@@ -134,7 +135,7 @@ export function displayNotificationForLedgerProfile(
         const allowedToNotify = allowMultiple ? true : isNewNotification(notificationType)
         const canNotify = allowedToNotify && (ignoreNotDetected ? state !== LedgerDeviceState.NotDetected : true)
 
-        const isConnected =  (!legacy && state === LedgerDeviceState.Connected)
+        const isConnected = (!legacy && state === LedgerDeviceState.Connected)
         const isLegacyConnected = (legacy && state === LedgerDeviceState.LegacyConnected)
         const shouldNotify = (!isConnected && !isLegacyConnected) || error
 
@@ -153,7 +154,7 @@ export function displayNotificationForLedgerProfile(
     if (checkDeviceStatus) {
         getLedgerDeviceStatus(
             false,
-            () => {},
+            () => { },
             () => _notify(),
             () => _notify()
         )
@@ -165,10 +166,10 @@ export function displayNotificationForLedgerProfile(
 }
 
 export function isLedgerError(error: any): boolean {
-    if(!error) return false
+    if (!error) return false
 
     let errorType: string = ''
-    switch(typeof error) {
+    switch (typeof error) {
         case 'object':
             errorType = error.type || error.name
             break
@@ -250,6 +251,7 @@ export function formatAddressForLedger(address: string, removeChecksum: boolean 
 }
 
 export function navigateToNewIndexMigration() {
+    resetWalletRoute()
     walletSetupType.set(SetupType.TrinityLedger)
     forceNextRoute(AppRoute.LedgerSetup)
 }

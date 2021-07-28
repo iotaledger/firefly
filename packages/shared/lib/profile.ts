@@ -240,8 +240,6 @@ export const removeProfile = (id: string): void => {
 export const updateProfile = (
     path: string, value: string | string[] | boolean | Date | number | AvailableExchangeRates | Node | Node[] | ChartSelectors | HistoryDataProps | MigratedTransaction[]) => {
     const _update = (_profile) => {
-        console.log('Path', path);
-        console.log('Value', value);
         const pathList = path.split('.')
 
         pathList.reduce((a, b: keyof Profile | keyof UserSettings, level: number) => {

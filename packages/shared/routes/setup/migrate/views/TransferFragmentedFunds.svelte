@@ -15,20 +15,13 @@
         migration,
         sendLedgerMigrationBundle,
         sendMigrationBundle,
-        unmigratedBundles
+        unmigratedBundles,
     } from 'shared/lib/migration'
     import { closePopup } from 'shared/lib/popup'
-    import {
-        activeProfile,
-        newProfile,
-        profileInProgress,
-        saveProfile,
-        setActiveProfile,
-        updateProfile,
-    } from 'shared/lib/profile'
+    import { newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
-    import { createEventDispatcher, onDestroy, onMount } from 'svelte'
+    import { createEventDispatcher, onDestroy } from 'svelte'
 
     export let locale
     export let mobile

@@ -6,7 +6,7 @@
     import { navigateToNewIndexMigration } from 'shared/lib/ledger'
     import { getOfficialNodes } from 'shared/lib/network'
     import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
+    import { activeProfile, isLedgerProfile, updateProfile } from 'shared/lib/profile'
     import { buildAccountNetworkSettings, updateAccountNetworkSettings } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
 
@@ -272,7 +272,7 @@
             {locale('views.settings.diagnostics.title')}
         </Button>
     </section>
-    {#if !$isSoftwareProfile}
+    {#if $isLedgerProfile}
         <HR classes="pb-5 mt-5 justify-center" />
         <section id="migrateLedgerIndex" class="w-3/4">
             <Text type="h4" classes="mb-3">{locale('views.settings.migrateLedgerIndex.title')}</Text>

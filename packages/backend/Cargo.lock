@@ -1825,7 +1825,7 @@ dependencies = [
 [[package]]
 name = "iota-client"
 version = "1.0.1"
-source = "git+https://github.com/iotaledger/iota.rs?branch=dev#ebf610ef2a5693a7f2e1675243bdf815a08af82e"
+source = "git+https://github.com/iotaledger/iota.rs?branch=dev#9d5f941612829a295a7d13bc04ba28e6ec064d59"
 dependencies = [
  "async-trait",
  "bee-common 0.4.1 (git+https://github.com/iotaledger/bee.git?branch=dev)",
@@ -2005,7 +2005,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.2.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=firefly-testing#c34e91082c9cf729f39c654d550b8144fc4bfc10"
+source = "git+https://github.com/iotaledger/wallet.rs?branch=firefly-testing#410e362911c74b6fa17a9b030f0e766418e9f888"
 dependencies = [
  "async-trait",
  "backtrace",
