@@ -16,7 +16,7 @@
         updateProfile,
     } from 'shared/lib/profile'
     import { walletRoute } from 'shared/lib/router'
-    import { TransferProgressEventType } from 'shared/lib/typings/events'
+    import { TransferProgressEventType, ErrorType } from 'shared/lib/typings/events'
     import type { Transaction } from 'shared/lib/typings/message'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import {
@@ -122,7 +122,6 @@
     setContext<Readable<BalanceHistory>>('walletBalanceHistory', walletBalanceHistory)
 
     let isGeneratingAddress = false
-    let ledgerLoadError: any = null
 
     // If wallet route or account changes force regeneration of Ledger receive address
     $: {
@@ -144,16 +143,14 @@
         const _onError = (error: any = null) => {
             console.error(error)
 
-            if($isLedgerProfile) {
-                if(ledgerLoadError === null) {
-                    ledgerLoadError = error
-                } else {
+            if ($isLedgerProfile) {
+                if (error.type !== ErrorType.LedgerDeviceNotFound) {
                     displayNotificationForLedgerProfile('error', true, true, false, false, error)
                 }
             } else {
                 showAppNotification({
                     type: 'error',
-                    message: locale(error?.error || 'error.global.generic')
+                    message: locale(error?.error || 'error.global.generic'),
                 })
             }
         }
@@ -252,7 +249,7 @@
         const _generate = () => {
             isGeneratingAddress = true
 
-            if($isLedgerProfile) displayNotificationForLedgerProfile('error', true, true)
+            if ($isLedgerProfile) displayNotificationForLedgerProfile('error', true, true)
 
             api.getUnusedAddress(accountId, {
                 onSuccess(response) {
