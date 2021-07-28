@@ -43,9 +43,7 @@
                     },
                     alias: `${locale('general.account')} ${idx}`,
                     signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
-                    // Only allow for ledger accounts and only for subsequent accounts
-                    // Does not make sense to allow it for first account
-                    allowCreateMultipleEmptyAccounts: ledgerSimulator && idx > 1
+                    allowCreateMultipleEmptyAccounts: true,
                 },
                 {
                     onSuccess(createAccountResponse) {
