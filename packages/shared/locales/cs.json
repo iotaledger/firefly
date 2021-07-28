@@ -56,7 +56,7 @@
         },
         "ledgerInstallationGuide": {
             "title": "Nainstalovali jste potřebné aplikace Ledger?",
-            "body1": "Before you proceed, you must find and install both the IOTA Legacy app and the new IOTA app through Ledger Live.",
+            "body1": "Než budete pokračovat, musíte najít a nainstalovat aplikaci IOTA Legacy i novou aplikaci IOTA prostřednictvím Ledger Live.",
             "body2": "Ujistěte se, že je firmware Ledger aktuální. Všechny předinstalované aplikace by měly být aktualizovány na nejnovější verzi.",
             "action": "Ano, nainstaloval jsem tyto aplikace"
         },
@@ -119,7 +119,7 @@
             "body": "Vaše peněženka je připravena k použití.",
             "softwareMigratedBody": "Úspěšně jste převedli své prostředky do nové sítě",
             "fireflyLedgerBody": "Váš účet Ledger byl úspěšně obnoven a nyní můžete pokračovat.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the IOTA Legacy app from your device.",
+            "trinityLedgerBody": "Úspěšně jste přesunuli svou Ledger do nové sítě. Nyní můžete odstranit aplikaci IOTA Legacy z vašeho zařízení.",
             "exportMigration": "Exportovat protokol migrace a dokončit nastavení"
         },
         "import": {
@@ -176,7 +176,7 @@
         "legacyLedgerIntro": {
             "title": "Spusťte migraci do Ledger pomocí Firefly",
             "body1": "Firefly vám pomůže přenést vaše tokeny do nové sítě Chrysalis.",
-            "body2": "After the migration, you will be able to send and receive your tokens using your Ledger with Firefly.",
+            "body2": "Po migraci budete moci posílat a přijímat tokeny pomocí aplikace Ledger s Firefly.",
             "readMore": "Co čekat od procesu migrace"
         },
         "generateNewLedgerAddress": {
@@ -190,7 +190,7 @@
         },
         "switchLedgerApps": {
             "title": "Přepnout aplikace Ledger",
-            "body": "Please switch to the IOTA Legacy app on your Ledger device to continue migration. When ready, press continue.",
+            "body": "Přepněte se prosím na zařízení Ledger do aplikace IOTA Legacy a pokračujte v migraci. Až budete připraveni, stiskněte pokračovat.",
             "ledgerApp": "IOTA",
             "ledgerLegacyApp": "IOTA Legacy"
         },
@@ -440,7 +440,7 @@
                     "statuses": {
                         "appNotOpen": "Aplikace IOTA není otevřena",
                         "connected": "Připojeno",
-                        "legacyConnected": "IOTA Legacy App Open",
+                        "legacyConnected": "IOTA Legacy je otevřená",
                         "locked": "Zamknuto",
                         "mnemonicMismatch": "Špatný Ledger nebo mnemotechnika",
                         "notDetected": "Nezjištěno",
@@ -579,7 +579,7 @@
         },
         "ledgerNotConnected": {
             "connect": "Pro pokračování otevřete novou aplikaci IOTA na Vašem zařízení Ledger",
-            "connectLegacy": "Open the IOTA Legacy app on your Ledger device to continue"
+            "connectLegacy": "Pro pokračování otevřete aplikaci IOTA Legacy na Vašem zařízení Ledger"
         },
         "ledgerConfirmation": {
             "confirm": "Pro pokračování, potvrďte výzvu zobrazenou na Vašem zařízení Ledger"
@@ -589,8 +589,8 @@
             "steps": [
                 "Nainstalovat a otevřít Ledger Live aplikaci",
                 "Ujistěte se, že je Váš Ledger připojen",
-                "Search for apps: IOTA Legacy and IOTA (MIOTA)",
-                "Install both apps: IOTA Legacy and IOTA (MIOTA)",
+                "Vyhledejte aplikace: IOTA Legacy a IOTA (MIOTA)",
+                "Nainstalujte obě aplikace: IOTA Legacy a IOTA (MIOTA)",
                 "Nezapomeňte, že je důležité zavřít Ledger Live před návratem do Firefly"
             ]
         },
@@ -610,8 +610,8 @@
             "transaction": {
                 "title": "Potvrdit transakci",
                 "info": "Potvrďte, že informace o transakci zobrazené na vašem zařízení Ledger odpovídají níže uvedeným informacím. Pokud se shodují, stiskněte na Vašem Ledgeru obě tlačítka, podle vyzvání.",
-                "input": "Input [{index}]",
-                "output": "Output",
+                "input": "Vstup [{index}]",
+                "output": "Výstup",
                 "checksum": "Chk: {checksum}"
             }
         },
@@ -961,8 +961,8 @@
             "notFound": "Zařízení Ledger nenalezeno.",
             "otherConnected": "Na Vašem zařízení Ledger je otevřena špatná aplikace.",
             "generateAddress": "Došlo k chybě při generování adresy.",
-            "timeout": "Timeout exceeded",
-            "disconnected": "Device disconnected"
+            "timeout": "Byl překročen časový limit",
+            "disconnected": "Zařízení odpojeno"
         }
     },
     "tooltips": {

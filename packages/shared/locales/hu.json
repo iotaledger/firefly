@@ -56,7 +56,7 @@
         },
         "ledgerInstallationGuide": {
             "title": "Telepítette a szükéséges Ledger alkalmazásokat?",
-            "body1": "Before you proceed, you must find and install both the IOTA Legacy app and the new IOTA app through Ledger Live.",
+            "body1": "Mielőtt folytatná, meg kell keresnie és telepítenie kell az IOTA Legacy alkalmazást és az új IOTA alkalmazást Ledger Live-on keresztül.",
             "body2": "Győződjön meg, hogy a Ledger firmware a legfrissebb verzióval rendelkezik. Minden előzetesen telepített alkalmazást a legújabb verzióra kell frissíteni.",
             "action": "Igen, feltelepítettem az alkalmazásokat"
         },
@@ -119,7 +119,7 @@
             "body": "Az új tárcája használatra kész.",
             "softwareMigratedBody": "Sikeresen migrálta tokenjeit az új hálózatra",
             "fireflyLedgerBody": "A Ledger számlája sikeresen helyreállt és továbbléphet a folyamatban.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the IOTA Legacy app from your device.",
+            "trinityLedgerBody": "Sikeresen migrálta a Ledger-t az új hálózatra. Mostmár eltávolíthatja az IOTA Legacy applikációt az eszközéről.",
             "exportMigration": "Migrálási napló exportálása és telepítés befejezése"
         },
         "import": {
@@ -190,7 +190,7 @@
         },
         "switchLedgerApps": {
             "title": "Váltás Ledger alkalmazások között",
-            "body": "Please switch to the IOTA Legacy app on your Ledger device to continue migration. When ready, press continue.",
+            "body": "Kérem váltson az IOTA Legacy alkalmazásra a Ledger eszközén a migrálás folytatásához. Amikor végzett, kattintson a folytatásra.",
             "ledgerApp": "IOTA",
             "ledgerLegacyApp": "IOTA Legacy"
         },
@@ -440,7 +440,7 @@
                     "statuses": {
                         "appNotOpen": "IOTA alkalmazás nincs megnyitva",
                         "connected": "Csatlakozva",
-                        "legacyConnected": "IOTA Legacy App Open",
+                        "legacyConnected": "IOTA Legacy alkalmazás megnyitva",
                         "locked": "Lezárva",
                         "mnemonicMismatch": "Téves Ledger vagy emlékeztető mondat",
                         "notDetected": "Nem található",
@@ -579,7 +579,7 @@
         },
         "ledgerNotConnected": {
             "connect": "Nyissa meg az új IOTA alkalmazást Ledger eszközén a folytatáshoz",
-            "connectLegacy": "Open the IOTA Legacy app on your Ledger device to continue"
+            "connectLegacy": "Nyissa meg az IOTA Legacy alkalmazást Ledger eszközén a folytatáshoz"
         },
         "ledgerConfirmation": {
             "confirm": "A folytatáshoz kövesse a megjelenített utasításokat a Ledger eszközén"
@@ -589,8 +589,8 @@
             "steps": [
                 "Ledger Live alkalmazás telepítése és megnyitása",
                 "Győződjön meg, hogy a Ledger csatlakoztatva van",
-                "Search for apps: IOTA Legacy and IOTA (MIOTA)",
-                "Install both apps: IOTA Legacy and IOTA (MIOTA)",
+                "Keresse meg az alkalmazásokat: IOTA Legacy és IOTA (MIOTA)",
+                "Telepítse fel mindkét alkalmazást: IOTA Legacy és IOTA (MIOTA)",
                 "Fontos, hogy zárja be a Ledger Live alkalmazást mielőtt visszatér a Firefly-hoz"
             ]
         },
@@ -610,9 +610,9 @@
             "transaction": {
                 "title": "Küldés jóváhagyása",
                 "info": "Hasonlítsa össze a Ledger eszközén megjelenített tranzakciós adatokat a lent megjelenítettel. Ha megegyeznek, nyomja meg mindkét gombot a Ledger-en, amikor az kéri.",
-                "input": "Input [{index}]",
-                "output": "Output",
-                "checksum": "Chk: {checksum}"
+                "input": "Bemenet [{index}]",
+                "output": "Kimenet",
+                "checksum": "Ellenőrzőkód: {checksum}"
             }
         },
         "ledgerAddress": {
@@ -961,8 +961,8 @@
             "notFound": "Nem található Ledger eszköz.",
             "otherConnected": "Nem megfelelő alkalmazás van megnyitva a Ledger eszközén.",
             "generateAddress": "Hiba történt a cím generálása közben.",
-            "timeout": "Timeout exceeded",
-            "disconnected": "Device disconnected"
+            "timeout": "Időtúllépés",
+            "disconnected": "Eszköz leválasztva"
         }
     },
     "tooltips": {

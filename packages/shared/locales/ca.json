@@ -1,12 +1,12 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Enviar, rebre i gestionar eIs vostres tokens IOTA",
+            "title": "Enviar, Rebre i Gestionar eIs vostres tokens IOTA",
             "body": "Firefly és el programari del moneder oficial de IOTA."
         },
         "legal": {
             "title": "Política de Privacitat i Condicions de Servei",
-            "body": "Consulteu la Política de privacitat i les Condicions del servei.",
+            "body": "Consulteu la Política de Privacitat i les Condicions del Servei.",
             "checkbox": "He llegit i accepto la Política de Privadesa i les Condicions de Servei"
         },
         "appearance": {
@@ -15,19 +15,19 @@
         },
         "profile": {
             "title": "Crear un perfil",
-            "body1": "Podeu crear diversos perfils d'usuari per mantenir separats els vostres criptovalors i millorar la privacitat.",
+            "body1": "Podeu crear diversos perfils d'usuari per gestionar els vostres moneders i millorar la privacitat.",
             "body2": "De moment, comencem pel vostre primer nom de perfil. Podreu afegir altres perfils més endavant.",
             "profileName": "Nom del perfil"
         },
         "setup": {
-            "title": "Configura el criptomoneder",
+            "title": "Configura un moneder",
             "chrysalisTitle": "Actualizació a la Xarxa Chrysalis",
             "chrysalisBody": "A partir del 21 d'Abril, els usuaris podran migrar els seus criptovalors a la nova xarxa Chrysalis. Us recomanem que migreu els vostres criptovalors tan aviat com sigui possible.",
             "learnMore": "Aprendre sobre la migració"
         },
         "secure": {
             "title": "Assegura el criptomoneder",
-            "body1": "Desa i imprimeix el Kit de recuperació en PDF.",
+            "body1": "Desar i imprimir la plantilla de recuperació en PDF.",
             "body2": "Si ompliu el Kit de Recuperació i el deseu en un lloc segur, sempre podreu recuperar els vostres moneders."
         },
         "create": {
@@ -56,7 +56,7 @@
         },
         "ledgerInstallationGuide": {
             "title": "Has instal·lat les aplicacions Ledger necessàries?",
-            "body1": "Before you proceed, you must find and install both the IOTA Legacy app and the new IOTA app through Ledger Live.",
+            "body1": "Abans de continuar, heu de cercar i instal·lar tant l'aplicació IOTA Legacy com la nova aplicació IOTA mitjançant Ledger Live.",
             "body2": "Assegureu-vos que el firmware del Ledger estigui actualitzat. Les aplicacions preinstal·lades s’han d’actualitzar a les seves darreres versions.",
             "action": "Sí, he instal·lat aquestes aplicacions"
         },
@@ -119,7 +119,7 @@
             "body": "Ja es pot utilitzar el criptomoneder nou.",
             "softwareMigratedBody": "Has migrat els vostres fons amb èxit a la nova xarxa",
             "fireflyLedgerBody": "El teu compte de Ledger s'ha recuperat correctament i ara podeu continuar.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the IOTA Legacy app from your device.",
+            "trinityLedgerBody": "S'ha migrat amb èxit el vostre dispositiu Ledger a la nova xarxa. Ja podeu eliminar l’aplicació IOTA Legacy del vostre dispositiu.",
             "exportMigration": "Exporta el registre de migració i finalitza la configuració"
         },
         "import": {
@@ -163,20 +163,20 @@
         },
         "connectLedger": {
             "title": "Conecta el teu Ledger a Firefly",
-            "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed.",
-            "trafficLight1": "Connect and unlock your Ledger with your PIN",
-            "trafficLight2": "Open the new IOTA app on your Ledger",
-            "tips": "Tips if your Ledger isn’t connecting"
+            "body": "Per a que el teu dispositiu Ledger pugui ser trobat per Firefly, assegura't que l'aplicació Ledger Live està tancada.",
+            "trafficLight1": "Connecta i desbloqueja el teu Ledger amb el teu PIN",
+            "trafficLight2": "Obre la nova aplicació de IOTA al teu Ledger",
+            "tips": "Consells si el teu Ledger no pot connectar"
         },
         "restoreFromFireflyLedger": {
-            "title": "Restore Your Ledger Profile",
-            "body": "Press restore to complete the setup process and restore your wallets, balances and transaction history.",
-            "restoring": "Restoring from Ledger..."
+            "title": "Restaura el teu profile de Ledger",
+            "body": "Prem restaurar per a completar la posada a punt i restaurar les teves carteres, balanços i historial de transacció.",
+            "restoring": "Restaurant des de Ledger..."
         },
         "legacyLedgerIntro": {
             "title": "Start your Ledger migration using Firefly",
             "body1": "Firefly will help you to transfer your tokens to the new Chrysalis network.",
-            "body2": "After the migration, you will be able to send and receive your tokens using your Ledger with Firefly.",
+            "body2": "Després de la migració, podreu enviar i rebre criptoactius utilitzant el vostre Ledger amb Firefly.",
             "readMore": "What to expect from the migration process"
         },
         "generateNewLedgerAddress": {
@@ -186,10 +186,10 @@
             "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
             "confirmedTitle": "Address confirmed",
             "confirmedBody": "You have confirmed that the address in Firefly matches the one on your Ledger device.",
-            "generating": "Generating address"
+            "generating": "Generant adreça"
         },
         "switchLedgerApps": {
-            "title": "Switch Ledger apps",
+            "title": "Canvieu entre aplicacions Ledger",
             "body": "Please switch to the IOTA Legacy app on your Ledger device to continue migration. When ready, press continue.",
             "ledgerApp": "IOTA",
             "ledgerLegacyApp": "IOTA Legacy"
@@ -199,7 +199,7 @@
             "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
             "accountIndex": "Account Index",
             "accountPage": "Account Page",
-            "standard": "Standard",
+            "standard": "Estàndard",
             "expert": "Expert"
         },
         "importBackupPassword": {
@@ -276,7 +276,7 @@
             "body": "Assegura't que el teu saldo sigui correcte abans de continuar. Pots tornar-ho a comprovar si no sembla correcte.",
             "error": "L’import mínim de migració és d’1 Mi. Torna-ho a comprovar si el teu saldo no sembla correcte.",
             "zeroBalance": "Torna a comprovar-ho. Si no pots trobar el teu saldo, és possible que hagis introduït el seed malament.",
-            "zeroBalanceLedgerLegacy": "Try checking again. If you still can't find your balance you might have selected the wrong account index."
+            "zeroBalanceLedgerLegacy": "Torna a comprovar-ho. Si no pots trobar el teu saldo, és possible que hagis introduït el seed malament."
         },
         "settings": {
             "settings": "Preferències",
@@ -321,7 +321,7 @@
                 "description": "Notificacions del sistema per a transaccions"
             },
             "networkStatus": {
-                "title": "Network status",
+                "title": "Estat de la xarxa",
                 "description": "Displays the status of the node you are currently connected to."
             },
             "exportStronghold": {
@@ -439,12 +439,12 @@
                     "title": "Dispositiu de maquinari",
                     "statuses": {
                         "appNotOpen": "IOTA App Not Open",
-                        "connected": "Connected",
+                        "connected": "Connectat",
                         "legacyConnected": "IOTA Legacy App Open",
                         "locked": "Blocat",
                         "mnemonicMismatch": "Wrong Ledger or Mnemonic",
-                        "notDetected": "Not Detected",
-                        "otherConnected": "App Open"
+                        "notDetected": "Usuari no detectat",
+                        "otherConnected": "Aplicació oberta"
                     }
                 },
                 "strongholdStatus": {
@@ -578,8 +578,8 @@
             "bodyFirefly": "Firefly està deshabilitat fins que s'hagi completat. La migració dels tokens, després encara serà possible."
         },
         "ledgerNotConnected": {
-            "connect": "Open the new IOTA app on your Ledger device to continue",
-            "connectLegacy": "Open the IOTA Legacy app on your Ledger device to continue"
+            "connect": "Obre la nova aplicació de IOTA al teu dispositiu Ledger per a continuar",
+            "connectLegacy": "Obre láplicació antiga de IOTA al teu dispositiu Ledger per a continuar"
         },
         "ledgerConfirmation": {
             "confirm": "To proceed, confirm the prompt displayed on your Ledger device"
@@ -595,16 +595,16 @@
             ]
         },
         "ledgerConnectionGuide": {
-            "title": "Tips if your Ledger isn’t connecting",
+            "title": "Consells si el teu Ledger no pot connectar",
             "steps": [
-                "Make sure Ledger Live is not open on your computer",
-                "Ensure you have unlocked your Ledger device with your PIN",
-                "Open the new IOTA app on your Ledger device"
+                "Assegura't que Ledger Live no està obert al teu ordinador",
+                "Assegura't que has bloquejat el teu dispositu Ledger amb el teu PIN",
+                "Obre la nova aplicació de IOTA al teu Ledger"
             ]
         },
         "ledgerTransaction": {
             "remainderAddress": {
-                "title": "Confirm remainder address",
+                "title": "Confirma la resta d'adreça",
                 "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
             },
             "transaction": {
@@ -953,16 +953,16 @@
         },
         "ledger": {
             "appNotOpen": "You must open the IOTA app on your Ledger device.",
-            "generic": "There was an error connecting to your Ledger device.",
-            "legacyConnected": "The wrong app is open on your Ledger device.",
-            "locked": "Please unlock your Ledger device by entering the PIN.",
-            "mnemonicMismatch": "You have connected the wrong Ledger device or the mnemonic has changed.",
-            "notDetected": "No Ledger device detected.",
-            "notFound": "Ledger device not found.",
-            "otherConnected": "The wrong app is open on your Ledger device.",
-            "generateAddress": "There was an error generating an address.",
-            "timeout": "Timeout exceeded",
-            "disconnected": "Device disconnected"
+            "generic": "S’ha produït un problema en connectar amb el teu dispositiu Ledger.",
+            "legacyConnected": "L'aplicació incorrecta està oberta al teu dispositu Ledger.",
+            "locked": "Si us plau, desbloqueja el teu dispositiu Ledger utilitzant el PIN.",
+            "mnemonicMismatch": "Has connectat un dispositiu Ledger equivocat or el mnemonic ha canviat.",
+            "notDetected": "Cap dispositiu Ledger detectat.",
+            "notFound": "No s'ha trobat el dispositiu Ledger.",
+            "otherConnected": "L'aplicació incorrecta està oberta al teu dispositu Ledger.",
+            "generateAddress": "Hi ha hagut un error generant l'adreça.",
+            "timeout": "Temps d'espera esgotat",
+            "disconnected": "Dispositiu desconnectat"
         }
     },
     "tooltips": {
