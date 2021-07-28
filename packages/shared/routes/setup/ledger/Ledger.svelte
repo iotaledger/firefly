@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
-    import { currentLedgerMigrationProgress, LedgerMigrationProgress, initialiseMigrationListeners } from 'shared/lib/migration'
+    import { currentLedgerMigrationProgress, LedgerMigrationProgress } from 'shared/lib/migration'
     import { ledgerRoute, ledgerRouteHistory, walletSetupType } from 'shared/lib/router'
     import { LedgerRoutes, SetupType } from 'shared/lib/typings/routes'
     import { createEventDispatcher, onMount } from 'svelte'
