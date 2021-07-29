@@ -147,7 +147,7 @@ export const routerNext = (event) => {
             }
             break
         case AppRoute.Create:
-            const profileType = get(activeProfile)?.profileType
+            const profileType = get(activeProfile)?.type
             if (profileType === ProfileType.Software) {
                 nextRoute = AppRoute.Secure
             } else if (profileType === ProfileType.Ledger || ProfileType.LedgerSimulator) {
@@ -169,7 +169,7 @@ export const routerNext = (event) => {
             if (pin) {
                 walletPin.set(pin)
                 const walletSetupType_ = get(walletSetupType)
-                const profileType = get(activeProfile)?.profileType
+                const profileType = get(activeProfile)?.type
                 if (
                     [SetupType.Mnemonic, SetupType.Stronghold].includes(walletSetupType_)
                 ) {

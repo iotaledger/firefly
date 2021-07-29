@@ -11,7 +11,7 @@ import {
     isLedgerProfile,
     isSoftwareProfile,
     isStrongholdLocked,
-    Profile,
+    Profile, ProfileType,
     updateProfile
 } from 'shared/lib/profile'
 import type {
@@ -1762,16 +1762,34 @@ export const findAccountWithAnyAddress = (addresses: string[], excludeFirst?: Wa
 
 /**
  * Get the sync options for an account
- * @param activeProfile The active profile containing gap limit information (optional)
- * @returns The sync options for an account, which contains data for the gap limit and account discovery threshold
+ * @returns {SyncAccountOptions} The sync options for an account, which contains data for the gap limit and account discovery threshold
  */
-export const getSyncAccountOptions = (activeProfile?: Profile): SyncAccountOptions => {
-    const _isSoftwareProfile = get(isSoftwareProfile)
+export const getSyncAccountOptions = (): SyncAccountOptions => {
+    const _activeProfile = get(activeProfile)
     const _isNewProfile = get(walletSetupType) === SetupType.New
+    console.log('AP-type: ', _activeProfile?.type, 'INP: ', _isNewProfile)
 
-    const gapLimit =
-        activeProfile?.gapLimit ?? _isSoftwareProfile ? (_isNewProfile ? 10 : 50) : (_isNewProfile ? 1 : 10)
+    const gapLimit = calculateGapLimit(_activeProfile?.type, _isNewProfile)
     const accountDiscoveryThreshold = _isNewProfile ? 1 : 0
+    console.log('GL: ', gapLimit, 'ADT: ', accountDiscoveryThreshold)
 
     return { gapLimit, accountDiscoveryThreshold }
+}
+
+/**
+ * Calculates the gap limit for a profile given it's type and if it is new
+ * @param {ProfileType} profileType The type of the profile to use
+ * @param {boolean} isNewProfile A boolean value denoting if the profile is a new one
+ *
+ * @returns {number} The gap limit for a profile
+ */
+const calculateGapLimit = (profileType: ProfileType, isNewProfile: boolean = false): number => {
+    switch(profileType) {
+        default:
+        case ProfileType.Software:
+            return isNewProfile ? 10 : 50
+        case ProfileType.Ledger:
+        case ProfileType.LedgerSimulator:
+            return isNewProfile ? 1 : 10
+    }
 }

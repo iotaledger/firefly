@@ -2,13 +2,13 @@
     import { ActivityRow, Icon, Text } from 'shared/components'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
+    import { activeProfile, isSoftwareProfile, ProfileType, updateProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import {
         AccountMessage,
         api,
-        asyncSyncAccounts,
+        asyncSyncAccounts, getSyncAccountOptions,
         isSyncing,
         selectedAccountId,
         selectedMessage,
@@ -36,14 +36,18 @@
     }
 
     function handleSyncClick() {
+        const { gapLimit, accountDiscoveryThreshold } = getSyncAccountOptions()
+
         if ($isSoftwareProfile) {
             api.getStrongholdStatus({
                 onSuccess(strongholdStatusResponse) {
                     if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                        openPopup({ type: 'password', props: { onSuccess: async () => asyncSyncAccounts(0, 10, 1, false) } })
+                        openPopup({
+                            type: 'password',
+                            props: { onSuccess: async () => asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false) }
+                        })
                     } else {
-                        const gapLimit = $activeProfile?.gapLimit
-                        asyncSyncAccounts(gapLimit === undefined ? undefined : 0, gapLimit, 1, false)
+                        asyncSyncAccounts(gapLimit === undefined ? undefined : 0, gapLimit, accountDiscoveryThreshold, false)
                         updateProfile('gapLimit', undefined)
                     }
                 },
@@ -55,9 +59,21 @@
                 },
             })
         } else {
-            const gapLimit = $activeProfile?.gapLimit
-            asyncSyncAccounts(gapLimit === undefined ? undefined : 0, gapLimit, 1)
+            asyncSyncAccounts(gapLimit === undefined ? undefined : 0, gapLimit, accountDiscoveryThreshold)
             updateProfile('gapLimit', undefined)
+        }
+    }
+
+    function isFirstSync() {
+        const { type } = $activeProfile
+        const { gapLimit } = getSyncAccountOptions()
+        switch(type) {
+            default:
+            case ProfileType.Software:
+                return gapLimit === 10
+            case ProfileType.Ledger:
+            case ProfileType.LedgerSimulator:
+                return gapLimit === 1
         }
     }
 </script>
@@ -70,7 +86,7 @@
         </button>
     </div>
     <div class="overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2 scroll-secondary">
-        {#if $activeProfile?.gapLimit === 50 && $isSyncing}
+        {#if isFirstSync() && $isSyncing}
             <div class="h-full flex flex-col items-center justify-center text-center">
                 <Text secondary>{locale('general.firstSync')}</Text>
             </div>
