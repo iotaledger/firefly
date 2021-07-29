@@ -45,14 +45,12 @@
         {#if typeof locale(`popups.ledgerConnectionGuide.steps.${stepIndex}`) === 'string'}
             <Text secondary>{locale(`popups.ledgerConnectionGuide.steps.${stepIndex}`)}</Text>
         {:else}
-            <div class="flex flex-row space-x-1 justify-center items-center">
-                <Text secondary>{locale(`popups.ledgerConnectionGuide.steps.${stepIndex}.text`)}</Text>
-                <Link
-                    classes="text-13 leading-160"
-                    onClick={() => Electron.openUrl('https://support.ledger.com/hc/en-us/articles/360019868977-Fix-USB-connection-issues-with-Ledger-Live?support=true')}>
-                    {locale(`popups.ledgerConnectionGuide.steps.${stepIndex}.link`)}
-                </Link>
-            </div>
+            <Text secondary classes="inline-block">{locale(`popups.ledgerConnectionGuide.steps.${stepIndex}.text`)}</Text>
+            <Link
+                classes="ml-0.5 inline-block text-13 leading-160"
+                onClick={() => Electron.openUrl('https://support.ledger.com/hc/en-us/articles/360019868977-Fix-USB-connection-issues-with-Ledger-Live?support=true')}>
+                {locale(`popups.ledgerConnectionGuide.steps.${stepIndex}.link`)}
+            </Link>
         {/if}
     </div>
     <div class="w-full flex flex-row flex-nowrap space-x-4 z-10">

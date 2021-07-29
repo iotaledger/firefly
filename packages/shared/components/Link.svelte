@@ -13,7 +13,7 @@
 </script>
 
 <a
-    class="text-12 leading-140 flex flex-row items-center cursor-pointer text-blue-500 {classes}"
+    class="text-12 leading-140 cursor-pointer text-blue-500 {icon && 'flex flex-row items-center'} {classes}"
     data-label="link"
     use:bindEvents={events}
     {href}
