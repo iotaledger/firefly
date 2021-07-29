@@ -123,7 +123,8 @@ function isUrlAllowed(targetUrl) {
         'chrysalis.iota.org',
         'chrysalis.docs.iota.org',
         'firefly.iota.org',
-        'blog.iota.org'
+        'blog.iota.org',
+        'support.ledger.com',
     ]
 
     const url = new URL(targetUrl)

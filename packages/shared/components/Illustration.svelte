@@ -51,6 +51,10 @@
             lightmode: 'onboarding/ledger-open-app-desktop.svg',
             darkmode: 'onboarding/ledger-open-app-desktop.svg',
         },
+        'ledger-support': {
+            lightmode: 'onboarding/ledger-support.svg',
+            darkmode: 'onboarding/ledger-support.svg',
+        },
     }
 </script>
 
