@@ -13,13 +13,14 @@
     import Diagnostics from './Diagnostics.svelte'
     import ErrorLog from './ErrorLog.svelte'
     import HideAccount from './HideAccount.svelte'
+    import LedgerAddress from './LedgerAddress.svelte'
     import LedgerAppGuide from './LedgerAppGuide.svelte'
     import LedgerConfirmation from './LedgerConfirmation.svelte'
     import LedgerConnectionGuide from './LedgerConnectionGuide.svelte'
     import LedgerLegacyTransaction from './LedgerLegacyTransaction.svelte'
+    import LedgerMigrateIndex from './LedgerMigrateIndex.svelte'
     import LedgerNotConnected from './LedgerNotConnected.svelte'
     import LedgerTransaction from './LedgerTransaction.svelte'
-    import LedgerAddress from './LedgerAddress.svelte'
     import MissingBundle from './MissingBundle.svelte'
     import Password from './Password.svelte'
     import QR from './QR.svelte'
@@ -77,6 +78,7 @@
         ledgerTransaction: LedgerTransaction,
         ledgerLegacyTransaction: LedgerLegacyTransaction,
         ledgerAddress: LedgerAddress,
+        ledgerMigrateIndex: LedgerMigrateIndex,
         removeNode: RemoveNode,
         busy: Busy,
         errorLog: ErrorLog,

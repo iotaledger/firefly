@@ -1,7 +1,7 @@
 <script>
     import { Button, Link, OnboardingLayout, Text, Video } from 'shared/components'
-    import { LEDGER_MIGRATION_VIDEO } from 'shared/lib/migration'
-    import { createEventDispatcher } from 'svelte'
+    import { LEDGER_MIGRATION_VIDEO, initialiseMigrationListeners } from 'shared/lib/migration'
+    import { createEventDispatcher, onMount } from 'svelte'
     import { Electron } from 'shared/lib/electron'
 
     export let locale
@@ -20,6 +20,11 @@
     function handleBackClick() {
         dispatch('previous')
     }
+
+    onMount(() => {
+        // This is the first screen that mounts when a user wants to migrate additional account index
+        initialiseMigrationListeners()
+    })
 </script>
 
 {#if mobile}

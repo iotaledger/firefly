@@ -112,12 +112,12 @@
                 </div>
                 <div>
                     <Text type="p" secondary classes="mb-2">{locale('views.selectLedgerAccountIndex.accountIndex')}</Text>
-                    <Number bind:value={index} {min} {max} error={!isValidAccountIndex ? locale('error.account.index') : ''} />
+                    <Number bind:value={index} {min} {max} disabled={busy} error={!isValidAccountIndex ? locale('error.account.index') : ''} />
                 </div>
                 {#if expert}
                     <div>
                         <Text type="p" secondary classes="mb-2">{locale('views.selectLedgerAccountIndex.accountPage')}</Text>
-                        <Number bind:value={page} {min} {max} error={!isValidAccountPage ? locale('error.account.page') : ''} />
+                        <Number bind:value={page} {min} {max} disabled={busy} error={!isValidAccountPage ? locale('error.account.page') : ''} />
                     </div>
                 {/if}
             </div>
