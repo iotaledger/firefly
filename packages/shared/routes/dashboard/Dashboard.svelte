@@ -5,7 +5,7 @@
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { NOTIFICATION_TIMEOUT_NEVER, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-    import { activeProfile, isSoftwareProfile, updateProfile, isLedgerProfile } from 'shared/lib/profile'
+    import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
     import { accountRoute, dashboardRoute, routerNext, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
     import { api, selectedAccountId, STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, wallet } from 'shared/lib/wallet'
@@ -158,11 +158,6 @@
                 timeout: NOTIFICATION_TIMEOUT_NEVER,
                 actions: [
                     {
-                        label: locale('actions.viewStatus'),
-                        isPrimary: true,
-                        callback: () => Electron.openUrl('https://chrysalis.iota.org'),
-                    },
-                    {
                         label: locale('actions.dismiss'),
                         callback: () => removeDisplayNotification(fundsSoonNotificationId),
                     },
@@ -172,14 +167,17 @@
     }
     $: if ($activeProfile) {
         const shouldDisplayMigrationPopup =
-        // Only display popup once the user successfully migrates the first account index
-            $isLedgerProfile && $activeProfile.ledgerMigrationCount === 1 && !$activeProfile.hasVisitedDashboard && !$popupState.active
+            // Only display popup once the user successfully migrates the first account index
+            $isLedgerProfile &&
+            $activeProfile.ledgerMigrationCount === 1 &&
+            !$activeProfile.hasVisitedDashboard &&
+            !$popupState.active
         if (shouldDisplayMigrationPopup) {
             updateProfile('hasVisitedDashboard', true)
 
             openPopup({
                 type: 'ledgerMigrateIndex',
-                preventClose: true
+                preventClose: true,
             })
         }
     }
