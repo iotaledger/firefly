@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Text } from 'shared/components'
+    import { Button, Text, Animation } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
     import { navigateToNewIndexMigration } from 'shared/lib/ledger'
 
@@ -19,7 +19,10 @@
     <Text type="h4" classes="mb-4">{locale('popups.ledgerMigrateIndex.title')}</Text>
     <Text type="p" secondary>{locale('popups.ledgerMigrateIndex.body')}</Text>
 </div>
+<div class="relative w-full h-1/2 bg-white dark:bg-gray-900 justify-center">
+    <Animation animation="import-from-text-success-desktop" />
+</div>
 <div class="flex flex-row justify-between w-full space-x-4 px-8">
-    <Button secondary classes="w-1/2" onClick={handleNoClick}>{locale('actions.no')}</Button>
     <Button secondary classes="w-1/2" onClick={handleYesClick}>{locale('actions.yes')}</Button>
+    <Button secondary classes="w-1/2" onClick={handleNoClick}>{locale('actions.no')}</Button>
 </div>

@@ -390,7 +390,7 @@
             },
             "migrateLedgerIndex": {
                 "title": "Migrate Ledger Index",
-                "description": "Migrate another ledger account index into this profile"
+                "description": "Migrate another Trinity account index"
             },
             "stateExport": {
                 "title": "State export",
@@ -616,7 +616,7 @@
         },
         "ledgerMigrateIndex": {
             "title": "Do you need to migrate another Trinity account index?",
-            "body": "You can also migrate another account index later from the Settings."
+            "body": "You can also migrate later in Advanced Settings."
         }
     },
     "charts": {
