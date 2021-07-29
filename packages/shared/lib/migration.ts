@@ -142,12 +142,6 @@ export const hardwareIndexes = writable<HardwareIndexes>({
 
 export const migrationLog = writable<MigrationLog[]>([]);
 
-/**
- * TODO: Remove this before it gets to production.
- * This is only added for testing purposes.
- */
-export const legacyAddressForTesting = writable<string>(null);
-
 /*
  * ongoingSnapshot
  */
@@ -336,18 +330,6 @@ export const getLedgerMigrationData = (getAddressFn: (index: number) => Promise<
 
     const _process = () => {
         return _generate().then((addresses) => {
-            const _addresses = addresses.map((address) => address.address)
-            // TODO: Remove this
-            // ----------------------------------------------------------------
-            // Added for internal testing so that testers can copy addresses
-            console.log('-'.repeat(20))
-            _addresses.forEach((address) => console.log(address));
-            console.log('-'.repeat(20))
-
-            legacyAddressForTesting.set(_addresses[_addresses.length - 1])
-            // ----------------------------------------------------------------
-            // End of the part that needs to be removed.
-
             return _get(addresses)
         }).then((response: any) => {
             const { data } = get(migration)
@@ -1207,7 +1189,7 @@ export function openSnapshotPopup(): void {
 /**
  * Initialise migration process listeners
  */
-export const initialiseMigrationListeners = () => {    
+export const initialiseMigrationListeners = () => {
     if (get(didInitialiseMigrationListeners) === false) {
         didInitialiseMigrationListeners.set(true)
         api.onMigrationProgress({
