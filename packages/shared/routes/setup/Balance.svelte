@@ -18,7 +18,6 @@
         hardwareIndexes,
         hasAnySpentAddressWithNoBundleHashes,
         hasLowBalanceOnAllSpentAddresses,
-        legacyAddressForTesting,
         migration,
         MINIMUM_MIGRATION_BALANCE,
         resetMigrationState,
@@ -29,7 +28,6 @@
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { setClipboard } from 'shared/lib/utils'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
 
@@ -221,13 +219,6 @@
             </Box>
             {#if error.text}
                 <Toast classes="mt-4" type="error" message={error.text} />
-            {/if}
-            {#if legacyLedger}
-                <div
-                    on:click={() => setClipboard($legacyAddressForTesting)}
-                    class="cursor-pointer flex mt-2 flex-col items-center bg-gray-50 dark:bg-gray-700 rounded-2xl p-5 text-center">
-                    <Text type="pre">{$legacyAddressForTesting}</Text>
-                </div>
             {/if}
         </div>
         <div slot="leftpane__action" class="flex flex-row justify-between items-center space-x-4">
