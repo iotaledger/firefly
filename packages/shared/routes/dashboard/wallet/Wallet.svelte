@@ -104,10 +104,9 @@
     })
 
     const transactions = derived([viewableAccounts, activeProfile], ([$viewableAccounts, $activeProfile]) => {
-        if ($activeProfile?.migratedTransactions?.length) {
-            return $activeProfile.migratedTransactions
-        }
-        return getTransactions($viewableAccounts)
+        const _migratedTransactions = $activeProfile?.migratedTransactions || []
+        
+        return [..._migratedTransactions, ...getTransactions($viewableAccounts)]
     })
 
     setContext<Writable<BalanceOverview>>('walletBalance', balanceOverview)

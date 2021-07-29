@@ -1,10 +1,7 @@
 <script lang="typescript">
     import { Animation, Button, OnboardingLayout, Spinner, Text, TransactionItem } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
-    import {
-        displayNotificationForLedgerProfile,
-        promptUserToConnectLedger
-    } from 'shared/lib/ledger'
+    import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import {
         ADDRESS_SECURITY_LEVEL,
         confirmedBundles,
@@ -235,7 +232,12 @@
     }
 
     function persistProfile() {
+        if (legacyLedger && !$newProfile) {
+            return
+        }
+
         // When the first migration bundle is broadcast, then persist profile
+
         saveProfile($newProfile)
         setActiveProfile($newProfile.id)
 

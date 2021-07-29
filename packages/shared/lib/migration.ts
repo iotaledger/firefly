@@ -134,6 +134,8 @@ export const migration = writable<MigrationState>({
     bundles: writable<Bundle[]>([])
 })
 
+export const didInitialiseMigrationListeners = writable<boolean>(false);
+
 export const hardwareIndexes = writable<HardwareIndexes>({
     accountIndex: 0,
     pageIndex: 0
@@ -396,10 +398,10 @@ export const getLedgerMigrationData = (getAddressFn: (index: number) => Promise<
  */
 export const mineLedgerBundle = (
     bundleIndex: number,
-    offset: number
+    offset: number,
 ): Promise<void> => {
     return new Promise((resolve, reject) => {
-        api.getMigrationAddress(false, {
+        api.getMigrationAddress(false, get(activeProfile).ledgerMigrationCount, {
             onSuccess(response) {
                 resolve(response.payload)
             },
@@ -528,7 +530,7 @@ export const createLedgerMigrationBundle = (
     callback: () => void
 ): Promise<any> => {
     return new Promise((resolve, reject) => {
-        api.getMigrationAddress(false, {
+        api.getMigrationAddress(false, get(activeProfile).ledgerMigrationCount, {
             onSuccess(response) {
                 resolve(response.payload);
             },
@@ -1316,25 +1318,28 @@ export function openSnapshotPopup(): void {
 /**
  * Initialise migration process listeners
  */
-export const initialiseMigrationListeners = () => {
-    api.onMigrationProgress({
-        onSuccess(response) {
-            if (response.payload.event.type === 'TransactionConfirmed') {
-                const { bundles } = get(migration)
+export const initialiseMigrationListeners = () => {    
+    if (get(didInitialiseMigrationListeners) === false) {
+        didInitialiseMigrationListeners.set(true)
+        api.onMigrationProgress({
+            onSuccess(response) {
+                if (response.payload.event.type === 'TransactionConfirmed') {
+                    const { bundles } = get(migration)
 
-                bundles.update((_bundles) => _bundles.map((bundle) => {
-                    // @ts-ignore
-                    if (bundle.bundleHash && bundle.bundleHash === response.payload.event.data.bundleHash) {
-                        return Object.assign({}, bundle, { confirmed: true })
-                    }
+                    bundles.update((_bundles) => _bundles.map((bundle) => {
+                        // @ts-ignore
+                        if (bundle.bundleHash && bundle.bundleHash === response.payload.event.data.bundleHash) {
+                            return Object.assign({}, bundle, { confirmed: true })
+                        }
 
-                    return bundle
-                }))
+                        return bundle
+                    }))
+                }
+            }, onError(error) {
+                console.log('Error', error)
             }
-        }, onError(error) {
-            console.log('Error', error)
-        }
-    })
+        })
+    }
 }
 
 export const asyncGetAddressChecksum = (address: string = '', legacy: boolean = false): Promise<string> => {

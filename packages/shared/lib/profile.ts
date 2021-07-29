@@ -40,6 +40,8 @@ export interface Profile {
     isDeveloperProfile: boolean
     gapLimit?: number
     profileType?: ProfileType
+    hasVisitedDashboard?: boolean
+    ledgerMigrationCount?: number
 }
 
 /**
@@ -156,7 +158,8 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
                 timeframe: HistoryDataProps.SEVEN_DAYS
             }
         },
-        profileType: null
+        profileType: null,
+        ledgerMigrationCount: 0
     }
 
     newProfile.set(profile)

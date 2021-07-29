@@ -14,7 +14,7 @@ import { deepLinkRequestActive } from './deepLinking'
  *
  * @returns {void}
  */
-export const setRoute = (path: string): void => {
+export const setRoute = (path: AppRoute): void => {
     appRoute.set(path)
 }
 
@@ -43,7 +43,7 @@ export const walletSetupType = writable<SetupType>(null)
 /*
  * Current view
  */
-export const appRoute = writable<string>(null)
+export const appRoute = writable<AppRoute>(null)
 
 /**
  * Application route history
@@ -102,7 +102,7 @@ export const initRouter = () => {
 // TODO: only handle route changes, not app variables
 export const routerNext = (event) => {
     let params = event.detail || {}
-    const currentRoute: string = get(appRoute)
+    const currentRoute: AppRoute = get(appRoute)
     let nextRoute: AppRoute
 
     switch (currentRoute) {
@@ -229,14 +229,27 @@ export const routerNext = (event) => {
 
     // Update history and navigate to new route
     if (nextRoute) {
-        history.update((_history) => {
-            _history.push(currentRoute)
-            return _history
-        })
+        updateHistory(currentRoute)
         setRoute(nextRoute)
     } else {
         console.error('Routing Error: Could not find next route')
     }
+}
+
+/**
+ * Forces app next route, updating the route history
+ * @param route next route
+ */
+export const forceNextRoute = (route: AppRoute) => {
+    updateHistory(get(appRoute))
+    setRoute(route)
+}
+
+const updateHistory = (newRoute: AppRoute): void => {
+    history.update((_history) => {
+        _history.push(newRoute)
+        return _history
+    })
 }
 
 // TODO: only handle route changes, not app variables
