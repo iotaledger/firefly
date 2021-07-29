@@ -15,7 +15,7 @@
         setMissingProfileType,
         updateProfile,
     } from 'shared/lib/profile'
-    import { walletRoute, walletSetupType } from 'shared/lib/router'
+    import { walletRoute } from 'shared/lib/router'
     import { TransferProgressEventType, ErrorType } from 'shared/lib/typings/events'
     import type { Transaction } from 'shared/lib/typings/message'
     import { WalletRoutes } from 'shared/lib/typings/routes'
@@ -35,7 +35,8 @@
         getTransactions,
         getWalletBalanceHistory,
         hasGeneratedALedgerReceiveAddress,
-        initialiseListeners, isFirstSync,
+        initialiseListeners,
+        isFirstSync,
         isSelfTransaction,
         isTransferring,
         prepareAccountInfo,
