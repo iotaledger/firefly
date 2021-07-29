@@ -67,7 +67,7 @@
                 onSuccess(getAccountsResponse) {
                     if (getAccountsResponse.payload.length > 0) {
                         if (getAccountsResponse.payload[$activeProfile.ledgerMigrationCount]) {
-                            newAddress = getAccountsResponse.payload[0].addresses[0].address
+                            newAddress = getAccountsResponse.payload[$activeProfile.ledgerMigrationCount].addresses[0].address
                             displayAddress()
                         } else {
                             _createAccount($activeProfile.ledgerMigrationCount + 1)

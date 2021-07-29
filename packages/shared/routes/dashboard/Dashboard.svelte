@@ -2,10 +2,10 @@
     import { Idle, Sidebar } from 'shared/components'
     import { loggedIn, logout } from 'shared/lib/app'
     import { Electron } from 'shared/lib/electron'
-    import { chrysalisLive, ongoingSnapshot, openSnapshotPopup, pollChrysalisStatus } from 'shared/lib/migration'
+    import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { NOTIFICATION_TIMEOUT_NEVER, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-    import { activeProfile, isSoftwareProfile, updateProfile, isLedgerProfile } from 'shared/lib/profile'
+    import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
     import { accountRoute, dashboardRoute, routerNext, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
     import { api, selectedAccountId, STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, wallet } from 'shared/lib/wallet'
@@ -24,9 +24,8 @@
     const { accountsLoaded } = $wallet
 
     let startInit
-    let chrysalisStatusUnsubscribe
     let busy
-    let migrationNotificationId
+    let fundsSoonNotificationId
 
     ongoingSnapshot.subscribe((os) => {
         if (os) {
@@ -79,18 +78,11 @@
                 }
             }
         })
-
-        if ($activeProfile?.migratedTransactions?.length) {
-            await pollChrysalisStatus()
-        }
     })
 
     onDestroy(() => {
-        if (chrysalisStatusUnsubscribe) {
-            chrysalisStatusUnsubscribe()
-        }
-        if (migrationNotificationId) {
-            removeDisplayNotification(migrationNotificationId)
+        if (fundsSoonNotificationId) {
+            removeDisplayNotification(fundsSoonNotificationId)
         }
     })
 
@@ -154,8 +146,23 @@
     }
 
     $: if (!busy && $accountsLoaded) {
+        /**
+         * If the profile has dummy migration transactions,
+         * then we open a "funds available soon" notification
+         */
         if (get(activeProfile)?.migratedTransactions?.length) {
-            handleChrysalisStatusNotifications()
+            fundsSoonNotificationId = showAppNotification({
+                type: 'warning',
+                message: locale('notifications.fundsAvailableSoon'),
+                progress: undefined,
+                timeout: NOTIFICATION_TIMEOUT_NEVER,
+                actions: [
+                    {
+                        label: locale('actions.dismiss'),
+                        callback: () => removeDisplayNotification(fundsSoonNotificationId),
+                    },
+                ],
+            })
         }
     }
     $: if ($activeProfile) {
@@ -167,68 +174,19 @@
 
             openPopup({
                 type: 'ledgerMigrateIndex',
-                preventClose: true
+                preventClose: true,
             })
-        }
-
-        if (!get(activeProfile)?.migratedTransactions?.length && migrationNotificationId) {
-            removeDisplayNotification(migrationNotificationId)
-            migrationNotificationId = null
-            if (chrysalisStatusUnsubscribe) {
-                chrysalisStatusUnsubscribe()
-                chrysalisStatusUnsubscribe = null
-            }
         }
     }
 
-    function handleChrysalisStatusNotifications() {
-        chrysalisStatusUnsubscribe = chrysalisLive.subscribe((live) => {
-            if (typeof live === 'boolean' && live === false) {
-                removeDisplayNotification(migrationNotificationId) // clean first otherwise it shows up while whatching
-                migrationNotificationId = null
-                if (get(activeProfile)?.migratedTransactions?.length) {
-                    migrationNotificationId = showAppNotification({
-                        type: 'warning',
-                        message: locale('notifications.migratedAccountChrysalisDown'),
-                        progress: undefined,
-                        timeout: NOTIFICATION_TIMEOUT_NEVER,
-                        actions: [
-                            {
-                                label: locale('actions.viewStatus'),
-                                isPrimary: true,
-                                callback: () => Electron.openUrl('https://chrysalis.iota.org'),
-                            },
-                            {
-                                label: locale('actions.dismiss'),
-                                callback: () => removeDisplayNotification(migrationNotificationId),
-                            },
-                        ],
-                    })
-                }
-            } else if (typeof live === 'boolean' && live === true) {
-                removeDisplayNotification(migrationNotificationId)
-                migrationNotificationId = null
-                if ($activeProfile?.migratedTransactions?.length) {
-                    migrationNotificationId = showAppNotification({
-                        type: 'warning',
-                        message: locale('notifications.migratedAccountChrysalisUp'),
-                        progress: undefined,
-                        timeout: NOTIFICATION_TIMEOUT_NEVER,
-                        actions: [
-                            {
-                                label: locale('actions.viewStatus'),
-                                isPrimary: true,
-                                callback: () => Electron.openUrl('https://chrysalis.iota.org'),
-                            },
-                            {
-                                label: locale('actions.dismiss'),
-                                callback: () => removeDisplayNotification(migrationNotificationId),
-                            },
-                        ],
-                    })
-                }
-            }
-        })
+    /**
+     * If the user doesnt have any dummy migration transaction
+     * but there is an active "funds available soon" notification,
+     * then we close it
+     */
+    $: if ($activeProfile && !$activeProfile?.migratedTransactions?.length && fundsSoonNotificationId) {
+        removeDisplayNotification(fundsSoonNotificationId)
+        fundsSoonNotificationId = null
     }
 </script>
 
