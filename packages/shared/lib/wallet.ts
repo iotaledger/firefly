@@ -1763,7 +1763,7 @@ export const findAccountWithAnyAddress = (addresses: string[], excludeFirst?: Wa
  */
 export const getSyncAccountOptions = (isManualSync: boolean = false): SyncAccountOptions => {
     return isInitialAccountSync() ?
-        calculateFirstSyncAccountOptions(get(walletSetupType))
+        calculateInitialSyncAccountOptions(get(walletSetupType))
         : calculateRegularSyncAccountOptions(get(activeProfile).type, isManualSync)
 }
 
@@ -1775,7 +1775,7 @@ export const isInitialAccountSync = (): boolean => {
     return get(walletSetupType) !== null && get(isFirstSync)
 }
 
-const calculateFirstSyncAccountOptions = (setupType: SetupType): SyncAccountOptions => {
+const calculateInitialSyncAccountOptions = (setupType: SetupType): SyncAccountOptions => {
     let gapLimit = 1
     let accountDiscoveryThreshold = 0
 

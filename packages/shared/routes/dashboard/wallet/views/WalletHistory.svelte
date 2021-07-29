@@ -25,6 +25,8 @@
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
     const transactions = getContext<Readable<AccountMessage[]>>('walletTransactions')
 
+    let isFirstManualSync = true
+
     function handleTransactionClick(transaction) {
         const sourceAccount = get(accounts).find((acc) => acc.index === transaction.account)
         if (sourceAccount) {
@@ -37,8 +39,21 @@
         }
     }
 
+    function handleSyncAccountOptions() {
+        if(isFirstManualSync) {
+            isFirstManualSync = false
+
+            return {
+                gapLimit: $isSoftwareProfile ? 10 : 1,
+                accountDiscoveryThreshold: 1
+            }
+        } else {
+            return getSyncAccountOptions(true)
+        }
+    }
+
     function handleSyncClick() {
-        const { gapLimit, accountDiscoveryThreshold } = getSyncAccountOptions(true)
+        const { gapLimit, accountDiscoveryThreshold } = handleSyncAccountOptions()
 
         if ($isSoftwareProfile) {
             api.getStrongholdStatus({
