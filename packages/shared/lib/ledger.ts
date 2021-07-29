@@ -19,6 +19,7 @@ import type { NotificationType } from './typings/notification'
 
 
 const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
+const LEGACY_ADDRESS_WITH_CHECKSUM_LENGTH = 90
 
 let polling = false
 let intervalTimer
@@ -243,7 +244,7 @@ export function getLegacyErrorMessage(error: any, shouldLocalize: boolean = fals
 }
 
 export function formatAddressForLedger(address: string, removeChecksum: boolean = false): string {
-    if (removeChecksum) {
+    if (address.length === LEGACY_ADDRESS_WITH_CHECKSUM_LENGTH && removeChecksum) {
         address = removeAddressChecksum(address)
     }
     const len = address.length
