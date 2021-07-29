@@ -6,14 +6,7 @@ import type { PriceData } from 'shared/lib/marketData'
 import { HistoryDataProps } from 'shared/lib/marketData'
 import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
 import { showAppNotification, showSystemNotification } from 'shared/lib/notifications'
-import {
-    activeProfile,
-    isLedgerProfile,
-    isSoftwareProfile,
-    isStrongholdLocked,
-    Profile, ProfileType,
-    updateProfile
-} from 'shared/lib/profile'
+import { activeProfile, isLedgerProfile, isStrongholdLocked, ProfileType, updateProfile } from 'shared/lib/profile'
 import type {
     Account,
     Account as BaseAccount,
@@ -46,14 +39,14 @@ import type {
 import { formatUnitBestMatch } from 'shared/lib/units'
 import { get, writable, Writable } from 'svelte/store'
 import { openPopup } from './popup'
-import { walletSetupType } from './router'
 import type { ClientOptions } from './typings/client'
 import type { LedgerStatus } from './typings/ledger'
 import type { Message } from './typings/message'
 import type { NodeAuth, NodeInfo } from './typings/node'
 import { SetupType } from './typings/routes'
 import type { Duration, StrongholdStatus } from './typings/wallet'
-import { isLedgerError, displayNotificationForLedgerProfile } from './ledger'
+import { displayNotificationForLedgerProfile } from './ledger'
+import { walletSetupType } from './router'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -169,6 +162,8 @@ export const resetWallet = () => {
     transferState.set(null)
     hasGeneratedALedgerReceiveAddress.set(false)
     isSyncing.set(null)
+    isFirstSync.set(true)
+    walletSetupType.set(null)
 }
 
 export const selectedAccountId = writable<string | null>(null)
@@ -181,6 +176,7 @@ export const transferState = writable<TransferState | null>(null)
 export const hasGeneratedALedgerReceiveAddress = writable<boolean | null>(false)
 
 export const isSyncing = writable<boolean>(false)
+export const isFirstSync = writable<boolean>(true)
 
 export const api: {
     generateMnemonic(callbacks: { onSuccess: (response: Event<string>) => void, onError: (err: ErrorEventPayload) => void })
@@ -1762,34 +1758,61 @@ export const findAccountWithAnyAddress = (addresses: string[], excludeFirst?: Wa
 
 /**
  * Get the sync options for an account
+ * @param {boolean} isManualSync A boolean value indicating if a user (via the UI) invoked this function
  * @returns {SyncAccountOptions} The sync options for an account, which contains data for the gap limit and account discovery threshold
  */
-export const getSyncAccountOptions = (): SyncAccountOptions => {
-    const _activeProfile = get(activeProfile)
-    const _isNewProfile = get(walletSetupType) === SetupType.New
-    console.log('AP-type: ', _activeProfile?.type, 'INP: ', _isNewProfile)
+export const getSyncAccountOptions = (isManualSync: boolean = false): SyncAccountOptions => {
+    return isInitialAccountSync() ?
+        calculateFirstSyncAccountOptions(get(walletSetupType))
+        : calculateRegularSyncAccountOptions(get(activeProfile).type, isManualSync)
+}
 
-    const gapLimit = calculateGapLimit(_activeProfile?.type, _isNewProfile)
-    const accountDiscoveryThreshold = _isNewProfile ? 1 : 0
-    console.log('GL: ', gapLimit, 'ADT: ', accountDiscoveryThreshold)
+/**
+ * Determines if the API call for syncing accounts is the initial one
+ * @returns {boolean} The boolean value determining if this sync API call is the first ever one
+ */
+export const isInitialAccountSync = (): boolean => {
+    return get(walletSetupType) !== null && get(isFirstSync)
+}
+
+const calculateFirstSyncAccountOptions = (setupType: SetupType): SyncAccountOptions => {
+    let gapLimit = 1
+    let accountDiscoveryThreshold = 0
+
+    switch(setupType) {
+        case SetupType.Import:
+        case SetupType.Mnemonic:
+        case SetupType.Stronghold:
+            gapLimit = 25
+            accountDiscoveryThreshold = 1
+            break
+        case SetupType.FireflyLedger:
+            gapLimit = 10
+            accountDiscoveryThreshold = 1
+            break
+    }
 
     return { gapLimit, accountDiscoveryThreshold }
 }
 
-/**
- * Calculates the gap limit for a profile given it's type and if it is new
- * @param {ProfileType} profileType The type of the profile to use
- * @param {boolean} isNewProfile A boolean value denoting if the profile is a new one
- *
- * @returns {number} The gap limit for a profile
- */
-const calculateGapLimit = (profileType: ProfileType, isNewProfile: boolean = false): number => {
+const calculateRegularSyncAccountOptions = (profileType: ProfileType, isManualSync: boolean): SyncAccountOptions => {
+    let gapLimit = 1
+    let accountDiscoveryThreshold = 0
+
+    const _isFirstSync = get(isFirstSync)
+
     switch(profileType) {
-        default:
         case ProfileType.Software:
-            return isNewProfile ? 10 : 50
+            gapLimit = _isFirstSync ? 10 : 1
+            break
         case ProfileType.Ledger:
         case ProfileType.LedgerSimulator:
-            return isNewProfile ? 1 : 10
+        default:
+            gapLimit = 1
+            break
     }
+
+    accountDiscoveryThreshold = (isManualSync && _isFirstSync) ? 1 : 0
+
+    return { gapLimit, accountDiscoveryThreshold }
 }

@@ -39,7 +39,6 @@ export interface Profile {
     hiddenAccounts?: string[]
     migratedTransactions?: MigratedTransaction[]
     isDeveloperProfile: boolean
-    gapLimit?: number
     hasVisitedDashboard?: boolean
     ledgerMigrationCount?: number
 }
@@ -147,7 +146,6 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
         type: null,
         lastStrongholdBackupTime: null,
         isDeveloperProfile,
-        gapLimit: 10, // TODO: Remove
         settings: {
             currency: AvailableExchangeRates.USD,
             automaticNodeSelection: true,

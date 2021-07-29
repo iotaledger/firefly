@@ -15,7 +15,7 @@
         setMissingProfileType,
         updateProfile,
     } from 'shared/lib/profile'
-    import { walletRoute } from 'shared/lib/router'
+    import { walletRoute, walletSetupType } from 'shared/lib/router'
     import { TransferProgressEventType, ErrorType } from 'shared/lib/typings/events'
     import type { Transaction } from 'shared/lib/typings/message'
     import { WalletRoutes } from 'shared/lib/typings/routes'
@@ -35,7 +35,7 @@
         getTransactions,
         getWalletBalanceHistory,
         hasGeneratedALedgerReceiveAddress,
-        initialiseListeners,
+        initialiseListeners, isFirstSync,
         isSelfTransaction,
         isTransferring,
         prepareAccountInfo,
@@ -163,11 +163,11 @@
 
                     try {
                         await asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
+
+                        if($isFirstSync) isFirstSync.set(false)
                     } catch (err) {
                         _onError(err)
                     }
-
-                    updateProfile('gapLimit', gapLimit)
                 }
 
                 if (accountsResponse.payload.length === 0) {
