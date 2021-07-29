@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Icon } from 'shared/components'
-    import { popupState, closePopup } from 'shared/lib/popup'
+    import { closePopup, popupState } from 'shared/lib/popup'
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
     import AddNode from './AddNode.svelte'
