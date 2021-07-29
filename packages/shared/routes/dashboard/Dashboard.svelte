@@ -150,7 +150,7 @@
          * If the profile has dummy migration transactions,
          * then we open a "funds available soon" notification
          */
-        if (get(activeProfile)?.migratedTransactions?.length) {
+        if (get(activeProfile)?.migratedTransactions?.length && !fundsSoonNotificationId) {
             fundsSoonNotificationId = showAppNotification({
                 type: 'warning',
                 message: locale('notifications.fundsAvailableSoon'),
