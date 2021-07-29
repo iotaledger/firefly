@@ -1,7 +1,12 @@
 <script lang="typescript">
     import { Animation, Button, OnboardingLayout, Spinner, Text, TransactionItem } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
-    import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
+    import {
+        displayNotificationForLedgerProfile,
+        isLedgerConnected,
+        ledgerDeviceState,
+        promptUserToConnectLedger
+    } from 'shared/lib/ledger'
     import {
         ADDRESS_SECURITY_LEVEL,
         confirmedBundles,
@@ -22,6 +27,7 @@
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
     import { createEventDispatcher, onDestroy } from 'svelte'
+    import { isNewNotification, showAppNotification } from 'shared/lib/notifications'
 
     export let locale
     export let mobile
@@ -231,6 +237,17 @@
         )
     }
 
+    $: if(busy && !isLedgerConnected(true) && $ledgerDeviceState) {
+        busy = false
+
+        if(isNewNotification('error')) {
+            showAppNotification({
+                type: 'error',
+                message: locale('error.ledger.generic')
+            })
+        }
+    }
+
     function persistProfile() {
         if (legacyLedger && !$newProfile) {
             return
@@ -417,8 +434,10 @@
         <div slot="leftpane__action" class="flex flex-col items-center space-y-4">
             {#if !migrated}
                 <Button disabled={busy} classes="w-full py-3 mt-2 text-white" onClick={() => handleMigrateClick()}>
-                    <Spinner {busy} message={migratingFundsMessage} classes="justify-center" />
-                    {#if !busy && !migrated}{locale('views.transferFragmentedFunds.migrate')}{/if}
+<!--                    <Spinner {busy} message={migratingFundsMessage} classes="justify-center" />-->
+                    {#if !busy}{locale('views.transferFragmentedFunds.migrate')}
+                    {:else}<Spinner {busy} message={migratingFundsMessage} classes="justify-center" />
+                    {/if}
                 </Button>
             {:else if fullSuccess}
                 <Button classes="w-full py-3 mt-2" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
