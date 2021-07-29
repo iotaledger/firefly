@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Animation, Button, OnboardingLayout, Spinner, Text, TransactionItem } from 'shared/components'
+    import { Animation, Button, OnboardingLayout, Spinner, Text, TransactionItem, Tooltip, Icon } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import {
@@ -18,7 +18,7 @@
         unmigratedBundles,
     } from 'shared/lib/migration'
     import { closePopup } from 'shared/lib/popup'
-    import { newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
+    import { newProfile, profileInProgress, saveProfile, setActiveProfile, isLedgerProfile } from 'shared/lib/profile'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
     import { createEventDispatcher, onDestroy } from 'svelte'
@@ -30,6 +30,14 @@
     let migrated = false
     let migratingFundsMessage = ''
     let fullSuccess = $hasMigratedAndConfirmedAllSelectedBundles
+
+    let showTooltip = false
+    let toolTip
+    let displayInfo
+    $: if (!busy) {
+        showTooltip = false
+        displayInfo = false
+    }
 
     let legacyLedger = $walletSetupType === SetupType.TrinityLedger
     $: animation = legacyLedger ? 'ledger-migrate-desktop' : 'migrate-desktop'
@@ -148,6 +156,7 @@
                                         )
                                     })
                                     .then(({ trytes, bundleHash }) => {
+                                        showInfo()
                                         closePopup(true) // close transaction popup
                                         return sendLedgerMigrationBundle(bundleHash, trytes)
                                     })
@@ -164,6 +173,7 @@
                                 })
                                 .then(({ trytes, bundleHash }) => {
                                     closePopup(true) // close transaction popup
+                                    showInfo()
                                     transactions = transactions.map((_transaction) => {
                                         if (_transaction.index === transaction.index) {
                                             return { ..._transaction, bundleHash }
@@ -282,6 +292,7 @@
                                     })
                                     .then(({ trytes, bundleHash }) => {
                                         closePopup(true) // close transaction popup
+                                        showInfo()
                                         transactions = transactions.map((_transaction, i) => {
                                             if (_transaction.index === transaction.index) {
                                                 return { ..._transaction, bundleHash }
@@ -311,6 +322,7 @@
                                 })
                                 .then(({ trytes, bundleHash }) => {
                                     closePopup(true) // close transaction popup
+                                    showInfo()
                                     transactions = transactions.map((_transaction, i) => {
                                         if (_transaction.index === transaction.index) {
                                             return { ..._transaction, bundleHash }
@@ -393,6 +405,16 @@
             Promise.resolve([])
         )
     }
+
+    function toggleTooltip() {
+        showTooltip = !showTooltip
+    }
+
+    function showInfo() {
+        if (!displayInfo && transactions.length > 1) {
+            displayInfo = true
+        }
+    }
 </script>
 
 {#if mobile}
@@ -415,6 +437,25 @@
             </div>
         </div>
         <div slot="leftpane__action" class="flex flex-col items-center space-y-4">
+            {#if $isLedgerProfile && busy && displayInfo}
+                <div
+                    class="flex flex-row w-full mb-4 justify-center"
+                    on:mouseenter={() => toggleTooltip()}
+                    on:mouseleave={() => toggleTooltip()}
+                    bind:this={toolTip}>
+                    <Icon icon="info" classes="mr-1 text-gray-800 dark:text-white" width={20} height={20} />
+                    <Text>{locale('views.transferFragmentedFunds.nothingHappening')}</Text>
+                </div>
+            {/if}
+            {#if showTooltip}
+                <Tooltip
+                    parentTop={toolTip.getBoundingClientRect().top - 20}
+                    parentLeft={toolTip.getBoundingClientRect().left}
+                    parentWidth={toolTip.offsetWidth / 2}
+                    classes="max-w-md">
+                    <Text classes="break-words">{locale('views.transferFragmentedFunds.reconnectDevice')}</Text>
+                </Tooltip>
+            {/if}
             {#if !migrated}
                 <Button disabled={busy} classes="w-full py-3 mt-2 text-white" onClick={() => handleMigrateClick()}>
                     <Spinner {busy} message={migratingFundsMessage} classes="justify-center" />

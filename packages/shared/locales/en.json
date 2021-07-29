@@ -259,7 +259,9 @@
             "body1": "Firefly will now proceed to migrate your funds. This may take a while.",
             "migrate": "Migrate funds",
             "transaction": "Transaction {number}",
-            "rerun": "Try again"
+            "rerun": "Try again",
+            "nothingHappening": "If nothing seems to be happening for a long time...",
+            "reconnectDevice": "Try disconnecting and reconnecting your Ledger."
         },
         "migrateFailed": {
             "title": "To do",
