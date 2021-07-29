@@ -365,17 +365,18 @@ export const getLedgerMigrationData = (getAddressFn: (index: number) => Promise<
             }
 
             prepareBundles()
-            return response.payload.spentAddresses === true || response.payload.inputs.length > 0 || response.payload.balance > 0;
+
+            const shouldGenerateMore = response.payload.spentAddresses === true || response.payload.inputs.length > 0 || response.payload.balance > 0;
+            
+            if (shouldGenerateMore) {
+                return _process();
+            }
+
+            return Promise.resolve();
         });
     }
 
-    return _process().then((shouldGenerateMore) => {
-        if (shouldGenerateMore) {
-            return _process();
-        }
-
-        return Promise.resolve(true);
-    }).then(() => {
+    return _process().then(() => {
         callback()
         return get(get(migration).data)
     })
