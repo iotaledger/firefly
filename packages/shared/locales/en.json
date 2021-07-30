@@ -730,7 +730,8 @@
         "searchAgain": "Search again",
         "searching": "Searching...",
         "closeFirefly": "Close Firefly",
-        "generateAddress": "Generate address"
+        "generateAddress": "Generate address",
+        "migrateAgain": "Migrate another index"
     },
     "general": {
         "password": "Password",

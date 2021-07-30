@@ -34,7 +34,7 @@
                         name={profile.name}
                         id={profile.id}
                         isDeveloper={profile.isDeveloperProfile}
-                        isLedgerProfile={profile?.profileType === ProfileType.Ledger || profile?.profileType === ProfileType.LedgerSimulator}
+                        isLedgerProfile={profile?.type === ProfileType.Ledger || profile?.type === ProfileType.LedgerSimulator}
                         classes="cursor-pointer" />
                 </div>
             {/each}

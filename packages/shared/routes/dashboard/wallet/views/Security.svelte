@@ -5,7 +5,7 @@
     import { getLedgerDeviceStatus, getLedgerOpenedApp, ledgerDeviceState, pollLedgerDeviceStatus } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, isSoftwareProfile, isStrongholdLocked, profiles } from 'shared/lib/profile'
+    import { activeProfile, isLedgerProfile, isSoftwareProfile, isStrongholdLocked, profiles } from 'shared/lib/profile'
     import { LedgerApp, LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { api } from 'shared/lib/wallet'
     import { onDestroy, onMount } from 'svelte'
@@ -71,7 +71,7 @@
     onMount(() => {
         setup()
 
-        if (!$isSoftwareProfile) {
+        if ($isLedgerProfile) {
             pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL)
         }
     })
