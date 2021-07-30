@@ -10,7 +10,7 @@
         api,
         asyncSyncAccounts,
         getSyncAccountOptions,
-        isFirstSync,
+        isFirstSessionSync,
         isSyncing,
         selectedAccountId,
         selectedMessage,
@@ -80,7 +80,7 @@
     }
 
     function shouldShowFirstSync() {
-        return $isFirstSync && $walletSetupType && $walletSetupType !== SetupType.New
+        return $isFirstSessionSync && $walletSetupType && $walletSetupType !== SetupType.New
     }
 </script>
 

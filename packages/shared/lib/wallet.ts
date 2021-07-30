@@ -162,7 +162,7 @@ export const resetWallet = () => {
     transferState.set(null)
     hasGeneratedALedgerReceiveAddress.set(false)
     isSyncing.set(null)
-    isFirstSync.set(true)
+    isFirstSessionSync.set(true)
     walletSetupType.set(null)
 }
 
@@ -176,7 +176,7 @@ export const transferState = writable<TransferState | null>(null)
 export const hasGeneratedALedgerReceiveAddress = writable<boolean | null>(false)
 
 export const isSyncing = writable<boolean>(false)
-export const isFirstSync = writable<boolean>(true)
+export const isFirstSessionSync = writable<boolean>(true)
 
 export const api: {
     generateMnemonic(callbacks: { onSuccess: (response: Event<string>) => void, onError: (err: ErrorEventPayload) => void })
@@ -1772,7 +1772,7 @@ export const getSyncAccountOptions = (isManualSync: boolean = false): SyncAccoun
  * @returns {boolean} The boolean value determining if this sync API call is the first ever one
  */
 export const isInitialAccountSync = (): boolean => {
-    return get(walletSetupType) !== null && get(isFirstSync)
+    return get(walletSetupType) !== null && get(isFirstSessionSync)
 }
 
 const calculateInitialSyncAccountOptions = (setupType: SetupType): SyncAccountOptions => {
@@ -1799,11 +1799,11 @@ const calculateRegularSyncAccountOptions = (profileType: ProfileType, isManualSy
     let gapLimit = 1
     let accountDiscoveryThreshold = 0
 
-    const _isFirstSync = get(isFirstSync)
+    const _isFirstSessionSync = get(isFirstSessionSync)
 
     switch(profileType) {
         case ProfileType.Software:
-            gapLimit = _isFirstSync ? 10 : 1
+            gapLimit = _isFirstSessionSync ? 10 : 1
             break
         case ProfileType.Ledger:
         case ProfileType.LedgerSimulator:
@@ -1812,7 +1812,7 @@ const calculateRegularSyncAccountOptions = (profileType: ProfileType, isManualSy
             break
     }
 
-    accountDiscoveryThreshold = (isManualSync && _isFirstSync) ? 1 : 0
+    accountDiscoveryThreshold = (isManualSync && _isFirstSessionSync) ? 1 : 0
 
     return { gapLimit, accountDiscoveryThreshold }
 }

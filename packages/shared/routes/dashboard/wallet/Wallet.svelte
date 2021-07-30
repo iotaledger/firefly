@@ -36,7 +36,7 @@
         getWalletBalanceHistory,
         hasGeneratedALedgerReceiveAddress,
         initialiseListeners,
-        isFirstSync,
+        isFirstSessionSync,
         isSelfTransaction,
         isTransferring,
         prepareAccountInfo,
@@ -165,7 +165,7 @@
                     try {
                         await asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
 
-                        if($isFirstSync) isFirstSync.set(false)
+                        if($isFirstSessionSync) isFirstSessionSync.set(false)
                     } catch (err) {
                         _onError(err)
                     }
