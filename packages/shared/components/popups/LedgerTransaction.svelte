@@ -71,7 +71,7 @@
     <Animation animation="ledger-confirm-address-desktop" />
 </div>
 
-<div class="transaction flex flex-col space-y-4">
+<div class="transaction flex flex-col space-y-4 scrollable-y">
     {#if shouldDisplaySendTo}
         <div class={`rounded-lg bg-gray-50 dark:bg-gray-800 p-5 text-center ${shouldDisplayRemainderAddress ? 'mb-4' : ''}`}>
             <Text type="h5" highlighted classes="mb-2">{locale('general.sendTo')}</Text>
