@@ -17,7 +17,7 @@
         sendMigrationBundle,
         unmigratedBundles,
     } from 'shared/lib/migration'
-    import { closePopup } from 'shared/lib/popup'
+    import { closePopup, popupState } from 'shared/lib/popup'
     import { newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
     import { walletSetupType } from 'shared/lib/router'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
@@ -50,8 +50,14 @@
         errorText: null,
     }))
 
-    $: if (legacyLedger && busy && $ledgerDeviceState !== LedgerDeviceState.LegacyConnected) {
+    $: if (
+        legacyLedger &&
+        busy &&
+        $ledgerDeviceState !== LedgerDeviceState.LegacyConnected &&
+        transactions.every((tx) => tx.status !== 1)
+    ) {
         migrated = true
+        busy = false
     }
 
     const unsubscribe = hasMigratedAndConfirmedAllSelectedBundles.subscribe((_hasMigratedAndConfirmedAllSelectedBundles) => {
@@ -70,8 +76,6 @@
     confirmedBundles.subscribe((newConfirmedBundles) => {
         newConfirmedBundles.forEach((bundle) => {
             if (bundle.bundleHash && bundle.confirmed) {
-                const hadMigratedAndUnconfirmedBundles = migratedAndUnconfirmedBundles.length > 0
-
                 migratedAndUnconfirmedBundles = migratedAndUnconfirmedBundles.filter(
                     (bundleHash) => bundleHash !== bundle.bundleHash
                 )
@@ -83,16 +87,6 @@
 
                     return item
                 })
-
-                if (
-                    hadMigratedAndUnconfirmedBundles &&
-                    migratedAndUnconfirmedBundles.length === 0 &&
-                    // // Do not update if there are some migrations in progress of broadcast
-                    !transactions.some((transaction) => transaction.status === 1)
-                ) {
-                    migrated = true
-                    busy = false
-                }
             }
         })
     })
@@ -120,6 +114,8 @@
     }
 
     function setMigratingTransaction(transaction, status) {
+        busy = true
+        migrated = false
         transactions = transactions.map((_transaction, i) => {
             if (_transaction.index === transaction.index) {
                 return { ..._transaction, status }
@@ -140,9 +136,6 @@
 
             return item
         })
-
-        busy = true
-        migrated = false
         migratingFundsMessage = locale('views.migrate.migrating')
 
         _unmigratedBundles.reduce(
@@ -198,7 +191,6 @@
                         if (transaction.bundleHash) {
                             return sendMigrationBundle(transaction.bundleHash).then(() => {
                                 migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, transaction.bundleHash]
-                                migrated = true
                             })
                         }
 
@@ -276,8 +268,6 @@
     }
 
     function migrateFunds() {
-        busy = true
-        migrated = false
         migratingFundsMessage = locale('views.migrate.migrating')
 
         transactions.reduce(
@@ -428,6 +418,9 @@
         <div slot="leftpane__content" class="h-full flex flex-col flex-wrap">
             <Text type="h2" classes="mb-5">{locale('views.migrate.title')}</Text>
             <Text type="p" secondary classes="mb-4">{locale('views.transferFragmentedFunds.body1')}</Text>
+            {#if legacyLedger}
+                <Text type="p" secondary classes="mb-4">{locale('views.transferFragmentedFunds.body2')}</Text>
+            {/if}
             <div class="flex-auto overflow-y-auto h-1 space-y-4 w-full scrollable-y scroll-secondary">
                 {#each transactions as transaction}
                     <TransactionItem {...transaction} {locale} />
@@ -436,7 +429,10 @@
         </div>
         <div slot="leftpane__action" class="flex flex-col items-center space-y-4">
             {#if !migrated}
-                <Button disabled={busy} classes="w-full py-3 mt-2 text-white" onClick={() => handleMigrateClick()}>
+                <Button
+                    disabled={busy}
+                    classes="w-full py-3 mt-2 text-white {$popupState.active && 'opacity-20'}"
+                    onClick={() => handleMigrateClick()}>
                     {#if !busy}
                         {locale('views.transferFragmentedFunds.migrate')}
                     {:else}
@@ -446,7 +442,7 @@
             {:else if fullSuccess}
                 <Button classes="w-full py-3 mt-2" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
             {:else}
-                <Button classes="w-full py-3 mt-2" onClick={() => handleRerunClick()}>
+                <Button classes="w-full py-3 mt-2 {$popupState.active && 'opacity-20'}" onClick={() => handleRerunClick()}>
                     {locale('views.transferFragmentedFunds.rerun')}
                 </Button>
             {/if}
