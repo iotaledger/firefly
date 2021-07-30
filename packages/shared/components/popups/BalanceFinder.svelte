@@ -35,6 +35,7 @@
             await asyncSyncAccounts(addressIndex, gapIndex, accountDiscoveryThreshold, false)
 
             addressIndex += gapIndex
+            accountDiscoveryThreshold++
         } catch (err) {
             error = locale(err.error)
 
