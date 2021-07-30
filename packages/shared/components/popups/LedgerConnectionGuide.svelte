@@ -43,7 +43,7 @@
     </div>
     <div class="w-full text-center my-9 px-10 z-10">
         {#if typeof locale(`popups.ledgerConnectionGuide.steps.${stepIndex}`) === 'string'}
-            <Text secondary>{locale(`popups.ledgerConnectionGuide.steps.${stepIndex}`)}</Text>
+            <Text secondary classes="inline-block">{locale(`popups.ledgerConnectionGuide.steps.${stepIndex}`)}</Text>
         {:else}
             <Text secondary classes="inline-block">{locale(`popups.ledgerConnectionGuide.steps.${stepIndex}.text`)}</Text>
             <Link

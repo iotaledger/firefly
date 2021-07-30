@@ -2,6 +2,7 @@
     import { Idle, Sidebar } from 'shared/components'
     import { loggedIn, logout } from 'shared/lib/app'
     import { Electron } from 'shared/lib/electron'
+    import { ledgerPollInterrupted, pollLedgerDeviceStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { NOTIFICATION_TIMEOUT_NEVER, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
@@ -26,6 +27,8 @@
     let startInit
     let busy
     let fundsSoonNotificationId
+
+    const LEDGER_STATUS_POLL_INTERVAL = 2000
 
     ongoingSnapshot.subscribe((os) => {
         if (os) {
@@ -167,8 +170,11 @@
     }
     $: if ($activeProfile) {
         const shouldDisplayMigrationPopup =
-        // Only display popup once the user successfully migrates the first account index
-            $isLedgerProfile && $activeProfile.ledgerMigrationCount > 0 && !$activeProfile.hasVisitedDashboard && !$popupState.active
+            // Only display popup once the user successfully migrates the first account index
+            $isLedgerProfile &&
+            $activeProfile.ledgerMigrationCount > 0 &&
+            !$activeProfile.hasVisitedDashboard &&
+            !$popupState.active
         if (shouldDisplayMigrationPopup) {
             updateProfile('hasVisitedDashboard', true)
 
@@ -187,6 +193,14 @@
     $: if ($activeProfile && !$activeProfile?.migratedTransactions?.length && fundsSoonNotificationId) {
         removeDisplayNotification(fundsSoonNotificationId)
         fundsSoonNotificationId = null
+    }
+
+    /**
+     * Reactive statement to resume ledger poll if it was interrupted
+     * when the one which interrupted has finished
+     */
+    $: if ($activeProfile && $isLedgerProfile && !$ledgerPollInterrupted) {
+        pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL)
     }
 </script>
 
