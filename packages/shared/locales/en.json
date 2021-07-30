@@ -194,8 +194,8 @@
             "accountPage": "Account Page",
             "standard": "Standard",
             "expert": "Expert",
-            "takingAWhile": "This seems to be taking a while...",
-            "reinstallLegacy": "If your Ledger is not generating addresses you may need to reinstall the {legacy} app and try again."
+            "notGeneratingAddresses": "Is your Ledger generating addresses?",
+            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
         },
         "importBackupPassword": {
             "body1": "Please enter your backup password.",
