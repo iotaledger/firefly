@@ -257,6 +257,7 @@
         },
         "transferFragmentedFunds": {
             "body1": "Firefly will now proceed to migrate your funds. This may take a while.",
+            "body2": "Ensure your Ledger is connected and the Legacy IOTA app is open at all times during migration.",
             "migrate": "Migrate funds",
             "transaction": "Transaction {number}",
             "rerun": "Try again"
