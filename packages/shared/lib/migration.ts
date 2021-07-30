@@ -13,6 +13,8 @@ import { api } from 'shared/lib/wallet'
 import { derived, get, writable, Writable } from 'svelte/store'
 import { localize } from './i18n'
 
+const LEGACY_ADDRESS_WITHOUT_CHECKSUM_LENGTH = 81
+
 export const LOG_FILE_NAME = 'migration.log'
 
 // TODO: Change back temp migration nodes (previously https://nodes.devnet.iota.org)
@@ -1217,7 +1219,7 @@ export const initialiseMigrationListeners = () => {
 export const asyncGetAddressChecksum = (address: string = '', legacy: boolean = false): Promise<string> => {
     const _checksum = (_address: string = '') => _address.slice(-CHECKSUM_LENGTH)
     return new Promise<string>((resolve, reject) => {
-        if (legacy) {
+        if (legacy || address.length === LEGACY_ADDRESS_WITHOUT_CHECKSUM_LENGTH) {
             api.getLegacyAddressChecksum(address, {
                 onSuccess(response) {
                     const checksum = _checksum(response.payload)
