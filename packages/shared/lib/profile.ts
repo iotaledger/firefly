@@ -27,6 +27,7 @@ export interface MigratedTransaction {
 export interface Profile {
     id: string
     name: string
+    type: ProfileType
     /**
      * Time for most recent stronghold back up
      */
@@ -38,8 +39,6 @@ export interface Profile {
     hiddenAccounts?: string[]
     migratedTransactions?: MigratedTransaction[]
     isDeveloperProfile: boolean
-    gapLimit?: number
-    profileType?: ProfileType
     hasVisitedDashboard?: boolean
     ledgerMigrationCount?: number
 }
@@ -109,11 +108,11 @@ activeProfileId.subscribe((profileId) => {
 })
 
 export const isSoftwareProfile: Readable<Boolean> = derived(activeProfile, $activeProfile => {
-    return $activeProfile?.profileType === ProfileType.Software
+    return $activeProfile?.type === ProfileType.Software
 })
 
 export const isLedgerProfile: Readable<Boolean> = derived(activeProfile, $activeProfile => {
-    return $activeProfile?.profileType === ProfileType.Ledger || $activeProfile?.profileType === ProfileType.LedgerSimulator
+    return $activeProfile?.type === ProfileType.Ledger || $activeProfile?.type === ProfileType.LedgerSimulator
 })
 
 /**
@@ -144,9 +143,9 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
     const profile: Profile = {
         id: generateRandomId(),
         name: profileName,
+        type: null,
         lastStrongholdBackupTime: null,
         isDeveloperProfile,
-        gapLimit: 10,
         settings: {
             currency: AvailableExchangeRates.USD,
             automaticNodeSelection: true,
@@ -158,7 +157,6 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
                 timeframe: HistoryDataProps.SEVEN_DAYS
             }
         },
-        profileType: null,
         ledgerMigrationCount: 0
     }
 
@@ -333,17 +331,13 @@ export const cleanupEmptyProfiles = async () => {
  * 
  * @method setProfileType
  * 
- * @param {ProfileType} profileType 
+ * @param {ProfileType} type
  * 
  * @returns {void}
  */
-export const setProfileType = (profileType: ProfileType) => {
-    if (ledgerSimulator && profileType === ProfileType.Ledger) {
-        updateProfile('profileType', ProfileType.LedgerSimulator)
-    }
-    else {
-        updateProfile('profileType', profileType)
-    }
+export const setProfileType = (type: ProfileType) => {
+    const isLedgerSimulator = ledgerSimulator && type === ProfileType.Ledger
+    updateProfile('type', isLedgerSimulator ? ProfileType.LedgerSimulator : type)
 }
 
 /**
@@ -371,6 +365,6 @@ export const setMissingProfileType = (accounts: WalletAccount[] = []) => {
         }
     }
     if (accountType) {
-        updateProfile('profileType', accountType)
+        updateProfile('type', accountType)
     }
 }

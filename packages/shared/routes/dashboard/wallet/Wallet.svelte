@@ -36,6 +36,7 @@
         getWalletBalanceHistory,
         hasGeneratedALedgerReceiveAddress,
         initialiseListeners,
+        isFirstSessionSync,
         isSelfTransaction,
         isTransferring,
         prepareAccountInfo,
@@ -133,7 +134,7 @@
 
     $: if ($accountsLoaded) {
         // update profileType if it is missing
-        if (!$activeProfile?.profileType) {
+        if (!$activeProfile?.type) {
             setMissingProfileType($accounts)
         }
     }
@@ -159,15 +160,15 @@
                 const _continue = async () => {
                     accountsLoaded.set(true)
 
-                    const { gapLimit, accountDiscoveryThreshold } = getSyncAccountOptions($activeProfile)
+                    const { gapLimit, accountDiscoveryThreshold } = getSyncAccountOptions()
 
                     try {
                         await asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
+
+                        if($isFirstSessionSync) isFirstSessionSync.set(false)
                     } catch (err) {
                         _onError(err)
                     }
-
-                    updateProfile('gapLimit', gapLimit)
                 }
 
                 if (accountsResponse.payload.length === 0) {

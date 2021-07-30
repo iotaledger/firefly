@@ -6,14 +6,7 @@ import type { PriceData } from 'shared/lib/marketData'
 import { HistoryDataProps } from 'shared/lib/marketData'
 import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
 import { showAppNotification, showSystemNotification } from 'shared/lib/notifications'
-import {
-    activeProfile,
-    isLedgerProfile,
-    isSoftwareProfile,
-    isStrongholdLocked,
-    Profile,
-    updateProfile
-} from 'shared/lib/profile'
+import { activeProfile, isLedgerProfile, isStrongholdLocked, ProfileType, updateProfile } from 'shared/lib/profile'
 import type {
     Account,
     Account as BaseAccount,
@@ -46,14 +39,14 @@ import type {
 import { formatUnitBestMatch } from 'shared/lib/units'
 import { get, writable, Writable } from 'svelte/store'
 import { openPopup } from './popup'
-import { walletSetupType } from './router'
 import type { ClientOptions } from './typings/client'
 import type { LedgerStatus } from './typings/ledger'
 import type { Message } from './typings/message'
 import type { NodeAuth, NodeInfo } from './typings/node'
 import { SetupType } from './typings/routes'
 import type { Duration, StrongholdStatus } from './typings/wallet'
-import { isLedgerError, displayNotificationForLedgerProfile } from './ledger'
+import { displayNotificationForLedgerProfile } from './ledger'
+import { walletSetupType } from './router'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -169,6 +162,9 @@ export const resetWallet = () => {
     transferState.set(null)
     hasGeneratedALedgerReceiveAddress.set(false)
     isSyncing.set(null)
+    isFirstSessionSync.set(true)
+    isFirstManualSync.set(true)
+    walletSetupType.set(null)
 }
 
 export const selectedAccountId = writable<string | null>(null)
@@ -181,6 +177,8 @@ export const transferState = writable<TransferState | null>(null)
 export const hasGeneratedALedgerReceiveAddress = writable<boolean | null>(false)
 
 export const isSyncing = writable<boolean>(false)
+export const isFirstSessionSync = writable<boolean>(true)
+export const isFirstManualSync = writable<boolean>(true)
 
 export const api: {
     generateMnemonic(callbacks: { onSuccess: (response: Event<string>) => void, onError: (err: ErrorEventPayload) => void })
@@ -1762,16 +1760,61 @@ export const findAccountWithAnyAddress = (addresses: string[], excludeFirst?: Wa
 
 /**
  * Get the sync options for an account
- * @param activeProfile The active profile containing gap limit information (optional)
- * @returns The sync options for an account, which contains data for the gap limit and account discovery threshold
+ * @param {boolean} isManualSync A boolean value indicating if a user (via the UI) invoked this function
+ * @returns {SyncAccountOptions} The sync options for an account, which contains data for the gap limit and account discovery threshold
  */
-export const getSyncAccountOptions = (activeProfile?: Profile): SyncAccountOptions => {
-    const _isSoftwareProfile = get(isSoftwareProfile)
-    const _isNewProfile = get(walletSetupType) === SetupType.New
+export const getSyncAccountOptions = (isManualSync: boolean = false): SyncAccountOptions => {
+    return isInitialAccountSync() ?
+        calculateInitialSyncAccountOptions(get(walletSetupType))
+        : calculateRegularSyncAccountOptions(get(activeProfile).type, isManualSync)
+}
 
-    const gapLimit =
-        activeProfile?.gapLimit ?? _isSoftwareProfile ? (_isNewProfile ? 10 : 50) : (_isNewProfile ? 1 : 10)
-    const accountDiscoveryThreshold = _isNewProfile ? 1 : 0
+/**
+ * Determines if the API call for syncing accounts is the initial one
+ * @returns {boolean} The boolean value determining if this sync API call is the first ever one
+ */
+export const isInitialAccountSync = (): boolean => {
+    return get(walletSetupType) !== null && get(isFirstSessionSync)
+}
+
+const calculateInitialSyncAccountOptions = (setupType: SetupType): SyncAccountOptions => {
+    let gapLimit = 1
+    let accountDiscoveryThreshold = 0
+
+    switch(setupType) {
+        case SetupType.Import:
+        case SetupType.Mnemonic:
+        case SetupType.Stronghold:
+            gapLimit = 25
+            accountDiscoveryThreshold = 1
+            break
+        case SetupType.FireflyLedger:
+            gapLimit = 10
+            accountDiscoveryThreshold = 1
+            break
+    }
+
+    return { gapLimit, accountDiscoveryThreshold }
+}
+
+const calculateRegularSyncAccountOptions = (profileType: ProfileType, isManualSync: boolean): SyncAccountOptions => {
+    let gapLimit = 1
+    let accountDiscoveryThreshold = 0
+
+    const _isFirstSessionSync = get(isFirstSessionSync)
+
+    switch(profileType) {
+        case ProfileType.Software:
+            gapLimit = _isFirstSessionSync ? 10 : 1
+            break
+        case ProfileType.Ledger:
+        case ProfileType.LedgerSimulator:
+        default:
+            gapLimit = 1
+            break
+    }
+
+    accountDiscoveryThreshold = (isManualSync && _isFirstSessionSync) ? 1 : 0
 
     return { gapLimit, accountDiscoveryThreshold }
 }

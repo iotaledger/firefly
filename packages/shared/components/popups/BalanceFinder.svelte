@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, Password, Spinner, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
-    import { asyncSetStrongholdPassword, asyncSyncAccounts, wallet } from 'shared/lib/wallet'
+    import { asyncSetStrongholdPassword, asyncSyncAccounts, getSyncAccountOptions, wallet } from 'shared/lib/wallet'
     import { isLedgerProfile, isSoftwareProfile, isStrongholdLocked } from 'shared/lib/profile'
     import { showAppNotification } from 'shared/lib/notifications'
     import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
@@ -11,8 +11,8 @@
     const { balanceOverview } = $wallet
 
     let addressIndex = 0
-    let gapIndex = 25
-    let accountDiscoveryThreshold = 10
+    let gapIndex = $isLedgerProfile ? 10 : 25
+    let accountDiscoveryThreshold = $isLedgerProfile ? 3 : 10
     let password = ''
     let error = ''
     let isBusy = false
@@ -35,6 +35,7 @@
             await asyncSyncAccounts(addressIndex, gapIndex, accountDiscoveryThreshold, false)
 
             addressIndex += gapIndex
+            accountDiscoveryThreshold++
         } catch (err) {
             error = locale(err.error)
 

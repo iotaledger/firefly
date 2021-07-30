@@ -167,11 +167,8 @@
     }
     $: if ($activeProfile) {
         const shouldDisplayMigrationPopup =
-            // Only display popup once the user successfully migrates the first account index
-            $isLedgerProfile &&
-            $activeProfile.ledgerMigrationCount === 1 &&
-            !$activeProfile.hasVisitedDashboard &&
-            !$popupState.active
+        // Only display popup once the user successfully migrates the first account index
+            $isLedgerProfile && $activeProfile.ledgerMigrationCount > 0 && !$activeProfile.hasVisitedDashboard && !$popupState.active
         if (shouldDisplayMigrationPopup) {
             updateProfile('hasVisitedDashboard', true)
 
