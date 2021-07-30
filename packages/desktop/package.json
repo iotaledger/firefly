@@ -19,6 +19,7 @@
     },
     "dependencies": {
         "@ledgerhq/hw-transport-node-hid": "^5.13.0",
+        "@ledgerhq/hw-transport-node-speculos": "^6.1.0",
         "argon2": "^0.27.1",
         "electron-log": "^4.3.1",
         "electron-updater": "^4.3.5",

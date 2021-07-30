@@ -85,12 +85,13 @@ let paths = {
 const defaultWebPreferences = {
     nodeIntegration: false,
     contextIsolation: true,
-    enableRemoteModule: true,
+    enableRemoteModule: false,
     worldSafeExecuteJavaScript: true,
     disableBlinkFeatures: 'Auxclick',
     webviewTag: false,
     enableWebSQL: false,
-    devTools: !app.isPackaged,
+    // TODO: Remove before Ledger release
+    devTools: true,
 }
 
 if (app.isPackaged) {
@@ -122,7 +123,8 @@ function isUrlAllowed(targetUrl) {
         'chrysalis.iota.org',
         'chrysalis.docs.iota.org',
         'firefly.iota.org',
-        'blog.iota.org'
+        'blog.iota.org',
+        'support.ledger.com',
     ]
 
     const url = new URL(targetUrl)

@@ -1,6 +1,7 @@
 <script>
-    import { Button, Illustration, Text } from 'shared/components'
+    import { Animation, Button, Illustration, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
+    import { LedgerAppName } from 'shared/lib/typings/ledger'
 
     export let locale
 
@@ -23,30 +24,39 @@
 </script>
 
 <style type="text/scss">
-    .illustration {
+    .illustration-wrapper {
         height: 320px;
-
+        .animation {
+            width: 117%;
+            height: 117%;
+        }
         :global(img) {
             min-height: 280px;
             max-width: 100%;
             object-position: 0 -3px;
+            z-index: 1;
         }
     }
 </style>
 
 <Text type="h4" classes="mb-6">{locale('popups.ledgerAppGuide.title')}</Text>
 <div class="w-full flex flex-row flex-wrap">
-    <div class="illustration w-full bg-white dark:bg-gray-900 flex justify-center">
+    <div class="illustration-wrapper relative w-full bg-white dark:bg-gray-900 flex justify-center items-center">
+        <div class="animation absolute transform top-2 left-1/2 -translate-x-1/2 z-0">
+            <Animation animation="ledger-bg-desktop" />
+        </div>
         <Illustration illustration={stepAnimations[stepIndex]} />
     </div>
     <div class="w-full text-center my-9 px-10">
-        <Text secondary>{locale('popups.ledgerAppGuide.steps')[stepIndex]}</Text>
+        <Text secondary>
+            {locale(`popups.ledgerAppGuide.steps.${stepIndex}`, { values: { legacy: LedgerAppName.IOTALegacy } })}
+        </Text>
     </div>
     <div class="w-full flex flex-row flex-nowrap space-x-4">
         <Button classes="w-1/2" secondary onClick={() => changeIndex(-1)} disabled={stepIndex === 0}>
             {locale('actions.previous')}
         </Button>
-        {#if stepIndex < locale('popups.ledgerAppGuide.steps').length - 1}
+        {#if stepIndex < Object.keys(locale('popups.ledgerAppGuide.steps')).length - 1}
             <Button classes="w-1/2" secondary onClick={() => changeIndex(1)}>{locale('actions.next')}</Button>
         {:else}
             <Button classes="w-1/2" primary onClick={handleCloseClick}>{locale('actions.close')}</Button>

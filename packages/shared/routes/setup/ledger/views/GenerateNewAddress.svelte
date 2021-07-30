@@ -1,6 +1,12 @@
 <script lang="typescript">
-    import { Button, Icon, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
-    import { ledgerSimulator, promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { activeProfile } from 'shared/lib/profile'
+    import { Animation, Button, Icon, OnboardingLayout, Spinner, Text } from 'shared/components'
+    import {
+        formatAddressForLedger,
+        ledgerSimulator,
+        displayNotificationForLedgerProfile,
+        promptUserToConnectLedger,
+    } from 'shared/lib/ledger'
     import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
@@ -15,7 +21,7 @@
 
     const dispatch = createEventDispatcher()
 
-    $: illustration = !newAddress
+    $: animation = !newAddress
         ? 'ledger-generate-address-desktop'
         : confirmed
         ? 'ledger-address-confirmed-desktop'
@@ -25,39 +31,49 @@
         newAddress = null
         busy = true
 
+        const _createAccount = (idx) => {
+            const officialNodes = getOfficialNodes()
+            const officialNetwork = getOfficialNetwork()
+            api.createAccount(
+                {
+                    clientOptions: {
+                        nodes: officialNodes,
+                        node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
+                        network: officialNetwork,
+                    },
+                    alias: `${locale('general.account')} ${idx}`,
+                    signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
+                    allowCreateMultipleEmptyAccounts: true,
+                },
+                {
+                    onSuccess(createAccountResponse) {
+                        newAddress = createAccountResponse.payload.addresses[0].address
+
+                        displayAddress()
+                    },
+                    onError(error) {
+                        busy = false
+
+                        console.error(error)
+
+                        displayNotificationForLedgerProfile('error', true, true, false, false, error)
+                    },
+                }
+            )
+        }
+
         const _onConnected = () => {
             api.getAccounts({
                 onSuccess(getAccountsResponse) {
-                    // If we have already created an account, just get the first address of the first account
                     if (getAccountsResponse.payload.length > 0) {
-                        newAddress = getAccountsResponse.payload[0].addresses[0].address
-
-                        displayAddress()
+                        if (getAccountsResponse.payload[$activeProfile.ledgerMigrationCount]) {
+                            newAddress = getAccountsResponse.payload[$activeProfile.ledgerMigrationCount].addresses[0].address
+                            displayAddress()
+                        } else {
+                            _createAccount($activeProfile.ledgerMigrationCount + 1)
+                        }
                     } else {
-                        const officialNodes = getOfficialNodes()
-                        const officialNetwork = getOfficialNetwork()
-                        api.createAccount(
-                            {
-                                clientOptions: {
-                                    nodes: officialNodes,
-                                    node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
-                                    network: officialNetwork,
-                                },
-                                alias: `${locale('general.account')} 1`,
-                                signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
-                            },
-                            {
-                                onSuccess(createAccountResponse) {
-                                    newAddress = createAccountResponse.payload.addresses[0].address
-
-                                    displayAddress()
-                                },
-                                onError(error) {
-                                    busy = false
-                                    console.error(error)
-                                },
-                            }
-                        )
+                        _createAccount(1)
                     }
                 },
                 onError(getAccountsError) {
@@ -72,7 +88,7 @@
     }
 
     function displayAddress() {
-        api.getMigrationAddress(true, {
+        api.getMigrationAddress(true, $activeProfile.ledgerMigrationCount, {
             onSuccess() {
                 busy = false
 
@@ -83,6 +99,8 @@
                 busy = false
 
                 console.error(err)
+
+                displayNotificationForLedgerProfile('error', true, true, false, false, err)
             },
         })
     }
@@ -111,17 +129,19 @@
             {:else if !confirmed}
                 <Text type="h2" classes="mb-5">{locale('views.generateNewLedgerAddress.confirmTitle')}</Text>
                 <Text type="p" secondary classes="mb-10">{locale('views.generateNewLedgerAddress.confirmBody')}</Text>
-                <div class="rounded-lg bg-gray-50 dark:bg-gray-700 p-4 text-center">
-                    <Text type="pre">{newAddress}</Text>
+                <div class="rounded-lg bg-gray-50 dark:bg-gray-900 p-5 text-center">
+                    <Text type="h5" highlighted classes="mb-2">{locale('general.newAddress')}</Text>
+                    <Text type="pre" bigger>{formatAddressForLedger(newAddress)}</Text>
                 </div>
             {:else}
                 <Text type="h2" classes="mb-5">{locale('views.generateNewLedgerAddress.confirmedTitle')}</Text>
                 <Text type="p" secondary classes="mb-12">{locale('views.generateNewLedgerAddress.confirmedBody')}</Text>
-                <div class="flex flex-col items-center bg-gray-50 dark:bg-gray-700 rounded-2xl p-5 text-center">
-                    <div class="bg-green-100 rounded-2xl relative -mt-10 mb-5">
+                <div class="flex flex-col items-center bg-gray-50 dark:bg-gray-900 rounded-lg p-5 text-center">
+                    <div class="bg-green-100 rounded-2xl relative -mt-10 mb-4">
                         <Icon icon="success-check" classes="text-white" />
                     </div>
-                    <Text type="pre">{newAddress}</Text>
+                    <Text type="h5" highlighted classes="mb-2">{locale('general.newAddress')}</Text>
+                    <Text type="pre" bigger>{formatAddressForLedger(newAddress)}</Text>
                 </div>
             {/if}
         </div>
@@ -140,7 +160,11 @@
             {/if}
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center items-center bg-gray-50 dark:bg-gray-900">
-            <Illustration width="100%" {illustration} />
+            <Animation
+                width="100%"
+                animation="ledger-bg-desktop"
+                classes="absolute transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+            <Animation width="100%" {animation} />
         </div>
     </OnboardingLayout>
 {/if}

@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Icon } from 'shared/components'
-    import { closePopup } from 'shared/lib/popup'
+    import { closePopup, popupState } from 'shared/lib/popup'
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
     import AddNode from './AddNode.svelte'
@@ -13,10 +13,14 @@
     import Diagnostics from './Diagnostics.svelte'
     import ErrorLog from './ErrorLog.svelte'
     import HideAccount from './HideAccount.svelte'
+    import LedgerAddress from './LedgerAddress.svelte'
     import LedgerAppGuide from './LedgerAppGuide.svelte'
     import LedgerConfirmation from './LedgerConfirmation.svelte'
     import LedgerConnectionGuide from './LedgerConnectionGuide.svelte'
+    import LedgerLegacyTransaction from './LedgerLegacyTransaction.svelte'
+    import LedgerMigrateIndex from './LedgerMigrateIndex.svelte'
     import LedgerNotConnected from './LedgerNotConnected.svelte'
+    import LedgerTransaction from './LedgerTransaction.svelte'
     import MissingBundle from './MissingBundle.svelte'
     import Password from './Password.svelte'
     import QR from './QR.svelte'
@@ -71,6 +75,10 @@
         ledgerConfirmation: LedgerConfirmation,
         ledgerAppGuide: LedgerAppGuide,
         ledgerConnectionGuide: LedgerConnectionGuide,
+        ledgerTransaction: LedgerTransaction,
+        ledgerLegacyTransaction: LedgerLegacyTransaction,
+        ledgerAddress: LedgerAddress,
+        ledgerMigrateIndex: LedgerMigrateIndex,
         removeNode: RemoveNode,
         busy: Busy,
         errorLog: ErrorLog,
@@ -89,7 +97,7 @@
             if ('function' === typeof props?.onCancelled) {
                 props?.onCancelled()
             }
-            closePopup()
+            closePopup($popupState?.preventClose)
         }
     }
 
@@ -152,7 +160,9 @@
         bind:this={popupContent}
         class={`${size} bg-white rounded-xl pt-6 px-8 pb-8 relative ${fullScreen ? 'full-screen dark:bg-gray-900' : 'dark:bg-gray-900'}`}>
         {#if !hideClose}
-            <button on:click={closePopup} class="absolute top-6 right-8 text-gray-800 dark:text-white focus:text-blue-500">
+            <button
+                on:click={() => closePopup($popupState?.preventClose)}
+                class="absolute top-6 right-8 text-gray-800 dark:text-white focus:text-blue-500">
                 <Icon icon="close" />
             </button>
         {/if}

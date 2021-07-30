@@ -1,16 +1,18 @@
 <script lang="typescript">
     import { Button, Password, Spinner, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
-    import { asyncSetStrongholdPassword, asyncSyncAccounts, wallet } from 'shared/lib/wallet'
-    import { isStrongholdLocked, isSoftwareProfile } from 'shared/lib/profile'
-    
+    import { asyncSetStrongholdPassword, asyncSyncAccounts, getSyncAccountOptions, wallet } from 'shared/lib/wallet'
+    import { isLedgerProfile, isSoftwareProfile, isStrongholdLocked } from 'shared/lib/profile'
+    import { showAppNotification } from 'shared/lib/notifications'
+    import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
+
     export let locale
 
     const { balanceOverview } = $wallet
 
     let addressIndex = 0
-    let gapIndex = 25
-    let accountDiscoveryThreshold = 10
+    let gapIndex = $isLedgerProfile ? 10 : 25
+    let accountDiscoveryThreshold = $isLedgerProfile ? 3 : 10
     let password = ''
     let error = ''
     let isBusy = false
@@ -19,13 +21,32 @@
         try {
             error = ''
             isBusy = true
+
             if ($isSoftwareProfile && $isStrongholdLocked) {
                 await asyncSetStrongholdPassword(password)
+            } else if($isLedgerProfile && !isLedgerConnected()) {
+                isBusy = false
+
+                displayNotificationForLedgerProfile('warning')
+
+                return
             }
+
             await asyncSyncAccounts(addressIndex, gapIndex, accountDiscoveryThreshold, false)
+
             addressIndex += gapIndex
+            accountDiscoveryThreshold++
         } catch (err) {
             error = locale(err.error)
+
+            if($isLedgerProfile) {
+                displayNotificationForLedgerProfile('error', true, true, false, false, err)
+            } else {
+                showAppNotification({
+                    type: 'error',
+                    message: locale(err.error)
+                })
+            }
         } finally {
             isBusy = false
         }

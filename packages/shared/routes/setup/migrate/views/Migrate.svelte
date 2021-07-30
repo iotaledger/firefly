@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Animation, Box, Button, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
+    import { Animation, Box, Button, OnboardingLayout, Spinner, Text } from 'shared/components'
     import {
         AvailableExchangeRates,
         convertToFiat,
@@ -9,6 +9,7 @@
         formatCurrency,
     } from 'shared/lib/currency'
     import { Electron } from 'shared/lib/electron'
+    import { getLegacyErrorMessage, promptUserToConnectLedger } from 'shared/lib/ledger'
     import {
         ADDRESS_SECURITY_LEVEL,
         confirmedBundles,
@@ -24,13 +25,13 @@
         unselectedInputs,
     } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
+    import { closePopup } from 'shared/lib/popup'
+    import { activeProfile,  newProfile, profileInProgress, saveProfile, setActiveProfile, updateProfile } from 'shared/lib/profile'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
-    import { promptUserToConnectLedger } from 'shared/lib/ledger'
 
     export let locale
     export let mobile
@@ -54,6 +55,9 @@
     let singleMigrationBundleHash
 
     let legacyLedger = $walletSetupType === SetupType.TrinityLedger
+    $: animation = legacyLedger ? 'ledger-migrate-desktop' : 'migrate-desktop'
+
+    let closeTransport = () => {}
 
     confirmedBundles.subscribe((newConfirmedBundles) => {
         newConfirmedBundles.forEach((bundle) => {
@@ -73,23 +77,33 @@
                 const _onConnected = () => {
                     Electron.ledger
                         .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
-                        .then((iota) => {
-                            return createLedgerMigrationBundle(0, iota.prepareTransfers)
+                        .then(({ iota, callback }) => {
+                            closeTransport = callback
+                            return createLedgerMigrationBundle(0, iota.prepareTransfers, callback)
                         })
                         .then(({ trytes, bundleHash }) => {
+                            closePopup(true) // close transaction popup
                             singleMigrationBundleHash = bundleHash
                             return sendLedgerMigrationBundle(bundleHash, trytes)
                         })
                         .then((data) => {
-                            // Save profile
-                            saveProfile($newProfile)
-                            setActiveProfile($newProfile.id)
-
-                            profileInProgress.set(undefined)
-                            newProfile.set(null)
+                            if ($newProfile) {
+                             // Save profile
+                                saveProfile($newProfile)
+                                setActiveProfile($newProfile.id)
+                                              
+                                profileInProgress.set(undefined)
+                                newProfile.set(null)
+                            }
                         })
                         .catch((error) => {
                             loading = false
+                            closePopup(true) // close transaction popup
+                            closeTransport()
+                            showAppNotification({
+                                type: 'error',
+                                message: locale(getLegacyErrorMessage(error)),
+                            })
                             console.error(error)
                         })
                 }
@@ -162,11 +176,7 @@
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            {#if legacyLedger}
-                <Illustration width="100%" illustration="ledger-migrate-desktop" />
-            {:else}
-                <Animation animation="migrate-desktop" />
-            {/if}
+            <Animation {animation} />
         </div>
     </OnboardingLayout>
 {/if}

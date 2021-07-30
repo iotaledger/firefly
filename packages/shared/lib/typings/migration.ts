@@ -22,7 +22,8 @@ export interface Input {
 export interface MigrationData {
     lastCheckedAddressIndex: number;
     balance: number;
-    inputs: Input[]
+    inputs: Input[];
+    spentAddresses?: boolean;
 }
 
 export interface MigrationBundle {
@@ -34,6 +35,12 @@ export interface SendMigrationBundleResponse {
     address: string;
     value: number;
     tailTransactionHash: string;
+}
+
+export interface Transfer {
+    address: string;
+    value: number;
+    tag: string;
 }
 
 export enum RiskLevel {
@@ -169,13 +176,17 @@ export function sendMigrationBundle(
 export function getMigrationAddress(
     bridge: Bridge,
     __ids: CommunicationIds,
-    prompt: boolean
+    ledgerPrompt: boolean,
+    accountIndex: number
 ) {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
         cmd: 'GetMigrationAddress',
-        payload: prompt
+        payload: {
+            ledger_prompt: ledgerPrompt,
+            account_id: accountIndex
+        }
     })
 }
 
@@ -265,7 +276,7 @@ export function getLedgerMigrationData(
  * 
  * @returns {Promise}
  */
- export function sendLedgerMigrationBundle(
+export function sendLedgerMigrationBundle(
     bridge: Bridge,
     __ids: CommunicationIds,
     nodes: string[],
@@ -281,5 +292,29 @@ export function getLedgerMigrationData(
             bundle,
             mwm
         },
+    })
+}
+
+/**
+ * Gets a legacy address with checksum.
+ * 
+ * @method getLegacyAddressChecksum
+ * 
+ * @param {Bridge} bridge 
+ * @param {CommunicationIds} __ids 
+ * @param {string} address
+ * 
+ * @returns {Promise}
+ */
+export function getLegacyAddressChecksum(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+    address: string
+) {
+    return bridge({
+        actorId: __ids.actorId,
+        id: __ids.messageId,
+        cmd: 'GetLegacyAddressChecksum',
+        payload: address
     })
 }

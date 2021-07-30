@@ -9,7 +9,7 @@
         formatCurrency,
     } from 'shared/lib/currency'
     import { Electron } from 'shared/lib/electron'
-    import { promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import {
         ADDRESS_SECURITY_LEVEL,
         bundlesWithUnspentAddresses,
@@ -18,7 +18,6 @@
         hardwareIndexes,
         hasAnySpentAddressWithNoBundleHashes,
         hasLowBalanceOnAllSpentAddresses,
-        legacyAddressForTesting,
         migration,
         MINIMUM_MIGRATION_BALANCE,
         resetMigrationState,
@@ -29,7 +28,6 @@
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { setClipboard } from 'shared/lib/utils'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
 
@@ -37,6 +35,7 @@
     export let mobile
 
     let isCheckingForBalance
+    let legacyLedger = $walletSetupType === SetupType.TrinityLedger
 
     const { seed, data, bundles } = $migration
 
@@ -64,8 +63,6 @@
 
     let error = getError(balance)
     let formattedBalance = formatUnitBestMatch(balance, true, 3)
-
-    let legacyLedger = $walletSetupType === SetupType.TrinityLedger
 
     bundles.subscribe((updatedBundles) => {
         _bundles = updatedBundles
@@ -173,15 +170,18 @@
             const _onConnected = () => {
                 Electron.ledger
                     .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
-                    .then((iota) => {
-                        return getLedgerMigrationData(iota.getAddress)
+                    .then(({ iota, callback }) => {
+                        return getLedgerMigrationData(iota.getAddress, callback)
                     })
-                    .then((data) => {
+                    .then(() => {
                         isCheckingForBalance = false
                     })
                     .catch((error) => {
                         isCheckingForBalance = false
+
                         console.error(error)
+
+                        displayNotificationForLedgerProfile('error', true, true, false, true, error)
                     })
             }
             const _onCancel = () => (isCheckingForBalance = false)
@@ -219,13 +219,6 @@
             </Box>
             {#if error.text}
                 <Toast classes="mt-4" type="error" message={error.text} />
-            {/if}
-            {#if legacyLedger}
-                <div
-                    on:click={() => setClipboard($legacyAddressForTesting)}
-                    class="cursor-pointer flex mt-2 flex-col items-center bg-gray-50 dark:bg-gray-700 rounded-2xl p-5 text-center">
-                    <Text type="pre">{$legacyAddressForTesting}</Text>
-                </div>
             {/if}
         </div>
         <div slot="leftpane__action" class="flex flex-row justify-between items-center space-x-4">

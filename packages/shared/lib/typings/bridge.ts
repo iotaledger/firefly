@@ -37,6 +37,7 @@ export enum ResponseTypes {
     LatestAddress = 'LatestAddress',
     Balance = 'Balance',
     SyncedAccounts = 'SyncedAccounts',
+    Ok = 'Ok',
     SyncedAccount = 'SyncedAccount',
     Reattached = 'Reattached',
     BackupSuccessful = 'BackupSuccessful',
@@ -53,6 +54,7 @@ export enum ResponseTypes {
     Broadcast = 'Broadcast',
     StrongholdStatusChange = 'StrongholdStatusChange',
     TransferProgress = 'TransferProgress',
+    LedgerAddressGeneration = "LedgerAddressGeneration",
     MigrationProgress = 'MigrationProgress',
     GeneratedMnemonic = 'GeneratedMnemonic',
     StoredMnemonic = 'StoredMnemonic',
@@ -77,6 +79,7 @@ export enum ResponseTypes {
     MigrationAddress = 'MigrationAddress',
     MinedBundle = 'MinedBundle',
     MineBundle = 'MineBundle',
+    LegacyAddressChecksum = 'GetLegacyAddressChecksum'
 }
 
 export enum Actions {
@@ -94,6 +97,7 @@ export type GeneratedAddressResponse = Response<ResponseTypes.GeneratedAddress, 
 export type LatestAddressResponse = Response<ResponseTypes.LatestAddress, Address>
 export type BalanceResponse = Response<ResponseTypes.Balance, Balance>
 export type SyncAccountsResponse = Response<ResponseTypes.SyncedAccounts, SyncedAccount[]>
+export type StartBackgroundSyncResponse = Response<ResponseTypes.Ok, void>
 export type SyncAccountResponse = Response<ResponseTypes.SyncedAccount, SyncedAccount>
 export type ReattachResponse = Response<ResponseTypes.Reattached, string> // message id
 export type BackupSuccessfulResponse = Response<ResponseTypes.BackupSuccessful, void>
@@ -127,6 +131,7 @@ export type GetNodeInfoResponse = Response<ResponseTypes.NodeInfo, NodeInfo>
 export type GetMigrationAddressResponse = Response<ResponseTypes.MigrationAddress, MigrationAddress>
 export type MinedBundleResponse = Response<ResponseTypes.MinedBundle, string[]>
 export type LedgerDeviceStatusResponse = Response<ResponseTypes.LedgerStatus, LedgerStatus>
+export type LegacyAddressChecksumResponse = Response<ResponseTypes.LegacyAddressChecksum, string>
 
 export type MessageResponse =
     RemovedAccountResponse
@@ -139,6 +144,7 @@ export type MessageResponse =
     | LatestAddressResponse
     | BalanceResponse
     | SyncAccountsResponse
+    | StartBackgroundSyncResponse
     | SyncAccountResponse
     | ReattachResponse
     | BackupSuccessfulResponse
@@ -168,5 +174,6 @@ export type MessageResponse =
     | GetNodeInfoResponse
     | GetMigrationAddressResponse
     | MinedBundleResponse
+    | LegacyAddressChecksumResponse
 
 export type Bridge = (message: BridgeMessage) => Promise<string>

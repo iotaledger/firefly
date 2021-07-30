@@ -1,9 +1,10 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
     import { currentLedgerMigrationProgress, LedgerMigrationProgress } from 'shared/lib/migration'
-    import { walletSetupType } from 'shared/lib/router'
-    import { SetupType } from 'shared/lib/typings/routes'
+    import { ledgerRoute, ledgerRouteHistory, walletSetupType } from 'shared/lib/router'
+    import { LedgerRoutes, SetupType } from 'shared/lib/typings/routes'
     import { createEventDispatcher, onMount } from 'svelte'
+    import { get } from 'svelte/store'
     import {
         AccountIndex,
         Connect,
@@ -17,44 +18,33 @@
     export let locale
     export let mobile
 
-    enum State {
-        Connect = 'connect',
-        RestoreFromLedger = 'restoreFromLedger',
-        LegacyIntro = 'legacyIntro',
-        InstallationGuide = 'installationGuide',
-        GenerateAddress = 'generateAddress',
-        SwitchApps = 'switchApps',
-        AccountIndex = 'accountIndex',
-    }
-
     const dispatch = createEventDispatcher()
 
-    let state: State
-    let stateHistory = []
+    $: $ledgerRoute, updateMigrationProgress()
 
     onMount(() => {
-        if ($walletSetupType === SetupType.New || $walletSetupType === SetupType.FireflyLedger) {
-            state = State.Connect
-        } else if ($walletSetupType === SetupType.TrinityLedger) {
-            state = State.LegacyIntro
+        // reinitialize the init view only if we are not in the middle of a ledger flow
+        if (!$ledgerRouteHistory.length) {
+            if ($walletSetupType === SetupType.New || $walletSetupType === SetupType.FireflyLedger) {
+                ledgerRoute.set(LedgerRoutes.Connect)
+            } else {
+                ledgerRoute.set(LedgerRoutes.LegacyIntro)
+            }
         }
-        currentLedgerMigrationProgress.set(null)
     })
 
-    $: state, updateMigrationProgress()
-
     const updateMigrationProgress = () => {
-        switch (state) {
-            case State.Connect:
+        switch (get(ledgerRoute)) {
+            case LedgerRoutes.Connect:
                 currentLedgerMigrationProgress.set(LedgerMigrationProgress.InstallLedgerApp)
                 break
-            case State.GenerateAddress:
+            case LedgerRoutes.GenerateAddress:
                 currentLedgerMigrationProgress.set(LedgerMigrationProgress.GenerateAddress)
                 break
-            case State.SwitchApps:
+            case LedgerRoutes.SwitchApps:
                 currentLedgerMigrationProgress.set(LedgerMigrationProgress.SwitchLedgerApp)
                 break
-            case State.AccountIndex:
+            case LedgerRoutes.AccountIndex:
                 currentLedgerMigrationProgress.set(LedgerMigrationProgress.TransferFunds)
                 break
             default:
@@ -65,76 +55,75 @@
 
     const _next = async (event) => {
         let nextState
-        switch (state) {
-            case State.Connect:
+        switch (get(ledgerRoute)) {
+            case LedgerRoutes.Connect:
                 if ($walletSetupType === SetupType.New) {
                     dispatch('next')
                 } else if ($walletSetupType === SetupType.FireflyLedger) {
-                    nextState = State.RestoreFromLedger
+                    nextState = LedgerRoutes.RestoreFromLedger
                 } else if ($walletSetupType === SetupType.TrinityLedger) {
-                    nextState = State.GenerateAddress
+                    nextState = LedgerRoutes.GenerateAddress
                 }
                 break
-            case State.RestoreFromLedger:
+            case LedgerRoutes.RestoreFromLedger:
                 dispatch('next')
                 break
-            case State.LegacyIntro:
-                nextState = State.InstallationGuide
+            case LedgerRoutes.LegacyIntro:
+                nextState = LedgerRoutes.InstallationGuide
                 break
-            case State.InstallationGuide:
-                nextState = State.Connect
+            case LedgerRoutes.InstallationGuide:
+                nextState = LedgerRoutes.Connect
                 break
-            case State.GenerateAddress:
-                nextState = State.SwitchApps
+            case LedgerRoutes.GenerateAddress:
+                nextState = LedgerRoutes.SwitchApps
                 break
-            case State.SwitchApps:
-                nextState = State.AccountIndex
+            case LedgerRoutes.SwitchApps:
+                nextState = LedgerRoutes.AccountIndex
                 break
-            case State.AccountIndex:
+            case LedgerRoutes.AccountIndex:
                 dispatch('next')
                 break
         }
         if (nextState) {
-            stateHistory.push(state)
-            stateHistory = stateHistory
-            state = nextState
+            $ledgerRouteHistory.push(get(ledgerRoute))
+            ledgerRoute.set(nextState)
         }
     }
     const _previous = () => {
-        let prevState = stateHistory.pop()
+        let prevState = $ledgerRouteHistory.pop() as LedgerRoutes
         if (prevState) {
-            state = prevState
+            ledgerRoute.set(prevState)
         } else {
             dispatch('previous')
         }
     }
 </script>
 
-{#if state === State.Connect}
+{#if $ledgerRoute === LedgerRoutes.Connect}
     <Transition>
         <Connect on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
-{:else if state === State.RestoreFromLedger}
+{:else if $ledgerRoute === LedgerRoutes.RestoreFromLedger}
     <Transition>
         <RestoreFromLedger on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
-{:else if state === State.LegacyIntro}
+{:else if $ledgerRoute === LedgerRoutes.LegacyIntro}
     <Transition>
         <LegacyIntro on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
-{:else if state === State.InstallationGuide}
+{:else if $ledgerRoute === LedgerRoutes.InstallationGuide}
     <Transition>
         <InstallationGuide on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
-{:else if state === State.GenerateAddress}
+{:else if $ledgerRoute === LedgerRoutes.GenerateAddress}
     <Transition>
         <GenerateNewAddress on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
-{:else if state === State.SwitchApps}
+{:else if $ledgerRoute === LedgerRoutes.SwitchApps}
     <Transition>
         <SwitchApps on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
-{:else if state === State.AccountIndex}
+{:else if $ledgerRoute === LedgerRoutes.AccountIndex}
     <Transition>
         <AccountIndex on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>

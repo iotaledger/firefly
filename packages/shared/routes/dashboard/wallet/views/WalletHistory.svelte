@@ -2,17 +2,20 @@
     import { ActivityRow, Icon, Text } from 'shared/components'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
-    import { accountRoute, walletRoute } from 'shared/lib/router'
-    import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
+    import { isSoftwareProfile } from 'shared/lib/profile'
+    import { accountRoute, walletRoute, walletSetupType } from 'shared/lib/router'
+    import { AccountRoutes, SetupType, WalletRoutes } from 'shared/lib/typings/routes'
     import {
         AccountMessage,
         api,
         asyncSyncAccounts,
+        getSyncAccountOptions,
+        isFirstSessionSync,
         isSyncing,
         selectedAccountId,
         selectedMessage,
         WalletAccount,
+        isFirstManualSync
     } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable, Writable } from 'svelte/store'
@@ -35,16 +38,32 @@
         }
     }
 
+    function handleSyncAccountOptions() {
+        if(get(isFirstManualSync)) {
+            isFirstManualSync.set(true)
+
+            return {
+                gapLimit: $isSoftwareProfile ? 10 : 1,
+                accountDiscoveryThreshold: 1
+            }
+        } else {
+            return getSyncAccountOptions(true)
+        }
+    }
+
     function handleSyncClick() {
+        const { gapLimit, accountDiscoveryThreshold } = handleSyncAccountOptions()
+
         if ($isSoftwareProfile) {
             api.getStrongholdStatus({
                 onSuccess(strongholdStatusResponse) {
                     if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                        openPopup({ type: 'password', props: { onSuccess: async () => asyncSyncAccounts(0, 10, 1, false) } })
+                        openPopup({
+                            type: 'password',
+                            props: { onSuccess: async () => asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false) }
+                        })
                     } else {
-                        const gapLimit = $activeProfile?.gapLimit
-                        asyncSyncAccounts(gapLimit === undefined ? undefined : 0, gapLimit, 1, false)
-                        updateProfile('gapLimit', undefined)
+                        asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
                     }
                 },
                 onError(err) {
@@ -55,10 +74,12 @@
                 },
             })
         } else {
-            const gapLimit = $activeProfile?.gapLimit
-            asyncSyncAccounts(gapLimit === undefined ? undefined : 0, gapLimit, 1)
-            updateProfile('gapLimit', undefined)
+            asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold)
         }
+    }
+
+    function shouldShowFirstSync() {
+        return $isFirstSessionSync && $walletSetupType && $walletSetupType !== SetupType.New
     }
 </script>
 
@@ -70,7 +91,7 @@
         </button>
     </div>
     <div class="overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2 scroll-secondary">
-        {#if $activeProfile?.gapLimit === 50 && $isSyncing}
+        {#if $isSyncing && shouldShowFirstSync()}
             <div class="h-full flex flex-col items-center justify-center text-center">
                 <Text secondary>{locale('general.firstSync')}</Text>
             </div>

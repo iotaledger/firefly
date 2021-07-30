@@ -1,14 +1,14 @@
 import type { MarketDataValidationResponse } from 'shared/lib/marketData'
-import type { ChrysalisNodeDataValidationResponse, ChrysalisVariablesValidationResponse } from 'shared/lib/migration'
+import type { ChrysalisVariablesValidationResponse } from 'shared/lib/migration'
 import type { Account, SyncedAccount } from './typings/account'
 import type { Address } from './typings/address'
 import type { MessageResponse } from './typings/bridge'
 import { ResponseTypes } from './typings/bridge'
-import type { Message } from './typings/message'
 import type { LedgerStatus } from './typings/ledger'
-import type { StrongholdStatus } from './typings/wallet'
+import type { Message } from './typings/message'
+import type { MigrationData } from './typings/migration'
 import type { NodeInfo } from './typings/node'
-import type { MigrationData } from './typings/migration';
+import type { StrongholdStatus } from './typings/wallet'
 
 type Validators =
     | IdValidator
@@ -558,13 +558,13 @@ class MigrationDataValidator extends Validator {
     isValid(response: MessageResponse): ValidationResponse {
         const payload = response.payload as MigrationData
 
-        if('number' !== typeof payload.lastCheckedAddressIndex) {
+        if ('number' !== typeof payload.lastCheckedAddressIndex) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of address index'
             })
         }
-        
+
         return super.isValid(response);
     }
 }
@@ -789,6 +789,7 @@ export default class ValidatorService {
             [ResponseTypes.StoredMnemonic]: this.createBaseValidator().getFirst(),
             [ResponseTypes.VerifiedMnemonic]: this.createBaseValidator().getFirst(),
             [ResponseTypes.SyncedAccounts]: this.createBaseValidator().add(new SyncedAccountListValidator()).getFirst(),
+            [ResponseTypes.Ok]: this.createBaseValidator().getFirst(),
             [ResponseTypes.SentTransfer]: this.createBaseValidator().add(new MessageValidator()).getFirst(),
             [ResponseTypes.StoragePasswordSet]: this.createBaseValidator().getFirst(),
             [ResponseTypes.StrongholdStatus]: this.createBaseValidator().add(new StrongholdStatusValidator()).getFirst(),
@@ -813,6 +814,7 @@ export default class ValidatorService {
 
             // Legacy seed APIs
             [ResponseTypes.LegacySeedChecksum]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.LegacyAddressChecksum]: this.createBaseValidator().getFirst(),
 
             // Migration
             [ResponseTypes.MigrationData]: this.createBaseValidator().add(new MigrationDataValidator()).getFirst(),
@@ -830,11 +832,10 @@ export default class ValidatorService {
             [ResponseTypes.BalanceChange]: this.createBaseEventValidator().getFirst(),
             [ResponseTypes.ConfirmationStateChange]: this.createBaseEventValidator().getFirst(),
             [ResponseTypes.TransferProgress]: this.createBaseEventValidator().getFirst(),
+            [ResponseTypes.LedgerAddressGeneration]: this.createBaseEventValidator().getFirst(),
             [ResponseTypes.MigrationProgress]: this.createBaseEventValidator().getFirst(),
             // Market data
             MarketData: new ValidatorChainBuilder().add(new TypeValidator()).getFirst(),
-            // Chrysalis node
-            ChrysalisNode: new ValidatorChainBuilder().add(new TypeValidator()).getFirst(),
             // Chrysalis github variables
             ChrysalisVariables: new ValidatorChainBuilder().add(new TypeValidator()).getFirst(),
         }
@@ -871,7 +872,7 @@ export default class ValidatorService {
      *
      * @returns {ValidationResponse}
      */
-    performValidation(response: MessageResponse | MarketDataValidationResponse | ChrysalisNodeDataValidationResponse | ChrysalisVariablesValidationResponse): ValidationResponse {
+    performValidation(response: MessageResponse | MarketDataValidationResponse | ChrysalisVariablesValidationResponse): ValidationResponse {
         return this.validators[response.type].isValid(response)
     }
 }
