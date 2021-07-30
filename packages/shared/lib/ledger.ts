@@ -28,6 +28,13 @@ export const ledgerSimulator = false
 export const ledgerDeviceState = writable<LedgerDeviceState>(LedgerDeviceState.NotDetected)
 export const isLedgerLegacyConnected = writable<boolean>(false)
 
+/**
+ * On the dashboard we run a permanent ledger poll to get its status,
+ * the intention of this variable is to know when the poll was interrupted
+ * so we can resume it again later
+ */
+export const ledgerPollInterrupted = writable<boolean>(false)
+
 export function getLedgerDeviceStatus(
     legacy: boolean = false,
     onConnected: () => void = () => { },
@@ -99,6 +106,7 @@ export function promptUserToConnectLedger(
     legacy: boolean = false,
     onConnected: () => void = () => { },
     onCancel: () => void = () => { },
+    forcePoll: boolean = false // use forcePoll to initialize a new poll even though there is one running
 ) {
     const _onCancel = () => {
         stopPollingLedgerStatus()
@@ -112,6 +120,10 @@ export function promptUserToConnectLedger(
         onConnected()
     }
     const _onDisconnected = () => {
+        if (polling && forcePoll) {
+            stopPollingLedgerStatus()
+            ledgerPollInterrupted.set(true)
+        }
         pollLedgerDeviceStatus(legacy, LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT, _onConnected, _onDisconnected, _onCancel)
         if (!get(popupState).active) {
             openLedgerNotConnectedPopup(legacy, onCancel)
@@ -219,6 +231,7 @@ export function stopPollingLedgerStatus(): void {
         clearInterval(intervalTimer)
         intervalTimer = null
         polling = false
+        ledgerPollInterrupted.set(false)
     }
 }
 

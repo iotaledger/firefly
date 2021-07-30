@@ -2,7 +2,13 @@
     import { SecurityTile, Text } from 'shared/components'
     import { versionDetails } from 'shared/lib/appUpdater'
     import { diffDates, getBackupWarningColor, isRecentDate } from 'shared/lib/helpers'
-    import { getLedgerDeviceStatus, getLedgerOpenedApp, ledgerDeviceState, pollLedgerDeviceStatus } from 'shared/lib/ledger'
+    import {
+        getLedgerDeviceStatus,
+        getLedgerOpenedApp,
+        ledgerDeviceState,
+        pollLedgerDeviceStatus,
+        ledgerPollInterrupted,
+    } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, isStrongholdLocked, profiles } from 'shared/lib/profile'
@@ -70,16 +76,20 @@
 
     onMount(() => {
         setup()
-
-        if ($isLedgerProfile) {
-            pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL)
-        }
     })
 
     onDestroy(() => {
         clearTimeout(ledgerSpinnerTimeout)
         unsubscribe()
     })
+
+    /**
+     * Reactive statement to resume ledger poll if it was interrupted
+     * when the one which interrupted has finished
+     */
+    $: if ($isLedgerProfile && !$ledgerPollInterrupted) {
+        pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL)
+    }
 
     function setup() {
         const ap = get(activeProfile)
