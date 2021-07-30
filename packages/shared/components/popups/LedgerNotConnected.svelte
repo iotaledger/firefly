@@ -9,8 +9,16 @@
     export let handleClose
     export let locale
 
+    /**
+     * Used to avoid race condition with the reactive poll on dashboard
+     * as stopPollingLedgerStatus was running twice,
+     * stopping a newly created poll
+     */
+    let pollStopped = false
+
     function handleCancelClick() {
         stopPollingLedgerStatus()
+        pollStopped = true
         if ('function' === typeof handleClose) {
             handleClose()
         }
@@ -18,7 +26,9 @@
     }
 
     onDestroy(() => {
-        stopPollingLedgerStatus()
+        if (!pollStopped) {
+            stopPollingLedgerStatus()
+        }
     })
 </script>
 
