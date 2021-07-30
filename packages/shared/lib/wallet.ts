@@ -163,6 +163,7 @@ export const resetWallet = () => {
     hasGeneratedALedgerReceiveAddress.set(false)
     isSyncing.set(null)
     isFirstSessionSync.set(true)
+    isFirstManualSync.set(true)
     walletSetupType.set(null)
 }
 
@@ -177,6 +178,7 @@ export const hasGeneratedALedgerReceiveAddress = writable<boolean | null>(false)
 
 export const isSyncing = writable<boolean>(false)
 export const isFirstSessionSync = writable<boolean>(true)
+export const isFirstManualSync = writable<boolean>(true)
 
 export const api: {
     generateMnemonic(callbacks: { onSuccess: (response: Event<string>) => void, onError: (err: ErrorEventPayload) => void })

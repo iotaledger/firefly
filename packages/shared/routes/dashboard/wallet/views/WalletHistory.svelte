@@ -15,6 +15,7 @@
         selectedAccountId,
         selectedMessage,
         WalletAccount,
+        isFirstManualSync
     } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable, Writable } from 'svelte/store'
@@ -24,8 +25,6 @@
 
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
     const transactions = getContext<Readable<AccountMessage[]>>('walletTransactions')
-
-    let isFirstManualSync = true
 
     function handleTransactionClick(transaction) {
         const sourceAccount = get(accounts).find((acc) => acc.index === transaction.account)
@@ -40,8 +39,8 @@
     }
 
     function handleSyncAccountOptions() {
-        if(isFirstManualSync) {
-            isFirstManualSync = false
+        if(get(isFirstManualSync)) {
+            isFirstManualSync.set(true)
 
             return {
                 gapLimit: $isSoftwareProfile ? 10 : 1,
