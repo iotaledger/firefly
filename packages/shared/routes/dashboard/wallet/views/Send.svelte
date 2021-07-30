@@ -379,7 +379,9 @@
          * prompt function (only for non-software profiles).
          */
         if ($isSoftwareProfile) onSuccess()
-        else promptUserToConnectLedger(false, onSuccess)
+        else {
+            promptUserToConnectLedger(false, onSuccess, undefined, true)
+        }
     }
 
     const handleBackClick = () => {

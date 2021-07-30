@@ -309,7 +309,7 @@
                 },
             })
         } else {
-            promptUserToConnectLedger(false, () => _generate())
+            promptUserToConnectLedger(false, () => _generate(), undefined, true)
         }
     }
 
