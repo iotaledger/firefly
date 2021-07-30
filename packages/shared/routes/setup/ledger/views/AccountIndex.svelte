@@ -3,6 +3,7 @@
     import { Electron } from 'shared/lib/electron'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { ADDRESS_SECURITY_LEVEL, getLedgerMigrationData, hardwareIndexes } from 'shared/lib/migration'
+    import { popupState } from 'shared/lib/popup'
     import { onDestroy, createEventDispatcher } from 'svelte'
     import { LedgerAppName } from 'shared/lib/typings/ledger'
 
@@ -12,9 +13,8 @@
     let busy = false
     let expert = false
     let showTooltip = false
-    let isTakingAWhile = false
+    let showInfo = false
     let toolTip
-    let toolTipTimeout
 
     let min = 0
     let max = 2147483647
@@ -25,7 +25,10 @@
     $: index = checkNumber(index)
     $: page = checkNumber(page)
 
-    $: if (!isTakingAWhile) showTooltip = false
+    $: if (!busy) { 
+        showInfo = false 
+        showTooltip = false 
+    }
 
     let isValidAccountIndex = false
     $: isValidAccountIndex = isValidNumber(index)
@@ -33,8 +36,6 @@
     $: isValidAccountPage = isValidNumber(page)
 
     const dispatch = createEventDispatcher()
-
-    onDestroy(() => clearTimeout(toolTipTimeout))
 
     function checkNumber(n: number): number {
         if (!isWithinRange(n)) n = Math.min(Math.max(n, min), max)
@@ -57,10 +58,10 @@
     function handleContinueClick() {
         busy = true
         const _onConnected = () => {
-            toolTipTimeout = setTimeout(() => (isTakingAWhile = true), 300000)
             Electron.ledger
                 .selectSeed(index, page, ADDRESS_SECURITY_LEVEL)
                 .then(({ iota, callback }) => {
+                    showInfo = true
                     return getLedgerMigrationData(iota.getAddress, callback)
                 })
                 .then((data) => {
@@ -72,9 +73,6 @@
                 .catch((error) => {
                     busy = false
                     displayNotificationForLedgerProfile('error', true, true, false, true, error)
-
-                    isTakingAWhile = false
-                    clearTimeout(toolTipTimeout)
 
                     console.error(error)
                 })
@@ -112,25 +110,35 @@
                 </div>
                 <div>
                     <Text type="p" secondary classes="mb-2">{locale('views.selectLedgerAccountIndex.accountIndex')}</Text>
-                    <Number bind:value={index} {min} {max} disabled={busy} error={!isValidAccountIndex ? locale('error.account.index') : ''} />
+                    <Number
+                        bind:value={index}
+                        {min}
+                        {max}
+                        disabled={busy}
+                        error={!isValidAccountIndex ? locale('error.account.index') : ''} />
                 </div>
                 {#if expert}
                     <div>
                         <Text type="p" secondary classes="mb-2">{locale('views.selectLedgerAccountIndex.accountPage')}</Text>
-                        <Number bind:value={page} {min} {max} disabled={busy} error={!isValidAccountPage ? locale('error.account.page') : ''} />
+                        <Number
+                            bind:value={page}
+                            {min}
+                            {max}
+                            disabled={busy}
+                            error={!isValidAccountPage ? locale('error.account.page') : ''} />
                     </div>
                 {/if}
             </div>
         </div>
         <div slot="leftpane__action" class="flex flex-col space-y-4">
-            {#if isTakingAWhile}
+            {#if showInfo && !$popupState.active}
                 <div
                     class="flex flex-row w-full mb-4 justify-center"
                     on:mouseenter={() => toggleTooltip()}
                     on:mouseleave={() => toggleTooltip()}
                     bind:this={toolTip}>
                     <Icon icon="info" classes="mr-1 text-gray-800 dark:text-white" width={20} height={20} />
-                    <Text>{locale('views.selectLedgerAccountIndex.takingAWhile')}</Text>
+                    <Text>{locale('views.selectLedgerAccountIndex.notGeneratingAddresses')}</Text>
                 </div>
             {/if}
             {#if showTooltip}
