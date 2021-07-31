@@ -43,20 +43,15 @@
             }
         },
         "setupLedger": {
-            "title": "Memasang aplikasi baru IOTA Ledger di perangkat Anda",
-            "body1": "1. Buka Ledger Live dan install aplikasi New IOTA",
-            "body2": "2. Close Ledger Live desktop application",
-            "body3": "3. Open the new app on your Ledger device",
             "progress1": "Connect your Ledger",
             "progress2": "Generate address",
             "progress3": "Switch Ledger app",
             "progress4": "Transfer funds",
-            "watchVideo": "Watch video guide",
-            "checkingConnection": "Checking Ledger Connection"
+            "watchVideo": "Watch video guide"
         },
         "ledgerInstallationGuide": {
             "title": "Have you installed the necessary Ledger apps?",
-            "body1": "Before you proceed, you must find and install both the IOTA Legacy app and the new IOTA app through Ledger Live.",
+            "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
             "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
             "action": "Yes, I've installed these apps"
         },
@@ -119,7 +114,7 @@
             "body": "Dompet baru Anda siap digunakan.",
             "softwareMigratedBody": "You have successfully migrated your funds to the new network",
             "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the IOTA Legacy app from your device.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
             "exportMigration": "Ekspor log migrasi dan selesaikan penyiapan"
         },
         "import": {
@@ -190,9 +185,7 @@
         },
         "switchLedgerApps": {
             "title": "Switch Ledger apps",
-            "body": "Please switch to the IOTA Legacy app on your Ledger device to continue migration. When ready, press continue.",
-            "ledgerApp": "IOTA",
-            "ledgerLegacyApp": "IOTA Legacy"
+            "body": "Please switch to the {legacy} app on your Ledger device to continue migration. When ready, press continue."
         },
         "selectLedgerAccountIndex": {
             "title": "Choose Ledger account index",
@@ -200,10 +193,11 @@
             "accountIndex": "Account Index",
             "accountPage": "Account Page",
             "standard": "Standard",
-            "expert": "Expert"
+            "expert": "Expert",
+            "notGeneratingAddresses": "Is your Ledger generating addresses?",
+            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
         },
         "importBackupPassword": {
-            "title": "Pulihkan dompet dari SeedVault atau Stronghold",
             "body1": "Harap masukkan kata sandi cadangan.",
             "body2": "Ini adalah kata sandi yang dibuat saat pencadangan pertama Anda."
         },
@@ -263,6 +257,7 @@
         },
         "transferFragmentedFunds": {
             "body1": "Firefly sekarang akan melanjutkan untuk memindahkan dana Anda. Ini mungkin memakan waktu cukup lama.",
+            "body2": "Ensure your Ledger is connected and the {legacy} app is open at all times during migration.",
             "migrate": "Migrasikan dana",
             "transaction": "Transaksi {number}",
             "rerun": "Coba kembali"
@@ -394,6 +389,10 @@
                 "title": "Diagnostik",
                 "description": "Lihat informasi sistem dan aplikasi"
             },
+            "migrateLedgerIndex": {
+                "title": "Migrate Ledger Index",
+                "description": "Migrate another Trinity account index"
+            },
             "stateExport": {
                 "title": "Ekspor Status",
                 "description": "Ekspor riwayat transaksi Anda ke file .csv"
@@ -440,7 +439,7 @@
                     "statuses": {
                         "appNotOpen": "IOTA App Not Open",
                         "connected": "Connected",
-                        "legacyConnected": "IOTA Legacy App Open",
+                        "legacyConnected": "{legacy} App Open",
                         "locked": "Locked",
                         "mnemonicMismatch": "Wrong Ledger or Mnemonic",
                         "notDetected": "Not Detected",
@@ -579,28 +578,32 @@
         },
         "ledgerNotConnected": {
             "connect": "Open the new IOTA app on your Ledger device to continue",
-            "connectLegacy": "Open the IOTA Legacy app on your Ledger device to continue"
+            "connectLegacy": "Open the {legacy} app on your Ledger device to continue"
         },
         "ledgerConfirmation": {
             "confirm": "To proceed, confirm the prompt displayed on your Ledger device"
         },
         "ledgerAppGuide": {
             "title": "Guide to installing the Ledger apps",
-            "steps": [
-                "Install and open the Ledger Live application",
-                "Ensure that your Ledger is connected",
-                "Search for apps: IOTA Legacy and IOTA (MIOTA)",
-                "Install both apps: IOTA Legacy and IOTA (MIOTA)",
-                "Remember that it's important to close Ledger Live before returning to Firefly"
-            ]
+            "steps": {
+                "0": "Install and open the Ledger Live application",
+                "1": "Ensure that your Ledger is connected",
+                "2": "Search for apps: {legacy} and IOTA (MIOTA)",
+                "3": "Install both apps: {legacy} and IOTA (MIOTA)",
+                "4": "Remember that it's important to close Ledger Live before returning to Firefly"
+            }
         },
         "ledgerConnectionGuide": {
             "title": "Tips if your Ledger isn’t connecting",
-            "steps": [
-                "Make sure Ledger Live is not open on your computer",
-                "Ensure you have unlocked your Ledger device with your PIN",
-                "Open the new IOTA app on your Ledger device"
-            ]
+            "steps": {
+                "0": "Make sure Ledger Live is not open on your computer",
+                "1": "Ensure you have unlocked your Ledger device with your PIN",
+                "2": "Open the new IOTA app on your Ledger device",
+                "3": {
+                    "text": "Still no luck?",
+                    "link": "Try the official Ledger support page"
+                }
+            }
         },
         "ledgerTransaction": {
             "remainderAddress": {
@@ -609,15 +612,16 @@
             },
             "transaction": {
                 "title": "Confirm transaction",
-                "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted.",
-                "input": "Input [{index}]",
-                "output": "Output",
-                "checksum": "Chk: {checksum}"
+                "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted."
             }
         },
         "ledgerAddress": {
             "title": "Confirm receive address",
             "body": "Confirm that the receive address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+        },
+        "ledgerMigrateIndex": {
+            "title": "Do you need to migrate another Trinity account index?",
+            "body": "You can also migrate later in Advanced Settings."
         }
     },
     "charts": {
@@ -726,7 +730,8 @@
         "searchAgain": "Search again",
         "searching": "Searching...",
         "closeFirefly": "Close Firefly",
-        "generateAddress": "Generate address"
+        "generateAddress": "Generate address",
+        "migrateAgain": "Migrate another index"
     },
     "general": {
         "password": "Kata sandi",
@@ -872,8 +877,7 @@
         "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {#sisa menit}}",
         "copiedToClipboard": "Salin ke papan klip",
         "accountsSynchronized": "Wallet synchronization complete",
-        "migratedAccountChrysalisDown": "Dana Anda akan tersedia setelah Chrysalis pada 28 April",
-        "migratedAccountChrysalisUp": "Dana Anda akan segera tersedia"
+        "fundsAvailableSoon": "Your funds will become available shortly"
     },
     "error": {
         "profile": {
@@ -961,8 +965,11 @@
             "notFound": "Ledger device not found.",
             "otherConnected": "The wrong app is open on your Ledger device.",
             "generateAddress": "There was an error generating an address.",
-            "timeout": "Timeout exceeded",
-            "disconnected": "Device disconnected"
+            "timeout": "Your Ledger device timed out.",
+            "disconnected": "Your Ledger device was disconnected."
+        },
+        "popup": {
+            "preventClose": "This popup is unable to be closed."
         }
     },
     "tooltips": {

@@ -43,20 +43,15 @@
             }
         },
         "setupLedger": {
-            "title": "在您的裝置上安裝新的 IOTA Ledger",
-            "body1": "1. 開啟 Ledger Live 並安裝新的 IOTA app",
-            "body2": "2. 關閉電腦版 Ledger Live",
-            "body3": "3. 在您的 Ledger 裝置上開啟新 app",
             "progress1": "連接您的 Ledger",
             "progress2": "產生新地址",
             "progress3": "切換 Ledger app",
             "progress4": "轉帳",
-            "watchVideo": "觀看影音導覽",
-            "checkingConnection": "正在檢查Ledger的連接狀態"
+            "watchVideo": "觀看影音導覽"
         },
         "ledgerInstallationGuide": {
             "title": "你是否已經裝好必須的Ledger軟體？",
-            "body1": "您必須先經由Ledger Live把舊版的IOTA Legacy app和新版的IOTA app都安裝好，才能繼續。",
+            "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
             "body2": "請確認您的Ledger韌體是最新版本。所有已安裝的軟體都必須更新至最新版本。",
             "action": "是，我已安裝這些軟體。"
         },
@@ -119,7 +114,7 @@
             "body": "您的新錢包可以使用了。",
             "softwareMigratedBody": "您已成功將資金遷移到新網路",
             "fireflyLedgerBody": "您的 Ledger 帳號已成功還原，現在可以繼續使用。",
-            "trinityLedgerBody": "您已成功將Ledger遷移至新網路。您現在可以把 IOTA Legacy app 從裝置中移除。",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
             "exportMigration": "導出遷移紀錄檔並結束設定"
         },
         "import": {
@@ -190,9 +185,7 @@
         },
         "switchLedgerApps": {
             "title": "切換 Ledger app",
-            "body": "請把Ledger裝置切換到 IOTA Legacy app以便繼續進行遷移。準備好時，請按「繼續」。",
-            "ledgerApp": "IOTA",
-            "ledgerLegacyApp": "IOTA Legacy"
+            "body": "Please switch to the {legacy} app on your Ledger device to continue migration. When ready, press continue."
         },
         "selectLedgerAccountIndex": {
             "title": "選擇Ledger帳戶索引",
@@ -200,10 +193,11 @@
             "accountIndex": "帳戶索引",
             "accountPage": "帳戶頁面",
             "standard": "標準模式",
-            "expert": "專家模式"
+            "expert": "專家模式",
+            "notGeneratingAddresses": "Is your Ledger generating addresses?",
+            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
         },
         "importBackupPassword": {
-            "title": "載入 SeedVault 或 Stronghold 以還原您的錢包",
             "body1": "請輸入您的備份密碼。",
             "body2": "這是您首次備份時設置的密碼。"
         },
@@ -263,6 +257,7 @@
         },
         "transferFragmentedFunds": {
             "body1": "Firefly 現在要開始遷移您的資金，這可能要花點時間。",
+            "body2": "Ensure your Ledger is connected and the {legacy} app is open at all times during migration.",
             "migrate": "遷移資金",
             "transaction": "交易編號 {number}",
             "rerun": "重新嘗試"
@@ -394,6 +389,10 @@
                 "title": "應用診斷",
                 "description": "查看系統和應用程序訊息"
             },
+            "migrateLedgerIndex": {
+                "title": "Migrate Ledger Index",
+                "description": "Migrate another Trinity account index"
+            },
             "stateExport": {
                 "title": "匯出狀態",
                 "description": "將您的交易記錄匯出成 .csv 檔案"
@@ -440,7 +439,7 @@
                     "statuses": {
                         "appNotOpen": "尚未開啟 IOTA App",
                         "connected": "已連接",
-                        "legacyConnected": "IOTA Legacy 應用程式已開啟",
+                        "legacyConnected": "{legacy} App Open",
                         "locked": "鎖定",
                         "mnemonicMismatch": "Ledger 或助記詞錯誤",
                         "notDetected": "未偵測",
@@ -579,28 +578,32 @@
         },
         "ledgerNotConnected": {
             "connect": "在您的 Ledger 裝置上開啟新版 IOTA app 來接續下一步",
-            "connectLegacy": "在您的 Ledger 裝置上開啟 IOTA Legacy app 來接續下一步"
+            "connectLegacy": "Open the {legacy} app on your Ledger device to continue"
         },
         "ledgerConfirmation": {
             "confirm": "請確認在 Ledger 裝置上的通知再繼續"
         },
         "ledgerAppGuide": {
             "title": "Ledger app 的安裝指南",
-            "steps": [
-                "安裝並開啟 Ledger Live 軟體",
-                "確保您的 Ledger 裝置已連上",
-                "搜尋應用程式：IOTA Legacy 和 IOTA (MIOTA)",
-                "同時安裝：IOTA Legacy 與 IOTA (MIOTA)",
-                "重要：再返回 Firefly 之前，記得先關閉 Ledger Live"
-            ]
+            "steps": {
+                "0": "安裝並開啟 Ledger Live 軟體",
+                "1": "確保您的 Ledger 裝置已連上",
+                "2": "Search for apps: {legacy} and IOTA (MIOTA)",
+                "3": "Install both apps: {legacy} and IOTA (MIOTA)",
+                "4": "重要：再返回 Firefly 之前，記得先關閉 Ledger Live"
+            }
         },
         "ledgerConnectionGuide": {
             "title": "Ledger無法連結時的處理技巧",
-            "steps": [
-                "確保 Ledger Live 尚未於您的電腦上開啟",
-                "確認您已經輸入 PIN 碼來解鎖您的 Ledger 裝置",
-                "在您的 Ledger 裝置上開啟新版 IOTA app"
-            ]
+            "steps": {
+                "0": "確保 Ledger Live 尚未於您的電腦上開啟",
+                "1": "確認您已經輸入 PIN 碼來解鎖您的 Ledger 裝置",
+                "2": "在您的 Ledger 裝置上開啟新版 IOTA app",
+                "3": {
+                    "text": "Still no luck?",
+                    "link": "Try the official Ledger support page"
+                }
+            }
         },
         "ledgerTransaction": {
             "remainderAddress": {
@@ -609,15 +612,16 @@
             },
             "transaction": {
                 "title": "確認交易",
-                "info": "請確認Ledger顯示的交易明細和下方顯示的明細相同。若相同，請依提示把Ledger上的兩個按鈕一起按下。",
-                "input": "輸入 [{index}]",
-                "output": "輸出",
-                "checksum": "檢查碼：{checksum}"
+                "info": "請確認Ledger顯示的交易明細和下方顯示的明細相同。若相同，請依提示把Ledger上的兩個按鈕一起按下。"
             }
         },
         "ledgerAddress": {
             "title": "確認接收地址",
             "body": "確認您的Ledger顯示的接收地址和下方顯示的地址相同。若相同，請依提示於Ledger按下按鈕。"
+        },
+        "ledgerMigrateIndex": {
+            "title": "Do you need to migrate another Trinity account index?",
+            "body": "You can also migrate later in Advanced Settings."
         }
     },
     "charts": {
@@ -726,7 +730,8 @@
         "searchAgain": "重新搜尋",
         "searching": "搜尋中...",
         "closeFirefly": "關閉 Firefly",
-        "generateAddress": "產生新地址"
+        "generateAddress": "產生新地址",
+        "migrateAgain": "Migrate another index"
     },
     "general": {
         "password": "密碼",
@@ -872,8 +877,7 @@
         "minutesRemaining": "分鐘, 複數, 一 剩下一分鐘 其他 剩下一分鐘",
         "copiedToClipboard": "複製到剪貼簿",
         "accountsSynchronized": "錢包同步完成",
-        "migratedAccountChrysalisDown": "您的資金將在四月28日Chrysalis後可以被使用",
-        "migratedAccountChrysalisUp": "您的資金將很快可以被使用"
+        "fundsAvailableSoon": "Your funds will become available shortly"
     },
     "error": {
         "profile": {
@@ -961,8 +965,11 @@
             "notFound": "找不到 Ledger 裝置",
             "otherConnected": "您的Ledger裝置開啟了錯誤的應用程式",
             "generateAddress": "產生地址時發生錯誤",
-            "timeout": "已經逾時。",
-            "disconnected": "裝置已斷線。"
+            "timeout": "Your Ledger device timed out.",
+            "disconnected": "Your Ledger device was disconnected."
+        },
+        "popup": {
+            "preventClose": "This popup is unable to be closed."
         }
     },
     "tooltips": {
