@@ -37,10 +37,6 @@
     })
 
     onMount(async () => {
-        openPopup({
-            type: 'ledgerMigrateIndex',
-            preventClose: true,
-        })
         if ($isSoftwareProfile) {
             api.setStrongholdPasswordClearInterval({ secs: STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, nanos: 0 })
         }
