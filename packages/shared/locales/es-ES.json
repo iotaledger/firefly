@@ -43,20 +43,15 @@
             }
         },
         "setupLedger": {
-            "title": "Instala la nueva aplicación IOTA Ledger en tu dispositivo",
-            "body1": "Abre Ledger Live e instala la nueva app de IOTA",
-            "body2": "Cierra la aplicación de escritorio Ledger Live",
-            "body3": "Abre la nueva app en tu dispositivo Ledger",
             "progress1": "Conecta tu Ledger",
             "progress2": "Generar dirección",
             "progress3": "Cambiar aplicación Ledger",
             "progress4": "Transferir fondos",
-            "watchVideo": "Ver guía en vídeo",
-            "checkingConnection": "Comprobando la conexión con Ledger"
+            "watchVideo": "Ver guía en vídeo"
         },
         "ledgerInstallationGuide": {
             "title": "¿Ha instalado las aplicaciones Ledger necesarias?",
-            "body1": "Antes de continuar, debes encontrar e instalar tanto la aplicación IOTA Legacy como la nueva aplicación IOTA a través de Ledger Live.",
+            "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
             "body2": "Asegúrese de que su firmware Ledger esté actualizado. Cualquier aplicación preinstalada debe actualizarse a sus últimas versiones.",
             "action": "Sí, he instalado estas aplicaciones"
         },
@@ -119,7 +114,7 @@
             "body": "Tu nueva cartera está lista para usar.",
             "softwareMigratedBody": "Tus fondos han sido migrados con éxito a la nueva red",
             "fireflyLedgerBody": "Tu cuenta de Ledger se ha recuperado con éxito y ahora puedes continuar.",
-            "trinityLedgerBody": "Has migrado con éxito tu Ledger a la nueva red. Ahora puedes eliminar la aplicación Legacy de IOTA de tu dispositivo.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
             "exportMigration": "Exportar registro de migración y finalizar la configuración"
         },
         "import": {
@@ -190,9 +185,7 @@
         },
         "switchLedgerApps": {
             "title": "Cambiar aplicaciones Ledger",
-            "body": "Por favor, cambie a la aplicación Legacy de IOTA en su dispositivo Ledger para continuar con la migración. Cuando esté listo, pulse continuar.",
-            "ledgerApp": "IOTA",
-            "ledgerLegacyApp": "IOTA Legacy"
+            "body": "Please switch to the {legacy} app on your Ledger device to continue migration. When ready, press continue."
         },
         "selectLedgerAccountIndex": {
             "title": "Elegir índice de cuenta Ledger",
@@ -200,10 +193,11 @@
             "accountIndex": "Índice de cuenta",
             "accountPage": "Página de Cuenta",
             "standard": "Estándar",
-            "expert": "Experto"
+            "expert": "Experto",
+            "notGeneratingAddresses": "Is your Ledger generating addresses?",
+            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
         },
         "importBackupPassword": {
-            "title": "Restaura tus carteras desde un SeedVault o Stronghold",
             "body1": "Por favor, introduce la contraseña de tu copia de seguridad.",
             "body2": "Esta es la contraseña que pusiste cuando por primera vez creaste tu copia de seguridad."
         },
@@ -263,6 +257,7 @@
         },
         "transferFragmentedFunds": {
             "body1": "Firefly va a proceder con la migración de tus fondos. Esto puede tardar un tiempo.",
+            "body2": "Ensure your Ledger is connected and the {legacy} app is open at all times during migration.",
             "migrate": "Migrar fondos",
             "transaction": "Transacción {number}",
             "rerun": "Intentar de nuevo"
@@ -394,6 +389,10 @@
                 "title": "Diagnósticos",
                 "description": "Ver información del sistema y la aplicación"
             },
+            "migrateLedgerIndex": {
+                "title": "Migrate Ledger Index",
+                "description": "Migrate another Trinity account index"
+            },
             "stateExport": {
                 "title": "Exportar estado",
                 "description": "Exportar tu historial de transacciones a un archivo .csv"
@@ -440,7 +439,7 @@
                     "statuses": {
                         "appNotOpen": "Aplicación IOTA no abierta",
                         "connected": "Conectado",
-                        "legacyConnected": "Aplicación IOTA Legacy Abierta",
+                        "legacyConnected": "{legacy} App Open",
                         "locked": "Bloqueado",
                         "mnemonicMismatch": "Palabras de seguridad o Ledger incorrecto",
                         "notDetected": "No detectado",
@@ -579,28 +578,32 @@
         },
         "ledgerNotConnected": {
             "connect": "Abre la nueva aplicación IOTA en tu dispositivo Ledger para continuar",
-            "connectLegacy": "Abre la aplicación Legacy de IOTA en tu dispositivo Ledger para continuar"
+            "connectLegacy": "Open the {legacy} app on your Ledger device to continue"
         },
         "ledgerConfirmation": {
             "confirm": "Para continuar, confirme el mensaje que se muestra en su dispositivo Ledger"
         },
         "ledgerAppGuide": {
             "title": "Guía para instalar las aplicaciones Ledger",
-            "steps": [
-                "Instalar y abrir la aplicación Ledger Live",
-                "Asegúrate de que tu Ledger está conectado",
-                "Buscar aplicaciones: IOTA Legacy y IOTA (MIOTA)",
-                "Instala ambas aplicaciones: IOTA Legacy y IOTA (MIOTA)",
-                "Recuerda que es importante cerrar Ledger Live antes de regresar a Firefly"
-            ]
+            "steps": {
+                "0": "Instalar y abrir la aplicación Ledger Live",
+                "1": "Asegúrate de que tu Ledger está conectado",
+                "2": "Search for apps: {legacy} and IOTA (MIOTA)",
+                "3": "Install both apps: {legacy} and IOTA (MIOTA)",
+                "4": "Recuerda que es importante cerrar Ledger Live antes de regresar a Firefly"
+            }
         },
         "ledgerConnectionGuide": {
             "title": "Sugerencias si tu Ledger no se conecta",
-            "steps": [
-                "Asegúrate de que Ledger Live no esté abierto en tu computadora",
-                "Asegúrese de que ha desbloqueado su dispositivo Ledger con su PIN",
-                "Abra la nueva aplicación IOTA en tu dispositivo Ledger"
-            ]
+            "steps": {
+                "0": "Asegúrate de que Ledger Live no esté abierto en tu computadora",
+                "1": "Asegúrese de que ha desbloqueado su dispositivo Ledger con su PIN",
+                "2": "Abra la nueva aplicación IOTA en tu dispositivo Ledger",
+                "3": {
+                    "text": "Still no luck?",
+                    "link": "Try the official Ledger support page"
+                }
+            }
         },
         "ledgerTransaction": {
             "remainderAddress": {
@@ -609,15 +612,16 @@
             },
             "transaction": {
                 "title": "Confirmar transacción",
-                "info": "Confirme que la información de transacción mostrada en su dispositivo Ledger coincide con la información mostrada a continuación. Si coinciden, pulse ambos botones en su Ledger como se le ha indicado.",
-                "input": "Entrada [{index}]",
-                "output": "Salida",
-                "checksum": "Chk: {checksum}"
+                "info": "Confirme que la información de transacción mostrada en su dispositivo Ledger coincide con la información mostrada a continuación. Si coinciden, pulse ambos botones en su Ledger como se le ha indicado."
             }
         },
         "ledgerAddress": {
             "title": "Confirmar dirección de recepción",
             "body": "Confirma que la dirección de recepción mostrada en tu Ledger coincide con la que se muestra a continuación. Si coinciden, pulsa ambos botones de tu Ledger como se le ha indicado."
+        },
+        "ledgerMigrateIndex": {
+            "title": "Do you need to migrate another Trinity account index?",
+            "body": "You can also migrate later in Advanced Settings."
         }
     },
     "charts": {
@@ -726,7 +730,8 @@
         "searchAgain": "Buscar de nuevo",
         "searching": "Buscando...",
         "closeFirefly": "Cerrar Firefly",
-        "generateAddress": "Generar dirección"
+        "generateAddress": "Generar dirección",
+        "migrateAgain": "Migrate another index"
     },
     "general": {
         "password": "Contraseña",
@@ -872,8 +877,7 @@
         "minutesRemaining": "{minutes, plural, one {1 minuto restante} other {# minutos restantes}}",
         "copiedToClipboard": "Copiado al portapapeles",
         "accountsSynchronized": "Sincronización de cartera completada",
-        "migratedAccountChrysalisDown": "Tus fondos estarán disponibles después de Chrysalis el 28 de Abril",
-        "migratedAccountChrysalisUp": "Tus fondos estarán disponibles en breve"
+        "fundsAvailableSoon": "Your funds will become available shortly"
     },
     "error": {
         "profile": {
@@ -961,8 +965,11 @@
             "notFound": "Dispositivo Ledger no encontrado.",
             "otherConnected": "Está abierta la aplicación incorrecta en tu dispositivo Ledger.",
             "generateAddress": "Hubo un error al generar una dirección.",
-            "timeout": "Tiempo de espera excedido",
-            "disconnected": "Dispositivo desconectado"
+            "timeout": "Your Ledger device timed out.",
+            "disconnected": "Your Ledger device was disconnected."
+        },
+        "popup": {
+            "preventClose": "This popup is unable to be closed."
         }
     },
     "tooltips": {
