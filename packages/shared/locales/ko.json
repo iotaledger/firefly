@@ -31,34 +31,34 @@
             "body2": "복구 키트를 작성하고 안전하게 보관하면 항상 지갑을 복구 할 수 있습니다."
         },
         "create": {
-            "title": "Create a wallet",
+            "title": "지갑 만들기",
             "body": "Create a new wallet. You can choose a regular software wallet or if you have a Ledger device you can set up a hardware wallet.",
             "softwareAccount": {
-                "title": "I want a software wallet",
+                "title": "소프트웨어 지갑",
                 "description": "Create a 24-word Recovery Phrase"
             },
             "ledgerAccount": {
-                "title": "I want a hardware wallet",
-                "description": "Ledger Nano S or Nano X required"
+                "title": "하드웨어 지갑",
+                "description": "Ledger Nano S 또는 Nano X 필요"
             }
         },
         "setupLedger": {
-            "title": "Install the new IOTA Ledger app on your device",
-            "body1": "1. Open Ledger Live and install New IOTA app",
-            "body2": "2. Close Ledger Live desktop application",
-            "body3": "3. Open the new app on your Ledger device",
-            "progress1": "Connect your Ledger",
-            "progress2": "Generate address",
-            "progress3": "Switch Ledger app",
-            "progress4": "Transfer funds",
-            "watchVideo": "Watch video guide",
-            "checkingConnection": "Checking Ledger Connection"
+            "title": "새 IOTA Ledger 앱을 기기에 설치",
+            "body1": "1. Ledger Live를 열고 새 IOTA 앱 설치",
+            "body2": "2. Ledger Live 데스크톱 앱 닫기",
+            "body3": "3. Ledger 장치에서 새 앱 열기",
+            "progress1": "Ledger 연결",
+            "progress2": "주소 생성",
+            "progress3": "Ledger 앱 전환",
+            "progress4": "송금",
+            "watchVideo": "동영상 도움말 보기",
+            "checkingConnection": "Ledger 연결 확인 중"
         },
         "ledgerInstallationGuide": {
-            "title": "Have you installed the necessary Ledger apps?",
-            "body1": "Before you proceed, you must find and install both the IOTA Legacy app and the new IOTA app through Ledger Live.",
+            "title": "필수 Ledger 앱을 설치하셨습니까?",
+            "body1": "계속하기 전, Ledger Live를 통하여 기존 IOTA 앱과 새 IOTA 앱 둘 모두를 찾아 설치해야 합니다.",
             "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
-            "action": "Yes, I've installed these apps"
+            "action": "이미 앱을 설치했습니다"
         },
         "password": {
             "title": "비밀번호 만들기",
@@ -131,7 +131,7 @@
             "importMnemonicDescription": "지갑을 복구하려면 복원 문구를 입력해주세요",
             "importFile": "파일 백업이 있습니다",
             "importFileDescription": "Seedvault 또는 Stronghold 파일 업로드",
-            "importLedger": "I have a Ledger backup",
+            "importLedger": "Ledger 복구 파일이 있습니다",
             "importLedgerDescription": "Restore or migrate a Ledger profile"
         },
         "importFromText": {
@@ -184,23 +184,23 @@
             "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
             "confirmTitle": "Confirm the new address",
             "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
-            "confirmedTitle": "Address confirmed",
+            "confirmedTitle": "주소 확인됨",
             "confirmedBody": "You have confirmed that the address in Firefly matches the one on your Ledger device.",
-            "generating": "Generating address"
+            "generating": "주소 생성 중"
         },
         "switchLedgerApps": {
-            "title": "Switch Ledger apps",
+            "title": "Ledger 앱 전환",
             "body": "Please switch to the IOTA Legacy app on your Ledger device to continue migration. When ready, press continue.",
             "ledgerApp": "IOTA",
-            "ledgerLegacyApp": "IOTA Legacy"
+            "ledgerLegacyApp": "기존 IOTA"
         },
         "selectLedgerAccountIndex": {
-            "title": "Choose Ledger account index",
+            "title": "Ledger 계정 인덱스 선택",
             "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
-            "accountIndex": "Account Index",
-            "accountPage": "Account Page",
-            "standard": "Standard",
-            "expert": "Expert"
+            "accountIndex": "계정 인덱스",
+            "accountPage": "계정 페이지",
+            "standard": "표준",
+            "expert": "전문가"
         },
         "importBackupPassword": {
             "title": "SeedVault 또는 Stronghold로부터 지갑 복원하기",
@@ -438,13 +438,13 @@
                 "hardwareDevice": {
                     "title": "하드웨어 장치",
                     "statuses": {
-                        "appNotOpen": "IOTA App Not Open",
-                        "connected": "Connected",
-                        "legacyConnected": "IOTA Legacy App Open",
+                        "appNotOpen": "IOTA 앱 열리지 않음",
+                        "connected": "연결됨",
+                        "legacyConnected": "기존 IOTA 앱 열림",
                         "locked": "잠김",
                         "mnemonicMismatch": "Wrong Ledger or Mnemonic",
-                        "notDetected": "Not Detected",
-                        "otherConnected": "App Open"
+                        "notDetected": "인식되지 않음",
+                        "otherConnected": "앱 열림"
                     }
                 },
                 "strongholdStatus": {
@@ -578,7 +578,7 @@
             "bodyFirefly": "Firefly는 완료 될 때까지 비활성화됩니다. 이후에도 토큰 마이그레이션이 가능합니다."
         },
         "ledgerNotConnected": {
-            "connect": "Open the new IOTA app on your Ledger device to continue",
+            "connect": "Ledger 기기에서 새 IOTA 앱을 열어 계속",
             "connectLegacy": "Open the IOTA Legacy app on your Ledger device to continue"
         },
         "ledgerConfirmation": {
@@ -610,8 +610,8 @@
             "transaction": {
                 "title": "트랜잭션 확인",
                 "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted.",
-                "input": "Input [{index}]",
-                "output": "Output",
+                "input": "입력 [{index}]",
+                "output": "출력",
                 "checksum": "Chk: {checksum}"
             }
         },
@@ -635,8 +635,8 @@
     "actions": {
         "continue": "계속하기",
         "back": "뒤로가기",
-        "previous": "Previous",
-        "next": "Next",
+        "previous": "이전",
+        "next": "다음",
         "cancel": "취소",
         "close": "닫기",
         "dismiss": "무시하기",
@@ -705,7 +705,7 @@
         "addAccount": "지갑 추가하기",
         "checkForUpdates": "업데이트 확인",
         "reportAnIssue": "오류 보고",
-        "restore": "Restore",
+        "restore": "복원",
         "clear": "지우기",
         "hideDetails": "세부 정보 숨기기",
         "yes": "예",
@@ -726,7 +726,7 @@
         "searchAgain": "다시 검색",
         "searching": "검색 중...",
         "closeFirefly": "Firefly 닫기",
-        "generateAddress": "Generate address"
+        "generateAddress": "주소 생성"
     },
     "general": {
         "password": "비밀번호",
@@ -741,7 +741,7 @@
         "received": "받음",
         "sendPayment": "보내기",
         "moveFunds": "내부 전송",
-        "sendTo": "Send To",
+        "sendTo": "전송",
         "sendFunds": "자금 보내기",
         "sendToAddress": "주소로 보내기",
         "scanQrOrPaste": "QR 코드를 스캔하거나 주소를 복사해 붙이기",
@@ -798,7 +798,7 @@
         "messageId": "메시지 ID",
         "inputAddress": "보낸 주소",
         "receiveAddress": "받은 주소",
-        "newAddress": "New Address",
+        "newAddress": "새 주소",
         "date": "날짜",
         "status": "상태",
         "confirmed": "승인됨",
@@ -961,8 +961,8 @@
             "notFound": "Ledger device not found.",
             "otherConnected": "The wrong app is open on your Ledger device.",
             "generateAddress": "There was an error generating an address.",
-            "timeout": "Timeout exceeded",
-            "disconnected": "Device disconnected"
+            "timeout": "응답 시간 초과",
+            "disconnected": "기기 연결 끊김"
         }
     },
     "tooltips": {

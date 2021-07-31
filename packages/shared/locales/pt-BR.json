@@ -579,7 +579,7 @@
         },
         "ledgerNotConnected": {
             "connect": "Abra o novo aplicativo IOTA no seu dispositivo Ledger para continuar",
-            "connectLegacy": "Open the IOTA Legacy app on your Ledger device to continue"
+            "connectLegacy": "Abra o aplicativo IOTA Legacy no seu dispositivo Ledger para continuar"
         },
         "ledgerConfirmation": {
             "confirm": "Para continuar, confirme a solicitação exibida no seu dispositivo Ledger"
@@ -589,8 +589,8 @@
             "steps": [
                 "Instalar e abrir o aplicativo Ledger Live",
                 "Certifique-se de que seu Ledger esteja conectado",
-                "Search for apps: IOTA Legacy and IOTA (MIOTA)",
-                "Install both apps: IOTA Legacy and IOTA (MIOTA)",
+                "Pesquisar aplicativos: IOTA Legacy e IOTA (MIOTA)",
+                "Instalar ambos os apps: IOTA Legacy e IOTA (MIOTA)",
                 "Lembre-se de que é importante fechar o Ledger Live antes de retornar ao Firefly"
             ]
         },
@@ -961,8 +961,8 @@
             "notFound": "Dispositivo Ledger não encontrado.",
             "otherConnected": "O app errado está aberto no seu dispositivo Ledger.",
             "generateAddress": "Ocorreu um erro ao gerar um endereço.",
-            "timeout": "Timeout exceeded",
-            "disconnected": "Device disconnected"
+            "timeout": "Tempo limite excedido",
+            "disconnected": "Dispositivo desconectado"
         }
     },
     "tooltips": {
