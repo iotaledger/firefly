@@ -43,20 +43,15 @@
             }
         },
         "setupLedger": {
-            "title": "Installez la nouvelle application IOTA sur votre appareil Ledger",
-            "body1": "1. Ouvrez Ledger Live et installez l'application IOTA",
-            "body2": "2. Fermez l'application Ledger Live desktop",
-            "body3": "3. Ouvrez la nouvelle application sur votre appareil Ledger",
             "progress1": "Connectez votre Ledger",
             "progress2": "Générer une adresse",
             "progress3": "Changer d'application Ledger",
             "progress4": "Transférer des fonds",
-            "watchVideo": "Regarder le guide vidéo",
-            "checkingConnection": "Vérification de la connexion Ledger"
+            "watchVideo": "Regarder le guide vidéo"
         },
         "ledgerInstallationGuide": {
             "title": "Avez-vous installé les applications Ledger nécessaires ?",
-            "body1": "Avant de continuer, vous devez trouver et installer à la fois l'application IOTA Legacy et la nouvelle application IOTA via Ledger Live.",
+            "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
             "body2": "Assurez-vous que votre firmware Ledger est à jour. Toutes les applications pré-installées doivent être mises à jour avec leurs dernières versions.",
             "action": "Oui, j'ai installé ces applications"
         },
@@ -119,7 +114,7 @@
             "body": "Votre nouveau portefeuille est prêt à être utilisé.",
             "softwareMigratedBody": "Vous avez déplacé vos fonds vers le nouveau réseau avec succès",
             "fireflyLedgerBody": "Votre compte Ledger a été récupéré avec succès et vous pouvez maintenant continuer.",
-            "trinityLedgerBody": "Vous avez fait migrer votre Ledger vers le nouveau réseau. Vous pouvez maintenant supprimer l'application IOTA Legacy de votre appareil.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
             "exportMigration": "Exporter le registre de migration et terminer l'installation"
         },
         "import": {
@@ -190,9 +185,7 @@
         },
         "switchLedgerApps": {
             "title": "Changer d'application sur la Ledger",
-            "body": "Veuillez passer à l'application IOTA Legacy de votre appareil Ledger pour continuer la migration. Une fois prêt, appuyez sur continuer.",
-            "ledgerApp": "IOTA",
-            "ledgerLegacyApp": "IOTA Legacy"
+            "body": "Please switch to the {legacy} app on your Ledger device to continue migration. When ready, press continue."
         },
         "selectLedgerAccountIndex": {
             "title": "Choisissez l'index du compte Ledger",
@@ -200,10 +193,11 @@
             "accountIndex": "Index du Compte",
             "accountPage": "Page du Compte",
             "standard": "Standard",
-            "expert": "Expert"
+            "expert": "Expert",
+            "notGeneratingAddresses": "Is your Ledger generating addresses?",
+            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
         },
         "importBackupPassword": {
-            "title": "Restaurez vos portefeuilles à partir d'un fichier SeedVault ou Stronghold",
             "body1": "Veuillez saisir votre mot de passe de sauvegarde.",
             "body2": "C'est le mot de passe que vous avez défini lorsque vous avez créé votre sauvegarde pour la première fois."
         },
@@ -263,6 +257,7 @@
         },
         "transferFragmentedFunds": {
             "body1": "Firefly va maintenant procéder au transfert de vos fonds. Cela peut prendre un certain temps.",
+            "body2": "Ensure your Ledger is connected and the {legacy} app is open at all times during migration.",
             "migrate": "Migrer les fonds",
             "transaction": "Transaction {number}",
             "rerun": "Réessayez"
@@ -394,6 +389,10 @@
                 "title": "Diagnostiques",
                 "description": "Voir les informations du système et de l'application"
             },
+            "migrateLedgerIndex": {
+                "title": "Migrate Ledger Index",
+                "description": "Migrate another Trinity account index"
+            },
             "stateExport": {
                 "title": "Exportation de l'état",
                 "description": "Exporter l'historique de vos transactions vers un fichier .csv"
@@ -440,7 +439,7 @@
                     "statuses": {
                         "appNotOpen": "L'application IOTA n'est pas ouverte",
                         "connected": "Connecté",
-                        "legacyConnected": "Application IOTA Legacy ouverte",
+                        "legacyConnected": "{legacy} App Open",
                         "locked": "Verrouillé",
                         "mnemonicMismatch": "Mauvais Ledger ou Mnémonique",
                         "notDetected": "Non Détecté",
@@ -579,28 +578,32 @@
         },
         "ledgerNotConnected": {
             "connect": "Ouvrez la nouvelle application IOTA sur votre appareil Ledger pour continuer",
-            "connectLegacy": "Ouvrez l'application IOTA Legacy sur votre Ledger pour continuer"
+            "connectLegacy": "Open the {legacy} app on your Ledger device to continue"
         },
         "ledgerConfirmation": {
             "confirm": "Pour continuer, confirmez l'invite affichée sur votre appareil Ledger"
         },
         "ledgerAppGuide": {
             "title": "Guide d'installation des applications Ledger",
-            "steps": [
-                "Installez et ouvrez l'application Ledger Live",
-                "Assurez-vous que votre Ledger est connecté",
-                "Recherche d'applications : IOTA Legacy et IOTA (MIOTA)",
-                "Installer les deux applications : IOTA Legacy et IOTA (MIOTA)",
-                "Rappelez-vous qu'il est important de fermer Ledger Live avant de retourner à Firefly"
-            ]
+            "steps": {
+                "0": "Installez et ouvrez l'application Ledger Live",
+                "1": "Assurez-vous que votre Ledger est connecté",
+                "2": "Search for apps: {legacy} and IOTA (MIOTA)",
+                "3": "Install both apps: {legacy} and IOTA (MIOTA)",
+                "4": "Rappelez-vous qu'il est important de fermer Ledger Live avant de retourner à Firefly"
+            }
         },
         "ledgerConnectionGuide": {
             "title": "Conseils si votre Ledger ne se connecte pas",
-            "steps": [
-                "Assurez-vous que Ledger Live n'est pas ouvert sur votre ordinateur",
-                "Assurez-vous d'avoir déverrouillé votre appareil Ledger avec votre code PIN",
-                "Ouvrez la nouvelle application IOTA sur votre appareil Ledger"
-            ]
+            "steps": {
+                "0": "Assurez-vous que Ledger Live n'est pas ouvert sur votre ordinateur",
+                "1": "Assurez-vous d'avoir déverrouillé votre appareil Ledger avec votre code PIN",
+                "2": "Ouvrez la nouvelle application IOTA sur votre appareil Ledger",
+                "3": {
+                    "text": "Still no luck?",
+                    "link": "Try the official Ledger support page"
+                }
+            }
         },
         "ledgerTransaction": {
             "remainderAddress": {
@@ -609,15 +612,16 @@
             },
             "transaction": {
                 "title": "Confirmer la transaction",
-                "info": "Pour des raisons de sécurité, veuillez comparer les informations générées sur votre Ledger avec celles affichées ci-dessous. Si elles correspondent, appuyez sur les deux boutons de votre Ledger comme demandé.",
-                "input": "Entrée [{index}]",
-                "output": "Sortie",
-                "checksum": "Chk: {checksum}"
+                "info": "Pour des raisons de sécurité, veuillez comparer les informations générées sur votre Ledger avec celles affichées ci-dessous. Si elles correspondent, appuyez sur les deux boutons de votre Ledger comme demandé."
             }
         },
         "ledgerAddress": {
             "title": "Confirmer l'adresse de réception",
             "body": "Veuillez comparer l'adresse générée sur votre Ledger avec celle affichée ci-dessous. Si elles correspondent, appuyez sur les deux boutons de votre Ledger comme demandé."
+        },
+        "ledgerMigrateIndex": {
+            "title": "Do you need to migrate another Trinity account index?",
+            "body": "You can also migrate later in Advanced Settings."
         }
     },
     "charts": {
@@ -726,7 +730,8 @@
         "searchAgain": "Chercher encore",
         "searching": "Recherche en cours...",
         "closeFirefly": "Fermer Firefly",
-        "generateAddress": "Générer une adresse"
+        "generateAddress": "Générer une adresse",
+        "migrateAgain": "Migrate another index"
     },
     "general": {
         "password": "Mot de passe",
@@ -872,8 +877,7 @@
         "minutesRemaining": "{minutes, plural, one {Il reste 1 minute} other {# minutes restantes}}",
         "copiedToClipboard": "Copié dans le presse-papier",
         "accountsSynchronized": "Synchronisation du portefeuille terminée",
-        "migratedAccountChrysalisDown": "Vos fonds seront disponibles après Chrysalis le 28 avril",
-        "migratedAccountChrysalisUp": "Vos fonds seront bientôt disponibles"
+        "fundsAvailableSoon": "Your funds will become available shortly"
     },
     "error": {
         "profile": {
@@ -961,8 +965,11 @@
             "notFound": "Appareil Ledger introuvable.",
             "otherConnected": "La mauvaise application est ouverte sur votre Ledger.",
             "generateAddress": "Une erreur s'est produite lors de la génération d'une adresse.",
-            "timeout": "Délai limite dépassé",
-            "disconnected": "L'appareil est déconnecté"
+            "timeout": "Your Ledger device timed out.",
+            "disconnected": "Your Ledger device was disconnected."
+        },
+        "popup": {
+            "preventClose": "This popup is unable to be closed."
         }
     },
     "tooltips": {

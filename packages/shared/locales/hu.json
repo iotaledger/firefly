@@ -43,20 +43,15 @@
             }
         },
         "setupLedger": {
-            "title": "Az új IOTA Ledger applikáció telepítése az eszközre",
-            "body1": "1. Ledger Live megnyitása és az új IOTA applikáció telepítése",
-            "body2": "2. Ledger Live asztali alkalmazás bezárása",
-            "body3": "3. Az új applikáció megnyitása a Ledger eszközén",
             "progress1": "Ledger csatlakoztatása",
             "progress2": "Új cím létrehozása",
             "progress3": "Váltás Ledger alkalmazásra",
             "progress4": "Tőke áthelyezése",
-            "watchVideo": "Video útmutató megtekintése",
-            "checkingConnection": "Ledger kapcsolat ellenőrzése"
+            "watchVideo": "Video útmutató megtekintése"
         },
         "ledgerInstallationGuide": {
             "title": "Telepítette a szükéséges Ledger alkalmazásokat?",
-            "body1": "Mielőtt folytatná, meg kell keresnie és telepítenie kell az IOTA Legacy alkalmazást és az új IOTA alkalmazást Ledger Live-on keresztül.",
+            "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
             "body2": "Győződjön meg, hogy a Ledger firmware a legfrissebb verzióval rendelkezik. Minden előzetesen telepített alkalmazást a legújabb verzióra kell frissíteni.",
             "action": "Igen, feltelepítettem az alkalmazásokat"
         },
@@ -119,7 +114,7 @@
             "body": "Az új tárcája használatra kész.",
             "softwareMigratedBody": "Sikeresen migrálta tokenjeit az új hálózatra",
             "fireflyLedgerBody": "A Ledger számlája sikeresen helyreállt és továbbléphet a folyamatban.",
-            "trinityLedgerBody": "Sikeresen migrálta a Ledger-t az új hálózatra. Mostmár eltávolíthatja az IOTA Legacy applikációt az eszközéről.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
             "exportMigration": "Migrálási napló exportálása és telepítés befejezése"
         },
         "import": {
@@ -190,9 +185,7 @@
         },
         "switchLedgerApps": {
             "title": "Váltás Ledger alkalmazások között",
-            "body": "Kérem váltson az IOTA Legacy alkalmazásra a Ledger eszközén a migrálás folytatásához. Amikor végzett, kattintson a folytatásra.",
-            "ledgerApp": "IOTA",
-            "ledgerLegacyApp": "IOTA Legacy"
+            "body": "Please switch to the {legacy} app on your Ledger device to continue migration. When ready, press continue."
         },
         "selectLedgerAccountIndex": {
             "title": "Ledger számla sorszámának kiválasztása",
@@ -200,10 +193,11 @@
             "accountIndex": "Számla sorszáma",
             "accountPage": "Számla oldal",
             "standard": "Általános",
-            "expert": "Haladó"
+            "expert": "Haladó",
+            "notGeneratingAddresses": "Is your Ledger generating addresses?",
+            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
         },
         "importBackupPassword": {
-            "title": "Állítsa helyre tárcáit SeedVault- vagy Stronghold-fájlból",
             "body1": "Kérjük, adja meg a biztonsági mentés titkosításának feloldására szolgáló jelszavát!",
             "body2": "Ez az a jelszó, amelyet a biztonsági mentés első létrehozásakor adott meg."
         },
@@ -263,6 +257,7 @@
         },
         "transferFragmentedFunds": {
             "body1": "A Firefly most megkezdi egyenlegének migrálását. Ez eltarthat egy ideig.",
+            "body2": "Ensure your Ledger is connected and the {legacy} app is open at all times during migration.",
             "migrate": "Egyenleg migrálása",
             "transaction": "Tranzakció {number}",
             "rerun": "Újrapróbálkozás"
@@ -394,6 +389,10 @@
                 "title": "Diagnosztika",
                 "description": "Rendszer- és alkalmazásinformációk megtekintése"
             },
+            "migrateLedgerIndex": {
+                "title": "Migrate Ledger Index",
+                "description": "Migrate another Trinity account index"
+            },
             "stateExport": {
                 "title": "Állapot exportálása",
                 "description": "A tranzakciós előzmények .csv fájlba exportálása"
@@ -440,7 +439,7 @@
                     "statuses": {
                         "appNotOpen": "IOTA alkalmazás nincs megnyitva",
                         "connected": "Csatlakozva",
-                        "legacyConnected": "IOTA Legacy alkalmazás megnyitva",
+                        "legacyConnected": "{legacy} App Open",
                         "locked": "Lezárva",
                         "mnemonicMismatch": "Téves Ledger vagy emlékeztető mondat",
                         "notDetected": "Nem található",
@@ -579,28 +578,32 @@
         },
         "ledgerNotConnected": {
             "connect": "Nyissa meg az új IOTA alkalmazást Ledger eszközén a folytatáshoz",
-            "connectLegacy": "Nyissa meg az IOTA Legacy alkalmazást Ledger eszközén a folytatáshoz"
+            "connectLegacy": "Open the {legacy} app on your Ledger device to continue"
         },
         "ledgerConfirmation": {
             "confirm": "A folytatáshoz kövesse a megjelenített utasításokat a Ledger eszközén"
         },
         "ledgerAppGuide": {
             "title": "Útmutató Ledger alkalmazások telepítéséhez",
-            "steps": [
-                "Ledger Live alkalmazás telepítése és megnyitása",
-                "Győződjön meg, hogy a Ledger csatlakoztatva van",
-                "Keresse meg az alkalmazásokat: IOTA Legacy és IOTA (MIOTA)",
-                "Telepítse fel mindkét alkalmazást: IOTA Legacy és IOTA (MIOTA)",
-                "Fontos, hogy zárja be a Ledger Live alkalmazást mielőtt visszatér a Firefly-hoz"
-            ]
+            "steps": {
+                "0": "Ledger Live alkalmazás telepítése és megnyitása",
+                "1": "Győződjön meg, hogy a Ledger csatlakoztatva van",
+                "2": "Search for apps: {legacy} and IOTA (MIOTA)",
+                "3": "Install both apps: {legacy} and IOTA (MIOTA)",
+                "4": "Fontos, hogy zárja be a Ledger Live alkalmazást mielőtt visszatér a Firefly-hoz"
+            }
         },
         "ledgerConnectionGuide": {
             "title": "Javaslatok, ha a Ledger nem csatlakozik",
-            "steps": [
-                "Győződjön meg, hogy a Ledger Live nincs megnyitva a számítógépén",
-                "Győződjön meg, hogy feloldotta a Ledger eszközét a PIN kódjával",
-                "Nyissa meg az új IOTA alkalmazást Ledger eszközén"
-            ]
+            "steps": {
+                "0": "Győződjön meg, hogy a Ledger Live nincs megnyitva a számítógépén",
+                "1": "Győződjön meg, hogy feloldotta a Ledger eszközét a PIN kódjával",
+                "2": "Nyissa meg az új IOTA alkalmazást Ledger eszközén",
+                "3": {
+                    "text": "Still no luck?",
+                    "link": "Try the official Ledger support page"
+                }
+            }
         },
         "ledgerTransaction": {
             "remainderAddress": {
@@ -609,15 +612,16 @@
             },
             "transaction": {
                 "title": "Küldés jóváhagyása",
-                "info": "Hasonlítsa össze a Ledger eszközén megjelenített tranzakciós adatokat a lent megjelenítettel. Ha megegyeznek, nyomja meg mindkét gombot a Ledger-en, amikor az kéri.",
-                "input": "Bemenet [{index}]",
-                "output": "Kimenet",
-                "checksum": "Ellenőrzőkód: {checksum}"
+                "info": "Hasonlítsa össze a Ledger eszközén megjelenített tranzakciós adatokat a lent megjelenítettel. Ha megegyeznek, nyomja meg mindkét gombot a Ledger-en, amikor az kéri."
             }
         },
         "ledgerAddress": {
             "title": "Fogadó cím megerősítése",
             "body": "Hasonlítsa össze a Ledger eszközén megjelenített fogadó címet a lent megjelenítettel. Ha megegyeznek, nyomja meg mindkét gombot a Ledger-en, amikor az kéri."
+        },
+        "ledgerMigrateIndex": {
+            "title": "Do you need to migrate another Trinity account index?",
+            "body": "You can also migrate later in Advanced Settings."
         }
     },
     "charts": {
@@ -726,7 +730,8 @@
         "searchAgain": "Keresés újra",
         "searching": "Keresés...",
         "closeFirefly": "Firefly bezárása",
-        "generateAddress": "Új cím létrehozása"
+        "generateAddress": "Új cím létrehozása",
+        "migrateAgain": "Migrate another index"
     },
     "general": {
         "password": "Jelszó",
@@ -872,8 +877,7 @@
         "minutesRemaining": "{minutes, plural, one {1 perc van hátra} other {# perc van hátra}}",
         "copiedToClipboard": "A vágólapra másolva",
         "accountsSynchronized": "Tárca szinkronizálva",
-        "migratedAccountChrysalisDown": "Egyenlege a Chrysalis migráció után lesz elérhető 2021. április 28-án",
-        "migratedAccountChrysalisUp": "Egyenlege hamarosan elérhető lesz"
+        "fundsAvailableSoon": "Your funds will become available shortly"
     },
     "error": {
         "profile": {
@@ -961,8 +965,11 @@
             "notFound": "Nem található Ledger eszköz.",
             "otherConnected": "Nem megfelelő alkalmazás van megnyitva a Ledger eszközén.",
             "generateAddress": "Hiba történt a cím generálása közben.",
-            "timeout": "Időtúllépés",
-            "disconnected": "Eszköz leválasztva"
+            "timeout": "Your Ledger device timed out.",
+            "disconnected": "Your Ledger device was disconnected."
+        },
+        "popup": {
+            "preventClose": "This popup is unable to be closed."
         }
     },
     "tooltips": {
