@@ -70,6 +70,15 @@ export enum ErrorType {
     DustError = 'DustError',
 }
 
+export enum LedgerErrorType {
+    LedgerMiscError = 'LedgerMiscError',
+    LedgerDongleLocked = 'LedgerDongleLocked',
+    LedgerDeniedByUser = 'LedgerDeniedByUser',
+    LedgerDeviceNotFound = 'LedgerDeviceNotFound',
+    LedgerEssenceTooLarge = 'LedgerEssenceTooLarge',
+    WrongLedgerSeedError = 'WrongLedgerSeedError',
+}
+
 export type Callback<T> = (error: string, data: T) => void
 
 export interface Event<T> {
