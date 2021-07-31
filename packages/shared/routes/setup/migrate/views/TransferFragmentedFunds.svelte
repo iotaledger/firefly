@@ -20,7 +20,7 @@
     import { closePopup, popupState } from 'shared/lib/popup'
     import { newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
     import { walletSetupType } from 'shared/lib/router'
-    import { LedgerDeviceState } from 'shared/lib/typings/ledger'
+    import { LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { SetupType } from 'shared/lib/typings/routes'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
@@ -419,7 +419,9 @@
             <Text type="h2" classes="mb-5">{locale('views.migrate.title')}</Text>
             <Text type="p" secondary classes="mb-4">{locale('views.transferFragmentedFunds.body1')}</Text>
             {#if legacyLedger}
-                <Text type="p" secondary classes="mb-4">{locale('views.transferFragmentedFunds.body2')}</Text>
+                <Text type="p" secondary classes="mb-4">
+                    {locale('views.transferFragmentedFunds.body2', { values: { legacy: LedgerAppName.IOTALegacy } })}
+                </Text>
             {/if}
             <div class="flex-auto overflow-y-auto h-1 space-y-4 w-full scrollable-y scroll-secondary">
                 {#each transactions as transaction}
