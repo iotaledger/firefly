@@ -165,6 +165,7 @@ export const resetWallet = () => {
     isSyncing.set(null)
     isFirstSessionSync.set(true)
     isFirstManualSync.set(true)
+    isBackgroundSyncing.set(false)
     walletSetupType.set(null)
 }
 
@@ -180,6 +181,7 @@ export const hasGeneratedALedgerReceiveAddress = writable<boolean | null>(false)
 export const isSyncing = writable<boolean>(false)
 export const isFirstSessionSync = writable<boolean>(true)
 export const isFirstManualSync = writable<boolean>(true)
+export const isBackgroundSyncing = writable<boolean>(false)
 
 export const api: {
     generateMnemonic(callbacks: { onSuccess: (response: Event<string>) => void, onError: (err: ErrorEventPayload) => void })
@@ -194,6 +196,7 @@ export const api: {
     syncAccounts(addressIndex: number, gapLimit: number, accountDiscoveryThreshold: number, callbacks: { onSuccess: (response: Event<SyncedAccount[]>) => void, onError: (err: ErrorEventPayload) => void })
     syncAccount(accountId: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
     startBackgroundSync(pollingInterval: Duration, automaticOutputConsolidation: boolean, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
+    stopBackgroundSync(callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
     createAccount(account: AccountToCreate, callbacks: { onSuccess: (response: Event<Account>) => void, onError: (err: ErrorEventPayload) => void })
     send(accountId: string, transfer: {
         amount: number,

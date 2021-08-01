@@ -98,6 +98,7 @@ export type LatestAddressResponse = Response<ResponseTypes.LatestAddress, Addres
 export type BalanceResponse = Response<ResponseTypes.Balance, Balance>
 export type SyncAccountsResponse = Response<ResponseTypes.SyncedAccounts, SyncedAccount[]>
 export type StartBackgroundSyncResponse = Response<ResponseTypes.Ok, void>
+export type StopBackgroundSyncResponse = Response<ResponseTypes.Ok, void>
 export type SyncAccountResponse = Response<ResponseTypes.SyncedAccount, SyncedAccount>
 export type ReattachResponse = Response<ResponseTypes.Reattached, string> // message id
 export type BackupSuccessfulResponse = Response<ResponseTypes.BackupSuccessful, void>
@@ -145,6 +146,7 @@ export type MessageResponse =
     | BalanceResponse
     | SyncAccountsResponse
     | StartBackgroundSyncResponse
+    | StopBackgroundSyncResponse
     | SyncAccountResponse
     | ReattachResponse
     | BackupSuccessfulResponse
