@@ -1,8 +1,10 @@
 <script>
     import { Button, Link, OnboardingLayout, Text, Video } from 'shared/components'
-    import { LEDGER_MIGRATION_VIDEO, initialiseMigrationListeners } from 'shared/lib/migration'
-    import { createEventDispatcher, onMount } from 'svelte'
     import { Electron } from 'shared/lib/electron'
+    import { initialiseMigrationListeners, LEDGER_MIGRATION_VIDEO } from 'shared/lib/migration'
+    import { api, isBackgroundSyncing } from 'shared/lib/wallet'
+    import { createEventDispatcher, onMount } from 'svelte'
+    import { get } from 'svelte/store'
 
     export let locale
     export let mobile
@@ -24,6 +26,20 @@
     onMount(() => {
         // This is the first screen that mounts when a user wants to migrate additional account index
         initialiseMigrationListeners()
+        if (get(isBackgroundSyncing)) {
+            api.stopBackgroundSync({
+                onSuccess() {
+                    console.log('stop polling')
+                    isBackgroundSyncing.set(false)
+                },
+                onError(err) {
+                    showAppNotification({
+                        type: 'error',
+                        message: locale('error.account.syncing'),
+                    })
+                },
+            })
+        }
     })
 </script>
 

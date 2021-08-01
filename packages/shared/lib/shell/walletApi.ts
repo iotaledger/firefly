@@ -50,6 +50,7 @@ const apiToResponseTypeMap = {
     getAccounts: ResponseTypes.ReadAccounts,
     syncAccounts: ResponseTypes.SyncedAccounts,
     startBackgroundSync: ResponseTypes.Ok,
+    stopBackgroundSync: ResponseTypes.Ok,
     listMessages: ResponseTypes.Messages,
     listAddresses: ResponseTypes.Addresses,
     generateAddress: ResponseTypes.GeneratedAddress,
