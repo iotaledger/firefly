@@ -41,22 +41,22 @@
             api.setStrongholdPasswordClearInterval({ secs: STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, nanos: 0 })
         }
 
-        api.startBackgroundSync(
-            {
-                secs: 30,
-                nanos: 0,
-            },
-            true,
-            {
-                onSuccess() {},
-                onError(err) {
-                    showAppNotification({
-                        type: 'error',
-                        message: locale('error.account.syncing'),
-                    })
-                },
-            }
-        )
+        // api.startBackgroundSync(
+        //     {
+        //         secs: 30,
+        //         nanos: 0,
+        //     },
+        //     true,
+        //     {
+        //         onSuccess() {},
+        //         onError(err) {
+        //             showAppNotification({
+        //                 type: 'error',
+        //                 message: locale('error.account.syncing'),
+        //             })
+        //         },
+        //     }
+        // )
 
         // TODO: Re-enable deep links
         // Electron.DeepLinkManager.requestDeepLink()
