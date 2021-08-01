@@ -31,23 +31,23 @@
             "body2": "Recovery Kit を記入して安全に保管すると、いつでもウォレットを復元できます。"
         },
         "create": {
-            "title": "Create a wallet",
-            "body": "Create a new wallet. You can choose a regular software wallet or if you have a Ledger device you can set up a hardware wallet.",
+            "title": "ウォレットを作成",
+            "body": "新しいウォレットを作成します。通常のソフトウェアウォレットを選択するか、Ledgerデバイスをお持ちの場合は、ハードウェアウォレットを設定できます。",
             "softwareAccount": {
-                "title": "I want a software wallet",
-                "description": "Create a 24-word Recovery Phrase"
+                "title": "ソフトウェアウォレットが欲しい",
+                "description": "24単語の回復フレーズを作成する"
             },
             "ledgerAccount": {
-                "title": "I want a hardware wallet",
-                "description": "Ledger Nano S or Nano X required"
+                "title": "ハードウェアウォレットが欲しい",
+                "description": "Ledger Nano SまたはNano Xが必要"
             }
         },
         "setupLedger": {
-            "progress1": "Connect your Ledger",
-            "progress2": "Generate address",
+            "progress1": "Ledgerを接続してください",
+            "progress2": "アドレスを生成",
             "progress3": "Switch Ledger app",
             "progress4": "Transfer funds",
-            "watchVideo": "Watch video guide"
+            "watchVideo": "ビデオガイドを見る"
         },
         "ledgerInstallationGuide": {
             "title": "Have you installed the necessary Ledger apps?",
@@ -730,7 +730,7 @@
         "searchAgain": "再検索",
         "searching": "検索しています...",
         "closeFirefly": "Firefly を閉じる",
-        "generateAddress": "Generate address",
+        "generateAddress": "アドレスを生成",
         "migrateAgain": "Migrate another index"
     },
     "general": {
