@@ -29,7 +29,6 @@
         if (get(isBackgroundSyncing)) {
             api.stopBackgroundSync({
                 onSuccess() {
-                    console.log('stop polling')
                     isBackgroundSyncing.set(false)
                 },
                 onError(err) {
