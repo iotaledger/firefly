@@ -31,29 +31,29 @@
             "body2": "如果您填写Recovery Kit并安全存储它，您就能够恢复您的钱包。"
         },
         "create": {
-            "title": "Create a wallet",
-            "body": "Create a new wallet. You can choose a regular software wallet or if you have a Ledger device you can set up a hardware wallet.",
+            "title": "创建一个钱包",
+            "body": "创建一个新钱包。您可以选择一个普通软件钱包，或者如果您有一个Ledger设备，您可以设置一个硬件钱包。",
             "softwareAccount": {
-                "title": "I want a software wallet",
-                "description": "Create a 24-word Recovery Phrase"
+                "title": "我想要一个软件钱包",
+                "description": "创建一个24个字的恢复助记词"
             },
             "ledgerAccount": {
-                "title": "I want a hardware wallet",
-                "description": "Ledger Nano S or Nano X required"
+                "title": "我想要一个硬件钱包",
+                "description": "需要Ledger Nano S 或 Nano X"
             }
         },
         "setupLedger": {
-            "progress1": "Connect your Ledger",
-            "progress2": "Generate address",
-            "progress3": "Switch Ledger app",
-            "progress4": "Transfer funds",
-            "watchVideo": "Watch video guide"
+            "progress1": "连接您的Ledger",
+            "progress2": "生成地址",
+            "progress3": "切换Ledger应用",
+            "progress4": "划拨资金",
+            "watchVideo": "观看视频指南"
         },
         "ledgerInstallationGuide": {
-            "title": "Have you installed the necessary Ledger apps?",
-            "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
-            "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
-            "action": "Yes, I've installed these apps"
+            "title": "您是否安装了必要的Ledger应用？",
+            "body1": "在您继续之前，您必须通过Ledger Live找到并安装 {legacy} 应用程序和新的 IOTA应用程序。",
+            "body2": "请确保您的Ledger固件是最新的。任何预安装的应用都应更新到他们的最新版本。",
+            "action": "是的，我已经安装了这些应用"
         },
         "password": {
             "title": "设置密码",
@@ -112,9 +112,9 @@
             "title": "钱包设置完成",
             "fundsMigrated": "资金已迁移",
             "body": "您的新钱包已准备使用。",
-            "softwareMigratedBody": "You have successfully migrated your funds to the new network",
-            "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
+            "softwareMigratedBody": "您已成功地将您的资金迁移到新的网络",
+            "fireflyLedgerBody": "您的Ledger 账号已成功恢复，您现在可以继续。",
+            "trinityLedgerBody": "您已成功地将您的Ledger迁移到新网络。您现在可以从您的设备中移除 {legacy} 应用程序。",
             "exportMigration": "导出迁移日志并完成设置"
         },
         "import": {
@@ -126,8 +126,8 @@
             "importMnemonicDescription": "输入恢复密语来找回您的钱包",
             "importFile": "我有一个备份文件",
             "importFileDescription": "上传Seedvault或Stronghold 文件",
-            "importLedger": "I have a Ledger backup",
-            "importLedgerDescription": "Restore or migrate a Ledger profile"
+            "importLedger": "我有一个Ledger 备份",
+            "importLedgerDescription": "还原或迁移Ledger 资料"
         },
         "importFromText": {
             "seed": {
@@ -149,15 +149,15 @@
             "body": "导入备份文件以恢复您的钱包。备份可以是 Stronghold (.stronghold) 或 Trinity SeedVault (.kdbx)格式。"
         },
         "importFromLedger": {
-            "title": "Restore or Migrate your Ledger",
-            "body": "Restore an existing Firefly Ledger profile, or migrate your funds from Trinity.",
-            "haveFireflyLedger": "I have a Firefly Ledger backup",
-            "haveFireflyLedgerDescription": "Restore a Firefly profile",
-            "haveTrinityLedger": "I have a Trinity Ledger backup",
-            "haveTrinityLedgerDescription": "Migrate a Trinity profile"
+            "title": "还原或迁移您的Ledger",
+            "body": "还原现有的Firefly Ledger 个人资料，或从Trinity迁移您的资金。",
+            "haveFireflyLedger": "我有一个Firefly Ledger备份",
+            "haveFireflyLedgerDescription": "还原一个Firefly 个人资料",
+            "haveTrinityLedger": "我有一个 Trinity Ledger 备份",
+            "haveTrinityLedgerDescription": "迁移一个 Trinity 档案"
         },
         "connectLedger": {
-            "title": "Connect your Ledger to Firefly",
+            "title": "将您的账单连接到Fifly",
             "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed.",
             "trafficLight1": "Connect and unlock your Ledger with your PIN",
             "trafficLight2": "Open the new IOTA app on your Ledger",
@@ -730,7 +730,7 @@
         "searchAgain": "重新搜索",
         "searching": "搜索中...",
         "closeFirefly": "关闭Firefly",
-        "generateAddress": "Generate address",
+        "generateAddress": "生成地址",
         "migrateAgain": "Migrate another index"
     },
     "general": {

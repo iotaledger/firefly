@@ -51,7 +51,7 @@
         },
         "ledgerInstallationGuide": {
             "title": "Oletko asentanut tarvittavat Ledger-sovellukset?",
-            "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
+            "body1": "Ennen kuin jatkat, sinun on löydettävä ja asennettava sekä {legacy} -sovellus että uusi IOTA-sovellus Ledger Liven kautta.",
             "body2": "Varmista, että Ledger-laitteesi laiteohjelmisto on ajan tasalla. Kaikki valmiiksi asennetut sovellukset tulee päivittää uusimpiin versioihin.",
             "action": "Kyllä, olen asentanut nämä sovellukset"
         },
@@ -114,7 +114,7 @@
             "body": "Uusi lompakkosi on käyttövalmis.",
             "softwareMigratedBody": "Olet onnistuneesti siirtänyt varasi uuteen verkkoon",
             "fireflyLedgerBody": "Ledger-tilisi on onnistuneesti palautettu ja voit nyt jatkaa.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
+            "trinityLedgerBody": "Olet onnistuneesti siirtänyt Ledger-laitteesi uuteen verkkoon. Voit nyt poistaa {legacy} -sovelluksen laitteestasi.",
             "exportMigration": "Vie migraatioloki ja viimeistele määritys"
         },
         "import": {
@@ -185,7 +185,7 @@
         },
         "switchLedgerApps": {
             "title": "Vaihda Ledger-sovelluksia",
-            "body": "Please switch to the {legacy} app on your Ledger device to continue migration. When ready, press continue."
+            "body": "Ole hyvä ja vaihda {legacy} -sovellukseen Ledger-laitteellasi jatkaaksesi migraatiota. Kun olet valmis, paina jatka."
         },
         "selectLedgerAccountIndex": {
             "title": "Valitse Ledger-tilin indeksi",
@@ -194,8 +194,8 @@
             "accountPage": "Tilin sivu",
             "standard": "Standardi",
             "expert": "Edistynyt",
-            "notGeneratingAddresses": "Is your Ledger generating addresses?",
-            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
+            "notGeneratingAddresses": "Luoko Ledger-laitteesi osoitteita?",
+            "reinstallLegacy": "Jos ei, katkaise yhteys laitteeseen ja yritä uudelleen. Jos ongelma jatkuu, saatat joutua asentamaan {legacy} -sovelluksen uudelleen."
         },
         "importBackupPassword": {
             "body1": "Syötä varmuuskopion salasanasi.",
@@ -257,7 +257,7 @@
         },
         "transferFragmentedFunds": {
             "body1": "Firefly ryhtyy nyt siirtämään varojasi. Tämä voi kestää jonkin aikaa.",
-            "body2": "Ensure your Ledger is connected and the {legacy} app is open at all times during migration.",
+            "body2": "Varmista, että Ledger-laitteesi on yhdistetty ja {legacy} -sovellus on auki koko ajan migraation aikana.",
             "migrate": "Siirrä varasi",
             "transaction": "Transaktio {number}",
             "rerun": "Yritä uudelleen"
@@ -390,8 +390,8 @@
                 "description": "Näytä järjestelmän ja sovelluksen tiedot"
             },
             "migrateLedgerIndex": {
-                "title": "Migrate Ledger Index",
-                "description": "Migrate another Trinity account index"
+                "title": "Siirrä Ledger-indeksi",
+                "description": "Siirrä toinen Trinity-tilin indeksi"
             },
             "stateExport": {
                 "title": "Tilan vienti",
@@ -439,7 +439,7 @@
                     "statuses": {
                         "appNotOpen": "IOTA-sovellus ei ole auki",
                         "connected": "Yhdistetty",
-                        "legacyConnected": "{legacy} App Open",
+                        "legacyConnected": "{legacy} -sovellus auki",
                         "locked": "Lukittu",
                         "mnemonicMismatch": "Väärä Ledger tai Mnemonic-fraasi",
                         "notDetected": "Ei havaittu",
@@ -578,7 +578,7 @@
         },
         "ledgerNotConnected": {
             "connect": "Avaa uusi IOTA-sovellus Ledger-laitteellasi jatkaaksesi",
-            "connectLegacy": "Open the {legacy} app on your Ledger device to continue"
+            "connectLegacy": "Avaa {legacy} -sovellus Ledger-laitteellasi jatkaaksesi"
         },
         "ledgerConfirmation": {
             "confirm": "Jatkaaksesi, vahvista Ledger-laitteellasi näkyvä kehotus"
@@ -588,8 +588,8 @@
             "steps": {
                 "0": "Asenna ja avaa Ledger Live -sovellus",
                 "1": "Varmista, että Ledger-laitteesi on yhdistetty",
-                "2": "Search for apps: {legacy} and IOTA (MIOTA)",
-                "3": "Install both apps: {legacy} and IOTA (MIOTA)",
+                "2": "Etsi sovelluksia: {legacy} ja IOTA (MIOTA)",
+                "3": "Asenna molemmat sovellukset: {legacy} ja IOTA (MIOTA)",
                 "4": "Muista, että on tärkeää sulkea Ledger Live ennen Fireflyhyn palaamista"
             }
         },
@@ -600,8 +600,8 @@
                 "1": "Varmista, että olet avannut Ledger-laitteesi PIN-koodillasi",
                 "2": "Avaa uusi IOTA-sovellus Ledger-laitteellasi",
                 "3": {
-                    "text": "Still no luck?",
-                    "link": "Try the official Ledger support page"
+                    "text": "Vieläkin ongelmia?",
+                    "link": "Kokeile Ledgerin virallista tukisivustoa"
                 }
             }
         },
@@ -620,8 +620,8 @@
             "body": "Vahvista, että Ledger-laitteella näkyvä vastaanotto-osoite täsmää alla näkyvään osoitteeseen. Jos ne täsmäävät, paina molempia painikkeita Ledger-laitteessasi kehotuksen mukaisesti."
         },
         "ledgerMigrateIndex": {
-            "title": "Do you need to migrate another Trinity account index?",
-            "body": "You can also migrate later in Advanced Settings."
+            "title": "Täytyykö sinun siirtää toinen Trinity-tilin indeksi?",
+            "body": "Voit myös tehdä migraation myöhemmin lisäasetuksissa."
         }
     },
     "charts": {
@@ -731,7 +731,7 @@
         "searching": "Haetaan...",
         "closeFirefly": "Sulje Firefly",
         "generateAddress": "Luo osoite",
-        "migrateAgain": "Migrate another index"
+        "migrateAgain": "Siirrä toinen indeksi"
     },
     "general": {
         "password": "Salasana",
@@ -877,7 +877,7 @@
         "minutesRemaining": "{minutes, plural, one {1 minuutti jäljellä} other {# minuuttia jäljellä}}",
         "copiedToClipboard": "Kopioitu leikepöydälle",
         "accountsSynchronized": "Lompakon synkronointi valmis",
-        "fundsAvailableSoon": "Your funds will become available shortly"
+        "fundsAvailableSoon": "Varasi ovat käytettävissä pian"
     },
     "error": {
         "profile": {
@@ -965,11 +965,11 @@
             "notFound": "Ledger-laitetta ei löydy.",
             "otherConnected": "Väärä sovellus on auki Ledger-laitteellasi.",
             "generateAddress": "Osoitetta luotaessa tapahtui virhe.",
-            "timeout": "Your Ledger device timed out.",
-            "disconnected": "Your Ledger device was disconnected."
+            "timeout": "Ledger-laitteesi aikakatkaistiin.",
+            "disconnected": "Yhteys Ledger-laitteeseesi katkaistiin."
         },
         "popup": {
-            "preventClose": "This popup is unable to be closed."
+            "preventClose": "Tätä ponnahdusikkunaa ei voi sulkea."
         }
     },
     "tooltips": {

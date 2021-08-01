@@ -31,29 +31,29 @@
             "body2": "Hvis du fyller ut Recovery Kit og oppbevarer det trygt, vil du alltid kunne gjenopprette lommebøkene dine."
         },
         "create": {
-            "title": "Create a wallet",
-            "body": "Create a new wallet. You can choose a regular software wallet or if you have a Ledger device you can set up a hardware wallet.",
+            "title": "Opprette lommebok",
+            "body": "Opprett en ny lommebok. Du kan velge mellom en vanlig lommebok, eller en Maskinvarelommebok hvis du har en Ledger-enhet.",
             "softwareAccount": {
-                "title": "I want a software wallet",
-                "description": "Create a 24-word Recovery Phrase"
+                "title": "Jeg vil ha en programvare lommebok",
+                "description": "Opprett en 24-ord gjenopprettingsfrase"
             },
             "ledgerAccount": {
-                "title": "I want a hardware wallet",
-                "description": "Ledger Nano S or Nano X required"
+                "title": "Jeg vil ha en maskinvarelommebok",
+                "description": "Ledger Nano S eller Nano X kreves"
             }
         },
         "setupLedger": {
-            "progress1": "Connect your Ledger",
-            "progress2": "Generate address",
-            "progress3": "Switch Ledger app",
-            "progress4": "Transfer funds",
-            "watchVideo": "Watch video guide"
+            "progress1": "Koble til din Ledger",
+            "progress2": "Generer adresse",
+            "progress3": "Bytt Ledger app",
+            "progress4": "Overfør midler",
+            "watchVideo": "Se video guide"
         },
         "ledgerInstallationGuide": {
-            "title": "Have you installed the necessary Ledger apps?",
-            "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
-            "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
-            "action": "Yes, I've installed these apps"
+            "title": "Har du installert de nødvendige Ledger-appene?",
+            "body1": "Før du fortsetter, må du finne og installere både {legacy} appen og den nye IOTA-appen gjennom Ledger Live.",
+            "body2": "Sørg for at din Ledger firmware er oppdatert. Alle forhåndsinstallerte apper skal oppdateres til sine siste versjoner.",
+            "action": "Ja, jeg har installert disse appene"
         },
         "password": {
             "title": "Opprett et passord",
@@ -112,9 +112,9 @@
             "title": "Oppsett av lommebok fullført",
             "fundsMigrated": "Midlene er migrert",
             "body": "Din nye lommebok er klar til bruk.",
-            "softwareMigratedBody": "You have successfully migrated your funds to the new network",
-            "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
+            "softwareMigratedBody": "Migreringen av dine midler til det nye nettverket var vellykket",
+            "fireflyLedgerBody": "Din Ledger konto er bekreftet gjenopprettet, og du kan nå fortsette.",
+            "trinityLedgerBody": "Du har nå migrert din Ledger til det nye nettverket. Du kan nå fjerne {legacy} appen fra enheten.",
             "exportMigration": "Eksporter migreringsloggen og fullfør oppsettet"
         },
         "import": {
@@ -126,8 +126,8 @@
             "importMnemonicDescription": "Skriv inn gjenopprettingsfrasen din for å gjenopprette lommebøkene dine",
             "importFile": "Jeg har en sikkerhetskopi-fil",
             "importFileDescription": "Last opp en Seedvault- eller Stronghold-fil",
-            "importLedger": "I have a Ledger backup",
-            "importLedgerDescription": "Restore or migrate a Ledger profile"
+            "importLedger": "Jeg har en Ledger sikkerhetskopi",
+            "importLedgerDescription": "Gjenopprett eller migrere en Ledger-profil"
         },
         "importFromText": {
             "seed": {
@@ -149,24 +149,24 @@
             "body": "Importer en sikkerhetskopi-fil for å gjenopprette lommebøkene dine. Sikkerhetskopier kan enten være et Stronghold (.stronghold) eller et Trinity SeedVault (.kdbx)."
         },
         "importFromLedger": {
-            "title": "Restore or Migrate your Ledger",
-            "body": "Restore an existing Firefly Ledger profile, or migrate your funds from Trinity.",
-            "haveFireflyLedger": "I have a Firefly Ledger backup",
-            "haveFireflyLedgerDescription": "Restore a Firefly profile",
-            "haveTrinityLedger": "I have a Trinity Ledger backup",
-            "haveTrinityLedgerDescription": "Migrate a Trinity profile"
+            "title": "Gjenopprett eller migrer din Ledger",
+            "body": "Gjenopprett en eksisterende Firefly Ledger profil eller migrerer midlene fra Trinity.",
+            "haveFireflyLedger": "Jeg har en Firefly Ledger sikkerhetskopi",
+            "haveFireflyLedgerDescription": "Gjenopprett en Firefly-profil",
+            "haveTrinityLedger": "Jeg har en Trinity Ledger sikkerhetskopi",
+            "haveTrinityLedgerDescription": "Migrer en Trinity-profil"
         },
         "connectLedger": {
-            "title": "Connect your Ledger to Firefly",
-            "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed.",
-            "trafficLight1": "Connect and unlock your Ledger with your PIN",
-            "trafficLight2": "Open the new IOTA app on your Ledger",
-            "tips": "Tips if your Ledger isn’t connecting"
+            "title": "Koble din Ledger til Firefly",
+            "body": "For at Ledger-enheten din skal bli funnet av Firefly, vennligst sørg for at den offisielle Ledger Live-applikasjonen er lukket.",
+            "trafficLight1": "Koble til og lås opp din Ledger med PIN-koden",
+            "trafficLight2": "Åpne den nye IOTA-appen på din Ledger",
+            "tips": "Tips hvis din Ledger ikke kobler til"
         },
         "restoreFromFireflyLedger": {
-            "title": "Restore Your Ledger Profile",
-            "body": "Press restore to complete the setup process and restore your wallets, balances and transaction history.",
-            "restoring": "Restoring from Ledger..."
+            "title": "Gjenopprett din Ledger-profil",
+            "body": "Trykk tilbakestill for å fullføre installasjonsprosessen og gjenopprette lommebøkene, saldoen og transaksjonshistorien.",
+            "restoring": "Gjenoppretter fra Ledger..."
         },
         "legacyLedgerIntro": {
             "title": "Start your Ledger migration using Firefly",
@@ -594,7 +594,7 @@
             }
         },
         "ledgerConnectionGuide": {
-            "title": "Tips if your Ledger isn’t connecting",
+            "title": "Tips hvis din Ledger ikke kobler til",
             "steps": {
                 "0": "Make sure Ledger Live is not open on your computer",
                 "1": "Ensure you have unlocked your Ledger device with your PIN",
@@ -730,7 +730,7 @@
         "searchAgain": "Søk på nytt",
         "searching": "Søker...",
         "closeFirefly": "Lukk Firefly",
-        "generateAddress": "Generate address",
+        "generateAddress": "Generer adresse",
         "migrateAgain": "Migrate another index"
     },
     "general": {
