@@ -109,11 +109,27 @@ export function promptUserToConnectLedger(
     forcePoll: boolean = false // use forcePoll to initialize a new poll even though there is one running
 ) {
     const _onCancel = () => {
-        stopPollingLedgerStatus()
+        /**
+         * stop poll only on normal circumstances (!forcePoll) 
+         * or if there really was an interruption.
+         * Otherwhise we have the rist of stopping an ongoing poll 
+         * that should be kept alive
+         */
+        if (!forcePoll || forcePoll && get(ledgerPollInterrupted)) {
+            stopPollingLedgerStatus()
+        }
         onCancel()
     }
     const _onConnected = () => {
-        stopPollingLedgerStatus()
+        /**
+         * stop poll only on normal circumstances (!forcePoll) 
+         * or if there really was an interruption.
+         * Otherwhise we have the rist of stopping an ongoing poll 
+         * that should be kept alive
+         */
+        if (!forcePoll || forcePoll && get(ledgerPollInterrupted)) {
+            stopPollingLedgerStatus()
+        }
         if (get(popupState).active) {
             closePopup()
         }
