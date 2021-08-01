@@ -34,7 +34,7 @@ import type {
     AddressInput,
     MigrationBundle,
     MigrationData,
-    SendMigrationBundleResponse
+    SendMigrationBundleResponse,
 } from 'shared/lib/typings/migration'
 import { formatUnitBestMatch } from 'shared/lib/units'
 import { get, writable, Writable } from 'svelte/store'
@@ -47,6 +47,7 @@ import { SetupType } from './typings/routes'
 import type { Duration, StrongholdStatus } from './typings/wallet'
 import { displayNotificationForLedgerProfile } from './ledger'
 import { walletSetupType } from './router'
+import { didInitialiseMigrationListeners } from 'shared/lib/migration';
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -316,6 +317,7 @@ export const initialise = (id: string, storagePath: string): void => {
  * @returns {void}
  */
 export const removeEventListeners = (id: string): void => {
+    didInitialiseMigrationListeners.set(false);
     actors[id].removeEventListeners()
 };
 
