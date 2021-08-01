@@ -2,7 +2,7 @@
     import { Idle, Sidebar } from 'shared/components'
     import { loggedIn, logout } from 'shared/lib/app'
     import { Electron } from 'shared/lib/electron'
-    import { ledgerPollInterrupted, pollLedgerDeviceStatus } from 'shared/lib/ledger'
+    import { ledgerPollInterrupted, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { NOTIFICATION_TIMEOUT_NEVER, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
@@ -87,6 +87,9 @@
         if (fundsSoonNotificationId) {
             removeDisplayNotification(fundsSoonNotificationId)
         }
+        if ($isLedgerProfile) {
+            stopPollingLedgerStatus()
+        }
     })
 
     // TODO: re-enable deep links
@@ -126,23 +129,29 @@
     if ($walletRoute === WalletRoutes.Init && !$accountsLoaded && $loggedIn) {
         startInit = Date.now()
         busy = true
-        openPopup({
-            type: 'busy',
-            hideClose: true,
-            fullScreen: true,
-            transition: false,
-        })
+        if (!get(popupState).active) {
+            openPopup({
+                type: 'busy',
+                hideClose: true,
+                fullScreen: true,
+                transition: false,
+            })
+        }
     }
     $: {
         if ($accountsLoaded) {
             const minTimeElapsed = 3000 - (Date.now() - startInit)
-            if (minTimeElapsed < 0) {
+            const cancelBusyState = () => {
                 busy = false
-                closePopup()
+                if (get(popupState).type === 'busy') {
+                    closePopup()
+                }
+            }
+            if (minTimeElapsed < 0) {
+                cancelBusyState()
             } else {
                 setTimeout(() => {
-                    busy = false
-                    closePopup()
+                    cancelBusyState()
                 }, minTimeElapsed)
             }
         }

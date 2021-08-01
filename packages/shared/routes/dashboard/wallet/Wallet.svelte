@@ -16,7 +16,7 @@
         updateProfile,
     } from 'shared/lib/profile'
     import { walletRoute } from 'shared/lib/router'
-    import { TransferProgressEventType, ErrorType } from 'shared/lib/typings/events'
+    import { TransferProgressEventType, LedgerErrorType } from 'shared/lib/typings/events'
     import type { Transaction } from 'shared/lib/typings/message'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import {
@@ -141,10 +141,8 @@
 
     function getAccounts() {
         const _onError = (error: any = null) => {
-            console.error(error)
-
             if ($isLedgerProfile) {
-                if (error.type !== ErrorType.LedgerDeviceNotFound) {
+                if (!LedgerErrorType[error.type]) {
                     displayNotificationForLedgerProfile('error', true, true, false, false, error)
                 }
             } else {
