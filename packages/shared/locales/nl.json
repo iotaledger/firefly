@@ -51,7 +51,7 @@
         },
         "ledgerInstallationGuide": {
             "title": "Heeft u de benodigde Ledger apps geïnstalleerd?",
-            "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
+            "body1": "Voordat je verder gaat, moet je zowel de {legacy} app als de nieuwe IOTA app vinden en installeren via Ledger Live.",
             "body2": "Zorg ervoor dat uw Ledger firmware up-to-date is. Alle vooraf geïnstalleerde apps moeten worden bijgewerkt naar de nieuwste versies.",
             "action": "Ja, ik heb deze apps geïnstalleerd"
         },
@@ -114,7 +114,7 @@
             "body": "Uw nieuwe portemonnee is klaar voor gebruik.",
             "softwareMigratedBody": "U heeft uw saldo met succes gemigreerd naar het nieuwe netwerk",
             "fireflyLedgerBody": "Uw Ledger-account is succesvol hersteld en u kunt nu verdergaan.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
+            "trinityLedgerBody": "U heeft uw Ledger met succes gemigreerd naar het nieuwe netwerk. U kunt nu de {legacy} app van uw apparaat verwijderen.",
             "exportMigration": "Exporteer migratielogboek en maak set-up af"
         },
         "import": {
@@ -185,7 +185,7 @@
         },
         "switchLedgerApps": {
             "title": "Wissel Ledger apps",
-            "body": "Please switch to the {legacy} app on your Ledger device to continue migration. When ready, press continue."
+            "body": "Schakel over naar de {legacy} app op uw Ledger apparaat om door te gaan met migratie. Wanneer klaar, druk op Doorgaan."
         },
         "selectLedgerAccountIndex": {
             "title": "Kies Ledger account index",
@@ -194,8 +194,8 @@
             "accountPage": "Account pagina",
             "standard": "Standaard",
             "expert": "Expert",
-            "notGeneratingAddresses": "Is your Ledger generating addresses?",
-            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
+            "notGeneratingAddresses": "Genereert uw Ledger adressen?",
+            "reinstallLegacy": "Zo niet, verbreek dan de verbinding met het apparaat en probeer het opnieuw. Als het probleem zich blijft voordoen, moet u wellicht de app {legacy} opnieuw installeren."
         },
         "importBackupPassword": {
             "body1": "Voer je back-up wachtwoord in.",
@@ -257,7 +257,7 @@
         },
         "transferFragmentedFunds": {
             "body1": "Firefly zal nu doorgaan met het migreren van je saldo. Dit kan een tijdje duren.",
-            "body2": "Ensure your Ledger is connected and the {legacy} app is open at all times during migration.",
+            "body2": "Zorg ervoor dat uw Ledger is aangesloten en de {legacy} app te allen tijde open is tijdens migratie.",
             "migrate": "Saldo migreren",
             "transaction": "Transactie {number}",
             "rerun": "Probeer opnieuw"
@@ -390,8 +390,8 @@
                 "description": "Bekijk systeem- en programma informatie"
             },
             "migrateLedgerIndex": {
-                "title": "Migrate Ledger Index",
-                "description": "Migrate another Trinity account index"
+                "title": "Migreer Ledger Index",
+                "description": "Migreer een andere Trinity account index"
             },
             "stateExport": {
                 "title": "Status exporteren",
@@ -439,7 +439,7 @@
                     "statuses": {
                         "appNotOpen": "IOTA App niet geopend",
                         "connected": "Verbonden",
-                        "legacyConnected": "{legacy} App Open",
+                        "legacyConnected": "{legacy} App openen",
                         "locked": "Vergrendeld",
                         "mnemonicMismatch": "Verkeerde Ledger of Mnemonic",
                         "notDetected": "Niet gedetecteerd",
@@ -578,7 +578,7 @@
         },
         "ledgerNotConnected": {
             "connect": "Open de nieuwe IOTA app op uw Ledger apparaat om door te gaan",
-            "connectLegacy": "Open the {legacy} app on your Ledger device to continue"
+            "connectLegacy": "Open de {legacy} app op uw Ledger apparaat om door te gaan"
         },
         "ledgerConfirmation": {
             "confirm": "Om door te gaan, bevestig de prompt die wordt weergegeven op uw Ledger apparaat"
@@ -588,8 +588,8 @@
             "steps": {
                 "0": "Installeer en open de Ledger Live applicatie",
                 "1": "Zorg ervoor dat uw Ledger is verbonden",
-                "2": "Search for apps: {legacy} and IOTA (MIOTA)",
-                "3": "Install both apps: {legacy} and IOTA (MIOTA)",
+                "2": "Zoek naar apps: {legacy} en IOTA (MIOTA)",
+                "3": "Installeer beide apps: {legacy} en IOTA (MIOTA)",
                 "4": "Vergeet niet dat het belangrijk is om Ledger Live te sluiten voordat je terugkeert naar Firefly"
             }
         },
@@ -600,8 +600,8 @@
                 "1": "Zorg ervoor dat je je Ledger apparaat hebt ontgrendeld met je pincode",
                 "2": "Open de nieuwe IOTA app op uw Ledger apparaat",
                 "3": {
-                    "text": "Still no luck?",
-                    "link": "Try the official Ledger support page"
+                    "text": "Nog steeds geen geluk?",
+                    "link": "Probeer de officiële Ledger support pagina"
                 }
             }
         },
@@ -620,8 +620,8 @@
             "body": "Bevestig dat het ontvangstadres op uw Ledger overeenkomt met degene die hieronder wordt weergegeven. Als ze overeenkomen, druk dan beide knoppen op uw Ledger zoals gevraagd."
         },
         "ledgerMigrateIndex": {
-            "title": "Do you need to migrate another Trinity account index?",
-            "body": "You can also migrate later in Advanced Settings."
+            "title": "Moet je nog een andere Trinity account index migreren?",
+            "body": "U kunt later ook migreren in Geavanceerde Instellingen."
         }
     },
     "charts": {
@@ -731,7 +731,7 @@
         "searching": "Zoeken...",
         "closeFirefly": "Sluit Firefly",
         "generateAddress": "Genereer een adres",
-        "migrateAgain": "Migrate another index"
+        "migrateAgain": "Migreer een andere index"
     },
     "general": {
         "password": "Wachtwoord",
@@ -877,7 +877,7 @@
         "minutesRemaining": "{minutes, plural, one {1 minuut resterend} other {# minuten resterend}}",
         "copiedToClipboard": "Gekopieerd naar het klembord",
         "accountsSynchronized": "Portemonnee synchronisatie voltooid",
-        "fundsAvailableSoon": "Your funds will become available shortly"
+        "fundsAvailableSoon": "Uw saldo wordt binnenkort beschikbaar"
     },
     "error": {
         "profile": {
@@ -965,11 +965,11 @@
             "notFound": "Ledger apparaat niet gevonden.",
             "otherConnected": "De verkeerde app staat open op uw Ledger apparaat.",
             "generateAddress": "Er is iets misgegaan bij het genereren van je adres.",
-            "timeout": "Your Ledger device timed out.",
-            "disconnected": "Your Ledger device was disconnected."
+            "timeout": "Uw Ledger apparaat heeft een time-out gekregen.",
+            "disconnected": "Uw Ledger apparaat is losgekoppeld."
         },
         "popup": {
-            "preventClose": "This popup is unable to be closed."
+            "preventClose": "Deze pop-up kan niet worden gesloten."
         }
     },
     "tooltips": {

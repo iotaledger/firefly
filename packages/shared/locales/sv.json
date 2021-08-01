@@ -51,7 +51,7 @@
         },
         "ledgerInstallationGuide": {
             "title": "Har du installerat de nödvändiga Ledger apparna?",
-            "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
+            "body1": "Innan du fortsätter måste du hitta och installera både {legacy} appen och den nya IOTA-appen via Ledger Live.",
             "body2": "Se till att din firmware från Ledger är uppdaterad. Alla förinstallerade appar bör uppdateras till sina senaste versioner.",
             "action": "Ja, jag har installerat dessa appar"
         },
@@ -114,7 +114,7 @@
             "body": "Din nya plånbok är redo att användas.",
             "softwareMigratedBody": "Du har framgångsrikt migrerat dina IOTA till det nya nätverket",
             "fireflyLedgerBody": "Ditt Ledger-konto har återställts och du kan nu fortsätta.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
+            "trinityLedgerBody": "Du har migrerat din Ledger till det nya nätverket. Du kan nu ta bort {legacy} appen från enheten.",
             "exportMigration": "Exportera migrationslogg och avsluta installationen"
         },
         "import": {
@@ -185,7 +185,7 @@
         },
         "switchLedgerApps": {
             "title": "Växla Ledger app",
-            "body": "Please switch to the {legacy} app on your Ledger device to continue migration. When ready, press continue."
+            "body": "Växla till {legacy} appen på din Ledger-enhet för att fortsätta migreringen. Tryck på fortsätt."
         },
         "selectLedgerAccountIndex": {
             "title": "Välj Ledger konto-index",
@@ -194,8 +194,8 @@
             "accountPage": "Kontosida",
             "standard": "Standard",
             "expert": "Avancerat",
-            "notGeneratingAddresses": "Is your Ledger generating addresses?",
-            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
+            "notGeneratingAddresses": "Genererar din Ledger adresser?",
+            "reinstallLegacy": "Om inte, koppla från enheten och försök igen. Om problemet kvarstår, kan du behöva installera om {legacy} appen."
         },
         "importBackupPassword": {
             "body1": "Ange lösenordet för din säkerhetskopia.",
@@ -257,7 +257,7 @@
         },
         "transferFragmentedFunds": {
             "body1": "Firefly kommer nu att fortsätta migrera dina IOTA. Detta kan ta ett tag.",
-            "body2": "Ensure your Ledger is connected and the {legacy} app is open at all times during migration.",
+            "body2": "Se till att din Ledger är ansluten och att {legacy} -appen är öppen hela tiden under migrationen.",
             "migrate": "Migrera tillgångar",
             "transaction": "Transaktion {number}",
             "rerun": "Försök igen"
@@ -390,8 +390,8 @@
                 "description": "Visa system- och applikationsinformation"
             },
             "migrateLedgerIndex": {
-                "title": "Migrate Ledger Index",
-                "description": "Migrate another Trinity account index"
+                "title": "Migrera Ledger Index",
+                "description": "Migrera ett annat kontoindex från Trinity"
             },
             "stateExport": {
                 "title": "Tillstånds-exportering",
@@ -439,7 +439,7 @@
                     "statuses": {
                         "appNotOpen": "IOTA-appen är inte öppen",
                         "connected": "Ansluten",
-                        "legacyConnected": "{legacy} App Open",
+                        "legacyConnected": "{legacy} appen öppen",
                         "locked": "Låst",
                         "mnemonicMismatch": "Fel Ledger eller Mnemonik",
                         "notDetected": "Inte upptäckt",
@@ -578,7 +578,7 @@
         },
         "ledgerNotConnected": {
             "connect": "Öppna den nya IOTA-appen på din Ledger-enhet för att fortsätta",
-            "connectLegacy": "Open the {legacy} app on your Ledger device to continue"
+            "connectLegacy": "Öppna {legacy} appen på din Ledger-enhet för att fortsätta"
         },
         "ledgerConfirmation": {
             "confirm": "För att fortsätta, bekräfta uppmaningen som visas på din Ledger-enhet"
@@ -588,8 +588,8 @@
             "steps": {
                 "0": "Installera och öppna programmet Ledger Live",
                 "1": "Se till att din Ledger är ansluten",
-                "2": "Search for apps: {legacy} and IOTA (MIOTA)",
-                "3": "Install both apps: {legacy} and IOTA (MIOTA)",
+                "2": "Sök efter appar: {legacy} och IOTA (MIOTA)",
+                "3": "Installera båda apparna: {legacy} och IOTA (MIOTA)",
                 "4": "Kom ihåg att det är viktigt att stänga Ledger Live innan du återvänder till Firefly"
             }
         },
@@ -600,8 +600,8 @@
                 "1": "Se till att du har låst upp din Ledger-enhet med din PIN-kod",
                 "2": "Öppna den nya IOTA-appen på din Ledger-enhet",
                 "3": {
-                    "text": "Still no luck?",
-                    "link": "Try the official Ledger support page"
+                    "text": "Funkar fortfarande inte?",
+                    "link": "Prova den officiella Ledger support sidan"
                 }
             }
         },
@@ -620,8 +620,8 @@
             "body": "Bekräfta att mottagaradressen som visas på din Ledger matchar den som visas nedan. Om de matchar, tryck på båda knapparna på din Ledger enligt uppmaning."
         },
         "ledgerMigrateIndex": {
-            "title": "Do you need to migrate another Trinity account index?",
-            "body": "You can also migrate later in Advanced Settings."
+            "title": "Behöver du migrera ytterligare ett Trinity kontoindex?",
+            "body": "Du kan också migrera senare i Avancerade inställningar."
         }
     },
     "charts": {
@@ -731,7 +731,7 @@
         "searching": "Söker...",
         "closeFirefly": "Stäng Firefly",
         "generateAddress": "Generera adress",
-        "migrateAgain": "Migrate another index"
+        "migrateAgain": "Migrera ett annat index"
     },
     "general": {
         "password": "Lösenord",
@@ -877,7 +877,7 @@
         "minutesRemaining": "{minutes, plural, one {1 minut kvar} other {# minuter kvar}}",
         "copiedToClipboard": "Kopierad till urklipp",
         "accountsSynchronized": "Plånbokssynkronisering slutförd",
-        "fundsAvailableSoon": "Your funds will become available shortly"
+        "fundsAvailableSoon": "Dina IOTA kommer inom kort att bli tillgängliga"
     },
     "error": {
         "profile": {
@@ -965,11 +965,11 @@
             "notFound": "Ledger-enheten hittades inte.",
             "otherConnected": "Fel app är öppen på din Ledger-enhet.",
             "generateAddress": "Det gick inte att generera en adress.",
-            "timeout": "Your Ledger device timed out.",
-            "disconnected": "Your Ledger device was disconnected."
+            "timeout": "Din Ledger-enhet nådde time out.",
+            "disconnected": "Din Ledger-enhet kopplades bort."
         },
         "popup": {
-            "preventClose": "This popup is unable to be closed."
+            "preventClose": "Detta popup-fönster kan inte stängas."
         }
     },
     "tooltips": {
