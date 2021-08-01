@@ -120,7 +120,11 @@ export function promptUserToConnectLedger(
         onConnected()
     }
     const _onDisconnected = () => {
-        if (polling && forcePoll) {
+        /**
+         * if there is an ongoing poll and we force to interrupt it, 
+         * we need to make sure we didnt interrupt it already
+         */
+        if (forcePoll && !get(ledgerPollInterrupted)) {
             stopPollingLedgerStatus()
             ledgerPollInterrupted.set(true)
         }
