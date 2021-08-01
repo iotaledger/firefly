@@ -1,35 +1,18 @@
 <script>
     import { Button, Icon, Text } from 'shared/components'
-    import { stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { closePopup } from 'shared/lib/popup'
     import { LedgerAppName } from 'shared/lib/typings/ledger'
-    import { onDestroy } from 'svelte'
 
     export let legacy
     export let handleClose
     export let locale
 
-    /**
-     * Used to avoid race condition with the reactive poll on dashboard
-     * as stopPollingLedgerStatus was running twice,
-     * stopping a newly created poll
-     */
-    let pollStopped = false
-
     function handleCancelClick() {
-        stopPollingLedgerStatus()
-        pollStopped = true
         if ('function' === typeof handleClose) {
             handleClose()
         }
         closePopup()
     }
-
-    onDestroy(() => {
-        if (!pollStopped) {
-            stopPollingLedgerStatus()
-        }
-    })
 </script>
 
 <div class="p-8 flex flex-col w-full items-center justify-center text-center">
