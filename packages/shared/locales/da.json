@@ -31,29 +31,29 @@
             "body2": "Hvis du udfylder Recovery Kit og gemme det forsvarligt, vil du altid være i stand til at gendanne dine wallets."
         },
         "create": {
-            "title": "Create a wallet",
-            "body": "Create a new wallet. You can choose a regular software wallet or if you have a Ledger device you can set up a hardware wallet.",
+            "title": "Opret en wallet",
+            "body": "Opret en ny wallet. Du kan vælge mellem en normal software wallet eller hvis du har en Ledger enhed kan du oprette en hardware wallet.",
             "softwareAccount": {
-                "title": "I want a software wallet",
-                "description": "Create a 24-word Recovery Phrase"
+                "title": "Jeg vil have en software wallet",
+                "description": "Opret en 24-ords gendannelsessætning"
             },
             "ledgerAccount": {
-                "title": "I want a hardware wallet",
-                "description": "Ledger Nano S or Nano X required"
+                "title": "Jeg vil have en hardware wallet",
+                "description": "Ledger Nano S eller Nano X kræves"
             }
         },
         "setupLedger": {
-            "progress1": "Connect your Ledger",
-            "progress2": "Generate address",
-            "progress3": "Switch Ledger app",
-            "progress4": "Transfer funds",
-            "watchVideo": "Watch video guide"
+            "progress1": "Tilslut din Ledger",
+            "progress2": "Generér adresse",
+            "progress3": "Skift Ledger app",
+            "progress4": "Overfør midler",
+            "watchVideo": "Se video guide"
         },
         "ledgerInstallationGuide": {
-            "title": "Have you installed the necessary Ledger apps?",
-            "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
-            "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
-            "action": "Yes, I've installed these apps"
+            "title": "Har du installeret de nødvendige Ledger apps?",
+            "body1": "Før du fortsætter, skal du finde og installere både {legacy} appen og den nye IOTA app gennem Ledger Live.",
+            "body2": "Sørg for, at din Ledger firmware er opdateret. Alle forudinstallerede apps bør opdateres til deres seneste versioner.",
+            "action": "Ja, jeg har installeret disse apps"
         },
         "password": {
             "title": "Opret en adgangskode",
@@ -112,7 +112,7 @@
             "title": "Opsætning af wallet fuldført",
             "fundsMigrated": "Midler migreret",
             "body": "Din nye wallet er klar til brug.",
-            "softwareMigratedBody": "You have successfully migrated your funds to the new network",
+            "softwareMigratedBody": "Du har nu migreret dine midler til det nye netværk",
             "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
             "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
             "exportMigration": "Eksportér migrationslog og afslut opsætning"
@@ -730,7 +730,7 @@
         "searchAgain": "Søg igen",
         "searching": "Søger...",
         "closeFirefly": "Luk Firefly",
-        "generateAddress": "Generate address",
+        "generateAddress": "Generér adresse",
         "migrateAgain": "Migrate another index"
     },
     "general": {
