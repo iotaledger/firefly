@@ -126,23 +126,29 @@
     if ($walletRoute === WalletRoutes.Init && !$accountsLoaded && $loggedIn) {
         startInit = Date.now()
         busy = true
-        openPopup({
-            type: 'busy',
-            hideClose: true,
-            fullScreen: true,
-            transition: false,
-        })
+        if (!get(popupState).active) {
+            openPopup({
+                type: 'busy',
+                hideClose: true,
+                fullScreen: true,
+                transition: false,
+            })
+        }
     }
     $: {
         if ($accountsLoaded) {
             const minTimeElapsed = 3000 - (Date.now() - startInit)
-            if (minTimeElapsed < 0) {
+            const cancelBusyState = () => {
                 busy = false
-                closePopup()
+                if (get(popupState).type === 'busy') {
+                    closePopup()
+                }
+            }
+            if (minTimeElapsed < 0) {
+                cancelBusyState()
             } else {
                 setTimeout(() => {
-                    busy = false
-                    closePopup()
+                    cancelBusyState()
                 }, minTimeElapsed)
             }
         }
