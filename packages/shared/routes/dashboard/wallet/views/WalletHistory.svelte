@@ -79,7 +79,10 @@
     }
 
     function shouldShowFirstSync() {
-        return $isFirstSessionSync && $walletSetupType && $walletSetupType !== SetupType.New
+        return $isFirstSessionSync &&
+            $walletSetupType &&
+            $walletSetupType !== SetupType.New &&
+            $transactions.length === 0
     }
 </script>
 
