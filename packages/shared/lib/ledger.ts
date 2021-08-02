@@ -109,10 +109,11 @@ export function promptUserToConnectLedger(
         onConnected()
     }
     const _onDisconnected = () => {
-        pollLedgerDeviceStatus(legacy, LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT, _onConnected, _onDisconnected, _onCancel)
         if (!get(popupState).active) {
-            openLedgerNotConnectedPopup(legacy, onCancel)
+            openLedgerNotConnectedPopup(legacy, onCancel, () => pollLedgerDeviceStatus(legacy, LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT, _onConnected, _onDisconnected, _onCancel))
         }
+
+        
     }
     getLedgerDeviceStatus(legacy, _onConnected, _onDisconnected, _onCancel)
 }
@@ -199,7 +200,8 @@ export function pollLedgerDeviceStatus(
 
 function openLedgerNotConnectedPopup(
     legacy: boolean = false,
-    cancel: () => void = () => { }
+    cancel: () => void = () => { }, 
+    poll: () => void = () => { }
 ) {
     if (!get(popupState).active) {
         openPopup({
@@ -207,7 +209,8 @@ function openLedgerNotConnectedPopup(
             hideClose: true,
             props: {
                 legacy,
-                handleClose: () => cancel()
+                handleClose: () => cancel(),
+                poll
             },
         })
     }
