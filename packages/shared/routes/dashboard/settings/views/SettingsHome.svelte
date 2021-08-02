@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { SettingsMenu, Text } from 'shared/components'
     import { loggedIn } from 'shared/lib/app'
-    import { isSoftwareProfile } from 'shared/lib/profile'
+    import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import { SettingsIcons } from 'shared/lib/typings/icons'
     import {
@@ -18,11 +18,15 @@
     export let mobile
 
     const securitySettings = Object.assign({}, SecuritySettings)
+    const advancedSettings = Object.assign({}, AdvancedSettings)
 
     // TODO: ledger, The operand of a 'delete' operator cannot be a read-only property
     $: if (!$isSoftwareProfile) {
         delete securitySettings.ExportStronghold
         delete securitySettings.ChangePassword
+    }
+    $: if (!$isLedgerProfile) {
+        delete advancedSettings.MigrateLedgerIndex
     }
 </script>
 
@@ -62,8 +66,8 @@
                 icon="tools"
                 iconColor="bg-green-600"
                 icons={SettingsIcons}
-                settings={AdvancedSettings}
-                activeSettings={$loggedIn ? AdvancedSettings : AdvancedSettingsNoProfile}
+                settings={advancedSettings}
+                activeSettings={$loggedIn ? advancedSettings : AdvancedSettingsNoProfile}
                 title={locale('views.settings.advancedSettings.title')}
                 description={locale('views.settings.advancedSettings.description')}
                 onClick={(setting) => {
