@@ -2,7 +2,7 @@
     import { Idle, Sidebar } from 'shared/components'
     import { loggedIn, logout } from 'shared/lib/app'
     import { Electron } from 'shared/lib/electron'
-    import { ledgerPollInterrupted, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
+    import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { NOTIFICATION_TIMEOUT_NEVER, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
@@ -11,10 +11,10 @@
     import { AccountRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
     import {
         api,
+        isBackgroundSyncing,
         selectedAccountId,
         STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
         wallet,
-        isBackgroundSyncing,
     } from 'shared/lib/wallet'
     import { Settings, Wallet } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'
@@ -219,7 +219,7 @@
      * Reactive statement to resume ledger poll if it was interrupted
      * when the one which interrupted has finished
      */
-    $: if ($activeProfile && $isLedgerProfile && !$ledgerPollInterrupted) {
+    $: if ($activeProfile && $isLedgerProfile && !$isPollingLedgerDeviceStatus) {
         pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL)
     }
 </script>

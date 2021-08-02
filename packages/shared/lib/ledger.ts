@@ -21,19 +21,11 @@ import type { NotificationType } from './typings/notification'
 const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
 const LEGACY_ADDRESS_WITH_CHECKSUM_LENGTH = 90
 
-let polling = false
 let intervalTimer
 
 export const ledgerSimulator = false
 export const ledgerDeviceState = writable<LedgerDeviceState>(LedgerDeviceState.NotDetected)
 export const isLedgerLegacyConnected = writable<boolean>(false)
-
-/**
- * On the dashboard we run a permanent ledger poll to get its status,
- * the intention of this variable is to know when the poll was interrupted
- * so we can resume it again later
- */
-export const ledgerPollInterrupted = writable<boolean>(false)
 
 export function getLedgerDeviceStatus(
     legacy: boolean = false,
@@ -49,6 +41,9 @@ export function getLedgerDeviceStatus(
             const isConnected = (legacy && state === LedgerDeviceState.LegacyConnected)
                 || (!legacy && state === LedgerDeviceState.Connected)
             if (isConnected) {
+                if (get(popupState).active && get(popupState).type === 'ledgerNotConnected') {
+                    closePopup()
+                }
                 onConnected()
             } else {
                 onDisconnected()
@@ -106,48 +101,19 @@ export function promptUserToConnectLedger(
     legacy: boolean = false,
     onConnected: () => void = () => { },
     onCancel: () => void = () => { },
-    forcePoll: boolean = false // use forcePoll to initialize a new poll even though there is one running
 ) {
     const _onCancel = () => {
-        /**
-         * stop poll only on normal circumstances (!forcePoll) 
-         * or if there really was an interruption.
-         * Otherwhise we have the rist of stopping an ongoing poll 
-         * that should be kept alive
-         */
-        if (!forcePoll || forcePoll && get(ledgerPollInterrupted)) {
-            stopPollingLedgerStatus()
-        }
         onCancel()
     }
     const _onConnected = () => {
-        /**
-         * stop poll only on normal circumstances (!forcePoll) 
-         * or if there really was an interruption.
-         * Otherwhise we have the rist of stopping an ongoing poll 
-         * that should be kept alive
-         */
-        if (!forcePoll || forcePoll && get(ledgerPollInterrupted)) {
-            stopPollingLedgerStatus()
-        }
-        if (get(popupState).active) {
-            closePopup()
-        }
         onConnected()
     }
     const _onDisconnected = () => {
-        /**
-         * if there is an ongoing poll and we force to interrupt it, 
-         * we need to make sure we didnt interrupt it already
-         */
-        if (forcePoll && !get(ledgerPollInterrupted)) {
-            stopPollingLedgerStatus()
-            ledgerPollInterrupted.set(true)
-        }
-        pollLedgerDeviceStatus(legacy, LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT, _onConnected, _onDisconnected, _onCancel)
         if (!get(popupState).active) {
-            openLedgerNotConnectedPopup(legacy, onCancel)
+            openLedgerNotConnectedPopup(legacy, onCancel, () => pollLedgerDeviceStatus(legacy, LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT, _onConnected, _onDisconnected, _onCancel))
         }
+
+        
     }
     getLedgerDeviceStatus(legacy, _onConnected, _onDisconnected, _onCancel)
 }
@@ -214,6 +180,8 @@ export function isLedgerError(error: any): boolean {
     return errorType?.slice(0, 6) === "Ledger"
 }
 
+export const isPollingLedgerDeviceStatus = writable<boolean>(false)
+
 export function pollLedgerDeviceStatus(
     legacy: boolean = false,
     pollInterval: number = 1000,
@@ -221,18 +189,19 @@ export function pollLedgerDeviceStatus(
     _onDisconnected: () => void = () => { },
     _onCancel: () => void = () => { }
 ) {
-    if (!polling) {
+    if (!get(isPollingLedgerDeviceStatus)) {
         getLedgerDeviceStatus(legacy, _onConnected, _onDisconnected, _onCancel)
         intervalTimer = setInterval(async () => {
             getLedgerDeviceStatus(legacy, _onConnected, _onDisconnected, _onCancel)
         }, pollInterval)
+        isPollingLedgerDeviceStatus.set(true)
     }
-    polling = true
 }
 
 function openLedgerNotConnectedPopup(
     legacy: boolean = false,
-    cancel: () => void = () => { }
+    cancel: () => void = () => { }, 
+    poll: () => void = () => { }
 ) {
     if (!get(popupState).active) {
         openPopup({
@@ -240,18 +209,18 @@ function openLedgerNotConnectedPopup(
             hideClose: true,
             props: {
                 legacy,
-                handleClose: () => cancel()
+                handleClose: () => cancel(),
+                poll
             },
         })
     }
 }
 
 export function stopPollingLedgerStatus(): void {
-    if (intervalTimer) {
+    if (get(isPollingLedgerDeviceStatus)) {
         clearInterval(intervalTimer)
         intervalTimer = null
-        polling = false
-        ledgerPollInterrupted.set(false)
+        isPollingLedgerDeviceStatus.set(false)
     }
 }
 

@@ -380,7 +380,7 @@
          */
         if ($isSoftwareProfile) onSuccess()
         else {
-            promptUserToConnectLedger(false, onSuccess, undefined, true)
+            promptUserToConnectLedger(false, onSuccess, undefined)
         }
     }
 
