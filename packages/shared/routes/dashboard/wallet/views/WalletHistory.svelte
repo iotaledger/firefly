@@ -79,7 +79,19 @@
     }
 
     function shouldShowFirstSync() {
-        return $isFirstSessionSync && $walletSetupType && $walletSetupType !== SetupType.New
+        /**
+         * NOTE: The following conditions must be satisfied
+         * for the "syncing history, ..." message to show:
+         *
+         *      1. It must be the first sync of the user's session
+         *      2. The wallet setup type must exist (a null value indicates an existing profile)
+         *      3. The wallet setup type cannot be new (if it's new then there's no tx history to sync)
+         *      4. Account must have no transactions (the length of $transactions must be zero)
+         */
+        return $isFirstSessionSync &&
+            $walletSetupType &&
+            $walletSetupType !== SetupType.New &&
+            $transactions.length === 0
     }
 </script>
 
