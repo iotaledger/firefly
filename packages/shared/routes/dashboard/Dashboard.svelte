@@ -9,7 +9,13 @@
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
     import { accountRoute, dashboardRoute, routerNext, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
-    import { api, selectedAccountId, STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, wallet } from 'shared/lib/wallet'
+    import {
+        api,
+        selectedAccountId,
+        STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
+        wallet,
+        isBackgroundSyncing,
+    } from 'shared/lib/wallet'
     import { Settings, Wallet } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
@@ -41,22 +47,26 @@
             api.setStrongholdPasswordClearInterval({ secs: STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, nanos: 0 })
         }
 
-        api.startBackgroundSync(
-            {
-                secs: 30,
-                nanos: 0,
-            },
-            true,
-            {
-                onSuccess() {},
-                onError(err) {
-                    showAppNotification({
-                        type: 'error',
-                        message: locale('error.account.syncing'),
-                    })
+        if (!get(isBackgroundSyncing)) {
+            api.startBackgroundSync(
+                {
+                    secs: 30,
+                    nanos: 0,
                 },
-            }
-        )
+                true,
+                {
+                    onSuccess() {
+                        isBackgroundSyncing.set(true)
+                    },
+                    onError(err) {
+                        showAppNotification({
+                            type: 'error',
+                            message: locale('error.account.syncing'),
+                        })
+                    },
+                }
+            )
+        }
 
         // TODO: Re-enable deep links
         // Electron.DeepLinkManager.requestDeepLink()

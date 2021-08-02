@@ -116,6 +116,14 @@ export function startBackgroundSync(bridge: Bridge, __ids: CommunicationIds, pol
     })
 }
 
+export function stopBackgroundSync(bridge: Bridge, __ids: CommunicationIds): Promise<string> {
+    return bridge({
+        actorId: __ids.actorId,
+        id: __ids.messageId,
+        cmd: 'StopBackgroundSync',
+    })
+}
+
 export function internalTransfer(
     bridge: Bridge,
     __ids: CommunicationIds,

@@ -21,7 +21,8 @@ import {
     areLatestAddressesUnused as _areLatestAddressesUnused,
     setAlias as _setAlias,
     getNodeInfo as _getNodeInfo,
-    startBackgroundSync as _startBackgroundSync
+    startBackgroundSync as _startBackgroundSync,
+    stopBackgroundSync as _stopBackgroundSync
 } from '../../../shared/lib/typings/account'
 import {
     Transfer,
@@ -146,6 +147,9 @@ export const api = {
     },
     startBackgroundSync: function (pollingInterval: Duration, automaticOutputConsolidation: boolean): ((__ids: CommunicationIds) => Promise<string>) {
         return (__ids: CommunicationIds) => _startBackgroundSync(sendMessage, __ids, pollingInterval, automaticOutputConsolidation)
+    },
+    stopBackgroundSync: function (): ((__ids: CommunicationIds) => Promise<string>) {
+        return (__ids: CommunicationIds) => _stopBackgroundSync(sendMessage, __ids)
     },
     areLatestAddressesUnused: function (): ((__ids: CommunicationIds) => Promise<string>) {
         return (__ids: CommunicationIds) => _areLatestAddressesUnused(sendMessage, __ids)
