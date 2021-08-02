@@ -26,7 +26,7 @@
     } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
-    import { activeProfile,  newProfile, profileInProgress, saveProfile, setActiveProfile, updateProfile } from 'shared/lib/profile'
+    import { newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
     import { formatUnitBestMatch } from 'shared/lib/units'
@@ -59,7 +59,7 @@
 
     let closeTransport = () => {}
 
-    confirmedBundles.subscribe((newConfirmedBundles) => {
+    const unsubscribe = confirmedBundles.subscribe((newConfirmedBundles) => {
         newConfirmedBundles.forEach((bundle) => {
             if (bundle.bundleHash && bundle.bundleHash === singleMigrationBundleHash && bundle.confirmed) {
                 didComplete.set(true)
@@ -88,10 +88,10 @@
                         })
                         .then((data) => {
                             if ($newProfile) {
-                             // Save profile
+                                // Save profile
                                 saveProfile($newProfile)
                                 setActiveProfile($newProfile.id)
-                                              
+
                                 profileInProgress.set(undefined)
                                 newProfile.set(null)
                             }
@@ -149,6 +149,7 @@
 
     onDestroy(() => {
         clearTimeout(timeout)
+        unsubscribe()
     })
 </script>
 

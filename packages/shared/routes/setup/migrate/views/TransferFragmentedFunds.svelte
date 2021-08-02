@@ -73,6 +73,7 @@
 
     let migratedAndUnconfirmedBundles = []
 
+    // TODO: add missing unsubscribe to onDestroy
     confirmedBundles.subscribe((newConfirmedBundles) => {
         newConfirmedBundles.forEach((bundle) => {
             if (bundle.bundleHash && bundle.confirmed) {

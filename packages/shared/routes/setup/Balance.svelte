@@ -64,11 +64,13 @@
     let error = getError(balance)
     let formattedBalance = formatUnitBestMatch(balance, true, 3)
 
+    // TODO: add missing unsubscribe to onDestroy
     bundles.subscribe((updatedBundles) => {
         _bundles = updatedBundles
         error = getError(_data.balance)
     })
 
+    // TODO: add missing unsubscribe to onDestroy
     unselectedInputs.subscribe(() => {
         error = getError(_data.balance)
     })

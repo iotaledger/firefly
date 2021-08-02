@@ -36,6 +36,7 @@
 
     const LEDGER_STATUS_POLL_INTERVAL = 2000
 
+    // TODO: add missing unsubscribe to onDestroy
     ongoingSnapshot.subscribe((os) => {
         if (os) {
             openSnapshotPopup()
