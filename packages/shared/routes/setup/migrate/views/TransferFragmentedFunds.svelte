@@ -157,8 +157,8 @@
                                         )
                                     })
                                     .then(({ trytes, bundleHash }) => {
-                                        setMigratingTransaction(transaction, 1)
                                         closePopup(true) // close transaction popup
+                                        setMigratingTransaction(transaction, 1)
                                         return sendLedgerMigrationBundle(bundleHash, trytes)
                                     })
                                     .then(() => {
@@ -173,8 +173,8 @@
                                     return createLedgerMigrationBundle(transaction.index, iota.prepareTransfers, callback)
                                 })
                                 .then(({ trytes, bundleHash }) => {
-                                    setMigratingTransaction(transaction, 1)
                                     closePopup(true) // close transaction popup
+                                    setMigratingTransaction(transaction, 1)
                                     transactions = transactions.map((_transaction) => {
                                         if (_transaction.index === transaction.index) {
                                             return { ..._transaction, bundleHash }
@@ -214,8 +214,8 @@
                         console.error(error)
 
                         if (legacyLedger) {
-                            closeTransport()
                             closePopup(true) // close transaction popup
+                            closeTransport()
                             displayNotificationForLedgerProfile('error', false, true, false, true, error)
                         }
 
@@ -289,8 +289,8 @@
                                         )
                                     })
                                     .then(({ trytes, bundleHash }) => {
-                                        setMigratingTransaction(transaction, 1)
                                         closePopup(true) // close transaction popup
+                                        setMigratingTransaction(transaction, 1)
                                         transactions = transactions.map((_transaction, i) => {
                                             if (_transaction.index === transaction.index) {
                                                 return { ..._transaction, bundleHash }
@@ -319,8 +319,8 @@
                                     return createLedgerMigrationBundle(transaction.index, iota.prepareTransfers, callback)
                                 })
                                 .then(({ trytes, bundleHash }) => {
-                                    setMigratingTransaction(transaction, 1)
                                     closePopup(true) // close transaction popup
+                                    setMigratingTransaction(transaction, 1)
                                     transactions = transactions.map((_transaction, i) => {
                                         if (_transaction.index === transaction.index) {
                                             return { ..._transaction, bundleHash }
@@ -378,8 +378,8 @@
                         console.error(error)
 
                         if (legacyLedger) {
-                            closeTransport()
                             closePopup(true) // close transaction popup
+                            closeTransport()
                             displayNotificationForLedgerProfile('error', false, true, false, true, error)
                         }
 
