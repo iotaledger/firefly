@@ -231,7 +231,7 @@
                             _unmigratedBundles.every((bundle) => {
                                 const tx = transactions.find((tx) => tx.index === bundle.index)
 
-                                return tx.status === -1
+                                return tx.status !== 0
                             })
                         ) {
                             migrated = true
@@ -393,7 +393,7 @@
                         if (
                             idx === transactions.length - 1 &&
                             transactions.every((tx) => {
-                                return tx.status === -1
+                                return tx.status !== 0
                             })
                         ) {
                             migrated = true
