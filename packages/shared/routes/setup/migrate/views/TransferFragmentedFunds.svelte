@@ -73,7 +73,8 @@
 
     let migratedAndUnconfirmedBundles = []
 
-    const unsubscribeConfirmedBundles = confirmedBundles.subscribe((newConfirmedBundles) => {
+    // TODO: add missing unsubscribe to onDestroy
+    confirmedBundles.subscribe((newConfirmedBundles) => {
         newConfirmedBundles.forEach((bundle) => {
             if (bundle.bundleHash && bundle.confirmed) {
                 migratedAndUnconfirmedBundles = migratedAndUnconfirmedBundles.filter(
@@ -256,10 +257,7 @@
         newProfile.set(null)
     }
 
-    onDestroy(() => {
-        unsubscribe()
-        unsubscribeConfirmedBundles()
-    })
+    onDestroy(unsubscribe)
 
     function handleMigrateClick() {
         if (legacyLedger) {
