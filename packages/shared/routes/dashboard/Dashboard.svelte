@@ -11,10 +11,10 @@
     import { AccountRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
     import {
         api,
+        isBackgroundSyncing,
         selectedAccountId,
         STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
         wallet,
-        isBackgroundSyncing,
     } from 'shared/lib/wallet'
     import { Settings, Wallet } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'
@@ -36,7 +36,7 @@
 
     const LEDGER_STATUS_POLL_INTERVAL = 2000
 
-    ongoingSnapshot.subscribe((os) => {
+    const unsubscribe = ongoingSnapshot.subscribe((os) => {
         if (os) {
             openSnapshotPopup()
         }
@@ -100,6 +100,7 @@
         if ($isLedgerProfile) {
             stopPollingLedgerStatus()
         }
+        unsubscribe()
     })
 
     // TODO: re-enable deep links
