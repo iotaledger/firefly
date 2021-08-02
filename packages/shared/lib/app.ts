@@ -81,7 +81,7 @@ export const logout = () => {
                 stopPollingLedgerStatus()
             }
             clearSendParams()
-            closePopup()
+            closePopup(true)
             clearActiveProfile()
             resetWallet()
             resetRouter()
