@@ -352,7 +352,7 @@ export const getLedgerMigrationData = (getAddressFn: (index: number) => Promise<
             prepareBundles()
 
             const shouldGenerateMore = response.payload.spentAddresses === true || response.payload.inputs.length > 0 || response.payload.balance > 0;
-            
+
             if (shouldGenerateMore) {
                 return _process();
             }
@@ -378,7 +378,7 @@ export const getLedgerMigrationData = (getAddressFn: (index: number) => Promise<
  */
 export const findMigrationBundle = (bundleIndex: number): Bundle => {
     const b = get(get(migration).bundles).find(b => b.index === bundleIndex)
-    if(!b) {
+    if (!b) {
         const localePath = 'error.migration.missingBundle'
         console.error(localePath)
         showAppNotification({
