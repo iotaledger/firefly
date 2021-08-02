@@ -12,6 +12,7 @@ import Validator from 'shared/lib/validator'
 import { api } from 'shared/lib/wallet'
 import { derived, get, writable, Writable } from 'svelte/store'
 import { localize } from './i18n'
+import { showAppNotification } from './notifications'
 
 const LEGACY_ADDRESS_WITHOUT_CHECKSUM_LENGTH = 81
 
@@ -367,6 +368,29 @@ export const getLedgerMigrationData = (getAddressFn: (index: number) => Promise<
 };
 
 /**
+ * Find a particular migration bundle given its index
+ *
+ * @method findMigrationBundle
+ *
+ * @param {number} bundleIndex
+ *
+ * @returns {Bundle} The bundle whose index matches the one provided (undefined if no matches)
+ */
+export const findMigrationBundle = (bundleIndex: number): Bundle => {
+    const b = get(get(migration).bundles).find(b => b.index === bundleIndex)
+    if(!b) {
+        const localePath = 'error.migration.missingBundle'
+        console.error(localePath)
+        showAppNotification({
+            type: 'error',
+            message: localize(localePath)
+        })
+    }
+
+    return b
+}
+
+/**
  * Mines ledger bundle
  * 
  * @method mineLedgerBundle
@@ -390,10 +414,7 @@ export const mineLedgerBundle = (
             }
         })
     }).then((address: MigrationAddress) => {
-        const { bundles } = get(migration);
-
-        const bundle = get(bundles).find((bundle) => bundle.index === bundleIndex);
-
+        const bundle = findMigrationBundle(bundleIndex)
         const spentBundleHashes = []
 
         bundle.inputs.forEach((input) => spentBundleHashes.push(...input.spentBundleHashes))
@@ -426,7 +447,6 @@ export const mineLedgerBundle = (
             // @ts-ignore
             updateLedgerBundleState(bundleIndex, payload.bundle, true, payload.crackability)
         })
-
     });
 };
 
@@ -450,11 +470,8 @@ export const createMinedLedgerMigrationBundle = (
     ) => Promise<string[]>,
     callback: () => void
 ) => {
-    const { bundles } = get(migration);
-
-    const bundle = get(bundles).find((bundle) => bundle.index === bundleIndex);
+    const bundle = findMigrationBundle(bundleIndex)
     const txs = bundle.trytes.map((tryte) => asTransactionObject(tryte));
-
     const transfer = bundle.trytes.
         map((tryte) => asTransactionObject(tryte))
         .reduce((acc, tx) => {
@@ -519,10 +536,7 @@ export const createLedgerMigrationBundle = (
             }
         })
     }).then((address: MigrationAddress) => {
-        const { bundles } = get(migration);
-
-        const bundle = get(bundles).find((bundle) => bundle.index === bundleIndex);
-
+        const bundle = findMigrationBundle(bundleIndex)
         const transfer = {
             address: address.trytes.toString(),
             value: bundle.inputs.reduce((acc, input) => acc + input.balance, 0),

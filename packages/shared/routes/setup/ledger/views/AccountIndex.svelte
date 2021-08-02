@@ -134,7 +134,7 @@
                         <Icon icon="warning" classes="text-white" />
                     </div>
                     <Text type="h3" classes="mb-4 text-center">{locale('views.selectLedgerAccountIndex.takingAWhile')}</Text>
-                    <Text classes="mb-4">{locale('views.selectLedgerAccountIndex.notGeneratingAddresses')}</Text>
+                    <Text classes="mb-4 text-center">{locale('views.selectLedgerAccountIndex.notGeneratingAddresses')}</Text>
                     <Text classes="break-words text-center">
                         {locale('views.selectLedgerAccountIndex.reinstallLegacy', {
                             values: { legacy: LedgerAppName.IOTALegacy },
