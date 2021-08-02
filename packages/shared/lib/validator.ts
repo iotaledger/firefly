@@ -118,7 +118,7 @@ class IdValidator extends Validator {
      * @returns {ValidationResponse}
      */
     isValid(response: MessageResponse): ValidationResponse {
-        const id = response.id
+        const id = response?.id
 
         if ('string' !== typeof id) {
             return super.createResponse(false, {
