@@ -1,7 +1,9 @@
 <script>
     import { Button, Icon, Text } from 'shared/components'
+    import { stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { closePopup } from 'shared/lib/popup'
     import { LedgerAppName } from 'shared/lib/typings/ledger'
+    import { onDestroy } from 'svelte'
 
     export let legacy
     export let handleClose
@@ -13,6 +15,10 @@
         }
         closePopup()
     }
+
+    onDestroy(() => {
+        stopPollingLedgerStatus()
+    })
 </script>
 
 <div class="p-8 flex flex-col w-full items-center justify-center text-center">
