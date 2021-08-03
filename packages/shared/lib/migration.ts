@@ -759,7 +759,7 @@ export const updateLedgerBundleState = (bundleIndex: number, trytes: string[], d
                     const isNewCrackabilityScoreLowerThanPrevious = bundle.bundleHash && bundle.crackability && migrationBundleCrackability < bundle.crackability
 
                     return Object.assign({}, bundle, {
-                        trytes,
+                        trytes: isNewCrackabilityScoreLowerThanPrevious ? trytes : bundle.trytes,
                         miningRuns: didMine ? bundle.miningRuns + 1 : bundle.miningRuns,
                         bundleHash: isNewCrackabilityScoreLowerThanPrevious ? newBundleHash : bundle.bundleHash,
                         crackability: isNewCrackabilityScoreLowerThanPrevious ? migrationBundleCrackability : bundle.crackability
