@@ -15,27 +15,31 @@
         },
         "profile": {
             "title": "建立個人設定檔",
+            "profileName": "使用者檔案名稱",
             "body1": "您可以創建多個使用者設定檔來整理您的錢包並加強隱私。",
-            "body2": "現在，讓我們先為第一個使用者檔案命名，您可以稍後添加更多檔案。",
-            "profileName": "使用者檔案名稱"
+            "body2": {
+                "first": "For now, let's start with your first profile name.",
+                "nonFirst": "For now, let's start with your profile name."
+            },
+            "addMore": "You can add more profiles later."
         },
         "setup": {
             "title": "設定一個錢包",
             "chrysalisTitle": "Chrysalis網路升級",
-            "chrysalisBody": "從四月21日開始，使用者可以將他們的代幣遷移到Chrysalis網路。我們建議您把現有的代幣儘早遷移。",
+            "chrysalisBody": "從四月21日開始，使用者可以將他們的代幣遷移到Chrysalis網路．我們建議您儘早遷移您的既存代幣",
             "learnMore": "深入瞭解「遷移」"
         },
         "secure": {
             "title": "保護你的錢包",
-            "body1": "存檔並列印 Recovery Kit PDF 範本。",
-            "body2": "如果您把 Recovery Kit 填好並妥善保存，在任何時候您都能夠恢復錢包。"
+            "body1": "儲存並列印助記套件 PDF 範本。",
+            "body2": "如果您有填好並妥善保存助記套件，你就隨時都能夠恢復您的錢包。"
         },
         "create": {
             "title": "建立錢包",
             "body": "建立新錢包。您可以選擇一般的軟體錢包，或是假如您有 Ledger 裝置的話，可以改用硬體錢包。",
             "softwareAccount": {
                 "title": "我想要使用軟體錢包",
-                "description": "產生24單字的還原助記詞"
+                "description": "產生24單字助記詞"
             },
             "ledgerAccount": {
                 "title": "我想要使用硬體錢包",
@@ -47,17 +51,18 @@
             "progress2": "產生新地址",
             "progress3": "切換 Ledger app",
             "progress4": "轉帳",
-            "watchVideo": "觀看影音導覽"
+            "watchVideo": "觀看影音導覽",
+            "videoGuide": "Ledger migration video guide"
         },
         "ledgerInstallationGuide": {
-            "title": "你是否已經裝好必須的Ledger軟體？",
+            "title": "你是否已安裝必須的 Ledger apps？",
             "body1": "您必須先經由Ledger Live同時安裝 {legacy} 和新版的IOTA app，才能繼續。",
             "body2": "請確認您的Ledger韌體是最新版本。所有已安裝的軟體都必須更新至最新版本。",
-            "action": "是，我已安裝這些軟體。"
+            "action": "是，我已安裝這些 apps。"
         },
         "password": {
             "title": "建立密碼",
-            "body1": "您需要強式密碼來保護資金，請使用字詞組合，並避免常見的詞語、名稱或日期。",
+            "body1": "您需要強密碼來保護您的資金。請使用字詞組合，並避免常見的短語、名稱或日期。",
             "body2": "建議您在 Recovery Kit 中寫下密碼。"
         },
         "protect": {
@@ -67,7 +72,7 @@
         },
         "pin": {
             "title": "設置 PIN 碼",
-            "body1": "在下方輸入一個 6 位數的 PIN 碼。系統將要求您提供 PIN 碼以存取您的個人檔案。",
+            "body1": "在下方輸入一個 6 位數的 PIN 碼。系統將要求您提供 PIN 碼以存取您的設定檔。",
             "body2": "只能使用數字"
         },
         "confirmPin": {
@@ -114,7 +119,7 @@
             "body": "您的新錢包可以使用了。",
             "softwareMigratedBody": "您已成功將資金遷移到新網路",
             "fireflyLedgerBody": "您的 Ledger 帳號已成功還原，現在可以繼續使用。",
-            "trinityLedgerBody": "您已成功將Ledger遷移至新網路。您現在可以從裝置中把{legacy} app移除。",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
             "exportMigration": "導出遷移紀錄檔並結束設定"
         },
         "import": {
@@ -194,8 +199,9 @@
             "accountPage": "帳戶頁面",
             "standard": "標準模式",
             "expert": "專家模式",
+            "takingAWhile": "This is taking a while...",
             "notGeneratingAddresses": "您的 Ledger 是否正在生成地址？",
-            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
+            "reinstallLegacy": "如果沒有，請斷開裝置連接並重試。如果問題仍然存在，您可能需要重新安裝 {legacy} app。"
         },
         "importBackupPassword": {
             "body1": "請輸入您的備份密碼。",
@@ -226,7 +232,7 @@
             "miningBundle": "交易組挖掘中",
             "problemRestoringWallet": "還原您的錢包時出現網絡錯誤。 請再試一次。",
             "minimumMigrationAmountSpentAddresses": "每個「已支出地址」的最小遷移數量是 1Mi。如果您的餘額看起來不對，請再次檢查。",
-            "tooManyAddressesToMigrate": "您有太多小額地址需要遷移。如果您的餘額看起來不對，請再次檢查。",
+            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
             "cannotMigrateAllYourFunds": "我們無法遷移您所有的資金，因為有些地址的金額太低。您仍舊可以進行遷移，但是 {value} 將會遺失。",
             "error": "遷移您的資金時發生錯誤，請重試。"
         },
@@ -439,7 +445,7 @@
                     "statuses": {
                         "appNotOpen": "尚未開啟 IOTA App",
                         "connected": "已連接",
-                        "legacyConnected": "{legacy} App Open",
+                        "legacyConnected": "{legacy} App 開啓",
                         "locked": "鎖定",
                         "mnemonicMismatch": "Ledger 或助記詞錯誤",
                         "notDetected": "未偵測",
@@ -970,6 +976,9 @@
         },
         "popup": {
             "preventClose": "無法關閉此彈出視窗。"
+        },
+        "migration": {
+            "missingBundle": "An error occurred while trying to find the transaction bundle."
         }
     },
     "tooltips": {

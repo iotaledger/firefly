@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "Profil oluştur",
+            "profileName": "Profil Adı",
             "body1": "Cüzdanlarınızı düzenlemek ve gizliliği artırmak için birden fazla kullanıcı profili oluşturabilirsiniz.",
-            "body2": "Şimdilik ilk profil adınızla başlayalım. Daha sonra daha fazla profil ekleyebilirsiniz.",
-            "profileName": "Profil Adı"
+            "body2": {
+                "first": "For now, let's start with your first profile name.",
+                "nonFirst": "For now, let's start with your profile name."
+            },
+            "addMore": "You can add more profiles later."
         },
         "setup": {
             "title": "Bir cüzdan oluşturun",
@@ -47,7 +51,8 @@
             "progress2": "Adres oluştur",
             "progress3": "Ledger uygulamasını değiştir",
             "progress4": "Para transferi",
-            "watchVideo": "Video kılavuzunu izleyin"
+            "watchVideo": "Video kılavuzunu izleyin",
+            "videoGuide": "Ledger migration video guide"
         },
         "ledgerInstallationGuide": {
             "title": "Gerekli Ledger uygulamalarını yüklediniz mi?",
@@ -114,7 +119,7 @@
             "body": "Yeni cüzdanınız kullanıma hazır.",
             "softwareMigratedBody": "Bakiyenizi başarılı bir şekilde yeni ağa aktardınız",
             "fireflyLedgerBody": "Ledger hesabınız başarıyla kurtarıldı ve artık devam edebilirsiniz.",
-            "trinityLedgerBody": "Ledger'ınızı başarıyla yeni ağa taşıdınız. Artık {legacy} uygulamasını cihazınızdan kaldırabilirsiniz.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
             "exportMigration": "Taşıma kaydını dışa aktar ve yüklemeyi bitir"
         },
         "import": {
@@ -194,6 +199,7 @@
             "accountPage": "Hesap Sayfası",
             "standard": "Standart",
             "expert": "Uzman",
+            "takingAWhile": "This is taking a while...",
             "notGeneratingAddresses": "Ledger'ınız adres üretiyor mu?",
             "reinstallLegacy": "Eğer üretmiyorsa, cihazın bağlantısını kesin ve tekrar deneyin. Sorun devam ediyorsa, {legacy} uygulamasını yeniden yüklemeniz gerekebilir."
         },
@@ -226,7 +232,7 @@
             "miningBundle": "Paket işleniyor",
             "problemRestoringWallet": "Cüzdanınızı geri yüklerken bir ağ hatası oluştu. Lütfen tekrar deneyin.",
             "minimumMigrationAmountSpentAddresses": "Harcama yapılmış her adres için minimum geçiş miktarı 1 Mi'dir. Bakiyeniz doğru görünmüyorsa tekrar kontrol edin.",
-            "tooManyAddressesToMigrate": "Düşük bakiyeli adres sayınız taşımak için çok fazla. Eğer bakiyeniz doğru görünmüyorsa lütfen tekrar kontrol ediniz.",
+            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
             "cannotMigrateAllYourFunds": "Bazı adreslerin değeri çok düşük olduğu için bütün bakiyenizi taşıyamıyoruz. İşleminize bu şekilde de devam edebilirsiniz. {value} kaybolacaktır.",
             "error": "Bakiyeniz taşınırken bir hata oluştu. Lütfen tekrar deneyin."
         },
@@ -970,6 +976,9 @@
         },
         "popup": {
             "preventClose": "Bu açılır pencere kapatılamaz."
+        },
+        "migration": {
+            "missingBundle": "An error occurred while trying to find the transaction bundle."
         }
     },
     "tooltips": {

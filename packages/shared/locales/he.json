@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "צור פרופיל",
+            "profileName": "שם הפרופיל",
             "body1": "ניתן ליצור פרופילים מרובים כדי לארגן את הארנקים שלך ולשפר פרטיות.",
-            "body2": "בינתיים, נתחיל עם פתיחת הפרופיל הראשון שלך. תוכל ליצור פרופילים נוספים בעתיד.",
-            "profileName": "שם הפרופיל"
+            "body2": {
+                "first": "For now, let's start with your first profile name.",
+                "nonFirst": "For now, let's start with your profile name."
+            },
+            "addMore": "You can add more profiles later."
         },
         "setup": {
             "title": "הגדר ארנק",
@@ -47,7 +51,8 @@
             "progress2": "Generate address",
             "progress3": "Switch Ledger app",
             "progress4": "Transfer funds",
-            "watchVideo": "Watch video guide"
+            "watchVideo": "Watch video guide",
+            "videoGuide": "Ledger migration video guide"
         },
         "ledgerInstallationGuide": {
             "title": "Have you installed the necessary Ledger apps?",
@@ -114,7 +119,7 @@
             "body": "הארנק שלך מוכן לשימוש.",
             "softwareMigratedBody": "You have successfully migrated your funds to the new network",
             "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
             "exportMigration": "יצא דוח הגירה וסיים את התהליך"
         },
         "import": {
@@ -194,6 +199,7 @@
             "accountPage": "Account Page",
             "standard": "Standard",
             "expert": "Expert",
+            "takingAWhile": "This is taking a while...",
             "notGeneratingAddresses": "Is your Ledger generating addresses?",
             "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
         },
@@ -226,7 +232,7 @@
             "miningBundle": "כורה חבילה",
             "problemRestoringWallet": "הרעה שגיאת רשת בזמן שחזור הארנק. אנא נסה שוב.",
             "minimumMigrationAmountSpentAddresses": "הסכום המינימלי לביצוע הגירה עבור כתובת אחת הוא 1 Mi. בדוק שוב שהמאזן תקין.",
-            "tooManyAddressesToMigrate": "יש לך יותר מדי כתובות עם מאזן נמוך מדי מכדי ביצוע הגירה. בדוק שוב שהמאזן תקין.",
+            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
             "cannotMigrateAllYourFunds": "איננו יכולים להגר את כל הכספים שלך בגלל שחלק מהכתובות שלך מכילות ערך נמוך מדי. תוכל להמשיך בכל מקרה. אך {value} יאבדו.",
             "error": "הרעה שגיאה בהגירת הכספים, אנא נסה/י שוב."
         },
@@ -970,6 +976,9 @@
         },
         "popup": {
             "preventClose": "This popup is unable to be closed."
+        },
+        "migration": {
+            "missingBundle": "An error occurred while trying to find the transaction bundle."
         }
     },
     "tooltips": {
