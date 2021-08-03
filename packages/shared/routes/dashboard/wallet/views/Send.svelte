@@ -2,7 +2,15 @@
     import { Unit } from '@iota/unit-converter'
     import { Address, Amount, Button, Dropdown, Icon, ProgressBar, Text } from 'shared/components'
     import { clearSendParams, sendParams } from 'shared/lib/app'
-    import { parseCurrency } from 'shared/lib/currency'
+    import {
+        convertFromFiat,
+        convertToFiat,
+        currencies,
+        CurrencyTypes,
+        exchangeRates,
+        isFiatCurrency,
+        parseCurrency
+    } from 'shared/lib/currency'
     import { ledgerDeviceState, displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { displayNotifications, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
@@ -269,6 +277,7 @@
         selectedSendType = type
         clearErrors()
     }
+
     const handleFromSelect = (item) => {
         from = item
         if (to === from) {
@@ -276,6 +285,7 @@
         }
         clearErrors()
     }
+
     const handleToSelect = (item) => {
         to = item
         if (from === to) {
@@ -283,6 +293,21 @@
         }
         clearErrors()
     }
+
+    const handleMaxAmount = (_amount) => {
+        /**
+         * NOTE: Sometimes max values from fiat calculations
+         * aren't precise enough, so ensure that when the max
+         * button is clicked that it calculates the actual max.
+         */
+
+        let isFiat = isFiatCurrency(unit)
+        let isMaxAmount = amount === convertToFiat(from.balance, $currencies[CurrencyTypes.USD], $exchangeRates[unit]).toString()
+        let hasDustRemaining = Math.abs(from.balance - _amount) < 1_000_000
+
+        return (isFiat && isMaxAmount && hasDustRemaining) ? from.balance : _amount
+    }
+
     const handleSendClick = () => {
         clearErrors()
 
@@ -308,11 +333,16 @@
         } else if (unit === Unit.i && Number.parseInt(amount, 10).toString() !== amount) {
             amountError = locale('error.send.amountNoFloat')
         } else {
+            let isFiat = isFiatCurrency(unit)
             let amountAsFloat = parseCurrency(amount)
+
             if (Number.isNaN(amountAsFloat)) {
                 amountError = locale('error.send.amountInvalidFormat')
             } else {
-                amountRaw = changeUnits(amountAsFloat, unit, Unit.i)
+                amountRaw = isFiat ? convertFromFiat(amountAsFloat, $currencies[CurrencyTypes.USD], $exchangeRates[unit])
+                    : changeUnits(amountAsFloat, unit, Unit.i)
+                amountRaw = handleMaxAmount(amountRaw)
+
                 if (amountRaw > from.balance) {
                     amountError = locale('error.send.amountTooHigh')
                 } else if (amountRaw <= 0) {
@@ -339,18 +369,16 @@
                 }
             }
 
-            handleLedgerConnection(() =>
-                openPopup({
-                    type: 'transaction',
-                    props: {
-                        internal,
-                        amount: amountRaw,
-                        unit,
-                        to: internal ? to.alias : address,
-                        onConfirm: () => triggerSend(internal),
-                    },
-                })
-            )
+            openPopup({
+                type: 'transaction',
+                props: {
+                    internal,
+                    amount: amountRaw,
+                    unit,
+                    to: internal ? to.alias : address,
+                    onConfirm: () => triggerSend(internal),
+                },
+            })
         }
     }
 
@@ -369,18 +397,10 @@
                     : send(from.id, address, amountRaw)
         }
 
-        handleLedgerConnection(_send(isInternal))
-    }
-
-    const handleLedgerConnection = (onSuccess: any) => {
-        /**
-         * NOTE: Because the Ledger must be connected to send a transaction,
-         * it is important to wrap the send function in the Ledger connection
-         * prompt function (only for non-software profiles).
-         */
-        if ($isSoftwareProfile) onSuccess()
-        else {
-            promptUserToConnectLedger(false, onSuccess, undefined)
+        if($isSoftwareProfile) {
+            _send(isInternal)()
+        } else if($isLedgerProfile) {
+            promptUserToConnectLedger(false, () => _send(isInternal)(), undefined)
         }
     }
 
@@ -401,7 +421,8 @@
         }
     }
     const handleMaxClick = () => {
-        amount = formatUnitPrecision(from.balance, unit, false)
+        amount = isFiatCurrency(unit) ? convertToFiat(from.balance, $currencies[CurrencyTypes.USD], $exchangeRates[unit]).toString()
+                                      : formatUnitPrecision(from.balance, unit, false)
     }
 
     const updateFromSendParams = (s) => {
