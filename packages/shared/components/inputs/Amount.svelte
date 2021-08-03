@@ -111,15 +111,19 @@
     }
 
     const updateAmount = (fromUnit: AmountUnit, toUnit: AmountUnit) => {
-        if(amount.length <= 0 || fromUnit === toUnit) return
+        if (amount.length <= 0 || fromUnit === toUnit) return
 
-        if(isFiatCurrency(toUnit)) { // IOTA -> FIAT
+        // IOTA -> FIAT
+        if (isFiatCurrency(toUnit)) {
             amount = amountToFiat(amount).slice(2)
         } else {
             let rawAmount
-            if(isFiatCurrency(fromUnit)) // FIAT -> IOTA
+
+            // FIAT -> IOTA
+            if (isFiatCurrency(fromUnit))
                 rawAmount = convertFromFiat(amount, $currencies[CurrencyTypes.USD], $exchangeRates[profileCurrency])
-            else // IOTA -> IOTA
+            // IOTA -> IOTA
+            else
                 rawAmount = changeUnits(parseCurrency(amount), fromUnit as Unit, Unit.i)
 
             amount = formatUnitPrecision(rawAmount, toUnit as Unit, false)
@@ -154,7 +158,7 @@
                     }
                 }
             } else if (e.key === 'Enter') {
-                if(focusedItem) {
+                if (focusedItem) {
                     const idx = [...navContainer.children].indexOf(focusedItem)
                     onUnitSelect(Units[idx])
                 }

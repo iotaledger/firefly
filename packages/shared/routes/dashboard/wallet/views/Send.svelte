@@ -397,9 +397,9 @@
                     : send(from.id, address, amountRaw)
         }
 
-        if($isSoftwareProfile) {
+        if ($isSoftwareProfile) {
             _send(isInternal)()
-        } else if($isLedgerProfile) {
+        } else if ($isLedgerProfile) {
             promptUserToConnectLedger(false, () => _send(isInternal)(), undefined)
         }
     }
