@@ -81,10 +81,6 @@
     $: amountForLabel = getFormattedLabel(amount)
     $: {
         if (amount.length > 0) {
-            // const rawVal = changeUnits(parseCurrency(amount), unit, Unit.i)
-            // if (rawVal > MAX_VALUE) {
-            //     amount = formatUnitPrecision(MAX_VALUE, unit, false)
-            // }
             if(!isFiatCurrency(unit)) {
                 const amountAsFloat = parseCurrency(amount)
                 const rawAmount = changeUnits(
