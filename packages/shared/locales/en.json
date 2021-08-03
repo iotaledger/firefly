@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "Create a profile",
+            "profileName": "Profile Name",
             "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
-            "profileName": "Profile Name"
+            "body2": {
+                "first": "For now, let's start with your first profile name.",
+                "nonFirst": "For now, let's start with your profile name."
+            },
+            "addMore": "You can add more profiles later."
         },
         "setup": {
             "title": "Set up a wallet",
