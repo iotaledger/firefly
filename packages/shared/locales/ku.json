@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "Profîlekê çêke",
+            "profileName": "Navê Profîlê",
             "body1": "Jibo hûn tokenên xwe cuda bigirîn û ewlehîyê zêde bikîn, dikarîn profîlên bikarhênerên ciyawaz saz bikî.",
-            "body2": "Em sereke bi navê profîla we ya yekem destpê bikin. Paşê hûn dikarin hinek profîl lê zêdebikin.",
-            "profileName": "Navê Profîlê"
+            "body2": {
+                "first": "For now, let's start with your first profile name.",
+                "nonFirst": "For now, let's start with your profile name."
+            },
+            "addMore": "You can add more profiles later."
         },
         "setup": {
             "title": "Cazdankekê saz bike",
@@ -47,7 +51,8 @@
             "progress2": "Navnîşanekê çêke",
             "progress3": "Switch Ledger app",
             "progress4": "Transfer funds",
-            "watchVideo": "Watch video guide"
+            "watchVideo": "Watch video guide",
+            "videoGuide": "Ledger migration video guide"
         },
         "ledgerInstallationGuide": {
             "title": "Have you installed the necessary Ledger apps?",
@@ -114,7 +119,7 @@
             "body": "Cuzdank amadeye jibo bikaranînê.",
             "softwareMigratedBody": "You have successfully migrated your funds to the new network",
             "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
             "exportMigration": "Tomarkirinê transferê derve bike û barkirinê biqedîn"
         },
         "import": {
@@ -194,6 +199,7 @@
             "accountPage": "Account Page",
             "standard": "Standard",
             "expert": "Expert",
+            "takingAWhile": "This is taking a while...",
             "notGeneratingAddresses": "Is your Ledger generating addresses?",
             "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
         },
@@ -226,7 +232,7 @@
             "miningBundle": "Şanenav tê xebitandin",
             "problemRestoringWallet": "Di paşbarkirina cuzdankê de pirsgirêkêk çêbû. Ji kerema xwe venêrîn.",
             "minimumMigrationAmountSpentAddresses": "Jibo navnîşanên hatin sarfkirin kêmahiya veguhastina herî kêm 1 Mi ye. Heke hevsengiya we rast xuya nake, careke din venêrin.",
-            "tooManyAddressesToMigrate": "Hejmara navnîşana weya kêm-hevseng pir zêde ye ku hûn hilgirin. Ger bîlançoya we rast xuya nake, ji kerema xwe careke din venêrin.",
+            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
             "cannotMigrateAllYourFunds": "Ji ber ku nirxê hin navnîşanan pir kêm e, em nikarin tevahiya bîlançoya we hilgirin. Hûn dikarin danûstendina xwe bi vî rengî jî bidomînin. {value} dê winda bibe.",
             "error": "Di paşbarkirina cuzdankê de pirsgirêkêk çêbû. Ji kerema xwe venêrîn."
         },
@@ -970,6 +976,9 @@
         },
         "popup": {
             "preventClose": "This popup is unable to be closed."
+        },
+        "migration": {
+            "missingBundle": "An error occurred while trying to find the transaction bundle."
         }
     },
     "tooltips": {

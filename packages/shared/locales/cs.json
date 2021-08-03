@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "Vytvořit profil",
+            "profileName": "Název profilu",
             "body1": "Můžete vytvořit více uživatelských profilů pro organizaci vašich peněženek a zlepšení soukromí.",
-            "body2": "Zatím začněme s názvem Vašeho prvního profilu. Další profily můžete přidat později.",
-            "profileName": "Název profilu"
+            "body2": {
+                "first": "For now, let's start with your first profile name.",
+                "nonFirst": "For now, let's start with your profile name."
+            },
+            "addMore": "You can add more profiles later."
         },
         "setup": {
             "title": "Nastavení peněženky",
@@ -47,7 +51,8 @@
             "progress2": "Vygenerovat adresu",
             "progress3": "Přepnout aplikaci Ledger",
             "progress4": "Převést prostředky",
-            "watchVideo": "Sledovat video průvodce"
+            "watchVideo": "Sledovat video průvodce",
+            "videoGuide": "Ledger migration video guide"
         },
         "ledgerInstallationGuide": {
             "title": "Nainstalovali jste potřebné aplikace Ledger?",
@@ -114,7 +119,7 @@
             "body": "Vaše peněženka je připravena k použití.",
             "softwareMigratedBody": "Úspěšně jste převedli své prostředky do nové sítě",
             "fireflyLedgerBody": "Váš účet Ledger byl úspěšně obnoven a nyní můžete pokračovat.",
-            "trinityLedgerBody": "Úspěšně jste přesunuli svou Ledger do nové sítě. Nyní můžete odstranit aplikaci {legacy} z vašeho zařízení.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
             "exportMigration": "Exportovat protokol migrace a dokončit nastavení"
         },
         "import": {
@@ -194,6 +199,7 @@
             "accountPage": "Stránka účtu",
             "standard": "Standard",
             "expert": "Expert",
+            "takingAWhile": "This is taking a while...",
             "notGeneratingAddresses": "Generuje vaše Ledger adresy?",
             "reinstallLegacy": "Pokud ne, odpojte zařízení a zkuste to znovu. Pokud problém přetrvává, možná budete muset aplikaci {legacy} přeinstalovat."
         },
@@ -226,7 +232,7 @@
             "miningBundle": "Těžení balíčku",
             "problemRestoringWallet": "Při obnovování vaší peněženky došlo k chybě sítě. Prosím zkuste to znovu.",
             "minimumMigrationAmountSpentAddresses": "Minimální částka pro migraci na každou adresu je 1 Mi. Zkontrolujte znovu zda zůstatek odpovídá.",
-            "tooManyAddressesToMigrate": "Na migraci máte příliš mnoho adres s nízkým zůstatkem. Zkontrolujte znovu vaše zůstatky.",
+            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
             "cannotMigrateAllYourFunds": "Nemůžeme migrovat všechny Vaše prostředky, protože některé adresy mají příliš nízký zůstatek. Můžete přesto pokračovat, ale {value} bude ztraceno.",
             "error": "Při migraci vašich prostředků došlo k chybě. Zkuste to prosím znovu."
         },
@@ -970,6 +976,9 @@
         },
         "popup": {
             "preventClose": "Vyskakovací okno nelze zavřít."
+        },
+        "migration": {
+            "missingBundle": "An error occurred while trying to find the transaction bundle."
         }
     },
     "tooltips": {

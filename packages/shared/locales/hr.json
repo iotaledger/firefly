@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "Stvori novi profil",
+            "profileName": "Ime profila",
             "body1": "Možete stvoriti više korisničkih računa kako biste organizirali svoje novčanike i poboljšali privatnost.",
-            "body2": "Počnimo s imenom vašeg prvog profila. Kasnije možete dodati još profila.",
-            "profileName": "Ime profila"
+            "body2": {
+                "first": "For now, let's start with your first profile name.",
+                "nonFirst": "For now, let's start with your profile name."
+            },
+            "addMore": "You can add more profiles later."
         },
         "setup": {
             "title": "Postavite svoj novčanik",
@@ -47,7 +51,8 @@
             "progress2": "Generiraj adresu",
             "progress3": "Switch Ledger app",
             "progress4": "Prebaci sredstva",
-            "watchVideo": "Pogledaj video s uputama"
+            "watchVideo": "Pogledaj video s uputama",
+            "videoGuide": "Ledger migration video guide"
         },
         "ledgerInstallationGuide": {
             "title": "Jesi li instalirao potrebne Ledger aplikacije?",
@@ -114,7 +119,7 @@
             "body": "Vaš novi novčanik spreman je za upotrebu.",
             "softwareMigratedBody": "Sredstva su uspješno prebačena na novu mrežu",
             "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
             "exportMigration": "Izvezite detalje o migraciji i dovršite postupak"
         },
         "import": {
@@ -194,6 +199,7 @@
             "accountPage": "Account Page",
             "standard": "Standard",
             "expert": "Expert",
+            "takingAWhile": "This is taking a while...",
             "notGeneratingAddresses": "Is your Ledger generating addresses?",
             "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
         },
@@ -226,7 +232,7 @@
             "miningBundle": "Rudarim skup",
             "problemRestoringWallet": "Došlo je do greške mreže prilikom oporavka vašeg novčanika. Molimo pokušajte ponovno.",
             "minimumMigrationAmountSpentAddresses": "Najmanji mogući iznos za migraciju je 1 Mi po iskorištenoj adresi. Provjerite još jednom izgleda li iznos ispravno.",
-            "tooManyAddressesToMigrate": "Imate previše adresa s malim iznosima za migraciju. Provjerite još jednom izgledaju li iznosi ispravno.",
+            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
             "cannotMigrateAllYourFunds": "Ne možemo migrirati sve vaše adrese jer neke imaju premalo sredstava. Možete nastaviti ali nepovratno ćete izgubiti {value}.",
             "error": "Došlo je pogreške u migraciji vaših sredstava. Molimo Vas, pokušajte ponovno."
         },
@@ -970,6 +976,9 @@
         },
         "popup": {
             "preventClose": "This popup is unable to be closed."
+        },
+        "migration": {
+            "missingBundle": "An error occurred while trying to find the transaction bundle."
         }
     },
     "tooltips": {

@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "Opret en profil",
+            "profileName": "Profilnavn",
             "body1": "Du kan oprette flere brugerprofiler for at organisere dine wallets og øge din fortrolighed.",
-            "body2": "For nu, lad os starte med dit profilnavn. Du kan tilføje flere profiler senere.",
-            "profileName": "Profilnavn"
+            "body2": {
+                "first": "For now, let's start with your first profile name.",
+                "nonFirst": "For now, let's start with your profile name."
+            },
+            "addMore": "You can add more profiles later."
         },
         "setup": {
             "title": "Konfigurér en wallet",
@@ -31,29 +35,30 @@
             "body2": "Hvis du udfylder Recovery Kit og gemme det forsvarligt, vil du altid være i stand til at gendanne dine wallets."
         },
         "create": {
-            "title": "Create a wallet",
-            "body": "Create a new wallet. You can choose a regular software wallet or if you have a Ledger device you can set up a hardware wallet.",
+            "title": "Opret en wallet",
+            "body": "Opret en ny wallet. Du kan vælge mellem en normal software wallet eller hvis du har en Ledger enhed kan du oprette en hardware wallet.",
             "softwareAccount": {
-                "title": "I want a software wallet",
-                "description": "Create a 24-word Recovery Phrase"
+                "title": "Jeg vil have en software wallet",
+                "description": "Opret en 24-ords gendannelsessætning"
             },
             "ledgerAccount": {
-                "title": "I want a hardware wallet",
-                "description": "Ledger Nano S or Nano X required"
+                "title": "Jeg vil have en hardware wallet",
+                "description": "Ledger Nano S eller Nano X kræves"
             }
         },
         "setupLedger": {
-            "progress1": "Connect your Ledger",
-            "progress2": "Generate address",
-            "progress3": "Switch Ledger app",
-            "progress4": "Transfer funds",
-            "watchVideo": "Watch video guide"
+            "progress1": "Tilslut din Ledger",
+            "progress2": "Generér adresse",
+            "progress3": "Skift Ledger app",
+            "progress4": "Overfør midler",
+            "watchVideo": "Se video guide",
+            "videoGuide": "Ledger migration video guide"
         },
         "ledgerInstallationGuide": {
-            "title": "Have you installed the necessary Ledger apps?",
-            "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
-            "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
-            "action": "Yes, I've installed these apps"
+            "title": "Har du installeret de nødvendige Ledger apps?",
+            "body1": "Før du fortsætter, skal du finde og installere både {legacy} appen og den nye IOTA app gennem Ledger Live.",
+            "body2": "Sørg for, at din Ledger firmware er opdateret. Alle forudinstallerede apps bør opdateres til deres seneste versioner.",
+            "action": "Ja, jeg har installeret disse apps"
         },
         "password": {
             "title": "Opret en adgangskode",
@@ -112,9 +117,9 @@
             "title": "Opsætning af wallet fuldført",
             "fundsMigrated": "Midler migreret",
             "body": "Din nye wallet er klar til brug.",
-            "softwareMigratedBody": "You have successfully migrated your funds to the new network",
+            "softwareMigratedBody": "Du har nu migreret dine midler til det nye netværk",
             "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
             "exportMigration": "Eksportér migrationslog og afslut opsætning"
         },
         "import": {
@@ -194,6 +199,7 @@
             "accountPage": "Account Page",
             "standard": "Standard",
             "expert": "Expert",
+            "takingAWhile": "This is taking a while...",
             "notGeneratingAddresses": "Is your Ledger generating addresses?",
             "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
         },
@@ -226,7 +232,7 @@
             "miningBundle": "Miner pakke",
             "problemRestoringWallet": "Der opstod en netværksfejl under gendannelse af din wallet. Prøv igen.",
             "minimumMigrationAmountSpentAddresses": "Det mindste migrationsbeløb for hver brugt adresse er 1 Mi. Tjek igen, hvis din saldo ikke ser rigtig ud.",
-            "tooManyAddressesToMigrate": "Du har for mange adresser med lav saldo til at migrere. Tjek igen, hvis din saldo ikke ser rigtigt ud.",
+            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
             "cannotMigrateAllYourFunds": "Vi kan ikke migrere alle dine midler, fordi nogle adresser har for lav værdi. Du kan fortsætte alligevel. {value} vil gå tabt.",
             "error": "Der opstod en fejl under migrering af dine midler. Prøv igen."
         },
@@ -730,7 +736,7 @@
         "searchAgain": "Søg igen",
         "searching": "Søger...",
         "closeFirefly": "Luk Firefly",
-        "generateAddress": "Generate address",
+        "generateAddress": "Generér adresse",
         "migrateAgain": "Migrate another index"
     },
     "general": {
@@ -970,6 +976,9 @@
         },
         "popup": {
             "preventClose": "This popup is unable to be closed."
+        },
+        "migration": {
+            "missingBundle": "An error occurred while trying to find the transaction bundle."
         }
     },
     "tooltips": {

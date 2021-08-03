@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "Crea un profilo",
+            "profileName": "Nome del profilo",
             "body1": "È possibile creare più profili utente per organizzare i wallet e migliorare la privacy.",
-            "body2": "Per ora, iniziamo con il nome del tuo primo profilo. Puoi aggiungere più profili più tardi.",
-            "profileName": "Nome del profilo"
+            "body2": {
+                "first": "For now, let's start with your first profile name.",
+                "nonFirst": "For now, let's start with your profile name."
+            },
+            "addMore": "You can add more profiles later."
         },
         "setup": {
             "title": "Configura un wallet",
@@ -47,7 +51,8 @@
             "progress2": "Genera un indirizzo",
             "progress3": "Accedi all'app Ledger",
             "progress4": "Trasferisci fondi",
-            "watchVideo": "Guarda la video guida"
+            "watchVideo": "Guarda la video guida",
+            "videoGuide": "Ledger migration video guide"
         },
         "ledgerInstallationGuide": {
             "title": "Hai installato le app Ledger necessarie?",
@@ -114,7 +119,7 @@
             "body": "Il tuo portafoglio è pronto all'uso.",
             "softwareMigratedBody": "Hai migrato con successo i tuoi fondi alla nuova rete",
             "fireflyLedgerBody": "Il tuo account Ledger è stato recuperato con successo e ora puoi continuare.",
-            "trinityLedgerBody": "Hai migrato con successo il tuo Ledger alla nuova rete. Ora puoi rimuovere l'app IOTA Legacy dal tuo dispositivo.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
             "exportMigration": "Esporta il log di migrazione e termina la configurazione"
         },
         "import": {
@@ -194,6 +199,7 @@
             "accountPage": "Pagina del conto",
             "standard": "Standard",
             "expert": "Esperto",
+            "takingAWhile": "This is taking a while...",
             "notGeneratingAddresses": "Il tuo Ledger sta generando indirizzi?",
             "reinstallLegacy": "In caso contrario, disconnetti il dispositivo e riprova. Se il problema persiste, potrebbe essere necessario reinstallare l'app {legacy}."
         },
@@ -226,7 +232,7 @@
             "miningBundle": "Mining del bundle",
             "problemRestoringWallet": "Si è verificato un errore di rete nel ripristino del wallet. Riprova.",
             "minimumMigrationAmountSpentAddresses": "L'importo minimo di migrazione per ogni indirizzo speso è 1 Mi. Controlla di nuovo se il tuo saldo non è corretto.",
-            "tooManyAddressesToMigrate": "Hai troppi indirizzi con un saldo basso per migrare. Controlla di nuovo se il tuo saldo non sembra corretto.",
+            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
             "cannotMigrateAllYourFunds": "Non possiamo migrare tutti i tuoi fondi perché alcuni indirizzi sono troppo bassi. Puoi procedere comunque. {value} andrà perso.",
             "error": "Si è verificato un errore durante la migrazione dei fondi. Per favore riprova."
         },
@@ -970,6 +976,9 @@
         },
         "popup": {
             "preventClose": "Questo popup non può essere chiuso."
+        },
+        "migration": {
+            "missingBundle": "An error occurred while trying to find the transaction bundle."
         }
     },
     "tooltips": {

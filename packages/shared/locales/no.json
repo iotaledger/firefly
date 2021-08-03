@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "Opprett profil",
+            "profileName": "Profilnavn",
             "body1": "Du kan opprette flere brukerprofiler for å organisere lommebøkene dine og forbedre personvern.",
-            "body2": "La oss begynne med ditt første profilnavn. Du kan legge til flere profiler senere.",
-            "profileName": "Profilnavn"
+            "body2": {
+                "first": "For now, let's start with your first profile name.",
+                "nonFirst": "For now, let's start with your profile name."
+            },
+            "addMore": "You can add more profiles later."
         },
         "setup": {
             "title": "Sett opp en lommebok",
@@ -47,7 +51,8 @@
             "progress2": "Generer adresse",
             "progress3": "Bytt Ledger app",
             "progress4": "Overfør midler",
-            "watchVideo": "Se video guide"
+            "watchVideo": "Se video guide",
+            "videoGuide": "Ledger migration video guide"
         },
         "ledgerInstallationGuide": {
             "title": "Har du installert de nødvendige Ledger-appene?",
@@ -114,7 +119,7 @@
             "body": "Din nye lommebok er klar til bruk.",
             "softwareMigratedBody": "Migreringen av dine midler til det nye nettverket var vellykket",
             "fireflyLedgerBody": "Din Ledger konto er bekreftet gjenopprettet, og du kan nå fortsette.",
-            "trinityLedgerBody": "Du har nå migrert din Ledger til det nye nettverket. Du kan nå fjerne {legacy} appen fra enheten.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
             "exportMigration": "Eksporter migreringsloggen og fullfør oppsettet"
         },
         "import": {
@@ -169,33 +174,34 @@
             "restoring": "Gjenoppretter fra Ledger..."
         },
         "legacyLedgerIntro": {
-            "title": "Start your Ledger migration using Firefly",
-            "body1": "Firefly will help you to transfer your tokens to the new Chrysalis network.",
-            "body2": "After the migration, you will be able to send and receive your tokens using your Ledger with Firefly.",
-            "readMore": "What to expect from the migration process"
+            "title": "Start din Ledger-migrering med Firefly",
+            "body1": "Firefly vil hjelpe deg med å overføre dine tokens til det nye Chrysalis-nettverket.",
+            "body2": "Etter migrasjonen vil du kunne sende og motta dine tokens ved hjelp av Ledger og Firefly.",
+            "readMore": "Hva du kan forvente fra migrasjonsprosessen"
         },
         "generateNewLedgerAddress": {
             "title": "Generer en ny adresse",
-            "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
-            "confirmTitle": "Confirm the new address",
-            "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
-            "confirmedTitle": "Address confirmed",
-            "confirmedBody": "You have confirmed that the address in Firefly matches the one on your Ledger device.",
-            "generating": "Generating address"
+            "body": "Du må generere en ny adresse for å migrere din tokens med Firefly. Klikk på knappen nedenfor for å fortsette.",
+            "confirmTitle": "Bekreft den nye adressen",
+            "confirmBody": "For sikkerhets skyld, sammenlign adressen generert på Ledger-enheten med adressen nedenfor. Hvis de er like, trykk begge knappene på Ledger-enheten som forespurt.",
+            "confirmedTitle": "Adresse bekreftet",
+            "confirmedBody": "Du har bekreftet at adressen i Firefly samsvarer med den på Ledger-enheten din.",
+            "generating": "Genererer adresse"
         },
         "switchLedgerApps": {
-            "title": "Switch Ledger apps",
-            "body": "Please switch to the {legacy} app on your Ledger device to continue migration. When ready, press continue."
+            "title": "Bytt Ledger-apper",
+            "body": "Vennligst bytt til {legacy}-appen på Ledger-enheten for å fortsette migrasjonen. Trykk på fortsette, når den er klar."
         },
         "selectLedgerAccountIndex": {
-            "title": "Choose Ledger account index",
-            "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
-            "accountIndex": "Account Index",
-            "accountPage": "Account Page",
+            "title": "Velg din Ledger kontoindeks",
+            "body": "Velg Ledger konto-indeksen du bruker med Trinity. For de fleste brukere vil dette være standardindeksen på 0.",
+            "accountIndex": "Konto-index",
+            "accountPage": "Kontoside",
             "standard": "Standard",
-            "expert": "Expert",
-            "notGeneratingAddresses": "Is your Ledger generating addresses?",
-            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
+            "expert": "Ekspert",
+            "takingAWhile": "This is taking a while...",
+            "notGeneratingAddresses": "Generere Ledger-appen din adresser?",
+            "reinstallLegacy": "Hvis ikke, koble fra enheten og prøv igjen. Hvis problemet vedvarer, kan det hende du må installere {legacy} på nytt."
         },
         "importBackupPassword": {
             "body1": "Vennligst skriv inn passordet for sikkerhetskopien.",
@@ -226,7 +232,7 @@
             "miningBundle": "Utvinner bundle",
             "problemRestoringWallet": "Det oppsto et tilkoblingsproblem under gjenopprettingen av lommeboken din. Vennligst prøv igjen.",
             "minimumMigrationAmountSpentAddresses": "Minste overføringsbeløp for hver brukte adresse er 1 Mi. Sjekk igjen om din saldo ser riktig ut.",
-            "tooManyAddressesToMigrate": "Du har for mange adresser med lav saldo til å migrere. Sjekk igjen om din saldo ser riktig ut.",
+            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
             "cannotMigrateAllYourFunds": "Vi kan ikke migrere alle dine midler fordi noen adresser har for lav verdi. Du kan allikevell fortsette. {value} vil gå tapt.",
             "error": "Det oppsto en feil ved migreringen av dine midler. Vennligst prøv igjen."
         },
@@ -257,7 +263,7 @@
         },
         "transferFragmentedFunds": {
             "body1": "Firefly vil nå gå videre med migreringen av dine midler. Dette kan ta en stund.",
-            "body2": "Ensure your Ledger is connected and the {legacy} app is open at all times during migration.",
+            "body2": "Sørg for at din Ledger er tilkoblet og at {legacy}-appen alltid er åpen under migrering.",
             "migrate": "Migrer midler",
             "transaction": "Transaksjon {number}",
             "rerun": "Prøv på nytt"
@@ -271,7 +277,7 @@
             "body": "Kontroller at saldoen stemmer før du fortsetter. Du kan sjekke igjen om det ikke ser riktig ut.",
             "error": "Minste migreringsbeløp er 1 Mi. Sjekk igjen om saldoen ikke ser riktig ut.",
             "zeroBalance": "Prøv å sjekke igjen. Hvis du fortsatt ikke kan finne balansen din, kan det hende at du har skrevet inn din hovednøkkel feil.",
-            "zeroBalanceLedgerLegacy": "Try checking again. If you still can't find your balance you might have selected the wrong account index."
+            "zeroBalanceLedgerLegacy": "Prøv å sjekke igjen. Hvis du fortsatt ikke finner saldoen din, kan du ha valgt feil kontoindeks."
         },
         "settings": {
             "settings": "Innstillinger",
@@ -390,8 +396,8 @@
                 "description": "Vis system- og applikasjonsinformasjon"
             },
             "migrateLedgerIndex": {
-                "title": "Migrate Ledger Index",
-                "description": "Migrate another Trinity account index"
+                "title": "Migrer Ledger-indeks",
+                "description": "Overfør en annen Trinity kontoindeks"
             },
             "stateExport": {
                 "title": "Tilstands-eksportering",
@@ -437,13 +443,13 @@
                 "hardwareDevice": {
                     "title": "Maskinvareenhet",
                     "statuses": {
-                        "appNotOpen": "IOTA App Not Open",
-                        "connected": "Connected",
-                        "legacyConnected": "{legacy} App Open",
+                        "appNotOpen": "IOTA-app ikke åpen",
+                        "connected": "Tilkoblet",
+                        "legacyConnected": "{legacy}-app er åpen",
                         "locked": "Låst",
-                        "mnemonicMismatch": "Wrong Ledger or Mnemonic",
-                        "notDetected": "Not Detected",
-                        "otherConnected": "App Open"
+                        "mnemonicMismatch": "Feil Ledger eller Mnemonic",
+                        "notDetected": "Ikke funnet",
+                        "otherConnected": "App er åpen"
                     }
                 },
                 "strongholdStatus": {
@@ -462,7 +468,7 @@
                 "networkDown": "Nettverket er frakoblet",
                 "status": "Status",
                 "messagesPerSecond": "Meldinger per sekund",
-                "referencedRate": "Referenced rate"
+                "referencedRate": "Referert-rate"
             },
             "profileModal": {
                 "allSettings": "Alle innstillinger",
@@ -577,51 +583,51 @@
             "bodyFirefly": "Firefly er deaktivert til det er fullført. Token migrering vil fortsatt bli mulig etterpå."
         },
         "ledgerNotConnected": {
-            "connect": "Open the new IOTA app on your Ledger device to continue",
-            "connectLegacy": "Open the {legacy} app on your Ledger device to continue"
+            "connect": "Åpne den nye IOTA appen på din Ledger enhet for å fortsette",
+            "connectLegacy": "Åpne {legacy}-appen på Ledger-enheten for å fortsette"
         },
         "ledgerConfirmation": {
-            "confirm": "To proceed, confirm the prompt displayed on your Ledger device"
+            "confirm": "For å fortsette, bekreft at ledeteksten vises på din Ledger enhet"
         },
         "ledgerAppGuide": {
-            "title": "Guide to installing the Ledger apps",
+            "title": "Guide å installere Ledger-appene",
             "steps": {
-                "0": "Install and open the Ledger Live application",
-                "1": "Ensure that your Ledger is connected",
-                "2": "Search for apps: {legacy} and IOTA (MIOTA)",
-                "3": "Install both apps: {legacy} and IOTA (MIOTA)",
-                "4": "Remember that it's important to close Ledger Live before returning to Firefly"
+                "0": "Installer og åpne Ledger Live-appen",
+                "1": "Sjekk at din Ledger er tilkoblet",
+                "2": "Søk etter appene: {legacy} og IOTA (MIOTA)",
+                "3": "Installer begge appene: {legacy} og IOTA (MIOTA)",
+                "4": "Husk at det er viktig å lukke Ledger Live før du kommer tilbake til Firefly"
             }
         },
         "ledgerConnectionGuide": {
             "title": "Tips hvis din Ledger ikke kobler til",
             "steps": {
-                "0": "Make sure Ledger Live is not open on your computer",
-                "1": "Ensure you have unlocked your Ledger device with your PIN",
-                "2": "Open the new IOTA app on your Ledger device",
+                "0": "Sørg for at Ledger Live ikke er åpen på datamaskinen",
+                "1": "Sørg for at du har låst opp din Ledger-enhet med PIN-koden",
+                "2": "Åpne den nye IOTA-appen på Ledger-enheten",
                 "3": {
-                    "text": "Still no luck?",
-                    "link": "Try the official Ledger support page"
+                    "text": "Fortsatt ingen hell?",
+                    "link": "Prøv den offisielle Ledger supportsiden"
                 }
             }
         },
         "ledgerTransaction": {
             "remainderAddress": {
-                "title": "Confirm remainder address",
-                "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+                "title": "Bekreft gjenværende adresse",
+                "info": "Bekreft at den resterende adressen som vises på Ledger-enheten samsvarer med visningen nedenfor. Dersom den er lik, trykk på begge knappene på Ledger-enheten som forespurt."
             },
             "transaction": {
                 "title": "Bekreft transaksjon",
-                "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted."
+                "info": "Bekreft at transaksjonsinformasjonen som vises på Ledger-enheten samsvarer med visningen nedenfor. Dersom den er lik, trykk på begge knappene på Ledger-enheten som forespurt."
             }
         },
         "ledgerAddress": {
-            "title": "Confirm receive address",
-            "body": "Confirm that the receive address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+            "title": "Bekreft mottaksadressen",
+            "body": "Bekreft at mottaksadressen som vises på Ledger-enheten samsvarer med visningen nedenfor. Dersom den er lik, trykk på begge knappene på Ledger-enheten som forespurt."
         },
         "ledgerMigrateIndex": {
-            "title": "Do you need to migrate another Trinity account index?",
-            "body": "You can also migrate later in Advanced Settings."
+            "title": "Trenger du å overføre til en ny Trinity kontoindeks?",
+            "body": "Du kan også migrere senere i Avanserte Innstillinger."
         }
     },
     "charts": {
@@ -639,8 +645,8 @@
     "actions": {
         "continue": "Fortsett",
         "back": "Tilbake",
-        "previous": "Previous",
-        "next": "Next",
+        "previous": "Forrige",
+        "next": "Neste",
         "cancel": "Avbryt",
         "close": "Lukk",
         "dismiss": "Avvis",
@@ -709,7 +715,7 @@
         "addAccount": "Legg til lommebok",
         "checkForUpdates": "Søk etter oppdateringer",
         "reportAnIssue": "Rapportér en feil",
-        "restore": "Restore",
+        "restore": "Gjenopprett",
         "clear": "Tøm",
         "hideDetails": "Skjul detaljer",
         "yes": "Ja",
@@ -731,7 +737,7 @@
         "searching": "Søker...",
         "closeFirefly": "Lukk Firefly",
         "generateAddress": "Generer adresse",
-        "migrateAgain": "Migrate another index"
+        "migrateAgain": "Migrer en annen indeks"
     },
     "general": {
         "password": "Passord",
@@ -746,7 +752,7 @@
         "received": "Mottatt",
         "sendPayment": "Send betaling",
         "moveFunds": "Intern Overføring",
-        "sendTo": "Send To",
+        "sendTo": "Send Til",
         "sendFunds": "Send midler",
         "sendToAddress": "Send til adresse",
         "scanQrOrPaste": "Skann en QR-kode eller lim inn en adresse",
@@ -765,8 +771,8 @@
         "myAddress": "Min adresse",
         "shareAddress": "Del en adresse",
         "yourAddress": "Din adresse",
-        "newRemainder": "New Remainder",
-        "remainder": "Remainder",
+        "newRemainder": "Ny gjenværende",
+        "remainder": "Gjenstående",
         "generateNewAddress": "Generer en ny adresse",
         "copyAddress": "Kopier adresse",
         "import": "Importer",
@@ -803,7 +809,7 @@
         "messageId": "Meldings-ID",
         "inputAddress": "Avsenders adresse",
         "receiveAddress": "Mottaksadresse",
-        "newAddress": "New Address",
+        "newAddress": "Ny adresse",
         "date": "Dato",
         "status": "Status",
         "confirmed": "Bekreftet",
@@ -815,13 +821,13 @@
         "firstSync": "Synkroniserer historikk, dette kan ta en stund...",
         "transferSyncing": "Synkroniserer lommebok",
         "transferSelectingInputs": "Velger inndata",
-        "transferRemainderAddress": "Generating remainder address",
-        "transferPreparedTransaction": "Preparing transaction",
+        "transferRemainderAddress": "Generer gjenværende adresse",
+        "transferPreparedTransaction": "Forbereder transaksjon",
         "transferSigning": "Signerer transaksjonen",
         "transferPow": "Utfører PoW",
         "transferBroadcasting": "Promoterer transaksjonen",
         "transferComplete": "Overføring fullført",
-        "generatingReceiveAddress": "Generating receive address",
+        "generatingReceiveAddress": "Genererer mottaksadresse",
         "creatingAccount": "Oppretter lommebok, vennligst vent...",
         "updatingAccount": "Oppdaterer lommebok, vennligst vent...",
         "accountSyncing": "Lommebok synkroniserer",
@@ -877,7 +883,7 @@
         "minutesRemaining": "{minutes, plural, one {1 minutt gjenstår} other {# minutter gjenstår}}",
         "copiedToClipboard": "Kopiert til utklippstavle",
         "accountsSynchronized": "Synkronisering av lommebok fullført",
-        "fundsAvailableSoon": "Your funds will become available shortly"
+        "fundsAvailableSoon": "Dine midler vil bli tilgjengelig innen kort tid"
     },
     "error": {
         "profile": {
@@ -915,9 +921,9 @@
             "control": "Et profilnavn kan ikke inneholde et kontrolltegn.",
             "startDot": "Et profilnavn kan ikke starte med '.'.",
             "chars": "Et profilnavn kan ikke inneholde følgende tegn: <>:\"/\\|?*",
-            "index": "Your account index must be a number between 0 and 2,147,483,647.",
-            "page": "Your account page must be a number between 0 and 2,147,483,647.",
-            "syncing": "There was an error syncing your wallets."
+            "index": "Din kontoindeks må være et tall mellom 0 og 2147483647.",
+            "page": "Din kontoside må være et tall mellom 0 og 2147483647.",
+            "syncing": "Det oppstod en feil ved synkronisering av lommeboken din."
         },
         "send": {
             "addressLength": "Adresser må bestå av {length, plural, one {1} other {#}} tegn.",
@@ -932,8 +938,8 @@
             "noToAccount": "Du har ikke valgt en lommebok for å sende pengene til.",
             "sendingDust": "Du kan ikke sende mindre enn 1 Mi.",
             "leavingDust": "Du kan ikke forlate mindre enn 1 Mi på adressen din.",
-            "cancelled": "The transaction was cancelled.",
-            "transaction": "There was an error sending your transaction. Please try again."
+            "cancelled": "Transaksjonen ble avbrutt.",
+            "transaction": "Det oppstod en feil ved sending av transaksjonen. Prøv på nytt."
         },
         "node": {
             "invalid": "Vennligst angi en gyldig URL-adresse.",
@@ -956,20 +962,23 @@
             "phraseCaseWord": "Ordet \"{word}\" kan kun ha små bokstaver"
         },
         "ledger": {
-            "appNotOpen": "You must open the IOTA app on your Ledger device.",
-            "generic": "There was an error connecting to your Ledger device.",
-            "legacyConnected": "The wrong app is open on your Ledger device.",
-            "locked": "Please unlock your Ledger device by entering the PIN.",
-            "mnemonicMismatch": "You have connected the wrong Ledger device or the mnemonic has changed.",
-            "notDetected": "No Ledger device detected.",
-            "notFound": "Ledger device not found.",
-            "otherConnected": "The wrong app is open on your Ledger device.",
-            "generateAddress": "There was an error generating an address.",
-            "timeout": "Your Ledger device timed out.",
-            "disconnected": "Your Ledger device was disconnected."
+            "appNotOpen": "Du må åpne IOTA-appen på Ledger-enheten.",
+            "generic": "Det oppstod en feil under tilkoblingen til Ledger-enheten din.",
+            "legacyConnected": "Feil app er åpen på Ledger-enheten din.",
+            "locked": "Vennligst lås opp din Ledger-enhet ved å skrive inn PIN-koden.",
+            "mnemonicMismatch": "Du har koblet til feil Ledger-enhet eller mnemonien er endret.",
+            "notDetected": "Ingen Ledger-enhet oppdaget.",
+            "notFound": "Ledger-enhet ikke funnet.",
+            "otherConnected": "Feil app er åpen på Ledger-enheten din.",
+            "generateAddress": "Det oppstod en feil under generering av adresse.",
+            "timeout": "Det oppstod et tidsavbrudd for Ledger-enheten.",
+            "disconnected": "Ledger-enheten ble frakoblet."
         },
         "popup": {
-            "preventClose": "This popup is unable to be closed."
+            "preventClose": "Denne popup kan ikke stenges."
+        },
+        "migration": {
+            "missingBundle": "An error occurred while trying to find the transaction bundle."
         }
     },
     "tooltips": {
