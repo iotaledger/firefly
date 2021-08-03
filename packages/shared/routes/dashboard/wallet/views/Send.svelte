@@ -159,20 +159,7 @@
         }
 
         if (!amountError && !addressError && !toError) {
-            // If this is an external send but the dest address is in one of
-            // the other accounts switch it to an internal transfer
             let internal = selectedSendType === SEND_TYPE.INTERNAL
-
-            if (!internal) {
-                for (const acc of $accounts) {
-                    const internalAddress = acc.addresses.find((a) => a.address === address)
-                    if (internalAddress) {
-                        internal = true
-                        to = acc
-                        break
-                    }
-                }
-            }
 
             openPopup({
                 type: 'transaction',
