@@ -11,7 +11,7 @@
     export let showLedgerVideoButton = false
 
     function handleWatchVideoClick() {
-        openPopup({ type: 'video', props: { video: LEDGER_MIGRATION_VIDEO, title: 'Ledger setup step-by-step video guide' } })
+        openPopup({ type: 'video', props: { video: LEDGER_MIGRATION_VIDEO, title: locale('views.setupLedger.videoGuide') } })
     }
 </script>
 
