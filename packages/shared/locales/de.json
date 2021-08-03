@@ -606,7 +606,7 @@
                 "1": "Stelle sicher, dass du dein Ledger-Gerät mit deiner PIN entsperrt hast",
                 "2": "Öffne die neue IOTA App auf deinem Ledger-Gerät, um fortzufahren",
                 "3": {
-                    "text": "Noch immer kein Glück?",
+                    "text": "Es klappt immer noch nicht?",
                     "link": "Besuche die offizielle Ledger Support-Seite"
                 }
             }

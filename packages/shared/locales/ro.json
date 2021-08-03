@@ -35,15 +35,15 @@
             "body2": "Dacă completați Kit-ul de recuperare și îl stocați în siguranță, veți putea întotdeauna să recuperați portofelele."
         },
         "create": {
-            "title": "Create a wallet",
-            "body": "Create a new wallet. You can choose a regular software wallet or if you have a Ledger device you can set up a hardware wallet.",
+            "title": "Creează un portofel",
+            "body": "Creează un portofel nou. Poți alege un portofel software normal sau dacă ai un dispozitiv Ledger, poți seta un portofel hardware.",
             "softwareAccount": {
-                "title": "I want a software wallet",
-                "description": "Create a 24-word Recovery Phrase"
+                "title": "Vreau un portofel software",
+                "description": "Creează o frază de recuperare de 24 de cuvinte"
             },
             "ledgerAccount": {
-                "title": "I want a hardware wallet",
-                "description": "Ledger Nano S or Nano X required"
+                "title": "Vreau un portofel hardware",
+                "description": "Este necesar un Ledger Nano S sau Nano X"
             }
         },
         "setupLedger": {
