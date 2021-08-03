@@ -28,6 +28,9 @@
                     body {
                         margin: 0px;
                     }
+                    video:focus {
+                        outline: none;
+                    }
                 </style>
             </head>
             <video 
@@ -47,6 +50,4 @@
         frameborder="0"
         title="video" />
 </div>
-
-
 
