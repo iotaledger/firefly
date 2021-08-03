@@ -16,7 +16,7 @@
         "profile": {
             "title": "Profil oluştur",
             "body1": "Cüzdanlarınızı düzenlemek ve gizliliği artırmak için birden fazla kullanıcı profili oluşturabilirsiniz.",
-            "body2": "Şimdilik ilk profil adınızla başlayalım. Daha sonra daha fazla profil ekleyebilirsiniz.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "Profil Adı"
         },
         "setup": {
@@ -114,7 +114,7 @@
             "body": "Yeni cüzdanınız kullanıma hazır.",
             "softwareMigratedBody": "Bakiyenizi başarılı bir şekilde yeni ağa aktardınız",
             "fireflyLedgerBody": "Ledger hesabınız başarıyla kurtarıldı ve artık devam edebilirsiniz.",
-            "trinityLedgerBody": "Ledger'ınızı başarıyla yeni ağa taşıdınız. Artık {legacy} uygulamasını cihazınızdan kaldırabilirsiniz.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
             "exportMigration": "Taşıma kaydını dışa aktar ve yüklemeyi bitir"
         },
         "import": {
@@ -226,7 +226,7 @@
             "miningBundle": "Paket işleniyor",
             "problemRestoringWallet": "Cüzdanınızı geri yüklerken bir ağ hatası oluştu. Lütfen tekrar deneyin.",
             "minimumMigrationAmountSpentAddresses": "Harcama yapılmış her adres için minimum geçiş miktarı 1 Mi'dir. Bakiyeniz doğru görünmüyorsa tekrar kontrol edin.",
-            "tooManyAddressesToMigrate": "Düşük bakiyeli adres sayınız taşımak için çok fazla. Eğer bakiyeniz doğru görünmüyorsa lütfen tekrar kontrol ediniz.",
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
             "cannotMigrateAllYourFunds": "Bazı adreslerin değeri çok düşük olduğu için bütün bakiyenizi taşıyamıyoruz. İşleminize bu şekilde de devam edebilirsiniz. {value} kaybolacaktır.",
             "error": "Bakiyeniz taşınırken bir hata oluştu. Lütfen tekrar deneyin."
         },

@@ -16,7 +16,7 @@
         "profile": {
             "title": "Stvori novi profil",
             "body1": "Možete stvoriti više korisničkih računa kako biste organizirali svoje novčanike i poboljšali privatnost.",
-            "body2": "Počnimo s imenom vašeg prvog profila. Kasnije možete dodati još profila.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "Ime profila"
         },
         "setup": {
@@ -226,7 +226,7 @@
             "miningBundle": "Rudarim skup",
             "problemRestoringWallet": "Došlo je do greške mreže prilikom oporavka vašeg novčanika. Molimo pokušajte ponovno.",
             "minimumMigrationAmountSpentAddresses": "Najmanji mogući iznos za migraciju je 1 Mi po iskorištenoj adresi. Provjerite još jednom izgleda li iznos ispravno.",
-            "tooManyAddressesToMigrate": "Imate previše adresa s malim iznosima za migraciju. Provjerite još jednom izgledaju li iznosi ispravno.",
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
             "cannotMigrateAllYourFunds": "Ne možemo migrirati sve vaše adrese jer neke imaju premalo sredstava. Možete nastaviti ali nepovratno ćete izgubiti {value}.",
             "error": "Došlo je pogreške u migraciji vaših sredstava. Molimo Vas, pokušajte ponovno."
         },

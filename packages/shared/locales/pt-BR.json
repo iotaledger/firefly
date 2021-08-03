@@ -16,7 +16,7 @@
         "profile": {
             "title": "Criar um perfil",
             "body1": "Você pode criar vários perfis de usuário para organizar suas carteiras e melhorar a privacidade.",
-            "body2": "Por agora, vamos começar com o nome de seu primeiro perfil. Você pode adicionar mais perfis mais tarde.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "Nome do Perfil"
         },
         "setup": {
@@ -114,7 +114,7 @@
             "body": "Sua nova carteira está pronta para uso.",
             "softwareMigratedBody": "Você migrou seus fundos com sucesso para a nova rede",
             "fireflyLedgerBody": "Sua conta Ledger foi recuperada com sucesso e você pode continuar agora.",
-            "trinityLedgerBody": "Você migrou sua Ledger com sucesso para a nova rede. Agora você pode remover o aplicativo {legacy} de seu dispositivo.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
             "exportMigration": "Exportar log de migração e concluir a configuração"
         },
         "import": {
@@ -226,7 +226,7 @@
             "miningBundle": "Pacote de mineração",
             "problemRestoringWallet": "Ocorreu um erro ao restaurar sua carteira. Por favor, tente novamente.",
             "minimumMigrationAmountSpentAddresses": "A quantidade mínima de migração para cada endereço usado é de 1 Mi. Verifique novamente se seu saldo não parece correto.",
-            "tooManyAddressesToMigrate": "Você tem muitos endereços com saldo baixo para migrar. Verifique novamente se seu saldo não parece correto.",
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
             "cannotMigrateAllYourFunds": "Não podemos migrar todos os seus fundos porque alguns endereços possuem valores muito baixos. Você pode prosseguir mesmo assim. {value} será perdido.",
             "error": "Ocorreu um erro ao migrar seus fundos. Por favor, tente novamente."
         },
@@ -406,7 +406,7 @@
                 "description": "Visualizar a documentação para explicações aprofundadas sobre como as coisas funcionam"
             },
             "faq": {
-                "title": "FAQ",
+                "title": "Perguntas Frequentes",
                 "title2": "Perguntas Frequentes",
                 "description": "Veja as FAQs para obter ajuda para um problema ou pergunta comum"
             },
@@ -677,7 +677,7 @@
         "syncAll": "Sincronizar tudo",
         "export": "Exportar",
         "exportNewStronghold": "Exportar uma nova Stronghold",
-        "enableDeepLinks": "Habilitar links profundos",
+        "enableDeepLinks": "Ativar links profundos",
         "enableDeveloperMode": "Ativar modo de desenvolvedor",
         "enableSystemNotifications": "Habilitar notificações do sistema",
         "exportState": "Exportar estado",

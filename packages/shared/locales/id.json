@@ -16,7 +16,7 @@
         "profile": {
             "title": "Buat Profil",
             "body1": "Anda dapat membuat beberapa profil pengguna untuk mengatur dompet Anda dan meningkatkan privasi.",
-            "body2": "Untuk saat ini, mari kita mulai dengan nama profil depan Anda. Anda dapat menambahkan lebih banyak profil nanti.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "Nama Profil"
         },
         "setup": {
@@ -226,7 +226,7 @@
             "miningBundle": "Bundel penambangan",
             "problemRestoringWallet": "Terjadi masalah jaringan saat memulihkan dompet Anda. Silahkan coba lagi.",
             "minimumMigrationAmountSpentAddresses": "Jumlah migrasi minimum untuk setiap alamat yang dibelanjakan adalah 1 Mi. Periksa lagi apakah saldo Anda terlihat tidak benar.",
-            "tooManyAddressesToMigrate": "Anda memiliki terlalu banyak alamat dengan saldo rendah untuk dimigrasi. Periksa lagi apakah saldo Anda terlihat tidak benar.",
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
             "cannotMigrateAllYourFunds": "Kami tidak dapat memindahkan semua dana Anda karena beberapa alamat nilainya terlalu rendah. Anda tetap dapat melanjutkan. {value} akan hilang.",
             "error": "Ada kesalahan saat memindahkan dana Anda. Silahkan coba lagi."
         },

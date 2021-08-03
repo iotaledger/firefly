@@ -16,7 +16,7 @@
         "profile": {
             "title": "إنشاء ملف شخصي",
             "body1": "يمكنك إنشاء ملفات شخصية متعددة للمستخدمين لتنظيم محافظك وتحسين الخصوصية.",
-            "body2": "في الوقت الحالي، دعنا نبدأ باسم ملفك الشخصي الأول. يمكنك إضافة المزيد من الملفات الشخصية لاحقاً.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "اسم الملف الشخصي"
         },
         "setup": {
@@ -226,7 +226,7 @@
             "miningBundle": "حزمة التعدين",
             "problemRestoringWallet": "حدث خطأ في الشبكة اثناء استعادة محفظتك. الرجاء المحاولة مرة أخرى.",
             "minimumMigrationAmountSpentAddresses": "الحد الأدنى القابل للترحيل لكل عنوان هو Mi 1. تحقق مرة أخرى من رصيدك.",
-            "tooManyAddressesToMigrate": "لديك الكثير من العناوين مع رصيد منخفض للترحيل. تحقق مرة أخرى إذا كان رصيدك لا يبدو صحيحاً.",
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
             "cannotMigrateAllYourFunds": "لا يمكننا ترحيل جميع أموالك لأن بعض العناوين منخفضة جدا في القيمة. يمكنك المضي قدما على أي حال. سيتم فقدان {value}.",
             "error": "حدث خطأ أثناء ترحيل الأموال الخاصة بك. الرجاء المحاولة مرة أخرى."
         },

@@ -16,7 +16,7 @@
         "profile": {
             "title": "Een profiel aanmaken",
             "body1": "U kunt meerdere gebruikersprofielen aanmaken om uw portemonnees te organiseren en de privacy te verbeteren.",
-            "body2": "Voor nu, laten we beginnen met uw eerste profielnaam. U kunt later meer profielen toevoegen.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "Profielnaam"
         },
         "setup": {
@@ -114,7 +114,7 @@
             "body": "Uw nieuwe portemonnee is klaar voor gebruik.",
             "softwareMigratedBody": "U heeft uw saldo met succes gemigreerd naar het nieuwe netwerk",
             "fireflyLedgerBody": "Uw Ledger-account is succesvol hersteld en u kunt nu verdergaan.",
-            "trinityLedgerBody": "U heeft uw Ledger met succes gemigreerd naar het nieuwe netwerk. U kunt nu de {legacy} app van uw apparaat verwijderen.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
             "exportMigration": "Exporteer migratielogboek en maak set-up af"
         },
         "import": {
@@ -226,7 +226,7 @@
             "miningBundle": "Mijnen bundel",
             "problemRestoringWallet": "Er was een netwerkfout bij het herstellen van je portemonnee. Probeer het opnieuw.",
             "minimumMigrationAmountSpentAddresses": "De minimum migratie bedrag voor elk uitgegeven adres is 1 Mi. Controleer opnieuw als uw saldo niet goed lijkt.",
-            "tooManyAddressesToMigrate": "U heeft te veel adressen met een laag saldo om te migreren. Controleer opnieuw als uw saldo niet juist lijkt.",
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
             "cannotMigrateAllYourFunds": "We kunnen niet al uw saldi migreren, omdat sommige adressen een te laag bedrag hebben. U kunt toch doorgaan. {value} zal verloren gaan.",
             "error": "Er is een fout opgetreden bij het migreren van uw saldi. Probeer het opnieuw."
         },

@@ -16,7 +16,7 @@
         "profile": {
             "title": "Erstelle ein Profil",
             "body1": "Du kannst mehrere Benutzerprofile erstellen, um deine Wallets zu organisieren und deine Privatsphäre zu verbessern.",
-            "body2": "Lass uns zunächst mit dem Namen für dein erstes Profil starten. Du kannst später noch weitere Profile hinzufügen.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "Profilname"
         },
         "setup": {
@@ -114,7 +114,7 @@
             "body": "Deine neue Wallet ist nun einsatzbereit.",
             "softwareMigratedBody": "Du hast dein Guthaben erfolgreich ins neue Netzwerk übertragen",
             "fireflyLedgerBody": "Dein Ledger-Konto wurde erfolgreich wiederhergestellt und du kannst nun fortfahren.",
-            "trinityLedgerBody": "Du hast deinen Ledger erfolgreich in das neue Netzwerk migriert. Du kannst nun die {legacy} App von deinem Gerät entfernen.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
             "exportMigration": "Migrationsprotokoll exportieren und abschließen"
         },
         "import": {
@@ -226,7 +226,7 @@
             "miningBundle": "Bundle minen",
             "problemRestoringWallet": "Beim Wiederherstellen deiner Wallet ist ein Problem aufgetreten. Bitte versuche es erneut.",
             "minimumMigrationAmountSpentAddresses": "Der minimale Migrationsbetrag für jede wiederverwendete Adresse beträgt 1 Mi. Versuche es erneut, wenn der Betrag nicht richtig ist.",
-            "tooManyAddressesToMigrate": "Du hast zu viele Adressen mit niedrigem Guthaben. Überprüfe erneut, ob dein Guthaben unvollständig ist.",
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
             "cannotMigrateAllYourFunds": "Wir können nicht alle Guthaben migrieren, da einige Adressen zu wenig Guthaben aufweisen. Du kannst trotzdem fortfahren. {value} gehen verloren.",
             "error": "Beim Migrieren der Guthaben ist ein Fehler aufgetreten. Bitte versuche es erneut."
         },
@@ -600,7 +600,7 @@
                 "1": "Stelle sicher, dass du dein Ledger-Gerät mit deiner PIN entsperrt hast",
                 "2": "Öffne die neue IOTA App auf deinem Ledger-Gerät, um fortzufahren",
                 "3": {
-                    "text": "Noch immer kein Glück?",
+                    "text": "Es klappt immer noch nicht?",
                     "link": "Besuche die offizielle Ledger Support-Seite"
                 }
             }

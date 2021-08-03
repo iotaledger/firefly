@@ -16,7 +16,7 @@
         "profile": {
             "title": "Crear un perfil",
             "body1": "Podeu crear diversos perfils d'usuari per gestionar els vostres moneders i millorar la privacitat.",
-            "body2": "De moment, comencem pel vostre primer nom de perfil. Podreu afegir altres perfils més endavant.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "Nom del perfil"
         },
         "setup": {
@@ -226,7 +226,7 @@
             "miningBundle": "Minant el paquet",
             "problemRestoringWallet": "Hi ha hagut un error de xarxa recuperant el vostre moneder. Si us plau, torneu-ho a provar.",
             "minimumMigrationAmountSpentAddresses": "L’import mínim de migració per a cada adreça és d’1 Mi. Torneu a comprovar si el vostre saldo no sembla correcte.",
-            "tooManyAddressesToMigrate": "Hi ha massa adreces amb poc saldo per migrar. Torneu a comprovar si el vostre saldo no sembla correcte.",
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
             "cannotMigrateAllYourFunds": "No podem migrar tots els vostres fons perquè algunes adreces tenen un valor massa baix. Podeu continuar igualment. {value} es perdrà.",
             "error": "S'ha produït un problema durant la migració dels teus fons. Tornau-ho a provar."
         },

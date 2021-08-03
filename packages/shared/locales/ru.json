@@ -16,7 +16,7 @@
         "profile": {
             "title": "Создать профиль",
             "body1": "Вы можете создать несколько профилей, чтобы организовать ваши кошельки и повысить безопасность.",
-            "body2": "Теперь давай начнем с твоего первого профиля. Ты можешь добавить дополнительные профили позже.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "Имя профиля"
         },
         "setup": {
@@ -226,7 +226,7 @@
             "miningBundle": "Майнинг данных",
             "problemRestoringWallet": "There was a network error restoring your wallet. Please try again.",
             "minimumMigrationAmountSpentAddresses": "Минимальная сумма миграции для каждого потраченного адреса составляет 1 мега айота. Проверьте снова, если ваш баланс неправильный.",
-            "tooManyAddressesToMigrate": "У вас слишком много адресов с низким балансом для миграции. Проверьте правильность отображения баланса.",
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
             "cannotMigrateAllYourFunds": "Мы не можем перенести все ваши средства, потому что некоторые адреса слишком низки. Вы все равно можете продолжить. {value} будет потерян.",
             "error": "Произошла ошибка при миграции ваших средств. Пожалуйста, попробуйте еще раз."
         },

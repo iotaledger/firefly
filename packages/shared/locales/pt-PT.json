@@ -16,7 +16,7 @@
         "profile": {
             "title": "Criar um perfil",
             "body1": "Poderá criar vários perfis de utilizadores para manter a sua carteira organizada e melhorar a privacidade.",
-            "body2": "Por agora, vamos começar com o nome do seu primeiro perfil. Pode adicionar mais perfis mais tarde.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "Nome do Perfil"
         },
         "setup": {
@@ -226,7 +226,7 @@
             "miningBundle": "A minerar pacote",
             "problemRestoringWallet": "Ocorreu um problema ao restaurar a sua carteira. Por favor, tente novamente mais tarde.",
             "minimumMigrationAmountSpentAddresses": "O valor mínimo de migração para cada endereço usado é de 1 Mi. Verifique novamente se o seu saldo está correto.",
-            "tooManyAddressesToMigrate": "Tem muitos endereços com saldo baixo para migrar. Verifique novamente se o seu saldo está correto.",
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
             "cannotMigrateAllYourFunds": "Não podemos migrar todos os seus fundos porque alguns endereços possuem valores muito baixos. Pode continuar mesmo assim. {value} será perdido.",
             "error": "Ocorreu um erro ao migrar os seus fundos. Tente novamente."
         },
