@@ -190,6 +190,8 @@
                         }
 
                         if (transaction.bundleHash) {
+                            setMigratingTransaction(transaction, 1)
+
                             return sendMigrationBundle(transaction.bundleHash).then(() => {
                                 migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, transaction.bundleHash]
                             })
@@ -342,6 +344,7 @@
                         }
 
                         if (transaction.bundleHash) {
+                            setMigratingTransaction(transaction, 1)
                             return sendMigrationBundle(transaction.bundleHash).then(() => {
                                 if (!hasBroadcastAnyBundle) {
                                     hasBroadcastAnyBundle = true
