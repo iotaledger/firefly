@@ -4,7 +4,8 @@ import { isValidHttpsUrl, isValidUrl } from './utils'
 const DEFAULT_NETWORK = 'testnet'
 
 const DEFAULT_NODES: Node[] = [
-    'https://api.lb-1.h.ledgermigration1.ledgermigration1.net/'
+    'https://chrysalis-nodes.iota.org',
+    'https://chrysalis-nodes.iota.cafe'
 ].map((url) => ({
     url,
     auth: {
