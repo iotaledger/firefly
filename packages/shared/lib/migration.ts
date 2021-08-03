@@ -28,7 +28,7 @@ export const ADDRESS_SECURITY_LEVEL = 2
 export const MINIMUM_MIGRATION_BALANCE = 1000000
 
 /** Bundle mining timeout for each bundle */
-export const MINING_TIMEOUT_SECONDS = 10
+export const MINING_TIMEOUT_SECONDS = 10 * 60
 
 // TODO: Change back temp mwm (previously 9)
 export const MINIMUM_WEIGHT_MAGNITUDE = 14;
