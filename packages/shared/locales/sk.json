@@ -16,7 +16,7 @@
         "profile": {
             "title": "Vytvoriť profil",
             "body1": "Môžete si vytvoriť viaceré používateľské profily pre organizáciu vašich peňaženiek a zvýšenie súkromia.",
-            "body2": "Nateraz poďme začať s názvom vášho prvého profilu. Ďalšie profily môžete pridať neskôr.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "Názov profilu"
         },
         "setup": {
@@ -114,7 +114,7 @@
             "body": "Vaša nová peňaženka je pripravená na použitie.",
             "softwareMigratedBody": "Úspešne ste premigrovali vaše prostriedky do novej siete",
             "fireflyLedgerBody": "Vaše Ledger konto bolo úspešne obnovené a teraz môžete pokračovať.",
-            "trinityLedgerBody": "Úspešne ste premigrovali váš Ledger do novej siete. Teraz môžete vymazať aplikáciu {legacy} z vášeho zariadenia.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
             "exportMigration": "Exportovať log migrácie a dokončiť nastavenie"
         },
         "import": {
@@ -226,7 +226,7 @@
             "miningBundle": "Ťaženie zväzka",
             "problemRestoringWallet": "Vyskytol sa problém so sieťou pri obnovovaní vašej peňaženky. Skúste to znova.",
             "minimumMigrationAmountSpentAddresses": "Minimálna suma pre každú použitú adresu je 1 Mi. Skontrolujte ešte raz, ak zostatok nevyzera správne.",
-            "tooManyAddressesToMigrate": "Máte príliš veľa adries s malým zostatok na presúvanie. Skontrolujte ešte raz, ak zostatok nevyzera správne.",
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
             "cannotMigrateAllYourFunds": "Nemožeme presunúť všetky vaše prostriedky, pretože niektoré adresy majú nízky zostatok. Ale v každom prípade možete pokračovať. {value} budú stratené.",
             "error": "Vyskytla sa chyba pri presúvani Vašich prostriedkov. Prosím skúste znova."
         },

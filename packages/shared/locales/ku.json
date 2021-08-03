@@ -16,7 +16,7 @@
         "profile": {
             "title": "Profîlekê çêke",
             "body1": "Jibo hûn tokenên xwe cuda bigirîn û ewlehîyê zêde bikîn, dikarîn profîlên bikarhênerên ciyawaz saz bikî.",
-            "body2": "Em sereke bi navê profîla we ya yekem destpê bikin. Paşê hûn dikarin hinek profîl lê zêdebikin.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "Navê Profîlê"
         },
         "setup": {
@@ -226,7 +226,7 @@
             "miningBundle": "Şanenav tê xebitandin",
             "problemRestoringWallet": "Di paşbarkirina cuzdankê de pirsgirêkêk çêbû. Ji kerema xwe venêrîn.",
             "minimumMigrationAmountSpentAddresses": "Jibo navnîşanên hatin sarfkirin kêmahiya veguhastina herî kêm 1 Mi ye. Heke hevsengiya we rast xuya nake, careke din venêrin.",
-            "tooManyAddressesToMigrate": "Hejmara navnîşana weya kêm-hevseng pir zêde ye ku hûn hilgirin. Ger bîlançoya we rast xuya nake, ji kerema xwe careke din venêrin.",
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
             "cannotMigrateAllYourFunds": "Ji ber ku nirxê hin navnîşanan pir kêm e, em nikarin tevahiya bîlançoya we hilgirin. Hûn dikarin danûstendina xwe bi vî rengî jî bidomînin. {value} dê winda bibe.",
             "error": "Di paşbarkirina cuzdankê de pirsgirêkêk çêbû. Ji kerema xwe venêrîn."
         },

@@ -16,7 +16,7 @@
         "profile": {
             "title": "프로필 생성하기",
             "body1": "여러 사용자 프로필을 만들어 지갑을 구성하고 보안성을 높일 수 있습니다.",
-            "body2": "지금은 첫 번째 프로필 이름부터 시작하겠습니다. 나중에 프로필을 더 추가 할 수 있습니다.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "프로필 이름"
         },
         "setup": {
@@ -226,7 +226,7 @@
             "miningBundle": "Mining 번들",
             "problemRestoringWallet": "지갑을 복원하는 중에 문제가 발생했습니다. 다시 시도하십시오.",
             "minimumMigrationAmountSpentAddresses": "각 지출 주소의 최소 마이그레이션 금액은 1Mi입니다. 잔액이 올바르지 않은지 다시 확인하십시오.",
-            "tooManyAddressesToMigrate": "마이그레이션 할 잔액이 적은 주소가 너무 많습니다. 잔액이 올바르지 않은지 다시 확인하십시오.",
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
             "cannotMigrateAllYourFunds": "일부 주소의 가치가 너무 낮아 모든 자금을 마이그레이션 할 수 없습니다. 어쨌든 계속할 수 있습니다. {value} 가 손실됩니다.",
             "error": "자금을 이전하는 중에 오류가 발생했습니다. 다시 시도하십시오."
         },

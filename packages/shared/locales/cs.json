@@ -16,7 +16,7 @@
         "profile": {
             "title": "Vytvořit profil",
             "body1": "Můžete vytvořit více uživatelských profilů pro organizaci vašich peněženek a zlepšení soukromí.",
-            "body2": "Zatím začněme s názvem Vašeho prvního profilu. Další profily můžete přidat později.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "Název profilu"
         },
         "setup": {
@@ -114,7 +114,7 @@
             "body": "Vaše peněženka je připravena k použití.",
             "softwareMigratedBody": "Úspěšně jste převedli své prostředky do nové sítě",
             "fireflyLedgerBody": "Váš účet Ledger byl úspěšně obnoven a nyní můžete pokračovat.",
-            "trinityLedgerBody": "Úspěšně jste přesunuli svou Ledger do nové sítě. Nyní můžete odstranit aplikaci {legacy} z vašeho zařízení.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
             "exportMigration": "Exportovat protokol migrace a dokončit nastavení"
         },
         "import": {
@@ -226,7 +226,7 @@
             "miningBundle": "Těžení balíčku",
             "problemRestoringWallet": "Při obnovování vaší peněženky došlo k chybě sítě. Prosím zkuste to znovu.",
             "minimumMigrationAmountSpentAddresses": "Minimální částka pro migraci na každou adresu je 1 Mi. Zkontrolujte znovu zda zůstatek odpovídá.",
-            "tooManyAddressesToMigrate": "Na migraci máte příliš mnoho adres s nízkým zůstatkem. Zkontrolujte znovu vaše zůstatky.",
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
             "cannotMigrateAllYourFunds": "Nemůžeme migrovat všechny Vaše prostředky, protože některé adresy mají příliš nízký zůstatek. Můžete přesto pokračovat, ale {value} bude ztraceno.",
             "error": "Při migraci vašich prostředků došlo k chybě. Zkuste to prosím znovu."
         },

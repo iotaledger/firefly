@@ -16,7 +16,7 @@
         "profile": {
             "title": "צור פרופיל",
             "body1": "ניתן ליצור פרופילים מרובים כדי לארגן את הארנקים שלך ולשפר פרטיות.",
-            "body2": "בינתיים, נתחיל עם פתיחת הפרופיל הראשון שלך. תוכל ליצור פרופילים נוספים בעתיד.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "שם הפרופיל"
         },
         "setup": {
@@ -226,7 +226,7 @@
             "miningBundle": "כורה חבילה",
             "problemRestoringWallet": "הרעה שגיאת רשת בזמן שחזור הארנק. אנא נסה שוב.",
             "minimumMigrationAmountSpentAddresses": "הסכום המינימלי לביצוע הגירה עבור כתובת אחת הוא 1 Mi. בדוק שוב שהמאזן תקין.",
-            "tooManyAddressesToMigrate": "יש לך יותר מדי כתובות עם מאזן נמוך מדי מכדי ביצוע הגירה. בדוק שוב שהמאזן תקין.",
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
             "cannotMigrateAllYourFunds": "איננו יכולים להגר את כל הכספים שלך בגלל שחלק מהכתובות שלך מכילות ערך נמוך מדי. תוכל להמשיך בכל מקרה. אך {value} יאבדו.",
             "error": "הרעה שגיאה בהגירת הכספים, אנא נסה/י שוב."
         },

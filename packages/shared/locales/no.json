@@ -16,7 +16,7 @@
         "profile": {
             "title": "Opprett profil",
             "body1": "Du kan opprette flere brukerprofiler for å organisere lommebøkene dine og forbedre personvern.",
-            "body2": "La oss begynne med ditt første profilnavn. Du kan legge til flere profiler senere.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "Profilnavn"
         },
         "setup": {
@@ -114,7 +114,7 @@
             "body": "Din nye lommebok er klar til bruk.",
             "softwareMigratedBody": "Migreringen av dine midler til det nye nettverket var vellykket",
             "fireflyLedgerBody": "Din Ledger konto er bekreftet gjenopprettet, og du kan nå fortsette.",
-            "trinityLedgerBody": "Du har nå migrert din Ledger til det nye nettverket. Du kan nå fjerne {legacy} appen fra enheten.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
             "exportMigration": "Eksporter migreringsloggen og fullfør oppsettet"
         },
         "import": {
@@ -226,7 +226,7 @@
             "miningBundle": "Utvinner bundle",
             "problemRestoringWallet": "Det oppsto et tilkoblingsproblem under gjenopprettingen av lommeboken din. Vennligst prøv igjen.",
             "minimumMigrationAmountSpentAddresses": "Minste overføringsbeløp for hver brukte adresse er 1 Mi. Sjekk igjen om din saldo ser riktig ut.",
-            "tooManyAddressesToMigrate": "Du har for mange adresser med lav saldo til å migrere. Sjekk igjen om din saldo ser riktig ut.",
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
             "cannotMigrateAllYourFunds": "Vi kan ikke migrere alle dine midler fordi noen adresser har for lav verdi. Du kan allikevell fortsette. {value} vil gå tapt.",
             "error": "Det oppsto en feil ved migreringen av dine midler. Vennligst prøv igjen."
         },

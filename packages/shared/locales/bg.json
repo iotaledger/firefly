@@ -16,7 +16,7 @@
         "profile": {
             "title": "Създаване на профил",
             "body1": "Можете да имате няколко профила, за да организирате портфейлите си и подобрите поверителността.",
-            "body2": "Нека да започнем с Вашият първи профил. Можете да добавяте още профили по-късно.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "Име на профил"
         },
         "setup": {
@@ -114,7 +114,7 @@
             "body": "Вашият нов портфейл е готов за използване.",
             "softwareMigratedBody": "Успешно мигрирахте средствата си в новата мрежа",
             "fireflyLedgerBody": "Вашият Ledger акаунт е успешно възстановен и можете да продължите.",
-            "trinityLedgerBody": "Успешно мигрирахте Ledger към новата мрежа. Можете да премахнете {legacy} приложението от устройството.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
             "exportMigration": "Експортиране на информация от миграцията и приключване на настройките"
         },
         "import": {
@@ -226,7 +226,7 @@
             "miningBundle": "Създава bundle трансакция",
             "problemRestoringWallet": "Възникна мрежова грешка по време на възстановяване на портфейла. Моля опитайте отново.",
             "minimumMigrationAmountSpentAddresses": "Минималната сума за миграция за всеки преизползвани адрес е 1 Mi. Проверете отново дали сумата е коректна.",
-            "tooManyAddressesToMigrate": "Имате твърде много адреси с малка наличност за миграция. Проверете отново дали сумата е коректна.",
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
             "cannotMigrateAllYourFunds": "Не могат да се мигрират всичките средства, защото някои адреси са с много малка стойност. Може да продължите въпреки това. {value} ще бъдат изгубени.",
             "error": "Възникна грешка при мигриране на средствата. Моля опитайте отново."
         },

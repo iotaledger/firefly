@@ -16,7 +16,7 @@
         "profile": {
             "title": "ایک پروفائل بنائیں",
             "body1": "آپ اپنے والیٹ کو منظم کرنے اور رازداری کو بہتر بنانے کے لئے متعدد صارف پروفائلز تشکیل دے سکتے ہیں.",
-            "body2": "ابھی کے لئے ، آئیے اپنے پہلے پروفائل نام کے ساتھ شروع کریں۔ آپ بعد میں مزید پروفائلز شامل کرسکتے ہیں.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "پروفائل کا نام"
         },
         "setup": {
@@ -226,7 +226,7 @@
             "miningBundle": "بنڈل کو تصدیق شدہ کیا جا رہا ہے",
             "problemRestoringWallet": "آپ کے والیٹ کو بحال کرنے میں نیٹورک کا مسئلہ تھا۔ براہ کرم دوبارہ کوشش کریں.",
             "minimumMigrationAmountSpentAddresses": "ہر خرچ شدہ ایڈریس کے لئے منتقلی کی کم سے کم رقم ۱Mi ہے۔ اگر آپ کا بیلینس ٹھیک نہیں لگتا ہے تو دوبارہ جانچ کریں.",
-            "tooManyAddressesToMigrate": "آپ کے پاس منتقلی کے لیئے کم بیلنس والے ایڈریس بہت زیادہ ہیں۔ اگر آپ کا بیلینس ٹھیک نہیں لگتا ہے تو دوبارہ جانچ کریں.",
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
             "cannotMigrateAllYourFunds": "ہم آپ کے تمام فنڈز کو منتقل نہیں کرسکتے ہیں کیونکہ کچھ ایڈریس کی قیمت بہت کم ہے۔ آپ بہرحال آگے بڑھ سکتے ہیں۔ {value} کھو دیا جائے گا.",
             "error": "آپ کے فنڈز کو منتقل کرنے میں ایک مسئلہ تھا۔ براہ کرم دوبارہ کوشش کریں."
         },

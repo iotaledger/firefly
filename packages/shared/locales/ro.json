@@ -16,7 +16,7 @@
         "profile": {
             "title": "Crează un profil",
             "body1": "Poți crea mai multe profiluri de utilizator pentru a îți organiza portofelele și pentru a îmbunătăți confidențialitatea.",
-            "body2": "Pentru moment, să începem cu primul tău nume de profil. Poți adăuga mai multe profiluri mai târziu.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "Nume Profil"
         },
         "setup": {
@@ -31,15 +31,15 @@
             "body2": "Dacă completați Kit-ul de recuperare și îl stocați în siguranță, veți putea întotdeauna să recuperați portofelele."
         },
         "create": {
-            "title": "Create a wallet",
-            "body": "Create a new wallet. You can choose a regular software wallet or if you have a Ledger device you can set up a hardware wallet.",
+            "title": "Creează un portofel",
+            "body": "Creează un portofel nou. Poți alege un portofel software normal sau dacă ai un dispozitiv Ledger, poți seta un portofel hardware.",
             "softwareAccount": {
-                "title": "I want a software wallet",
-                "description": "Create a 24-word Recovery Phrase"
+                "title": "Vreau un portofel software",
+                "description": "Creează o frază de recuperare de 24 de cuvinte"
             },
             "ledgerAccount": {
-                "title": "I want a hardware wallet",
-                "description": "Ledger Nano S or Nano X required"
+                "title": "Vreau un portofel hardware",
+                "description": "Este necesar un Ledger Nano S sau Nano X"
             }
         },
         "setupLedger": {
@@ -226,7 +226,7 @@
             "miningBundle": "Semnare pachet",
             "problemRestoringWallet": "A apărut o eroare de rețea la restaurarea portofelului. Vă rugăm să încercați din nou.",
             "minimumMigrationAmountSpentAddresses": "Suma minimă de migrare pentru fiecare adresă cheltuită este de 1 Mi. Verifică din nou dacă soldul tău nu arată corect.",
-            "tooManyAddressesToMigrate": "Ai prea multe adrese cu sold mic pentru a migra. Verifică din nou dacă soldul tău nu arată corect.",
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
             "cannotMigrateAllYourFunds": "Nu putem migra toate fondurile pentru că unele adrese au o valoare prea mică. Poți continua oricum. {value} va fi pierdut.",
             "error": "A apărut o eroare la migrarea fondurilor tale. Te rugăm să încerci din nou."
         },

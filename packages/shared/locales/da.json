@@ -16,7 +16,7 @@
         "profile": {
             "title": "Opret en profil",
             "body1": "Du kan oprette flere brugerprofiler for at organisere dine wallets og øge din fortrolighed.",
-            "body2": "For nu, lad os starte med dit profilnavn. Du kan tilføje flere profiler senere.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "Profilnavn"
         },
         "setup": {
@@ -226,7 +226,7 @@
             "miningBundle": "Miner pakke",
             "problemRestoringWallet": "Der opstod en netværksfejl under gendannelse af din wallet. Prøv igen.",
             "minimumMigrationAmountSpentAddresses": "Det mindste migrationsbeløb for hver brugt adresse er 1 Mi. Tjek igen, hvis din saldo ikke ser rigtig ud.",
-            "tooManyAddressesToMigrate": "Du har for mange adresser med lav saldo til at migrere. Tjek igen, hvis din saldo ikke ser rigtigt ud.",
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
             "cannotMigrateAllYourFunds": "Vi kan ikke migrere alle dine midler, fordi nogle adresser har for lav værdi. Du kan fortsætte alligevel. {value} vil gå tabt.",
             "error": "Der opstod en fejl under migrering af dine midler. Prøv igen."
         },

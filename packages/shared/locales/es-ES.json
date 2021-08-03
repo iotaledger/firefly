@@ -16,7 +16,7 @@
         "profile": {
             "title": "Crear un perfil",
             "body1": "Puedes crear múltiples perfiles de usuario para organizar tus carteras y mejorar la privacidad.",
-            "body2": "Por ahora, empieza nombrando tu primer perfil de usuario. Puedes añadir más perfiles luego.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "Nombre del Perfil"
         },
         "setup": {
@@ -114,7 +114,7 @@
             "body": "Tu nueva cartera está lista para usar.",
             "softwareMigratedBody": "Tus fondos han sido migrados con éxito a la nueva red",
             "fireflyLedgerBody": "Tu cuenta de Ledger se ha recuperado con éxito y ahora puedes continuar.",
-            "trinityLedgerBody": "Has migrado correctamente tu Ledger a la nueva red. Ya puedes eliminar la app {legacy} de tu dispositivo.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
             "exportMigration": "Exportar registro de migración y finalizar la configuración"
         },
         "import": {
@@ -122,9 +122,9 @@
             "body": "Si tienes una semilla o un archivo de copia de seguridad de cartera existentes, puedes importarlos aquí. Si mantienes fondos en una red más antigua, se te llevará a una serie de pasos para la migración a la red Chrysalis.",
             "importSeed": "Tengo una semilla de 81 caracteres",
             "importSeedDescription": "Introducir una semilla y migrar fondos a Chrysalis",
-            "importMnemonic": "Tengo una frase de recuperación Firefly",
+            "importMnemonic": "Tengo una frase de recuperación de Firefly",
             "importMnemonicDescription": "Introduce tu frase de recuperación para recuperar tus carteras",
-            "importFile": "Tengo una copia de seguridad en archivo",
+            "importFile": "Tengo una copia de seguridad",
             "importFileDescription": "Subir un archivo Seedvault o Stronghold",
             "importLedger": "Tengo una copia de seguridad del Ledger",
             "importLedgerDescription": "Restaurar o migrar un perfil Ledger"
@@ -226,7 +226,7 @@
             "miningBundle": "Minando paquete",
             "problemRestoringWallet": "Se ha producido un error de red restaurando tu cartera. Por favor inténtalo de nuevo.",
             "minimumMigrationAmountSpentAddresses": "La cantidad mínima de migración para cada dirección gastada es 1 Mi. Comprueba de nuevo si tu balance no parece ser el correcto.",
-            "tooManyAddressesToMigrate": "Tienes demasiadas direcciones con balance bajo para migrar. Comprueba de nuevo si tu balance no parece ser el correcto.",
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
             "cannotMigrateAllYourFunds": "No podemos migrar todos tus fondos porque algunas direcciones tienen un valor demasiado bajo. Puedes continuar de todos modos. Se perderán {value}.",
             "error": "Hubo un error al migrar tus fondos. Por favor, inténtalo de nuevo."
         },
@@ -596,7 +596,7 @@
         "ledgerConnectionGuide": {
             "title": "Sugerencias si tu Ledger no se conecta",
             "steps": {
-                "0": "Asegúrate de que Ledger Live no esté abierto en tu computadora",
+                "0": "Asegúrate de que Ledger Live no esté abierto en tu ordenador",
                 "1": "Asegúrese de que ha desbloqueado su dispositivo Ledger con su PIN",
                 "2": "Abra la nueva aplicación IOTA en tu dispositivo Ledger",
                 "3": {
@@ -922,7 +922,7 @@
         "send": {
             "addressLength": "Las direcciones deben tener {length, plural, one {1 carácter} other {# caracteres}} de largo.",
             "amountTooHigh": "Esto es superior a tu saldo disponible.",
-            "amountNoFloat": "Si las unidades son `i` no puedes usar lugares decimales.",
+            "amountNoFloat": "Si las unidades son `i` no puedes usar decimales.",
             "amountInvalidFormat": "La cantidad parece ser un número no válido.",
             "amountZero": "La cantidad debe ser mayor que 0.",
             "wrongAddressPrefix": "Las direcciones comienzan con el prefijo {prefix}.",

@@ -16,7 +16,7 @@
         "profile": {
             "title": "प्रोफ़ाइल बनाएँ",
             "body1": "आप अपने वॉलेट को व्यवस्थित करने और गोपनीयता में सुधार करने के लिए कई उपयोगकर्ता प्रोफ़ाइल बना सकते हैं",
-            "body2": "अभी के लिए, पहले प्रोफ़ाइल नाम से शुरू करते हैं। आप बाद में और प्रोफाइल जोड़ सकते हैं",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "प्रोफ़ाइल नाम"
         },
         "setup": {
@@ -226,7 +226,7 @@
             "miningBundle": "माइनिंग बंडल",
             "problemRestoringWallet": "आपके बटुए को पुनर्स्थापित करने में एक नेटवर्क त्रुटि थी। कृपया पुन: प्रयास करें।",
             "minimumMigrationAmountSpentAddresses": "प्रत्येक खर्च किए गए पते की न्यूनतम प्रवास राशि 1 Mi है। यदि आपका बैलेंस सही नहीं दिखता है तो फिर से जांचें।",
-            "tooManyAddressesToMigrate": "आपके पास माइग्रेट करने के लिए कम बैलेंस वाले कई पते हैं। यदि आपका बैलेंस सही नहीं दिखता है तो फिर से जांचें।",
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
             "cannotMigrateAllYourFunds": "हम आपके सभी फंडों को स्थानांतरित नहीं कर सकते हैं क्योंकि कुछ पते मूल्य में बहुत कम हैं। आप वैसे भी आगे बढ़ सकते हैं। {value} खो जाएगा।",
             "error": "आपके फंड्स को माइग्रेट करने में समस्या थी। कृपया पुन: प्रयास करें"
         },

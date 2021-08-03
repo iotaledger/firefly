@@ -16,7 +16,7 @@
         "profile": {
             "title": "Izveido profilu",
             "body1": "Jūs varat izveidot vairākus lietotāja profilus, lai pārvaldītu savus makus un uzlabotu privātumu.",
-            "body2": "Sāksim ar Jūsu profila nosaukumu. Jūs varat pievienot citus profilus velāk.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "Profila nosaukums"
         },
         "setup": {

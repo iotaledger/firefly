@@ -16,7 +16,7 @@
         "profile": {
             "title": "Tạo một hồ sơ",
             "body1": "Bạn có thể tạo nhiều hồ sơ người dùng để giữ các mã token của bạn riêng biệt và cải thiện quyền riêng tư.",
-            "body2": "Bây giờ, hãy bắt đầu với tên hồ sơ đầu tiên của bạn. Bạn có thể thêm nhiều hồ sơ sau này.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "Tên hồ sơ"
         },
         "setup": {

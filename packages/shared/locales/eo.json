@@ -16,7 +16,7 @@
         "profile": {
             "title": "Krei profilon",
             "body1": "Vi povas krei kelkajn uzantoprofilojn por organizi viajn monujojn kaj plibonigi la privatecon.",
-            "body2": "Por nun, komencu per la nomo de via unua profilo. Vi povas aldoni aliajn profilojn poste.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "Profilnomo"
         },
         "setup": {
@@ -226,7 +226,7 @@
             "miningBundle": "Mining bundle",
             "problemRestoringWallet": "Okazis reta eraro dum restaŭri vian monujon. Bonvole provu denove.",
             "minimumMigrationAmountSpentAddresses": "The minimum migration amount for each spent address is 1 Mi. Check again if your balance doesn't look right.",
-            "tooManyAddressesToMigrate": "Vi havas tro da adresoj kun malalta bonhavo por migrigi. Kontrolu ree ĉu via bonhavo aspektas ĝuste.",
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
             "cannotMigrateAllYourFunds": "Ni ne povas migrigi la tutan vian fonduson ĉar kelkaj adresoj havas tro malaltan valoron. Vi povas daŭrigi kiel ajn. {value} perdiĝos.",
             "error": "Estis eraro dum migrigi vian fonduson. Bonvole provu denove."
         },

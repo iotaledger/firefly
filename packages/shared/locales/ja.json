@@ -16,7 +16,7 @@
         "profile": {
             "title": "プロファイルを作成",
             "body1": "複数のユーザープロファイルを作成してトークンを分離し、プライバシーを向上させることができます。",
-            "body2": "まずは、最初のプロファイルから始めましょう。あとから、さらにプロファイルを追加できます。",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "プロファイル名"
         },
         "setup": {
@@ -226,7 +226,7 @@
             "miningBundle": "マイニングバンドル",
             "problemRestoringWallet": "ウォレットの復元中にネットワークエラーが発生しました。もう一度やり直してください。",
             "minimumMigrationAmountSpentAddresses": "送金先アドレスごとの最小移行額は1Miです。残高が正しくない場合は再度確認してください。",
-            "tooManyAddressesToMigrate": "残高が少ないアドレスが多すぎます。残高が正しくない場合は、もう一度確認してください。",
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
             "cannotMigrateAllYourFunds": "いくつかのアドレスの価値が低すぎるため、すべての資金を移行することはできません。続行できますが、 {value} は失われます。",
             "error": "資金の移行中にエラーが発生しました。もう一度やり直してください。"
         },
