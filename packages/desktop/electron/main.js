@@ -90,8 +90,7 @@ const defaultWebPreferences = {
     disableBlinkFeatures: 'Auxclick',
     webviewTag: false,
     enableWebSQL: false,
-    // TODO: Remove before Ledger release
-    devTools: true,
+    devTools: !app.isPackaged,
 }
 
 if (app.isPackaged) {
