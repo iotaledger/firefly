@@ -1,7 +1,7 @@
 import type { Node } from './typings/node'
 import { isValidHttpsUrl, isValidUrl } from './utils'
 
-const DEFAULT_NETWORK = 'testnet'
+const DEFAULT_NETWORK = 'chrysalis-mainnet'
 
 const DEFAULT_NODES: Node[] = [
     'https://chrysalis-nodes.iota.org',
