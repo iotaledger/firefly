@@ -153,9 +153,9 @@ export function displayNotificationForLedgerProfile(
     if (checkDeviceStatus) {
         getLedgerDeviceStatus(
             false,
-            () => { },
-            () => _notify(),
-            () => _notify()
+            _notify,
+            _notify,
+            _notify
         )
     } else {
         _notify()
