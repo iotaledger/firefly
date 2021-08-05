@@ -49,7 +49,7 @@
                         console.error(err?.error || err)
 
                         if($isLedgerProfile) {
-                            displayNotificationForLedgerProfile('error', true, true, false, false, err)
+                            displayNotificationForLedgerProfile('error', true, false, false, false, err)
                         } else {
                             showAppNotification({
                                 type: 'error',
