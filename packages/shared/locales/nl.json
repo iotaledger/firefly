@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "Een profiel aanmaken",
+            "profileName": "Profielnaam",
             "body1": "U kunt meerdere gebruikersprofielen aanmaken om uw portemonnees te organiseren en de privacy te verbeteren.",
-            "body2": "Voor nu, laten we beginnen met uw eerste profielnaam. U kunt later meer profielen toevoegen.",
-            "profileName": "Profielnaam"
+            "body2": {
+                "first": "Om te beginnen, laten we starten met de naam van je eerste profiel.",
+                "nonFirst": "Om te beginnen, laten we starten met de naam van je profiel."
+            },
+            "addMore": "Je kunt later meer profielen toevoegen."
         },
         "setup": {
             "title": "Stel een portemonnee in",
@@ -47,7 +51,8 @@
             "progress2": "Genereer een adres",
             "progress3": "Wissel Ledger app",
             "progress4": "Bedrag versturen",
-            "watchVideo": "Bekijk de instructievideo"
+            "watchVideo": "Bekijk de instructievideo",
+            "videoGuide": "Ledger migratie instructie video"
         },
         "ledgerInstallationGuide": {
             "title": "Heeft u de benodigde Ledger apps geïnstalleerd?",
@@ -114,7 +119,7 @@
             "body": "Uw nieuwe portemonnee is klaar voor gebruik.",
             "softwareMigratedBody": "U heeft uw saldo met succes gemigreerd naar het nieuwe netwerk",
             "fireflyLedgerBody": "Uw Ledger-account is succesvol hersteld en u kunt nu verdergaan.",
-            "trinityLedgerBody": "U heeft uw Ledger met succes gemigreerd naar het nieuwe netwerk. U kunt nu de {legacy} app van uw apparaat verwijderen.",
+            "trinityLedgerBody": "U heeft uw saldo met succes gemigreerd naar het nieuwe netwerk.",
             "exportMigration": "Exporteer migratielogboek en maak set-up af"
         },
         "import": {
@@ -194,6 +199,7 @@
             "accountPage": "Account pagina",
             "standard": "Standaard",
             "expert": "Expert",
+            "takingAWhile": "Dit kan even duren...",
             "notGeneratingAddresses": "Genereert uw Ledger adressen?",
             "reinstallLegacy": "Zo niet, verbreek dan de verbinding met het apparaat en probeer het opnieuw. Als het probleem zich blijft voordoen, moet u wellicht de app {legacy} opnieuw installeren."
         },
@@ -970,6 +976,9 @@
         },
         "popup": {
             "preventClose": "Deze pop-up kan niet worden gesloten."
+        },
+        "migration": {
+            "missingBundle": "Er is een fout opgetreden tijdens het zoeken van de transactiebundel."
         }
     },
     "tooltips": {

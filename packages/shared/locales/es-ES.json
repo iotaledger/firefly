@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "Crear un perfil",
+            "profileName": "Nombre del Perfil",
             "body1": "Puedes crear múltiples perfiles de usuario para organizar tus carteras y mejorar la privacidad.",
-            "body2": "Por ahora, empecemos con tu primer nombre de perfil. Después podrás añadir más perfiles.",
-            "profileName": "Nombre del Perfil"
+            "body2": {
+                "first": "Por ahora, empecemos con el nombre de tu primer perfil.",
+                "nonFirst": "Por ahora, empecemos con el nombre de tu primer perfil."
+            },
+            "addMore": "Puedes añadir más perfiles después."
         },
         "setup": {
             "title": "Despliega una cartera",
@@ -47,7 +51,8 @@
             "progress2": "Generar dirección",
             "progress3": "Cambiar aplicación Ledger",
             "progress4": "Transferir fondos",
-            "watchVideo": "Ver guía en vídeo"
+            "watchVideo": "Ver guía en vídeo",
+            "videoGuide": "Video guía de la migración de Ledger"
         },
         "ledgerInstallationGuide": {
             "title": "¿Ha instalado las aplicaciones Ledger necesarias?",
@@ -114,7 +119,7 @@
             "body": "Tu nueva cartera está lista para usar.",
             "softwareMigratedBody": "Tus fondos han sido migrados con éxito a la nueva red",
             "fireflyLedgerBody": "Tu cuenta de Ledger se ha recuperado con éxito y ahora puedes continuar.",
-            "trinityLedgerBody": "Has migrado con éxito tu Ledger a la nueva red. Ya puedes eliminar la aplicación {legacy} de tu dispositivo.",
+            "trinityLedgerBody": "Has migrado con éxito tu Ledger a la nueva red.",
             "exportMigration": "Exportar registro de migración y finalizar la configuración"
         },
         "import": {
@@ -194,6 +199,7 @@
             "accountPage": "Página de Cuenta",
             "standard": "Estándar",
             "expert": "Experto",
+            "takingAWhile": "Esto está tardando un poco...",
             "notGeneratingAddresses": "¿Está tu Ledger generando direcciones?",
             "reinstallLegacy": "Si no es así, desconecte el dispositivo y vuelva a intentarlo. Si el problema persiste, puede que necesite reinstalar la aplicación {legacy}."
         },
@@ -226,7 +232,7 @@
             "miningBundle": "Minando paquete",
             "problemRestoringWallet": "Se ha producido un error de red restaurando tu cartera. Por favor inténtalo de nuevo.",
             "minimumMigrationAmountSpentAddresses": "La cantidad mínima de migración para cada dirección gastada es 1 Mi. Comprueba de nuevo si tu balance no parece ser el correcto.",
-            "tooManyAddressesToMigrate": "Tienes demasiadas direcciones con balance bajo para migrar. Comprueba de nuevo si tu balance no parece ser el correcto.",
+            "tooManyAddressesToMigrate": "Tienes demasiadas direcciones con balance bajo para poder migrar. Comprueba de nuevo si tu balance no parece ser el correcto.",
             "cannotMigrateAllYourFunds": "No podemos migrar todos tus fondos porque algunas direcciones tienen un valor demasiado bajo. Puedes continuar de todos modos. Se perderán {value}.",
             "error": "Hubo un error al migrar tus fondos. Por favor, inténtalo de nuevo."
         },
@@ -970,6 +976,9 @@
         },
         "popup": {
             "preventClose": "Esta ventana emergente no es capaz de cerrarse."
+        },
+        "migration": {
+            "missingBundle": "Ha ocurrido un error buscando el paquete de la transacción."
         }
     },
     "tooltips": {

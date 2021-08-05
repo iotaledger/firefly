@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "Luo profiili",
+            "profileName": "Profiilin nimi",
             "body1": "Voit luoda useita käyttäjäprofiileja lompakkojesi järjestämiseksi ja yksityisyyden parantamiseksi.",
-            "body2": "Aloitetaan ensimmäisen profiilisi nimellä. Voit luoda lisää profiileja myöhemmin.",
-            "profileName": "Profiilin nimi"
+            "body2": {
+                "first": "Aloitetaan nyt ensimmäisen profiilisi nimellä.",
+                "nonFirst": "Aloitetaan nyt profiilisi nimellä."
+            },
+            "addMore": "Voit tehdä lisää profiileja myöhemmin."
         },
         "setup": {
             "title": "Määritä lompakko",
@@ -47,7 +51,8 @@
             "progress2": "Luo osoite",
             "progress3": "Vaihda Ledger-sovellusta",
             "progress4": "Siirrä varoja",
-            "watchVideo": "Katso video-opas"
+            "watchVideo": "Katso video-opas",
+            "videoGuide": "Ledger-migraation opasvideo"
         },
         "ledgerInstallationGuide": {
             "title": "Oletko asentanut tarvittavat Ledger-sovellukset?",
@@ -114,7 +119,7 @@
             "body": "Uusi lompakkosi on käyttövalmis.",
             "softwareMigratedBody": "Olet onnistuneesti siirtänyt varasi uuteen verkkoon",
             "fireflyLedgerBody": "Ledger-tilisi on onnistuneesti palautettu ja voit nyt jatkaa.",
-            "trinityLedgerBody": "Olet onnistuneesti siirtänyt Ledger-laitteesi uuteen verkkoon. Voit nyt poistaa {legacy} -sovelluksen laitteestasi.",
+            "trinityLedgerBody": "Olet onnistuneesti siirtänyt Ledger-laitteesi uuteen verkkoon.",
             "exportMigration": "Vie migraatioloki ja viimeistele määritys"
         },
         "import": {
@@ -194,6 +199,7 @@
             "accountPage": "Tilin sivu",
             "standard": "Standardi",
             "expert": "Edistynyt",
+            "takingAWhile": "Tämä kestää hetken...",
             "notGeneratingAddresses": "Luoko Ledger-laitteesi osoitteita?",
             "reinstallLegacy": "Jos ei, katkaise yhteys laitteeseen ja yritä uudelleen. Jos ongelma jatkuu, saatat joutua asentamaan {legacy} -sovelluksen uudelleen."
         },
@@ -226,7 +232,7 @@
             "miningBundle": "Louhitaan bundlea",
             "problemRestoringWallet": "Lompakkosi palauttamisessa tapahtui verkkovirhe. Ole hyvä ja yritä uudelleen.",
             "minimumMigrationAmountSpentAddresses": "Vähimmäissaldo migraatiossa jokaiselle käytetylle osoitteelle on 1 Mi. Tarkista uudelleen, jos saldosi ei näytä olevan oikein.",
-            "tooManyAddressesToMigrate": "Sinulla on liian monta osoitetta alhaisella saldolla migraatiota varten. Tarkista uudelleen, jos saldosi ei näytä olevan oikein.",
+            "tooManyAddressesToMigrate": "Sinulla on liian monta osoitetta alhaisella saldolla migraatiota varten. Tarkista uudelleen, jos kokonaissaldosi ei näytä olevan oikein.",
             "cannotMigrateAllYourFunds": "Emme voi siirtää kaikkia varojasi, koska joissain osoitteissa on liian alhainen saldo. Voit jatkaa joka tapauksessa. {value} menetetään.",
             "error": "Varojesi siirtämisessä tapahtui virhe. Ole hyvä ja yritä uudelleen."
         },
@@ -970,6 +976,9 @@
         },
         "popup": {
             "preventClose": "Tätä ponnahdusikkunaa ei voi sulkea."
+        },
+        "migration": {
+            "missingBundle": "Transaktiobundlen etsinnän aikana tapahtui virhe."
         }
     },
     "tooltips": {

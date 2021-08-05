@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "Створити профіль",
+            "profileName": "Ім'я профілю",
             "body1": "Ви можете створити декілька профілів користувачів для організації ваших гаманців та покращення конфіденційності.",
-            "body2": "Наразі давайте почнемо з імені вашого профілю. Ви можете додати більше профілів пізніше.",
-            "profileName": "Ім'я профілю"
+            "body2": {
+                "first": "For now, let's start with your first profile name.",
+                "nonFirst": "For now, let's start with your profile name."
+            },
+            "addMore": "You can add more profiles later."
         },
         "setup": {
             "title": "Налаштування гаманця",
@@ -47,7 +51,8 @@
             "progress2": "Створити адресу",
             "progress3": "Додаток Switch Ledger",
             "progress4": "Переказ коштів",
-            "watchVideo": "Переглянути відеопосібник"
+            "watchVideo": "Переглянути відеопосібник",
+            "videoGuide": "Ledger migration video guide"
         },
         "ledgerInstallationGuide": {
             "title": "Ви встановили необхідні програми Ledger?",
@@ -114,7 +119,7 @@
             "body": "Вітаємо! Ваш новий гаманець готовий до використання.",
             "softwareMigratedBody": "Ви успішно перенесли свої кошти в нову мережу",
             "fireflyLedgerBody": "Ваш обліковий запис Ledger успішно відновлено, і тепер ви можете продовжити.",
-            "trinityLedgerBody": "Ви успішно перенесли ваш Ledger у нову мережу. Тепер ви можете видалити додаток {legacy} з вашого пристрою.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
             "exportMigration": "Експортуйте журнал міграції та завершіть налаштування"
         },
         "import": {
@@ -194,6 +199,7 @@
             "accountPage": "Сторінка облікового запису",
             "standard": "Стандартний",
             "expert": "Експерт",
+            "takingAWhile": "This is taking a while...",
             "notGeneratingAddresses": "Ваш Ledger генерує адреси?",
             "reinstallLegacy": "Якщо ні, від'єднайте пристрій і повторіть спробу. Якщо проблема не зникне, можливо, вам доведеться перевстановити додаток {legacy}."
         },
@@ -226,7 +232,7 @@
             "miningBundle": "Майнінг даних",
             "problemRestoringWallet": "Під час відновлення гаманця сталася помилка мережі. Будь ласка спробуйте ще раз.",
             "minimumMigrationAmountSpentAddresses": "Мінімальна сума міграції для кожного витраченої адреси становить 1 Mi. Перевірте знову, якщо ваш баланс неправильний.",
-            "tooManyAddressesToMigrate": "У вас занадто багато адрес з низьким балансом для перенесення. Перевірте ще раз, чи баланс не виглядає належним чином.",
+            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
             "cannotMigrateAllYourFunds": "Ми не можемо перенести всі ваші кошти, тому що деякі адреси занадто низькі. Ви все одно можете продовжити. {value} буде втрачено.",
             "error": "Помилка під час міграції ваших коштів. Будь ласка, спробуйте ще раз."
         },
@@ -970,6 +976,9 @@
         },
         "popup": {
             "preventClose": "Це спливаюче вікно неможливо закрити."
+        },
+        "migration": {
+            "missingBundle": "An error occurred while trying to find the transaction bundle."
         }
     },
     "tooltips": {

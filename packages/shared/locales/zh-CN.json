@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "新建配置文件",
+            "profileName": "配置名称",
             "body1": "您可创建多个用户配置文件来分别存储您的Token以确保安全。",
-            "body2": "现在，让我们开始创建你的第一个配置文件。以后您可以添加更多的配置文件。",
-            "profileName": "配置名称"
+            "body2": {
+                "first": "现在，让我们从您的第一个配置文件的名称开始。",
+                "nonFirst": "现在，让我们从您的配置名称开始。"
+            },
+            "addMore": "您可以稍后添加更多配置文件。"
         },
         "setup": {
             "title": "设置钱包",
@@ -47,7 +51,8 @@
             "progress2": "生成地址",
             "progress3": "切换Ledger应用",
             "progress4": "划拨资金",
-            "watchVideo": "观看视频指南"
+            "watchVideo": "观看视频指南",
+            "videoGuide": "Ledger 迁移视频指南"
         },
         "ledgerInstallationGuide": {
             "title": "您是否安装了必要的Ledger应用？",
@@ -114,7 +119,7 @@
             "body": "您的新钱包已准备使用。",
             "softwareMigratedBody": "您已成功地将您的资金迁移到新的网络",
             "fireflyLedgerBody": "您的Ledger 账号已成功恢复，您现在可以继续。",
-            "trinityLedgerBody": "您已成功地将您的Ledger迁移到新网络。您现在可以从您的设备中移除 {legacy} 应用程序。",
+            "trinityLedgerBody": "您已成功地从Ledger 迁移到新的网络。",
             "exportMigration": "导出迁移日志并完成设置"
         },
         "import": {
@@ -194,6 +199,7 @@
             "accountPage": "账户页面",
             "standard": "标准模式",
             "expert": "专家模式",
+            "takingAWhile": "这需要一段时间...",
             "notGeneratingAddresses": "您的Ledger设备是否生成新的地址？",
             "reinstallLegacy": "若未生新地址，请断开设备并重试。如果问题仍然存在，您可能需要重新安装 {legacy} 应用程序。"
         },
@@ -226,7 +232,7 @@
             "miningBundle": "签名包",
             "problemRestoringWallet": "恢复钱包出现网络异常，请重试。",
             "minimumMigrationAmountSpentAddresses": "每个已花费地址的最小迁移金额为1Mi，请再次检查你的余额是否符合。",
-            "tooManyAddressesToMigrate": "你有太多的小额地址需要迁移，请再次检查您的账户余额看起来是否正确。",
+            "tooManyAddressesToMigrate": "您有太多的小额地址需要迁移，请再次检查您的账户余额是否正确。",
             "cannotMigrateAllYourFunds": "我们不能迁移您的所有资金，因为某些地址的价值太低。您仍然可以继续，但是 {value} 将会丢失。",
             "error": "资金迁移出现错误，请重试。"
         },
@@ -970,6 +976,9 @@
         },
         "popup": {
             "preventClose": "此弹出窗口无法关闭。"
+        },
+        "migration": {
+            "missingBundle": "试图查找交易包信息时发生错误"
         }
     },
     "tooltips": {
