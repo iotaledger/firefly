@@ -16,7 +16,9 @@
 
     const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
 
-    $: navAccounts = $account ? $viewableAccounts.map(({ id, alias, color }) => ({ id, alias, color, active: $account.id === id })) : []
+    $: navAccounts = $account
+        ? $viewableAccounts.map(({ id, alias, color }) => ({ id, alias, color, active: $account.id === id }))
+        : []
 
     let showActionsModal = false
 

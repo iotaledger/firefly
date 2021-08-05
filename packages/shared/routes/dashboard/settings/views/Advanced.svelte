@@ -3,9 +3,10 @@
     import { clickOutside } from 'shared/lib/actions'
     import { loggedIn } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
+    import { navigateToNewIndexMigration } from 'shared/lib/ledger'
     import { getOfficialNodes } from 'shared/lib/network'
     import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, updateProfile } from 'shared/lib/profile'
+    import { activeProfile, isLedgerProfile, updateProfile } from 'shared/lib/profile'
     import { buildAccountNetworkSettings, updateAccountNetworkSettings } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
 
@@ -271,6 +272,16 @@
             {locale('views.settings.diagnostics.title')}
         </Button>
     </section>
+    {#if $isLedgerProfile}
+        <HR classes="pb-5 mt-5 justify-center" />
+        <section id="migrateLedgerIndex" class="w-3/4">
+            <Text type="h4" classes="mb-3">{locale('views.settings.migrateLedgerIndex.title')}</Text>
+            <Text type="p" secondary classes="mb-5">{locale('views.settings.migrateLedgerIndex.description')}</Text>
+            <Button medium inlineStyle="min-width: 156px;" onClick={() => navigateToNewIndexMigration()}>
+                {locale('views.settings.migrateLedgerIndex.title')}
+            </Button>
+        </section>
+    {/if}
     <!-- TODO: Implement state export -->
     <!-- {#if $loggedIn}
     <HR classes="pb-5 mt-5 justify-center" />

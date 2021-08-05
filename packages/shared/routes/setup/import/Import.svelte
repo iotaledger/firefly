@@ -5,6 +5,9 @@
         File = 'file',
         SeedVault = 'seedvault',
         Stronghold = 'stronghold',
+        Ledger = 'ledger',
+        TrinityLedger = 'trinityLedger',
+        FireflyLedger = 'fireflyLedger',
     }
 </script>
 
@@ -18,7 +21,7 @@
     import { asyncRestoreBackup } from 'shared/lib/wallet'
     import { createEventDispatcher, setContext } from 'svelte'
     import { get, Writable, writable } from 'svelte/store'
-    import { BackupPassword, FileImport, Import, Success, TextImport } from './views/'
+    import { BackupPassword, FileImport, Import, Ledger, Success, TextImport } from './views/'
 
     export let locale
     export let mobile
@@ -29,6 +32,7 @@
         Init = 'init',
         TextImport = 'textImport',
         FileImport = 'fileImport',
+        LedgerImport = 'ledgerImport',
         BackupPassword = 'backupPassword',
         Success = 'Success',
     }
@@ -40,6 +44,8 @@
 
     let importFile
     let importFilePath
+    let balance
+
     let busy = false
 
     let error = ''
@@ -58,6 +64,8 @@
                     nextState = ImportState.TextImport
                 } else if (type === ImportType.File) {
                     nextState = ImportState.FileImport
+                } else if (type === ImportType.Ledger) {
+                    nextState = ImportState.LedgerImport
                 }
                 break
             case ImportState.TextImport:
@@ -97,7 +105,6 @@
                 }
                 nextState = ImportState.BackupPassword
                 break
-
             case ImportState.BackupPassword:
                 const { password } = params
                 busy = true
@@ -138,7 +145,11 @@
                     isGettingMigrationData = false
                 }
                 break
-
+            case ImportState.LedgerImport:
+                const { impType } = params
+                importType.set(impType)
+                dispatch('next', { importType: impType })
+                break
             case ImportState.Success:
                 dispatch('next', { importType: get(importType) })
                 break
@@ -171,17 +182,13 @@
     <Transition>
         <FileImport on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
+{:else if state === ImportState.LedgerImport}
+    <Transition>
+        <Ledger on:next={_next} on:previous={_previous} {locale} {mobile} />
+    </Transition>
 {:else if state === ImportState.BackupPassword}
     <Transition>
-        <BackupPassword
-            on:next={_next}
-            on:previous={_previous}
-            {isGettingMigrationData}
-            {importType}
-            {error}
-            {locale}
-            {mobile}
-            {busy} />
+        <BackupPassword on:next={_next} on:previous={_previous} {isGettingMigrationData} {error} {locale} {mobile} {busy} />
     </Transition>
 {:else if state === ImportState.Success}
     <Transition>
