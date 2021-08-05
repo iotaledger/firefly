@@ -16,7 +16,7 @@
         "profile": {
             "title": "Utwórz profil",
             "body1": "Możesz tworzyć wiele profili użytkownika w celu organizacji swoich portfeli i zwiększenia prywatności.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
+            "body2": "Zacznijmy od Twojej pierwszej nazwy profilu. Możesz dodać więcej profili później.",
             "profileName": "Nazwa profilu"
         },
         "setup": {
@@ -91,7 +91,7 @@
         },
         "verifyRecoveryPhrase": {
             "title": "Zweryfikuj wyrazy ratunkowe",
-            "body": "Sprawdźmy, czy zapisałeś wszystkie wyrazy poprawnie. Przyporządkuj zapisane słowa do podanej kolejności.",
+            "body": "Sprawdźmy, czy zapisałeś wszystkie wyrazy poprawnie. Przyporządkuj słowa, które zapisałeś, do podanej kolejności.",
             "word": "Słowo",
             "verified": "Wyrazy ratunkowe zostały zweryfikowane",
             "verifiedBody": "Pamiętaj, aby zachować te wyrazy wyłącznie dla siebie oraz przechowywać je w bezpiecznym miejscu."
@@ -102,7 +102,7 @@
             "body2": "Powody, dla których cyfrowe kopie zapasowe są ważne:",
             "reason1": "Łatwe odzyskiwanie portfeli bez wpisywania wyrazów ratunkowych",
             "reason2": "Możliwość importu swoich portfeli do innych urządzeń",
-            "reason3": "Zachowanie pełnych historii transakcji"
+            "reason3": "Zachowanie pełnej historii transakcji"
         },
         "recoveryPhraseSaved": {
             "title": "Pomyślnie utworzono kopię zapasową",
@@ -114,7 +114,7 @@
             "body": "Twój nowy portfel jest już gotowy do użycia.",
             "softwareMigratedBody": "Twoje środki zostały pomyślnie przeniesione do nowej sieci",
             "fireflyLedgerBody": "Twoje konto Ledger zostało pomyślnie odzyskane. Możesz kontynuować.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
+            "trinityLedgerBody": "Pomyślnie przeniosłeś swój Ledger do nowej sieci. Możesz teraz usunąć aplikację {legacy} ze swojego urządzenia.",
             "exportMigration": "Eksportuj dziennik migracji i zakończ konfigurację"
         },
         "import": {
@@ -154,7 +154,7 @@
             "haveFireflyLedger": "Mam kopię zapasową Ledger z portfela Firefly",
             "haveFireflyLedgerDescription": "Przywróć profil Firefly",
             "haveTrinityLedger": "Mam kopię zapasową Ledger z portfela Trinity",
-            "haveTrinityLedgerDescription": "Migruj profil Trinity"
+            "haveTrinityLedgerDescription": "Migruj profil z Trinity"
         },
         "connectLedger": {
             "title": "Połącz swój Ledger z Firefly",
@@ -226,7 +226,7 @@
             "miningBundle": "Wydobywanie pakietu",
             "problemRestoringWallet": "Wystąpił błąd sieciowy podczas przywracania Twojego portfela. Spróbuj ponownie.",
             "minimumMigrationAmountSpentAddresses": "Minimalna kwota migracji dla każdego wydatkowanego adresu wynosi 1 Mi. Sprawdź ponownie, jeśli Twoje saldo nie wygląda prawidłowo.",
-            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
+            "tooManyAddressesToMigrate": "Masz zbyt wiele adresów o niskim saldzie, aby dokonać migracji. Sprawdź ponownie, jeśli Twoje saldo wydaje się nieprawidłowe.",
             "cannotMigrateAllYourFunds": "Nie możemy dokonać migracji wszystkich Twoich tokenów, ponieważ niektóre adresy posiadają zbyt mało środków. Możesz mimo to kontynuować. {value} zostanie utracone.",
             "error": "Wystąpił błąd podczas migracji Twoich środków. Spróbuj ponownie."
         },
@@ -457,7 +457,7 @@
                 }
             },
             "network": {
-                "networkOperational": "Sieć działa",
+                "networkOperational": "Sieć działa poprawnie",
                 "networkDegraded": "Pogorszenie stanu sieci",
                 "networkDown": "Brak dostępu do sieci",
                 "status": "Status",
@@ -490,7 +490,7 @@
         "backup": {
             "title": "Ostatnia kopia zapasowa: {date}",
             "lastBackup": "Ostatnia kopia została wykonana {date}",
-            "backupDescription": "Ważne jest, aby regularnie wykonywać kopie zapasowe. Będziemy mieć wtedy pewność co do swoich portfeli oraz historii transakcji.",
+            "backupDescription": "Regularne wykonywanie kopii zapasowej jest bardzo ważne. Mamy wtedy pewność co do bezpieczeństwa swoich portfeli oraz historii transakcji.",
             "backupWarning": "Jeśli utracisz swoją kopię zapasową i wyrazy ratunkowe, stracisz dostęp do swoich środków.",
             "notBackedUp": "Nie wykonano kopii zapasowej",
             "notBackedUpDescription": "Nie wykonałeś kopii zapasowej swoich portfeli",
@@ -584,7 +584,7 @@
             "confirm": "Aby kontynuować, potwierdź informację wyświetlaną na urządzeniu Ledger"
         },
         "ledgerAppGuide": {
-            "title": "Instrukcja instalacji wymaganych aplikacji na urządzeniu Ledger",
+            "title": "Jak zainstalować wymagane aplikacje na urządzeniu Ledger?",
             "steps": {
                 "0": "Zainstaluj i otwórz aplikację Ledger Live",
                 "1": "Upewnij się, że Twój Ledger jest połączony",

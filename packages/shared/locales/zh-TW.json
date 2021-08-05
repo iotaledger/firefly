@@ -16,7 +16,7 @@
         "profile": {
             "title": "建立個人設定檔",
             "body1": "您可以創建多個使用者設定檔來整理您的錢包並加強隱私。",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
+            "body2": "現在，讓我們先為您的第一個使用者設定檔命名。您稍後可以添加更多設定檔。",
             "profileName": "使用者檔案名稱"
         },
         "setup": {
@@ -51,7 +51,7 @@
         },
         "ledgerInstallationGuide": {
             "title": "你是否已安裝必須的 Ledger apps？",
-            "body1": "您必須先經由Ledger Live同時安裝 {legacy} 和新版的IOTA app，才能繼續。",
+            "body1": "您必須先經由Ledger Live同時安裝 {legacy} app 和新版的IOTA app，才能繼續。",
             "body2": "請確認您的Ledger韌體是最新版本。所有已安裝的軟體都必須更新至最新版本。",
             "action": "是，我已安裝這些 apps。"
         },
@@ -114,7 +114,7 @@
             "body": "您的新錢包可以使用了。",
             "softwareMigratedBody": "您已成功將資金遷移到新網路",
             "fireflyLedgerBody": "您的 Ledger 帳號已成功還原，現在可以繼續使用。",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
+            "trinityLedgerBody": "您已成功將Ledger遷移至新網路。您現在可以從裝置中把{legacy} app移除。",
             "exportMigration": "導出遷移紀錄檔並結束設定"
         },
         "import": {
@@ -226,7 +226,7 @@
             "miningBundle": "交易組挖掘中",
             "problemRestoringWallet": "還原您的錢包時出現網絡錯誤。 請再試一次。",
             "minimumMigrationAmountSpentAddresses": "每個「已支出地址」的最小遷移數量是 1Mi。如果您的餘額看起來不對，請再次檢查。",
-            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
+            "tooManyAddressesToMigrate": "您有太多小額地址需要遷移。請再次檢查您的餘額是否正確。",
             "cannotMigrateAllYourFunds": "我們無法遷移您所有的資金，因為有些地址的金額太低。您仍舊可以進行遷移，但是 {value} 將會遺失。",
             "error": "遷移您的資金時發生錯誤，請重試。"
         },
@@ -600,7 +600,7 @@
                 "1": "確認您已經輸入 PIN 碼來解鎖您的 Ledger 裝置",
                 "2": "在您的 Ledger 裝置上開啟新版 IOTA app",
                 "3": {
-                    "text": "運氣糟透？",
+                    "text": "還是沒成功嗎？",
                     "link": "試試 Ledger 的官方支援頁面"
                 }
             }

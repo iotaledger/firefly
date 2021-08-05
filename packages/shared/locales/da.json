@@ -16,7 +16,7 @@
         "profile": {
             "title": "Opret en profil",
             "body1": "Du kan oprette flere brugerprofiler for at organisere dine wallets og øge din fortrolighed.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
+            "body2": "For nu, lad os starte med dit profilnavn. Du kan tilføje flere profiler senere.",
             "profileName": "Profilnavn"
         },
         "setup": {
@@ -113,8 +113,8 @@
             "fundsMigrated": "Midler migreret",
             "body": "Din nye wallet er klar til brug.",
             "softwareMigratedBody": "Du har nu migreret dine midler til det nye netværk",
-            "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
+            "fireflyLedgerBody": "Din Bogføringskonto er blevet genoprettet, og du kan nu fortsætte.",
+            "trinityLedgerBody": "Du har migreret din bogføring til det nye netværk. Du kan nu fjerne {legacy} appen fra din enhed.",
             "exportMigration": "Eksportér migrationslog og afslut opsætning"
         },
         "import": {

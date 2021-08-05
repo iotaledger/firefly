@@ -16,7 +16,7 @@
         "profile": {
             "title": "Profil létrehozása",
             "body1": "Több felhasználói profilt is létrehozhat a tokenek elkülönítése és a biztonság növelésének érdekében.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
+            "body2": "Most kezdjük az első profilnévvel. Később további profilokat is hozzáadhat.",
             "profileName": "Profil név"
         },
         "setup": {
@@ -114,7 +114,7 @@
             "body": "Az új tárcája használatra kész.",
             "softwareMigratedBody": "Sikeresen migrálta tokenjeit az új hálózatra",
             "fireflyLedgerBody": "A Ledger számlája sikeresen helyreállt és továbbléphet a folyamatban.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
+            "trinityLedgerBody": "Sikeresen migrálta a Ledger-t az új hálózatra. Most már eltávolíthatja a {legacy} alkalmazást az eszközéről.",
             "exportMigration": "Migrálási napló exportálása és telepítés befejezése"
         },
         "import": {
@@ -226,7 +226,7 @@
             "miningBundle": "Kötegtranzakció bányászása",
             "problemRestoringWallet": "Hálózati hiba történt tárcája helyreállítása közben. Kérjük, próbálja újra.",
             "minimumMigrationAmountSpentAddresses": "A migráláshoz legalalább 1 Mi egyenlegnek kell lennie minden olyan címen, amelyről korábban már költött. Ellenőrizze, hogy egyenlege rendben van-e.",
-            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
+            "tooManyAddressesToMigrate": "Túl sok alacsony egyenleggel rendelkező címe van a migrációhoz. Ellenőrizze, hogy egyenlege rendben van-e.",
             "cannotMigrateAllYourFunds": "Nem tudjuk a teljes egyenlegét migrálni, mert néhány címén 1 Mi alatti egyenleggel rendelkezik. Ennek ellenére folyathatja, de {value} el fog veszni.",
             "error": "Hiba történt az egyenlege migrálása során. Kérjük, próbálja újra."
         },

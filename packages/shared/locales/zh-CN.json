@@ -16,7 +16,7 @@
         "profile": {
             "title": "新建配置文件",
             "body1": "您可创建多个用户配置文件来分别存储您的Token以确保安全。",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
+            "body2": "现在，让我们开始创建你的第一个配置文件。以后您可以添加更多的配置文件。",
             "profileName": "配置名称"
         },
         "setup": {
@@ -114,7 +114,7 @@
             "body": "您的新钱包已准备使用。",
             "softwareMigratedBody": "您已成功地将您的资金迁移到新的网络",
             "fireflyLedgerBody": "您的Ledger 账号已成功恢复，您现在可以继续。",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
+            "trinityLedgerBody": "您已成功地将您的Ledger迁移到新网络。您现在可以从您的设备中移除 {legacy} 应用程序。",
             "exportMigration": "导出迁移日志并完成设置"
         },
         "import": {
@@ -226,7 +226,7 @@
             "miningBundle": "签名包",
             "problemRestoringWallet": "恢复钱包出现网络异常，请重试。",
             "minimumMigrationAmountSpentAddresses": "每个已花费地址的最小迁移金额为1Mi，请再次检查你的余额是否符合。",
-            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
+            "tooManyAddressesToMigrate": "你有太多的小额地址需要迁移，请再次检查您的账户余额看起来是否正确。",
             "cannotMigrateAllYourFunds": "我们不能迁移您的所有资金，因为某些地址的价值太低。您仍然可以继续，但是 {value} 将会丢失。",
             "error": "资金迁移出现错误，请重试。"
         },

@@ -16,7 +16,7 @@
         "profile": {
             "title": "Crea un profilo",
             "body1": "È possibile creare più profili utente per organizzare i wallet e migliorare la privacy.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
+            "body2": "Per ora, iniziamo con il nome del tuo primo profilo. Puoi aggiungere più profili più tardi.",
             "profileName": "Nome del profilo"
         },
         "setup": {
@@ -114,7 +114,7 @@
             "body": "Il tuo portafoglio è pronto all'uso.",
             "softwareMigratedBody": "Hai migrato con successo i tuoi fondi alla nuova rete",
             "fireflyLedgerBody": "Il tuo account Ledger è stato recuperato con successo e ora puoi continuare.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
+            "trinityLedgerBody": "Hai migrato con successo il tuo Ledger alla nuova rete. Ora puoi rimuovere l'app {legacy} dal tuo dispositivo.",
             "exportMigration": "Esporta il log di migrazione e termina la configurazione"
         },
         "import": {
@@ -226,7 +226,7 @@
             "miningBundle": "Mining del bundle",
             "problemRestoringWallet": "Si è verificato un errore di rete nel ripristino del wallet. Riprova.",
             "minimumMigrationAmountSpentAddresses": "L'importo minimo di migrazione per ogni indirizzo speso è 1 Mi. Controlla di nuovo se il tuo saldo non è corretto.",
-            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
+            "tooManyAddressesToMigrate": "Hai troppi indirizzi con un saldo basso per migrare. Controlla di nuovo se il tuo saldo non sembra corretto.",
             "cannotMigrateAllYourFunds": "Non possiamo migrare tutti i tuoi fondi perché alcuni indirizzi sono troppo bassi. Puoi procedere comunque. {value} andrà perso.",
             "error": "Si è verificato un errore durante la migrazione dei fondi. Per favore riprova."
         },
