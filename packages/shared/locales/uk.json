@@ -47,11 +47,11 @@
             }
         },
         "setupLedger": {
-            "progress1": "Connect your Ledger",
-            "progress2": "Generate address",
-            "progress3": "Switch Ledger app",
-            "progress4": "Transfer funds",
-            "watchVideo": "Watch video guide",
+            "progress1": "Підключіть свій Ledger",
+            "progress2": "Створити адресу",
+            "progress3": "Додаток Switch Ledger",
+            "progress4": "Переказ коштів",
+            "watchVideo": "Переглянути відеопосібник",
             "videoGuide": "Ledger migration video guide"
         },
         "ledgerInstallationGuide": {
@@ -117,8 +117,8 @@
             "title": "Налаштування гаманця завершено",
             "fundsMigrated": "Кошти мігрували",
             "body": "Вітаємо! Ваш новий гаманець готовий до використання.",
-            "softwareMigratedBody": "You have successfully migrated your funds to the new network",
-            "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
+            "softwareMigratedBody": "Ви успішно перенесли свої кошти в нову мережу",
+            "fireflyLedgerBody": "Ваш обліковий запис Ledger успішно відновлено, і тепер ви можете продовжити.",
             "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
             "exportMigration": "Експортуйте журнал міграції та завершіть налаштування"
         },
@@ -193,15 +193,15 @@
             "body": "Щоб продовжити міграцію, перейдіть на додаток {legacy} на своєму пристрої Ledger. Коли будете готові, натисніть продовжити."
         },
         "selectLedgerAccountIndex": {
-            "title": "Choose Ledger account index",
-            "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
-            "accountIndex": "Account Index",
-            "accountPage": "Account Page",
-            "standard": "Standard",
-            "expert": "Expert",
+            "title": "Виберіть індекс облікового запису Ledger",
+            "body": "Виберіть індекс облікового запису Ledger, який ви використовували з Trinity. Для більшості користувачів це буде стандартний індекс 0.",
+            "accountIndex": "Індекс аккаунта",
+            "accountPage": "Сторінка облікового запису",
+            "standard": "Стандартний",
+            "expert": "Експерт",
             "takingAWhile": "This is taking a while...",
-            "notGeneratingAddresses": "Is your Ledger generating addresses?",
-            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
+            "notGeneratingAddresses": "Ваш Ledger генерує адреси?",
+            "reinstallLegacy": "Якщо ні, від'єднайте пристрій і повторіть спробу. Якщо проблема не зникне, можливо, вам доведеться перевстановити додаток {legacy}."
         },
         "importBackupPassword": {
             "body1": "Будь ласка введіть пароль для захисту резервної копії.",
@@ -230,8 +230,8 @@
             "signingBundle": "Пакет підпису",
             "broadcastingBundle": "Передача пакету",
             "miningBundle": "Майнінг даних",
-            "problemRestoringWallet": "There was a network error restoring your wallet. Please try again.",
-            "minimumMigrationAmountSpentAddresses": "Мінімальна сума міграції для кожного витраченої адреси становить 1 мега айота. Перевірте знову, якщо ваш баланс неправильний.",
+            "problemRestoringWallet": "Під час відновлення гаманця сталася помилка мережі. Будь ласка спробуйте ще раз.",
+            "minimumMigrationAmountSpentAddresses": "Мінімальна сума міграції для кожного витраченої адреси становить 1 Mi. Перевірте знову, якщо ваш баланс неправильний.",
             "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
             "cannotMigrateAllYourFunds": "Ми не можемо перенести всі ваші кошти, тому що деякі адреси занадто низькі. Ви все одно можете продовжити. {value} буде втрачено.",
             "error": "Помилка під час міграції ваших коштів. Будь ласка, спробуйте ще раз."
@@ -975,7 +975,7 @@
             "disconnected": "Ваш пристрій Ledger було відключено."
         },
         "popup": {
-            "preventClose": "This popup is unable to be closed."
+            "preventClose": "Це спливаюче вікно неможливо закрити."
         },
         "migration": {
             "missingBundle": "An error occurred while trying to find the transaction bundle."

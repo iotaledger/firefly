@@ -47,11 +47,11 @@
             }
         },
         "setupLedger": {
-            "progress1": "Connect your Ledger",
-            "progress2": "Generate address",
-            "progress3": "Switch Ledger app",
-            "progress4": "Transfer funds",
-            "watchVideo": "Watch video guide",
+            "progress1": "लेजर को कनेक्ट करे",
+            "progress2": "नया पता उत्पन्न करें",
+            "progress3": "लेजर ऐप स्विच करें",
+            "progress4": "धनराशि का ट्रांसफर",
+            "watchVideo": "वीडियो गाइड देखें",
             "videoGuide": "Ledger migration video guide"
         },
         "ledgerInstallationGuide": {
@@ -117,8 +117,8 @@
             "title": "वॉलेट सेटअप पूरा हुआ",
             "fundsMigrated": "फंड्स माइग्रेट हुए",
             "body": "आपका वॉलेट उपयोग के लिए तैयार है",
-            "softwareMigratedBody": "You have successfully migrated your funds to the new network",
-            "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
+            "softwareMigratedBody": "आपने अपने धन को नए नेटवर्क में सफलतापूर्वक स्थानांतरित कर दिया है",
+            "fireflyLedgerBody": "आपका लेजर खाता सफलतापूर्वक पुनर्प्राप्त कर लिया गया है और अब आप जारी रख सकते हैं।",
             "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
             "exportMigration": "निर्यात माइग्रेशन लॉग और सेटअप फिनिश करिए"
         },
@@ -193,15 +193,15 @@
             "body": "माइग्रेशन जारी रखने के लिए कृपया अपने लेजर डिवाइस पर {legacy} ऐप पर स्विच करें। तैयार होने पर, जारी रखें दबाएं।"
         },
         "selectLedgerAccountIndex": {
-            "title": "Choose Ledger account index",
-            "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
-            "accountIndex": "Account Index",
-            "accountPage": "Account Page",
-            "standard": "Standard",
-            "expert": "Expert",
+            "title": "लेजर अकाउंट इंडेक्स चुनें",
+            "body": "ट्रिनिटी के साथ आपके द्वारा उपयोग किया गया लेजर खाता सूचकांक चुनें। अधिकांश उपयोगकर्ताओं के लिए यह 0 की डिफ़ॉल्ट अनुक्रमणिका होगी।",
+            "accountIndex": "खाता सूचकांक",
+            "accountPage": "अकाउंट पेज",
+            "standard": "मानक",
+            "expert": "एक्स्पर्ट",
             "takingAWhile": "This is taking a while...",
-            "notGeneratingAddresses": "Is your Ledger generating addresses?",
-            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
+            "notGeneratingAddresses": "क्या आपका लेजर एड्रेस जनरेट कर रहा है?",
+            "reinstallLegacy": "यदि नहीं, तो डिवाइस को डिस्कनेक्ट करें और पुनः प्रयास करें। अगर समस्या बनी रहती है, तो आपको {legacy} ऐप को फिर से इंस्टॉल करना पड़ सकता है।"
         },
         "importBackupPassword": {
             "body1": "कृपया अपना बैकअप पासवर्ड डालें",
@@ -975,7 +975,7 @@
             "disconnected": "आपका लेजर डिवाइस डिस्कनेक्ट हो गया था।"
         },
         "popup": {
-            "preventClose": "This popup is unable to be closed."
+            "preventClose": "यह पॉपअप बंद करने में असमर्थ है।"
         },
         "migration": {
             "missingBundle": "An error occurred while trying to find the transaction bundle."

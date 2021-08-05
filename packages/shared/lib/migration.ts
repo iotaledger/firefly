@@ -119,7 +119,7 @@ export const ledgerMigrationProgresses = derived(currentLedgerMigrationProgress,
     })
 })
 
-export const LEDGER_MIGRATION_VIDEO = 'https://d17lo1ro77zjnd.cloudfront.net/firefly/videos/ledger_integration_v10.mp4'
+export const LEDGER_MIGRATION_VIDEO = 'https://d17lo1ro77zjnd.cloudfront.net/firefly/videos/ledger_integration_v12.mp4'
 
 /*
  * Migration state
