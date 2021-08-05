@@ -56,7 +56,7 @@
         },
         "ledgerInstallationGuide": {
             "title": "你是否已安裝必須的 Ledger apps？",
-            "body1": "您必須先經由Ledger Live同時安裝 {legacy} 和新版的IOTA app，才能繼續。",
+            "body1": "您必須先經由Ledger Live同時安裝 {legacy} app 和新版的IOTA app，才能繼續。",
             "body2": "請確認您的Ledger韌體是最新版本。所有已安裝的軟體都必須更新至最新版本。",
             "action": "是，我已安裝這些 apps。"
         },
@@ -606,7 +606,7 @@
                 "1": "確認您已經輸入 PIN 碼來解鎖您的 Ledger 裝置",
                 "2": "在您的 Ledger 裝置上開啟新版 IOTA app",
                 "3": {
-                    "text": "運氣糟透？",
+                    "text": "還是沒成功嗎？",
                     "link": "試試 Ledger 的官方支援頁面"
                 }
             }

@@ -96,7 +96,7 @@
         },
         "verifyRecoveryPhrase": {
             "title": "Zweryfikuj wyrazy ratunkowe",
-            "body": "Sprawdźmy, czy zapisałeś wszystkie wyrazy poprawnie. Przyporządkuj zapisane słowa do podanej kolejności.",
+            "body": "Sprawdźmy, czy zapisałeś wszystkie wyrazy poprawnie. Przyporządkuj słowa, które zapisałeś, do podanej kolejności.",
             "word": "Słowo",
             "verified": "Wyrazy ratunkowe zostały zweryfikowane",
             "verifiedBody": "Pamiętaj, aby zachować te wyrazy wyłącznie dla siebie oraz przechowywać je w bezpiecznym miejscu."
@@ -107,7 +107,7 @@
             "body2": "Powody, dla których cyfrowe kopie zapasowe są ważne:",
             "reason1": "Łatwe odzyskiwanie portfeli bez wpisywania wyrazów ratunkowych",
             "reason2": "Możliwość importu swoich portfeli do innych urządzeń",
-            "reason3": "Zachowanie pełnych historii transakcji"
+            "reason3": "Zachowanie pełnej historii transakcji"
         },
         "recoveryPhraseSaved": {
             "title": "Pomyślnie utworzono kopię zapasową",
@@ -159,7 +159,7 @@
             "haveFireflyLedger": "Mam kopię zapasową Ledger z portfela Firefly",
             "haveFireflyLedgerDescription": "Przywróć profil Firefly",
             "haveTrinityLedger": "Mam kopię zapasową Ledger z portfela Trinity",
-            "haveTrinityLedgerDescription": "Migruj profil Trinity"
+            "haveTrinityLedgerDescription": "Migruj profil z Trinity"
         },
         "connectLedger": {
             "title": "Połącz swój Ledger z Firefly",
@@ -463,7 +463,7 @@
                 }
             },
             "network": {
-                "networkOperational": "Sieć działa",
+                "networkOperational": "Sieć działa poprawnie",
                 "networkDegraded": "Pogorszenie stanu sieci",
                 "networkDown": "Brak dostępu do sieci",
                 "status": "Status",
@@ -496,7 +496,7 @@
         "backup": {
             "title": "Ostatnia kopia zapasowa: {date}",
             "lastBackup": "Ostatnia kopia została wykonana {date}",
-            "backupDescription": "Ważne jest, aby regularnie wykonywać kopie zapasowe. Będziemy mieć wtedy pewność co do swoich portfeli oraz historii transakcji.",
+            "backupDescription": "Regularne wykonywanie kopii zapasowej jest bardzo ważne. Mamy wtedy pewność co do bezpieczeństwa swoich portfeli oraz historii transakcji.",
             "backupWarning": "Jeśli utracisz swoją kopię zapasową i wyrazy ratunkowe, stracisz dostęp do swoich środków.",
             "notBackedUp": "Nie wykonano kopii zapasowej",
             "notBackedUpDescription": "Nie wykonałeś kopii zapasowej swoich portfeli",
@@ -590,7 +590,7 @@
             "confirm": "Aby kontynuować, potwierdź informację wyświetlaną na urządzeniu Ledger"
         },
         "ledgerAppGuide": {
-            "title": "Instrukcja instalacji wymaganych aplikacji na urządzeniu Ledger",
+            "title": "Jak zainstalować wymagane aplikacje na urządzeniu Ledger?",
             "steps": {
                 "0": "Zainstaluj i otwórz aplikację Ledger Live",
                 "1": "Upewnij się, że Twój Ledger jest połączony",
