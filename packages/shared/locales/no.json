@@ -21,7 +21,7 @@
                 "first": "For now, let's start with your first profile name.",
                 "nonFirst": "For now, let's start with your profile name."
             },
-            "addMore": "You can add more profiles later."
+            "addMore": "Du kan legge til flere profiler senere."
         },
         "setup": {
             "title": "Sett opp en lommebok",
@@ -52,7 +52,7 @@
             "progress3": "Bytt Ledger app",
             "progress4": "Overfør midler",
             "watchVideo": "Se video guide",
-            "videoGuide": "Ledger migration video guide"
+            "videoGuide": "Ledger migrasjons videoguide"
         },
         "ledgerInstallationGuide": {
             "title": "Har du installert de nødvendige Ledger-appene?",
@@ -119,7 +119,7 @@
             "body": "Din nye lommebok er klar til bruk.",
             "softwareMigratedBody": "Migreringen av dine midler til det nye nettverket var vellykket",
             "fireflyLedgerBody": "Din Ledger konto er bekreftet gjenopprettet, og du kan nå fortsette.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
+            "trinityLedgerBody": "Du har vellykket overført din Ledger til det nye nettverket.",
             "exportMigration": "Eksporter migreringsloggen og fullfør oppsettet"
         },
         "import": {
@@ -199,7 +199,7 @@
             "accountPage": "Kontoside",
             "standard": "Standard",
             "expert": "Ekspert",
-            "takingAWhile": "This is taking a while...",
+            "takingAWhile": "Dette tar en stund...",
             "notGeneratingAddresses": "Generere Ledger-appen din adresser?",
             "reinstallLegacy": "Hvis ikke, koble fra enheten og prøv igjen. Hvis problemet vedvarer, kan det hende du må installere {legacy} på nytt."
         },
@@ -978,7 +978,7 @@
             "preventClose": "Denne popup kan ikke stenges."
         },
         "migration": {
-            "missingBundle": "An error occurred while trying to find the transaction bundle."
+            "missingBundle": "Det oppsto en feil under forsøk på å finne transaksjonspakken."
         }
     },
     "tooltips": {

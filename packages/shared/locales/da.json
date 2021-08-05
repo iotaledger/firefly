@@ -118,7 +118,7 @@
             "fundsMigrated": "Midler migreret",
             "body": "Din nye wallet er klar til brug.",
             "softwareMigratedBody": "Du har nu migreret dine midler til det nye netværk",
-            "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
+            "fireflyLedgerBody": "Din Bogføringskonto er blevet genoprettet, og du kan nu fortsætte.",
             "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
             "exportMigration": "Eksportér migrationslog og afslut opsætning"
         },

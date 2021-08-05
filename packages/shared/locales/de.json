@@ -18,10 +18,10 @@
             "profileName": "Profilname",
             "body1": "Du kannst mehrere Benutzerprofile erstellen, um deine Wallets zu organisieren und deine Privatsphäre zu verbessern.",
             "body2": {
-                "first": "For now, let's start with your first profile name.",
-                "nonFirst": "For now, let's start with your profile name."
+                "first": "Beginnen wir zunächst mit deinem ersten Profilnamen.",
+                "nonFirst": "Beginnen wir zunächst mit deinem Profilnamen."
             },
-            "addMore": "You can add more profiles later."
+            "addMore": "Du kannst später weitere Profile hinzufügen."
         },
         "setup": {
             "title": "Richte eine Wallet ein",
@@ -52,7 +52,7 @@
             "progress3": "Ledger-App wechseln",
             "progress4": "Guthaben übertragen",
             "watchVideo": "Videoanleitung ansehen",
-            "videoGuide": "Ledger migration video guide"
+            "videoGuide": "Video-Leitfaden zur Ledger-Migration"
         },
         "ledgerInstallationGuide": {
             "title": "Hast du die notwendigen Ledger-Apps installiert?",
@@ -119,7 +119,7 @@
             "body": "Deine neue Wallet ist nun einsatzbereit.",
             "softwareMigratedBody": "Du hast dein Guthaben erfolgreich ins neue Netzwerk übertragen",
             "fireflyLedgerBody": "Dein Ledger-Konto wurde erfolgreich wiederhergestellt und du kannst nun fortfahren.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
+            "trinityLedgerBody": "Du hast deinen Ledger erfolgreich in das neue Netzwerk migriert.",
             "exportMigration": "Migrationsprotokoll exportieren und abschließen"
         },
         "import": {
@@ -199,7 +199,7 @@
             "accountPage": "Kontoseite",
             "standard": "Standard",
             "expert": "Experte",
-            "takingAWhile": "This is taking a while...",
+            "takingAWhile": "Das dauert ein bisschen...",
             "notGeneratingAddresses": "Generiert dein Ledger Adressen?",
             "reinstallLegacy": "Falls nicht, trenne das Gerät und versuche es noch einmal. Sollte der Fehler weiterhin bestehen, musst du die {legacy} App ggf. erneut installieren."
         },
@@ -232,7 +232,7 @@
             "miningBundle": "Bundle minen",
             "problemRestoringWallet": "Beim Wiederherstellen deiner Wallet ist ein Problem aufgetreten. Bitte versuche es erneut.",
             "minimumMigrationAmountSpentAddresses": "Der minimale Migrationsbetrag für jede wiederverwendete Adresse beträgt 1 Mi. Versuche es erneut, wenn der Betrag nicht richtig ist.",
-            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
+            "tooManyAddressesToMigrate": "Du hast für die Migration zu viele Adressen mit zu wenig Guthaben. Prüfe erneut, wenn dein Gesamtguthaben nicht richtig ist.",
             "cannotMigrateAllYourFunds": "Wir können nicht alle Guthaben migrieren, da einige Adressen zu wenig Guthaben aufweisen. Du kannst trotzdem fortfahren. {value} gehen verloren.",
             "error": "Beim Migrieren der Guthaben ist ein Fehler aufgetreten. Bitte versuche es erneut."
         },
@@ -978,7 +978,7 @@
             "preventClose": "Dieses Popup kann nicht geschlossen werden."
         },
         "migration": {
-            "missingBundle": "An error occurred while trying to find the transaction bundle."
+            "missingBundle": "Beim Versuch, das Transaktionsbundle zu finden, ist ein Fehler aufgetreten."
         }
     },
     "tooltips": {
