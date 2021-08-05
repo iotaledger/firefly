@@ -232,7 +232,7 @@
             "miningBundle": "Ťaženie zväzka",
             "problemRestoringWallet": "Vyskytol sa problém so sieťou pri obnovovaní vašej peňaženky. Skúste to znova.",
             "minimumMigrationAmountSpentAddresses": "Minimálna suma pre každú použitú adresu je 1 Mi. Skontrolujte ešte raz, ak zostatok nevyzera správne.",
-            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
+            "tooManyAddressesToMigrate": "Máte príliš veľa adries s malým zostatok na presúvanie. Skontrolujte ešte raz, ak zostatok nevyzera správne.",
             "cannotMigrateAllYourFunds": "Nemožeme presunúť všetky vaše prostriedky, pretože niektoré adresy majú nízky zostatok. Ale v každom prípade možete pokračovať. {value} budú stratené.",
             "error": "Vyskytla sa chyba pri presúvani Vašich prostriedkov. Prosím skúste znova."
         },

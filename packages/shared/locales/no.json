@@ -232,7 +232,7 @@
             "miningBundle": "Utvinner bundle",
             "problemRestoringWallet": "Det oppsto et tilkoblingsproblem under gjenopprettingen av lommeboken din. Vennligst prøv igjen.",
             "minimumMigrationAmountSpentAddresses": "Minste overføringsbeløp for hver brukte adresse er 1 Mi. Sjekk igjen om din saldo ser riktig ut.",
-            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
+            "tooManyAddressesToMigrate": "Du har for mange adresser med lav saldo til å migrere. Sjekk igjen om din saldo ser riktig ut.",
             "cannotMigrateAllYourFunds": "Vi kan ikke migrere alle dine midler fordi noen adresser har for lav verdi. Du kan allikevell fortsette. {value} vil gå tapt.",
             "error": "Det oppsto en feil ved migreringen av dine midler. Vennligst prøv igjen."
         },
