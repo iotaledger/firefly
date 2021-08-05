@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "프로필 생성하기",
+            "profileName": "프로필 이름",
             "body1": "여러 사용자 프로필을 만들어 지갑을 구성하고 보안성을 높일 수 있습니다.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
-            "profileName": "프로필 이름"
+            "body2": {
+                "first": "이제 여러분의 첫번째 프로필 이름부터 만들어볼까요.",
+                "nonFirst": "이제 여러분의 프로필 이름부터 만들어볼까요."
+            },
+            "addMore": "나중에 다른 프로필도 더 추가할 수 있습니다."
         },
         "setup": {
             "title": "지갑 설정하기",
@@ -32,10 +36,10 @@
         },
         "create": {
             "title": "지갑 만들기",
-            "body": "Create a new wallet. You can choose a regular software wallet or if you have a Ledger device you can set up a hardware wallet.",
+            "body": "새로운 지갑을 생성하세요. 일반 소프트웨어 지갑을 선택할 수도 있고, Ledger 장치를 가지고 있는 분들은 하드웨어 지갑을 설정할 수도 있습니다.",
             "softwareAccount": {
                 "title": "소프트웨어 지갑",
-                "description": "Create a 24-word Recovery Phrase"
+                "description": "24개 단어의 복구 문자를 생성하세요."
             },
             "ledgerAccount": {
                 "title": "하드웨어 지갑",
@@ -47,12 +51,13 @@
             "progress2": "주소 생성",
             "progress3": "Ledger 앱 전환",
             "progress4": "송금",
-            "watchVideo": "동영상 도움말 보기"
+            "watchVideo": "동영상 도움말 보기",
+            "videoGuide": "Ledger 마이그레이션 비디오 가이드"
         },
         "ledgerInstallationGuide": {
             "title": "필수 Ledger 앱을 설치하셨습니까?",
             "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
-            "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
+            "body2": "Ledger 펌웨어가 최신인지 반드시 확인하세요. 이전에 설치했던 모든 앱들을 전부 최신 버전으로 업데이트 해야합니다.",
             "action": "이미 앱을 설치했습니다"
         },
         "password": {
@@ -112,9 +117,9 @@
             "title": "지갑 설정 완료",
             "fundsMigrated": "이전 된 자금",
             "body": "이제 새로 설정된 지갑을 사용할 수 있습니다.",
-            "softwareMigratedBody": "You have successfully migrated your funds to the new network",
-            "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
+            "softwareMigratedBody": "여러분의 자금을 새로운 네트워크로 무사히 이동시켰습니다.",
+            "fireflyLedgerBody": "Ledger 계정이 성공적으로 복원되어 이제 계속할 수 있습니다.",
+            "trinityLedgerBody": "여러분의 Ledger를 새로운 네트워크로 무사히 이동시켰습니다.",
             "exportMigration": "마이그레이션 로그 내보내기 및 설정 완료"
         },
         "import": {
@@ -127,7 +132,7 @@
             "importFile": "파일 백업이 있습니다",
             "importFileDescription": "Seedvault 또는 Stronghold 파일 업로드",
             "importLedger": "Ledger 복구 파일이 있습니다",
-            "importLedgerDescription": "Restore or migrate a Ledger profile"
+            "importLedgerDescription": "Ledger 프로필을 복원하거나 마이그레이션하세요."
         },
         "importFromText": {
             "seed": {
@@ -149,16 +154,16 @@
             "body": "지갑을 복구하는 데 사용할 백업 파일을 불러옵니다. Stronghold (.stronghold) 또는 Trinity 지갑의 SeedVault (.kdbx) 파일을 선택해 주세요."
         },
         "importFromLedger": {
-            "title": "Restore or Migrate your Ledger",
-            "body": "Restore an existing Firefly Ledger profile, or migrate your funds from Trinity.",
-            "haveFireflyLedger": "I have a Firefly Ledger backup",
-            "haveFireflyLedgerDescription": "Restore a Firefly profile",
-            "haveTrinityLedger": "I have a Trinity Ledger backup",
-            "haveTrinityLedgerDescription": "Migrate a Trinity profile"
+            "title": "여러분의 Ledger를 복원하거나 마이그레이션하세요.",
+            "body": "기존의 Firefly Ledger 프로필을 복원하거나 여러분의 자금을 Trinity로부터 마이그레이션하세요.",
+            "haveFireflyLedger": "Firefly Ledger 백업을 갖고 있습니다.",
+            "haveFireflyLedgerDescription": "Firefly 프로필을 복원하세요.",
+            "haveTrinityLedger": "Trinity Ledger 백업을 갖고 있습니다.",
+            "haveTrinityLedgerDescription": "Trinity 프로필을 마이그레이션하세요."
         },
         "connectLedger": {
-            "title": "Connect your Ledger to Firefly",
-            "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed.",
+            "title": "Ledger를 Firefly에 연결하세요.",
+            "body": "Firefly가 Ledger 장치를 발견하려면, 공식 Ledger Live 애플리케이션이 반드시 종료된 상태여야 합니다.",
             "trafficLight1": "Connect and unlock your Ledger with your PIN",
             "trafficLight2": "Open the new IOTA app on your Ledger",
             "tips": "Tips if your Ledger isn’t connecting"
@@ -194,6 +199,7 @@
             "accountPage": "계정 페이지",
             "standard": "표준",
             "expert": "전문가",
+            "takingAWhile": "This is taking a while...",
             "notGeneratingAddresses": "Is your Ledger generating addresses?",
             "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
         },
@@ -226,7 +232,7 @@
             "miningBundle": "Mining 번들",
             "problemRestoringWallet": "지갑을 복원하는 중에 문제가 발생했습니다. 다시 시도하십시오.",
             "minimumMigrationAmountSpentAddresses": "각 지출 주소의 최소 마이그레이션 금액은 1Mi입니다. 잔액이 올바르지 않은지 다시 확인하십시오.",
-            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
+            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
             "cannotMigrateAllYourFunds": "일부 주소의 가치가 너무 낮아 모든 자금을 마이그레이션 할 수 없습니다. 어쨌든 계속할 수 있습니다. {value} 가 손실됩니다.",
             "error": "자금을 이전하는 중에 오류가 발생했습니다. 다시 시도하십시오."
         },
@@ -970,6 +976,9 @@
         },
         "popup": {
             "preventClose": "This popup is unable to be closed."
+        },
+        "migration": {
+            "missingBundle": "An error occurred while trying to find the transaction bundle."
         }
     },
     "tooltips": {

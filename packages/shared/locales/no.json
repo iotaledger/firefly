@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "Opprett profil",
+            "profileName": "Profilnavn",
             "body1": "Du kan opprette flere brukerprofiler for å organisere lommebøkene dine og forbedre personvern.",
-            "body2": "La oss nå starte med ditt første profilnavn. Du kan legge til flere profiler senere.",
-            "profileName": "Profilnavn"
+            "body2": {
+                "first": "For now, let's start with your first profile name.",
+                "nonFirst": "For now, let's start with your profile name."
+            },
+            "addMore": "Du kan legge til flere profiler senere."
         },
         "setup": {
             "title": "Sett opp en lommebok",
@@ -47,7 +51,8 @@
             "progress2": "Generer adresse",
             "progress3": "Bytt Ledger app",
             "progress4": "Overfør midler",
-            "watchVideo": "Se video guide"
+            "watchVideo": "Se video guide",
+            "videoGuide": "Ledger migrasjons videoguide"
         },
         "ledgerInstallationGuide": {
             "title": "Har du installert de nødvendige Ledger-appene?",
@@ -114,7 +119,7 @@
             "body": "Din nye lommebok er klar til bruk.",
             "softwareMigratedBody": "Migreringen av dine midler til det nye nettverket var vellykket",
             "fireflyLedgerBody": "Din Ledger konto er bekreftet gjenopprettet, og du kan nå fortsette.",
-            "trinityLedgerBody": "Du har nå migrert din Ledger til det nye nettverket. Du kan nå fjerne {legacy}-appen fra enheten.",
+            "trinityLedgerBody": "Du har vellykket overført din Ledger til det nye nettverket.",
             "exportMigration": "Eksporter migreringsloggen og fullfør oppsettet"
         },
         "import": {
@@ -194,6 +199,7 @@
             "accountPage": "Kontoside",
             "standard": "Standard",
             "expert": "Ekspert",
+            "takingAWhile": "Dette tar en stund...",
             "notGeneratingAddresses": "Generere Ledger-appen din adresser?",
             "reinstallLegacy": "Hvis ikke, koble fra enheten og prøv igjen. Hvis problemet vedvarer, kan det hende du må installere {legacy} på nytt."
         },
@@ -970,6 +976,9 @@
         },
         "popup": {
             "preventClose": "Denne popup kan ikke stenges."
+        },
+        "migration": {
+            "missingBundle": "Det oppsto en feil under forsøk på å finne transaksjonspakken."
         }
     },
     "tooltips": {

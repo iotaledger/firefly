@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "建立個人設定檔",
+            "profileName": "使用者檔案名稱",
             "body1": "您可以創建多個使用者設定檔來整理您的錢包並加強隱私。",
-            "body2": "現在，讓我們先為您的第一個使用者設定檔命名。您稍後可以添加更多設定檔。",
-            "profileName": "使用者檔案名稱"
+            "body2": {
+                "first": "現在，讓我們從您的第一個個人設定檔的名稱開始",
+                "nonFirst": "現在，讓我們從您的個人設定檔的名稱開始"
+            },
+            "addMore": "您可以在之後添加更多的設定檔"
         },
         "setup": {
             "title": "設定一個錢包",
@@ -47,7 +51,8 @@
             "progress2": "產生新地址",
             "progress3": "切換 Ledger app",
             "progress4": "轉帳",
-            "watchVideo": "觀看影音導覽"
+            "watchVideo": "觀看影音導覽",
+            "videoGuide": "Ledger 遷移視頻指南"
         },
         "ledgerInstallationGuide": {
             "title": "你是否已安裝必須的 Ledger apps？",
@@ -114,7 +119,7 @@
             "body": "您的新錢包可以使用了。",
             "softwareMigratedBody": "您已成功將資金遷移到新網路",
             "fireflyLedgerBody": "您的 Ledger 帳號已成功還原，現在可以繼續使用。",
-            "trinityLedgerBody": "您已成功將Ledger遷移至新網路。您現在可以從裝置中把{legacy} app移除。",
+            "trinityLedgerBody": "您已經成功地從Ledger 遷移到新網路.",
             "exportMigration": "導出遷移紀錄檔並結束設定"
         },
         "import": {
@@ -194,6 +199,7 @@
             "accountPage": "帳戶頁面",
             "standard": "標準模式",
             "expert": "專家模式",
+            "takingAWhile": "這需要一些時間...",
             "notGeneratingAddresses": "您的 Ledger 是否正在生成地址？",
             "reinstallLegacy": "如果沒有，請斷開裝置連接並重試。如果問題仍然存在，您可能需要重新安裝 {legacy} app。"
         },
@@ -226,7 +232,7 @@
             "miningBundle": "交易組挖掘中",
             "problemRestoringWallet": "還原您的錢包時出現網絡錯誤。 請再試一次。",
             "minimumMigrationAmountSpentAddresses": "每個「已支出地址」的最小遷移數量是 1Mi。如果您的餘額看起來不對，請再次檢查。",
-            "tooManyAddressesToMigrate": "您有太多小額地址需要遷移。請再次檢查您的餘額是否正確。",
+            "tooManyAddressesToMigrate": "您有太多小額地址需要遷移. 請再次檢查您的餘額是否正確",
             "cannotMigrateAllYourFunds": "我們無法遷移您所有的資金，因為有些地址的金額太低。您仍舊可以進行遷移，但是 {value} 將會遺失。",
             "error": "遷移您的資金時發生錯誤，請重試。"
         },
@@ -970,6 +976,9 @@
         },
         "popup": {
             "preventClose": "無法關閉此彈出視窗。"
+        },
+        "migration": {
+            "missingBundle": "試圖尋找交易組時發生錯誤"
         }
     },
     "tooltips": {

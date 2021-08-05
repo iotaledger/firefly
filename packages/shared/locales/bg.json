@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "Създаване на профил",
+            "profileName": "Име на профил",
             "body1": "Можете да имате няколко профила, за да организирате портфейлите си и подобрите поверителността.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
-            "profileName": "Име на профил"
+            "body2": {
+                "first": "For now, let's start with your first profile name.",
+                "nonFirst": "For now, let's start with your profile name."
+            },
+            "addMore": "You can add more profiles later."
         },
         "setup": {
             "title": "Създаване на портфейл",
@@ -47,7 +51,8 @@
             "progress2": "Генериране на адрес",
             "progress3": "Смяна на Ledger приложение",
             "progress4": "Прехвърляне на средства",
-            "watchVideo": "Виж видео обяснение"
+            "watchVideo": "Виж видео обяснение",
+            "videoGuide": "Ledger migration video guide"
         },
         "ledgerInstallationGuide": {
             "title": "Инсталирахте ли необходимите Ledger приложения?",
@@ -114,7 +119,7 @@
             "body": "Вашият нов портфейл е готов за използване.",
             "softwareMigratedBody": "Успешно мигрирахте средствата си в новата мрежа",
             "fireflyLedgerBody": "Вашият Ledger акаунт е успешно възстановен и можете да продължите.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
             "exportMigration": "Експортиране на информация от миграцията и приключване на настройките"
         },
         "import": {
@@ -194,6 +199,7 @@
             "accountPage": "Account Page",
             "standard": "Стандартен",
             "expert": "Експертен",
+            "takingAWhile": "This is taking a while...",
             "notGeneratingAddresses": "Ledger устройството генерира ли адреси?",
             "reinstallLegacy": "Ако не генерира, разкачете устройството и опитайте отново. Ако проблемът продължава, може да трябва да преинсталирате приложението {legacy}."
         },
@@ -226,7 +232,7 @@
             "miningBundle": "Създава bundle трансакция",
             "problemRestoringWallet": "Възникна мрежова грешка по време на възстановяване на портфейла. Моля опитайте отново.",
             "minimumMigrationAmountSpentAddresses": "Минималната сума за миграция за всеки преизползвани адрес е 1 Mi. Проверете отново дали сумата е коректна.",
-            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
+            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
             "cannotMigrateAllYourFunds": "Не могат да се мигрират всичките средства, защото някои адреси са с много малка стойност. Може да продължите въпреки това. {value} ще бъдат изгубени.",
             "error": "Възникна грешка при мигриране на средствата. Моля опитайте отново."
         },
@@ -970,6 +976,9 @@
         },
         "popup": {
             "preventClose": "Този popup прозорец не може да бъде затворен."
+        },
+        "migration": {
+            "missingBundle": "An error occurred while trying to find the transaction bundle."
         }
     },
     "tooltips": {

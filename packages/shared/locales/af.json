@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "Skep 'n Profiel",
+            "profileName": "Profiel Naam",
             "body1": "Jy kan verskeie gebruikersprofiele skep om jou tokens apart te hou en privaatheid te verbeter.",
-            "body2": "Laat ons eers begin met jou eerste profielnaam. Jy kan later meer profiele byvoeg.",
-            "profileName": "Profiel Naam"
+            "body2": {
+                "first": "For now, let's start with your first profile name.",
+                "nonFirst": "For now, let's start with your profile name."
+            },
+            "addMore": "You can add more profiles later."
         },
         "setup": {
             "title": "Stel jou beursie op",
@@ -47,7 +51,8 @@
             "progress2": "Genereer nuwe adres",
             "progress3": "Switch Ledger app",
             "progress4": "Oordra fondse",
-            "watchVideo": "Kyk na die videogids"
+            "watchVideo": "Kyk na die videogids",
+            "videoGuide": "Ledger migration video guide"
         },
         "ledgerInstallationGuide": {
             "title": "Het jy die nodige Ledger app geïnstalleer?",
@@ -114,7 +119,7 @@
             "body": "Jou nuwe beursie is gereed om te gebruik.",
             "softwareMigratedBody": "Jy het jou fondse suksesvol na die nuwe netwerk gemigreer",
             "fireflyLedgerBody": "Jou Ledger rekening is suksesvol herstel en jy kan nou voortgaan.",
-            "trinityLedgerBody": "Jy het jou Ledger suksesvol na die nuwe netwerk gemigreer. Jy kan nou die {legacy} app van jou toestel verwyder.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
             "exportMigration": "Voer migrasielogboek uit en voltooi die opstelling"
         },
         "import": {
@@ -194,6 +199,7 @@
             "accountPage": "Rekening bladsy",
             "standard": "Standaard",
             "expert": "Expert",
+            "takingAWhile": "This is taking a while...",
             "notGeneratingAddresses": "Genereer jou Ledger 'n adresse?",
             "reinstallLegacy": "Indien nie, ontkoppel die toestel en probeer weer. As die probleem voortduur, moet jy die {legacy} program weer installeer."
         },
@@ -226,7 +232,7 @@
             "miningBundle": "Bondelmynbou",
             "problemRestoringWallet": "Daar was 'n network probleem om jou beursie te herstel. Probeer asseblief weer.",
             "minimumMigrationAmountSpentAddresses": "Die minimum migrasiebedrag vir elke spandeerde adres is 1 Mi. Kyk weer of jou balans nie reg lyk nie.",
-            "tooManyAddressesToMigrate": "Jy het te veel adresse met 'n lae balans om te migreer. Kyk weer of jou balans nie reg lyk nie.",
+            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
             "cannotMigrateAllYourFunds": "Ons kan nie al jou fondse migreer nie, sommige adresse is the min. Jy kan in elk geval voortgaan. {value} sal verlore gaan.",
             "error": "Daar was 'n fout tydens die migrasie van jou fondse. Probeer asseblief weer."
         },
@@ -970,6 +976,9 @@
         },
         "popup": {
             "preventClose": "Hierdie popup kan nie togemaak word nie."
+        },
+        "migration": {
+            "missingBundle": "An error occurred while trying to find the transaction bundle."
         }
     },
     "tooltips": {

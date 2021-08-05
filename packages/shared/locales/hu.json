@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "Profil létrehozása",
+            "profileName": "Profil név",
             "body1": "Több felhasználói profilt is létrehozhat a tokenek elkülönítése és a biztonság növelésének érdekében.",
-            "body2": "Most kezdjük az első profilnévvel. Később további profilokat is hozzáadhat.",
-            "profileName": "Profil név"
+            "body2": {
+                "first": "For now, let's start with your first profile name.",
+                "nonFirst": "For now, let's start with your profile name."
+            },
+            "addMore": "You can add more profiles later."
         },
         "setup": {
             "title": "Tárca létrehozása",
@@ -47,7 +51,8 @@
             "progress2": "Új cím létrehozása",
             "progress3": "Váltás Ledger alkalmazásra",
             "progress4": "Utalás kezdeményezése",
-            "watchVideo": "Video útmutató megtekintése"
+            "watchVideo": "Video útmutató megtekintése",
+            "videoGuide": "Ledger migration video guide"
         },
         "ledgerInstallationGuide": {
             "title": "Telepítette a szükéséges Ledger alkalmazásokat?",
@@ -114,7 +119,7 @@
             "body": "Az új tárcája használatra kész.",
             "softwareMigratedBody": "Sikeresen migrálta tokenjeit az új hálózatra",
             "fireflyLedgerBody": "A Ledger számlája sikeresen helyreállt és továbbléphet a folyamatban.",
-            "trinityLedgerBody": "Sikeresen migrálta a Ledger-t az új hálózatra. Most már eltávolíthatja a {legacy} alkalmazást az eszközéről.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
             "exportMigration": "Migrálási napló exportálása és telepítés befejezése"
         },
         "import": {
@@ -194,6 +199,7 @@
             "accountPage": "Számla oldal",
             "standard": "Általános",
             "expert": "Haladó",
+            "takingAWhile": "This is taking a while...",
             "notGeneratingAddresses": "A Ledger eszköze képes címeket generálni?",
             "reinstallLegacy": "Ha nem, csatlakoztassa le az eszközt a számítógépéről majd próbálja újra. Ha a probléma továbbra is fennáll, elképzelhető, hogy újra kell telepítenie a {legacy} alkalmazást."
         },
@@ -226,7 +232,7 @@
             "miningBundle": "Kötegtranzakció bányászása",
             "problemRestoringWallet": "Hálózati hiba történt tárcája helyreállítása közben. Kérjük, próbálja újra.",
             "minimumMigrationAmountSpentAddresses": "A migráláshoz legalalább 1 Mi egyenlegnek kell lennie minden olyan címen, amelyről korábban már költött. Ellenőrizze, hogy egyenlege rendben van-e.",
-            "tooManyAddressesToMigrate": "Túl sok alacsony egyenleggel rendelkező címe van a migrációhoz. Ellenőrizze, hogy egyenlege rendben van-e.",
+            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
             "cannotMigrateAllYourFunds": "Nem tudjuk a teljes egyenlegét migrálni, mert néhány címén 1 Mi alatti egyenleggel rendelkezik. Ennek ellenére folyathatja, de {value} el fog veszni.",
             "error": "Hiba történt az egyenlege migrálása során. Kérjük, próbálja újra."
         },
@@ -970,6 +976,9 @@
         },
         "popup": {
             "preventClose": "A felugró ablakot nem lehet bezárni."
+        },
+        "migration": {
+            "missingBundle": "An error occurred while trying to find the transaction bundle."
         }
     },
     "tooltips": {

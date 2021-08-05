@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "प्रोफ़ाइल बनाएँ",
+            "profileName": "प्रोफ़ाइल नाम",
             "body1": "आप अपने वॉलेट को व्यवस्थित करने और गोपनीयता में सुधार करने के लिए कई उपयोगकर्ता प्रोफ़ाइल बना सकते हैं",
-            "body2": "अभी के लिए, पहले प्रोफ़ाइल नाम से शुरू करते हैं। आप बाद में और प्रोफाइल जोड़ सकते हैं",
-            "profileName": "प्रोफ़ाइल नाम"
+            "body2": {
+                "first": "For now, let's start with your first profile name.",
+                "nonFirst": "For now, let's start with your profile name."
+            },
+            "addMore": "You can add more profiles later."
         },
         "setup": {
             "title": "वॉलेट सेट करें",
@@ -47,7 +51,8 @@
             "progress2": "नया पता उत्पन्न करें",
             "progress3": "लेजर ऐप स्विच करें",
             "progress4": "धनराशि का ट्रांसफर",
-            "watchVideo": "वीडियो गाइड देखें"
+            "watchVideo": "वीडियो गाइड देखें",
+            "videoGuide": "Ledger migration video guide"
         },
         "ledgerInstallationGuide": {
             "title": "क्या आपने आवश्यक लेजर ऐप्स इंस्टॉल किए हैं?",
@@ -114,7 +119,7 @@
             "body": "आपका वॉलेट उपयोग के लिए तैयार है",
             "softwareMigratedBody": "आपने अपने धन को नए नेटवर्क में सफलतापूर्वक स्थानांतरित कर दिया है",
             "fireflyLedgerBody": "आपका लेजर खाता सफलतापूर्वक पुनर्प्राप्त कर लिया गया है और अब आप जारी रख सकते हैं।",
-            "trinityLedgerBody": "आपने अपने लेजर को नए नेटवर्क में सफलतापूर्वक स्थानांतरित कर दिया है। अब आप अपने डिवाइस से {legacy} ऐप को हटा सकते हैं",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
             "exportMigration": "निर्यात माइग्रेशन लॉग और सेटअप फिनिश करिए"
         },
         "import": {
@@ -194,6 +199,7 @@
             "accountPage": "अकाउंट पेज",
             "standard": "मानक",
             "expert": "एक्स्पर्ट",
+            "takingAWhile": "This is taking a while...",
             "notGeneratingAddresses": "क्या आपका लेजर एड्रेस जनरेट कर रहा है?",
             "reinstallLegacy": "यदि नहीं, तो डिवाइस को डिस्कनेक्ट करें और पुनः प्रयास करें। अगर समस्या बनी रहती है, तो आपको {legacy} ऐप को फिर से इंस्टॉल करना पड़ सकता है।"
         },
@@ -226,7 +232,7 @@
             "miningBundle": "माइनिंग बंडल",
             "problemRestoringWallet": "आपके बटुए को पुनर्स्थापित करने में एक नेटवर्क त्रुटि थी। कृपया पुन: प्रयास करें।",
             "minimumMigrationAmountSpentAddresses": "प्रत्येक खर्च किए गए पते की न्यूनतम प्रवास राशि 1 Mi है। यदि आपका बैलेंस सही नहीं दिखता है तो फिर से जांचें।",
-            "tooManyAddressesToMigrate": "आपके पास माइग्रेट करने के लिए कम बैलेंस वाले कई पते हैं। यदि आपका बैलेंस सही नहीं दिखता है तो फिर से जांचें।",
+            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
             "cannotMigrateAllYourFunds": "हम आपके सभी फंडों को स्थानांतरित नहीं कर सकते हैं क्योंकि कुछ पते मूल्य में बहुत कम हैं। आप वैसे भी आगे बढ़ सकते हैं। {value} खो जाएगा।",
             "error": "आपके फंड्स को माइग्रेट करने में समस्या थी। कृपया पुन: प्रयास करें"
         },
@@ -970,6 +976,9 @@
         },
         "popup": {
             "preventClose": "यह पॉपअप बंद करने में असमर्थ है।"
+        },
+        "migration": {
+            "missingBundle": "An error occurred while trying to find the transaction bundle."
         }
     },
     "tooltips": {

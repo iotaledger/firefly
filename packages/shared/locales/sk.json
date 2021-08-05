@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "Vytvoriť profil",
+            "profileName": "Názov profilu",
             "body1": "Môžete si vytvoriť viaceré používateľské profily pre organizáciu vašich peňaženiek a zvýšenie súkromia.",
-            "body2": "Nateraz poďme začať s názvom vášho prvého profilu. Ďalšie profily môžete pridať neskôr.",
-            "profileName": "Názov profilu"
+            "body2": {
+                "first": "Začnime s menom vášho prvého profilu.",
+                "nonFirst": "Začnime s menom vášho profilu."
+            },
+            "addMore": "Viac profilov viete pridať neskôr."
         },
         "setup": {
             "title": "Nastavte si svoju peňaženku",
@@ -47,7 +51,8 @@
             "progress2": "Vygenerovať adresu",
             "progress3": "Prepnúť aplikáciu Ledger",
             "progress4": "Previesť prostriedky",
-            "watchVideo": "Pozrieť si video-návod"
+            "watchVideo": "Pozrieť si video-návod",
+            "videoGuide": "Video-návod pre Ledger migráciu"
         },
         "ledgerInstallationGuide": {
             "title": "Nainštalovali ste potrebné Ledger aplikácie?",
@@ -114,7 +119,7 @@
             "body": "Vaša nová peňaženka je pripravená na použitie.",
             "softwareMigratedBody": "Úspešne ste premigrovali vaše prostriedky do novej siete",
             "fireflyLedgerBody": "Vaše Ledger konto bolo úspešne obnovené a teraz môžete pokračovať.",
-            "trinityLedgerBody": "Úspešne ste premigrovali váš Ledger do novej siete. Teraz môžete vymazať aplikáciu {legacy} z vášeho zariadenia.",
+            "trinityLedgerBody": "Úspešne ste premigrovali váš Ledger do novej siete.",
             "exportMigration": "Exportovať log migrácie a dokončiť nastavenie"
         },
         "import": {
@@ -194,6 +199,7 @@
             "accountPage": "Stránka účtu",
             "standard": "Štandardný",
             "expert": "Expert",
+            "takingAWhile": "Toto akosi trvá...",
             "notGeneratingAddresses": "Generuje vaša Ledger adresy?",
             "reinstallLegacy": "Ak nie, odpojte zariadenie a skúste to znova. Ak problém pretrváva, možno budete musieť znova nainštalovať aplikáciu {legacy}."
         },
@@ -970,6 +976,9 @@
         },
         "popup": {
             "preventClose": "Toto kontextové okno nie je možné zatvoriť."
+        },
+        "migration": {
+            "missingBundle": "Počas hľadania transakčného bundlu sa vyskytla chyba."
         }
     },
     "tooltips": {
