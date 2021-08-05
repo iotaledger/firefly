@@ -396,7 +396,7 @@
                 "description": "Ver información del sistema y la aplicación"
             },
             "migrateLedgerIndex": {
-                "title": "Migrar índice Ledger",
+                "title": "Migrar índice de Ledger",
                 "description": "Migrar otro índice de cuenta Trinity"
             },
             "stateExport": {
@@ -595,7 +595,7 @@
                 "0": "Instalar y abrir la aplicación Ledger Live",
                 "1": "Asegúrate de que tu Ledger está conectado",
                 "2": "Buscar aplicaciones: {legacy} e IOTA (MIOTA)",
-                "3": "Instala ambas aplicaciones: {legacy} e IOTA (MIOTA)",
+                "3": "Instalar ambas aplicaciones: {legacy} e IOTA (MIOTA)",
                 "4": "Recuerda que es importante cerrar Ledger Live antes de regresar a Firefly"
             }
         },
@@ -607,7 +607,7 @@
                 "2": "Abra la nueva aplicación IOTA en tu dispositivo Ledger",
                 "3": {
                     "text": "¿Aún no tienes suerte?",
-                    "link": "Prueba la página oficial de soporte Ledger"
+                    "link": "Prueba la página oficial de soporte de Ledger"
                 }
             }
         },
@@ -626,8 +626,8 @@
             "body": "Confirma que la dirección de recepción mostrada en tu Ledger coincide con la que se muestra a continuación. Si coinciden, pulsa ambos botones de tu Ledger como se le ha indicado."
         },
         "ledgerMigrateIndex": {
-            "title": "¿Necesita migrar otro índice de cuenta Trinite?",
-            "body": "También puede migrar más tarde en Configuración Avanzada."
+            "title": "¿Necesitas migrar otro índice de cuenta Trinity?",
+            "body": "También puedes migrar más tarde en Configuración Avanzada."
         }
     },
     "charts": {
@@ -883,7 +883,7 @@
         "minutesRemaining": "{minutes, plural, one {1 minuto restante} other {# minutos restantes}}",
         "copiedToClipboard": "Copiado al portapapeles",
         "accountsSynchronized": "Sincronización de cartera completada",
-        "fundsAvailableSoon": "Tus fondos estarán disponibles en breve"
+        "fundsAvailableSoon": "Tus fondos pronto estarán disponibles"
     },
     "error": {
         "profile": {
@@ -972,7 +972,7 @@
             "otherConnected": "Está abierta la aplicación incorrecta en tu dispositivo Ledger.",
             "generateAddress": "Hubo un error al generar una dirección.",
             "timeout": "El tiempo de espera de tu Ledger ha expirado.",
-            "disconnected": "Tu dispositivo Ledger se ha desconectado."
+            "disconnected": "Tu dispositivo Ledger ha sido desconectado."
         },
         "popup": {
             "preventClose": "Esta ventana emergente no se puede cerrar."

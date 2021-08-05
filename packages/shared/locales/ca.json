@@ -56,7 +56,7 @@
         },
         "ledgerInstallationGuide": {
             "title": "Has instal·lat les aplicacions Ledger necessàries?",
-            "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
+            "body1": "Abans de continuar, cal que cerqueu i instal·leu tant l'aplicació {legacy} com la nova aplicació IOTA mitjançant Ledger Live.",
             "body2": "Assegureu-vos que el firmware del Ledger estigui actualitzat. Les aplicacions preinstal·lades s’han d’actualitzar a les seves darreres versions.",
             "action": "Sí, he instal·lat aquestes aplicacions"
         },
@@ -174,10 +174,10 @@
             "restoring": "Restaurant des de Ledger..."
         },
         "legacyLedgerIntro": {
-            "title": "Start your Ledger migration using Firefly",
-            "body1": "Firefly will help you to transfer your tokens to the new Chrysalis network.",
+            "title": "Inicieu la migració del vostre Ledger usant Firefly",
+            "body1": "Firefly us ajudarà a transferir els vostres criptoactius a la nova xarxa Chrysalis.",
             "body2": "Després de la migració, podreu enviar i rebre criptoactius utilitzant el vostre Ledger amb Firefly.",
-            "readMore": "What to expect from the migration process"
+            "readMore": "Què esperar del procés de migració"
         },
         "generateNewLedgerAddress": {
             "title": "Generar una nova adreça",
