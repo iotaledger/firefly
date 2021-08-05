@@ -16,7 +16,7 @@
         "profile": {
             "title": "Créer un profil",
             "body1": "Vous pouvez créer plusieurs profils utilisateurs pour organiser vos portefeuilles et augmenter votre confidentialité.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
+            "body2": "Commençons avec votre premier profil utilisateur. Vous pourrez ajouter d'autres profils par la suite.",
             "profileName": "Nom du Profil"
         },
         "setup": {
@@ -114,7 +114,7 @@
             "body": "Votre nouveau portefeuille est prêt à être utilisé.",
             "softwareMigratedBody": "Vous avez déplacé vos fonds vers le nouveau réseau avec succès",
             "fireflyLedgerBody": "Votre compte Ledger a été récupéré avec succès et vous pouvez maintenant continuer.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
+            "trinityLedgerBody": "Vous avez fait migrer avec succès votre Ledger vers le nouveau réseau. Vous pouvez maintenant supprimer l'application {legacy} de votre appareil.",
             "exportMigration": "Exporter le registre de migration et terminer l'installation"
         },
         "import": {
@@ -226,7 +226,7 @@
             "miningBundle": "Lot de signature",
             "problemRestoringWallet": "Une erreur réseau s'est produite lors de la restauration de votre portefeuille. Veuillez réessayer.",
             "minimumMigrationAmountSpentAddresses": "Le montant minimum nécessaire pour déplacer vos fonds est de 1 Mi pour chaque adresse. Merci de vérifier le montant de votre portefeuille.",
-            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
+            "tooManyAddressesToMigrate": "Vous avez trop d'adresses avec un solde insuffisant pour déplacer vos fonds. Vérifiez à nouveau si votre solde ne semble pas correct.",
             "cannotMigrateAllYourFunds": "Nous ne pouvons pas transférer tous vos fonds parce que certaines adresses ont trop de valeur. Vous pouvez néanmoins continuer. {value} seront perdues.",
             "error": "Il s'est produit une erreur lors du transfert de vos fonds. Merci d'essayer à nouveau."
         },

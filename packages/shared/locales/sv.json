@@ -16,7 +16,7 @@
         "profile": {
             "title": "Skapa en profil",
             "body1": "Du kan skapa flera användarprofiler för att organisera dina plånböcker och förbättra sekretessen.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
+            "body2": "Låt oss börja med ditt första profilnamn. Du kan lägga till fler profiler senare.",
             "profileName": "Profilnamn"
         },
         "setup": {
@@ -114,7 +114,7 @@
             "body": "Din nya plånbok är redo att användas.",
             "softwareMigratedBody": "Du har framgångsrikt migrerat dina IOTA till det nya nätverket",
             "fireflyLedgerBody": "Ditt Ledger-konto har återställts och du kan nu fortsätta.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
+            "trinityLedgerBody": "Du har migrerat din Ledger till det nya nätverket. Du kan nu ta bort {legacy} -appen från din enhet.",
             "exportMigration": "Exportera migrationslogg och avsluta installationen"
         },
         "import": {
@@ -226,7 +226,7 @@
             "miningBundle": "Utvinner säker bundle",
             "problemRestoringWallet": "Det uppstod ett nätverksfel när din plånbok skulle återställas. Försök igen.",
             "minimumMigrationAmountSpentAddresses": "Minsta migreringsbelopp för varje förbrukad adress är 1 Mi. Kontrollera igen om ditt saldo inte ser rätt ut.",
-            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
+            "tooManyAddressesToMigrate": "Du har för många adresser med lågt saldo för att migrera. Kontrollera igen om ditt saldo inte ser rätt ut.",
             "cannotMigrateAllYourFunds": "Vi kan inte migrera alla dina tillgångar eftersom vissa adresser är för låga i värde. Du kan fortsätta ändå. {value} kommer att gå förlorad.",
             "error": "Det gick inte att migrera dina tillgångar. Försök igen."
         },

@@ -16,7 +16,7 @@
         "profile": {
             "title": "Skep 'n Profiel",
             "body1": "Jy kan verskeie gebruikersprofiele skep om jou tokens apart te hou en privaatheid te verbeter.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
+            "body2": "Laat ons eers begin met jou eerste profielnaam. Jy kan later meer profiele byvoeg.",
             "profileName": "Profiel Naam"
         },
         "setup": {
@@ -114,7 +114,7 @@
             "body": "Jou nuwe beursie is gereed om te gebruik.",
             "softwareMigratedBody": "Jy het jou fondse suksesvol na die nuwe netwerk gemigreer",
             "fireflyLedgerBody": "Jou Ledger rekening is suksesvol herstel en jy kan nou voortgaan.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network. You can now remove the {legacy} app from your device.",
+            "trinityLedgerBody": "Jy het jou Ledger suksesvol na die nuwe netwerk gemigreer. Jy kan nou die {legacy} app van jou toestel verwyder.",
             "exportMigration": "Voer migrasielogboek uit en voltooi die opstelling"
         },
         "import": {
@@ -226,7 +226,7 @@
             "miningBundle": "Bondelmynbou",
             "problemRestoringWallet": "Daar was 'n network probleem om jou beursie te herstel. Probeer asseblief weer.",
             "minimumMigrationAmountSpentAddresses": "Die minimum migrasiebedrag vir elke spandeerde adres is 1 Mi. Kyk weer of jou balans nie reg lyk nie.",
-            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
+            "tooManyAddressesToMigrate": "Jy het te veel adresse met 'n lae balans om te migreer. Kyk weer of jou balans nie reg lyk nie.",
             "cannotMigrateAllYourFunds": "Ons kan nie al jou fondse migreer nie, sommige adresse is the min. Jy kan in elk geval voortgaan. {value} sal verlore gaan.",
             "error": "Daar was 'n fout tydens die migrasie van jou fondse. Probeer asseblief weer."
         },

@@ -46,7 +46,7 @@
             "progress1": "Ledgerを接続してください",
             "progress2": "アドレスを生成",
             "progress3": "Switch Ledger app",
-            "progress4": "Transfer funds",
+            "progress4": "資金を移動",
             "watchVideo": "ビデオガイドを見る"
         },
         "ledgerInstallationGuide": {
@@ -152,7 +152,7 @@
             "title": "Restore or Migrate your Ledger",
             "body": "Restore an existing Firefly Ledger profile, or migrate your funds from Trinity.",
             "haveFireflyLedger": "I have a Firefly Ledger backup",
-            "haveFireflyLedgerDescription": "Restore a Firefly profile",
+            "haveFireflyLedgerDescription": "Firefly プロファイルを復元",
             "haveTrinityLedger": "I have a Trinity Ledger backup",
             "haveTrinityLedgerDescription": "Migrate a Trinity profile"
         },
@@ -179,9 +179,9 @@
             "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
             "confirmTitle": "Confirm the new address",
             "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
-            "confirmedTitle": "Address confirmed",
+            "confirmedTitle": "住所確認",
             "confirmedBody": "You have confirmed that the address in Firefly matches the one on your Ledger device.",
-            "generating": "Generating address"
+            "generating": "アドレスを生成"
         },
         "switchLedgerApps": {
             "title": "Switch Ledger apps",
@@ -190,8 +190,8 @@
         "selectLedgerAccountIndex": {
             "title": "Choose Ledger account index",
             "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
-            "accountIndex": "Account Index",
-            "accountPage": "Account Page",
+            "accountIndex": "アカウントインデックス",
+            "accountPage": "アカウントページ",
             "standard": "Standard",
             "expert": "Expert",
             "notGeneratingAddresses": "Is your Ledger generating addresses?",
