@@ -6,6 +6,9 @@
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
+    import { activeProfile } from 'shared/lib/profile'
+    import { Bech32 } from 'shared/lib/bech32'
+    import { BipPath } from 'shared/lib/typings/address'
 
     export let locale
 
@@ -42,6 +45,10 @@
         if (amountRaw <= 0) onInvalid()
 
         return formatUnitBestMatch(amountRaw)
+    }
+
+    const formatBip32Path = (address: string): BipPath => {
+        return Bech32.deriveBip32Path(address)
     }
 
     onMount(() => {
@@ -86,13 +93,18 @@
             <Text type="h5" highlighted classes="mb-2">
                 {locale(`general.${shouldDisplayRemainderAmount ? 'r' : 'newR'}emainder`)}
             </Text>
-            <Text type="pre" classes={shouldDisplayRemainderAmount ? 'mb-4' : ''}>
+            <Text type="pre" classes={shouldDisplayRemainderAmount || $activeProfile.settings.displayBip32Path ? 'mb-4' : ''}>
                 {formatAddressForLedger(remainderAddress)}
             </Text>
 
             {#if shouldDisplayRemainderAmount}
                 <Text type="h5" highlighted classes="mb-2">{locale('general.amount')}</Text>
-                <Text type="pre">{formatAmount(remainderAmount)}</Text>
+                <Text type="pre" classes="mb-4">{formatAmount(remainderAmount)}</Text>
+            {/if}
+
+            {#if $activeProfile.settings.displayBip32Path}
+                <Text type="h5" highlighted classes="mb-2">{locale('general.bipPath')}</Text>
+                <Text type="pre">{formatBip32Path(remainderAddress)}</Text>
             {/if}
         </div>
     {/if}

@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Checkbox, HR, Radio, Text } from 'shared/components'
+    import { Button, Checkbox, HR, Radio, Text, Toggle } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
     import { loggedIn } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
@@ -104,6 +104,11 @@
 
     function handleBalanceFinderClick() {
         openPopup({ type: 'balanceFinder', hideClose: true })
+    }
+
+    function handleDisplayBip32PathClick() {
+        const displayBip32Path = $activeProfile.settings.displayBip32Path
+        updateProfile('settings.displayBip32Path', !displayBip32Path)
     }
 </script>
 
@@ -280,6 +285,12 @@
             <Button medium inlineStyle="min-width: 156px;" onClick={() => navigateToNewIndexMigration()}>
                 {locale('views.settings.migrateLedgerIndex.title')}
             </Button>
+        </section>
+        <HR classes="pb-5 mt-5 justify-center" />
+        <section id="displayBipPath" class="w-3/4">
+            <Text type="h4" classes="mb-3">{locale('views.settings.displayBip32Path.title')}</Text>
+            <Text type="p" secondary classes="mb-5">{locale('views.settings.displayBip32Path.description')}</Text>
+            <Toggle active={$activeProfile.settings.displayBip32Path} onClick={() => handleDisplayBip32PathClick()} />
         </section>
     {/if}
     <!-- TODO: Implement state export -->

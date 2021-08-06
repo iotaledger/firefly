@@ -16,3 +16,12 @@ export interface Address {
         [key: string]: AddressOutput
     }
 }
+
+export type BipPath = string | {
+    seed: string
+    purpose: number
+    coinType: number
+    accountIndex: number
+    changeIndex: number
+    addressIndex: number
+}

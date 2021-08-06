@@ -5,6 +5,9 @@
     import { closePopup,popupState } from 'shared/lib/popup';
     import { onMount } from 'svelte';
     import { get } from 'svelte/store';
+    import { BipPath } from 'shared/lib/typings/address'
+    import { Bech32 } from 'shared/lib/bech32'
+    import { activeProfile } from 'shared/lib/profile'
 
     export let locale
 
@@ -17,6 +20,10 @@
         })
 
         if (get(popupState).active) closePopup(true)
+    }
+
+    const formatBip32Path = (address: string): BipPath => {
+        return Bech32.deriveBip32Path(address)
     }
 
     onMount(() => {
@@ -36,5 +43,12 @@
 </div>
 <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-5 text-center">
     <Text type="h5" highlighted classes="mb-2">{locale('general.receiveAddress')}</Text>
-    <Text type="pre">{formatAddressForLedger(address)}</Text>
+    <Text type="pre" classes={$activeProfile.settings.displayBip32Path ? 'mb-4' : ''}>
+        {formatAddressForLedger(address)}
+    </Text>
+
+    {#if $activeProfile.settings.displayBip32Path}
+        <Text type="h5" highlighted classes="mb-2">{locale('general.bip32Path')}</Text>
+        <Text type="pre">{formatBip32Path(address)}</Text>
+    {/if}
 </div>

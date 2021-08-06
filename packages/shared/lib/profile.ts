@@ -56,6 +56,7 @@ export interface UserSettings {
     showHiddenAccounts?: boolean
     chartSelectors: ChartSelectors
     hideNetworkStatistics?: boolean
+    displayBip32Path?: boolean
 }
 
 /**
@@ -151,6 +152,7 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
             automaticNodeSelection: true,
             includeOfficialNodes: true,
             disabledNodes: undefined,
+            displayBip32Path: false,
             lockScreenTimeout: 5,
             chartSelectors: {
                 currency: AvailableExchangeRates.USD,
