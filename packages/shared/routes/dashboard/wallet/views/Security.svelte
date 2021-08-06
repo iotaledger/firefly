@@ -9,9 +9,11 @@
     import { SecurityTile, Text } from 'shared/components'
     import { versionDetails } from 'shared/lib/appUpdater'
     import { diffDates, getBackupWarningColor, isRecentDate } from 'shared/lib/helpers'
+    import { getLedgerDeviceStatus, getLedgerOpenedApp, ledgerDeviceState } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, isSoftwareProfile, isStrongholdLocked, profiles } from 'shared/lib/profile'
+    import { LedgerApp, LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { api } from 'shared/lib/wallet'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
@@ -25,7 +27,6 @@
     let color
     let isCheckingLedger
     let ledgerSpinnerTimeout
-    let LEDGER_STATUS_POLL_INTERVAL = 5000
 
     let hardwareDeviceColor = 'gray'
     $: {
@@ -35,13 +36,11 @@
                 hardwareDeviceColor = 'blue'
                 break
             case LedgerDeviceState.NotDetected:
-                hardwareDeviceColor = 'red'
-                break
             case LedgerDeviceState.AppNotOpen:
             case LedgerDeviceState.LegacyConnected:
             case LedgerDeviceState.Locked:
             case LedgerDeviceState.OtherConnected:
-                hardwareDeviceColor = 'gray'
+                hardwareDeviceColor = 'red'
                 break
         }
     }
@@ -51,13 +50,14 @@
     })
 
     const checkHardwareDeviceStatus = (state: LedgerDeviceState): void => {
-        const text = locale(`views.dashboard.security.hardwareDevice.statuses.${state}`)
+        const values = state === LedgerDeviceState.LegacyConnected ? { legacy: LedgerAppName.IOTALegacy } : {}
+        const text = locale(`views.dashboard.security.hardwareDevice.statuses.${state}`, { values })
 
         /**
          * NOTE: The text for when another app (besides IOTA or IOTA Legacy) is open
          * requires an app name to be prepended or else the text won't make sense.
          */
-        if(state === LedgerDeviceState.OtherConnected) {
+        if (state === LedgerDeviceState.OtherConnected) {
             getLedgerOpenedApp()
                 .then((la: LedgerApp) => {
                     hardwareDeviceStatus = `${la.name} ${text}`
@@ -77,15 +77,10 @@
 
     onMount(() => {
         setup()
-
-        if (!$isSoftwareProfile) {
-            pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL, getLedgerDeviceStatus)
-        }
     })
 
     onDestroy(() => {
         clearTimeout(ledgerSpinnerTimeout)
-        stopPollingLedgerStatus()
         unsubscribe()
     })
 

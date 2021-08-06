@@ -1,9 +1,10 @@
 import { isSoftwareProfile } from 'shared/lib/profile'
 import { get, writable } from 'svelte/store'
 import { localize } from './i18n'
+import { stopPollingLedgerStatus } from './ledger'
 import { showAppNotification } from './notifications'
 import { closePopup } from './popup'
-import { activeProfile, clearActiveProfile, isStrongholdLocked } from './profile'
+import { activeProfile, clearActiveProfile, isLedgerProfile, isStrongholdLocked } from './profile'
 import { resetRouter } from './router'
 import { api, destroyActor, resetWallet } from './wallet'
 
@@ -76,8 +77,11 @@ export const logout = () => {
             if (get(isSoftwareProfile)) {
                 isStrongholdLocked.set(true)
             }
+            if (get(isLedgerProfile)) {
+                stopPollingLedgerStatus()
+            }
             clearSendParams()
-            closePopup()
+            closePopup(true)
             clearActiveProfile()
             resetWallet()
             resetRouter()

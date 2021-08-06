@@ -2,20 +2,23 @@
     import { DashboardPane } from 'shared/components'
     import { clearSendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
+    import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { addProfileCurrencyPriceData, priceData } from 'shared/lib/marketData'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { openPopup } from 'shared/lib/popup'
+    import { closePopup, openPopup } from 'shared/lib/popup'
     import {
         activeProfile,
+        isLedgerProfile,
         isSoftwareProfile,
         isStrongholdLocked,
         MigratedTransaction,
         setMissingProfileType,
         updateProfile,
     } from 'shared/lib/profile'
-    import { walletRoute, walletSetupType } from 'shared/lib/router'
+    import { walletRoute } from 'shared/lib/router'
+    import { TransferProgressEventType, LedgerErrorType } from 'shared/lib/typings/events'
     import type { Transaction } from 'shared/lib/typings/message'
-    import { SetupType, WalletRoutes } from 'shared/lib/typings/routes'
+    import { WalletRoutes } from 'shared/lib/typings/routes'
     import {
         AccountMessage,
         AccountsBalanceHistory,
@@ -28,9 +31,12 @@
         getAccountsBalanceHistory,
         getIncomingFlag,
         getInternalFlag,
+        getSyncAccountOptions,
         getTransactions,
         getWalletBalanceHistory,
+        hasGeneratedALedgerReceiveAddress,
         initialiseListeners,
+        isFirstSessionSync,
         isSelfTransaction,
         isTransferring,
         prepareAccountInfo,
@@ -44,7 +50,7 @@
         WalletAccount,
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
-    import { derived, get, Readable, Writable } from 'svelte/store'
+    import { derived, Readable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
     import { TransferProgressEventType } from 'shared/lib/typings/events'
 
@@ -100,10 +106,9 @@
     })
 
     const transactions = derived([viewableAccounts, activeProfile], ([$viewableAccounts, $activeProfile]) => {
-        if ($activeProfile?.migratedTransactions?.length) {
-            return $activeProfile.migratedTransactions
-        }
-        return getTransactions($viewableAccounts)
+        const _migratedTransactions = $activeProfile?.migratedTransactions || []
+        
+        return [..._migratedTransactions, ...getTransactions($viewableAccounts)]
     })
 
     setContext<Writable<BalanceOverview>>('walletBalance', balanceOverview)
@@ -119,29 +124,50 @@
 
     let isGeneratingAddress = false
 
+    // If wallet route or account changes force regeneration of Ledger receive address
+    $: {
+        $walletRoute
+        $selectedAccountId
+        if ($isLedgerProfile) {
+            hasGeneratedALedgerReceiveAddress.set(false)
+        }
+    }
+
     $: if ($accountsLoaded) {
         // update profileType if it is missing
-        if (!$activeProfile?.profileType) {
+        if (!$activeProfile?.type) {
             setMissingProfileType($accounts)
         }
     }
 
     function getAccounts() {
+        const _onError = (error: any = null) => {
+            if ($isLedgerProfile) {
+                if (!LedgerErrorType[error.type]) {
+                    displayNotificationForLedgerProfile('error', true, true, false, false, error)
+                }
+            } else {
+                showAppNotification({
+                    type: 'error',
+                    message: locale(error?.error || 'error.global.generic'),
+                })
+            }
+        }
+
         api.getAccounts({
             onSuccess(accountsResponse) {
                 const _continue = async () => {
                     accountsLoaded.set(true)
-                    const isNewProfile = get(walletSetupType) === SetupType.New
-                    const softwareGapLimit = isNewProfile ? 10 : 50
-                    const ledgerGapLimit = isNewProfile ? 1 : 10
-                    const accountDiscovery = isNewProfile ? 1 : 0
-                    const gapLimit = $activeProfile?.gapLimit ?? (get(isSoftwareProfile) ? softwareGapLimit : ledgerGapLimit)
+
+                    const { gapLimit, accountDiscoveryThreshold } = getSyncAccountOptions()
+
                     try {
-                        await asyncSyncAccounts(0, gapLimit, accountDiscovery, false)
+                        await asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
+
+                        if($isFirstSessionSync) isFirstSessionSync.set(false)
                     } catch (err) {
-                        console.error(err)
+                        _onError(err)
                     }
-                    updateProfile('gapLimit', get(isSoftwareProfile) ? 10 : 1)
                 }
 
                 if (accountsResponse.payload.length === 0) {
@@ -197,7 +223,7 @@
                                 const account = prepareAccountInfo(payloadAccount, meta)
                                 newAccounts.push(account)
                             } else {
-                                console.error(err)
+                                _onError(err)
                             }
 
                             completeCount++
@@ -213,10 +239,7 @@
                 }
             },
             onError(err) {
-                showAppNotification({
-                    type: 'error',
-                    message: locale(err.error),
-                })
+                _onError(err)
             },
         })
     }
@@ -224,6 +247,9 @@
     function onGenerateAddress(accountId) {
         const _generate = () => {
             isGeneratingAddress = true
+
+            if ($isLedgerProfile) displayNotificationForLedgerProfile('error', true, true)
+
             api.getUnusedAddress(accountId, {
                 onSuccess(response) {
                     accounts.update((accounts) =>
@@ -239,18 +265,29 @@
                             return account
                         })
                     )
+                    closePopup(true)
+
                     isGeneratingAddress = false
+                    hasGeneratedALedgerReceiveAddress.set(true)
                 },
                 onError(err) {
+                    closePopup(true)
+
+                    console.error(err)
+
                     isGeneratingAddress = false
 
-                    const shouldHideErrorNotification =
-                        err && err.type === 'ClientError' && err.error === 'error.node.chrysalisNodeInactive'
-
+                    const isClientError = err && err.type === 'ClientError'
+                    const shouldHideErrorNotification = isClientError && err.error === 'error.node.chrysalisNodeInactive'
                     if (!shouldHideErrorNotification) {
+                        /**
+                         * NOTE: To ensure a clear error message (for Ledger users),
+                         * we need to update the locale path.
+                         */
+                        const localePath = isClientError && $isLedgerProfile ? 'error.ledger.generateAddress' : err.error
                         showAppNotification({
                             type: 'error',
-                            message: locale(err.error),
+                            message: locale(localePath),
                         })
                     }
                 },
@@ -271,7 +308,7 @@
                 },
             })
         } else {
-            _generate()
+            promptUserToConnectLedger(false, () => _generate(), undefined)
         }
     }
 
@@ -354,7 +391,7 @@
                         completeCallback()
                     },
                     onError(err) {
-                        completeCallback(locale(err.error))
+                        completeCallback(err)
                     },
                 })
             } else {
@@ -405,7 +442,7 @@
                             })
                         },
                         onError(err) {
-                            completeCallback(locale(err.error))
+                            completeCallback(err)
                         },
                     }
                 )
@@ -462,7 +499,7 @@
                         })
 
                         transferState.set({
-                            type: TransferProgressEventType.Complete
+                            type: TransferProgressEventType.Complete,
                         })
 
                         setTimeout(() => {
@@ -537,7 +574,7 @@
                     })
 
                     transferState.set({
-                        type: TransferProgressEventType.Complete
+                        type: TransferProgressEventType.Complete,
                     })
 
                     setTimeout(() => {
@@ -600,27 +637,6 @@
             addProfileCurrencyPriceData()
         }
     })
-
-    function checkStrongholdStatus() {
-        api.getStrongholdStatus({
-            onSuccess(strongholdStatusResponse) {
-                updateProfile('isStrongholdLocked', strongholdStatusResponse.payload.snapshot.status === 'Locked')
-                api.areLatestAddressesUnused({
-                    onSuccess(response) {
-                        if (!response.payload) {
-                            openPopup({ type: 'password', props: { onSuccess: syncAccounts } })
-                        }
-                    },
-                    onError(error) {
-                        console.error(error)
-                    },
-                })
-            },
-            onError(error) {
-                console.error(error)
-            },
-        })
-    }
 </script>
 
 <style type="text/scss">

@@ -1,17 +1,19 @@
 <script lang="typescript">
-    import { Button, Illustration, Number, OnboardingLayout, Spinner, Text, Toggle } from 'shared/components'
+    import { Animation, Button, Number, OnboardingLayout, Spinner, Text, Toggle, Icon } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
-    import {
-        promptUserToConnectLedger,
-    } from 'shared/lib/ledger'
+    import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { ADDRESS_SECURITY_LEVEL, getLedgerMigrationData, hardwareIndexes } from 'shared/lib/migration'
-    import { createEventDispatcher } from 'svelte'
+    import { popupState } from 'shared/lib/popup'
+    import { onDestroy, createEventDispatcher } from 'svelte'
+    import { LedgerAppName } from 'shared/lib/typings/ledger'
 
     export let locale
     export let mobile
 
     let busy = false
     let expert = false
+    let showInfo = false
+    let infoTimeout
 
     let min = 0
     let max = 2147483647
@@ -21,6 +23,12 @@
 
     $: index = checkNumber(index)
     $: page = checkNumber(page)
+
+    $: if (!busy) {
+        showInfo = false
+    }
+
+    onDestroy(() => clearTimeout(infoTimeout))
 
     let isValidAccountIndex = false
     $: isValidAccountIndex = isValidNumber(index)
@@ -50,10 +58,11 @@
     function handleContinueClick() {
         busy = true
         const _onConnected = () => {
+            infoTimeout = setTimeout(() => (showInfo = true), 180000)
             Electron.ledger
                 .selectSeed(index, page, ADDRESS_SECURITY_LEVEL)
-                .then((iota) => {
-                    return getLedgerMigrationData(iota.getAddress)
+                .then(({ iota, callback }) => {
+                    return getLedgerMigrationData(iota.getAddress, callback)
                 })
                 .then((data) => {
                     busy = false
@@ -63,12 +72,13 @@
                 })
                 .catch((error) => {
                     busy = false
+                    displayNotificationForLedgerProfile('error', true, true, false, true, error)
+                    showInfo = false
+                    clearTimeout(infoTimeout)
                     console.error(error)
                 })
         }
-        const _onCancel = () => {
-            busy = false
-        }
+        const _onCancel = () => (busy = false)
         promptUserToConnectLedger(true, _onConnected, _onCancel)
     }
 
@@ -97,25 +107,49 @@
                 </div>
                 <div>
                     <Text type="p" secondary classes="mb-2">{locale('views.selectLedgerAccountIndex.accountIndex')}</Text>
-                    <Number bind:value={index} {min} {max} error={!isValidAccountIndex ? locale('error.account.index') : ''} />
+                    <Number
+                        bind:value={index}
+                        {min}
+                        {max}
+                        disabled={busy}
+                        error={!isValidAccountIndex ? locale('error.account.index') : ''} />
                 </div>
                 {#if expert}
                     <div>
                         <Text type="p" secondary classes="mb-2">{locale('views.selectLedgerAccountIndex.accountPage')}</Text>
-                        <Number bind:value={page} {min} {max} error={!isValidAccountPage ? locale('error.account.page') : ''} />
+                        <Number
+                            bind:value={page}
+                            {min}
+                            {max}
+                            disabled={busy}
+                            error={!isValidAccountPage ? locale('error.account.page') : ''} />
                     </div>
                 {/if}
             </div>
         </div>
         <div slot="leftpane__action" class="flex flex-col space-y-4">
+            {#if showInfo && !$popupState.active}
+                <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mb-6 p-10 pb-6">
+                    <div class="bg-red-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
+                        <Icon icon="warning" classes="text-white" />
+                    </div>
+                    <Text type="h3" classes="mb-4 text-center">{locale('views.selectLedgerAccountIndex.takingAWhile')}</Text>
+                    <Text classes="mb-4 text-center">{locale('views.selectLedgerAccountIndex.notGeneratingAddresses')}</Text>
+                    <Text classes="break-words text-center">
+                        {locale('views.selectLedgerAccountIndex.reinstallLegacy', {
+                            values: { legacy: LedgerAppName.IOTALegacy },
+                        })}
+                    </Text>
+                </div>
+            {/if}
             <Button classes="w-full" disabled={busy || !isValidAccountIndex || !isValidAccountPage} onClick={handleContinueClick}>
                 {#if busy}
                     <Spinner busy={true} message={locale('views.migrate.findingBalance')} classes="justify-center" />
                 {:else}{locale('actions.confirm')}{/if}
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-end items-center bg-orange-50 dark:bg-gray-900">
-            <Illustration width="100%" illustration="ledger-choose-index-desktop" />
+        <div slot="rightpane" class="w-full h-full flex justify-center items-center bg-orange-50 dark:bg-gray-900">
+            <Animation width="100%" animation="ledger-choose-index-desktop" />
         </div>
     </OnboardingLayout>
 {/if}

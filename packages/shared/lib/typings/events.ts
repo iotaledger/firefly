@@ -1,9 +1,7 @@
 import type { ResponseTypes } from './bridge'
 import type {
     Message,
-    ReferencedSignatureLockedSingleOutput,
-    SignatureLockedDustAllowance,
-    SignatureLockedSingleOutput
+    UTXOEventData
 } from './message'
 
 // Reference: https://github.com/iotaledger/wallet.rs/blob/develop/src/error.rs
@@ -70,6 +68,15 @@ export enum ErrorType {
 
     // Dust output
     DustError = 'DustError',
+}
+
+export enum LedgerErrorType {
+    LedgerMiscError = 'LedgerMiscError',
+    LedgerDongleLocked = 'LedgerDongleLocked',
+    LedgerDeniedByUser = 'LedgerDeniedByUser',
+    LedgerDeviceNotFound = 'LedgerDeviceNotFound',
+    LedgerEssenceTooLarge = 'LedgerEssenceTooLarge',
+    WrongLedgerSeedError = 'WrongLedgerSeedError',
 }
 
 export type Callback<T> = (error: string, data: T) => void
@@ -146,9 +153,9 @@ export interface GeneratingRemainderDepositAddressEvent extends TransferProgress
 
 export interface PreparedTransactionEvent extends TransferProgressEvent {
     /// Transaction inputs.
-    inputs: ReferencedSignatureLockedSingleOutput[]
+    inputs: UTXOEventData[]
     /// Transaction outputs.
-    outputs: (SignatureLockedSingleOutput | SignatureLockedDustAllowance)[]
+    outputs: UTXOEventData[]
     /// Indexation data.
     data?: string
 
@@ -164,6 +171,14 @@ export interface TransferState extends TransferProgressEvent {
 export interface TransferProgressEventPayload {
     accountId: string
     event: TransferProgressEventData
+}
+
+export interface LedgerAddressGenerationEventPayload {
+    event: LedgerAddressGenerationEvent;
+}
+
+export interface LedgerAddressGenerationEvent {
+    address: string;
 }
 
 export enum MigrationProgressEventType {

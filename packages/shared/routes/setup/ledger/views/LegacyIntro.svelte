@@ -1,7 +1,10 @@
 <script>
-    import { Button, OnboardingLayout, Text, Video } from 'shared/components'
-    import { LEDGER_MIGRATION_VIDEO } from 'shared/lib/migration'
-    import { createEventDispatcher } from 'svelte'
+    import { Button, Link, OnboardingLayout, Text, Video } from 'shared/components'
+    import { Electron } from 'shared/lib/electron'
+    import { initialiseMigrationListeners, LEDGER_MIGRATION_VIDEO } from 'shared/lib/migration'
+    import { api, isBackgroundSyncing } from 'shared/lib/wallet'
+    import { createEventDispatcher, onMount } from 'svelte'
+    import { get } from 'svelte/store'
 
     export let locale
     export let mobile
@@ -9,7 +12,7 @@
     const dispatch = createEventDispatcher()
 
     function handleReadMoreClick() {
-        // TODO: add link
+        Electron.openUrl('https://firefly.iota.org/faq#migration')
     }
 
     function handleNextClick() {
@@ -19,6 +22,24 @@
     function handleBackClick() {
         dispatch('previous')
     }
+
+    onMount(() => {
+        // This is the first screen that mounts when a user wants to migrate additional account index
+        initialiseMigrationListeners()
+        if (get(isBackgroundSyncing)) {
+            api.stopBackgroundSync({
+                onSuccess() {
+                    isBackgroundSyncing.set(false)
+                },
+                onError(err) {
+                    showAppNotification({
+                        type: 'error',
+                        message: locale('error.account.syncing'),
+                    })
+                },
+            })
+        }
+    })
 </script>
 
 {#if mobile}
@@ -37,9 +58,7 @@
             slot="rightpane"
             class="w-full h-full px-32 flex flex-col flex-wrap justify-center items-center bg-gray-50 dark:bg-gray-900">
             <Video video={LEDGER_MIGRATION_VIDEO} />
-            <Text onClick={handleReadMoreClick} type="p" highlighted classes="cursor-pointer mt-7 text-center">
-                {locale('views.legacyLedgerIntro.readMore')}
-            </Text>
+            <Link onClick={handleReadMoreClick} classes="mt-7" icon="info">{locale('views.legacyLedgerIntro.readMore')}</Link>
         </div>
     </OnboardingLayout>
 {/if}

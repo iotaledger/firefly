@@ -1,12 +1,18 @@
-const Transport = require('@ledgerhq/hw-transport-node-hid').default;
+const TransportHid = require('@ledgerhq/hw-transport-node-hid').default;
+const TransportSpeculos = require('@ledgerhq/hw-transport-node-speculos').default;
 const Iota = require('hw-app-iota').default
-const { ipcRenderer, remote } = require('electron')
 
-const ipc = ipcRenderer;
-const Wallet = remote.getCurrentWindow().webContents;
+const USE_SIMULATOR = false
+const SIMULATOR_PORT = 9999;
 
-const Errors = {
-    LEDGER_CANCELLED: 'Transaction cancelled on Ledger device.',
+async function createTransport() {
+    if (USE_SIMULATOR) {
+        return await TransportSpeculos.open({
+            apduPort: SIMULATOR_PORT
+        })
+    }
+
+    return await TransportHid.create();
 }
 
 class Ledger {
@@ -14,7 +20,7 @@ class Ledger {
         this.connected = false;
         this.listeners = [];
 
-        this.subscription = Transport.listen({
+        this.subscription = TransportHid.listen({
             next: (e) => {
                 this.onMessage(e.type);
             }
@@ -37,9 +43,7 @@ class Ledger {
      */
     async selectSeed(index, page, security) {
         if (!this.connected) {
-            Wallet.send('ledger', { awaitConnection: true });
             await this.awaitConnection();
-            Wallet.send('ledger', { awaitConnection: false });
         }
 
         if (!this.connected) {
@@ -53,7 +57,7 @@ class Ledger {
 
         await this.awaitApplication(index, page, security);
 
-        return this.iota;
+        return { iota: this.iota, callback: () => this.transport.close() };
     }
 
     /**
@@ -61,24 +65,14 @@ class Ledger {
      * @returns {promise}
      */
     async awaitConnection() {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             const callbackSuccess = (connected) => {
                 if (connected) {
                     resolve();
                     this.removeListener(callbackSuccess);
-                    ipc.removeListener('ledger', callbackAbort);
                 }
             };
             this.addListener(callbackSuccess);
-
-            const callbackAbort = (e, message) => {
-                if (message && message.abort) {
-                    this.removeListener(callbackSuccess);
-                    ipc.removeListener('ledger', callbackAbort);
-                    reject(Errors.LEDGER_CANCELLED);
-                }
-            };
-            ipc.on('ledger', callbackAbort);
         });
     }
 
@@ -96,7 +90,8 @@ class Ledger {
 
             const callback = async () => {
                 try {
-                    this.transport = await Transport.create();
+                    this.transport = await createTransport();
+
                     this.iota = new Iota(this.transport);
 
                     // TODO: Remove this before release.
@@ -106,7 +101,6 @@ class Ledger {
 
                     await this.iota.setActiveSeed(`44'/4218'/${testAccountIndex}'/${page}'`, security || 2);
 
-                    Wallet.send('ledger', { awaitApplication: false });
                     clearTimeout(timeout);
 
                     resolve(true);
@@ -116,7 +110,6 @@ class Ledger {
                     }
                     this.iota = null;
 
-                    Wallet.send('ledger', { awaitApplication: true });
 
                     if (rejected) {
                         return;
@@ -126,28 +119,12 @@ class Ledger {
                     if (error.statusCode === 0x6e00) {
                         timeout = setTimeout(() => callback(), 4000);
                     } else {
-                        Wallet.send('ledger', { awaitApplication: false });
                         reject(error);
                     }
                 }
             };
 
             callback();
-
-            const callbackAbort = (_e, message) => {
-                if (message && message.abort) {
-                    rejected = true;
-
-                    ipc.removeListener('ledger', callbackAbort);
-
-                    if (timeout) {
-                        clearTimeout(timeout);
-                    }
-                    reject(Errors.LEDGER_CANCELLED);
-                }
-            };
-
-            ipc.on('ledger', callbackAbort);
         });
     }
 
@@ -179,6 +156,7 @@ class Ledger {
      */
     addListener(callback) {
         this.listeners.push(callback);
+
         if (this.connected) {
             callback(this.connected);
         }
@@ -197,4 +175,15 @@ class Ledger {
     }
 }
 
-export default new Ledger();
+class LedgerSpeculos extends Ledger {
+    async awaitConnection() {
+        return new Promise((resolve) => {
+            this.connected = true;
+            resolve()
+        });
+    }
+}
+
+const _ledger = USE_SIMULATOR ? new LedgerSpeculos() : new Ledger();
+
+export default _ledger;

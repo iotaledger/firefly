@@ -1,10 +1,11 @@
 <script lang="ts">
-    import { Illustration, Text } from 'shared/components'
+    import { Animation, Text } from 'shared/components'
+    import { formatAddressForLedger } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { formatUnitBestMatch } from 'shared/lib/units'
-    import { get } from 'svelte/store'
-    import { onMount } from 'svelte'
     import { closePopup, popupState } from 'shared/lib/popup'
+    import { formatUnitBestMatch } from 'shared/lib/units'
+    import { onMount } from 'svelte'
+    import { get } from 'svelte/store'
 
     export let locale
 
@@ -27,8 +28,7 @@
 
         onCancel()
 
-        if(get(popupState).active)
-            closePopup()
+        if (get(popupState).active) closePopup(true)
     }
 
     const getPopupLocaleData = (prop: string): string => {
@@ -39,8 +39,7 @@
     }
 
     const formatAmount = (amountRaw: number): string => {
-        if(amountRaw <= 0)
-            onInvalid()
+        if (amountRaw <= 0) onInvalid()
 
         return formatUnitBestMatch(amountRaw)
     }
@@ -51,35 +50,50 @@
          * valid information then Firefly should cancel the transaction
          * (to be retried) and notify the user.
          */
-        if(!shouldDisplaySendTo && !shouldDisplayRemainderAddress)
-            onInvalid()
+        if (!shouldDisplaySendTo && !shouldDisplayRemainderAddress) onInvalid()
     })
 </script>
+
+<style>
+    .transaction {
+        max-height: 30vh;
+    }
+</style>
 
 <Text type="h4" classes="mb-6">{locale(getPopupLocaleData('title'))}</Text>
 <Text type="p" classes="mb-6" secondary>{locale(getPopupLocaleData('info'))}</Text>
 
-<div class="illustration w-full h-1/2 bg-white dark:bg-gray-900 flex justify-center content-center">
-    <Illustration illustration="ledger-confirm-address-desktop" />
+<div class="relative w-full h-1/2 bg-white dark:bg-gray-900 flex justify-center content-center">
+    <Animation
+        width="100%"
+        animation="ledger-bg-desktop"
+        classes="absolute transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+    <Animation animation="ledger-confirm-address-desktop" />
 </div>
 
-{#if shouldDisplaySendTo}
-    <div class={`rounded-lg bg-gray-50 dark:bg-gray-800 p-4 ${shouldDisplayRemainderAddress ? 'mb-6' : ''}`}>
-        <Text type="h5" highlighted classes="mb-2">{locale('general.sendTo')}</Text>
-        <Text type="pre" classes="mb-3">{toAddress}</Text>
+<div class="transaction flex flex-col space-y-4 scrollable-y">
+    {#if shouldDisplaySendTo}
+        <div class={`rounded-lg bg-gray-50 dark:bg-gray-800 p-5 text-center ${shouldDisplayRemainderAddress ? 'mb-4' : ''}`}>
+            <Text type="h5" highlighted classes="mb-2">{locale('general.sendTo')}</Text>
+            <Text type="pre" classes="mb-4">{formatAddressForLedger(toAddress)}</Text>
 
-        <Text type="h5" highlighted classes="mb-2">{locale('general.amount')}</Text>
-        <Text type="pre">{formatAmount(toAmount)}</Text>
-    </div>
-{/if}
-{#if shouldDisplayRemainderAddress}
-    <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-4">
-        <Text type="h5" highlighted classes="mb-2">{locale(`general.${shouldDisplayRemainderAmount ? 'r' : 'newR'}emainder`)}</Text>
-        <Text type="pre" classes={shouldDisplayRemainderAmount ? 'mb-3' : ''}>{remainderAddress}</Text>
-
-        {#if shouldDisplayRemainderAmount}
             <Text type="h5" highlighted classes="mb-2">{locale('general.amount')}</Text>
-            <Text type="pre">{formatAmount(remainderAmount)}</Text>
-        {/if}
-    </div>
-{/if}
+            <Text type="pre">{formatAmount(toAmount)}</Text>
+        </div>
+    {/if}
+    {#if shouldDisplayRemainderAddress}
+        <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-5 text-center">
+            <Text type="h5" highlighted classes="mb-2">
+                {locale(`general.${shouldDisplayRemainderAmount ? 'r' : 'newR'}emainder`)}
+            </Text>
+            <Text type="pre" classes={shouldDisplayRemainderAmount ? 'mb-4' : ''}>
+                {formatAddressForLedger(remainderAddress)}
+            </Text>
+
+            {#if shouldDisplayRemainderAmount}
+                <Text type="h5" highlighted classes="mb-2">{locale('general.amount')}</Text>
+                <Text type="pre">{formatAmount(remainderAmount)}</Text>
+            {/if}
+        </div>
+    {/if}
+</div>

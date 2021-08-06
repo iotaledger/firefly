@@ -3,16 +3,20 @@
     import { Address, Amount, Button, Dropdown, Icon, ProgressBar, Text } from 'shared/components'
     import { clearSendParams, sendParams } from 'shared/lib/app'
     import { parseCurrency } from 'shared/lib/currency'
+    import { ledgerDeviceState, displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { displayNotifications, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-    import { isSoftwareProfile } from 'shared/lib/profile'
+    import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import {
         GeneratingRemainderDepositAddressEvent,
         PreparedTransactionEvent,
         TransferProgressEventData,
         TransferProgressEventType,
-        TransferState
+        TransferState,
     } from 'shared/lib/typings/events'
+    import { LedgerDeviceState } from 'shared/lib/typings/ledger'
+    import type { NotificationType } from 'shared/lib/typings/notification'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
@@ -20,15 +24,6 @@
     import { getContext, onDestroy, onMount } from 'svelte'
     import type { Readable } from 'svelte/store'
     import { get } from 'svelte/store'
-    import {
-        getLedgerDeviceStatus,
-        ledgerDeviceState,
-        pollLedgerDeviceStatus,
-        stopPollingLedgerStatus
-    } from 'shared/lib/ledger'
-    import { LedgerDeviceState } from 'shared/lib/typings/ledger'
-    import { displayNotifications, showAppNotification } from 'shared/lib/notifications'
-    import { NotificationData, NotificationType } from 'shared/lib/typings/notification'
 
     export let locale
     export let send
@@ -59,6 +54,7 @@
 
     let transactionEventData: TransferProgressEventData = null
     let transactionTimeoutId = null
+    let transactionNotificationId = null
 
     // This looks odd but sets a reactive dependency on amount, so when it changes the error will clear
     $: amount, (amountError = '')
@@ -85,7 +81,7 @@
         },
         PreparedTransaction: {
             label: locale('general.transferPreparedTransaction'),
-            percent: 50
+            percent: 50,
         },
         SigningTransaction: {
             label: locale('general.transferSigning'),
@@ -121,30 +117,27 @@
     }
 
     const handleTransactionEventData = (eventData: TransferProgressEventData): any => {
-        if(!eventData)
-            return {}
+        if (!eventData) return {}
 
         const remainderData = eventData as GeneratingRemainderDepositAddressEvent
-        if(remainderData?.address)
-            return { remainderAddress: remainderData?.address }
+        if (remainderData?.address) return { remainderAddress: remainderData?.address }
 
         const txData = eventData as PreparedTransactionEvent
-        if(!(txData?.inputs && txData?.outputs) || (txData?.inputs.length <= 0 || txData?.outputs.length <= 0))
-            return {}
+        if (!(txData?.inputs && txData?.outputs) || txData?.inputs.length <= 0 || txData?.outputs.length <= 0) return {}
 
         const numOutputs = txData.outputs.length
-        if(numOutputs === 1) {
+        if (numOutputs === 1) {
             return {
                 toAddress: txData.outputs[0].address,
-                toAmount: txData.outputs[0].amount
+                toAmount: txData.outputs[0].amount,
             }
-        } else if(numOutputs > 1) {
+        } else if (numOutputs > 1) {
             return {
                 toAddress: txData.outputs[0].address,
                 toAmount: txData.outputs[0].amount,
 
                 remainderAddress: txData.outputs[numOutputs - 1].address,
-                remainderAmount: txData.outputs[numOutputs - 1].amount
+                remainderAmount: txData.outputs[numOutputs - 1].amount,
             }
         } else {
             return txData
@@ -152,17 +145,16 @@
     }
 
     const handleTransferState = (state: TransferState): void => {
-        if(!state)
-            return
+        if (!state) return
 
         const _onCancel = () => {
             isTransferring.set(false)
             transferState.set(null)
 
             clearSendParams(selectedSendType === SEND_TYPE.INTERNAL)
-            closePopup()
+            closePopup(true)
 
-            if(get(displayNotifications).length === 0)
+            if (get(displayNotifications).length === 0)
                 showAppNotification({
                     type: 'error',
                     message: locale('error.send.transaction'),
@@ -170,23 +162,14 @@
         }
 
         const { data, type } = state
-        switch(type) {
-            default:
-                if(ledgerAwaitingConfirmation) {
-                    ledgerAwaitingConfirmation = false
-
-                    closePopup()
-                }
-
-                break
-
+        switch (type) {
             case TransferProgressEventType.GeneratingRemainderDepositAddress:
                 transactionEventData = data
 
-                /**
-                 * NOTE: The break statement is omitted in this case to allow the next block of code
-                 * (under SigningTransaction) to be executed.
-                 */
+            /**
+             * NOTE: The break statement is omitted in this case to allow the next block of code
+             * (under SigningTransaction) to be executed.
+             */
 
             case TransferProgressEventType.SigningTransaction:
                 ledgerAwaitingConfirmation = true
@@ -194,10 +177,11 @@
                 openPopup({
                     type: 'ledgerTransaction',
                     hideClose: true,
+                    preventClose: true,
                     props: {
                         onCancel: _onCancel,
-                        ...handleTransactionEventData(transactionEventData)
-                    }
+                        ...handleTransactionEventData(transactionEventData),
+                    },
                 })
 
                 break
@@ -207,20 +191,72 @@
                  * CAUTION: The Ledger confirmation doesn't always trigger
                  * the popup to close, so it is programmatically enforced here.
                  */
-                if(get(popupState).active)
-                    closePopup()
+                if (get(popupState).active) closePopup(true)
 
                 transactionEventData = data
+
+                break
+
+            default:
+                if (ledgerAwaitingConfirmation) {
+                    ledgerAwaitingConfirmation = false
+
+                    closePopup(true)
+                }
 
                 break
         }
     }
 
-    $: if(!$isSoftwareProfile)
-        handleTransferState($transferState)
+    $: if (get(isLedgerProfile)) handleTransferState($transferState)
 
     $: if (!$isTransferring && ledgerAwaitingConfirmation) {
-        closePopup()
+        closePopup(true)
+    }
+
+    const checkLedgerDeviceState = (
+        state: LedgerDeviceState,
+        notificationType: NotificationType = 'error',
+        ignoreNotDetected: boolean = false
+    ): void => {
+        /**
+         * NOTE: The NotDetected state is another state to not show notifications for
+         * because the Ledger app assumes this state upon entering / exiting apps for a
+         * miniscule amount of time (but still enough to read as "Not Detected"), resulting
+         * in lots of unnecessary errors. The logic here is a little hard to reason, but it
+         * accomodates for if we want to ignore the NotDetected state.
+         */
+        switch (state) {
+            case LedgerDeviceState.Connected:
+                if(transactionNotificationId) {
+                    removeDisplayNotification(transactionNotificationId)
+
+                    transactionNotificationId = null
+                }
+
+                break
+
+            case LedgerDeviceState.Locked:
+                if (transactionTimeoutId) clearTimeout(transactionTimeoutId)
+
+                transactionTimeoutId = setTimeout(
+                    () => checkLedgerDeviceState(get(ledgerDeviceState), notificationType, ignoreNotDetected),
+                    10000
+                )
+
+                break
+
+            default:
+                transactionNotificationId = displayNotificationForLedgerProfile(notificationType, false, false, ignoreNotDetected)
+
+                break
+        }
+    }
+
+    let _ledgerDeviceState
+    $: _ledgerDeviceState = $ledgerDeviceState
+    $: {
+        checkLedgerDeviceState($ledgerDeviceState, 'warning', true)
     }
 
     const checkLedgerDeviceState = (state: LedgerDeviceState, notificationType: NotificationType = 'error', ignoreNotDetected: boolean = false): void => {
@@ -383,14 +419,9 @@
          * it is important to wrap the send function in the Ledger connection
          * prompt function (only for non-software profiles).
          */
-        if ($isSoftwareProfile) {
-            onSuccess()
-        } else {
-            if(_ledgerDeviceState === LedgerDeviceState.Connected) {
-                onSuccess()
-            } else {
-                checkLedgerDeviceState(_ledgerDeviceState)
-            }
+        if ($isSoftwareProfile) onSuccess()
+        else {
+            promptUserToConnectLedger(false, onSuccess, undefined)
         }
     }
 
@@ -435,11 +466,7 @@
     })
 
     onDestroy(() => {
-        if(transactionTimeoutId)
-            clearTimeout(transactionTimeoutId)
-
-        stopPollingLedgerStatus()
-
+        if (transactionTimeoutId) clearTimeout(transactionTimeoutId)
         sendSubscription()
     })
 </script>

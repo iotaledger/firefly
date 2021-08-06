@@ -1,11 +1,11 @@
 <script>
-    import { Button, Icon, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
+    import { Animation, Button, Icon, Link, OnboardingLayout, Spinner, Text } from 'shared/components'
     import {
         getLedgerDeviceStatus,
         ledgerDeviceState,
         ledgerSimulator,
+        displayNotificationForLedgerProfile,
         pollLedgerDeviceStatus,
-        promptUserToConnectLedger,
         stopPollingLedgerStatus,
     } from 'shared/lib/ledger'
     import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
@@ -34,12 +34,16 @@
     $: isConnected = $ledgerDeviceState !== LedgerDeviceState.NotDetected
     $: isAppOpen = $ledgerDeviceState === LedgerDeviceState.Connected
 
-    $: illustration = isConnected && isAppOpen ? 'ledger-connected-desktop' : 'ledger-disconnected-desktop'
+    $: animation = !isConnected
+        ? 'ledger-disconnected-desktop'
+        : isAppOpen
+        ? 'ledger-connected-desktop'
+        : 'ledger-app-closed-desktop'
 
     const dispatch = createEventDispatcher()
 
     onMount(() => {
-        pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL, getLedgerDeviceStatus, getLedgerDeviceStatus)
+        pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL)
         polling = true
     })
 
@@ -50,36 +54,34 @@
 
         const officialNodes = getOfficialNodes()
         const officialNetwork = getOfficialNetwork()
-
-        const _onConnected = () =>
-            api.createAccount(
-                {
-                    clientOptions: {
-                        nodes: officialNodes,
-                        node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
-                        network: officialNetwork,
-                    },
-                    alias: `${locale('general.account')} 1`,
-                    signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
+        api.createAccount(
+            {
+                clientOptions: {
+                    nodes: officialNodes,
+                    node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
+                    network: officialNetwork,
                 },
-                {
-                    onSuccess() {
-                        creatingAccount = false
+                alias: `${locale('general.account')} 1`,
+                signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
+            },
+            {
+                onSuccess() {
+                    creatingAccount = false
 
-                        dispatch('next')
-                    },
-                    onError(error) {
-                        creatingAccount = false
+                    dispatch('next')
+                },
+                onError(error) {
+                    creatingAccount = false
 
-                        console.error(error)
-                    },
-                }
-            )
-        const _onCancel = () => (creatingAccount = false)
-        promptUserToConnectLedger(false, _onConnected, _onCancel)
+                    console.error(error)
+
+                    displayNotificationForLedgerProfile('error', true, true, false, false, error)
+                },
+            }
+        )
     }
 
-    function handlePopupOpen() {
+    function handleGuidePopup() {
         openPopup({
             type: 'ledgerConnectionGuide',
         })
@@ -91,9 +93,17 @@
         if (newLedgerProfile) {
             createAccount()
         } else {
-            const _onConnected = () => dispatch('next')
-            const _onCancel = () => (creatingAccount = false)
-            promptUserToConnectLedger(false, _onConnected, _onCancel)
+            const _onCancel = () => {
+                creatingAccount = false
+
+                displayNotificationForLedgerProfile('error', true)
+            }
+            const _onConnected = () => {
+                if ($ledgerDeviceState !== LedgerDeviceState.Connected) _onCancel()
+                else dispatch('next')
+            }
+
+            getLedgerDeviceStatus(false, _onConnected, _onCancel, _onCancel)
         }
     }
 
@@ -129,10 +139,9 @@
             </div>
         </div>
         <div slot="leftpane__action">
-            <div on:click={handlePopupOpen} class="mb-10 flex flex-row justify-center cursor-pointer">
-                <Icon icon="info" classes="mr-2 text-blue-500" />
-                <Text secondary highlighted>{locale('popups.ledgerConnectionGuide.title')}</Text>
-            </div>
+            <Link icon="info" onClick={handleGuidePopup} classes="mb-10 justify-center">
+                {locale('popups.ledgerConnectionGuide.title')}
+            </Link>
             <Button
                 classes="w-full"
                 disabled={(polling && (!isConnected || !isAppOpen)) || creatingAccount}
@@ -142,8 +151,12 @@
                 {:else}{locale('actions.continue')}{/if}
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-end items-center bg-gray-50 dark:bg-gray-900">
-            <Illustration width="100%" {illustration} />
+        <div slot="rightpane" class="w-full h-full flex justify-center items-center bg-gray-50 dark:bg-gray-900">
+            <Animation
+                width="100%"
+                animation="ledger-bg-desktop"
+                classes="absolute transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+            <Animation width="100%" {animation} />
         </div>
     </OnboardingLayout>
 {/if}

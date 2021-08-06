@@ -3,12 +3,16 @@ import { generateRandomId } from 'shared/lib/utils'
 import { get, writable } from 'svelte/store'
 import { Electron } from './electron'
 
-import type { NotificationData } from './typings/notification'
+import type { NotificationData, NotificationType } from './typings/notification'
 
 const NOTIFICATION_TIMEOUT_DEFAULT = 5000
 export const NOTIFICATION_TIMEOUT_NEVER = -1
 
 export const displayNotifications = writable<Array<NotificationData>>([])
+
+export function isNewNotification(type: NotificationType): boolean {
+    return get(displayNotifications).filter((nd: NotificationData) => nd.type === type).length === 0
+}
 
 export function showSystemNotification(notificationData: NotificationData): string {
     return showNotification(notificationData, true)
