@@ -1,7 +1,7 @@
 import { cleanupSignup, login, strongholdPassword, walletPin } from 'shared/lib/app'
-import { profiles, updateProfile } from 'shared/lib/profile'
+import { activeProfile, profiles, ProfileType } from 'shared/lib/profile'
+import { AccountRoutes, AppRoute, SettingsRoutes, SetupType, Tabs, WalletRoutes, LedgerRoutes } from 'shared/lib/typings/routes'
 import { selectedAccountId } from 'shared/lib/wallet'
-import { AccountRoutes, AppRoute, SettingsRoutes, SetupType, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
 import { get, readable, writable } from 'svelte/store'
 import { deepLinkRequestActive } from './deepLinking'
 
@@ -14,7 +14,7 @@ import { deepLinkRequestActive } from './deepLinking'
  *
  * @returns {void}
  */
-export const setRoute = (path: string): void => {
+export const setRoute = (path: AppRoute): void => {
     appRoute.set(path)
 }
 
@@ -43,7 +43,7 @@ export const walletSetupType = writable<SetupType>(null)
 /*
  * Current view
  */
-export const appRoute = writable<string>(null)
+export const appRoute = writable<AppRoute>(null)
 
 /**
  * Application route history
@@ -54,6 +54,16 @@ const history = writable<Array<string>>([])
  * Active dashboard tab
  */
 export const dashboardRoute = writable<Tabs>(Tabs.Wallet)
+
+/**
+ * Ledger setup route
+ */
+export const ledgerRoute = writable<LedgerRoutes>(LedgerRoutes.LegacyIntro)
+
+/**
+ * Ledger setup routing history
+ */
+export const ledgerRouteHistory = writable<Array<string>>([])
 
 /**
  * Wallet view route
@@ -86,12 +96,13 @@ export const initRouter = () => {
     } else {
         setRoute(AppRoute.Welcome)
     }
+
 }
 
 // TODO: only handle route changes, not app variables
 export const routerNext = (event) => {
     let params = event.detail || {}
-    const currentRoute: string = get(appRoute)
+    const currentRoute: AppRoute = get(appRoute)
     let nextRoute: AppRoute
 
     switch (currentRoute) {
@@ -129,10 +140,18 @@ export const routerNext = (event) => {
             if (setupType) {
                 walletSetupType.set(setupType)
                 if (setupType === SetupType.New) {
-                    nextRoute = AppRoute.Secure
+                    nextRoute = AppRoute.Create
                 } else if (setupType === SetupType.Import) {
                     nextRoute = AppRoute.Import
                 }
+            }
+            break
+        case AppRoute.Create:
+            const profileType = get(activeProfile)?.type
+            if (profileType === ProfileType.Software) {
+                nextRoute = AppRoute.Secure
+            } else if (profileType === ProfileType.Ledger || ProfileType.LedgerSimulator) {
+                nextRoute = AppRoute.Protect
             }
             break
         case AppRoute.Secure:
@@ -149,8 +168,14 @@ export const routerNext = (event) => {
             const { pin } = params
             if (pin) {
                 walletPin.set(pin)
-                if (get(walletSetupType) === SetupType.Mnemonic || get(walletSetupType) === SetupType.Stronghold) {
+                const walletSetupType_ = get(walletSetupType)
+                const profileType = get(activeProfile)?.type
+                if (
+                    [SetupType.Mnemonic, SetupType.Stronghold].includes(walletSetupType_)
+                ) {
                     nextRoute = AppRoute.Congratulations
+                } else if ([ProfileType.Ledger, ProfileType.LedgerSimulator].includes(profileType)) {
+                    nextRoute = AppRoute.LedgerSetup
                 } else {
                     nextRoute = AppRoute.Backup
                 }
@@ -169,36 +194,61 @@ export const routerNext = (event) => {
             walletSetupType.set(importType)
             if (importType === SetupType.Mnemonic) {
                 nextRoute = AppRoute.Secure
-            } else if (importType === SetupType.Stronghold) {
+            } else if ([SetupType.Stronghold, SetupType.TrinityLedger, SetupType.FireflyLedger].includes(importType)) {
                 nextRoute = AppRoute.Protect
             } else if (importType === SetupType.Seed || importType === SetupType.Seedvault) {
                 nextRoute = AppRoute.Balance
             }
             break
         case AppRoute.Balance:
-            nextRoute = AppRoute.Password
+            if (get(walletSetupType) === SetupType.TrinityLedger) {
+                nextRoute = AppRoute.Migrate
+            } else {
+                nextRoute = AppRoute.Password
+            }
             break
         case AppRoute.Migrate:
             nextRoute = AppRoute.Congratulations
             break
+        case AppRoute.LedgerSetup:
+            if (get(walletSetupType) === SetupType.TrinityLedger) {
+                nextRoute = AppRoute.Balance
+            } else {
+                nextRoute = AppRoute.Congratulations
+            }
+            break
         case AppRoute.Congratulations:
-            updateProfile('gapLimit', get(walletSetupType) === SetupType.New ? 10 : 50)
             cleanupSignup()
             login()
+
             nextRoute = AppRoute.Dashboard
+
             break
     }
 
     // Update history and navigate to new route
     if (nextRoute) {
-        history.update((_history) => {
-            _history.push(currentRoute)
-            return _history
-        })
+        updateHistory(currentRoute)
         setRoute(nextRoute)
     } else {
         console.error('Routing Error: Could not find next route')
     }
+}
+
+/**
+ * Forces app next route, updating the route history
+ * @param route next route
+ */
+export const forceNextRoute = (route: AppRoute) => {
+    updateHistory(get(appRoute))
+    setRoute(route)
+}
+
+const updateHistory = (newRoute: AppRoute): void => {
+    history.update((_history) => {
+        _history.push(newRoute)
+        return _history
+    })
 }
 
 // TODO: only handle route changes, not app variables
@@ -236,4 +286,9 @@ export const resetWalletRoute = () => {
     walletRoute.set(WalletRoutes.Init)
     accountRoute.set(AccountRoutes.Init)
     selectedAccountId.set(null)
+}
+
+export const resetLedgerRoute = () => {
+    ledgerRoute.set(LedgerRoutes.LegacyIntro)
+    ledgerRouteHistory.set([])
 }

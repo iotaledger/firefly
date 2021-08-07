@@ -17,17 +17,19 @@
         Backup,
         Balance,
         Congratulations,
+        Create,
         Dashboard,
         Import,
+        Ledger,
         Legal,
         Login,
         Migrate,
         Password,
+        Profile,
         Protect,
         Secure,
         Settings,
         Setup,
-        Profile,
         Splash,
         Welcome,
     } from 'shared/routes'
@@ -231,6 +233,14 @@
         <Route route={AppRoute.Setup}>
             <Setup on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
         </Route>
+        <!-- TODO: fix ledger -->
+        <Route route={AppRoute.Create}>
+            <Create on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        </Route>
+        <Route route={AppRoute.LedgerSetup}>
+            <Ledger on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        </Route>
+        <!--  -->
         <Route route={AppRoute.Secure}>
             <Secure on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
         </Route>
