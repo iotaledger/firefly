@@ -2,6 +2,8 @@ arrowParens: always
 bracketSpacing: true
 embeddedLanguageFormatting: auto
 endOfLine: lf
+plugins:
+  - "prettier-plugin-svelte"
 printWidth: 130
 semi: false
 singleQuote: true

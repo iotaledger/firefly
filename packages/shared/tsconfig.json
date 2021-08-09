@@ -6,7 +6,13 @@
         "lib": [
             "DOM",
             "ESNext"
-        ]
+        ],
+        "paths": {
+            "@components/*": ["./components/*"],
+            "@lib/*": ["./lib/*"],
+            "@routes/*": ["./routes/*"],
+            "@shared/*": ["./*"]
+        }
     },
     "include": [
         "./lib"

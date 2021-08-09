@@ -11,6 +11,7 @@
         "@iota/unit-converter": "^1.0.0-beta.30",
         "big.js": "^6.0.3",
         "chart.js": "^2.9.3",
+        "eslint-plugin-svelte3": "^3.2.0",
         "iota.lib.js": "^0.5.3",
         "lottie-web": "^5.7.8",
         "qr.js": "0.0.0",
@@ -21,7 +22,8 @@
     "scripts": {
         "build": "tsc",
         "dev": "tsc --watch",
-        "format": "prettier --write \"**/*.{ts,js,json,yml,md}\"",
+        "format": "prettier -w \"**/*.{ts,js,json,yml,md}\"",
+        "format-check": "prettier -c \"**/*.{ts,js,json,yml,md}\"",
         "lint": "eslint ./",
         "lint-fix": "eslint ./ --fix"
     },

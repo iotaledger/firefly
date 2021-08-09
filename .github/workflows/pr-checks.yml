@@ -25,4 +25,4 @@ jobs:
 
       - name: Run Linter
         working-directory: packages/shared
-        run: yarn run lint
+        run: yarn lint
