@@ -27,8 +27,7 @@ packages/mobile/public/
 # Shared (packages/shared)
 packages/shared/assets/
 packages/shared/locales/
-packages/shared/!locales/en.json
-packages/shared/style/
+!packages/shared/locales/en.json
 
 # Common files and folders
 **/node_modules

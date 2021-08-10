@@ -7,7 +7,7 @@
     "private": true,
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/iotaledger/firefly.git"
+        "url": "git@github.com:iotaledger/firefly.git"
     },
     "workspaces": [
         "packages/desktop",
