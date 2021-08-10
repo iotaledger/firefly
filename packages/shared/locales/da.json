@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "Opret en profil",
+            "profileName": "Profilnavn",
             "body1": "Du kan oprette flere brugerprofiler for at organisere dine wallets og øge din fortrolighed.",
-            "body2": "For nu, lad os starte med dit profilnavn. Du kan tilføje flere profiler senere.",
-            "profileName": "Profilnavn"
+            "body2": {
+                "first": "For now, let's start with your first profile name.",
+                "nonFirst": "For now, let's start with your profile name."
+            },
+            "addMore": "You can add more profiles later."
         },
         "setup": {
             "title": "Konfigurér en wallet",
@@ -29,6 +33,32 @@
             "title": "Gør din wallet sikker",
             "body1": "Gem og udskriv Recovery Kit PDF-skabelonen.",
             "body2": "Hvis du udfylder Recovery Kit og gemme det forsvarligt, vil du altid være i stand til at gendanne dine wallets."
+        },
+        "create": {
+            "title": "Opret en wallet",
+            "body": "Opret en ny wallet. Du kan vælge mellem en normal software wallet eller hvis du har en Ledger enhed kan du oprette en hardware wallet.",
+            "softwareAccount": {
+                "title": "Jeg vil have en software wallet",
+                "description": "Opret en 24-ords gendannelsessætning"
+            },
+            "ledgerAccount": {
+                "title": "Jeg vil have en hardware wallet",
+                "description": "Ledger Nano S eller Nano X kræves"
+            }
+        },
+        "setupLedger": {
+            "progress1": "Tilslut din Ledger",
+            "progress2": "Generér adresse",
+            "progress3": "Skift Ledger app",
+            "progress4": "Overfør midler",
+            "watchVideo": "Se video guide",
+            "videoGuide": "Ledger migration video guide"
+        },
+        "ledgerInstallationGuide": {
+            "title": "Har du installeret de nødvendige Ledger apps?",
+            "body1": "Før du fortsætter, skal du finde og installere både {legacy} appen og den nye IOTA app gennem Ledger Live.",
+            "body2": "Sørg for, at din Ledger firmware er opdateret. Alle forudinstallerede apps bør opdateres til deres seneste versioner.",
+            "action": "Ja, jeg har installeret disse apps"
         },
         "password": {
             "title": "Opret en adgangskode",
@@ -85,9 +115,11 @@
         },
         "congratulations": {
             "title": "Opsætning af wallet fuldført",
-            "body": "Din nye wallet er klar til brug.",
             "fundsMigrated": "Midler migreret",
-            "success": "Du har nu migreret dine midler til det nye netværk",
+            "body": "Din nye wallet er klar til brug.",
+            "softwareMigratedBody": "Du har nu migreret dine midler til det nye netværk",
+            "fireflyLedgerBody": "Din Bogføringskonto er blevet genoprettet, og du kan nu fortsætte.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
             "exportMigration": "Eksportér migrationslog og afslut opsætning"
         },
         "import": {
@@ -98,7 +130,9 @@
             "importMnemonic": "Jeg har gendannelsesord til Firefly",
             "importMnemonicDescription": "Indtast dine gendannelsesord for at gendanne dine wallets",
             "importFile": "Jeg har en sikkerhedskopi fil",
-            "importFileDescription": "Upload en Seedvault eller Stronghold fil"
+            "importFileDescription": "Upload en Seedvault eller Stronghold fil",
+            "importLedger": "I have a Ledger backup",
+            "importLedgerDescription": "Restore or migrate a Ledger profile"
         },
         "importFromText": {
             "seed": {
@@ -119,18 +153,63 @@
             "title": "Gendan dine wallets ved hjælp af en sikkerhedskopi fil",
             "body": "Importer en sikkerhedskopi fil for at gendanne dine wallets. Sikkerhedskopier kan enten være et Stronghold (.stronghold) eller en Trinity SeedVault (.kdbx)."
         },
+        "importFromLedger": {
+            "title": "Restore or Migrate your Ledger",
+            "body": "Restore an existing Firefly Ledger profile, or migrate your funds from Trinity.",
+            "haveFireflyLedger": "I have a Firefly Ledger backup",
+            "haveFireflyLedgerDescription": "Restore a Firefly profile",
+            "haveTrinityLedger": "I have a Trinity Ledger backup",
+            "haveTrinityLedgerDescription": "Migrate a Trinity profile"
+        },
+        "connectLedger": {
+            "title": "Connect your Ledger to Firefly",
+            "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed.",
+            "trafficLight1": "Connect and unlock your Ledger with your PIN",
+            "trafficLight2": "Open the new IOTA app on your Ledger",
+            "tips": "Tips if your Ledger isn’t connecting"
+        },
+        "restoreFromFireflyLedger": {
+            "title": "Restore Your Ledger Profile",
+            "body": "Press restore to complete the setup process and restore your wallets, balances and transaction history.",
+            "restoring": "Restoring from Ledger..."
+        },
+        "legacyLedgerIntro": {
+            "title": "Start your Ledger migration using Firefly",
+            "body1": "Firefly will help you to transfer your tokens to the new Chrysalis network.",
+            "body2": "After the migration, you will be able to send and receive your tokens using your Ledger with Firefly.",
+            "readMore": "What to expect from the migration process"
+        },
+        "generateNewLedgerAddress": {
+            "title": "Generér ny adresse",
+            "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
+            "confirmTitle": "Confirm the new address",
+            "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
+            "confirmedTitle": "Address confirmed",
+            "confirmedBody": "You have confirmed that the address in Firefly matches the one on your Ledger device.",
+            "generating": "Generating address"
+        },
+        "switchLedgerApps": {
+            "title": "Switch Ledger apps",
+            "body": "Please switch to the {legacy} app on your Ledger device to continue migration. When ready, press continue."
+        },
+        "selectLedgerAccountIndex": {
+            "title": "Choose Ledger account index",
+            "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
+            "accountIndex": "Account Index",
+            "accountPage": "Account Page",
+            "standard": "Standard",
+            "expert": "Expert",
+            "takingAWhile": "This is taking a while...",
+            "notGeneratingAddresses": "Is your Ledger generating addresses?",
+            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
+        },
         "importBackupPassword": {
-            "title": "Gendan dine wallets fra en SeedVault eller Stronghold",
             "body1": "Indtast venligst adgangskoden til din sikkerhedskopi.",
             "body2": "Dette er den adgangskode du angav, da du først oprettede din backup."
         },
         "importSuccess": {
             "title": "Du har gendannet din sikkerhedskopi med succes",
-            "body": "Du kan nu konfigurere din nye profil.",
-            "seedvaultTitle": "Import lykkedes",
-            "seedvaultBody": "Din adgangskode er korrekt, du kan nu fortsætte.",
-            "strongholdTitle": "Import lykkedes",
-            "strongholdBody": "Din adgangskode er korrekt, du kan nu fortsætte."
+            "body": "Du kan nu konfigurere din nye profil."
         },
         "migrate": {
             "title": "Migrér dine midler",
@@ -153,7 +232,7 @@
             "miningBundle": "Miner pakke",
             "problemRestoringWallet": "Der opstod en netværksfejl under gendannelse af din wallet. Prøv igen.",
             "minimumMigrationAmountSpentAddresses": "Det mindste migrationsbeløb for hver brugt adresse er 1 Mi. Tjek igen, hvis din saldo ikke ser rigtig ud.",
-            "tooManyAddressesToMigrate": "Du har for mange adresser med lav saldo til at migrere. Tjek igen, hvis din saldo ikke ser rigtigt ud.",
+            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
             "cannotMigrateAllYourFunds": "Vi kan ikke migrere alle dine midler, fordi nogle adresser har for lav værdi. Du kan fortsætte alligevel. {value} vil gå tabt.",
             "error": "Der opstod en fejl under migrering af dine midler. Prøv igen."
         },
@@ -184,6 +263,7 @@
         },
         "transferFragmentedFunds": {
             "body1": "Firefly vil nu fortsætte med at migrere dine midler. Dette kan tage et stykke tid.",
+            "body2": "Ensure your Ledger is connected and the {legacy} app is open at all times during migration.",
             "migrate": "Migrér midler",
             "transaction": "Transaktion {number}",
             "rerun": "Prøv igen"
@@ -196,7 +276,8 @@
             "title": "Din saldo",
             "body": "Sørg for at din saldo er korrekt, før du fortsætter. Du kan tjekke igen, hvis tingene ikke ser korrekt ud.",
             "error": "Det mindste migrationsbeløb er 1 Mi. Tjek igen, hvis din saldo ikke ser rigtig ud.",
-            "zeroBalance": "Prøv at tjekke igen. Hvis du stadig ikke kan finde din saldo, har du måske indtastet dit seed forkert."
+            "zeroBalance": "Prøv at tjekke igen. Hvis du stadig ikke kan finde din saldo, har du måske indtastet dit seed forkert.",
+            "zeroBalanceLedgerLegacy": "Try checking again. If you still can't find your balance you might have selected the wrong account index."
         },
         "settings": {
             "settings": "Indstillinger",
@@ -314,6 +395,10 @@
                 "title": "Diagnostik",
                 "description": "Vis system og applikationsinformation"
             },
+            "migrateLedgerIndex": {
+                "title": "Migrate Ledger Index",
+                "description": "Migrate another Trinity account index"
+            },
             "stateExport": {
                 "title": "Eksportér tilstand",
                 "description": "Eksporter din transaktionshistorik til en .csv-fil"
@@ -357,7 +442,15 @@
                 },
                 "hardwareDevice": {
                     "title": "Hardware-enhed",
-                    "noneDetected": "Ingen fundet"
+                    "statuses": {
+                        "appNotOpen": "IOTA App Not Open",
+                        "connected": "Connected",
+                        "legacyConnected": "{legacy} App Open",
+                        "locked": "Låst",
+                        "mnemonicMismatch": "Wrong Ledger or Mnemonic",
+                        "notDetected": "Not Detected",
+                        "otherConnected": "App Open"
+                    }
                 },
                 "strongholdStatus": {
                     "title": "Wallet Status",
@@ -488,6 +581,53 @@
             "body": "Chrysalis netværksopgradering er begyndt.",
             "bodyMigration": "Migration er deaktiveret indtil den er færdig.",
             "bodyFirefly": "Firefly er deaktiveret, indtil den er færdig. Token migration vil stadig være mulig efterfølgende."
+        },
+        "ledgerNotConnected": {
+            "connect": "Open the new IOTA app on your Ledger device to continue",
+            "connectLegacy": "Open the {legacy} app on your Ledger device to continue"
+        },
+        "ledgerConfirmation": {
+            "confirm": "To proceed, confirm the prompt displayed on your Ledger device"
+        },
+        "ledgerAppGuide": {
+            "title": "Guide to installing the Ledger apps",
+            "steps": {
+                "0": "Install and open the Ledger Live application",
+                "1": "Ensure that your Ledger is connected",
+                "2": "Search for apps: {legacy} and IOTA (MIOTA)",
+                "3": "Install both apps: {legacy} and IOTA (MIOTA)",
+                "4": "Remember that it's important to close Ledger Live before returning to Firefly"
+            }
+        },
+        "ledgerConnectionGuide": {
+            "title": "Tips if your Ledger isn’t connecting",
+            "steps": {
+                "0": "Make sure Ledger Live is not open on your computer",
+                "1": "Ensure you have unlocked your Ledger device with your PIN",
+                "2": "Open the new IOTA app on your Ledger device",
+                "3": {
+                    "text": "Still no luck?",
+                    "link": "Try the official Ledger support page"
+                }
+            }
+        },
+        "ledgerTransaction": {
+            "remainderAddress": {
+                "title": "Confirm remainder address",
+                "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+            },
+            "transaction": {
+                "title": "Bekræft transaktion",
+                "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted."
+            }
+        },
+        "ledgerAddress": {
+            "title": "Confirm receive address",
+            "body": "Confirm that the receive address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+        },
+        "ledgerMigrateIndex": {
+            "title": "Do you need to migrate another Trinity account index?",
+            "body": "You can also migrate later in Advanced Settings."
         }
     },
     "charts": {
@@ -505,6 +645,8 @@
     "actions": {
         "continue": "Fortsæt",
         "back": "Tilbage",
+        "previous": "Previous",
+        "next": "Next",
         "cancel": "Annullér",
         "close": "Luk",
         "dismiss": "Afvis",
@@ -573,6 +715,7 @@
         "addAccount": "Tilføj Wallet",
         "checkForUpdates": "Tjek for opdateringer",
         "reportAnIssue": "Rapportér et problem",
+        "restore": "Restore",
         "clear": "Ryd",
         "hideDetails": "Skjul detaljer",
         "yes": "Ja",
@@ -592,7 +735,9 @@
         "searchBalances": "Søg efter saldi",
         "searchAgain": "Søg igen",
         "searching": "Søger...",
-        "closeFirefly": "Luk Firefly"
+        "closeFirefly": "Luk Firefly",
+        "generateAddress": "Generér adresse",
+        "migrateAgain": "Migrate another index"
     },
     "general": {
         "password": "Adgangskode",
@@ -607,6 +752,7 @@
         "received": "Modtaget",
         "sendPayment": "Send Betaling",
         "moveFunds": "Intern Overførsel",
+        "sendTo": "Send To",
         "sendFunds": "Send midler",
         "sendToAddress": "Send til adresse",
         "scanQrOrPaste": "Scan en QR-kode eller indsæt en adresse",
@@ -625,6 +771,8 @@
         "myAddress": "Min Adresse",
         "shareAddress": "Del en adresse",
         "yourAddress": "Din adresse",
+        "newRemainder": "New Remainder",
+        "remainder": "Remainder",
         "generateNewAddress": "Generér ny adresse",
         "copyAddress": "Kopiér adresse",
         "import": "Importér",
@@ -661,6 +809,7 @@
         "messageId": "Besked ID",
         "inputAddress": "Send Adresse",
         "receiveAddress": "Modtag Adresse",
+        "newAddress": "New Address",
         "date": "Dato",
         "status": "Status",
         "confirmed": "Bekræftet",
@@ -672,11 +821,13 @@
         "firstSync": "Synkroniserer historie, dette kan tage et stykke tid...",
         "transferSyncing": "Synkroniserer wallet",
         "transferSelectingInputs": "Vælger input",
-        "transferRemainderAddress": "Genererer restdeponeringsadresse",
+        "transferRemainderAddress": "Generating remainder address",
+        "transferPreparedTransaction": "Preparing transaction",
         "transferSigning": "Underskriver transaktionen",
         "transferPow": "Udfører PoW",
         "transferBroadcasting": "Udsender transaktion",
         "transferComplete": "Overførsel gennemført",
+        "generatingReceiveAddress": "Generating receive address",
         "creatingAccount": "Opretter wallet, vent venligst...",
         "updatingAccount": "Opdaterer wallet, vent venligst...",
         "accountSyncing": "Wallet synkroniserer",
@@ -732,8 +883,7 @@
         "minutesRemaining": "{minutes, plural, one {1 minut tilbage} other {# minutter tilbage}}",
         "copiedToClipboard": "Kopieret til udklipsholder",
         "accountsSynchronized": "Synkronisering af wallet fuldført",
-        "migratedAccountChrysalisDown": "Dine midler vil blive tilgængelige efter Chrysalis den 28. april",
-        "migratedAccountChrysalisUp": "Dine midler vil snart være tilgængelige"
+        "fundsAvailableSoon": "Your funds will become available shortly"
     },
     "error": {
         "profile": {
@@ -770,7 +920,10 @@
             "tilde": "Et profilnavn kan ikke starte med '~'.",
             "control": "Et profilnavn kan ikke indeholde et kontroltegn.",
             "startDot": "Et profilnavn kan ikke starte med '.'.",
-            "chars": "Et profilnavn kan ikke indeholde følgende tegn <>:\"/\\|?*"
+            "chars": "Et profilnavn kan ikke indeholde følgende tegn <>:\"/\\|?*",
+            "index": "Your account index must be a number between 0 and 2,147,483,647.",
+            "page": "Your account page must be a number between 0 and 2,147,483,647.",
+            "syncing": "There was an error syncing your wallets."
         },
         "send": {
             "addressLength": "Adresser skal være {length, plural, one {1 tegn} other {# tegn}} langt.",
@@ -784,7 +937,9 @@
             "insufficientFunds": "Denne wallet har ikke tilstrækkelige midler.",
             "noToAccount": "Du har ikke valgt en wallet at sende midlerne til.",
             "sendingDust": "Du kan ikke sende mindre end 1 Mi.",
-            "leavingDust": "Du kan ikke forlade mindre end 1 Mi på din adresse."
+            "leavingDust": "Du kan ikke forlade mindre end 1 Mi på din adresse.",
+            "cancelled": "The transaction was cancelled.",
+            "transaction": "There was an error sending your transaction. Please try again."
         },
         "node": {
             "invalid": "Indtast venligst en gyldig URL.",
@@ -805,6 +960,25 @@
             "phraseWordCount": "Der bør være 24 ord i dine gendannelsesord, i øjeblikket der {length, plural, one {er 1} other {er #}}.",
             "phraseUnrecognizedWord": "Ordet \"{word}\" blev ikke genkendt i dine gendannelsesord",
             "phraseCaseWord": "Ordet \"{word}\" skal være små bogstaver"
+        },
+        "ledger": {
+            "appNotOpen": "You must open the IOTA app on your Ledger device.",
+            "generic": "There was an error connecting to your Ledger device.",
+            "legacyConnected": "The wrong app is open on your Ledger device.",
+            "locked": "Please unlock your Ledger device by entering the PIN.",
+            "mnemonicMismatch": "You have connected the wrong Ledger device or the mnemonic has changed.",
+            "notDetected": "No Ledger device detected.",
+            "notFound": "Ledger device not found.",
+            "otherConnected": "The wrong app is open on your Ledger device.",
+            "generateAddress": "There was an error generating an address.",
+            "timeout": "Your Ledger device timed out.",
+            "disconnected": "Your Ledger device was disconnected."
+        },
+        "popup": {
+            "preventClose": "This popup is unable to be closed."
+        },
+        "migration": {
+            "missingBundle": "An error occurred while trying to find the transaction bundle."
         }
     },
     "tooltips": {

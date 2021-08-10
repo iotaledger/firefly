@@ -18,6 +18,7 @@ export enum SettingsIcons {
     proofOfWork = 'work',
     errorLog = 'warning',
     diagnostics = 'tools',
+    migrateLedgerIndex = 'ledger',
     stateExport = 'export',
     troubleshoot = 'tools',
     documentation = 'doc',

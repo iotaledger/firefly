@@ -39,6 +39,7 @@ const eventsApiToResponseTypeMap = {
     onBroadcast: ResponseTypes.Broadcast,
     onStrongholdStatusChange: ResponseTypes.StrongholdStatusChange,
     onTransferProgress: ResponseTypes.TransferProgress,
+    onLedgerAddressGeneration: ResponseTypes.LedgerAddressGeneration,
     onMigrationProgress: ResponseTypes.MigrationProgress,
 }
 
@@ -48,6 +49,8 @@ const apiToResponseTypeMap = {
     getAccount: ResponseTypes.ReadAccount,
     getAccounts: ResponseTypes.ReadAccounts,
     syncAccounts: ResponseTypes.SyncedAccounts,
+    startBackgroundSync: ResponseTypes.Ok,
+    stopBackgroundSync: ResponseTypes.Ok,
     listMessages: ResponseTypes.Messages,
     listAddresses: ResponseTypes.Addresses,
     generateAddress: ResponseTypes.GeneratedAddress,
@@ -70,9 +73,12 @@ const apiToResponseTypeMap = {
     removeStorage: ResponseTypes.DeletedStorage,
     lockStronghold: ResponseTypes.LockedStronghold,
     changeStrongholdPassword: ResponseTypes.StrongholdPasswordChanged,
+    getLedgerDeviceStatus: ResponseTypes.LedgerStatus,
     setStrongholdPasswordClearInterval: ResponseTypes.StrongholdPasswordClearIntervalSet,
     getLegacySeedChecksum: ResponseTypes.LegacySeedChecksum,
     getNodeInfo: ResponseTypes.NodeInfo,
+    mineBundle: ResponseTypes.MinedBundle,
+    getLegacyAddressChecksum: ResponseTypes.LegacyAddressChecksum,
     ...eventsApiToResponseTypeMap
 }
 

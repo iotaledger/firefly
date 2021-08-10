@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "プロファイルを作成",
+            "profileName": "プロファイル名",
             "body1": "複数のユーザープロファイルを作成してトークンを分離し、プライバシーを向上させることができます。",
-            "body2": "まずは、最初のプロファイルから始めましょう。あとから、さらにプロファイルを追加できます。",
-            "profileName": "プロファイル名"
+            "body2": {
+                "first": "For now, let's start with your first profile name.",
+                "nonFirst": "For now, let's start with your profile name."
+            },
+            "addMore": "You can add more profiles later."
         },
         "setup": {
             "title": "ウォレットを設定",
@@ -29,6 +33,32 @@
             "title": "ウォレットの保護",
             "body1": "Recovery Kit PDF テンプレートを保存し、印刷します。",
             "body2": "Recovery Kit を記入して安全に保管すると、いつでもウォレットを復元できます。"
+        },
+        "create": {
+            "title": "ウォレットを作成",
+            "body": "新しいウォレットを作成します。通常のソフトウェアウォレットを選択するか、Ledgerデバイスをお持ちの場合は、ハードウェアウォレットを設定できます。",
+            "softwareAccount": {
+                "title": "ソフトウェアウォレットが欲しい",
+                "description": "24単語の回復フレーズを作成する"
+            },
+            "ledgerAccount": {
+                "title": "ハードウェアウォレットが欲しい",
+                "description": "Ledger Nano SまたはNano Xが必要"
+            }
+        },
+        "setupLedger": {
+            "progress1": "Ledgerを接続してください",
+            "progress2": "アドレスを生成",
+            "progress3": "Switch Ledger app",
+            "progress4": "資金を移動",
+            "watchVideo": "ビデオガイドを見る",
+            "videoGuide": "Ledger migration video guide"
+        },
+        "ledgerInstallationGuide": {
+            "title": "Have you installed the necessary Ledger apps?",
+            "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
+            "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
+            "action": "Yes, I've installed these apps"
         },
         "password": {
             "title": "パスワードを作成します",
@@ -85,9 +115,11 @@
         },
         "congratulations": {
             "title": "ウォレットのセットアップが完了しました",
-            "body": "新しいウォレットを使用する準備ができました。",
             "fundsMigrated": "資金が移行されました",
-            "success": "資金を新しいネットワークに移行しました",
+            "body": "新しいウォレットを使用する準備ができました。",
+            "softwareMigratedBody": "You have successfully migrated your funds to the new network",
+            "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
             "exportMigration": "移行ログをエクスポートしてセットアップを終了します"
         },
         "import": {
@@ -98,7 +130,9 @@
             "importMnemonic": "Firefly の復元フレーズがあります",
             "importMnemonicDescription": "ウォレットを復元するために復元フレーズを入力してください",
             "importFile": "ファイルのバックアップがあります",
-            "importFileDescription": "SeedvaultまたはStrongholdをアップロード"
+            "importFileDescription": "SeedvaultまたはStrongholdをアップロード",
+            "importLedger": "I have a Ledger backup",
+            "importLedgerDescription": "Restore or migrate a Ledger profile"
         },
         "importFromText": {
             "seed": {
@@ -119,18 +153,63 @@
             "title": "バックアップファイルを使用してウォレットを復元する",
             "body": "ウォレットを復元するためにバックアップファイルをインポートします。バックアップは、Stronghold(.stronghold)またはTrinity SeedVault(.kdbx)のいずれかにすることができます。"
         },
+        "importFromLedger": {
+            "title": "Restore or Migrate your Ledger",
+            "body": "Restore an existing Firefly Ledger profile, or migrate your funds from Trinity.",
+            "haveFireflyLedger": "I have a Firefly Ledger backup",
+            "haveFireflyLedgerDescription": "Firefly プロファイルを復元",
+            "haveTrinityLedger": "I have a Trinity Ledger backup",
+            "haveTrinityLedgerDescription": "Migrate a Trinity profile"
+        },
+        "connectLedger": {
+            "title": "Connect your Ledger to Firefly",
+            "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed.",
+            "trafficLight1": "Connect and unlock your Ledger with your PIN",
+            "trafficLight2": "Open the new IOTA app on your Ledger",
+            "tips": "Tips if your Ledger isn’t connecting"
+        },
+        "restoreFromFireflyLedger": {
+            "title": "Restore Your Ledger Profile",
+            "body": "Press restore to complete the setup process and restore your wallets, balances and transaction history.",
+            "restoring": "Restoring from Ledger..."
+        },
+        "legacyLedgerIntro": {
+            "title": "Start your Ledger migration using Firefly",
+            "body1": "Firefly will help you to transfer your tokens to the new Chrysalis network.",
+            "body2": "After the migration, you will be able to send and receive your tokens using your Ledger with Firefly.",
+            "readMore": "What to expect from the migration process"
+        },
+        "generateNewLedgerAddress": {
+            "title": "新しいアドレスを作成する",
+            "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
+            "confirmTitle": "Confirm the new address",
+            "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
+            "confirmedTitle": "住所確認",
+            "confirmedBody": "You have confirmed that the address in Firefly matches the one on your Ledger device.",
+            "generating": "アドレスを生成"
+        },
+        "switchLedgerApps": {
+            "title": "Switch Ledger apps",
+            "body": "Please switch to the {legacy} app on your Ledger device to continue migration. When ready, press continue."
+        },
+        "selectLedgerAccountIndex": {
+            "title": "Choose Ledger account index",
+            "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
+            "accountIndex": "アカウントインデックス",
+            "accountPage": "アカウントページ",
+            "standard": "Standard",
+            "expert": "Expert",
+            "takingAWhile": "This is taking a while...",
+            "notGeneratingAddresses": "Is your Ledger generating addresses?",
+            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
+        },
         "importBackupPassword": {
-            "title": "SeedVaultまたはStrongholdからウォレットを復元する",
             "body1": "パスワードを入力してください。",
             "body2": "このパスワードは、バックアップを最初に作成したときに設定したものです。"
         },
         "importSuccess": {
             "title": "バックアップを正常に復元しました",
-            "body": "新しいプロフィールを設定できます。",
-            "seedvaultTitle": "インポートに成功しました。",
-            "seedvaultBody": "パスワードが正しいです。続行できます。",
-            "strongholdTitle": "インポートに成功しました。",
-            "strongholdBody": "パスワードが正しいです。続行できます。"
+            "body": "新しいプロフィールを設定できます。"
         },
         "migrate": {
             "title": "資金を移行",
@@ -153,7 +232,7 @@
             "miningBundle": "マイニングバンドル",
             "problemRestoringWallet": "ウォレットの復元中にネットワークエラーが発生しました。もう一度やり直してください。",
             "minimumMigrationAmountSpentAddresses": "送金先アドレスごとの最小移行額は1Miです。残高が正しくない場合は再度確認してください。",
-            "tooManyAddressesToMigrate": "残高が少ないアドレスが多すぎます。残高が正しくない場合は、もう一度確認してください。",
+            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
             "cannotMigrateAllYourFunds": "いくつかのアドレスの価値が低すぎるため、すべての資金を移行することはできません。続行できますが、 {value} は失われます。",
             "error": "資金の移行中にエラーが発生しました。もう一度やり直してください。"
         },
@@ -184,6 +263,7 @@
         },
         "transferFragmentedFunds": {
             "body1": "Firefly はあなたの資金を移行します。しばらく時間がかかる場合があります。",
+            "body2": "Ensure your Ledger is connected and the {legacy} app is open at all times during migration.",
             "migrate": "資金の移行",
             "transaction": "取引 {number}",
             "rerun": "やり直す"
@@ -196,7 +276,8 @@
             "title": "残高",
             "body": "続行する前に、残高が正しいことを確認してください。正しくない場合は、もう一度確認できます。",
             "error": "最小移行金額は1Miです。残高が正しくない場合は、もう一度確認してください。",
-            "zeroBalance": "もう一度確認してください。 それでも残高が見つからない場合は、シードを間違って入力した可能性があります。"
+            "zeroBalance": "もう一度確認してください。 それでも残高が見つからない場合は、シードを間違って入力した可能性があります。",
+            "zeroBalanceLedgerLegacy": "Try checking again. If you still can't find your balance you might have selected the wrong account index."
         },
         "settings": {
             "settings": "設定",
@@ -314,6 +395,10 @@
                 "title": "診断",
                 "description": "システムとアプリケーションの情報を表示"
             },
+            "migrateLedgerIndex": {
+                "title": "Migrate Ledger Index",
+                "description": "Migrate another Trinity account index"
+            },
             "stateExport": {
                 "title": "状態のエクスポート",
                 "description": "取引履歴を .csv ファイルにエクスポートします"
@@ -357,7 +442,15 @@
                 },
                 "hardwareDevice": {
                     "title": "外部デバイス",
-                    "noneDetected": "何も検出されませんでした"
+                    "statuses": {
+                        "appNotOpen": "IOTA App Not Open",
+                        "connected": "Connected",
+                        "legacyConnected": "{legacy} App Open",
+                        "locked": "ロック中",
+                        "mnemonicMismatch": "Wrong Ledger or Mnemonic",
+                        "notDetected": "Not Detected",
+                        "otherConnected": "App Open"
+                    }
                 },
                 "strongholdStatus": {
                     "title": "ウォレットのステータス",
@@ -488,6 +581,53 @@
             "body": "Chrysalis のネットワークアップグレードが開始されました。",
             "bodyMigration": "移行は、完了するまで無効になります。",
             "bodyFirefly": "Firefly は完了するまで無効になります。トークンの移行はその後も可能です。"
+        },
+        "ledgerNotConnected": {
+            "connect": "Open the new IOTA app on your Ledger device to continue",
+            "connectLegacy": "Open the {legacy} app on your Ledger device to continue"
+        },
+        "ledgerConfirmation": {
+            "confirm": "To proceed, confirm the prompt displayed on your Ledger device"
+        },
+        "ledgerAppGuide": {
+            "title": "Guide to installing the Ledger apps",
+            "steps": {
+                "0": "Install and open the Ledger Live application",
+                "1": "Ensure that your Ledger is connected",
+                "2": "Search for apps: {legacy} and IOTA (MIOTA)",
+                "3": "Install both apps: {legacy} and IOTA (MIOTA)",
+                "4": "Remember that it's important to close Ledger Live before returning to Firefly"
+            }
+        },
+        "ledgerConnectionGuide": {
+            "title": "Tips if your Ledger isn’t connecting",
+            "steps": {
+                "0": "Make sure Ledger Live is not open on your computer",
+                "1": "Ensure you have unlocked your Ledger device with your PIN",
+                "2": "Open the new IOTA app on your Ledger device",
+                "3": {
+                    "text": "Still no luck?",
+                    "link": "Try the official Ledger support page"
+                }
+            }
+        },
+        "ledgerTransaction": {
+            "remainderAddress": {
+                "title": "Confirm remainder address",
+                "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+            },
+            "transaction": {
+                "title": "取引を承認する",
+                "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted."
+            }
+        },
+        "ledgerAddress": {
+            "title": "Confirm receive address",
+            "body": "Confirm that the receive address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+        },
+        "ledgerMigrateIndex": {
+            "title": "Do you need to migrate another Trinity account index?",
+            "body": "You can also migrate later in Advanced Settings."
         }
     },
     "charts": {
@@ -505,6 +645,8 @@
     "actions": {
         "continue": "続ける",
         "back": "戻る",
+        "previous": "Previous",
+        "next": "Next",
         "cancel": "キャンセル",
         "close": "閉じる",
         "dismiss": "拒否する",
@@ -573,6 +715,7 @@
         "addAccount": "ウォレットを追加",
         "checkForUpdates": "アップデートの確認",
         "reportAnIssue": "問題を報告",
+        "restore": "Restore",
         "clear": "消去",
         "hideDetails": "詳細を非表示",
         "yes": "はい",
@@ -592,7 +735,9 @@
         "searchBalances": "残高を検索",
         "searchAgain": "再検索",
         "searching": "検索しています...",
-        "closeFirefly": "Firefly を閉じる"
+        "closeFirefly": "Firefly を閉じる",
+        "generateAddress": "アドレスを生成",
+        "migrateAgain": "Migrate another index"
     },
     "general": {
         "password": "パスワード",
@@ -607,6 +752,7 @@
         "received": "受取り",
         "sendPayment": "支払いの送信",
         "moveFunds": "内部送金",
+        "sendTo": "Send To",
         "sendFunds": "資金を送金",
         "sendToAddress": "アドレスへ送金する",
         "scanQrOrPaste": "QRコードをスキャンするかアドレスを貼り付けてください",
@@ -625,6 +771,8 @@
         "myAddress": "自分のアドレス",
         "shareAddress": "アドレスを共有",
         "yourAddress": "あなたのアドレス",
+        "newRemainder": "New Remainder",
+        "remainder": "Remainder",
         "generateNewAddress": "新しいアドレスを作成する",
         "copyAddress": "アドレスをコビー",
         "import": "インポート",
@@ -661,6 +809,7 @@
         "messageId": "メッセージ ID：",
         "inputAddress": "アドレスを送信",
         "receiveAddress": "入金アドレス",
+        "newAddress": "New Address",
         "date": "日付",
         "status": "ステータス",
         "confirmed": "承認済み",
@@ -672,11 +821,13 @@
         "firstSync": "履歴を同期中、しばらく時間がかかることがあります...",
         "transferSyncing": "ウォレットを同期中",
         "transferSelectingInputs": "入力を選択",
-        "transferRemainderAddress": "残りの入金アドレスの作成中",
+        "transferRemainderAddress": "Generating remainder address",
+        "transferPreparedTransaction": "Preparing transaction",
         "transferSigning": "取引署名中",
         "transferPow": "PoW（プルーフ・オブ・ワーク）の実行",
         "transferBroadcasting": "取引をブロードキャストしています",
         "transferComplete": "転送完了",
+        "generatingReceiveAddress": "Generating receive address",
         "creatingAccount": "ウォレットを作成しています。しばらくお待ちください...",
         "updatingAccount": "ウォレットを更新しています。お待ちください...",
         "accountSyncing": "ウォレットを同期しています",
@@ -732,8 +883,7 @@
         "minutesRemaining": "{minutes, plural, one { 残り1分 } other {# 残り分 }}",
         "copiedToClipboard": "クリップボードにコピーしました",
         "accountsSynchronized": "ウォレット同期が完了しました",
-        "migratedAccountChrysalisDown": "あなたの資金は4月28日に Chrysalis の後に利用可能になります",
-        "migratedAccountChrysalisUp": "資金はまもなく利用可能になります"
+        "fundsAvailableSoon": "Your funds will become available shortly"
     },
     "error": {
         "profile": {
@@ -770,7 +920,10 @@
             "tilde": "プロファイル名は '~' 記号で始まることはできません。",
             "control": "プロファイル名に制御文字を含めることはできません。",
             "startDot": "プロファイル名は '.' 記号で始まることはできません。",
-            "chars": "プロファイル名には次の記号を含めることはできません<>:\"/\\|?*"
+            "chars": "プロファイル名には次の記号を含めることはできません<>:\"/\\|?*",
+            "index": "Your account index must be a number between 0 and 2,147,483,647.",
+            "page": "Your account page must be a number between 0 and 2,147,483,647.",
+            "syncing": "There was an error syncing your wallets."
         },
         "send": {
             "addressLength": "アドレスは {length, plural, one {1 文字} other {# 文字}}でなければなりません。",
@@ -784,7 +937,9 @@
             "insufficientFunds": "このウォレットの残高が不足しています。",
             "noToAccount": "資金を送金するウォレットが選択されていません。",
             "sendingDust": "1 Mi未満の送金はできません。",
-            "leavingDust": "アドレスに1Mi 未満を残すことはできません。"
+            "leavingDust": "アドレスに1Mi 未満を残すことはできません。",
+            "cancelled": "The transaction was cancelled.",
+            "transaction": "There was an error sending your transaction. Please try again."
         },
         "node": {
             "invalid": "有効なURLを入力してください。",
@@ -805,6 +960,25 @@
             "phraseWordCount": "復元フレーズには24単語が含まれているはずですが、現在は {length, plural, one {1です} other {#です}}.",
             "phraseUnrecognizedWord": "復元フレーズの単語「{word}」が認識されません",
             "phraseCaseWord": "単語「{word}」は小文字でなければなりません"
+        },
+        "ledger": {
+            "appNotOpen": "You must open the IOTA app on your Ledger device.",
+            "generic": "There was an error connecting to your Ledger device.",
+            "legacyConnected": "The wrong app is open on your Ledger device.",
+            "locked": "Please unlock your Ledger device by entering the PIN.",
+            "mnemonicMismatch": "You have connected the wrong Ledger device or the mnemonic has changed.",
+            "notDetected": "No Ledger device detected.",
+            "notFound": "Ledger device not found.",
+            "otherConnected": "The wrong app is open on your Ledger device.",
+            "generateAddress": "There was an error generating an address.",
+            "timeout": "Your Ledger device timed out.",
+            "disconnected": "Your Ledger device was disconnected."
+        },
+        "popup": {
+            "preventClose": "This popup is unable to be closed."
+        },
+        "migration": {
+            "missingBundle": "An error occurred while trying to find the transaction bundle."
         }
     },
     "tooltips": {

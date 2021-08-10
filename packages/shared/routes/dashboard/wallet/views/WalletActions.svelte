@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { AccountTile, Button, Text } from 'shared/components'
-    import { activeProfile } from 'shared/lib/profile'
+    import { activeProfile, isLedgerProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { selectedAccountId, WalletAccount } from 'shared/lib/wallet'
@@ -17,8 +17,6 @@
     const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
     const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
 
-    $: waitingChrysalis = $activeProfile?.migratedTransactions?.length
-
     function handleAccountClick(accountId) {
         selectedAccountId.set(accountId)
         walletRoute.set(WalletRoutes.Account)
@@ -34,9 +32,7 @@
         <div data-label="accounts" class="w-full h-full flex flex-col flex-no-wrap justify-start">
             <div class="flex flex-row mb-4 justify-between items-center">
                 <Text type="h5">{locale('general.myAccounts')}</Text>
-                <Button disabled={waitingChrysalis} onClick={handleCreateClick} secondary small showHoverText icon="plus">
-                    {locale('actions.create')}
-                </Button>
+                <Button onClick={handleCreateClick} secondary small showHoverText icon="plus">{locale('actions.create')}</Button>
             </div>
             {#if $viewableAccounts.length > 0}
                 <div
@@ -49,8 +45,8 @@
                             balanceEquiv={account.balanceEquiv}
                             size={$viewableAccounts.length === 1 ? 'l' : 'm'}
                             hidden={hiddenAccounts.includes(account.id)}
-                            disabled={waitingChrysalis}
-                            onClick={() => handleAccountClick(account.id)} />
+                            onClick={() => handleAccountClick(account.id)}
+                            ledger={$isLedgerProfile} />
                     {/each}
                 </div>
             {:else}

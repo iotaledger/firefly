@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
+    import { hasBundlesWithSpentAddresses, hasSingleBundle } from 'shared/lib/migration'
     import { createEventDispatcher } from 'svelte'
     import {
         BundleMiningWarning,
@@ -9,7 +10,6 @@
         SecurityCheckCompleted,
         TransferFragmentedFunds,
     } from './views/'
-    import { hasSingleBundle, hasBundlesWithSpentAddresses } from 'shared/lib/migration'
 
     export let locale
     export let mobile
@@ -23,20 +23,10 @@
         SecurityCheckCompleted = 'securityCheckCompleted',
     }
 
-    // TODO: dummy
-    enum MigrationType {
-        SingleBundle = 'singleBundle',
-        FragmentedFunds = 'fragmentedFunds',
-        SpentAddresses = 'spentAddresses',
-    }
-
     const dispatch = createEventDispatcher()
 
     let state: MigrateState = MigrateState.Init
     let stateHistory = []
-
-    // TODO: dummy
-    let migrationType: MigrationType = MigrationType.FragmentedFunds
 
     const _next = async (event) => {
         let nextState
@@ -56,6 +46,7 @@
                 }
 
                 break
+
             case MigrateState.TransferFragmentedFunds:
                 dispatch('next')
                 break

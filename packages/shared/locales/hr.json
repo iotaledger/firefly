@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "Stvori novi profil",
+            "profileName": "Ime profila",
             "body1": "Možete stvoriti više korisničkih računa kako biste organizirali svoje novčanike i poboljšali privatnost.",
-            "body2": "Počnimo s imenom vašeg prvog profila. Kasnije možete dodati još profila.",
-            "profileName": "Ime profila"
+            "body2": {
+                "first": "For now, let's start with your first profile name.",
+                "nonFirst": "For now, let's start with your profile name."
+            },
+            "addMore": "You can add more profiles later."
         },
         "setup": {
             "title": "Postavite svoj novčanik",
@@ -29,6 +33,32 @@
             "title": "Osiguraj svoj novčanik",
             "body1": "Spremite i ispišite Recovery Kit PDF predložak.",
             "body2": "Ako ispunite Recovery Kit i spremite ga na sigurno, uvijek možete izvršiti oporavak svojih novčanika."
+        },
+        "create": {
+            "title": "Stvori novčanik",
+            "body": "Stvori novi novčanik. Možeš odabrati običan softver novčanik, ili postavi hardverski novčanik ukoliko imaš Ledger uređaj.",
+            "softwareAccount": {
+                "title": "Želim softverski novčanik",
+                "description": "Stvori frazu za oporavak od 24 riječi"
+            },
+            "ledgerAccount": {
+                "title": "Želim hardverski novčanik",
+                "description": "Potreban je Ledger Nano S ili Ledger Nano X"
+            }
+        },
+        "setupLedger": {
+            "progress1": "Spoji svoj Ledger",
+            "progress2": "Generiraj adresu",
+            "progress3": "Switch Ledger app",
+            "progress4": "Prebaci sredstva",
+            "watchVideo": "Pogledaj video s uputama",
+            "videoGuide": "Ledger migration video guide"
+        },
+        "ledgerInstallationGuide": {
+            "title": "Jesi li instalirao potrebne Ledger aplikacije?",
+            "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
+            "body2": "Uvjeri se da je tvoj Ledger na najnovijoj verziji firmwarea. Sve predinstalirane aplikacije trebaju biti na najnovijim verzijama.",
+            "action": "Da, instalirao sam sve potrebne aplikacije"
         },
         "password": {
             "title": "Stvorite lozinku",
@@ -85,9 +115,11 @@
         },
         "congratulations": {
             "title": "Postavljanje novčanika je završeno",
-            "body": "Vaš novi novčanik spreman je za upotrebu.",
             "fundsMigrated": "Sredstva su prebačena",
-            "success": "Uspješno ste prebacili svoja sredstva na novu mrežu",
+            "body": "Vaš novi novčanik spreman je za upotrebu.",
+            "softwareMigratedBody": "Sredstva su uspješno prebačena na novu mrežu",
+            "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
             "exportMigration": "Izvezite detalje o migraciji i dovršite postupak"
         },
         "import": {
@@ -98,7 +130,9 @@
             "importMnemonic": "Imam Firefly frazu za oporavak",
             "importMnemonicDescription": "Za oporavak novčanika unesite svoju frazu za oporavak",
             "importFile": "Imam datoteku s pričuvnom kopijom",
-            "importFileDescription": "Uvezite Seedvault ili Stronghold datoteku"
+            "importFileDescription": "Uvezite Seedvault ili Stronghold datoteku",
+            "importLedger": "I have a Ledger backup",
+            "importLedgerDescription": "Restore or migrate a Ledger profile"
         },
         "importFromText": {
             "seed": {
@@ -119,18 +153,63 @@
             "title": "Obnovite svoje novčanike iz datoteke s pričuvnom kopijom",
             "body": "Za obnovu svojih novčanika uvezite datoteku s pričuvnom kopijom. To može biti Stronghold (.stronghold) ili Trinity SeedVault (.kdbx) datoteka."
         },
+        "importFromLedger": {
+            "title": "Restore or Migrate your Ledger",
+            "body": "Restore an existing Firefly Ledger profile, or migrate your funds from Trinity.",
+            "haveFireflyLedger": "I have a Firefly Ledger backup",
+            "haveFireflyLedgerDescription": "Restore a Firefly profile",
+            "haveTrinityLedger": "I have a Trinity Ledger backup",
+            "haveTrinityLedgerDescription": "Migrate a Trinity profile"
+        },
+        "connectLedger": {
+            "title": "Connect your Ledger to Firefly",
+            "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed.",
+            "trafficLight1": "Connect and unlock your Ledger with your PIN",
+            "trafficLight2": "Open the new IOTA app on your Ledger",
+            "tips": "Tips if your Ledger isn’t connecting"
+        },
+        "restoreFromFireflyLedger": {
+            "title": "Restore Your Ledger Profile",
+            "body": "Press restore to complete the setup process and restore your wallets, balances and transaction history.",
+            "restoring": "Restoring from Ledger..."
+        },
+        "legacyLedgerIntro": {
+            "title": "Start your Ledger migration using Firefly",
+            "body1": "Firefly will help you to transfer your tokens to the new Chrysalis network.",
+            "body2": "Nakon migracije moći ćete slati i primati tokene koristeći Ledger i Firefly.",
+            "readMore": "What to expect from the migration process"
+        },
+        "generateNewLedgerAddress": {
+            "title": "Stvorite novu adresu",
+            "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
+            "confirmTitle": "Confirm the new address",
+            "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
+            "confirmedTitle": "Address confirmed",
+            "confirmedBody": "You have confirmed that the address in Firefly matches the one on your Ledger device.",
+            "generating": "Generating address"
+        },
+        "switchLedgerApps": {
+            "title": "Switch Ledger apps",
+            "body": "Please switch to the {legacy} app on your Ledger device to continue migration. When ready, press continue."
+        },
+        "selectLedgerAccountIndex": {
+            "title": "Choose Ledger account index",
+            "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
+            "accountIndex": "Account Index",
+            "accountPage": "Account Page",
+            "standard": "Standard",
+            "expert": "Expert",
+            "takingAWhile": "This is taking a while...",
+            "notGeneratingAddresses": "Is your Ledger generating addresses?",
+            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
+        },
         "importBackupPassword": {
-            "title": "Obnovite svoje novčanike iz SeedVaulta ili Strongolda",
             "body1": "Molimo vas da unesete svoju lozinku za pričuvnu kopiju.",
             "body2": "Ovo je lozinka koju ste postavili kada ste izradili pričuvnu kopiju."
         },
         "importSuccess": {
             "title": "Uspješno ste obnovili pričuvnu kopiju",
-            "body": "Sada možete postaviti svoj novi profil.",
-            "seedvaultTitle": "Uvoz je uspješan",
-            "seedvaultBody": "Vaša je lozinka točna, možete nastaviti.",
-            "strongholdTitle": "Uvoz je uspješan",
-            "strongholdBody": "Vaša je lozinka točna, možete nastaviti."
+            "body": "Sada možete postaviti svoj novi profil."
         },
         "migrate": {
             "title": "Migrirajte svoja sredstva",
@@ -153,7 +232,7 @@
             "miningBundle": "Rudarim skup",
             "problemRestoringWallet": "Došlo je do greške mreže prilikom oporavka vašeg novčanika. Molimo pokušajte ponovno.",
             "minimumMigrationAmountSpentAddresses": "Najmanji mogući iznos za migraciju je 1 Mi po iskorištenoj adresi. Provjerite još jednom izgleda li iznos ispravno.",
-            "tooManyAddressesToMigrate": "Imate previše adresa s malim iznosima za migraciju. Provjerite još jednom izgledaju li iznosi ispravno.",
+            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
             "cannotMigrateAllYourFunds": "Ne možemo migrirati sve vaše adrese jer neke imaju premalo sredstava. Možete nastaviti ali nepovratno ćete izgubiti {value}.",
             "error": "Došlo je pogreške u migraciji vaših sredstava. Molimo Vas, pokušajte ponovno."
         },
@@ -184,6 +263,7 @@
         },
         "transferFragmentedFunds": {
             "body1": "Firefly će sada započeti migraciju. Ovo bi moglo potrajati.",
+            "body2": "Ensure your Ledger is connected and the {legacy} app is open at all times during migration.",
             "migrate": "Prebaci sredstva",
             "transaction": "Transakcija {number}",
             "rerun": "Pokušaj ponovo"
@@ -196,7 +276,8 @@
             "title": "Vaš saldo",
             "body": "Uvjerite se da je stanje sredstava ispravno prije no što započete. Ako stvari ne izgledaju točno, možete provjeriti još jednom.",
             "error": "Najmanji mogući iznos za migraciju je 1 Mi po adresi. Ukoliko iznos ne izgleda ispravno, provjerite ponovo.",
-            "zeroBalance": "Provjerite još jednom. Ukoliko i dalje ne vidite ispravan iznos, možda ste krivo unijeli seed."
+            "zeroBalance": "Provjerite još jednom. Ukoliko i dalje ne vidite ispravan iznos, možda ste krivo unijeli seed.",
+            "zeroBalanceLedgerLegacy": "Try checking again. If you still can't find your balance you might have selected the wrong account index."
         },
         "settings": {
             "settings": "Postavke",
@@ -314,6 +395,10 @@
                 "title": "Dijagnostika",
                 "description": "Vidi informacije o sustavu i aplikaciji"
             },
+            "migrateLedgerIndex": {
+                "title": "Migrate Ledger Index",
+                "description": "Migrate another Trinity account index"
+            },
             "stateExport": {
                 "title": "Izvoz stanja",
                 "description": "Izvezi povijest transakcija u .csv datoteku"
@@ -357,7 +442,15 @@
                 },
                 "hardwareDevice": {
                     "title": "Hardverski uređaj",
-                    "noneDetected": "Nije otkriveno"
+                    "statuses": {
+                        "appNotOpen": "IOTA App Not Open",
+                        "connected": "Connected",
+                        "legacyConnected": "{legacy} App Open",
+                        "locked": "Zaključano",
+                        "mnemonicMismatch": "Wrong Ledger or Mnemonic",
+                        "notDetected": "Not Detected",
+                        "otherConnected": "App Open"
+                    }
                 },
                 "strongholdStatus": {
                     "title": "Status novčanika",
@@ -488,6 +581,53 @@
             "body": "Unaprijeđenje Chrysalis mreže je počelo.",
             "bodyMigration": "Migracije su onemogućene do završetka postupka.",
             "bodyFirefly": "Firefly je onemogućen tijekom unaprijeđenja mreže. Migracija tokens opet će biti moguća po završetku."
+        },
+        "ledgerNotConnected": {
+            "connect": "Open the new IOTA app on your Ledger device to continue",
+            "connectLegacy": "Open the {legacy} app on your Ledger device to continue"
+        },
+        "ledgerConfirmation": {
+            "confirm": "To proceed, confirm the prompt displayed on your Ledger device"
+        },
+        "ledgerAppGuide": {
+            "title": "Guide to installing the Ledger apps",
+            "steps": {
+                "0": "Install and open the Ledger Live application",
+                "1": "Ensure that your Ledger is connected",
+                "2": "Search for apps: {legacy} and IOTA (MIOTA)",
+                "3": "Install both apps: {legacy} and IOTA (MIOTA)",
+                "4": "Remember that it's important to close Ledger Live before returning to Firefly"
+            }
+        },
+        "ledgerConnectionGuide": {
+            "title": "Tips if your Ledger isn’t connecting",
+            "steps": {
+                "0": "Make sure Ledger Live is not open on your computer",
+                "1": "Ensure you have unlocked your Ledger device with your PIN",
+                "2": "Open the new IOTA app on your Ledger device",
+                "3": {
+                    "text": "Still no luck?",
+                    "link": "Try the official Ledger support page"
+                }
+            }
+        },
+        "ledgerTransaction": {
+            "remainderAddress": {
+                "title": "Confirm remainder address",
+                "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+            },
+            "transaction": {
+                "title": "Potvrdi transakciju",
+                "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted."
+            }
+        },
+        "ledgerAddress": {
+            "title": "Confirm receive address",
+            "body": "Confirm that the receive address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+        },
+        "ledgerMigrateIndex": {
+            "title": "Do you need to migrate another Trinity account index?",
+            "body": "You can also migrate later in Advanced Settings."
         }
     },
     "charts": {
@@ -505,6 +645,8 @@
     "actions": {
         "continue": "Nastavi",
         "back": "Natrag",
+        "previous": "Previous",
+        "next": "Next",
         "cancel": "Poništi",
         "close": "Zatvori",
         "dismiss": "Odbaci",
@@ -573,6 +715,7 @@
         "addAccount": "Dodaj novčanik",
         "checkForUpdates": "Potraži ažuriranja",
         "reportAnIssue": "Prijavi problem",
+        "restore": "Restore",
         "clear": "Očisti",
         "hideDetails": "Sakrij detalje",
         "yes": "Da",
@@ -592,7 +735,9 @@
         "searchBalances": "Traži sredstva",
         "searchAgain": "Traži ponovno",
         "searching": "Pretraga...",
-        "closeFirefly": "Zatvori Firefly"
+        "closeFirefly": "Zatvori Firefly",
+        "generateAddress": "Generiraj adresu",
+        "migrateAgain": "Migrate another index"
     },
     "general": {
         "password": "Lozinka",
@@ -607,6 +752,7 @@
         "received": "Primljeno",
         "sendPayment": "Pošalji uplatu",
         "moveFunds": "Interni prijenos",
+        "sendTo": "Send To",
         "sendFunds": "Pošaljite sredstva",
         "sendToAddress": "Slanje na adresu",
         "scanQrOrPaste": "Skenirajte QR kod ili zalijepite Adresu",
@@ -625,6 +771,8 @@
         "myAddress": "Moja adresa",
         "shareAddress": "Podijelite adresu",
         "yourAddress": "Vaša adresa",
+        "newRemainder": "New Remainder",
+        "remainder": "Remainder",
         "generateNewAddress": "Stvorite novu adresu",
         "copyAddress": "Kopiraj adresu",
         "import": "Uvezi",
@@ -661,6 +809,7 @@
         "messageId": "ID poruke",
         "inputAddress": "Adresa s koje je poslano",
         "receiveAddress": "Adresa na koju je poslano",
+        "newAddress": "New Address",
         "date": "Datum",
         "status": "Stanje",
         "confirmed": "Potvrđeno",
@@ -672,11 +821,13 @@
         "firstSync": "Sinkronizirano povijest aktivnosti, ovo bi moglo potrajati...",
         "transferSyncing": "Sinkronizacija novčanika",
         "transferSelectingInputs": "Odabir inputa",
-        "transferRemainderAddress": "Generiranje adrese za polog ostatka",
+        "transferRemainderAddress": "Generating remainder address",
+        "transferPreparedTransaction": "Preparing transaction",
         "transferSigning": "Potpisivanje transakcije",
         "transferPow": "Izvodim PoW (Proof of Work)",
         "transferBroadcasting": "Odašiljem transakciju",
         "transferComplete": "Transakcija dovršena",
+        "generatingReceiveAddress": "Generating receive address",
         "creatingAccount": "Stvaram novčanik, molim pričekajte...",
         "updatingAccount": "Usklađujem novčanik, molim pričekajte...",
         "accountSyncing": "Novčanik se sinkronizira",
@@ -732,8 +883,7 @@
         "minutesRemaining": "{minutes, plural, one {minuta} few {# minute} other {# minuta}}",
         "copiedToClipboard": "Kopirano u međuspremnik",
         "accountsSynchronized": "Sinkronizacija novčanika je završena",
-        "migratedAccountChrysalisDown": "Vaša će sredstva biti dostupna nakon Chrysalisa, 28. travnja",
-        "migratedAccountChrysalisUp": "Vaša će sredstva biti dostupna uskoro"
+        "fundsAvailableSoon": "Your funds will become available shortly"
     },
     "error": {
         "profile": {
@@ -770,7 +920,10 @@
             "tilde": "Ime profila ne može početi znakom '~'.",
             "control": "Ime profila ne smije sadržavati Ctrl znak.",
             "startDot": "Ime profila ne može početi točkom.",
-            "chars": "Ime profila ne smije uključivati neki od sljedećih znakova <>:\"/\\|?*"
+            "chars": "Ime profila ne smije uključivati neki od sljedećih znakova <>:\"/\\|?*",
+            "index": "Your account index must be a number between 0 and 2,147,483,647.",
+            "page": "Your account page must be a number between 0 and 2,147,483,647.",
+            "syncing": "There was an error syncing your wallets."
         },
         "send": {
             "addressLength": "Adrese moraju sadržavati {length, plural, one {1 znak} few {# znaka} other {# znakova}}.",
@@ -784,7 +937,9 @@
             "insufficientFunds": "Ovaj novčanik nema dovoljno sredstava.",
             "noToAccount": "Niste odabrali novčanik na koji želite poslati sredstva.",
             "sendingDust": "Ne možete slati manje od 1 Mi.",
-            "leavingDust": "Ne možet ostaviti manje od 1 Mi na svojoj adresi."
+            "leavingDust": "Ne možet ostaviti manje od 1 Mi na svojoj adresi.",
+            "cancelled": "The transaction was cancelled.",
+            "transaction": "There was an error sending your transaction. Please try again."
         },
         "node": {
             "invalid": "Molimo unesite valjani URL.",
@@ -805,6 +960,25 @@
             "phraseWordCount": "Vaša fraza za oporavak mora se sastojati od 24 riječi. Trenutno {length, plural, one {je samo jedna} other {ih ima samo #}}.",
             "phraseUnrecognizedWord": "Ne prepoznajemo riječ \"{word}\" u vašoj frazi za oporavak",
             "phraseCaseWord": "Riječ \"{word}\" treba započeti malim slovom"
+        },
+        "ledger": {
+            "appNotOpen": "You must open the IOTA app on your Ledger device.",
+            "generic": "There was an error connecting to your Ledger device.",
+            "legacyConnected": "The wrong app is open on your Ledger device.",
+            "locked": "Please unlock your Ledger device by entering the PIN.",
+            "mnemonicMismatch": "You have connected the wrong Ledger device or the mnemonic has changed.",
+            "notDetected": "No Ledger device detected.",
+            "notFound": "Ledger device not found.",
+            "otherConnected": "The wrong app is open on your Ledger device.",
+            "generateAddress": "There was an error generating an address.",
+            "timeout": "Your Ledger device timed out.",
+            "disconnected": "Your Ledger device was disconnected."
+        },
+        "popup": {
+            "preventClose": "This popup is unable to be closed."
+        },
+        "migration": {
+            "missingBundle": "An error occurred while trying to find the transaction bundle."
         }
     },
     "tooltips": {

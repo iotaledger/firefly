@@ -9,6 +9,7 @@
         cleanupInProgressProfiles,
         createProfile,
         disposeNewProfile,
+        hasNoProfiles,
         newProfile,
         profileInProgress,
         profiles,
@@ -104,8 +105,13 @@
     <OnboardingLayout onBackClick={handleBackClick} {busy}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-4">{locale('views.profile.title')}</Text>
-            <Text type="p" secondary classes="mb-4">{locale('views.profile.body1')}</Text>
-            <Text type="p" secondary classes="mb-10">{locale('views.profile.body2')}</Text>
+            <Text type="p" secondary classes="mb-4">
+                {locale('views.profile.body1')}
+            </Text>
+            <Text type="p" secondary classes="mb-10">
+                {locale(`views.profile.body2.${hasNoProfiles() ? 'first' : 'nonFirst'}`)}
+                {locale('views.profile.addMore')}
+            </Text>
             <Input
                 {error}
                 bind:value={profileName}

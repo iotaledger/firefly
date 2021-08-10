@@ -32,26 +32,6 @@ export interface Duration {
     nanos: number
 }
 
-export interface NodeInfo {
-    nodeinfo: {
-        name: string;
-        version: string;
-        isHealthy: boolean;
-        networkId: string;
-        minPoWScore: number;
-        bech32HRP: string;
-        latestMilestoneIndex: number;
-        latestMilestoneTimestamp: number;
-        confirmedMilestoneIndex: number;
-        pruningIndex: number;
-        features: string[];
-        messagesPerSecond: number;
-        referencedMessagesPerSecond: number;
-        referencedRate: number;
-    }
-    url: string
-}
-
 export function backup(bridge: Bridge, __ids: CommunicationIds, destinationPath: string, password: string) {
     return bridge({
         actorId: __ids.actorId,
@@ -174,6 +154,15 @@ export function setClientOptions(bridge: Bridge, __ids: CommunicationIds, payloa
     })
 }
 
+export function getLedgerDeviceStatus(bridge: Bridge, __ids: CommunicationIds, isSimulator: boolean) {
+    return bridge({
+        actorId: __ids.actorId,
+        id: __ids.messageId,
+        cmd: 'GetLedgerStatus',
+        payload: isSimulator
+    })
+}
+
 export function setStrongholdPasswordClearInterval(bridge: Bridge, __ids: CommunicationIds, payload: Duration) {
     return bridge({
         actorId: __ids.actorId,
@@ -182,7 +171,6 @@ export function setStrongholdPasswordClearInterval(bridge: Bridge, __ids: Commun
         payload,
     })
 }
-
 
 export function getLegacySeedChecksum(bridge: Bridge, __ids: CommunicationIds, payload: string) {
     return bridge({
