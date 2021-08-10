@@ -14,9 +14,9 @@ parser: '@typescript-eslint/parser'
 parserOptions:
   ecmaVersion: 6
   extraFileExtensions: '.svelte'
-  project: './tsconfig.lint.json'
+  project: 'packages/shared/tsconfig.lint.json'
   sourceType: module
-  tsconfigRootDir: './'
+  tsconfigRootDir: 'packages/shared'
 plugins:
   - '@typescript-eslint'
   - 'svelte3'
