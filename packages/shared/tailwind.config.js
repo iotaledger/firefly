@@ -247,8 +247,8 @@ module.exports = {
     },
     variants: {
         fontWeight: ['hover', 'focus', 'group-hover'],
-        textColor: ['dark', 'responsive', 'hover', 'dark-hover', 'focus', 'group-hover'],
-        backgroundColor: ['dark', 'responsive', 'hover', 'dark-hover', 'focus', 'group-hover'],
+        textColor: ['dark', 'responsive', 'hover', 'dark-hover', 'focus', 'dark-focus', 'group-hover'],
+        backgroundColor: ['dark', 'responsive', 'hover', 'dark-hover', 'focus', 'dark-focus', 'group-hover'],
         backgroundOpacity: ['dark'],
         opacity: ['responsive', 'group-hover', 'focus-within', 'hover', 'focus', 'disabled'],
         cursor: ['responsive', 'disabled'],
@@ -313,6 +313,13 @@ module.exports = {
             addVariant('dark-hover', ({ modifySelectors, separator }) => {
                 modifySelectors(({ className }) => {
                     return `.scheme-dark .${e(`dark\:hover${separator}${className}`)}:hover`
+                })
+            })
+        }),
+        plugin(function({ addVariant, e }) {
+            addVariant('dark-focus', ({ modifySelectors, separator }) => {
+                modifySelectors(({ className }) => {
+                    return `.scheme-dark .${e(`dark\:focus${separator}${className}`)}:focus`
                 })
             })
         }),
