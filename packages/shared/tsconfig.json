@@ -12,7 +12,7 @@
             "@lib/*": ["./lib/*"],
             "@routes/*": ["./routes/*"],
             "@shared/*": ["./*"],
-            "@types/*": ["./lib/typings/*"]
+            "@typings/*": ["./lib/typings/*"]
         }
     },
     "include": [

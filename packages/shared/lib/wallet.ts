@@ -1,12 +1,18 @@
-import { mnemonic } from 'shared/lib/app'
-import { convertToFiat, currencies, CurrencyTypes, exchangeRates, formatCurrency } from 'shared/lib/currency'
-import { stripTrailingSlash } from 'shared/lib/helpers'
-import { localize } from 'shared/lib/i18n'
-import type { PriceData } from 'shared/lib/marketData'
-import { HistoryDataProps } from 'shared/lib/marketData'
-import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
-import { showAppNotification, showSystemNotification } from 'shared/lib/notifications'
-import { activeProfile, isLedgerProfile, isStrongholdLocked, ProfileType, updateProfile } from 'shared/lib/profile'
+import { get, writable, Writable } from 'svelte/store'
+
+import { mnemonic } from '@lib/app'
+import { convertToFiat, currencies, CurrencyTypes, exchangeRates, formatCurrency } from '@lib/currency'
+import { stripTrailingSlash } from '@lib/helpers'
+import { localize } from '@lib/i18n'
+import { displayNotificationForLedgerProfile } from '@lib/ledger'
+import { didInitialiseMigrationListeners } from '@lib/migration'
+import { getOfficialNetwork, getOfficialNodes } from '@lib/network'
+import { showAppNotification, showSystemNotification } from '@lib/notifications'
+import { openPopup } from '@lib/popup'
+import { activeProfile, isLedgerProfile, isStrongholdLocked, ProfileType, updateProfile } from '@lib/profile'
+import { walletSetupType } from '@lib/router'
+import { formatUnitBestMatch } from '@lib/units'
+
 import type {
     Account,
     Account as BaseAccount,
@@ -14,9 +20,10 @@ import type {
     Balance,
     SyncAccountOptions,
     SyncedAccount
-} from 'shared/lib/typings/account'
-import type { Address } from 'shared/lib/typings/address'
-import type { Actor, GetMigrationAddressResponse } from 'shared/lib/typings/bridge'
+} from '@typings/account'
+import type { Address } from '@typings/address'
+import type { Actor, GetMigrationAddressResponse } from '@typings/bridge'
+import type { ClientOptions } from '@typings/client'
 import type {
     BalanceChangeEventPayload,
     ConfirmationStateChangeEventPayload,
@@ -28,26 +35,27 @@ import type {
     TransactionEventPayload,
     TransferProgressEventPayload,
     TransferState
-} from 'shared/lib/typings/events'
-import type { Payload, Transaction } from 'shared/lib/typings/message'
+} from '@typings/events'
+import type { LedgerStatus } from '@typings/ledger'
+import { HistoryDataProps, PriceData } from '@typings/market'
+import type { Message, Payload, Transaction } from '@typings/message'
 import type {
     AddressInput,
     MigrationBundle,
     MigrationData,
     SendMigrationBundleResponse,
-} from 'shared/lib/typings/migration'
-import { formatUnitBestMatch } from 'shared/lib/units'
-import { get, writable, Writable } from 'svelte/store'
-import { openPopup } from './popup'
-import type { ClientOptions } from './typings/client'
-import type { LedgerStatus } from './typings/ledger'
-import type { Message } from './typings/message'
-import type { NodeAuth, NodeInfo } from './typings/node'
-import { SetupType } from './typings/routes'
-import type { Duration, StrongholdStatus } from './typings/wallet'
-import { displayNotificationForLedgerProfile } from './ledger'
-import { walletSetupType } from './router'
-import { didInitialiseMigrationListeners } from 'shared/lib/migration';
+} from '@typings/migration'
+import { SetupType } from '@typings/routes'
+import type { NodeAuth, NodeInfo } from '@typings/node'
+import type {
+    AccountMessage,
+    AccountsBalanceHistory,
+    BalanceHistory,
+    BalanceOverview,
+    Duration,
+    StrongholdStatus,
+    WalletAccount
+} from '@typings/wallet'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -62,31 +70,8 @@ export const STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS = 0
 
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
-export interface WalletAccount extends Account {
-    depositAddress: string;
-    rawIotaBalance: number;
-    balance: string;
-    balanceEquiv: string;
-    color: string;
-}
-
-export interface AccountMessage extends Message {
-    account: number;
-}
-
-
 interface ActorState {
     [id: string]: Actor
-}
-
-export type BalanceOverview = {
-    incoming: string
-    incomingRaw: number
-    outgoing: string
-    outgoingRaw: number
-    balance: string
-    balanceRaw: number
-    balanceFiat: string
 }
 
 type WalletState = {
@@ -99,22 +84,6 @@ type WalletState = {
             to: string
         }
     }>
-}
-
-type BalanceTimestamp = {
-    timestamp: number,
-    balance: number
-}
-
-export type BalanceHistory = {
-    [HistoryDataProps.ONE_HOUR]: BalanceTimestamp[]
-    [HistoryDataProps.SEVEN_DAYS]: BalanceTimestamp[]
-    [HistoryDataProps.TWENTY_FOUR_HOURS]: BalanceTimestamp[]
-    [HistoryDataProps.ONE_MONTH]: BalanceTimestamp[]
-}
-
-export type AccountsBalanceHistory = {
-    [accountIndex: number]: BalanceHistory
 }
 
 /** Active actors state */

@@ -9,7 +9,8 @@ import {
     updateDisplayNotification,
     updateDisplayNotificationProgress
 } from '@lib/notifications'
-import type { NotificationData } from '@lib/typings/notification'
+
+import type { NotificationData } from '@typings/notification'
 
 const DEFAULT_APP_UPDATER_POLL_INTERVAL = 900000 // 15 Minutes
 

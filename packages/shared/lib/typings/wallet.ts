@@ -1,8 +1,47 @@
-import type { AccountIdentifier } from './account'
+import type { Account, AccountIdentifier } from './account'
 import type { Bridge, CommunicationIds } from './bridge'
 import type { ClientOptions } from './client'
-import type { Transfer } from './message'
+import type { HistoryDataProps } from "./market";
+import type { Message, Transfer } from './message'
 import type { MnemonicPayload } from './mnemonic'
+
+export interface WalletAccount extends Account {
+    depositAddress: string;
+    rawIotaBalance: number;
+    balance: string;
+    balanceEquiv: string;
+    color: string;
+}
+
+export interface AccountMessage extends Message {
+    account: number;
+}
+
+export type BalanceOverview = {
+    incoming: string
+    incomingRaw: number
+    outgoing: string
+    outgoingRaw: number
+    balance: string
+    balanceRaw: number
+    balanceFiat: string
+}
+
+type BalanceTimestamp = {
+    timestamp: number,
+    balance: number
+}
+
+export type BalanceHistory = {
+    [HistoryDataProps.ONE_HOUR]: BalanceTimestamp[]
+    [HistoryDataProps.SEVEN_DAYS]: BalanceTimestamp[]
+    [HistoryDataProps.TWENTY_FOUR_HOURS]: BalanceTimestamp[]
+    [HistoryDataProps.ONE_MONTH]: BalanceTimestamp[]
+}
+
+export type AccountsBalanceHistory = {
+    [accountIndex: number]: BalanceHistory
+}
 
 export interface StrongholdStatus {
     snapshot: {

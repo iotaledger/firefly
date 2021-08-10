@@ -4,17 +4,14 @@ import { Unit } from '@iota/unit-converter'
 
 import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates, formatCurrencyValue } from '@lib/currency'
 import { formatDate, localize } from '@lib/i18n'
+import { priceData } from '@lib/marketData'
 import { activeProfile, updateProfile } from '@lib/profile'
 import { formatUnitPrecision } from '@lib/units'
 import { isSelfTransaction, wallet } from '@lib/wallet'
-import {
-    HistoryDataProps,
-    priceData
-} from '@lib/marketData'
 
-import type { WalletAccount } from '@lib/wallet'
-import type { Message } from '@lib/typings/message'
-import type { BalanceHistory } from '@lib/wallet'
+import type { Message } from '@typings/message'
+import type { BalanceHistory, WalletAccount } from '@typings/wallet'
+import { HistoryDataProps } from '@typings/market'
 
 export interface Tooltip {
     title: string
