@@ -9,7 +9,7 @@ on:
       - hotfix/**
 
 jobs:
-  setup:
+  lint:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -22,38 +22,14 @@ jobs:
       - name: Install Dependencies
         run: yarn
 
-  backend:
-    runs-on: ubuntu-18.04
-    needs: [setup]
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Linter
+      - name: Linter (Backend)
         run: yarn lint:backend
 
-  desktop:
-    runs-on: ubuntu-18.04
-    needs: [ setup ]
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Linter
+      - name: Linter (Desktop)
         run: yarn lint:desktop
 
-  mobile:
-    runs-on: ubuntu-18.04
-    needs: [ setup ]
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Linter
+      - name: Linter (Mobile)
         run: yarn lint:mobile
 
-  shared:
-    runs-on: ubuntu-18.04
-    needs: [ setup ]
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Linter
+      - name: Linter (Shared)
         run: yarn lint:shared

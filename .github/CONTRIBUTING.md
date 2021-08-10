@@ -150,6 +150,8 @@ example that compiles and passes [documentation tests](https://doc.rust-lang.org
 
 - All instances of `unsafe` should have a comment that explains why its use was unavoidable
 
+- All code should pass formatting and linting checks (run `yarn lint` or `yarn format-check` in the root dir)
+
 - All code should be well tested, using unit tests and integration tests
 
 - Code must compile and pass our [continuous integration tests](.github/workflows)

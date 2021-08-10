@@ -11,7 +11,8 @@
             "@components/*": ["./components/*"],
             "@lib/*": ["./lib/*"],
             "@routes/*": ["./routes/*"],
-            "@shared/*": ["./*"]
+            "@shared/*": ["./*"],
+            "@types/*": ["./lib/typings/*"]
         }
     },
     "include": [

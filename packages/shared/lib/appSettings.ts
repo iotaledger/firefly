@@ -1,4 +1,5 @@
-import { persistent } from './helpers'
+import { persistent } from '@lib/helpers'
+
 /**
  * App Settings
  */

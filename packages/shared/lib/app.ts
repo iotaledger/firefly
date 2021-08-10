@@ -1,12 +1,12 @@
-import { isSoftwareProfile } from 'shared/lib/profile'
 import { get, writable } from 'svelte/store'
-import { localize } from './i18n'
-import { stopPollingLedgerStatus } from './ledger'
-import { showAppNotification } from './notifications'
-import { closePopup } from './popup'
-import { activeProfile, clearActiveProfile, isLedgerProfile, isStrongholdLocked } from './profile'
-import { resetRouter } from './router'
-import { api, destroyActor, resetWallet } from './wallet'
+
+import { localize } from '@lib/i18n'
+import { stopPollingLedgerStatus } from '@lib/ledger'
+import { showAppNotification } from '@lib/notifications'
+import { closePopup } from '@lib/popup'
+import { activeProfile, clearActiveProfile, isLedgerProfile, isSoftwareProfile, isStrongholdLocked } from '@lib/profile'
+import { resetRouter } from '@lib/router'
+import { api, destroyActor, resetWallet } from '@lib/wallet'
 
 /**
  * Mobile mode

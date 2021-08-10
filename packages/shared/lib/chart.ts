@@ -1,19 +1,20 @@
-import { Unit } from '@iota/unit-converter'
-import { AvailableExchangeRates, convertToFiat, currencies, exchangeRates } from 'shared/lib/currency'
-import { localize } from 'shared/lib/i18n'
-import { activeProfile, updateProfile } from 'shared/lib/profile'
-import { formatUnitPrecision } from 'shared/lib/units'
-import type { WalletAccount } from 'shared/lib/wallet'
-import { isSelfTransaction, wallet } from 'shared/lib/wallet'
-import { formatDate } from 'shared/lib/i18n'
 import { derived, get, writable } from 'svelte/store'
-import { CurrencyTypes, formatCurrencyValue } from './currency'
+
+import { Unit } from '@iota/unit-converter'
+
+import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates, formatCurrencyValue } from '@lib/currency'
+import { formatDate, localize } from '@lib/i18n'
+import { activeProfile, updateProfile } from '@lib/profile'
+import { formatUnitPrecision } from '@lib/units'
+import { isSelfTransaction, wallet } from '@lib/wallet'
 import {
     HistoryDataProps,
     priceData
-} from './marketData'
-import type { Message } from './typings/message'
-import type { BalanceHistory } from './wallet'
+} from '@lib/marketData'
+
+import type { WalletAccount } from '@lib/wallet'
+import type { Message } from '@lib/typings/message'
+import type { BalanceHistory } from '@lib/wallet'
 
 export interface Tooltip {
     title: string

@@ -1,14 +1,15 @@
-import { Electron, NativeProgress, VersionDetails } from 'shared/lib/electron'
-import { localize } from 'shared/lib/i18n'
+import { writable } from 'svelte/store'
+
+import { Electron, NativeProgress, VersionDetails } from '@lib/electron'
+import { localize } from '@lib/i18n'
 import {
     NOTIFICATION_TIMEOUT_NEVER,
     removeDisplayNotification,
     showAppNotification,
     updateDisplayNotification,
     updateDisplayNotificationProgress
-} from 'shared/lib/notifications'
-import type { NotificationData } from 'shared/lib/typings/notification'
-import { writable } from 'svelte/store'
+} from '@lib/notifications'
+import type { NotificationData } from '@lib/typings/notification'
 
 const DEFAULT_APP_UPDATER_POLL_INTERVAL = 900000 // 15 Minutes
 
