@@ -1,5 +1,4 @@
 assets/
-locales/
+locales/*
 !locales/en.json
 node_modules/
-style/

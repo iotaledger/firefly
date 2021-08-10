@@ -6,6 +6,8 @@
         "packages/backend/bindings/node"
     ],
     "devDependencies": {
+        "husky": "^7.0.1",
+        "lint-staged": "^11.1.2",
         "patch-package": "^6.2.2"
     },
     "scripts": {
@@ -13,5 +15,13 @@
     },
     "resolutions": {
         "lodash": ">=4.17.21"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "packages/shared": "yarn format-check"
     }
 }

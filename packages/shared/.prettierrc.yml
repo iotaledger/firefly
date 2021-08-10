@@ -4,7 +4,7 @@ embeddedLanguageFormatting: auto
 endOfLine: lf
 plugins:
   - "prettier-plugin-svelte"
-printWidth: 130
+printWidth: 120
 semi: false
 singleQuote: true
 tabWidth: 4

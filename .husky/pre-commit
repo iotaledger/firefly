@@ -1,0 +1,7 @@
+# Stage code by running formatter (Prettier)
+yarn lint-staged
+
+# Change to shared dir and run linter (ESLint)
+cd packages/shared/
+yarn lint
+cd ../../

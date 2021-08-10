@@ -24,8 +24,8 @@
         "dev": "tsc --watch",
         "format": "prettier -w \"**/*.{ts,js,json,yml,md}\"",
         "format-check": "prettier -c \"**/*.{ts,js,json,yml,md}\"",
-        "lint": "eslint ./",
-        "lint-fix": "eslint ./ --fix"
+        "lint": "eslint . --cache",
+        "lint-fix": "eslint . --cache --fix"
     },
     "devDependencies": {
         "@rollup/plugin-commonjs": "^13.0.0",
