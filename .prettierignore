@@ -1,0 +1,34 @@
+# Repository
+.github/
+.vscode/
+
+patches/
+specs/
+
+# Backend (packages/backend)
+packages/backend/**/*.rs
+
+packages/backend/bindings/c/
+packages/backend/bindings/capacitor/
+packages/backend/bindings/node/dist/
+packages/backend/bindings/node/native/
+
+packages/backend/src/
+
+# Desktop (packages/desktop)
+packages/desktop/out/
+packages/desktop/public/
+
+# Mobile (packages/mobile)
+packages/mobile/android/
+packages/mobile/ios/
+packages/mobile/public/
+
+# Shared (packages/shared)
+packages/shared/assets/
+packages/shared/locales/
+packages/shared/!locales/en.json
+packages/shared/style/
+
+# Common files and folders
+**/node_modules

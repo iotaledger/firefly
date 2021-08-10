@@ -1,0 +1,51 @@
+name: pr-checks
+
+on:
+  push:
+    branches:
+      - chore/**
+      - fix/**
+      - feat/**
+      - hotfix/**
+
+jobs:
+  setup:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 12.x
+
+      - name: Install Dependencies
+        run: yarn
+
+  backend:
+    runs-on: ubuntu-18.04
+    needs: [setup]
+    steps:
+      - name: Linter
+        run: yarn lint:backend
+
+  desktop:
+    runs-on: ubuntu-18.04
+    needs: [ setup ]
+    steps:
+      - name: Linter
+        run: yarn lint:desktop
+
+  mobile:
+    runs-on: ubuntu-18.04
+    needs: [ setup ]
+    steps:
+      - name: Linter
+        run: yarn lint:mobile
+
+  shared:
+    runs-on: ubuntu-18.04
+    needs: [ setup ]
+    steps:
+      - name: Linter
+        run: yarn lint:shared

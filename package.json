@@ -1,27 +1,43 @@
 {
+    "name": "firefly",
+    "version": "1.2.0",
+    "url": "https://firefly.iota.org",
+    "homepage": "https://firefly.iota.org",
+    "author": "IOTA Foundation <contact@iota.org>",
     "private": true,
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/iotaledger/firefly.git"
+    },
     "workspaces": [
         "packages/desktop",
         "packages/shared",
         "packages/backend/bindings/node"
     ],
     "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^4.29.1",
+        "@typescript-eslint/parser": "^4.29.1",
+        "eslint": "^7.32.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-prettier": "^3.4.0",
+        "eslint-plugin-svelte3": "^3.2.0",
         "husky": "^7.0.1",
         "lint-staged": "^11.1.2",
-        "patch-package": "^6.2.2"
+        "patch-package": "^6.2.2",
+        "prettier": "^2.3.2",
+        "prettier-plugin-svelte": "^2.3.1"
     },
     "scripts": {
+        "format": "prettier -w **/*.{ts,js,json,scss,css}",
+        "format-check": "prettier -c **/*.{ts,js,json,scss,css}",
+        "lint": "eslint .",
+        "lint:backend": "eslint packages/backend",
+        "lint:desktop": "eslint packages/desktop",
+        "lint:mobile": "eslint packages/mobile",
+        "lint:shared": "eslint packages/shared",
         "postinstall": "patch-package"
     },
     "resolutions": {
         "lodash": ">=4.17.21"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
-    },
-    "lint-staged": {
-        "packages/shared": "yarn format-check"
     }
 }
