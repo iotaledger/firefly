@@ -9,9 +9,7 @@
         "packages/shared/components",
         "packages/shared/lib",
         "packages/shared/routes",
-        "packages/shared/style",
+        "packages/shared/style"
     ],
-    "exclude": [
-        "**/node_modules"
-    ]
+    "exclude": ["**/node_modules"]
 }

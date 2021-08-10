@@ -1,24 +1,24 @@
 const { ipcRenderer, contextBridge } = require('electron')
 
 // Hook the error handlers as early as possible
-window.addEventListener('error', event => {
+window.addEventListener('error', (event) => {
     if (event.error && event.error.message) {
-        ipcRenderer.invoke('handle-error', "Preload Context Error", {
+        ipcRenderer.invoke('handle-error', 'Preload Context Error', {
             message: event.error.message,
-            stack: event.error.stack
+            stack: event.error.stack,
         })
     } else {
-        ipcRenderer.invoke('handle-error', "Preload Context Error", event.error || event)
+        ipcRenderer.invoke('handle-error', 'Preload Context Error', event.error || event)
     }
-    event.preventDefault();
+    event.preventDefault()
     console.error(event.error || event)
 })
 
-window.addEventListener('unhandledrejection', event => {
-    ipcRenderer.invoke('handle-error', "Preload Render Context Unhandled Rejection", event.reason)
-    event.preventDefault();
+window.addEventListener('unhandledrejection', (event) => {
+    ipcRenderer.invoke('handle-error', 'Preload Render Context Unhandled Rejection', event.reason)
+    event.preventDefault()
     console.error(event.reason)
-});
+})
 
 try {
     const fs = require('fs')
@@ -76,40 +76,39 @@ try {
         DeepLinkManager,
         NotificationManager,
         getStrongholdBackupDestination: (defaultPath) => {
-            return ipcRenderer.invoke('show-save-dialog', {
-                properties: ['createDirectory', 'showOverwriteConfirmation'],
-                defaultPath,
-                filters: [
-                    { name: 'Stronghold Files', extensions: ['stronghold'] }
-                ]
-            }).then((result) => {
-                if (result.canceled) {
-                    return null
-                }
+            return ipcRenderer
+                .invoke('show-save-dialog', {
+                    properties: ['createDirectory', 'showOverwriteConfirmation'],
+                    defaultPath,
+                    filters: [{ name: 'Stronghold Files', extensions: ['stronghold'] }],
+                })
+                .then((result) => {
+                    if (result.canceled) {
+                        return null
+                    }
 
-                return result.filePath
-            })
+                    return result.filePath
+                })
         },
 
         /**
          * Exports migration log
-         * 
+         *
          * @method exportMigrationLog
-         * 
-         * @param {string} sourcePath 
+         *
+         * @param {string} sourcePath
          * @param {string} defaultFileName
-         *  
+         *
          * @returns {Promise<boolean>}
          */
         exportMigrationLog: (sourcePath, defaultFileName) => {
-            return ipcRenderer.invoke('show-save-dialog',
-                {
+            return ipcRenderer
+                .invoke('show-save-dialog', {
                     properties: ['createDirectory', 'showOverwriteConfirmation'],
                     defaultPath: defaultFileName,
-                    filters: [
-                        { name: 'Log Files', extensions: ['log'] }
-                    ]
-                }).then((result) => {
+                    filters: [{ name: 'Log Files', extensions: ['log'] }],
+                })
+                .then((result) => {
                     if (result.canceled) {
                         return null
                     }
@@ -121,38 +120,36 @@ try {
                             } else {
                                 resolve(true)
                             }
-                        });
+                        })
                     })
-
                 })
         },
 
         /**
          * Exports ledger migration log
-         * 
+         *
          * @method exportLedgerMigrationLog
-         * 
+         *
          * @param {string} content
-         * @param {string} defaultFileName 
-         * 
+         * @param {string} defaultFileName
+         *
          * @returns {Promise}
          */
         exportLedgerMigrationLog: (content, defaultFileName) => {
-            return ipcRenderer.invoke('show-save-dialog',
-                {
+            return ipcRenderer
+                .invoke('show-save-dialog', {
                     properties: ['createDirectory', 'showOverwriteConfirmation'],
                     defaultPath: defaultFileName,
-                    filters: [
-                        { name: 'Log Files', extensions: ['log'] }
-                    ]
-                }).then((result) => {
+                    filters: [{ name: 'Log Files', extensions: ['log'] }],
+                })
+                .then((result) => {
                     if (result.canceled) {
                         return null
                     }
 
                     return new Promise((resolve, reject) => {
                         try {
-                            let payload = '';
+                            let payload = ''
 
                             content.forEach((object) => {
                                 Object.keys(object).forEach((key) => {
@@ -160,8 +157,7 @@ try {
                                 })
 
                                 payload = `${payload} \r\n`
-                            });
-
+                            })
 
                             fs.writeFileSync(result.filePath, payload)
                             resolve(true)
@@ -174,29 +170,29 @@ try {
 
         /**
          * Imports legacy IOTA seed
-         * 
+         *
          * @method importLegacySeed
-         * 
-         * @param {Buffer} buffer 
-         * @param {string} password 
-         * 
-         * @returns {Promise<string>} 
+         *
+         * @param {Buffer} buffer
+         * @param {string} password
+         *
+         * @returns {Promise<string>}
          */
         importLegacySeed: (buffer, password) => {
-            return kdbx.importVault(buffer, password);
+            return kdbx.importVault(buffer, password)
         },
 
         /**
          * Validates Seed Vault
-         * 
+         *
          * @method validateSeedVault
-         * 
-         * @param {Buffer} buffer 
-         * 
-         * @returns {boolean} 
+         *
+         * @param {Buffer} buffer
+         *
+         * @returns {boolean}
          */
         validateSeedVault: (buffer) => {
-            return kdbx.checkFormat(buffer);
+            return kdbx.checkFormat(buffer)
         },
 
         /**
@@ -224,12 +220,12 @@ try {
          */
         getOS: () => ipcRenderer.invoke('get-os'),
         /**
-        * Starts an update of the application
-        *
-        * @method updateDownload
-        *
-        * @returns void
-        */
+         * Starts an update of the application
+         *
+         * @method updateDownload
+         *
+         * @returns void
+         */
         updateDownload: () => ipcRenderer.invoke('update-download'),
         /**
          * Cancels an update of the application
@@ -256,12 +252,12 @@ try {
          */
         updateCheck: () => ipcRenderer.invoke('update-check'),
         /**
-        * Get version details
-        *
-        * @method getVersionDetails
-        *
-        * @returns void
-        */
+         * Get version details
+         *
+         * @method getVersionDetails
+         *
+         * @returns void
+         */
         getVersionDetails: () => ipcRenderer.invoke('update-get-version-details'),
         /**
          * Change menu state to determine what menu items to display
@@ -272,7 +268,7 @@ try {
         updateMenu: (attribute, value) => {
             if (Object.keys(menuState).includes(attribute)) {
                 ipcRenderer.invoke('menu-update', {
-                    [attribute]: value
+                    [attribute]: value,
                 })
             }
         },
@@ -320,11 +316,11 @@ try {
             ipcRenderer.invoke('handle-error', errorType, error)
         },
         /**
-          * Add native window wallet event listener
-          * @param {string} event - Target event name
-          * @param {function} callback - Event trigger callback
-          * @returns {undefined}
-          */
+         * Add native window wallet event listener
+         * @param {string} event - Target event name
+         * @param {function} callback - Event trigger callback
+         * @returns {undefined}
+         */
         onEvent: (event, callback) => {
             let listeners = eventListeners[event]
             if (!listeners) {
@@ -339,31 +335,33 @@ try {
         },
         /**
          * Save the recovery kit
-         * @returns 
+         * @returns
          */
         saveRecoveryKit: (recoverKitData) => {
-            return ipcRenderer.invoke('show-save-dialog', {
-                properties: ['createDirectory', 'showOverwriteConfirmation'],
-                defaultPath: "firefly-recovery-kit.pdf",
-                filters: [
-                    { name: 'Pdf Document', extensions: ['pdf'] },
-                    { name: 'All Files', extensions: ['*'] }
-                ]
-            }).then((result) => {
-                if (result.canceled) {
-                    return
-                }
+            return ipcRenderer
+                .invoke('show-save-dialog', {
+                    properties: ['createDirectory', 'showOverwriteConfirmation'],
+                    defaultPath: 'firefly-recovery-kit.pdf',
+                    filters: [
+                        { name: 'Pdf Document', extensions: ['pdf'] },
+                        { name: 'All Files', extensions: ['*'] },
+                    ],
+                })
+                .then((result) => {
+                    if (result.canceled) {
+                        return
+                    }
 
-                try {
-                    fs.writeFileSync(result.filePath, Buffer.from(recoverKitData))
-                } catch (err) {
-                    console.error(err)
-                }
-            })
+                    try {
+                        fs.writeFileSync(result.filePath, Buffer.from(recoverKitData))
+                    } catch (err) {
+                        console.error(err)
+                    }
+                })
         },
         /**
          * Hook the logger
-         * @returns 
+         * @returns
          */
         hookErrorLogger,
         ledger,
@@ -377,5 +375,5 @@ try {
 
     contextBridge.exposeInMainWorld('Electron', Electron)
 } catch (error) {
-    ipcRenderer.invoke('handle-error', "Preload Error", error)
+    ipcRenderer.invoke('handle-error', 'Preload Error', error)
 }

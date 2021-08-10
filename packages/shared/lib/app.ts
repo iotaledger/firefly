@@ -39,7 +39,8 @@ interface SendParams {
  * Input paramaters for sending transactions
  */
 export const sendParams = writable<SendParams>({ amount: 0, address: '', message: '', isInternal: false })
-export const clearSendParams = (isInternal = false) => sendParams.set({ amount: 0, address: '', message: '', isInternal })
+export const clearSendParams = (isInternal = false) =>
+    sendParams.set({ amount: 0, address: '', message: '', isInternal })
 
 /**
  * Determines whether a user is logged in
@@ -68,7 +69,7 @@ export const login = () => {
  */
 export const logout = () => {
     return new Promise<void>((resolve) => {
-        const ap = get(activeProfile);
+        const ap = get(activeProfile)
 
         const _cleanup = () => {
             if (ap) {
@@ -102,11 +103,9 @@ export const logout = () => {
                         type: 'error',
                         message: localize(err.error),
                     })
-
                 },
             })
-        }
-        else {
+        } else {
             _cleanup()
         }
     })

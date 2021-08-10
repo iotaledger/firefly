@@ -256,7 +256,7 @@ module.exports = {
     plugins: [
         // Add individual border colors
         // Source: https://github.com/tailwindlabs/tailwindcss/issues/559#issuecomment-639118372
-        plugin(function({ addUtilities, theme, config }) {
+        plugin(function ({ addUtilities, theme, config }) {
             const themeColors = theme('colors')
             const individualBorderColors = Object.keys(themeColors).map((colorName) => {
                 if (typeof themeColors[colorName] === 'string') {
@@ -297,7 +297,7 @@ module.exports = {
         }),
         // Add darkmode
         // Source: https://dev.to/smartmointy/tailwind-css-dark-mode-switch-with-javascript-2kl9
-        plugin(function({ addVariant, prefix }) {
+        plugin(function ({ addVariant, prefix }) {
             addVariant('dark', ({ modifySelectors, separator }) => {
                 modifySelectors(({ selector }) => {
                     return selectorParser((selectors) => {
@@ -309,7 +309,7 @@ module.exports = {
                 })
             })
         }),
-        plugin(function({ addVariant, e }) {
+        plugin(function ({ addVariant, e }) {
             addVariant('dark-hover', ({ modifySelectors, separator }) => {
                 modifySelectors(({ className }) => {
                     return `.scheme-dark .${e(`dark\:hover${separator}${className}`)}:hover`

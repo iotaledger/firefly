@@ -1,11 +1,11 @@
 import { get, writable } from 'svelte/store'
 
-import { currencies, CurrencyTypes, exchangeRates } from "@lib/currency";
+import { currencies, CurrencyTypes, exchangeRates } from '@lib/currency'
 import { activeProfile } from '@lib/profile'
 import Validator from '@lib/validator'
 
-import type { MarketData, PriceData } from "@typings/market";
-import { HistoryDataProps } from "@typings/market";
+import type { MarketData, PriceData } from '@typings/market'
+import { HistoryDataProps } from '@typings/market'
 
 /**
  * Market data endpoints list
@@ -23,10 +23,10 @@ const DEFAULT_MARKETDATA_ENDPOINT_TIMEOUT = 5000
 const DEFAULT_MARKETDATA_POLL_INTERVAL = 300000 // 5 minutes
 
 enum Timeframes {
-    ONE_HOUR = "1Hour",
-    TWENTY_FOUR_HOURS = "1Day",
-    SEVEN_DAYS = "1Week",
-    ONE_MONTH = "1Month",
+    ONE_HOUR = '1Hour',
+    TWENTY_FOUR_HOURS = '1Day',
+    SEVEN_DAYS = '1Week',
+    ONE_MONTH = '1Month',
 }
 
 /**
@@ -88,7 +88,7 @@ export async function pollMarketData(): Promise<void> {
     // Load any previously stored data in case the endpoints are not working
     // these might be a bit out of date but they are better than no values at all
     try {
-        const marketData = localStorage.getItem("marketData")
+        const marketData = localStorage.getItem('marketData')
         if (marketData) {
             processMarketData(JSON.parse(marketData))
         }
@@ -119,17 +119,15 @@ export async function fetchMarketData(): Promise<void> {
         const endpoint = MARKETDATA_ENDPOINTS[index]
         try {
             const abortController = new AbortController()
-            const timerId = setTimeout(
-                () => {
-                    if (abortController) {
-                        abortController.abort();
-                    }
-                },
-                DEFAULT_MARKETDATA_ENDPOINT_TIMEOUT);
+            const timerId = setTimeout(() => {
+                if (abortController) {
+                    abortController.abort()
+                }
+            }, DEFAULT_MARKETDATA_ENDPOINT_TIMEOUT)
 
-            requestOptions.signal = abortController.signal;
+            requestOptions.signal = abortController.signal
 
-            const response = await fetch(endpoint, requestOptions);
+            const response = await fetch(endpoint, requestOptions)
 
             clearTimeout(timerId)
 
@@ -139,10 +137,10 @@ export async function fetchMarketData(): Promise<void> {
 
             // Successfully retrieved and processed the market data
             // so store it in case the endpoint is down in the future
-            localStorage.setItem("marketData", JSON.stringify(marketData))
+            localStorage.setItem('marketData', JSON.stringify(marketData))
             break
         } catch (err) {
-            console.error(err.name === "AbortError" ? new Error(`Could not fetch from ${endpoint}.`) : err)
+            console.error(err.name === 'AbortError' ? new Error(`Could not fetch from ${endpoint}.`) : err)
         }
     }
 }
@@ -190,9 +188,12 @@ export async function addProfileCurrencyPriceData(): Promise<void> {
         if (!Object.values(CurrencyTypes.USD).includes(profileCurrency)) {
             const profileCurrencyRate: number = get(exchangeRates)[profileCurrency.toUpperCase()]
             const usdHistory = get(priceData)[CurrencyTypes.USD]
-            let profileCurrencyHistory = {};
+            let profileCurrencyHistory = {}
             Object.keys(usdHistory).forEach((key) => {
-                let convertedProfileCurrencyHistory = usdHistory[key].map(([timestamp, value]) => [timestamp, (value * profileCurrencyRate).toString()])
+                let convertedProfileCurrencyHistory = usdHistory[key].map(([timestamp, value]) => [
+                    timestamp,
+                    (value * profileCurrencyRate).toString(),
+                ])
                 profileCurrencyHistory[key] = convertedProfileCurrencyHistory
             })
             priceData.update((_priceData) => ({ ..._priceData, [profileCurrency]: profileCurrencyHistory }))

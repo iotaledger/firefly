@@ -1,10 +1,10 @@
-import { Currencies, CurrencyTypes, ExchangeRates } from "@lib/currency";
+import { Currencies, CurrencyTypes, ExchangeRates } from '@lib/currency'
 
 export enum HistoryDataProps {
-    ONE_HOUR = "1h",
-    TWENTY_FOUR_HOURS = "24h",
-    SEVEN_DAYS = "7d",
-    ONE_MONTH = "1m",
+    ONE_HOUR = '1h',
+    TWENTY_FOUR_HOURS = '24h',
+    SEVEN_DAYS = '7d',
+    ONE_MONTH = '1m',
 }
 
 export type HistoryData = {
@@ -15,10 +15,10 @@ export type HistoryData = {
 }
 
 enum Histories {
-    HISTORY_BTC = "history-btc",
-    HISTORY_ETH = "history-eth",
-    HISTORY_EUR = "history-eur",
-    HISTORY_USD = "history-usd",
+    HISTORY_BTC = 'history-btc',
+    HISTORY_ETH = 'history-eth',
+    HISTORY_EUR = 'history-eur',
+    HISTORY_USD = 'history-usd',
 }
 
 type HistoryBTC = {
@@ -59,7 +59,7 @@ export type MarketData = {
 }
 
 export type MarketDataValidationResponse = {
-    type: "MarketData"
+    type: 'MarketData'
     payload: MarketData
 }
 

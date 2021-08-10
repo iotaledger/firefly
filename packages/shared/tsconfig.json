@@ -3,10 +3,7 @@
     "compilerOptions": {
         "outDir": "out",
         "baseUrl": "./",
-        "lib": [
-            "DOM",
-            "ESNext"
-        ],
+        "lib": ["DOM", "ESNext"],
         "paths": {
             "@components/*": ["./components/*"],
             "@lib/*": ["./lib/*"],
@@ -15,7 +12,5 @@
             "@typings/*": ["./lib/typings/*"]
         }
     },
-    "include": [
-        "./lib"
-    ]
+    "include": ["./lib"]
 }

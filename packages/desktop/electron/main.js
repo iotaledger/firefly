@@ -40,7 +40,7 @@ const handleError = (errorType, error, isRenderProcessError) => {
         lastError = {
             diagnostics: getDiagnostics(),
             errorType,
-            error
+            error,
         }
 
         openErrorWindow()
@@ -53,13 +53,13 @@ const handleError = (errorType, error, isRenderProcessError) => {
     }
 }
 
-process.on('uncaughtException', error => {
+process.on('uncaughtException', (error) => {
     handleError('Main Unhandled Error', error)
-});
+})
 
-process.on('unhandledRejection', error => {
+process.on('unhandledRejection', (error) => {
     handleError('Main Unhandled Promise Rejection', error)
-});
+})
 
 /**
  * Define wallet windows
@@ -67,7 +67,7 @@ process.on('unhandledRejection', error => {
 const windows = {
     main: null,
     about: null,
-    error: null
+    error: null,
 }
 
 let paths = {
@@ -163,7 +163,7 @@ function createWindow() {
         console.log(error) //eslint-disable-line no-console
     }
 
-    const mainWindowState = windowStateKeeper('main', 'settings.json');
+    const mainWindowState = windowStateKeeper('main', 'settings.json')
 
     // Create the browser window
     windows.main = new BrowserWindow({
@@ -183,10 +183,10 @@ function createWindow() {
     })
 
     if (mainWindowState.isMaximized) {
-        windows.main.maximize();
+        windows.main.maximize()
     }
 
-    mainWindowState.track(windows.main);
+    mainWindowState.track(windows.main)
 
     if (!app.isPackaged) {
         // Enable dev tools only in developer mode
@@ -354,8 +354,8 @@ const getDiagnostics = () => {
         [8, ['Tiger', '10.4']],
         [7, ['Panther', '10.3']],
         [6, ['Jaguar', '10.2']],
-        [5, ['Puma', '10.1']]
-    ]);
+        [5, ['Puma', '10.1']],
+    ])
 
     let platform = os.platform()
     let platformVersion = os.release()
@@ -367,7 +367,7 @@ const getDiagnostics = () => {
         if (!Number.isNaN(num)) {
             const [_, version] = osXNameMap.get(num)
             if (version) {
-               platformVersion = version
+                platformVersion = version
             }
         }
     }
@@ -561,9 +561,8 @@ export const closeErrorWindow = () => {
     }
 }
 
-
 function windowStateKeeper(windowName, settingsFilename) {
-    let window, windowState;
+    let window, windowState
 
     function setBounds() {
         const settings = loadJsonConfig(settingsFilename)
@@ -579,13 +578,13 @@ function windowStateKeeper(windowName, settingsFilename) {
             y: undefined,
             width: 1280,
             height: 720,
-        };
+        }
     }
 
     function saveState() {
-        windowState.isMaximized = window.isMaximized();
+        windowState.isMaximized = window.isMaximized()
         if (!windowState.isMaximized) {
-            windowState = window.getBounds();
+            windowState = window.getBounds()
         }
 
         let settings = loadJsonConfig(settingsFilename)
@@ -598,13 +597,13 @@ function windowStateKeeper(windowName, settingsFilename) {
     }
 
     function track(win) {
-        window = win;
-        ['resize', 'move', 'close'].forEach(event => {
-            win.on(event, saveState);
-        });
+        window = win
+        ;['resize', 'move', 'close'].forEach((event) => {
+            win.on(event, saveState)
+        })
     }
 
-    setBounds();
+    setBounds()
 
     return {
         x: windowState.x,
@@ -612,8 +611,8 @@ function windowStateKeeper(windowName, settingsFilename) {
         width: windowState.width,
         height: windowState.height,
         isMaximized: windowState.isMaximized,
-        track
-    };
+        track,
+    }
 }
 
 function saveJsonConfig(filename, data) {

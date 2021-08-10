@@ -1,20 +1,20 @@
 import type { Account, AccountIdentifier } from './account'
 import type { Bridge, CommunicationIds } from './bridge'
 import type { ClientOptions } from './client'
-import type { HistoryDataProps } from "./market";
+import type { HistoryDataProps } from './market'
 import type { Message, Transfer } from './message'
 import type { MnemonicPayload } from './mnemonic'
 
 export interface WalletAccount extends Account {
-    depositAddress: string;
-    rawIotaBalance: number;
-    balance: string;
-    balanceEquiv: string;
-    color: string;
+    depositAddress: string
+    rawIotaBalance: number
+    balance: string
+    balanceEquiv: string
+    color: string
 }
 
 export interface AccountMessage extends Message {
-    account: number;
+    account: number
 }
 
 export type BalanceOverview = {
@@ -28,7 +28,7 @@ export type BalanceOverview = {
 }
 
 type BalanceTimestamp = {
-    timestamp: number,
+    timestamp: number
     balance: number
 }
 
@@ -79,7 +79,7 @@ export function backup(bridge: Bridge, __ids: CommunicationIds, destinationPath:
         payload: {
             destination: destinationPath,
             password,
-        }
+        },
     })
 }
 
@@ -198,7 +198,7 @@ export function getLedgerDeviceStatus(bridge: Bridge, __ids: CommunicationIds, i
         actorId: __ids.actorId,
         id: __ids.messageId,
         cmd: 'GetLedgerStatus',
-        payload: isSimulator
+        payload: isSimulator,
     })
 }
 
