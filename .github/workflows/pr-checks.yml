@@ -26,6 +26,8 @@ jobs:
     runs-on: ubuntu-18.04
     needs: [setup]
     steps:
+      - uses: actions/checkout@v2
+
       - name: Linter
         run: yarn lint:backend
 
@@ -33,6 +35,8 @@ jobs:
     runs-on: ubuntu-18.04
     needs: [ setup ]
     steps:
+      - uses: actions/checkout@v2
+
       - name: Linter
         run: yarn lint:desktop
 
@@ -40,6 +44,8 @@ jobs:
     runs-on: ubuntu-18.04
     needs: [ setup ]
     steps:
+      - uses: actions/checkout@v2
+
       - name: Linter
         run: yarn lint:mobile
 
@@ -47,5 +53,7 @@ jobs:
     runs-on: ubuntu-18.04
     needs: [ setup ]
     steps:
+      - uses: actions/checkout@v2
+
       - name: Linter
         run: yarn lint:shared
