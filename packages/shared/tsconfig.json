@@ -4,13 +4,6 @@
         "outDir": "out",
         "baseUrl": "./",
         "lib": ["DOM", "ESNext"],
-        "paths": {
-            "@components/*": ["./components/*"],
-            "@lib/*": ["./lib/*"],
-            "@routes/*": ["./routes/*"],
-            "@shared/*": ["./*"],
-            "@typings/*": ["./lib/typings/*"]
-        }
     },
     "include": ["./lib"]
 }
