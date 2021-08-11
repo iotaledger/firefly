@@ -45,7 +45,8 @@
     },
     "lint-staged": {
         "**/*.{ts,js,json}": [
-            "yarn format-check"
+            "echo 'LINTING'",
+            "yarn format-check",
             "yarn lint"
         ]
     }
