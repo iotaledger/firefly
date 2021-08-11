@@ -38,16 +38,16 @@
     "resolutions": {
         "lodash": ">=4.17.21"
     },
-    "husky": {
-        "hooks": {
-            "pre-commit": "echo 'SUP'"
-        }
-    },
     "lint-staged": {
         "**/*.{ts,js,json}": [
             "echo 'LINTING'",
             "yarn format-check",
             "yarn lint"
         ]
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
     }
 }
