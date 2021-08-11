@@ -46,6 +46,7 @@
     "lint-staged": {
         "**/*.{ts,js,json}": [
             "yarn format-check"
+            "yarn lint"
         ]
     }
 }
