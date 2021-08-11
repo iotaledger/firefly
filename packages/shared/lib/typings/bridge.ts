@@ -54,7 +54,7 @@ export enum ResponseTypes {
     Broadcast = 'Broadcast',
     StrongholdStatusChange = 'StrongholdStatusChange',
     TransferProgress = 'TransferProgress',
-    LedgerAddressGeneration = 'LedgerAddressGeneration',
+    LedgerAddressGeneration = "LedgerAddressGeneration",
     MigrationProgress = 'MigrationProgress',
     GeneratedMnemonic = 'GeneratedMnemonic',
     StoredMnemonic = 'StoredMnemonic',
@@ -79,7 +79,7 @@ export enum ResponseTypes {
     MigrationAddress = 'MigrationAddress',
     MinedBundle = 'MinedBundle',
     MineBundle = 'MineBundle',
-    LegacyAddressChecksum = 'GetLegacyAddressChecksum',
+    LegacyAddressChecksum = 'GetLegacyAddressChecksum'
 }
 
 export enum Actions {
@@ -135,7 +135,7 @@ export type LedgerDeviceStatusResponse = Response<ResponseTypes.LedgerStatus, Le
 export type LegacyAddressChecksumResponse = Response<ResponseTypes.LegacyAddressChecksum, string>
 
 export type MessageResponse =
-    | RemovedAccountResponse
+    RemovedAccountResponse
     | CreatedAccountResponse
     | ReadAccountResponse
     | ReadAccountsResponse

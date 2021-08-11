@@ -20,7 +20,10 @@
     },
     "scripts": {
         "build": "tsc",
-        "dev": "tsc --watch"
+        "dev": "tsc --watch",
+        "format": "prettier --write \"**/*.{ts,js,json,yml,md}\"",
+        "lint": "eslint ./",
+        "lint-fix": "eslint ./ --fix"
     },
     "devDependencies": {
         "@rollup/plugin-commonjs": "^13.0.0",
@@ -28,9 +31,16 @@
         "@rollup/plugin-node-resolve": "^9.0.0",
         "@rollup/plugin-typescript": "^6.0.0",
         "@tsconfig/svelte": "^1.0.10",
+        "@typescript-eslint/eslint-plugin": "^4.29.0",
+        "@typescript-eslint/parser": "^4.29.0",
         "autoprefixer": "^10.0.2",
+        "eslint": "^7.32.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-prettier": "^3.4.0",
         "postcss": "^8.2.10",
         "postcss-cli": "^8.0.0",
+        "prettier": "^2.3.2",
+        "prettier-plugin-svelte": "^1.4.2",
         "sass": "^1.32.6",
         "svelte-check": "^1.1.16",
         "svelte-loader": "^3.0.0",

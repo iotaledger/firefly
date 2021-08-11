@@ -261,11 +261,9 @@ class SyncedAccountListValidator extends Validator {
         }
 
         for (const account of payload) {
-            const validationResponse = new SyncedAccountValidator().isValid(
-                Object.assign({}, response, {
-                    payload: account as any,
-                })
-            )
+            const validationResponse = new SyncedAccountValidator().isValid(Object.assign({}, response, {
+                payload: account as any
+            }))
 
             if (!validationResponse.isValid) {
                 return validationResponse
@@ -550,11 +548,11 @@ class LedgerDeviceStatusValidator extends Validator {
 class MigrationDataValidator extends Validator {
     /**
      * Checks if migration data response is valid
-     *
+     * 
      * @method isValid
-     *
+     * 
      * @param {MessageResponse} response
-     *
+     * 
      * @returns {ValidationResponse}
      */
     isValid(response: MessageResponse): ValidationResponse {
@@ -563,11 +561,11 @@ class MigrationDataValidator extends Validator {
         if ('number' !== typeof payload.lastCheckedAddressIndex) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
-                error: 'Invalid type of address index',
+                error: 'Invalid type of address index'
             })
         }
 
-        return super.isValid(response)
+        return super.isValid(response);
     }
 }
 
@@ -587,10 +585,7 @@ class TypeValidator extends Validator {
      */
     isValid(response: MessageResponse): ValidationResponse {
         const hasValidType =
-            'object' === typeof response &&
-            null !== response &&
-            !Array.isArray(response) &&
-            'function' !== typeof response
+            'object' === typeof response && null !== response && !Array.isArray(response) && 'function' !== typeof response
 
         if (!hasValidType) {
             return super.createResponse(false, {
@@ -779,13 +774,9 @@ export default class ValidatorService {
         this.ids = ids
 
         this.validators = {
-            [ResponseTypes.InvalidMessage]: this.createBaseValidator()
-                .add(new PayloadTypeValidator('object'))
-                .getFirst(),
+            [ResponseTypes.InvalidMessage]: this.createBaseValidator().add(new PayloadTypeValidator('object')).getFirst(),
             [ResponseTypes.StrongholdPasswordSet]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.RemovedAccount]: this.createBaseValidator()
-                .add(new PayloadTypeValidator('string'))
-                .getFirst(),
+            [ResponseTypes.RemovedAccount]: this.createBaseValidator().add(new PayloadTypeValidator('string')).getFirst(),
             [ResponseTypes.CreatedAccount]: this.createBaseValidator().add(new AccountValidator()).getFirst(),
             [ResponseTypes.ReadAccounts]: this.createBaseValidator().add(new AccountListValidator()).getFirst(),
             [ResponseTypes.Balance]: this.createBaseValidator().add(new PayloadTypeValidator('object')).getFirst(),
@@ -801,16 +792,12 @@ export default class ValidatorService {
             [ResponseTypes.Ok]: this.createBaseValidator().getFirst(),
             [ResponseTypes.SentTransfer]: this.createBaseValidator().add(new MessageValidator()).getFirst(),
             [ResponseTypes.StoragePasswordSet]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.StrongholdStatus]: this.createBaseValidator()
-                .add(new StrongholdStatusValidator())
-                .getFirst(),
+            [ResponseTypes.StrongholdStatus]: this.createBaseValidator().add(new StrongholdStatusValidator()).getFirst(),
             [ResponseTypes.GeneratedAddress]: this.createBaseValidator().add(new AddressValidator()).getFirst(),
             [ResponseTypes.LatestAddress]: this.createBaseValidator().add(new AddressValidator()).getFirst(),
             [ResponseTypes.SyncedAccount]: this.createBaseValidator().add(new SyncedAccountValidator()).getFirst(),
             [ResponseTypes.UnusedAddress]: this.createBaseValidator().add(new AddressValidator()).getFirst(),
-            [ResponseTypes.IsLatestAddressUnused]: this.createBaseValidator()
-                .add(new PayloadTypeValidator('boolean'))
-                .getFirst(),
+            [ResponseTypes.IsLatestAddressUnused]: this.createBaseValidator().add(new PayloadTypeValidator('boolean')).getFirst(),
             [ResponseTypes.AreAllLatestAddressesUnused]: this.createBaseValidator()
                 .add(new PayloadTypeValidator('boolean'))
                 .getFirst(),
@@ -862,10 +849,7 @@ export default class ValidatorService {
      * @returns {ValidatorChainBuilder}
      */
     private createBaseValidator(): ValidatorChainBuilder {
-        return new ValidatorChainBuilder()
-            .add(new TypeValidator())
-            .add(new IdValidator(this.ids))
-            .add(new ActionValidator())
+        return new ValidatorChainBuilder().add(new TypeValidator()).add(new IdValidator(this.ids)).add(new ActionValidator())
     }
 
     /**
@@ -888,9 +872,7 @@ export default class ValidatorService {
      *
      * @returns {ValidationResponse}
      */
-    performValidation(
-        response: MessageResponse | MarketDataValidationResponse | ChrysalisVariablesValidationResponse
-    ): ValidationResponse {
+    performValidation(response: MessageResponse | MarketDataValidationResponse | ChrysalisVariablesValidationResponse): ValidationResponse {
         return this.validators[response.type].isValid(response)
     }
 }

@@ -1,4 +1,4 @@
-import type { Node } from './node'
+import type { Node } from './node';
 
 export interface ClientOptions {
     nodes?: Node[]

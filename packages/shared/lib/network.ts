@@ -3,12 +3,15 @@ import { isValidHttpsUrl, isValidUrl } from './utils'
 
 const DEFAULT_NETWORK = 'chrysalis-mainnet'
 
-const DEFAULT_NODES: Node[] = ['https://chrysalis-nodes.iota.org', 'https://chrysalis-nodes.iota.cafe'].map((url) => ({
+const DEFAULT_NODES: Node[] = [
+    'https://chrysalis-nodes.iota.org',
+    'https://chrysalis-nodes.iota.cafe'
+].map((url) => ({
     url,
     auth: {
         username: '',
-        password: '',
-    },
+        password: ''
+    }
 }))
 
 /**
@@ -41,6 +44,7 @@ export const isNodeUrlValid = (nodesList: Node[], newUrl: string): string | unde
     return undefined
 }
 
+
 /**
  * Get the list of official nodes
  * @returns The list of nodes
@@ -48,6 +52,7 @@ export const isNodeUrlValid = (nodesList: Node[], newUrl: string): string | unde
 export const getOfficialNodes = () => {
     return DEFAULT_NODES
 }
+
 
 /**
  * Get the official network

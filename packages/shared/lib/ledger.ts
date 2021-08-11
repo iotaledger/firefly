@@ -13,9 +13,10 @@ import {
     LedgerDeviceState,
     LedgerStatus,
     LegacyLedgerErrorCode,
-    LegacyLedgerErrorName,
+    LegacyLedgerErrorName
 } from './typings/ledger'
 import type { NotificationType } from './typings/notification'
+
 
 const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
 const LEGACY_ADDRESS_WITH_CHECKSUM_LENGTH = 90
@@ -28,18 +29,17 @@ export const isLedgerLegacyConnected = writable<boolean>(false)
 
 export function getLedgerDeviceStatus(
     legacy: boolean = false,
-    onConnected: () => void = () => {},
-    onDisconnected: () => void = () => {},
-    onError: () => void = () => {}
+    onConnected: () => void = () => { },
+    onDisconnected: () => void = () => { },
+    onError: () => void = () => { }
 ) {
     api.getLedgerDeviceStatus(ledgerSimulator, {
         onSuccess(response: Event<LedgerStatus>) {
             ledgerDeviceState.set(calculateLedgerDeviceState(response.payload))
 
             const state = get(ledgerDeviceState)
-            const isConnected =
-                (legacy && state === LedgerDeviceState.LegacyConnected) ||
-                (!legacy && state === LedgerDeviceState.Connected)
+            const isConnected = (legacy && state === LedgerDeviceState.LegacyConnected)
+                || (!legacy && state === LedgerDeviceState.Connected)
             if (isConnected) {
                 if (get(popupState).active && get(popupState).type === 'ledgerNotConnected') {
                     closePopup()
@@ -51,7 +51,7 @@ export function getLedgerDeviceStatus(
         },
         onError(err) {
             onError()
-        },
+        }
     })
 }
 
@@ -72,9 +72,7 @@ export function calculateLedgerDeviceState(status: LedgerStatus): LedgerDeviceSt
                      * NOTE: "BOLOS" is the name of the Ledger operating system and is
                      * sometimes registered as an app.
                      */
-                    return app?.name && app?.name !== LedgerAppName.BOLOS
-                        ? LedgerDeviceState.OtherConnected
-                        : LedgerDeviceState.AppNotOpen
+                    return (app?.name && app?.name !== LedgerAppName.BOLOS) ? LedgerDeviceState.OtherConnected : LedgerDeviceState.AppNotOpen
                 } else {
                     return LedgerDeviceState.NotDetected
                 }
@@ -94,15 +92,15 @@ export function getLedgerOpenedApp(): Promise<LedgerApp> {
             },
             onError(err) {
                 reject(err)
-            },
+            }
         })
     })
 }
 
 export function promptUserToConnectLedger(
     legacy: boolean = false,
-    onConnected: () => void = () => {},
-    onCancel: () => void = () => {}
+    onConnected: () => void = () => { },
+    onCancel: () => void = () => { },
 ) {
     const _onCancel = () => {
         onCancel()
@@ -112,16 +110,10 @@ export function promptUserToConnectLedger(
     }
     const _onDisconnected = () => {
         if (!get(popupState).active) {
-            openLedgerNotConnectedPopup(legacy, onCancel, () =>
-                pollLedgerDeviceStatus(
-                    legacy,
-                    LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT,
-                    _onConnected,
-                    _onDisconnected,
-                    _onCancel
-                )
-            )
+            openLedgerNotConnectedPopup(legacy, onCancel, () => pollLedgerDeviceStatus(legacy, LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT, _onConnected, _onDisconnected, _onCancel))
         }
+
+        
     }
     getLedgerDeviceStatus(legacy, _onConnected, _onDisconnected, _onCancel)
 }
@@ -142,22 +134,18 @@ export function displayNotificationForLedgerProfile(
         const allowedToNotify = allowMultiple ? true : isNewNotification(notificationType)
         const canNotify = allowedToNotify && (ignoreNotDetected ? state !== LedgerDeviceState.NotDetected : true)
 
-        const isConnected = !legacy && state === LedgerDeviceState.Connected
-        const isLegacyConnected = legacy && state === LedgerDeviceState.LegacyConnected
+        const isConnected = (!legacy && state === LedgerDeviceState.Connected)
+        const isLegacyConnected = (legacy && state === LedgerDeviceState.LegacyConnected)
         const shouldNotify = (!isConnected && !isLegacyConnected) || error
 
         if (canNotify && shouldNotify) {
             const stateErrorMessage = localize(`error.ledger.${state}`)
-            const errorMessage = legacy
-                ? getLegacyErrorMessage(error, true)
-                : error?.error
-                ? localize(error.error)
-                : error
+            const errorMessage = legacy ? getLegacyErrorMessage(error, true) : error?.error ? localize(error.error) : error
 
-            const message = error ? (isLedgerError(error) ? stateErrorMessage : errorMessage) : stateErrorMessage
+            const message = error ? isLedgerError(error) ? stateErrorMessage : errorMessage : stateErrorMessage
             notificationId = showAppNotification({
                 type: notificationType,
-                message,
+                message
             })
         }
     }
@@ -165,7 +153,7 @@ export function displayNotificationForLedgerProfile(
     if (checkDeviceStatus) {
         getLedgerDeviceStatus(
             false,
-            () => {},
+            () => { },
             () => _notify(),
             () => _notify()
         )
@@ -189,7 +177,7 @@ export function isLedgerError(error: any): boolean {
             break
     }
 
-    return errorType?.slice(0, 6) === 'Ledger'
+    return errorType?.slice(0, 6) === "Ledger"
 }
 
 export const isPollingLedgerDeviceStatus = writable<boolean>(false)
@@ -197,9 +185,9 @@ export const isPollingLedgerDeviceStatus = writable<boolean>(false)
 export function pollLedgerDeviceStatus(
     legacy: boolean = false,
     pollInterval: number = 1000,
-    _onConnected: () => void = () => {},
-    _onDisconnected: () => void = () => {},
-    _onCancel: () => void = () => {}
+    _onConnected: () => void = () => { },
+    _onDisconnected: () => void = () => { },
+    _onCancel: () => void = () => { }
 ) {
     if (!get(isPollingLedgerDeviceStatus)) {
         getLedgerDeviceStatus(legacy, _onConnected, _onDisconnected, _onCancel)
@@ -212,8 +200,8 @@ export function pollLedgerDeviceStatus(
 
 function openLedgerNotConnectedPopup(
     legacy: boolean = false,
-    cancel: () => void = () => {},
-    poll: () => void = () => {}
+    cancel: () => void = () => { }, 
+    poll: () => void = () => { }
 ) {
     if (!get(popupState).active) {
         openPopup({
@@ -222,7 +210,7 @@ function openLedgerNotConnectedPopup(
             props: {
                 legacy,
                 handleClose: () => cancel(),
-                poll,
+                poll
             },
         })
     }
