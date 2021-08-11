@@ -15,4 +15,3 @@ export const appSettings = persistent<AppSettings>('settings', {
     darkMode: false,
     notifications: true
 })
-
