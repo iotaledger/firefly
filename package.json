@@ -39,11 +39,8 @@
         "lodash": ">=4.17.21"
     },
     "lint-staged": {
-        "**/*.{ts,js,json}": [
-            "echo 'LINTING'",
-            "yarn format-check",
-            "yarn lint"
-        ]
+        "*.{ts,js}": ["yarn lint"],
+        "*.{ts,js,json,md,yml}": ["npm run format-check"]
     },
     "husky": {
         "hooks": {

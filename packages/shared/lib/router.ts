@@ -5,6 +5,8 @@ import { selectedAccountId } from 'shared/lib/wallet'
 import { get, readable, writable } from 'svelte/store'
 import { deepLinkRequestActive } from './deepLinking'
 
+
+
 /**
  * Sets next route
  *
