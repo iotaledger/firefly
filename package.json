@@ -37,5 +37,15 @@
     },
     "resolutions": {
         "lodash": ">=4.17.21"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "**/*.{ts,js,json}": [
+            "yarn format-check"
+        ]
     }
 }
