@@ -13,6 +13,8 @@ export const appSettings = persistent<AppSettings>('settings', {
     deepLinking: false,
     language: 'en',
     darkMode: false,
-    notifications: true
+    notifications: true,
+
+
 })
 
