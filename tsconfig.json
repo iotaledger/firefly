@@ -10,7 +10,8 @@
         "packages/shared/components",
         "packages/shared/lib",
         "packages/shared/routes",
-        "packages/shared/style"
+        "packages/shared/style",
+        "packages/shared/tailwind.config.js"
     ],
     "exclude": ["**/node_modules"]
 }
