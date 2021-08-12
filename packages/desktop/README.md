@@ -33,7 +33,7 @@ The following __must__ be installed on all platforms:
 
 Install yarn dependencies:
 ```
-## in root directory
+## in the root directory
 yarn
 
 ## in packages/backend/bindings/node
