@@ -25,15 +25,18 @@
 
 Firefly is IOTA's new official wallet for Chrysalis.
 
-
 ## Installation
 
-Desktop readme: https://github.com/iotaledger/firefly/blob/develop/packages/desktop/README.md
+There are a few options to install Firefly:
+
+- Download from [official Firefly website](https://firefly.iota.org)
+- Build from source code (see [desktop README](https://github.com/iotaledger/firefly/blob/develop/packages/desktop/README.md))
 
 ## Contributing
 
 Help out the Firefly project by filing a [bug report](https://github.com/iotaledger/firefly/issues/new?assignees=&labels=alphatesting&template=alphatest_report.md&title=), making a [feature request](https://github.com/iotaledger/firefly/issues/new?assignees=&labels=&template=feature_request.md) or opening a [pull request](https://github.com/iotaledger/firefly/pulls/).
+See the [contribution guidelines](https://github.com/iotaledger/firefly/blob/develop/.github/CONTRIBUTING.md) for more.
 
 ## Joining the discussion
 
-If you have any questions for the developers or ideas you want to discuss join the #firefly-discussion channel on our [Discord](https://discord.iota.org/).
+If you have any questions for the developers or ideas you want to discuss, join the #firefly-discussion channel on our [Discord](https://discord.iota.org/).

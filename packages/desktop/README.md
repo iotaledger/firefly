@@ -1,16 +1,16 @@
-# IOTA Firefly Desktop Wallet
+# Firefly Desktop
 
-This is the repository for the IOTA Firefly Desktop Wallet.
+This is the directory for the desktop application of Firefly - IOTA's new official wallet.
 
-## Required Dependencies
+## Setup
 
-For all platforms, the following are required:
+The following __must__ be installed on all platforms:
 
--   [Node.js](https://nodejs.org/en/) 12+ (note: there may be issues with Node.js 15 on Windows)
+-   [Node.js](https://nodejs.org/en/) 12+ (NOTE: There may be issues with Node.js 15 on Windows)
 -   [Yarn](https://classic.yarnpkg.com/en/docs/install)
 -   [Rust](https://www.rust-lang.org/tools/install)
 
-### macOS
+### MacOS
 
 -   Xcode Command Line Tools
 
@@ -29,46 +29,50 @@ For all platforms, the following are required:
 -   `libudev` (Debian/Ubuntu: `libudev-dev`)
 -   `gnome-keyring`, `keepassxc`, or another secrets manager that implements the [freedesktop.org Secrets API](https://www.freedesktop.org/wiki/Specifications/secret-storage-spec/)
 
-## Building Firefly 
+## Building
 
+Install yarn dependencies:
 ```
-## in the root folder
+## in root directory
 yarn
 
 ## in packages/backend/bindings/node
 yarn
+```
 
+Build desktop app:
+```
 ## in packages/desktop
 yarn build
 ```
-### Dev Mode
+
+### Development
 
 ```
 # in packages/desktop
 yarn start
 ```
+
 ### Production 
 
 ```
 # in packages/desktop
-yarn compile:win
+yarn compile:<platform>
 ```
-Change win to your operating system - mac, win or linux.
 
-Mac users need to `return true` in the notarization script in `packages/desktop/notarization`.
+Change `<platform>` as necessary (`win`, `mac`, and `linux`). 
+MacOS users __must__ `return true` in the notarization script in `packages/desktop/notarization`.
 
 ## Running the Firefly Snap
 
 To run the Firefly snap properly on Linux, you may need to run the following commands:
 
-To install the snap when built locally:
-
+Install the snap when built locally:
 ```bash
 snap install --dangerous path/to/firefly-desktop-0.0.1.snap
 ```
 
-To connect the `password-manager-service` interface:
-
+Connect the `password-manager-service` interface:
 ```bash
 snap connect firefly-wallet:password-manager-service
 ```

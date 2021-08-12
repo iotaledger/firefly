@@ -1,8 +1,7 @@
-# Contribute to wallet
+# Contribute to Firefly
 
-This document describes how to contribute to wallet.
-
-We encourage everyone with knowledge of IOTA technology to contribute.
+This document describes how to contribute to Firefly.
+We encourage everyone with knowledge and passion in IOTA technology to do so.
 
 Thanks! :heart:
 
