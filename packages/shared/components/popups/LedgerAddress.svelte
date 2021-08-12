@@ -1,17 +1,24 @@
 <script lang="ts">
+    import { onMount } from 'svelte'
+    import { get } from 'svelte/store'
+
     import { Animation,Text } from 'shared/components';
+    import { composeBip32Path } from 'shared/lib/bip32'
     import { formatAddressForLedger } from 'shared/lib/ledger';
     import { showAppNotification } from 'shared/lib/notifications';
     import { closePopup,popupState } from 'shared/lib/popup';
-    import { onMount } from 'svelte';
-    import { get } from 'svelte/store';
-    import { BipPath } from 'shared/lib/typings/address'
-    import { Bech32 } from 'shared/lib/bech32'
     import { activeProfile } from 'shared/lib/profile'
 
     export let locale
 
     export let address = ''
+
+    let bip32Path
+    $: {
+        if($activeProfile.settings.displayBip32Path) {
+            bip32Path = composeBip32Path(true) ?? ''
+        }
+    }
 
     const onInvalid = () => {
         showAppNotification({
@@ -20,10 +27,6 @@
         })
 
         if (get(popupState).active) closePopup(true)
-    }
-
-    const formatBip32Path = (address: string): BipPath => {
-        return Bech32.deriveBip32Path(address)
     }
 
     onMount(() => {
@@ -43,12 +46,12 @@
 </div>
 <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-5 text-center">
     <Text type="h5" highlighted classes="mb-2">{locale('general.receiveAddress')}</Text>
-    <Text type="pre" classes={$activeProfile.settings.displayBip32Path ? 'mb-4' : ''}>
+    <Text type="pre" classes={$activeProfile.settings.displayBip32Path && bip32Path ? 'mb-4' : ''}>
         {formatAddressForLedger(address)}
     </Text>
 
-    {#if $activeProfile.settings.displayBip32Path}
+    {#if $activeProfile.settings.displayBip32Path && bip32Path}
         <Text type="h5" highlighted classes="mb-2">{locale('general.bip32Path')}</Text>
-        <Text type="pre">{formatBip32Path(address)}</Text>
+        <Text type="pre">{bip32Path}</Text>
     {/if}
 </div>

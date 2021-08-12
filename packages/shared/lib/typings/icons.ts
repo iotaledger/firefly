@@ -19,6 +19,7 @@ export enum SettingsIcons {
     errorLog = 'warning',
     diagnostics = 'tools',
     migrateLedgerIndex = 'ledger',
+    displayBip32Path = 'seed',
     stateExport = 'export',
     troubleshoot = 'tools',
     documentation = 'doc',

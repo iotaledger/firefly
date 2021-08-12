@@ -1,14 +1,14 @@
 <script lang="ts">
+    import { onMount } from 'svelte'
+    import { get } from 'svelte/store'
+
     import { Animation, Text } from 'shared/components'
+    import { composeBip32Path, constructBip32 } from 'shared/lib/bip32'
     import { formatAddressForLedger } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup, popupState } from 'shared/lib/popup'
-    import { formatUnitBestMatch } from 'shared/lib/units'
-    import { onMount } from 'svelte'
-    import { get } from 'svelte/store'
     import { activeProfile } from 'shared/lib/profile'
-    import { Bech32 } from 'shared/lib/bech32'
-    import { BipPath } from 'shared/lib/typings/address'
+    import { formatUnitBestMatch } from 'shared/lib/units'
 
     export let locale
 
@@ -18,6 +18,13 @@
     export let remainderAmount = null
     let shouldDisplayRemainderAddress = remainderAddress?.length > 0
     let shouldDisplayRemainderAmount = remainderAmount !== null
+
+    let bip32Path
+    $: () => {
+        if($activeProfile.settings.displayBip32Path) {
+            bip32Path = composeBip32Path(true, constructBip32(1, true)) ?? ''
+        }
+    }
 
     export let toAddress = ''
     export let toAmount = null
@@ -45,10 +52,6 @@
         if (amountRaw <= 0) onInvalid()
 
         return formatUnitBestMatch(amountRaw)
-    }
-
-    const formatBip32Path = (address: string): BipPath => {
-        return Bech32.deriveBip32Path(address)
     }
 
     onMount(() => {
@@ -93,18 +96,18 @@
             <Text type="h5" highlighted classes="mb-2">
                 {locale(`general.${shouldDisplayRemainderAmount ? 'r' : 'newR'}emainder`)}
             </Text>
-            <Text type="pre" classes={shouldDisplayRemainderAmount || $activeProfile.settings.displayBip32Path ? 'mb-4' : ''}>
+            <Text type="pre" classes={shouldDisplayRemainderAmount || ($activeProfile.settings.displayBip32Path && bip32Path) ? 'mb-4' : ''}>
                 {formatAddressForLedger(remainderAddress)}
             </Text>
 
             {#if shouldDisplayRemainderAmount}
                 <Text type="h5" highlighted classes="mb-2">{locale('general.amount')}</Text>
-                <Text type="pre" classes="mb-4">{formatAmount(remainderAmount)}</Text>
+                <Text type="pre" classes={($activeProfile.settings.displayBip32Path && bip32Path) ? 'mb-4' : ''}>{formatAmount(remainderAmount)}</Text>
             {/if}
 
-            {#if $activeProfile.settings.displayBip32Path}
-                <Text type="h5" highlighted classes="mb-2">{locale('general.bipPath')}</Text>
-                <Text type="pre">{formatBip32Path(remainderAddress)}</Text>
+            {#if $activeProfile.settings.displayBip32Path && bip32Path}
+                <Text type="h5" highlighted classes="mb-2">{locale('general.bip32Path')}</Text>
+                <Text type="pre">{bip32Path}</Text>
             {/if}
         </div>
     {/if}

@@ -400,8 +400,8 @@
                 "description": "Migrate another Trinity account index"
             },
             "displayBip32Path": {
-                "title": "Display BIP32 Path",
-                "description": "Display the BIP32 path in transactions with your Ledger device"
+                "title": "Display BIP 32 Path",
+                "description": "Display the BIP 32 path when confirming addresses with your Ledger device"
             },
             "stateExport": {
                 "title": "State export",

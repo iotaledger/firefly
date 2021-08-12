@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 /* eslint-disable no-bitwise */
 
-import type { BipPath } from './typings/address'
+import type { Bip32Path } from './typings/address'
 
 /**
  * Class to help with Bech32 encoding/decoding.
@@ -155,13 +155,6 @@ import type { BipPath } from './typings/address'
         }
         const regEx = new RegExp(`^${humanReadablePart}1[${Bech32.CHARSET}]{6,}$`);
         return regEx.test(bech32Text);
-    }
-
-    public static deriveBip32Path(address: string): BipPath {
-        const { humanReadablePart, data } = this.decode(address)
-        console.log(humanReadablePart, data);
-
-        return '2c\'/107a\'/1\'/1\'/1\''
     }
 
     /**
