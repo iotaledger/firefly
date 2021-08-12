@@ -7,8 +7,6 @@ See its [REAMDE](https://github.com/iotaledger/wallet.rs#dependencies) for the r
 
 This directory contains various bindings for the original wallet.rs library (written in Rust) - each can be built and purposed as needed.
 
-To include most recent commits, run `cargo update` in both `firefly/packages/backend` __AND__ `firefly/packages/backend/bindings/node/native`.
-
 ### Node.js
 
 Run `yarn` in `firefly/packages/backend/bindings/node` to bundle and build the Javascript bindings for a Node app.
@@ -21,10 +19,12 @@ TODO
 
 TODO
 
-## Other Branches
+## Other Branches / Commits
 
 The default branch of wallet.rs is `dev`, however to test another branch one follow these steps:
 
 - Change the dependency in `firefly/packages/backend/Cargo.toml`
 - Run `cargo update` in both `firefly/packages/backend` __AND__ `firefly/packages/backend/bindings/node/native`
 - Build desired bindings 
+
+To include most recent commits, simply run `cargo update` in both `firefly/packages/backend` __AND__ `firefly/packages/backend/bindings/node/native`.
