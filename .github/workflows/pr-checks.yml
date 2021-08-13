@@ -44,10 +44,13 @@ jobs:
         with:
           node-version: 12.x
 
+      - name: See Directories
+        run: pwd && ls
+
       - name: Install Dependencies
-        working-directory: firefly/packages/shared
-        run: ls && yarn
+        working-directory: packages/shared
+        run: yarn
 
       - name: Test
-        working-directory: firefly/packages/shared
+        working-directory: packages/shared
         run: yarn test
