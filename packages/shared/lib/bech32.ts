@@ -2,8 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 /* eslint-disable no-bitwise */
 
-import type { Bip32Path } from './typings/address'
-
 /**
  * Class to help with Bech32 encoding/decoding.
  * Based on reference implementation https://github.com/sipa/bech32/blob/master/ref/javascript/bech32.js

@@ -10,10 +10,10 @@ export const MAX_BIP32_INDEX = 2147483647
 export const constructBip32 = (changeIndex: number = 0, useInternal: boolean = false): Bip32 => {
     const _addressIndex = (addresses: Address[]) => {
         return addresses
-            // only get addresses with no outputs that match the useInternal
+            // only get addresses with no outputs that match useInternal
             .filter((a) => Object.keys(a.outputs).length === 0 && a.internal === useInternal)
-            // get first lowest address by keyIndex
-            .reduce((a1, a2) => a1.keyIndex <= a2.keyIndex ? a1 : a2)
+            // get last lowest address by keyIndex
+            .reduce((a1, a2) => a1.keyIndex < a2.keyIndex ? a1 : a2)
             .keyIndex
     }
 
@@ -40,7 +40,7 @@ export const composeBip32Path = (useHexadecimal: boolean = false, data: Bip32 = 
     if(!data) data = constructBip32()
 
     data = validateBip32(data) as Bip32
-    if(!data) {
+    if (!data) {
         showAppNotification({
             /**
              * NOTE: Normally this would be an error, but since the displayBip32Path setting shouldn't
@@ -57,7 +57,7 @@ export const composeBip32Path = (useHexadecimal: boolean = false, data: Bip32 = 
 }
 
 const validateBip32 = (bip32: Bip32): Bip32 | null => {
-    if(!bip32) return null
+    if (!bip32) return null
 
     const props = ['accountIndex', 'changeIndex', 'addressIndex']
     const isMissingIndexes = props.map(p => p in bip32).filter(b => b).length < props.length

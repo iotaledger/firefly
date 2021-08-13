@@ -15,7 +15,7 @@
 
     let bip32Path
     $: {
-        if($activeProfile.settings.displayBip32Path) {
+        if ($activeProfile.settings.displayBip32Path) {
             bip32Path = composeBip32Path(true) ?? ''
         }
     }
