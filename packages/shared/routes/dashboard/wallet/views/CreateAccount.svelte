@@ -3,7 +3,7 @@
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
-    import { MAX_ACCOUNT_NAME_LENGTH, wallet } from 'shared/lib/wallet'
+    import { MAX_ACCOUNT_NAME_LENGTH, wallet, AccountColors, AccountPatterns } from 'shared/lib/wallet'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { isLedgerProfile } from 'shared/lib/profile'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -20,8 +20,8 @@
 
     let accountAlias = ''
     let isBusy = false
-    let color = 'blue'
-    let pattern = ''
+    let color = AccountColors.Default
+    let pattern = AccountPatterns.Default
 
     // This looks odd but sets a reactive dependency on accountAlias, so when it changes the error will clear
     $: accountAlias, (error = '')
