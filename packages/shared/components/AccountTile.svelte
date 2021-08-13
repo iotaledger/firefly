@@ -25,7 +25,7 @@
     import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { capitalize } from 'shared/lib/utils'
-    import { wallet } from 'shared/lib/wallet'
+    import { wallet, AccountColors, AccountPatterns } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
 
     const NEW_LINE = '\r\n'
@@ -33,14 +33,14 @@
     export let name = ''
     export let balance = ''
     export let balanceEquiv = ''
-    export let color = 'turquoise'
+    export let color = AccountColors.Default
     export let airdrop: StakingAirdrop = undefined
     export let size = 'm' // m, l
     export let hidden = false
     export let disabled = false
     export let onClick = (): void | string => ''
     export let disabledHover = false
-    export let pattern = ''
+    export let pattern = AccountPatterns.Default
 
     $: darkModeEnabled = $appSettings.darkMode
 

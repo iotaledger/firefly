@@ -75,7 +75,24 @@ import type {
 } from './typings/wallet'
 import { setAccountTheme } from 'shared/lib/accountsTheme'
 
-const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
+export enum AccountColors {
+    Default = 'turquoise',
+    Green = 'green',
+    Orange = 'orange',
+    Yellow = 'yellow',
+    Purple = 'purple',
+    Pink = 'pink',
+}
+
+export enum AccountPatterns {
+    Default = '',
+    Clover = 'clover',
+    Circles = 'circles',
+    Shapes = 'shapes',
+    Wind = 'wind',
+    Rain = 'rain',
+    Organic = 'organic',
+}
 
 export const MAX_PROFILE_NAME_LENGTH = 20
 
@@ -1748,7 +1765,8 @@ export const prepareAccountInfo = (
         balanceEquiv: formatCurrency(
             convertToFiat(balance, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[activeCurrency])
         ),
-        color: ACCOUNT_COLORS[index % ACCOUNT_COLORS.length],
+        color: AccountColors.Default,
+        pattern: AccountPatterns.Default,
     })
 }
 

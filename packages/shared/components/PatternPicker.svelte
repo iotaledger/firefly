@@ -1,12 +1,11 @@
 <script lang="typescript">
     import { Text, Icon } from "shared/components"
+    import { AccountColors, AccountPatterns } from 'shared/lib/wallet'
 
     export let locale
     export let title = locale('views.pickers.pattern')
-    export let color = "turquoise"
-    export let active = ""
-
-    const patterns = ["", "clover", "circles", "clouds", "shapes", "wind", "rain", "organic"]
+    export let color = AccountColors.Default
+    export let active = AccountPatterns.Default
 
     const changeActive = pattern => {
         active = pattern
@@ -21,7 +20,7 @@
         <Text type="h5">{title}</Text>
     </div>
     <ul class="grid grid-cols-4 grid-rows-2 gap-4">
-        {#each patterns as pattern}
+        {#each Object.values(AccountPatterns) as pattern}
             <li
                 class="h-20 rounded-lg {pattern === active ? `bg-${color}-500 opacity-100 ring-${color}-500 ring-4 ring-opacity-30 hover:ring-opacity-40 focus:ring-opacity-40` : 'bg-gray-300 hover:bg-{color}-500 focus:bg-{color}-500 opacity-80 hover:opacity-100 focus:opacity-100'} bg-no-repeat bg-center bg-cover bg cursor-pointer flex justify-center items-center"
                 style={pattern ? `background-image: url("assets/patterns/${pattern}.svg");` : null}

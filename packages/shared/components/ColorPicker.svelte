@@ -1,11 +1,10 @@
 <script lang="typescript">
     import { Text, Icon } from 'shared/components'
+    import { AccountColors } from 'shared/lib/wallet'
 
     export let locale
     export let title = locale('views.pickers.color')
     export let active = 'green'
-
-    const colors = ['blue', 'lightblue', 'turquoise', 'green', 'yellow', 'orange', 'red', 'purple']
 
     const changeActive = color => {
         active = color
@@ -20,7 +19,7 @@
         <Text type="h5">{title}</Text>
     </div>
     <ul class="flex flex-row justify-between">
-        {#each colors as color}
+        {#each Object.values(AccountColors) as color}
             <li tabindex="0" class='w-8 h-8 bg-{color}-500 hover:bg-{color}-600 focus:bg-{color}-600 rounded-lg ring-{color}-500 ring-opacity-30 hover:ring-opacity-40 cursor-pointer flex justify-center items-center' class:ring-4="{color === active}"
             on:click={() => handleClick(color)} on:keypress={(event) => handleKeyPress(event, color)}
             aria-label={color}>

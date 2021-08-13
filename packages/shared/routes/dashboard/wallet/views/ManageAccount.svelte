@@ -3,7 +3,7 @@
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
-    import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccountId, wallet } from 'shared/lib/wallet'
+    import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccountId, wallet, AccountColors, AccountPatterns } from 'shared/lib/wallet'
     import { Locale } from 'shared/lib/typings/i18n'
     import { setAccountTheme } from 'shared/lib/accountsTheme'
     import { WalletAccount } from 'shared/lib/typings/wallet'
@@ -18,8 +18,8 @@
 
     let accountAlias = alias
     let isBusy = false
-    let color = account.color
-    let pattern = account.pattern
+    let color = account.color || AccountColors.Default
+    let pattern = account.pattern || AccountPatterns.Default
 
     // This looks odd but sets a reactive dependency on accountAlias, so when it changes the error will clear
     $: accountAlias, (error = '')
