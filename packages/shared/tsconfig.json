@@ -6,9 +6,14 @@
         "lib": [
             "DOM",
             "ESNext"
-        ]
+        ],
+        "types": ["jest"]
     },
     "include": [
         "./lib"
+    ],
+    "exclude": [
+        "**/node_modules",
+        "**/tests"
     ]
 }
