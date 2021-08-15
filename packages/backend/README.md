@@ -1,4 +1,4 @@
-# Firefly Backend
+# Firefly - Backend
 
 Firefly uses [wallet.rs](https://github.com/iotaledger/wallet.rs) in the backend to handle functionality around value-based transfers.
 See its [REAMDE](https://github.com/iotaledger/wallet.rs#dependencies) for the required dependencies.
