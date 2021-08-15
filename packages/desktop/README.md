@@ -53,8 +53,6 @@ export SODIUM_SHARED=1
 export LIBCLANG_PATH="C:\Program Files\LLVM\bin"
 ```
 
-Be sure to change `<USER_NAME>` as necessary for `SODIUM_LIB_DIR`.
-
 ### Linux
 
 - [Snapcraft](https://snapcraft.io/) (`sudo snap install snapcraft --classic`)
