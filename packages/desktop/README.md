@@ -7,7 +7,7 @@ This is the directory for the desktop application of Firefly - IOTA's new offici
 The following __must__ be installed on all platforms:
 
 - [Node.js](https://nodejs.org/en/) 12+ (NOTE: There may be issues with Node.js 15 on Windows)
-- [Yarn](https://classic.yarnpkg.com/en/docs/install)
+- [Yarn](https://classic.yarnpkg.com/en/docs/install) (NOTE: `npm` is required for Windows setup)
 - [Rust](https://www.rust-lang.org/tools/install)
 
 ### MacOS
@@ -42,15 +42,15 @@ You must check boxes for "Node.js development" and "Desktop development with C++
 - Add environment variable definitions in `~/.bash_profile` or `~/.bashrc`:
 ```bash
 ## wallet.rs sub-dependencies
-export OPENSSL_DIR="/c/Program\ Files/OpenSSL-Win64"
+export OPENSSL_DIR="C:\Program Files\OpenSSL-Win64"
 
 ## ensure SODIUM_LIB_DIR points to folder with .lib file (and not .dll)
-export SODIUM_LIB_DIR="$HOME/.cargo/registry/src/github.com-1ecc6299db9ec823/libsodium-sys-0.2.7/msvc/x64/Release/v142"
+export SODIUM_LIB_DIR="$HOME\.cargo\registry\src\github.com-1ecc6299db9ec823\libsodium-sys-0.2.7\msvc\x64\Release\v142"
 ## tell rustc to link library dynamically (use .dll - "dynamic-link library")
 export SODIUM_SHARED=1
 
 ## path to clang binaries (*.dll/*.lib files)
-export LIBCLANG_PATH="/c/Program\ Files\LLVM\bin"
+export LIBCLANG_PATH="C:\Program Files\LLVM\bin"
 ```
 
 Be sure to change `<USER_NAME>` as necessary for `SODIUM_LIB_DIR`.
