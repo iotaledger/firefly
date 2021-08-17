@@ -38,12 +38,14 @@
             <Button
                 classes="flex-1"
                 disabled={input.length === 0 || isGettingMigrationData}
-                onClick={() => handleContinueClick()}>
+                onClick={() => handleContinueClick()}
+            >
                 {#if isGettingMigrationData}
                     <Spinner
                         busy={isGettingMigrationData}
                         message={locale('views.migrate.restoringWallet')}
-                        classes="justify-center" />
+                        classes="justify-center"
+                    />
                 {:else}{locale('actions.continue')}{/if}
             </Button>
         </div>

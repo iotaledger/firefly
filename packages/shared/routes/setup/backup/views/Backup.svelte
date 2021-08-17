@@ -27,7 +27,9 @@
             <Text type="p" secondary highlighted classes="mb-4 font-bold">{locale('views.backup.body3')}</Text>
         </div>
         <div slot="leftpane__action">
-            <Button classes="w-full" onClick={() => handleContinueClick()} autofocus>{locale('actions.continue')}</Button>
+            <Button classes="w-full" onClick={() => handleContinueClick()} autofocus
+                >{locale('actions.continue')}</Button
+            >
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-purple dark:bg-gray-900">
             <Animation animation="backup-desktop" />

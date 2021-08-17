@@ -1,6 +1,14 @@
 import { cleanupSignup, login, strongholdPassword, walletPin } from 'shared/lib/app'
 import { activeProfile, profiles, ProfileType } from 'shared/lib/profile'
-import { AccountRoutes, AppRoute, SettingsRoutes, SetupType, Tabs, WalletRoutes, LedgerRoutes } from 'shared/lib/typings/routes'
+import {
+    AccountRoutes,
+    AppRoute,
+    SettingsRoutes,
+    SetupType,
+    Tabs,
+    WalletRoutes,
+    LedgerRoutes,
+} from 'shared/lib/typings/routes'
 import { selectedAccountId } from 'shared/lib/wallet'
 import { get, readable, writable } from 'svelte/store'
 import { deepLinkRequestActive } from './deepLinking'
@@ -96,7 +104,6 @@ export const initRouter = () => {
     } else {
         setRoute(AppRoute.Welcome)
     }
-
 }
 
 // TODO: only handle route changes, not app variables
@@ -170,9 +177,7 @@ export const routerNext = (event) => {
                 walletPin.set(pin)
                 const walletSetupType_ = get(walletSetupType)
                 const profileType = get(activeProfile)?.type
-                if (
-                    [SetupType.Mnemonic, SetupType.Stronghold].includes(walletSetupType_)
-                ) {
+                if ([SetupType.Mnemonic, SetupType.Stronghold].includes(walletSetupType_)) {
                     nextRoute = AppRoute.Congratulations
                 } else if ([ProfileType.Ledger, ProfileType.LedgerSimulator].includes(profileType)) {
                     nextRoute = AppRoute.LedgerSetup

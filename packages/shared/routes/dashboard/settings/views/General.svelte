@@ -52,7 +52,8 @@
             sortItems={true}
             onSelect={handleLanguage}
             value={locales[$appSettings.language]}
-            items={Object.values(locales).map((locale) => ({ value: locale, label: locale }))} />
+            items={Object.values(locales).map((locale) => ({ value: locale, label: locale }))}
+        />
     </section>
     {#if $loggedIn}
         <HR classes="pb-5 mt-5 justify-center" />
@@ -65,7 +66,8 @@
                 value={$activeProfile?.settings.currency}
                 items={Object.keys($exchangeRates)
                     .map((currency) => ({ value: currency, label: currency }))
-                    .sort()} />
+                    .sort()}
+            />
         </section>
     {/if}
     <HR classes="pb-5 mt-5 justify-center" />

@@ -67,7 +67,6 @@
                     } else {
                         const dest = await Electron.getStrongholdBackupDestination(getDefaultStrongholdName())
                         if (dest) {
-
                             busy = true
                             await asyncStoreMnemonic(get(mnemonic).join(' '))
                             await asyncCreateAccount()
@@ -117,6 +116,13 @@
     </Transition>
 {:else if state === BackupState.Backup}
     <Transition>
-        <BackupToFile on:next={_next} on:previous={_previous} {busy} strongholdPassword={$strongholdPassword} {locale} {mobile} />
+        <BackupToFile
+            on:next={_next}
+            on:previous={_previous}
+            {busy}
+            strongholdPassword={$strongholdPassword}
+            {locale}
+            {mobile}
+        />
     </Transition>
 {/if}

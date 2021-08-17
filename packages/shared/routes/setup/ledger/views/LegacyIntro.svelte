@@ -56,9 +56,12 @@
         </div>
         <div
             slot="rightpane"
-            class="w-full h-full px-32 flex flex-col flex-wrap justify-center items-center bg-gray-50 dark:bg-gray-900">
+            class="w-full h-full px-32 flex flex-col flex-wrap justify-center items-center bg-gray-50 dark:bg-gray-900"
+        >
             <Video video={LEDGER_MIGRATION_VIDEO} />
-            <Link onClick={handleReadMoreClick} classes="mt-7" icon="info">{locale('views.legacyLedgerIntro.readMore')}</Link>
+            <Link onClick={handleReadMoreClick} classes="mt-7" icon="info"
+                >{locale('views.legacyLedgerIntro.readMore')}</Link
+            >
         </div>
     </OnboardingLayout>
 {/if}

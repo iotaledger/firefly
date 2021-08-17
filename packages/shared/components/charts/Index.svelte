@@ -20,7 +20,18 @@
 </script>
 
 {#if type === ChartType.Line}
-    <LineChart {formatYAxis} {datasets} {labels} {tooltips} {xMaxTicks} {yMaxTicks} {yPrecision} {beginAtZero} {color} {inlineStyle} />
+    <LineChart
+        {formatYAxis}
+        {datasets}
+        {labels}
+        {tooltips}
+        {xMaxTicks}
+        {yMaxTicks}
+        {yPrecision}
+        {beginAtZero}
+        {color}
+        {inlineStyle}
+    />
 {:else if type === ChartType.Bar}
     <BarChart {formatYAxis} {datasets} {labels} {tooltips} {inlineStyle} />
 {/if}

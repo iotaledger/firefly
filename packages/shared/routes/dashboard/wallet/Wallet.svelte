@@ -70,43 +70,53 @@
         return $selectedAccount ? getAccountMessages($selectedAccount) : []
     })
 
-    const viewableAccounts: Readable<WalletAccount[]> = derived([activeProfile, accounts], ([$activeProfile, $accounts]) => {
-        if (!$activeProfile) {
-            return []
-        }
-
-        if ($activeProfile.settings.showHiddenAccounts) {
-            let sortedAccounts = $accounts.sort((a, b) => a.index - b.index)
-
-            // If the last account is "hidden" and has no value, messages or history treat it as "deleted"
-            // This account will get re-used if someone creates a new one
-            if (sortedAccounts.length > 1 && $activeProfile.hiddenAccounts) {
-                const lastAccount = sortedAccounts[sortedAccounts.length - 1]
-                if (
-                    $activeProfile.hiddenAccounts.includes(lastAccount.id) &&
-                    lastAccount.rawIotaBalance === 0 &&
-                    lastAccount.messages.length === 0
-                ) {
-                    sortedAccounts.pop()
-                }
+    const viewableAccounts: Readable<WalletAccount[]> = derived(
+        [activeProfile, accounts],
+        ([$activeProfile, $accounts]) => {
+            if (!$activeProfile) {
+                return []
             }
 
-            return sortedAccounts
-        }
+            if ($activeProfile.settings.showHiddenAccounts) {
+                let sortedAccounts = $accounts.sort((a, b) => a.index - b.index)
 
-        return $accounts.filter((a) => !$activeProfile.hiddenAccounts?.includes(a.id)).sort((a, b) => a.index - b.index)
-    })
+                // If the last account is "hidden" and has no value, messages or history treat it as "deleted"
+                // This account will get re-used if someone creates a new one
+                if (sortedAccounts.length > 1 && $activeProfile.hiddenAccounts) {
+                    const lastAccount = sortedAccounts[sortedAccounts.length - 1]
+                    if (
+                        $activeProfile.hiddenAccounts.includes(lastAccount.id) &&
+                        lastAccount.rawIotaBalance === 0 &&
+                        lastAccount.messages.length === 0
+                    ) {
+                        sortedAccounts.pop()
+                    }
+                }
 
-    const liveAccounts: Readable<WalletAccount[]> = derived([activeProfile, accounts], ([$activeProfile, $accounts]) => {
-        if (!$activeProfile) {
-            return []
+                return sortedAccounts
+            }
+
+            return $accounts
+                .filter((a) => !$activeProfile.hiddenAccounts?.includes(a.id))
+                .sort((a, b) => a.index - b.index)
         }
-        return $accounts.filter((a) => !$activeProfile.hiddenAccounts?.includes(a.id)).sort((a, b) => a.index - b.index)
-    })
+    )
+
+    const liveAccounts: Readable<WalletAccount[]> = derived(
+        [activeProfile, accounts],
+        ([$activeProfile, $accounts]) => {
+            if (!$activeProfile) {
+                return []
+            }
+            return $accounts
+                .filter((a) => !$activeProfile.hiddenAccounts?.includes(a.id))
+                .sort((a, b) => a.index - b.index)
+        }
+    )
 
     const transactions = derived([viewableAccounts, activeProfile], ([$viewableAccounts, $activeProfile]) => {
         const _migratedTransactions = $activeProfile?.migratedTransactions || []
-        
+
         return [..._migratedTransactions, ...getTransactions($viewableAccounts)]
     })
 
@@ -163,7 +173,7 @@
                     try {
                         await asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
 
-                        if($isFirstSessionSync) isFirstSessionSync.set(false)
+                        if ($isFirstSessionSync) isFirstSessionSync.set(false)
                     } catch (err) {
                         _onError(err)
                     }
@@ -199,7 +209,8 @@
                                 // would be the same and the incoming flag the opposite
                                 const internalIncoming = getIncomingFlag(internalMessage.payload)
                                 let pair = internalMessages.find(
-                                    (m) => m.id === internalMessage.id && getIncomingFlag(m.payload) !== internalIncoming
+                                    (m) =>
+                                        m.id === internalMessage.id && getIncomingFlag(m.payload) !== internalIncoming
                                 )
 
                                 // Can't find the other side of the pair so clone the original
@@ -228,9 +239,19 @@
                             completeCount++
 
                             if (completeCount === accountsResponse.payload.length) {
-                                accounts.update((accounts) => [...accounts, ...newAccounts].sort((a, b) => a.index - b.index))
-                                processMigratedTransactions(payloadAccount.id, payloadAccount.messages, payloadAccount.addresses)
-                                updateBalanceOverview(totalBalance.balance, totalBalance.incoming, totalBalance.outgoing)
+                                accounts.update((accounts) =>
+                                    [...accounts, ...newAccounts].sort((a, b) => a.index - b.index)
+                                )
+                                processMigratedTransactions(
+                                    payloadAccount.id,
+                                    payloadAccount.messages,
+                                    payloadAccount.addresses
+                                )
+                                updateBalanceOverview(
+                                    totalBalance.balance,
+                                    totalBalance.incoming,
+                                    totalBalance.outgoing
+                                )
                                 _continue()
                             }
                         })
@@ -277,13 +298,15 @@
                     isGeneratingAddress = false
 
                     const isClientError = err && err.type === 'ClientError'
-                    const shouldHideErrorNotification = isClientError && err.error === 'error.node.chrysalisNodeInactive'
+                    const shouldHideErrorNotification =
+                        isClientError && err.error === 'error.node.chrysalisNodeInactive'
                     if (!shouldHideErrorNotification) {
                         /**
                          * NOTE: To ensure a clear error message (for Ledger users),
                          * we need to update the locale path.
                          */
-                        const localePath = isClientError && $isLedgerProfile ? 'error.ledger.generateAddress' : err.error
+                        const localePath =
+                            isClientError && $isLedgerProfile ? 'error.ledger.generateAddress' : err.error
                         showAppNotification({
                             type: 'error',
                             message: locale(localePath),
@@ -383,7 +406,9 @@
                             })
                         }
 
-                        const hiddenAccounts = ($activeProfile?.hiddenAccounts ?? []).filter((a) => a !== reuseAccountId)
+                        const hiddenAccounts = ($activeProfile?.hiddenAccounts ?? []).filter(
+                            (a) => a !== reuseAccountId
+                        )
                         updateProfile('hiddenAccounts', hiddenAccounts)
 
                         walletRoute.set(WalletRoutes.Init)
@@ -638,19 +663,14 @@
     })
 </script>
 
-<style type="text/scss">
-    :global(body.platform-win32) .wallet-wrapper {
-        @apply pt-0;
-    }
-</style>
-
 {#if $walletRoute === WalletRoutes.Account && $selectedAccountId}
     <Account
         {isGeneratingAddress}
         send={onSend}
         internalTransfer={onInternalTransfer}
         generateAddress={onGenerateAddress}
-        {locale} />
+        {locale}
+    />
 {:else}
     <div class="wallet-wrapper w-full h-full flex flex-col p-10 flex-1 bg-gray-50 dark:bg-gray-900">
         <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
@@ -667,7 +687,8 @@
                                 send={onSend}
                                 internalTransfer={onInternalTransfer}
                                 generateAddress={onGenerateAddress}
-                                {locale} />
+                                {locale}
+                            />
                         </DashboardPane>
                     {/if}
                 </div>
@@ -688,3 +709,9 @@
         </div>
     </div>
 {/if}
+
+<style type="text/scss">
+    :global(body.platform-win32) .wallet-wrapper {
+        @apply pt-0;
+    }
+</style>

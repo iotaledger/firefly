@@ -4,7 +4,11 @@
     import { Electron } from 'shared/lib/electron'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
-    import { NOTIFICATION_TIMEOUT_NEVER, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
+    import {
+        NOTIFICATION_TIMEOUT_NEVER,
+        removeDisplayNotification,
+        showAppNotification,
+    } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
     import { accountRoute, dashboardRoute, routerNext, walletRoute } from 'shared/lib/router'
@@ -80,7 +84,9 @@
         Electron.onEvent('notification-activated', (contextData) => {
             if (contextData) {
                 if (
-                    (contextData.type === 'confirmed' || contextData.type === 'failed' || contextData.type === 'valueTx') &&
+                    (contextData.type === 'confirmed' ||
+                        contextData.type === 'failed' ||
+                        contextData.type === 'valueTx') &&
                     contextData.accountId
                 ) {
                     selectedAccountId.set(contextData.accountId)

@@ -67,7 +67,9 @@
                 .then((data) => {
                     busy = false
 
-                    hardwareIndexes.update((_indexes) => Object.assign({}, _indexes, { accountIndex: index, pageIndex: page }))
+                    hardwareIndexes.update((_indexes) =>
+                        Object.assign({}, _indexes, { accountIndex: index, pageIndex: page })
+                    )
                     dispatch('next', { balance: data.balance })
                 })
                 .catch((error) => {
@@ -96,45 +98,60 @@
             <Text type="p" secondary>{locale('views.selectLedgerAccountIndex.body')}</Text>
             <div class="flex flex-col space-y-4 mt-8">
                 <div class="flex row space-x-2 items-center">
-                    <Text type="p" smaller highlighted={!expert}>{locale('views.selectLedgerAccountIndex.standard')}</Text>
+                    <Text type="p" smaller highlighted={!expert}
+                        >{locale('views.selectLedgerAccountIndex.standard')}</Text
+                    >
                     <Toggle
                         active={expert}
                         onClick={() => {
                             expert = !expert
                         }}
-                        classes="cursor-pointer" />
+                        classes="cursor-pointer"
+                    />
                     <Text type="p" smaller highlighted={expert}>{locale('views.selectLedgerAccountIndex.expert')}</Text>
                 </div>
                 <div>
-                    <Text type="p" secondary classes="mb-2">{locale('views.selectLedgerAccountIndex.accountIndex')}</Text>
+                    <Text type="p" secondary classes="mb-2"
+                        >{locale('views.selectLedgerAccountIndex.accountIndex')}</Text
+                    >
                     <Number
                         bind:value={index}
                         {min}
                         {max}
                         disabled={busy}
-                        error={!isValidAccountIndex ? locale('error.account.index') : ''} />
+                        error={!isValidAccountIndex ? locale('error.account.index') : ''}
+                    />
                 </div>
                 {#if expert}
                     <div>
-                        <Text type="p" secondary classes="mb-2">{locale('views.selectLedgerAccountIndex.accountPage')}</Text>
+                        <Text type="p" secondary classes="mb-2"
+                            >{locale('views.selectLedgerAccountIndex.accountPage')}</Text
+                        >
                         <Number
                             bind:value={page}
                             {min}
                             {max}
                             disabled={busy}
-                            error={!isValidAccountPage ? locale('error.account.page') : ''} />
+                            error={!isValidAccountPage ? locale('error.account.page') : ''}
+                        />
                     </div>
                 {/if}
             </div>
         </div>
         <div slot="leftpane__action" class="flex flex-col space-y-4">
             {#if showInfo && !$popupState.active}
-                <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mb-6 p-10 pb-6">
+                <div
+                    class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mb-6 p-10 pb-6"
+                >
                     <div class="bg-red-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
                         <Icon icon="warning" classes="text-white" />
                     </div>
-                    <Text type="h3" classes="mb-4 text-center">{locale('views.selectLedgerAccountIndex.takingAWhile')}</Text>
-                    <Text classes="mb-4 text-center">{locale('views.selectLedgerAccountIndex.notGeneratingAddresses')}</Text>
+                    <Text type="h3" classes="mb-4 text-center"
+                        >{locale('views.selectLedgerAccountIndex.takingAWhile')}</Text
+                    >
+                    <Text classes="mb-4 text-center"
+                        >{locale('views.selectLedgerAccountIndex.notGeneratingAddresses')}</Text
+                    >
                     <Text classes="break-words text-center">
                         {locale('views.selectLedgerAccountIndex.reinstallLegacy', {
                             values: { legacy: LedgerAppName.IOTALegacy },
@@ -142,7 +159,11 @@
                     </Text>
                 </div>
             {/if}
-            <Button classes="w-full" disabled={busy || !isValidAccountIndex || !isValidAccountPage} onClick={handleContinueClick}>
+            <Button
+                classes="w-full"
+                disabled={busy || !isValidAccountIndex || !isValidAccountPage}
+                onClick={handleContinueClick}
+            >
                 {#if busy}
                     <Spinner busy={true} message={locale('views.migrate.findingBalance')} classes="justify-center" />
                 {:else}{locale('actions.confirm')}{/if}

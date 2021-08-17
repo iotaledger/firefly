@@ -20,7 +20,8 @@
     on:click={onClick}
     class:secondary
     class:disabled
-    class:ghost>
+    class:ghost
+>
     {#if icon}
         <Icon {icon} width={20} height={20} classes="text-blue-500 mr-1" />
     {/if}

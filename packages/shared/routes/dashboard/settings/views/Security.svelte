@@ -20,7 +20,10 @@
         return locale('views.settings.appLock.durationMinute', { values: { time: timeInMinutes } })
     }
 
-    const lockScreenTimeoutOptions = [1, 5, 10, 30, 60].map((time) => ({ value: time, label: assignTimeoutOptionLabel(time) }))
+    const lockScreenTimeoutOptions = [1, 5, 10, 30, 60].map((time) => ({
+        value: time,
+        label: assignTimeoutOptionLabel(time),
+    }))
 
     let exportStrongholdChecked
     let currentPassword = ''
@@ -286,7 +289,8 @@
                 updateProfile('settings.lockScreenTimeout', option.value)
             }}
             value={assignTimeoutOptionLabel($activeProfile?.settings.lockScreenTimeout)}
-            items={lockScreenTimeoutOptions} />
+            items={lockScreenTimeoutOptions}
+        />
     </section>
     <HR classes="pb-5 mt-5 justify-center" />
     <!-- TODO: ledger, remove this also from settings index -->
@@ -303,7 +307,8 @@
                     {locale}
                     placeholder={locale('general.currentPassword')}
                     disabled={passwordChangeBusy}
-                    submitHandler={changePassword} />
+                    submitHandler={changePassword}
+                />
                 <Password
                     error={newPasswordError}
                     classes="mb-4"
@@ -315,7 +320,8 @@
                     {locale}
                     placeholder={locale('general.newPassword')}
                     disabled={passwordChangeBusy}
-                    submitHandler={changePassword} />
+                    submitHandler={changePassword}
+                />
                 <Password
                     classes="mb-5"
                     bind:value={confirmedPassword}
@@ -323,18 +329,21 @@
                     {locale}
                     placeholder={locale('general.confirmNewPassword')}
                     disabled={passwordChangeBusy}
-                    submitHandler={changePassword} />
+                    submitHandler={changePassword}
+                />
                 <Checkbox
                     classes="mb-5"
                     label={locale('actions.exportNewStronghold')}
                     bind:checked={exportStrongholdChecked}
-                    disabled={passwordChangeBusy} />
+                    disabled={passwordChangeBusy}
+                />
                 <div class="flex flex-row items-center">
                     <Button
                         medium
                         form="form-change-password"
                         type="submit"
-                        disabled={!currentPassword || !newPassword || !confirmedPassword || passwordChangeBusy}>
+                        disabled={!currentPassword || !newPassword || !confirmedPassword || passwordChangeBusy}
+                    >
                         {locale('views.settings.changePassword.title')}
                     </Button>
                     <Spinner busy={passwordChangeBusy} message={passwordChangeMessage} classes="ml-2" />
@@ -348,14 +357,17 @@
             <Text type="h4" classes="mb-3">{locale('views.settings.changePincode.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.changePincode.description')}</Text>
 
-            <Text type="p" secondary smaller classes="mb-2">{locale('views.settings.changePincode.currentPincode')}</Text>
+            <Text type="p" secondary smaller classes="mb-2"
+                >{locale('views.settings.changePincode.currentPincode')}</Text
+            >
             <Pin
                 smaller
                 error={currentPincodeError}
                 classes="mb-4"
                 bind:value={currentPincode}
                 disabled={pinCodeBusy}
-                on:submit={changePincode} />
+                on:submit={changePincode}
+            />
             <Text type="p" secondary smaller classes="mb-2">{locale('views.settings.changePincode.newPincode')}</Text>
             <Pin
                 smaller
@@ -363,21 +375,26 @@
                 classes="mb-4"
                 bind:value={newPincode}
                 disabled={pinCodeBusy}
-                on:submit={changePincode} />
-            <Text type="p" secondary smaller classes="mb-2">{locale('views.settings.changePincode.confirmNewPincode')}</Text>
+                on:submit={changePincode}
+            />
+            <Text type="p" secondary smaller classes="mb-2"
+                >{locale('views.settings.changePincode.confirmNewPincode')}</Text
+            >
             <Pin
                 smaller
                 error={confirmationPincodeError}
                 classes="mb-4"
                 bind:value={confirmedPincode}
                 disabled={pinCodeBusy}
-                on:submit={changePincode} />
+                on:submit={changePincode}
+            />
             <div class="flex flex-row items-center">
                 <Button
                     medium
                     type="submit"
                     form="pincode-change-form"
-                    disabled={!currentPincode || !newPincode || !confirmedPincode || pinCodeBusy}>
+                    disabled={!currentPincode || !newPincode || !confirmedPincode || pinCodeBusy}
+                >
                     {locale('views.settings.changePincode.action')}
                 </Button>
                 <Spinner busy={pinCodeBusy} message={pinCodeMessage} classes="ml-2" />

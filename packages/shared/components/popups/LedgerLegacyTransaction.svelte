@@ -15,12 +15,6 @@
     const outputString = 'Output'
 </script>
 
-<style>
-    .transaction {
-        max-height: 30vh;
-    }
-</style>
-
 <Text type="h4" classes="mb-6">{locale('popups.ledgerTransaction.transaction.title')}</Text>
 <Text type="p" classes="mb-6" secondary>{locale('popups.ledgerTransaction.transaction.info')}</Text>
 
@@ -28,7 +22,8 @@
     <Animation
         width="100%"
         animation="ledger-bg-desktop"
-        classes="absolute transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+        classes="absolute transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+    />
     <Animation animation="ledger-confirm-address-desktop" />
 </div>
 
@@ -52,3 +47,9 @@
         </div>
     {/each}
 </div>
+
+<style>
+    .transaction {
+        max-height: 30vh;
+    }
+</style>

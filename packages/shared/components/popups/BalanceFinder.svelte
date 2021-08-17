@@ -24,7 +24,7 @@
 
             if ($isSoftwareProfile && $isStrongholdLocked) {
                 await asyncSetStrongholdPassword(password)
-            } else if($isLedgerProfile && !isLedgerConnected()) {
+            } else if ($isLedgerProfile && !isLedgerConnected()) {
                 isBusy = false
 
                 displayNotificationForLedgerProfile('warning')
@@ -39,12 +39,12 @@
         } catch (err) {
             error = locale(err.error)
 
-            if($isLedgerProfile) {
+            if ($isLedgerProfile) {
                 displayNotificationForLedgerProfile('error', true, true, false, false, err)
             } else {
                 showAppNotification({
                     type: 'error',
-                    message: locale(err.error)
+                    message: locale(err.error),
                 })
             }
         } finally {
@@ -77,12 +77,19 @@
                 placeholder={locale('general.password')}
                 autofocus
                 submitHandler={() => handleFindBalances()}
-                disabled={isBusy} />
+                disabled={isBusy}
+            />
         {/if}
     </div>
     <div class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" secondary onClick={handleCancelClick} disabled={isBusy}>{locale('actions.cancel')}</Button>
-        <Button classes="w-full" onClick={handleFindBalances} disabled={($isSoftwareProfile && $isStrongholdLocked && password.length === 0) || isBusy}>
+        <Button classes="w-full" secondary onClick={handleCancelClick} disabled={isBusy}
+            >{locale('actions.cancel')}</Button
+        >
+        <Button
+            classes="w-full"
+            onClick={handleFindBalances}
+            disabled={($isSoftwareProfile && $isStrongholdLocked && password.length === 0) || isBusy}
+        >
             {#if isBusy}
                 <Spinner busy={true} message={locale(`actions.searching`)} classes="justify-center" />
             {:else}{locale(`actions.${addressIndex ? 'searchAgain' : 'searchBalances'}`)}{/if}

@@ -4,7 +4,7 @@
     import { closePopup } from 'shared/lib/popup'
     import { onMount } from 'svelte'
     import { formatDate } from 'shared/lib/i18n'
-    import { Electron } from 'shared/lib/electron';
+    import { Electron } from 'shared/lib/electron'
 
     export let locale
     let hasAutoUpdate = true
@@ -28,20 +28,13 @@
             await updateCheck()
         }
         const os = await Electron.getOS()
-        hasAutoUpdate = os !== "win32"
+        hasAutoUpdate = os !== 'win32'
     })
 </script>
 
-<style type="text/scss">
-    img {
-        width: 196px;
-    }
-    .changelog {
-        max-height: 50vh;
-    }
-</style>
-
-<Text type="h4" classes="mb-5">{locale('popups.version.title', { values: { version: $versionDetails.currentVersion } })}</Text>
+<Text type="h4" classes="mb-5"
+    >{locale('popups.version.title', { values: { version: $versionDetails.currentVersion } })}</Text
+>
 <div class="flex w-full flex-row flex-wrap">
     <div class="w-full p-4 bg-gray-50 dark:bg-gray-800 flex justify-center content-center">
         <Logo width="50%" logo="logo-firefly-full" />
@@ -84,3 +77,12 @@
         </div>
     {/if}
 </div>
+
+<style type="text/scss">
+    img {
+        width: 196px;
+    }
+    .changelog {
+        max-height: 50vh;
+    }
+</style>

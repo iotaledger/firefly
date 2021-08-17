@@ -23,11 +23,21 @@
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-5">{locale('views.importFromLedger.title')}</Text>
             <Text type="p" secondary classes="mb-8">{locale('views.importFromLedger.body')}</Text>
-            <Button icon="settings" classes="w-full mb-5" secondary onClick={() => handleContinueClick(ImportType.FireflyLedger)}>
+            <Button
+                icon="settings"
+                classes="w-full mb-5"
+                secondary
+                onClick={() => handleContinueClick(ImportType.FireflyLedger)}
+            >
                 {locale('views.importFromLedger.haveFireflyLedger')}
                 <Text type="p" secondary smaller>{locale('views.importFromLedger.haveFireflyLedgerDescription')}</Text>
             </Button>
-            <Button icon="settings" classes="w-full mb-8" secondary onClick={() => handleContinueClick(ImportType.TrinityLedger)}>
+            <Button
+                icon="settings"
+                classes="w-full mb-8"
+                secondary
+                onClick={() => handleContinueClick(ImportType.TrinityLedger)}
+            >
                 {locale('views.importFromLedger.haveTrinityLedger')}
                 <Text type="p" secondary smaller>{locale('views.importFromLedger.haveTrinityLedgerDescription')}</Text>
             </Button>

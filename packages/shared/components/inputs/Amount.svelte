@@ -109,11 +109,75 @@
             return null
         } else {
             const amountAsI = changeUnits(amountAsFloat, unit, Unit.i)
-            const amountasFiat = convertToFiat(amountAsI, $currencies[CurrencyTypes.USD], $exchangeRates[profileCurrency])
+            const amountasFiat = convertToFiat(
+                amountAsI,
+                $currencies[CurrencyTypes.USD],
+                $exchangeRates[profileCurrency]
+            )
             return amountasFiat === 0 ? replaceCurrencyDecimal(`< 0.01`) : formatCurrency(amountasFiat)
         }
     }
 </script>
+
+<svelte:window on:click={clickOutside} />
+<amount-input class:disabled class="relative block {classes}" on:keydown={handleKey}>
+    <Input
+        {error}
+        label={fiatAmount ?? (label || locale('general.amount'))}
+        placeholder={placeholder || locale('general.amount')}
+        bind:value={amount}
+        maxlength={17}
+        {disabled}
+        {autofocus}
+        maxDecimals={UNIT_MAP[unit].dp}
+        integer={unit === Unit.i}
+        float={unit !== Unit.i}
+        style={dropdown ? 'border-bottom-right-radius: 0' : ''}
+        isFocused={dropdown}
+    />
+    <actions class="absolute right-0 top-2.5 h-8 flex flex-row items-center text-12 text-gray-500 dark:text-white">
+        <button
+            on:click={maxClick}
+            class={`pr-2 ${disabled ? 'cursor-auto' : 'hover:text-blue-500 focus:text-blue-500 cursor-pointer'}`}
+            {disabled}>{locale('actions.max').toUpperCase()}</button
+        >
+        <button
+            on:click={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                toggleDropDown()
+            }}
+            bind:this={unitsButton}
+            class={`w-10 h-full text-center px-2 border-l border-solid border-gray-300 dark:border-gray-700 ${
+                disabled ? 'cursor-auto' : 'hover:text-blue-500 focus:text-blue-500 cursor-pointer'
+            }`}
+            {disabled}
+        >
+            {unit}
+            <nav
+                class="absolute w-10 overflow-y-auto pointer-events-none opacity-0 z-10 text-left top-10 right-0 rounded-b-lg bg-white dark:bg-gray-800 border border-solid border-blue-500"
+                class:dropdown
+                bind:this={navContainer}
+            >
+                {#each Units as _unit}
+                    <button
+                        id={_unit}
+                        class="text-center w-full py-2 {unit === _unit &&
+                            'bg-gray-100 dark:bg-gray-700 dark:bg-opacity-20'} 
+                        hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20
+                        focus:bg-gray-200 dark:focus:bg-gray-800 dark:focus:bg-opacity-20"
+                        on:click={() => onSelect(_unit)}
+                        on:focus={() => focusItem(_unit)}
+                        class:active={unit === _unit}
+                        tabindex={dropdown ? 0 : -1}
+                    >
+                        <Text type="p" smaller>{_unit}</Text>
+                    </button>
+                {/each}
+            </nav>
+        </button>
+    </actions>
+</amount-input>
 
 <style type="text/scss">
     amount-input {
@@ -132,55 +196,3 @@
         }
     }
 </style>
-
-<svelte:window on:click={clickOutside} />
-<amount-input class:disabled class="relative block {classes}" on:keydown={handleKey}>
-    <Input
-        {error}
-        label={fiatAmount ?? (label || locale('general.amount'))}
-        placeholder={placeholder || locale('general.amount')}
-        bind:value={amount}
-        maxlength={17}
-        {disabled}
-        {autofocus}
-        maxDecimals={UNIT_MAP[unit].dp}
-        integer={unit === Unit.i}
-        float={unit !== Unit.i}
-        style={dropdown ? 'border-bottom-right-radius: 0' : ''}
-        isFocused={dropdown} />
-    <actions class="absolute right-0 top-2.5 h-8 flex flex-row items-center text-12 text-gray-500 dark:text-white">
-        <button
-            on:click={maxClick}
-            class={`pr-2 ${disabled ? 'cursor-auto' : 'hover:text-blue-500 focus:text-blue-500 cursor-pointer'}`}
-            {disabled}>{locale('actions.max').toUpperCase()}</button>
-        <button
-            on:click={(e) => {
-                e.preventDefault()
-                e.stopPropagation()
-                toggleDropDown()
-            }}
-            bind:this={unitsButton}
-            class={`w-10 h-full text-center px-2 border-l border-solid border-gray-300 dark:border-gray-700 ${disabled ? 'cursor-auto' : 'hover:text-blue-500 focus:text-blue-500 cursor-pointer'}`}
-            {disabled}>
-            {unit}
-            <nav
-                class="absolute w-10 overflow-y-auto pointer-events-none opacity-0 z-10 text-left top-10 right-0 rounded-b-lg bg-white dark:bg-gray-800 border border-solid border-blue-500"
-                class:dropdown
-                bind:this={navContainer}>
-                {#each Units as _unit}
-                    <button
-                        id={_unit}
-                        class="text-center w-full py-2 {unit === _unit && 'bg-gray-100 dark:bg-gray-700 dark:bg-opacity-20'} 
-                        hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20
-                        focus:bg-gray-200 dark:focus:bg-gray-800 dark:focus:bg-opacity-20"
-                        on:click={() => onSelect(_unit)}
-                        on:focus={() => focusItem(_unit)}
-                        class:active={unit === _unit}
-                        tabindex={dropdown ? 0 : -1}>
-                        <Text type="p" smaller>{_unit}</Text>
-                    </button>
-                {/each}
-            </nav>
-        </button>
-    </actions>
-</amount-input>

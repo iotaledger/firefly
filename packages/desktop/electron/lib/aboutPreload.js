@@ -1,5 +1,8 @@
 const { contextBridge, ipcRenderer } = require('electron')
-const { version, build: { productName } } = require('../../package.json')
+const {
+    version,
+    build: { productName },
+} = require('../../package.json')
 
 contextBridge.exposeInMainWorld('about', {
     getData: () => {
@@ -7,10 +10,10 @@ contextBridge.exposeInMainWorld('about', {
             const aboutData = {
                 appName: productName,
                 version: data.strings.version.replace('{version}', version),
-                iconPath: './assets/logos/firefly_logo.svg'
+                iconPath: './assets/logos/firefly_logo.svg',
             }
-            
+
             return aboutData
         })
-    }
+    },
 })

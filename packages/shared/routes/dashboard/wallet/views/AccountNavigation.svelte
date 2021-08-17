@@ -54,14 +54,6 @@
     })
 </script>
 
-<style type="text/scss">
-    button {
-        + button {
-            @apply ml-4;
-        }
-    }
-</style>
-
 <div class="flex flex-row justify-between items-start py-5" bind:this={rootElement}>
     <button data-label="back-button" class="flex-1 mt-1" on:click={handleBackClick} bind:this={buttonElement}>
         <div class="flex items-center space-x-3">
@@ -76,10 +68,21 @@
                 <button
                     on:click={() => handleAccountClick(acc.id)}
                     class="w-10 h-10 rounded-xl p-2 text-14 leading-100 font-bold text-center
-            {activeAccount.id === acc.id ? `bg-${acc.color}-500 text-white` : 'bg-gray-200 dark:bg-gray-700 text-gray-500'} 
-            hover:bg-{acc.color}-500 hover:text-white">{getInitials(acc.alias, 2)}
+            {activeAccount.id === acc.id
+                        ? `bg-${acc.color}-500 text-white`
+                        : 'bg-gray-200 dark:bg-gray-700 text-gray-500'} 
+            hover:bg-{acc.color}-500 hover:text-white"
+                    >{getInitials(acc.alias, 2)}
                 </button>
             {/each}
         </div>
     </div>
 </div>
+
+<style type="text/scss">
+    button {
+        + button {
+            @apply ml-4;
+        }
+    }
+</style>

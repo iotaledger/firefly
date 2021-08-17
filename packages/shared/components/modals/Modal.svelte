@@ -8,6 +8,18 @@
     const { top = 'inherit', right = 'inherit', bottom = 'inherit', left = 'inherit' } = position
 </script>
 
+{#if isActive}
+    <modal-content
+        in:fade={{ duration: 100 }}
+        use:clickOutside
+        on:clickOutside={() => (isActive = false)}
+        class="bg-white dark:bg-gray-900 border border-solid border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden z-10"
+        style="--modal-position-top: {top}; --modal-position-right: {right}; --modal-position-bottom: {bottom}; --modal-position-left: {left};"
+    >
+        <slot />
+    </modal-content>
+{/if}
+
 <style type="text/scss">
     modal-content {
         position: absolute;
@@ -19,14 +31,3 @@
         left: var(--modal-position-left);
     }
 </style>
-
-{#if isActive}
-    <modal-content
-        in:fade={{ duration: 100 }}
-        use:clickOutside
-        on:clickOutside={() => (isActive = false)}
-        class="bg-white dark:bg-gray-900 border border-solid border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden z-10"
-        style="--modal-position-top: {top}; --modal-position-right: {right}; --modal-position-bottom: {bottom}; --modal-position-left: {left};">
-        <slot />
-    </modal-content>
-{/if}

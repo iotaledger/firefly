@@ -86,12 +86,18 @@
             placeholder={locale('general.password')}
             autofocus
             submitHandler={() => handleDeleteClick()}
-            disabled={isBusy} />
+            disabled={isBusy}
+        />
     {/if}
 </div>
 <div class="flex flex-row justify-between space-x-4 w-full px-8 ">
     <Button secondary classes="w-1/2" onClick={() => closePopup()} disabled={isBusy}>{locale('actions.no')}</Button>
-    <Button disabled={(!password && $isSoftwareProfile) || isBusy} classes="w-1/2" onClick={() => handleDeleteClick()} warning>
+    <Button
+        disabled={(!password && $isSoftwareProfile) || isBusy}
+        classes="w-1/2"
+        onClick={() => handleDeleteClick()}
+        warning
+    >
         {locale('actions.yes')}
     </Button>
 </div>

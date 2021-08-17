@@ -1,23 +1,10 @@
-<script context="module" lang="typescript">
-    export enum ImportType {
-        Seed = 'seed',
-        Mnemonic = 'mnemonic',
-        File = 'file',
-        SeedVault = 'seedvault',
-        Stronghold = 'stronghold',
-        Ledger = 'ledger',
-        TrinityLedger = 'trinityLedger',
-        FireflyLedger = 'fireflyLedger',
-    }
-</script>
-
 <script lang="typescript">
     import { Transition } from 'shared/components'
     import { mnemonic } from 'shared/lib/app'
     import { Electron } from 'shared/lib/electron'
     import { getMigrationData } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { newProfile } from 'shared/lib/profile'
+    import { ImportType, newProfile } from 'shared/lib/profile'
     import { asyncRestoreBackup } from 'shared/lib/wallet'
     import { createEventDispatcher, setContext } from 'svelte'
     import { get, Writable, writable } from 'svelte/store'
@@ -188,7 +175,15 @@
     </Transition>
 {:else if state === ImportState.BackupPassword}
     <Transition>
-        <BackupPassword on:next={_next} on:previous={_previous} {isGettingMigrationData} {error} {locale} {mobile} {busy} />
+        <BackupPassword
+            on:next={_next}
+            on:previous={_previous}
+            {isGettingMigrationData}
+            {error}
+            {locale}
+            {mobile}
+            {busy}
+        />
     </Transition>
 {:else if state === ImportState.Success}
     <Transition>

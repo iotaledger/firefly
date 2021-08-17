@@ -73,7 +73,11 @@
         <div slot="leftpane__action">
             <Button classes="w-full" disabled={restoring} onClick={restore}>
                 {#if restoring}
-                    <Spinner busy message={locale('views.restoreFromFireflyLedger.restoring')} classes="justify-center" />
+                    <Spinner
+                        busy
+                        message={locale('views.restoreFromFireflyLedger.restoring')}
+                        classes="justify-center"
+                    />
                 {:else}{locale('actions.restore')}{/if}
             </Button>
         </div>

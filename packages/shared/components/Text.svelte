@@ -11,6 +11,83 @@
     export let classes = '' // ISSUE: https://github.com/tailwindlabs/tailwindcss/discussions/1446
 </script>
 
+{#if type === 'h1'}
+    <h1
+        class={`font-bold text-32 leading-120 ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
+        class:secondary
+        class:disabled
+        class:highlighted
+        class:error
+    >
+        <slot />
+    </h1>
+{:else if type === 'h2'}
+    <h2
+        class={`font-bold text-24 leading-120 ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
+        class:secondary
+        class:disabled
+        class:highlighted
+        class:error
+    >
+        <slot />
+    </h2>
+{:else if type === 'h3'}
+    <h3
+        class={`font-bold text-18 leading-140 ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
+        class:secondary
+        class:disabled
+        class:highlighted
+        class:error
+    >
+        <slot />
+    </h3>
+{:else if type === 'h4'}
+    <h4
+        class={`font-bold text-16 leading-140 ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
+        class:secondary
+        class:disabled
+        class:highlighted
+        class:error
+    >
+        <slot />
+    </h4>
+{:else if type === 'h5'}
+    <h5
+        class={`font-bold text-14 leading-140  ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
+        class:secondary
+        class:disabled
+        class:highlighted
+        class:error
+    >
+        <slot />
+    </h5>
+{:else if type === 'p'}
+    <p
+        class={`text-13 leading-160 ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
+        class:secondary
+        class:disabled
+        class:highlighted
+        class:error
+        class:smaller
+        class:bigger
+        class:font-bold={bold}
+    >
+        <slot />
+    </p>
+{:else if type === 'pre'}
+    <pre
+        class={`text-12 leading-140 ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
+        class:secondary
+        class:disabled
+        class:highlighted
+        class:error
+        class:smaller
+        class:bigger
+        class:font-bold={bold}>
+        <slot />
+    </pre>
+{/if}
+
 <style type="text/scss">
     p {
         &.smaller {
@@ -58,74 +135,3 @@
         @apply whitespace-pre-line;
     }
 </style>
-
-{#if type === 'h1'}
-    <h1
-        class={`font-bold text-32 leading-120 ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
-        class:secondary
-        class:disabled
-        class:highlighted
-        class:error>
-        <slot />
-    </h1>
-{:else if type === 'h2'}
-    <h2
-        class={`font-bold text-24 leading-120 ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
-        class:secondary
-        class:disabled
-        class:highlighted
-        class:error>
-        <slot />
-    </h2>
-{:else if type === 'h3'}
-    <h3
-        class={`font-bold text-18 leading-140 ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
-        class:secondary
-        class:disabled
-        class:highlighted
-        class:error>
-        <slot />
-    </h3>
-{:else if type === 'h4'}
-    <h4
-        class={`font-bold text-16 leading-140 ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
-        class:secondary
-        class:disabled
-        class:highlighted
-        class:error>
-        <slot />
-    </h4>
-{:else if type === 'h5'}
-    <h5
-        class={`font-bold text-14 leading-140  ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
-        class:secondary
-        class:disabled
-        class:highlighted
-        class:error>
-        <slot />
-    </h5>
-{:else if type === 'p'}
-    <p
-        class={`text-13 leading-160 ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
-        class:secondary
-        class:disabled
-        class:highlighted
-        class:error
-        class:smaller
-        class:bigger
-        class:font-bold={bold}>
-        <slot />
-    </p>
-{:else if type === 'pre'}
-    <pre
-        class={`text-12 leading-140 ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
-        class:secondary
-        class:disabled
-        class:highlighted
-        class:error
-        class:smaller
-        class:bigger
-        class:font-bold={bold}>
-        <slot />
-    </pre>
-{/if}

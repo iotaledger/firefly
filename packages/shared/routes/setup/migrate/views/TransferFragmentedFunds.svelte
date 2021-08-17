@@ -1,7 +1,11 @@
 <script lang="typescript">
     import { Animation, Button, OnboardingLayout, Spinner, Text, TransactionItem } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
-    import { displayNotificationForLedgerProfile, ledgerDeviceState, promptUserToConnectLedger } from 'shared/lib/ledger'
+    import {
+        displayNotificationForLedgerProfile,
+        ledgerDeviceState,
+        promptUserToConnectLedger,
+    } from 'shared/lib/ledger'
     import {
         ADDRESS_SECURITY_LEVEL,
         confirmedBundles,
@@ -60,16 +64,18 @@
         busy = false
     }
 
-    const unsubscribe = hasMigratedAndConfirmedAllSelectedBundles.subscribe((_hasMigratedAndConfirmedAllSelectedBundles) => {
-        fullSuccess = _hasMigratedAndConfirmedAllSelectedBundles
+    const unsubscribe = hasMigratedAndConfirmedAllSelectedBundles.subscribe(
+        (_hasMigratedAndConfirmedAllSelectedBundles) => {
+            fullSuccess = _hasMigratedAndConfirmedAllSelectedBundles
 
-        migrated = _hasMigratedAndConfirmedAllSelectedBundles
+            migrated = _hasMigratedAndConfirmedAllSelectedBundles
 
-        if (_hasMigratedAndConfirmedAllSelectedBundles) {
-            migratingFundsMessage = locale('actions.continue')
-            busy = false
+            if (_hasMigratedAndConfirmedAllSelectedBundles) {
+                migratingFundsMessage = locale('actions.continue')
+                busy = false
+            }
         }
-    })
+    )
 
     let migratedAndUnconfirmedBundles = []
 
@@ -147,7 +153,11 @@
                         if (legacyLedger) {
                             if (transaction.trytes && transaction.trytes.length) {
                                 return Electron.ledger
-                                    .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
+                                    .selectSeed(
+                                        $hardwareIndexes.accountIndex,
+                                        $hardwareIndexes.pageIndex,
+                                        ADDRESS_SECURITY_LEVEL
+                                    )
                                     .then(({ iota, callback }) => {
                                         closeTransport = callback
                                         return createMinedLedgerMigrationBundle(
@@ -162,15 +172,26 @@
                                         return sendLedgerMigrationBundle(bundleHash, trytes)
                                     })
                                     .then(() => {
-                                        migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, transaction.bundleHash]
+                                        migratedAndUnconfirmedBundles = [
+                                            ...migratedAndUnconfirmedBundles,
+                                            transaction.bundleHash,
+                                        ]
                                     })
                             }
 
                             return Electron.ledger
-                                .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
+                                .selectSeed(
+                                    $hardwareIndexes.accountIndex,
+                                    $hardwareIndexes.pageIndex,
+                                    ADDRESS_SECURITY_LEVEL
+                                )
                                 .then(({ iota, callback }) => {
                                     closeTransport = callback
-                                    return createLedgerMigrationBundle(transaction.index, iota.prepareTransfers, callback)
+                                    return createLedgerMigrationBundle(
+                                        transaction.index,
+                                        iota.prepareTransfers,
+                                        callback
+                                    )
                                 })
                                 .then(({ trytes, bundleHash }) => {
                                     closePopup(true) // close transaction popup
@@ -193,7 +214,10 @@
                             setMigratingTransaction(transaction, 1)
 
                             return sendMigrationBundle(transaction.bundleHash).then(() => {
-                                migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, transaction.bundleHash]
+                                migratedAndUnconfirmedBundles = [
+                                    ...migratedAndUnconfirmedBundles,
+                                    transaction.bundleHash,
+                                ]
                             })
                         }
 
@@ -208,7 +232,10 @@
                             })
 
                             return sendMigrationBundle(result.payload.bundleHash).then(() => {
-                                migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, result.payload.bundleHash]
+                                migratedAndUnconfirmedBundles = [
+                                    ...migratedAndUnconfirmedBundles,
+                                    result.payload.bundleHash,
+                                ]
                             })
                         })
                     })
@@ -223,7 +250,11 @@
 
                         transactions = transactions.map((_transaction, i) => {
                             if (_transaction.index === transaction.index) {
-                                return { ..._transaction, status: -1, errorText: locale('views.migrate.migrationFailed') }
+                                return {
+                                    ..._transaction,
+                                    status: -1,
+                                    errorText: locale('views.migrate.migrationFailed'),
+                                }
                             }
 
                             return _transaction
@@ -281,7 +312,11 @@
                         if (legacyLedger) {
                             if (transaction.trytes && transaction.trytes.length) {
                                 return Electron.ledger
-                                    .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
+                                    .selectSeed(
+                                        $hardwareIndexes.accountIndex,
+                                        $hardwareIndexes.pageIndex,
+                                        ADDRESS_SECURITY_LEVEL
+                                    )
                                     .then(({ iota, callback }) => {
                                         closeTransport = callback
                                         return createMinedLedgerMigrationBundle(
@@ -310,15 +345,26 @@
                                             persistProfile()
                                         }
 
-                                        migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, transaction.bundleHash]
+                                        migratedAndUnconfirmedBundles = [
+                                            ...migratedAndUnconfirmedBundles,
+                                            transaction.bundleHash,
+                                        ]
                                     })
                             }
 
                             return Electron.ledger
-                                .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
+                                .selectSeed(
+                                    $hardwareIndexes.accountIndex,
+                                    $hardwareIndexes.pageIndex,
+                                    ADDRESS_SECURITY_LEVEL
+                                )
                                 .then(({ iota, callback }) => {
                                     closeTransport = callback
-                                    return createLedgerMigrationBundle(transaction.index, iota.prepareTransfers, callback)
+                                    return createLedgerMigrationBundle(
+                                        transaction.index,
+                                        iota.prepareTransfers,
+                                        callback
+                                    )
                                 })
                                 .then(({ trytes, bundleHash }) => {
                                     closePopup(true) // close transaction popup
@@ -352,7 +398,10 @@
                                     persistProfile()
                                 }
 
-                                migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, transaction.bundleHash]
+                                migratedAndUnconfirmedBundles = [
+                                    ...migratedAndUnconfirmedBundles,
+                                    transaction.bundleHash,
+                                ]
                             })
                         }
 
@@ -373,7 +422,10 @@
                                     persistProfile()
                                 }
 
-                                migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, result.payload.bundleHash]
+                                migratedAndUnconfirmedBundles = [
+                                    ...migratedAndUnconfirmedBundles,
+                                    result.payload.bundleHash,
+                                ]
                             })
                         })
                     })
@@ -418,7 +470,8 @@
         onBackClick={handleBackClick}
         class=""
         showLedgerProgress={legacyLedger}
-        showLedgerVideoButton={legacyLedger}>
+        showLedgerVideoButton={legacyLedger}
+    >
         <div slot="leftpane__content" class="h-full flex flex-col flex-wrap">
             <Text type="h2" classes="mb-5">{locale('views.migrate.title')}</Text>
             <Text type="p" secondary classes="mb-4">{locale('views.transferFragmentedFunds.body1')}</Text>
@@ -438,7 +491,8 @@
                 <Button
                     disabled={busy}
                     classes="w-full py-3 mt-2 text-white {$popupState.active && 'opacity-20'}"
-                    onClick={() => handleMigrateClick()}>
+                    onClick={() => handleMigrateClick()}
+                >
                     {#if !busy}
                         {locale('views.transferFragmentedFunds.migrate')}
                     {:else}
@@ -446,9 +500,14 @@
                     {/if}
                 </Button>
             {:else if fullSuccess}
-                <Button classes="w-full py-3 mt-2" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
+                <Button classes="w-full py-3 mt-2" onClick={() => handleContinueClick()}
+                    >{locale('actions.continue')}</Button
+                >
             {:else}
-                <Button classes="w-full py-3 mt-2 {$popupState.active && 'opacity-20'}" onClick={() => handleRerunClick()}>
+                <Button
+                    classes="w-full py-3 mt-2 {$popupState.active && 'opacity-20'}"
+                    onClick={() => handleRerunClick()}
+                >
                     {locale('views.transferFragmentedFunds.rerun')}
                 </Button>
             {/if}

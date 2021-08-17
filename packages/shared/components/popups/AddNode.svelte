@@ -4,7 +4,7 @@
     import { isNodeUrlValid } from 'shared/lib/network'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
-    
+
     export let locale
     export let onSuccess
     export let node
@@ -51,8 +51,8 @@
                         url,
                         auth: {
                             username,
-                            password
-                        }
+                            password,
+                        },
                     })
                 }
             }
@@ -62,14 +62,26 @@
 
 <Text type="h4" classes="mb-5">{locale(`popups.node.title${node ? 'Update' : 'Add'}`)}</Text>
 <div class="w-full h-full">
-    <Input bind:value={url} placeholder={locale('popups.node.nodeAddress')} error={addressError} disabled={isBusy} autofocus />
+    <Input
+        bind:value={url}
+        placeholder={locale('popups.node.nodeAddress')}
+        error={addressError}
+        disabled={isBusy}
+        autofocus
+    />
     <Input
         classes="mt-3"
         bind:value={username}
         placeholder={locale('popups.node.optionalUsername')}
         error={authError}
-        disabled={isBusy} />
-    <Password classes="mt-3 mb-8" bind:value={password} placeholder={locale('popups.node.optionalPassword')} disabled={isBusy} />
+        disabled={isBusy}
+    />
+    <Password
+        classes="mt-3 mb-8"
+        bind:value={password}
+        placeholder={locale('popups.node.optionalPassword')}
+        disabled={isBusy}
+    />
 </div>
 <div class="flex flex-row justify-between space-x-4 w-full px-8 ">
     <Button secondary classes="w-1/2" onClick={() => closePopup()} disabled={isBusy}>{locale('actions.cancel')}</Button>

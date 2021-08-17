@@ -33,7 +33,13 @@
 
     /** Chart data */
     $: {
-        if (locale || $selectedChart || $activeProfile?.settings.chartSelectors || $walletBalanceHistory || $selectedAccount) {
+        if (
+            locale ||
+            $selectedChart ||
+            $activeProfile?.settings.chartSelectors ||
+            $walletBalanceHistory ||
+            $selectedAccount
+        ) {
             if ($activeProfile?.settings) {
                 // Account value chart
                 if ($selectedAccount) {
@@ -86,22 +92,6 @@
     }
 </script>
 
-<style type="text/scss">
-    button.active {
-        @apply relative;
-        &:after {
-            content: '';
-            @apply bg-blue-500;
-            @apply w-full;
-            @apply rounded;
-            @apply h-0.5;
-            @apply absolute;
-            @apply -bottom-2.5;
-            @apply left-0;
-        }
-    }
-</style>
-
 <div data-label="line-chart" class="flex flex-col justify-between w-full h-full px-8 py-4">
     <div class="flex justify-between items-center mb-2">
         {#if !$selectedAccount}
@@ -122,15 +112,22 @@
                     value={$activeProfile?.settings.chartSelectors.currency}
                     items={currencyDropdown}
                     onSelect={handleCurrencySelect}
-                    contentWidth={true} />
+                    contentWidth={true}
+                />
             </span>
             <span>
                 <Dropdown
                     small
-                    value={locale(`charts.timeframe${TIMEFRAME_MAP[$activeProfile?.settings.chartSelectors.timeframe]}`)}
-                    items={Object.keys(TIMEFRAME_MAP).map((value) => ({ label: locale(`charts.timeframe${TIMEFRAME_MAP[value]}`), value }))}
+                    value={locale(
+                        `charts.timeframe${TIMEFRAME_MAP[$activeProfile?.settings.chartSelectors.timeframe]}`
+                    )}
+                    items={Object.keys(TIMEFRAME_MAP).map((value) => ({
+                        label: locale(`charts.timeframe${TIMEFRAME_MAP[value]}`),
+                        value,
+                    }))}
                     onSelect={(newTimeframe) => updateProfile('settings.chartSelectors.timeframe', newTimeframe.value)}
-                    contentWidth={true} />
+                    contentWidth={true}
+                />
             </span>
         </div>
     </div>
@@ -141,6 +138,24 @@
         {labels}
         {color}
         {xMaxTicks}
-        formatYAxis={(value) => formatCurrencyValue(value, $activeProfile?.settings.chartSelectors.currency ?? '', undefined, undefined, 5)}
-        inlineStyle={$selectedAccount && `height: calc(50vh - ${hasTitleBar ? '190' : '150'}px);`} />
+        formatYAxis={(value) =>
+            formatCurrencyValue(value, $activeProfile?.settings.chartSelectors.currency ?? '', undefined, undefined, 5)}
+        inlineStyle={$selectedAccount && `height: calc(50vh - ${hasTitleBar ? '190' : '150'}px);`}
+    />
 </div>
+
+<style type="text/scss">
+    button.active {
+        @apply relative;
+        &:after {
+            content: '';
+            @apply bg-blue-500;
+            @apply w-full;
+            @apply rounded;
+            @apply h-0.5;
+            @apply absolute;
+            @apply -bottom-2.5;
+            @apply left-0;
+        }
+    }
+</style>

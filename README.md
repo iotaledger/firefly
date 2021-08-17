@@ -25,7 +25,6 @@
 
 Firefly is IOTA's new official wallet for Chrysalis.
 
-
 ## Installation
 
 Desktop readme: https://github.com/iotaledger/firefly/blob/develop/packages/desktop/README.md

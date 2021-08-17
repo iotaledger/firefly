@@ -106,7 +106,12 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <BundleMiningLayout allowBack={false} {locale} showLedgerProgress={legacyLedger} showLedgerVideoButton={legacyLedger}>
+    <BundleMiningLayout
+        allowBack={false}
+        {locale}
+        showLedgerProgress={legacyLedger}
+        showLedgerVideoButton={legacyLedger}
+    >
         <div slot="icon_boxed">
             <div class="flex justify-center items-center rounded-2xl w-12 h-12 bg-blue-500 shadow-lg">
                 <Icon boxed="true" icon="history" classes="text-white" />
@@ -115,11 +120,17 @@
         <div slot="box_content">
             <Text type="h2" classes="mb-5 text-center">{locale('views.securingSpentAddresses.title')}</Text>
             <Text type="p" secondary classes="mb-4 text-center">
-                {locale('views.securingSpentAddresses.body1', { values: { minutes: $selectedBundlesToMine.length * 10 } })}
+                {locale('views.securingSpentAddresses.body1', {
+                    values: { minutes: $selectedBundlesToMine.length * 10 },
+                })}
             </Text>
             <Text type="p" secondary classes="mb-8 text-center">{locale('views.securingSpentAddresses.body2')}</Text>
             <div class="flex flex-col flex-grow items-center">
-                <Button secondary classes="w-56" onClick={() => Electron.openUrl('https://firefly.iota.org/faq#spent-addresses')}>
+                <Button
+                    secondary
+                    classes="w-56"
+                    onClick={() => Electron.openUrl('https://firefly.iota.org/faq#spent-addresses')}
+                >
                     {locale('views.bundleMiningWarning.learn')}
                 </Button>
             </div>

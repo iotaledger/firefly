@@ -48,7 +48,9 @@
 <div class="{classes} flex flex-row items-center bg-{TOAST_STYLE[type].backgroundColor} rounded-lg px-6 py-4">
     <div
         style={'width:40px;height:40px'}
-        class="flex flex-shrink-0 justify-center items-center bg-{TOAST_STYLE[type].iconBackgroundColor} rounded-lg text-{TOAST_STYLE[type].iconColor}">
+        class="flex flex-shrink-0 justify-center items-center bg-{TOAST_STYLE[type]
+            .iconBackgroundColor} rounded-lg text-{TOAST_STYLE[type].iconColor}"
+    >
         {#if TOAST_STYLE[type].logo}
             <Logo logo={TOAST_STYLE[type].logo} />
         {:else}
@@ -68,9 +70,12 @@
         <div class="flex flex-col" style="min-width:90px">
             {#each actions as action}
                 <button
-                    class="cursor-pointer text-center rounded-lg font-bold text-11 {action.isPrimary ? 'bg-white' : ''} text-{action.isPrimary ? 'black' : TOAST_STYLE[type].buttonSecondary}"
+                    class="cursor-pointer text-center rounded-lg font-bold text-11 {action.isPrimary
+                        ? 'bg-white'
+                        : ''} text-{action.isPrimary ? 'black' : TOAST_STYLE[type].buttonSecondary}"
                     style={`min-width:90px;min-height:32px`}
-                    on:click={() => action.onClick()}>
+                    on:click={() => action.onClick()}
+                >
                     {action.label}
                 </button>
             {/each}

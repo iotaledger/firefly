@@ -7,6 +7,21 @@
     export let disabled = false
 </script>
 
+<button
+    data-label="checkbox-input"
+    class={`flex items-center text-left cursor-pointer ${classes}`}
+    type="button"
+    {disabled}
+    on:click={() => {
+        checked = !checked
+    }}
+>
+    <Icon icon={checked ? 'checkbox' : 'checkbox-unchecked'} classes={`mr-3 ${checked ? 'active' : ''}`} />
+    {#if label}
+        <Text type="p" secondary={!checked || disabled}>{label}</Text>
+    {/if}
+</button>
+
 <style type="text/scss">
     button {
         @apply border-gray-500;
@@ -32,17 +47,3 @@
         }
     }
 </style>
-
-<button
-    data-label="checkbox-input"
-    class={`flex items-center text-left cursor-pointer ${classes}`}
-    type="button"
-    {disabled}
-    on:click={() => {
-        checked = !checked
-    }}>
-    <Icon icon={checked ? 'checkbox' : 'checkbox-unchecked'} classes={`mr-3 ${checked ? 'active' : ''}`} />
-    {#if label}
-        <Text type="p" secondary={!checked || disabled}>{label}</Text>
-    {/if}
-</button>

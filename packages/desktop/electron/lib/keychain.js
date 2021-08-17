@@ -4,9 +4,9 @@ const { app } = require('electron')
 /** Keychain object */
 const Keychain = {
     /**
-     * Service name — Key under which credentials will be stored.
+     * Service name — Key under which credentials will be stored.
      */
-    SERVICE_NAME: app.isPackaged ? 'Firefly' : 'Firefly — Dev',
+    SERVICE_NAME: app.isPackaged ? 'Firefly' : 'Firefly — Dev',
     /**
      * Gets all credentials from keychain
      *

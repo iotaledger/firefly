@@ -7,6 +7,7 @@
 <div
     data-label="box"
     class={`block relative ${classes}`}
-    style={`${width ? `width:${width};` : ''}${height ? `height:${height};` : ''}`}>
+    style={`${width ? `width:${width};` : ''}${height ? `height:${height};` : ''}`}
+>
     <slot />
 </div>

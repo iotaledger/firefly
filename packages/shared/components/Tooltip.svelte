@@ -18,6 +18,18 @@
     })
 </script>
 
+<tooltip
+    class="fixed text-center z-10 py-4 px-6 w-auto max-w-60 shadow-lg rounded-xl border border-solid bg-white dark:bg-gray-900 border-white dark:border-gray-700 {classes}"
+    class:darkmode={darkModeEnabled}
+    style="top: {top}px; left:{left}px;"
+    bind:this={tooltip}
+>
+    <slot />
+    <triangle>
+        <inner-dark class="border-gray-700" />
+    </triangle>
+</tooltip>
+
 <style type="text/scss">
     tooltip {
         triangle,
@@ -55,14 +67,3 @@
         }
     }
 </style>
-
-<tooltip
-    class="fixed text-center z-10 py-4 px-6 w-auto max-w-60 shadow-lg rounded-xl border border-solid bg-white dark:bg-gray-900 border-white dark:border-gray-700 {classes}"
-    class:darkmode={darkModeEnabled}
-    style="top: {top}px; left:{left}px;"
-    bind:this={tooltip}>
-    <slot />
-    <triangle>
-        <inner-dark class="border-gray-700" />
-    </triangle>
-</tooltip>

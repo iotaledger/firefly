@@ -29,7 +29,10 @@
     <div class="flex flex-col justify-between items-center">
         <div
             on:click={() => onClick(id)}
-            class="h-20 w-20 {bgColor ? `bg-${bgColor}-500` : ''} rounded-full font-bold text-center flex items-center justify-center {classes}">
+            class="h-20 w-20 {bgColor
+                ? `bg-${bgColor}-500`
+                : ''} rounded-full font-bold text-center flex items-center justify-center {classes}"
+        >
             {#if slots}
                 <slot />
             {:else}
@@ -38,7 +41,12 @@
         </div>
         <div class="mt-5 flex flex-row items-baseline space-x-1.5">
             {#if isLedgerProfile}
-                <Icon icon="ledger" classes="text-gray-400 dark:text-gray-700 relative top-0.5" width={14} height={14} />
+                <Icon
+                    icon="ledger"
+                    classes="text-gray-400 dark:text-gray-700 relative top-0.5"
+                    width={14}
+                    height={14}
+                />
             {/if}
             <Text type="h5" classes="text-center">{name}</Text>
         </div>

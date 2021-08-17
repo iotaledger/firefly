@@ -34,15 +34,18 @@
                         name={profile.name}
                         id={profile.id}
                         isDeveloper={profile.isDeveloperProfile}
-                        isLedgerProfile={profile?.type === ProfileType.Ledger || profile?.type === ProfileType.LedgerSimulator}
-                        classes="cursor-pointer" />
+                        isLedgerProfile={profile?.type === ProfileType.Ledger ||
+                            profile?.type === ProfileType.LedgerSimulator}
+                        classes="cursor-pointer"
+                    />
                 </div>
             {/each}
             <div class="mx-4 mb-8">
                 <Profile
                     onClick={addProfile}
                     name={locale('general.addProfile')}
-                    classes="border-solid border-2 border-gray-400 cursor-pointer">
+                    classes="border-solid border-2 border-gray-400 cursor-pointer"
+                >
                     <Icon icon="plus" classes="text-blue-500" />
                 </Profile>
             </div>

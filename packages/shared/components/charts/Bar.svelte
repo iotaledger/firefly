@@ -90,7 +90,14 @@
                 ctx.strokeStyle = vm.borderColor
                 ctx.lineWidth = borderWidth
 
-                Chart.helpers.drawRoundedTopRectangle(ctx, left, top - barRadius + 1, barWidth, bottom - prevTop, barRadius)
+                Chart.helpers.drawRoundedTopRectangle(
+                    ctx,
+                    left,
+                    top - barRadius + 1,
+                    barWidth,
+                    bottom - prevTop,
+                    barRadius
+                )
 
                 ctx.fill()
                 if (borderWidth) {

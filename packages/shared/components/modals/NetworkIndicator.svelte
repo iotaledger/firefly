@@ -19,7 +19,8 @@
 
     const unsubscribe = networkStatus.subscribe((data) => {
         healthStatus = data.health ?? 0
-        healthStatusText = healthStatus === 0 ? 'networkDown' : healthStatus === 1 ? 'networkDegraded' : 'networkOperational'
+        healthStatusText =
+            healthStatus === 0 ? 'networkDown' : healthStatus === 1 ? 'networkDegraded' : 'networkOperational'
         messagesPerSecond = data.messagesPerSecond ?? 0
         referencedRate = data.referencedRate ?? 0
     })
@@ -38,11 +39,15 @@
         {#if !$activeProfile?.settings.hideNetworkStatistics}
             <HR />
             <div class="flex flex-row justify-between px-7 pt-5 pb-2">
-                <span class="text-12 text-gray-800 dark:text-white">{locale('views.dashboard.network.messagesPerSecond')}</span>
+                <span class="text-12 text-gray-800 dark:text-white"
+                    >{locale('views.dashboard.network.messagesPerSecond')}</span
+                >
                 <span class="text-12 text-gray-500">{`${Math.round(messagesPerSecond)}`}</span>
             </div>
             <div class="flex flex-row justify-between px-7 pb-5">
-                <span class="text-12 text-gray-800 dark:text-white">{locale('views.dashboard.network.referencedRate')}</span>
+                <span class="text-12 text-gray-800 dark:text-white"
+                    >{locale('views.dashboard.network.referencedRate')}</span
+                >
                 <span class="text-12 text-gray-500">{`${Math.round(referencedRate)}%`}</span>
             </div>
         {/if}

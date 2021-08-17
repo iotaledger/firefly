@@ -123,13 +123,16 @@
             <!-- Stronghold backup -->
             <SecurityTile
                 title={locale('views.dashboard.security.strongholdBackup.title')}
-                message={$activeProfile?.lastStrongholdBackupTime ? locale(`dates.${lastBackupDateFormatted.unit}`, {
+                message={$activeProfile?.lastStrongholdBackupTime
+                    ? locale(`dates.${lastBackupDateFormatted.unit}`, {
                           values: { time: lastBackupDateFormatted.value },
-                      }) : locale('popups.backup.notBackedUp')}
+                      })
+                    : locale('popups.backup.notBackedUp')}
                 onClick={() => handleSecurityTileClick('backup')}
                 icon="shield"
                 warning={!backupSafe}
-                {color} />
+                {color}
+            />
         {:else}
             <!-- Ledger profile backup -->
             <SecurityTile
@@ -137,28 +140,35 @@
                 message={''}
                 icon="shield"
                 color="gray"
-                disabled />
+                disabled
+            />
         {/if}
         <!-- Firefly version -->
         <SecurityTile
-            title={locale('views.dashboard.security.version.title', { values: { version: $versionDetails.currentVersion } })}
+            title={locale('views.dashboard.security.version.title', {
+                values: { version: $versionDetails.currentVersion },
+            })}
             message={locale(`views.dashboard.security.version.${$versionDetails.upToDate ? 'upToDate' : 'outOfDate'}`)}
             color={$versionDetails.upToDate ? 'blue' : 'yellow'}
             warning={!$versionDetails.upToDate}
             icon="firefly"
-            onClick={() => handleSecurityTileClick('version')} />
+            onClick={() => handleSecurityTileClick('version')}
+        />
         {#if $isSoftwareProfile}
             <!-- Stronghold status -->
             <SecurityTile
                 title={locale('views.dashboard.security.strongholdStatus.title')}
-                message={locale(`views.dashboard.security.strongholdStatus.${$isStrongholdLocked ? 'locked' : 'unlocked'}`)}
+                message={locale(
+                    `views.dashboard.security.strongholdStatus.${$isStrongholdLocked ? 'locked' : 'unlocked'}`
+                )}
                 color="yellow"
                 icon={$isStrongholdLocked ? 'lock' : 'unlock'}
                 onClick={() => ($isStrongholdLocked ? handleSecurityTileClick('password') : lockStronghold())}
                 classes="col-span-2"
                 toggle
                 wide
-                toggleActive={!$isStrongholdLocked} />
+                toggleActive={!$isStrongholdLocked}
+            />
         {:else}
             <!-- Hardware Device -->
             <SecurityTile
@@ -171,7 +181,8 @@
                 refreshIcon
                 loading={isCheckingLedger}
                 classes="col-span-2"
-                wide />
+                wide
+            />
         {/if}
     </div>
 </div>

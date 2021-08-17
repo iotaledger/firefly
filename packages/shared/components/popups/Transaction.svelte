@@ -25,24 +25,15 @@
 
     function localConvertToFiat(amount) {
         const activeCurrency = get(activeProfile)?.settings.currency ?? AvailableExchangeRates.USD
-        return formatCurrency(convertToFiat(amount, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[activeCurrency]))
+        return formatCurrency(
+            convertToFiat(amount, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[activeCurrency])
+        )
     }
 
     function handleCancelClick() {
         closePopup()
     }
 </script>
-
-<style type="text/scss">
-    .illustration {
-        height: 250px;
-        :global(img) {
-            min-height: 280px;
-            max-width: 100%;
-            object-position: 0 -3px;
-        }
-    }
-</style>
 
 <Text type="h4" classes="mb-6">{locale('popups.transaction.title')}</Text>
 <div class="flex w-full flex-row flex-wrap">
@@ -60,3 +51,14 @@
         <Button classes="w-full" onClick={onConfirm}>{locale('actions.confirm')}</Button>
     </div>
 </div>
+
+<style type="text/scss">
+    .illustration {
+        height: 250px;
+        :global(img) {
+            min-height: 280px;
+            max-width: 100%;
+            object-position: 0 -3px;
+        }
+    }
+</style>

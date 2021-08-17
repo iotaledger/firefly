@@ -29,12 +29,6 @@
     }
 </script>
 
-<style type="text/scss">
-    .receive-info {
-        max-height: 350px;
-    }
-</style>
-
 <div class="w-full h-full flex flex-col justify-between {!$currentAccount ? 'p-8' : ''}">
     <div class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
         {#if !$currentAccount}
@@ -50,17 +44,23 @@
                     value={selectedAccount.alias}
                     items={$liveAccounts}
                     onSelect={handleDropdownSelect}
-                    disabled={$liveAccounts.length === 1} />
+                    disabled={$liveAccounts.length === 1}
+                />
             </div>
         {/if}
         {#if $isLedgerProfile && !$hasGeneratedALedgerReceiveAddress}
             <div class="flex w-full h-full items-end">
-                <Button disabled={isGeneratingAddress || $isSyncing} classes="w-full" onClick={() => generateNewAddress()}>
+                <Button
+                    disabled={isGeneratingAddress || $isSyncing}
+                    classes="w-full"
+                    onClick={() => generateNewAddress()}
+                >
                     {#if isGeneratingAddress}
                         <Spinner
                             busy={isGeneratingAddress}
                             message={locale('general.generatingReceiveAddress')}
-                            classes="justify-center" />
+                            classes="justify-center"
+                        />
                     {:else}
                         {locale('actions.generateAddress')}
                     {/if}
@@ -68,13 +68,15 @@
             </div>
         {:else}
             <div
-                class="receive-info w-full h-full flex flex-col flex-auto rounded-xl border border-solid border-gray-300 dark:border-gray-700 p-4">
+                class="receive-info w-full h-full flex flex-col flex-auto rounded-xl border border-solid border-gray-300 dark:border-gray-700 p-4"
+            >
                 <div class="w-full flex flex-row justify-between items-center mb-1">
                     <Text type="p" smaller bold>{locale('actions.receive')}</Text>
                     <button on:click={generateNewAddress} class:pointer-events-none={isGeneratingAddress}>
                         <Icon
                             icon="refresh"
-                            classes="{isGeneratingAddress && 'animate-spin-reverse'} text-gray-500 dark:text-white" />
+                            classes="{isGeneratingAddress && 'animate-spin-reverse'} text-gray-500 dark:text-white"
+                        />
                     </button>
                 </div>
                 <div class="flex flex-auto items-center justify-center mb-4">
@@ -87,10 +89,17 @@
                 <Button
                     disabled={isGeneratingAddress}
                     classes="w-full"
-                    onClick={() => setClipboard(selectedAccount.depositAddress)}>
+                    onClick={() => setClipboard(selectedAccount.depositAddress)}
+                >
                     {locale('general.copyAddress')}
                 </Button>
             </div>
         {/if}
     </div>
 </div>
+
+<style type="text/scss">
+    .receive-info {
+        max-height: 350px;
+    }
+</style>

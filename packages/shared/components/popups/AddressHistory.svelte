@@ -24,12 +24,6 @@
     }
 </script>
 
-<style>
-    .history {
-        max-height: 30vh;
-    }
-</style>
-
 <div class="mb-5">
     <Text type="h4">{locale('popups.addressHistory.title', { values: { name: $account.alias } })}</Text>
 </div>
@@ -40,7 +34,9 @@
                 <Text type="pre">{_addr.address}</Text>
             </button>
             <Text type="p">
-                {locale('popups.addressHistory.currentBalance', { values: { balance: formatUnitBestMatch(_addr.balance) } })}
+                {locale('popups.addressHistory.currentBalance', {
+                    values: { balance: formatUnitBestMatch(_addr.balance) },
+                })}
             </Text>
         </div>
     {/each}
@@ -48,3 +44,9 @@
 <div class="flex w-full justify-center pt-8">
     <Button classes="w-1/2" onClick={() => handleCopyClick()}>{locale('actions.copy')}</Button>
 </div>
+
+<style>
+    .history {
+        max-height: 30vh;
+    }
+</style>

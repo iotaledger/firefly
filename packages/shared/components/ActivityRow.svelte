@@ -59,7 +59,9 @@
     // especially if there was a remainder, so if any account addresses match
     // we need to find the account details for our address match
     $: receiverAccount =
-        getIncomingFlag(txPayload) || getInternalFlag(txPayload) ? findAccountWithAnyAddress(receiverAddresses, senderAccount) : null
+        getIncomingFlag(txPayload) || getInternalFlag(txPayload)
+            ? findAccountWithAnyAddress(receiverAddresses, senderAccount)
+            : null
 
     let initialsColor
     let accountAlias = ''
@@ -117,8 +119,11 @@
 <button
     on:click={onClick}
     data-label="transaction-row"
-    class="w-full text-left flex rounded-2xl items-center bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 p-4 {(!confirmed || cachedMigrationTx) && 'opacity-50'} {cachedMigrationTx && 'pointer-events-none'} overflow-hidden"
-    disabled={cachedMigrationTx}>
+    class="w-full text-left flex rounded-2xl items-center bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 p-4 {(!confirmed ||
+        cachedMigrationTx) &&
+        'opacity-50'} {cachedMigrationTx && 'pointer-events-none'} overflow-hidden"
+    disabled={cachedMigrationTx}
+>
     <div class="w-8">
         {#if cachedMigrationTx || milestonePayload}
             <Icon boxed classes="text-white" boxClasses="bg-gray-500 dark:bg-gray-900" icon="double-chevron-right" />
@@ -126,13 +131,24 @@
             <Icon
                 boxed
                 classes={`text-white dark:text-${initialsColor}-600`}
-                boxClasses="bg-{initialsColor ? `${initialsColor}-500` : txPayload.data.essence.data.internal ? 'gray-500' : `${color}-${txPayload.data.essence.data.internal ? '500' : '600'}`} dark:bg-gray-900"
-                icon={txPayload.data.essence.data.internal ? 'transfer' : txPayload.data.essence.data.incoming ? 'chevron-down' : 'chevron-up'} />
+                boxClasses="bg-{initialsColor
+                    ? `${initialsColor}-500`
+                    : txPayload.data.essence.data.internal
+                    ? 'gray-500'
+                    : `${color}-${txPayload.data.essence.data.internal ? '500' : '600'}`} dark:bg-gray-900"
+                icon={txPayload.data.essence.data.internal
+                    ? 'transfer'
+                    : txPayload.data.essence.data.incoming
+                    ? 'chevron-down'
+                    : 'chevron-up'}
+            />
         {/if}
     </div>
     <div class="flex flex-col ml-3.5 space-y-1.5 overflow-hidden">
         <Text type="p" bold smaller classes="overflow-hidden overflow-ellipsis multiwrap-line2">
-            {cachedMigrationTx || milestonePayload ? locale('general.fundMigration') : locale(direction, {
+            {cachedMigrationTx || milestonePayload
+                ? locale('general.fundMigration')
+                : locale(direction, {
                       values: { account: accountAlias },
                   })}
         </Text>

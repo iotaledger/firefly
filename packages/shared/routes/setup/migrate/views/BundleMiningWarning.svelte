@@ -27,7 +27,8 @@
         onBackClick={handleBackClick}
         {locale}
         showLedgerProgress={legacyLedger}
-        showLedgerVideoButton={legacyLedger}>
+        showLedgerVideoButton={legacyLedger}
+    >
         <div slot="icon_boxed">
             <div class="flex justify-center items-center rounded-2xl w-12 h-12 bg-orange-600 shadow-lg">
                 <Icon boxed="true" icon="warning-filled" classes="text-white" />
@@ -38,7 +39,11 @@
             <Text type="p" secondary classes="mb-4 text-center">{locale('views.bundleMiningWarning.body1')}</Text>
             <Text type="p" secondary classes="mb-8 text-center">{locale('views.bundleMiningWarning.body2')}</Text>
             <div class="flex flex-col flex-grow items-center">
-                <Button secondary classes="w-56" onClick={() => Electron.openUrl('https://firefly.iota.org/faq#spent-addresses')}>
+                <Button
+                    secondary
+                    classes="w-56"
+                    onClick={() => Electron.openUrl('https://firefly.iota.org/faq#spent-addresses')}
+                >
                     {locale('views.bundleMiningWarning.learn')}
                 </Button>
             </div>

@@ -29,7 +29,7 @@ For all platforms, the following are required:
 -   `libudev` (Debian/Ubuntu: `libudev-dev`)
 -   `gnome-keyring`, `keepassxc`, or another secrets manager that implements the [freedesktop.org Secrets API](https://www.freedesktop.org/wiki/Specifications/secret-storage-spec/)
 
-## Building Firefly 
+## Building Firefly
 
 ```
 ## in the root folder
@@ -41,18 +41,21 @@ yarn
 ## in packages/desktop
 yarn build
 ```
+
 ### Dev Mode
 
 ```
 # in packages/desktop
 yarn start
 ```
-### Production 
+
+### Production
 
 ```
 # in packages/desktop
 yarn compile:win
 ```
+
 Change win to your operating system - mac, win or linux.
 
 Mac users need to `return true` in the notarization script in `packages/desktop/notarization`.

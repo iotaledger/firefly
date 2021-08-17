@@ -3,7 +3,13 @@
     import { Electron } from 'shared/lib/electron'
     import { activeProfile } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'
-    import { api, asyncSetStoragePassword, asyncVerifyMnemonic, asyncStoreMnemonic, asyncCreateAccount } from 'shared/lib/wallet'
+    import {
+        api,
+        asyncSetStoragePassword,
+        asyncVerifyMnemonic,
+        asyncStoreMnemonic,
+        asyncCreateAccount,
+    } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
     import { Pin, Protect, RepeatPin } from './views/'

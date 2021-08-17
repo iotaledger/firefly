@@ -49,7 +49,9 @@
             <ButtonRadio icon="theme-light" value={false} bind:group={darkModeEnabled}>
                 {locale('general.lightTheme')}
             </ButtonRadio>
-            <ButtonRadio icon="theme-dark" value={true} bind:group={darkModeEnabled}>{locale('general.darkTheme')}</ButtonRadio>
+            <ButtonRadio icon="theme-dark" value={true} bind:group={darkModeEnabled}
+                >{locale('general.darkTheme')}</ButtonRadio
+            >
         </div>
         <div slot="leftpane__action">
             <Button onClick={() => handleContinueClick()} classes="w-full">{locale('actions.continue')}</Button>
