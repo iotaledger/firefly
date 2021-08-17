@@ -6,9 +6,22 @@
         "packages/backend/bindings/node"
     ],
     "devDependencies": {
-        "patch-package": "^6.2.2"
+        "@typescript-eslint/eslint-plugin": "^4.29.2",
+        "@typescript-eslint/parser": "^4.29.2",
+        "eslint": "^7.32.0",
+        "eslint-plugin-svelte3": "^3.2.0",
+        "patch-package": "^6.2.2",
+        "prettier": "^2.3.2",
+        "prettier-plugin-svelte": "^2.3.1"
     },
     "scripts": {
+        "format": "prettier -w **/*.{ts,js,json,scss,css}",
+        "format-check": "prettier -c **/*.{ts,js,json,scss,css}",
+        "lint": "eslint .",
+        "lint:backend": "eslint packages/backend",
+        "lint:desktop": "eslint packages/desktop",
+        "lint:mobile": "eslint packages/mobile",
+        "lint:shared": "eslint packages/shared",
         "postinstall": "patch-package"
     },
     "resolutions": {
