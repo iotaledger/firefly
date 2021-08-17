@@ -10,13 +10,15 @@
         "@typescript-eslint/parser": "^4.29.2",
         "eslint": "^7.32.0",
         "eslint-plugin-svelte3": "^3.2.0",
+        "husky": "^7.0.1",
+        "lint-staged": "^11.1.2",
         "patch-package": "^6.2.2",
         "prettier": "^2.3.2",
         "prettier-plugin-svelte": "^2.3.1"
     },
     "scripts": {
-        "format": "prettier -w **/*.{ts,js,json,scss,css}",
-        "format-check": "prettier -c **/*.{ts,js,json,scss,css}",
+        "format": "prettier -w **/*.{ts,js,json,scss,css,md,yml}",
+        "format-check": "prettier -c **/*.{ts,js,json,scss,css,md,yml}",
         "lint": "eslint .",
         "lint:backend": "eslint packages/backend",
         "lint:desktop": "eslint packages/desktop",
@@ -26,5 +28,18 @@
     },
     "resolutions": {
         "lodash": ">=4.17.21"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.{ts,js}": [
+            "yarn lint"
+        ],
+        "*.{ts,js,json,md,yml}": [
+            "yarn format-check"
+        ]
     }
 }
