@@ -4,8 +4,8 @@ import { persistent } from './helpers'
  */
 export interface AppSettings {
     deepLinking: boolean
-    language: string,
-    darkMode: boolean,
+    language: string
+    darkMode: boolean
     notifications: boolean
 }
 
@@ -13,5 +13,5 @@ export const appSettings = persistent<AppSettings>('settings', {
     deepLinking: false,
     language: 'en',
     darkMode: false,
-    notifications: true
+    notifications: true,
 })

@@ -31,9 +31,7 @@ export function showNotification(notificationData: NotificationData, showSystemN
         notificationData.progress = Math.min(Math.max(notificationData.progress, 0), 100)
     }
 
-    if (showSystemNotification &&
-        get(appSettings).notifications &&
-        Electron.NotificationManager) {
+    if (showSystemNotification && get(appSettings).notifications && Electron.NotificationManager) {
         Electron.NotificationManager.notify(notificationData.message, notificationData.contextData)
     } else {
         for (const action of notificationData.actions) {
@@ -79,14 +77,14 @@ export function updateDisplayNotification(id: string, updateData: NotificationDa
     displayNotifications.update((_currentNotifications) => {
         const notification = _currentNotifications.find((n) => n.id === id)
         if (notification) {
-            notification.message = updateData.message;
-            notification.subMessage = updateData.subMessage;
-            notification.progress = updateData.progress;
-            notification.actions = updateData.actions;
-            notification.timeout = updateData.timeout ?? NOTIFICATION_TIMEOUT_DEFAULT;
+            notification.message = updateData.message
+            notification.subMessage = updateData.subMessage
+            notification.progress = updateData.progress
+            notification.actions = updateData.actions
+            notification.timeout = updateData.timeout ?? NOTIFICATION_TIMEOUT_DEFAULT
 
             if (notification.timeout !== NOTIFICATION_TIMEOUT_NEVER) {
-                setTimeout(() => removeDisplayNotification(notification.id), notification.timeout);
+                setTimeout(() => removeDisplayNotification(notification.id), notification.timeout)
             }
         }
         return _currentNotifications

@@ -39,8 +39,12 @@
         "lodash": ">=4.17.21"
     },
     "lint-staged": {
-        "*.{ts,js}": ["yarn lint"],
-        "*.{ts,js,json,md,yml}": ["npm run format-check"]
+        "*.{ts,js}": [
+            "yarn lint"
+        ],
+        "*.{ts,js,json,md,yml}": [
+            "npm run format-check"
+        ]
     },
     "husky": {
         "hooks": {

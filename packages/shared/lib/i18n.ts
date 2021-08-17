@@ -99,7 +99,9 @@ const setupI18n = (options = { withLocale: null }) => {
 const isLocaleLoaded = derived(
     [isDownloading, dictionary, appSettings],
     ([$isDownloading, $dictionary, $appSettings]) =>
-        !$isDownloading && $dictionary[$appSettings.language] && Object.keys($dictionary[$appSettings.language]).length > 0
+        !$isDownloading &&
+        $dictionary[$appSettings.language] &&
+        Object.keys($dictionary[$appSettings.language]).length > 0
 )
 
 const hasLoadedLocale = (locale: string) => {

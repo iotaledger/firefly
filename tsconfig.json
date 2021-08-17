@@ -2,7 +2,6 @@
 // for any actual building or compilation - do NOT use it as such.
 
 {
-
     "include": [
         "packages/backend/bindings/node",
         "packages/desktop",
