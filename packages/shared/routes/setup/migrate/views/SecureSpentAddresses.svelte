@@ -74,8 +74,7 @@
         onBackClick={handleBackClick}
         {locale}
         showLedgerProgress={legacyLedger}
-        showLedgerVideoButton={legacyLedger}
-    >
+        showLedgerVideoButton={legacyLedger}>
         <div slot="leftpane__content" class="relative h-full flex flex-col flex-wrap">
             <Text type="h2" classes="mb-5">{locale('views.secureSpentAddresses.title')}</Text>
             <Text type="p mb-4" secondary>
@@ -89,16 +88,14 @@
                         {...address}
                         {locale}
                         selected={selectedAddresses.find((_address) => _address.id === address.id)}
-                        onClick={() => onAddressClick(address)}
-                    />
+                        onClick={() => onAddressClick(address)} />
                 {/each}
             </div>
             <Link onClick={handleSkipClick} classes="absolute -top-12 right-0">{locale('actions.skip')}</Link>
         </div>
         <div slot="leftpane__action">
             <Button classes="w-full" onClick={() => secureAddresses()}
-                >{locale('views.secureSpentAddresses.title')}</Button
-            >
+                >{locale('views.secureSpentAddresses.title')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
             <Animation {animation} />

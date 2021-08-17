@@ -44,8 +44,7 @@
                     value={selectedAccount.alias}
                     items={$liveAccounts}
                     onSelect={handleDropdownSelect}
-                    disabled={$liveAccounts.length === 1}
-                />
+                    disabled={$liveAccounts.length === 1} />
             </div>
         {/if}
         {#if $isLedgerProfile && !$hasGeneratedALedgerReceiveAddress}
@@ -53,14 +52,12 @@
                 <Button
                     disabled={isGeneratingAddress || $isSyncing}
                     classes="w-full"
-                    onClick={() => generateNewAddress()}
-                >
+                    onClick={() => generateNewAddress()}>
                     {#if isGeneratingAddress}
                         <Spinner
                             busy={isGeneratingAddress}
                             message={locale('general.generatingReceiveAddress')}
-                            classes="justify-center"
-                        />
+                            classes="justify-center" />
                     {:else}
                         {locale('actions.generateAddress')}
                     {/if}
@@ -68,15 +65,13 @@
             </div>
         {:else}
             <div
-                class="receive-info w-full h-full flex flex-col flex-auto rounded-xl border border-solid border-gray-300 dark:border-gray-700 p-4"
-            >
+                class="receive-info w-full h-full flex flex-col flex-auto rounded-xl border border-solid border-gray-300 dark:border-gray-700 p-4">
                 <div class="w-full flex flex-row justify-between items-center mb-1">
                     <Text type="p" smaller bold>{locale('actions.receive')}</Text>
                     <button on:click={generateNewAddress} class:pointer-events-none={isGeneratingAddress}>
                         <Icon
                             icon="refresh"
-                            classes="{isGeneratingAddress && 'animate-spin-reverse'} text-gray-500 dark:text-white"
-                        />
+                            classes="{isGeneratingAddress && 'animate-spin-reverse'} text-gray-500 dark:text-white" />
                     </button>
                 </div>
                 <div class="flex flex-auto items-center justify-center mb-4">
@@ -89,8 +84,7 @@
                 <Button
                     disabled={isGeneratingAddress}
                     classes="w-full"
-                    onClick={() => setClipboard(selectedAccount.depositAddress)}
-                >
+                    onClick={() => setClipboard(selectedAccount.depositAddress)}>
                     {locale('general.copyAddress')}
                 </Button>
             </div>

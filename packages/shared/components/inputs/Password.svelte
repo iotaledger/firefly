@@ -57,8 +57,7 @@
             disableContextMenu={true}
             spellcheck="false"
             {locale}
-            capsLockWarning={true}
-        />
+            capsLockWarning={true} />
         {#if showRevealToggle === true && !disabled}
             <button type="button" on:click={() => revealToggle()} tabindex="-1" class="absolute top-3 right-3">
                 <Icon icon={revealed ? 'view' : 'hide'} classes="text-blue-500" />

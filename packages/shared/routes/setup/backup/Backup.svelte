@@ -122,7 +122,6 @@
             {busy}
             strongholdPassword={$strongholdPassword}
             {locale}
-            {mobile}
-        />
+            {mobile} />
     </Transition>
 {/if}

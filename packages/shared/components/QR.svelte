@@ -34,8 +34,7 @@
                         style="fill: {cell ? (darkModeEnabled ? '#ffffff' : '#000000') : 'none'};"
                         width={1}
                         x={cellIndex}
-                        y={rowIndex}
-                    />
+                        y={rowIndex} />
                 {/each}
             {/each}
         </svg>

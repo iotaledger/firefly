@@ -38,8 +38,7 @@
             <Animation
                 animation={$importType === ImportType.Seed || $importType === ImportType.Mnemonic
                     ? 'import-from-text-success-desktop'
-                    : 'import-from-file-success-desktop'}
-            />
+                    : 'import-from-file-success-desktop'} />
         </div>
     </OnboardingLayout>
 {/if}

@@ -149,16 +149,14 @@
         <div slot="leftpane__action" class="flex flex-col space-y-4">
             {#if newAddress}
                 <Button classes="w-full" disabled={!confirmed} onClick={handleContinueClick}
-                    >{locale('actions.continue')}</Button
-                >
+                    >{locale('actions.continue')}</Button>
             {:else}
                 <Button classes="w-full" disabled={busy} onClick={generateNewAddress}>
                     {#if busy}
                         <Spinner
                             busy={true}
                             message={locale('views.generateNewLedgerAddress.generating')}
-                            classes="justify-center"
-                        />
+                            classes="justify-center" />
                     {:else}{locale('actions.generateAddress')}{/if}
                 </Button>
             {/if}
@@ -167,8 +165,7 @@
             <Animation
                 width="100%"
                 animation="ledger-bg-desktop"
-                classes="absolute transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-            />
+                classes="absolute transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
             <Animation width="100%" {animation} />
         </div>
     </OnboardingLayout>

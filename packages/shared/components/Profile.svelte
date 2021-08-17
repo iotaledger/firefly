@@ -31,8 +31,7 @@
             on:click={() => onClick(id)}
             class="h-20 w-20 {bgColor
                 ? `bg-${bgColor}-500`
-                : ''} rounded-full font-bold text-center flex items-center justify-center {classes}"
-        >
+                : ''} rounded-full font-bold text-center flex items-center justify-center {classes}">
             {#if slots}
                 <slot />
             {:else}
@@ -45,8 +44,7 @@
                     icon="ledger"
                     classes="text-gray-400 dark:text-gray-700 relative top-0.5"
                     width={14}
-                    height={14}
-                />
+                    height={14} />
             {/if}
             <Text type="h5" classes="text-center">{name}</Text>
         </div>

@@ -470,8 +470,7 @@
         onBackClick={handleBackClick}
         class=""
         showLedgerProgress={legacyLedger}
-        showLedgerVideoButton={legacyLedger}
-    >
+        showLedgerVideoButton={legacyLedger}>
         <div slot="leftpane__content" class="h-full flex flex-col flex-wrap">
             <Text type="h2" classes="mb-5">{locale('views.migrate.title')}</Text>
             <Text type="p" secondary classes="mb-4">{locale('views.transferFragmentedFunds.body1')}</Text>
@@ -491,8 +490,7 @@
                 <Button
                     disabled={busy}
                     classes="w-full py-3 mt-2 text-white {$popupState.active && 'opacity-20'}"
-                    onClick={() => handleMigrateClick()}
-                >
+                    onClick={() => handleMigrateClick()}>
                     {#if !busy}
                         {locale('views.transferFragmentedFunds.migrate')}
                     {:else}
@@ -501,13 +499,11 @@
                 </Button>
             {:else if fullSuccess}
                 <Button classes="w-full py-3 mt-2" onClick={() => handleContinueClick()}
-                    >{locale('actions.continue')}</Button
-                >
+                    >{locale('actions.continue')}</Button>
             {:else}
                 <Button
                     classes="w-full py-3 mt-2 {$popupState.active && 'opacity-20'}"
-                    onClick={() => handleRerunClick()}
-                >
+                    onClick={() => handleRerunClick()}>
                     {locale('views.transferFragmentedFunds.rerun')}
                 </Button>
             {/if}

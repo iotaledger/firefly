@@ -122,8 +122,7 @@
     class="w-full text-left flex rounded-2xl items-center bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 p-4 {(!confirmed ||
         cachedMigrationTx) &&
         'opacity-50'} {cachedMigrationTx && 'pointer-events-none'} overflow-hidden"
-    disabled={cachedMigrationTx}
->
+    disabled={cachedMigrationTx}>
     <div class="w-8">
         {#if cachedMigrationTx || milestonePayload}
             <Icon boxed classes="text-white" boxClasses="bg-gray-500 dark:bg-gray-900" icon="double-chevron-right" />
@@ -140,8 +139,7 @@
                     ? 'transfer'
                     : txPayload.data.essence.data.incoming
                     ? 'chevron-down'
-                    : 'chevron-up'}
-            />
+                    : 'chevron-up'} />
         {/if}
     </div>
     <div class="flex flex-col ml-3.5 space-y-1.5 overflow-hidden">

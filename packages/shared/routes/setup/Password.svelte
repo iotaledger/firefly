@@ -84,8 +84,7 @@
                     strength={passwordStrength.score}
                     {locale}
                     autofocus
-                    disabled={busy}
-                />
+                    disabled={busy} />
                 <Password
                     error={errorConfirm}
                     bind:value={confirmedPassword}
@@ -93,8 +92,7 @@
                     {locale}
                     placeholder={locale('general.confirmPassword')}
                     showRevealToggle
-                    disabled={busy}
-                />
+                    disabled={busy} />
             </form>
         </div>
         <div slot="leftpane__action">
@@ -102,8 +100,7 @@
                 type="submit"
                 form="password-form"
                 classes="w-full"
-                disabled={!password || !confirmedPassword || busy}
-            >
+                disabled={!password || !confirmedPassword || busy}>
                 {locale('actions.savePassword')}
             </Button>
         </div>

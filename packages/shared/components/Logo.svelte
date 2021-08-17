@@ -36,6 +36,5 @@
         width={width || '100%'}
         height={height || '100%'}
         src={`assets/logos/${selected}`}
-        alt=""
-    />
+        alt="" />
 {/if}

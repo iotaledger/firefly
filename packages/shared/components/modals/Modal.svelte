@@ -14,8 +14,7 @@
         use:clickOutside
         on:clickOutside={() => (isActive = false)}
         class="bg-white dark:bg-gray-900 border border-solid border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden z-10"
-        style="--modal-position-top: {top}; --modal-position-right: {right}; --modal-position-bottom: {bottom}; --modal-position-left: {left};"
-    >
+        style="--modal-position-top: {top}; --modal-position-right: {right}; --modal-position-bottom: {bottom}; --modal-position-left: {left};">
         <slot />
     </modal-content>
 {/if}

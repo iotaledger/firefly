@@ -25,19 +25,17 @@
         ? 'bg-gray-100 p-4'
         : `bg-${color}-50 px-4 pt-4 pb-5`} dark:bg-gray-900 dark:bg-opacity-50 {classes}"
     class:wide
-    {disabled}
->
+    {disabled}>
     <div
         class="h-full {wide
             ? 'flex flex-row items-center space-x-4'
-            : 'flex flex-col justify-between flex-auto'} flex-nowrap"
-    >
+            : 'flex flex-col justify-between flex-auto'} flex-nowrap">
         <Icon
             boxed
             {icon}
             classes="text-white"
-            boxClasses="{toggle ? 'bg-gray-400' : `bg-${color}-500`}  {!keepDarkThemeIconColor && 'dark:bg-gray-900'}"
-        />
+            boxClasses="{toggle ? 'bg-gray-400' : `bg-${color}-500`}  {!keepDarkThemeIconColor &&
+                'dark:bg-gray-900'}" />
         <div>
             <Text smaller bold>{title}</Text>
             <p class="text-10 leading-120 text-gray-500 {wide ? 'mt-1' : 'mt-1.5'}">{message}</p>
@@ -48,8 +46,7 @@
     {:else if !toggle && warning}
         <Icon
             icon="warning-filled"
-            classes="absolute right-4 top-5 {color ? `text-${color}-500` : 'text-yellow-500'}"
-        />
+            classes="absolute right-4 top-5 {color ? `text-${color}-500` : 'text-yellow-500'}" />
     {:else if refreshIcon}
         <Icon icon="refresh" classes="{loading && 'animate-spin-reverse'} text-gray-500 dark:text-white" />
     {/if}

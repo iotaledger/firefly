@@ -74,15 +74,13 @@
                     placeholder={locale('general.password')}
                     autofocus
                     submitHandler={() => handleHideClick()}
-                    disabled={isBusy}
-                />
+                    disabled={isBusy} />
             {/if}
         {:else}
             <Text type="p" secondary classes="mb-5">{locale('popups.hideAccount.errorBody3')}</Text>
         {/if}
         <div
-            class={`flex flex-row w-full space-x-4 px-8 ${hasMultipleAccounts ? 'justify-between' : 'justify-center'}`}
-        >
+            class={`flex flex-row w-full space-x-4 px-8 ${hasMultipleAccounts ? 'justify-between' : 'justify-center'}`}>
             <Button secondary classes="w-1/2" onClick={() => handleCancelClick()} disabled={isBusy}>
                 {locale(hasMultipleAccounts ? 'actions.cancel' : 'actions.close')}
             </Button>
@@ -92,8 +90,7 @@
                     classes="w-1/2"
                     onClick={() => handleHideClick()}
                     type="submit"
-                    disabled={(!password && $isSoftwareProfile) || isBusy}
-                >
+                    disabled={(!password && $isSoftwareProfile) || isBusy}>
                     {locale('actions.hideAccount')}
                 </Button>
             {/if}

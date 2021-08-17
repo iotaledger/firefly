@@ -86,8 +86,7 @@
             placeholder={locale('general.password')}
             autofocus
             submitHandler={() => handleDeleteClick()}
-            disabled={isBusy}
-        />
+            disabled={isBusy} />
     {/if}
 </div>
 <div class="flex flex-row justify-between space-x-4 w-full px-8 ">
@@ -96,8 +95,7 @@
         disabled={(!password && $isSoftwareProfile) || isBusy}
         classes="w-1/2"
         onClick={() => handleDeleteClick()}
-        warning
-    >
+        warning>
         {locale('actions.yes')}
     </Button>
 </div>

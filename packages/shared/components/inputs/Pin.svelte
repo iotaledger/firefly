@@ -123,8 +123,7 @@
         bind:this={root}
         on:click={selectFirstEmptyRoot}
         on:focus={selectFirstEmptyRoot}
-        tabindex="0"
-    >
+        tabindex="0">
         <div class="flex flex-row inputs-wrapper">
             <div class="input-wrapper absolute items-center w-full flex flex-row flex-no-wrap justify-between">
                 {#each inputs as item, i}
@@ -138,13 +137,11 @@
                         class:glimpse
                         {disabled}
                         on:keydown={(event) => changeHandler(event, i)}
-                        on:contextmenu|preventDefault
-                    />
+                        on:contextmenu|preventDefault />
                 {/each}
             </div>
             <div
-                class="input-decorator-wrapper items-center absolute w-full flex flex-row flex-no-wrap justify-between"
-            >
+                class="input-decorator-wrapper items-center absolute w-full flex flex-row flex-no-wrap justify-between">
                 {#each inputs as item, i}
                     <input-decorator class:active={inputs[i] && inputs[i].length !== 0} class:disabled />
                 {/each}

@@ -14,8 +14,7 @@
     {disabled}
     on:click={() => {
         checked = !checked
-    }}
->
+    }}>
     <Icon icon={checked ? 'checkbox' : 'checkbox-unchecked'} classes={`mr-3 ${checked ? 'active' : ''}`} />
     {#if label}
         <Text type="p" secondary={!checked || disabled}>{label}</Text>

@@ -11,8 +11,7 @@
     <div
         data-label="recovery-phrase"
         class={`grid w-full text-12 grid-cols-3 gap-3 text-gray-800 ${classes}`}
-        class:hide
-    >
+        class:hide>
         {#each recoveryPhrase as word, i}
             <span
                 class="px-6 py-4 flex flex-row items-center rounded-2xl bg-gray-200 dark:bg-gray-800"
@@ -20,8 +19,7 @@
                 class:disabled
                 class:errored={verifyRecoveryPhrase &&
                     verifyRecoveryPhrase[i] &&
-                    verifyRecoveryPhrase[i] !== recoveryPhrase[i]}
-            >
+                    verifyRecoveryPhrase[i] !== recoveryPhrase[i]}>
                 <span class="text-gray-500 mr-2">{`${i + 1}. `}</span>
                 <span class={'text-gray-800 dark:text-white'}>{word}</span>
             </span>

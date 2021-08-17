@@ -131,8 +131,7 @@
                 onClick={() => handleSecurityTileClick('backup')}
                 icon="shield"
                 warning={!backupSafe}
-                {color}
-            />
+                {color} />
         {:else}
             <!-- Ledger profile backup -->
             <SecurityTile
@@ -140,8 +139,7 @@
                 message={''}
                 icon="shield"
                 color="gray"
-                disabled
-            />
+                disabled />
         {/if}
         <!-- Firefly version -->
         <SecurityTile
@@ -152,8 +150,7 @@
             color={$versionDetails.upToDate ? 'blue' : 'yellow'}
             warning={!$versionDetails.upToDate}
             icon="firefly"
-            onClick={() => handleSecurityTileClick('version')}
-        />
+            onClick={() => handleSecurityTileClick('version')} />
         {#if $isSoftwareProfile}
             <!-- Stronghold status -->
             <SecurityTile
@@ -167,8 +164,7 @@
                 classes="col-span-2"
                 toggle
                 wide
-                toggleActive={!$isStrongholdLocked}
-            />
+                toggleActive={!$isStrongholdLocked} />
         {:else}
             <!-- Hardware Device -->
             <SecurityTile
@@ -181,8 +177,7 @@
                 refreshIcon
                 loading={isCheckingLedger}
                 classes="col-span-2"
-                wide
-            />
+                wide />
         {/if}
     </div>
 </div>

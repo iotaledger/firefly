@@ -65,8 +65,7 @@
         width={width || '100%'}
         height={height || '100%'}
         src={`assets/illustrations/${selected}`}
-        alt=""
-    />
+        alt="" />
 {:else}
     <div class={`${classes}`} width={width || '100%'} height={height || '100%'} />
 {/if}

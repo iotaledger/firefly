@@ -27,8 +27,7 @@
                 icon="settings"
                 classes="w-full mb-5"
                 secondary
-                onClick={() => handleContinueClick(ImportType.FireflyLedger)}
-            >
+                onClick={() => handleContinueClick(ImportType.FireflyLedger)}>
                 {locale('views.importFromLedger.haveFireflyLedger')}
                 <Text type="p" secondary smaller>{locale('views.importFromLedger.haveFireflyLedgerDescription')}</Text>
             </Button>
@@ -36,8 +35,7 @@
                 icon="settings"
                 classes="w-full mb-8"
                 secondary
-                onClick={() => handleContinueClick(ImportType.TrinityLedger)}
-            >
+                onClick={() => handleContinueClick(ImportType.TrinityLedger)}>
                 {locale('views.importFromLedger.haveTrinityLedger')}
                 <Text type="p" secondary smaller>{locale('views.importFromLedger.haveTrinityLedgerDescription')}</Text>
             </Button>

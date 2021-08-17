@@ -119,8 +119,7 @@
                 classes="w-full"
                 autofocus
                 disabled={busy}
-                submitHandler={handleContinueClick}
-            />
+                submitHandler={handleContinueClick} />
         </div>
         <div slot="leftpane__action" class="flex flex-col">
             <Button classes="w-full" disabled={!isProfileNameValid || busy} onClick={handleContinueClick}>

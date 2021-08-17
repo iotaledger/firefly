@@ -27,8 +27,7 @@
                 classes="w-full mb-5"
                 secondary
                 disabled
-                onClick={() => handleContinueClick('biometric')}
-            >
+                onClick={() => handleContinueClick('biometric')}>
                 {locale('actions.useBiometric')}
             </Button>
             <Button icon="pin" classes="w-full mb-8" secondary onClick={() => handleContinueClick('pin')}>

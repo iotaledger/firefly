@@ -95,8 +95,7 @@
             icons={SettingsIcons}
             {settings}
             {locale}
-            bind:route={$settingsRoute}
-        />
+            bind:route={$settingsRoute} />
         <div class="h-full w-full pb-10">
             <Text type="p" secondary highlighted classes="mb-8">
                 {locale('views.settings.settings')}

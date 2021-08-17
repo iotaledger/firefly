@@ -18,8 +18,7 @@
                 width={width || selected.width || '100%'}
                 height={height || selected.height || '100%'}
                 viewBox="0 0 {selected.width} {selected.height}"
-                xmlns="http://www.w3.org/2000/svg"
-            >
+                xmlns="http://www.w3.org/2000/svg">
                 {#each selected.path as path}
                     <path
                         class:stroke={path.strokeWidth}
@@ -33,8 +32,7 @@
                         stroke-linecap={path.strokeLinecap || ''}
                         stroke={path.strokeColor || ''}
                         opacity={path.opacity || 1}
-                        fill={path.fill || ''}
-                    />
+                        fill={path.fill || ''} />
                 {/each}
             </svg>
         </div>
@@ -45,8 +43,7 @@
             width={width || selected.width || '100%'}
             height={height || selected.height || '100%'}
             viewBox="0 0 {selected.width} {selected.height}"
-            xmlns="http://www.w3.org/2000/svg"
-        >
+            xmlns="http://www.w3.org/2000/svg">
             {#each selected.path as path}
                 <path
                     class:stroke={path.strokeWidth}
@@ -60,8 +57,7 @@
                     stroke-linecap={path.strokeLinecap || ''}
                     stroke={path.strokeColor || ''}
                     opacity={path.opacity || 1}
-                    fill={path.fill || ''}
-                />
+                    fill={path.fill || ''} />
             {/each}
         </svg>
     {/if}

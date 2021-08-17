@@ -90,8 +90,7 @@
         <form
             id="password-popup-form"
             class="flex justify-center w-full flex-row flex-wrap"
-            on:submit={handleBackupClick}
-        >
+            on:submit={handleBackupClick}>
             <Password
                 classes="w-full mb-5"
                 bind:value={password}
@@ -100,18 +99,15 @@
                 disabled={busy}
                 placeholder={locale('general.password')}
                 autofocus
-                {error}
-            />
+                {error} />
             <div class="flex flex-row justify-between w-full space-x-4 px-8">
                 <Button secondary classes="w-1/2" onClick={handleCancelClick} disabled={busy}
-                    >{locale('actions.cancel')}</Button
-                >
+                    >{locale('actions.cancel')}</Button>
                 <Button
                     classes="w-1/2"
                     type="submit"
                     form="password-popup-form"
-                    disabled={!password || password.length === 0 || busy}
-                >
+                    disabled={!password || password.length === 0 || busy}>
                     {#if busy}
                         <Spinner busy={true} message={locale('popups.backup.saving')} classes="justify-center" />
                     {:else}

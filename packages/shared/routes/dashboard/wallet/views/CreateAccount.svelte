@@ -84,8 +84,7 @@
                 placeholder={locale('general.accountName')}
                 autofocus
                 submitHandler={handleCreateClick}
-                disabled={isBusy}
-            />
+                disabled={isBusy} />
         </div>
     </div>
     <!-- Action -->
@@ -95,13 +94,11 @@
     {#if !isBusy}
         <div class="flex flex-row justify-between px-2">
             <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()}
-                >{locale('actions.cancel')}</Button
-            >
+                >{locale('actions.cancel')}</Button>
             <Button
                 disabled={!getTrimmedLength(accountAlias) || isBusy}
                 classes="-mx-2 w-1/2"
-                onClick={() => handleCreateClick()}
-            >
+                onClick={() => handleCreateClick()}>
                 {locale('actions.create')}
             </Button>
         </div>

@@ -48,8 +48,7 @@
                     settingsRoute.set(SettingsRoutes.GeneralSettings)
                     settingsChildRoute.set(setting)
                 }}
-                {locale}
-            />
+                {locale} />
             <SettingsMenu
                 icon="security"
                 iconColor="bg-yellow-500"
@@ -62,8 +61,7 @@
                     settingsRoute.set(SettingsRoutes.Security)
                     settingsChildRoute.set(setting)
                 }}
-                {locale}
-            />
+                {locale} />
             <SettingsMenu
                 icon="tools"
                 iconColor="bg-green-600"
@@ -76,8 +74,7 @@
                     settingsRoute.set(SettingsRoutes.AdvancedSettings)
                     settingsChildRoute.set(setting)
                 }}
-                {locale}
-            />
+                {locale} />
             <SettingsMenu
                 icon="info"
                 iconColor="bg-purple-500"
@@ -90,8 +87,7 @@
                     settingsRoute.set(SettingsRoutes.HelpAndInfo)
                     settingsChildRoute.set(setting)
                 }}
-                {locale}
-            />
+                {locale} />
         </div>
     </div>
 {/if}

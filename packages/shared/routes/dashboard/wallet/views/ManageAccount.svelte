@@ -84,8 +84,7 @@
                 placeholder={locale('general.accountName')}
                 autofocus
                 submitHandler={handleSaveClick}
-                disabled={isBusy}
-            />
+                disabled={isBusy} />
         </div>
     </div>
     <!-- Action -->
@@ -100,8 +99,7 @@
             <Button
                 classes="-mx-2 w-1/2"
                 onClick={() => handleSaveClick()}
-                disabled={!getTrimmedLength(accountAlias) || isBusy}
-            >
+                disabled={!getTrimmedLength(accountAlias) || isBusy}>
                 {locale('actions.save')}
             </Button>
         </div>

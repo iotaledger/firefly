@@ -43,8 +43,7 @@
                     autofocus
                     disabled={busy}
                     showRevealToggle
-                    classes="mb-8"
-                />
+                    classes="mb-8" />
                 <Text type="p" secondary classes="mb-4">{locale('views.backupWallet.body2')}</Text>
                 <Text type="p" secondary smaller classes="mb-2">- {locale('views.backupWallet.reason1')}</Text>
                 <Text type="p" secondary smaller classes="mb-2">- {locale('views.backupWallet.reason2')}</Text>

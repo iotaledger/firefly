@@ -129,8 +129,7 @@
             data-label="back-button"
             class="absolute top-12 left-5 disabled:opacity-50 cursor-pointer disabled:cursor-auto"
             disabled={hasReachedMaxAttempts}
-            on:click={handleBackClick}
-        >
+            on:click={handleBackClick}>
             <div class="flex items-center space-x-3">
                 <Icon icon="arrow-left" classes="text-blue-500" />
                 <Text type="h5">{locale('general.profiles')}</Text>
@@ -145,8 +144,7 @@
                     classes="mt-10 {shake && 'animate-shake'}"
                     on:submit={onSubmit}
                     disabled={hasReachedMaxAttempts || isBusy}
-                    autofocus
-                />
+                    autofocus />
                 <Text type="p" bold classes="mt-4 text-center">
                     {attempts > 0
                         ? locale('views.login.incorrectAttempts', {

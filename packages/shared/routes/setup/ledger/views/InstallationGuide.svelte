@@ -55,15 +55,13 @@
                 {locale('popups.ledgerAppGuide.title')}
             </Link>
             <Button classes="w-full" onClick={handleContinueClick}
-                >{locale('views.ledgerInstallationGuide.action')}</Button
-            >
+                >{locale('views.ledgerInstallationGuide.action')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center items-center bg-gray-50 dark:bg-gray-900">
             <Animation
                 width="100%"
                 animation="ledger-bg-desktop"
-                classes="absolute z-0 transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-            />
+                classes="absolute z-0 transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
             <Illustration width="100%" illustration="ledger-install-new-app-desktop" classes="z-0" />
         </div>
     </OnboardingLayout>

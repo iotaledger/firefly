@@ -23,26 +23,22 @@
                 class={`circle-container z-0 flex items-center justify-center ${ongoing ? 'w-7 h-7' : 'w-6 h-6'}`}
                 class:completed-section={complete}
                 class:last={index === progress.length - 1}
-                class:darkmode={darkModeEnabled}
-            >
+                class:darkmode={darkModeEnabled}>
                 <div
                     class={`relative w-full h-full rounded-full border-solid border-2 border-gray-300 text-gray-500 flex items-center justify-center ${
                         complete || ongoing ? 'bg-blue-500 dark:bg-blue-500' : 'bg-white dark:bg-gray-900'
                     }`}
                     class:complete
-                    class:ongoing
-                >
+                    class:ongoing>
                     <div
-                        class="w-full h-full z-10 absolute transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center"
-                    >
+                        class="w-full h-full z-10 absolute transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center">
                         {#if complete}
                             <Icon width="20" height="20" icon="success-check" classes="text-white" />
                         {:else}
                             <div
                                 class={`text-center text-12 leading-120 ${
                                     ongoing ? 'text-white' : 'text-gray-500'
-                                } dark:text-white`}
-                            >
+                                } dark:text-white`}>
                                 {index + 1}
                             </div>
                         {/if}
@@ -52,8 +48,7 @@
             <div
                 class={`text-center text-10 leading-120 ${
                     ongoing ? 'mt-2 text-gray-800' : 'mt-2.5 text-gray-500'
-                } dark:text-white`}
-            >
+                } dark:text-white`}>
                 {title}
             </div>
         </div>

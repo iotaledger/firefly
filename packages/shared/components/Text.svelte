@@ -17,8 +17,7 @@
         class:secondary
         class:disabled
         class:highlighted
-        class:error
-    >
+        class:error>
         <slot />
     </h1>
 {:else if type === 'h2'}
@@ -27,8 +26,7 @@
         class:secondary
         class:disabled
         class:highlighted
-        class:error
-    >
+        class:error>
         <slot />
     </h2>
 {:else if type === 'h3'}
@@ -37,8 +35,7 @@
         class:secondary
         class:disabled
         class:highlighted
-        class:error
-    >
+        class:error>
         <slot />
     </h3>
 {:else if type === 'h4'}
@@ -47,8 +44,7 @@
         class:secondary
         class:disabled
         class:highlighted
-        class:error
-    >
+        class:error>
         <slot />
     </h4>
 {:else if type === 'h5'}
@@ -57,8 +53,7 @@
         class:secondary
         class:disabled
         class:highlighted
-        class:error
-    >
+        class:error>
         <slot />
     </h5>
 {:else if type === 'p'}
@@ -70,8 +65,7 @@
         class:error
         class:smaller
         class:bigger
-        class:font-bold={bold}
-    >
+        class:font-bold={bold}>
         <slot />
     </p>
 {:else if type === 'pre'}

@@ -112,8 +112,7 @@
         bind:value={content}
         on:keydown={debounce(handleKeyDown)}
         placeholder=""
-        spellcheck={false}
-    />
+        spellcheck={false} />
     <div class="flex flex-row items-start justify-between">
         <Text type="p" secondary {error}>{statusMessage}&nbsp;</Text>
         {#if seedChecksum}

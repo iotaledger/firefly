@@ -60,8 +60,7 @@
                     <button on:click={handleSyncAccountClick} class:pointer-events-none={$isSyncing}>
                         <Icon
                             icon="refresh"
-                            classes="{$isSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white"
-                        />
+                            classes="{$isSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white" />
                     </button>
                 {/if}
             </div>
@@ -77,8 +76,7 @@
                         onClick={() => handleTransactionClick(transaction)}
                         {...transaction}
                         {color}
-                        {locale}
-                    />
+                        {locale} />
                 {/each}
             {:else}
                 <div class="h-full flex flex-col items-center justify-center text-center">

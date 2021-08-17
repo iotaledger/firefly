@@ -11,7 +11,7 @@
     <iframe
         srcdoc={`
             <head>
-                <style type="text/css" ✂prettier:content✂="CiAgICAgICAgICAgICAgICAgICAgYm9keSB7CiAgICAgICAgICAgICAgICAgICAgICAgIG1hcmdpbjogMHB4OwogICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgICAgICB2aWRlbzpmb2N1cyB7CiAgICAgICAgICAgICAgICAgICAgICAgIG91dGxpbmU6IG5vbmU7CiAgICAgICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAg" ✂prettier:content✂="" ✂prettier:content✂="" ✂prettier:content✂="" ✂prettier:content✂="" ✂prettier:content✂="" ✂prettier:content✂="" ✂prettier:content✂="" ✂prettier:content✂="" ✂prettier:content✂="" ✂prettier:content✂="" ✂prettier:content✂=""></style>
+                <style type="text/css" ✂prettier:content✂="CiAgICAgICAgICAgICAgICAgICAgYm9keSB7CiAgICAgICAgICAgICAgICAgICAgICAgIG1hcmdpbjogMHB4OwogICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgICAgICB2aWRlbzpmb2N1cyB7CiAgICAgICAgICAgICAgICAgICAgICAgIG91dGxpbmU6IG5vbmU7CiAgICAgICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAg" ✂prettier:content✂="" ✂prettier:content✂="" ✂prettier:content✂="" ✂prettier:content✂="" ✂prettier:content✂="" ✂prettier:content✂="" ✂prettier:content✂="" ✂prettier:content✂="" ✂prettier:content✂="" ✂prettier:content✂="" ✂prettier:content✂="" ✂prettier:content✂="" ✂prettier:content✂="" ✂prettier:content✂=""></style>
             </head>
             <video 
                 width="100%" 
@@ -28,8 +28,7 @@
         {scrolling}
         {sandbox}
         frameborder="0"
-        title="video"
-    />
+        title="video" />
 </div>
 
 <style type="text/css">

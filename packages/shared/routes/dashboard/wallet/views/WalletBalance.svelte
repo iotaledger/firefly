@@ -25,8 +25,7 @@
 
 <wallet-balance
     class="relative z-0 bg-gradient-to-b from-{color}-500 to-{color}-600 dark:from-gray-800 dark:to-gray-900 rounded-t-xl px-8"
-    class:compressed={$walletRoute !== WalletRoutes.Init}
->
+    class:compressed={$walletRoute !== WalletRoutes.Init}>
     <!-- Balance -->
     <div data-label="total-balance" class="flex flex-col flex-wrap space-y-5">
         <p class="text-11 leading-120 text-white uppercase tracking-widest">{locale('general.balance')}</p>
@@ -40,15 +39,13 @@
         width="100%"
         height="auto"
         src={`assets/patterns/${darkModeEnabled ? 'wallet-balance-darkmode.svg' : 'wallet-balance.svg'}`}
-        alt=""
-    />
+        alt="" />
     {#if $walletRoute === WalletRoutes.Init}
         {#if $accounts.length > 0}
             <!-- Action Send / Receive -->
             <div class="flex flex-row justify-between space-x-4 mt-7 mb-3">
                 <Button medium secondary classes="w-full" onClick={handleReceiveClick}
-                    >{locale('actions.receive')}</Button
-                >
+                    >{locale('actions.receive')}</Button>
                 <Button medium secondary classes="w-full" onClick={handleSendClick}>{locale('actions.send')}</Button>
             </div>
         {/if}

@@ -34,16 +34,14 @@
         <HR />
         <button
             on:click={() => handleSettingsClick()}
-            class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full"
-        >
+            class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full">
             <Icon icon="settings" classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
-            <Text smaller classes="group-hover:text-blue-500">{locale(`views.dashboard.profileModal.allSettings`)}</Text
-            >
+            <Text smaller classes="group-hover:text-blue-500"
+                >{locale(`views.dashboard.profileModal.allSettings`)}</Text>
         </button>
         <button
             on:click={() => handleLogoutClick()}
-            class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full"
-        >
+            class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full">
             <Icon icon="logout" classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
             <Text smaller classes="group-hover:text-blue-500">{locale(`views.dashboard.profileModal.logout`)}</Text>
         </button>

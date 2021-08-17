@@ -145,8 +145,7 @@
             {...$$restProps}
             {placeholder}
             {style}
-            spellcheck={false}
-        />
+            spellcheck={false} />
         {#if label}
             <floating-label class:floating-active={value && label}>{label}</floating-label>
         {/if}

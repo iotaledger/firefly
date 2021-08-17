@@ -30,8 +30,7 @@
         {yPrecision}
         {beginAtZero}
         {color}
-        {inlineStyle}
-    />
+        {inlineStyle} />
 {:else if type === ChartType.Bar}
     <BarChart {formatYAxis} {datasets} {labels} {tooltips} {inlineStyle} />
 {/if}

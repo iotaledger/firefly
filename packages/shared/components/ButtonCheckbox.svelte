@@ -20,8 +20,7 @@
     bind:this={buttonElement}
     type="button"
     class="w-full flex flex-row p-4 mb-4 rounded-2xl border border-1 border-solid items-center justify-between border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-gray-500 focus:hover:border-gray-700"
-    style="height: 72px"
->
+    style="height: 72px">
     <div class="flex flex-row items-center">
         <Icon {icon} classes="text-blue-500" />
         <Text smaller classes="ml-3">

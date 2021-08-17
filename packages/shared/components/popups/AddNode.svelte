@@ -67,21 +67,18 @@
         placeholder={locale('popups.node.nodeAddress')}
         error={addressError}
         disabled={isBusy}
-        autofocus
-    />
+        autofocus />
     <Input
         classes="mt-3"
         bind:value={username}
         placeholder={locale('popups.node.optionalUsername')}
         error={authError}
-        disabled={isBusy}
-    />
+        disabled={isBusy} />
     <Password
         classes="mt-3 mb-8"
         bind:value={password}
         placeholder={locale('popups.node.optionalPassword')}
-        disabled={isBusy}
-    />
+        disabled={isBusy} />
 </div>
 <div class="flex flex-row justify-between space-x-4 w-full px-8 ">
     <Button secondary classes="w-1/2" onClick={() => closePopup()} disabled={isBusy}>{locale('actions.cancel')}</Button>

@@ -89,14 +89,12 @@
     class="w-full static p-4 flex justify-between items-center border-solid border border-gray-300 dark:border-gray-700
     rounded-2xl"
     class:selected
-    on:click={onClick}
->
+    on:click={onClick}>
     <div class="flex items-center justify-between w-full">
         <div class="flex items-center space-x-4 text-left">
             <div
                 class="radio-button w-6 h-6 mr-3 rounded-full border border-solid border-gray-300 dark:border-gray-700"
-                class:active={selected}
-            >
+                class:active={selected}>
                 <Icon icon={selected ? 'radio' : 'radio-unchecked'} />
             </div>
             <div>
@@ -113,15 +111,13 @@
                 bind:this={riskBox}
                 on:mouseenter={() => toggleTooltip(TooltipType.Risk)}
                 on:mouseleave={() => toggleTooltip(TooltipType.Risk)}
-                class="flex flex-row items-center space-x-0.5"
-            >
+                class="flex flex-row items-center space-x-0.5">
                 <Icon icon="info" classes="mr-1 text-gray-800 dark:text-white" width={20} height={20} />
                 {#each Array(Object.keys(RiskLevel).length / 2) as _, i}
                     <span
                         class="h-4 w-1 rounded-2xl {i <= riskBars - 1
                             ? `bg-${riskColor}-500`
-                            : 'bg-gray-300 dark:bg-gray-700'}"
-                    />
+                            : 'bg-gray-300 dark:bg-gray-700'}" />
                 {/each}
             </risk-meter>
             {#if showRiskTooltip && risk}
@@ -129,8 +125,7 @@
                     <Text
                         >{locale('tooltips.risk.title', {
                             values: { risk: locale(`tooltips.risk.${localeRiskLevel}`) },
-                        })}</Text
-                    >
+                        })}</Text>
                 </Tooltip>
             {/if}
         {/if}

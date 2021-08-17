@@ -445,13 +445,11 @@
                     on:click={() => handleSendTypeClick(SEND_TYPE.EXTERNAL)}
                     disabled={$isTransferring}
                     class={$isTransferring ? 'cursor-auto' : 'cursor-pointer'}
-                    class:active={SEND_TYPE.EXTERNAL === selectedSendType && !$isTransferring}
-                >
+                    class:active={SEND_TYPE.EXTERNAL === selectedSendType && !$isTransferring}>
                     <Text
                         classes="text-left"
                         type="h5"
-                        secondary={SEND_TYPE.EXTERNAL !== selectedSendType || $isTransferring}
-                    >
+                        secondary={SEND_TYPE.EXTERNAL !== selectedSendType || $isTransferring}>
                         {locale(`general.${SEND_TYPE.EXTERNAL}`)}
                     </Text>
                 </button>
@@ -460,13 +458,11 @@
                         on:click={() => handleSendTypeClick(SEND_TYPE.INTERNAL)}
                         disabled={$isTransferring}
                         class={$isTransferring ? 'cursor-auto' : 'cursor-pointer'}
-                        class:active={SEND_TYPE.INTERNAL === selectedSendType && !$isTransferring}
-                    >
+                        class:active={SEND_TYPE.INTERNAL === selectedSendType && !$isTransferring}>
                         <Text
                             classes="text-left"
                             type="h5"
-                            secondary={SEND_TYPE.INTERNAL !== selectedSendType || $isTransferring}
-                        >
+                            secondary={SEND_TYPE.INTERNAL !== selectedSendType || $isTransferring}>
                             {locale(`general.${SEND_TYPE.INTERNAL}`)}
                         </Text>
                     </button>
@@ -486,8 +482,7 @@
                             placeholder={locale('general.from')}
                             items={accountsDropdownItems}
                             onSelect={handleFromSelect}
-                            disabled={$liveAccounts.length === 1 || $isTransferring}
-                        />
+                            disabled={$liveAccounts.length === 1 || $isTransferring} />
                     </div>
                 {/if}
                 <div class="w-full block">
@@ -501,8 +496,7 @@
                             disabled={$isTransferring || $liveAccounts.length === 2}
                             error={toError}
                             classes="mb-6"
-                            autofocus={$liveAccounts.length > 2}
-                        />
+                            autofocus={$liveAccounts.length > 2} />
                     {:else}
                         <Address
                             error={addressError}
@@ -512,8 +506,7 @@
                             disabled={$isTransferring}
                             placeholder={`${locale('general.sendToAddress')}\n${addressPrefix}...`}
                             classes="mb-6"
-                            autofocus
-                        />
+                            autofocus />
                     {/if}
                     <Amount
                         error={amountError}
@@ -522,16 +515,15 @@
                         maxClick={handleMaxClick}
                         {locale}
                         disabled={$isTransferring}
-                        autofocus={selectedSendType === SEND_TYPE.INTERNAL && $liveAccounts.length === 2}
-                    />
+                        autofocus={selectedSendType === SEND_TYPE.INTERNAL && $liveAccounts.length === 2} />
                 </div>
             </div>
         </div>
     </div>
     {#if !$isTransferring}
         <div class="flex flex-row justify-between px-2">
-            <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}>{locale('actions.cancel')}</Button
-            >
+            <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}
+                >{locale('actions.cancel')}</Button>
             <Button classes="-mx-2 w-1/2" onClick={() => handleSendClick()}>{locale('actions.send')}</Button>
         </div>
     {/if}
@@ -540,8 +532,7 @@
             preloading={!$transferState}
             secondary
             message={transferSteps[$transferState?.type || TransferProgressEventType.SyncingAccount]?.label}
-            percent={transferSteps[$transferState?.type || TransferProgressEventType.SyncingAccount]?.percent}
-        />
+            percent={transferSteps[$transferState?.type || TransferProgressEventType.SyncingAccount]?.percent} />
     {/if}
 </div>
 

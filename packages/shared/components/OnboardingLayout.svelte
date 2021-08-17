@@ -31,12 +31,10 @@
                     <button
                         on:click={onBackClick}
                         class="mb-8 w-6 h-6 {busy && 'pointer-events-none opacity-50'}"
-                        disabled={busy}
-                    >
+                        disabled={busy}>
                         <Icon
                             icon="arrow-left"
-                            classes={busy ? 'pointer-events-none text-gray-500' : 'cursor-pointer text-blue-500'}
-                        />
+                            classes={busy ? 'pointer-events-none text-gray-500' : 'cursor-pointer text-blue-500'} />
                     </button>
                 {/if}
                 <div data-label="leftpane-content" class="h-full">
@@ -58,8 +56,7 @@
         {#if showLedgerVideoButton}
             <button
                 on:click={handleWatchVideoClick}
-                class="absolute top-6 right-6 px-8 py-2.5 text-blue-500 bg-transparent flex flex-row items-center justify-center border border-solid border-gray-300 dark:border-gray-700 rounded-xl"
-            >
+                class="absolute top-6 right-6 px-8 py-2.5 text-blue-500 bg-transparent flex flex-row items-center justify-center border border-solid border-gray-300 dark:border-gray-700 rounded-xl">
                 <Icon icon="play" classes="text-blue-500 mr-2" />
                 <Text smaller overrideColor classes="text-blue-500">{locale('views.setupLedger.watchVideo')}</Text>
             </button>

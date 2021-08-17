@@ -45,8 +45,7 @@
                 on:submit={onSubmit}
                 autofocus
                 disabled={busy}
-                {error}
-            />
+                {error} />
         </div>
         <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
             <Button classes="flex-1" disabled={!validatePinFormat(pinInput) || busy} onClick={() => onSubmit()}>

@@ -61,8 +61,7 @@
     <Animation
         width="100%"
         animation="ledger-bg-desktop"
-        classes="absolute transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-    />
+        classes="absolute transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
     <Animation animation="ledger-confirm-address-desktop" />
 </div>
 
@@ -71,8 +70,7 @@
         <div
             class={`rounded-lg bg-gray-50 dark:bg-gray-800 p-5 text-center ${
                 shouldDisplayRemainderAddress ? 'mb-4' : ''
-            }`}
-        >
+            }`}>
             <Text type="h5" highlighted classes="mb-2">{locale('general.sendTo')}</Text>
             <Text type="pre" classes="mb-4">{formatAddressForLedger(toAddress)}</Text>
 

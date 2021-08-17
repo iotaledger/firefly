@@ -7,6 +7,9 @@ plugins:
 printWidth: 120
 semi: false
 singleQuote: true
+svelteStrictMode: false
+svelteBracketNewLine: false
+svelteIndentScriptAndStyle: true
 tabWidth: 4
 trailingComma: es5
 useTabs: false

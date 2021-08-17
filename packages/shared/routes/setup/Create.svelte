@@ -28,8 +28,7 @@
                 icon="settings"
                 classes="w-full mb-5"
                 secondary
-                onClick={() => handleContinueClick(ProfileType.Software)}
-            >
+                onClick={() => handleContinueClick(ProfileType.Software)}>
                 {locale('views.create.softwareAccount.title')}
                 <Text type="p" secondary smaller>{locale('views.create.softwareAccount.description')}</Text>
             </Button>
@@ -37,8 +36,7 @@
                 icon="settings"
                 classes="w-full mb-8"
                 secondary
-                onClick={() => handleContinueClick(ProfileType.Ledger)}
-            >
+                onClick={() => handleContinueClick(ProfileType.Ledger)}>
                 {locale('views.create.ledgerAccount.title')}
                 <Text type="p" secondary smaller>{locale('views.create.ledgerAccount.description')}</Text>
             </Button>

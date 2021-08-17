@@ -213,14 +213,12 @@
         onBackClick={handleBackClick}
         {locale}
         showLedgerProgress={legacyLedger}
-        showLedgerVideoButton={legacyLedger}
-    >
+        showLedgerVideoButton={legacyLedger}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-3.5">{locale('views.balance.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.balance.body')}</Text>
             <Box
-                classes="flex flex-col flex-grow items-center py-12 bg-gray-50 dark:bg-gray-900 dark:bg-opacity-50 rounded-lg "
-            >
+                classes="flex flex-col flex-grow items-center py-12 bg-gray-50 dark:bg-gray-900 dark:bg-opacity-50 rounded-lg ">
                 <Text type="h2">{formattedBalance}</Text>
                 <Text type="p" highlighted classes="py-1 uppercase">{fiatBalance}</Text>
             </Box>
@@ -234,15 +232,13 @@
                     <Spinner
                         busy={isCheckingForBalance}
                         message={locale('views.migrate.findingBalance')}
-                        classes="justify-center"
-                    />
+                        classes="justify-center" />
                 {:else}{locale('actions.checkAgain')}{/if}
             </Button>
             <Button
                 classes="flex-1"
                 disabled={isCheckingForBalance || !error.allowToProceed}
-                onClick={() => handleContinueClick()}
-            >
+                onClick={() => handleContinueClick()}>
                 {locale('actions.continue')}
             </Button>
         </div>

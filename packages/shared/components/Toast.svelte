@@ -49,8 +49,7 @@
     <div
         style={'width:40px;height:40px'}
         class="flex flex-shrink-0 justify-center items-center bg-{TOAST_STYLE[type]
-            .iconBackgroundColor} rounded-lg text-{TOAST_STYLE[type].iconColor}"
-    >
+            .iconBackgroundColor} rounded-lg text-{TOAST_STYLE[type].iconColor}">
         {#if TOAST_STYLE[type].logo}
             <Logo logo={TOAST_STYLE[type].logo} />
         {:else}
@@ -74,8 +73,7 @@
                         ? 'bg-white'
                         : ''} text-{action.isPrimary ? 'black' : TOAST_STYLE[type].buttonSecondary}"
                     style={`min-width:90px;min-height:32px`}
-                    on:click={() => action.onClick()}
-                >
+                    on:click={() => action.onClick()}>
                     {action.label}
                 </button>
             {/each}

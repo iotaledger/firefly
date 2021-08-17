@@ -182,8 +182,7 @@
             {error}
             {locale}
             {mobile}
-            {busy}
-        />
+            {busy} />
     </Transition>
 {:else if state === ImportState.Success}
     <Transition>

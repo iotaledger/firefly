@@ -35,15 +35,13 @@
             <Text secondary classes="inline-block">{locale(`popups.ledgerConnectionGuide.steps.${stepIndex}`)}</Text>
         {:else}
             <Text secondary classes="inline-block"
-                >{locale(`popups.ledgerConnectionGuide.steps.${stepIndex}.text`)}</Text
-            >
+                >{locale(`popups.ledgerConnectionGuide.steps.${stepIndex}.text`)}</Text>
             <Link
                 classes="ml-0.5 inline-block text-13 leading-160"
                 onClick={() =>
                     Electron.openUrl(
                         'https://support.ledger.com/hc/en-us/articles/360019868977-Fix-USB-connection-issues-with-Ledger-Live?support=true'
-                    )}
-            >
+                    )}>
                 {locale(`popups.ledgerConnectionGuide.steps.${stepIndex}.link`)}
             </Link>
         {/if}

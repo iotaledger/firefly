@@ -112,8 +112,7 @@
                     value={$activeProfile?.settings.chartSelectors.currency}
                     items={currencyDropdown}
                     onSelect={handleCurrencySelect}
-                    contentWidth={true}
-                />
+                    contentWidth={true} />
             </span>
             <span>
                 <Dropdown
@@ -126,8 +125,7 @@
                         value,
                     }))}
                     onSelect={(newTimeframe) => updateProfile('settings.chartSelectors.timeframe', newTimeframe.value)}
-                    contentWidth={true}
-                />
+                    contentWidth={true} />
             </span>
         </div>
     </div>
@@ -140,8 +138,7 @@
         {xMaxTicks}
         formatYAxis={(value) =>
             formatCurrencyValue(value, $activeProfile?.settings.chartSelectors.currency ?? '', undefined, undefined, 5)}
-        inlineStyle={$selectedAccount && `height: calc(50vh - ${hasTitleBar ? '190' : '150'}px);`}
-    />
+        inlineStyle={$selectedAccount && `height: calc(50vh - ${hasTitleBar ? '190' : '150'}px);`} />
 </div>
 
 <style type="text/scss">

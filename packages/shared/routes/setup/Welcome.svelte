@@ -31,8 +31,7 @@
                 sortItems={true}
                 onSelect={handleLanguage}
                 value={locales[$appSettings.language]}
-                items={Object.values(locales).map((locale) => ({ value: locale, label: locale }))}
-            />
+                items={Object.values(locales).map((locale) => ({ value: locale, label: locale }))} />
         </div>
         <div slot="leftpane__action">
             <Button onClick={() => handleContinueClick()} classes="w-full">{locale('actions.continue')}</Button>

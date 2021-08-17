@@ -535,8 +535,7 @@
                             </li>
                             <li>
                                 <Text type="p" secondary classes="mb-4"
-                                    >the processing is required by the applicable law;</Text
-                                >
+                                    >the processing is required by the applicable law;</Text>
                             </li>
                             <li>
                                 <Text type="p" secondary classes="mb-4">
@@ -569,8 +568,7 @@
                         <ul>
                             <li>
                                 <Text type="p" secondary classes="mb-4"
-                                    >pseudonymisation and encryption of Personal Data;</Text
-                                >
+                                    >pseudonymisation and encryption of Personal Data;</Text>
                             </li>
                             <li>
                                 <Text type="p" secondary classes="mb-4">
@@ -626,8 +624,7 @@
                     </Text>
 
                     <Text type="h2" classes="mt-8 mb-5"
-                        >Providers of Operating Systems and Telecommunication Services</Text
-                    >
+                        >Providers of Operating Systems and Telecommunication Services</Text>
                     <Text type="p" secondary classes="mb-4">
                         Any transmission of data from your device depends on the operating system, the telecommunication
                         network provider as well as other providers of data communication (e.g. Wi-Fi provider) used.

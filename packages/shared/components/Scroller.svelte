@@ -45,7 +45,6 @@
     data-label="scroller"
     id="scroller"
     class={`block relative max-h-full overflow-y-auto ${classes}`}
-    bind:this={scroller}
->
+    bind:this={scroller}>
     <slot />
 </div>

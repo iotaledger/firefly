@@ -36,8 +36,7 @@
             {placeholder}
             {disabled}
             spellcheck={false}
-            maxlength={ADDRESS_LENGTH}
-        />
+            maxlength={ADDRESS_LENGTH} />
         {#if label}
             <floating-label class:floating-active={address && label}>{label}</floating-label>
         {/if}

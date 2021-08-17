@@ -28,8 +28,7 @@
         </div>
         <div slot="leftpane__action">
             <Button classes="w-full" onClick={() => handleContinueClick()} autofocus
-                >{locale('actions.continue')}</Button
-            >
+                >{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-purple dark:bg-gray-900">
             <Animation animation="backup-desktop" />

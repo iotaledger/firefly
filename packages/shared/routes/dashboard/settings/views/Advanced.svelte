@@ -124,25 +124,21 @@
                 <Checkbox
                     label={locale('views.settings.configureNodeList.includeOfficialNodeList')}
                     bind:checked={includeOfficialNodes}
-                    classes="mb-5"
-                />
+                    classes="mb-5" />
                 <div
                     class="nodes-container flex flex-col border border-solid border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 rounded-2xl overflow-auto"
-                    bind:this={nodesContainer}
-                >
+                    bind:this={nodesContainer}>
                     {#if nodes.length === 0}
                         <Text classes="p-3">{locale('views.settings.configureNodeList.noNodes')}</Text>
                     {/if}
                     {#each nodes as node}
                         <div
-                            class="flex flex-row items-center justify-between py-4 px-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
-                        >
+                            class="flex flex-row items-center justify-between py-4 px-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20">
                             <div class="flex flex-row items-center overflow-hidden">
                                 <Text
                                     classes={`overflow-hidden whitespace-nowrap overflow-ellipsis ${
                                         node.disabled ? 'opacity-50' : ''
-                                    }`}
-                                >
+                                    }`}>
                                     {node.url}
                                 </Text>
                                 <Text highlighted classes="mx-4">
@@ -156,8 +152,7 @@
                                     nodeContextMenu = node
                                     contextPosition = { x: e.clientX, y: e.clientY }
                                 }}
-                                class="dark:text-white">...</button
-                            >
+                                class="dark:text-white">...</button>
                         </div>
                     {/each}
                     {#if nodeContextMenu}
@@ -165,16 +160,14 @@
                             class="fixed flex flex-col border border-solid bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 rounded-lg overflow-hidden"
                             use:clickOutside={{ includeScroll: true }}
                             on:clickOutside={() => (nodeContextMenu = undefined)}
-                            style={`left: ${contextPosition.x - 10}px; top: ${contextPosition.y - 10}px`}
-                        >
+                            style={`left: ${contextPosition.x - 10}px; top: ${contextPosition.y - 10}px`}>
                             {#if !nodeContextMenu.disabled}
                                 <button
                                     on:click={() => {
                                         primaryNodeUrl = nodeContextMenu.url
                                         nodeContextMenu = undefined
                                     }}
-                                    class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
-                                >
+                                    class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20">
                                     <Text smaller>{locale('views.settings.configureNodeList.setAsPrimary')}</Text>
                                 </button>
                             {/if}
@@ -184,8 +177,7 @@
                                         handlePropertiesNodeClick(nodeContextMenu)
                                         nodeContextMenu = undefined
                                     }}
-                                    class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
-                                >
+                                    class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20">
                                     <Text smaller>{locale('views.settings.configureNodeList.viewDetails')}</Text>
                                 </button>
                             {/if}
@@ -198,8 +190,7 @@
                                         // so by reassiging the array we force a redraw
                                         nodes = nodes
                                     }}
-                                    class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
-                                >
+                                    class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20">
                                     <Text smaller>
                                         {locale(
                                             nodeContextMenu.disabled
@@ -216,8 +207,7 @@
                                         handleRemoveNodeClick(nodeContextMenu)
                                         nodeContextMenu = undefined
                                     }}
-                                    class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
-                                >
+                                    class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20">
                                     <Text smaller error>{locale('views.settings.configureNodeList.removeNode')}</Text>
                                 </button>
                             {/if}
@@ -228,8 +218,7 @@
                     medium
                     inlineStyle="min-width: 156px;"
                     classes="w-1/4 mt-4"
-                    onClick={() => handleAddNodeClick()}
-                >
+                    onClick={() => handleAddNodeClick()}>
                     {locale('actions.addNode')}
                 </Button>
             </section>

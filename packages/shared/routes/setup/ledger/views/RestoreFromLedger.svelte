@@ -76,8 +76,7 @@
                     <Spinner
                         busy
                         message={locale('views.restoreFromFireflyLedger.restoring')}
-                        classes="justify-center"
-                    />
+                        classes="justify-center" />
                 {:else}{locale('actions.restore')}{/if}
             </Button>
         </div>

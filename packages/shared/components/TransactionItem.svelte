@@ -47,8 +47,7 @@
 </script>
 
 <div
-    class="transaction-item relative flex justify-between border-solid border border-gray-200 dark:border-gray-700 rounded-2xl h-14 items-center pl-5 pr-6 focus:border-blue-500 mt-4"
->
+    class="transaction-item relative flex justify-between border-solid border border-gray-200 dark:border-gray-700 rounded-2xl h-14 items-center pl-5 pr-6 focus:border-blue-500 mt-4">
     <div class="flex items-center justify-between w-full space-x-4">
         <div class="flex items-center">
             <Icon icon="transfer" classes="text-blue-500" />
@@ -61,8 +60,7 @@
                 <Text type="p" secondary smaller>{locale('views.migrate.migrating')}</Text>
             {:else if status === Status.Success}
                 <Text type="p" secondary smaller
-                    >{locale('views.migrate.migrated', { values: { balance: balanceString } })}</Text
-                >
+                    >{locale('views.migrate.migrated', { values: { balance: balanceString } })}</Text>
                 <Icon icon="status-success" classes="text-white bg-green-600 rounded-full ml-3" />
             {:else if status === -1}
                 <div class="flex items-center relative">

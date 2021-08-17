@@ -64,8 +64,7 @@
                 placeholder={locale('general.password')}
                 autofocus
                 submitHandler={() => handleDeleteClick()}
-                disabled={isBusy}
-            />
+                disabled={isBusy} />
         {/if}
     {:else}
         <Text type="p" secondary classes="mb-5">{locale('popups.deleteAccount.errorBody1')}</Text>
@@ -79,8 +78,7 @@
             classes="w-1/2"
             onClick={() => handleDeleteClick()}
             type="submit"
-            disabled={(!password && $isSoftwareProfile) || isBusy}
-        >
+            disabled={(!password && $isSoftwareProfile) || isBusy}>
             {locale('actions.deleteAccount')}
         </Button>
     </div>

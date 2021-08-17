@@ -44,8 +44,7 @@
             <Button
                 disabled={!hasRevealedRecoveryPhrase}
                 classes="flex-1"
-                onClick={() => handleContinueClick('verify')}
-            >
+                onClick={() => handleContinueClick('verify')}>
                 {locale('actions.continue')}
             </Button>
         </div>
@@ -62,8 +61,7 @@
                     <button
                         on:click={handleMnemonicVisibilityClick}
                         class="absolute top-10 right-10 flex flex-row items-center"
-                        type="button"
-                    >
+                        type="button">
                         <Text smaller overrideColor classes="text-blue-500 mr-2">
                             {locale(`views.recoveryPhrase.${hide ? 'revealRecoveryPhrase' : 'hideRecoveryPhrase'}`)}
                         </Text>

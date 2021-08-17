@@ -23,8 +23,7 @@
                         width="16"
                         height="16"
                         icon="small-chevron-right"
-                        classes="text-blue-500 absolute left-1 top-0.4 text-xl"
-                    />
+                        classes="text-blue-500 absolute left-1 top-0.4 text-xl" />
                 {/if}
                 <Text type="p" classes="mb-1">{locale(`views.settings.${setting}.title`)}</Text>
             </button>
@@ -36,12 +35,10 @@
                             settings[route]
                         ).length -
                             1 ===
-                            i && 'mb-4'}"
-                    >
+                            i && 'mb-4'}">
                         <Icon icon={icons[setting]} classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
                         <Text type="p" classes="group-hover:text-blue-500"
-                            >{locale(`views.settings.${setting}.title`)}</Text
-                        >
+                            >{locale(`views.settings.${setting}.title`)}</Text>
                     </button>
                 {/each}
             {/if}
