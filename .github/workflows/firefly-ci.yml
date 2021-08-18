@@ -20,8 +20,8 @@ jobs:
       - name: Install Dependencies
         run: yarn --ignore-scripts
 
-      - name: Formatting Check
+      - name: Check Formatting
         run: yarn format-check
 
-      - name: Linting Check
+      - name: Check Linting
         run: yarn lint
