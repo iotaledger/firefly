@@ -1,46 +1,46 @@
 import type { Bridge, CommunicationIds } from './bridge'
 
 export interface MigrationAddress {
-    bech32: string;
-    trytes: string;
+    bech32: string
+    trytes: string
 }
 
 export interface AddressInput {
-    address: string;
-    index: number;
+    address: string
+    index: number
 }
 
 export interface Input {
-    address: string;
-    balance: number;
-    spent: boolean;
-    index: number;
-    securityLevel: number;
+    address: string
+    balance: number
+    spent: boolean
+    index: number
+    securityLevel: number
     spentBundleHashes: string[]
 }
 
 export interface MigrationData {
-    lastCheckedAddressIndex: number;
-    balance: number;
-    inputs: Input[];
-    spentAddresses?: boolean;
+    lastCheckedAddressIndex: number
+    balance: number
+    inputs: Input[]
+    spentAddresses?: boolean
 }
 
 export interface MigrationBundle {
-    bundleHash: string;
-    crackability: number;
+    bundleHash: string
+    crackability: number
 }
 
 export interface SendMigrationBundleResponse {
-    address: string;
-    value: number;
-    tailTransactionHash: string;
+    address: string
+    value: number
+    tailTransactionHash: string
 }
 
 export interface Transfer {
-    address: string;
-    value: number;
-    tag: string;
+    address: string
+    value: number
+    tag: string
 }
 
 export enum RiskLevel {
@@ -48,22 +48,22 @@ export enum RiskLevel {
     HIGH = 10 ** -15,
     MEDIUM = 10 ** -17,
     LOW = 10 ** -19,
-    VERYLOW = 0
+    VERYLOW = 0,
 }
 
 /**
  * Gets data related to seed
- * 
+ *
  * @method getMigrationData
- * 
- * @param {Bridge} bridge 
- * @param {CommunicationIds} __ids 
- * @param {string} seed 
- * @param {string[]} nodes 
- * @param {number} [securityLevel] 
+ *
+ * @param {Bridge} bridge
+ * @param {CommunicationIds} __ids
+ * @param {string} seed
+ * @param {string[]} nodes
+ * @param {number} [securityLevel]
  * @param {number} [initialAddressIndex]
  * @param {string} [permanode]
- *  
+ *
  * @returns {Promise}
  */
 export function getMigrationData(
@@ -73,7 +73,7 @@ export function getMigrationData(
     nodes: string[],
     securityLevel?: number,
     initialAddressIndex?: number,
-    permanode?: string,
+    permanode?: string
 ) {
     return bridge({
         actorId: __ids.actorId,
@@ -84,25 +84,25 @@ export function getMigrationData(
             nodes,
             permanode,
             securityLevel,
-            initialAddressIndex
+            initialAddressIndex,
         },
     })
 }
 
 /**
  * Creates migration bundle
- * 
+ *
  * @method createMigrationBundle
- * 
- * @param {Bridge} bridge 
- * @param {CommunicationIds} __ids 
- * @param {string} seed 
+ *
+ * @param {Bridge} bridge
+ * @param {CommunicationIds} __ids
+ * @param {string} seed
  * @param {number[]} inputAddressIndexes
  * @param {boolean} mine
  * @param {number} timeoutSeconds
  * @param {number} offset
  * @param {string} logFileName
- * 
+ *
  * @returns {Promise}
  */
 export function createMigrationBundle(
@@ -125,31 +125,25 @@ export function createMigrationBundle(
             mine,
             timeoutSeconds,
             offset,
-            logFileName
+            logFileName,
         },
     })
 }
 
 /**
  * Creates migration bundle
- * 
+ *
  * @method createMigrationBundle
- * 
- * @param {Bridge} bridge 
- * @param {CommunicationIds} __ids 
- * @param {string[]} node 
+ *
+ * @param {Bridge} bridge
+ * @param {CommunicationIds} __ids
+ * @param {string[]} node
  * @param {string} bundleHash
- * @param {number} mwm 
- * 
+ * @param {number} mwm
+ *
  * @returns {Promise}
  */
-export function sendMigrationBundle(
-    bridge: Bridge,
-    __ids: CommunicationIds,
-    nodes: string[],
-    bundleHash: string,
-    mwm: number
-) {
+export function sendMigrationBundle(bridge: Bridge, __ids: CommunicationIds, nodes: string[], bundleHash: string, mwm: number) {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -157,51 +151,46 @@ export function sendMigrationBundle(
         payload: {
             nodes,
             bundleHash,
-            mwm
+            mwm,
         },
     })
 }
 
 /**
  * Gets migration address
- * 
+ *
  * @method getMigrationAddress
- * 
- * @param {Bridge} bridge 
- * @param {CommunicationIds} __ids 
+ *
+ * @param {Bridge} bridge
+ * @param {CommunicationIds} __ids
  * @param {boolean} prompt
- * 
+ *
  * @returns {Promise}
  */
-export function getMigrationAddress(
-    bridge: Bridge,
-    __ids: CommunicationIds,
-    ledgerPrompt: boolean,
-    accountIndex: number
-) {
+export function getMigrationAddress(bridge: Bridge, __ids: CommunicationIds, ledgerPrompt: boolean, accountIndex: number) {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
         cmd: 'GetMigrationAddress',
         payload: {
             ledger_prompt: ledgerPrompt,
-            account_id: accountIndex
-        }
+            account_id: accountIndex,
+        },
     })
 }
 
 /**
  * Mine bundle
- * 
+ *
  * @method mineBundle
- * 
- * @param {Bridge} bridge 
- * @param {CommunicationIds} __ids 
+ *
+ * @param {Bridge} bridge
+ * @param {CommunicationIds} __ids
  * @param {string[]} preparedBundle
  * @param {string[]} spentBundleHashes
  * @param {number} timeout
  * @param {number} offset
- * 
+ *
  * @returns {Promise}
  */
 export function mineBundle(
@@ -222,24 +211,24 @@ export function mineBundle(
             spentBundleHashes,
             securityLevel,
             timeout,
-            offset
-        }
+            offset,
+        },
     })
 }
 
 /**
  * Gets transaction history and balance for ledger addresses
- * 
+ *
  * @method getLedgerMigrationData
- * 
- * @param {Bridge} bridge 
- * @param {CommunicationIds} __ids 
- * @param {string} seed 
- * @param {string[]} nodes 
- * @param {number} [securityLevel] 
+ *
+ * @param {Bridge} bridge
+ * @param {CommunicationIds} __ids
+ * @param {string} seed
+ * @param {string[]} nodes
+ * @param {number} [securityLevel]
  * @param {number} [initialAddressIndex]
  * @param {string} [permanode]
- *  
+ *
  * @returns {Promise}
  */
 export function getLedgerMigrationData(
@@ -258,22 +247,22 @@ export function getLedgerMigrationData(
             addresses: addresses.map((object) => JSON.stringify(object)),
             nodes,
             permanode,
-            securityLevel
+            securityLevel,
         },
     })
 }
 
 /**
  * Sends ledger migration bundle
- * 
+ *
  * @method sendLedgerMigrationBundle
- * 
- * @param {Bridge} bridge 
- * @param {CommunicationIds} __ids 
- * @param {string[]} node 
+ *
+ * @param {Bridge} bridge
+ * @param {CommunicationIds} __ids
+ * @param {string[]} node
  * @param {string[]} bundles
- * @param {number} mwm 
- * 
+ * @param {number} mwm
+ *
  * @returns {Promise}
  */
 export function sendLedgerMigrationBundle(
@@ -290,31 +279,27 @@ export function sendLedgerMigrationBundle(
         payload: {
             nodes,
             bundle,
-            mwm
+            mwm,
         },
     })
 }
 
 /**
  * Gets a legacy address with checksum.
- * 
+ *
  * @method getLegacyAddressChecksum
- * 
- * @param {Bridge} bridge 
- * @param {CommunicationIds} __ids 
+ *
+ * @param {Bridge} bridge
+ * @param {CommunicationIds} __ids
  * @param {string} address
- * 
+ *
  * @returns {Promise}
  */
-export function getLegacyAddressChecksum(
-    bridge: Bridge,
-    __ids: CommunicationIds,
-    address: string
-) {
+export function getLegacyAddressChecksum(bridge: Bridge, __ids: CommunicationIds, address: string) {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
         cmd: 'GetLegacyAddressChecksum',
-        payload: address
+        payload: address,
     })
 }

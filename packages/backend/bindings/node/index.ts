@@ -22,12 +22,9 @@ import {
     setAlias as _setAlias,
     getNodeInfo as _getNodeInfo,
     startBackgroundSync as _startBackgroundSync,
-    stopBackgroundSync as _stopBackgroundSync
+    stopBackgroundSync as _stopBackgroundSync,
 } from '../../../shared/lib/typings/account'
-import {
-    Transfer,
-    reattach as _reattach
-} from '../../../shared/lib/typings/message'
+import { Transfer, reattach as _reattach } from '../../../shared/lib/typings/message'
 import {
     getMigrationData as _getMigrationData,
     createMigrationBundle as _createMigrationBundle,
@@ -37,7 +34,7 @@ import {
     getLedgerMigrationData as _getLedgerMigrationData,
     sendLedgerMigrationBundle as _sendLedgerMigrationBundle,
     getLegacyAddressChecksum as _getLegacyAddressChecksum,
-    AddressInput
+    AddressInput,
 } from '../../../shared/lib/typings/migration'
 import {
     LoggerConfig,
@@ -57,7 +54,7 @@ import {
     setClientOptions as _setClientOptions,
     getLedgerDeviceStatus as _getLedgerDeviceStatus,
     setStrongholdPasswordClearInterval as _setStrongholdPasswordClearInterval,
-    getLegacySeedChecksum as _getLegacySeedChecksum
+    getLegacySeedChecksum as _getLegacySeedChecksum,
 } from '../../../shared/lib/typings/wallet'
 import { ClientOptions } from '../../../shared/lib/typings/client'
 import { NodeAuth } from '../../../shared/lib/typings/node'
@@ -76,19 +73,23 @@ function _poll(runtime: typeof addon.ActorSystem, cb: (error: string, data: any)
 }
 
 function sendMessage(message: BridgeMessage): Promise<string> {
-    const id = message.id;
+    const id = message.id
 
-    return new Promise(resolve => addon.sendMessage(JSON.stringify(message), () => resolve(id)))
+    return new Promise((resolve) => addon.sendMessage(JSON.stringify(message), () => resolve(id)))
 }
 
 export function init(id: string, storagePath?: string) {
     const runtime = storagePath ? new addon.ActorSystem(id, storagePath) : new addon.ActorSystem(id)
     let destroyed = false
-    _poll(runtime, (error, data) => {
-        const message = error || data
-        mailbox.push(message)
-        onMessageListeners.forEach(listener => listener(message))
-    }, () => destroyed)
+    _poll(
+        runtime,
+        (error, data) => {
+            const message = error || data
+            mailbox.push(message)
+            onMessageListeners.forEach((listener) => listener(message))
+        },
+        () => destroyed
+    )
     return {
         destroy() {
             destroyed = true
@@ -96,7 +97,7 @@ export function init(id: string, storagePath?: string) {
         },
         removeEventListeners() {
             runtime.removeEventListeners()
-        }
+        },
     }
 }
 
@@ -109,197 +110,260 @@ export function initLogger(config: LoggerConfig) {
 }
 
 export const api = {
-    setAlias: function (accountId: AccountIdentifier, newAccountAlias: string): ((__ids: CommunicationIds) => Promise<string>) {
+    setAlias: function (
+        accountId: AccountIdentifier,
+        newAccountAlias: string
+    ): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _setAlias(sendMessage, __ids, accountId, newAccountAlias)
     },
-    getStrongholdStatus: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    getStrongholdStatus: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _getStrongholdStatus(sendMessage, __ids)
     },
-    lockStronghold: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    lockStronghold: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _lockStronghold(sendMessage, __ids)
     },
-    generateMnemonic: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    generateMnemonic: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _generateMnemonic(sendMessage, __ids)
     },
-    storeMnemonic: function (mnemonic?: string): ((__ids: CommunicationIds) => Promise<string>) {
-        return (__ids: CommunicationIds) => _storeMnemonic(sendMessage, __ids, {
-            signerType: { type: 'Stronghold' },
-            mnemonic: mnemonic || null
-        })
+    storeMnemonic: function (mnemonic?: string): (__ids: CommunicationIds) => Promise<string> {
+        return (__ids: CommunicationIds) =>
+            _storeMnemonic(sendMessage, __ids, {
+                signerType: { type: 'Stronghold' },
+                mnemonic: mnemonic || null,
+            })
     },
-    verifyMnemonic: function (mnemonic: string): ((__ids: CommunicationIds) => Promise<string>) {
+    verifyMnemonic: function (mnemonic: string): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _verifyMnemonic(sendMessage, __ids, mnemonic)
     },
-    createAccount: function (account: AccountToCreate): ((__ids: CommunicationIds) => Promise<string>) {
+    createAccount: function (account: AccountToCreate): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _createAccount(sendMessage, __ids, account)
     },
-    removeAccount: function (accountId: AccountIdentifier): ((__ids: CommunicationIds) => Promise<string>) {
+    removeAccount: function (accountId: AccountIdentifier): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _removeAccount(sendMessage, __ids, accountId)
     },
-    getAccount: function (accountId: AccountIdentifier): ((__ids: CommunicationIds) => Promise<string>) {
+    getAccount: function (accountId: AccountIdentifier): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _getAccount(sendMessage, __ids, accountId)
     },
-    getAccounts: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    getAccounts: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _getAccounts(sendMessage, __ids)
     },
-    syncAccounts: function (addressIndex?: number, gapLimit?: number, accountDiscoveryThreshold?: number): ((__ids: CommunicationIds) => Promise<string>) {
-        return (__ids: CommunicationIds) => _syncAccounts(sendMessage, __ids, addressIndex, gapLimit, accountDiscoveryThreshold)
+    syncAccounts: function (
+        addressIndex?: number,
+        gapLimit?: number,
+        accountDiscoveryThreshold?: number
+    ): (__ids: CommunicationIds) => Promise<string> {
+        return (__ids: CommunicationIds) =>
+            _syncAccounts(sendMessage, __ids, addressIndex, gapLimit, accountDiscoveryThreshold)
     },
-    startBackgroundSync: function (pollingInterval: Duration, automaticOutputConsolidation: boolean): ((__ids: CommunicationIds) => Promise<string>) {
-        return (__ids: CommunicationIds) => _startBackgroundSync(sendMessage, __ids, pollingInterval, automaticOutputConsolidation)
+    startBackgroundSync: function (
+        pollingInterval: Duration,
+        automaticOutputConsolidation: boolean
+    ): (__ids: CommunicationIds) => Promise<string> {
+        return (__ids: CommunicationIds) =>
+            _startBackgroundSync(sendMessage, __ids, pollingInterval, automaticOutputConsolidation)
     },
-    stopBackgroundSync: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    stopBackgroundSync: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _stopBackgroundSync(sendMessage, __ids)
     },
-    areLatestAddressesUnused: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    areLatestAddressesUnused: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _areLatestAddressesUnused(sendMessage, __ids)
     },
-    generateAddress: function (accountId: AccountIdentifier): ((__ids: CommunicationIds) => Promise<string>) {
+    generateAddress: function (accountId: AccountIdentifier): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _generateAddress(sendMessage, __ids, accountId)
     },
-    getUnusedAddress: function (accountId: AccountIdentifier): ((__ids: CommunicationIds) => Promise<string>) {
+    getUnusedAddress: function (accountId: AccountIdentifier): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _getUnusedAddress(sendMessage, __ids, accountId)
     },
-    listMessages: function (accountId: AccountIdentifier, filters?: ListMessagesFilter): ((__ids: CommunicationIds) => Promise<string>) {
+    listMessages: function (
+        accountId: AccountIdentifier,
+        filters?: ListMessagesFilter
+    ): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _listMessages(sendMessage, __ids, accountId, filters)
     },
-    listAddresses: function (accountId: AccountIdentifier, unspent?: boolean): ((__ids: CommunicationIds) => Promise<string>) {
+    listAddresses: function (
+        accountId: AccountIdentifier,
+        unspent?: boolean
+    ): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _listAddresses(sendMessage, __ids, accountId, unspent)
     },
-    getBalance: function (accountId: AccountIdentifier): ((__ids: CommunicationIds) => Promise<string>) {
+    getBalance: function (accountId: AccountIdentifier): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _getBalance(sendMessage, __ids, accountId)
     },
-    latestAddress: function (accountId: AccountIdentifier): ((__ids: CommunicationIds) => Promise<string>) {
+    latestAddress: function (accountId: AccountIdentifier): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _latestAddress(sendMessage, __ids, accountId)
     },
-    syncAccount: function (accountId: AccountIdentifier, options?: SyncAccountOptions): ((__ids: CommunicationIds) => Promise<string>) {
+    syncAccount: function (
+        accountId: AccountIdentifier,
+        options?: SyncAccountOptions
+    ): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _syncAccount(sendMessage, __ids, accountId, options)
     },
-    isLatestAddressUnused: function (accountId: AccountIdentifier): ((__ids: CommunicationIds) => Promise<string>) {
+    isLatestAddressUnused: function (accountId: AccountIdentifier): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _isLatestAddressUnused(sendMessage, __ids, accountId)
     },
-    reattach: function (accountId: AccountIdentifier, messageId: string): ((__ids: CommunicationIds) => Promise<string>) {
+    reattach: function (accountId: AccountIdentifier, messageId: string): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _reattach(sendMessage, __ids, accountId, messageId)
     },
-    backup: function (destinationPath: string, password: string): ((__ids: CommunicationIds) => Promise<string>) {
+    backup: function (destinationPath: string, password: string): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _backup(sendMessage, __ids, destinationPath, password)
     },
-    restoreBackup: function (backupPath: string, password: string): ((__ids: CommunicationIds) => Promise<string>) {
+    restoreBackup: function (backupPath: string, password: string): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _restoreBackup(sendMessage, __ids, backupPath, password)
     },
-    setStrongholdPassword: function (password: string): ((__ids: CommunicationIds) => Promise<string>) {
+    setStrongholdPassword: function (password: string): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _setStrongholdPassword(sendMessage, __ids, password)
     },
-    changeStrongholdPassword: function (currentPassword: string, newPassword: string): ((__ids: CommunicationIds) => Promise<string>) {
-        return (__ids: CommunicationIds) => _changeStrongholdPassword(sendMessage, __ids, {
-            currentPassword,
-            newPassword
-        })
+    changeStrongholdPassword: function (
+        currentPassword: string,
+        newPassword: string
+    ): (__ids: CommunicationIds) => Promise<string> {
+        return (__ids: CommunicationIds) =>
+            _changeStrongholdPassword(sendMessage, __ids, {
+                currentPassword,
+                newPassword,
+            })
     },
-    setStoragePassword: function (password: string): ((__ids: CommunicationIds) => Promise<string>) {
+    setStoragePassword: function (password: string): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _setStoragePassword(sendMessage, __ids, password)
     },
-    removeStorage: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    removeStorage: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _removeStorage(sendMessage, __ids)
     },
-    send: function (fromAccountId: AccountIdentifier, transfer: Transfer): ((__ids: CommunicationIds) => Promise<string>) {
+    send: function (
+        fromAccountId: AccountIdentifier,
+        transfer: Transfer
+    ): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _send(sendMessage, __ids, fromAccountId, transfer)
     },
-    internalTransfer: function (fromAccountId: AccountIdentifier, toAccountId: AccountIdentifier, amount: number): ((__ids: CommunicationIds) => Promise<string>) {
+    internalTransfer: function (
+        fromAccountId: AccountIdentifier,
+        toAccountId: AccountIdentifier,
+        amount: number
+    ): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _internalTransfer(sendMessage, __ids, fromAccountId, toAccountId, amount)
     },
-    setClientOptions: function (options: ClientOptions): ((__ids: CommunicationIds) => Promise<string>) {
+    setClientOptions: function (options: ClientOptions): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _setClientOptions(sendMessage, __ids, options)
     },
-    setStrongholdPasswordClearInterval: function (interval: Duration): ((__ids: CommunicationIds) => Promise<string>) {
+    setStrongholdPasswordClearInterval: function (interval: Duration): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _setStrongholdPasswordClearInterval(sendMessage, __ids, interval)
     },
-    getLegacySeedChecksum: function (seed: string): ((__ids: CommunicationIds) => Promise<string>) {
+    getLegacySeedChecksum: function (seed: string): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _getLegacySeedChecksum(sendMessage, __ids, seed)
     },
 
     // Migration related methods
-    getMigrationData: function (seed: string, nodes: string[], securityLevel?: number, initialAddressIndex?: number, permanode?: string):
-        ((__ids: CommunicationIds) => Promise<string>) {
-        return (__ids: CommunicationIds) => _getMigrationData(
-            sendMessage,
-            __ids,
-            seed,
-            nodes,
-            securityLevel,
-            initialAddressIndex,
-            permanode,
-        )
+    getMigrationData: function (
+        seed: string,
+        nodes: string[],
+        securityLevel?: number,
+        initialAddressIndex?: number,
+        permanode?: string
+    ): (__ids: CommunicationIds) => Promise<string> {
+        return (__ids: CommunicationIds) =>
+            _getMigrationData(sendMessage, __ids, seed, nodes, securityLevel, initialAddressIndex, permanode)
     },
-    createMigrationBundle: function (seed: string, inputAddressIndexes: number[], mine: boolean, timeoutSeconds: number, offset: number, logFileName: string):
-        ((__ids: CommunicationIds) => Promise<string>) {
-        return (__ids: CommunicationIds) => _createMigrationBundle(sendMessage, __ids, seed, inputAddressIndexes, mine, timeoutSeconds, offset, logFileName)
+    createMigrationBundle: function (
+        seed: string,
+        inputAddressIndexes: number[],
+        mine: boolean,
+        timeoutSeconds: number,
+        offset: number,
+        logFileName: string
+    ): (__ids: CommunicationIds) => Promise<string> {
+        return (__ids: CommunicationIds) =>
+            _createMigrationBundle(
+                sendMessage,
+                __ids,
+                seed,
+                inputAddressIndexes,
+                mine,
+                timeoutSeconds,
+                offset,
+                logFileName
+            )
     },
-    sendMigrationBundle: function (nodes: string[], bundleHash: string, mwm: number):
-        ((__ids: CommunicationIds) => Promise<string>) {
+    sendMigrationBundle: function (
+        nodes: string[],
+        bundleHash: string,
+        mwm: number
+    ): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _sendMigrationBundle(sendMessage, __ids, nodes, bundleHash, mwm)
     },
-    getMigrationAddress: function (prompt: boolean, accountIndex: number):
-        ((__ids: CommunicationIds) => Promise<string>) {
+    getMigrationAddress: function (
+        prompt: boolean,
+        accountIndex: number
+    ): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _getMigrationAddreess(sendMessage, __ids, prompt, accountIndex)
     },
-    mineBundle: function (bundle: string[], spentBundleHashes: string[], securityLevel: number, timeout: number, offset: number):
-        ((__ids: CommunicationIds) => Promise<string>) {
-        return (__ids: CommunicationIds) => _mineBundle(sendMessage, __ids, bundle, spentBundleHashes, securityLevel, timeout, offset)
+    mineBundle: function (
+        bundle: string[],
+        spentBundleHashes: string[],
+        securityLevel: number,
+        timeout: number,
+        offset: number
+    ): (__ids: CommunicationIds) => Promise<string> {
+        return (__ids: CommunicationIds) =>
+            _mineBundle(sendMessage, __ids, bundle, spentBundleHashes, securityLevel, timeout, offset)
     },
-    getLedgerMigrationData: function (addresses: AddressInput[], nodes: string[], permanode: string, securityLevel: number):
-        ((__ids: CommunicationIds) => Promise<string>) {
-        return (__ids: CommunicationIds) => _getLedgerMigrationData(
-            sendMessage,
-            __ids,
-            addresses,
-            nodes,
-            permanode,
-            securityLevel
-        )
+    getLedgerMigrationData: function (
+        addresses: AddressInput[],
+        nodes: string[],
+        permanode: string,
+        securityLevel: number
+    ): (__ids: CommunicationIds) => Promise<string> {
+        return (__ids: CommunicationIds) =>
+            _getLedgerMigrationData(sendMessage, __ids, addresses, nodes, permanode, securityLevel)
     },
-    sendLedgerMigrationBundle: function (nodes: string[], bundle: string[], mwm: number):
-        ((__ids: CommunicationIds) => Promise<string>) {
+    sendLedgerMigrationBundle: function (
+        nodes: string[],
+        bundle: string[],
+        mwm: number
+    ): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _sendLedgerMigrationBundle(sendMessage, __ids, nodes, bundle, mwm)
     },
-    getNodeInfo: function (accountId: AccountIdentifier, url?: string, auth?: NodeAuth): ((__ids: CommunicationIds) => Promise<string>) {
+    getNodeInfo: function (
+        accountId: AccountIdentifier,
+        url?: string,
+        auth?: NodeAuth
+    ): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _getNodeInfo(sendMessage, __ids, accountId, url, auth)
     },
-    getLegacyAddressChecksum: function (address: string): ((__ids: CommunicationIds) => Promise<string>) {
+    getLegacyAddressChecksum: function (address: string): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _getLegacyAddressChecksum(sendMessage, __ids, address)
     },
     // Event emitters
-    onError: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    onError: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'ErrorThrown')
     },
-    onBalanceChange: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    onBalanceChange: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'BalanceChange')
     },
-    onNewTransaction: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    onNewTransaction: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'NewTransaction')
     },
-    onConfirmationStateChange: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    onConfirmationStateChange: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'ConfirmationStateChange')
     },
-    onReattachment: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    onReattachment: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'Reattachment')
     },
-    onBroadcast: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    onBroadcast: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'Broadcast')
     },
-    onStrongholdStatusChange: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    onStrongholdStatusChange: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'StrongholdStatusChange')
     },
-    onTransferProgress: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    onTransferProgress: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'TransferProgress')
     },
-    onLedgerAddressGeneration: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    onLedgerAddressGeneration: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'LedgerAddressGeneration')
     },
-    getLedgerDeviceStatus: function (isSimulator: boolean): ((__ids: CommunicationIds) => Promise<string>) {
+    getLedgerDeviceStatus: function (isSimulator: boolean): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _getLedgerDeviceStatus(sendMessage, __ids, isSimulator)
     },
-    onMigrationProgress: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    onMigrationProgress: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'MigrationProgress')
     },
-};
+}

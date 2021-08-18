@@ -1,5 +1,5 @@
 /**
- * Returns localised Electron menu items 
+ * Returns localised Electron menu items
  *
  * @method getLocalisedMenuItems
  *
@@ -39,6 +39,6 @@ export const getLocalisedMenuItems = (locale) => {
         documentation: locale('views.settings.documentation.title'),
         discord: locale('views.settings.discord.title'),
         reportAnIssue: locale('actions.reportAnIssue'),
-        version: locale('general.version')
+        version: locale('general.version'),
     }
 }

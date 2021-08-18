@@ -7,13 +7,15 @@ contextBridge.exposeInMainWorld('error', {
             return {
                 iconPath: './assets/logos/firefly_logo.svg',
                 version,
-                diagnostics: data.diagnostics.map((d) => `${d.label.replace('popups.diagnostics.', '')}: ${d.value}`).join('\r\n'),
+                diagnostics: data.diagnostics
+                    .map((d) => `${d.label.replace('popups.diagnostics.', '')}: ${d.value}`)
+                    .join('\r\n'),
                 errorType: data.errorType,
-                error: data.error
+                error: data.error,
             }
         })
     },
     openUrl: (url) => {
         ipcRenderer.invoke('open-url', url)
-    }
-}) 
+    },
+})

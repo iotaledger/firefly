@@ -12,8 +12,5 @@
         "packages/shared/routes",
         "packages/shared/tailwind.config.js"
     ],
-    "exclude": [
-        ".eslintrc.js",
-        "**/node_modules"
-    ]
+    "exclude": [".eslintrc.js", "**/node_modules"]
 }

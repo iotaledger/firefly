@@ -14,7 +14,7 @@ module.exports = {
         {
             files: '**/*.svelte',
             processor: 'svelte3/svelte3',
-        }
+        },
     ],
     parser: '@typescript-eslint/parser',
     parserOptions: {
@@ -22,19 +22,16 @@ module.exports = {
         extraFileExtensions: ['.svelte'],
         project: './tsconfig.lint.json',
         sourceType: 'module',
-        tsconfigRootDir: './'
+        tsconfigRootDir: './',
     },
-    plugins: [
-        '@typescript-eslint',
-        'svelte3'
-    ],
+    plugins: ['@typescript-eslint', 'svelte3'],
     rules: {
         'a11y-autofocus': 'off',
         'arrow-body-style': 'off',
         'arrow-spacing': 'off',
         'eol-last': 'off',
         'func-call-spacing': 'off',
-        'indent': 'off',
+        indent: 'off',
         'linebreak-style': 'off',
         'no-alert': 'off',
         'no-async-promise-executor': 'off',
@@ -61,8 +58,8 @@ module.exports = {
         'prefer-arrow-callback': 'off',
         'prefer-const': 'off',
         'prefer-destructuring': 'off',
-        'quotes': 'off',
-        'semi': 'off',
+        quotes: 'off',
+        semi: 'off',
         'spaced-comment': 'off',
         '@typescript-eslint/await-thenable': 'off',
         '@typescript-eslint/ban-types': 'off',

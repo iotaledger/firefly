@@ -41,7 +41,13 @@ export const formatUnitBestMatch = (value: number, includeUnits: boolean = true,
  * @param overrideDecimalPlaces Override the default decimal places.
  * @param grouped Group the thousands
  */
-export function formatUnitPrecision(valueRaw: number, unit: Unit, includeUnits: boolean = true, grouped: boolean = false, overrideDecimalPlaces?: number): string {
+export function formatUnitPrecision(
+    valueRaw: number,
+    unit: Unit,
+    includeUnits: boolean = true,
+    grouped: boolean = false,
+    overrideDecimalPlaces?: number
+): string {
     // At the moment we have no symbol for IOTA so we always put the currency code
     // at the end, in the future when we have a symbol this can be updated to position
     // it correctly to the left when necessary
@@ -53,7 +59,13 @@ export function formatUnitPrecision(valueRaw: number, unit: Unit, includeUnits: 
 
     const converted = changeUnits(valueRaw, Unit.i, unit)
 
-    const formatted = formatNumber(converted, overrideDecimalPlaces ?? UNIT_MAP[unit].dp, overrideDecimalPlaces ?? UNIT_MAP[unit].dp, unit === Unit.i ? 0 : 2, grouped)
+    const formatted = formatNumber(
+        converted,
+        overrideDecimalPlaces ?? UNIT_MAP[unit].dp,
+        overrideDecimalPlaces ?? UNIT_MAP[unit].dp,
+        unit === Unit.i ? 0 : 2,
+        grouped
+    )
 
     if (includeUnits) {
         return currencyPosition === `left` ? `${formatted} ${unit}` : `${formatted} ${unit}`
@@ -104,11 +116,11 @@ const getUnit = (value: number): Unit => {
  */
 export const changeUnits = (value: number, fromUnit: Unit, toUnit: Unit): number => {
     if (value === 0) {
-        return 0;
+        return 0
     }
 
     if (fromUnit === toUnit) {
-        return value;
+        return value
     }
 
     const scaledValue = Number(new Big(value).times(UNIT_MAP[fromUnit].val).div(UNIT_MAP[toUnit].val))
