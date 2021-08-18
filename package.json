@@ -17,16 +17,21 @@
     "scripts": {
         "format": "prettier -w **/*.{ts,js,json,scss,css,md,yml}",
         "format-check": "prettier -c **/*.{ts,js,json,scss,css,md,yml}",
-        "lint": "eslint . --cache --debug",
+        "lint-debug": "eslint . --cache",
         "lint:backend": "eslint packages/backend",
         "lint:desktop": "eslint packages/desktop",
         "lint:mobile": "eslint packages/mobile",
         "lint:shared": "eslint packages/shared",
         "postinstall": "patch-package",
-        "pre-commit": "yarn format-check && yarn lint",
+        "pre-commit": "yarn format-check && yarn lint-debug",
         "prepare": "husky install"
     },
     "resolutions": {
         "lodash": ">=4.17.21"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "yarn pre-commit"
+        }
     }
 }
