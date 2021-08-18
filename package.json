@@ -22,7 +22,9 @@
         "lint:desktop": "eslint packages/desktop",
         "lint:mobile": "eslint packages/mobile",
         "lint:shared": "eslint packages/shared",
-        "postinstall": "patch-package"
+        "postinstall": "patch-package",
+        "pre-commit": "yarn format-check && yarn lint",
+        "prepare": "husky install"
     },
     "resolutions": {
         "lodash": ">=4.17.21"
