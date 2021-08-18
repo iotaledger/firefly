@@ -1,0 +1,14 @@
+// CAUTION: This tsconfig.json file is NOT meant to be
+// used for compilation or building.
+
+{
+    "include": [
+        "packages/backend/bindings/node",
+        "packages/desktop",
+        "packages/mobile",
+        "packages/shared"
+    ],
+    "exclude": [
+        "**/node_modules"
+    ]
+}

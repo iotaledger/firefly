@@ -1,0 +1,51 @@
+name: Firefly CI
+
+on:
+  pull_request:
+    branches:
+      - chore/**
+      - fix/**
+      - feat/**
+      - hotfix/**
+  push:
+    branches:
+      - develop
+
+jobs:
+  lint:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 12.x
+
+      - name: Yarn Cache Dir
+        id: yarn-cache-dir
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install Dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn --ignore-scripts
+
+      - name: Linter (Backend)
+        run: yarn lint:backend
+
+      - name: Linter (Desktop)
+        run: yarn lint:desktop
+
+      - name: Linter (Mobile)
+        run: yarn lint:mobile
+
+      - name: Linter (Shared)
+        run: yarn lint:shared

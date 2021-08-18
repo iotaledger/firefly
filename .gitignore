@@ -218,3 +218,6 @@ DerivedData/
 
 ## Vercel
 .vercel
+
+## Prettier / ESLint
+**/.eslintcache
