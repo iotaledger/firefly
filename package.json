@@ -17,7 +17,7 @@
     "scripts": {
         "format": "prettier -w **/*.{ts,js,json,scss,css}",
         "format-check": "prettier -c **/*.{ts,js,json,scss,css}",
-        "lint-debug": "eslint . --cache",
+        "lint-debug": "eslint . --cache --debug",
         "lint:backend": "eslint packages/backend",
         "lint:desktop": "eslint packages/desktop",
         "lint:mobile": "eslint packages/mobile",
