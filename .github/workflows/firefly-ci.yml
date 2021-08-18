@@ -3,13 +3,13 @@ name: Firefly CI
 on:
   pull_request:
     branches:
-      - chore/**
-      - fix/**
-      - feat/**
-      - hotfix/**
+      - 'chore/**'
+      - 'fix/**'
+      - 'feat/**'
+      - 'hotfix/**'
   push:
     branches:
-      - develop
+      - 'develop'
 
 jobs:
   lint:
