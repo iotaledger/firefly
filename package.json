@@ -10,7 +10,7 @@
         "@typescript-eslint/parser": "^4.29.2",
         "eslint": "^7.32.0",
         "eslint-plugin-svelte3": "^3.2.0",
-        "husky": "^7.0.1",
+        "husky": "^7.0.0",
         "patch-package": "^6.2.2",
         "prettier": "^2.3.2"
     },
@@ -23,15 +23,10 @@
         "lint:mobile": "eslint packages/mobile",
         "lint:shared": "eslint packages/shared",
         "postinstall": "patch-package",
-        "pre-commit": "yarn format-check && yarn lint-debug",
+        "pre-commit": "yarn lint-debug",
         "prepare": "husky install"
     },
     "resolutions": {
         "lodash": ">=4.17.21"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "yarn pre-commit"
-        }
     }
 }
