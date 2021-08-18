@@ -1,13 +1,10 @@
 name: Firefly CI
 
 on:
+  pull_request:
   push:
     branches:
       - 'develop'
-      - 'chore/**'
-      - 'fix/**'
-      - 'feat/**'
-      - 'hotfix/**'
 
 jobs:
   linting:
