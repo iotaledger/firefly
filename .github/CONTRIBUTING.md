@@ -50,7 +50,7 @@ Please check the following list:
 
 **Note:** If you find a **Closed** issue that seems similar to what you're experiencing, open a new issue and include a link to the original issue in the body of your new one.
 
-### Submitting A Bug Report
+### Submitting a bug report
 
 To report a bug, [open a new issue](https://github.com/iotaledger/wallet/issues/new), and be sure to include as many details as possible, using the template.
 
@@ -149,6 +149,8 @@ Before submitting a pull request, please follow these steps to have your contrib
 example that compiles and passes [documentation tests](https://doc.rust-lang.org/rustdoc/documentation-tests.html)
 
 - All instances of `unsafe` should have a comment that explains why its use was unavoidable
+
+- All code should pass formatting and linting checks
 
 - All code should be well tested, using unit tests and integration tests
 
