@@ -4,8 +4,8 @@ import { showAppNotification } from 'shared/lib/notifications'
 import validUrl from 'valid-url'
 import { Bech32 } from "shared/lib/bech32"
 
-export const VALID_MAINNET_ADDRESS = /^iota1[02-9ac-hj-np-z]{59}$/
-export const VALID_DEVNET_ADDRESS = /^atoi1[02-9ac-hj-np-z]{59}$/
+export const VALID_MAINNET_ADDRESS: RegExp = /^iota1[02-9ac-hj-np-z]{59}$/
+export const VALID_DEVNET_ADDRESS: RegExp = /^atoi1[02-9ac-hj-np-z]{59}$/
 export const ADDRESS_LENGTH = 64;
 export const PIN_LENGTH = 6;
 

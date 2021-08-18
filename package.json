@@ -9,15 +9,15 @@
         "@typescript-eslint/eslint-plugin": "^4.29.2",
         "@typescript-eslint/parser": "^4.29.2",
         "eslint": "^7.32.0",
-        "eslint-plugin-import": "^2.24.0",
         "eslint-plugin-svelte3": "^3.2.0",
+        "husky": "^7.0.1",
         "patch-package": "^6.2.2",
         "prettier": "^2.3.2"
     },
     "scripts": {
         "format": "prettier -w **/*.{ts,js,json,scss,css,md,yml}",
         "format-check": "prettier -c **/*.{ts,js,json,scss,css,md,yml}",
-        "lint": "eslint . --cache",
+        "lint": "eslint . --cache --debug",
         "lint:backend": "eslint packages/backend",
         "lint:desktop": "eslint packages/desktop",
         "lint:mobile": "eslint packages/mobile",

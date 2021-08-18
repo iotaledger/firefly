@@ -30,3 +30,6 @@ packages/shared/locales/
 
 # Common files and folders
 **/node_modules
+
+# ESLint configuration and files
+**/.eslintrc.js
