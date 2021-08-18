@@ -18,10 +18,10 @@
         "format": "prettier -w **/*.{ts,js,json,scss,css,md,yml}",
         "format-check": "prettier -c **/*.{ts,js,json,scss,css,md,yml}",
         "lint": "eslint . --cache",
-        "lint:backend": "eslint packages/backend --cache",
-        "lint:desktop": "eslint packages/desktop --cache",
-        "lint:mobile": "eslint packages/mobile --cache",
-        "lint:shared": "eslint packages/shared --cache",
+        "lint:backend": "eslint packages/backend",
+        "lint:desktop": "eslint packages/desktop",
+        "lint:mobile": "eslint packages/mobile",
+        "lint:shared": "eslint packages/shared",
         "postinstall": "patch-package"
     },
     "resolutions": {
