@@ -17,11 +17,8 @@
     "scripts": {
         "format": "prettier -w **/*.{ts,js,json,scss,css}",
         "format-check": "prettier -c **/*.{ts,js,json,scss,css}",
+        "lint": "eslint .",
         "lint-debug": "eslint . --cache --debug",
-        "lint:backend": "eslint packages/backend",
-        "lint:desktop": "eslint packages/desktop",
-        "lint:mobile": "eslint packages/mobile",
-        "lint:shared": "eslint packages/shared",
         "postinstall": "patch-package",
         "pre-commit": "yarn format-check && yarn lint-debug",
         "prepare": "husky install"
