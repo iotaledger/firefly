@@ -16,6 +16,7 @@ defined here.
 
 Contains all of the data for translations in other languages 
 (`en.json` (English) is used as a base for the translation).
+Please do __NOT__ modify any files besides `en.json` as the others are synced from [Crowdin](https://crowdin.com/project/iota-firefly).
 
 ## `routes`
 
