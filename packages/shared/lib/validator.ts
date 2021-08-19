@@ -1,4 +1,3 @@
-import type { MarketDataValidationResponse } from 'shared/lib/marketData'
 import type { ChrysalisVariablesValidationResponse } from 'shared/lib/migration'
 import type { Account, SyncedAccount } from './typings/account'
 import type { Address } from './typings/address'
@@ -9,6 +8,9 @@ import type { Message } from './typings/message'
 import type { MigrationData } from './typings/migration'
 import type { NodeInfo } from './typings/node'
 import type { StrongholdStatus } from './typings/wallet'
+import type { ErrorObject, ValidationResponse } from './typings/validator'
+import { ErrorTypes } from './typings/validator'
+import type { MarketDataValidationResponse } from './typings/market'
 
 type Validators =
     | IdValidator
@@ -22,22 +24,6 @@ type Validators =
     | StrongholdStatusValidator
     | AddressValidator
     | NodeInfoValidator
-
-export enum ErrorTypes {
-    UnknownId = 'UnknownId',
-    InvalidType = 'InvalidType',
-    EmptyResponse = 'EmptyResponse',
-}
-
-type ErrorObject = {
-    type: ErrorTypes
-    error: string
-}
-
-export type ValidationResponse = {
-    isValid: boolean
-    payload: ErrorObject
-}
 
 class Validator {
     nextValidator: Validators

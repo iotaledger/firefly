@@ -78,7 +78,7 @@ function sendMessage(message: BridgeMessage): Promise<string> {
     return new Promise((resolve) => addon.sendMessage(JSON.stringify(message), () => resolve(id)))
 }
 
-export function init(id: string, storagePath?: string): { destroy: () => void, removeEventListeners: () => void } {
+export function init(id: string, storagePath?: string): { destroy: () => void; removeEventListeners: () => void } {
     const runtime = storagePath ? new addon.ActorSystem(id, storagePath) : new addon.ActorSystem(id)
     let destroyed = false
     _poll(

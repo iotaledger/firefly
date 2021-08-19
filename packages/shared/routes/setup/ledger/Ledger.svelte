@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
-    import { currentLedgerMigrationProgress, LedgerMigrationProgress } from 'shared/lib/migration'
+    import { currentLedgerMigrationProgress } from 'shared/lib/migration'
     import { ledgerRoute, ledgerRouteHistory, walletSetupType } from 'shared/lib/router'
     import { LedgerRoutes, SetupType } from 'shared/lib/typings/routes'
     import { createEventDispatcher, onMount } from 'svelte'
@@ -14,8 +14,11 @@
         RestoreFromLedger,
         SwitchApps,
     } from './views/'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { LedgerMigrationProgress } from 'shared/lib/typings/migration'
 
-    export let locale
+    export let locale: Locale
+
     export let mobile
 
     const dispatch = createEventDispatcher()

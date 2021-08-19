@@ -4,7 +4,7 @@
     import { appSettings } from 'shared/lib/appSettings'
     import { goto } from 'shared/lib/helpers'
     import { dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
-    import { fetchMarketData } from 'shared/lib/marketData'
+    import { fetchMarketData } from 'shared/lib/market'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
     import { initRouter, routerNext, routerPrevious } from 'shared/lib/router'
     import { AppRoute } from 'shared/lib/typings/routes'

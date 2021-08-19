@@ -2,9 +2,11 @@
     import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
     import { createEventDispatcher, getContext } from 'svelte'
     import type { Writable } from 'svelte/store'
-    import { ImportType } from '../Import.svelte'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { ImportType } from 'shared/lib/typings/profile'
 
-    export let locale
+    export let locale: Locale
+
     export let mobile
 
     const dispatch = createEventDispatcher()

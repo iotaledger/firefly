@@ -4,8 +4,10 @@
     import { isSoftwareProfile } from 'shared/lib/profile'
     import { api, selectedAccountId } from 'shared/lib/wallet'
     import { AccountIdentifier } from 'shared/lib/typings/account'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     export let account
     export let deleteAccount = (selectedAccountId: AccountIdentifier): void => {}
     export let hasMultipleAccounts

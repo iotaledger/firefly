@@ -2,8 +2,9 @@
     import { Animation, Button, Illustration, Link, Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { closePopup } from 'shared/lib/popup'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
     let stepIndex = 0
     const stepAnimations = ['ledger-background-live-desktop', 'ledger-pin-desktop', 'ledger-open-app-desktop', 'ledger-support']

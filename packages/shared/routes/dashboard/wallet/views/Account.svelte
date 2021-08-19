@@ -1,15 +1,16 @@
 <script lang="typescript">
     import { AccountActionsModal, DashboardPane } from 'shared/components'
-    import type { AccountMessage, WalletAccount } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable } from 'svelte/store'
     import { AccountActions, AccountBalance, AccountHistory, AccountNavigation, BarChart, LineChart } from '.'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { AccountMessage, WalletAccount } from 'shared/lib/typings/wallet'
 
-    export let locale
+    export let locale: Locale
 
-    export let onSend
-    export let onInternalTransfer
-    export let onGenerateAddress
+    export let onSend = (...args: any[]): void => {}
+    export let onInternalTransfer = (...args: any[]): void => {}
+    export let onGenerateAddress = (...args: any[]): void => {}
 
     export let isGeneratingAddress
 

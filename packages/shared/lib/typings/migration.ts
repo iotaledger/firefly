@@ -1,4 +1,5 @@
 import type { Bridge, CommunicationIds } from './bridge'
+import type { Writable } from 'svelte/store'
 
 export interface MigrationAddress {
     bech32: string
@@ -49,6 +50,51 @@ export enum RiskLevel {
     MEDIUM = 10 ** -17,
     LOW = 10 ** -19,
     VERYLOW = 0,
+}
+
+export interface MigrationLog {
+    bundleHash: string
+    trytes: string[]
+    receiveAddressTrytes: string
+    balance: number
+    timestamp: string
+    spentAddresses: string[]
+    spentBundleHashes: string[]
+    mine: boolean
+    crackability: number | null
+}
+
+export interface Bundle {
+    index: number
+    shouldMine: boolean
+    selectedToMine: boolean
+    bundleHash?: string
+    crackability?: number
+    migrated: boolean
+    selected: boolean
+    inputs: Input[]
+    miningRuns: number
+    confirmed: boolean
+    trytes?: string[]
+}
+
+export interface HardwareIndexes {
+    accountIndex: number
+    pageIndex: number
+}
+
+export interface MigrationState {
+    didComplete: Writable<boolean>
+    data: Writable<MigrationData>
+    seed: Writable<string>
+    bundles: Writable<Bundle[]>
+}
+
+export enum LedgerMigrationProgress {
+    InstallLedgerApp,
+    GenerateAddress,
+    SwitchLedgerApp,
+    TransferFunds,
 }
 
 /**

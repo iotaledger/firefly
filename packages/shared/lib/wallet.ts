@@ -1,12 +1,9 @@
 import { mnemonic } from 'shared/lib/app'
-import { convertToFiat, currencies, CurrencyTypes, exchangeRates, formatCurrency } from 'shared/lib/currency'
 import { stripTrailingSlash } from 'shared/lib/helpers'
 import { localize } from 'shared/lib/i18n'
-import type { PriceData } from 'shared/lib/marketData'
-import { HistoryDataProps } from 'shared/lib/marketData'
 import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
 import { showAppNotification, showSystemNotification } from 'shared/lib/notifications'
-import { activeProfile, isLedgerProfile, isStrongholdLocked, ProfileType, updateProfile } from 'shared/lib/profile'
+import { activeProfile, isLedgerProfile, isStrongholdLocked, updateProfile } from 'shared/lib/profile'
 import type {
     Account,
     Account as BaseAccount,
@@ -37,18 +34,31 @@ import type {
     SendMigrationBundleResponse,
 } from 'shared/lib/typings/migration'
 import { formatUnitBestMatch } from 'shared/lib/units'
-import { get, writable, Writable } from 'svelte/store'
+import { get, writable } from 'svelte/store'
 import { openPopup } from './popup'
 import type { ClientOptions } from './typings/client'
 import type { LedgerStatus } from './typings/ledger'
 import type { Message } from './typings/message'
 import type { Node, NodeAuth, NodeInfo } from './typings/node'
 import { SetupType } from './typings/routes'
-import type { Duration, StrongholdStatus } from './typings/wallet'
+import type {
+    AccountMessage,
+    AccountsBalanceHistory,
+    BalanceHistory,
+    BalanceOverview,
+    Duration,
+    StrongholdStatus,
+    WalletAccount,
+    WalletState,
+} from './typings/wallet'
 import { displayNotificationForLedgerProfile } from './ledger'
 import { walletSetupType } from './router'
 import { didInitialiseMigrationListeners } from 'shared/lib/migration'
 import type { RecoveryPhrase } from './typings/mnemonic'
+import { CurrencyTypes } from './typings/currency'
+import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
+import { HistoryDataProps, PriceData } from './typings/market'
+import { ProfileType } from './typings/profile'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -63,58 +73,8 @@ export const STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS = 0
 
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
-export interface WalletAccount extends Account {
-    depositAddress: string
-    rawIotaBalance: number
-    balance: string
-    balanceEquiv: string
-    color: string
-}
-
-export interface AccountMessage extends Message {
-    account: number
-}
-
 interface ActorState {
     [id: string]: Actor
-}
-
-export type BalanceOverview = {
-    incoming: string
-    incomingRaw: number
-    outgoing: string
-    outgoingRaw: number
-    balance: string
-    balanceRaw: number
-    balanceFiat: string
-}
-
-type WalletState = {
-    balanceOverview: Writable<BalanceOverview>
-    accounts: Writable<WalletAccount[]>
-    accountsLoaded: Writable<boolean>
-    internalTransfersInProgress: Writable<{
-        [key: string]: {
-            from: string
-            to: string
-        }
-    }>
-}
-
-type BalanceTimestamp = {
-    timestamp: number
-    balance: number
-}
-
-export type BalanceHistory = {
-    [HistoryDataProps.ONE_HOUR]: BalanceTimestamp[]
-    [HistoryDataProps.SEVEN_DAYS]: BalanceTimestamp[]
-    [HistoryDataProps.TWENTY_FOUR_HOURS]: BalanceTimestamp[]
-    [HistoryDataProps.ONE_MONTH]: BalanceTimestamp[]
-}
-
-export type AccountsBalanceHistory = {
-    [accountIndex: number]: BalanceHistory
 }
 
 /** Active actors state */
@@ -633,7 +593,12 @@ export const asyncRemoveStorage = (): Promise<void> =>
         })
     })
 
-export const asyncSyncAccounts = (addressIndex?: number, gapLimit?: number, accountDiscoveryThreshold?: number, showErrorNotification = true): Promise<void> =>
+export const asyncSyncAccounts = (
+    addressIndex?: number,
+    gapLimit?: number,
+    accountDiscoveryThreshold?: number,
+    showErrorNotification = true
+): Promise<void> =>
     new Promise<void>((resolve, reject) => {
         isSyncing.set(true)
 

@@ -3,12 +3,71 @@ import type { Bridge, CommunicationIds } from './bridge'
 import type { ClientOptions } from './client'
 import type { Transfer } from './message'
 import type { MnemonicPayload } from './mnemonic'
+import type { Account } from './account'
+import type { Message } from './message'
+import type { Writable } from 'svelte/store'
+import { HistoryDataProps } from './market'
+
+export interface WalletAccount extends Account {
+    depositAddress: string
+    rawIotaBalance: number
+    balance: string
+    balanceEquiv: string
+    color: string
+}
+
+export interface AccountMessage extends Message {
+    account: number
+}
+
+export type BalanceOverview = {
+    incoming: string
+    incomingRaw: number
+    outgoing: string
+    outgoingRaw: number
+    balance: string
+    balanceRaw: number
+    balanceFiat: string
+}
+
+export type WalletState = {
+    balanceOverview: Writable<BalanceOverview>
+    accounts: Writable<WalletAccount[]>
+    accountsLoaded: Writable<boolean>
+    internalTransfersInProgress: Writable<{
+        [key: string]: {
+            from: string
+            to: string
+        }
+    }>
+}
+
+type BalanceTimestamp = {
+    timestamp: number
+    balance: number
+}
+
+export type BalanceHistory = {
+    [HistoryDataProps.ONE_HOUR]: BalanceTimestamp[]
+    [HistoryDataProps.SEVEN_DAYS]: BalanceTimestamp[]
+    [HistoryDataProps.TWENTY_FOUR_HOURS]: BalanceTimestamp[]
+    [HistoryDataProps.ONE_MONTH]: BalanceTimestamp[]
+}
+
+export type AccountsBalanceHistory = {
+    [accountIndex: number]: BalanceHistory
+}
 
 export interface StrongholdStatus {
     snapshot: {
         status: 'Locked' | 'Unlocked'
     }
     snapshotPath: string
+}
+
+export interface DateDiff {
+    unit: string
+    value?: number
 }
 
 export interface LoggerOutput {
@@ -32,7 +91,12 @@ export interface Duration {
     nanos: number
 }
 
-export function backup(bridge: Bridge, __ids: CommunicationIds, destinationPath: string, password: string): Promise<string> {
+export function backup(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+    destinationPath: string,
+    password: string
+): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -44,7 +108,12 @@ export function backup(bridge: Bridge, __ids: CommunicationIds, destinationPath:
     })
 }
 
-export function restoreBackup(bridge: Bridge, __ids: CommunicationIds, backupPath: string, password: string): Promise<string> {
+export function restoreBackup(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+    backupPath: string,
+    password: string
+): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -82,7 +151,12 @@ export function removeStorage(bridge: Bridge, __ids: CommunicationIds): Promise<
     })
 }
 
-export function send(bridge: Bridge, __ids: CommunicationIds, fromAccountId: AccountIdentifier, transfer: Transfer): Promise<string> {
+export function send(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+    fromAccountId: AccountIdentifier,
+    transfer: Transfer
+): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -136,7 +210,11 @@ export function lockStronghold(bridge: Bridge, __ids: CommunicationIds): Promise
     })
 }
 
-export function changeStrongholdPassword(bridge: Bridge, __ids: CommunicationIds, payload: StrongholdPasswordChange): Promise<string> {
+export function changeStrongholdPassword(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+    payload: StrongholdPasswordChange
+): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -163,7 +241,11 @@ export function getLedgerDeviceStatus(bridge: Bridge, __ids: CommunicationIds, i
     })
 }
 
-export function setStrongholdPasswordClearInterval(bridge: Bridge, __ids: CommunicationIds, payload: Duration): Promise<string> {
+export function setStrongholdPasswordClearInterval(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+    payload: Duration
+): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,

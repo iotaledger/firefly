@@ -10,6 +10,7 @@ const eslintRules = {
     'func-call-spacing': 'error',
     indent: ['error', 4, { SwitchCase: 1 }],
     'linebreak-style': 'off', // OFF b/c Windows (Git) puts CRLF line endings
+    'missing-declaration': 'off', // OFF b/c throws errors on imports / require statements
     'no-alert': 'error',
     'no-async-promise-executor': 'off', // OFF b/c used in lib/migration.ts
     'no-case-declarations': 'error',

@@ -1,7 +1,9 @@
 import { app, ipcMain, Menu, shell } from 'electron'
 import { WalletRoutes } from 'shared/lib/typings/routes'
 import { closeAboutWindow, getOrInitWindow, openAboutWindow } from '../main'
-import { menuState as state } from './menuState'
+import { menuState } from './menuState'
+
+let state = menuState
 
 /**
  * Creates a native menu tree and applies it to the application window

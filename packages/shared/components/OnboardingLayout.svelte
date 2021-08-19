@@ -2,13 +2,16 @@
     import { Icon, ProgressFlow, Text } from 'shared/components'
     import { ledgerMigrationProgresses, LEDGER_MIGRATION_VIDEO } from 'shared/lib/migration'
     import { openPopup } from 'shared/lib/popup'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     export let allowBack = true
-    export let onBackClick = (): void => {}
     export let busy = false
     export let showLedgerProgress = false
     export let showLedgerVideoButton = false
+
+    export let onBackClick = (): void => {}
 
     function handleWatchVideoClick() {
         openPopup({ type: 'video', props: { video: LEDGER_MIGRATION_VIDEO, title: locale('views.setupLedger.videoGuide') } })

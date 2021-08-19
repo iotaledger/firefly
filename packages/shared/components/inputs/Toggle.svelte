@@ -2,6 +2,7 @@
     export let active = false
     export let classes = ''
     export let color = 'blue'
+
     export let onClick = (): void => {}
 </script>
 

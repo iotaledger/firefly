@@ -4,17 +4,21 @@
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
-    import { selectedAccountId, selectedMessage, WalletAccount } from 'shared/lib/wallet'
+    import { selectedAccountId, selectedMessage } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable } from 'svelte/store'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
+
+    export let locale: Locale
+
+    export let isActive
 
     const account = getContext<Readable<WalletAccount>>('selectedAccount')
     const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
     const allAccounts = getContext<Readable<WalletAccount[]>>('walletAccounts')
     const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
 
-    export let isActive
-    export let locale
     const hidden = hiddenAccounts.includes($selectedAccountId)
     const canDelete = $account.index === $allAccounts.length - 1 && $account.rawIotaBalance === 0 && $account.messages.length === 0
 
@@ -23,8 +27,8 @@
         isActive = false
     }
 
-    const handlViewAddressHistoryClick = () => {
-        openPopup({ type: 'addressHistory', wide: true, props: { account } })
+    const handleViewAddressHistoryClick = () => {
+        openPopup({ type: 'addressHistory', props: { account } })
         isActive = false
     }
     const handleHideAccountClick = () => {
@@ -94,7 +98,7 @@
         </button>
         <!-- Address history -->
         <button
-            on:click={() => handlViewAddressHistoryClick()}
+            on:click={() => handleViewAddressHistoryClick()}
             class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full">
             <Icon icon="history" classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
             <Text smaller classes="group-hover:text-blue-500">{locale('actions.viewAddressHistory')}</Text>

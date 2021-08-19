@@ -1,7 +1,8 @@
 import type { Node } from './typings/node'
 import { isValidHttpsUrl, isValidUrl } from './utils'
+import { Network } from './typings/network'
 
-const DEFAULT_NETWORK = 'chrysalis-mainnet'
+const DEFAULT_NETWORK: Network = Network.ChrysalisMainnet
 
 const DEFAULT_NODES: Node[] = ['https://chrysalis-nodes.iota.org', 'https://chrysalis-nodes.iota.cafe'].map((url) => ({
     url,

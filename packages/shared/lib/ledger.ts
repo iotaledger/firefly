@@ -176,7 +176,7 @@ export function displayNotificationForLedgerProfile(
     return notificationId
 }
 
-export function isLedgerError(error: { name, type }): boolean {
+export function isLedgerError(error: { name; type }): boolean {
     if (!error) return false
 
     let errorType: string = ''
@@ -236,7 +236,7 @@ export function stopPollingLedgerStatus(): void {
     }
 }
 
-export function getLegacyErrorMessage(error: { name, statusCode }, shouldLocalize: boolean = false): string {
+export function getLegacyErrorMessage(error: { name; statusCode }, shouldLocalize: boolean = false): string {
     let errorMessage = 'error.global.generic'
     switch (error?.name) {
         case LegacyLedgerErrorName.TransportStatusError:

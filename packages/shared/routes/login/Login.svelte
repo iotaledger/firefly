@@ -2,8 +2,10 @@
     import { createEventDispatcher } from 'svelte'
     import { Transition } from 'shared/components'
     import { SelectProfile, EnterPin } from './views/'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+    
     export let mobile
 
     enum LoginState {

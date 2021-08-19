@@ -1,82 +1,15 @@
-import { AvailableExchangeRates } from 'shared/lib/currency'
 import { persistent } from 'shared/lib/helpers'
 import { ledgerSimulator } from 'shared/lib/ledger'
 import { generateRandomId } from 'shared/lib/utils'
-import type { WalletAccount } from 'shared/lib/wallet'
 import { destroyActor, getStoragePath, getWalletStoragePath } from 'shared/lib/wallet'
 import { derived, get, Readable, writable } from 'svelte/store'
-import type { ChartSelectors } from './chart'
 import { Electron } from './electron'
-import { HistoryDataProps } from './marketData'
 import type { ValuesOf } from './typings/utils'
-
-export interface MigratedTransaction {
-    address: string
-    balance: number
-    timestamp: string
-    account: number
-    tailTransactionHash: string
-}
-
-/**
- * Profile
- */
-export interface Profile {
-    id: string
-    name: string
-    type: ProfileType
-    /**
-     * Time for most recent stronghold back up
-     */
-    lastStrongholdBackupTime: Date | null
-    /**
-     * User settings
-     */
-    settings: UserSettings
-    hiddenAccounts?: string[]
-    migratedTransactions?: MigratedTransaction[]
-    isDeveloperProfile: boolean
-    hasVisitedDashboard?: boolean
-    ledgerMigrationCount?: number
-}
-
-/**
- * User Settings
- */
-export interface UserSettings {
-    currency: AvailableExchangeRates
-    automaticNodeSelection: boolean
-    includeOfficialNodes: boolean
-    disabledNodes: string[] | undefined
-    /** Lock screen timeout in minutes */
-    lockScreenTimeout: number
-    showHiddenAccounts?: boolean
-    chartSelectors: ChartSelectors
-    hideNetworkStatistics?: boolean
-}
-
-/**
- * Profile types
- */
-export enum ProfileType {
-    Software = 'Software',
-    Ledger = 'Ledger',
-    LedgerSimulator = 'LedgerSimulator',
-}
-
-/**
- * Profile import types
- */
-export enum ImportType {
-    Seed = 'seed',
-    Mnemonic = 'mnemonic',
-    File = 'file',
-    SeedVault = 'seedvault',
-    Stronghold = 'stronghold',
-    Ledger = 'ledger',
-    TrinityLedger = 'trinityLedger',
-    FireflyLedger = 'fireflyLedger',
-}
+import type { Profile, UserSettings } from './typings/profile'
+import { ProfileType } from './typings/profile'
+import { HistoryDataProps } from './typings/market'
+import { AvailableExchangeRates } from './typings/currency'
+import type { WalletAccount } from './typings/wallet'
 
 export const activeProfileId = writable<string | null>(null)
 
@@ -219,8 +152,6 @@ export const removeProfile = (id: string): void => {
     profiles.update((_profiles) => _profiles.filter((_profile) => _profile.id !== id))
 }
 
-
-
 /**
  * Updates a profile property
  *
@@ -230,10 +161,7 @@ export const removeProfile = (id: string): void => {
  *
  * @returns {void}
  */
-export const updateProfile = (
-    path: string,
-    value: ValuesOf<Profile> | ValuesOf<UserSettings>
-): void => {
+export const updateProfile = (path: string, value: ValuesOf<Profile> | ValuesOf<UserSettings>): void => {
     const _update = (_profile) => {
         const pathList = path.split('.')
 

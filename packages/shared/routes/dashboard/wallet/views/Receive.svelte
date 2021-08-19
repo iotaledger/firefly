@@ -4,14 +4,18 @@
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { setClipboard } from 'shared/lib/utils'
-    import { WalletAccount, hasGeneratedALedgerReceiveAddress, isSyncing } from 'shared/lib/wallet'
+    import { hasGeneratedALedgerReceiveAddress, isSyncing } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable } from 'svelte/store'
     import { AccountIdentifier } from 'shared/lib/typings/account'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
 
-    export let locale
-    export let onGenerateAddress = (accountId: AccountIdentifier): void => {}
+    export let locale: Locale
+
     export let isGeneratingAddress = false
+
+    export let onGenerateAddress = (accountId: AccountIdentifier): void => {}
 
     const liveAccounts = getContext<Readable<WalletAccount[]>>('liveAccounts')
     const currentAccount = getContext<Readable<WalletAccount>>('selectedAccount')

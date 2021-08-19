@@ -8,18 +8,23 @@ import { appRoute, walletSetupType } from 'shared/lib/router'
 import type { Address } from 'shared/lib/typings/address'
 import type {
     AddressInput,
+    Bundle,
+    HardwareIndexes,
     Input,
     MigrationAddress,
     MigrationBundle,
     MigrationData,
+    MigrationLog,
+    MigrationState,
     Transfer,
 } from 'shared/lib/typings/migration'
 import { AppRoute, SetupType } from 'shared/lib/typings/routes'
 import Validator from 'shared/lib/validator'
 import { api } from 'shared/lib/wallet'
-import { derived, get, writable, Writable } from 'svelte/store'
+import { derived, get, writable } from 'svelte/store'
 import { localize } from './i18n'
 import { showAppNotification } from './notifications'
+import { LedgerMigrationProgress } from 'shared/lib/typings/migration'
 
 const LEGACY_ADDRESS_WITHOUT_CHECKSUM_LENGTH = 81
 
@@ -46,51 +51,6 @@ const HARDWARE_MAX_INPUTS_PER_BUNDLE = 3
 const HARDWARE_ADDRESS_GAP = 3
 
 const CHECKSUM_LENGTH = 9
-
-interface MigrationLog {
-    bundleHash: string
-    trytes: string[]
-    receiveAddressTrytes: string
-    balance: number
-    timestamp: string
-    spentAddresses: string[]
-    spentBundleHashes: string[]
-    mine: boolean
-    crackability: number | null
-}
-
-interface Bundle {
-    index: number
-    shouldMine: boolean
-    selectedToMine: boolean
-    bundleHash?: string
-    crackability?: number
-    migrated: boolean
-    selected: boolean
-    inputs: Input[]
-    miningRuns: number
-    confirmed: boolean
-    trytes?: string[]
-}
-
-interface HardwareIndexes {
-    accountIndex: number
-    pageIndex: number
-}
-
-interface MigrationState {
-    didComplete: Writable<boolean>
-    data: Writable<MigrationData>
-    seed: Writable<string>
-    bundles: Writable<Bundle[]>
-}
-
-export enum LedgerMigrationProgress {
-    InstallLedgerApp,
-    GenerateAddress,
-    SwitchLedgerApp,
-    TransferFunds,
-}
 
 export const removeAddressChecksum = (address: string = ''): string => address.slice(0, -CHECKSUM_LENGTH)
 

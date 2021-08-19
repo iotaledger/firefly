@@ -5,9 +5,12 @@
     import { activeProfile } from 'shared/lib/profile'
     import { get } from 'svelte/store'
     import { fade } from 'svelte/transition'
+    import { Locale } from 'shared/lib/typings/i18n'
+
+    export let locale: Locale
 
     export let isActive
-    export let locale
+
     export let openSettings = (): void => {}
 
     const profileColor = 'blue' // TODO: each profile has a different color

@@ -1,8 +1,9 @@
 <script lang="typescript">
     import { Electron } from 'shared/lib/electron'
     import { Button, HR, Text } from 'shared/components'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
     // const handleTroubleshootClick = () => {
     //     Electron.openUrl('https://iota.org')

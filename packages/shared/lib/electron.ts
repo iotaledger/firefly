@@ -1,4 +1,4 @@
-import type { Error } from './errors'
+import type { Error } from './typings/error'
 import type { WalletRoutes } from './typings/routes'
 
 export type VersionDetails = {

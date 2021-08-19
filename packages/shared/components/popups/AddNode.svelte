@@ -4,11 +4,14 @@
     import { isNodeUrlValid } from 'shared/lib/network'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
-    
-    export let locale
-    export let onSuccess
+    import { Locale } from 'shared/lib/typings/i18n'
+
+    export let locale: Locale
+
     export let node
     export let nodes
+
+    export let onSuccess = (): void => {}
 
     let url = node?.url ?? ''
     let username = node?.auth?.username ?? ''

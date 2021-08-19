@@ -1,5 +1,5 @@
 import { writable, Writable } from 'svelte/store'
-import type { Payload } from './typings/message'
+import type { DateDiff } from './typings/wallet'
 
 /**
  * Update application path
@@ -127,7 +127,7 @@ export const truncateString = (
  * @param firstDate: first date to compare
  * @param secondDate: second sate to compare
  */
-export const diffDates = (firstDate: Date, secondDate: Date): { unit, value? }  => {
+export const diffDates = (firstDate: Date, secondDate: Date): DateDiff => {
     if (!(firstDate instanceof Date) || !(secondDate instanceof Date)) {
         return null
     }
@@ -163,7 +163,7 @@ export const diffDates = (firstDate: Date, secondDate: Date): { unit, value? }  
  * Get if a date is considered "recent". Less than 1 month is considered recent.
  * @param date: date to know if recent or not, compared to today. Must be in the past.
  */
-export const isRecentDate = (date: Date): { lessThanAMonth, lessThanThreeMonths } => {
+export const isRecentDate = (date: Date): { lessThanAMonth; lessThanThreeMonths } => {
     if (!(date instanceof Date)) {
         return null
     }

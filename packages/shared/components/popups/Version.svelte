@@ -5,8 +5,10 @@
     import { onMount } from 'svelte'
     import { formatDate } from 'shared/lib/i18n'
     import { Electron } from 'shared/lib/electron';
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     let hasAutoUpdate = true
 
     function handleDownload() {

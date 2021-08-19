@@ -10,8 +10,10 @@
         SecurityCheckCompleted,
         TransferFragmentedFunds,
     } from './views/'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     export let mobile
 
     enum MigrateState {

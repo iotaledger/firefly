@@ -9,8 +9,9 @@
     import { activeProfile, isLedgerProfile, updateProfile } from 'shared/lib/profile'
     import { buildAccountNetworkSettings, updateAccountNetworkSettings } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
     const deepLinkingChecked = $appSettings.deepLinking
 

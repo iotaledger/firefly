@@ -2,8 +2,10 @@
     import { Button, Icon, OnboardingLayout, RecoveryPhrase, Text } from 'shared/components'
     import { english } from 'shared/lib/wordlists/english'
     import { createEventDispatcher, onMount } from 'svelte'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     export let mobile
     export let mnemonic
     export let busy = false

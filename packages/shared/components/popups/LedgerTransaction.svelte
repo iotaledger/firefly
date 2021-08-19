@@ -6,18 +6,19 @@
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
-
-    export let onCancel = (): void => {}
+    export let locale: Locale
 
     export let remainderAddress = ''
     export let remainderAmount = null
-    const shouldDisplayRemainderAddress = remainderAddress?.length > 0
-    const shouldDisplayRemainderAmount = remainderAmount !== null
-
     export let toAddress = ''
     export let toAmount = null
+
+    export let onCancel = (): void => {}
+
+    const shouldDisplayRemainderAddress = remainderAddress?.length > 0
+    const shouldDisplayRemainderAmount = remainderAmount !== null
     const shouldDisplaySendTo = toAddress?.length > 0 && toAmount !== null
 
     const onInvalid = () => {

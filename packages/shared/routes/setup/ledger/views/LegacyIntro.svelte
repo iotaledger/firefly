@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { Button, Link, OnboardingLayout, Text, Video } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { initialiseMigrationListeners, LEDGER_MIGRATION_VIDEO } from 'shared/lib/migration'
@@ -6,8 +6,10 @@
     import { api, isBackgroundSyncing } from 'shared/lib/wallet'
     import { createEventDispatcher, onMount } from 'svelte'
     import { get } from 'svelte/store'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     export let mobile
 
     const dispatch = createEventDispatcher()

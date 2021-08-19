@@ -2,9 +2,12 @@
     import { Button, Text, Link } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { closePopup } from 'shared/lib/popup'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     export let balance = ''
+
     export let onProceed = (): void => {}
 
     function handleCancelClick() {

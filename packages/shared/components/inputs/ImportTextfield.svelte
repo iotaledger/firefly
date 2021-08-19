@@ -3,15 +3,12 @@
     import { debounce } from 'shared/lib/utils'
     import { asyncGetLegacySeedChecksum, asyncVerifyMnemonic } from 'shared/lib/wallet'
     import { english } from 'shared/lib/wordlists/english'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    enum Type {
-        Seed = 'seed',
-        Mnemonic = 'mnemonic',
-    }
+    export let locale: Locale
 
     export let value = undefined
     export let type: Type = Type.Seed
-    export let locale
 
     export let disabled = false
 
@@ -19,6 +16,11 @@
     let content = ''
     let error = false
     let seedChecksum = ''
+
+    enum Type {
+        Seed = 'seed',
+        Mnemonic = 'mnemonic',
+    }
 
     const isSeed = (value: string): string | undefined => {
         if (value.length !== 81) {

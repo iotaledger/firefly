@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
-    import { convertToFiat, currencies, CurrencyTypes, exchangeRates, formatCurrency } from 'shared/lib/currency'
+    import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { getInitials, truncateString } from 'shared/lib/helpers'
     import { formatDate } from 'shared/lib/i18n'
     import { activeProfile } from 'shared/lib/profile'
@@ -14,16 +14,19 @@
         getInternalFlag,
         getMilestoneMessageValue,
         receiverAddressesFromTransactionPayload,
-        sendAddressFromTransactionPayload,
-        WalletAccount,
+        sendAddressFromTransactionPayload
     } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Writable } from 'svelte/store'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { CurrencyTypes } from 'shared/lib/typings/currency'
+
+    export let locale: Locale
 
     export let id
     export let timestamp
     export let confirmed
-    export let locale
     export let payload: Payload
     export let balance // migration tx
 

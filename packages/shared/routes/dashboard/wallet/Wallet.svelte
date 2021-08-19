@@ -3,7 +3,7 @@
     import { clearSendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
-    import { addProfileCurrencyPriceData, priceData } from 'shared/lib/marketData'
+    import { addProfileCurrencyPriceData, priceData } from 'shared/lib/market'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import {
@@ -11,21 +11,16 @@
         isLedgerProfile,
         isSoftwareProfile,
         isStrongholdLocked,
-        MigratedTransaction,
         setMissingProfileType,
         updateProfile,
     } from 'shared/lib/profile'
     import { walletRoute } from 'shared/lib/router'
     import { TransferProgressEventType, LedgerErrorType } from 'shared/lib/typings/events'
-    import type { Transaction } from 'shared/lib/typings/message'
+    import type { Message, Transaction } from 'shared/lib/typings/message'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import {
-        AccountMessage,
-        AccountsBalanceHistory,
         api,
         asyncSyncAccounts,
-        BalanceHistory,
-        BalanceOverview,
         getAccountMessages,
         getAccountMeta,
         getAccountsBalanceHistory,
@@ -47,13 +42,21 @@
         transferState,
         updateBalanceOverview,
         wallet,
-        WalletAccount,
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
     import { derived, Readable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import {
+        AccountMessage,
+        AccountsBalanceHistory,
+        BalanceHistory,
+        BalanceOverview,
+        WalletAccount
+    } from 'shared/lib/typings/wallet'
+    import { MigratedTransaction } from 'shared/lib/typings/profile'
 
-    export let locale
+    export let locale: Locale
 
     const { accounts, balanceOverview, accountsLoaded, internalTransfersInProgress } = $wallet
 
@@ -196,14 +199,14 @@
                                 // Try and find the other side of the pair where the message id
                                 // would be the same and the incoming flag the opposite
                                 const internalIncoming = getIncomingFlag(internalMessage.payload)
-                                let pair = internalMessages.find(
+                                let pair: Message = internalMessages.find(
                                     (m) => m.id === internalMessage.id && getIncomingFlag(m.payload) !== internalIncoming
                                 )
 
                                 // Can't find the other side of the pair so clone the original
                                 // reverse its incoming flag and store it
                                 if (!pair) {
-                                    pair = deepCopy(internalMessage)
+                                    pair = deepCopy(internalMessage) as Message
                                     // Reverse the incoming flag for the other side of the pair
                                     setIncomingFlag(pair.payload, !getIncomingFlag(pair.payload))
                                     payloadAccount.messages.push(pair)
@@ -370,7 +373,7 @@
                                         getAccountMeta(reuseAccountId, (err, meta) => {
                                             if (!err) {
                                                 const account = prepareAccountInfo(ac, meta)
-                                                accounts.update((accounts) => [...accounts, account])
+                                                accounts.update((accounts) => [...accounts, account] as WalletAccount[])
                                             }
                                         })
                                     }
@@ -398,12 +401,13 @@
                     },
                     {
                         onSuccess(createAccountResponse) {
-                            const account: WalletAccount = prepareAccountInfo(createAccountResponse.payload, {
+                            const account = prepareAccountInfo(createAccountResponse.payload, {
                                 balance: 0,
                                 incoming: 0,
                                 outgoing: 0,
                                 depositAddress: createAccountResponse.payload.addresses[0].address,
-                            })
+                            }) as WalletAccount
+
                             // immediately store the account; we update it later after sync
                             // we do this to allow offline account creation
                             accounts.update((accounts) => [...accounts, account])
@@ -412,7 +416,7 @@
                                     onSuccess(_syncAccountResponse) {
                                         getAccountMeta(createAccountResponse.payload.id, (err, meta) => {
                                             if (!err) {
-                                                const account = prepareAccountInfo(createAccountResponse.payload, meta)
+                                                const account = prepareAccountInfo(createAccountResponse.payload, meta) as WalletAccount
                                                 accounts.update((storedAccounts) => storedAccounts.map((storedAccount) => {
                                                     if (storedAccount.id === account.id) {
                                                         return account
@@ -545,14 +549,14 @@
 
                     accounts.update((_accounts) => _accounts.map((_account) => {
                         if (_account.id === senderAccountId) {
-                            const m = deepCopy(message)
+                            const m = deepCopy(message) as Message
                             const mPayload = m.payload as Transaction
                             mPayload.data.essence.data.incoming = false
                             mPayload.data.essence.data.internal = true
                             _account.messages.push(m)
                         }
                         if (_account.id === receiverAccountId) {
-                            const m = deepCopy(message)
+                            const m = deepCopy(message) as Message
                             const mPayload = m.payload as Transaction
                             mPayload.data.essence.data.incoming = true
                             mPayload.data.essence.data.internal = true
@@ -637,9 +641,9 @@
 {#if $walletRoute === WalletRoutes.Account && $selectedAccountId}
     <Account
         {isGeneratingAddress}
-        send={onSend}
-        internalTransfer={onInternalTransfer}
-        generateAddress={onGenerateAddress}
+        {onSend}
+        {onInternalTransfer}
+        {onGenerateAddress}
         {locale} />
 {:else}
     <div class="wallet-wrapper w-full h-full flex flex-col p-10 flex-1 bg-gray-50 dark:bg-gray-900">

@@ -2,10 +2,8 @@
     import { Unit } from '@iota/unit-converter'
     import { Input, Text } from 'shared/components'
     import {
-        AvailableExchangeRates,
         convertToFiat,
         currencies,
-        CurrencyTypes,
         exchangeRates,
         formatCurrency,
         parseCurrency,
@@ -13,17 +11,21 @@
     } from 'shared/lib/currency'
     import { activeProfile } from 'shared/lib/profile'
     import { changeUnits, formatUnitPrecision, UNIT_MAP } from 'shared/lib/units'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
+
+    export let locale: Locale
 
     export let amount = undefined
     export let unit = Unit.Mi
     export let label = undefined
     export let placeholder = undefined
-    export let locale = undefined
     export let classes = ''
-    export let maxClick = (): void => {}
     export let error = ''
     export let disabled = false
     export let autofocus = false
+
+    export let onMaxClick = (): void => {}
 
     const Units = Object.values(Unit).filter((x) => x !== 'Pi')
     const MAX_VALUE = 2779530283000000
@@ -34,7 +36,10 @@
     let focusedItem
 
     const profileCurrency: AvailableExchangeRates = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
+
+    let fiatAmount
     $: fiatAmount = amountToFiat(amount)
+
     $: {
         if (amount.length > 0) {
             const rawVal = changeUnits(parseCurrency(amount), unit, Unit.i)
@@ -150,7 +155,7 @@
         isFocused={dropdown} />
     <actions class="absolute right-0 top-2.5 h-8 flex flex-row items-center text-12 text-gray-500 dark:text-white">
         <button
-            on:click={maxClick}
+            on:click={onMaxClick}
             class={`pr-2 ${disabled ? 'cursor-auto' : 'hover:text-blue-500 focus:text-blue-500 cursor-pointer'}`}
             {disabled}>{locale('actions.max').toUpperCase()}</button>
         <button

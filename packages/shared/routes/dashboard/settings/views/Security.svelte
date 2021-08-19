@@ -9,8 +9,9 @@
     import { api, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
     import zxcvbn from 'zxcvbn'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
     function assignTimeoutOptionLabel(timeInMinutes) {
         if (timeInMinutes >= 60) {

@@ -1,21 +1,15 @@
 import { get, writable } from 'svelte/store'
 import { asyncGetNodeInfo, wallet } from 'shared/lib/wallet'
 import { getOfficialNodes } from 'shared/lib/network'
-
 import type { Node } from './typings/node'
+import type { NetworkStatus } from './typings/network'
 
 /**
  * Default interval for polling the network status
  */
 const DEFAULT_NETWORK_STATUS_POLL_INTERVAL = 10000
 
-type StatusData = {
-    messagesPerSecond?: number
-    referencedRate?: number
-    health?: number
-}
-
-export const networkStatus = writable<StatusData>({})
+export const networkStatus = writable<NetworkStatus>({})
 
 let pollInterval
 

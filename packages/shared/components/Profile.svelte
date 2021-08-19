@@ -1,16 +1,19 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
     import { getInitials as _getInitials } from 'shared/lib/helpers'
+    import { Locale } from 'shared/lib/typings/i18n'
+
+    export let locale: Locale
 
     export let classes = undefined
-    export let locale
 
     export let name = ''
     export let id = ''
     export let isDeveloper = false
     export let isLedgerProfile = false
-    export let onClick = (): void | string => ''
     export let bgColor
+
+    export let onClick = (): void | string => ''
 
     const slots = $$props.$$slots
 

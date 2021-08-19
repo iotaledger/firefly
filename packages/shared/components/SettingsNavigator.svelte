@@ -1,11 +1,14 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
+    import { Locale } from 'shared/lib/typings/i18n'
+
+    export let locale: Locale
 
     export let settings
-    export let locale
     export let routes
     export let route
     export let icons
+
     export let onSettingClick = (_: unknown): void => {}
 
     function changeRoute(setting) {

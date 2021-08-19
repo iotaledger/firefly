@@ -1,62 +1,20 @@
 import { Unit } from '@iota/unit-converter'
-import { AvailableExchangeRates, convertToFiat, currencies, exchangeRates } from 'shared/lib/currency'
+import { convertToFiat, currencies, exchangeRates } from 'shared/lib/currency'
 import { localize } from 'shared/lib/i18n'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
 import { formatUnitPrecision } from 'shared/lib/units'
-import type { WalletAccount } from 'shared/lib/wallet'
 import { isSelfTransaction, wallet } from 'shared/lib/wallet'
 import { formatDate } from 'shared/lib/i18n'
 import { derived, get, writable } from 'svelte/store'
-import { CurrencyTypes, formatCurrencyValue } from './currency'
-import { HistoryDataProps, priceData } from './marketData'
+import { formatCurrencyValue } from './currency'
+import { priceData } from './market'
 import type { Message } from './typings/message'
-import type { BalanceHistory } from './wallet'
-
-export interface Tooltip {
-    title: string
-    label: string
-}
-
-export interface ChartData {
-    data: number[]
-    label?: string
-    labels?: string[]
-    tooltips?: Tooltip[]
-    color?: string
-}
-
-export interface ActivityData {
-    incoming: ChartData
-    outgoing: ChartData
-    labels?: string[]
-}
-
-interface ActivityTimeframe {
-    start: number
-    end: number
-}
-
-export enum DashboardChartType {
-    PORTFOLIO = 'portoflio',
-    TOKEN = 'token',
-}
-export enum AccountChartType {
-    Value = 'Value',
-    Activity = 'Activity',
-}
+import { ActivityData, ActivityTimeframe, ChartData, DashboardChartType, Tooltip } from './typings/chart'
+import { AvailableExchangeRates, CurrencyTypes } from './typings/currency'
+import { HistoryDataProps } from './typings/market'
+import type { BalanceHistory, WalletAccount } from './typings/wallet'
 
 const BAR_CHART_ACTIVITY_MONTHS = 6
-
-export interface ChartSelectors {
-    currency: AvailableExchangeRates
-    timeframe: HistoryDataProps
-}
-
-export interface Chart {
-    time: number
-    type: string
-    message: string
-}
 
 /** Selected chart */
 export const selectedChart = writable<DashboardChartType>(DashboardChartType.PORTFOLIO)

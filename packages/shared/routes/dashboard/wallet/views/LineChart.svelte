@@ -1,21 +1,23 @@
 <script lang="typescript">
     import { Chart, Dropdown, Text } from 'shared/components'
     import {
-        ChartData,
-        DashboardChartType,
         getAccountValueData,
         getPortfolioData,
         getTokenData,
         selectedChart,
     } from 'shared/lib/chart'
-    import { AvailableExchangeRates, CurrencyTypes, formatCurrencyValue } from 'shared/lib/currency'
-    import { HistoryDataProps, TIMEFRAME_MAP } from 'shared/lib/marketData'
+    import { formatCurrencyValue } from 'shared/lib/currency'
+    import { TIMEFRAME_MAP } from 'shared/lib/market'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
-    import type { AccountsBalanceHistory, BalanceHistory, WalletAccount } from 'shared/lib/wallet'
     import { getContext, onMount } from 'svelte'
     import type { Readable } from 'svelte/store'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { AccountsBalanceHistory, BalanceHistory, WalletAccount } from 'shared/lib/typings/wallet'
+    import { ChartData, DashboardChartType } from 'shared/lib/typings/chart'
+    import { HistoryDataProps } from 'shared/lib/typings/market'
+    import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
 
-    export let locale
+    export let locale: Locale
 
     const walletBalanceHistory = getContext<Readable<BalanceHistory>>('walletBalanceHistory')
     const accountsBalanceHistory = getContext<Readable<AccountsBalanceHistory>>('accountsBalanceHistory')
@@ -24,6 +26,10 @@
     let chartData: ChartData = { labels: [], data: [], tooltips: [] }
     let currencyDropdown = []
     let xMaxTicks
+
+    let datasets: { data, tooltips}[]
+    let labels: string[]
+    let color: string
 
     $: datasets = [{ data: chartData.data, tooltips: chartData.tooltips }]
     $: labels = chartData.labels

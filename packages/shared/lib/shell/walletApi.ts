@@ -1,4 +1,4 @@
-import Validator, { ErrorTypes as ValidatorErrorTypes } from 'shared/lib/validator'
+import Validator from 'shared/lib/validator'
 import * as Wallet from 'wallet-nodejs-binding'
 import type {
     CreatedAccountResponse,
@@ -13,6 +13,7 @@ import type { BalanceChangeEventPayload, Event, TransactionEventPayload } from '
 import { ErrorType } from '../typings/events'
 import { logError } from './errorLogger'
 import { getErrorMessage } from './walletErrors'
+import { ErrorTypes as ValidatorErrorTypes } from '../typings/validator'
 
 type CallbacksStore = {
     [id: string]: CallbacksPattern

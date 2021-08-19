@@ -12,19 +12,22 @@
         getMilestoneMessageValue,
         receiverAddressesFromTransactionPayload,
         sendAddressFromTransactionPayload,
-        WalletAccount,
     } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Writable } from 'svelte/store'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
+
+    export let locale: Locale
 
     export let timestamp
     export let confirmed
     export let color
-    export let locale
     export let includeFullSender
     export let payload: Payload
-
     export let balance // migration tx
+
+    export let onClick = (): void => {}
 
     let messageValue = ''
 
@@ -119,8 +122,6 @@
             }
         }
     }
-
-    export let onClick = (): void => {}
 </script>
 
 <button

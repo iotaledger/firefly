@@ -6,7 +6,6 @@
     import { accountRoute, walletRoute, walletSetupType } from 'shared/lib/router'
     import { AccountRoutes, SetupType, WalletRoutes } from 'shared/lib/typings/routes'
     import {
-        AccountMessage,
         api,
         asyncSyncAccounts,
         getSyncAccountOptions,
@@ -14,14 +13,15 @@
         isSyncing,
         selectedAccountId,
         selectedMessage,
-        WalletAccount,
         isFirstManualSync
     } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable, Writable } from 'svelte/store'
     import { get } from 'svelte/store'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { AccountMessage, WalletAccount } from 'shared/lib/typings/wallet'
 
-    export let locale
+    export let locale: Locale
 
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
     const transactions = getContext<Readable<AccountMessage[]>>('walletTransactions')

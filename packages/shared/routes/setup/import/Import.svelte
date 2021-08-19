@@ -4,13 +4,16 @@
     import { Electron } from 'shared/lib/electron'
     import { getMigrationData } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { ImportType, newProfile } from 'shared/lib/profile'
+    import { newProfile } from 'shared/lib/profile'
     import { asyncRestoreBackup } from 'shared/lib/wallet'
     import { createEventDispatcher, setContext } from 'svelte'
     import { get, Writable, writable } from 'svelte/store'
     import { BackupPassword, FileImport, Import, Ledger, Success, TextImport } from './views/'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { ImportType } from 'shared/lib/typings/profile'
 
-    export let locale
+    export let locale: Locale
+
     export let mobile
 
     let isGettingMigrationData = false

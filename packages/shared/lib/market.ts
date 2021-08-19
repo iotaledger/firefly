@@ -1,7 +1,9 @@
-import { currencies, Currencies, CurrencyTypes, exchangeRates, ExchangeRates } from 'shared/lib/currency'
 import { activeProfile } from 'shared/lib/profile'
 import Validator from 'shared/lib/validator'
 import { get, writable } from 'svelte/store'
+import { HistoryDataProps, MarketData, PriceData, Timeframes } from './typings/market'
+import { CurrencyTypes } from './typings/currency'
+import { currencies, exchangeRates } from './currency'
 
 /**
  * Market data endpoints list
@@ -17,83 +19,6 @@ const DEFAULT_MARKETDATA_ENDPOINT_TIMEOUT = 5000
  * Default interval for polling the market data
  */
 const DEFAULT_MARKETDATA_POLL_INTERVAL = 300000 // 5 minutes
-
-export enum HistoryDataProps {
-    ONE_HOUR = '1h',
-    TWENTY_FOUR_HOURS = '24h',
-    SEVEN_DAYS = '7d',
-    ONE_MONTH = '1m',
-}
-
-enum Timeframes {
-    ONE_HOUR = '1Hour',
-    TWENTY_FOUR_HOURS = '1Day',
-    SEVEN_DAYS = '1Week',
-    ONE_MONTH = '1Month',
-}
-
-enum Histories {
-    HISTORY_BTC = 'history-btc',
-    HISTORY_ETH = 'history-eth',
-    HISTORY_EUR = 'history-eur',
-    HISTORY_USD = 'history-usd',
-}
-
-export type HistoryData = {
-    [HistoryDataProps.ONE_HOUR]: (string | number)[]
-    [HistoryDataProps.SEVEN_DAYS]: (string | number)[]
-    [HistoryDataProps.TWENTY_FOUR_HOURS]: (string | number)[]
-    [HistoryDataProps.ONE_MONTH]: (string | number)[]
-}
-
-type HistoryBTC = {
-    currency: CurrencyTypes.BTC
-    data: HistoryData
-}
-
-type HistoryETH = {
-    currency: CurrencyTypes.ETH
-    data: HistoryData
-}
-
-type HistoryEUR = {
-    currency: CurrencyTypes.EUR
-    data: HistoryData
-}
-
-type HistoryUSD = {
-    currency: CurrencyTypes.USD
-    data: HistoryData
-}
-
-type Market = {
-    usd: number
-    usd_24h_change: number
-    usd_24h_vol: number
-    usd_market_cap: number
-}
-
-type MarketData = {
-    currencies: Currencies
-    market: Market
-    rates: ExchangeRates
-    [Histories.HISTORY_BTC]: HistoryBTC
-    [Histories.HISTORY_ETH]: HistoryETH
-    [Histories.HISTORY_EUR]: HistoryEUR
-    [Histories.HISTORY_USD]: HistoryUSD
-}
-
-export type MarketDataValidationResponse = {
-    type: 'MarketData'
-    payload: MarketData
-}
-
-export type PriceData = {
-    [CurrencyTypes.BTC]: HistoryData
-    [CurrencyTypes.EUR]: HistoryData
-    [CurrencyTypes.USD]: HistoryData
-    [CurrencyTypes.ETH]: HistoryData
-}
 
 /**
  * Market cap

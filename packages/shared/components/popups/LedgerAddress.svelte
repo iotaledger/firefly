@@ -5,8 +5,9 @@
     import { closePopup,popupState } from 'shared/lib/popup';
     import { onMount } from 'svelte';
     import { get } from 'svelte/store';
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
     export let address = ''
 

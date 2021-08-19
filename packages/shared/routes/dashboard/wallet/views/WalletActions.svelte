@@ -3,16 +3,18 @@
     import { activeProfile, isLedgerProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
-    import { selectedAccountId, WalletAccount } from 'shared/lib/wallet'
+    import { selectedAccountId } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable } from 'svelte/store'
     import { Receive, Send } from '.'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
 
-    export let locale
+    export let locale: Locale
 
-    export let onSend
-    export let onInternalTransfer
-    export let onGenerateAddress
+    export let onSend = (): void => {}
+    export let onInternalTransfer = (): void => {}
+    export let onGenerateAddress = (): void => {}
 
     export let isGeneratingAddress
 
