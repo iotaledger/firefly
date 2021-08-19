@@ -25,8 +25,9 @@
     export let confirmed
     export let locale
     export let payload: Payload
-    export let onBackClick = () => {}
     export let balance // migration tx
+
+    export let onBackClick = (): void => {}
 
     const cachedMigrationTx = !payload
     const milestonePayload = payload?.type === 'Milestone' ? (payload as Milestone) : undefined

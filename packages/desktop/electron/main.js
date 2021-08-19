@@ -255,7 +255,7 @@ export const getWindow = function (windowName) {
  * @param {string} windowName
  * @returns {BrowserWindow} Requested window
  */
-export const getOrInitWindow = (windowName) => {
+export const getOrInitWindow = (windowName) => { /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
     if (!windows[windowName]) {
         if (windowName === 'main') {
             return createWindow()
@@ -455,7 +455,7 @@ ipcMain.on('notification-activated', (ev, contextData) => {
  * Create about window
  * @returns {BrowserWindow} About window
  */
-export const openAboutWindow = () => {
+export const openAboutWindow = () => { /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
     if (windows.about !== null) {
         windows.about.focus()
         return windows.about
@@ -491,7 +491,7 @@ export const openAboutWindow = () => {
     return windows.about
 }
 
-export const closeAboutWindow = () => {
+export const closeAboutWindow = () => { /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
     if (windows.about) {
         windows.about.close()
         windows.about = null
@@ -502,7 +502,7 @@ export const closeAboutWindow = () => {
  * Create error window
  * @returns {BrowserWindow} Error window
  */
-export const openErrorWindow = () => {
+export const openErrorWindow = () => { /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
     if (windows.error !== null) {
         windows.error.focus()
         return windows.error
@@ -536,7 +536,7 @@ export const openErrorWindow = () => {
     return windows.error
 }
 
-export const closeErrorWindow = () => {
+export const closeErrorWindow = () => { /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
     if (windows.error) {
         windows.error.close()
         windows.error = null

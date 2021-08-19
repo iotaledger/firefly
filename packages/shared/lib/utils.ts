@@ -3,14 +3,16 @@ import { localize } from 'shared/lib/i18n'
 import { showAppNotification } from 'shared/lib/notifications'
 import validUrl from 'valid-url'
 import { Bech32 } from 'shared/lib/bech32'
+import type { ParsedAddress } from './typings/address'
 
 export const VALID_MAINNET_ADDRESS: RegExp = /^iota1[02-9ac-hj-np-z]{59}$/
 export const VALID_DEVNET_ADDRESS: RegExp = /^atoi1[02-9ac-hj-np-z]{59}$/
 export const ADDRESS_LENGTH = 64
 export const PIN_LENGTH = 6
 
-export function bindEvents(element, events) {
+export function bindEvents(element: unknown, events: unknown): { destroy } {
     const listeners = Object.entries(events).map(([event, handler]) => {
+        // @ts-ignore
         const listener = element.addEventListener(event, handler)
 
         return [event, listener]
@@ -19,6 +21,7 @@ export function bindEvents(element, events) {
     return {
         destroy() {
             listeners.forEach(([event, listener]) => {
+                // @ts-ignore
                 element.removeEventListener(event, listener)
             })
         },
@@ -28,7 +31,7 @@ export function bindEvents(element, events) {
 /**
  * Validate pincode format
  */
-export const validatePinFormat = (pincode: string) => {
+export const validatePinFormat = (pincode: string): boolean => {
     const REGEX = new RegExp(`^\\d{${PIN_LENGTH}}$`)
     return REGEX.test(pincode)
 }
@@ -46,9 +49,9 @@ export const generateRandomId = (): string =>
 /**
  * Parse a deep link (iota://)
  * @param  {string} data Deep link data
- * @return {ParsedURL}  The parsed address, message and/or amount values
+ * @return {ParsedAddress}  The parsed address, message and/or amount values
  */
-export const parseDeepLink = (data) => {
+export const parseDeepLink = (data: string): ParsedAddress => {
     const parsed = parseAddress(data)
     if (!parsed) {
         return null
@@ -63,9 +66,9 @@ export const parseDeepLink = (data) => {
 
 /** Parse an IOTA address input
  * @param {string} input
- * @returns {ParsedURL} - The parsed address, message and/or amount values
+ * @returns {ParsedAddress} - The parsed address, message and/or amount values
  */
-export const parseAddress = (input) => {
+export const parseAddress = (input: string): ParsedAddress => {
     const result = {
         address: null,
         message: null,
@@ -124,7 +127,7 @@ export const parseAddress = (input) => {
  * @param  {string}  url
  * @returns {Boolean}
  */
-export const isValidUrl = (url) => {
+export const isValidUrl = (url: string): boolean => {
     if (validUrl.isWebUri(url)) {
         return true
     }
@@ -139,7 +142,7 @@ export const isValidUrl = (url) => {
  * @param  {string}  url
  * @returns {Boolean}
  */
-export const isValidHttpsUrl = (url) => {
+export const isValidHttpsUrl = (url: string): boolean => {
     if (validUrl.isHttpsUri(url)) {
         return true
     }
@@ -152,7 +155,7 @@ export const isValidHttpsUrl = (url) => {
  * @param addr The address to validate.
  * @returns The error string to use if it does not validate.
  */
-export const validateBech32Address = (prefix, addr) => {
+export const validateBech32Address = (prefix: string, addr: string): undefined | string => {
     if (!addr || !addr.startsWith(prefix)) {
         return localize('error.send.wrongAddressPrefix', {
             values: {
@@ -182,7 +185,7 @@ export const validateBech32Address = (prefix, addr) => {
  * @param callback The callback to call in completion
  * @param wait How to long wait before calling callback
  */
-export function debounce(callback, wait = 500) {
+export function debounce(callback: () => any, wait = 500): (...args: any[]) => void {
     let _timeout
     return (...args) => {
         const context = this
@@ -234,7 +237,7 @@ export const getDefaultStrongholdName = (): string => {
     return `firefly-backup-${date}.stronghold`
 }
 
-export const downloadRecoveryKit = () => {
+export const downloadRecoveryKit = (): void => {
     fetch('assets/docs/recovery-kit.pdf')
         .then((response) => response.arrayBuffer())
         .then((data) => {

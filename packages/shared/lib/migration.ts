@@ -92,7 +92,7 @@ export enum LedgerMigrationProgress {
     TransferFunds,
 }
 
-export const removeAddressChecksum = (address: string = '') => address.slice(0, -CHECKSUM_LENGTH)
+export const removeAddressChecksum = (address: string = ''): string => address.slice(0, -CHECKSUM_LENGTH)
 
 export const currentLedgerMigrationProgress = writable<LedgerMigrationProgress>(null)
 export const ledgerMigrationProgresses = derived(currentLedgerMigrationProgress, (_currentLedgerMigrationProgress) => {
@@ -150,7 +150,7 @@ export const migrationLog = writable<MigrationLog[]>([])
 /*
  * ongoingSnapshot
  */
-export const ongoingSnapshot = writable<Boolean>(false)
+export const ongoingSnapshot = writable<boolean>(false)
 
 export const createUnsignedBundle = (
     outputAddress: string,
@@ -254,7 +254,7 @@ export const getMigrationData = (migrationSeed: string, initialAddressIndex = 0)
  *
  * @returns {void}
  */
-export const prepareMigrationLog = (bundleHash: string, trytes: string[], balance: number) => {
+export const prepareMigrationLog = (bundleHash: string, trytes: string[], balance: number): void => {
     const transactionObjects = trytes.map((tryteString) => asTransactionObject(tryteString))
     const { bundles } = get(migration)
 
@@ -460,7 +460,7 @@ export const createMinedLedgerMigrationBundle = (
         now: () => number
     ) => Promise<string[]>,
     callback: () => void
-) => {
+): unknown => {
     const bundle = findMigrationBundle(bundleIndex)
     const txs = bundle.trytes.map((tryte) => asTransactionObject(tryte))
     const transfer = bundle.trytes
@@ -753,7 +753,7 @@ export const updateLedgerBundleState = (
     trytes: string[],
     didMine: boolean,
     migrationBundleCrackability?: number
-) => {
+): void => {
     const { bundles } = get(migration)
 
     bundles.update((_bundles) =>
@@ -912,7 +912,7 @@ const selectInputsForUnspentAddresses = (inputs: Input[]): Input[][] => {
  *
  * @returns {void}
  */
-export const prepareBundles = () => {
+export const prepareBundles = (): void => {
     const { data, bundles } = get(migration)
 
     const { inputs } = get(data)
@@ -1281,7 +1281,7 @@ export function openSnapshotPopup(): void {
 /**
  * Initialise migration process listeners
  */
-export const initialiseMigrationListeners = () => {
+export const initialiseMigrationListeners = (): void => {
     if (get(didInitialiseMigrationListeners) === false) {
         didInitialiseMigrationListeners.set(true)
         api.onMigrationProgress({

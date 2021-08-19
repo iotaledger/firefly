@@ -8,7 +8,7 @@ import { derived, get, Readable, writable } from 'svelte/store'
 import type { ChartSelectors } from './chart'
 import { Electron } from './electron'
 import { HistoryDataProps } from './marketData'
-import type { Node } from './typings/node'
+import type { ValuesOf } from './typings/utils'
 
 export interface MigratedTransaction {
     address: string
@@ -101,12 +101,12 @@ activeProfileId.subscribe((profileId) => {
     Electron.updateActiveProfile(profileId)
 })
 
-export const isSoftwareProfile: Readable<Boolean> = derived(
+export const isSoftwareProfile: Readable<boolean> = derived(
     activeProfile,
     ($activeProfile) => $activeProfile?.type === ProfileType.Software
 )
 
-export const isLedgerProfile: Readable<Boolean> = derived(
+export const isLedgerProfile: Readable<boolean> = derived(
     activeProfile,
     ($activeProfile) =>
         $activeProfile?.type === ProfileType.Ledger || $activeProfile?.type === ProfileType.LedgerSimulator
@@ -134,7 +134,7 @@ export const saveProfile = (profile: Profile): Profile => {
  *
  * @returns {Profile}
  */
-export const createProfile = (profileName, isDeveloperProfile): Profile => {
+export const createProfile = (profileName: string, isDeveloperProfile: boolean): Profile => {
     const profile: Profile = {
         id: generateRandomId(),
         name: profileName,
@@ -168,7 +168,7 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
  *
  * @returns {void}
  */
-export const disposeNewProfile = async () => {
+export const disposeNewProfile = async (): Promise<void> => {
     const np = get(newProfile)
     if (np) {
         try {
@@ -219,6 +219,8 @@ export const removeProfile = (id: string): void => {
     profiles.update((_profiles) => _profiles.filter((_profile) => _profile.id !== id))
 }
 
+
+
 /**
  * Updates a profile property
  *
@@ -230,19 +232,8 @@ export const removeProfile = (id: string): void => {
  */
 export const updateProfile = (
     path: string,
-    value:
-        | string
-        | string[]
-        | boolean
-        | Date
-        | number
-        | AvailableExchangeRates
-        | Node
-        | Node[]
-        | ChartSelectors
-        | HistoryDataProps
-        | MigratedTransaction[]
-) => {
+    value: ValuesOf<Profile> | ValuesOf<UserSettings>
+): void => {
     const _update = (_profile) => {
         const pathList = path.split('.')
 
@@ -279,7 +270,7 @@ export const updateProfile = (
  *
  * @returns {void}
  */
-export const cleanupInProgressProfiles = async () => {
+export const cleanupInProgressProfiles = async (): Promise<void> => {
     const inProgressProfile = get(profileInProgress)
     if (inProgressProfile) {
         profileInProgress.update(() => undefined)
@@ -294,7 +285,7 @@ export const cleanupInProgressProfiles = async () => {
  *
  * @returns {void}
  */
-export const removeProfileFolder = async (profileName) => {
+export const removeProfileFolder = async (profileName: string): Promise<void> => {
     try {
         const userDataPath = await Electron.getUserDataPath()
         const profileStoragePath = getStoragePath(userDataPath, profileName)
@@ -311,7 +302,7 @@ export const removeProfileFolder = async (profileName) => {
  *
  * @returns {void}
  */
-export const cleanupEmptyProfiles = async () => {
+export const cleanupEmptyProfiles = async (): Promise<void> => {
     try {
         const userDataPath = await Electron.getUserDataPath()
         const profileStoragePath = getWalletStoragePath(userDataPath)
@@ -339,7 +330,7 @@ export const cleanupEmptyProfiles = async () => {
  *
  * @returns {void}
  */
-export const setProfileType = (type: ProfileType) => {
+export const setProfileType = (type: ProfileType): void => {
     const isLedgerSimulator = ledgerSimulator && type === ProfileType.Ledger
     updateProfile('type', isLedgerSimulator ? ProfileType.LedgerSimulator : type)
 }
@@ -353,7 +344,7 @@ export const setProfileType = (type: ProfileType) => {
  *
  * @returns {void}
  */
-export const setMissingProfileType = (accounts: WalletAccount[] = []) => {
+export const setMissingProfileType = (accounts: WalletAccount[] = []): void => {
     let accountType = null
     if (accounts.length) {
         switch (accounts[0]?.signerType?.type) {

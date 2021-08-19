@@ -20,7 +20,7 @@
     export let selected = false
     export let risk = undefined
     export let showRiskLevel = false
-    export let onClick = () => {}
+    export let onClick = (): void => {}
 
     let showErrorTooltip = false
     let showRiskTooltip = false

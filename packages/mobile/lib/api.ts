@@ -27,6 +27,7 @@ import {
     send as _send,
 } from '../../../../backend/api-wrapper/wallet'
 import { Plugins } from '@capacitor/core'
+
 const { WalletPlugin } = Plugins
 
 const mailbox = []
@@ -43,15 +44,15 @@ function sendMessage(message: BridgeMessage): Promise<number> {
     }).then(() => id)
 }
 
-export function onMessage(cb: (payload: MessageResponse) => void) {
+export function onMessage(cb: (payload: MessageResponse) => void): void {
     onMessageListeners.push(cb)
 }
 
-export function initLogger(config: LoggerConfig) {
+export function initLogger(config: LoggerConfig): void {
     WalletPlugin.initLogger(JSON.stringify(config))
 }
 
-export function init() {
+export function init(): void {
     WalletPlugin.addListener('walletMessageReceived', (message) => {
         mailbox.push(message)
         onMessageListeners.forEach((listener) => listener(message))

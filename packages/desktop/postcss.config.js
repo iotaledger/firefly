@@ -9,11 +9,11 @@ module.exports = {
             url:
                 mode === 'production'
                     ? (asset) =>
-                          path
-                              .relative(__dirname, asset.absolutePath)
-                              .replace('..', '../shared')
-                              // on Windows the path resolution doesn't work unless we change the path separator
-                              .replace(/\\/g, '/')
+                        path
+                            .relative(__dirname, asset.absolutePath)
+                            .replace('..', '../shared')
+                        // on Windows the path resolution doesn't work unless we change the path separator
+                            .replace(/\\/g, '/')
                     : undefined,
         }),
     ],

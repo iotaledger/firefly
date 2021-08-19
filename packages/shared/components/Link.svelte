@@ -3,7 +3,7 @@
     import { bindEvents } from 'shared/lib/utils'
     export let events = {}
 
-    export let onClick = () => ''
+    export let onClick = (): void | string => ''
     export let href = undefined
     export let secondary = false
     export let disabled = false

@@ -78,7 +78,7 @@ function sendMessage(message: BridgeMessage): Promise<string> {
     return new Promise((resolve) => addon.sendMessage(JSON.stringify(message), () => resolve(id)))
 }
 
-export function init(id: string, storagePath?: string) {
+export function init(id: string, storagePath?: string): { destroy: () => void, removeEventListeners: () => void } {
     const runtime = storagePath ? new addon.ActorSystem(id, storagePath) : new addon.ActorSystem(id)
     let destroyed = false
     _poll(
@@ -101,11 +101,11 @@ export function init(id: string, storagePath?: string) {
     }
 }
 
-export function onMessage(cb: (payload: any) => void) {
+export function onMessage(cb: (payload: any) => void): void {
     onMessageListeners.push(cb)
 }
 
-export function initLogger(config: LoggerConfig) {
+export function initLogger(config: LoggerConfig): void {
     addon.initLogger(JSON.stringify(config))
 }
 

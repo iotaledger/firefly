@@ -42,12 +42,13 @@ import { openPopup } from './popup'
 import type { ClientOptions } from './typings/client'
 import type { LedgerStatus } from './typings/ledger'
 import type { Message } from './typings/message'
-import type { NodeAuth, NodeInfo } from './typings/node'
+import type { Node, NodeAuth, NodeInfo } from './typings/node'
 import { SetupType } from './typings/routes'
 import type { Duration, StrongholdStatus } from './typings/wallet'
 import { displayNotificationForLedgerProfile } from './ledger'
 import { walletSetupType } from './router'
 import { didInitialiseMigrationListeners } from 'shared/lib/migration'
+import type { RecoveryPhrase } from './typings/mnemonic'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -142,7 +143,7 @@ export const wallet = writable<WalletState>({
     }>({}),
 })
 
-export const resetWallet = () => {
+export const resetWallet = (): void => {
     const { balanceOverview, accounts, accountsLoaded, internalTransfersInProgress } = get(wallet)
     balanceOverview.set({
         incoming: '0 Mi',
@@ -472,7 +473,7 @@ export const destroyActor = (id: string): void => {
 /**
  * Generate BIP39 Mnemonic Recovery Phrase
  */
-export const generateRecoveryPhrase = (): Promise<string[]> =>
+export const generateRecoveryPhrase = (): Promise<RecoveryPhrase> =>
     new Promise((resolve, reject) => {
         api.generateMnemonic({
             onSuccess(response) {
@@ -484,7 +485,7 @@ export const generateRecoveryPhrase = (): Promise<string[]> =>
         })
     })
 
-export const requestMnemonic = async () => {
+export const requestMnemonic = async (): Promise<RecoveryPhrase> => {
     const recoveryPhrase = await generateRecoveryPhrase()
     mnemonic.set(recoveryPhrase)
     return recoveryPhrase
@@ -511,7 +512,7 @@ export const asyncGetLegacySeedChecksum = (seed: string): Promise<string> =>
         })
     })
 
-export const asyncSetStrongholdPassword = (password) =>
+export const asyncSetStrongholdPassword = (password: string): Promise<void> =>
     new Promise<void>((resolve, reject) => {
         api.setStrongholdPassword(password, {
             onSuccess() {
@@ -523,7 +524,7 @@ export const asyncSetStrongholdPassword = (password) =>
         })
     })
 
-export const asyncChangeStrongholdPassword = (currentPassword, newPassword) =>
+export const asyncChangeStrongholdPassword = (currentPassword: string, newPassword: string): Promise<void> =>
     new Promise<void>((resolve, reject) => {
         api.changeStrongholdPassword(currentPassword, newPassword, {
             onSuccess() {
@@ -535,7 +536,7 @@ export const asyncChangeStrongholdPassword = (currentPassword, newPassword) =>
         })
     })
 
-export const asyncStoreMnemonic = (mnemonic) =>
+export const asyncStoreMnemonic = (mnemonic: string): Promise<void> =>
     new Promise<void>((resolve, reject) => {
         api.storeMnemonic(mnemonic, {
             onSuccess() {
@@ -547,7 +548,7 @@ export const asyncStoreMnemonic = (mnemonic) =>
         })
     })
 
-export const asyncVerifyMnemonic = (mnemonic) =>
+export const asyncVerifyMnemonic = (mnemonic: string): Promise<void> =>
     new Promise<void>((resolve, reject) => {
         api.verifyMnemonic(mnemonic, {
             onSuccess() {
@@ -559,7 +560,7 @@ export const asyncVerifyMnemonic = (mnemonic) =>
         })
     })
 
-export const asyncBackup = (dest: string, password: string) =>
+export const asyncBackup = (dest: string, password: string): Promise<void> =>
     new Promise<void>((resolve, reject) => {
         api.backup(dest, password, {
             onSuccess() {
@@ -571,7 +572,7 @@ export const asyncBackup = (dest: string, password: string) =>
         })
     })
 
-export const asyncSetStoragePassword = (password) =>
+export const asyncSetStoragePassword = (password: string): Promise<void> =>
     new Promise<void>((resolve, reject) => {
         api.setStoragePassword(password, {
             onSuccess() {
@@ -583,7 +584,7 @@ export const asyncSetStoragePassword = (password) =>
         })
     })
 
-export const asyncRestoreBackup = (importFilePath, password) =>
+export const asyncRestoreBackup = (importFilePath: string, password: string): Promise<void> =>
     new Promise<void>((resolve, reject) => {
         api.restoreBackup(importFilePath, password, {
             onSuccess() {
@@ -595,7 +596,7 @@ export const asyncRestoreBackup = (importFilePath, password) =>
         })
     })
 
-export const asyncCreateAccount = () =>
+export const asyncCreateAccount = (): Promise<void> =>
     new Promise<void>((resolve, reject) => {
         const officialNodes = getOfficialNodes()
         const officialNetwork = getOfficialNetwork()
@@ -620,7 +621,7 @@ export const asyncCreateAccount = () =>
         )
     })
 
-export const asyncRemoveStorage = () =>
+export const asyncRemoveStorage = (): Promise<void> =>
     new Promise<void>((resolve, reject) => {
         api.removeStorage({
             onSuccess() {
@@ -632,7 +633,7 @@ export const asyncRemoveStorage = () =>
         })
     })
 
-export const asyncSyncAccounts = (addressIndex?, gapLimit?, accountDiscoveryThreshold?, showErrorNotification = true) =>
+export const asyncSyncAccounts = (addressIndex?: number, gapLimit?: number, accountDiscoveryThreshold?: number, showErrorNotification = true): Promise<void> =>
     new Promise<void>((resolve, reject) => {
         isSyncing.set(true)
 
@@ -671,7 +672,7 @@ export const asyncSyncAccounts = (addressIndex?, gapLimit?, accountDiscoveryThre
         })
     })
 
-export const asyncGetNodeInfo = (accountId: string, url?: string, auth?: NodeAuth) =>
+export const asyncGetNodeInfo = (accountId: string, url?: string, auth?: NodeAuth): Promise<NodeInfo> =>
     new Promise<NodeInfo>((resolve, reject) => {
         api.getNodeInfo(accountId, url, auth, {
             onSuccess(response) {
@@ -690,7 +691,7 @@ export const asyncGetNodeInfo = (accountId: string, url?: string, auth?: NodeAut
  *
  * @returns {void}
  */
-export const initialiseListeners = () => {
+export const initialiseListeners = (): void => {
     /**
      * Event listener for stronghold status change
      */
@@ -1491,7 +1492,7 @@ export const getAccountMeta = (
             depositAddress: string
         }
     ) => void
-) => {
+): void => {
     api.getBalance(accountId, {
         onSuccess(balanceResponse) {
             api.latestAddress(accountId, {
@@ -1522,7 +1523,7 @@ export const prepareAccountInfo = (
         outgoing: number
         depositAddress: string
     }
-) => {
+): unknown => {
     const { id, index, alias, signerType } = account
     const { balance, depositAddress } = meta
 
@@ -1581,7 +1582,8 @@ export const processMigratedTransactions = (accountId: string, messages: Message
         })
     }
 }
-export const buildAccountNetworkSettings = () => {
+
+export const buildAccountNetworkSettings = (): unknown => {
     const activeProfileSettings = get(activeProfile)?.settings
 
     const automaticNodeSelection = activeProfileSettings?.automaticNodeSelection ?? true
@@ -1661,12 +1663,12 @@ export const buildAccountNetworkSettings = () => {
 }
 
 export const updateAccountNetworkSettings = async (
-    automaticNodeSelection,
-    includeOfficialNodes,
-    nodes,
-    primaryNodeUrl,
-    localPow
-) => {
+    automaticNodeSelection: boolean,
+    includeOfficialNodes: boolean,
+    nodes: Node[],
+    primaryNodeUrl: string,
+    localPow: boolean
+): Promise<void> => {
     updateProfile('settings.automaticNodeSelection', automaticNodeSelection)
     updateProfile('settings.includeOfficialNodes', includeOfficialNodes)
 
@@ -1816,7 +1818,7 @@ export const receiverAddressesFromMilestonePayload = (payload: Payload): string[
  * Get the value of a milestone message
  * @returns
  */
-export const getMilestoneMessageValue = (payload: Payload, accounts) => {
+export const getMilestoneMessageValue = (payload: Payload, accounts: WalletAccount[]): number => {
     if (payload?.type === 'Milestone') {
         const { funds } = payload.data.essence.receipt.data
 
@@ -1840,7 +1842,7 @@ export const getMilestoneMessageValue = (payload: Payload, accounts) => {
  * Get incoming flag from message
  * @returns
  */
-export const getIncomingFlag = (payload: Payload) => {
+export const getIncomingFlag = (payload: Payload): boolean | undefined => {
     if (payload?.type === 'Transaction') {
         return payload.data.essence.data.incoming
     }
@@ -1852,7 +1854,7 @@ export const getIncomingFlag = (payload: Payload) => {
  * Set incoming flag on the message
  * @returns
  */
-export const setIncomingFlag = (payload: Payload, incoming: boolean) => {
+export const setIncomingFlag = (payload: Payload, incoming: boolean): void => {
     if (payload?.type === 'Transaction') {
         payload.data.essence.data.incoming = incoming
     }
@@ -1862,7 +1864,7 @@ export const setIncomingFlag = (payload: Payload, incoming: boolean) => {
  * Get internal flag from message
  * @returns
  */
-export const getInternalFlag = (payload: Payload) => {
+export const getInternalFlag = (payload: Payload): boolean | undefined => {
     if (payload?.type === 'Transaction') {
         return payload.data.essence.data.internal
     }

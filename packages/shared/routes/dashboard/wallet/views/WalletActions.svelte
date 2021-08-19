@@ -9,9 +9,11 @@
     import { Receive, Send } from '.'
 
     export let locale
-    export let send
-    export let internalTransfer
-    export let generateAddress
+
+    export let onSend
+    export let onInternalTransfer
+    export let onGenerateAddress
+
     export let isGeneratingAddress
 
     const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
@@ -55,7 +57,7 @@
         </div>
     </div>
 {:else if $walletRoute === WalletRoutes.Send}
-    <Send {send} {internalTransfer} {locale} />
+    <Send {onSend} {onInternalTransfer} {locale} />
 {:else if $walletRoute === WalletRoutes.Receive}
-    <Receive {isGeneratingAddress} {generateAddress} {locale} />
+    <Receive {isGeneratingAddress} {onGenerateAddress} {locale} />
 {/if}

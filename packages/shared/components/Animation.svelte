@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import lottie from 'lottie-web'
     import { appSettings } from 'shared/lib/appSettings'
     import { onDestroy } from 'svelte'

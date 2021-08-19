@@ -26,8 +26,9 @@
     import { get } from 'svelte/store'
 
     export let locale
-    export let send
-    export let internalTransfer
+
+    export let onSend
+    export let onInternalTransfer
 
     const { accounts } = $wallet
 
@@ -365,8 +366,8 @@
          * in another account. Send parameters are reset once the transfer completes.
          */
             isInternal
-                ? internalTransfer(from.id, to.id, amountRaw, selectedSendType === SEND_TYPE.INTERNAL)
-                : send(from.id, address, amountRaw)
+                ? onInternalTransfer(from.id, to.id, amountRaw, selectedSendType === SEND_TYPE.INTERNAL)
+                : onSend(from.id, address, amountRaw)
 
         handleLedgerConnection(_send(isInternal))
     }

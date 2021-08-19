@@ -185,7 +185,7 @@ export interface Transfer {
     address: string
 }
 
-export function reattach(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier, messageId: string) {
+export function reattach(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier, messageId: string): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,

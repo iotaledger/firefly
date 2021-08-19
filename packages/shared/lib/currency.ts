@@ -177,7 +177,7 @@ export const formatCurrencyValue = (
     }
 }
 
-export const getDecimalSeparator = (currency: string | undefined = undefined) => {
+export const getDecimalSeparator = (currency: string | undefined = undefined): string | undefined => {
     const appLanguage = get(appSettings).language
 
     if (!currency) {
@@ -205,7 +205,7 @@ export const getCurrencyPosition = (): 'left' | 'right' => {
     return format.findIndex((p) => p.type === 'currency') === 0 ? 'left' : 'right'
 }
 
-export const getGroupSeparator = (currency: string | undefined = undefined) => {
+export const getGroupSeparator = (currency: string | undefined = undefined): string => {
     const appLanguage = get(appSettings).language
 
     if (!currency) {
@@ -222,7 +222,7 @@ export const getGroupSeparator = (currency: string | undefined = undefined) => {
     )
 }
 
-export const getAllDecimalSeparators = () => ['.', ',']
+export const getAllDecimalSeparators = (): string[] => ['.', ',']
 
 export const parseCurrency = (valueString: string, currency: string | undefined = undefined): number => {
     // Need to escape the character in the regex in case it is . otherwise it will replace all characters

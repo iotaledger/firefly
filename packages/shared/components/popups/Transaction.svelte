@@ -19,7 +19,7 @@
     export let to = ''
     export let amount = 0
     export let unit = Unit.i
-    export let onConfirm = () => {}
+    export let onConfirm = (): void => {}
 
     const displayedAmount = `${formatUnitPrecision(amount, unit)} (${localConvertToFiat(amount)})`
 

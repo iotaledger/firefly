@@ -45,10 +45,10 @@ export const isNodeUrlValid = (nodesList: Node[], newUrl: string): string | unde
  * Get the list of official nodes
  * @returns The list of nodes
  */
-export const getOfficialNodes = () => DEFAULT_NODES
+export const getOfficialNodes = (): Node[] => DEFAULT_NODES
 
 /**
  * Get the official network
  * @returns The official network
  */
-export const getOfficialNetwork = () => DEFAULT_NETWORK
+export const getOfficialNetwork = (): string => DEFAULT_NETWORK

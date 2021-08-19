@@ -64,7 +64,7 @@ const INIT_OPTIONS = {
 // loading state
 const isDownloading = writable(false)
 
-const setupI18n = (options = { withLocale: null }) => {
+const setupI18n = (options = { withLocale: null }): Promise<any> => {
     // If we're given an explicit locale, we use
     // it. Otherwise, we attempt to auto-detect
     // the user's locale.
@@ -138,7 +138,7 @@ const dir = derived(
         'ltr'
 )
 
-const setLanguage = (item) => {
+const setLanguage = (item: { value }): void => {
     const locale = Object.keys(locales).find((key) => locales[key] === item.value)
     appSettings.set({
         ...get(appSettings),
@@ -155,7 +155,7 @@ const localize = get(_) as (string, values?) => string
  * @param format
  * @returns Formatted date
  */
-const formatDate = (date: Date, options: Intl.DateTimeFormatOptions & { format?: string; locale?: string }) =>
+const formatDate = (date: Date, options: Intl.DateTimeFormatOptions & { format?: string; locale?: string }): string =>
     getDateFormatter({ locale: getLocaleFromNavigator(), ...options }).format(date)
 
 // We expose the svelte-i18n _ store so that our app has

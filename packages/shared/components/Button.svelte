@@ -5,7 +5,7 @@
     import { onMount } from 'svelte'
 
     export let events = {}
-    export let onClick = () => ''
+    export let onClick = (): void => ''
     export let secondary = false
     export let disabled = false
     export let warning = false

@@ -471,7 +471,7 @@
                     remainder_value_strategy: {
                         strategy: 'ChangeAddress',
                     },
-                    indexation: { index: 'firefly', data: new Array() },
+                    indexation: { index: 'firefly', data: [] },
                 },
                 {
                     onSuccess(response) {
@@ -654,9 +654,9 @@
                         <DashboardPane classes="-mt-5 h-full z-0">
                             <WalletActions
                                 {isGeneratingAddress}
-                                send={onSend}
-                                internalTransfer={onInternalTransfer}
-                                generateAddress={onGenerateAddress}
+                                {onSend}
+                                {onInternalTransfer}
+                                {onGenerateAddress}
                                 {locale} />
                         </DashboardPane>
                     {/if}

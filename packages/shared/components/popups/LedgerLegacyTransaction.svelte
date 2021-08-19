@@ -1,4 +1,4 @@
-<script lang="ts" xmlns="http://www.w3.org/1999/html">
+<script lang="typescript" xmlns="http://www.w3.org/1999/html">
     import { Animation, Text } from 'shared/components'
     import { formatAddressForLedger } from 'shared/lib/ledger'
     import { asyncGetAddressChecksum } from 'shared/lib/migration'

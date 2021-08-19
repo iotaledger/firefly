@@ -5,7 +5,7 @@
 
     export let locale
     export let allowBack = true
-    export let onBackClick = () => {}
+    export let onBackClick = (): void => {}
     export let busy = false
     export let showLedgerProgress = false
     export let showLedgerVideoButton = false

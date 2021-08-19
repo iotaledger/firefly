@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="typescript">
     import { Animation,Text } from 'shared/components';
     import { formatAddressForLedger } from 'shared/lib/ledger';
     import { showAppNotification } from 'shared/lib/notifications';

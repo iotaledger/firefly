@@ -56,7 +56,7 @@ export const appRoute = writable<AppRoute>(null)
 /**
  * Application route history
  */
-const history = writable<Array<string>>([])
+const history = writable<string[]>([])
 
 /**
  * Active dashboard tab
@@ -71,7 +71,7 @@ export const ledgerRoute = writable<LedgerRoutes>(LedgerRoutes.LegacyIntro)
 /**
  * Ledger setup routing history
  */
-export const ledgerRouteHistory = writable<Array<string>>([])
+export const ledgerRouteHistory = writable<string[]>([])
 
 /**
  * Wallet view route
@@ -96,7 +96,7 @@ export const settingsChildRoute = writable<string>(null)
 /**
  * Navigate to initial route
  */
-export const initRouter = () => {
+export const initRouter = (): void => {
     const hasCompletedSetup: boolean = get(profiles).length > 0
 
     if (hasCompletedSetup) {
@@ -107,7 +107,7 @@ export const initRouter = () => {
 }
 
 // TODO: only handle route changes, not app variables
-export const routerNext = (event) => {
+export const routerNext = (event: { detail }): void => {
     const params = event.detail || {}
     const currentRoute: AppRoute = get(appRoute)
     let nextRoute: AppRoute
@@ -251,7 +251,7 @@ export const routerNext = (event) => {
  * Forces app next route, updating the route history
  * @param route next route
  */
-export const forceNextRoute = (route: AppRoute) => {
+export const forceNextRoute = (route: AppRoute): void => {
     updateHistory(get(appRoute))
     setRoute(route)
 }
@@ -264,7 +264,7 @@ const updateHistory = (newRoute: AppRoute): void => {
 }
 
 // TODO: only handle route changes, not app variables
-export const routerPrevious = () => {
+export const routerPrevious = (): void => {
     let previousRoute: AppRoute
 
     history.update((_history) => {
@@ -277,7 +277,7 @@ export const routerPrevious = () => {
     }
 }
 
-export const resetRouter = () => {
+export const resetRouter = (): void => {
     history.set([])
     const hasCompletedSetup: boolean = get(profiles).length > 0
     if (hasCompletedSetup) {
@@ -293,14 +293,14 @@ export const resetRouter = () => {
     deepLinkRequestActive.set(false)
 }
 
-export const resetWalletRoute = () => {
+export const resetWalletRoute = (): void => {
     dashboardRoute.set(Tabs.Wallet)
     walletRoute.set(WalletRoutes.Init)
     accountRoute.set(AccountRoutes.Init)
     selectedAccountId.set(null)
 }
 
-export const resetLedgerRoute = () => {
+export const resetLedgerRoute = (): void => {
     ledgerRoute.set(LedgerRoutes.LegacyIntro)
     ledgerRouteHistory.set([])
 }

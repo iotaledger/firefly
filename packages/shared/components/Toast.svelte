@@ -13,7 +13,7 @@
     export let message: string
     export let subMessage: string
     export let progress: number
-    export let actions: Array<Action>
+    export let actions: Action[]
 
     const TOAST_STYLE = {
         info: {

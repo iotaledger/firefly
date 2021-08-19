@@ -73,9 +73,9 @@ export class Bech32 {
         const result = Bech32.decodeTo5BitArray(bech)
         return result
             ? {
-                  humanReadablePart: result.humanReadablePart,
-                  data: Bech32.from5Bit(result.data),
-              }
+                humanReadablePart: result.humanReadablePart,
+                data: Bech32.from5Bit(result.data),
+            }
             : undefined
     }
 

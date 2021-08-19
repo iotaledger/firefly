@@ -41,7 +41,7 @@ export const persistent = <T>(key: string, initialValue: T): Writable<T> => {
  * @param name The string to get the length of
  * @returns
  */
-export const getTrimmedLength = (name: string | undefined) => {
+export const getTrimmedLength = (name: string | undefined): number => {
     if (!name) {
         return 0
     }
@@ -54,7 +54,7 @@ export const getTrimmedLength = (name: string | undefined) => {
  * @param name The name to validate
  * @returns
  */
-export const validateFilenameChars = (name: string | undefined) => {
+export const validateFilenameChars = (name: string | undefined): string => {
     if (!name) {
         return
     }
@@ -76,7 +76,7 @@ export const validateFilenameChars = (name: string | undefined) => {
 /**
  * Extract initials from string
  */
-export const getInitials = (name: string | undefined, maxChars: number) => {
+export const getInitials = (name: string | undefined, maxChars: number): string => {
     if (!name || !name.trim()) {
         return ''
     }
@@ -110,7 +110,7 @@ export const truncateString = (
     firstCharCount: number = 5,
     endCharCount: number = 5,
     dotCount: number = 3
-) => {
+): string => {
     const MAX_LENGTH = 13
     if (!str || str.length <= MAX_LENGTH) {
         return str
@@ -127,7 +127,7 @@ export const truncateString = (
  * @param firstDate: first date to compare
  * @param secondDate: second sate to compare
  */
-export const diffDates = (firstDate: Date, secondDate: Date) => {
+export const diffDates = (firstDate: Date, secondDate: Date): { unit, value? }  => {
     if (!(firstDate instanceof Date) || !(secondDate instanceof Date)) {
         return null
     }
@@ -163,7 +163,7 @@ export const diffDates = (firstDate: Date, secondDate: Date) => {
  * Get if a date is considered "recent". Less than 1 month is considered recent.
  * @param date: date to know if recent or not, compared to today. Must be in the past.
  */
-export const isRecentDate = (date: Date) => {
+export const isRecentDate = (date: Date): { lessThanAMonth, lessThanThreeMonths } => {
     if (!(date instanceof Date)) {
         return null
     }
@@ -181,7 +181,7 @@ export const isRecentDate = (date: Date) => {
  * Returns warning text color for last Stronghold backup
  * @param lastBackupDate: Blue if less than a month. Orange if less than three months. Red if more.
  */
-export const getBackupWarningColor = (lastBackupDate: Date) => {
+export const getBackupWarningColor = (lastBackupDate: Date): string => {
     if (!(lastBackupDate instanceof Date)) {
         return 'red'
     }
@@ -195,7 +195,7 @@ export const getBackupWarningColor = (lastBackupDate: Date) => {
  * @param hexCode: hex color to convert
  * @param opacity: [0,100], default = 100
  */
-export const convertHexToRGBA = (hexCode: string, opacity: number = 100) => {
+export const convertHexToRGBA = (hexCode: string, opacity: number = 100): string => {
     let hex = hexCode.replace('#', '')
 
     if (hex.length === 3) {
@@ -214,21 +214,21 @@ export const convertHexToRGBA = (hexCode: string, opacity: number = 100) => {
  * @param str The text to strip the values from
  * @returns The stripped text
  */
-export const stripTrailingSlash = (str) => (str ? str.replace(/\/+$/, '') : '')
+export const stripTrailingSlash = (str: string): string => (str ? str.replace(/\/+$/, '') : '')
 
 /**
  * Strip spaces from the text
  * @param str The text to strip the values from
  * @returns The stripped text
  */
-export const stripSpaces = (str) => (str ? str.replace(/ /g, '') : '')
+export const stripSpaces = (str: string): string => (str ? str.replace(/ /g, '') : '')
 
 /**
  * Create a deep copy of an object
  * @param obj The object to copy
  * @returns The copied object
  */
-export function deepCopy(obj) {
+export function deepCopy(obj: unknown): unknown {
     if (typeof obj !== 'object' || obj === null) {
         return obj
     }

@@ -32,7 +32,7 @@ export interface Duration {
     nanos: number
 }
 
-export function backup(bridge: Bridge, __ids: CommunicationIds, destinationPath: string, password: string) {
+export function backup(bridge: Bridge, __ids: CommunicationIds, destinationPath: string, password: string): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -44,7 +44,7 @@ export function backup(bridge: Bridge, __ids: CommunicationIds, destinationPath:
     })
 }
 
-export function restoreBackup(bridge: Bridge, __ids: CommunicationIds, backupPath: string, password: string) {
+export function restoreBackup(bridge: Bridge, __ids: CommunicationIds, backupPath: string, password: string): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -56,7 +56,7 @@ export function restoreBackup(bridge: Bridge, __ids: CommunicationIds, backupPat
     })
 }
 
-export function setStrongholdPassword(bridge: Bridge, __ids: CommunicationIds, password: string) {
+export function setStrongholdPassword(bridge: Bridge, __ids: CommunicationIds, password: string): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -65,7 +65,7 @@ export function setStrongholdPassword(bridge: Bridge, __ids: CommunicationIds, p
     })
 }
 
-export function setStoragePassword(bridge: Bridge, __ids: CommunicationIds, password: string) {
+export function setStoragePassword(bridge: Bridge, __ids: CommunicationIds, password: string): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -74,7 +74,7 @@ export function setStoragePassword(bridge: Bridge, __ids: CommunicationIds, pass
     })
 }
 
-export function removeStorage(bridge: Bridge, __ids: CommunicationIds) {
+export function removeStorage(bridge: Bridge, __ids: CommunicationIds): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -82,7 +82,7 @@ export function removeStorage(bridge: Bridge, __ids: CommunicationIds) {
     })
 }
 
-export function send(bridge: Bridge, __ids: CommunicationIds, fromAccountId: AccountIdentifier, transfer: Transfer) {
+export function send(bridge: Bridge, __ids: CommunicationIds, fromAccountId: AccountIdentifier, transfer: Transfer): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -94,7 +94,7 @@ export function send(bridge: Bridge, __ids: CommunicationIds, fromAccountId: Acc
     })
 }
 
-export function generateMnemonic(bridge: Bridge, __ids: CommunicationIds) {
+export function generateMnemonic(bridge: Bridge, __ids: CommunicationIds): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -102,7 +102,7 @@ export function generateMnemonic(bridge: Bridge, __ids: CommunicationIds) {
     })
 }
 
-export function storeMnemonic(bridge: Bridge, __ids: CommunicationIds, payload: MnemonicPayload) {
+export function storeMnemonic(bridge: Bridge, __ids: CommunicationIds, payload: MnemonicPayload): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -111,7 +111,7 @@ export function storeMnemonic(bridge: Bridge, __ids: CommunicationIds, payload: 
     })
 }
 
-export function verifyMnemonic(bridge: Bridge, __ids: CommunicationIds, payload: string) {
+export function verifyMnemonic(bridge: Bridge, __ids: CommunicationIds, payload: string): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -120,7 +120,7 @@ export function verifyMnemonic(bridge: Bridge, __ids: CommunicationIds, payload:
     })
 }
 
-export function getStrongholdStatus(bridge: Bridge, __ids: CommunicationIds) {
+export function getStrongholdStatus(bridge: Bridge, __ids: CommunicationIds): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -128,7 +128,7 @@ export function getStrongholdStatus(bridge: Bridge, __ids: CommunicationIds) {
     })
 }
 
-export function lockStronghold(bridge: Bridge, __ids: CommunicationIds) {
+export function lockStronghold(bridge: Bridge, __ids: CommunicationIds): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -136,7 +136,7 @@ export function lockStronghold(bridge: Bridge, __ids: CommunicationIds) {
     })
 }
 
-export function changeStrongholdPassword(bridge: Bridge, __ids: CommunicationIds, payload: StrongholdPasswordChange) {
+export function changeStrongholdPassword(bridge: Bridge, __ids: CommunicationIds, payload: StrongholdPasswordChange): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -145,7 +145,7 @@ export function changeStrongholdPassword(bridge: Bridge, __ids: CommunicationIds
     })
 }
 
-export function setClientOptions(bridge: Bridge, __ids: CommunicationIds, payload: ClientOptions) {
+export function setClientOptions(bridge: Bridge, __ids: CommunicationIds, payload: ClientOptions): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -154,7 +154,7 @@ export function setClientOptions(bridge: Bridge, __ids: CommunicationIds, payloa
     })
 }
 
-export function getLedgerDeviceStatus(bridge: Bridge, __ids: CommunicationIds, isSimulator: boolean) {
+export function getLedgerDeviceStatus(bridge: Bridge, __ids: CommunicationIds, isSimulator: boolean): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -163,7 +163,7 @@ export function getLedgerDeviceStatus(bridge: Bridge, __ids: CommunicationIds, i
     })
 }
 
-export function setStrongholdPasswordClearInterval(bridge: Bridge, __ids: CommunicationIds, payload: Duration) {
+export function setStrongholdPasswordClearInterval(bridge: Bridge, __ids: CommunicationIds, payload: Duration): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -172,7 +172,7 @@ export function setStrongholdPasswordClearInterval(bridge: Bridge, __ids: Commun
     })
 }
 
-export function getLegacySeedChecksum(bridge: Bridge, __ids: CommunicationIds, payload: string) {
+export function getLegacySeedChecksum(bridge: Bridge, __ids: CommunicationIds, payload: string): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,

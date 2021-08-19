@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { Button, Icon, Text } from 'shared/components'
     import { stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { closePopup } from 'shared/lib/popup'
@@ -10,7 +10,7 @@
     export let locale
     export let poll
 
-    function handleCancelClick() {
+    function handleCancelClick(): void {
         if ('function' === typeof handleClose) {
             handleClose()
         }

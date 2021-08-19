@@ -2,7 +2,7 @@
     import { Text, Button } from 'shared/components'
 
     export let locale = undefined
-    export let onDrop = (buffer?, name?, path?) => {}
+    export let onDrop = (buffer?: ArrayBufferLike, name?: string, path?: string): void => {}
     export let extentionsLabel = ''
     export let allowedExtensions
 

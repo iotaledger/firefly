@@ -25,6 +25,12 @@ export interface ChartData {
     color?: string
 }
 
+export interface ActivityData {
+    incoming: ChartData
+    outgoing: ChartData
+    labels?: string[]
+}
+
 interface ActivityTimeframe {
     start: number
     end: number
@@ -137,7 +143,7 @@ export function getAccountValueData(balanceHistory: BalanceHistory, accountBalan
     return chartData
 }
 
-export const getAccountActivityData = (account: WalletAccount) => {
+export const getAccountActivityData = (account: WalletAccount): ActivityData => {
     const now = new Date()
     const activityTimeframes: ActivityTimeframe[] = []
     const incoming: ChartData = {
@@ -237,12 +243,12 @@ export const getAccountActivityData = (account: WalletAccount) => {
             })
         })
     }
-    const chartData = {
+
+    return {
         incoming,
         outgoing,
         labels,
     }
-    return chartData
 }
 
 function formatLabel(timestamp: number): string {

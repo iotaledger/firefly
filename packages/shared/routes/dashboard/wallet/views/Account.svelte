@@ -6,9 +6,11 @@
     import { AccountActions, AccountBalance, AccountHistory, AccountNavigation, BarChart, LineChart } from '.'
 
     export let locale
-    export let send
-    export let internalTransfer
-    export let generateAddress
+
+    export let onSend
+    export let onInternalTransfer
+    export let onGenerateAddress
+
     export let isGeneratingAddress
 
     const account = getContext<Readable<WalletAccount>>('selectedAccount')
@@ -16,6 +18,7 @@
 
     const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
 
+    let navAccounts
     $: navAccounts = $account
         ? $viewableAccounts.map(({ id, alias, color }) => ({ id, alias, color, active: $account.id === id }))
         : []
@@ -41,7 +44,7 @@
                         balanceEquiv={$account.balanceEquiv}
                         onMenuClick={handleMenuClick} />
                     <DashboardPane classes="h-full -mt-5 z-0">
-                        <AccountActions {isGeneratingAddress} {send} {internalTransfer} {generateAddress} {locale} />
+                        <AccountActions {isGeneratingAddress} {onSend} {onInternalTransfer} {onGenerateAddress} {locale} />
                     </DashboardPane>
                 </DashboardPane>
                 <DashboardPane>

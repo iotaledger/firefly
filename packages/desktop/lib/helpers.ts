@@ -7,7 +7,7 @@
  *
  * @returns {object}
  */
-export const getLocalisedMenuItems = (locale) => ({
+export const getLocalisedMenuItems = (locale: (_: string) => string): unknown => ({
     about: locale('views.settings.about.title'),
     checkForUpdates: locale('actions.checkForUpdates'),
     settings: locale('views.settings.settings'),

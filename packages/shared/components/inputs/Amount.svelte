@@ -20,7 +20,7 @@
     export let placeholder = undefined
     export let locale = undefined
     export let classes = ''
-    export let maxClick = () => {}
+    export let maxClick = (): void => {}
     export let error = ''
     export let disabled = false
     export let autofocus = false

@@ -4,7 +4,7 @@
 
     export let locale
     export let subtitle
-    export let onProceed: () => {}
+    export let onProceed = (): void => {}
 
     function handleCancelClick() {
         closePopup()

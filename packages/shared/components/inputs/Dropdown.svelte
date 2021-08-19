@@ -11,7 +11,7 @@
     export let sortItems = false
     export let items = []
     export let small = false
-    export let onSelect = (_) => {}
+    export let onSelect = (_: unknown): void => {}
     export let contentWidth = false
     export let error = ''
     export let classes = ''

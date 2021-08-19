@@ -74,7 +74,7 @@ export function getMigrationData(
     securityLevel?: number,
     initialAddressIndex?: number,
     permanode?: string
-) {
+): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -114,7 +114,7 @@ export function createMigrationBundle(
     timeoutSeconds: number,
     offset: number,
     logFileName: string
-) {
+): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -149,7 +149,7 @@ export function sendMigrationBundle(
     nodes: string[],
     bundleHash: string,
     mwm: number
-) {
+): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -178,7 +178,7 @@ export function getMigrationAddress(
     __ids: CommunicationIds,
     ledgerPrompt: boolean,
     accountIndex: number
-) {
+): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -212,7 +212,7 @@ export function mineBundle(
     securityLevel: number,
     timeout: number,
     offset: number
-) {
+): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -249,7 +249,7 @@ export function getLedgerMigrationData(
     nodes: string[],
     permanode: string,
     securityLevel: number
-) {
+): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -282,7 +282,7 @@ export function sendLedgerMigrationBundle(
     nodes: string[],
     bundle: string[],
     mwm: number
-) {
+): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -306,7 +306,7 @@ export function sendLedgerMigrationBundle(
  *
  * @returns {Promise}
  */
-export function getLegacyAddressChecksum(bridge: Bridge, __ids: CommunicationIds, address: string) {
+export function getLegacyAddressChecksum(bridge: Bridge, __ids: CommunicationIds, address: string): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,

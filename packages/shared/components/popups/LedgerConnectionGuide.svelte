@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { Animation, Button, Illustration, Link, Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { closePopup } from 'shared/lib/popup'

@@ -11,6 +11,6 @@ export interface Error {
 
 export const errorLog = persistent<Error[]>('errorLog', [])
 
-export const addError = (err: Error) => {
+export const addError = (err: Error): void => {
     errorLog.update((log) => [err, ...log])
 }

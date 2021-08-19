@@ -26,7 +26,7 @@
         /* eslint-disable no-undef */
         if (!devMode) {
             await getVersionDetails()
-            await updateCheck()
+            updateCheck()
         }
         const os = await Electron.getOS()
         hasAutoUpdate = os !== 'win32'

@@ -5,7 +5,7 @@
 
     export let locale
     export let balance = ''
-    export let onProceed: () => {}
+    export let onProceed = (): void => {}
 
     function handleCancelClick() {
         closePopup()

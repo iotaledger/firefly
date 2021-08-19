@@ -3,10 +3,11 @@
     import { closePopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
     import { api, selectedAccountId } from 'shared/lib/wallet'
+    import { AccountIdentifier } from 'shared/lib/typings/account'
 
     export let locale
     export let account
-    export let deleteAccount = (selectedAccountId) => {}
+    export let deleteAccount = (selectedAccountId: AccountIdentifier): void => {}
     export let hasMultipleAccounts
 
     let password

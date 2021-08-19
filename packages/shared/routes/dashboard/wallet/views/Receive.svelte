@@ -7,9 +7,10 @@
     import { WalletAccount, hasGeneratedALedgerReceiveAddress, isSyncing } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable } from 'svelte/store'
+    import { AccountIdentifier } from 'shared/lib/typings/account'
 
     export let locale
-    export let generateAddress = (accountId) => {}
+    export let onGenerateAddress = (accountId: AccountIdentifier): void => {}
     export let isGeneratingAddress = false
 
     const liveAccounts = getContext<Readable<WalletAccount[]>>('liveAccounts')
@@ -21,7 +22,7 @@
         selectedAccount = item
     }
     const generateNewAddress = () => {
-        generateAddress(selectedAccount.id)
+        onGenerateAddress(selectedAccount.id)
     }
     const handleCloseClick = () => {
         walletRoute.set(WalletRoutes.Init)

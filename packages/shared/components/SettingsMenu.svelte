@@ -9,7 +9,7 @@
     export let iconColor
     export let title
     export let description
-    export let onClick = (setting) => {}
+    export let onClick = (setting: unknown): void => {}
 </script>
 
 <div class="flex-1">

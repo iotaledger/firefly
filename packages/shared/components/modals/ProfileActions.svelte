@@ -8,7 +8,7 @@
 
     export let isActive
     export let locale
-    export let openSettings = () => {}
+    export let openSettings = (): void => {}
 
     const profileColor = 'blue' // TODO: each profile has a different color
     const profileName = get(activeProfile)?.name

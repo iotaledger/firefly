@@ -6,7 +6,7 @@ import { menuState as state } from './menuState'
 /**
  * Creates a native menu tree and applies it to the application window
  */
-export const initMenu = () => {
+export const initMenu = () => { /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
     let mainMenu = null
 
     const createMenu = () => {
@@ -235,7 +235,7 @@ const buildTemplate = () => {
  * Creates context menu
  * @returns {Menu} Context menu
  */
-export const contextMenu = () =>
+export const contextMenu = () => /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
     Menu.buildFromTemplate([
         {
             label: state.strings.undo,

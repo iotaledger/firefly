@@ -10,7 +10,7 @@
     export let datasets = []
     export let xMaxTicks = 7
     export let yMaxTicks = 6
-    export let formatYAxis = (value) => Number(value.toString())
+    export let formatYAxis = (value: unknown): number => Number(value.toString())
     export let color = 'blue' // TODO: each profile has a different color
     export let beginAtZero = false
     export let inlineStyle = 'height: calc(50vh - 130px);'

@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { Animation, Button, Illustration, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
     import { LedgerAppName } from 'shared/lib/typings/ledger'

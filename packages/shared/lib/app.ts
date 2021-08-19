@@ -26,7 +26,7 @@ export const strongholdPassword = writable<string>(null)
 /**
  * Seed BIP39 mnemonic recovery phrase
  */
-export const mnemonic = writable<Array<string>>(null)
+export const mnemonic = writable<string[]>(null)
 
 interface SendParams {
     amount: number
@@ -39,7 +39,7 @@ interface SendParams {
  * Input paramaters for sending transactions
  */
 export const sendParams = writable<SendParams>({ amount: 0, address: '', message: '', isInternal: false })
-export const clearSendParams = (isInternal = false) =>
+export const clearSendParams = (isInternal = false): void =>
     sendParams.set({ amount: 0, address: '', message: '', isInternal })
 
 /**
@@ -50,7 +50,7 @@ export const loggedIn = writable<boolean>(false)
 /**
  * Cleanup the signup vars
  */
-export const cleanupSignup = () => {
+export const cleanupSignup = (): void => {
     mnemonic.set(null)
     strongholdPassword.set(null)
     walletPin.set(null)
@@ -59,7 +59,7 @@ export const cleanupSignup = () => {
 /**
  * Log in to the current profile
  */
-export const login = () => {
+export const login = (): void => {
     loggedIn.set(true)
 }
 
@@ -67,7 +67,7 @@ export const login = () => {
 
  * Logout from current profile
  */
-export const logout = () =>
+export const logout = (): Promise<void> =>
     new Promise<void>((resolve) => {
         const ap = get(activeProfile)
 

@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="typescript">
     import { Animation, Text } from 'shared/components'
     import { formatAddressForLedger } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -9,7 +9,7 @@
 
     export let locale
 
-    export let onCancel = () => {}
+    export let onCancel = (): void => {}
 
     export let remainderAddress = ''
     export let remainderAmount = null

@@ -14,7 +14,7 @@
     export let keepDarkThemeIconColor = false
     export let refreshIcon = false
     export let loading = false
-    export let onClick = () => {}
+    export let onClick = (): void => {}
 </script>
 
 <style type="text/scss">

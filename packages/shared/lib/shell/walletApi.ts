@@ -251,36 +251,36 @@ const generateRandomId = (): string =>
 const GenerateMiddleware = (activeProfileIdGetter: () => string) => ({
     get:
         (_target, prop) =>
-        async (...payload): Promise<void> => {
-            const actorId = activeProfileIdGetter()
+            async (...payload): Promise<void> => {
+                const actorId = activeProfileIdGetter()
 
-            const messageId = generateRandomId()
+                const messageId = generateRandomId()
 
-            const hasPayload = payload.length
+                const hasPayload = payload.length
 
-            let shouldOverrideDefaultCallbacks = false
-            let lastArgument = null
+                let shouldOverrideDefaultCallbacks = false
+                let lastArgument = null
 
-            if (hasPayload) {
-                lastArgument = payload[payload.length - 1]
+                if (hasPayload) {
+                    lastArgument = payload[payload.length - 1]
 
-                shouldOverrideDefaultCallbacks =
+                    shouldOverrideDefaultCallbacks =
                     typeof lastArgument === 'object' && 'onSuccess' in lastArgument && 'onError' in lastArgument
-            }
+                }
 
-            storeCallbacks(
-                messageId,
-                apiToResponseTypeMap[prop],
-                shouldOverrideDefaultCallbacks ? lastArgument : undefined
-            )
+                storeCallbacks(
+                    messageId,
+                    apiToResponseTypeMap[prop],
+                    shouldOverrideDefaultCallbacks ? lastArgument : undefined
+                )
 
-            const actualPayload = shouldOverrideDefaultCallbacks ? payload.slice(0, -1) : payload
+                const actualPayload = shouldOverrideDefaultCallbacks ? payload.slice(0, -1) : payload
 
-            await _target[prop](...actualPayload)({ actorId, messageId })
-        },
+                await _target[prop](...actualPayload)({ actorId, messageId })
+            },
     set: () => false,
 })
 
-export function proxyApi(activeProfileIdGetter: () => string) {
+export function proxyApi(activeProfileIdGetter: () => string): typeof Wallet.api {
     return new Proxy(Wallet.api, GenerateMiddleware(activeProfileIdGetter))
 }

@@ -9,7 +9,7 @@
     export let id = ''
     export let isDeveloper = false
     export let isLedgerProfile = false
-    export let onClick = () => ''
+    export let onClick = (): void | string => ''
     export let bgColor
 
     const slots = $$props.$$slots

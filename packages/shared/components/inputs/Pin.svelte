@@ -91,19 +91,19 @@
         }
     }
 
-    const selectFirstEmptyRoot = (e) => {
+    const selectFirstEmptyRoot = (e): void => {
         if (e.target === root) {
             selectFirstEmpty()
         }
     }
 
-    export function focus() {
+    export function focus(): void {
         if (!disabled) {
             selectFirstEmpty()
         }
     }
 
-    export function resetAndFocus() {
+    export function resetAndFocus(): void {
         if (!disabled) {
             inputs = new Array(PIN_LENGTH)
             selectFirstEmpty()
