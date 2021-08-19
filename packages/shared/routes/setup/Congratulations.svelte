@@ -25,7 +25,7 @@
 
     const { didComplete } = $migration
 
-    let wasMigrated = $didComplete
+    const wasMigrated = $didComplete
 
     let localizedBody = 'body'
     let localizedValues = {}
@@ -57,7 +57,7 @@
 
     const dispatch = createEventDispatcher()
 
-    let fiatbalance = formatCurrency(
+    const fiatbalance = formatCurrency(
         convertToFiat(
             // Only show actually migrated balance to user
             $totalMigratedBalance,

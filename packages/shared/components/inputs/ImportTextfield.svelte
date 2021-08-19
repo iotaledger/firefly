@@ -71,7 +71,7 @@
             .replace(/\n/g, '')
             .replace(/  +/g, ' ')
 
-        let trimmedContent = content.trim()
+        const trimmedContent = content.trim()
 
         if (trimmedContent.length >= 3) {
             const words = trimmedContent.split(' ')

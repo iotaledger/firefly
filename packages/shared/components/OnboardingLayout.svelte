@@ -21,7 +21,7 @@
 {/if}
 <!--  -->
 <div data-label="onboarding-layout" class="relative w-full h-full flex flex-row">
-    <div data-label="leftpane" class="h-full flex justify-center p-10 bg-white dark:bg-gray-800" style={`width: 38%;`}>
+    <div data-label="leftpane" class="h-full flex justify-center p-10 bg-white dark:bg-gray-800" style={'width: 38%;'}>
         <div class="w-full h-full flex flex-col justify-between" style="max-width: 406px;">
             <div class="flex flex-col h-full">
                 {#if allowBack}
@@ -43,7 +43,7 @@
             </div>
         </div>
     </div>
-    <div data-label="rightpane" style={`width: 62%;`} class="relative bg-gray-100 dark:bg-gray-900">
+    <div data-label="rightpane" style={'width: 62%;'} class="relative bg-gray-100 dark:bg-gray-900">
         <slot name="rightpane" />
         {#if showLedgerProgress}
             <div class="absolute transform bottom-8 left-1/2 -translate-x-1/2 w-full px-20">

@@ -48,7 +48,7 @@
     }
 
     const focusItem = (itemId) => {
-        let elem = document.getElementById(itemId)
+        const elem = document.getElementById(itemId)
         focusedItem = elem
     }
 

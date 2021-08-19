@@ -14,7 +14,7 @@
     let username = node?.auth?.username ?? ''
     let password = node?.auth?.password ?? ''
     let addressError = ''
-    let authError = ''
+    const authError = ''
     let isBusy = false
 
     async function addCustomNode() {

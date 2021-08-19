@@ -41,9 +41,9 @@
     const { didComplete, bundles, data } = $migration
     const { balance } = $data
 
-    let migratableBalance = balance - $unselectedInputs.reduce((acc, input) => acc + input.balance, 0)
+    const migratableBalance = balance - $unselectedInputs.reduce((acc, input) => acc + input.balance, 0)
 
-    let fiatbalance = formatCurrency(
+    const fiatbalance = formatCurrency(
         convertToFiat(migratableBalance, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[AvailableExchangeRates.USD]),
         AvailableExchangeRates.USD
     )
@@ -54,7 +54,7 @@
 
     let singleMigrationBundleHash
 
-    let legacyLedger = $walletSetupType === SetupType.TrinityLedger
+    const legacyLedger = $walletSetupType === SetupType.TrinityLedger
     $: animation = legacyLedger ? 'ledger-migrate-desktop' : 'migrate-desktop'
 
     let closeTransport = () => {}

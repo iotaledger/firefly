@@ -22,7 +22,7 @@
     }
 
     let root
-    let inputElements = []
+    const inputElements = []
 
     const KEYBOARD = {
         BACKSPACE: 8,
@@ -50,7 +50,7 @@
     }
 
     const changeHandler = function (e, i) {
-        let regex = new RegExp(/^\d+$/)
+        const regex = new RegExp(/^\d+$/)
 
         if (e.keyCode == KEYBOARD.BACKSPACE) {
             handleBackspace()

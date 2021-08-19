@@ -6,7 +6,7 @@
     export let locale
 
     let stepIndex = 0
-    let stepAnimations = [
+    const stepAnimations = [
         'ledger-live-updated-desktop',
         'ledger-connected-2-desktop',
         'ledger-search-apps-desktop',

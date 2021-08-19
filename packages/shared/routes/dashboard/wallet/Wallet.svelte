@@ -66,9 +66,7 @@
     const selectedAccount = derived([selectedAccountId, accounts], ([$selectedAccountId, $accounts]) =>
         $accounts.find((acc) => acc.id === $selectedAccountId)
     )
-    const accountTransactions = derived([selectedAccount], ([$selectedAccount]) => {
-        return $selectedAccount ? getAccountMessages($selectedAccount) : []
-    })
+    const accountTransactions = derived([selectedAccount], ([$selectedAccount]) => $selectedAccount ? getAccountMessages($selectedAccount) : [])
 
     const viewableAccounts: Readable<WalletAccount[]> = derived([activeProfile, accounts], ([$activeProfile, $accounts]) => {
         if (!$activeProfile) {
@@ -76,7 +74,7 @@
         }
 
         if ($activeProfile.settings.showHiddenAccounts) {
-            let sortedAccounts = $accounts.sort((a, b) => a.index - b.index)
+            const sortedAccounts = $accounts.sort((a, b) => a.index - b.index)
 
             // If the last account is "hidden" and has no value, messages or history treat it as "deleted"
             // This account will get re-used if someone creates a new one
@@ -106,7 +104,7 @@
 
     const transactions = derived([viewableAccounts, activeProfile], ([$viewableAccounts, $activeProfile]) => {
         const _migratedTransactions = $activeProfile?.migratedTransactions || []
-        
+
         return [..._migratedTransactions, ...getTransactions($viewableAccounts)]
     })
 
@@ -179,7 +177,7 @@
                     }
 
                     let completeCount = 0
-                    let newAccounts = []
+                    const newAccounts = []
                     for (const payloadAccount of accountsResponse.payload) {
                         // Only keep messages with a payload
                         payloadAccount.messages = payloadAccount.messages.filter((m) => m.payload)
@@ -347,22 +345,20 @@
                 api.setAlias(reuseAccountId, alias, {
                     onSuccess() {
                         let hasUpdated = false
-                        accounts.update((_accounts) => {
-                            return _accounts.map((account) => {
-                                if (account.id === reuseAccountId) {
-                                    hasUpdated = true
-                                    return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                                        {} as WalletAccount,
-                                        account,
-                                        {
-                                            alias,
-                                        }
-                                    )
-                                }
+                        accounts.update((_accounts) => _accounts.map((account) => {
+                            if (account.id === reuseAccountId) {
+                                hasUpdated = true
+                                return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
+                                    {} as WalletAccount,
+                                    account,
+                                    {
+                                        alias,
+                                    }
+                                )
+                            }
 
-                                return account
-                            })
-                        })
+                            return account
+                        }))
 
                         // We didn't have the account in the list to update
                         // so we need to retrieve the details from the wallet manually
@@ -417,14 +413,12 @@
                                         getAccountMeta(createAccountResponse.payload.id, (err, meta) => {
                                             if (!err) {
                                                 const account = prepareAccountInfo(createAccountResponse.payload, meta)
-                                                accounts.update((storedAccounts) => {
-                                                    return storedAccounts.map((storedAccount) => {
-                                                        if (storedAccount.id === account.id) {
-                                                            return account
-                                                        }
-                                                        return storedAccount
-                                                    })
-                                                })
+                                                accounts.update((storedAccounts) => storedAccounts.map((storedAccount) => {
+                                                    if (storedAccount.id === account.id) {
+                                                        return account
+                                                    }
+                                                    return storedAccount
+                                                }))
                                             }
                                             resolve(null)
                                         })
@@ -481,21 +475,19 @@
                 },
                 {
                     onSuccess(response) {
-                        accounts.update((_accounts) => {
-                            return _accounts.map((_account) => {
-                                if (_account.id === senderAccountId) {
-                                    return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                                        {} as WalletAccount,
-                                        _account,
-                                        {
-                                            messages: [response.payload, ..._account.messages],
-                                        }
-                                    )
-                                }
+                        accounts.update((_accounts) => _accounts.map((_account) => {
+                            if (_account.id === senderAccountId) {
+                                return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
+                                    {} as WalletAccount,
+                                    _account,
+                                    {
+                                        messages: [response.payload, ..._account.messages],
+                                    }
+                                )
+                            }
 
-                                return _account
-                            })
-                        })
+                            return _account
+                        }))
 
                         transferState.set({
                             type: TransferProgressEventType.Complete,
@@ -551,26 +543,24 @@
                         return transfers
                     })
 
-                    accounts.update((_accounts) => {
-                        return _accounts.map((_account) => {
-                            if (_account.id === senderAccountId) {
-                                const m = deepCopy(message)
-                                const mPayload = m.payload as Transaction
-                                mPayload.data.essence.data.incoming = false
-                                mPayload.data.essence.data.internal = true
-                                _account.messages.push(m)
-                            }
-                            if (_account.id === receiverAccountId) {
-                                const m = deepCopy(message)
-                                const mPayload = m.payload as Transaction
-                                mPayload.data.essence.data.incoming = true
-                                mPayload.data.essence.data.internal = true
-                                _account.messages.push(m)
-                            }
+                    accounts.update((_accounts) => _accounts.map((_account) => {
+                        if (_account.id === senderAccountId) {
+                            const m = deepCopy(message)
+                            const mPayload = m.payload as Transaction
+                            mPayload.data.essence.data.incoming = false
+                            mPayload.data.essence.data.internal = true
+                            _account.messages.push(m)
+                        }
+                        if (_account.id === receiverAccountId) {
+                            const m = deepCopy(message)
+                            const mPayload = m.payload as Transaction
+                            mPayload.data.essence.data.incoming = true
+                            mPayload.data.essence.data.internal = true
+                            _account.messages.push(m)
+                        }
 
-                            return _account
-                        })
-                    })
+                        return _account
+                    }))
 
                     transferState.set({
                         type: TransferProgressEventType.Complete,

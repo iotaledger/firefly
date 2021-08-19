@@ -152,7 +152,7 @@ class ActionValidator extends Validator {
      * @returns {ValidationResponse}
      */
     isValid(response: MessageResponse): ValidationResponse {
-        const action = response.action
+        const { action } = response
 
         if ('string' !== typeof action) {
             return super.createResponse(false, {
@@ -186,7 +186,7 @@ class PayloadTypeValidator extends Validator {
      * @returns {ValidationResponse}
      */
     isValid(response: MessageResponse): ValidationResponse {
-        const payload = response.payload
+        const { payload } = response
 
         if (payload && typeof payload !== this.type) {
             return super.createResponse(false, {
@@ -587,7 +587,10 @@ class TypeValidator extends Validator {
      */
     isValid(response: MessageResponse): ValidationResponse {
         const hasValidType =
-            'object' === typeof response && null !== response && !Array.isArray(response) && 'function' !== typeof response
+            'object' === typeof response &&
+            null !== response &&
+            !Array.isArray(response) &&
+            'function' !== typeof response
 
         if (!hasValidType) {
             return super.createResponse(false, {
@@ -776,9 +779,13 @@ export default class ValidatorService {
         this.ids = ids
 
         this.validators = {
-            [ResponseTypes.InvalidMessage]: this.createBaseValidator().add(new PayloadTypeValidator('object')).getFirst(),
+            [ResponseTypes.InvalidMessage]: this.createBaseValidator()
+                .add(new PayloadTypeValidator('object'))
+                .getFirst(),
             [ResponseTypes.StrongholdPasswordSet]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.RemovedAccount]: this.createBaseValidator().add(new PayloadTypeValidator('string')).getFirst(),
+            [ResponseTypes.RemovedAccount]: this.createBaseValidator()
+                .add(new PayloadTypeValidator('string'))
+                .getFirst(),
             [ResponseTypes.CreatedAccount]: this.createBaseValidator().add(new AccountValidator()).getFirst(),
             [ResponseTypes.ReadAccounts]: this.createBaseValidator().add(new AccountListValidator()).getFirst(),
             [ResponseTypes.Balance]: this.createBaseValidator().add(new PayloadTypeValidator('object')).getFirst(),
@@ -794,12 +801,16 @@ export default class ValidatorService {
             [ResponseTypes.Ok]: this.createBaseValidator().getFirst(),
             [ResponseTypes.SentTransfer]: this.createBaseValidator().add(new MessageValidator()).getFirst(),
             [ResponseTypes.StoragePasswordSet]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.StrongholdStatus]: this.createBaseValidator().add(new StrongholdStatusValidator()).getFirst(),
+            [ResponseTypes.StrongholdStatus]: this.createBaseValidator()
+                .add(new StrongholdStatusValidator())
+                .getFirst(),
             [ResponseTypes.GeneratedAddress]: this.createBaseValidator().add(new AddressValidator()).getFirst(),
             [ResponseTypes.LatestAddress]: this.createBaseValidator().add(new AddressValidator()).getFirst(),
             [ResponseTypes.SyncedAccount]: this.createBaseValidator().add(new SyncedAccountValidator()).getFirst(),
             [ResponseTypes.UnusedAddress]: this.createBaseValidator().add(new AddressValidator()).getFirst(),
-            [ResponseTypes.IsLatestAddressUnused]: this.createBaseValidator().add(new PayloadTypeValidator('boolean')).getFirst(),
+            [ResponseTypes.IsLatestAddressUnused]: this.createBaseValidator()
+                .add(new PayloadTypeValidator('boolean'))
+                .getFirst(),
             [ResponseTypes.AreAllLatestAddressesUnused]: this.createBaseValidator()
                 .add(new PayloadTypeValidator('boolean'))
                 .getFirst(),
@@ -851,7 +862,10 @@ export default class ValidatorService {
      * @returns {ValidatorChainBuilder}
      */
     private createBaseValidator(): ValidatorChainBuilder {
-        return new ValidatorChainBuilder().add(new TypeValidator()).add(new IdValidator(this.ids)).add(new ActionValidator())
+        return new ValidatorChainBuilder()
+            .add(new TypeValidator())
+            .add(new IdValidator(this.ids))
+            .add(new ActionValidator())
     }
 
     /**

@@ -25,12 +25,12 @@
     export let status = Status.ReadyToMigrate
     export let errorText = null
 
-    let fiatBalance = formatCurrency(
+    const fiatBalance = formatCurrency(
         convertToFiat(balance, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[AvailableExchangeRates.USD]),
         AvailableExchangeRates.USD
     )
 
-    let balanceString = `${formatUnitBestMatch(balance, true, 3)} • ${fiatBalance}`
+    const balanceString = `${formatUnitBestMatch(balance, true, 3)} • ${fiatBalance}`
 
     let showTooltip = false
     let errorBox

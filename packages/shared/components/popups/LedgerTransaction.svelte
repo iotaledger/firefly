@@ -13,12 +13,12 @@
 
     export let remainderAddress = ''
     export let remainderAmount = null
-    let shouldDisplayRemainderAddress = remainderAddress?.length > 0
-    let shouldDisplayRemainderAmount = remainderAmount !== null
+    const shouldDisplayRemainderAddress = remainderAddress?.length > 0
+    const shouldDisplayRemainderAmount = remainderAmount !== null
 
     export let toAddress = ''
     export let toAmount = null
-    let shouldDisplaySendTo = toAddress?.length > 0 && toAmount !== null
+    const shouldDisplaySendTo = toAddress?.length > 0 && toAmount !== null
 
     const onInvalid = () => {
         showAppNotification({

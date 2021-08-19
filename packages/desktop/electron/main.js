@@ -70,7 +70,7 @@ const windows = {
     error: null,
 }
 
-let paths = {
+const paths = {
     preload: '',
     html: '',
     aboutHtml: '',
@@ -143,7 +143,7 @@ const handleNavigation = (e, url) => {
             shell.openExternal(url)
         }
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
 }
 
@@ -278,7 +278,7 @@ initMenu()
 app.allowRendererProcessReuse = false
 
 // Quit when all windows are closed.
-app.on('window-all-closed', function () {
+app.on('window-all-closed', () => {
     // On macOS it is common for applications and their menu bar
     // to stay active until the user quits explicitly with Cmd + Q
     if (process.platform !== 'darwin') {
@@ -286,7 +286,7 @@ app.on('window-all-closed', function () {
     }
 })
 
-app.on('activate', function () {
+app.on('activate', () => {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) {
@@ -301,31 +301,17 @@ app.once('ready', () => {
 // IPC handlers for APIs exposed from main proces
 
 // URLs
-ipcMain.handle('open-url', (_e, url) => {
-    return handleNavigation(_e, url)
-})
+ipcMain.handle('open-url', (_e, url) => handleNavigation(_e, url))
 
 // Keychain
-ipcMain.handle('keychain-getAll', (_e) => {
-    return Keychain.getAll()
-})
-ipcMain.handle('keychain-get', (_e, key) => {
-    return Keychain.get(key)
-})
-ipcMain.handle('keychain-set', (_e, key, content) => {
-    return Keychain.set(key, content)
-})
-ipcMain.handle('keychain-remove', (_e, key) => {
-    return Keychain.remove(key)
-})
+ipcMain.handle('keychain-getAll', (_e) => Keychain.getAll())
+ipcMain.handle('keychain-get', (_e, key) => Keychain.get(key))
+ipcMain.handle('keychain-set', (_e, key, content) => Keychain.set(key, content))
+ipcMain.handle('keychain-remove', (_e, key) => Keychain.remove(key))
 
 // Dialogs
-ipcMain.handle('show-open-dialog', (_e, options) => {
-    return dialog.showOpenDialog(options)
-})
-ipcMain.handle('show-save-dialog', (_e, options) => {
-    return dialog.showSaveDialog(options)
-})
+ipcMain.handle('show-open-dialog', (_e, options) => dialog.showOpenDialog(options))
+ipcMain.handle('show-save-dialog', (_e, options) => dialog.showSaveDialog(options))
 
 // Miscellaneous
 ipcMain.handle('get-path', (_e, path) => {
@@ -383,23 +369,19 @@ const getDiagnostics = () => {
     ]
 }
 
-ipcMain.handle('diagnostics', (_e) => {
-    return getDiagnostics()
-})
+ipcMain.handle('diagnostics', (_e) => getDiagnostics())
 
 ipcMain.handle('handle-error', (_e, errorType, error) => {
     handleError(errorType, error, true)
 })
 
 // Os
-ipcMain.handle('get-os', (_e) => {
-    return process.platform
-})
+ipcMain.handle('get-os', (_e) => process.platform)
 
 /**
  * Define deep link state
  */
-let deepLinkUrl = null
+const deepLinkUrl = null
 
 /**
  * Create a single instance only

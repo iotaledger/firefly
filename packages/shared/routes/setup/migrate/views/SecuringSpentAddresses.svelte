@@ -21,7 +21,7 @@
     let progressBarMessage = `${progressBarPercent} % completed`
     let timeElapsed = 0
 
-    let legacyLedger = $walletSetupType === SetupType.TrinityLedger
+    const legacyLedger = $walletSetupType === SetupType.TrinityLedger
 
     let timeout
     let interval
@@ -85,7 +85,7 @@
     }
 
     function updateProgress() {
-        progressBarPercent = Math.floor((timeElapsed / (MINING_TIMEOUT_SECONDS * $selectedBundlesToMine.length)) * 100)
+        progressBarPercent = Math.floor(timeElapsed / (MINING_TIMEOUT_SECONDS * $selectedBundlesToMine.length) * 100)
         progressBarMessage = progressBarPercent.toString() + '% completed'
     }
 

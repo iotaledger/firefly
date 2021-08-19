@@ -33,7 +33,7 @@
     let unitsButton
     let focusedItem
 
-    let profileCurrency: AvailableExchangeRates = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
+    const profileCurrency: AvailableExchangeRates = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
     $: fiatAmount = amountToFiat(amount)
     $: {
         if (amount.length > 0) {
@@ -55,7 +55,7 @@
     }
 
     const focusItem = (itemId) => {
-        let elem = document.getElementById(itemId)
+        const elem = document.getElementById(itemId)
         focusedItem = elem
     }
 
@@ -110,7 +110,7 @@
         } else {
             const amountAsI = changeUnits(amountAsFloat, unit, Unit.i)
             const amountasFiat = convertToFiat(amountAsI, $currencies[CurrencyTypes.USD], $exchangeRates[profileCurrency])
-            return amountasFiat === 0 ? replaceCurrencyDecimal(`< 0.01`) : formatCurrency(amountasFiat)
+            return amountasFiat === 0 ? replaceCurrencyDecimal('< 0.01') : formatCurrency(amountasFiat)
         }
     }
 </script>

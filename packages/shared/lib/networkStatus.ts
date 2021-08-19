@@ -51,7 +51,7 @@ export async function fetchNetworkStatus(): Promise<void> {
 
     if (accs.length > 0) {
         const account0 = accs[0]
-        const clientOptions = account0.clientOptions
+        const { clientOptions } = account0
         const node: Node = {
             ...(clientOptions.node ?? getOfficialNodes()[0]),
             auth: { username: '', password: '' },

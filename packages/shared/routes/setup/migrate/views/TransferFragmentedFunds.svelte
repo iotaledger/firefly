@@ -33,7 +33,7 @@
     let migratingFundsMessage = ''
     let fullSuccess = $hasMigratedAndConfirmedAllSelectedBundles
 
-    let legacyLedger = $walletSetupType === SetupType.TrinityLedger
+    const legacyLedger = $walletSetupType === SetupType.TrinityLedger
     $: animation = legacyLedger ? 'ledger-migrate-desktop' : 'migrate-desktop'
 
     let closeTransport = () => {}
@@ -396,9 +396,7 @@
 
                         if (
                             idx === transactions.length - 1 &&
-                            transactions.every((tx) => {
-                                return tx.status !== 0
-                            })
+                            transactions.every((tx) => tx.status !== 0)
                         ) {
                             migrated = true
                             busy = false

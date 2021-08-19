@@ -39,7 +39,7 @@
     let localeRiskLevel = ''
     let riskBars = 0
 
-    let fiatBalance = formatCurrency(
+    const fiatBalance = formatCurrency(
         convertToFiat(balance, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[AvailableExchangeRates.USD]),
         AvailableExchangeRates.USD
     )

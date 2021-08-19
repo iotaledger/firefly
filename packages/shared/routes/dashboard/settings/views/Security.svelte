@@ -126,7 +126,7 @@
             } else {
                 passwordChangeBusy = true
                 passwordChangeMessage = locale('general.passwordUpdating')
-                let busyStart = Date.now()
+                const busyStart = Date.now()
                 const _clearMessage = () => {
                     setTimeout(() => (passwordChangeMessage = ''), 2000)
                 }

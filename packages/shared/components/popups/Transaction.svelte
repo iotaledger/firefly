@@ -21,7 +21,7 @@
     export let unit = Unit.i
     export let onConfirm = () => {}
 
-    let displayedAmount = `${formatUnitPrecision(amount, unit)} (${localConvertToFiat(amount)})`
+    const displayedAmount = `${formatUnitPrecision(amount, unit)} (${localConvertToFiat(amount)})`
 
     function localConvertToFiat(amount) {
         const activeCurrency = get(activeProfile)?.settings.currency ?? AvailableExchangeRates.USD

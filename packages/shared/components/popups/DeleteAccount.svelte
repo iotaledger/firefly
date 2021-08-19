@@ -67,7 +67,7 @@
     {:else}
         <Text type="p" secondary classes="mb-5">{locale('popups.deleteAccount.errorBody1')}</Text>
     {/if}
-    <div class={`flex flex-row w-full space-x-4 px-8 justify-center`}>
+    <div class={'flex flex-row w-full space-x-4 px-8 justify-center'}>
         <Button secondary classes="w-1/2" onClick={() => handleCancelClick()} disabled={isBusy}>
             {locale('actions.cancel')}
         </Button>

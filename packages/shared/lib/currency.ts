@@ -146,9 +146,8 @@ export const currencies = writable<Currencies>({} as Currencies)
  *
  * @returns {number}
  */
-export const convertToFiat = (amount: number, usdPrice: number, conversionRate: number): number => {
-    return +(((amount * usdPrice) / 1000000) * conversionRate).toFixed(2)
-}
+export const convertToFiat = (amount: number, usdPrice: number, conversionRate: number): number =>
+    +(((amount * usdPrice) / 1000000) * conversionRate).toFixed(2)
 
 /**
  * Converts to appropriate decimal places for a given currency
@@ -223,9 +222,7 @@ export const getGroupSeparator = (currency: string | undefined = undefined) => {
     )
 }
 
-export const getAllDecimalSeparators = () => {
-    return ['.', ',']
-}
+export const getAllDecimalSeparators = () => ['.', ',']
 
 export const parseCurrency = (valueString: string, currency: string | undefined = undefined): number => {
     // Need to escape the character in the regex in case it is . otherwise it will replace all characters
@@ -317,6 +314,5 @@ export const ensureZeros = (val: string, maxZeros: number): string => {
     }
 }
 
-export const replaceCurrencyDecimal = (value: string, currency: string | undefined = undefined): string => {
-    return value.replace('.', getDecimalSeparator(currency))
-}
+export const replaceCurrencyDecimal = (value: string, currency: string | undefined = undefined): string =>
+    value.replace('.', getDecimalSeparator(currency))

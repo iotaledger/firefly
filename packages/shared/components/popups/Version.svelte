@@ -23,12 +23,13 @@
 
     onMount(async () => {
         // @ts-ignore: This value is replaced by Webpack DefinePlugin
+        /* eslint-disable no-undef */
         if (!devMode) {
             await getVersionDetails()
             await updateCheck()
         }
         const os = await Electron.getOS()
-        hasAutoUpdate = os !== "win32"
+        hasAutoUpdate = os !== 'win32'
     })
 </script>
 

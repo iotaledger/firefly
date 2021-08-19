@@ -53,7 +53,7 @@ try {
                         // so retry if we receive a busy exception
                         fs.rmdirSync(profilePath, { recursive: true, maxRetries: 30, retryDelay: 500 })
                     } catch (err) {
-                        console.log(err)
+                        console.error(err)
                     }
                 }
             })
@@ -67,7 +67,7 @@ try {
                         // Get a list of all the profile folders in storage
                         return fs.readdirSync(profileStoragePath)
                     } catch (err) {
-                        console.log(err)
+                        console.error(err)
                     }
                 }
             })
@@ -75,8 +75,8 @@ try {
         PincodeManager,
         DeepLinkManager,
         NotificationManager,
-        getStrongholdBackupDestination: (defaultPath) => {
-            return ipcRenderer
+        getStrongholdBackupDestination: (defaultPath) =>
+            ipcRenderer
                 .invoke('show-save-dialog', {
                     properties: ['createDirectory', 'showOverwriteConfirmation'],
                     defaultPath,
@@ -88,8 +88,7 @@ try {
                     }
 
                     return result.filePath
-                })
-        },
+                }),
 
         /**
          * Exports migration log
@@ -101,8 +100,8 @@ try {
          *
          * @returns {Promise<boolean>}
          */
-        exportMigrationLog: (sourcePath, defaultFileName) => {
-            return ipcRenderer
+        exportMigrationLog: (sourcePath, defaultFileName) =>
+            ipcRenderer
                 .invoke('show-save-dialog', {
                     properties: ['createDirectory', 'showOverwriteConfirmation'],
                     defaultPath: defaultFileName,
@@ -122,8 +121,7 @@ try {
                             }
                         })
                     })
-                })
-        },
+                }),
 
         /**
          * Exports ledger migration log
@@ -135,8 +133,8 @@ try {
          *
          * @returns {Promise}
          */
-        exportLedgerMigrationLog: (content, defaultFileName) => {
-            return ipcRenderer
+        exportLedgerMigrationLog: (content, defaultFileName) =>
+            ipcRenderer
                 .invoke('show-save-dialog', {
                     properties: ['createDirectory', 'showOverwriteConfirmation'],
                     defaultPath: defaultFileName,
@@ -165,8 +163,7 @@ try {
                             reject(err)
                         }
                     })
-                })
-        },
+                }),
 
         /**
          * Imports legacy IOTA seed
@@ -178,9 +175,7 @@ try {
          *
          * @returns {Promise<string>}
          */
-        importLegacySeed: (buffer, password) => {
-            return kdbx.importVault(buffer, password)
-        },
+        importLegacySeed: (buffer, password) => kdbx.importVault(buffer, password),
 
         /**
          * Validates Seed Vault
@@ -191,9 +186,7 @@ try {
          *
          * @returns {boolean}
          */
-        validateSeedVault: (buffer) => {
-            return kdbx.checkFormat(buffer)
-        },
+        validateSeedVault: (buffer) => kdbx.checkFormat(buffer),
 
         /**
          * Gets directory for app's configuration files
@@ -337,8 +330,8 @@ try {
          * Save the recovery kit
          * @returns
          */
-        saveRecoveryKit: (recoverKitData) => {
-            return ipcRenderer
+        saveRecoveryKit: (recoverKitData) =>
+            ipcRenderer
                 .invoke('show-save-dialog', {
                     properties: ['createDirectory', 'showOverwriteConfirmation'],
                     defaultPath: 'firefly-recovery-kit.pdf',
@@ -357,8 +350,7 @@ try {
                     } catch (err) {
                         console.error(err)
                     }
-                })
-        },
+                }),
         /**
          * Hook the logger
          * @returns

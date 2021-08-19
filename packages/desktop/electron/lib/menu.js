@@ -2,6 +2,7 @@ import { app, ipcMain, Menu, shell } from 'electron'
 import { WalletRoutes } from 'shared/lib/typings/routes'
 import { closeAboutWindow, getOrInitWindow, openAboutWindow } from '../main'
 import { menuState as state } from './menuState'
+
 /**
  * Creates a native menu tree and applies it to the application window
  */
@@ -24,6 +25,7 @@ export const initMenu = () => {
 
     app.once('ready', () => {
         ipcMain.handle('menu-update', (e, args) => {
+            /* eslint-disable no-import-assign */
             state = Object.assign({}, state, args)
             mainMenu = createMenu()
         })
@@ -44,9 +46,7 @@ export const initMenu = () => {
             return !isMaximized
         })
 
-        ipcMain.handle('isMaximized', () => {
-            return getOrInitWindow('main').isMaximized()
-        })
+        ipcMain.handle('isMaximized', () => getOrInitWindow('main').isMaximized())
 
         ipcMain.handle('minimize', () => {
             getOrInitWindow('main').minimize()
@@ -235,8 +235,8 @@ const buildTemplate = () => {
  * Creates context menu
  * @returns {Menu} Context menu
  */
-export const contextMenu = () => {
-    return Menu.buildFromTemplate([
+export const contextMenu = () =>
+    Menu.buildFromTemplate([
         {
             label: state.strings.undo,
             role: 'undo',
@@ -268,4 +268,3 @@ export const contextMenu = () => {
             role: 'selectAll',
         },
     ])
-}

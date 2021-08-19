@@ -12,7 +12,7 @@
 
     const dispatch = createEventDispatcher()
 
-    let addresses = $spentAddressesFromBundles
+    const addresses = $spentAddressesFromBundles
         .map((address) =>
             Object.assign({}, address, {
                 id: address.index,
@@ -23,11 +23,11 @@
 
     let selectedAddresses = addresses.filter((address) => address.selectedToMine === true)
 
-    let legacyLedger = $walletSetupType === SetupType.TrinityLedger
+    const legacyLedger = $walletSetupType === SetupType.TrinityLedger
     $: animation = legacyLedger ? 'ledger-migrate-desktop' : 'migrate-desktop'
 
     function onAddressClick(address) {
-        var index = selectedAddresses.findIndex((_address) => _address.id === address.id)
+        const index = selectedAddresses.findIndex((_address) => _address.id === address.id)
         if (index === -1) {
             selectedAddresses.push(address)
         } else {

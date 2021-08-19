@@ -243,15 +243,15 @@ const handleError = (
  *
  * @returns {string}
  */
-const generateRandomId = (): string => {
-    return Array.from(crypto.getRandomValues(new Uint8Array(16)), (byte) => {
-        return ('0' + (byte & 0xff).toString(16)).slice(-2)
-    }).join('')
-}
+const generateRandomId = (): string =>
+    Array.from(crypto.getRandomValues(new Uint8Array(16)), (byte) => ('0' + (byte & 0xff).toString(16)).slice(-2)).join(
+        ''
+    )
 
 const GenerateMiddleware = (activeProfileIdGetter: () => string) => ({
-    get: (_target, prop) => {
-        return async (...payload): Promise<void> => {
+    get:
+        (_target, prop) =>
+        async (...payload): Promise<void> => {
             const actorId = activeProfileIdGetter()
 
             const messageId = generateRandomId()
@@ -268,16 +268,17 @@ const GenerateMiddleware = (activeProfileIdGetter: () => string) => ({
                     typeof lastArgument === 'object' && 'onSuccess' in lastArgument && 'onError' in lastArgument
             }
 
-            storeCallbacks(messageId, apiToResponseTypeMap[prop], shouldOverrideDefaultCallbacks ? lastArgument : undefined)
+            storeCallbacks(
+                messageId,
+                apiToResponseTypeMap[prop],
+                shouldOverrideDefaultCallbacks ? lastArgument : undefined
+            )
 
             const actualPayload = shouldOverrideDefaultCallbacks ? payload.slice(0, -1) : payload
 
             await _target[prop](...actualPayload)({ actorId, messageId })
-        }
-    },
-    set: () => {
-        return false
-    },
+        },
+    set: () => false,
 })
 
 export function proxyApi(activeProfileIdGetter: () => string) {

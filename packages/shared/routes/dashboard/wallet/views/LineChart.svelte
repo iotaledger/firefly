@@ -29,7 +29,7 @@
     $: labels = chartData.labels
     $: color = $selectedAccount ? $selectedAccount.color : 'blue'
 
-    const hasTitleBar = document.body.classList.contains(`platform-win32`)
+    const hasTitleBar = document.body.classList.contains('platform-win32')
 
     /** Chart data */
     $: {
@@ -67,7 +67,7 @@
     }
 
     onMount(() => {
-        let profileCurrency: AvailableExchangeRates = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
+        const profileCurrency: AvailableExchangeRates = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
         currencyDropdown = Object.values(CurrencyTypes).map((currency) => ({
             value: currency.toUpperCase(),
             label: currency.toUpperCase(),

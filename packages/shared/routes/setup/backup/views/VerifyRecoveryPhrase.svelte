@@ -8,7 +8,7 @@
     export let mnemonic
     export let busy = false
 
-    let verifyRecoveryPhrase = []
+    const verifyRecoveryPhrase = []
     let wordChoices = ['', '', '']
     let verifyIndex = 0
     let verified = false

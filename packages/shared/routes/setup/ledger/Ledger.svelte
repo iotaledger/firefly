@@ -90,7 +90,7 @@
         }
     }
     const _previous = () => {
-        let prevState = $ledgerRouteHistory.pop() as LedgerRoutes
+        const prevState = $ledgerRouteHistory.pop() as LedgerRoutes
         if (prevState) {
             ledgerRoute.set(prevState)
         } else {

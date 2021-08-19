@@ -59,7 +59,7 @@ const fiatHistoryData = derived([priceData, activeProfile], ([$priceData, $activ
     if ($activeProfile?.settings) {
         // back compatibility: init profile chartSelectors
         if (!$activeProfile?.settings.chartSelectors) {
-            let chartSelectors = {
+            const chartSelectors = {
                 currency: AvailableExchangeRates.USD,
                 timeframe: HistoryDataProps.SEVEN_DAYS,
             }
@@ -138,19 +138,24 @@ export function getAccountValueData(balanceHistory: BalanceHistory, accountBalan
 }
 
 export const getAccountActivityData = (account: WalletAccount) => {
-    let now = new Date()
-    let activityTimeframes: ActivityTimeframe[] = []
-    let incoming: ChartData = { data: [], tooltips: [], label: localize('general.incoming'), color: account.color || 'blue' } // TODO: profile colors
-    let outgoing: ChartData = { data: [], tooltips: [], label: localize('general.outgoing'), color: 'gray' } // TODO: profile colors
-    let labels: string[] = []
-    let messages: Message[] =
+    const now = new Date()
+    const activityTimeframes: ActivityTimeframe[] = []
+    const incoming: ChartData = {
+        data: [],
+        tooltips: [],
+        label: localize('general.incoming'),
+        color: account.color || 'blue',
+    } // TODO: profile colors
+    const outgoing: ChartData = { data: [], tooltips: [], label: localize('general.outgoing'), color: 'gray' } // TODO: profile colors
+    const labels: string[] = []
+    const messages: Message[] =
         account.messages
             .slice()
             ?.filter((message) => message.payload && !isSelfTransaction(message.payload, account)) // Remove self transactions and messages with no payload
             ?.sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()) ?? []
-    for (var i = 0; i < BAR_CHART_ACTIVITY_MONTHS; i++) {
-        let start: number = new Date(now.getFullYear(), now.getMonth() - i, 1).getTime()
-        let end: number = new Date(now.getFullYear(), now.getMonth() - i + 1, 0).getTime()
+    for (let i = 0; i < BAR_CHART_ACTIVITY_MONTHS; i++) {
+        const start: number = new Date(now.getFullYear(), now.getMonth() - i, 1).getTime()
+        const end: number = new Date(now.getFullYear(), now.getMonth() - i + 1, 0).getTime()
         activityTimeframes.push({ start, end })
         labels.unshift(formatDate(new Date(start), { month: 'short' }))
     }
@@ -232,7 +237,7 @@ export const getAccountActivityData = (account: WalletAccount) => {
             })
         })
     }
-    let chartData = {
+    const chartData = {
         incoming,
         outgoing,
         labels,
@@ -242,7 +247,7 @@ export const getAccountActivityData = (account: WalletAccount) => {
 
 function formatLabel(timestamp: number): string {
     const date: Date = new Date(timestamp)
-    var formattedLabel: string = ''
+    let formattedLabel: string = ''
     switch (get(activeProfile)?.settings.chartSelectors.timeframe) {
         case HistoryDataProps.ONE_HOUR:
         case HistoryDataProps.TWENTY_FOUR_HOURS:
@@ -262,7 +267,11 @@ function formatLabel(timestamp: number): string {
     return formattedLabel
 }
 
-function formatLineChartTooltip(data: number | string, timestamp: number | string, showMiota: boolean = false): Tooltip {
+function formatLineChartTooltip(
+    data: number | string,
+    timestamp: number | string,
+    showMiota: boolean = false
+): Tooltip {
     const currency = get(activeProfile)?.settings.chartSelectors.currency ?? ''
     const title: string = `${showMiota ? `1 ${Unit.Mi}: ` : ''}${formatCurrencyValue(data, currency, 3)} ${currency}`
     const label: string = formatDate(new Date(timestamp), {

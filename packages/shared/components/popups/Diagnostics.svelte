@@ -13,7 +13,7 @@
 
     const combineValues = (values) => values.map((c) => (c.label ? `${locale(c.label)}: ${c.value}` : c.value)).join('\r\n')
 
-    let appVars = [
+    const appVars = [
         {
             label: '',
             value: locale('views.dashboard.security.version.title', { values: { version: $versionDetails.currentVersion } }),

@@ -143,7 +143,13 @@ export function createMigrationBundle(
  *
  * @returns {Promise}
  */
-export function sendMigrationBundle(bridge: Bridge, __ids: CommunicationIds, nodes: string[], bundleHash: string, mwm: number) {
+export function sendMigrationBundle(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+    nodes: string[],
+    bundleHash: string,
+    mwm: number
+) {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -167,7 +173,12 @@ export function sendMigrationBundle(bridge: Bridge, __ids: CommunicationIds, nod
  *
  * @returns {Promise}
  */
-export function getMigrationAddress(bridge: Bridge, __ids: CommunicationIds, ledgerPrompt: boolean, accountIndex: number) {
+export function getMigrationAddress(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+    ledgerPrompt: boolean,
+    accountIndex: number
+) {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,

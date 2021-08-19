@@ -148,7 +148,7 @@
     $: selected = animations[animation]?.[darkModeEnabled ? 'darkmode' : 'lightmode']
 
     $: if (selected && container) {
-        let options = {
+        const options = {
             container,
             renderer,
             path: `assets/animations/${selected}`,

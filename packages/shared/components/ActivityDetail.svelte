@@ -28,9 +28,9 @@
     export let onBackClick = () => {}
     export let balance // migration tx
 
-    let cachedMigrationTx = !payload
-    let milestonePayload = payload?.type === 'Milestone' ? (payload as Milestone) : undefined
-    let txPayload = payload?.type === 'Transaction' ? (payload as Transaction) : undefined
+    const cachedMigrationTx = !payload
+    const milestonePayload = payload?.type === 'Milestone' ? (payload as Milestone) : undefined
+    const txPayload = payload?.type === 'Transaction' ? (payload as Transaction) : undefined
 
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
 
@@ -51,7 +51,7 @@
         if (txPayload) {
             return receiverAddressesFromTransactionPayload(txPayload)
         } else if (milestonePayload) {
-            const funds = milestonePayload.data.essence.receipt.data.funds
+            const {funds} = milestonePayload.data.essence.receipt.data
 
             const firstAccount = $accounts.find((acc) => acc.index === 0)
             const firstAccountAddresses = firstAccount.addresses.map((address) => address.address)
@@ -90,9 +90,9 @@
         return null
     }
 
-    let senderAddress: string = prepareSenderAddress()
-    let receiverAddresses: string[] = prepareReceiverAddresses()
-    let receiverAddressesYou: WalletAccount[] = receiverAddresses.map((a) => findAccountWithAddress(a))
+    const senderAddress: string = prepareSenderAddress()
+    const receiverAddresses: string[] = prepareReceiverAddresses()
+    const receiverAddressesYou: WalletAccount[] = receiverAddresses.map((a) => findAccountWithAddress(a))
 
     $: senderAccount = prepareSenderAccount()
     $: receiverAccount = prepareReceiverAccount()

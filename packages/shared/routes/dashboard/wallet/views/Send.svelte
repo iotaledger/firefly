@@ -45,7 +45,7 @@
     let address = ''
     let to = undefined
     let amountError = ''
-    let addressPrefix = ($account ?? $liveAccounts[0]).depositAddress.split('1')[0]
+    const addressPrefix = ($account ?? $liveAccounts[0]).depositAddress.split('1')[0]
     let addressError = ''
     let toError = ''
     let amountRaw
@@ -61,7 +61,7 @@
     $: to, (toError = '')
     $: address, (addressError = '')
 
-    let transferSteps: {
+    const transferSteps: {
         [key in TransferProgressEventType]: {
             label: string
             percent: number
@@ -166,11 +166,12 @@
             case TransferProgressEventType.GeneratingRemainderDepositAddress:
                 transactionEventData = data
 
-            /**
+                /**
              * NOTE: The break statement is omitted in this case to allow the next block of code
              * (under SigningTransaction) to be executed.
              */
 
+                /* eslint-disable no-fallthrough */
             case TransferProgressEventType.SigningTransaction:
                 ledgerAwaitingConfirmation = true
 
@@ -187,7 +188,7 @@
                 break
 
             case TransferProgressEventType.PreparedTransaction:
-                /**
+            /**
                  * CAUTION: The Ledger confirmation doesn't always trigger
                  * the popup to close, so it is programmatically enforced here.
                  */
@@ -308,7 +309,7 @@
         } else if (unit === Unit.i && Number.parseInt(amount, 10).toString() !== amount) {
             amountError = locale('error.send.amountNoFloat')
         } else {
-            let amountAsFloat = parseCurrency(amount)
+            const amountAsFloat = parseCurrency(amount)
             if (Number.isNaN(amountAsFloat)) {
                 amountError = locale('error.send.amountInvalidFormat')
             } else {
@@ -357,17 +358,15 @@
     const triggerSend = (isInternal) => {
         closePopup()
 
-        const _send = (isInternal: boolean): any => {
-            /**
-             * NOTE: selectedSendType is passed (only to the internalTransfer method) in the
-             * case that we are masquerading as an internal transfer by sending to an address
-             * in another account. Send parameters are reset once the transfer completes.
-             */
-            return () =>
-                isInternal
-                    ? internalTransfer(from.id, to.id, amountRaw, selectedSendType === SEND_TYPE.INTERNAL)
-                    : send(from.id, address, amountRaw)
-        }
+        const _send = (isInternal: boolean): any =>
+        /**
+         * NOTE: selectedSendType is passed (only to the internalTransfer method) in the
+         * case that we are masquerading as an internal transfer by sending to an address
+         * in another account. Send parameters are reset once the transfer completes.
+         */
+            isInternal
+                ? internalTransfer(from.id, to.id, amountRaw, selectedSendType === SEND_TYPE.INTERNAL)
+                : send(from.id, address, amountRaw)
 
         handleLedgerConnection(_send(isInternal))
     }
@@ -393,13 +392,11 @@
         }
     }
 
-    const format = (account: WalletAccount) => {
-        return {
-            ...account,
-            label: `${account.alias} • ${account.balance}`,
-            balance: account.rawIotaBalance,
-        }
-    }
+    const format = (account: WalletAccount) => ({
+        ...account,
+        label: `${account.alias} • ${account.balance}`,
+        balance: account.rawIotaBalance,
+    })
     const handleMaxClick = () => {
         amount = formatUnitPrecision(from.balance, unit, false)
     }

@@ -61,6 +61,7 @@ export const validateFilenameChars = (name: string | undefined) => {
     if (name.startsWith('~')) {
         return 'tilde'
     }
+    /* eslint-disable no-control-regex */
     if (/[\u0000-\u001f\u0080-\u009f]/g.test(name)) {
         return 'control'
     }
@@ -104,7 +105,12 @@ export const getInitials = (name: string | undefined, maxChars: number) => {
  * @param dotCount: Count of dots in between first and end portion. Default = 3
  */
 
-export const truncateString = (str: string = '', firstCharCount: number = 5, endCharCount: number = 5, dotCount: number = 3) => {
+export const truncateString = (
+    str: string = '',
+    firstCharCount: number = 5,
+    endCharCount: number = 5,
+    dotCount: number = 3
+) => {
     const MAX_LENGTH = 13
     if (!str || str.length <= MAX_LENGTH) {
         return str
@@ -208,18 +214,14 @@ export const convertHexToRGBA = (hexCode: string, opacity: number = 100) => {
  * @param str The text to strip the values from
  * @returns The stripped text
  */
-export const stripTrailingSlash = (str) => {
-    return str ? str.replace(/\/+$/, '') : ''
-}
+export const stripTrailingSlash = (str) => (str ? str.replace(/\/+$/, '') : '')
 
 /**
  * Strip spaces from the text
  * @param str The text to strip the values from
  * @returns The stripped text
  */
-export const stripSpaces = (str) => {
-    return str ? str.replace(/ /g, '') : ''
-}
+export const stripSpaces = (str) => (str ? str.replace(/ /g, '') : '')
 
 /**
  * Create a deep copy of an object

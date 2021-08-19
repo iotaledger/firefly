@@ -2,16 +2,12 @@ const lib = require('../dist')
 const assert = require('assert')
 const fs = require('fs')
 
-const generateRandomId = () => {
-    return Math.random().toString()
-}
+const generateRandomId = () => Math.random().toString()
 
-const communicationIds = (actorId) => {
-    return {
-        actorId,
-        messageId: generateRandomId(),
-    }
-}
+const communicationIds = (actorId) => ({
+    actorId,
+    messageId: generateRandomId(),
+})
 
 lib.initLogger({
     color_enabled: false,
@@ -41,7 +37,9 @@ describe('binding', () => {
                     recursive: true,
                     force: true,
                 })
-            } catch {}
+            } catch (err) {
+                console.error(err)
+            }
         })
 
         const actorId = Math.random().toString().replace('.', '')
@@ -50,7 +48,6 @@ describe('binding', () => {
             const actor = lib.init(actorId)
             let index = 0
             lib.onMessage((message) => {
-                console.log(message, index)
                 switch (index++) {
                     case 0: {
                         assert.deepStrictEqual(message, {

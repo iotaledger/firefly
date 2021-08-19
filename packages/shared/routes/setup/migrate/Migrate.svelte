@@ -30,7 +30,7 @@
 
     const _next = async (event) => {
         let nextState
-        let params = event.detail || {}
+        const params = event.detail || {}
 
         switch (state) {
             case MigrateState.Init:
@@ -53,10 +53,11 @@
             case MigrateState.BundleMiningWarning:
                 nextState = MigrateState.SecureSpentAddresses
                 break
-            case MigrateState.SecureSpentAddresses:
+            case MigrateState.SecureSpentAddresses: {
                 const { skippedMining } = params
                 nextState = skippedMining ? MigrateState.TransferFragmentedFunds : MigrateState.SecuringSpentAddresses
                 break
+            }
             case MigrateState.SecuringSpentAddresses:
                 nextState = MigrateState.SecurityCheckCompleted
                 break
@@ -72,7 +73,7 @@
     }
 
     const _previous = () => {
-        let prevState = stateHistory.pop()
+        const prevState = stateHistory.pop()
         if (prevState) {
             state = prevState
         } else {

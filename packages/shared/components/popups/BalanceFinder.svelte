@@ -11,7 +11,7 @@
     const { balanceOverview } = $wallet
 
     let addressIndex = 0
-    let gapIndex = $isLedgerProfile ? 10 : 25
+    const gapIndex = $isLedgerProfile ? 10 : 25
     let accountDiscoveryThreshold = $isLedgerProfile ? 3 : 10
     let password = ''
     let error = ''
@@ -84,7 +84,7 @@
         <Button classes="w-full" secondary onClick={handleCancelClick} disabled={isBusy}>{locale('actions.cancel')}</Button>
         <Button classes="w-full" onClick={handleFindBalances} disabled={($isSoftwareProfile && $isStrongholdLocked && password.length === 0) || isBusy}>
             {#if isBusy}
-                <Spinner busy={true} message={locale(`actions.searching`)} classes="justify-center" />
+                <Spinner busy={true} message={locale('actions.searching')} classes="justify-center" />
             {:else}{locale(`actions.${addressIndex ? 'searchAgain' : 'searchBalances'}`)}{/if}
         </Button>
     </div>

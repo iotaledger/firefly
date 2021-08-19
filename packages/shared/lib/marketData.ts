@@ -254,9 +254,9 @@ export async function addProfileCurrencyPriceData(): Promise<void> {
         if (!Object.values(CurrencyTypes.USD).includes(profileCurrency)) {
             const profileCurrencyRate: number = get(exchangeRates)[profileCurrency.toUpperCase()]
             const usdHistory = get(priceData)[CurrencyTypes.USD]
-            let profileCurrencyHistory = {}
+            const profileCurrencyHistory = {}
             Object.keys(usdHistory).forEach((key) => {
-                let convertedProfileCurrencyHistory = usdHistory[key].map(([timestamp, value]) => [
+                const convertedProfileCurrencyHistory = usdHistory[key].map(([timestamp, value]) => [
                     timestamp,
                     (value * profileCurrencyRate).toString(),
                 ])

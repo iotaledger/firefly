@@ -1,6 +1,14 @@
 import { cleanupSignup, login, strongholdPassword, walletPin } from 'shared/lib/app'
 import { activeProfile, profiles, ProfileType } from 'shared/lib/profile'
-import { AccountRoutes, AppRoute, SettingsRoutes, SetupType, Tabs, WalletRoutes, LedgerRoutes } from 'shared/lib/typings/routes'
+import {
+    AccountRoutes,
+    AppRoute,
+    SettingsRoutes,
+    SetupType,
+    Tabs,
+    WalletRoutes,
+    LedgerRoutes,
+} from 'shared/lib/typings/routes'
 import { selectedAccountId } from 'shared/lib/wallet'
 import { get, readable, writable } from 'svelte/store'
 import { deepLinkRequestActive } from './deepLinking'
@@ -89,7 +97,7 @@ export const settingsChildRoute = writable<string>(null)
  * Navigate to initial route
  */
 export const initRouter = () => {
-    let hasCompletedSetup: boolean = get(profiles).length > 0
+    const hasCompletedSetup: boolean = get(profiles).length > 0
 
     if (hasCompletedSetup) {
         setRoute(AppRoute.Login)
@@ -100,12 +108,12 @@ export const initRouter = () => {
 
 // TODO: only handle route changes, not app variables
 export const routerNext = (event) => {
-    let params = event.detail || {}
+    const params = event.detail || {}
     const currentRoute: AppRoute = get(appRoute)
     let nextRoute: AppRoute
 
     switch (currentRoute) {
-        case AppRoute.Login:
+        case AppRoute.Login: {
             const { shouldAddProfile } = params
 
             if (shouldAddProfile) {
@@ -115,13 +123,15 @@ export const routerNext = (event) => {
                 nextRoute = AppRoute.Dashboard
             }
             break
-        case AppRoute.Dashboard:
+        }
+        case AppRoute.Dashboard: {
             const { reset } = params
 
             if (reset) {
                 nextRoute = AppRoute.Login
             }
             break
+        }
         case AppRoute.Welcome:
             nextRoute = AppRoute.Legal
             break
@@ -134,7 +144,7 @@ export const routerNext = (event) => {
         case AppRoute.Profile:
             nextRoute = AppRoute.Setup
             break
-        case AppRoute.Setup:
+        case AppRoute.Setup: {
             const { setupType } = params
             if (setupType) {
                 walletSetupType.set(setupType)
@@ -145,7 +155,8 @@ export const routerNext = (event) => {
                 }
             }
             break
-        case AppRoute.Create:
+        }
+        case AppRoute.Create: {
             const profileType = get(activeProfile)?.type
             if (profileType === ProfileType.Software) {
                 nextRoute = AppRoute.Secure
@@ -153,17 +164,19 @@ export const routerNext = (event) => {
                 nextRoute = AppRoute.Protect
             }
             break
+        }
         case AppRoute.Secure:
             nextRoute = AppRoute.Password
             break
-        case AppRoute.Password:
+        case AppRoute.Password: {
             const { password } = params
             if (password) {
                 strongholdPassword.set(password)
                 nextRoute = AppRoute.Protect
             }
             break
-        case AppRoute.Protect:
+        }
+        case AppRoute.Protect: {
             const { pin } = params
             if (pin) {
                 walletPin.set(pin)
@@ -178,6 +191,7 @@ export const routerNext = (event) => {
                 }
             }
             break
+        }
         case AppRoute.Backup:
             if (get(walletSetupType) === SetupType.Seed || get(walletSetupType) === SetupType.Seedvault) {
                 nextRoute = AppRoute.Migrate
@@ -185,7 +199,7 @@ export const routerNext = (event) => {
                 nextRoute = AppRoute.Congratulations
             }
             break
-        case AppRoute.Import:
+        case AppRoute.Import: {
             nextRoute = AppRoute.Congratulations
             const { importType } = params
             walletSetupType.set(importType)
@@ -197,6 +211,7 @@ export const routerNext = (event) => {
                 nextRoute = AppRoute.Balance
             }
             break
+        }
         case AppRoute.Balance:
             if (get(walletSetupType) === SetupType.TrinityLedger) {
                 nextRoute = AppRoute.Migrate
@@ -264,7 +279,7 @@ export const routerPrevious = () => {
 
 export const resetRouter = () => {
     history.set([])
-    let hasCompletedSetup: boolean = get(profiles).length > 0
+    const hasCompletedSetup: boolean = get(profiles).length > 0
     if (hasCompletedSetup) {
         setRoute(AppRoute.Login)
     } else {

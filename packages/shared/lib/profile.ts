@@ -94,23 +94,23 @@ export const isStrongholdLocked = writable<boolean>(true)
 export const activeProfile: Readable<Profile | undefined> = derived(
     [profiles, newProfile, activeProfileId],
     ([$profiles, $newProfile, $activeProfileId]) =>
-        $newProfile ||
-        $profiles.find((_profile) => {
-            return _profile.id === $activeProfileId
-        })
+        $newProfile || $profiles.find((_profile) => _profile.id === $activeProfileId)
 )
 
 activeProfileId.subscribe((profileId) => {
     Electron.updateActiveProfile(profileId)
 })
 
-export const isSoftwareProfile: Readable<Boolean> = derived(activeProfile, ($activeProfile) => {
-    return $activeProfile?.type === ProfileType.Software
-})
+export const isSoftwareProfile: Readable<Boolean> = derived(
+    activeProfile,
+    ($activeProfile) => $activeProfile?.type === ProfileType.Software
+)
 
-export const isLedgerProfile: Readable<Boolean> = derived(activeProfile, ($activeProfile) => {
-    return $activeProfile?.type === ProfileType.Ledger || $activeProfile?.type === ProfileType.LedgerSimulator
-})
+export const isLedgerProfile: Readable<Boolean> = derived(
+    activeProfile,
+    ($activeProfile) =>
+        $activeProfile?.type === ProfileType.Ledger || $activeProfile?.type === ProfileType.LedgerSimulator
+)
 
 /**
  * Saves profile in persistent storage
@@ -122,9 +122,7 @@ export const isLedgerProfile: Readable<Boolean> = derived(activeProfile, ($activ
  * @returns {Profile}
  */
 export const saveProfile = (profile: Profile): Profile => {
-    profiles.update((_profiles) => {
-        return [..._profiles, profile]
-    })
+    profiles.update((_profiles) => [..._profiles, profile])
 
     return profile
 }
@@ -218,9 +216,7 @@ export const clearActiveProfile = (): void => {
  * @returns {void}
  */
 export const removeProfile = (id: string): void => {
-    profiles.update((_profiles) => {
-        return _profiles.filter((_profile) => _profile.id !== id)
-    })
+    profiles.update((_profiles) => _profiles.filter((_profile) => _profile.id !== id))
 }
 
 /**
@@ -264,15 +260,15 @@ export const updateProfile = (
     if (get(newProfile)) {
         newProfile.update((_profile) => _update(_profile))
     } else {
-        profiles.update((_profiles) => {
-            return _profiles.map((_profile) => {
+        profiles.update((_profiles) =>
+            _profiles.map((_profile) => {
                 if (_profile.id === get(activeProfile)?.id) {
                     return _update(_profile)
                 }
 
                 return _profile
             })
-        })
+        )
     }
 }
 
@@ -321,9 +317,7 @@ export const cleanupEmptyProfiles = async () => {
         const profileStoragePath = getWalletStoragePath(userDataPath)
         const storedProfiles = await Electron.listProfileFolders(profileStoragePath)
 
-        profiles.update((_profiles) => {
-            return _profiles.filter((p) => storedProfiles.includes(p.name))
-        })
+        profiles.update((_profiles) => _profiles.filter((p) => storedProfiles.includes(p.name)))
 
         const appProfiles = get(profiles).map((p) => p.name)
         for (const storedProfile of storedProfiles) {
@@ -386,6 +380,4 @@ export const setMissingProfileType = (accounts: WalletAccount[] = []) => {
  *
  * @returns {boolean}
  */
-export const hasNoProfiles = (): boolean => {
-    return get(profiles).length === 0
-}
+export const hasNoProfiles = (): boolean => get(profiles).length === 0

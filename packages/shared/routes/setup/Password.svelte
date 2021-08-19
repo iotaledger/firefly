@@ -10,7 +10,7 @@
     export let locale
     export let mobile
 
-    let existingPassword = $strongholdPassword
+    const existingPassword = $strongholdPassword
     let password = ''
     let confirmedPassword = ''
     let error = ''

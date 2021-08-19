@@ -6,7 +6,7 @@
     export let locale
 
     let stepIndex = 0
-    let stepAnimations = ['ledger-background-live-desktop', 'ledger-pin-desktop', 'ledger-open-app-desktop', 'ledger-support']
+    const stepAnimations = ['ledger-background-live-desktop', 'ledger-pin-desktop', 'ledger-open-app-desktop', 'ledger-support']
 
     function changeIndex(increment) {
         stepIndex += increment

@@ -15,8 +15,8 @@
 
     export let isActive
     export let locale
-    let hidden = hiddenAccounts.includes($selectedAccountId)
-    let canDelete = $account.index === $allAccounts.length - 1 && $account.rawIotaBalance === 0 && $account.messages.length === 0
+    const hidden = hiddenAccounts.includes($selectedAccountId)
+    const canDelete = $account.index === $allAccounts.length - 1 && $account.rawIotaBalance === 0 && $account.messages.length === 0
 
     const handleCustomiseAccountClick = () => {
         accountRoute.set(AccountRoutes.Manage)
@@ -90,14 +90,14 @@
             class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full {hidden ? 'opacity-50 pointer-events-none' : ''}"
             disabled={hidden}>
             <Icon icon="customize" classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
-            <Text smaller classes="group-hover:text-blue-500">{locale(`actions.customizeAcount`)}</Text>
+            <Text smaller classes="group-hover:text-blue-500">{locale('actions.customizeAcount')}</Text>
         </button>
         <!-- Address history -->
         <button
             on:click={() => handlViewAddressHistoryClick()}
             class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full">
             <Icon icon="history" classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
-            <Text smaller classes="group-hover:text-blue-500">{locale(`actions.viewAddressHistory`)}</Text>
+            <Text smaller classes="group-hover:text-blue-500">{locale('actions.viewAddressHistory')}</Text>
         </button>
         <HR />
         <!-- Delete -->
@@ -106,7 +106,7 @@
             class="group flex flex-row justify-start items-center hover:bg-red-50 dark:hover:bg-red-200 dark:hover:bg-opacity-20 py-4 px-3 w-full">
             <Icon icon={canDelete ? 'delete' : hidden ? 'view' : 'hide'} classes="text-red-500 ml-1 mr-3" />
             <Text smaller classes="text-red-500" overrideColor>
-                {locale(canDelete ? 'actions.deleteAccount' : hidden ? `actions.showAccount` : `actions.hideAccount`)}
+                {locale(canDelete ? 'actions.deleteAccount' : hidden ? 'actions.showAccount' : 'actions.hideAccount')}
             </Text>
         </button>
     </div>

@@ -97,16 +97,16 @@
                         ? 'general.receivedTo'
                         : 'general.sentFrom'
                     : txPayload.data.essence.data.incoming
-                    ? 'general.receivingTo'
-                    : 'general.sendingFrom'
+                        ? 'general.receivingTo'
+                        : 'general.sendingFrom'
             } else {
                 direction = confirmed
                     ? txPayload.data.essence.data.incoming
                         ? 'general.received'
                         : 'general.sent'
                     : txPayload.data.essence.data.incoming
-                    ? 'general.receiving'
-                    : 'general.sending'
+                        ? 'general.receiving'
+                        : 'general.sending'
             }
         }
     }

@@ -29,4 +29,4 @@ packages/shared/locales/
 !packages/shared/locales/en.json
 
 # Common files and folders
-**/node_modules
+**/node_modules/

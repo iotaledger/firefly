@@ -29,9 +29,11 @@ export const UNIT_MAP: { [unit in Unit]: { val: number; dp: number } } = {
  *
  * @returns {string}
  */
-export const formatUnitBestMatch = (value: number, includeUnits: boolean = true, overrideDecimalPlaces?: number): string => {
-    return formatUnitPrecision(value, getUnit(value), includeUnits, false, overrideDecimalPlaces)
-}
+export const formatUnitBestMatch = (
+    value: number,
+    includeUnits: boolean = true,
+    overrideDecimalPlaces?: number
+): string => formatUnitPrecision(value, getUnit(value), includeUnits, false, overrideDecimalPlaces)
 
 /**
  * Format a value with the provided value precision
@@ -54,7 +56,7 @@ export function formatUnitPrecision(
     const currencyPosition = getCurrencyPosition()
 
     if (!valueRaw) {
-        return includeUnits ? (currencyPosition === `left` ? `0 ${unit}` : `0 ${unit}`) : '0'
+        return includeUnits ? (currencyPosition === 'left' ? `0 ${unit}` : `0 ${unit}`) : '0'
     }
 
     const converted = changeUnits(valueRaw, Unit.i, unit)
@@ -68,7 +70,7 @@ export function formatUnitPrecision(
     )
 
     if (includeUnits) {
-        return currencyPosition === `left` ? `${formatted} ${unit}` : `${formatted} ${unit}`
+        return currencyPosition === 'left' ? `${formatted} ${unit}` : `${formatted} ${unit}`
     } else {
         return formatted
     }

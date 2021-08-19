@@ -154,7 +154,7 @@
                 message={locale(`views.dashboard.security.strongholdStatus.${$isStrongholdLocked ? 'locked' : 'unlocked'}`)}
                 color="yellow"
                 icon={$isStrongholdLocked ? 'lock' : 'unlock'}
-                onClick={() => ($isStrongholdLocked ? handleSecurityTileClick('password') : lockStronghold())}
+                onClick={() => $isStrongholdLocked ? handleSecurityTileClick('password') : lockStronghold()}
                 classes="col-span-2"
                 toggle
                 wide

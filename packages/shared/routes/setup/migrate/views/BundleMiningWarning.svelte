@@ -8,7 +8,7 @@
     export let locale
     export let mobile
 
-    let legacyLedger = $walletSetupType === SetupType.TrinityLedger
+    const legacyLedger = $walletSetupType === SetupType.TrinityLedger
 
     const dispatch = createEventDispatcher()
 

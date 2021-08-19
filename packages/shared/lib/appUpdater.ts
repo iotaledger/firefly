@@ -47,7 +47,7 @@ Electron.onEvent('version-complete', () => {
 })
 
 Electron.onEvent('version-error', (nativeVersionError) => {
-    console.log(nativeVersionError)
+    console.error(nativeVersionError)
     updateError.set(true)
 })
 
@@ -58,10 +58,10 @@ export function updateDownload(): void {
     updateComplete.set(false)
     updateError.set(false)
 
-    let progressSubscription
-    let minutesRemainingSubscription
-    let completeSubscription
-    let errorSubscription
+    let progressSubscription = null
+    let minutesRemainingSubscription = null
+    let completeSubscription = null
+    let errorSubscription = null
 
     const cleanup = () => {
         removeDisplayNotification(notificationId)

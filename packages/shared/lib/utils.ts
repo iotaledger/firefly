@@ -38,11 +38,10 @@ export const validatePinFormat = (pincode: string) => {
  *
  * @returns {string}
  */
-export const generateRandomId = (): string => {
-    return Array.from(crypto.getRandomValues(new Uint8Array(16)), (byte) => {
-        return ('0' + (byte & 0xff).toString(16)).slice(-2)
-    }).join('')
-}
+export const generateRandomId = (): string =>
+    Array.from(crypto.getRandomValues(new Uint8Array(16)), (byte) => ('0' + (byte & 0xff).toString(16)).slice(-2)).join(
+        ''
+    )
 
 /**
  * Parse a deep link (iota://)
@@ -169,7 +168,9 @@ export const validateBech32Address = (prefix, addr) => {
     try {
         const decoded = Bech32.decode(addr)
         isValid = decoded && decoded.humanReadablePart === prefix
-    } catch {}
+    } catch (err) {
+        console.error('error.crypto.cannotDecodeBech32')
+    }
 
     if (!isValid) {
         return localize('error.send.invalidAddress')
@@ -218,7 +219,8 @@ export const setClipboard = (input: string): boolean => {
 
         return true
     } catch (err) {
-        console.log(err)
+        console.error(err)
+
         return false
     }
 }

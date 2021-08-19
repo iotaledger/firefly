@@ -12,9 +12,9 @@
 
     export let locale
 
-    let deepLinkingChecked = $appSettings.deepLinking
+    const deepLinkingChecked = $appSettings.deepLinking
 
-    let isDeveloperProfile = get(activeProfile)?.isDeveloperProfile
+    const isDeveloperProfile = get(activeProfile)?.isDeveloperProfile
     let showHiddenAccounts = get(activeProfile)?.settings.showHiddenAccounts
 
     let { automaticNodeSelection, includeOfficialNodes, nodes, primaryNodeUrl, localPow } = buildAccountNetworkSettings()
@@ -39,7 +39,7 @@
         }
 
         const allEnabled = nodes.filter((n) => !n.disabled)
-        let primaryNode = allEnabled.find((n) => n.url === primaryNodeUrl)
+        const primaryNode = allEnabled.find((n) => n.url === primaryNodeUrl)
         if (!primaryNode && allEnabled.length > 0) {
             primaryNodeUrl = allEnabled[0].url
         }

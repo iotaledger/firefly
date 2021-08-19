@@ -12,7 +12,7 @@
     export let onClick = () => ''
     export let bgColor
 
-    let slots = $$props.$$slots
+    const slots = $$props.$$slots
 
     function getInitials() {
         const initials = _getInitials(name)

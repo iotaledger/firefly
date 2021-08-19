@@ -13,7 +13,7 @@
     export let lastBackupDate
     export let lastBackupDateFormatted
 
-    let color = getBackupWarningColor(lastBackupDate)
+    const color = getBackupWarningColor(lastBackupDate)
     let password = ''
     let busy = false
     let error = ''

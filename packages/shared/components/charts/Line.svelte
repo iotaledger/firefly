@@ -36,7 +36,7 @@
                 labels,
                 datasets: datasets.map((dataset) => {
                     const themeColor = fullConfig.theme.colors[dataset.color || color]
-                    var gradient = canvas.getContext('2d').createLinearGradient(0, 0, 0, context.canvas.height)
+                    const gradient = canvas.getContext('2d').createLinearGradient(0, 0, 0, context.canvas.height)
                     gradient.addColorStop(0, convertHexToRGBA(themeColor['500'], 30))
                     gradient.addColorStop(1, convertHexToRGBA(themeColor['500'], 0))
                     return {
@@ -73,14 +73,14 @@
                     bodyFontColor: fullConfig.theme.colors[color]['200'],
                     callbacks: {
                         title: function ([tooltipItem]) {
-                            let dataset = datasets[tooltipItem.datasetIndex]
+                            const dataset = datasets[tooltipItem.datasetIndex]
                             if (dataset && dataset.tooltips) {
                                 return dataset.tooltips[tooltipItem.index]?.title ?? ''
                             }
                             return ''
                         },
                         label: function (tooltipItem) {
-                            let dataset = datasets[tooltipItem.datasetIndex]
+                            const dataset = datasets[tooltipItem.datasetIndex]
                             if (dataset && dataset.tooltips) {
                                 return dataset.tooltips[tooltipItem.index]?.label ?? ''
                             }

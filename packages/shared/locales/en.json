@@ -979,6 +979,9 @@
         },
         "migration": {
             "missingBundle": "An error occurred while trying to find the transaction bundle."
+        },
+        "crypto": {
+            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
         }
     },
     "tooltips": {

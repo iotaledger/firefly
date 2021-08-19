@@ -41,10 +41,11 @@
 
     const _next = async (event) => {
         let nextState
-        let params = event.detail || {}
+        const params = event.detail || {}
+        const { pinCandidate, type } = params
+
         switch (state) {
             case ProtectState.Init:
-                const { type } = params
                 if (type === 'pin') {
                     nextState = ProtectState.Pin
                 } else if (type === 'biometric') {
@@ -52,7 +53,6 @@
                 }
                 break
             case ProtectState.Pin:
-                const { pinCandidate } = params
                 pin = pinCandidate
                 nextState = ProtectState.RepeatPin
                 break
@@ -68,18 +68,13 @@
                     await asyncSetStoragePassword(pin)
 
                     if ($walletSetupType === SetupType.Mnemonic) {
-                        // Initialises wallet from imported mnemonic
-                        // Verifies mnemonic syntactically
-                        // Stores mnemonic
-                        // Creates first account
-
                         const m = get(mnemonic).join(' ')
                         await asyncVerifyMnemonic(m)
                         await asyncStoreMnemonic(m)
                         await asyncCreateAccount()
 
-                        // Clear mnemonic
                         mnemonic.set(null)
+
                         dispatch('next', { pin })
                     } else {
                         dispatch('next', { pin })
@@ -102,7 +97,7 @@
     }
 
     const _previous = () => {
-        let prevState = stateHistory.pop()
+        const prevState = stateHistory.pop()
         if (prevState) {
             state = prevState
         } else {

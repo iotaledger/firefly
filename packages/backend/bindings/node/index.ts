@@ -73,7 +73,7 @@ function _poll(runtime: typeof addon.ActorSystem, cb: (error: string, data: any)
 }
 
 function sendMessage(message: BridgeMessage): Promise<string> {
-    const id = message.id
+    const { id } = message
 
     return new Promise((resolve) => addon.sendMessage(JSON.stringify(message), () => resolve(id)))
 }

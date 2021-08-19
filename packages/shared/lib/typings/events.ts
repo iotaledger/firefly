@@ -157,7 +157,10 @@ export interface PreparedTransactionEvent extends TransferProgressEvent {
     data?: string
 }
 
-export type TransferProgressEventData = TransferProgressEvent | GeneratingRemainderDepositAddressEvent | PreparedTransactionEvent
+export type TransferProgressEventData =
+    | TransferProgressEvent
+    | GeneratingRemainderDepositAddressEvent
+    | PreparedTransactionEvent
 
 export interface TransferState extends TransferProgressEvent {
     /// Relevant data for this type of transfer progress event.

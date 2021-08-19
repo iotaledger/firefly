@@ -35,7 +35,7 @@
     export let mobile
 
     let isCheckingForBalance
-    let legacyLedger = $walletSetupType === SetupType.TrinityLedger
+    const legacyLedger = $walletSetupType === SetupType.TrinityLedger
 
     const { seed, data, bundles } = $migration
 
@@ -172,9 +172,7 @@
             const _onConnected = () => {
                 Electron.ledger
                     .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
-                    .then(({ iota, callback }) => {
-                        return getLedgerMigrationData(iota.getAddress, callback)
-                    })
+                    .then(({ iota, callback }) => getLedgerMigrationData(iota.getAddress, callback))
                     .then(() => {
                         isCheckingForBalance = false
                     })

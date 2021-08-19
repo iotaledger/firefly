@@ -11,6 +11,7 @@ packages/backend/bindings/c/
 packages/backend/bindings/capacitor/
 packages/backend/bindings/node/dist/
 packages/backend/bindings/node/native/
+packages/backend/bindings/node/test/
 
 packages/backend/src/
 
@@ -29,7 +30,7 @@ packages/shared/locales/
 !packages/shared/locales/en.json
 
 # Common files and folders
-**/node_modules
+**/node_modules/
 
 # ESLint configuration and files
 **/.eslintrc.js

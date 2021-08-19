@@ -23,8 +23,8 @@
     export let capsLockWarning = false
 
     let inputElement
-    let allDecimalSeparators = getAllDecimalSeparators()
-    let decimalSeparator = getDecimalSeparator()
+    const allDecimalSeparators = getAllDecimalSeparators()
+    const decimalSeparator = getDecimalSeparator()
     let capsLockOn = false
     let hasFocus = false
 
