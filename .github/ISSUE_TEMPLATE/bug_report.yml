@@ -1,0 +1,83 @@
+name: Report an issue in wallet
+description: Create a report to help us improve
+labels: bug
+
+body:
+  - type: textarea
+    id: Description
+    attributes:
+      label: Issue description
+      description: Briefly describe the issue.
+      render: bash
+    validations:
+      required: true
+
+  - type: input
+    id: Version
+    attributes:
+      label: Wallet version
+      description: Which version of wallet are you using?
+      placeholder: version number, commit, or branchs
+    validations:
+      required: true
+
+  - type: input
+    id: Os
+    attributes:
+      label: What is your operating system?
+      description: Mac/Win/Linux inklusive Version and or Distro
+      placeholder: ex. Windows 10 Pro 10.0.19042 Build 19042
+    validations:
+      required: true
+
+  - type: dropdown
+    id: Repeatable
+    attributes:
+      label: Is it a repeatable issue?
+      description: Can the issue be reproduced repetitively?
+      options:
+        - 'Yes'
+        - 'No'
+    validations:
+      required: true
+
+  - type: textarea
+    id: Reproduce
+    attributes:
+      label: Steps to reproduce the issue
+      description: Explain how the maintainer can reproduce the issue.
+      value: |
+        1.
+        2.
+        3.
+        ...
+      render: bash
+    validations:
+      required: true
+
+  - type: textarea
+    id: Expected
+    attributes:
+      label: Expected behaviour
+      description: A concise description of what you expected to happen.
+      render: bash
+    validations:
+      required: true
+
+  - type: textarea
+    id: Actual
+    attributes:
+      label: Actual behaviour
+      description: A concise description of what you're experiencing.
+      render: bash
+    validations:
+      required: true
+
+  - type: textarea
+    id: Errors
+    attributes:
+      label: Errors
+      description: Paste any errors that you see from the Error Log in the Firefly menu or share screenshots of the issue.
+      render: bash
+    validations:
+      required: true
