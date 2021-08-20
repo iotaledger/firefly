@@ -15,7 +15,8 @@ import type {
     MigrationBundle,
     MigrationData,
     MigrationLog,
-    MigrationState, SendMigrationBundleResponse,
+    MigrationState,
+    SendMigrationBundleResponse,
     Transfer,
 } from 'shared/lib/typings/migration'
 import { AppRoute, SetupType } from 'shared/lib/typings/routes'
@@ -571,7 +572,8 @@ export const createMigrationBundle = (inputAddressIndexes: number[], offset: num
  * @returns {Promise<void>}
  */
 export const sendMigrationBundle = (bundleHash: string, mwm = MINIMUM_WEIGHT_MAGNITUDE): Promise<void> =>
-    new Promise((resolve, reject) => { /* eslint-disable @typescript-eslint/no-misused-promises */
+    new Promise((resolve, reject) => {
+        /* eslint-disable @typescript-eslint/no-misused-promises */
         if (get(ongoingSnapshot) === true) {
             reject({ snapshot: true })
             openSnapshotPopup()
