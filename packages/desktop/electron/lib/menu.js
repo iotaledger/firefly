@@ -8,7 +8,8 @@ let state = menuState
 /**
  * Creates a native menu tree and applies it to the application window
  */
-export const initMenu = () => { /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+export const initMenu = () => {
+    /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
     let mainMenu = null
 
     const createMenu = () => {
@@ -179,7 +180,8 @@ const buildTemplate = () => {
                 },
                 {
                     label: state.strings.addAccount,
-                    click: () => getOrInitWindow('main').webContents.send('menu-navigate-wallet', WalletRoutes.CreateAccount),
+                    click: () =>
+                        getOrInitWindow('main').webContents.send('menu-navigate-wallet', WalletRoutes.CreateAccount),
                     enabled: state.enabled,
                 },
                 {
@@ -237,7 +239,8 @@ const buildTemplate = () => {
  * Creates context menu
  * @returns {Menu} Context menu
  */
-export const contextMenu = () => /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+export const contextMenu = () =>
+    /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
     Menu.buildFromTemplate([
         {
             label: state.strings.undo,

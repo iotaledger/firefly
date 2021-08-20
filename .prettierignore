@@ -15,8 +15,9 @@ packages/backend/bindings/node/native/
 packages/backend/src/
 
 # Desktop (packages/desktop)
-packages/desktop/out/
-packages/desktop/public/
+packages/desktop/public/assets/
+packages/desktop/public/build/
+packages/desktop/public/locales/
 
 # Mobile (packages/mobile)
 packages/mobile/android/
@@ -30,3 +31,4 @@ packages/shared/locales/
 
 # Common files and folders
 **/node_modules/
+**/out/

@@ -6,7 +6,9 @@ contextBridge.exposeInMainWorld('error', {
         ipcRenderer.invoke('error-data').then((data) => ({
             iconPath: './assets/logos/firefly_logo.svg',
             version,
-            diagnostics: data.diagnostics.map((d) => `${d.label.replace('popups.diagnostics.', '')}: ${d.value}`).join('\r\n'),
+            diagnostics: data.diagnostics
+                .map((d) => `${d.label.replace('popups.diagnostics.', '')}: ${d.value}`)
+                .join('\r\n'),
             errorType: data.errorType,
             error: data.error,
         })),

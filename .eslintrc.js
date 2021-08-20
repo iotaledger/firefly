@@ -8,7 +8,7 @@ const eslintRules = {
     'arrow-spacing': 'error',
     'eol-last': 'error',
     'func-call-spacing': 'error',
-    'indent': 'off', // OFF b/c causes problems between Prettier and ESLint
+    indent: 'off', // OFF b/c causes problems between Prettier and ESLint
     'linebreak-style': 'off', // OFF b/c Windows (Git) puts CRLF line endings
     'missing-declaration': 'off', // OFF b/c throws errors on imports / require statements
     'multiline-ternary': 'off', // OFF b/c causes problems between Prettier and ESLint
@@ -90,9 +90,7 @@ module.exports = {
         es6: true,
         node: true,
     },
-    extends: [
-        'eslint:recommended',
-    ],
+    extends: ['eslint:recommended'],
     overrides: [
         {
             files: '**/*.svelte',
@@ -116,7 +114,7 @@ module.exports = {
             plugins: ['@typescript-eslint', 'svelte3'],
             rules: {
                 ...eslintRules,
-                ...typescriptEslintRules
+                ...typescriptEslintRules,
             },
             settings: svelteSettings,
         },
@@ -124,7 +122,7 @@ module.exports = {
     parser: '@babel/eslint-parser',
     parserOptions: {
         ...parserOptions,
-        requireConfigFile: false
+        requireConfigFile: false,
     },
     rules: {
         ...eslintRules,
