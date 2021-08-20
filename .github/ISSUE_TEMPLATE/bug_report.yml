@@ -17,7 +17,7 @@ body:
     attributes:
       label: Wallet version
       description: Which version of wallet are you using?
-      placeholder: version number, commit, or branchs
+      placeholder: version number, commit, or branch
     validations:
       required: true
 
@@ -25,7 +25,7 @@ body:
     id: Os
     attributes:
       label: What is your operating system?
-      description: Mac/Win/Linux inklusive Version and or Distro
+      description: Mac/Win/Linux inclusive Version and or Distro
       placeholder: ex. Windows 10 Pro 10.0.19042 Build 19042
     validations:
       required: true
