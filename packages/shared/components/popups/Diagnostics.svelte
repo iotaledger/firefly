@@ -38,7 +38,7 @@
 
     contentApp = combineValues(appVars)
 
-    Electron.getDiagnostics().then((values) => (contentSystem = combineValues(values)))
+    void Electron.getDiagnostics().then((values) => (contentSystem = combineValues(values)))
 
     const handleCopyClick = () => {
         setClipboard(contentApp + '\r\n' + contentSystem)

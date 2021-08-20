@@ -21,7 +21,7 @@
 
     const handleCurrencySelect = (item) => {
         updateProfile('settings.currency', item.value)
-        addProfileCurrencyPriceData()
+        void addProfileCurrencyPriceData()
         refreshBalanceOverview()
         updateAccountsBalanceEquiv()
     }

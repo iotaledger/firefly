@@ -7,6 +7,7 @@
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
+    import { CallbackFn } from 'shared/lib/typings/utils'
 
     export let locale: Locale
 
@@ -15,7 +16,7 @@
     export let toAddress = ''
     export let toAmount = null
 
-    export let onCancel = (): void => {}
+    export let onCancel = (..._: any[]): void => {}
 
     const shouldDisplayRemainderAddress = remainderAddress?.length > 0
     const shouldDisplayRemainderAmount = remainderAmount !== null

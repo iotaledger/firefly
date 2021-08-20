@@ -33,7 +33,7 @@
 
     let splash = true
 
-    setupI18n()
+    void setupI18n()
     onMount(async () => {
         setTimeout(() => {
             splash = false

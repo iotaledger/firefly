@@ -775,7 +775,7 @@ export const initialiseListeners = (): void => {
                 // If the state has changed then display a notification
                 // but only for transactions not migrations
                 if (confirmationChanged && message.payload.type === 'Transaction') {
-                    const tx = message.payload as Transaction
+                    const tx = message.payload
                     const messageKey = confirmed ? 'confirmed' : 'failed'
 
                     const _notify = (accountTo: string | null = null) => {
@@ -1272,9 +1272,9 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
                             newAccount,
                             {
                                 alias: `${localize('general.account')} ${newAccount.index + 1}`,
-                                clientOptions: existingAccounts[0].clientOptions,
+                                clientOptions: existingAccounts[0]?.clientOptions,
                                 createdAt: new Date().toISOString(),
-                                signerType: existingAccounts[0].signerType,
+                                signerType: existingAccounts[0]?.signerType,
                                 depositAddress: newAccount.depositAddress.address,
                             }
                         ),
@@ -1627,13 +1627,13 @@ export const buildAccountNetworkSettings = (): unknown => {
     }
 }
 
-export const updateAccountNetworkSettings = async (
+export const updateAccountNetworkSettings = (
     automaticNodeSelection: boolean,
     includeOfficialNodes: boolean,
     nodes: Node[],
     primaryNodeUrl: string,
     localPow: boolean
-): Promise<void> => {
+): void => {
     updateProfile('settings.automaticNodeSelection', automaticNodeSelection)
     updateProfile('settings.includeOfficialNodes', includeOfficialNodes)
 

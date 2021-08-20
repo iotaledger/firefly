@@ -12,9 +12,9 @@
 
     export let locale: Locale
 
-    export let onSend = (): void => {}
-    export let onInternalTransfer = (): void => {}
-    export let onGenerateAddress = (): void => {}
+    export let onSend = (..._: any[]): void => {}
+    export let onInternalTransfer = (..._: any[]): void => {}
+    export let onGenerateAddress = (..._: any[]): void => {}
 
     export let isGeneratingAddress
 

@@ -10,7 +10,7 @@
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import {
         GeneratingRemainderDepositAddressEvent,
-        PreparedTransactionEvent,
+        PreparedTransactionEvent, TransactionEventData,
         TransferProgressEventData,
         TransferProgressEventType,
         TransferState,
@@ -119,7 +119,7 @@
         }
     }
 
-    const handleTransactionEventData = (eventData: TransferProgressEventData): any => {
+    const handleTransactionEventData = (eventData: TransferProgressEventData): TransactionEventData => {
         if (!eventData) return {}
 
         const remainderData = eventData as GeneratingRemainderDepositAddressEvent
@@ -361,7 +361,7 @@
     const triggerSend = (isInternal) => {
         closePopup()
 
-        const _send = (isInternal: boolean): any =>
+        const _send = (isInternal: boolean): void =>
         /**
          * NOTE: selectedSendType is passed (only to the internalTransfer method) in the
          * case that we are masquerading as an internal transfer by sending to an address
@@ -371,10 +371,10 @@
                 ? onInternalTransfer(from.id, to.id, amountRaw, selectedSendType === SEND_TYPE.INTERNAL)
                 : onSend(from.id, address, amountRaw)
 
-        handleLedgerConnection(_send(isInternal))
+        handleLedgerConnection(() => _send(isInternal))
     }
 
-    const handleLedgerConnection = (onSuccess: any) => {
+    const handleLedgerConnection = (onSuccess: () => void) => {
         /**
          * NOTE: Because the Ledger must be connected to send a transaction,
          * it is important to wrap the send function in the Ledger connection

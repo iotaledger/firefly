@@ -45,7 +45,7 @@
             primaryNodeUrl = allEnabled[0].url
         }
     }
-    $: updateAccountNetworkSettings(automaticNodeSelection, includeOfficialNodes, nodes, primaryNodeUrl, localPow)
+    $: void updateAccountNetworkSettings(automaticNodeSelection, includeOfficialNodes, nodes, primaryNodeUrl, localPow)
 
     function handleAddNodeClick() {
         openPopup({

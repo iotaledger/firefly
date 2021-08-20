@@ -59,6 +59,7 @@ import {
 import { ClientOptions } from '../../../shared/lib/typings/client'
 import { NodeAuth } from '../../../shared/lib/typings/node'
 
+/* eslint-disable @typescript-eslint/no-var-requires */
 const addon = require('../index.node')
 const mailbox = []
 const onMessageListeners: ((payload: MessageResponse) => void)[] = []

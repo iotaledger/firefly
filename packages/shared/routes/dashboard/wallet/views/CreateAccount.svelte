@@ -14,7 +14,7 @@
 
     export let error = ''
 
-    export let onCreate = (...args: any[]): void => {}
+    export let onCreate = (..._: any[]): void => {}
 
     const { accounts } = $wallet
 

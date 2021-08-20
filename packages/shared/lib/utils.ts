@@ -79,7 +79,7 @@ export const parseAddress = (input: string): ParsedAddress => {
         return null
     }
 
-    if (input.match(VALID_MAINNET_ADDRESS) || input.match(VALID_DEVNET_ADDRESS)) {
+    if (VALID_MAINNET_ADDRESS.exec(input) || VALID_DEVNET_ADDRESS.exec(input)) {
         result.address = input
         return result
     }
@@ -188,6 +188,7 @@ export const validateBech32Address = (prefix: string, addr: string): undefined |
 export function debounce(callback: () => any, wait = 500): (...args: any[]) => void {
     let _timeout
     return (...args) => {
+        /* eslint-disable @typescript-eslint/no-this-alias */
         const context = this
         clearTimeout(_timeout)
         _timeout = setTimeout(() => callback.apply(context, args), wait)
@@ -203,7 +204,7 @@ export const setClipboard = (input: string): boolean => {
         textArea.value = input
         document.body.appendChild(textArea)
 
-        if (navigator.userAgent.match(/ipad|iphone/i)) {
+        if (/ipad|iphone/i.exec(navigator.userAgent)) {
             const range = document.createRange()
             range.selectNodeContents(textArea)
             const selection = window.getSelection()
@@ -241,7 +242,7 @@ export const downloadRecoveryKit = (): void => {
     fetch('assets/docs/recovery-kit.pdf')
         .then((response) => response.arrayBuffer())
         .then((data) => {
-            Electron.saveRecoveryKit(data)
+            void Electron.saveRecoveryKit(data)
         })
         .catch((err) => {
             console.error(err)

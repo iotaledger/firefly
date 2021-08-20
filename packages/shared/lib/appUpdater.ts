@@ -154,11 +154,12 @@ export function updateDownload(): void {
         }
     })
 
-    Electron.updateDownload()
+    void Electron.updateDownload()
 }
 
 export function updateCancel(): void {
-    Electron.updateCancel()
+    void Electron.updateCancel()
+
     updateProgress.set(0)
     updateBusy.set(false)
     updateComplete.set(false)
@@ -167,11 +168,11 @@ export function updateCancel(): void {
 }
 
 export function updateInstall(): void {
-    Electron.updateInstall()
+    void Electron.updateInstall()
 }
 
 export function updateCheck(): void {
-    Electron.updateCheck()
+    void Electron.updateCheck()
 }
 
 export async function getVersionDetails(): Promise<void> {
@@ -179,6 +180,6 @@ export async function getVersionDetails(): Promise<void> {
     versionDetails.set(verDetails)
 }
 
-export async function pollVersion(): Promise<void> {
-    setInterval(async () => updateCheck(), DEFAULT_APP_UPDATER_POLL_INTERVAL)
+export function pollVersion(): void {
+    setInterval(() => updateCheck(), DEFAULT_APP_UPDATER_POLL_INTERVAL)
 }

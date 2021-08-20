@@ -18,6 +18,7 @@ let pollInterval
  */
 export async function pollNetworkStatus(): Promise<void> {
     await fetchNetworkStatus()
+    /* eslint-disable @typescript-eslint/no-misused-promises */
     pollInterval = setInterval(async () => fetchNetworkStatus(), DEFAULT_NETWORK_STATUS_POLL_INTERVAL)
 }
 
@@ -25,7 +26,7 @@ const { accounts, accountsLoaded } = get(wallet)
 
 accountsLoaded.subscribe((val) => {
     if (val) {
-        pollNetworkStatus()
+        void pollNetworkStatus()
     } else {
         clearInterval(pollInterval)
     }

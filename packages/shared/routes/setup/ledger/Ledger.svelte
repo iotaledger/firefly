@@ -56,7 +56,7 @@
         }
     }
 
-    const _next = async (event) => {
+    const _next = (event) => {
         let nextState
         switch (get(ledgerRoute)) {
             case LedgerRoutes.Connect:

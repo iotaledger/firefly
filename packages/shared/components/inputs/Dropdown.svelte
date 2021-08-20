@@ -15,7 +15,7 @@
     export let classes = ''
     export let autofocus = false
 
-    export let onSelect = (_: unknown): void => {}
+    export let onSelect = (..._: any[]): void => {}
 
     let dropdown = false
     let navContainer

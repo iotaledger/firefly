@@ -36,12 +36,13 @@
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { getLocalisedMenuItems } from './lib/helpers'
+    import { Locale } from 'shared/lib/typings/i18n'
 
     $: $appSettings.darkMode ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')
     $: {
         isLocaleLoaded.subscribe((loaded) => {
             if (loaded) {
-                Electron.updateMenu('strings', getLocalisedMenuItems($_))
+                Electron.updateMenu('strings', getLocalisedMenuItems($_ as Locale))
             }
         })
     }
@@ -54,7 +55,7 @@
     let splash = true
     let settings = false
 
-    setupI18n({ withLocale: $appSettings.language })
+    void setupI18n({ withLocale: $appSettings.language })
     onMount(async () => {
         setTimeout(() => {
             splash = false
@@ -67,7 +68,7 @@
         /* eslint-disable no-undef */
         if (!devMode) {
             await getVersionDetails()
-            await pollVersion()
+            pollVersion()
         }
         Electron.onEvent('menu-navigate-wallet', (route) => {
             if (get(dashboardRoute) !== Tabs.Wallet) {
@@ -84,7 +85,7 @@
                 settings = true
             }
         })
-        Electron.onEvent('menu-check-for-update', async () => {
+        Electron.onEvent('menu-check-for-update', () => {
             openPopup({
                 type: 'version',
                 props: {
@@ -92,10 +93,10 @@
                 },
             })
         })
-        Electron.onEvent('menu-error-log', async () => {
+        Electron.onEvent('menu-error-log', () => {
             openPopup({ type: 'errorLog' })
         })
-        Electron.onEvent('menu-diagnostics', async () => {
+        Electron.onEvent('menu-diagnostics', () => {
             openPopup({ type: 'diagnostics' })
         })
         Electron.hookErrorLogger((err) => {

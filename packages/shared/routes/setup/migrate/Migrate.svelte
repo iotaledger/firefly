@@ -30,7 +30,7 @@
     let state: MigrateState = MigrateState.Init
     let stateHistory = []
 
-    const _next = async (event) => {
+    const _next = (event) => {
         let nextState
         const params = event.detail || {}
 

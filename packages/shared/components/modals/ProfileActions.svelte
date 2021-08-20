@@ -22,7 +22,7 @@
         isActive = false
     }
     const handleLogoutClick = () => {
-        logout()
+        void logout()
     }
 </script>
 

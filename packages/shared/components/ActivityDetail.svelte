@@ -33,8 +33,8 @@
     export let onBackClick = (): void => {}
 
     const cachedMigrationTx = !payload
-    const milestonePayload = payload?.type === 'Milestone' ? (payload as Milestone) : undefined
-    const txPayload = payload?.type === 'Transaction' ? (payload as Transaction) : undefined
+    const milestonePayload = payload?.type === 'Milestone' ? payload : undefined
+    const txPayload = payload?.type === 'Transaction' ? payload : undefined
 
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
 

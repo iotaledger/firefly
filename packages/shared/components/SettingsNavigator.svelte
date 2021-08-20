@@ -9,7 +9,7 @@
     export let route
     export let icons
 
-    export let onSettingClick = (_: unknown): void => {}
+    export let onSettingClick = (..._: any[]): void => {}
 
     function changeRoute(setting) {
         document.getElementById('scroller').scrollTop = 0

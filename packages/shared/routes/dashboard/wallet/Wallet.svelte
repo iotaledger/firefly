@@ -171,7 +171,7 @@
                 }
 
                 if (accountsResponse.payload.length === 0) {
-                    _continue()
+                    void _continue()
                 } else {
                     const totalBalance = {
                         balance: 0,
@@ -232,7 +232,7 @@
                                 accounts.update((accounts) => [...accounts, ...newAccounts].sort((a, b) => a.index - b.index))
                                 processMigratedTransactions(payloadAccount.id, payloadAccount.messages, payloadAccount.addresses)
                                 updateBalanceOverview(totalBalance.balance, totalBalance.incoming, totalBalance.outgoing)
-                                _continue()
+                                void _continue()
                             }
                         })
                     }
@@ -396,8 +396,8 @@
                 api.createAccount(
                     {
                         alias,
-                        signerType: $accounts[0].signerType,
-                        clientOptions: $accounts[0].clientOptions,
+                        signerType: $accounts[0]?.signerType,
+                        clientOptions: $accounts[0]?.clientOptions,
                     },
                     {
                         onSuccess(createAccountResponse) {
@@ -603,7 +603,7 @@
         }
     }
 
-    onMount(async () => {
+    onMount(() => {
         // If we are in settings when logged out the router reset
         // switches back to the wallet, but there is no longer
         // an active profile, only init if there is a profile
@@ -627,7 +627,7 @@
                 })
             }
 
-            addProfileCurrencyPriceData()
+            void addProfileCurrencyPriceData()
         }
     })
 </script>

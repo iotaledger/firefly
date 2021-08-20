@@ -35,6 +35,7 @@ export const isNodeUrlValid = (nodesList: Node[], newUrl: string): string | unde
     }
 
     // Check whether the node was already added to the list
+    /* eslint-disable @typescript-eslint/prefer-regexp-exec */
     if (nodesList && nodesList.some(({ url }) => (url.endsWith(':443') ? url.slice(0, -4) : url).match(newUrl))) {
         return 'error.node.duplicate'
     }

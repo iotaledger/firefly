@@ -1,3 +1,5 @@
+import type { Locale } from 'shared/lib/typings/i18n'
+
 /**
  * Returns localised Electron menu items
  *
@@ -7,7 +9,7 @@
  *
  * @returns {object}
  */
-export const getLocalisedMenuItems = (locale: (_: string) => string): unknown => ({
+export const getLocalisedMenuItems = (locale: Locale): unknown => ({
     about: locale('views.settings.about.title'),
     checkForUpdates: locale('actions.checkForUpdates'),
     settings: locale('views.settings.settings'),

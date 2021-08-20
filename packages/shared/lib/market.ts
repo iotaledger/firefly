@@ -89,6 +89,7 @@ export async function pollMarketData(): Promise<void> {
     }
 
     await fetchMarketData()
+    /* eslint-disable @typescript-eslint/no-misused-promises */
     setInterval(async () => fetchMarketData(), DEFAULT_MARKETDATA_POLL_INTERVAL)
 }
 
@@ -165,13 +166,13 @@ function processMarketData(marketData) {
         volume.set(marketData.market.usd_24h_vol)
         change24h.set(marketData.market.usd_24h_change)
 
-        addProfileCurrencyPriceData()
+        void addProfileCurrencyPriceData()
     } else {
         throw new Error(payload.error)
     }
 }
 
-export async function addProfileCurrencyPriceData(): Promise<void> {
+export function addProfileCurrencyPriceData(): void {
     const profile = get(activeProfile)
     if (profile) {
         // get selected profile currency and add its estimated history

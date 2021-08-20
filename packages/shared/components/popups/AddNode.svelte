@@ -11,7 +11,7 @@
     export let node
     export let nodes
 
-    export let onSuccess = (): void => {}
+    export let onSuccess = (..._: any[]): void => {}
 
     let url = node?.url ?? ''
     let username = node?.auth?.username ?? ''
@@ -20,7 +20,7 @@
     const authError = ''
     let isBusy = false
 
-    async function addCustomNode() {
+    function addCustomNode() {
         try {
             isBusy = true
             addressError = ''

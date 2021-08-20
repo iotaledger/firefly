@@ -162,6 +162,13 @@ export type TransferProgressEventData =
     | GeneratingRemainderDepositAddressEvent
     | PreparedTransactionEvent
 
+export type TransactionEventData = {
+    toAddress?: string
+    toAmount?: number
+    remainderAddress?: string
+    remainderAmount?: number
+} | PreparedTransactionEvent
+
 export interface TransferState extends TransferProgressEvent {
     /// Relevant data for this type of transfer progress event.
     data?: TransferProgressEventData

@@ -203,7 +203,8 @@ export function pollLedgerDeviceStatus(
 ): void {
     if (!get(isPollingLedgerDeviceStatus)) {
         getLedgerDeviceStatus(legacy, _onConnected, _onDisconnected, _onCancel)
-        intervalTimer = setInterval(async () => {
+        /* eslint-disable @typescript-eslint/no-misused-promises */
+        intervalTimer = setInterval(() => {
             getLedgerDeviceStatus(legacy, _onConnected, _onDisconnected, _onCancel)
         }, pollInterval)
         isPollingLedgerDeviceStatus.set(true)

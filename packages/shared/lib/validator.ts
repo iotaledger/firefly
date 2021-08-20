@@ -211,7 +211,7 @@ class AccountListValidator extends Validator {
         for (const account of payload) {
             const validationResponse = new AccountValidator().isValid(
                 Object.assign({}, response, {
-                    payload: account as any,
+                    payload: account as unknown,
                 })
             )
             if (!validationResponse.isValid) {
@@ -249,7 +249,7 @@ class SyncedAccountListValidator extends Validator {
         for (const account of payload) {
             const validationResponse = new SyncedAccountValidator().isValid(
                 Object.assign({}, response, {
-                    payload: account as any,
+                    payload: account as unknown,
                 })
             )
 
@@ -758,7 +758,7 @@ class ValidatorChainBuilder {
 }
 
 export default class ValidatorService {
-    validators: any
+    validators: unknown
     ids: string[]
 
     constructor(ids?: string[]) {

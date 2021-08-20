@@ -88,7 +88,7 @@ const setupI18n = (options = { withLocale: null }): Promise<any> => {
             // in case the chosen language does not have all the translations
             if (_locale !== 'en' && !hasLoadedLocale('en')) {
                 const messagesFileUrl = MESSAGE_FILE_URL_TEMPLATE.replace('{locale}', 'en')
-                loadJson(messagesFileUrl).then((messages) => {
+                void loadJson(messagesFileUrl).then((messages) => {
                     addMessages('en', messages)
                 })
             }
@@ -145,7 +145,7 @@ const setLanguage = (item: { value }): void => {
         language: locale,
     })
 
-    setupI18n({ withLocale: locale })
+    void setupI18n({ withLocale: locale })
 }
 
 const localize = get(_) as (string, values?) => string

@@ -36,8 +36,8 @@
     let txPayload: Transaction
 
     $: hasCachedMigrationTx = !payload
-    $: milestonePayload = payload?.type === 'Milestone' ? (payload as Milestone) : undefined
-    $: txPayload = payload?.type === 'Transaction' ? (payload as Transaction) : undefined
+    $: milestonePayload = payload?.type === 'Milestone' ? payload : undefined
+    $: txPayload = payload?.type === 'Transaction' ? payload : undefined
     $: hasCachedMigrationTx, milestonePayload, txPayload, (messageValue = getMessageValue())
 
     const getMessageValue = () => {

@@ -31,7 +31,7 @@
     $: hasReachedMaxAttempts = attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS
     $: {
         if (validatePinFormat(pinCode)) {
-            onSubmit()
+            void onSubmit()
         }
     }
 
@@ -62,7 +62,7 @@
         }
     }
 
-    async function onSubmit() {
+    function onSubmit() {
         if (get(ongoingSnapshot) === true) {
             return openSnapshotPopup()
         }

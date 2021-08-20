@@ -15,7 +15,7 @@ import type {
     MigrationBundle,
     MigrationData,
     MigrationLog,
-    MigrationState,
+    MigrationState, SendMigrationBundleResponse,
     Transfer,
 } from 'shared/lib/typings/migration'
 import { AppRoute, SetupType } from 'shared/lib/typings/routes'
@@ -161,7 +161,8 @@ export const createUnsignedBundle = (
  * @returns {Promise<void}
  */
 export const getMigrationData = (migrationSeed: string, initialAddressIndex = 0): Promise<void> =>
-    new Promise(async (resolve, reject) => {
+    /* eslint-disable @typescript-eslint/no-misused-promises */
+    new Promise((resolve, reject) => {
         if (get(ongoingSnapshot) === true) {
             reject({ snapshot: true })
             openSnapshotPopup()
@@ -523,37 +524,7 @@ export const sendLedgerMigrationBundle = (bundleHash: string, trytes: string[]):
                 // Store migration log so that we can export it later
                 prepareMigrationLog(bundleHash, trytes, response.payload.value)
 
-                const { bundles } = get(migration)
-
-                // Update bundle and mark it as migrated
-                bundles.update((_bundles) =>
-                    _bundles.map((bundle) => {
-                        if (bundle.bundleHash === bundleHash) {
-                            return Object.assign({}, bundle, { migrated: true })
-                        }
-
-                        return bundle
-                    })
-                )
-
-                // Persist these bundles in local storage
-                const _activeProfile = get(activeProfile)
-
-                const migratedTransaction = {
-                    address: response.payload.address,
-                    balance: response.payload.value,
-                    tailTransactionHash: response.payload.tailTransactionHash,
-                    timestamp: new Date().toISOString(),
-                    // Account index. Since we migrate funds to account at 0th index
-                    account: 0,
-                }
-
-                updateProfile(
-                    'migratedTransactions',
-                    _activeProfile.migratedTransactions
-                        ? [..._activeProfile.migratedTransactions, migratedTransaction]
-                        : [migratedTransaction]
-                )
+                _sendMigrationBundle(bundleHash, response.payload)
 
                 resolve(response)
             },
@@ -600,44 +571,15 @@ export const createMigrationBundle = (inputAddressIndexes: number[], offset: num
  * @returns {Promise<void>}
  */
 export const sendMigrationBundle = (bundleHash: string, mwm = MINIMUM_WEIGHT_MAGNITUDE): Promise<void> =>
-    new Promise(async (resolve, reject) => {
+    new Promise((resolve, reject) => { /* eslint-disable @typescript-eslint/no-misused-promises */
         if (get(ongoingSnapshot) === true) {
             reject({ snapshot: true })
             openSnapshotPopup()
         } else {
             api.sendMigrationBundle(MIGRATION_NODES, bundleHash, mwm, {
                 onSuccess(response) {
-                    const { bundles } = get(migration)
+                    _sendMigrationBundle(bundleHash, response.payload)
 
-                    // Update bundle and mark it as migrated
-                    bundles.update((_bundles) =>
-                        _bundles.map((bundle) => {
-                            if (bundle.bundleHash === bundleHash) {
-                                return Object.assign({}, bundle, { migrated: true })
-                            }
-
-                            return bundle
-                        })
-                    )
-
-                    // Persist these bundles in local storage
-                    const _activeProfile = get(activeProfile)
-
-                    const migratedTransaction = {
-                        address: response.payload.address,
-                        balance: response.payload.value,
-                        tailTransactionHash: response.payload.tailTransactionHash,
-                        timestamp: new Date().toISOString(),
-                        // Account index. Since we migrate funds to account at 0th index
-                        account: 0,
-                    }
-
-                    updateProfile(
-                        'migratedTransactions',
-                        _activeProfile.migratedTransactions
-                            ? [..._activeProfile.migratedTransactions, migratedTransaction]
-                            : [migratedTransaction]
-                    )
                     resolve()
                 },
                 onError(error) {
@@ -646,6 +588,40 @@ export const sendMigrationBundle = (bundleHash: string, mwm = MINIMUM_WEIGHT_MAG
             })
         }
     })
+
+const _sendMigrationBundle = (hash: string, data: SendMigrationBundleResponse) => {
+    const { bundles } = get(migration)
+
+    // Update bundle and mark it as migrated
+    bundles.update((_bundles) =>
+        _bundles.map((bundle) => {
+            if (bundle.bundleHash === hash) {
+                return Object.assign({}, bundle, { migrated: true })
+            }
+
+            return bundle
+        })
+    )
+
+    // Persist these bundles in local storage
+    const _activeProfile = get(activeProfile)
+
+    const migratedTransaction = {
+        address: data.address,
+        balance: data.value,
+        tailTransactionHash: data.tailTransactionHash,
+        timestamp: new Date().toISOString(),
+        // Account index. Since we migrate funds to account at 0th index
+        account: 0,
+    }
+
+    updateProfile(
+        'migratedTransactions',
+        _activeProfile.migratedTransactions
+            ? [..._activeProfile.migratedTransactions, migratedTransaction]
+            : [migratedTransaction]
+    )
+}
 
 /**
  * Assigns bundle hash and crackability score to bundles
@@ -1225,6 +1201,7 @@ export async function checkChrysalisSnapshot(): Promise<void> {
  */
 export async function pollChrysalisSnapshot(stopPoll: boolean = true): Promise<void> {
     await checkChrysalisSnapshot()
+    /* eslint-disable @typescript-eslint/no-misused-promises */
     setInterval(async () => checkChrysalisSnapshot(), DEFAULT_CHRYSALIS_VARIABLES_POLL_INTERVAL)
 }
 

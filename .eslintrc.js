@@ -50,26 +50,30 @@ const typescriptEslintRules = {
     '@typescript-eslint/ban-ts-comment': 'off', // OFF b/c ts-ignore comments are sometimes useful and needed
     '@typescript-eslint/explicit-module-boundary-types': 'error',
     '@typescript-eslint/no-array-constructor': 'error',
-
-    '@typescript-eslint/no-empty-function': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
-    '@typescript-eslint/no-floating-promises': 'off',
-    '@typescript-eslint/no-inferrable-types': 'off',
-    '@typescript-eslint/no-misused-promises': 'off',
-    '@typescript-eslint/no-non-null-assertion': 'off',
-    '@typescript-eslint/no-this-alias': 'off',
-    '@typescript-eslint/no-unnecessary-type-assertion': 'off',
-    '@typescript-eslint/no-unsafe-assignment': 'off',
-    '@typescript-eslint/no-unsafe-call': 'off',
-    '@typescript-eslint/no-unsafe-member-access': 'off',
-    '@typescript-eslint/no-unsafe-return': 'off',
+    '@typescript-eslint/no-empty-function': 'off', // OFF b/c we use empty functions a lot (esp. for initialization)
+    '@typescript-eslint/no-explicit-any': 'off', // OFF b/c we use any but only when it's necessary
+    '@typescript-eslint/no-extra-non-null-assertion': 'error',
+    '@typescript-eslint/no-extra-semi': 'error',
+    '@typescript-eslint/no-floating-promises': 'error',
+    '@typescript-eslint/no-implied-eval': 'error',
+    '@typescript-eslint/no-inferrable-types': 'off', // OFF b/c this errors on some useful code annotations for function signatures
+    '@typescript-eslint/no-misused-new': 'error',
+    '@typescript-eslint/no-misused-promises': 'error',
+    '@typescript-eslint/no-non-null-asserted-optional-chain': 'error',
+    '@typescript-eslint/no-non-null-assertion': 'error',
+    '@typescript-eslint/no-this-alias': 'error',
+    '@typescript-eslint/no-unnecessary-type-assertion': 'error',
+    '@typescript-eslint/no-unsafe-assignment': 'off', // OFF b/c used in Svelte components for UI logic
+    '@typescript-eslint/no-unsafe-call': 'off', // OFF b/c used in Svelte components for UI logic
+    '@typescript-eslint/no-unsafe-member-access': 'off', // OFF b/c there are simply too many linting errors
+    '@typescript-eslint/no-unsafe-return': 'off', // OFF b/c used in Svelte components for UI logic
     '@typescript-eslint/no-unused-vars': 'off', // OFF b/c there are simply too many and they're harmless
-    '@typescript-eslint/no-var-requires': 'off',
-    '@typescript-eslint/prefer-regexp-exec': 'off',
-    '@typescript-eslint/restrict-plus-operands': 'off',
-    '@typescript-eslint/restrict-template-expressions': 'off',
-    '@typescript-eslint/require-await': 'off',
-    '@typescript-eslint/unbound-method': 'off',
+    '@typescript-eslint/no-var-requires': 'error',
+    '@typescript-eslint/prefer-regexp-exec': 'error',
+    '@typescript-eslint/restrict-plus-operands': 'off', // OFF b/c not entirely accurate despite proper typings
+    '@typescript-eslint/restrict-template-expressions': 'off', // OFF b/c using any is useful in template expressions
+    '@typescript-eslint/require-await': 'error',
+    '@typescript-eslint/unbound-method': 'error',
 }
 
 const svelteSettings = {

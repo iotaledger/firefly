@@ -8,9 +8,9 @@
 
     export let locale: Locale
 
-    export let onSend = (...args: any[]): void => {}
-    export let onInternalTransfer = (...args: any[]): void => {}
-    export let onGenerateAddress = (...args: any[]): void => {}
+    export let onSend = (..._: any[]): void => {}
+    export let onInternalTransfer = (..._: any[]): void => {}
+    export let onGenerateAddress = (..._: any[]): void => {}
 
     export let isGeneratingAddress
 

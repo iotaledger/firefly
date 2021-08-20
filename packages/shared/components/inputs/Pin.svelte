@@ -30,7 +30,7 @@
         TAB: 9,
     }
 
-    onMount(async () => {
+    onMount(() => {
         if (autofocus) {
             focus()
         }

@@ -63,7 +63,7 @@
                             props: { onSuccess: async () => asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false) }
                         })
                     } else {
-                        asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
+                        void asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
                     }
                 },
                 onError(err) {
@@ -74,7 +74,7 @@
                 },
             })
         } else {
-            asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold)
+            void asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold)
         }
     }
 
