@@ -150,7 +150,7 @@ example that compiles and passes [documentation tests](https://doc.rust-lang.org
 
 - All instances of `unsafe` should have a comment that explains why its use was unavoidable
 
-- All code should pass linting checks
+- All code should pass formatting and linting checks
 
 - All code should be well tested, using unit tests and integration tests
 
