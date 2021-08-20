@@ -67,6 +67,10 @@ try {
                         // Get a list of all the profile folders in storage
                         return fs.readdirSync(profileStoragePath)
                     } catch (err) {
+                        if (err.code === 'ENOENT') {
+                            // The __storage__ directory doesn't exist
+                            return []
+                        }
                         console.error(err)
                     }
                 }
