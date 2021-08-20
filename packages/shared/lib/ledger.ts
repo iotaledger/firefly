@@ -151,8 +151,8 @@ export function displayNotificationForLedgerProfile(
             const errorMessage = legacy
                 ? getLegacyErrorMessage(error, true)
                 : error?.error
-                    ? localize(error.error)
-                    : error
+                ? localize(error.error)
+                : error
 
             const message = error ? (isLedgerError(error) ? stateErrorMessage : errorMessage) : stateErrorMessage
             notificationId = showAppNotification({

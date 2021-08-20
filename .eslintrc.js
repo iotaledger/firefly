@@ -8,9 +8,10 @@ const eslintRules = {
     'arrow-spacing': 'error',
     'eol-last': 'error',
     'func-call-spacing': 'error',
-    indent: ['error', 4, { SwitchCase: 1 }],
+    'indent': 'off', // OFF b/c causes problems between Prettier and ESLint
     'linebreak-style': 'off', // OFF b/c Windows (Git) puts CRLF line endings
     'missing-declaration': 'off', // OFF b/c throws errors on imports / require statements
+    'multiline-ternary': 'off', // OFF b/c causes problems between Prettier and ESLint
     'no-alert': 'error',
     'no-async-promise-executor': 'off', // OFF b/c used in lib/migration.ts
     'no-case-declarations': 'error',
@@ -26,6 +27,7 @@ const eslintRules = {
     'no-irregular-whitespace': 'off', // OFF b/c special char used in packages/desktop/electron/lib/keychain.js
     'no-prototype-builtins': 'error',
     'no-return-await': 'error',
+    // 'no-tab': ['error', { allowIndentationTabs: true }],
     'no-trailing-spaces': 'error',
     'no-useless-escape': 'error',
     'no-undef': 'error',
