@@ -69,7 +69,7 @@ export interface IElectron {
     updateActiveProfile(id: string): void
     removeProfileFolder(profilePath: string): Promise<void>
     listProfileFolders(profileStoragePath: string): Promise<string[]>
-    updateMenu(attribute: string, value: unknown): void
+    updateMenu(attribute: string, value: any): void
     popupMenu(): void
     maximize(): Promise<boolean>
     minimize(): void

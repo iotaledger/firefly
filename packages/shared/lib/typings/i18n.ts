@@ -1,5 +1,5 @@
 /**
- * Type for the locale function, from Svelte's i18n store.
+ * Type for the locale function from Svelte's i18n store.
  */
 export type Locale = (path: string, args?: LocaleArgs) => string
 

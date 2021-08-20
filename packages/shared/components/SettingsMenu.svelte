@@ -12,7 +12,7 @@
     export let title
     export let description
 
-    export let onClick = (setting: unknown): void => {}
+    export let onClick = (..._: any[]): void => {}
 </script>
 
 <div class="flex-1">
