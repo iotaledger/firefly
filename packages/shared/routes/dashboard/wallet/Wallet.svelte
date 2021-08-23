@@ -2,11 +2,21 @@
     import { DashboardPane } from 'shared/components'
     import { clearSendParams, sendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
+    import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { addProfileCurrencyPriceData, priceData } from 'shared/lib/marketData'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, isStrongholdLocked, MigratedTransaction, updateProfile } from 'shared/lib/profile'
+    import { closePopup, openPopup } from 'shared/lib/popup'
+    import {
+        activeProfile,
+        isLedgerProfile,
+        isSoftwareProfile,
+        isStrongholdLocked,
+        MigratedTransaction,
+        setMissingProfileType,
+        updateProfile,
+    } from 'shared/lib/profile'
     import { walletRoute } from 'shared/lib/router'
+    import { TransferProgressEventType, LedgerErrorType } from 'shared/lib/typings/events'
     import type { Transaction } from 'shared/lib/typings/message'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import {
@@ -21,9 +31,12 @@
         getAccountsBalanceHistory,
         getIncomingFlag,
         getInternalFlag,
+        getSyncAccountOptions,
         getTransactions,
         getWalletBalanceHistory,
+        hasGeneratedALedgerReceiveAddress,
         initialiseListeners,
+        isFirstSessionSync,
         isSelfTransaction,
         isTransferring,
         prepareAccountInfo,
@@ -37,7 +50,7 @@
         WalletAccount,
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
-    import { derived, get, Readable, Writable } from 'svelte/store'
+    import { derived, Readable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
 
@@ -100,10 +113,9 @@
     })
 
     const transactions = derived([viewableAccounts, activeProfile], ([$viewableAccounts, $activeProfile]) => {
-        if ($activeProfile?.migratedTransactions?.length) {
-            return $activeProfile.migratedTransactions
-        }
-        return getTransactions($viewableAccounts)
+        const _migratedTransactions = $activeProfile?.migratedTransactions || []
+        
+        return [..._migratedTransactions, ...getTransactions($viewableAccounts)]
     })
 
     setContext<Writable<BalanceOverview>>('walletBalance', balanceOverview)
@@ -119,18 +131,50 @@
 
     let isGeneratingAddress = false
 
+    // If wallet route or account changes force regeneration of Ledger receive address
+    $: {
+        $walletRoute
+        $selectedAccountId
+        if ($isLedgerProfile) {
+            hasGeneratedALedgerReceiveAddress.set(false)
+        }
+    }
+
+    $: if ($accountsLoaded) {
+        // update profileType if it is missing
+        if (!$activeProfile?.type) {
+            setMissingProfileType($accounts)
+        }
+    }
+
     function getAccounts() {
+        const _onError = (error: any = null) => {
+            if ($isLedgerProfile) {
+                if (!LedgerErrorType[error.type]) {
+                    displayNotificationForLedgerProfile('error', true, true, false, false, error)
+                }
+            } else {
+                showAppNotification({
+                    type: 'error',
+                    message: locale(error?.error || 'error.global.generic'),
+                })
+            }
+        }
+
         api.getAccounts({
             onSuccess(accountsResponse) {
                 const _continue = async () => {
                     accountsLoaded.set(true)
-                    const gapLimit = $activeProfile?.gapLimit ?? 10
+
+                    const { gapLimit, accountDiscoveryThreshold } = getSyncAccountOptions()
+
                     try {
-                        await asyncSyncAccounts(0, gapLimit, 1, false)
+                        await asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
+
+                        if($isFirstSessionSync) isFirstSessionSync.set(false)
                     } catch (err) {
-                        console.error(err)
+                        _onError(err)
                     }
-                    updateProfile('gapLimit', 10)
                 }
 
                 if (accountsResponse.payload.length === 0) {
@@ -146,7 +190,7 @@
                     let newAccounts = []
                     for (const payloadAccount of accountsResponse.payload) {
                         // Only keep messages with a payload
-                        payloadAccount.messages = payloadAccount.messages.filter(m => m.payload)
+                        payloadAccount.messages = payloadAccount.messages.filter((m) => m.payload)
 
                         // The wallet only returns one side of internal transfers
                         // to the same account, so create the other side by first finding
@@ -186,7 +230,7 @@
                                 const account = prepareAccountInfo(payloadAccount, meta)
                                 newAccounts.push(account)
                             } else {
-                                console.error(err)
+                                _onError(err)
                             }
 
                             completeCount++
@@ -202,10 +246,7 @@
                 }
             },
             onError(err) {
-                showAppNotification({
-                    type: 'error',
-                    message: locale(err.error),
-                })
+                _onError(err)
             },
         })
     }
@@ -213,6 +254,9 @@
     function onGenerateAddress(accountId) {
         const _generate = () => {
             isGeneratingAddress = true
+
+            if ($isLedgerProfile) displayNotificationForLedgerProfile('error', true, true)
+
             api.getUnusedAddress(accountId, {
                 onSuccess(response) {
                     accounts.update((accounts) =>
@@ -228,38 +272,51 @@
                             return account
                         })
                     )
+                    closePopup(true)
+
                     isGeneratingAddress = false
+                    hasGeneratedALedgerReceiveAddress.set(true)
                 },
                 onError(err) {
+                    closePopup(true)
+
+                    console.error(err)
+
                     isGeneratingAddress = false
 
-                    const shouldHideErrorNotification = err && err.type === 'ClientError' && err.error === 'error.node.chrysalisNodeInactive'
-
+                    const isClientError = err && err.type === 'ClientError'
+                    const shouldHideErrorNotification = isClientError && err.error === 'error.node.chrysalisNodeInactive'
                     if (!shouldHideErrorNotification) {
+                        /**
+                         * NOTE: To ensure a clear error message (for Ledger users),
+                         * we need to update the locale path.
+                         */
+                        const localePath = isClientError && $isLedgerProfile ? 'error.ledger.generateAddress' : err.error
                         showAppNotification({
-                        type: 'error',
-                        message: locale(err.error),
+                            type: 'error',
+                            message: locale(localePath),
                         })
                     }
                 },
             })
         }
 
-        api.getStrongholdStatus({
-            onSuccess(strongholdStatusResponse) {
-                if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                    openPopup({ type: 'password', props: { onSuccess: _generate } })
-                } else {
-                    _generate()
-                }
-            },
-            onError(err) {
-                showAppNotification({
-                    type: 'error',
-                    message: locale(err.error),
-                })
-            },
-        })
+        if ($isSoftwareProfile) {
+            api.getStrongholdStatus({
+                onSuccess(strongholdStatusResponse) {
+                    if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
+                        openPopup({ type: 'password', props: { onSuccess: _generate } })
+                    } else {
+                        _generate()
+                    }
+                },
+                onError(error) {
+                    console.error(error)
+                },
+            })
+        } else {
+            promptUserToConnectLedger(false, () => _generate(), undefined)
+        }
     }
 
     function findReuseAccount() {
@@ -341,14 +398,14 @@
                         completeCallback()
                     },
                     onError(err) {
-                        completeCallback(locale(err.error))
+                        completeCallback(err)
                     },
                 })
             } else {
                 api.createAccount(
                     {
                         alias,
-                        signerType: { type: 'Stronghold' },
+                        signerType: $accounts[0].signerType,
                         clientOptions: $accounts[0].clientOptions,
                     },
                     {
@@ -392,25 +449,29 @@
                             })
                         },
                         onError(err) {
-                            completeCallback(locale(err.error))
+                            completeCallback(err)
                         },
                     }
                 )
             }
         }
 
-        api.getStrongholdStatus({
-            onSuccess(strongholdStatusResponse) {
-                if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                    openPopup({ type: 'password', props: { onSuccess: _create, onCancelled: completeCallback } })
-                } else {
-                    _create()
-                }
-            },
-            onError(err) {
-                completeCallback(locale(err.error))
-            },
-        })
+        if ($isSoftwareProfile) {
+            api.getStrongholdStatus({
+                onSuccess(strongholdStatusResponse) {
+                    if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
+                        openPopup({ type: 'password', props: { onSuccess: _create } })
+                    } else {
+                        _create()
+                    }
+                },
+                onError(error) {
+                    console.error(error)
+                },
+            })
+        } else {
+            _create()
+        }
     }
 
     function onSend(senderAccountId, receiveAddress, amount) {
@@ -444,7 +505,9 @@
                             })
                         })
 
-                        transferState.set('Complete')
+                        transferState.set({
+                            type: TransferProgressEventType.Complete,
+                        })
 
                         setTimeout(() => {
                             clearSendParams()
@@ -462,26 +525,22 @@
             )
         }
 
-        api.getStrongholdStatus({
-            onSuccess(strongholdStatusResponse) {
-                if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                    openPopup({
-                        type: 'password',
-                        props: {
-                            onSuccess: _send,
-                        },
-                    })
-                } else {
-                    _send()
-                }
-            },
-            onError(err) {
-                showAppNotification({
-                    type: 'error',
-                    message: locale(err.error),
-                })
-            },
-        })
+        if ($isSoftwareProfile) {
+            api.getStrongholdStatus({
+                onSuccess(strongholdStatusResponse) {
+                    if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
+                        openPopup({ type: 'password', props: { onSuccess: _send } })
+                    } else {
+                        _send()
+                    }
+                },
+                onError(error) {
+                    console.error(error)
+                },
+            })
+        } else {
+            _send()
+        }
     }
 
     function onInternalTransfer(senderAccountId, receiverAccountId, amount, internal) {
@@ -521,7 +580,9 @@
                         })
                     })
 
-                    transferState.set('Complete')
+                    transferState.set({
+                        type: TransferProgressEventType.Complete,
+                    })
 
                     setTimeout(() => {
                         clearSendParams(internal)
@@ -538,21 +599,22 @@
             })
         }
 
-        api.getStrongholdStatus({
-            onSuccess(strongholdStatusResponse) {
-                if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                    openPopup({ type: 'password', props: { onSuccess: _internalTransfer } })
-                } else {
-                    _internalTransfer()
-                }
-            },
-            onError(err) {
-                showAppNotification({
-                    type: 'error',
-                    message: locale(err.error),
-                })
-            },
-        })
+        if ($isSoftwareProfile) {
+            api.getStrongholdStatus({
+                onSuccess(strongholdStatusResponse) {
+                    if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
+                        openPopup({ type: 'password', props: { onSuccess: _internalTransfer } })
+                    } else {
+                        _internalTransfer()
+                    }
+                },
+                onError(error) {
+                    console.error(error)
+                },
+            })
+        } else {
+            _internalTransfer()
+        }
     }
 
     onMount(async () => {
@@ -568,14 +630,16 @@
 
             initialiseListeners()
 
-            api.getStrongholdStatus({
-                onSuccess(strongholdStatusResponse) {
-                    isStrongholdLocked.set(strongholdStatusResponse.payload.snapshot.status === 'Locked')
-                },
-                onError(error) {
-                    console.error(error)
-                },
-            })
+            if ($isSoftwareProfile) {
+                api.getStrongholdStatus({
+                    onSuccess(strongholdStatusResponse) {
+                        isStrongholdLocked.set(strongholdStatusResponse.payload.snapshot.status === 'Locked')
+                    },
+                    onError(error) {
+                        console.error(error)
+                    },
+                })
+            }
 
             addProfileCurrencyPriceData()
         }

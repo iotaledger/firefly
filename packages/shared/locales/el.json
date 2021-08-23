@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "Δημιουργήστε ένα προφίλ",
+            "profileName": "Όνομα Προφίλ",
             "body1": "Μπορείτε να δημιουργήσετε πολλαπλά προφίλ χρηστών για να οργανώσετε τα πορτοφόλια σας και να βελτιώσετε την ιδιωτικότητά σας.",
-            "body2": "Προς το παρόν, ας ξεκινήσουμε με το όνομα του πρώτου σας προφίλ. Μπορείτε να προσθέσετε περισσότερα προφίλ αργότερα.",
-            "profileName": "Όνομα Προφίλ"
+            "body2": {
+                "first": "For now, let's start with your first profile name.",
+                "nonFirst": "For now, let's start with your profile name."
+            },
+            "addMore": "You can add more profiles later."
         },
         "setup": {
             "title": "Ρυθμίστε ένα πορτοφόλι",
@@ -29,6 +33,32 @@
             "title": "Ασφαλίστε το πορτοφόλι σας",
             "body1": "Αποθήκευση και εκτύπωση του PDF κιτ αποκατάστασης.",
             "body2": "Αν συμπληρώσετε το Κιτ Αποκατάστασης και το αποθηκεύσετε με ασφάλεια, θα μπορείτε πάντα να ανακτήσετε τα πορτοφόλια σας."
+        },
+        "create": {
+            "title": "Create a wallet",
+            "body": "Create a new wallet. You can choose a regular software wallet or if you have a Ledger device you can set up a hardware wallet.",
+            "softwareAccount": {
+                "title": "I want a software wallet",
+                "description": "Create a 24-word Recovery Phrase"
+            },
+            "ledgerAccount": {
+                "title": "I want a hardware wallet",
+                "description": "Ledger Nano S or Nano X required"
+            }
+        },
+        "setupLedger": {
+            "progress1": "Connect your Ledger",
+            "progress2": "Generate address",
+            "progress3": "Switch Ledger app",
+            "progress4": "Transfer funds",
+            "watchVideo": "Watch video guide",
+            "videoGuide": "Ledger migration video guide"
+        },
+        "ledgerInstallationGuide": {
+            "title": "Have you installed the necessary Ledger apps?",
+            "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
+            "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
+            "action": "Yes, I've installed these apps"
         },
         "password": {
             "title": "Δημιουργία κωδικού πρόσβασης",
@@ -85,9 +115,11 @@
         },
         "congratulations": {
             "title": "Η ρύθμιση του πορτοφολιού ολοκληρώθηκε",
-            "body": "Το νέο σας πορτοφόλι είναι έτοιμο για χρήση.",
             "fundsMigrated": "Μετεγκατάσταση κεφαλαίων",
-            "success": "Έχετε μετεγκαταστήσει με επιτυχία τα κεφάλαιά σας στο νέο δίκτυο",
+            "body": "Το νέο σας πορτοφόλι είναι έτοιμο για χρήση.",
+            "softwareMigratedBody": "You have successfully migrated your funds to the new network",
+            "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
             "exportMigration": "Εξαγωγή αρχείου καταγραφής μετεγκατάστασης και τερματισμός εγκατάστασης"
         },
         "import": {
@@ -98,7 +130,9 @@
             "importMnemonic": "Έχω μια φράση ανάκτησης Firefly",
             "importMnemonicDescription": "Εισάγετε τη φράση ανάκτησης για να ανακτήσετε τα πορτοφόλια σας",
             "importFile": "Έχω εφεδρικό αρχείο",
-            "importFileDescription": "Ανεβάστε ένα αρχείο Seedvault ή Stronghold"
+            "importFileDescription": "Ανεβάστε ένα αρχείο Seedvault ή Stronghold",
+            "importLedger": "I have a Ledger backup",
+            "importLedgerDescription": "Restore or migrate a Ledger profile"
         },
         "importFromText": {
             "seed": {
@@ -119,18 +153,63 @@
             "title": "Επαναφορά του πορτοφολιού σας χρησιμοποιώντας ένα αρχείο αντιγράφου ασφαλείας",
             "body": "Εισαγάγετε ένα αρχείο αντιγράφου ασφαλείας για να επαναφέρετε τα πορτοφόλια σας. Τα αντίγραφα ασφαλείας μπορεί να είναι είτε Stronghold (.stronghold) ή Trinity SeedVault (.kdbx)."
         },
+        "importFromLedger": {
+            "title": "Restore or Migrate your Ledger",
+            "body": "Restore an existing Firefly Ledger profile, or migrate your funds from Trinity.",
+            "haveFireflyLedger": "I have a Firefly Ledger backup",
+            "haveFireflyLedgerDescription": "Restore a Firefly profile",
+            "haveTrinityLedger": "I have a Trinity Ledger backup",
+            "haveTrinityLedgerDescription": "Migrate a Trinity profile"
+        },
+        "connectLedger": {
+            "title": "Connect your Ledger to Firefly",
+            "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed.",
+            "trafficLight1": "Connect and unlock your Ledger with your PIN",
+            "trafficLight2": "Open the new IOTA app on your Ledger",
+            "tips": "Tips if your Ledger isn’t connecting"
+        },
+        "restoreFromFireflyLedger": {
+            "title": "Restore Your Ledger Profile",
+            "body": "Press restore to complete the setup process and restore your wallets, balances and transaction history.",
+            "restoring": "Restoring from Ledger..."
+        },
+        "legacyLedgerIntro": {
+            "title": "Start your Ledger migration using Firefly",
+            "body1": "Firefly will help you to transfer your tokens to the new Chrysalis network.",
+            "body2": "After the migration, you will be able to send and receive your tokens using your Ledger with Firefly.",
+            "readMore": "What to expect from the migration process"
+        },
+        "generateNewLedgerAddress": {
+            "title": "Δημιουργία νέας διεύθυνσης",
+            "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
+            "confirmTitle": "Confirm the new address",
+            "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
+            "confirmedTitle": "Address confirmed",
+            "confirmedBody": "You have confirmed that the address in Firefly matches the one on your Ledger device.",
+            "generating": "Generating address"
+        },
+        "switchLedgerApps": {
+            "title": "Switch Ledger apps",
+            "body": "Please switch to the {legacy} app on your Ledger device to continue migration. When ready, press continue."
+        },
+        "selectLedgerAccountIndex": {
+            "title": "Choose Ledger account index",
+            "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
+            "accountIndex": "Account Index",
+            "accountPage": "Account Page",
+            "standard": "Standard",
+            "expert": "Expert",
+            "takingAWhile": "This is taking a while...",
+            "notGeneratingAddresses": "Is your Ledger generating addresses?",
+            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
+        },
         "importBackupPassword": {
-            "title": "Επαναφέρετε τα πορτοφόλια σας από ένα SeedVault ή Stronghold",
             "body1": "Παρακαλώ εισάγετε τον κωδικό του εφεδρικού σας αρχείου.",
             "body2": "Αυτός είναι ο κωδικός που ορίσατε οταν δημιουργήσατε το αντίγραφο ασφαλείας σας αρχείο."
         },
         "importSuccess": {
             "title": "Έχετε επαναφέρει το εφεδρικό σας αρχείο με επιτυχία",
-            "body": "Τώρα μπορείτε να δημιουργήσετε το καινούριο σας πορτοφόλι.",
-            "seedvaultTitle": "Εισήχθη με επιτυχία",
-            "seedvaultBody": "Ο κωδικός πρόσβασής σας είναι σωστός, τώρα μπορείτε να συνεχίσετε.",
-            "strongholdTitle": "Εισήχθη με επιτυχία",
-            "strongholdBody": "Ο κωδικός πρόσβασής σας είναι σωστός, τώρα μπορείτε να συνεχίσετε."
+            "body": "Τώρα μπορείτε να δημιουργήσετε το καινούριο σας πορτοφόλι."
         },
         "migrate": {
             "title": "Μεταφέρετε τα χρήματα σας",
@@ -153,7 +232,7 @@
             "miningBundle": "Υπογραφή δέσμης",
             "problemRestoringWallet": "Παρουσιάστηκε σφάλμα δικτύου κατά την επαναφορά του πορτοφολιού σας. Παρακαλώ δοκιμάστε ξανά.",
             "minimumMigrationAmountSpentAddresses": "Το ελάχιστο ποσό μετεγκατάστασης για κάθε διεύθυνση που δαπανάται είναι 1 Mi. Ελέγξτε και πάλι αν το υπόλοιπό σας δεν φαίνεται σωστό.",
-            "tooManyAddressesToMigrate": "Έχετε πάρα πολλές διευθύνσεις με χαμηλό υπόλοιπο για να μετεγκαταστήσετε. Ελέγξτε ξανά αν το υπόλοιπό σας δεν φαίνεται σωστό.",
+            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
             "cannotMigrateAllYourFunds": "Δεν μπορούμε να μετεγκαταστήσουμε όλα τα κεφάλαιά σας επειδή ορισμένες διευθύνσεις είναι πολύ χαμηλές σε αξία. Μπορείτε να προχωρήσετε ούτως ή άλλως. {value} θα χαθεί.",
             "error": "Παρουσιάστηκε σφάλμα κατά τη μετεγκατάσταση των κεφαλαίων σας. Παρακαλώ δοκιμάστε ξανά."
         },
@@ -184,6 +263,7 @@
         },
         "transferFragmentedFunds": {
             "body1": "Το Firefly θα προχωρήσει τώρα στη μετεγκατάσταση των κεφαλαίων σας. Αυτό μπορεί να διαρκέσει λίγο.",
+            "body2": "Ensure your Ledger is connected and the {legacy} app is open at all times during migration.",
             "migrate": "Μετεγκατάσταση κεφαλαίων",
             "transaction": "Συναλλαγή {number}",
             "rerun": "Προσπαθήστε ξανά"
@@ -196,7 +276,8 @@
             "title": "Το υπόλοιπο σας",
             "body": "Βεβαιωθείτε ότι το υπόλοιπό σας είναι σωστό πριν συνεχίσετε. Μπορείτε να ελέγξετε ξανά αν τα πράγματα δεν φαίνονται σωστά.",
             "error": "Το ελάχιστο ποσό μετεγκατάστασης είναι 1 Mi. Ελέγξτε και πάλι αν το υπόλοιπό σας δεν φαίνεται σωστό.",
-            "zeroBalance": "Δοκίμασε να ελέγξετε ξανά. Αν δεν μπορείτε να βρείτε το υπόλοιπό σας ίσως να εισάγατε εσφαλμένα το seed σας."
+            "zeroBalance": "Δοκίμασε να ελέγξετε ξανά. Αν δεν μπορείτε να βρείτε το υπόλοιπό σας ίσως να εισάγατε εσφαλμένα το seed σας.",
+            "zeroBalanceLedgerLegacy": "Try checking again. If you still can't find your balance you might have selected the wrong account index."
         },
         "settings": {
             "settings": "Ρυθμίσεις",
@@ -314,6 +395,10 @@
                 "title": "Διαγνωστικός Έλεγχος",
                 "description": "Προβολή πληροφοριών συστήματος και εφαρμογών"
             },
+            "migrateLedgerIndex": {
+                "title": "Migrate Ledger Index",
+                "description": "Migrate another Trinity account index"
+            },
             "stateExport": {
                 "title": "Εξαγωγή Κατάστασης",
                 "description": "Εξαγωγή του ιστορικού συναλλαγών σας σε ένα αρχείο .csv"
@@ -357,7 +442,15 @@
                 },
                 "hardwareDevice": {
                     "title": "Συσκευή",
-                    "noneDetected": "Δεν ανιχνεύθηκε κανένα"
+                    "statuses": {
+                        "appNotOpen": "IOTA App Not Open",
+                        "connected": "Connected",
+                        "legacyConnected": "{legacy} App Open",
+                        "locked": "Κλειδωμένο",
+                        "mnemonicMismatch": "Wrong Ledger or Mnemonic",
+                        "notDetected": "Not Detected",
+                        "otherConnected": "App Open"
+                    }
                 },
                 "strongholdStatus": {
                     "title": "Κατάσταση Πορτοφολιού",
@@ -488,6 +581,53 @@
             "body": "Η αναβάθμιση του δικτύου Chrysalis έχει ξεκινήσει.",
             "bodyMigration": "Η μετεγκατάσταση είναι απενεργοποιημένη μέχρι να ολοκληρωθεί.",
             "bodyFirefly": "Το Firefly είναι απενεργοποιημένο μέχρι να ολοκληρωθεί. Η μετεγκατάσταση των κεφαλαίων θα είναι ακόμα δυνατή και αργότερα."
+        },
+        "ledgerNotConnected": {
+            "connect": "Open the new IOTA app on your Ledger device to continue",
+            "connectLegacy": "Open the {legacy} app on your Ledger device to continue"
+        },
+        "ledgerConfirmation": {
+            "confirm": "To proceed, confirm the prompt displayed on your Ledger device"
+        },
+        "ledgerAppGuide": {
+            "title": "Guide to installing the Ledger apps",
+            "steps": {
+                "0": "Install and open the Ledger Live application",
+                "1": "Ensure that your Ledger is connected",
+                "2": "Search for apps: {legacy} and IOTA (MIOTA)",
+                "3": "Install both apps: {legacy} and IOTA (MIOTA)",
+                "4": "Remember that it's important to close Ledger Live before returning to Firefly"
+            }
+        },
+        "ledgerConnectionGuide": {
+            "title": "Tips if your Ledger isn’t connecting",
+            "steps": {
+                "0": "Make sure Ledger Live is not open on your computer",
+                "1": "Ensure you have unlocked your Ledger device with your PIN",
+                "2": "Open the new IOTA app on your Ledger device",
+                "3": {
+                    "text": "Still no luck?",
+                    "link": "Try the official Ledger support page"
+                }
+            }
+        },
+        "ledgerTransaction": {
+            "remainderAddress": {
+                "title": "Confirm remainder address",
+                "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+            },
+            "transaction": {
+                "title": "Επιβεβαίωση συναλλαγής",
+                "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted."
+            }
+        },
+        "ledgerAddress": {
+            "title": "Confirm receive address",
+            "body": "Confirm that the receive address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+        },
+        "ledgerMigrateIndex": {
+            "title": "Do you need to migrate another Trinity account index?",
+            "body": "You can also migrate later in Advanced Settings."
         }
     },
     "charts": {
@@ -505,6 +645,8 @@
     "actions": {
         "continue": "Συνέχεια",
         "back": "Πίσω",
+        "previous": "Previous",
+        "next": "Next",
         "cancel": "Ακύρωση",
         "close": "Κλείσιμο",
         "dismiss": "Απόρριψη",
@@ -573,6 +715,7 @@
         "addAccount": "Προσθήκη Πορτοφολιού",
         "checkForUpdates": "Έλεγχος για ενημερώσεις",
         "reportAnIssue": "Αναφορά Προβλήματος",
+        "restore": "Restore",
         "clear": "Εκκαθάριση",
         "hideDetails": "Απόκρυψη Λεπτομερειών",
         "yes": "Ναι",
@@ -592,7 +735,9 @@
         "searchBalances": "Αναζήτηση υπολοίπων",
         "searchAgain": "Αναζήτηση Ξανά",
         "searching": "Αναζήτηση...",
-        "closeFirefly": "Κλείσιμο Του Firefly"
+        "closeFirefly": "Κλείσιμο Του Firefly",
+        "generateAddress": "Generate address",
+        "migrateAgain": "Migrate another index"
     },
     "general": {
         "password": "Κωδικός πρόσβασης",
@@ -607,6 +752,7 @@
         "received": "Ελήφθη",
         "sendPayment": "Αποστολή Πληρωμής",
         "moveFunds": "Εσωτερική Μεταφορά",
+        "sendTo": "Send To",
         "sendFunds": "Αποστολή Χρημάτων",
         "sendToAddress": "Αποστολή προς διεύθυνση",
         "scanQrOrPaste": "Σαρώστε τον κωδικό QR ή επικολλήστε μια διεύθυνση",
@@ -625,6 +771,8 @@
         "myAddress": "Η διεύθυνσή μου",
         "shareAddress": "Μοιραστείτε μια διεύθυνση",
         "yourAddress": "Η διεύθυνση σας",
+        "newRemainder": "New Remainder",
+        "remainder": "Remainder",
         "generateNewAddress": "Δημιουργία νέας διεύθυνσης",
         "copyAddress": "Αντιγραφή Διεύθυνσης",
         "import": "Εισαγωγή",
@@ -661,6 +809,7 @@
         "messageId": "Κωδικός Μηνύματος",
         "inputAddress": "Αποστολή Διεύθυνσης",
         "receiveAddress": "Διεύθυνση Λήψης",
+        "newAddress": "New Address",
         "date": "Ημερομηνία",
         "status": "Κατάσταση",
         "confirmed": "Επιβεβαιώθηκε",
@@ -672,11 +821,13 @@
         "firstSync": "Συγχρονισμός ιστορικού, αυτό μπορεί να διαρκέσει λίγο...",
         "transferSyncing": "Συγχρονισμός πορτοφολιού",
         "transferSelectingInputs": "Επιλογή εισαγωγών",
-        "transferRemainderAddress": "Δημιουργία διεύθυνσης κατάθεσης υπολοίπου",
+        "transferRemainderAddress": "Generating remainder address",
+        "transferPreparedTransaction": "Preparing transaction",
         "transferSigning": "Υπογραφή συναλλαγής",
         "transferPow": "Εκτέλεση Του Pow",
         "transferBroadcasting": "Κοινοποίηση συναλλαγής",
         "transferComplete": "Η μεταφορά ολοκληρώθηκε",
+        "generatingReceiveAddress": "Generating receive address",
         "creatingAccount": "Δημιουργία πορτοφολιού, παρακαλώ περιμένετε...",
         "updatingAccount": "Ενημέρωση πορτοφολιού, παρακαλώ περιμένετε...",
         "accountSyncing": "Το πορτοφόλι συγχρονίζεται",
@@ -732,8 +883,7 @@
         "minutesRemaining": "{minutes, plural, one {1 λεπτό απομένει} other {# λεπτά απομένουν}}",
         "copiedToClipboard": "Αντιγράφηκε στο πρόχειρο",
         "accountsSynchronized": "Ο συγχρονισμός πορτοφολιού ολοκληρώθηκε",
-        "migratedAccountChrysalisDown": "Τα χρήματά σας θα είναι διαθέσιμα μετά το Chrysalis στις 28 Απριλίου",
-        "migratedAccountChrysalisUp": "Τα κεφάλαιά σας θα είναι διαθέσιμα σύντομα"
+        "fundsAvailableSoon": "Your funds will become available shortly"
     },
     "error": {
         "profile": {
@@ -770,7 +920,10 @@
             "tilde": "Το όνομα προφίλ δεν μπορεί να ξεκινήσει με τον χαρακτήρα '~'.",
             "control": "Το όνομα του προφίλ δεν μπορεί να περιέχει χαρακτήρα ελέγχου.",
             "startDot": "Το όνομα προφίλ δεν μπορεί να ξεκινήσει με το χαρακτήρα ''.",
-            "chars": "Το όνομα προφίλ δεν μπορεί να περιέχει τους ακόλουθους χαρακτήρες <>:\"/\\|?*"
+            "chars": "Το όνομα προφίλ δεν μπορεί να περιέχει τους ακόλουθους χαρακτήρες <>:\"/\\|?*",
+            "index": "Your account index must be a number between 0 and 2,147,483,647.",
+            "page": "Your account page must be a number between 0 and 2,147,483,647.",
+            "syncing": "There was an error syncing your wallets."
         },
         "send": {
             "addressLength": "Οι διευθύνσεις πρέπει να είναι {length, plural, one {1 χαρακτήρα} other {# χαρακτήρες}}.",
@@ -784,7 +937,9 @@
             "insufficientFunds": "Αυτό το πορτοφόλι έχει ανεπαρκή κεφάλαια.",
             "noToAccount": "Δεν έχετε επιλέξει ένα πορτοφόλι για να στείλετε τα κεφάλαια.",
             "sendingDust": "Δεν μπορείτε να στείλετε λιγότερο από 1 Mi.",
-            "leavingDust": "Δεν μπορείτε να αφήσετε λιγότερο από 1 Mi στη διεύθυνσή σας."
+            "leavingDust": "Δεν μπορείτε να αφήσετε λιγότερο από 1 Mi στη διεύθυνσή σας.",
+            "cancelled": "The transaction was cancelled.",
+            "transaction": "There was an error sending your transaction. Please try again."
         },
         "node": {
             "invalid": "Εισαγάγετε μια έγκυρη διεύθυνση URL.",
@@ -805,6 +960,25 @@
             "phraseWordCount": "Πρέπει να υπάρχουν 24 λέξεις στη φράση ανάκτησής σας, αυτή τη στιγμή {length, plural, one {είναι 1} other {είναι #}}.",
             "phraseUnrecognizedWord": "Μη αναγνωρίσιμη λέξη \"{word}\" στη φράση ανάκτησης σας",
             "phraseCaseWord": "Η λέξη \"{word}\" πρέπει να είναι πεζή"
+        },
+        "ledger": {
+            "appNotOpen": "You must open the IOTA app on your Ledger device.",
+            "generic": "There was an error connecting to your Ledger device.",
+            "legacyConnected": "The wrong app is open on your Ledger device.",
+            "locked": "Please unlock your Ledger device by entering the PIN.",
+            "mnemonicMismatch": "You have connected the wrong Ledger device or the mnemonic has changed.",
+            "notDetected": "No Ledger device detected.",
+            "notFound": "Ledger device not found.",
+            "otherConnected": "The wrong app is open on your Ledger device.",
+            "generateAddress": "There was an error generating an address.",
+            "timeout": "Your Ledger device timed out.",
+            "disconnected": "Your Ledger device was disconnected."
+        },
+        "popup": {
+            "preventClose": "This popup is unable to be closed."
+        },
+        "migration": {
+            "missingBundle": "An error occurred while trying to find the transaction bundle."
         }
     },
     "tooltips": {

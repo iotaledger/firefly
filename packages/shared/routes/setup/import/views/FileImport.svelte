@@ -8,9 +8,6 @@
     let fileName
     let filePath
 
-    // TODO: remove this to enable seed support
-    $: isSeedVault = fileName && fileName.endsWith('.kdbx')
-
     const dispatch = createEventDispatcher()
 
     function handleContinueClick() {

@@ -1,0 +1,994 @@
+{
+    "views": {
+        "onboarding1": {
+            "title": "Pošiljajte, prejemajte in upravljajte svoje IOTA žetone",
+            "body": "Firefly is the official wallet software of IOTA."
+        },
+        "legal": {
+            "title": "Pravilnik o zasebnosti in pogoji storitve",
+            "body": "Please review the Privacy Policy and Terms of Service.",
+            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
+        },
+        "appearance": {
+            "title": "Videz",
+            "body": "Izberite temo aplikacije."
+        },
+        "profile": {
+            "title": "Ustvari profil",
+            "profileName": "Ime profila",
+            "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
+            "body2": {
+                "first": "For now, let's start with your first profile name.",
+                "nonFirst": "For now, let's start with your profile name."
+            },
+            "addMore": "You can add more profiles later."
+        },
+        "setup": {
+            "title": "Nastavite denarnico",
+            "chrysalisTitle": "Chrysalis Network Update",
+            "chrysalisBody": "From April 21st, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
+            "learnMore": "Learn about the migration"
+        },
+        "secure": {
+            "title": "Zaščiti svojo denarnico",
+            "body1": "Save and print the Recovery Kit PDF template.",
+            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallets."
+        },
+        "create": {
+            "title": "Ustvari denarnico",
+            "body": "Create a new wallet. You can choose a regular software wallet or if you have a Ledger device you can set up a hardware wallet.",
+            "softwareAccount": {
+                "title": "I want a software wallet",
+                "description": "Create a 24-word Recovery Phrase"
+            },
+            "ledgerAccount": {
+                "title": "I want a hardware wallet",
+                "description": "Ledger Nano S or Nano X required"
+            }
+        },
+        "setupLedger": {
+            "progress1": "Povežite svoj Ledger",
+            "progress2": "Generiraj naslov",
+            "progress3": "Switch Ledger app",
+            "progress4": "Prenos sredstev",
+            "watchVideo": "Watch video guide",
+            "videoGuide": "Ledger migration video guide"
+        },
+        "ledgerInstallationGuide": {
+            "title": "Have you installed the necessary Ledger apps?",
+            "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
+            "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
+            "action": "Yes, I've installed these apps"
+        },
+        "password": {
+            "title": "Ustvari geslo",
+            "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
+            "body2": "It is recommended that you write down your password in your Recovery Kit."
+        },
+        "protect": {
+            "title": "Protect your wallet",
+            "body1": "Set up a login PIN to make sure that only you can enter your profile.",
+            "body2": "Ohranite vašo PIN kodo varno!"
+        },
+        "pin": {
+            "title": "Nastavi PIN kodo",
+            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
+            "body2": "Uporabi samo števila"
+        },
+        "confirmPin": {
+            "title": "Preveri tvojo PIN kodo",
+            "body1": "Your PIN keeps your balance and transactions private.",
+            "body2": "Re-enter your PIN code to proceed. "
+        },
+        "backup": {
+            "title": "Shrani tvojo denarnico",
+            "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
+            "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
+            "body3": "If you lose your recovery phrase, you may lose your funds."
+        },
+        "recoveryPhrase": {
+            "title": "Recovery phrase",
+            "body1": "In your Recovery Kit, write down the words in the exact order shown.",
+            "body2": "Keep this private and safely stored.",
+            "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
+            "revealRecoveryPhrase": "Reveal recovery phrase",
+            "hideRecoveryPhrase": "Hide recovery phrase"
+        },
+        "verifyRecoveryPhrase": {
+            "title": "Verify recovery phrase",
+            "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
+            "word": "Beseda",
+            "verified": "Recovery phrase verified",
+            "verifiedBody": "Remember to keep it private and safely stored."
+        },
+        "backupWallet": {
+            "title": "Back up to a Stronghold file",
+            "body1": "Enter your password to backup your wallets to a Stronghold file. Your password is used to encrypt the backup.",
+            "body2": "Reasons why digital backups are important:",
+            "reason1": "Easily recover your wallets without typing in your recovery phrase",
+            "reason2": "Import your wallets on other devices",
+            "reason3": "Recover your full transaction history"
+        },
+        "recoveryPhraseSaved": {
+            "title": "Successfully backed up",
+            "body": "You have backed up your wallets to a Stronghold."
+        },
+        "congratulations": {
+            "title": "Wallet setup completed",
+            "fundsMigrated": "Funds migrated",
+            "body": "Your new wallet is ready to use.",
+            "softwareMigratedBody": "You have successfully migrated your funds to the new network",
+            "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
+            "exportMigration": "Export migration log and finish setup"
+        },
+        "import": {
+            "title": "Recover or migrate funds",
+            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
+            "importSeed": "I have an 81 character seed",
+            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
+            "importMnemonic": "I have a Firefly recovery phrase",
+            "importMnemonicDescription": "Enter your recovery phrase to recover your wallets",
+            "importFile": "I have a file backup",
+            "importFileDescription": "Upload a Seedvault or Stronghold file",
+            "importLedger": "I have a Ledger backup",
+            "importLedgerDescription": "Restore or migrate a Ledger profile"
+        },
+        "importFromText": {
+            "seed": {
+                "title": "Type your seed to commence migration",
+                "body": "A seed consists of 81 characters. This is used to recover from the older Trinity app.",
+                "enter": "Enter your seed"
+            },
+            "mnemonic": {
+                "title": "Type your recovery phrase",
+                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly wallets.",
+                "enter": "Enter your secret recovery phrase"
+            },
+            "seedDetected": "81 character seed detected",
+            "phraseDetected": "24 word recovery phrase detected",
+            "checksum": "Checksum"
+        },
+        "importFromFile": {
+            "title": "Restore your wallets using a backup file",
+            "body": "Import a backup file to restore your wallets. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+        },
+        "importFromLedger": {
+            "title": "Restore or Migrate your Ledger",
+            "body": "Restore an existing Firefly Ledger profile, or migrate your funds from Trinity.",
+            "haveFireflyLedger": "I have a Firefly Ledger backup",
+            "haveFireflyLedgerDescription": "Restore a Firefly profile",
+            "haveTrinityLedger": "I have a Trinity Ledger backup",
+            "haveTrinityLedgerDescription": "Migrate a Trinity profile"
+        },
+        "connectLedger": {
+            "title": "Connect your Ledger to Firefly",
+            "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed.",
+            "trafficLight1": "Connect and unlock your Ledger with your PIN",
+            "trafficLight2": "Open the new IOTA app on your Ledger",
+            "tips": "Tips if your Ledger isn’t connecting"
+        },
+        "restoreFromFireflyLedger": {
+            "title": "Restore Your Ledger Profile",
+            "body": "Press restore to complete the setup process and restore your wallets, balances and transaction history.",
+            "restoring": "Restoring from Ledger..."
+        },
+        "legacyLedgerIntro": {
+            "title": "Start your Ledger migration using Firefly",
+            "body1": "Firefly will help you to transfer your tokens to the new Chrysalis network.",
+            "body2": "After the migration, you will be able to send and receive your tokens using your Ledger with Firefly.",
+            "readMore": "What to expect from the migration process"
+        },
+        "generateNewLedgerAddress": {
+            "title": "Ustvari nov naslov",
+            "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
+            "confirmTitle": "Potrditev novega naslova",
+            "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
+            "confirmedTitle": "Naslov potrjen",
+            "confirmedBody": "You have confirmed that the address in Firefly matches the one on your Ledger device.",
+            "generating": "Ustvarjanje naslova"
+        },
+        "switchLedgerApps": {
+            "title": "Switch Ledger apps",
+            "body": "Please switch to the {legacy} app on your Ledger device to continue migration. When ready, press continue."
+        },
+        "selectLedgerAccountIndex": {
+            "title": "Izberite indeks Ledger računa",
+            "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
+            "accountIndex": "Indeks računa",
+            "accountPage": "Stran računa",
+            "standard": "Običajen",
+            "expert": "Strokovni",
+            "takingAWhile": "This is taking a while...",
+            "notGeneratingAddresses": "Is your Ledger generating addresses?",
+            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
+        },
+        "importBackupPassword": {
+            "body1": "Please enter your backup password.",
+            "body2": "This is the password you set when you first created your backup."
+        },
+        "importSuccess": {
+            "title": "You have successfully recovered your backup",
+            "body": "You can now set up your new profile."
+        },
+        "migrate": {
+            "title": "Migrate your funds",
+            "body1": "This is an automated process to transfer your funds to your new wallet.",
+            "body2": "It may take some time. Do not turn off your device during the migration.",
+            "existing": "Vaša stara denarnica",
+            "new": "Vaša nova denarnica",
+            "learn": "Learn about the migration",
+            "beginMigration": "Begin Migration",
+            "migrating": "Migrating funds...",
+            "migrated": "{balance} migrated",
+            "migrationFailed": "Migration Failed",
+            "noAddressesForMigration": "Please select the addresses you wish to secure.",
+            "restoringWallet": "Restoring wallet...",
+            "findingBalance": "Iskanje sredstev...",
+            "incorrectSeedVaultPassword": "Nepravilno SeedVault geslo.",
+            "noDataSeedVault": "No data could be found in the SeedVault.",
+            "signingBundle": "Signing bundle",
+            "broadcastingBundle": "Broadcasting bundle",
+            "miningBundle": "Mining bundle",
+            "problemRestoringWallet": "There was a network error restoring your wallet. Please try again.",
+            "minimumMigrationAmountSpentAddresses": "The minimum migration amount for each spent address is 1 Mi. Check again if your balance doesn't look right.",
+            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
+            "cannotMigrateAllYourFunds": "We cannot migrate all of your funds because some addresses are too low in value. You can proceed anyway. {value} will be lost.",
+            "error": "There was an error migrating your funds. Please try again."
+        },
+        "bundleMiningWarning": {
+            "title": "Opozorilo",
+            "body1": "You have funds on one or more spent addresses.",
+            "body2": "We recommend you run an automated process to help secure and transfer these funds safely.",
+            "body3": "If you close the app you will need to restart the whole migration.",
+            "learn": "Learn about spent addresses"
+        },
+        "secureSpentAddresses": {
+            "title": "Secure spent addresses",
+            "body1": "You have funds detected on {number, plural, one {# spent address} other {# spent addresses}}.",
+            "body2": "We recommend you run an automated process to help secure and transfer your funds safely.",
+            "error": "You can’t migrate spent addresses with less than 1 Mi"
+        },
+        "securityCheckCompleted": {
+            "title": "Security check completed",
+            "body1": "We have calculated the security risk level. Running this process again may lower your risk level.",
+            "body2": "When you are happy with the risk level(s) press continue.",
+            "rerun": "Rerun process for selected addresses",
+            "continueMigration": "Continue migration"
+        },
+        "securingSpentAddresses": {
+            "title": "Securing spent addresses...",
+            "body1": "This process will take {minutes, plural, one {1 minute} other {# minutes}}.",
+            "body2": "Your computer will run at full capacity, you may wish to do something else while you wait for this to complete."
+        },
+        "transferFragmentedFunds": {
+            "body1": "Firefly will now proceed to migrate your funds. This may take a while.",
+            "body2": "Ensure your Ledger is connected and the {legacy} app is open at all times during migration.",
+            "migrate": "Migrate funds",
+            "transaction": "Transaction {number}",
+            "rerun": "Poskusi znova"
+        },
+        "migrateFailed": {
+            "title": "To do",
+            "body": "To do"
+        },
+        "balance": {
+            "title": "Your balance",
+            "body": "Make sure your balance is correct before continuing. You can check again if things don't look correct.",
+            "error": "The minimum migration amount is 1 Mi. Check again if your balance doesn't look right.",
+            "zeroBalance": "Try checking again. If you still can't find your balance you might have entered your seed incorrectly.",
+            "zeroBalanceLedgerLegacy": "Try checking again. If you still can't find your balance you might have selected the wrong account index."
+        },
+        "settings": {
+            "settings": "Nastavitve",
+            "generalSettings": {
+                "title": "Splošne nastavitve",
+                "description": "Configure your app's appearance and other general settings"
+            },
+            "security": {
+                "title": "Varnost",
+                "description": "Change your password and adjust security-related settings"
+            },
+            "advancedSettings": {
+                "title": "Napredne nastavitve",
+                "description": "Tools and manual settings for technical users"
+            },
+            "helpAndInfo": {
+                "title": "Pomoč in Informacije",
+                "description": "Find the answer to a question or get help with an issue"
+            },
+            "profile": {
+                "title": "Profil",
+                "description": "Change your profile name or set an avatar"
+            },
+            "sync": {
+                "title": "Sinhroniziraj denarnice",
+                "description": ""
+            },
+            "theme": {
+                "title": "Tema",
+                "description": ""
+            },
+            "language": {
+                "title": "Jezik",
+                "description": ""
+            },
+            "currency": {
+                "title": "Valuta",
+                "description": "Adjusts balance conversion and updates chart options"
+            },
+            "notifications": {
+                "title": "Obvestila",
+                "description": "System notifications for transaction events"
+            },
+            "networkStatus": {
+                "title": "Stanje omrežja",
+                "description": "Displays the status of the node you are currently connected to."
+            },
+            "exportStronghold": {
+                "title": "Export Backup",
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
+            },
+            "appLock": {
+                "title": "Automatic Lock",
+                "description": "Inactivity time before your wallets lock and you are logged out",
+                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
+                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
+            },
+            "changePassword": {
+                "title": "Zamenjaj geslo",
+                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
+            },
+            "changePincode": {
+                "title": "Spremeni PIN kodo",
+                "description": "Your PIN keeps your balance and transactions private",
+                "currentPincode": "Trenutna koda PIN",
+                "newPincode": "Nova koda PIN",
+                "confirmNewPincode": "Potrdi novo kodo PIN",
+                "action": "Zamenjaj kodo PIN"
+            },
+            "balanceFinder": {
+                "title": "Balance finder",
+                "description": "Perform an extended search of your addresses for tokens"
+            },
+            "hiddenAccounts": {
+                "title": "Skrite denarnice",
+                "description": "Selecting this options will show wallets that were previously hidden"
+            },
+            "deleteProfile": {
+                "title": "Izbriši profil",
+                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
+            },
+            "deepLinks": {
+                "title": "Deep links",
+                "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
+            },
+            "developerMode": {
+                "title": "Način razvijalca",
+                "description": "Connect to testnets and other developer features"
+            },
+            "nodeSettings": {
+                "title": "Node nastavitve",
+                "description": "Select Manual to configure the node settings and connect to your own node"
+            },
+            "configureNodeList": {
+                "title": "Izberi Node",
+                "description": "Manage the list of IOTA network nodes you connect to",
+                "primaryNode": "Primarni node",
+                "excludeNode": "Izključi node",
+                "includeNode": "Vključi node",
+                "viewDetails": "Poglej podrobnosti",
+                "setAsPrimary": "Nastavi kot primaren",
+                "removeNode": "Izbriši node",
+                "includeOfficialNodeList": "Include official node list",
+                "noNodes": "There are no nodes, automatic selection will be used instead"
+            },
+            "proofOfWork": {
+                "title": "Proof of work",
+                "description": "Complete proof of work locally on your device or outsource to the node"
+            },
+            "errorLog": {
+                "title": "Dnevnik napak",
+                "description": "View errors to debug an issue"
+            },
+            "diagnostics": {
+                "title": "Diagnostics",
+                "description": "View system and application information"
+            },
+            "migrateLedgerIndex": {
+                "title": "Migrate Ledger Index",
+                "description": "Migrate another Trinity account index"
+            },
+            "stateExport": {
+                "title": "State export",
+                "description": "Export your transaction history to a .csv file"
+            },
+            "troubleshoot": {
+                "title": "Odpravljanje težav",
+                "description": "Use the troubleshooting wizard to solve common problems"
+            },
+            "documentation": {
+                "title": "Dokumentacija",
+                "description": "View the documentation for in depth explanations of how things work"
+            },
+            "faq": {
+                "title": "Pogosta vprašanja",
+                "title2": "Frequently Asked Questions",
+                "description": "View the FAQs to get help with a common problem or question"
+            },
+            "discord": {
+                "title": "Discord",
+                "description": "Get help from the IOTA community on Discord"
+            },
+            "about": {
+                "title": "About",
+                "description": ""
+            },
+            "reportAnIssue": {
+                "title": "Report an issue",
+                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
+            }
+        },
+        "login": {
+            "pleaseWait": "Please wait {time, plural, one {1 second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+        },
+        "dashboard": {
+            "security": {
+                "version": {
+                    "title": "Firefly v{version}",
+                    "upToDate": "Posodobljeno",
+                    "outOfDate": "Zastarelo"
+                },
+                "hardwareDevice": {
+                    "title": "Strojna naprava",
+                    "statuses": {
+                        "appNotOpen": "IOTA App Not Open",
+                        "connected": "Povezan",
+                        "legacyConnected": "{legacy} App Open",
+                        "locked": "Zaklenjeno",
+                        "mnemonicMismatch": "Wrong Ledger or Mnemonic",
+                        "notDetected": "Not Detected",
+                        "otherConnected": "Aplikacija odprta"
+                    }
+                },
+                "strongholdStatus": {
+                    "title": "Stanje Denarnice",
+                    "locked": "Zaklenjeno",
+                    "unlocked": "Odklenjeno"
+                },
+                "strongholdBackup": {
+                    "title": "Wallet Backup",
+                    "weeksAgo": "{weeks, plural, one {# week} other {# weeks}} ago"
+                }
+            },
+            "network": {
+                "networkOperational": "Network Operational",
+                "networkDegraded": "Network Degraded",
+                "networkDown": "Network Disconnected",
+                "status": "Stanje",
+                "messagesPerSecond": "Messages per second",
+                "referencedRate": "Referenced rate"
+            },
+            "profileModal": {
+                "allSettings": "All settings",
+                "logout": "Odjava"
+            }
+        }
+    },
+    "popups": {
+        "password": {
+            "title": "Geslo zahtevano",
+            "subtitle": "Please enter your password to unlock your wallets",
+            "backup": "Please enter your password to export a backup"
+        },
+        "qr": {
+            "title": "Your QR code"
+        },
+        "version": {
+            "title": "Current version: {version}",
+            "upToDateTitle": "Firefly is up to date",
+            "upToDateDescription": "You are running the latest and safest version of Firefly.",
+            "updateAvailable": "Firefly update available",
+            "updateDetails": "Version {version} - {date}",
+            "noAutoUpdate": "Auto-update is disabled in this Windows version, please go to https://firefly.iota.org to download the update."
+        },
+        "backup": {
+            "title": "Last backup: {date}",
+            "lastBackup": "You last backed up {date}",
+            "backupDescription": "It is important to back up regularly to ensure you have a copy of your wallets and transaction history.",
+            "backupWarning": "If you lose your backup and recovery phrase you will lose access to your funds.",
+            "notBackedUp": "Not backed up",
+            "notBackedUpDescription": "You have not backed up your wallets",
+            "saving": "Shranjevanje..."
+        },
+        "deleteAccount": {
+            "title": "Delete {name}?",
+            "body": "This wallet has no transaction history. It can safely be deleted.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Izbriši denarnico",
+            "errorTitle": "Unable to delete {name}",
+            "errorBody1": "You cannot delete this wallet, you must have at least one."
+        },
+        "hideAccount": {
+            "title": "Hide {name}?",
+            "body": "You can find this wallet later by enabling \"Show hidden wallets\" in Advanced Settings.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Skrij denarnico",
+            "errorTitle": "Unable to hide {name}",
+            "errorBody1": "To hide a wallet it must have 0 balance.",
+            "errorBody2": "You currently have {balance} remaining on this wallet. Please move these funds to a different wallet and try again.",
+            "errorBody3": "You cannot hide this wallet, you must have at least one."
+        },
+        "addressHistory": {
+            "title": "{name} address history",
+            "currentBalance": "Current balance: {balance}"
+        },
+        "node": {
+            "titleAdd": "Dodaj Node",
+            "titleUpdate": "Obnovi Node",
+            "titleRemove": "Izbriši Node",
+            "titleDetails": "Podrobnosti Node",
+            "nodeAddress": "Node address",
+            "optionalUsername": "Username (optional)",
+            "optionalPassword": "Password (optional)",
+            "setAsPrimaryNode": "Set as primary node",
+            "removeConfirmation": "Are you sure you want to remove this node?"
+        },
+        "errorLog": {
+            "title": "Error Log",
+            "empty": "The error log is empty."
+        },
+        "deleteProfile": {
+            "title": "Izbriši profil",
+            "confirmation": "Are you sure you want to delete this profile? This operation cannot be undone.",
+            "typePassword": "Type your password to confirm."
+        },
+        "diagnostics": {
+            "title": "Diagnostics",
+            "node": "Node",
+            "platform": "Platform",
+            "platformVersion": "Platform Version",
+            "platformArchitecture": "Platform Architecture",
+            "cpuCount": "CPU Count",
+            "totalMem": "Total Memory",
+            "freeMem": "Free Memory",
+            "userPath": "User Path"
+        },
+        "transaction": {
+            "title": "Confirm transaction",
+            "body": "You’re about to send {amount} to"
+        },
+        "balanceFinder": {
+            "title": "Balance finder",
+            "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
+            "totalWalletBalance": "Skupno stanje",
+            "typePassword": "Type your password to allow searching."
+        },
+        "riskFunds": {
+            "title": "Warning: funds at risk during migration",
+            "body1": "It is strongly recommended that you secure all your funds before proceeding with migration. Your funds are at risk of theft if you do not secure them.",
+            "body2": "It is recommended that you rerun the process for addresses with a medium risk level or above."
+        },
+        "missingBundle": {
+            "title": "Warning: funds at risk during migration",
+            "body": "You have funds on spent addresses, but the information needed to secure them was not found. This can happen if you made transactions a long time ago. You can proceed but {value} are at risk during migration.",
+            "learnMore": "Learn more about spent addresses",
+            "proceed": "I understand the risk"
+        },
+        "snapshot": {
+            "title": "Ongoing network upgrade",
+            "body": "The Chrysalis network upgrade has begun.",
+            "bodyMigration": "Migration is disabled until it is complete.",
+            "bodyFirefly": "Firefly is disabled until it is complete. Token migration will still be possible afterwards."
+        },
+        "ledgerNotConnected": {
+            "connect": "Open the new IOTA app on your Ledger device to continue",
+            "connectLegacy": "Open the {legacy} app on your Ledger device to continue"
+        },
+        "ledgerConfirmation": {
+            "confirm": "To proceed, confirm the prompt displayed on your Ledger device"
+        },
+        "ledgerAppGuide": {
+            "title": "Guide to installing the Ledger apps",
+            "steps": {
+                "0": "Install and open the Ledger Live application",
+                "1": "Ensure that your Ledger is connected",
+                "2": "Search for apps: {legacy} and IOTA (MIOTA)",
+                "3": "Install both apps: {legacy} and IOTA (MIOTA)",
+                "4": "Remember that it's important to close Ledger Live before returning to Firefly"
+            }
+        },
+        "ledgerConnectionGuide": {
+            "title": "Tips if your Ledger isn’t connecting",
+            "steps": {
+                "0": "Make sure Ledger Live is not open on your computer",
+                "1": "Ensure you have unlocked your Ledger device with your PIN",
+                "2": "Open the new IOTA app on your Ledger device",
+                "3": {
+                    "text": "Still no luck?",
+                    "link": "Try the official Ledger support page"
+                }
+            }
+        },
+        "ledgerTransaction": {
+            "remainderAddress": {
+                "title": "Confirm remainder address",
+                "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+            },
+            "transaction": {
+                "title": "Confirm transaction",
+                "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted."
+            }
+        },
+        "ledgerAddress": {
+            "title": "Confirm receive address",
+            "body": "Confirm that the receive address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+        },
+        "ledgerMigrateIndex": {
+            "title": "Do you need to migrate another Trinity account index?",
+            "body": "You can also migrate later in Advanced Settings."
+        }
+    },
+    "charts": {
+        "incomingMi": "Incoming {value}",
+        "outgoingMi": "Outgoing {value}",
+        "portoflio": "Portfolio",
+        "token": "Žeton",
+        "accountValue": "Wallet Value",
+        "accountActivity": "Wallet Activity",
+        "timeframe1Hour": "1 ura",
+        "timeframe1Day": "1 dan",
+        "timeframe1Week": "1 teden",
+        "timeframe1Month": "1 month"
+    },
+    "actions": {
+        "continue": "Nadaljuj",
+        "back": "Nazaj",
+        "previous": "Prejšnje",
+        "next": "Naprej",
+        "cancel": "Prekliči",
+        "close": "Zapri",
+        "dismiss": "Opusti",
+        "proceedAnyway": "Proceed anyway",
+        "save": "Shrani",
+        "importSeed": "Import an existing seed",
+        "restoreWallet": "Migrate or restore a wallet",
+        "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
+        "createWallet": "Create new wallet",
+        "createWalletDescription": "Create a fresh wallet running on Chrysalis",
+        "savePassword": "Save password",
+        "useBiometric": "Use biometric security",
+        "setupPin": "Nastavi PIN kodo",
+        "setPin": "Nastavi PIN kodo",
+        "confirmPin": "Potrdi PIN kodo",
+        "enterYourPin": "Vnesi PIN kodo",
+        "saveBackupFile": "Shrani varnostno kopijo datoteke",
+        "iveWrittenRecoveryPhrase": "I’ve written down my recovery phrase",
+        "verifyRecoveryPhrase": "Verify recovery phrase",
+        "revealRecoveryPhrase": "Reveal recovery phrase",
+        "importSeedvault": "Import SeedVault",
+        "checkAgain": "Preveri Znova",
+        "importFromFile": "Import from a file",
+        "send": "Pošlji",
+        "receive": "Prejmi",
+        "create": "Ustvari",
+        "beginTransfer": "Begin Transfer",
+        "tryAgain": "Poskusi znova",
+        "visitDiscord": "Obišči Discord",
+        "dragDrop": "Povleci in spusti",
+        "importExtentions": ".kdbx ali .stronghold datoteka",
+        "chooseFile": "Izberi datoteko",
+        "dropHere": "Spusti datoteko tukaj",
+        "syncAll": "Sinhr. vse",
+        "export": "Izvoz",
+        "exportNewStronghold": "Export a new Stronghold",
+        "enableDeepLinks": "Enable deep links",
+        "enableDeveloperMode": "Enable developer mode",
+        "enableSystemNotifications": "Enable system notifications",
+        "exportState": "Export state",
+        "localProofOfWork": "Local proof of work",
+        "unlock": "Odkleni",
+        "updateFirefly": "Posodobi Firefly",
+        "restartNow": "Ponovno zaženi zdaj",
+        "saveBackup": "Save Stronghold backup",
+        "customizeAcount": "Customise wallet",
+        "viewAddressHistory": "View address history",
+        "hideAccount": "Skrij denarnico",
+        "showAccount": "Prikaži denarnico",
+        "deleteAccount": "Izbriši denarnico",
+        "max": "Največ",
+        "addNode": "Dodaj Node",
+        "updateNode": "Posodobi Node",
+        "removeNode": "Izbriši node",
+        "hide": "Skrij",
+        "hideOthers": "Skrij ostale",
+        "showAll": "Prikaži vse",
+        "quit": "Izhod",
+        "edit": "Uredi",
+        "undo": "Razveljavi",
+        "redo": "Ponovi",
+        "cut": "Izreži",
+        "copy": "Kopiraj",
+        "paste": "Prilepi",
+        "selectAll": "Označi vse",
+        "addAccount": "Dodaj denarnico",
+        "checkForUpdates": "Preveri posodobitve",
+        "reportAnIssue": "Prijavi težavo",
+        "restore": "Obnovi",
+        "clear": "Počisti",
+        "hideDetails": "Skrij podrobnosti",
+        "yes": "Da",
+        "no": "Ne",
+        "skip": "Preskoči",
+        "reset": "Ponastavi",
+        "downloadRecoveryKit": "Save Recovery Kit template",
+        "skipBackup": "Skip file backup",
+        "finishSetup": "Zaključi nastavitev",
+        "readDocumentation": "Preberi dokumentacijo",
+        "visitFaq": "Visit FAQ",
+        "viewStatus": "View status",
+        "showHiddenAccounts": "Show hidden wallets",
+        "confirm": "Potrdi",
+        "hideNetworkStatistics": "Hide network statistics",
+        "findBalances": "Find balances",
+        "searchBalances": "Search for balances",
+        "searchAgain": "Search again",
+        "searching": "Searching...",
+        "closeFirefly": "Close Firefly",
+        "generateAddress": "Generiraj naslov",
+        "migrateAgain": "Migrate another index"
+    },
+    "general": {
+        "password": "Password",
+        "confirmPassword": "Confirm password",
+        "currentPassword": "Current password",
+        "newPassword": "New password",
+        "confirmNewPassword": "Confirm new password",
+        "yourSeed": "Your Seed",
+        "recoveryPhrase": "Recovery Phrase",
+        "recentActivity": "Recent Activity",
+        "sent": "Pošlji",
+        "received": "Prejeto",
+        "sendPayment": "Send Payment",
+        "moveFunds": "Internal Transfer",
+        "sendTo": "Send To",
+        "sendFunds": "Send funds",
+        "sendToAddress": "Send to address",
+        "scanQrOrPaste": "Scan a QR code or paste an Address",
+        "moveFundsBetweenAccounts": "Move funds between wallets",
+        "sendTokensToAddress": "Send tokens to an address",
+        "manageAccount": "Manage Wallet",
+        "customizeAcount": "Customize your wallet",
+        "account": "Denarnica",
+        "sendingToAddress": "Pošiljanje na naslov",
+        "amount": "Količina",
+        "addAddress": "Dodaj naslov",
+        "reference": "Sklic",
+        "from": "Od",
+        "to": "Za",
+        "receiveFunds": "Receive Funds",
+        "myAddress": "Moj Naslov",
+        "shareAddress": "Delite naslov",
+        "yourAddress": "Vaš naslov",
+        "newRemainder": "New Remainder",
+        "remainder": "Remainder",
+        "generateNewAddress": "Ustvari nov naslov",
+        "copyAddress": "Kopiraj naslov",
+        "import": "Uvozi",
+        "seedvault": "SeedVault",
+        "stronghold": "Stronghold",
+        "language": "Jezik",
+        "appearance": "Videz",
+        "lightTheme": "Svetla tema",
+        "darkTheme": "Temna tema",
+        "balance": "Stanje",
+        "accountBalance": "Stanje denarnice",
+        "incoming": "Prihodna",
+        "outgoing": "Odhodna",
+        "totalIn": "Total in",
+        "totalOut": "Total out",
+        "accounts": "Denarnice",
+        "myAccounts": "Moje denarnice",
+        "automaticNodeSelection": "Avtomatski izbor Node",
+        "manualNodeSelection": "Ročna izbira Node",
+        "profiles": "Profili",
+        "developerProfile": "Profil razvijalca",
+        "developerProfileDescription": "Allows you to connect to testnets",
+        "dev": "Dev",
+        "createAccount": "Ustvari denarnico",
+        "accountName": "Ime denarnice",
+        "latestTransactions": "Zadnje transakcije",
+        "transactions": "Transakcije",
+        "security": "Varnost",
+        "accountAddress": "Naslov Denarnice",
+        "nodes": "Nodes",
+        "wallet": "Denarnica",
+        "help": "Pomoč",
+        "you": "Vi",
+        "messageId": "ID sporočila",
+        "inputAddress": "Send Address",
+        "receiveAddress": "Receive Address",
+        "newAddress": "New Address",
+        "date": "Datum",
+        "status": "Stanje",
+        "confirmed": "Potrjeno",
+        "pending": "Na čakanju",
+        "noAccounts": "You have no wallets, please create one.",
+        "loadingAccounts": "Loading, please wait...",
+        "addProfile": "Add Profile",
+        "noRecentHistory": "No recent history",
+        "firstSync": "Syncing history, this may take a while...",
+        "transferSyncing": "Syncing wallet",
+        "transferSelectingInputs": "Selecting inputs",
+        "transferRemainderAddress": "Generating remainder address",
+        "transferPreparedTransaction": "Preparing transaction",
+        "transferSigning": "Signing the transaction",
+        "transferPow": "Performing PoW",
+        "transferBroadcasting": "Broadcasting transaction",
+        "transferComplete": "Transfer complete",
+        "generatingReceiveAddress": "Generating receive address",
+        "creatingAccount": "Creating wallet, please wait...",
+        "updatingAccount": "Updating wallet, please wait...",
+        "accountSyncing": "Wallet is syncing",
+        "accountSyncComplete": "Wallet sync complete",
+        "passwordUpdating": "Updating password...",
+        "passwordSuccess": "Updated password successfully",
+        "passwordFailed": "Updating password failed",
+        "syncingAccounts": "Syncing wallets...",
+        "exportingStronghold": "Exporting Stronghold...",
+        "exportingStrongholdSuccess": "Exported Stronghold successfully",
+        "exportingStrongholdFailed": "Exporting Stronghold failed",
+        "pinCodeUpdating": "Updating PIN code...",
+        "pinCodeSuccess": "Updated PIN code successfully",
+        "pinCodeFailed": "Updating PIN code failed",
+        "passwordStrength": "Password strength",
+        "passwordStrength0": "Bad",
+        "passwordStrength1": "Poor",
+        "passwordStrength2": "Weak",
+        "passwordStrength3": "Average",
+        "passwordStrength4": "Strong",
+        "creatingProfile": "Creating profile, please wait...",
+        "fundMigration": "Fund migration",
+        "accountRemoved": "This wallet is hidden. Unhide it to perform transfers.",
+        "receivingTo": "Receiving to {account}",
+        "sendingFrom": "Sending from {account}",
+        "receivedTo": "Received to {account}",
+        "sentFrom": "Sent from {account}",
+        "receiving": "Receiving",
+        "sending": "Sending",
+        "legacyNetwork": "Legacy Network",
+        "capsLock": "Caps Lock is on",
+        "version": "Version {version}"
+    },
+    "dates": {
+        "today": "Today",
+        "yesterday": "Yesterday",
+        "daysAgo": "{time, plural, one {# day} other {# days}} ago",
+        "weeksAgo": "{time, plural, one {# week} other {# weeks}} ago",
+        "monthsAgo": "{time, plural, one {# month} other {# months}} ago",
+        "yearsAgo": "{time, plural, one {# year} other {# years}} ago"
+    },
+    "notifications": {
+        "valueTx": "Receiving {{value}} to {{account}}",
+        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
+        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
+        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
+        "failed": "Outgoing {{value}} from {{account}} has failed",
+        "downloadingUpdate": "Downloading update",
+        "updateReady": "Update ready",
+        "updateError": "An error occurred during the update, please try again",
+        "restartInstall": "Restart to install",
+        "calcMinutesRemaining": "Calculating minutes remaining...",
+        "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}",
+        "copiedToClipboard": "Copied to clipboard",
+        "accountsSynchronized": "Wallet synchronization complete",
+        "fundsAvailableSoon": "Your funds will become available shortly"
+    },
+    "error": {
+        "profile": {
+            "length": "Your profile name can't be longer than {length, plural, one {1 character} other {# characters}}.",
+            "duplicate": "A profile with this name already exists."
+        },
+        "password": {
+            "doNotMatch": "Passwords do not match.",
+            "tooWeak": "Your new password is too weak.",
+            "row": "Straight rows of keys are easy to guess.",
+            "pattern": "Short keyboard patterns are easy to guess.",
+            "names": "Common names and surnames are easy to guess.",
+            "repeats": "Repeats like 'aaa' are easy to guess.",
+            "repeats2": "Repeats like 'abcabcabc' are easy to guess.",
+            "sequence": "Sequences of characters are easy to guess.",
+            "years": "Recent years are easy to guess.",
+            "dates": "Dates are easy to guess.",
+            "common": "This is a very common password.",
+            "similar": "This is similar to a common password.",
+            "word": "A single word is easy to guess.",
+            "incorrect": "Your password is incorrect.",
+            "length": "Your password can't be longer than {length, plural, one {1 character} other {# characters}}."
+        },
+        "pincode": {
+            "length": "Your PIN must be {length, plural, one {1 digit} other {# digits}} long.",
+            "match": "PINs do not match.",
+            "incorrect": "Your current PIN is incorrect."
+        },
+        "account": {
+            "length": "Your wallet name can't be longer than {length, plural, one {1 character} other {# characters}}.",
+            "empty": "You must use your latest wallet before creating a new one.",
+            "notEmpty": "You must transfer your balance before deleting this wallet.",
+            "duplicate": "A wallet with this name already exists.",
+            "tilde": "A profile name can't start with the '~' character.",
+            "control": "A profile name can't contain a control character.",
+            "startDot": "A profile name can't start with the '.' character.",
+            "chars": "A profile name can't contain the following characters <>:\"/\\|?*",
+            "index": "Your account index must be a number between 0 and 2,147,483,647.",
+            "page": "Your account page must be a number between 0 and 2,147,483,647.",
+            "syncing": "There was an error syncing your wallets."
+        },
+        "send": {
+            "addressLength": "Addresses should be {length, plural, one {1 character} other {# characters}} long.",
+            "amountTooHigh": "This is greater than your available balance.",
+            "amountNoFloat": "If units are `i` you cannot use decimal places.",
+            "amountInvalidFormat": "The amount appears to be an invalid number.",
+            "amountZero": "The amount must be greater than 0.",
+            "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
+            "wrongAddressFormat": "The address is not correctly formatted.",
+            "invalidAddress": "The address is not valid.",
+            "insufficientFunds": "This wallet has insufficient funds.",
+            "noToAccount": "You have not selected a wallet to send the funds to.",
+            "sendingDust": "You cannot send less than 1 Mi.",
+            "leavingDust": "You cannot leave less than 1 Mi on your address.",
+            "cancelled": "The transaction was cancelled.",
+            "transaction": "There was an error sending your transaction. Please try again."
+        },
+        "node": {
+            "invalid": "Please enter a valid URL.",
+            "https": "HTTPS is required. Set up a developer profile to use unsecured HTTP connections.",
+            "duplicate": "This node has already been added.",
+            "unsynced": "The node is not in sync.",
+            "noSynced": "No synced nodes are available."
+        },
+        "global": {
+            "generic": "Something went wrong."
+        },
+        "backup": {
+            "invalid": "The backup file was not recognised.",
+            "destination": "The backup destination was not valid.",
+            "mnemonic": "The mnemonic is not valid.",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is 1} other {is #}}",
+            "seedCharacters": "The seed should only contain characters A-Z or 9",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
+            "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase",
+            "phraseCaseWord": "The word \"{word}\" should be lower case"
+        },
+        "ledger": {
+            "appNotOpen": "You must open the IOTA app on your Ledger device.",
+            "generic": "There was an error connecting to your Ledger device.",
+            "legacyConnected": "The wrong app is open on your Ledger device.",
+            "locked": "Please unlock your Ledger device by entering the PIN.",
+            "mnemonicMismatch": "You have connected the wrong Ledger device or the mnemonic has changed.",
+            "notDetected": "No Ledger device detected.",
+            "notFound": "Ledger device not found.",
+            "otherConnected": "The wrong app is open on your Ledger device.",
+            "generateAddress": "There was an error generating an address.",
+            "timeout": "Your Ledger device timed out.",
+            "disconnected": "Your Ledger device was disconnected."
+        },
+        "popup": {
+            "preventClose": "This popup is unable to be closed."
+        },
+        "migration": {
+            "missingBundle": "An error occurred while trying to find the transaction bundle."
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "Risk level: {risk}",
+            "veryHigh": "Very high",
+            "high": "High",
+            "medium": "Medium",
+            "low": "Low",
+            "veryLow": "Very low"
+        }
+    }
+}
