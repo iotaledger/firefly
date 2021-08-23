@@ -97,7 +97,11 @@ const rendererRules = [
 
 /// ------------------------ Plugins ------------------------
 
-const mainPlugins = []
+const mainPlugins = [
+    new DefinePlugin({
+        PLATFORM_LINUX: JSON.stringify(process.platform === 'linux'),
+    }),
+]
 
 const rendererPlugins = [
     new CopyPlugin({
@@ -166,6 +170,7 @@ module.exports = [
         devtool: prod ? false : 'cheap-module-source-map',
         optimization: {
             nodeEnv: hardcodeNodeEnv ? mode : false,
+            minimize: true
         },
     },
 ]

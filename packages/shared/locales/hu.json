@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "Profil létrehozása",
+            "profileName": "Profil név",
             "body1": "Több felhasználói profilt is létrehozhat a tokenek elkülönítése és a biztonság növelésének érdekében.",
-            "body2": "Most kezdjük az első profilnévvel. Később további profilokat is hozzáadhat.",
-            "profileName": "Profil név"
+            "body2": {
+                "first": "For now, let's start with your first profile name.",
+                "nonFirst": "For now, let's start with your profile name."
+            },
+            "addMore": "You can add more profiles later."
         },
         "setup": {
             "title": "Tárca létrehozása",
@@ -29,6 +33,32 @@
             "title": "Tárca biztonsága",
             "body1": "Mentse el és nyomtassa ki a helyreállítási lap PDF-sablonját.",
             "body2": "Ha kitölti és biztonságosan tárolja a helyreállítási lapot, akkor mindig helyre tudja állítani a tárcáit."
+        },
+        "create": {
+            "title": "Tárca létrehozása",
+            "body": "Tárca létrehozása. Választhatja a hagyományos szoftver tárcát vagy ha van Ledger eszköze, létrehozhat egy hardver tárcát.",
+            "softwareAccount": {
+                "title": "Szoftver tárcát szeretnék",
+                "description": "24 szóból álló helyreállítási szavak létrehozása"
+            },
+            "ledgerAccount": {
+                "title": "Hardver tárcát szeretnék",
+                "description": "Ledger Nano S vagy Nano X szükséges"
+            }
+        },
+        "setupLedger": {
+            "progress1": "Ledger csatlakoztatása",
+            "progress2": "Új cím létrehozása",
+            "progress3": "Váltás Ledger alkalmazásra",
+            "progress4": "Utalás kezdeményezése",
+            "watchVideo": "Video útmutató megtekintése",
+            "videoGuide": "Ledger migration video guide"
+        },
+        "ledgerInstallationGuide": {
+            "title": "Telepítette a szükéséges Ledger alkalmazásokat?",
+            "body1": "Mielőtt folytatná, meg kell keresnie és telepítenie kell mind a {legacy} alkalmazást, mind az új IOTA alkalmazást a Ledger Live-on keresztül.",
+            "body2": "Győződjön meg, hogy a Ledger firmware a legfrissebb verzióval rendelkezik. Minden előzetesen telepített alkalmazást a legújabb verzióra kell frissíteni.",
+            "action": "Igen, feltelepítettem az alkalmazásokat"
         },
         "password": {
             "title": "Jelszó létrehozása",
@@ -85,9 +115,11 @@
         },
         "congratulations": {
             "title": "A tárca beállítása elkészült",
-            "body": "Az új tárcája használatra kész.",
             "fundsMigrated": "Egyenleg migrálva",
-            "success": "Sikeresen migrálta tokenjeit az új hálózatra",
+            "body": "Az új tárcája használatra kész.",
+            "softwareMigratedBody": "Sikeresen migrálta tokenjeit az új hálózatra",
+            "fireflyLedgerBody": "A Ledger számlája sikeresen helyreállt és továbbléphet a folyamatban.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
             "exportMigration": "Migrálási napló exportálása és telepítés befejezése"
         },
         "import": {
@@ -98,7 +130,9 @@
             "importMnemonic": "Firefly helyreállítási szavakkal rendelkezem",
             "importMnemonicDescription": "Adja meg a helyreállítási szavakat tárcái helyreállításához",
             "importFile": "Biztonsági mentésem van",
-            "importFileDescription": "Importálja Seedvault vagy Stronghold mentését"
+            "importFileDescription": "Importálja Seedvault vagy Stronghold mentését",
+            "importLedger": "Ledger biztonsági mentésem van",
+            "importLedgerDescription": "Ledger profil helyreállítása vagy migrálása"
         },
         "importFromText": {
             "seed": {
@@ -119,18 +153,63 @@
             "title": "Tárcák helyreállítása biztonsági mentésből",
             "body": "Tárcáit importálhatja egy meglévő biztonsági mentésből, mely lehet Stronghold (.stronghold) vagy Trinity SeedVault (.kdbx)."
         },
+        "importFromLedger": {
+            "title": "Ledger helyreállítása vagy migrálása",
+            "body": "Létező Firefly Ledger profil helyreállítása vagy tokenek migrálása Trinity-ből.",
+            "haveFireflyLedger": "Firefly Ledger biztonsági mentésem van",
+            "haveFireflyLedgerDescription": "Firefly profil helyreállítása",
+            "haveTrinityLedger": "Trinity Ledger biztonsági mentésem van",
+            "haveTrinityLedgerDescription": "Trinity profil migrálása"
+        },
+        "connectLedger": {
+            "title": "Ledger csatlakoztatása Firefly-hoz",
+            "body": "Ahhoz, hogy a Ledger-t megtalálja a Firefly, kérem győződjön meg arról, hogy a Ledger Live applikáció be van zárva.",
+            "trafficLight1": "Ledger csatlakoztatása és feloldása PIN-kóddal",
+            "trafficLight2": "Az új IOTA applikáció megnyitása Ledger-en",
+            "tips": "Javaslatok, ha a Ledger nem csatlakozik"
+        },
+        "restoreFromFireflyLedger": {
+            "title": "Ledger profil helyreállítása",
+            "body": "Nyomja meg a helyreállítást a telepítés befejezéséhez valamint tárcái, egyenlegei és tranzakciós előzményei helyreállításához.",
+            "restoring": "Helyreállítás Ledger-ről..."
+        },
+        "legacyLedgerIntro": {
+            "title": "Ledger migráció megkezdése Firefly segítségével",
+            "body1": "A Firefly segít Önnek átmozgatni tokenjeit az új Chrysalis hálózatra.",
+            "body2": "A migrálás után küldhet és fogadhat tokeneket a Firefly-ban, ha a Ledger eszköze csatlakoztatva van.",
+            "readMore": "Mire számíthat a migrálás során"
+        },
+        "generateNewLedgerAddress": {
+            "title": "Új cím létrehozása",
+            "body": "Tokenjeinek migrálásához új címet kell generálnia a Firefly-jal. Kattintson a lenti gombra a folytatáshoz.",
+            "confirmTitle": "Új cím megerősítése",
+            "confirmBody": "Biztonsági okokból kérjük hasonlítsa össze a Ledger eszközén generált címet a lent megjelenítettel. Ha megegyeznek, nyomja meg mindkét gombot a Ledger-en, amikor az kéri.",
+            "confirmedTitle": "Cím megerősítve",
+            "confirmedBody": "Megerősítette, hogy a Firefly-ban megjelenített cím megegyezik a Ledger eszközén lévővel.",
+            "generating": "Új cím létrehozása"
+        },
+        "switchLedgerApps": {
+            "title": "Váltás Ledger alkalmazások között",
+            "body": "Kérem váltson a {legacy} alkalmazásra a Ledger eszközén a migrálás folytatásához. Amikor végzett, kattintson a folytatásra."
+        },
+        "selectLedgerAccountIndex": {
+            "title": "Ledger számla sorszámának kiválasztása",
+            "body": "Válassza ki a Trinity-ben használt Ledger számla sorszámát. A legtöbb esetben ez az alapértelmezett 0 lesz.",
+            "accountIndex": "Számla sorszáma",
+            "accountPage": "Számla oldal",
+            "standard": "Általános",
+            "expert": "Haladó",
+            "takingAWhile": "This is taking a while...",
+            "notGeneratingAddresses": "A Ledger eszköze képes címeket generálni?",
+            "reinstallLegacy": "Ha nem, csatlakoztassa le az eszközt a számítógépéről majd próbálja újra. Ha a probléma továbbra is fennáll, elképzelhető, hogy újra kell telepítenie a {legacy} alkalmazást."
+        },
         "importBackupPassword": {
-            "title": "Állítsa helyre tárcáit SeedVault- vagy Stronghold-fájlból",
             "body1": "Kérjük, adja meg a biztonsági mentés titkosításának feloldására szolgáló jelszavát!",
             "body2": "Ez az a jelszó, amelyet a biztonsági mentés első létrehozásakor adott meg."
         },
         "importSuccess": {
             "title": "Sikeresen helyreállította tárcáját a biztonsági mentésből",
-            "body": "Most már beállíthatja profilját.",
-            "seedvaultTitle": "Sikeresen importálva",
-            "seedvaultBody": "A jelszó helyes.",
-            "strongholdTitle": "Sikeresen importálva",
-            "strongholdBody": "A jelszó helyes."
+            "body": "Most már beállíthatja profilját."
         },
         "migrate": {
             "title": "Egyenleg migrálása",
@@ -153,7 +232,7 @@
             "miningBundle": "Kötegtranzakció bányászása",
             "problemRestoringWallet": "Hálózati hiba történt tárcája helyreállítása közben. Kérjük, próbálja újra.",
             "minimumMigrationAmountSpentAddresses": "A migráláshoz legalalább 1 Mi egyenlegnek kell lennie minden olyan címen, amelyről korábban már költött. Ellenőrizze, hogy egyenlege rendben van-e.",
-            "tooManyAddressesToMigrate": "Túl sok 1 Mi alatti egyenleggel rendelkező címe van, amelyet így nem tud migrálni. Ellenőrizze, hogy egyenlege rendben van-e.",
+            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
             "cannotMigrateAllYourFunds": "Nem tudjuk a teljes egyenlegét migrálni, mert néhány címén 1 Mi alatti egyenleggel rendelkezik. Ennek ellenére folyathatja, de {value} el fog veszni.",
             "error": "Hiba történt az egyenlege migrálása során. Kérjük, próbálja újra."
         },
@@ -184,6 +263,7 @@
         },
         "transferFragmentedFunds": {
             "body1": "A Firefly most megkezdi egyenlegének migrálását. Ez eltarthat egy ideig.",
+            "body2": "Győződjön meg róla, hogy a Ledger eszköz csatlakoztatva van és a {legacy} alkalmazás meg van nyitva a migrálás teljes időtartama alatt.",
             "migrate": "Egyenleg migrálása",
             "transaction": "Tranzakció {number}",
             "rerun": "Újrapróbálkozás"
@@ -196,7 +276,8 @@
             "title": "Egyenleg",
             "body": "Győződjön meg róla, hogy egyenlege helyes, mielőtt folytatja. Még egyszer ellenőrizheti, ha valamit nem talál rendjén.",
             "error": "A migráláshoz legalább 1 Mi egyenleggel kell rendelkeznie. Ellenőrizze, hogy rendben van-e az egyenlege!",
-            "zeroBalance": "Ellenőrizze egyenlegét még egyszer! Ha továbbra sincs rendben, elképzhelhető, hogy helytelen seed-et adott meg."
+            "zeroBalance": "Ellenőrizze egyenlegét még egyszer! Ha továbbra sincs rendben, elképzhelhető, hogy helytelen seed-et adott meg.",
+            "zeroBalanceLedgerLegacy": "Ellenőrizze újra. Ha továbbra sem találja egyenlegét, elképzhelhető, hogy helytelen számla sorszámot adott meg."
         },
         "settings": {
             "settings": "Beállítások",
@@ -314,6 +395,10 @@
                 "title": "Diagnosztika",
                 "description": "Rendszer- és alkalmazásinformációk megtekintése"
             },
+            "migrateLedgerIndex": {
+                "title": "Ledger számlasorszám migrálása",
+                "description": "Másik Trinity számlasorszám migrálása"
+            },
             "stateExport": {
                 "title": "Állapot exportálása",
                 "description": "A tranzakciós előzmények .csv fájlba exportálása"
@@ -357,7 +442,15 @@
                 },
                 "hardwareDevice": {
                     "title": "Hardvereszköz",
-                    "noneDetected": "Nincs találat"
+                    "statuses": {
+                        "appNotOpen": "IOTA alkalmazás nincs megnyitva",
+                        "connected": "Csatlakozva",
+                        "legacyConnected": "{legacy} alkalmazás megnyitva",
+                        "locked": "Lezárva",
+                        "mnemonicMismatch": "Rossz Ledger eszköz vagy emlékeztető mondat",
+                        "notDetected": "Nem található",
+                        "otherConnected": "Alkalmazás megnyitva"
+                    }
                 },
                 "strongholdStatus": {
                     "title": "Tárca állapota",
@@ -488,6 +581,53 @@
             "body": "A Chrysalis hálózatra történő frissítés elkezdődött.",
             "bodyMigration": "A migráció átmenetileg nem lehetséges, amíg a frissítés be nem fejeződik.",
             "bodyFirefly": "A Firefly átmenetileg nem használható, amíg a hálózatfrissítés be nem fejeződik. A tokenek migrálására a frissítés után is lesz lehetőség."
+        },
+        "ledgerNotConnected": {
+            "connect": "Nyissa meg az új IOTA alkalmazást Ledger eszközén a folytatáshoz",
+            "connectLegacy": "Nyissa meg a {legacy} alkalmazást a Ledger eszközén a folytatáshoz"
+        },
+        "ledgerConfirmation": {
+            "confirm": "A folytatáshoz kövesse a megjelenített utasításokat a Ledger eszközén"
+        },
+        "ledgerAppGuide": {
+            "title": "Útmutató Ledger alkalmazások telepítéséhez",
+            "steps": {
+                "0": "Ledger Live alkalmazás telepítése és megnyitása",
+                "1": "Győződjön meg, hogy a Ledger csatlakoztatva van",
+                "2": "Alkalmazások keresése: {legacy} és IOTA (MIOTA)",
+                "3": "Alkalmazások telepítése: {legacy} és IOTA (MIOTA)",
+                "4": "Fontos, hogy zárja be a Ledger Live alkalmazást mielőtt visszatér a Firefly-hoz"
+            }
+        },
+        "ledgerConnectionGuide": {
+            "title": "Javaslatok, ha a Ledger nem csatlakozik",
+            "steps": {
+                "0": "Győződjön meg, hogy a Ledger Live nincs megnyitva a számítógépén",
+                "1": "Győződjön meg, hogy feloldotta a Ledger eszközét a PIN-kódjával",
+                "2": "Nyissa meg az új IOTA alkalmazást Ledger eszközén",
+                "3": {
+                    "text": "A probléma még mindig fennáll?",
+                    "link": "Próbáljon megoldást keresni a hivatalos Ledger támogatás weboldalán"
+                }
+            }
+        },
+        "ledgerTransaction": {
+            "remainderAddress": {
+                "title": "Maradvány cím megerősítése",
+                "info": "Hasonlítsa össze a Ledger eszközén megjelenített maradvány címet a lent megjelenítettel. Ha megegyeznek, nyomja meg mindkét gombot a Ledger-en, amikor az kéri."
+            },
+            "transaction": {
+                "title": "Küldés jóváhagyása",
+                "info": "Hasonlítsa össze a Ledger eszközén megjelenített tranzakciós adatokat a lent megjelenítettel. Ha megegyeznek, nyomja meg mindkét gombot a Ledger-en, amikor az kéri."
+            }
+        },
+        "ledgerAddress": {
+            "title": "Fogadó cím megerősítése",
+            "body": "Hasonlítsa össze a Ledger eszközén megjelenített fogadó címet a lent megjelenítettel. Ha megegyeznek, nyomja meg mindkét gombot a Ledger-en, amikor az kéri."
+        },
+        "ledgerMigrateIndex": {
+            "title": "Szeretne egy másik Trinity számlasorszámot migrálni?",
+            "body": "Később a haladó beállításokban is indíthat migrálást."
         }
     },
     "charts": {
@@ -505,6 +645,8 @@
     "actions": {
         "continue": "Tovább",
         "back": "Vissza",
+        "previous": "Vissza",
+        "next": "Következő",
         "cancel": "Mégse",
         "close": "Bezár",
         "dismiss": "Elvet",
@@ -573,6 +715,7 @@
         "addAccount": "Tárca hozzáadása",
         "checkForUpdates": "Frissítések keresése",
         "reportAnIssue": "Hiba jelentése",
+        "restore": "Helyreállítás",
         "clear": "Törlés",
         "hideDetails": "Részletek elrejtése",
         "yes": "Igen",
@@ -592,7 +735,9 @@
         "searchBalances": "Egyenleg keresése",
         "searchAgain": "Keresés újra",
         "searching": "Keresés...",
-        "closeFirefly": "Firefly bezárása"
+        "closeFirefly": "Firefly bezárása",
+        "generateAddress": "Új cím létrehozása",
+        "migrateAgain": "Másik számlasorszám migrálása"
     },
     "general": {
         "password": "Jelszó",
@@ -607,6 +752,7 @@
         "received": "Fogadott",
         "sendPayment": "Átutalás",
         "moveFunds": "Küldés saját számlák közt",
+        "sendTo": "Küldés",
         "sendFunds": "Átutalás",
         "sendToAddress": "Küldés a következő címre",
         "scanQrOrPaste": "QR-kód beolvasása vagy cím beillesztése",
@@ -625,6 +771,8 @@
         "myAddress": "Címem",
         "shareAddress": "Cím megosztása",
         "yourAddress": "Az Ön címe",
+        "newRemainder": "Új maradvány",
+        "remainder": "Maradvány",
         "generateNewAddress": "Új cím létrehozása",
         "copyAddress": "Cím másolása",
         "import": "Importálás",
@@ -661,6 +809,7 @@
         "messageId": "Üzenetazonosító",
         "inputAddress": "Küldő cím",
         "receiveAddress": "Fogadó cím",
+        "newAddress": "Új cím",
         "date": "Dátum",
         "status": "Állapot",
         "confirmed": "Megerősítve",
@@ -673,10 +822,12 @@
         "transferSyncing": "Tárca szinkronizálása",
         "transferSelectingInputs": "Bemenetek kiválasztása",
         "transferRemainderAddress": "Cím létrehozása a fennmaradó egyenleg számára",
+        "transferPreparedTransaction": "Tranzakció előkészítése",
         "transferSigning": "Tranzakció hitelesítése",
         "transferPow": "Kiszabott munka elvégzése folyamatban",
         "transferBroadcasting": "Tranzakció elküldése",
         "transferComplete": "Utalás végrehajtva",
+        "generatingReceiveAddress": "Fogadó cím létrehozása",
         "creatingAccount": "Tárca létrehozása folyamatban. Kérjük, várjon...",
         "updatingAccount": "Tárca frissítése folyamatban. Kérjük, várjon...",
         "accountSyncing": "Tárca szinkronizása folyamatban",
@@ -732,8 +883,7 @@
         "minutesRemaining": "{minutes, plural, one {1 perc van hátra} other {# perc van hátra}}",
         "copiedToClipboard": "A vágólapra másolva",
         "accountsSynchronized": "Tárca szinkronizálva",
-        "migratedAccountChrysalisDown": "Egyenlege a Chrysalis migráció után lesz elérhető 2021. április 28-án",
-        "migratedAccountChrysalisUp": "Egyenlege hamarosan elérhető lesz"
+        "fundsAvailableSoon": "Egyenlege hamarosan elérhető lesz"
     },
     "error": {
         "profile": {
@@ -770,7 +920,10 @@
             "tilde": "A profilnév nem kezdődhet “~” karakterrel.",
             "control": "A profilnév csak nyomtatható karaktereket tartalmazhat.",
             "startDot": "A profilnév nem kezdődhet “.” karakterrel.",
-            "chars": "A profilnévben nem fordulhatnak elő a következő karakterek: <>:”/\\|?*"
+            "chars": "A profilnévben nem fordulhatnak elő a következő karakterek: <>:”/\\|?*",
+            "index": "A számla sorszáma 0 és 2,147,483,647 közötti szám kell legyen.",
+            "page": "A számla oldal 0 és 2,147,483,647 közötti szám kell legyen.",
+            "syncing": "Hiba történt a tárcák szinkronizálása közben."
         },
         "send": {
             "addressLength": "A címnek {length, plural, one {1 karakter} other {# karakter}} hosszúnak kell lennie.",
@@ -784,7 +937,9 @@
             "insufficientFunds": "Nincs elég összeg a tárcájában a tranzakció végrehajtásához.",
             "noToAccount": "Nem választotta ki melyik tárcájába szeretne küldeni.",
             "sendingDust": "1 Mi-nél kevesebbet nem lehet elküldeni.",
-            "leavingDust": "Minimum 1 Mi-nek maradnia kell a számláján."
+            "leavingDust": "Minimum 1 Mi-nek maradnia kell a számláján.",
+            "cancelled": "A tranzakció megszakítva.",
+            "transaction": "Hiba történt a tranzakció küldésekor. Kérem próbálja újra."
         },
         "node": {
             "invalid": "Kérjük, adjon meg egy érvényes URL címet!",
@@ -805,6 +960,25 @@
             "phraseWordCount": "24 helyett csak {length, plural, one {1} other { #}} helyreállítási szót adott meg.",
             "phraseUnrecognizedWord": "Ismeretlen szó \"{word}\" található a helyreállítási szavak között",
             "phraseCaseWord": "A “{word}” szó csak kisbetűkből állhat"
+        },
+        "ledger": {
+            "appNotOpen": "Nyissa meg az új IOTA alkalmazást Ledger eszközén.",
+            "generic": "Hiba történt a Ledger eszközéhez való csatlakozáskor.",
+            "legacyConnected": "Nem megfelelő alkalmazás van megnyitva a Ledger eszközén.",
+            "locked": "Kérem oldja fel Ledger eszközét a PIN-kóddal.",
+            "mnemonicMismatch": "Rossz Ledger eszközt csatlakozatott vagy az emlékeztető megváltozott.",
+            "notDetected": "Nem észlelhető Ledger eszköz.",
+            "notFound": "Nem található Ledger eszköz.",
+            "otherConnected": "Nem megfelelő alkalmazás van megnyitva a Ledger eszközén.",
+            "generateAddress": "Hiba történt a cím generálása közben.",
+            "timeout": "A Ledger eszköze időtúllépés miatt nem elérhető.",
+            "disconnected": "Megszakadt a kapcsolat a Ledger eszközével."
+        },
+        "popup": {
+            "preventClose": "A felugró ablakot nem lehet bezárni."
+        },
+        "migration": {
+            "missingBundle": "An error occurred while trying to find the transaction bundle."
         }
     },
     "tooltips": {

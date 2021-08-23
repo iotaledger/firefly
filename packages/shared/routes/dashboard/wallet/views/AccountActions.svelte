@@ -13,6 +13,7 @@
     export let generateAddress
     export let internalTransfer
     export let isGeneratingAddress
+
     const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
 
     const account = getContext<Readable<WalletAccount>>('selectedAccount')

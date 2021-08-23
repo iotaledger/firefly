@@ -6,27 +6,48 @@ import type { PriceData } from 'shared/lib/marketData'
 import { HistoryDataProps } from 'shared/lib/marketData'
 import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
 import { showAppNotification, showSystemNotification } from 'shared/lib/notifications'
-import { activeProfile, isStrongholdLocked, updateProfile } from 'shared/lib/profile'
-import type { Account, Account as BaseAccount, AccountToCreate, Balance, SyncedAccount } from 'shared/lib/typings/account'
+import { activeProfile, isLedgerProfile, isStrongholdLocked, ProfileType, updateProfile } from 'shared/lib/profile'
+import type {
+    Account,
+    Account as BaseAccount,
+    AccountToCreate,
+    Balance,
+    SyncAccountOptions,
+    SyncedAccount
+} from 'shared/lib/typings/account'
 import type { Address } from 'shared/lib/typings/address'
-import type { Actor } from 'shared/lib/typings/bridge'
+import type { Actor, GetMigrationAddressResponse } from 'shared/lib/typings/bridge'
 import type {
     BalanceChangeEventPayload,
     ConfirmationStateChangeEventPayload,
     ErrorEventPayload,
     Event,
+    LedgerAddressGenerationEventPayload,
     MigrationProgressEventPayload,
     ReattachmentEventPayload,
     TransactionEventPayload,
     TransferProgressEventPayload,
-    TransferProgressEventType
+    TransferState
 } from 'shared/lib/typings/events'
-import type { Message, Payload, Transaction } from 'shared/lib/typings/message'
-import type { MigrationBundle, MigrationData, SendMigrationBundleResponse } from 'shared/lib/typings/migration'
+import type { Payload, Transaction } from 'shared/lib/typings/message'
+import type {
+    AddressInput,
+    MigrationBundle,
+    MigrationData,
+    SendMigrationBundleResponse,
+} from 'shared/lib/typings/migration'
 import { formatUnitBestMatch } from 'shared/lib/units'
 import { get, writable, Writable } from 'svelte/store'
+import { openPopup } from './popup'
 import type { ClientOptions } from './typings/client'
-import type { Duration, NodeInfo, StrongholdStatus } from './typings/wallet'
+import type { LedgerStatus } from './typings/ledger'
+import type { Message } from './typings/message'
+import type { NodeAuth, NodeInfo } from './typings/node'
+import { SetupType } from './typings/routes'
+import type { Duration, StrongholdStatus } from './typings/wallet'
+import { displayNotificationForLedgerProfile } from './ledger'
+import { walletSetupType } from './router'
+import { didInitialiseMigrationListeners } from 'shared/lib/migration';
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -140,7 +161,12 @@ export const resetWallet = () => {
     selectedMessage.set(null)
     isTransferring.set(false)
     transferState.set(null)
+    hasGeneratedALedgerReceiveAddress.set(false)
     isSyncing.set(null)
+    isFirstSessionSync.set(true)
+    isFirstManualSync.set(true)
+    isBackgroundSyncing.set(false)
+    walletSetupType.set(null)
 }
 
 export const selectedAccountId = writable<string | null>(null)
@@ -148,9 +174,14 @@ export const selectedAccountId = writable<string | null>(null)
 export const selectedMessage = writable<Message | null>(null)
 
 export const isTransferring = writable<boolean>(false)
-export const transferState = writable<TransferProgressEventType | "Complete" | null>(null)
+export const transferState = writable<TransferState | null>(null)
+
+export const hasGeneratedALedgerReceiveAddress = writable<boolean | null>(false)
 
 export const isSyncing = writable<boolean>(false)
+export const isFirstSessionSync = writable<boolean>(true)
+export const isFirstManualSync = writable<boolean>(true)
+export const isBackgroundSyncing = writable<boolean>(false)
 
 export const api: {
     generateMnemonic(callbacks: { onSuccess: (response: Event<string>) => void, onError: (err: ErrorEventPayload) => void })
@@ -164,6 +195,8 @@ export const api: {
     getStrongholdStatus(callbacks: { onSuccess: (response: Event<StrongholdStatus>) => void, onError: (err: ErrorEventPayload) => void })
     syncAccounts(addressIndex: number, gapLimit: number, accountDiscoveryThreshold: number, callbacks: { onSuccess: (response: Event<SyncedAccount[]>) => void, onError: (err: ErrorEventPayload) => void })
     syncAccount(accountId: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
+    startBackgroundSync(pollingInterval: Duration, automaticOutputConsolidation: boolean, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
+    stopBackgroundSync(callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
     createAccount(account: AccountToCreate, callbacks: { onSuccess: (response: Event<Account>) => void, onError: (err: ErrorEventPayload) => void })
     send(accountId: string, transfer: {
         amount: number,
@@ -185,7 +218,7 @@ export const api: {
     removeStorage(callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
     setClientOptions(clientOptions: ClientOptions, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
     setStrongholdPasswordClearInterval(interval: Duration, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
-    getNodeInfo(accountId: string, url: string | undefined, callbacks: { onSuccess: (response: Event<NodeInfo>) => void, onError: (err: ErrorEventPayload) => void })
+    getNodeInfo(accountId: string, url: string | undefined, auth: NodeAuth | undefined, callbacks: { onSuccess: (response: Event<NodeInfo>) => void, onError: (err: ErrorEventPayload) => void })
 
     // Legacy seed APIs
     getLegacySeedChecksum(seed: string, callbacks: { onSuccess: (response: Event<string>) => void, onError: (err: ErrorEventPayload) => void })
@@ -196,6 +229,7 @@ export const api: {
     onConfirmationStateChange(callbacks: { onSuccess: (response: Event<ConfirmationStateChangeEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
     onBalanceChange(callbacks: { onSuccess: (response: Event<BalanceChangeEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
     onTransferProgress(callbacks: { onSuccess: (response: Event<TransferProgressEventPayload>) => void, onError: (err: ErrorEventPayload) => void }),
+    onLedgerAddressGeneration(callbacks: { onSuccess: (response: Event<LedgerAddressGenerationEventPayload>) => void, onError: (err: ErrorEventPayload) => void }),
     onMigrationProgress(callbacks: { onSuccess: (response: Event<MigrationProgressEventPayload>) => void, onError: (err: ErrorEventPayload) => void }),
 
     // Migration
@@ -222,6 +256,40 @@ export const api: {
         mwm: number,
         callbacks: { onSuccess: (response: Event<SendMigrationBundleResponse>) => void, onError: (err: ErrorEventPayload) => void }
     ),
+    getMigrationAddress(
+        prompt: boolean,
+        accountIndex: number,
+        callbacks: { onSuccess: (response: Event<GetMigrationAddressResponse>) => void, onError: (err: ErrorEventPayload) => void }
+    ),
+    mineBundle(
+        bundle: string[],
+        spentBundleHashes: string[],
+        securityLevel: number,
+        timeout: number,
+        offset: number,
+        callbacks: { onSuccess: (response: Event<{ bundle: string[], crackability: number }>) => void, onError: (err: ErrorEventPayload) => void }
+    ),
+    getLedgerMigrationData(
+        addresses: AddressInput[],
+        nodes: string[],
+        permanode: string,
+        securityLevel: number,
+        callbacks: { onSuccess: (response: Event<MigrationData>) => void, onError: (err: ErrorEventPayload) => void }
+    ),
+    sendLedgerMigrationBundle(
+        node: string[],
+        bundle: string[],
+        mwm: number,
+        callbacks: { onSuccess: (response: Event<SendMigrationBundleResponse>) => void, onError: (err: ErrorEventPayload) => void }
+    ),
+    getLedgerDeviceStatus(
+        ledgerSimulator: boolean,
+        callbacks: { onSuccess: (response: Event<LedgerStatus>) => void, onError: (err: ErrorEventPayload) => void }
+    ),
+    getLegacyAddressChecksum(
+        address: string,
+        callbacks: { onSuccess: (response: Event<string>) => void, onError: (err: ErrorEventPayload) => void }
+    )
 } = window['__WALLET_API__']
 
 export const getWalletStoragePath = (appPath: string): string => {
@@ -251,6 +319,7 @@ export const initialise = (id: string, storagePath: string): void => {
  * @returns {void}
  */
 export const removeEventListeners = (id: string): void => {
+    didInitialiseMigrationListeners.set(false);
     actors[id].removeEventListeners()
 };
 
@@ -471,9 +540,9 @@ export const asyncSyncAccounts = (addressIndex?, gapLimit?, accountDiscoveryThre
             onSuccess(response) {
                 const syncedAccounts = response.payload
 
-                const firstAccount = syncedAccounts.find(account => account.index === 0)
-
-                processMigratedTransactions(firstAccount.id, firstAccount.messages, firstAccount.addresses)
+                syncedAccounts.forEach((account) => {
+                    processMigratedTransactions(account.id, account.messages, account.addresses)
+                })
 
                 updateAccounts(syncedAccounts)
 
@@ -485,10 +554,15 @@ export const asyncSyncAccounts = (addressIndex?, gapLimit?, accountDiscoveryThre
                 isSyncing.set(false)
 
                 if (showErrorNotification) {
-                    showAppNotification({
-                        type: 'error',
-                        message: localize(err.error),
-                    })
+                    if (get(isLedgerProfile)) {
+                        displayNotificationForLedgerProfile('error', true, true, false, false, err)
+                    } else {
+                        showAppNotification({
+                            type: 'error',
+                            message: localize(err.error),
+                        })
+                    }
+
                     resolve()
                 } else {
                     reject(err)
@@ -498,9 +572,9 @@ export const asyncSyncAccounts = (addressIndex?, gapLimit?, accountDiscoveryThre
     })
 }
 
-export const asyncGetNodeInfo = (accountId, url) => {
+export const asyncGetNodeInfo = (accountId: string, url?: string, auth?: NodeAuth) => {
     return new Promise<NodeInfo>((resolve, reject) => {
-        api.getNodeInfo(accountId, url, {
+        api.getNodeInfo(accountId, url, auth, {
             onSuccess(response) {
                 resolve(response.payload)
             },
@@ -727,7 +801,34 @@ export const initialiseListeners = () => {
      */
     api.onTransferProgress({
         onSuccess(response) {
-            transferState.set(response.payload.event.type)
+            const { event } = response.payload
+            if (event.hasOwnProperty('type')) {
+                transferState.set({
+                    type: event.type,
+                    data: { ...event }
+                })
+            }
+
+        },
+        onError(error) {
+            console.error(error)
+        }
+    })
+
+    /**
+     * Event listener for Ledger receive address generation
+     */
+    api.onLedgerAddressGeneration({
+        onSuccess(response) {
+            const { event } = response.payload
+            openPopup({
+                type: 'ledgerAddress',
+                hideClose: true,
+                preventClose: true,
+                props: {
+                    address: event.address
+                }
+            })
         },
         onError(error) {
             console.error(error)
@@ -1284,7 +1385,7 @@ export const prepareAccountInfo = (
         depositAddress: string
     }
 ) => {
-    const { id, index, alias } = account
+    const { id, index, alias, signerType } = account
     const { balance, depositAddress } = meta
 
     const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD
@@ -1295,6 +1396,7 @@ export const prepareAccountInfo = (
         depositAddress,
         alias,
         rawIotaBalance: balance,
+        signerType,
         balance: formatUnitBestMatch(balance, true, 3),
         balanceEquiv: formatCurrency(convertToFiat(
             balance,
@@ -1312,8 +1414,7 @@ export const processMigratedTransactions = (accountId: string, messages: Message
         if (message.payload?.type === 'Milestone') {
             const account = get(accounts).find((account) => account.id === accountId);
 
-            // Only check migrated messages for first account as the migrated messages are sent there
-            if (account && account.index === 0) {
+            if (account) {
                 const _activeProfile = get(activeProfile)
 
                 if (_activeProfile.migratedTransactions && _activeProfile.migratedTransactions.length) {
@@ -1582,11 +1683,14 @@ export const getMilestoneMessageValue = (payload: Payload, accounts) => {
     if (payload?.type === "Milestone") {
         const funds = payload.data.essence.receipt.data.funds
 
-        const firstAccount = accounts.find((acc) => acc.index === 0)
-        const firstAccountAddresses = firstAccount.addresses.map((address) => address.address)
+        const addresses = [];
+
+        accounts.forEach((account) => {
+            account.addresses.forEach((address) => addresses.push(address.address))
+        })
 
         const totalValue = funds
-            .filter((fund) => firstAccountAddresses.includes(fund.output.address))
+            .filter((fund) => addresses.includes(fund.output.address))
             .reduce((acc, fund) => acc + fund.output.amount, 0)
 
         return totalValue
@@ -1671,4 +1775,65 @@ export const findAccountWithAnyAddress = (addresses: string[], excludeFirst?: Wa
             return res[0]
         }
     }
+}
+
+/**
+ * Get the sync options for an account
+ * @param {boolean} isManualSync A boolean value indicating if a user (via the UI) invoked this function
+ * @returns {SyncAccountOptions} The sync options for an account, which contains data for the gap limit and account discovery threshold
+ */
+export const getSyncAccountOptions = (isManualSync: boolean = false): SyncAccountOptions => {
+    return isInitialAccountSync() ?
+        calculateInitialSyncAccountOptions(get(walletSetupType))
+        : calculateRegularSyncAccountOptions(get(activeProfile).type, isManualSync)
+}
+
+/**
+ * Determines if the API call for syncing accounts is the initial one
+ * @returns {boolean} The boolean value determining if this sync API call is the first ever one
+ */
+export const isInitialAccountSync = (): boolean => {
+    return get(walletSetupType) !== null && get(isFirstSessionSync)
+}
+
+const calculateInitialSyncAccountOptions = (setupType: SetupType): SyncAccountOptions => {
+    let gapLimit = 1
+    let accountDiscoveryThreshold = 0
+
+    switch(setupType) {
+        case SetupType.Import:
+        case SetupType.Mnemonic:
+        case SetupType.Stronghold:
+            gapLimit = 25
+            accountDiscoveryThreshold = 1
+            break
+        case SetupType.FireflyLedger:
+            gapLimit = 10
+            accountDiscoveryThreshold = 1
+            break
+    }
+
+    return { gapLimit, accountDiscoveryThreshold }
+}
+
+const calculateRegularSyncAccountOptions = (profileType: ProfileType, isManualSync: boolean): SyncAccountOptions => {
+    let gapLimit = 1
+    let accountDiscoveryThreshold = 0
+
+    const _isFirstSessionSync = get(isFirstSessionSync)
+
+    switch(profileType) {
+        case ProfileType.Software:
+            gapLimit = _isFirstSessionSync ? 10 : 1
+            break
+        case ProfileType.Ledger:
+        case ProfileType.LedgerSimulator:
+        default:
+            gapLimit = 1
+            break
+    }
+
+    accountDiscoveryThreshold = (isManualSync && _isFirstSessionSync) ? 1 : 0
+
+    return { gapLimit, accountDiscoveryThreshold }
 }
