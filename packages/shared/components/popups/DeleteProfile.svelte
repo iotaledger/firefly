@@ -21,7 +21,7 @@
         if ($isSoftwareProfile) {
             api.setStrongholdPassword(password, {
                 async onSuccess() {
-                    await triggerDeletProfile()
+                    await triggerDeleteProfile()
                 },
                 onError(err) {
                     isBusy = false
@@ -29,13 +29,18 @@
                 },
             })
         } else {
-            await triggerDeletProfile()
+            await triggerDeleteProfile()
         }
     }
 
-    async function triggerDeletProfile() {
+    async function triggerDeleteProfile() {
         try {
-            const ap = get(activeProfile)
+            const _activeProfile = get(activeProfile)
+
+            // The account data associated with a profile must also be deleted
+            // and since logout() destroys the event actor, we must call the API
+            // now to remove the data
+            await asyncRemoveWalletAccounts(get(get(wallet).accounts))
 
             // We have to logout before the profile is removed
             // from the profile list otherwise the activeProfile which is
@@ -46,9 +51,9 @@
             // Now that all the resources have been freed we try
             // and remove the profile folder, this will retry until locks
             // can be gained
-            if (ap) {
+            if (_activeProfile) {
                 // Remove the profile from the active list of profiles
-                removeProfile(ap.id)
+                removeProfile(_activeProfile.id)
 
                 // If after removing the profile there are none left
                 // we need to make sure the router gets reset to the welcome screen
@@ -59,12 +64,12 @@
 
                 // Remove the profile folder this will wait until it can get
                 // the lock on the resources
-                await removeProfileFolder(ap.name)
+                await removeProfileFolder(_activeProfile.name)
             }
         } catch (err) {
             showAppNotification({
                 type: 'error',
-                message: locale('Something bad happened'),
+                message: locale('error.global.generic'),
             })
         } finally {
             isBusy = false
