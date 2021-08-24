@@ -28,8 +28,6 @@
     export let onBackClick = () => {}
     export let balance // migration tx
 
-    console.log('THIS IS ME!')
-
     let cachedMigrationTx = !payload
     let milestonePayload = payload?.type === 'Milestone' ? (payload as Milestone) : undefined
     let txPayload = payload?.type === 'Transaction' ? (payload as Transaction) : undefined
