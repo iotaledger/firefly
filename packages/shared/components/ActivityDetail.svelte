@@ -28,6 +28,8 @@
     export let onBackClick = () => {}
     export let balance // migration tx
 
+    console.log('THIS IS ME!')
+
     let cachedMigrationTx = !payload
     let milestonePayload = payload?.type === 'Milestone' ? (payload as Milestone) : undefined
     let txPayload = payload?.type === 'Transaction' ? (payload as Transaction) : undefined
@@ -126,7 +128,7 @@
                 </div>
                 <Text smaller>{locale('general.you')}</Text>
             {:else}
-                <Text smaller>{truncateString(senderAddress, 3, 3, 3)}</Text>
+                <Text smaller>{truncateString(senderAddress, 3, 3, 3) || locale('general.unknown')}</Text>
             {/if}
         </div>
         <Icon icon="small-chevron-right" classes="mx-4 text-gray-500 dark:text-white" />
@@ -141,7 +143,7 @@
                 <Text smaller>{locale('general.you')}</Text>
             {:else}
                 {#each receiverAddresses as address}
-                    <Text smaller>{truncateString(address, 3, 3, 3)}</Text>
+                    <Text smaller>{truncateString(address, 3, 3, 3) || locale('general.unknown')}</Text>
                 {/each}
             {/if}
         </div>
