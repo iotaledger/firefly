@@ -40,7 +40,7 @@
             error = locale(err.error)
 
             if($isLedgerProfile) {
-                displayNotificationForLedgerProfile('error', true, true, false, false, err)
+                displayNotificationForLedgerProfile('error', true, false, false, false, error)
             } else {
                 showAppNotification({
                     type: 'error',

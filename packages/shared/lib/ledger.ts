@@ -139,10 +139,11 @@ export function displayNotificationForLedgerProfile(
         const shouldNotify = (!isConnected && !isLegacyConnected) || error
 
         if (canNotify && shouldNotify) {
-            const stateErrorMessage = localize(`error.ledger.${state}`)
+            const stateMessage = localize(`error.ledger.${state}`)
             const errorMessage = legacy ? getLegacyErrorMessage(error, true) : error?.error ? localize(error.error) : error
-
-            const message = error ? isLedgerError(error) ? stateErrorMessage : errorMessage : stateErrorMessage
+            
+            const shouldShowStateMessage = (!isConnected && !isLegacyConnected) && !error
+            const message = error ? (isLedgerError(error) && shouldShowStateMessage) ? stateMessage : errorMessage : stateMessage
             notificationId = showAppNotification({
                 type: notificationType,
                 message

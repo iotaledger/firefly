@@ -46,7 +46,7 @@
                     isBusy = false
 
                     if(err) {
-                        console.error(err?.error || err)
+                        console.error(err)
 
                         if($isLedgerProfile) {
                             displayNotificationForLedgerProfile('error', true, false, false, false, err)
