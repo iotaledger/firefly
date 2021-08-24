@@ -4,37 +4,35 @@ labels: bug
 
 body:
   - type: textarea
-    id: Description
+    id: description
     attributes:
       label: Issue description
       description: Briefly describe the issue.
-      render: bash
     validations:
       required: true
 
   - type: input
-    id: Version
+    id: version
     attributes:
-      label: Wallet version
+      label: Firefly version
       description: Which version of wallet are you using?
-      placeholder: version number, commit, or branch
+      placeholder: Version number, commit, or branch
     validations:
       required: true
 
   - type: input
-    id: Os
+    id: os_details
     attributes:
-      label: What is your operating system?
-      description: Mac/Win/Linux inclusive Version and or Distro
+      label: OS details
+      description: Mac/Windows/Linux (including version and/or distro)
       placeholder: ex. Windows 10 Pro 10.0.19042 Build 19042
     validations:
       required: true
 
   - type: dropdown
-    id: Repeatable
+    id: can_repro
     attributes:
-      label: Is it a repeatable issue?
-      description: Can the issue be reproduced repetitively?
+      label: Can the issue be reliably reproduced?
       options:
         - 'Yes'
         - 'No'
@@ -42,7 +40,7 @@ body:
       required: true
 
   - type: textarea
-    id: Reproduce
+    id: repro_steps
     attributes:
       label: Steps to reproduce the issue
       description: Explain how the maintainer can reproduce the issue.
@@ -51,33 +49,27 @@ body:
         2.
         3.
         ...
-      render: bash
     validations:
       required: true
 
   - type: textarea
-    id: Expected
+    id: expected_behaviour
     attributes:
       label: Expected behaviour
       description: A concise description of what you expected to happen.
-      render: bash
     validations:
       required: true
 
   - type: textarea
-    id: Actual
+    id: actual_behaviour
     attributes:
       label: Actual behaviour
       description: A concise description of what you're experiencing.
-      render: bash
     validations:
       required: true
 
   - type: textarea
-    id: Errors
+    id: errors
     attributes:
       label: Errors
       description: Paste any errors that you see from the Error Log in the Firefly menu or share screenshots of the issue.
-      render: bash
-    validations:
-      required: true
