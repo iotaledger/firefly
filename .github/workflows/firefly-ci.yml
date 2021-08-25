@@ -1,15 +1,13 @@
-name: pr-checks
+name: Firefly CI
 
-on:
+on: 
+  pull_request:
   push:
     branches:
-      - chore/**
-      - fix/**
-      - feat/**
-      - hotfix/**
+      - 'develop'
 
 jobs:
-  test:
+  test-shared:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -21,7 +19,7 @@ jobs:
 
       - name: Install Dependencies
         working-directory: packages/shared
-        run: yarn
+        run: yarn --ignore-scripts
 
       - name: Test
         working-directory: packages/shared
