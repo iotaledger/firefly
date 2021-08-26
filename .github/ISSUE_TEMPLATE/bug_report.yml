@@ -1,4 +1,4 @@
-name: Report an issue in wallet
+name: Report a Firefly issue
 description: Create a report to help us improve
 labels: bug
 
@@ -15,7 +15,7 @@ body:
     id: version
     attributes:
       label: Firefly version
-      description: Which version of wallet are you using?
+      description: Which version of the wallet are you using?
       placeholder: Version number, commit, or branch
     validations:
       required: true
