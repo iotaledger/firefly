@@ -10,7 +10,8 @@
     },
     "scripts": {
         "postinstall": "patch-package",
-        "test": "cd packages/shared && yarn test"
+        "test": "yarn test-shared",
+        "test-shared": "cd packages/shared && yarn test"
     },
     "resolutions": {
         "lodash": ">=4.17.21"
