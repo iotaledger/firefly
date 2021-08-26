@@ -71,6 +71,10 @@ export const logout = () => {
         const ap = get(activeProfile);
 
         const _cleanup = () => {
+            /**
+             * CAUTION: Be sure to make any necessary API calls before
+             * the event actor is destroyed!
+             */
             if (ap) {
                 destroyActor(ap.id)
             }

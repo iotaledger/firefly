@@ -4,9 +4,9 @@
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
-    import { selectedAccountId, selectedMessage, WalletAccount } from 'shared/lib/wallet'
+    import { asyncRemoveWalletAccount, selectedAccountId, selectedMessage, WalletAccount } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
-    import type { Readable } from 'svelte/store'
+    import { get, Readable } from 'svelte/store'
 
     const account = getContext<Readable<WalletAccount>>('selectedAccount')
     const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
@@ -54,7 +54,9 @@
             props: {
                 account,
                 hasMultipleAccounts: $viewableAccounts.length > 1,
-                deleteAccount: (id) => {
+                deleteAccount: async (id) => {
+                    await asyncRemoveWalletAccount(get(account))
+
                     if (!hiddenAccounts.includes(id)) {
                         hiddenAccounts.push(id)
                         updateProfile('hiddenAccounts', hiddenAccounts)
