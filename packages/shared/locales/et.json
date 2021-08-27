@@ -18,10 +18,10 @@
             "profileName": "Profiili nimi",
             "body1": "Sa saad luua mitu kasutajaprofiili, et oma rahakotte organiseerida ja privaatsust parendada.",
             "body2": {
-                "first": "For now, let's start with your first profile name.",
-                "nonFirst": "For now, let's start with your profile name."
+                "first": "Alustame praegu sinu esimese profiili nimega.",
+                "nonFirst": "Alustame praegu sinu profiili nimega."
             },
-            "addMore": "You can add more profiles later."
+            "addMore": "Sa saad hiljem veel profiile lisada."
         },
         "setup": {
             "title": "Sea üles rahakott",
@@ -30,35 +30,35 @@
             "learnMore": "Loe üleviimise kohta"
         },
         "secure": {
-            "title": "Secure your wallet",
+            "title": "Kindlusta oma rahakott",
             "body1": "Save and print the Recovery Kit PDF template.",
             "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallets."
         },
         "create": {
-            "title": "Create a wallet",
-            "body": "Create a new wallet. You can choose a regular software wallet or if you have a Ledger device you can set up a hardware wallet.",
+            "title": "Loo rahakott",
+            "body": "Loo uus rahakott. Sa võid valida tavalise tarkvara rahakoti või kui sul on Ledgeri seade, siis saad seadistada riistvaralise rahakoti.",
             "softwareAccount": {
-                "title": "I want a software wallet",
+                "title": "Ma tahan tarkvara rahakotti",
                 "description": "Create a 24-word Recovery Phrase"
             },
             "ledgerAccount": {
-                "title": "I want a hardware wallet",
-                "description": "Ledger Nano S or Nano X required"
+                "title": "Ma tahan riistvara rahakotti",
+                "description": "Ledger Nano S või Nano X nõutud"
             }
         },
         "setupLedger": {
-            "progress1": "Connect your Ledger",
-            "progress2": "Generate address",
-            "progress3": "Switch Ledger app",
-            "progress4": "Transfer funds",
-            "watchVideo": "Watch video guide",
-            "videoGuide": "Ledger migration video guide"
+            "progress1": "Ühenda oma Ledger",
+            "progress2": "Loo aadress",
+            "progress3": "Vaheta Ledgeri rakendus",
+            "progress4": "Kanna raha",
+            "watchVideo": "Vaata videoõpetust",
+            "videoGuide": "Ledgeri ületoomise videoõpetus"
         },
         "ledgerInstallationGuide": {
-            "title": "Have you installed the necessary Ledger apps?",
+            "title": "Kas oled paigaldanud vajalikud Ledgeri rakendused?",
             "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
             "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
-            "action": "Yes, I've installed these apps"
+            "action": "Jah, ma olen need rakendused paigaldanud"
         },
         "password": {
             "title": "Loo salasõna",
@@ -73,15 +73,15 @@
         "pin": {
             "title": "Sea PIN-kood",
             "body1": "Sisesta 6-numbriline PIN-kood allpool. Sinult küsitakse PINi oma profiilile ligipääsemiseks.",
-            "body2": "Use numbers only"
+            "body2": "Kasuta ainult numbreid"
         },
         "confirmPin": {
             "title": "Kinnita oma PIN-kood",
-            "body1": "Your PIN keeps your balance and transactions private.",
-            "body2": "Re-enter your PIN code to proceed. "
+            "body1": "Sinu PIN-kood hoiab su kontojäägi ja tehingud privaatsena.",
+            "body2": "Sisesta oma PIN-kood uuesti. "
         },
         "backup": {
-            "title": "Back up your wallet",
+            "title": "Tee oma rahakotist tagavarakoopia",
             "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
             "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
             "body3": "If you lose your recovery phrase, you may lose your funds."
@@ -89,7 +89,7 @@
         "recoveryPhrase": {
             "title": "Recovery phrase",
             "body1": "In your Recovery Kit, write down the words in the exact order shown.",
-            "body2": "Keep this private and safely stored.",
+            "body2": "Hoia seda turvaliselt enda teada.",
             "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
             "revealRecoveryPhrase": "Reveal recovery phrase",
             "hideRecoveryPhrase": "Hide recovery phrase"
@@ -103,41 +103,41 @@
         },
         "backupWallet": {
             "title": "Back up to a Stronghold file",
-            "body1": "Enter your password to backup your wallets to a Stronghold file. Your password is used to encrypt the backup.",
+            "body1": "Sisesta oma salasõna, et luua oma rahakotist tagavarakoopia Stronghold faili. Sinu salasõna kasutatakse koopia krüpteerimiseks.",
             "body2": "Reasons why digital backups are important:",
             "reason1": "Easily recover your wallets without typing in your recovery phrase",
             "reason2": "Import your wallets on other devices",
             "reason3": "Recover your full transaction history"
         },
         "recoveryPhraseSaved": {
-            "title": "Successfully backed up",
+            "title": "Edukalt varundatud",
             "body": "You have backed up your wallets to a Stronghold."
         },
         "congratulations": {
             "title": "Rahakott ülesseadistatud",
-            "fundsMigrated": "Funds migrated",
-            "body": "Your new wallet is ready to use.",
+            "fundsMigrated": "Vahendid ületoodud",
+            "body": "Sinu uus rahakott on kasutamiseks valmis.",
             "softwareMigratedBody": "You have successfully migrated your funds to the new network",
             "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
             "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
             "exportMigration": "Export migration log and finish setup"
         },
         "import": {
-            "title": "Recover or migrate funds",
+            "title": "Vahendite taastamine või ületoomine",
             "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
             "importSeed": "Mul on 81-tähemärgiline seeme",
-            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
+            "importSeedDescription": "Sisesta seeme ja too raha Chrysalisesse üle",
             "importMnemonic": "I have a Firefly recovery phrase",
             "importMnemonicDescription": "Enter your recovery phrase to recover your wallets",
-            "importFile": "I have a file backup",
+            "importFile": "Mul on tagavarafail",
             "importFileDescription": "Upload a Seedvault or Stronghold file",
-            "importLedger": "I have a Ledger backup",
+            "importLedger": "Mul on Ledgeri tagavara",
             "importLedgerDescription": "Restore or migrate a Ledger profile"
         },
         "importFromText": {
             "seed": {
-                "title": "Type your seed to commence migration",
-                "body": "A seed consists of 81 characters. This is used to recover from the older Trinity app.",
+                "title": "Kirjuta oma seeme, et alustada ületoomist",
+                "body": "Seeme koosneb 81-tähemärgist. Seda kasutatakse taastamiseks vanemast Trinity rakendusest.",
                 "enter": "Sisesta oma seeme"
             },
             "mnemonic": {
@@ -145,7 +145,7 @@
                 "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly wallets.",
                 "enter": "Enter your secret recovery phrase"
             },
-            "seedDetected": "81 character seed detected",
+            "seedDetected": "81-tähemärgiline seeme tuvastatud",
             "phraseDetected": "24 word recovery phrase detected",
             "checksum": "Kontrollsumma"
         },
@@ -157,75 +157,75 @@
             "title": "Restore or Migrate your Ledger",
             "body": "Restore an existing Firefly Ledger profile, or migrate your funds from Trinity.",
             "haveFireflyLedger": "I have a Firefly Ledger backup",
-            "haveFireflyLedgerDescription": "Restore a Firefly profile",
-            "haveTrinityLedger": "I have a Trinity Ledger backup",
-            "haveTrinityLedgerDescription": "Migrate a Trinity profile"
+            "haveFireflyLedgerDescription": "Taasta Firefly profiil",
+            "haveTrinityLedger": "Mul on Trinity Ledgeri tagavara",
+            "haveTrinityLedgerDescription": "Too üle Trinity profiil"
         },
         "connectLedger": {
-            "title": "Connect your Ledger to Firefly",
+            "title": "Ühenda oma Ledger Firefly'ga",
             "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed.",
             "trafficLight1": "Connect and unlock your Ledger with your PIN",
-            "trafficLight2": "Open the new IOTA app on your Ledger",
+            "trafficLight2": "Ava oma Ledgeris uus IOTA rakendus",
             "tips": "Tips if your Ledger isn’t connecting"
         },
         "restoreFromFireflyLedger": {
-            "title": "Restore Your Ledger Profile",
+            "title": "Taasta oma Ledgeri profiil",
             "body": "Press restore to complete the setup process and restore your wallets, balances and transaction history.",
-            "restoring": "Restoring from Ledger..."
+            "restoring": "Taastamine Ledgerist..."
         },
         "legacyLedgerIntro": {
-            "title": "Start your Ledger migration using Firefly",
+            "title": "Alusta oma Ledgeri ületoomist kasutades Firefly'd",
             "body1": "Firefly will help you to transfer your tokens to the new Chrysalis network.",
             "body2": "After the migration, you will be able to send and receive your tokens using your Ledger with Firefly.",
-            "readMore": "What to expect from the migration process"
+            "readMore": "Mida ületoomise protsessilt oodata"
         },
         "generateNewLedgerAddress": {
             "title": "Loo uus aadress",
             "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
-            "confirmTitle": "Confirm the new address",
+            "confirmTitle": "Kinnita uus aadress",
             "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
-            "confirmedTitle": "Address confirmed",
+            "confirmedTitle": "Aadress kinnitatud",
             "confirmedBody": "You have confirmed that the address in Firefly matches the one on your Ledger device.",
-            "generating": "Generating address"
+            "generating": "Aadressi loomine"
         },
         "switchLedgerApps": {
-            "title": "Switch Ledger apps",
+            "title": "Vaheta Ledgeri rakendus",
             "body": "Please switch to the {legacy} app on your Ledger device to continue migration. When ready, press continue."
         },
         "selectLedgerAccountIndex": {
             "title": "Choose Ledger account index",
             "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
-            "accountIndex": "Account Index",
-            "accountPage": "Account Page",
-            "standard": "Standard",
-            "expert": "Expert",
-            "takingAWhile": "This is taking a while...",
-            "notGeneratingAddresses": "Is your Ledger generating addresses?",
-            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
+            "accountIndex": "Konto viit",
+            "accountPage": "Konto leht",
+            "standard": "Tavaline",
+            "expert": "Ekspert",
+            "takingAWhile": "See võtab aega...",
+            "notGeneratingAddresses": "Kas sinu Ledger genereerib aadresse?",
+            "reinstallLegacy": "Kui ei, siis ühenda seade lahti ja proovi uuesti. Kui probleem jätkub, võib juhtuda, et pead uuesti paigaldama {legacy} rakenduse."
         },
         "importBackupPassword": {
-            "body1": "Please enter your backup password.",
-            "body2": "This is the password you set when you first created your backup."
+            "body1": "Palun sisesta oma tagavarakoopia salasõna.",
+            "body2": "See on salasõna, mille määrasid hetkel, kui tegid tagavarakoopia."
         },
         "importSuccess": {
-            "title": "You have successfully recovered your backup",
-            "body": "You can now set up your new profile."
+            "title": "Sa taastasid edukalt oma tagavarakoopia",
+            "body": "Saad nüüd oma uue profiili üles seadistada."
         },
         "migrate": {
-            "title": "Migrate your funds",
-            "body1": "This is an automated process to transfer your funds to your new wallet.",
-            "body2": "It may take some time. Do not turn off your device during the migration.",
+            "title": "Too oma vahendid üle",
+            "body1": "See on automatiseeritud protsess oma vahendite ületoomiseks oma uude rahakotti.",
+            "body2": "See võib natukene aega võtta. Ära lülita oma seadet ületoomise ajal välja.",
             "existing": "Sinu vana rahakott",
             "new": "Sinu uus rahakott",
             "learn": "Loe üleviimise kohta",
-            "beginMigration": "Begin Migration",
-            "migrating": "Migrating funds...",
-            "migrated": "{balance} migrated",
-            "migrationFailed": "Migration Failed",
-            "noAddressesForMigration": "Please select the addresses you wish to secure.",
-            "restoringWallet": "Restoring wallet...",
-            "findingBalance": "Finding balance...",
-            "incorrectSeedVaultPassword": "Incorrect SeedVault password.",
+            "beginMigration": "Alusta ületoomist",
+            "migrating": "Vahendite ületoomine...",
+            "migrated": "{balance} ületoodud",
+            "migrationFailed": "Ületoomine ebaõnnestus",
+            "noAddressesForMigration": "Palun vali aadressid, mida soovid turvata.",
+            "restoringWallet": "Taastan rahakotti...",
+            "findingBalance": "Kontojäägi otsimine...",
+            "incorrectSeedVaultPassword": "Vale SeedVault salasõna.",
             "noDataSeedVault": "No data could be found in the SeedVault.",
             "signingBundle": "Signing bundle",
             "broadcastingBundle": "Broadcasting bundle",
@@ -250,21 +250,21 @@
             "error": "You can’t migrate spent addresses with less than 1 Mi"
         },
         "securityCheckCompleted": {
-            "title": "Security check completed",
-            "body1": "We have calculated the security risk level. Running this process again may lower your risk level.",
-            "body2": "When you are happy with the risk level(s) press continue.",
+            "title": "Turvalisus kontrollitud",
+            "body1": "Me hindasime turvalisuse ohutaset. Selle protsessi uuestikäivitamine võib ohutaset maandada.",
+            "body2": "Kui oled ohutaseme(te)ga rahul, vajuta jätka.",
             "rerun": "Rerun process for selected addresses",
-            "continueMigration": "Continue migration"
+            "continueMigration": "Jätka ületoomist"
         },
         "securingSpentAddresses": {
             "title": "Securing spent addresses...",
-            "body1": "This process will take {minutes, plural, one {1 minute} other {# minutes}}.",
+            "body1": "See protsess võtab {minutes, plural, one {1 minuti} other {# minutit}}.",
             "body2": "Your computer will run at full capacity, you may wish to do something else while you wait for this to complete."
         },
         "transferFragmentedFunds": {
             "body1": "Firefly will now proceed to migrate your funds. This may take a while.",
             "body2": "Ensure your Ledger is connected and the {legacy} app is open at all times during migration.",
-            "migrate": "Migrate funds",
+            "migrate": "Too vahendid üle",
             "transaction": "Tehing {number}",
             "rerun": "Proovi uuesti"
         },
@@ -287,19 +287,19 @@
             },
             "security": {
                 "title": "Turvalisus",
-                "description": "Change your password and adjust security-related settings"
+                "description": "Vaheta oma salasõna ja timmi turvasätteid"
             },
             "advancedSettings": {
-                "title": "Advanced Settings",
+                "title": "Täpsemad seaded",
                 "description": "Tools and manual settings for technical users"
             },
             "helpAndInfo": {
                 "title": "Abi & Informatsioon",
-                "description": "Find the answer to a question or get help with an issue"
+                "description": "Leia küsimusele vastus või abi probleemi lahendamisel"
             },
             "profile": {
                 "title": "Profiil",
-                "description": "Change your profile name or set an avatar"
+                "description": "Vaheta oma profiili nime või määra avatar"
             },
             "sync": {
                 "title": "Sync wallets",
@@ -319,36 +319,36 @@
             },
             "notifications": {
                 "title": "Teavitused",
-                "description": "System notifications for transaction events"
+                "description": "Süsteemiteavitused tehingusündmustele"
             },
             "networkStatus": {
                 "title": "Võrgu staatus",
                 "description": "Displays the status of the node you are currently connected to."
             },
             "exportStronghold": {
-                "title": "Export Backup",
+                "title": "Ekspordi tagavara",
                 "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
             },
             "appLock": {
-                "title": "Automatic Lock",
+                "title": "Automaatne lukustus",
                 "description": "Inactivity time before your wallets lock and you are logged out",
                 "durationMinute": "{time, plural, one {1 minut} other {# minutit}}",
                 "durationHour": "{time, plural, one {1 tund} other {# tundi}}"
             },
             "changePassword": {
                 "title": "Muuda salasõna",
-                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
+                "description": "Sinu salasõna kasutatakse sinu rahakottide turvamiseks. Oma vahendite kaitsmiseks pead kasutama tugevat salasõna"
             },
             "changePincode": {
                 "title": "Muuda PIN-koodi",
-                "description": "Your PIN keeps your balance and transactions private",
+                "description": "Sinu PIN-kood hoiab su kontojäägi ja tehingud privaatsena",
                 "currentPincode": "Praegune PIN-kood",
                 "newPincode": "Uus PIN-kood",
                 "confirmNewPincode": "Kinnita uus PIN",
                 "action": "Muuda PIN"
             },
             "balanceFinder": {
-                "title": "Balance finder",
+                "title": "Kontojäägi otsija",
                 "description": "Perform an extended search of your addresses for tokens"
             },
             "hiddenAccounts": {
@@ -357,43 +357,43 @@
             },
             "deleteProfile": {
                 "title": "Kustuta profiil",
-                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
+                "description": "Kustutab su terve profiili, rahakotid ja tehinguajalugu. Tee kindlaks, et sul on tagavara"
             },
             "deepLinks": {
                 "title": "Deep links",
                 "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
             },
             "developerMode": {
-                "title": "Developer mode",
+                "title": "Arendaja režiim",
                 "description": "Connect to testnets and other developer features"
             },
             "nodeSettings": {
-                "title": "Node settings",
+                "title": "Sõlme seaded",
                 "description": "Select Manual to configure the node settings and connect to your own node"
             },
             "configureNodeList": {
-                "title": "Select a node",
+                "title": "Vali sõlm",
                 "description": "Manage the list of IOTA network nodes you connect to",
                 "primaryNode": "Peamine sõlm",
                 "excludeNode": "Exclude node",
                 "includeNode": "Include node",
                 "viewDetails": "Vaata üksikasju",
-                "setAsPrimary": "Set as primary",
+                "setAsPrimary": "Määra peamiseks",
                 "removeNode": "Eemalda sõlm",
                 "includeOfficialNodeList": "Include official node list",
                 "noNodes": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
-                "title": "Proof of work",
+                "title": "Töötõend",
                 "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
-                "title": "Error log",
+                "title": "Vealogi",
                 "description": "View errors to debug an issue"
             },
             "diagnostics": {
                 "title": "Diagnostika",
-                "description": "View system and application information"
+                "description": "Vaata süsteemi ja rakenduse teavet"
             },
             "migrateLedgerIndex": {
                 "title": "Migrate Ledger Index",
@@ -404,7 +404,7 @@
                 "description": "Export your transaction history to a .csv file"
             },
             "troubleshoot": {
-                "title": "Troubleshoot",
+                "title": "Tõrkeotsing",
                 "description": "Use the troubleshooting wizard to solve common problems"
             },
             "documentation": {
@@ -413,7 +413,7 @@
             },
             "faq": {
                 "title": "KKK",
-                "title2": "Frequently Asked Questions",
+                "title2": "Korduma Kippuvad Küsimused",
                 "description": "View the FAQs to get help with a common problem or question"
             },
             "discord": {
@@ -421,11 +421,11 @@
                 "description": "Get help from the IOTA community on Discord"
             },
             "about": {
-                "title": "About",
+                "title": "Teave",
                 "description": ""
             },
             "reportAnIssue": {
-                "title": "Report an issue",
+                "title": "Teata veast",
                 "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
             }
         },
@@ -438,37 +438,37 @@
                 "version": {
                     "title": "Firefly v{version}",
                     "upToDate": "Ajakohane",
-                    "outOfDate": "Out of date"
+                    "outOfDate": "Vananenud"
                 },
                 "hardwareDevice": {
-                    "title": "Hardware Device",
+                    "title": "Riistvaraline seade",
                     "statuses": {
-                        "appNotOpen": "IOTA App Not Open",
-                        "connected": "Connected",
-                        "legacyConnected": "{legacy} App Open",
+                        "appNotOpen": "IOTA rakendus pole avatud",
+                        "connected": "Ühendatud",
+                        "legacyConnected": "{legacy} rakendus avatud",
                         "locked": "Lukustatud",
                         "mnemonicMismatch": "Wrong Ledger or Mnemonic",
-                        "notDetected": "Not Detected",
-                        "otherConnected": "App Open"
+                        "notDetected": "Pole tuvastatud",
+                        "otherConnected": "Rakendus avatud"
                     }
                 },
                 "strongholdStatus": {
-                    "title": "Wallet Status",
+                    "title": "Rahakoti olek",
                     "locked": "Lukustatud",
                     "unlocked": "Lukustamata"
                 },
                 "strongholdBackup": {
-                    "title": "Wallet Backup",
-                    "weeksAgo": "{weeks, plural, one {# week} other {# weeks}} ago"
+                    "title": "Rahakoti tagavara",
+                    "weeksAgo": "{weeks, plural, one {# nädal} other {# nädalat}} tagasi"
                 }
             },
             "network": {
-                "networkOperational": "Network Operational",
-                "networkDegraded": "Network Degraded",
-                "networkDown": "Network Disconnected",
-                "status": "Status",
-                "messagesPerSecond": "Messages per second",
-                "referencedRate": "Referenced rate"
+                "networkOperational": "Võrk toimiv",
+                "networkDegraded": "Võrk nõrk",
+                "networkDown": "Ühendus puudub",
+                "status": "Olek",
+                "messagesPerSecond": "Sõnumit sekundis",
+                "referencedRate": "Viidatute määr"
             },
             "profileModal": {
                 "allSettings": "Kõik seaded",
@@ -480,7 +480,7 @@
         "password": {
             "title": "Salasõna on vajalik",
             "subtitle": "Palun sisesta oma salasõna rahakoti lahtilukustamiseks",
-            "backup": "Please enter your password to export a backup"
+            "backup": "Tagavarakoopia eksportimiseks palun sisesta oma salasõna"
         },
         "qr": {
             "title": "Sinu QR kood"
@@ -489,40 +489,40 @@
             "title": "Praegune versioon: {version}",
             "upToDateTitle": "Firefly on ajakohane",
             "upToDateDescription": "You are running the latest and safest version of Firefly.",
-            "updateAvailable": "Firefly update available",
+            "updateAvailable": "Firefly uuendus saadaval",
             "updateDetails": "Versioon {version} - {date}",
             "noAutoUpdate": "Auto-update is disabled in this Windows version, please go to https://firefly.iota.org to download the update."
         },
         "backup": {
-            "title": "Last backup: {date}",
-            "lastBackup": "You last backed up {date}",
+            "title": "Viimane varundamine: {date}",
+            "lastBackup": "Tegid viimati tagavara {date}",
             "backupDescription": "It is important to back up regularly to ensure you have a copy of your wallets and transaction history.",
             "backupWarning": "If you lose your backup and recovery phrase you will lose access to your funds.",
-            "notBackedUp": "Not backed up",
-            "notBackedUpDescription": "You have not backed up your wallets",
+            "notBackedUp": "Pole varundatud",
+            "notBackedUpDescription": "Sa ei ole oma rahakotte varundanud",
             "saving": "Salvestan..."
         },
         "deleteAccount": {
             "title": "Kustuta {name}?",
-            "body": "This wallet has no transaction history. It can safely be deleted.",
-            "typePassword": "Type your wallet password to confirm.",
+            "body": "Sel rahakotil pole tehinguajalugu. Selle võib turvaliselt ära kustutada.",
+            "typePassword": "Kinnitamiseks sisesta oma rahakoti salasõna.",
             "hideAccount": "Kustuta rahakott",
-            "errorTitle": "Unable to delete {name}",
-            "errorBody1": "You cannot delete this wallet, you must have at least one."
+            "errorTitle": "{name} kustutamine ebaõnnestus",
+            "errorBody1": "Sa ei saa seda rahakotti kustutada, sul peab olema vähemalt üks."
         },
         "hideAccount": {
             "title": "Peida {name}?",
             "body": "You can find this wallet later by enabling \"Show hidden wallets\" in Advanced Settings.",
-            "typePassword": "Type your wallet password to confirm.",
+            "typePassword": "Kinnitamiseks sisesta oma rahakoti salasõna.",
             "hideAccount": "Peida rahakott",
-            "errorTitle": "Unable to hide {name}",
-            "errorBody1": "To hide a wallet it must have 0 balance.",
+            "errorTitle": "{name} peitmine ebaõnnestus",
+            "errorBody1": "Rahakoti peitmiseks peab selle kontojääk olema 0.",
             "errorBody2": "You currently have {balance} remaining on this wallet. Please move these funds to a different wallet and try again.",
             "errorBody3": "You cannot hide this wallet, you must have at least one."
         },
         "addressHistory": {
-            "title": "{name} address history",
-            "currentBalance": "Current balance: {balance}"
+            "title": "{name} addressi ajalugu",
+            "currentBalance": "Hetke kontojääk: {balance}"
         },
         "node": {
             "titleAdd": "Lisa sõlm",
@@ -532,49 +532,49 @@
             "nodeAddress": "Sõlme aadress",
             "optionalUsername": "Kasutajanimi (valikuline)",
             "optionalPassword": "Salasõna (valikuline)",
-            "setAsPrimaryNode": "Set as primary node",
-            "removeConfirmation": "Are you sure you want to remove this node?"
+            "setAsPrimaryNode": "Määra peamiseks sõlmeks",
+            "removeConfirmation": "Oled kindel, et soovid selle sõlme eemaldada?"
         },
         "errorLog": {
-            "title": "Error Log",
-            "empty": "The error log is empty."
+            "title": "Vealogi",
+            "empty": "Vealogi on tühi."
         },
         "deleteProfile": {
             "title": "Kustuta profiil",
             "confirmation": "Are you sure you want to delete this profile? This operation cannot be undone.",
-            "typePassword": "Type your password to confirm."
+            "typePassword": "Kinnitamiseks sisesta oma salasõna."
         },
         "diagnostics": {
             "title": "Diagnostika",
             "node": "Sõlm",
             "platform": "Platvorm",
-            "platformVersion": "Platform Version",
-            "platformArchitecture": "Platform Architecture",
-            "cpuCount": "CPU Count",
-            "totalMem": "Total Memory",
-            "freeMem": "Free Memory",
+            "platformVersion": "Platvormi versioon",
+            "platformArchitecture": "Platvormi arhitektuur",
+            "cpuCount": "CPU arv",
+            "totalMem": "Kogumälu",
+            "freeMem": "Vaba mälu",
             "userPath": "User Path"
         },
         "transaction": {
-            "title": "Confirm transaction",
-            "body": "You’re about to send {amount} to"
+            "title": "Kinnita tehing",
+            "body": "Oled saatmas {amount} aadressile"
         },
         "balanceFinder": {
-            "title": "Balance finder",
+            "title": "Kontojäägi otsija",
             "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
-            "totalWalletBalance": "Total balance",
-            "typePassword": "Type your password to allow searching."
+            "totalWalletBalance": "Kontojääk kokku",
+            "typePassword": "Otsimise lubamiseks sisesta oma salasõna."
         },
         "riskFunds": {
-            "title": "Warning: funds at risk during migration",
+            "title": "Hoiatus: vahendid on ületoomise ajal ohus",
             "body1": "It is strongly recommended that you secure all your funds before proceeding with migration. Your funds are at risk of theft if you do not secure them.",
             "body2": "It is recommended that you rerun the process for addresses with a medium risk level or above."
         },
         "missingBundle": {
-            "title": "Warning: funds at risk during migration",
+            "title": "Hoiatus: vahendid on ületoomise ajal ohus",
             "body": "You have funds on spent addresses, but the information needed to secure them was not found. This can happen if you made transactions a long time ago. You can proceed but {value} are at risk during migration.",
             "learnMore": "Learn more about spent addresses",
-            "proceed": "I understand the risk"
+            "proceed": "Ma mõistan ohtu"
         },
         "snapshot": {
             "title": "Ongoing network upgrade",
@@ -587,7 +587,7 @@
             "connectLegacy": "Open the {legacy} app on your Ledger device to continue"
         },
         "ledgerConfirmation": {
-            "confirm": "To proceed, confirm the prompt displayed on your Ledger device"
+            "confirm": "Jätkamiseks kinnita Ledgeri seadmes"
         },
         "ledgerAppGuide": {
             "title": "Guide to installing the Ledger apps",
@@ -606,7 +606,7 @@
                 "1": "Ensure you have unlocked your Ledger device with your PIN",
                 "2": "Open the new IOTA app on your Ledger device",
                 "3": {
-                    "text": "Still no luck?",
+                    "text": "Ikka pole õnne?",
                     "link": "Try the official Ledger support page"
                 }
             }
@@ -617,12 +617,12 @@
                 "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
             },
             "transaction": {
-                "title": "Confirm transaction",
+                "title": "Kinnita tehing",
                 "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted."
             }
         },
         "ledgerAddress": {
-            "title": "Confirm receive address",
+            "title": "Kinnita saaja aadress",
             "body": "Confirm that the receive address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
         },
         "ledgerMigrateIndex": {
@@ -631,8 +631,8 @@
         }
     },
     "charts": {
-        "incomingMi": "Incoming {value}",
-        "outgoingMi": "Outgoing {value}",
+        "incomingMi": "Sissetulev {value}",
+        "outgoingMi": "Väljaminev {value}",
         "portoflio": "Portfell",
         "token": "Žetoon",
         "accountValue": "Rahakoti väärtus",
@@ -645,8 +645,8 @@
     "actions": {
         "continue": "Jätka",
         "back": "Tagasi",
-        "previous": "Previous",
-        "next": "Next",
+        "previous": "Eelmine",
+        "next": "Järgmine",
         "cancel": "Katkesta",
         "close": "Sulge",
         "dismiss": "Loobu",
@@ -660,10 +660,10 @@
         "savePassword": "Salvesta salasõna",
         "useBiometric": "Kasuta biomeetrilisi turvaelemente",
         "setupPin": "Sea PIN-kood",
-        "setPin": "Set PIN code",
-        "confirmPin": "Confirm PIN code",
-        "enterYourPin": "Enter your PIN",
-        "saveBackupFile": "Save backup file",
+        "setPin": "Sea PIN-kood",
+        "confirmPin": "Kinnita PIN-kood",
+        "enterYourPin": "Sisesta oma PIN",
+        "saveBackupFile": "Salvesta tagavarafail",
         "iveWrittenRecoveryPhrase": "I’ve written down my recovery phrase",
         "verifyRecoveryPhrase": "Verify recovery phrase",
         "revealRecoveryPhrase": "Reveal recovery phrase",
@@ -673,22 +673,22 @@
         "send": "Saada",
         "receive": "Võta vastu",
         "create": "Loo",
-        "beginTransfer": "Begin Transfer",
+        "beginTransfer": "Alusta ülekannet",
         "tryAgain": "Proovi uuesti",
         "visitDiscord": "Külasta Discordi",
         "dragDrop": "Drag & Drop",
-        "importExtentions": ".kdbx or .stronghold file",
-        "chooseFile": "Choose a File",
-        "dropHere": "Drop your file here",
+        "importExtentions": ".kdbx või .stronghold fail",
+        "chooseFile": "Vali fail",
+        "dropHere": "Lohista oma fail siia",
         "syncAll": "Sync all",
         "export": "Ekspordi",
         "exportNewStronghold": "Export a new Stronghold",
         "enableDeepLinks": "Enable deep links",
         "enableDeveloperMode": "Enable developer mode",
-        "enableSystemNotifications": "Enable system notifications",
+        "enableSystemNotifications": "Luba süsteemiteavitused",
         "exportState": "Export state",
         "localProofOfWork": "Local proof of work",
-        "unlock": "Unlock",
+        "unlock": "Ava",
         "updateFirefly": "Uuenda Firefly",
         "restartNow": "Taaskäivita kohe",
         "saveBackup": "Save Stronghold backup",
@@ -697,12 +697,12 @@
         "hideAccount": "Peida rahakott",
         "showAccount": "Unhide wallet",
         "deleteAccount": "Kustuta rahakott",
-        "max": "Max",
-        "addNode": "Add node",
-        "updateNode": "Update node",
+        "max": "Maks.",
+        "addNode": "Lisa sõlm",
+        "updateNode": "Uuenda sõlme",
         "removeNode": "Eemalda sõlm",
         "hide": "Peida",
-        "hideOthers": "Hide Others",
+        "hideOthers": "Peida teised",
         "showAll": "Kuva kõik",
         "quit": "Välju",
         "edit": "Muuda",
@@ -715,7 +715,7 @@
         "addAccount": "Lisa rahakott",
         "checkForUpdates": "Kontrolli uuendusi",
         "reportAnIssue": "Report an Issue",
-        "restore": "Restore",
+        "restore": "Taasta",
         "clear": "Tühjenda",
         "hideDetails": "Peida üksikasjad",
         "yes": "Jah",
@@ -724,19 +724,19 @@
         "reset": "Lähtesta",
         "downloadRecoveryKit": "Save Recovery Kit template",
         "skipBackup": "Skip file backup",
-        "finishSetup": "Finish setup",
-        "readDocumentation": "Read the documentation",
+        "finishSetup": "Valmis",
+        "readDocumentation": "Loe dokumentatsiooni",
         "visitFaq": "Külasta KKK",
         "viewStatus": "View status",
-        "showHiddenAccounts": "Show hidden wallets",
+        "showHiddenAccounts": "Näita peidetud rahakotte",
         "confirm": "Kinnita",
-        "hideNetworkStatistics": "Hide network statistics",
-        "findBalances": "Find balances",
+        "hideNetworkStatistics": "Peida võrgustatistika",
+        "findBalances": "Otsi kontojääke",
         "searchBalances": "Search for balances",
         "searchAgain": "Otsi uuesti",
         "searching": "Otsin...",
         "closeFirefly": "Sulge Firefly",
-        "generateAddress": "Generate address",
+        "generateAddress": "Loo aadress",
         "migrateAgain": "Migrate another index"
     },
     "general": {
@@ -747,32 +747,32 @@
         "confirmNewPassword": "Kinnita uus salasõna",
         "yourSeed": "Sinu Seeme",
         "recoveryPhrase": "Recovery Phrase",
-        "recentActivity": "Recent Activity",
+        "recentActivity": "Hiljutine tegevus",
         "sent": "Saadetud",
         "received": "Laekunud",
-        "sendPayment": "Send Payment",
-        "moveFunds": "Internal Transfer",
+        "sendPayment": "Tee makse",
+        "moveFunds": "Oma kontode vahel",
         "sendTo": "Send To",
-        "sendFunds": "Send funds",
-        "sendToAddress": "Send to address",
+        "sendFunds": "Saada raha",
+        "sendToAddress": "Saada aadressile",
         "scanQrOrPaste": "Scan a QR code or paste an Address",
-        "moveFundsBetweenAccounts": "Move funds between wallets",
+        "moveFundsBetweenAccounts": "Liiguta rahakottide vahel vahendeid",
         "sendTokensToAddress": "Send tokens to an address",
-        "manageAccount": "Manage Wallet",
+        "manageAccount": "Halda rahakotti",
         "customizeAcount": "Customize your wallet",
         "account": "Rahakott",
         "sendingToAddress": "Saadan aadressile",
         "amount": "Kogus",
         "addAddress": "Lisa aadress",
-        "reference": "Reference",
+        "reference": "Viide",
         "from": "Kontolt",
         "to": "Kontole",
         "receiveFunds": "Receive Funds",
         "myAddress": "Minu aadress",
         "shareAddress": "Jaga aadressi",
         "yourAddress": "Sinu aadress",
-        "newRemainder": "New Remainder",
-        "remainder": "Remainder",
+        "newRemainder": "Uus jääk",
+        "remainder": "Jääk",
         "generateNewAddress": "Loo uus aadress",
         "copyAddress": "Kopeeri aadress",
         "import": "Impordi",
@@ -786,17 +786,17 @@
         "accountBalance": "Wallet Balance",
         "incoming": "Sissetulev",
         "outgoing": "Väljaminev",
-        "totalIn": "Total in",
-        "totalOut": "Total out",
+        "totalIn": "Kokku sisse",
+        "totalOut": "Kokku välja",
         "accounts": "Rahakotid",
         "myAccounts": "Minu rahakotid",
         "automaticNodeSelection": "Automatic node selection",
         "manualNodeSelection": "Manual node selection",
         "profiles": "Profiilid",
-        "developerProfile": "Developer Profile",
+        "developerProfile": "Arendaja profiil",
         "developerProfileDescription": "Allows you to connect to testnets",
-        "dev": "Dev",
-        "createAccount": "Create a Wallet",
+        "dev": "Arendaja",
+        "createAccount": "Loo rahakott",
         "accountName": "Rahakoti nimi",
         "latestTransactions": "Viimased tehingud",
         "transactions": "Tehingud",
@@ -807,34 +807,34 @@
         "help": "Abi",
         "you": "Sina",
         "messageId": "Sõnumi ID",
-        "inputAddress": "Send Address",
-        "receiveAddress": "Receive Address",
-        "newAddress": "New Address",
+        "inputAddress": "Saatja aadress",
+        "receiveAddress": "Saaja aadress",
+        "newAddress": "Uus aadress",
         "date": "Kuupäev",
-        "status": "Status",
+        "status": "Olek",
         "confirmed": "Kinnitatud",
         "pending": "Ootel",
-        "noAccounts": "You have no wallets, please create one.",
-        "loadingAccounts": "Loading, please wait...",
+        "noAccounts": "Sul ei ole rahakotte, palun loo üks.",
+        "loadingAccounts": "Laadimine, palun oodake...",
         "addProfile": "Lisa profiil",
         "noRecentHistory": "Lähiajalugu puudub",
         "firstSync": "Syncing history, this may take a while...",
         "transferSyncing": "Syncing wallet",
         "transferSelectingInputs": "Selecting inputs",
         "transferRemainderAddress": "Generating remainder address",
-        "transferPreparedTransaction": "Preparing transaction",
-        "transferSigning": "Signing the transaction",
+        "transferPreparedTransaction": "Tehingu ettevalmistamine",
+        "transferSigning": "Tehingu allkirjastamine",
         "transferPow": "Performing PoW",
         "transferBroadcasting": "Broadcasting transaction",
-        "transferComplete": "Transfer complete",
+        "transferComplete": "Ülekanne tehtud",
         "generatingReceiveAddress": "Generating receive address",
-        "creatingAccount": "Creating wallet, please wait...",
-        "updatingAccount": "Updating wallet, please wait...",
+        "creatingAccount": "Rahakoti loomine, palun oodake...",
+        "updatingAccount": "Rahakoti uuendamine, palun oodake...",
         "accountSyncing": "Wallet is syncing",
         "accountSyncComplete": "Wallet sync complete",
-        "passwordUpdating": "Updating password...",
-        "passwordSuccess": "Updated password successfully",
-        "passwordFailed": "Updating password failed",
+        "passwordUpdating": "Uuendan salasõna...",
+        "passwordSuccess": "Salasõna edukalt uuendatud",
+        "passwordFailed": "Salasõna uuendamine ebaõnnestus",
         "syncingAccounts": "Syncing wallets...",
         "exportingStronghold": "Exporting Stronghold...",
         "exportingStrongholdSuccess": "Exported Stronghold successfully",
@@ -842,32 +842,33 @@
         "pinCodeUpdating": "Updating PIN code...",
         "pinCodeSuccess": "Updated PIN code successfully",
         "pinCodeFailed": "Updating PIN code failed",
-        "passwordStrength": "Password strength",
+        "passwordStrength": "Salasõna tugevus",
         "passwordStrength0": "Halb",
         "passwordStrength1": "Kehv",
         "passwordStrength2": "Nõrk",
         "passwordStrength3": "Keskmine",
         "passwordStrength4": "Tugev",
-        "creatingProfile": "Creating profile, please wait...",
-        "fundMigration": "Fund migration",
+        "creatingProfile": "Profiili loomine, palun oota...",
+        "fundMigration": "Vahendite ületoomine",
         "accountRemoved": "This wallet is hidden. Unhide it to perform transfers.",
         "receivingTo": "Receiving to {account}",
-        "sendingFrom": "Sending from {account}",
-        "receivedTo": "Received to {account}",
-        "sentFrom": "Sent from {account}",
+        "sendingFrom": "Saadan kontolt {account}",
+        "receivedTo": "Saabus kontole {account}",
+        "sentFrom": "Saadetud kontolt {account}",
         "receiving": "Receiving",
         "sending": "Sending",
         "legacyNetwork": "Legacy Network",
-        "capsLock": "Caps Lock is on",
-        "version": "Versioon {version}"
+        "capsLock": "Caps Lock on sees",
+        "version": "Versioon {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "Täna",
         "yesterday": "Eile",
         "daysAgo": "{time, plural, one {# päev} other {# päev}} tagasi",
         "weeksAgo": "{time, plural, one {# nädal} other {# nädalat}} tagasi",
-        "monthsAgo": "{time, plural, one {# month} other {# months}} ago",
-        "yearsAgo": "{time, plural, one {# year} other {# years}} ago"
+        "monthsAgo": "{time, plural, one {# kuu} other {# kuud}} tagasi",
+        "yearsAgo": "{time, plural, one {# aasta} other {# aastat}} tagasi"
     },
     "notifications": {
         "valueTx": "Receiving {{value}} to {{account}}",
@@ -875,13 +876,13 @@
         "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
         "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
         "failed": "Outgoing {{value}} from {{account}} has failed",
-        "downloadingUpdate": "Downloading update",
+        "downloadingUpdate": "Uuenduse allalaadimine",
         "updateReady": "Uuendus valmis",
         "updateError": "An error occurred during the update, please try again",
-        "restartInstall": "Restart to install",
+        "restartInstall": "Taaskäivita paigaldamiseks",
         "calcMinutesRemaining": "Calculating minutes remaining...",
-        "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}",
-        "copiedToClipboard": "Copied to clipboard",
+        "minutesRemaining": "{minutes, plural, one {1 minut jäänud} other {# minutit jäänud}}",
+        "copiedToClipboard": "Kopeeritud lõikelauale",
         "accountsSynchronized": "Wallet synchronization complete",
         "fundsAvailableSoon": "Your funds will become available shortly"
     },
@@ -892,20 +893,20 @@
         },
         "password": {
             "doNotMatch": "Salasõnad ei ühti.",
-            "tooWeak": "Your new password is too weak.",
-            "row": "Straight rows of keys are easy to guess.",
-            "pattern": "Short keyboard patterns are easy to guess.",
-            "names": "Common names and surnames are easy to guess.",
-            "repeats": "Repeats like 'aaa' are easy to guess.",
-            "repeats2": "Repeats like 'abcabcabc' are easy to guess.",
-            "sequence": "Sequences of characters are easy to guess.",
-            "years": "Recent years are easy to guess.",
-            "dates": "Dates are easy to guess.",
-            "common": "This is a very common password.",
-            "similar": "This is similar to a common password.",
-            "word": "A single word is easy to guess.",
-            "incorrect": "Your password is incorrect.",
-            "length": "Your password can't be longer than {length, plural, one {1 character} other {# characters}}."
+            "tooWeak": "Sinu uus salasõna on liiga nõrk.",
+            "row": "Lihtsaid klahvide ridu on lihtne ära arvata.",
+            "pattern": "Lühikesi klaviatuurimustreid on lihtne ära arvata.",
+            "names": "Levinud nimesid ja perekonnanimesid on lihtne ära arvata.",
+            "repeats": "Kordusi nagu 'aaa' on lihtne ära arvata.",
+            "repeats2": "Kordusi nagu 'abcabcabc' on lihtne ära arvata.",
+            "sequence": "Tähemärkide järjestusi on lihtne ära arvata.",
+            "years": "Hiljutisi aastaid on lihtne ära arvata.",
+            "dates": "Kuupäevi on lihtne ära arvata.",
+            "common": "See on väga levinud salasõna.",
+            "similar": "See sarnaneb levinud salasõnadele.",
+            "word": "Ühte sõna on lihtne ära arvata.",
+            "incorrect": "Sinu salasõna on vale.",
+            "length": "Sinu salasõna ei saa olla pikem kui {length, plural, one {1 tähemärk} other {# tähemärki}}."
         },
         "pincode": {
             "length": "Sinu PIN peab olema {length, plural, one {1 tähemärk} other {# tähemärki}} pikk.",
@@ -917,10 +918,10 @@
             "empty": "Sa pead olema kasutanud oma viimast rahakotti enne kui saad uue luua.",
             "notEmpty": "Sa pead enne selle rahakoti kustutamist oma kontojäägi üle kandma.",
             "duplicate": "Selle nimega rahakott on juba olemas.",
-            "tilde": "A profile name can't start with the '~' character.",
+            "tilde": "Profiilinimi ei saa alata tähemärgiga '~'.",
             "control": "A profile name can't contain a control character.",
-            "startDot": "A profile name can't start with the '.' character.",
-            "chars": "A profile name can't contain the following characters <>:\"/\\|?*",
+            "startDot": "Profiilinimi ei saa alata tähemärgiga '.'.",
+            "chars": "Profiilinimi ei tohi sisalda järgnevaid tähemärke <>:\"/\\|?*",
             "index": "Your account index must be a number between 0 and 2,147,483,647.",
             "page": "Your account page must be a number between 0 and 2,147,483,647.",
             "syncing": "There was an error syncing your wallets."
@@ -929,16 +930,16 @@
             "addressLength": "Aadressid peaksid olema {length, plural, one {1 tähemärgi} other {# tähemärgi}} pikkused.",
             "amountTooHigh": "See on suurem kui sinu kasutatav kontojääk.",
             "amountNoFloat": "If units are `i` you cannot use decimal places.",
-            "amountInvalidFormat": "The amount appears to be an invalid number.",
+            "amountInvalidFormat": "Kogus näib olevat vale.",
             "amountZero": "Kogus peab olema suurem kui 0.",
             "wrongAddressPrefix": "Aadressid algavad eesliitega {prefix}.",
             "wrongAddressFormat": "Aadress ei ole korrektses vormingus.",
             "invalidAddress": "See aadress pole korrektne.",
-            "insufficientFunds": "This wallet has insufficient funds.",
+            "insufficientFunds": "Selles rahakotis pole piisavalt vahendeid.",
             "noToAccount": "You have not selected a wallet to send the funds to.",
-            "sendingDust": "You cannot send less than 1 Mi.",
-            "leavingDust": "You cannot leave less than 1 Mi on your address.",
-            "cancelled": "The transaction was cancelled.",
+            "sendingDust": "Sa ei saa saata vähem kui 1 Mi.",
+            "leavingDust": "Sa ei saa jätta oma aadressile vähem kui 1 Mi.",
+            "cancelled": "Tehing katkestati.",
             "transaction": "There was an error sending your transaction. Please try again."
         },
         "node": {
