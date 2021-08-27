@@ -191,7 +191,7 @@
 </style>
 
 <dropdown-input
-    class="relative {contentWidth ? "" : "w-full" } {classes}"
+    class="relative {contentWidth ? '' : 'w-full'} {classes}"
     on:click={(e) => {
         e.stopPropagation()
         toggleDropDown()
@@ -233,7 +233,7 @@
                     class="relative flex items-center p-4 w-full whitespace-nowrap
                         {item[valueKey] === value && 'bg-gray-100 dark:bg-gray-700 dark:bg-opacity-20'} 
                         hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20
-                        focus:bg-gray-200 dark:focus:bg-gray-800 dark:focus:bg-opacity-20"
+                        focus:bg-gray-200 dark:focus:bg-gray-600 dark:focus:bg-opacity-20"
                     id={item[valueKey]}
                     on:click={() => onSelect(item)}
                     on:focus={() => focusItem(item[valueKey])}
