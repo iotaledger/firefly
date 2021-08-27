@@ -8,11 +8,11 @@
         CurrencyTypes,
         exchangeRates,
         formatCurrency,
+        isFiatCurrency,
     } from 'shared/lib/currency'
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile } from 'shared/lib/profile'
-    import { formatUnitPrecision } from 'shared/lib/units'
-    import { get } from 'svelte/store'
+    import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
 
     export let locale
     export let internal = false
@@ -21,11 +21,16 @@
     export let unit = Unit.i
     export let onConfirm = () => {}
 
-    let displayedAmount = `${formatUnitPrecision(amount, unit)} (${localConvertToFiat(amount)})`
+    let displayAmount = getFormattedAmount()
 
-    function localConvertToFiat(amount) {
-        const activeCurrency = get(activeProfile)?.settings.currency ?? AvailableExchangeRates.USD
-        return formatCurrency(convertToFiat(amount, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[activeCurrency]))
+    function getFormattedAmount() {
+        const isFiat = isFiatCurrency(unit)
+        const currency = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
+
+        let iotaAmount = isFiat ? formatUnitBestMatch(amount) : formatUnitPrecision(amount, unit)
+        let fiatAmount = formatCurrency(convertToFiat(amount, $currencies[CurrencyTypes.USD], $exchangeRates[currency]), currency)
+
+        return isFiat ? `${fiatAmount} (${iotaAmount})` : `${iotaAmount} (${fiatAmount})`
     }
 
     function handleCancelClick() {
@@ -51,7 +56,7 @@
     </div>
     <div class="w-full text-center my-9 px-10">
         <Text type="h4" highlighted classes="mb-3">
-            {locale('popups.transaction.body', { values: { amount: displayedAmount } })}
+            {locale('popups.transaction.body', { values: { amount: displayAmount } })}
         </Text>
         <Text type={internal ? 'p' : 'pre'} secondary bigger>{to}</Text>
     </div>
