@@ -859,7 +859,8 @@
         "sending": "Tê şandin",
         "legacyNetwork": "Tora Kevn",
         "capsLock": "Caps Lock is on",
-        "version": "Version {version}"
+        "version": "Version {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "Evro",

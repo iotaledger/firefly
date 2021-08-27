@@ -859,7 +859,8 @@
         "sending": "轉帳中",
         "legacyNetwork": "舊版網絡",
         "capsLock": "大寫鎖定已啟用",
-        "version": "版本 {version}"
+        "version": "版本 {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "今天",
