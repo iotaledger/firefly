@@ -48,10 +48,11 @@ const errorMessages: {
     'UrlError': 'error.node.invalid',
     'NodesNotSynced': 'error.node.unsynced',
     // Ledger
-    'LedgerMiscError': 'error.global.generic',
-    'LedgerDongleLocked': 'error.global.generic',
-    'LedgerDeniedByUser': 'error.global.generic',
-    'LedgerDeviceNotFound': 'error.global.generic',
+    'LedgerMiscError': 'error.ledger.generic',
+    'WrongLedgerSeedError': 'error.ledger.mnemonicMismatch',
+    'LedgerDongleLocked': 'error.ledger.locked',
+    'LedgerDeniedByUser': 'error.send.cancelled',
+    'LedgerDeviceNotFound': 'error.ledger.notFound',
     'LedgerEssenceTooLarge': 'error.global.generic',
     // Dust output
     'DustError': 'error.send.sendingDust',

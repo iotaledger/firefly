@@ -2,7 +2,9 @@
     import { Animation, Button, OnboardingLayout, SpentAddress, Text } from 'shared/components'
     import { spentAddressesFromBundles, toggleMiningSelection } from 'shared/lib/migration'
     import { closePopup, openPopup } from 'shared/lib/popup'
+    import { walletSetupType } from 'shared/lib/router'
     import { RiskLevel } from 'shared/lib/typings/migration'
+    import { SetupType } from 'shared/lib/typings/routes'
     import { createEventDispatcher } from 'svelte'
 
     export let locale
@@ -20,6 +22,9 @@
         .sort((a, b) => b.risk - a.risk)
 
     let selectedAddresses = addresses.filter((address) => address.selectedToMine === true)
+
+    let legacyLedger = $walletSetupType === SetupType.TrinityLedger
+    $: animation = legacyLedger ? 'ledger-migrate-desktop' : 'migrate-desktop'
 
     function onAddressClick(address) {
         var index = selectedAddresses.findIndex((_address) => _address.id === address.id)
@@ -60,7 +65,12 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout allowBack={false} classes="relative">
+    <OnboardingLayout
+        allowBack={false}
+        {locale}
+        classes="relative"
+        showLedgerProgress={legacyLedger}
+        showLedgerVideoButton={legacyLedger}>
         <div slot="leftpane__content" class="h-full flex flex-col flex-wrap">
             <Text type="h2" classes="mb-5">{locale('views.securityCheckCompleted.title')}</Text>
             <Text type="p" secondary classes="mb-4">{locale('views.securityCheckCompleted.body1')}</Text>
@@ -85,7 +95,7 @@
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            <Animation animation="migrate-desktop" />
+            <Animation {animation} />
         </div>
     </OnboardingLayout>
 {/if}

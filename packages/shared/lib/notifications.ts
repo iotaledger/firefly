@@ -1,30 +1,18 @@
-import { appSettings } from 'shared/lib/appSettings';
-import { generateRandomId } from 'shared/lib/utils';
-import { get, writable } from 'svelte/store';
-import { Electron } from './electron';
+import { appSettings } from 'shared/lib/appSettings'
+import { generateRandomId } from 'shared/lib/utils'
+import { get, writable } from 'svelte/store'
+import { Electron } from './electron'
+
+import type { NotificationData, NotificationType } from './typings/notification'
 
 const NOTIFICATION_TIMEOUT_DEFAULT = 5000
 export const NOTIFICATION_TIMEOUT_NEVER = -1
 
-export type NotificationAction = {
-    label: string
-    isPrimary?: boolean
-    callback?: (notificationData: NotificationData, actionIndex: number) => void
-}
-
-export type NotificationData = {
-    type: 'info' | 'warning' | 'error'
-    message: string
-    progress?: number
-    subMessage?: string
-    actions?: NotificationAction[]
-    id?: string
-    ts?: number
-    timeout?: number
-    contextData?: any
-}
-
 export const displayNotifications = writable<Array<NotificationData>>([])
+
+export function isNewNotification(type: NotificationType): boolean {
+    return get(displayNotifications).filter((nd: NotificationData) => nd.type === type).length === 0
+}
 
 export function showSystemNotification(notificationData: NotificationData): string {
     return showNotification(notificationData, true)
