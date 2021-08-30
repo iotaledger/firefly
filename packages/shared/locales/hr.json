@@ -859,7 +859,8 @@
         "sending": "Slanje u tijeku",
         "legacyNetwork": "Stara mreža",
         "capsLock": "Caps Lock je uključen",
-        "version": "Verzija {version}"
+        "version": "Verzija {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "Danas",

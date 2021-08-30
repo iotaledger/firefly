@@ -859,7 +859,8 @@
         "sending": "Gönderiliyor",
         "legacyNetwork": "Eski Ağ",
         "capsLock": "Caps Lock açık",
-        "version": "Sürüm {version}"
+        "version": "Sürüm {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "Bugün",

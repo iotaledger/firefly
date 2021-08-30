@@ -22,11 +22,10 @@
 
     // TODO: ledger, The operand of a 'delete' operator cannot be a read-only property
     $: if (!$isSoftwareProfile) {
-        delete securitySettings.ChangePassword
         delete securitySettings.ExportStronghold
+        delete securitySettings.ChangePassword
     }
     $: if (!$isLedgerProfile) {
-        delete advancedSettings.DisplayBip32Path
         delete advancedSettings.MigrateLedgerIndex
     }
 </script>

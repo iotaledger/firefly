@@ -82,6 +82,29 @@ export enum ImportType {
     FireflyLedger = 'fireflyLedger',
 }
 
+/**
+ * Profile types
+ */
+export enum ProfileType {
+    Software = 'Software',
+    Ledger = 'Ledger',
+    LedgerSimulator = 'LedgerSimulator'
+}
+
+/**
+ * Profile import types
+ */
+export enum ImportType {
+    Seed = 'seed',
+    Mnemonic = 'mnemonic',
+    File = 'file',
+    SeedVault = 'seedvault',
+    Stronghold = 'stronghold',
+    Ledger = 'ledger',
+    TrinityLedger = 'trinityLedger',
+    FireflyLedger = 'fireflyLedger',
+}
+
 export const activeProfileId = writable<string | null>(null)
 
 export const profiles = persistent<Profile[]>('profiles', [])
@@ -105,7 +128,15 @@ export const activeProfile: Readable<Profile | undefined> = derived(
 )
 
 activeProfileId.subscribe((profileId) => {
-    Electron.updateActiveProfile(profileId)
+    Electron?.updateActiveProfile(profileId)
+})
+
+export const isSoftwareProfile: Readable<Boolean> = derived(activeProfile, $activeProfile => {
+    return $activeProfile?.type === ProfileType.Software
+})
+
+export const isLedgerProfile: Readable<Boolean> = derived(activeProfile, $activeProfile => {
+    return $activeProfile?.type === ProfileType.Ledger || $activeProfile?.type === ProfileType.LedgerSimulator
 })
 
 export const isSoftwareProfile: Readable<Boolean> = derived(activeProfile, $activeProfile => {

@@ -859,7 +859,8 @@
         "sending": "Αποστολή σε εξέλιξη",
         "legacyNetwork": "Παλαιό Δίκτυο",
         "capsLock": "Το Caps Lock είναι ενεργοποιημένο",
-        "version": "Έκδοση {version}"
+        "version": "Έκδοση {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "Σήμερα",

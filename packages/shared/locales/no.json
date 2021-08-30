@@ -18,8 +18,8 @@
             "profileName": "Profilnavn",
             "body1": "Du kan opprette flere brukerprofiler for å organisere lommebøkene dine og forbedre personvern.",
             "body2": {
-                "first": "For now, let's start with your first profile name.",
-                "nonFirst": "For now, let's start with your profile name."
+                "first": "La oss nå starte med det første profilnavnet ditt.",
+                "nonFirst": "La oss nå starte med profilnavnet ditt."
             },
             "addMore": "Du kan legge til flere profiler senere."
         },
@@ -859,7 +859,8 @@
         "sending": "Sender",
         "legacyNetwork": "Gammelt Nettverk",
         "capsLock": "Caps Lock er på",
-        "version": "Versjon {version}"
+        "version": "Versjon {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "I dag",

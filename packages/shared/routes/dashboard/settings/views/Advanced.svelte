@@ -286,12 +286,6 @@
                 {locale('views.settings.migrateLedgerIndex.title')}
             </Button>
         </section>
-        <HR classes="pb-5 mt-5 justify-center" />
-        <section id="displayBip32Path" class="w-3/4">
-            <Text type="h4" classes="mb-3">{locale('views.settings.displayBip32Path.title')}</Text>
-            <Text type="p" secondary classes="mb-5">{locale('views.settings.displayBip32Path.description')}</Text>
-            <Toggle active={$activeProfile.settings.displayBip32Path} onClick={() => handleDisplayBip32PathClick()} />
-        </section>
     {/if}
     <!-- TODO: Implement state export -->
     <!-- {#if $loggedIn}

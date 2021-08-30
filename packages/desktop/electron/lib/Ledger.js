@@ -94,12 +94,7 @@ class Ledger {
 
                     this.iota = new Iota(this.transport);
 
-                    // TODO: Remove this before release.
-                    // This is temporarily added for testing to ensure that testers do not 
-                    // end up using the same address space as the one with their actual funds on. 
-                    const testAccountIndex = index + 0x1e4d832a;
-
-                    await this.iota.setActiveSeed(`44'/4218'/${testAccountIndex}'/${page}'`, security || 2);
+                    await this.iota.setActiveSeed(`44'/4218'/${index}'/${page}'`, security || 2);
 
                     clearTimeout(timeout);
 

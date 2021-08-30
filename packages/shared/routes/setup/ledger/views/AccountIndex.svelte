@@ -6,7 +6,6 @@
     import { popupState } from 'shared/lib/popup'
     import { onDestroy, createEventDispatcher } from 'svelte'
     import { LedgerAppName } from 'shared/lib/typings/ledger'
-    import { MAX_BIP32_INDEX, MIN_BIP32_INDEX } from 'shared/lib/bip32'
 
     export let locale
     export let mobile
@@ -15,6 +14,9 @@
     let expert = false
     let showInfo = false
     let infoTimeout
+
+    let min = 0
+    let max = 2147483647
 
     let index = 0
     let page = 0
@@ -36,7 +38,7 @@
     const dispatch = createEventDispatcher()
 
     function checkNumber(n: number): number {
-        if (!isWithinRange(n)) n = Math.min(Math.max(n, MIN_BIP32_INDEX), MAX_BIP32_INDEX)
+        if (!isWithinRange(n)) n = Math.min(Math.max(n, min), max)
 
         return n
     }
@@ -50,7 +52,7 @@
     }
 
     function isWithinRange(n: number): boolean {
-        return n >= MIN_BIP32_INDEX && n <= MAX_BIP32_INDEX
+        return n >= min && n <= max
     }
 
     function handleContinueClick() {
@@ -107,8 +109,8 @@
                     <Text type="p" secondary classes="mb-2">{locale('views.selectLedgerAccountIndex.accountIndex')}</Text>
                     <Number
                         bind:value={index}
-                        min={MIN_BIP32_INDEX}
-                        max={MAX_BIP32_INDEX}
+                        {min}
+                        {max}
                         disabled={busy}
                         error={!isValidAccountIndex ? locale('error.account.index') : ''} />
                 </div>
@@ -117,8 +119,8 @@
                         <Text type="p" secondary classes="mb-2">{locale('views.selectLedgerAccountIndex.accountPage')}</Text>
                         <Number
                             bind:value={page}
-                            min={MIN_BIP32_INDEX}
-                            max={MAX_BIP32_INDEX}
+                            {min}
+                            {max}
                             disabled={busy}
                             error={!isValidAccountPage ? locale('error.account.page') : ''} />
                     </div>

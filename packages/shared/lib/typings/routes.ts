@@ -109,7 +109,6 @@ export enum AdvancedSettings {
     ErrorLog = 'errorLog',
     Diagnostics = 'diagnostics',
     MigrateLedgerIndex = 'migrateLedgerIndex',
-    DisplayBip32Path = 'displayBip32Path',
     // TODO: Implement and enable
     //StateExport = 'stateExport',
 }

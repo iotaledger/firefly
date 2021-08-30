@@ -9,7 +9,9 @@
         "patch-package": "^6.2.2"
     },
     "scripts": {
-        "postinstall": "patch-package"
+        "postinstall": "patch-package",
+        "test": "yarn test-shared",
+        "test-shared": "cd packages/shared && yarn test"
     },
     "resolutions": {
         "lodash": ">=4.17.21"
