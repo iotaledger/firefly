@@ -38,7 +38,7 @@ There are a few options to install Firefly:
 
 ## Contributing
 
-Help out the Firefly project by filing a [bug report](https://github.com/iotaledger/firefly/issues/new?assignees=&labels=alphatesting&template=alphatest_report.md&title=), making a [feature request](https://github.com/iotaledger/firefly/issues/new?assignees=&labels=&template=feature_request.md) or opening a [pull request](https://github.com/iotaledger/firefly/pulls/).
+Help out the Firefly project by filing a [bug report](https://github.com/iotaledger/firefly/issues/new?assignees=&labels=bug&template=bug_report.yml), making a [feature request](https://github.com/iotaledger/firefly/issues/new?assignees=&labels=feat&template=feature_request.md) or opening a [pull request](https://github.com/iotaledger/firefly/pulls/).
 See the [contribution guidelines](https://github.com/iotaledger/firefly/blob/develop/.github/CONTRIBUTING.md) for more.
 
 ## Joining the discussion
