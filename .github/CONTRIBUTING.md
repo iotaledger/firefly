@@ -1,8 +1,7 @@
-# Contribute to wallet
+# Contribute to Firefly
 
-This document describes how to contribute to wallet.
-
-We encourage everyone with knowledge of IOTA technology to contribute.
+This document describes how to contribute to Firefly.
+We encourage everyone with knowledge and passion in IOTA technology to do so.
 
 Thanks! :heart:
 
@@ -95,7 +94,7 @@ Otherwise, your feature may not be approved at all.
 
 ### Building a new feature
 
-To build a new feature, check out a new branch based on the `master` branch, and be sure to document any public-facing APIs, using Rust code comments.
+To build a new feature, check out a new branch based on the `develop` branch, and be sure to document any public-facing APIs, using Rust code comments.
 </details>
 
 <br>
