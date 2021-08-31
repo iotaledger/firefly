@@ -7,7 +7,22 @@ on:
       - 'develop'
 
 jobs:
-  all:
+  rust:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: "Setup Rust (+ Toolchain)"
+        run: "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
+        run: |
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+          rustup update nightly
+
+      - name: "Format"
+        working-directory: packages/backend
+        run: cargo +nightly fmt
+
+  js:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
