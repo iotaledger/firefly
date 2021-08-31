@@ -17,10 +17,11 @@
     "scripts": {
         "format": "prettier -w **/*.{ts,js,json,scss,css}",
         "format-check": "prettier -c **/*.{ts,js,json,scss,css}",
-        "lint": "eslint .",
-        "lint-debug": "eslint . --cache --debug",
+        "lint": "yarn lint:rust && yarn lint:js",
+        "lint:js": "eslint . --cache",
+        "lint:rust": "cd packages/backend && cargo +nightly fmt",
         "postinstall": "patch-package",
-        "pre-commit": "yarn format-check && yarn lint-debug",
+        "pre-commit": "yarn format-check && yarn lint",
         "prepare": "husky install",
         "test": "yarn test-shared",
         "test-shared": "cd packages/shared && yarn test"
