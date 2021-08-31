@@ -14,7 +14,7 @@ jobs:
 
       - name: "Setup Rust (+ Toolchain)"
         run: |
-          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -y
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -y | sh
           rustup update nightly
 
       - name: "Format"
