@@ -1,4 +1,4 @@
-name: Firefly CI
+name: Format & Lint
 
 on:
   pull_request:
@@ -7,7 +7,7 @@ on:
       - 'develop'
 
 jobs:
-  linting:
+  check:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -20,8 +20,8 @@ jobs:
       - name: Install Dependencies
         run: yarn --ignore-scripts
 
-      - name: Check Formatting
+      - name: Format
         run: yarn format-check
 
-      - name: Check Linting
+      - name: Lint
         run: yarn lint
