@@ -50,7 +50,9 @@
         transferState,
         updateBalanceOverview,
         wallet,
-        addMessagesPair
+        addMessagesPair,
+        AccountColors,
+        AccountPatterns,
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
     import { derived, Readable, Writable } from 'svelte/store'
@@ -68,6 +70,8 @@
             deepLinkRequestActive.set(false)
         }
     }
+    const color = AccountColors.Default
+    const pattern = AccountPatterns.Default
 
     const accountsBalanceHistory = derived([accounts, priceData], ([$accounts, $priceData]) =>
         getAccountsBalanceHistory($accounts, $priceData)
@@ -131,17 +135,6 @@
 
         return [..._migratedTransactions, ...getTransactions($viewableAccounts)]
     })
-
-    $: if ($accounts) {
-        accounts.update(_accounts => _accounts.map(account => {
-            const accountTheme = $accountsTheme.find(e => e.accountId === account.id)
-            if (accountTheme) {
-                const { color, pattern } = accountTheme
-                return { ...account, color, pattern }
-            }
-            return account
-        }))
-    }
 
     setContext<Writable<BalanceOverview>>('walletBalance', balanceOverview)
     setContext<Writable<WalletAccount[]>>('walletAccounts', accounts)
@@ -324,10 +317,10 @@
         }
     }
 
-    async function onCreateAccount(alias: string, color: string, pattern: string, onComplete) {
+    async function onCreateAccount(alias: string, onComplete) {
         const _create = async (): Promise<unknown> => {
             try {
-                const account = await asyncCreateAccount(alias, color, pattern)
+                const account = await asyncCreateAccount(alias)
                 await asyncSyncAccountOffline(account)
 
                 walletRoute.set(WalletRoutes.Init)

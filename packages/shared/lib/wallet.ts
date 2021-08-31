@@ -688,7 +688,7 @@ export const asyncRestoreBackup = (importFilePath: string, password: string): Pr
         })
     })
 
-export const asyncCreateAccount = (alias?: string, color?: string, pattern?: string): Promise<WalletAccount> =>
+export const asyncCreateAccount = (alias?: string): Promise<WalletAccount> =>
     new Promise<WalletAccount>((resolve, reject) => {
         const accounts = get(get(wallet)?.accounts)
         api.createAccount(

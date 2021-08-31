@@ -4,11 +4,12 @@
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccountId, wallet, AccountColors, AccountPatterns } from 'shared/lib/wallet'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
     import { setAccountTheme } from 'shared/lib/accountsTheme'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
 
     export let locale: Locale
+    import { activeProfile } from 'shared/lib/profile'
 
     export let alias
     export let account
@@ -16,16 +17,18 @@
 
     const { accounts } = $wallet
 
+    const activeProfileAccount = $activeProfile.accounts?.find(_account => account.id)
+
     let accountAlias = alias
     let isBusy = false
-    let color = account.color || AccountColors.Default
-    let pattern = account.pattern || AccountPatterns.Default
+    let color = activeProfileAccount?.color || AccountColors.Default
+    let pattern = activeProfileAccount?.pattern || AccountPatterns.Default
 
     // This looks odd but sets a reactive dependency on accountAlias, so when it changes the error will clear
     $: accountAlias, (error = '')
 
     const handleSaveClick = () => {
-        setAccountTheme($selectedAccountId, color, pattern)
+        setAccountTheme($activeProfile, { id: $selectedAccountId, color, pattern })
         const trimmedAccountAlias = accountAlias.trim()
         if (trimmedAccountAlias === alias) {
             selectedAccountId.set(null)

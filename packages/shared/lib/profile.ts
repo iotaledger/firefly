@@ -1,7 +1,7 @@
 import { persistent } from 'shared/lib/helpers'
 import { ledgerSimulator } from 'shared/lib/ledger'
 import { generateRandomId, migrateObjects } from 'shared/lib/utils'
-import { asyncRemoveStorage, destroyActor, getStoragePath, getWalletStoragePath } from 'shared/lib/wallet'
+import { asyncRemoveStorage, destroyActor, getStoragePath, getWalletStoragePath} from 'shared/lib/wallet'
 import { derived, get, Readable, writable } from 'svelte/store'
 import { Electron } from './electron'
 import type { ValuesOf } from './typings/utils'
@@ -14,6 +14,11 @@ import { getOfficialNetworkConfig } from './network'
 import { NetworkConfig, NetworkType } from './typings/network'
 
 export const activeProfileId = persistent<string | null>('activeProfileId', null)
+export interface ProfileAccount {
+    id: string
+    color: string
+    pattern: string
+}
 
 export const profiles = persistent<Profile[]>('profiles', [])
 

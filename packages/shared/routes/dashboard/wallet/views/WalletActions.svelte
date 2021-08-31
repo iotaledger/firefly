@@ -7,7 +7,7 @@
     import type { Locale } from 'shared/lib/typings/i18n'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import type { WalletAccount } from 'shared/lib/typings/wallet'
-    import { selectedAccountId } from 'shared/lib/wallet'
+    import { selectedAccountId, AccountColors, AccountPatterns } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable } from 'svelte/store'
     import { Receive, Send } from '.'
@@ -31,6 +31,8 @@
     function handleCreateClick() {
         walletRoute.set(WalletRoutes.CreateAccount)
     }
+
+    const getActiveProfileAccount = (account) => $activeProfile.accounts?.find(_account => account.id)
 </script>
 
 {#if $walletRoute === WalletRoutes.Init}
@@ -47,8 +49,8 @@
                     class="grid {$viewableAccounts.length === 1 && !$assemblyStakingRewards && !$shimmerStakingRewards ? 'grid-cols-1' : 'grid-cols-2'} auto-rows-max gap-4 flex-auto overflow-y-auto h-1 -mr-2 pr-2 scroll-secondary">
                     {#each $viewableAccounts as account}
                         <AccountTile
-                            color={account.color}
-                            pattern={account.pattern}
+                            color={getActiveProfileAccount(account)?.color || AccountColors.Default}
+                            pattern={getActiveProfileAccount(account)?.pattern || AccountPatterns.Default}
                             name={account.alias}
                             balance={account.balance}
                             balanceEquiv={account.balanceEquiv}
