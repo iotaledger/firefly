@@ -1,13 +1,13 @@
-name: Firefly CI
+name: Test
 
-on:
+on: 
   pull_request:
   push:
     branches:
       - 'develop'
 
 jobs:
-  linting:
+  shared:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -18,10 +18,9 @@ jobs:
           node-version: 12.x
 
       - name: Install Dependencies
+        working-directory: packages/shared
         run: yarn --ignore-scripts
 
-      - name: Format
-        run: yarn format-check
-
-      - name: Lint
-        run: yarn lint
+      - name: Test
+        working-directory: packages/shared
+        run: yarn test:shared

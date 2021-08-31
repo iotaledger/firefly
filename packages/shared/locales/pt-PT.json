@@ -859,7 +859,8 @@
         "sending": "A enviar",
         "legacyNetwork": "Rede Legada",
         "capsLock": "O Caps Lock está ativado",
-        "version": "Versão {version}"
+        "version": "Versão {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "Hoje",

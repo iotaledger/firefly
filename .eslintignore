@@ -27,10 +27,12 @@ packages/mobile/public/
 # Shared (packages/shared)
 packages/shared/assets/
 packages/shared/locales/
+packages/shared/tests/
 !packages/shared/locales/en.json
 
 # Common files and folders
 **/node_modules/
+**/tests/
 
 # ESLint configuration and files
 **/.eslintrc.js

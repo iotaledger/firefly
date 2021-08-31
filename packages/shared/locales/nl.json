@@ -859,7 +859,8 @@
         "sending": "Verzenden",
         "legacyNetwork": "Verouderd netwerk",
         "capsLock": "Caps Lock staat aan",
-        "version": "Versie {version}"
+        "version": "Versie {version}",
+        "unknown": "Onbekend"
     },
     "dates": {
         "today": "Vandaag",
