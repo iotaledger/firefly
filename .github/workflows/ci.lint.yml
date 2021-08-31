@@ -15,8 +15,8 @@ jobs:
       - name: "Setup Rust (+ Toolchain)"
         run: |
           curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -y | sh
-          rustup component add rustfmt --toolchain nightly-x86_64-unknown-linux-gnu
           rustup update nightly
+          rustup component add rustfmt --toolchain nightly-x86_64-unknown-linux-gnu
 
       - name: "Format"
         working-directory: packages/backend
