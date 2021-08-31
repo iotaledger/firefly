@@ -859,7 +859,8 @@
         "sending": "发送",
         "legacyNetwork": "旧的网络",
         "capsLock": "大写锁定键已开启",
-        "version": "版本 {version}"
+        "version": "版本 {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "今日",
