@@ -16,6 +16,7 @@ jobs:
         run: |
           curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -y | sh
           rustup update nightly
+          rustup component add rustfmt
 
       - name: "Format"
         working-directory: packages/backend
