@@ -5,11 +5,6 @@
         "baseUrl": "./",
         "lib": ["DOM", "ESNext"]
     },
-    "include": [
-        "./lib"
-    ],
-    "exclude": [
-        "**/node_modules",
-        "**/tests"
-    ]
+    "include": ["./lib"],
+    "exclude": ["**/node_modules", "**/tests"]
 }
