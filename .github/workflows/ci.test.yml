@@ -18,9 +18,7 @@ jobs:
           node-version: 12.x
 
       - name: Install Dependencies
-        working-directory: packages/shared
         run: yarn --ignore-scripts
 
       - name: Test
-        working-directory: packages/shared
         run: yarn test:shared
