@@ -1,9 +1,8 @@
 import { Unit } from '@iota/unit-converter'
 import { convertToFiat, currencies, exchangeRates } from 'shared/lib/currency'
 import { localize } from 'shared/lib/i18n'
-import { activeProfile, updateProfile } from 'shared/lib/profile'
+import { activeProfile, updateProfile, getColor } from 'shared/lib/profile'
 import { formatUnitPrecision } from 'shared/lib/units'
-import type { WalletAccount } from 'shared/lib/wallet'
 import { isSelfTransaction, wallet, AccountColors } from 'shared/lib/wallet'
 import { formatDate } from 'shared/lib/i18n'
 import { derived, get, writable } from 'svelte/store'
@@ -119,9 +118,9 @@ export const getAccountActivityData = (
         data: [],
         tooltips: [],
         label: localize('general.incoming'),
-        color: account.color || 'blue',
+        color: account.color || AccountColors.Default,
     } // TODO: profile colors
-    const outgoing: ChartData = { data: [], tooltips: [], label: localize('general.outgoing'), color: account.color || AccountColors.Default } // TODO: profile colors
+    const outgoing: ChartData = { data: [], tooltips: [], label: localize('general.outgoing'), color: AccountColors.Default } // TODO: profile colors
     const labels: string[] = []
     const messages: Message[] =
         account.messages

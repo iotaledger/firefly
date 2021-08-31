@@ -2,7 +2,7 @@
     import { AccountTile, Button, Text } from 'shared/components'
     import { assemblyStakingRewards, shimmerStakingRewards } from 'shared/lib/participation/stores'
     import { StakingAirdrop } from 'shared/lib/participation/types'
-    import { activeProfile } from 'shared/lib/profile'
+    import { activeProfile, getColor, getPattern } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import type { Locale } from 'shared/lib/typings/i18n'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
@@ -31,8 +31,6 @@
     function handleCreateClick() {
         walletRoute.set(WalletRoutes.CreateAccount)
     }
-
-    const getActiveProfileAccount = (account) => $activeProfile.accounts?.find(_account => account.id)
 </script>
 
 {#if $walletRoute === WalletRoutes.Init}
@@ -49,8 +47,8 @@
                     class="grid {$viewableAccounts.length === 1 && !$assemblyStakingRewards && !$shimmerStakingRewards ? 'grid-cols-1' : 'grid-cols-2'} auto-rows-max gap-4 flex-auto overflow-y-auto h-1 -mr-2 pr-2 scroll-secondary">
                     {#each $viewableAccounts as account}
                         <AccountTile
-                            color={getActiveProfileAccount(account)?.color || AccountColors.Default}
-                            pattern={getActiveProfileAccount(account)?.pattern || AccountPatterns.Default}
+                            color={getColor($activeProfile, account.id)}
+                            pattern={getPattern($activeProfile, account.id)}
                             name={account.alias}
                             balance={account.balance}
                             balanceEquiv={account.balanceEquiv}

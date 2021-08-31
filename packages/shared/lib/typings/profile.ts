@@ -69,7 +69,9 @@ export enum ImportType {
     TrinityLedger = 'trinityLedger',
     FireflyLedger = 'fireflyLedger',
 }
-
+/**
+ * Profile account settings
+ */
 export interface ProfileAccount {
     id: string
     color: string

@@ -4,8 +4,8 @@
     import { Icon, Text } from 'shared/components'
     import { truncateString } from 'shared/lib/helpers'
     import { formatDate } from 'shared/lib/i18n'
-    import { Locale } from 'shared/lib/typings/i18n'
     import type { Payload } from 'shared/lib/typings/message'
+    import type { Locale } from 'shared/lib/typings/i18n'
     import { ParticipationAction } from 'shared/lib/participation/types'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import {
@@ -16,9 +16,10 @@
         getMilestoneMessageValue,
         receiverAddressesFromTransactionPayload,
         sendAddressFromTransactionPayload,
-        isParticipationPayload
+        isParticipationPayload,
+        AccountColors,
     } from 'shared/lib/wallet'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
 
     export let locale: Locale
 
@@ -80,7 +81,7 @@
                 if (includeFullSender) {
                     accountAlias = acc.alias
                 }
-                initialsColor = acc.color
+                initialsColor = AccountColors.Default
             } else {
                 // We can't find the address in our accounts so just display the abbreviated address
                 if (includeFullSender) {

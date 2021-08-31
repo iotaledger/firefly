@@ -116,8 +116,6 @@ export interface WalletAccount extends Account {
     rawIotaBalance: number;
     balance: string;
     balanceEquiv: string;
-    color: string;
-    pattern: string;
 }
 
 export interface AccountMessage extends Message {
@@ -708,7 +706,7 @@ export const asyncCreateAccount = (alias?: string): Promise<WalletAccount> =>
                         depositAddress: response.payload.addresses[0].address,
                     }) as WalletAccount
                     get(wallet)?.accounts.update((_accounts) => [..._accounts, preparedAccount])
-                    setAccountTheme(preparedAccount.id, color, pattern)
+                    setAccountTheme(preparedAccount.id)
 
                     resolve(preparedAccount)
                 },
@@ -1763,11 +1761,11 @@ export const prepareAccountInfo = (
         rawIotaBalance: balance,
         signerType,
         balance: formatUnitBestMatch(balance, true, 3),
-        balanceEquiv: formatCurrency(
-            convertToFiat(balance, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[activeCurrency])
-        ),
-        color: AccountColors.Default,
-        pattern: AccountPatterns.Default,
+        balanceEquiv: formatCurrency(convertToFiat(
+            balance,
+            get(currencies)[CurrencyTypes.USD],
+            get(exchangeRates)[activeCurrency]
+        )),
     })
 }
 

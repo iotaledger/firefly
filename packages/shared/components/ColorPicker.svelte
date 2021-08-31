@@ -4,7 +4,7 @@
 
     export let locale
     export let title = locale('views.pickers.color')
-    export let active = 'green'
+    export let active = AccountColors.Default
 
     const changeActive = color => {
         active = color

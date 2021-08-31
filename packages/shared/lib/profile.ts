@@ -1,7 +1,7 @@
 import { persistent } from 'shared/lib/helpers'
 import { ledgerSimulator } from 'shared/lib/ledger'
 import { generateRandomId, migrateObjects } from 'shared/lib/utils'
-import { asyncRemoveStorage, destroyActor, getStoragePath, getWalletStoragePath} from 'shared/lib/wallet'
+import { asyncRemoveStorage, destroyActor, getStoragePath, getWalletStoragePath, AccountColors, AccountPatterns} from 'shared/lib/wallet'
 import { derived, get, Readable, writable } from 'svelte/store'
 import { Electron } from './electron'
 import type { ValuesOf } from './typings/utils'
@@ -95,6 +95,7 @@ const buildProfile = (profileName: string, isDeveloperProfile: boolean): Profile
         },
     },
     ledgerMigrationCount: 0,
+    accounts: []
 })
 
 /**
@@ -349,3 +350,67 @@ export const setMissingProfileType = (accounts: WalletAccount[] = []): void => {
  * @returns {boolean}
  */
 export const hasNoProfiles = (): boolean => get(profiles).length === 0
+
+/*
+ * Maps accounts key values creating or updating existing objects with param profileAccount searching by account id
+ *
+ * @method getUpdatedAccounts
+ *
+ * @returns {ProfileAccount[]}
+ */
+ const getUpdatedAccounts = (activeProfile: Profile, accountId: string, profileAccount: ProfileAccount): ProfileAccount[] => {
+    const { accounts } = activeProfile
+
+    if (accounts?.length) {
+        if (accounts?.find(account => account.id === accountId)) {
+            return accounts.map(account => account.id === accountId ? profileAccount : account)
+        } else {
+            return [...accounts, profileAccount]
+        }
+    }
+
+    return [profileAccount]
+}
+
+/**
+ * Sets profile account object color and pattern found by id inside profiles object
+ *
+ * @method setProfileAccount
+ *
+ * @returns {void}
+ */
+export const setProfileAccount = (activeProfile: Profile, profileAccount: ProfileAccount): void => {
+    updateProfile('accounts', getUpdatedAccounts(activeProfile, profileAccount.id, profileAccount))
+}
+
+/**
+ * Gets account color from activeProfile using account id
+ *
+ * @method getColor
+ *
+ * @returns {string}
+ */
+export const getColor = (activeProfile: Profile, accountId: string): string => {
+    const { accounts } = activeProfile
+
+    if (accounts?.length) {
+        return accounts.find(account => account.id === accountId)?.color || AccountColors.Default
+    }
+    return AccountColors.Default
+}
+
+/**
+ * Gets account pattern from activeProfile using account id
+ *
+ * @method getPattern
+ *
+ * @returns {string}
+ */
+export const getPattern = (activeProfile: Profile, accountId: string): string => {
+    const { accounts } = activeProfile
+
+    if (accounts?.length) {
+        return accounts.find(account => account.id === accountId)?.pattern || AccountPatterns.Default
+    }
+    return AccountPatterns.Default
+}
