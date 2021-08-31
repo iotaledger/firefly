@@ -68,6 +68,7 @@ export enum ErrorType {
 
     // Dust output
     DustError = 'DustError',
+    LeavingDustError = 'LeavingDustError',
 }
 
 export enum LedgerErrorType {
