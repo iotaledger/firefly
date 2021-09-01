@@ -859,7 +859,8 @@
         "sending": "Се испраќа",
         "legacyNetwork": "Стара мрежа",
         "capsLock": "Вклучен ви е Caps Lock",
-        "version": "Верзија {version}"
+        "version": "Верзија {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "Денес",

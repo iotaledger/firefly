@@ -1,8 +1,7 @@
-# Contribute to wallet
+# Contribute to Firefly
 
-This document describes how to contribute to wallet.
-
-We encourage everyone with knowledge of IOTA technology to contribute.
+This document describes how to contribute to Firefly.
+We encourage everyone with knowledge and passion in IOTA technology to do so.
 
 Thanks! :heart:
 
@@ -50,7 +49,7 @@ Please check the following list:
 
 **Note:** If you find a **Closed** issue that seems similar to what you're experiencing, open a new issue and include a link to the original issue in the body of your new one.
 
-### Submitting A Bug Report
+### Submitting a bug report
 
 To report a bug, [open a new issue](https://github.com/iotaledger/wallet/issues/new), and be sure to include as many details as possible, using the template.
 
@@ -95,7 +94,7 @@ Otherwise, your feature may not be approved at all.
 
 ### Building a new feature
 
-To build a new feature, check out a new branch based on the `master` branch, and be sure to document any public-facing APIs, using Rust code comments.
+To build a new feature, check out a new branch based on the `develop` branch, and be sure to document any public-facing APIs, using Rust code comments.
 </details>
 
 <br>
@@ -150,9 +149,7 @@ example that compiles and passes [documentation tests](https://doc.rust-lang.org
 
 - All instances of `unsafe` should have a comment that explains why its use was unavoidable
 
-- All code should be well tested, using unit tests and integration tests
-
-- Code must compile and pass our [continuous integration tests](.github/workflows)
+- All code should be well tested, passing unit and integration tests both locally and in our [continuous integration](https://github.com/iotaledger/firefly/.github/workflows/ci.test.yml) workflows
 
 - To be compatible with the guidelines of the Eclipse foundation, all code must be licensed under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0). This license must be referenced in every crate of the workspace (add [`./LICENSE`] to the crate's top level directory). For Rust crates, every `Cargo.toml` must contain the line `license = "Apache-2.0"`.
 

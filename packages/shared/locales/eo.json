@@ -1,7 +1,7 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Sendu, ricevu kaj administru viajn IOTA ĵetonojn",
+            "title": "Sendu, Ricevu kaj Administru viajn IOTA ĵetonojn",
             "body": "Firefly estas la oficiala monujo-apo de IOTA."
         },
         "legal": {
@@ -18,10 +18,10 @@
             "profileName": "Profilnomo",
             "body1": "Vi povas krei kelkajn uzantoprofilojn por organizi viajn monujojn kaj plibonigi la privatecon.",
             "body2": {
-                "first": "For now, let's start with your first profile name.",
-                "nonFirst": "For now, let's start with your profile name."
+                "first": "Nuntempe, ni komencu per via unua profilnomo.",
+                "nonFirst": "Nuntempe, ni komencu per via profilnomo."
             },
-            "addMore": "You can add more profiles later."
+            "addMore": "Vi povas aldoni pliajn profilojn poste."
         },
         "setup": {
             "title": "Agordu monujon",
@@ -35,30 +35,30 @@
             "body2": "Se vi plenigu la restarigo-ilon kaj konservu ĝin sekure, vi ĉiam povas restarigi viajn monujojn."
         },
         "create": {
-            "title": "Create a wallet",
-            "body": "Create a new wallet. You can choose a regular software wallet or if you have a Ledger device you can set up a hardware wallet.",
+            "title": "Kreu monujon",
+            "body": "Kreu novan monujon. Vi povas elekti regulan programan monujon aŭ se vi havas Ledger-aparaton, vi povas starigi aparatan monujon.",
             "softwareAccount": {
-                "title": "I want a software wallet",
-                "description": "Create a 24-word Recovery Phrase"
+                "title": "Mi volas programan monujon",
+                "description": "Kreu 24-vortan Rekuperan Frazon"
             },
             "ledgerAccount": {
-                "title": "I want a hardware wallet",
-                "description": "Ledger Nano S or Nano X required"
+                "title": "Mi volas aparatan monujon",
+                "description": "Ledger Nano S aŭ Nano X necesas"
             }
         },
         "setupLedger": {
-            "progress1": "Connect your Ledger",
-            "progress2": "Generate address",
-            "progress3": "Switch Ledger app",
-            "progress4": "Transfer funds",
-            "watchVideo": "Watch video guide",
-            "videoGuide": "Ledger migration video guide"
+            "progress1": "Konekti vian ledger",
+            "progress2": "Kreu adreson",
+            "progress3": "Ŝanĝu Ledger-programon",
+            "progress4": "Ĝiri monon",
+            "watchVideo": "Spektu video-gvidilon",
+            "videoGuide": "Video-gvidilo pri Ledger migrado"
         },
         "ledgerInstallationGuide": {
-            "title": "Have you installed the necessary Ledger apps?",
-            "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
-            "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
-            "action": "Yes, I've installed these apps"
+            "title": "Ĉu vi instalis la necesajn Ledger-programojn?",
+            "body1": "Antaŭ ol daŭrigi, vi devas trovi kaj instali ambaŭ la programon {legacy} kaj la novan IOTA-programon per Ledger Live.",
+            "body2": "Certigu, ke via mikroprogramaro Ledger estas ĝisdata. Ĉiuj antaŭinstalitaj programoj devas esti ĝisdatigitaj al siaj plej novaj versioj.",
+            "action": "Jes, mi instalis ĉi tiujn programojn"
         },
         "password": {
             "title": "Krei pasvorton",
@@ -117,35 +117,35 @@
             "title": "La agordado de la monujo estas farita",
             "fundsMigrated": "Fonduso estas migrigita",
             "body": "Via nova monujo estas preta por uzi.",
-            "softwareMigratedBody": "You have successfully migrated your funds to the new network",
-            "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
+            "softwareMigratedBody": "Vi sukcese migris vian monon al la nova reto",
+            "fireflyLedgerBody": "Via Ledger-konto estas sukcese rekuperita kaj vi nun povas daŭrigi.",
+            "trinityLedgerBody": "Vi sukcese migris vian Ledger al la nova reto.",
             "exportMigration": "Eksportu la protokolon de la migrado kaj finu la agordadon"
         },
         "import": {
             "title": "Restarigu aŭ migrigu fonduson",
-            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
-            "importSeed": "I have an 81 character seed",
-            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
+            "body": "Se vi havas ekzistantan semon/sekurkopian monujon dosieron, vi povas importi ĝin ĉi tie. Se vi posedas pli malnovajn retajn monon, vi estos kondukita tra la migraj paŝoj por transiri al la reto Chrysalis.",
+            "importSeed": "Mi havas 81 ĉeno da literoj/semo",
+            "importSeedDescription": "Enigu la semon kaj migru monon al Chrysalis",
             "importMnemonic": "Mi havas restarigo-frazon de Firefly",
             "importMnemonicDescription": "Enigu vian restarigo-frazon por restarigi viajn monujojn",
             "importFile": "Mi havas savkopio-dosieron",
             "importFileDescription": "Alŝutu Seedvault aŭ Stronghold dosieron",
-            "importLedger": "I have a Ledger backup",
-            "importLedgerDescription": "Restore or migrate a Ledger profile"
+            "importLedger": "Mi havas kopion de Ledger",
+            "importLedgerDescription": "Restarigu aŭ migru Ledger-profilon"
         },
         "importFromText": {
             "seed": {
-                "title": "Type your seed to commence migration",
-                "body": "A seed consists of 81 characters. This is used to recover from the older Trinity app.",
-                "enter": "Enter your seed"
+                "title": "Tajpu vian semon por komenci migradon",
+                "body": "Semo konsistas el 81 signoj. Ĉi tio estas uzata por rekuperi de la pli malnova programo Trinity.",
+                "enter": "Enmetu vian semon"
             },
             "mnemonic": {
                 "title": "Tajpu vian restarigo-frazon",
                 "body": "Restarigo-frazo havas 24 vortojn, ĉiuj minusklaj, kun spaco inter ili. Ĉi tiu estas uzata por restarigi ekzistantajn Firefly monujojn.",
                 "enter": "Enigu vian sekretan restarigo-frazon"
             },
-            "seedDetected": "81 character seed detected",
+            "seedDetected": "81-semo detektita",
             "phraseDetected": "24-vorta restarigo-frazo estas detektita",
             "checksum": "Kontrolsumo"
         },
@@ -154,54 +154,54 @@
             "body": "Importu savkopio-dosieron por restaŭri viajn monujojn. Savkopioj povas esti kaj Stronghold (.stronghold) kaj Trinity SeedVault (.kdbx)."
         },
         "importFromLedger": {
-            "title": "Restore or Migrate your Ledger",
-            "body": "Restore an existing Firefly Ledger profile, or migrate your funds from Trinity.",
-            "haveFireflyLedger": "I have a Firefly Ledger backup",
-            "haveFireflyLedgerDescription": "Restore a Firefly profile",
-            "haveTrinityLedger": "I have a Trinity Ledger backup",
-            "haveTrinityLedgerDescription": "Migrate a Trinity profile"
+            "title": "Restarigu aŭ migru vian Ledger",
+            "body": "Restarigu ekzistantan profilon de Firefly Ledger, aŭ migru vian monon de Trinity.",
+            "haveFireflyLedger": "Mi havas kopion de Firefly Ledger",
+            "haveFireflyLedgerDescription": "Restarigu profilon de Firefly",
+            "haveTrinityLedger": "Mi havas sekurkopion de Trinity Ledger",
+            "haveTrinityLedgerDescription": "Migru Trinity-profilon"
         },
         "connectLedger": {
-            "title": "Connect your Ledger to Firefly",
-            "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed.",
-            "trafficLight1": "Connect and unlock your Ledger with your PIN",
-            "trafficLight2": "Open the new IOTA app on your Ledger",
-            "tips": "Tips if your Ledger isn’t connecting"
+            "title": "Konektu vian Ledger al Firefly",
+            "body": "Por ke via Ledger-aparato trovu Firefly, bonvolu certigi, ke la oficiala programo Ledger Live estas fermita.",
+            "trafficLight1": "Konektu kaj malŝlosu vian Ledger per via PIN",
+            "trafficLight2": "Malfermu la novan programon IOTA en via Ledger",
+            "tips": "Konsiloj se via Ledger ne konektas"
         },
         "restoreFromFireflyLedger": {
-            "title": "Restore Your Ledger Profile",
-            "body": "Press restore to complete the setup process and restore your wallets, balances and transaction history.",
-            "restoring": "Restoring from Ledger..."
+            "title": "Restarigu Vian Ledger Profilon",
+            "body": "Premu restarigi por kompletigi la agordan procezon kaj restarigi viajn monujojn, monon kaj transakcian historion.",
+            "restoring": "Restarigo de Ledger..."
         },
         "legacyLedgerIntro": {
-            "title": "Start your Ledger migration using Firefly",
-            "body1": "Firefly will help you to transfer your tokens to the new Chrysalis network.",
-            "body2": "After the migration, you will be able to send and receive your tokens using your Ledger with Firefly.",
-            "readMore": "What to expect from the migration process"
+            "title": "Komencu vian Ledger-migradon per Firefly",
+            "body1": "Firefly helpos vin transsendi viajn ĵetonojn al la nova Chrysalis reto.",
+            "body2": "Post la migrado, vi povos sendi kaj ricevi viajn ĵetonojn per via Ledger kun Firefly.",
+            "readMore": "Kion atendi de la migrada procezo"
         },
         "generateNewLedgerAddress": {
-            "title": "Generate new address",
-            "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
-            "confirmTitle": "Confirm the new address",
-            "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
-            "confirmedTitle": "Address confirmed",
-            "confirmedBody": "You have confirmed that the address in Firefly matches the one on your Ledger device.",
-            "generating": "Generating address"
+            "title": "Generi novan adreson",
+            "body": "Vi devas generi novan adreson por migri viajn signojn per Firefly. Alklaku la suban butonon por daŭrigi.",
+            "confirmTitle": "Konfirmu la novan adreson",
+            "confirmBody": "Por sekureco, bonvolu kompari la adreson generitan sur via Ledger-aparato kun tiu montrita sube. Se ili kongruas, premu ambaŭ butonojn de via Ledger kiel petite.",
+            "confirmedTitle": "Adreso konfirmita",
+            "confirmedBody": "Vi konfirmis, ke la adreso en Firefly kongruas kun tiu de via Ledger-aparato.",
+            "generating": "Generanta adreso"
         },
         "switchLedgerApps": {
-            "title": "Switch Ledger apps",
-            "body": "Please switch to the {legacy} app on your Ledger device to continue migration. When ready, press continue."
+            "title": "Ŝanĝi Ledger-programojn",
+            "body": "Bonvolu ŝanĝi al la programo {legacy} en via Ledger-aparato por daŭrigi migradon. Kiam vi pretas, premu daŭrigi."
         },
         "selectLedgerAccountIndex": {
-            "title": "Choose Ledger account index",
-            "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
-            "accountIndex": "Account Index",
-            "accountPage": "Account Page",
-            "standard": "Standard",
-            "expert": "Expert",
-            "takingAWhile": "This is taking a while...",
-            "notGeneratingAddresses": "Is your Ledger generating addresses?",
-            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
+            "title": "Elektu Ledger-kontan indekson",
+            "body": "Elektu la indekson de Ledger-konto, kiun vi uzis kun Trinity. Por plej multaj uzantoj ĉi tio estos la defaŭlta indekso de 0.",
+            "accountIndex": "Konto-Indekso",
+            "accountPage": "Konta Paĝo",
+            "standard": "Normo",
+            "expert": "Eksperta",
+            "takingAWhile": "Ĉi tio daŭras iomete...",
+            "notGeneratingAddresses": "Ĉu via Ledger generas adresojn?",
+            "reinstallLegacy": "Se ne, malkonektu la aparaton kaj provu denove. Se la problemo daŭras, vi eble bezonos reinstali la programon {legacy}."
         },
         "importBackupPassword": {
             "body1": "Tajpu vian savkopio-pasvorton.",
@@ -226,26 +226,26 @@
             "restoringWallet": "Restaŭri monujon...",
             "findingBalance": "Trovante bonhavon...",
             "incorrectSeedVaultPassword": "Malĝusta SeedVault pasvorto.",
-            "noDataSeedVault": "No data could be found in the SeedVault.",
-            "signingBundle": "Signing bundle",
-            "broadcastingBundle": "Broadcasting bundle",
-            "miningBundle": "Mining bundle",
+            "noDataSeedVault": "Neniuj datumoj troveblis en la SemKluzo.",
+            "signingBundle": "Subskriba pakaĵo",
+            "broadcastingBundle": "Dissendanta pakaĵo",
+            "miningBundle": "Minada pakaĵo",
             "problemRestoringWallet": "Okazis reta eraro dum restaŭri vian monujon. Bonvole provu denove.",
-            "minimumMigrationAmountSpentAddresses": "The minimum migration amount for each spent address is 1 Mi. Check again if your balance doesn't look right.",
-            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
+            "minimumMigrationAmountSpentAddresses": "La minimuma migrokvanto por ĉiu elspezita adreso estas 1 Mi. Kontrolu denove se via bilancoj ne aspektas ĝusta.",
+            "tooManyAddressesToMigrate": "Vi havas tro da adresojn kun malalta bonhavo por migri. Kontrolu denove ĉu via bonhavo aspektas ĝuste.",
             "cannotMigrateAllYourFunds": "Ni ne povas migrigi la tutan vian fonduson ĉar kelkaj adresoj havas tro malaltan valoron. Vi povas daŭrigi kiel ajn. {value} perdiĝos.",
             "error": "Estis eraro dum migrigi vian fonduson. Bonvole provu denove."
         },
         "bundleMiningWarning": {
             "title": "Averto",
-            "body1": "You have funds on one or more spent addresses.",
+            "body1": "Vi havas monon por unu aŭ pluraj elspezitaj adresoj.",
             "body2": "Ni rekomendas ke vi rulu aŭtomatigitan procezon por helpi sekurecon kaj transpagi ĉi tiun fonduson sekure.",
             "body3": "Se vi fermu la apon, vi bezonos rekomenci la tutan migradon.",
-            "learn": "Learn about spent addresses"
+            "learn": "Lernu pri elspezitaj adresoj"
         },
         "secureSpentAddresses": {
-            "title": "Secure spent addresses",
-            "body1": "You have funds detected on {number, plural, one {# spent address} other {# spent addresses}}.",
+            "title": "Sekuraj elspezitaj adresoj",
+            "body1": "Vi havas monon detektitajn ĉe {number, plural, one {# elspezita adreso} other {# elspezitaj adresoj}}.",
             "body2": "Ni rekomendas ke vi rulu aŭtomatigitan procezon por helpi sekurecon kaj transpagi vian fonduson sekure.",
             "error": "You can’t migrate spent addresses with less than 1 Mi"
         },
@@ -600,7 +600,7 @@
             }
         },
         "ledgerConnectionGuide": {
-            "title": "Tips if your Ledger isn’t connecting",
+            "title": "Konsiloj se via Ledger ne konektas",
             "steps": {
                 "0": "Make sure Ledger Live is not open on your computer",
                 "1": "Ensure you have unlocked your Ledger device with your PIN",
@@ -736,7 +736,7 @@
         "searchAgain": "Search again",
         "searching": "Searching...",
         "closeFirefly": "Close Firefly",
-        "generateAddress": "Generate address",
+        "generateAddress": "Kreu adreson",
         "migrateAgain": "Migrate another index"
     },
     "general": {
@@ -859,7 +859,8 @@
         "sending": "Sending",
         "legacyNetwork": "Legacy Network",
         "capsLock": "Caps Lock is on",
-        "version": "Version {version}"
+        "version": "Version {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "Hodiaŭ",

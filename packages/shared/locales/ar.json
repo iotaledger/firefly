@@ -859,7 +859,8 @@
         "sending": "جاري الارسال",
         "legacyNetwork": "الشبكة القديمة",
         "capsLock": "Caps Lock مفعل",
-        "version": "الإصدار {version}"
+        "version": "الإصدار {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "اليوم",
