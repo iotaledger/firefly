@@ -4,21 +4,24 @@
     import { appSettings } from 'shared/lib/appSettings'
     import { exchangeRates } from 'shared/lib/currency'
     import { locales, setLanguage, _ } from 'shared/lib/i18n'
-    import { addProfileCurrencyPriceData } from 'shared/lib/marketData'
+    import { addProfileCurrencyPriceData } from 'shared/lib/market'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { refreshBalanceOverview, updateAccountsBalanceEquiv } from 'shared/lib/wallet'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
     let darkModeEnabled = $appSettings.darkMode
     let notificationsChecked = $appSettings.notifications
+    let hideNetworkStatistics = $activeProfile?.settings.hideNetworkStatistics
 
     $: $appSettings.darkMode = darkModeEnabled
     $: $appSettings.notifications = notificationsChecked
+    $: updateProfile('settings.hideNetworkStatistics', hideNetworkStatistics)
 
     const handleCurrencySelect = (item) => {
         updateProfile('settings.currency', item.value)
-        addProfileCurrencyPriceData()
+        void addProfileCurrencyPriceData()
         refreshBalanceOverview()
         updateAccountsBalanceEquiv()
     }
@@ -72,4 +75,12 @@
         <Text type="p" secondary classes="mb-5">{locale('views.settings.notifications.description')}</Text>
         <Checkbox label={locale('actions.enableSystemNotifications')} bind:checked={notificationsChecked} />
     </section>
+    {#if $loggedIn}
+        <HR classes="pb-5 mt-5 justify-center" />
+        <section id="networkStatus" class="w-3/4">
+            <Text type="h4" classes="mb-3">{locale('views.settings.networkStatus.title')}</Text>
+            <Text type="p" secondary classes="mb-5">{locale('views.settings.networkStatus.description')}</Text>
+            <Checkbox label={locale('actions.hideNetworkStatistics')} bind:checked={hideNetworkStatistics} />
+        </section>
+    {/if}
 </div>

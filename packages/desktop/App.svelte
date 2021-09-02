@@ -7,10 +7,9 @@
     import { addError } from 'shared/lib/errors'
     import { goto } from 'shared/lib/helpers'
     import { dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
-    import { pollMarketData } from 'shared/lib/marketData'
-    import { pollNetworkStatus } from 'shared/lib/networkStatus'
+    import { pollMarketData } from 'shared/lib/market'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { cleanupInProgressProfiles } from 'shared/lib/profile'
+    import { cleanupEmptyProfiles, cleanupInProgressProfiles } from 'shared/lib/profile'
     import { dashboardRoute, initRouter, routerNext, routerPrevious, walletRoute } from 'shared/lib/router'
     import { AppRoute, Tabs } from 'shared/lib/typings/routes'
     import {
@@ -18,12 +17,15 @@
         Backup,
         Balance,
         Congratulations,
+        Create,
         Dashboard,
         Import,
+        Ledger,
         Legal,
         Login,
         Migrate,
         Password,
+        Profile,
         Protect,
         Secure,
         Settings,
@@ -34,12 +36,13 @@
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { getLocalisedMenuItems } from './lib/helpers'
+    import { Locale } from 'shared/lib/typings/i18n'
 
     $: $appSettings.darkMode ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')
     $: {
         isLocaleLoaded.subscribe((loaded) => {
             if (loaded) {
-                Electron.updateMenu('strings', getLocalisedMenuItems($_))
+                Electron.updateMenu('strings', getLocalisedMenuItems($_ as Locale))
             }
         })
     }
@@ -52,20 +55,20 @@
     let splash = true
     let settings = false
 
-    setupI18n({ withLocale: $appSettings.language })
+    void setupI18n({ withLocale: $appSettings.language })
     onMount(async () => {
         setTimeout(() => {
             splash = false
             initRouter()
-        }, 2000)
+        }, 3000)
 
         await pollMarketData()
-        await pollNetworkStatus()
 
         // @ts-ignore: This value is replaced by Webpack DefinePlugin
+        /* eslint-disable no-undef */
         if (!devMode) {
             await getVersionDetails()
-            await pollVersion()
+            pollVersion()
         }
         Electron.onEvent('menu-navigate-wallet', (route) => {
             if (get(dashboardRoute) !== Tabs.Wallet) {
@@ -82,7 +85,7 @@
                 settings = true
             }
         })
-        Electron.onEvent('menu-check-for-update', async () => {
+        Electron.onEvent('menu-check-for-update', () => {
             openPopup({
                 type: 'version',
                 props: {
@@ -90,10 +93,10 @@
                 },
             })
         })
-        Electron.onEvent('menu-error-log', async () => {
+        Electron.onEvent('menu-error-log', () => {
             openPopup({ type: 'errorLog' })
         })
-        Electron.onEvent('menu-diagnostics', async () => {
+        Electron.onEvent('menu-diagnostics', () => {
             openPopup({ type: 'diagnostics' })
         })
         Electron.hookErrorLogger((err) => {
@@ -101,6 +104,7 @@
         })
 
         await cleanupInProgressProfiles()
+        await cleanupEmptyProfiles()
     })
 </script>
 
@@ -151,6 +155,12 @@
             }
         }
 
+        .scroll-quaternary {
+            &::-webkit-scrollbar-thumb {
+                @apply border-gray-100;
+            }
+        }
+
         &.scheme-dark {
             @apply bg-gray-900;
             :global(::-webkit-scrollbar-thumb) {
@@ -169,6 +179,18 @@
                     @apply border-gray-900;
                 }
             }
+
+            .scroll-quaternary {
+                &::-webkit-scrollbar-thumb {
+                    @apply border-gray-900;
+                }
+            }
+        }
+
+        .multiwrap-line2 {
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            display: -webkit-box;
         }
     }
     @layer utilities {
@@ -207,9 +229,20 @@
         <Route route={AppRoute.Appearance}>
             <Appearance on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
         </Route>
+        <Route route={AppRoute.Profile}>
+            <Profile on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        </Route>
         <Route route={AppRoute.Setup}>
             <Setup on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
         </Route>
+        <!-- TODO: fix ledger -->
+        <Route route={AppRoute.Create}>
+            <Create on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        </Route>
+        <Route route={AppRoute.LedgerSetup}>
+            <Ledger on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        </Route>
+        <!--  -->
         <Route route={AppRoute.Secure}>
             <Secure on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
         </Route>
@@ -229,7 +262,7 @@
             <Balance on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
         </Route>
         <Route route={AppRoute.Migrate}>
-            <Migrate on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
+            <Migrate on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} {goto} />
         </Route>
         <Route route={AppRoute.Congratulations}>
             <Congratulations on:next={routerNext} mobile={$mobile} locale={$_} {goto} />

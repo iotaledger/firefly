@@ -1,20 +1,19 @@
-import Validator, { ErrorTypes as ValidatorErrorTypes } from 'shared/lib/validator'
+import Validator from 'shared/lib/validator'
 import * as Wallet from 'wallet-nodejs-binding'
 import type {
     CreatedAccountResponse,
-    LatestAddressResponse, MessageResponse,
-    ReadAccountsResponse, SetStrongholdPasswordResponse,
-    SyncAccountsResponse
+    LatestAddressResponse,
+    MessageResponse,
+    ReadAccountsResponse,
+    SetStrongholdPasswordResponse,
+    SyncAccountsResponse,
 } from '../typings/bridge'
 import { ResponseTypes } from '../typings/bridge'
-import type {
-    BalanceChangeEventPayload,
-    Event,
-    TransactionEventPayload
-} from '../typings/events'
+import type { BalanceChangeEventPayload, Event, TransactionEventPayload } from '../typings/events'
 import { ErrorType } from '../typings/events'
 import { logError } from './errorLogger'
 import { getErrorMessage } from './walletErrors'
+import { ErrorTypes as ValidatorErrorTypes } from '../typings/validator'
 
 type CallbacksStore = {
     [id: string]: CallbacksPattern
@@ -26,7 +25,7 @@ type CallbacksPattern = {
 }
 
 type ErrorMessage = {
-    type: ErrorType | ValidatorErrorTypes,
+    type: ErrorType | ValidatorErrorTypes
     error: string
 }
 
@@ -39,6 +38,8 @@ const eventsApiToResponseTypeMap = {
     onBroadcast: ResponseTypes.Broadcast,
     onStrongholdStatusChange: ResponseTypes.StrongholdStatusChange,
     onTransferProgress: ResponseTypes.TransferProgress,
+    onLedgerAddressGeneration: ResponseTypes.LedgerAddressGeneration,
+    onMigrationProgress: ResponseTypes.MigrationProgress,
 }
 
 const apiToResponseTypeMap = {
@@ -47,6 +48,8 @@ const apiToResponseTypeMap = {
     getAccount: ResponseTypes.ReadAccount,
     getAccounts: ResponseTypes.ReadAccounts,
     syncAccounts: ResponseTypes.SyncedAccounts,
+    startBackgroundSync: ResponseTypes.Ok,
+    stopBackgroundSync: ResponseTypes.Ok,
     listMessages: ResponseTypes.Messages,
     listAddresses: ResponseTypes.Addresses,
     generateAddress: ResponseTypes.GeneratedAddress,
@@ -69,9 +72,13 @@ const apiToResponseTypeMap = {
     removeStorage: ResponseTypes.DeletedStorage,
     lockStronghold: ResponseTypes.LockedStronghold,
     changeStrongholdPassword: ResponseTypes.StrongholdPasswordChanged,
+    getLedgerDeviceStatus: ResponseTypes.LedgerStatus,
     setStrongholdPasswordClearInterval: ResponseTypes.StrongholdPasswordClearIntervalSet,
+    getLegacySeedChecksum: ResponseTypes.LegacySeedChecksum,
     getNodeInfo: ResponseTypes.NodeInfo,
-    ...eventsApiToResponseTypeMap
+    mineBundle: ResponseTypes.MinedBundle,
+    getLegacyAddressChecksum: ResponseTypes.LegacyAddressChecksum,
+    ...eventsApiToResponseTypeMap,
 }
 
 /**
@@ -85,35 +92,35 @@ const callbacksStore: CallbacksStore = {}
  */
 const defaultCallbacks = {
     StrongholdPasswordSet: {
-        onSuccess: (response: SetStrongholdPasswordResponse): void => { },
-        onError: (error: ErrorMessage): void => { },
+        onSuccess: (response: SetStrongholdPasswordResponse): void => {},
+        onError: (error: ErrorMessage): void => {},
     },
     CreatedAccount: {
-        onSuccess: (response: CreatedAccountResponse): void => { },
-        onError: (error: ErrorMessage): void => { },
+        onSuccess: (response: CreatedAccountResponse): void => {},
+        onError: (error: ErrorMessage): void => {},
     },
     ReadAccounts: {
-        onSuccess: (response: ReadAccountsResponse): void => { },
-        onError: (error: ErrorMessage): void => { },
+        onSuccess: (response: ReadAccountsResponse): void => {},
+        onError: (error: ErrorMessage): void => {},
     },
     LatestAddress: {
-        onSuccess: (response: LatestAddressResponse): void => { },
-        onError: (error: ErrorMessage): void => { },
+        onSuccess: (response: LatestAddressResponse): void => {},
+        onError: (error: ErrorMessage): void => {},
     },
     SyncedAccounts: {
-        onSuccess: (response: SyncAccountsResponse): void => { },
-        onError: (error: ErrorMessage): void => { },
+        onSuccess: (response: SyncAccountsResponse): void => {},
+        onError: (error: ErrorMessage): void => {},
     },
     BalanceChange: {
-        onSuccess: (response: Event<BalanceChangeEventPayload>): void => { },
+        onSuccess: (response: Event<BalanceChangeEventPayload>): void => {},
     },
     NewTransaction: {
-        onSuccess: (response: Event<TransactionEventPayload>): void => { },
+        onSuccess: (response: Event<TransactionEventPayload>): void => {},
     },
     StrongholdPasswordClearIntervalSet: {
-        onSuccess: (response: Event<void>): void => { },
-        onError: (error: ErrorMessage): void => { },
-    }
+        onSuccess: (response: Event<void>): void => {},
+        onError: (error: ErrorMessage): void => {},
+    },
 }
 
 const eventsApiResponseTypes = Object.values(eventsApiToResponseTypeMap)
@@ -128,7 +135,7 @@ Wallet.onMessage((message: MessageResponse) => {
         // There is no message id
         // Something lower level has thrown an error
         // We should stop processing at this point
-        const newError = { type: ErrorType.ClientError, message: JSON.stringify(message), time: Date.now() };
+        const newError = { type: ErrorType.ClientError, message: JSON.stringify(message), time: Date.now() }
         logError(newError)
         return
     }
@@ -147,17 +154,9 @@ Wallet.onMessage((message: MessageResponse) => {
             const { id } = message
             const { onError } = callbacksStore[id]
 
-            onError(
-                handleError(
-                    payload.type,
-                    payload.error
-                )
-            )
+            onError(handleError(payload.type, payload.error))
         } else {
-            handleError(
-                payload.type,
-                payload.error
-            )
+            handleError(payload.type, payload.error)
         }
     } else {
         const { id } = message
@@ -165,21 +164,10 @@ Wallet.onMessage((message: MessageResponse) => {
         const { onSuccess, onError } = callbacksStore[id]
 
         if (message.type === ResponseTypes.Error) {
-            onError(
-                handleError(
-                    message.payload.type,
-                    message.payload.error
-                )
-            )
+            onError(handleError(message.payload.type, message.payload.error))
         } else if (message.type === ResponseTypes.Panic) {
-            onError(
-                handleError(
-                    ErrorType.Panic,
-                    message.payload
-                )
-            )
-        }
-        else {
+            onError(handleError(ErrorType.Panic, message.payload))
+        } else {
             onSuccess(message)
         }
     }
@@ -212,53 +200,59 @@ const storeCallbacks = (__id: string, type: ResponseTypes, callbacks?: Callbacks
 }
 
 /**
- * Emits formatted error and adds to error log 
- * 
+ * Emits formatted error and adds to error log
+ *
  * @method handleError
- * 
+ *
  * @param {ErrorType | ValidatorErrorTypes} type
  * @param {string} error
  */
-const handleError = (type: ErrorType | ValidatorErrorTypes, error: string): { type: ErrorType | ValidatorErrorTypes, error: string } => {
-    const newError = { type, message: error, time: Date.now() };
+const handleError = (
+    type: ErrorType | ValidatorErrorTypes,
+    error: string
+): { type: ErrorType | ValidatorErrorTypes; error: string } => {
+    const newError = { type, message: error, time: Date.now() }
+
     logError(newError)
 
     // TODO: Add full type list to remove this temporary fix
     const _getError = () => {
         if (error.includes('try another password')) {
-            return ('error.password.incorrect')
+            return 'error.password.incorrect'
         }
         if (error.includes('message history and balance')) {
-            return ('error.account.empty')
+            return 'error.account.empty'
         }
         if (error.includes('No synced node')) {
-            return ('error.node.noSynced')
+            return 'error.node.noSynced'
+        }
+        if (error.includes('dns error')) {
+            return 'error.node.dns'
         }
 
         return getErrorMessage(type)
     }
 
-
     return {
         type,
-        error: _getError()
+        error: _getError(),
     }
-};
+}
 
 /**
  * @method generateRandomId
  *
  * @returns {string}
  */
-const generateRandomId = (): string => {
-    return Array.from(crypto.getRandomValues(new Uint8Array(16)), (byte) => {
-        return ('0' + (byte & 0xff).toString(16)).slice(-2)
-    }).join('')
-}
+const generateRandomId = (): string =>
+    Array.from(crypto.getRandomValues(new Uint8Array(16)), (byte) => ('0' + (byte & 0xff).toString(16)).slice(-2)).join(
+        ''
+    )
 
 const GenerateMiddleware = (activeProfileIdGetter: () => string) => ({
-    get: (_target, prop) => {
-        return async (...payload): Promise<void> => {
+    get:
+        (_target, prop) =>
+        async (...payload): Promise<void> => {
             const actorId = activeProfileIdGetter()
 
             const messageId = generateRandomId()
@@ -275,18 +269,19 @@ const GenerateMiddleware = (activeProfileIdGetter: () => string) => ({
                     typeof lastArgument === 'object' && 'onSuccess' in lastArgument && 'onError' in lastArgument
             }
 
-            storeCallbacks(messageId, apiToResponseTypeMap[prop], shouldOverrideDefaultCallbacks ? lastArgument : undefined)
+            storeCallbacks(
+                messageId,
+                apiToResponseTypeMap[prop],
+                shouldOverrideDefaultCallbacks ? lastArgument : undefined
+            )
 
             const actualPayload = shouldOverrideDefaultCallbacks ? payload.slice(0, -1) : payload
 
             await _target[prop](...actualPayload)({ actorId, messageId })
-        }
-    },
-    set: () => {
-        return false
-    },
+        },
+    set: () => false,
 })
 
-export function proxyApi(activeProfileIdGetter: () => string) {
+export function proxyApi(activeProfileIdGetter: () => string): typeof Wallet.api {
     return new Proxy(Wallet.api, GenerateMiddleware(activeProfileIdGetter))
 }

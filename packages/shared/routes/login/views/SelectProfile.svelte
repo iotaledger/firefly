@@ -2,8 +2,11 @@
     import { Icon, Logo, Profile } from 'shared/components'
     import { profiles, setActiveProfile } from 'shared/lib/profile'
     import { createEventDispatcher } from 'svelte'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { ProfileType } from 'shared/lib/typings/profile'
 
-    export let locale
+    export let locale: Locale
+
     export let mobile
 
     const dispatch = createEventDispatcher()
@@ -21,11 +24,11 @@
 {#if mobile}
     <div>Not yet implemented</div>
 {:else}
-    <section class="flex flex-col h-full bg-white dark:bg-gray-900 items-center">
-        <Logo width="64px" logo="logo-firefly" classes="absolute top-20 transform left-1/2 -translate-x-1/2" />
-        <div class="h-full space-x-20 flex flex-wrap justify-center items-start content-center mt-10 mx-20">
+    <section class="flex flex-col justify-center items-center h-full bg-white dark:bg-gray-900 px-40 pt-48 pb-20">
+        <Logo width="64px" logo="logo-firefly" classes="absolute top-20" />
+        <div class="profiles-wrapper h-auto items-start justify-center w-full overflow-y-auto flex flex-row flex-wrap">
             {#each $profiles as profile}
-                <div class="mb-6">
+                <div class="mx-4 mb-8">
                     <Profile
                         bgColor="blue"
                         {locale}
@@ -33,10 +36,11 @@
                         name={profile.name}
                         id={profile.id}
                         isDeveloper={profile.isDeveloperProfile}
+                        isLedgerProfile={profile?.type === ProfileType.Ledger || profile?.type === ProfileType.LedgerSimulator}
                         classes="cursor-pointer" />
                 </div>
             {/each}
-            <div class="mb-6">
+            <div class="mx-4 mb-8">
                 <Profile
                     onClick={addProfile}
                     name={locale('general.addProfile')}

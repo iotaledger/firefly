@@ -1,16 +1,18 @@
 <script lang="typescript">
-    import { Button, Illustration, OnboardingLayout, Password, Text } from 'shared/components'
+    import { Animation, Button, OnboardingLayout, Password, Text } from 'shared/components'
     import { strongholdPassword } from 'shared/lib/app'
     import { showAppNotification } from 'shared/lib/notifications'
     import passwordInfo from 'shared/lib/password'
     import { asyncChangeStrongholdPassword, asyncSetStrongholdPassword, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import zxcvbn from 'zxcvbn'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+    
     export let mobile
 
-    let existingPassword = $strongholdPassword
+    const existingPassword = $strongholdPassword
     let password = ''
     let confirmedPassword = ''
     let error = ''
@@ -101,7 +103,7 @@
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-yellow dark:bg-gray-900">
-            <Illustration illustration="password-desktop" width="100%" height="auto" />
+            <Animation animation="password-desktop" />
         </div>
     </OnboardingLayout>
 {/if}

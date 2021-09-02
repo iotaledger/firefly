@@ -2,45 +2,63 @@
     "views": {
         "onboarding1": {
             "title": "发送，接收&管理您的IOTA",
-            "body": "萤火虫是爱而嗒的官方钱包。"
+            "body": "Firefly 是IOTA的官方钱包软件。"
         },
         "legal": {
             "title": "隐私政策和服务条款",
-            "body": "请审查隐私政策和服务条款。",
-            "privacyPolicy": {
-                "title": "看 -> 合法 -> 隐私政策 -> 标题",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
-            "termsOfService": {
-                "title": "看 -> 合法 -> 服务条款 -> 标题",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
+            "body": "请查看隐私政策和服务条款。",
             "checkbox": "我已读过和接受隐私政策和服务条款"
         },
         "appearance": {
-            "title": "外表",
-            "body": "选择您的钱包的主题。"
+            "title": "外观",
+            "body": "选择您的App主题"
+        },
+        "profile": {
+            "title": "新建配置文件",
+            "profileName": "配置名称",
+            "body1": "您可创建多个用户配置文件来分别存储您的Token以确保安全。",
+            "body2": {
+                "first": "现在，让我们从您的第一个配置文件的名称开始。",
+                "nonFirst": "现在，让我们从您的配置名称开始。"
+            },
+            "addMore": "您可以稍后添加更多配置文件。"
         },
         "setup": {
-            "title": "设置您的钱包",
-            "body1": "您可创建多个用户配置文件来分别存储您的Token以确保安全。",
-            "body2": "现在，让我们以您的第一个配置文件名开始。以后您可以添加更多的配置文件。",
-            "profileName": "配置名称"
+            "title": "设置钱包",
+            "chrysalisTitle": "Chrysalis网络更新",
+            "chrysalisBody": "从4月21日起，用户可以将他们的Token迁移到新的 Chrysalis 网络。我们建议您尽快迁移您现有的Token。",
+            "learnMore": "了解迁移信息"
         },
         "secure": {
             "title": "保障钱包的安全",
             "body1": "保存和打印Recovery Kit PDF模板。",
             "body2": "如果您填写Recovery Kit并安全存储它，您就能够恢复您的钱包。"
+        },
+        "create": {
+            "title": "创建一个钱包",
+            "body": "创建一个新钱包。您可以选择一个普通软件钱包，或者如果您有一个Ledger设备，您可以设置一个硬件钱包。",
+            "softwareAccount": {
+                "title": "我想要一个软件钱包",
+                "description": "创建一个24个字的恢复助记词"
+            },
+            "ledgerAccount": {
+                "title": "我想要一个硬件钱包",
+                "description": "需要Ledger Nano S 或 Nano X"
+            }
+        },
+        "setupLedger": {
+            "progress1": "连接您的Ledger",
+            "progress2": "生成地址",
+            "progress3": "切换Ledger应用",
+            "progress4": "划拨资金",
+            "watchVideo": "观看视频指南",
+            "videoGuide": "Ledger 迁移视频指南"
+        },
+        "ledgerInstallationGuide": {
+            "title": "您是否安装了必要的Ledger应用？",
+            "body1": "在您继续之前，您必须通过Ledger Live找到并安装 {legacy} 应用程序和新的 IOTA应用程序。",
+            "body2": "请确保您的Ledger固件是最新的。任何预安装的应用都应更新到他们的最新版本。",
+            "action": "是的，我已经安装了这些应用"
         },
         "password": {
             "title": "设置密码",
@@ -87,7 +105,7 @@
             "title": "备份到 Stronghold 文件",
             "body1": "请输入您的密码来备份您的钱包到一个Stronghold文件。您的密码将用来加密这个备份文件。",
             "body2": "数字备份很重要的原因：",
-            "reason1": "轻松恢复你的钱包而不输入你的恢复密语",
+            "reason1": "不需要输入您的恢复密语就能轻松恢复您的钱包",
             "reason2": "导入你的钱包到其他设备",
             "reason3": "恢复您的全部交易记录"
         },
@@ -97,43 +115,158 @@
         },
         "congratulations": {
             "title": "钱包设置完成",
-            "body": "您的新钱包已准备使用。"
+            "fundsMigrated": "资金已迁移",
+            "body": "您的新钱包已准备使用。",
+            "softwareMigratedBody": "您已成功地将您的资金迁移到新的网络",
+            "fireflyLedgerBody": "您的Ledger 账号已成功恢复，您现在可以继续。",
+            "trinityLedgerBody": "您已成功地从Ledger 迁移到新的网络。",
+            "exportMigration": "导出迁移日志并完成设置"
         },
         "import": {
-            "title": "导入钱包",
-            "body": "如果您已有恢复恢复或是Stronghold的备份文件，您可以在此处导入。"
+            "title": "恢复或迁移资金",
+            "body": "如果您已经有一个seed或钱包备份文件，你可以在这里导入。 如果您在旧的IOTA主网持有资金，您将会通过迁移步骤将资金转移到Chrysalis网络。",
+            "importSeed": "我有一个81个字符的seed",
+            "importSeedDescription": "输入seed并将资金迁移到Chrysalis",
+            "importMnemonic": "我有一个Fifrefly恢复密语",
+            "importMnemonicDescription": "输入恢复密语来找回您的钱包",
+            "importFile": "我有一个备份文件",
+            "importFileDescription": "上传Seedvault或Stronghold 文件",
+            "importLedger": "我有一个Ledger 备份",
+            "importLedgerDescription": "还原或迁移Ledger 资料"
         },
         "importFromText": {
-            "title": "用恢复恢复或种子恢复你的钱包",
-            "body1": "种子由81个字符组成。它用于从旧的 Trinity 钱包中恢复。",
-            "body2": "恢复密语长度为24个单词，单词间由空格隔开。这个密语可用于恢复已有的Firefly钱包。",
-            "body3": "请输入您的种子或恢复密语",
+            "seed": {
+                "title": "键入您的seed以开始迁移",
+                "body": "一个seed由81个字符组成。它用于从旧的的 Trinity 钱包中进行恢复。",
+                "enter": "输入您的seed"
+            },
+            "mnemonic": {
+                "title": "输入您的恢复密语",
+                "body": "恢复密语长度为24个单词，单词全部为小写，单词间由空格隔开。这个密语可用于恢复已有的Firefly钱包。",
+                "enter": "请输入您的seed或恢复密语"
+            },
             "seedDetected": "检测到81个字符种子",
-            "phraseDetected": "检测到24个单词恢复密语"
+            "phraseDetected": "检测到24个单词恢复密语",
+            "checksum": "校验和"
         },
         "importFromFile": {
-            "title": "从备份文件恢复你的钱包",
+            "title": "使用备份文件恢复你的钱包",
             "body": "导入备份文件以恢复您的钱包。备份可以是 Stronghold (.stronghold) 或 Trinity SeedVault (.kdbx)格式。"
         },
+        "importFromLedger": {
+            "title": "还原或迁移您的Ledger",
+            "body": "还原现有的Firefly Ledger 个人资料，或从Trinity迁移您的资金。",
+            "haveFireflyLedger": "我有一个Firefly Ledger备份",
+            "haveFireflyLedgerDescription": "还原一个Firefly 个人资料",
+            "haveTrinityLedger": "我有一个 Trinity Ledger 备份",
+            "haveTrinityLedgerDescription": "迁移一个 Trinity 档案"
+        },
+        "connectLedger": {
+            "title": "将您的账单连接到Fifly",
+            "body": "为了让Firefly找到的您的Ledger设备，请确保官方的Ledger Live应用程序已关闭。",
+            "trafficLight1": "输入PIN码来连接并解锁您的Ledger设备",
+            "trafficLight2": "在您的Ledger设备上打开新的 IOTA应用",
+            "tips": "Ledger无法连接时的处理技巧"
+        },
+        "restoreFromFireflyLedger": {
+            "title": "恢复您的Ledger用户资料",
+            "body": "按下恢复以完成设置并恢复您的钱包、余额和交易记录。",
+            "restoring": "正在从Ledger恢复..."
+        },
+        "legacyLedgerIntro": {
+            "title": "使用Fifly开始您的Ledger迁移",
+            "body1": "Firefly会协助您将代币转移到新的Chrysalis网络。",
+            "body2": "迁移后，您将能够使用Firefly通过Ledger设备来发送和接收您的代币。",
+            "readMore": "迁移过程中会发生什么"
+        },
+        "generateNewLedgerAddress": {
+            "title": "生成新地址",
+            "body": "您需要生成一个新地址来使用 Firefly 迁移您的代币。请点击下面的按钮继续。",
+            "confirmTitle": "确认新地址",
+            "confirmBody": "为了安全起见，请确认Ledger上生成的地址与下面显示的地址相同。如果地址相同，请同时按下您Ledger上的两个按钮。",
+            "confirmedTitle": "地址已确认",
+            "confirmedBody": "您已确认Fifrefly的地址与您Ledger设备上的地址相匹配。",
+            "generating": "生成地址"
+        },
+        "switchLedgerApps": {
+            "title": "切换Ledger应用",
+            "body": "请切换到您Ledger设备上的 {legacy} 应用程序以继续迁移。准备就绪后，请按下继续。"
+        },
+        "selectLedgerAccountIndex": {
+            "title": "选择您的Ledger账户索引",
+            "body": "请选择您的Trinity所使用的Ledger帐户索引。对于大多数用户，默认的索引值是0。",
+            "accountIndex": "账户索引",
+            "accountPage": "账户页面",
+            "standard": "标准模式",
+            "expert": "专家模式",
+            "takingAWhile": "这需要一段时间...",
+            "notGeneratingAddresses": "您的Ledger设备是否生成新的地址？",
+            "reinstallLegacy": "若未生新地址，请断开设备并重试。如果问题仍然存在，您可能需要重新安装 {legacy} 应用程序。"
+        },
         "importBackupPassword": {
-            "title": "从SeedVault或Stronghold文件恢复你的钱包",
             "body1": "请输入您的备份密码。",
             "body2": "这是您首次创建备份时设置的密码。"
         },
         "importSuccess": {
             "title": "您已成功恢复您的备份。",
-            "body": "您现在可以设置您的新钱包。",
-            "seedvaultTitle": "导入成功",
-            "seedvaultBody": "您的密码正确，您现在可以继续。",
-            "strongholdTitle": "导入成功",
-            "strongholdBody": "您的密码正确，您现在可以继续。"
+            "body": "您现在可以设置新的配置文件。"
         },
         "migrate": {
             "title": "迁移您的资金",
-            "body1": "这是一个将您的资金发送到您新钱包的自动化过程。我们将检查削弱您安全性的已花费地址。",
+            "body1": "这是一个自动化过程，可以将您的资金迁移到您的新钱包。",
             "body2": "这可能需要一些时间。不要在迁移过程中关闭您的设备。",
             "existing": "您的旧钱包",
-            "new": "您的新钱包"
+            "new": "您的新钱包",
+            "learn": "了解迁移信息",
+            "beginMigration": "开始迁移",
+            "migrating": "正在迁移资金...",
+            "migrated": "{balance} 已迁移",
+            "migrationFailed": "迁移失败",
+            "noAddressesForMigration": "请选择你要保护的地址。",
+            "restoringWallet": "正在恢复钱包...",
+            "findingBalance": "正在寻找余额...",
+            "incorrectSeedVaultPassword": "SeedVault 密码不正确。",
+            "noDataSeedVault": "SeedVault文件中没有找到数据。",
+            "signingBundle": "签名包",
+            "broadcastingBundle": "广播包",
+            "miningBundle": "签名包",
+            "problemRestoringWallet": "恢复钱包出现网络异常，请重试。",
+            "minimumMigrationAmountSpentAddresses": "每个已花费地址的最小迁移金额为1Mi，请再次检查你的余额是否符合。",
+            "tooManyAddressesToMigrate": "您有太多的小额地址需要迁移，请再次检查您的账户余额是否正确。",
+            "cannotMigrateAllYourFunds": "我们不能迁移您的所有资金，因为某些地址的价值太低。您仍然可以继续，但是 {value} 将会丢失。",
+            "error": "资金迁移出现错误，请重试。"
+        },
+        "bundleMiningWarning": {
+            "title": "警告！",
+            "body1": "您在一个或多个已花费的地址上存有资金。",
+            "body2": "我们建议你执行一个自动化程序，以帮助您保护和安全地转移这些资金。",
+            "body3": "如果您关闭了应用程序，您将需要重新启动整个迁移。",
+            "learn": "了解已花费的地址"
+        },
+        "secureSpentAddresses": {
+            "title": "保护已花费的地址",
+            "body1": "在 {number, plural, other {# 个花费的地址}}上检查到有资金存在。",
+            "body2": "我们建议你执行一个自动化程序，以帮助您保护和安全地转移这些资金。",
+            "error": "你不能迁移余额小于1Mi 的已花费的地址"
+        },
+        "securityCheckCompleted": {
+            "title": "安全检查已完成",
+            "body1": "我们已经评估了安全风险等级。再次运行此进程可能会降低您的风险等级。",
+            "body2": "如果您对风险等级感到满意，请按键继续。",
+            "rerun": "重新评估被选中的地址",
+            "continueMigration": "继续迁移"
+        },
+        "securingSpentAddresses": {
+            "title": "保护已花费的地址...",
+            "body1": "这个过程将需要 {minutes, plural, other {# 分钟}}",
+            "body2": "您的计算机将满负荷运行，请等待完成以后再处理其他的事情。"
+        },
+        "transferFragmentedFunds": {
+            "body1": "Firefly将立即开始迁移您的资金。这可能需要一段时间。",
+            "body2": "请确认您的Ledger设备已连接， 并且{legacy} 应用在迁移过程中保持打开状态.",
+            "migrate": "迁移资金",
+            "transaction": "交易 {number}",
+            "rerun": "重试"
         },
         "migrateFailed": {
             "title": "To do",
@@ -141,13 +274,16 @@
         },
         "balance": {
             "title": "您的余额",
-            "body": "您的余额是否正确？"
+            "body": "在继续之前请确保您的余额是正确的。如果它看起来不正确，您可以再次检查。",
+            "error": "最小迁移金额是 1 Mi。请再次检查您的余额是否正确。",
+            "zeroBalance": "请再试一次。如果您仍然找不到您的余额，您输入的种子可能不正确。",
+            "zeroBalanceLedgerLegacy": "请再试一次。如果您仍然找不到您的余额，您可能选择了错误的帐户索引。"
         },
         "settings": {
             "settings": "设置",
             "generalSettings": {
                 "title": "常规设置",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "配置您的应用外观和其他常规设置"
             },
             "security": {
                 "title": "安全设置",
@@ -166,7 +302,7 @@
                 "description": "更改您的账户名称或设置头像"
             },
             "sync": {
-                "title": "同步账户",
+                "title": "同步钱包",
                 "description": ""
             },
             "theme": {
@@ -185,17 +321,23 @@
                 "title": "通知",
                 "description": "交易事件的系统通知"
             },
+            "networkStatus": {
+                "title": "网络状态",
+                "description": "显示你现在所连接的节点状态。"
+            },
             "exportStronghold": {
                 "title": "导出备份",
-                "description": "导出到 Stronghold文件 - 你钱包的完整加密备份和最新交易记录。"
+                "description": "导出到 Stronghold文件 - 完整加密备份您的钱包及其最新交易记录"
             },
             "appLock": {
                 "title": "自动锁定",
-                "description": "在你的钱包锁定并注销你之前所花费的时间"
+                "description": "自动锁定钱包并登出的待机时间",
+                "durationMinute": "{time, plural, one {1分钟} other {# 分钟}}",
+                "durationHour": "{time, plural, one {1小时} other {# 小时}}"
             },
             "changePassword": {
                 "title": "修改密码",
-                "description": "您的密码是用来保护您的钱包的。您必须使用一个强大的密码来保护您的资金。"
+                "description": "您的密码是用来保护您的钱包的。您必须使用一个强有力的密码来保护您的资金"
             },
             "changePincode": {
                 "title": "修改 PIN 码",
@@ -205,17 +347,17 @@
                 "confirmNewPincode": "确认新PIN码",
                 "action": "更改 PIN 码"
             },
-            "resyncAccounts": {
-                "title": "重新同步账户",
-                "description": "启动后台任务来以确保您的帐户同步到最新状态。"
+            "balanceFinder": {
+                "title": "余额搜索器",
+                "description": "对您的币地址进行扩展搜索"
             },
             "hiddenAccounts": {
-                "title": "隐藏帐户",
-                "description": "选择此选项将显示以前隐藏的帐户。"
+                "title": "隐藏钱包列表",
+                "description": "选择此选项将显示以前隐藏的钱包"
             },
             "deleteProfile": {
                 "title": "删除配置文件",
-                "description": "删除您的整个钱包、账户信息和交易历史。请确保您有一个备份。"
+                "description": "删除您的整个账户信息、钱包和交易历史。请确保您有一个备份"
             },
             "deepLinks": {
                 "title": "深链接",
@@ -231,7 +373,7 @@
             },
             "configureNodeList": {
                 "title": "选择节点",
-                "description": "管理你钱包连接节点列表。",
+                "description": "管理您连接的 IOTA网络节点列表",
                 "primaryNode": "主节点",
                 "excludeNode": "排除此节点",
                 "includeNode": "包含此节点",
@@ -239,7 +381,7 @@
                 "setAsPrimary": "设为主要节点",
                 "removeNode": "删除节点",
                 "includeOfficialNodeList": "包含官方节点列表",
-                "noNodes": "尚未配置节点，将使用节点自动选择功能。"
+                "noNodes": "尚未配置节点，将使用节点自动选择功能"
             },
             "proofOfWork": {
                 "title": "工作量证明",
@@ -252,6 +394,10 @@
             "diagnostics": {
                 "title": "诊断程序",
                 "description": "查看系统和应用程序信息"
+            },
+            "migrateLedgerIndex": {
+                "title": "迁移Ledger账户索引",
+                "description": "迁移另一个 Trinity 帐户索引"
             },
             "stateExport": {
                 "title": "状态导出",
@@ -280,7 +426,7 @@
             },
             "reportAnIssue": {
                 "title": "反馈问题",
-                "description": "向开发者反馈错误。请检查以确保它尚未被报告过。"
+                "description": "向开发者反馈错误。请检查以确保该问题尚未被反馈过"
             }
         },
         "login": {
@@ -296,12 +442,20 @@
                 },
                 "hardwareDevice": {
                     "title": "硬件设备",
-                    "noneDetected": "没有检测到"
+                    "statuses": {
+                        "appNotOpen": "IOTA 应用未打开",
+                        "connected": "已连接",
+                        "legacyConnected": "{legacy} 应用程序已打开",
+                        "locked": "锁定",
+                        "mnemonicMismatch": "错误的Ledger设备或记助词",
+                        "notDetected": "未检测到设备",
+                        "otherConnected": "应用已打开"
+                    }
                 },
                 "strongholdStatus": {
                     "title": "钱包状态",
-                    "locked": "Stronghold已锁定",
-                    "unlocked": "Stronghold已解锁"
+                    "locked": "锁定",
+                    "unlocked": "解锁"
                 },
                 "strongholdBackup": {
                     "title": "钱包备份",
@@ -314,7 +468,7 @@
                 "networkDown": "网络已断开",
                 "status": "状态",
                 "messagesPerSecond": "每秒信息数",
-                "confirmationRate": "确认率"
+                "referencedRate": "确认率"
             },
             "profileModal": {
                 "allSettings": "所有设置",
@@ -325,7 +479,7 @@
     "popups": {
         "password": {
             "title": "需要输入密码",
-            "subtitle": "请输入您的密码来解锁Stronghold",
+            "subtitle": "请输入您的密码来解锁您的钱包",
             "backup": "请输入您的密码以导出备份"
         },
         "qr": {
@@ -336,34 +490,35 @@
             "upToDateTitle": "Firefly 目前是最新版本",
             "upToDateDescription": "你正在运行的Firefly是最新的，最安全的版本。",
             "updateAvailable": "Firefly有可用的更新",
-            "updateDetails": "版本{version} - {date}"
+            "updateDetails": "版本{version} - {date}",
+            "noAutoUpdate": "此Windows版本禁用自动更新，请访问 https://firefly.iota.org 下载更新。"
         },
         "backup": {
             "title": "上次备份: {date}",
             "lastBackup": "您上次的备份 {date}",
-            "backupDescription": "定期备份您的账户和交易记录是非常重要的。",
+            "backupDescription": "定期备份您的钱包和交易记录是非常重要的。",
             "backupWarning": "如果您丢失了备份文件和恢复短语，您将再也不能访问您的资金",
             "notBackedUp": "没有备份",
-            "notBackedUpDescription": "您还没有备份您的 Stronghold",
+            "notBackedUpDescription": "您还未备份您的钱包",
             "saving": "正在保存..."
         },
         "deleteAccount": {
             "title": "删除{name}?",
-            "body": "此帐户没有交易历史。它可以被安全地删除。",
+            "body": "此钱包没有交易历史。它可以被安全地删除。",
             "typePassword": "请输入您的钱包密码进行确认。",
-            "hideAccount": "删除帐户",
+            "hideAccount": "删除钱包",
             "errorTitle": "无法删除 {name}",
-            "errorBody1": "您不能删除这个账户，您必须至少有一个账户。"
+            "errorBody1": "您不能删除这个钱包，您必须至少有一个钱包"
         },
         "hideAccount": {
             "title": "是否隐藏 {name}？",
-            "body": "您可以稍后通过在高级设置中启用\"显示隐藏账户\"来查找此账户。",
+            "body": "您可以稍后通过在高级设置中启用\"显示隐藏账户\"来查找此钱包。",
             "typePassword": "请输入您的钱包密码进行确认。",
-            "hideAccount": "隐藏帐户",
+            "hideAccount": "隐藏钱包",
             "errorTitle": "无法隐藏 {name}",
-            "errorBody1": "你只能隐藏余额为0的账户",
-            "errorBody2": "目前您的这个账户还有 {balance} 余额. 请把这些资金移动到另一个账户后重试。",
-            "errorBody3": "您不能隐藏此账户，您必须至少有一个账户。"
+            "errorBody1": "你只能隐藏余额为0的钱包",
+            "errorBody2": "目前你的这个账户还有 {balance} 余额. 请把这些资金移动到另一个钱包后重试。",
+            "errorBody3": "您不能隐藏这个钱包，您必须至少有一个钱包"
         },
         "addressHistory": {
             "title": "{name} 地址历史记录",
@@ -403,30 +558,105 @@
         "transaction": {
             "title": "确认交易",
             "body": "您将要发送 {amount} 到"
+        },
+        "balanceFinder": {
+            "title": "寻找余额",
+            "body": "对地址进行更详尽的搜索以找到缺失的余额。此操作可能需要一段时间。",
+            "totalWalletBalance": "总余额",
+            "typePassword": "输入您的密码以允许搜索。"
+        },
+        "riskFunds": {
+            "title": "警告：迁移过程面临风险的资金",
+            "body1": "强烈建议您在着手迁移之前为您的所有资金做好安全保护。 如果您不能保证资金安全，您的资金就有被盗的风险。",
+            "body2": "建议您为中风险级别或以上的地址重新进行处理。"
+        },
+        "missingBundle": {
+            "title": "警告：迁移过程面临风险的资金",
+            "body": "您在已花费的地址上存有资金，但是没有找到保护这些地址所需的信息。 如果您在很久以前进行了交易，就可能会发生这种情况。您可以继续，但是 {value} 在迁移过程中面临风险。",
+            "learnMore": "了解更多关于已花费的地址",
+            "proceed": "我已经了解风险"
+        },
+        "snapshot": {
+            "title": "正在进行网络升级",
+            "body": "Chrysalis网络升级已经开始。",
+            "bodyMigration": "在维护完成之前暂不支持迁移功能。",
+            "bodyFirefly": "在完成之前Firefly将被暂停使用。完成之后您仍然可以进行代币迁移。"
+        },
+        "ledgerNotConnected": {
+            "connect": "打开您Ledger设备上的IOTA应用以继续",
+            "connectLegacy": "打开您Ledger设备上的 {legacy} 应用以继续"
+        },
+        "ledgerConfirmation": {
+            "confirm": "若要继续，请确认Ledger设备上的弹出窗口"
+        },
+        "ledgerAppGuide": {
+            "title": "Ledger应用安装指南",
+            "steps": {
+                "0": "安装并打开 Ledger Live 应用程序",
+                "1": "请确保您的Ledger设备已连接",
+                "2": "搜索应用: {legacy} 和 IOTA(MIOTA)",
+                "3": "安装应用: {legacy} 和 IOTA(MIOTA)",
+                "4": "请记住，在返回Fifly之前关闭Ledger Live是非常重要的"
+            }
+        },
+        "ledgerConnectionGuide": {
+            "title": "Ledger无法连接时的处理技巧",
+            "steps": {
+                "0": "请确保Ledger Live没有在您的计算机上打开运行",
+                "1": "请确保您已经用PIN码解锁了Ledger设备",
+                "2": "在您的Ledger设备上打开新的 IOTA应用",
+                "3": {
+                    "text": "仍然无法连接？",
+                    "link": "尝试查看Ledger的官方网站支持"
+                }
+            }
+        },
+        "ledgerTransaction": {
+            "remainderAddress": {
+                "title": "确认余额地址",
+                "info": "请确认Ledger上显示的余额地址与下面显示的地址相同。如果地址相同，请同时按下您Ledger上的两个按钮。"
+            },
+            "transaction": {
+                "title": "确认交易",
+                "info": "请确认Ledger上显示的交易信息与下面显示的信息相同。如果信息相同，请同时按下您Ledger上的两个按钮。"
+            }
+        },
+        "ledgerAddress": {
+            "title": "确认接收地址",
+            "body": "请确认Ledger上显示的接收地址与下面显示的地址相同。如果地址相同，请同时按下您Ledger上的两个按钮。"
+        },
+        "ledgerMigrateIndex": {
+            "title": "您需要迁移另一个 Trinity 帐户索引吗？",
+            "body": "您也可以稍后在高级设置中迁移Ledger索引。"
         }
     },
     "charts": {
-        "incomingMi": "传入 {value} Mi",
-        "outgoingMi": "发送 {value} Mi",
+        "incomingMi": "转入 {value}",
+        "outgoingMi": "发送 {value}",
         "portoflio": "资产组合",
         "token": "Token",
-        "accountValue": "账户价值",
-        "accountActivity": "帐户活动",
-        "timeframe1Hour": "1 hour",
-        "timeframe1Day": "1 day",
-        "timeframe1Week": "1 week",
-        "timeframe1Month": "1 month"
+        "accountValue": "钱包金额",
+        "accountActivity": "钱包活动",
+        "timeframe1Hour": "1 小时",
+        "timeframe1Day": "1 天",
+        "timeframe1Week": "1 周",
+        "timeframe1Month": "1个月"
     },
     "actions": {
         "continue": "继续",
         "back": "返回",
+        "previous": "上一步",
+        "next": "下一步",
         "cancel": "取消",
         "close": "关闭",
         "dismiss": "取消",
+        "proceedAnyway": "仍要继续",
         "save": "保存",
         "importSeed": "导入已有的种子",
-        "importWallet": "导入现有钱包",
+        "restoreWallet": "迁移或恢复钱包",
+        "restoreWalletDescription": "迁移到 Chrysalis 或恢复现有钱包",
         "createWallet": "创建新钱包",
+        "createWalletDescription": "在 Chrysalis 上创建一个新的钱包",
         "savePassword": "保存密码",
         "useBiometric": "使用生物特征安全机制",
         "setupPin": "设置PIN码",
@@ -438,7 +668,7 @@
         "verifyRecoveryPhrase": "验证恢复密语",
         "revealRecoveryPhrase": "显示恢复密语",
         "importSeedvault": "导入SeedVault",
-        "checkAgain": "不，再次检查",
+        "checkAgain": "再次检查",
         "importFromFile": "从文件导入",
         "send": "发送",
         "receive": "接收",
@@ -462,11 +692,11 @@
         "updateFirefly": "更新Firefly",
         "restartNow": "立即重启",
         "saveBackup": "保存Stronghold备份",
-        "customizeAcount": "自定义账户",
+        "customizeAcount": "自定义钱包",
         "viewAddressHistory": "显示地址历史记录",
-        "hideAccount": "隐藏此帐户",
-        "showAccount": "显示此帐户",
-        "deleteAccount": "删除帐户",
+        "hideAccount": "隐藏钱包",
+        "showAccount": "取消隐藏该钱包",
+        "deleteAccount": "删除钱包",
         "max": "最大",
         "addNode": "添加节点",
         "updateNode": "更新节点",
@@ -482,21 +712,32 @@
         "copy": "复制",
         "paste": "粘贴",
         "selectAll": "全选",
-        "addAccount": "添加账户",
+        "addAccount": "添加钱包",
         "checkForUpdates": "检查更新",
         "reportAnIssue": "反馈问题",
+        "restore": "还原",
         "clear": "清除",
         "hideDetails": "隐藏详情",
         "yes": "是",
         "no": "否",
+        "skip": "跳过",
         "reset": "重置",
         "downloadRecoveryKit": "保存Recovery Kit模板",
         "skipBackup": "跳过文件备份",
         "finishSetup": "完成设置",
         "readDocumentation": "阅读文档",
         "visitFaq": "访问常见问题",
-        "showHiddenAccounts": "显示隐藏账户",
-        "confirm": "确认"
+        "viewStatus": "查看状态",
+        "showHiddenAccounts": "显示隐藏钱包",
+        "confirm": "确认",
+        "hideNetworkStatistics": "隐藏网络统计信息",
+        "findBalances": "寻找余额",
+        "searchBalances": "搜索余额",
+        "searchAgain": "重新搜索",
+        "searching": "搜索中...",
+        "closeFirefly": "关闭Firefly",
+        "generateAddress": "生成地址",
+        "migrateAgain": "迁移另一个Ledger索引"
     },
     "general": {
         "password": "密码",
@@ -511,14 +752,15 @@
         "received": "已收到",
         "sendPayment": "发送资金",
         "moveFunds": "内部转账",
+        "sendTo": "发送到",
         "sendFunds": "发送资金",
         "sendToAddress": "发送至地址",
         "scanQrOrPaste": "扫描二维码或粘贴地址",
-        "moveFundsBetweenAccounts": "账户之间的资金转移",
+        "moveFundsBetweenAccounts": "钱包间资金互转",
         "sendTokensToAddress": "发送Token到另一个地址",
-        "manageAccount": "账户管理",
-        "customizeAcount": "自定义账户",
-        "account": "账号",
+        "manageAccount": "管理钱包",
+        "customizeAcount": "自定义你的钱包",
+        "account": "钱包",
         "sendingToAddress": "发送至地址",
         "amount": "金额",
         "addAddress": "新增地址",
@@ -529,12 +771,10 @@
         "myAddress": "我的地址",
         "shareAddress": "分享地址",
         "yourAddress": "您的地址",
+        "newRemainder": "新的余额",
+        "remainder": "剩余资金",
         "generateNewAddress": "生成新地址",
         "copyAddress": "复制地址",
-        "haveTextBackup": "我有一个文本备份",
-        "haveFileBackup": "我有一个文本备份",
-        "enterSeedOrPhrase": "输入恢复密语或种子",
-        "uploadSeedvaultOrStronghold": "导入Strong或 SeedVault 文件",
         "import": "导入",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -543,24 +783,25 @@
         "lightTheme": "浅色主题",
         "darkTheme": "深色主题",
         "balance": "余额",
-        "accountBalance": "账户余额",
+        "accountBalance": "钱包余额",
         "incoming": "收到",
         "outgoing": "转出",
         "totalIn": "收入总计",
         "totalOut": "支出总计",
-        "accounts": "帐户",
-        "myAccounts": "我的账户",
+        "accounts": "钱包列表",
+        "myAccounts": "我的钱包",
         "automaticNodeSelection": "自动选择节点",
         "manualNodeSelection": "手动选择节点",
         "profiles": "用户配置",
         "developerProfile": "开发者模式",
+        "developerProfileDescription": "允许您连接到测试网",
         "dev": "开发者",
-        "createAccount": "创建帐户",
-        "accountName": "账户名称",
+        "createAccount": "创建钱包",
+        "accountName": "钱包名称",
         "latestTransactions": "最新交易",
         "transactions": "交易",
         "security": "安全设置",
-        "accountAddress": "账户地址",
+        "accountAddress": "钱包地址",
         "nodes": "节点",
         "wallet": "钱包",
         "help": "帮助",
@@ -568,29 +809,33 @@
         "messageId": "消息 ID",
         "inputAddress": "发送地址",
         "receiveAddress": "接收地址",
+        "newAddress": "新地址",
         "date": "日期",
         "status": "状态",
         "confirmed": "已确认",
         "pending": "正在处理",
-        "noAccounts": "您没有帐户，请创建一个。",
+        "noAccounts": "您还没有钱包，请创建一个。",
         "loadingAccounts": "加载中，请稍候...",
         "addProfile": "添加个人档案",
         "noRecentHistory": "没有最近的历史记录",
-        "transferSyncing": "正在同步账户",
+        "firstSync": "同步历史记录，可能需要一段时间...",
+        "transferSyncing": "正在同步钱包",
         "transferSelectingInputs": "选择输入",
-        "transferRemainderAddress": "生成剩余的存款地址",
+        "transferRemainderAddress": "生成余额地址",
+        "transferPreparedTransaction": "准备交易...",
         "transferSigning": "签名交易",
         "transferPow": "执行PoW",
         "transferBroadcasting": "正在广播交易...",
         "transferComplete": "转账完毕",
-        "creatingAccount": "正在创建帐户，请稍候...",
-        "updatingAccount": "正在更新帐户，请稍候...",
-        "accountSyncing": "帐户正在同步",
-        "accountSyncComplete": "帐户同步完成",
+        "generatingReceiveAddress": "生成接收地址",
+        "creatingAccount": "正在创建钱包，请稍候...",
+        "updatingAccount": "正在更新钱包，请稍候...",
+        "accountSyncing": "正在同步钱包",
+        "accountSyncComplete": "钱包同步完成",
         "passwordUpdating": "正在更新密码...",
         "passwordSuccess": "密码更新成功",
         "passwordFailed": "更新密码失败",
-        "syncingAccounts": "正在同步账户...",
+        "syncingAccounts": "正在同步钱包...",
         "exportingStronghold": "导出Stronghold...",
         "exportingStrongholdSuccess": "Stronghold导出成功",
         "exportingStrongholdFailed": "Stronghold导出失败",
@@ -604,7 +849,18 @@
         "passwordStrength3": "一般",
         "passwordStrength4": "强壮的",
         "creatingProfile": "正在创建帐户，请稍候...",
-        "accountRemoved": "此帐户被隐藏。请取消隐藏以执行转账。"
+        "fundMigration": "资金迁移",
+        "accountRemoved": "此钱包被隐藏。请取消隐藏以执行转账。",
+        "receivingTo": "正在接收到 {account}",
+        "sendingFrom": "正在从 {account} 发送",
+        "receivedTo": "已接收至 {account}",
+        "sentFrom": "已从 {account} 发送",
+        "receiving": "接收",
+        "sending": "发送",
+        "legacyNetwork": "旧的网络",
+        "capsLock": "大写锁定键已开启",
+        "version": "版本 {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "今日",
@@ -627,7 +883,8 @@
         "calcMinutesRemaining": "正在计算剩余分钟...",
         "minutesRemaining": "{minutes, plural, one {还剩最后一分钟...} other {还剩余 # 分钟...}}",
         "copiedToClipboard": "复制到剪贴板",
-        "accountsSynchronized": "账户同步完成"
+        "accountsSynchronized": "钱包同步完成",
+        "fundsAvailableSoon": "您的资金将很快变为可用资金。"
     },
     "error": {
         "profile": {
@@ -657,14 +914,17 @@
             "incorrect": "您当前的 PIN 码不正确。"
         },
         "account": {
-            "length": "您的账户名称不能超过 {length, plural, one {1 个字符} other {# 字符}}。",
-            "empty": "您必须使用您的最新帐户才能创建一个新帐户。",
-            "notEmpty": "您必须在删除此帐户之前转账您的余额。",
-            "duplicate": "具有此名称的帐户已存在。",
+            "length": "您的钱包名称不能超过 {length, plural, one {1 个字符} other {# 字符}}。",
+            "empty": "您必须先使用您最新的钱包之后才能创建一个新钱包。",
+            "notEmpty": "您必须在删除此帐户之前转移您的余额。",
+            "duplicate": "此名称的钱包已经存在",
             "tilde": "配置名称不能以“~”字符开头。",
             "control": "配置名称不能包含控制字符。",
             "startDot": "配置名称不能以 '.' 字符开头。",
-            "chars": "配置名称不能包含以下字符 <>:\"/\\|?*"
+            "chars": "配置名称不能包含以下字符 <>:\"/\\|?*",
+            "index": "您的帐户索引必须是0-2,147,483,647之间的数字。",
+            "page": "您的帐户页码必须是0-2,147,483,647之间的数字。",
+            "syncing": "钱包同步时出错。"
         },
         "send": {
             "addressLength": "地址的长度应该是 {length, plural,one {1 个字符} other {# 个字符}}。",
@@ -676,9 +936,11 @@
             "wrongAddressFormat": "地址格式不正确。",
             "invalidAddress": "地址无效的",
             "insufficientFunds": "该账户资金不足。",
-            "noToAccount": "您尚未选择一个账户来发送资金。",
+            "noToAccount": "您尚未选择一个收款账户来发送资金。",
             "sendingDust": "您的发送不能小于 1 Mi。",
-            "leavingDust": "您的地址余额不能少于1Mi。"
+            "leavingDust": "您的地址余额不能少于1Mi。",
+            "cancelled": "您的交易已被取消。",
+            "transaction": "发送交易错误。请再次尝试。"
         },
         "node": {
             "invalid": "请输入有效的URL",
@@ -699,6 +961,35 @@
             "phraseWordCount": "您的恢复密语中应该有24个单词，目前 {length, plural, one {只有 1}other {是 #}} 个单词。",
             "phraseUnrecognizedWord": "恢复短语中无法识别的单词“{word}”",
             "phraseCaseWord": "单词 \"{word}\" 应为小写"
+        },
+        "ledger": {
+            "appNotOpen": "您必须在您的Ledger设备上打开 IOTA应用程序。",
+            "generic": "连接到您的Ledger设备时出错。",
+            "legacyConnected": "Ledger设备上打开的应用程序不正确。",
+            "locked": "请输入 PIN 码来解锁您的Ledger设备。",
+            "mnemonicMismatch": "您连接了错误的Ledger设备或助记符已更改。",
+            "notDetected": "没有检测到Ledger设备。",
+            "notFound": "未找到Ledger设备",
+            "otherConnected": "Ledger设备上打开的应用程序不正确。",
+            "generateAddress": "地址生成出错。",
+            "timeout": "您的Ledger设备连接超时。",
+            "disconnected": "您的Ledger设备已断开."
+        },
+        "popup": {
+            "preventClose": "此弹出窗口无法关闭。"
+        },
+        "migration": {
+            "missingBundle": "试图查找交易包信息时发生错误"
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "风险等级: {risk}",
+            "veryHigh": "非常高",
+            "high": "较高",
+            "medium": "中",
+            "low": "较低",
+            "veryLow": "非常低"
         }
     }
 }

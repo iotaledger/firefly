@@ -1,47 +1,25 @@
 <script lang="typescript">
     import { AccountTile, Button, Text } from 'shared/components'
-    import { loggedIn } from 'shared/lib/app'
-    import { closePopup, openPopup } from 'shared/lib/popup'
-    import { activeProfile } from 'shared/lib/profile'
+    import { activeProfile, isLedgerProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
-    import { selectedAccountId, WalletAccount } from 'shared/lib/wallet'
+    import { selectedAccountId } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
-    import type { Readable, Writable } from 'svelte/store'
+    import type { Readable } from 'svelte/store'
     import { Receive, Send } from '.'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
 
-    export let locale
-    export let send
-    export let internalTransfer
-    export let generateAddress
+    export let locale: Locale
+
+    export let onSend = (..._: any[]): void => {}
+    export let onInternalTransfer = (..._: any[]): void => {}
+    export let onGenerateAddress = (..._: any[]): void => {}
+
     export let isGeneratingAddress
 
     const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
-    const accountsLoaded = getContext<Writable<boolean>>('walletAccountsLoaded')
     const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
-
-    let startInit
-
-    if ($walletRoute === WalletRoutes.Init && !$accountsLoaded && $loggedIn) {
-        startInit = Date.now()
-        openPopup({
-            type: 'busy',
-            hideClose: true,
-            fullScreen: true,
-            transition: false,
-        })
-    }
-
-    $: {
-        if ($accountsLoaded) {
-            const minTimeElapsed = 3000 - (Date.now() - startInit)
-            if (minTimeElapsed < 0) {
-                closePopup()
-            } else {
-                setTimeout(() => closePopup(), minTimeElapsed)
-            }
-        }
-    }
 
     function handleAccountClick(accountId) {
         selectedAccountId.set(accountId)
@@ -62,16 +40,17 @@
             </div>
             {#if $viewableAccounts.length > 0}
                 <div
-                    class="grid {$viewableAccounts.length === 1 ? 'grid-cols-1' : 'grid-cols-2'} auto-rows-max gap-4 w-full flex-auto overflow-y-auto h-1 -mr-2 pr-2 scroll-secondary">
+                    class="grid {$viewableAccounts.length === 1 ? 'grid-cols-1' : 'grid-cols-2'} auto-rows-max gap-4 flex-auto overflow-y-auto h-1 -mr-2 pr-2 scroll-secondary">
                     {#each $viewableAccounts as account}
                         <AccountTile
                             color={account.color}
                             name={account.alias}
                             balance={account.balance}
                             balanceEquiv={account.balanceEquiv}
-                            hidden={hiddenAccounts.includes(account.id)}
                             size={$viewableAccounts.length === 1 ? 'l' : 'm'}
-                            onClick={() => handleAccountClick(account.id)} />
+                            hidden={hiddenAccounts.includes(account.id)}
+                            onClick={() => handleAccountClick(account.id)}
+                            ledger={$isLedgerProfile} />
                     {/each}
                 </div>
             {:else}
@@ -80,7 +59,7 @@
         </div>
     </div>
 {:else if $walletRoute === WalletRoutes.Send}
-    <Send {send} {internalTransfer} {locale} />
+    <Send {onSend} {onInternalTransfer} {locale} />
 {:else if $walletRoute === WalletRoutes.Receive}
-    <Receive {isGeneratingAddress} {generateAddress} {locale} />
+    <Receive {isGeneratingAddress} {onGenerateAddress} {locale} />
 {/if}

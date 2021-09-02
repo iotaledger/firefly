@@ -1,5 +1,8 @@
 <script lang="typescript">
     import { Icon, Input, Text } from 'shared/components'
+    import type { Locale } from 'shared/lib/typings/i18n'
+
+    export let locale: Locale
 
     export let value = ''
     export let classes = ''
@@ -8,7 +11,6 @@
     export let showRevealToggle = false
     export let strengthLevels = 4
     export let placeholder = undefined
-    export let locale = undefined
     export let maxlength = undefined
     export let error = null
     export let integer = false
@@ -58,7 +60,7 @@
             </div>
         </strength-meter>
     {/if}
-    <div class="flex w-full relative">
+    <div class="flex  w-full relative">
         <Input
             {error}
             {type}
@@ -70,7 +72,9 @@
             placeholder={placeholder || locale('general.password')}
             {submitHandler}
             disableContextMenu={true}
-            spellcheck="false" />
+            spellcheck="false"
+            {locale}
+            capsLockWarning={true} />
         {#if showRevealToggle === true && !disabled}
             <button type="button" on:click={() => revealToggle()} tabindex="-1" class="absolute top-3 right-3">
                 <Icon icon={revealed ? 'view' : 'hide'} classes="text-blue-500" />

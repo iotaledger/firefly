@@ -1,41 +1,62 @@
 <script lang="typescript">
     import { DashboardPane } from 'shared/components'
     import { clearSendParams } from 'shared/lib/app'
-    import { appSettings } from 'shared/lib/appSettings'
-    import { deepLinkRequestActive } from 'shared/lib/deepLinking'
-    import { addProfileCurrencyPriceData, priceData } from 'shared/lib/marketData'
+    import { deepCopy } from 'shared/lib/helpers'
+    import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { addProfileCurrencyPriceData, priceData } from 'shared/lib/market'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, isStrongholdLocked, updateProfile } from 'shared/lib/profile'
+    import { closePopup, openPopup } from 'shared/lib/popup'
+    import {
+        activeProfile,
+        isLedgerProfile,
+        isSoftwareProfile,
+        isStrongholdLocked,
+        setMissingProfileType,
+        updateProfile,
+    } from 'shared/lib/profile'
     import { walletRoute } from 'shared/lib/router'
+    import { TransferProgressEventType, LedgerErrorType } from 'shared/lib/typings/events'
+    import type { Message, Transaction } from 'shared/lib/typings/message'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import {
-        AccountMessage,
-        AccountsBalanceHistory,
         api,
-        BalanceHistory,
-        BalanceOverview,
+        asyncSyncAccounts,
         getAccountMessages,
         getAccountMeta,
         getAccountsBalanceHistory,
+        getIncomingFlag,
+        getInternalFlag,
+        getSyncAccountOptions,
         getTransactions,
         getWalletBalanceHistory,
+        hasGeneratedALedgerReceiveAddress,
         initialiseListeners,
+        isFirstSessionSync,
+        isSelfTransaction,
         isTransferring,
         prepareAccountInfo,
+        processMigratedTransactions,
         removeEventListeners,
         selectedAccountId,
-        syncAccounts,
+        setIncomingFlag,
         transferState,
         updateBalanceOverview,
         wallet,
-        WalletAccount,
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
     import { derived, Readable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import {
+        AccountMessage,
+        AccountsBalanceHistory,
+        BalanceHistory,
+        BalanceOverview,
+        WalletAccount
+    } from 'shared/lib/typings/wallet'
+    import { MigratedTransaction } from 'shared/lib/typings/profile'
 
-    export let locale
+    export let locale: Locale
 
     const { accounts, balanceOverview, accountsLoaded, internalTransfersInProgress } = $wallet
 
@@ -48,9 +69,7 @@
     const selectedAccount = derived([selectedAccountId, accounts], ([$selectedAccountId, $accounts]) =>
         $accounts.find((acc) => acc.id === $selectedAccountId)
     )
-    const accountTransactions = derived([selectedAccount], ([$selectedAccount]) => {
-        return $selectedAccount ? getAccountMessages($selectedAccount) : []
-    })
+    const accountTransactions = derived([selectedAccount], ([$selectedAccount]) => $selectedAccount ? getAccountMessages($selectedAccount) : [])
 
     const viewableAccounts: Readable<WalletAccount[]> = derived([activeProfile, accounts], ([$activeProfile, $accounts]) => {
         if (!$activeProfile) {
@@ -58,7 +77,7 @@
         }
 
         if ($activeProfile.settings.showHiddenAccounts) {
-            let sortedAccounts = $accounts.sort((a, b) => a.index - b.index)
+            const sortedAccounts = $accounts.sort((a, b) => a.index - b.index)
 
             // If the last account is "hidden" and has no value, messages or history treat it as "deleted"
             // This account will get re-used if someone creates a new one
@@ -86,8 +105,10 @@
         return $accounts.filter((a) => !$activeProfile.hiddenAccounts?.includes(a.id)).sort((a, b) => a.index - b.index)
     })
 
-    const transactions = derived(viewableAccounts, ($viewableAccounts) => {
-        return getTransactions($viewableAccounts)
+    const transactions = derived([viewableAccounts, activeProfile], ([$viewableAccounts, $activeProfile]) => {
+        const _migratedTransactions = $activeProfile?.migratedTransactions || []
+
+        return [..._migratedTransactions, ...getTransactions($viewableAccounts)]
     })
 
     setContext<Writable<BalanceOverview>>('walletBalance', balanceOverview)
@@ -95,7 +116,7 @@
     setContext<Readable<WalletAccount[]>>('viewableAccounts', viewableAccounts)
     setContext<Readable<WalletAccount[]>>('liveAccounts', liveAccounts)
     setContext<Writable<boolean>>('walletAccountsLoaded', accountsLoaded)
-    setContext<Readable<AccountMessage[]>>('walletTransactions', transactions)
+    setContext<Readable<AccountMessage[] | MigratedTransaction[]>>('walletTransactions', transactions)
     setContext<Readable<WalletAccount>>('selectedAccount', selectedAccount)
     setContext<Readable<AccountsBalanceHistory>>('accountsBalanceHistory', accountsBalanceHistory)
     setContext<Readable<AccountMessage[]>>('accountTransactions', accountTransactions)
@@ -103,18 +124,54 @@
 
     let isGeneratingAddress = false
 
+    // If wallet route or account changes force regeneration of Ledger receive address
+    $: {
+        $walletRoute
+        $selectedAccountId
+        if ($isLedgerProfile) {
+            hasGeneratedALedgerReceiveAddress.set(false)
+        }
+    }
+
+    $: if ($accountsLoaded) {
+        // update profileType if it is missing
+        if (!$activeProfile?.type) {
+            setMissingProfileType($accounts)
+        }
+    }
+
     function getAccounts() {
+        const _onError = (error: any = null) => {
+            if ($isLedgerProfile) {
+                if (!LedgerErrorType[error.type]) {
+                    displayNotificationForLedgerProfile('error', true, true, false, false, error)
+                }
+            } else {
+                showAppNotification({
+                    type: 'error',
+                    message: locale(error?.error || 'error.global.generic'),
+                })
+            }
+        }
+
         api.getAccounts({
             onSuccess(accountsResponse) {
-                const _continue = () => {
+                const _continue = async () => {
                     accountsLoaded.set(true)
-                    const gapLimit = $activeProfile?.gapLimit ?? 10
-                    syncAccounts(false, 0, gapLimit, 5)
-                    updateProfile('gapLimit', 10)
+
+                    const { gapLimit, accountDiscoveryThreshold } = getSyncAccountOptions()
+
+                    try {
+                        await asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
+
+                        if($isFirstSessionSync) isFirstSessionSync.set(false)
+                    } catch (err) {
+                        _onError(err)
+                    }
                 }
 
                 if (accountsResponse.payload.length === 0) {
-                    _continue()
+                    void _continue()
                 } else {
                     const totalBalance = {
                         balance: 0,
@@ -123,8 +180,40 @@
                     }
 
                     let completeCount = 0
-                    let newAccounts = []
+                    const newAccounts = []
                     for (const payloadAccount of accountsResponse.payload) {
+                        // Only keep messages with a payload
+                        payloadAccount.messages = payloadAccount.messages.filter((m) => m.payload)
+
+                        // The wallet only returns one side of internal transfers
+                        // to the same account, so create the other side by first finding
+                        // the internal messages
+                        const internalMessages = payloadAccount.messages.filter((m) => getInternalFlag(m.payload))
+
+                        for (const internalMessage of internalMessages) {
+                            // Check if the message sends to another address in the same account
+                            const isSelf = isSelfTransaction(internalMessage.payload, payloadAccount)
+
+                            if (isSelf) {
+                                // It's a transfer between two addresses in the same account
+                                // Try and find the other side of the pair where the message id
+                                // would be the same and the incoming flag the opposite
+                                const internalIncoming = getIncomingFlag(internalMessage.payload)
+                                let pair: Message = internalMessages.find(
+                                    (m) => m.id === internalMessage.id && getIncomingFlag(m.payload) !== internalIncoming
+                                )
+
+                                // Can't find the other side of the pair so clone the original
+                                // reverse its incoming flag and store it
+                                if (!pair) {
+                                    pair = deepCopy(internalMessage) as Message
+                                    // Reverse the incoming flag for the other side of the pair
+                                    setIncomingFlag(pair.payload, !getIncomingFlag(pair.payload))
+                                    payloadAccount.messages.push(pair)
+                                }
+                            }
+                        }
+
                         getAccountMeta(payloadAccount.id, (err, meta) => {
                             if (!err) {
                                 totalBalance.balance += meta.balance
@@ -134,25 +223,23 @@
                                 const account = prepareAccountInfo(payloadAccount, meta)
                                 newAccounts.push(account)
                             } else {
-                                console.error(err)
+                                _onError(err)
                             }
 
                             completeCount++
 
                             if (completeCount === accountsResponse.payload.length) {
                                 accounts.update((accounts) => [...accounts, ...newAccounts].sort((a, b) => a.index - b.index))
+                                processMigratedTransactions(payloadAccount.id, payloadAccount.messages, payloadAccount.addresses)
                                 updateBalanceOverview(totalBalance.balance, totalBalance.incoming, totalBalance.outgoing)
-                                _continue()
+                                void _continue()
                             }
                         })
                     }
                 }
             },
             onError(err) {
-                showAppNotification({
-                    type: 'error',
-                    message: locale(err.error),
-                })
+                _onError(err)
             },
         })
     }
@@ -160,6 +247,9 @@
     function onGenerateAddress(accountId) {
         const _generate = () => {
             isGeneratingAddress = true
+
+            if ($isLedgerProfile) displayNotificationForLedgerProfile('error', true, true)
+
             api.getUnusedAddress(accountId, {
                 onSuccess(response) {
                     accounts.update((accounts) =>
@@ -175,33 +265,51 @@
                             return account
                         })
                     )
+                    closePopup(true)
+
                     isGeneratingAddress = false
+                    hasGeneratedALedgerReceiveAddress.set(true)
                 },
                 onError(err) {
+                    closePopup(true)
+
+                    console.error(err)
+
                     isGeneratingAddress = false
-                    showAppNotification({
-                        type: 'error',
-                        message: locale(err.error),
-                    })
+
+                    const isClientError = err && err.type === 'ClientError'
+                    const shouldHideErrorNotification = isClientError && err.error === 'error.node.chrysalisNodeInactive'
+                    if (!shouldHideErrorNotification) {
+                        /**
+                         * NOTE: To ensure a clear error message (for Ledger users),
+                         * we need to update the locale path.
+                         */
+                        const localePath = isClientError && $isLedgerProfile ? 'error.ledger.generateAddress' : err.error
+                        showAppNotification({
+                            type: 'error',
+                            message: locale(localePath),
+                        })
+                    }
                 },
             })
         }
 
-        api.getStrongholdStatus({
-            onSuccess(strongholdStatusResponse) {
-                if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                    openPopup({ type: 'password', props: { onSuccess: _generate } })
-                } else {
-                    _generate()
-                }
-            },
-            onError(err) {
-                showAppNotification({
-                    type: 'error',
-                    message: locale(err.error),
-                })
-            },
-        })
+        if ($isSoftwareProfile) {
+            api.getStrongholdStatus({
+                onSuccess(strongholdStatusResponse) {
+                    if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
+                        openPopup({ type: 'password', props: { onSuccess: _generate } })
+                    } else {
+                        _generate()
+                    }
+                },
+                onError(error) {
+                    console.error(error)
+                },
+            })
+        } else {
+            promptUserToConnectLedger(false, () => _generate(), undefined)
+        }
     }
 
     function findReuseAccount() {
@@ -240,22 +348,20 @@
                 api.setAlias(reuseAccountId, alias, {
                     onSuccess() {
                         let hasUpdated = false
-                        accounts.update((_accounts) => {
-                            return _accounts.map((account) => {
-                                if (account.id === reuseAccountId) {
-                                    hasUpdated = true
-                                    return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                                        {} as WalletAccount,
-                                        account,
-                                        {
-                                            alias,
-                                        }
-                                    )
-                                }
+                        accounts.update((_accounts) => _accounts.map((account) => {
+                            if (account.id === reuseAccountId) {
+                                hasUpdated = true
+                                return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
+                                    {} as WalletAccount,
+                                    account,
+                                    {
+                                        alias,
+                                    }
+                                )
+                            }
 
-                                return account
-                            })
-                        })
+                            return account
+                        }))
 
                         // We didn't have the account in the list to update
                         // so we need to retrieve the details from the wallet manually
@@ -267,7 +373,7 @@
                                         getAccountMeta(reuseAccountId, (err, meta) => {
                                             if (!err) {
                                                 const account = prepareAccountInfo(ac, meta)
-                                                accounts.update((accounts) => [...accounts, account])
+                                                accounts.update((accounts) => [...accounts, account] as WalletAccount[])
                                             }
                                         })
                                     }
@@ -283,24 +389,25 @@
                         completeCallback()
                     },
                     onError(err) {
-                        completeCallback(locale(err.error))
+                        completeCallback(err)
                     },
                 })
             } else {
                 api.createAccount(
                     {
                         alias,
-                        signerType: { type: 'Stronghold' },
-                        clientOptions: $accounts[0].clientOptions,
+                        signerType: $accounts[0]?.signerType,
+                        clientOptions: $accounts[0]?.clientOptions,
                     },
                     {
                         onSuccess(createAccountResponse) {
-                            const account: WalletAccount = prepareAccountInfo(createAccountResponse.payload, {
+                            const account = prepareAccountInfo(createAccountResponse.payload, {
                                 balance: 0,
                                 incoming: 0,
                                 outgoing: 0,
                                 depositAddress: createAccountResponse.payload.addresses[0].address,
-                            })
+                            }) as WalletAccount
+
                             // immediately store the account; we update it later after sync
                             // we do this to allow offline account creation
                             accounts.update((accounts) => [...accounts, account])
@@ -309,15 +416,13 @@
                                     onSuccess(_syncAccountResponse) {
                                         getAccountMeta(createAccountResponse.payload.id, (err, meta) => {
                                             if (!err) {
-                                                const account = prepareAccountInfo(createAccountResponse.payload, meta)
-                                                accounts.update((storedAccounts) => {
-                                                    return storedAccounts.map((storedAccount) => {
-                                                        if (storedAccount.id === account.id) {
-                                                            return account
-                                                        }
-                                                        return storedAccount
-                                                    })
-                                                })
+                                                const account = prepareAccountInfo(createAccountResponse.payload, meta) as WalletAccount
+                                                accounts.update((storedAccounts) => storedAccounts.map((storedAccount) => {
+                                                    if (storedAccount.id === account.id) {
+                                                        return account
+                                                    }
+                                                    return storedAccount
+                                                }))
                                             }
                                             resolve(null)
                                         })
@@ -334,25 +439,29 @@
                             })
                         },
                         onError(err) {
-                            completeCallback(locale(err.error))
+                            completeCallback(err)
                         },
                     }
                 )
             }
         }
 
-        api.getStrongholdStatus({
-            onSuccess(strongholdStatusResponse) {
-                if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                    openPopup({ type: 'password', props: { onSuccess: _create, onCancelled: completeCallback } })
-                } else {
-                    _create()
-                }
-            },
-            onError(err) {
-                completeCallback(locale(err.error))
-            },
-        })
+        if ($isSoftwareProfile) {
+            api.getStrongholdStatus({
+                onSuccess(strongholdStatusResponse) {
+                    if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
+                        openPopup({ type: 'password', props: { onSuccess: _create } })
+                    } else {
+                        _create()
+                    }
+                },
+                onError(error) {
+                    console.error(error)
+                },
+            })
+        } else {
+            _create()
+        }
     }
 
     function onSend(senderAccountId, receiveAddress, amount) {
@@ -366,27 +475,27 @@
                     remainder_value_strategy: {
                         strategy: 'ChangeAddress',
                     },
-                    indexation: { index: 'firefly', data: new Array() },
+                    indexation: { index: 'firefly', data: [] },
                 },
                 {
                     onSuccess(response) {
-                        accounts.update((_accounts) => {
-                            return _accounts.map((_account) => {
-                                if (_account.id === senderAccountId) {
-                                    return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                                        {} as WalletAccount,
-                                        _account,
-                                        {
-                                            messages: [response.payload, ..._account.messages],
-                                        }
-                                    )
-                                }
+                        accounts.update((_accounts) => _accounts.map((_account) => {
+                            if (_account.id === senderAccountId) {
+                                return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
+                                    {} as WalletAccount,
+                                    _account,
+                                    {
+                                        messages: [response.payload, ..._account.messages],
+                                    }
+                                )
+                            }
 
-                                return _account
-                            })
+                            return _account
+                        }))
+
+                        transferState.set({
+                            type: TransferProgressEventType.Complete,
                         })
-
-                        transferState.set('Complete')
 
                         setTimeout(() => {
                             clearSendParams()
@@ -404,26 +513,22 @@
             )
         }
 
-        api.getStrongholdStatus({
-            onSuccess(strongholdStatusResponse) {
-                if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                    openPopup({
-                        type: 'password',
-                        props: {
-                            onSuccess: _send,
-                        },
-                    })
-                } else {
-                    _send()
-                }
-            },
-            onError(err) {
-                showAppNotification({
-                    type: 'error',
-                    message: locale(err.error),
-                })
-            },
-        })
+        if ($isSoftwareProfile) {
+            api.getStrongholdStatus({
+                onSuccess(strongholdStatusResponse) {
+                    if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
+                        openPopup({ type: 'password', props: { onSuccess: _send } })
+                    } else {
+                        _send()
+                    }
+                },
+                onError(error) {
+                    console.error(error)
+                },
+            })
+        } else {
+            _send()
+        }
     }
 
     function onInternalTransfer(senderAccountId, receiverAccountId, amount, internal) {
@@ -442,39 +547,28 @@
                         return transfers
                     })
 
-                    accounts.update((_accounts) => {
-                        return _accounts.map((_account) => {
-                            const isSenderAccount = _account.id === senderAccountId
-                            const isReceiverAccount = _account.id === receiverAccountId
-                            if (isSenderAccount || isReceiverAccount) {
-                                return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                                    {} as WalletAccount,
-                                    _account,
-                                    {
-                                        messages: [
-                                            Object.assign({}, message, {
-                                                payload: Object.assign({}, message.payload, {
-                                                    data: Object.assign({}, message.payload.data, {
-                                                        essence: Object.assign({}, message.payload.data.essence, {
-                                                            data: Object.assign({}, message.payload.data.essence.data, {
-                                                                incoming: isReceiverAccount,
-                                                                internal: true,
-                                                            }),
-                                                        }),
-                                                    }),
-                                                }),
-                                            }),
-                                            ..._account.messages,
-                                        ],
-                                    }
-                                )
-                            }
+                    accounts.update((_accounts) => _accounts.map((_account) => {
+                        if (_account.id === senderAccountId) {
+                            const m = deepCopy(message) as Message
+                            const mPayload = m.payload as Transaction
+                            mPayload.data.essence.data.incoming = false
+                            mPayload.data.essence.data.internal = true
+                            _account.messages.push(m)
+                        }
+                        if (_account.id === receiverAccountId) {
+                            const m = deepCopy(message) as Message
+                            const mPayload = m.payload as Transaction
+                            mPayload.data.essence.data.incoming = true
+                            mPayload.data.essence.data.internal = true
+                            _account.messages.push(m)
+                        }
 
-                            return _account
-                        })
+                        return _account
+                    }))
+
+                    transferState.set({
+                        type: TransferProgressEventType.Complete,
                     })
-
-                    transferState.set('Complete')
 
                     setTimeout(() => {
                         clearSendParams(internal)
@@ -491,49 +585,50 @@
             })
         }
 
-        api.getStrongholdStatus({
-            onSuccess(strongholdStatusResponse) {
-                if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                    openPopup({ type: 'password', props: { onSuccess: _internalTransfer } })
-                } else {
-                    _internalTransfer()
-                }
-            },
-            onError(err) {
-                showAppNotification({
-                    type: 'error',
-                    message: locale(err.error),
-                })
-            },
-        })
-    }
-
-    $: {
-        if ($deepLinkRequestActive && $appSettings.deepLinking) {
-            walletRoute.set(WalletRoutes.Send)
-            deepLinkRequestActive.set(false)
+        if ($isSoftwareProfile) {
+            api.getStrongholdStatus({
+                onSuccess(strongholdStatusResponse) {
+                    if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
+                        openPopup({ type: 'password', props: { onSuccess: _internalTransfer } })
+                    } else {
+                        _internalTransfer()
+                    }
+                },
+                onError(error) {
+                    console.error(error)
+                },
+            })
+        } else {
+            _internalTransfer()
         }
     }
 
     onMount(() => {
-        if (!$accountsLoaded) {
-            getAccounts()
+        // If we are in settings when logged out the router reset
+        // switches back to the wallet, but there is no longer
+        // an active profile, only init if there is a profile
+        if ($activeProfile) {
+            if (!$accountsLoaded) {
+                getAccounts()
+            }
+
+            removeEventListeners($activeProfile.id)
+
+            initialiseListeners()
+
+            if ($isSoftwareProfile) {
+                api.getStrongholdStatus({
+                    onSuccess(strongholdStatusResponse) {
+                        isStrongholdLocked.set(strongholdStatusResponse.payload.snapshot.status === 'Locked')
+                    },
+                    onError(error) {
+                        console.error(error)
+                    },
+                })
+            }
+
+            void addProfileCurrencyPriceData()
         }
-
-        removeEventListeners($activeProfile.id)
-
-        initialiseListeners()
-
-        api.getStrongholdStatus({
-            onSuccess(strongholdStatusResponse) {
-                isStrongholdLocked.set(strongholdStatusResponse.payload.snapshot.status === 'Locked')
-            },
-            onError(error) {
-                console.error(error)
-            },
-        })
-
-        addProfileCurrencyPriceData()
     })
 </script>
 
@@ -546,9 +641,9 @@
 {#if $walletRoute === WalletRoutes.Account && $selectedAccountId}
     <Account
         {isGeneratingAddress}
-        send={onSend}
-        internalTransfer={onInternalTransfer}
-        generateAddress={onGenerateAddress}
+        {onSend}
+        {onInternalTransfer}
+        {onGenerateAddress}
         {locale} />
 {:else}
     <div class="wallet-wrapper w-full h-full flex flex-col p-10 flex-1 bg-gray-50 dark:bg-gray-900">
@@ -563,9 +658,9 @@
                         <DashboardPane classes="-mt-5 h-full z-0">
                             <WalletActions
                                 {isGeneratingAddress}
-                                send={onSend}
-                                internalTransfer={onInternalTransfer}
-                                generateAddress={onGenerateAddress}
+                                {onSend}
+                                {onInternalTransfer}
+                                {onGenerateAddress}
                                 {locale} />
                         </DashboardPane>
                     {/if}

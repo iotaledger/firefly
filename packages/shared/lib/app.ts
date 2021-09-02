@@ -1,9 +1,10 @@
+import { isSoftwareProfile } from 'shared/lib/profile'
 import { get, writable } from 'svelte/store'
-import { persistent } from './helpers'
 import { localize } from './i18n'
+import { stopPollingLedgerStatus } from './ledger'
 import { showAppNotification } from './notifications'
 import { closePopup } from './popup'
-import { activeProfile, clearActiveProfile, isStrongholdLocked } from './profile'
+import { activeProfile, clearActiveProfile, isLedgerProfile, isStrongholdLocked } from './profile'
 import { resetRouter } from './router'
 import { api, destroyActor, resetWallet } from './wallet'
 
@@ -25,7 +26,7 @@ export const strongholdPassword = writable<string>(null)
 /**
  * Seed BIP39 mnemonic recovery phrase
  */
-export const mnemonic = writable<Array<string>>(null)
+export const mnemonic = writable<string[]>(null)
 
 interface SendParams {
     amount: number
@@ -38,7 +39,8 @@ interface SendParams {
  * Input paramaters for sending transactions
  */
 export const sendParams = writable<SendParams>({ amount: 0, address: '', message: '', isInternal: false })
-export const clearSendParams = (isInternal = false) => sendParams.set({ amount: 0, address: '', message: '', isInternal })
+export const clearSendParams = (isInternal = false): void =>
+    sendParams.set({ amount: 0, address: '', message: '', isInternal })
 
 /**
  * Determines whether a user is logged in
@@ -48,7 +50,7 @@ export const loggedIn = writable<boolean>(false)
 /**
  * Cleanup the signup vars
  */
-export const cleanupSignup = () => {
+export const cleanupSignup = (): void => {
     mnemonic.set(null)
     strongholdPassword.set(null)
     walletPin.set(null)
@@ -57,7 +59,7 @@ export const cleanupSignup = () => {
 /**
  * Log in to the current profile
  */
-export const login = () => {
+export const login = (): void => {
     loggedIn.set(true)
 }
 
@@ -65,26 +67,31 @@ export const login = () => {
 
  * Logout from current profile
  */
-export const logout = () => {
-    return new Promise<void>((resolve) => {
-        const ap = get(activeProfile);
+export const logout = (): Promise<void> =>
+    new Promise<void>((resolve) => {
+        const ap = get(activeProfile)
 
         const _cleanup = () => {
             if (ap) {
                 destroyActor(ap.id)
             }
-            isStrongholdLocked.set(true)
+            if (get(isSoftwareProfile)) {
+                isStrongholdLocked.set(true)
+            }
+            if (get(isLedgerProfile)) {
+                stopPollingLedgerStatus()
+            }
             clearSendParams()
-            closePopup()
+            closePopup(true)
+            clearActiveProfile()
             resetWallet()
             resetRouter()
-            clearActiveProfile()
             loggedIn.set(false)
 
             resolve()
         }
 
-        if (!get(isStrongholdLocked)) {
+        if (get(isSoftwareProfile) && !get(isStrongholdLocked)) {
             api.lockStronghold({
                 onSuccess() {
                     _cleanup()
@@ -96,11 +103,9 @@ export const logout = () => {
                         type: 'error',
                         message: localize(err.error),
                     })
-
                 },
             })
         } else {
             _cleanup()
         }
     })
-}

@@ -3,16 +3,19 @@
     import { clickOutside } from 'shared/lib/actions'
     import { loggedIn } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
-    import { ExtendedNode, getOfficialDefaultNetwork, getOfficialNetworks, getOfficialNodes } from 'shared/lib/network'
+    import { navigateToNewIndexMigration } from 'shared/lib/ledger'
+    import { getOfficialNodes } from 'shared/lib/network'
     import { openPopup } from 'shared/lib/popup'
-    import { activeProfile } from 'shared/lib/profile'
-    import { buildAccountNetworkSettings, updateAccountNetworkSettings, wallet } from 'shared/lib/wallet'
+    import { activeProfile, isLedgerProfile, updateProfile } from 'shared/lib/profile'
+    import { buildAccountNetworkSettings, updateAccountNetworkSettings } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
-    let deepLinkingChecked = $appSettings.deepLinking
+    const deepLinkingChecked = $appSettings.deepLinking
 
+    const isDeveloperProfile = get(activeProfile)?.isDeveloperProfile
     let showHiddenAccounts = get(activeProfile)?.settings.showHiddenAccounts
 
     let {
@@ -62,13 +65,8 @@
                 }
             }
 
-            const allEnabled = networkNodes.filter((n) => !n.disabled)
-            if (allEnabled.length > 0) {
-                allEnabled[0].isPrimary = true
-            }
-        }
-    }
-    $: updateAccountNetworkSettings(automaticNodeSelection, includeOfficialNodes, nodes, localPow, networkId, customNetworkId)
+    $: updateProfile('settings.showHiddenAccounts', showHiddenAccounts)
+    $: updateProfile('isDeveloperProfile', isDeveloperProfile)
 
     $: $appSettings.deepLinking = deepLinkingChecked
     $: {
@@ -86,12 +84,13 @@
             nodes = [...nonOfficialNodes]
         }
 
-        ensurePrimary(actualNetworkId, primaryNodeOfficial?.url)
+        const allEnabled = nodes.filter((n) => !n.disabled)
+        const primaryNode = allEnabled.find((n) => n.url === primaryNodeUrl)
+        if (!primaryNode && allEnabled.length > 0) {
+            primaryNodeUrl = allEnabled[0].url
+        }
     }
-    $: updateAccountNetworkSettings(automaticNodeSelection, includeOfficialNodes, nodes, localPow, networkId, customNetworkId)
-    $: {
-        customNetworkId = customNetworkId.replace(/[^0-9a-z]/gi, '')
-    }
+    $: void updateAccountNetworkSettings(automaticNodeSelection, includeOfficialNodes, nodes, primaryNodeUrl, localPow)
 
     function handleAddNodeClick() {
         openPopup({
@@ -243,19 +242,14 @@
                             use:clickOutside={{ includeScroll: true }}
                             on:clickOutside={() => (nodeContextMenu = undefined)}
                             style={`left: ${contextPosition.x - 10}px; top: ${contextPosition.y - 10}px`}>
-                            {#if !nodeContextMenu.isPrimary}
+                            {#if !nodeContextMenu.disabled}
                                 <button
                                     on:click={() => {
-                                        nodeContextMenu.disabled = !nodeContextMenu.disabled
+                                        primaryNodeUrl = nodeContextMenu.url
                                         nodeContextMenu = undefined
-                                        // The disabled state does not propogate to the item UI
-                                        // so by reassiging the array we force a redraw
-                                        nodes = nodes
                                     }}
                                     class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20">
-                                    <Text smaller>
-                                        {locale(nodeContextMenu.disabled ? 'views.settings.configureNodeList.includeNode' : 'views.settings.configureNodeList.excludeNode')}
-                                    </Text>
+                                    <Text smaller>{locale('views.settings.configureNodeList.setAsPrimary')}</Text>
                                 </button>
                             {/if}
                             {#if nodeContextMenu.isCustom}
@@ -268,20 +262,19 @@
                                     <Text smaller>{locale('views.settings.configureNodeList.viewDetails')}</Text>
                                 </button>
                             {/if}
-                            {#if !nodeContextMenu.disabled}
+                            {#if nodeContextMenu.url !== primaryNodeUrl}
                                 <button
                                     on:click={() => {
-                                        for (const node of nodes.filter((n) => n.networkId === nodeContextMenu.networkId)) {
-                                            node.isPrimary = false
-                                        }
-                                        nodeContextMenu.isPrimary = true
+                                        nodeContextMenu.disabled = !nodeContextMenu.disabled
                                         nodeContextMenu = undefined
-                                        // The isPrimary state does not propogate to the item UI
+                                        // The disabled state does not propogate to the item UI
                                         // so by reassiging the array we force a redraw
                                         nodes = nodes
                                     }}
                                     class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20">
-                                    <Text smaller>{locale('views.settings.configureNodeList.setAsPrimary')}</Text>
+                                    <Text smaller>
+                                        {locale(nodeContextMenu.disabled ? 'views.settings.configureNodeList.includeNode' : 'views.settings.configureNodeList.excludeNode')}
+                                    </Text>
                                 </button>
                             {/if}
                             {#if nodeContextMenu.isCustom && (!officialNetworkIds.includes(nodeContextMenu.networkId) || !nodeContextMenu.isPrimary)}
@@ -311,19 +304,22 @@
         </section>
         <HR classes="pb-5 mt-5 justify-center" />
     {/if}
-    <section id="developerMode" class="w-3/4">
-        <Text type="h4" classes="mb-3">{locale('views.settings.developerMode.title')}</Text>
-        <Text type="p" secondary classes="mb-5">{locale('views.settings.developerMode.description')}</Text>
-        <Checkbox label={locale('actions.enableDeveloperMode')} bind:checked={$appSettings.developerMode} />
-    </section>
-    <HR classes="pb-5 mt-5 justify-center" />
-    <section id="deepLinks" class="w-3/4">
+    <!-- {#if $loggedIn}
+        <section id="developerMode" class="w-3/4">
+            <Text type="h4" classes="mb-3">{locale('views.settings.developerMode.title')}</Text>
+            <Text type="p" secondary classes="mb-5">{locale('views.settings.developerMode.description')}</Text>
+            <Checkbox label={locale('actions.enableDeveloperMode')} bind:checked={isDeveloperProfile} />
+        </section>
+        <HR classes="pb-5 mt-5 justify-center" />
+    {/if} -->
+    <!-- TODO: re-enable deep links -->
+    <!-- <section id="deepLinks" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.deepLinks.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.deepLinks.description')}</Text>
         <Checkbox label={locale('actions.enableDeepLinks')} bind:checked={deepLinkingChecked} />
-    </section>
-    {#if $loggedIn}
         <HR classes="pb-5 mt-5 justify-center" />
+    </section> -->
+    {#if $loggedIn}
         <section id="balanceFinder" class="w-3/4">
             <Text type="h4" classes="mb-3">{locale('views.settings.balanceFinder.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.balanceFinder.description')}</Text>
@@ -356,6 +352,16 @@
             {locale('views.settings.diagnostics.title')}
         </Button>
     </section>
+    {#if $isLedgerProfile}
+        <HR classes="pb-5 mt-5 justify-center" />
+        <section id="migrateLedgerIndex" class="w-3/4">
+            <Text type="h4" classes="mb-3">{locale('views.settings.migrateLedgerIndex.title')}</Text>
+            <Text type="p" secondary classes="mb-5">{locale('views.settings.migrateLedgerIndex.description')}</Text>
+            <Button medium inlineStyle="min-width: 156px;" onClick={() => navigateToNewIndexMigration()}>
+                {locale('views.settings.migrateLedgerIndex.title')}
+            </Button>
+        </section>
+    {/if}
     <!-- TODO: Implement state export -->
     <!-- {#if $loggedIn}
     <HR classes="pb-5 mt-5 justify-center" />

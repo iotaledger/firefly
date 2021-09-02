@@ -1,16 +1,18 @@
 <script lang="typescript">
-    import { Button, Text } from 'shared/components'
+    import { Button } from 'shared/components'
     import { appSettings } from 'shared/lib/appSettings'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
-    import type { BalanceOverview } from 'shared/lib/wallet'
-    import type { WalletAccount } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable, Writable } from 'svelte/store'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { BalanceOverview, WalletAccount } from 'shared/lib/typings/wallet'
 
-    export let locale
+    export let locale: Locale
+
     export let color = 'blue' // TODO: profiles will have different colors
 
+    let darkModeEnabled
     $: darkModeEnabled = $appSettings.darkMode
 
     const balance = getContext<Readable<BalanceOverview>>('walletBalance')

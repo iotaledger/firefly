@@ -2,45 +2,63 @@
     "views": {
         "onboarding1": {
             "title": "Šaljite, primajte i upravljajte svojim IOTA tokenima",
-            "body": "Firefly je službeni IOTA novčanik."
+            "body": "Firefly je službeni IOTA program novčanika."
         },
         "legal": {
             "title": "Politika privatnosti i Uvjeti korištenja",
             "body": "Molimo Vas da proučite Politiku privatnosti i Uvjete korištenja.",
-            "privacyPolicy": {
-                "title": "Politika privatnosti",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
-            "termsOfService": {
-                "title": "Uvjeti korištenja",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
             "checkbox": "Pročitao sam i prihvaćam Politiku privatnosti i Uvjete korištenja"
         },
         "appearance": {
-            "title": "Prikaz",
-            "body": "Odaberi temu svojeg novčanika."
+            "title": "Izgled",
+            "body": "Odaberite temu aplikacije."
+        },
+        "profile": {
+            "title": "Stvori novi profil",
+            "profileName": "Ime profila",
+            "body1": "Možete stvoriti više korisničkih računa kako biste organizirali svoje novčanike i poboljšali privatnost.",
+            "body2": {
+                "first": "For now, let's start with your first profile name.",
+                "nonFirst": "For now, let's start with your profile name."
+            },
+            "addMore": "You can add more profiles later."
         },
         "setup": {
             "title": "Postavite svoj novčanik",
-            "body1": "Možete stvoriti više korisničkih računa kako biste razdvojili svoje tokene i poboljšali sigurnost.",
-            "body2": "Počnimo s imenom vašeg prvog profila. Kasnije možete dodati još profila.",
-            "profileName": "Naziv Profila"
+            "chrysalisTitle": "Chrysalis unaprijeđenje mreže",
+            "chrysalisBody": "Od 21. travnja, korisnici mogu obaviti migraciju svojih tokens na novu Chrysalis mrežu. Preporučamo da svoje tokene prebacite čim prije.",
+            "learnMore": "Saznajte detalje o migraciji"
         },
         "secure": {
             "title": "Osiguraj svoj novčanik",
             "body1": "Spremite i ispišite Recovery Kit PDF predložak.",
-            "body2": "Ako ispunite Recovery Kit i spremite ga na sigurno, uvijek možete izvršiti oporavak svojeg novčanika."
+            "body2": "Ako ispunite Recovery Kit i spremite ga na sigurno, uvijek možete izvršiti oporavak svojih novčanika."
+        },
+        "create": {
+            "title": "Stvori novčanik",
+            "body": "Stvori novi novčanik. Možeš odabrati običan softver novčanik, ili postavi hardverski novčanik ukoliko imaš Ledger uređaj.",
+            "softwareAccount": {
+                "title": "Želim softverski novčanik",
+                "description": "Stvori frazu za oporavak od 24 riječi"
+            },
+            "ledgerAccount": {
+                "title": "Želim hardverski novčanik",
+                "description": "Potreban je Ledger Nano S ili Ledger Nano X"
+            }
+        },
+        "setupLedger": {
+            "progress1": "Spoji svoj Ledger",
+            "progress2": "Generiraj adresu",
+            "progress3": "Switch Ledger app",
+            "progress4": "Prebaci sredstva",
+            "watchVideo": "Pogledaj video s uputama",
+            "videoGuide": "Ledger migration video guide"
+        },
+        "ledgerInstallationGuide": {
+            "title": "Jesi li instalirao potrebne Ledger aplikacije?",
+            "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
+            "body2": "Uvjeri se da je tvoj Ledger na najnovijoj verziji firmwarea. Sve predinstalirane aplikacije trebaju biti na najnovijim verzijama.",
+            "action": "Da, instalirao sam sve potrebne aplikacije"
         },
         "password": {
             "title": "Stvorite lozinku",
@@ -49,7 +67,7 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Postavite PIN kako biste bili sigurni da samo vi možete ući u svoj novčanik.",
+            "body1": "Postavite PIN kako biste bili sigurni da samo vi možete ući u svoj profil.",
             "body2": "Držite svoj PIN na sigurnom!"
         },
         "pin": {
@@ -72,7 +90,7 @@
             "title": "Fraza za oporavak",
             "body1": "Zapišite riječi u svoj Recovery Kit, točnim redoslijedom.",
             "body2": "Držite ovo za sebe i na sigurnom.",
-            "body3": "Važno je imati pohranjenu pisanu kopiju. Računala se kvare a datoteke mogu imati pogreške.",
+            "body3": "Važno je imati pohranjenu pisanu kopiju. Računala se često kvare, a datoteke mogu imati pogreške.",
             "revealRecoveryPhrase": "Prikaži frazu za oporavak",
             "hideRecoveryPhrase": "Sakrij frazu za oporavak"
         },
@@ -85,55 +103,170 @@
         },
         "backupWallet": {
             "title": "Spremite pričuvnu kopiju u Stronghold datoteku",
-            "body1": "Unesite svoju lozinku kako biste spremili pričuvnu kopiju u Stronghold datoteku. Vašu lozinku koristimo za enkripciju pričuvne kopije.",
+            "body1": "Unesite svoju lozinku kako biste spremili pričuvne kopije svojih novčanika u Stronghold datoteku. Vašu lozinku koristimo za enkripciju pričuvne kopije.",
             "body2": "Zašto su digitalne pričuvne kopije tako važne:",
-            "reason1": "Jednostavno oporavite svoj novčanik bez upisivanja fraze za oporavak",
-            "reason2": "Uvezite svoj novčanik u druge uređaje",
+            "reason1": "Jednostavno oporavite svoje novčanike bez upisivanja fraze za oporavak",
+            "reason2": "Uvezite svoje novčanike s drugih uređaja",
             "reason3": "Oporavite povijest svojih transakcija"
         },
         "recoveryPhraseSaved": {
             "title": "Pričuvna kopija je uspješno napravljena",
-            "body": "Napravili ste Stronghold pričuvnu kopiju svojeg novčanika."
+            "body": "Napravili ste Stronghold pričuvnu kopiju svojih novčanika."
         },
         "congratulations": {
             "title": "Postavljanje novčanika je završeno",
-            "body": "Vaš novi novčanik spreman je za upotrebu."
+            "fundsMigrated": "Sredstva su prebačena",
+            "body": "Vaš novi novčanik spreman je za upotrebu.",
+            "softwareMigratedBody": "Sredstva su uspješno prebačena na novu mrežu",
+            "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
+            "exportMigration": "Izvezite detalje o migraciji i dovršite postupak"
         },
         "import": {
-            "title": "Uvezite novčanik",
-            "body": "Ako imate frazu za oporavak ili Stronghold pričuvnu kopiju, možete ih uvesti ovdje."
+            "title": "Oporavite ili migrirajte sredstva",
+            "body": "Ako imate seed ili datoteku za oporavak novčanika, možete ih uvesti ovdje. Ako držite sredstva sa starije mreže, provest ćemo vas kroz korake za prebacivanje na Chrysalis mrežu.",
+            "importSeed": "Imam seed koji se sastoji od 81 znaka",
+            "importSeedDescription": "Unesite seed i preselite sredstva na Chrysalis",
+            "importMnemonic": "Imam Firefly frazu za oporavak",
+            "importMnemonicDescription": "Za oporavak novčanika unesite svoju frazu za oporavak",
+            "importFile": "Imam datoteku s pričuvnom kopijom",
+            "importFileDescription": "Uvezite Seedvault ili Stronghold datoteku",
+            "importLedger": "I have a Ledger backup",
+            "importLedgerDescription": "Restore or migrate a Ledger profile"
         },
         "importFromText": {
-            "title": "Obnovite svoj novčanik pomoću fraze za oporavak ili seeda",
-            "body1": "Seed se sastoji od 81 znaka. Potreban je za oporavak sredstava iz starijih Trinity novčanika.",
-            "body2": "Fraza za oporavak sastoji se od 24 riječi, pisanih malim slovima, s razmacima između svake. Služi za oporavak postojećeg Firefly novčanika.",
-            "body3": "Unesite svoj seed ili frazu za oporavak",
+            "seed": {
+                "title": "Za početak migracije unesite seed",
+                "body": "Seed se sastoji od 81 znaka. On služi za oporavak iz starije Trinity aplikacije.",
+                "enter": "Unesite vaš seed"
+            },
+            "mnemonic": {
+                "title": "Unesite frazu za oporavak",
+                "body": "Fraza za oporavak sastoji se od 24 riječi, pisanih malim slovima, s razmacima između svake. Služi za oporavak postojećih Firefly novčanika.",
+                "enter": "Unesite tajnu frazu za oporavak"
+            },
             "seedDetected": "81 znakova seeda prepoznati",
-            "phraseDetected": "Fraza od 24 riječi je prepoznata"
+            "phraseDetected": "Fraza od 24 riječi je prepoznata",
+            "checksum": "Kontrolni zbroj"
         },
         "importFromFile": {
-            "title": "Obnovite svoj novčanik iz datoteke s pričuvnom kopijom",
-            "body": "Za obnovu novčanika uvezite datoteku s pričuvnom kopijom. To može biti Stronghold (.stronghold) ili Trinity SeedVault (.kdbx) datoteka."
+            "title": "Obnovite svoje novčanike iz datoteke s pričuvnom kopijom",
+            "body": "Za obnovu svojih novčanika uvezite datoteku s pričuvnom kopijom. To može biti Stronghold (.stronghold) ili Trinity SeedVault (.kdbx) datoteka."
+        },
+        "importFromLedger": {
+            "title": "Restore or Migrate your Ledger",
+            "body": "Restore an existing Firefly Ledger profile, or migrate your funds from Trinity.",
+            "haveFireflyLedger": "I have a Firefly Ledger backup",
+            "haveFireflyLedgerDescription": "Restore a Firefly profile",
+            "haveTrinityLedger": "I have a Trinity Ledger backup",
+            "haveTrinityLedgerDescription": "Migrate a Trinity profile"
+        },
+        "connectLedger": {
+            "title": "Connect your Ledger to Firefly",
+            "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed.",
+            "trafficLight1": "Connect and unlock your Ledger with your PIN",
+            "trafficLight2": "Open the new IOTA app on your Ledger",
+            "tips": "Tips if your Ledger isn’t connecting"
+        },
+        "restoreFromFireflyLedger": {
+            "title": "Restore Your Ledger Profile",
+            "body": "Press restore to complete the setup process and restore your wallets, balances and transaction history.",
+            "restoring": "Restoring from Ledger..."
+        },
+        "legacyLedgerIntro": {
+            "title": "Start your Ledger migration using Firefly",
+            "body1": "Firefly will help you to transfer your tokens to the new Chrysalis network.",
+            "body2": "Nakon migracije moći ćete slati i primati tokene koristeći Ledger i Firefly.",
+            "readMore": "What to expect from the migration process"
+        },
+        "generateNewLedgerAddress": {
+            "title": "Stvorite novu adresu",
+            "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
+            "confirmTitle": "Confirm the new address",
+            "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
+            "confirmedTitle": "Address confirmed",
+            "confirmedBody": "You have confirmed that the address in Firefly matches the one on your Ledger device.",
+            "generating": "Generating address"
+        },
+        "switchLedgerApps": {
+            "title": "Switch Ledger apps",
+            "body": "Please switch to the {legacy} app on your Ledger device to continue migration. When ready, press continue."
+        },
+        "selectLedgerAccountIndex": {
+            "title": "Choose Ledger account index",
+            "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
+            "accountIndex": "Account Index",
+            "accountPage": "Account Page",
+            "standard": "Standard",
+            "expert": "Expert",
+            "takingAWhile": "This is taking a while...",
+            "notGeneratingAddresses": "Is your Ledger generating addresses?",
+            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
         },
         "importBackupPassword": {
-            "title": "Obnovite svoj novčanik pomoću SeedVaulta ili Strongolda",
             "body1": "Molimo vas da unesete svoju lozinku za pričuvnu kopiju.",
             "body2": "Ovo je lozinka koju ste postavili kada ste izradili pričuvnu kopiju."
         },
         "importSuccess": {
             "title": "Uspješno ste obnovili pričuvnu kopiju",
-            "body": "Sada možete postaviti svoj novi novčanik.",
-            "seedvaultTitle": "Uvoz je uspješan",
-            "seedvaultBody": "Vaša je lozinka točna, možete nastaviti.",
-            "strongholdTitle": "Uvoz je uspješan",
-            "strongholdBody": "Vaša je lozinka točna, možete nastaviti."
+            "body": "Sada možete postaviti svoj novi profil."
         },
         "migrate": {
             "title": "Migrirajte svoja sredstva",
-            "body1": "Ovo je automatski postupak za prebacivanje vaših sredstava u novi novčanik. Provjerit ćemo već korištene adrese koje ugrožavaju vašu sigurnost.",
+            "body1": "Ovo je automatizirani postupak prebacivanja vaših sredstava u novi novčanik.",
             "body2": "Ovo bi moglo potrajati. Za trajanja migracije ne gasite uređaj.",
             "existing": "Vaš stari novčanik",
-            "new": "Vaš novi novčanik"
+            "new": "Vaš novi novčanik",
+            "learn": "Saznajte detalje o migraciji",
+            "beginMigration": "Započni migraciju",
+            "migrating": "Prebacujem sredstva...",
+            "migrated": "{balance} prebačeno",
+            "migrationFailed": "Migracija nije uspjela",
+            "noAddressesForMigration": "Molimo odaberite adrese koje želite osigurati.",
+            "restoringWallet": "Vraćanje novčanika...",
+            "findingBalance": "Dohvaćam stanje...",
+            "incorrectSeedVaultPassword": "Netočna SeedVault lozinka.",
+            "noDataSeedVault": "Ne možemo pronaći podatke unutar SeedVaulta.",
+            "signingBundle": "Potpisujem skup",
+            "broadcastingBundle": "Odašiljem skup",
+            "miningBundle": "Rudarim skup",
+            "problemRestoringWallet": "Došlo je do greške mreže prilikom oporavka vašeg novčanika. Molimo pokušajte ponovno.",
+            "minimumMigrationAmountSpentAddresses": "Najmanji mogući iznos za migraciju je 1 Mi po iskorištenoj adresi. Provjerite još jednom izgleda li iznos ispravno.",
+            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
+            "cannotMigrateAllYourFunds": "Ne možemo migrirati sve vaše adrese jer neke imaju premalo sredstava. Možete nastaviti ali nepovratno ćete izgubiti {value}.",
+            "error": "Došlo je pogreške u migraciji vaših sredstava. Molimo Vas, pokušajte ponovno."
+        },
+        "bundleMiningWarning": {
+            "title": "Upozorenje",
+            "body1": "Imate sredstva na jednoj ili više iskorištenih adresa.",
+            "body2": "Preporučamo da pokrenete automatski postupak kako biste uspješno osigurali i prebacili svoja sredstva.",
+            "body3": "Ako zatvorite aplikaciju, postupak migracije morat ćete pokrenuti ispočetka.",
+            "learn": "Saznajte više o iskorištenim adresama"
+        },
+        "secureSpentAddresses": {
+            "title": "Osigurajte iskorištene adrese",
+            "body1": "Imate sredstva na {number, plural, one {# iskorištenoj adresi} few {# iskorištene adrese} other {# iskorištenih adresa}}.",
+            "body2": "Preporučamo da pokrenete automatski postupak kako biste uspješno osigurali i prebacili svoja sredstva.",
+            "error": "Ne možete migrirati iskorištene adrese s manje od 1Mi"
+        },
+        "securityCheckCompleted": {
+            "title": "Sigurnosna provjera završena",
+            "body1": "Izračunali smo razinu rizika. Ponovno pokretanje ovog postupka može smanjiti rizik.",
+            "body2": "Kada ste zadovoljni s razinom rizika, pritisnite za nastavak.",
+            "rerun": "Ponovno pokretanje postupka za odabrane adrese",
+            "continueMigration": "Nastavi s migracijom"
+        },
+        "securingSpentAddresses": {
+            "title": "Osiguravam iskorištene adrese...",
+            "body1": "Ovaj postupak trajat će {minutes, plural, one {1 minutu} few {# minute} other {# minuta}}.",
+            "body2": "Vaša će računalo raditi punom snagom, možda se želite posvetiti nečem drugom dok čekate završetak postupka."
+        },
+        "transferFragmentedFunds": {
+            "body1": "Firefly će sada započeti migraciju. Ovo bi moglo potrajati.",
+            "body2": "Ensure your Ledger is connected and the {legacy} app is open at all times during migration.",
+            "migrate": "Prebaci sredstva",
+            "transaction": "Transakcija {number}",
+            "rerun": "Pokušaj ponovo"
         },
         "migrateFailed": {
             "title": "To do",
@@ -141,13 +274,16 @@
         },
         "balance": {
             "title": "Vaš saldo",
-            "body": "Je li vaš saldo ispravan?"
+            "body": "Uvjerite se da je stanje sredstava ispravno prije no što započete. Ako stvari ne izgledaju točno, možete provjeriti još jednom.",
+            "error": "Najmanji mogući iznos za migraciju je 1 Mi po adresi. Ukoliko iznos ne izgleda ispravno, provjerite ponovo.",
+            "zeroBalance": "Provjerite još jednom. Ukoliko i dalje ne vidite ispravan iznos, možda ste krivo unijeli seed.",
+            "zeroBalanceLedgerLegacy": "Try checking again. If you still can't find your balance you might have selected the wrong account index."
         },
         "settings": {
             "settings": "Postavke",
             "generalSettings": {
                 "title": "Opće postavke",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Odredite izgled aplikacije i druge opće postavke"
             },
             "security": {
                 "title": "Sigurnost",
@@ -166,7 +302,7 @@
                 "description": "Promjena imena profila i postavljanje avatara"
             },
             "sync": {
-                "title": "Sinkroniziraj račune",
+                "title": "Sinkroniziraj novčanike",
                 "description": ""
             },
             "theme": {
@@ -185,17 +321,23 @@
                 "title": "Obavijesti",
                 "description": "Obavijesti sustava o provedenim transakcijama"
             },
+            "networkStatus": {
+                "title": "Network status",
+                "description": "Displays the status of the node you are currently connected to."
+            },
             "exportStronghold": {
                 "title": "Izvezi sigurnosnu kopiju",
-                "description": "Izvoz u Stronghold datoteku - potpunu enkriptiranu kopiju vašeg novčanika i najnovijih transakcija."
+                "description": "Izvoz u Stronghold datoteku - potpunu enkriptiranu kopiju vaših novčanika i najnovijih transakcija"
             },
             "appLock": {
                 "title": "Automatsko zaključavanje",
-                "description": "Preostalo vrijeme do zaključavanja novčanika i odjave"
+                "description": "Vrijeme neaktivnosti preostalo do zaključavanja novčanika i odjave iz sustava",
+                "durationMinute": "{time, plural, one {# minuta} few {# minute} other {# minuta}}",
+                "durationHour": "{time, plural, one {# sat} few {# sata} other {# sati}}"
             },
             "changePassword": {
                 "title": "Promijenite lozinku",
-                "description": "Lozinka služi zaštiti novčanika. Upotrijebite jaku lozinku kako biste zaštitili svoja sredstva."
+                "description": "Lozinka služi za zaštitu novčanika. Upotrijebite jaku lozinku kako biste zaštitili svoja sredstva"
             },
             "changePincode": {
                 "title": "Promijenite PIN kod",
@@ -205,17 +347,17 @@
                 "confirmNewPincode": "Potvrdite novi PIN",
                 "action": "Promijenite PIN"
             },
-            "resyncAccounts": {
-                "title": "Ponovno sinkroniziranje računa",
-                "description": "Pokreće pozadinski postupak koji će provjeriti jesu li svi vaši računi aktualni."
+            "balanceFinder": {
+                "title": "Pronalazak sredstava",
+                "description": "Izvršite detaljnu pretragu svojih adresa kako bi pronašli tokene"
             },
             "hiddenAccounts": {
-                "title": "Skriveni računi",
-                "description": "Odaberite ovu opciju za prikaz računa koji su ranije bili skriveni."
+                "title": "Skriveni novčanici",
+                "description": "Odaberite ovu opciju za prikaz novčanika koji su ranije bili skriveni"
             },
             "deleteProfile": {
                 "title": "Izbrišite profil",
-                "description": "Brisanje cijelog novčanika, profila i povijesti transakcija. Uvjerite se da imate pričuvnu kopiju."
+                "description": "Brisanje čitavog profila, svih novčanika i povijesti transakcija. Uvjerite se da imate pričuvnu kopiju"
             },
             "deepLinks": {
                 "title": "Deep Links",
@@ -231,7 +373,7 @@
             },
             "configureNodeList": {
                 "title": "Odaberi node",
-                "description": "Uređivanje popisa nodeova na koji se spaja vaš novčanik.",
+                "description": "Upravljate popisom IOTA mrežnih nodeova s kojima se spajate",
                 "primaryNode": "Primarni node",
                 "excludeNode": "Izuzmi node",
                 "includeNode": "Priključi node",
@@ -239,7 +381,7 @@
                 "setAsPrimary": "Koristi kao primarno",
                 "removeNode": "Ukloni node",
                 "includeOfficialNodeList": "Uključi popis službenih nodeova",
-                "noNodes": "Nema nodeova na raspolaganju. Upotrijebit ćemo automatski odabir."
+                "noNodes": "Nema nodeova na raspolaganju. Upotrijebit ćemo automatski odabir"
             },
             "proofOfWork": {
                 "title": "Proof of Work",
@@ -252,6 +394,10 @@
             "diagnostics": {
                 "title": "Dijagnostika",
                 "description": "Vidi informacije o sustavu i aplikaciji"
+            },
+            "migrateLedgerIndex": {
+                "title": "Migrate Ledger Index",
+                "description": "Migrate another Trinity account index"
             },
             "stateExport": {
                 "title": "Izvoz stanja",
@@ -280,7 +426,7 @@
             },
             "reportAnIssue": {
                 "title": "Prijavi problem",
-                "description": "Prijavi bug developerima. Prvo provjeri nije li ista greška već prijavljena."
+                "description": "Prijavite bug developerima. Prvo provjerite je li ista greška već prijavljena"
             }
         },
         "login": {
@@ -296,12 +442,20 @@
                 },
                 "hardwareDevice": {
                     "title": "Hardverski uređaj",
-                    "noneDetected": "Nije otkriveno"
+                    "statuses": {
+                        "appNotOpen": "IOTA App Not Open",
+                        "connected": "Connected",
+                        "legacyConnected": "{legacy} App Open",
+                        "locked": "Zaključano",
+                        "mnemonicMismatch": "Wrong Ledger or Mnemonic",
+                        "notDetected": "Not Detected",
+                        "otherConnected": "App Open"
+                    }
                 },
                 "strongholdStatus": {
                     "title": "Status novčanika",
-                    "locked": "Stronghold je zaključan",
-                    "unlocked": "Stronghold je otključan"
+                    "locked": "Zaključano",
+                    "unlocked": "Otključano"
                 },
                 "strongholdBackup": {
                     "title": "Sigurnosna kopija novčanika",
@@ -314,7 +468,7 @@
                 "networkDown": "Mreža nije funkcionalna",
                 "status": "Stanje",
                 "messagesPerSecond": "Poruka u sekundi",
-                "confirmationRate": "Postotak potvrda"
+                "referencedRate": "Referenced rate"
             },
             "profileModal": {
                 "allSettings": "Sve postavke",
@@ -325,7 +479,7 @@
     "popups": {
         "password": {
             "title": "Potrebna je lozinka",
-            "subtitle": "Za otključavanje Strongholda molimo unesi lozinku",
+            "subtitle": "Za otključavanje novčanika molimo unesite lozinku",
             "backup": "Unesi lozinku za izvoz pričuvne kopije"
         },
         "qr": {
@@ -336,34 +490,35 @@
             "upToDateTitle": "Firefly je ažuriran",
             "upToDateDescription": "Koristiš najnoviju i najsigurniju verziju Fireflyja.",
             "updateAvailable": "Dostupno je Firefly ažuriranje",
-            "updateDetails": "Verzija {version} - {date}"
+            "updateDetails": "Verzija {version} - {date}",
+            "noAutoUpdate": "Automatsko ažuriranje je onemogućeno u ovoj verziji Windowsa, molimo posjetite https://firefly.iota.org kako biste skinuli novu verziju."
         },
         "backup": {
             "title": "Posljednja pričuvna kopija: {date}",
             "lastBackup": "Zadnja pričuvna kopija napravljena je {date}",
-            "backupDescription": "Važno je redovito izrađivati pričuvne kopije kako biste uvijek imali kopiju računa i povijesti transakcija.",
+            "backupDescription": "Važno je redovito izrađivati pričuvne kopije kako biste uvijek imali kopiju svojih novčanika i povijesti transakcija.",
             "backupWarning": "Izgubite li pričuvnu kopiju i frazu za oporavak, izgubit ćete pristup svojim sredstvima.",
             "notBackedUp": "Nije napravljena pričuvna kopija",
-            "notBackedUpDescription": "Niste napravili pričuvnu kopiju svojeg Strongholda",
+            "notBackedUpDescription": "Niste napravili pričuvnu kopiju svojih novčanika",
             "saving": "Spremanje..."
         },
         "deleteAccount": {
             "title": "Obriši {name}?",
-            "body": "Ovaj račun nema povijest transakcija i zato ga je sigurno obrisati.",
+            "body": "Ovaj novčanik nema povijest transakcija i zato ga je sigurno obrisati.",
             "typePassword": "Za potvrdu unesite lozinku novčanika.",
-            "hideAccount": "Brisanje računa",
+            "hideAccount": "Obriši novčanik",
             "errorTitle": "Nije moguće ukloniti {name}",
-            "errorBody1": "Ne možete ukloniti ovaj račun. Mora postojati barem jedan."
+            "errorBody1": "Ne možete obrisati ovaj novčanik. Mora postojati barem jedan."
         },
         "hideAccount": {
             "title": "Sakrij {name}?",
-            "body": "Možete pronaći ovaj račun ako omogućite \"Pokaži skrivene račune\" u Naprednim postavkama.",
+            "body": "Možete pronaći ovaj novčanik ako omogućite \"Pokaži skrivene novčanike\" u Naprednim postavkama.",
             "typePassword": "Za potvrdu unesite lozinku novčanika.",
-            "hideAccount": "Sakrij račun",
+            "hideAccount": "Sakrij novčanik",
             "errorTitle": "Nije moguće sakriti {name}",
-            "errorBody1": "Kako biste sakrili račun, na njemu ne smije biti sredstava.",
-            "errorBody2": "Trenutno na ovom računu imate {balance}. Molimo prenesite sredstva na drugi račun i pokušajte ponovo.",
-            "errorBody3": "Ne možete ukloniti ovaj račun. Mora postojati barem jedan."
+            "errorBody1": "Kako biste sakrili novčanik, na njemu ne smije biti sredstava.",
+            "errorBody2": "Trenutno u ovom novčaniku imate {balance}. Molimo prenesite sredstva u neki drugi novčanik i pokušajte ponovo.",
+            "errorBody3": "Ne možete obrisati ovaj novčanik. Mora postojati barem jedan."
         },
         "addressHistory": {
             "title": "{name} povijest adresa",
@@ -403,30 +558,105 @@
         "transaction": {
             "title": "Potvrdi transakciju",
             "body": "Ovim ćete poslati {amount} na račun"
+        },
+        "balanceFinder": {
+            "title": "Pronalazak sredstava",
+            "body": "Izvršite detaljniju pretragu adresa u potrazi za stedstvima koja vam nedostaju.",
+            "totalWalletBalance": "Ukupno stanje",
+            "typePassword": "Za pretraživanje morate unijeti lozinku."
+        },
+        "riskFunds": {
+            "title": "Upozorenje: sredstva su u opasnosti tijekom migracije",
+            "body1": "Najtoplije preporučamo da osigurate svoja sredstva prije no što nastavite s migracijom. Ukoliko to ne učinite vaša sredstva neće biti sigurna od krađe.",
+            "body2": "Preporučamo da ponovite postupak za adrese sa srednjom ili višom razinom rizika."
+        },
+        "missingBundle": {
+            "title": "Upozorenje: sredstva su u opasnosti tijekom migracije",
+            "body": "Imate sredstava na iskorištenim adresama no informacije potrebne kako bismo ih osigurali nisu dostupne. Ovo se može dogoditi ukoliko su te transakcije učinjene pred dosta vremena. Možete nastaviti ali tijekom migracije {value} je pod rizikom.",
+            "learnMore": "Saznajte više o iskorištenim adresama",
+            "proceed": "Da, razumijem rizike"
+        },
+        "snapshot": {
+            "title": "Unaprijeđenje mreže u tijeku",
+            "body": "Unaprijeđenje Chrysalis mreže je počelo.",
+            "bodyMigration": "Migracije su onemogućene do završetka postupka.",
+            "bodyFirefly": "Firefly je onemogućen tijekom unaprijeđenja mreže. Migracija tokens opet će biti moguća po završetku."
+        },
+        "ledgerNotConnected": {
+            "connect": "Open the new IOTA app on your Ledger device to continue",
+            "connectLegacy": "Open the {legacy} app on your Ledger device to continue"
+        },
+        "ledgerConfirmation": {
+            "confirm": "To proceed, confirm the prompt displayed on your Ledger device"
+        },
+        "ledgerAppGuide": {
+            "title": "Guide to installing the Ledger apps",
+            "steps": {
+                "0": "Install and open the Ledger Live application",
+                "1": "Ensure that your Ledger is connected",
+                "2": "Search for apps: {legacy} and IOTA (MIOTA)",
+                "3": "Install both apps: {legacy} and IOTA (MIOTA)",
+                "4": "Remember that it's important to close Ledger Live before returning to Firefly"
+            }
+        },
+        "ledgerConnectionGuide": {
+            "title": "Tips if your Ledger isn’t connecting",
+            "steps": {
+                "0": "Make sure Ledger Live is not open on your computer",
+                "1": "Ensure you have unlocked your Ledger device with your PIN",
+                "2": "Open the new IOTA app on your Ledger device",
+                "3": {
+                    "text": "Still no luck?",
+                    "link": "Try the official Ledger support page"
+                }
+            }
+        },
+        "ledgerTransaction": {
+            "remainderAddress": {
+                "title": "Confirm remainder address",
+                "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+            },
+            "transaction": {
+                "title": "Potvrdi transakciju",
+                "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted."
+            }
+        },
+        "ledgerAddress": {
+            "title": "Confirm receive address",
+            "body": "Confirm that the receive address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+        },
+        "ledgerMigrateIndex": {
+            "title": "Do you need to migrate another Trinity account index?",
+            "body": "You can also migrate later in Advanced Settings."
         }
     },
     "charts": {
-        "incomingMi": "{value} Mi u dolasku",
-        "outgoingMi": "{value} Mi u odlasku",
+        "incomingMi": "U dolasku {value}",
+        "outgoingMi": "Šalje se {value}",
         "portoflio": "Portfolio",
         "token": "Token",
-        "accountValue": "Ukupna vrijednost računa",
-        "accountActivity": "Aktivnosti računa",
-        "timeframe1Hour": "1 hour",
-        "timeframe1Day": "1 day",
-        "timeframe1Week": "1 week",
-        "timeframe1Month": "1 month"
+        "accountValue": "Vrijednost novčanika",
+        "accountActivity": "Aktivnost novčanika",
+        "timeframe1Hour": "1 sat",
+        "timeframe1Day": "1 dan",
+        "timeframe1Week": "1 tjedan",
+        "timeframe1Month": "1 mjesec"
     },
     "actions": {
         "continue": "Nastavi",
         "back": "Natrag",
+        "previous": "Previous",
+        "next": "Next",
         "cancel": "Poništi",
         "close": "Zatvori",
         "dismiss": "Odbaci",
+        "proceedAnyway": "Ipak nastavi",
         "save": "Spremi",
         "importSeed": "Uvezite postojeći Seed",
-        "importWallet": "Uvezite postojeći novčanik",
+        "restoreWallet": "Migriraj ili obnovi novčanik",
+        "restoreWalletDescription": "Migriraj na Chrysalis mrežu ili obnovi postojeći novčanik",
         "createWallet": "Stvorite novi novčanik",
+        "createWalletDescription": "Napravi novi, svjež novčanik na Chrysalis mreži",
         "savePassword": "Spremi lozinku",
         "useBiometric": "Koristi biometričku zaštitu",
         "setupPin": "Postavite PIN",
@@ -438,7 +668,7 @@
         "verifyRecoveryPhrase": "Potvrdite frazu za oporavak",
         "revealRecoveryPhrase": "Prikaži frazu za oporavak",
         "importSeedvault": "Uvezi SeedVault",
-        "checkAgain": "Ne, provjeri opet",
+        "checkAgain": "Ne, provjeri ponovo",
         "importFromFile": "Uvezi iz datoteke",
         "send": "Pošalji",
         "receive": "Primi",
@@ -462,11 +692,11 @@
         "updateFirefly": "Ažuriraj Firefly",
         "restartNow": "Ponovno pokreni",
         "saveBackup": "Spremi Stronghold pričuvnu kopiju",
-        "customizeAcount": "Prilagodi račun",
+        "customizeAcount": "Personaliziraj novčanik",
         "viewAddressHistory": "Povijest adresa",
-        "hideAccount": "Sakrij račun",
-        "showAccount": "Pokaži račun",
-        "deleteAccount": "Izbriši račun",
+        "hideAccount": "Sakrij novčanik",
+        "showAccount": "Prikaži novčanik",
+        "deleteAccount": "Obriši novčanik",
         "max": "Maksimum",
         "addNode": "Dodaj node",
         "updateNode": "Obnovi node",
@@ -482,21 +712,32 @@
         "copy": "Kopiraj",
         "paste": "Zalijepi",
         "selectAll": "Označi sve",
-        "addAccount": "Dodaj Račun",
+        "addAccount": "Dodaj novčanik",
         "checkForUpdates": "Potraži ažuriranja",
         "reportAnIssue": "Prijavi problem",
+        "restore": "Restore",
         "clear": "Očisti",
         "hideDetails": "Sakrij detalje",
         "yes": "Da",
         "no": "Ne",
+        "skip": "Preskoči",
         "reset": "Resetiraj",
         "downloadRecoveryKit": "Spremi predložak Recovery Kita",
         "skipBackup": "Preskoči izradu pričuvne kopije",
         "finishSetup": "Završi postavljanje",
         "readDocumentation": "Pročitajte dokumentaciju",
         "visitFaq": "Posjeti često postavljana pitanja",
-        "showHiddenAccounts": "Prikaži skrivene račune",
-        "confirm": "Potvrdi"
+        "viewStatus": "Vidi status",
+        "showHiddenAccounts": "Prikaži skrivene novčanike",
+        "confirm": "Potvrdi",
+        "hideNetworkStatistics": "Hide network statistics",
+        "findBalances": "Pronalazak sredstava",
+        "searchBalances": "Traži sredstva",
+        "searchAgain": "Traži ponovno",
+        "searching": "Pretraga...",
+        "closeFirefly": "Zatvori Firefly",
+        "generateAddress": "Generiraj adresu",
+        "migrateAgain": "Migrate another index"
     },
     "general": {
         "password": "Lozinka",
@@ -511,14 +752,15 @@
         "received": "Primljeno",
         "sendPayment": "Pošalji uplatu",
         "moveFunds": "Interni prijenos",
+        "sendTo": "Send To",
         "sendFunds": "Pošaljite sredstva",
         "sendToAddress": "Slanje na adresu",
         "scanQrOrPaste": "Skenirajte QR kod ili zalijepite Adresu",
-        "moveFundsBetweenAccounts": "Prebacite sredstva između svojih računa",
+        "moveFundsBetweenAccounts": "Prebacite sredstva između svojih novčanika",
         "sendTokensToAddress": "Šalji tokene na adresu",
-        "manageAccount": "Upravljaj računom",
-        "customizeAcount": "Prilagodi svoj račun",
-        "account": "Račun",
+        "manageAccount": "Upravljanje novčanikom",
+        "customizeAcount": "Personaliziraj novčanik",
+        "account": "Novčanik",
         "sendingToAddress": "Slanje na adresu",
         "amount": "Iznos",
         "addAddress": "Dodajte adresu",
@@ -529,12 +771,10 @@
         "myAddress": "Moja adresa",
         "shareAddress": "Podijelite adresu",
         "yourAddress": "Vaša adresa",
+        "newRemainder": "New Remainder",
+        "remainder": "Remainder",
         "generateNewAddress": "Stvorite novu adresu",
         "copyAddress": "Kopiraj adresu",
-        "haveTextBackup": "Imam tekstualnu pričuvnu kopiju",
-        "haveFileBackup": "Imam datoteku s pričuvnom kopijom",
-        "enterSeedOrPhrase": "Unesite frazu za oporavak ili seed",
-        "uploadSeedvaultOrStronghold": "Uvezite Stronghold ili SeedVault datoteku",
         "import": "Uvezi",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -543,24 +783,25 @@
         "lightTheme": "Svijetla tema",
         "darkTheme": "Tamna tema",
         "balance": "Stanje računa",
-        "accountBalance": "Stanje računa",
+        "accountBalance": "Stanje novčanika",
         "incoming": "Dolazni",
         "outgoing": "Odlazni",
         "totalIn": "Ukupno unutra",
         "totalOut": "Ukupno van",
-        "accounts": "Računi",
-        "myAccounts": "Moji Računi",
+        "accounts": "Novčanici",
+        "myAccounts": "Moji novčanici",
         "automaticNodeSelection": "Automatski odabir nodea",
         "manualNodeSelection": "Ručni odabir nodea",
         "profiles": "Profili",
         "developerProfile": "Developer profil",
+        "developerProfileDescription": "Omogućuje vam spajanje na testnet",
         "dev": "Programer",
-        "createAccount": "Napravi račun",
-        "accountName": "Naziv računa",
+        "createAccount": "Stvori novčanik",
+        "accountName": "Ime novčanika",
         "latestTransactions": "Najnovije transakcije",
         "transactions": "Transakcije",
         "security": "Sigurnost",
-        "accountAddress": "Adresa računa",
+        "accountAddress": "Adresa novčanika",
         "nodes": "Nodeovi",
         "wallet": "Novčanik",
         "help": "Pomoć",
@@ -568,29 +809,33 @@
         "messageId": "ID poruke",
         "inputAddress": "Adresa s koje je poslano",
         "receiveAddress": "Adresa na koju je poslano",
+        "newAddress": "New Address",
         "date": "Datum",
         "status": "Stanje",
         "confirmed": "Potvrđeno",
         "pending": "U tijeku",
-        "noAccounts": "Ne posjeduješ niti jedan račun, molimo kreiraj jedan.",
+        "noAccounts": "Ne posjedujete niti jedan novčanik, molimo kreirajte jedan.",
         "loadingAccounts": "Učitavanje. Molimo pričekajte...",
         "addProfile": "Dodaj profil",
         "noRecentHistory": "Nema nedavnih povijesnih podataka",
-        "transferSyncing": "Sinkroniziranje računa",
+        "firstSync": "Sinkronizirano povijest aktivnosti, ovo bi moglo potrajati...",
+        "transferSyncing": "Sinkronizacija novčanika",
         "transferSelectingInputs": "Odabir inputa",
-        "transferRemainderAddress": "Generiranje adrese za polog ostatka",
+        "transferRemainderAddress": "Generating remainder address",
+        "transferPreparedTransaction": "Preparing transaction",
         "transferSigning": "Potpisivanje transakcije",
         "transferPow": "Izvodim PoW (Proof of Work)",
         "transferBroadcasting": "Odašiljem transakciju",
         "transferComplete": "Transakcija dovršena",
-        "creatingAccount": "Stvaram račun, molim pričekajte...",
-        "updatingAccount": "Usklađujem račun, molim pričekajte...",
-        "accountSyncing": "Račun se sinkronizira",
-        "accountSyncComplete": "Sinkronizacija računa završena",
+        "generatingReceiveAddress": "Generating receive address",
+        "creatingAccount": "Stvaram novčanik, molim pričekajte...",
+        "updatingAccount": "Usklađujem novčanik, molim pričekajte...",
+        "accountSyncing": "Novčanik se sinkronizira",
+        "accountSyncComplete": "Sinkronizacija novčanika je završena",
         "passwordUpdating": "Ažuriram lozinku...",
         "passwordSuccess": "Lozinka je uspješno ažurirana",
         "passwordFailed": "Ažuriranje lozinke nije uspjelo",
-        "syncingAccounts": "Sinkroniziranje računa...",
+        "syncingAccounts": "Sinkronizacija novčanika...",
         "exportingStronghold": "Izvozim Stronghold...",
         "exportingStrongholdSuccess": "Stronghold je uspješno izvezen",
         "exportingStrongholdFailed": "Izvoz Strongholda nije uspio",
@@ -604,7 +849,18 @@
         "passwordStrength3": "Osrednje",
         "passwordStrength4": "Jako",
         "creatingProfile": "Stvaram račun, molim pričekajte...",
-        "accountRemoved": "Ovaj je račun skriven. Kako biste mogli raditi transfere prvo ga morate prikazati."
+        "fundMigration": "Prebacivanje sredstava",
+        "accountRemoved": "Ovaj je novčanik skriven. Kako biste mogli raditi transfere prvo ga morate prikazati.",
+        "receivingTo": "U dolasku na {account}",
+        "sendingFrom": "Šalje se sa {account}",
+        "receivedTo": "Primljeno na {account} račun",
+        "sentFrom": "Poslano sa {account} računa",
+        "receiving": "Primanje u tijeku",
+        "sending": "Slanje u tijeku",
+        "legacyNetwork": "Stara mreža",
+        "capsLock": "Caps Lock je uključen",
+        "version": "Verzija {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "Danas",
@@ -627,7 +883,8 @@
         "calcMinutesRemaining": "Računam preostalo vrijeme...",
         "minutesRemaining": "{minutes, plural, one {minuta} few {# minute} other {# minuta}}",
         "copiedToClipboard": "Kopirano u međuspremnik",
-        "accountsSynchronized": "Sinkronizacija računa je završena"
+        "accountsSynchronized": "Sinkronizacija novčanika je završena",
+        "fundsAvailableSoon": "Your funds will become available shortly"
     },
     "error": {
         "profile": {
@@ -657,14 +914,17 @@
             "incorrect": "Vaš trenutni PIN je netočan."
         },
         "account": {
-            "length": "Ime računa ne smije biti dulje od {length, plural, one {1 znaka} few {# znaka} other {# znakova}}.",
-            "empty": "Morate upotrijebiti najnoviji račun prije no što možete stvoriti još jedan.",
-            "notEmpty": "Morate prebaciti sredstva drugdje prije no što možete obrisati račun.",
-            "duplicate": "Račun s ovim imenom već postoji.",
+            "length": "Ime novčanika ne smije biti dulje od {length, plural, one {1 znaka} few {# znaka} other {# znakova}}.",
+            "empty": "Morate upotrijebiti najnoviji novčanik prije no što možete stvoriti još jedan.",
+            "notEmpty": "Morate prebaciti sredstva drugdje prije no što možete obrisati novčanik.",
+            "duplicate": "Novčanik s ovim imenom već postoji.",
             "tilde": "Ime profila ne može početi znakom '~'.",
             "control": "Ime profila ne smije sadržavati Ctrl znak.",
             "startDot": "Ime profila ne može početi točkom.",
-            "chars": "Ime profila ne smije uključivati neki od sljedećih znakova <>:\"/\\|?*"
+            "chars": "Ime profila ne smije uključivati neki od sljedećih znakova <>:\"/\\|?*",
+            "index": "Your account index must be a number between 0 and 2,147,483,647.",
+            "page": "Your account page must be a number between 0 and 2,147,483,647.",
+            "syncing": "There was an error syncing your wallets."
         },
         "send": {
             "addressLength": "Adrese moraju sadržavati {length, plural, one {1 znak} few {# znaka} other {# znakova}}.",
@@ -675,10 +935,12 @@
             "wrongAddressPrefix": "Adrese započinju prefiksom {prefix}.",
             "wrongAddressFormat": "Adresa nije u ispravnom formatu.",
             "invalidAddress": "Adresa nije valjana.",
-            "insufficientFunds": "Ovaj račun nema dovoljno sredstava.",
-            "noToAccount": "Niste odabrali račun na koji želite poslati sredstva.",
+            "insufficientFunds": "Ovaj novčanik nema dovoljno sredstava.",
+            "noToAccount": "Niste odabrali novčanik na koji želite poslati sredstva.",
             "sendingDust": "Ne možete slati manje od 1 Mi.",
-            "leavingDust": "Ne možet ostaviti manje od 1 Mi na svojoj adresi."
+            "leavingDust": "Ne možet ostaviti manje od 1 Mi na svojoj adresi.",
+            "cancelled": "The transaction was cancelled.",
+            "transaction": "There was an error sending your transaction. Please try again."
         },
         "node": {
             "invalid": "Molimo unesite valjani URL.",
@@ -699,6 +961,35 @@
             "phraseWordCount": "Vaša fraza za oporavak mora se sastojati od 24 riječi. Trenutno {length, plural, one {je samo jedna} other {ih ima samo #}}.",
             "phraseUnrecognizedWord": "Ne prepoznajemo riječ \"{word}\" u vašoj frazi za oporavak",
             "phraseCaseWord": "Riječ \"{word}\" treba započeti malim slovom"
+        },
+        "ledger": {
+            "appNotOpen": "You must open the IOTA app on your Ledger device.",
+            "generic": "There was an error connecting to your Ledger device.",
+            "legacyConnected": "The wrong app is open on your Ledger device.",
+            "locked": "Please unlock your Ledger device by entering the PIN.",
+            "mnemonicMismatch": "You have connected the wrong Ledger device or the mnemonic has changed.",
+            "notDetected": "No Ledger device detected.",
+            "notFound": "Ledger device not found.",
+            "otherConnected": "The wrong app is open on your Ledger device.",
+            "generateAddress": "There was an error generating an address.",
+            "timeout": "Your Ledger device timed out.",
+            "disconnected": "Your Ledger device was disconnected."
+        },
+        "popup": {
+            "preventClose": "This popup is unable to be closed."
+        },
+        "migration": {
+            "missingBundle": "An error occurred while trying to find the transaction bundle."
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "Razina rizika: {risk}",
+            "veryHigh": "Vrlo visoka",
+            "high": "Visoka",
+            "medium": "Srednja",
+            "low": "Niska",
+            "veryLow": "Vrlo niska"
         }
     }
 }

@@ -1,14 +1,19 @@
 <script lang="typescript">
-    import { Button, Illustration, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
+    import { setProfileType } from 'shared/lib/profile'
     import { createEventDispatcher } from 'svelte'
-    import { ImportType } from '../Import.svelte'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { ImportType, ProfileType } from 'shared/lib/typings/profile'
 
-    export let locale
+    export let locale: Locale
+
     export let mobile
 
     const dispatch = createEventDispatcher()
 
-    function handleContinueClick(type) {
+    function handleContinueClick(type: ImportType) {
+        const profileType = type === ImportType.Ledger ? ProfileType.Ledger : ProfileType.Software
+        setProfileType(profileType)
         dispatch('next', { type })
     }
     function handleBackClick() {
@@ -37,9 +42,13 @@
                 {locale('views.import.importFile')}
                 <Text type="p" secondary smaller>{locale('views.import.importFileDescription')}</Text>
             </Button>
+            <Button icon="chip" classes="w-full mb-8" secondary onClick={() => handleContinueClick(ImportType.Ledger)}>
+                {locale('views.import.importLedger')}
+                <Text type="p" secondary smaller>{locale('views.import.importLedgerDescription')}</Text>
+            </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-end items-center bg-purple-green dark:bg-gray-900">
-            <Illustration width="100%" height="auto" illustration="import-desktop" />
+        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-purple dark:bg-gray-900">
+            <Animation animation="import-desktop" />
         </div>
     </OnboardingLayout>
 {/if}

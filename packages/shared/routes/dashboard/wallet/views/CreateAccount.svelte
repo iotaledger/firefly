@@ -4,10 +4,17 @@
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import { MAX_ACCOUNT_NAME_LENGTH, wallet } from 'shared/lib/wallet'
+    import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { isLedgerProfile } from 'shared/lib/profile'
+    import { showAppNotification } from 'shared/lib/notifications'
+    import { localize } from 'shared/lib/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
-    export let onCreate
+    export let locale: Locale
+
     export let error = ''
+
+    export let onCreate = (..._: any[]): void => {}
 
     const { accounts } = $wallet
 
@@ -21,6 +28,7 @@
         const trimmedAccountAlias = accountAlias.trim()
         if (trimmedAccountAlias) {
             error = ''
+
             if (getTrimmedLength(trimmedAccountAlias) > MAX_ACCOUNT_NAME_LENGTH) {
                 return (error = locale('error.account.length', {
                     values: {
@@ -28,14 +36,37 @@
                     },
                 }))
             }
+
             if ($accounts.find((a) => a.alias === trimmedAccountAlias)) {
                 return (error = locale('error.account.duplicate'))
             }
+
             isBusy = true
-            onCreate(trimmedAccountAlias, (err) => {
-                error = err || ''
-                isBusy = false
-            })
+
+            const _cancel = () => (isBusy = false)
+            const _create = () =>
+                onCreate(trimmedAccountAlias, (err) => {
+                    isBusy = false
+
+                    if(err) {
+                        console.error(err?.error || err)
+
+                        if($isLedgerProfile) {
+                            displayNotificationForLedgerProfile('error', true, false, false, false, err)
+                        } else {
+                            showAppNotification({
+                                type: 'error',
+                                message: localize(err?.error || err)
+                            })
+                        }
+                    }
+                })
+
+            if($isLedgerProfile) {
+                promptUserToConnectLedger(false, _create, _cancel)
+            } else {
+                _create()
+            }
         }
     }
     const handleCancelClick = () => {

@@ -2,7 +2,7 @@ const { notarize } = require('electron-notarize')
 const path = require('path')
 
 exports.default = async () => {
-    if (process.platform !== 'darwin') {
+    if (process.platform !== 'darwin' || process.env.MACOS_SKIP_NOTARIZATION) {
         return true
     }
 
@@ -19,7 +19,7 @@ exports.default = async () => {
 
     await notarize({
         appBundleId: 'org.iota.firefly',
-        appPath: path.resolve(__dirname, '../out/mac/Firefly Beta.app'),
+        appPath: path.resolve(__dirname, '../out/mac/Firefly.app'),
         appleId: APPLE_ID,
         appleIdPassword: APPLE_ID_PASSWORD,
         ascProvider: 'UG77RJKZHH',

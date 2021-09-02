@@ -1,15 +1,21 @@
 <script lang="typescript">
-    import { Button, Dropdown, Icon, QR, Text } from 'shared/components'
-    import { setClipboard } from 'shared/lib/utils'
+    import { Button, Dropdown, Icon, QR, Spinner, Text } from 'shared/components'
+    import { isLedgerProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
-    import type { WalletAccount } from 'shared/lib/wallet'
+    import { setClipboard } from 'shared/lib/utils'
+    import { hasGeneratedALedgerReceiveAddress, isSyncing } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable } from 'svelte/store'
+    import { AccountIdentifier } from 'shared/lib/typings/account'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
 
-    export let locale
-    export let generateAddress = (accountId) => {}
+    export let locale: Locale
+
     export let isGeneratingAddress = false
+
+    export let onGenerateAddress = (accountId: AccountIdentifier): void => {}
 
     const liveAccounts = getContext<Readable<WalletAccount[]>>('liveAccounts')
     const currentAccount = getContext<Readable<WalletAccount>>('selectedAccount')
@@ -20,7 +26,7 @@
         selectedAccount = item
     }
     const generateNewAddress = () => {
-        generateAddress(selectedAccount.id)
+        onGenerateAddress(selectedAccount.id)
     }
     const handleCloseClick = () => {
         walletRoute.set(WalletRoutes.Init)
@@ -52,26 +58,44 @@
                     disabled={$liveAccounts.length === 1} />
             </div>
         {/if}
-        <div
-            class="receive-info w-full h-full flex flex-col flex-auto rounded-xl border border-solid border-gray-300 dark:border-gray-700 p-4">
-            <div class="w-full flex flex-row justify-between items-center mb-1">
-                <Text type="p" smaller bold>{locale('actions.receive')}</Text>
-                <button on:click={generateNewAddress} class:pointer-events-none={isGeneratingAddress}>
-                    <Icon
-                        icon="refresh"
-                        classes="{isGeneratingAddress && 'animate-spin-reverse'} text-gray-500 dark:text-white" />
-                </button>
+        {#if $isLedgerProfile && !$hasGeneratedALedgerReceiveAddress}
+            <div class="flex w-full h-full items-end">
+                <Button disabled={isGeneratingAddress || $isSyncing} classes="w-full" onClick={() => generateNewAddress()}>
+                    {#if isGeneratingAddress}
+                        <Spinner
+                            busy={isGeneratingAddress}
+                            message={locale('general.generatingReceiveAddress')}
+                            classes="justify-center" />
+                    {:else}
+                        {locale('actions.generateAddress')}
+                    {/if}
+                </Button>
             </div>
-            <div class="flex flex-auto items-center justify-center mb-4">
-                <QR size={98} data={selectedAccount.depositAddress} />
+        {:else}
+            <div
+                class="receive-info w-full h-full flex flex-col flex-auto rounded-xl border border-solid border-gray-300 dark:border-gray-700 p-4">
+                <div class="w-full flex flex-row justify-between items-center mb-1">
+                    <Text type="p" smaller bold>{locale('actions.receive')}</Text>
+                    <button on:click={generateNewAddress} class:pointer-events-none={isGeneratingAddress}>
+                        <Icon
+                            icon="refresh"
+                            classes="{isGeneratingAddress && 'animate-spin-reverse'} text-gray-500 dark:text-white" />
+                    </button>
+                </div>
+                <div class="flex flex-auto items-center justify-center mb-4">
+                    <QR size={98} data={selectedAccount.depositAddress} />
+                </div>
+                <div class="mb-6">
+                    <Text secondary smaller classes="mb-1">{locale('general.myAddress')}</Text>
+                    <Text type="pre">{selectedAccount.depositAddress}</Text>
+                </div>
+                <Button
+                    disabled={isGeneratingAddress}
+                    classes="w-full"
+                    onClick={() => setClipboard(selectedAccount.depositAddress)}>
+                    {locale('general.copyAddress')}
+                </Button>
             </div>
-            <div class="mb-6">
-                <Text secondary smaller classes="mb-1">{locale('general.myAddress')}</Text>
-                <Text type="pre">{selectedAccount.depositAddress}</Text>
-            </div>
-            <Button disabled={isGeneratingAddress} classes="w-full" onClick={() => setClipboard(selectedAccount.depositAddress)}>
-                {locale('general.copyAddress')}
-            </Button>
-        </div>
+        {/if}
     </div>
 </div>

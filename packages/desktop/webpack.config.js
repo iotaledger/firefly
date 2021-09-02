@@ -97,7 +97,11 @@ const rendererRules = [
 
 /// ------------------------ Plugins ------------------------
 
-const mainPlugins = []
+const mainPlugins = [
+    new DefinePlugin({
+        PLATFORM_LINUX: JSON.stringify(process.platform === 'linux'),
+    }),
+]
 
 const rendererPlugins = [
     new CopyPlugin({
@@ -131,7 +135,7 @@ const rendererPlugins = [
 module.exports = [
     {
         entry: {
-            'build/index': ['./main.js'],
+            'build/index': ['./index.js'],
         },
         resolve,
         output,
@@ -146,11 +150,15 @@ module.exports = [
         },
     },
     {
+        externals: {
+            argon2: 'commonjs argon2',
+        },
         target: 'electron-main',
         entry: {
             'build/main': ['./electron/main.js'],
             'build/preload': ['./electron/preload.js'],
             'build/lib/aboutPreload': ['./electron/lib/aboutPreload.js'],
+            'build/lib/errorPreload': ['./electron/lib/errorPreload.js'],
         },
         resolve,
         output,
@@ -162,6 +170,7 @@ module.exports = [
         devtool: prod ? false : 'cheap-module-source-map',
         optimization: {
             nodeEnv: hardcodeNodeEnv ? mode : false,
+            minimize: true,
         },
     },
 ]

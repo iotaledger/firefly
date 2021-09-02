@@ -2,45 +2,63 @@
     "views": {
         "onboarding1": {
             "title": "IOTA rêke, bistîn û rêvebibe",
-            "body": "Firefly cuzdanka IOTA ya fermî ye."
+            "body": "Firefly Cuzdanka-Nermalava IOTA ya fermî ye."
         },
         "legal": {
             "title": "Polîtîkayên Veşartinê û Mercên Bikaranînê",
             "body": "Ji kerema xwe polîtîqaya taybetîtiyê û Mercên Karûbar binirxînin.",
-            "privacyPolicy": {
-                "title": "Polîtîqa Taybetîyê",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
-            "termsOfService": {
-                "title": "Mercên Karûberîyê",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
             "checkbox": "Min Polîtîkayên Veşartinê û Mercên Bikaranînê xwendin û dipêjirînim."
         },
         "appearance": {
             "title": "Xûyanîn",
-            "body": "Rengê cuzdanka xwe bijêrin."
+            "body": "Rûkera sepana xwe jê bigirin."
+        },
+        "profile": {
+            "title": "Profîlekê çêke",
+            "profileName": "Navê Profîlê",
+            "body1": "Jibo hûn tokenên xwe cuda bigirîn û ewlehîyê zêde bikîn, dikarîn profîlên bikarhênerên ciyawaz saz bikî.",
+            "body2": {
+                "first": "For now, let's start with your first profile name.",
+                "nonFirst": "For now, let's start with your profile name."
+            },
+            "addMore": "You can add more profiles later."
         },
         "setup": {
-            "title": "Cazdanka xwe saz bike",
-            "body1": "Jibo hûn tokenên xwe cuda bigirîn û ewlehîyê zêde bikîn, dikarîn profîlên bikarhênerên ciyawaz saz bikî.",
-            "body2": "Em sereke bi navê profîla we ya yekem destpê bikin. Paşê hûn dikarin hinek profîl lê zêdebikin.",
-            "profileName": "Navê Profîlê"
+            "title": "Cazdankekê saz bike",
+            "chrysalisTitle": "Nûjenkirina Tora Chrysalis'ê",
+            "chrysalisBody": "Piştî 21'ê avrêlê bikarhêner dikarin tokenên xwe bikşînin tora Chrysalis a nû. Em pêşnîyar dikin ko bi demekê zû hûn tokênên xwe yên heyî barbikin.",
+            "learnMore": "Jibo barkirinê zanyarî bistînin"
         },
         "secure": {
             "title": "Cuzdanka xwe bikin ewlehiyê de.",
             "body1": "Tomar bikin û kîta rizgarkirinê PDF çap bistînin.",
             "body2": "Heke hûn kîta rizgarkirinê dagirîn û bi ewlehî veşêrin, hûn hertim dikarin cuzdanka xwe paş bistînin."
+        },
+        "create": {
+            "title": "Cuzdanek nû çêke",
+            "body": "Create a new wallet. You can choose a regular software wallet or if you have a Ledger device you can set up a hardware wallet.",
+            "softwareAccount": {
+                "title": "Ez cuzdanek nermalavê dixwazim",
+                "description": "Hevokek Vejînê ya 24-bêjeyî biafirînin"
+            },
+            "ledgerAccount": {
+                "title": "Ez cuzdanek hardwarî dixwazim",
+                "description": "Ledger Nano S or Nano X required"
+            }
+        },
+        "setupLedger": {
+            "progress1": "Ledgera xwe re were girêdan",
+            "progress2": "Navnîşanekê çêke",
+            "progress3": "Switch Ledger app",
+            "progress4": "Transfer funds",
+            "watchVideo": "Watch video guide",
+            "videoGuide": "Ledger migration video guide"
+        },
+        "ledgerInstallationGuide": {
+            "title": "Have you installed the necessary Ledger apps?",
+            "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
+            "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
+            "action": "Yes, I've installed these apps"
         },
         "password": {
             "title": "Şîfreyê pêk bîne",
@@ -49,7 +67,7 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Jibo piştrastîya têketina we PIN'ekê çêkin.",
+            "body1": "PIN-a têketinê saz bikin da ku pê ewle bibe ku tenê hûn dikarin profîla xwe têkevinê.",
             "body2": "PIN'a xwe bi ewlehî veşêrin!"
         },
         "pin": {
@@ -93,47 +111,162 @@
         },
         "recoveryPhraseSaved": {
             "title": "Bi serfirazî piştgirî kirin",
-            "body": "We berîka xwe li Stronghold'ê hilanîn."
+            "body": "We cuzdanka xwe li Stronghold'ê hiland."
         },
         "congratulations": {
             "title": "Sazkirina cuzdankê dawî nehat",
-            "body": "Cuzdank amadeye jibo bikaranînê."
+            "fundsMigrated": "Mayîn hat barkirin",
+            "body": "Cuzdank amadeye jibo bikaranînê.",
+            "softwareMigratedBody": "You have successfully migrated your funds to the new network",
+            "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
+            "exportMigration": "Tomarkirinê transferê derve bike û barkirinê biqedîn"
         },
         "import": {
-            "title": "Berîka xwe têxe malde",
-            "body": "Amûrek ya xilaskirinê hebe an ji Stronghold'ê xilaskirinek hebe, hûn dikarin ji vir têxin hindir."
+            "title": "Dravî paş destbixin an jî barbikin",
+            "body": "Heke pelê weya hilanînê ya seed an bergê we heye, hûn dikarin wê ji vir bînin. Ger bîlançoya we ya ya tora kevn hebe, hûn ê bi gavên barkirinê rêve bibin ku wê wê bibin tora Chrysalis.",
+            "importSeed": "Seed'a min ya 81 rewişt heye",
+            "importSeedDescription": "Seed'ekê têkevin û vac'an barbikin li Chrysalis'ê",
+            "importMnemonic": "Min rewişta rizgarkirina Firefly heye",
+            "importMnemonicDescription": "Jibo rizgarkirina cuzdankê rewişta xwe ya veşartî têkevin",
+            "importFile": "Min cîhgira dosyayê heye",
+            "importFileDescription": "Dosyayêk SeedVault'ê an jî Stronghold'ê têkevin",
+            "importLedger": "I have a Ledger backup",
+            "importLedgerDescription": "Restore or migrate a Ledger profile"
         },
         "importFromText": {
-            "title": "Berîka xwe pê peyvekê an jî gotinekê xilas bikin",
-            "body1": "Yek seed ji 81 tîpan pêktê. Ev jibo rizgarîya cuzdankek kevnar tê bikaranîn.",
-            "body2": "Vegotonek ya rizgarkirinê 24 peyva dirêje. Ev, jibo cuzdanek heyî ya Firefly tomar bikî tê karanîn.",
-            "body3": "Seed an jî gotina xilaskirina xwe tekin",
+            "seed": {
+                "title": "Jibo destpêkirina transferê seed'a xwe binivîsin",
+                "body": "Yek seed ji 81 tîpan çêdibe. Ev, ji bo xilasbuna ji berikek Trinity a kevin tê bikaranîn.",
+                "enter": "Seed'a xwe têkeve"
+            },
+            "mnemonic": {
+                "title": "Rewişta xwe ya rizgarkirinê têkeve",
+                "body": "Vegotonek ya rizgarkirinê 24 peyva dirêje. Ev, jibo cuzdanek heyî ya Firefly tomar bikî tê karanîn.",
+                "enter": "Rewişta xwe ya rizgarkirinê têkeve"
+            },
             "seedDetected": "Tîpek 81 seed hat dîtin",
-            "phraseDetected": "24 pêyva rizgarkirinê hat dîtin"
+            "phraseDetected": "24 pêyva rizgarkirinê hat dîtin",
+            "checksum": "Pêkhatin"
         },
         "importFromFile": {
             "title": "Bikaranîna dosya cîgirî cuzdanka xwe rizgar bikin",
             "body": "Pelê hilanînê ji bo vegerandina berîka xwe têxin hundurê. Piştgirî dikarin bibin Stronghold (.stronghold) an Trinity SeedVault (.kdbx)."
         },
+        "importFromLedger": {
+            "title": "Restore or Migrate your Ledger",
+            "body": "Restore an existing Firefly Ledger profile, or migrate your funds from Trinity.",
+            "haveFireflyLedger": "I have a Firefly Ledger backup",
+            "haveFireflyLedgerDescription": "Restore a Firefly profile",
+            "haveTrinityLedger": "I have a Trinity Ledger backup",
+            "haveTrinityLedgerDescription": "Migrate a Trinity profile"
+        },
+        "connectLedger": {
+            "title": "Connect your Ledger to Firefly",
+            "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed.",
+            "trafficLight1": "Connect and unlock your Ledger with your PIN",
+            "trafficLight2": "Open the new IOTA app on your Ledger",
+            "tips": "Tips if your Ledger isn’t connecting"
+        },
+        "restoreFromFireflyLedger": {
+            "title": "Restore Your Ledger Profile",
+            "body": "Press restore to complete the setup process and restore your wallets, balances and transaction history.",
+            "restoring": "Restoring from Ledger..."
+        },
+        "legacyLedgerIntro": {
+            "title": "Start your Ledger migration using Firefly",
+            "body1": "Firefly will help you to transfer your tokens to the new Chrysalis network.",
+            "body2": "After the migration, you will be able to send and receive your tokens using your Ledger with Firefly.",
+            "readMore": "What to expect from the migration process"
+        },
+        "generateNewLedgerAddress": {
+            "title": "Navnîşanek nû çêke",
+            "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
+            "confirmTitle": "Confirm the new address",
+            "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
+            "confirmedTitle": "Address confirmed",
+            "confirmedBody": "You have confirmed that the address in Firefly matches the one on your Ledger device.",
+            "generating": "Generating address"
+        },
+        "switchLedgerApps": {
+            "title": "Switch Ledger apps",
+            "body": "Please switch to the {legacy} app on your Ledger device to continue migration. When ready, press continue."
+        },
+        "selectLedgerAccountIndex": {
+            "title": "Choose Ledger account index",
+            "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
+            "accountIndex": "Account Index",
+            "accountPage": "Account Page",
+            "standard": "Standard",
+            "expert": "Expert",
+            "takingAWhile": "This is taking a while...",
+            "notGeneratingAddresses": "Is your Ledger generating addresses?",
+            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
+        },
         "importBackupPassword": {
-            "title": "Berîka xwe ji SeedVault an jî ji Stronghold vegerînin",
             "body1": "Ji kerema xwe şîfreya xweya hilanînê binivîsin.",
             "body2": "Ev şîfreya we ye ku hûn danîn dema ku we yekem car hilanîna xwe afirandî ye."
         },
         "importSuccess": {
             "title": "We hilanîna xwe bi serfirazî vegerand",
-            "body": "Hun dikarin berîka xwe a nû tomar bikî.",
-            "seedvaultTitle": "Tevilkirina hundir serkeft",
-            "seedvaultBody": "Pêborîna we raste, niha dikarin bidomînî.",
-            "strongholdTitle": "Tevilkirina hundir serkeft",
-            "strongholdBody": "Pêborîna we raste, niha dikarin bidomînî."
+            "body": "Hun dikarin profile xwe a nû tomar bikî."
         },
         "migrate": {
             "title": "Hebûnên xwe bar bikin",
-            "body1": "Ev pêvajoyek xweser e ku fonên xwe veguhezîne berîka xweya nû. Em ê navnîşanên xerckirî yên ku ewlehiya we qels dikin kontrol bikin.",
+            "body1": "Ev çalakîyek ya jibo mayînên we ye ko bi şêweyekî otomatîk barê cuzdanka nû bike ye.",
             "body2": "Dibe ku demek bikişîne. Di dema barkirinê de amûrê xwe qut nekin.",
             "existing": "Berîka tê a kevin",
-            "new": "Cizdan a te ya nu"
+            "new": "Cizdan a te ya nu",
+            "learn": "Jibo barkirinê zanyarî bistînin",
+            "beginMigration": "Dest Barkirinê Bikin",
+            "migrating": "Mayîn tê barkirin...",
+            "migrated": "{balance} barbû",
+            "migrationFailed": "Barkirin Serneket",
+            "noAddressesForMigration": "Ji kere xwe navnîşanên ewle jê bigirin.",
+            "restoringWallet": "Paşbarkirina cuzdankê...",
+            "findingBalance": "Mayîn tê dîtin...",
+            "incorrectSeedVaultPassword": "Çewtîya pêborîna SeedVault'ê.",
+            "noDataSeedVault": "Di SeedVault de ti daneyek nehat dîtin.",
+            "signingBundle": "Şanenavkirina bestekê",
+            "broadcastingBundle": "Bestek tê weşandin",
+            "miningBundle": "Şanenav tê xebitandin",
+            "problemRestoringWallet": "Di paşbarkirina cuzdankê de pirsgirêkêk çêbû. Ji kerema xwe venêrîn.",
+            "minimumMigrationAmountSpentAddresses": "Jibo navnîşanên hatin sarfkirin kêmahiya veguhastina herî kêm 1 Mi ye. Heke hevsengiya we rast xuya nake, careke din venêrin.",
+            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
+            "cannotMigrateAllYourFunds": "Ji ber ku nirxê hin navnîşanan pir kêm e, em nikarin tevahiya bîlançoya we hilgirin. Hûn dikarin danûstendina xwe bi vî rengî jî bidomînin. {value} dê winda bibe.",
+            "error": "Di paşbarkirina cuzdankê de pirsgirêkêk çêbû. Ji kerema xwe venêrîn."
+        },
+        "bundleMiningWarning": {
+            "title": "Hişyarî",
+            "body1": "Di yek an çend navnîşanên ku we berê lê derbas kirî de hevsengiyek we heye.",
+            "body2": "Em pêşniyar dikin ku pêvajoyek xweser bimeşînin da ku alîkariya ewledariyê û ewlehiya veguheztina van dravî bikin.",
+            "body3": "Ger hûn sepanê dadin, dê pêdiviya barkirina jinûve bike.",
+            "learn": "Zêdetir zanyarî yê navnîşanên karhatî agahdar bibin"
+        },
+        "secureSpentAddresses": {
+            "title": "Navnîşanên hatin bikaranîn bike ewlehî yê",
+            "body1": "{number, plural, one {# navnîşana hatî karanîn} other {# navnîşana hatî karanîn}} de mayînên we hatine tespîtkirin.",
+            "body2": "Em pêşniyar dikin ku pêvajoyek xweser bimeşînin da ku alîkariya ewlehî û veguhastina hevsengiya we bi ewlehî bikin.",
+            "error": "Hûn nikarin navnîşanên hatin bikaranîn yên ji 1 Mî kêmtir barbikin"
+        },
+        "securityCheckCompleted": {
+            "title": "Kontrola ewlehiyê serket",
+            "body1": "Me asta xetera ewlehiyê hesab kir. Dîsa meşandina vê pêvajoyê dikare asta xetereyê kêm bike.",
+            "body2": "Heke hûn ji asta (yên) rîskê piştrastîn, bişkoka berdewamiyê pitikînin.",
+            "rerun": "Jibo navnîşanên jêgirtî pêvajoyê ji nûve bide destpêkirin",
+            "continueMigration": "Barkirinê bidomîne"
+        },
+        "securingSpentAddresses": {
+            "title": "Navnîşanên hatin bikaranîn di ewlehîdene...",
+            "body1": "Ev kirarî {minutes, plural, one {1 xulek} other {# xulek}} dê bidome.",
+            "body2": "Dê komputera we bi kapasîteya tevahî bixebite, hûn dikarin li bendê nebin ko ev pêvajo xilas bibe tiştek din bikin."
+        },
+        "transferFragmentedFunds": {
+            "body1": "Firefly wê niha dest barkirina dirawê we bike. Dibe ko ev piçek dem bigire.",
+            "body2": "Ensure your Ledger is connected and the {legacy} app is open at all times during migration.",
+            "migrate": "Mayînê barbike",
+            "transaction": "Kirarî {number}",
+            "rerun": "Dîsa biceribîne"
         },
         "migrateFailed": {
             "title": "To do",
@@ -141,13 +274,16 @@
         },
         "balance": {
             "title": "Hevsenga te",
-            "body": "Bîlançoya we rast e?"
+            "body": "Berî ku bidomînin bila bîlançoya we rast be. Heke hin tişt rast xuya nekin, hûn dikarin dîsa kontrol bikin.",
+            "error": "Kêmahiya veguhastina herî kêm 1 Mi ye. Heke hevsengiya we rast xuya nake, careke din venêrin.",
+            "zeroBalance": "Dîsa biceribînin. Heke hûn hîn jî nekarin hevsengiya xwe bibînin, dibe ko hûn seed'a xwe nerast ketibînê.",
+            "zeroBalanceLedgerLegacy": "Try checking again. If you still can't find your balance you might have selected the wrong account index."
         },
         "settings": {
             "settings": "Mîhengên",
             "generalSettings": {
                 "title": "Serdilkirinên tevayî",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Xûyakirina cuzdanka xwe biguherîne û mîhengên gelemperî serast bikin"
             },
             "security": {
                 "title": "Ewlehî",
@@ -166,7 +302,7 @@
                 "description": "Navê profîla xwe biguherîne an jî avatarekê sazbike"
             },
             "sync": {
-                "title": "Hesabê xwe hevdem bike",
+                "title": "Cuzdanka sekronîze bike",
                 "description": ""
             },
             "theme": {
@@ -185,17 +321,23 @@
                 "title": "Hişyarî",
                 "description": "Jibo bûyerên kirarîyê hişyariyên sîstemî"
             },
+            "networkStatus": {
+                "title": "Network status",
+                "description": "Displays the status of the node you are currently connected to."
+            },
             "exportStronghold": {
                 "title": "Cîgirê bikşîne derve",
-                "description": "Barê dosyayek Stronghold bikin\n- cîhgira hatî pêborîkirin cuzdank û bûyerên kiryarên we yên dawî."
+                "description": "Barê dosyayek Stronghold bikin\n- cîhgira hatî pêborîkirin cuzdank û bûyerên kiryarên we yên dawî"
             },
             "appLock": {
                 "title": "Kilîda Otomatîk",
-                "description": "Berîya cuzdanka we bê kilîl kirin û têketina we werê dawî kirin demê we derbas kirî"
+                "description": "Dema bêçalaktiyê berî ku çenteyên we kilît bibin û hûn ji nav derkevin",
+                "durationMinute": "Berî {time, plural, one {1 xulek} other {# xulek}}",
+                "durationHour": "{time, plural, one {1 demjimêr} other {# demjimêr}}"
             },
             "changePassword": {
                 "title": "Pêborînê biguherînê",
-                "description": "Pêborîn jibo ewlehîya hesaba we biparêze tê karanîn. Jibo parastina mayînên xwe pêborînek xurt bikarbînin."
+                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
             },
             "changePincode": {
                 "title": "Qoda PIN'ê biguherîne",
@@ -205,17 +347,17 @@
                 "confirmNewPincode": "PIN'a nû tomarbike",
                 "action": "PIN'ê biguherîne"
             },
-            "resyncAccounts": {
-                "title": "Hesabê xwe ji hevdemê rake",
-                "description": "Jibo piştrastîya mayînên we pişt pilanê de pêywîrê kartînê."
+            "balanceFinder": {
+                "title": "Gerdîta mayîna",
+                "description": "Perform an extended search of your addresses for tokens"
             },
             "hiddenAccounts": {
-                "title": "Hesabên veşartî",
-                "description": "Ev jêgirtin hesabên berîya niha hatîn veşartin dê bidê nîşan."
+                "title": "Cuzdankên veşartî",
+                "description": "Selecting this options will show wallets that were previously hidden"
             },
             "deleteProfile": {
                 "title": "Profîlê jêbibe",
-                "description": "Cuzdanka we, bûyerên kirarîyê dê ji bin bibe. Piştrast bin ko cîhgirkirek yê we heye."
+                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
             },
             "deepLinks": {
                 "title": "Girêdanên kûr",
@@ -231,7 +373,7 @@
             },
             "configureNodeList": {
                 "title": "Girêkê jêbigir",
-                "description": "Lîsteya girêdanên cuzdanka xwe rêvebibin.",
+                "description": "Manage the list of IOTA network nodes you connect to",
                 "primaryNode": "Girêdana yekemîn",
                 "excludeNode": "Girêdanê lê neke",
                 "includeNode": "Girêdanê lê bike",
@@ -239,7 +381,7 @@
                 "setAsPrimary": "Wekî yekemîn bihesibîn",
                 "removeNode": "Girêdanê jêbibe",
                 "includeOfficialNodeList": "Lîsteya girêdanên fermî tevil bike",
-                "noNodes": "Node tune, li şûna wê hilbijartina otomatîkî tê bikar anîn."
+                "noNodes": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "Delîlên kar",
@@ -252,6 +394,10 @@
             "diagnostics": {
                 "title": "Pêderk",
                 "description": "Zanyarîyên sîstem û sazîyê bibînin"
+            },
+            "migrateLedgerIndex": {
+                "title": "Migrate Ledger Index",
+                "description": "Migrate another Trinity account index"
             },
             "stateExport": {
                 "title": "Rewşê barbikê derve",
@@ -280,7 +426,7 @@
             },
             "reportAnIssue": {
                 "title": "Pirsgirêkê ragehîne",
-                "description": "Çewtiyek ji pêşdebiran re ragihînin. Vê kontrol bikin ku hûn pê ew nehatiye raporkirin."
+                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
             }
         },
         "login": {
@@ -296,12 +442,20 @@
                 },
                 "hardwareDevice": {
                     "title": "Pergala Arasteyî",
-                    "noneDetected": "Çi nehat dîtin"
+                    "statuses": {
+                        "appNotOpen": "IOTA App Not Open",
+                        "connected": "Connected",
+                        "legacyConnected": "{legacy} App Open",
+                        "locked": "Kilîl kirî",
+                        "mnemonicMismatch": "Wrong Ledger or Mnemonic",
+                        "notDetected": "Not Detected",
+                        "otherConnected": "App Open"
+                    }
                 },
                 "strongholdStatus": {
                     "title": "Rewşa Cuzdankê",
-                    "locked": "Stronghold kilîl bû",
-                    "unlocked": "Stronghold kilîl vebî"
+                    "locked": "Kilîl kirî",
+                    "unlocked": "Kilîl vekirî"
                 },
                 "strongholdBackup": {
                     "title": "Cîhgira Cuzdankê",
@@ -314,7 +468,7 @@
                 "networkDown": "Girêdana Networkê Qeta",
                 "status": "Hal",
                 "messagesPerSecond": "Peyam di sanîyek de",
-                "confirmationRate": "Rêjeya Piştrastîyê"
+                "referencedRate": "Referenced rate"
             },
             "profileModal": {
                 "allSettings": "Hemu dilkirin",
@@ -325,7 +479,7 @@
     "popups": {
         "password": {
             "title": "Nasnav pêwîste",
-            "subtitle": "Ji kerema xwe pêborînê bikevine ko kilîla Stronghold rabe",
+            "subtitle": "Ji kerema xwe pêborînê bikevine ko kilîla cuzdanka we rabe",
             "backup": "Ji kerema xwe şîfreya xwe binivîsin da ku hûn hilanînê bişînin"
         },
         "qr": {
@@ -336,7 +490,8 @@
             "upToDateTitle": "Firefly nûjene",
             "upToDateDescription": "Hûn versîyona Firefly ya herî dawî û ewle kartînîn.",
             "updateAvailable": "Nûjenîya Firefly heye",
-            "updateDetails": "Versîyon {version} - {date}"
+            "updateDetails": "Versîyon {version} - {date}",
+            "noAutoUpdate": "Di vê guhertoya Windows-ê de nûvekirina xweser qedexe ye, ji kerema xwe biçin https://firefly.iota.org ku nûvekirinê dakêşin."
         },
         "backup": {
             "title": "Cîhgira dawî: {date}",
@@ -344,26 +499,26 @@
             "backupDescription": "Girîng e ku hûn bi rêkûpêk paşde biavêjin da ku hûn kopiyek hesab û dîroka danûstendina we hebe.",
             "backupWarning": "Ger hûn hevoka xweya hilanînê û başbûnê winda bikin hûn ê têkevina dravên xwe winda bikin.",
             "notBackedUp": "Nehat cîhgirkirin",
-            "notBackedUpDescription": "We Stronghold'a xwe cîhgir nekir",
+            "notBackedUpDescription": "We cuzdanka xwe cîhgir nekir",
             "saving": "Tomar dike..."
         },
         "deleteAccount": {
             "title": "Jêbibe {name}?",
-            "body": "Dîroka danûstendinê ya vê hesabê tune. Ew bi ewlehî dikare were jêbirin.",
+            "body": "Dîroka danûstendinê ya vê cudzdankê tune. Ew bi ewlehî dikare were jêbirin.",
             "typePassword": "Jibo pêjirandinê pêborîna cuzdaneka xwe binivîse.",
-            "hideAccount": "Hesabê jêbibe",
+            "hideAccount": "Cuzdankê jêbibe",
             "errorTitle": "Nayê jêbirin {name}",
-            "errorBody1": "Hûn nikarin vê hesabê jêbirin, divê hûn bi kêmanî yek hebe."
+            "errorBody1": "Hûn nikarin vê cuzdankê jêbibin, divê bi kêmanî yek ya te hebe."
         },
         "hideAccount": {
             "title": "Hilne {name}?",
-            "body": "Hûn dikarin vê hesabê paşê bi çalakkirina \"Nîşan hesabên veşartî\" di Mîhengên Pêşkeftî de bibînin.",
+            "body": "Hûn dikarin vê cuzdankê paşê bi çalakkirina \"Nîşan hesabên veşartî\" di Mîhengên Pêşkeftî de bibînin.",
             "typePassword": "Jibo pêjirandinê pêborîna cuzdaneka xwe binivîse.",
-            "hideAccount": "Hesabên veşartî",
+            "hideAccount": "Cuzdankê veşêre",
             "errorTitle": "Nayê jêbirin {name}",
-            "errorBody1": "Ji bo veşartina hesabek divê 0 bîlançoya wê hebe.",
-            "errorBody2": "Niha we {balance} li ser vê hesabê maye. Ji kerema xwe van dravî veguherînin hesabek cûda û dîsa biceribînin.",
-            "errorBody3": "Hûn nikarin vê hesabê jêbibin, divê bi kêmanî yek ya te hebe."
+            "errorBody1": "Ji bo veşartina cuzdank divê 0 bîlançoya wê hebe.",
+            "errorBody2": "Niha we {balance} li ser vê cuzdank maye. Ji kerema xwe van dravî veguherînin hesabek cûda û dîsa biceribînin.",
+            "errorBody3": "Hûn nikarin vê cuzdankê jêbibin, divê bi kêmanî yek ya te hebe."
         },
         "addressHistory": {
             "title": "{name} dîroka navnîşanê",
@@ -403,30 +558,105 @@
         "transaction": {
             "title": "Kirarê bipêjirîn",
             "body": "Wê tu ewqasî {amount} hinêrî"
+        },
+        "balanceFinder": {
+            "title": "Gerdîta mayîna",
+            "body": "Lêgerînek ya navnîşana berfirehtir pêk bînin da ku hevsengiyên wenda bibînin.",
+            "totalWalletBalance": "Krediya tevahî",
+            "typePassword": "Jibo destûra lêgerînê pêborîna xwe têkevin."
+        },
+        "riskFunds": {
+            "title": "Hişyarî: demê barkirinê mayîn dibin metirsî yê de ye",
+            "body1": "Berî ku hûn dest bi barkirinê bikin pir tê pêşniyar kirin ku hemî hûn dravê xwe ewleh bikin. Heke hûn dravê xwe ewle nekin, dravê we di bin xetera diziyê de bin.",
+            "body2": "Tête pêşniyar kirin ku pêvajo ji bo navnîşanên bi asta xetereya navîn an mezintir ji nû ve werin destpêkirin."
+        },
+        "missingBundle": {
+            "title": "Hişyarî: demê barkirinê mayîn dibin metirsî yê de ye",
+            "body": "Di navnîşanên karanîn de hevsengiyek we heye, lê ji bo ewlehiya wê ji bo agahdariyê hewce nake. Heke we demek dirêj berê bazirganî kiribe ev dikare pêk were. Hûn dikarin berdewam bikin lê dê {value} di dema barkirinê de bikeve bin metirsiyê.",
+            "learnMore": "Zêdetir zanyarî yê navnîşanên karhatî agahdar bibin",
+            "proceed": "Ez metirsî yê didim berçav"
+        },
+        "snapshot": {
+            "title": "Barkirina tora ongoing'ê bilind bike",
+            "body": "Nûvekirina torgiloka Chrysalis dest pê kir.",
+            "bodyMigration": "Koçberî heya ku xelas bibe seqet e.",
+            "bodyFirefly": "Firefly heya ku xelas bibe seqet e.\nKoçkirina Tokensd jî dê paşê gengaz be."
+        },
+        "ledgerNotConnected": {
+            "connect": "Open the new IOTA app on your Ledger device to continue",
+            "connectLegacy": "Open the {legacy} app on your Ledger device to continue"
+        },
+        "ledgerConfirmation": {
+            "confirm": "To proceed, confirm the prompt displayed on your Ledger device"
+        },
+        "ledgerAppGuide": {
+            "title": "Guide to installing the Ledger apps",
+            "steps": {
+                "0": "Install and open the Ledger Live application",
+                "1": "Ensure that your Ledger is connected",
+                "2": "Search for apps: {legacy} and IOTA (MIOTA)",
+                "3": "Install both apps: {legacy} and IOTA (MIOTA)",
+                "4": "Remember that it's important to close Ledger Live before returning to Firefly"
+            }
+        },
+        "ledgerConnectionGuide": {
+            "title": "Tips if your Ledger isn’t connecting",
+            "steps": {
+                "0": "Make sure Ledger Live is not open on your computer",
+                "1": "Ensure you have unlocked your Ledger device with your PIN",
+                "2": "Open the new IOTA app on your Ledger device",
+                "3": {
+                    "text": "Still no luck?",
+                    "link": "Try the official Ledger support page"
+                }
+            }
+        },
+        "ledgerTransaction": {
+            "remainderAddress": {
+                "title": "Confirm remainder address",
+                "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+            },
+            "transaction": {
+                "title": "Kirarê bipêjirîn",
+                "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted."
+            }
+        },
+        "ledgerAddress": {
+            "title": "Confirm receive address",
+            "body": "Confirm that the receive address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+        },
+        "ledgerMigrateIndex": {
+            "title": "Do you need to migrate another Trinity account index?",
+            "body": "You can also migrate later in Advanced Settings."
         }
     },
     "charts": {
-        "incomingMi": "Yên hatî {value} Mi",
-        "outgoingMi": "Yên çûyî {value} Mi",
+        "incomingMi": "Yên hatî {value}",
+        "outgoingMi": "Yên çûyî {value}",
         "portoflio": "Portfolio",
         "token": "Token",
-        "accountValue": "Bihayê Hesabê",
-        "accountActivity": "Çalakiyên Hesabê",
-        "timeframe1Hour": "1 hour",
-        "timeframe1Day": "1 day",
-        "timeframe1Week": "1 week",
-        "timeframe1Month": "1 month"
+        "accountValue": "Mayîna Cuzdankê",
+        "accountActivity": "Çalakîya Cuzdankê",
+        "timeframe1Hour": "1 demjimêr",
+        "timeframe1Day": "1 roj",
+        "timeframe1Week": "1 hefte",
+        "timeframe1Month": "1 mang"
     },
     "actions": {
         "continue": "Berdewam",
         "back": "Şûnde",
+        "previous": "Previous",
+        "next": "Next",
         "cancel": "Betal",
         "close": "Derkeve",
         "dismiss": "Devjêberde",
+        "proceedAnyway": "Dîsa jî bidome",
         "save": "Tomarkirin",
         "importSeed": "Seed'ek heyî barbikê hundir",
-        "importWallet": "Cuzdanka heyî barbikê hundir",
+        "restoreWallet": "Cuzdankekê bar bikin an vegerînin",
+        "restoreWalletDescription": "Derbasê Chrysalis'ê bibin an jî cuzdankelê vegerînin",
         "createWallet": "Cuzdanek nû çêke",
+        "createWalletDescription": "Cuzdankeke nû çêbikin ku bi Chrysalis'ê de bixebite",
         "savePassword": "Pêborînê tomar bike",
         "useBiometric": "Ewlehîya bîyometrîk bikarbînin",
         "setupPin": "Qoda PIN saz bike",
@@ -462,11 +692,11 @@
         "updateFirefly": "Firefly nûjen bike",
         "restartNow": "Aniha ji nûdestpêbike",
         "saveBackup": "Cîhgira Stronghold'ê tomar bike",
-        "customizeAcount": "Hesabê bike taybetî",
+        "customizeAcount": "Taybetkirina cuzdankê",
         "viewAddressHistory": "Bûyera navnîşanê nîşan bide",
-        "hideAccount": "Hesabên veşartî",
-        "showAccount": "Hesabê veşêre",
-        "deleteAccount": "Hesabê jêbibe",
+        "hideAccount": "Cuzdankê veşêre",
+        "showAccount": "Veşartina cuzdankê rake",
+        "deleteAccount": "Cuzdankê jêbibe",
         "max": "Herî zêde",
         "addNode": "Girêkê zêde bike",
         "updateNode": "Girêk nûjen",
@@ -482,21 +712,32 @@
         "copy": "kopî",
         "paste": "tevlêkirin",
         "selectAll": "Hemîyê Hilbjiêre ",
-        "addAccount": "Hesabekî çêke",
+        "addAccount": "Cuzdankî zêde",
         "checkForUpdates": "Ji bo Nûvekirinan Kontrol bikin",
         "reportAnIssue": "Pirsgirêkekê ragihînin\n",
+        "restore": "Restore",
         "clear": "Paqij bike",
         "hideDetails": "Derbarê dade",
         "yes": "Erê",
         "no": "Na",
+        "skip": "Hilavêje",
         "reset": "Bîne serî",
         "downloadRecoveryKit": "Kîta rizgarkirinê tomar bike",
         "skipBackup": "Dosîya rizgarkirinê veke",
         "finishSetup": "Sazîyê biqedîn",
         "readDocumentation": "Belgenamê bixwîne",
         "visitFaq": "Here PPP",
-        "showHiddenAccounts": "Hesabên veşartî nîşan bidin",
-        "confirm": "Tomarkirin"
+        "viewStatus": "Rewşê bibîn",
+        "showHiddenAccounts": "Cuzdankê veşartî nîşan bidin",
+        "confirm": "Tomarkirin",
+        "hideNetworkStatistics": "Hide network statistics",
+        "findBalances": "Mayîna bibîne",
+        "searchBalances": "Mayîna bigere",
+        "searchAgain": "Dîsa lê bigere",
+        "searching": "Lêdigere...",
+        "closeFirefly": "Firefly bigire",
+        "generateAddress": "Navnîşanekê çêke",
+        "migrateAgain": "Migrate another index"
     },
     "general": {
         "password": "Şîfre",
@@ -511,14 +752,15 @@
         "received": "Wergirtin",
         "sendPayment": "Dravê bişînin",
         "moveFunds": "Transfera dahîl",
+        "sendTo": "Send To",
         "sendFunds": "Diraw hinêre",
         "sendToAddress": "Navnîşana xwe hinêre",
         "scanQrOrPaste": "Qodek QR-ê Scan bikin an navnîşanekê pêve bide",
-        "moveFundsBetweenAccounts": "Navbera hesabên xwe diraw hinêre",
+        "moveFundsBetweenAccounts": "Navbera Cuzdankê xwe diraw hinêre",
         "sendTokensToAddress": "Tokena hinêre navnîşanekê",
-        "manageAccount": "Rêveberiya Hesabê",
-        "customizeAcount": "Hesabê xwe bike taybetî",
-        "account": "Hesab",
+        "manageAccount": "Cuzdank birêve bibin",
+        "customizeAcount": "Taybetkirina cuzdankê",
+        "account": "Tûrik",
         "sendingToAddress": "Dihênêrê navnîşanê",
         "amount": "Hijmar",
         "addAddress": "Navnîşanê zêde bike",
@@ -529,12 +771,10 @@
         "myAddress": "Navnîşana Min",
         "shareAddress": "Navnîşanekê parve bike",
         "yourAddress": "Navnîşana we",
+        "newRemainder": "New Remainder",
+        "remainder": "Remainder",
         "generateNewAddress": "Navnîşanek nû çêke",
         "copyAddress": "Kopîkirina Navnîşanê",
-        "haveTextBackup": "Min cîhgira hevokî heye",
-        "haveFileBackup": "Min cîhgira dosyayê heye",
-        "enterSeedOrPhrase": "Hevokek an tovek başbûnê binivîse",
-        "uploadSeedvaultOrStronghold": "Pelê Stronghold an SeedVault-ê têxin",
         "import": "Barke hundir",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -543,54 +783,59 @@
         "lightTheme": "Rûkara Ronî",
         "darkTheme": "Rûkara tarî",
         "balance": "Mayîn",
-        "accountBalance": "Mayîn a Hesabê",
+        "accountBalance": "Mayîna Cuzdankê",
         "incoming": "Yên hatî",
         "outgoing": "Yên çûyî",
         "totalIn": "Têketina giştî",
         "totalOut": "Derçûna giştî",
-        "accounts": "Hesaba Min",
-        "myAccounts": "Hesaba Min",
-        "automaticNodeSelection": "Jêgirtina node ya otomatîk",
+        "accounts": "Cuzdank",
+        "myAccounts": "Cuzdank",
+        "automaticNodeSelection": "Jêgirtina girê ya otomatîk",
         "manualNodeSelection": "Jêgirtina node ya manuel",
         "profiles": "Profîl",
         "developerProfile": "Hesaba Pêşvebir",
+        "developerProfileDescription": "Destûrê dide ku hûn bi torên testê re têkilî daynin",
         "dev": "Pêşvebir",
-        "createAccount": "Hesabekê Çêke",
-        "accountName": "Navê Hesabê",
+        "createAccount": "Cuzdanek nû çêke",
+        "accountName": "Navê Cuzdankê",
         "latestTransactions": "Transferên Dawî",
         "transactions": "Lîsteya Transferan",
         "security": "Ewlehî",
-        "accountAddress": "Navnîşana Hesabê",
-        "nodes": "Hemî Girê",
-        "wallet": "Tûrik",
+        "accountAddress": "Navnîşana Cuzdankê",
+        "nodes": "Girê",
+        "wallet": "Cuzdank",
         "help": "Alîkarî",
         "you": "Tu",
         "messageId": "Nasnameya Peyamê",
         "inputAddress": "Navnîşanê Hinêre",
         "receiveAddress": "Navnîşana Standinê",
+        "newAddress": "New Address",
         "date": "Rojmêr",
         "status": "Hal",
         "confirmed": "Hat Pejirandin",
         "pending": "Bendê ye",
-        "noAccounts": "Hesabê we tune, ji kerema xwe yêk çêbikin.",
+        "noAccounts": "Cuzdankê we tune, ji kerema xwe yêk çêbikin.",
         "loadingAccounts": "Bardibe, ji kerema xwe re rawestin...",
         "addProfile": "Profîlê zêde bikin\n",
         "noRecentHistory": "Bûyer nîne",
-        "transferSyncing": "Hesab tê senkronîzekirin",
+        "firstSync": "Dîroka hevdemkirinê, dibe ku ev demek bikişîne...",
+        "transferSyncing": "Cuzdanka sekronîze bike",
         "transferSelectingInputs": "Hilbijartina têketinê",
-        "transferRemainderAddress": "Navnîşana spartina bermayî çêdike",
+        "transferRemainderAddress": "Generating remainder address",
+        "transferPreparedTransaction": "Preparing transaction",
         "transferSigning": "Îmzekirina danûstendinê",
         "transferPow": "PoW çêdibe",
         "transferBroadcasting": "Kiryar tê weşandin",
         "transferComplete": "Transfer gehişt",
-        "creatingAccount": "Hesabê tê diafirînin, ji kerema xwe bisekinin...",
-        "updatingAccount": "Piştrastkirin a hesabê, ji kerema xwe rawestin...",
-        "accountSyncing": "Hesab tê senkronîzekirin",
-        "accountSyncComplete": "Senkronîzekirina hesabê diqede",
+        "generatingReceiveAddress": "Generating receive address",
+        "creatingAccount": "Profîlek nû çêdibe, ji kerema xwe rawestin...",
+        "updatingAccount": "Cuzdank tê nûvekirin, ji kerema xwe bisekinin...",
+        "accountSyncing": "Cuzdank sekronîze dibe",
+        "accountSyncComplete": "Senkronîzekirina Cuzdank diqede",
         "passwordUpdating": "Şifre nû dibe...",
         "passwordSuccess": "Pêborîn bi serfirazî hat nûjenkirin",
         "passwordFailed": "Pêborîn bi serfirazî nehat nûjenkirin",
-        "syncingAccounts": "Hesab tê senkronîzekirin...",
+        "syncingAccounts": "Cuzdanka sekronîze bike...",
         "exportingStronghold": "Stronghold barke...",
         "exportingStrongholdSuccess": "Stronghold bi serfirazî hat şandin",
         "exportingStrongholdFailed": "Barkirina Stronghold ya derve têk çû",
@@ -604,7 +849,18 @@
         "passwordStrength3": "Nacîn",
         "passwordStrength4": "Bihêze",
         "creatingProfile": "Profîlek nû çêdibe, ji kerema xwe rawestin...",
-        "accountRemoved": "Ev hesab veşartî ye. Wê veke ku veguheztinan pêk bîne."
+        "fundMigration": "Barkirina mayînan",
+        "accountRemoved": "Ev Cuzdank veşartî ye. Wê veke ku veguheztinan pêk bîne.",
+        "receivingTo": "Tê standin{account}",
+        "sendingFrom": "Ji {account} tê şandin",
+        "receivedTo": "{account} hat standin",
+        "sentFrom": "Ji {account} tê şandin",
+        "receiving": "Tê standin",
+        "sending": "Tê şandin",
+        "legacyNetwork": "Tora Kevn",
+        "capsLock": "Caps Lock is on",
+        "version": "Version {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "Evro",
@@ -627,7 +883,8 @@
         "calcMinutesRemaining": "Xulekên mayîn tên hesabkirin...",
         "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# xulek maye}}",
         "copiedToClipboard": "Li rûnûsgehê hate kopîkirin",
-        "accountsSynchronized": "Senkronîzekirina hesabê serkeft"
+        "accountsSynchronized": "Senkronîzekirina Cuzdankê serkeft",
+        "fundsAvailableSoon": "Your funds will become available shortly"
     },
     "error": {
         "profile": {
@@ -658,13 +915,16 @@
         },
         "account": {
             "length": "Navê profîla we {length, plural, one {1 character} other {# Tîpa}} zêdetir nabe.",
-            "empty": "Berîya hûn yek nû çêkin, divê hûn hesaba xwe ya kevin bikarbînin.",
-            "notEmpty": "Berîya hûn vê hesabê binbibin, pêdiviye hûn transfera mayînên xwe bikin.",
-            "duplicate": "Li ser vî navî jixwe bikarhênerek heye.",
+            "empty": "Berîya hûn yek nû çêkin, divê hûn Cuzdankê xwe ya kevin bikarbînin.",
+            "notEmpty": "Berîya hûn vê Cuzdankê binbibin, pêdiviye hûn transfera mayînên xwe bikin.",
+            "duplicate": "Li ser vî navî jixwe Cuzdank heye.",
             "tilde": "Nabe navê profîlê bi qerekteran '~' destpêbike.",
             "control": "Nabe navê profîlê qerekterek yê kontrolê destpêbike.",
             "startDot": "Nabe navê profîlê bi qerekteran '.' destpêbike.",
-            "chars": "Nabe navê profîlê ji qerekterek <>:\"/\\|?* destpêbike"
+            "chars": "Nabe navê profîlê ji qerekterek <>:\"/\\|?* destpêbike",
+            "index": "Your account index must be a number between 0 and 2,147,483,647.",
+            "page": "Your account page must be a number between 0 and 2,147,483,647.",
+            "syncing": "There was an error syncing your wallets."
         },
         "send": {
             "addressLength": "Divê dirêjiya navnîşan {length, plural, one {1 character} other {# qerekter}} be.",
@@ -675,10 +935,12 @@
             "wrongAddressPrefix": "Navnîşan bi pêveya pêşî {prefix} re destpêbike.",
             "wrongAddressFormat": "Navnîşan şêweyek rast nehatiye çêkirin.",
             "invalidAddress": "Navnîşan netêle.",
-            "insufficientFunds": "Mayîna hesabê têrê nake.",
-            "noToAccount": "Jibo hinêrtina mayînê te hesab jê ne girt.",
+            "insufficientFunds": "Mayîna Cuzdankê têrê nake.",
+            "noToAccount": "Jibo hinêrtina mayînê te Cuzdank jê ne girt.",
             "sendingDust": "Hûn nikarin ji 1 Mi kêmtir hinêrin.",
-            "leavingDust": "Hûn nikarin di navnîşana xwe de ji 1 Mi kêmtir bêhêlîn."
+            "leavingDust": "Hûn nikarin di navnîşana xwe de ji 1 Mi kêmtir bêhêlîn.",
+            "cancelled": "The transaction was cancelled.",
+            "transaction": "There was an error sending your transaction. Please try again."
         },
         "node": {
             "invalid": "Ji kerema xwe URL'yeke derbasdar bikevê.",
@@ -699,6 +961,35 @@
             "phraseWordCount": "Divê di hevoka başbûna we de 24 peyv hebin, ku niha li wir e {length, plural, one {is 1} other {are #}}.",
             "phraseUnrecognizedWord": "Di hevoka başbûna we de peyva \"{word}\" a ku nayê nas kirin",
             "phraseCaseWord": "Divê pêyv \"{word}\" bi tîpa piçûk be"
+        },
+        "ledger": {
+            "appNotOpen": "You must open the IOTA app on your Ledger device.",
+            "generic": "There was an error connecting to your Ledger device.",
+            "legacyConnected": "The wrong app is open on your Ledger device.",
+            "locked": "Please unlock your Ledger device by entering the PIN.",
+            "mnemonicMismatch": "You have connected the wrong Ledger device or the mnemonic has changed.",
+            "notDetected": "No Ledger device detected.",
+            "notFound": "Ledger device not found.",
+            "otherConnected": "The wrong app is open on your Ledger device.",
+            "generateAddress": "There was an error generating an address.",
+            "timeout": "Your Ledger device timed out.",
+            "disconnected": "Your Ledger device was disconnected."
+        },
+        "popup": {
+            "preventClose": "This popup is unable to be closed."
+        },
+        "migration": {
+            "missingBundle": "An error occurred while trying to find the transaction bundle."
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "Asta metirsî yê:{risk}",
+            "veryHigh": "Pir bilind",
+            "high": "Bilind",
+            "medium": "Navîn",
+            "low": "Lawaz",
+            "veryLow": "Gelekî Nizm"
         }
     }
 }

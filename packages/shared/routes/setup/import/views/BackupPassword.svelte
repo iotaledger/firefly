@@ -1,14 +1,17 @@
 <script lang="typescript">
-    import { Button, Illustration, OnboardingLayout, Password, Text } from 'shared/components'
+    import { Animation, Button, OnboardingLayout, Password, Spinner, Text } from 'shared/components'
     import { createEventDispatcher, getContext } from 'svelte'
     import type { Writable } from 'svelte/store'
-    import type { ImportType } from '../Import.svelte'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { ImportType } from 'shared/lib/typings/profile'
 
-    export let locale
+    export let locale: Locale
+
     export let mobile
     export let error = ''
     export let busy = false
 
+    export let isGettingMigrationData
     const importType = getContext<Writable<ImportType>>('importType')
 
     let password = ''
@@ -21,7 +24,9 @@
         }
     }
     function handleBackClick() {
-        dispatch('previous')
+        if (!busy && !isGettingMigrationData) {
+            dispatch('previous')
+        }
     }
 </script>
 
@@ -45,12 +50,20 @@
                 submitHandler={handleContinue} />
         </div>
         <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-            <Button classes="flex-1" disabled={password.length === 0 || busy} onClick={() => handleContinue()}>
-                {locale('actions.continue')}
+            <Button
+                classes="flex-1"
+                disabled={password.length === 0 || busy || isGettingMigrationData}
+                onClick={() => handleContinue()}>
+                {#if isGettingMigrationData}
+                    <Spinner
+                        busy={isGettingMigrationData}
+                        message={locale('views.migrate.restoringWallet')}
+                        classes="justify-center" />
+                {:else}{locale('actions.continue')}{/if}
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            <Illustration illustration="import-from-file-password-desktop" width="100%" height="auto" />
+            <Animation animation="import-from-file-password-desktop" />
         </div>
     </OnboardingLayout>
 {/if}

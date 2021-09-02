@@ -7,13 +7,14 @@
     import { SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
     import { onDestroy } from 'svelte'
     import { get } from 'svelte/store'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
     let showNetwork = false
     let healthStatus = 2
     let showProfile = false
-    let profileColor = 'blue' // TODO: each profile has a different color
+    const profileColor = 'blue' // TODO: each profile has a different color
 
     const NETWORK_HEALTH_COLORS = {
         0: 'red',
@@ -40,7 +41,7 @@
         resetWalletRoute()
     }
 
-    const hasTitleBar = document.body.classList.contains(`platform-win32`)
+    const hasTitleBar = document.body.classList.contains('platform-win32')
 </script>
 
 <style type="text/scss">
@@ -52,7 +53,7 @@
 
 <aside
     class="flex flex-col justify-center items-center bg-white dark:bg-gray-800 h-screen relative w-20 px-5 pb-9 pt-9 border-solid border-r border-gray-100 dark:border-gray-800">
-    <Logo classes="logo mb-9 {hasTitleBar ? "mt-3": ""}" width="48px" logo="logo-firefly" />
+    <Logo classes="logo mb-9 {hasTitleBar ? 'mt-3' : ''}" width="48px" logo="logo-firefly" />
     <nav class="flex flex-grow flex-col items-center justify-between">
         <button class={$dashboardRoute === Tabs.Wallet ? 'text-blue-500' : 'text-gray-500'} on:click={() => openWallet()}>
             <Icon icon="wallet" />

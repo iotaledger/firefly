@@ -12,5 +12,13 @@ export interface Address {
     balance: number
     keyIndex: number
     internal: boolean
-    outputs: AddressOutput[]
+    outputs: {
+        [key: string]: AddressOutput
+    }
+}
+
+export interface ParsedAddress {
+    address: string
+    message: string
+    amount: number | string
 }

@@ -1,40 +1,16 @@
-import { stripTrailingSlash } from './helpers'
-import type { Node } from './typings/client'
+import type { Node } from './typings/node'
 import { isValidHttpsUrl, isValidUrl } from './utils'
+import { Network } from './typings/network'
 
-export type ExtendedNode = {
-    url: string
-    auth?: {
-        password: string
-        username: string
+const DEFAULT_NETWORK: Network = Network.ChrysalisMainnet
+
+const DEFAULT_NODES: Node[] = ['https://chrysalis-nodes.iota.org', 'https://chrysalis-nodes.iota.cafe'].map((url) => ({
+    url,
+    auth: {
+        username: '',
+        password: '',
     },
-    disabled?: boolean
-    isCustom: boolean
-    isPrimary: boolean
-    networkId: string
-}
-
-/**
- * Default timeout for a request made to an endpoint
- */
-const DEFAULT_NODE_ENDPOINT_TIMEOUT = 5000
-
-/**
- * TODO retrieve from endpoint
- */
-const DEFAULT_NODES: {
-    [network: string]: Node[]
-} = {
-    // mainnet: [
-    //     { url: 'https://iota.eco', auth: { username: '', password: '' } },
-    // ],
-    testnet: [
-        { url: 'https://api.hornet-0.testnet.chrysalis2.com', auth: { username: '', password: '' } },
-        { url: 'https://api.hornet-1.testnet.chrysalis2.com', auth: { username: '', password: '' } },
-        { url: 'https://api.hornet-2.testnet.chrysalis2.com', auth: { username: '', password: '' } },
-        { url: 'https://api.hornet-3.testnet.chrysalis2.com', auth: { username: '', password: '' } }
-    ]
-}
+}))
 
 /**
  * Check if a node url is valid
@@ -60,6 +36,7 @@ export const isNodeUrlValid = (nodesList: ExtendedNode[], newUrl: string, allowI
     }
 
     // Check whether the node was already added to the list
+    /* eslint-disable @typescript-eslint/prefer-regexp-exec */
     if (nodesList && nodesList.some(({ url }) => (url.endsWith(':443') ? url.slice(0, -4) : url).match(newUrl))) {
         return 'error.node.duplicate'
     }
@@ -68,40 +45,13 @@ export const isNodeUrlValid = (nodesList: ExtendedNode[], newUrl: string, allowI
 }
 
 /**
- * Get the default network
- * @returns The default network
- */
- export const getOfficialDefaultNetwork = (): string => {
-     // TODO change for release
-     return "testnet"
- }
-
-/**
- * Get the list of official networks
- * @returns The list of networks
- */
-export const getOfficialNetworks = (): {label: string; network: string }[] => {
-    return [
-        // {
-        //     label: 'Mainnet',
-        //     network: "mainnet",
-        // },
-        {
-            label: 'Testnet',
-            network: "testnet",
-        }
-    ]
-}
-
-/**
  * Get the list of official nodes
  * @returns The list of nodes
  */
- export const getOfficialNodes = (network: string): ExtendedNode[] => {
-    return (DEFAULT_NODES[network] ?? []).map((n, idx) => ({
-        ...n,
-        isPrimary: false,
-        isCustom: false,
-        networkId: network
-    }))
-}
+export const getOfficialNodes = (): Node[] => DEFAULT_NODES
+
+/**
+ * Get the official network
+ * @returns The official network
+ */
+export const getOfficialNetwork = (): string => DEFAULT_NETWORK

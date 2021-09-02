@@ -1,16 +1,19 @@
 <script lang="typescript">
-    import { Button, Icon, Pin, Profile, Text } from 'shared/components'
+    import { Icon, Pin, Profile, Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
+    import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { activeProfile } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'
     import { api, getStoragePath, initialise } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     export let mobile
-
+    
     let attempts = 0
     let pinCode = ''
     let isBusy = false
@@ -28,7 +31,7 @@
     $: hasReachedMaxAttempts = attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS
     $: {
         if (validatePinFormat(pinCode)) {
-            onSubmit()
+            void onSubmit()
         }
     }
 
@@ -60,6 +63,9 @@
     }
 
     function onSubmit() {
+        if (get(ongoingSnapshot) === true) {
+            return openSnapshotPopup()
+        }
         if (!hasReachedMaxAttempts) {
             const profile = get(activeProfile)
 

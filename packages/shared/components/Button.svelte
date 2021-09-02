@@ -5,7 +5,7 @@
     import { onMount } from 'svelte'
 
     export let events = {}
-    export let onClick = () => ''
+
     export let secondary = false
     export let disabled = false
     export let warning = false
@@ -22,7 +22,11 @@
     export let inlineStyle = ''
     export let showHoverText = undefined
 
+    export let onClick = (): void | string => ''
+
     let buttonElement
+    let darkModeEnabled
+
     $: darkModeEnabled = $appSettings.darkMode
 
     onMount(() => {
@@ -169,6 +173,16 @@
                         @apply bg-transparent;
                     }
                 }
+                &:disabled {
+                    :global(svg.showHoverText) {
+                        @apply text-gray-400;
+                    }
+                    &.darkmode {
+                        :global(svg.showHoverText) {
+                            @apply text-gray-700;
+                        }
+                    }
+                }
             }
             &.xl {
                 @apply pb-6;
@@ -257,10 +271,13 @@
         }
         &.xl {
             min-width: 100px;
-            &,
+            &:not(:disabled),
             &:hover,
             &:active {
                 @apply text-gray-800;
+            }
+            span {
+                @apply mx-0;
             }
             &.darkmode {
                 @apply bg-gray-700;
@@ -325,9 +342,9 @@
         {disabled}
         bind:this={buttonElement}>
         <Icon classes="mb-1" {icon} />
-        <div class="text-12 leading-140">
+        <span class="text-12 leading-140">
             <slot />
-        </div>
+        </span>
     </button>
 {:else}
     <button

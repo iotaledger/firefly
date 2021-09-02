@@ -5,16 +5,17 @@
     import { isNodeUrlValid } from 'shared/lib/network'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
-    import { asyncGetNodeInfo, wallet } from 'shared/lib/wallet'
-import { get } from 'svelte/store';
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
-    export let onSuccess
+    export let locale: Locale
+
     export let node
     export let nodes
     export let network
 
     const { accounts } = get(wallet)
+
+    export let onSuccess = (..._: any[]): void => {}
 
     let url = node?.url ?? ''
     let username = node?.auth?.username ?? ''
@@ -22,20 +23,10 @@ import { get } from 'svelte/store';
     let isDisabled = node?.disabled ?? false
     let isPrimary = node?.isPrimary ?? false
     let addressError = ''
-    let addressWarn = ''
-    let authError = ''
+    const authError = ''
     let isBusy = false
 
-    $: {
-        addressWarn = ''
-        url = stripSpaces(url)
-        if ($appSettings.developerMode && url.length > 4 && url.startsWith('http:')) {
-            addressWarn = locale('popups.node.httpWarning')
-        }
-    }
-
-    async function addCustomNode() {
-        let newNetworkId
+    function addCustomNode() {
         try {
             isBusy = true
             addressError = ''

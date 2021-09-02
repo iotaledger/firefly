@@ -2,8 +2,12 @@
     import { ActivityDetail, ActivityRow, Icon, Text } from 'shared/components'
     import { showAppNotification } from 'shared/lib/notifications'
     import { api, isSyncing, selectedAccountId, selectedMessage } from 'shared/lib/wallet'
+    import { isLedgerProfile } from 'shared/lib/profile'
+    import { displayNotificationForLedgerProfile } from 'shared/lib/ledger'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     export let transactions = []
     export let color = 'blue'
 
@@ -25,11 +29,20 @@
                 },
                 onError(err) {
                     $isSyncing = false
-                    showAppNotification({
-                        type: 'error',
-                        message: locale(err.error),
-                    })
-                },
+
+                    const shouldHideErrorNotification =
+                        err && err.type === 'ClientError' && err.error === 'error.node.chrysalisNodeInactive'
+                    if (!shouldHideErrorNotification) {
+                        if ($isLedgerProfile) {
+                            displayNotificationForLedgerProfile('error', true, true, false, false, err)
+                        } else {
+                            showAppNotification({
+                                type: 'error',
+                                message: locale(err.error),
+                            })
+                        }
+                    }
+                }
             })
         }
     }

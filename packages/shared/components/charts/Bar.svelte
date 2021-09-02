@@ -8,7 +8,7 @@
     export let datasets = []
     export let color = 'blue'
     export let inlineStyle = 'height: calc(50vh - 130px);'
-    export let formatYAxis = (value) => Number(value.toString())
+    export let formatYAxis = (value: unknown): number => Number(value.toString())
 
     let canvas
     let chart
@@ -31,11 +31,11 @@
 
         Chart.elements.RoundedTopRectangle = Chart.elements.Rectangle.extend({
             draw: function () {
-                const ctx = this._chart.ctx
+                const {ctx} = this._chart
                 const vm = this._view
 
                 let left, right, top, bottom, signX, signY, borderSkipped
-                let borderWidth = vm.borderWidth
+                let {borderWidth} = vm
 
                 if (!vm.horizontal) {
                     left = vm.x - vm.width / 2
@@ -114,14 +114,12 @@
             type: 'roundedBar',
             data: {
                 labels,
-                datasets: datasets.map((dataset) => {
-                    return {
-                        backgroundColor: fullConfig.theme.colors[dataset.color || color]['500'],
-                        hoverBackgroundColor: fullConfig.theme.colors[dataset.color || color]['500'],
-                        barThickness: 7,
-                        ...dataset,
-                    }
-                }),
+                datasets: datasets.map((dataset) => ({
+                    backgroundColor: fullConfig.theme.colors[dataset.color || color]['500'],
+                    hoverBackgroundColor: fullConfig.theme.colors[dataset.color || color]['500'],
+                    barThickness: 7,
+                    ...dataset,
+                }))
             },
             options: {
                 animation: false,
@@ -173,14 +171,14 @@
                     bodyFontColor: fullConfig.theme.colors[color]['200'],
                     callbacks: {
                         title: function ([tooltipItem]) {
-                            let dataset = datasets[tooltipItem.datasetIndex]
+                            const dataset = datasets[tooltipItem.datasetIndex]
                             if (dataset && dataset.tooltips) {
                                 return dataset.tooltips[tooltipItem.index]?.title ?? ''
                             }
                             return ''
                         },
                         label: function (tooltipItem) {
-                            let dataset = datasets[tooltipItem.datasetIndex]
+                            const dataset = datasets[tooltipItem.datasetIndex]
                             if (dataset && dataset.tooltips) {
                                 return dataset.tooltips[tooltipItem.index]?.label ?? ''
                             }

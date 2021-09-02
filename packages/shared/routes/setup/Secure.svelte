@@ -1,9 +1,11 @@
 <script lang="typescript">
-    import { Button, Illustration, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
     import { downloadRecoveryKit } from 'shared/lib/utils'
     import { createEventDispatcher } from 'svelte'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     export let mobile
 
     const dispatch = createEventDispatcher()
@@ -37,7 +39,7 @@
             <Button classes="flex-1" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-orange dark:bg-gray-900">
-            <Illustration illustration="secure-desktop" width="100%" height="auto" />
+            <Animation animation="secure-desktop" />
         </div>
     </OnboardingLayout>
 {/if}

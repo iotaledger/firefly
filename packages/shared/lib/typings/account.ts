@@ -2,6 +2,8 @@ import type { Bridge, CommunicationIds } from './bridge'
 import type { Message } from './message'
 import type { Address } from './address'
 import type { ClientOptions } from './client'
+import type { NodeAuth } from './node'
+import type { Duration } from './wallet'
 
 export enum MessageType {}
 
@@ -32,9 +34,7 @@ export interface Account {
     clientOptions: ClientOptions
     index: number
     lastSyncedAt: string
-    signerType: {
-        type: 'Stronghold'
-    }
+    signerType: SignerType
     storagePath: string
     messages: Message[]
     addresses: Address[]
@@ -43,7 +43,7 @@ export interface Account {
 export type AccountIdentifier = number | string
 
 export interface SignerType {
-    type: 'Stronghold'
+    type: 'Stronghold' | 'LedgerNano' | 'LedgerNanoSimulator'
 }
 
 export interface AccountToCreate {
@@ -51,9 +51,11 @@ export interface AccountToCreate {
     signerType: SignerType
     alias?: string
     createdAt?: string
+    allowCreateMultipleEmptyAccounts?: boolean
 }
 
 export interface SyncedAccount {
+    index: number
     id: string
     depositAddress: Address
     isEmpty: boolean
@@ -96,12 +98,40 @@ export function getAccounts(bridge: Bridge, __ids: CommunicationIds): Promise<st
     })
 }
 
-export function syncAccounts(bridge: Bridge, __ids: CommunicationIds, addressIndex?: number, gapLimit?: number, accountDiscoveryThreshold?: number): Promise<string> {
+export function syncAccounts(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+    addressIndex?: number,
+    gapLimit?: number,
+    accountDiscoveryThreshold?: number
+): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
         cmd: 'SyncAccounts',
-        payload: { addressIndex, gapLimit, accountDiscoveryThreshold }
+        payload: { addressIndex, gapLimit, accountDiscoveryThreshold },
+    })
+}
+
+export function startBackgroundSync(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+    pollingInterval: Duration,
+    automaticOutputConsolidation: boolean
+): Promise<string> {
+    return bridge({
+        actorId: __ids.actorId,
+        id: __ids.messageId,
+        cmd: 'StartBackgroundSync',
+        payload: { pollingInterval, automaticOutputConsolidation },
+    })
+}
+
+export function stopBackgroundSync(bridge: Bridge, __ids: CommunicationIds): Promise<string> {
+    return bridge({
+        actorId: __ids.actorId,
+        id: __ids.messageId,
+        cmd: 'StopBackgroundSync',
     })
 }
 
@@ -175,14 +205,26 @@ export function setAlias(
     return _callAccountMethod(bridge, __ids, AccountMethod.SetAlias, accountId, payload)
 }
 
-export function isLatestAddressUnused(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier): Promise<string> {
+export function isLatestAddressUnused(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+    accountId: AccountIdentifier
+): Promise<string> {
     return _callAccountMethod(bridge, __ids, AccountMethod.IsLatestAddressUnused, accountId)
 }
-export function generateAddress(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier): Promise<string> {
+export function generateAddress(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+    accountId: AccountIdentifier
+): Promise<string> {
     return _callAccountMethod(bridge, __ids, AccountMethod.GenerateAddress, accountId)
 }
 
-export function getUnusedAddress(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier): Promise<string> {
+export function getUnusedAddress(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+    accountId: AccountIdentifier
+): Promise<string> {
     return _callAccountMethod(bridge, __ids, AccountMethod.GetUnusedAddress, accountId)
 }
 
@@ -221,6 +263,16 @@ export function syncAccount(
     return _callAccountMethod(bridge, __ids, AccountMethod.SyncAccount, accountId, options || {})
 }
 
-export function getNodeInfo(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier, url?: string): Promise<string> {
-    return _callAccountMethod(bridge, __ids, AccountMethod.GetNodeInfo, accountId, url)
+export function getNodeInfo(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+    accountId: AccountIdentifier,
+    url?: string,
+    auth?: NodeAuth
+): Promise<string> {
+    return _callAccountMethod(bridge, __ids, AccountMethod.GetNodeInfo, accountId, [
+        url,
+        auth?.jwt,
+        [auth?.username, auth?.password],
+    ])
 }

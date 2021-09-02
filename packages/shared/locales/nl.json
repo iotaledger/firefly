@@ -1,46 +1,64 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Verstuur, ontvang & beheer uw IOTA tokens",
-            "body": "Firefly is de officiële IOTA portemonnee."
+            "title": "Verstuur, Ontvang & Beheer uw IOTA tokens",
+            "body": "Firefly is de officiële wallet software van IOTA."
         },
         "legal": {
             "title": "Privacy beleid & Service voorwaarden",
             "body": "Lees het privacybeleid en de algemene voorwaarden.",
-            "privacyPolicy": {
-                "title": "Privacybeleid",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
-            "termsOfService": {
-                "title": "Algemene voorwaarden",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
             "checkbox": "Ik heb het privacy beleid & de service voorwaarden gelezen en ga hier mee akkoord"
         },
         "appearance": {
             "title": "Vormgeving",
-            "body": "Kies het thema van uw portemonnee."
+            "body": "Kies uw app thema."
+        },
+        "profile": {
+            "title": "Een profiel aanmaken",
+            "profileName": "Profielnaam",
+            "body1": "U kunt meerdere gebruikersprofielen aanmaken om uw portemonnees te organiseren en de privacy te verbeteren.",
+            "body2": {
+                "first": "Om te beginnen, laten we starten met de naam van je eerste profiel.",
+                "nonFirst": "Om te beginnen, laten we starten met de naam van je profiel."
+            },
+            "addMore": "Je kunt later meer profielen toevoegen."
         },
         "setup": {
-            "title": "Stel je wallet in",
-            "body1": "U kunt meerdere gebruikersprofielen aanmaken om uw tokens gescheiden te houden en de privacy te vergroten.",
-            "body2": "Voor nu, laten we beginnen met uw eeste profielnaam. U kunt later meer profielen toevoegen.",
-            "profileName": "Profielnaam"
+            "title": "Stel een portemonnee in",
+            "chrysalisTitle": "Chrysalis Netwerk Update",
+            "chrysalisBody": "Vanaf 21 april kunnen gebruikers hun tokens migreren naar het nieuwe Chrysalis-netwerk. We raden u aan om uw bestaande tokens zo snel mogelijk te migreren.",
+            "learnMore": "Leer meer over de migratie"
         },
         "secure": {
             "title": "Beveilig uw portemonnee",
             "body1": "Sla op en print de PDF herstelkit.",
-            "body2": "Als u de herstelkit invult en deze veilig opslaat, kunt u uw portemonnee altijd herstellen."
+            "body2": "Als u de herstelkit vult en deze veilig opslaat, kunt u uw wallet altijd herstellen."
+        },
+        "create": {
+            "title": "Maak een wallet",
+            "body": "Maak een nieuwe wallet. U kunt kiezen voor een reguliere software wallet of, als u een Ledger apparaat heeft, om een hardware wallet in te stellen.",
+            "softwareAccount": {
+                "title": "Ik wil een software wallet",
+                "description": "Maak een 24-woord Recovery Phrase"
+            },
+            "ledgerAccount": {
+                "title": "Ik wil een hardware wallet",
+                "description": "Ledger Nano S of Nano X vereist"
+            }
+        },
+        "setupLedger": {
+            "progress1": "Sluit uw Ledger aan",
+            "progress2": "Genereer een adres",
+            "progress3": "Wissel Ledger app",
+            "progress4": "Bedrag versturen",
+            "watchVideo": "Bekijk de instructievideo",
+            "videoGuide": "Ledger migratie instructie video"
+        },
+        "ledgerInstallationGuide": {
+            "title": "Heeft u de benodigde Ledger apps geïnstalleerd?",
+            "body1": "Voordat je verder gaat, moet je zowel de {legacy} app als de nieuwe IOTA app vinden en installeren via Ledger Live.",
+            "body2": "Zorg ervoor dat uw Ledger firmware up-to-date is. Alle vooraf geïnstalleerde apps moeten worden bijgewerkt naar de nieuwste versies.",
+            "action": "Ja, ik heb deze apps geïnstalleerd"
         },
         "password": {
             "title": "Geef een wachtwoord op",
@@ -49,7 +67,7 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Stel een inlog pincode in om er zeker van te zijn dat u alleen uw portemonnee kunt invoeren.",
+            "body1": "Stel een inlog pincode in om er zeker van te zijn dat alleen jij toegang hebt tot je profiel.",
             "body2": "Houd je pincode veilig!"
         },
         "pin": {
@@ -85,55 +103,170 @@
         },
         "backupWallet": {
             "title": "Maak een back-up naar een Stronghold bestand",
-            "body1": "Voer uw wachtwoord in om een back-up van uw portemonnee te maken naar een Stronghold bestand. Uw wachtwoord wordt gebruikt om de back-up te versleutelen.",
+            "body1": "Voer je wachtwoord in om een back-up van je wallet te maken naar een Stronghold bestand. Je wachtwoord wordt gebruikt om de back-up te versleutelen.",
             "body2": "Redenen waarom digitale back-up's belangrijk zijn:",
             "reason1": "Herstel gemakkelijk uw portemonnee zonder uw herstelzin in te typen",
-            "reason2": "Importeer uw portemonnee naar andere apparaten",
+            "reason2": "Importeer uw wallet naar andere apparaten",
             "reason3": "Herstel uw volledige transactie geschiedenis"
         },
         "recoveryPhraseSaved": {
             "title": "Backup succesvol gemaakt",
-            "body": "Je hebt een back-up van je wallet gemaakt naar een Stronghold-bestand."
+            "body": "Je hebt een back-up van je wallets gemaakt naar een Stronghold."
         },
         "congratulations": {
             "title": "Portemonnee installatie voltooid",
-            "body": "Uw nieuwe portemonnee is klaar voor gebruik."
+            "fundsMigrated": "Saldo gemigreerd",
+            "body": "Uw nieuwe portemonnee is klaar voor gebruik.",
+            "softwareMigratedBody": "U heeft uw saldo met succes gemigreerd naar het nieuwe netwerk",
+            "fireflyLedgerBody": "Uw Ledger-account is succesvol hersteld en u kunt nu verdergaan.",
+            "trinityLedgerBody": "U heeft uw saldo met succes gemigreerd naar het nieuwe netwerk.",
+            "exportMigration": "Exporteer migratielogboek en maak set-up af"
         },
         "import": {
-            "title": "Importeer wallet",
-            "body": "Als je een herstelzin of Stronghold back-up hebt, dan kun je die hier importeren."
+            "title": "Saldo herstellen of migreren",
+            "body": "Als u een bestaand seed of portemonnee backup bestand heeft, kunt u het hier importeren. Als u oudere netwerk tegoeden bezit, zult u via de migratiestappen naar het Chrysalis-netwerk worden overgebracht.",
+            "importSeed": "Ik heb een 81 tekenreeks seed",
+            "importSeedDescription": "Voer een seed in en migreer tegoeden naar Chrysalis",
+            "importMnemonic": "Ik heb een Firefly herstel zin",
+            "importMnemonicDescription": "Voer uw herstel zin in om uw portemonnees te herstellen",
+            "importFile": "Ik heb een bestandsback-up",
+            "importFileDescription": "Upload een Seedkluis of Stronghold bestand",
+            "importLedger": "Ik heb een Ledger back-up",
+            "importLedgerDescription": "Een Ledger profiel herstellen of migreren"
         },
         "importFromText": {
-            "title": "Herstel je wallet met een herstelzin of seed",
-            "body1": "Een seed bestaat uit 81 tekens. Deze wordt gebruikt om te herstellen vanuit een oudere Trinity portemonnee.",
-            "body2": "Een herstel zin is 24 woorden lang, bestaat uitzonderlijk uit kleine letters en gescheiden middels spaties. Dit wordt gebruikt om een bestaande Firefly portemonnee te herstellen.",
-            "body3": "Voer je seed of herstelzin in",
+            "seed": {
+                "title": "Voer uw seed in om de migratie te starten",
+                "body": "Een seed bestaat uit 81 tekens. Deze wordt gebruikt om een eerdere Trinity wallet te herstellen.",
+                "enter": "Voer uw seed in"
+            },
+            "mnemonic": {
+                "title": "Voer uw herstel zin in",
+                "body": "Een herstel zin is 24 woorden lang, alle kleine letters, met spaties ertussen. Dit wordt gebruikt om een bestaande Firefly portemonnee te herstellen.",
+                "enter": "Voer uw geheime herstel zin in"
+            },
             "seedDetected": "81 karakters gedetecteerd",
-            "phraseDetected": "24-woord herstelzin gedetecteerd"
+            "phraseDetected": "24-woord herstelzin gedetecteerd",
+            "checksum": "Controlesom"
         },
         "importFromFile": {
-            "title": "Herstel uw portemonnee met behulp van een back-up bestand",
+            "title": "Herstel je wallet met een back-upbestand",
             "body": "Importeer een back-upbestand om je wallet te herstellen. Back-ups kunnen een Stronghold bestand (.stronghold) of een Trinity SeedVault bestand (.kdbx) zijn."
         },
+        "importFromLedger": {
+            "title": "Herstel of Migreer je Ledger",
+            "body": "Herstel een bestaand Firefly Ledger profiel of migreer je saldo vanaf Trinity.",
+            "haveFireflyLedger": "Ik heb een Firefly Ledger back-up",
+            "haveFireflyLedgerDescription": "Herstel een Firefly profiel",
+            "haveTrinityLedger": "Ik heb een Trinity Ledger back-up",
+            "haveTrinityLedgerDescription": "Migreer een Trinity profiel"
+        },
+        "connectLedger": {
+            "title": "Verbind je Ledger met Firefly",
+            "body": "Om Firefly je Ledger apparaat te laten vinden, moet je ervoor zorgen dat de officiële Ledger Live app wordt gesloten.",
+            "trafficLight1": "Verbind en ontgrendel je Ledger met je pincode",
+            "trafficLight2": "Open de nieuwe IOTA app op uw Ledger",
+            "tips": "Tips als uw Ledger geen verbinding kan maken"
+        },
+        "restoreFromFireflyLedger": {
+            "title": "Herstel je Ledger Profiel",
+            "body": "Druk op herstellen om het setup-proces te voltooien en uw wallets, saldi en transactiegeschiedenis te herstellen.",
+            "restoring": "Herstellen vanaf Ledger..."
+        },
+        "legacyLedgerIntro": {
+            "title": "Start je Ledger migratie met Firefly",
+            "body1": "Firefly helpt je om je tokens over te dragen naar het nieuwe Chrysalis-netwerk.",
+            "body2": "Na de migratie kun je Iota verzenden en ontvangen door gebruik te maken van je Ledger en Firefly.",
+            "readMore": "Wat je kunt verwachten van het migratieproces"
+        },
+        "generateNewLedgerAddress": {
+            "title": "Genereer nieuw adres",
+            "body": "Je moet een nieuw adres genereren om je tokens te migreren met Firefly. Klik op de knop hieronder om door te gaan.",
+            "confirmTitle": "Nieuw ontvangstadres bevestigen",
+            "confirmBody": "Vergelijk voor de veiligheid het adres dat is gegenereerd op uw Ledger apparaat met het bericht hieronder. Als ze overeenkomen, druk dan op beide knoppen op je Ledger zoals gevraagd.",
+            "confirmedTitle": "Adres bevestigd",
+            "confirmedBody": "Je hebt bevestigd dat het adres in Firefly overeenkomt met dat op je Ledger-apparaat.",
+            "generating": "Adres wordt gegenereerd"
+        },
+        "switchLedgerApps": {
+            "title": "Wissel Ledger apps",
+            "body": "Schakel over naar de {legacy} app op uw Ledger apparaat om door te gaan met migratie. Wanneer klaar, druk op Doorgaan."
+        },
+        "selectLedgerAccountIndex": {
+            "title": "Kies Ledger account index",
+            "body": "Kies de Ledger account index die je hebt gebruikt voor Trinity. Voor de meeste gebruikers is dit de standaard index van 0.",
+            "accountIndex": "Account index",
+            "accountPage": "Account pagina",
+            "standard": "Standaard",
+            "expert": "Expert",
+            "takingAWhile": "Dit kan even duren...",
+            "notGeneratingAddresses": "Genereert uw Ledger adressen?",
+            "reinstallLegacy": "Zo niet, verbreek dan de verbinding met het apparaat en probeer het opnieuw. Als het probleem zich blijft voordoen, moet u wellicht de app {legacy} opnieuw installeren."
+        },
         "importBackupPassword": {
-            "title": "Herstel je wallet vanuit een Seedvault of vanuit Stronghold",
             "body1": "Voer je back-up wachtwoord in.",
             "body2": "Dit is het wachtwoord dat je hebt ingesteld toen je de back-up maakte."
         },
         "importSuccess": {
             "title": "Je hebt je back-up succesvol hersteld",
-            "body": "Je kunt nu je nieuwe wallet gaan instellen.",
-            "seedvaultTitle": "Importeren geslaagd",
-            "seedvaultBody": "Uw wachtwoord is correct, u kunt nu verder gaan.",
-            "strongholdTitle": "Importeren geslaagd",
-            "strongholdBody": "Uw wachtwoord is correct, u kunt nu verder gaan."
+            "body": "Je kunt nu je nieuwe profiel instellen."
         },
         "migrate": {
             "title": "Migreer je saldo",
-            "body1": "Dit is een automatisch proces om je tokens naar je nieuwe wallet over te schrijven. We controleren op reeds bestede adressen die je beveiliging verzwakken.",
+            "body1": "Dit is een automatisch proces om je saldo over te maken naar je nieuwe portemonnee.",
             "body2": "Dit kan even duren. Schakel je apparaat niet uit tijdens de migratie.",
             "existing": "Je oude wallet",
-            "new": "Je nieuwe wallet"
+            "new": "Je nieuwe wallet",
+            "learn": "Leer meer over de migratie",
+            "beginMigration": "Migratie starten",
+            "migrating": "Migreren saldo...",
+            "migrated": "{balance} gemigreerd",
+            "migrationFailed": "Migreren mislukt",
+            "noAddressesForMigration": "Selecteer de adressen die u wilt beveiligen.",
+            "restoringWallet": "Herstellen portemonnee...",
+            "findingBalance": "Zoeken saldo...",
+            "incorrectSeedVaultPassword": "Onjuist SeedVault wachtwoord.",
+            "noDataSeedVault": "Er konden geen gegevens worden gevonden in de SeedVault.",
+            "signingBundle": "Tekenen bundel",
+            "broadcastingBundle": "Uitzenden bundel",
+            "miningBundle": "Mijnen bundel",
+            "problemRestoringWallet": "Er was een netwerkfout bij het herstellen van je portemonnee. Probeer het opnieuw.",
+            "minimumMigrationAmountSpentAddresses": "De minimum migratie bedrag voor elk uitgegeven adres is 1 Mi. Controleer opnieuw als uw saldo niet goed lijkt.",
+            "tooManyAddressesToMigrate": "U heeft te veel adressen met een laag saldo om te migreren. Controleer opnieuw als uw saldo niet juist lijkt.",
+            "cannotMigrateAllYourFunds": "We kunnen niet al uw saldi migreren, omdat sommige adressen een te laag bedrag hebben. U kunt toch doorgaan. {value} zal verloren gaan.",
+            "error": "Er is een fout opgetreden bij het migreren van uw saldi. Probeer het opnieuw."
+        },
+        "bundleMiningWarning": {
+            "title": "Waarschuwing",
+            "body1": "U heeft een saldo op een of meer uitgegeven adressen.",
+            "body2": "Wij raden u aan een geautomatiseerd proces te starten om te helpen deze saldi veilig te stellen en te migreren.",
+            "body3": "Als u de app sluit moet u de hele migratie herstarten.",
+            "learn": "Leer meer over uitgegeven adressen"
+        },
+        "secureSpentAddresses": {
+            "title": "Veiligstellen uitgegeven adressen",
+            "body1": "U heeft tegoeden gedetecteerd op {number, plural, one {# uitgegeven adres} other {# uitgegeven adressen}}.",
+            "body2": "Wij raden u aan een geautomatiseerd proces te starten om te helpen uw saldi veilig te stellen en te migreren.",
+            "error": "U kunt geen uitgegeven adressen met minder dan 1 Mi migreren"
+        },
+        "securityCheckCompleted": {
+            "title": "Beveiligingscontrole voltooid",
+            "body1": "We hebben het beveiligings risico niveau berekend. Het opnieuw uitvoeren van dit proces kan uw risico niveau verlagen.",
+            "body2": "Als je tevreden bent met het risico niveau(s) druk dan op doorgaan.",
+            "rerun": "Herstart proces voor geselecteerde adressen",
+            "continueMigration": "Doorgaan met migratie"
+        },
+        "securingSpentAddresses": {
+            "title": "Veiligstellen uitgegeven adressen...",
+            "body1": "Dit proces duurt {minutes, plural, one {1 minuut} other {# minuten}}.",
+            "body2": "Uw computer zal op volle capaciteit werken, je wilt misschien iets anders doen terwijl je wacht tot het klaar is."
+        },
+        "transferFragmentedFunds": {
+            "body1": "Firefly zal nu doorgaan met het migreren van je saldo. Dit kan een tijdje duren.",
+            "body2": "Zorg ervoor dat uw Ledger is aangesloten en de {legacy} app te allen tijde open is tijdens migratie.",
+            "migrate": "Saldo migreren",
+            "transaction": "Transactie {number}",
+            "rerun": "Probeer opnieuw"
         },
         "migrateFailed": {
             "title": "To do",
@@ -141,13 +274,16 @@
         },
         "balance": {
             "title": "Je saldo",
-            "body": "Klopt je saldo?"
+            "body": "Zorg ervoor dat uw saldo correct is voordat u doorgaat. U kunt opnieuw controleren als het niet juist lijkt.",
+            "error": "Het minimum migratie bedrag is 1 Mi. Probeer het nog eens als uw saldo er niet goed uitziet.",
+            "zeroBalance": "Probeer het nog eens. Als u uw saldo nog niet kunt vinden, heeft u mogelijk uw seed verkeerd ingevoerd.",
+            "zeroBalanceLedgerLegacy": "Probeer het nog eens. Als je het saldo nog steeds niet kunt vinden, heb je mogelijk de verkeerde accountindex geselecteerd."
         },
         "settings": {
             "settings": "Instellingen",
             "generalSettings": {
                 "title": "Algemene instellingen",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Het uiterlijk van uw portemonnee en andere algemene instellingen configureren"
             },
             "security": {
                 "title": "Beveiliging",
@@ -166,7 +302,7 @@
                 "description": "Verander je profielnaam of stel een avatar in"
             },
             "sync": {
-                "title": "Synchroniseer accounts",
+                "title": "Synchroniseer portemonnees",
                 "description": ""
             },
             "theme": {
@@ -185,17 +321,23 @@
                 "title": "Meldingen",
                 "description": "Systeemmeldingen voor transactie activiteiten"
             },
+            "networkStatus": {
+                "title": "Netwerk status",
+                "description": "Toont de status van de node waarmee u momenteel verbonden bent."
+            },
             "exportStronghold": {
                 "title": "Back-up exporteren",
-                "description": "Exporteer naar een Stronghold bestand - een complete versleutelde back-up van uw portemonnee en de nieuwste transactiegeschiedenis."
+                "description": "Exporteren naar een Stronghold bestand - een complete versleutelde back-up van uw portemonnees en de nieuwste transactiegeschiedenis"
             },
             "appLock": {
                 "title": "Automatisch vergrendelen",
-                "description": "Verstreken tijd voordat uw portemonnee vergrendelt en u uitlogt"
+                "description": "Inactiviteit tijd voordat uw portemonnees vergrendelen en u bent uitgelogd",
+                "durationMinute": "{time, plural, one {1 minuut} other {# minuten}}",
+                "durationHour": "{time, plural, one {1 uur} other {# uur}}"
             },
             "changePassword": {
                 "title": "Wachtwoord wijzigen",
-                "description": "Uw wachtwoord wordt gebruikt om uw portemonnee te beveiligen. Gebruik een sterk wachtwoord om uw saldo te beschermen."
+                "description": "Uw wachtwoord wordt gebruikt om uw portemonnees te beveiligen. Gebruik een sterk wachtwoord om uw tegoeden te beschermen"
             },
             "changePincode": {
                 "title": "Wijzig PIN code",
@@ -205,17 +347,17 @@
                 "confirmNewPincode": "Bevestig nieuwe PIN",
                 "action": "Wijzig PIN"
             },
-            "resyncAccounts": {
-                "title": "Accounts opnieuw synchroniseren",
-                "description": "Start een achtergrondtaak om ervoor te zorgen dat je accounts up-to-date zijn."
+            "balanceFinder": {
+                "title": "Saldo zoeker",
+                "description": "Voer een uitgebreide zoekopdracht uit op uw adressen voor tokens"
             },
             "hiddenAccounts": {
-                "title": "Verborgen rekeningen",
-                "description": "Door deze optie te selecteren worden eerder verborgen rekeningen getoond."
+                "title": "Verborgen portemonnees",
+                "description": "Door deze optie te selecteren, worden portefeuilles die voorheen verborgen waren getoond"
             },
             "deleteProfile": {
                 "title": "Profiel verwijderen",
-                "description": "Verwijdert uw hele portemonnee, profiel- en transactiegeschiedenis. Zorg ervoor dat u een back-up heeft."
+                "description": "Verwijdert uw hele profiel, portemonnees en transactiegeschiedenis. Zorg ervoor dat u een back-up hebt"
             },
             "deepLinks": {
                 "title": "Diepe links",
@@ -231,7 +373,7 @@
             },
             "configureNodeList": {
                 "title": "Selecteer een node",
-                "description": "Beheer de lijst met nodes waarmee uw portemonnee verbinding maakt.",
+                "description": "Beheer de lijst van IOTA-netwerkknooppunten waarmee u verbinding maakt",
                 "primaryNode": "Primaire node",
                 "excludeNode": "Node uitsluiten",
                 "includeNode": "Node toevoegen",
@@ -239,7 +381,7 @@
                 "setAsPrimary": "Instellen als primair",
                 "removeNode": "Verwijder node",
                 "includeOfficialNodeList": "Voeg officiële node lijst toe",
-                "noNodes": "Er zijn geen nodes, automatische selectie zal in plaats daarvan worden gebruikt."
+                "noNodes": "Er zijn geen nodes, automatische selectie zal in plaats daarvan worden gebruikt"
             },
             "proofOfWork": {
                 "title": "Proof of work",
@@ -252,6 +394,10 @@
             "diagnostics": {
                 "title": "Foutrapportages",
                 "description": "Bekijk systeem- en programma informatie"
+            },
+            "migrateLedgerIndex": {
+                "title": "Migreer Ledger Index",
+                "description": "Migreer een andere Trinity account index"
             },
             "stateExport": {
                 "title": "Status exporteren",
@@ -280,7 +426,7 @@
             },
             "reportAnIssue": {
                 "title": "Meld een probleem",
-                "description": "Meld een probleem aan de ontwikkelaars. Controleer eerst of deze niet al eerder gemeld is."
+                "description": "Meld een probleem aan de ontwikkelaars. Controleer eerst of deze niet al eerder gemeld is"
             }
         },
         "login": {
@@ -296,12 +442,20 @@
                 },
                 "hardwareDevice": {
                     "title": "Hardware apparaat",
-                    "noneDetected": "Niet gedetecteerd"
+                    "statuses": {
+                        "appNotOpen": "IOTA App niet geopend",
+                        "connected": "Verbonden",
+                        "legacyConnected": "{legacy} App openen",
+                        "locked": "Vergrendeld",
+                        "mnemonicMismatch": "Verkeerde Ledger of Mnemonic",
+                        "notDetected": "Niet gedetecteerd",
+                        "otherConnected": "App open"
+                    }
                 },
                 "strongholdStatus": {
                     "title": "Portemonnee Status",
-                    "locked": "Stronghold vergrendeld",
-                    "unlocked": "Stronghold ontgrendeld"
+                    "locked": "Vergrendeld",
+                    "unlocked": "Ontgrendeld"
                 },
                 "strongholdBackup": {
                     "title": "Portemonnee back-up",
@@ -314,7 +468,7 @@
                 "networkDown": "Netwerk verbinding verbroken",
                 "status": "Status",
                 "messagesPerSecond": "Berichten per seconde",
-                "confirmationRate": "Bevestigingssnelheid"
+                "referencedRate": "Bevestigings percentage"
             },
             "profileModal": {
                 "allSettings": "Alle instellingen",
@@ -325,7 +479,7 @@
     "popups": {
         "password": {
             "title": "Wachtwoord vereist",
-            "subtitle": "Voer je wachtwoord in om Stronghold te ontgrendelen",
+            "subtitle": "Voer uw wachtwoord in om uw portemonnees te ontgrendelen",
             "backup": "Voer je wachtwoord in om een back-up te exporteren"
         },
         "qr": {
@@ -336,34 +490,35 @@
             "upToDateTitle": "Firefly is up-to-date",
             "upToDateDescription": "Je gebruikt de nieuwste en veiligste versie van Firefly.",
             "updateAvailable": "Firefly update beschikbaar",
-            "updateDetails": "Versie {version} - {date}"
+            "updateDetails": "Versie {version} - {date}",
+            "noAutoUpdate": "Auto-update is uitgeschakeld in deze Windows-versie, ga naar https://firefly.iota.org om de update te downloaden."
         },
         "backup": {
             "title": "Laatste back-up: {date}",
             "lastBackup": "Je hebt voor het laatst een back-up gemaakt op {date}",
-            "backupDescription": "Het is belangrijk om regelmatig een back-up te maken om er zeker van te zijn dat je een kopie hebt van je accounts en transactiegeschiedenis.",
+            "backupDescription": "Het is belangrijk om regelmatig een back-up te maken om ervoor te zorgen dat u een copie van uw portemonnees en transactiegeschiedenis heeft.",
             "backupWarning": "Als je je back-up en herstelzin kwijt raakt verlies je toegang tot je fondsen.",
             "notBackedUp": "Geen back-up gemaakt",
-            "notBackedUpDescription": "Je hebt geen back-up van je Stronghold gemaakt",
+            "notBackedUpDescription": "U heeft geen back-up van uw portemonnees gemaakt",
             "saving": "Opslaan..."
         },
         "deleteAccount": {
             "title": "Verwijder {name}?",
-            "body": "Dit account heeft geen transactiegeschiedenis. Het kan veilig worden verwijderd.",
+            "body": "Deze portemonnee heeft geen transactiegeschiedenis. Het kan veilig worden verwijderd.",
             "typePassword": "Voer je portemonnee wachtwoord in om te bevestigen.",
-            "hideAccount": "Verwijder account",
+            "hideAccount": "Verwijder portemonnee",
             "errorTitle": "Kan {name} niet verwijderen",
-            "errorBody1": "U kunt dit account niet verwijderen, er moet minstens 1 account zijn."
+            "errorBody1": "U kunt deze portemonnee niet verwijderen, u moet ten minste één hebben."
         },
         "hideAccount": {
             "title": "{name} verbergen?",
-            "body": "U kunt dit account later terugvinden door \"Verborgen accounts weergeven\" in te schakelen in Geavanceerde Instellingen.",
+            "body": "Je kunt deze portemonnee later vinden door \"Verborgen portemonnees weergeven\" in te schakelen in Geavanceerde Instellingen.",
             "typePassword": "Voer je portemonnee wachtwoord in om te bevestigen.",
-            "hideAccount": "Account verbergen",
+            "hideAccount": "Verberg portemonnee",
             "errorTitle": "{name} kan niet worden verborgen",
-            "errorBody1": "Om een account te verbergen moet het saldo 0 hebben.",
-            "errorBody2": "U heeft momenteel nog {balance} staan op deze rekening. Verplaats deze bedragen naar een ander account en probeer het opnieuw.",
-            "errorBody3": "U kunt dit account niet verbergen, u moet ten minste één hebben."
+            "errorBody1": "Om een portemonnee te verbergen moet het 0 saldo hebben.",
+            "errorBody2": "Je hebt momenteel {balance} resterend in deze portemonnee. Verplaats dit tegoed naar een andere portemonnee en probeer het opnieuw.",
+            "errorBody3": "U kunt deze portemonnee niet verbergen, u moet ten minste één hebben."
         },
         "addressHistory": {
             "title": "{name} adresgeschiedenis",
@@ -403,30 +558,105 @@
         "transaction": {
             "title": "Bevestig transactie",
             "body": "Je staat op het punt {amount} te sturen naar"
+        },
+        "balanceFinder": {
+            "title": "Saldo zoeker",
+            "body": "Voer een uitvoerigere zoekopdracht uit van adressen om ontbrekende saldi te vinden. Dit kan enige tijd duren.",
+            "totalWalletBalance": "Totaalsaldo",
+            "typePassword": "Voer uw wachtwoord in om zoeken mogelijk te maken."
+        },
+        "riskFunds": {
+            "title": "Waarschuwing: saldi in gevaar tijdens migratie",
+            "body1": "Het wordt sterk aanbevolen dat u al uw tegoeden beveiligt voordat u verder gaat met migratie. Uw tegoed loopt het risico om gestolen te worden als u ze niet veilig stelt.",
+            "body2": "Het wordt aanbevolen om het proces te herstarten voor adressen met een gemiddeld risiconiveau of hoger."
+        },
+        "missingBundle": {
+            "title": "Waarschuwing: saldi in gevaar tijdens migratie",
+            "body": "U heeft tegoeden op uitgegeven adressen, maar de informatie die nodig was om ze te beveiligen, is niet gevonden. Dit kan gebeuren als je lang geleden transacties hebt gemaakt. Je kunt doorgaan maar {value} is in gevaar tijdens de migratie.",
+            "learnMore": "Leer meer over uitgegeven adressen",
+            "proceed": "Ik begrijp het risico"
+        },
+        "snapshot": {
+            "title": "Lopende netwerk upgrade",
+            "body": "De Chrysalisnetwerk upgrade is begonnen.",
+            "bodyMigration": "Migratie is uitgeschakeld totdat deze is voltooid.",
+            "bodyFirefly": "Firefly is uitgeschakeld totdat het is voltooid. Token migratie zal later nog steeds mogelijk zijn."
+        },
+        "ledgerNotConnected": {
+            "connect": "Open de nieuwe IOTA app op uw Ledger apparaat om door te gaan",
+            "connectLegacy": "Open de {legacy} app op uw Ledger apparaat om door te gaan"
+        },
+        "ledgerConfirmation": {
+            "confirm": "Om door te gaan, bevestig de prompt die wordt weergegeven op uw Ledger apparaat"
+        },
+        "ledgerAppGuide": {
+            "title": "Gids voor het installeren van de Ledger apps",
+            "steps": {
+                "0": "Installeer en open de Ledger Live applicatie",
+                "1": "Zorg ervoor dat uw Ledger is verbonden",
+                "2": "Zoek naar apps: {legacy} en IOTA (MIOTA)",
+                "3": "Installeer beide apps: {legacy} en IOTA (MIOTA)",
+                "4": "Vergeet niet dat het belangrijk is om Ledger Live te sluiten voordat je terugkeert naar Firefly"
+            }
+        },
+        "ledgerConnectionGuide": {
+            "title": "Tips als uw Ledger geen verbinding kan maken",
+            "steps": {
+                "0": "Zorg ervoor dat Ledger Live niet open is op je computer",
+                "1": "Zorg ervoor dat je je Ledger apparaat hebt ontgrendeld met je pincode",
+                "2": "Open de nieuwe IOTA app op uw Ledger apparaat",
+                "3": {
+                    "text": "Nog steeds geen geluk?",
+                    "link": "Probeer de officiële Ledger support pagina"
+                }
+            }
+        },
+        "ledgerTransaction": {
+            "remainderAddress": {
+                "title": "Bevestig adres voor restant",
+                "info": "Bevestig dat het resterende adres op uw Ledger overeenkomt met het adres dat hieronder wordt weergegeven. Als beide overeenkomen, druk dan op beide knoppen op uw Ledger zoals gevraagd."
+            },
+            "transaction": {
+                "title": "Bevestig transactie",
+                "info": "Bevestig dat de transactieinformatie die op uw Ledger wordt getoond overeenkomt met de onderstaande informatie. Als ze overeenkomen, druk dan op beide knoppen op je Ledger zoals gevraagd."
+            }
+        },
+        "ledgerAddress": {
+            "title": "Ontvangstadres bevestigen",
+            "body": "Bevestig dat het ontvangstadres op uw Ledger overeenkomt met degene die hieronder wordt weergegeven. Als ze overeenkomen, druk dan beide knoppen op uw Ledger zoals gevraagd."
+        },
+        "ledgerMigrateIndex": {
+            "title": "Moet je nog een andere Trinity account index migreren?",
+            "body": "U kunt later ook migreren in Geavanceerde Instellingen."
         }
     },
     "charts": {
-        "incomingMi": "Binnenkomende {value} Mi",
-        "outgoingMi": "Uitgaande {value} Mi",
+        "incomingMi": "Inkomende {value}",
+        "outgoingMi": "Uitgaande {value}",
         "portoflio": "Portfolio",
         "token": "Token",
-        "accountValue": "Accountwaarde",
-        "accountActivity": "Recente activiteit",
-        "timeframe1Hour": "1 hour",
-        "timeframe1Day": "1 day",
+        "accountValue": "Waarde Portemonnee",
+        "accountActivity": "Activiteit Portemonnee",
+        "timeframe1Hour": "1 uur",
+        "timeframe1Day": "1 dag",
         "timeframe1Week": "1 week",
-        "timeframe1Month": "1 month"
+        "timeframe1Month": "1 maand"
     },
     "actions": {
         "continue": "Doorgaan",
         "back": "Terug",
+        "previous": "Vorige",
+        "next": "Volgende",
         "cancel": "Annuleer",
         "close": "Sluiten",
         "dismiss": "Sluiten",
+        "proceedAnyway": "Toch doorgaan",
         "save": "Opslaan",
         "importSeed": "Importeer een bestaande seed",
-        "importWallet": "Importeer bestaande wallet",
+        "restoreWallet": "Migreer of herstel een portemonnee",
+        "restoreWalletDescription": "Migreren naar Chrysalis of een bestaande portemonnee herstellen",
         "createWallet": "Nieuwe wallet maken",
+        "createWalletDescription": "Maak een nieuwe portemonnee die wordt uitgevoerd op Chrysalis",
         "savePassword": "Wachtwoord opslaan",
         "useBiometric": "Biometrische beveiliging gebruiken",
         "setupPin": "PIN-code instellen",
@@ -438,7 +668,7 @@
         "verifyRecoveryPhrase": "Verifieer jouw herstelzin",
         "revealRecoveryPhrase": "Toon herstelzin",
         "importSeedvault": "Importeer SeedVault",
-        "checkAgain": "Nee, controleer opnieuw",
+        "checkAgain": "Controleer Opnieuw",
         "importFromFile": "Importeer vanuit een bestand",
         "send": "Verstuur",
         "receive": "Ontvang",
@@ -462,11 +692,11 @@
         "updateFirefly": "Firefly bijwerken",
         "restartNow": "Herstart nu",
         "saveBackup": "Sla Stronghold back-up op",
-        "customizeAcount": "Account aanpassen",
+        "customizeAcount": "Portemonnee aanpassen",
         "viewAddressHistory": "Bekijk adresgeschiedenis",
-        "hideAccount": "Account verbergen",
-        "showAccount": "Account zichtbaar maken",
-        "deleteAccount": "Verwijder account",
+        "hideAccount": "Verberg portemonnee",
+        "showAccount": "Maak portemonnee zichtbaar",
+        "deleteAccount": "Verwijder portemonnee",
         "max": "Max",
         "addNode": "Node toevoegen",
         "updateNode": "Node bijwerken",
@@ -482,21 +712,32 @@
         "copy": "Kopiëren",
         "paste": "Plakken",
         "selectAll": "Selecteer Alles",
-        "addAccount": "Account toevoegen",
+        "addAccount": "Portemonnee Toevoegen",
         "checkForUpdates": "Controleren op Updates",
         "reportAnIssue": "Een probleem melden",
+        "restore": "Herstellen",
         "clear": "Wis",
         "hideDetails": "Details verbergen",
         "yes": "Ja",
         "no": "Nee",
+        "skip": "Overslaan",
         "reset": "Herstel",
         "downloadRecoveryKit": "Herstelkit sjabloon opslaan",
         "skipBackup": "Bestandsback-up overslaan",
         "finishSetup": "Installatie voltooien",
         "readDocumentation": "Lees de documentatie",
         "visitFaq": "Bezoek veelgestelde vragen",
-        "showHiddenAccounts": "Toon verborgen accounts",
-        "confirm": "Bevestig"
+        "viewStatus": "Bekijk status",
+        "showHiddenAccounts": "Toon verborgen portemonnees",
+        "confirm": "Bevestig",
+        "hideNetworkStatistics": "Netwerkstatistieken verbergen",
+        "findBalances": "Saldi zoeken",
+        "searchBalances": "Zoeken naar saldi",
+        "searchAgain": "Opnieuw zoeken",
+        "searching": "Zoeken...",
+        "closeFirefly": "Sluit Firefly",
+        "generateAddress": "Genereer een adres",
+        "migrateAgain": "Migreer een andere index"
     },
     "general": {
         "password": "Wachtwoord",
@@ -511,14 +752,15 @@
         "received": "Ontvangen",
         "sendPayment": "Verstuur betaling",
         "moveFunds": "Interne overdracht",
+        "sendTo": "Verzend naar",
         "sendFunds": "Verstuur tokens",
         "sendToAddress": "Stuur naar rekening",
         "scanQrOrPaste": "Scan een QR-code of plak een adres",
-        "moveFundsBetweenAccounts": "Geld tussen rekeningen verplaatsen",
+        "moveFundsBetweenAccounts": "Verplaats tegoeden tussen portemonnees",
         "sendTokensToAddress": "Verstuur tokens naar een adres",
-        "manageAccount": "Account beheren",
-        "customizeAcount": "Pas je account aan",
-        "account": "Rekening",
+        "manageAccount": "Portemonnee beheren",
+        "customizeAcount": "Aanpassen van uw portemonnee",
+        "account": "Portemonnee",
         "sendingToAddress": "Naar een adres sturen",
         "amount": "Aantal",
         "addAddress": "Adres toevoegen",
@@ -529,12 +771,10 @@
         "myAddress": "Mijn Adres",
         "shareAddress": "Een adres delen",
         "yourAddress": "Jouw adres",
+        "newRemainder": "Nieuw Resterend",
+        "remainder": "Resterend",
         "generateNewAddress": "Genereer nieuw adres",
         "copyAddress": "Adres kopiëren",
-        "haveTextBackup": "Ik heb een tekst back-up",
-        "haveFileBackup": "Ik heb een bestandsback-up",
-        "enterSeedOrPhrase": "Voer een herstelzin of seed in",
-        "uploadSeedvaultOrStronghold": "Importeer een Stronghold of Seedvault bestand",
         "import": "Importeer",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -543,24 +783,25 @@
         "lightTheme": "Lichte modus",
         "darkTheme": "Donkere modus",
         "balance": "Saldo",
-        "accountBalance": "Rekeningsaldo",
+        "accountBalance": "Portemonnee saldo",
         "incoming": "Inkomend",
         "outgoing": "Uitgaand",
         "totalIn": "Totaal inkomend",
         "totalOut": "Totaal uitgaand",
-        "accounts": "Rekeningen",
-        "myAccounts": "Mijn accounts",
+        "accounts": "Portemonnees",
+        "myAccounts": "Mijn Portemonnees",
         "automaticNodeSelection": "Automatische node selectie",
         "manualNodeSelection": "Handmatige node selectie",
         "profiles": "Profielen",
         "developerProfile": "Ontwikkelaar Profiel",
+        "developerProfileDescription": "Maakt het mogelijk om verbinding te maken met testnets",
         "dev": "Ontwikkelaar",
-        "createAccount": "Maak een account aan",
-        "accountName": "Accountnaam",
+        "createAccount": "Maak een portemonnee aan",
+        "accountName": "Naam portemonnee",
         "latestTransactions": "Meest recente transacties",
         "transactions": "Transacties",
         "security": "Beveiliging",
-        "accountAddress": "Account adres",
+        "accountAddress": "Portemonnee adres",
         "nodes": "Nodes",
         "wallet": "Portemonnee",
         "help": "Help",
@@ -568,29 +809,33 @@
         "messageId": "Bericht ID",
         "inputAddress": "Verzendadres",
         "receiveAddress": "Adres van de ontvanger",
+        "newAddress": "Nieuw Adres",
         "date": "Datum",
         "status": "Status",
         "confirmed": "Bevestigd",
         "pending": "Lopende",
-        "noAccounts": "Je hebt geen accounts, maak er een aan.",
+        "noAccounts": "U heeft geen portemonnees, maak er een aan.",
         "loadingAccounts": "Laden, even geduld...",
         "addProfile": "Profiel Toevoegen",
         "noRecentHistory": "Geen recente geschiedenis",
-        "transferSyncing": "Account synchroniseren",
+        "firstSync": "Geschiedenis synchroniseren, dit kan even duren...",
+        "transferSyncing": "Portemonnee synchroniseren",
         "transferSelectingInputs": "Invoer selecteren",
-        "transferRemainderAddress": "Genereren van rest stortingsadres",
+        "transferRemainderAddress": "Genereren van rest adres",
+        "transferPreparedTransaction": "Voorbereiden transactie",
         "transferSigning": "Transactie ondertekenen",
         "transferPow": "PoW uitvoeren",
         "transferBroadcasting": "Transactie verzenden",
         "transferComplete": "Overdracht voltooid",
-        "creatingAccount": "Account aanmaken, even geduld...",
-        "updatingAccount": "Account bijwerken, even geduld...",
-        "accountSyncing": "Account wordt gesynchroniseerd",
-        "accountSyncComplete": "Account synchronisatie voltooid",
+        "generatingReceiveAddress": "Ontvangstadres wordt gegenereerd",
+        "creatingAccount": "Portemonnee wordt aangemaakt, even geduld...",
+        "updatingAccount": "Portemonnee wordt bijgewerkt, even geduld...",
+        "accountSyncing": "Portemonnee wordt gesynchroniseerd",
+        "accountSyncComplete": "Portemonnee synchronisatie voltooid",
         "passwordUpdating": "Wachtwoord bijwerken...",
         "passwordSuccess": "Wachtwoord succesvol bijgewerkt",
         "passwordFailed": "Wachtwoord bijwerken mislukt",
-        "syncingAccounts": "Accounts synchroniseren...",
+        "syncingAccounts": "Portemonnees synchroniseren...",
         "exportingStronghold": "Exporteren van Stronghold...",
         "exportingStrongholdSuccess": "Stronghold succesvol geexporteerd",
         "exportingStrongholdFailed": "Exporteren Stronghold mislukt",
@@ -604,7 +849,18 @@
         "passwordStrength3": "Gemiddeld",
         "passwordStrength4": "Sterk",
         "creatingProfile": "Profiel aanmaken, even geduld alstublieft...",
-        "accountRemoved": "Dit account is verborgen. Toon het om overschrijvingen uit te voeren."
+        "fundMigration": "Saldo migratie",
+        "accountRemoved": "Deze portemonnee is verborgen. Maak het zichtbaar om de overdracht uit te voeren.",
+        "receivingTo": "Ontvangen op {account}",
+        "sendingFrom": "Verzenden vanaf {account}",
+        "receivedTo": "Ontvangen op {account}",
+        "sentFrom": "Verzonden vanaf {account}",
+        "receiving": "Ontvangen",
+        "sending": "Verzenden",
+        "legacyNetwork": "Verouderd netwerk",
+        "capsLock": "Caps Lock staat aan",
+        "version": "Versie {version}",
+        "unknown": "Onbekend"
     },
     "dates": {
         "today": "Vandaag",
@@ -627,7 +883,8 @@
         "calcMinutesRemaining": "Resterende minuten aan het berekenen...",
         "minutesRemaining": "{minutes, plural, one {1 minuut resterend} other {# minuten resterend}}",
         "copiedToClipboard": "Gekopieerd naar het klembord",
-        "accountsSynchronized": "Account synchronisatie voltooid"
+        "accountsSynchronized": "Portemonnee synchronisatie voltooid",
+        "fundsAvailableSoon": "Uw saldo wordt binnenkort beschikbaar"
     },
     "error": {
         "profile": {
@@ -652,19 +909,22 @@
             "length": "Uw wachtwoord kan niet langer zijn dan {length, plural, one {1 teken} other {# tekens}}."
         },
         "pincode": {
-            "length": "Je pincode moet {length, plural, one {1 cijfer} other {# cijfers}}",
+            "length": "Je pincode moet {length, plural, one {1 cijfer} other {# cijfers}} lang zijn.",
             "match": "Pincodes komen niet overeen.",
             "incorrect": "Uw huidige pincode is onjuist."
         },
         "account": {
-            "length": "Uw accountnaam mag niet langer zijn dan {length, plural, one {1 karakter} other {# karakters}}.",
-            "empty": "U moet uw laatste account gebruiken voordat u een nieuwe aanmaakt.",
-            "notEmpty": "U moet het openstaande saldo overboeken voordat u deze rekening verwijdert.",
-            "duplicate": "Een account met deze naam bestaat al.",
+            "length": "Uw portemonnee naam mag niet langer zijn dan {length, plural, one {1 karakter} other {# karakters}}.",
+            "empty": "U moet uw laatste portemonnee gebruiken voordat u een nieuwe aanmaakt.",
+            "notEmpty": "U moet uw saldo overmaken voordat u deze portemonnee kunt verwijderen.",
+            "duplicate": "Een portemonnee met deze naam bestaat al.",
             "tilde": "Een profielnaam kan niet beginnen met het teken '~'.",
             "control": "Een profielnaam mag geen controleteken bevatten.",
             "startDot": "Een profielnaam kan niet beginnen met het '.' karakter.",
-            "chars": "Een profielnaam mag de volgende tekens niet bevatten <>:\"/\\×?*"
+            "chars": "Een profielnaam mag de volgende tekens niet bevatten <>:\"/\\×?*",
+            "index": "Je rekeningindex moet een nummer zijn tussen 0 en 2,147.483.647.",
+            "page": "Uw accountpagina moet een nummer zijn tussen 0 en 2,147.483.647.",
+            "syncing": "Er is een fout opgetreden bij het synchroniseren van uw portemonnees."
         },
         "send": {
             "addressLength": "Adressen moeten {length, plural, one {1 teken} other {# tekens}} lang zijn.",
@@ -675,10 +935,12 @@
             "wrongAddressPrefix": "Adressen beginnen met het voorvoegsel {prefix}.",
             "wrongAddressFormat": "Het adres is niet correct opgemaakt.",
             "invalidAddress": "Het adres is niet geldig.",
-            "insufficientFunds": "Deze rekening heeft onvoldoende saldo.",
-            "noToAccount": "U heeft geen account geselecteerd om de bedragen naar toe te sturen.",
+            "insufficientFunds": "Deze portemonnee heeft onvoldoende saldo.",
+            "noToAccount": "U heeft geen portemonnee geselecteerd om het saldo naar te verzenden.",
             "sendingDust": "U kunt niet minder dan 1 Mi verzenden.",
-            "leavingDust": "U kunt niet minder dan 1 Mi op uw rekening achterlaten."
+            "leavingDust": "U kunt niet minder dan 1 Mi op uw rekening achterlaten.",
+            "cancelled": "De transactie is geannuleerd.",
+            "transaction": "Er is een fout opgetreden bij het verzenden van uw transactie. Probeer het opnieuw."
         },
         "node": {
             "invalid": "Voer een geldige URL in.",
@@ -699,6 +961,35 @@
             "phraseWordCount": "Uw herstelzin zou 24 woorden moeten bevatten, op dit moment {length, plural, one {is er 1} other {zijn er #}}.",
             "phraseUnrecognizedWord": "Het woord \"{word}\" is niet herkend in uw herstel zin",
             "phraseCaseWord": "Het woord \"{word}\" mag alleen uit kleine letters bestaan"
+        },
+        "ledger": {
+            "appNotOpen": "U moet de IOTA app op uw Ledger apparaat openen.",
+            "generic": "Er is een fout opgetreden bij het verbinden met uw Ledger apparaat.",
+            "legacyConnected": "De verkeerde app staat open op uw Ledger apparaat.",
+            "locked": "Ontgrendel je Ledger apparaat door de pincode in te voeren.",
+            "mnemonicMismatch": "U heeft het verkeerde Ledger apparaat verbonden of de mnemonic is veranderd.",
+            "notDetected": "Geen Ledger apparaat gedetecteerd.",
+            "notFound": "Ledger apparaat niet gevonden.",
+            "otherConnected": "De verkeerde app staat open op uw Ledger apparaat.",
+            "generateAddress": "Er is iets misgegaan bij het genereren van je adres.",
+            "timeout": "Uw Ledger apparaat heeft een time-out gekregen.",
+            "disconnected": "Uw Ledger apparaat is losgekoppeld."
+        },
+        "popup": {
+            "preventClose": "Deze pop-up kan niet worden gesloten."
+        },
+        "migration": {
+            "missingBundle": "Er is een fout opgetreden tijdens het zoeken van de transactiebundel."
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "Risico niveau: {risk}",
+            "veryHigh": "Zeer hoog",
+            "high": "Hoog",
+            "medium": "Middelgroot",
+            "low": "Laag",
+            "veryLow": "Zeer laag"
         }
     }
 }

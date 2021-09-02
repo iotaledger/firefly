@@ -2,10 +2,8 @@
     import { Unit } from '@iota/unit-converter'
     import { Button, Illustration, Text } from 'shared/components'
     import {
-        AvailableExchangeRates,
         convertToFiat,
         currencies,
-        CurrencyTypes,
         exchangeRates,
         formatCurrency,
     } from 'shared/lib/currency'
@@ -13,15 +11,19 @@
     import { activeProfile } from 'shared/lib/profile'
     import { formatUnitPrecision } from 'shared/lib/units'
     import { get } from 'svelte/store'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
 
-    export let locale
+    export let locale: Locale
+
     export let internal = false
     export let to = ''
     export let amount = 0
     export let unit = Unit.i
-    export let onConfirm = () => {}
 
-    let displayedAmount = `${formatUnitPrecision(amount, unit)} (${localConvertToFiat(amount)})`
+    export let onConfirm = (): void => {}
+
+    const displayedAmount = `${formatUnitPrecision(amount, unit)} (${localConvertToFiat(amount)})`
 
     function localConvertToFiat(amount) {
         const activeCurrency = get(activeProfile)?.settings.currency ?? AvailableExchangeRates.USD

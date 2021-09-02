@@ -2,45 +2,63 @@
     "views": {
         "onboarding1": {
             "title": "Отправляй, получай и управляй своими токенами IOTA",
-            "body": "Firefly является официальным кошельком IOTA."
+            "body": "Firefly - это официальное программное обеспечение кошелька IOTA."
         },
         "legal": {
             "title": "Политика конфиденциальности и условия обслуживания",
             "body": "Пожалуйста, ознакомьтесь с Политикой конфиденциальности и Условиями обслуживания.",
-            "privacyPolicy": {
-                "title": "Политика конфиденциальности",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
-            "termsOfService": {
-                "title": "Условия обслуживания",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
             "checkbox": "Я ознакомился и согласен с правилами пользования и политикой конфиденциальности"
         },
         "appearance": {
             "title": "Внешний вид",
-            "body": "Выбери тему своего кошелька."
+            "body": "Выберите тему приложения."
+        },
+        "profile": {
+            "title": "Создать профиль",
+            "profileName": "Имя профиля",
+            "body1": "Вы можете создать несколько профилей, чтобы организовать ваши кошельки и повысить безопасность.",
+            "body2": {
+                "first": "А сейчас, давайте начнем с вашего первого имени профиля.",
+                "nonFirst": "А сейчас, давайте начнем с вашего имени профиля."
+            },
+            "addMore": "Вы можете добавить больше профилей позже."
         },
         "setup": {
-            "title": "Настройте ваш кошелек",
-            "body1": "Ты можешь создать несколько профилей, чтобы сохранить свои токены отдельно и повысить безопасность.",
-            "body2": "Теперь давай начнем с твоего первого профиля. Ты можешь добавить дополнительные профили позже.",
-            "profileName": "Название профиля"
+            "title": "Настройте кошелек",
+            "chrysalisTitle": "Обновление сети Chrysalis",
+            "chrysalisBody": "С 21 апреля пользователи могут перенести их токены в новую сеть Chrysalis. Мы рекомендуем вам как можно скорее перенести ваши токены.",
+            "learnMore": "Узнайте о миграции"
         },
         "secure": {
             "title": "Защити твой кошелек",
             "body1": "Сохранить и распечатать PDF документ для восстановление.",
-            "body2": "Если ты заполниш документ и сохранишь его безопасно, ты всегда сможешь восстановить твой кошелек."
+            "body2": "Если вы заполните Recovery Kit и будете хранить его в защищенном месте, вы всегда сможете восстановить свои кошельки."
+        },
+        "create": {
+            "title": "Создайте кошелек",
+            "body": "Создайте новый кошелек. Вы можете выбрать обычный программный кошелек или, если у вас есть устройство Ledger, настроить аппаратный кошелек.",
+            "softwareAccount": {
+                "title": "Мне нужен программный кошелек",
+                "description": "Создать фразу восстановления из 24 слов"
+            },
+            "ledgerAccount": {
+                "title": "Я хочу аппаратный кошелек",
+                "description": "Требуется Ledger Nano S или Nano X"
+            }
+        },
+        "setupLedger": {
+            "progress1": "Подключите ваш Ledger",
+            "progress2": "Сгенерировать адрес",
+            "progress3": "Переключить приложение Ledger",
+            "progress4": "Перевести средства",
+            "watchVideo": "Смотреть видеогид",
+            "videoGuide": "Видеогайд по миграции Ledger"
+        },
+        "ledgerInstallationGuide": {
+            "title": "Вы установили необходимые Ledger приложения?",
+            "body1": "Прежде чем продолжить, необходимо найти и установить как приложение {legacy}, так и новое приложение IOTA через Ledger Live.",
+            "body2": "Убедитесь, что прошивка Ledger актуальна. Любые предварительно установленные приложения должны быть обновлены до их последних версий.",
+            "action": "Да, я установил эти приложения"
         },
         "password": {
             "title": "Придумайте пароль",
@@ -49,7 +67,7 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Установи PIN-код для входа в кошелек.",
+            "body1": "Установите PIN-код для доступа, чтобы убедиться, что только вы можете войти в свой профиль.",
             "body2": "Держи PIN-код в безопасности!"
         },
         "pin": {
@@ -85,55 +103,170 @@
         },
         "backupWallet": {
             "title": "Сделайте резервную копию в файл Stronghold",
-            "body1": "Введи пароль для резервного копирования кошелька на файл Stronghold. Твой пароль используется для шифрования резервной копии.",
+            "body1": "Введите пароль для резервного копирования кошельков в файл Stronghold. Ваш пароль будет использован для шифрования резервной копии.",
             "body2": "Причины, по которым важны цифровые резервные копии:",
-            "reason1": "Легкое восстановление твоего кошелека без ввода фразы восстановления",
-            "reason2": "Импортируй твой кошелек на другие устройства",
+            "reason1": "Просто восстанавливайте кошельки, без ввода фразы восстановления",
+            "reason2": "Импортируйте свои кошельки на другие устройства",
             "reason3": "Восстановление всей историй транзакций"
         },
         "recoveryPhraseSaved": {
             "title": "Резервная копия сделано успешно",
-            "body": "Вы сделали резервную копию вашего кошелька на Stronghold."
+            "body": "Вы сделали резервную копию своих кошельков в Stronghold."
         },
         "congratulations": {
             "title": "Настройка кошелька завершена",
-            "body": "Твой новый кошелек готов к использованию."
+            "fundsMigrated": "Средства перенесены",
+            "body": "Твой новый кошелек готов к использованию.",
+            "softwareMigratedBody": "Вы успешно мигрировали свои средства в новую сеть",
+            "fireflyLedgerBody": "Ваш Ledger аккаунт успешно восстановлен, и вы можете продолжить.",
+            "trinityLedgerBody": "Вы успешно перевели свой Ledger в новую сеть.",
+            "exportMigration": "Экспорт журнала миграции и завершение настройки"
         },
         "import": {
-            "title": "Импортировать кошелёк",
-            "body": "Если у вас есть фраза восстановления или резервная копия, вы можете импортировать его здесь."
+            "title": "Восстановить или мигрировать средства",
+            "body": "Если у вас есть существующий файл резервной копии seed или кошелька, вы можете импортировать его здесь. Если у вас есть старые сетевые средства, вы пройдете через шаги миграции для перехода в сеть Chrysalis.",
+            "importSeed": "У меня 81 символ seed",
+            "importSeedDescription": "Ввести seed и перевести средства в Chrysalis",
+            "importMnemonic": "У меня есть фраза восстановления Firefly",
+            "importMnemonicDescription": "Введите фразу восстановления, чтобы восстановить кошельки",
+            "importFile": "У меня есть резервная копия файла",
+            "importFileDescription": "Загрузите файл Seedvault или Stronghold",
+            "importLedger": "У меня есть резервная копия Ledger",
+            "importLedgerDescription": "Восстановить или перенести профиль Ledger"
         },
         "importFromText": {
-            "title": "Восстановить кошелек с фразой восстановления или мнемоникой",
-            "body1": "Ключ состоит из 81 символа. Используется для восстановления со старого кошелька Trinity.",
-            "body2": "Ключевая фраза длиной 24 слов, все маленькими буквами с пробелами между ними. Используется для восстановления существующего кошелька Firefly.",
-            "body3": "Введите вашу фразу восстановления или мнемонику",
+            "seed": {
+                "title": "Введите свой seed для начала миграции",
+                "body": "Seed состоит из 81 символа. Он используется для восстановления из старого приложения Trinity.",
+                "enter": "Введите свой seed"
+            },
+            "mnemonic": {
+                "title": "Введите вашу фразу восстановления",
+                "body": "Фраза для восстановления состоит из 24 слов, все слова в строчном формате, с пробелами между ними. Она используется для восстановления существующих кошельков Firefly.",
+                "enter": "Введите вашу секретную фразу восстановления"
+            },
             "seedDetected": "Обнаружено 81 символ seed",
-            "phraseDetected": "Обнаружена фраза восстановления 24 слов"
+            "phraseDetected": "Обнаружена фраза восстановления 24 слов",
+            "checksum": "Контрольная сумма"
         },
         "importFromFile": {
-            "title": "Восстанови кошелек с помощью файла резервной копии",
-            "body": "Импортируйте файл резервной копии для восстановления вашего кошелька. Резервные копии могут быть Stronghold (.stronghold) или Trinity SeedVault (.kdbx)."
+            "title": "Восстановите свои кошельки с помощью файла резервной копии",
+            "body": "Импортируйте файл резервной копии для восстановления кошельков. Резервные копии могут быть либо в формате Stronghold (.stronghold), либо в формате Trinity SeedVault (.kdbx)."
+        },
+        "importFromLedger": {
+            "title": "Восстановить или мигрировать ваш Ledger",
+            "body": "Восстановите существующий профиль Firefly Ledger или перенесите свои средства из Trinity.",
+            "haveFireflyLedger": "У меня есть резервная копия Firefly Ledger",
+            "haveFireflyLedgerDescription": "Восстановить профиль Firefly",
+            "haveTrinityLedger": "У меня есть резервная копия Тринити Ledger",
+            "haveTrinityLedgerDescription": "Мигрировать профиль Trinity"
+        },
+        "connectLedger": {
+            "title": "Подключите вашу Ledger к Firefly",
+            "body": "Чтобы ваше устройство Ledger было найдено Firefly, убедитесь, что официальное приложение Ledger Live закрыто.",
+            "trafficLight1": "Подключите и разблокируйте свой Ledger с помощью PIN-кода",
+            "trafficLight2": "Откройте новое приложение IOTA в вашем Ledger",
+            "tips": "Советы, если ваш Ledger не подключается"
+        },
+        "restoreFromFireflyLedger": {
+            "title": "Восстановить ваш Ledger профиль",
+            "body": "Нажмите кнопку восстановления, чтобы выполнить процесс настройки и восстановить ваши кошельки, балансы и историю транзакций.",
+            "restoring": "Восстановление из Ledger..."
+        },
+        "legacyLedgerIntro": {
+            "title": "Начните миграцию Ledger с помощью Firefly",
+            "body1": "Firefly поможет вам перевести ваши токены в новую сеть Chrysalis.",
+            "body2": "После миграции вы сможете отправлять и получать свои токены, используя свой Ledger с Firefly.",
+            "readMore": "Что ожидать от процесса миграции"
+        },
+        "generateNewLedgerAddress": {
+            "title": "Создать новый адрес",
+            "body": "Вам нужно сгенерировать новый адрес для миграции токенов с Firefly. Нажмите кнопку ниже, чтобы продолжить.",
+            "confirmTitle": "Подтвердите новый адрес",
+            "confirmBody": "В целях безопасности сравните адрес, сгенерированный на вашем устройстве Ledger, с адресом, указанным ниже. Если они совпадают, нажмите обе кнопки на устройстве Ledger в соответствии с запросом.",
+            "confirmedTitle": "Адрес подтвержден",
+            "confirmedBody": "Вы подтвердили, что адрес в Firefly совпадает с адресом на вашем устройстве Ledger.",
+            "generating": "Генерация адреса"
+        },
+        "switchLedgerApps": {
+            "title": "Переключить Ledger приложения",
+            "body": "Для продолжения миграции перейдите в приложение {legacy} на вашем устройстве Ledger. Когда все будет готово, нажмите кнопку \"Продолжить\"."
+        },
+        "selectLedgerAccountIndex": {
+            "title": "Выберите индекс аккаунта Ledger",
+            "body": "Выберите индекс аккаунта Ledger, который вы использовали в Trinity. Для большинства пользователей это будет индекс по умолчанию, равный 0.",
+            "accountIndex": "Индекс аккаунта",
+            "accountPage": "Страница аккаунта",
+            "standard": "Обычный",
+            "expert": "Экспертный",
+            "takingAWhile": "Это займет некоторое время...",
+            "notGeneratingAddresses": "Генерирует ли ваш Ledger адреса?",
+            "reinstallLegacy": "Если нет, отсоедините устройство и попробуйте снова. Если проблема сохраняется, возможно, вам потребуется переустановить приложение {legacy}."
         },
         "importBackupPassword": {
-            "title": "Восстановить кошелёк из SeedVault или Stronghold",
             "body1": "Пожалуйста, введите ваш пароль от резервной копии.",
             "body2": "Это пароль, который вы установили при первом создании резервной копии."
         },
         "importSuccess": {
             "title": "Вы успешно восстановили вашу резервную копию",
-            "body": "Теперь вы можете настроить ваш новый кошелёк.",
-            "seedvaultTitle": "Успешно импортировано",
-            "seedvaultBody": "Твой пароль правильный, ты можешь продолжить.",
-            "strongholdTitle": "Успешно импортировано",
-            "strongholdBody": "Твой пароль правильный, ты можешь продолжить."
+            "body": "Теперь вы можете настроить свой новый профиль."
         },
         "migrate": {
             "title": "Мигрируйте свои средства",
-            "body1": "Это автоматизированный процесс перемищение ваших средств на новый кошелёк. Мы проверим потраченные адреса, которые ослабляют вашу безопасность.",
+            "body1": "Это автоматизированный процесс перевода ваших средств на новый кошелек.",
             "body2": "Это может занять некоторое время. Не выключайте устройство во время миграции.",
             "existing": "Ваш старый кошелёк",
-            "new": "Ваш новый кошелёк"
+            "new": "Ваш новый кошелёк",
+            "learn": "Узнайте о миграции",
+            "beginMigration": "Начать миграцию",
+            "migrating": "Перевод средств...",
+            "migrated": "{баланс} перенесён",
+            "migrationFailed": "Сбой переноса данных",
+            "noAddressesForMigration": "Пожалуйста, выберите адреса, которые вы хотите использовать.",
+            "restoringWallet": "Восстановление кошелька...",
+            "findingBalance": "Поиск баланса...",
+            "incorrectSeedVaultPassword": "Неправильный пароль сида.",
+            "noDataSeedVault": "В SeedVault не удалось найти никаких данных.",
+            "signingBundle": "Пакет подписи",
+            "broadcastingBundle": "Передача пакета",
+            "miningBundle": "Майнинг данных",
+            "problemRestoringWallet": "Произошла сетевая ошибка при восстановлении вашего кошелька. Пожалуйста, попробуйте еще раз.",
+            "minimumMigrationAmountSpentAddresses": "Минимальная сумма миграции для каждого потраченного адреса составляет 1 мега айота. Проверьте снова, если ваш баланс неправильный.",
+            "tooManyAddressesToMigrate": "У вас слишком много адресов с низким балансом для миграции. Проверьте еще раз правильность отображения полного баланса.",
+            "cannotMigrateAllYourFunds": "Мы не можем перенести все ваши средства, потому что некоторые адреса слишком низки. Вы все равно можете продолжить. {value} будет потерян.",
+            "error": "Произошла ошибка при миграции ваших средств. Пожалуйста, попробуйте еще раз."
+        },
+        "bundleMiningWarning": {
+            "title": "Предупреждение",
+            "body1": "У вас есть средства на одном или несколько потраченных адресов.",
+            "body2": "Мы рекомендуем вам запустить автоматизированный процесс для безопасного и надёжного перевода средств.",
+            "body3": "Если вы закроете приложение, вам нужно будет перезапустить весь процесс миграции.",
+            "learn": "Узнайте о потраченных адресах"
+        },
+        "secureSpentAddresses": {
+            "title": "Безопасные потраченные адреса",
+            "body1": "Обнаружены ваши средства {number, plural, one {# потраченный адрес} other {# потраченные адреса}}.",
+            "body2": "Мы рекомендуем вам запустить автоматизированный процесс для безопасного и надёжного перевода средств.",
+            "error": "Вы не можете мигрировать потраченные адреса с менее чем 1 Mi"
+        },
+        "securityCheckCompleted": {
+            "title": "Проверка безопасности завершена",
+            "body1": "Мы рассчитали уровень риска безопасности. Перезапуск этого процесса может снизить уровень вашего риска.",
+            "body2": "Когда вы довольны уровнем риска, нажмите продолжить.",
+            "rerun": "Перезапусти процесс для выбранный адресов",
+            "continueMigration": "Продолжить миграцию"
+        },
+        "securingSpentAddresses": {
+            "title": "Защищаем потраченные адреса...",
+            "body1": "Этот процесс займет {minutes, plural, one {1 минуту} other {# минут}}.",
+            "body2": "Ваш компьютер будет работать с полной мощностью, вы можете делать что-то другое, пока вы ждёте завершения."
+        },
+        "transferFragmentedFunds": {
+            "body1": "Фаерфлай приступает к миграции ваших средств. Это может занять некоторое время.",
+            "body2": "Во время миграции убедитесь, что ваш Ledger подключен и приложение {legacy} постоянно открыто.",
+            "migrate": "Миграция средств",
+            "transaction": "Транзакция {number}",
+            "rerun": "Попрoбуйте снова"
         },
         "migrateFailed": {
             "title": "To do",
@@ -141,13 +274,16 @@
         },
         "balance": {
             "title": "Ваш баланс",
-            "body": "Верен ли ваш баланс?"
+            "body": "Убедитесь, что баланс правильный, прежде чем продолжить. Вы можете проверить ещё раз, если что-то выглядит неправильно.",
+            "error": "Минимальная сумма миграции составляет 1 мега айота. Проверьте снова, если ваш баланс неправильный.",
+            "zeroBalance": "Попробуйте проверить снова. Если вы все ещё не нашли ваш баланс, возможно, вы ввели ваш сид неправильно.",
+            "zeroBalanceLedgerLegacy": "Попробуйте проверить еще раз. Если вы все еще не можете найти свой баланс, возможно, вы выбрали неправильный индекс счета."
         },
         "settings": {
             "settings": "Настройки",
             "generalSettings": {
                 "title": "Общие настройки",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Настройте внешний вид приложения и другие общие параметры"
             },
             "security": {
                 "title": "Настройки Безопасности",
@@ -166,7 +302,7 @@
                 "description": "Измени имя профиля или установи аватар"
             },
             "sync": {
-                "title": "Синхронизация учетных записей",
+                "title": "Синхронизировать кошельки",
                 "description": ""
             },
             "theme": {
@@ -185,53 +321,59 @@
                 "title": "Оповещения",
                 "description": "Уведомления системы для транзакций"
             },
+            "networkStatus": {
+                "title": "Статус сети",
+                "description": "Отображает стутус узла, к которому вы в данный момент подключены."
+            },
             "exportStronghold": {
                 "title": "Экспорт резервной копии",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallet and latest transaction history."
+                "description": "Экспорт в файл Stronghold - полная зашифрованная резервная копия ваших кошельков и последней истории транзакций"
             },
             "appLock": {
-                "title": "Automatic Lock",
-                "description": "Time elapsed before your wallet locks and logs you out"
+                "title": "Автоматическая блокировка",
+                "description": "Время бездействия до блокировки кошелька и выхода из системы",
+                "durationMinute": "{time, plural, one {1 минута} other {# минут}}",
+                "durationHour": "{time, plural, one {1 час} other {# часов}}"
             },
             "changePassword": {
                 "title": "Изменить пароль",
-                "description": "Your password is used to secure your wallet. You must use a strong password to protect your funds."
+                "description": "Ваш пароль используется для защиты ваших кошельков. Вы должны использовать надежный пароль для защиты своих средств"
             },
             "changePincode": {
-                "title": "Change PIN code",
-                "description": "Your PIN keeps your balance and transactions private",
-                "currentPincode": "Current PIN",
-                "newPincode": "New PIN",
-                "confirmNewPincode": "Confirm new PIN",
-                "action": "Change PIN"
+                "title": "Изменить PIN-код",
+                "description": "Ваш PIN-код хранит ваш баланс и транзакции тайными",
+                "currentPincode": "Текущий PIN-код",
+                "newPincode": "Новый PIN-код",
+                "confirmNewPincode": "Подтвердите новый PIN",
+                "action": "Изменить PIN-код"
             },
-            "resyncAccounts": {
-                "title": "Повторить синхронизацию учетных записей",
-                "description": "Starts a background task to make sure your accounts are up to date."
+            "balanceFinder": {
+                "title": "Определитель баланса",
+                "description": "Выполните расширенный поиск ваших адресов для токенов"
             },
             "hiddenAccounts": {
-                "title": "Скрытые учетные записи",
-                "description": "При выборе этого параметра будут показаны учетные записи, которые были ранее скрыты."
+                "title": "Скрытые кошельки",
+                "description": "При выборе этой опции будут показаны кошельки, которые ранее были скрыты"
             },
             "deleteProfile": {
-                "title": "Delete profile",
-                "description": "Deletes your entire wallet, profile and transaction history. Make sure you have a backup."
+                "title": "Удалить профиль",
+                "description": "Удаляет весь ваш профиль, кошельки и историю транзакций. Убедитесь, что у вас есть резервная копия"
             },
             "deepLinks": {
                 "title": "Умные ссылки",
-                "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
+                "description": "Автоматически заполнить данные транзакций в Firefly при нажатии на ссылку iota://"
             },
             "developerMode": {
                 "title": "Режим Разработчика",
-                "description": "Connect to testnets and other developer features"
+                "description": "Подключиться к testnets и другим функциям разработчика"
             },
             "nodeSettings": {
                 "title": "Настройка Node (точка подключения к сети)",
                 "description": "Выберите Вручную для настройки параметров узла и подключения к вашему собственному узлу"
             },
             "configureNodeList": {
-                "title": "Select a node",
-                "description": "Управление списком узлов, к которым подключается ваш кошелек.",
+                "title": "Выберите узел",
+                "description": "Управляйте списком узлов сети IOTA, к которым вы подключаетесь",
                 "primaryNode": "Основной узел",
                 "excludeNode": "Исключить узел",
                 "includeNode": "Включить узел",
@@ -239,48 +381,52 @@
                 "setAsPrimary": "Установить как основной",
                 "removeNode": "Удалить узел",
                 "includeOfficialNodeList": "Включить список официальных узлов",
-                "noNodes": "Узлы не выбраны, вместо этого узлы будут выбираться автоматически."
+                "noNodes": "Узлов нет, вместо них будет использоваться автоматический выбор"
             },
             "proofOfWork": {
                 "title": "Доказательство Работы (PoW)",
-                "description": "Complete proof of work locally on your device or outsource to the node"
+                "description": "Завершите подтверждение работы локально на вашем устройстве или аутсорсите на узел"
             },
             "errorLog": {
                 "title": "Журнал ошибок",
-                "description": "View errors to debug an issue"
+                "description": "Просмотреть ошибки для отладки проблемы"
             },
             "diagnostics": {
-                "title": "Diagnostics",
-                "description": "View system and application information"
+                "title": "Диагностика",
+                "description": "Просмотр информации о системе и приложении"
+            },
+            "migrateLedgerIndex": {
+                "title": "Мигрировать индекс Ledger",
+                "description": "Миграция другого индекса аккаунта Trinity"
             },
             "stateExport": {
                 "title": "Экспортировать Состояние Кошелька",
-                "description": "Export your transaction history to a .csv file"
+                "description": "Экспорт истории транзакций в .csv файл"
             },
             "troubleshoot": {
                 "title": "Диагностика",
-                "description": "Use the troubleshooting wizard to solve common problems"
+                "description": "Используй ассистент по устранению неполадок для решения общих проблем"
             },
             "documentation": {
                 "title": "Документация",
-                "description": "View the documentation for in depth explanations of how things work"
+                "description": "Смотри документацию для подробного объяснения того, как всё устроено"
             },
             "faq": {
                 "title": "ЧАВО",
-                "title2": "Frequently Asked Questions",
-                "description": "View the FAQs to get help with a common problem or question"
+                "title2": "Часто задаваемые вопросы",
+                "description": "Просмотреть часто задаваемые вопросы для получения помощи с общей проблемой или вопросом"
             },
             "discord": {
                 "title": "Discord",
-                "description": "Get help from the IOTA community on Discord"
+                "description": "Получить помощь от сообщества IOTA в Discord"
             },
             "about": {
                 "title": "О приложение",
                 "description": ""
             },
             "reportAnIssue": {
-                "title": "Report an issue",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported."
+                "title": "Сообщить об ошибке",
+                "description": "Сообщи об ошибке разработчикам. Убедись что об этом еще не сообщили"
             }
         },
         "login": {
@@ -291,79 +437,88 @@
             "security": {
                 "version": {
                     "title": "Firefly v{version}",
-                    "upToDate": "Up to date",
-                    "outOfDate": "Out of date"
+                    "upToDate": "Последняя версия",
+                    "outOfDate": "Требует обновления"
                 },
                 "hardwareDevice": {
-                    "title": "Hardware Device",
-                    "noneDetected": "None detected"
+                    "title": "Устройства",
+                    "statuses": {
+                        "appNotOpen": "Приложение IOTA не открыто",
+                        "connected": "Подключено",
+                        "legacyConnected": "Приложение {legacy} открыто",
+                        "locked": "Заблокировано",
+                        "mnemonicMismatch": "Неправильный Ledger или Mnemonic",
+                        "notDetected": "Не обнаружено",
+                        "otherConnected": "Приложение открыто"
+                    }
                 },
                 "strongholdStatus": {
-                    "title": "Wallet Status",
-                    "locked": "Stronghold locked",
-                    "unlocked": "Stronghold unlocked"
+                    "title": "Статус кошелька",
+                    "locked": "Заблокировано",
+                    "unlocked": "Разблокировано"
                 },
                 "strongholdBackup": {
-                    "title": "Wallet Backup",
-                    "weeksAgo": "{weeks, plural, one {# week} other {# weeks}} ago"
+                    "title": "Резервная копия кошелька",
+                    "weeksAgo": "{weeks, plural, one {# неделя} few {# недели} other {# недель}}"
                 }
             },
             "network": {
-                "networkOperational": "Network Operational",
-                "networkDegraded": "Network Degraded",
-                "networkDown": "Network Disconnected",
-                "status": "Status",
-                "messagesPerSecond": "Messages per second",
-                "confirmationRate": "Confirmation rate"
+                "networkOperational": "Сетевой оператор",
+                "networkDegraded": "Деградация сети",
+                "networkDown": "Сеть отключена",
+                "status": "Статус",
+                "messagesPerSecond": "Сообщений в секунду",
+                "referencedRate": "Базовая ставка"
             },
             "profileModal": {
-                "allSettings": "All settings",
-                "logout": "Log out"
+                "allSettings": "Все настройки",
+                "logout": "Выйти"
             }
         }
     },
     "popups": {
         "password": {
             "title": "Требуется пароль",
-            "subtitle": "Please enter your password to unlock Stronghold",
-            "backup": "Please enter your password to export a backup"
+            "subtitle": "Пожалуйста, введите свой пароль для разблокировки кошельков",
+            "backup": "Пожалуйста, введи свой пароль для экспорта резервной копии"
         },
         "qr": {
             "title": "Ваш QR-код"
         },
         "version": {
-            "title": "Current version: {version}",
-            "upToDateTitle": "Firefly is up to date",
+            "title": "Актуальная версия: {version}",
+            "upToDateTitle": "Firefly актуальный",
             "upToDateDescription": "Ты использушь последнюю и безопасную версию Firefly.",
             "updateAvailable": "Доступно обновление Firefly",
-            "updateDetails": "Версия {version} - {date}"
+            "updateDetails": "Версия {version} - {date}",
+            "noAutoUpdate": "Автообновление отключено в этой версии Windows, пожалуйста, перейдите на сайт https://firefly.iota.org для скачивания обновления."
         },
         "backup": {
             "title": "Последняя резервная копия: {date}",
             "lastBackup": "Дата последней резервной копии: {date}",
-            "backupDescription": "Важно регулярно составлять резервную копию, чтобы убедиться, что у тебя есть копия всех твоих счетов и истории транзакций.",
+            "backupDescription": "Важно регулярно создавать резервные копии, чтобы у вас была копия ваших кошельков и истории транзакций.",
             "backupWarning": "Если ты потеряешь свою резервную копию и фразу восстановления, ты потеряешь доступ к своим средствам.",
             "notBackedUp": "Резервная копия не создана",
-            "notBackedUpDescription": "Ты не сохранил резервную копию твоего Stronghold",
+            "notBackedUpDescription": "Вы не сохранили резервную копию кошельков",
             "saving": "Сохранение..."
         },
         "deleteAccount": {
             "title": "Удалить {name}?",
-            "body": "Эта учетная запись не имеет истории транзакций. Ее можно безопасно удалить.",
+            "body": "Этот кошелек не имеет истории транзакций. Он может быть безопасно удален.",
             "typePassword": "Введите пароль для подтверждения.",
-            "hideAccount": "Удалить учетную запись",
+            "hideAccount": "Удалить кошелёк",
             "errorTitle": "Не удается удалить {name}",
-            "errorBody1": "Вы не можете удалить эту учетную запись, у вас должна быть хотя бы одна."
+            "errorBody1": "Вы не можете удалить этот кошелек, у вас должен быть хотя бы один."
         },
         "hideAccount": {
             "title": "Скрыть {name}?",
-            "body": "Вы можете найти эту учетную запись позже, включив \"Показать скрытые учетные записи\" в расширенных настройках.",
+            "body": "Вы можете найти этот кошелек позже, включив опцию \"Показывать скрытые кошельки\" в расширенных настройках.",
             "typePassword": "Введите пароль для подтверждения.",
-            "hideAccount": "Скрыть учетную запись",
+            "hideAccount": "Скрыть кошелек",
             "errorTitle": "Не удается скрыть {name}",
-            "errorBody1": "Чтобы скрыть учетную запись, она должна иметь нулевой баланс.",
-            "errorBody2": "В настоящее время на этом аккаунте осталось {balance}. Переведите эти средства на другой счет и повторите попытку.",
-            "errorBody3": "Вы не можете скрыть эту учетную запись, вы должны иметь хотя бы одну."
+            "errorBody1": "Чтобы скрыть кошелек, он должен иметь 0 баланса.",
+            "errorBody2": "В настоящее время на этом кошельке осталось {balance}. Пожалуйста, переведите эти средства на другой кошелек и повторите попытку.",
+            "errorBody3": "Вы не можете скрыть этот кошелек, вы должны иметь хотя бы один."
         },
         "addressHistory": {
             "title": "История адресов: {name}",
@@ -403,30 +558,105 @@
         "transaction": {
             "title": "Подтвердить транзакцию",
             "body": "Вы собираетесь отправить {amount}"
+        },
+        "balanceFinder": {
+            "title": "Определитель баланса",
+            "body": "Проведите более тщательный поиск адресов, чтобы найти недостающие балансы. Это может занять некоторое время.",
+            "totalWalletBalance": "Общий баланс",
+            "typePassword": "Введите ваш пароль, чтобы разрешить поиск."
+        },
+        "riskFunds": {
+            "title": "Предупреждение: средства, находящиеся под угрозой во время миграции",
+            "body1": "Настоятельно рекомендуем защитить все твои средства, прежде чем приступить к миграции. Твои средства могут быть потерены, если ты не создашь резервную копию.",
+            "body2": "Рекомендуется перезапустить процесс для адресов со средним уровнем риска или выше."
+        },
+        "missingBundle": {
+            "title": "Предупреждение: средства, находящиеся под угрозой во время миграции",
+            "body": "У тебя есть средства на потраченных адресах, но информация, необходима для их сохранения, не найдена. Это может произойти, если ты выполнял транзакции давно. Ты можешь продолжить, но {value} находятся под угрозой во время миграции.",
+            "learnMore": "Узнай больше о потраченных адресах",
+            "proceed": "Я понимаю риск"
+        },
+        "snapshot": {
+            "title": "Текущее обновление сети",
+            "body": "Началось обновление сети Chrysalis.",
+            "bodyMigration": "Миграция отключена до ее завершения.",
+            "bodyFirefly": "Firefly отключён до завершения. После этого миграция токенов будет по-прежнему возможна."
+        },
+        "ledgerNotConnected": {
+            "connect": "Откройте новое приложение IOTA на вашем устройстве Ledger, чтобы продолжить работу",
+            "connectLegacy": "Откройте приложение {legacy} на вашем устройстве Ledger, чтобы продолжить"
+        },
+        "ledgerConfirmation": {
+            "confirm": "Чтобы продолжить, подтвердите запрос, отображаемый на вашем устройстве Ledger"
+        },
+        "ledgerAppGuide": {
+            "title": "Руководство по установке приложений Ledger",
+            "steps": {
+                "0": "Установите и откройте приложение Ledger Live",
+                "1": "Убедитесь, что ваш Ledger подключен",
+                "2": "Поиск приложений: {legacy} и IOTA (MIOTA)",
+                "3": "Установить оба приложения: {legacy} и IOTA (MIOTA)",
+                "4": "Помните, что важно закрыть Ledger Live перед возвращением в Firefly"
+            }
+        },
+        "ledgerConnectionGuide": {
+            "title": "Советы, если ваш Ledger не подключается",
+            "steps": {
+                "0": "Убедитесь, что на вашем компьютере не открыта программа Ledger Live",
+                "1": "Убедитесь, что вы разблокировали свое устройство Ledger с помощью PIN-кода",
+                "2": "Откройте новое приложение IOTA на своем устройстве Ledger",
+                "3": {
+                    "text": "Все еще не везёт?",
+                    "link": "Попробуйте зайти на официальную страницу поддержки Ledger"
+                }
+            }
+        },
+        "ledgerTransaction": {
+            "remainderAddress": {
+                "title": "Подтвердите адрес остатка",
+                "info": "Убедитесь, что адрес остатка, отображаемый в вашем Ledger, совпадает с адресом, показанным ниже. Если они совпадают, нажмите обе кнопки на Ledger в соответствии с запросом."
+            },
+            "transaction": {
+                "title": "Подтвердить транзакцию",
+                "info": "Убедитесь, что информация о транзакции, отображаемая на вашем устройстве Ledger, совпадает с информацией, отображаемой ниже. Если они совпадают, нажмите обе кнопки на Ledger в соответствии с запросом."
+            }
+        },
+        "ledgerAddress": {
+            "title": "Подтверждение адреса приема",
+            "body": "Убедитесь, что адрес получения, отображаемый в вашем Ledger, совпадает с адресом, показанным ниже. Если они совпадают, нажмите обе кнопки на устройстве Ledger в соответствии с запросом."
+        },
+        "ledgerMigrateIndex": {
+            "title": "Вам нужно перенести другой индекс аккаунта Trinity?",
+            "body": "Вы также можете выполнить миграцию позже в расширенных настройках."
         }
     },
     "charts": {
-        "incomingMi": "Входящий {value} Mi",
-        "outgoingMi": "Исходящий {value} Mi",
+        "incomingMi": "Входящие {value}",
+        "outgoingMi": "Исходящие {value}",
         "portoflio": "Портфолио",
         "token": "Токен",
-        "accountValue": "Счёт аккаунт",
-        "accountActivity": "Активность аккаунта",
-        "timeframe1Hour": "1 hour",
-        "timeframe1Day": "1 day",
-        "timeframe1Week": "1 week",
-        "timeframe1Month": "1 month"
+        "accountValue": "Стоимость кошелька",
+        "accountActivity": "Активность кошелька",
+        "timeframe1Hour": "1 час",
+        "timeframe1Day": "1 день",
+        "timeframe1Week": "1 неделя",
+        "timeframe1Month": "1 месяц"
     },
     "actions": {
         "continue": "Продолжить",
         "back": "Назад",
+        "previous": "Предыдущий",
+        "next": "Следующий",
         "cancel": "Отменить",
         "close": "Закрыть",
         "dismiss": "Отклонить",
+        "proceedAnyway": "Все равно продолжить",
         "save": "Сохранить",
         "importSeed": "Импортировать существующую мнемонику",
-        "importWallet": "Импортировать существующий кошелек",
+        "restoreWallet": "Миграция или восстановление кошелька",
+        "restoreWalletDescription": "Миграция в Chrysalis или восстановление существующего кошелька",
         "createWallet": "Создать новый кошелек",
+        "createWalletDescription": "Создать новый кошелек на Chrysalis",
         "savePassword": "Сохранить пароль",
         "useBiometric": "Использовать биометрическую защиту",
         "setupPin": "Задайте PIN-код",
@@ -438,7 +668,7 @@
         "verifyRecoveryPhrase": "Проверьте фразу восстановления",
         "revealRecoveryPhrase": "Показать фразу восстановлению",
         "importSeedvault": "Импортировать SeedVault",
-        "checkAgain": "Нет, проверьте снова",
+        "checkAgain": "Нет, снова проверить",
         "importFromFile": "Импортировать из файла",
         "send": "Отправить",
         "receive": "Получить",
@@ -462,41 +692,52 @@
         "updateFirefly": "Обновить Firefly",
         "restartNow": "Перезагрузить сейчас",
         "saveBackup": "Сохранить резервную копию Stronghold",
-        "customizeAcount": "Настройка аккаунта",
+        "customizeAcount": "Персонализация кошелька",
         "viewAddressHistory": "Просмотр истории адресов",
-        "hideAccount": "Скрыть учетную запись",
-        "showAccount": "Показать учетную запись",
-        "deleteAccount": "Удалить учетную запись",
+        "hideAccount": "Скрыть кошелек",
+        "showAccount": "Раскрыть кошелёк",
+        "deleteAccount": "Удалить кошелёк",
         "max": "Максимум",
         "addNode": "Добавить узел",
         "updateNode": "Обновить узел",
         "removeNode": "Удалить узел",
         "hide": "Скрыть",
         "hideOthers": "Скрыть остальные",
-        "showAll": "Show All",
-        "quit": "Quit",
-        "edit": "Edit",
-        "undo": "Undo",
-        "redo": "Redo",
-        "cut": "Cut",
-        "copy": "Copy",
-        "paste": "Paste",
-        "selectAll": "Select All",
-        "addAccount": "Add Account",
-        "checkForUpdates": "Check for Updates",
-        "reportAnIssue": "Report an Issue",
-        "clear": "Clear",
-        "hideDetails": "Hide Details",
-        "yes": "Yes",
-        "no": "No",
-        "reset": "Reset",
-        "downloadRecoveryKit": "Save Recovery Kit template",
-        "skipBackup": "Skip file backup",
-        "finishSetup": "Finish setup",
-        "readDocumentation": "Read the documentation",
-        "visitFaq": "Visit FAQ",
-        "showHiddenAccounts": "Показать скрытые учетные записи",
-        "confirm": "Подтвердить"
+        "showAll": "Показать всё",
+        "quit": "Выйти",
+        "edit": "Редактировать",
+        "undo": "Отменить",
+        "redo": "Повторить",
+        "cut": "Вырезать",
+        "copy": "Копировать",
+        "paste": "Вставить",
+        "selectAll": "Выбрать все",
+        "addAccount": "Добавить кошелёк",
+        "checkForUpdates": "Проверять обновления",
+        "reportAnIssue": "Сообщить об ошибке",
+        "restore": "Восстановить",
+        "clear": "Очистить",
+        "hideDetails": "Скрыть подробности",
+        "yes": "Да",
+        "no": "Нет",
+        "skip": "Пропустить",
+        "reset": "Сбросить",
+        "downloadRecoveryKit": "Сохранить шаблон документа для востановления",
+        "skipBackup": "Пропустить резервную копию",
+        "finishSetup": "Завершить настройку",
+        "readDocumentation": "Читать документацию",
+        "visitFaq": "Посетить FAQ",
+        "viewStatus": "Просмотр статуса",
+        "showHiddenAccounts": "Показать скрытые кошельки",
+        "confirm": "Подтвердить",
+        "hideNetworkStatistics": "Скрыть статистику сети",
+        "findBalances": "Найти балансы",
+        "searchBalances": "Поиск балансов",
+        "searchAgain": "Повторный поиск",
+        "searching": "Поиск...",
+        "closeFirefly": "Закрыть Firefly",
+        "generateAddress": "Сгенерировать адрес",
+        "migrateAgain": "Мигрировать другой индекс"
     },
     "general": {
         "password": "Пароль",
@@ -509,32 +750,31 @@
         "recentActivity": "Последние действия",
         "sent": "Отправлено",
         "received": "Получено",
-        "sendPayment": "Send Payment",
-        "moveFunds": "Internal Transfer",
+        "sendPayment": "Отправить платёж",
+        "moveFunds": "Внутренний перевод",
+        "sendTo": "Отправить на",
         "sendFunds": "Отправить средства",
-        "sendToAddress": "Send to address",
+        "sendToAddress": "Отправить на адрес",
         "scanQrOrPaste": "Сканировать QR-код или вставить Адрес",
-        "moveFundsBetweenAccounts": "Переместить средства между своими счетами",
-        "sendTokensToAddress": "Send tokens to an address",
-        "manageAccount": "Управление аккаунтом",
-        "customizeAcount": "Customize your account",
-        "account": "Аккаунт",
+        "moveFundsBetweenAccounts": "Переместить средства между кошельками",
+        "sendTokensToAddress": "Отправить токены на адрес",
+        "manageAccount": "Управление кошельками",
+        "customizeAcount": "Персонализируйте свой кошелек",
+        "account": "Кошелёк",
         "sendingToAddress": "Отправляется на адрес",
         "amount": "Сумма",
         "addAddress": "Добавить Адрес",
         "reference": "Ссылка",
         "from": "От",
         "to": "Кому",
-        "receiveFunds": "Receive Funds",
-        "myAddress": "My Address",
+        "receiveFunds": "Получить средства",
+        "myAddress": "Мой адрес",
         "shareAddress": "Поделиться адресом",
         "yourAddress": "Ваш адрес",
+        "newRemainder": "Новый оставшийся адрес",
+        "remainder": "Оставшийся адрес",
         "generateNewAddress": "Создать новый адрес",
         "copyAddress": "Скопировать адрес",
-        "haveTextBackup": "У меня есть резервная копия текста",
-        "haveFileBackup": "У меня есть резервная копия файла",
-        "enterSeedOrPhrase": "Введите фразу восстановлении или мнемонику",
-        "uploadSeedvaultOrStronghold": "Импорт файла Stronghold или SeedVault",
         "import": "Импорт",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -543,54 +783,59 @@
         "lightTheme": "Светлая тема",
         "darkTheme": "Тёмная тема",
         "balance": "Баланс",
-        "accountBalance": "Account Balance",
+        "accountBalance": "Баланс кошелька",
         "incoming": "Входящие",
         "outgoing": "Исходящие",
-        "totalIn": "Total in",
-        "totalOut": "Total out",
-        "accounts": "Аккаунты",
-        "myAccounts": "My Accounts",
+        "totalIn": "Всего (вх.)",
+        "totalOut": "Всего (исх.)",
+        "accounts": "Кошельки",
+        "myAccounts": "Мои кошельки",
         "automaticNodeSelection": "Авто подбор Node (точка подключения к сети)",
         "manualNodeSelection": "Ручной выбор Node (точка подключения к сети)",
         "profiles": "Профили",
-        "developerProfile": "Developer Profile",
-        "dev": "Dev",
-        "createAccount": "Create an Account",
-        "accountName": "Название учетной записи",
+        "developerProfile": "Профиль разработчика",
+        "developerProfileDescription": "Позволяет подключаться к тестовым сетям",
+        "dev": "Разработчик",
+        "createAccount": "Создать кошелёк",
+        "accountName": "Имя кошелька",
         "latestTransactions": "Последние Транзакции",
         "transactions": "Транзакции",
         "security": "Настройки Безопасности",
         "accountAddress": "Адрес кошелька",
-        "nodes": "Nodes",
-        "wallet": "Wallet",
-        "help": "Help",
-        "you": "You",
-        "messageId": "Message ID",
-        "inputAddress": "Send Address",
-        "receiveAddress": "Receive Address",
-        "date": "Date",
-        "status": "Status",
-        "confirmed": "Confirmed",
-        "pending": "Pending",
-        "noAccounts": "You have no accounts, please create one.",
-        "loadingAccounts": "Loading, please wait...",
-        "addProfile": "Add Profile",
+        "nodes": "Узлы",
+        "wallet": "Кошелёк",
+        "help": "Помощь",
+        "you": "Ты",
+        "messageId": "ID сообщения",
+        "inputAddress": "Адрес отправителя",
+        "receiveAddress": "Адрес получателя",
+        "newAddress": "Новый адрес",
+        "date": "Дата",
+        "status": "Статус",
+        "confirmed": "Подтверждено",
+        "pending": "В ожидании",
+        "noAccounts": "У вас нет кошельков, пожалуйста, создайте один.",
+        "loadingAccounts": "Загрузка, пожалуйста подожди...",
+        "addProfile": "Добавить профиль",
         "noRecentHistory": "Нет недавней истории",
-        "transferSyncing": "Синхронизация аккаунта",
+        "firstSync": "Синхронизация истории, это может занять некоторое время...",
+        "transferSyncing": "Синхронизация кошелька",
         "transferSelectingInputs": "Выбор входов",
-        "transferRemainderAddress": "Генерация адреса депозита",
+        "transferRemainderAddress": "Генерирование адреса остатка",
+        "transferPreparedTransaction": "Подготовка транзакции",
         "transferSigning": "Подписание транзакции",
         "transferPow": "Выполнение PoW",
         "transferBroadcasting": "Отправка транзакции",
         "transferComplete": "Передача завершена",
-        "creatingAccount": "Создание аккаунта, пожалуйста подожди...",
-        "updatingAccount": "Обновление аккаунта, пожалуйста подожди...",
-        "accountSyncing": "Аккаунт синхронизируется",
-        "accountSyncComplete": "Синхронизация аккаунта завершена",
+        "generatingReceiveAddress": "Генерирование адреса приема",
+        "creatingAccount": "Создание кошелька, пожалуйста, подождите...",
+        "updatingAccount": "Обновление кошелька, пожалуйста, подождите...",
+        "accountSyncing": "Кошелек синхронизируется",
+        "accountSyncComplete": "Синхронизация кошелька завершена",
         "passwordUpdating": "Обновление пароля...",
         "passwordSuccess": "Пароль успешно обновлен",
         "passwordFailed": "Не удалось обновить пароль",
-        "syncingAccounts": "Синхронизация аккаунтов...",
+        "syncingAccounts": "Синхронизация кошельков...",
         "exportingStronghold": "Экспортирование Stronghold...",
         "exportingStrongholdSuccess": "Stronghold успешно экспортирован",
         "exportingStrongholdFailed": "Экспортирование Stronghold не удалось",
@@ -604,7 +849,18 @@
         "passwordStrength3": "Средний",
         "passwordStrength4": "Сильный",
         "creatingProfile": "Создание аккаунта, пожалуйста подожди...",
-        "accountRemoved": "Эта учетная запись скрыта. Сделайте её видимой для выполнения переводов."
+        "fundMigration": "Миграция счета",
+        "accountRemoved": "Этот кошелек скрыт. Для осуществления переводов раскройте его.",
+        "receivingTo": "Поступление на {account}",
+        "sendingFrom": "Отправка с {account}",
+        "receivedTo": "Поступило на {account}",
+        "sentFrom": "Отправлено с {account}",
+        "receiving": "Поступление",
+        "sending": "Отправление",
+        "legacyNetwork": "Устаревшая сеть",
+        "capsLock": "Включен Caps Lock",
+        "version": "Версия {version}",
+        "unknown": "Неизвестно"
     },
     "dates": {
         "today": "Сегодня",
@@ -617,88 +873,123 @@
     "notifications": {
         "valueTx": "Получение {{value}} в {{account}}",
         "confirmed": "Исходящий {{value}} из {{account}} подтверждён",
-        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
+        "confirmedInternal": "{{value}} с {{senderAccount}} на {{receiverAccount}} подтверждено",
         "confirmedInternalNoAccounts": "Внутренний перевод {{value}} подтвержден",
-        "failed": "Outgoing {{value}} from {{account}} has failed",
+        "failed": "Исходящий {{value}} из {{account}} подтверждён",
         "downloadingUpdate": "Загрузка обновлений",
         "updateReady": "Обновление готово",
         "updateError": "Во время обновления произошла ошибка, попробуйте ещё раз",
         "restartInstall": "Перезапустите для установки",
         "calcMinutesRemaining": "Вычисление оставшихся минут...",
-        "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}",
-        "copiedToClipboard": "Copied to clipboard",
-        "accountsSynchronized": "Account synchronization complete"
+        "minutesRemaining": "{minutes, plural, one {Осталась 1 минута} other { Осталось # минут}}",
+        "copiedToClipboard": "Скопировано в буфер обмена",
+        "accountsSynchronized": "Синхронизация кошелька завершена",
+        "fundsAvailableSoon": "Ваши средства будут доступны в ближайшее время"
     },
     "error": {
         "profile": {
-            "length": "Your profile name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "duplicate": "A profile with this name already exists."
+            "length": "Имя твоего профиля не может быть длиннее {length, plural, one {1 символа} few {# символов} many {# символов} other {# символов}}.",
+            "duplicate": "Профиль с таким именем уже существует."
         },
         "password": {
-            "doNotMatch": "Passwords do not match.",
-            "tooWeak": "Your new password is too weak.",
-            "row": "Straight rows of keys are easy to guess.",
-            "pattern": "Short keyboard patterns are easy to guess.",
-            "names": "Common names and surnames are easy to guess.",
-            "repeats": "Repeats like 'aaa' are easy to guess.",
-            "repeats2": "Repeats like 'abcabcabc' are easy to guess.",
-            "sequence": "Sequences of characters are easy to guess.",
-            "years": "Recent years are easy to guess.",
-            "dates": "Dates are easy to guess.",
-            "common": "This is a very common password.",
-            "similar": "This is similar to a common password.",
-            "word": "A single word is easy to guess.",
-            "incorrect": "Your password is incorrect.",
-            "length": "Your password can't be longer than {length, plural, one {1 character} other {# characters}}."
+            "doNotMatch": "Пароли не совпадают.",
+            "tooWeak": "Новый пароль установлен.",
+            "row": "Последовательный ряд символов легко угадать.",
+            "pattern": "Короткие сочетания клавиш легко угадать.",
+            "names": "Распространенные имена и фамилии легко угадать.",
+            "repeats": "Повторы как 'aaa' легко угадать.",
+            "repeats2": "Повторы как 'abcabcabc' легко угадать.",
+            "sequence": "Последовательный ряд букв легко угадать.",
+            "years": "Последние годы легко угадать.",
+            "dates": "Даты легко угадать.",
+            "common": "Это очень распространенный пароль.",
+            "similar": "Похоже на один из широко распространенных паролей.",
+            "word": "Одно слово легко угадать.",
+            "incorrect": "Неправильный пароль.",
+            "length": "Твой пароль не может быть длиннее {length, plural, one {1 символа} few {# символов} many {# символов} other {# символов}}."
         },
         "pincode": {
-            "length": "Your PIN must be {length, plural, one {1 digit} other {# digits}} long.",
-            "match": "PINs do not match.",
-            "incorrect": "Your current PIN is incorrect."
+            "length": "Твой PIN-код должен быть {length, plural, one {1 цифра} few {# цифр} many {# цифр} other {# цифр}}.",
+            "match": "PIN-код и подтверждение не совпадают.",
+            "incorrect": "Твой PIN-код неверен."
         },
         "account": {
-            "length": "Your account name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "empty": "You must use your latest account before creating a new one.",
-            "notEmpty": "You must transfer your balance before deleting this account.",
-            "duplicate": "An account with this name already exists.",
+            "length": "Имя вашего кошелька не может быть длиннее, чем {length, plural, one {1 character} other {# characters}}.",
+            "empty": "Вы должны использовать ваш последний кошелёк перед созданием нового.",
+            "notEmpty": "Вы должны перевести баланс перед удалением этого кошелька.",
+            "duplicate": "Кошелек с таким именем уже существует.",
             "tilde": "Имя профиля не может начинаться с символа '~'.",
             "control": "Имя профиля не может содержать управляющий символ.",
             "startDot": "Имя профиля не может начинаться с символа '.'.",
-            "chars": "Имя профиля не может содержать символы <>:\"/\\|?*"
+            "chars": "Имя профиля не может содержать символы <>:\"/\\|?*",
+            "index": "Индекс вашего аккаунта должен быть числом от 0 до 2,147,483,647.",
+            "page": "Страница вашего аккаунта должна быть числом от 0 до 2,147,483,647.",
+            "syncing": "Произошла ошибка при синхронизации ваших кошельков."
         },
         "send": {
-            "addressLength": "Addresses should be {length, plural, one {1 character} other {# characters}} long.",
-            "amountTooHigh": "This is greater than your available balance.",
-            "amountNoFloat": "If units are `i` you cannot use decimal places.",
-            "amountInvalidFormat": "The amount appears to be an invalid number.",
-            "amountZero": "The amount must be greater than 0.",
+            "addressLength": "Длина адресов должна быть {length, plural, one {1 символ} other {# символов}}.",
+            "amountTooHigh": "Это больше, чем твой баланс.",
+            "amountNoFloat": "Если единицы измерения 'i', то вы не можете использовать знаки после запятой.",
+            "amountInvalidFormat": "Сумма является недопустимым числом.",
+            "amountZero": "Сумма должна быть больше 0.",
             "wrongAddressPrefix": "Адреса начинаются с префикса {prefix}.",
             "wrongAddressFormat": "Адрес неверно отформатирован.",
-            "invalidAddress": "The address is not valid.",
-            "insufficientFunds": "This account has insufficient funds.",
-            "noToAccount": "Вы не выбрали аккаунт для перевода средств.",
-            "sendingDust": "You cannot send less than 1 Mi.",
-            "leavingDust": "You cannot leave less than 1 Mi on your address."
+            "invalidAddress": "Адрес недействителен.",
+            "insufficientFunds": "На этом кошельке недостаточно средств.",
+            "noToAccount": "Вы не выбрали кошелек для отправки средств.",
+            "sendingDust": "Вы не можете отправить менее 1 Mi.",
+            "leavingDust": "Вы не можете оставить менее 1 Mi на вашем адресе.",
+            "cancelled": "Транзакция была отменена.",
+            "transaction": "Произошла ошибка при отправке вашей транзакции. Пожалуйста, попробуйте еще раз."
         },
         "node": {
-            "invalid": "Please enter a valid URL.",
-            "https": "HTTPS is required. Set up a developer profile to use unsecured HTTP connections.",
-            "duplicate": "This node has already been added.",
-            "unsynced": "The node is not in sync.",
-            "noSynced": "No synced nodes are available."
+            "invalid": "Пожалуйста, введите правильный адрес.",
+            "https": "Требуется HTTPS. Настройте профиль разработчика для использования небезопасных HTTP-соединений.",
+            "duplicate": "Этот узел уже был добавлен.",
+            "unsynced": "Узел не синхронизирован.",
+            "noSynced": "Нет доступных синхронизированных узлов."
         },
         "global": {
-            "generic": "Something went wrong."
+            "generic": "Что-то пошло не так."
         },
         "backup": {
-            "invalid": "The backup file was not recognised.",
-            "destination": "The backup destination was not valid.",
-            "mnemonic": "The mnemonic is not valid.",
-            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is 1} other {is #}}",
-            "seedCharacters": "The seed should only contain characters A-Z or 9",
-            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
-            "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase",
-            "phraseCaseWord": "The word \"{word}\" should be lower case"
+            "invalid": "Файл резервной копии не распознан.",
+            "destination": "Резервная копия недействительна.",
+            "mnemonic": "Мнемоника недействительна.",
+            "seedTooShort": "Ключ должен быть 81 символ длиной, это {length, plural, one {1} other {#}}",
+            "seedCharacters": "Ключ должен содержать только символы A-Z или 9",
+            "phraseWordCount": "В твоей фразе восстановления должно быть 24 слов, сейчас здесь {length, plural, one {1} few {#} many {#} other {#}}.",
+            "phraseUnrecognizedWord": "Нераспознанное слово \"{word}\" в твоей фразе восстановления",
+            "phraseCaseWord": "Слово \"{word}\" должно быть строчным регистром"
+        },
+        "ledger": {
+            "appNotOpen": "Вы должны открыть приложение IOTA на своем устройстве Ledger.",
+            "generic": "Произошла ошибка при подключении к вашему устройству Ledger.",
+            "legacyConnected": "На вашем устройстве Ledger открыто неправильное приложение.",
+            "locked": "Пожалуйста, разблокируйте ваше устройство Ledger, введя PIN-код.",
+            "mnemonicMismatch": "Вы подключили не то устройство Ledger или изменилась мнемоника.",
+            "notDetected": "Устройство Ledger не обнаружено.",
+            "notFound": "Ledger устройство не найдено.",
+            "otherConnected": "На вашем устройстве Ledger открыто неправильное приложение.",
+            "generateAddress": "Произошла ошибка при генерировании адреса.",
+            "timeout": "Время работы вашего устройства Ledger истекло.",
+            "disconnected": "Ваше устройство Ledger было отключено."
+        },
+        "popup": {
+            "preventClose": "Это всплывающее окно невозможно закрыть."
+        },
+        "migration": {
+            "missingBundle": "Произошла ошибка при попытке найти узел транзакции."
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "Уровень риска: {risk}",
+            "veryHigh": "Очень высокий",
+            "high": "Высокий",
+            "medium": "Средний",
+            "low": "Низкий",
+            "veryLow": "Очень низкий"
         }
     }
 }

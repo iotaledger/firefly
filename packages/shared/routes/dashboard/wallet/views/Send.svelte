@@ -3,19 +3,34 @@
     import { Address, Amount, Button, Dropdown, Icon, ProgressBar, Text } from 'shared/components'
     import { clearSendParams, sendParams } from 'shared/lib/app'
     import { parseCurrency } from 'shared/lib/currency'
-    import { closePopup, openPopup } from 'shared/lib/popup'
+    import { ledgerDeviceState, displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { displayNotifications, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
+    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
+    import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
-    import type { TransferProgressEventType } from 'shared/lib/typings/events'
+    import {
+        GeneratingRemainderDepositAddressEvent,
+        PreparedTransactionEvent, TransactionEventData,
+        TransferProgressEventData,
+        TransferProgressEventType,
+        TransferState,
+    } from 'shared/lib/typings/events'
+    import { LedgerDeviceState } from 'shared/lib/typings/ledger'
+    import type { NotificationType } from 'shared/lib/typings/notification'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
-    import { isTransferring, transferState, wallet, WalletAccount } from 'shared/lib/wallet'
+    import { isTransferring, transferState, wallet } from 'shared/lib/wallet'
     import { getContext, onDestroy, onMount } from 'svelte'
     import type { Readable } from 'svelte/store'
+    import { get } from 'svelte/store'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
 
-    export let locale
-    export let send
-    export let internalTransfer
+    export let locale: Locale
+
+    export let onSend = (..._: any[]): void => {}
+    export let onInternalTransfer = (..._: any[]): void => {}
 
     const { accounts } = $wallet
 
@@ -33,43 +48,42 @@
     let address = ''
     let to = undefined
     let amountError = ''
-    let addressPrefix = ($account ?? $liveAccounts[0]).depositAddress.split('1')[0]
+    const addressPrefix = ($account ?? $liveAccounts[0]).depositAddress.split('1')[0]
     let addressError = ''
     let toError = ''
     let amountRaw
+
+    let ledgerAwaitingConfirmation = false
+
+    let transactionEventData: TransferProgressEventData = null
+    let transactionTimeoutId = null
+    let transactionNotificationId = null
 
     // This looks odd but sets a reactive dependency on amount, so when it changes the error will clear
     $: amount, (amountError = '')
     $: to, (toError = '')
     $: address, (addressError = '')
 
-    const updateFromSendParams = ((s) => {
-        selectedSendType = s.isInternal ? SEND_TYPE.INTERNAL : SEND_TYPE.EXTERNAL
-        unit = Unit.i
-        amount = s.amount === 0 ? '' : formatUnitPrecision(s.amount, Unit.i, false)
-        address = s.address
-    })
-
-    const sendSubscription = sendParams.subscribe((s) => {
-        updateFromSendParams(s)
-    })
-
-    let transferSteps: {
-        [key in TransferProgressEventType | 'Complete']: {
+    const transferSteps: {
+        [key in TransferProgressEventType]: {
             label: string
             percent: number
         }
     } = {
         SyncingAccount: {
             label: locale('general.transferSyncing'),
-            percent: 30,
+            percent: 20,
         },
         SelectingInputs: {
             label: locale('general.transferSelectingInputs'),
-            percent: 40,
+            percent: 30,
         },
         GeneratingRemainderDepositAddress: {
             label: locale('general.transferRemainderAddress'),
+            percent: 40,
+        },
+        PreparedTransaction: {
+            label: locale('general.transferPreparedTransaction'),
             percent: 50,
         },
         SigningTransaction: {
@@ -90,31 +104,191 @@
         },
     }
 
-    $: accountsDropdownItems = $liveAccounts.map((acc) => format(acc))
-    $: from = $account ? format($account) : accountsDropdownItems[0]
+    let accountsDropdownItems
+    let from
+    $: {
+        accountsDropdownItems = $liveAccounts.map((acc) => format(acc))
+
+        if (from) {
+            from = accountsDropdownItems.find((a) => a.id === from.id)
+        } else {
+            from = $account ? accountsDropdownItems.find((a) => a.id === $account.id) : accountsDropdownItems[0]
+        }
+        if (to) {
+            to = accountsDropdownItems.find((a) => a.id === to.id)
+        }
+    }
+
+    const handleTransactionEventData = (eventData: TransferProgressEventData): TransactionEventData => {
+        if (!eventData) return {}
+
+        const remainderData = eventData as GeneratingRemainderDepositAddressEvent
+        if (remainderData?.address) return { remainderAddress: remainderData?.address }
+
+        const txData = eventData as PreparedTransactionEvent
+        if (!(txData?.inputs && txData?.outputs) || txData?.inputs.length <= 0 || txData?.outputs.length <= 0) return {}
+
+        const numOutputs = txData.outputs.length
+        if (numOutputs === 1) {
+            return {
+                toAddress: txData.outputs[0].address,
+                toAmount: txData.outputs[0].amount,
+            }
+        } else if (numOutputs > 1) {
+            return {
+                toAddress: txData.outputs[0].address,
+                toAmount: txData.outputs[0].amount,
+
+                remainderAddress: txData.outputs[numOutputs - 1].address,
+                remainderAmount: txData.outputs[numOutputs - 1].amount,
+            }
+        } else {
+            return txData
+        }
+    }
+
+    const handleTransferState = (state: TransferState): void => {
+        if (!state) return
+
+        const _onCancel = () => {
+            isTransferring.set(false)
+            transferState.set(null)
+
+            clearSendParams(selectedSendType === SEND_TYPE.INTERNAL)
+            closePopup(true)
+
+            if (get(displayNotifications).length === 0)
+                showAppNotification({
+                    type: 'error',
+                    message: locale('error.send.transaction'),
+                })
+        }
+
+        const { data, type } = state
+        switch (type) {
+            case TransferProgressEventType.GeneratingRemainderDepositAddress:
+                transactionEventData = data
+
+                /**
+             * NOTE: The break statement is omitted in this case to allow the next block of code
+             * (under SigningTransaction) to be executed.
+             */
+
+                /* eslint-disable no-fallthrough */
+            case TransferProgressEventType.SigningTransaction:
+                ledgerAwaitingConfirmation = true
+
+                openPopup({
+                    type: 'ledgerTransaction',
+                    hideClose: true,
+                    preventClose: true,
+                    props: {
+                        onCancel: _onCancel,
+                        ...handleTransactionEventData(transactionEventData),
+                    },
+                })
+
+                break
+
+            case TransferProgressEventType.PreparedTransaction:
+            /**
+                 * CAUTION: The Ledger confirmation doesn't always trigger
+                 * the popup to close, so it is programmatically enforced here.
+                 */
+                if (get(popupState).active) closePopup(true)
+
+                transactionEventData = data
+
+                break
+
+            default:
+                if (ledgerAwaitingConfirmation) {
+                    ledgerAwaitingConfirmation = false
+
+                    closePopup(true)
+                }
+
+                break
+        }
+    }
+
+    $: if (get(isLedgerProfile)) handleTransferState($transferState)
+
+    $: if (!$isTransferring && ledgerAwaitingConfirmation) {
+        closePopup(true)
+    }
+
+    const checkLedgerDeviceState = (
+        state: LedgerDeviceState,
+        notificationType: NotificationType = 'error',
+        ignoreNotDetected: boolean = false
+    ): void => {
+        /**
+         * NOTE: The NotDetected state is another state to not show notifications for
+         * because the Ledger app assumes this state upon entering / exiting apps for a
+         * miniscule amount of time (but still enough to read as "Not Detected"), resulting
+         * in lots of unnecessary errors. The logic here is a little hard to reason, but it
+         * accomodates for if we want to ignore the NotDetected state.
+         */
+        switch (state) {
+            case LedgerDeviceState.Connected:
+                if(transactionNotificationId) {
+                    removeDisplayNotification(transactionNotificationId)
+
+                    transactionNotificationId = null
+                }
+
+                break
+
+            case LedgerDeviceState.Locked:
+                if (transactionTimeoutId) clearTimeout(transactionTimeoutId)
+
+                transactionTimeoutId = setTimeout(
+                    () => checkLedgerDeviceState(get(ledgerDeviceState), notificationType, ignoreNotDetected),
+                    10000
+                )
+
+                break
+
+            default:
+                transactionNotificationId = displayNotificationForLedgerProfile(notificationType, false, false, ignoreNotDetected)
+
+                break
+        }
+    }
+
+    let _ledgerDeviceState
+    $: _ledgerDeviceState = $ledgerDeviceState
+    $: {
+        checkLedgerDeviceState($ledgerDeviceState, 'warning', true)
+    }
+
+    const clearErrors = () => {
+        amountError = ''
+        addressError = ''
+        toError = ''
+    }
 
     const handleSendTypeClick = (type) => {
         selectedSendType = type
-        amountError = ''
+        clearErrors()
     }
     const handleFromSelect = (item) => {
         from = item
         if (to === from) {
             to = $liveAccounts.length === 2 ? accountsDropdownItems[from.id === $liveAccounts[0].id ? 1 : 0] : undefined
         }
-        amountError = ''
+        clearErrors()
     }
     const handleToSelect = (item) => {
         to = item
         if (from === to) {
             from = undefined
         }
-        amountError = ''
+        clearErrors()
     }
     const handleSendClick = () => {
-        amountError = ''
-        addressError = ''
-        toError = ''
+        clearErrors()
 
         if (selectedSendType === SEND_TYPE.EXTERNAL) {
             // Validate address length
@@ -138,7 +312,7 @@
         } else if (unit === Unit.i && Number.parseInt(amount, 10).toString() !== amount) {
             amountError = locale('error.send.amountNoFloat')
         } else {
-            let amountAsFloat = parseCurrency(amount)
+            const amountAsFloat = parseCurrency(amount)
             if (Number.isNaN(amountAsFloat)) {
                 amountError = locale('error.send.amountInvalidFormat')
             } else {
@@ -169,55 +343,87 @@
                 }
             }
 
-            openPopup({
-                type: 'transaction',
-                props: {
-                    internal,
-                    amount: amountRaw,
-                    unit,
-                    to: internal ? to.alias : address,
-                    onConfirm: () => triggerSend(internal),
-                },
-            })
+            handleLedgerConnection(() =>
+                openPopup({
+                    type: 'transaction',
+                    props: {
+                        internal,
+                        amount: amountRaw,
+                        unit,
+                        to: internal ? to.alias : address,
+                        onConfirm: () => triggerSend(internal),
+                    },
+                })
+            )
         }
     }
 
-    const triggerSend = (internal) => {
+    const triggerSend = (isInternal) => {
         closePopup()
-        if (internal) {
-            // We pass the original selectedSendType in case we are masquerading as
-            // an internal transfer by a send to an address in one of our
-            // other accounts. When the transfer completes it resets
-            // the send params to where it was
-            internalTransfer(from.id, to.id, amountRaw, selectedSendType === SEND_TYPE.INTERNAL)
-        } else {
-            send(from.id, address, amountRaw)
+
+        const _send = (isInternal: boolean): void =>
+        /**
+         * NOTE: selectedSendType is passed (only to the internalTransfer method) in the
+         * case that we are masquerading as an internal transfer by sending to an address
+         * in another account. Send parameters are reset once the transfer completes.
+         */
+            isInternal
+                ? onInternalTransfer(from.id, to.id, amountRaw, selectedSendType === SEND_TYPE.INTERNAL)
+                : onSend(from.id, address, amountRaw)
+
+        handleLedgerConnection(() => _send(isInternal))
+    }
+
+    const handleLedgerConnection = (onSuccess: () => void) => {
+        /**
+         * NOTE: Because the Ledger must be connected to send a transaction,
+         * it is important to wrap the send function in the Ledger connection
+         * prompt function (only for non-software profiles).
+         */
+        if ($isSoftwareProfile) onSuccess()
+        else {
+            promptUserToConnectLedger(false, onSuccess, undefined)
         }
     }
 
     const handleBackClick = () => {
         clearSendParams()
+
         accountRoute.set(AccountRoutes.Init)
         if (!$account) {
             walletRoute.set(WalletRoutes.Init)
         }
     }
 
-    const format = (account: WalletAccount) => {
-        return {
-            ...account,
-            label: `${account.alias} • ${account.balance}`,
-            balance: account.rawIotaBalance,
-        }
-    }
+    const format = (account: WalletAccount) => ({
+        ...account,
+        label: `${account.alias} • ${account.balance}`,
+        balance: account.rawIotaBalance,
+    })
     const handleMaxClick = () => {
         amount = formatUnitPrecision(from.balance, unit, false)
     }
+
+    const updateFromSendParams = (s) => {
+        selectedSendType = s.isInternal && $liveAccounts.length > 1 ? SEND_TYPE.INTERNAL : SEND_TYPE.EXTERNAL
+        unit = s.amount === 0 ? Unit.Mi : Unit.i
+        amount = s.amount === 0 ? '' : formatUnitPrecision(s.amount, Unit.i, false)
+        address = s.address
+        if (from && accountsDropdownItems) {
+            to = $liveAccounts.length === 2 ? accountsDropdownItems[from.id === $liveAccounts[0].id ? 1 : 0] : to
+        }
+    }
+
+    const sendSubscription = sendParams.subscribe((s) => {
+        updateFromSendParams(s)
+    })
+
     onMount(() => {
         updateFromSendParams($sendParams)
-        to = $liveAccounts.length === 2 ? accountsDropdownItems[from.id === $liveAccounts[0].id ? 1 : 0] : to
     })
+
     onDestroy(() => {
+        if (transactionTimeoutId) clearTimeout(transactionTimeoutId)
         sendSubscription()
     })
 </script>
@@ -310,11 +516,10 @@
                         error={amountError}
                         bind:amount
                         bind:unit
-                        maxClick={handleMaxClick}
+                        onMaxClick={handleMaxClick}
                         {locale}
                         disabled={$isTransferring}
-                        autofocus={selectedSendType === SEND_TYPE.INTERNAL && $liveAccounts.length === 2}
-                    />
+                        autofocus={selectedSendType === SEND_TYPE.INTERNAL && $liveAccounts.length === 2} />
                 </div>
             </div>
         </div>
@@ -326,6 +531,10 @@
         </div>
     {/if}
     {#if $isTransferring}
-        <ProgressBar message={transferSteps[$transferState]?.label} percent={transferSteps[$transferState]?.percent} />
+        <ProgressBar
+            preloading={!$transferState}
+            secondary
+            message={transferSteps[$transferState?.type || TransferProgressEventType.SyncingAccount]?.label}
+            percent={transferSteps[$transferState?.type || TransferProgressEventType.SyncingAccount]?.percent} />
     {/if}
 </div>
