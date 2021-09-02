@@ -48,7 +48,10 @@
         "zxcvbn": "^4.4.2"
     },
     "jest": {
-        "moduleFileExtensions": ["ts", "js"],
+        "moduleFileExtensions": [
+            "ts",
+            "js"
+        ],
         "transform": {
             "^.+\\.ts$": "ts-jest"
         },
@@ -58,8 +61,12 @@
             }
         },
         "testEnvironment": "jsdom",
-        "testMatch": ["**/tests/**/*.+(test).+(ts|js)"],
-        "testPathIgnorePatterns": ["./node_modules/"],
+        "testMatch": [
+            "**/tests/**/*.+(test).+(ts|js)"
+        ],
+        "testPathIgnorePatterns": [
+            "./node_modules/"
+        ],
         "setupFilesAfterEnv": [
             "./lib/tests/setup.ts"
         ],

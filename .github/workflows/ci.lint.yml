@@ -1,0 +1,44 @@
+name: Format & Lint
+
+on:
+  pull_request:
+  push:
+    branches:
+      - 'develop'
+
+jobs:
+  rust:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install rustfmt with nightly toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: nightly
+          override: true
+          components: rustfmt
+
+      - name: Format
+        run: cargo +nightly fmt -- --check
+        working-directory: packages/backend
+
+  js:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 12.x
+
+      - name: Install Dependencies
+        run: yarn --ignore-scripts
+
+      - name: Format
+        run: yarn format-check
+
+      - name: Lint
+        run: yarn lint

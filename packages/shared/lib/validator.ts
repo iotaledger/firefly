@@ -261,9 +261,11 @@ class SyncedAccountListValidator extends Validator {
         }
 
         for (const account of payload) {
-            const validationResponse = new SyncedAccountValidator().isValid(Object.assign({}, response, {
-                payload: account as any
-            }))
+            const validationResponse = new SyncedAccountValidator().isValid(
+                Object.assign({}, response, {
+                    payload: account as any,
+                })
+            )
 
             if (!validationResponse.isValid) {
                 return validationResponse
@@ -548,11 +550,11 @@ class LedgerDeviceStatusValidator extends Validator {
 class MigrationDataValidator extends Validator {
     /**
      * Checks if migration data response is valid
-     * 
+     *
      * @method isValid
-     * 
+     *
      * @param {MessageResponse} response
-     * 
+     *
      * @returns {ValidationResponse}
      */
     isValid(response: MessageResponse): ValidationResponse {
@@ -561,11 +563,11 @@ class MigrationDataValidator extends Validator {
         if ('number' !== typeof payload.lastCheckedAddressIndex) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
-                error: 'Invalid type of address index'
+                error: 'Invalid type of address index',
             })
         }
 
-        return super.isValid(response);
+        return super.isValid(response)
     }
 }
 
@@ -872,7 +874,9 @@ export default class ValidatorService {
      *
      * @returns {ValidationResponse}
      */
-    performValidation(response: MessageResponse | MarketDataValidationResponse | ChrysalisVariablesValidationResponse): ValidationResponse {
+    performValidation(
+        response: MessageResponse | MarketDataValidationResponse | ChrysalisVariablesValidationResponse
+    ): ValidationResponse {
         return this.validators[response.type].isValid(response)
     }
 }

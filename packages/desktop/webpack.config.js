@@ -151,7 +151,7 @@ module.exports = [
     },
     {
         externals: {
-            argon2: 'commonjs argon2'
+            argon2: 'commonjs argon2',
         },
         target: 'electron-main',
         entry: {
@@ -170,7 +170,7 @@ module.exports = [
         devtool: prod ? false : 'cheap-module-source-map',
         optimization: {
             nodeEnv: hardcodeNodeEnv ? mode : false,
-            minimize: true
+            minimize: true,
         },
     },
 ]

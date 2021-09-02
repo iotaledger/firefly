@@ -5,7 +5,7 @@ import type { ClientOptions } from './client'
 import type { NodeAuth } from './node'
 import type { Duration } from './wallet'
 
-export enum MessageType { }
+export enum MessageType {}
 
 export interface Balance {
     total: number
@@ -98,21 +98,32 @@ export function getAccounts(bridge: Bridge, __ids: CommunicationIds): Promise<st
     })
 }
 
-export function syncAccounts(bridge: Bridge, __ids: CommunicationIds, addressIndex?: number, gapLimit?: number, accountDiscoveryThreshold?: number): Promise<string> {
+export function syncAccounts(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+    addressIndex?: number,
+    gapLimit?: number,
+    accountDiscoveryThreshold?: number
+): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
         cmd: 'SyncAccounts',
-        payload: { addressIndex, gapLimit, accountDiscoveryThreshold }
+        payload: { addressIndex, gapLimit, accountDiscoveryThreshold },
     })
 }
 
-export function startBackgroundSync(bridge: Bridge, __ids: CommunicationIds, pollingInterval: Duration, automaticOutputConsolidation: boolean): Promise<string> {
+export function startBackgroundSync(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+    pollingInterval: Duration,
+    automaticOutputConsolidation: boolean
+): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
         cmd: 'StartBackgroundSync',
-        payload: { pollingInterval, automaticOutputConsolidation }
+        payload: { pollingInterval, automaticOutputConsolidation },
     })
 }
 
@@ -179,9 +190,9 @@ function _callAccountMethod(
             accountId,
             method: {
                 name: AccountMethod[methodName],
-                data
-            }
-        }
+                data,
+            },
+        },
     })
 }
 
@@ -240,6 +251,16 @@ export function syncAccount(
     return _callAccountMethod(bridge, __ids, AccountMethod.SyncAccount, accountId, options || {})
 }
 
-export function getNodeInfo(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier, url?: string, auth?: NodeAuth): Promise<string> {
-    return _callAccountMethod(bridge, __ids, AccountMethod.GetNodeInfo, accountId, [url, auth?.jwt, [auth?.username, auth?.password]])
+export function getNodeInfo(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+    accountId: AccountIdentifier,
+    url?: string,
+    auth?: NodeAuth
+): Promise<string> {
+    return _callAccountMethod(bridge, __ids, AccountMethod.GetNodeInfo, accountId, [
+        url,
+        auth?.jwt,
+        [auth?.username, auth?.password],
+    ])
 }
