@@ -17,9 +17,8 @@
     "scripts": {
         "format": "prettier -w **/*.{ts,js,json,scss,css}",
         "format-check": "prettier -c **/*.{ts,js,json,scss,css}",
-        "lint": "yarn lint:rust && yarn lint:js",
-        "lint:js": "eslint . --cache",
-        "lint:rust": "cd packages/backend && cargo +nightly fmt",
+        "lint": "eslint . --cache",
+        "lint-debug": "eslint . --cache --debug",
         "postinstall": "patch-package",
         "pre-commit": "yarn format-check && yarn lint",
         "prepare": "husky install",
