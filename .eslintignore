@@ -14,6 +14,7 @@ packages/backend/bindings/node/native/
 packages/backend/bindings/node/test/
 
 packages/backend/src/
+packages/backend/target/
 
 # Desktop (packages/desktop)
 packages/desktop/out/
