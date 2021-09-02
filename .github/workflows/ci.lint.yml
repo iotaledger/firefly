@@ -12,13 +12,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-     - name: Install rustfmt with nightly toolchain
-       uses: actions-rs/toolchain@v1
-       with:
-           profile: minimal
-           toolchain: nightly
-           override: true
-           components: rustfmt
+      - name: Install rustfmt with nightly toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: nightly
+          override: true
+          components: rustfmt
 
       - name: Format
         run: cargo +nightly fmt -- --check
