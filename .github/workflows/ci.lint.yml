@@ -20,8 +20,9 @@ jobs:
            override: true
            components: rustfmt
 
-      - name: "Format"
-        run: yarn lint:rust
+      - name: Format
+        run: cargo +nightly fmt -- --check
+        working-directory: packages/backend
 
   js:
     runs-on: ubuntu-18.04
