@@ -516,7 +516,7 @@
                         error={amountError}
                         bind:amount
                         bind:unit
-                        maxClick={handleMaxClick}
+                        onMaxClick={handleMaxClick}
                         {locale}
                         disabled={$isTransferring}
                         autofocus={selectedSendType === SEND_TYPE.INTERNAL && $liveAccounts.length === 2} />
