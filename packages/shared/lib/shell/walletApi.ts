@@ -227,7 +227,7 @@ const handleError = (
             return 'error.node.noSynced'
         }
         if (error.includes('dns error')) {
-            return 'error.node.chrysalisNodeInactive'
+            return 'error.node.dns'
         }
 
         return getErrorMessage(type)

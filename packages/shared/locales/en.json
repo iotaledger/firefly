@@ -944,6 +944,7 @@
         },
         "node": {
             "invalid": "Please enter a valid URL.",
+            "dns": "Could not resolve DNS for node.",
             "https": "HTTPS is required. Set up a developer profile to use unsecured HTTP connections.",
             "duplicate": "This node has already been added.",
             "unsynced": "The node is not in sync.",
