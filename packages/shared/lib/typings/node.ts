@@ -7,7 +7,10 @@ export interface NodeAuth {
 export interface Node {
     url: string
     auth?: NodeAuth
-    disabled?: boolean
+    networkId: string
+    isDisabled?: boolean
+    isPrivate?: boolean
+    isPrimary?: boolean
 }
 
 export interface NodeInfo {

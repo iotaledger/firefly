@@ -38,7 +38,16 @@ export interface UserSettings {
     currency: AvailableExchangeRates
     automaticNodeSelection: boolean
     includeOfficialNodes: boolean
-    disabledNodes: string[] | undefined
+    customNodes:
+        | {
+              url: string
+              disabled: boolean
+              networkId: string
+              isPrimary: boolean
+          }[]
+        | undefined
+    networkId: string | undefined
+    customNetworkId: string | undefined
     /** Lock screen timeout in minutes */
     lockScreenTimeout: number
     showHiddenAccounts?: boolean

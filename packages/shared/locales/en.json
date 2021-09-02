@@ -365,7 +365,7 @@
             },
             "developerMode": {
                 "title": "Developer mode",
-                "description": "Connect to testnets and other developer features"
+                "description": "Configure Firefly for mainnet, devnet, or private Tangles, use HTTP for node connections, and other developer features"
             },
             "nodeSettings": {
                 "title": "Node settings",
@@ -533,8 +533,7 @@
             "optionalUsername": "Username (optional)",
             "optionalPassword": "Password (optional)",
             "setAsPrimaryNode": "Set as primary node",
-            "removeConfirmation": "Are you sure you want to remove this node?",
-            "httpWarning": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
+            "removeConfirmation": "Are you sure you want to remove this node?"
         },
         "errorLog": {
             "title": "Error Log",
@@ -987,6 +986,11 @@
         },
         "crypto": {
             "cannotDecodeBech32": "Unable to decode string as Bech32 address."
+        }
+    },
+    "warning": {
+        "node": {
+            "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
         }
     },
     "tooltips": {

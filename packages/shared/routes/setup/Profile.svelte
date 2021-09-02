@@ -1,6 +1,7 @@
 <script lang="typescript">
-    import { Animation, Button, Input, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, Button, ButtonCheckbox, Input, OnboardingLayout, Text } from 'shared/components'
     import { cleanupSignup } from 'shared/lib/app'
+    import { appSettings } from 'shared/lib/appSettings'
     import { Electron } from 'shared/lib/electron'
     import { getTrimmedLength, validateFilenameChars } from 'shared/lib/helpers'
     import { initialiseMigrationListeners } from 'shared/lib/migration'
@@ -27,6 +28,7 @@
 
     const dispatch = createEventDispatcher()
 
+    let isDeveloperProfile = false
     let profileName = get(newProfile)?.name ?? ''
 
     $: isProfileNameValid = profileName && profileName.trim()
@@ -72,7 +74,7 @@
                 busy = true
 
                 if (nameChanged) {
-                    profile = createProfile(trimmedProfileName, false)
+                    createProfile(trimmedProfileName, isDeveloperProfile)
                     profileInProgress.set(trimmedProfileName)
 
                     const userDataPath = await Electron.getUserDataPath()
@@ -110,7 +112,7 @@
             <Text type="p" secondary classes="mb-4">
                 {locale('views.profile.body1')}
             </Text>
-            <Text type="p" secondary classes="mb-10">
+            <Text type="p" secondary classes="mb-6">
                 {locale(`views.profile.body2.${hasNoProfiles() ? 'first' : 'nonFirst'}`)}
                 {locale('views.profile.addMore')}
             </Text>
@@ -118,10 +120,14 @@
                 {error}
                 bind:value={profileName}
                 placeholder={locale('views.profile.profileName')}
-                classes="w-full"
+                classes="w-full mb-10"
                 autofocus
                 disabled={busy}
                 submitHandler={handleContinueClick} />
+            {#if $appSettings.developerMode}
+                <Text type="p" secondary classes="mb-6">{locale('views.settings.developerMode.description')}.</Text>
+                <ButtonCheckbox icon="dev" bind:value={isDeveloperProfile}>{locale('general.developerProfile')}</ButtonCheckbox>
+            {/if}
         </div>
         <div slot="leftpane__action" class="flex flex-col">
             <Button classes="w-full" disabled={!isProfileNameValid || busy} onClick={handleContinueClick}>

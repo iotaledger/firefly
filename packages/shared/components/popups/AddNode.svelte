@@ -5,6 +5,7 @@
     import { isNodeUrlValid } from 'shared/lib/network'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
+    import { asyncGetNodeInfo, wallet } from 'shared/lib/wallet'
     import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
@@ -13,20 +14,31 @@
     export let nodes
     export let network
 
-    const { accounts } = get(wallet)
-
     export let onSuccess = (..._: any[]): void => {}
+
+    const { accounts } = $wallet
 
     let url = node?.url ?? ''
     let username = node?.auth?.username ?? ''
     let password = node?.auth?.password ?? ''
-    let isDisabled = node?.disabled ?? false
-    let isPrimary = node?.isPrimary ?? false
+    const isDisabled = node?.disabled ?? false
+    const isPrimary = node?.isPrimary ?? false
     let addressError = ''
+    let addressWarn = ''
     const authError = ''
     let isBusy = false
 
-    function addCustomNode() {
+    $: {
+        addressWarn = ''
+        url = stripSpaces(url)
+        if ($appSettings.developerMode && /^http[s]*:\/\//.exec(url)) {
+            addressWarn = locale('warning.node.http')
+        }
+    }
+
+    async function addCustomNode() {
+        let newNetworkId
+
         try {
             isBusy = true
             addressError = ''

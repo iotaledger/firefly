@@ -10,6 +10,7 @@ const DEFAULT_NODES: Node[] = ['https://chrysalis-nodes.iota.org', 'https://chry
         username: '',
         password: '',
     },
+    networkId: 'mainnet',
 }))
 
 /**
@@ -19,7 +20,7 @@ const DEFAULT_NODES: Node[] = ['https://chrysalis-nodes.iota.org', 'https://chry
  * @param {boolean} allowInSecure: allow the use of plain http
  * @returns {string | undefined}
  */
-export const isNodeUrlValid = (nodesList: ExtendedNode[], newUrl: string, allowInSecure: boolean): string | undefined => {
+export const isNodeUrlValid = (nodesList: Node[], newUrl: string, allowInSecure: boolean): string | undefined => {
     // Check if URL is valid
     if (!isValidUrl(newUrl)) {
         return 'error.node.invalid'
@@ -48,10 +49,18 @@ export const isNodeUrlValid = (nodesList: ExtendedNode[], newUrl: string, allowI
  * Get the list of official nodes
  * @returns The list of nodes
  */
-export const getOfficialNodes = (): Node[] => DEFAULT_NODES
+export const getOfficialNodes = (networkId: string = ''): Node[] => DEFAULT_NODES
 
 /**
  * Get the official network
  * @returns The official network
  */
 export const getOfficialNetwork = (): string => DEFAULT_NETWORK
+
+export const getOfficialDefaultNetwork = (): string => getOfficialNetwork()
+
+export type NodeUi = {
+    label: string
+    network: string
+}
+export const getOfficialNetworks = (): NodeUi[] => [{ label: 'Mainnet', network: 'mainnet' }]

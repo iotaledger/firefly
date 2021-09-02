@@ -197,7 +197,7 @@
 </style>
 
 <dropdown-input
-    class="relative {contentWidth ? '' : 'w-full' } {classes}"
+    class="relative {contentWidth ? '' : 'w-full'} {classes}"
     on:click={(e) => {
         e.stopPropagation()
         toggleDropDown()

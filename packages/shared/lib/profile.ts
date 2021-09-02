@@ -10,6 +10,7 @@ import { ProfileType } from './typings/profile'
 import { HistoryDataProps } from './typings/market'
 import { AvailableExchangeRates } from './typings/currency'
 import type { WalletAccount } from './typings/wallet'
+import type { Node } from './typings/node'
 
 export const activeProfileId = writable<string | null>(null)
 
@@ -163,7 +164,7 @@ export const removeProfile = (id: string): void => {
  *
  * @returns {void}
  */
-export const updateProfile = (path: string, value: ValuesOf<Profile> | ValuesOf<UserSettings>): void => {
+export const updateProfile = (path: string, value: ValuesOf<Profile> | ValuesOf<UserSettings> | Node[]): void => {
     const _update = (_profile) => {
         const pathList = path.split('.')
 

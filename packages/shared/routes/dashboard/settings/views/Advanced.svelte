@@ -4,18 +4,19 @@
     import { loggedIn } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { navigateToNewIndexMigration } from 'shared/lib/ledger'
-    import { getOfficialNodes } from 'shared/lib/network'
+    import { getOfficialDefaultNetwork, getOfficialNetworks, getOfficialNodes } from 'shared/lib/network'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, updateProfile } from 'shared/lib/profile'
-    import { buildAccountNetworkSettings, updateAccountNetworkSettings } from 'shared/lib/wallet'
+    import { buildAccountNetworkSettings, updateAccountNetworkSettings, wallet } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
+    import { Node } from 'shared/lib/typings/node'
 
     export let locale: Locale
 
     const deepLinkingChecked = $appSettings.deepLinking
+    const developerNode = $appSettings.developerMode
 
-    const isDeveloperProfile = get(activeProfile)?.isDeveloperProfile
     let showHiddenAccounts = get(activeProfile)?.settings.showHiddenAccounts
 
     let {
@@ -27,13 +28,15 @@
         localPow,
     } = buildAccountNetworkSettings()
 
+    const defaultOfficialNetworkId = getOfficialDefaultNetwork()
+    const officialNetworks = getOfficialNetworks()
+    const officialNetworkIds = officialNetworks.map((n) => n.network)
+
     let contextPosition = { x: 0, y: 0 }
     let nodeContextMenu = undefined
     let nodesContainer
-    let defaultOfficialNetworkId = getOfficialDefaultNetwork()
-    let officialNetworks = getOfficialNetworks()
-    let officialNetworkIds = officialNetworks.map((n) => n.network)
     let actualNetworkId
+    let primaryNodeUrl
 
     const { accounts } = $wallet
 
@@ -64,9 +67,10 @@
                     return
                 }
             }
+        }
+    }
 
     $: updateProfile('settings.showHiddenAccounts', showHiddenAccounts)
-    $: updateProfile('isDeveloperProfile', isDeveloperProfile)
 
     $: $appSettings.deepLinking = deepLinkingChecked
     $: {
@@ -74,7 +78,7 @@
         actualNetworkId = networkId === 'custom' ? customNetworkId : networkId
 
         const nonOfficialNodes = nodes.filter((n) => !officialNetworkIds.includes(n.networkId))
-        const primaryNodeOfficial = nodes.find((n) => n.networkId === actualNetworkId && n.isPrimary && !n.isCustom)
+        const primaryNodeOfficial = nodes.find((n) => n.networkId === actualNetworkId && n.isPrimary && !n.isPrivate)
 
         const officialNodes = getOfficialNodes(networkId)
 
@@ -84,13 +88,18 @@
             nodes = [...nonOfficialNodes]
         }
 
-        const allEnabled = nodes.filter((n) => !n.disabled)
-        const primaryNode = allEnabled.find((n) => n.url === primaryNodeUrl)
-        if (!primaryNode && allEnabled.length > 0) {
-            primaryNodeUrl = allEnabled[0].url
-        }
+        // const allEnabled = nodes.filter((n) => !n.disabled)
+        // const primaryNode = allEnabled.find((n) => n.url === primaryNodeUrl)
+        // if (!primaryNode && allEnabled.length > 0) {
+        //     primaryNodeUrl = allEnabled[0].url
+        // }
+
+        ensurePrimary(actualNetworkId, primaryNodeOfficial?.url)
     }
-    $: void updateAccountNetworkSettings(automaticNodeSelection, includeOfficialNodes, nodes, primaryNodeUrl, localPow)
+    $: updateAccountNetworkSettings(automaticNodeSelection, includeOfficialNodes, nodes, localPow, networkId, customNetworkId)
+    $: {
+        customNetworkId = customNetworkId.replace(/[^0-9a-z]/gi, '')
+    }
 
     function handleAddNodeClick() {
         openPopup({
@@ -98,7 +107,7 @@
             props: {
                 nodes,
                 network: actualNetworkId,
-                onSuccess: (node: ExtendedNode) => {
+                onSuccess: (node: Node) => {
                     // If there are no other primary nodes for this network then auto select this one
                     const networkNodes = nodes.filter((n) => n.networkId === node.networkId)
                     const primaryNode = networkNodes.some((n) => n.isPrimary)
@@ -125,7 +134,7 @@
                 node,
                 nodes,
                 network: actualNetworkId,
-                onSuccess: (updatedNode: ExtendedNode) => {
+                onSuccess: (updatedNode: Node) => {
                     const idx = nodes.findIndex((n) => n.url === node.url)
                     if (idx >= 0) {
                         // If there are no other primary nodes for this network then auto select this one
@@ -265,7 +274,7 @@
                             {#if nodeContextMenu.url !== primaryNodeUrl}
                                 <button
                                     on:click={() => {
-                                        nodeContextMenu.disabled = !nodeContextMenu.disabled
+                                        nodeContextMenu.isDisabled = !nodeContextMenu.disabled
                                         nodeContextMenu = undefined
                                         // The disabled state does not propogate to the item UI
                                         // so by reassiging the array we force a redraw
@@ -304,14 +313,14 @@
         </section>
         <HR classes="pb-5 mt-5 justify-center" />
     {/if}
-    <!-- {#if $loggedIn}
+    {#if $loggedIn}
         <section id="developerMode" class="w-3/4">
             <Text type="h4" classes="mb-3">{locale('views.settings.developerMode.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.developerMode.description')}</Text>
-            <Checkbox label={locale('actions.enableDeveloperMode')} bind:checked={isDeveloperProfile} />
+            <Checkbox label={locale('actions.enableDeveloperMode')} bind:checked={$appSettings.developerMode} />
         </section>
         <HR classes="pb-5 mt-5 justify-center" />
-    {/if} -->
+    {/if}
     <!-- TODO: re-enable deep links -->
     <!-- <section id="deepLinks" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.deepLinks.title')}</Text>
