@@ -12,14 +12,17 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: "Setup Rust (+ Toolchain)"
-        run: |
-          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -y | sh
-          rustup update nightly
-          rustup component add rustfmt --toolchain nightly-x86_64-unknown-linux-gnu
+      - name: Install rustfmt with nightly toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: nightly
+          override: true
+          components: rustfmt
 
-      - name: "Format"
-        run: yarn lint:rust
+      - name: Format
+        run: cargo +nightly fmt -- --check
+        working-directory: packages/backend
 
   js:
     runs-on: ubuntu-18.04
@@ -38,4 +41,4 @@ jobs:
         run: yarn format-check
 
       - name: Lint
-        run: yarn lint:js
+        run: yarn lint

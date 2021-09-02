@@ -18,15 +18,13 @@
     "scripts": {
         "format": "prettier -w **/*.{ts,js,json,scss,css}",
         "format-check": "prettier -c **/*.{ts,js,json,scss,css}",
-        "lint": "yarn lint:rust && yarn lint:js",
-        "lint:js": "eslint . --cache",
-        "lint:rust": "cd packages/backend && cargo +nightly fmt",
-        "lint-fix:js": "eslint . --cache --fix",
+        "lint": "eslint . --cache",
+        "lint-debug": "eslint . --cache --debug",
         "postinstall": "patch-package",
         "pre-commit": "yarn format-check && yarn lint",
         "prepare": "husky install",
-        "test": "yarn test:shared",
-        "test:shared": "cd packages/shared && yarn test"
+        "test": "yarn test-shared",
+        "test-shared": "cd packages/shared && yarn test"
     },
     "resolutions": {
         "lodash": ">=4.17.21"
