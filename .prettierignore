@@ -13,6 +13,7 @@ packages/backend/bindings/node/dist/
 packages/backend/bindings/node/native/
 
 packages/backend/src/
+packages/backend/target/
 
 # Desktop (packages/desktop)
 packages/desktop/public/assets/
