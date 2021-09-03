@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Idle, Sidebar } from 'shared/components'
-    import { loggedIn, logout } from 'shared/lib/app'
+    import { loggedIn, logout, sendParams } from 'shared/lib/app'
     import { Electron } from 'shared/lib/electron'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
@@ -20,6 +20,9 @@
     import { Settings, Wallet } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
+    import { appSettings } from 'shared/lib/appSettings'
+    import { deepLinkRequestActive } from 'shared/lib/deepLinking'
+    import { parseDeepLink } from 'shared/lib/utils'
 
     const { accountsLoaded, accounts } = $wallet
 
