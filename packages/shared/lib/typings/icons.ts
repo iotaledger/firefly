@@ -14,7 +14,7 @@ export enum SettingsIcons {
     deleteProfile = 'reset',
     deepLinks = 'link',
     developerMode = 'dev',
-    nodeSettings = 'settings',
+    network = 'settings',
     proofOfWork = 'work',
     errorLog = 'warning',
     diagnostics = 'tools',

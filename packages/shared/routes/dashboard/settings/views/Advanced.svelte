@@ -1,42 +1,71 @@
 <script lang="typescript">
-    import { Button, Checkbox, Dropdown, HR, Input, Radio, Text } from 'shared/components'
+    import { Button, Checkbox, HR, Radio, Text } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
     import { loggedIn } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { navigateToNewIndexMigration } from 'shared/lib/ledger'
-    import { getOfficialDefaultNetwork, getOfficialNetworks, getOfficialNodes } from 'shared/lib/network'
+    import {
+        getOfficialNodes,
+        updateAccountNetworkConfig,
+    } from 'shared/lib/network'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, updateProfile } from 'shared/lib/profile'
-    import { buildAccountNetworkSettings, updateAccountNetworkSettings, wallet } from 'shared/lib/wallet'
-    import { get } from 'svelte/store'
+    import { wallet } from 'shared/lib/wallet'
     import { Locale } from 'shared/lib/typings/i18n'
     import { Node } from 'shared/lib/typings/node'
+    import { NetworkConfig } from 'shared/lib/typings/network'
+    import { onDestroy } from 'svelte'
+    import { networkStatus } from 'shared/lib/networkStatus'
 
     export let locale: Locale
 
     const deepLinkingChecked = $appSettings.deepLinking
-    const developerNode = $appSettings.developerMode
 
-    let showHiddenAccounts = get(activeProfile)?.settings.showHiddenAccounts
+    let showHiddenAccounts = $activeProfile?.settings.showHiddenAccounts
 
-    let {
-        automaticNodeSelection,
-        includeOfficialNodes,
-        networkId,
-        customNetworkId,
-        nodes,
-        localPow,
-    } = buildAccountNetworkSettings()
+    const networkStatusInt = 2
+    let networkStatusText = 'networkOperational'
+    let networkMps = 0
+    let networkRate = 0
 
-    const defaultOfficialNetworkId = getOfficialDefaultNetwork()
-    const officialNetworks = getOfficialNetworks()
-    const officialNetworkIds = officialNetworks.map((n) => n.network)
+    const unsubscribe = networkStatus.subscribe((data) => {
+        networkStatusText = networkStatusInt === 0 ? 'networkDown' : networkStatusInt === 1 ? 'networkDegraded' : 'networkOperational'
+        networkMps = data.messagesPerSecond ?? 0
+        networkRate = data.referencedRate ?? 0
+    })
+
+    const NETWORK_HEALTH_COLORS = {
+        0: 'red',
+        1: 'yellow',
+        2: 'green',
+    }
+
+    const networkConfig: NetworkConfig = $activeProfile.settings.networkConfig
+    $: {
+        ensureOfficialNodeSelection()
+        ensureOnePrimaryNode()
+        updateProfile('settings.networkConfig', networkConfig)
+        updateAccountNetworkConfig(networkConfig)
+    }
+
+    let canRemoveAllNodes
+    $: {
+        if(networkConfig.nodes.length === 0) {
+            canRemoveAllNodes = false
+        } else {
+            if(networkConfig.includeOfficialNodes) {
+                canRemoveAllNodes = networkConfig.nodes.length !== getOfficialNodes(networkConfig.network.type).length
+            } else {
+                canRemoveAllNodes = true
+            }
+        }
+    }
+
+    $: updateProfile('settings.showHiddenAccounts', showHiddenAccounts)
 
     let contextPosition = { x: 0, y: 0 }
-    let nodeContextMenu = undefined
+    let nodeContextMenu: Node = undefined
     let nodesContainer
-    let actualNetworkId
-    let primaryNodeUrl
 
     const { accounts } = $wallet
 
@@ -49,77 +78,56 @@
         }
     }
 
-    const networkChoices = [
-        ...officialNetworks,
-        {
-            label: locale('views.settings.configureNodeList.customNetwork'),
-            network: 'custom',
-        },
-    ]
+    function ensureOfficialNodeSelection(): void {
+        const nonOfficialNodes = networkConfig.nodes.filter((n) => !getOfficialNodes(networkConfig.network.type).map((n1) => n1.url).includes(n.url))
+        if(networkConfig.includeOfficialNodes) {
+            networkConfig.nodes = [...getOfficialNodes(networkConfig.network.type, false), ...nonOfficialNodes]
+        } else {
+            networkConfig.nodes = nonOfficialNodes
+        }
+    }
 
-    const ensurePrimary = (networkId, hintUrl?) => {
-        const networkNodes = nodes.filter((n) => n.networkId === networkId)
-        if (networkNodes.length > 0) {
-            if (hintUrl) {
-                const found = networkNodes.find((n) => n.url === hintUrl)
-                if (found) {
-                    found.isPrimary = true
-                    return
-                }
+    function ensureOnePrimaryNode(): void {
+        const numPrimaryNodes = networkConfig.nodes.filter((n) => n.isPrimary).length
+        if(numPrimaryNodes !== 1) {
+            if(numPrimaryNodes > 1) {
+                const activeNode = networkConfig.nodes.find((n) => n.isPrimary)
+                networkConfig.nodes = networkConfig.nodes.map((n, idx) => ({ ...n, isPrimary: n.url === activeNode.url }))
+            } else {
+                const randIdx = Math.floor(Math.random() * networkConfig.nodes.length)
+                networkConfig.nodes = networkConfig.nodes.map((n, idx) => ({ ...n, isPrimary: idx === randIdx}))
             }
         }
     }
 
-    $: updateProfile('settings.showHiddenAccounts', showHiddenAccounts)
-
-    $: $appSettings.deepLinking = deepLinkingChecked
-    $: {
-        networkId = !$appSettings.developerMode ? defaultOfficialNetworkId : networkId
-        actualNetworkId = networkId === 'custom' ? customNetworkId : networkId
-
-        const nonOfficialNodes = nodes.filter((n) => !officialNetworkIds.includes(n.networkId))
-        const primaryNodeOfficial = nodes.find((n) => n.networkId === actualNetworkId && n.isPrimary && !n.isPrivate)
-
-        const officialNodes = getOfficialNodes(networkId)
-
-        if (includeOfficialNodes) {
-            nodes = [...officialNodes, ...nonOfficialNodes]
-        } else {
-            nodes = [...nonOfficialNodes]
-        }
-
-        // const allEnabled = nodes.filter((n) => !n.disabled)
-        // const primaryNode = allEnabled.find((n) => n.url === primaryNodeUrl)
-        // if (!primaryNode && allEnabled.length > 0) {
-        //     primaryNodeUrl = allEnabled[0].url
-        // }
-
-        ensurePrimary(actualNetworkId, primaryNodeOfficial?.url)
-    }
-    $: updateAccountNetworkSettings(automaticNodeSelection, includeOfficialNodes, nodes, localPow, networkId, customNetworkId)
-    $: {
-        customNetworkId = customNetworkId.replace(/[^0-9a-z]/gi, '')
+    function handleIncludeOfficialNodesClick() {
+        ensureOfficialNodeSelection()
+        ensureOnePrimaryNode()
     }
 
     function handleAddNodeClick() {
         openPopup({
             type: 'addNode',
             props: {
-                nodes,
-                network: actualNetworkId,
+                nodes: networkConfig.nodes,
+                network: networkConfig.network,
                 onSuccess: (node: Node) => {
-                    // If there are no other primary nodes for this network then auto select this one
-                    const networkNodes = nodes.filter((n) => n.networkId === node.networkId)
-                    const primaryNode = networkNodes.some((n) => n.isPrimary)
+                    if(node.isPrimary) {
+                        networkConfig.nodes = networkConfig.nodes.map((n) => ({ ...n, isPrimary: false }))
+                    }
+
+                    const primaryNode = node.isPrimary ? node : networkConfig.nodes.some((n) => n.isPrimary)
                     if (!primaryNode) {
                         node.isPrimary = true
                     }
 
-                    nodes = [...nodes, node]
+                    networkConfig.nodes = [...networkConfig.nodes.filter((n) => n.url !== node.url), node]
 
-                    // On adding a new item scroll to the bottom of the nodes container
-                    // so you can see the node you added
                     setTimeout(() => {
+                        /**
+                         * NOTE: This automatically scrolls the user to the bottom of the
+                         * nodes container to see the newly added node.
+                         */
                         nodesContainer.scrollTop = nodesContainer.scrollHeight
                     }, 100)
                 },
@@ -132,23 +140,28 @@
             type: 'addNode',
             props: {
                 node,
-                nodes,
-                network: actualNetworkId,
+                nodes: networkConfig.nodes,
+                network: networkConfig.network,
                 onSuccess: (updatedNode: Node) => {
-                    const idx = nodes.findIndex((n) => n.url === node.url)
+                    const idx = networkConfig.nodes.findIndex((n) => n.url === updatedNode.url)
                     if (idx >= 0) {
                         // If there are no other primary nodes for this network then auto select this one
-                        const networkNodes = nodes.filter((n) => n.networkId === node.networkId)
+                        const networkNodes = networkConfig.nodes
                         const primaryNode = networkNodes.some((n) => n.isPrimary)
                         if (!primaryNode) {
-                            node.isPrimary = true
+                            updatedNode.isPrimary = true
                         }
 
-                        nodes[idx] = updatedNode
+                        networkConfig.nodes[idx] = updatedNode
                     }
                 },
             },
         })
+    }
+
+    function handleSetPrimaryNode(node: Node) {
+        networkConfig.nodes = networkConfig.nodes.map((n) => ({ ...n, isPrimary: n.url === node.url }))
+        nodeContextMenu = undefined
     }
 
     function handleRemoveNodeClick(node) {
@@ -157,9 +170,27 @@
             props: {
                 node,
                 onSuccess: (node) => {
-                    nodes = nodes.filter((n) => n.url !== node.url)
+                    networkConfig.nodes = networkConfig.nodes.filter((n) => n.url !== node.url)
+
+                    ensureOnePrimaryNode()
                 },
             },
+        })
+    }
+
+    function handleRemoveAllNodesClick() {
+        openPopup({
+            type: 'removeNode',
+            props: {
+                removeAll: true,
+                onSuccess: () => {
+                    networkConfig.nodes = networkConfig.includeOfficialNodes
+                        ? getOfficialNodes(networkConfig.network.type)
+                        : []
+
+                    ensureOnePrimaryNode()
+                }
+            }
         })
     }
 
@@ -174,6 +205,10 @@
     function handleBalanceFinderClick() {
         openPopup({ type: 'balanceFinder', hideClose: true })
     }
+
+    onDestroy(() => {
+        unsubscribe()
+    })
 </script>
 
 <style type="text/scss">
@@ -184,53 +219,52 @@
 
 <div>
     {#if $loggedIn}
-        <section id="nodeSettings" class="w-3/4">
-            <Text type="h4" classes="mb-3">{locale('views.settings.nodeSettings.title')}</Text>
-            <Text type="p" secondary classes="mb-5">{locale('views.settings.nodeSettings.description')}</Text>
-            <Radio value={true} bind:group={automaticNodeSelection} label={locale('general.automaticNodeSelection')} />
-            <Radio value={false} bind:group={automaticNodeSelection} label={locale('general.manualNodeSelection')} />
+        <section id="network" class="w-3/4">
+            <Text type="h4" classes="mb-3">{locale('views.settings.network.title')}</Text>
+            {#if $activeProfile.isDeveloperProfile}
+                <div class="mb-2">
+                    <Text type="p" classes="inline" secondary>{locale('views.settings.network.connectedTo')}:</Text>
+                    <Text type="p" highlighted>{networkConfig.network.name}</Text>
+                </div>
+                <div>
+                    <Text type="p" classes="inline" secondary>{locale('views.dashboard.network.status')}:</Text>
+                    <div>
+                        <p class="text-13 text-{NETWORK_HEALTH_COLORS[networkStatusInt]}-500">
+                            {locale(`views.dashboard.network.${networkStatusText}`)}
+                        </p>
+                    </div>
+                </div>
+            {/if}
         </section>
         <HR classes="pb-5 mt-5 justify-center" />
-        {#if !automaticNodeSelection}
+        <section id="nodeConfiguration">
+            <Text type="h5" classes="mb-3">{locale('views.settings.network.nodeSelection.title')}</Text>
+            <Text type="p" secondary classes="mb-5">{locale('views.settings.network.nodeSelection.description')}</Text>
+            <Radio value={true} bind:group={networkConfig.automaticNodeSelection} label={locale('views.settings.network.nodeSelection.automatic')} subLabel='Connect to official nodes from the IOTA Foundation' />
+            <Radio value={false} bind:group={networkConfig.automaticNodeSelection} label={locale('views.settings.network.nodeSelection.manual')} />
+        </section>
+        <HR classes="pb-5 mt-5 justify-center" />
+        {#if !networkConfig.automaticNodeSelection}
             <section id="configureNodeList">
-                {#if $appSettings.developerMode}
-                    <Text type="h4" classes="mb-3">{locale('views.settings.configureNodeList.network')}</Text>
-                    <Dropdown
-                        onSelect={(v) => (networkId = v.network)}
-                        value={networkId}
-                        valueKey={'network'}
-                        items={networkChoices}
-                        classes="mb-3"
-                        disabled={hasTransactions} />
-                    {#if networkId === 'custom'}
-                        <Input
-                            bind:value={customNetworkId}
-                            placeholder={locale('views.settings.configureNodeList.customNetworkId')}
-                            classes="mb-3"
-                            maxlength="20"
-                            disabled={hasTransactions}
-                            label={locale('views.settings.configureNodeList.customNetworkId')} />
-                    {/if}
-                {/if}
-                <Text type="h4" classes="mb-3">{locale('views.settings.configureNodeList.title')}</Text>
+                <Text type="h5" classes="mb-3">{locale('views.settings.configureNodeList.title')}</Text>
                 <Text type="p" secondary classes="mb-5">{locale('views.settings.configureNodeList.description')}</Text>
                 <Checkbox
                     label={locale('views.settings.configureNodeList.includeOfficialNodeList')}
-                    bind:checked={includeOfficialNodes}
-                    disabled={!officialNetworkIds.includes(networkId)}
+                    bind:checked={networkConfig.includeOfficialNodes}
+                    onClick={handleIncludeOfficialNodesClick}
                     classes="mb-5" />
                 <div
                     class="nodes-container flex flex-col border border-solid border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 rounded-2xl overflow-auto"
                     bind:this={nodesContainer}>
-                    {#if nodes.filter((n) => n.networkId === actualNetworkId).length === 0}
+                    {#if networkConfig.nodes.length === 0}
                         <Text classes="p-3">{locale('views.settings.configureNodeList.noNodes')}</Text>
                     {/if}
-                    {#each nodes.filter((n) => n.networkId === actualNetworkId) as node}
+                    {#each networkConfig.nodes as node}
                         <div
                             class="flex flex-row items-center justify-between py-4 px-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20">
                             <div class="flex flex-row items-center overflow-hidden">
                                 <Text
-                                    classes={`overflow-hidden whitespace-nowrap overflow-ellipsis ${node.disabled ? 'opacity-50' : ''}`}>
+                                    classes={`overflow-hidden whitespace-nowrap overflow-ellipsis ${node.isDisabled ? 'opacity-50' : ''}`}>
                                     {node.url}
                                 </Text>
                                 <Text highlighted classes="mx-4">
@@ -251,17 +285,14 @@
                             use:clickOutside={{ includeScroll: true }}
                             on:clickOutside={() => (nodeContextMenu = undefined)}
                             style={`left: ${contextPosition.x - 10}px; top: ${contextPosition.y - 10}px`}>
-                            {#if !nodeContextMenu.disabled}
+                            {#if !nodeContextMenu.isDisabled}
                                 <button
-                                    on:click={() => {
-                                        primaryNodeUrl = nodeContextMenu.url
-                                        nodeContextMenu = undefined
-                                    }}
+                                    on:click={() => handleSetPrimaryNode(nodeContextMenu)}
                                     class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20">
                                     <Text smaller>{locale('views.settings.configureNodeList.setAsPrimary')}</Text>
                                 </button>
                             {/if}
-                            {#if nodeContextMenu.isCustom}
+                            {#if !getOfficialNodes(networkConfig.network.type).map((n) => n.url).includes(nodeContextMenu.url)}
                                 <button
                                     on:click={() => {
                                         handlePropertiesNodeClick(nodeContextMenu)
@@ -271,22 +302,22 @@
                                     <Text smaller>{locale('views.settings.configureNodeList.viewDetails')}</Text>
                                 </button>
                             {/if}
-                            {#if nodeContextMenu.url !== primaryNodeUrl}
+                            {#if nodeContextMenu.url !== networkConfig.nodes.find((n) => n.isPrimary).url}
                                 <button
                                     on:click={() => {
-                                        nodeContextMenu.isDisabled = !nodeContextMenu.disabled
+                                        nodeContextMenu.isDisabled = !nodeContextMenu.isDisabled
                                         nodeContextMenu = undefined
                                         // The disabled state does not propogate to the item UI
                                         // so by reassiging the array we force a redraw
-                                        nodes = nodes
+                                        // nodes = nodes
                                     }}
                                     class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20">
                                     <Text smaller>
-                                        {locale(nodeContextMenu.disabled ? 'views.settings.configureNodeList.includeNode' : 'views.settings.configureNodeList.excludeNode')}
+                                        {locale(nodeContextMenu.isDisabled ? 'views.settings.configureNodeList.includeNode' : 'views.settings.configureNodeList.excludeNode')}
                                     </Text>
                                 </button>
                             {/if}
-                            {#if nodeContextMenu.isCustom && (!officialNetworkIds.includes(nodeContextMenu.networkId) || !nodeContextMenu.isPrimary)}
+                            {#if !getOfficialNodes(networkConfig.network.type).map((n) => n.url).includes(nodeContextMenu.url)}
                                 <HR />
                                 <button
                                     on:click={() => {
@@ -300,24 +331,21 @@
                         </div>
                     {/if}
                 </div>
-                <Button medium inlineStyle="min-width: 156px;" classes="w-1/4 mt-4" onClick={() => handleAddNodeClick()}>
-                    {locale('actions.addNode')}
-                </Button>
+                <div class="flex flex-row justify-between space-x-3 w-full mt-4">
+                    <Button medium inlineStyle="min-width: 156px;" classes="w-1/2" onClick={handleAddNodeClick}>
+                        {locale('actions.addNode')}
+                    </Button>
+                    <Button disabled={!canRemoveAllNodes} warning medium inlineStyle="min-width: 156px;" classes="w-1/2" onClick={handleRemoveAllNodesClick}>
+                        {locale('actions.removeAllNodes')}
+                    </Button>
+                </div>
             </section>
             <HR classes="pb-5 mt-5 justify-center" />
         {/if}
         <section id="proofOfWork" class="w-3/4">
             <Text type="h4" classes="mb-3">{locale('views.settings.proofOfWork.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.proofOfWork.description')}</Text>
-            <Checkbox label={locale('actions.localProofOfWork')} bind:checked={localPow} />
-        </section>
-        <HR classes="pb-5 mt-5 justify-center" />
-    {/if}
-    {#if $loggedIn}
-        <section id="developerMode" class="w-3/4">
-            <Text type="h4" classes="mb-3">{locale('views.settings.developerMode.title')}</Text>
-            <Text type="p" secondary classes="mb-5">{locale('views.settings.developerMode.description')}</Text>
-            <Checkbox label={locale('actions.enableDeveloperMode')} bind:checked={$appSettings.developerMode} />
+            <Checkbox label={locale('actions.localProofOfWork')} bind:checked={networkConfig.localPow} />
         </section>
         <HR classes="pb-5 mt-5 justify-center" />
     {/if}

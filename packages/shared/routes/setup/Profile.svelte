@@ -7,8 +7,7 @@
     import { initialiseMigrationListeners } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import {
-        cleanupInProgressProfiles,
-        createProfile,
+        cleanupInProgressProfiles, createNewProfile,
         disposeNewProfile,
         hasNoProfiles,
         newProfile,
@@ -74,7 +73,8 @@
                 busy = true
 
                 if (nameChanged) {
-                    createProfile(trimmedProfileName, isDeveloperProfile)
+                    createNewProfile(trimmedProfileName, isDeveloperProfile)
+
                     profileInProgress.set(trimmedProfileName)
 
                     const userDataPath = await Electron.getUserDataPath()
@@ -120,14 +120,17 @@
                 {error}
                 bind:value={profileName}
                 placeholder={locale('views.profile.profileName')}
-                classes="w-full mb-10"
+                classes="w-full mb-6"
                 autofocus
                 disabled={busy}
                 submitHandler={handleContinueClick} />
-            {#if $appSettings.developerMode}
-                <Text type="p" secondary classes="mb-6">{locale('views.settings.developerMode.description')}.</Text>
-                <ButtonCheckbox icon="dev" bind:value={isDeveloperProfile}>{locale('general.developerProfile')}</ButtonCheckbox>
-            {/if}
+
+            <ButtonCheckbox icon="dev" bind:value={isDeveloperProfile}>
+                <div class="text-left">
+                    <Text type="p">{locale('views.profile.developerProfile')}</Text>
+                    <Text type="p" secondary>{locale('views.profile.developerProfileInfo')}</Text>
+                </div>
+            </ButtonCheckbox>
         </div>
         <div slot="leftpane__action" class="flex flex-col">
             <Button classes="w-full" disabled={!isProfileNameValid || busy} onClick={handleContinueClick}>

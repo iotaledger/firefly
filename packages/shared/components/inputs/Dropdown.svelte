@@ -27,7 +27,7 @@
 
     $: {
         const item = items.find(i => i[valueKey] === value)
-        valueLabel = item ? item.label : value
+        valueLabel = item ? item.label || value : value
     }
 
     let navWidth
@@ -244,7 +244,7 @@
                     on:click={() => onSelect(item)}
                     on:focus={() => focusItem(item[valueKey])}
                     tabindex={dropdown ? 0 : -1}
-                    class:active={item[valueKey] === value}><Text type="p" smaller>{item.label}</Text></button>
+                    class:active={item[valueKey] === value}><Text type="p" smaller>{item[valueKey]}</Text></button>
             {/each}
         </div>
     </nav>

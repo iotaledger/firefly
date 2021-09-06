@@ -248,3 +248,36 @@ export const downloadRecoveryKit = (): void => {
             console.error(err)
         })
 }
+
+/**
+ * Migrates an object to a newer version
+ *
+ * @param oldObj The object whose keys and data will be used if found and matching the newer version
+ * @param newObj The object whose keys and data will be used if not found on older version
+ *
+ * @returns The resulting object of migrating from an older version to a newer one (i.e. updated keys and / or data)
+ */
+export const migrateObjects = <T>(oldObj: T, newObj: T): T => {
+    /* eslint-disable prefer-const */
+    let obj: any = {}
+
+    const _helper = (curObj: any, oldObj: any, newObj: any): any => {
+        for (const k in newObj) {
+            /* eslint-disable no-prototype-builtins */
+            if (oldObj.hasOwnProperty(k)) {
+                if (typeof newObj[k] === 'object' && newObj[k] !== undefined && newObj[k] !== null) {
+                    // @ts-ignore
+                    curObj[k] = Array.isArray(newObj[k]) ? newObj[k] : _helper({}, oldObj[k], newObj[k])
+                } else {
+                    curObj[k] = oldObj[k]
+                }
+            } else {
+                curObj[k] = newObj[k]
+            }
+        }
+
+        return curObj
+    }
+
+    return _helper(obj, oldObj, newObj) as T
+}

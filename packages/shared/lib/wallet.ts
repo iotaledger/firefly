@@ -1,22 +1,9 @@
 import { mnemonic } from 'shared/lib/app'
-import { stripTrailingSlash } from 'shared/lib/helpers'
 import { localize } from 'shared/lib/i18n'
-import {
-    getOfficialDefaultNetwork,
-    getOfficialNetwork,
-    getOfficialNetworks,
-    getOfficialNodes,
-} from 'shared/lib/network'
+import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
 import { showAppNotification, showSystemNotification } from 'shared/lib/notifications'
 import { activeProfile, isLedgerProfile, isStrongholdLocked, updateProfile } from 'shared/lib/profile'
-import type {
-    Account,
-    Account as BaseAccount,
-    AccountToCreate,
-    Balance,
-    SyncAccountOptions,
-    SyncedAccount,
-} from 'shared/lib/typings/account'
+import type { Account, AccountToCreate, Balance, SyncAccountOptions, SyncedAccount } from 'shared/lib/typings/account'
 import type { Address } from 'shared/lib/typings/address'
 import type { Actor, GetMigrationAddressResponse } from 'shared/lib/typings/bridge'
 import type {
@@ -44,7 +31,7 @@ import { openPopup } from './popup'
 import type { ClientOptions } from './typings/client'
 import type { LedgerStatus } from './typings/ledger'
 import type { Message } from './typings/message'
-import type { Node, NodeAuth, NodeInfo } from './typings/node'
+import type { NodeAuth, NodeInfo } from './typings/node'
 import { SetupType } from './typings/routes'
 import type {
     AccountMessage,
@@ -64,6 +51,7 @@ import { CurrencyTypes } from './typings/currency'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
 import { HistoryDataProps, PriceData } from './typings/market'
 import { ProfileType } from './typings/profile'
+import { NetworkType } from './typings/network'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -564,14 +552,13 @@ export const asyncRestoreBackup = (importFilePath: string, password: string): Pr
 export const asyncCreateAccount = (): Promise<void> =>
     new Promise<void>((resolve, reject) => {
         const officialNodes = getOfficialNodes()
-        const officialNetwork = getOfficialNetwork()
+        // const officialNetwork = getOfficialNetwork()
         api.createAccount(
             {
                 signerType: { type: 'Stronghold' },
                 clientOptions: {
                     nodes: officialNodes,
                     node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
-                    network: officialNetwork,
                 },
                 alias: `${localize('general.account')} 1`,
             },
@@ -649,6 +636,7 @@ export const asyncGetNodeInfo = (accountId: string, url?: string, auth?: NodeAut
                 resolve(response.payload)
             },
             onError(err) {
+                console.error(err)
                 reject(err)
             },
         })
@@ -1551,242 +1539,6 @@ export const processMigratedTransactions = (accountId: string, messages: Message
             }
         })
     }
-}
-
-export const buildAccountNetworkSettings = (): {
-    networkId: string
-    customNetworkId: string
-    automaticNodeSelection: boolean
-    includeOfficialNodes: boolean
-    nodes: Node[]
-    localPow: boolean
-} => {
-    const activeProfileSettings = get(activeProfile)?.settings
-
-    const automaticNodeSelection = activeProfileSettings?.automaticNodeSelection ?? true
-    const includeOfficialNodes = activeProfileSettings?.includeOfficialNodes ?? true
-    const customNodes = activeProfileSettings?.customNodes ?? []
-    const networkId = activeProfileSettings?.networkId ?? getOfficialDefaultNetwork()
-    const customNetworkId = activeProfileSettings?.customNetworkId ?? ''
-    const actualNetworkId = networkId === 'custom' ? customNetworkId : networkId
-    const allNetworks = getOfficialNetworks().map((n) => n.network)
-
-    const { accounts } = get(wallet)
-    const actualAccounts: WalletAccount[] = get(accounts)
-
-    let clientOptionNodes = []
-    let officialNodes = []
-    let localPow = true
-    let allOfficialNodes = []
-
-    for (const net of allNetworks) {
-        const netNodes = getOfficialNodes(net)
-
-        allOfficialNodes = allOfficialNodes.concat(netNodes)
-
-        if (net === actualNetworkId) {
-            officialNodes = netNodes
-        }
-    }
-
-    if (actualAccounts && actualAccounts.length > 0) {
-        const clientOptions = actualAccounts[0].clientOptions
-        if (clientOptions) {
-            clientOptionNodes = clientOptions.nodes ?? []
-            localPow = clientOptions.localPow ?? true
-
-            if (clientOptions.node) {
-                const primaryNode = clientOptionNodes.find((n) => n.url === clientOptions.node.url)
-                if (primaryNode) {
-                    primaryNode.isPrimary = true
-                }
-            }
-        }
-    }
-
-    // If we are in automatic node selection make sure none of the offical nodes
-    // are disabled
-    if (automaticNodeSelection) {
-        officialNodes = officialNodes.map((o) => ({ ...o, disabled: false }))
-    }
-
-    // First populate the nodes with the official ones if needed
-    let nodes = []
-    if (includeOfficialNodes || automaticNodeSelection || clientOptionNodes.length === 0) {
-        nodes = [...officialNodes]
-    }
-
-    // Now go through the nodes from the client options and add
-    // any that were not in the official list, setting their custom flag as well
-    for (const clientOptionNode of clientOptionNodes) {
-        if (!allOfficialNodes.find((n) => n.url == stripTrailingSlash(clientOptionNode.url))) {
-            clientOptionNode.isCustom = true
-            nodes.push({
-                ...clientOptionNode,
-                url: stripTrailingSlash(clientOptionNode.url),
-            })
-        }
-    }
-
-    // Iterate through the custom nodes info from the profile
-    // and transfer any details to the corresponding node in the list
-    // We use these stored details like the disabled flag instead of from the client options
-    // as we may have been in automatic mode which disables all
-    // non official nodes
-    for (const customNode of customNodes) {
-        const foundNode = nodes.find((n) => n.url === stripTrailingSlash(customNode.url))
-        if (foundNode) {
-            foundNode.disabled = customNode.disabled
-            foundNode.networkId = customNode.networkId
-            foundNode.isPrimary = customNode.isPrimary
-
-            if (!allNetworks.includes(customNode.networkId)) {
-                allNetworks.push(customNode.networkId)
-            }
-        }
-    }
-
-    // If the primary node is not set or its not in the list
-    // or in the list and disabled find the
-    // first node from the list that is not disabled
-    for (const net of allNetworks) {
-        const networkNodes = nodes.filter((n) => n.networkId === net)
-        const hasPrimary = networkNodes.some((n) => n.isPrimary)
-        if (!hasPrimary) {
-            const allEnabled = networkNodes.filter((n) => !n.disabled)
-            if (allEnabled.length > 0) {
-                allEnabled[0].isPrimary = true
-            }
-        }
-    }
-
-    return {
-        networkId,
-        customNetworkId,
-        automaticNodeSelection,
-        includeOfficialNodes,
-        nodes,
-        localPow,
-    }
-}
-
-export const updateAccountNetworkSettings = (
-    automaticNodeSelection: boolean,
-    includeOfficialNodes: boolean,
-    nodes: Node[],
-    localPow: boolean,
-    networkId: string,
-    customNetworkId: string
-): void => {
-    updateProfile('settings.automaticNodeSelection', automaticNodeSelection)
-    updateProfile('settings.includeOfficialNodes', includeOfficialNodes)
-
-    const customNodes: Node[] = nodes
-        .filter((n) => n.isPrivate)
-        .map((n) => ({
-            url: n.url,
-            isDisabled: n.isDisabled,
-            networkId: n.networkId,
-            isPrimary: n.isPrimary,
-        }))
-    updateProfile('settings.customNodes', customNodes)
-
-    updateProfile('settings.networkId', networkId)
-    updateProfile('settings.customNetworkId', customNetworkId)
-
-    const actualNetworkId = automaticNodeSelection
-        ? getOfficialDefaultNetwork()
-        : networkId === 'custom'
-        ? customNetworkId
-        : networkId
-
-    let clientNodes = []
-    let officialNodes = getOfficialNodes(actualNetworkId)
-    const officialNetworks = getOfficialNetworks()
-    const officialNetworkIds = officialNetworks.map((n) => n.network)
-    const allNetworks = officialNetworkIds.slice()
-    const primaryNode = nodes.find((n) => n.networkId === actualNetworkId && n.isPrimary)
-
-    // Get the list of non official nodes
-    const nonOfficialNodes = nodes.filter((n) => !officialNetworkIds.includes(n.networkId))
-
-    // If we are in automatic node selection make sure none of the offical nodes
-    // are disabled
-    if (automaticNodeSelection) {
-        officialNodes = officialNodes.map((o) => ({ ...o, disabled: false }))
-    }
-
-    // If we are in automatic mode, or including the official nodes in manual mode
-    // or in manual mode and there are no non official nodes for this network
-    if (
-        automaticNodeSelection ||
-        includeOfficialNodes ||
-        nonOfficialNodes.filter((n) => n.networkId === actualNetworkId).length === 0
-    ) {
-        clientNodes = [...officialNodes]
-    }
-
-    // Now add back the non official nodes, if we are in automatic mode we should
-    // disable them, otherwise retain their current disabled state
-    if (nonOfficialNodes.length > 0) {
-        clientNodes = [
-            ...clientNodes,
-            ...nonOfficialNodes.map((o) => ({
-                ...o,
-                disabled: automaticNodeSelection ? true : o.isDisabled,
-            })),
-        ]
-    }
-
-    // Disable all nodes which don't match the current network id
-    for (const clientNode of clientNodes) {
-        if (clientNode.networkId !== actualNetworkId) {
-            clientNode.disabled = true
-        }
-        if (!allNetworks.includes(clientNode.networkId)) {
-            allNetworks.push(clientNode.networkId)
-        }
-        if (clientNode.url === primaryNode?.url) {
-            clientNode.isPrimary = true
-        }
-    }
-
-    // Get all the enabled nodes and make sure the primary url is enabled
-    const networkNodes = clientNodes.filter((n) => n.networkId === actualNetworkId)
-
-    // Get the primary node
-    let clientNode = networkNodes.find((n) => n.isPrimary)
-
-    // If not selected then auto select the first enabled node
-    if (!clientNode) {
-        const allEnabled = networkNodes.filter((n) => !n.disabled)
-        if (allEnabled.length > 0) {
-            clientNode = allEnabled[0]
-        }
-    }
-
-    const clientOptions = {
-        nodes: clientNodes,
-        node: clientNode,
-        localPow,
-    }
-
-    api.setClientOptions(clientOptions, {
-        onSuccess() {
-            const { accounts } = get(wallet)
-
-            accounts.update((_accounts) =>
-                _accounts.map((_account) =>
-                    Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>({} as WalletAccount, _account, {
-                        clientOptions,
-                    })
-                )
-            )
-        },
-        onError(err) {
-            console.error(err)
-        },
-    })
 }
 
 /**

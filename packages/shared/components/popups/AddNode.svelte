@@ -1,43 +1,46 @@
 <script lang="typescript">
-    import { Button, Input, Password, Text } from 'shared/components'
-    import { appSettings } from 'shared/lib/appSettings'
+    import { Button, Checkbox, Input, Password, Text } from 'shared/components'
     import { stripSpaces, stripTrailingSlash } from 'shared/lib/helpers'
     import { isNodeUrlValid } from 'shared/lib/network'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
     import { asyncGetNodeInfo, wallet } from 'shared/lib/wallet'
     import { Locale } from 'shared/lib/typings/i18n'
+    import { Node, NodeInfo } from '../../lib/typings/node'
+    import { Network } from 'shared/lib/typings/network'
+    import { activeProfile } from 'shared/lib/profile'
 
     export let locale: Locale
 
-    export let node
-    export let nodes
-    export let network
+    export let node: Node
+    export let nodes: Node[]
+    export let network: Network
 
     export let onSuccess = (..._: any[]): void => {}
 
     const { accounts } = $wallet
 
     let url = node?.url ?? ''
-    let username = node?.auth?.username ?? ''
-    let password = node?.auth?.password ?? ''
-    const isDisabled = node?.disabled ?? false
-    const isPrimary = node?.isPrimary ?? false
+    let auth = node?.auth ?? { password: '', username: '' }
+    const isDisabled = node?.isDisabled ?? false
+    let isPrimary = node?.isPrimary ?? false
     let addressError = ''
     let addressWarn = ''
     const authError = ''
     let isBusy = false
+    let isSuccess = true
 
     $: {
         addressWarn = ''
         url = stripSpaces(url)
-        if ($appSettings.developerMode && /^http[s]*:\/\//.exec(url)) {
+        if (!$activeProfile.isDeveloperProfile && /^http:\/\//.exec(url)) {
             addressWarn = locale('warning.node.http')
         }
     }
 
     async function addCustomNode() {
         let newNetworkId
+        let nodeInfo: NodeInfo
 
         try {
             isBusy = true
@@ -52,17 +55,23 @@
             if (node) {
                 allNodes = allNodes.filter((n) => n.url !== node.url)
             }
-            const validErr = isNodeUrlValid(allNodes, url, $appSettings.developerMode)
+            const validErr = isNodeUrlValid(allNodes, url, $activeProfile.isDeveloperProfile)
             if (validErr) {
                 addressError = locale(validErr)
             }
             if (!addressError) {
-                const info = await asyncGetNodeInfo($accounts[0].id, url)
-                newNetworkId = info?.nodeinfo.networkId
+                /**
+                 * CAUTION: If the JSON web token data field is empty but still there, it likely
+                 * will throw an error when trying to connect with the node.
+                 */
+                auth = auth.jwt ? auth : { username: auth.username, password: auth.password }
+
+                nodeInfo = await asyncGetNodeInfo($accounts[0].id, url, auth)
+                newNetworkId = nodeInfo?.nodeinfo.networkId
 
                 if (!newNetworkId) {
                     addressError = locale('error.node.networkNotReachable')
-                } else if (newNetworkId !== network) {
+                } else if (newNetworkId !== network.id) {
                     addressError = locale('error.node.networkMismatch', {
                         values: {
                             networkId: newNetworkId,
@@ -71,6 +80,8 @@
                 }
             }
         } catch (err) {
+            isSuccess = false
+
             showAppNotification({
                 type: 'error',
                 message: locale(err.error),
@@ -79,19 +90,16 @@
             isBusy = false
 
             if (!addressError) {
-                closePopup()
+                if (isSuccess && onSuccess) {
+                    closePopup()
 
-                if (onSuccess) {
+                    const network = $activeProfile.settings.networkConfig.network
                     onSuccess({
                         url,
-                        auth: {
-                            username,
-                            password,
-                        },
-                        networkId: newNetworkId,
-                        disabled: isDisabled,
-                        isPrimary: isPrimary,
-                        isCustom: true,
+                        auth,
+                        network,
+                        isDisabled,
+                        isPrimary,
                     })
                 }
             }
@@ -107,11 +115,13 @@
     {/if}
     <Input
         classes="mt-3"
-        bind:value={username}
+        bind:value={auth.username}
         placeholder={locale('popups.node.optionalUsername')}
         error={authError}
         disabled={isBusy} />
-    <Password classes="mt-3 mb-8" bind:value={password} placeholder={locale('popups.node.optionalPassword')} disabled={isBusy} />
+    <Password classes="mt-3" bind:value={auth.password} placeholder={locale('popups.node.optionalPassword')} disabled={isBusy} />
+    <Password classes="mt-3" bind:value={auth.jwt} placeholder={locale('popups.node.optionalJwt')} disabled={isBusy} />
+    <Checkbox label={locale('popups.node.setAsPrimaryNode')} bind:checked={isPrimary} classes="mt-4 mb-8" />
 </div>
 <div class="flex flex-row justify-between space-x-4 w-full px-8 ">
     <Button secondary classes="w-1/2" onClick={() => closePopup()} disabled={isBusy}>{locale('actions.cancel')}</Button>

@@ -1,16 +1,17 @@
+import type { Network } from './network'
+
 export interface NodeAuth {
-    jwt?: string
     username?: string
     password?: string
+    jwt?: string
 }
 
 export interface Node {
     url: string
     auth?: NodeAuth
-    networkId: string
-    isDisabled?: boolean
-    isPrivate?: boolean
+    network?: Network
     isPrimary?: boolean
+    isDisabled?: boolean
 }
 
 export interface NodeInfo {

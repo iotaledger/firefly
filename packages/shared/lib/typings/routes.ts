@@ -100,9 +100,8 @@ export enum SecuritySettings {
 }
 
 export enum AdvancedSettings {
-    NodeSettings = 'nodeSettings',
+    Network = 'network',
     ProofOfWork = 'proofOfWork',
-    DeveloperMode = 'developerMode',
     //DeepLinks = 'deepLinks',
     BalanceFinder = 'balanceFinder',
     HiddenAccounts = 'hiddenAccounts',

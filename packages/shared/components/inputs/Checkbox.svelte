@@ -5,6 +5,8 @@
     export let checked = false
     export let classes = ''
     export let disabled = false
+
+    export let onClick = (..._args: any[]): void => {}
 </script>
 
 <style type="text/scss">
@@ -40,6 +42,8 @@
     {disabled}
     on:click={() => {
         checked = !checked
+
+        onClick()
     }}>
     <Icon icon={checked ? 'checkbox' : 'checkbox-unchecked'} classes={`mr-3 ${checked ? 'active' : ''}`} />
     {#if label}

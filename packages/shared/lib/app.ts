@@ -1,4 +1,4 @@
-import { isSoftwareProfile } from 'shared/lib/profile'
+import { isSoftwareProfile, migrateProfile } from 'shared/lib/profile'
 import { get, writable } from 'svelte/store'
 import { localize } from './i18n'
 import { stopPollingLedgerStatus } from './ledger'
