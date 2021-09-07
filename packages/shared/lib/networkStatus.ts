@@ -1,8 +1,11 @@
 import { get, writable } from 'svelte/store'
 import { asyncGetNodeInfo, wallet } from 'shared/lib/wallet'
-import { getOfficialNodes } from 'shared/lib/network'
+import { cleanNodeAuth, getOfficialNodes } from 'shared/lib/network'
 import type { Node } from './typings/node'
 import type { NetworkStatus } from './typings/network'
+import type { WalletAccount } from './typings/wallet'
+import { client, network } from './typings'
+import { activeProfile } from './profile'
 
 /**
  * Default interval for polling the network status
@@ -42,15 +45,14 @@ accountsLoaded.subscribe((val) => {
 export async function fetchNetworkStatus(): Promise<void> {
     let updated = false
 
-    const accs = get(accounts)
+    const accs: WalletAccount[] = get(accounts)
+    // console.log('ACCOUNTS: ', accs)
 
     if (accs.length > 0) {
         const account0 = accs[0]
         const { clientOptions } = account0
-        const node: Node = {
-            ...(clientOptions.nodes[0] ?? getOfficialNodes()[0]),
-            auth: { username: '', password: '' },
-        }
+        const networkConfig = get(activeProfile).settings.networkConfig
+        const node = cleanNodeAuth(clientOptions?.node || getOfficialNodes(networkConfig.network.type)[0])
 
         try {
             const response = await asyncGetNodeInfo(account0.id, node.url, node.auth)

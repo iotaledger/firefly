@@ -51,7 +51,7 @@ import { CurrencyTypes } from './typings/currency'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
 import { HistoryDataProps, PriceData } from './typings/market'
 import { ProfileType } from './typings/profile'
-import { NetworkType } from './typings/network'
+import type { NetworkConfig } from './typings/network'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -551,15 +551,10 @@ export const asyncRestoreBackup = (importFilePath: string, password: string): Pr
 
 export const asyncCreateAccount = (): Promise<void> =>
     new Promise<void>((resolve, reject) => {
-        const officialNodes = getOfficialNodes()
-        // const officialNetwork = getOfficialNetwork()
         api.createAccount(
             {
                 signerType: { type: 'Stronghold' },
-                clientOptions: {
-                    nodes: officialNodes,
-                    node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
-                },
+                clientOptions: buildClientOptions(),
                 alias: `${localize('general.account')} 1`,
             },
             {
@@ -572,6 +567,17 @@ export const asyncCreateAccount = (): Promise<void> =>
             }
         )
     })
+
+const buildClientOptions = (): ClientOptions => {
+    const nc: NetworkConfig = get(activeProfile).settings.networkConfig
+
+    return {
+        node: nc.nodes.find((n) => n.isPrimary) || getOfficialNodes(nc.network.type)[0],
+        nodes: nc.nodes,
+        network: nc.network.id,
+        localPow: nc.localPow,
+    }
+}
 
 export const asyncRemoveStorage = (): Promise<void> =>
     new Promise<void>((resolve, reject) => {

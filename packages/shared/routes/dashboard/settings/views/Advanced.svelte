@@ -6,16 +6,18 @@
     import { navigateToNewIndexMigration } from 'shared/lib/ledger'
     import {
         getOfficialNodes,
-        updateAccountNetworkConfig,
+        isOfficialNetwork,
+        updateClientOptions,
     } from 'shared/lib/network'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, updateProfile } from 'shared/lib/profile'
-    import { wallet } from 'shared/lib/wallet'
+    import { asyncSyncAccounts, getSyncAccountOptions, wallet } from 'shared/lib/wallet'
     import { Locale } from 'shared/lib/typings/i18n'
     import { Node } from 'shared/lib/typings/node'
-    import { NetworkConfig } from 'shared/lib/typings/network'
+    import { NetworkConfig, NetworkType } from 'shared/lib/typings/network'
     import { onDestroy } from 'svelte'
     import { networkStatus } from 'shared/lib/networkStatus'
+    import { showAppNotification } from 'shared/lib/notifications'
 
     export let locale: Locale
 
@@ -40,12 +42,12 @@
         2: 'green',
     }
 
-    const networkConfig: NetworkConfig = $activeProfile.settings.networkConfig
+    let networkConfig: NetworkConfig
+    $: networkConfig = $activeProfile.settings.networkConfig
     $: {
-        ensureOfficialNodeSelection()
         ensureOnePrimaryNode()
         updateProfile('settings.networkConfig', networkConfig)
-        updateAccountNetworkConfig(networkConfig)
+        updateClientOptions(networkConfig)
     }
 
     let canRemoveAllNodes
@@ -59,6 +61,11 @@
                 canRemoveAllNodes = true
             }
         }
+    }
+
+    let canConfigureNodes
+    $: {
+        canConfigureNodes = isOfficialNetwork(networkConfig.network.type)
     }
 
     $: updateProfile('settings.showHiddenAccounts', showHiddenAccounts)
@@ -79,7 +86,8 @@
     }
 
     function ensureOfficialNodeSelection(): void {
-        const nonOfficialNodes = networkConfig.nodes.filter((n) => !getOfficialNodes(networkConfig.network.type).map((n1) => n1.url).includes(n.url))
+        const nonOfficialNodes =
+            networkConfig.nodes.filter((n) => !getOfficialNodes(networkConfig.network.type).map((n1) => n1.url).includes(n.url))
         if(networkConfig.includeOfficialNodes) {
             networkConfig.nodes = [...getOfficialNodes(networkConfig.network.type, false), ...nonOfficialNodes]
         } else {
@@ -111,7 +119,7 @@
             props: {
                 nodes: networkConfig.nodes,
                 network: networkConfig.network,
-                onSuccess: (node: Node) => {
+                onSuccess: (shouldSwitchNetworks: boolean, node: Node) => {
                     if(node.isPrimary) {
                         networkConfig.nodes = networkConfig.nodes.map((n) => ({ ...n, isPrimary: false }))
                     }
@@ -121,7 +129,22 @@
                         node.isPrimary = true
                     }
 
+                    networkConfig.network = shouldSwitchNetworks ? node.network : networkConfig.network
                     networkConfig.nodes = [...networkConfig.nodes.filter((n) => n.url !== node.url), node]
+                    if(networkConfig.nodes.length === 0) networkConfig.nodes = [node]
+
+                    updateClientOptions(networkConfig)
+                    updateProfile('settings.networkConfig', networkConfig)
+
+                    if(shouldSwitchNetworks) {
+                        const { gapLimit, accountDiscoveryThreshold } = getSyncAccountOptions(false)
+                        void asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold)
+
+                        showAppNotification({
+                            type: 'info',
+                            message: locale('views.settings.networkConfiguration.switchedNetworks', { values: { networkName: networkConfig.network.name }})
+                        })
+                    }
 
                     setTimeout(() => {
                         /**
@@ -219,11 +242,12 @@
 
 <div>
     {#if $loggedIn}
-        <section id="network" class="w-3/4">
-            <Text type="h4" classes="mb-3">{locale('views.settings.network.title')}</Text>
-            {#if $activeProfile.isDeveloperProfile}
-                <div class="mb-2">
-                    <Text type="p" classes="inline" secondary>{locale('views.settings.network.connectedTo')}:</Text>
+        <section id="networkConfiguration">
+            <Text type="h4" classes="mb-3">{locale('views.settings.networkConfiguration.title')}</Text>
+            <Text type="p" secondary classes="mb-3">{locale(`views.settings.networkConfiguration.description.${$activeProfile.isDeveloperProfile ? 'dev' : 'nonDev'}`)}</Text>
+            <div class="flex flex-row justify-between w-3/4">
+                <div>
+                    <Text type="p" classes="inline" secondary>{locale('views.settings.networkConfiguration.connectedTo')}:</Text>
                     <Text type="p" highlighted>{networkConfig.network.name}</Text>
                 </div>
                 <div>
@@ -234,22 +258,25 @@
                         </p>
                     </div>
                 </div>
-            {/if}
+            </div>
         </section>
         <HR classes="pb-5 mt-5 justify-center" />
-        <section id="nodeConfiguration">
-            <Text type="h5" classes="mb-3">{locale('views.settings.network.nodeSelection.title')}</Text>
-            <Text type="p" secondary classes="mb-5">{locale('views.settings.network.nodeSelection.description')}</Text>
-            <Radio value={true} bind:group={networkConfig.automaticNodeSelection} label={locale('views.settings.network.nodeSelection.automatic')} subLabel='Connect to official nodes from the IOTA Foundation' />
-            <Radio value={false} bind:group={networkConfig.automaticNodeSelection} label={locale('views.settings.network.nodeSelection.manual')} />
-        </section>
-        <HR classes="pb-5 mt-5 justify-center" />
+        {#if canConfigureNodes}
+            <section id="nodeConfiguration">
+                <Text type="h5" classes="mb-3">{locale('views.settings.networkConfiguration.nodeConfiguration.title')}</Text>
+                <Text type="p" secondary classes="mb-5">{locale('views.settings.networkConfiguration.nodeConfiguration.description')}</Text>
+                <Radio value={true} bind:group={networkConfig.automaticNodeSelection} label={locale('views.settings.networkConfiguration.nodeConfiguration.automatic')} subLabel='Connect to official nodes from the IOTA Foundation' />
+                <Radio value={false} bind:group={networkConfig.automaticNodeSelection} label={locale('views.settings.networkConfiguration.nodeConfiguration.manual')} />
+            </section>
+            <HR classes="pb-5 mt-5 justify-center" />
+        {/if}
         {#if !networkConfig.automaticNodeSelection}
             <section id="configureNodeList">
                 <Text type="h5" classes="mb-3">{locale('views.settings.configureNodeList.title')}</Text>
                 <Text type="p" secondary classes="mb-5">{locale('views.settings.configureNodeList.description')}</Text>
                 <Checkbox
                     label={locale('views.settings.configureNodeList.includeOfficialNodeList')}
+                    disabled={!canConfigureNodes}
                     bind:checked={networkConfig.includeOfficialNodes}
                     onClick={handleIncludeOfficialNodesClick}
                     classes="mb-5" />
@@ -257,7 +284,9 @@
                     class="nodes-container flex flex-col border border-solid border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 rounded-2xl overflow-auto"
                     bind:this={nodesContainer}>
                     {#if networkConfig.nodes.length === 0}
-                        <Text classes="p-3">{locale('views.settings.configureNodeList.noNodes')}</Text>
+                        <Text classes="p-3">
+                            {locale(`views.settings.configureNodeList.${isOfficialNetwork(networkConfig.network.type) ? 'noNodesAuto' : 'noNodes'}`)}
+                        </Text>
                     {/if}
                     {#each networkConfig.nodes as node}
                         <div
@@ -306,10 +335,9 @@
                                 <button
                                     on:click={() => {
                                         nodeContextMenu.isDisabled = !nodeContextMenu.isDisabled
+                                        networkConfig.nodes
+                                            = networkConfig.nodes.map((n) => ({ ...n, isDisabled: (n.url === nodeContextMenu.url && nodeContextMenu.isDisabled) }))
                                         nodeContextMenu = undefined
-                                        // The disabled state does not propogate to the item UI
-                                        // so by reassiging the array we force a redraw
-                                        // nodes = nodes
                                     }}
                                     class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20">
                                     <Text smaller>

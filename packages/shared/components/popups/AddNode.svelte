@@ -1,14 +1,14 @@
 <script lang="typescript">
     import { Button, Checkbox, Input, Password, Text } from 'shared/components'
     import { stripSpaces, stripTrailingSlash } from 'shared/lib/helpers'
-    import { isNodeUrlValid } from 'shared/lib/network'
+    import { getNetworkById, getOfficialNodes, isNodeUrlValid, updateClientOptions } from 'shared/lib/network'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
     import { asyncGetNodeInfo, wallet } from 'shared/lib/wallet'
     import { Locale } from 'shared/lib/typings/i18n'
     import { Node, NodeInfo } from '../../lib/typings/node'
     import { Network } from 'shared/lib/typings/network'
-    import { activeProfile } from 'shared/lib/profile'
+    import { activeProfile, updateProfile } from 'shared/lib/profile'
 
     export let locale: Locale
 
@@ -21,7 +21,7 @@
     const { accounts } = $wallet
 
     let url = node?.url ?? ''
-    let auth = node?.auth ?? { password: '', username: '' }
+    const auth = node?.auth ?? { password: '', username: '' }
     const isDisabled = node?.isDisabled ?? false
     let isPrimary = node?.isPrimary ?? false
     let addressError = ''
@@ -29,6 +29,7 @@
     const authError = ''
     let isBusy = false
     let isSuccess = true
+    let shouldSwitchNetworks = false
 
     $: {
         addressWarn = ''
@@ -64,19 +65,23 @@
                  * CAUTION: If the JSON web token data field is empty but still there, it likely
                  * will throw an error when trying to connect with the node.
                  */
-                auth = auth.jwt ? auth : { username: auth.username, password: auth.password }
+                const _auth = auth.jwt ? auth : { username: auth.username, password: auth.password }
 
-                nodeInfo = await asyncGetNodeInfo($accounts[0].id, url, auth)
+                nodeInfo = await asyncGetNodeInfo($accounts[0].id, url, _auth)
                 newNetworkId = nodeInfo?.nodeinfo.networkId
 
                 if (!newNetworkId) {
-                    addressError = locale('error.node.networkNotReachable')
+                    addressError = locale('error.network.notReachable')
                 } else if (newNetworkId !== network.id) {
-                    addressError = locale('error.node.networkMismatch', {
-                        values: {
-                            networkId: newNetworkId,
-                        },
-                    })
+                    if(nodes.length !== 0 || !$activeProfile.isDeveloperProfile) {
+                        addressError = locale('error.network.mismatch', {
+                            values: {
+                                networkId: newNetworkId,
+                            },
+                        })
+                    } else {
+                        shouldSwitchNetworks = true
+                    }
                 }
             }
         } catch (err) {
@@ -84,23 +89,25 @@
 
             showAppNotification({
                 type: 'error',
-                message: locale(err.error),
+                message: locale(err?.error),
             })
         } finally {
             isBusy = false
 
             if (!addressError) {
                 if (isSuccess && onSuccess) {
-                    closePopup()
+                    const network = shouldSwitchNetworks
+                        ? getNetworkById(nodeInfo.nodeinfo.networkId)
+                        : $activeProfile.settings.networkConfig.network
 
-                    const network = $activeProfile.settings.networkConfig.network
-                    onSuccess({
+                    onSuccess(shouldSwitchNetworks, {
                         url,
                         auth,
                         network,
                         isDisabled,
                         isPrimary,
                     })
+                    closePopup()
                 }
             }
         }
@@ -120,7 +127,7 @@
         error={authError}
         disabled={isBusy} />
     <Password classes="mt-3" bind:value={auth.password} placeholder={locale('popups.node.optionalPassword')} disabled={isBusy} />
-    <Password classes="mt-3" bind:value={auth.jwt} placeholder={locale('popups.node.optionalJwt')} disabled={isBusy} />
+    <Password classes="mt-3" bind:value={auth.jwt} label placeholder={locale('popups.node.optionalJwt')} disabled={isBusy} />
     <Checkbox label={locale('popups.node.setAsPrimaryNode')} bind:checked={isPrimary} classes="mt-4 mb-8" />
 </div>
 <div class="flex flex-row justify-between space-x-4 w-full px-8 ">

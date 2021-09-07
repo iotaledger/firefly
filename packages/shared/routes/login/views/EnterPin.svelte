@@ -3,10 +3,10 @@
     import { Electron } from 'shared/lib/electron'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { activeProfile, migrateProfile } from 'shared/lib/profile'
+    import { activeProfile } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'
     import { api, getStoragePath, initialise } from 'shared/lib/wallet'
-    import { createEventDispatcher, onDestroy, onMount } from 'svelte'
+    import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
 

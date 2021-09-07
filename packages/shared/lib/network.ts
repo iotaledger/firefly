@@ -4,8 +4,9 @@ import { Network, NetworkConfig, NetworkType } from './typings/network'
 import { api, wallet } from './wallet'
 import type { ClientOptions } from './typings/client'
 import { get } from 'svelte/store'
-import type { WalletAccount } from './typings/wallet'
-import { updateProfile } from './profile'
+import { isNewNotification, showAppNotification } from './notifications'
+import { localize } from './i18n'
+import { client } from './typings'
 
 export const getOfficialNetwork = (type: NetworkType = NetworkType.ChrysalisMainnet): Network => {
     switch (type) {
@@ -22,6 +23,41 @@ export const getOfficialNetwork = (type: NetworkType = NetworkType.ChrysalisMain
                 name: 'Chrysalis Mainnet',
                 type,
             }
+    }
+}
+
+export const getNetworkById = (id: string): Network => {
+    const type = getNetworkType(id)
+    switch (type) {
+        case NetworkType.ChrysalisMainnet:
+            return {
+                id,
+                type,
+                name: 'Chrysalis Mainnet',
+            }
+        case NetworkType.ChrysalisDevnet:
+            return {
+                id,
+                type,
+                name: 'Chrysalis Devnet',
+            }
+        default:
+            return {
+                id,
+                type: NetworkType.PrivateNet,
+                name: 'Private Net',
+            }
+    }
+}
+
+const getNetworkType = (id: string): NetworkType => {
+    switch (id) {
+        case 'chrysalis-mainnet':
+            return NetworkType.ChrysalisMainnet
+        case 'chrysalis-devnet':
+            return NetworkType.ChrysalisDevnet
+        default:
+            return NetworkType.PrivateNet
     }
 }
 
@@ -48,7 +84,7 @@ export const getOfficialNodes = (
 const getOfficialNodeUrls = (networkType: NetworkType = NetworkType.ChrysalisMainnet): string[] => {
     switch (networkType) {
         case NetworkType.ChrysalisDevnet:
-            return ['https://api.lb-0.h.testnet.chrysalis2.com', 'https://api.lb-1.h.testnet.chrysalis2.com']
+            return ['https://api.lb-0.h.chrysalis-devnet.iota.cafe', 'https://api.lb-1.h.chrysalis-devnet.iota.cafe']
         case NetworkType.ChrysalisMainnet:
         default:
             return ['https://chrysalis-nodes.iota.org', 'https://chrysalis-nodes.iota.cafe']
@@ -87,141 +123,50 @@ export const isNodeUrlValid = (nodesList: Node[], newUrl: string, allowInSecure:
     return undefined
 }
 
-// 0. Validate input as necessary and only proceed if valid
-// 1. Init independent variables (i.e. automaticNodeSelection, includeOfficialNodes)
-// 2. Construct dependent variables as needed
-// 3. Set API client options then update profile data if successful
-export const updateAccountNetworkConfig = (config: NetworkConfig): void => {
-    // updateProfile('settings.networkConfig.automaticNodeSelection', automaticNodeSelection)
-    // updateProfile('settings.networkConfig.includeOfficialNodes', includeOfficialNodes)
-    // updateProfile('settings.networkConfig.network', network)
-    //
-    // const actualNetworkId = automaticNodeSelection
-    //     ? getOfficialDefaultNetwork()
-    //     : networkId === 'custom'
-    //         ? customNetworkId
-    //         : networkId
-    //
-    // let clientNodes = []
-    // let officialNodes = getOfficialNodes(actualNetworkId)
-    // const officialNetworks = getOfficialNetworks()
-    // const officialNetworkIds = officialNetworks.map((n) => n.network)
-    // const allNetworks = officialNetworkIds.slice()
-    // const primaryNode = nodes.find((n) => n.networkId === actualNetworkId && n.isPrimary)
-    //
-    // // Get the list of non official nodes
-    // const nonOfficialNodes = nodes.filter((n) => !officialNetworkIds.includes(n.networkId))
-    //
-    // // If we are in automatic node selection make sure none of the offical nodes
-    // // are disabled
-    // if (automaticNodeSelection) {
-    //     officialNodes = officialNodes.map((o) => ({ ...o, disabled: false }))
-    // }
-    //
-    // // If we are in automatic mode, or including the official nodes in manual mode
-    // // or in manual mode and there are no non official nodes for this network
-    // if (
-    //     automaticNodeSelection ||
-    //     includeOfficialNodes ||
-    //     nonOfficialNodes.filter((n) => n.networkId === actualNetworkId).length === 0
-    // ) {
-    //     clientNodes = [...officialNodes]
-    // }
-    //
-    // // Now add back the non official nodes, if we are in automatic mode we should
-    // // disable them, otherwise retain their current disabled state
-    // if (nonOfficialNodes.length > 0) {
-    //     clientNodes = [
-    //         ...clientNodes,
-    //         ...nonOfficialNodes.map((o) => ({
-    //             ...o,
-    //             disabled: automaticNodeSelection ? true : o.isDisabled,
-    //         })),
-    //     ]
-    // }
-    //
-    // // Disable all nodes which don't match the current network id
-    // for (const clientNode of clientNodes) {
-    //     if (clientNode.networkId !== actualNetworkId) {
-    //         clientNode.disabled = true
-    //     }
-    //     if (!allNetworks.includes(clientNode.networkId)) {
-    //         allNetworks.push(clientNode.networkId)
-    //     }
-    //     if (clientNode.url === primaryNode?.url) {
-    //         clientNode.isPrimary = true
-    //     }
-    // }
-    //
-    // // Get all the enabled nodes and make sure the primary url is enabled
-    // const networkNodes = clientNodes.filter((n) => n.networkId === actualNetworkId)
-    //
-    // // Get the primary node
-    // let clientNode = networkNodes.find((n) => n.isPrimary)
-    //
-    // // If not selected then auto select the first enabled node
-    // if (!clientNode) {
-    //     const allEnabled = networkNodes.filter((n) => !n.disabled)
-    //     if (allEnabled.length > 0) {
-    //         clientNode = allEnabled[0]
-    //     }
-    // }
-    //
-    // const clientOptions = {
-    //     network,
-    //     nodes: clientNodes,
-    //     node: clientNode,
-    //     localPow,
-    // }
-    //
-
-    // const clientNodes = config.networks.find((n) => n.isActive).nodes
-    //
-    // const clientOptions: ClientOptions = {
-    //     network: {},
-    //     node: '',
-    //     nodes: [],
-    //     localPow: true,
-    // }
-    // api.setClientOptions(clientOptions, {
-    //     onSuccess() {
-    //         const { accounts } = get(wallet)
-    //
-    //         accounts.update((_accounts) =>
-    //             _accounts.map((_account) =>
-    //                 Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>({} as WalletAccount, _account, {
-    //                     clientOptions,
-    //                 })
-    //             )
-    //         )
-    //     },
-    //     onError(err) {
-    //         console.error(err)
-    //     },
-    // })
-    for (const k in config) {
-        updateProfile(`settings.networkConfig.${k}`, config[k])
-    }
+export const updateClientOptions = (config: NetworkConfig): void => {
+    const nodeCandidates =
+        config.nodes.length === 0 || config.automaticNodeSelection
+            ? getOfficialNodes(config.network.type, true)
+            : config.nodes.filter((n) => !n.isDisabled)
 
     const clientOptions: ClientOptions = {
-        node: config.nodes.find((n) => n.isPrimary),
-        nodes: config.nodes,
-        networkId: config.network.id,
+        node: nodeCandidates.find((n) => n.isPrimary),
+        nodes: nodeCandidates,
+        network: config.network.id,
         localPow: config.localPow,
     }
+
+    const hasMismatchedNetwork = clientOptions.node.network.id !== clientOptions.network
+    if (hasMismatchedNetwork && isNewNotification('warning')) {
+        showAppNotification({
+            type: 'warning',
+            message: localize('error.network.badNodes'),
+        })
+
+        return
+    }
+
     api.setClientOptions(clientOptions, {
         onSuccess() {
-            const { accounts } = get(wallet)
-            accounts.update((_accounts) =>
-                _accounts.map((_account) =>
-                    Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>({} as WalletAccount, _account, {
-                        clientOptions,
-                    })
-                )
-            )
+            get(wallet).accounts.update((_accounts) => _accounts.map((a) => ({ ...a, clientOptions })))
         },
         onError(err) {
             console.error(err)
         },
     })
 }
+
+export const isOfficialNetwork = (type: NetworkType): boolean => {
+    switch (type) {
+        case NetworkType.ChrysalisMainnet:
+        case NetworkType.ChrysalisDevnet:
+            return true
+        default:
+            return false
+    }
+}
+
+export const cleanNodeAuth = (node: Node): Node => ({
+    ...node,
+    auth: node.auth.jwt ? node.auth : { username: node.auth.username || '', password: node.auth.password || '' },
+})

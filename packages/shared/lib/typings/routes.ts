@@ -100,7 +100,7 @@ export enum SecuritySettings {
 }
 
 export enum AdvancedSettings {
-    Network = 'network',
+    NetworkConfiguration = 'networkConfiguration',
     ProofOfWork = 'proofOfWork',
     //DeepLinks = 'deepLinks',
     BalanceFinder = 'balanceFinder',

@@ -207,6 +207,13 @@ export const migrateProfile = (): void => {
     const oldProfile: Profile = get(activeProfile)
     const newProfile: Profile = buildProfile(oldProfile.name, oldProfile.isDeveloperProfile)
 
+    let shouldMigrate = false
+    for (const k in newProfile) {
+        /* eslint-disable no-prototype-builtins */
+        if (!oldProfile.hasOwnProperty(k)) shouldMigrate = true
+    }
+    if (!shouldMigrate) return
+
     updateProfile('', migrateObjects(oldProfile, newProfile))
 }
 

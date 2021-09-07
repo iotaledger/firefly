@@ -365,10 +365,15 @@
                 "title": "Deep links",
                 "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
             },
-            "network": {
+            "networkConfiguration": {
                 "title": "Network configuration",
+                "description": {
+                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
+                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                },
+                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
                 "connectedTo": "Connected to",
-                "nodeSelection": {
+                "nodeConfiguration": {
                     "title": "Node selection",
                     "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
                     "automatic": "Automatic",
@@ -376,8 +381,8 @@
                 }
             },
             "configureNodeList": {
-                "title": "Select a node",
-                "description": "Manage the list of IOTA network nodes you connect to",
+                "title": "Node configuration",
+                "description": "Manage the list of nodes you connect to",
                 "primaryNode": "Primary node",
                 "excludeNode": "Exclude node",
                 "includeNode": "Include node",
@@ -385,7 +390,8 @@
                 "setAsPrimary": "Set as primary",
                 "removeNode": "Remove node",
                 "includeOfficialNodeList": "Include official node list",
-                "noNodes": "There are no nodes, automatic selection will be used instead"
+                "noNodes": "There are no nodes, unable to connect to the network",
+                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "Proof of work",
@@ -472,7 +478,8 @@
                 "networkDown": "Network Disconnected",
                 "status": "Status",
                 "messagesPerSecond": "Messages per second",
-                "referencedRate": "Referenced rate"
+                "referencedRate": "Referenced rate",
+                "id": "Network ID"
             },
             "profileModal": {
                 "allSettings": "All settings",
@@ -537,7 +544,7 @@
             "nodeAddress": "Node address",
             "optionalUsername": "Username (optional)",
             "optionalPassword": "Password (optional)",
-            "optionalJwt": "JWT (optional)",
+            "optionalJwt": "JSON web token (optional)",
             "setAsPrimaryNode": "Set as primary node",
             "removeConfirmation": "Are you sure you want to remove this node?",
             "removeAllConfirmation": "Are you sure you want to remove all nodes?"
@@ -808,6 +815,7 @@
         "transactions": "Transactions",
         "security": "Security",
         "accountAddress": "Wallet Address",
+        "network": "Network",
         "nodes": "Nodes",
         "wallet": "Wallet",
         "help": "Help",
@@ -958,9 +966,12 @@
             "https": "HTTPS is required. Set up a developer profile to use unsecured HTTP connections.",
             "duplicate": "This node has already been added.",
             "unsynced": "The node is not in sync.",
-            "noSynced": "No synced nodes are available.",
-            "networkMismatch": "The network id for your node is \"{networkId}\" which does not match the current network.",
-            "networkNotReachable": "The network id for your node could not be retrieved, unable to add node."
+            "noSynced": "No synced nodes are available."
+        },
+        "network": {
+            "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
+            "notReachable": "The network ID for this node could not be retrieved, unable to add node.",
+            "badNodes": "Unable to connect to the network with current node configuration."
         },
         "global": {
             "generic": "Something went wrong."

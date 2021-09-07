@@ -6,6 +6,7 @@
     export let label = ''
     export let classes = ''
     export let tabindex
+    export let disabled = false
 </script>
 
 <style type="text/scss">
@@ -25,15 +26,19 @@
 
         &:hover,
         &:focus-within {
-            div {
+            div:not(input:disabled) {
                 @apply border-blue-500;
             }
+        }
+
+        &:disabled {
+            @apply pointer-events-none
         }
     }
 </style>
 
-<label class={`flex items-center ${label ? 'mb-4' : ''} text-12 leading-160 cursor-pointer text-gray-800 dark:text-white ${classes}`}>
-    <input class="absolute left-0 opacity-0 h-4 w-4 cursor-pointer" type="radio" bind:group {value} {tabindex} />
+<label class={`flex items-center ${label ? 'mb-4' : ''} text-12 leading-160 cursor-pointer text-gray-${disabled ? 400 : 800} dark:text-white ${classes}`}>
+    <input class="absolute left-0 opacity-0 h-4 w-4 {disabled ? '' : 'cursor-pointer'}" type="radio" bind:group {value} {tabindex} {disabled}/>
     <div class={`mr-3 svg-container rounded-full border border-solid border-gray-300 ${value === group ? 'active' : ''}`}>
         <Icon icon={value === group ? 'radio' : 'radio-unchecked'} />
     </div>
