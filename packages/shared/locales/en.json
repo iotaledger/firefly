@@ -372,6 +372,7 @@
                     "nonDev": "Your network settings will update automatically according to the current node configuration"
                 },
                 "switchedNetworks": "Successfully switched network to \"{networkName}\".",
+                "resetWallet": "Your wallet state has been reset.",
                 "connectedTo": "Connected to",
                 "nodeConfiguration": {
                     "title": "Node selection",

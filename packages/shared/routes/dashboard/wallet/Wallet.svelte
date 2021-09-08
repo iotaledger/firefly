@@ -44,7 +44,7 @@
         wallet,
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
-    import { derived, Readable, Writable } from 'svelte/store'
+    import { derived, get, Readable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
     import { Locale } from 'shared/lib/typings/i18n'
     import {

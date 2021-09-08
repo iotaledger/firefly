@@ -3,6 +3,7 @@ import type { Node } from './node'
 export enum NetworkType {
     ChrysalisMainnet = 'chrysalis-mainnet',
     ChrysalisDevnet = 'chrysalis-devnet',
+    ChrysalisTestnet = 'testnet7',
     PrivateNet = 'private-net',
 }
 
@@ -10,6 +11,7 @@ export interface Network {
     id: string
     name: string
     type: NetworkType
+    bech32Hrp: string
 }
 
 export interface NetworkConfig {

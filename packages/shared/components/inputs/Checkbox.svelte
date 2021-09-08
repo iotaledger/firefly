@@ -6,7 +6,7 @@
     export let classes = ''
     export let disabled = false
 
-    export let onClick = (..._args: any[]): void => {}
+    export let onClick = (..._: any[]): void => {}
 </script>
 
 <style type="text/scss">

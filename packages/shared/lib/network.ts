@@ -1,12 +1,10 @@
 import type { Node } from './typings/node'
 import { isValidHttpsUrl, isValidUrl } from './utils'
 import { Network, NetworkConfig, NetworkType } from './typings/network'
-import { api, wallet } from './wallet'
+import { api, asyncSyncAccounts, getSyncAccountOptions, resetWallet } from './wallet'
 import type { ClientOptions } from './typings/client'
-import { get } from 'svelte/store'
 import { isNewNotification, showAppNotification } from './notifications'
 import { localize } from './i18n'
-import { client } from './typings'
 
 export const getOfficialNetwork = (type: NetworkType = NetworkType.ChrysalisMainnet): Network => {
     switch (type) {
@@ -15,6 +13,14 @@ export const getOfficialNetwork = (type: NetworkType = NetworkType.ChrysalisMain
                 id: 'chrysalis-devnet',
                 name: 'Chrysalis Devnet',
                 type,
+                bech32Hrp: 'atoi',
+            }
+        case NetworkType.ChrysalisTestnet:
+            return {
+                id: 'testnet7',
+                type,
+                name: 'Chrysalis Testnet',
+                bech32Hrp: 'atoi',
             }
         case NetworkType.ChrysalisMainnet:
         default:
@@ -22,6 +28,7 @@ export const getOfficialNetwork = (type: NetworkType = NetworkType.ChrysalisMain
                 id: 'chrysalis-mainnet',
                 name: 'Chrysalis Mainnet',
                 type,
+                bech32Hrp: 'iota',
             }
     }
 }
@@ -34,18 +41,28 @@ export const getNetworkById = (id: string): Network => {
                 id,
                 type,
                 name: 'Chrysalis Mainnet',
+                bech32Hrp: 'iota',
             }
         case NetworkType.ChrysalisDevnet:
             return {
                 id,
                 type,
                 name: 'Chrysalis Devnet',
+                bech32Hrp: 'atoi',
+            }
+        case NetworkType.ChrysalisTestnet:
+            return {
+                id,
+                type,
+                name: 'Chrysalis Testnet',
+                bech32Hrp: 'atoi',
             }
         default:
             return {
                 id,
                 type: NetworkType.PrivateNet,
                 name: 'Private Net',
+                bech32Hrp: 'atoi', // TODO: Get this data from wallet.rs instead as it may not be "atoi"
             }
     }
 }
@@ -56,6 +73,8 @@ const getNetworkType = (id: string): NetworkType => {
             return NetworkType.ChrysalisMainnet
         case 'chrysalis-devnet':
             return NetworkType.ChrysalisDevnet
+        case 'testnet7':
+            return NetworkType.ChrysalisTestnet
         default:
             return NetworkType.PrivateNet
     }
@@ -85,6 +104,8 @@ const getOfficialNodeUrls = (networkType: NetworkType = NetworkType.ChrysalisMai
     switch (networkType) {
         case NetworkType.ChrysalisDevnet:
             return ['https://api.lb-0.h.chrysalis-devnet.iota.cafe', 'https://api.lb-1.h.chrysalis-devnet.iota.cafe']
+        case NetworkType.ChrysalisTestnet:
+            return ['https://api.lb-0.testnet.chrysalis2.com']
         case NetworkType.ChrysalisMainnet:
         default:
             return ['https://chrysalis-nodes.iota.org', 'https://chrysalis-nodes.iota.cafe']
@@ -123,7 +144,7 @@ export const isNodeUrlValid = (nodesList: Node[], newUrl: string, allowInSecure:
     return undefined
 }
 
-export const updateClientOptions = (config: NetworkConfig): void => {
+export const updateClientOptions = (config: NetworkConfig, isNetworkSwitch: boolean = false): void => {
     const nodeCandidates =
         config.nodes.length === 0 || config.automaticNodeSelection
             ? getOfficialNodes(config.network.type, true)
@@ -148,7 +169,12 @@ export const updateClientOptions = (config: NetworkConfig): void => {
 
     api.setClientOptions(clientOptions, {
         onSuccess() {
-            get(wallet).accounts.update((_accounts) => _accounts.map((a) => ({ ...a, clientOptions })))
+            if (isNetworkSwitch) {
+                resetWallet()
+
+                const { gapLimit, accountDiscoveryThreshold } = getSyncAccountOptions(false)
+                void asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold)
+            }
         },
         onError(err) {
             console.error(err)
@@ -160,6 +186,7 @@ export const isOfficialNetwork = (type: NetworkType): boolean => {
     switch (type) {
         case NetworkType.ChrysalisMainnet:
         case NetworkType.ChrysalisDevnet:
+        case NetworkType.ChrysalisTestnet:
             return true
         default:
             return false

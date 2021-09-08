@@ -18,7 +18,7 @@ import type {
     TransferProgressEventPayload,
     TransferState,
 } from 'shared/lib/typings/events'
-import type { Payload, Transaction } from 'shared/lib/typings/message'
+import type { Essence, Output, Payload, Transaction } from 'shared/lib/typings/message'
 import type {
     AddressInput,
     MigrationBundle,
@@ -51,7 +51,7 @@ import { CurrencyTypes } from './typings/currency'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
 import { HistoryDataProps, PriceData } from './typings/market'
 import { ProfileType } from './typings/profile'
-import type { NetworkConfig } from './typings/network'
+import type { Network, NetworkConfig } from './typings/network'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -1087,6 +1087,7 @@ export const getAccountMessages = (account: WalletAccount): AccountMessage[] => 
         [key: string]: AccountMessage
     } = {}
 
+    account.messages = getMessagesForNetwork(account.messages, get(activeProfile)?.settings.networkConfig.network)
     account.messages.forEach((message) => {
         let extraId = ''
         if (message.payload?.type === 'Transaction') {
@@ -1221,16 +1222,8 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
         // Update deposit address
         storedAccount.depositAddress = syncedAccount.depositAddress.address
 
-        // If we have received a new address, simply add it;
-        // If we have received an existing address, update the properties.
-        for (const addr of syncedAccount.addresses) {
-            const addressIndex = storedAccount.addresses.findIndex((a) => a.address === addr.address)
-            if (addressIndex < 0) {
-                storedAccount.addresses.push(addr)
-            } else {
-                storedAccount.addresses[addressIndex] = addr
-            }
-        }
+        // Add new addresses and ensure no duplicates
+        storedAccount.addresses = syncedAccount.addresses.filter((a, idx, arr) => arr.indexOf(a) === idx)
 
         // If we have received a new message, simply add it;
         // If we have received an existing message, update the properties.
@@ -1488,15 +1481,18 @@ export const prepareAccountInfo = (
         depositAddress: string
     }
 ): unknown => {
-    const { id, index, alias, signerType } = account
+    const { id, index, alias, signerType, addresses } = account
     const { balance, depositAddress } = meta
 
     const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD
+    const { network } = get(activeProfile)?.settings.networkConfig
 
     return Object.assign<WalletAccount, Account, Partial<WalletAccount>>({} as WalletAccount, account, {
         id,
         index,
         depositAddress,
+        addresses: getAddressesForNetwork(addresses, network),
+        messages: getAccountMessages(account as WalletAccount),
         alias,
         rawIotaBalance: balance,
         signerType,
@@ -1506,6 +1502,22 @@ export const prepareAccountInfo = (
         ),
         color: ACCOUNT_COLORS[index % ACCOUNT_COLORS.length],
     })
+}
+
+const getAddressesForNetwork = (addresses: Address[], network: Network): Address[] => {
+    const _filterBech32Hrp = (a: Address): boolean => a.address.slice(0, network.bech32Hrp.length) === network.bech32Hrp
+    const _filterUnique = (a: Address, idx: number, arr: Address[]) => arr.indexOf(a) === idx
+
+    return addresses.filter(_filterBech32Hrp).filter(_filterUnique)
+}
+
+const getMessagesForNetwork = (messages: Message[], network: Network): Message[] => {
+    const _filterOutputs = (o: Output): boolean =>
+        o.data.address.slice(0, network.bech32Hrp.length) === network.bech32Hrp
+    const _filterBech32Hrp = (m: Message): boolean =>
+        m.payload.data.essence['data'].outputs.filter(_filterOutputs).length > 0
+
+    return messages.filter(_filterBech32Hrp)
 }
 
 export const processMigratedTransactions = (accountId: string, messages: Message[], addresses: Address[]): void => {

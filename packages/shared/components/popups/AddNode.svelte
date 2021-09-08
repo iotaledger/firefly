@@ -1,14 +1,14 @@
 <script lang="typescript">
     import { Button, Checkbox, Input, Password, Text } from 'shared/components'
     import { stripSpaces, stripTrailingSlash } from 'shared/lib/helpers'
-    import { getNetworkById, getOfficialNodes, isNodeUrlValid, updateClientOptions } from 'shared/lib/network'
+    import { getNetworkById, isNodeUrlValid } from 'shared/lib/network'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
     import { asyncGetNodeInfo, wallet } from 'shared/lib/wallet'
     import { Locale } from 'shared/lib/typings/i18n'
     import { Node, NodeInfo } from '../../lib/typings/node'
     import { Network } from 'shared/lib/typings/network'
-    import { activeProfile, updateProfile } from 'shared/lib/profile'
+    import { activeProfile } from 'shared/lib/profile'
 
     export let locale: Locale
 
@@ -29,7 +29,7 @@
     const authError = ''
     let isBusy = false
     let isSuccess = true
-    let shouldSwitchNetworks = false
+    let isNetworkSwitch = false
 
     $: {
         addressWarn = ''
@@ -80,7 +80,7 @@
                             },
                         })
                     } else {
-                        shouldSwitchNetworks = true
+                        isNetworkSwitch = true
                     }
                 }
             }
@@ -96,11 +96,11 @@
 
             if (!addressError) {
                 if (isSuccess && onSuccess) {
-                    const network = shouldSwitchNetworks
+                    const network = isNetworkSwitch
                         ? getNetworkById(nodeInfo.nodeinfo.networkId)
                         : $activeProfile.settings.networkConfig.network
 
-                    onSuccess(shouldSwitchNetworks, {
+                    onSuccess(isNetworkSwitch, {
                         url,
                         auth,
                         network,

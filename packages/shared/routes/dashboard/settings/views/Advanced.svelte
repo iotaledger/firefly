@@ -11,10 +11,10 @@
     } from 'shared/lib/network'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, updateProfile } from 'shared/lib/profile'
-    import { asyncSyncAccounts, getSyncAccountOptions, wallet } from 'shared/lib/wallet'
+    import { wallet } from 'shared/lib/wallet'
     import { Locale } from 'shared/lib/typings/i18n'
     import { Node } from 'shared/lib/typings/node'
-    import { NetworkConfig, NetworkType } from 'shared/lib/typings/network'
+    import { NetworkConfig } from 'shared/lib/typings/network'
     import { onDestroy } from 'svelte'
     import { networkStatus } from 'shared/lib/networkStatus'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -119,7 +119,7 @@
             props: {
                 nodes: networkConfig.nodes,
                 network: networkConfig.network,
-                onSuccess: (shouldSwitchNetworks: boolean, node: Node) => {
+                onSuccess: (isNetworkSwitch: boolean, node: Node) => {
                     if(node.isPrimary) {
                         networkConfig.nodes = networkConfig.nodes.map((n) => ({ ...n, isPrimary: false }))
                     }
@@ -129,20 +129,18 @@
                         node.isPrimary = true
                     }
 
-                    networkConfig.network = shouldSwitchNetworks ? node.network : networkConfig.network
+                    networkConfig.network = isNetworkSwitch ? node.network : networkConfig.network
                     networkConfig.nodes = [...networkConfig.nodes.filter((n) => n.url !== node.url), node]
                     if(networkConfig.nodes.length === 0) networkConfig.nodes = [node]
 
-                    updateClientOptions(networkConfig)
+                    updateClientOptions(networkConfig, isNetworkSwitch)
                     updateProfile('settings.networkConfig', networkConfig)
 
-                    if(shouldSwitchNetworks) {
-                        const { gapLimit, accountDiscoveryThreshold } = getSyncAccountOptions(false)
-                        void asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold)
-
+                    if(isNetworkSwitch) {
                         showAppNotification({
                             type: 'info',
-                            message: locale('views.settings.networkConfiguration.switchedNetworks', { values: { networkName: networkConfig.network.name }})
+                            message: locale('views.settings.networkConfiguration.switchedNetworks', { values: { networkName: networkConfig.network.name }}),
+                            subMessage: locale('views.settings.networkConfiguration.resetWallet')
                         })
                     }
 
