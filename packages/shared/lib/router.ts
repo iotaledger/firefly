@@ -96,7 +96,6 @@ export const initRouter = () => {
     } else {
         setRoute(AppRoute.Welcome)
     }
-
 }
 
 // TODO: only handle route changes, not app variables
@@ -170,9 +169,7 @@ export const routerNext = (event) => {
                 walletPin.set(pin)
                 const walletSetupType_ = get(walletSetupType)
                 const profileType = get(activeProfile)?.type
-                if (
-                    [SetupType.Mnemonic, SetupType.Stronghold].includes(walletSetupType_)
-                ) {
+                if ([SetupType.Mnemonic, SetupType.Stronghold].includes(walletSetupType_)) {
                     nextRoute = AppRoute.Congratulations
                 } else if ([ProfileType.Ledger, ProfileType.LedgerSimulator].includes(profileType)) {
                     nextRoute = AppRoute.LedgerSetup

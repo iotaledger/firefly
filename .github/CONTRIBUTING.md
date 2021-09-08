@@ -149,7 +149,9 @@ example that compiles and passes [documentation tests](https://doc.rust-lang.org
 
 - All instances of `unsafe` should have a comment that explains why its use was unavoidable
 
-- All code should be well tested, passing unit and integration tests both locally and in our [continuous integration](https://github.com/iotaledger/firefly/.github/workflows/ci.test.yml) workflows
+- All code should be well formatted and linted, passing our [linting continuous integration](https://github.com/iotaledger/firefly/blob/develop/.github/workflows/ci.lint.yml) workflow
+
+- All code should be well tested, passing both locally and in our [testing continuous integration](https://github.com/iotaledger/firefly/blob/develop/.github/workflows/ci.test.yml) workflow
 
 - To be compatible with the guidelines of the Eclipse foundation, all code must be licensed under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0). This license must be referenced in every crate of the workspace (add [`./LICENSE`] to the crate's top level directory). For Rust crates, every `Cargo.toml` must contain the line `license = "Apache-2.0"`.
 

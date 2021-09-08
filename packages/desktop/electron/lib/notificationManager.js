@@ -8,7 +8,7 @@ const { ipcRenderer } = require('electron')
 function notify(message, contextData) {
     const notification = new Notification('Firefly', {
         body: message,
-        data: contextData
+        data: contextData,
     })
 
     notification.onclick = (event) => {

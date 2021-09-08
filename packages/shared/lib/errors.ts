@@ -5,7 +5,7 @@ import { persistent } from 'shared/lib/helpers'
  */
 export interface Error {
     time: number
-    type: string,
+    type: string
     message: string
 }
 

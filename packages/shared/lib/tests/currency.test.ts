@@ -4,8 +4,8 @@ describe('File: currency.ts', () => {
     describe('Function: convertToFiat', () => {
         it('should convert USD fiat values', () => {
             // (10Gi, $1.06/Mi, $1/$1) => $10,600
-            let calc = convertToFiat(10_000_000_000, 1.06, 1.00)
-            expect(calc).toEqual(10600.00)
+            let calc = convertToFiat(10_000_000_000, 1.06, 1.0)
+            expect(calc).toEqual(10600.0)
         })
         it('should convert non-USD fiat values', () => {
             // (10Gi, $1.06/Mi, €0.85/$1) => €9040,51

@@ -39,7 +39,7 @@ export const persistent = <T>(key: string, initialValue: T): Writable<T> => {
 /**
  * Get the length of a string after it has been trimmed supporting emojis
  * @param name The string to get the length of
- * @returns 
+ * @returns
  */
 export const getTrimmedLength = (name: string | undefined) => {
     if (!name) {
@@ -52,20 +52,20 @@ export const getTrimmedLength = (name: string | undefined) => {
 /**
  * Does the string contain invalid filename chars
  * @param name The name to validate
- * @returns 
+ * @returns
  */
 export const validateFilenameChars = (name: string | undefined) => {
     if (!name) {
         return
     }
-    if (name.startsWith("~")) {
+    if (name.startsWith('~')) {
         return 'tilde'
     }
     if (/[\u0000-\u001f\u0080-\u009f]/g.test(name)) {
         return 'control'
     }
     if (/^\.\./.test(name)) {
-        return 'startDot';
+        return 'startDot'
     }
     if (/[<>:"/\\|?*]/g.test(name)) {
         return 'chars'
@@ -77,16 +77,16 @@ export const validateFilenameChars = (name: string | undefined) => {
  */
 export const getInitials = (name: string | undefined, maxChars: number) => {
     if (!name || !name.trim()) {
-        return ""
+        return ''
     }
 
     let initialsArray = name
         .trim()
         .split(' ')
-        .filter(n => n)
-        .map(n => n.match(/./ug)) // match characters for emoji compatibility 
-        .filter(n => n)
-        .map(n => n[0])
+        .filter((n) => n)
+        .map((n) => n.match(/./gu)) // match characters for emoji compatibility
+        .filter((n) => n)
+        .map((n) => n[0])
 
     if (maxChars) {
         initialsArray = initialsArray.slice(0, maxChars)
@@ -190,18 +190,18 @@ export const getBackupWarningColor = (lastBackupDate: Date) => {
  * @param opacity: [0,100], default = 100
  */
 export const convertHexToRGBA = (hexCode: string, opacity: number = 100) => {
-    let hex = hexCode.replace('#', '');
+    let hex = hexCode.replace('#', '')
 
     if (hex.length === 3) {
-        hex = `${hex[0]}${hex[0]}${hex[1]}${hex[1]}${hex[2]}${hex[2]}`;
+        hex = `${hex[0]}${hex[0]}${hex[1]}${hex[1]}${hex[2]}${hex[2]}`
     }
 
-    const r = parseInt(hex.substring(0, 2), 16);
-    const g = parseInt(hex.substring(2, 4), 16);
-    const b = parseInt(hex.substring(4, 6), 16);
+    const r = parseInt(hex.substring(0, 2), 16)
+    const g = parseInt(hex.substring(2, 4), 16)
+    const b = parseInt(hex.substring(4, 6), 16)
 
-    return `rgba(${r},${g},${b},${opacity / 100})`;
-};
+    return `rgba(${r},${g},${b},${opacity / 100})`
+}
 
 /**
  * Strip trailing slashes from the text
@@ -227,25 +227,25 @@ export const stripSpaces = (str) => {
  * @returns The copied object
  */
 export function deepCopy(obj) {
-    if(typeof obj !== 'object' || obj === null) {
-        return obj;
+    if (typeof obj !== 'object' || obj === null) {
+        return obj
     }
 
-    if(obj instanceof Date) {
-        return new Date(obj.getTime());
+    if (obj instanceof Date) {
+        return new Date(obj.getTime())
     }
 
-    if(obj instanceof Array) {
+    if (obj instanceof Array) {
         return obj.reduce((arr, item, i) => {
-            arr[i] = deepCopy(item);
-            return arr;
-        }, []);
+            arr[i] = deepCopy(item)
+            return arr
+        }, [])
     }
 
-    if(obj instanceof Object) {
+    if (obj instanceof Object) {
         return Object.keys(obj).reduce((newObj, key) => {
-            newObj[key] = deepCopy(obj[key]);
-            return newObj;
+            newObj[key] = deepCopy(obj[key])
+            return newObj
         }, {})
     }
 }

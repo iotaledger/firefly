@@ -37,9 +37,9 @@ export const initMenu = () => {
         ipcMain.handle('maximize', () => {
             const isMaximized = getOrInitWindow('main').isMaximized()
             if (isMaximized) {
-                getOrInitWindow('main').restore();
+                getOrInitWindow('main').restore()
             } else {
-                getOrInitWindow('main').maximize();
+                getOrInitWindow('main').maximize()
             }
             return !isMaximized
         })
@@ -49,11 +49,11 @@ export const initMenu = () => {
         })
 
         ipcMain.handle('minimize', () => {
-            getOrInitWindow('main').minimize();
+            getOrInitWindow('main').minimize()
         })
 
         ipcMain.handle('close', () => {
-            getOrInitWindow('main').close();
+            getOrInitWindow('main').close()
         })
 
         mainMenu = createMenu()
@@ -94,29 +94,26 @@ const buildTemplate = () => {
                     label: state.strings.diagnostics,
                     click: () => getOrInitWindow('main').webContents.send('menu-diagnostics'),
                 },
-            ]
-        }
+            ],
+        },
     ]
 
     if (!app.isPackaged) {
-        template[0].submenu.push(
-            {
-                label: "Developer Tools",
-                role: 'toggleDevTools'
-            }
-        )
+        template[0].submenu.push({
+            label: 'Developer Tools',
+            role: 'toggleDevTools',
+        })
     }
 
     template[0].submenu = template[0].submenu.concat([
         {
             label: state.strings.errorLog,
-            click: () => getOrInitWindow('main').webContents.send('menu-error-log')
+            click: () => getOrInitWindow('main').webContents.send('menu-error-log'),
         },
         {
             type: 'separator',
         },
-    ]
-    )
+    ])
 
     if (process.platform === 'darwin') {
         template[0].submenu = template[0].submenu.concat([

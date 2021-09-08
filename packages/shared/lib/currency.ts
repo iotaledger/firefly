@@ -163,7 +163,13 @@ export const convertToFiat = (amount: number, usdPrice: number, conversionRate: 
  *
  * @returns {string}
  */
-export const formatCurrencyValue = (data: (number | string), currency: string, fiatFixed: number = 2, btcFixed: number = 7, ethFixed: number = 6,): string => {
+export const formatCurrencyValue = (
+    data: number | string,
+    currency: string,
+    fiatFixed: number = 2,
+    btcFixed: number = 7,
+    ethFixed: number = 6
+): string => {
     const parsedData: number = parseFloat(data.toString())
     switch (currency.toLowerCase()) {
         case CurrencyTypes.IOTA:
@@ -184,24 +190,25 @@ export const getDecimalSeparator = (currency: string | undefined = undefined) =>
         currency = get(activeProfile)?.settings?.currency
     }
 
-    return Intl.NumberFormat(appLanguage, {
-        style: 'currency',
-        currency: currency ?? 'USD',
-    })
-        .formatToParts(1.1)
-        .find(part => part.type === 'decimal')
-        ?.value ?? '.';
+    return (
+        Intl.NumberFormat(appLanguage, {
+            style: 'currency',
+            currency: currency ?? 'USD',
+        })
+            .formatToParts(1.1)
+            .find((part) => part.type === 'decimal')?.value ?? '.'
+    )
 }
 
-export const getCurrencyPosition = (): "left" | "right" => {
+export const getCurrencyPosition = (): 'left' | 'right' => {
     const appLanguage = get(appSettings).language
 
     const format = Intl.NumberFormat(appLanguage, {
         style: 'currency',
-        currency: 'USD'
+        currency: 'USD',
     }).formatToParts(1.1)
 
-    return format.findIndex(p => p.type === "currency") === 0 ? 'left' : 'right'
+    return format.findIndex((p) => p.type === 'currency') === 0 ? 'left' : 'right'
 }
 
 export const getGroupSeparator = (currency: string | undefined = undefined) => {
@@ -211,15 +218,15 @@ export const getGroupSeparator = (currency: string | undefined = undefined) => {
         currency = get(activeProfile)?.settings?.currency
     }
 
-    return Intl.NumberFormat(appLanguage, {
-        style: 'currency',
-        currency: currency ?? 'USD',
-    })
-        .formatToParts(1111111)
-        .find(part => part.type === 'group')
-        ?.value ?? ',';
+    return (
+        Intl.NumberFormat(appLanguage, {
+            style: 'currency',
+            currency: currency ?? 'USD',
+        })
+            .formatToParts(1111111)
+            .find((part) => part.type === 'group')?.value ?? ','
+    )
 }
-
 
 export const getAllDecimalSeparators = () => {
     return ['.', ',']
@@ -231,7 +238,13 @@ export const parseCurrency = (valueString: string, currency: string | undefined 
     return Number.parseFloat(v.replace(getDecimalSeparator(currency), '.'))
 }
 
-export const formatCurrency = (value: number, currency: string | undefined = undefined, minDecimals: number | undefined = undefined, maxDecimals: number | undefined = undefined, grouped: boolean = false): string => {
+export const formatCurrency = (
+    value: number,
+    currency: string | undefined = undefined,
+    minDecimals: number | undefined = undefined,
+    maxDecimals: number | undefined = undefined,
+    grouped: boolean = false
+): string => {
     if (Number.isNaN(value)) {
         return ''
     }
@@ -248,32 +261,38 @@ export const formatCurrency = (value: number, currency: string | undefined = und
         currencyDisplay: 'symbol',
         minimumFractionDigits: minDecimals ?? 2,
         maximumFractionDigits: maxDecimals,
-        useGrouping: grouped
+        useGrouping: grouped,
     }).formatToParts(value)
 
-    // Default symbol usage does not always include a literal beside 
+    // Default symbol usage does not always include a literal beside
     // the
-    const curIndex = parts.findIndex(p => p.type === "currency")
+    const curIndex = parts.findIndex((p) => p.type === 'currency')
     if (curIndex >= 0) {
         if (curIndex === 0) {
-            if (parts[curIndex + 1].type !== "literal") {
-                parts.splice(curIndex + 1, 0, { type: "literal", value: " " })
+            if (parts[curIndex + 1].type !== 'literal') {
+                parts.splice(curIndex + 1, 0, { type: 'literal', value: ' ' })
             }
-        } else if (parts[curIndex - 1].type !== "literal") {
-            parts.splice(curIndex, 0, { type: "literal", value: " " })
+        } else if (parts[curIndex - 1].type !== 'literal') {
+            parts.splice(curIndex, 0, { type: 'literal', value: ' ' })
         }
     }
 
-    return parts.map(p => p.value).join('')
+    return parts.map((p) => p.value).join('')
 }
 
-export const formatNumber = (value: number, minDecimals: number | undefined = undefined, maxDecimals: number | undefined = undefined, maxZeros: number = 2, grouped: boolean = false): string => {
+export const formatNumber = (
+    value: number,
+    minDecimals: number | undefined = undefined,
+    maxDecimals: number | undefined = undefined,
+    maxZeros: number = 2,
+    grouped: boolean = false
+): string => {
     const appLanguage = get(appSettings).language
 
     const formatted = Intl.NumberFormat(appLanguage, {
         minimumFractionDigits: minDecimals ?? 2,
         maximumFractionDigits: maxDecimals,
-        useGrouping: grouped
+        useGrouping: grouped,
     }).format(value)
 
     return ensureZeros(formatted, maxZeros)
@@ -306,4 +325,3 @@ export const ensureZeros = (val: string, maxZeros: number): string => {
 export const replaceCurrencyDecimal = (value: string, currency: string | undefined = undefined): string => {
     return value.replace('.', getDecimalSeparator(currency))
 }
-
