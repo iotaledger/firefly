@@ -1,8 +1,10 @@
 import { get, writable } from 'svelte/store'
 import { appSettings } from './appSettings'
 import { activeProfile } from './profile'
+import { formatUnitBestMatch } from './units'
 
 export enum CurrencyTypes {
+    IOTA = 'iota',
     BTC = 'btc',
     ETH = 'eth',
     EUR = 'eur',
@@ -10,6 +12,7 @@ export enum CurrencyTypes {
 }
 
 export type Currencies = {
+    [CurrencyTypes.IOTA]: number
     [CurrencyTypes.BTC]: number
     [CurrencyTypes.ETH]: number
     [CurrencyTypes.EUR]: number
@@ -163,6 +166,8 @@ export const convertToFiat = (amount: number, usdPrice: number, conversionRate: 
 export const formatCurrencyValue = (data: (number | string), currency: string, fiatFixed: number = 2, btcFixed: number = 7, ethFixed: number = 6,): string => {
     const parsedData: number = parseFloat(data.toString())
     switch (currency.toLowerCase()) {
+        case CurrencyTypes.IOTA:
+            return formatUnitBestMatch(parsedData)
         case CurrencyTypes.BTC:
             return replaceCurrencyDecimal(parsedData.toFixed(btcFixed), 'USD')
         case CurrencyTypes.ETH:
