@@ -26,12 +26,10 @@
         os = await Electron.getOS()
         isMaximized = await Electron.isMaximized()
         document.body.classList.add(`platform-${os}`)
-        /* eslint-disable @typescript-eslint/no-misused-promises */
         window.addEventListener('resize', handleResize)
     })
 
     onDestroy(() => {
-        /* eslint-disable @typescript-eslint/no-misused-promises */
         window.removeEventListener('resize', handleResize)
     })
 

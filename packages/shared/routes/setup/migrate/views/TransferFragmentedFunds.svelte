@@ -199,18 +199,18 @@
                             })
                         }
 
-                        return createMigrationBundle(getInputIndexesForBundle(transaction), 0, false).then((result) => {
+                        return createMigrationBundle(getInputIndexesForBundle(transaction), 0, false).then((data) => {
                             setMigratingTransaction(transaction, 1)
                             transactions = transactions.map((_transaction) => {
                                 if (_transaction.index === transaction.index) {
-                                    return { ..._transaction, bundleHash: result.payload.bundleHash }
+                                    return { ..._transaction, bundleHash: data.bundleHash }
                                 }
 
                                 return _transaction
                             })
 
-                            return sendMigrationBundle(result.payload.bundleHash).then(() => {
-                                migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, result.payload.bundleHash]
+                            return sendMigrationBundle(data.bundleHash).then(() => {
+                                migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, data.bundleHash]
                             })
                         })
                     })
@@ -362,20 +362,20 @@
                             setMigratingTransaction(transaction, 1)
                             transactions = transactions.map((_transaction, i) => {
                                 if (_transaction.index === transaction.index) {
-                                    return { ..._transaction, bundleHash: result.payload.bundleHash }
+                                    return { ..._transaction, bundleHash: result.bundleHash }
                                 }
 
                                 return _transaction
                             })
 
-                            return sendMigrationBundle(result.payload.bundleHash).then(() => {
+                            return sendMigrationBundle(result.bundleHash).then(() => {
                                 if (!hasBroadcastAnyBundle) {
                                     hasBroadcastAnyBundle = true
 
                                     persistProfile()
                                 }
 
-                                migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, result.payload.bundleHash]
+                                migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, result.bundleHash]
                             })
                         })
                     })

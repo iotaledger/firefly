@@ -67,7 +67,7 @@
                             })
                     }
                     return createMigrationBundle(getInputIndexesForBundle(bundle), bundle.miningRuns * 10 ** 8, true)
-                        .then((result) => {
+                        .then((data) => {
                             _updateOnSuccess()
                         })
                         .catch((error) => {

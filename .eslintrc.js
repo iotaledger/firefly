@@ -13,7 +13,7 @@ const eslintRules = {
     'missing-declaration': 'off', // OFF b/c throws errors on imports / require statements
     'multiline-ternary': 'off', // OFF b/c causes problems between Prettier and ESLint
     'no-alert': 'error',
-    'no-async-promise-executor': 'off', // OFF b/c used in lib/migration.ts
+    'no-async-promise-executor': 'error',
     'no-case-declarations': 'error',
     'no-console': ['error', { allow: ['error', 'warn'] }],
     'no-control-regex': 'error',
@@ -24,10 +24,9 @@ const eslintRules = {
     'no-extra-semi': 'error',
     'no-fallthrough': 'error',
     'no-import-assign': 'error',
-    'no-irregular-whitespace': 'off', // OFF b/c special char used in packages/desktop/electron/lib/keychain.js
+    'no-irregular-whitespace': 'error',
     'no-prototype-builtins': 'error',
     'no-return-await': 'error',
-    // 'no-tab': ['error', { allowIndentationTabs: true }],
     'no-trailing-spaces': 'error',
     'no-useless-escape': 'error',
     'no-undef': 'error',
@@ -42,18 +41,18 @@ const eslintRules = {
     quotes: ['error', 'single'],
     semi: 'off', // OFF b/c we aren't using semicolons
     'space-before-function-paren': 'off', // OFF b/c we aren't using spaces before function parameters / signatures
-    'spaced-comment': 'off', // OFF b/c there are lots of comments with mixed formatting - best to leave it
+    'spaced-comment': 'error',
 }
 
 const typescriptEslintRules = {
     '@typescript-eslint/array-type': 'error',
     '@typescript-eslint/await-thenable': 'error',
     '@typescript-eslint/ban-types': 'error',
-    '@typescript-eslint/ban-ts-comment': 'off', // OFF b/c ts-ignore comments are sometimes useful and needed
+    '@typescript-eslint/ban-ts-comment': 'warn',
     '@typescript-eslint/explicit-module-boundary-types': 'error',
     '@typescript-eslint/no-array-constructor': 'error',
     '@typescript-eslint/no-empty-function': 'off', // OFF b/c we use empty functions a lot (esp. for initialization)
-    '@typescript-eslint/no-explicit-any': 'off', // OFF b/c we use any but only when it's necessary
+    '@typescript-eslint/no-explicit-any': 'error',
     '@typescript-eslint/no-extra-non-null-assertion': 'error',
     '@typescript-eslint/no-extra-semi': 'error',
     '@typescript-eslint/no-floating-promises': 'error',
@@ -78,6 +77,10 @@ const typescriptEslintRules = {
     '@typescript-eslint/unbound-method': 'error',
 }
 
+const svelteRules = {
+    '@typescript-eslint/no-explicit-any': 'off', // OFF b/c used for callback methods in Svelte components
+}
+
 const svelteSettings = {
     'svelte3/typescript': () => require('typescript'),
     'svelte3/ignore-styles': () => true,
@@ -92,11 +95,6 @@ module.exports = {
     },
     extends: ['eslint:recommended'],
     overrides: [
-        {
-            files: '**/*.svelte',
-            processor: 'svelte3/svelte3',
-            settings: svelteSettings,
-        },
         {
             files: ['**/*.ts', '**/*.svelte'],
             extends: [
@@ -117,6 +115,16 @@ module.exports = {
                 ...typescriptEslintRules,
             },
             settings: svelteSettings,
+        },
+        {
+            files: '**/*.svelte',
+            processor: 'svelte3/svelte3',
+            settings: svelteSettings,
+            rules: {
+                ...eslintRules,
+                ...typescriptEslintRules,
+                ...svelteRules,
+            }
         },
     ],
     parser: '@babel/eslint-parser',

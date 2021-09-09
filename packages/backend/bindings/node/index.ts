@@ -59,12 +59,17 @@ import {
 import { ClientOptions } from '../../../shared/lib/typings/client'
 import { NodeAuth } from '../../../shared/lib/typings/node'
 
-/* eslint-disable @typescript-eslint/no-var-requires */
-const addon = require('../index.node')
+// @ts-ignore
+import addon = require('./index.node')
+
 const mailbox = []
 const onMessageListeners: ((payload: MessageResponse) => void)[] = []
 
-function _poll(runtime: typeof addon.ActorSystem, cb: (error: string, data: any) => void, shouldStop: () => boolean) {
+function _poll(
+    runtime: typeof addon.ActorSystem,
+    cb: (error: string, data: unknown) => void,
+    shouldStop: () => boolean
+) {
     runtime.poll((err: string, data: string) => {
         cb(err, err ? null : JSON.parse(data))
         if (!shouldStop()) {
@@ -87,6 +92,7 @@ export function init(id: string, storagePath?: string): { destroy: () => void; r
         (error, data) => {
             const message = error || data
             mailbox.push(message)
+            // @ts-ignore
             onMessageListeners.forEach((listener) => listener(message))
         },
         () => destroyed
@@ -102,7 +108,7 @@ export function init(id: string, storagePath?: string): { destroy: () => void; r
     }
 }
 
-export function onMessage(cb: (payload: any) => void): void {
+export function onMessage(cb: (payload: unknown) => void): void {
     onMessageListeners.push(cb)
 }
 

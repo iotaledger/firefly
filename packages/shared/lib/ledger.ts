@@ -16,6 +16,7 @@ import {
     LegacyLedgerErrorName,
 } from './typings/ledger'
 import type { NotificationType } from './typings/notification'
+import { Error } from './typings/error'
 
 const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
 const LEGACY_ADDRESS_WITH_CHECKSUM_LENGTH = 90
@@ -132,6 +133,7 @@ export function displayNotificationForLedgerProfile(
     checkDeviceStatus: boolean = false,
     ignoreNotDetected: boolean = false,
     legacy: boolean = false,
+    /* eslint-disable @typescript-eslint/no-explicit-any */
     error: any = null
 ): string {
     let notificationId

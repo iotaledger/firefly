@@ -1,6 +1,7 @@
 import { appSettings } from 'shared/lib/appSettings'
 import { addMessages, dictionary, getLocaleFromNavigator, init, _, getDateFormatter } from 'svelte-i18n'
 import { derived, get, writable } from 'svelte/store'
+import type { LocaleOptions } from './typings/i18n'
 
 /*
  * Code following https://phrase.com/blog/posts/a-step-by-step-guide-to-svelte-localization-with-svelte-i18n-v3/
@@ -52,7 +53,7 @@ export const locales = {
 
 // Init options: eg locale to show when we don't support the
 // requested locale
-const INIT_OPTIONS = {
+const INIT_OPTIONS: LocaleOptions = {
     fallbackLocale: 'en',
     initialLocale: null,
     loadingDelay: 200,
@@ -64,13 +65,13 @@ const INIT_OPTIONS = {
 // loading state
 const isDownloading = writable(false)
 
-const setupI18n = (options = { withLocale: null }): Promise<any> => {
+const setupI18n = (options: LocaleOptions = { fallbackLocale: 'en', initialLocale: null }): Promise<unknown> => {
     // If we're given an explicit locale, we use
     // it. Otherwise, we attempt to auto-detect
     // the user's locale.
-    const _locale = supported(options.withLocale || reduceLocale(getLocaleFromNavigator() || 'en'))
+    const _locale = supported(options.initialLocale || reduceLocale(getLocaleFromNavigator() || 'en'))
 
-    init({ ...INIT_OPTIONS, initialLocale: _locale } as any)
+    init({ ...INIT_OPTIONS, initialLocale: _locale } as LocaleOptions)
 
     // Don't re-download translation files
     if (!hasLoadedLocale(_locale)) {
@@ -145,7 +146,7 @@ const setLanguage = (item: { value }): void => {
         language: locale,
     })
 
-    void setupI18n({ withLocale: locale })
+    void setupI18n({ fallbackLocale: 'en', initialLocale: locale })
 }
 
 const localize = get(_) as (string, values?) => string

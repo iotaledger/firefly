@@ -877,8 +877,7 @@ export const initialiseListeners = (): void => {
     api.onTransferProgress({
         onSuccess(response) {
             const { event } = response.payload
-            /* eslint-disable no-prototype-builtins */
-            if (event.hasOwnProperty('type')) {
+            if ('type' in event) {
                 transferState.set({
                     type: event.type,
                     data: { ...event },

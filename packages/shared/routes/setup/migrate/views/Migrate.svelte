@@ -114,9 +114,9 @@
                 promptUserToConnectLedger(true, _onConnected, _onCancel)
             } else {
                 createMigrationBundle(getInputIndexesForBundle($bundles[0]), 0, false)
-                    .then((response) => {
-                        singleMigrationBundleHash = response.payload.bundleHash
-                        return sendMigrationBundle(response.payload.bundleHash).then(() => {
+                    .then((data) => {
+                        singleMigrationBundleHash = data.bundleHash
+                        return sendMigrationBundle(data.bundleHash).then(() => {
                             // Save profile
                             saveProfile($newProfile)
                             setActiveProfile($newProfile.id)
@@ -143,7 +143,7 @@
         }
     }
 
-    //TODO: complete function functionality
+    // TODO: complete function functionality
     function learnAboutMigrationsClick() {
         Electron.openUrl('https://blog.iota.org/firefly-token-migration/')
     }

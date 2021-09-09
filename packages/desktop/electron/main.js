@@ -160,7 +160,7 @@ function createWindow() {
             callback(request.url.replace('iota:/', app.getAppPath()).split('?')[0].split('#')[0])
         })
     } catch (error) {
-        console.log(error) //eslint-disable-line no-console
+        console.log(error) // eslint-disable-line no-console
     }
 
     const mainWindowState = windowStateKeeper('main', 'settings.json')

@@ -180,7 +180,7 @@ function _callAccountMethod(
     __ids: CommunicationIds,
     methodName: AccountMethod,
     accountId: AccountIdentifier,
-    data: any = void 0
+    data: unknown = void 0
 ): Promise<string> {
     return bridge({
         actorId: __ids.actorId,

@@ -2,6 +2,9 @@
 // used for compilation or building.
 
 {
+    "compilerOptions": {
+        "types": ["jest"]
+    },
     "include": [
         "packages/backend/bindings/node",
         "packages/desktop",

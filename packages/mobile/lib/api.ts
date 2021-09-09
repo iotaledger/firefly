@@ -31,7 +31,7 @@ import { Plugins } from '@capacitor/core'
 const { WalletPlugin } = Plugins
 
 const mailbox = []
-const onMessageListeners: ((payload: any) => void)[] = []
+const onMessageListeners: ((payload: unknown) => void)[] = []
 
 function sendMessage(message: BridgeMessage): Promise<number> {
     // TODO should this be done on the Java/Swift layer?

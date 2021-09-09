@@ -20,17 +20,20 @@ lib.initLogger({
     ],
 })
 
+/* eslint-disable no-undef */
 describe('binding', () => {
     /* it('gets an event', () => {
     lib.init()
     lib.onMessage(console.log)
     lib.api.listenToErrorEvents()(generateRandomId())
   }) */
+    /* eslint-disable no-undef */
     it('creates an account, backup and restore it', () => {
         fs.rmdirSync('./storage', {
             recursive: true,
             force: true,
         })
+        /* eslint-disable no-undef */
         after(() => {
             try {
                 fs.rmdirSync('./backup', {

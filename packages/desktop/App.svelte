@@ -55,7 +55,7 @@
     let splash = true
     let settings = false
 
-    void setupI18n({ withLocale: $appSettings.language })
+    void setupI18n({ fallbackLocale: 'en', initialLocale: $appSettings.language })
     onMount(async () => {
         setTimeout(() => {
             splash = false

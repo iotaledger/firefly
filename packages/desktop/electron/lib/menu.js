@@ -9,7 +9,6 @@ let state = menuState
  * Creates a native menu tree and applies it to the application window
  */
 export const initMenu = () => {
-    /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
     let mainMenu = null
 
     const createMenu = () => {
@@ -240,7 +239,6 @@ const buildTemplate = () => {
  * @returns {Menu} Context menu
  */
 export const contextMenu = () =>
-    /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
     Menu.buildFromTemplate([
         {
             label: state.strings.undo,

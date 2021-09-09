@@ -29,7 +29,8 @@ export interface MigrationData {
 
 export interface MigrationBundle {
     bundleHash: string
-    crackability: number
+    crackability?: number
+    trytes?: string[]
 }
 
 export interface SendMigrationBundleResponse {

@@ -26,6 +26,7 @@ import { derived, get, writable } from 'svelte/store'
 import { localize } from './i18n'
 import { showAppNotification } from './notifications'
 import { LedgerMigrationProgress } from 'shared/lib/typings/migration'
+import type { Event } from './typings/events'
 
 const LEGACY_ADDRESS_WITHOUT_CHECKSUM_LENGTH = 81
 
@@ -257,8 +258,8 @@ export const prepareMigrationLog = (bundleHash: string, trytes: string[], balanc
 export const getLedgerMigrationData = (
     getAddressFn: (index: number) => Promise<string>,
     callback: () => void
-): Promise<any> => {
-    const _get = (addresses: AddressInput[]): Promise<any> =>
+): Promise<unknown> => {
+    const _get = (addresses: AddressInput[]): Promise<unknown> =>
         new Promise((resolve, reject) => {
             api.getLedgerMigrationData(addresses, MIGRATION_NODES, PERMANODE, ADDRESS_SECURITY_LEVEL, {
                 onSuccess(response) {
@@ -289,6 +290,7 @@ export const getLedgerMigrationData = (
     const _process = () =>
         _generate()
             .then((addresses) => _get(addresses))
+            /* eslint-disable @typescript-eslint/no-explicit-any */
             .then((response: any) => {
                 const { data } = get(migration)
 
@@ -479,7 +481,7 @@ export const createLedgerMigrationBundle = (
     bundleIndex: number,
     prepareTransfersFn: (transfers: Transfer[], inputs: Input[]) => Promise<string[]>,
     callback: () => void
-): Promise<any> =>
+): Promise<MigrationBundle> =>
     new Promise((resolve, reject) => {
         api.getMigrationAddress(false, get(activeProfile).ledgerMigrationCount, {
             onSuccess(response) {
@@ -518,7 +520,7 @@ export const createLedgerMigrationBundle = (
  *
  * @returns {Promise}
  */
-export const sendLedgerMigrationBundle = (bundleHash: string, trytes: string[]): Promise<any> =>
+export const sendLedgerMigrationBundle = (bundleHash: string, trytes: string[]): Promise<void> =>
     new Promise((resolve, reject) => {
         api.sendLedgerMigrationBundle(MIGRATION_NODES, trytes, MINIMUM_WEIGHT_MAGNITUDE, {
             onSuccess(response) {
@@ -527,7 +529,7 @@ export const sendLedgerMigrationBundle = (bundleHash: string, trytes: string[]):
 
                 _sendMigrationBundle(bundleHash, response.payload)
 
-                resolve(response)
+                resolve()
             },
             onError(error) {
                 reject(error)
@@ -545,14 +547,18 @@ export const sendLedgerMigrationBundle = (bundleHash: string, trytes: string[]):
  *
  * @returns {Promise}
  */
-export const createMigrationBundle = (inputAddressIndexes: number[], offset: number, mine: boolean): Promise<any> => {
+export const createMigrationBundle = (
+    inputAddressIndexes: number[],
+    offset: number,
+    mine: boolean
+): Promise<MigrationBundle> => {
     const { seed } = get(migration)
 
     return new Promise((resolve, reject) => {
         api.createMigrationBundle(get(seed), inputAddressIndexes, mine, MINING_TIMEOUT_SECONDS, offset, LOG_FILE_NAME, {
             onSuccess(response) {
                 assignBundleHash(inputAddressIndexes, response.payload, mine)
-                resolve(response)
+                resolve(response.payload)
             },
             onError(error) {
                 reject(error)
@@ -591,7 +597,7 @@ export const sendMigrationBundle = (bundleHash: string, mwm = MINIMUM_WEIGHT_MAG
         }
     })
 
-const _sendMigrationBundle = (hash: string, data: SendMigrationBundleResponse) => {
+const _sendMigrationBundle = (hash: string, data: SendMigrationBundleResponse): void => {
     const { bundles } = get(migration)
 
     // Update bundle and mark it as migrated

@@ -4,15 +4,20 @@ import { showAppNotification } from 'shared/lib/notifications'
 import validUrl from 'valid-url'
 import { Bech32 } from 'shared/lib/bech32'
 import type { ParsedAddress } from './typings/address'
+import type { Event } from './typings/events'
 
 export const VALID_MAINNET_ADDRESS: RegExp = /^iota1[02-9ac-hj-np-z]{59}$/
 export const VALID_DEVNET_ADDRESS: RegExp = /^atoi1[02-9ac-hj-np-z]{59}$/
 export const ADDRESS_LENGTH = 64
 export const PIN_LENGTH = 6
 
-export function bindEvents(element: unknown, events: unknown): { destroy } {
+interface Element {
+    addEventListener(event: Event<unknown> | string, unknown)
+    removeEventListener(event: Event<unknown> | string, handler: unknown)
+}
+
+export function bindEvents(element: Element, events: Event<unknown>[]): { destroy } {
     const listeners = Object.entries(events).map(([event, handler]) => {
-        // @ts-ignore
         const listener = element.addEventListener(event, handler)
 
         return [event, listener]
@@ -21,7 +26,6 @@ export function bindEvents(element: unknown, events: unknown): { destroy } {
     return {
         destroy() {
             listeners.forEach(([event, listener]) => {
-                // @ts-ignore
                 element.removeEventListener(event, listener)
             })
         },
@@ -185,7 +189,7 @@ export const validateBech32Address = (prefix: string, addr: string): undefined |
  * @param callback The callback to call in completion
  * @param wait How to long wait before calling callback
  */
-export function debounce(callback: () => any, wait = 500): (...args: any[]) => void {
+export function debounce(callback: () => void, wait = 500): (...args: unknown[]) => void {
     let _timeout
     return (...args) => {
         /* eslint-disable @typescript-eslint/no-this-alias */

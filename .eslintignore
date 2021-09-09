@@ -11,7 +11,6 @@ packages/backend/bindings/c/
 packages/backend/bindings/capacitor/
 packages/backend/bindings/node/dist/
 packages/backend/bindings/node/native/
-packages/backend/bindings/node/test/
 
 packages/backend/src/
 packages/backend/target/
@@ -19,6 +18,7 @@ packages/backend/target/
 # Desktop (packages/desktop)
 packages/desktop/out/
 packages/desktop/public/
+packages/desktop/electron/lib/keychain.js
 
 # Mobile (packages/mobile)
 packages/mobile/android/
@@ -28,7 +28,6 @@ packages/mobile/public/
 # Shared (packages/shared)
 packages/shared/assets/
 packages/shared/locales/
-packages/shared/tests/
 !packages/shared/locales/en.json
 
 # Common files and folders
