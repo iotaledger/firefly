@@ -62,7 +62,7 @@ export interface Chart {
 
 /** Selected chart */
 export const selectedDashboardChart = writable<DashboardChartType>(DashboardChartType.HOLDINGS)
-export const selectedWalletChart = writable<DashboardChartType>(DashboardChartType.HOLDINGS)
+export const selectedWalletChart = writable<WalletChartType>(WalletChartType.HOLDINGS)
 
 const fiatHistoryData = derived([priceData, activeProfile], ([$priceData, $activeProfile]) => {
     if ($activeProfile?.settings) {
