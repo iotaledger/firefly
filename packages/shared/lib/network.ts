@@ -1,31 +1,132 @@
 import type { Node } from './typings/node'
 import { isValidHttpsUrl, isValidUrl } from './utils'
-import { Network } from './typings/network'
+import { Network, NetworkConfig, NetworkType } from './typings/network'
+import { api, asyncSyncAccounts, getSyncAccountOptions, resetWallet } from './wallet'
+import type { ClientOptions } from './typings/client'
+import { isNewNotification, showAppNotification } from './notifications'
+import { localize } from './i18n'
 
-const DEFAULT_NETWORK: Network = Network.ChrysalisMainnet
+export const getOfficialNetwork = (type: NetworkType = NetworkType.ChrysalisMainnet): Network => {
+    switch (type) {
+        case NetworkType.ChrysalisDevnet:
+            return {
+                id: 'chrysalis-devnet',
+                name: 'Chrysalis Devnet',
+                type,
+                bech32Hrp: 'atoi',
+            }
+        case NetworkType.ChrysalisTestnet:
+            return {
+                id: 'testnet7',
+                type,
+                name: 'Chrysalis Testnet',
+                bech32Hrp: 'atoi',
+            }
+        case NetworkType.ChrysalisMainnet:
+        default:
+            return {
+                id: 'chrysalis-mainnet',
+                name: 'Chrysalis Mainnet',
+                type,
+                bech32Hrp: 'iota',
+            }
+    }
+}
 
-const DEFAULT_NODES: Node[] = ['https://chrysalis-nodes.iota.org', 'https://chrysalis-nodes.iota.cafe'].map((url) => ({
-    url,
-    auth: {
-        username: '',
-        password: '',
-    },
-}))
+export const getNetworkById = (id: string): Network => {
+    const type = getNetworkType(id)
+    switch (type) {
+        case NetworkType.ChrysalisMainnet:
+            return {
+                id,
+                type,
+                name: 'Chrysalis Mainnet',
+                bech32Hrp: 'iota',
+            }
+        case NetworkType.ChrysalisDevnet:
+            return {
+                id,
+                type,
+                name: 'Chrysalis Devnet',
+                bech32Hrp: 'atoi',
+            }
+        case NetworkType.ChrysalisTestnet:
+            return {
+                id,
+                type,
+                name: 'Chrysalis Testnet',
+                bech32Hrp: 'atoi',
+            }
+        default:
+            return {
+                id,
+                type: NetworkType.PrivateNet,
+                name: 'Private Net',
+                bech32Hrp: 'atoi', // TODO: Get this data from wallet.rs instead as it may not be "atoi"
+            }
+    }
+}
+
+const getNetworkType = (id: string): NetworkType => {
+    switch (id) {
+        case 'chrysalis-mainnet':
+            return NetworkType.ChrysalisMainnet
+        case 'chrysalis-devnet':
+            return NetworkType.ChrysalisDevnet
+        case 'testnet7':
+            return NetworkType.ChrysalisTestnet
+        default:
+            return NetworkType.PrivateNet
+    }
+}
+
+export const getDefaultNetworkConfig = (): NetworkConfig => ({
+    network: getOfficialNetwork(NetworkType.ChrysalisMainnet),
+    nodes: getOfficialNodes(NetworkType.ChrysalisMainnet),
+    automaticNodeSelection: false,
+    includeOfficialNodes: true,
+    localPow: true,
+})
+
+export const getOfficialNodes = (
+    networkType: NetworkType = NetworkType.ChrysalisMainnet,
+    activate: boolean = false
+): Node[] =>
+    getOfficialNodeUrls(networkType).map((url: string) => ({
+        url,
+        auth: { username: '', password: '' },
+        network: getOfficialNetwork(networkType),
+        isPrimary: activate && url === getOfficialNodeUrls(networkType)[0],
+        isDisabled: false,
+    }))
+
+const getOfficialNodeUrls = (networkType: NetworkType = NetworkType.ChrysalisMainnet): string[] => {
+    switch (networkType) {
+        case NetworkType.ChrysalisDevnet:
+            return ['https://api.lb-0.h.chrysalis-devnet.iota.cafe', 'https://api.lb-1.h.chrysalis-devnet.iota.cafe']
+        case NetworkType.ChrysalisTestnet:
+            return ['https://api.lb-0.testnet.chrysalis2.com']
+        case NetworkType.ChrysalisMainnet:
+        default:
+            return ['https://chrysalis-nodes.iota.org', 'https://chrysalis-nodes.iota.cafe']
+    }
+}
 
 /**
  * Check if a node url is valid
  * @param {Node[]} nodesList: list of current nodes
  * @param {string} newUrl: new node url candidate
+ * @param {boolean} allowInSecure: allow the use of plain http
  * @returns {string | undefined}
  */
-export const isNodeUrlValid = (nodesList: Node[], newUrl: string): string | undefined => {
+export const isNodeUrlValid = (nodesList: Node[], newUrl: string, allowInSecure: boolean): string | undefined => {
     // Check if URL is valid
     if (!isValidUrl(newUrl)) {
         return 'error.node.invalid'
     }
 
     // Only allow HTTPS nodes
-    if (!isValidHttpsUrl(newUrl)) {
+    if (!allowInSecure && !isValidHttpsUrl(newUrl)) {
         return 'error.node.https'
     }
 
@@ -43,14 +144,56 @@ export const isNodeUrlValid = (nodesList: Node[], newUrl: string): string | unde
     return undefined
 }
 
-/**
- * Get the list of official nodes
- * @returns The list of nodes
- */
-export const getOfficialNodes = (): Node[] => DEFAULT_NODES
+export const updateClientOptions = (config: NetworkConfig, isNetworkSwitch: boolean = false): void => {
+    const nodeCandidates =
+        config.nodes.length === 0 || config.automaticNodeSelection
+            ? getOfficialNodes(config.network.type, true)
+            : config.nodes.filter((n) => !n.isDisabled)
 
-/**
- * Get the official network
- * @returns The official network
- */
-export const getOfficialNetwork = (): string => DEFAULT_NETWORK
+    const clientOptions: ClientOptions = {
+        node: nodeCandidates.find((n) => n.isPrimary),
+        nodes: nodeCandidates,
+        network: config.network.id,
+        localPow: config.localPow,
+    }
+
+    const hasMismatchedNetwork = clientOptions.node.network.id !== clientOptions.network
+    if (hasMismatchedNetwork && isNewNotification('warning')) {
+        showAppNotification({
+            type: 'warning',
+            message: localize('error.network.badNodes'),
+        })
+
+        return
+    }
+
+    api.setClientOptions(clientOptions, {
+        onSuccess() {
+            if (isNetworkSwitch) {
+                resetWallet()
+
+                const { gapLimit, accountDiscoveryThreshold } = getSyncAccountOptions(false)
+                void asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold)
+            }
+        },
+        onError(err) {
+            console.error(err)
+        },
+    })
+}
+
+export const isOfficialNetwork = (type: NetworkType): boolean => {
+    switch (type) {
+        case NetworkType.ChrysalisMainnet:
+        case NetworkType.ChrysalisDevnet:
+        case NetworkType.ChrysalisTestnet:
+            return true
+        default:
+            return false
+    }
+}
+
+export const cleanNodeAuth = (node: Node): Node => ({
+    ...node,
+    auth: node.auth.jwt ? node.auth : { username: node.auth.username || '', password: node.auth.password || '' },
+})

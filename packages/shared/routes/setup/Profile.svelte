@@ -1,13 +1,13 @@
 <script lang="typescript">
-    import { Animation, Button, Input, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, Button, ButtonCheckbox, Input, OnboardingLayout, Text } from 'shared/components'
     import { cleanupSignup } from 'shared/lib/app'
+    import { appSettings } from 'shared/lib/appSettings'
     import { Electron } from 'shared/lib/electron'
     import { getTrimmedLength, validateFilenameChars } from 'shared/lib/helpers'
     import { initialiseMigrationListeners } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import {
-        cleanupInProgressProfiles,
-        createProfile,
+        cleanupInProgressProfiles, createNewProfile,
         disposeNewProfile,
         hasNoProfiles,
         newProfile,
@@ -27,6 +27,7 @@
 
     const dispatch = createEventDispatcher()
 
+    let isDeveloperProfile = false
     let profileName = get(newProfile)?.name ?? ''
 
     $: isProfileNameValid = profileName && profileName.trim()
@@ -72,7 +73,8 @@
                 busy = true
 
                 if (nameChanged) {
-                    profile = createProfile(trimmedProfileName, false)
+                    createNewProfile(trimmedProfileName, isDeveloperProfile)
+
                     profileInProgress.set(trimmedProfileName)
 
                     const userDataPath = await Electron.getUserDataPath()
@@ -110,7 +112,7 @@
             <Text type="p" secondary classes="mb-4">
                 {locale('views.profile.body1')}
             </Text>
-            <Text type="p" secondary classes="mb-10">
+            <Text type="p" secondary classes="mb-6">
                 {locale(`views.profile.body2.${hasNoProfiles() ? 'first' : 'nonFirst'}`)}
                 {locale('views.profile.addMore')}
             </Text>
@@ -118,10 +120,17 @@
                 {error}
                 bind:value={profileName}
                 placeholder={locale('views.profile.profileName')}
-                classes="w-full"
+                classes="w-full mb-6"
                 autofocus
                 disabled={busy}
                 submitHandler={handleContinueClick} />
+
+            <ButtonCheckbox icon="dev" bind:value={isDeveloperProfile}>
+                <div class="text-left">
+                    <Text type="p">{locale('views.profile.developerProfile')}</Text>
+                    <Text type="p" secondary>{locale('views.profile.developerProfileInfo')}</Text>
+                </div>
+            </ButtonCheckbox>
         </div>
         <div slot="leftpane__action" class="flex flex-col">
             <Button classes="w-full" disabled={!isProfileNameValid || busy} onClick={handleContinueClick}>

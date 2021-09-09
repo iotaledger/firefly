@@ -31,7 +31,7 @@
     let labels: string[]
     let color: string
 
-    $: datasets = [{ data: chartData.data, tooltips: chartData.tooltips }]
+    $: datasets = [{ data: chartData.data.map((n) => n < 0 ? 0 : n), tooltips: chartData.tooltips }]
     $: labels = chartData.labels
     $: color = $selectedAccount ? $selectedAccount.color : 'blue'
 

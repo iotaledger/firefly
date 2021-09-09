@@ -1,6 +1,6 @@
 import { persistent } from 'shared/lib/helpers'
 import { ledgerSimulator } from 'shared/lib/ledger'
-import { generateRandomId } from 'shared/lib/utils'
+import { generateRandomId, migrateObjects } from 'shared/lib/utils'
 import { destroyActor, getStoragePath, getWalletStoragePath } from 'shared/lib/wallet'
 import { derived, get, Readable, writable } from 'svelte/store'
 import { Electron } from './electron'
@@ -10,6 +10,9 @@ import { ProfileType } from './typings/profile'
 import { HistoryDataProps } from './typings/market'
 import { AvailableExchangeRates } from './typings/currency'
 import type { WalletAccount } from './typings/wallet'
+import type { NetworkConfig } from './typings/network'
+import { NetworkType } from './typings/network'
+import { getOfficialNetwork, getDefaultNetworkConfig } from './network'
 
 export const activeProfileId = writable<string | null>(null)
 
@@ -63,35 +66,33 @@ export const saveProfile = (profile: Profile): Profile => {
 /**
  * Creates a new profile
  *
- * @method createProfile
+ * @method buildProfile
  *
  * @returns {Profile}
  */
-export const createProfile = (profileName: string, isDeveloperProfile: boolean): Profile => {
-    const profile: Profile = {
-        id: generateRandomId(),
-        name: profileName,
-        type: null,
-        lastStrongholdBackupTime: null,
-        isDeveloperProfile,
-        settings: {
+export const buildProfile = (profileName: string, isDeveloperProfile: boolean = false): Profile => ({
+    id: generateRandomId(),
+    name: profileName,
+    type: null,
+    lastStrongholdBackupTime: null,
+    isDeveloperProfile,
+    settings: {
+        currency: AvailableExchangeRates.USD,
+        networkConfig: getDefaultNetworkConfig(),
+        lockScreenTimeout: 5,
+        chartSelectors: {
             currency: AvailableExchangeRates.USD,
-            automaticNodeSelection: true,
-            includeOfficialNodes: true,
-            disabledNodes: undefined,
-            lockScreenTimeout: 5,
-            chartSelectors: {
-                currency: AvailableExchangeRates.USD,
-                timeframe: HistoryDataProps.SEVEN_DAYS,
-            },
+            timeframe: HistoryDataProps.SEVEN_DAYS,
         },
-        ledgerMigrationCount: 0,
-    }
+    },
+    ledgerMigrationCount: 0,
+})
+
+export const createNewProfile = (profileName: string, isDeveloperProfile: boolean = false): void => {
+    const profile = buildProfile(profileName, isDeveloperProfile)
 
     newProfile.set(profile)
     activeProfileId.set(profile.id)
-
-    return profile
 }
 
 /**
@@ -161,11 +162,22 @@ export const removeProfile = (id: string): void => {
  *
  * @returns {void}
  */
-export const updateProfile = (path: string, value: ValuesOf<Profile> | ValuesOf<UserSettings>): void => {
+export const updateProfile = (
+    path: string,
+    value: ValuesOf<Profile> | ValuesOf<UserSettings> | ValuesOf<NetworkConfig>
+): void => {
     const _update = (_profile) => {
+        if (path === '') {
+            const isValidData =
+                /* eslint-disable no-prototype-builtins */
+                typeof value === 'object' && Object.keys(value).filter((k) => !_profile.hasOwnProperty(k)).length === 0
+            /* eslint-disable @typescript-eslint/ban-types */
+            return isValidData ? { ..._profile, ...(value as object) } : _profile
+        }
+
         const pathList = path.split('.')
 
-        pathList.reduce((a, b: keyof Profile | keyof UserSettings, level: number) => {
+        pathList.reduce((a, b: keyof Profile | keyof UserSettings | keyof NetworkConfig, level: number) => {
             if (level === pathList.length - 1) {
                 a[b] = value
                 return value
@@ -189,6 +201,20 @@ export const updateProfile = (path: string, value: ValuesOf<Profile> | ValuesOf<
             })
         )
     }
+}
+
+export const migrateProfile = (): void => {
+    const oldProfile: Profile = get(activeProfile)
+    const newProfile: Profile = buildProfile(oldProfile.name, oldProfile.isDeveloperProfile)
+
+    let shouldMigrate = false
+    for (const k in newProfile) {
+        /* eslint-disable no-prototype-builtins */
+        if (!oldProfile.hasOwnProperty(k)) shouldMigrate = true
+    }
+    if (!shouldMigrate) return
+
+    updateProfile('', migrateObjects(oldProfile, newProfile))
 }
 
 /**

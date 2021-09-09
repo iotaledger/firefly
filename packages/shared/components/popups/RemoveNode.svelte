@@ -6,8 +6,9 @@
     export let locale: Locale
 
     export let node
+    export let removeAll = false
 
-    export let onSuccess = (...args: any[]): void => {}
+    export let onSuccess = (..._: any[]): void => {}
 
     function removeCustomNode() {
         if (onSuccess) {
@@ -17,9 +18,9 @@
     }
 </script>
 
-<Text type="h4" classes="mb-5">{locale('popups.node.titleRemove')}</Text>
+<Text type="h4" classes="mb-5">{locale(`popups.node.titleRemove${removeAll ? 'All' : ''}` )}</Text>
 <div class="w-full h-full mb-5">
-    <Text>{locale('popups.node.removeConfirmation')}</Text>
+    <Text>{locale(`popups.node.remove${removeAll ? 'All' : ''}Confirmation`)}</Text>
 </div>
 <div class="flex flex-row justify-between space-x-4 w-full px-8 ">
     <Button secondary classes="w-1/2" onClick={() => closePopup()}>{locale('actions.no')}</Button>

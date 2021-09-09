@@ -1,17 +1,9 @@
 import { mnemonic } from 'shared/lib/app'
-import { stripTrailingSlash } from 'shared/lib/helpers'
 import { localize } from 'shared/lib/i18n'
 import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
 import { showAppNotification, showSystemNotification } from 'shared/lib/notifications'
 import { activeProfile, isLedgerProfile, isStrongholdLocked, updateProfile } from 'shared/lib/profile'
-import type {
-    Account,
-    Account as BaseAccount,
-    AccountToCreate,
-    Balance,
-    SyncAccountOptions,
-    SyncedAccount,
-} from 'shared/lib/typings/account'
+import type { Account, AccountToCreate, Balance, SyncAccountOptions, SyncedAccount } from 'shared/lib/typings/account'
 import type { Address } from 'shared/lib/typings/address'
 import type { Actor, GetMigrationAddressResponse } from 'shared/lib/typings/bridge'
 import type {
@@ -26,7 +18,7 @@ import type {
     TransferProgressEventPayload,
     TransferState,
 } from 'shared/lib/typings/events'
-import type { Payload, Transaction } from 'shared/lib/typings/message'
+import type { Essence, Output, Payload, Transaction } from 'shared/lib/typings/message'
 import type {
     AddressInput,
     MigrationBundle,
@@ -39,7 +31,7 @@ import { openPopup } from './popup'
 import type { ClientOptions } from './typings/client'
 import type { LedgerStatus } from './typings/ledger'
 import type { Message } from './typings/message'
-import type { Node, NodeAuth, NodeInfo } from './typings/node'
+import type { NodeAuth, NodeInfo } from './typings/node'
 import { SetupType } from './typings/routes'
 import type {
     AccountMessage,
@@ -59,6 +51,7 @@ import { CurrencyTypes } from './typings/currency'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
 import { HistoryDataProps, PriceData } from './typings/market'
 import { ProfileType } from './typings/profile'
+import type { Network, NetworkConfig } from './typings/network'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -558,16 +551,10 @@ export const asyncRestoreBackup = (importFilePath: string, password: string): Pr
 
 export const asyncCreateAccount = (): Promise<void> =>
     new Promise<void>((resolve, reject) => {
-        const officialNodes = getOfficialNodes()
-        const officialNetwork = getOfficialNetwork()
         api.createAccount(
             {
                 signerType: { type: 'Stronghold' },
-                clientOptions: {
-                    nodes: officialNodes,
-                    node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
-                    network: officialNetwork,
-                },
+                clientOptions: buildClientOptions(),
                 alias: `${localize('general.account')} 1`,
             },
             {
@@ -580,6 +567,17 @@ export const asyncCreateAccount = (): Promise<void> =>
             }
         )
     })
+
+const buildClientOptions = (): ClientOptions => {
+    const nc: NetworkConfig = get(activeProfile).settings.networkConfig
+
+    return {
+        node: nc.nodes.find((n) => n.isPrimary) || getOfficialNodes(nc.network.type)[0],
+        nodes: nc.nodes,
+        network: nc.network.id,
+        localPow: nc.localPow,
+    }
+}
 
 export const asyncRemoveStorage = (): Promise<void> =>
     new Promise<void>((resolve, reject) => {
@@ -644,6 +642,7 @@ export const asyncGetNodeInfo = (accountId: string, url?: string, auth?: NodeAut
                 resolve(response.payload)
             },
             onError(err) {
+                console.error(err)
                 reject(err)
             },
         })
@@ -683,7 +682,7 @@ export const initialiseListeners = (): void => {
 
                 if (!essence.data.internal) {
                     const { balanceOverview } = get(wallet)
-                    const overview = get(balanceOverview)
+                    const overview: BalanceOverview = get(balanceOverview)
 
                     const incoming = essence.data.incoming
                         ? overview.incomingRaw + essence.data.value
@@ -1088,14 +1087,18 @@ export const getAccountMessages = (account: WalletAccount): AccountMessage[] => 
         [key: string]: AccountMessage
     } = {}
 
+    const { network } = get(activeProfile)?.settings.networkConfig
+
     account.messages.forEach((message) => {
         let extraId = ''
         if (message.payload?.type === 'Transaction') {
             extraId = getIncomingFlag(message.payload) ? 'in' : 'out'
         }
-        messages[message.id + extraId] = {
-            ...message,
-            account: account.index,
+        if (isValidMessageForNetwork(message, network)) {
+            messages[message.id + extraId] = {
+                ...message,
+                account: account.index,
+            }
         }
     })
 
@@ -1122,15 +1125,19 @@ export const getTransactions = (accounts: WalletAccount[], count = 10): AccountM
         [key: string]: AccountMessage
     } = {}
 
+    const { network } = get(activeProfile)?.settings.networkConfig
+
     accounts.forEach((account) => {
         account.messages.forEach((message) => {
             let extraId = ''
             if (message.payload?.type === 'Transaction') {
                 extraId = getIncomingFlag(message.payload) ? 'in' : 'out'
             }
-            messages[account.index + message.id + extraId] = {
-                ...message,
-                account: account.index,
+            if (isValidMessageForNetwork(message, network)) {
+                messages[account.index + message.id + extraId] = {
+                    ...message,
+                    account: account.index,
+                }
             }
         })
     })
@@ -1143,6 +1150,12 @@ export const getTransactions = (accounts: WalletAccount[], count = 10): AccountM
             return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
         })
         .slice(0, count)
+}
+
+const isValidMessageForNetwork = (m: Message, n: Network): boolean => {
+    const _filterOutputs = (o: Output): boolean => o.data.address.slice(0, n.bech32Hrp.length) === n.bech32Hrp
+
+    return m.payload.data.essence['data'].outputs.filter(_filterOutputs).length !== 0
 }
 
 /**
@@ -1222,16 +1235,8 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
         // Update deposit address
         storedAccount.depositAddress = syncedAccount.depositAddress.address
 
-        // If we have received a new address, simply add it;
-        // If we have received an existing address, update the properties.
-        for (const addr of syncedAccount.addresses) {
-            const addressIndex = storedAccount.addresses.findIndex((a) => a.address === addr.address)
-            if (addressIndex < 0) {
-                storedAccount.addresses.push(addr)
-            } else {
-                storedAccount.addresses[addressIndex] = addr
-            }
-        }
+        // Add new addresses and ensure no duplicates
+        storedAccount.addresses = syncedAccount.addresses.filter((a, idx, arr) => arr.indexOf(a) === idx)
 
         // If we have received a new message, simply add it;
         // If we have received an existing message, update the properties.
@@ -1481,7 +1486,7 @@ export const getAccountMeta = (
 }
 
 export const prepareAccountInfo = (
-    account: BaseAccount,
+    account: Account,
     meta: {
         balance: number
         incoming: number
@@ -1494,7 +1499,7 @@ export const prepareAccountInfo = (
 
     const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD
 
-    return Object.assign<WalletAccount, BaseAccount, Partial<WalletAccount>>({} as WalletAccount, account, {
+    return Object.assign<WalletAccount, Account, Partial<WalletAccount>>({} as WalletAccount, account, {
         id,
         index,
         depositAddress,
@@ -1546,165 +1551,6 @@ export const processMigratedTransactions = (accountId: string, messages: Message
             }
         })
     }
-}
-
-export const buildAccountNetworkSettings = (): unknown => {
-    const activeProfileSettings = get(activeProfile)?.settings
-
-    const automaticNodeSelection = activeProfileSettings?.automaticNodeSelection ?? true
-    const includeOfficialNodes = activeProfileSettings?.includeOfficialNodes ?? true
-    const disabledNodes = activeProfileSettings?.disabledNodes ?? []
-
-    const { accounts } = get(wallet)
-    const actualAccounts = get(accounts)
-
-    let clientOptionNodes = []
-    let primaryNodeUrl = ''
-    let officialNodes = getOfficialNodes()
-    let localPow = true
-
-    if (actualAccounts && actualAccounts.length > 0) {
-        const { clientOptions } = actualAccounts[0]
-        if (clientOptions) {
-            clientOptionNodes = clientOptions.nodes ?? []
-            localPow = clientOptions.localPow ?? true
-
-            if (clientOptions.node) {
-                primaryNodeUrl = stripTrailingSlash(clientOptions.node.url)
-            }
-        }
-    }
-
-    // If we are in automatic node selection make sure none of the offical nodes
-    // are disabled
-    if (automaticNodeSelection) {
-        officialNodes = officialNodes.map((o) => ({ ...o, disabled: false }))
-    }
-
-    // First populate the nodes with the official ones if needed
-    let nodes = []
-    if (includeOfficialNodes || automaticNodeSelection || clientOptionNodes.length === 0) {
-        nodes = [...officialNodes]
-    }
-
-    // Now go through the nodes from the client options and add
-    // any that were not in the official list, setting their custom flag as well
-    for (const clientOptionNode of clientOptionNodes) {
-        if (!nodes.find((n) => n.url == stripTrailingSlash(clientOptionNode.url))) {
-            clientOptionNode.isCustom = true
-            nodes.push({
-                ...clientOptionNode,
-                url: stripTrailingSlash(clientOptionNode.url),
-            })
-        }
-    }
-
-    // Iterate through the complete disabled node list and mark any
-    // Use this instead of the flag on the client option nodes
-    // as we may have been in automatic mode which disables all
-    // non official nodes
-    for (const disabledNode of disabledNodes) {
-        const foundNode = nodes.find((n) => n.url === stripTrailingSlash(disabledNode))
-        if (foundNode) {
-            foundNode.disabled = true
-        }
-    }
-
-    // If the primary node is not set or its not in the list
-    // or in the list and disabled find the
-    // first node from the list that is not disabled
-    const allEnabled = nodes.filter((n) => !n.disabled)
-    if (allEnabled.length > 0 && (!primaryNodeUrl || !allEnabled.find((n) => n.url === primaryNodeUrl))) {
-        primaryNodeUrl = allEnabled[0].url
-    }
-
-    return {
-        automaticNodeSelection,
-        includeOfficialNodes,
-        nodes,
-        primaryNodeUrl,
-        localPow,
-    }
-}
-
-export const updateAccountNetworkSettings = (
-    automaticNodeSelection: boolean,
-    includeOfficialNodes: boolean,
-    nodes: Node[],
-    primaryNodeUrl: string,
-    localPow: boolean
-): void => {
-    updateProfile('settings.automaticNodeSelection', automaticNodeSelection)
-    updateProfile('settings.includeOfficialNodes', includeOfficialNodes)
-
-    const disabledNodes = nodes.filter((n) => n.disabled).map((n) => n.url)
-    updateProfile('settings.disabledNodes', disabledNodes)
-
-    let clientNodes = []
-    let officialNodes = getOfficialNodes()
-
-    // Get the list of non official nodes
-    const nonOfficialNodes = nodes.filter((n) => !officialNodes.find((d) => d.url === n.url))
-
-    // If we are in automatic node selection make sure none of the offical nodes
-    // are disabled
-    if (automaticNodeSelection) {
-        officialNodes = officialNodes.map((o) => ({ ...o, disabled: false }))
-    }
-
-    // If we are in automatic mode, or including the official nodes in manual mode
-    // or in manual mode and there are no non official nodes
-    if (automaticNodeSelection || includeOfficialNodes || nonOfficialNodes.length === 0) {
-        clientNodes = [...officialNodes]
-    }
-
-    // Now add back the non official nodes, if we are in automatic mode we should
-    // disable them, otherwise retain their current disabled state
-    if (nonOfficialNodes.length > 0) {
-        clientNodes = [
-            ...clientNodes,
-            ...nonOfficialNodes.map((o) => ({ ...o, disabled: automaticNodeSelection ? true : o.disabled })),
-        ]
-    }
-
-    // Get all the enabled nodes and make sure the primary url is enabled
-    const allEnabled = clientNodes.filter((n) => !n.disabled)
-    let clientNode = allEnabled.find((n) => n.url === primaryNodeUrl)
-
-    if (!clientNode && allEnabled.length > 0) {
-        clientNode = allEnabled[0]
-    }
-
-    const clientOptions = {
-        nodes: clientNodes,
-        node: clientNode,
-        localPow,
-    }
-
-    api.setClientOptions(clientOptions, {
-        onSuccess() {
-            const { accounts } = get(wallet)
-
-            accounts.update((_accounts) =>
-                _accounts.map((_account) =>
-                    Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>({} as WalletAccount, _account, {
-                        clientOptions,
-                    })
-                )
-            )
-        },
-        onError(err) {
-            const shouldHideErrorNotification =
-                err && err.type === 'ClientError' && err.error === 'error.node.chrysalisNodeInactive'
-
-            if (!shouldHideErrorNotification) {
-                showAppNotification({
-                    type: 'error',
-                    message: localize(err.error),
-                })
-            }
-        },
-    })
 }
 
 /**
@@ -1846,7 +1692,7 @@ export const findAccountWithAddress = (address: string): WalletAccount | undefin
     if (!address) {
         return
     }
-    const accounts = get(get(wallet).accounts)
+    const accounts: WalletAccount[] = get(get(wallet).accounts)
     return accounts.find((acc) => acc.addresses.some((add) => address === add.address))
 }
 
@@ -1863,7 +1709,7 @@ export const findAccountWithAnyAddress = (
     if (!addresses || addresses.length === 0) {
         return
     }
-    const accounts = get(get(wallet).accounts)
+    const accounts: WalletAccount[] = get(get(wallet).accounts)
 
     let res = accounts.filter((acc) => acc.addresses.some((add) => addresses.includes(add.address)))
 

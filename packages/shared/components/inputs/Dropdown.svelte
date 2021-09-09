@@ -21,8 +21,14 @@
     let navContainer
     let divContainer
     let focusedItem
+    let valueLabel
 
     items = sortItems ? items.sort((a, b) => (a.label > b.label ? 1 : -1)) : items
+
+    $: {
+        const item = items.find(i => i[valueKey] === value)
+        valueLabel = item ? item.label || value : value
+    }
 
     let navWidth
 
@@ -191,7 +197,7 @@
 </style>
 
 <dropdown-input
-    class="relative {contentWidth ? '' : 'w-full' } {classes}"
+    class="relative {contentWidth ? '' : 'w-full'} {classes}"
     on:click={(e) => {
         e.stopPropagation()
         toggleDropDown()
@@ -209,7 +215,7 @@
     bg-white dark:bg-gray-800 focus:border-blue-500 {dropdown ? 'border-blue-500' : 'border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700'}"
         tabindex="0"
         bind:this={divContainer}>
-        <div class="w-full text-12 leading-140 text-gray-800 dark:text-white">{value || placeholder}</div>
+        <div class="w-full text-12 leading-140 text-gray-800 dark:text-white">{valueLabel || placeholder}</div>
         <Icon
             icon={small ? 'small-chevron-down' : 'chevron-down'}
             width={small ? 16 : 24}

@@ -1,5 +1,6 @@
 import type { AvailableExchangeRates } from './currency'
 import type { ChartSelectors } from './chart'
+import type { NetworkConfig } from './network'
 
 export interface MigratedTransaction {
     address: string
@@ -36,9 +37,7 @@ export interface Profile {
  */
 export interface UserSettings {
     currency: AvailableExchangeRates
-    automaticNodeSelection: boolean
-    includeOfficialNodes: boolean
-    disabledNodes: string[] | undefined
+    networkConfig: NetworkConfig
     /** Lock screen timeout in minutes */
     lockScreenTimeout: number
     showHiddenAccounts?: boolean
