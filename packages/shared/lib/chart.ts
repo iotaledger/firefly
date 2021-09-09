@@ -36,6 +36,12 @@ export enum DashboardChartType {
     PORTFOLIO = 'portoflio',
     TOKEN = 'token',
 }
+
+export enum WalletChartType {
+    HOLDINGS = 'holdings',
+    PORTFOLIO = 'portoflio',
+}
+
 export enum AccountChartType {
     Value = 'Value',
     Activity = 'Activity',
@@ -55,7 +61,8 @@ export interface Chart {
 }
 
 /** Selected chart */
-export const selectedChart = writable<DashboardChartType>(DashboardChartType.HOLDINGS)
+export const selectedDashboardChart = writable<DashboardChartType>(DashboardChartType.HOLDINGS)
+export const selectedWalletChart = writable<DashboardChartType>(DashboardChartType.HOLDINGS)
 
 const fiatHistoryData = derived([priceData, activeProfile], ([$priceData, $activeProfile]) => {
     if ($activeProfile?.settings) {
