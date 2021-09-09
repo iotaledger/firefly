@@ -1087,15 +1087,18 @@ export const getAccountMessages = (account: WalletAccount): AccountMessage[] => 
         [key: string]: AccountMessage
     } = {}
 
-    account.messages = getMessagesForNetwork(account.messages, get(activeProfile)?.settings.networkConfig.network)
+    const { network } = get(activeProfile)?.settings.networkConfig
+
     account.messages.forEach((message) => {
         let extraId = ''
         if (message.payload?.type === 'Transaction') {
             extraId = getIncomingFlag(message.payload) ? 'in' : 'out'
         }
-        messages[message.id + extraId] = {
-            ...message,
-            account: account.index,
+        if (isValidMessageForNetwork(message, network)) {
+            messages[message.id + extraId] = {
+                ...message,
+                account: account.index,
+            }
         }
     })
 
@@ -1122,15 +1125,19 @@ export const getTransactions = (accounts: WalletAccount[], count = 10): AccountM
         [key: string]: AccountMessage
     } = {}
 
+    const { network } = get(activeProfile)?.settings.networkConfig
+
     accounts.forEach((account) => {
         account.messages.forEach((message) => {
             let extraId = ''
             if (message.payload?.type === 'Transaction') {
                 extraId = getIncomingFlag(message.payload) ? 'in' : 'out'
             }
-            messages[account.index + message.id + extraId] = {
-                ...message,
-                account: account.index,
+            if (isValidMessageForNetwork(message, network)) {
+                messages[account.index + message.id + extraId] = {
+                    ...message,
+                    account: account.index,
+                }
             }
         })
     })
@@ -1143,6 +1150,12 @@ export const getTransactions = (accounts: WalletAccount[], count = 10): AccountM
             return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
         })
         .slice(0, count)
+}
+
+const isValidMessageForNetwork = (m: Message, n: Network): boolean => {
+    const _filterOutputs = (o: Output): boolean => o.data.address.slice(0, n.bech32Hrp.length) === n.bech32Hrp
+
+    return m.payload.data.essence['data'].outputs.filter(_filterOutputs).length !== 0
 }
 
 /**
@@ -1499,22 +1512,6 @@ export const prepareAccountInfo = (
         ),
         color: ACCOUNT_COLORS[index % ACCOUNT_COLORS.length],
     })
-}
-
-const getAddressesForNetwork = (addresses: Address[], network: Network): Address[] => {
-    const _filterBech32Hrp = (a: Address): boolean => a.address.slice(0, network.bech32Hrp.length) === network.bech32Hrp
-    const _filterUnique = (a: Address, idx: number, arr: Address[]) => arr.indexOf(a) === idx
-
-    return addresses.filter(_filterBech32Hrp).filter(_filterUnique)
-}
-
-const getMessagesForNetwork = (messages: Message[], network: Network): Message[] => {
-    const _filterOutputs = (o: Output): boolean =>
-        o.data.address.slice(0, network.bech32Hrp.length) === network.bech32Hrp
-    const _filterBech32Hrp = (m: Message): boolean =>
-        m.payload.data.essence['data'].outputs.filter(_filterOutputs).length > 0
-
-    return messages.filter(_filterBech32Hrp)
 }
 
 export const processMigratedTransactions = (accountId: string, messages: Message[], addresses: Address[]): void => {
