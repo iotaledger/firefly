@@ -1481,18 +1481,15 @@ export const prepareAccountInfo = (
         depositAddress: string
     }
 ): unknown => {
-    const { id, index, alias, signerType, addresses } = account
+    const { id, index, alias, signerType } = account
     const { balance, depositAddress } = meta
 
     const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD
-    const { network } = get(activeProfile)?.settings.networkConfig
 
     return Object.assign<WalletAccount, Account, Partial<WalletAccount>>({} as WalletAccount, account, {
         id,
         index,
         depositAddress,
-        addresses: getAddressesForNetwork(addresses, network),
-        messages: getAccountMessages(account as WalletAccount),
         alias,
         rawIotaBalance: balance,
         signerType,
