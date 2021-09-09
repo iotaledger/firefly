@@ -23,17 +23,17 @@
     const selectedAccount = getContext<Readable<WalletAccount>>('selectedAccount')
 
     let chartData: ChartData = { labels: [], data: [], tooltips: [] }
-    let chartTypeDropdownItems: {value: string, label: string}[] = []
-    let currencyDropdownItems: {value: string, label: string}[] = []
+    let chartTypeDropdownItems: { value: string; label: string }[] = []
+    let currencyDropdownItems: { value: string; label: string }[] = []
     let tokenDropdownItems = [{ value: CurrencyTypes.IOTA.toLocaleLowerCase(), label: CurrencyTypes.IOTA.toLocaleUpperCase() }]
 
     let xMaxTicks
 
-    $: datasets = [{ data: chartData.data, tooltips: chartData.tooltips,  steppedLine: chartData.steppedLine ?? false}]
+    $: datasets = [{ data: chartData.data, tooltips: chartData.tooltips, steppedLine: chartData.steppedLine ?? false }]
     $: labels = chartData.labels
     $: color = $selectedAccount ? $selectedAccount.color : 'blue'
 
-    const walletBalance = derived(wallet, $wallet => {
+    const walletBalance = derived(wallet, ($wallet) => {
         const { balanceOverview } = $wallet
         return get(balanceOverview)?.balanceRaw
     })
@@ -42,16 +42,32 @@
 
     /** Chart data */
     $: {
-        if (locale || $selectedDashboardChart || $activeProfile?.settings.chartSelectors || $walletBalanceHistory || $selectedAccount) {
+        if (
+            locale ||
+            $selectedDashboardChart ||
+            $activeProfile?.settings.chartSelectors ||
+            $walletBalanceHistory ||
+            $selectedAccount
+        ) {
             if ($activeProfile?.settings) {
                 // Account value chart
                 if ($selectedAccount) {
-                    switch($selectedWalletChart) {
+                    switch ($selectedWalletChart) {
                         case DashboardChartType.HOLDINGS:
-                            chartData = getChartDataFromBalanceHistory({balanceHistory: $accountsBalanceHistory[$selectedAccount.index], currentBalance: $selectedAccount.rawIotaBalance, tokenType: CurrencyTypes.IOTA.toLocaleLowerCase(), convertToSelectedCurrency: false})
+                            chartData = getChartDataFromBalanceHistory({
+                                balanceHistory: $accountsBalanceHistory[$selectedAccount.index],
+                                currentBalance: $selectedAccount.rawIotaBalance,
+                                tokenType: CurrencyTypes.IOTA.toLocaleLowerCase(),
+                                convertToSelectedCurrency: false,
+                            })
                             break
                         case DashboardChartType.PORTFOLIO:
-                            chartData = getChartDataFromBalanceHistory({balanceHistory: $accountsBalanceHistory[$selectedAccount.index], currentBalance: $selectedAccount.rawIotaBalance, tokenType: CurrencyTypes.IOTA.toLocaleLowerCase(), convertToSelectedCurrency: true})
+                            chartData = getChartDataFromBalanceHistory({
+                                balanceHistory: $accountsBalanceHistory[$selectedAccount.index],
+                                currentBalance: $selectedAccount.rawIotaBalance,
+                                tokenType: CurrencyTypes.IOTA.toLocaleLowerCase(),
+                                convertToSelectedCurrency: true,
+                            })
                             break
                         default:
                             break
@@ -67,18 +83,27 @@
                             break
                     }
                 } else {
-                    switch($selectedDashboardChart) {
+                    switch ($selectedDashboardChart) {
                         case DashboardChartType.HOLDINGS:
-                            chartData = getChartDataFromBalanceHistory({balanceHistory: $walletBalanceHistory, currentBalance: get(walletBalance), tokenType: CurrencyTypes.IOTA.toLocaleLowerCase()})
-                            break;
+                            chartData = getChartDataFromBalanceHistory({
+                                balanceHistory: $walletBalanceHistory,
+                                currentBalance: get(walletBalance),
+                                tokenType: CurrencyTypes.IOTA.toLocaleLowerCase(),
+                            })
+                            break
                         case DashboardChartType.PORTFOLIO:
-                            chartData = getChartDataFromBalanceHistory({balanceHistory: $walletBalanceHistory, currentBalance: get(walletBalance), tokenType: CurrencyTypes.IOTA.toLocaleLowerCase(), convertToSelectedCurrency: true})
-                            break;
+                            chartData = getChartDataFromBalanceHistory({
+                                balanceHistory: $walletBalanceHistory,
+                                currentBalance: get(walletBalance),
+                                tokenType: CurrencyTypes.IOTA.toLocaleLowerCase(),
+                                convertToSelectedCurrency: true,
+                            })
+                            break
                         case DashboardChartType.TOKEN:
                             chartData = getChartDataForTokenValue()
-                            break;
+                            break
                         default:
-                            break;
+                            break
                     }
                     xMaxTicks = undefined
                 }
@@ -90,15 +115,13 @@
         let profileCurrency: AvailableExchangeRates = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
         Object.values(CurrencyTypes).forEach((currency) => {
             if (currency !== CurrencyTypes.IOTA) {
-                currencyDropdownItems.push(
-                    {
-                        value: currency.toUpperCase(),
-                        label: currency.toUpperCase(),
-                    }
-                )
+                currencyDropdownItems.push({
+                    value: currency.toUpperCase(),
+                    label: currency.toUpperCase(),
+                })
             }
         })
-        
+
         if (!CurrencyTypes[profileCurrency]) {
             currencyDropdownItems.push({ value: profileCurrency, label: profileCurrency })
         }
@@ -108,12 +131,10 @@
         }
 
         Object.values(WalletChartType).forEach((chartType) => {
-            chartTypeDropdownItems.push(
-                {
-                    value: chartType,
-                    label: locale(`charts.${chartType}`),
-                }
-            )
+            chartTypeDropdownItems.push({
+                value: chartType,
+                label: locale(`charts.${chartType}`),
+            })
         })
     })
 
@@ -127,6 +148,21 @@
 
     function handleCurrencySelect({ value: currency }) {
         updateProfile('settings.chartSelectors.currency', currency)
+    }
+
+    function formatYAxis(value) {
+        formatCurrencyValue(
+            value,
+            (!$selectedAccount && $selectedDashboardChart === DashboardChartType.HOLDINGS) ||
+                ($selectedAccount && $selectedWalletChart === DashboardChartType.HOLDINGS)
+                ? CurrencyTypes.IOTA
+                : $activeProfile?.settings.chartSelectors.currency
+                ? $activeProfile?.settings.chartSelectors.currency
+                : '',
+            undefined,
+            undefined,
+            5
+        )
     }
 </script>
 
@@ -151,7 +187,9 @@
         {#if !$selectedAccount}
             <div class="flex space-x-4">
                 {#each Object.values(DashboardChartType) as chart}
-                    <button on:click={() => handleDashboardChartTypeSelect(chart)} class:active={chart === $selectedDashboardChart}>
+                    <button
+                        on:click={() => handleDashboardChartTypeSelect(chart)}
+                        class:active={chart === $selectedDashboardChart}>
                         <Text type="h5" secondary={chart !== $selectedDashboardChart}>{locale(`charts.${chart}`)}</Text>
                     </button>
                 {/each}
@@ -159,25 +197,19 @@
         {:else}
             <div class="flex space-x-4 -ml-3">
                 <Dropdown
-                        small
-                        value={locale(`charts.${$selectedWalletChart}`)}
-                        items={chartTypeDropdownItems}
-                        onSelect={handleWalletChartTypeSelect}
-                        contentWidth={true}
-                        valueTextType='h5'
-                        showBorderWhenClosed={false}
-                    />
+                    small
+                    value={locale(`charts.${$selectedWalletChart}`)}
+                    items={chartTypeDropdownItems}
+                    onSelect={handleWalletChartTypeSelect}
+                    contentWidth={true}
+                    valueTextType="h5"
+                    showBorderWhenClosed={false} />
             </div>
         {/if}
         <div class="flex justify-between items-center space-x-2">
             {#if (!$selectedAccount && $selectedDashboardChart === DashboardChartType.HOLDINGS) || ($selectedAccount && $selectedWalletChart === DashboardChartType.HOLDINGS)}
                 <span>
-                    <Dropdown
-                        small
-                        value={tokenDropdownItems[0].label}
-                        items={tokenDropdownItems}
-                        contentWidth={true}
-                    />
+                    <Dropdown small value={tokenDropdownItems[0].label} items={tokenDropdownItems} contentWidth={true} />
                 </span>
             {:else}
                 <span>
@@ -186,15 +218,17 @@
                         value={$activeProfile?.settings.chartSelectors.currency}
                         items={currencyDropdownItems}
                         onSelect={handleCurrencySelect}
-                        contentWidth={true}
-                    />
+                        contentWidth={true} />
                 </span>
             {/if}
             <span>
                 <Dropdown
                     small
                     value={locale(`charts.timeframe${TIMEFRAME_MAP[$activeProfile?.settings.chartSelectors.timeframe]}`)}
-                    items={Object.keys(TIMEFRAME_MAP).map((value) => ({ label: locale(`charts.timeframe${TIMEFRAME_MAP[value]}`), value }))}
+                    items={Object.keys(TIMEFRAME_MAP).map((value) => ({
+                        label: locale(`charts.timeframe${TIMEFRAME_MAP[value]}`),
+                        value,
+                    }))}
                     onSelect={(newTimeframe) => updateProfile('settings.chartSelectors.timeframe', newTimeframe.value)}
                     contentWidth={true} />
             </span>
@@ -207,6 +241,6 @@
         {labels}
         {color}
         {xMaxTicks}
-        formatYAxis={(value) => formatCurrencyValue(value, (!$selectedAccount && $selectedDashboardChart === DashboardChartType.HOLDINGS) || ($selectedAccount && $selectedWalletChart === DashboardChartType.HOLDINGS) ? CurrencyTypes.IOTA : $activeProfile?.settings.chartSelectors.currency ? $activeProfile?.settings.chartSelectors.currency : '', undefined, undefined, 5)}
+        {formatYAxis}
         inlineStyle={$selectedAccount && `height: calc(50vh - ${hasTitleBar ? '190' : '150'}px);`} />
 </div>

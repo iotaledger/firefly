@@ -90,27 +90,47 @@ const walletBalance = derived(wallet, ($wallet) => {
     return get(balanceOverview)?.balanceRaw
 })
 
-export function getChartDataFromBalanceHistory({balanceHistory, currentBalance, tokenType, convertToSelectedCurrency = false}: {balanceHistory: BalanceHistory, currentBalance: number, tokenType: string, convertToSelectedCurrency?: boolean}): ChartData {
+export function getChartDataFromBalanceHistory({
+    balanceHistory,
+    currentBalance,
+    tokenType,
+    convertToSelectedCurrency = false,
+}: {
+    balanceHistory: BalanceHistory
+    currentBalance: number
+    tokenType: string
+    convertToSelectedCurrency?: boolean
+}): ChartData {
     let chartData: ChartData = { labels: [], data: [], tooltips: [] }
     let _fiatHistoryData
     const selectedCurrency = get(activeProfile)?.settings.chartSelectors.currency ?? ''
-    
-    if(convertToSelectedCurrency) {
+
+    if (convertToSelectedCurrency) {
         _fiatHistoryData = get(fiatHistoryData)
     }
 
     chartData = balanceHistory[get(activeProfile)?.settings.chartSelectors.timeframe].reduce(
         (acc, values, index) => {
-            let balance = convertToSelectedCurrency ? ((values.balance * _fiatHistoryData[index][1]) / 1000000).toFixed(5) : values.balance
+            let balance = convertToSelectedCurrency
+                ? ((values.balance * _fiatHistoryData[index][1]) / 1000000).toFixed(5)
+                : values.balance
             acc.data.push(balance)
             acc.labels.push(formatLabel(values.timestamp * 1000))
-            acc.tooltips.push(formatLineChartTooltip(balance, convertToSelectedCurrency ? selectedCurrency : tokenType.toLocaleLowerCase(), values.timestamp * 1000, false, convertToSelectedCurrency))
+            acc.tooltips.push(
+                formatLineChartTooltip(
+                    balance,
+                    convertToSelectedCurrency ? selectedCurrency : tokenType.toLocaleLowerCase(),
+                    values.timestamp * 1000,
+                    false,
+                    convertToSelectedCurrency
+                )
+            )
             return acc
         },
         { labels: [], data: [], tooltips: [] }
     )
     // add current balance
-    const currentBalanceDataPoint = getCurrentBalanceDataPoint({currentBalance, tokenType, convertToSelectedCurrency})
+    const currentBalanceDataPoint = getCurrentBalanceDataPoint({ currentBalance, tokenType, convertToSelectedCurrency })
     chartData.data.push(currentBalanceDataPoint.data)
     chartData.labels.push(currentBalanceDataPoint.label)
     chartData.tooltips.push(currentBalanceDataPoint.tooltip)
@@ -258,8 +278,16 @@ function formatLabel(timestamp: number): string {
     return formattedLabel
 }
 
-function formatLineChartTooltip(data: (number | string), currency: string,  timestamp: number | string, showMiota: boolean = false, showCurrencyUnit: boolean = true,): Tooltip {
-    const title: string = `${showMiota ? `1 ${Unit.Mi}: ` : ''}${formatCurrencyValue(data, currency, 3)} ${showCurrencyUnit ? currency : ''}`
+function formatLineChartTooltip(
+    data: number | string,
+    currency: string,
+    timestamp: number | string,
+    showMiota: boolean = false,
+    showCurrencyUnit: boolean = true
+): Tooltip {
+    const title: string = `${showMiota ? `1 ${Unit.Mi}: ` : ''}${formatCurrencyValue(data, currency, 3)} ${
+        showCurrencyUnit ? currency : ''
+    }`
     const label: string = formatDate(new Date(timestamp), {
         year: 'numeric',
         month: 'short',
@@ -273,9 +301,33 @@ function formatLineChartTooltip(data: (number | string), currency: string,  time
     return { title, label }
 }
 
-function getCurrentBalanceDataPoint({currentBalance, tokenType, convertToSelectedCurrency}: {currentBalance: number, tokenType: string, convertToSelectedCurrency?: boolean}): {data: number, label: string, tooltip: Tooltip } {
+function getCurrentBalanceDataPoint({
+    currentBalance,
+    tokenType,
+    convertToSelectedCurrency,
+}: {
+    currentBalance: number
+    tokenType: string
+    convertToSelectedCurrency?: boolean
+}): { data: number; label: string; tooltip: Tooltip } {
     const selectedCurrency = get(activeProfile)?.settings.chartSelectors.currency ?? ''
     const now = new Date().getTime()
-    let balance = convertToSelectedCurrency ? convertToFiat(currentBalance, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[get(activeProfile)?.settings.chartSelectors.currency]) : currentBalance
-    return { data: balance, label: formatLabel(now), tooltip: formatLineChartTooltip(balance, convertToSelectedCurrency ? selectedCurrency : tokenType.toLocaleLowerCase(), now, false, convertToSelectedCurrency) }
+    let balance = convertToSelectedCurrency
+        ? convertToFiat(
+              currentBalance,
+              get(currencies)[CurrencyTypes.USD],
+              get(exchangeRates)[get(activeProfile)?.settings.chartSelectors.currency]
+          )
+        : currentBalance
+    return {
+        data: balance,
+        label: formatLabel(now),
+        tooltip: formatLineChartTooltip(
+            balance,
+            convertToSelectedCurrency ? selectedCurrency : tokenType.toLocaleLowerCase(),
+            now,
+            false,
+            convertToSelectedCurrency
+        ),
+    }
 }
