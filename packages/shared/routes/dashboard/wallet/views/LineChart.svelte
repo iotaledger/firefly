@@ -43,7 +43,7 @@
             if ($activeProfile?.settings) {
                 // Account value chart
                 if ($selectedAccount) {
-                    chartData = getChartDataFromBalanceHistory({balanceHistory: $accountsBalanceHistory[$selectedAccount.index], currentBalance: $selectedAccount.rawIotaBalance, tokenType: CurrencyTypes.IOTA.toLocaleLowerCase()})
+                    chartData = getChartDataFromBalanceHistory({balanceHistory: $accountsBalanceHistory[$selectedAccount.index], currentBalance: $selectedAccount.rawIotaBalance, tokenType: CurrencyTypes.IOTA.toLocaleLowerCase(), convertToSelectedCurrency: true})
                     switch ($activeProfile?.settings.chartSelectors.timeframe) {
                         case HistoryDataProps.ONE_HOUR:
                         case HistoryDataProps.TWENTY_FOUR_HOURS:
