@@ -14,7 +14,8 @@
         "eslint-plugin-svelte3": "^3.2.0",
         "husky": "^7.0.0",
         "patch-package": "^6.2.2",
-        "prettier": "^2.3.2"
+        "prettier": "^2.3.2",
+        "snyk": "^1.704.0"
     },
     "scripts": {
         "format": "prettier -w **/*.{ts,js,json,scss,css}",
