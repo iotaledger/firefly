@@ -153,6 +153,8 @@ example that compiles and passes [documentation tests](https://doc.rust-lang.org
 
 - All code should be well tested, passing both locally and in our [testing continuous integration](https://github.com/iotaledger/firefly/blob/develop/.github/workflows/ci.test.yml) workflow
 
+- The repository should be secure, passing our [Snyk continuous integration](https://github.com/iotaledger/firefly/blob/develop/.github/workflows/ci.snyk.yml) workflow (checking for security vulnerabilities)
+   
 - To be compatible with the guidelines of the Eclipse foundation, all code must be licensed under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0). This license must be referenced in every crate of the workspace (add [`./LICENSE`] to the crate's top level directory). For Rust crates, every `Cargo.toml` must contain the line `license = "Apache-2.0"`.
 
 ### Submitting a pull request
