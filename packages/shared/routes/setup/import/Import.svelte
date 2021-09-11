@@ -1,13 +1,3 @@
-<script context="module" lang="typescript">
-    export enum ImportType {
-        Seed = 'seed',
-        Mnemonic = 'mnemonic',
-        File = 'file',
-        SeedVault = 'seedvault',
-        Stronghold = 'stronghold',
-    }
-</script>
-
 <script lang="typescript">
     import { Transition } from 'shared/components'
     import { mnemonic } from 'shared/lib/app'
@@ -18,9 +8,12 @@
     import { asyncRestoreBackup } from 'shared/lib/wallet'
     import { createEventDispatcher, setContext } from 'svelte'
     import { get, Writable, writable } from 'svelte/store'
-    import { BackupPassword, FileImport, Import, Success, TextImport } from './views/'
+    import { BackupPassword, FileImport, Import, Ledger, Success, TextImport } from './views/'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { ImportType } from 'shared/lib/typings/profile'
 
-    export let locale
+    export let locale: Locale
+
     export let mobile
 
     let isGettingMigrationData = false
@@ -29,17 +22,20 @@
         Init = 'init',
         TextImport = 'textImport',
         FileImport = 'fileImport',
+        LedgerImport = 'ledgerImport',
         BackupPassword = 'backupPassword',
         Success = 'Success',
     }
 
     const dispatch = createEventDispatcher()
 
-    let importType: Writable<ImportType> = writable(null)
+    const importType: Writable<ImportType> = writable(null)
     setContext<Writable<ImportType>>('importType', importType)
 
     let importFile
     let importFilePath
+    let balance
+
     let busy = false
 
     let error = ''
@@ -49,18 +45,21 @@
 
     const _next = async (event) => {
         let nextState
-        let params = event.detail || {}
+        const params = event.detail || {}
         switch (state) {
-            case ImportState.Init:
+            case ImportState.Init: {
                 const { type } = params
                 importType.set(type)
                 if (type === ImportType.Seed || type === ImportType.Mnemonic) {
                     nextState = ImportState.TextImport
                 } else if (type === ImportType.File) {
                     nextState = ImportState.FileImport
+                } else if (type === ImportType.Ledger) {
+                    nextState = ImportState.LedgerImport
                 }
                 break
-            case ImportState.TextImport:
+            }
+            case ImportState.TextImport: {
                 const { input } = params
                 if (get(importType) === ImportType.Seed) {
                     isGettingMigrationData = true
@@ -83,7 +82,8 @@
                     nextState = ImportState.Success
                 }
                 break
-            case ImportState.FileImport:
+            }
+            case ImportState.FileImport: {
                 const strongholdRegex = /\.(stronghold)$/i
                 const seedvaultRegex = /\.(kdbx)$/i
                 const { file, fileName, filePath } = params
@@ -97,8 +97,8 @@
                 }
                 nextState = ImportState.BackupPassword
                 break
-
-            case ImportState.BackupPassword:
+            }
+            case ImportState.BackupPassword: {
                 const { password } = params
                 busy = true
 
@@ -138,7 +138,13 @@
                     isGettingMigrationData = false
                 }
                 break
-
+            }
+            case ImportState.LedgerImport: {
+                const { impType } = params
+                importType.set(impType)
+                dispatch('next', { importType: impType })
+                break
+            }
             case ImportState.Success:
                 dispatch('next', { importType: get(importType) })
                 break
@@ -150,7 +156,7 @@
         }
     }
     const _previous = () => {
-        let prevState = stateHistory.pop()
+        const prevState = stateHistory.pop()
         if (prevState) {
             state = prevState
         } else {
@@ -171,17 +177,13 @@
     <Transition>
         <FileImport on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
+{:else if state === ImportState.LedgerImport}
+    <Transition>
+        <Ledger on:next={_next} on:previous={_previous} {locale} {mobile} />
+    </Transition>
 {:else if state === ImportState.BackupPassword}
     <Transition>
-        <BackupPassword
-            on:next={_next}
-            on:previous={_previous}
-            {isGettingMigrationData}
-            {importType}
-            {error}
-            {locale}
-            {mobile}
-            {busy} />
+        <BackupPassword on:next={_next} on:previous={_previous} {isGettingMigrationData} {error} {locale} {mobile} {busy} />
     </Transition>
 {:else if state === ImportState.Success}
     <Transition>

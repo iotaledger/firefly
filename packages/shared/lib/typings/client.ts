@@ -1,11 +1,4 @@
-export interface Node {
-    url: string
-    auth?: {
-        password: string
-        username: string
-    },
-    disabled?: boolean
-}
+import type { Node } from './node'
 
 export interface ClientOptions {
     nodes?: Node[]

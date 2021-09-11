@@ -1,19 +1,15 @@
 import { get, writable } from 'svelte/store'
-import { asyncGetNodeInfo, wallet } from "shared/lib/wallet"
+import { asyncGetNodeInfo, wallet } from 'shared/lib/wallet'
 import { getOfficialNodes } from 'shared/lib/network'
+import type { Node } from './typings/node'
+import type { NetworkStatus } from './typings/network'
 
 /**
  * Default interval for polling the network status
  */
 const DEFAULT_NETWORK_STATUS_POLL_INTERVAL = 10000
 
-type StatusData = {
-    messagesPerSecond?: number
-    referencedRate?: number
-    health?: number
-}
-
-export const networkStatus = writable<StatusData>({})
+export const networkStatus = writable<NetworkStatus>({})
 
 let pollInterval
 
@@ -22,6 +18,7 @@ let pollInterval
  */
 export async function pollNetworkStatus(): Promise<void> {
     await fetchNetworkStatus()
+    /* eslint-disable @typescript-eslint/no-misused-promises */
     pollInterval = setInterval(async () => fetchNetworkStatus(), DEFAULT_NETWORK_STATUS_POLL_INTERVAL)
 }
 
@@ -29,7 +26,7 @@ const { accounts, accountsLoaded } = get(wallet)
 
 accountsLoaded.subscribe((val) => {
     if (val) {
-        pollNetworkStatus()
+        void pollNetworkStatus()
     } else {
         clearInterval(pollInterval)
     }
@@ -49,30 +46,32 @@ export async function fetchNetworkStatus(): Promise<void> {
 
     if (accs.length > 0) {
         const account0 = accs[0]
-        const clientOptions = account0.clientOptions
-        const node = clientOptions.node ?? getOfficialNodes()[0]
+        const { clientOptions } = account0
+        const node: Node = {
+            ...(clientOptions.node ?? getOfficialNodes()[0]),
+            auth: { username: '', password: '' },
+        }
 
         try {
-            // TODO add user/pass support when implemented in wallet.rs
-            const response = await asyncGetNodeInfo(account0.id, node.url)
+            const response = await asyncGetNodeInfo(account0.id, node.url, node.auth)
 
-            const timeSinceLastMsInMinutes = (Date.now() - (response.nodeinfo.latestMilestoneTimestamp * 1000)) / 60000;
-            let health = 0; //bad
+            const timeSinceLastMsInMinutes = (Date.now() - response.nodeinfo.latestMilestoneTimestamp * 1000) / 60000
+            let health = 0 // bad
             if (timeSinceLastMsInMinutes < 2) {
-                health = 2; // good
+                health = 2 // good
             } else if (timeSinceLastMsInMinutes < 5) {
-                health = 1; // degraded
+                health = 1 // degraded
             }
 
             networkStatus.set({
                 messagesPerSecond: response.nodeinfo.messagesPerSecond,
                 referencedRate: response.nodeinfo.referencedRate,
-                health
+                health,
             })
 
             updated = true
         } catch (err) {
-            console.error(err.name === "AbortError" ? new Error(`Could not fetch from ${node.url}.`) : err)
+            console.error(err.name === 'AbortError' ? new Error(`Could not fetch from ${node.url}.`) : err)
         }
     }
 
@@ -80,7 +79,7 @@ export async function fetchNetworkStatus(): Promise<void> {
         networkStatus.set({
             messagesPerSecond: 0,
             referencedRate: 0,
-            health: 0
+            health: 0,
         })
     }
 }

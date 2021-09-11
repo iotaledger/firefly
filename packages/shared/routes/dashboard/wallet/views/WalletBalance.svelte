@@ -1,18 +1,19 @@
 <script lang="typescript">
     import { Button } from 'shared/components'
     import { appSettings } from 'shared/lib/appSettings'
-    import { activeProfile } from 'shared/lib/profile'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
-    import type { BalanceOverview, WalletAccount } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable, Writable } from 'svelte/store'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { BalanceOverview, WalletAccount } from 'shared/lib/typings/wallet'
 
-    export let locale
+    export let locale: Locale
+
     export let color = 'blue' // TODO: profiles will have different colors
 
+    let darkModeEnabled
     $: darkModeEnabled = $appSettings.darkMode
-    $: waitingChrysalis = $activeProfile?.migratedTransactions?.length
 
     const balance = getContext<Readable<BalanceOverview>>('walletBalance')
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
@@ -67,12 +68,8 @@
         {#if $accounts.length > 0}
             <!-- Action Send / Receive -->
             <div class="flex flex-row justify-between space-x-4 mt-7 mb-3">
-                <Button disabled={waitingChrysalis} medium secondary classes="w-full" onClick={handleReceiveClick}>
-                    {locale('actions.receive')}
-                </Button>
-                <Button disabled={waitingChrysalis} medium secondary classes="w-full" onClick={handleSendClick}>
-                    {locale('actions.send')}
-                </Button>
+                <Button medium secondary classes="w-full" onClick={handleReceiveClick}>{locale('actions.receive')}</Button>
+                <Button medium secondary classes="w-full" onClick={handleSendClick}>{locale('actions.send')}</Button>
             </div>
         {/if}
     {/if}

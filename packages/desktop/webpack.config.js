@@ -8,7 +8,7 @@ const mode = process.env.NODE_ENV || 'development'
 const prod = mode === 'production'
 const hardcodeNodeEnv = typeof process.env.HARDCODE_NODE_ENV !== 'undefined'
 
-/// ------------------------ Resolve ------------------------
+// / ------------------------ Resolve ------------------------
 
 const resolve = {
     alias: {
@@ -22,7 +22,7 @@ const resolve = {
     },
 }
 
-/// ------------------------ Output ------------------------
+// / ------------------------ Output ------------------------
 
 const output = {
     publicPath: prod ? '../' : '/',
@@ -31,7 +31,7 @@ const output = {
     chunkFilename: '[name].[id].js',
 }
 
-/// ------------------------ Module rules ------------------------
+// / ------------------------ Module rules ------------------------
 
 const mainRules = [
     {
@@ -95,9 +95,13 @@ const rendererRules = [
     },
 ]
 
-/// ------------------------ Plugins ------------------------
+// / ------------------------ Plugins ------------------------
 
-const mainPlugins = []
+const mainPlugins = [
+    new DefinePlugin({
+        PLATFORM_LINUX: JSON.stringify(process.platform === 'linux'),
+    }),
+]
 
 const rendererPlugins = [
     new CopyPlugin({
@@ -126,7 +130,7 @@ const rendererPlugins = [
     }),
 ]
 
-/// ------------------------ Webpack config ------------------------
+// / ------------------------ Webpack config ------------------------
 
 module.exports = [
     {
@@ -147,7 +151,7 @@ module.exports = [
     },
     {
         externals: {
-            argon2: 'commonjs argon2'
+            argon2: 'commonjs argon2',
         },
         target: 'electron-main',
         entry: {
@@ -166,6 +170,7 @@ module.exports = [
         devtool: prod ? false : 'cheap-module-source-map',
         optimization: {
             nodeEnv: hardcodeNodeEnv ? mode : false,
+            minimize: true,
         },
     },
 ]

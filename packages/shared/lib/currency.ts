@@ -1,92 +1,7 @@
 import { get, writable } from 'svelte/store'
 import { appSettings } from './appSettings'
 import { activeProfile } from './profile'
-
-export enum CurrencyTypes {
-    BTC = 'btc',
-    ETH = 'eth',
-    EUR = 'eur',
-    USD = 'usd',
-}
-
-export type Currencies = {
-    [CurrencyTypes.BTC]: number
-    [CurrencyTypes.ETH]: number
-    [CurrencyTypes.EUR]: number
-    [CurrencyTypes.USD]: number
-}
-
-export enum AvailableExchangeRates {
-    AUD = 'AUD',
-    BGN = 'BGN',
-    BRL = 'BRL',
-    CAD = 'CAD',
-    CHF = 'CHF',
-    CNY = 'CNY',
-    CZK = 'CZK',
-    DKK = 'DKK',
-    EUR = 'EUR',
-    GBP = 'GBP',
-    HKD = 'HKD',
-    HRK = 'HRK',
-    HUF = 'HUF',
-    IDR = 'IDR',
-    ILS = 'ILS',
-    INR = 'INR',
-    ISK = 'ISK',
-    JPY = 'JPY',
-    KRW = 'KRW',
-    MXN = 'MXN',
-    MYR = 'MYR',
-    NOK = 'NOK',
-    NZD = 'NZD',
-    PHP = 'PHP',
-    PLN = 'PLN',
-    RON = 'RON',
-    RUB = 'RUB',
-    SEK = 'SEK',
-    SGD = 'SGD',
-    THB = 'THB',
-    TRY = 'TRY',
-    USD = 'USD',
-    ZAR = 'ZAR',
-}
-
-export type ExchangeRates = {
-    [AvailableExchangeRates.AUD]: number
-    [AvailableExchangeRates.BGN]: number
-    [AvailableExchangeRates.BRL]: number
-    [AvailableExchangeRates.CAD]: number
-    [AvailableExchangeRates.CHF]: number
-    [AvailableExchangeRates.CNY]: number
-    [AvailableExchangeRates.CZK]: number
-    [AvailableExchangeRates.DKK]: number
-    [AvailableExchangeRates.EUR]: number
-    [AvailableExchangeRates.GBP]: number
-    [AvailableExchangeRates.HKD]: number
-    [AvailableExchangeRates.HRK]: number
-    [AvailableExchangeRates.HUF]: number
-    [AvailableExchangeRates.IDR]: number
-    [AvailableExchangeRates.ILS]: number
-    [AvailableExchangeRates.INR]: number
-    [AvailableExchangeRates.ISK]: number
-    [AvailableExchangeRates.JPY]: number
-    [AvailableExchangeRates.KRW]: number
-    [AvailableExchangeRates.MXN]: number
-    [AvailableExchangeRates.MYR]: number
-    [AvailableExchangeRates.NOK]: number
-    [AvailableExchangeRates.NZD]: number
-    [AvailableExchangeRates.PHP]: number
-    [AvailableExchangeRates.PLN]: number
-    [AvailableExchangeRates.RON]: number
-    [AvailableExchangeRates.RUB]: number
-    [AvailableExchangeRates.SEK]: number
-    [AvailableExchangeRates.SGD]: number
-    [AvailableExchangeRates.THB]: number
-    [AvailableExchangeRates.TRY]: number
-    [AvailableExchangeRates.USD]: number
-    [AvailableExchangeRates.ZAR]: number
-}
+import { AvailableExchangeRates, Currencies, CurrencyTypes, ExchangeRates } from './typings/currency'
 
 /**
  * Default exchange rates
@@ -146,9 +61,8 @@ export const currencies = writable<Currencies>({} as Currencies)
  *
  * @returns {number}
  */
-export const convertToFiat = (amount: number, usdPrice: number, conversionRate: number): number => {
-    return +(((amount * usdPrice) / 1000000) * conversionRate).toFixed(2)
-}
+export const convertToFiat = (amount: number, usdPrice: number, conversionRate: number): number =>
+    +(((amount * usdPrice) / 1000000) * conversionRate).toFixed(2)
 
 /**
  * Converts to appropriate decimal places for a given currency
@@ -160,7 +74,13 @@ export const convertToFiat = (amount: number, usdPrice: number, conversionRate: 
  *
  * @returns {string}
  */
-export const formatCurrencyValue = (data: (number | string), currency: string, fiatFixed: number = 2, btcFixed: number = 7, ethFixed: number = 6,): string => {
+export const formatCurrencyValue = (
+    data: number | string,
+    currency: string,
+    fiatFixed: number = 2,
+    btcFixed: number = 7,
+    ethFixed: number = 6
+): string => {
     const parsedData: number = parseFloat(data.toString())
     switch (currency.toLowerCase()) {
         case CurrencyTypes.BTC:
@@ -172,53 +92,52 @@ export const formatCurrencyValue = (data: (number | string), currency: string, f
     }
 }
 
-export const getDecimalSeparator = (currency: string | undefined = undefined) => {
+export const getDecimalSeparator = (currency: string | undefined = undefined): string | undefined => {
     const appLanguage = get(appSettings).language
 
     if (!currency) {
         currency = get(activeProfile)?.settings?.currency
     }
 
-    return Intl.NumberFormat(appLanguage, {
-        style: 'currency',
-        currency: currency ?? 'USD',
-    })
-        .formatToParts(1.1)
-        .find(part => part.type === 'decimal')
-        ?.value ?? '.';
+    return (
+        Intl.NumberFormat(appLanguage, {
+            style: 'currency',
+            currency: currency ?? 'USD',
+        })
+            .formatToParts(1.1)
+            .find((part) => part.type === 'decimal')?.value ?? '.'
+    )
 }
 
-export const getCurrencyPosition = (): "left" | "right" => {
+export const getCurrencyPosition = (): 'left' | 'right' => {
     const appLanguage = get(appSettings).language
 
     const format = Intl.NumberFormat(appLanguage, {
         style: 'currency',
-        currency: 'USD'
+        currency: 'USD',
     }).formatToParts(1.1)
 
-    return format.findIndex(p => p.type === "currency") === 0 ? 'left' : 'right'
+    return format.findIndex((p) => p.type === 'currency') === 0 ? 'left' : 'right'
 }
 
-export const getGroupSeparator = (currency: string | undefined = undefined) => {
+export const getGroupSeparator = (currency: string | undefined = undefined): string => {
     const appLanguage = get(appSettings).language
 
     if (!currency) {
         currency = get(activeProfile)?.settings?.currency
     }
 
-    return Intl.NumberFormat(appLanguage, {
-        style: 'currency',
-        currency: currency ?? 'USD',
-    })
-        .formatToParts(1111111)
-        .find(part => part.type === 'group')
-        ?.value ?? ',';
+    return (
+        Intl.NumberFormat(appLanguage, {
+            style: 'currency',
+            currency: currency ?? 'USD',
+        })
+            .formatToParts(1111111)
+            .find((part) => part.type === 'group')?.value ?? ','
+    )
 }
 
-
-export const getAllDecimalSeparators = () => {
-    return ['.', ',']
-}
+export const getAllDecimalSeparators = (): string[] => ['.', ',']
 
 export const parseCurrency = (valueString: string, currency: string | undefined = undefined): number => {
     // Need to escape the character in the regex in case it is . otherwise it will replace all characters
@@ -226,7 +145,13 @@ export const parseCurrency = (valueString: string, currency: string | undefined 
     return Number.parseFloat(v.replace(getDecimalSeparator(currency), '.'))
 }
 
-export const formatCurrency = (value: number, currency: string | undefined = undefined, minDecimals: number | undefined = undefined, maxDecimals: number | undefined = undefined, grouped: boolean = false): string => {
+export const formatCurrency = (
+    value: number,
+    currency: string | undefined = undefined,
+    minDecimals: number | undefined = undefined,
+    maxDecimals: number | undefined = undefined,
+    grouped: boolean = false
+): string => {
     if (Number.isNaN(value)) {
         return ''
     }
@@ -243,32 +168,38 @@ export const formatCurrency = (value: number, currency: string | undefined = und
         currencyDisplay: 'symbol',
         minimumFractionDigits: minDecimals ?? 2,
         maximumFractionDigits: maxDecimals,
-        useGrouping: grouped
+        useGrouping: grouped,
     }).formatToParts(value)
 
-    // Default symbol usage does not always include a literal beside 
+    // Default symbol usage does not always include a literal beside
     // the
-    const curIndex = parts.findIndex(p => p.type === "currency")
+    const curIndex = parts.findIndex((p) => p.type === 'currency')
     if (curIndex >= 0) {
         if (curIndex === 0) {
-            if (parts[curIndex + 1].type !== "literal") {
-                parts.splice(curIndex + 1, 0, { type: "literal", value: " " })
+            if (parts[curIndex + 1].type !== 'literal') {
+                parts.splice(curIndex + 1, 0, { type: 'literal', value: ' ' })
             }
-        } else if (parts[curIndex - 1].type !== "literal") {
-            parts.splice(curIndex, 0, { type: "literal", value: " " })
+        } else if (parts[curIndex - 1].type !== 'literal') {
+            parts.splice(curIndex, 0, { type: 'literal', value: ' ' })
         }
     }
 
-    return parts.map(p => p.value).join('')
+    return parts.map((p) => p.value).join('')
 }
 
-export const formatNumber = (value: number, minDecimals: number | undefined = undefined, maxDecimals: number | undefined = undefined, maxZeros: number = 2, grouped: boolean = false): string => {
+export const formatNumber = (
+    value: number,
+    minDecimals: number | undefined = undefined,
+    maxDecimals: number | undefined = undefined,
+    maxZeros: number = 2,
+    grouped: boolean = false
+): string => {
     const appLanguage = get(appSettings).language
 
     const formatted = Intl.NumberFormat(appLanguage, {
         minimumFractionDigits: minDecimals ?? 2,
         maximumFractionDigits: maxDecimals,
-        useGrouping: grouped
+        useGrouping: grouped,
     }).format(value)
 
     return ensureZeros(formatted, maxZeros)
@@ -298,7 +229,5 @@ export const ensureZeros = (val: string, maxZeros: number): string => {
     }
 }
 
-export const replaceCurrencyDecimal = (value: string, currency: string | undefined = undefined): string => {
-    return value.replace('.', getDecimalSeparator(currency))
-}
-
+export const replaceCurrencyDecimal = (value: string, currency: string | undefined = undefined): string =>
+    value.replace('.', getDecimalSeparator(currency))

@@ -2,8 +2,11 @@
     import { Icon, Logo, Profile } from 'shared/components'
     import { profiles, setActiveProfile } from 'shared/lib/profile'
     import { createEventDispatcher } from 'svelte'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { ProfileType } from 'shared/lib/typings/profile'
 
-    export let locale
+    export let locale: Locale
+
     export let mobile
 
     const dispatch = createEventDispatcher()
@@ -33,6 +36,7 @@
                         name={profile.name}
                         id={profile.id}
                         isDeveloper={profile.isDeveloperProfile}
+                        isLedgerProfile={profile?.type === ProfileType.Ledger || profile?.type === ProfileType.LedgerSimulator}
                         classes="cursor-pointer" />
                 </div>
             {/each}
