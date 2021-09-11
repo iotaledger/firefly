@@ -22,7 +22,7 @@
     "dependencies": {
         "@capacitor/android": "2.2.1",
         "@capacitor/core": "^2.2.1",
-        "@capacitor/ios": "2.2.1",
+        "@capacitor/ios": "2.4.9",
         "shared-modules": "link:../shared",
         "wallet-actor-system-capacitor-binding": "link:../../../backend/bindings/capacitor"
     },
