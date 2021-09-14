@@ -56,7 +56,7 @@ export const parseDeepLink = (addressPrefix, input) => {
 
     try {
         const url = new URL(input)
-
+        
         if (url.protocol === "iota:") {
             if (url.host === "wallet") {
                 // Remove any leading and trailing slashes
@@ -110,13 +110,14 @@ export const parseWalletSendDeepLink = (addressPrefix, url, pathParts) => {
         return
     }
 
-    const unitParam: Unit = url.searchParams.get('unit') as Unit ?? Unit.i
-    if (!Object.values(Unit).includes(unitParam)) {
+    const unitParam = url.searchParams.get('unit') ?? Unit
+    const parsedUnit: Unit = unitParam.length > 1 ? unitParam.charAt(0).toUpperCase() + unitParam.slice(1) : unitParam.toLowerCase() as Unit 
+    if (!Object.values(Unit).includes(parsedUnit)) {
         addError({ time: Date.now(), type: "deepLink", message: `Unit is not recognised '${unitParam}'` })
         return
     }
 
-    if (unitParam === "i" && !Number.isInteger(parsedAmount)) {
+    if (parsedUnit === "i" && !Number.isInteger(parsedAmount)) {
         addError({ time: Date.now(), type: "deepLink", message: `For unit 'i' the amount must be an integer '${parsedAmount}'` })
         return
     }
@@ -127,7 +128,7 @@ export const parseWalletSendDeepLink = (addressPrefix, url, pathParts) => {
         params: {
             address,
             amount: Math.abs(parsedAmount),
-            unit: unitParam,
+            unit: parsedUnit,
             message: url.searchParams.get('msg') ?? ''
         }
     }
