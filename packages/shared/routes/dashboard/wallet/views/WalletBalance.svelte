@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button } from 'shared/components'
+    import { Button, BalanceSummary } from 'shared/components'
     import { appSettings } from 'shared/lib/appSettings'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
@@ -47,13 +47,9 @@
 <wallet-balance
     class="relative z-0 bg-gradient-to-b from-{color}-500 to-{color}-600 dark:from-gray-800 dark:to-gray-900 rounded-t-xl px-8"
     class:compressed={$walletRoute !== WalletRoutes.Init}>
-    <!-- Balance -->
     <div data-label="total-balance" class="flex flex-col flex-wrap space-y-5">
         <p class="text-11 leading-120 text-white uppercase tracking-widest">{locale('general.balance')}</p>
-        <div class="flex flex-row justify-between items-end">
-            <p class="text-28 leading-120 text-white font-600">{$balance.balance}</p>
-            <p class="text-12 leading-140 text-white font-600">{$balance.balanceFiat}</p>
-        </div>
+        <BalanceSummary balanceRaw={$balance.balanceRaw} balanceFiat={$balance.balanceFiat} />
     </div>
     <img
         class="bg-pattern"
