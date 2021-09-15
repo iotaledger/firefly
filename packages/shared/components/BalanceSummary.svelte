@@ -2,6 +2,7 @@
     import { Text, Tooltip } from 'shared/components'
     import { Unit } from '@iota/unit-converter'
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
+    import { onMount, tick } from 'svelte'
 
     export let color = 'blue' // TODO: profiles will have different colors
 
@@ -18,17 +19,21 @@
 
     function toggleTooltip() {
         showTooltip = !showTooltip
-        parentWidth = balanceBox.offsetWidth / 2
-        parentLeft = balanceBox.getBoundingClientRect().left
-        parentTop = balanceBox.getBoundingClientRect().top
     }
 
-    function togglePreciseBalance() {
+    async function togglePreciseBalance() {
         showPreciseBalance = !showPreciseBalance
-        parentWidth = balanceBox.offsetWidth / 2
-        parentLeft = balanceBox.getBoundingClientRect().left
-        parentTop = balanceBox.getBoundingClientRect().top
+        await tick()
+        refreshParentBox()
     }
+
+    function refreshParentBox() {
+        parentWidth = balanceBox?.offsetWidth / 2 ?? 0
+        parentLeft = balanceBox?.getBoundingClientRect().left ?? 0
+        parentTop = balanceBox?.getBoundingClientRect().top ?? 0
+    }
+
+    onMount(refreshParentBox)
 </script>
 
 <div class="flex items-start flex-col flex-wrap space-y-1.5">

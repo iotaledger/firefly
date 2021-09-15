@@ -6,15 +6,21 @@
     export let parentTop = 0
     export let parentWidth = 0
 
+    let rendered = false
+
     let tooltip
     let top = 0
     let left = 0
 
     $: darkModeEnabled = $appSettings.darkMode
 
-    onMount(() => {
+    $: if (rendered) {
         top = parentTop - tooltip.offsetHeight - 15
         left = parentLeft - tooltip.offsetWidth / 2 + parentWidth
+    }
+
+    onMount(() => {
+        rendered = true
     })
 </script>
 
