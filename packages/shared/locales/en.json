@@ -635,6 +635,7 @@
         "outgoingMi": "Outgoing {value}",
         "portoflio": "Portfolio",
         "token": "Token",
+        "holdings": "Holdings",
         "accountValue": "Wallet Value",
         "accountActivity": "Wallet Activity",
         "timeframe1Hour": "1 hour",
