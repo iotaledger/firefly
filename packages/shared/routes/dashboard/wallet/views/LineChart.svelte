@@ -53,7 +53,7 @@
                 // Account value chart
                 if ($selectedAccount) {
                     switch ($selectedWalletChart) {
-                        case DashboardChartType.HOLDINGS:
+                        case WalletChartType.HOLDINGS:
                             chartData = getChartDataFromBalanceHistory({
                                 balanceHistory: $accountsBalanceHistory[$selectedAccount.index],
                                 currentBalance: $selectedAccount.rawIotaBalance,
@@ -61,7 +61,7 @@
                                 convertToSelectedCurrency: false,
                             })
                             break
-                        case DashboardChartType.PORTFOLIO:
+                        case WalletChartType.PORTFOLIO:
                             chartData = getChartDataFromBalanceHistory({
                                 balanceHistory: $accountsBalanceHistory[$selectedAccount.index],
                                 currentBalance: $selectedAccount.rawIotaBalance,
@@ -151,10 +151,10 @@
     }
 
     function formatYAxis(value) {
-        formatCurrencyValue(
+        return formatCurrencyValue(
             value,
             (!$selectedAccount && $selectedDashboardChart === DashboardChartType.HOLDINGS) ||
-                ($selectedAccount && $selectedWalletChart === DashboardChartType.HOLDINGS)
+                ($selectedAccount && $selectedWalletChart === WalletChartType.HOLDINGS)
                 ? CurrencyTypes.IOTA
                 : $activeProfile?.settings.chartSelectors.currency
                 ? $activeProfile?.settings.chartSelectors.currency
@@ -207,7 +207,7 @@
             </div>
         {/if}
         <div class="flex justify-between items-center space-x-2">
-            {#if (!$selectedAccount && $selectedDashboardChart === DashboardChartType.HOLDINGS) || ($selectedAccount && $selectedWalletChart === DashboardChartType.HOLDINGS)}
+            {#if (!$selectedAccount && $selectedDashboardChart === DashboardChartType.HOLDINGS) || ($selectedAccount && $selectedWalletChart === WalletChartType.HOLDINGS)}
                 <span>
                     <Dropdown small value={tokenDropdownItems[0].label} items={tokenDropdownItems} contentWidth={true} />
                 </span>
