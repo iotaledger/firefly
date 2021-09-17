@@ -64,7 +64,7 @@ export const parseWalletSendDeepLink = (addressPrefix, url, pathParts) => {
         return addError({ time: Date.now(), type: "deepLink", message: `Address '${address}' does not match prefix '${addressPrefix}' or format` })
     }
 
-    const amountParam = url.searchParams.get('amt')
+    const amountParam = url.searchParams.get('amt') ?? 0
     const parsedAmount = Number.parseFloat(amountParam)
     if (Number.isNaN(parsedAmount) || !Number.isFinite(parsedAmount)) {
         return addError({ time: Date.now(), type: "deepLink", message: `Amount is not a number '${amountParam}'` })

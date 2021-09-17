@@ -59,7 +59,7 @@
     const { accounts, balanceOverview, accountsLoaded, internalTransfersInProgress } = $wallet
 
     $: {
-        if ($deepLinkRequestActive && $sendParams && $sendParams.amount && $sendParams.address) {
+        if ($deepLinkRequestActive && $sendParams && $sendParams.address) {
             walletRoute.set(WalletRoutes.Send)
             deepLinkRequestActive.set(false)
         }
