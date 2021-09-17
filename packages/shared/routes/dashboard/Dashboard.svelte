@@ -4,10 +4,9 @@
     import { Electron } from 'shared/lib/electron'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
-    import { NOTIFICATION_TIMEOUT_NEVER, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
+    import { NOTIFICATION_TIMEOUT_NEVER, removeDisplayNotification, showSystemNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
-    import { showSystemNotification } from 'shared/lib/notifications'
     import { accountRoute, dashboardRoute, routerNext, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
     import {
@@ -21,8 +20,7 @@
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { appSettings } from 'shared/lib/appSettings'
-    import { deepLinkRequestActive } from 'shared/lib/deepLinking'
-    import { parseDeepLink } from 'shared/lib/utils'
+    import { deepLinkRequestActive, parseDeepLink } from 'shared/lib/deepLinking'
 
     const { accountsLoaded, accounts } = $wallet
 
@@ -47,9 +45,11 @@
         }
     })
 
-    const accountsSubscription = accountsLoaded.subscribe(() => {
-        Electron.DeepLinkManager.requestDeepLink()
-        Electron.onEvent('deep-link-params', (data) => handleDeepLinkRequest(data))
+    accountsLoaded.subscribe(() => {
+        if (get(accountsLoaded)) {
+            Electron.DeepLinkManager.requestDeepLink()
+            Electron.onEvent('deep-link-params', (data) => handleDeepLinkRequest(data))
+        }
     })
 
     onMount(async () => {
@@ -79,7 +79,6 @@
         }
 
         Electron.DeepLinkManager.requestDeepLink()
-        Electron.onEvent('deep-link-params', (data) => handleDeepLinkRequest(data))
 
         Electron.onEvent('menu-logout', () => {
             logout()
@@ -158,9 +157,7 @@
         } else {
             if ($accounts && $accounts.length > 0) {
                 let addressPrefix = $accounts[0].depositAddress.split('1')[0]
-
                 const parsedData = parseDeepLink(addressPrefix, data)
-
                 if (parsedData && parsedData.context === 'wallet' && parsedData.operation === 'send') {
                     _redirect(Tabs.Wallet)
                     sendParams.set({
