@@ -4,7 +4,7 @@
     import { Electron } from 'shared/lib/electron'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
-    import { NOTIFICATION_TIMEOUT_NEVER, removeDisplayNotification, showSystemNotification } from 'shared/lib/notifications'
+    import { NOTIFICATION_TIMEOUT_NEVER, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
     import { accountRoute, dashboardRoute, routerNext, walletRoute } from 'shared/lib/router'
@@ -153,7 +153,7 @@
         }
         if (!$appSettings.deepLinking) {
             _redirect(Tabs.Settings)
-            showSystemNotification({ type: 'info', message: locale('notifications.deepLinkingIsNotEnabled') })
+            showAppNotification({ type: 'info', message: locale('notifications.deepLinkingIsNotEnabled') })
         } else {
             if ($accounts && $accounts.length > 0) {
                 let addressPrefix = $accounts[0].depositAddress.split('1')[0]
@@ -165,7 +165,7 @@
                         isInternal: false,
                     })
                 } else {
-                    showSystemNotification({ type: 'error', message: locale('notifications.deepLinkingInvalidFormat') })
+                    showAppNotification({ type: 'error', message: locale('notifications.deepLinkingInvalidFormat') })
                 }
             }
         }
