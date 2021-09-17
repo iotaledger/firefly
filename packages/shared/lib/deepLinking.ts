@@ -70,7 +70,7 @@ export const parseWalletSendDeepLink = (addressPrefix, url, pathParts) => {
         return addError({ time: Date.now(), type: "deepLink", message: `Amount is not a number '${amountParam}'` })
     }
 
-    const unitParam = url.searchParams.get('unit') ?? Unit
+    const unitParam = url.searchParams.get('unit') ?? Unit.i
     const parsedUnit: Unit = unitParam.length > 1 ? unitParam.charAt(0).toUpperCase() + unitParam.slice(1).toLowerCase() : unitParam.toLowerCase() as Unit
     if (!Object.values(Unit).includes(parsedUnit)) {
         return addError({ time: Date.now(), type: "deepLink", message: `Unit is not recognised '${unitParam}'` })
