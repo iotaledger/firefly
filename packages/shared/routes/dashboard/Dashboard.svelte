@@ -78,8 +78,6 @@
             )
         }
 
-        Electron.DeepLinkManager.requestDeepLink()
-
         Electron.onEvent('menu-logout', () => {
             logout()
         })
