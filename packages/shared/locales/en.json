@@ -360,8 +360,8 @@
                 "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
             },
             "deepLinks": {
-                "title": "Deep links",
-                "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
+                "title": "IOTA links",
+                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
             },
             "developerMode": {
                 "title": "Developer mode",
@@ -683,7 +683,7 @@
         "syncAll": "Sync all",
         "export": "Export",
         "exportNewStronghold": "Export a new Stronghold",
-        "enableDeepLinks": "Enable deep links",
+        "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "Enable developer mode",
         "enableSystemNotifications": "Enable system notifications",
         "exportState": "Export state",
@@ -885,8 +885,8 @@
         "copiedToClipboard": "Copied to clipboard",
         "accountsSynchronized": "Wallet synchronization complete",
         "fundsAvailableSoon": "Your funds will become available shortly",
-        "deepLinkingIsNotEnabled": "Deep linking is not enable for the wallet.",
-        "deepLinkingInvalidFormat": "The format of the deep link was invalid."
+        "deepLinkingIsNotEnabled": "IOTA links are not enabled",
+        "deepLinkingInvalidFormat": "The IOTA link you clicked is invalid."
     },
     "error": {
         "profile": {

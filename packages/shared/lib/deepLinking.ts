@@ -7,8 +7,6 @@ import { writable } from 'svelte/store';
  */
 export const deepLinkRequestActive = writable<boolean>(false)
 
-export const IOTA_SCHEME = 'iota'
-
 /**
  * Parse a deep link for the app (iota://)
  * @param {string} data Deep link data
@@ -39,7 +37,7 @@ export const parseDeepLink = (addressPrefix, input) => {
                 return addError({ time: Date.now(), type: "deepLink", message: `Unrecognized context '${url.host}'` })
             }
         } else {
-            return addError({ time: Date.now(), type: "deepLink", message: `Error handling deep link. Does not start with ${IOTA_SCHEME}//` })
+            return addError({ time: Date.now(), type: "deepLink", message: `Error handling deep link. Does not start with iota://` })
         }
     } catch (err) {
         return addError({ time: Date.now(), type: "deepLink", message: `Error handling deep link. ${err.message}` })
