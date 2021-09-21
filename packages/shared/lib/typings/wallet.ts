@@ -40,7 +40,7 @@ export function backup(bridge: Bridge, __ids: CommunicationIds, destinationPath:
         payload: {
             destination: destinationPath,
             password,
-        }
+        },
     })
 }
 
@@ -159,7 +159,7 @@ export function getLedgerDeviceStatus(bridge: Bridge, __ids: CommunicationIds, i
         actorId: __ids.actorId,
         id: __ids.messageId,
         cmd: 'GetLedgerStatus',
-        payload: isSimulator
+        payload: isSimulator,
     })
 }
 

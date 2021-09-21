@@ -8,13 +8,12 @@ use iota_wallet::{
     actor::{MessageType, Response, ResponseType},
     client::drop_all as drop_clients,
     event::{
-        on_balance_change, on_broadcast, on_confirmation_state_change, on_error,
-        on_migration_progress, on_new_transaction, on_reattachment, on_stronghold_status_change,
-        on_transfer_progress, on_ledger_address_generation, remove_balance_change_listener, remove_broadcast_listener,
-        remove_confirmation_state_change_listener, remove_error_listener,
-        remove_migration_progress_listener, remove_new_transaction_listener,
-        remove_reattachment_listener, remove_stronghold_status_change_listener,
-        remove_transfer_progress_listener, remove_ledger_address_generation_listener, EventId,
+        on_balance_change, on_broadcast, on_confirmation_state_change, on_error, on_ledger_address_generation,
+        on_migration_progress, on_new_transaction, on_reattachment, on_stronghold_status_change, on_transfer_progress,
+        remove_balance_change_listener, remove_broadcast_listener, remove_confirmation_state_change_listener,
+        remove_error_listener, remove_ledger_address_generation_listener, remove_migration_progress_listener,
+        remove_new_transaction_listener, remove_reattachment_listener, remove_stronghold_status_change_listener,
+        remove_transfer_progress_listener, EventId,
     },
 };
 use once_cell::sync::Lazy;
@@ -28,11 +27,13 @@ use tokio::{
     },
 };
 
-use std::collections::HashMap;
-use std::convert::TryFrom;
-use std::path::{Path, PathBuf};
-use std::sync::{mpsc::Sender, Arc, Mutex};
-use std::time::Duration;
+use std::{
+    collections::HashMap,
+    convert::TryFrom,
+    path::{Path, PathBuf},
+    sync::{mpsc::Sender, Arc, Mutex},
+    time::Duration,
+};
 
 struct WalletActorData {
     listeners: Vec<(EventId, EventType)>,
@@ -158,14 +159,10 @@ async fn remove_event_listeners_internal(listeners: &[(EventId, EventType)]) {
             EventType::ErrorThrown => remove_error_listener(event_id),
             EventType::BalanceChange => remove_balance_change_listener(event_id).await,
             EventType::NewTransaction => remove_new_transaction_listener(event_id).await,
-            EventType::ConfirmationStateChange => {
-                remove_confirmation_state_change_listener(event_id).await
-            }
+            EventType::ConfirmationStateChange => remove_confirmation_state_change_listener(event_id).await,
             EventType::Reattachment => remove_reattachment_listener(event_id).await,
             EventType::Broadcast => remove_broadcast_listener(event_id).await,
-            EventType::StrongholdStatusChange => {
-                remove_stronghold_status_change_listener(event_id).await
-            }
+            EventType::StrongholdStatusChange => remove_stronghold_status_change_listener(event_id).await,
             EventType::TransferProgress => remove_transfer_progress_listener(event_id).await,
             EventType::LedgerAddressGeneration => remove_ledger_address_generation_listener(event_id).await,
             EventType::MigrationProgress => remove_migration_progress_listener(event_id).await,
@@ -397,9 +394,11 @@ pub async fn listen<A: Into<String>, S: Into<String>>(actor_id: A, id: S, event_
 #[cfg(test)]
 mod tests {
     use iota_wallet::actor::{MessageType, Response, ResponseType};
-    use std::path::PathBuf;
-    use std::sync::{mpsc::channel, Mutex};
-    use std::time::Duration;
+    use std::{
+        path::PathBuf,
+        sync::{mpsc::channel, Mutex},
+        time::Duration,
+    };
     use tokio::runtime::Runtime;
 
     #[test]
@@ -440,10 +439,7 @@ mod tests {
             if let Ok(message) = rx.recv_timeout(Duration::from_secs(1)) {
                 let value: serde_json::Value = serde_json::from_str(&message).unwrap();
                 let json = value.as_object().unwrap();
-                assert_eq!(
-                    json.get("type"),
-                    Some(&serde_json::Value::String("Error".to_string()))
-                );
+                assert_eq!(json.get("type"), Some(&serde_json::Value::String("Error".to_string())));
                 let payload = json.get("payload").unwrap().as_object().unwrap();
                 assert_eq!(
                     payload.get("type"),
@@ -497,8 +493,7 @@ mod tests {
     }
 
     use futures::{Future, FutureExt};
-    use std::any::Any;
-    use std::panic::AssertUnwindSafe;
+    use std::{any::Any, panic::AssertUnwindSafe};
 
     fn panic_message(panic: Box<dyn Any>) -> String {
         if let Some(message) = panic.downcast_ref::<String>() {

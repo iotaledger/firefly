@@ -1,8 +1,5 @@
 import type { ResponseTypes } from './bridge'
-import type {
-    Message,
-    UTXOEventData
-} from './message'
+import type { Message, UTXOEventData } from './message'
 
 // Reference: https://github.com/iotaledger/wallet.rs/blob/develop/src/error.rs
 export enum ErrorType {
@@ -99,8 +96,8 @@ export interface BalanceChangeEventPayload {
     accountId: string
     address: string
     balanceChange: {
-        spent: number;
-        received: number;
+        spent: number
+        received: number
     }
 }
 
@@ -116,10 +113,10 @@ export interface ConfirmationStateChangeEventPayload {
 }
 
 export interface ReattachmentEventPayload {
-    indexationId: string;
-    accountId: string;
-    message: Message;
-    reattachedMessageId: string;
+    indexationId: string
+    accountId: string
+    message: Message
+    reattachedMessageId: string
 }
 
 export enum TransferProgressEventType {
@@ -138,7 +135,7 @@ export enum TransferProgressEventType {
     /// Broadcasting.
     Broadcasting = 'Broadcasting',
     /// Complete.
-    Complete = 'Complete'
+    Complete = 'Complete',
 }
 
 export interface TransferProgressEvent {
@@ -158,7 +155,6 @@ export interface PreparedTransactionEvent extends TransferProgressEvent {
     outputs: UTXOEventData[]
     /// Indexation data.
     data?: string
-
 }
 
 export type TransferProgressEventData = TransferProgressEvent | GeneratingRemainderDepositAddressEvent | PreparedTransactionEvent
@@ -174,11 +170,11 @@ export interface TransferProgressEventPayload {
 }
 
 export interface LedgerAddressGenerationEventPayload {
-    event: LedgerAddressGenerationEvent;
+    event: LedgerAddressGenerationEvent
 }
 
 export interface LedgerAddressGenerationEvent {
-    address: string;
+    address: string
 }
 
 export enum MigrationProgressEventType {
@@ -195,7 +191,7 @@ export enum MigrationProgressEventType {
     /// Broadcasting.
     Broadcasting = 'Broadcasting',
     // Transaction confirmed (through promotion & reattachment)
-    TransactionConfirmed = 'TransactionConfirmed'
+    TransactionConfirmed = 'TransactionConfirmed',
 }
 
 export interface FetchingMigrationDataEvent {
@@ -227,7 +223,6 @@ export interface BroadcastingBundleEvent {
     }
 }
 
-
 export interface LegacyTransactionConfirmedEvent {
     type: 'TransactionConfirmed'
     data: {
@@ -235,7 +230,11 @@ export interface LegacyTransactionConfirmedEvent {
     }
 }
 
-
 export interface MigrationProgressEventPayload {
-    event: FetchingMigrationDataEvent | MiningEvent | SigningBundleEvent | BroadcastingBundleEvent | LegacyTransactionConfirmedEvent
+    event:
+        | FetchingMigrationDataEvent
+        | MiningEvent
+        | SigningBundleEvent
+        | BroadcastingBundleEvent
+        | LegacyTransactionConfirmedEvent
 }

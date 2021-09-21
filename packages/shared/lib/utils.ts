@@ -7,6 +7,7 @@ import validUrl from 'valid-url';
 export const ADDRESS_LENGTH = 64;
 export const PIN_LENGTH = 6;
 
+
 export function bindEvents(element, events) {
     const listeners = Object.entries(events).map(([event, handler]) => {
         const listener = element.addEventListener(event, handler)
@@ -93,8 +94,7 @@ export const validateBech32Address = (prefix, addr) => {
     try {
         const decoded = Bech32.decode(addr)
         isValid = decoded && decoded.humanReadablePart === prefix
-    } catch {
-    }
+    } catch { }
 
     if (!isValid) {
         return localize('error.send.invalidAddress')
@@ -139,7 +139,7 @@ export const setClipboard = (input: string): boolean => {
         document.body.removeChild(textArea)
 
         const notificationMessage = localize('notifications.copiedToClipboard')
-        showAppNotification({ type: "info", message: notificationMessage })
+        showAppNotification({ type: 'info', message: notificationMessage })
 
         return true
     } catch (err) {
@@ -151,9 +151,9 @@ export const setClipboard = (input: string): boolean => {
 export const getDefaultStrongholdName = (): string => {
     // Match https://github.com/iotaledger/wallet.rs/blob/ffbeaa3466b44f79dd5f87e14ed1bdc4846d9e85/src/account_manager.rs#L1428
     // Trim milliseconds and replace colons with dashes
-    const tzoffset = (new Date()).getTimezoneOffset() * 60000; // offset in milliseconds
-    const localISOTime = (new Date(Date.now() - tzoffset)).toISOString()
-    const date = localISOTime.slice(0, -5).replace(/:/g, "-")
+    const tzoffset = new Date().getTimezoneOffset() * 60000 // offset in milliseconds
+    const localISOTime = new Date(Date.now() - tzoffset).toISOString()
+    const date = localISOTime.slice(0, -5).replace(/:/g, '-')
     return `firefly-backup-${date}.stronghold`
 }
 
