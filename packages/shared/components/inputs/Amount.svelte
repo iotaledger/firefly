@@ -60,7 +60,7 @@
             } else {
                 const rawAmount = convertFromFiat(amount, $currencies[CurrencyTypes.USD], $exchangeRates[currency])
                 if(rawAmount > MAX_VALUE) {
-                    amount = convertToFiat(MAX_VALUE, $currencies[CurrencyTypes.USD], $exchangeRates[currency])
+                    amount = convertToFiat(MAX_VALUE, $currencies[CurrencyTypes.USD], $exchangeRates[currency]).toString()
                 }
             }
         }
@@ -92,6 +92,8 @@
 
     const convertAmount = (_amount, _unit, convertFn) => {
         if(!amount) return null
+
+        console.log('AMT: ', _amount)
 
         const amountAsFloat = parseCurrency(_amount, _unit)
         if (amountAsFloat === 0 || Number.isNaN(amountAsFloat)) return null
@@ -242,7 +244,7 @@
                 {#each Units as _unit}
                     <button
                         id={_unit}
-                        class="text-center w-full py-2 {unit === _unit && 'bg-gray-100 dark:bg-gray-700 dark:bg-opacity-20'} 
+                        class="text-center w-full py-2 {unit === _unit && 'bg-gray-100 dark:bg-gray-700 dark:bg-opacity-20'}
                         hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20
                         focus:bg-gray-200 dark:focus:bg-gray-800 dark:focus:bg-opacity-20"
                         on:click={() => onUnitSelect(_unit)}
