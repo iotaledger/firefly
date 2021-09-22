@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, BalanceSummary } from 'shared/components'
+    import { BalanceSummary, Button } from 'shared/components'
     import { appSettings } from 'shared/lib/appSettings'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
