@@ -1,10 +1,13 @@
 <script lang="typescript">
     import { Text, Button } from 'shared/components'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale = undefined
-    export let onDrop = (buffer?, name?, path?) => {}
+    export let locale: Locale
+
     export let extentionsLabel = ''
     export let allowedExtensions
+
+    export let onDrop = (buffer?: ArrayBufferLike, name?: string, path?: string): void => {}
 
     let dropping = false
     let fileName = null

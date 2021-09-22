@@ -22,7 +22,7 @@
     }
 
     let root
-    let inputElements = []
+    const inputElements = []
 
     const KEYBOARD = {
         BACKSPACE: 8,
@@ -30,7 +30,7 @@
         TAB: 9,
     }
 
-    onMount(async () => {
+    onMount(() => {
         if (autofocus) {
             focus()
         }
@@ -50,7 +50,7 @@
     }
 
     const changeHandler = function (e, i) {
-        let regex = new RegExp(/^\d+$/)
+        const regex = new RegExp(/^\d+$/)
 
         if (e.keyCode == KEYBOARD.BACKSPACE) {
             handleBackspace()
@@ -91,19 +91,19 @@
         }
     }
 
-    const selectFirstEmptyRoot = (e) => {
+    const selectFirstEmptyRoot = (e): void => {
         if (e.target === root) {
             selectFirstEmpty()
         }
     }
 
-    export function focus() {
+    export function focus(): void {
         if (!disabled) {
             selectFirstEmpty()
         }
     }
 
-    export function resetAndFocus() {
+    export function resetAndFocus(): void {
         if (!disabled) {
             inputs = new Array(PIN_LENGTH)
             selectFirstEmpty()

@@ -16,6 +16,7 @@ import {
     LegacyLedgerErrorName,
 } from './typings/ledger'
 import type { NotificationType } from './typings/notification'
+import { Error } from './typings/error'
 
 const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
 const LEGACY_ADDRESS_WITH_CHECKSUM_LENGTH = 90
@@ -31,14 +32,15 @@ export function getLedgerDeviceStatus(
     onConnected: () => void = () => {},
     onDisconnected: () => void = () => {},
     onError: () => void = () => {}
-) {
+): void {
     api.getLedgerDeviceStatus(ledgerSimulator, {
         onSuccess(response: Event<LedgerStatus>) {
             ledgerDeviceState.set(calculateLedgerDeviceState(response.payload))
 
             const state = get(ledgerDeviceState)
             const isConnected =
-                (legacy && state === LedgerDeviceState.LegacyConnected) || (!legacy && state === LedgerDeviceState.Connected)
+                (legacy && state === LedgerDeviceState.LegacyConnected) ||
+                (!legacy && state === LedgerDeviceState.Connected)
             if (isConnected) {
                 if (get(popupState).active && get(popupState).type === 'ledgerNotConnected') {
                     closePopup()
@@ -102,7 +104,7 @@ export function promptUserToConnectLedger(
     legacy: boolean = false,
     onConnected: () => void = () => {},
     onCancel: () => void = () => {}
-) {
+): void {
     const _onCancel = () => {
         onCancel()
     }
@@ -131,6 +133,7 @@ export function displayNotificationForLedgerProfile(
     checkDeviceStatus: boolean = false,
     ignoreNotDetected: boolean = false,
     legacy: boolean = false,
+    /* eslint-disable @typescript-eslint/no-explicit-any */
     error: any = null
 ): string {
     let notificationId
@@ -147,7 +150,11 @@ export function displayNotificationForLedgerProfile(
 
         if (canNotify && shouldNotify) {
             const stateErrorMessage = localize(`error.ledger.${state}`)
-            const errorMessage = legacy ? getLegacyErrorMessage(error, true) : error?.error ? localize(error.error) : error
+            const errorMessage = legacy
+                ? getLegacyErrorMessage(error, true)
+                : error?.error
+                ? localize(error.error)
+                : error
 
             const message = error ? (isLedgerError(error) ? stateErrorMessage : errorMessage) : stateErrorMessage
             notificationId = showAppNotification({
@@ -171,7 +178,7 @@ export function displayNotificationForLedgerProfile(
     return notificationId
 }
 
-export function isLedgerError(error: any): boolean {
+export function isLedgerError(error: { name; type }): boolean {
     if (!error) return false
 
     let errorType: string = ''
@@ -195,17 +202,22 @@ export function pollLedgerDeviceStatus(
     _onConnected: () => void = () => {},
     _onDisconnected: () => void = () => {},
     _onCancel: () => void = () => {}
-) {
+): void {
     if (!get(isPollingLedgerDeviceStatus)) {
         getLedgerDeviceStatus(legacy, _onConnected, _onDisconnected, _onCancel)
-        intervalTimer = setInterval(async () => {
+        /* eslint-disable @typescript-eslint/no-misused-promises */
+        intervalTimer = setInterval(() => {
             getLedgerDeviceStatus(legacy, _onConnected, _onDisconnected, _onCancel)
         }, pollInterval)
         isPollingLedgerDeviceStatus.set(true)
     }
 }
 
-function openLedgerNotConnectedPopup(legacy: boolean = false, cancel: () => void = () => {}, poll: () => void = () => {}) {
+function openLedgerNotConnectedPopup(
+    legacy: boolean = false,
+    cancel: () => void = () => {},
+    poll: () => void = () => {}
+) {
     if (!get(popupState).active) {
         openPopup({
             type: 'ledgerNotConnected',
@@ -227,7 +239,7 @@ export function stopPollingLedgerStatus(): void {
     }
 }
 
-export function getLegacyErrorMessage(error: any, shouldLocalize: boolean = false): string {
+export function getLegacyErrorMessage(error: { name; statusCode }, shouldLocalize: boolean = false): string {
     let errorMessage = 'error.global.generic'
     switch (error?.name) {
         case LegacyLedgerErrorName.TransportStatusError:
@@ -256,7 +268,7 @@ export function formatAddressForLedger(address: string, removeChecksum: boolean 
     return `${address.slice(0, len / 2)}\n${address.slice(len / 2, len)}`
 }
 
-export function navigateToNewIndexMigration() {
+export function navigateToNewIndexMigration(): void {
     resetWalletRoute()
     walletSetupType.set(SetupType.TrinityLedger)
     forceNextRoute(AppRoute.LedgerSetup)

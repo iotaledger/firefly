@@ -1,11 +1,14 @@
 <script lang="typescript">
     import { Text } from 'shared/components'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     export let color
     export let balance
     export let balanceEquiv
-    export let onMenuClick
+
+    export let onMenuClick = (): void => {}
 </script>
 
 <div class="relative bg-gradient-to-b from-{color}-500 to-{color}-600 dark:from-gray-800 dark:to-gray-900 pt-6 pb-10 px-8 z-0">

@@ -8,7 +8,7 @@ const mode = process.env.NODE_ENV || 'development'
 const prod = mode === 'production'
 const hardcodeNodeEnv = typeof process.env.HARDCODE_NODE_ENV !== 'undefined'
 
-/// ------------------------ Resolve ------------------------
+// / ------------------------ Resolve ------------------------
 
 const resolve = {
     alias: {
@@ -22,7 +22,7 @@ const resolve = {
     },
 }
 
-/// ------------------------ Output ------------------------
+// / ------------------------ Output ------------------------
 
 const output = {
     publicPath: prod ? '../' : '/',
@@ -31,7 +31,7 @@ const output = {
     chunkFilename: '[name].[id].js',
 }
 
-/// ------------------------ Module rules ------------------------
+// / ------------------------ Module rules ------------------------
 
 const mainRules = [
     {
@@ -95,7 +95,7 @@ const rendererRules = [
     },
 ]
 
-/// ------------------------ Plugins ------------------------
+// / ------------------------ Plugins ------------------------
 
 const mainPlugins = [
     new DefinePlugin({
@@ -130,7 +130,7 @@ const rendererPlugins = [
     }),
 ]
 
-/// ------------------------ Webpack config ------------------------
+// / ------------------------ Webpack config ------------------------
 
 module.exports = [
     {

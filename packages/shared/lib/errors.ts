@@ -1,16 +1,8 @@
 import { persistent } from 'shared/lib/helpers'
-
-/**
- * Error interface
- */
-export interface Error {
-    time: number
-    type: string
-    message: string
-}
+import type { Error } from './typings/error'
 
 export const errorLog = persistent<Error[]>('errorLog', [])
 
-export const addError = (err: Error) => {
+export const addError = (err: Error): void => {
     errorLog.update((log) => [err, ...log])
 }

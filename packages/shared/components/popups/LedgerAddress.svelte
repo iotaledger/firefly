@@ -1,12 +1,13 @@
-<script lang="ts">
+<script lang="typescript">
     import { Animation,Text } from 'shared/components';
     import { formatAddressForLedger } from 'shared/lib/ledger';
     import { showAppNotification } from 'shared/lib/notifications';
     import { closePopup,popupState } from 'shared/lib/popup';
     import { onMount } from 'svelte';
     import { get } from 'svelte/store';
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
     export let address = ''
 

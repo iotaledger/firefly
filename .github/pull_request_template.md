@@ -32,4 +32,5 @@ Add an `x` to the boxes that are relevant to your changes, and delete any items 
 - [ ] I have commented my code, particularly in hard-to-understand areas
 - [ ] I have made corresponding changes to the documentation
 - [ ] I have added tests that prove my fix is effective or that my feature works
+- [ ] I have checked that my latest changes pass CI tests
 - [ ] New and existing unit tests pass locally with my changes

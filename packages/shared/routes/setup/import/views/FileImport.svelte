@@ -1,9 +1,12 @@
 <script lang="typescript">
     import { Animation, Button, Dropzone, OnboardingLayout, Text } from 'shared/components'
     import { createEventDispatcher } from 'svelte'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     export let mobile
+
     let file
     let fileName
     let filePath

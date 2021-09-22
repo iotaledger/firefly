@@ -1,10 +1,13 @@
 <script lang="typescript">
     import { Button, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
-    export let onSuccess
+    export let locale: Locale
+
     export let node
+
+    export let onSuccess = (...args: any[]): void => {}
 
     function removeCustomNode() {
         if (onSuccess) {

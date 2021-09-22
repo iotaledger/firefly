@@ -1,8 +1,10 @@
 <script lang="typescript">
     import { Animation, Button, OnboardingLayout, Password, Spinner, Text } from 'shared/components'
     import { createEventDispatcher } from 'svelte'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     export let mobile
     export let strongholdPassword
     export let busy = false

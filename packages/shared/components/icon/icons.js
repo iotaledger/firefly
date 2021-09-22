@@ -745,6 +745,7 @@ export const icons = {
             },
         ],
     },
+    /* eslint-disable no-dupe-keys */
     transfer: {
         width: 24,
         height: 24,
@@ -946,6 +947,7 @@ export const icons = {
             },
         ],
     },
+    /* eslint-disable no-dupe-keys */
     'success-check': {
         width: 38,
         height: 36,

@@ -13,6 +13,7 @@
     export let progress: ProgressStep[] = []
     export let classes = ''
 
+    let darkModeEnabled
     $: darkModeEnabled = $appSettings.darkMode
 </script>
 

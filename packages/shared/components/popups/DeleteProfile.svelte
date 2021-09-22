@@ -8,8 +8,9 @@
     import { AppRoute } from 'shared/lib/typings/routes'
     import { api } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
     let isBusy = false
     let error = ''

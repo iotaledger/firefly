@@ -1,8 +1,10 @@
 <script lang="typescript">
     import { Button, Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     export let dashboard = true
 </script>
 

@@ -22,7 +22,7 @@ export interface BridgeMessage {
     // TODO: rename to messageId for clarity
     id: string
     cmd: string
-    payload?: any
+    payload?: unknown
 }
 
 export enum ResponseTypes {

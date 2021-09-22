@@ -1,4 +1,4 @@
-import type { ErrorTypes as ValidatorErrorTypes } from '../validator'
+import type { ErrorTypes as ValidatorErrorTypes } from '../typings/validator'
 import type { ErrorType } from '../typings/events'
 
 const errorMessages: {

@@ -1,11 +1,13 @@
 <script lang="typescript">
     import { icons } from './icons'
+
     export let icon = undefined
     export let width = undefined
     export let height = undefined
     export let classes = ''
     export let boxed = false
     export let boxClasses = 'undefined'
+
     $: selected = icons[icon]
 </script>
 
