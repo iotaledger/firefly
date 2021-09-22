@@ -16,6 +16,6 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Check vulnerabilities
-        uses: snyk/actions/node@master
+        uses: snyk/actions/node@0.3.0
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
