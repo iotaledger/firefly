@@ -9,7 +9,6 @@
     export let error = false
     export let overrideColor = false
     export let classes = '' // ISSUE: https://github.com/tailwindlabs/tailwindcss/discussions/1446
-    export let value
 </script>
 
 <style type="text/scss">
@@ -67,7 +66,6 @@
         class:disabled
         class:highlighted
         class:error>
-        {#if value}{value}{/if}
         <slot />
     </h1>
 {:else if type === 'h2'}
@@ -77,7 +75,6 @@
         class:disabled
         class:highlighted
         class:error>
-        {#if value}{value}{/if}
         <slot />
     </h2>
 {:else if type === 'h3'}
@@ -87,7 +84,6 @@
         class:disabled
         class:highlighted
         class:error>
-        {#if value}{value}{/if}
         <slot />
     </h3>
 {:else if type === 'h4'}
@@ -106,7 +102,6 @@
         class:disabled
         class:highlighted
         class:error>
-        {#if value}{value}{/if}
         <slot />
     </h5>
 {:else if type === 'p'}
@@ -119,7 +114,6 @@
         class:smaller
         class:bigger
         class:font-bold={bold}>
-        {#if value}{value}{/if}
         <slot />
     </p>
 {:else if type === 'pre'}
@@ -132,7 +126,6 @@
         class:smaller
         class:bigger
         class:font-bold={bold}>
-        {#if value}{value}{/if}
         <slot />
     </pre>
 {/if}
