@@ -1,8 +1,8 @@
 <script lang="typescript">
-    import { Text, Tooltip } from 'shared/components'
     import { Unit } from '@iota/unit-converter'
+    import { Text, Tooltip } from 'shared/components'
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
-    import { onMount, tick } from 'svelte'
+    import { tick } from 'svelte'
 
     export let color = 'blue' // TODO: profiles will have different colors
 
@@ -17,23 +17,25 @@
     let showTooltip = false
     let showPreciseBalance = false
 
+    $: balanceBox, showTooltip, showPreciseBalance, refreshParentBox()
+
     function toggleTooltip() {
         showTooltip = !showTooltip
     }
 
     async function togglePreciseBalance() {
         showPreciseBalance = !showPreciseBalance
-        await tick()
-        refreshParentBox()
     }
 
-    function refreshParentBox() {
+    async function refreshParentBox() {
+        if (!balanceBox || !showTooltip) {
+            return
+        }
+        await tick()
         parentWidth = balanceBox?.offsetWidth / 2 ?? 0
         parentLeft = balanceBox?.getBoundingClientRect().left ?? 0
         parentTop = balanceBox?.getBoundingClientRect().top ?? 0
     }
-
-    onMount(refreshParentBox)
 </script>
 
 <div class="flex items-start flex-col flex-wrap space-y-1.5">
