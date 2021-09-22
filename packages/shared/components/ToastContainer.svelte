@@ -3,6 +3,7 @@
     import { displayNotifications } from 'shared/lib/notifications'
     import { fade } from 'svelte/transition'
 
+    let toasts
     $: toasts = $displayNotifications.map((notification) => ({
         ...notification,
         actions: notification.actions.map((action, actionIndex) => ({

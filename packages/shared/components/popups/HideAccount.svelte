@@ -6,12 +6,18 @@
     import { accountRoute } from 'shared/lib/router'
     import { AccountRoutes } from 'shared/lib/typings/routes'
     import { api, selectedAccountId } from 'shared/lib/wallet'
+    import { AccountIdentifier } from 'shared/lib/typings/account'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
 
-    export let locale
-    export let account
-    export let hideAccount = (selectedAccountId) => {}
+    export let locale: Locale
+
+    export let account: WalletAccount
     export let hasMultipleAccounts
 
+    export let hideAccount = (selectedAccountId: AccountIdentifier): void => {}
+
+    let canDelete
     $: canDelete = $account ? $account.rawIotaBalance === 0 : false
 
     let password

@@ -1,12 +1,13 @@
-<script>
+<script lang="typescript">
     import { Animation, Button, Illustration, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
     import { LedgerAppName } from 'shared/lib/typings/ledger'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
     let stepIndex = 0
-    let stepAnimations = [
+    const stepAnimations = [
         'ledger-live-updated-desktop',
         'ledger-connected-2-desktop',
         'ledger-search-apps-desktop',

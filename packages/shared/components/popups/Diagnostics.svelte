@@ -5,15 +5,16 @@
     import { Electron } from 'shared/lib/electron'
     import { activeProfile } from 'shared/lib/profile'
     import { setClipboard } from 'shared/lib/utils'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
     let contentApp = ''
     let contentSystem = ''
 
     const combineValues = (values) => values.map((c) => (c.label ? `${locale(c.label)}: ${c.value}` : c.value)).join('\r\n')
 
-    let appVars = [
+    const appVars = [
         {
             label: '',
             value: locale('views.dashboard.security.version.title', { values: { version: $versionDetails.currentVersion } }),
@@ -37,7 +38,7 @@
 
     contentApp = combineValues(appVars)
 
-    Electron.getDiagnostics().then((values) => (contentSystem = combineValues(values)))
+    void Electron.getDiagnostics().then((values) => (contentSystem = combineValues(values)))
 
     const handleCopyClick = () => {
         setClipboard(contentApp + '\r\n' + contentSystem)

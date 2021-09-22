@@ -1,11 +1,12 @@
 <script lang="typescript">
     import { Chart, Text } from 'shared/components'
     import { getAccountActivityData } from 'shared/lib/chart'
-    import type { WalletAccount } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable } from 'svelte/store'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
 
-    export let locale
+    export let locale: Locale
 
     const selectedAccount = getContext<Readable<WalletAccount>>('selectedAccount')
 

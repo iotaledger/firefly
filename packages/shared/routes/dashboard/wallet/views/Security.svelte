@@ -10,8 +10,9 @@
     import { api } from 'shared/lib/wallet'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
+    import { Locale, LocaleArgs } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
     let lastBackupDate
     let lastBackupDateFormatted
@@ -42,7 +43,7 @@
     })
 
     const checkHardwareDeviceStatus = (state: LedgerDeviceState): void => {
-        const values = state === LedgerDeviceState.LegacyConnected ? { legacy: LedgerAppName.IOTALegacy } : {}
+        const values: LocaleArgs = state === LedgerDeviceState.LegacyConnected ? { legacy: LedgerAppName.IOTALegacy } : {}
         const text = locale(`views.dashboard.security.hardwareDevice.statuses.${state}`, { values })
 
         /**
@@ -154,7 +155,7 @@
                 message={locale(`views.dashboard.security.strongholdStatus.${$isStrongholdLocked ? 'locked' : 'unlocked'}`)}
                 color="yellow"
                 icon={$isStrongholdLocked ? 'lock' : 'unlock'}
-                onClick={() => ($isStrongholdLocked ? handleSecurityTileClick('password') : lockStronghold())}
+                onClick={() => $isStrongholdLocked ? handleSecurityTileClick('password') : lockStronghold()}
                 classes="col-span-2"
                 toggle
                 wide

@@ -4,20 +4,23 @@
     import { isNodeUrlValid } from 'shared/lib/network'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
-    
-    export let locale
-    export let onSuccess
+    import { Locale } from 'shared/lib/typings/i18n'
+
+    export let locale: Locale
+
     export let node
     export let nodes
+
+    export let onSuccess = (..._: any[]): void => {}
 
     let url = node?.url ?? ''
     let username = node?.auth?.username ?? ''
     let password = node?.auth?.password ?? ''
     let addressError = ''
-    let authError = ''
+    const authError = ''
     let isBusy = false
 
-    async function addCustomNode() {
+    function addCustomNode() {
         try {
             isBusy = true
             addressError = ''

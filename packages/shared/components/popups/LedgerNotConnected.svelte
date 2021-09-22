@@ -1,16 +1,18 @@
-<script>
+<script lang="typescript">
     import { Button, Icon, Text } from 'shared/components'
     import { stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { closePopup } from 'shared/lib/popup'
     import { LedgerAppName } from 'shared/lib/typings/ledger'
     import { onDestroy, onMount } from 'svelte'
+    import { Locale } from 'shared/lib/typings/i18n'
+
+    export let locale: Locale
 
     export let legacy
     export let handleClose
-    export let locale
     export let poll
 
-    function handleCancelClick() {
+    function handleCancelClick(): void {
         if ('function' === typeof handleClose) {
             handleClose()
         }

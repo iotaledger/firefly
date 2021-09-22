@@ -5,8 +5,8 @@ const {
 } = require('../../package.json')
 
 contextBridge.exposeInMainWorld('about', {
-    getData: () => {
-        return ipcRenderer.invoke('menu-data').then((data) => {
+    getData: () =>
+        ipcRenderer.invoke('menu-data').then((data) => {
             const aboutData = {
                 appName: productName,
                 version: data.strings.version.replace('{version}', version),
@@ -14,6 +14,5 @@ contextBridge.exposeInMainWorld('about', {
             }
 
             return aboutData
-        })
-    },
+        }),
 })

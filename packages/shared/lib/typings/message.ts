@@ -4,15 +4,15 @@ import type { AccountIdentifier } from './account'
 type MessageVersion = 1
 
 export enum MessageType {
-    /// Message received.
+    // / Message received.
     Received = 1,
-    /// Message sent.
+    // / Message sent.
     Sent = 2,
-    /// Message not broadcasted.
+    // / Message not broadcasted.
     Failed = 3,
-    /// Message not confirmed.
+    // / Message not confirmed.
     Unconfirmed = 4,
-    /// A value message.
+    // / A value message.
     Value = 5,
 }
 
@@ -21,7 +21,7 @@ export interface RegularEssence {
     outputs: Output[]
     payload?: {
         type: 'Indexation'
-        data: any
+        data: unknown
     }
     incoming: boolean
     internal: boolean
@@ -185,7 +185,12 @@ export interface Transfer {
     address: string
 }
 
-export function reattach(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier, messageId: string) {
+export function reattach(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+    accountId: AccountIdentifier,
+    messageId: string
+): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,

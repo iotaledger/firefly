@@ -2,8 +2,10 @@
     import { createEventDispatcher } from 'svelte'
     import { Transition } from 'shared/components'
     import { SelectProfile, EnterPin } from './views/'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+    
     export let mobile
 
     enum LoginState {
@@ -18,9 +20,9 @@
 
     const _next = (event) => {
         let nextState
-        let params = event.detail || {}
+        const params = event.detail || {}
         switch (state) {
-            case LoginState.Init:
+            case LoginState.Init: {
                 const { shouldAddProfile } = params
 
                 if (shouldAddProfile) {
@@ -29,6 +31,7 @@
                     nextState = LoginState.EnterPin
                 }
                 break
+            }
             case LoginState.EnterPin:
                 dispatch('next')
                 break
@@ -40,7 +43,7 @@
         }
     }
     const _previous = () => {
-        let prevState = stateHistory.pop()
+        const prevState = stateHistory.pop()
         if (prevState) {
             state = prevState
         } else {

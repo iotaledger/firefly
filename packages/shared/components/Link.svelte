@@ -1,15 +1,16 @@
 <script lang="typescript">
     import { Icon } from 'shared/components'
     import { bindEvents } from 'shared/lib/utils'
-    export let events = {}
 
-    export let onClick = () => ''
+    export let events = {}
     export let href = undefined
     export let secondary = false
     export let disabled = false
     export let ghost = false
     export let classes = ''
     export let icon = undefined
+
+    export let onClick = (): void | string => ''
 </script>
 
 <a

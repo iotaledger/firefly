@@ -1,4 +1,4 @@
-import type { Error } from './errors'
+import type { Error } from './typings/error'
 import type { WalletRoutes } from './typings/routes'
 
 export type VersionDetails = {
@@ -18,7 +18,7 @@ export type NativeProgress = {
 }
 
 export interface INotificationManager {
-    notify(message: string, contextData: any): void
+    notify(message: string, contextData: unknown): void
 }
 
 export interface IDeepLinkManager {
@@ -44,25 +44,25 @@ interface ElectronEventMap {
     'version-progress': NativeProgress
     'version-complete': void
     'version-error': Error
-    'notification-activated': any
+    'notification-activated': unknown
 }
 
 interface ILedger {
     connected: boolean
-    listeners: { (...data: any[]): void }[]
+    listeners: { (...data: unknown[]): void }[]
     selectSeed(index: number, page: number, security: number): Promise<void | null>
     awaitConnection(): Promise<void>
     awaitApplication(index: number, page: number, security: number): Promise<void>
-    onMessage(...data: any[]): void
-    addListener(...data: any[]): void
-    removeListener(...data: any[]): void
+    onMessage(...data: unknown[]): void
+    addListener(...data: unknown[]): void
+    removeListener(...data: unknown[]): void
 }
 
 export interface IElectron {
     ledger: ILedger
     getStrongholdBackupDestination(defaultPath: string): Promise<string | null>
     exportMigrationLog(sourcePath: string, defaultFileName: string): Promise<boolean | null>
-    exportLedgerMigrationLog(content: any, defaultFileName: string): Promise<boolean | null>
+    exportLedgerMigrationLog(content: unknown, defaultFileName: string): Promise<boolean | null>
     getUserDataPath(): Promise<string>
     getDiagnostics(): Promise<{ label: string; value: string }[]>
     getOS(): Promise<string>
@@ -93,8 +93,8 @@ export interface IElectron {
     unhandledException(title: string, err: Error): Promise<void>
 
     // SeedVault API methods
-    importLegacySeed(buffer: any, password: string): Promise<string>
-    validateSeedVault(buffer: any): Promise<boolean>
+    importLegacySeed(buffer: unknown, password: string): Promise<string>
+    validateSeedVault(buffer: unknown): Promise<boolean>
 
     onEvent<K extends keyof ElectronEventMap>(eventName: K, callback: (param: ElectronEventMap[K]) => void)
 }

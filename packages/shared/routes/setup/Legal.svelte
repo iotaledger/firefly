@@ -2,8 +2,10 @@
     import { Button, Checkbox, Link, OnboardingLayout, Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { createEventDispatcher } from 'svelte'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     export let mobile
 
     let checked = false

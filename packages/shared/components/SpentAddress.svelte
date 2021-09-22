@@ -1,10 +1,8 @@
 <script lang="typescript">
     import { Icon, Text, Tooltip } from 'shared/components'
     import {
-        AvailableExchangeRates,
         convertToFiat,
         currencies,
-        CurrencyTypes,
         exchangeRates,
         formatCurrency,
     } from 'shared/lib/currency'
@@ -13,14 +11,18 @@
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
 
-    export let locale
+    export let locale: Locale
+
     export let address = ''
     export let balance = 0
     export let selected = false
     export let risk = undefined
     export let showRiskLevel = false
-    export let onClick = () => {}
+
+    export let onClick = (): void => {}
 
     let showErrorTooltip = false
     let showRiskTooltip = false
@@ -39,7 +41,7 @@
     let localeRiskLevel = ''
     let riskBars = 0
 
-    let fiatBalance = formatCurrency(
+    const fiatBalance = formatCurrency(
         convertToFiat(balance, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[AvailableExchangeRates.USD]),
         AvailableExchangeRates.USD
     )

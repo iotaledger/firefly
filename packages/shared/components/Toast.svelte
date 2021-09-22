@@ -13,7 +13,7 @@
     export let message: string
     export let subMessage: string
     export let progress: number
-    export let actions: Array<Action>
+    export let actions: Action[]
 
     const TOAST_STYLE = {
         info: {
@@ -58,7 +58,7 @@
     <div class="flex flex-auto flex-col px-4">
         <span class="flex text-12 text-{TOAST_STYLE[type].messageColor}">{message}</span>
         {#if progress !== undefined}
-            <span class="block bg-{TOAST_STYLE[type].subMessageColor}" style={`width:100%;height:2px;margin:4px 0`}>
+            <span class="block bg-{TOAST_STYLE[type].subMessageColor}" style={'width:100%;height:2px;margin:4px 0'}>
                 <span class="block bg-{TOAST_STYLE[type].messageColor}" style={`width:${progress}%;height:2px`} />
             </span>
         {/if}
@@ -69,7 +69,7 @@
             {#each actions as action}
                 <button
                     class="cursor-pointer text-center rounded-lg font-bold text-11 {action.isPrimary ? 'bg-white' : ''} text-{action.isPrimary ? 'black' : TOAST_STYLE[type].buttonSecondary}"
-                    style={`min-width:90px;min-height:32px`}
+                    style={'min-width:90px;min-height:32px'}
                     on:click={() => action.onClick()}>
                     {action.label}
                 </button>

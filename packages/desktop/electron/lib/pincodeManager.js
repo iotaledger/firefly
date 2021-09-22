@@ -27,9 +27,7 @@ const PincodeManager = {
      * @returns {Promise}
      */
     verify(key, pincode) {
-        return ipcRenderer.invoke('keychain-get', key).then((storedPincode) => {
-            return storedPincode === pincode
-        })
+        return ipcRenderer.invoke('keychain-get', key).then((storedPincode) => storedPincode === pincode)
     },
 
     /**

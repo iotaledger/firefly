@@ -19,8 +19,10 @@
     import { Settings, Wallet } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     export let mobile
 
     const tabs = {
@@ -43,7 +45,7 @@
         }
     })
 
-    onMount(async () => {
+    onMount(() => {
         if ($isSoftwareProfile) {
             api.setStrongholdPasswordClearInterval({ secs: STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, nanos: 0 })
         }
@@ -74,7 +76,7 @@
         // Electron.onEvent('deep-link-params', (data) => handleDeepLinkRequest(data))
 
         Electron.onEvent('menu-logout', () => {
-            logout()
+            void logout()
         })
 
         Electron.onEvent('notification-activated', (contextData) => {

@@ -1,4 +1,4 @@
-export let menuState = {
+export const menuState = {
     loggedIn: false,
     enabled: true,
     strings: {

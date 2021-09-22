@@ -120,47 +120,59 @@ export interface ReattachmentEventPayload {
 }
 
 export enum TransferProgressEventType {
-    /// Syncing account.
+    // / Syncing account.
     SyncingAccount = 'SyncingAccount',
-    /// Performing input selection.
+    // / Performing input selection.
     SelectingInputs = 'SelectingInputs',
-    /// Generating address for remainder funds.
+    // / Generating address for remainder funds.
     GeneratingRemainderDepositAddress = 'GeneratingRemainderDepositAddress',
-    /// Preparing the transaction data.
+    // / Preparing the transaction data.
     PreparedTransaction = 'PreparedTransaction',
-    /// Signing the transaction.
+    // / Signing the transaction.
     SigningTransaction = 'SigningTransaction',
-    /// Performing PoW.
+    // / Performing PoW.
     PerformingPoW = 'PerformingPoW',
-    /// Broadcasting.
+    // / Broadcasting.
     Broadcasting = 'Broadcasting',
-    /// Complete.
+    // / Complete.
     Complete = 'Complete',
 }
 
 export interface TransferProgressEvent {
-    /// The transfer progress event type.
+    // / The transfer progress event type.
     type: TransferProgressEventType
 }
 
 export interface GeneratingRemainderDepositAddressEvent extends TransferProgressEvent {
-    /// Bech32 representation of remainder address.
+    // / Bech32 representation of remainder address.
     address: string
 }
 
 export interface PreparedTransactionEvent extends TransferProgressEvent {
-    /// Transaction inputs.
+    // / Transaction inputs.
     inputs: UTXOEventData[]
-    /// Transaction outputs.
+    // / Transaction outputs.
     outputs: UTXOEventData[]
-    /// Indexation data.
+    // / Indexation data.
     data?: string
 }
 
-export type TransferProgressEventData = TransferProgressEvent | GeneratingRemainderDepositAddressEvent | PreparedTransactionEvent
+export type TransferProgressEventData =
+    | TransferProgressEvent
+    | GeneratingRemainderDepositAddressEvent
+    | PreparedTransactionEvent
+
+export type TransactionEventData =
+    | {
+          toAddress?: string
+          toAmount?: number
+          remainderAddress?: string
+          remainderAmount?: number
+      }
+    | PreparedTransactionEvent
 
 export interface TransferState extends TransferProgressEvent {
-    /// Relevant data for this type of transfer progress event.
+    // / Relevant data for this type of transfer progress event.
     data?: TransferProgressEventData
 }
 
@@ -180,15 +192,15 @@ export interface LedgerAddressGenerationEvent {
 export enum MigrationProgressEventType {
     // Syncing account.
     SyncingAccount = 'SyncingAccount',
-    /// Performing input selection.
+    // / Performing input selection.
     SelectingInputs = 'SelectingInputs',
-    /// Generating remainder value deposit address.
+    // / Generating remainder value deposit address.
     GeneratingRemainderDepositAddress = 'GeneratingRemainderDepositAddress',
-    /// Signing the transaction.
+    // / Signing the transaction.
     SigningTransaction = 'SigningTransaction',
-    /// Performing PoW.
+    // / Performing PoW.
     PerformingPoW = 'PerformingPoW',
-    /// Broadcasting.
+    // / Broadcasting.
     Broadcasting = 'Broadcasting',
     // Transaction confirmed (through promotion & reattachment)
     TransactionConfirmed = 'TransactionConfirmed',

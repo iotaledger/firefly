@@ -1,17 +1,18 @@
 <script lang="typescript">
     import { Button, Password, Spinner, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
-    import { asyncSetStrongholdPassword, asyncSyncAccounts, getSyncAccountOptions, wallet } from 'shared/lib/wallet'
+    import { asyncSetStrongholdPassword, asyncSyncAccounts, wallet } from 'shared/lib/wallet'
     import { isLedgerProfile, isSoftwareProfile, isStrongholdLocked } from 'shared/lib/profile'
     import { showAppNotification } from 'shared/lib/notifications'
     import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
     const { balanceOverview } = $wallet
 
     let addressIndex = 0
-    let gapIndex = $isLedgerProfile ? 10 : 25
+    const gapIndex = $isLedgerProfile ? 10 : 25
     let accountDiscoveryThreshold = $isLedgerProfile ? 3 : 10
     let password = ''
     let error = ''
@@ -84,7 +85,7 @@
         <Button classes="w-full" secondary onClick={handleCancelClick} disabled={isBusy}>{locale('actions.cancel')}</Button>
         <Button classes="w-full" onClick={handleFindBalances} disabled={($isSoftwareProfile && $isStrongholdLocked && password.length === 0) || isBusy}>
             {#if isBusy}
-                <Spinner busy={true} message={locale(`actions.searching`)} classes="justify-center" />
+                <Spinner busy={true} message={locale('actions.searching')} classes="justify-center" />
             {:else}{locale(`actions.${addressIndex ? 'searchAgain' : 'searchBalances'}`)}{/if}
         </Button>
     </div>

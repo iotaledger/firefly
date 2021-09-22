@@ -1,10 +1,12 @@
-<script>
+<script lang="typescript">
     import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
     import { promptUserToConnectLedger, displayNotificationForLedgerProfile, ledgerDeviceState } from 'shared/lib/ledger'
     import { LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { createEventDispatcher } from 'svelte'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     export let mobile
 
     export let busy = false
