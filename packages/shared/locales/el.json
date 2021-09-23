@@ -18,8 +18,8 @@
             "profileName": "Όνομα Προφίλ",
             "body1": "Μπορείτε να δημιουργήσετε πολλαπλά προφίλ χρηστών για να οργανώσετε τα πορτοφόλια σας και να βελτιώσετε την ιδιωτικότητά σας.",
             "body2": {
-                "first": "For now, let's start with your first profile name.",
-                "nonFirst": "For now, let's start with your profile name."
+                "first": "Προς το παρόν, ας ξεκινήσουμε με το όνομα του πρώτου σας προφίλ.",
+                "nonFirst": "Προς το παρόν, ας ξεκινήσουμε με το όνομα του προφίλ σας."
             },
             "addMore": "You can add more profiles later."
         },
