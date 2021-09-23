@@ -1,12 +1,11 @@
-import { Bech32 } from "shared/lib/bech32";
-import { Electron } from 'shared/lib/electron';
-import { localize } from 'shared/lib/i18n';
-import { showAppNotification } from 'shared/lib/notifications';
-import validUrl from 'valid-url';
+import { Bech32 } from 'shared/lib/bech32'
+import { Electron } from 'shared/lib/electron'
+import { localize } from 'shared/lib/i18n'
+import { showAppNotification } from 'shared/lib/notifications'
+import validUrl from 'valid-url'
 
-export const ADDRESS_LENGTH = 64;
-export const PIN_LENGTH = 6;
-
+export const ADDRESS_LENGTH = 64
+export const PIN_LENGTH = 6
 
 export function bindEvents(element, events) {
     const listeners = Object.entries(events).map(([event, handler]) => {
@@ -94,7 +93,7 @@ export const validateBech32Address = (prefix, addr) => {
     try {
         const decoded = Bech32.decode(addr)
         isValid = decoded && decoded.humanReadablePart === prefix
-    } catch { }
+    } catch {}
 
     if (!isValid) {
         return localize('error.send.invalidAddress')

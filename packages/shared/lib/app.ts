@@ -42,7 +42,8 @@ interface SendParams {
  * Input parameters for sending transactions
  */
 export const sendParams = writable<SendParams>({ amount: 0, unit: Unit.Mi, address: '', message: '', isInternal: false })
-export const clearSendParams = (isInternal = false) => sendParams.set({ amount: 0, unit: Unit.Mi, address: '', message: '', isInternal })
+export const clearSendParams = (isInternal = false) =>
+    sendParams.set({ amount: 0, unit: Unit.Mi, address: '', message: '', isInternal })
 
 /**
  * Determines whether a user is logged in
