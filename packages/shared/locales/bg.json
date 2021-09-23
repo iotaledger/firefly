@@ -860,7 +860,7 @@
         "legacyNetwork": "Стара мрежа",
         "capsLock": "Caps Lock е включен",
         "version": "Версия {version}",
-        "unknown": "Unknown"
+        "unknown": "Неизвестен"
     },
     "dates": {
         "today": "Днес",

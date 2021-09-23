@@ -860,7 +860,7 @@
         "legacyNetwork": "Vanha verkko",
         "capsLock": "Caps Lock on päällä",
         "version": "Versio {version}",
-        "unknown": "Unknown"
+        "unknown": "Tuntematon"
     },
     "dates": {
         "today": "Tänään",
