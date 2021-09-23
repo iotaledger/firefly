@@ -8,9 +8,12 @@ import { writable } from 'svelte/store';
 export const deepLinkRequestActive = writable<boolean>(false)
 
 /**
- * Parse a deep link for the app (iota://)
- * @param {string} data Deep link data
- * @return {ParsedURL}  The parsed address, message and/or amount values
+ * Parse an IOTA deep link i.e. a link that begins with the scheme iota://
+ *  
+ * @method parseDeepLink
+ *
+ * @param {string} addressPrefix First four characters of address
+ * @param {string} input The link that was opened
  */
 export const parseDeepLink = (addressPrefix, input) => {
     if (!input || typeof input !== "string") {
@@ -45,10 +48,14 @@ export const parseDeepLink = (addressPrefix, input) => {
 }
 
 /**
- * Parse a deep link for the wallet (iota://wallet/send)
- * @param {url} The url
- * @param {pathParts} The path parts
- * @return {ParsedURL}  The parsed address, message and/or amount values
+ * Parse a deep link for sending via the wallet (iota://wallet/send)
+ * 
+ * @method parseWalletSendDeepLink
+ *
+ * @param {string} addressPrefix 
+ * @param {URL} url 
+ * @param {string[]} pathParts 
+ * @return {object} The formatted deep link content for populating the send params
  */
 export const parseWalletSendDeepLink = (addressPrefix, url, pathParts) => {
     if (pathParts.length === 0) {
