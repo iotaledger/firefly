@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { DashboardPane } from 'shared/components'
-    import { clearSendParams } from 'shared/lib/app'
+    import { clearSendParams, sendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { addProfileCurrencyPriceData, priceData } from 'shared/lib/marketData'
@@ -52,11 +52,19 @@
     import { onMount, setContext } from 'svelte'
     import { derived, Readable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
+    import { deepLinkRequestActive } from 'shared/lib/deepLinking'
 
     export let locale
 
     const { accounts, balanceOverview, accountsLoaded, internalTransfersInProgress } = $wallet
 
+    $: {
+        if ($deepLinkRequestActive && $sendParams && $sendParams.address) {
+            walletRoute.set(WalletRoutes.Send)
+            deepLinkRequestActive.set(false)
+        }
+    }
+    
     const accountsBalanceHistory = derived([accounts, priceData], ([$accounts, $priceData]) =>
         getAccountsBalanceHistory($accounts, $priceData)
     )

@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Idle, Sidebar } from 'shared/components'
-    import { loggedIn, logout } from 'shared/lib/app'
+    import { loggedIn, logout, sendParams } from 'shared/lib/app'
     import { Electron } from 'shared/lib/electron'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
@@ -19,6 +19,10 @@
     import { Settings, Wallet } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
+    import { appSettings } from 'shared/lib/appSettings'
+    import { deepLinkRequestActive, parseDeepLink } from 'shared/lib/deepLinking'
+
+    const { accountsLoaded, accounts } = $wallet
 
     export let locale
     export let mobile
@@ -27,8 +31,6 @@
         wallet: Wallet,
         settings: Settings,
     }
-
-    const { accountsLoaded } = $wallet
 
     let startInit
     let busy
@@ -40,6 +42,13 @@
     ongoingSnapshot.subscribe((os) => {
         if (os) {
             openSnapshotPopup()
+        }
+    })
+
+    accountsLoaded.subscribe(() => {
+        if (get(accountsLoaded)) {
+            Electron.DeepLinkManager.requestDeepLink()
+            Electron.onEvent('deep-link-params', (data) => handleDeepLinkRequest(data))
         }
     })
 
@@ -68,10 +77,6 @@
                 }
             )
         }
-
-        // TODO: Re-enable deep links
-        // Electron.DeepLinkManager.requestDeepLink()
-        // Electron.onEvent('deep-link-params', (data) => handleDeepLinkRequest(data))
 
         Electron.onEvent('menu-logout', () => {
             logout()
@@ -103,40 +108,6 @@
         }
     })
 
-    // TODO: re-enable deep links
-    // /**
-    //  * Handles deep link request
-    //  * If deep linking is enabled, fill send input parameters
-    //  * If deep linking is disabled, direct user to settings
-    //  */
-    // const handleDeepLinkRequest = (data) => {
-    //     const parsedData = parseDeepLink(data)
-    //     const _redirect = (tab) => {
-    //         deepLinkRequestActive.set(true)
-    //         if (get(dashboardRoute) !== tab) {
-    //             dashboardRoute.set(tab)
-    //         }
-    //     }
-
-    //     if (!$appSettings.deepLinking) {
-    //         _redirect(Tabs.Settings)
-    //         // TODO: Add alert system
-    //         console.log('deep linking not enabled')
-    //     } else if (parsedData) {
-    //         _redirect(Tabs.Wallet)
-    //         sendParams.set(parsedData)
-    //     } else {
-    //         console.log('error parsing')
-    //     }
-    // }
-
-    // $: {
-    //     if ($deepLinkRequestActive && $appSettings.deepLinking) {
-    //         walletRoute.set(WalletRoutes.Send)
-    //         deepLinkRequestActive.set(false)
-    //     }
-    // }
-
     if ($walletRoute === WalletRoutes.Init && !$accountsLoaded && $loggedIn) {
         startInit = Date.now()
         busy = true
@@ -164,6 +135,36 @@
                 setTimeout(() => {
                     cancelBusyState()
                 }, minTimeElapsed)
+            }
+        }
+    }
+
+    /**
+     * Handles deep link request
+     */
+    const handleDeepLinkRequest = (data) => {
+        const _redirect = (tab) => {
+            deepLinkRequestActive.set(true)
+            if (get(dashboardRoute) !== tab) {
+                dashboardRoute.set(tab)
+            }
+        }
+        if (!$appSettings.deepLinking) {
+            _redirect(Tabs.Settings)
+            showAppNotification({ type: 'info', message: locale('notifications.deepLinkingIsNotEnabled') })
+        } else {
+            if ($accounts && $accounts.length > 0) {
+                let addressPrefix = $accounts[0].depositAddress.split('1')[0]
+                const parsedData = parseDeepLink(addressPrefix, data)
+                if (parsedData && parsedData.context === 'wallet' && parsedData.operation === 'send') {
+                    _redirect(Tabs.Wallet)
+                    sendParams.set({
+                        ...parsedData.params,
+                        isInternal: false,
+                    })
+                } else {
+                    showAppNotification({ type: 'error', message: locale('notifications.deepLinkingInvalidFormat') })
+                }
             }
         }
     }
