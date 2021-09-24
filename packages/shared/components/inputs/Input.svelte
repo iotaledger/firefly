@@ -85,7 +85,7 @@
                 if (Number.isNaN(val)) {
                     e.preventDefault()
                 } else if (maxDecimals !== undefined) {
-                    value = formatNumber(val, maxDecimals, undefined, 0)
+                    value = formatNumber(val, undefined, maxDecimals, 0)
                     e.preventDefault()
                 }
             } else if (integer) {
