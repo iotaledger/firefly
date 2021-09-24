@@ -860,7 +860,7 @@
         "legacyNetwork": "Rete Legacy",
         "capsLock": "Blocco maiuscole è attivo",
         "version": "Versione {version}",
-        "unknown": "Unknown"
+        "unknown": "Sconosciuto"
     },
     "dates": {
         "today": "Oggi",
