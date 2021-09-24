@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Text } from 'shared/components'
+    import { BalanceSummary } from 'shared/components'
 
     export let locale
     export let color
@@ -12,8 +12,7 @@
     <!-- Balance -->
     <div data-label="total-balance" class="flex flex-col flex-wrap space-y-1.5">
         <p class="text-11 leading-120 text-white">{locale('general.accountBalance')}</p>
-        <Text type="h2" overrideColor classes="text-white">{balance}</Text>
-        <Text type="p" overrideColor smaller classes="text-{color}-200 dark:text-blue-300">{balanceEquiv}</Text>
+        <BalanceSummary balanceRaw={balance} balanceFiat={balanceEquiv} />
     </div>
     <button
         on:click={() => onMenuClick()}
