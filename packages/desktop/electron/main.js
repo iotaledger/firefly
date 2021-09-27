@@ -287,16 +287,19 @@ app.on('window-all-closed', () => {
     }
 })
 
-app.on('activate', () => {
-    // On macOS it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
-    if (BrowserWindow.getAllWindows().length === 0) {
-        createWindow()
-    }
-})
-
 app.once('ready', () => {
     ipcMain.handle('error-data', () => lastError)
+    app.on('activate', () => {
+        // On macOS it's common to re-create a window in the app when the
+        // dock icon is clicked and there are no other windows open.
+        //
+        // This listener must be created once the app is ready,
+        // otherwise we run into https://github.com/iotaledger/firefly/issues/1006
+        // because the `activate` event is also emitted when the app is launched for the first time
+        if (BrowserWindow.getAllWindows().length === 0) {
+            createWindow()
+        }
+    })
 })
 
 // IPC handlers for APIs exposed from main proces
@@ -585,9 +588,9 @@ function windowStateKeeper(windowName, settingsFilename) {
 
     function track(win) {
         window = win
-        ;['resize', 'move', 'close'].forEach((event) => {
-            win.on(event, saveState)
-        })
+            ;['resize', 'move', 'close'].forEach((event) => {
+                win.on(event, saveState)
+            })
     }
 
     setBounds()
