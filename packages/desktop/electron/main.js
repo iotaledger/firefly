@@ -588,9 +588,9 @@ function windowStateKeeper(windowName, settingsFilename) {
 
     function track(win) {
         window = win
-            ;['resize', 'move', 'close'].forEach((event) => {
-                win.on(event, saveState)
-            })
+        ;['resize', 'move', 'close'].forEach((event) => {
+            win.on(event, saveState)
+        })
     }
 
     setBounds()
