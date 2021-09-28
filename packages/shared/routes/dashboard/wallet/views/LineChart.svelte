@@ -1,9 +1,9 @@
 <script lang="typescript">
-    import { ChartData, DashboardChartType, WalletChartType } from 'lib/typings/chart'
-    import { AvailableExchangeRates, CurrencyTypes } from 'lib/typings/currency'
+    import type { ChartData, DashboardChartType, WalletChartType } from 'lib/typings/chart'
     import type { Locale } from 'lib/typings/i18n'
-    import { HistoryDataProps } from 'lib/typings/market'
     import type { AccountsBalanceHistory, BalanceHistory, WalletAccount } from 'lib/typings/wallet'
+    import type { AvailableExchangeRates, CurrencyTypes } from 'lib/typings/currency'
+    import type { HistoryDataProps } from 'lib/typings/market'
     import { Chart, Dropdown, Text } from 'shared/components'
     import {
         getChartDataFromBalanceHistory,
