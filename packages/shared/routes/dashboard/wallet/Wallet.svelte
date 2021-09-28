@@ -3,7 +3,7 @@
     import { clearSendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
-    import { addProfileCurrencyPriceData, priceData } from 'shared/lib/marketData'
+    import { addProfileCurrencyPriceData, priceData } from 'shared/lib/market'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import {
@@ -11,21 +11,16 @@
         isLedgerProfile,
         isSoftwareProfile,
         isStrongholdLocked,
-        MigratedTransaction,
         setMissingProfileType,
         updateProfile,
     } from 'shared/lib/profile'
     import { walletRoute } from 'shared/lib/router'
     import { TransferProgressEventType, LedgerErrorType } from 'shared/lib/typings/events'
-    import type { Transaction } from 'shared/lib/typings/message'
+    import type { Message, Transaction } from 'shared/lib/typings/message'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import {
-        AccountMessage,
-        AccountsBalanceHistory,
         api,
         asyncSyncAccounts,
-        BalanceHistory,
-        BalanceOverview,
         getAccountMessages,
         getAccountMeta,
         getAccountsBalanceHistory,
@@ -47,13 +42,21 @@
         transferState,
         updateBalanceOverview,
         wallet,
-        WalletAccount,
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
     import { derived, Readable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import {
+        AccountMessage,
+        AccountsBalanceHistory,
+        BalanceHistory,
+        BalanceOverview,
+        WalletAccount
+    } from 'shared/lib/typings/wallet'
+    import { MigratedTransaction } from 'shared/lib/typings/profile'
 
-    export let locale
+    export let locale: Locale
 
     const { accounts, balanceOverview, accountsLoaded, internalTransfersInProgress } = $wallet
 
@@ -66,9 +69,7 @@
     const selectedAccount = derived([selectedAccountId, accounts], ([$selectedAccountId, $accounts]) =>
         $accounts.find((acc) => acc.id === $selectedAccountId)
     )
-    const accountTransactions = derived([selectedAccount], ([$selectedAccount]) => {
-        return $selectedAccount ? getAccountMessages($selectedAccount) : []
-    })
+    const accountTransactions = derived([selectedAccount], ([$selectedAccount]) => $selectedAccount ? getAccountMessages($selectedAccount) : [])
 
     const viewableAccounts: Readable<WalletAccount[]> = derived([activeProfile, accounts], ([$activeProfile, $accounts]) => {
         if (!$activeProfile) {
@@ -76,7 +77,7 @@
         }
 
         if ($activeProfile.settings.showHiddenAccounts) {
-            let sortedAccounts = $accounts.sort((a, b) => a.index - b.index)
+            const sortedAccounts = $accounts.sort((a, b) => a.index - b.index)
 
             // If the last account is "hidden" and has no value, messages or history treat it as "deleted"
             // This account will get re-used if someone creates a new one
@@ -106,7 +107,7 @@
 
     const transactions = derived([viewableAccounts, activeProfile], ([$viewableAccounts, $activeProfile]) => {
         const _migratedTransactions = $activeProfile?.migratedTransactions || []
-        
+
         return [..._migratedTransactions, ...getTransactions($viewableAccounts)]
     })
 
@@ -170,7 +171,7 @@
                 }
 
                 if (accountsResponse.payload.length === 0) {
-                    _continue()
+                    void _continue()
                 } else {
                     const totalBalance = {
                         balance: 0,
@@ -179,7 +180,7 @@
                     }
 
                     let completeCount = 0
-                    let newAccounts = []
+                    const newAccounts = []
                     for (const payloadAccount of accountsResponse.payload) {
                         // Only keep messages with a payload
                         payloadAccount.messages = payloadAccount.messages.filter((m) => m.payload)
@@ -198,14 +199,14 @@
                                 // Try and find the other side of the pair where the message id
                                 // would be the same and the incoming flag the opposite
                                 const internalIncoming = getIncomingFlag(internalMessage.payload)
-                                let pair = internalMessages.find(
+                                let pair: Message = internalMessages.find(
                                     (m) => m.id === internalMessage.id && getIncomingFlag(m.payload) !== internalIncoming
                                 )
 
                                 // Can't find the other side of the pair so clone the original
                                 // reverse its incoming flag and store it
                                 if (!pair) {
-                                    pair = deepCopy(internalMessage)
+                                    pair = deepCopy(internalMessage) as Message
                                     // Reverse the incoming flag for the other side of the pair
                                     setIncomingFlag(pair.payload, !getIncomingFlag(pair.payload))
                                     payloadAccount.messages.push(pair)
@@ -231,7 +232,7 @@
                                 accounts.update((accounts) => [...accounts, ...newAccounts].sort((a, b) => a.index - b.index))
                                 processMigratedTransactions(payloadAccount.id, payloadAccount.messages, payloadAccount.addresses)
                                 updateBalanceOverview(totalBalance.balance, totalBalance.incoming, totalBalance.outgoing)
-                                _continue()
+                                void _continue()
                             }
                         })
                     }
@@ -347,22 +348,20 @@
                 api.setAlias(reuseAccountId, alias, {
                     onSuccess() {
                         let hasUpdated = false
-                        accounts.update((_accounts) => {
-                            return _accounts.map((account) => {
-                                if (account.id === reuseAccountId) {
-                                    hasUpdated = true
-                                    return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                                        {} as WalletAccount,
-                                        account,
-                                        {
-                                            alias,
-                                        }
-                                    )
-                                }
+                        accounts.update((_accounts) => _accounts.map((account) => {
+                            if (account.id === reuseAccountId) {
+                                hasUpdated = true
+                                return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
+                                    {} as WalletAccount,
+                                    account,
+                                    {
+                                        alias,
+                                    }
+                                )
+                            }
 
-                                return account
-                            })
-                        })
+                            return account
+                        }))
 
                         // We didn't have the account in the list to update
                         // so we need to retrieve the details from the wallet manually
@@ -374,7 +373,7 @@
                                         getAccountMeta(reuseAccountId, (err, meta) => {
                                             if (!err) {
                                                 const account = prepareAccountInfo(ac, meta)
-                                                accounts.update((accounts) => [...accounts, account])
+                                                accounts.update((accounts) => [...accounts, account] as WalletAccount[])
                                             }
                                         })
                                     }
@@ -397,17 +396,18 @@
                 api.createAccount(
                     {
                         alias,
-                        signerType: $accounts[0].signerType,
-                        clientOptions: $accounts[0].clientOptions,
+                        signerType: $accounts[0]?.signerType,
+                        clientOptions: $accounts[0]?.clientOptions,
                     },
                     {
                         onSuccess(createAccountResponse) {
-                            const account: WalletAccount = prepareAccountInfo(createAccountResponse.payload, {
+                            const account = prepareAccountInfo(createAccountResponse.payload, {
                                 balance: 0,
                                 incoming: 0,
                                 outgoing: 0,
                                 depositAddress: createAccountResponse.payload.addresses[0].address,
-                            })
+                            }) as WalletAccount
+
                             // immediately store the account; we update it later after sync
                             // we do this to allow offline account creation
                             accounts.update((accounts) => [...accounts, account])
@@ -416,15 +416,13 @@
                                     onSuccess(_syncAccountResponse) {
                                         getAccountMeta(createAccountResponse.payload.id, (err, meta) => {
                                             if (!err) {
-                                                const account = prepareAccountInfo(createAccountResponse.payload, meta)
-                                                accounts.update((storedAccounts) => {
-                                                    return storedAccounts.map((storedAccount) => {
-                                                        if (storedAccount.id === account.id) {
-                                                            return account
-                                                        }
-                                                        return storedAccount
-                                                    })
-                                                })
+                                                const account = prepareAccountInfo(createAccountResponse.payload, meta) as WalletAccount
+                                                accounts.update((storedAccounts) => storedAccounts.map((storedAccount) => {
+                                                    if (storedAccount.id === account.id) {
+                                                        return account
+                                                    }
+                                                    return storedAccount
+                                                }))
                                             }
                                             resolve(null)
                                         })
@@ -477,25 +475,23 @@
                     remainder_value_strategy: {
                         strategy: 'ChangeAddress',
                     },
-                    indexation: { index: 'firefly', data: new Array() },
+                    indexation: { index: 'firefly', data: [] },
                 },
                 {
                     onSuccess(response) {
-                        accounts.update((_accounts) => {
-                            return _accounts.map((_account) => {
-                                if (_account.id === senderAccountId) {
-                                    return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                                        {} as WalletAccount,
-                                        _account,
-                                        {
-                                            messages: [response.payload, ..._account.messages],
-                                        }
-                                    )
-                                }
+                        accounts.update((_accounts) => _accounts.map((_account) => {
+                            if (_account.id === senderAccountId) {
+                                return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
+                                    {} as WalletAccount,
+                                    _account,
+                                    {
+                                        messages: [response.payload, ..._account.messages],
+                                    }
+                                )
+                            }
 
-                                return _account
-                            })
-                        })
+                            return _account
+                        }))
 
                         transferState.set({
                             type: TransferProgressEventType.Complete,
@@ -551,26 +547,24 @@
                         return transfers
                     })
 
-                    accounts.update((_accounts) => {
-                        return _accounts.map((_account) => {
-                            if (_account.id === senderAccountId) {
-                                const m = deepCopy(message)
-                                const mPayload = m.payload as Transaction
-                                mPayload.data.essence.data.incoming = false
-                                mPayload.data.essence.data.internal = true
-                                _account.messages.push(m)
-                            }
-                            if (_account.id === receiverAccountId) {
-                                const m = deepCopy(message)
-                                const mPayload = m.payload as Transaction
-                                mPayload.data.essence.data.incoming = true
-                                mPayload.data.essence.data.internal = true
-                                _account.messages.push(m)
-                            }
+                    accounts.update((_accounts) => _accounts.map((_account) => {
+                        if (_account.id === senderAccountId) {
+                            const m = deepCopy(message) as Message
+                            const mPayload = m.payload as Transaction
+                            mPayload.data.essence.data.incoming = false
+                            mPayload.data.essence.data.internal = true
+                            _account.messages.push(m)
+                        }
+                        if (_account.id === receiverAccountId) {
+                            const m = deepCopy(message) as Message
+                            const mPayload = m.payload as Transaction
+                            mPayload.data.essence.data.incoming = true
+                            mPayload.data.essence.data.internal = true
+                            _account.messages.push(m)
+                        }
 
-                            return _account
-                        })
-                    })
+                        return _account
+                    }))
 
                     transferState.set({
                         type: TransferProgressEventType.Complete,
@@ -609,7 +603,7 @@
         }
     }
 
-    onMount(async () => {
+    onMount(() => {
         // If we are in settings when logged out the router reset
         // switches back to the wallet, but there is no longer
         // an active profile, only init if there is a profile
@@ -633,7 +627,7 @@
                 })
             }
 
-            addProfileCurrencyPriceData()
+            void addProfileCurrencyPriceData()
         }
     })
 </script>
@@ -647,9 +641,9 @@
 {#if $walletRoute === WalletRoutes.Account && $selectedAccountId}
     <Account
         {isGeneratingAddress}
-        send={onSend}
-        internalTransfer={onInternalTransfer}
-        generateAddress={onGenerateAddress}
+        {onSend}
+        {onInternalTransfer}
+        {onGenerateAddress}
         {locale} />
 {:else}
     <div class="wallet-wrapper w-full h-full flex flex-col p-10 flex-1 bg-gray-50 dark:bg-gray-900">
@@ -664,9 +658,9 @@
                         <DashboardPane classes="-mt-5 h-full z-0">
                             <WalletActions
                                 {isGeneratingAddress}
-                                send={onSend}
-                                internalTransfer={onInternalTransfer}
-                                generateAddress={onGenerateAddress}
+                                {onSend}
+                                {onInternalTransfer}
+                                {onGenerateAddress}
                                 {locale} />
                         </DashboardPane>
                     {/if}

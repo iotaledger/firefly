@@ -3,9 +3,11 @@
     import { networkStatus } from 'shared/lib/networkStatus'
     import { activeProfile } from 'shared/lib/profile'
     import { onDestroy } from 'svelte'
+    import { Locale } from 'shared/lib/typings/i18n'
+
+    export let locale: Locale
 
     export let isActive
-    export let locale
     let healthStatus = 2
     let healthStatusText = 'networkOperational'
     let messagesPerSecond = 0

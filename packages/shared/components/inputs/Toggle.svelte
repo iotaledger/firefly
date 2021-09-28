@@ -2,7 +2,8 @@
     export let active = false
     export let classes = ''
     export let color = 'blue'
-    export let onClick = () => {}
+
+    export let onClick = (): void => {}
 </script>
 
 <style type="text/scss">
