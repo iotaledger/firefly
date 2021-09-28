@@ -4,7 +4,7 @@
     import { pollChrysalisSnapshot } from 'shared/lib/migration'
 
     onMount(() => {
-        pollChrysalisSnapshot()
+        void pollChrysalisSnapshot()
     })
 </script>
 

@@ -1,11 +1,13 @@
-<script lang="ts" xmlns="http://www.w3.org/1999/html">
+<script lang="typescript" xmlns="http://www.w3.org/1999/html">
     import { Animation, Text } from 'shared/components'
     import { formatAddressForLedger } from 'shared/lib/ledger'
     import { asyncGetAddressChecksum } from 'shared/lib/migration'
     import type { Input, Transfer } from 'shared/lib/typings/migration'
     import { formatUnitBestMatch } from 'shared/lib/units'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     export let transfer: Transfer
     export let inputs: Input[]
 

@@ -16,3 +16,9 @@ export interface Address {
         [key: string]: AddressOutput
     }
 }
+
+export interface ParsedAddress {
+    address: string
+    message: string
+    amount: number | string
+}

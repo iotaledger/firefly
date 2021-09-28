@@ -15,5 +15,5 @@ export type NotificationData = {
     id?: string
     ts?: number
     timeout?: number
-    contextData?: any
+    contextData?: unknown
 }

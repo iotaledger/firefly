@@ -1,7 +1,8 @@
 import type { Node } from './typings/node'
 import { isValidHttpsUrl, isValidUrl } from './utils'
+import { Network } from './typings/network'
 
-const DEFAULT_NETWORK = 'chrysalis-mainnet'
+const DEFAULT_NETWORK: Network = Network.ChrysalisMainnet
 
 const DEFAULT_NODES: Node[] = ['https://chrysalis-nodes.iota.org', 'https://chrysalis-nodes.iota.cafe'].map((url) => ({
     url,
@@ -34,6 +35,7 @@ export const isNodeUrlValid = (nodesList: Node[], newUrl: string): string | unde
     }
 
     // Check whether the node was already added to the list
+    /* eslint-disable @typescript-eslint/prefer-regexp-exec */
     if (nodesList && nodesList.some(({ url }) => (url.endsWith(':443') ? url.slice(0, -4) : url).match(newUrl))) {
         return 'error.node.duplicate'
     }
@@ -45,14 +47,10 @@ export const isNodeUrlValid = (nodesList: Node[], newUrl: string): string | unde
  * Get the list of official nodes
  * @returns The list of nodes
  */
-export const getOfficialNodes = () => {
-    return DEFAULT_NODES
-}
+export const getOfficialNodes = (): Node[] => DEFAULT_NODES
 
 /**
  * Get the official network
  * @returns The official network
  */
-export const getOfficialNetwork = () => {
-    return DEFAULT_NETWORK
-}
+export const getOfficialNetwork = (): string => DEFAULT_NETWORK

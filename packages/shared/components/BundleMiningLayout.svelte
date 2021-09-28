@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Box, Icon } from 'shared/components'
 
-    export let onBackClick = () => {}
+    export let onBackClick = (): void => {}
 
     export let allowBack = true
 </script>
