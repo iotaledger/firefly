@@ -17,13 +17,13 @@
     let showTooltip = false
     let showPreciseBalance = false
 
-    $: balanceBox, showTooltip, showPreciseBalance, refreshParentBox()
+    $: balanceBox, showTooltip, showPreciseBalance, void refreshParentBox()
 
     function toggleTooltip() {
         showTooltip = !showTooltip
     }
 
-    async function togglePreciseBalance() {
+    function togglePreciseBalance() {
         showPreciseBalance = !showPreciseBalance
     }
 

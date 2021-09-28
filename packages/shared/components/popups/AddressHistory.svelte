@@ -2,11 +2,13 @@
     import { Button, Text } from 'shared/components'
     import type { Address } from 'shared/lib/typings/address'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import type { WalletAccount } from 'shared/lib/wallet'
     import type { Readable } from 'svelte/store'
     import { setClipboard } from 'shared/lib/utils'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
 
-    export let locale
+    export let locale: Locale
+
     export let account: Readable<WalletAccount>
 
     let addresses: Address[]

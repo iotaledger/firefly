@@ -1,6 +1,7 @@
 import { appSettings } from 'shared/lib/appSettings'
 import { addMessages, dictionary, getLocaleFromNavigator, init, _, getDateFormatter } from 'svelte-i18n'
 import { derived, get, writable } from 'svelte/store'
+import type { LocaleOptions } from './typings/i18n'
 
 /*
  * Code following https://phrase.com/blog/posts/a-step-by-step-guide-to-svelte-localization-with-svelte-i18n-v3/
@@ -52,7 +53,7 @@ export const locales = {
 
 // Init options: eg locale to show when we don't support the
 // requested locale
-const INIT_OPTIONS = {
+const INIT_OPTIONS: LocaleOptions = {
     fallbackLocale: 'en',
     initialLocale: null,
     loadingDelay: 200,
@@ -64,13 +65,13 @@ const INIT_OPTIONS = {
 // loading state
 const isDownloading = writable(false)
 
-const setupI18n = (options = { withLocale: null }) => {
+const setupI18n = (options: LocaleOptions = { fallbackLocale: 'en', initialLocale: null }): Promise<unknown> => {
     // If we're given an explicit locale, we use
     // it. Otherwise, we attempt to auto-detect
     // the user's locale.
-    const _locale = supported(options.withLocale || reduceLocale(getLocaleFromNavigator() || 'en'))
+    const _locale = supported(options.initialLocale || reduceLocale(getLocaleFromNavigator() || 'en'))
 
-    init({ ...INIT_OPTIONS, initialLocale: _locale } as any)
+    init({ ...INIT_OPTIONS, initialLocale: _locale } as LocaleOptions)
 
     // Don't re-download translation files
     if (!hasLoadedLocale(_locale)) {
@@ -88,7 +89,7 @@ const setupI18n = (options = { withLocale: null }) => {
             // in case the chosen language does not have all the translations
             if (_locale !== 'en' && !hasLoadedLocale('en')) {
                 const messagesFileUrl = MESSAGE_FILE_URL_TEMPLATE.replace('{locale}', 'en')
-                loadJson(messagesFileUrl).then((messages) => {
+                void loadJson(messagesFileUrl).then((messages) => {
                     addMessages('en', messages)
                 })
             }
@@ -99,14 +100,15 @@ const setupI18n = (options = { withLocale: null }) => {
 const isLocaleLoaded = derived(
     [isDownloading, dictionary, appSettings],
     ([$isDownloading, $dictionary, $appSettings]) =>
-        !$isDownloading && $dictionary[$appSettings.language] && Object.keys($dictionary[$appSettings.language]).length > 0
+        !$isDownloading &&
+        $dictionary[$appSettings.language] &&
+        Object.keys($dictionary[$appSettings.language]).length > 0
 )
 
-const hasLoadedLocale = (locale: string) => {
+const hasLoadedLocale = (locale: string) =>
     // If the svelte-i18n dictionary has an entry for the
     // locale, then the locale has already been added
-    return get(dictionary)[locale]
-}
+    get(dictionary)[locale]
 
 // Extract the "en" bit from fully qualified
 // locales, like "en-US"
@@ -129,20 +131,22 @@ function loadJson(url) {
     return fetch(url).then((response) => response.json())
 }
 
-const dir = derived(appSettings, (_appSettings) => {
-    // TODO: Implement RTL support
-    // return appSettings.language === 'ar' ? 'rtl' : 'ltr'
-    return 'ltr'
-})
+const dir = derived(
+    appSettings,
+    (_appSettings) =>
+        // TODO: Implement RTL support
+        // return appSettings.language === 'ar' ? 'rtl' : 'ltr'
+        'ltr'
+)
 
-const setLanguage = (item) => {
+const setLanguage = (item: { value }): void => {
     const locale = Object.keys(locales).find((key) => locales[key] === item.value)
     appSettings.set({
         ...get(appSettings),
         language: locale,
     })
 
-    setupI18n({ withLocale: locale })
+    void setupI18n({ fallbackLocale: 'en', initialLocale: locale })
 }
 
 const localize = get(_) as (string, values?) => string
@@ -152,9 +156,8 @@ const localize = get(_) as (string, values?) => string
  * @param format
  * @returns Formatted date
  */
-const formatDate = (date: Date, options: Intl.DateTimeFormatOptions & { format?: string; locale?: string }) => {
-    return getDateFormatter({ locale: getLocaleFromNavigator(), ...options }).format(date)
-}
+const formatDate = (date: Date, options: Intl.DateTimeFormatOptions & { format?: string; locale?: string }): string =>
+    getDateFormatter({ locale: getLocaleFromNavigator(), ...options }).format(date)
 
 // We expose the svelte-i18n _ store so that our app has
 // a single API for i18n

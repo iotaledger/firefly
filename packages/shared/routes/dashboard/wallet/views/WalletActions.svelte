@@ -3,15 +3,19 @@
     import { activeProfile, isLedgerProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
-    import { selectedAccountId, WalletAccount } from 'shared/lib/wallet'
+    import { selectedAccountId } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable } from 'svelte/store'
     import { Receive, Send } from '.'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
 
-    export let locale
-    export let send
-    export let internalTransfer
-    export let generateAddress
+    export let locale: Locale
+
+    export let onSend = (..._: any[]): void => {}
+    export let onInternalTransfer = (..._: any[]): void => {}
+    export let onGenerateAddress = (..._: any[]): void => {}
+
     export let isGeneratingAddress
 
     const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
@@ -55,7 +59,7 @@
         </div>
     </div>
 {:else if $walletRoute === WalletRoutes.Send}
-    <Send {send} {internalTransfer} {locale} />
+    <Send {onSend} {onInternalTransfer} {locale} />
 {:else if $walletRoute === WalletRoutes.Receive}
-    <Receive {isGeneratingAddress} {generateAddress} {locale} />
+    <Receive {isGeneratingAddress} {onGenerateAddress} {locale} />
 {/if}

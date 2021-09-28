@@ -10,6 +10,7 @@
     let top = 0
     let left = 0
 
+    let darkModeEnabled
     $: darkModeEnabled = $appSettings.darkMode
 
     $: parentLeft, parentTop, parentWidth, refreshPosition()

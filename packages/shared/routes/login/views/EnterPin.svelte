@@ -8,9 +8,11 @@
     import { api, getStoragePath, initialise } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
-    export let mobile 
+    export let locale: Locale
+
+    export let mobile
     
     let attempts = 0
     let pinCode = ''
@@ -29,7 +31,7 @@
     $: hasReachedMaxAttempts = attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS
     $: {
         if (validatePinFormat(pinCode)) {
-            onSubmit()
+            void onSubmit()
         }
     }
 
@@ -60,7 +62,7 @@
         }
     }
 
-    async function onSubmit() {
+    function onSubmit() {
         if (get(ongoingSnapshot) === true) {
             return openSnapshotPopup()
         }
