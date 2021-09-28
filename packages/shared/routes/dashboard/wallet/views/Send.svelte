@@ -2,7 +2,16 @@
     import { Unit } from '@iota/unit-converter'
     import { Address, Amount, Button, Dropdown, Icon, ProgressBar, Text } from 'shared/components'
     import { clearSendParams, sendParams } from 'shared/lib/app'
-    import { convertFromFiat, convertToFiat, currencies, CurrencyTypes, exchangeRates, isFiatCurrency, parseCurrency } from 'shared/lib/currency'
+    import {
+        convertFromFiat,
+        convertToFiat,
+        currencies,
+        CurrencyTypes,
+        DUST_THRESHOLD,
+        exchangeRates,
+        isFiatCurrency,
+        parseCurrency,
+    } from 'shared/lib/currency'
     import { ledgerDeviceState, displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { displayNotifications, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
@@ -296,7 +305,7 @@
 
         let isFiat = isFiatCurrency(unit)
         let isMaxAmount = amount === convertToFiat(from.balance, $currencies[CurrencyTypes.USD], $exchangeRates[unit]).toString()
-        let hasDustRemaining = Math.abs(from.balance - _amount) < 1_000_000
+        let hasDustRemaining = Math.abs(from.balance - _amount) < DUST_THRESHOLD
 
         return (isFiat && isMaxAmount && hasDustRemaining) ? from.balance : _amount
     }
@@ -341,7 +350,7 @@
                     amountError = locale('error.send.amountTooHigh')
                 } else if (amountRaw <= 0) {
                     amountError = locale('error.send.amountZero')
-                } else if (amountRaw < 1000000) {
+                } else if (amountRaw < DUST_THRESHOLD) {
                     amountError = locale('error.send.sendingDust')
                 }
             }
@@ -393,7 +402,7 @@
         if($isSoftwareProfile) {
             _send(isInternal)
         } else if($isLedgerProfile) {
-            promptUserToConnectLedger(false, () => send(isInternal), undefined)
+            promptUserToConnectLedger(false, () => _send(isInternal), undefined)
         }
     }
 

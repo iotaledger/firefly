@@ -16,7 +16,7 @@
     import { activeProfile } from 'shared/lib/profile'
     import { changeUnits, formatUnitBestMatch, formatUnitPrecision, UNIT_MAP } from 'shared/lib/units'
 
-    type AmountUnit = Unit | string
+    type AmountUnit = Unit | AvailableExchangeRates
 
     export let amount = undefined
     export let unit: AmountUnit = Unit.Mi
@@ -31,7 +31,7 @@
     export let onMaxClick = (): void => {}
 
     const currency: AvailableExchangeRates = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
-    const Units: AmountUnit[] = [currency as string].concat(Object.values(Unit).filter(u => u !== 'Pi'))
+    const Units: AmountUnit[] = [currency].concat(Object.values(Unit).filter(u => u !== 'Pi'))
     const MAX_VALUE = 2_779_530_283_000_000
 
     let showDropdown = false
@@ -92,8 +92,6 @@
 
     const convertAmount = (_amount, _unit, convertFn) => {
         if(!amount) return null
-
-        console.log('AMT: ', _amount)
 
         const amountAsFloat = parseCurrency(_amount, _unit)
         if (amountAsFloat === 0 || Number.isNaN(amountAsFloat)) return null

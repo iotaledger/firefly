@@ -219,5 +219,8 @@ DerivedData/
 ## Vercel
 .vercel
 
+# ESLint / Prettier
+**/.eslintcache
+
 # Testing
 **/coverage

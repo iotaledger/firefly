@@ -128,6 +128,11 @@ const DEFAULT_EXCHANGE_RATES: { [key in AvailableExchangeRates]: number } = {
 }
 
 /**
+ * The threshold for what is considered dust, which is 1Mi or 1,000,000i
+ */
+export const DUST_THRESHOLD: number = 1_000_000
+
+/**
  * Exchange rates
  */
 export const exchangeRates = writable<ExchangeRates>(DEFAULT_EXCHANGE_RATES)
@@ -147,6 +152,9 @@ export const currencies = writable<Currencies>({} as Currencies)
  * @returns {number}
  */
 export const convertToFiat = (amount: number, usdPrice: number, conversionRate: number): number => {
+    /**
+     * NOTE: 1_000_000 is referring to 1Mi worth of value.
+     */
     return +(((amount * usdPrice) / 1_000_000) * conversionRate).toFixed(2)
 }
 
@@ -163,6 +171,9 @@ export const convertToFiat = (amount: number, usdPrice: number, conversionRate: 
  * @returns {number}
  */
 export const convertFromFiat = (amount: number, usdPrice: number, conversionRate: number): number => {
+    /**
+     * NOTE: 1_000_000 is referring to 1Mi worth of value.
+     */
     return +(((amount / conversionRate) / usdPrice) * 1_000_000).toFixed(0)
 }
 
