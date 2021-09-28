@@ -67,7 +67,7 @@ export function getChartDataFromBalanceHistory({
 
     chartData = balanceHistory[get(activeProfile)?.settings.chartSelectors.timeframe].reduce(
         (acc, values, index) => {
-            let balance = convertToSelectedCurrency
+            const balance = convertToSelectedCurrency
                 ? ((values.balance * _fiatHistoryData[index][1]) / 1000000).toFixed(5)
                 : values.balance
             acc.data.push(balance)
@@ -112,17 +112,17 @@ export function getChartDataForTokenValue(): ChartData {
 export const getAccountActivityData = (
     account: WalletAccount
 ): { incoming: ChartData; outgoing: ChartData; labels: string[] } => {
-    let now = new Date()
-    let activityTimeframes: ActivityTimeframe[] = []
-    let incoming: ChartData = {
+    const now = new Date()
+    const activityTimeframes: ActivityTimeframe[] = []
+    const incoming: ChartData = {
         data: [],
         tooltips: [],
         label: localize('general.incoming'),
         color: account.color || 'blue',
     } // TODO: profile colors
-    let outgoing: ChartData = { data: [], tooltips: [], label: localize('general.outgoing'), color: 'gray' } // TODO: profile colors
-    let labels: string[] = []
-    let messages: Message[] =
+    const outgoing: ChartData = { data: [], tooltips: [], label: localize('general.outgoing'), color: 'gray' } // TODO: profile colors
+    const labels: string[] = []
+    const messages: Message[] =
         account.messages
             .slice()
             ?.filter((message) => message.payload && !isSelfTransaction(message.payload, account)) // Remove self transactions and messages with no payload
@@ -275,7 +275,7 @@ function getCurrentBalanceDataPoint({
 }): { data: number; label: string; tooltip: Tooltip } {
     const selectedCurrency = get(activeProfile)?.settings.chartSelectors.currency ?? ''
     const now = new Date().getTime()
-    let balance = convertToSelectedCurrency
+    const balance = convertToSelectedCurrency
         ? convertToFiat(
               currentBalance,
               get(currencies)[CurrencyTypes.USD],

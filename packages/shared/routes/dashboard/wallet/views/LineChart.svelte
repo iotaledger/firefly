@@ -25,9 +25,9 @@
     const selectedAccount = getContext<Readable<WalletAccount>>('selectedAccount')
 
     let chartData: ChartData = { labels: [], data: [], tooltips: [] }
-    let chartTypeDropdownItems: { value: string; label: string }[] = []
-    let currencyDropdownItems: { value: string; label: string }[] = []
-    let tokenDropdownItems = [
+    const chartTypeDropdownItems: { value: string; label: string }[] = []
+    const currencyDropdownItems: { value: string; label: string }[] = []
+    const tokenDropdownItems = [
         { value: CurrencyTypes.IOTA.toLocaleLowerCase(), label: CurrencyTypes.IOTA.toLocaleUpperCase() },
     ]
 
@@ -116,7 +116,7 @@
     }
 
     onMount(() => {
-        let profileCurrency: AvailableExchangeRates = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
+        const profileCurrency: AvailableExchangeRates = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
         Object.values(CurrencyTypes).forEach((currency) => {
             if (currency !== CurrencyTypes.IOTA) {
                 currencyDropdownItems.push({
