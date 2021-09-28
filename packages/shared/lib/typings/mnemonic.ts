@@ -4,3 +4,5 @@ export interface MnemonicPayload {
     }
     mnemonic: string | null
 }
+
+export type RecoveryPhrase = string[]

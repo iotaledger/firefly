@@ -2,30 +2,36 @@
     import { Unit } from '@iota/unit-converter'
     import { Button, Illustration, Text } from 'shared/components'
     import {
-        AvailableExchangeRates,
         convertToFiat,
         currencies,
-        CurrencyTypes,
         exchangeRates,
         formatCurrency,
+        isFiatCurrency,
     } from 'shared/lib/currency'
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile } from 'shared/lib/profile'
-    import { formatUnitPrecision } from 'shared/lib/units'
-    import { get } from 'svelte/store'
+    import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
 
-    export let locale
+    export let locale: Locale
+
     export let internal = false
     export let to = ''
     export let amount = 0
     export let unit = Unit.i
-    export let onConfirm = () => {}
+    export let onConfirm = (..._: any[]): void => {}
 
-    let displayedAmount = `${formatUnitPrecision(amount, unit)} (${localConvertToFiat(amount)})`
+    const displayAmount = getFormattedAmount()
 
-    function localConvertToFiat(amount) {
-        const activeCurrency = get(activeProfile)?.settings.currency ?? AvailableExchangeRates.USD
-        return formatCurrency(convertToFiat(amount, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[activeCurrency]))
+    function getFormattedAmount() {
+        const isFiat = isFiatCurrency(unit)
+        const currency = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
+
+        const iotaAmount = isFiat ? formatUnitBestMatch(amount) : formatUnitPrecision(amount, unit)
+        const fiatAmount = formatCurrency(convertToFiat(amount, $currencies[CurrencyTypes.USD], $exchangeRates[currency]), currency)
+
+        return isFiat ? `${fiatAmount} (${iotaAmount})` : `${iotaAmount} (${fiatAmount})`
     }
 
     function handleCancelClick() {
@@ -51,7 +57,7 @@
     </div>
     <div class="w-full text-center my-9 px-10">
         <Text type="h4" highlighted classes="mb-3">
-            {locale('popups.transaction.body', { values: { amount: displayedAmount } })}
+            {locale('popups.transaction.body', { values: { amount: displayAmount } })}
         </Text>
         <Text type={internal ? 'p' : 'pre'} secondary bigger>{to}</Text>
     </div>

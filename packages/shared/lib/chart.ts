@@ -1,64 +1,20 @@
 import { Unit } from '@iota/unit-converter'
-import { AvailableExchangeRates, convertToFiat, currencies, exchangeRates } from 'shared/lib/currency'
+import { convertToFiat, currencies, exchangeRates } from 'shared/lib/currency'
 import { localize } from 'shared/lib/i18n'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
 import { formatUnitPrecision } from 'shared/lib/units'
-import type { WalletAccount } from 'shared/lib/wallet'
 import { isSelfTransaction, wallet } from 'shared/lib/wallet'
 import { formatDate } from 'shared/lib/i18n'
 import { derived, get, writable } from 'svelte/store'
-import { CurrencyTypes, formatCurrencyValue } from './currency'
-import { HistoryDataProps, priceData } from './marketData'
+import { formatCurrencyValue } from './currency'
+import { priceData } from './market'
 import type { Message } from './typings/message'
-import type { BalanceHistory } from './wallet'
-
-export interface Tooltip {
-    title: string
-    label: string
-}
-
-export interface ChartData {
-    data: number[]
-    label?: string
-    labels?: string[]
-    tooltips?: Tooltip[]
-    color?: string
-    steppedLine?: boolean
-}
-
-interface ActivityTimeframe {
-    start: number
-    end: number
-}
-
-export enum DashboardChartType {
-    HOLDINGS = 'holdings',
-    PORTFOLIO = 'portoflio',
-    TOKEN = 'token',
-}
-
-export enum WalletChartType {
-    HOLDINGS = 'holdings',
-    PORTFOLIO = 'portoflio',
-}
-
-export enum AccountChartType {
-    Value = 'Value',
-    Activity = 'Activity',
-}
+import { ActivityTimeframe, ChartData, DashboardChartType, Tooltip, WalletChartType } from './typings/chart'
+import { AvailableExchangeRates, CurrencyTypes } from './typings/currency'
+import { HistoryDataProps } from './typings/market'
+import type { BalanceHistory, WalletAccount } from './typings/wallet'
 
 const BAR_CHART_ACTIVITY_MONTHS = 6
-
-export interface ChartSelectors {
-    currency: AvailableExchangeRates
-    timeframe: HistoryDataProps
-}
-
-export interface Chart {
-    time: number
-    type: string
-    message: string
-}
 
 /** Selected chart */
 export const selectedDashboardChart = writable<DashboardChartType>(DashboardChartType.HOLDINGS)
@@ -68,7 +24,7 @@ const fiatHistoryData = derived([priceData, activeProfile], ([$priceData, $activ
     if ($activeProfile?.settings) {
         // back compatibility: init profile chartSelectors
         if (!$activeProfile?.settings.chartSelectors) {
-            let chartSelectors = {
+            const chartSelectors = {
                 currency: AvailableExchangeRates.USD,
                 timeframe: HistoryDataProps.SEVEN_DAYS,
             }
@@ -153,10 +109,17 @@ export function getChartDataForTokenValue(): ChartData {
     return chartData
 }
 
-export const getAccountActivityData = (account: WalletAccount) => {
+export const getAccountActivityData = (
+    account: WalletAccount
+): { incoming: ChartData; outgoing: ChartData; labels: string[] } => {
     let now = new Date()
     let activityTimeframes: ActivityTimeframe[] = []
-    let incoming: ChartData = { data: [], tooltips: [], label: localize('general.incoming'), color: account.color || 'blue' } // TODO: profile colors
+    let incoming: ChartData = {
+        data: [],
+        tooltips: [],
+        label: localize('general.incoming'),
+        color: account.color || 'blue',
+    } // TODO: profile colors
     let outgoing: ChartData = { data: [], tooltips: [], label: localize('general.outgoing'), color: 'gray' } // TODO: profile colors
     let labels: string[] = []
     let messages: Message[] =
@@ -164,9 +127,9 @@ export const getAccountActivityData = (account: WalletAccount) => {
             .slice()
             ?.filter((message) => message.payload && !isSelfTransaction(message.payload, account)) // Remove self transactions and messages with no payload
             ?.sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()) ?? []
-    for (var i = 0; i < BAR_CHART_ACTIVITY_MONTHS; i++) {
-        let start: number = new Date(now.getFullYear(), now.getMonth() - i, 1).getTime()
-        let end: number = new Date(now.getFullYear(), now.getMonth() - i + 1, 0).getTime()
+    for (let i = 0; i < BAR_CHART_ACTIVITY_MONTHS; i++) {
+        const start: number = new Date(now.getFullYear(), now.getMonth() - i, 1).getTime()
+        const end: number = new Date(now.getFullYear(), now.getMonth() - i + 1, 0).getTime()
         activityTimeframes.push({ start, end })
         labels.unshift(formatDate(new Date(start), { month: 'short' }))
     }
@@ -248,17 +211,17 @@ export const getAccountActivityData = (account: WalletAccount) => {
             })
         })
     }
-    let chartData = {
+
+    return {
         incoming,
         outgoing,
         labels,
     }
-    return chartData
 }
 
 function formatLabel(timestamp: number): string {
     const date: Date = new Date(timestamp)
-    var formattedLabel: string = ''
+    let formattedLabel: string = ''
     switch (get(activeProfile)?.settings.chartSelectors.timeframe) {
         case HistoryDataProps.ONE_HOUR:
         case HistoryDataProps.TWENTY_FOUR_HOURS:

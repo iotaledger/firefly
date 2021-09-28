@@ -3,15 +3,12 @@
     import { debounce } from 'shared/lib/utils'
     import { asyncGetLegacySeedChecksum, asyncVerifyMnemonic } from 'shared/lib/wallet'
     import { english } from 'shared/lib/wordlists/english'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    enum Type {
-        Seed = 'seed',
-        Mnemonic = 'mnemonic',
-    }
+    export let locale: Locale
 
     export let value = undefined
     export let type: Type = Type.Seed
-    export let locale
 
     export let disabled = false
 
@@ -19,6 +16,11 @@
     let content = ''
     let error = false
     let seedChecksum = ''
+
+    enum Type {
+        Seed = 'seed',
+        Mnemonic = 'mnemonic',
+    }
 
     const isSeed = (value: string): string | undefined => {
         if (value.length !== 81) {
@@ -71,7 +73,7 @@
             .replace(/\n/g, '')
             .replace(/  +/g, ' ')
 
-        let trimmedContent = content.trim()
+        const trimmedContent = content.trim()
 
         if (trimmedContent.length >= 3) {
             const words = trimmedContent.split(' ')
@@ -122,7 +124,10 @@
         class="text-14 leading-140 resize-none w-full p-4 pb-3 rounded-xl border border-solid {error ? 'border-red-300 hover:border-red-500 focus:border-red-500' : 'border-gray-300 hover:border-gray-500 dark:border-gray-700 dark:hover:border-gray-700'}
         text-gray-500 dark:text-white bg-white dark:bg-gray-800 scroll-secondary"
         bind:value={content}
-        on:keydown={debounce(handleKeyDown)}
+        on:keydown={() => {
+            /* eslint-disable @typescript-eslint/no-misused-promises */
+            debounce(handleKeyDown)
+        }}
         placeholder=""
         spellcheck={false}
         autofocus />

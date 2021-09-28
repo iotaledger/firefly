@@ -1,6 +1,5 @@
 <script lang="typescript">
     import { Icon, Text, Error } from 'shared/components'
-    import { clickOutside } from 'shared/lib/actions'
     import { onMount } from 'svelte'
 
     export let value = undefined
@@ -11,7 +10,6 @@
     export let sortItems = false
     export let items = []
     export let small = false
-    export let onSelect = (_) => {}
     export let contentWidth = false
     export let error = ''
     export let classes = ''
@@ -19,6 +17,8 @@
     export let valueTextType = 'p'
     export let itemTextType = 'p'
     export let showBorderWhenClosed = true
+
+    export let onSelect = (..._: any[]): void => {}
 
     let dropdown = false
     let navContainer
@@ -51,7 +51,7 @@
     }
 
     const focusItem = (itemId) => {
-        let elem = document.getElementById(itemId)
+        const elem = document.getElementById(itemId)
         focusedItem = elem
     }
 
@@ -198,12 +198,12 @@
 </style>
 
 <dropdown-input
-    class="relative {contentWidth ? "" : "w-full" } {classes}"
+    class="relative {contentWidth ? '' : 'w-full' } {classes}"
     on:click={(e) => {
         e.stopPropagation()
         toggleDropDown()
     }}
-    use:clickOutside
+    use:handleClickOutside
     on:clickOutside={handleClickOutside}
     on:keydown={handleKey}
     class:active={dropdown}

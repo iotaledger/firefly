@@ -6,15 +6,13 @@ const kdbxweb = require('kdbxweb')
  * @param {string} char - Input character
  * @returns {array} Output trit array
  */
-const charToByte = (char) => {
-    return '9ABCDEFGHIJKLMNOPQRSTUVWXYZ'.indexOf(char.toUpperCase())
-}
+const charToByte = (char) => '9ABCDEFGHIJKLMNOPQRSTUVWXYZ'.indexOf(char.toUpperCase())
 
 /**
  * Bind kdbxweb and argon2
  */
-kdbxweb.CryptoEngine.argon2 = (password, salt, memory, iterations, length, parallelism, type, version) => {
-    return argon2.hash(password, {
+kdbxweb.CryptoEngine.argon2 = (password, salt, memory, iterations, length, parallelism, type, version) =>
+    argon2.hash(password, {
         hashLength: length,
         timeCost: iterations,
         memoryCost: memory,
@@ -24,7 +22,6 @@ kdbxweb.CryptoEngine.argon2 = (password, salt, memory, iterations, length, paral
         salt: Buffer.from(salt),
         raw: true,
     })
-}
 
 /**
  * Get seed from encrypt KDBX database
@@ -41,7 +38,7 @@ const importVault = async (buffer, password) => {
 
     const db = await kdbxweb.Kdbx.load(buffer, credentials)
 
-    const entries = db.getDefaultGroup().entries
+    const { entries } = db.getDefaultGroup()
 
     if (!entries.length) {
         throw new Error('No seed found.')

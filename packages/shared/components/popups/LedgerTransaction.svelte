@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="typescript">
     import { Animation, Text } from 'shared/components'
     import { formatAddressForLedger } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -6,19 +6,21 @@
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { CallbackFn } from 'shared/lib/typings/utils'
 
-    export let locale
-
-    export let onCancel = () => {}
+    export let locale: Locale
 
     export let remainderAddress = ''
     export let remainderAmount = null
-    let shouldDisplayRemainderAddress = remainderAddress?.length > 0
-    let shouldDisplayRemainderAmount = remainderAmount !== null
-
     export let toAddress = ''
     export let toAmount = null
-    let shouldDisplaySendTo = toAddress?.length > 0 && toAmount !== null
+
+    export let onCancel = (..._: any[]): void => {}
+
+    const shouldDisplayRemainderAddress = remainderAddress?.length > 0
+    const shouldDisplayRemainderAmount = remainderAmount !== null
+    const shouldDisplaySendTo = toAddress?.length > 0 && toAmount !== null
 
     const onInvalid = () => {
         showAppNotification({

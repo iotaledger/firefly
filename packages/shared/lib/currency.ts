@@ -2,94 +2,7 @@ import { get, writable } from 'svelte/store'
 import { appSettings } from './appSettings'
 import { activeProfile } from './profile'
 import { formatUnitBestMatch } from './units'
-
-export enum CurrencyTypes {
-    IOTA = 'iota',
-    BTC = 'btc',
-    ETH = 'eth',
-    EUR = 'eur',
-    USD = 'usd',
-}
-
-export type Currencies = {
-    [CurrencyTypes.IOTA]: number
-    [CurrencyTypes.BTC]: number
-    [CurrencyTypes.ETH]: number
-    [CurrencyTypes.EUR]: number
-    [CurrencyTypes.USD]: number
-}
-
-export enum AvailableExchangeRates {
-    AUD = 'AUD',
-    BGN = 'BGN',
-    BRL = 'BRL',
-    CAD = 'CAD',
-    CHF = 'CHF',
-    CNY = 'CNY',
-    CZK = 'CZK',
-    DKK = 'DKK',
-    EUR = 'EUR',
-    GBP = 'GBP',
-    HKD = 'HKD',
-    HRK = 'HRK',
-    HUF = 'HUF',
-    IDR = 'IDR',
-    ILS = 'ILS',
-    INR = 'INR',
-    ISK = 'ISK',
-    JPY = 'JPY',
-    KRW = 'KRW',
-    MXN = 'MXN',
-    MYR = 'MYR',
-    NOK = 'NOK',
-    NZD = 'NZD',
-    PHP = 'PHP',
-    PLN = 'PLN',
-    RON = 'RON',
-    RUB = 'RUB',
-    SEK = 'SEK',
-    SGD = 'SGD',
-    THB = 'THB',
-    TRY = 'TRY',
-    USD = 'USD',
-    ZAR = 'ZAR',
-}
-
-export type ExchangeRates = {
-    [AvailableExchangeRates.AUD]: number
-    [AvailableExchangeRates.BGN]: number
-    [AvailableExchangeRates.BRL]: number
-    [AvailableExchangeRates.CAD]: number
-    [AvailableExchangeRates.CHF]: number
-    [AvailableExchangeRates.CNY]: number
-    [AvailableExchangeRates.CZK]: number
-    [AvailableExchangeRates.DKK]: number
-    [AvailableExchangeRates.EUR]: number
-    [AvailableExchangeRates.GBP]: number
-    [AvailableExchangeRates.HKD]: number
-    [AvailableExchangeRates.HRK]: number
-    [AvailableExchangeRates.HUF]: number
-    [AvailableExchangeRates.IDR]: number
-    [AvailableExchangeRates.ILS]: number
-    [AvailableExchangeRates.INR]: number
-    [AvailableExchangeRates.ISK]: number
-    [AvailableExchangeRates.JPY]: number
-    [AvailableExchangeRates.KRW]: number
-    [AvailableExchangeRates.MXN]: number
-    [AvailableExchangeRates.MYR]: number
-    [AvailableExchangeRates.NOK]: number
-    [AvailableExchangeRates.NZD]: number
-    [AvailableExchangeRates.PHP]: number
-    [AvailableExchangeRates.PLN]: number
-    [AvailableExchangeRates.RON]: number
-    [AvailableExchangeRates.RUB]: number
-    [AvailableExchangeRates.SEK]: number
-    [AvailableExchangeRates.SGD]: number
-    [AvailableExchangeRates.THB]: number
-    [AvailableExchangeRates.TRY]: number
-    [AvailableExchangeRates.USD]: number
-    [AvailableExchangeRates.ZAR]: number
-}
+import { AvailableExchangeRates, Currencies, CurrencyTypes, ExchangeRates } from './typings/currency'
 
 /**
  * Default exchange rates
@@ -139,7 +52,7 @@ export const exchangeRates = writable<ExchangeRates>(DEFAULT_EXCHANGE_RATES)
 export const currencies = writable<Currencies>({} as Currencies)
 
 /**
- * Converts iotas to fiat equivalent
+ * Converts an amount in IOTAs to its equivalent in fiat
  *
  * @method convertToFiat
  *
@@ -149,9 +62,43 @@ export const currencies = writable<Currencies>({} as Currencies)
  *
  * @returns {number}
  */
-export const convertToFiat = (amount: number, usdPrice: number, conversionRate: number): number => {
-    return +(((amount * usdPrice) / 1000000) * conversionRate).toFixed(2)
-}
+export const convertToFiat = (amount: number, usdPrice: number, conversionRate: number): number =>
+    /**
+     * NOTE: 1_000_000 is referring to 1Mi worth of value.
+     */
+    +(((amount * usdPrice) / 1_000_000) * conversionRate).toFixed(2)
+
+/**
+ *
+ * Converts a fiat amount to its equivalent in IOTAs
+ *
+ * @method convertFromFiat
+ *
+ * @param {number} amount
+ * @param {number} usdPrice
+ * @param {number} conversionRate
+ *
+ * @returns {number}
+ */
+export const convertFromFiat = (amount: number, usdPrice: number, conversionRate: number): number =>
+    /**
+     * NOTE: 1_000_000 is referring to 1Mi worth of value.
+     */
+    +((amount / conversionRate / usdPrice) * 1_000_000).toFixed(0)
+
+/**
+ * Determines if a currency is a fiat or not via its ISO 4217 code
+ *
+ * @method isFiatCurrency
+ *
+ * @param {number} currency
+ *
+ * @returns {boolean}
+ */
+export const isFiatCurrency = (currency: string): boolean =>
+    Object.values(AvailableExchangeRates)
+        .map((er) => er as string)
+        .includes(currency)
 
 /**
  * Converts to appropriate decimal places for a given currency
@@ -183,7 +130,7 @@ export const formatCurrencyValue = (
     }
 }
 
-export const getDecimalSeparator = (currency: string | undefined = undefined) => {
+export const getDecimalSeparator = (currency: string | undefined = undefined): string | undefined => {
     const appLanguage = get(appSettings).language
 
     if (!currency) {
@@ -211,7 +158,7 @@ export const getCurrencyPosition = (): 'left' | 'right' => {
     return format.findIndex((p) => p.type === 'currency') === 0 ? 'left' : 'right'
 }
 
-export const getGroupSeparator = (currency: string | undefined = undefined) => {
+export const getGroupSeparator = (currency: string | undefined = undefined): string => {
     const appLanguage = get(appSettings).language
 
     if (!currency) {
@@ -228,9 +175,7 @@ export const getGroupSeparator = (currency: string | undefined = undefined) => {
     )
 }
 
-export const getAllDecimalSeparators = () => {
-    return ['.', ',']
-}
+export const getAllDecimalSeparators = (): string[] => ['.', ',']
 
 export const parseCurrency = (valueString: string, currency: string | undefined = undefined): number => {
     // Need to escape the character in the regex in case it is . otherwise it will replace all characters
@@ -322,6 +267,5 @@ export const ensureZeros = (val: string, maxZeros: number): string => {
     }
 }
 
-export const replaceCurrencyDecimal = (value: string, currency: string | undefined = undefined): string => {
-    return value.replace('.', getDecimalSeparator(currency))
-}
+export const replaceCurrencyDecimal = (value: string, currency: string | undefined = undefined): string =>
+    value.replace('.', getDecimalSeparator(currency))

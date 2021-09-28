@@ -10,8 +10,10 @@
         SecurityCheckCompleted,
         TransferFragmentedFunds,
     } from './views/'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     export let mobile
 
     enum MigrateState {
@@ -28,9 +30,9 @@
     let state: MigrateState = MigrateState.Init
     let stateHistory = []
 
-    const _next = async (event) => {
+    const _next = (event) => {
         let nextState
-        let params = event.detail || {}
+        const params = event.detail || {}
 
         switch (state) {
             case MigrateState.Init:
@@ -53,10 +55,11 @@
             case MigrateState.BundleMiningWarning:
                 nextState = MigrateState.SecureSpentAddresses
                 break
-            case MigrateState.SecureSpentAddresses:
+            case MigrateState.SecureSpentAddresses: {
                 const { skippedMining } = params
                 nextState = skippedMining ? MigrateState.TransferFragmentedFunds : MigrateState.SecuringSpentAddresses
                 break
+            }
             case MigrateState.SecuringSpentAddresses:
                 nextState = MigrateState.SecurityCheckCompleted
                 break
@@ -72,7 +75,7 @@
     }
 
     const _previous = () => {
-        let prevState = stateHistory.pop()
+        const prevState = stateHistory.pop()
         if (prevState) {
             state = prevState
         } else {

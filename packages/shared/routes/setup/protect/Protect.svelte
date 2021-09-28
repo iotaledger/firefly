@@ -3,16 +3,18 @@
     import { Electron } from 'shared/lib/electron'
     import { activeProfile } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'
-    import { api, asyncSetStoragePassword, asyncVerifyMnemonic, asyncStoreMnemonic, asyncCreateAccount } from 'shared/lib/wallet'
+    import { asyncSetStoragePassword, asyncVerifyMnemonic, asyncStoreMnemonic, asyncCreateAccount } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
-    import { Pin, Protect, RepeatPin } from './views/'
+    import { Pin, RepeatPin } from './views/'
     import { showAppNotification } from 'shared/lib/notifications'
     import { walletSetupType } from 'shared/lib/router'
     import { mnemonic } from 'shared/lib/app'
     import { SetupType } from 'shared/lib/typings/routes'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     export let mobile
 
     let busy = false
@@ -41,10 +43,11 @@
 
     const _next = async (event) => {
         let nextState
-        let params = event.detail || {}
+        const params = event.detail || {}
+        const { pinCandidate, type } = params
+
         switch (state) {
             case ProtectState.Init:
-                const { type } = params
                 if (type === 'pin') {
                     nextState = ProtectState.Pin
                 } else if (type === 'biometric') {
@@ -52,7 +55,6 @@
                 }
                 break
             case ProtectState.Pin:
-                const { pinCandidate } = params
                 pin = pinCandidate
                 nextState = ProtectState.RepeatPin
                 break
@@ -68,18 +70,13 @@
                     await asyncSetStoragePassword(pin)
 
                     if ($walletSetupType === SetupType.Mnemonic) {
-                        // Initialises wallet from imported mnemonic
-                        // Verifies mnemonic syntactically
-                        // Stores mnemonic
-                        // Creates first account
-
                         const m = get(mnemonic).join(' ')
                         await asyncVerifyMnemonic(m)
                         await asyncStoreMnemonic(m)
                         await asyncCreateAccount()
 
-                        // Clear mnemonic
                         mnemonic.set(null)
+
                         dispatch('next', { pin })
                     } else {
                         dispatch('next', { pin })
@@ -102,7 +99,7 @@
     }
 
     const _previous = () => {
-        let prevState = stateHistory.pop()
+        const prevState = stateHistory.pop()
         if (prevState) {
             state = prevState
         } else {

@@ -1,22 +1,24 @@
 <script lang="typescript">
+    import { ChartData, DashboardChartType, WalletChartType } from 'lib/typings/chart'
+    import { AvailableExchangeRates, CurrencyTypes } from 'lib/typings/currency'
+    import type { Locale } from 'lib/typings/i18n'
+    import { HistoryDataProps } from 'lib/typings/market'
+    import type { AccountsBalanceHistory, BalanceHistory, WalletAccount } from 'lib/typings/wallet'
     import { Chart, Dropdown, Text } from 'shared/components'
     import {
-        ChartData,
-        DashboardChartType,
-        WalletChartType,
         getChartDataFromBalanceHistory,
         getChartDataForTokenValue,
         selectedDashboardChart,
         selectedWalletChart,
     } from 'shared/lib/chart'
-    import { AvailableExchangeRates, CurrencyTypes, formatCurrencyValue } from 'shared/lib/currency'
-    import { HistoryDataProps, TIMEFRAME_MAP } from 'shared/lib/marketData'
+    import { formatCurrencyValue } from 'shared/lib/currency'
+    import { TIMEFRAME_MAP } from 'shared/lib/market'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
-    import { AccountsBalanceHistory, BalanceHistory, wallet, WalletAccount } from 'shared/lib/wallet'
+    import { wallet } from 'shared/lib/wallet'
     import { getContext, onMount } from 'svelte'
     import { derived, get, Readable } from 'svelte/store'
 
-    export let locale
+    export let locale: Locale
 
     const walletBalanceHistory = getContext<Readable<BalanceHistory>>('walletBalanceHistory')
     const accountsBalanceHistory = getContext<Readable<AccountsBalanceHistory>>('accountsBalanceHistory')
@@ -25,7 +27,9 @@
     let chartData: ChartData = { labels: [], data: [], tooltips: [] }
     let chartTypeDropdownItems: { value: string; label: string }[] = []
     let currencyDropdownItems: { value: string; label: string }[] = []
-    let tokenDropdownItems = [{ value: CurrencyTypes.IOTA.toLocaleLowerCase(), label: CurrencyTypes.IOTA.toLocaleUpperCase() }]
+    let tokenDropdownItems = [
+        { value: CurrencyTypes.IOTA.toLocaleLowerCase(), label: CurrencyTypes.IOTA.toLocaleUpperCase() },
+    ]
 
     let xMaxTicks
 
@@ -38,7 +42,7 @@
         return get(balanceOverview)?.balanceRaw
     })
 
-    const hasTitleBar = document.body.classList.contains(`platform-win32`)
+    const hasTitleBar = document.body.classList.contains('platform-win32')
 
     /** Chart data */
     $: {
@@ -209,7 +213,11 @@
         <div class="flex justify-between items-center space-x-2">
             {#if (!$selectedAccount && $selectedDashboardChart === DashboardChartType.HOLDINGS) || ($selectedAccount && $selectedWalletChart === WalletChartType.HOLDINGS)}
                 <span>
-                    <Dropdown small value={tokenDropdownItems[0].label} items={tokenDropdownItems} contentWidth={true} />
+                    <Dropdown
+                        small
+                        value={tokenDropdownItems[0].label}
+                        items={tokenDropdownItems}
+                        contentWidth={true} />
                 </span>
             {:else}
                 <span>
