@@ -6,12 +6,27 @@
         "packages/backend/bindings/node"
     ],
     "devDependencies": {
-        "patch-package": "^6.2.2"
+        "@babel/eslint-parser": "^7.15.0",
+        "@typescript-eslint/eslint-plugin": "^4.29.2",
+        "@typescript-eslint/parser": "^4.29.2",
+        "eslint": "^7.32.0",
+        "eslint-plugin-security": "^1.4.0",
+        "eslint-plugin-svelte3": "^3.2.0",
+        "husky": "^7.0.0",
+        "patch-package": "^6.2.2",
+        "prettier": "^2.3.2"
     },
     "scripts": {
+        "format": "prettier -w '**/*.{ts,js,json,scss,css}'",
+        "format-check": "prettier -c '**/*.{ts,js,json,scss,css}'",
+        "lint": "eslint . --cache",
+        "lint-debug": "eslint . --cache --debug",
+        "lint-fix": "eslint . --cache --fix",
         "postinstall": "patch-package",
-        "test": "yarn test-shared",
-        "test-shared": "cd packages/shared && yarn test"
+        "pre-commit": "yarn format-check && yarn lint",
+        "prepare": "husky install",
+        "test": "yarn test:shared",
+        "test:shared": "cd packages/shared && yarn test"
     },
     "resolutions": {
         "lodash": ">=4.17.21"

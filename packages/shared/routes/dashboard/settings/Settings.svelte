@@ -8,8 +8,10 @@
     import { selectedAccountId } from 'shared/lib/wallet'
     import { onDestroy } from 'svelte'
     import { SettingsHome, SettingsViewer } from './views'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     export let mobile
     export let handleClose
 

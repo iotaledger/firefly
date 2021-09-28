@@ -3,9 +3,11 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { api, isSyncing, selectedAccountId, selectedMessage } from 'shared/lib/wallet'
     import { isLedgerProfile } from 'shared/lib/profile'
-    import { isLedgerError, displayNotificationForLedgerProfile } from 'shared/lib/ledger'
+    import { displayNotificationForLedgerProfile } from 'shared/lib/ledger'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     export let transactions = []
     export let color = 'blue'
 

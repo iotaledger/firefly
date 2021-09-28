@@ -6,7 +6,6 @@
         convertFromFiat,
         convertToFiat,
         currencies,
-        CurrencyTypes,
         exchangeRates,
         isFiatCurrency,
         parseCurrency,
@@ -18,7 +17,7 @@
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import {
         GeneratingRemainderDepositAddressEvent,
-        PreparedTransactionEvent,
+        PreparedTransactionEvent, TransactionEventData,
         TransferProgressEventData,
         TransferProgressEventType,
         TransferState,
@@ -28,14 +27,18 @@
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
-    import { DUST_THRESHOLD, isTransferring, transferState, wallet, WalletAccount } from 'shared/lib/wallet'
+    import { DUST_THRESHOLD, isTransferring, transferState, wallet } from 'shared/lib/wallet'
     import { getContext, onDestroy, onMount } from 'svelte'
     import type { Readable } from 'svelte/store'
     import { get } from 'svelte/store'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { CurrencyTypes } from 'shared/lib/typings/currency'
 
-    export let locale
-    export let send
-    export let internalTransfer
+    export let locale: Locale
+
+    export let onSend = (..._: any[]): void => {}
+    export let onInternalTransfer = (..._: any[]): void => {}
 
     const { accounts } = $wallet
 
@@ -53,7 +56,7 @@
     let address = ''
     let to = undefined
     let amountError = ''
-    let addressPrefix = ($account ?? $liveAccounts[0]).depositAddress.split('1')[0]
+    const addressPrefix = ($account ?? $liveAccounts[0]).depositAddress.split('1')[0]
     let addressError = ''
     let toError = ''
     let amountRaw
@@ -69,7 +72,7 @@
     $: to, (toError = '')
     $: address, (addressError = '')
 
-    let transferSteps: {
+    const transferSteps: {
         [key in TransferProgressEventType]: {
             label: string
             percent: number
@@ -124,7 +127,7 @@
         }
     }
 
-    const handleTransactionEventData = (eventData: TransferProgressEventData): any => {
+    const handleTransactionEventData = (eventData: TransferProgressEventData): TransactionEventData => {
         if (!eventData) return {}
 
         const remainderData = eventData as GeneratingRemainderDepositAddressEvent
@@ -174,11 +177,12 @@
             case TransferProgressEventType.GeneratingRemainderDepositAddress:
                 transactionEventData = data
 
-            /**
+                /**
              * NOTE: The break statement is omitted in this case to allow the next block of code
              * (under SigningTransaction) to be executed.
              */
 
+                /* eslint-disable no-fallthrough */
             case TransferProgressEventType.SigningTransaction:
                 ledgerAwaitingConfirmation = true
 
@@ -195,7 +199,7 @@
                 break
 
             case TransferProgressEventType.PreparedTransaction:
-                /**
+            /**
                  * CAUTION: The Ledger confirmation doesn't always trigger
                  * the popup to close, so it is programmatically enforced here.
                  */
@@ -296,15 +300,15 @@
 
     const ensureMaxAmount = (_amount) => {
         /**
-         * NOTE: Sometimes max values from fiat calculations 
+         * NOTE: Sometimes max values from fiat calculations
          * aren't precise enough, so we have to ensure that the
          * actual max amount is applied when the user clicks
          * the button.
         */
 
-        let isFiat = isFiatCurrency(unit)
-        let isMaxAmount = amount === convertToFiat(from.balance, $currencies[CurrencyTypes.USD], $exchangeRates[unit]).toString()
-        let hasDustRemaining = Math.abs(from.balance - _amount) < DUST_THRESHOLD
+        const isFiat = isFiatCurrency(unit)
+        const isMaxAmount = amount === convertToFiat(from.balance, $currencies[CurrencyTypes.USD], $exchangeRates[unit]).toString()
+        const hasDustRemaining = Math.abs(from.balance - _amount) < DUST_THRESHOLD
 
         return (isFiat && isMaxAmount && hasDustRemaining) ? from.balance : _amount
     }
@@ -334,8 +338,8 @@
         } else if (unit === Unit.i && Number.parseInt(amount, 10).toString() !== amount) {
             amountError = locale('error.send.amountNoFloat')
         } else {
-            let isFiat = isFiatCurrency(unit)
-            let amountAsFloat = parseCurrency(amount)
+            const isFiat = isFiatCurrency(unit)
+            const amountAsFloat = parseCurrency(amount)
 
             if (Number.isNaN(amountAsFloat)) {
                 amountError = locale('error.send.amountInvalidFormat')
@@ -387,16 +391,15 @@
     const triggerSend = (isInternal) => {
         closePopup()
 
-        const _send = (isInternal: boolean): any => {
+        const _send = (isInternal: boolean): any =>
             /**
              * NOTE: selectedSendType is passed (only to the internalTransfer method) in the
              * case that we are masquerading as an internal transfer by sending to an address
              * in another account. Send parameters are reset once the transfer completes.
              */
-            return isInternal
-                ? internalTransfer(from.id, to.id, amountRaw, selectedSendType === SEND_TYPE.INTERNAL)
-                : send(from.id, address, amountRaw)
-        }
+             isInternal
+                ? onInternalTransfer(from.id, to.id, amountRaw, selectedSendType === SEND_TYPE.INTERNAL)
+                : onSend(from.id, address, amountRaw)
 
         if($isSoftwareProfile) {
             _send(isInternal)
@@ -414,13 +417,11 @@
         }
     }
 
-    const format = (account: WalletAccount) => {
-        return {
-            ...account,
-            label: `${account.alias} • ${account.balance}`,
-            balance: account.rawIotaBalance,
-        }
-    }
+    const format = (account: WalletAccount) => ({
+        ...account,
+        label: `${account.alias} • ${account.balance}`,
+        balance: account.rawIotaBalance,
+    })
 
     const handleMaxClick = () => {
         amount = isFiatCurrency(unit)

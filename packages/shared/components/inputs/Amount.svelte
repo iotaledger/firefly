@@ -2,11 +2,9 @@
     import { Unit } from '@iota/unit-converter'
     import { Input, Text } from 'shared/components'
     import {
-        AvailableExchangeRates,
         convertFromFiat,
         convertToFiat,
         currencies,
-        CurrencyTypes,
         exchangeRates,
         formatCurrency,
         isFiatCurrency,
@@ -15,14 +13,17 @@
     } from 'shared/lib/currency'
     import { activeProfile } from 'shared/lib/profile'
     import { changeUnits, formatUnitBestMatch, formatUnitPrecision, UNIT_MAP } from 'shared/lib/units'
-
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
+    
     type AmountUnit = Unit | AvailableExchangeRates
+
+    export let locale: Locale
 
     export let amount = undefined
     export let unit: AmountUnit = Unit.Mi
     export let label = undefined
     export let placeholder = undefined
-    export let locale = undefined
     export let classes = ''
     export let error = ''
     export let disabled = false
@@ -40,9 +41,7 @@
     let unitsButton
     let focusedItem
 
-    const getFormattedLabel = (_amount) => {
-        return isFiatCurrency(unit) ? convertAmountFromFiat(_amount) : convertAmountToFiat(_amount)
-    }
+    const getFormattedLabel = (_amount) => isFiatCurrency(unit) ? convertAmountFromFiat(_amount) : convertAmountToFiat(_amount)
 
     $: amountForLabel = getFormattedLabel(amount)
     $: {
@@ -73,16 +72,16 @@
             const rawAmount = changeUnits(amountAsFloat, unit as Unit, Unit.i)
             const fiatAmount = convertToFiat(rawAmount, $currencies[CurrencyTypes.USD], $exchangeRates[currency])
 
-            return fiatAmount === 0 ? replaceCurrencyDecimal(`< 0.01`) : formatCurrency(fiatAmount)
+            return fiatAmount === 0 ? replaceCurrencyDecimal('< 0.01') : formatCurrency(fiatAmount)
         }
 
         return convertAmount(_amount, undefined, _convert)
     }
     const convertAmountFromFiat = (_amount) => {
         if(!isFiatCurrency(unit)) return _amount
-        
+    
         const _convert = (amountAsFloat) => {
-            let rawAmount = convertFromFiat(amountAsFloat, $currencies[CurrencyTypes.USD], $exchangeRates[currency])
+            const rawAmount = convertFromFiat(amountAsFloat, $currencies[CurrencyTypes.USD], $exchangeRates[currency])
 
             return formatUnitBestMatch(rawAmount)
         }
@@ -95,7 +94,7 @@
 
         const amountAsFloat = parseCurrency(_amount, _unit)
         if (amountAsFloat === 0 || Number.isNaN(amountAsFloat)) return null
-        
+    
         return convertFn(amountAsFloat)
     }
 
@@ -103,7 +102,7 @@
         showDropdown = false
     }
 
-    const onUnitSelect = (toUnit: AmountUnit) => {
+    const onUnitClick = (toUnit: AmountUnit) => {
         updateAmount(unit, toUnit)
         unit = toUnit
     }
@@ -120,7 +119,7 @@
             // FIAT -> IOTA
             if(isFiatCurrency(fromUnit)) {
                 rawAmount = convertFromFiat(amount, $currencies[CurrencyTypes.USD], $exchangeRates[currency])
-            } 
+            }
             // IOTA -> IOTA
             else {
                 rawAmount = changeUnits(parseCurrency(amount), fromUnit as Unit, Unit.i)
@@ -131,7 +130,7 @@
     }
 
     const focusItem = (itemId) => {
-        let elem = document.getElementById(itemId)
+        const elem = document.getElementById(itemId)
         focusedItem = elem
     }
 
@@ -161,7 +160,7 @@
             } else if (e.key === 'Enter') {
                 if (focusedItem) {
                     const idx = [...navContainer.children].indexOf(focusedItem)
-                    onUnitSelect(Units[idx])
+                    onUnitClick(Units[idx])
                 }
             }
         }
@@ -183,9 +182,7 @@
         }
     }
 
-    const getMaxDecimals = (_unit: AmountUnit) => {
-        return isFiatCurrency(_unit) ? 2 : UNIT_MAP[_unit].dp
-    }
+    const getMaxDecimals = (_unit: AmountUnit) => isFiatCurrency(_unit) ? 2 : UNIT_MAP[_unit].dp
 </script>
 
 <style type="text/scss">
@@ -245,7 +242,7 @@
                         class="text-center w-full py-2 {unit === _unit && 'bg-gray-100 dark:bg-gray-700 dark:bg-opacity-20'}
                         hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20
                         focus:bg-gray-200 dark:focus:bg-gray-800 dark:focus:bg-opacity-20"
-                        on:click={() => onUnitSelect(_unit)}
+                        on:click={() => onUnitClick(_unit)}
                         on:focus={() => focusItem(_unit)}
                         class:active={unit === _unit}
                         tabindex={showDropdown ? 0 : -1}>

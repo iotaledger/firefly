@@ -859,7 +859,8 @@
         "sending": "भेज रहे है",
         "legacyNetwork": "विरासत नेटवर्क",
         "capsLock": "कैप्स लॉक ऑन है",
-        "version": "संस्करण {version}"
+        "version": "संस्करण {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "आज",

@@ -2,10 +2,8 @@
     import { Unit } from '@iota/unit-converter'
     import { Button, Illustration, Text } from 'shared/components'
     import {
-        AvailableExchangeRates,
         convertToFiat,
         currencies,
-        CurrencyTypes,
         exchangeRates,
         formatCurrency,
         isFiatCurrency,
@@ -13,22 +11,25 @@
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile } from 'shared/lib/profile'
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
 
-    export let locale
+    export let locale: Locale
+
     export let internal = false
     export let to = ''
     export let amount = 0
     export let unit = Unit.i
-    export let onConfirm = () => {}
+    export let onConfirm = (..._: any[]): void => {}
 
-    let displayAmount = getFormattedAmount()
+    const displayAmount = getFormattedAmount()
 
     function getFormattedAmount() {
         const isFiat = isFiatCurrency(unit)
         const currency = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
 
-        let iotaAmount = isFiat ? formatUnitBestMatch(amount) : formatUnitPrecision(amount, unit)
-        let fiatAmount = formatCurrency(convertToFiat(amount, $currencies[CurrencyTypes.USD], $exchangeRates[currency]), currency)
+        const iotaAmount = isFiat ? formatUnitBestMatch(amount) : formatUnitPrecision(amount, unit)
+        const fiatAmount = formatCurrency(convertToFiat(amount, $currencies[CurrencyTypes.USD], $exchangeRates[currency]), currency)
 
         return isFiat ? `${fiatAmount} (${iotaAmount})` : `${iotaAmount} (${fiatAmount})`
     }
