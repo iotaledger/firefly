@@ -1,9 +1,9 @@
 <script lang="typescript">
-    import type { ChartData, DashboardChartType, WalletChartType } from 'lib/typings/chart'
-    import type { Locale } from 'lib/typings/i18n'
-    import type { AccountsBalanceHistory, BalanceHistory, WalletAccount } from 'lib/typings/wallet'
-    import type { AvailableExchangeRates, CurrencyTypes } from 'lib/typings/currency'
-    import type { HistoryDataProps } from 'lib/typings/market'
+    import { ChartData, DashboardChartType, WalletChartType } from 'shared/lib/typings/chart'
+    import type { Locale } from 'shared/lib/typings/i18n'
+    import { AccountsBalanceHistory, BalanceHistory, WalletAccount } from 'shared/lib/typings/wallet'
+    import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
+    import { HistoryDataProps } from 'shared/lib/typings/market'
     import { Chart, Dropdown, Text } from 'shared/components'
     import {
         getChartDataFromBalanceHistory,
@@ -32,6 +32,10 @@
     ]
 
     let xMaxTicks
+
+    let datasets: ChartData[]
+    let labels: string[]
+    let color: string
 
     $: datasets = [{ data: chartData.data, tooltips: chartData.tooltips, steppedLine: chartData.steppedLine ?? false }]
     $: labels = chartData.labels
