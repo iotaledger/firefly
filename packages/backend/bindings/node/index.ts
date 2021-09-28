@@ -60,7 +60,7 @@ import { ClientOptions } from '../../../shared/lib/typings/client'
 import { NodeAuth } from '../../../shared/lib/typings/node'
 
 // @ts-ignore
-import addon = require('./index.node')
+import addon = require('../index.node')
 
 const mailbox = []
 const onMessageListeners: ((payload: MessageResponse) => void)[] = []
