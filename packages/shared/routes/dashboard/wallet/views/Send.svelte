@@ -7,7 +7,6 @@
         convertToFiat,
         currencies,
         CurrencyTypes,
-        DUST_THRESHOLD,
         exchangeRates,
         isFiatCurrency,
         parseCurrency,
@@ -29,7 +28,7 @@
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
-    import { isTransferring, transferState, wallet, WalletAccount } from 'shared/lib/wallet'
+    import { DUST_THRESHOLD, isTransferring, transferState, wallet, WalletAccount } from 'shared/lib/wallet'
     import { getContext, onDestroy, onMount } from 'svelte'
     import type { Readable } from 'svelte/store'
     import { get } from 'svelte/store'

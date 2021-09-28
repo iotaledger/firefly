@@ -128,11 +128,6 @@ const DEFAULT_EXCHANGE_RATES: { [key in AvailableExchangeRates]: number } = {
 }
 
 /**
- * The threshold for what is considered dust, which is 1Mi or 1,000,000i
- */
-export const DUST_THRESHOLD: number = 1_000_000
-
-/**
  * Exchange rates
  */
 export const exchangeRates = writable<ExchangeRates>(DEFAULT_EXCHANGE_RATES)

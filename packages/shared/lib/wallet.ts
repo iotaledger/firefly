@@ -57,6 +57,11 @@ export const MAX_ACCOUNT_NAME_LENGTH = 20
 
 export const MAX_PASSWORD_LENGTH = 256
 
+/**
+ * A number representing the threshold for what is considered dust, which is 1Mi or 1,000,000i.
+ */
+export const DUST_THRESHOLD: number = 1_000_000
+
 // Setting to 0 removes auto lock. We must lock Stronghold manually.
 export const STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS = 0
 
