@@ -2,7 +2,14 @@
     import { Unit } from '@iota/unit-converter'
     import { Address, Amount, Button, Dropdown, Icon, ProgressBar, Text } from 'shared/components'
     import { clearSendParams, sendParams } from 'shared/lib/app'
-    import { parseCurrency } from 'shared/lib/currency'
+    import {
+        convertFromFiat,
+        convertToFiat,
+        currencies,
+        exchangeRates,
+        isFiatCurrency,
+        parseCurrency,
+    } from 'shared/lib/currency'
     import { ledgerDeviceState, displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { displayNotifications, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
@@ -20,12 +27,13 @@
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
-    import { isTransferring, transferState, wallet } from 'shared/lib/wallet'
+    import { DUST_THRESHOLD, isTransferring, transferState, wallet } from 'shared/lib/wallet'
     import { getContext, onDestroy, onMount } from 'svelte'
     import type { Readable } from 'svelte/store'
     import { get } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { CurrencyTypes } from 'shared/lib/typings/currency'
 
     export let locale: Locale
 
@@ -273,6 +281,7 @@
         selectedSendType = type
         clearErrors()
     }
+
     const handleFromSelect = (item) => {
         from = item
         if (to === from) {
@@ -280,6 +289,7 @@
         }
         clearErrors()
     }
+
     const handleToSelect = (item) => {
         to = item
         if (from === to) {
@@ -287,6 +297,22 @@
         }
         clearErrors()
     }
+
+    const ensureMaxAmount = (_amount) => {
+        /**
+         * NOTE: Sometimes max values from fiat calculations
+         * aren't precise enough, so we have to ensure that the
+         * actual max amount is applied when the user clicks
+         * the button.
+        */
+
+        const isFiat = isFiatCurrency(unit)
+        const isMaxAmount = amount === convertToFiat(from.balance, $currencies[CurrencyTypes.USD], $exchangeRates[unit]).toString()
+        const hasDustRemaining = Math.abs(from.balance - _amount) < DUST_THRESHOLD
+
+        return (isFiat && isMaxAmount && hasDustRemaining) ? from.balance : _amount
+    }
+
     const handleSendClick = () => {
         clearErrors()
 
@@ -312,16 +338,22 @@
         } else if (unit === Unit.i && Number.parseInt(amount, 10).toString() !== amount) {
             amountError = locale('error.send.amountNoFloat')
         } else {
+            const isFiat = isFiatCurrency(unit)
             const amountAsFloat = parseCurrency(amount)
+
             if (Number.isNaN(amountAsFloat)) {
                 amountError = locale('error.send.amountInvalidFormat')
             } else {
-                amountRaw = changeUnits(amountAsFloat, unit, Unit.i)
+                amountRaw = isFiat
+                    ? convertFromFiat(amountAsFloat, $currencies[CurrencyTypes.USD], $exchangeRates[unit])
+                    : changeUnits(amountAsFloat, unit, Unit.i)
+                amountRaw = ensureMaxAmount(amountRaw)
+
                 if (amountRaw > from.balance) {
                     amountError = locale('error.send.amountTooHigh')
                 } else if (amountRaw <= 0) {
                     amountError = locale('error.send.amountZero')
-                } else if (amountRaw < 1000000) {
+                } else if (amountRaw < DUST_THRESHOLD) {
                     amountError = locale('error.send.sendingDust')
                 }
             }
@@ -343,46 +375,36 @@
                 }
             }
 
-            handleLedgerConnection(() =>
-                openPopup({
-                    type: 'transaction',
-                    props: {
-                        internal,
-                        amount: amountRaw,
-                        unit,
-                        to: internal ? to.alias : address,
-                        onConfirm: () => triggerSend(internal),
-                    },
-                })
-            )
+            openPopup({
+                type: 'transaction',
+                props: {
+                    internal,
+                    amount: amountRaw,
+                    unit,
+                    to: internal ? to.alias : address,
+                    onConfirm: () => triggerSend(internal),
+                },
+            })
         }
     }
 
     const triggerSend = (isInternal) => {
         closePopup()
 
-        const _send = (isInternal: boolean): void =>
-        /**
-         * NOTE: selectedSendType is passed (only to the internalTransfer method) in the
-         * case that we are masquerading as an internal transfer by sending to an address
-         * in another account. Send parameters are reset once the transfer completes.
-         */
-            isInternal
+        const _send = (isInternal: boolean): any =>
+            /**
+             * NOTE: selectedSendType is passed (only to the internalTransfer method) in the
+             * case that we are masquerading as an internal transfer by sending to an address
+             * in another account. Send parameters are reset once the transfer completes.
+             */
+             isInternal
                 ? onInternalTransfer(from.id, to.id, amountRaw, selectedSendType === SEND_TYPE.INTERNAL)
                 : onSend(from.id, address, amountRaw)
 
-        handleLedgerConnection(() => _send(isInternal))
-    }
-
-    const handleLedgerConnection = (onSuccess: () => void) => {
-        /**
-         * NOTE: Because the Ledger must be connected to send a transaction,
-         * it is important to wrap the send function in the Ledger connection
-         * prompt function (only for non-software profiles).
-         */
-        if ($isSoftwareProfile) onSuccess()
-        else {
-            promptUserToConnectLedger(false, onSuccess, undefined)
+        if($isSoftwareProfile) {
+            _send(isInternal)
+        } else if($isLedgerProfile) {
+            promptUserToConnectLedger(false, () => _send(isInternal), undefined)
         }
     }
 
@@ -400,8 +422,11 @@
         label: `${account.alias} • ${account.balance}`,
         balance: account.rawIotaBalance,
     })
+
     const handleMaxClick = () => {
-        amount = formatUnitPrecision(from.balance, unit, false)
+        amount = isFiatCurrency(unit)
+            ? convertToFiat(from.balance, $currencies[CurrencyTypes.USD], $exchangeRates[unit]).toString()
+            : formatUnitPrecision(from.balance, unit, false)
     }
 
     const updateFromSendParams = (s) => {

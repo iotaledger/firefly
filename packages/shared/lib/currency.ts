@@ -51,7 +51,7 @@ export const exchangeRates = writable<ExchangeRates>(DEFAULT_EXCHANGE_RATES)
 export const currencies = writable<Currencies>({} as Currencies)
 
 /**
- * Converts iotas to fiat equivalent
+ * Converts an amount in IOTAs to its equivalent in fiat
  *
  * @method convertToFiat
  *
@@ -62,7 +62,42 @@ export const currencies = writable<Currencies>({} as Currencies)
  * @returns {number}
  */
 export const convertToFiat = (amount: number, usdPrice: number, conversionRate: number): number =>
-    +(((amount * usdPrice) / 1000000) * conversionRate).toFixed(2)
+    /**
+     * NOTE: 1_000_000 is referring to 1Mi worth of value.
+     */
+    +(((amount * usdPrice) / 1_000_000) * conversionRate).toFixed(2)
+
+/**
+ *
+ * Converts a fiat amount to its equivalent in IOTAs
+ *
+ * @method convertFromFiat
+ *
+ * @param {number} amount
+ * @param {number} usdPrice
+ * @param {number} conversionRate
+ *
+ * @returns {number}
+ */
+export const convertFromFiat = (amount: number, usdPrice: number, conversionRate: number): number =>
+    /**
+     * NOTE: 1_000_000 is referring to 1Mi worth of value.
+     */
+    +((amount / conversionRate / usdPrice) * 1_000_000).toFixed(0)
+
+/**
+ * Determines if a currency is a fiat or not via its ISO 4217 code
+ *
+ * @method isFiatCurrency
+ *
+ * @param {number} currency
+ *
+ * @returns {boolean}
+ */
+export const isFiatCurrency = (currency: string): boolean =>
+    Object.values(AvailableExchangeRates)
+        .map((er) => er as string)
+        .includes(currency)
 
 /**
  * Converts to appropriate decimal places for a given currency
