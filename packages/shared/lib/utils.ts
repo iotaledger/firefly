@@ -3,13 +3,20 @@ import { localize } from 'shared/lib/i18n'
 import { showAppNotification } from 'shared/lib/notifications'
 import validUrl from 'valid-url'
 import { Bech32 } from 'shared/lib/bech32'
+import type { ParsedAddress } from './typings/address'
+import type { Event } from './typings/events'
 
 export const VALID_MAINNET_ADDRESS: RegExp = /^iota1[02-9ac-hj-np-z]{59}$/
 export const VALID_DEVNET_ADDRESS: RegExp = /^atoi1[02-9ac-hj-np-z]{59}$/
 export const ADDRESS_LENGTH = 64
 export const PIN_LENGTH = 6
 
-export function bindEvents(element, events) {
+interface Element {
+    addEventListener(event: Event<unknown> | string, unknown)
+    removeEventListener(event: Event<unknown> | string, handler: unknown)
+}
+
+export function bindEvents(element: Element, events: Event<unknown>[]): { destroy } {
     const listeners = Object.entries(events).map(([event, handler]) => {
         const listener = element.addEventListener(event, handler)
 
@@ -28,7 +35,7 @@ export function bindEvents(element, events) {
 /**
  * Validate pincode format
  */
-export const validatePinFormat = (pincode: string) => {
+export const validatePinFormat = (pincode: string): boolean => {
     const REGEX = new RegExp(`^\\d{${PIN_LENGTH}}$`)
     return REGEX.test(pincode)
 }
@@ -38,18 +45,17 @@ export const validatePinFormat = (pincode: string) => {
  *
  * @returns {string}
  */
-export const generateRandomId = (): string => {
-    return Array.from(crypto.getRandomValues(new Uint8Array(16)), (byte) => {
-        return ('0' + (byte & 0xff).toString(16)).slice(-2)
-    }).join('')
-}
+export const generateRandomId = (): string =>
+    Array.from(crypto.getRandomValues(new Uint8Array(16)), (byte) => ('0' + (byte & 0xff).toString(16)).slice(-2)).join(
+        ''
+    )
 
 /**
  * Parse a deep link (iota://)
  * @param  {string} data Deep link data
- * @return {ParsedURL}  The parsed address, message and/or amount values
+ * @return {ParsedAddress}  The parsed address, message and/or amount values
  */
-export const parseDeepLink = (data) => {
+export const parseDeepLink = (data: string): ParsedAddress => {
     const parsed = parseAddress(data)
     if (!parsed) {
         return null
@@ -64,9 +70,9 @@ export const parseDeepLink = (data) => {
 
 /** Parse an IOTA address input
  * @param {string} input
- * @returns {ParsedURL} - The parsed address, message and/or amount values
+ * @returns {ParsedAddress} - The parsed address, message and/or amount values
  */
-export const parseAddress = (input) => {
+export const parseAddress = (input: string): ParsedAddress => {
     const result = {
         address: null,
         message: null,
@@ -77,7 +83,7 @@ export const parseAddress = (input) => {
         return null
     }
 
-    if (input.match(VALID_MAINNET_ADDRESS) || input.match(VALID_DEVNET_ADDRESS)) {
+    if (VALID_MAINNET_ADDRESS.exec(input) || VALID_DEVNET_ADDRESS.exec(input)) {
         result.address = input
         return result
     }
@@ -125,7 +131,7 @@ export const parseAddress = (input) => {
  * @param  {string}  url
  * @returns {Boolean}
  */
-export const isValidUrl = (url) => {
+export const isValidUrl = (url: string): boolean => {
     if (validUrl.isWebUri(url)) {
         return true
     }
@@ -140,7 +146,7 @@ export const isValidUrl = (url) => {
  * @param  {string}  url
  * @returns {Boolean}
  */
-export const isValidHttpsUrl = (url) => {
+export const isValidHttpsUrl = (url: string): boolean => {
     if (validUrl.isHttpsUri(url)) {
         return true
     }
@@ -153,7 +159,7 @@ export const isValidHttpsUrl = (url) => {
  * @param addr The address to validate.
  * @returns The error string to use if it does not validate.
  */
-export const validateBech32Address = (prefix, addr) => {
+export const validateBech32Address = (prefix: string, addr: string): undefined | string => {
     if (!addr || !addr.startsWith(prefix)) {
         return localize('error.send.wrongAddressPrefix', {
             values: {
@@ -169,7 +175,9 @@ export const validateBech32Address = (prefix, addr) => {
     try {
         const decoded = Bech32.decode(addr)
         isValid = decoded && decoded.humanReadablePart === prefix
-    } catch {}
+    } catch (err) {
+        console.error('error.crypto.cannotDecodeBech32')
+    }
 
     if (!isValid) {
         return localize('error.send.invalidAddress')
@@ -181,9 +189,10 @@ export const validateBech32Address = (prefix, addr) => {
  * @param callback The callback to call in completion
  * @param wait How to long wait before calling callback
  */
-export function debounce(callback, wait = 500) {
+export function debounce(callback: () => void, wait = 500): (...args: unknown[]) => void {
     let _timeout
     return (...args) => {
+        /* eslint-disable @typescript-eslint/no-this-alias */
         const context = this
         clearTimeout(_timeout)
         _timeout = setTimeout(() => callback.apply(context, args), wait)
@@ -199,7 +208,7 @@ export const setClipboard = (input: string): boolean => {
         textArea.value = input
         document.body.appendChild(textArea)
 
-        if (navigator.userAgent.match(/ipad|iphone/i)) {
+        if (/ipad|iphone/i.exec(navigator.userAgent)) {
             const range = document.createRange()
             range.selectNodeContents(textArea)
             const selection = window.getSelection()
@@ -218,7 +227,8 @@ export const setClipboard = (input: string): boolean => {
 
         return true
     } catch (err) {
-        console.log(err)
+        console.error(err)
+
         return false
     }
 }
@@ -232,11 +242,11 @@ export const getDefaultStrongholdName = (): string => {
     return `firefly-backup-${date}.stronghold`
 }
 
-export const downloadRecoveryKit = () => {
+export const downloadRecoveryKit = (): void => {
     fetch('assets/docs/recovery-kit.pdf')
         .then((response) => response.arrayBuffer())
         .then((data) => {
-            Electron.saveRecoveryKit(data)
+            void Electron.saveRecoveryKit(data)
         })
         .catch((err) => {
             console.error(err)

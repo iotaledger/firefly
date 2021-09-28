@@ -8,10 +8,13 @@
     import { isLedgerProfile } from 'shared/lib/profile'
     import { showAppNotification } from 'shared/lib/notifications'
     import { localize } from 'shared/lib/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
-    export let onCreate
+    export let locale: Locale
+
     export let error = ''
+
+    export let onCreate = (..._: any[]): void => {}
 
     const { accounts } = $wallet
 

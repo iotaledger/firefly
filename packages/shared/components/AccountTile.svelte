@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
 
-    export let onClick = () => ''
     export let name = ''
     export let balance = ''
     export let balanceEquiv = ''
@@ -10,6 +9,8 @@
     export let size = 'm' // m, l
     export let hidden = false
     export let disabled = false
+
+    export let onClick = (): void | string => ''
 </script>
 
 <style type="text/scss">

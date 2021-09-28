@@ -180,7 +180,7 @@ function _callAccountMethod(
     __ids: CommunicationIds,
     methodName: AccountMethod,
     accountId: AccountIdentifier,
-    data: any = void 0
+    data: unknown = void 0
 ): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
@@ -205,14 +205,26 @@ export function setAlias(
     return _callAccountMethod(bridge, __ids, AccountMethod.SetAlias, accountId, payload)
 }
 
-export function isLatestAddressUnused(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier): Promise<string> {
+export function isLatestAddressUnused(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+    accountId: AccountIdentifier
+): Promise<string> {
     return _callAccountMethod(bridge, __ids, AccountMethod.IsLatestAddressUnused, accountId)
 }
-export function generateAddress(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier): Promise<string> {
+export function generateAddress(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+    accountId: AccountIdentifier
+): Promise<string> {
     return _callAccountMethod(bridge, __ids, AccountMethod.GenerateAddress, accountId)
 }
 
-export function getUnusedAddress(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier): Promise<string> {
+export function getUnusedAddress(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+    accountId: AccountIdentifier
+): Promise<string> {
     return _callAccountMethod(bridge, __ids, AccountMethod.GetUnusedAddress, accountId)
 }
 

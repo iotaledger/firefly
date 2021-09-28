@@ -8,7 +8,7 @@ import type { NotificationData, NotificationType } from './typings/notification'
 const NOTIFICATION_TIMEOUT_DEFAULT = 5000
 export const NOTIFICATION_TIMEOUT_NEVER = -1
 
-export const displayNotifications = writable<Array<NotificationData>>([])
+export const displayNotifications = writable<NotificationData[]>([])
 
 export function isNewNotification(type: NotificationType): boolean {
     return get(displayNotifications).filter((nd: NotificationData) => nd.type === type).length === 0

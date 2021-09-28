@@ -151,7 +151,7 @@ example that compiles and passes [documentation tests](https://doc.rust-lang.org
 
 - All code should be well formatted and linted, passing our [linting continuous integration](https://github.com/iotaledger/firefly/blob/develop/.github/workflows/ci.lint.yml) workflow
 
-- All code should be well tested, passing both locally and in our [testing continuous integration](https://github.com/iotaledger/firefly/blob/develop/.github/workflows/ci.test.yml) workflow
+- All code should be well tested, passing (unit _and_ integration tests) both locally and in our [testing continuous integration](https://github.com/iotaledger/firefly/blob/develop/.github/workflows/ci.test.yml) workflow
 
 - If your changes include modification or adding of dependencies, once your PR is approved it must then be merged into a `snyk/branch-prefix/branch-name` on the main Firefly repository to test said changes with the [Snyk continuous integration](https://github.com/iotaledger/firefly/blob/develop/.github/workflows/ci.snyk.yml) workflow
    

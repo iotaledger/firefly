@@ -1,92 +1,7 @@
 import { get, writable } from 'svelte/store'
 import { appSettings } from './appSettings'
 import { activeProfile } from './profile'
-
-export enum CurrencyTypes {
-    BTC = 'btc',
-    ETH = 'eth',
-    EUR = 'eur',
-    USD = 'usd',
-}
-
-export type Currencies = {
-    [CurrencyTypes.BTC]: number
-    [CurrencyTypes.ETH]: number
-    [CurrencyTypes.EUR]: number
-    [CurrencyTypes.USD]: number
-}
-
-export enum AvailableExchangeRates {
-    AUD = 'AUD',
-    BGN = 'BGN',
-    BRL = 'BRL',
-    CAD = 'CAD',
-    CHF = 'CHF',
-    CNY = 'CNY',
-    CZK = 'CZK',
-    DKK = 'DKK',
-    EUR = 'EUR',
-    GBP = 'GBP',
-    HKD = 'HKD',
-    HRK = 'HRK',
-    HUF = 'HUF',
-    IDR = 'IDR',
-    ILS = 'ILS',
-    INR = 'INR',
-    ISK = 'ISK',
-    JPY = 'JPY',
-    KRW = 'KRW',
-    MXN = 'MXN',
-    MYR = 'MYR',
-    NOK = 'NOK',
-    NZD = 'NZD',
-    PHP = 'PHP',
-    PLN = 'PLN',
-    RON = 'RON',
-    RUB = 'RUB',
-    SEK = 'SEK',
-    SGD = 'SGD',
-    THB = 'THB',
-    TRY = 'TRY',
-    USD = 'USD',
-    ZAR = 'ZAR',
-}
-
-export type ExchangeRates = {
-    [AvailableExchangeRates.AUD]: number
-    [AvailableExchangeRates.BGN]: number
-    [AvailableExchangeRates.BRL]: number
-    [AvailableExchangeRates.CAD]: number
-    [AvailableExchangeRates.CHF]: number
-    [AvailableExchangeRates.CNY]: number
-    [AvailableExchangeRates.CZK]: number
-    [AvailableExchangeRates.DKK]: number
-    [AvailableExchangeRates.EUR]: number
-    [AvailableExchangeRates.GBP]: number
-    [AvailableExchangeRates.HKD]: number
-    [AvailableExchangeRates.HRK]: number
-    [AvailableExchangeRates.HUF]: number
-    [AvailableExchangeRates.IDR]: number
-    [AvailableExchangeRates.ILS]: number
-    [AvailableExchangeRates.INR]: number
-    [AvailableExchangeRates.ISK]: number
-    [AvailableExchangeRates.JPY]: number
-    [AvailableExchangeRates.KRW]: number
-    [AvailableExchangeRates.MXN]: number
-    [AvailableExchangeRates.MYR]: number
-    [AvailableExchangeRates.NOK]: number
-    [AvailableExchangeRates.NZD]: number
-    [AvailableExchangeRates.PHP]: number
-    [AvailableExchangeRates.PLN]: number
-    [AvailableExchangeRates.RON]: number
-    [AvailableExchangeRates.RUB]: number
-    [AvailableExchangeRates.SEK]: number
-    [AvailableExchangeRates.SGD]: number
-    [AvailableExchangeRates.THB]: number
-    [AvailableExchangeRates.TRY]: number
-    [AvailableExchangeRates.USD]: number
-    [AvailableExchangeRates.ZAR]: number
-}
+import { AvailableExchangeRates, Currencies, CurrencyTypes, ExchangeRates } from './typings/currency'
 
 /**
  * Default exchange rates
@@ -146,9 +61,8 @@ export const currencies = writable<Currencies>({} as Currencies)
  *
  * @returns {number}
  */
-export const convertToFiat = (amount: number, usdPrice: number, conversionRate: number): number => {
-    return +(((amount * usdPrice) / 1000000) * conversionRate).toFixed(2)
-}
+export const convertToFiat = (amount: number, usdPrice: number, conversionRate: number): number =>
+    +(((amount * usdPrice) / 1000000) * conversionRate).toFixed(2)
 
 /**
  * Converts to appropriate decimal places for a given currency
@@ -178,7 +92,7 @@ export const formatCurrencyValue = (
     }
 }
 
-export const getDecimalSeparator = (currency: string | undefined = undefined) => {
+export const getDecimalSeparator = (currency: string | undefined = undefined): string | undefined => {
     const appLanguage = get(appSettings).language
 
     if (!currency) {
@@ -206,7 +120,7 @@ export const getCurrencyPosition = (): 'left' | 'right' => {
     return format.findIndex((p) => p.type === 'currency') === 0 ? 'left' : 'right'
 }
 
-export const getGroupSeparator = (currency: string | undefined = undefined) => {
+export const getGroupSeparator = (currency: string | undefined = undefined): string => {
     const appLanguage = get(appSettings).language
 
     if (!currency) {
@@ -223,9 +137,7 @@ export const getGroupSeparator = (currency: string | undefined = undefined) => {
     )
 }
 
-export const getAllDecimalSeparators = () => {
-    return ['.', ',']
-}
+export const getAllDecimalSeparators = (): string[] => ['.', ',']
 
 export const parseCurrency = (valueString: string, currency: string | undefined = undefined): number => {
     // Need to escape the character in the regex in case it is . otherwise it will replace all characters
@@ -317,6 +229,5 @@ export const ensureZeros = (val: string, maxZeros: number): string => {
     }
 }
 
-export const replaceCurrencyDecimal = (value: string, currency: string | undefined = undefined): string => {
-    return value.replace('.', getDecimalSeparator(currency))
-}
+export const replaceCurrencyDecimal = (value: string, currency: string | undefined = undefined): string =>
+    value.replace('.', getDecimalSeparator(currency))
