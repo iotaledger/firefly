@@ -16,6 +16,7 @@
         "qr.js": "0.0.0",
         "svelte": "^3.30.1",
         "svelte-i18n": "^3.0.4",
+        "tailwindcss": "^2.2.16",
         "zxcvbn": "^4.4.2"
     },
     "scripts": {
