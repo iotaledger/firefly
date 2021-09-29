@@ -30,7 +30,7 @@
 
 <button
     on:click={onClick}
-    class="size-{size} group rounded-xl bg-gray-100 dark:bg-gray-900 hover:bg-{color}-500 font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'} {hidden ? 'opacity-50' : ''}"
+    class="size-{size} group rounded-xl bg-gray-100 dark:bg-gray-900 hover:bg-{color}-500 font-400 flex flex-col justify-between text-left {size === 's' ? 'p-3' : 'p-6'} {hidden ? 'opacity-50' : ''}"
     {disabled}>
     <div class="mb-2 w-full flex flex-row justify-between items-start space-x-1.5">
         <Text
