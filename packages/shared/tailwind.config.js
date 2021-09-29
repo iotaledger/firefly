@@ -5,6 +5,7 @@ const selectorParser = require('postcss-selector-parser')
 const pxToRem = (px, base = 16) => `${px / base}rem`
 
 module.exports = {
+    mode: 'jit',
     future: {
         // removeDeprecatedGapUtilities: true,
         // purgeLayersByDefault: true,
