@@ -6,33 +6,22 @@ const pxToRem = (px, base = 16) => `${px / base}rem`
 
 module.exports = {
     mode: 'jit',
-    future: {
-        // removeDeprecatedGapUtilities: true,
-        // purgeLayersByDefault: true,
-    },
     purge: {
         content: ['../shared/**/*.svelte', '../shared/**/*.scss'],
         options: {
             // Needed to prevent purgecss from removing classes declared with string concatenation
             safelist: [
-                // `from-${color}` (gradients)
+                // gradients: from-{color} to-{color}
                 /^from-/,
-                // `to-${color}` (gradients)
                 /^to-/,
-                // `bg-${color}`
+                // backgrounds: bg-{color}
                 /^bg-/,
                 /^hover:bg-/,
                 /^dark:bg-/,
-                // `text-${color}`
+                // text colors: text-{color}
                 /^text-/,
                 /^hover:text-/,
                 /^dark:text-/,
-                /^grid-cols-/,
-                // `p-${size}`
-                /^p-/,
-                'scheme-dark',
-                'fill-current',
-                'stroke-current',
             ],
         },
     },
@@ -246,14 +235,6 @@ module.exports = {
             },
         },
     },
-    variants: {
-        fontWeight: ['hover', 'focus', 'group-hover'],
-        textColor: ['dark', 'responsive', 'hover', 'dark-hover', 'focus', 'group-hover'],
-        backgroundColor: ['dark', 'responsive', 'hover', 'dark-hover', 'focus', 'group-hover'],
-        backgroundOpacity: ['dark'],
-        opacity: ['responsive', 'group-hover', 'focus-within', 'hover', 'focus', 'disabled'],
-        cursor: ['responsive', 'disabled'],
-    },
     plugins: [
         // Add individual border colors
         // Source: https://github.com/tailwindlabs/tailwindcss/issues/559#issuecomment-639118372
@@ -306,11 +287,6 @@ module.exports = {
                         })
                     }).processSync(selector)
                 )
-            })
-        }),
-        plugin(({ addVariant, e }) => {
-            addVariant('dark-hover', ({ modifySelectors, separator }) => {
-                modifySelectors(({ className }) => `.scheme-dark .${e(`dark:hover${separator}${className}`)}:hover`)
             })
         }),
     ],
