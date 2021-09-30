@@ -21,7 +21,6 @@
     import { get } from 'svelte/store'
 
     export let locale
-    export let mobile
 
     const tabs = {
         wallet: Wallet,
@@ -224,13 +223,9 @@
     }
 </script>
 
-{#if mobile}
-    <div>foo</div>
-{:else}
-    <Idle />
-    <div class="flex flex-row w-full h-full">
-        <Sidebar {locale} />
-        <!-- Dashboard Pane -->
-        <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
-    </div>
-{/if}
+<Idle />
+<div class="flex flex-row w-full h-full">
+    <Sidebar {locale} />
+    <!-- Dashboard Pane -->
+    <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
+</div>

@@ -45,7 +45,7 @@
     let address = ''
     let to = undefined
     let amountError = ''
-    let addressPrefix = ($account ?? $liveAccounts[0]).depositAddress.split('1')[0]
+    let addressPrefix = ($account ?? $liveAccounts[0])?.depositAddress.split('1')[0]
     let addressError = ''
     let toError = ''
     let amountRaw

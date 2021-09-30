@@ -15,7 +15,11 @@
     const liveAccounts = getContext<Readable<WalletAccount[]>>('liveAccounts')
     const currentAccount = getContext<Readable<WalletAccount>>('selectedAccount')
 
-    let selectedAccount = $currentAccount || $liveAccounts[0]
+    // TODO: remove dummy data 
+    let selectedAccount = $currentAccount || $liveAccounts[0] || {
+        alias: 'test',
+        depositAddress: 'iotalkgnsd3453jgndsffu32n4rjl3b4lh5b3l4b5l23jb43ljb5lkjb4'
+    }
 
     const handleDropdownSelect = (item) => {
         selectedAccount = item

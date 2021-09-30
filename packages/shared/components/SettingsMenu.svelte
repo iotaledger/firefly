@@ -5,8 +5,8 @@
     export let activeSettings = []
     export let locale
     export let icons
-    export let icon
-    export let iconColor
+    export let icon = undefined
+    export let iconColor = undefined
     export let title
     export let description
     export let onClick = (setting) => {}

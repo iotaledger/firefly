@@ -1,10 +1,12 @@
 <script lang="typescript">
-    import { Icon, Logo, NetworkIndicator, ProfileActionsModal } from 'shared/components'
+    import { Drawer, Icon, Logo, NetworkIndicator, ProfileActionsModal } from 'shared/components'
+    import { mobile } from 'shared/lib/app'
     import { getInitials } from 'shared/lib/helpers'
     import { networkStatus } from 'shared/lib/networkStatus'
     import { activeProfile } from 'shared/lib/profile'
-    import { dashboardRoute, settingsRoute, resetWalletRoute } from 'shared/lib/router'
+    import { dashboardRoute, resetWalletRoute, settingsRoute } from 'shared/lib/router'
     import { SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
+    import { SettingsHome } from 'shared/routes/dashboard/settings/views'
     import { onDestroy } from 'svelte'
     import { get } from 'svelte/store'
 
@@ -14,6 +16,7 @@
     let healthStatus = 2
     let showProfile = false
     let profileColor = 'blue' // TODO: each profile has a different color
+    let drawer: Drawer
 
     const NETWORK_HEALTH_COLORS = {
         0: 'red',
@@ -50,24 +53,46 @@
     }
 </style>
 
-<aside
-    class="flex flex-col justify-center items-center bg-white dark:bg-gray-800 h-screen relative w-20 px-5 pb-9 pt-9 border-solid border-r border-gray-100 dark:border-gray-800">
-    <Logo classes="logo mb-9 {hasTitleBar ? 'mt-3' : ''}" width="48px" logo="logo-firefly" />
-    <nav class="flex flex-grow flex-col items-center justify-between">
-        <button class={$dashboardRoute === Tabs.Wallet ? 'text-blue-500' : 'text-gray-500'} on:click={() => openWallet()}>
-            <Icon icon="wallet" />
-        </button>
-        <span class="flex flex-col items-center">
-            <button class="mb-7 health-status" on:click={() => (showNetwork = true)}>
-                <Icon icon="network" classes="text-{NETWORK_HEALTH_COLORS[healthStatus]}-500" />
+{#if $mobile}
+    <button
+        class="absolute top-10 right-8 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100"
+        on:click={() => drawer.open()}>
+        <span class="text-12 text-center text-white uppercase">{profileInitial || 'A'}</span>
+    </button>
+    <Drawer bind:this={drawer} fromRight={true} dimLength={0} opened={false}>
+        <div>
+            <header class="text-16 text-center m-auto pt-2 text-gray-900 dark:text-white">Your Wallets</header>
+            <button class="fixed top-5 left-5 mb-7 z-30" on:click={() => drawer.close()}>
+                <Icon icon="arrow-left" classes="text-{profileColor}-500" />
             </button>
-            <button
-                class="w-8 h-8 flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100"
-                on:click={() => (showProfile = true)}>
-                <span class="text-12 text-center text-white uppercase">{profileInitial}</span>
+            <div
+                class="absolute top-16 left-5 z-10 w-16 h-16 flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100">
+                <span class="text-20 text-center text-white uppercase">{profileInitial || 'A'}</span>
+            </div>
+            <div class="pt-10 pl-28 mb-7 text-17 text-white">{'John Doe'}</div>
+            <SettingsHome {locale} />
+        </div>
+    </Drawer>
+{:else}
+    <aside
+        class="flex flex-col justify-center items-center bg-white dark:bg-gray-800 h-screen relative w-20 px-5 pb-9 pt-9 border-solid border-r border-gray-100 dark:border-gray-800">
+        <Logo classes="logo mb-9 {hasTitleBar ? 'mt-3' : ''}" width="48px" logo="logo-firefly" />
+        <nav class="flex flex-grow flex-col items-center justify-between">
+            <button class={$dashboardRoute === Tabs.Wallet ? 'text-blue-500' : 'text-gray-500'} on:click={() => openWallet()}>
+                <Icon icon="wallet" />
             </button>
-        </span>
-    </nav>
-    <NetworkIndicator bind:isActive={showNetwork} {locale} />
-    <ProfileActionsModal bind:isActive={showProfile} {locale} {openSettings} />
-</aside>
+            <span class="flex flex-col items-center">
+                <button class="mb-7 health-status" on:click={() => (showNetwork = true)}>
+                    <Icon icon="network" classes="text-{NETWORK_HEALTH_COLORS[healthStatus]}-500" />
+                </button>
+                <button
+                    class="w-8 h-8 flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100"
+                    on:click={() => (showProfile = true)}>
+                    <span class="text-12 text-center text-white uppercase">{profileInitial}</span>
+                </button>
+            </span>
+        </nav>
+        <NetworkIndicator bind:isActive={showNetwork} {locale} />
+        <ProfileActionsModal bind:isActive={showProfile} {locale} {openSettings} />
+    </aside>
+{/if}

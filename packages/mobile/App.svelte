@@ -25,6 +25,8 @@
     } from 'shared/routes'
     import { onMount } from 'svelte'
 
+    mobile.set(true)
+
     $: $appSettings.darkMode ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')
 
     $: if (document.dir !== $dir) {
