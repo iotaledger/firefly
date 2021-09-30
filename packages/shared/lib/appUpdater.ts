@@ -26,6 +26,8 @@ export const updateBusy = writable<boolean>(false)
 export const updateComplete = writable<boolean>(false)
 export const updateError = writable<boolean>(false)
 
+// TODO: commented for mobile dev only, uncomment after we remove explicit Electron declarations 
+/* 
 Electron.onEvent('version-details', (nativeVersionDetails) => {
     versionDetails.set(nativeVersionDetails)
 })
@@ -50,7 +52,7 @@ Electron.onEvent('version-error', (nativeVersionError) => {
     console.log(nativeVersionError)
     updateError.set(true)
 })
-
+ */
 export function updateDownload(): void {
     updateProgress.set(0)
     updateMinutesRemaining.set(-1)

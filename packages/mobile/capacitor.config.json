@@ -10,5 +10,9 @@
     }
   },
   "cordova": {},
-  "linuxAndroidStudioPath": "/usr/bin/android-studio"
+  "linuxAndroidStudioPath": "/usr/bin/android-studio",
+  "server": {
+    "url": "http://XXX.XXX.XXX.XXX:8080",
+    "cleartext": true
+  }
 }
