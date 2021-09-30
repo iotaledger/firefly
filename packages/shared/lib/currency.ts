@@ -1,6 +1,7 @@
 import { get, writable } from 'svelte/store'
 import { appSettings } from './appSettings'
 import { activeProfile } from './profile'
+import { formatUnitBestMatch } from './units'
 import { AvailableExchangeRates, Currencies, CurrencyTypes, ExchangeRates } from './typings/currency'
 
 /**
@@ -118,6 +119,8 @@ export const formatCurrencyValue = (
 ): string => {
     const parsedData: number = parseFloat(data.toString())
     switch (currency.toLowerCase()) {
+        case CurrencyTypes.IOTA:
+            return formatUnitBestMatch(parsedData)
         case CurrencyTypes.BTC:
             return replaceCurrencyDecimal(parsedData.toFixed(btcFixed), 'USD')
         case CurrencyTypes.ETH:

@@ -1,4 +1,5 @@
 export enum CurrencyTypes {
+    IOTA = 'iota',
     BTC = 'btc',
     ETH = 'eth',
     EUR = 'eur',

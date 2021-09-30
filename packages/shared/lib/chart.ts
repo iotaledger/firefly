@@ -9,7 +9,7 @@ import { derived, get, writable } from 'svelte/store'
 import { formatCurrencyValue } from './currency'
 import { priceData } from './market'
 import type { Message } from './typings/message'
-import { ActivityData, ActivityTimeframe, ChartData, DashboardChartType, Tooltip } from './typings/chart'
+import { ActivityTimeframe, ChartData, DashboardChartType, Tooltip, WalletChartType } from './typings/chart'
 import { AvailableExchangeRates, CurrencyTypes } from './typings/currency'
 import { HistoryDataProps } from './typings/market'
 import type { BalanceHistory, WalletAccount } from './typings/wallet'
@@ -17,7 +17,8 @@ import type { BalanceHistory, WalletAccount } from './typings/wallet'
 const BAR_CHART_ACTIVITY_MONTHS = 6
 
 /** Selected chart */
-export const selectedChart = writable<DashboardChartType>(DashboardChartType.PORTFOLIO)
+export const selectedDashboardChart = writable<DashboardChartType>(DashboardChartType.HOLDINGS)
+export const selectedWalletChart = writable<WalletChartType>(WalletChartType.HOLDINGS)
 
 const fiatHistoryData = derived([priceData, activeProfile], ([$priceData, $activeProfile]) => {
     if ($activeProfile?.settings) {
@@ -45,34 +46,62 @@ const walletBalance = derived(wallet, ($wallet) => {
     return get(balanceOverview)?.balanceRaw
 })
 
-export function getPortfolioData(balanceHistory: BalanceHistory): ChartData {
+export function getChartDataFromBalanceHistory({
+    balanceHistory,
+    currentBalance,
+    tokenType,
+    convertToSelectedCurrency = false,
+}: {
+    balanceHistory: BalanceHistory
+    currentBalance: number
+    tokenType: string
+    convertToSelectedCurrency?: boolean
+}): ChartData {
     let chartData: ChartData = { labels: [], data: [], tooltips: [] }
-    const _fiatHistoryData = get(fiatHistoryData)
+    let _fiatHistoryData
+    const selectedCurrency = get(activeProfile)?.settings.chartSelectors.currency ?? ''
+
+    if (convertToSelectedCurrency) {
+        _fiatHistoryData = get(fiatHistoryData)
+    }
+
     chartData = balanceHistory[get(activeProfile)?.settings.chartSelectors.timeframe].reduce(
         (acc, values, index) => {
-            const fiatBalance = ((values.balance * _fiatHistoryData[index][1]) / 1000000).toFixed(5)
-            acc.data.push(fiatBalance)
+            const balance = convertToSelectedCurrency
+                ? ((values.balance * _fiatHistoryData[index][1]) / 1000000).toFixed(5)
+                : values.balance
+            acc.data.push(balance)
             acc.labels.push(formatLabel(values.timestamp * 1000))
-            acc.tooltips.push(formatLineChartTooltip(fiatBalance, values.timestamp * 1000))
+            acc.tooltips.push(
+                formatLineChartTooltip(
+                    balance,
+                    convertToSelectedCurrency ? selectedCurrency : tokenType.toLocaleLowerCase(),
+                    values.timestamp * 1000,
+                    false,
+                    convertToSelectedCurrency
+                )
+            )
             return acc
         },
         { labels: [], data: [], tooltips: [] }
     )
     // add current balance
-    const currentBalanceData = getCurrentBalancedata(get(walletBalance))
-    chartData.data.push(currentBalanceData.data)
-    chartData.labels.push(currentBalanceData.label)
-    chartData.tooltips.push(currentBalanceData.tooltip)
+    const currentBalanceDataPoint = getCurrentBalanceDataPoint({ currentBalance, tokenType, convertToSelectedCurrency })
+    chartData.data.push(currentBalanceDataPoint.data)
+    chartData.labels.push(currentBalanceDataPoint.label)
+    chartData.tooltips.push(currentBalanceDataPoint.tooltip)
+    chartData.steppedLine = !convertToSelectedCurrency
     return chartData
 }
 
-export function getTokenData(): ChartData {
+export function getChartDataForTokenValue(): ChartData {
     let chartData: ChartData = { labels: [], data: [], tooltips: [] }
+    const currency = get(activeProfile)?.settings.chartSelectors.currency ?? ''
     chartData = get(fiatHistoryData).reduce(
         (acc, values) => {
             acc.data.push(parseFloat(values[1]))
             acc.labels.push(formatLabel(values[0] * 1000))
-            acc.tooltips.push(formatLineChartTooltip(parseFloat(values[1]), values[0] * 1000, true))
+            acc.tooltips.push(formatLineChartTooltip(parseFloat(values[1]), currency, values[0] * 1000, true))
             return acc
         },
         { labels: [], data: [], tooltips: [] }
@@ -80,28 +109,9 @@ export function getTokenData(): ChartData {
     return chartData
 }
 
-export function getAccountValueData(balanceHistory: BalanceHistory, accountBalance: number): ChartData {
-    let chartData: ChartData = { labels: [], data: [], tooltips: [] }
-    const _fiatHistoryData = get(fiatHistoryData)
-    chartData = balanceHistory[get(activeProfile)?.settings.chartSelectors.timeframe].reduce(
-        (acc, values, index) => {
-            const fiatBalance = ((values.balance * _fiatHistoryData[index][1]) / 1000000).toFixed(5)
-            acc.data.push(fiatBalance)
-            acc.labels.push(formatLabel(values.timestamp * 1000))
-            acc.tooltips.push(formatLineChartTooltip(fiatBalance, values.timestamp * 1000))
-            return acc
-        },
-        { labels: [], data: [], tooltips: [] }
-    )
-    // add current balance
-    const currentBalanceData = getCurrentBalancedata(accountBalance)
-    chartData.data.push(currentBalanceData.data)
-    chartData.labels.push(currentBalanceData.label)
-    chartData.tooltips.push(currentBalanceData.tooltip)
-    return chartData
-}
-
-export const getAccountActivityData = (account: WalletAccount): ActivityData => {
+export const getAccountActivityData = (
+    account: WalletAccount
+): { incoming: ChartData; outgoing: ChartData; labels: string[] } => {
     const now = new Date()
     const activityTimeframes: ActivityTimeframe[] = []
     const incoming: ChartData = {
@@ -233,11 +243,14 @@ function formatLabel(timestamp: number): string {
 
 function formatLineChartTooltip(
     data: number | string,
+    currency: string,
     timestamp: number | string,
-    showMiota: boolean = false
+    showMiota: boolean = false,
+    showCurrencyUnit: boolean = true
 ): Tooltip {
-    const currency = get(activeProfile)?.settings.chartSelectors.currency ?? ''
-    const title: string = `${showMiota ? `1 ${Unit.Mi}: ` : ''}${formatCurrencyValue(data, currency, 3)} ${currency}`
+    const title: string = `${showMiota ? `1 ${Unit.Mi}: ` : ''}${formatCurrencyValue(data, currency, 3)} ${
+        showCurrencyUnit ? currency : ''
+    }`
     const label: string = formatDate(new Date(timestamp), {
         year: 'numeric',
         month: 'short',
@@ -251,12 +264,33 @@ function formatLineChartTooltip(
     return { title, label }
 }
 
-function getCurrentBalancedata(balance): { data: number; label: string; tooltip: Tooltip } {
+function getCurrentBalanceDataPoint({
+    currentBalance,
+    tokenType,
+    convertToSelectedCurrency,
+}: {
+    currentBalance: number
+    tokenType: string
+    convertToSelectedCurrency?: boolean
+}): { data: number; label: string; tooltip: Tooltip } {
+    const selectedCurrency = get(activeProfile)?.settings.chartSelectors.currency ?? ''
     const now = new Date().getTime()
-    const fiatBalance = convertToFiat(
-        balance,
-        get(currencies)[CurrencyTypes.USD],
-        get(exchangeRates)[get(activeProfile)?.settings.chartSelectors.currency]
-    )
-    return { data: fiatBalance, label: formatLabel(now), tooltip: formatLineChartTooltip(fiatBalance, now) }
+    const balance = convertToSelectedCurrency
+        ? convertToFiat(
+              currentBalance,
+              get(currencies)[CurrencyTypes.USD],
+              get(exchangeRates)[get(activeProfile)?.settings.chartSelectors.currency]
+          )
+        : currentBalance
+    return {
+        data: balance,
+        label: formatLabel(now),
+        tooltip: formatLineChartTooltip(
+            balance,
+            convertToSelectedCurrency ? selectedCurrency : tokenType.toLocaleLowerCase(),
+            now,
+            false,
+            convertToSelectedCurrency
+        ),
+    }
 }
