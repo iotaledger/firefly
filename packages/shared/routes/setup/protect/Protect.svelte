@@ -13,7 +13,6 @@
     import { SetupType } from 'shared/lib/typings/routes'
 
     export let locale
-    export let mobile
 
     let busy = false
 
@@ -115,16 +114,16 @@
     
 #if state === ProtectState.Init || state === ProtectState.Biometric}
     <Transition>
-        <Protect on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <Protect on:next={_next} on:previous={_previous} {locale} />
     </Transition>
 {/if}-->
 
 {#if state === ProtectState.Pin}
     <Transition>
-        <Pin {busy} on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <Pin {busy} on:next={_next} on:previous={_previous} {locale} />
     </Transition>
 {:else if state === ProtectState.RepeatPin}
     <Transition>
-        <RepeatPin {busy} on:next={_next} on:previous={_previous} pinCandidate={pin} {locale} {mobile} />
+        <RepeatPin {busy} on:next={_next} on:previous={_previous} pinCandidate={pin} {locale} />
     </Transition>
 {/if}

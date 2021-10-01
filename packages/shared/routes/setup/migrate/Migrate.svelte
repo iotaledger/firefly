@@ -12,7 +12,6 @@
     } from './views/'
 
     export let locale
-    export let mobile
 
     enum MigrateState {
         Init = 'init',
@@ -83,26 +82,26 @@
 
 {#if state === MigrateState.Init}
     <Transition>
-        <Migrate on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <Migrate on:next={_next} on:previous={_previous} {locale} />
     </Transition>
 {:else if state === MigrateState.TransferFragmentedFunds}
     <Transition>
-        <TransferFragmentedFunds on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <TransferFragmentedFunds on:next={_next} on:previous={_previous} {locale} />
     </Transition>
 {:else if state === MigrateState.BundleMiningWarning}
     <Transition>
-        <BundleMiningWarning on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <BundleMiningWarning on:next={_next} on:previous={_previous} {locale} />
     </Transition>
 {:else if state === MigrateState.SecureSpentAddresses}
     <Transition>
-        <SecureSpentAddresses on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <SecureSpentAddresses on:next={_next} on:previous={_previous} {locale} />
     </Transition>
 {:else if state === MigrateState.SecuringSpentAddresses}
     <Transition>
-        <SecuringSpentAddresses on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <SecuringSpentAddresses on:next={_next} on:previous={_previous} {locale} />
     </Transition>
 {:else if state === MigrateState.SecurityCheckCompleted}
     <Transition>
-        <SecurityCheckCompleted on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <SecurityCheckCompleted on:next={_next} on:previous={_previous} {locale} />
     </Transition>
 {/if}

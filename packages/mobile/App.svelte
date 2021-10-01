@@ -1,23 +1,28 @@
 <script lang="typescript">
     import { Route, Toggle } from 'shared/components'
-    import { loggedIn, mobile } from 'shared/lib/app'
+    import { mobile } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { goto } from 'shared/lib/helpers'
     import { dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
     import { fetchMarketData } from 'shared/lib/marketData'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
-    import { initRouter, routerNext, routerPrevious } from 'shared/lib/router'
+    import { initRouter, routerNext, routerPrevious, setRoute } from 'shared/lib/router'
     import { AppRoute } from 'shared/lib/typings/routes'
     import {
+        Appearance,
         Backup,
         Balance,
         Congratulations,
+        Create,
         Dashboard,
         Import,
         Legal,
+        Login,
         Migrate,
         Password,
+        Profile,
         Protect,
+        Secure,
         Settings,
         Setup,
         Splash,
@@ -57,9 +62,14 @@
     body {
         @apply bg-white;
         &.scheme-dark {
-            @apply bg-blue-900;
+            @apply bg-gray-900;
         }
     }
+
+    .setup-anim-aspect-ratio {
+        aspect-ratio: 19/15;
+    }
+
     // dummy toggles
     .dummy-toggles {
         position: absolute;
@@ -85,52 +95,60 @@
 {#if !$isLocaleLoaded || splash}
     <Splash />
 {:else}
-    <!-- dummy toggles -->
+    <!-- TODO: remove!! Dummy toggles, dev only -->
     <div class="dummy-toggles flex flex-row">
         <div class="mr-4">
-            <Toggle on={$appSettings.darkMode} />
+            <Toggle active={$appSettings.darkMode} onClick={() => ($appSettings.darkMode = !$appSettings.darkMode)} />
         </div>
-        <button on:click={() => loggedIn.update(() => false)}>reset</button>
     </div>
     <!--  -->
+    <!-- TODO: remove locale={$_} everywhere -->
     <Route route={AppRoute.Welcome}>
-        <Welcome on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        <Welcome on:next={routerNext} on:previous={routerPrevious} locale={$_} />
     </Route>
     <Route route={AppRoute.Legal}>
-        <Legal on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        <Legal on:next={routerNext} on:previous={routerPrevious} locale={$_} />
     </Route>
-    <Route route={AppRoute.Settings}>
-        <Settings on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+    <Route route={AppRoute.Appearance}>
+        <Appearance on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+    </Route>
+    <Route route={AppRoute.Profile}>
+        <Profile on:next={routerNext} on:previous={routerPrevious} locale={$_} />
     </Route>
     <Route route={AppRoute.Setup}>
-        <Setup on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        <Setup on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+    </Route>
+    <Route route={AppRoute.Create}>
+        <Create on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+    </Route>
+    <Route route={AppRoute.Secure}>
+        <Secure on:next={routerNext} on:previous={routerPrevious} locale={$_} />
     </Route>
     <Route route={AppRoute.Password}>
-        <Password on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        <Password on:next={routerNext} on:previous={routerPrevious} locale={$_} />
     </Route>
     <Route route={AppRoute.Protect} transition={false}>
-        <Protect on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        <Protect on:next={routerNext} on:previous={routerPrevious} locale={$_} />
     </Route>
     <Route route={AppRoute.Backup} transition={false}>
-        <Backup
-            on:next={routerNext}
-            on:previous={routerPrevious}
-            mobile={$mobile}
-            locale={$_} />
+        <Backup on:next={routerNext} on:previous={routerPrevious} locale={$_} />
     </Route>
     <Route route={AppRoute.Import} transition={false}>
-        <Import on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        <Import on:next={routerNext} on:previous={routerPrevious} locale={$_} />
     </Route>
     <Route route={AppRoute.Balance}>
-        <Balance on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        <Balance on:next={routerNext} on:previous={routerPrevious} locale={$_} />
     </Route>
     <Route route={AppRoute.Migrate}>
-        <Migrate on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
+        <Migrate on:next={routerNext} on:previous={routerPrevious} locale={$_} {goto} />
     </Route>
     <Route route={AppRoute.Congratulations}>
-        <Congratulations on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
+        <Congratulations on:next={routerNext} locale={$_} {goto} />
     </Route>
     <Route route={AppRoute.Dashboard}>
-        <Dashboard mobile={$mobile} locale={$_} {goto} />
+        <Dashboard locale={$_} {goto} />
+    </Route>
+    <Route route={AppRoute.Login}>
+        <Login on:next={routerNext} on:previous={routerPrevious} locale={$_} {goto} />
     </Route>
 {/if}

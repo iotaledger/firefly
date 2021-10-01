@@ -2,10 +2,10 @@
     import { Animation, Button, OnboardingLayout, Password, Spinner, Text } from 'shared/components'
     import { createEventDispatcher, getContext } from 'svelte'
     import type { Writable } from 'svelte/store'
-    import type { ImportType } from '../Import.svelte'
+    import { ImportType } from '../Import.svelte'
+    import { mobile } from 'shared/lib/app'
 
     export let locale
-    export let mobile
     export let error = ''
     export let busy = false
 
@@ -28,40 +28,42 @@
     }
 </script>
 
-{#if mobile}
-    <div>foo</div>
-{:else}
-    <OnboardingLayout onBackClick={handleBackClick} {busy}>
-        <div slot="leftpane__content">
+<OnboardingLayout onBackClick={handleBackClick} {busy}>
+    <div slot="title">
+        {#if $mobile}
+            <Text type="h2" classes="mb-4">{`${locale('general.import')} ${locale(`general.${$importType}`)}`}</Text>
+        {:else}
             <Text type="h2" classes="mb-4">{locale('general.import')}</Text>
-            <Text type="h3" highlighted classes="mb-5">{locale(`general.${$importType}`)}</Text>
-            <Text type="p" secondary classes="mb-4">{locale('views.importBackupPassword.body1')}</Text>
-            <Text type="p" secondary classes="mb-8">{locale('views.importBackupPassword.body2')}</Text>
-            <Password
-                classes="mb-6"
-                {error}
-                bind:value={password}
-                {locale}
-                showRevealToggle
-                autofocus
-                disabled={busy}
-                submitHandler={handleContinue} />
-        </div>
-        <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-            <Button
-                classes="flex-1"
-                disabled={password.length === 0 || busy || isGettingMigrationData}
-                onClick={() => handleContinue()}>
-                {#if isGettingMigrationData}
-                    <Spinner
-                        busy={isGettingMigrationData}
-                        message={locale('views.migrate.restoringWallet')}
-                        classes="justify-center" />
-                {:else}{locale('actions.continue')}{/if}
-            </Button>
-        </div>
-        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            <Animation animation="import-from-file-password-desktop" />
-        </div>
-    </OnboardingLayout>
-{/if}
+            <Text type="h3" highlighted>{locale(`general.${$importType}`)}</Text>
+        {/if}
+    </div>
+    <div slot="leftpane__content">
+        <Text type="p" secondary classes="mb-4">{locale('views.importBackupPassword.body1')}</Text>
+        <Text type="p" secondary classes="mb-8">{locale('views.importBackupPassword.body2')}</Text>
+        <Password
+            classes="mb-6"
+            {error}
+            bind:value={password}
+            {locale}
+            showRevealToggle
+            autofocus
+            disabled={busy}
+            submitHandler={handleContinue} />
+    </div>
+    <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
+        <Button
+            classes="flex-1"
+            disabled={password.length === 0 || busy || isGettingMigrationData}
+            onClick={() => handleContinue()}>
+            {#if isGettingMigrationData}
+                <Spinner
+                    busy={isGettingMigrationData}
+                    message={locale('views.migrate.restoringWallet')}
+                    classes="justify-center" />
+            {:else}{locale('actions.continue')}{/if}
+        </Button>
+    </div>
+    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-orange dark:bg-gray-900'}">
+        <Animation classes="setup-anim-aspect-ratio" animation="import-from-file-password-desktop" />
+    </div>
+</OnboardingLayout>

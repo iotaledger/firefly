@@ -1,10 +1,11 @@
 <script lang="typescript">
     import { Button, Logo, Text } from 'shared/components'
     import { getVersionDetails, updateBusy, updateCheck, updateDownload, versionDetails } from 'shared/lib/appUpdater'
+    import { openUrl } from 'shared/lib/device'
+    import { Electron } from 'shared/lib/electron'
+    import { formatDate } from 'shared/lib/i18n'
     import { closePopup } from 'shared/lib/popup'
     import { onMount } from 'svelte'
-    import { formatDate } from 'shared/lib/i18n'
-    import { Electron } from 'shared/lib/electron';
 
     export let locale
     let hasAutoUpdate = true
@@ -13,7 +14,7 @@
         if (hasAutoUpdate) {
             updateDownload()
         } else {
-            Electron.openUrl('https://firefly.iota.org')
+            openUrl('https://firefly.iota.org')
         }
         closePopup()
     }
@@ -28,7 +29,7 @@
             await updateCheck()
         }
         const os = await Electron.getOS()
-        hasAutoUpdate = os !== "win32"
+        hasAutoUpdate = os !== 'win32'
     })
 </script>
 

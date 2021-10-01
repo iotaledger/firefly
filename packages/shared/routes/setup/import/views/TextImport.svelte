@@ -1,11 +1,11 @@
 <script lang="typescript">
     import { Animation, Button, ImportTextfield, OnboardingLayout, Spinner, Text } from 'shared/components'
+    import { mobile } from 'shared/lib/app'
     import { createEventDispatcher, getContext } from 'svelte'
     import type { Writable } from 'svelte/store'
     import type { ImportType } from '../Import.svelte'
 
     export let locale
-    export let mobile
 
     const importType = getContext<Writable<ImportType>>('importType')
 
@@ -24,31 +24,26 @@
     }
 </script>
 
-{#if mobile}
-    <div>foo</div>
-{:else}
-    <OnboardingLayout onBackClick={handleBackClick}>
-        <div slot="leftpane__content">
-            <Text type="h2" classes="mb-5">{locale(`views.importFromText.${$importType}.title`)}</Text>
-            <Text type="p" secondary classes="mb-8">{locale(`views.importFromText.${$importType}.body`)}</Text>
-            <Text type="h5" classes="mb-3">{locale(`views.importFromText.${$importType}.enter`)}</Text>
-            <ImportTextfield disabled={isGettingMigrationData} type={$importType} bind:value={input} {locale} />
-        </div>
-        <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-            <Button
-                classes="flex-1"
-                disabled={input.length === 0 || isGettingMigrationData}
-                onClick={() => handleContinueClick()}>
-                {#if isGettingMigrationData}
-                    <Spinner
-                        busy={isGettingMigrationData}
-                        message={locale('views.migrate.restoringWallet')}
-                        classes="justify-center" />
-                {:else}{locale('actions.continue')}{/if}
-            </Button>
-        </div>
-        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            <Animation animation="import-from-text-desktop" />
-        </div>
-    </OnboardingLayout>
-{/if}
+<OnboardingLayout onBackClick={handleBackClick}>
+    <div slot="title">
+        <Text type="h2">{locale(`views.importFromText.${$importType}.title`)}</Text>
+    </div>
+    <div slot="leftpane__content">
+        <Text type="p" secondary classes="mb-8">{locale(`views.importFromText.${$importType}.body`)}</Text>
+        <Text type="h5" classes="mb-3">{locale(`views.importFromText.${$importType}.enter`)}</Text>
+        <ImportTextfield disabled={isGettingMigrationData} type={$importType} bind:value={input} {locale} />
+    </div>
+    <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
+        <Button classes="flex-1" disabled={input.length === 0 || isGettingMigrationData} onClick={() => handleContinueClick()}>
+            {#if isGettingMigrationData}
+                <Spinner
+                    busy={isGettingMigrationData}
+                    message={locale('views.migrate.restoringWallet')}
+                    classes="justify-center" />
+            {:else}{locale('actions.continue')}{/if}
+        </Button>
+    </div>
+    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-blue dark:bg-gray-900'}">
+        <Animation classes="setup-anim-aspect-ratio" animation="import-from-text-desktop" />
+    </div>
+</OnboardingLayout>

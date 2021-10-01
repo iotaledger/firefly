@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { Animation, Button, Link, OnboardingLayout, SpentAddress, Text } from 'shared/components'
+    import { mobile } from 'shared/lib/app'
     import { selectAllAddressesForMining, spentAddressesFromBundles, toggleMiningSelection } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup } from 'shared/lib/popup'
@@ -8,7 +9,6 @@
     import { createEventDispatcher } from 'svelte'
 
     export let locale
-    export let mobile
 
     const dispatch = createEventDispatcher()
 
@@ -67,37 +67,31 @@
     }
 </script>
 
-{#if mobile}
-    <div>foo</div>
-{:else}
-    <OnboardingLayout
-        onBackClick={handleBackClick}
-        {locale}
-        showLedgerProgress={legacyLedger}
-        showLedgerVideoButton={legacyLedger}>
-        <div slot="leftpane__content" class="relative h-full flex flex-col flex-wrap">
-            <Text type="h2" classes="mb-5">{locale('views.secureSpentAddresses.title')}</Text>
-            <Text type="p mb-4" secondary>
-                {locale('views.secureSpentAddresses.body1', { values: { number: addresses.length } })}
-            </Text>
-            <Text type="p" secondary classes="mb-4">{locale('views.secureSpentAddresses.body2')}</Text>
-            <Text type="p" secondary classes="mb-6">{locale('views.migrate.noAddressesForMigration')}</Text>
-            <div class="flex-auto overflow-y-auto h-1 space-y-4 w-full scrollable-y scroll-secondary">
-                {#each addresses as address}
-                    <SpentAddress
-                        {...address}
-                        {locale}
-                        selected={selectedAddresses.find((_address) => _address.id === address.id)}
-                        onClick={() => onAddressClick(address)} />
-                {/each}
-            </div>
-            <Link onClick={handleSkipClick} classes="absolute -top-12 right-0">{locale('actions.skip')}</Link>
+<OnboardingLayout onBackClick={handleBackClick} {locale} showLedgerProgress={legacyLedger} showLedgerVideoButton={legacyLedger}>
+    <div slot="title">
+        <Text type="h2">{locale('views.secureSpentAddresses.title')}</Text>
+    </div>
+    <div slot="leftpane__content" class="relative h-full flex flex-col flex-wrap">
+        <Text type="p mb-4" secondary>
+            {locale('views.secureSpentAddresses.body1', { values: { number: addresses.length } })}
+        </Text>
+        <Text type="p" secondary classes="mb-4">{locale('views.secureSpentAddresses.body2')}</Text>
+        <Text type="p" secondary classes="mb-6">{locale('views.migrate.noAddressesForMigration')}</Text>
+        <div class="flex-auto overflow-y-auto h-1 space-y-4 w-full scrollable-y scroll-secondary">
+            {#each addresses as address}
+                <SpentAddress
+                    {...address}
+                    {locale}
+                    selected={selectedAddresses.find((_address) => _address.id === address.id)}
+                    onClick={() => onAddressClick(address)} />
+            {/each}
         </div>
-        <div slot="leftpane__action">
-            <Button classes="w-full" onClick={() => secureAddresses()}>{locale('views.secureSpentAddresses.title')}</Button>
-        </div>
-        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            <Animation {animation} />
-        </div>
-    </OnboardingLayout>
-{/if}
+        <Link onClick={handleSkipClick} classes="absolute -top-12 right-0">{locale('actions.skip')}</Link>
+    </div>
+    <div slot="leftpane__action">
+        <Button classes="w-full" onClick={() => secureAddresses()}>{locale('views.secureSpentAddresses.title')}</Button>
+    </div>
+    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-blue dark:bg-gray-900'}">
+        <Animation classes="setup-anim-aspect-ratio" {animation} />
+    </div>
+</OnboardingLayout>

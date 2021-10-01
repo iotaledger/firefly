@@ -1,8 +1,8 @@
 <script lang="typescript">
+    import { Button, OnboardingLayout, Text } from 'shared/components'
     import { createEventDispatcher } from 'svelte'
-    import { OnboardingLayout, Text, Button } from 'shared/components'
+
     export let locale
-    export let mobile
 
     const dispatch = createEventDispatcher()
 
@@ -14,23 +14,21 @@
     }
 </script>
 
-{#if mobile}
-    <div>foo</div>
-{:else}
-    <OnboardingLayout onBackClick={handleBackClick}>
-        <div slot="leftpane__content">
-            <Text type="h2" classes="mb-5">{locale('views.protect.title')}</Text>
-            <Text type="p" secondary classes="mb-4">{locale('views.protect.body1')}</Text>
-            <Text type="p" secondary highlighted classes="mb-8 font-bold">{locale('views.protect.body2')}</Text>
-            <Button icon="biometric" classes="w-full mb-5" secondary disabled onClick={() => handleContinueClick('biometric')}>
-                {locale('actions.useBiometric')}
-            </Button>
-            <Button icon="pin" classes="w-full mb-8" secondary onClick={() => handleContinueClick('pin')}>
-                {locale('actions.setupPin')}
-            </Button>
-        </div>
-        <div slot="rightpane" class="w-full h-full flex justify-end items-center">
-            <!-- <Illustration illustration="protect-desktop" height="100%" width="auto" classes="h-full object-cover object-left" /> -->
-        </div>
-    </OnboardingLayout>
-{/if}
+<OnboardingLayout onBackClick={handleBackClick}>
+    <div slot="title">
+        <Text type="h2">{locale('views.protect.title')}</Text>
+    </div>
+    <div slot="leftpane__content">
+        <Text type="p" secondary classes="mb-4">{locale('views.protect.body1')}</Text>
+        <Text type="p" secondary highlighted classes="mb-8 font-bold">{locale('views.protect.body2')}</Text>
+        <Button icon="biometric" classes="w-full mb-5" secondary disabled onClick={() => handleContinueClick('biometric')}>
+            {locale('actions.useBiometric')}
+        </Button>
+        <Button icon="pin" classes="w-full mb-8" secondary onClick={() => handleContinueClick('pin')}>
+            {locale('actions.setupPin')}
+        </Button>
+    </div>
+    <div slot="rightpane" class="w-full h-full flex justify-end items-center">
+        <!-- <Illustration illustration="protect-desktop" height="100%" width="auto" classes="h-full object-cover object-left" /> -->
+    </div>
+</OnboardingLayout>

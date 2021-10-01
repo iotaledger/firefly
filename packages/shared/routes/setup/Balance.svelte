@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { Animation, Box, Button, OnboardingLayout, Spinner, Text, Toast } from 'shared/components'
+    import { mobile } from 'shared/lib/app'
     import {
         AvailableExchangeRates,
         convertToFiat,
@@ -32,7 +33,6 @@
     import { get } from 'svelte/store'
 
     export let locale
-    export let mobile
 
     let isCheckingForBalance
     let legacyLedger = $walletSetupType === SetupType.TrinityLedger
@@ -203,44 +203,36 @@
     onDestroy(unsubscribe)
 </script>
 
-{#if mobile}
-    <div>not yet implemented</div>
-{:else}
-    <OnboardingLayout
-        busy={isCheckingForBalance}
-        onBackClick={handleBackClick}
-        {locale}
-        showLedgerProgress={legacyLedger}
-        showLedgerVideoButton={legacyLedger}>
-        <div slot="leftpane__content">
-            <Text type="h2" classes="mb-3.5">{locale('views.balance.title')}</Text>
-            <Text type="p" secondary classes="mb-5">{locale('views.balance.body')}</Text>
-            <Box classes="flex flex-col flex-grow items-center py-12 bg-gray-50 dark:bg-gray-900 dark:bg-opacity-50 rounded-lg ">
-                <Text type="h2">{formattedBalance}</Text>
-                <Text type="p" highlighted classes="py-1 uppercase">{fiatBalance}</Text>
-            </Box>
-            {#if error.text}
-                <Toast classes="mt-4" type="error" message={error.text} />
-            {/if}
-        </div>
-        <div slot="leftpane__action" class="flex flex-row justify-between items-center space-x-4">
-            <Button secondary classes="flex-1" disabled={isCheckingForBalance} onClick={checkAgain}>
-                {#if isCheckingForBalance}
-                    <Spinner
-                        busy={isCheckingForBalance}
-                        message={locale('views.migrate.findingBalance')}
-                        classes="justify-center" />
-                {:else}{locale('actions.checkAgain')}{/if}
-            </Button>
-            <Button
-                classes="flex-1"
-                disabled={isCheckingForBalance || !error.allowToProceed}
-                onClick={() => handleContinueClick()}>
-                {locale('actions.continue')}
-            </Button>
-        </div>
-        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-yellow dark:bg-gray-900">
-            <Animation animation="balance-desktop" />
-        </div>
-    </OnboardingLayout>
-{/if}
+<OnboardingLayout
+    busy={isCheckingForBalance}
+    onBackClick={handleBackClick}
+    {locale}
+    showLedgerProgress={legacyLedger}
+    showLedgerVideoButton={legacyLedger}>
+    <div slot="title">
+        <Text type="h2">{locale('views.balance.title')}</Text>
+    </div>
+    <div slot="leftpane__content">
+        <Text type="p" secondary classes="mb-5">{locale('views.balance.body')}</Text>
+        <Box classes="flex flex-col flex-grow items-center py-12 bg-gray-50 dark:bg-gray-900 dark:bg-opacity-50 rounded-lg ">
+            <Text type="h2">{formattedBalance}</Text>
+            <Text type="p" highlighted classes="py-1 uppercase">{fiatBalance}</Text>
+        </Box>
+        {#if error.text}
+            <Toast classes="mt-4" type="error" message={error.text} />
+        {/if}
+    </div>
+    <div slot="leftpane__action" class="flex flex-row justify-between items-center space-x-4">
+        <Button secondary classes="flex-1" disabled={isCheckingForBalance} onClick={checkAgain}>
+            {#if isCheckingForBalance}
+                <Spinner busy={isCheckingForBalance} message={locale('views.migrate.findingBalance')} classes="justify-center" />
+            {:else}{locale('actions.checkAgain')}{/if}
+        </Button>
+        <Button classes="flex-1" disabled={isCheckingForBalance || !error.allowToProceed} onClick={() => handleContinueClick()}>
+            {locale('actions.continue')}
+        </Button>
+    </div>
+    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-yellow dark:bg-gray-900'}">
+        <Animation classes="setup-anim-aspect-ratio" animation="balance-desktop" />
+    </div>
+</OnboardingLayout>

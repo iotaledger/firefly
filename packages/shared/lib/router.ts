@@ -1,9 +1,10 @@
 import { cleanupSignup, login, strongholdPassword, walletPin } from 'shared/lib/app'
-import { activeProfile, profiles, ProfileType } from 'shared/lib/profile'
+import { activeProfile, profiles, ProfileType, setProfileType } from 'shared/lib/profile'
 import { AccountRoutes, AppRoute, SettingsRoutes, SetupType, Tabs, WalletRoutes, LedgerRoutes } from 'shared/lib/typings/routes'
 import { selectedAccountId } from 'shared/lib/wallet'
 import { get, readable, writable } from 'svelte/store'
 import { deepLinkRequestActive } from './deepLinking'
+import { mobile } from 'shared/lib/app'
 
 /**
  * Sets next route
@@ -140,7 +141,12 @@ export const routerNext = (event) => {
             if (setupType) {
                 walletSetupType.set(setupType)
                 if (setupType === SetupType.New) {
-                    nextRoute = AppRoute.Create
+                    if (get(mobile)) {
+                        setProfileType(ProfileType.Software)
+                        nextRoute = AppRoute.Secure
+                    } else {
+                        nextRoute = AppRoute.Create
+                    }
                 } else if (setupType === SetupType.Import) {
                     nextRoute = AppRoute.Import
                 }

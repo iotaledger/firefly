@@ -10,7 +10,7 @@
 </script>
 
 <div class="w-full h-full flex justify-center items-center bg-white dark:bg-gray-900">
-    <div class={$mobile ? 'w-1/2' : 'w-1/3'}>
+    <div class={$mobile ? 'w-full px-4' : 'w-1/3'}>
         <Animation classes="w-full h-auto" animation="splashscreen-desktop" loop={false} renderer="canvas" />
     </div>
 </div>

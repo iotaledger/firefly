@@ -2,42 +2,11 @@
     import { Text, Button } from 'shared/components'
 
     export let locale = undefined
-    export let onDrop = (buffer?, name?, path?) => {}
+    export let onFile = (event?) => {}
     export let extentionsLabel = ''
     export let allowedExtensions
-
-    let dropping = false
-    let fileName = null
-
-    const onFile = (e) => {
-        e.preventDefault()
-        dropping = false
-
-        const file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0]
-
-        if (!file) {
-            fileName = null
-            return onDrop()
-        }
-
-        if (allowedExtensions && allowedExtensions.length > 0) {
-            const ext = /\.([0-9a-z]+)$/i.exec(file.name)
-            if (!ext || !allowedExtensions.includes(ext[1])) {
-                fileName = null
-                return onDrop()
-            }
-        }
-
-        fileName = file.name
-
-        const reader = new FileReader()
-
-        reader.onload = (e) => {
-            onDrop(e.target.result, file.name, file.path)
-        }
-
-        reader.readAsArrayBuffer(file)
-    }
+    export let dropping
+    export let fileName
 
     const onEnter = () => {
         dropping = true

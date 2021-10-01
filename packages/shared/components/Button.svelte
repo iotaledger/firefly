@@ -21,6 +21,7 @@
     export let autofocus = false
     export let inlineStyle = ''
     export let showHoverText = undefined
+    export let iconOnly = false
 
     let buttonElement
     $: darkModeEnabled = $appSettings.darkMode
@@ -218,7 +219,8 @@
                 span {
                     @apply text-white;
                 }
-                :global(svg, svg.right) {
+                :global(svg),
+                :global(svg.right) {
                     @apply text-gray-500;
                 }
                 &:hover,
@@ -386,6 +388,8 @@
                         </div>
                     </div>
                 {/if}
+            {:else if iconOnly}
+                <Icon width="24" height="24" {icon} />
             {:else}
                 <div class="relative flex flex-row justify-between">
                     <div class="relative flex items-center flex-1">

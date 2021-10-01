@@ -1,12 +1,16 @@
 <script lang="typescript">
     import { Animation, Button, Dropzone, OnboardingLayout, Text } from 'shared/components'
+    import { mobile } from 'shared/lib/app'
     import { createEventDispatcher } from 'svelte'
 
     export let locale
-    export let mobile
+
     let file
     let fileName
     let filePath
+    let dropping
+
+    const allowedExtensions = ['kdbx', 'stronghold', 'txt']
 
     const dispatch = createEventDispatcher()
 
@@ -17,7 +21,7 @@
         dispatch('previous')
     }
 
-    const onDrop = (buffer, name, path) => {
+    const onDrop = (buffer?, name?, path?) => {
         if (!buffer) {
             file = null
             fileName = null
@@ -29,26 +33,70 @@
         fileName = name
         filePath = path
     }
+
+    const onFile = (e) => {
+        e?.preventDefault()
+        dropping = false
+
+        const file = e?.dataTransfer?.files?.[0] ?? e?.target?.files?.[0] ?? null
+
+        if (!file) {
+            fileName = null
+            return onDrop()
+        }
+
+        if (allowedExtensions && allowedExtensions.length > 0) {
+            const ext = /\.([0-9a-z]+)$/i.exec(file.name)
+            if (!ext || !allowedExtensions.includes(ext[1])) {
+                fileName = null
+                return onDrop()
+            }
+        }
+
+        fileName = file.name
+
+        const reader = new FileReader()
+
+        reader.onload = (e) => {
+            onDrop(e.target.result, file.name, file.path)
+            if ($mobile) {
+                handleContinueClick()
+            }
+        }
+
+        reader.readAsArrayBuffer(file)
+    }
 </script>
 
-{#if mobile}
-    <div>foo</div>
-{:else}
-    <OnboardingLayout onBackClick={handleBackClick}>
-        <div slot="leftpane__content">
-            <Text type="h2" classes="mb-5">{locale('views.importFromFile.title')}</Text>
-            <Text type="p" secondary classes="mb-8">{locale('views.importFromFile.body')}</Text>
+<OnboardingLayout onBackClick={handleBackClick}>
+    <div slot="title">
+        <Text type="h2">{locale('views.importFromFile.title')}</Text>
+    </div>
+    <div slot="leftpane__content">
+        <Text type="p" secondary classes="mb-8">{locale('views.importFromFile.body')}</Text>
+        {#if !$mobile}
             <Dropzone
-                {onDrop}
                 {locale}
-                extentionsLabel={locale('actions.importExtentions')}
-                allowedExtensions={['kdbx', 'stronghold']} />
-        </div>
-        <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-            <Button classes="flex-1" disabled={!file} onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
-        </div>
-        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            <Animation animation="import-from-file-desktop" />
-        </div>
-    </OnboardingLayout>
-{/if}
+                {fileName}
+                {allowedExtensions}
+                {onFile}
+                bind:dropping
+                extentionsLabel={locale('actions.importExtentions')} />
+        {/if}
+    </div>
+    <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
+        {#if $mobile}
+            <input
+                class="absolute opacity-0 w-full h-full"
+                type="file"
+                on:change={onFile}
+                accept={allowedExtensions ? allowedExtensions.map((e) => `.${e}`).join(',') : '*'} />
+        {/if}
+        <Button classes="flex-1" disabled={!$mobile && !file} onClick={$mobile ? onFile : handleContinueClick}>
+            {locale(`actions.${$mobile ? 'chooseFile' : 'continue'}`)}
+        </Button>
+    </div>
+    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-blue dark:bg-gray-900'}">
+        <Animation classes="setup-anim-aspect-ratio" animation="import-from-file-desktop" />
+    </div>
+</OnboardingLayout>

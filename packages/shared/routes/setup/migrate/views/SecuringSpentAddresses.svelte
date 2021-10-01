@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { BundleMiningLayout, Button, Icon, ProgressBar, Text } from 'shared/components'
-    import { Electron } from 'shared/lib/electron'
+    import { openUrl } from 'shared/lib/device'
     import {
         createMigrationBundle,
         getInputIndexesForBundle,
@@ -13,7 +13,6 @@
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
 
     export let locale
-    export let mobile
 
     const dispatch = createEventDispatcher()
 
@@ -103,29 +102,26 @@
     })
 </script>
 
-{#if mobile}
-    <div>foo</div>
-{:else}
-    <BundleMiningLayout allowBack={false} {locale} showLedgerProgress={legacyLedger} showLedgerVideoButton={legacyLedger}>
-        <div slot="icon_boxed">
-            <div class="flex justify-center items-center rounded-2xl w-12 h-12 bg-blue-500 shadow-lg">
-                <Icon boxed="true" icon="history" classes="text-white" />
-            </div>
+<!-- TODO: missing mobile -->
+<BundleMiningLayout allowBack={false} {locale} showLedgerProgress={legacyLedger} showLedgerVideoButton={legacyLedger}>
+    <div slot="icon_boxed">
+        <div class="flex justify-center items-center rounded-2xl w-12 h-12 bg-blue-500 shadow-lg">
+            <Icon boxed="true" icon="history" classes="text-white" />
         </div>
-        <div slot="box_content">
-            <Text type="h2" classes="mb-5 text-center">{locale('views.securingSpentAddresses.title')}</Text>
-            <Text type="p" secondary classes="mb-4 text-center">
-                {locale('views.securingSpentAddresses.body1', { values: { minutes: $selectedBundlesToMine.length * 10 } })}
-            </Text>
-            <Text type="p" secondary classes="mb-8 text-center">{locale('views.securingSpentAddresses.body2')}</Text>
-            <div class="flex flex-col flex-grow items-center">
-                <Button secondary classes="w-56" onClick={() => Electron.openUrl('https://firefly.iota.org/faq#spent-addresses')}>
-                    {locale('views.bundleMiningWarning.learn')}
-                </Button>
-            </div>
+    </div>
+    <div slot="box_content">
+        <Text type="h2" classes="mb-5 text-center">{locale('views.securingSpentAddresses.title')}</Text>
+        <Text type="p" secondary classes="mb-4 text-center">
+            {locale('views.securingSpentAddresses.body1', { values: { minutes: $selectedBundlesToMine.length * 10 } })}
+        </Text>
+        <Text type="p" secondary classes="mb-8 text-center">{locale('views.securingSpentAddresses.body2')}</Text>
+        <div class="flex flex-col flex-grow items-center">
+            <Button secondary classes="w-56" onClick={() => openUrl('https://firefly.iota.org/faq#spent-addresses')}>
+                {locale('views.bundleMiningWarning.learn')}
+            </Button>
         </div>
-        <div slot="actions" class="w-2/5 mt-8">
-            <ProgressBar narrow percent={progressBarPercent} message={progressBarMessage} />
-        </div>
-    </BundleMiningLayout>
-{/if}
+    </div>
+    <div slot="actions" class="w-2/5 mt-8">
+        <ProgressBar narrow percent={progressBarPercent} message={progressBarMessage} />
+    </div>
+</BundleMiningLayout>

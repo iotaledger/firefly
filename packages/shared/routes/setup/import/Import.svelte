@@ -24,7 +24,6 @@
     import { BackupPassword, FileImport, Import, Ledger, Success, TextImport } from './views/'
 
     export let locale
-    export let mobile
 
     let isGettingMigrationData = false
 
@@ -172,26 +171,26 @@
 
 {#if state === ImportState.Init}
     <Transition>
-        <Import on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <Import on:next={_next} on:previous={_previous} {locale} />
     </Transition>
 {:else if state === ImportState.TextImport}
     <Transition>
-        <TextImport {isGettingMigrationData} on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <TextImport {isGettingMigrationData} on:next={_next} on:previous={_previous} {locale} />
     </Transition>
 {:else if state === ImportState.FileImport}
     <Transition>
-        <FileImport on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <FileImport on:next={_next} on:previous={_previous} {locale} />
     </Transition>
 {:else if state === ImportState.LedgerImport}
     <Transition>
-        <Ledger on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <Ledger on:next={_next} on:previous={_previous} {locale} />
     </Transition>
 {:else if state === ImportState.BackupPassword}
     <Transition>
-        <BackupPassword on:next={_next} on:previous={_previous} {isGettingMigrationData} {error} {locale} {mobile} {busy} />
+        <BackupPassword on:next={_next} on:previous={_previous} {isGettingMigrationData} {error} {locale} {busy} />
     </Transition>
 {:else if state === ImportState.Success}
     <Transition>
-        <Success on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <Success on:next={_next} on:previous={_previous} {locale} />
     </Transition>
 {/if}

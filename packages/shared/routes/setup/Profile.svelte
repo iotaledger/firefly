@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Animation, Button, Input, OnboardingLayout, Text } from 'shared/components'
-    import { cleanupSignup } from 'shared/lib/app'
+    import { cleanupSignup, mobile } from 'shared/lib/app'
     import { Electron } from 'shared/lib/electron'
     import { getTrimmedLength, validateFilenameChars } from 'shared/lib/helpers'
     import { initialiseMigrationListeners } from 'shared/lib/migration'
@@ -19,7 +19,7 @@
     import { get } from 'svelte/store'
 
     export let locale
-    export let mobile
+
     let error = ''
     let busy = false
 
@@ -99,35 +99,31 @@
     }
 </script>
 
-{#if mobile}
-    <div>foo</div>
-{:else}
-    <OnboardingLayout onBackClick={handleBackClick} {busy}>
-        <div slot="leftpane__content">
-            <Text type="h2" classes="mb-4">{locale('views.profile.title')}</Text>
-            <Text type="p" secondary classes="mb-4">
-                {locale('views.profile.body1')}
-            </Text>
-            <Text type="p" secondary classes="mb-10">
-                {locale(`views.profile.body2.${hasNoProfiles() ? 'first' : 'nonFirst'}`)}
-                {locale('views.profile.addMore')}
-            </Text>
-            <Input
-                {error}
-                bind:value={profileName}
-                placeholder={locale('views.profile.profileName')}
-                classes="w-full"
-                autofocus
-                disabled={busy}
-                submitHandler={handleContinueClick} />
-        </div>
-        <div slot="leftpane__action" class="flex flex-col">
-            <Button classes="w-full" disabled={!isProfileNameValid || busy} onClick={handleContinueClick}>
-                {locale('actions.continue')}
-            </Button>
-        </div>
-        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-green dark:bg-gray-900">
-            <Animation animation="profile-desktop" />
-        </div>
-    </OnboardingLayout>
-{/if}
+<OnboardingLayout onBackClick={handleBackClick} {busy}>
+    <div slot="title">
+        <Text type="h2">{locale('views.profile.title')}</Text>
+    </div>
+    <div slot="leftpane__content">
+        <Text type="p" secondary classes="mb-4">{locale('views.profile.body1')}</Text>
+        <Text type="p" secondary classes={$mobile ? 'mb-4' : 'mb-10'}>
+            {locale(`views.profile.body2.${hasNoProfiles() ? 'first' : 'nonFirst'}`)}
+            {locale('views.profile.addMore')}
+        </Text>
+        <Input
+            {error}
+            bind:value={profileName}
+            placeholder={locale('views.profile.profileName')}
+            classes="w-full"
+            autofocus
+            disabled={busy}
+            submitHandler={handleContinueClick} />
+    </div>
+    <div slot="leftpane__action" class="flex flex-col">
+        <Button classes="w-full" disabled={!isProfileNameValid || busy} onClick={handleContinueClick}>
+            {locale('actions.continue')}
+        </Button>
+    </div>
+    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-green dark:bg-gray-900'}">
+        <Animation animation="profile-desktop" />
+    </div>
+</OnboardingLayout>

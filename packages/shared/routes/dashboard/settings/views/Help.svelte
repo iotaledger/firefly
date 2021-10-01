@@ -1,27 +1,27 @@
 <script lang="typescript">
-    import { Electron } from 'shared/lib/electron'
     import { Button, HR, Text } from 'shared/components'
+    import { openUrl } from 'shared/lib/device'
 
     export let locale
 
     // const handleTroubleshootClick = () => {
-    //     Electron.openUrl('https://iota.org')
+    //     openUrl('https://iota.org')
     // }
 
     const handleDocumentationClick = () => {
-        Electron.openUrl('https://chrysalis.docs.iota.org/')
+        openUrl('https://chrysalis.docs.iota.org/')
     }
 
     const handleFaqClick = () => {
-        Electron.openUrl('https://firefly.iota.org/faq')
+        openUrl('https://firefly.iota.org/faq')
     }
 
     const handleDiscordClick = () => {
-        Electron.openUrl('https://discord.iota.org')
+        openUrl('https://discord.iota.org')
     }
 
     const handleReportAnIssueClick = () => {
-        Electron.openUrl('https://github.com/iotaledger/firefly/issues')
+        openUrl('https://github.com/iotaledger/firefly/issues')
     }
 </script>
 
@@ -45,9 +45,7 @@
     <section id="faq" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.faq.title2')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.faq.description')}</Text>
-        <Button medium inlineStyle="min-width: 156px;" onClick={() => handleFaqClick()}>
-            {locale('actions.visitFaq')}
-        </Button>
+        <Button medium inlineStyle="min-width: 156px;" onClick={() => handleFaqClick()}>{locale('actions.visitFaq')}</Button>
     </section>
     <HR classes="pb-5 mt-5 justify-center" />
     <section id="discord" class="w-3/4">

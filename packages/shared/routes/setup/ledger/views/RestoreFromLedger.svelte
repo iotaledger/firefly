@@ -6,7 +6,6 @@
     import { createEventDispatcher } from 'svelte'
 
     export let locale
-    export let mobile
 
     let restoring = false
 
@@ -62,23 +61,19 @@
     }
 </script>
 
-{#if mobile}
-    <div>foo</div>
-{:else}
-    <OnboardingLayout onBackClick={handleBackClick} busy={restoring}>
-        <div slot="leftpane__content">
-            <Text type="h2" classes="mb-5">{locale('views.restoreFromFireflyLedger.title')}</Text>
-            <Text type="p" secondary classes="mb-8">{locale('views.restoreFromFireflyLedger.body')}</Text>
-        </div>
-        <div slot="leftpane__action">
-            <Button classes="w-full" disabled={restoring} onClick={restore}>
-                {#if restoring}
-                    <Spinner busy message={locale('views.restoreFromFireflyLedger.restoring')} classes="justify-center" />
-                {:else}{locale('actions.restore')}{/if}
-            </Button>
-        </div>
-        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            <Animation animation="import-from-file-password-desktop" />
-        </div>
-    </OnboardingLayout>
-{/if}
+<OnboardingLayout onBackClick={handleBackClick} busy={restoring}>
+    <div slot="leftpane__content">
+        <Text type="h2" classes="mb-5">{locale('views.restoreFromFireflyLedger.title')}</Text>
+        <Text type="p" secondary classes="mb-8">{locale('views.restoreFromFireflyLedger.body')}</Text>
+    </div>
+    <div slot="leftpane__action">
+        <Button classes="w-full" disabled={restoring} onClick={restore}>
+            {#if restoring}
+                <Spinner busy message={locale('views.restoreFromFireflyLedger.restoring')} classes="justify-center" />
+            {:else}{locale('actions.restore')}{/if}
+        </Button>
+    </div>
+    <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
+        <Animation animation="import-from-file-password-desktop" />
+    </div>
+</OnboardingLayout>

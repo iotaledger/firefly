@@ -16,7 +16,6 @@
     } from './views/'
 
     export let locale
-    export let mobile
 
     const dispatch = createEventDispatcher()
 
@@ -101,30 +100,30 @@
 
 {#if $ledgerRoute === LedgerRoutes.Connect}
     <Transition>
-        <Connect on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <Connect on:next={_next} on:previous={_previous} {locale} />
     </Transition>
 {:else if $ledgerRoute === LedgerRoutes.RestoreFromLedger}
     <Transition>
-        <RestoreFromLedger on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <RestoreFromLedger on:next={_next} on:previous={_previous} {locale} />
     </Transition>
 {:else if $ledgerRoute === LedgerRoutes.LegacyIntro}
     <Transition>
-        <LegacyIntro on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <LegacyIntro on:next={_next} on:previous={_previous} {locale} />
     </Transition>
 {:else if $ledgerRoute === LedgerRoutes.InstallationGuide}
     <Transition>
-        <InstallationGuide on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <InstallationGuide on:next={_next} on:previous={_previous} {locale} />
     </Transition>
 {:else if $ledgerRoute === LedgerRoutes.GenerateAddress}
     <Transition>
-        <GenerateNewAddress on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <GenerateNewAddress on:next={_next} on:previous={_previous} {locale} />
     </Transition>
 {:else if $ledgerRoute === LedgerRoutes.SwitchApps}
     <Transition>
-        <SwitchApps on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <SwitchApps on:next={_next} on:previous={_previous} {locale} />
     </Transition>
 {:else if $ledgerRoute === LedgerRoutes.AccountIndex}
     <Transition>
-        <AccountIndex on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <AccountIndex on:next={_next} on:previous={_previous} {locale} />
     </Transition>
 {/if}
