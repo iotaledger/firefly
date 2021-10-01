@@ -369,7 +369,6 @@ const getDiagnostics = () => {
         { label: 'popups.diagnostics.cpuCount', value: os.cpus().length },
         { label: 'popups.diagnostics.totalMem', value: `${(os.totalmem() / 1048576).toFixed(1)} MB` },
         { label: 'popups.diagnostics.freeMem', value: `${(os.freemem() / 1048576).toFixed(1)} MB` },
-        { label: 'popups.diagnostics.userPath', value: app.getPath('userData') },
     ]
 }
 

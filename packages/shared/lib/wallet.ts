@@ -59,6 +59,7 @@ import { CurrencyTypes } from './typings/currency'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
 import { HistoryDataProps, PriceData } from './typings/market'
 import { ProfileType } from './typings/profile'
+import { Electron } from './electron'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -148,7 +149,7 @@ export const isFirstSessionSync = writable<boolean>(true)
 export const isFirstManualSync = writable<boolean>(true)
 export const isBackgroundSyncing = writable<boolean>(false)
 
-export const api: {
+interface IWalletApi {
     generateMnemonic(callbacks: {
         onSuccess: (response: Event<string>) => void
         onError: (err: ErrorEventPayload) => void
@@ -384,7 +385,54 @@ export const api: {
         address: string,
         callbacks: { onSuccess: (response: Event<string>) => void; onError: (err: ErrorEventPayload) => void }
     )
-} = window['__WALLET_API__']
+}
+
+export const api: IWalletApi = new Proxy(
+    { ...window['__WALLET_API__'] },
+    {
+        get: (target, propKey) => {
+            const _handleCallbackError = (err) => {
+                const title = `Callback Error ${propKey.toString()}`
+
+                console.error(title, err)
+                void Electron.unhandledException(title, { message: err?.message, stack: err?.stack })
+            }
+
+            const originalMethod = target[propKey]
+            return (...args) => {
+                for (let i = args.length - 1; i >= 0; i--) {
+                    if (args[i]?.onSuccess) {
+                        const originalSuccess = args[i].onSuccess
+                        args[i].onSuccess = (payload) => {
+                            try {
+                                originalSuccess(payload)
+                            } catch (err) {
+                                _handleCallbackError(err)
+                            }
+                        }
+                    }
+
+                    if (args[i]?.onError) {
+                        const originalError = args[i].onError
+                        args[i].onError = (payload) => {
+                            try {
+                                originalError(payload)
+                            } catch (err) {
+                                _handleCallbackError(err)
+                            }
+                        }
+                    }
+
+                    if (args[i]?.onSuccess || args[i]?.onError) {
+                        break
+                    }
+                }
+
+                return originalMethod.apply(target, args)
+            }
+        },
+    }
+)
 
 export const getWalletStoragePath = (appPath: string): string => `${appPath}/${WALLET_STORAGE_DIRECTORY}/`
 
