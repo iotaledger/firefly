@@ -22,6 +22,8 @@
     export let dimLength = 160
     export let opened = false
     export let fromRight = false
+    export let classes = ''
+    export let fullScreen = false
 
     const dispatch = createEventDispatcher()
 
@@ -155,9 +157,6 @@
         height: var(--height);
         width: var(--width);
         opacity: var(--opacity);
-        --padding-top: 0.6rem;
-        padding-top: var(--padding-top);
-
         --bg-indicator-color: #d8e3f5;
         @apply from-white;
         &.darkmode {
@@ -180,7 +179,7 @@
     }
 
     // Scroll overlay gradient mask
-    main:after {
+    main:not(.fullScreen):after {
         content: '';
         position: fixed;
         top: var(--padding-top);
@@ -202,7 +201,7 @@
 
 <drawer class="absolute top-0 z-30" class:invisible={!isOpen}>
     <slide-zone
-        class="fixed h-full w-full"
+        class="fixed h-screen w-screen"
         use:slidable
         on:slideMove={handleSlideMove}
         on:slideEnd={handleSlideEnd}
@@ -210,8 +209,9 @@
         <div id="dim" class="h-screen" style="--opacity: {dimOpacity}" />
     </slide-zone>
     <main
-        class="fixed overflow-y-auto w-full h-full bg-white dark:bg-gray-800"
+        class="fixed overflow-y-auto w-screen h-screen bg-white dark:bg-gray-800 {classes}"
         class:darkmode={darkModeEnabled}
+        class:fullScreen
         style="--y: {fromRight ? 0 : $coords.y}px; 
 			--x: {fromRight ? $coords.x : 0}px; 
 			--opacity: {contentOpacity}; 

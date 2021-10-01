@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Icon, Scroller, SettingsNavigator, Text } from 'shared/components'
-    import { loggedIn } from 'shared/lib/app'
+    import { loggedIn, mobile } from 'shared/lib/app'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import { SettingsIcons } from 'shared/lib/typings/icons'
@@ -18,7 +18,6 @@
     import { Advanced, General, Help, Security } from './'
 
     export let locale
-    export let mobile
 
     let scroller
     let index
@@ -79,10 +78,8 @@
     })
 </script>
 
-{#if mobile}
-    <div>foo</div>
-{:else}
-    <div class="flex flex-1 flex-row items-start">
+<div class="flex flex-1 flex-row items-start">
+    {#if !$mobile}
         <button data-label="back-button" class="absolute top-8 left-8" on:click={handleBackClick}>
             <div class="flex items-center space-x-3">
                 <Icon icon="arrow-left" classes="text-blue-500" />
@@ -96,26 +93,30 @@
             {settings}
             {locale}
             bind:route={$settingsRoute} />
-        <div class="h-full w-full pb-10">
+    {/if}
+    <div class="h-full w-full pb-10">
+        {#if !$mobile}
             <Text type="p" secondary highlighted classes="mb-8">
                 {locale('views.settings.settings')}
                 /
                 {locale(`views.settings.${$settingsRoute}.title`)}
             </Text>
-            <Scroller classes="w-3/4 h-full pr-100" threshold={70} bind:index bind:this={scroller}>
-                <div class="w-11/12">
+        {/if}
+        <Scroller classes="w-full md:w-3/4 h-full md:pr-100" threshold={70} bind:index bind:this={scroller}>
+            <div class="md:w-11/12">
+                {#if !$mobile}
                     <Text type="h2" classes="mb-7">{locale(`views.settings.${$settingsRoute}.title`)}</Text>
-                    {#if $settingsRoute === 'generalSettings'}
-                        <General {locale} />
-                    {:else if $settingsRoute === 'security'}
-                        <Security {locale} />
-                    {:else if $settingsRoute === 'advancedSettings'}
-                        <Advanced {locale} />
-                    {:else if $settingsRoute === 'helpAndInfo'}
-                        <Help {locale} />
-                    {/if}
-                </div>
-            </Scroller>
-        </div>
+                {/if}
+                {#if $settingsRoute === 'generalSettings'}
+                    <General {locale} />
+                {:else if $settingsRoute === 'security'}
+                    <Security {locale} />
+                {:else if $settingsRoute === 'advancedSettings'}
+                    <Advanced {locale} />
+                {:else if $settingsRoute === 'helpAndInfo'}
+                    <Help {locale} />
+                {/if}
+            </div>
+        </Scroller>
     </div>
-{/if}
+</div>

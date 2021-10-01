@@ -115,7 +115,7 @@
 
 <div>
     {#if $loggedIn}
-        <section id="nodeSettings" class="w-3/4">
+        <section id="nodeSettings" class="w-full sm:w-3/4">
             <Text type="h4" classes="mb-3">{locale('views.settings.nodeSettings.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.nodeSettings.description')}</Text>
             <Radio value={true} bind:group={automaticNodeSelection} label={locale('general.automaticNodeSelection')} />
@@ -217,7 +217,7 @@
             </section>
             <HR classes="pb-5 mt-5 justify-center" />
         {/if}
-        <section id="proofOfWork" class="w-3/4">
+        <section id="proofOfWork" class="w-full sm:w-3/4">
             <Text type="h4" classes="mb-3">{locale('views.settings.proofOfWork.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.proofOfWork.description')}</Text>
             <Checkbox label={locale('actions.localProofOfWork')} bind:checked={localPow} />
@@ -225,7 +225,7 @@
         <HR classes="pb-5 mt-5 justify-center" />
     {/if}
     <!-- {#if $loggedIn}
-        <section id="developerMode" class="w-3/4">
+        <section id="developerMode" class="w-full sm:w-3/4">
             <Text type="h4" classes="mb-3">{locale('views.settings.developerMode.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.developerMode.description')}</Text>
             <Checkbox label={locale('actions.enableDeveloperMode')} bind:checked={isDeveloperProfile} />
@@ -233,14 +233,14 @@
         <HR classes="pb-5 mt-5 justify-center" />
     {/if} -->
     <!-- TODO: re-enable deep links -->
-    <!-- <section id="deepLinks" class="w-3/4">
+    <!-- <section id="deepLinks" class="w-full sm:w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.deepLinks.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.deepLinks.description')}</Text>
         <Checkbox label={locale('actions.enableDeepLinks')} bind:checked={deepLinkingChecked} />
         <HR classes="pb-5 mt-5 justify-center" />
     </section> -->
     {#if $loggedIn}
-        <section id="balanceFinder" class="w-3/4">
+        <section id="balanceFinder" class="w-full sm:w-3/4">
             <Text type="h4" classes="mb-3">{locale('views.settings.balanceFinder.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.balanceFinder.description')}</Text>
             <div class="flex flex-row items-center">
@@ -250,14 +250,14 @@
             </div>
         </section>
         <HR classes="pb-5 mt-5 justify-center" />
-        <section id="hiddenAccounts" class="w-3/4">
+        <section id="hiddenAccounts" class="w-full sm:w-3/4">
             <Text type="h4" classes="mb-3">{locale('views.settings.hiddenAccounts.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.hiddenAccounts.description')}</Text>
             <Checkbox label={locale('actions.showHiddenAccounts')} bind:checked={showHiddenAccounts} />
         </section>
     {/if}
     <HR classes="pb-5 mt-5 justify-center" />
-    <section id="errorLog" class="w-3/4">
+    <section id="errorLog" class="w-full sm:w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.errorLog.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.errorLog.description')}</Text>
         <Button medium inlineStyle="min-width: 156px;" onClick={() => handleErrorLogClick()}>
@@ -265,7 +265,7 @@
         </Button>
     </section>
     <HR classes="pb-5 mt-5 justify-center" />
-    <section id="diagnostics" class="w-3/4">
+    <section id="diagnostics" class="w-full sm:w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.diagnostics.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.diagnostics.description')}</Text>
         <Button medium inlineStyle="min-width: 156px;" onClick={() => handleDiagnosticsClick()}>
@@ -274,7 +274,7 @@
     </section>
     {#if $isLedgerProfile}
         <HR classes="pb-5 mt-5 justify-center" />
-        <section id="migrateLedgerIndex" class="w-3/4">
+        <section id="migrateLedgerIndex" class="w-full sm:w-3/4">
             <Text type="h4" classes="mb-3">{locale('views.settings.migrateLedgerIndex.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.migrateLedgerIndex.description')}</Text>
             <Button medium inlineStyle="min-width: 156px;" onClick={() => navigateToNewIndexMigration()}>
@@ -285,7 +285,7 @@
     <!-- TODO: Implement state export -->
     <!-- {#if $loggedIn}
     <HR classes="pb-5 mt-5 justify-center" />
-    <section id="stateExport" class="w-3/4 opacity-50">
+    <section id="stateExport" class="w-full sm:w-3/4 opacity-50">
         <Text type="h4" classes="mb-3">{locale('views.settings.stateExport.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.stateExport.description')}</Text>
         <Button medium inlineStyle="min-width: 156px;" disabled onClick={() => {}}>{locale('actions.exportState')}</Button>

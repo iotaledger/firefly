@@ -1,12 +1,12 @@
 <script lang="typescript">
-    import { Drawer, Icon, Logo, NetworkIndicator, ProfileActionsModal } from 'shared/components'
+    import { Drawer, Icon, Logo, NetworkIndicator, ProfileActionsModal, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { getInitials } from 'shared/lib/helpers'
     import { networkStatus } from 'shared/lib/networkStatus'
     import { activeProfile } from 'shared/lib/profile'
     import { dashboardRoute, resetWalletRoute, settingsRoute } from 'shared/lib/router'
     import { SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
-    import { SettingsHome } from 'shared/routes/dashboard/settings/views'
+    import { Settings } from 'shared/routes'
     import { onDestroy } from 'svelte'
     import { get } from 'svelte/store'
 
@@ -43,6 +43,14 @@
         resetWalletRoute()
     }
 
+    function handleBackClick() {
+        if ($settingsRoute === SettingsRoutes.Init) {
+            drawer.close()
+        } else {
+            settingsRoute.set(SettingsRoutes.Init)
+        }
+    }
+
     const hasTitleBar = document.body.classList.contains(`platform-win32`)
 </script>
 
@@ -59,18 +67,26 @@
         on:click={() => drawer.open()}>
         <span class="text-12 text-center text-white uppercase">{profileInitial || 'A'}</span>
     </button>
-    <Drawer bind:this={drawer} fromRight={true} dimLength={0} opened={false}>
-        <div>
-            <header class="text-16 text-center m-auto pt-2 text-gray-900 dark:text-white">Your Wallets</header>
-            <button class="fixed top-5 left-5 mb-7 z-30" on:click={() => drawer.close()}>
-                <Icon icon="arrow-left" classes="text-{profileColor}-500" />
-            </button>
+    <Drawer bind:this={drawer} fromRight={true} dimLength={0} opened={false} fullScreen classes="flex">
+        <div class="flex flex-col flex-1">
             <div
-                class="absolute top-16 left-5 z-10 w-16 h-16 flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100">
-                <span class="text-20 text-center text-white uppercase">{profileInitial || 'A'}</span>
+                class="cursor-pointer w-full px-8 py-3 mb-6 flex items-centers justify-center bg-white dark:bg-gray-800"
+                on:click={handleBackClick}>
+                <Icon icon="arrow-left" classes="absolute left-6 text-gray-500 text-blue-500" />
+                <Text type="h4" classes="text-center">
+                    {locale($settingsRoute === SettingsRoutes.Init ? 'general.yourWallets' : `views.settings.${$settingsRoute}.title`)}
+                </Text>
             </div>
-            <div class="pt-10 pl-28 mb-7 text-17 text-white">{'John Doe'}</div>
-            <SettingsHome {locale} />
+            {#if $settingsRoute === SettingsRoutes.Init}
+                <!-- TODO: add real profile data -->
+                <div class="flex flex-row items-center space-x-6 mb-7 px-6 w-full">
+                    <div class="w-16 h-16 flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100">
+                        <span class="text-20 text-center text-white uppercase font-semibold">{profileInitial || 'A'}</span>
+                    </div>
+                    <Text type="h4">John Doe</Text>
+                </div>
+            {/if}
+            <Settings {locale} />
         </div>
     </Drawer>
 {:else}

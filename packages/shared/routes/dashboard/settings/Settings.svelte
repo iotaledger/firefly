@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { Icon } from 'shared/components'
+    import { mobile } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { isLocaleLoaded } from 'shared/lib/i18n'
@@ -10,7 +11,6 @@
     import { SettingsHome, SettingsViewer } from './views'
 
     export let locale
-    export let mobile
     export let handleClose
 
     $: {
@@ -38,13 +38,15 @@
 </script>
 
 <div
-    class="relative w-full h-full px-16 py-12 flex flex-1 bg-white dark:bg-gray-900 {$settingsRoute !== SettingsRoutes.Init && 'pt-20'} ">
-    <button on:click={handleClose || closeSettings} class="absolute top-8 right-8">
-        <Icon icon="close" classes="text-gray-800 dark:text-white" />
-    </button>
+    class="relative h-auto w-full px-6 pb-10 md:px-16 md:py-12 md:bg-white md:dark:bg-gray-900 flex flex-1 {$settingsRoute !== SettingsRoutes.Init && 'md:pt-20'} ">
+    {#if !$mobile}
+        <button on:click={handleClose || closeSettings} class="absolute top-8 right-8">
+            <Icon icon="close" classes="text-gray-800 dark:text-white" />
+        </button>
+    {/if}
     {#if $settingsRoute === SettingsRoutes.Init}
-        <SettingsHome {mobile} {locale} />
+        <SettingsHome {locale} />
     {:else}
-        <SettingsViewer {mobile} {locale} />
+        <SettingsViewer {locale} />
     {/if}
 </div>

@@ -29,111 +29,54 @@
     }
 </script>
 
-{#if $mobile}
-    <div class="h-full w-full flex flex-col">
-        <div class="flex flex-col items-start gap-5 p-6">
-            <SettingsMenu
-                icons={SettingsIcons}
-                settings={GeneralSettings}
-                activeSettings={$loggedIn ? GeneralSettings : GeneralSettingsNoProfile}
-                title={locale('views.settings.generalSettings.title')}
-                description=""
-                onClick={(setting) => {
-                    settingsRoute.set(SettingsRoutes.GeneralSettings)
-                    settingsChildRoute.set(setting)
-                }}
-                {locale} />
-            <SettingsMenu
-                icons={SettingsIcons}
-                settings={securitySettings}
-                activeSettings={$loggedIn ? SecuritySettings : undefined}
-                title={locale('views.settings.security.title')}
-                description=""
-                onClick={(setting) => {
-                    settingsRoute.set(SettingsRoutes.Security)
-                    settingsChildRoute.set(setting)
-                }}
-                {locale} />
-            <SettingsMenu
-                icons={SettingsIcons}
-                settings={advancedSettings}
-                activeSettings={$loggedIn ? advancedSettings : AdvancedSettingsNoProfile}
-                title={locale('views.settings.advancedSettings.title')}
-                description=""
-                onClick={(setting) => {
-                    settingsRoute.set(SettingsRoutes.AdvancedSettings)
-                    settingsChildRoute.set(setting)
-                }}
-                {locale} />
-            <SettingsMenu
-                icons={SettingsIcons}
-                settings={HelpAndInfo}
-                activeSettings={HelpAndInfo}
-                title={locale('views.settings.helpAndInfo.title')}
-                description=""
-                onClick={(setting) => {
-                    settingsRoute.set(SettingsRoutes.HelpAndInfo)
-                    settingsChildRoute.set(setting)
-                }}
-                {locale} />
-        </div>
-    </div>
-{:else}
-    <div class="h-full w-full flex flex-col">
+<div class="h-full w-full flex flex-col">
+    {#if !$mobile}
         <Text type="h2" classes="mb-14">{locale('views.settings.settings')}</Text>
-        <div class="flex flex-row items-start space-x-10">
-            <SettingsMenu
-                icon="settings"
-                iconColor="bg-blue-500"
-                icons={SettingsIcons}
-                settings={GeneralSettings}
-                activeSettings={$loggedIn ? GeneralSettings : GeneralSettingsNoProfile}
-                title={locale('views.settings.generalSettings.title')}
-                description={locale('views.settings.generalSettings.description')}
-                onClick={(setting) => {
-                    settingsRoute.set(SettingsRoutes.GeneralSettings)
-                    settingsChildRoute.set(setting)
-                }}
-                {locale} />
-            <SettingsMenu
-                icon="security"
-                iconColor="bg-yellow-500"
-                icons={SettingsIcons}
-                settings={securitySettings}
-                activeSettings={$loggedIn ? SecuritySettings : undefined}
-                title={locale('views.settings.security.title')}
-                description={locale('views.settings.security.description')}
-                onClick={(setting) => {
-                    settingsRoute.set(SettingsRoutes.Security)
-                    settingsChildRoute.set(setting)
-                }}
-                {locale} />
-            <SettingsMenu
-                icon="tools"
-                iconColor="bg-green-600"
-                icons={SettingsIcons}
-                settings={advancedSettings}
-                activeSettings={$loggedIn ? advancedSettings : AdvancedSettingsNoProfile}
-                title={locale('views.settings.advancedSettings.title')}
-                description={locale('views.settings.advancedSettings.description')}
-                onClick={(setting) => {
-                    settingsRoute.set(SettingsRoutes.AdvancedSettings)
-                    settingsChildRoute.set(setting)
-                }}
-                {locale} />
-            <SettingsMenu
-                icon="info"
-                iconColor="bg-purple-500"
-                icons={SettingsIcons}
-                settings={HelpAndInfo}
-                activeSettings={HelpAndInfo}
-                title={locale('views.settings.helpAndInfo.title')}
-                description={locale('views.settings.helpAndInfo.description')}
-                onClick={(setting) => {
-                    settingsRoute.set(SettingsRoutes.HelpAndInfo)
-                    settingsChildRoute.set(setting)
-                }}
-                {locale} />
-        </div>
+    {/if}
+    <div class="flex items-start {$mobile ? 'flex-col gap-5 md:p-6' : 'flex-row  space-x-10'}">
+        <SettingsMenu
+            icons={SettingsIcons}
+            settings={GeneralSettings}
+            activeSettings={$loggedIn ? GeneralSettings : GeneralSettingsNoProfile}
+            title={locale('views.settings.generalSettings.title')}
+            description=""
+            onClick={(setting) => {
+                settingsRoute.set(SettingsRoutes.GeneralSettings)
+                settingsChildRoute.set(setting)
+            }}
+            {locale} />
+        <SettingsMenu
+            icons={SettingsIcons}
+            settings={securitySettings}
+            activeSettings={$loggedIn ? SecuritySettings : undefined}
+            title={locale('views.settings.security.title')}
+            description=""
+            onClick={(setting) => {
+                settingsRoute.set(SettingsRoutes.Security)
+                settingsChildRoute.set(setting)
+            }}
+            {locale} />
+        <SettingsMenu
+            icons={SettingsIcons}
+            settings={advancedSettings}
+            activeSettings={$loggedIn ? advancedSettings : AdvancedSettingsNoProfile}
+            title={locale('views.settings.advancedSettings.title')}
+            description=""
+            onClick={(setting) => {
+                settingsRoute.set(SettingsRoutes.AdvancedSettings)
+                settingsChildRoute.set(setting)
+            }}
+            {locale} />
+        <SettingsMenu
+            icons={SettingsIcons}
+            settings={HelpAndInfo}
+            activeSettings={HelpAndInfo}
+            title={locale('views.settings.helpAndInfo.title')}
+            description=""
+            onClick={(setting) => {
+                settingsRoute.set(SettingsRoutes.HelpAndInfo)
+                settingsChildRoute.set(setting)
+            }}
+            {locale} />
     </div>
-{/if}
+</div>
