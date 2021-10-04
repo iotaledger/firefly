@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "Luo profiili",
+            "profileName": "Profiilin nimi",
             "body1": "Voit luoda useita käyttäjäprofiileja lompakkojesi järjestämiseksi ja yksityisyyden parantamiseksi.",
-            "body2": "Aloitetaan ensimmäisen profiilisi nimellä. Voit luoda lisää profiileja myöhemmin.",
-            "profileName": "Profiilin nimi"
+            "body2": {
+                "first": "Aloitetaan nyt ensimmäisen profiilisi nimellä.",
+                "nonFirst": "Aloitetaan nyt profiilisi nimellä."
+            },
+            "addMore": "Voit tehdä lisää profiileja myöhemmin."
         },
         "setup": {
             "title": "Määritä lompakko",
@@ -29,6 +33,32 @@
             "title": "Suojaa lompakkosi",
             "body1": "Tallenna ja tulosta palautussivun PDF-malli.",
             "body2": "Jos täytät palautussivun ja säilytät sen turvallisesti, voit aina palauttaa lompakkosi."
+        },
+        "create": {
+            "title": "Luo lompakko",
+            "body": "Luo uusi lompakko. Voit valita tavallisen ohjelmistolompakon tai jos sinulla on Ledger-laite, voit määrittää rautalompakon.",
+            "softwareAccount": {
+                "title": "Haluan ohjelmistolompakon",
+                "description": "Luo 24 sanan palautuslauseke"
+            },
+            "ledgerAccount": {
+                "title": "Haluan rautalompakon",
+                "description": "Ledger Nano S tai Nano X vaaditaan"
+            }
+        },
+        "setupLedger": {
+            "progress1": "Yhdistä Ledger-laitteesi",
+            "progress2": "Luo osoite",
+            "progress3": "Vaihda Ledger-sovellusta",
+            "progress4": "Siirrä varoja",
+            "watchVideo": "Katso video-opas",
+            "videoGuide": "Ledger-migraation opasvideo"
+        },
+        "ledgerInstallationGuide": {
+            "title": "Oletko asentanut tarvittavat Ledger-sovellukset?",
+            "body1": "Ennen kuin jatkat, sinun on löydettävä ja asennettava sekä {legacy} -sovellus että uusi IOTA-sovellus Ledger Liven kautta.",
+            "body2": "Varmista, että Ledger-laitteesi laiteohjelmisto on ajan tasalla. Kaikki valmiiksi asennetut sovellukset tulee päivittää uusimpiin versioihin.",
+            "action": "Kyllä, olen asentanut nämä sovellukset"
         },
         "password": {
             "title": "Luo salasana",
@@ -85,9 +115,11 @@
         },
         "congratulations": {
             "title": "Lompakon määritys valmis",
-            "body": "Uusi lompakkosi on käyttövalmis.",
             "fundsMigrated": "Varat siirretty",
-            "success": "Olet onnistuneesti siirtänyt varasi uuteen verkkoon",
+            "body": "Uusi lompakkosi on käyttövalmis.",
+            "softwareMigratedBody": "Olet onnistuneesti siirtänyt varasi uuteen verkkoon",
+            "fireflyLedgerBody": "Ledger-tilisi on onnistuneesti palautettu ja voit nyt jatkaa.",
+            "trinityLedgerBody": "Olet onnistuneesti siirtänyt Ledger-laitteesi uuteen verkkoon.",
             "exportMigration": "Vie migraatioloki ja viimeistele määritys"
         },
         "import": {
@@ -98,7 +130,9 @@
             "importMnemonic": "Minulla on Fireflyn palautuslauseke",
             "importMnemonicDescription": "Syötä palautuslausekkeesi palauttaaksesi lompakkosi",
             "importFile": "Minulla on tiedostomuotoinen varmuuskopio",
-            "importFileDescription": "Lataa SeedVault- tai Stronghold-tiedosto"
+            "importFileDescription": "Lataa SeedVault- tai Stronghold-tiedosto",
+            "importLedger": "Minulla on Ledger-varmuuskopio",
+            "importLedgerDescription": "Palauta tai siirrä Ledger-profiili"
         },
         "importFromText": {
             "seed": {
@@ -119,18 +153,63 @@
             "title": "Palauta lompakkosi varmuuskopiotiedostosta",
             "body": "Tuo varmuuskopiotiedosto lompakkojesi palauttamiseksi. Varmuuskopiot voivat olla joko Stronghold-tiedosto (.stronghold) tai Trinity SeedVault -tiedosto (.kdbx)."
         },
+        "importFromLedger": {
+            "title": "Palauta tai siirrä Ledger-laitteesi",
+            "body": "Palauta olemassaoleva Firefly Ledger-profiili, tai siirrä varasi Trinity-lompakosta.",
+            "haveFireflyLedger": "Minulla on Firefly Ledger-varmuuskopio",
+            "haveFireflyLedgerDescription": "Palauta Firefly-profiili",
+            "haveTrinityLedger": "Minulla on Trinity Ledger-varmuuskopio",
+            "haveTrinityLedgerDescription": "Siirrä Trinity-profiili"
+        },
+        "connectLedger": {
+            "title": "Yhdistä Ledger-laitteesi Fireflyhyn",
+            "body": "Jotta Ledger-laitteesi tunnistuu Fireflyssä, varmista, että virallinen Ledger Live -sovellus on suljettu.",
+            "trafficLight1": "Yhdistä ja avaa Ledger-laitteesi PIN-koodillasi",
+            "trafficLight2": "Avaa uusi IOTA-sovellus Ledger-laitteessasi",
+            "tips": "Vinkkejä, jos Ledger ei yhdistä"
+        },
+        "restoreFromFireflyLedger": {
+            "title": "Palauta Ledger-profiilisi",
+            "body": "Paina palauta suorittaaksesi määritysprosessin loppuun ja palauttaaksesi lompakkosi, saldosi ja transaktiohistoriasi.",
+            "restoring": "Palautetaan Ledgeristä..."
+        },
+        "legacyLedgerIntro": {
+            "title": "Aloita Ledger-migraatiosi käyttäen Fireflyä",
+            "body1": "Firefly auttaa sinua siirtämään tokenisi uuteen Chrysalis-verkkoon.",
+            "body2": "Migraation jälkeen, voit lähettää ja vastaanottaa tokeneita käyttäen Ledger-laitettasi Fireflyn kanssa.",
+            "readMore": "Mitä migraatioprosessilta on odotettavissa"
+        },
+        "generateNewLedgerAddress": {
+            "title": "Luo uusi osoite",
+            "body": "Sinun täytyy luoda uusi osoite siirtääksesi tokenisi Fireflyllä. Jatka napsauttamalla alla olevaa painiketta.",
+            "confirmTitle": "Vahvista uusi osoite",
+            "confirmBody": "Turvallisuussyistä, ole hyvä ja vertaa Ledger-laitteellasi luotua osoitetta alla näkyvään osoitteeseen. Jos ne täsmäävät, paina molempia painikkeita Ledger-laitteessasi kehotuksen mukaisesti.",
+            "confirmedTitle": "Osoite vahvistettu",
+            "confirmedBody": "Olet varmistanut, että osoite Fireflyssä täsmää osoitteeseen Ledger-laitteessasi.",
+            "generating": "Luodaan osoitetta"
+        },
+        "switchLedgerApps": {
+            "title": "Vaihda Ledger-sovelluksia",
+            "body": "Ole hyvä ja vaihda {legacy} -sovellukseen Ledger-laitteellasi jatkaaksesi migraatiota. Kun olet valmis, paina jatka."
+        },
+        "selectLedgerAccountIndex": {
+            "title": "Valitse Ledger-tilin indeksi",
+            "body": "Valitse Ledger-tilin indeksi, jota käytit Trinityssä. Useimmille käyttäjille tämä on oletusindeksi 0.",
+            "accountIndex": "Tilin indeksi",
+            "accountPage": "Tilin sivu",
+            "standard": "Standardi",
+            "expert": "Edistynyt",
+            "takingAWhile": "Tämä kestää hetken...",
+            "notGeneratingAddresses": "Luoko Ledger-laitteesi osoitteita?",
+            "reinstallLegacy": "Jos ei, katkaise yhteys laitteeseen ja yritä uudelleen. Jos ongelma jatkuu, saatat joutua asentamaan {legacy} -sovelluksen uudelleen."
+        },
         "importBackupPassword": {
-            "title": "Palauta lompakkosi SeedVault- tai Stronghold-tiedostosta",
             "body1": "Syötä varmuuskopion salasanasi.",
             "body2": "Asetit tämän salasanan, kun loit varmuuskopion."
         },
         "importSuccess": {
             "title": "Varmuuskopion palautus onnistui",
-            "body": "Voit nyt määrittää uuden profiilin.",
-            "seedvaultTitle": "Tuonti onnistui",
-            "seedvaultBody": "Salasanasi on oikein, voit nyt jatkaa.",
-            "strongholdTitle": "Tuonti onnistui",
-            "strongholdBody": "Salasanasi on oikein, voit nyt jatkaa."
+            "body": "Voit nyt määrittää uuden profiilin."
         },
         "migrate": {
             "title": "Siirrä varasi",
@@ -153,7 +232,7 @@
             "miningBundle": "Louhitaan bundlea",
             "problemRestoringWallet": "Lompakkosi palauttamisessa tapahtui verkkovirhe. Ole hyvä ja yritä uudelleen.",
             "minimumMigrationAmountSpentAddresses": "Vähimmäissaldo migraatiossa jokaiselle käytetylle osoitteelle on 1 Mi. Tarkista uudelleen, jos saldosi ei näytä olevan oikein.",
-            "tooManyAddressesToMigrate": "Sinulla on liian monta osoitetta alhaisella saldolla migraatiota varten. Tarkista uudelleen, jos saldosi ei näytä olevan oikein.",
+            "tooManyAddressesToMigrate": "Sinulla on liian monta osoitetta alhaisella saldolla migraatiota varten. Tarkista uudelleen, jos kokonaissaldosi ei näytä olevan oikein.",
             "cannotMigrateAllYourFunds": "Emme voi siirtää kaikkia varojasi, koska joissain osoitteissa on liian alhainen saldo. Voit jatkaa joka tapauksessa. {value} menetetään.",
             "error": "Varojesi siirtämisessä tapahtui virhe. Ole hyvä ja yritä uudelleen."
         },
@@ -184,6 +263,7 @@
         },
         "transferFragmentedFunds": {
             "body1": "Firefly ryhtyy nyt siirtämään varojasi. Tämä voi kestää jonkin aikaa.",
+            "body2": "Varmista, että Ledger-laitteesi on yhdistetty ja {legacy} -sovellus on auki koko ajan migraation aikana.",
             "migrate": "Siirrä varasi",
             "transaction": "Transaktio {number}",
             "rerun": "Yritä uudelleen"
@@ -196,7 +276,8 @@
             "title": "Saldosi",
             "body": "Varmista, että saldosi on oikein ennen jatkamista. Voit tarkistaa uudelleen, jos kaikki ei näytä olevan oikein.",
             "error": "Vähimmäismäärä migraatiossa on 1 Mi. Tarkista uudelleen, jos saldosi ei näytä olevan oikein.",
-            "zeroBalance": "Yritä tarkistaa uudelleen. Jos et siltikään löydä saldoasi, olet saattanut syöttää seed-merkkijonosi väärin."
+            "zeroBalance": "Yritä tarkistaa uudelleen. Jos et siltikään löydä saldoasi, olet saattanut syöttää seed-merkkijonosi väärin.",
+            "zeroBalanceLedgerLegacy": "Yritä tarkistaa uudelleen. Jos et siltikään löydä saldoasi, olet saattanut valita väärän tilin indeksin."
         },
         "settings": {
             "settings": "Asetukset",
@@ -314,6 +395,10 @@
                 "title": "Diagnostiikka",
                 "description": "Näytä järjestelmän ja sovelluksen tiedot"
             },
+            "migrateLedgerIndex": {
+                "title": "Siirrä Ledger-indeksi",
+                "description": "Siirrä toinen Trinity-tilin indeksi"
+            },
             "stateExport": {
                 "title": "Tilan vienti",
                 "description": "Vie transaktiohistoriasi .csv-tiedostoon"
@@ -357,7 +442,15 @@
                 },
                 "hardwareDevice": {
                     "title": "Laite",
-                    "noneDetected": "Ei havaittu"
+                    "statuses": {
+                        "appNotOpen": "IOTA-sovellus ei ole auki",
+                        "connected": "Yhdistetty",
+                        "legacyConnected": "{legacy} -sovellus auki",
+                        "locked": "Lukittu",
+                        "mnemonicMismatch": "Väärä Ledger tai Mnemonic-fraasi",
+                        "notDetected": "Ei havaittu",
+                        "otherConnected": "Sovellus auki"
+                    }
                 },
                 "strongholdStatus": {
                     "title": "Lompakon tila",
@@ -488,6 +581,53 @@
             "body": "Chrysalis-verkkopäivitys on alkanut.",
             "bodyMigration": "Migraatio on poistettu käytöstä, kunnes se on valmis.",
             "bodyFirefly": "Firefly on poistettu käytöstä, kunnes se on valmis. Tokenien migraatio on edelleen mahdollista jälkeenpäin."
+        },
+        "ledgerNotConnected": {
+            "connect": "Avaa uusi IOTA-sovellus Ledger-laitteellasi jatkaaksesi",
+            "connectLegacy": "Avaa {legacy} -sovellus Ledger-laitteellasi jatkaaksesi"
+        },
+        "ledgerConfirmation": {
+            "confirm": "Jatkaaksesi, vahvista Ledger-laitteellasi näkyvä kehotus"
+        },
+        "ledgerAppGuide": {
+            "title": "Opas Ledger-sovellusten asentamiseen",
+            "steps": {
+                "0": "Asenna ja avaa Ledger Live -sovellus",
+                "1": "Varmista, että Ledger-laitteesi on yhdistetty",
+                "2": "Etsi sovelluksia: {legacy} ja IOTA (MIOTA)",
+                "3": "Asenna molemmat sovellukset: {legacy} ja IOTA (MIOTA)",
+                "4": "Muista, että on tärkeää sulkea Ledger Live ennen Fireflyhyn palaamista"
+            }
+        },
+        "ledgerConnectionGuide": {
+            "title": "Vinkkejä, jos Ledger ei yhdistä",
+            "steps": {
+                "0": "Varmista, että Ledger Live ei ole auki tietokoneellasi",
+                "1": "Varmista, että olet avannut Ledger-laitteesi PIN-koodillasi",
+                "2": "Avaa uusi IOTA-sovellus Ledger-laitteellasi",
+                "3": {
+                    "text": "Vieläkin ongelmia?",
+                    "link": "Kokeile Ledgerin virallista tukisivustoa"
+                }
+            }
+        },
+        "ledgerTransaction": {
+            "remainderAddress": {
+                "title": "Vahvista jäännösosoite",
+                "info": "Vahvista, että Ledger-laitteella näkyvä jäännösosoite täsmää alla näkyvään osoitteeseen. Jos ne täsmäävät, paina molempia painikkeita Ledger-laitteessasi kehotuksen mukaisesti."
+            },
+            "transaction": {
+                "title": "Vahvista transaktio",
+                "info": "Vahvista, että Ledger-laitteellasi näkyvät transaktion tiedot täsmäävät alla näkyviin tietoihin. Jos ne täsmäävät, paina molempia painikkeita Ledger-laitteellasi kehotuksen mukaisesti."
+            }
+        },
+        "ledgerAddress": {
+            "title": "Vahvista vastaanotto-osoite",
+            "body": "Vahvista, että Ledger-laitteella näkyvä vastaanotto-osoite täsmää alla näkyvään osoitteeseen. Jos ne täsmäävät, paina molempia painikkeita Ledger-laitteessasi kehotuksen mukaisesti."
+        },
+        "ledgerMigrateIndex": {
+            "title": "Täytyykö sinun siirtää toinen Trinity-tilin indeksi?",
+            "body": "Voit myös tehdä migraation myöhemmin lisäasetuksissa."
         }
     },
     "charts": {
@@ -505,6 +645,8 @@
     "actions": {
         "continue": "Jatka",
         "back": "Takaisin",
+        "previous": "Edellinen",
+        "next": "Seuraava",
         "cancel": "Peruuta",
         "close": "Sulje",
         "dismiss": "Hylkää",
@@ -573,6 +715,7 @@
         "addAccount": "Lisää lompakko",
         "checkForUpdates": "Tarkista päivitykset",
         "reportAnIssue": "Ilmoita ongelmasta",
+        "restore": "Palauta",
         "clear": "Tyhjennä",
         "hideDetails": "Piilota tiedot",
         "yes": "Kyllä",
@@ -592,7 +735,9 @@
         "searchBalances": "Hae saldoja",
         "searchAgain": "Hae uudelleen",
         "searching": "Haetaan...",
-        "closeFirefly": "Sulje Firefly"
+        "closeFirefly": "Sulje Firefly",
+        "generateAddress": "Luo osoite",
+        "migrateAgain": "Siirrä toinen indeksi"
     },
     "general": {
         "password": "Salasana",
@@ -607,6 +752,7 @@
         "received": "Vastaanotettu",
         "sendPayment": "Lähetä maksu",
         "moveFunds": "Sisäinen siirto",
+        "sendTo": "Lähetä",
         "sendFunds": "Lähetä varoja",
         "sendToAddress": "Lähetä osoitteeseen",
         "scanQrOrPaste": "Skannaa QR-koodi tai liitä osoite",
@@ -625,6 +771,8 @@
         "myAddress": "Osoitteeni",
         "shareAddress": "Jaa osoite",
         "yourAddress": "Osoitteesi",
+        "newRemainder": "Uusi jäännös",
+        "remainder": "Jäännös",
         "generateNewAddress": "Luo uusi osoite",
         "copyAddress": "Kopioi osoite",
         "import": "Tuo",
@@ -661,6 +809,7 @@
         "messageId": "Viestitunniste",
         "inputAddress": "Lähdeosoite",
         "receiveAddress": "Kohdeosoite",
+        "newAddress": "Uusi osoite",
         "date": "Päivämäärä",
         "status": "Tila",
         "confirmed": "Vahvistettu",
@@ -672,11 +821,13 @@
         "firstSync": "Synkronoidaan historiaa, tämä voi kestää jonkin aikaa...",
         "transferSyncing": "Synkronoidaan lompakkoa",
         "transferSelectingInputs": "Valitaan syötteet",
-        "transferRemainderAddress": "Luodaan jäljellä olevaa talletusosoitetta",
+        "transferRemainderAddress": "Luodaan jäännösosoitetta",
+        "transferPreparedTransaction": "Valmistellaan transaktiota",
         "transferSigning": "Allekirjoitetaan transaktiota",
         "transferPow": "Suoritetaan PoW",
         "transferBroadcasting": "Lähetetään transaktiota",
         "transferComplete": "Siirto valmis",
+        "generatingReceiveAddress": "Luodaan vastaanotto-osoitetta",
         "creatingAccount": "Luodaan lompakkoa, odota hetki...",
         "updatingAccount": "Päivitetään lompakkoa, odota hetki...",
         "accountSyncing": "Lompakkoa synkronoidaan",
@@ -708,7 +859,8 @@
         "sending": "Lähetetään",
         "legacyNetwork": "Vanha verkko",
         "capsLock": "Caps Lock on päällä",
-        "version": "Versio {version}"
+        "version": "Versio {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "Tänään",
@@ -732,8 +884,7 @@
         "minutesRemaining": "{minutes, plural, one {1 minuutti jäljellä} other {# minuuttia jäljellä}}",
         "copiedToClipboard": "Kopioitu leikepöydälle",
         "accountsSynchronized": "Lompakon synkronointi valmis",
-        "migratedAccountChrysalisDown": "Varasi ovat käytettävissä Chrysalis-päivityksen jälkeen 28. huhtikuuta",
-        "migratedAccountChrysalisUp": "Varasi ovat käytettävissä pian"
+        "fundsAvailableSoon": "Varasi ovat käytettävissä pian"
     },
     "error": {
         "profile": {
@@ -770,7 +921,10 @@
             "tilde": "Profiilin nimi ei voi alkaa merkillä '~'.",
             "control": "Profiilin nimi ei voi sisältää ohjausmerkkiä.",
             "startDot": "Profiilin nimi ei voi alkaa pisteellä.",
-            "chars": "Profiilin nimi ei voi sisältää merkkejä <>:\"/\\|?*"
+            "chars": "Profiilin nimi ei voi sisältää merkkejä <>:\"/\\|?*",
+            "index": "Tilisi indeksi täytyy olla numero väliltä 0 ja 2147483647.",
+            "page": "Tilisi sivu täytyy olla numero väliltä 0 ja 2147483647.",
+            "syncing": "Lompakoiden synkronoinnissa tapahtui virhe."
         },
         "send": {
             "addressLength": "Osoitteiden tulee olla {length, plural, one {1 merkin pituinen} other {# merkkiä pitkä}}.",
@@ -784,7 +938,9 @@
             "insufficientFunds": "Tässä lompakossa ei ole riittävästi varoja.",
             "noToAccount": "Et ole valinnut lompakkoa, johon varat lähetetään.",
             "sendingDust": "Et voi lähettää alle 1 Mi.",
-            "leavingDust": "Et voi jättää alle 1 Mi osoitteeseesi."
+            "leavingDust": "Et voi jättää alle 1 Mi osoitteeseesi.",
+            "cancelled": "Transaktio peruutettiin.",
+            "transaction": "Transaktiosi lähettämisessä tapahtui virhe. Ole hyvä ja yritä uudelleen."
         },
         "node": {
             "invalid": "Syötä kelvollinen URL-osoite.",
@@ -805,6 +961,25 @@
             "phraseWordCount": "Palautuslausekkeessasi pitäisi olla 24 sanaa, tällä hetkellä siinä {length, plural, one {on 1} other {on #}}.",
             "phraseUnrecognizedWord": "Tuntematon sana \"{word}\" palautuslauseessasi",
             "phraseCaseWord": "Sana \"{word}\" tulee olla pienillä kirjaimilla kirjoitettu"
+        },
+        "ledger": {
+            "appNotOpen": "Sinun täytyy avata IOTA-sovellus Ledger-laitteellasi.",
+            "generic": "Ledger-laitteeen yhdistämisessä tapahtui virhe.",
+            "legacyConnected": "Väärä sovellus on auki Ledger-laitteellasi.",
+            "locked": "Ole hyvä ja avaa Ledger-laitteesi lukitus syöttämällä PIN-koodisi.",
+            "mnemonicMismatch": "Olet yhdistänyt väärän Ledger-laitteen tai mnemonic-fraasi on muuttunut.",
+            "notDetected": "Ledger-laitetta ei havaittu.",
+            "notFound": "Ledger-laitetta ei löydy.",
+            "otherConnected": "Väärä sovellus on auki Ledger-laitteellasi.",
+            "generateAddress": "Osoitetta luotaessa tapahtui virhe.",
+            "timeout": "Ledger-laitteesi aikakatkaistiin.",
+            "disconnected": "Yhteys Ledger-laitteeseesi katkaistiin."
+        },
+        "popup": {
+            "preventClose": "Tätä ponnahdusikkunaa ei voi sulkea."
+        },
+        "migration": {
+            "missingBundle": "Transaktiobundlen etsinnän aikana tapahtui virhe."
         }
     },
     "tooltips": {

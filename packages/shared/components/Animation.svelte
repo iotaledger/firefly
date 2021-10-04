@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import lottie from 'lottie-web'
     import { appSettings } from 'shared/lib/appSettings'
     import { onDestroy } from 'svelte'
@@ -99,6 +99,46 @@
             lightmode: 'loading-desktop.json',
             darkmode: 'loading-desktop.json',
         },
+        'ledger-choose-index-desktop': {
+            lightmode: 'ledger-choose-index-desktop.json',
+            darkmode: 'ledger-choose-index-desktop-darkmode.json',
+        },
+        'ledger-migrate-desktop': {
+            lightmode: 'ledger-migrate-desktop.json',
+            darkmode: 'ledger-migrate-desktop-darkmode.json',
+        },
+        'ledger-bg-desktop': {
+            lightmode: 'ledger-bg-desktop.json',
+            darkmode: 'ledger-bg-desktop-darkmode.json',
+        },
+        'ledger-switch-app-desktop': {
+            lightmode: 'ledger-switch-app-desktop.json',
+            darkmode: 'ledger-switch-app-desktop.json',
+        },
+        'ledger-generate-address-desktop': {
+            lightmode: 'ledger-generate-address-desktop.json',
+            darkmode: 'ledger-generate-address-desktop.json',
+        },
+        'ledger-address-confirmed-desktop': {
+            lightmode: 'ledger-address-confirmed-desktop.json',
+            darkmode: 'ledger-address-confirmed-desktop.json',
+        },
+        'ledger-confirm-address-desktop': {
+            lightmode: 'ledger-confirm-address-desktop.json',
+            darkmode: 'ledger-confirm-address-desktop.json',
+        },
+        'ledger-connected-desktop': {
+            lightmode: 'ledger-connected-desktop.json',
+            darkmode: 'ledger-connected-desktop.json',
+        },
+        'ledger-disconnected-desktop': {
+            lightmode: 'ledger-disconnected-desktop.json',
+            darkmode: 'ledger-disconnected-desktop.json',
+        },
+        'ledger-app-closed-desktop': {
+            lightmode: 'ledger-app-closed-desktop.json',
+            darkmode: 'ledger-app-closed-desktop.json',
+        },
     }
 
     let container
@@ -108,7 +148,7 @@
     $: selected = animations[animation]?.[darkModeEnabled ? 'darkmode' : 'lightmode']
 
     $: if (selected && container) {
-        let options = {
+        const options = {
             container,
             renderer,
             path: `assets/animations/${selected}`,
@@ -147,4 +187,4 @@
     })
 </script>
 
-<div class="relative w-full {classes}" bind:this={container} />
+<div class="w-full {classes}" bind:this={container} />

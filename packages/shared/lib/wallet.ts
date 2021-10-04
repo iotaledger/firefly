@@ -1,32 +1,64 @@
 import { mnemonic } from 'shared/lib/app'
-import { convertToFiat, currencies, CurrencyTypes, exchangeRates, formatCurrency } from 'shared/lib/currency'
 import { stripTrailingSlash } from 'shared/lib/helpers'
 import { localize } from 'shared/lib/i18n'
-import type { PriceData } from 'shared/lib/marketData'
-import { HistoryDataProps } from 'shared/lib/marketData'
 import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
 import { showAppNotification, showSystemNotification } from 'shared/lib/notifications'
-import { activeProfile, isStrongholdLocked, updateProfile } from 'shared/lib/profile'
-import type { Account, Account as BaseAccount, AccountToCreate, Balance, SyncedAccount } from 'shared/lib/typings/account'
+import { activeProfile, isLedgerProfile, isStrongholdLocked, updateProfile } from 'shared/lib/profile'
+import type {
+    Account,
+    Account as BaseAccount,
+    AccountToCreate,
+    Balance,
+    SyncAccountOptions,
+    SyncedAccount,
+} from 'shared/lib/typings/account'
 import type { Address } from 'shared/lib/typings/address'
-import type { Actor } from 'shared/lib/typings/bridge'
+import type { Actor, GetMigrationAddressResponse } from 'shared/lib/typings/bridge'
 import type {
     BalanceChangeEventPayload,
     ConfirmationStateChangeEventPayload,
     ErrorEventPayload,
     Event,
+    LedgerAddressGenerationEventPayload,
     MigrationProgressEventPayload,
     ReattachmentEventPayload,
     TransactionEventPayload,
     TransferProgressEventPayload,
-    TransferProgressEventType
+    TransferState,
 } from 'shared/lib/typings/events'
-import type { Message, Payload, Transaction } from 'shared/lib/typings/message'
-import type { MigrationBundle, MigrationData, SendMigrationBundleResponse } from 'shared/lib/typings/migration'
+import type { Payload, Transaction } from 'shared/lib/typings/message'
+import type {
+    AddressInput,
+    MigrationBundle,
+    MigrationData,
+    SendMigrationBundleResponse,
+} from 'shared/lib/typings/migration'
 import { formatUnitBestMatch } from 'shared/lib/units'
-import { get, writable, Writable } from 'svelte/store'
+import { get, writable } from 'svelte/store'
+import { openPopup } from './popup'
 import type { ClientOptions } from './typings/client'
-import type { Duration, NodeInfo, StrongholdStatus } from './typings/wallet'
+import type { LedgerStatus } from './typings/ledger'
+import type { Message } from './typings/message'
+import type { Node, NodeAuth, NodeInfo } from './typings/node'
+import { SetupType } from './typings/routes'
+import type {
+    AccountMessage,
+    AccountsBalanceHistory,
+    BalanceHistory,
+    BalanceOverview,
+    Duration,
+    StrongholdStatus,
+    WalletAccount,
+    WalletState,
+} from './typings/wallet'
+import { displayNotificationForLedgerProfile } from './ledger'
+import { walletSetupType } from './router'
+import { didInitialiseMigrationListeners } from 'shared/lib/migration'
+import type { RecoveryPhrase } from './typings/mnemonic'
+import { CurrencyTypes } from './typings/currency'
+import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
+import { HistoryDataProps, PriceData } from './typings/market'
+import { ProfileType } from './typings/profile'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -36,64 +68,18 @@ export const MAX_ACCOUNT_NAME_LENGTH = 20
 
 export const MAX_PASSWORD_LENGTH = 256
 
+/**
+ * A number representing the threshold for what is considered dust, which is 1Mi or 1,000,000i.
+ */
+export const DUST_THRESHOLD: number = 1_000_000
+
 // Setting to 0 removes auto lock. We must lock Stronghold manually.
 export const STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS = 0
 
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
-export interface WalletAccount extends Account {
-    depositAddress: string;
-    rawIotaBalance: number;
-    balance: string;
-    balanceEquiv: string;
-    color: string;
-}
-
-export interface AccountMessage extends Message {
-    account: number;
-}
-
-
 interface ActorState {
     [id: string]: Actor
-}
-
-export type BalanceOverview = {
-    incoming: string
-    incomingRaw: number
-    outgoing: string
-    outgoingRaw: number
-    balance: string
-    balanceRaw: number
-    balanceFiat: string
-}
-
-type WalletState = {
-    balanceOverview: Writable<BalanceOverview>
-    accounts: Writable<WalletAccount[]>
-    accountsLoaded: Writable<boolean>
-    internalTransfersInProgress: Writable<{
-        [key: string]: {
-            from: string
-            to: string
-        }
-    }>
-}
-
-type BalanceTimestamp = {
-    timestamp: number,
-    balance: number
-}
-
-export type BalanceHistory = {
-    [HistoryDataProps.ONE_HOUR]: BalanceTimestamp[]
-    [HistoryDataProps.SEVEN_DAYS]: BalanceTimestamp[]
-    [HistoryDataProps.TWENTY_FOUR_HOURS]: BalanceTimestamp[]
-    [HistoryDataProps.ONE_MONTH]: BalanceTimestamp[]
-}
-
-export type AccountsBalanceHistory = {
-    [accountIndex: number]: BalanceHistory
 }
 
 /** Active actors state */
@@ -119,10 +105,10 @@ export const wallet = writable<WalletState>({
             from: string
             to: string
         }
-    }>({})
+    }>({}),
 })
 
-export const resetWallet = () => {
+export const resetWallet = (): void => {
     const { balanceOverview, accounts, accountsLoaded, internalTransfersInProgress } = get(wallet)
     balanceOverview.set({
         incoming: '0 Mi',
@@ -140,7 +126,12 @@ export const resetWallet = () => {
     selectedMessage.set(null)
     isTransferring.set(false)
     transferState.set(null)
+    hasGeneratedALedgerReceiveAddress.set(false)
     isSyncing.set(null)
+    isFirstSessionSync.set(true)
+    isFirstManualSync.set(true)
+    isBackgroundSyncing.set(false)
+    walletSetupType.set(null)
 }
 
 export const selectedAccountId = writable<string | null>(null)
@@ -148,56 +139,180 @@ export const selectedAccountId = writable<string | null>(null)
 export const selectedMessage = writable<Message | null>(null)
 
 export const isTransferring = writable<boolean>(false)
-export const transferState = writable<TransferProgressEventType | "Complete" | null>(null)
+export const transferState = writable<TransferState | null>(null)
+
+export const hasGeneratedALedgerReceiveAddress = writable<boolean | null>(false)
 
 export const isSyncing = writable<boolean>(false)
+export const isFirstSessionSync = writable<boolean>(true)
+export const isFirstManualSync = writable<boolean>(true)
+export const isBackgroundSyncing = writable<boolean>(false)
 
 export const api: {
-    generateMnemonic(callbacks: { onSuccess: (response: Event<string>) => void, onError: (err: ErrorEventPayload) => void })
-    storeMnemonic(mnemonic: string, callbacks: { onSuccess: (response: Event<string>) => void, onError: (err: ErrorEventPayload) => void })
-    verifyMnemonic(mnemonic: string, callbacks: { onSuccess: (response: Event<string>) => void, onError: (err: ErrorEventPayload) => void })
-    getAccounts(callbacks: { onSuccess: (response: Event<Account[]>) => void, onError: (err: ErrorEventPayload) => void })
-    getBalance(accountId: string, callbacks: { onSuccess: (response: Event<Balance>) => void, onError: (err: ErrorEventPayload) => void })
-    latestAddress(accountId: string, callbacks: { onSuccess: (response: Event<Address>) => void, onError: (err: ErrorEventPayload) => void })
-    areLatestAddressesUnused(callbacks: { onSuccess: (response: Event<boolean>) => void, onError: (err: ErrorEventPayload) => void })
-    getUnusedAddress(accountId: string, callbacks: { onSuccess: (response: Event<Address>) => void, onError: (err: ErrorEventPayload) => void })
-    getStrongholdStatus(callbacks: { onSuccess: (response: Event<StrongholdStatus>) => void, onError: (err: ErrorEventPayload) => void })
-    syncAccounts(addressIndex: number, gapLimit: number, accountDiscoveryThreshold: number, callbacks: { onSuccess: (response: Event<SyncedAccount[]>) => void, onError: (err: ErrorEventPayload) => void })
-    syncAccount(accountId: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
-    createAccount(account: AccountToCreate, callbacks: { onSuccess: (response: Event<Account>) => void, onError: (err: ErrorEventPayload) => void })
-    send(accountId: string, transfer: {
-        amount: number,
-        address: string,
-        remainder_value_strategy: {
-            strategy: string,
+    generateMnemonic(callbacks: {
+        onSuccess: (response: Event<string>) => void
+        onError: (err: ErrorEventPayload) => void
+    })
+    storeMnemonic(
+        mnemonic: string,
+        callbacks: { onSuccess: (response: Event<string>) => void; onError: (err: ErrorEventPayload) => void }
+    )
+    verifyMnemonic(
+        mnemonic: string,
+        callbacks: { onSuccess: (response: Event<string>) => void; onError: (err: ErrorEventPayload) => void }
+    )
+    getAccounts(callbacks: {
+        onSuccess: (response: Event<Account[]>) => void
+        onError: (err: ErrorEventPayload) => void
+    })
+    getBalance(
+        accountId: string,
+        callbacks: { onSuccess: (response: Event<Balance>) => void; onError: (err: ErrorEventPayload) => void }
+    )
+    latestAddress(
+        accountId: string,
+        callbacks: { onSuccess: (response: Event<Address>) => void; onError: (err: ErrorEventPayload) => void }
+    )
+    areLatestAddressesUnused(callbacks: {
+        onSuccess: (response: Event<boolean>) => void
+        onError: (err: ErrorEventPayload) => void
+    })
+    getUnusedAddress(
+        accountId: string,
+        callbacks: { onSuccess: (response: Event<Address>) => void; onError: (err: ErrorEventPayload) => void }
+    )
+    getStrongholdStatus(callbacks: {
+        onSuccess: (response: Event<StrongholdStatus>) => void
+        onError: (err: ErrorEventPayload) => void
+    })
+    syncAccounts(
+        addressIndex: number,
+        gapLimit: number,
+        accountDiscoveryThreshold: number,
+        callbacks: { onSuccess: (response: Event<SyncedAccount[]>) => void; onError: (err: ErrorEventPayload) => void }
+    )
+    syncAccount(
+        accountId: string,
+        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
+    )
+    startBackgroundSync(
+        pollingInterval: Duration,
+        automaticOutputConsolidation: boolean,
+        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
+    )
+    stopBackgroundSync(callbacks: {
+        onSuccess: (response: Event<void>) => void
+        onError: (err: ErrorEventPayload) => void
+    })
+    createAccount(
+        account: AccountToCreate,
+        callbacks: { onSuccess: (response: Event<Account>) => void; onError: (err: ErrorEventPayload) => void }
+    )
+    send(
+        accountId: string,
+        transfer: {
+            amount: number
+            address: string
+            remainder_value_strategy: {
+                strategy: string
+            }
+            indexation: { index: string; data: number[] }
         },
-        indexation: { index: string, data: number[] },
-    }, callbacks: { onSuccess: (response: Event<Message>) => void, onError: (err: ErrorEventPayload) => void })
-    internalTransfer(fromId: string, toId: string, amount: number, callbacks: { onSuccess: (response: Event<Message>) => void, onError: (err: ErrorEventPayload) => void })
-    setAlias(accountId: string, alias: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
-    lockStronghold(callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
-    setStrongholdPassword(password: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
-    changeStrongholdPassword(currentPassword: string, newPassword: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
-    backup(strongholdPath: string, password: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
-    restoreBackup(strongholdPath: string, password: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
-    removeAccount(accountId: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
-    setStoragePassword(newPinCode: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
-    removeStorage(callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
-    setClientOptions(clientOptions: ClientOptions, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
-    setStrongholdPasswordClearInterval(interval: Duration, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
-    getNodeInfo(accountId: string, url: string | undefined, callbacks: { onSuccess: (response: Event<NodeInfo>) => void, onError: (err: ErrorEventPayload) => void })
+        callbacks: { onSuccess: (response: Event<Message>) => void; onError: (err: ErrorEventPayload) => void }
+    )
+    internalTransfer(
+        fromId: string,
+        toId: string,
+        amount: number,
+        callbacks: { onSuccess: (response: Event<Message>) => void; onError: (err: ErrorEventPayload) => void }
+    )
+    setAlias(
+        accountId: string,
+        alias: string,
+        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
+    )
+    lockStronghold(callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void })
+    setStrongholdPassword(
+        password: string,
+        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
+    )
+    changeStrongholdPassword(
+        currentPassword: string,
+        newPassword: string,
+        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
+    )
+    backup(
+        strongholdPath: string,
+        password: string,
+        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
+    )
+    restoreBackup(
+        strongholdPath: string,
+        password: string,
+        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
+    )
+    removeAccount(
+        accountId: string,
+        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
+    )
+    setStoragePassword(
+        newPinCode: string,
+        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
+    )
+    removeStorage(callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void })
+    setClientOptions(
+        clientOptions: ClientOptions,
+        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
+    )
+    setStrongholdPasswordClearInterval(
+        interval: Duration,
+        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
+    )
+    getNodeInfo(
+        accountId: string,
+        url: string | undefined,
+        auth: NodeAuth | undefined,
+        callbacks: { onSuccess: (response: Event<NodeInfo>) => void; onError: (err: ErrorEventPayload) => void }
+    )
 
     // Legacy seed APIs
-    getLegacySeedChecksum(seed: string, callbacks: { onSuccess: (response: Event<string>) => void, onError: (err: ErrorEventPayload) => void })
+    getLegacySeedChecksum(
+        seed: string,
+        callbacks: { onSuccess: (response: Event<string>) => void; onError: (err: ErrorEventPayload) => void }
+    )
 
-
-    onStrongholdStatusChange(callbacks: { onSuccess: (response: Event<StrongholdStatus>) => void, onError: (err: ErrorEventPayload) => void })
-    onNewTransaction(callbacks: { onSuccess: (response: Event<TransactionEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
-    onReattachment(callbacks: { onSuccess: (response: Event<ReattachmentEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
-    onConfirmationStateChange(callbacks: { onSuccess: (response: Event<ConfirmationStateChangeEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
-    onBalanceChange(callbacks: { onSuccess: (response: Event<BalanceChangeEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
-    onTransferProgress(callbacks: { onSuccess: (response: Event<TransferProgressEventPayload>) => void, onError: (err: ErrorEventPayload) => void }),
-    onMigrationProgress(callbacks: { onSuccess: (response: Event<MigrationProgressEventPayload>) => void, onError: (err: ErrorEventPayload) => void }),
+    onStrongholdStatusChange(callbacks: {
+        onSuccess: (response: Event<StrongholdStatus>) => void
+        onError: (err: ErrorEventPayload) => void
+    })
+    onNewTransaction(callbacks: {
+        onSuccess: (response: Event<TransactionEventPayload>) => void
+        onError: (err: ErrorEventPayload) => void
+    })
+    onReattachment(callbacks: {
+        onSuccess: (response: Event<ReattachmentEventPayload>) => void
+        onError: (err: ErrorEventPayload) => void
+    })
+    onConfirmationStateChange(callbacks: {
+        onSuccess: (response: Event<ConfirmationStateChangeEventPayload>) => void
+        onError: (err: ErrorEventPayload) => void
+    })
+    onBalanceChange(callbacks: {
+        onSuccess: (response: Event<BalanceChangeEventPayload>) => void
+        onError: (err: ErrorEventPayload) => void
+    })
+    onTransferProgress(callbacks: {
+        onSuccess: (response: Event<TransferProgressEventPayload>) => void
+        onError: (err: ErrorEventPayload) => void
+    })
+    onLedgerAddressGeneration(callbacks: {
+        onSuccess: (response: Event<LedgerAddressGenerationEventPayload>) => void
+        onError: (err: ErrorEventPayload) => void
+    })
+    onMigrationProgress(callbacks: {
+        onSuccess: (response: Event<MigrationProgressEventPayload>) => void
+        onError: (err: ErrorEventPayload) => void
+    })
 
     // Migration
     getMigrationData(
@@ -206,8 +321,8 @@ export const api: {
         securityLevel: number,
         initialAddressIndex: number,
         permanode: string | undefined,
-        callbacks: { onSuccess: (response: Event<MigrationData>) => void, onError: (err: ErrorEventPayload) => void }
-    ),
+        callbacks: { onSuccess: (response: Event<MigrationData>) => void; onError: (err: ErrorEventPayload) => void }
+    )
     createMigrationBundle(
         seed: string,
         inputAddressIndexes: number[],
@@ -215,27 +330,70 @@ export const api: {
         timeoutSeconds: number,
         offset: number,
         logFilePath: string,
-        callbacks: { onSuccess: (response: Event<MigrationBundle>) => void, onError: (err: ErrorEventPayload) => void }
-    ),
+        callbacks: { onSuccess: (response: Event<MigrationBundle>) => void; onError: (err: ErrorEventPayload) => void }
+    )
     sendMigrationBundle(
         node: string[],
         bundleHash: string,
         mwm: number,
-        callbacks: { onSuccess: (response: Event<SendMigrationBundleResponse>) => void, onError: (err: ErrorEventPayload) => void }
-    ),
+        callbacks: {
+            onSuccess: (response: Event<SendMigrationBundleResponse>) => void
+            onError: (err: ErrorEventPayload) => void
+        }
+    )
+    getMigrationAddress(
+        prompt: boolean,
+        accountIndex: number,
+        callbacks: {
+            onSuccess: (response: Event<GetMigrationAddressResponse>) => void
+            onError: (err: ErrorEventPayload) => void
+        }
+    )
+    mineBundle(
+        bundle: string[],
+        spentBundleHashes: string[],
+        securityLevel: number,
+        timeout: number,
+        offset: number,
+        callbacks: {
+            onSuccess: (response: Event<{ bundle: string[]; crackability: number }>) => void
+            onError: (err: ErrorEventPayload) => void
+        }
+    )
+    getLedgerMigrationData(
+        addresses: AddressInput[],
+        nodes: string[],
+        permanode: string,
+        securityLevel: number,
+        callbacks: { onSuccess: (response: Event<MigrationData>) => void; onError: (err: ErrorEventPayload) => void }
+    )
+    sendLedgerMigrationBundle(
+        node: string[],
+        bundle: string[],
+        mwm: number,
+        callbacks: {
+            onSuccess: (response: Event<SendMigrationBundleResponse>) => void
+            onError: (err: ErrorEventPayload) => void
+        }
+    )
+    getLedgerDeviceStatus(
+        ledgerSimulator: boolean,
+        callbacks: { onSuccess: (response: Event<LedgerStatus>) => void; onError: (err: ErrorEventPayload) => void }
+    )
+    getLegacyAddressChecksum(
+        address: string,
+        callbacks: { onSuccess: (response: Event<string>) => void; onError: (err: ErrorEventPayload) => void }
+    )
 } = window['__WALLET_API__']
 
-export const getWalletStoragePath = (appPath: string): string => {
-    return `${appPath}/${WALLET_STORAGE_DIRECTORY}/`
-}
+export const getWalletStoragePath = (appPath: string): string => `${appPath}/${WALLET_STORAGE_DIRECTORY}/`
 
-export const getStoragePath = (appPath: string, profileName: string): string => {
-    return `${getWalletStoragePath(appPath)}${profileName}`
-}
+export const getStoragePath = (appPath: string, profileName: string): string =>
+    `${getWalletStoragePath(appPath)}${profileName}`
 
 export const initialise = (id: string, storagePath: string): void => {
     if (Object.keys(actors).length > 0) {
-        console.error("Initialise called when another actor already initialised")
+        console.error('Initialise called when another actor already initialised')
     }
     const actor: Actor = window['__WALLET_INIT__'].run(id, storagePath)
 
@@ -244,16 +402,17 @@ export const initialise = (id: string, storagePath: string): void => {
 
 /**
  * Removes event listeners for active actor
- * 
+ *
  * @method removeEventListeners
- * 
- * @param {string} id 
- * 
+ *
+ * @param {string} id
+ *
  * @returns {void}
  */
 export const removeEventListeners = (id: string): void => {
+    didInitialiseMigrationListeners.set(false)
     actors[id].removeEventListeners()
-};
+}
 
 /**
  * Destroys an actor & remove it from actors state
@@ -279,7 +438,7 @@ export const destroyActor = (id: string): void => {
 /**
  * Generate BIP39 Mnemonic Recovery Phrase
  */
-export const generateRecoveryPhrase = (): Promise<string[]> =>
+export const generateRecoveryPhrase = (): Promise<RecoveryPhrase> =>
     new Promise((resolve, reject) => {
         api.generateMnemonic({
             onSuccess(response) {
@@ -291,23 +450,23 @@ export const generateRecoveryPhrase = (): Promise<string[]> =>
         })
     })
 
-export const requestMnemonic = async () => {
-    let recoveryPhrase = await generateRecoveryPhrase()
+export const requestMnemonic = async (): Promise<RecoveryPhrase> => {
+    const recoveryPhrase = await generateRecoveryPhrase()
     mnemonic.set(recoveryPhrase)
     return recoveryPhrase
 }
 
 /**
  * Get legacy seed checksum
- * 
+ *
  * @method asyncGetLegacySeedChecksum
- * 
+ *
  * @param {string} seed
- *  
+ *
  * @returns {Promise<Event<string>>}
  */
-export const asyncGetLegacySeedChecksum = (seed: string): Promise<string> => {
-    return new Promise<string>((resolve, reject) => {
+export const asyncGetLegacySeedChecksum = (seed: string): Promise<string> =>
+    new Promise<string>((resolve, reject) => {
         api.getLegacySeedChecksum(seed, {
             onSuccess(response) {
                 resolve(response.payload)
@@ -317,10 +476,9 @@ export const asyncGetLegacySeedChecksum = (seed: string): Promise<string> => {
             },
         })
     })
-}
 
-export const asyncSetStrongholdPassword = (password) => {
-    return new Promise<void>((resolve, reject) => {
+export const asyncSetStrongholdPassword = (password: string): Promise<void> =>
+    new Promise<void>((resolve, reject) => {
         api.setStrongholdPassword(password, {
             onSuccess() {
                 resolve()
@@ -330,10 +488,9 @@ export const asyncSetStrongholdPassword = (password) => {
             },
         })
     })
-}
 
-export const asyncChangeStrongholdPassword = (currentPassword, newPassword) => {
-    return new Promise<void>((resolve, reject) => {
+export const asyncChangeStrongholdPassword = (currentPassword: string, newPassword: string): Promise<void> =>
+    new Promise<void>((resolve, reject) => {
         api.changeStrongholdPassword(currentPassword, newPassword, {
             onSuccess() {
                 resolve()
@@ -343,10 +500,9 @@ export const asyncChangeStrongholdPassword = (currentPassword, newPassword) => {
             },
         })
     })
-}
 
-export const asyncStoreMnemonic = (mnemonic) => {
-    return new Promise<void>((resolve, reject) => {
+export const asyncStoreMnemonic = (mnemonic: string): Promise<void> =>
+    new Promise<void>((resolve, reject) => {
         api.storeMnemonic(mnemonic, {
             onSuccess() {
                 resolve()
@@ -356,10 +512,9 @@ export const asyncStoreMnemonic = (mnemonic) => {
             },
         })
     })
-}
 
-export const asyncVerifyMnemonic = (mnemonic) => {
-    return new Promise<void>((resolve, reject) => {
+export const asyncVerifyMnemonic = (mnemonic: string): Promise<void> =>
+    new Promise<void>((resolve, reject) => {
         api.verifyMnemonic(mnemonic, {
             onSuccess() {
                 resolve()
@@ -369,10 +524,9 @@ export const asyncVerifyMnemonic = (mnemonic) => {
             },
         })
     })
-}
 
-export const asyncBackup = (dest: string, password: string) => {
-    return new Promise<void>((resolve, reject) => {
+export const asyncBackup = (dest: string, password: string): Promise<void> =>
+    new Promise<void>((resolve, reject) => {
         api.backup(dest, password, {
             onSuccess() {
                 resolve()
@@ -382,10 +536,9 @@ export const asyncBackup = (dest: string, password: string) => {
             },
         })
     })
-}
 
-export const asyncSetStoragePassword = (password) => {
-    return new Promise<void>((resolve, reject) => {
+export const asyncSetStoragePassword = (password: string): Promise<void> =>
+    new Promise<void>((resolve, reject) => {
         api.setStoragePassword(password, {
             onSuccess() {
                 resolve()
@@ -395,10 +548,9 @@ export const asyncSetStoragePassword = (password) => {
             },
         })
     })
-}
 
-export const asyncRestoreBackup = (importFilePath, password) => {
-    return new Promise<void>((resolve, reject) => {
+export const asyncRestoreBackup = (importFilePath: string, password: string): Promise<void> =>
+    new Promise<void>((resolve, reject) => {
         api.restoreBackup(importFilePath, password, {
             onSuccess() {
                 resolve()
@@ -408,10 +560,9 @@ export const asyncRestoreBackup = (importFilePath, password) => {
             },
         })
     })
-}
 
-export const asyncCreateAccount = () => {
-    return new Promise<void>((resolve, reject) => {
+export const asyncCreateAccount = (): Promise<void> =>
+    new Promise<void>((resolve, reject) => {
         const officialNodes = getOfficialNodes()
         const officialNetwork = getOfficialNetwork()
         api.createAccount(
@@ -420,9 +571,9 @@ export const asyncCreateAccount = () => {
                 clientOptions: {
                     nodes: officialNodes,
                     node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
-                    network: officialNetwork
+                    network: officialNetwork,
                 },
-                alias: `${localize('general.account')} 1`
+                alias: `${localize('general.account')} 1`,
             },
             {
                 onSuccess() {
@@ -434,10 +585,9 @@ export const asyncCreateAccount = () => {
             }
         )
     })
-}
 
-export const asyncRemoveStorage = () => {
-    return new Promise<void>((resolve, reject) => {
+export const asyncRemoveStorage = (): Promise<void> =>
+    new Promise<void>((resolve, reject) => {
         api.removeStorage({
             onSuccess() {
                 resolve()
@@ -447,19 +597,23 @@ export const asyncRemoveStorage = () => {
             },
         })
     })
-}
 
-export const asyncSyncAccounts = (addressIndex?, gapLimit?, accountDiscoveryThreshold?, showErrorNotification = true) => {
-    return new Promise<void>((resolve, reject) => {
+export const asyncSyncAccounts = (
+    addressIndex?: number,
+    gapLimit?: number,
+    accountDiscoveryThreshold?: number,
+    showErrorNotification = true
+): Promise<void> =>
+    new Promise<void>((resolve, reject) => {
         isSyncing.set(true)
 
         api.syncAccounts(addressIndex, gapLimit, accountDiscoveryThreshold, {
             onSuccess(response) {
                 const syncedAccounts = response.payload
 
-                const firstAccount = syncedAccounts.find(account => account.index === 0)
-
-                processMigratedTransactions(firstAccount.id, firstAccount.messages, firstAccount.addresses)
+                syncedAccounts.forEach((account) => {
+                    processMigratedTransactions(account.id, account.messages, account.addresses)
+                })
 
                 updateAccounts(syncedAccounts)
 
@@ -471,10 +625,15 @@ export const asyncSyncAccounts = (addressIndex?, gapLimit?, accountDiscoveryThre
                 isSyncing.set(false)
 
                 if (showErrorNotification) {
-                    showAppNotification({
-                        type: 'error',
-                        message: localize(err.error),
-                    })
+                    if (get(isLedgerProfile)) {
+                        displayNotificationForLedgerProfile('error', true, true, false, false, err)
+                    } else {
+                        showAppNotification({
+                            type: 'error',
+                            message: localize(err.error),
+                        })
+                    }
+
                     resolve()
                 } else {
                     reject(err)
@@ -482,11 +641,10 @@ export const asyncSyncAccounts = (addressIndex?, gapLimit?, accountDiscoveryThre
             },
         })
     })
-}
 
-export const asyncGetNodeInfo = (accountId, url) => {
-    return new Promise<NodeInfo>((resolve, reject) => {
-        api.getNodeInfo(accountId, url, {
+export const asyncGetNodeInfo = (accountId: string, url?: string, auth?: NodeAuth): Promise<NodeInfo> =>
+    new Promise<NodeInfo>((resolve, reject) => {
+        api.getNodeInfo(accountId, url, auth, {
             onSuccess(response) {
                 resolve(response.payload)
             },
@@ -495,7 +653,6 @@ export const asyncGetNodeInfo = (accountId, url) => {
             },
         })
     })
-}
 
 /**
  * Initialises event listeners from wallet library
@@ -504,7 +661,7 @@ export const asyncGetNodeInfo = (accountId, url) => {
  *
  * @returns {void}
  */
-export const initialiseListeners = () => {
+export const initialiseListeners = (): void => {
     /**
      * Event listener for stronghold status change
      */
@@ -522,42 +679,49 @@ export const initialiseListeners = () => {
      */
     api.onNewTransaction({
         onSuccess(response) {
-            const accounts = get(wallet).accounts
+            const { accounts } = get(wallet)
             const account = get(accounts).find((account) => account.id === response.payload.accountId)
-            const message = response.payload.message
+            const { message } = response.payload
 
             if (message.payload.type === 'Transaction') {
-                const essence = message.payload.data.essence
+                const { essence } = message.payload.data
 
                 if (!essence.data.internal) {
-                    const { balanceOverview } = get(wallet);
-                    const overview = get(balanceOverview);
+                    const { balanceOverview } = get(wallet)
+                    const overview = get(balanceOverview)
 
-                    const incoming = essence.data.incoming ? overview.incomingRaw + essence.data.value : overview.incomingRaw;
-                    const outgoing = essence.data.incoming ? overview.outgoingRaw : overview.outgoingRaw + essence.data.value;
+                    const incoming = essence.data.incoming
+                        ? overview.incomingRaw + essence.data.value
+                        : overview.incomingRaw
+                    const outgoing = essence.data.incoming
+                        ? overview.outgoingRaw
+                        : overview.outgoingRaw + essence.data.value
 
-                    updateBalanceOverview(
-                        overview.balanceRaw,
-                        incoming,
-                        outgoing
-                    );
+                    updateBalanceOverview(overview.balanceRaw, incoming, outgoing)
                 }
 
                 // Update account with new message
-                saveNewMessage(response.payload.accountId, response.payload.message);
+                saveNewMessage(response.payload.accountId, response.payload.message)
 
                 const notificationMessage = localize('notifications.valueTx')
                     .replace('{{value}}', formatUnitBestMatch(message.payload.data.essence.data.value, true, 3))
-                    .replace('{{account}}', account.alias);
+                    .replace('{{account}}', account.alias)
 
-                showSystemNotification({ type: "info", message: notificationMessage, contextData: { type: "valueTx", accountId: account.id } });
+                showSystemNotification({
+                    type: 'info',
+                    message: notificationMessage,
+                    contextData: { type: 'valueTx', accountId: account.id },
+                })
             } else if (message.payload.type === 'Milestone') {
                 // Update account with new message
-                saveNewMessage(response.payload.accountId, response.payload.message);
-                processMigratedTransactions(response.payload.accountId, [response.payload.message],
+                saveNewMessage(response.payload.accountId, response.payload.message)
+                processMigratedTransactions(
+                    response.payload.accountId,
+                    [response.payload.message],
 
                     // New transaction will only emit an event for fluid migrations
-                    [])
+                    []
+                )
             }
         },
         onError(error) {
@@ -570,12 +734,12 @@ export const initialiseListeners = () => {
      */
     api.onConfirmationStateChange({
         onSuccess(response) {
-            const accounts = get(wallet).accounts
-            const message = response.payload.message
+            const { accounts } = get(wallet)
+            const { message } = response.payload
 
             if (message.payload.type === 'Transaction') {
-                const confirmed = response.payload.confirmed;
-                const essence = message.payload.data.essence
+                const { confirmed } = response.payload
+                const { essence } = message.payload.data
 
                 let account1
                 let account2
@@ -597,17 +761,17 @@ export const initialiseListeners = () => {
 
                 // If this is a confirmation of a regular transfer update the balance overview
                 if (confirmed && !essence.data.internal) {
-                    const { balanceOverview } = get(wallet);
-                    const overview = get(balanceOverview);
+                    const { balanceOverview } = get(wallet)
+                    const overview = get(balanceOverview)
 
-                    const incoming = essence.data.incoming ? overview.incomingRaw + essence.data.value : overview.incomingRaw;
-                    const outgoing = essence.data.incoming ? overview.outgoingRaw : overview.outgoingRaw + essence.data.value;
+                    const incoming = essence.data.incoming
+                        ? overview.incomingRaw + essence.data.value
+                        : overview.incomingRaw
+                    const outgoing = essence.data.incoming
+                        ? overview.outgoingRaw
+                        : overview.outgoingRaw + essence.data.value
 
-                    updateBalanceOverview(
-                        overview.balanceRaw,
-                        incoming,
-                        outgoing
-                    );
+                    updateBalanceOverview(overview.balanceRaw, incoming, outgoing)
                 }
 
                 // Update the confirmation state of all messages with this id
@@ -616,7 +780,7 @@ export const initialiseListeners = () => {
                 // If the state has changed then display a notification
                 // but only for transactions not migrations
                 if (confirmationChanged && message.payload.type === 'Transaction') {
-                    const tx = message.payload as Transaction
+                    const tx = message.payload
                     const messageKey = confirmed ? 'confirmed' : 'failed'
 
                     const _notify = (accountTo: string | null = null) => {
@@ -633,8 +797,10 @@ export const initialiseListeners = () => {
                                 // have the account info it is most likely that someone logged
                                 // out before an internal transfer completed so the internalTransfersInProgress
                                 // was wiped, display the anonymous account message instead
-                                notificationMessage = localize(`notifications.confirmedInternalNoAccounts`)
-                                    .replace('{{value}}', formatUnitBestMatch(tx.data.essence.data.value, true, 3))
+                                notificationMessage = localize('notifications.confirmedInternalNoAccounts').replace(
+                                    '{{value}}',
+                                    formatUnitBestMatch(tx.data.essence.data.value, true, 3)
+                                )
                             } else {
                                 notificationMessage = localize(`notifications.${messageKey}`)
                                     .replace('{{value}}', formatUnitBestMatch(tx.data.essence.data.value, true, 3))
@@ -642,7 +808,11 @@ export const initialiseListeners = () => {
                             }
                         }
 
-                        showSystemNotification({ type: "info", message: notificationMessage, contextData: { type: messageKey, accountId: account1.id } });
+                        showSystemNotification({
+                            type: 'info',
+                            message: notificationMessage,
+                            contextData: { type: messageKey, accountId: account1.id },
+                        })
                     }
 
                     // If this event is emitted because a message failed, then this message will only exist on the sender account
@@ -652,7 +822,7 @@ export const initialiseListeners = () => {
                     } else {
                         // If we have 2 accounts this was an internal transfer
                         if (account1 && account2) {
-                            _notify(account2.alias);
+                            _notify(account2.alias)
                         } else {
                             _notify()
                         }
@@ -670,25 +840,23 @@ export const initialiseListeners = () => {
      */
     api.onBalanceChange({
         onSuccess(response) {
-            const { payload: { accountId, address, balanceChange, messageId } } = response;
+            const {
+                payload: { accountId, address, balanceChange, messageId },
+            } = response
 
             updateAccountAfterBalanceChange(accountId, address, balanceChange.received, balanceChange.spent)
 
-            const { balanceOverview } = get(wallet);
-            const overview = get(balanceOverview);
+            const { balanceOverview } = get(wallet)
+            const overview = get(balanceOverview)
 
             const balance = overview.balanceRaw - balanceChange.spent + balanceChange.received
 
-            updateBalanceOverview(balance, overview.incomingRaw, overview.outgoingRaw);
+            updateBalanceOverview(balance, overview.incomingRaw, overview.outgoingRaw)
 
             // Migration
             if (messageId === '0'.repeat(64)) {
-                updateProfile(
-                    'migratedTransactions',
-                    []
-                )
+                updateProfile('migratedTransactions', [])
             }
-
         },
         onError(error) {
             console.error(error)
@@ -701,7 +869,7 @@ export const initialiseListeners = () => {
     api.onReattachment({
         onSuccess(response) {
             // Replace original message with reattachment
-            replaceMessage(response.payload.accountId, response.payload.reattachedMessageId, response.payload.message);
+            replaceMessage(response.payload.accountId, response.payload.reattachedMessageId, response.payload.message)
         },
         onError(error) {
             console.error(error)
@@ -713,41 +881,71 @@ export const initialiseListeners = () => {
      */
     api.onTransferProgress({
         onSuccess(response) {
-            transferState.set(response.payload.event.type)
+            const { event } = response.payload
+            if ('type' in event) {
+                transferState.set({
+                    type: event.type,
+                    data: { ...event },
+                })
+            }
         },
         onError(error) {
             console.error(error)
-        }
+        },
+    })
+
+    /**
+     * Event listener for Ledger receive address generation
+     */
+    api.onLedgerAddressGeneration({
+        onSuccess(response) {
+            const { event } = response.payload
+            openPopup({
+                type: 'ledgerAddress',
+                hideClose: true,
+                preventClose: true,
+                props: {
+                    address: event.address,
+                },
+            })
+        },
+        onError(error) {
+            console.error(error)
+        },
     })
 }
 
 const updateAllMessagesState = (accounts, messageId, confirmation) => {
     let confirmationHasChanged = false
 
-    accounts.update((storedAccounts) => {
-        return storedAccounts.map((storedAccount) => {
-            return Object.assign<WalletAccount, Partial<WalletAccount>, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
-                messages: storedAccount.messages.map((_message: Message) => {
-                    if (_message.id === messageId) {
-                        confirmationHasChanged = _message.confirmed !== confirmation
-                        _message.confirmed = confirmation
-                    }
-                    return _message
-                })
-            })
-        })
-    })
+    accounts.update((storedAccounts) =>
+        storedAccounts.map((storedAccount) =>
+            Object.assign<WalletAccount, Partial<WalletAccount>, Partial<WalletAccount>>(
+                {} as WalletAccount,
+                storedAccount,
+                {
+                    messages: storedAccount.messages.map((_message: Message) => {
+                        if (_message.id === messageId) {
+                            confirmationHasChanged = _message.confirmed !== confirmation
+                            _message.confirmed = confirmation
+                        }
+                        return _message
+                    }),
+                }
+            )
+        )
+    )
 
     return confirmationHasChanged
 }
 
 /**
  * Updates account information after balance change
- * 
+ *
  * @method updateAccountAfterBalanceChange
- * 
- * @param {string} accountId 
- * @param {Address} addressMeta 
+ *
+ * @param {string} accountId
+ * @param {Address} addressMeta
  */
 export const updateAccountAfterBalanceChange = (
     accountId: string,
@@ -755,24 +953,26 @@ export const updateAccountAfterBalanceChange = (
     receivedBalance: number,
     spentBalance: number
 ): void => {
-    const { accounts } = get(wallet);
+    const { accounts } = get(wallet)
 
-    accounts.update((storedAccounts) => {
-        return storedAccounts.map((storedAccount) => {
+    accounts.update((storedAccounts) =>
+        storedAccounts.map((storedAccount) => {
             if (storedAccount.id === accountId) {
-                const rawIotaBalance = storedAccount.rawIotaBalance - spentBalance + receivedBalance;
+                const rawIotaBalance = storedAccount.rawIotaBalance - spentBalance + receivedBalance
 
-                const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD;
+                const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD
 
                 let updatedAddress = false
                 const updatedAccount = Object.assign<WalletAccount, Partial<WalletAccount>>(storedAccount, {
                     rawIotaBalance,
                     balance: formatUnitBestMatch(rawIotaBalance, true, 3),
-                    balanceEquiv: formatCurrency(convertToFiat(
-                        rawIotaBalance,
-                        get(currencies)[CurrencyTypes.USD],
-                        get(exchangeRates)[activeCurrency]
-                    )),
+                    balanceEquiv: formatCurrency(
+                        convertToFiat(
+                            rawIotaBalance,
+                            get(currencies)[CurrencyTypes.USD],
+                            get(exchangeRates)[activeCurrency]
+                        )
+                    ),
                     addresses: storedAccount.addresses.map((_address: Address) => {
                         if (_address.address === address) {
                             _address.balance += receivedBalance - spentBalance
@@ -780,7 +980,7 @@ export const updateAccountAfterBalanceChange = (
                         }
 
                         return _address
-                    })
+                    }),
                 })
 
                 // The address could not be found in our current list of addresses
@@ -790,7 +990,7 @@ export const updateAccountAfterBalanceChange = (
                         onSuccess(accountsResponse) {
                             const ac = accountsResponse.payload.find((a) => a.id === accountId)
                             if (ac) {
-                                const addr = ac.addresses.find(ad => ad.address === address)
+                                const addr = ac.addresses.find((ad) => ad.address === address)
                                 if (addr) {
                                     updatedAccount.addresses.push(addr)
                                 }
@@ -806,71 +1006,77 @@ export const updateAccountAfterBalanceChange = (
                 return updatedAccount
             }
 
-            return storedAccount;
+            return storedAccount
         })
-    })
+    )
 }
 
-/** 
+/**
  * @method saveNewMessage
- * 
- * @param {string} accountId 
+ *
+ * @param {string} accountId
  * @param {Message} message
- * 
- * @returns {void} 
+ *
+ * @returns {void}
  */
 export const saveNewMessage = (accountId: string, message: Message): void => {
     const { accounts } = get(wallet)
 
     const messageIncoming = getIncomingFlag(message.payload)
 
-    accounts.update((storedAccounts) => {
-        return storedAccounts.map((storedAccount: WalletAccount) => {
+    accounts.update((storedAccounts) =>
+        storedAccounts.map((storedAccount: WalletAccount) => {
             if (storedAccount.id === accountId) {
-                const hasMessage = storedAccount.messages.some(m => m.id === message.id && getIncomingFlag(m.payload) === messageIncoming)
+                const hasMessage = storedAccount.messages.some(
+                    (m) => m.id === message.id && getIncomingFlag(m.payload) === messageIncoming
+                )
 
                 if (!hasMessage) {
                     storedAccount.messages.push(message)
                 }
             }
 
-            return storedAccount;
+            return storedAccount
         })
-    })
-};
+    )
+}
 
-/** 
+/**
  * @method replaceMessage
- * 
- * @param {string} accountId 
+ *
+ * @param {string} accountId
  * @param {string} messageId
  * @param {Message} newMessage
- * 
- * @returns {void} 
+ *
+ * @returns {void}
  */
 export const replaceMessage = (accountId: string, messageId: string, newMessage: Message): void => {
     const { accounts } = get(wallet)
 
     const messageIncoming = getIncomingFlag(newMessage.payload)
 
-    accounts.update((storedAccounts) => {
-        return storedAccounts.map((storedAccount: WalletAccount) => {
+    accounts.update((storedAccounts) =>
+        storedAccounts.map((storedAccount: WalletAccount) => {
             if (storedAccount.id === accountId) {
-                return Object.assign<WalletAccount, Partial<WalletAccount>, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
-                    messages: storedAccount.messages.map((_message) => {
-                        if (_message.id === messageId && getIncomingFlag(_message.payload) === messageIncoming) {
-                            return newMessage;
-                        }
+                return Object.assign<WalletAccount, Partial<WalletAccount>, Partial<WalletAccount>>(
+                    {} as WalletAccount,
+                    storedAccount,
+                    {
+                        messages: storedAccount.messages.map((_message) => {
+                            if (_message.id === messageId && getIncomingFlag(_message.payload) === messageIncoming) {
+                                return newMessage
+                            }
 
-                        return _message;
-                    })
-                })
+                            return _message
+                        }),
+                    }
+                )
             }
 
-            return storedAccount;
+            return storedAccount
         })
-    })
-};
+    )
+}
 
 /**
  * Gets the account messages. Appends account index and sort the message list.
@@ -884,26 +1090,25 @@ export const replaceMessage = (accountId: string, messageId: string, newMessage:
 export const getAccountMessages = (account: WalletAccount): AccountMessage[] => {
     const messages: {
         [key: string]: AccountMessage
-    } = {};
+    } = {}
 
     account.messages.forEach((message) => {
         let extraId = ''
-        if (message.payload?.type === "Transaction") {
+        if (message.payload?.type === 'Transaction') {
             extraId = getIncomingFlag(message.payload) ? 'in' : 'out'
         }
         messages[message.id + extraId] = {
             ...message,
-            account: account.index
+            account: account.index,
         }
     })
 
-    return Object.values(messages)
-        .sort((a, b) => {
-            if (a.id === b.id && a.payload?.type == "Transaction") {
-                return getIncomingFlag(a.payload) ? -1 : 1
-            }
-            return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
-        })
+    return Object.values(messages).sort((a, b) => {
+        if (a.id === b.id && a.payload?.type == 'Transaction') {
+            return getIncomingFlag(a.payload) ? -1 : 1
+        }
+        return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+    })
 }
 
 /**
@@ -919,24 +1124,24 @@ export const getAccountMessages = (account: WalletAccount): AccountMessage[] => 
 export const getTransactions = (accounts: WalletAccount[], count = 10): AccountMessage[] => {
     const messages: {
         [key: string]: AccountMessage
-    } = {};
+    } = {}
 
     accounts.forEach((account) => {
         account.messages.forEach((message) => {
             let extraId = ''
-            if (message.payload?.type === "Transaction") {
+            if (message.payload?.type === 'Transaction') {
                 extraId = getIncomingFlag(message.payload) ? 'in' : 'out'
             }
             messages[account.index + message.id + extraId] = {
                 ...message,
-                account: account.index
+                account: account.index,
             }
         })
-    });
+    })
 
     return Object.values(messages)
         .sort((a, b) => {
-            if (a.id === b.id && a.payload.type == "Transaction") {
+            if (a.id === b.id && a.payload.type == 'Transaction') {
                 return getIncomingFlag(a.payload) ? -1 : 1
             }
             return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
@@ -956,26 +1161,24 @@ export const getTransactions = (accounts: WalletAccount[], count = 10): AccountM
  * @returns {void}
  */
 export const updateBalanceOverview = (balance: number, incoming: number, outgoing: number): void => {
-    const { balanceOverview } = get(wallet);
+    const { balanceOverview } = get(wallet)
 
-    const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD;
+    const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD
 
-    balanceOverview.update((overview) => {
-        return Object.assign<BalanceOverview, BalanceOverview, Partial<BalanceOverview>>({} as BalanceOverview, overview, {
+    balanceOverview.update((overview) =>
+        Object.assign<BalanceOverview, BalanceOverview, Partial<BalanceOverview>>({} as BalanceOverview, overview, {
             incoming: formatUnitBestMatch(incoming, true, 3),
             incomingRaw: incoming,
             outgoing: formatUnitBestMatch(outgoing, true, 3),
             outgoingRaw: outgoing,
             balance: formatUnitBestMatch(balance, true, 3),
             balanceRaw: balance,
-            balanceFiat: formatCurrency(convertToFiat(
-                balance,
-                get(currencies)[CurrencyTypes.USD],
-                get(exchangeRates)[activeCurrency]
-            )),
-        });
-    });
-};
+            balanceFiat: formatCurrency(
+                convertToFiat(balance, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[activeCurrency])
+            ),
+        })
+    )
+}
 
 /**
  * Updates balance overview fiat value
@@ -985,34 +1188,37 @@ export const updateBalanceOverview = (balance: number, incoming: number, outgoin
  * @returns {void}
  */
 export const refreshBalanceOverview = (): void => {
-    const { balanceOverview } = get(wallet);
+    const { balanceOverview } = get(wallet)
     const bo = get(balanceOverview)
     updateBalanceOverview(bo.balanceRaw, bo.incomingRaw, bo.outgoingRaw)
 }
 
 /**
-* Updates accounts information after a successful sync accounts operation
-*
-* @method updateAccounts
-*
-* @param {SyncedAccount[]} syncedAccounts
-*
-* @returns {void}
-*/
+ * Updates accounts information after a successful sync accounts operation
+ *
+ * @method updateAccounts
+ *
+ * @param {SyncedAccount[]} syncedAccounts
+ *
+ * @returns {void}
+ */
 export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
     const { accounts } = get(wallet)
 
     const existingAccountIds = get(accounts).map((account) => account.id)
 
-    const { newAccounts, existingAccounts } = syncedAccounts.reduce((acc, syncedAccount: SyncedAccount) => {
-        if (existingAccountIds.includes(syncedAccount.id)) {
-            acc.existingAccounts.push(syncedAccount);
-        } else {
-            acc.newAccounts.push(syncedAccount);
-        }
+    const { newAccounts, existingAccounts } = syncedAccounts.reduce(
+        (acc, syncedAccount: SyncedAccount) => {
+            if (existingAccountIds.includes(syncedAccount.id)) {
+                acc.existingAccounts.push(syncedAccount)
+            } else {
+                acc.newAccounts.push(syncedAccount)
+            }
 
-        return acc;
-    }, { newAccounts: [], existingAccounts: [] })
+            return acc
+        },
+        { newAccounts: [], existingAccounts: [] }
+    )
 
     const updatedStoredAccounts = get(accounts).map((storedAccount) => {
         const syncedAccount = existingAccounts.find((_account) => _account.id === storedAccount.id)
@@ -1023,7 +1229,7 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
         // If we have received a new address, simply add it;
         // If we have received an existing address, update the properties.
         for (const addr of syncedAccount.addresses) {
-            const addressIndex = storedAccount.addresses.findIndex(a => a.address === addr.address)
+            const addressIndex = storedAccount.addresses.findIndex((a) => a.address === addr.address)
             if (addressIndex < 0) {
                 storedAccount.addresses.push(addr)
             } else {
@@ -1034,7 +1240,9 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
         // If we have received a new message, simply add it;
         // If we have received an existing message, update the properties.
         for (const msg of syncedAccount.messages) {
-            const msgIndex = storedAccount.messages.findIndex(m => m.id === msg.id && getIncomingFlag(m.payload) === getIncomingFlag(msg.payload))
+            const msgIndex = storedAccount.messages.findIndex(
+                (m) => m.id === msg.id && getIncomingFlag(m.payload) === getIncomingFlag(msg.payload)
+            )
             if (msgIndex < 0) {
                 storedAccount.messages.push(msg)
             } else {
@@ -1062,15 +1270,20 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
                     totalBalance.incoming += meta.incoming
                     totalBalance.outgoing += meta.outgoing
 
-                    const account = prepareAccountInfo(Object.assign<
-                        WalletAccount, WalletAccount, Partial<WalletAccount>
-                    >({} as WalletAccount, newAccount, {
-                        alias: `${localize('general.account')} ${newAccount.index + 1}`,
-                        clientOptions: existingAccounts[0].clientOptions,
-                        createdAt: new Date().toISOString(),
-                        signerType: existingAccounts[0].signerType,
-                        depositAddress: newAccount.depositAddress.address
-                    }), meta)
+                    const account = prepareAccountInfo(
+                        Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
+                            {} as WalletAccount,
+                            newAccount,
+                            {
+                                alias: `${localize('general.account')} ${newAccount.index + 1}`,
+                                clientOptions: existingAccounts[0]?.clientOptions,
+                                createdAt: new Date().toISOString(),
+                                signerType: existingAccounts[0]?.signerType,
+                                depositAddress: newAccount.depositAddress.address,
+                            }
+                        ),
+                        meta
+                    )
 
                     _accounts.push(account)
                 } else {
@@ -1079,12 +1292,10 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
 
                 completeCount++
                 if (completeCount === newAccounts.length) {
-                    const { balanceOverview } = get(wallet);
-                    const overview = get(balanceOverview);
+                    const { balanceOverview } = get(wallet)
+                    const overview = get(balanceOverview)
 
-                    accounts.update(() => {
-                        return [...updatedStoredAccounts, ..._accounts].sort((a, b) => a.index - b.index)
-                    })
+                    accounts.update(() => [...updatedStoredAccounts, ..._accounts].sort((a, b) => a.index - b.index))
 
                     updateBalanceOverview(
                         overview.balanceRaw + totalBalance.balance,
@@ -1092,13 +1303,12 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
                         overview.outgoingRaw + totalBalance.outgoing
                     )
                 }
-
             })
         }
     } else {
-        accounts.update(() => updatedStoredAccounts.sort((a, b) => a.index - b.index));
+        accounts.update(() => updatedStoredAccounts.sort((a, b) => a.index - b.index))
     }
-};
+}
 
 /**
  * Updates balance fiat value for every account
@@ -1110,16 +1320,18 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
 export const updateAccountsBalanceEquiv = (): void => {
     const { accounts } = get(wallet)
 
-    const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD;
+    const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD
 
     accounts.update((storedAccounts) => {
         for (const storedAccount of storedAccounts) {
             storedAccount.balance = formatUnitBestMatch(storedAccount.rawIotaBalance, true, 3)
-            storedAccount.balanceEquiv = formatCurrency(convertToFiat(
-                storedAccount.rawIotaBalance,
-                get(currencies)[CurrencyTypes.USD],
-                get(exchangeRates)[activeCurrency]
-            ))
+            storedAccount.balanceEquiv = formatCurrency(
+                convertToFiat(
+                    storedAccount.rawIotaBalance,
+                    get(currencies)[CurrencyTypes.USD],
+                    get(exchangeRates)[activeCurrency]
+                )
+            )
         }
         return storedAccounts
     })
@@ -1136,29 +1348,30 @@ export const updateAccountsBalanceEquiv = (): void => {
  *
  */
 export const getAccountsBalanceHistory = (accounts: WalletAccount[], priceData: PriceData): AccountsBalanceHistory => {
-    let balanceHistory: AccountsBalanceHistory = {}
+    const balanceHistory: AccountsBalanceHistory = {}
     if (priceData && accounts) {
         accounts.forEach((account) => {
-            let accountBalanceHistory: BalanceHistory = {
+            const accountBalanceHistory: BalanceHistory = {
                 [HistoryDataProps.ONE_HOUR]: [],
                 [HistoryDataProps.TWENTY_FOUR_HOURS]: [],
                 [HistoryDataProps.SEVEN_DAYS]: [],
                 [HistoryDataProps.ONE_MONTH]: [],
             }
-            let messages: Message[] = account?.messages?.slice()
-                ?.filter((message) => message.payload && !isSelfTransaction(message.payload, account)) // Remove self transactions and messages with no payload
-                ?.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()) ?? [] // Sort messages from last to newest
+            const messages: Message[] =
+                account?.messages
+                    ?.slice()
+                    ?.filter((message) => message.payload && !isSelfTransaction(message.payload, account)) // Remove self transactions and messages with no payload
+                    ?.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()) ?? [] // Sort messages from last to newest
             // Calculate the variations for each account
-            var trackedBalance = account.rawIotaBalance;
-            let accountBalanceVariations = [{ balance: trackedBalance, timestamp: new Date().toString() }]
+            let trackedBalance = account.rawIotaBalance
+            const accountBalanceVariations = [{ balance: trackedBalance, timestamp: new Date().toString() }]
             messages.forEach((message) => {
-                const essence = message.payload.type === 'Transaction' &&
-                    message.payload.data.essence.data
+                const essence = message.payload.type === 'Transaction' && message.payload.data.essence.data
 
                 if (essence && essence.incoming) {
-                    trackedBalance -= essence.value || 0;
+                    trackedBalance -= essence.value || 0
                 } else {
-                    trackedBalance += essence.value || 0;
+                    trackedBalance += essence.value || 0
                 }
                 accountBalanceVariations.push({ balance: trackedBalance, timestamp: message.timestamp })
             })
@@ -1166,25 +1379,32 @@ export const getAccountsBalanceHistory = (accounts: WalletAccount[], priceData: 
             let balanceHistoryInTimeframe = []
             Object.entries(priceData[CurrencyTypes.USD]).forEach(([timeframe, data]) => {
                 // sort market data from newest to last
-                let sortedData = data.slice().sort((a, b) => b[0] - a[0])
+                const sortedData = data.slice().sort((a, b) => b[0] - a[0])
                 balanceHistoryInTimeframe = []
                 // if there are no balance variations
                 if (accountBalanceVariations.length === 1) {
-                    balanceHistoryInTimeframe = sortedData.map(_data => ({ timestamp: _data[0], balance: trackedBalance }))
-                }
-                else {
+                    balanceHistoryInTimeframe = sortedData.map((_data) => ({
+                        timestamp: _data[0],
+                        balance: trackedBalance,
+                    }))
+                } else {
                     let i = 0
                     sortedData.forEach((data) => {
-                        let marketTimestamp = new Date(data[0] * 1000).getTime()
+                        const marketTimestamp = new Date(data[0] * 1000).getTime()
                         // find balance for each market data timepstamp
                         for (i; i < accountBalanceVariations.length - 1; i++) {
-                            let currentBalanceTimestamp = new Date(accountBalanceVariations[i].timestamp).getTime()
-                            let nextBalanceTimestamp = new Date(accountBalanceVariations[i + 1].timestamp).getTime()
+                            const currentBalanceTimestamp = new Date(accountBalanceVariations[i].timestamp).getTime()
+                            const nextBalanceTimestamp = new Date(accountBalanceVariations[i + 1].timestamp).getTime()
                             if (marketTimestamp > nextBalanceTimestamp && marketTimestamp <= currentBalanceTimestamp) {
-                                balanceHistoryInTimeframe.push({ timestamp: data[0], balance: accountBalanceVariations[i].balance })
+                                balanceHistoryInTimeframe.push({
+                                    timestamp: data[0],
+                                    balance: accountBalanceVariations[i].balance,
+                                })
                                 return
-                            }
-                            else if (marketTimestamp <= nextBalanceTimestamp && i === (accountBalanceVariations.length - 2)) {
+                            } else if (
+                                marketTimestamp <= nextBalanceTimestamp &&
+                                i === accountBalanceVariations.length - 2
+                            ) {
                                 balanceHistoryInTimeframe.push({ timestamp: data[0], balance: 0 })
                                 return
                             }
@@ -1209,36 +1429,39 @@ export const getAccountsBalanceHistory = (accounts: WalletAccount[], priceData: 
  *
  */
 export const getWalletBalanceHistory = (accountsBalanceHistory: AccountsBalanceHistory): BalanceHistory => {
-    let balanceHistory: BalanceHistory = {
+    const balanceHistory: BalanceHistory = {
         [HistoryDataProps.ONE_HOUR]: [],
         [HistoryDataProps.TWENTY_FOUR_HOURS]: [],
         [HistoryDataProps.SEVEN_DAYS]: [],
         [HistoryDataProps.ONE_MONTH]: [],
     }
-    Object.values(accountsBalanceHistory).forEach(accBalanceHistory => {
+    Object.values(accountsBalanceHistory).forEach((accBalanceHistory) => {
         Object.entries(accBalanceHistory).forEach(([timeframe, data]) => {
             if (!balanceHistory[timeframe].length) {
                 balanceHistory[timeframe] = data
-            }
-            else {
-                balanceHistory[timeframe] = balanceHistory[timeframe].map(({ balance, timestamp }, index) =>
-                    ({ timestamp, balance: balance + data[index].balance })
-                )
+            } else {
+                balanceHistory[timeframe] = balanceHistory[timeframe].map(({ balance, timestamp }, index) => ({
+                    timestamp,
+                    balance: balance + data[index].balance,
+                }))
             }
         })
     })
     return balanceHistory
 }
 
-export const getAccountMeta = (accountId: string, callback: (
-    error: ErrorEventPayload,
-    meta?: {
-        balance: number
-        incoming: number
-        outgoing: number
-        depositAddress: string
-    }
-) => void) => {
+export const getAccountMeta = (
+    accountId: string,
+    callback: (
+        error: ErrorEventPayload,
+        meta?: {
+            balance: number
+            incoming: number
+            outgoing: number
+            depositAddress: string
+        }
+    ) => void
+): void => {
     api.getBalance(accountId, {
         onSuccess(balanceResponse) {
             api.latestAddress(accountId, {
@@ -1269,8 +1492,8 @@ export const prepareAccountInfo = (
         outgoing: number
         depositAddress: string
     }
-) => {
-    const { id, index, alias } = account
+): unknown => {
+    const { id, index, alias, signerType } = account
     const { balance, depositAddress } = meta
 
     const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD
@@ -1281,38 +1504,35 @@ export const prepareAccountInfo = (
         depositAddress,
         alias,
         rawIotaBalance: balance,
+        signerType,
         balance: formatUnitBestMatch(balance, true, 3),
-        balanceEquiv: formatCurrency(convertToFiat(
-            balance,
-            get(currencies)[CurrencyTypes.USD],
-            get(exchangeRates)[activeCurrency]
-        )),
+        balanceEquiv: formatCurrency(
+            convertToFiat(balance, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[activeCurrency])
+        ),
         color: ACCOUNT_COLORS[index % ACCOUNT_COLORS.length],
     })
 }
 
 export const processMigratedTransactions = (accountId: string, messages: Message[], addresses: Address[]): void => {
-    const accounts = get(wallet).accounts
+    const { accounts } = get(wallet)
 
     messages.forEach((message: Message) => {
         if (message.payload?.type === 'Milestone') {
-            const account = get(accounts).find((account) => account.id === accountId);
+            const account = get(accounts).find((account) => account.id === accountId)
 
-            // Only check migrated messages for first account as the migrated messages are sent there
-            if (account && account.index === 0) {
+            if (account) {
                 const _activeProfile = get(activeProfile)
 
                 if (_activeProfile.migratedTransactions && _activeProfile.migratedTransactions.length) {
-                    const funds = message.payload.data.essence.receipt.data.funds;
+                    const { funds } = message.payload.data.essence.receipt.data
 
                     const tailTransactionHashes = funds.map((fund) => fund.tailTransactionHash)
 
-                    const updatedMigratedTransactions = _activeProfile.migratedTransactions.filter((transaction) => !tailTransactionHashes.includes(transaction.tailTransactionHash))
-
-                    updateProfile(
-                        'migratedTransactions',
-                        updatedMigratedTransactions
+                    const updatedMigratedTransactions = _activeProfile.migratedTransactions.filter(
+                        (transaction) => !tailTransactionHashes.includes(transaction.tailTransactionHash)
                     )
+
+                    updateProfile('migratedTransactions', updatedMigratedTransactions)
                 }
             }
         }
@@ -1323,24 +1543,21 @@ export const processMigratedTransactions = (accountId: string, messages: Message
     if (_activeProfile.migratedTransactions && _activeProfile.migratedTransactions.length) {
         // For pre-snapshot migrations, there will be no messages
         addresses.forEach((address) => {
-            const outputs = address.outputs;
+            const { outputs } = address
 
             if (Object.values(outputs).some((output) => output.messageId === '0'.repeat(64))) {
-                updateProfile(
-                    'migratedTransactions',
-                    []
-                )
+                updateProfile('migratedTransactions', [])
             }
         })
     }
-
 }
-export const buildAccountNetworkSettings = () => {
-    let activeProfileSettings = get(activeProfile)?.settings
 
-    let automaticNodeSelection = activeProfileSettings?.automaticNodeSelection ?? true
-    let includeOfficialNodes = activeProfileSettings?.includeOfficialNodes ?? true
-    let disabledNodes = activeProfileSettings?.disabledNodes ?? []
+export const buildAccountNetworkSettings = (): unknown => {
+    const activeProfileSettings = get(activeProfile)?.settings
+
+    const automaticNodeSelection = activeProfileSettings?.automaticNodeSelection ?? true
+    const includeOfficialNodes = activeProfileSettings?.includeOfficialNodes ?? true
+    const disabledNodes = activeProfileSettings?.disabledNodes ?? []
 
     const { accounts } = get(wallet)
     const actualAccounts = get(accounts)
@@ -1351,7 +1568,7 @@ export const buildAccountNetworkSettings = () => {
     let localPow = true
 
     if (actualAccounts && actualAccounts.length > 0) {
-        const clientOptions = actualAccounts[0].clientOptions
+        const { clientOptions } = actualAccounts[0]
         if (clientOptions) {
             clientOptionNodes = clientOptions.nodes ?? []
             localPow = clientOptions.localPow ?? true
@@ -1365,7 +1582,7 @@ export const buildAccountNetworkSettings = () => {
     // If we are in automatic node selection make sure none of the offical nodes
     // are disabled
     if (automaticNodeSelection) {
-        officialNodes = officialNodes.map(o => ({ ...o, disabled: false }))
+        officialNodes = officialNodes.map((o) => ({ ...o, disabled: false }))
     }
 
     // First populate the nodes with the official ones if needed
@@ -1377,11 +1594,11 @@ export const buildAccountNetworkSettings = () => {
     // Now go through the nodes from the client options and add
     // any that were not in the official list, setting their custom flag as well
     for (const clientOptionNode of clientOptionNodes) {
-        if (!nodes.find(n => n.url == stripTrailingSlash(clientOptionNode.url))) {
+        if (!nodes.find((n) => n.url == stripTrailingSlash(clientOptionNode.url))) {
             clientOptionNode.isCustom = true
             nodes.push({
                 ...clientOptionNode,
-                url: stripTrailingSlash(clientOptionNode.url)
+                url: stripTrailingSlash(clientOptionNode.url),
             })
         }
     }
@@ -1391,7 +1608,7 @@ export const buildAccountNetworkSettings = () => {
     // as we may have been in automatic mode which disables all
     // non official nodes
     for (const disabledNode of disabledNodes) {
-        const foundNode = nodes.find(n => n.url === stripTrailingSlash(disabledNode))
+        const foundNode = nodes.find((n) => n.url === stripTrailingSlash(disabledNode))
         if (foundNode) {
             foundNode.disabled = true
         }
@@ -1400,8 +1617,8 @@ export const buildAccountNetworkSettings = () => {
     // If the primary node is not set or its not in the list
     // or in the list and disabled find the
     // first node from the list that is not disabled
-    const allEnabled = nodes.filter(n => !n.disabled)
-    if (allEnabled.length > 0 && (!primaryNodeUrl || !allEnabled.find(n => n.url === primaryNodeUrl))) {
+    const allEnabled = nodes.filter((n) => !n.disabled)
+    if (allEnabled.length > 0 && (!primaryNodeUrl || !allEnabled.find((n) => n.url === primaryNodeUrl))) {
         primaryNodeUrl = allEnabled[0].url
     }
 
@@ -1410,27 +1627,33 @@ export const buildAccountNetworkSettings = () => {
         includeOfficialNodes,
         nodes,
         primaryNodeUrl,
-        localPow
+        localPow,
     }
 }
 
-export const updateAccountNetworkSettings = async (automaticNodeSelection, includeOfficialNodes, nodes, primaryNodeUrl, localPow) => {
+export const updateAccountNetworkSettings = (
+    automaticNodeSelection: boolean,
+    includeOfficialNodes: boolean,
+    nodes: Node[],
+    primaryNodeUrl: string,
+    localPow: boolean
+): void => {
     updateProfile('settings.automaticNodeSelection', automaticNodeSelection)
     updateProfile('settings.includeOfficialNodes', includeOfficialNodes)
 
-    const disabledNodes = nodes.filter(n => n.disabled).map(n => n.url)
+    const disabledNodes = nodes.filter((n) => n.disabled).map((n) => n.url)
     updateProfile('settings.disabledNodes', disabledNodes)
 
     let clientNodes = []
     let officialNodes = getOfficialNodes()
 
     // Get the list of non official nodes
-    const nonOfficialNodes = nodes.filter(n => !officialNodes.find(d => d.url === n.url))
+    const nonOfficialNodes = nodes.filter((n) => !officialNodes.find((d) => d.url === n.url))
 
     // If we are in automatic node selection make sure none of the offical nodes
     // are disabled
     if (automaticNodeSelection) {
-        officialNodes = officialNodes.map(o => ({ ...o, disabled: false }))
+        officialNodes = officialNodes.map((o) => ({ ...o, disabled: false }))
     }
 
     // If we are in automatic mode, or including the official nodes in manual mode
@@ -1442,12 +1665,15 @@ export const updateAccountNetworkSettings = async (automaticNodeSelection, inclu
     // Now add back the non official nodes, if we are in automatic mode we should
     // disable them, otherwise retain their current disabled state
     if (nonOfficialNodes.length > 0) {
-        clientNodes = [...clientNodes, ...nonOfficialNodes.map(o => ({ ...o, disabled: automaticNodeSelection ? true : o.disabled }))]
+        clientNodes = [
+            ...clientNodes,
+            ...nonOfficialNodes.map((o) => ({ ...o, disabled: automaticNodeSelection ? true : o.disabled })),
+        ]
     }
 
     // Get all the enabled nodes and make sure the primary url is enabled
-    const allEnabled = clientNodes.filter(n => !n.disabled)
-    let clientNode = allEnabled.find(n => n.url === primaryNodeUrl)
+    const allEnabled = clientNodes.filter((n) => !n.disabled)
+    let clientNode = allEnabled.find((n) => n.url === primaryNodeUrl)
 
     if (!clientNode && allEnabled.length > 0) {
         clientNode = allEnabled[0]
@@ -1456,41 +1682,33 @@ export const updateAccountNetworkSettings = async (automaticNodeSelection, inclu
     const clientOptions = {
         nodes: clientNodes,
         node: clientNode,
-        localPow
+        localPow,
     }
 
-    api.setClientOptions(
-        clientOptions,
-        {
-            onSuccess() {
-                const { accounts } = get(wallet)
+    api.setClientOptions(clientOptions, {
+        onSuccess() {
+            const { accounts } = get(wallet)
 
-                accounts.update((_accounts) =>
-                    _accounts.map((_account) =>
-                        Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                            {} as WalletAccount,
-                            _account,
-                            {
-                                clientOptions
-                            }
-                        )
-                    )
-                )
-            },
-            onError(err) {
-                const shouldHideErrorNotification =
-                    err && err.type === 'ClientError' && err.error === 'error.node.chrysalisNodeInactive'
-
-                if (!shouldHideErrorNotification) {
-                    showAppNotification({
-                        type: 'error',
-                        message: localize(err.error),
+            accounts.update((_accounts) =>
+                _accounts.map((_account) =>
+                    Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>({} as WalletAccount, _account, {
+                        clientOptions,
                     })
-                }
+                )
+            )
+        },
+        onError(err) {
+            const shouldHideErrorNotification =
+                err && err.type === 'ClientError' && err.error === 'error.node.chrysalisNodeInactive'
 
-            },
-        }
-    )
+            if (!shouldHideErrorNotification) {
+                showAppNotification({
+                    type: 'error',
+                    message: localize(err.error),
+                })
+            }
+        },
+    })
 }
 
 /**
@@ -1503,7 +1721,7 @@ export const updateAccountNetworkSettings = async (automaticNodeSelection, inclu
  *
  */
 export const isSelfTransaction = (payload: Payload, account: Account): boolean => {
-    const accountAddresses = account?.addresses?.map(add => add.address) ?? []
+    const accountAddresses = account?.addresses?.map((add) => add.address) ?? []
     if (payload && accountAddresses.length) {
         const getReceiverAddresses = () => {
             if (payload.type === 'Transaction') {
@@ -1512,7 +1730,7 @@ export const isSelfTransaction = (payload: Payload, account: Account): boolean =
                 return receiverAddressesFromMilestonePayload(payload)
             }
 
-            return null;
+            return null
         }
 
         const senderAddress: string = sendAddressFromTransactionPayload(payload)
@@ -1520,7 +1738,11 @@ export const isSelfTransaction = (payload: Payload, account: Account): boolean =
         const receiverAddresses: string[] = getReceiverAddresses()
 
         const transactionAddresses = [senderAddress, ...receiverAddresses]
-        return senderAddress && receiverAddresses.length && transactionAddresses.every((txAddress) => accountAddresses.indexOf(txAddress) !== -1)
+        return (
+            senderAddress &&
+            receiverAddresses.length &&
+            transactionAddresses.every((txAddress) => accountAddresses.indexOf(txAddress) !== -1)
+        )
     }
     return false
 }
@@ -1529,8 +1751,11 @@ export const isSelfTransaction = (payload: Payload, account: Account): boolean =
  * Get the sender address from a transaction payload.
  */
 export const sendAddressFromTransactionPayload = (payload: Payload): string => {
-    if (payload?.type === "Transaction") {
-        return payload?.data?.essence?.data?.inputs?.find((input) => /utxo/i.test(input?.type))?.data?.metadata?.address ?? null
+    if (payload?.type === 'Transaction') {
+        return (
+            payload?.data?.essence?.data?.inputs?.find((input) => /utxo/i.test(input?.type))?.data?.metadata?.address ??
+            null
+        )
     }
 
     return null
@@ -1540,9 +1765,8 @@ export const sendAddressFromTransactionPayload = (payload: Payload): string => {
  * Get the receiver addresses from a transaction payload.
  */
 export const receiverAddressesFromTransactionPayload = (payload: Payload): string[] => {
-    if (payload?.type === "Transaction") {
-        return payload?.data?.essence?.data?.outputs
-            ?.map((output) => output?.data?.address) ?? []
+    if (payload?.type === 'Transaction') {
+        return payload?.data?.essence?.data?.outputs?.map((output) => output?.data?.address) ?? []
     }
 
     return []
@@ -1552,9 +1776,8 @@ export const receiverAddressesFromTransactionPayload = (payload: Payload): strin
  * Get the receiver addresses from a milestone payload.
  */
 export const receiverAddressesFromMilestonePayload = (payload: Payload): string[] => {
-    if (payload?.type === "Milestone") {
-        return payload?.data?.essence?.receipt?.data?.funds
-            ?.map((receiptFunds) => receiptFunds?.output?.address) ?? []
+    if (payload?.type === 'Milestone') {
+        return payload?.data?.essence?.receipt?.data?.funds?.map((receiptFunds) => receiptFunds?.output?.address) ?? []
     }
 
     return []
@@ -1562,17 +1785,20 @@ export const receiverAddressesFromMilestonePayload = (payload: Payload): string[
 
 /**
  * Get the value of a milestone message
- * @returns 
+ * @returns
  */
-export const getMilestoneMessageValue = (payload: Payload, accounts) => {
-    if (payload?.type === "Milestone") {
-        const funds = payload.data.essence.receipt.data.funds
+export const getMilestoneMessageValue = (payload: Payload, accounts: WalletAccount[]): number => {
+    if (payload?.type === 'Milestone') {
+        const { funds } = payload.data.essence.receipt.data
 
-        const firstAccount = accounts.find((acc) => acc.index === 0)
-        const firstAccountAddresses = firstAccount.addresses.map((address) => address.address)
+        const addresses = []
+
+        accounts.forEach((account) => {
+            account.addresses.forEach((address) => addresses.push(address.address))
+        })
 
         const totalValue = funds
-            .filter((fund) => firstAccountAddresses.includes(fund.output.address))
+            .filter((fund) => addresses.includes(fund.output.address))
             .reduce((acc, fund) => acc + fund.output.amount, 0)
 
         return totalValue
@@ -1583,10 +1809,10 @@ export const getMilestoneMessageValue = (payload: Payload, accounts) => {
 
 /**
  * Get incoming flag from message
- * @returns 
+ * @returns
  */
-export const getIncomingFlag = (payload: Payload) => {
-    if (payload?.type === "Transaction") {
+export const getIncomingFlag = (payload: Payload): boolean | undefined => {
+    if (payload?.type === 'Transaction') {
         return payload.data.essence.data.incoming
     }
 
@@ -1595,20 +1821,20 @@ export const getIncomingFlag = (payload: Payload) => {
 
 /**
  * Set incoming flag on the message
- * @returns 
+ * @returns
  */
-export const setIncomingFlag = (payload: Payload, incoming: boolean) => {
-    if (payload?.type === "Transaction") {
+export const setIncomingFlag = (payload: Payload, incoming: boolean): void => {
+    if (payload?.type === 'Transaction') {
         payload.data.essence.data.incoming = incoming
     }
 }
 
 /**
-* Get internal flag from message
-* @returns 
-*/
-export const getInternalFlag = (payload: Payload) => {
-    if (payload?.type === "Transaction") {
+ * Get internal flag from message
+ * @returns
+ */
+export const getInternalFlag = (payload: Payload): boolean | undefined => {
+    if (payload?.type === 'Transaction') {
         return payload.data.essence.data.internal
     }
 
@@ -1634,18 +1860,21 @@ export const findAccountWithAddress = (address: string): WalletAccount | undefin
  * @param excludeFirst A wallet to exclude on first pass
  * @returns The wallet account matching the address or undefined if not found
  */
-export const findAccountWithAnyAddress = (addresses: string[], excludeFirst?: WalletAccount): WalletAccount | undefined => {
+export const findAccountWithAnyAddress = (
+    addresses: string[],
+    excludeFirst?: WalletAccount
+): WalletAccount | undefined => {
     if (!addresses || addresses.length === 0) {
         return
     }
-    let accounts = get(get(wallet).accounts)
+    const accounts = get(get(wallet).accounts)
 
     let res = accounts.filter((acc) => acc.addresses.some((add) => addresses.includes(add.address)))
 
     if (res.length > 0) {
         if (excludeFirst) {
             const initialLen = res.length
-            res = res.filter(a => a.id !== excludeFirst.id)
+            res = res.filter((a) => a.id !== excludeFirst.id)
             // If the length changed we removed it, so put it back
             // at the end
             if (res.length !== initialLen) {
@@ -1657,4 +1886,62 @@ export const findAccountWithAnyAddress = (addresses: string[], excludeFirst?: Wa
             return res[0]
         }
     }
+}
+
+/**
+ * Get the sync options for an account
+ * @param {boolean} isManualSync A boolean value indicating if a user (via the UI) invoked this function
+ * @returns {SyncAccountOptions} The sync options for an account, which contains data for the gap limit and account discovery threshold
+ */
+export const getSyncAccountOptions = (isManualSync: boolean = false): SyncAccountOptions =>
+    isInitialAccountSync()
+        ? calculateInitialSyncAccountOptions(get(walletSetupType))
+        : calculateRegularSyncAccountOptions(get(activeProfile).type, isManualSync)
+
+/**
+ * Determines if the API call for syncing accounts is the initial one
+ * @returns {boolean} The boolean value determining if this sync API call is the first ever one
+ */
+export const isInitialAccountSync = (): boolean => get(walletSetupType) !== null && get(isFirstSessionSync)
+
+const calculateInitialSyncAccountOptions = (setupType: SetupType): SyncAccountOptions => {
+    let gapLimit = 1
+    let accountDiscoveryThreshold = 0
+
+    switch (setupType) {
+        case SetupType.Import:
+        case SetupType.Mnemonic:
+        case SetupType.Stronghold:
+            gapLimit = 25
+            accountDiscoveryThreshold = 1
+            break
+        case SetupType.FireflyLedger:
+            gapLimit = 10
+            accountDiscoveryThreshold = 1
+            break
+    }
+
+    return { gapLimit, accountDiscoveryThreshold }
+}
+
+const calculateRegularSyncAccountOptions = (profileType: ProfileType, isManualSync: boolean): SyncAccountOptions => {
+    let gapLimit = 1
+    let accountDiscoveryThreshold = 0
+
+    const _isFirstSessionSync = get(isFirstSessionSync)
+
+    switch (profileType) {
+        case ProfileType.Software:
+            gapLimit = _isFirstSessionSync ? 10 : 1
+            break
+        case ProfileType.Ledger:
+        case ProfileType.LedgerSimulator:
+        default:
+            gapLimit = 1
+            break
+    }
+
+    accountDiscoveryThreshold = isManualSync && _isFirstSessionSync ? 1 : 0
+
+    return { gapLimit, accountDiscoveryThreshold }
 }

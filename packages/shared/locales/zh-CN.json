@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "新建配置文件",
+            "profileName": "配置名称",
             "body1": "您可创建多个用户配置文件来分别存储您的Token以确保安全。",
-            "body2": "现在，让我们开始创建你的第一个配置文件。以后您可以添加更多的配置文件。",
-            "profileName": "配置名称"
+            "body2": {
+                "first": "现在，让我们从您的第一个配置文件的名称开始。",
+                "nonFirst": "现在，让我们从您的配置名称开始。"
+            },
+            "addMore": "您可以稍后添加更多配置文件。"
         },
         "setup": {
             "title": "设置钱包",
@@ -29,6 +33,32 @@
             "title": "保障钱包的安全",
             "body1": "保存和打印Recovery Kit PDF模板。",
             "body2": "如果您填写Recovery Kit并安全存储它，您就能够恢复您的钱包。"
+        },
+        "create": {
+            "title": "创建一个钱包",
+            "body": "创建一个新钱包。您可以选择一个普通软件钱包，或者如果您有一个Ledger设备，您可以设置一个硬件钱包。",
+            "softwareAccount": {
+                "title": "我想要一个软件钱包",
+                "description": "创建一个24个字的恢复助记词"
+            },
+            "ledgerAccount": {
+                "title": "我想要一个硬件钱包",
+                "description": "需要Ledger Nano S 或 Nano X"
+            }
+        },
+        "setupLedger": {
+            "progress1": "连接您的Ledger",
+            "progress2": "生成地址",
+            "progress3": "切换Ledger应用",
+            "progress4": "划拨资金",
+            "watchVideo": "观看视频指南",
+            "videoGuide": "Ledger 迁移视频指南"
+        },
+        "ledgerInstallationGuide": {
+            "title": "您是否安装了必要的Ledger应用？",
+            "body1": "在您继续之前，您必须通过Ledger Live找到并安装 {legacy} 应用程序和新的 IOTA应用程序。",
+            "body2": "请确保您的Ledger固件是最新的。任何预安装的应用都应更新到他们的最新版本。",
+            "action": "是的，我已经安装了这些应用"
         },
         "password": {
             "title": "设置密码",
@@ -85,9 +115,11 @@
         },
         "congratulations": {
             "title": "钱包设置完成",
-            "body": "您的新钱包已准备使用。",
             "fundsMigrated": "资金已迁移",
-            "success": "您已成功地将您的资金迁移到新的网络",
+            "body": "您的新钱包已准备使用。",
+            "softwareMigratedBody": "您已成功地将您的资金迁移到新的网络",
+            "fireflyLedgerBody": "您的Ledger 账号已成功恢复，您现在可以继续。",
+            "trinityLedgerBody": "您已成功地从Ledger 迁移到新的网络。",
             "exportMigration": "导出迁移日志并完成设置"
         },
         "import": {
@@ -98,7 +130,9 @@
             "importMnemonic": "我有一个Fifrefly恢复密语",
             "importMnemonicDescription": "输入恢复密语来找回您的钱包",
             "importFile": "我有一个备份文件",
-            "importFileDescription": "上传Seedvault或Stronghold 文件"
+            "importFileDescription": "上传Seedvault或Stronghold 文件",
+            "importLedger": "我有一个Ledger 备份",
+            "importLedgerDescription": "还原或迁移Ledger 资料"
         },
         "importFromText": {
             "seed": {
@@ -119,18 +153,63 @@
             "title": "使用备份文件恢复你的钱包",
             "body": "导入备份文件以恢复您的钱包。备份可以是 Stronghold (.stronghold) 或 Trinity SeedVault (.kdbx)格式。"
         },
+        "importFromLedger": {
+            "title": "还原或迁移您的Ledger",
+            "body": "还原现有的Firefly Ledger 个人资料，或从Trinity迁移您的资金。",
+            "haveFireflyLedger": "我有一个Firefly Ledger备份",
+            "haveFireflyLedgerDescription": "还原一个Firefly 个人资料",
+            "haveTrinityLedger": "我有一个 Trinity Ledger 备份",
+            "haveTrinityLedgerDescription": "迁移一个 Trinity 档案"
+        },
+        "connectLedger": {
+            "title": "将您的账单连接到Fifly",
+            "body": "为了让Firefly找到的您的Ledger设备，请确保官方的Ledger Live应用程序已关闭。",
+            "trafficLight1": "输入PIN码来连接并解锁您的Ledger设备",
+            "trafficLight2": "在您的Ledger设备上打开新的 IOTA应用",
+            "tips": "Ledger无法连接时的处理技巧"
+        },
+        "restoreFromFireflyLedger": {
+            "title": "恢复您的Ledger用户资料",
+            "body": "按下恢复以完成设置并恢复您的钱包、余额和交易记录。",
+            "restoring": "正在从Ledger恢复..."
+        },
+        "legacyLedgerIntro": {
+            "title": "使用Fifly开始您的Ledger迁移",
+            "body1": "Firefly会协助您将代币转移到新的Chrysalis网络。",
+            "body2": "迁移后，您将能够使用Firefly通过Ledger设备来发送和接收您的代币。",
+            "readMore": "迁移过程中会发生什么"
+        },
+        "generateNewLedgerAddress": {
+            "title": "生成新地址",
+            "body": "您需要生成一个新地址来使用 Firefly 迁移您的代币。请点击下面的按钮继续。",
+            "confirmTitle": "确认新地址",
+            "confirmBody": "为了安全起见，请确认Ledger上生成的地址与下面显示的地址相同。如果地址相同，请同时按下您Ledger上的两个按钮。",
+            "confirmedTitle": "地址已确认",
+            "confirmedBody": "您已确认Fifrefly的地址与您Ledger设备上的地址相匹配。",
+            "generating": "生成地址"
+        },
+        "switchLedgerApps": {
+            "title": "切换Ledger应用",
+            "body": "请切换到您Ledger设备上的 {legacy} 应用程序以继续迁移。准备就绪后，请按下继续。"
+        },
+        "selectLedgerAccountIndex": {
+            "title": "选择您的Ledger账户索引",
+            "body": "请选择您的Trinity所使用的Ledger帐户索引。对于大多数用户，默认的索引值是0。",
+            "accountIndex": "账户索引",
+            "accountPage": "账户页面",
+            "standard": "标准模式",
+            "expert": "专家模式",
+            "takingAWhile": "这需要一段时间...",
+            "notGeneratingAddresses": "您的Ledger设备是否生成新的地址？",
+            "reinstallLegacy": "若未生新地址，请断开设备并重试。如果问题仍然存在，您可能需要重新安装 {legacy} 应用程序。"
+        },
         "importBackupPassword": {
-            "title": "使用SeedVault或Stronghold文件恢复你的钱包",
             "body1": "请输入您的备份密码。",
             "body2": "这是您首次创建备份时设置的密码。"
         },
         "importSuccess": {
             "title": "您已成功恢复您的备份。",
-            "body": "您现在可以设置新的配置文件。",
-            "seedvaultTitle": "导入成功",
-            "seedvaultBody": "您的密码正确，您现在可以继续。",
-            "strongholdTitle": "导入成功",
-            "strongholdBody": "您的密码正确，您现在可以继续。"
+            "body": "您现在可以设置新的配置文件。"
         },
         "migrate": {
             "title": "迁移您的资金",
@@ -153,7 +232,7 @@
             "miningBundle": "签名包",
             "problemRestoringWallet": "恢复钱包出现网络异常，请重试。",
             "minimumMigrationAmountSpentAddresses": "每个已花费地址的最小迁移金额为1Mi，请再次检查你的余额是否符合。",
-            "tooManyAddressesToMigrate": "你有太多的低余额地址需要迁移，如果您的余额看起来不对，请再次检查。",
+            "tooManyAddressesToMigrate": "您有太多的小额地址需要迁移，请再次检查您的账户余额是否正确。",
             "cannotMigrateAllYourFunds": "我们不能迁移您的所有资金，因为某些地址的价值太低。您仍然可以继续，但是 {value} 将会丢失。",
             "error": "资金迁移出现错误，请重试。"
         },
@@ -184,6 +263,7 @@
         },
         "transferFragmentedFunds": {
             "body1": "Firefly将立即开始迁移您的资金。这可能需要一段时间。",
+            "body2": "请确认您的Ledger设备已连接， 并且{legacy} 应用在迁移过程中保持打开状态.",
             "migrate": "迁移资金",
             "transaction": "交易 {number}",
             "rerun": "重试"
@@ -196,7 +276,8 @@
             "title": "您的余额",
             "body": "在继续之前请确保您的余额是正确的。如果它看起来不正确，您可以再次检查。",
             "error": "最小迁移金额是 1 Mi。请再次检查您的余额是否正确。",
-            "zeroBalance": "请再试一次。如果您仍然找不到您的余额，您输入的种子可能不正确。"
+            "zeroBalance": "请再试一次。如果您仍然找不到您的余额，您输入的种子可能不正确。",
+            "zeroBalanceLedgerLegacy": "请再试一次。如果您仍然找不到您的余额，您可能选择了错误的帐户索引。"
         },
         "settings": {
             "settings": "设置",
@@ -314,6 +395,10 @@
                 "title": "诊断程序",
                 "description": "查看系统和应用程序信息"
             },
+            "migrateLedgerIndex": {
+                "title": "迁移Ledger账户索引",
+                "description": "迁移另一个 Trinity 帐户索引"
+            },
             "stateExport": {
                 "title": "状态导出",
                 "description": "将您的交易历史记录导出到.csv文件"
@@ -357,7 +442,15 @@
                 },
                 "hardwareDevice": {
                     "title": "硬件设备",
-                    "noneDetected": "没有检测到"
+                    "statuses": {
+                        "appNotOpen": "IOTA 应用未打开",
+                        "connected": "已连接",
+                        "legacyConnected": "{legacy} 应用程序已打开",
+                        "locked": "锁定",
+                        "mnemonicMismatch": "错误的Ledger设备或记助词",
+                        "notDetected": "未检测到设备",
+                        "otherConnected": "应用已打开"
+                    }
                 },
                 "strongholdStatus": {
                     "title": "钱包状态",
@@ -488,6 +581,53 @@
             "body": "Chrysalis网络升级已经开始。",
             "bodyMigration": "在维护完成之前暂不支持迁移功能。",
             "bodyFirefly": "在完成之前Firefly将被暂停使用。完成之后您仍然可以进行代币迁移。"
+        },
+        "ledgerNotConnected": {
+            "connect": "打开您Ledger设备上的IOTA应用以继续",
+            "connectLegacy": "打开您Ledger设备上的 {legacy} 应用以继续"
+        },
+        "ledgerConfirmation": {
+            "confirm": "若要继续，请确认Ledger设备上的弹出窗口"
+        },
+        "ledgerAppGuide": {
+            "title": "Ledger应用安装指南",
+            "steps": {
+                "0": "安装并打开 Ledger Live 应用程序",
+                "1": "请确保您的Ledger设备已连接",
+                "2": "搜索应用: {legacy} 和 IOTA(MIOTA)",
+                "3": "安装应用: {legacy} 和 IOTA(MIOTA)",
+                "4": "请记住，在返回Fifly之前关闭Ledger Live是非常重要的"
+            }
+        },
+        "ledgerConnectionGuide": {
+            "title": "Ledger无法连接时的处理技巧",
+            "steps": {
+                "0": "请确保Ledger Live没有在您的计算机上打开运行",
+                "1": "请确保您已经用PIN码解锁了Ledger设备",
+                "2": "在您的Ledger设备上打开新的 IOTA应用",
+                "3": {
+                    "text": "仍然无法连接？",
+                    "link": "尝试查看Ledger的官方网站支持"
+                }
+            }
+        },
+        "ledgerTransaction": {
+            "remainderAddress": {
+                "title": "确认余额地址",
+                "info": "请确认Ledger上显示的余额地址与下面显示的地址相同。如果地址相同，请同时按下您Ledger上的两个按钮。"
+            },
+            "transaction": {
+                "title": "确认交易",
+                "info": "请确认Ledger上显示的交易信息与下面显示的信息相同。如果信息相同，请同时按下您Ledger上的两个按钮。"
+            }
+        },
+        "ledgerAddress": {
+            "title": "确认接收地址",
+            "body": "请确认Ledger上显示的接收地址与下面显示的地址相同。如果地址相同，请同时按下您Ledger上的两个按钮。"
+        },
+        "ledgerMigrateIndex": {
+            "title": "您需要迁移另一个 Trinity 帐户索引吗？",
+            "body": "您也可以稍后在高级设置中迁移Ledger索引。"
         }
     },
     "charts": {
@@ -505,6 +645,8 @@
     "actions": {
         "continue": "继续",
         "back": "返回",
+        "previous": "上一步",
+        "next": "下一步",
         "cancel": "取消",
         "close": "关闭",
         "dismiss": "取消",
@@ -573,6 +715,7 @@
         "addAccount": "添加钱包",
         "checkForUpdates": "检查更新",
         "reportAnIssue": "反馈问题",
+        "restore": "还原",
         "clear": "清除",
         "hideDetails": "隐藏详情",
         "yes": "是",
@@ -592,7 +735,9 @@
         "searchBalances": "搜索余额",
         "searchAgain": "重新搜索",
         "searching": "搜索中...",
-        "closeFirefly": "关闭Firefly"
+        "closeFirefly": "关闭Firefly",
+        "generateAddress": "生成地址",
+        "migrateAgain": "迁移另一个Ledger索引"
     },
     "general": {
         "password": "密码",
@@ -607,6 +752,7 @@
         "received": "已收到",
         "sendPayment": "发送资金",
         "moveFunds": "内部转账",
+        "sendTo": "发送到",
         "sendFunds": "发送资金",
         "sendToAddress": "发送至地址",
         "scanQrOrPaste": "扫描二维码或粘贴地址",
@@ -625,6 +771,8 @@
         "myAddress": "我的地址",
         "shareAddress": "分享地址",
         "yourAddress": "您的地址",
+        "newRemainder": "新的余额",
+        "remainder": "剩余资金",
         "generateNewAddress": "生成新地址",
         "copyAddress": "复制地址",
         "import": "导入",
@@ -661,6 +809,7 @@
         "messageId": "消息 ID",
         "inputAddress": "发送地址",
         "receiveAddress": "接收地址",
+        "newAddress": "新地址",
         "date": "日期",
         "status": "状态",
         "confirmed": "已确认",
@@ -672,11 +821,13 @@
         "firstSync": "同步历史记录，可能需要一段时间...",
         "transferSyncing": "正在同步钱包",
         "transferSelectingInputs": "选择输入",
-        "transferRemainderAddress": "生成剩余的存款地址",
+        "transferRemainderAddress": "生成余额地址",
+        "transferPreparedTransaction": "准备交易...",
         "transferSigning": "签名交易",
         "transferPow": "执行PoW",
         "transferBroadcasting": "正在广播交易...",
         "transferComplete": "转账完毕",
+        "generatingReceiveAddress": "生成接收地址",
         "creatingAccount": "正在创建钱包，请稍候...",
         "updatingAccount": "正在更新钱包，请稍候...",
         "accountSyncing": "正在同步钱包",
@@ -708,7 +859,8 @@
         "sending": "发送",
         "legacyNetwork": "旧的网络",
         "capsLock": "大写锁定键已开启",
-        "version": "版本 {version}"
+        "version": "版本 {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "今日",
@@ -732,8 +884,7 @@
         "minutesRemaining": "{minutes, plural, one {还剩最后一分钟...} other {还剩余 # 分钟...}}",
         "copiedToClipboard": "复制到剪贴板",
         "accountsSynchronized": "钱包同步完成",
-        "migratedAccountChrysalisDown": "您的资金将在4月28日Chrysalis升级完成后可用",
-        "migratedAccountChrysalisUp": "您的资金将很快就可用。"
+        "fundsAvailableSoon": "您的资金将很快变为可用资金。"
     },
     "error": {
         "profile": {
@@ -770,7 +921,10 @@
             "tilde": "配置名称不能以“~”字符开头。",
             "control": "配置名称不能包含控制字符。",
             "startDot": "配置名称不能以 '.' 字符开头。",
-            "chars": "配置名称不能包含以下字符 <>:\"/\\|?*"
+            "chars": "配置名称不能包含以下字符 <>:\"/\\|?*",
+            "index": "您的帐户索引必须是0-2,147,483,647之间的数字。",
+            "page": "您的帐户页码必须是0-2,147,483,647之间的数字。",
+            "syncing": "钱包同步时出错。"
         },
         "send": {
             "addressLength": "地址的长度应该是 {length, plural,one {1 个字符} other {# 个字符}}。",
@@ -784,7 +938,9 @@
             "insufficientFunds": "该账户资金不足。",
             "noToAccount": "您尚未选择一个收款账户来发送资金。",
             "sendingDust": "您的发送不能小于 1 Mi。",
-            "leavingDust": "您的地址余额不能少于1Mi。"
+            "leavingDust": "您的地址余额不能少于1Mi。",
+            "cancelled": "您的交易已被取消。",
+            "transaction": "发送交易错误。请再次尝试。"
         },
         "node": {
             "invalid": "请输入有效的URL",
@@ -805,6 +961,25 @@
             "phraseWordCount": "您的恢复密语中应该有24个单词，目前 {length, plural, one {只有 1}other {是 #}} 个单词。",
             "phraseUnrecognizedWord": "恢复短语中无法识别的单词“{word}”",
             "phraseCaseWord": "单词 \"{word}\" 应为小写"
+        },
+        "ledger": {
+            "appNotOpen": "您必须在您的Ledger设备上打开 IOTA应用程序。",
+            "generic": "连接到您的Ledger设备时出错。",
+            "legacyConnected": "Ledger设备上打开的应用程序不正确。",
+            "locked": "请输入 PIN 码来解锁您的Ledger设备。",
+            "mnemonicMismatch": "您连接了错误的Ledger设备或助记符已更改。",
+            "notDetected": "没有检测到Ledger设备。",
+            "notFound": "未找到Ledger设备",
+            "otherConnected": "Ledger设备上打开的应用程序不正确。",
+            "generateAddress": "地址生成出错。",
+            "timeout": "您的Ledger设备连接超时。",
+            "disconnected": "您的Ledger设备已断开."
+        },
+        "popup": {
+            "preventClose": "此弹出窗口无法关闭。"
+        },
+        "migration": {
+            "missingBundle": "试图查找交易包信息时发生错误"
         }
     },
     "tooltips": {

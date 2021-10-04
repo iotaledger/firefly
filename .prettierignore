@@ -1,0 +1,38 @@
+# Repository
+.vscode/
+
+patches/
+specs/
+
+# Backend (packages/backend)
+packages/backend/**/*.rs
+
+packages/backend/bindings/c/
+packages/backend/bindings/capacitor/
+packages/backend/bindings/node/dist/
+packages/backend/bindings/node/native/
+
+packages/backend/src/
+packages/backend/target/
+
+# Desktop (packages/desktop)
+packages/desktop/public/assets/
+packages/desktop/public/build/
+packages/desktop/public/locales/
+
+# Mobile (packages/mobile)
+packages/mobile/android/
+packages/mobile/ios/
+packages/mobile/public/
+
+# Shared (packages/shared)
+packages/shared/assets/
+packages/shared/locales/
+!packages/shared/locales/en.json
+
+# Common files and folders
+**/node_modules/
+**/out/
+
+# ESLint configuration and files
+**/.eslintrc.js

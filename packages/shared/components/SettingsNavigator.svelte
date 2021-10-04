@@ -1,12 +1,15 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
+    import { Locale } from 'shared/lib/typings/i18n'
+
+    export let locale: Locale
 
     export let settings
-    export let locale
     export let routes
     export let route
     export let icons
-    export let onSettingClick = (_) => {}
+
+    export let onSettingClick = (..._: any[]): void => {}
 
     function changeRoute(setting) {
         document.getElementById('scroller').scrollTop = 0

@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "프로필 생성하기",
+            "profileName": "프로필 이름",
             "body1": "여러 사용자 프로필을 만들어 지갑을 구성하고 보안성을 높일 수 있습니다.",
-            "body2": "지금은 첫 번째 프로필 이름부터 시작하겠습니다. 나중에 프로필을 더 추가 할 수 있습니다.",
-            "profileName": "프로필 이름"
+            "body2": {
+                "first": "이제 여러분의 첫번째 프로필 이름부터 만들어볼까요.",
+                "nonFirst": "이제 여러분의 프로필 이름부터 만들어볼까요."
+            },
+            "addMore": "나중에 다른 프로필도 더 추가할 수 있습니다."
         },
         "setup": {
             "title": "지갑 설정하기",
@@ -29,6 +33,32 @@
             "title": "지갑을 안전하게 보관하기",
             "body1": "복원 양식 PDF 파일을 받아 인쇄하세요.",
             "body2": "복구 키트를 작성하고 안전하게 보관하면 항상 지갑을 복구 할 수 있습니다."
+        },
+        "create": {
+            "title": "지갑 만들기",
+            "body": "새로운 지갑을 생성하세요. 일반 소프트웨어 지갑을 선택할 수도 있고, Ledger 장치를 가지고 있는 분들은 하드웨어 지갑을 설정할 수도 있습니다.",
+            "softwareAccount": {
+                "title": "소프트웨어 지갑",
+                "description": "24개 단어의 복구 문자를 생성하세요."
+            },
+            "ledgerAccount": {
+                "title": "하드웨어 지갑",
+                "description": "Ledger Nano S 또는 Nano X 필요"
+            }
+        },
+        "setupLedger": {
+            "progress1": "Ledger 연결",
+            "progress2": "주소 생성",
+            "progress3": "Ledger 앱 전환",
+            "progress4": "송금",
+            "watchVideo": "동영상 도움말 보기",
+            "videoGuide": "Ledger 마이그레이션 비디오 가이드"
+        },
+        "ledgerInstallationGuide": {
+            "title": "필수 Ledger 앱을 설치하셨습니까?",
+            "body1": "진행하기 전에 반드시 Ledger Live를 통해 {legacy} 앱과 새로운 IOTA 앱을 찾고 설치해야 합니다.",
+            "body2": "Ledger 펌웨어가 최신인지 반드시 확인하세요. 이전에 설치했던 모든 앱들을 전부 최신 버전으로 업데이트 해야합니다.",
+            "action": "이미 앱을 설치했습니다"
         },
         "password": {
             "title": "비밀번호 만들기",
@@ -85,9 +115,11 @@
         },
         "congratulations": {
             "title": "지갑 설정 완료",
-            "body": "이제 새로 설정된 지갑을 사용할 수 있습니다.",
             "fundsMigrated": "이전 된 자금",
-            "success": "자금을 새 네트워크로 성공적으로 마이그레이션했습니다.",
+            "body": "이제 새로 설정된 지갑을 사용할 수 있습니다.",
+            "softwareMigratedBody": "여러분의 자금을 새로운 네트워크로 무사히 이동시켰습니다.",
+            "fireflyLedgerBody": "Ledger 계정이 성공적으로 복원되어 이제 계속할 수 있습니다.",
+            "trinityLedgerBody": "여러분의 Ledger를 새로운 네트워크로 무사히 이동시켰습니다.",
             "exportMigration": "마이그레이션 로그 내보내기 및 설정 완료"
         },
         "import": {
@@ -98,7 +130,9 @@
             "importMnemonic": "Firefly 복원 문구가 있습니다",
             "importMnemonicDescription": "지갑을 복구하려면 복원 문구를 입력해주세요",
             "importFile": "파일 백업이 있습니다",
-            "importFileDescription": "Seedvault 또는 Stronghold 파일 업로드"
+            "importFileDescription": "Seedvault 또는 Stronghold 파일 업로드",
+            "importLedger": "Ledger 복구 파일이 있습니다",
+            "importLedgerDescription": "Ledger 프로필을 복원하거나 마이그레이션하세요."
         },
         "importFromText": {
             "seed": {
@@ -119,18 +153,63 @@
             "title": "백업 파일로부터 지갑 복원",
             "body": "지갑을 복구하는 데 사용할 백업 파일을 불러옵니다. Stronghold (.stronghold) 또는 Trinity 지갑의 SeedVault (.kdbx) 파일을 선택해 주세요."
         },
+        "importFromLedger": {
+            "title": "여러분의 Ledger를 복원하거나 마이그레이션하세요.",
+            "body": "기존의 Firefly Ledger 프로필을 복원하거나 여러분의 자금을 Trinity로부터 마이그레이션하세요.",
+            "haveFireflyLedger": "Firefly Ledger 백업을 갖고 있습니다.",
+            "haveFireflyLedgerDescription": "Firefly 프로필을 복원하세요.",
+            "haveTrinityLedger": "Trinity Ledger 백업을 갖고 있습니다.",
+            "haveTrinityLedgerDescription": "Trinity 프로필을 마이그레이션하세요."
+        },
+        "connectLedger": {
+            "title": "Ledger를 Firefly에 연결하세요.",
+            "body": "Firefly가 Ledger 장치를 발견하려면, 공식 Ledger Live 애플리케이션이 반드시 종료된 상태여야 합니다.",
+            "trafficLight1": "Ledger을 연결하고 PIN 번호를 입력하여 잠금을 해제하세요.",
+            "trafficLight2": "Ledger에서 새로운 IOTA 앱을 여세요.",
+            "tips": "Ledger 연결이 잘 되지 않을 때 참고할 도움말"
+        },
+        "restoreFromFireflyLedger": {
+            "title": "Ledger 프로필을 복원하세요",
+            "body": "Restore를 눌러 설치 과정을 완료하고 지갑, 잔고, 거래 기록을 복원하세요.",
+            "restoring": "Ledger로부터 복원중…"
+        },
+        "legacyLedgerIntro": {
+            "title": "Firefly를 이용해 Ledger 마이그레이션을 시작하세요.",
+            "body1": "Furefly는 여러분의 토큰들을 새로운 Chrysalis 네트워크로 전송하는 일을 도울 것입니다.",
+            "body2": "마이그레이션이 끝난 후, Firefly와 함께 Ledger를 이용해 토큰을 주고 받는 것이 가능해질 것입니다.",
+            "readMore": "마이그레이션 과정에서 기대할 수 있는 것"
+        },
+        "generateNewLedgerAddress": {
+            "title": "새 주소 생성하기",
+            "body": "Firefly와 함께 토큰을 마이그레이션하려면 새로운 주소를 생성해야 합니다. 계속하려면 아래의 버튼을 클릭하세요.",
+            "confirmTitle": "새로운 주소를 확인하세요.",
+            "confirmBody": "보안을 위해서 Ledger 장치에 생성된 주소를 아래에 표시된 주소와 비교해주세요. 만약 일치한다면, Ledger의 두 버튼을 안내된대로 누르세요.",
+            "confirmedTitle": "주소 확인됨",
+            "confirmedBody": "Firefly의 주소가 Ledger 장치의 주소와 일치함을 확인하였습니다.",
+            "generating": "주소 생성 중"
+        },
+        "switchLedgerApps": {
+            "title": "Ledger 앱 전환",
+            "body": "마이그레이션을 계속하기 위해 Ledger 장치에서 {legacy} 앱으로 전환하여 주세요. 준비가 되면 계속을 누르세요."
+        },
+        "selectLedgerAccountIndex": {
+            "title": "Ledger 계정 인덱스 선택",
+            "body": "Trinity에서 사용했던 Ledger 계정 인덱스를 선택하세요. 대부분의 사용자들에게 이 값은 기본값인 0일것입니다.",
+            "accountIndex": "계정 인덱스",
+            "accountPage": "계정 페이지",
+            "standard": "표준",
+            "expert": "전문가",
+            "takingAWhile": "이 작업은 잠시 시간이 걸릴 수 있습니다…",
+            "notGeneratingAddresses": "Ledger가 주소들을 생성하고 있습니까?",
+            "reinstallLegacy": "아니라면, 장치의 연결을 끊고 다시 시도하세요. 만약 문제가 계속된다면, {legacy} 앱을 다시 설치해보세요."
+        },
         "importBackupPassword": {
-            "title": "SeedVault 또는 Stronghold로부터 지갑 복원하기",
             "body1": "백업 파일의 비밀번호를 입력해 주세요.",
             "body2": "백업 파일을 처음 만들때 설정했던 비밀번호를 입력합니다."
         },
         "importSuccess": {
             "title": "백업 파일에서 복구 완료",
-            "body": "이제 새로운 프로필을 설정할 수 있습니다.",
-            "seedvaultTitle": "가져오기 성공",
-            "seedvaultBody": "암호를 확인하였습니다. 다음 단계로 계속합니다.",
-            "strongholdTitle": "가져오기 성공",
-            "strongholdBody": "암호를 확인하였습니다. 다음 단계로 계속합니다."
+            "body": "이제 새로운 프로필을 설정할 수 있습니다."
         },
         "migrate": {
             "title": "잔고 옮기는 중",
@@ -153,7 +232,7 @@
             "miningBundle": "Mining 번들",
             "problemRestoringWallet": "지갑을 복원하는 중에 문제가 발생했습니다. 다시 시도하십시오.",
             "minimumMigrationAmountSpentAddresses": "각 지출 주소의 최소 마이그레이션 금액은 1Mi입니다. 잔액이 올바르지 않은지 다시 확인하십시오.",
-            "tooManyAddressesToMigrate": "마이그레이션 할 잔액이 적은 주소가 너무 많습니다. 잔액이 올바르지 않은지 다시 확인하십시오.",
+            "tooManyAddressesToMigrate": "잔고가 얼마 되지않는 주소들을 너무 많이 소유하고 있어 마이그레이션을 할 수 없습니다. 잔고 합계가 이상한 것 같다면 다시 확인해보세요.",
             "cannotMigrateAllYourFunds": "일부 주소의 가치가 너무 낮아 모든 자금을 마이그레이션 할 수 없습니다. 어쨌든 계속할 수 있습니다. {value} 가 손실됩니다.",
             "error": "자금을 이전하는 중에 오류가 발생했습니다. 다시 시도하십시오."
         },
@@ -184,6 +263,7 @@
         },
         "transferFragmentedFunds": {
             "body1": "이제 Firefly가 자금 마이그레이션을 진행합니다. 시간이 걸릴 수 있습니다.",
+            "body2": "Ledger가 연결되어 있는지 확인하고 {legacy} 앱이 마이그레이션 과정에서 항상 열려 있도록 해주세요.",
             "migrate": "자금 마이그레이션 하기",
             "transaction": "거래 번호 {number}",
             "rerun": "다시 시도하기"
@@ -196,7 +276,8 @@
             "title": "내 잔액",
             "body": "계속하기 전에 잔액이 올바른지 확인하십시오. 올바르지 않으면 다시 확인할 수 있습니다.",
             "error": "최소 마이그레이션 양은 1Mi입니다. 잔액이 올바르지 않은지 다시 확인하십시오.",
-            "zeroBalance": "다시 확인하십시오. 여전히 잔액을 찾을 수 없다면 시드를 잘못 입력했을 수 있습니다."
+            "zeroBalance": "다시 확인하십시오. 여전히 잔액을 찾을 수 없다면 시드를 잘못 입력했을 수 있습니다.",
+            "zeroBalanceLedgerLegacy": "다시 확인해주세요. 여전히 잔고를 찾을 수 없다면 잘못된 계정 인덱스를 선택했었던 것일 수 있습니다."
         },
         "settings": {
             "settings": "설정",
@@ -314,6 +395,10 @@
                 "title": "진단",
                 "description": "시스템 및 앱 정보 보기"
             },
+            "migrateLedgerIndex": {
+                "title": "Ledger 인덱스 마이그레이션",
+                "description": "다른 Trinity 계정 인덱스를 마이그레이션"
+            },
             "stateExport": {
                 "title": "상태 내보내기",
                 "description": "거래 내역을 .csv 파일로 내보내기"
@@ -357,7 +442,15 @@
                 },
                 "hardwareDevice": {
                     "title": "하드웨어 장치",
-                    "noneDetected": "발견된 하드웨어 장치 없음"
+                    "statuses": {
+                        "appNotOpen": "IOTA 앱 열리지 않음",
+                        "connected": "연결됨",
+                        "legacyConnected": "{legacy} 앱 열림",
+                        "locked": "잠김",
+                        "mnemonicMismatch": "잘못된 Ledger 또는 Mnemonic",
+                        "notDetected": "인식되지 않음",
+                        "otherConnected": "앱 열림"
+                    }
                 },
                 "strongholdStatus": {
                     "title": "지갑 상태",
@@ -488,6 +581,53 @@
             "body": "Chrysalis 네트워크 업그레이드가 시작되었습니다.",
             "bodyMigration": "마이그레이션이 완료 될 때까지 비활성화됩니다.",
             "bodyFirefly": "Firefly는 완료 될 때까지 비활성화됩니다. 이후에도 토큰 마이그레이션이 가능합니다."
+        },
+        "ledgerNotConnected": {
+            "connect": "Ledger 기기에서 새 IOTA 앱을 열어 계속",
+            "connectLegacy": "계속하기 위해 Ledger 장치의 {legacy} 앱을 여세요."
+        },
+        "ledgerConfirmation": {
+            "confirm": "진행하기 위해서 Ledger 장치에 표시된 안내를 확인하세요."
+        },
+        "ledgerAppGuide": {
+            "title": "Ledger 앱 설치 가이드",
+            "steps": {
+                "0": "Ledger Live 앱을 설치하고 여세요.",
+                "1": "Ledger가 연결되어 있는지 확인하세요.",
+                "2": "앱 찾기: {legacy} 그리고 IOTA(MIOTA)",
+                "3": "두 앱 모두 설치: {legacy} 그리고 IOTA (MIOTA)",
+                "4": "Firfly로 돌아가기 전에 Ledger Live를 종료하는 것이 중요하다는 것을 기억하세요."
+            }
+        },
+        "ledgerConnectionGuide": {
+            "title": "Ledger 연결이 잘 되지 않을 때 참고할 도움말",
+            "steps": {
+                "0": "Ledger Live가 열려있지 않도록 확인하세요.",
+                "1": "Ledger 장치를 PIN 번호로 잠금해제 했는지 확인하세요.",
+                "2": "Ledger 장치에서 새로운 IOTA 앱을 여세요.",
+                "3": {
+                    "text": "아직 해결되지 않았나요?",
+                    "link": "공식 Ledger 지원 페이지를 확인해보세요."
+                }
+            }
+        },
+        "ledgerTransaction": {
+            "remainderAddress": {
+                "title": "나머지 주소를 확인하세요.",
+                "info": "Ledger에 표시된 나머지 주소가 아래에 표시된 것과 일치하는지 확인하세요. 만약 일치한다면 Ledger의 두 버튼을 안내된대로 누르세요."
+            },
+            "transaction": {
+                "title": "트랜잭션 확인",
+                "info": "Ledger 장치에 표시된 거래 정보가 아래에 표시된 정보와 일치하는지 확인하세요. 만약 일치한다면 Ledger의 두 버튼을 안내된대로 누르세요."
+            }
+        },
+        "ledgerAddress": {
+            "title": "받는 주소를 확인하세요.",
+            "body": "Ledger에 표시된 받는 주소가 아래에 표시된 것과 일치하는지 확인하세요 만약 일치한가면 Ledger의 두 버튼을 안내된대로 누르세요."
+        },
+        "ledgerMigrateIndex": {
+            "title": "다른 Trinity 계정 인덱스를 마이그레이션 하시겠습니까?",
+            "body": "나중에 고급 설정에서 마이그레이션할 수도 있습니다."
         }
     },
     "charts": {
@@ -505,6 +645,8 @@
     "actions": {
         "continue": "계속하기",
         "back": "뒤로가기",
+        "previous": "이전",
+        "next": "다음",
         "cancel": "취소",
         "close": "닫기",
         "dismiss": "무시하기",
@@ -573,6 +715,7 @@
         "addAccount": "지갑 추가하기",
         "checkForUpdates": "업데이트 확인",
         "reportAnIssue": "오류 보고",
+        "restore": "복원",
         "clear": "지우기",
         "hideDetails": "세부 정보 숨기기",
         "yes": "예",
@@ -592,7 +735,9 @@
         "searchBalances": "잔고 검색",
         "searchAgain": "다시 검색",
         "searching": "검색 중...",
-        "closeFirefly": "Firefly 닫기"
+        "closeFirefly": "Firefly 닫기",
+        "generateAddress": "주소 생성",
+        "migrateAgain": "다른 인덱스 마이그레이션"
     },
     "general": {
         "password": "비밀번호",
@@ -607,6 +752,7 @@
         "received": "받음",
         "sendPayment": "보내기",
         "moveFunds": "내부 전송",
+        "sendTo": "전송",
         "sendFunds": "자금 보내기",
         "sendToAddress": "주소로 보내기",
         "scanQrOrPaste": "QR 코드를 스캔하거나 주소를 복사해 붙이기",
@@ -625,6 +771,8 @@
         "myAddress": "내 주소",
         "shareAddress": "주소 공유하기",
         "yourAddress": "내 주소",
+        "newRemainder": "새로운 잔돈",
+        "remainder": "잔돈",
         "generateNewAddress": "새 주소 생성하기",
         "copyAddress": "주소 복사하기",
         "import": "불러오기",
@@ -661,6 +809,7 @@
         "messageId": "메시지 ID",
         "inputAddress": "보낸 주소",
         "receiveAddress": "받은 주소",
+        "newAddress": "새 주소",
         "date": "날짜",
         "status": "상태",
         "confirmed": "승인됨",
@@ -672,11 +821,13 @@
         "firstSync": "기록을 동기화하는 중입니다. 다소 시간이 걸릴 수 있습니다...",
         "transferSyncing": "지갑 동기화하기",
         "transferSelectingInputs": "보낼 주소를 선택하는 중",
-        "transferRemainderAddress": "나머지를 보낼 주소를 생성하는 중",
+        "transferRemainderAddress": "잔돈 주소 생성하기",
+        "transferPreparedTransaction": "거래 준비하기",
         "transferSigning": "거래에 서명하는 중",
         "transferPow": "작업 증명 수행 중",
         "transferBroadcasting": "거래를 송출하는 중",
         "transferComplete": "전송 완료",
+        "generatingReceiveAddress": "받는 주소 생성하기",
         "creatingAccount": "지갑을 만드는 중입니다. 잠시만 기다려 주세요...",
         "updatingAccount": "지갑을 업데이트 중입니다. 잠시만 기다려 주세요...",
         "accountSyncing": "지갑 동기화 중",
@@ -708,7 +859,8 @@
         "sending": "보내는 중",
         "legacyNetwork": "예전 네트워크",
         "capsLock": "Caps Lock 켜짐",
-        "version": "{version} 버전"
+        "version": "{version} 버전",
+        "unknown": "알 수 없음"
     },
     "dates": {
         "today": "오늘",
@@ -732,8 +884,7 @@
         "minutesRemaining": "{minutes, plural, other {남은 시간 #분}}",
         "copiedToClipboard": "클립보드에 복사되었습니다.",
         "accountsSynchronized": "지갑 동기화 완료",
-        "migratedAccountChrysalisDown": "4 월 28 일 Chrysalis 이후에 자금을 사용할 수 있습니다",
-        "migratedAccountChrysalisUp": "곧 자금을 사용할 수 있습니다"
+        "fundsAvailableSoon": "자금이 곧 사용가능해질 것입니다."
     },
     "error": {
         "profile": {
@@ -770,7 +921,10 @@
             "tilde": "프로필 이름은 `~`로 시작할 수 없습니다.",
             "control": "프로필 이름은 제어 문자를 포함할 수 없습니다.",
             "startDot": "프로필 이름은 '.'로 시작할 수 없습니다.",
-            "chars": "프로필 이름은 <>:\"/\\|?*을 포함할 수 없습니다."
+            "chars": "프로필 이름은 <>:\"/\\|?*을 포함할 수 없습니다.",
+            "index": "계정 인덱스가 반드시 0 과 2,147,483,647 사이의 숫자여야 합니다.",
+            "page": "계좌 페이지가 반드시 0 과 2,147,483,647 사이의 숫자여야 합니다.",
+            "syncing": "지갑을 동기화하는 중 에러가 발생했습니다."
         },
         "send": {
             "addressLength": "주소는 {length, plural, other {#글자}}여야 합니다.",
@@ -784,7 +938,9 @@
             "insufficientFunds": "지갑에 자금이 부족합니다.",
             "noToAccount": "보낼 지갑을 선택하지 않았습니다.",
             "sendingDust": "1 Mi 미만은 보낼 수 없습니다.",
-            "leavingDust": "주소에 1 Mi 미만을 남겨놓을 수 없습니다."
+            "leavingDust": "주소에 1 Mi 미만을 남겨놓을 수 없습니다.",
+            "cancelled": "거래가 취소되었습니다.",
+            "transaction": "거래를 보내는 중 에러가 발생했습니다. 다시 시도하세요."
         },
         "node": {
             "invalid": "유효한 URL을 입력하세요.",
@@ -805,6 +961,25 @@
             "phraseWordCount": "복원 문구는 24개의 단어로 이루어지며, 현재 {length, plural, other {#}}개의 단어를 입력하였습니다.",
             "phraseUnrecognizedWord": "복원 문구에 인식할 수 없는 단어 \"{word}\"가 있습니다",
             "phraseCaseWord": "\"{word}\" 단어는 소문자로 입력해주세요."
+        },
+        "ledger": {
+            "appNotOpen": "Ledger 장치에서 IOTA 앱을 열어야합니다.",
+            "generic": "Ledger 장치에 연결하는 중 에러가 있었습니다.",
+            "legacyConnected": "Ledger 장치에서 잘못된 앱이 열려있습니다.",
+            "locked": "PIN 전호를 입력하여 Ledger 장치의 잠금을 해제하세요.",
+            "mnemonicMismatch": "잘못된 Ledger 장치를 연결하였거나 mnemonic이 바뀌었습니다.",
+            "notDetected": "Ledger 장치가 발견되지 않았습니다.",
+            "notFound": "Ledger 장치를 찾을 수 없습니다.",
+            "otherConnected": "Ledger 장치에서 잘못된 앱을 열었습니다.",
+            "generateAddress": "주소를 생성하는 중 에러가 있었습니다.",
+            "timeout": "Ledger 장치가 시간을 초과하였습니다.",
+            "disconnected": "Ledger 장치의 연결이 끊어졌습니다."
+        },
+        "popup": {
+            "preventClose": "이 팝업창을 닫을 수 없습니다."
+        },
+        "migration": {
+            "missingBundle": "거래 번들을 찾는 동안 에러가 발생하였습니다."
         }
     },
     "tooltips": {

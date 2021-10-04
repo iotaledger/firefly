@@ -1,23 +1,25 @@
 <script lang="typescript">
     import { AccountTile, Button, Text } from 'shared/components'
-    import { activeProfile } from 'shared/lib/profile'
+    import { activeProfile, isLedgerProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
-    import { selectedAccountId, WalletAccount } from 'shared/lib/wallet'
+    import { selectedAccountId } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable } from 'svelte/store'
     import { Receive, Send } from '.'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
 
-    export let locale
-    export let send
-    export let internalTransfer
-    export let generateAddress
+    export let locale: Locale
+
+    export let onSend = (..._: any[]): void => {}
+    export let onInternalTransfer = (..._: any[]): void => {}
+    export let onGenerateAddress = (..._: any[]): void => {}
+
     export let isGeneratingAddress
 
     const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
     const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
-
-    $: waitingChrysalis = $activeProfile?.migratedTransactions?.length
 
     function handleAccountClick(accountId) {
         selectedAccountId.set(accountId)
@@ -34,9 +36,7 @@
         <div data-label="accounts" class="w-full h-full flex flex-col flex-no-wrap justify-start">
             <div class="flex flex-row mb-4 justify-between items-center">
                 <Text type="h5">{locale('general.myAccounts')}</Text>
-                <Button disabled={waitingChrysalis} onClick={handleCreateClick} secondary small showHoverText icon="plus">
-                    {locale('actions.create')}
-                </Button>
+                <Button onClick={handleCreateClick} secondary small showHoverText icon="plus">{locale('actions.create')}</Button>
             </div>
             {#if $viewableAccounts.length > 0}
                 <div
@@ -49,8 +49,8 @@
                             balanceEquiv={account.balanceEquiv}
                             size={$viewableAccounts.length === 1 ? 'l' : 'm'}
                             hidden={hiddenAccounts.includes(account.id)}
-                            disabled={waitingChrysalis}
-                            onClick={() => handleAccountClick(account.id)} />
+                            onClick={() => handleAccountClick(account.id)}
+                            ledger={$isLedgerProfile} />
                     {/each}
                 </div>
             {:else}
@@ -59,7 +59,7 @@
         </div>
     </div>
 {:else if $walletRoute === WalletRoutes.Send}
-    <Send {send} {internalTransfer} {locale} />
+    <Send {onSend} {onInternalTransfer} {locale} />
 {:else if $walletRoute === WalletRoutes.Receive}
-    <Receive {isGeneratingAddress} {generateAddress} {locale} />
+    <Receive {isGeneratingAddress} {onGenerateAddress} {locale} />
 {/if}

@@ -1,14 +1,17 @@
 <script lang="typescript">
     import { AccountActionsModal, DashboardPane } from 'shared/components'
-    import type { AccountMessage, WalletAccount } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable } from 'svelte/store'
     import { AccountActions, AccountBalance, AccountHistory, AccountNavigation, BarChart, LineChart } from '.'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { AccountMessage, WalletAccount } from 'shared/lib/typings/wallet'
 
-    export let locale
-    export let send
-    export let internalTransfer
-    export let generateAddress
+    export let locale: Locale
+
+    export let onSend = (..._: any[]): void => {}
+    export let onInternalTransfer = (..._: any[]): void => {}
+    export let onGenerateAddress = (..._: any[]): void => {}
+
     export let isGeneratingAddress
 
     const account = getContext<Readable<WalletAccount>>('selectedAccount')
@@ -16,7 +19,10 @@
 
     const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
 
-    $: navAccounts = $account ? $viewableAccounts.map(({ id, alias, color }) => ({ id, alias, color, active: $account.id === id })) : []
+    let navAccounts
+    $: navAccounts = $account
+        ? $viewableAccounts.map(({ id, alias, color }) => ({ id, alias, color, active: $account.id === id }))
+        : []
 
     let showActionsModal = false
 
@@ -35,11 +41,11 @@
                     <AccountBalance
                         {locale}
                         color={$account.color}
-                        balance={$account.balance}
+                        balance={$account.rawIotaBalance}
                         balanceEquiv={$account.balanceEquiv}
                         onMenuClick={handleMenuClick} />
                     <DashboardPane classes="h-full -mt-5 z-0">
-                        <AccountActions {isGeneratingAddress} {send} {internalTransfer} {generateAddress} {locale} />
+                        <AccountActions {isGeneratingAddress} {onSend} {onInternalTransfer} {onGenerateAddress} {locale} />
                     </DashboardPane>
                 </DashboardPane>
                 <DashboardPane>
