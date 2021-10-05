@@ -1,35 +1,35 @@
 {
-  "name": "mobile-wallet",
-  "version": "1.0.0",
-  "description": "IOTA wallet mobile",
-  "main": "main.js",
-  "repository": "git@github.com:iotaledger/new-wallet.git",
-  "author": "IOTA Foundation <contact@iota.org>",
-  "license": "Apache-2.0",
-  "scripts": {
-    "preinstall": "cd ./../shared && yarn && cd ./../mobile",
-    "build": "NODE_ENV=production webpack",
-    "ios": "cap copy ios && cap open ios",
-    "ios:update": "cap sync ios && cap open ios",
-    "android": "cap copy android && cap open android",
-    "android:update": "cap sync android && cap open android",
-    "dev": "NODE_ENV=development webpack serve --content-base public --host 0.0.0.0 --client-log-level none"
-  },
-  "devDependencies": {
-    "@capacitor/android": "3.2.0",
-    "@capacitor/cli": "^3.2.0",
-    "@capacitor/core": "3.2.0",
-    "@capacitor/ios": "3.2.0",
-    "mini-css-extract-plugin": "^1.6.0",
-    "webpack": "^5.38.1",
-    "webpack-cli": "^4.7.2",
-    "webpack-dev-server": "^3.11.2"
-  },
-  "dependencies": {
-    "shared-modules": "link:../shared"
-  },
-  "engineStrict": true,
-  "engines": {
-    "node": ">=12"
-  }
+    "name": "mobile-wallet",
+    "version": "1.0.0",
+    "description": "IOTA wallet mobile",
+    "main": "main.js",
+    "repository": "git@github.com:iotaledger/new-wallet.git",
+    "author": "IOTA Foundation <contact@iota.org>",
+    "license": "Apache-2.0",
+    "scripts": {
+        "preinstall": "cd ./../shared && yarn && cd ./../mobile",
+        "build": "NODE_ENV=production webpack",
+        "ios": "cap copy ios && cap open ios",
+        "ios:update": "cap sync ios && cap open ios",
+        "android": "cap copy android && cap open android",
+        "android:update": "cap sync android && cap open android",
+        "dev": "NODE_ENV=development webpack serve --content-base public --host 0.0.0.0 --client-log-level none"
+    },
+    "devDependencies": {
+        "@capacitor/android": "3.2.0",
+        "@capacitor/cli": "^3.2.0",
+        "@capacitor/core": "3.2.0",
+        "@capacitor/ios": "3.2.0",
+        "mini-css-extract-plugin": "^1.6.0",
+        "webpack": "^5.38.1",
+        "webpack-cli": "^4.7.2",
+        "webpack-dev-server": "^3.11.2"
+    },
+    "dependencies": {
+        "shared-modules": "link:../shared"
+    },
+    "engineStrict": true,
+    "engines": {
+        "node": ">=12"
+    }
 }

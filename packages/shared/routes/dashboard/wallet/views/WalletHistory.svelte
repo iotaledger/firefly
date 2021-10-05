@@ -26,13 +26,13 @@
 
     let drawer: Drawer
 
-    //--------------- TODO: remove mobile mockup data ----------------
+    // --------------- TODO: remove mobile mockup data ----------------
     const random_range = (from, to) => Math.round(Math.random() * (to - from) + from)
     const random_bool = () => !Math.round(Math.random())
     let mockup_msg = () => ({
         account: Math.random(),
         id: Math.random().toString(),
-        //version: MessageVersion,
+        // version: MessageVersion,
         parents: ['string', 'string'],
         payloadLength: 10,
         payload: {
@@ -42,13 +42,13 @@
                     type: 'Regular',
                     data: {
                         incoming: random_bool(),
-                        //internal: !random_bool(),
+                        // internal: !random_bool(),
                         value: random_range(50000000, 1000000000),
                         remainderValue: random_range(50000000, 1000000000),
                     },
                 },
             },
-        }, //Payload,
+        }, // Payload,
         timestamp: new Date(new Date() - random_range(50000000, 1000000000)),
         nonce: Math.random(),
         confirmed: Math.random() * (1 - 0) + 0.5,
@@ -64,7 +64,7 @@
         mockup_msg(),
         mockup_msg(),
     ]
-    //--------------- mobile mockup data ----------------
+    // --------------- mobile mockup data ----------------
 
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
     // TODO: mockup, replace with const transactions = getContext<Readable<AccountMessage[]>>('walletTransactions')

@@ -41,7 +41,7 @@
 
     onMount(() => {
         if (opened) {
-            open()
+            void open()
         }
     })
 
@@ -100,7 +100,7 @@
     }
 
     function handleSlideMove(event: CustomEvent): void {
-        coords.update(
+        void coords.update(
             ($coords) => ({
                 x: $coords.x + event.detail.sx,
                 y: $coords.y + event.detail.sy,
@@ -114,15 +114,15 @@
             ? (viewportLength - dimLength) / 2 > $coords.x
             : (viewportLength - dimLength) / 1.2 > $coords.y
         if (thresholdUnreached) {
-            open()
+            void open()
         } else {
-            close()
+            void close()
         }
     }
 
     export async function open(): Promise<void> {
         isOpen = true
-        coords.set(
+        await coords.set(
             {
                 x: fromRight ? dimLength : 0,
                 y: fromRight ? 0 : dimLength,

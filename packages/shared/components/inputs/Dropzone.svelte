@@ -3,17 +3,17 @@
     import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale = undefined
-    export let onFile = (event?) => {}
+    export let onFile = (event?: Event): void => {}
     export let extentionsLabel = ''
     export let allowedExtensions
     export let dropping
     export let fileName
 
-    const onEnter = () => {
+    const onEnter = (): void => {
         dropping = true
     }
 
-    const onLeave = () => {
+    const onLeave = (): void => {
         dropping = false
     }
 </script>

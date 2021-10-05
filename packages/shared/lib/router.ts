@@ -2,10 +2,12 @@ import { cleanupSignup, login, mobile, strongholdPassword, walletPin } from 'sha
 import { activeProfile, profiles, setProfileType } from 'shared/lib/profile'
 import {
     AccountRoutes,
-    AppRoute, LedgerRoutes, SettingsRoutes,
+    AppRoute,
+    LedgerRoutes,
+    SettingsRoutes,
     SetupType,
     Tabs,
-    WalletRoutes
+    WalletRoutes,
 } from 'shared/lib/typings/routes'
 import { selectedAccountId } from 'shared/lib/wallet'
 import { get, readable, writable } from 'svelte/store'
