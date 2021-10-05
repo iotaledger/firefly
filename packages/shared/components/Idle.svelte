@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { logout, lastActiveAt } from 'shared/lib/app'
+    import { logout } from 'shared/lib/app'
     import { activeProfile } from 'shared/lib/profile'
     import { debounce } from 'shared/lib/utils'
     import { onDestroy } from 'svelte'
