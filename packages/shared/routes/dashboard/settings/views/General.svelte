@@ -4,11 +4,12 @@
     import { appSettings, AppTheme, shouldBeDarkMode } from 'shared/lib/appSettings'
     import { exchangeRates } from 'shared/lib/currency'
     import { locales, setLanguage, _ } from 'shared/lib/i18n'
-    import { addProfileCurrencyPriceData } from 'shared/lib/marketData'
+    import { addProfileCurrencyPriceData } from 'shared/lib/market'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { refreshBalanceOverview, updateAccountsBalanceEquiv } from 'shared/lib/wallet'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
     let notificationsChecked = $appSettings.notifications
     let hideNetworkStatistics = $activeProfile?.settings.hideNetworkStatistics
@@ -22,7 +23,7 @@
 
     const handleCurrencySelect = (item) => {
         updateProfile('settings.currency', item.value)
-        addProfileCurrencyPriceData()
+        void addProfileCurrencyPriceData()
         refreshBalanceOverview()
         updateAccountsBalanceEquiv()
     }

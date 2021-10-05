@@ -859,7 +859,8 @@
         "sending": "Invio",
         "legacyNetwork": "Rete Legacy",
         "capsLock": "Blocco maiuscole è attivo",
-        "version": "Versione {version}"
+        "version": "Versione {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "Oggi",

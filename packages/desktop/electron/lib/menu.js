@@ -1,7 +1,10 @@
 import { app, ipcMain, Menu, shell } from 'electron'
 import { WalletRoutes } from 'shared/lib/typings/routes'
 import { closeAboutWindow, getOrInitWindow, openAboutWindow } from '../main'
-import { menuState as state } from './menuState'
+import { menuState } from './menuState'
+
+let state = menuState
+
 /**
  * Creates a native menu tree and applies it to the application window
  */
@@ -24,6 +27,7 @@ export const initMenu = () => {
 
     app.once('ready', () => {
         ipcMain.handle('menu-update', (e, args) => {
+            /* eslint-disable no-import-assign */
             state = Object.assign({}, state, args)
             mainMenu = createMenu()
         })
@@ -37,23 +41,21 @@ export const initMenu = () => {
         ipcMain.handle('maximize', () => {
             const isMaximized = getOrInitWindow('main').isMaximized()
             if (isMaximized) {
-                getOrInitWindow('main').restore();
+                getOrInitWindow('main').restore()
             } else {
-                getOrInitWindow('main').maximize();
+                getOrInitWindow('main').maximize()
             }
             return !isMaximized
         })
 
-        ipcMain.handle('isMaximized', () => {
-            return getOrInitWindow('main').isMaximized()
-        })
+        ipcMain.handle('isMaximized', () => getOrInitWindow('main').isMaximized())
 
         ipcMain.handle('minimize', () => {
-            getOrInitWindow('main').minimize();
+            getOrInitWindow('main').minimize()
         })
 
         ipcMain.handle('close', () => {
-            getOrInitWindow('main').close();
+            getOrInitWindow('main').close()
         })
 
         mainMenu = createMenu()
@@ -94,29 +96,26 @@ const buildTemplate = () => {
                     label: state.strings.diagnostics,
                     click: () => getOrInitWindow('main').webContents.send('menu-diagnostics'),
                 },
-            ]
-        }
+            ],
+        },
     ]
 
     if (!app.isPackaged) {
-        template[0].submenu.push(
-            {
-                label: "Developer Tools",
-                role: 'toggleDevTools'
-            }
-        )
+        template[0].submenu.push({
+            label: 'Developer Tools',
+            role: 'toggleDevTools',
+        })
     }
 
     template[0].submenu = template[0].submenu.concat([
         {
             label: state.strings.errorLog,
-            click: () => getOrInitWindow('main').webContents.send('menu-error-log')
+            click: () => getOrInitWindow('main').webContents.send('menu-error-log'),
         },
         {
             type: 'separator',
         },
-    ]
-    )
+    ])
 
     if (process.platform === 'darwin') {
         template[0].submenu = template[0].submenu.concat([
@@ -180,7 +179,8 @@ const buildTemplate = () => {
                 },
                 {
                     label: state.strings.addAccount,
-                    click: () => getOrInitWindow('main').webContents.send('menu-navigate-wallet', WalletRoutes.CreateAccount),
+                    click: () =>
+                        getOrInitWindow('main').webContents.send('menu-navigate-wallet', WalletRoutes.CreateAccount),
                     enabled: state.enabled,
                 },
                 {
@@ -238,8 +238,8 @@ const buildTemplate = () => {
  * Creates context menu
  * @returns {Menu} Context menu
  */
-export const contextMenu = () => {
-    return Menu.buildFromTemplate([
+export const contextMenu = () =>
+    Menu.buildFromTemplate([
         {
             label: state.strings.undo,
             role: 'undo',
@@ -271,4 +271,3 @@ export const contextMenu = () => {
             role: 'selectAll',
         },
     ])
-}

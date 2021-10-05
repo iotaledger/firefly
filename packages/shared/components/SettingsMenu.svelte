@@ -1,15 +1,18 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
+    import { Locale } from 'shared/lib/typings/i18n'
+
+    export let locale: Locale
 
     export let settings
     export let activeSettings = []
-    export let locale
     export let icons
     export let icon
     export let iconColor
     export let title
     export let description
-    export let onClick = (setting) => {}
+
+    export let onClick = (..._: any[]): void => {}
 </script>
 
 <div class="flex-1">

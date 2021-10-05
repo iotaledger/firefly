@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
-    import { convertToFiat, currencies, CurrencyTypes, exchangeRates, formatCurrency } from 'shared/lib/currency'
+    import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { getInitials, truncateString } from 'shared/lib/helpers'
     import { formatDate } from 'shared/lib/i18n'
     import { activeProfile } from 'shared/lib/profile'
@@ -14,23 +14,27 @@
         getInternalFlag,
         getMilestoneMessageValue,
         receiverAddressesFromTransactionPayload,
-        sendAddressFromTransactionPayload,
-        WalletAccount,
+        sendAddressFromTransactionPayload
     } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Writable } from 'svelte/store'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { CurrencyTypes } from 'shared/lib/typings/currency'
+
+    export let locale: Locale
 
     export let id
     export let timestamp
     export let confirmed
-    export let locale
     export let payload: Payload
-    export let onBackClick = () => {}
     export let balance // migration tx
 
-    let cachedMigrationTx = !payload
-    let milestonePayload = payload?.type === 'Milestone' ? (payload as Milestone) : undefined
-    let txPayload = payload?.type === 'Transaction' ? (payload as Transaction) : undefined
+    export let onBackClick = (): void => {}
+
+    const cachedMigrationTx = !payload
+    const milestonePayload = payload?.type === 'Milestone' ? payload : undefined
+    const txPayload = payload?.type === 'Transaction' ? payload : undefined
 
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
 
@@ -51,7 +55,7 @@
         if (txPayload) {
             return receiverAddressesFromTransactionPayload(txPayload)
         } else if (milestonePayload) {
-            const funds = milestonePayload.data.essence.receipt.data.funds
+            const {funds} = milestonePayload.data.essence.receipt.data
 
             const firstAccount = $accounts.find((acc) => acc.index === 0)
             const firstAccountAddresses = firstAccount.addresses.map((address) => address.address)
@@ -90,9 +94,9 @@
         return null
     }
 
-    let senderAddress: string = prepareSenderAddress()
-    let receiverAddresses: string[] = prepareReceiverAddresses()
-    let receiverAddressesYou: WalletAccount[] = receiverAddresses.map((a) => findAccountWithAddress(a))
+    const senderAddress: string = prepareSenderAddress()
+    const receiverAddresses: string[] = prepareReceiverAddresses()
+    const receiverAddressesYou: WalletAccount[] = receiverAddresses.map((a) => findAccountWithAddress(a))
 
     $: senderAccount = prepareSenderAccount()
     $: receiverAccount = prepareReceiverAccount()
@@ -126,7 +130,7 @@
                 </div>
                 <Text smaller>{locale('general.you')}</Text>
             {:else}
-                <Text smaller>{truncateString(senderAddress, 3, 3, 3)}</Text>
+                <Text smaller>{truncateString(senderAddress, 3, 3, 3) || locale('general.unknown')}</Text>
             {/if}
         </div>
         <Icon icon="small-chevron-right" classes="mx-4 text-gray-500 dark:text-white" />
@@ -141,7 +145,7 @@
                 <Text smaller>{locale('general.you')}</Text>
             {:else}
                 {#each receiverAddresses as address}
-                    <Text smaller>{truncateString(address, 3, 3, 3)}</Text>
+                    <Text smaller>{truncateString(address, 3, 3, 3) || locale('general.unknown')}</Text>
                 {/each}
             {/if}
         </div>

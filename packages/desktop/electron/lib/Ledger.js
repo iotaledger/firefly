@@ -1,37 +1,37 @@
-const TransportHid = require('@ledgerhq/hw-transport-node-hid').default;
-const TransportSpeculos = require('@ledgerhq/hw-transport-node-speculos').default;
+const TransportHid = require('@ledgerhq/hw-transport-node-hid').default
+const TransportSpeculos = require('@ledgerhq/hw-transport-node-speculos').default
 const Iota = require('hw-app-iota').default
 
 const USE_SIMULATOR = false
-const SIMULATOR_PORT = 9999;
+const SIMULATOR_PORT = 9999
 
 async function createTransport() {
     if (USE_SIMULATOR) {
-        return await TransportSpeculos.open({
-            apduPort: SIMULATOR_PORT
+        return TransportSpeculos.open({
+            apduPort: SIMULATOR_PORT,
         })
     }
 
-    return await TransportHid.create();
+    return TransportHid.create()
 }
 
 class Ledger {
     constructor() {
-        this.connected = false;
-        this.listeners = [];
+        this.connected = false
+        this.listeners = []
 
         this.subscription = TransportHid.listen({
             next: (e) => {
-                this.onMessage(e.type);
-            }
-        });
+                this.onMessage(e.type)
+            },
+        })
 
-        this.selectSeed = this.selectSeed.bind(this);
-        this.awaitConnection = this.awaitConnection.bind(this);
-        this.awaitApplication = this.awaitApplication.bind(this);
-        this.getAppMaxBundleSize = this.getAppMaxBundleSize.bind(this);
-        this.addListener = this.addListener.bind(this);
-        this.removeListener = this.removeListener.bind(this);
+        this.selectSeed = this.selectSeed.bind(this)
+        this.awaitConnection = this.awaitConnection.bind(this)
+        this.awaitApplication = this.awaitApplication.bind(this)
+        this.getAppMaxBundleSize = this.getAppMaxBundleSize.bind(this)
+        this.addListener = this.addListener.bind(this)
+        this.removeListener = this.removeListener.bind(this)
     }
 
     /**
@@ -43,21 +43,21 @@ class Ledger {
      */
     async selectSeed(index, page, security) {
         if (!this.connected) {
-            await this.awaitConnection();
+            await this.awaitConnection()
         }
 
         if (!this.connected) {
-            throw new Error('Ledger connection error');
+            throw new Error('Ledger connection error')
         }
 
         if (this.iota) {
-            this.transport.close();
-            this.iota = null;
+            this.transport.close()
+            this.iota = null
         }
 
-        await this.awaitApplication(index, page, security);
+        await this.awaitApplication(index, page, security)
 
-        return { iota: this.iota, callback: () => this.transport.close() };
+        return { iota: this.iota, callback: () => this.transport.close() }
     }
 
     /**
@@ -68,12 +68,12 @@ class Ledger {
         return new Promise((resolve) => {
             const callbackSuccess = (connected) => {
                 if (connected) {
-                    resolve();
-                    this.removeListener(callbackSuccess);
+                    resolve()
+                    this.removeListener(callbackSuccess)
                 }
-            };
-            this.addListener(callbackSuccess);
-        });
+            }
+            this.addListener(callbackSuccess)
+        })
     }
 
     /**
@@ -85,42 +85,41 @@ class Ledger {
      */
     async awaitApplication(index, page, security) {
         return new Promise((resolve, reject) => {
-            let timeout = null;
-            let rejected = false;
+            let timeout = null
+            const rejected = false
 
             const callback = async () => {
                 try {
-                    this.transport = await createTransport();
+                    this.transport = await createTransport()
 
-                    this.iota = new Iota(this.transport);
+                    this.iota = new Iota(this.transport)
 
-                    await this.iota.setActiveSeed(`44'/4218'/${index}'/${page}'`, security || 2);
+                    await this.iota.setActiveSeed(`44'/4218'/${index}'/${page}'`, security || 2)
 
-                    clearTimeout(timeout);
+                    clearTimeout(timeout)
 
-                    resolve(true);
+                    resolve(true)
                 } catch (error) {
                     if (this.transport) {
-                        this.transport.close();
+                        this.transport.close()
                     }
-                    this.iota = null;
-
+                    this.iota = null
 
                     if (rejected) {
-                        return;
+                        return
                     }
 
                     // Retry application await on error 0x6e00 - IOTA application not open
                     if (error.statusCode === 0x6e00) {
-                        timeout = setTimeout(() => callback(), 4000);
+                        timeout = setTimeout(() => callback(), 4000)
                     } else {
-                        reject(error);
+                        reject(error)
                     }
                 }
-            };
+            }
 
-            callback();
-        });
+            callback()
+        })
     }
 
     /**
@@ -128,7 +127,7 @@ class Ledger {
      * @returns {number}
      */
     async getAppMaxBundleSize() {
-        return await this.iota.getAppMaxBundleSize();
+        return this.iota.getAppMaxBundleSize()
     }
 
     /**
@@ -136,12 +135,12 @@ class Ledger {
      * @param {string} status -
      */
     onMessage(status) {
-        this.connected = status === 'add';
-        this.listeners.forEach((listener) => listener(this.connected));
+        this.connected = status === 'add'
+        this.listeners.forEach((listener) => listener(this.connected))
 
         if (!this.connected && this.iota) {
-            this.transport.close();
-            this.iota = null;
+            this.transport.close()
+            this.iota = null
         }
     }
 
@@ -150,10 +149,10 @@ class Ledger {
      * @param {function} callback - Event callback
      */
     addListener(callback) {
-        this.listeners.push(callback);
+        this.listeners.push(callback)
 
         if (this.connected) {
-            callback(this.connected);
+            callback(this.connected)
         }
     }
 
@@ -164,21 +163,21 @@ class Ledger {
     removeListener(callback) {
         this.listeners.forEach((listener, index) => {
             if (callback === listener) {
-                this.listeners.splice(index, 1);
+                this.listeners.splice(index, 1)
             }
-        });
+        })
     }
 }
 
 class LedgerSpeculos extends Ledger {
     async awaitConnection() {
         return new Promise((resolve) => {
-            this.connected = true;
+            this.connected = true
             resolve()
-        });
+        })
     }
 }
 
-const _ledger = USE_SIMULATOR ? new LedgerSpeculos() : new Ledger();
+const _ledger = USE_SIMULATOR ? new LedgerSpeculos() : new Ledger()
 
-export default _ledger;
+export default _ledger

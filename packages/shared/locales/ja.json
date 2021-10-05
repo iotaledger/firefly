@@ -859,7 +859,8 @@
         "sending": "送金中",
         "legacyNetwork": "レガシーネットワーク",
         "capsLock": "Caps Lock キーが有効になっています",
-        "version": "バージョン {version}"
+        "version": "バージョン {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "今日",

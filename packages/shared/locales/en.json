@@ -636,6 +636,7 @@
         "outgoingMi": "Outgoing {value}",
         "portoflio": "Portfolio",
         "token": "Token",
+        "holdings": "Holdings",
         "accountValue": "Wallet Value",
         "accountActivity": "Wallet Activity",
         "timeframe1Hour": "1 hour",
@@ -861,7 +862,8 @@
         "sending": "Sending",
         "legacyNetwork": "Legacy Network",
         "capsLock": "Caps Lock is on",
-        "version": "Version {version}"
+        "version": "Version {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "Today",
@@ -945,6 +947,7 @@
         },
         "node": {
             "invalid": "Please enter a valid URL.",
+            "dns": "Could not resolve DNS for node.",
             "https": "HTTPS is required. Set up a developer profile to use unsecured HTTP connections.",
             "duplicate": "This node has already been added.",
             "unsynced": "The node is not in sync.",
@@ -981,6 +984,9 @@
         },
         "migration": {
             "missingBundle": "An error occurred while trying to find the transaction bundle."
+        },
+        "crypto": {
+            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
         }
     },
     "tooltips": {

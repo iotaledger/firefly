@@ -12,7 +12,7 @@
     $: $appSettings.darkMode = shouldBeDarkMode($appSettings.theme)
 
     onMount(() => {
-        pollChrysalisSnapshot()
+        void pollChrysalisSnapshot()
     })
 </script>
 

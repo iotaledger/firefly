@@ -6,11 +6,13 @@
     import { asyncChangeStrongholdPassword, asyncSetStrongholdPassword, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import zxcvbn from 'zxcvbn'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+    
     export let mobile
 
-    let existingPassword = $strongholdPassword
+    const existingPassword = $strongholdPassword
     let password = ''
     let confirmedPassword = ''
     let error = ''

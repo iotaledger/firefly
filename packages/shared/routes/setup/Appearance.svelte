@@ -2,8 +2,10 @@
     import { Animation, Button, ButtonRadio, OnboardingLayout, Text } from 'shared/components'
     import { appSettings, AppTheme, shouldBeDarkMode } from 'shared/lib/appSettings'
     import { createEventDispatcher, onMount } from 'svelte'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     export let mobile
 
     const BLINK_SEGMENTS = [[1, 200]]

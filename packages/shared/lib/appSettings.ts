@@ -1,27 +1,15 @@
 import { persistent } from './helpers'
+import type { AppSettings, AppTheme } from './typings/app'
 
 /**
- * The types of themes for the app
+ * Persisted data for the application settings.
  */
-export type AppTheme = 'light' | 'dark' | 'system'
-
-/**
- * App Settings
- */
-export interface AppSettings {
-    deepLinking: boolean
-    language: string,
-    theme: AppTheme,
-    darkMode: boolean,
-    notifications: boolean
-}
-
 export const appSettings = persistent<AppSettings>('settings', {
     deepLinking: false,
     language: 'en',
     theme: 'light',
     darkMode: false,
-    notifications: true
+    notifications: true,
 })
 
 /**
@@ -37,9 +25,10 @@ const isSystemInDarkMode = window.matchMedia('(prefers-color-scheme: dark)').mat
 /**
  * Determines if the theme is dark or not based on the current
  * application settings
- * @param theme the theme to check against
- * @returns true if the app should be in dark mode according to the theme
+ *
+ * @param {AppTheme} theme The theme to check against
+ *
+ * @returns {boolean} True if the app should be in dark mode according to the theme
  */
-export const shouldBeDarkMode = (theme: AppTheme): boolean => {
-    return theme === 'system' ? isSystemInDarkMode : theme === 'dark'
-}
+export const shouldBeDarkMode = (theme: AppTheme): boolean =>
+    theme === 'system' ? isSystemInDarkMode : theme === 'dark'

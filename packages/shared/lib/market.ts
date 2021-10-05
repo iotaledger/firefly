@@ -1,7 +1,9 @@
-import { currencies, Currencies, CurrencyTypes, exchangeRates, ExchangeRates } from 'shared/lib/currency'
 import { activeProfile } from 'shared/lib/profile'
 import Validator from 'shared/lib/validator'
 import { get, writable } from 'svelte/store'
+import { HistoryDataProps, MarketData, PriceData, Timeframes } from './typings/market'
+import { CurrencyTypes } from './typings/currency'
+import { currencies, exchangeRates } from './currency'
 
 /**
  * Market data endpoints list
@@ -17,83 +19,6 @@ const DEFAULT_MARKETDATA_ENDPOINT_TIMEOUT = 5000
  * Default interval for polling the market data
  */
 const DEFAULT_MARKETDATA_POLL_INTERVAL = 300000 // 5 minutes
-
-export enum HistoryDataProps {
-    ONE_HOUR = '1h',
-    TWENTY_FOUR_HOURS = '24h',
-    SEVEN_DAYS = '7d',
-    ONE_MONTH = '1m',
-}
-
-enum Timeframes {
-    ONE_HOUR = '1Hour',
-    TWENTY_FOUR_HOURS = '1Day',
-    SEVEN_DAYS = '1Week',
-    ONE_MONTH = '1Month',
-}
-
-enum Histories {
-    HISTORY_BTC = 'history-btc',
-    HISTORY_ETH = 'history-eth',
-    HISTORY_EUR = 'history-eur',
-    HISTORY_USD = 'history-usd',
-}
-
-export type HistoryData = {
-    [HistoryDataProps.ONE_HOUR]: (string | number)[]
-    [HistoryDataProps.SEVEN_DAYS]: (string | number)[]
-    [HistoryDataProps.TWENTY_FOUR_HOURS]: (string | number)[]
-    [HistoryDataProps.ONE_MONTH]: (string | number)[]
-}
-
-type HistoryBTC = {
-    currency: CurrencyTypes.BTC
-    data: HistoryData
-}
-
-type HistoryETH = {
-    currency: CurrencyTypes.ETH
-    data: HistoryData
-}
-
-type HistoryEUR = {
-    currency: CurrencyTypes.EUR
-    data: HistoryData
-}
-
-type HistoryUSD = {
-    currency: CurrencyTypes.USD
-    data: HistoryData
-}
-
-type Market = {
-    usd: number
-    usd_24h_change: number
-    usd_24h_vol: number
-    usd_market_cap: number
-}
-
-type MarketData = {
-    currencies: Currencies
-    market: Market
-    rates: ExchangeRates
-    [Histories.HISTORY_BTC]: HistoryBTC
-    [Histories.HISTORY_ETH]: HistoryETH
-    [Histories.HISTORY_EUR]: HistoryEUR
-    [Histories.HISTORY_USD]: HistoryUSD
-}
-
-export type MarketDataValidationResponse = {
-    type: 'MarketData'
-    payload: MarketData
-}
-
-export type PriceData = {
-    [CurrencyTypes.BTC]: HistoryData
-    [CurrencyTypes.EUR]: HistoryData
-    [CurrencyTypes.USD]: HistoryData
-    [CurrencyTypes.ETH]: HistoryData
-}
 
 /**
  * Market cap
@@ -154,7 +79,7 @@ export async function pollMarketData(): Promise<void> {
     // Load any previously stored data in case the endpoints are not working
     // these might be a bit out of date but they are better than no values at all
     try {
-        const marketData = localStorage.getItem("marketData")
+        const marketData = localStorage.getItem('marketData')
         if (marketData) {
             processMarketData(JSON.parse(marketData))
         }
@@ -164,6 +89,7 @@ export async function pollMarketData(): Promise<void> {
     }
 
     await fetchMarketData()
+    /* eslint-disable @typescript-eslint/no-misused-promises */
     setInterval(async () => fetchMarketData(), DEFAULT_MARKETDATA_POLL_INTERVAL)
 }
 
@@ -185,17 +111,15 @@ export async function fetchMarketData(): Promise<void> {
         const endpoint = MARKETDATA_ENDPOINTS[index]
         try {
             const abortController = new AbortController()
-            const timerId = setTimeout(
-                () => {
-                    if (abortController) {
-                        abortController.abort();
-                    }
-                },
-                DEFAULT_MARKETDATA_ENDPOINT_TIMEOUT);
+            const timerId = setTimeout(() => {
+                if (abortController) {
+                    abortController.abort()
+                }
+            }, DEFAULT_MARKETDATA_ENDPOINT_TIMEOUT)
 
-            requestOptions.signal = abortController.signal;
+            requestOptions.signal = abortController.signal
 
-            const response = await fetch(endpoint, requestOptions);
+            const response = await fetch(endpoint, requestOptions)
 
             clearTimeout(timerId)
 
@@ -205,10 +129,10 @@ export async function fetchMarketData(): Promise<void> {
 
             // Successfully retrieved and processed the market data
             // so store it in case the endpoint is down in the future
-            localStorage.setItem("marketData", JSON.stringify(marketData))
+            localStorage.setItem('marketData', JSON.stringify(marketData))
             break
         } catch (err) {
-            console.error(err.name === "AbortError" ? new Error(`Could not fetch from ${endpoint}.`) : err)
+            console.error(err.name === 'AbortError' ? new Error(`Could not fetch from ${endpoint}.`) : err)
         }
     }
 }
@@ -242,13 +166,13 @@ function processMarketData(marketData) {
         volume.set(marketData.market.usd_24h_vol)
         change24h.set(marketData.market.usd_24h_change)
 
-        addProfileCurrencyPriceData()
+        void addProfileCurrencyPriceData()
     } else {
         throw new Error(payload.error)
     }
 }
 
-export async function addProfileCurrencyPriceData(): Promise<void> {
+export function addProfileCurrencyPriceData(): void {
     const profile = get(activeProfile)
     if (profile) {
         // get selected profile currency and add its estimated history
@@ -256,9 +180,12 @@ export async function addProfileCurrencyPriceData(): Promise<void> {
         if (!Object.values(CurrencyTypes.USD).includes(profileCurrency)) {
             const profileCurrencyRate: number = get(exchangeRates)[profileCurrency.toUpperCase()]
             const usdHistory = get(priceData)[CurrencyTypes.USD]
-            let profileCurrencyHistory = {};
+            const profileCurrencyHistory = {}
             Object.keys(usdHistory).forEach((key) => {
-                let convertedProfileCurrencyHistory = usdHistory[key].map(([timestamp, value]) => [timestamp, (value * profileCurrencyRate).toString()])
+                const convertedProfileCurrencyHistory = usdHistory[key].map(([timestamp, value]) => [
+                    timestamp,
+                    (value * profileCurrencyRate).toString(),
+                ])
                 profileCurrencyHistory[key] = convertedProfileCurrencyHistory
             })
             priceData.update((_priceData) => ({ ..._priceData, [profileCurrency]: profileCurrencyHistory }))

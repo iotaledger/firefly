@@ -30,8 +30,10 @@
     import Transaction from './Transaction.svelte'
     import Version from './Version.svelte'
     import Video from './Video.svelte'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale = 'en'
+    export let locale: Locale
+
     export let type = undefined
     export let props = undefined
     export let hideClose = undefined

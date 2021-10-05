@@ -1,7 +1,8 @@
-<script>
+<script lang="typescript">
     import { Icon, Text } from 'shared/components'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 </script>
 
 <div class="p-8 flex flex-col w-full items-center justify-center text-center">
