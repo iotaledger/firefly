@@ -4,7 +4,7 @@
     import { debounce } from 'shared/lib/utils'
     import { onDestroy } from 'svelte'
     import { get } from 'svelte/store'
-    import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE } from 'shared/lib/units'
+    import { isIdleTimeValid, MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE } from 'shared/lib/time'
 
     let timeout
     let isDestroyed = false
@@ -29,28 +29,6 @@
                 timeout = setTimeout(lock, timeoutDuration)
             }
         }
-    }
-
-    function isIdleTimeValid(newLastActiveTime: Date, timeoutDuration: number): boolean {
-        /**
-         * CAUTION: An attacker may be able to manipulate the date / time on his device, so
-         * it is necessary to ensure that the newLastActiveTime is really newer than the old one.
-         */
-        const oldLastActiveTime = get(lastActiveAt)
-        const isValidIdleTimestamp = newLastActiveTime >= oldLastActiveTime
-
-        const idleDuration = calculateUpdatedIdleDuration(newLastActiveTime)
-        const isValidIdleDuration = idleDuration < timeoutDuration
-
-        return isValidIdleTimestamp && isValidIdleDuration
-    }
-
-    function calculateUpdatedIdleDuration(newLastActiveTime: Date): number {
-        const oldLastActiveTime = get(lastActiveAt)
-
-        lastActiveAt.set(newLastActiveTime)
-
-        return newLastActiveTime - oldLastActiveTime
     }
 
     function lock(): void {

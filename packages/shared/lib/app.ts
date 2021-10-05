@@ -7,6 +7,7 @@ import { closePopup } from './popup'
 import { activeProfile, clearActiveProfile, isLedgerProfile, isStrongholdLocked } from './profile'
 import { resetRouter } from './router'
 import { api, destroyActor, resetWallet } from './wallet'
+import { lastActiveAt } from './time'
 
 /**
  * Mobile mode
@@ -41,11 +42,6 @@ interface SendParams {
 export const sendParams = writable<SendParams>({ amount: 0, address: '', message: '', isInternal: false })
 export const clearSendParams = (isInternal = false): void =>
     sendParams.set({ amount: 0, address: '', message: '', isInternal })
-
-/**
- * The last timestamp that the app user was active
- */
-export const lastActiveAt = writable<Date>(new Date())
 
 /**
  * Determines whether a user is logged in
