@@ -185,9 +185,9 @@ export const validateBech32Address = (prefix: string, addr: string): undefined |
 }
 
 /**
- * Debounce the opertation
- * @param callback The callback to call in completion
- * @param wait How to long wait before calling callback
+ * Debounce the operation
+ * @param callback Callback to execute after debouncing
+ * @param wait Length of time (millis) before executing the callback
  */
 export function debounce(callback: () => void, wait = 500): (...args: unknown[]) => void {
     let _timeout

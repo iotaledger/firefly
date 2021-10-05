@@ -4,24 +4,26 @@
     import { debounce } from 'shared/lib/utils'
     import { onDestroy } from 'svelte'
     import { get } from 'svelte/store'
+    import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE } from 'shared/lib/units'
 
     let timeout
     let isDestroyed = false
 
-    function handleEvent(): void {
-        // The events are debounced so the component can get onDestroy
-        // called and be followed by a debounced handleEvent so
-        // make sure the idle doesn't get triggered again when its
-        // already destroyed
+    function updateIdleTime(): void {
+        /**
+         * CAUTION: Events must be debounced so that the component can have
+         * onDestroy properly called. Without this there is a risk of an event
+         * triggering again after this component has already been destroyed.
+         */
         if (!isDestroyed) {
             clearTimeout(timeout)
 
             const ap = get(activeProfile)
             if (ap) {
-                const now = new Date()
-                const timeoutDuration = ap.settings.lockScreenTimeout * 60 * 1000
+                const timeoutDuration =
+                    MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE * ap.settings.lockScreenTimeout
 
-                if(!isIdleTimeValid(now, timeoutDuration))
+                if(!isIdleTimeValid(new Date(), timeoutDuration))
                     lock()
 
                 timeout = setTimeout(lock, timeoutDuration)
@@ -62,8 +64,8 @@
 </script>
 
 <svelte:window
-    on:keydown={debounce(handleEvent)}
-    on:mousemove={debounce(handleEvent)}
-    on:mousedown={debounce(handleEvent)}
-    on:touchstart={debounce(handleEvent)}
-    on:scroll={debounce(handleEvent)}/>
+    on:keydown={debounce(updateIdleTime)}
+    on:mousemove={debounce(updateIdleTime)}
+    on:mousedown={debounce(updateIdleTime)}
+    on:touchstart={debounce(updateIdleTime)}
+    on:scroll={debounce(updateIdleTime)}/>
