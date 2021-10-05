@@ -7,7 +7,6 @@ import { closePopup } from './popup'
 import { activeProfile, clearActiveProfile, isLedgerProfile, isStrongholdLocked } from './profile'
 import { resetRouter } from './router'
 import { api, destroyActor, resetWallet } from './wallet'
-import { lastActiveAt } from './time'
 
 /**
  * Mobile mode
@@ -28,6 +27,11 @@ export const strongholdPassword = writable<string>(null)
  * Seed BIP39 mnemonic recovery phrase
  */
 export const mnemonic = writable<string[]>(null)
+
+/**
+ * The last timestamp that the app user was active
+ */
+export const lastActiveAt = writable<Date>(new Date())
 
 interface SendParams {
     amount: number
