@@ -3,6 +3,7 @@
     import { Text, Tooltip } from 'shared/components'
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
     import { tick } from 'svelte'
+    import { mobile } from 'shared/lib/app'
 
     export let color = 'blue' // TODO: profiles will have different colors
 
@@ -38,17 +39,19 @@
     }
 </script>
 
-<div class="flex items-start flex-col flex-wrap space-y-1.5">
+<div class="flex flex-col flex-wrap items-start {!$mobile && 'justify-end'} space-y-1.5">
     <balance-box
         bind:this={balanceBox}
         on:mouseenter={toggleTooltip}
         on:mouseleave={toggleTooltip}
         on:click={togglePreciseBalance}>
-        <Text type="h2" overrideColor classes="text-white">
+        <Text type="h2" overrideColor classes={$mobile ? 'text-black dark:text-white' : 'text-white'}>
             {showPreciseBalance ? formatUnitPrecision(balanceRaw, Unit.Mi) : formatUnitBestMatch(balanceRaw, true, 3)}
         </Text>
     </balance-box>
-    <Text type="p" overrideColor smaller classes="text-{color}-200 dark:text-blue-300">{balanceFiat}</Text>
+    <Text type="p" overrideColor smaller classes={$mobile ? 'text-gray-500' : `text-${color}-200 dark:text-blue-300`}>
+        {balanceFiat}
+    </Text>
     {#if showTooltip}
         <Tooltip {parentTop} {parentLeft} {parentWidth}>
             <Text type="p">
