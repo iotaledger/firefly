@@ -2,9 +2,10 @@
     import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { ProfileType, setProfileType } from 'shared/lib/profile'
+    import { Locale } from 'shared/lib/typings/i18n'
     import { createEventDispatcher } from 'svelte'
 
-    export let locale
+    export let locale: Locale
 
     const dispatch = createEventDispatcher()
 
@@ -23,7 +24,11 @@
     </div>
     <div slot="leftpane__content">
         <Text type="p" secondary classes="mb-8">{locale('views.create.body')}</Text>
-        <Button icon="settings" classes="w-full mb-5" secondary onClick={() => handleContinueClick(ProfileType.Software)}>
+        <Button
+            icon="settings"
+            classes="w-full mb-5"
+            secondary
+            onClick={() => handleContinueClick(ProfileType.Software)}>
             {locale('views.create.softwareAccount.title')}
             {#if !$mobile}
                 <Text type="p" secondary smaller>{locale('views.create.softwareAccount.description')}</Text>

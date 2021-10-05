@@ -3,9 +3,10 @@
     import { mobile } from 'shared/lib/app'
     import { createEventDispatcher, getContext } from 'svelte'
     import type { Writable } from 'svelte/store'
-    import type { ImportType } from '../Import.svelte'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { ImportType } from 'shared/lib/typings/profile'
 
-    export let locale
+    export let locale: Locale
 
     const importType = getContext<Writable<ImportType>>('importType')
 

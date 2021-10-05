@@ -1,0 +1,22 @@
+// CAUTION: This tsconfig.lint.json file is NOT meant to be
+// used for compilation or building.
+
+{
+    "compilerOptions": {
+        "types": ["jest"]
+    },
+    "include": [
+        "packages/backend/bindings/node",
+        "packages/desktop",
+        "packages/mobile",
+        "packages/shared/components",
+        "packages/shared/lib",
+        "packages/shared/lib/shell",
+        "packages/shared/lib/typings",
+        "packages/shared/lib/wordlists",
+        "packages/shared/locales/en.json",
+        "packages/shared/routes",
+        "packages/shared/tailwind.config.js"
+    ],
+    "exclude": [".eslintrc.js", "**/node_modules", "**/tests"]
+}

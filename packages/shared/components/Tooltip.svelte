@@ -1,6 +1,6 @@
 <script lang="typescript">
-    import { onMount } from 'svelte'
     import { appSettings } from 'shared/lib/appSettings'
+    import { onMount } from 'svelte'
     export let classes = ''
     export let parentLeft = 0
     export let parentTop = 0
@@ -10,12 +10,20 @@
     let top = 0
     let left = 0
 
+    let darkModeEnabled
     $: darkModeEnabled = $appSettings.darkMode
 
-    onMount(() => {
+    $: parentLeft, parentTop, parentWidth, refreshPosition()
+
+    onMount(refreshPosition)
+
+    function refreshPosition() {
+        if (!tooltip) {
+            return
+        }
         top = parentTop - tooltip.offsetHeight - 15
         left = parentLeft - tooltip.offsetWidth / 2 + parentWidth
-    })
+    }
 </script>
 
 <style type="text/scss">

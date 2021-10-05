@@ -1,0 +1,23 @@
+name: Snyk
+
+on:
+  pull_request:
+  push:
+    branches:
+      - 'develop'
+
+jobs:
+  test:
+    # Only run on push events or PRs from iotaledger/firefly, skip on PRs from forks
+    # Secret variables cannot be exposed to PRs from forks
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Check vulnerabilities
+        uses: snyk/actions/node@0.3.0
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --yarn-workspaces --strict-out-of-sync=false --detection-depth=5 --dev

@@ -859,7 +859,8 @@
         "sending": "Envoi en cours",
         "legacyNetwork": "Ancien Réseau",
         "capsLock": "Majuscules activées",
-        "version": "Version {version}"
+        "version": "Version {version}",
+        "unknown": "Inconnu"
     },
     "dates": {
         "today": "Aujourd'hui",

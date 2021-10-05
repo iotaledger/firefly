@@ -5,7 +5,7 @@
     import { onMount } from 'svelte'
 
     export let events = {}
-    export let onClick = () => ''
+
     export let secondary = false
     export let disabled = false
     export let warning = false
@@ -23,7 +23,11 @@
     export let showHoverText = undefined
     export let iconOnly = false
 
+    export let onClick = (): void | string => ''
+
     let buttonElement
+    let darkModeEnabled
+
     $: darkModeEnabled = $appSettings.darkMode
 
     onMount(() => {

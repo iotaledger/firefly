@@ -3,9 +3,11 @@
     import { createEventDispatcher, getContext } from 'svelte'
     import type { Writable } from 'svelte/store'
     import { ImportType } from '../Import.svelte'
-    import { mobile } from 'shared/lib/app'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
+    export let mobile
     export let error = ''
     export let busy = false
 

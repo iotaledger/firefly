@@ -11,8 +11,9 @@
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
     const dispatch = createEventDispatcher()
 
@@ -20,7 +21,7 @@
     let progressBarMessage = `${progressBarPercent} % completed`
     let timeElapsed = 0
 
-    let legacyLedger = $walletSetupType === SetupType.TrinityLedger
+    const legacyLedger = $walletSetupType === SetupType.TrinityLedger
 
     let timeout
     let interval
@@ -64,7 +65,7 @@
                             })
                     }
                     return createMigrationBundle(getInputIndexesForBundle(bundle), bundle.miningRuns * 10 ** 8, true)
-                        .then((result) => {
+                        .then((data) => {
                             _updateOnSuccess()
                         })
                         .catch((error) => {
@@ -84,7 +85,7 @@
     }
 
     function updateProgress() {
-        progressBarPercent = Math.floor((timeElapsed / (MINING_TIMEOUT_SECONDS * $selectedBundlesToMine.length)) * 100)
+        progressBarPercent = Math.floor(timeElapsed / (MINING_TIMEOUT_SECONDS * $selectedBundlesToMine.length) * 100)
         progressBarMessage = progressBarPercent.toString() + '% completed'
     }
 

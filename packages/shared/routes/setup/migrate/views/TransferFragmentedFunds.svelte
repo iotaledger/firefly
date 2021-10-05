@@ -25,15 +25,16 @@
     import { SetupType } from 'shared/lib/typings/routes'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
     let busy = false
     let migrated = false
     let migratingFundsMessage = ''
     let fullSuccess = $hasMigratedAndConfirmedAllSelectedBundles
 
-    let legacyLedger = $walletSetupType === SetupType.TrinityLedger
+    const legacyLedger = $walletSetupType === SetupType.TrinityLedger
     $: animation = legacyLedger ? 'ledger-migrate-desktop' : 'migrate-desktop'
 
     let closeTransport = () => {}
@@ -197,18 +198,18 @@
                             })
                         }
 
-                        return createMigrationBundle(getInputIndexesForBundle(transaction), 0, false).then((result) => {
+                        return createMigrationBundle(getInputIndexesForBundle(transaction), 0, false).then((data) => {
                             setMigratingTransaction(transaction, 1)
                             transactions = transactions.map((_transaction) => {
                                 if (_transaction.index === transaction.index) {
-                                    return { ..._transaction, bundleHash: result.payload.bundleHash }
+                                    return { ..._transaction, bundleHash: data.bundleHash }
                                 }
 
                                 return _transaction
                             })
 
-                            return sendMigrationBundle(result.payload.bundleHash).then(() => {
-                                migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, result.payload.bundleHash]
+                            return sendMigrationBundle(data.bundleHash).then(() => {
+                                migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, data.bundleHash]
                             })
                         })
                     })
@@ -360,20 +361,20 @@
                             setMigratingTransaction(transaction, 1)
                             transactions = transactions.map((_transaction, i) => {
                                 if (_transaction.index === transaction.index) {
-                                    return { ..._transaction, bundleHash: result.payload.bundleHash }
+                                    return { ..._transaction, bundleHash: result.bundleHash }
                                 }
 
                                 return _transaction
                             })
 
-                            return sendMigrationBundle(result.payload.bundleHash).then(() => {
+                            return sendMigrationBundle(result.bundleHash).then(() => {
                                 if (!hasBroadcastAnyBundle) {
                                     hasBroadcastAnyBundle = true
 
                                     persistProfile()
                                 }
 
-                                migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, result.payload.bundleHash]
+                                migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, result.bundleHash]
                             })
                         })
                     })
@@ -396,9 +397,7 @@
 
                         if (
                             idx === transactions.length - 1 &&
-                            transactions.every((tx) => {
-                                return tx.status !== 0
-                            })
+                            transactions.every((tx) => tx.status !== 0)
                         ) {
                             migrated = true
                             busy = false

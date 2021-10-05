@@ -2,8 +2,9 @@
     import { Animation, Button, Dropzone, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { createEventDispatcher } from 'svelte'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
     let file
     let fileName

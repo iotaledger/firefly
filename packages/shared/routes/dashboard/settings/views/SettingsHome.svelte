@@ -13,8 +13,9 @@
         SecuritySettings,
         SettingsRoutes,
     } from 'shared/lib/typings/routes'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
     const securitySettings = Object.assign({}, SecuritySettings)
     const advancedSettings = Object.assign({}, AdvancedSettings)

@@ -1,7 +1,8 @@
 <script lang="typescript">
     import { Text, Button } from 'shared/components'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale = undefined
+    export let locale: Locale = undefined
     export let onFile = (event?) => {}
     export let extentionsLabel = ''
     export let allowedExtensions

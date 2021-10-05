@@ -859,7 +859,8 @@
         "sending": "Enviando",
         "legacyNetwork": "Red Legacy",
         "capsLock": "Bloqueo de mayúsculas activado",
-        "version": "Versión {version}"
+        "version": "Versión {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "Hoy",

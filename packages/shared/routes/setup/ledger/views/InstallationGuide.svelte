@@ -3,8 +3,9 @@
     import { openPopup } from 'shared/lib/popup'
     import { LedgerAppName } from 'shared/lib/typings/ledger'
     import { createEventDispatcher } from 'svelte'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
     const dispatch = createEventDispatcher()
 

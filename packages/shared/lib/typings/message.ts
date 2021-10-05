@@ -1,40 +1,40 @@
 import type { Bridge, CommunicationIds } from './bridge'
 import type { AccountIdentifier } from './account'
 
-type MessageVersion = 1;
+type MessageVersion = 1
 
 export enum MessageType {
-    /// Message received.
+    // / Message received.
     Received = 1,
-    /// Message sent.
+    // / Message sent.
     Sent = 2,
-    /// Message not broadcasted.
+    // / Message not broadcasted.
     Failed = 3,
-    /// Message not confirmed.
+    // / Message not confirmed.
     Unconfirmed = 4,
-    /// A value message.
+    // / A value message.
     Value = 5,
 }
 
 export interface RegularEssence {
-    inputs: Input[];
-    outputs: Output[];
+    inputs: Input[]
+    outputs: Output[]
     payload?: {
-        type: 'Indexation',
-        data: any;
-    };
-    incoming: boolean;
-    internal: boolean;
-    value: number;
-    remainderValue: number;
+        type: 'Indexation'
+        data: unknown
+    }
+    incoming: boolean
+    internal: boolean
+    value: number
+    remainderValue: number
 }
 
 export type Essence = {
-    type: 'Regular',
+    type: 'Regular'
     data: RegularEssence
 }
 
-export type Input = { type: 'UTXO', data: UTXOInput }
+export type Input = { type: 'UTXO'; data: UTXOInput }
 
 /**
  * Describes an input which references an unspent
@@ -83,24 +83,26 @@ export interface SignatureLockedDustAllowance {
     remainder: boolean
 }
 
-export type Output = {
-    type: 'SignatureLockedSingle',
-    data: SignatureLockedSingleOutput
-} | {
-    type: 'SignatureLockedDustAllowance',
-    data: SignatureLockedDustAllowance
-}
+export type Output =
+    | {
+          type: 'SignatureLockedSingle'
+          data: SignatureLockedSingleOutput
+      }
+    | {
+          type: 'SignatureLockedDustAllowance'
+          data: SignatureLockedDustAllowance
+      }
 
 export interface Transaction {
-    type: 'Transaction',
+    type: 'Transaction'
     data: {
-        essence: Essence;
+        essence: Essence
         unlock_blocks: {
-            type: 'Signature';
+            type: 'Signature'
             data: {
-                type: 'Ed25519';
+                type: 'Ed25519'
                 data: {
-                    public_key: number[];
+                    public_key: number[]
                     signature: number[]
                 }
             }
@@ -110,68 +112,68 @@ export interface Transaction {
 
 interface ReceiptFunds {
     output: {
-        address: string;
-        amount: number;
-        remainder: boolean;
-    },
+        address: string
+        amount: number
+        remainder: boolean
+    }
     tailTransactionHash: string
 }
 
 interface Receipt {
-    type: 'Receipt',
+    type: 'Receipt'
     data: {
-        last: boolean;
-        migratedAt: number;
-        funds: ReceiptFunds[],
+        last: boolean
+        migratedAt: number
+        funds: ReceiptFunds[]
         transaction: {
             data: {
                 input: {
-                    data: string;
+                    data: string
                     type: 'Treasury'
-                },
+                }
                 output: {
                     data: {
-                        amount: number;
+                        amount: number
                     }
                 }
-            },
+            }
             type: 'TreasuryTransaction'
         }
     }
 }
 
 interface MilestoneEssence {
-    index: number;
-    merkleProof: number[];
-    nextPowScore: number;
-    nextPowScoreMilestoneIndex: number;
-    parents: string[];
-    publicKeys: number[];
-    receipt: Receipt;
-    timestamp: number;
-    value: number;
+    index: number
+    merkleProof: number[]
+    nextPowScore: number
+    nextPowScoreMilestoneIndex: number
+    parents: string[]
+    publicKeys: number[]
+    receipt: Receipt
+    timestamp: number
+    value: number
 }
 
 export interface Milestone {
-    type: 'Milestone',
+    type: 'Milestone'
     data: {
-        essence: MilestoneEssence,
+        essence: MilestoneEssence
         signatures: number[]
     }
 }
 
-export type Payload = Transaction | Milestone;
+export type Payload = Transaction | Milestone
 
 export interface Message {
-    id: string;
-    version: MessageVersion;
-    parents: string[];
-    payloadLength: number;
-    payload?: Payload;
-    timestamp: string;
-    nonce: number;
-    confirmed?: boolean;
-    broadcasted: boolean;
+    id: string
+    version: MessageVersion
+    parents: string[]
+    payloadLength: number
+    payload?: Payload
+    timestamp: string
+    nonce: number
+    confirmed?: boolean
+    broadcasted: boolean
 }
 
 export interface ListMessageFilter {
@@ -183,7 +185,12 @@ export interface Transfer {
     address: string
 }
 
-export function reattach(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier, messageId: string) {
+export function reattach(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+    accountId: AccountIdentifier,
+    messageId: string
+): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,

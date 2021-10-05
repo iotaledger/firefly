@@ -859,7 +859,8 @@
         "sending": "Lähetetään",
         "legacyNetwork": "Vanha verkko",
         "capsLock": "Caps Lock on päällä",
-        "version": "Versio {version}"
+        "version": "Versio {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "Tänään",

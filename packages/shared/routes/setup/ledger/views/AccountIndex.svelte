@@ -6,16 +6,17 @@
     import { popupState } from 'shared/lib/popup'
     import { onDestroy, createEventDispatcher } from 'svelte'
     import { LedgerAppName } from 'shared/lib/typings/ledger'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
     let busy = false
     let expert = false
     let showInfo = false
     let infoTimeout
 
-    let min = 0
-    let max = 2147483647
+    const min = 0
+    const max = 2147483647
 
     let index = 0
     let page = 0
@@ -60,9 +61,7 @@
             infoTimeout = setTimeout(() => (showInfo = true), 180000)
             Electron.ledger
                 .selectSeed(index, page, ADDRESS_SECURITY_LEVEL)
-                .then(({ iota, callback }) => {
-                    return getLedgerMigrationData(iota.getAddress, callback)
-                })
+                .then(({ iota, callback }) => getLedgerMigrationData(iota.getAddress, callback))
                 .then((data) => {
                     busy = false
 

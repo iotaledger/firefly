@@ -859,7 +859,8 @@
         "sending": "Sender",
         "legacyNetwork": "Legacy Netværk",
         "capsLock": "Caps Lock er slået til",
-        "version": "Version {version}"
+        "version": "Version {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "I dag",

@@ -4,8 +4,9 @@
     import { openUrl } from 'shared/lib/device'
     import { SetupType } from 'shared/lib/typings/routes'
     import { createEventDispatcher } from 'svelte'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
     const dispatch = createEventDispatcher()
 
