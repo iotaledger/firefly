@@ -6,8 +6,10 @@
     import { formatDate } from 'shared/lib/i18n'
     import { closePopup } from 'shared/lib/popup'
     import { onMount } from 'svelte'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     let hasAutoUpdate = true
 
     function handleDownload() {
@@ -24,9 +26,10 @@
 
     onMount(async () => {
         // @ts-ignore: This value is replaced by Webpack DefinePlugin
+        /* eslint-disable no-undef */
         if (!devMode) {
             await getVersionDetails()
-            await updateCheck()
+            updateCheck()
         }
         const os = await Electron.getOS()
         hasAutoUpdate = os !== 'win32'

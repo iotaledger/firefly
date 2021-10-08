@@ -5,7 +5,7 @@
     import { onMount } from 'svelte'
 
     onMount(() => {
-        pollChrysalisSnapshot()
+        void pollChrysalisSnapshot()
     })
 </script>
 

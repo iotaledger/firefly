@@ -9,14 +9,15 @@
     import { Settings } from 'shared/routes'
     import { onDestroy } from 'svelte'
     import { get } from 'svelte/store'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
     let showNetwork = false
     let healthStatus = 2
     let showProfile = false
-    let profileColor = 'blue' // TODO: each profile has a different color
     let drawer: Drawer
+    const profileColor = 'blue' // TODO: each profile has a different color
 
     const NETWORK_HEALTH_COLORS = {
         0: 'red',
@@ -51,7 +52,7 @@
         }
     }
 
-    const hasTitleBar = document.body.classList.contains(`platform-win32`)
+    const hasTitleBar = document.body.classList.contains('platform-win32')
 </script>
 
 <style type="text/scss">

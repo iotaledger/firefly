@@ -3,8 +3,9 @@
     import { mobile } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { createEventDispatcher, onMount } from 'svelte'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
     const BLINK_SEGMENTS = [[1, 200]]
     const SWITCH_SEGMENTS = [

@@ -859,7 +859,8 @@
         "sending": "در حال ارسال",
         "legacyNetwork": "شبکه قدیمی",
         "capsLock": "کلید caps lock روشن است",
-        "version": "نسخه {version}"
+        "version": "نسخه {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "امروز",

@@ -2,10 +2,8 @@
     import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import {
-        AvailableExchangeRates,
         convertToFiat,
         currencies,
-        CurrencyTypes,
         exchangeRates,
         formatCurrency,
     } from 'shared/lib/currency'
@@ -27,12 +25,14 @@
     import { getStoragePath } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
 
-    export let locale
+    export let locale: Locale
 
     const { didComplete } = $migration
 
-    let wasMigrated = $didComplete
+    const wasMigrated = $didComplete
 
     let localizedBody = 'body'
     let localizedValues = {}
@@ -64,7 +64,7 @@
 
     const dispatch = createEventDispatcher()
 
-    let fiatbalance = formatCurrency(
+    const fiatbalance = formatCurrency(
         convertToFiat(
             // Only show actually migrated balance to user
             $totalMigratedBalance,

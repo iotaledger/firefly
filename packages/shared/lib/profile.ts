@@ -1,85 +1,15 @@
-import { AvailableExchangeRates } from 'shared/lib/currency'
 import { persistent } from 'shared/lib/helpers'
 import { ledgerSimulator } from 'shared/lib/ledger'
 import { generateRandomId } from 'shared/lib/utils'
-import type { WalletAccount } from 'shared/lib/wallet'
 import { destroyActor, getStoragePath, getWalletStoragePath } from 'shared/lib/wallet'
 import { derived, get, Readable, writable } from 'svelte/store'
-import type { ChartSelectors } from './chart'
 import { Electron } from './electron'
-import {
-    HistoryDataProps
-} from './marketData'
-import type { Node } from './typings/node'
-
-
-export interface MigratedTransaction {
-    address: string;
-    balance: number;
-    timestamp: string
-    account: number;
-    tailTransactionHash: string;
-}
-
-/**
- * Profile
- */
-export interface Profile {
-    id: string
-    name: string
-    type: ProfileType
-    /**
-     * Time for most recent stronghold back up
-     */
-    lastStrongholdBackupTime: Date | null
-    /**
-     * User settings
-     */
-    settings: UserSettings
-    hiddenAccounts?: string[]
-    migratedTransactions?: MigratedTransaction[]
-    isDeveloperProfile: boolean
-    hasVisitedDashboard?: boolean
-    ledgerMigrationCount?: number
-}
-
-/**
- * User Settings
- */
-export interface UserSettings {
-    currency: AvailableExchangeRates
-    automaticNodeSelection: boolean
-    includeOfficialNodes: boolean
-    disabledNodes: string[] | undefined
-    /** Lock screen timeout in minutes */
-    lockScreenTimeout: number
-    showHiddenAccounts?: boolean
-    chartSelectors: ChartSelectors
-    hideNetworkStatistics?: boolean
-}
-
-/**
- * Profile types
- */
-export enum ProfileType {
-    Software = 'Software',
-    Ledger = 'Ledger',
-    LedgerSimulator = 'LedgerSimulator'
-}
-
-/**
- * Profile import types
- */
-export enum ImportType {
-    Seed = 'seed',
-    Mnemonic = 'mnemonic',
-    File = 'file',
-    SeedVault = 'seedvault',
-    Stronghold = 'stronghold',
-    Ledger = 'ledger',
-    TrinityLedger = 'trinityLedger',
-    FireflyLedger = 'fireflyLedger',
-}
+import type { ValuesOf } from './typings/utils'
+import type { Profile, UserSettings } from './typings/profile'
+import { ProfileType } from './typings/profile'
+import { HistoryDataProps } from './typings/market'
+import { AvailableExchangeRates } from './typings/currency'
+import type { WalletAccount } from './typings/wallet'
 
 export const activeProfileId = writable<string | null>(null)
 
@@ -97,24 +27,24 @@ export const isStrongholdLocked = writable<boolean>(true)
 export const activeProfile: Readable<Profile | undefined> = derived(
     [profiles, newProfile, activeProfileId],
     ([$profiles, $newProfile, $activeProfileId]) =>
-        $newProfile ||
-        $profiles.find((_profile) => {
-            return _profile.id === $activeProfileId
-        })
+        $newProfile || $profiles.find((_profile) => _profile.id === $activeProfileId)
 )
 
 activeProfileId.subscribe((profileId) => {
-    // TODO: commented for mobile dev only, uncomment after we remove explicit Electron declarations 
-    // Electron.updateActiveProfile(profileId) 
+    // TODO: commented for mobile dev only, uncomment after we remove explicit Electron declarations
+    // Electron?.updateActiveProfile(profileId)
 })
 
-export const isSoftwareProfile: Readable<Boolean> = derived(activeProfile, $activeProfile => {
-    return $activeProfile?.type === ProfileType.Software
-})
+export const isSoftwareProfile: Readable<boolean> = derived(
+    activeProfile,
+    ($activeProfile) => $activeProfile?.type === ProfileType.Software
+)
 
-export const isLedgerProfile: Readable<Boolean> = derived(activeProfile, $activeProfile => {
-    return $activeProfile?.type === ProfileType.Ledger || $activeProfile?.type === ProfileType.LedgerSimulator
-})
+export const isLedgerProfile: Readable<boolean> = derived(
+    activeProfile,
+    ($activeProfile) =>
+        $activeProfile?.type === ProfileType.Ledger || $activeProfile?.type === ProfileType.LedgerSimulator
+)
 
 /**
  * Saves profile in persistent storage
@@ -126,9 +56,7 @@ export const isLedgerProfile: Readable<Boolean> = derived(activeProfile, $active
  * @returns {Profile}
  */
 export const saveProfile = (profile: Profile): Profile => {
-    profiles.update((_profiles) => {
-        return [..._profiles, profile]
-    })
+    profiles.update((_profiles) => [..._profiles, profile])
 
     return profile
 }
@@ -140,7 +68,7 @@ export const saveProfile = (profile: Profile): Profile => {
  *
  * @returns {Profile}
  */
-export const createProfile = (profileName, isDeveloperProfile): Profile => {
+export const createProfile = (profileName: string, isDeveloperProfile: boolean): Profile => {
     const profile: Profile = {
         id: generateRandomId(),
         name: profileName,
@@ -155,10 +83,10 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
             lockScreenTimeout: 5,
             chartSelectors: {
                 currency: AvailableExchangeRates.USD,
-                timeframe: HistoryDataProps.SEVEN_DAYS
-            }
+                timeframe: HistoryDataProps.SEVEN_DAYS,
+            },
         },
-        ledgerMigrationCount: 0
+        ledgerMigrationCount: 0,
     }
 
     newProfile.set(profile)
@@ -174,7 +102,7 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
  *
  * @returns {void}
  */
-export const disposeNewProfile = async () => {
+export const disposeNewProfile = async (): Promise<void> => {
     const np = get(newProfile)
     if (np) {
         try {
@@ -222,9 +150,7 @@ export const clearActiveProfile = (): void => {
  * @returns {void}
  */
 export const removeProfile = (id: string): void => {
-    profiles.update((_profiles) => {
-        return _profiles.filter((_profile) => _profile.id !== id)
-    })
+    profiles.update((_profiles) => _profiles.filter((_profile) => _profile.id !== id))
 }
 
 /**
@@ -236,8 +162,7 @@ export const removeProfile = (id: string): void => {
  *
  * @returns {void}
  */
-export const updateProfile = (
-    path: string, value: string | string[] | boolean | Date | number | AvailableExchangeRates | Node | Node[] | ChartSelectors | HistoryDataProps | MigratedTransaction[]) => {
+export const updateProfile = (path: string, value: ValuesOf<Profile> | ValuesOf<UserSettings>): void => {
     const _update = (_profile) => {
         const pathList = path.split('.')
 
@@ -255,15 +180,15 @@ export const updateProfile = (
     if (get(newProfile)) {
         newProfile.update((_profile) => _update(_profile))
     } else {
-        profiles.update((_profiles) => {
-            return _profiles.map((_profile) => {
+        profiles.update((_profiles) =>
+            _profiles.map((_profile) => {
                 if (_profile.id === get(activeProfile)?.id) {
                     return _update(_profile)
                 }
 
                 return _profile
             })
-        })
+        )
     }
 }
 
@@ -274,7 +199,7 @@ export const updateProfile = (
  *
  * @returns {void}
  */
-export const cleanupInProgressProfiles = async () => {
+export const cleanupInProgressProfiles = async (): Promise<void> => {
     const inProgressProfile = get(profileInProgress)
     if (inProgressProfile) {
         profileInProgress.update(() => undefined)
@@ -289,7 +214,7 @@ export const cleanupInProgressProfiles = async () => {
  *
  * @returns {void}
  */
-export const removeProfileFolder = async (profileName) => {
+export const removeProfileFolder = async (profileName: string): Promise<void> => {
     try {
         const userDataPath = await Electron.getUserDataPath()
         const profileStoragePath = getStoragePath(userDataPath, profileName)
@@ -301,22 +226,20 @@ export const removeProfileFolder = async (profileName) => {
 
 /**
  * Cleanup profile listed that have nothing stored and stored profiles not in app.
- * 
+ *
  * @method cleanupEmptyProfiles
  *
  * @returns {void}
  */
-export const cleanupEmptyProfiles = async () => {
+export const cleanupEmptyProfiles = async (): Promise<void> => {
     try {
         const userDataPath = await Electron.getUserDataPath()
         const profileStoragePath = getWalletStoragePath(userDataPath)
         const storedProfiles = await Electron.listProfileFolders(profileStoragePath)
 
-        profiles.update((_profiles) => {
-            return _profiles.filter(p => storedProfiles.includes(p.name))
-        })
+        profiles.update((_profiles) => _profiles.filter((p) => storedProfiles.includes(p.name)))
 
-        const appProfiles = get(profiles).map(p => p.name)
+        const appProfiles = get(profiles).map((p) => p.name)
         for (const storedProfile of storedProfiles) {
             if (!appProfiles.includes(storedProfile)) {
                 await removeProfileFolder(storedProfile)
@@ -329,28 +252,28 @@ export const cleanupEmptyProfiles = async () => {
 
 /**
  * Set profile type if missing (for back compatibility purposes)
- * 
+ *
  * @method setProfileType
- * 
+ *
  * @param {ProfileType} type
- * 
+ *
  * @returns {void}
  */
-export const setProfileType = (type: ProfileType) => {
+export const setProfileType = (type: ProfileType): void => {
     const isLedgerSimulator = ledgerSimulator && type === ProfileType.Ledger
     updateProfile('type', isLedgerSimulator ? ProfileType.LedgerSimulator : type)
 }
 
 /**
  * Set profile type for back compatibility purposes
- * 
+ *
  * @method setMissingProfileType
- * 
- * @param {WalletAccount[]} accounts 
- * 
+ *
+ * @param {WalletAccount[]} accounts
+ *
  * @returns {void}
  */
-export const setMissingProfileType = (accounts: WalletAccount[] = []) => {
+export const setMissingProfileType = (accounts: WalletAccount[] = []): void => {
     let accountType = null
     if (accounts.length) {
         switch (accounts[0]?.signerType?.type) {
@@ -377,6 +300,4 @@ export const setMissingProfileType = (accounts: WalletAccount[] = []) => {
  *
  * @returns {boolean}
  */
-export const hasNoProfiles = (): boolean => {
-    return get(profiles).length === 0
-}
+export const hasNoProfiles = (): boolean => get(profiles).length === 0

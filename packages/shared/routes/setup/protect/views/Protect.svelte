@@ -1,8 +1,9 @@
 <script lang="typescript">
-    import { Button, OnboardingLayout, Text } from 'shared/components'
-    import { createEventDispatcher } from 'svelte'
+    import { Button,OnboardingLayout,Text } from 'shared/components';
+    import type { Locale } from 'shared/lib/typings/i18n';
+    import { createEventDispatcher } from 'svelte';
 
-    export let locale
+    export let locale: Locale
 
     const dispatch = createEventDispatcher()
 

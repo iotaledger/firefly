@@ -1,31 +1,62 @@
 <script lang="typescript">
-    import { Box, Text } from 'shared/components'
+    import { Unit } from '@iota/unit-converter'
+    import { Text, Tooltip } from 'shared/components'
+    import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
+    import { tick } from 'svelte'
+    import { mobile } from 'shared/lib/app'
 
-    export let balance
-    export let transactions
-    export let accounts
+    export let color = 'blue' // TODO: profiles will have different colors
+
+    export let balanceRaw
+    export let balanceFiat
+
+    let balanceBox
+    let parentWidth = 0
+    let parentLeft = 0
+    let parentTop = 0
+
+    let showTooltip = false
+    let showPreciseBalance = false
+
+    $: balanceBox, showTooltip, showPreciseBalance, void refreshParentBox()
+
+    function toggleTooltip() {
+        showTooltip = !showTooltip
+    }
+
+    function togglePreciseBalance() {
+        showPreciseBalance = !showPreciseBalance
+    }
+
+    async function refreshParentBox() {
+        if (!balanceBox || !showTooltip) {
+            return
+        }
+        await tick()
+        parentWidth = balanceBox?.offsetWidth / 2 ?? 0
+        parentLeft = balanceBox?.getBoundingClientRect().left ?? 0
+        parentTop = balanceBox?.getBoundingClientRect().top ?? 0
+    }
 </script>
 
-<Box classes="flex flex-col h-full">
-    <Box classes="flex-grow border-solid border-b border-gray-200">
-        <Text type="p" secondary classes="mb-3 uppercase">Balance</Text>
-        <Box classes="flex mb-2">
-            <Text type="h2" classes="uppercase">{balance.split(' ')[0]}</Text>
-            <Text type="p" secondary classes="ml-1">{balance.split(' ')[1]}</Text>
-        </Box>
-        <Text type="h4" highlighted classes="mb-3 uppercase">45000 USD</Text>
-    </Box>
-
-    <Box classes="flex-grow-0 mt-4">
-        <Box classes="flex justify-between">
-            <Box classes="flex flex-col">
-                <Text type="p" secondary classes="uppercase">Transactions</Text>
-                <Text type="h4">{transactions}</Text>
-            </Box>
-            <Box classes="flex flex-col">
-                <Text type="p" secondary classes="uppercase">Accounts</Text>
-                <Text type="h4">{accounts}</Text>
-            </Box>
-        </Box>
-    </Box>
-</Box>
+<div class="flex flex-col flex-wrap items-start {!$mobile && 'justify-end'} space-y-1.5">
+    <balance-box
+        bind:this={balanceBox}
+        on:mouseenter={toggleTooltip}
+        on:mouseleave={toggleTooltip}
+        on:click={togglePreciseBalance}>
+        <Text type="h2" overrideColor classes={$mobile ? 'text-black dark:text-white' : 'text-white'}>
+            {showPreciseBalance ? formatUnitPrecision(balanceRaw, Unit.Mi) : formatUnitBestMatch(balanceRaw, true, 3)}
+        </Text>
+    </balance-box>
+    <Text type="p" overrideColor smaller classes={$mobile ? 'text-gray-500' : `text-${color}-200 dark:text-blue-300`}>
+        {balanceFiat}
+    </Text>
+    {#if showTooltip}
+        <Tooltip {parentTop} {parentLeft} {parentWidth}>
+            <Text type="p">
+                {!showPreciseBalance ? formatUnitPrecision(balanceRaw, Unit.Mi) : formatUnitBestMatch(balanceRaw, true, 3)}
+            </Text>
+        </Tooltip>
+    {/if}
+</div>

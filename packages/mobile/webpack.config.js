@@ -7,7 +7,7 @@ const sveltePreprocess = require('svelte-preprocess')
 const mode = process.env.NODE_ENV || 'development'
 const prod = mode === 'production'
 
-/// ------------------------ Resolve ------------------------
+// ------------------------ Resolve ------------------------
 const resolve = {
     alias: {
         svelte: path.dirname(require.resolve('svelte/package.json')),
@@ -20,7 +20,7 @@ const resolve = {
     },
 }
 
-/// ------------------------ Output ------------------------
+// ------------------------ Output ------------------------
 const output = {
     publicPath: prod ? '../' : '/',
     path: path.join(__dirname, '/public'),
@@ -28,7 +28,7 @@ const output = {
     chunkFilename: '[name].[id].js',
 }
 
-/// ------------------------ Module rules ------------------------
+// ------------------------ Module rules ------------------------
 const rendererRules = [
     {
         test: /\.ts$/,
@@ -76,7 +76,7 @@ const rendererRules = [
     },
 ]
 
-/// ------------------------ Plugins ------------------------
+// ------------------------ Plugins ------------------------
 const rendererPlugins = [
     new CopyPlugin({
         patterns: [
@@ -104,7 +104,7 @@ const rendererPlugins = [
     }),
 ]
 
-/// ------------------------ Webpack config ------------------------
+// ------------------------ Webpack config ------------------------
 module.exports = [
     {
         entry: {

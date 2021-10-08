@@ -3,8 +3,9 @@
     import { mobile } from 'shared/lib/app'
     import { createEventDispatcher } from 'svelte'
     import Content from './Content.svelte'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
     let checked = false
     let termsAccepted = false

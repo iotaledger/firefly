@@ -3,12 +3,13 @@
     import { mobile } from 'shared/lib/app'
     import { english } from 'shared/lib/wordlists/english'
     import { createEventDispatcher, onMount } from 'svelte'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
     export let mnemonic
     export let busy = false
 
-    let verifyRecoveryPhrase = []
+    const verifyRecoveryPhrase = []
     let wordChoices = ['', '', '']
     let verifyIndex = 0
     let verified = false

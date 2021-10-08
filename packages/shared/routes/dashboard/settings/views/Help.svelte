@@ -1,8 +1,9 @@
 <script lang="typescript">
     import { Button, HR, Text } from 'shared/components'
     import { openUrl } from 'shared/lib/device'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
     // const handleTroubleshootClick = () => {
     //     openUrl('https://iota.org')

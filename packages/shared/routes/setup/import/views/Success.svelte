@@ -3,9 +3,10 @@
     import { mobile } from 'shared/lib/app'
     import { createEventDispatcher, getContext } from 'svelte'
     import type { Writable } from 'svelte/store'
-    import { ImportType } from '../Import.svelte'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { ImportType } from 'shared/lib/typings/profile'
 
-    export let locale
+    export let locale: Locale
 
     const dispatch = createEventDispatcher()
     const importType = getContext<Writable<ImportType>>('importType')
@@ -27,8 +28,8 @@
             <div class="bg-green-100 rounded-2xl relative -top-10">
                 <Icon icon="success-check" classes="text-white" />
             </div>
-            <Text type="h2" classes="mb-5 text-center">{locale(`views.importSuccess.title`)}</Text>
-            <Text type="p" secondary classes="mb-2">{locale(`views.importSuccess.body`)}</Text>
+            <Text type="h2" classes="mb-5 text-center">{locale('views.importSuccess.title')}</Text>
+            <Text type="p" secondary classes="mb-2">{locale('views.importSuccess.body')}</Text>
         </div>
     </div>
     <div slot="leftpane__action">

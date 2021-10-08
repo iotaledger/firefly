@@ -2,9 +2,10 @@
     import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { ImportType } from 'shared/lib/profile'
+    import { Locale } from 'shared/lib/typings/i18n'
     import { createEventDispatcher } from 'svelte'
 
-    export let locale
+    export let locale: Locale
 
     const dispatch = createEventDispatcher()
 
@@ -22,11 +23,19 @@
     </div>
     <div slot="leftpane__content">
         <Text type="p" secondary classes="mb-8">{locale('views.importFromLedger.body')}</Text>
-        <Button icon="settings" classes="w-full mb-5" secondary onClick={() => handleContinueClick(ImportType.FireflyLedger)}>
+        <Button
+            icon="settings"
+            classes="w-full mb-5"
+            secondary
+            onClick={() => handleContinueClick(ImportType.FireflyLedger)}>
             {locale('views.importFromLedger.haveFireflyLedger')}
             <Text type="p" secondary smaller>{locale('views.importFromLedger.haveFireflyLedgerDescription')}</Text>
         </Button>
-        <Button icon="settings" classes="w-full mb-8" secondary onClick={() => handleContinueClick(ImportType.TrinityLedger)}>
+        <Button
+            icon="settings"
+            classes="w-full mb-8"
+            secondary
+            onClick={() => handleContinueClick(ImportType.TrinityLedger)}>
             {locale('views.importFromLedger.haveTrinityLedger')}
             <Text type="p" secondary smaller>{locale('views.importFromLedger.haveTrinityLedgerDescription')}</Text>
         </Button>

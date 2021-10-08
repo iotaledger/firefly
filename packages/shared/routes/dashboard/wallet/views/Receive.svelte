@@ -1,21 +1,26 @@
 <script lang="typescript">
-    import { Button, Dropdown, Icon, QR, Spinner, Text } from 'shared/components'
-    import { isLedgerProfile } from 'shared/lib/profile'
-    import { accountRoute, walletRoute } from 'shared/lib/router'
-    import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
-    import { setClipboard } from 'shared/lib/utils'
-    import { WalletAccount, hasGeneratedALedgerReceiveAddress, isSyncing } from 'shared/lib/wallet'
-    import { getContext } from 'svelte'
-    import type { Readable } from 'svelte/store'
+    import { Button,Dropdown,Icon,QR,Spinner,Text } from 'shared/components';
+    import { isLedgerProfile } from 'shared/lib/profile';
+    import { accountRoute,walletRoute } from 'shared/lib/router';
+    import { AccountIdentifier } from 'shared/lib/typings/account';
+    import { Locale } from 'shared/lib/typings/i18n';
+    import { AccountRoutes,WalletRoutes } from 'shared/lib/typings/routes';
+    import { WalletAccount } from 'shared/lib/typings/wallet';
+    import { setClipboard } from 'shared/lib/utils';
+    import { hasGeneratedALedgerReceiveAddress,isSyncing } from 'shared/lib/wallet';
+    import { getContext } from 'svelte';
+    import type { Readable } from 'svelte/store';
 
-    export let locale
-    export let generateAddress = (accountId) => {}
+    export let locale: Locale
+
     export let isGeneratingAddress = false
+
+    export let onGenerateAddress = (accountId: AccountIdentifier): void => {}
 
     const liveAccounts = getContext<Readable<WalletAccount[]>>('liveAccounts')
     const currentAccount = getContext<Readable<WalletAccount>>('selectedAccount')
 
-    // TODO: remove dummy data 
+    // TODO: remove dummy data
     let selectedAccount = $currentAccount || $liveAccounts[0] || {
         alias: 'test',
         depositAddress: 'iotalkgnsd3453jgndsffu32n4rjl3b4lh5b3l4b5l23jb43ljb5lkjb4'
@@ -25,7 +30,7 @@
         selectedAccount = item
     }
     const generateNewAddress = () => {
-        generateAddress(selectedAccount.id)
+        onGenerateAddress(selectedAccount.id)
     }
     const handleCloseClick = () => {
         walletRoute.set(WalletRoutes.Init)

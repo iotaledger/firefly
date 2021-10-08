@@ -1,16 +1,19 @@
 <script lang="typescript">
-    import { Icon, Text } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
+    import { Icon,Text } from 'shared/components';
+    import { mobile } from 'shared/lib/app';
+    import { Locale } from 'shared/lib/typings/i18n';
+
+    export let locale: Locale
 
     export let settings
     export let activeSettings = []
-    export let locale
     export let icons
     export let icon = undefined
     export let iconColor = undefined
     export let title
     export let description
-    export let onClick = (setting) => {}
+
+    export let onClick = (..._: any[]): void => {}
 </script>
 
 <div class="flex-1 {$mobile && 'w-full'}">

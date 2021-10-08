@@ -5,7 +5,7 @@ import {
     removeDisplayNotification,
     showAppNotification,
     updateDisplayNotification,
-    updateDisplayNotificationProgress
+    updateDisplayNotificationProgress,
 } from 'shared/lib/notifications'
 import type { NotificationData } from 'shared/lib/typings/notification'
 import { writable } from 'svelte/store'
@@ -26,8 +26,8 @@ export const updateBusy = writable<boolean>(false)
 export const updateComplete = writable<boolean>(false)
 export const updateError = writable<boolean>(false)
 
-// TODO: commented for mobile dev only, uncomment after we remove explicit Electron declarations 
-/* 
+// TODO: commented for mobile dev only, uncomment after we remove explicit Electron declarations
+/*
 Electron.onEvent('version-details', (nativeVersionDetails) => {
     versionDetails.set(nativeVersionDetails)
 })
@@ -35,9 +35,9 @@ Electron.onEvent('version-details', (nativeVersionDetails) => {
 Electron.onEvent('version-progress', (nativeVersionProgress: NativeProgress) => {
     updateProgress.set(nativeVersionProgress.percent)
 
-    const bytesRemaining = ((100 - nativeVersionProgress.percent) / 100) * nativeVersionProgress.total;
+    const bytesRemaining = ((100 - nativeVersionProgress.percent) / 100) * nativeVersionProgress.total
     if (nativeVersionProgress.bytesPerSecond > 0) {
-        updateMinutesRemaining.set((bytesRemaining / nativeVersionProgress.bytesPerSecond) / 60)
+        updateMinutesRemaining.set(bytesRemaining / nativeVersionProgress.bytesPerSecond / 60)
     }
 })
 
@@ -49,7 +49,7 @@ Electron.onEvent('version-complete', () => {
 })
 
 Electron.onEvent('version-error', (nativeVersionError) => {
-    console.log(nativeVersionError)
+    console.error(nativeVersionError)
     updateError.set(true)
 })
  */
@@ -60,21 +60,21 @@ export function updateDownload(): void {
     updateComplete.set(false)
     updateError.set(false)
 
-    let progressSubscription;
-    let minutesRemainingSubscription;
-    let completeSubscription;
-    let errorSubscription;
+    let progressSubscription = null
+    let minutesRemainingSubscription = null
+    let completeSubscription = null
+    let errorSubscription = null
 
     const cleanup = () => {
         removeDisplayNotification(notificationId)
-        progressSubscription();
-        completeSubscription();
-        errorSubscription();
-        minutesRemainingSubscription();
+        progressSubscription()
+        completeSubscription()
+        errorSubscription()
+        minutesRemainingSubscription()
     }
 
     const downloadingNotification: NotificationData = {
-        type: "info",
+        type: 'info',
         message: localize('notifications.downloadingUpdate'),
         progress: 0,
         subMessage: localize('notifications.calcMinutesRemaining'),
@@ -83,87 +83,85 @@ export function updateDownload(): void {
                 label: localize('actions.cancel'),
                 callback: () => {
                     updateCancel()
-                    cleanup();
-                }
-            }
+                    cleanup()
+                },
+            },
         ],
-        timeout: NOTIFICATION_TIMEOUT_NEVER
+        timeout: NOTIFICATION_TIMEOUT_NEVER,
     }
 
     const notificationId = showAppNotification(downloadingNotification)
 
-    progressSubscription = updateProgress.subscribe(progress => {
-        updateDisplayNotificationProgress(notificationId, progress);
-    });
+    progressSubscription = updateProgress.subscribe((progress) => {
+        updateDisplayNotificationProgress(notificationId, progress)
+    })
 
-    minutesRemainingSubscription = updateMinutesRemaining.subscribe(minutesRemaining => {
+    minutesRemainingSubscription = updateMinutesRemaining.subscribe((minutesRemaining) => {
         if (minutesRemaining > 0) {
             updateDisplayNotification(notificationId, {
                 ...downloadingNotification,
-                subMessage: minutesRemaining === -1
-                    ? localize('notifications.calcMinutesRemaining')
-                    : (minutesRemaining < 1 ? "< " : "")
-                    + localize('notifications.minutesRemaining', {
-                        values: {
-                            minutes: Math.ceil(minutesRemaining).toString()
-                        }
-                    })
-            });
+                subMessage:
+                    minutesRemaining === -1
+                        ? localize('notifications.calcMinutesRemaining')
+                        : (minutesRemaining < 1 ? '< ' : '') +
+                          localize('notifications.minutesRemaining', {
+                              values: {
+                                  minutes: Math.ceil(minutesRemaining).toString(),
+                              },
+                          }),
+            })
         }
-    });
+    })
 
     completeSubscription = updateComplete.subscribe((isComplete) => {
         if (isComplete) {
-            updateDisplayNotification(
-                notificationId,
-                {
-                    ...downloadingNotification,
-                    message: localize('notifications.updateReady'),
-                    subMessage: localize('notifications.restartInstall'),
-                    progress: undefined,
-                    actions: [
-                        {
-                            label: localize('actions.restartNow'),
-                            callback: () => {
-                                cleanup()
-                                updateInstall()
-                            },
-                            isPrimary: true
+            updateDisplayNotification(notificationId, {
+                ...downloadingNotification,
+                message: localize('notifications.updateReady'),
+                subMessage: localize('notifications.restartInstall'),
+                progress: undefined,
+                actions: [
+                    {
+                        label: localize('actions.restartNow'),
+                        callback: () => {
+                            cleanup()
+                            updateInstall()
                         },
-                        {
-                            label: localize('actions.dismiss'),
-                            callback: () => cleanup()
-                        }
-                    ]
-                })
+                        isPrimary: true,
+                    },
+                    {
+                        label: localize('actions.dismiss'),
+                        callback: () => cleanup(),
+                    },
+                ],
+            })
         }
-    });
+    })
 
     errorSubscription = updateError.subscribe((isError) => {
         if (isError) {
-            updateDisplayNotification(
-                notificationId,
-                {
-                    ...downloadingNotification,
-                    type: "error",
-                    message: localize('notifications.updateError'),
-                    progress: undefined,
-                    actions: [
-                        {
-                            label: localize('actions.dismiss'),
-                            callback: () => cleanup(),
-                            isPrimary: true
-                        }
-                    ]
-                })
+            updateDisplayNotification(notificationId, {
+                ...downloadingNotification,
+                type: 'error',
+                message: localize('notifications.updateError'),
+                progress: undefined,
+                actions: [
+                    {
+                        label: localize('actions.dismiss'),
+                        callback: () => cleanup(),
+                        isPrimary: true,
+                    },
+                ],
+            })
         }
-    });
+    })
 
-    Electron.updateDownload()
+    void Electron.updateDownload()
 }
 
 export function updateCancel(): void {
-    Electron.updateCancel()
+    void Electron.updateCancel()
+
     updateProgress.set(0)
     updateBusy.set(false)
     updateComplete.set(false)
@@ -172,18 +170,18 @@ export function updateCancel(): void {
 }
 
 export function updateInstall(): void {
-    Electron.updateInstall()
+    void Electron.updateInstall()
 }
 
 export function updateCheck(): void {
-    Electron.updateCheck()
+    void Electron.updateCheck()
 }
 
 export async function getVersionDetails(): Promise<void> {
-    const verDetails = await Electron.getVersionDetails();
+    const verDetails = await Electron.getVersionDetails()
     versionDetails.set(verDetails)
 }
 
-export async function pollVersion(): Promise<void> {
-    setInterval(async () => updateCheck(), DEFAULT_APP_UPDATER_POLL_INTERVAL)
+export function pollVersion(): void {
+    setInterval(() => updateCheck(), DEFAULT_APP_UPDATER_POLL_INTERVAL)
 }

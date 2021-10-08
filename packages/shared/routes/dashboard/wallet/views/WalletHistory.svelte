@@ -5,6 +5,7 @@
     import { openPopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute, walletSetupType } from 'shared/lib/router'
+    import { Locale } from 'shared/lib/typings/i18n'
     import { AccountRoutes, SetupType, WalletRoutes } from 'shared/lib/typings/routes'
     import {
         api,
@@ -21,16 +22,17 @@
     import type { Writable } from 'svelte/store'
     import { get, readable } from 'svelte/store'
 
-    export let locale
+    export let locale: Locale
+
     let drawer: Drawer
 
-    //--------------- TODO: remove mobile mockup data ----------------
+    // --------------- TODO: remove mobile mockup data ----------------
     const random_range = (from, to) => Math.round(Math.random() * (to - from) + from)
     const random_bool = () => !Math.round(Math.random())
     let mockup_msg = () => ({
         account: Math.random(),
         id: Math.random().toString(),
-        //version: MessageVersion,
+        // version: MessageVersion,
         parents: ['string', 'string'],
         payloadLength: 10,
         payload: {
@@ -40,20 +42,29 @@
                     type: 'Regular',
                     data: {
                         incoming: random_bool(),
-                        //internal: !random_bool(),
+                        // internal: !random_bool(),
                         value: random_range(50000000, 1000000000),
                         remainderValue: random_range(50000000, 1000000000),
                     },
                 },
             },
-        }, //Payload,
+        }, // Payload,
         timestamp: new Date(new Date() - random_range(50000000, 1000000000)),
         nonce: Math.random(),
         confirmed: Math.random() * (1 - 0) + 0.5,
         broadcasted: random_bool(),
     })
-    let mockup = [mockup_msg(), mockup_msg(), mockup_msg(), mockup_msg(), mockup_msg(), mockup_msg(), mockup_msg(), mockup_msg()]
-    //--------------- mobile mockup data ----------------
+    let mockup = [
+        mockup_msg(),
+        mockup_msg(),
+        mockup_msg(),
+        mockup_msg(),
+        mockup_msg(),
+        mockup_msg(),
+        mockup_msg(),
+        mockup_msg(),
+    ]
+    // --------------- mobile mockup data ----------------
 
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
     // TODO: mockup, replace with const transactions = getContext<Readable<AccountMessage[]>>('walletTransactions')
@@ -95,10 +106,12 @@
                     if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
                         openPopup({
                             type: 'password',
-                            props: { onSuccess: async () => asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false) },
+                            props: {
+                                onSuccess: async () => asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false),
+                            },
                         })
                     } else {
-                        asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
+                        void asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
                     }
                 },
                 onError(err) {
@@ -109,7 +122,7 @@
                 },
             })
         } else {
-            asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold)
+            void asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold)
         }
     }
 
@@ -123,7 +136,9 @@
          *      3. The wallet setup type cannot be new (if it's new then there's no tx history to sync)
          *      4. Account must have no transactions (the length of $transactions must be zero)
          */
-        return $isFirstSessionSync && $walletSetupType && $walletSetupType !== SetupType.New && $transactions.length === 0
+        return (
+            $isFirstSessionSync && $walletSetupType && $walletSetupType !== SetupType.New && $transactions.length === 0
+        )
     }
 </script>
 

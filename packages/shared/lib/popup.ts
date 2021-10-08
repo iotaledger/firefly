@@ -9,7 +9,7 @@ interface PopupState {
     preventClose?: boolean
     fullScreen?: boolean
     transition?: boolean
-    props?: any
+    props?: Record<string, unknown>
 }
 
 export const popupState = writable<PopupState>({
@@ -19,18 +19,28 @@ export const popupState = writable<PopupState>({
     preventClose: false,
     fullScreen: false,
     transition: undefined,
-    props: null
+    props: null,
 })
 
-export const openPopup = ({ type, props = null, hideClose = false, preventClose = false, fullScreen = false, transition = undefined }) => {
+export const openPopup = ({
+    type,
+    props = null,
+    hideClose = false,
+    preventClose = false,
+    fullScreen = false,
+    transition = undefined,
+}: Omit<PopupState, 'active'>): void => {
     modifyPopupState({ active: true, type, hideClose, preventClose, fullScreen, transition, props })
 }
 
-export const closePopup = (forceClose: boolean = false) => {
-    modifyPopupState({ active: false, type: null, hideClose: false, preventClose: false, fullScreen: false, props: null }, forceClose)
+export const closePopup = (forceClose: boolean = false): void => {
+    modifyPopupState(
+        { active: false, type: null, hideClose: false, preventClose: false, fullScreen: false, props: null },
+        forceClose
+    )
 }
 
-const modifyPopupState = (state: PopupState, forceClose: boolean = false) => {
+const modifyPopupState = (state: PopupState, forceClose: boolean = false): void => {
     /**
      * NOTE: There are some cases where a popup needs to stay open despite
      * trying to perhaps close it or open another one. This is accomplished
@@ -41,10 +51,9 @@ const modifyPopupState = (state: PopupState, forceClose: boolean = false) => {
     if (get(popupState).preventClose && !forceClose) {
         showAppNotification({
             type: 'error',
-            message: localize('error.popup.preventClose')
+            message: localize('error.popup.preventClose'),
         })
-    }
-    else {
+    } else {
         popupState.set({ ...state })
     }
 }
