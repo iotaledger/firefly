@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Route, Toggle } from 'shared/components'
+    import { Route, Toggle, ToastContainer } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { goto } from 'shared/lib/helpers'
@@ -151,4 +151,6 @@
     <Route route={AppRoute.Login}>
         <Login on:next={routerNext} on:previous={routerPrevious} locale={$_} {goto} />
     </Route>
+
+    <ToastContainer />
 {/if}

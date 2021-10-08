@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { Toast } from 'shared/components'
+    import { mobile } from 'shared/lib/app'
     import { displayNotifications } from 'shared/lib/notifications'
     import { fade } from 'svelte/transition'
 
@@ -14,7 +15,14 @@
 </script>
 
 <style type="text/scss">
-    toast-container {
+    .mobile-container {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        right: 20px;
+    }
+
+    .desktop-container {
         position: absolute;
         right: 20px;
         bottom: 20px;
@@ -22,7 +30,7 @@
     }
 </style>
 
-<toast-container class="flex flex-col relative z-20">
+<toast-container class="flex flex-col relative z-20 {$mobile ? 'mobile-container' : 'desktop-container'}">
     <ul class="space-y-2">
         {#each toasts as toast}
             <li in:fade={{ duration: 100 }} out:fade={{ duration: 100 }}>
