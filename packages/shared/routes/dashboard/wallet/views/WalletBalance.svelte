@@ -57,7 +57,7 @@
     class:compressed={$walletRoute !== WalletRoutes.Init}
     class:mobile={$mobile}>
     <div data-label="total-balance" class="flex flex-col flex-wrap space-y-5">
-        {#if !mobile}
+        {#if !$mobile}
             <p class="text-11 leading-120 text-white uppercase tracking-widest">{locale('general.balance')}</p>
         {/if}
         <BalanceSummary balanceRaw={$balance.balanceRaw} balanceFiat={$balance.balanceFiat} />

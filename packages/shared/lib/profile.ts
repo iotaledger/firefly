@@ -31,8 +31,7 @@ export const activeProfile: Readable<Profile | undefined> = derived(
 )
 
 activeProfileId.subscribe((profileId) => {
-    // TODO: commented for mobile dev only, uncomment after we remove explicit Electron declarations
-    // Electron?.updateActiveProfile(profileId)
+    Electron?.updateActiveProfile(profileId)
 })
 
 export const isSoftwareProfile: Readable<boolean> = derived(

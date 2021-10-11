@@ -21,7 +21,7 @@
 
     let drawer: Drawer
 
-    $: if ((mobile && drawer && $walletRoute === WalletRoutes.Receive) || $walletRoute === WalletRoutes.Send) {
+    $: if (($mobile && drawer && $walletRoute === WalletRoutes.Receive) || $walletRoute === WalletRoutes.Send) {
         drawer.open()
     }
 
@@ -73,7 +73,7 @@
                         {/each}
                     </div>
                 {:else}
-                    <Text classes={mobile && 'text-right'}>{locale('general.noAccounts')}</Text>
+                    <Text classes="text-right">{locale('general.noAccounts')}</Text>
                 {/if}
             </div>
         </div>

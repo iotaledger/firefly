@@ -46,7 +46,7 @@
 
     function handleBackClick() {
         if ($settingsRoute === SettingsRoutes.Init) {
-            drawer.close()
+            drawer?.close()
         } else {
             settingsRoute.set(SettingsRoutes.Init)
         }

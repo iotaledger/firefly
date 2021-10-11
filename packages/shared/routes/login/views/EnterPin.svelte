@@ -1,19 +1,18 @@
 <script lang="typescript">
     import { Icon, Pin, Profile, Text } from 'shared/components'
+    import { mobile } from 'shared/lib/app'
     import { Electron } from 'shared/lib/electron'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { activeProfile } from 'shared/lib/profile'
+    import { Locale } from 'shared/lib/typings/i18n'
     import { validatePinFormat } from 'shared/lib/utils'
     import { api, getStoragePath, initialise } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
-    import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
-    export let mobile
-    
     let attempts = 0
     let pinCode = ''
     let isBusy = false
@@ -123,7 +122,7 @@
     })
 </script>
 
-{#if mobile}
+{#if $mobile}
     <div>foo</div>
 {:else}
     <div class="relative w-full h-full bg-white dark:bg-gray-900">

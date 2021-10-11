@@ -7,6 +7,7 @@
     import { accountRoute, walletRoute, walletSetupType } from 'shared/lib/router'
     import { Locale } from 'shared/lib/typings/i18n'
     import { AccountRoutes, SetupType, WalletRoutes } from 'shared/lib/typings/routes'
+    import { AccountMessage } from 'shared/lib/typings/wallet'
     import {
         api,
         asyncSyncAccounts,
@@ -19,56 +20,15 @@
         WalletAccount,
     } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
-    import type { Writable } from 'svelte/store'
-    import { get, readable } from 'svelte/store'
+    import type { Readable, Writable } from 'svelte/store'
+    import { get } from 'svelte/store'
 
     export let locale: Locale
 
     let drawer: Drawer
 
-    // --------------- TODO: remove mobile mockup data ----------------
-    const random_range = (from, to) => Math.round(Math.random() * (to - from) + from)
-    const random_bool = () => !Math.round(Math.random())
-    let mockup_msg = () => ({
-        account: Math.random(),
-        id: Math.random().toString(),
-        // version: MessageVersion,
-        parents: ['string', 'string'],
-        payloadLength: 10,
-        payload: {
-            type: 'Transaction',
-            data: {
-                essence: {
-                    type: 'Regular',
-                    data: {
-                        incoming: random_bool(),
-                        // internal: !random_bool(),
-                        value: random_range(50000000, 1000000000),
-                        remainderValue: random_range(50000000, 1000000000),
-                    },
-                },
-            },
-        }, // Payload,
-        timestamp: new Date(new Date() - random_range(50000000, 1000000000)),
-        nonce: Math.random(),
-        confirmed: Math.random() * (1 - 0) + 0.5,
-        broadcasted: random_bool(),
-    })
-    let mockup = [
-        mockup_msg(),
-        mockup_msg(),
-        mockup_msg(),
-        mockup_msg(),
-        mockup_msg(),
-        mockup_msg(),
-        mockup_msg(),
-        mockup_msg(),
-    ]
-    // --------------- mobile mockup data ----------------
-
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
-    // TODO: mockup, replace with const transactions = getContext<Readable<AccountMessage[]>>('walletTransactions')
-    const transactions = readable(mockup)
+    const transactions = getContext<Readable<AccountMessage[]>>('walletTransactions')
 
     function handleTransactionClick(transaction) {
         const sourceAccount = get(accounts).find((acc) => acc.index === transaction.account)
