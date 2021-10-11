@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
-    import { loggedIn, mobile } from 'shared/lib/app'
+    import { loggedIn } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { getVersionDetails, pollVersion, versionDetails } from 'shared/lib/appUpdater'
     import { Electron } from 'shared/lib/electron'
@@ -221,57 +221,57 @@
                 locale={$_} />
         {/if}
         <Route route={AppRoute.Welcome}>
-            <Welcome on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+            <Welcome on:next={routerNext} on:previous={routerPrevious} locale={$_} />
         </Route>
         <Route route={AppRoute.Legal}>
-            <Legal on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+            <Legal on:next={routerNext} on:previous={routerPrevious} locale={$_} />
         </Route>
         <Route route={AppRoute.Appearance}>
-            <Appearance on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+            <Appearance on:next={routerNext} on:previous={routerPrevious} locale={$_} />
         </Route>
         <Route route={AppRoute.Profile}>
-            <Profile on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+            <Profile on:next={routerNext} on:previous={routerPrevious} locale={$_} />
         </Route>
         <Route route={AppRoute.Setup}>
-            <Setup on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+            <Setup on:next={routerNext} on:previous={routerPrevious} locale={$_} />
         </Route>
         <!-- TODO: fix ledger -->
         <Route route={AppRoute.Create}>
-            <Create on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+            <Create on:next={routerNext} on:previous={routerPrevious} locale={$_} />
         </Route>
         <Route route={AppRoute.LedgerSetup}>
-            <Ledger on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+            <Ledger on:next={routerNext} on:previous={routerPrevious} locale={$_} />
         </Route>
         <!--  -->
         <Route route={AppRoute.Secure}>
-            <Secure on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+            <Secure on:next={routerNext} on:previous={routerPrevious} locale={$_} />
         </Route>
         <Route route={AppRoute.Password}>
-            <Password on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+            <Password on:next={routerNext} on:previous={routerPrevious} locale={$_} />
         </Route>
         <Route route={AppRoute.Protect} transition={false}>
-            <Protect on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+            <Protect on:next={routerNext} on:previous={routerPrevious} locale={$_} />
         </Route>
         <Route route={AppRoute.Backup} transition={false}>
-            <Backup on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+            <Backup on:next={routerNext} on:previous={routerPrevious} locale={$_} />
         </Route>
         <Route route={AppRoute.Import} transition={false}>
-            <Import on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+            <Import on:next={routerNext} on:previous={routerPrevious} locale={$_} />
         </Route>
         <Route route={AppRoute.Balance}>
-            <Balance on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+            <Balance on:next={routerNext} on:previous={routerPrevious} locale={$_} />
         </Route>
         <Route route={AppRoute.Migrate}>
-            <Migrate on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} {goto} />
+            <Migrate on:next={routerNext} on:previous={routerPrevious} locale={$_} {goto} />
         </Route>
         <Route route={AppRoute.Congratulations}>
-            <Congratulations on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
+            <Congratulations on:next={routerNext} locale={$_} {goto} />
         </Route>
         <Route route={AppRoute.Dashboard}>
-            <Dashboard mobile={$mobile} locale={$_} {goto} />
+            <Dashboard locale={$_} {goto} />
         </Route>
         <Route route={AppRoute.Login}>
-            <Login on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} {goto} />
+            <Login on:next={routerNext} on:previous={routerPrevious} locale={$_} {goto} />
         </Route>
         {#if settings}
             <Settings locale={$_} handleClose={() => (settings = false)} />
