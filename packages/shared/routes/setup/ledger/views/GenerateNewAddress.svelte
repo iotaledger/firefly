@@ -24,8 +24,8 @@
     $: animation = !newAddress
         ? 'ledger-generate-address-desktop'
         : confirmed
-        ? 'ledger-address-confirmed-desktop'
-        : 'ledger-confirm-address-desktop'
+            ? 'ledger-address-confirmed-desktop'
+            : 'ledger-confirm-address-desktop'
 
     function generateNewAddress() {
         newAddress = null
