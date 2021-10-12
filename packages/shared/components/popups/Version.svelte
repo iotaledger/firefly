@@ -19,7 +19,7 @@
         }
         closePopup()
     }
-    function handleCancelClick() {
+    function handleCloseClick() {
         closePopup()
     }
 
@@ -57,7 +57,7 @@
             </Text>
         </div>
         <div class="flex flex-row justify-center w-full">
-            <Button secondary onClick={() => handleCancelClick()}>{locale('actions.cancel')}</Button>
+            <Button secondary onClick={() => handleCloseClick()}>{locale('actions.close')}</Button>
         </div>
     {:else}
         <div class="my-6">
