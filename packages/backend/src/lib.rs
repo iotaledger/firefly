@@ -30,6 +30,7 @@ use tokio::{
 use std::{
     collections::HashMap,
     convert::TryFrom,
+    env,
     path::{Path, PathBuf},
     sync::{mpsc::Sender, Arc, Mutex},
     time::Duration,
@@ -101,11 +102,26 @@ impl TryFrom<&str> for EventType {
     }
 }
 
+fn init_sentry() -> sentry::ClientInitGuard {
+    sentry::init((
+        match env::var("SENTRY_DSN") {
+            Ok(sentry_dsn) => sentry_dsn,
+            Err(_) => String::from("https://48349d5d80f0429fb2d273702544a012@o1010134.ingest.sentry.io/5974639"), // DEFAULT from firefly-dev
+        },
+        sentry::ClientOptions {
+            release: sentry::release_name!(),
+            ..Default::default()
+        },
+    ))
+}
+
 pub async fn init<A: Into<String>>(
     actor_id: A,
     storage_path: Option<impl AsRef<Path>>,
     message_receiver: Arc<Mutex<Sender<String>>>,
 ) {
+    let _sentry_guard = init_sentry();
+
     let actor_id = actor_id.into();
     let mut actors = wallet_actors().lock().await;
     let manager = AccountManager::builder()
