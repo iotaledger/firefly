@@ -859,7 +859,8 @@
         "sending": "Odosielané",
         "legacyNetwork": "Zastaralá sieť",
         "capsLock": "Caps Lock je zapnutý",
-        "version": "Verzia {version}"
+        "version": "Verzia {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "Dnes",

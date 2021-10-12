@@ -1,11 +1,11 @@
 {
-  "compilerOptions": {
-    "strict": true,
-    "esModuleInterop": true,
-    "baseUrl": ".",
-    "paths": {
-      "types": ["@types"]
-    }
-  },
-  "include": ["."]
+    "compilerOptions": {
+        "strict": true,
+        "esModuleInterop": true,
+        "baseUrl": ".",
+        "paths": {
+            "types": ["@types"]
+        }
+    },
+    "include": ["."]
 }

@@ -859,7 +859,8 @@
         "sending": "بھیجے جا رہے",
         "legacyNetwork": "لیگیسی نیٹ ورک",
         "capsLock": "کیپس لاک آن ہے",
-        "version": "ورژن {version}"
+        "version": "ورژن {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "آج",

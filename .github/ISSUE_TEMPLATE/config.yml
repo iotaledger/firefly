@@ -1,11 +1,14 @@
-blank_issues_enabled: false
+blank_issues_enabled: true
 contact_links:
-  - name: Discord
+  - name: Guide to issues
+    url: https://github.com/iotaledger/firefly/wiki/Issues-Guide
+    about: Read our guide to see how we are using GitHub issues.
+  - name: Request a feature
+    url: https://github.com/iotaledger/firefly/discussions/categories/feature-and-enhancements
+    about: Propose a feature or enhancement in GitHub discussions.
+  - name: Request support
     url: https://discord.iota.org/
-    about: Please ask and answer questions here.
+    about: Ask for help in our discord server.
   - name: Translation issues
     url: https://crowdin.com/project/iota-firefly
     about: Issues with translations can be resolved on Crowdin.
-  - name: Security vulnerabilities
-    url: security@iota.org
-    about: Please report security vulnerabilities here.
