@@ -69,25 +69,6 @@
     .setup-anim-aspect-ratio {
         aspect-ratio: 19/15;
     }
-
-    // dummy toggles
-    .dummy-toggles {
-        position: absolute;
-        right: 5px;
-        top: 5px;
-        z-index: 10;
-        font-size: 12px;
-        display: flex;
-        padding: 5px;
-        background: #8080803d;
-        border-radius: 10px;
-        button {
-            background: var(--button-bg-color);
-            padding: 0 7px;
-            border-radius: 10px;
-            color: var(--button-text-color);
-        }
-    }
 </style>
 
 <!-- empty div to avoid auto-purge removing dark classes -->
@@ -95,13 +76,6 @@
 {#if !$isLocaleLoaded || splash}
     <Splash />
 {:else}
-    <!-- TODO: remove!! Dummy toggles, dev only -->
-    <div class="dummy-toggles flex flex-row">
-        <div class="mr-4">
-            <Toggle active={$appSettings.darkMode} onClick={() => ($appSettings.darkMode = !$appSettings.darkMode)} />
-        </div>
-    </div>
-    <!--  -->
     <!-- TODO: remove locale={$_} everywhere -->
     <Route route={AppRoute.Welcome}>
         <Welcome on:next={routerNext} on:previous={routerPrevious} locale={$_} />
