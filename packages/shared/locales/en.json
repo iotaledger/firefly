@@ -657,6 +657,8 @@
         "restoreWallet": "Migrate or restore a wallet",
         "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
         "createWallet": "Create new wallet",
+        "walletColor": "Wallet Color",
+        "walletPattern": "Wallet Pattern",
         "createWalletDescription": "Create a fresh wallet running on Chrysalis",
         "savePassword": "Save password",
         "useBiometric": "Use biometric security",

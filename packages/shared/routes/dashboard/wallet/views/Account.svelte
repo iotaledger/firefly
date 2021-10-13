@@ -2,6 +2,8 @@
     import { AccountActionsModal, DashboardPane } from 'shared/components'
     import { getContext } from 'svelte'
     import type { Readable } from 'svelte/store'
+    import { accountRoute } from 'shared/lib/router'
+    import { AccountRoutes } from 'shared/lib/typings/routes'
     import { AccountActions, AccountBalance, AccountHistory, AccountNavigation, BarChart, LineChart } from '.'
     import { Locale } from 'shared/lib/typings/i18n'
     import { AccountMessage, WalletAccount } from 'shared/lib/typings/wallet'
@@ -38,12 +40,14 @@
         {#key $account}
             <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
                 <DashboardPane classes=" h-full flex flex-auto flex-col flex-shrink-0">
+                  {#if $accountRoute != AccountRoutes.Manage}
                     <AccountBalance
                         {locale}
                         color={$account.color}
                         balance={$account.rawIotaBalance}
                         balanceEquiv={$account.balanceEquiv}
                         onMenuClick={handleMenuClick} />
+                  {/if}
                     <DashboardPane classes="h-full -mt-5 z-0">
                         <AccountActions {isGeneratingAddress} {onSend} {onInternalTransfer} {onGenerateAddress} {locale} />
                     </DashboardPane>

@@ -6,11 +6,14 @@
     import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccountId, wallet } from 'shared/lib/wallet'
     import { Locale } from 'shared/lib/typings/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { WalletDetails } from '.'
 
     export let locale: Locale
 
     export let alias
     export let error = ''
+    export let balance
+    export let balanceEquiv
 
     const { accounts } = $wallet
 
@@ -21,6 +24,8 @@
     $: accountAlias, (error = '')
 
     const handleSaveClick = () => {
+      console.log('what happens');
+      
         const trimmedAccountAlias = accountAlias.trim()
         if (trimmedAccountAlias === alias) {
             selectedAccountId.set(null)
@@ -74,7 +79,7 @@
 </script>
 
 <div class="w-full h-full flex flex-col justify-between p-8">
-    <div>
+      <!-- <div>
         <div class="flex flex-row mb-6">
             <Text type="h5">{locale('general.manageAccount')}</Text>
         </div>
@@ -87,7 +92,8 @@
                 submitHandler={handleSaveClick}
                 disabled={isBusy} />
         </div>
-    </div>
+    </div> -->
+    <WalletDetails on:handleInputSubmit={handleSaveClick} {locale} {alias} {balance} {balanceEquiv}/>
     <!-- Action -->
     {#if isBusy && !error}
         <Text secondary classes="mb-3">{locale('general.updatingAccount')}</Text>

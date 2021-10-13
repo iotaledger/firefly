@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
     import { loggedIn, mobile } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
@@ -36,7 +36,7 @@
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { getLocalisedMenuItems } from './lib/helpers'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
 
     $: $appSettings.darkMode ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')
     $: {

@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Input, Spinner, Text } from 'shared/components'
+    import { Button, Spinner} from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
@@ -8,7 +8,8 @@
     import { isLedgerProfile } from 'shared/lib/profile'
     import { showAppNotification } from 'shared/lib/notifications'
     import { localize } from 'shared/lib/i18n'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n' 
+    import { WalletDetails } from '.'
 
     export let locale: Locale
 
@@ -48,21 +49,21 @@
                 onCreate(trimmedAccountAlias, (err) => {
                     isBusy = false
 
-                    if(err) {
+                    if (err) {
                         console.error(err?.error || err)
 
-                        if($isLedgerProfile) {
+                        if ($isLedgerProfile) {
                             displayNotificationForLedgerProfile('error', true, false, false, false, err)
                         } else {
                             showAppNotification({
                                 type: 'error',
-                                message: localize(err?.error || err)
+                                message: localize(err?.error || err),
                             })
                         }
                     }
                 })
 
-            if($isLedgerProfile) {
+            if ($isLedgerProfile) {
                 promptUserToConnectLedger(false, _create, _cancel)
             } else {
                 _create()
@@ -73,30 +74,20 @@
         error = ''
         walletRoute.set(WalletRoutes.Init)
     }
+    
 </script>
 
 <div class="px-8 py-6 flex flex-col h-full justify-between">
-    <div>
-        <div class="flex flex-row mb-6">
-            <Text type="h5">{locale('general.createAccount')}</Text>
-        </div>
-        <div class="w-full h-full flex flex-col justify-between">
-            <Input
-                {error}
-                bind:value={accountAlias}
-                placeholder={locale('general.accountName')}
-                autofocus
-                submitHandler={handleCreateClick}
-                disabled={isBusy} />
-        </div>
-    </div>
+    <WalletDetails on:handleInputSubmit={handleCreateClick} {locale} />
     <!-- Action -->
     {#if isBusy && !error}
         <Spinner busy={true} message={locale('general.creatingAccount')} classes="justify-center mb-4" />
     {/if}
     {#if !isBusy}
         <div class="flex flex-row justify-between px-2">
-            <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()}>{locale('actions.cancel')}</Button>
+            <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()}>
+                {locale('actions.cancel')}
+            </Button>
             <Button
                 disabled={!getTrimmedLength(accountAlias) || isBusy}
                 classes="-mx-2 w-1/2"
