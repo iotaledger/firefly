@@ -106,7 +106,7 @@ fn init_sentry() -> sentry::ClientInitGuard {
     sentry::init((
         match env::var("SENTRY_DSN") {
             Ok(sentry_dsn) => sentry_dsn,
-            Err(_) => String::from("https://48349d5d80f0429fb2d273702544a012@o1010134.ingest.sentry.io/5974639"), // DEFAULT from firefly-dev
+            Err(_) => String::from("https://48349d5d80f0429fb2d273702544a012@o1010134.ingest.sentry.io/5974639"), /* DEFAULT from firefly-dev */
         },
         sentry::ClientOptions {
             release: sentry::release_name!(),

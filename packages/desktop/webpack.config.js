@@ -3,10 +3,12 @@ const CopyPlugin = require('copy-webpack-plugin')
 const { DefinePlugin } = require('webpack')
 const path = require('path')
 const sveltePreprocess = require('svelte-preprocess')
+const SentryWebpackPlugin = require('@sentry/webpack-plugin')
 
 const mode = process.env.NODE_ENV || 'development'
 const prod = mode === 'production'
 const hardcodeNodeEnv = typeof process.env.HARDCODE_NODE_ENV !== 'undefined'
+const version = '1.2.0'
 
 // / ------------------------ Resolve ------------------------
 
@@ -130,6 +132,19 @@ const rendererPlugins = [
     }),
 ]
 
+const sentryPlugins = [
+    new SentryWebpackPlugin({
+        authToken: process.env.SENTRY_AUTH_TOKEN,
+        include: '.',
+        release: `firefly-${version}`,
+        ignoreFile: '.sentrycliignore',
+        ignore: ['node_modules', 'webpack.config.js'],
+        org: 'iota-foundation-h4',
+        project: `firefly-${prod ? 'prod' : 'dev'}`,
+        configFile: 'sentry.properties',
+    }),
+]
+
 // / ------------------------ Webpack config ------------------------
 
 module.exports = [
@@ -143,7 +158,7 @@ module.exports = [
             rules: rendererRules,
         },
         mode,
-        plugins: rendererPlugins,
+        plugins: [...rendererPlugins, ...sentryPlugins],
         devtool: prod ? false : 'cheap-module-source-map',
         devServer: {
             hot: true,
@@ -166,7 +181,7 @@ module.exports = [
             rules: mainRules,
         },
         mode,
-        plugins: mainPlugins,
+        plugins: [...mainPlugins, ...sentryPlugins],
         devtool: prod ? false : 'cheap-module-source-map',
         optimization: {
             nodeEnv: hardcodeNodeEnv ? mode : false,

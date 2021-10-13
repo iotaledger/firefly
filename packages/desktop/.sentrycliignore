@@ -1,0 +1,6 @@
+public/
+node_modules/
+scripts/
+
+postcss.config.js
+webpack.config.js

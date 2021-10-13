@@ -1,3 +1,5 @@
+require('../sentry')
+
 const { ipcRenderer, contextBridge } = require('electron')
 
 // Hook the error handlers as early as possible

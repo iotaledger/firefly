@@ -1,3 +1,5 @@
+require('../../sentry')
+
 const { ipcRenderer } = require('electron')
 
 /** Pincode Manager  */

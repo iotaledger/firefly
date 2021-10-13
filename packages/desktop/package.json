@@ -12,7 +12,9 @@
         "start:dev": "cross-env NODE_ENV=development webpack serve --content-base public",
         "start:electron": "cross-env NODE_ENV=development electron public/build/main.js",
         "start:electron-prod": "cross-env NODE_ENV=production electron public/build/main.js",
-        "build": "cross-env NODE_ENV=production webpack",
+        "build": "yarn build:prod",
+        "build:dev": "cross-env NODE_ENV=development webpack",
+        "build:prod": "cross-env NODE_ENV=production webpack",
         "compile:linux": "electron-builder --linux --x64",
         "compile:mac": "electron-builder --mac --x64",
         "compile:win": "electron-builder --win --x64"
@@ -20,7 +22,10 @@
     "dependencies": {
         "@ledgerhq/hw-transport-node-hid": "^5.13.0",
         "@ledgerhq/hw-transport-node-speculos": "^6.1.0",
+        "@sentry/electron": "^2.5.4",
+        "@sentry/webpack-plugin": "^1.18.1",
         "argon2": "^0.27.1",
+        "crypto-browserify": "^3.12.0",
         "electron-log": "^4.3.1",
         "electron-updater": "^4.3.5",
         "hw-app-iota": "0.6.5",

@@ -6,6 +6,8 @@ const fs = require('fs')
 const Keychain = require('./lib/keychain')
 const { initMenu, contextMenu } = require('./lib/menu')
 
+require('../sentry')
+
 /**
  * Set AppUserModelID for Windows notifications functionallity
  */
