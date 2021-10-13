@@ -102,6 +102,7 @@ const rendererRules = [
 const mainPlugins = [
     new DefinePlugin({
         PLATFORM_LINUX: JSON.stringify(process.platform === 'linux'),
+        SENTRY_MAIN: JSON.stringify(true),
     }),
 ]
 
@@ -129,6 +130,14 @@ const rendererPlugins = [
     }),
     new DefinePlugin({
         devMode: JSON.stringify(mode === 'development'),
+        SENTRY_MAIN: JSON.stringify(false),
+    }),
+]
+
+const preloadPlugins = [
+    new DefinePlugin({
+        PLATFORM_LINUX: JSON.stringify(process.platform === 'linux'),
+        SENTRY_MAIN: JSON.stringify(false),
     }),
 ]
 
@@ -165,12 +174,29 @@ module.exports = [
         },
     },
     {
-        externals: {
-            argon2: 'commonjs argon2',
-        },
         target: 'electron-main',
         entry: {
             'build/main': ['./electron/main.js'],
+        },
+        resolve,
+        output,
+        module: {
+            rules: mainRules,
+        },
+        mode,
+        plugins: [...mainPlugins, ...sentryPlugins],
+        devtool: prod ? false : 'cheap-module-source-map',
+        optimization: {
+            nodeEnv: hardcodeNodeEnv ? mode : false,
+            minimize: true,
+        },
+    },
+    {
+        externals: {
+            argon2: 'commonjs argon2',
+        },
+        target: 'electron-renderer',
+        entry: {
             'build/preload': ['./electron/preload.js'],
             'build/lib/aboutPreload': ['./electron/lib/aboutPreload.js'],
             'build/lib/errorPreload': ['./electron/lib/errorPreload.js'],
@@ -181,7 +207,7 @@ module.exports = [
             rules: mainRules,
         },
         mode,
-        plugins: [...mainPlugins, ...sentryPlugins],
+        plugins: [...preloadPlugins, ...sentryPlugins],
         devtool: prod ? false : 'cheap-module-source-map',
         optimization: {
             nodeEnv: hardcodeNodeEnv ? mode : false,
