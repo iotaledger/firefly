@@ -22,7 +22,7 @@
         dispatch('previous')
     }
 
-    const onDrop = (buffer?, name?, path?) => {
+    const setFile = (buffer?, name?, path?) => {
         if (!buffer) {
             file = null
             fileName = null
@@ -35,7 +35,7 @@
         filePath = path
     }
 
-    const onFile = (e) => {
+    const handleFileSelect = (e) => {
         e?.preventDefault()
         dropping = false
 
@@ -43,14 +43,14 @@
 
         if (!file) {
             fileName = null
-            return onDrop()
+            return setFile()
         }
 
         if (allowedExtensions && allowedExtensions.length > 0) {
             const ext = /\.([0-9a-z]+)$/i.exec(file.name)
             if (!ext || !allowedExtensions.includes(ext[1])) {
                 fileName = null
-                return onDrop()
+                return setFile()
             }
         }
 
@@ -59,7 +59,7 @@
         const reader = new FileReader()
 
         reader.onload = (e) => {
-            onDrop(e.target.result, file.name, file.path)
+            setFile(e.target.result, file.name, file.path)
             if ($mobile) {
                 handleContinueClick()
             }
@@ -80,7 +80,7 @@
                 {locale}
                 {fileName}
                 {allowedExtensions}
-                {onFile}
+                onDrop={handleFileSelect}
                 bind:dropping
                 extentionsLabel={locale('actions.importExtentions')} />
         {/if}
@@ -90,10 +90,13 @@
             <input
                 class="absolute opacity-0 w-full h-full"
                 type="file"
-                on:change={onFile}
+                on:change={handleFileSelect}
                 accept={allowedExtensions ? allowedExtensions.map((e) => `.${e}`).join(',') : '*'} />
         {/if}
-        <Button classes="flex-1" disabled={!$mobile && !file} onClick={$mobile ? onFile : handleContinueClick}>
+        <Button
+            classes="flex-1"
+            disabled={!$mobile && !file}
+            onClick={$mobile ? handleFileSelect : handleContinueClick}>
             {locale(`actions.${$mobile ? 'chooseFile' : 'continue'}`)}
         </Button>
     </div>
