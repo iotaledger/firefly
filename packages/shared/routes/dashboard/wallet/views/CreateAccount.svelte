@@ -8,7 +8,7 @@
     import { isLedgerProfile } from 'shared/lib/profile'
     import { showAppNotification } from 'shared/lib/notifications'
     import { localize } from 'shared/lib/i18n'
-    import { Locale } from 'shared/lib/typings/i18n' 
+    import { Locale } from 'shared/lib/typings/i18n'
     import { WalletDetails } from '.'
 
     export let locale: Locale
@@ -19,7 +19,7 @@
 
     const { accounts } = $wallet
 
-    let accountAlias = ''
+    const accountAlias = ''
     let isBusy = false
 
     // This looks odd but sets a reactive dependency on accountAlias, so when it changes the error will clear
@@ -78,7 +78,7 @@
 </script>
 
 <div class="px-8 py-6 flex flex-col h-full justify-between">
-    <WalletDetails on:handleInputSubmit={handleCreateClick} {locale} />
+    <WalletDetails on:handleInputSubmit={handleCreateClick} {locale} createWallet={true}/>
     <!-- Action -->
     {#if isBusy && !error}
         <Spinner busy={true} message={locale('general.creatingAccount')} classes="justify-center mb-4" />

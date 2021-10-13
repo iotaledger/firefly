@@ -43,14 +43,16 @@
                     class="grid {$viewableAccounts.length === 1 ? 'grid-cols-1' : 'grid-cols-2'} auto-rows-max gap-4 flex-auto overflow-y-auto h-1 -mr-2 pr-2 scroll-secondary">
                     {#each $viewableAccounts as account}
                         <AccountTile
-                            color={account.color}
+                            color={$activeProfile?.settings?.color}
                             name={account.alias}
                             balance={account.balance}
                             balanceEquiv={account.balanceEquiv}
                             size={$viewableAccounts.length === 1 ? 'l' : 'm'}
                             hidden={hiddenAccounts.includes(account.id)}
                             onClick={() => handleAccountClick(account.id)}
-                            ledger={$isLedgerProfile} />
+                            ledger={$isLedgerProfile} 
+                            pattern={$activeProfile?.settings?.pattern}
+                            />
                     {/each}
                 </div>
             {:else}

@@ -3,6 +3,7 @@
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
+    import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccountId, wallet } from 'shared/lib/wallet'
     import { Locale } from 'shared/lib/typings/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
@@ -10,22 +11,26 @@
 
     export let locale: Locale
 
-    export let alias
+    export let alias : string
     export let error = ''
     export let balance
     export let balanceEquiv
 
+    let selectedColor = $activeProfile?.settings?.color;
+    let selectedPattern = $activeProfile?.settings?.pattern
+
     const { accounts } = $wallet
 
-    let accountAlias = alias
+    const accountAlias = alias
     let isBusy = false
 
     // This looks odd but sets a reactive dependency on accountAlias, so when it changes the error will clear
     $: accountAlias, (error = '')
 
     const handleSaveClick = () => {
-      console.log('what happens');
-      
+        updateProfile('settings.color', selectedColor)
+        updateProfile('settings.pattern', selectedPattern)
+    
         const trimmedAccountAlias = accountAlias.trim()
         if (trimmedAccountAlias === alias) {
             selectedAccountId.set(null)
@@ -79,21 +84,7 @@
 </script>
 
 <div class="w-full h-full flex flex-col justify-between p-8">
-      <!-- <div>
-        <div class="flex flex-row mb-6">
-            <Text type="h5">{locale('general.manageAccount')}</Text>
-        </div>
-        <div class="w-full h-full flex flex-col justify-between">
-            <Input
-                {error}
-                bind:value={accountAlias}
-                placeholder={locale('general.accountName')}
-                autofocus
-                submitHandler={handleSaveClick}
-                disabled={isBusy} />
-        </div>
-    </div> -->
-    <WalletDetails on:handleInputSubmit={handleSaveClick} {locale} {alias} {balance} {balanceEquiv}/>
+    <WalletDetails on:handleInputSubmit={handleSaveClick} {locale} bind:alias bind:selectedColor bind:selectedPattern {balance} {balanceEquiv}/>
     <!-- Action -->
     {#if isBusy && !error}
         <Text secondary classes="mb-3">{locale('general.updatingAccount')}</Text>

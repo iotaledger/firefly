@@ -797,6 +797,8 @@
         "developerProfileDescription": "Vous permet de vous connecter aux réseaux de test",
         "dev": "Dév",
         "createAccount": "Créer un Portefeuille",
+        "walletColor": "Couleur du Portefeuille",
+        "walletPattern": "Modèle du Portefeuille",
         "accountName": "Nom du portefeuille",
         "latestTransactions": "Dernières Transactions",
         "transactions": "Transactions",

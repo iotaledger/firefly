@@ -44,6 +44,9 @@ export interface UserSettings {
     showHiddenAccounts?: boolean
     chartSelectors: ChartSelectors
     hideNetworkStatistics?: boolean
+    /** profile colors */
+    color: string
+    pattern: string
 }
 
 /**

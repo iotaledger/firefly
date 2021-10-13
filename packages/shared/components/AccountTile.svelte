@@ -9,6 +9,7 @@
     export let size = 'm' // m, l
     export let hidden = false
     export let disabled = false
+    export let pattern = '';
 
     export let onClick = (): void | string => ''
 </script>
@@ -30,7 +31,8 @@
 
 <button
     on:click={onClick}
-    class="size-{size} group rounded-xl bg-gray-100 dark:bg-gray-900 hover:bg-{color}-500 font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'} {hidden ? 'opacity-50' : ''}"
+    style="background-image: url({`assets/patterns/${pattern}.svg`})"
+    class="bg-right-top bg-no-repeat size-{size} group rounded-xl bg-gray-100 dark:bg-gray-900 hover:bg-{color}-500 font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'} {hidden ? 'opacity-50' : ''}"
     {disabled}>
     <div class="mb-2 w-full flex flex-row justify-between items-start space-x-1.5">
         <Text
