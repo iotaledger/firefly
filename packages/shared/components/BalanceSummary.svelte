@@ -39,7 +39,7 @@
     }
 </script>
 
-<div class="flex flex-col flex-wrap items-start {!$mobile && 'justify-end'} space-y-1.5">
+<div class="flex flex-col flex-wrap items-start space-y-1.5">
     <balance-box
         bind:this={balanceBox}
         on:mouseenter={toggleTooltip}
