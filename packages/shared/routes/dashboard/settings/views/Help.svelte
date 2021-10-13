@@ -5,10 +5,6 @@
 
     export let locale: Locale
 
-    // const handleTroubleshootClick = () => {
-    //     openUrl('https://iota.org')
-    // }
-
     const handleDocumentationClick = () => {
         openUrl('https://chrysalis.docs.iota.org/')
     }
