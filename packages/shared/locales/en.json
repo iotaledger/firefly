@@ -9,6 +9,11 @@
             "body": "Please review the Privacy Policy and Terms of Service.",
             "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
         },
+        "diagnostics": {
+            "title": "Diagnostic reporting",
+            "body": "Help improve Firefly by automatically sending anonymous diagnostic data.",
+            "checkbox": "Share diagnostic data with the IOTA Foundation"
+        },
         "appearance": {
             "title": "Appearance",
             "body": "Choose your app theme."
@@ -393,7 +398,12 @@
             },
             "diagnostics": {
                 "title": "Diagnostics",
-                "description": "View system and application information"
+                "description": "View system and application information",
+                "reporting": {
+                    "title": "Diagnostic reporting",
+                    "body": "Help improve Firefly by automatically sending anonymous diagnostic data.",
+                    "checkbox": "Share diagnostic data with the IOTA Foundation"
+                }
             },
             "migrateLedgerIndex": {
                 "title": "Migrate Ledger Index",

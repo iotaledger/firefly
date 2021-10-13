@@ -19,6 +19,7 @@
         Congratulations,
         Create,
         Dashboard,
+        Diagnostics,
         Import,
         Ledger,
         Legal,
@@ -38,7 +39,13 @@
     import { getLocalisedMenuItems } from './lib/helpers'
     import { Locale } from 'shared/lib/typings/i18n'
 
+    const handleDiagnosticReporting = async (diagnosticReporting: boolean): Promise<void> => {
+        // TODO: Update the JSON settings file (put this function in one common place for Advanced.svelte too!)
+    }
+
+    $: void handleDiagnosticReporting($appSettings.diagnosticReporting)
     $: $appSettings.darkMode ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')
+
     $: {
         isLocaleLoaded.subscribe((loaded) => {
             if (loaded) {
@@ -138,7 +145,7 @@
             @apply rounded-2xl;
             border-width: 7px;
             /* This needs to match the background it is displayed on
-               and can be override in local components using the secondary 
+               and can be override in local components using the secondary
                and tertiary styles */
             @apply border-white;
         }
@@ -225,6 +232,9 @@
         </Route>
         <Route route={AppRoute.Legal}>
             <Legal on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Diagnostics}>
+            <Diagnostics on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
         </Route>
         <Route route={AppRoute.Appearance}>
             <Appearance on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />

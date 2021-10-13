@@ -26,6 +26,12 @@
 
     $: $appSettings.deepLinking = deepLinkingChecked
 
+    const handleDiagnosticReporting = (diagnosticReporting) => {
+        // TODO: Update the JSON settings file (put this function in one common place for App.svelte too!)
+    }
+
+    $: handleDiagnosticReporting($appSettings.diagnosticReporting)
+
     $: updateProfile('settings.showHiddenAccounts', showHiddenAccounts)
     $: updateProfile('isDeveloperProfile', isDeveloperProfile)
 
@@ -269,9 +275,13 @@
     <section id="diagnostics" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.diagnostics.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.diagnostics.description')}</Text>
-        <Button medium inlineStyle="min-width: 156px;" onClick={() => handleDiagnosticsClick()}>
+        <Button medium classes="mb-6" inlineStyle="min-width: 156px;" onClick={() => handleDiagnosticsClick()}>
             {locale('views.settings.diagnostics.title')}
         </Button>
+
+        <Text type="h5" classes="mb-3">{locale('views.settings.diagnostics.reporting.title')}</Text>
+        <Text type="p" secondary classes="mb-5">{locale('views.settings.diagnostics.reporting.body')}</Text>
+        <Checkbox label={locale('views.settings.diagnostics.reporting.checkbox')} bind:checked={$appSettings.diagnosticReporting} />
     </section>
     {#if $isLedgerProfile}
         <HR classes="pb-5 mt-5 justify-center" />

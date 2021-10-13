@@ -6,7 +6,9 @@ const fs = require('fs')
 const Keychain = require('./lib/keychain')
 const { initMenu, contextMenu } = require('./lib/menu')
 
-require('../sentry')
+if (loadJsonConfig('settings.json').diagnosticReporting) {
+    module.require('../sentry')
+}
 
 /**
  * Set AppUserModelID for Windows notifications functionallity
@@ -607,11 +609,16 @@ function windowStateKeeper(windowName, settingsFilename) {
     }
 }
 
+function updateSettings(data) {
+    const filename = 'settings.json'
+    const config = loadJsonConfig(filename)
+
+    saveJsonConfig(filename, { ...config, ...data })
+}
+
 function saveJsonConfig(filename, data) {
     try {
-        const userDataPath = app.getPath('userData')
-        const configFilename = path.join(userDataPath, filename)
-        fs.writeFileSync(configFilename, JSON.stringify(data))
+        fs.writeFileSync(getJsonConfig(filename), JSON.stringify(data))
     } catch (err) {
         console.error(err)
     }
@@ -619,12 +626,15 @@ function saveJsonConfig(filename, data) {
 
 function loadJsonConfig(filename) {
     try {
-        const userDataPath = app.getPath('userData')
-        const configFilename = path.join(userDataPath, filename)
-        return JSON.parse(fs.readFileSync(configFilename).toString())
+        return JSON.parse(fs.readFileSync(getJsonConfig(filename)).toString())
     } catch (err) {
         if (!err.message.includes('ENOENT')) {
             console.error(err)
         }
     }
+}
+
+function getJsonConfig(filename) {
+    const userDataPath = app.getPath('userData')
+    return path.join(userDataPath, filename)
 }
