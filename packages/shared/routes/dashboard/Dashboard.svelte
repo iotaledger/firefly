@@ -20,7 +20,7 @@
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { appSettings } from 'shared/lib/appSettings'
-    import { deepLinkRequestActive, parseDeepLink } from 'shared/lib/deepLinking'
+    import { deepLinkRequestActive, parseDeepLink } from 'shared/lib/deepLinking/deepLinking'
 
     const { accountsLoaded, accounts } = $wallet
 

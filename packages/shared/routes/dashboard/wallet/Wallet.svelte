@@ -52,7 +52,7 @@
     import { onMount, setContext } from 'svelte'
     import { derived, Readable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
-    import { deepLinkRequestActive } from 'shared/lib/deepLinking'
+    import { deepLinkRequestActive } from 'shared/lib/deepLinking/deepLinking'
 
     export let locale
 
@@ -64,7 +64,7 @@
             deepLinkRequestActive.set(false)
         }
     }
-    
+
     const accountsBalanceHistory = derived([accounts, priceData], ([$accounts, $priceData]) =>
         getAccountsBalanceHistory($accounts, $priceData)
     )
@@ -114,7 +114,7 @@
 
     const transactions = derived([viewableAccounts, activeProfile], ([$viewableAccounts, $activeProfile]) => {
         const _migratedTransactions = $activeProfile?.migratedTransactions || []
-        
+
         return [..._migratedTransactions, ...getTransactions($viewableAccounts)]
     })
 
@@ -171,7 +171,7 @@
                     try {
                         await asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
 
-                        if($isFirstSessionSync) isFirstSessionSync.set(false)
+                        if ($isFirstSessionSync) isFirstSessionSync.set(false)
                     } catch (err) {
                         _onError(err)
                     }

@@ -3,7 +3,7 @@ import { activeProfile, profiles, ProfileType } from 'shared/lib/profile'
 import { AccountRoutes, AppRoute, SettingsRoutes, SetupType, Tabs, WalletRoutes, LedgerRoutes } from 'shared/lib/typings/routes'
 import { selectedAccountId } from 'shared/lib/wallet'
 import { get, readable, writable } from 'svelte/store'
-import { deepLinkRequestActive } from './deepLinking'
+import { deepLinkRequestActive } from './deepLinking/deepLinking'
 
 /**
  * Sets next route
