@@ -140,7 +140,7 @@ const sentryPlugins = [
         ignoreFile: '.sentrycliignore',
         ignore: ['node_modules', 'webpack.config.js'],
         org: 'iota-foundation-h4',
-        project: `firefly-${prod ? 'prod' : 'dev'}`,
+        project: 'firefly',
         configFile: 'sentry.properties',
     }),
 ]
