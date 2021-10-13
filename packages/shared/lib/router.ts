@@ -137,6 +137,9 @@ export const routerNext = (event: { detail }): void => {
             nextRoute = AppRoute.Legal
             break
         case AppRoute.Legal:
+            nextRoute = AppRoute.Diagnostics
+            break
+        case AppRoute.Diagnostics:
             nextRoute = AppRoute.Appearance
             break
         case AppRoute.Appearance:
