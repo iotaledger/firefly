@@ -1,5 +1,3 @@
-require('../../sentry')
-
 import { getOrInitWindow } from '../main'
 const { ipcMain } = require('electron')
 const { autoUpdater, CancellationToken } = require('electron-updater')

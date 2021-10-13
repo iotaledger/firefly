@@ -3,6 +3,7 @@ const {
     version,
     build: { productName },
 } = require('../../package.json')
+require('../../sentry')
 
 contextBridge.exposeInMainWorld('about', {
     getData: () =>

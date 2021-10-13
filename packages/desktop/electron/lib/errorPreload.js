@@ -1,5 +1,6 @@
 const { contextBridge, ipcRenderer } = require('electron')
 const { version } = require('../../package.json')
+require('../../sentry')
 
 contextBridge.exposeInMainWorld('error', {
     getData: () =>

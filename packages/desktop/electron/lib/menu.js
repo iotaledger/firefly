@@ -1,5 +1,3 @@
-require('../../sentry')
-
 import { app, ipcMain, Menu, shell } from 'electron'
 import { WalletRoutes } from 'shared/lib/typings/routes'
 import { closeAboutWindow, getOrInitWindow, openAboutWindow } from '../main'

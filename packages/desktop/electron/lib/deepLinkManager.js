@@ -1,5 +1,3 @@
-require('../../sentry')
-
 const { ipcRenderer } = require('electron')
 
 /** Deep link manager  */
