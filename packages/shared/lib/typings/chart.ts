@@ -12,6 +12,7 @@ export interface ChartData {
     labels?: string[]
     tooltips?: Tooltip[]
     color?: string
+    steppedLine?: boolean
 }
 
 export interface ActivityData {
@@ -26,9 +27,16 @@ export interface ActivityTimeframe {
 }
 
 export enum DashboardChartType {
+    HOLDINGS = 'holdings',
     PORTFOLIO = 'portoflio',
     TOKEN = 'token',
 }
+
+export enum WalletChartType {
+    HOLDINGS = 'holdings',
+    PORTFOLIO = 'portoflio',
+}
+
 export enum AccountChartType {
     Value = 'Value',
     Activity = 'Activity',
