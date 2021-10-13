@@ -5,6 +5,11 @@
     import { english } from 'shared/lib/wordlists/english'
     import { Locale } from 'shared/lib/typings/i18n'
 
+    enum Type {
+        Seed = 'seed',
+        Mnemonic = 'mnemonic',
+    }
+
     export let locale: Locale
 
     export let value = undefined
@@ -16,11 +21,6 @@
     let content = ''
     let error = false
     let seedChecksum = ''
-
-    enum Type {
-        Seed = 'seed',
-        Mnemonic = 'mnemonic',
-    }
 
     const isSeed = (value: string): string | undefined => {
         if (value.length !== 81) {
