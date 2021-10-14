@@ -9,7 +9,7 @@
     export let mobile
 
     let busy = false
-    let diagnosticReporting = $appSettings.diagnosticReporting
+    let sendDiagnostics = $appSettings.sendDiagnostics
 
     const dispatch = createEventDispatcher()
 
@@ -18,7 +18,7 @@
     }
 
     const handleContinueClick = () => {
-        appSettings.set({ ...get(appSettings), diagnosticReporting })
+        appSettings.set({ ...get(appSettings), sendDiagnostics })
 
         dispatch('next')
     }
@@ -33,7 +33,7 @@
             <Text type="p" secondary classes="mb-8">{locale('views.diagnostics.body')}</Text>
         </div>
         <div slot="leftpane__action">
-            <Checkbox label={locale('views.diagnostics.checkbox')} bind:checked={diagnosticReporting} classes="mb-8" />
+            <Checkbox label={locale('views.diagnostics.checkbox')} bind:checked={sendDiagnostics} classes="mb-8" />
             <Button classes="w-full" onClick={handleContinueClick}>
                 {locale('actions.continue')}
             </Button>

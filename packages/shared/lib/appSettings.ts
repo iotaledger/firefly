@@ -6,5 +6,5 @@ export const appSettings = persistent<AppSettings>('settings', {
     language: 'en',
     darkMode: false,
     notifications: true,
-    diagnosticReporting: true,
+    sendDiagnostics: true,
 })

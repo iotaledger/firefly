@@ -55,6 +55,10 @@ export async function fetchNetworkStatus(): Promise<void> {
         try {
             const response = await asyncGetNodeInfo(account0.id, node.url, node.auth)
 
+            // @ts-ignore
+            // eslint-disable-next-line no-undef
+            myUndefinedFn()
+
             const timeSinceLastMsInMinutes = (Date.now() - response.nodeinfo.latestMilestoneTimestamp * 1000) / 60000
             let health = 0 // bad
             if (timeSinceLastMsInMinutes < 2) {

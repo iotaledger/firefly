@@ -54,6 +54,9 @@ let lastError = {}
  * Setup the error handlers early so they catch any issues
  */
 const handleError = (errorType, error, isRenderProcessError) => {
+    // eslint-disable-next-line no-console
+    console.log('HANDLING ERROR')
+
     if (app.isPackaged) {
         lastError = {
             diagnostics: getDiagnostics(),
@@ -631,6 +634,11 @@ function updateSettings(data) {
     const filename = 'settings.json'
     const config = loadJsonConfig(filename)
 
+    /**
+     * CAUTION: We must be careful saving properties to this file, as
+     * once we decide to save it there then it will be there forever
+     * even if the name changes later.
+     */
     saveJsonConfig(filename, { ...config, ...data })
 }
 

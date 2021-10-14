@@ -3,5 +3,5 @@ export interface AppSettings {
     language: string
     darkMode: boolean
     notifications: boolean
-    diagnosticReporting: boolean
+    sendDiagnostics: boolean
 }

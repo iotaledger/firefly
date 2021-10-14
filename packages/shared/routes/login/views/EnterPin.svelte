@@ -9,11 +9,12 @@
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
+    import { appSettings } from 'shared/lib/appSettings'
 
     export let locale: Locale
 
     export let mobile
-    
+
     let attempts = 0
     let pinCode = ''
     let isBusy = false
@@ -68,6 +69,7 @@
         }
         if (!hasReachedMaxAttempts) {
             const profile = get(activeProfile)
+            const { sendDiagnostics } = get(appSettings)
 
             isBusy = true
 
@@ -75,7 +77,7 @@
                 .then((verified) => {
                     if (verified === true) {
                         return Electron.getUserDataPath().then((path) => {
-                            initialise(profile.id, getStoragePath(path, profile.name))
+                            initialise(profile.id, getStoragePath(path, profile.name), sendDiagnostics)
                             api.setStoragePassword(pinCode, {
                                 onSuccess() {
                                     dispatch('next')

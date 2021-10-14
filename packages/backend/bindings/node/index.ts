@@ -84,8 +84,16 @@ function sendMessage(message: BridgeMessage): Promise<string> {
     return new Promise((resolve) => addon.sendMessage(JSON.stringify(message), () => resolve(id)))
 }
 
-export function init(id: string, storagePath?: string): { destroy: () => void; removeEventListeners: () => void } {
-    const runtime = storagePath ? new addon.ActorSystem(id, storagePath) : new addon.ActorSystem(id)
+export function init(
+    id: string,
+    storagePath?: string,
+    sendDiagnostics?: boolean
+): { destroy: () => void; removeEventListeners: () => void } {
+    /* NOTE: This ensures that if no argument is passed then it is still a boolean */
+    sendDiagnostics = sendDiagnostics || false
+
+    const runtime = storagePath ? new addon.ActorSystem(id, storagePath, sendDiagnostics) : new addon.ActorSystem(id)
+
     let destroyed = false
     _poll(
         runtime,

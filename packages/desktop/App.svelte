@@ -39,10 +39,10 @@
     import { getLocalisedMenuItems } from './lib/helpers'
     import { Locale } from 'shared/lib/typings/i18n'
 
-    const handleDiagnosticReporting = async (diagnosticReporting: boolean): Promise<void> =>
-        Electron.updateAppSettings({ diagnosticReporting })
+    const handleDiagnosticReporting = async (sendDiagnostics: boolean): Promise<void> =>
+        Electron.updateAppSettings({ sendDiagnostics })
 
-    $: void handleDiagnosticReporting($appSettings.diagnosticReporting)
+    $: void handleDiagnosticReporting($appSettings.sendDiagnostics)
     $: $appSettings.darkMode ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')
 
     $: {

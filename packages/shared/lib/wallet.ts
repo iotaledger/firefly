@@ -59,6 +59,7 @@ import { CurrencyTypes } from './typings/currency'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
 import { HistoryDataProps, PriceData } from './typings/market'
 import { ProfileType } from './typings/profile'
+import { appSettings } from './appSettings'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -391,11 +392,11 @@ export const getWalletStoragePath = (appPath: string): string => `${appPath}/${W
 export const getStoragePath = (appPath: string, profileName: string): string =>
     `${getWalletStoragePath(appPath)}${profileName}`
 
-export const initialise = (id: string, storagePath: string): void => {
+export const initialise = (id: string, storagePath: string, sendDiagnostics: boolean): void => {
     if (Object.keys(actors).length > 0) {
         console.error('Initialise called when another actor already initialised')
     }
-    const actor: Actor = window['__WALLET_INIT__'].run(id, storagePath)
+    const actor: Actor = window['__WALLET_INIT__'].run(id, storagePath, sendDiagnostics)
 
     actors[id] = actor
 }

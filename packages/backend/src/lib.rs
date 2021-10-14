@@ -47,6 +47,8 @@ type MessageReceivers = Arc<Mutex<HashMap<String, MessageReceiver>>>;
 
 pub static RUNTIME: Lazy<Runtime> = Lazy::new(|| Runtime::new().unwrap());
 
+static mut SENTRY_GUARD: Option<sentry::ClientInitGuard> = None;
+
 fn wallet_actors() -> &'static WalletActors {
     static ACTORS: Lazy<WalletActors> = Lazy::new(Default::default);
     &ACTORS
@@ -118,9 +120,20 @@ fn init_sentry() -> sentry::ClientInitGuard {
 pub async fn init<A: Into<String>>(
     actor_id: A,
     storage_path: Option<impl AsRef<Path>>,
+    send_diagnostics: Option<bool>,
     message_receiver: Arc<Mutex<Sender<String>>>,
 ) {
-    let _sentry_guard = init_sentry();
+    let send_diagnostics = match send_diagnostics {
+        Some(arg) => arg,
+        None => false
+    };
+    if send_diagnostics {
+        // NOTE: This is required so that the Sentry guard can be initialized
+        // to an actual object if the app allows for sending diagnostics.
+        unsafe {
+            SENTRY_GUARD = Some(init_sentry());
+        }
+    }
 
     let actor_id = actor_id.into();
     let mut actors = wallet_actors().lock().await;
