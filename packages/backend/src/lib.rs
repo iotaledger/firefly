@@ -129,7 +129,7 @@ pub async fn init<A: Into<String>>(
     };
     if send_diagnostics {
         // NOTE: This is required so that the Sentry guard can be initialized
-        // to an actual object if the app allows for sending diagnostics.
+        // to a dynamic object via the init_sentry function.
         unsafe {
             SENTRY_GUARD = Some(init_sentry());
         }
