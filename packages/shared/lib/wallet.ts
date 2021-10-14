@@ -644,15 +644,14 @@ export const asyncSyncAccounts = (
 
 export const asyncGetNodeInfo = (accountId: string, url?: string, auth?: NodeAuth): Promise<NodeInfo> =>
     new Promise<NodeInfo>((resolve, reject) => {
-        throw new Error('Everything is on fire in wallet.ts')
-        // api.getNodeInfo(accountId, url, auth, {
-        //     onSuccess(response) {
-        //         resolve(response.payload)
-        //     },
-        //     onError(err) {
-        //         reject(err)
-        //     },
-        // })
+        api.getNodeInfo(accountId, url, auth, {
+            onSuccess(response) {
+                resolve(response.payload)
+            },
+            onError(err) {
+                reject(err)
+            },
+        })
     })
 
 /**

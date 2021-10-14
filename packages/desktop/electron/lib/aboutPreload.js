@@ -4,8 +4,8 @@ const {
     build: { productName },
 } = require('../../package.json')
 
-const sendDiagnosticsArg = window.process.argv.slice(-1)[0]
-if (sendDiagnosticsArg === '--send-diagnostics=true') {
+const sendDiagnosticsArg = '--send-diagnostics=true'
+if (window.process.argv.includes(sendDiagnosticsArg)) {
     require('../../sentry')
 }
 

@@ -19,7 +19,7 @@ if (typeof diagnosticReporting === 'undefined') {
     updateSettings({ diagnosticReporting })
 }
 
-const shouldSendDiagnostics = diagnosticReporting && app.isPackaged
+const shouldSendDiagnostics = true // diagnosticReporting && app.isPackaged
 if (shouldSendDiagnostics) {
     module.require('../sentry')
 }
@@ -628,8 +628,6 @@ function windowStateKeeper(windowName, settingsFilename) {
 }
 
 function updateSettings(data) {
-    // eslint-disable-next-line no-console
-    console.log('SETTINGS: ', data)
     const filename = 'settings.json'
     const config = loadJsonConfig(filename)
 
