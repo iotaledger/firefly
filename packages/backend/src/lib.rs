@@ -125,7 +125,7 @@ pub async fn init<A: Into<String>>(
 ) {
     let send_diagnostics = match send_diagnostics {
         Some(arg) => arg,
-        None => false
+        None => false,
     };
     if send_diagnostics {
         // NOTE: This is required so that the Sentry guard can be initialized
