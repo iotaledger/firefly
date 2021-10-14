@@ -3,7 +3,11 @@ const {
     version,
     build: { productName },
 } = require('../../package.json')
-require('../../sentry')
+
+const sendDiagnosticsArg = window.process.argv.slice(-1)[0]
+if (sendDiagnosticsArg === '--send-diagnostics=true') {
+    require('../../sentry')
+}
 
 contextBridge.exposeInMainWorld('about', {
     getData: () =>

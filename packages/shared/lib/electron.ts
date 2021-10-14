@@ -1,5 +1,6 @@
 import type { Error } from './typings/error'
 import type { WalletRoutes } from './typings/routes'
+import type { AppSettings } from './typings/app'
 
 export type VersionDetails = {
     upToDate: boolean
@@ -66,6 +67,7 @@ export interface IElectron {
     getUserDataPath(): Promise<string>
     getDiagnostics(): Promise<{ label: string; value: string }[]>
     getOS(): Promise<string>
+    updateAppSettings(settings: Partial<AppSettings>): Promise<void>
     updateActiveProfile(id: string): void
     removeProfileFolder(profilePath: string): Promise<void>
     listProfileFolders(profileStoragePath: string): Promise<string[]>

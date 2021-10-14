@@ -1,5 +1,9 @@
 const { ipcRenderer, contextBridge } = require('electron')
-require('../sentry')
+
+const sendDiagnosticsArg = window.process.argv.slice(-1)[0]
+if (sendDiagnosticsArg === '--send-diagnostics=true') {
+    require('../sentry')
+}
 
 // Hook the error handlers as early as possible
 window.addEventListener('error', (event) => {
@@ -41,6 +45,9 @@ try {
     const eventListeners = {}
 
     const Electron = {
+        updateAppSettings(settings) {
+            return ipcRenderer.invoke('update-app-settings', settings)
+        },
         updateActiveProfile(id) {
             activeProfileId = id
         },

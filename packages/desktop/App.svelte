@@ -39,9 +39,8 @@
     import { getLocalisedMenuItems } from './lib/helpers'
     import { Locale } from 'shared/lib/typings/i18n'
 
-    const handleDiagnosticReporting = async (diagnosticReporting: boolean): Promise<void> => {
-        // TODO: Update the JSON settings file (put this function in one common place for Advanced.svelte too!)
-    }
+    const handleDiagnosticReporting = async (diagnosticReporting: boolean): Promise<void> =>
+        Electron.updateAppSettings({ diagnosticReporting })
 
     $: void handleDiagnosticReporting($appSettings.diagnosticReporting)
     $: $appSettings.darkMode ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')

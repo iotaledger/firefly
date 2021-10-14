@@ -6,7 +6,21 @@ const fs = require('fs')
 const Keychain = require('./lib/keychain')
 const { initMenu, contextMenu } = require('./lib/menu')
 
-if (loadJsonConfig('settings.json').diagnosticReporting) {
+let diagnosticReporting = loadJsonConfig('settings.json').diagnosticReporting
+if (typeof diagnosticReporting === 'undefined') {
+    /**
+     * NOTE: If the diagnostic reporting metadata
+     * is undefined (will be the case for existing
+     * settings files), then set it to false by default
+     * and update the actual JSON file.
+     */
+    diagnosticReporting = false
+
+    updateSettings({ diagnosticReporting })
+}
+
+const shouldSendDiagnostics = diagnosticReporting && app.isPackaged
+if (shouldSendDiagnostics) {
     module.require('../sentry')
 }
 
@@ -95,6 +109,7 @@ const defaultWebPreferences = {
     webviewTag: false,
     enableWebSQL: false,
     devTools: !app.isPackaged,
+    additionalArguments: [`--send-diagnostics=${shouldSendDiagnostics}`],
 }
 
 if (app.isPackaged) {
@@ -386,6 +401,9 @@ ipcMain.handle('handle-error', (_e, errorType, error) => {
 // Os
 ipcMain.handle('get-os', (_e) => process.platform)
 
+// Settings
+ipcMain.handle('update-app-settings', (_e, settings) => updateSettings(settings))
+
 /**
  * Define deep link state
  */
@@ -610,6 +628,8 @@ function windowStateKeeper(windowName, settingsFilename) {
 }
 
 function updateSettings(data) {
+    // eslint-disable-next-line no-console
+    console.log('SETTINGS: ', data)
     const filename = 'settings.json'
     const config = loadJsonConfig(filename)
 
