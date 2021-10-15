@@ -6,21 +6,22 @@ const fs = require('fs')
 const Keychain = require('./lib/keychain')
 const { initMenu, contextMenu } = require('./lib/menu')
 
-let diagnosticReporting = loadJsonConfig('settings.json').diagnosticReporting
-if (typeof diagnosticReporting === 'undefined') {
+let sendDiagnostics = loadJsonConfig('settings.json').sendDiagnostics // && app.isPackaged
+if (typeof sendDiagnostics === 'undefined') {
     /**
      * NOTE: If the diagnostic reporting metadata
      * is undefined (will be the case for existing
      * settings files), then set it to false by default
      * and update the actual JSON file.
      */
-    diagnosticReporting = false
+    sendDiagnostics = false
 
-    updateSettings({ diagnosticReporting })
+    updateSettings({ sendDiagnostics })
 }
 
-const shouldSendDiagnostics = true // diagnosticReporting && app.isPackaged
-if (shouldSendDiagnostics) {
+if (sendDiagnostics) {
+    // eslint-disable-next-line no-console
+    console.log('SENDING DIAGNOSTICS!')
     module.require('../sentry')
 }
 
@@ -112,7 +113,7 @@ const defaultWebPreferences = {
     webviewTag: false,
     enableWebSQL: false,
     devTools: !app.isPackaged,
-    additionalArguments: [`--send-diagnostics=${shouldSendDiagnostics}`],
+    additionalArguments: [`--send-diagnostics=${sendDiagnostics}`],
 }
 
 if (app.isPackaged) {

@@ -1,8 +1,8 @@
 <script lang="typescript">
-    import { Button, Checkbox, HR, Radio, Text } from 'shared/components'
+    import { Button, Checkbox, HR, Icon, Radio, Text } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
     import { loggedIn } from 'shared/lib/app'
-    import { appSettings } from 'shared/lib/appSettings'
+    import { appSettings, initAppSettings } from 'shared/lib/appSettings'
     import { navigateToNewIndexMigration } from 'shared/lib/ledger'
     import { getOfficialNodes } from 'shared/lib/network'
     import { openPopup } from 'shared/lib/popup'
@@ -269,12 +269,18 @@
     <section id="diagnostics" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.diagnostics.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.diagnostics.description')}</Text>
-        <Button medium classes="mb-6" inlineStyle="min-width: 156px;" onClick={() => handleDiagnosticsClick()}>
+        <Button classes="mb-6" medium inlineStyle="min-width: 156px;" onClick={() => handleDiagnosticsClick()}>
             {locale('views.settings.diagnostics.title')}
         </Button>
 
         <Text type="h5" classes="mb-3">{locale('views.settings.diagnostics.reporting.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.diagnostics.reporting.body')}</Text>
+        {#if $appSettings.sendDiagnostics !== $initAppSettings.sendDiagnostics}
+            <div class="flex flex-row space-x-3 mb-5">
+                <Icon icon="info" classes="x-1" />
+                <Text type="p" classes="x-3">You must restart Firefly to apply this change</Text>
+            </div>
+        {/if}
         <Checkbox label={locale('views.settings.diagnostics.reporting.checkbox')} bind:checked={$appSettings.sendDiagnostics} />
     </section>
     {#if $isLedgerProfile}

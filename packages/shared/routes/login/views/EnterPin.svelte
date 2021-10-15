@@ -9,7 +9,7 @@
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { appSettings } from 'shared/lib/appSettings'
+    import { initAppSettings } from 'shared/lib/appSettings'
 
     export let locale: Locale
 
@@ -69,7 +69,7 @@
         }
         if (!hasReachedMaxAttempts) {
             const profile = get(activeProfile)
-            const { sendDiagnostics } = get(appSettings)
+            const { sendDiagnostics } = get(initAppSettings)
 
             isBusy = true
 

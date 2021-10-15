@@ -10,7 +10,7 @@
             "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
         },
         "diagnostics": {
-            "title": "Diagnostic reporting",
+            "title": "Send diagnostic reports",
             "body": "Help improve Firefly by automatically sending anonymous diagnostic data.",
             "checkbox": "Share diagnostic data with the IOTA Foundation"
         },
@@ -400,9 +400,9 @@
                 "title": "Diagnostics",
                 "description": "View system and application information",
                 "reporting": {
-                    "title": "Diagnostic reporting",
-                    "body": "Help improve Firefly by automatically sending anonymous diagnostic data.",
-                    "checkbox": "Share diagnostic data with the IOTA Foundation"
+                    "title": "Send reports",
+                    "body": "Help improve Firefly by automatically sending anonymous diagnostic data for any errors or crashes.",
+                    "checkbox": "Share diagnostic data"
                 }
             },
             "migrateLedgerIndex": {

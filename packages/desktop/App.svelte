@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
     import { loggedIn, mobile } from 'shared/lib/app'
-    import { appSettings } from 'shared/lib/appSettings'
+    import { appSettings, initAppSettings } from 'shared/lib/appSettings'
     import { getVersionDetails, pollVersion, versionDetails } from 'shared/lib/appUpdater'
     import { Electron } from 'shared/lib/electron'
     import { addError } from 'shared/lib/errors'
@@ -67,6 +67,11 @@
             splash = false
             initRouter()
         }, 3000)
+
+        /**
+         * CA
+         */
+        initAppSettings.set($appSettings)
 
         await pollMarketData()
 

@@ -18,7 +18,7 @@
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { appSettings } from 'shared/lib/appSettings'
+    import { initAppSettings } from 'shared/lib/appSettings'
 
     export let locale: Locale
 
@@ -77,7 +77,7 @@
                     profileInProgress.set(trimmedProfileName)
 
                     const userDataPath = await Electron.getUserDataPath()
-                    const { sendDiagnostics } = $appSettings
+                    const { sendDiagnostics } = $initAppSettings
                     initialise($newProfile.id, getStoragePath(userDataPath, $newProfile.name), sendDiagnostics)
 
                     initialiseMigrationListeners()

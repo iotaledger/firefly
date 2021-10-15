@@ -2,6 +2,8 @@ const { ipcRenderer, contextBridge } = require('electron')
 
 const sendDiagnosticsArg = '--send-diagnostics=true'
 if (window.process.argv.includes(sendDiagnosticsArg)) {
+    // eslint-disable-next-line no-console
+    console.log('SENDING DIAGNOSTICS!')
     require('../sentry')
 }
 

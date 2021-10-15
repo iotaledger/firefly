@@ -59,7 +59,6 @@ import { CurrencyTypes } from './typings/currency'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
 import { HistoryDataProps, PriceData } from './typings/market'
 import { ProfileType } from './typings/profile'
-import { appSettings } from './appSettings'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -392,6 +391,18 @@ export const getWalletStoragePath = (appPath: string): string => `${appPath}/${W
 export const getStoragePath = (appPath: string, profileName: string): string =>
     `${getWalletStoragePath(appPath)}${profileName}`
 
+/**
+ * Initialise the actor system with the Rust wallet.rs bindings.
+ *
+ * @method initialise
+ *
+ * @param {string} id The identifier to use for the wallet actor system.
+ * @param {string} storagePath The storage directory to use for profile data.
+ * @param {boolean} sendDiagnostics Determines whether diagnostic data should be sent from the wallet actor.
+ *
+ * CAUTION: Only use the app settings from startup as the wallet actor is initialized dynamically while the
+ * Electron app is not.
+ */
 export const initialise = (id: string, storagePath: string, sendDiagnostics: boolean): void => {
     if (Object.keys(actors).length > 0) {
         console.error('Initialise called when another actor already initialised')
