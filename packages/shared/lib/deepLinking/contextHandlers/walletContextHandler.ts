@@ -1,17 +1,17 @@
 import { Unit } from '@iota/unit-converter'
 import { addError } from 'shared/lib/errors'
 
-//TODO: Move out of file
+// TODO: Move out of file
 export enum DeepLinkingContexts {
     Wallet = 'wallet',
 }
 
-//TODO: Move out of file
+// TODO: Move out of file
 export enum WalletOperations {
     Send = 'send',
 }
 
-//TODO: Move out of file
+// TODO: Move out of file
 export enum SendSearchParameters {
     Amount = 'amount',
     Unit = 'unit',
@@ -27,7 +27,19 @@ export enum SendSearchParameters {
  * @param {string} expectedAddressPrefix
  * @return {object} The formatted deep link content for populating the send params
  */
-export const parseWalletRequest = (url: URL, expectedAddressPrefix: string) => {
+export const parseWalletRequest = (
+    url: URL,
+    expectedAddressPrefix: string
+): void | {
+    context: string
+    operation: string
+    params: void | {
+        address: string
+        amount: number
+        unit: Unit
+        message: string
+    }
+} => {
     let params
     // Remove any leading and trailing slashes
     const pathnameParts = url.pathname.replace(/^\/+|\/+$/g, '').split('/')
@@ -66,8 +78,8 @@ export const parseWalletRequest = (url: URL, expectedAddressPrefix: string) => {
  * @return {object} The formatted deep link content for populating the send params
  */
 const parseSendOperation = (address: string, searchParams: URLSearchParams, expectedAddressPrefix: string) => {
-    var parsedAmount: number | undefined
-    var parsedUnit: Unit | undefined
+    let parsedAmount: number | undefined
+    let parsedUnit: Unit | undefined
 
     // Check address exists and is valid this is not optional.
     if (!address) {
@@ -91,10 +103,12 @@ const parseSendOperation = (address: string, searchParams: URLSearchParams, expe
         }
     }
 
-    var unitParam = searchParams.get(SendSearchParameters.Unit)
+    let unitParam = searchParams.get(SendSearchParameters.Unit)
     if (unitParam) {
         unitParam =
-            unitParam.length > 1 ? unitParam.charAt(0).toUpperCase() + unitParam.slice(1).toLowerCase() : unitParam.toLowerCase()
+            unitParam.length > 1
+                ? unitParam.charAt(0).toUpperCase() + unitParam.slice(1).toLowerCase()
+                : unitParam.toLowerCase()
         parsedUnit = Unit[unitParam]
         if (!Object.values(Unit).includes(parsedUnit)) {
             return addError({ time: Date.now(), type: 'deepLink', message: `Unit is not recognised '${unitParam}'` })
@@ -119,7 +133,6 @@ const parseSendOperation = (address: string, searchParams: URLSearchParams, expe
     }
 }
 
-//TODO: Move out of file
-const isValidAddressAndPrefix = (address: string, expectedAddressPrefix: string) => {
-    return !new RegExp(`^${expectedAddressPrefix}1[02-9ac-hj-np-z]{59}$`).test(address)
-}
+// TODO: Move out of file
+const isValidAddressAndPrefix = (address: string, expectedAddressPrefix: string) =>
+    !new RegExp(`^${expectedAddressPrefix}1[02-9ac-hj-np-z]{59}$`).test(address)

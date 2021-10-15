@@ -1,9 +1,11 @@
 <script lang="typescript">
     import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
-    import { ImportType } from 'shared/lib/profile'
     import { createEventDispatcher } from 'svelte'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { ImportType } from 'shared/lib/typings/profile'
 
-    export let locale
+    export let locale: Locale
+
     export let mobile
 
     const dispatch = createEventDispatcher()

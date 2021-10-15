@@ -1,13 +1,20 @@
 <script lang="typescript">
     import { Idle, Sidebar } from 'shared/components'
     import { loggedIn, logout, sendParams } from 'shared/lib/app'
+    import { appSettings } from 'shared/lib/appSettings'
+    import { deepLinkRequestActive, parseDeepLink } from 'shared/lib/deepLinking/deepLinking'
     import { Electron } from 'shared/lib/electron'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
-    import { NOTIFICATION_TIMEOUT_NEVER, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
+    import {
+        NOTIFICATION_TIMEOUT_NEVER,
+        removeDisplayNotification,
+        showAppNotification,
+    } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
     import { accountRoute, dashboardRoute, routerNext, walletRoute } from 'shared/lib/router'
+    import type { Locale } from 'shared/lib/typings/i18n'
     import { AccountRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
     import {
         api,
@@ -19,13 +26,11 @@
     import { Settings, Wallet } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import { appSettings } from 'shared/lib/appSettings'
-    import { deepLinkRequestActive, parseDeepLink } from 'shared/lib/deepLinking/deepLinking'
+
+    export let locale: Locale
+    export let mobile
 
     const { accountsLoaded, accounts } = $wallet
-
-    export let locale
-    export let mobile
 
     const tabs = {
         wallet: Wallet,
@@ -52,7 +57,7 @@
         }
     })
 
-    onMount(async () => {
+    onMount(() => {
         if ($isSoftwareProfile) {
             api.setStrongholdPasswordClearInterval({ secs: STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, nanos: 0 })
         }
@@ -79,13 +84,15 @@
         }
 
         Electron.onEvent('menu-logout', () => {
-            logout()
+            void logout()
         })
 
         Electron.onEvent('notification-activated', (contextData) => {
             if (contextData) {
                 if (
-                    (contextData.type === 'confirmed' || contextData.type === 'failed' || contextData.type === 'valueTx') &&
+                    (contextData.type === 'confirmed' ||
+                        contextData.type === 'failed' ||
+                        contextData.type === 'valueTx') &&
                     contextData.accountId
                 ) {
                     selectedAccountId.set(contextData.accountId)

@@ -1,4 +1,5 @@
 import type { Bridge, CommunicationIds } from './bridge'
+import type { Writable } from 'svelte/store'
 
 export interface MigrationAddress {
     bech32: string
@@ -28,7 +29,8 @@ export interface MigrationData {
 
 export interface MigrationBundle {
     bundleHash: string
-    crackability: number
+    crackability?: number
+    trytes?: string[]
 }
 
 export interface SendMigrationBundleResponse {
@@ -49,6 +51,51 @@ export enum RiskLevel {
     MEDIUM = 10 ** -17,
     LOW = 10 ** -19,
     VERYLOW = 0,
+}
+
+export interface MigrationLog {
+    bundleHash: string
+    trytes: string[]
+    receiveAddressTrytes: string
+    balance: number
+    timestamp: string
+    spentAddresses: string[]
+    spentBundleHashes: string[]
+    mine: boolean
+    crackability: number | null
+}
+
+export interface Bundle {
+    index: number
+    shouldMine: boolean
+    selectedToMine: boolean
+    bundleHash?: string
+    crackability?: number
+    migrated: boolean
+    selected: boolean
+    inputs: Input[]
+    miningRuns: number
+    confirmed: boolean
+    trytes?: string[]
+}
+
+export interface HardwareIndexes {
+    accountIndex: number
+    pageIndex: number
+}
+
+export interface MigrationState {
+    didComplete: Writable<boolean>
+    data: Writable<MigrationData>
+    seed: Writable<string>
+    bundles: Writable<Bundle[]>
+}
+
+export enum LedgerMigrationProgress {
+    InstallLedgerApp,
+    GenerateAddress,
+    SwitchLedgerApp,
+    TransferFunds,
 }
 
 /**
@@ -74,7 +121,7 @@ export function getMigrationData(
     securityLevel?: number,
     initialAddressIndex?: number,
     permanode?: string
-) {
+): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -114,7 +161,7 @@ export function createMigrationBundle(
     timeoutSeconds: number,
     offset: number,
     logFileName: string
-) {
+): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -143,7 +190,13 @@ export function createMigrationBundle(
  *
  * @returns {Promise}
  */
-export function sendMigrationBundle(bridge: Bridge, __ids: CommunicationIds, nodes: string[], bundleHash: string, mwm: number) {
+export function sendMigrationBundle(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+    nodes: string[],
+    bundleHash: string,
+    mwm: number
+): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -167,7 +220,12 @@ export function sendMigrationBundle(bridge: Bridge, __ids: CommunicationIds, nod
  *
  * @returns {Promise}
  */
-export function getMigrationAddress(bridge: Bridge, __ids: CommunicationIds, ledgerPrompt: boolean, accountIndex: number) {
+export function getMigrationAddress(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+    ledgerPrompt: boolean,
+    accountIndex: number
+): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -201,7 +259,7 @@ export function mineBundle(
     securityLevel: number,
     timeout: number,
     offset: number
-) {
+): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -238,7 +296,7 @@ export function getLedgerMigrationData(
     nodes: string[],
     permanode: string,
     securityLevel: number
-) {
+): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -271,7 +329,7 @@ export function sendLedgerMigrationBundle(
     nodes: string[],
     bundle: string[],
     mwm: number
-) {
+): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -295,7 +353,7 @@ export function sendLedgerMigrationBundle(
  *
  * @returns {Promise}
  */
-export function getLegacyAddressChecksum(bridge: Bridge, __ids: CommunicationIds, address: string) {
+export function getLegacyAddressChecksum(bridge: Bridge, __ids: CommunicationIds, address: string): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,

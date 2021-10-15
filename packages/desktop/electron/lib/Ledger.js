@@ -7,12 +7,12 @@ const SIMULATOR_PORT = 9999
 
 async function createTransport() {
     if (USE_SIMULATOR) {
-        return await TransportSpeculos.open({
+        return TransportSpeculos.open({
             apduPort: SIMULATOR_PORT,
         })
     }
 
-    return await TransportHid.create()
+    return TransportHid.create()
 }
 
 class Ledger {
@@ -86,7 +86,7 @@ class Ledger {
     async awaitApplication(index, page, security) {
         return new Promise((resolve, reject) => {
             let timeout = null
-            let rejected = false
+            const rejected = false
 
             const callback = async () => {
                 try {
@@ -127,7 +127,7 @@ class Ledger {
      * @returns {number}
      */
     async getAppMaxBundleSize() {
-        return await this.iota.getAppMaxBundleSize()
+        return this.iota.getAppMaxBundleSize()
     }
 
     /**

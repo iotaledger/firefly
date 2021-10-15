@@ -3,7 +3,7 @@
 /* eslint-disable no-bitwise */
 
 /**
- * Class to help with Bech32 encoding/decoding.
+ * Class to help with Bech32 encoding/decoding
  * Based on reference implementation https://github.com/sipa/bech32/blob/master/ref/javascript/bech32.js
  */
 export class Bech32 {
@@ -24,11 +24,7 @@ export class Bech32 {
      * @internal
      */
     private static readonly GENERATOR: Uint32Array = Uint32Array.from([
-        0x3b6a57b2,
-        0x26508e6d,
-        0x1ea119fa,
-        0x3d4233dd,
-        0x2a1462b3,
+        0x3b6a57b2, 0x26508e6d, 0x1ea119fa, 0x3d4233dd, 0x2a1462b3,
     ])
 
     /**
@@ -68,9 +64,7 @@ export class Bech32 {
      * @param bech The text to decode.
      * @returns The decoded data or undefined if it could not be decoded.
      */
-    public static decode(
-        bech: string
-    ):
+    public static decode(bech: string):
         | {
               humanReadablePart: string
               data: Uint8Array
@@ -90,9 +84,7 @@ export class Bech32 {
      * @param bech The text to decode.
      * @returns The decoded data or undefined if it could not be decoded.
      */
-    public static decodeTo5BitArray(
-        bech: string
-    ):
+    public static decodeTo5BitArray(bech: string):
         | {
               humanReadablePart: string
               data: Uint8Array

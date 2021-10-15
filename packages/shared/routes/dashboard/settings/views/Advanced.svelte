@@ -7,17 +7,24 @@
     import { getOfficialNodes } from 'shared/lib/network'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, updateProfile } from 'shared/lib/profile'
+    import type { Locale } from 'shared/lib/typings/i18n'
     import { buildAccountNetworkSettings, updateAccountNetworkSettings } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
 
-    export let locale
+    export let locale: Locale
 
     let deepLinkingChecked = $appSettings.deepLinking
 
-    let isDeveloperProfile = get(activeProfile)?.isDeveloperProfile
+    const isDeveloperProfile = get(activeProfile)?.isDeveloperProfile
     let showHiddenAccounts = get(activeProfile)?.settings.showHiddenAccounts
 
-    let { automaticNodeSelection, includeOfficialNodes, nodes, primaryNodeUrl, localPow } = buildAccountNetworkSettings()
+    let {
+        automaticNodeSelection,
+        includeOfficialNodes,
+        nodes,
+        primaryNodeUrl,
+        localPow,
+    } = buildAccountNetworkSettings()
 
     let contextPosition = { x: 0, y: 0 }
     let nodeContextMenu = undefined
@@ -39,12 +46,12 @@
         }
 
         const allEnabled = nodes.filter((n) => !n.disabled)
-        let primaryNode = allEnabled.find((n) => n.url === primaryNodeUrl)
+        const primaryNode = allEnabled.find((n) => n.url === primaryNodeUrl)
         if (!primaryNode && allEnabled.length > 0) {
             primaryNodeUrl = allEnabled[0].url
         }
     }
-    $: updateAccountNetworkSettings(automaticNodeSelection, includeOfficialNodes, nodes, primaryNodeUrl, localPow)
+    $: void updateAccountNetworkSettings(automaticNodeSelection, includeOfficialNodes, nodes, primaryNodeUrl, localPow)
 
     function handleAddNodeClick() {
         openPopup({
@@ -211,7 +218,11 @@
                         </div>
                     {/if}
                 </div>
-                <Button medium inlineStyle="min-width: 156px;" classes="w-1/4 mt-4" onClick={() => handleAddNodeClick()}>
+                <Button
+                    medium
+                    inlineStyle="min-width: 156px;"
+                    classes="w-1/4 mt-4"
+                    onClick={() => handleAddNodeClick()}>
                     {locale('actions.addNode')}
                 </Button>
             </section>

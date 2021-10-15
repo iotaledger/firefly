@@ -59,11 +59,16 @@ import {
 import { ClientOptions } from '../../../shared/lib/typings/client'
 import { NodeAuth } from '../../../shared/lib/typings/node'
 
-const addon = require('../index.node')
-const mailbox = []
+// @ts-ignore
+import addon = require('../index.node')
+
 const onMessageListeners: ((payload: MessageResponse) => void)[] = []
 
-function _poll(runtime: typeof addon.ActorSystem, cb: (error: string, data: any) => void, shouldStop: () => boolean) {
+function _poll(
+    runtime: typeof addon.ActorSystem,
+    cb: (error: string, data: unknown) => void,
+    shouldStop: () => boolean
+) {
     runtime.poll((err: string, data: string) => {
         cb(err, err ? null : JSON.parse(data))
         if (!shouldStop()) {
@@ -73,19 +78,19 @@ function _poll(runtime: typeof addon.ActorSystem, cb: (error: string, data: any)
 }
 
 function sendMessage(message: BridgeMessage): Promise<string> {
-    const id = message.id
+    const { id } = message
 
     return new Promise((resolve) => addon.sendMessage(JSON.stringify(message), () => resolve(id)))
 }
 
-export function init(id: string, storagePath?: string) {
+export function init(id: string, storagePath?: string): { destroy: () => void; removeEventListeners: () => void } {
     const runtime = storagePath ? new addon.ActorSystem(id, storagePath) : new addon.ActorSystem(id)
     let destroyed = false
     _poll(
         runtime,
         (error, data) => {
             const message = error || data
-            mailbox.push(message)
+            // @ts-ignore
             onMessageListeners.forEach((listener) => listener(message))
         },
         () => destroyed
@@ -101,11 +106,11 @@ export function init(id: string, storagePath?: string) {
     }
 }
 
-export function onMessage(cb: (payload: any) => void) {
+export function onMessage(cb: (payload: unknown) => void): void {
     onMessageListeners.push(cb)
 }
 
-export function initLogger(config: LoggerConfig) {
+export function initLogger(config: LoggerConfig): void {
     addon.initLogger(JSON.stringify(config))
 }
 

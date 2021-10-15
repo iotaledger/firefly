@@ -2,16 +2,12 @@ const lib = require('../dist')
 const assert = require('assert')
 const fs = require('fs')
 
-const generateRandomId = () => {
-    return Math.random().toString()
-}
+const generateRandomId = () => Math.random().toString()
 
-const communicationIds = (actorId) => {
-    return {
-        actorId,
-        messageId: generateRandomId(),
-    }
-}
+const communicationIds = (actorId) => ({
+    actorId,
+    messageId: generateRandomId(),
+})
 
 lib.initLogger({
     color_enabled: false,
@@ -24,24 +20,29 @@ lib.initLogger({
     ],
 })
 
+/* eslint-disable no-undef */
 describe('binding', () => {
     /* it('gets an event', () => {
     lib.init()
     lib.onMessage(console.log)
     lib.api.listenToErrorEvents()(generateRandomId())
   }) */
+    /* eslint-disable no-undef */
     it('creates an account, backup and restore it', () => {
         fs.rmdirSync('./storage', {
             recursive: true,
             force: true,
         })
+        /* eslint-disable no-undef */
         after(() => {
             try {
                 fs.rmdirSync('./backup', {
                     recursive: true,
                     force: true,
                 })
-            } catch {}
+            } catch (err) {
+                console.error(err)
+            }
         })
 
         const actorId = Math.random().toString().replace('.', '')
@@ -50,7 +51,6 @@ describe('binding', () => {
             const actor = lib.init(actorId)
             let index = 0
             lib.onMessage((message) => {
-                console.log(message, index)
                 switch (index++) {
                     case 0: {
                         assert.deepStrictEqual(message, {
