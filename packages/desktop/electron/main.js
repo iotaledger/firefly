@@ -3,6 +3,7 @@ const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session } = requir
 const path = require('path')
 const os = require('os')
 const fs = require('fs')
+const Sentry = require('@sentry/electron')
 const Keychain = require('./lib/keychain')
 const { initMenu, contextMenu } = require('./lib/menu')
 
@@ -55,15 +56,24 @@ let lastError = {}
  * Setup the error handlers early so they catch any issues
  */
 const handleError = (errorType, error, isRenderProcessError) => {
-    // eslint-disable-next-line no-console
-    console.log('HANDLING ERROR')
+    Sentry.captureException(
+        new Error(
+            JSON.stringify({
+                type: errorType,
+                message: error.message || error.reason || error,
+                stack: error.stack || undefined,
+            })
+        )
+    )
 
     if (app.isPackaged) {
         lastError = {
             diagnostics: getDiagnostics(),
-            errorType,
             error,
+            errorType,
         }
+
+        Sentry.captureException(new Error({ type: errorType, ...error }))
 
         openErrorWindow()
     } else {
@@ -76,11 +86,11 @@ const handleError = (errorType, error, isRenderProcessError) => {
 }
 
 process.on('uncaughtException', (error) => {
-    handleError('Main Unhandled Error', error)
+    handleError('Main Context (Unhandled Error)', error)
 })
 
 process.on('unhandledRejection', (error) => {
-    handleError('Main Unhandled Promise Rejection', error)
+    handleError('Main Context (Unhandled Promise Rejection)', error)
 })
 
 /**

@@ -317,7 +317,7 @@ try {
         /**
          * Log unhandled exception
          * @param {string} errorType The type of eerror
-         * @param {Errir} error The error
+         * @param {Error} error The error
          */
         unhandledException: (errorType, error) => {
             ipcRenderer.invoke('handle-error', errorType, error)
