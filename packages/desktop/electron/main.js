@@ -323,7 +323,7 @@ ipcMain.handle('get-path', (_e, path) => {
     if (allowedPaths.indexOf(path) === -1) {
         throw Error(`Path ${path} is not allowed`)
     }
-    return app.getPath(path)
+    return path.normalize(app.getPath(path))
 })
 
 // Diagnostics
