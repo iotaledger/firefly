@@ -106,10 +106,13 @@ impl TryFrom<&str> for EventType {
 
 fn init_sentry() -> Option<sentry::ClientInitGuard> {
     match env::var("SENTRY_DSN") {
-        Ok(sentry_dsn) => Some(sentry::init((sentry_dsn, sentry::ClientOptions {
-            release: sentry::release_name!(),
-            ..Default::default()
-        }))),
+        Ok(sentry_dsn) => Some(sentry::init((
+            sentry_dsn,
+            sentry::ClientOptions {
+                release: sentry::release_name!(),
+                ..Default::default()
+            },
+        ))),
         Err(_) => None,
     }
 }
