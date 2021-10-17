@@ -7,7 +7,7 @@ const Sentry = require('@sentry/electron')
 const Keychain = require('./lib/keychain')
 const { initMenu, contextMenu } = require('./lib/menu')
 
-let sendDiagnostics = loadJsonConfig('settings.json').sendDiagnostics // && app.isPackaged
+let sendDiagnostics = loadJsonConfig('settings.json').sendDiagnostics && app.isPackaged
 if (typeof sendDiagnostics === 'undefined') {
     /**
      * NOTE: If the diagnostic reporting metadata
