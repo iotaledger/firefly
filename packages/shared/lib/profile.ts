@@ -198,11 +198,10 @@ export const updateProfile = (path: string, value: ValuesOf<Profile> | ValuesOf<
  *
  * @returns {void}
  */
-export const cleanupInProgressProfiles = async (): Promise<void> => {
+export const cleanupInProgressProfiles = (): void => {
     const inProgressProfile = get(profileInProgress)
     if (inProgressProfile) {
         profileInProgress.update(() => undefined)
-        await removeProfileFolder(inProgressProfile)
     }
 }
 

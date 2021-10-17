@@ -37,11 +37,16 @@
     async function triggerDeleteProfile() {
         try {
             const _activeProfile = get(activeProfile)
+            if (!_activeProfile) return
 
             // The account data associated with a profile must also be deleted
             // and since logout() destroys the event actor, we must call the API
             // now to remove the data
             await asyncRemoveWalletAccounts(get(get(wallet).accounts))
+
+            // Remove the profile folder this will wait until it can get
+            // the lock on the resources
+            await removeProfileFolder(_activeProfile.name)
 
             // We have to logout before the profile is removed
             // from the profile list otherwise the activeProfile which is
@@ -49,23 +54,14 @@
             // is not destroyed
             await logout()
 
-            // Now that all the resources have been freed we try
-            // and remove the profile folder, this will retry until locks
-            // can be gained
-            if (_activeProfile) {
-                // Remove the profile from the active list of profiles
-                removeProfile(_activeProfile.id)
+            // Remove the profile from the active list of profiles
+            removeProfile(_activeProfile.id)
 
-                // If after removing the profile there are none left
-                // we need to make sure the router gets reset to the welcome screen
-                // by default it will go to the profile selection
-                if (get(profiles).length === 0) {
-                    setRoute(AppRoute.Welcome)
-                }
-
-                // Remove the profile folder this will wait until it can get
-                // the lock on the resources
-                await removeProfileFolder(_activeProfile.name)
+            // If after removing the profile there are none left
+            // we need to make sure the router gets reset to the welcome screen
+            // by default it will go to the profile selection
+            if (get(profiles).length === 0) {
+                setRoute(AppRoute.Welcome)
             }
         } catch (err) {
             showAppNotification({
