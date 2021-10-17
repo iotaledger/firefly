@@ -100,8 +100,6 @@
     }
 
     function handleDiagnosticsClick() {
-        // eslint-disable-next-line no-undef
-        myUndefinedFn()
         openPopup({ type: 'diagnostics' })
     }
 

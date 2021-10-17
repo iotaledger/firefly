@@ -82,6 +82,4 @@ export async function fetchNetworkStatus(): Promise<void> {
             health: 0,
         })
     }
-
-    throw new Error('Everything is on fire!')
 }

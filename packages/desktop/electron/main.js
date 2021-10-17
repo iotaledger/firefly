@@ -21,8 +21,6 @@ if (typeof sendDiagnostics === 'undefined') {
 }
 
 if (sendDiagnostics) {
-    // eslint-disable-next-line no-console
-    console.log('SENDING DIAGNOSTICS!')
     module.require('../sentry')
 }
 
@@ -56,24 +54,25 @@ let lastError = {}
  * Setup the error handlers early so they catch any issues
  */
 const handleError = (errorType, error, isRenderProcessError) => {
-    Sentry.captureException(
-        new Error(
-            JSON.stringify({
-                type: errorType,
-                message: error.message || error.reason || error,
-                stack: error.stack || undefined,
-            })
-        )
-    )
-
     if (app.isPackaged) {
+        const diagnostics = getDiagnostics()
+
         lastError = {
-            diagnostics: getDiagnostics(),
+            diagnostics,
             error,
             errorType,
         }
 
-        Sentry.captureException(new Error({ type: errorType, ...error }))
+        Sentry.captureException(
+            new Error(
+                JSON.stringify({
+                    type: errorType,
+                    message: error.message || error.reason || error,
+                    stack: error.stack || undefined,
+                    diagnostics,
+                })
+            )
+        )
 
         openErrorWindow()
     } else {

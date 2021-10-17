@@ -658,7 +658,6 @@ export const asyncGetNodeInfo = (accountId: string, url?: string, auth?: NodeAut
     new Promise<NodeInfo>((resolve, reject) => {
         api.getNodeInfo(accountId, url, auth, {
             onSuccess(response) {
-                reject(response.payload)
                 resolve(response.payload)
             },
             onError(err) {

@@ -104,17 +104,14 @@ impl TryFrom<&str> for EventType {
     }
 }
 
-fn init_sentry() -> sentry::ClientInitGuard {
-    sentry::init((
-        match env::var("SENTRY_DSN") {
-            Ok(sentry_dsn) => sentry_dsn,
-            Err(_) => String::from("https://48349d5d80f0429fb2d273702544a012@o1010134.ingest.sentry.io/5974639"), /* DEFAULT from firefly-dev */
-        },
-        sentry::ClientOptions {
+fn init_sentry() -> Option<sentry::ClientInitGuard> {
+    match env::var("SENTRY_DSN") {
+        Ok(sentry_dsn) => Some(sentry::init((sentry_dsn, sentry::ClientOptions {
             release: sentry::release_name!(),
             ..Default::default()
-        },
-    ))
+        }))),
+        Err(_) => None,
+    }
 }
 
 pub async fn init<A: Into<String>>(
@@ -128,10 +125,10 @@ pub async fn init<A: Into<String>>(
         None => false,
     };
     if send_diagnostics {
-        // NOTE: This is required so that the Sentry guard can be initialized
-        // to a dynamic object via the init_sentry function.
+        // NOTE: unsafe is required here so that the Sentry guard can be
+        // re-initialized with this init call.
         unsafe {
-            SENTRY_GUARD = Some(init_sentry());
+            SENTRY_GUARD = init_sentry();
         }
     }
 

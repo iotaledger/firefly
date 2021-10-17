@@ -68,9 +68,6 @@
             initRouter()
         }, 3000)
 
-        /**
-         * CA
-         */
         initAppSettings.set($appSettings)
 
         await pollMarketData()
