@@ -28,6 +28,11 @@ export const strongholdPassword = writable<string>(null)
  */
 export const mnemonic = writable<string[]>(null)
 
+/**
+ * The last timestamp that the app user was active
+ */
+export const lastActiveAt = writable<Date>(new Date())
+
 interface SendParams {
     amount: number
     address: string
@@ -61,6 +66,7 @@ export const cleanupSignup = (): void => {
  */
 export const login = (): void => {
     loggedIn.set(true)
+    lastActiveAt.set(new Date())
 }
 
 /**
@@ -75,17 +81,22 @@ export const logout = (): Promise<void> =>
             if (ap) {
                 destroyActor(ap.id)
             }
+
             if (get(isSoftwareProfile)) {
                 isStrongholdLocked.set(true)
             }
             if (get(isLedgerProfile)) {
                 stopPollingLedgerStatus()
             }
+
+            lastActiveAt.set(new Date())
+
             clearSendParams()
             closePopup(true)
             clearActiveProfile()
             resetWallet()
             resetRouter()
+
             loggedIn.set(false)
 
             resolve()

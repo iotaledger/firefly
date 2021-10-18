@@ -1,5 +1,5 @@
-name: Report a Firefly issue
-description: Create a report to help us improve
+name: Found a bug?
+description: Fill in this form to report it, and help us improve.
 labels: bug
 
 body:
