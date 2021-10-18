@@ -586,16 +586,16 @@ export const asyncCreateAccount = (): Promise<void> =>
         )
     })
 
-export const asyncRemoveWalletAccount = (_account: WalletAccount): Promise<void> =>
+export const asyncRemoveWalletAccount = (accountId: string): Promise<void> =>
     new Promise<void>((resolve, reject) => {
-        api.removeAccount(_account.id, {
+        api.removeAccount(accountId, {
             onSuccess() {
                 /**
                  * CAUTION: If an account is successfully removed in wallet.rs then it should also be
                  * removed in the Firefly store. This is "inefficient" (esp. for batch deletes) but it
                  * at least ensures data integrity / consistency between Firefly and the backend.
                  */
-                get(wallet).accounts.update((_accounts) => _accounts.filter((wa) => wa.id !== _account.id))
+                get(wallet).accounts.update((_accounts) => _accounts.filter((wa) => wa.id !== accountId))
 
                 resolve()
             },
@@ -605,8 +605,8 @@ export const asyncRemoveWalletAccount = (_account: WalletAccount): Promise<void>
         })
     })
 
-export const asyncRemoveWalletAccounts = (_accounts: WalletAccount[]): Promise<void[]> =>
-    Promise.all(_accounts.map((wa) => asyncRemoveWalletAccount(wa)))
+export const asyncRemoveWalletAccounts = (accountIds: string[]): Promise<void[]> =>
+    Promise.all(accountIds.map((id) => asyncRemoveWalletAccount(id)))
 
 export const asyncRemoveStorage = (): Promise<void> =>
     new Promise<void>((resolve, reject) => {

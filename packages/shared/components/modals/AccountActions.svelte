@@ -60,7 +60,7 @@
                 account,
                 hasMultipleAccounts: $viewableAccounts.length > 1,
                 deleteAccount: async (id) => {
-                    await asyncRemoveWalletAccount(get(account))
+                    await asyncRemoveWalletAccount(get(account).id)
 
                     if (!hiddenAccounts.includes(id)) {
                         hiddenAccounts.push(id)

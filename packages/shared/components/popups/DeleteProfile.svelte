@@ -42,7 +42,7 @@
             /**
              * CAUTION: The individual accounts must be removed from wallet.rs.
              */
-            await asyncRemoveWalletAccounts(get(get(wallet).accounts))
+            await asyncRemoveWalletAccounts(get(get(wallet).accounts).map((a) => a.id))
 
             /**
              * CAUTION: The storage for wallet.rs must also be deleted in order
