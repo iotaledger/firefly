@@ -1,6 +1,6 @@
 import { persistent } from 'shared/lib/helpers'
 import { ledgerSimulator } from 'shared/lib/ledger'
-import { generateRandomId } from 'shared/lib/utils'
+import { generateRandomId, migrateObjects } from 'shared/lib/utils'
 import { destroyActor, getStoragePath, getWalletStoragePath } from 'shared/lib/wallet'
 import { derived, get, Readable, writable } from 'svelte/store'
 import { Electron } from './electron'
@@ -61,37 +61,67 @@ export const saveProfile = (profile: Profile): Profile => {
 }
 
 /**
- * Creates a new profile
+ * Build a default profile object given a name and developer status.
+ *
+ * @method buildProfile
+ *
+ * @param {string} profileName
+ * @param {boolean} isDeveloperProfile
+ *
+ * @returns {Profile}
+ */
+const buildProfile = (profileName: string, isDeveloperProfile: boolean): Profile => ({
+    id: generateRandomId(),
+    name: profileName,
+    type: null,
+    lastStrongholdBackupTime: null,
+    isDeveloperProfile,
+    settings: {
+        currency: AvailableExchangeRates.USD,
+        automaticNodeSelection: true,
+        includeOfficialNodes: true,
+        disabledNodes: undefined,
+        lockScreenTimeout: 5,
+        chartSelectors: {
+            currency: AvailableExchangeRates.USD,
+            timeframe: HistoryDataProps.SEVEN_DAYS,
+        },
+    },
+    ledgerMigrationCount: 0,
+})
+
+/**
+ * Builds a new profile and sets Svelte store variables accordingly.
  *
  * @method createProfile
+ *
+ * @param {string} profileName
+ * @param {boolean} isDeveloperProfile
  *
  * @returns {Profile}
  */
 export const createProfile = (profileName: string, isDeveloperProfile: boolean): Profile => {
-    const profile: Profile = {
-        id: generateRandomId(),
-        name: profileName,
-        type: null,
-        lastStrongholdBackupTime: null,
-        isDeveloperProfile,
-        settings: {
-            currency: AvailableExchangeRates.USD,
-            automaticNodeSelection: true,
-            includeOfficialNodes: true,
-            disabledNodes: undefined,
-            lockScreenTimeout: 5,
-            chartSelectors: {
-                currency: AvailableExchangeRates.USD,
-                timeframe: HistoryDataProps.SEVEN_DAYS,
-            },
-        },
-        ledgerMigrationCount: 0,
-    }
+    const profile = buildProfile(profileName, isDeveloperProfile)
 
     newProfile.set(profile)
     activeProfileId.set(profile.id)
 
     return profile
+}
+
+/**
+ * Migrates profile data in need of being modified to accommodate changes
+ * in a newer Firefly version.
+ *
+ * @method migrateProfile
+ *
+ * @returns {void}
+ */
+export const migrateProfile = (): void => {
+    const oldProfile = get(activeProfile)
+    const newProfile = buildProfile(oldProfile.name, oldProfile.isDeveloperProfile)
+
+    updateProfile('', migrateObjects<Profile>(oldProfile, newProfile))
 }
 
 /**
@@ -163,6 +193,14 @@ export const removeProfile = (id: string): void => {
  */
 export const updateProfile = (path: string, value: ValuesOf<Profile> | ValuesOf<UserSettings>): void => {
     const _update = (_profile) => {
+        if (path === '') {
+            const isValidData =
+                /* eslint-disable no-prototype-builtins */
+                typeof value === 'object' && Object.keys(value).filter((k) => !_profile.hasOwnProperty(k)).length === 0
+            /* eslint-disable @typescript-eslint/ban-types */
+            return isValidData ? { ..._profile, ...(value as object) } : _profile
+        }
+
         const pathList = path.split('.')
 
         pathList.reduce((a, b: keyof Profile | keyof UserSettings, level: number) => {

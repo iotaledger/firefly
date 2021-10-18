@@ -21,7 +21,11 @@
                 "first": "For now, let's start with your first profile name.",
                 "nonFirst": "For now, let's start with your profile name."
             },
-            "addMore": "You can add more profiles later."
+            "addMore": "You can add more profiles later.",
+            "developer": {
+                "label": "Developer profile",
+                "info": "Connect to other networks, use HTTP, and more"
+            }
         },
         "setup": {
             "title": "Set up a wallet",
