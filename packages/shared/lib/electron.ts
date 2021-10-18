@@ -22,7 +22,8 @@ export interface INotificationManager {
 }
 
 export interface IDeepLinkManager {
-    requestDeepLink(): void
+    checkDeepLinkRequestExists(): void
+    clearDeepLinkRequest(): void
 }
 
 export interface IPincodeManager {
@@ -97,6 +98,7 @@ export interface IElectron {
     validateSeedVault(buffer: unknown): Promise<boolean>
 
     onEvent<K extends keyof ElectronEventMap>(eventName: K, callback: (param: ElectronEventMap[K]) => void)
+    removeListenersForEvent<K extends keyof ElectronEventMap>(eventName: K)
 }
 
 export const Electron: IElectron = window['Electron']

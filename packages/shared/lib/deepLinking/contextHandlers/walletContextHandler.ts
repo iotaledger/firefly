@@ -1,17 +1,17 @@
 import { Unit } from '@iota/unit-converter'
 import { addError } from 'shared/lib/errors'
 
-// TODO: Move out of file
+// TODO: Refactor into seperate file
 export enum DeepLinkingContexts {
     Wallet = 'wallet',
 }
 
-// TODO: Move out of file
+// TODO: Refactor into seperate file
 export enum WalletOperations {
     Send = 'send',
 }
 
-// TODO: Move out of file
+// TODO: Refactor into seperate file
 export enum SendSearchParameters {
     Amount = 'amount',
     Unit = 'unit',
@@ -135,6 +135,6 @@ const parseSendOperation = (address: string, searchParams: URLSearchParams, expe
     }
 }
 
-// TODO: Move out of file
+// TODO: Refactor into seperate file
 const isValidAddressAndPrefix = (address: string, expectedAddressPrefix: string) =>
     !new RegExp(`^${expectedAddressPrefix}1[02-9ac-hj-np-z]{59}$`).test(address)

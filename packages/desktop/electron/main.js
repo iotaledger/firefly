@@ -439,11 +439,18 @@ app.on('open-url', (event, url) => {
 /**
  * Proxy deep link event to the wallet application
  */
-ipcMain.on('deep-link-request', () => {
+ipcMain.on('check-deep-link-request-exists', () => {
     if (deepLinkUrl) {
         windows.main.webContents.send('deep-link-params', deepLinkUrl)
         deepLinkUrl = null
     }
+})
+
+/**
+ * Proxy deep link event to the wallet application
+ */
+ipcMain.on('clear-deep-link-request', () => {
+    deepLinkUrl = null
 })
 
 /**

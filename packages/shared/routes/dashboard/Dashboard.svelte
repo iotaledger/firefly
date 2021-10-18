@@ -37,6 +37,7 @@
         settings: Settings,
     }
 
+    let mounted = false
     let startInit
     let busy
     let fundsSoonNotificationId
@@ -50,14 +51,15 @@
         }
     })
 
-    accountsLoaded.subscribe(() => {
+    const unsubscribeFromAccountsLoaded = accountsLoaded.subscribe(() => {
         if (get(accountsLoaded)) {
-            Electron.DeepLinkManager.requestDeepLink()
-            Electron.onEvent('deep-link-params', (data) => handleDeepLinkRequest(data))
+            Electron.DeepLinkManager.checkDeepLinkRequestExists()
+            Electron.onEvent('deep-link-params', (data: string) => handleDeepLinkRequest(data))
         }
     })
 
     onMount(() => {
+        mounted = true
         if ($isSoftwareProfile) {
             api.setStrongholdPasswordClearInterval({ secs: STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, nanos: 0 })
         }
@@ -107,12 +109,17 @@
     })
 
     onDestroy(() => {
+        Electron.removeListenersForEvent('deep-link-params')
+        unsubscribeFromAccountsLoaded()
+
         if (fundsSoonNotificationId) {
             removeDisplayNotification(fundsSoonNotificationId)
         }
         if ($isLedgerProfile) {
             stopPollingLedgerStatus()
         }
+
+        mounted = false
     })
 
     if ($walletRoute === WalletRoutes.Init && !$accountsLoaded && $loggedIn) {
@@ -156,11 +163,11 @@
                 dashboardRoute.set(tab)
             }
         }
-        if (!$appSettings.deepLinking) {
+        if (mounted && !$appSettings.deepLinking) {
             _redirect(Tabs.Settings)
             showAppNotification({ type: 'info', message: locale('notifications.deepLinkingIsNotEnabled') })
         } else {
-            if ($accounts && $accounts.length > 0) {
+            if (mounted && $accounts && $accounts.length > 0) {
                 let addressPrefix = $accounts[0].depositAddress.split('1')[0]
                 const parsedData = parseDeepLink(addressPrefix, data)
                 if (
@@ -177,6 +184,7 @@
                 } else {
                     showAppNotification({ type: 'error', message: locale('notifications.deepLinkingInvalidFormat') })
                 }
+                Electron.DeepLinkManager.clearDeepLinkRequest()
             }
         }
     }

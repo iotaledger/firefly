@@ -331,6 +331,15 @@ try {
             listeners.push(callback)
         },
         /**
+         * Remove native window wallet event listener
+         * @param {string} event - Target event name
+         * @param {function} callback - Event trigger callback
+         * @returns {undefined}
+         */
+        removeListenersForEvent: (event) => {
+            eventListeners[event] = []
+        },
+        /**
          * Save the recovery kit
          * @returns
          */
