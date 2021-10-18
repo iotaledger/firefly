@@ -438,7 +438,7 @@ app.on('open-url', (event, url) => {
 })
 
 /**
- * Proxy deep link event to the wallet application
+ * Check if a deep link request/event currently exists and has not been cleared
  */
 ipcMain.on('check-deep-link-request-exists', () => {
     if (deepLinkUrl) {
@@ -448,7 +448,7 @@ ipcMain.on('check-deep-link-request-exists', () => {
 })
 
 /**
- * Proxy deep link event to the wallet application
+ * Clear deep link request/event
  */
 ipcMain.on('clear-deep-link-request', () => {
     deepLinkUrl = null
