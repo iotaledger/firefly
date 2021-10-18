@@ -44,10 +44,6 @@
             // now to remove the data
             await asyncRemoveWalletAccounts(get(get(wallet).accounts))
 
-            // Remove the profile folder this will wait until it can get
-            // the lock on the resources
-            await removeProfileFolder(_activeProfile.name)
-
             // We have to logout before the profile is removed
             // from the profile list otherwise the activeProfile which is
             // derived from profiles is undefined and the actor
@@ -63,6 +59,10 @@
             if (get(profiles).length === 0) {
                 setRoute(AppRoute.Welcome)
             }
+
+            // Remove the profile folder this will wait until it can get
+            // the lock on the resources
+            await removeProfileFolder(_activeProfile.name)
         } catch (err) {
             showAppNotification({
                 type: 'error',
