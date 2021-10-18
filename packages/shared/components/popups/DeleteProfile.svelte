@@ -6,7 +6,7 @@
     import { activeProfile, isSoftwareProfile, profiles, removeProfile, removeProfileFolder } from 'shared/lib/profile'
     import { setRoute } from 'shared/lib/router'
     import { AppRoute } from 'shared/lib/typings/routes'
-    import { api, asyncRemoveWalletAccounts, wallet } from 'shared/lib/wallet'
+    import { api, asyncRemoveStorage, asyncRemoveWalletAccounts, wallet } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
 
@@ -39,29 +39,43 @@
             const _activeProfile = get(activeProfile)
             if (!_activeProfile) return
 
-            // The account data associated with a profile must also be deleted
-            // and since logout() destroys the event actor, we must call the API
-            // now to remove the data
+            /**
+             * CAUTION: The individual accounts must be removed from wallet.rs.
+             */
             await asyncRemoveWalletAccounts(get(get(wallet).accounts))
 
-            // We have to logout before the profile is removed
-            // from the profile list otherwise the activeProfile which is
-            // derived from profiles is undefined and the actor
-            // is not destroyed
+            /**
+             * CAUTION: The storage for wallet.rs must also be deleted in order
+             * to free the locks on the files within the profile folder (removed
+             * later).
+             */
+            await asyncRemoveStorage()
+
+            /**
+             * CAUTION: Logout must occur before the profile is removed
+             * from the Svelte store list of profiles, otherwise the
+             * actor is not able to be destroyed.
+             */
             await logout()
 
-            // Remove the profile from the active list of profiles
+            /**
+             * CAUTION: The profile must be removed from the
+             * app's list of profiles that lives as a Svelte store.
+             */
             removeProfile(_activeProfile.id)
 
-            // If after removing the profile there are none left
-            // we need to make sure the router gets reset to the welcome screen
-            // by default it will go to the profile selection
+            /**
+             * NOTE: If there are no more profiles then the user should be
+             * routed to the welcome screen.
+             */
             if (get(profiles).length === 0) {
                 setRoute(AppRoute.Welcome)
             }
 
-            // Remove the profile folder this will wait until it can get
-            // the lock on the resources
+            /**
+             * CAUTION: This removes the actual directory for the profile,
+             * so it should occur last.
+             */
             await removeProfileFolder(_activeProfile.name)
         } catch (err) {
             showAppNotification({
