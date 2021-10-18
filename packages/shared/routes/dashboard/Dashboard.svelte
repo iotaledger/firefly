@@ -53,8 +53,8 @@
 
     const unsubscribeFromAccountsLoaded = accountsLoaded.subscribe(() => {
         if (get(accountsLoaded)) {
-            Electron.DeepLinkManager.checkDeepLinkRequestExists()
             Electron.onEvent('deep-link-params', (data: string) => handleDeepLinkRequest(data))
+            Electron.DeepLinkManager.checkDeepLinkRequestExists()
         }
     })
 

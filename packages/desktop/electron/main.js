@@ -433,6 +433,7 @@ app.on('open-url', (event, url) => {
     deepLinkUrl = url
     if (windows.main) {
         windows.main.webContents.send('deep-link-params', url)
+        windows.main.webContents.send('deep-link-request')
     }
 })
 

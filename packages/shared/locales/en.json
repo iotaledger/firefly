@@ -887,6 +887,7 @@
         "accountsSynchronized": "Wallet synchronization complete",
         "fundsAvailableSoon": "Your funds will become available shortly",
         "deepLinkingIsNotEnabled": "IOTA links are not enabled",
+        "deepLinkRequestRecieved": "IOTA link has been followed",
         "deepLinkingInvalidFormat": "The IOTA link you clicked is invalid."
     },
     "error": {
