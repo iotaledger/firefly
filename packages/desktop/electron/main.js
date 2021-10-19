@@ -432,7 +432,7 @@ app.on('open-url', (event, url) => {
     event.preventDefault()
     deepLinkUrl = url
     if (windows.main) {
-        windows.main.webContents.send('deep-link-params', url)
+        windows.main.webContents.send('deep-link-params', deepLinkUrl)
         windows.main.webContents.send('deep-link-request')
     }
 })
@@ -443,7 +443,6 @@ app.on('open-url', (event, url) => {
 ipcMain.on('check-deep-link-request-exists', () => {
     if (deepLinkUrl) {
         windows.main.webContents.send('deep-link-params', deepLinkUrl)
-        deepLinkUrl = null
     }
 })
 

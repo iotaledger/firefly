@@ -1,14 +1,15 @@
 <script lang="typescript">
-    import { Button, Checkbox, HR, Radio, Text } from 'shared/components'
+    import { Button,Checkbox,HR,Radio,Text } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
     import { loggedIn } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
+    import { Electron } from 'shared/lib/electron'
     import { navigateToNewIndexMigration } from 'shared/lib/ledger'
     import { getOfficialNodes } from 'shared/lib/network'
     import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, isLedgerProfile, updateProfile } from 'shared/lib/profile'
-    import type { Locale } from 'shared/lib/typings/i18n'
-    import { buildAccountNetworkSettings, updateAccountNetworkSettings } from 'shared/lib/wallet'
+    import { activeProfile,isLedgerProfile,updateProfile } from 'shared/lib/profile'
+    import type { Locale } from 'shared/lib/typings/i18n';
+    import { buildAccountNetworkSettings,updateAccountNetworkSettings } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
 
     export let locale: Locale
@@ -31,6 +32,8 @@
     let nodesContainer
 
     $: $appSettings.deepLinking = deepLinkingChecked
+
+    $: $appSettings.deepLinking && Electron.DeepLinkManager.checkDeepLinkRequestExists()
 
     $: updateProfile('settings.showHiddenAccounts', showHiddenAccounts)
     $: updateProfile('isDeveloperProfile', isDeveloperProfile)

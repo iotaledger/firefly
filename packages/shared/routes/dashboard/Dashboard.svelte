@@ -13,9 +13,9 @@
     } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
-    import { accountRoute, dashboardRoute, routerNext, walletRoute } from 'shared/lib/router'
+    import { accountRoute, dashboardRoute, routerNext, settingsChildRoute, settingsRoute, walletRoute } from 'shared/lib/router'
     import type { Locale } from 'shared/lib/typings/i18n'
-    import { AccountRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
+    import { AccountRoutes, AdvancedSettings, SettingsRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
     import {
         api,
         isBackgroundSyncing,
@@ -109,6 +109,7 @@
     })
 
     onDestroy(() => {
+        Electron.DeepLinkManager.clearDeepLinkRequest()
         Electron.removeListenersForEvent('deep-link-params')
         unsubscribeFromAccountsLoaded()
 
@@ -165,6 +166,8 @@
         }
         if (mounted && !$appSettings.deepLinking) {
             _redirect(Tabs.Settings)
+            settingsRoute.set(SettingsRoutes.AdvancedSettings)
+            settingsChildRoute.set(AdvancedSettings.DeepLinks)
             showAppNotification({ type: 'warning', message: locale('notifications.deepLinkingIsNotEnabled') })
         } else {
             if (mounted && $accounts && $accounts.length > 0) {
