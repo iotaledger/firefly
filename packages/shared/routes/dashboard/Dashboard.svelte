@@ -165,7 +165,7 @@
         }
         if (mounted && !$appSettings.deepLinking) {
             _redirect(Tabs.Settings)
-            showAppNotification({ type: 'info', message: locale('notifications.deepLinkingIsNotEnabled') })
+            showAppNotification({ type: 'warning', message: locale('notifications.deepLinkingIsNotEnabled') })
         } else {
             if (mounted && $accounts && $accounts.length > 0) {
                 let addressPrefix = $accounts[0].depositAddress.split('1')[0]
@@ -181,6 +181,7 @@
                         ...parsedData.params,
                         isInternal: false,
                     })
+                    showAppNotification({ type: 'info', message: locale('notifications.deepLinkingRequestRecieved.loggedIn') })
                 } else {
                     showAppNotification({ type: 'error', message: locale('notifications.deepLinkingInvalidFormat') })
                 }

@@ -887,8 +887,11 @@
         "accountsSynchronized": "Wallet synchronization complete",
         "fundsAvailableSoon": "Your funds will become available shortly",
         "deepLinkingIsNotEnabled": "IOTA links are not enabled",
-        "deepLinkRequestRecieved": "IOTA link has been followed",
-        "deepLinkingInvalidFormat": "The IOTA link you clicked is invalid."
+        "deepLinkingRequestRecieved": {
+            "loggedOut": "You have followed an IOTA link, please log in to your preferred profile",
+            "loggedIn": "You have followed an IOTA link" 
+            },
+        "deepLinkingInvalidFormat": "The IOTA link you followed is invalid."
     },
     "error": {
         "profile": {

@@ -116,7 +116,9 @@
     })
 
     const showDeepLinkNotification = () => {
-        showAppNotification({ type: 'info', message: $_('notifications.deepLinkRequestRecieved') })
+        if(!$loggedIn) {
+            showAppNotification({ type: 'info', message: $_('notifications.deepLinkingRequestRecieved.loggedOut') })
+        }
     }
 </script>
 
