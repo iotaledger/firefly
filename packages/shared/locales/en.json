@@ -886,12 +886,16 @@
         "copiedToClipboard": "Copied to clipboard",
         "accountsSynchronized": "Wallet synchronization complete",
         "fundsAvailableSoon": "Your funds will become available shortly",
-        "deepLinkingIsNotEnabled": "IOTA links are not enabled",
-        "deepLinkingRequestRecieved": {
-            "loggedOut": "You have followed an IOTA link, please log in to your preferred profile",
-            "loggedIn": "You have followed an IOTA link" 
-            },
-        "deepLinkingInvalidFormat": "The IOTA link you followed is invalid."
+        "deepLinkingRequest": {
+            "recievedWhileLoggedOut": "You have followed an IOTA link, please log in to your preferred profile",
+            "notEnabled": "IOTA links are not enabled",
+            "invalidFormat": "The IOTA link you followed is invalid",
+            "wallet": {
+                "send": {
+                    "success": "Send payment details added from IOTA link"
+                }
+            }
+        }   
     },
     "error": {
         "profile": {

@@ -1,21 +1,14 @@
 import { Unit } from '@iota/unit-converter'
+import { isValidAddressAndPrefix } from 'shared/lib/address'
 import { addError } from 'shared/lib/errors'
-
-// TODO: Refactor into seperate file
-export enum DeepLinkingContexts {
-    Wallet = 'wallet',
-}
-
-// TODO: Refactor into seperate file
-export enum WalletOperations {
-    Send = 'send',
-}
-
-// TODO: Refactor into seperate file
-export enum SendSearchParameters {
-    Amount = 'amount',
-    Unit = 'unit',
-}
+import { localize } from 'shared/lib/i18n'
+import { DeepLinkingContexts } from 'shared/lib/typings/deepLinking/deepLinking'
+import {
+    SendOperationParameters,
+    SendRequestParameters,
+    WalletOperations,
+} from 'shared/lib/typings/deepLinking/walletContext'
+import type { NotificationData } from 'shared/lib/typings/notification'
 
 /**
  * Parse the wallet context from a deeplink
@@ -39,6 +32,7 @@ export const parseWalletRequest = (
         unit: Unit
         message: string
     }
+    notification: NotificationData
 } => {
     let params
     // Remove any leading and trailing slashes
@@ -64,6 +58,10 @@ export const parseWalletRequest = (
         context: DeepLinkingContexts.Wallet,
         operation: pathnameParts[0],
         params: params,
+        notification: {
+            type: 'info',
+            message: localize('notifications.deepLinkingRequest.wallet.send.success'),
+        },
     }
 }
 
@@ -77,7 +75,11 @@ export const parseWalletRequest = (
  * @param {string} expectedAddressPrefix
  * @return {object} The formatted deep link content for populating the send params
  */
-const parseSendOperation = (address: string, searchParams: URLSearchParams, expectedAddressPrefix: string) => {
+const parseSendOperation = (
+    address: string,
+    searchParams: URLSearchParams,
+    expectedAddressPrefix: string
+): SendOperationParameters | void => {
     let parsedAmount: number | undefined
     let parsedUnit: Unit | undefined
 
@@ -95,7 +97,7 @@ const parseSendOperation = (address: string, searchParams: URLSearchParams, expe
 
     // Optional parameter: amount
     // Check if exists and is valid or does not exist
-    const amountParam = searchParams.get(SendSearchParameters.Amount)
+    const amountParam = searchParams.get(SendRequestParameters.Amount)
     if (amountParam) {
         parsedAmount = Number.parseFloat(amountParam)
         if (Number.isNaN(parsedAmount) || !Number.isFinite(parsedAmount)) {
@@ -105,7 +107,7 @@ const parseSendOperation = (address: string, searchParams: URLSearchParams, expe
         parsedAmount = 0
     }
 
-    let unitParam = searchParams.get(SendSearchParameters.Unit)
+    let unitParam = searchParams.get(SendRequestParameters.Unit)
     if (unitParam) {
         unitParam =
             unitParam.length > 1
@@ -134,7 +136,3 @@ const parseSendOperation = (address: string, searchParams: URLSearchParams, expe
         message: '',
     }
 }
-
-// TODO: Refactor into seperate file
-const isValidAddressAndPrefix = (address: string, expectedAddressPrefix: string) =>
-    !new RegExp(`^${expectedAddressPrefix}1[02-9ac-hj-np-z]{59}$`).test(address)

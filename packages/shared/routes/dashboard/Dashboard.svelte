@@ -3,6 +3,8 @@
     import { loggedIn, logout, sendParams } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { deepLinkRequestActive, parseDeepLink } from 'shared/lib/deepLinking/deepLinking'
+    import { DeepLinkingContexts } from 'shared/lib/typings/deepLinking/deepLinking';
+    import { WalletOperations } from 'shared/lib/typings/deepLinking/walletContext';
     import { Electron } from 'shared/lib/electron'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
@@ -168,25 +170,25 @@
             _redirect(Tabs.Settings)
             settingsRoute.set(SettingsRoutes.AdvancedSettings)
             settingsChildRoute.set(AdvancedSettings.DeepLinks)
-            showAppNotification({ type: 'warning', message: locale('notifications.deepLinkingIsNotEnabled') })
+            showAppNotification({ type: 'warning', message: locale('notifications.deepLinkingRequest.notEnabled') })
         } else {
             if (mounted && $accounts && $accounts.length > 0) {
                 let addressPrefix = $accounts[0].depositAddress.split('1')[0]
-                const parsedData = parseDeepLink(addressPrefix, data)
+                const parsedDeepLink = parseDeepLink(addressPrefix, data)
                 if (
-                    parsedData &&
-                    parsedData.context === 'wallet' &&
-                    parsedData.operation === 'send' &&
-                    parsedData.params
+                    parsedDeepLink &&
+                    parsedDeepLink.context === DeepLinkingContexts.Wallet &&
+                    parsedDeepLink.operation === WalletOperations.Send &&
+                    parsedDeepLink.params
                 ) {
                     _redirect(Tabs.Wallet)
                     sendParams.set({
-                        ...parsedData.params,
+                        ...parsedDeepLink.params,
                         isInternal: false,
                     })
-                    showAppNotification({ type: 'info', message: locale('notifications.deepLinkingRequestRecieved.loggedIn') })
+                    showAppNotification({ type: parsedDeepLink.notification.type, message: parsedDeepLink.notification.message })
                 } else {
-                    showAppNotification({ type: 'error', message: locale('notifications.deepLinkingInvalidFormat') })
+                    showAppNotification({ type: 'error', message: locale('notifications.deepLinkingRequest.invalidFormat') })
                 }
                 Electron.DeepLinkManager.clearDeepLinkRequest()
             }
