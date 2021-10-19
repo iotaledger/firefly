@@ -106,6 +106,10 @@
     function handleBalanceFinderClick() {
         openPopup({ type: 'balanceFinder', hideClose: true })
     }
+
+    function handleExportStateClick() {
+        openPopup({ type: 'exportState', hideClose: true })
+    }
 </script>
 
 <style type="text/scss">
@@ -283,13 +287,12 @@
             </Button>
         </section>
     {/if}
-    <!-- TODO: Implement state export -->
-    <!-- {#if $loggedIn}
+    {#if $loggedIn}
     <HR classes="pb-5 mt-5 justify-center" />
-    <section id="stateExport" class="w-3/4 opacity-50">
+    <section id="stateExport" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.stateExport.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.stateExport.description')}</Text>
-        <Button medium inlineStyle="min-width: 156px;" disabled onClick={() => {}}>{locale('actions.exportState')}</Button>
+        <Button medium inlineStyle="min-width: 156px;"  onClick={handleExportStateClick}>{locale('actions.exportState')}</Button>
     </section>
-    {/if} -->
+    {/if}
 </div>

@@ -90,8 +90,49 @@ try {
                     if (result.canceled) {
                         return null
                     }
-
                     return result.filePath
+                }),
+
+        exportTransactionHistory: (defaultPath, payloads) =>
+            ipcRenderer
+                .invoke('show-save-dialog', {
+                    properties: ['createDirectory', 'showOverwriteConfirmation'],
+                    defaultPath,
+                    filters: [{ name: 'Export Files', extensions: ['csv'] }],
+                })
+                .then((result) => {
+                    if (result.canceled) {
+                        return null
+                    }
+
+                    return new Promise((resolve, reject) => {
+                        const tzoffset = new Date().getTimezoneOffset() * 60000 // offset in milliseconds
+                        const localISOTime = new Date(Date.now() - tzoffset).toISOString()
+                        const date = localISOTime.slice(0, -5).replace(/:/g, '-')
+
+                        const filePathParts = result.filePath.split(/[/.]+/)
+                        const extension = filePathParts[filePathParts.length - 1]
+
+                        try {
+                            payloads.forEach((payload) => {
+                                const filePath =
+                                    '/' +
+                                    filePathParts.slice(1, -1).join('/') +
+                                    '-' +
+                                    payload.alias +
+                                    '-' +
+                                    date +
+                                    '.' +
+                                    extension
+
+                                fs.writeFileSync(filePath, payload.contents)
+                            })
+
+                            resolve(true)
+                        } catch (err) {
+                            reject(err)
+                        }
+                    })
                 }),
 
         /**

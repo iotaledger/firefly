@@ -31,6 +31,7 @@
     import Version from './Version.svelte'
     import Video from './Video.svelte'
     import { Locale } from 'shared/lib/typings/i18n'
+    import ExportTransactionHistoryPopup from './ExportTransactionHistoryPopup.svelte';
 
     export let locale: Locale
 
@@ -92,6 +93,7 @@
         balanceFinder: BalanceFinder,
         snapshot: Snapshot,
         video: Video,
+        exportState: ExportTransactionHistoryPopup
     }
 
     const onkey = (e) => {

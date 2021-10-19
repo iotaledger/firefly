@@ -109,8 +109,7 @@ export enum AdvancedSettings {
     ErrorLog = 'errorLog',
     Diagnostics = 'diagnostics',
     MigrateLedgerIndex = 'migrateLedgerIndex',
-    // TODO: Implement and enable
-    // StateExport = 'stateExport',
+    StateExport = 'stateExport',
 }
 
 export enum AdvancedSettingsNoProfile {

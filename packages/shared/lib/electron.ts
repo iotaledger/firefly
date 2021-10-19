@@ -61,6 +61,7 @@ interface ILedger {
 export interface IElectron {
     ledger: ILedger
     getStrongholdBackupDestination(defaultPath: string): Promise<string | null>
+    exportTransactionHistory(defaultPath: string, content: unknown): Promise<string | null>
     exportMigrationLog(sourcePath: string, defaultFileName: string): Promise<boolean | null>
     exportLedgerMigrationLog(content: unknown, defaultFileName: string): Promise<boolean | null>
     getUserDataPath(): Promise<string>
