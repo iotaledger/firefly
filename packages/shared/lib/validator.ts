@@ -141,6 +141,9 @@ class ActionValidator extends Validator {
         const { action } = response
 
         if ('string' !== typeof action) {
+            console.trace()
+            console.log('RESPONSE: ', response)
+
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of action received.',

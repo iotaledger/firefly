@@ -263,6 +263,7 @@ export const downloadRecoveryKit = (): void => {
  * @returns The resulting object of migrating from an older version to a newer one (i.e. updated keys and / or data)
  */
 export const migrateObjects = <T>(oldObj: T, newObj: T): T => {
+    console.log('OLD NC: ', oldObj['settings']['networkConfig'], '\n\nNEW NC: ', newObj['settings']['networkConfig'])
     if (!shouldMigrate<T>(oldObj, newObj)) return oldObj
 
     /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -272,7 +273,11 @@ export const migrateObjects = <T>(oldObj: T, newObj: T): T => {
             if (oldObj.hasOwnProperty(k)) {
                 if (typeof newObj[k] === 'object' && newObj[k] !== undefined && newObj[k] !== null) {
                     // @ts-ignore
-                    curObj[k] = Array.isArray(newObj[k]) ? newObj[k] : _helper({}, oldObj[k], newObj[k])
+                    if (Array.isArray(newObj[k])) {
+                        curObj[k] = Array.isArray(oldObj[k]) ? oldObj[k] : newObj[k]
+                    } else {
+                        curObj[k] = _helper({}, oldObj[k], newObj[k])
+                    }
                 } else {
                     curObj[k] = oldObj[k]
                 }
@@ -311,3 +316,17 @@ const shouldMigrate = <T>(oldObj: T, newObj: T): boolean => {
 
     return _helper(false, oldObj, newObj)
 }
+
+/**
+ * Generates a random number between a given beginning and end. This is NOT
+ * cryptographically secure.
+ *
+ * @method generateRandomInteger
+ *
+ * @param {number} beginning
+ * @param {number} end
+ *
+ * @returns {number}
+ */
+export const generateRandomInteger = (beginning: number, end: number): number =>
+    Math.floor(Math.random() * end + beginning)

@@ -1,8 +1,8 @@
 import { get, writable } from 'svelte/store'
-import { asyncGetNodeInfo, wallet } from 'shared/lib/wallet'
-import { getOfficialNodes } from 'shared/lib/network'
-import type { Node } from './typings/node'
+import { asyncGetNodeInfo, wallet } from './wallet'
+import { cleanNodeAuth, cleanNodeAuthOfNode, getNodeCandidates, getOfficialNodes, isNodeAuthValid } from './network'
 import type { NetworkStatus } from './typings/network'
+import { activeProfile } from './profile'
 
 /**
  * Default interval for polling the network status
@@ -46,16 +46,14 @@ export async function fetchNetworkStatus(): Promise<void> {
 
     if (accs.length > 0) {
         const account0 = accs[0]
-        const { clientOptions } = account0
-        const node: Node = {
-            ...(clientOptions.node ?? getOfficialNodes()[0]),
-            auth: { username: '', password: '' },
-        }
+        const { networkConfig } = get(activeProfile)?.settings
+        const node = networkConfig.nodes.find((n) => n.isPrimary) || getOfficialNodes(networkConfig.network.type)[0]
+        console.log('USING NODE: ', node)
 
         try {
-            const response = await asyncGetNodeInfo(account0.id, node.url, node.auth)
-
+            const response = await asyncGetNodeInfo(account0.id, node?.url, cleanNodeAuth(node?.auth))
             const timeSinceLastMsInMinutes = (Date.now() - response.nodeinfo.latestMilestoneTimestamp * 1000) / 60000
+
             let health = 0 // bad
             if (timeSinceLastMsInMinutes < 2) {
                 health = 2 // good

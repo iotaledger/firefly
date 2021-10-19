@@ -1,7 +1,7 @@
 <script type="typescript">
     import { Animation, Button, OnboardingLayout, Spinner, Text } from 'shared/components'
-    import { ledgerSimulator, displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
-    import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
+    import { displayNotificationForLedgerProfile, ledgerSimulator, promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { getOfficialClientOptions } from 'shared/lib/network'
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { Locale } from 'shared/lib/typings/i18n'
@@ -16,8 +16,6 @@
 
     function restore() {
         restoring = true
-        const officialNodes = getOfficialNodes()
-        const officialNetwork = getOfficialNetwork()
 
         const _onConnected = () =>
             api.getAccounts({
@@ -25,11 +23,7 @@
                     if (accountsResponse.payload.length === 0) {
                         api.createAccount(
                             {
-                                clientOptions: {
-                                    nodes: officialNodes,
-                                    node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
-                                    network: officialNetwork,
-                                },
+                                clientOptions: getOfficialClientOptions(),
                                 alias: `${locale('general.account')} 1`,
                                 signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
                             },

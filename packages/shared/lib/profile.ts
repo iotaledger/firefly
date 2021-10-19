@@ -10,6 +10,8 @@ import { ProfileType } from './typings/profile'
 import { HistoryDataProps } from './typings/market'
 import { AvailableExchangeRates } from './typings/currency'
 import type { WalletAccount } from './typings/wallet'
+import { getOfficialNetworkConfig } from './network'
+import { NetworkConfig, NetworkType } from './typings/network'
 
 export const activeProfileId = writable<string | null>(null)
 
@@ -78,9 +80,7 @@ const buildProfile = (profileName: string, isDeveloperProfile: boolean): Profile
     isDeveloperProfile,
     settings: {
         currency: AvailableExchangeRates.USD,
-        automaticNodeSelection: true,
-        includeOfficialNodes: true,
-        disabledNodes: undefined,
+        networkConfig: getOfficialNetworkConfig(NetworkType.ChrysalisMainnet),
         lockScreenTimeout: 5,
         chartSelectors: {
             currency: AvailableExchangeRates.USD,
@@ -191,7 +191,10 @@ export const removeProfile = (id: string): void => {
  *
  * @returns {void}
  */
-export const updateProfile = (path: string, value: ValuesOf<Profile> | ValuesOf<UserSettings>): void => {
+export const updateProfile = (
+    path: string,
+    value: ValuesOf<Profile> | ValuesOf<UserSettings> | ValuesOf<NetworkConfig>
+): void => {
     const _update = (_profile) => {
         if (path === '') {
             const isValidData =

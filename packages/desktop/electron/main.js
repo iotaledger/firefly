@@ -619,6 +619,7 @@ function loadJsonConfig(filename) {
     try {
         const userDataPath = app.getPath('userData')
         const configFilename = path.join(userDataPath, filename)
+        console.log('JSON SYNTAX ERROR HERE!')
         return JSON.parse(fs.readFileSync(configFilename).toString())
     } catch (err) {
         if (!err.message.includes('ENOENT')) {
