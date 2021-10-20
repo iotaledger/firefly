@@ -887,12 +887,12 @@
         "accountsSynchronized": "Wallet synchronization complete",
         "fundsAvailableSoon": "Your funds will become available shortly",
         "deepLinkingRequest": {
-            "recievedWhileLoggedOut": "You have followed an IOTA link, please log in to your preferred profile",
+            "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
             "notEnabled": "IOTA links are not enabled",
             "invalidFormat": "The IOTA link you followed is invalid",
             "wallet": {
                 "send": {
-                    "success": "Send payment details added from IOTA link"
+                    "success": "Payment details added from IOTA link"
                 }
             }
         }   
