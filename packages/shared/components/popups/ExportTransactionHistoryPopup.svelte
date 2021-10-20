@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { generateTransactionHistoryCsvFromAccount } from 'shared/lib/transactionHistory'
+    import { generateTransactionHistoryCsvFromAccount, generateTransactionHistoryCsvFileName } from 'shared/lib/transactionHistory'
     import { Button,Password,Spinner,Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { displayNotificationForLedgerProfile,isLedgerConnected } from 'shared/lib/ledger'
@@ -34,24 +34,16 @@
                 return
             }
 
-            let csvPayloads = []
-            $accounts.forEach((wallerAccount,index) => {
-                csvPayloads.push(
-                    {
-                        alias: wallerAccount.alias,
-                        contents: generateTransactionHistoryCsvFromAccount(wallerAccount)
-                    }
-                )
-            })
-
-            Electron.exportTransactionHistory('firefly-transaction-history',csvPayloads)
-                    .then((result) => {
-                        isBusy = false
-                    })
-                    .catch((error) => {
-                        isBusy = false
+            for (const walletAccount of $accounts) {
+                try {
+                    await Electron.exportTransactionHistory(generateTransactionHistoryCsvFileName(profileName, walletAccount.alias),generateTransactionHistoryCsvFromAccount(walletAccount))
+                } catch (error) {
                         console.error(error)
-                    })
+                }
+            }
+
+            isBusy = false
+
         } catch (err) {
             error = locale(err.error)
 
