@@ -635,6 +635,7 @@
         "outgoingMi": "Појдовни {value}",
         "portoflio": "Портфолио",
         "token": "Токен",
+        "holdings": "Holdings",
         "accountValue": "Вредност на паричникот",
         "accountActivity": "Активност на паричникот",
         "timeframe1Hour": "1 час",
@@ -944,6 +945,7 @@
         },
         "node": {
             "invalid": "Ве молиме внесете валиден URL.",
+            "dns": "Could not resolve DNS for node.",
             "https": "HTTPS е неопходно. Конфигурирајте профил на девелопер за да користите несигурни HTTP поврзувања.",
             "duplicate": "Овој јазол е веќе додаден.",
             "unsynced": "Јазолот не е синхронизиран.",
@@ -980,6 +982,9 @@
         },
         "migration": {
             "missingBundle": "An error occurred while trying to find the transaction bundle."
+        },
+        "crypto": {
+            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
         }
     },
     "tooltips": {
