@@ -39,7 +39,6 @@
         settings: Settings,
     }
 
-    let mounted = false
     let startInit
     let busy
     let fundsSoonNotificationId
@@ -53,15 +52,7 @@
         }
     })
 
-    const unsubscribeFromAccountsLoaded = accountsLoaded.subscribe(() => {
-        if (get(accountsLoaded)) {
-            Electron.onEvent('deep-link-params', (data: string) => handleDeepLinkRequest(data))
-            Electron.DeepLinkManager.checkDeepLinkRequestExists()
-        }
-    })
-
     onMount(() => {
-        mounted = true
         if ($isSoftwareProfile) {
             api.setStrongholdPasswordClearInterval({ secs: STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, nanos: 0 })
         }
@@ -108,12 +99,13 @@
                 }
             }
         })
+
+        Electron.onEvent('deep-link-params', (data: string) => handleDeepLinkRequest(data))
     })
 
     onDestroy(() => {
         Electron.DeepLinkManager.clearDeepLinkRequest()
         Electron.removeListenersForEvent('deep-link-params')
-        unsubscribeFromAccountsLoaded()
 
         if (fundsSoonNotificationId) {
             removeDisplayNotification(fundsSoonNotificationId)
@@ -121,8 +113,6 @@
         if ($isLedgerProfile) {
             stopPollingLedgerStatus()
         }
-
-        mounted = false
     })
 
     if ($walletRoute === WalletRoutes.Init && !$accountsLoaded && $loggedIn) {
@@ -137,6 +127,7 @@
             })
         }
     }
+
     $: {
         if ($accountsLoaded) {
             const minTimeElapsed = 3000 - (Date.now() - startInit)
@@ -145,6 +136,7 @@
                 if (get(popupState).type === 'busy') {
                     closePopup()
                 }
+                Electron.DeepLinkManager.checkDeepLinkRequestExists()
             }
             if (minTimeElapsed < 0) {
                 cancelBusyState()
@@ -166,13 +158,13 @@
                 dashboardRoute.set(tab)
             }
         }
-        if (mounted && !$appSettings.deepLinking) {
+        if (!$appSettings.deepLinking) {
             _redirect(Tabs.Settings)
             settingsRoute.set(SettingsRoutes.AdvancedSettings)
             settingsChildRoute.set(AdvancedSettings.DeepLinks)
             showAppNotification({ type: 'warning', message: locale('notifications.deepLinkingRequest.notEnabled') })
         } else {
-            if (mounted && $accounts && $accounts.length > 0) {
+            if ($accounts && $accounts.length > 0) {
                 let addressPrefix = $accounts[0].depositAddress.split('1')[0]
                 const parsedDeepLink = parseDeepLink(addressPrefix, data)
                 if (
