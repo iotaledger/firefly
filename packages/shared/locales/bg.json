@@ -635,6 +635,7 @@
         "outgoingMi": "Разходи {value}",
         "portoflio": "Портфолио",
         "token": "Token - монети",
+        "holdings": "Holdings",
         "accountValue": "Наличност в портфейла",
         "accountActivity": "Активност на портфейла",
         "timeframe1Hour": "1 час",
@@ -860,7 +861,7 @@
         "legacyNetwork": "Стара мрежа",
         "capsLock": "Caps Lock е включен",
         "version": "Версия {version}",
-        "unknown": "Unknown"
+        "unknown": "Неизвестен"
     },
     "dates": {
         "today": "Днес",
@@ -944,6 +945,7 @@
         },
         "node": {
             "invalid": "Моля, въведете валиден URL адрес.",
+            "dns": "Could not resolve DNS for node.",
             "https": "Изисква се сигурна HTTPS връзка. Настройте режим за разработчици, за да използвате несигурна HTTP връзка.",
             "duplicate": "Този Node сървър вече е добавен.",
             "unsynced": "Node сървърът не в синхронизиран.",
@@ -980,6 +982,9 @@
         },
         "migration": {
             "missingBundle": "Възникна грешка при опит за намиране на трансакцията."
+        },
+        "crypto": {
+            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
         }
     },
     "tooltips": {

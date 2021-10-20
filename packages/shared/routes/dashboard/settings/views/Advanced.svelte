@@ -1,8 +1,9 @@
 <script lang="typescript">
-    import { Button, Checkbox, HR, Radio, Text } from 'shared/components'
+    import { Button,Checkbox,HR,Radio,Text } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
     import { loggedIn } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
+    import { Electron } from 'shared/lib/electron'
     import { navigateToNewIndexMigration } from 'shared/lib/ledger'
     import {
         ensureSinglePrimaryNode, getNodeCandidates,
@@ -22,7 +23,7 @@
 
     export let locale: Locale
 
-    const deepLinkingChecked = $appSettings.deepLinking
+    let deepLinkingChecked = $appSettings.deepLinking
 
     let showHiddenAccounts = $activeProfile?.settings.showHiddenAccounts
 
@@ -33,6 +34,10 @@
         ensureValidNodeSelection()
     }
 
+    $: $appSettings.deepLinking = deepLinkingChecked
+    $: $appSettings.deepLinking && Electron.DeepLinkManager.checkDeepLinkRequestExists()
+
+    $: updateProfile('settings.showHiddenAccounts', showHiddenAccounts)
     $: {
         updateClientOptions(networkConfig)
         updateProfile('settings.networkConfig', networkConfig)
@@ -356,13 +361,12 @@
         </section>
         <HR classes="pb-5 mt-5 justify-center" />
     {/if}
-    <!-- TODO: re-enable deep links -->
-    <!-- <section id="deepLinks" class="w-3/4">
+    <section id="deepLinks" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.deepLinks.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.deepLinks.description')}</Text>
         <Checkbox label={locale('actions.enableDeepLinks')} bind:checked={deepLinkingChecked} />
         <HR classes="pb-5 mt-5 justify-center" />
-    </section> -->
+    </section>
     {#if $loggedIn}
         <section id="balanceFinder" class="w-3/4">
             <Text type="h4" classes="mb-3">{locale('views.settings.balanceFinder.title')}</Text>
