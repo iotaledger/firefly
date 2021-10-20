@@ -42,7 +42,7 @@
                         if(!filePath) {
                             break;
                         }
-                        showAppNotification({type: 'info', message: locale('notifications.exportTransactionHistory.success', {values: {accountAlias: walletAccount.alias, filePath: filePath}}), timeout: 1000000000})
+                        showAppNotification({type: 'info', message: locale('notifications.exportTransactionHistory.success', {values: {accountAlias: walletAccount.alias, filePath: filePath}})})
                     } catch {
                         showAppNotification({type: 'error', message: locale('notifications.exportTransactionHistory.error', {value: {accountAlias: walletAccount.alias}})})
                     }
