@@ -11,21 +11,23 @@
         wallet,
     } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
-    import { updateClientOptions } from '../../lib/network'
+    import { updateClientOptions } from 'shared/lib/network'
     import {
         activeProfile,
         isLedgerProfile,
         isSoftwareProfile,
         isStrongholdLocked,
         updateProfile,
-    } from '../../lib/profile'
-    import { displayNotificationForLedgerProfile, isLedgerConnected } from '../../lib/ledger'
-    import { logout } from '../../lib/app'
+    } from 'shared/lib/profile'
+    import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
+    import { logout } from 'shared/lib/app'
 
     export let locale: Locale
 
     export let network: Network
     export let node: Node
+
+    const showPasswordInput = $isSoftwareProfile && $isStrongholdLocked
 
     const error = ''
     let isSwitchingNetwork = false
@@ -85,7 +87,7 @@
         </div>
     </div>
 </div>
-{#if $isSoftwareProfile && $isStrongholdLocked}
+{#if showPasswordInput}
 <div class="flex w-full flex-row flex-wrap mt-2 mb-9 justify-between">
         <Text type="p" secondary classes="mb-3">
             {locale('popups.switchNetwork.typePassword')}

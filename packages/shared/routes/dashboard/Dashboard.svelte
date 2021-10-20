@@ -20,7 +20,7 @@
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { clearPollNetworkInterval, pollNetworkStatus } from '../../lib/networkStatus'
+    import { clearPollNetworkInterval, pollNetworkStatus } from 'shared/lib/networkStatus'
 
     export let locale: Locale
 

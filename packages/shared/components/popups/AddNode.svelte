@@ -3,7 +3,8 @@
     import SwitchNetwork from './SwitchNetwork.svelte'
     import { stripSpaces, stripTrailingSlash } from 'shared/lib/helpers'
     import {
-        cleanNodeAuth, getNetworkById, isNodeAuthValid,
+        cleanNodeAuth,
+        getNetworkById,
         isNodeUrlValid,
     } from 'shared/lib/network'
     import { showAppNotification } from 'shared/lib/notifications'

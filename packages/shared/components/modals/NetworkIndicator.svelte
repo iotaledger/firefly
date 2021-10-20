@@ -4,7 +4,7 @@
     import { activeProfile } from 'shared/lib/profile'
     import { onDestroy } from 'svelte'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { NetworkStatusHealthText } from '../../lib/typings/network'
+    import { NetworkStatusHealthText } from 'shared/lib/typings/network'
 
     export let locale: Locale
 

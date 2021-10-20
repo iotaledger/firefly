@@ -413,7 +413,7 @@
                 "description": "View system and application information"
             },
             "migrateLedgerIndex": {
-                "title": "Migrate Ledger Index",
+                "title": "Migrate Ledger index",
                 "description": "Migrate another Trinity account index"
             },
             "stateExport": {
@@ -430,7 +430,7 @@
             },
             "faq": {
                 "title": "FAQ",
-                "title2": "Frequently Asked Questions",
+                "title2": "Frequently asked questions",
                 "description": "View the FAQs to get help with a common problem or question"
             },
             "discord": {
