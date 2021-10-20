@@ -635,6 +635,7 @@
         "outgoingMi": "{value} saliente",
         "portoflio": "Portafolio",
         "token": "Token",
+        "holdings": "Holdings",
         "accountValue": "Valor de Cartera",
         "accountActivity": "Actividad de Cartera",
         "timeframe1Hour": "1 hora",
@@ -944,6 +945,7 @@
         },
         "node": {
             "invalid": "Por favor, introduce una URL válida.",
+            "dns": "Could not resolve DNS for node.",
             "https": "Se requiere HTTPS. Configura un perfil de desarrollador para usar conexiones HTTP no seguras.",
             "duplicate": "Este nodo ya ha sido añadido.",
             "unsynced": "El nodo no está sincronizado.",
@@ -980,6 +982,9 @@
         },
         "migration": {
             "missingBundle": "Ha ocurrido un error buscando el paquete de la transacción."
+        },
+        "crypto": {
+            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
         }
     },
     "tooltips": {
