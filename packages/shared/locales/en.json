@@ -399,9 +399,9 @@
                 "title": "Migrate Ledger Index",
                 "description": "Migrate another Trinity account index"
             },
-            "stateExport": {
-                "title": "State export",
-                "description": "Export your transaction history to a .csv file"
+            "transactionHistory": {
+                "title": "Transaction history",
+                "description": "Export the transaction history of your accounts as .csv files"
             },
             "troubleshoot": {
                 "title": "Troubleshoot",
@@ -631,7 +631,7 @@
         },
         "exportTransactionHistory": {
             "title": "Export transaction history",
-            "body": "Export your transaction history for all accounts within this profile. Export will be in a CSV format.",
+            "body": "Export your transaction history for all accounts consectutively within this profile. Exports will be in a CSV format.",
             "profileName": "Profile name:",
             "numberOfAccounts": "Number of accounts:",
             "typePassword": "Type your password to allow exporting"
@@ -696,7 +696,7 @@
         "enableDeepLinks": "Enable deep links",
         "enableDeveloperMode": "Enable developer mode",
         "enableSystemNotifications": "Enable system notifications",
-        "exportState": "Export state",
+        "exportTransactionHistory": "Export transaction history",
         "localProofOfWork": "Local proof of work",
         "unlock": "Unlock",
         "updateFirefly": "Update Firefly",
@@ -894,7 +894,11 @@
         "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "Copied to clipboard",
         "accountsSynchronized": "Wallet synchronization complete",
-        "fundsAvailableSoon": "Your funds will become available shortly"
+        "fundsAvailableSoon": "Your funds will become available shortly",
+        "exportTransactionHistory": {
+            "success": "Transaction history for {accountAlias} was successfully saved to {filePath}",
+            "error": "Unable to export transaction history for {accountAlias}"
+        }
     },
     "error": {
         "profile": {

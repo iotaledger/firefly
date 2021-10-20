@@ -35,11 +35,17 @@
             }
 
             for (const walletAccount of $accounts) {
-                try {
-                    await Electron.exportTransactionHistory(generateTransactionHistoryCsvFileName(profileName, walletAccount.alias),generateTransactionHistoryCsvFromAccount(walletAccount))
-                } catch (error) {
-                        console.error(error)
-                }
+                    const fileName = generateTransactionHistoryCsvFileName(profileName, walletAccount.alias)
+                    const contents = generateTransactionHistoryCsvFromAccount(walletAccount)
+                    try {
+                        const filePath = await Electron.exportTransactionHistory(fileName, contents)
+                        if(!filePath) {
+                            break;
+                        }
+                        showAppNotification({type: 'info', message: locale('notifications.exportTransactionHistory.success', {values: {accountAlias: walletAccount.alias, filePath: filePath}}), timeout: 1000000000})
+                    } catch {
+                        showAppNotification({type: 'error', message: locale('notifications.exportTransactionHistory.error', {value: {accountAlias: walletAccount.alias}})})
+                    }
             }
 
             isBusy = false

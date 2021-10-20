@@ -20,14 +20,14 @@ export const generateTransactionHistoryCsvFromAccount = (WalletAccount: WalletAc
 }
 
 export const generateTransactionHistoryCsvFileName = (profileName: string, accountAlias: string): string => {
-    const DEFAULT_FILE_NAME_PATTERN = 'firefly-transaction-history-[profileName]-[accountAlias]-[date]'
+    const DEFAULT_FILE_NAME_PATTERN = 'firefly-transaction-history-{{profileName}}-{{accountAlias}}-{{date}}'
     const tzoffset = new Date().getTimezoneOffset() * 60000 // offset in milliseconds
     const localISOTime = new Date(Date.now() - tzoffset).toISOString()
     const date = localISOTime.slice(0, -5)
 
-    const fileName = DEFAULT_FILE_NAME_PATTERN.replace('[profileName]', profileName.toLowerCase())
-        .replace('[accountAlias]', accountAlias.toLowerCase())
-        .replace('[date]', date)
+    const fileName = DEFAULT_FILE_NAME_PATTERN.replace('{{profileName}}', profileName.toLowerCase())
+        .replace('{{accountAlias}}', accountAlias.toLowerCase())
+        .replace('{{date}}', date)
 
     return sanatiseFilename(fileName)
 }

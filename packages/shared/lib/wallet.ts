@@ -26,7 +26,7 @@ import type {
     TransferProgressEventPayload,
     TransferState,
 } from 'shared/lib/typings/events'
-import type { Payload, Transaction } from 'shared/lib/typings/message'
+import type { Payload } from 'shared/lib/typings/message'
 import type {
     AddressInput,
     MigrationBundle,

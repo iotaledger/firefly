@@ -93,7 +93,7 @@
         balanceFinder: BalanceFinder,
         snapshot: Snapshot,
         video: Video,
-        exportState: ExportTransactionHistoryPopup
+        exportTransactionHistory: ExportTransactionHistoryPopup
     }
 
     const onkey = (e) => {

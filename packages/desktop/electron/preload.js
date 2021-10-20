@@ -107,7 +107,7 @@ try {
                     return new Promise((resolve, reject) => {
                         try {
                             fs.writeFileSync(result.filePath, contents)
-                            resolve(true)
+                            resolve(result.filePath)
                         } catch (err) {
                             reject(err)
                         }
