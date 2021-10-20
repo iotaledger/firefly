@@ -3,7 +3,7 @@
 /* eslint-disable no-bitwise */
 
 /**
- * Class to help with Bech32 encoding/decoding.
+ * Class to help with Bech32 encoding/decoding
  * Based on reference implementation https://github.com/sipa/bech32/blob/master/ref/javascript/bech32.js
  */
 export class Bech32 {

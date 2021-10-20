@@ -635,6 +635,7 @@
         "outgoingMi": "In uscita {value}",
         "portoflio": "Portafoglio",
         "token": "Token",
+        "holdings": "Holdings",
         "accountValue": "Valore Wallet",
         "accountActivity": "Attività Wallet",
         "timeframe1Hour": "1 ora",
@@ -860,7 +861,7 @@
         "legacyNetwork": "Rete Legacy",
         "capsLock": "Blocco maiuscole è attivo",
         "version": "Versione {version}",
-        "unknown": "Unknown"
+        "unknown": "Sconosciuto"
     },
     "dates": {
         "today": "Oggi",
@@ -944,6 +945,7 @@
         },
         "node": {
             "invalid": "Per favore, inserisci un URL valido.",
+            "dns": "Could not resolve DNS for node.",
             "https": "HTTPS è richiesto. Impostare un profilo sviluppatore per utilizzare connessioni HTTP non protette.",
             "duplicate": "Questo nodo è già stato aggiunto.",
             "unsynced": "Il nodo non è sincronizzato.",
@@ -980,6 +982,9 @@
         },
         "migration": {
             "missingBundle": "Si è verificato un errore cercando di trovare il bundle delle transazioni."
+        },
+        "crypto": {
+            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
         }
     },
     "tooltips": {

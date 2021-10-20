@@ -160,7 +160,7 @@ function createWindow() {
             callback(request.url.replace('iota:/', app.getAppPath()).split('?')[0].split('#')[0])
         })
     } catch (error) {
-        console.log(error) // eslint-disable-line no-console
+        console.error(error)
     }
 
     const mainWindowState = windowStateKeeper('main', 'settings.json')
@@ -385,7 +385,7 @@ ipcMain.handle('get-os', (_e) => process.platform)
 /**
  * Define deep link state
  */
-const deepLinkUrl = null
+let deepLinkUrl = null
 
 /**
  * Create a single instance only
@@ -412,40 +412,46 @@ app.on('second-instance', (_e, args) => {
     }
 })
 
-// TODO: re-enable deep links
 /**
  * Register iota:// protocol for deep links
  * Set Firefly as the default handler for iota:// protocol
  */
-// protocol.registerSchemesAsPrivileged([{ scheme: 'iota', privileges: { secure: true, standard: true } }])
-// if (process.defaultApp) {
-//     if (process.argv.length >= 2) {
-//         app.setAsDefaultProtocolClient('iota', process.execPath, [path.resolve(process.argv[1])])
-//     }
-// } else {
-//     app.setAsDefaultProtocolClient('iota')
-// }
+protocol.registerSchemesAsPrivileged([{ scheme: 'iota', privileges: { secure: true, standard: true } }])
+if (process.defaultApp) {
+    if (process.argv.length >= 2) {
+        app.setAsDefaultProtocolClient('iota', process.execPath, [path.resolve(process.argv[1])])
+    }
+} else {
+    app.setAsDefaultProtocolClient('iota')
+}
 
-// /**
-//  * Proxy deep link event to the wallet application
-//  */
-// app.on('open-url', (event, url) => {
-//     event.preventDefault()
-//     deepLinkUrl = url
-//     if (windows.main) {
-//         windows.main.webContents.send('deep-link-params', url)
-//     }
-// })
+/**
+ * Proxy deep link event to the wallet application
+ */
+app.on('open-url', (event, url) => {
+    event.preventDefault()
+    deepLinkUrl = url
+    if (windows.main) {
+        windows.main.webContents.send('deep-link-params', deepLinkUrl)
+        windows.main.webContents.send('deep-link-request')
+    }
+})
 
-// /**
-//  * Proxy deep link event to the wallet application
-//  */
-// ipcMain.on('deep-link-request', () => {
-//     if (deepLinkUrl) {
-//         windows.main.webContents.send('deep-link-params', deepLinkUrl)
-//         deepLinkUrl = null
-//     }
-// })
+/**
+ * Check if a deep link request/event currently exists and has not been cleared
+ */
+ipcMain.on('check-deep-link-request-exists', () => {
+    if (deepLinkUrl) {
+        windows.main.webContents.send('deep-link-params', deepLinkUrl)
+    }
+})
+
+/**
+ * Clear deep link request/event
+ */
+ipcMain.on('clear-deep-link-request', () => {
+    deepLinkUrl = null
+})
 
 /**
  * Proxy notification activated to the wallet application
