@@ -444,7 +444,7 @@
         selectedSendType = sendParams.isInternal && $liveAccounts.length > 1 ? SEND_TYPE.INTERNAL : SEND_TYPE.EXTERNAL
         unit = sendParams.unit ?? (sendParams.amount === 0 ? Unit.Mi : Unit.i)
         const rawAmount = changeUnits(sendParams.amount, unit, Unit.i)
-        amount = sendParams.amount === 0 ? '' : formatUnitPrecision(rawAmount, sendParams.unit, false)
+        amount = sendParams.amount === 0 ? '' : formatUnitPrecision(rawAmount, unit, false)
         address = sendParams.address
         if (from && accountsDropdownItems) {
             to = $liveAccounts.length === 2 ? accountsDropdownItems[from.id === $liveAccounts[0].id ? 1 : 0] : to
