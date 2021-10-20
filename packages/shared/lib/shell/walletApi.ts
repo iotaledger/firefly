@@ -242,6 +242,9 @@ const handleError = (
         if (error.includes('invalid certificate')) {
             return 'error.node.invalidCertificate'
         }
+        if (error.includes('Failed to get an answer from all nodes')) {
+            return 'error.node.answer'
+        }
 
         return getErrorMessage(type)
     }

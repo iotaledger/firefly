@@ -981,7 +981,8 @@
             "https": "HTTPS is required. Set up a developer profile to use unsecured HTTP connections.",
             "duplicate": "This node has already been added.",
             "unsynced": "The node is not in sync.",
-            "noSynced": "No synced nodes are available."
+            "noSynced": "No synced nodes are available.",
+            "answer": "Failed to get an answer from all nodes."
         },
         "network": {
             "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
