@@ -15,7 +15,7 @@
     import { changeUnits, formatUnitBestMatch, formatUnitPrecision, UNIT_MAP } from 'shared/lib/units'
     import { Locale } from 'shared/lib/typings/i18n'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
-    
+
     type AmountUnit = Unit | AvailableExchangeRates
 
     export let locale: Locale
@@ -32,7 +32,7 @@
     export let onMaxClick = (): void => {}
 
     const currency: AvailableExchangeRates = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
-    const Units: AmountUnit[] = [currency].concat(Object.values(Unit).filter(u => u !== 'Pi'))
+    const Units: AmountUnit[] = [currency].concat(Object.values(Unit).filter((u) => u !== 'Pi'))
     const MAX_VALUE = 2_779_530_283_000_000
 
     let showDropdown = false
@@ -40,33 +40,35 @@
     let navContainer
     let unitsButton
     let focusedItem
+    let amountForLabel
 
-    const getFormattedLabel = (_amount) => isFiatCurrency(unit) ? convertAmountFromFiat(_amount) : convertAmountToFiat(_amount)
+    const getFormattedLabel = (_amount) =>
+        isFiatCurrency(unit) ? convertAmountFromFiat(_amount) : convertAmountToFiat(_amount)
 
-    $: amountForLabel = getFormattedLabel(amount)
+    $: amount, unit, (amountForLabel = getFormattedLabel(amount))
     $: {
         if (amount.length > 0) {
-            if(!isFiatCurrency(unit)) {
+            if (!isFiatCurrency(unit)) {
                 const amountAsFloat = parseCurrency(amount)
-                const rawAmount = changeUnits(
-                    Number.isNaN(amountAsFloat) ? 0 : amountAsFloat,
-                    unit as Unit,
-                    Unit.i
-                )
-                if(rawAmount > MAX_VALUE) {
+                const rawAmount = changeUnits(Number.isNaN(amountAsFloat) ? 0 : amountAsFloat, unit as Unit, Unit.i)
+                if (rawAmount > MAX_VALUE) {
                     amount = formatUnitPrecision(MAX_VALUE, unit as Unit, false)
                 }
             } else {
                 const rawAmount = convertFromFiat(amount, $currencies[CurrencyTypes.USD], $exchangeRates[currency])
-                if(rawAmount > MAX_VALUE) {
-                    amount = convertToFiat(MAX_VALUE, $currencies[CurrencyTypes.USD], $exchangeRates[currency]).toString()
+                if (rawAmount > MAX_VALUE) {
+                    amount = convertToFiat(
+                        MAX_VALUE,
+                        $currencies[CurrencyTypes.USD],
+                        $exchangeRates[currency]
+                    ).toString()
                 }
             }
         }
     }
 
     const convertAmountToFiat = (_amount) => {
-        if(isFiatCurrency(unit)) return _amount
+        if (isFiatCurrency(unit)) return _amount
 
         const _convert = (amountAsFloat) => {
             const rawAmount = changeUnits(amountAsFloat, unit as Unit, Unit.i)
@@ -78,8 +80,8 @@
         return convertAmount(_amount, undefined, _convert)
     }
     const convertAmountFromFiat = (_amount) => {
-        if(!isFiatCurrency(unit)) return _amount
-    
+        if (!isFiatCurrency(unit)) return _amount
+
         const _convert = (amountAsFloat) => {
             const rawAmount = convertFromFiat(amountAsFloat, $currencies[CurrencyTypes.USD], $exchangeRates[currency])
 
@@ -90,11 +92,11 @@
     }
 
     const convertAmount = (_amount, _unit, convertFn) => {
-        if(!amount) return null
+        if (!amount) return null
 
         const amountAsFloat = parseCurrency(_amount, _unit)
         if (amountAsFloat === 0 || Number.isNaN(amountAsFloat)) return null
-    
+
         return convertFn(amountAsFloat)
     }
 
@@ -108,16 +110,16 @@
     }
 
     const updateAmount = (fromUnit: AmountUnit, toUnit: AmountUnit) => {
-        if(amount.length <= 0 || fromUnit === toUnit) return
+        if (amount.length <= 0 || fromUnit === toUnit) return
 
         // IOTA -> FIAT
-        if(isFiatCurrency(toUnit)) {
+        if (isFiatCurrency(toUnit)) {
             amount = convertAmountToFiat(amount).slice(2)
         } else {
             let rawAmount
 
             // FIAT -> IOTA
-            if(isFiatCurrency(fromUnit)) {
+            if (isFiatCurrency(fromUnit)) {
                 rawAmount = convertFromFiat(amount, $currencies[CurrencyTypes.USD], $exchangeRates[currency])
             }
             // IOTA -> IOTA
@@ -182,7 +184,7 @@
         }
     }
 
-    const getMaxDecimals = (_unit: AmountUnit) => isFiatCurrency(_unit) ? 2 : UNIT_MAP[_unit].dp
+    const getMaxDecimals = (_unit: AmountUnit) => (isFiatCurrency(_unit) ? 2 : UNIT_MAP[_unit].dp)
 </script>
 
 <style type="text/scss">
