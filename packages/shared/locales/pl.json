@@ -635,6 +635,7 @@
         "outgoingMi": "Wychodzące {value}",
         "portoflio": "Portfolio",
         "token": "Token",
+        "holdings": "Kapitał",
         "accountValue": "Wartość portfela",
         "accountActivity": "Aktywność portfela",
         "timeframe1Hour": "1 godzina",
@@ -944,6 +945,7 @@
         },
         "node": {
             "invalid": "Wprowadź prawidłowy adres URL.",
+            "dns": "Nie można uzyskać wyniku DNS dla serwera.",
             "https": "HTTPS jest wymagany. Skonfiguruj profil dewelopera, aby używać niezabezpieczonych połączeń HTTP.",
             "duplicate": "Ten serwer został już wcześniej dodany.",
             "unsynced": "Serwer nie jest zsynchronizowany.",
@@ -980,6 +982,9 @@
         },
         "migration": {
             "missingBundle": "Wystąpił błąd podczas próby znalezienia pakietu transakcji."
+        },
+        "crypto": {
+            "cannotDecodeBech32": "Nie można odkodować ciągu znaków jako adresu Bech32."
         }
     },
     "tooltips": {
