@@ -99,7 +99,7 @@ const parseSendOperation = (
     // Check if exists and is valid or does not exist
     const amountParam = searchParams.get(SendRequestParameters.Amount)
     if (amountParam) {
-        parsedAmount = Number.parseFloat(amountParam)
+        parsedAmount = Number(amountParam)
         if (Number.isNaN(parsedAmount) || !Number.isFinite(parsedAmount)) {
             return addError({ time: Date.now(), type: 'deepLink', message: `Amount is not a number '${amountParam}'` })
         }
