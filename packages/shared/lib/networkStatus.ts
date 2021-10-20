@@ -1,10 +1,6 @@
 import { get, writable } from 'svelte/store'
 import { asyncGetNodeInfo, wallet } from './wallet'
-import {
-    cleanNodeAuth,
-    getOfficialNodes,
-    updateClientOptions,
-} from './network'
+import { cleanNodeAuth, getOfficialNodes, updateClientOptions } from './network'
 import type { NetworkStatus } from './typings/network'
 import { activeProfile } from './profile'
 import { NetworkStatusHealthText } from './typings/network'
@@ -33,13 +29,17 @@ export async function pollNetworkStatus(): Promise<void> {
     pollInterval = setInterval(async () => updateNetworkStatus(), DEFAULT_NETWORK_STATUS_POLL_INTERVAL)
 }
 
+export function clearPollNetworkInterval(): void {
+    clearInterval(pollInterval)
+}
+
 const { accounts, accountsLoaded } = get(wallet)
 
 const unsubscribe = accountsLoaded.subscribe((val) => {
     if (val) {
         void pollNetworkStatus()
     } else {
-        clearInterval(pollInterval)
+        clearPollNetworkInterval()
     }
 })
 
@@ -62,18 +62,16 @@ export async function updateNetworkStatus(): Promise<void> {
         const { clientOptions } = account0
 
         let node = clientOptions.nodes.find((n) => n.isPrimary)
-        if (node?.url !== networkConfig?.nodes.find((n) => n.isPrimary).url) {
+        if (node?.url !== networkConfig?.nodes.find((n) => n.isPrimary)?.url) {
             /**
              * NOTE: If the network configuration and client options do NOT
              * agree on which node is the primary one, it is best to go with
              * what is stored app-side in the profile's setting's NetworkConfig.
              */
-            node = networkConfig.nodes.find((n) => n.isPrimary)
-                || getOfficialNodes(networkConfig.network.type)[0]
+            node = networkConfig.nodes.find((n) => n.isPrimary) || getOfficialNodes(networkConfig.network.type)[0]
 
             updateClientOptions(networkConfig)
         }
-        console.log('USING NODE: ', node)
 
         try {
             const response = await asyncGetNodeInfo(account0.id, node?.url, cleanNodeAuth(node?.auth))
@@ -98,7 +96,6 @@ export async function updateNetworkStatus(): Promise<void> {
                 default:
                     healthText = NetworkStatusHealthText.Down
                     break
-
             }
 
             networkStatus.set({

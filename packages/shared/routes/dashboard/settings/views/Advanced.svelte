@@ -26,8 +26,9 @@
 
     let showHiddenAccounts = $activeProfile?.settings.showHiddenAccounts
 
-    let networkConfig: NetworkConfig = $activeProfile?.settings.networkConfig || getOfficialNetworkConfig(NetworkType.ChrysalisMainnet)
+    const networkConfig: NetworkConfig = $activeProfile?.settings.networkConfig || getOfficialNetworkConfig(NetworkType.ChrysalisMainnet)
 
+    ensureOnePrimaryNode()
     ensureValidNodeSelection()
 
     $: {
@@ -72,6 +73,7 @@
 
     function handleIncludeOfficialNodesClick() {
         ensureValidNodeSelection()
+        ensureOnePrimaryNode()
     }
 
     function ensureValidNodeSelection(): void {
@@ -81,11 +83,7 @@
          */
         if (networkConfig.automaticNodeSelection) return
 
-        console.log('CHECK before: ', networkConfig.nodes)
-        // const primaryNodeUrl = networkConfig.nodes.find((n) => n.isPrimary) || getOfficialNodes(networkConfig.network.type)[0].url
-        networkConfig.nodes = getNodeCandidates(networkConfig)//.map((n) => ({ ...n, isPrimary: n.url === primaryNodeUrl }))
-
-        console.log('CHECK after: ', networkConfig.nodes)
+        networkConfig.nodes = getNodeCandidates(networkConfig)
     }
 
     function ensureOnePrimaryNode(): void {
@@ -93,7 +91,6 @@
     }
 
     function handleSetPrimaryNode(node: Node) {
-        console.log('SETTING: ', node)
         networkConfig.nodes = networkConfig.nodes.map((n) => ({ ...n, isPrimary: n.url === node.url }))
         nodeContextMenu = undefined
 
@@ -118,8 +115,6 @@
                             })
                         }
                     } else {
-                        console.log('NODE: ', node)
-
                         if(node.isPrimary) {
                             networkConfig.nodes = networkConfig.nodes.map((n) => ({ ...n, isPrimary: false }))
                         }

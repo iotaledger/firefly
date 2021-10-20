@@ -559,8 +559,9 @@
         "switchNetwork": {
             "title": "Switch network",
             "newNetwork": "New network",
-            "resetWarning": "Changing networks will reset all accounts, balances, and transaction history of this profile.",
-            "switchingNetwork": "Switching network"
+            "resetWarning": "Changing networks will reset all accounts, balances, and transaction history for this profile.",
+            "switchingNetwork": "Switching network",
+            "typePassword": "Type your password to switch to:"
         },
         "errorLog": {
             "title": "Error Log",

@@ -27,11 +27,11 @@
     const { accounts } = $wallet
 
     let nodeUrl: string = node?.url || ''
-    let optNodeAuth: NodeAuth = node?.auth || { username: '', password: '', jwt: '' }
+    const optNodeAuth: NodeAuth = node?.auth || { username: '', password: '', jwt: '' }
 
     let addressError = ''
     let addressWarn = ''
-    let authError = ''
+    const authError = ''
 
     let isBusy = false
     let isSuccess = true
@@ -52,7 +52,7 @@
     const constructNodes = (): Node[] => node ? nodes.filter((n) => cleanNodeUrl(node.url) !== cleanNodeUrl(n.url)) : nodes
 
     const cleanNodeFormData = (): void => {
-        let _nodes = constructNodes()
+        const _nodes = constructNodes()
         const validErr = isNodeUrlValid(_nodes, cleanNodeUrl(nodeUrl), $activeProfile.isDeveloperProfile)
         if (validErr) {
             addressError = locale(validErr)
@@ -97,25 +97,25 @@
             isBusy = false
 
             if (!addressError) {
-                if (isNetworkSwitch) return
-
-                onSuccess(
-                    false,
-                    {
-                        url: nodeUrl,
-                        auth: optNodeAuth,
-                        network: getNetworkById(nodeInfo.nodeinfo.networkId),
-                        isPrimary: node?.isPrimary || false,
-                    },
-                )
-                closePopup()
+                if (!isNetworkSwitch) {
+                    onSuccess(
+                        false,
+                        {
+                            url: nodeUrl,
+                            auth: optNodeAuth,
+                            network: getNetworkById(nodeInfo?.nodeinfo.networkId),
+                            isPrimary: node?.isPrimary || false,
+                        },
+                    )
+                    closePopup()
+                }
             }
         }
     }
 </script>
 
 {#if isNetworkSwitch}
-    <SwitchNetwork {locale} {newNetwork} />
+    <SwitchNetwork {locale} network={newNetwork} node={{ url: nodeUrl, auth: optNodeAuth, isPrimary: true, }} />
 {:else}
     <Text type="h4" classes="mb-5">{locale(`popups.node.title${isAddingNode ? 'Add' : 'Update'}`)}</Text>
     <div class="w-full h-full">

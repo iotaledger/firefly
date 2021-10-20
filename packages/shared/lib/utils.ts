@@ -263,7 +263,6 @@ export const downloadRecoveryKit = (): void => {
  * @returns The resulting object of migrating from an older version to a newer one (i.e. updated keys and / or data)
  */
 export const migrateObjects = <T>(oldObj: T, newObj: T): T => {
-    console.log('OLD NC: ', oldObj['settings']['networkConfig'], '\n\nNEW NC: ', newObj['settings']['networkConfig'])
     if (!shouldMigrate<T>(oldObj, newObj)) return oldObj
 
     /* eslint-disable @typescript-eslint/no-explicit-any */

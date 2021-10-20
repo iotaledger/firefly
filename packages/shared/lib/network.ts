@@ -7,7 +7,7 @@ import { isNewNotification, showAppNotification } from './notifications'
 import { localize } from './i18n'
 import type { ClientOptions } from './typings/client'
 import { get } from 'svelte/store'
-import { activeProfile, updateProfile } from './profile'
+import { activeProfile } from './profile'
 
 export const CHRYSALIS_MAINNET_ID = 'chrysalis-mainnet'
 export const CHRYSALIS_MAINNET_NAME = 'Chrysalis Mainnet'
@@ -46,7 +46,6 @@ export const getOfficialClientOptions = (): ClientOptions => {
  */
 export const getOfficialNetworkConfig = (type: NetworkType): NetworkConfig => ({
     network: getOfficialNetwork(type),
-    // node: getOfficialNodes(type)[0],
     nodes: getOfficialNodes(type),
     automaticNodeSelection: true,
     includeOfficialNodes: true,
@@ -265,7 +264,7 @@ export const isNodeUrlValid = (nodesList: Node[], newUrl: string, allowInsecure:
  * @returns {void}
  */
 export const updateClientOptions = (config: NetworkConfig): void => {
-    const nodeCandidates = getNodeCandidates(config)
+    const nodeCandidates = getNodeCandidates(config).map((n) => ({ ...n, network: config.network }))
     const clientOptions: ClientOptions = {
         ...config,
         node: nodeCandidates.find((n) => n.isPrimary),
@@ -277,10 +276,10 @@ export const updateClientOptions = (config: NetworkConfig): void => {
         return
     }
 
-    const hasMismatchedNetwork = clientOptions.node.network.id !== clientOptions.network
+    const hasMismatchedNetwork = clientOptions.node?.network?.id !== clientOptions.network
     if (hasMismatchedNetwork && isNewNotification('warning')) {
         showAppNotification({
-            type: 'warning',
+            type: 'error',
             message: localize('error.network.badNodes'),
         })
 
@@ -307,7 +306,12 @@ export const getNodeCandidates = (config: NetworkConfig): Node[] => {
     } else {
         nodeCandidates = config.includeOfficialNodes
             ? addOfficialNodes(config.network.type, config.nodes)
-            : config.nodes.filter((n) => !getOfficialNodes(config.network.type).map((_n) => _n.url).includes(n.url))
+            : config.nodes.filter(
+                  (n) =>
+                      !getOfficialNodes(config.network.type)
+                          .map((_n) => _n.url)
+                          .includes(n.url)
+              )
     }
 
     return ensureSinglePrimaryNode(nodeCandidates)
@@ -332,6 +336,3 @@ export const ensureSinglePrimaryNode = (nodes: Node[]): Node[] => {
         return nodes.map((n, idx) => ({ ...n, isPrimary: n.url === activeNode.url }))
     }
 }
-
-// TODO: resetWalletClient (for times when it is a network switch)
-export const switchNetworks = (network: Network): void => {}
