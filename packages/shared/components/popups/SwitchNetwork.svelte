@@ -96,13 +96,19 @@
 </script>
 
 <Text type="h4" classes="mb-9">{locale('popups.switchNetwork.title')}</Text>
-<div class="w-full h-full {$isSoftwareProfile && $isStrongholdLocked ? '' : 'mb-2'}">
+<div class="w-full h-full {showPasswordInput ? '' : 'mb-2'}">
     <div class="flex flex-row justify-between">
         <div class="relative flex flex-col items-center bg-gray-50 dark:bg-gray-800 rounded-2xl mb-6 p-3">
+            {#if !showPasswordInput}
+                <Text type="p" secondary classes="self-start ml-4 mt-6">
+                    {locale('popups.switchNetwork.newNetwork')}:
+                    <Text highlighted classes="inline">{network.name}</Text>
+                </Text>
+            {/if}
             <div class="bg-red-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
                 <Icon icon="warning" classes="text-white" />
             </div>
-            <Text type="p" classes="dark:text-white ml-4 mt-6 mb-4">
+            <Text type="p" classes="dark:text-white ml-4 mb-4 {showPasswordInput ? 'mt-6' : 'mt-3'}">
                 {locale('popups.switchNetwork.resetWarning')}
             </Text>
         </div>
