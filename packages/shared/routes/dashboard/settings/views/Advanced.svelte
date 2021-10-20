@@ -5,7 +5,7 @@
     import { appSettings } from 'shared/lib/appSettings'
     import { navigateToNewIndexMigration } from 'shared/lib/ledger'
     import {
-        ensureSinglePrimaryNode,
+        ensureSinglePrimaryNode, getNodeCandidates,
         getOfficialNetworkConfig,
         getOfficialNodes,
         isOfficialNetwork,
@@ -16,9 +16,8 @@
     import { wallet } from 'shared/lib/wallet'
     import { Locale } from 'shared/lib/typings/i18n'
     import { Node } from 'shared/lib/typings/node'
-    import { NetworkConfig, NetworkType } from 'shared/lib/typings/network'
-    import { onDestroy } from 'svelte'
-    import { networkStatus } from 'shared/lib/networkStatus'
+    import { NetworkConfig, NetworkStatusHealthText, NetworkType } from 'shared/lib/typings/network'
+    import { NETWORK_HEALTH_COLORS, networkStatus } from 'shared/lib/networkStatus'
     import { showAppNotification } from 'shared/lib/notifications'
 
     export let locale: Locale
@@ -27,28 +26,9 @@
 
     let showHiddenAccounts = $activeProfile?.settings.showHiddenAccounts
 
-    const networkStatusInt = 2
-    let networkStatusText = 'networkOperational'
-    let networkMps = 0
-    let networkRate = 0
-
-    const unsubscribe = networkStatus.subscribe((data) => {
-        networkStatusText = networkStatusInt === 0 ? 'networkDown' : networkStatusInt === 1 ? 'networkDegraded' : 'networkOperational'
-        networkMps = data.messagesPerSecond ?? 0
-        networkRate = data.referencedRate ?? 0
-    })
-
-    const NETWORK_HEALTH_COLORS = {
-        0: 'red',
-        1: 'yellow',
-        2: 'green',
-    }
-
     let networkConfig: NetworkConfig = $activeProfile?.settings.networkConfig || getOfficialNetworkConfig(NetworkType.ChrysalisMainnet)
-    console.log('CONFIG: ', networkConfig)
 
-    ensureOfficialNodeSelection()
-    ensureOnePrimaryNode()
+    ensureValidNodeSelection()
 
     $: {
         updateClientOptions(networkConfig)
@@ -91,19 +71,21 @@
     }
 
     function handleIncludeOfficialNodesClick() {
-        ensureOfficialNodeSelection()
-        ensureOnePrimaryNode()
+        ensureValidNodeSelection()
     }
 
-    function ensureOfficialNodeSelection(): void {
-        const includeOfficialNodes = networkConfig.includeOfficialNodes
-        const officialNodes = getOfficialNodes(networkConfig.network.type)
-        networkConfig.nodes = networkConfig.nodes.length === 0 || networkConfig.automaticNodeSelection
-            ? officialNodes.map((n, idx) => ({ ...n, isPrimary: idx === 0 }))
-            : [
-                ...(includeOfficialNodes ? officialNodes : []),
-                ...networkConfig.nodes.filter((n) => !n.isDisabled && !officialNodes.map((_n) => _n.url).includes(n.url))
-            ]
+    function ensureValidNodeSelection(): void {
+        /**
+         * NOTE: There's no need to ensure a valid node
+         * selection if it will be handled automatically.
+         */
+        if (networkConfig.automaticNodeSelection) return
+
+        console.log('CHECK before: ', networkConfig.nodes)
+        // const primaryNodeUrl = networkConfig.nodes.find((n) => n.isPrimary) || getOfficialNodes(networkConfig.network.type)[0].url
+        networkConfig.nodes = getNodeCandidates(networkConfig)//.map((n) => ({ ...n, isPrimary: n.url === primaryNodeUrl }))
+
+        console.log('CHECK after: ', networkConfig.nodes)
     }
 
     function ensureOnePrimaryNode(): void {
@@ -111,8 +93,10 @@
     }
 
     function handleSetPrimaryNode(node: Node) {
+        console.log('SETTING: ', node)
         networkConfig.nodes = networkConfig.nodes.map((n) => ({ ...n, isPrimary: n.url === node.url }))
         nodeContextMenu = undefined
+
         updateClientOptions(networkConfig)
         updateProfile('settings.networkConfig', networkConfig)
     }
@@ -229,10 +213,6 @@
     function handleBalanceFinderClick() {
         openPopup({ type: 'balanceFinder', hideClose: true })
     }
-
-    onDestroy(() => {
-        unsubscribe()
-    })
 </script>
 
 <style type="text/scss">
@@ -254,8 +234,8 @@
                 <div>
                     <Text type="p" classes="inline" secondary>{locale('views.dashboard.network.status')}:</Text>
                     <div>
-                        <p class="text-13 text-{NETWORK_HEALTH_COLORS[networkStatusInt]}-500">
-                            {locale(`views.dashboard.network.${networkStatusText}`)}
+                        <p class="text-13 text-{NETWORK_HEALTH_COLORS[$networkStatus.health || 0]}-500">
+                            {locale(`views.dashboard.network.${$networkStatus.healthText || NetworkStatusHealthText.Down}`)}
                         </p>
                     </div>
                 </div>
@@ -332,7 +312,7 @@
                                     <Text smaller>{locale('views.settings.configureNodeList.viewDetails')}</Text>
                                 </button>
                             {/if}
-                            {#if nodeContextMenu.url !== networkConfig.nodes.find((n) => n.isPrimary).url}
+                            {#if nodeContextMenu.url !== networkConfig.nodes.find((n) => n.isPrimary)?.url}
                                 <button
                                     on:click={() => {
                                         nodeContextMenu.isDisabled = !nodeContextMenu.isDisabled

@@ -1,8 +1,19 @@
 import { get, writable } from 'svelte/store'
 import { asyncGetNodeInfo, wallet } from './wallet'
-import { cleanNodeAuth, cleanNodeAuthOfNode, getNodeCandidates, getOfficialNodes, isNodeAuthValid } from './network'
+import {
+    cleanNodeAuth,
+    getOfficialNodes,
+    updateClientOptions,
+} from './network'
 import type { NetworkStatus } from './typings/network'
 import { activeProfile } from './profile'
+import { NetworkStatusHealthText } from './typings/network'
+
+export const NETWORK_HEALTH_COLORS = {
+    0: 'red',
+    1: 'yellow',
+    2: 'green',
+}
 
 /**
  * Default interval for polling the network status
@@ -17,14 +28,14 @@ let pollInterval
  * Poll the network status at an interval.
  */
 export async function pollNetworkStatus(): Promise<void> {
-    await fetchNetworkStatus()
+    await updateNetworkStatus()
     /* eslint-disable @typescript-eslint/no-misused-promises */
-    pollInterval = setInterval(async () => fetchNetworkStatus(), DEFAULT_NETWORK_STATUS_POLL_INTERVAL)
+    pollInterval = setInterval(async () => updateNetworkStatus(), DEFAULT_NETWORK_STATUS_POLL_INTERVAL)
 }
 
 const { accounts, accountsLoaded } = get(wallet)
 
-accountsLoaded.subscribe((val) => {
+const unsubscribe = accountsLoaded.subscribe((val) => {
     if (val) {
         void pollNetworkStatus()
     } else {
@@ -33,21 +44,35 @@ accountsLoaded.subscribe((val) => {
 })
 
 /**
- * Fetches network status data
+ * Update the store variable for the status of the network that is currently
+ * in use.
  *
  * @method fetchNetworkStatus
  *
  * @returns {Promise<void>}
  */
-export async function fetchNetworkStatus(): Promise<void> {
+export async function updateNetworkStatus(): Promise<void> {
     let updated = false
 
     const accs = get(accounts)
 
     if (accs.length > 0) {
-        const account0 = accs[0]
         const { networkConfig } = get(activeProfile)?.settings
-        const node = networkConfig.nodes.find((n) => n.isPrimary) || getOfficialNodes(networkConfig.network.type)[0]
+        const account0 = accs[0]
+        const { clientOptions } = account0
+
+        let node = clientOptions.nodes.find((n) => n.isPrimary)
+        if (node?.url !== networkConfig?.nodes.find((n) => n.isPrimary).url) {
+            /**
+             * NOTE: If the network configuration and client options do NOT
+             * agree on which node is the primary one, it is best to go with
+             * what is stored app-side in the profile's setting's NetworkConfig.
+             */
+            node = networkConfig.nodes.find((n) => n.isPrimary)
+                || getOfficialNodes(networkConfig.network.type)[0]
+
+            updateClientOptions(networkConfig)
+        }
         console.log('USING NODE: ', node)
 
         try {
@@ -61,10 +86,26 @@ export async function fetchNetworkStatus(): Promise<void> {
                 health = 1 // degraded
             }
 
+            let healthText: NetworkStatusHealthText
+            switch (health) {
+                case 2:
+                    healthText = NetworkStatusHealthText.Operational
+                    break
+                case 1:
+                    healthText = NetworkStatusHealthText.Degraded
+                    break
+                case 0:
+                default:
+                    healthText = NetworkStatusHealthText.Down
+                    break
+
+            }
+
             networkStatus.set({
                 messagesPerSecond: response.nodeinfo.messagesPerSecond,
                 referencedRate: response.nodeinfo.referencedRate,
                 health,
+                healthText,
             })
 
             updated = true
@@ -80,4 +121,15 @@ export async function fetchNetworkStatus(): Promise<void> {
             health: 0,
         })
     }
+}
+
+/**
+ * Cleans up any subscriptions or the like to help prevent memory leaks.
+ *
+ * @method cleanupNetworkStatus
+ *
+ * @returns {void}
+ */
+export const cleanupNetworkStatus = (): void => {
+    unsubscribe()
 }

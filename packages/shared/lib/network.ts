@@ -307,7 +307,7 @@ export const getNodeCandidates = (config: NetworkConfig): Node[] => {
     } else {
         nodeCandidates = config.includeOfficialNodes
             ? addOfficialNodes(config.network.type, config.nodes)
-            : config.nodes
+            : config.nodes.filter((n) => !getOfficialNodes(config.network.type).map((_n) => _n.url).includes(n.url))
     }
 
     return ensureSinglePrimaryNode(nodeCandidates)

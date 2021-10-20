@@ -28,13 +28,14 @@
 
     let addressError = ''
     let addressWarn = ''
-    const authError = ''
+    let authError = ''
 
     let isBusy = false
     let isSuccess = true
     let isNetworkSwitch = false
     let newNetwork: Network
 
+    $: nodeUrl, (addressError = '')
     $: {
         addressWarn = ''
         node.url = stripSpaces(node.url)
@@ -104,6 +105,7 @@
                         url: nodeUrl,
                         auth: optNodeAuth,
                         network: getNetworkById(nodeInfo.nodeinfo.networkId),
+                        isPrimary: node?.isPrimary || false
                     }
                 )
                 closePopup()
@@ -163,7 +165,7 @@
             error={authError}
             disabled={isBusy} />
         <Password classes="mt-3" bind:value={optNodeAuth.password} placeholder={locale('popups.node.optionalPassword')} disabled={isBusy} />
-        <Password classes="mt-3" bind:value={optNodeAuth.jwt} label placeholder={locale('popups.node.optionalJwt')} disabled={isBusy} />
+        <Password classes="mt-3" bind:value={optNodeAuth.jwt} placeholder={locale('popups.node.optionalJwt')} disabled={isBusy} />
         <Checkbox label={locale('popups.node.setAsPrimaryNode')} bind:checked={node.isPrimary} disabled={isBusy} classes="mt-4 mb-8" />
     </div>
     <div class="flex flex-row justify-between space-x-4 w-full px-8 ">

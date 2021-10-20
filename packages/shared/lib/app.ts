@@ -7,6 +7,7 @@ import { closePopup } from './popup'
 import { activeProfile, clearActiveProfile, isLedgerProfile, isStrongholdLocked } from './profile'
 import { resetRouter } from './router'
 import { api, destroyActor, resetWallet } from './wallet'
+import { cleanupNetworkStatus } from './networkStatus'
 
 /**
  * Mobile mode
@@ -91,6 +92,7 @@ export const logout = (): Promise<void> =>
 
             lastActiveAt.set(new Date())
 
+            cleanupNetworkStatus()
             clearSendParams()
             closePopup(true)
             clearActiveProfile()

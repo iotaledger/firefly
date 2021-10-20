@@ -43,4 +43,11 @@ export type NetworkStatus = {
     messagesPerSecond?: number
     referencedRate?: number
     health?: number
+    healthText?: NetworkStatusHealthText
+}
+
+export enum NetworkStatusHealthText {
+    Down = 'networkDown',
+    Degraded = 'networkDegraded',
+    Operational = 'networkOperational',
 }
