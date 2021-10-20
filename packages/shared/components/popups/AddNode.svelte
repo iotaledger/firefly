@@ -17,7 +17,7 @@
 
     export let locale: Locale
 
-    export let node: Node = { url: '' }
+    export let node: Node = { url: '', isPrimary: false }
     export let nodes: Node[] = []
     export let network: Network
     export let isAddingNode: boolean = true

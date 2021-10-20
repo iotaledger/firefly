@@ -112,31 +112,17 @@
                 nodes: networkConfig.nodes,
                 network: networkConfig.network,
                 onSuccess: (isNetworkSwitch: boolean, node: Node) => {
-                    if (isNetworkSwitch) {
-                        // TODO: Handle network switch logic here
-                        if(isNetworkSwitch) {
-                            showAppNotification({
-                                type: 'info',
-                                message: locale('views.settings.networkConfiguration.switchedNetworks', { values: { networkName: networkConfig.network.name }}),
-                                subMessage: locale('views.settings.networkConfiguration.resetWallet')
-                            })
-                        }
-                    } else {
-                        if(node.isPrimary) {
-                            networkConfig.nodes = networkConfig.nodes.map((n) => ({ ...n, isPrimary: false }))
-                        }
-
-                        const primaryNode = node.isPrimary ? node : networkConfig.nodes.some((n) => n.isPrimary)
-                        if (!primaryNode) {
-                            node.isPrimary = true
-                        }
-
-                        networkConfig.nodes = [...networkConfig.nodes.filter((n) => n.url !== node.url), node]
-                        if(networkConfig.nodes.length === 0) networkConfig.nodes = [node]
-
-                        updateClientOptions(networkConfig)
-                        updateProfile('settings.networkConfig', networkConfig)
+                    if(node.isPrimary) {
+                        networkConfig.nodes = networkConfig.nodes.map((n) => ({ ...n, isPrimary: false }))
+                    } else if (!networkConfig.nodes.some((n) => n.isPrimary)) {
+                        node.isPrimary = true
                     }
+
+                    networkConfig.nodes = [...networkConfig.nodes.filter((n) => n.url !== node.url), node]
+                    if(networkConfig.nodes.length === 0) networkConfig.nodes = [node]
+
+                    updateClientOptions(networkConfig)
+                    updateProfile('settings.networkConfig', networkConfig)
 
                     setTimeout(() => {
                         /**
@@ -158,17 +144,19 @@
                 node,
                 nodes: networkConfig.nodes,
                 network: networkConfig.network,
-                onSuccess: (updatedNode: Node) => {
-                    const idx = networkConfig.nodes.findIndex((n) => n.url === updatedNode.url)
+                onSuccess: (isNetworkSwitch: boolean, node: Node) => {
+                    const idx = networkConfig.nodes.findIndex((n) => n.url === node.url)
                     if (idx >= 0) {
-                        // If there are no other primary nodes for this network then auto select this one
-                        const networkNodes = networkConfig.nodes
-                        const primaryNode = networkNodes.some((n) => n.isPrimary)
-                        if (!primaryNode) {
-                            updatedNode.isPrimary = true
+                        if(node.isPrimary) {
+                            networkConfig.nodes = networkConfig.nodes.map((n) => ({ ...n, isPrimary: n.url === node.url }))
+                        } else if (!networkConfig.nodes.some((n) => n.isPrimary)) {
+                            node.isPrimary = true
                         }
 
-                        networkConfig.nodes[idx] = updatedNode
+                        networkConfig.nodes[idx] = node
+
+                        updateClientOptions(networkConfig)
+                        updateProfile('settings.networkConfig', networkConfig)
                     }
                 },
             },
