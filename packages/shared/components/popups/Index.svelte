@@ -25,6 +25,7 @@
     import Password from './Password.svelte'
     import QR from './QR.svelte'
     import RemoveNode from './RemoveNode.svelte'
+    import SwitchNetwork from './SwitchNetwork.svelte'
     import RiskFunds from './RiskFunds.svelte'
     import Snapshot from './Snapshot.svelte'
     import Transaction from './Transaction.svelte'
@@ -82,6 +83,7 @@
         ledgerAddress: LedgerAddress,
         ledgerMigrateIndex: LedgerMigrateIndex,
         removeNode: RemoveNode,
+        switchNetwork: SwitchNetwork,
         busy: Busy,
         errorLog: ErrorLog,
         deleteProfile: DeleteProfile,

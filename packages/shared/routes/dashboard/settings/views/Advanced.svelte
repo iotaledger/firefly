@@ -152,6 +152,7 @@
         openPopup({
             type: 'addNode',
             props: {
+                isAddingNode: false,
                 node,
                 nodes: networkConfig.nodes,
                 network: networkConfig.network,

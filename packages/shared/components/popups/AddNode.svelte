@@ -1,5 +1,6 @@
 <script lang="typescript">
-    import { Button, Checkbox, Icon, Input, Password, Text } from 'shared/components'
+    import { Button, Checkbox, Input, Password, Text } from 'shared/components'
+    import SwitchNetwork from './SwitchNetwork.svelte'
     import { stripSpaces, stripTrailingSlash } from 'shared/lib/helpers'
     import {
         cleanNodeAuth, getNetworkById, isNodeAuthValid,
@@ -18,13 +19,15 @@
     export let node: Node = { url: '' }
     export let nodes: Node[] = []
     export let network: Network
+    export let isAddingNode: boolean = true
 
-    export let onSuccess = (..._: any[]): void => {}
+    export let onSuccess = (..._: any[]): void => {
+    }
 
     const { accounts } = $wallet
 
     let nodeUrl: string = node?.url || ''
-    let optNodeAuth: NodeAuth = node?.auth || { username: '', password: '', jwt: '', }
+    let optNodeAuth: NodeAuth = node?.auth || { username: '', password: '', jwt: '' }
 
     let addressError = ''
     let addressWarn = ''
@@ -49,11 +52,8 @@
     const constructNodes = (): Node[] => node ? nodes.filter((n) => cleanNodeUrl(node.url) !== cleanNodeUrl(n.url)) : nodes
 
     const cleanNodeFormData = (): void => {
-        nodeUrl = cleanNodeUrl(nodeUrl)
-        optNodeAuth = cleanNodeAuth(optNodeAuth)
-
         let _nodes = constructNodes()
-        const validErr = isNodeUrlValid(_nodes, nodeUrl, $activeProfile.isDeveloperProfile)
+        const validErr = isNodeUrlValid(_nodes, cleanNodeUrl(nodeUrl), $activeProfile.isDeveloperProfile)
         if (validErr) {
             addressError = locale(validErr)
         }
@@ -63,7 +63,7 @@
         if (!id) {
             addressError = locale('error.network.notReachable')
         } else if (id !== network.id) {
-            if($activeProfile.isDeveloperProfile) {
+            if ($activeProfile.isDeveloperProfile) {
                 isNetworkSwitch = true
                 newNetwork = getNetworkById(id)
             } else {
@@ -82,7 +82,7 @@
             if (node) {
                 cleanNodeFormData()
 
-                nodeInfo = await asyncGetNodeInfo($accounts[0].id, nodeUrl, optNodeAuth)
+                nodeInfo = await asyncGetNodeInfo($accounts[0].id, cleanNodeUrl(nodeUrl), cleanNodeAuth(optNodeAuth))
 
                 checkNetworkId(nodeInfo?.nodeinfo?.networkId)
             }
@@ -105,54 +105,19 @@
                         url: nodeUrl,
                         auth: optNodeAuth,
                         network: getNetworkById(nodeInfo.nodeinfo.networkId),
-                        isPrimary: node?.isPrimary || false
-                    }
+                        isPrimary: node?.isPrimary || false,
+                    },
                 )
                 closePopup()
             }
         }
     }
-
-    const handleCancelNetworkSwitchClick = (): void => {
-        isNetworkSwitch = false
-    }
-
-    const handleConfirmNetworkSwitchClick = (): void => {
-        console.log('TODO: Handle switching networks')
-        closePopup()
-    }
 </script>
 
 {#if isNetworkSwitch}
-    <Text type="h4" classes="mb-5">Switch networks</Text>
-    <div class="w-full h-full mb-5">
-        <div class="mb-12">
-            <Text type="p" secondary>
-                You are changing networks to: <Text highlighted classes="inline">{newNetwork.name}</Text>
-            </Text>
-        </div>
-        <div class="flex flex-row justify-between">
-            <div class="relative flex flex-col items-center bg-red-100 dark:bg-red-900 rounded-2xl mb-6 p-3">
-                <div class="bg-red-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
-                    <Icon icon="warning" classes="text-white" />
-                </div>
-                <Text type="p" classes="text-gray dark:text-white ml-2 mt-4 mb-2">
-                    Changing networks resets all accounts, balances, and transaction history of this profile.
-                    Please click "Confirm" to proceed and switch networks.
-                </Text>
-            </div>
-        </div>
-    </div>
-    <div class="flex flex-row justify-between space-x-4 w-full px-8">
-        <Button secondary classes="w-1/2" onClick={handleCancelNetworkSwitchClick} disabled={isBusy}>
-            {locale('actions.cancel')}
-        </Button>
-        <Button warning disabled={!nodeUrl || isBusy} classes="w-1/2" onClick={handleConfirmNetworkSwitchClick}>
-            {locale('actions.confirm')}
-        </Button>
-    </div>
+    <SwitchNetwork {locale} {newNetwork} />
 {:else}
-    <Text type="h4" classes="mb-5">{locale(`popups.node.title${node ? 'Update' : 'Add'}`)}</Text>
+    <Text type="h4" classes="mb-5">{locale(`popups.node.title${isAddingNode ? 'Add' : 'Update'}`)}</Text>
     <div class="w-full h-full">
         <Input bind:value={nodeUrl} placeholder={locale('popups.node.nodeAddress')} error={addressError} disabled={isBusy} autofocus />
         {#if addressWarn}
@@ -173,7 +138,7 @@
             {locale('actions.cancel')}
         </Button>
         <Button disabled={!nodeUrl|| isBusy} classes="w-1/2" onClick={handleAddNodeClick}>
-            {locale(`actions.${node ? 'updateNode' : 'addNode'}`)}
+            {locale(`actions.${isAddingNode ? 'addNode' : 'updateNode'}`)}
         </Button>
     </div>
 {/if}
