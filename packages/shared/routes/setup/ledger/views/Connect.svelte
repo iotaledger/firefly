@@ -8,7 +8,7 @@
         pollLedgerDeviceStatus,
         stopPollingLedgerStatus,
     } from 'shared/lib/ledger'
-    import { getOfficialClientOptions } from 'shared/lib/network'
+    import { getClientOptions } from 'shared/lib/network'
     import { openPopup } from 'shared/lib/popup'
     import { walletSetupType } from 'shared/lib/router'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
@@ -56,7 +56,7 @@
 
         api.createAccount(
             {
-                clientOptions: getOfficialClientOptions(),
+                clientOptions: getClientOptions(),
                 alias: `${locale('general.account')} 1`,
                 signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
             },

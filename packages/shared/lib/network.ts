@@ -16,7 +16,7 @@ export const CHRYSALIS_DEVNET_ID = 'chrysalis-devnet'
 export const CHRYSALIS_DEVNET_NAME = 'Chrysalis Devnet'
 export const CHRYSALIS_DEVNET_BECH32_HRP = 'atoi'
 
-export const getOfficialClientOptions = (): ClientOptions => {
+export const getClientOptions = (): ClientOptions => {
     const { id, type } =
         get(activeProfile)?.settings?.networkConfig.network || getOfficialNetwork(NetworkType.ChrysalisMainnet)
 
@@ -76,7 +76,7 @@ export const getOfficialNetwork = (type: NetworkType): Network => {
             return {
                 id: CHRYSALIS_MAINNET_ID,
                 name: CHRYSALIS_MAINNET_NAME,
-                type,
+                type: type || NetworkType.ChrysalisMainnet,
                 bech32Hrp: CHRYSALIS_MAINNET_BECH32_HRP,
             }
     }
@@ -158,11 +158,10 @@ export const getNetworkById = (id: string): Network => {
                 name: CHRYSALIS_DEVNET_NAME,
                 bech32Hrp: CHRYSALIS_DEVNET_BECH32_HRP,
             }
+        case NetworkType.PrivateNet:
+            return <Network>{ id, type }
         default:
-            return {
-                id,
-                type,
-            } as Network
+            return <Network>{}
     }
 }
 
@@ -173,7 +172,8 @@ const getNetworkType = (id: string): NetworkType => {
         case CHRYSALIS_DEVNET_ID:
             return NetworkType.ChrysalisDevnet
         default:
-            return NetworkType.PrivateNet
+            if (id) return NetworkType.PrivateNet
+            else return undefined
     }
 }
 
@@ -221,7 +221,7 @@ export const isNodeAuthValid = (auth: NodeAuth): boolean => {
 /**
  * Check if a node's URL is valid.
  *
- * @method isNodeUrlValid
+ * @method checkNodeUrlValidity
  *
  * @param {Node[]} nodesList list of current nodes
  * @param {string} newUrl new URL candidate
@@ -229,7 +229,7 @@ export const isNodeAuthValid = (auth: NodeAuth): boolean => {
  *
  * @returns {string | undefined}
  */
-export const isNodeUrlValid = (nodesList: Node[], newUrl: string, allowInsecure: boolean): string | undefined => {
+export const checkNodeUrlValidity = (nodesList: Node[], newUrl: string, allowInsecure: boolean): string | undefined => {
     // Check if URL is valid
     if (!isValidUrl(newUrl)) {
         return 'error.node.invalid'
@@ -297,7 +297,18 @@ export const updateClientOptions = (config: NetworkConfig): void => {
     })
 }
 
+/**
+ * Determine the appropriate node candidates from a given network configuration.
+ *
+ * @method getNodeCandiates
+ *
+ * @param {NetworkConfig} config
+ *
+ * @returns {Node[]}
+ */
 export const getNodeCandidates = (config: NetworkConfig): Node[] => {
+    if (!config) return []
+
     const useAutomaticSelection = config.nodes.length === 0 || config.automaticNodeSelection
 
     let nodeCandidates
@@ -324,7 +335,19 @@ const addOfficialNodes = (networkType: NetworkType, nodes: Node[]): Node[] => {
     return [...officialNodes, ...nonOfficialNodes]
 }
 
+/**
+ * Ensures that a list of nodes contains only one primary node. If none exist, one will
+ * be selected randomly.
+ *
+ * @method ensureSinglePrimaryNode
+ *
+ * @param {Node[]} nodes
+ *
+ * @returns {Node[]}
+ */
 export const ensureSinglePrimaryNode = (nodes: Node[]): Node[] => {
+    if (!nodes || !nodes.length) return nodes
+
     const numPrimaryNodes = nodes.filter((n) => n.isPrimary).length
     if (numPrimaryNodes === 0) {
         const randIdx = Math.floor(Math.random() * nodes.length)

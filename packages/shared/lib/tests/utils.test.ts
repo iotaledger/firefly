@@ -7,11 +7,13 @@ type Simple = {
     flag2?: boolean
 }
 
-type Data = {
-    path: string
-    simple1?: Simple
-    simple2?: Simple
-}
+type Data =
+    | {
+          path: string
+          simple1?: Simple
+          simple2?: Simple
+      }
+    | Simple[]
 
 type Complex = {
     id: string
@@ -93,6 +95,19 @@ describe('File: utils.ts', () => {
                     simple2: { prop2: 'PROP', flag2: false },
                 },
             }
+            const o5: Complex = {
+                id: 'Object 05',
+                data: [
+                    {
+                        prop1: 'PROP',
+                        flag2: true,
+                    },
+                    {
+                        prop2: 'PROP',
+                        flag1: true,
+                    },
+                ],
+            }
 
             expect(migrateObjects(o1, o2)).toEqual(<Complex>{
                 id: 'Object 01',
@@ -109,6 +124,10 @@ describe('File: utils.ts', () => {
                     simple1: { flag1: true },
                     simple2: { prop2: 'PROP', flag2: false },
                 },
+            })
+            expect(migrateObjects(o4, o5)).toEqual(<Complex>{
+                id: 'Object 04',
+                data: o5.data,
             })
         })
     })

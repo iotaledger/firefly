@@ -5,7 +5,7 @@
     import {
         cleanNodeAuth,
         getNetworkById,
-        isNodeUrlValid,
+        checkNodeUrlValidity,
     } from 'shared/lib/network'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
@@ -54,7 +54,7 @@
 
     const cleanNodeFormData = (): void => {
         const _nodes = constructNodes()
-        const validErr = isNodeUrlValid(_nodes, cleanNodeUrl(nodeUrl), $activeProfile.isDeveloperProfile)
+        const validErr = checkNodeUrlValidity(_nodes, cleanNodeUrl(nodeUrl), $activeProfile.isDeveloperProfile)
         if (validErr) {
             addressError = locale(validErr)
         }
