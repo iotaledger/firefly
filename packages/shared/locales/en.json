@@ -631,7 +631,7 @@
         },
         "exportTransactionHistory": {
             "title": "Export transaction history",
-            "body": "Export your transaction history for all accounts consectutively within this profile. Exports will be in a CSV format.",
+            "body": "Export your transaction history for all accounts consecutively within this profile. Exports will be in a CSV format.",
             "profileName": "Profile name:",
             "numberOfAccounts": "Number of accounts:",
             "typePassword": "Type your password to allow exporting"
