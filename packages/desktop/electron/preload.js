@@ -98,7 +98,7 @@ try {
                 .invoke('show-save-dialog', {
                     properties: ['createDirectory', 'showOverwriteConfirmation'],
                     defaultPath,
-                    filters: [{ name: 'Export Files', extensions: ['csv'] }],
+                    filters: [{ name: 'CSV Files', extensions: ['csv'] }],
                 })
                 .then((result) => {
                     if (result.canceled) {
