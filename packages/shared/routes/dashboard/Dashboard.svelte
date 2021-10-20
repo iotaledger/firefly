@@ -20,6 +20,7 @@
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
+    import { clearPollNetworkInterval, pollNetworkStatus } from '../../lib/networkStatus'
 
     export let locale: Locale
 
@@ -37,6 +38,14 @@
     let fundsSoonNotificationId
 
     const LEDGER_STATUS_POLL_INTERVAL = 2000
+
+    const unsubscribeAccountsLoaded = accountsLoaded.subscribe((val) => {
+        if (val) {
+            void pollNetworkStatus()
+        } else {
+            clearPollNetworkInterval()
+        }
+    })
 
     // TODO: add missing unsubscribe to onDestroy
     ongoingSnapshot.subscribe((os) => {
@@ -97,6 +106,8 @@
     })
 
     onDestroy(() => {
+        unsubscribeAccountsLoaded()
+
         if (fundsSoonNotificationId) {
             removeDisplayNotification(fundsSoonNotificationId)
         }

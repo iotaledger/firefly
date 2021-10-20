@@ -33,16 +33,6 @@ export function clearPollNetworkInterval(): void {
     clearInterval(pollInterval)
 }
 
-const { accounts, accountsLoaded } = get(wallet)
-
-const unsubscribe = accountsLoaded.subscribe((val) => {
-    if (val) {
-        void pollNetworkStatus()
-    } else {
-        clearPollNetworkInterval()
-    }
-})
-
 /**
  * Update the store variable for the status of the network that is currently
  * in use.
@@ -54,7 +44,7 @@ const unsubscribe = accountsLoaded.subscribe((val) => {
 export async function updateNetworkStatus(): Promise<void> {
     let updated = false
 
-    const accs = get(accounts)
+    const accs = get(get(wallet).accounts)
 
     if (accs.length > 0) {
         const { networkConfig } = get(activeProfile)?.settings
@@ -118,15 +108,4 @@ export async function updateNetworkStatus(): Promise<void> {
             health: 0,
         })
     }
-}
-
-/**
- * Cleans up any subscriptions or the like to help prevent memory leaks.
- *
- * @method cleanupNetworkStatus
- *
- * @returns {void}
- */
-export const cleanupNetworkStatus = (): void => {
-    unsubscribe()
 }

@@ -62,11 +62,13 @@
             resetWallet()
             updateClientOptions(newConfig)
             updateProfile('settings.networkConfig', newConfig)
+
+            await logout()
         } catch (err) {
+            isSwitchingNetwork = false
+
             console.error(err)
         }
-
-        await logout()
     }
 </script>
 

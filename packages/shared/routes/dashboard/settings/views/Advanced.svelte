@@ -28,8 +28,10 @@
 
     const networkConfig: NetworkConfig = $activeProfile?.settings.networkConfig || getOfficialNetworkConfig(NetworkType.ChrysalisMainnet)
 
-    ensureOnePrimaryNode()
-    ensureValidNodeSelection()
+    if (networkConfig.nodes.length !== 0) {
+        ensureOnePrimaryNode()
+        ensureValidNodeSelection()
+    }
 
     $: {
         updateClientOptions(networkConfig)
