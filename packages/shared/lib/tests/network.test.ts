@@ -1,7 +1,6 @@
 import {
     checkNodeUrlValidity,
     cleanNodeAuth,
-    cleanNodeAuthOfNode,
     ensureSinglePrimaryNode,
     getClientOptions,
     getNetworkById,

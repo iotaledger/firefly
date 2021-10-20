@@ -21,6 +21,8 @@
     } from 'shared/lib/profile'
     import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
     import { logout } from 'shared/lib/app'
+    import { showAppNotification } from '../../lib/notifications'
+    import { ErrorType } from '../../lib/typings/events'
 
     export let locale: Locale
 
@@ -68,6 +70,25 @@
             await logout()
         } catch (err) {
             isSwitchingNetwork = false
+
+            /**
+             * NOTE: It is necessary to override the default locale paths
+             * for some wallet.rs errors as they're more specific in the
+             * context of network configuration.
+             */
+            let error
+            switch(err?.type) {
+                case ErrorType.AccountNotEmpty:
+                    error = 'error.network.nonEmptyAccount'
+                    break
+                default:
+                    error = err
+                    break
+            }
+            showAppNotification({
+                type: 'error',
+                message: locale(error?.error || error)
+            })
 
             console.error(err)
         }

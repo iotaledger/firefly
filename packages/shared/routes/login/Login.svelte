@@ -3,7 +3,7 @@
     import { Transition } from 'shared/components'
     import { SelectProfile, EnterPin } from './views/'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { migrateProfile } from '../../lib/profile'
+    import { migrateProfile } from 'shared/lib/profile'
 
     export let locale: Locale
 

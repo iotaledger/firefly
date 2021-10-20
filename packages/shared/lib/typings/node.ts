@@ -3,7 +3,7 @@ import type { Network } from './network'
 export interface NodeAuth {
     jwt?: string
     username?: string
-    password: string
+    password?: string
 }
 
 export interface Node {

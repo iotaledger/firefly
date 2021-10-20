@@ -55,6 +55,7 @@
         WalletAccount,
     } from 'shared/lib/typings/wallet'
     import type { MigratedTransaction } from 'shared/lib/typings/profile'
+    import { getClientOptions } from 'shared/lib/network'
 
     export let locale: Locale
 
@@ -369,7 +370,6 @@
     function onCreateAccount(alias, completeCallback) {
         const _create = () => {
             const reuseAccountId = findReuseAccount()
-            const { networkConfig } = $activeProfile?.settings
             if (reuseAccountId) {
                 api.setAlias(reuseAccountId, alias, {
                     onSuccess() {
@@ -383,10 +383,7 @@
                                         account,
                                         {
                                             alias,
-                                            clientOptions: {
-                                                ...networkConfig,
-                                                network: networkConfig.network.id,
-                                            }
+                                            clientOptions: getClientOptions(),
                                         }
                                     )
                                 }
@@ -431,10 +428,7 @@
                     {
                         alias,
                         signerType: $accounts[0]?.signerType,
-                        clientOptions: $accounts[0]?.clientOptions || {
-                            ...networkConfig,
-                            network: networkConfig.network.id,
-                        },
+                        clientOptions: $accounts[0]?.clientOptions || getClientOptions(),
                     },
                     {
                         onSuccess(createAccountResponse) {

@@ -986,7 +986,8 @@
         "network": {
             "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
             "notReachable": "The network ID for this node could not be retrieved, unable to add node.",
-            "badNodes": "Unable to connect to the network with current node configuration."
+            "badNodes": "Unable to connect to the network with current node configuration.",
+            "nonEmptyAccount": "You must transfer all balances before switching networks."
         },
         "global": {
             "generic": "Something went wrong."
