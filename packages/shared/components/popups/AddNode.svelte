@@ -93,37 +93,42 @@
 
             }
         } catch (err) {
+            isBusy = false
             isSuccess = false
 
             showAppNotification({
                 type: 'error',
                 message: locale(err?.error),
             })
-        } finally {
-            if (!addressError) {
-                if (!isNetworkSwitch) {
-                    await updateNetworkStatus(get($wallet.accounts)[0]?.id, <Node>{ url: nodeUrl, auth: optNodeAuth, isPrimary: node?.isPrimary })
-                        .then(() => {
-                            isBusy = false
 
-                            onSuccess(
-                                false,
-                                {
-                                    url: nodeUrl,
-                                    auth: optNodeAuth,
-                                    network: getNetworkById(nodeInfo?.nodeinfo.networkId),
-                                    isPrimary: node?.isPrimary || false,
-                                },
-                            )
-                            closePopup()
-                        })
-                        .catch((err) => {
-                            isBusy = false
-                            return
-                        })
-                }
+            return
+        }
+
+        if (!addressError) {
+            if (!isNetworkSwitch) {
+                await updateNetworkStatus(get($wallet.accounts)[0]?.id, <Node>{ url: nodeUrl, auth: optNodeAuth, isPrimary: node?.isPrimary })
+                    .then(() => {
+                        isBusy = false
+
+                        onSuccess(
+                            false,
+                            {
+                                url: nodeUrl,
+                                auth: optNodeAuth,
+                                network: getNetworkById(nodeInfo?.nodeinfo.networkId),
+                                isPrimary: node?.isPrimary || false,
+                            },
+                        )
+                        closePopup()
+                    })
+                    .catch((err) => {
+                        isBusy = false
+                        return
+                    })
             }
         }
+
+        isBusy = false
     }
 </script>
 
