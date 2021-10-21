@@ -41,6 +41,13 @@
     }
 
     const handleConfirmNetworkSwitchClick = async (): Promise<void> => {
+        /**
+         * NOTE: This check is made to prevent simultaneous requests to
+         * delete an account being made (otherwise will return RecordNotFound
+         * error from wallet.rs).
+         */
+        if (isSwitchingNetwork) return
+
         isSwitchingNetwork = true
 
         if ($isSoftwareProfile && $isStrongholdLocked) {
@@ -61,7 +68,7 @@
 
         try {
             await asyncRemoveWalletAccounts(get($wallet.accounts).map((a) => a.id))
-            await asyncCreateAccount()
+            await asyncCreateAccount(`${locale('general.account')} 1`)
 
             resetWallet()
             updateClientOptions(newConfig)

@@ -7,6 +7,7 @@ import type {
     Account as BaseAccount,
     AccountToCreate,
     Balance,
+    SignerType,
     SyncAccountOptions,
     SyncedAccount,
 } from './typings/account'
@@ -24,14 +25,13 @@ import type {
     TransferProgressEventPayload,
     TransferState,
 } from './typings/events'
-import type { Payload, Transaction } from './typings/message'
+import type { Message, Payload, Transaction } from './typings/message'
 import type { AddressInput, MigrationBundle, MigrationData, SendMigrationBundleResponse } from './typings/migration'
 import { formatUnitBestMatch } from './units'
 import { get, writable } from 'svelte/store'
 import { openPopup } from './popup'
 import type { ClientOptions } from './typings/client'
 import type { LedgerStatus } from './typings/ledger'
-import type { Message } from './typings/message'
 import type { NodeAuth, NodeInfo } from './typings/node'
 import { SetupType } from './typings/routes'
 import type {
@@ -52,6 +52,7 @@ import { CurrencyTypes } from './typings/currency'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
 import { HistoryDataProps, PriceData } from './typings/market'
 import { ProfileType } from './typings/profile'
+import { getClientOptions } from './network'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -560,22 +561,26 @@ export const asyncRestoreBackup = (importFilePath: string, password: string): Pr
         })
     })
 
-export const asyncCreateAccount = (): Promise<void> =>
-    new Promise<void>((resolve, reject) => {
-        const { networkConfig } = get(activeProfile)?.settings
-
+export const asyncCreateAccount = (alias: string): Promise<WalletAccount> =>
+    new Promise<WalletAccount>((resolve, reject) => {
+        const accounts = get(get(wallet)?.accounts)
         api.createAccount(
             {
-                signerType: { type: 'Stronghold' },
-                clientOptions: {
-                    ...networkConfig,
-                    network: networkConfig.network.id,
-                },
-                alias: `${localize('general.account')} 1`,
+                alias,
+                signerType: getSignerType(get(activeProfile)?.type),
+                clientOptions: accounts.length ? accounts[0]?.clientOptions : getClientOptions(),
             },
             {
-                onSuccess() {
-                    resolve()
+                onSuccess(response) {
+                    const preparedAccount = prepareAccountInfo(response.payload, {
+                        balance: 0,
+                        incoming: 0,
+                        outgoing: 0,
+                        depositAddress: response.payload.addresses[0].address,
+                    }) as WalletAccount
+                    get(wallet)?.accounts.update((_accounts) => [..._accounts, preparedAccount])
+
+                    resolve(preparedAccount)
                 },
                 onError(err) {
                     reject(err)
@@ -583,6 +588,19 @@ export const asyncCreateAccount = (): Promise<void> =>
             }
         )
     })
+
+const getSignerType = (profileType: ProfileType): SignerType | undefined => {
+    if (!profileType) return undefined
+
+    switch (profileType) {
+        case ProfileType.Software:
+            return { type: 'Stronghold' }
+        case ProfileType.Ledger:
+            return { type: 'LedgerNano' }
+        case ProfileType.LedgerSimulator:
+            return { type: 'LedgerNanoSimulator' }
+    }
+}
 
 export const asyncRemoveWalletAccount = (accountId: string): Promise<void> =>
     new Promise<void>((resolve, reject) => {
@@ -658,6 +676,31 @@ export const asyncSyncAccounts = (
                 } else {
                     reject(err)
                 }
+            },
+        })
+    })
+
+export const asyncSyncAccountOffline = (account: WalletAccount): Promise<void> =>
+    new Promise((resolve) => {
+        api.syncAccount(account.id, {
+            onSuccess(response) {
+                getAccountMeta(account.id, (err, meta) => {
+                    if (!err) {
+                        const _account = prepareAccountInfo(account, meta) as WalletAccount
+                        get(wallet)?.accounts.update((_accounts) =>
+                            _accounts.map((a) => (a.id === _account.id ? _account : a))
+                        )
+                        updateProfile(
+                            'hiddenAccounts',
+                            (get(activeProfile)?.hiddenAccounts || []).filter((id) => id !== _account.id)
+                        )
+                    }
+
+                    resolve()
+                })
+            },
+            onError(err) {
+                resolve()
             },
         })
     })
