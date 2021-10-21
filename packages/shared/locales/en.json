@@ -552,7 +552,7 @@
             "titleInfo": "Node info",
             "addingNode": "Adding node",
             "updatingNode": "Updating node",
-            "loadingNodeInfo": "Loading node",
+            "loadingNodeInfo": "Loading node info",
             "nodeAddress": "Node address",
             "optionalUsername": "Username (optional)",
             "optionalPassword": "Password (optional)",

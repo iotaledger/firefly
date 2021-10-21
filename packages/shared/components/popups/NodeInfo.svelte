@@ -62,14 +62,12 @@
     <Text type="h4">{locale('popups.node.titleInfo')}</Text>
 </div>
 {#if nodeContent}
-<Text type="pre" secondary>{nodeContent}</Text>
+    <Text type="pre" secondary>{nodeContent}</Text>
+{:else}
+    <Spinner busy={!nodeContent} message={locale('popups.node.loadingNodeInfo')} classes="justify-center" />
 {/if}
 <div class="flex w-full justify-center pt-8">
     <Button classes="w-1/2" onClick={handleCopyNodeInfoClick} disabled={!nodeContent}>
-        {#if nodeContent}
-            {locale('actions.copy')}
-        {:else}
-            <Spinner busy={!nodeContent} message={locale('popups.node.loadingNodeInfo')} classes="justify-center" />
-        {/if}
+        {locale('actions.copy')}
     </Button>
 </div>
