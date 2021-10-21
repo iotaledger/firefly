@@ -4,6 +4,7 @@ import { cleanNodeAuth, getOfficialNodes, updateClientOptions } from './network'
 import type { NetworkStatus } from './typings/network'
 import { activeProfile } from './profile'
 import { NetworkStatusHealthText } from './typings/network'
+import type { Node } from './typings/node'
 
 export const NETWORK_HEALTH_COLORS = {
     0: 'red',
@@ -24,24 +25,16 @@ let pollInterval
  * Poll the network status at an interval.
  */
 export async function pollNetworkStatus(): Promise<void> {
-    await updateNetworkStatus()
+    await pollNetworkStatusInternal()
     /* eslint-disable @typescript-eslint/no-misused-promises */
-    pollInterval = setInterval(async () => updateNetworkStatus(), DEFAULT_NETWORK_STATUS_POLL_INTERVAL)
+    pollInterval = setInterval(async () => pollNetworkStatusInternal(), DEFAULT_NETWORK_STATUS_POLL_INTERVAL)
 }
 
 export function clearPollNetworkInterval(): void {
     clearInterval(pollInterval)
 }
 
-/**
- * Update the store variable for the status of the network that is currently
- * in use.
- *
- * @method fetchNetworkStatus
- *
- * @returns {Promise<void>}
- */
-export async function updateNetworkStatus(): Promise<void> {
+async function pollNetworkStatusInternal(): Promise<void> {
     let updated = false
 
     const accs = get(get(wallet).accounts)
@@ -64,36 +57,7 @@ export async function updateNetworkStatus(): Promise<void> {
         }
 
         try {
-            const response = await asyncGetNodeInfo(account0.id, node?.url, cleanNodeAuth(node?.auth))
-            const timeSinceLastMsInMinutes = (Date.now() - response.nodeinfo.latestMilestoneTimestamp * 1000) / 60000
-
-            let health = 0 // bad
-            if (timeSinceLastMsInMinutes < 2) {
-                health = 2 // good
-            } else if (timeSinceLastMsInMinutes < 5) {
-                health = 1 // degraded
-            }
-
-            let healthText: NetworkStatusHealthText
-            switch (health) {
-                case 2:
-                    healthText = NetworkStatusHealthText.Operational
-                    break
-                case 1:
-                    healthText = NetworkStatusHealthText.Degraded
-                    break
-                case 0:
-                default:
-                    healthText = NetworkStatusHealthText.Down
-                    break
-            }
-
-            networkStatus.set({
-                messagesPerSecond: response.nodeinfo.messagesPerSecond,
-                referencedRate: response.nodeinfo.referencedRate,
-                health,
-                healthText,
-            })
+            await updateNetworkStatus(account0.id, node)
 
             updated = true
         } catch (err) {
@@ -108,4 +72,47 @@ export async function updateNetworkStatus(): Promise<void> {
             health: 0,
         })
     }
+}
+
+/**
+ * Query the network and update the store for its status.
+ *
+ * @method updateNetworkStatus
+ *
+ * @param {string} accountId
+ * @param {Node} node
+ *
+ * @returns {Promise<void>}
+ */
+export const updateNetworkStatus = async (accountId: string, node: Node): Promise<void> => {
+    const response = await asyncGetNodeInfo(accountId, node?.url, cleanNodeAuth(node?.auth))
+    const timeSinceLastMsInMinutes = (Date.now() - response.nodeinfo.latestMilestoneTimestamp * 1000) / 60000
+
+    let health = 0 // bad
+    if (timeSinceLastMsInMinutes < 2) {
+        health = 2 // good
+    } else if (timeSinceLastMsInMinutes < 5) {
+        health = 1 // degraded
+    }
+
+    let healthText: NetworkStatusHealthText
+    switch (health) {
+        case 2:
+            healthText = NetworkStatusHealthText.Operational
+            break
+        case 1:
+            healthText = NetworkStatusHealthText.Degraded
+            break
+        case 0:
+        default:
+            healthText = NetworkStatusHealthText.Down
+            break
+    }
+
+    networkStatus.set({
+        messagesPerSecond: response.nodeinfo.messagesPerSecond,
+        referencedRate: response.nodeinfo.referencedRate,
+        health,
+        healthText,
+    })
 }

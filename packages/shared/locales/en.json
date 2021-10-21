@@ -549,6 +549,8 @@
             "titleRemove": "Remove a node",
             "titleRemoveAll": "Remove all nodes",
             "titleDetails": "Node details",
+            "addingNode": "Adding node",
+            "updatingNode": "Updating node",
             "nodeAddress": "Node address",
             "optionalUsername": "Username (optional)",
             "optionalPassword": "Password (optional)",

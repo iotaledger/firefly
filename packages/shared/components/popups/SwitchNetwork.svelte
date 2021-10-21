@@ -115,7 +115,7 @@
     </div>
 </div>
 {#if showPasswordInput}
-<div class="flex w-full flex-row flex-wrap mt-2 mb-9 justify-between">
+<form id="stronghold-password-form" class="flex w-full flex-row flex-wrap mt-2 mb-9 justify-between">
         <Text type="p" secondary classes="mb-3">
             {locale('popups.switchNetwork.typePassword')}
             <Text highlighted classes="inline">{network.name}</Text>
@@ -130,17 +130,17 @@
             autofocus
             submitHandler={handleConfirmNetworkSwitchClick}
             disabled={isSwitchingNetwork} />
-</div>
+</form>
 {/if}
 <div class="flex flex-row justify-between space-x-4 w-full px-8">
     <Button secondary classes="w-1/2" onClick={handleCancelNetworkSwitchClick} disabled={isSwitchingNetwork}>
         {locale('actions.cancel')}
     </Button>
-    <Button warning classes="w-1/2" onClick={handleConfirmNetworkSwitchClick}>
-    {#if isSwitchingNetwork}
-        <Spinner busy message={locale('popups.switchNetwork.switchingNetwork')} classes="justify-center" />
-    {:else}
-        {locale('actions.confirm')}
-    {/if}
+    <Button warning type="submit" form={showPasswordInput ? 'stronghold-password-form' : ''} classes="w-1/2" onClick={handleConfirmNetworkSwitchClick}>
+        {#if isSwitchingNetwork}
+            <Spinner busy={isSwitchingNetwork} message={locale('popups.switchNetwork.switchingNetwork')} classes="justify-center" />
+        {:else}
+            {locale('actions.confirm')}
+        {/if}
     </Button>
 </div>
