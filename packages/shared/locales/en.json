@@ -394,7 +394,8 @@
                 "primaryNode": "Primary node",
                 "excludeNode": "Exclude node",
                 "includeNode": "Include node",
-                "viewDetails": "View details",
+                "editDetails": "Edit details",
+                "viewInfo": "View info",
                 "setAsPrimary": "Set as primary",
                 "removeNode": "Remove node",
                 "includeOfficialNodeList": "Include official node list",
@@ -486,8 +487,7 @@
                 "networkDown": "Network Disconnected",
                 "status": "Status",
                 "messagesPerSecond": "Messages per second",
-                "referencedRate": "Referenced rate",
-                "id": "Network ID"
+                "referencedRate": "Referenced rate"
             },
             "profileModal": {
                 "allSettings": "All settings",
@@ -549,15 +549,27 @@
             "titleRemove": "Remove a node",
             "titleRemoveAll": "Remove all nodes",
             "titleDetails": "Node details",
+            "titleInfo": "Node info",
             "addingNode": "Adding node",
             "updatingNode": "Updating node",
+            "loadingNodeInfo": "Loading node",
             "nodeAddress": "Node address",
             "optionalUsername": "Username (optional)",
             "optionalPassword": "Password (optional)",
             "optionalJwt": "JSON web token (optional)",
             "setAsPrimaryNode": "Set as primary node",
             "removeConfirmation": "Are you sure you want to remove this node?",
-            "removeAllConfirmation": "Are you sure you want to remove all nodes?"
+            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "info": {
+                "software": "Software",
+                "networkId": "Network ID",
+                "bech32HRP": "Bech32 HRP",
+                "features": "Features",
+                "confirmedMilestoneIndex": "Confirmed milestone index",
+                "pruningIndex": "Pruning index",
+                "messagesPerSecond": "Messages per second",
+                "referencedRate": "Referenced rate"
+            }
         },
         "switchNetwork": {
             "title": "Switch network",

@@ -19,7 +19,6 @@
     import { Node } from 'shared/lib/typings/node'
     import { NetworkConfig, NetworkStatusHealthText, NetworkType } from 'shared/lib/typings/network'
     import { NETWORK_HEALTH_COLORS, networkStatus } from 'shared/lib/networkStatus'
-    import { showAppNotification } from 'shared/lib/notifications'
 
     export let locale: Locale
 
@@ -136,7 +135,7 @@
         })
     }
 
-    function handlePropertiesNodeClick(node) {
+    function handleEditNodeDetailsClick(node) {
         openPopup({
             type: 'addNode',
             props: {
@@ -163,7 +162,16 @@
         })
     }
 
-    function handleRemoveNodeClick(node) {
+    function handleViewNodeInfoClick(node: Node) {
+        openPopup({
+            type: 'nodeInfo',
+            props: {
+                node
+            }
+        })
+    }
+
+    function handleRemoveNodeClick(node: Node) {
         openPopup({
             type: 'removeNode',
             props: {
@@ -292,15 +300,23 @@
                                     class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20">
                                     <Text smaller>{locale('views.settings.configureNodeList.setAsPrimary')}</Text>
                                 </button>
+                                <button
+                                    on:click={() => {
+                                        handleViewNodeInfoClick(nodeContextMenu)
+                                        nodeContextMenu = undefined
+                                    }}
+                                    class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20">
+                                    <Text smaller>{locale('views.settings.configureNodeList.viewInfo')}</Text>
+                                </button>
                             {/if}
                             {#if !getOfficialNodes(networkConfig.network.type).map((n) => n.url).includes(nodeContextMenu.url)}
                                 <button
                                     on:click={() => {
-                                        handlePropertiesNodeClick(nodeContextMenu)
+                                        handleEditNodeDetailsClick(nodeContextMenu)
                                         nodeContextMenu = undefined
                                     }}
                                     class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20">
-                                    <Text smaller>{locale('views.settings.configureNodeList.viewDetails')}</Text>
+                                    <Text smaller>{locale('views.settings.configureNodeList.editDetails')}</Text>
                                 </button>
                             {/if}
                             {#if nodeContextMenu.url !== networkConfig.nodes.find((n) => n.isPrimary)?.url}

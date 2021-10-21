@@ -107,6 +107,7 @@ const getOfficialNodeUrls = (networkType: NetworkType): string[] => {
 
 const getOfficialNode = (type: NetworkType, url: string): Node => ({
     url,
+    auth: { username: '', password: '' },
     network: getOfficialNetwork(type),
     isPrimary: false,
     isDisabled: false,
