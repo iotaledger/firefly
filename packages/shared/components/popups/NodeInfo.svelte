@@ -7,7 +7,8 @@
     import { closePopup } from 'shared/lib/popup'
     import { asyncGetNodeInfo, wallet } from 'shared/lib/wallet'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { setClipboard } from '../../lib/utils'
+    import { setClipboard } from 'shared/lib/utils'
+    import { cleanNodeAuth } from 'shared/lib/network'
 
     export let locale: Locale
     export let node: Node = { url: '', }
@@ -16,7 +17,7 @@
 
     onMount(() => {
         const accounts = get($wallet.accounts)
-        asyncGetNodeInfo(accounts[0]?.id, node?.url, node?.auth)
+        asyncGetNodeInfo(accounts[0]?.id, node?.url, cleanNodeAuth(node?.auth))
             .then((nodeInfo) => {
                 nodeContent = combineNodeInfo(nodeInfo)
             })
@@ -38,7 +39,8 @@
                 val = `${nodeInfo?.nodeinfo['name']} ${nodeInfo?.nodeinfo['version']}`
                 keyLocale = 'popups.node.info.software'
             } else if (k === 'features') {
-                val = nodeInfo?.nodeinfo[k]?.join(', ')
+                const hasFeatures = nodeInfo?.nodeinfo[k]?.length
+                val = hasFeatures ? nodeInfo?.nodeinfo[k]?.join(', ') : locale('general.none')
             } else if (k === 'messagesPerSecond' || k === 'referencedRate') {
                 val = nodeInfo?.nodeinfo[k]?.toFixed(2)
             } else {

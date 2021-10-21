@@ -904,7 +904,8 @@
         "legacyNetwork": "Legacy Network",
         "capsLock": "Caps Lock is on",
         "version": "Version {version}",
-        "unknown": "Unknown"
+        "unknown": "Unknown",
+        "none": "None"
     },
     "dates": {
         "today": "Today",
