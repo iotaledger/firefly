@@ -330,11 +330,11 @@
                 "description": "Displays the status of the node you are currently connected to."
             },
             "exportStronghold": {
-                "title": "Export Backup",
+                "title": "Export backup",
                 "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
             },
             "appLock": {
-                "title": "Automatic Lock",
+                "title": "Automatic lock",
                 "description": "Inactivity time before your wallets lock and you are logged out",
                 "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
                 "durationHour": "{time, plural, one {1 hour} other {# hours}}"
@@ -521,7 +521,7 @@
             "saving": "Saving..."
         },
         "deleteAccount": {
-            "title": "Delete {name}?",c
+            "title": "Delete {name}?",
             "body": "This wallet has no transaction history. It can safely be deleted.",
             "typePassword": "Type your wallet password to confirm.",
             "hideAccount": "Delete wallet",

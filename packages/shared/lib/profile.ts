@@ -80,7 +80,9 @@ const buildProfile = (profileName: string, isDeveloperProfile: boolean): Profile
     isDeveloperProfile,
     settings: {
         currency: AvailableExchangeRates.USD,
-        networkConfig: getOfficialNetworkConfig(NetworkType.ChrysalisMainnet),
+        networkConfig: getOfficialNetworkConfig(
+            isDeveloperProfile ? NetworkType.ChrysalisDevnet : NetworkType.ChrysalisMainnet
+        ),
         lockScreenTimeout: 5,
         chartSelectors: {
             currency: AvailableExchangeRates.USD,
