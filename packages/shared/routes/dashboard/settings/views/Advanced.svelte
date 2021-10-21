@@ -215,7 +215,7 @@
 <div>
     {#if $loggedIn}
         <section id="networkConfiguration">
-            <Text type="h4" classes="mb-3">{locale('views.settings.networkConfiguration.title')}</Text>
+            <Text type="h4" classes="mb-3">{locale('views.settings.networkConfiguration.title2')}</Text>
             <Text type="p" secondary classes="mb-3">{locale(`views.settings.networkConfiguration.description.${$activeProfile.isDeveloperProfile ? 'dev' : 'nonDev'}`)}</Text>
             <div class="flex flex-row justify-between w-3/4">
                 <div>

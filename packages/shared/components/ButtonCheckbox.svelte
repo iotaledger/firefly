@@ -23,9 +23,9 @@
     style="height: 72px">
     <div class="flex flex-row items-center">
         <Icon {icon} classes="text-blue-500" />
-        <Text smaller classes="ml-3">
+        <Text smaller classes="ml-3 mr-3">
             <slot />
         </Text>
     </div>
-    <Checkbox bind:checked={value} classes="ml-1 mb-0 pointer-events-none" tabindex={-1} />
+    <Checkbox bind:checked={value} classes="mb-0 pointer-events-none" tabindex={-1} />
 </button>
