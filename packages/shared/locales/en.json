@@ -24,7 +24,7 @@
             "addMore": "You can add more profiles later.",
             "developer": {
                 "label": "Developer profile",
-                "info": "Connect to other networks, use HTTP, and more"
+                "info": "Connect to testnets and private networks"
             }
         },
         "setup": {
@@ -521,7 +521,7 @@
             "saving": "Saving..."
         },
         "deleteAccount": {
-            "title": "Delete {name}?",
+            "title": "Delete {name}?",c
             "body": "This wallet has no transaction history. It can safely be deleted.",
             "typePassword": "Type your wallet password to confirm.",
             "hideAccount": "Delete wallet",
@@ -559,7 +559,7 @@
         "switchNetwork": {
             "title": "Switch network",
             "newNetwork": "New network",
-            "resetWarning": "Changing networks will reset all accounts, balances, and transaction history for this profile.",
+            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
             "switchingNetwork": "Switching network",
             "typePassword": "Type your password to switch to:"
         },
@@ -923,7 +923,7 @@
                     "success": "Payment details added from IOTA link"
                 }
             }
-        }   
+        }
     },
     "error": {
         "profile": {
