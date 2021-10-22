@@ -371,15 +371,29 @@
         }
 
         if (!amountError && !addressError && !toError) {
-            let internal = selectedSendType === SEND_TYPE.INTERNAL
+            // If this is an external send but the dest address is in one of
+            // the other accounts, detect it to display the right popup
+            // but keep the tx external to keep the original entered address
+            const internal = selectedSendType === SEND_TYPE.INTERNAL
+            let accountAlias = internal ? to.alias : undefined
+
+            if (!internal) {
+                for (const acc of $accounts) {
+                    const internalAddress = acc.addresses.find((a) => a.address === address)
+                    if (internalAddress) {
+                        accountAlias = acc.alias
+                        break
+                    }
+                }
+            }
 
             openPopup({
                 type: 'transaction',
                 props: {
-                    internal,
+                    internal: internal || accountAlias,
                     amount: amountRaw,
                     unit,
-                    to: internal ? to.alias : address,
+                    to: accountAlias ?? address,
                     onConfirm: () => triggerSend(internal),
                 },
             })
