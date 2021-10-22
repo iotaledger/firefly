@@ -253,9 +253,10 @@
                             completeCount++
 
                             if (completeCount === accountsResponse.payload.length) {
-                                accounts.update((accounts) =>
-                                    [...accounts, ...newAccounts].sort((a, b) => a.index - b.index)
-                                )
+                                accounts.update((_accounts) => _accounts.map((a) => {
+                                    const _account = newAccounts.find((_a) => _a.id === a.id)
+                                    return _account ? _account : a
+                                }).sort((a, b) => a.index - b.index))
                                 processMigratedTransactions(
                                     payloadAccount.id,
                                     payloadAccount.messages,

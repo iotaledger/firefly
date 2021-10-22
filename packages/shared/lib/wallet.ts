@@ -561,12 +561,12 @@ export const asyncRestoreBackup = (importFilePath: string, password: string): Pr
         })
     })
 
-export const asyncCreateAccount = (alias: string): Promise<WalletAccount> =>
+export const asyncCreateAccount = (alias?: string): Promise<WalletAccount> =>
     new Promise<WalletAccount>((resolve, reject) => {
         const accounts = get(get(wallet)?.accounts)
         api.createAccount(
             {
-                alias,
+                alias: alias || `${localize('general.account')} ${accounts.length + 1}`,
                 signerType: getSignerType(get(activeProfile)?.type),
                 clientOptions: accounts.length ? accounts[0]?.clientOptions : getClientOptions(),
             },
