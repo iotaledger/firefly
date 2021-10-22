@@ -165,7 +165,7 @@
             showAppNotification({ type: 'warning', message: locale('notifications.deepLinkingRequest.notEnabled') })
         } else {
             if ($accounts && $accounts.length > 0) {
-                let addressPrefix = $accounts[0].depositAddress.split('1')[0]
+                const addressPrefix = $accounts[0].depositAddress.split('1')[0]
                 const parsedDeepLink = parseDeepLink(addressPrefix, data)
                 if (
                     parsedDeepLink &&
