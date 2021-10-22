@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "Erstelle ein Profil",
+            "profileName": "Profilname",
             "body1": "Du kannst mehrere Benutzerprofile erstellen, um deine Wallets zu organisieren und deine Privatsphäre zu verbessern.",
-            "body2": "Lass uns zunächst mit dem Namen für dein erstes Profil starten. Du kannst später noch weitere Profile hinzufügen.",
-            "profileName": "Profilname"
+            "body2": {
+                "first": "Beginnen wir zunächst mit deinem ersten Profilnamen.",
+                "nonFirst": "Beginnen wir zunächst mit deinem Profilnamen."
+            },
+            "addMore": "Du kannst später weitere Profile hinzufügen."
         },
         "setup": {
             "title": "Richte eine Wallet ein",
@@ -29,6 +33,32 @@
             "title": "Sichere deine Wallet",
             "body1": "Speichere die Wiederherstellungs-Dokument PDF-Vorlage ab und drucke diese aus.",
             "body2": "Wenn du das Wiederherstellungs-Dokument ausfüllst und sicher verwahrst, kannst du deine Wallets jederzeit wiederherstellen."
+        },
+        "create": {
+            "title": "Wallet erstellen",
+            "body": "Erstelle eine neue Wallet. Du kannst zwischen einer normalen Software-Wallet oder, falls du ein Ledger-Gerät besitzt, einer Hardware-Wallet wählen.",
+            "softwareAccount": {
+                "title": "Ich möchte eine Software-Wallet",
+                "description": "Erstelle eine 24 Wörter Wiederherstellungsphrase"
+            },
+            "ledgerAccount": {
+                "title": "Ich möchte eine Hardware-Wallet",
+                "description": "Ledger Nano S oder Nano X erforderlich"
+            }
+        },
+        "setupLedger": {
+            "progress1": "Verbinde deinen Ledger",
+            "progress2": "Adresse erstellen",
+            "progress3": "Ledger-App wechseln",
+            "progress4": "Guthaben übertragen",
+            "watchVideo": "Videoanleitung ansehen",
+            "videoGuide": "Video-Leitfaden zur Ledger-Migration"
+        },
+        "ledgerInstallationGuide": {
+            "title": "Hast du die notwendigen Ledger-Apps installiert?",
+            "body1": "Bevor du fortfährst, musst du sowohl die {legacy} App als auch die neue IOTA App über Ledger Live installieren.",
+            "body2": "Stelle sicher, dass deine Ledger-Firmware aktuell ist. Beide vorinstallierten Apps sollten auf die neueste Version aktualisiert werden.",
+            "action": "Ja, ich habe beide Apps installiert"
         },
         "password": {
             "title": "Passwort erstellen",
@@ -42,7 +72,7 @@
         },
         "pin": {
             "title": "PIN-Code festlegen",
-            "body1": "Gib unten eine 6-stellige PIN ein. Du wirst nach deiner PIN gefragt, wenn du auf dein Profil zugreifst.",
+            "body1": "Gib unten eine 6-stellige PIN ein. Du wirst nach deiner PIN gefragt, wenn du auf dein Profil zugreifen möchtest.",
             "body2": "Verwende ausschließlich Zahlen"
         },
         "confirmPin": {
@@ -85,9 +115,11 @@
         },
         "congratulations": {
             "title": "Einrichten der Wallet abgeschlossen",
-            "body": "Deine neue Wallet ist nun einsatzbereit.",
             "fundsMigrated": "Guthaben migriert",
-            "success": "Du hast dein Guthaben erfolgreich ins neue Netzwerk übertragen",
+            "body": "Deine neue Wallet ist nun einsatzbereit.",
+            "softwareMigratedBody": "Du hast dein Guthaben erfolgreich ins neue Netzwerk übertragen",
+            "fireflyLedgerBody": "Dein Ledger-Konto wurde erfolgreich wiederhergestellt und du kannst nun fortfahren.",
+            "trinityLedgerBody": "Du hast deinen Ledger erfolgreich in das neue Netzwerk migriert.",
             "exportMigration": "Migrationsprotokoll exportieren und abschließen"
         },
         "import": {
@@ -98,7 +130,9 @@
             "importMnemonic": "Ich habe eine Firefly-Wiederherstellungsphrase",
             "importMnemonicDescription": "Gib deine Wiederherstellungsphrase ein, um deine Wallets wiederherzustellen",
             "importFile": "Ich habe ein Backup",
-            "importFileDescription": "SeedVault- oder Stronghold-Datei hochladen"
+            "importFileDescription": "SeedVault- oder Stronghold-Datei hochladen",
+            "importLedger": "Ich habe ein Ledger-Backup",
+            "importLedgerDescription": "Ein Ledger-Profil wiederherstellen oder migrieren"
         },
         "importFromText": {
             "seed": {
@@ -108,7 +142,7 @@
             },
             "mnemonic": {
                 "title": "Wiederherstellungsphrase eingeben",
-                "body": "Eine Wiederherstellungsphrase besteht aus 24 Wörtern in Kleinbuchstaben inklusive Leerzeichen. Diese wird benutzt, um bestehende Firefly-Wallets wiederherzustellen.",
+                "body": "Eine Wiederherstellungsphrase besteht aus 24 Wörtern in Kleinbuchstaben (durch Leerzeichen getrennt). Diese wird benutzt, um bestehende Firefly-Wallets wiederherzustellen.",
                 "enter": "Gib deine geheime Wiederherstellungsphrase ein"
             },
             "seedDetected": "81 Zeichen Seed erkannt",
@@ -117,20 +151,65 @@
         },
         "importFromFile": {
             "title": "Wallets aus einer Backup-Datei wiederherstellen",
-            "body": "Importiere ein Backup um deine Wallets wiederherzustellen. Backups können entweder eine Stronghold (.stronghold) oder eine Trinity SeedVault (.kdbx) Datei sein."
+            "body": "Importiere ein Backup, um deine Wallets wiederherzustellen. Backups können entweder eine Stronghold (.stronghold) oder eine Trinity SeedVault (.kdbx) Datei sein."
+        },
+        "importFromLedger": {
+            "title": "Ledger wiederherstellen oder migrieren",
+            "body": "Stelle dein bestehendes Firefly Ledger Profil wieder her oder migriere dein Guthaben von Trinity.",
+            "haveFireflyLedger": "Ich habe ein Firefly Ledger-Backup",
+            "haveFireflyLedgerDescription": "Ein Firefly Profil wiederherstellen",
+            "haveTrinityLedger": "Ich habe ein Trinity Ledger-Backup",
+            "haveTrinityLedgerDescription": "Trinity Profil migrieren"
+        },
+        "connectLedger": {
+            "title": "Verbinde deinen Ledger mit Firefly",
+            "body": "Damit dein Ledger von Firefly gefunden wird, stelle bitte sicher, dass die offizielle Ledger Live-Anwendung geschlossen ist.",
+            "trafficLight1": "Verbinde und entsperre deinen Ledger mit deiner PIN",
+            "trafficLight2": "Öffne die neue IOTA App auf deinem Ledger",
+            "tips": "Tipps, wenn sich dein Ledger nicht verbindet"
+        },
+        "restoreFromFireflyLedger": {
+            "title": "Dein Ledger-Profil wiederherstellen",
+            "body": "Drücke auf Wiederherstellen, um den Einrichtungsprozess abzuschließen und deine Wallets, Guthaben und Transaktionsverläufe wiederherzustellen.",
+            "restoring": "Wiederherstellen vom Ledger..."
+        },
+        "legacyLedgerIntro": {
+            "title": "Starte deine Ledger-Migration mit Firefly",
+            "body1": "Firefly wird dir helfen, deine Token in das neue Chrysalis-Netzwerk zu transferieren.",
+            "body2": "Nach der Migration kannst du deine Token mit dem Ledger mittels Firefly senden und empfangen.",
+            "readMore": "Was du vom Migrationsprozess erwarten kannst"
+        },
+        "generateNewLedgerAddress": {
+            "title": "Neue Adresse erstellen",
+            "body": "Du musst eine neue Adresse generieren, um deine Token mit Firefly zu migrieren. Klicke auf die Schaltfläche unten, um fortzufahren.",
+            "confirmTitle": "Bestätige die neue Adresse",
+            "confirmBody": "Vergleiche bitte zur Sicherheit die auf deinem Ledger-Gerät generierte mit der unten angezeigten Adresse. Wenn beide übereinstimmen, drücke zur Bestätigung beide Tasten auf deinem Ledger-Gerät.",
+            "confirmedTitle": "Adresse bestätigt",
+            "confirmedBody": "Du hast bestätigt, dass die Adresse in Firefly mit der auf deinem Ledger-Gerät übereinstimmt.",
+            "generating": "Adresse wird generiert"
+        },
+        "switchLedgerApps": {
+            "title": "Ledger-Apps wechseln",
+            "body": "Bitte wechsle jetzt zur {legacy} App auf deinem Ledger-Gerät, um die Migration fortzusetzen. Wenn du bereit bist, klicke auf Weiter."
+        },
+        "selectLedgerAccountIndex": {
+            "title": "Wähle den Ledger-Kontoindex",
+            "body": "Wähle den selben Ledger-Kontoindex, den du in Trinity verwendet hast. Für die meisten Nutzer ist dies der Standardindex 0.",
+            "accountIndex": "Kontoindex",
+            "accountPage": "Kontoseite",
+            "standard": "Standard",
+            "expert": "Experte",
+            "takingAWhile": "Dies kann eine Weile dauern...",
+            "notGeneratingAddresses": "Generiert dein Ledger Adressen?",
+            "reinstallLegacy": "Falls nicht, trenne das Gerät und versuche es noch einmal. Sollte der Fehler weiterhin bestehen, musst du die {legacy} App ggf. erneut installieren."
         },
         "importBackupPassword": {
-            "title": "Wallets aus einem SeedVault oder Stronghold wiederherstellen",
             "body1": "Bitte gib dein Backup Passwort ein.",
             "body2": "Das ist das Passwort, das du beim Erstellen deines Backups festgelegt hast."
         },
         "importSuccess": {
             "title": "Du hast dein Backup erfolgreich wiederhergestellt",
-            "body": "Du kannst nun dein neues Profil einrichten.",
-            "seedvaultTitle": "Erfolgreich importiert",
-            "seedvaultBody": "Dein Passwort ist korrekt, du kannst jetzt fortfahren.",
-            "strongholdTitle": "Erfolgreich importiert",
-            "strongholdBody": "Dein Passwort ist korrekt, du kannst jetzt fortfahren."
+            "body": "Du kannst nun dein neues Profil einrichten."
         },
         "migrate": {
             "title": "Guthaben migrieren",
@@ -150,10 +229,10 @@
             "noDataSeedVault": "Im SeedVault konnten keine Daten gefunden werden.",
             "signingBundle": "Signiere Bundle",
             "broadcastingBundle": "Übertrage Bundle",
-            "miningBundle": "Mine Bundle",
+            "miningBundle": "Bundle minen",
             "problemRestoringWallet": "Beim Wiederherstellen deiner Wallet ist ein Problem aufgetreten. Bitte versuche es erneut.",
             "minimumMigrationAmountSpentAddresses": "Der minimale Migrationsbetrag für jede wiederverwendete Adresse beträgt 1 Mi. Versuche es erneut, wenn der Betrag nicht richtig ist.",
-            "tooManyAddressesToMigrate": "Du hast zu viele Adressen mit niedrigem Guthaben. Überprüfe erneut, ob dein Guthaben unvollständig ist.",
+            "tooManyAddressesToMigrate": "Für die Migration hast du zu viele Adressen mit geringem Guthaben. Prüfe erneut, wenn dein Gesamtguthaben nicht richtig ist.",
             "cannotMigrateAllYourFunds": "Wir können nicht alle Guthaben migrieren, da einige Adressen zu wenig Guthaben aufweisen. Du kannst trotzdem fortfahren. {value} gehen verloren.",
             "error": "Beim Migrieren der Guthaben ist ein Fehler aufgetreten. Bitte versuche es erneut."
         },
@@ -173,7 +252,7 @@
         "securityCheckCompleted": {
             "title": "Sicherheitsüberprüfung abgeschlossen",
             "body1": "Wir haben das Sicherheitsrisiko berechnet. Das erneutes Ausführen dieses Vorgangs kann dein Risikolevel senken.",
-            "body2": "Wenn du mit dem Risikolevel zufrieden bist, drücke weiter.",
+            "body2": "Wenn du mit dem Risikolevel zufrieden bist, klicke auf Weiter.",
             "rerun": "Vorgang für ausgewählte Adressen wiederholen",
             "continueMigration": "Migration fortsetzen"
         },
@@ -184,6 +263,7 @@
         },
         "transferFragmentedFunds": {
             "body1": "Firefly wird nun dein Guthaben migrieren. Dies kann eine Weile dauern.",
+            "body2": "Stelle sicher, dass dein Ledger-Gerät verbunden, und die {legacy} App während der Migration durchgehend geöffnet ist.",
             "migrate": "Guthaben migrieren",
             "transaction": "Transaktion {number}",
             "rerun": "Erneut versuchen"
@@ -196,7 +276,8 @@
             "title": "Dein Guthaben",
             "body": "Stelle sicher, dass dein Guthaben korrekt ist, bevor du fortfährst. Versuche es erneut, wenn der Betrag nicht richtig ist.",
             "error": "Der minimale Migrationsbetrag für jede Adresse beträgt 1 Mi. Versuche es erneut, wenn der Betrag nicht richtig ist.",
-            "zeroBalance": "Versuche es erneut. Wenn du dein Guthaben noch immer nicht finden konntest, hast du den Seed vielleicht falsch eingegeben."
+            "zeroBalance": "Versuche es erneut. Wenn du dein Guthaben noch immer nicht finden konntest, hast du den Seed vielleicht falsch eingegeben.",
+            "zeroBalanceLedgerLegacy": "Versuche es noch einmal. Wenn du dein Guthaben noch immer nicht findest, hast du möglicherweise den falschen Kontoindex ausgewählt."
         },
         "settings": {
             "settings": "Einstellungen",
@@ -256,7 +337,7 @@
             },
             "changePassword": {
                 "title": "Passwort ändern",
-                "description": "Dein Passwort wird zum Sichern deiner Wallets genutzt. Du solltest ein starkes Passwort verwenden um dein Guthaben zu schützen"
+                "description": "Dein Passwort wird zum Sichern deiner Wallets genutzt. Du solltest ein starkes Passwort verwenden, um dein Guthaben zu schützen"
             },
             "changePincode": {
                 "title": "PIN ändern",
@@ -314,6 +395,10 @@
                 "title": "Diagnose",
                 "description": "System- und Anwendungsinformationen anzeigen"
             },
+            "migrateLedgerIndex": {
+                "title": "Ledger-Index migrieren",
+                "description": "Einen weiteren Trinity Kontoindex migrieren"
+            },
             "stateExport": {
                 "title": "Status exportieren",
                 "description": "Exportiere deinen Transaktionsverlauf in eine .csv-Datei"
@@ -357,7 +442,15 @@
                 },
                 "hardwareDevice": {
                     "title": "Geräte",
-                    "noneDetected": "Keine erkannt"
+                    "statuses": {
+                        "appNotOpen": "IOTA App ist nicht geöffnet",
+                        "connected": "Verbunden",
+                        "legacyConnected": "{legacy} App geöffnet",
+                        "locked": "Gesperrt",
+                        "mnemonicMismatch": "Falsches Ledger-Gerät oder falscher Mnemonic-Satz",
+                        "notDetected": "Nicht erkannt",
+                        "otherConnected": "App geöffnet"
+                    }
                 },
                 "strongholdStatus": {
                     "title": "Wallet-Status",
@@ -488,6 +581,53 @@
             "body": "Das Chrysalis Netzwerk Upgrade hat begonnen.",
             "bodyMigration": "Migration ist deaktiviert, bis sie abgeschlossen ist.",
             "bodyFirefly": "Firefly ist deaktiviert, bis es abgeschlossen ist. Token Migration wird auch danach möglich sein."
+        },
+        "ledgerNotConnected": {
+            "connect": "Öffne die neue IOTA App auf deinem Ledger-Gerät, um fortzufahren",
+            "connectLegacy": "Öffne die {legacy} App auf deinem Ledger-Gerät, um fortzufahren"
+        },
+        "ledgerConfirmation": {
+            "confirm": "Um fortzufahren, bestätige die Eingabeaufforderung, die auf deinem Ledger-Gerät angezeigt wird"
+        },
+        "ledgerAppGuide": {
+            "title": "Anleitung zur Installation der Ledger-Apps",
+            "steps": {
+                "0": "Installiere und öffne die Ledger Live Anwendung",
+                "1": "Stelle sicher, dass dein Ledger verbunden ist",
+                "2": "Suche nach den folgenden Apps: {legacy} and IOTA (MIOTA)",
+                "3": "Installiere beide Apps: {legacy} und IOTA (MIOTA)",
+                "4": "Denke daran, dass es wichtig ist, Ledger Live zu schließen, bevor du zu Firefly zurückkehrst"
+            }
+        },
+        "ledgerConnectionGuide": {
+            "title": "Tipps, wenn sich dein Ledger nicht verbindet",
+            "steps": {
+                "0": "Stelle sicher, dass Ledger Live auf deinem Computer nicht geöffnet ist",
+                "1": "Stelle sicher, dass du dein Ledger-Gerät mit deiner PIN entsperrt hast",
+                "2": "Öffne die neue IOTA App auf deinem Ledger-Gerät, um fortzufahren",
+                "3": {
+                    "text": "Es klappt immer noch nicht?",
+                    "link": "Besuche die offizielle Ledger Support-Seite"
+                }
+            }
+        },
+        "ledgerTransaction": {
+            "remainderAddress": {
+                "title": "Restadresse bestätigen",
+                "info": "Prüfe die auf deinem Ledger angezeigte Restadresse. Wenn sie mit der Angezeigten übereinstimmt, drücke beide Tasten an deinem Ledger, um diese zu bestätigen."
+            },
+            "transaction": {
+                "title": "Transaktion bestätigen",
+                "info": "Bestätige, dass die Transaktionsinformationen auf deinem Ledger-Gerät mit den unten angezeigten Informationen übereinstimmen. Wenn sie übereinstimmen, drücke beide Tasten auf deinem Ledger wie angefordert."
+            }
+        },
+        "ledgerAddress": {
+            "title": "Empfangsadresse bestätigen",
+            "body": "Prüfe die auf deinem Ledger angezeigte Empfangsadresse. Wenn sie mit der Angezeigten übereinstimmt, drücke beide Tasten an deinem Ledger, um diese zu bestätigen."
+        },
+        "ledgerMigrateIndex": {
+            "title": "Möchtest du einen weiteren Trinity Kontoindex migrieren?",
+            "body": "Du kannst später weitere Migrationen in den Einstellungen vornehmen."
         }
     },
     "charts": {
@@ -495,6 +635,7 @@
         "outgoingMi": "Ausgehende {value}",
         "portoflio": "Portfolio",
         "token": "Token",
+        "holdings": "Bestände",
         "accountValue": "Wallet-Wert",
         "accountActivity": "Wallet-Aktivität",
         "timeframe1Hour": "1 Stunde",
@@ -505,6 +646,8 @@
     "actions": {
         "continue": "Weiter",
         "back": "Zurück",
+        "previous": "Zurück",
+        "next": "Weiter",
         "cancel": "Abbrechen",
         "close": "Schließen",
         "dismiss": "Verwerfen",
@@ -573,6 +716,7 @@
         "addAccount": "Wallet hinzufügen",
         "checkForUpdates": "Suche nach Updates",
         "reportAnIssue": "Ein Problem melden",
+        "restore": "Wiederherstellen",
         "clear": "Löschen",
         "hideDetails": "Details ausblenden",
         "yes": "Ja",
@@ -591,8 +735,10 @@
         "findBalances": "Guthaben suchen",
         "searchBalances": "Nach Guthaben suchen",
         "searchAgain": "Erneut suchen",
-        "searching": "Suche läuft ...",
-        "closeFirefly": "Firefly schließen"
+        "searching": "Suche läuft...",
+        "closeFirefly": "Firefly schließen",
+        "generateAddress": "Adresse generieren",
+        "migrateAgain": "Einen anderen Index migrieren"
     },
     "general": {
         "password": "Passwort",
@@ -607,6 +753,7 @@
         "received": "Empfangen",
         "sendPayment": "Zahlung senden",
         "moveFunds": "Interner Transfer",
+        "sendTo": "Senden an",
         "sendFunds": "Guthaben senden",
         "sendToAddress": "An Adresse senden",
         "scanQrOrPaste": "Scanne einen QR-Code ein oder füge eine Adresse hinzu",
@@ -625,6 +772,8 @@
         "myAddress": "Meine Adresse",
         "shareAddress": "Adresse teilen",
         "yourAddress": "Deine Adresse",
+        "newRemainder": "Neue Restadresse",
+        "remainder": "Restbetrag",
         "generateNewAddress": "Neue Adresse erstellen",
         "copyAddress": "Adresse kopieren",
         "import": "Importieren",
@@ -661,6 +810,7 @@
         "messageId": "Message ID",
         "inputAddress": "Absendeadresse",
         "receiveAddress": "Empfangsadresse",
+        "newAddress": "Neue Adresse",
         "date": "Datum",
         "status": "Status",
         "confirmed": "Bestätigt",
@@ -672,11 +822,13 @@
         "firstSync": "Verlauf wird synchronisiert, dies kann eine Weile dauern...",
         "transferSyncing": "Synchronisiere Wallet",
         "transferSelectingInputs": "Wähle Inputs",
-        "transferRemainderAddress": "Erzeuge Rest-Einzahlungsadresse",
+        "transferRemainderAddress": "Restadresse wird generiert",
+        "transferPreparedTransaction": "Bereite Transaktion vor",
         "transferSigning": "Signieren der Transaktion",
         "transferPow": "Führe PoW aus",
         "transferBroadcasting": "Übermittlung der Transaktion",
         "transferComplete": "Überweisung abgeschlossen",
+        "generatingReceiveAddress": "Empfangsadresse wird generiert",
         "creatingAccount": "Erstelle Wallet, bitte warten...",
         "updatingAccount": "Aktualisiere Wallet, bitte warten...",
         "accountSyncing": "Wallet wird synchronisiert",
@@ -708,7 +860,8 @@
         "sending": "Sende",
         "legacyNetwork": "Altes Netzwerk",
         "capsLock": "Feststelltaste ist aktiviert",
-        "version": "Version {version}"
+        "version": "Version {version}",
+        "unknown": "Unbekannt"
     },
     "dates": {
         "today": "Heute",
@@ -732,8 +885,7 @@
         "minutesRemaining": "{minutes, plural, one {1 Minute verbleibend} other {# Minuten verbleibend}}",
         "copiedToClipboard": "In die Zwischenablage kopiert",
         "accountsSynchronized": "Synchronisierung der Wallet abgeschlossen",
-        "migratedAccountChrysalisDown": "Dein Guthaben wird nach dem Chrysalis Upgrade am 28. April verfügbar sein",
-        "migratedAccountChrysalisUp": "Dein Guthaben wird in Kürze verfügbar sein"
+        "fundsAvailableSoon": "Dein Guthaben wird in Kürze verfügbar sein"
     },
     "error": {
         "profile": {
@@ -765,12 +917,15 @@
         "account": {
             "length": "Der Name deiner Wallet darf nicht länger als {length, plural, one {1 Zeichen} other {# Zeichen}} sein.",
             "empty": "Du musst deine letzte Wallet erst verwenden, bevor du eine neue erstellen kannst.",
-            "notEmpty": "Du musst dein Guthaben übertragen bevor diese Wallet gelöscht werden kann.",
+            "notEmpty": "Du musst dein Guthaben übertragen, bevor diese Wallet gelöscht werden kann.",
             "duplicate": "Eine Wallet mit diesem Namen existiert bereits.",
             "tilde": "Ein Profilname darf nicht mit dem Zeichen '~' beginnen.",
             "control": "Ein Profilname darf kein Kontrollzeichen enthalten.",
             "startDot": "Ein Profilname darf nicht mit dem Zeichen '.' beginnen.",
-            "chars": "Ein Profilname darf die folgenden Zeichen nicht enthalten: <>:\"/\\|?*"
+            "chars": "Ein Profilname darf die folgenden Zeichen nicht enthalten: <>:\"/\\|?*",
+            "index": "Dein Kontoindex muss eine Zahl zwischen 0 und 2.147.483.647 sein.",
+            "page": "Deine Kontoseite muss eine Zahl zwischen 0 und 2.147.483.647 sein.",
+            "syncing": "Beim Synchronisieren deiner Wallets ist ein Fehler aufgetreten."
         },
         "send": {
             "addressLength": "Adressen sollten noch {length, plural, one {1 Zeichen} other {# Zeichen}} länger sein.",
@@ -784,10 +939,13 @@
             "insufficientFunds": "Diese Wallet hat unzureichendes Guthaben.",
             "noToAccount": "Du hast keine Wallet ausgewählt, auf welche das Guthaben gesendet werden soll.",
             "sendingDust": "Du kannst nicht weniger als 1 Mi senden.",
-            "leavingDust": "Du kannst nicht weniger als 1 Mi auf deiner Adresse hinterlassen."
+            "leavingDust": "Du kannst nicht weniger als 1 Mi auf deiner Adresse hinterlassen.",
+            "cancelled": "Die Transaktion wurde abgebrochen.",
+            "transaction": "Beim Senden deiner Transaktion ist ein Fehler aufgetreten. Bitte versuche es erneut."
         },
         "node": {
             "invalid": "Gib eine gültige URL ein.",
+            "dns": "DNS für Node konnte nicht aufgelöst werden.",
             "https": "HTTPS wird benötigt. Benutze ein Entwicklerprofil, um ungesicherte HTTP-Verbindungen zu nutzen.",
             "duplicate": "Dieser Node wurde bereits hinzugefügt.",
             "unsynced": "Der Node ist nicht synchronisiert.",
@@ -805,6 +963,28 @@
             "phraseWordCount": "Deine Wiederherstellungsphrase sollte aus 24 Wörtern bestehen. Aktuell {length, plural, one {ist es 1} other {sind es #}}.",
             "phraseUnrecognizedWord": "Unbekanntes Wort \"{word}\" in deiner Wiederherstellungsphrase",
             "phraseCaseWord": "Das Wort \"{word}\" muss aus Kleinbuchstaben bestehen"
+        },
+        "ledger": {
+            "appNotOpen": "Du musst die IOTA App auf deinem Ledger-Gerät öffnen.",
+            "generic": "Beim Verbinden mit deinem Ledger ist ein Fehler aufgetreten.",
+            "legacyConnected": "Auf deinem Ledger-Gerät ist die falsche App geöffnet.",
+            "locked": "Bitte entsperre dein Ledger-Gerät durch Eingabe der PIN.",
+            "mnemonicMismatch": "Du hast das falsche Ledger-Gerät angeschlossen oder das Mnemonic hat sich geändert.",
+            "notDetected": "Kein Ledger-Gerät erkannt.",
+            "notFound": "Ledger-Gerät nicht gefunden.",
+            "otherConnected": "Auf deinem Ledger-Gerät ist die falsche App geöffnet.",
+            "generateAddress": "Beim Generieren der Adresse ist ein Fehler aufgetreten.",
+            "timeout": "Das Ledger-Gerät hat das Zeitlimit überschritten.",
+            "disconnected": "Die Verbindung zu deinem Ledger-Gerät wurde getrennt."
+        },
+        "popup": {
+            "preventClose": "Dieses Popup kann nicht geschlossen werden."
+        },
+        "migration": {
+            "missingBundle": "Beim Versuch, das Transaktionsbundle zu finden, ist ein Fehler aufgetreten."
+        },
+        "crypto": {
+            "cannotDecodeBech32": "String konnte nicht als Bech32-Adresse dekodiert werden."
         }
     },
     "tooltips": {

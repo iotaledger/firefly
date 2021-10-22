@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
+    import { hasBundlesWithSpentAddresses, hasSingleBundle } from 'shared/lib/migration'
     import { createEventDispatcher } from 'svelte'
     import {
         BundleMiningWarning,
@@ -9,9 +10,10 @@
         SecurityCheckCompleted,
         TransferFragmentedFunds,
     } from './views/'
-    import { hasSingleBundle, hasBundlesWithSpentAddresses } from 'shared/lib/migration'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     export let mobile
 
     enum MigrateState {
@@ -23,24 +25,14 @@
         SecurityCheckCompleted = 'securityCheckCompleted',
     }
 
-    // TODO: dummy
-    enum MigrationType {
-        SingleBundle = 'singleBundle',
-        FragmentedFunds = 'fragmentedFunds',
-        SpentAddresses = 'spentAddresses',
-    }
-
     const dispatch = createEventDispatcher()
 
     let state: MigrateState = MigrateState.Init
     let stateHistory = []
 
-    // TODO: dummy
-    let migrationType: MigrationType = MigrationType.FragmentedFunds
-
-    const _next = async (event) => {
+    const _next = (event) => {
         let nextState
-        let params = event.detail || {}
+        const params = event.detail || {}
 
         switch (state) {
             case MigrateState.Init:
@@ -56,16 +48,18 @@
                 }
 
                 break
+
             case MigrateState.TransferFragmentedFunds:
                 dispatch('next')
                 break
             case MigrateState.BundleMiningWarning:
                 nextState = MigrateState.SecureSpentAddresses
                 break
-            case MigrateState.SecureSpentAddresses:
+            case MigrateState.SecureSpentAddresses: {
                 const { skippedMining } = params
                 nextState = skippedMining ? MigrateState.TransferFragmentedFunds : MigrateState.SecuringSpentAddresses
                 break
+            }
             case MigrateState.SecuringSpentAddresses:
                 nextState = MigrateState.SecurityCheckCompleted
                 break
@@ -81,7 +75,7 @@
     }
 
     const _previous = () => {
-        let prevState = stateHistory.pop()
+        const prevState = stateHistory.pop()
         if (prevState) {
             state = prevState
         } else {

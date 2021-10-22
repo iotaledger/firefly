@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "Skapa en profil",
+            "profileName": "Profilnamn",
             "body1": "Du kan skapa flera användarprofiler för att organisera dina plånböcker och förbättra sekretessen.",
-            "body2": "Låt oss börja med ditt första profilnamn. Du kan lägga till fler profiler senare.",
-            "profileName": "Profilnamn"
+            "body2": {
+                "first": "För tillfället, låt oss börja med ditt första profilnamn.",
+                "nonFirst": "För tillfället, låt oss börja med ditt profilnamn."
+            },
+            "addMore": "Du kan lägga till fler profiler senare."
         },
         "setup": {
             "title": "Konfigurera en plånbok",
@@ -29,6 +33,32 @@
             "title": "Säkra din plånbok",
             "body1": "Spara och skriv ut PDF-mallen för återställningsbladet.",
             "body2": "Om du fyller i återställningsbladet och lagrar det på ett säkert sätt, kommer du alltid att kunna återställa dina plånböcker."
+        },
+        "create": {
+            "title": "Skapa en plånbok",
+            "body": "Skapa en ny plånbok. Du kan välja en vanlig plånbok eller om du har en Ledger-enhet kan du ställa in en hårdvaruplånbok.",
+            "softwareAccount": {
+                "title": "Jag vill ha en vanlig plånbok",
+                "description": "Skapa en 24 ord lång återställningsfras"
+            },
+            "ledgerAccount": {
+                "title": "Jag vill ha en hårdvaruplånbok",
+                "description": "Ledger Nano S eller Nano X krävs"
+            }
+        },
+        "setupLedger": {
+            "progress1": "Anslut din Ledger",
+            "progress2": "Generera adress",
+            "progress3": "Växla Ledger app",
+            "progress4": "Överför IOTA",
+            "watchVideo": "Titta på videoguide",
+            "videoGuide": "Video guide för Ledger migrering"
+        },
+        "ledgerInstallationGuide": {
+            "title": "Har du installerat de nödvändiga Ledger apparna?",
+            "body1": "Innan du fortsätter måste du hitta och installera både {legacy} appen och den nya IOTA-appen via Ledger Live.",
+            "body2": "Se till att din firmware från Ledger är uppdaterad. Alla förinstallerade appar bör uppdateras till sina senaste versioner.",
+            "action": "Ja, jag har installerat dessa appar"
         },
         "password": {
             "title": "Skapa ett lösenord",
@@ -85,9 +115,11 @@
         },
         "congratulations": {
             "title": "Installationen av plånboken slutförd",
-            "body": "Din nya plånbok är redo att användas.",
             "fundsMigrated": "Tokens migrerade",
-            "success": "Du har framgångsrikt migrerat dina IOTA till det nya nätverket",
+            "body": "Din nya plånbok är redo att användas.",
+            "softwareMigratedBody": "Du har framgångsrikt migrerat dina IOTA till det nya nätverket",
+            "fireflyLedgerBody": "Ditt Ledger-konto har återställts och du kan nu fortsätta.",
+            "trinityLedgerBody": "Du har framgångsrikt migrerat din Ledger till det nya nätverket.",
             "exportMigration": "Exportera migrationslogg och avsluta installationen"
         },
         "import": {
@@ -98,7 +130,9 @@
             "importMnemonic": "Jag har en Firefly återställningsfras",
             "importMnemonicDescription": "Ange din återställningsfras för att återställa dina plånböcker",
             "importFile": "Jag har en digital säkerhetskopia",
-            "importFileDescription": "Ladda upp en Seedvault- eller Stronghold-fil"
+            "importFileDescription": "Ladda upp en Seedvault- eller Stronghold-fil",
+            "importLedger": "Jag har en Ledger backup",
+            "importLedgerDescription": "Återställ eller migrera en Ledger profil"
         },
         "importFromText": {
             "seed": {
@@ -119,18 +153,63 @@
             "title": "Återställ dina plånböcker från en säkerhetskopia",
             "body": "Importera en säkerhetskopia för att återställa dina plånböcker. Säkerhetskopior kan antingen vara en Stronghold (.stronghold) eller en Trinity SeedVault (.kdbx)."
         },
+        "importFromLedger": {
+            "title": "Återställ eller migrera din Ledger",
+            "body": "Återställ en befintlig Firefly Ledger profil eller migrera dina IOTA från Trinity.",
+            "haveFireflyLedger": "Jag har en Firefly Ledger backup",
+            "haveFireflyLedgerDescription": "Återställ en Firefly-profil",
+            "haveTrinityLedger": "Jag har en Trinity Ledger backup",
+            "haveTrinityLedgerDescription": "Migrera en Trinity-profil"
+        },
+        "connectLedger": {
+            "title": "Anslut din Ledger till Firefly",
+            "body": "För att din Ledger enhet ska hittas av Firefly, se till att den officiella Ledger Live-applikationen är stängd.",
+            "trafficLight1": "Anslut och lås upp din Ledger med din PIN-kod",
+            "trafficLight2": "Öppna den nya IOTA appen på din Ledger",
+            "tips": "Tips om din Ledger inte ansluter"
+        },
+        "restoreFromFireflyLedger": {
+            "title": "Återställ din Ledger profil",
+            "body": "Tryck på återställ för att slutföra installationsprocessen och återställa plånböcker, saldon och transaktionshistorik.",
+            "restoring": "Återställer från Ledger..."
+        },
+        "legacyLedgerIntro": {
+            "title": "Starta din Ledger migrering med Firefly",
+            "body1": "Firefly hjälper dig att överföra dina IOTA till det nya Chrysalis nätverket.",
+            "body2": "Efter du migrerat, kommer du att kunna skicka och ta emot IOTA med din Ledger och Firefly.",
+            "readMore": "Vad man kan förvänta sig av migrationsprocessen"
+        },
+        "generateNewLedgerAddress": {
+            "title": "Skapa ny adress",
+            "body": "Du måste generera en ny adress för att migrera dina IOTA med Firefly. Klicka på knappen nedan för att fortsätta.",
+            "confirmTitle": "Bekräfta den nya adressen",
+            "confirmBody": "För säkerhets skull kan du jämföra den adress som genereras på din Ledger-enhet med den som visas nedan. Om de matchar, tryck på båda knapparna på din Ledger enligt uppmaning.",
+            "confirmedTitle": "Adress bekräftad",
+            "confirmedBody": "Du har bekräftat att adressen i Firefly matchar den på din Ledger-enhet.",
+            "generating": "Genererar adress"
+        },
+        "switchLedgerApps": {
+            "title": "Växla Ledger app",
+            "body": "Växla till {legacy} appen på din Ledger-enhet för att fortsätta migreringen. Tryck på fortsätt."
+        },
+        "selectLedgerAccountIndex": {
+            "title": "Välj Ledger konto-index",
+            "body": "Välj det Ledger konto-index du använde med Trinity. För de flesta användare kommer detta att vara index 0.",
+            "accountIndex": "Konto-index",
+            "accountPage": "Kontosida",
+            "standard": "Standard",
+            "expert": "Avancerat",
+            "takingAWhile": "Detta tar ett tag...",
+            "notGeneratingAddresses": "Genererar din Ledger adresser?",
+            "reinstallLegacy": "Om inte, koppla från enheten och försök igen. Om problemet kvarstår, kan du behöva installera om {legacy} appen."
+        },
         "importBackupPassword": {
-            "title": "Återställ dina plånböcker från en SeedVault eller Stronghold",
             "body1": "Ange lösenordet för din säkerhetskopia.",
             "body2": "Detta är lösenordet du valde när du skapade din säkerhetskopia."
         },
         "importSuccess": {
             "title": "Du har framgångsrikt återställt din säkerhetskopia",
-            "body": "Du kan nu ställa in din nya profil.",
-            "seedvaultTitle": "Importen lyckades",
-            "seedvaultBody": "Ditt lösenord är korrekt, du kan nu fortsätta.",
-            "strongholdTitle": "Importen lyckades",
-            "strongholdBody": "Ditt lösenord är korrekt, du kan nu fortsätta."
+            "body": "Du kan nu ställa in din nya profil."
         },
         "migrate": {
             "title": "Migrera dina tillgångar",
@@ -153,7 +232,7 @@
             "miningBundle": "Utvinner säker bundle",
             "problemRestoringWallet": "Det uppstod ett nätverksfel när din plånbok skulle återställas. Försök igen.",
             "minimumMigrationAmountSpentAddresses": "Minsta migreringsbelopp för varje förbrukad adress är 1 Mi. Kontrollera igen om ditt saldo inte ser rätt ut.",
-            "tooManyAddressesToMigrate": "Du har för många adresser med lågt saldo för att migrera. Kontrollera igen om ditt saldo inte ser rätt ut.",
+            "tooManyAddressesToMigrate": "Du har för många adresser med lågt saldo för att migrera. Kontrollera igen om ditt totala saldo inte ser rätt ut.",
             "cannotMigrateAllYourFunds": "Vi kan inte migrera alla dina tillgångar eftersom vissa adresser är för låga i värde. Du kan fortsätta ändå. {value} kommer att gå förlorad.",
             "error": "Det gick inte att migrera dina tillgångar. Försök igen."
         },
@@ -184,6 +263,7 @@
         },
         "transferFragmentedFunds": {
             "body1": "Firefly kommer nu att fortsätta migrera dina IOTA. Detta kan ta ett tag.",
+            "body2": "Se till att din Ledger är ansluten och att {legacy} -appen är öppen hela tiden under migrationen.",
             "migrate": "Migrera tillgångar",
             "transaction": "Transaktion {number}",
             "rerun": "Försök igen"
@@ -196,7 +276,8 @@
             "title": "Ditt saldo",
             "body": "Se till att ditt saldo är korrekt innan du fortsätter. Du kan kontrollera igen om det inte ser rätt ut.",
             "error": "Minsta migreringsbelopp är 1 Mi. Kontrollera igen om ditt saldo inte ser rätt ut.",
-            "zeroBalance": "Försök kontrollera igen. Om du fortfarande inte hittar ditt saldo kan du ha angett din seed felaktigt."
+            "zeroBalance": "Försök kontrollera igen. Om du fortfarande inte hittar ditt saldo kan du ha angett din seed felaktigt.",
+            "zeroBalanceLedgerLegacy": "Försök kontrollera igen. Om du fortfarande inte hittar ditt saldo kan du ha angett fel konto-index."
         },
         "settings": {
             "settings": "Inställningar",
@@ -314,6 +395,10 @@
                 "title": "Diagnostik",
                 "description": "Visa system- och applikationsinformation"
             },
+            "migrateLedgerIndex": {
+                "title": "Migrera Ledger Index",
+                "description": "Migrera ett annat kontoindex från Trinity"
+            },
             "stateExport": {
                 "title": "Tillstånds-exportering",
                 "description": "Exportera din transaktionshistorik till en .csv-fil"
@@ -357,7 +442,15 @@
                 },
                 "hardwareDevice": {
                     "title": "Hårdvaruenhet",
-                    "noneDetected": "Ingen upptäckt"
+                    "statuses": {
+                        "appNotOpen": "IOTA-appen är inte öppen",
+                        "connected": "Ansluten",
+                        "legacyConnected": "{legacy} appen öppen",
+                        "locked": "Låst",
+                        "mnemonicMismatch": "Fel Ledger eller Mnemonik",
+                        "notDetected": "Inte upptäckt",
+                        "otherConnected": "App öppen"
+                    }
                 },
                 "strongholdStatus": {
                     "title": "Firefly status",
@@ -488,6 +581,53 @@
             "body": "Uppgraderingen av Chrysalis-nätverket har börjat.",
             "bodyMigration": "Migrering är inaktiverad tills den är klar.",
             "bodyFirefly": "Firefly är inaktiverad tills det är klart. Token-migrering kommer fortfarande att vara möjlig efteråt."
+        },
+        "ledgerNotConnected": {
+            "connect": "Öppna den nya IOTA-appen på din Ledger-enhet för att fortsätta",
+            "connectLegacy": "Öppna {legacy} appen på din Ledger-enhet för att fortsätta"
+        },
+        "ledgerConfirmation": {
+            "confirm": "För att fortsätta, bekräfta uppmaningen som visas på din Ledger-enhet"
+        },
+        "ledgerAppGuide": {
+            "title": "Guide för att installera Ledger apparna",
+            "steps": {
+                "0": "Installera och öppna programmet Ledger Live",
+                "1": "Se till att din Ledger är ansluten",
+                "2": "Sök efter appar: {legacy} och IOTA (MIOTA)",
+                "3": "Installera båda apparna: {legacy} och IOTA (MIOTA)",
+                "4": "Kom ihåg att det är viktigt att stänga Ledger Live innan du återvänder till Firefly"
+            }
+        },
+        "ledgerConnectionGuide": {
+            "title": "Tips om din Ledger inte ansluter",
+            "steps": {
+                "0": "Se till att Ledger Live inte är öppen på din dator",
+                "1": "Se till att du har låst upp din Ledger-enhet med din PIN-kod",
+                "2": "Öppna den nya IOTA-appen på din Ledger-enhet",
+                "3": {
+                    "text": "Funkar fortfarande inte?",
+                    "link": "Prova den officiella Ledger support sidan"
+                }
+            }
+        },
+        "ledgerTransaction": {
+            "remainderAddress": {
+                "title": "Bekräfta återstående adress",
+                "info": "Bekräfta att den återstående adressen som visas på din Ledger matchar den som visas nedan. Om de matchar, tryck på båda knapparna på din Ledger enligt uppmaning."
+            },
+            "transaction": {
+                "title": "Bekräfta transaktion",
+                "info": "Bekräfta att transaktionsinformationen som visas på din Ledger-enhet matchar informationen som visas nedan. Om de matchar, tryck på båda knapparna på din Ledger enligt uppmaning."
+            }
+        },
+        "ledgerAddress": {
+            "title": "Bekräfta mottagaradress",
+            "body": "Bekräfta att mottagaradressen som visas på din Ledger matchar den som visas nedan. Om de matchar, tryck på båda knapparna på din Ledger enligt uppmaning."
+        },
+        "ledgerMigrateIndex": {
+            "title": "Behöver du migrera ytterligare ett Trinity kontoindex?",
+            "body": "Du kan också migrera senare i Avancerade inställningar."
         }
     },
     "charts": {
@@ -495,6 +635,7 @@
         "outgoingMi": "Utgående {value}",
         "portoflio": "Portfölj",
         "token": "Token",
+        "holdings": "Innehav",
         "accountValue": "Plånboksvärde",
         "accountActivity": "Plånboksaktivitet",
         "timeframe1Hour": "1 timme",
@@ -505,6 +646,8 @@
     "actions": {
         "continue": "Fortsätt",
         "back": "Bakåt",
+        "previous": "Föregående",
+        "next": "Nästa",
         "cancel": "Avbryt",
         "close": "Stäng",
         "dismiss": "Avfärda",
@@ -573,6 +716,7 @@
         "addAccount": "Lägg till plånbok",
         "checkForUpdates": "Sök efter uppdateringar",
         "reportAnIssue": "Rapportera ett fel",
+        "restore": "Återställ",
         "clear": "Rensa",
         "hideDetails": "Dölj detaljer",
         "yes": "Ja",
@@ -592,7 +736,9 @@
         "searchBalances": "Sök efter saldo",
         "searchAgain": "Sök igen",
         "searching": "Söker...",
-        "closeFirefly": "Stäng Firefly"
+        "closeFirefly": "Stäng Firefly",
+        "generateAddress": "Generera adress",
+        "migrateAgain": "Migrera ett annat index"
     },
     "general": {
         "password": "Lösenord",
@@ -607,6 +753,7 @@
         "received": "Mottaget",
         "sendPayment": "Skicka IOTA",
         "moveFunds": "Intern överföring",
+        "sendTo": "Skicka till",
         "sendFunds": "Skicka IOTA",
         "sendToAddress": "Skicka till adress",
         "scanQrOrPaste": "Skanna en QR-kod eller klistra in en adress",
@@ -625,6 +772,8 @@
         "myAddress": "Min adress",
         "shareAddress": "Dela en adress",
         "yourAddress": "Din adress",
+        "newRemainder": "Ny Återstående",
+        "remainder": "Återstående",
         "generateNewAddress": "Skapa ny adress",
         "copyAddress": "Kopiera adress",
         "import": "Importera",
@@ -661,6 +810,7 @@
         "messageId": "Meddelande-ID",
         "inputAddress": "Inmatningsadress",
         "receiveAddress": "Mottagaradress",
+        "newAddress": "Ny adress",
         "date": "Datum",
         "status": "Status",
         "confirmed": "Bekräftad",
@@ -672,11 +822,13 @@
         "firstSync": "Synkroniserar historik, detta kan ta ett tag...",
         "transferSyncing": "Synkroniserar plånbok",
         "transferSelectingInputs": "Väljer inmatning",
-        "transferRemainderAddress": "Genererar insättningsadress för resterande",
+        "transferRemainderAddress": "Genererar återstående adress",
+        "transferPreparedTransaction": "Förbereder transaktion",
         "transferSigning": "Signerar transaktionen",
         "transferPow": "Utför PoW",
         "transferBroadcasting": "Sänder transaktion",
         "transferComplete": "Överföring slutförd",
+        "generatingReceiveAddress": "Genererar mottagaradress",
         "creatingAccount": "Skapar plånbok, vänligen vänta...",
         "updatingAccount": "Uppdaterar plånbok, vänligen vänta...",
         "accountSyncing": "Plånboken synkroniseras",
@@ -708,7 +860,8 @@
         "sending": "Skickar",
         "legacyNetwork": "Ursprungliga nätverket",
         "capsLock": "Caps Lock är på",
-        "version": "Version {version}"
+        "version": "Version {version}",
+        "unknown": "Okänd"
     },
     "dates": {
         "today": "Idag",
@@ -732,8 +885,7 @@
         "minutesRemaining": "{minutes, plural, one {1 minut kvar} other {# minuter kvar}}",
         "copiedToClipboard": "Kopierad till urklipp",
         "accountsSynchronized": "Plånbokssynkronisering slutförd",
-        "migratedAccountChrysalisDown": "Dina IOTA kommer att bli tillgängliga efter Chrysalis den 28 april",
-        "migratedAccountChrysalisUp": "Dina IOTA kommer inom kort att bli tillgängliga"
+        "fundsAvailableSoon": "Dina IOTA kommer inom kort att bli tillgängliga"
     },
     "error": {
         "profile": {
@@ -770,7 +922,10 @@
             "tilde": "Ett profilnamn kan inte börja med '~' tecken.",
             "control": "Ett profilnamn får inte innehålla ett kontrolltecken (TAB, ny rad et cetera).",
             "startDot": "Ett profilnamn kan inte börja med en punkt.",
-            "chars": "Ett profilnamn får inte innehålla följande tecken <>:\"/\\|?*"
+            "chars": "Ett profilnamn får inte innehålla följande tecken <>:\"/\\|?*",
+            "index": "Ditt konto-index måste vara ett nummer mellan 0 och 2,147,483,647.",
+            "page": "Din kontosida måste vara ett nummer mellan 0 och 2,147,483,647.",
+            "syncing": "Det gick inte att synkronisera dina plånböcker."
         },
         "send": {
             "addressLength": "Adresser bör vara {length, plural, one {1 tecken} other {# tecken}}.",
@@ -784,10 +939,13 @@
             "insufficientFunds": "Denna plånbok har inte tillräckligt med tillgångar.",
             "noToAccount": "Du har inte valt en plånbok att skicka IOTA till.",
             "sendingDust": "Du kan inte skicka mindre än 1 Mi.",
-            "leavingDust": "Du kan inte lämna mindre än 1 Mi på din adress."
+            "leavingDust": "Du kan inte lämna mindre än 1 Mi på din adress.",
+            "cancelled": "Transaktionen avbröts.",
+            "transaction": "Det uppstod ett fel. Vänligen försök igen."
         },
         "node": {
             "invalid": "Ange en giltig URL.",
+            "dns": "Kunde inte lösa DNS för nod.",
             "https": "HTTPS krävs. Konfigurera en utvecklarprofil för att använda osäkra HTTP-anslutningar.",
             "duplicate": "Den här noden har redan lagts till.",
             "unsynced": "Noden är inte synkroniserad.",
@@ -805,6 +963,28 @@
             "phraseWordCount": "Det ska finnas 24 ord i din återställningsfras, just nu är det {length, plural, one {är 1} other {är #}}.",
             "phraseUnrecognizedWord": "Okänt ord \"{word}\" i din återställningsfras",
             "phraseCaseWord": "Ordet \"{word}\" ska vara skrivet med små bokstäver"
+        },
+        "ledger": {
+            "appNotOpen": "Du måste öppna IOTA appen på din Ledger-enhet.",
+            "generic": "Det gick inte att ansluta till din Ledger-enhet.",
+            "legacyConnected": "Fel app är öppen på din Ledger-enhet.",
+            "locked": "Lås upp din Ledger-enhet genom att ange PIN-koden.",
+            "mnemonicMismatch": "Du har anslutit fel Ledger-enhet eller så har din mnemonik ändrats.",
+            "notDetected": "Ingen Ledger-enhet upptäckt.",
+            "notFound": "Ledger-enheten hittades inte.",
+            "otherConnected": "Fel app är öppen på din Ledger-enhet.",
+            "generateAddress": "Det gick inte att generera en adress.",
+            "timeout": "Din Ledger-enhet nådde time out.",
+            "disconnected": "Din Ledger-enhet kopplades bort."
+        },
+        "popup": {
+            "preventClose": "Detta popup-fönster kan inte stängas."
+        },
+        "migration": {
+            "missingBundle": "Ett fel inträffade när transaktions-bundlen skulle hittas."
+        },
+        "crypto": {
+            "cannotDecodeBech32": "Det går inte att avkoda strängen som Bech32-adress."
         }
     },
     "tooltips": {

@@ -1,12 +1,12 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Enviar, rebre i gestionar eIs vostres tokens IOTA",
+            "title": "Enviar, Rebre i Gestionar eIs vostres tokens IOTA",
             "body": "Firefly és el programari del moneder oficial de IOTA."
         },
         "legal": {
             "title": "Política de Privacitat i Condicions de Servei",
-            "body": "Consulteu la Política de privacitat i les Condicions del servei.",
+            "body": "Consulteu la Política de Privacitat i les Condicions del Servei.",
             "checkbox": "He llegit i accepto la Política de Privadesa i les Condicions de Servei"
         },
         "appearance": {
@@ -15,20 +15,50 @@
         },
         "profile": {
             "title": "Crear un perfil",
-            "body1": "Podeu crear diversos perfils d'usuari per mantenir separats els vostres criptovalors i millorar la privacitat.",
-            "body2": "De moment, comencem pel vostre primer nom de perfil. Podreu afegir altres perfils més endavant.",
-            "profileName": "Nom del perfil"
+            "profileName": "Nom del perfil",
+            "body1": "Podeu crear diversos perfils d'usuari per gestionar els vostres moneders i millorar la privacitat.",
+            "body2": {
+                "first": "Per ara, comencem amb el vostre primer nom de perfil.",
+                "nonFirst": "Per ara, comencem amb el vostre nom de perfil."
+            },
+            "addMore": "Després podreu afegir més perfils."
         },
         "setup": {
-            "title": "Configura el criptomoneder",
+            "title": "Configura un moneder",
             "chrysalisTitle": "Actualizació a la Xarxa Chrysalis",
             "chrysalisBody": "A partir del 21 d'Abril, els usuaris podran migrar els seus criptovalors a la nova xarxa Chrysalis. Us recomanem que migreu els vostres criptovalors tan aviat com sigui possible.",
             "learnMore": "Aprendre sobre la migració"
         },
         "secure": {
             "title": "Assegura el criptomoneder",
-            "body1": "Desa i imprimeix el Kit de recuperació en PDF.",
+            "body1": "Desar i imprimir la plantilla de recuperació en PDF.",
             "body2": "Si ompliu el Kit de Recuperació i el deseu en un lloc segur, sempre podreu recuperar els vostres moneders."
+        },
+        "create": {
+            "title": "Crea un moneder",
+            "body": "Crear un nou moneder. Podeu triar entre moneder basat en programari normal o, si teniu un dispositiu Ledger, podeu configurar un moneder de maquinari.",
+            "softwareAccount": {
+                "title": "Vull un moneder de programari",
+                "description": "Crear una frase de recuperació de 24 paraules"
+            },
+            "ledgerAccount": {
+                "title": "Vull un moneder de maquinari",
+                "description": "Es necessita Ledger Nano S o Nano X"
+            }
+        },
+        "setupLedger": {
+            "progress1": "Conecta el teu Ledger",
+            "progress2": "Generar adreça",
+            "progress3": "Canvia l'aplicació Ledger",
+            "progress4": "Transferir fons",
+            "watchVideo": "Veure la vídeo guia",
+            "videoGuide": "Vídeo guia de la migració del Ledger"
+        },
+        "ledgerInstallationGuide": {
+            "title": "Has instal·lat les aplicacions Ledger necessàries?",
+            "body1": "Abans de continuar, cal que cerqueu i instal·leu tant l'aplicació {legacy} com la nova aplicació IOTA mitjançant Ledger Live.",
+            "body2": "Assegureu-vos que el firmware del Ledger estigui actualitzat. Les aplicacions preinstal·lades s’han d’actualitzar a les seves darreres versions.",
+            "action": "Sí, he instal·lat aquestes aplicacions"
         },
         "password": {
             "title": "Crea una contrasenya",
@@ -85,9 +115,11 @@
         },
         "congratulations": {
             "title": "S'ha completat la configuració del criptomoneder",
-            "body": "Ja es pot utilitzar el criptomoneder nou.",
             "fundsMigrated": "Fons migrats",
-            "success": "Heu migrat els vostres fons amb èxit a la nova xarxa",
+            "body": "Ja es pot utilitzar el criptomoneder nou.",
+            "softwareMigratedBody": "Has migrat els vostres fons amb èxit a la nova xarxa",
+            "fireflyLedgerBody": "El teu compte de Ledger s'ha recuperat correctament i ara podeu continuar.",
+            "trinityLedgerBody": "Heu migrat el vostre Ledger amb èxit a la nova xarxa.",
             "exportMigration": "Exporta el registre de migració i finalitza la configuració"
         },
         "import": {
@@ -98,7 +130,9 @@
             "importMnemonic": "Tinc una frase de recuperació de Firefly",
             "importMnemonicDescription": "Introduïu la vostra frase de recuperació per recuperar els vostres moneders",
             "importFile": "Tinc un fitxer de còpia de seguretat",
-            "importFileDescription": "Pugeu un fitxer SeedVault o Stronghold"
+            "importFileDescription": "Pugeu un fitxer SeedVault o Stronghold",
+            "importLedger": "Tinc una còpia de seguretat del Ledger",
+            "importLedgerDescription": "Restaurar o migrar un perfil de Ledger"
         },
         "importFromText": {
             "seed": {
@@ -119,18 +153,63 @@
             "title": "Recupereu els vostres moneders utilitzant un fitxer de còpia de seguretat",
             "body": "Importeu un fitxer de còpia de seguretat per recuperar el moneder. Les còpies de seguretat poden ser Stronghold (.stronghold) o Trinity SeedVault (.kdbx)."
         },
+        "importFromLedger": {
+            "title": "Restaurar o migrar el meu Ledger",
+            "body": "Restaurar un perfil de Firefly Ledger existent o migrar els vostres fons des de Trinity.",
+            "haveFireflyLedger": "Tinc una còpia de seguretat Firefly del Ledger",
+            "haveFireflyLedgerDescription": "Restaurar un perfil Firefly",
+            "haveTrinityLedger": "Tinc una còpia de seguretat Trinity del Ledger",
+            "haveTrinityLedgerDescription": "Migrar un perfil de Trinity"
+        },
+        "connectLedger": {
+            "title": "Conecta el teu Ledger a Firefly",
+            "body": "Per a que el teu dispositiu Ledger pugui ser trobat per Firefly, assegura't que l'aplicació Ledger Live està tancada.",
+            "trafficLight1": "Connecta i desbloqueja el teu Ledger amb el teu PIN",
+            "trafficLight2": "Obre la nova aplicació de IOTA al teu Ledger",
+            "tips": "Consells si el teu Ledger no pot connectar"
+        },
+        "restoreFromFireflyLedger": {
+            "title": "Restaura el teu profile de Ledger",
+            "body": "Prem restaurar per a completar la posada a punt i restaurar les teves carteres, balanços i historial de transacció.",
+            "restoring": "Restaurant des de Ledger..."
+        },
+        "legacyLedgerIntro": {
+            "title": "Inicieu la migració del vostre Ledger usant Firefly",
+            "body1": "Firefly us ajudarà a transferir els vostres criptoactius a la nova xarxa Chrysalis.",
+            "body2": "Després de la migració, podreu enviar i rebre criptoactius utilitzant el vostre Ledger amb Firefly.",
+            "readMore": "Què esperar del procés de migració"
+        },
+        "generateNewLedgerAddress": {
+            "title": "Generar una nova adreça",
+            "body": "Cal que genereu una nova adreça per migrar els vostres criptoactius amb Firefly. Toqueu el botó següent per continuar.",
+            "confirmTitle": "Confirma la nova adreça",
+            "confirmBody": "Per seguretat, si us plau, compareu l'adreça generada al vostre Ledger amb la que es mostra més avall. Si coincideixen, premeu els dos botons del vostre Ledger com s'indica.",
+            "confirmedTitle": "Adreça confirmada",
+            "confirmedBody": "Heu confirmat que l'adreça de Firefly coincideix amb la del vostre Ledger.",
+            "generating": "Generant adreça"
+        },
+        "switchLedgerApps": {
+            "title": "Canvieu entre aplicacions Ledger",
+            "body": "Si us plau, canvieu a l'app {legacy} en el vostre Ledger per seguir amb la migració. Quan esteu a punt, premeu continuar."
+        },
+        "selectLedgerAccountIndex": {
+            "title": "Trieu l'índex del compte Ledger",
+            "body": "Trieu l'índex del compte Ledger que utilitzàveu amb Trinity. Per la majoria, aquest serà l'índex per defecte de 0.",
+            "accountIndex": "Índex de compte",
+            "accountPage": "Pàgina de compte",
+            "standard": "Estàndard",
+            "expert": "Expert",
+            "takingAWhile": "Això tardarà una estona...",
+            "notGeneratingAddresses": "El vostre Ledger, està generant adreces?",
+            "reinstallLegacy": "Si no ho fa, desconnecteu el dispositiu i torneu a provar-ho. Si el problema continua, pot ser que calgui reinstal·lar l'app {legacy}."
+        },
         "importBackupPassword": {
-            "title": "Recupereu els vostres moneders des de fitxers SeedVault o Stronghold",
             "body1": "Introduïu la contrasenya de la vostra còpia de seguretat.",
             "body2": "Aquesta és la contrasenya que vau definir quan vau crear la còpia de seguretat per primera vegada."
         },
         "importSuccess": {
             "title": "Heu recuperat amb èxit la vostra còpia de seguretat",
-            "body": "Ara podeu configurar el vostre perfil nou.",
-            "seedvaultTitle": "S'ha importat correctament",
-            "seedvaultBody": "La vostra contrasenya és correcta, podeu continuar.",
-            "strongholdTitle": "S'ha importat correctament",
-            "strongholdBody": "La vostra contrasenya és correcta, podeu continuar."
+            "body": "Ara podeu configurar el vostre perfil nou."
         },
         "migrate": {
             "title": "Migreu els vostres fons",
@@ -153,7 +232,7 @@
             "miningBundle": "Minant el paquet",
             "problemRestoringWallet": "Hi ha hagut un error de xarxa recuperant el vostre moneder. Si us plau, torneu-ho a provar.",
             "minimumMigrationAmountSpentAddresses": "L’import mínim de migració per a cada adreça és d’1 Mi. Torneu a comprovar si el vostre saldo no sembla correcte.",
-            "tooManyAddressesToMigrate": "Hi ha massa adreces amb poc saldo per migrar. Torneu a comprovar si el vostre saldo no sembla correcte.",
+            "tooManyAddressesToMigrate": "Hi ha massa adreces amb poc saldo per migrar. Torneu a comprovar si el vostre saldo us sembla correcte.",
             "cannotMigrateAllYourFunds": "No podem migrar tots els vostres fons perquè algunes adreces tenen un valor massa baix. Podeu continuar igualment. {value} es perdrà.",
             "error": "S'ha produït un problema durant la migració dels teus fons. Tornau-ho a provar."
         },
@@ -184,6 +263,7 @@
         },
         "transferFragmentedFunds": {
             "body1": "Ara Firefly procedirà a migrar els vostres fons. Això pot trigar una estona.",
+            "body2": "Assegureu-vos que el vostre Ledger està connectat i que l'app {legacy} és sempre oberta mentre duri la migració.",
             "migrate": "Migrar els fons",
             "transaction": "Transacció {number}",
             "rerun": "Torna-ho a provar"
@@ -196,7 +276,8 @@
             "title": "El vostre saldo",
             "body": "Assegura't que el teu saldo sigui correcte abans de continuar. Pots tornar-ho a comprovar si no sembla correcte.",
             "error": "L’import mínim de migració és d’1 Mi. Torna-ho a comprovar si el teu saldo no sembla correcte.",
-            "zeroBalance": "Torna a comprovar-ho. Si no pots trobar el teu saldo, és possible que hagis introduït el seed malament."
+            "zeroBalance": "Torna a comprovar-ho. Si no pots trobar el teu saldo, és possible que hagis introduït el seed malament.",
+            "zeroBalanceLedgerLegacy": "Torna a comprovar-ho. Si no pots trobar el teu saldo, és possible que hagis introduït el seed malament."
         },
         "settings": {
             "settings": "Preferències",
@@ -241,8 +322,8 @@
                 "description": "Notificacions del sistema per a transaccions"
             },
             "networkStatus": {
-                "title": "Network status",
-                "description": "Displays the status of the node you are currently connected to."
+                "title": "Estat de la xarxa",
+                "description": "Mostra l'estat del node al que esteu connectat."
             },
             "exportStronghold": {
                 "title": "Exportar còpia de seguretat",
@@ -314,6 +395,10 @@
                 "title": "Diagnòstics",
                 "description": "Veure la informació del sistema i de l'aplicació"
             },
+            "migrateLedgerIndex": {
+                "title": "Migra l'índex del Ledger",
+                "description": "Migra un altre índex de compte Trinity"
+            },
             "stateExport": {
                 "title": "Exportació de l'estat",
                 "description": "Exporteu el vostre historial de transaccions a un fitxer .csv"
@@ -357,7 +442,15 @@
                 },
                 "hardwareDevice": {
                     "title": "Dispositiu de maquinari",
-                    "noneDetected": "Cap detectat"
+                    "statuses": {
+                        "appNotOpen": "L'aplicació IOTA no està oberta",
+                        "connected": "Connectat",
+                        "legacyConnected": "Aplicació {legacy} oberta",
+                        "locked": "Blocat",
+                        "mnemonicMismatch": "Mnemònic o Ledger incorrecte",
+                        "notDetected": "Usuari no detectat",
+                        "otherConnected": "Aplicació oberta"
+                    }
                 },
                 "strongholdStatus": {
                     "title": "Estat de la cartera",
@@ -375,7 +468,7 @@
                 "networkDown": "Xarxa Desconectada",
                 "status": "Estat",
                 "messagesPerSecond": "Missatges per segon",
-                "referencedRate": "Referenced rate"
+                "referencedRate": "Taxa referenciada"
             },
             "profileModal": {
                 "allSettings": "Tots els paràmetres",
@@ -488,6 +581,53 @@
             "body": "L'actualització de la xarxa Chrysalis ha començat.",
             "bodyMigration": "La migració esta deshabilitada fins que s'hagi completat.",
             "bodyFirefly": "Firefly està deshabilitat fins que s'hagi completat. La migració dels tokens, després encara serà possible."
+        },
+        "ledgerNotConnected": {
+            "connect": "Obre la nova aplicació de IOTA al teu dispositiu Ledger per a continuar",
+            "connectLegacy": "Obriu l'app {legacy} al vostre Ledger per continuar"
+        },
+        "ledgerConfirmation": {
+            "confirm": "Per continuar, confirmeu el missatge que us apareix al Ledger"
+        },
+        "ledgerAppGuide": {
+            "title": "Guia per instal·lar aplicacions Ledger",
+            "steps": {
+                "0": "Instal·leu i obriu l'aplicació Ledger Live",
+                "1": "Assegureu-vos de que teniu el Ledger connectat",
+                "2": "Cerca d'aplicacions: {legacy} i IOTA (MIOTA)",
+                "3": "Instal·la les dues aplicacions: {legacy} i IOTA (MIOTA)",
+                "4": "Recordeu que és important que tanqueu Ledger Live abans de tornar a Firefly"
+            }
+        },
+        "ledgerConnectionGuide": {
+            "title": "Consells si el teu Ledger no pot connectar",
+            "steps": {
+                "0": "Assegura't que Ledger Live no està obert al teu ordinador",
+                "1": "Assegura't que has bloquejat el teu dispositu Ledger amb el teu PIN",
+                "2": "Obre la nova aplicació de IOTA al teu Ledger",
+                "3": {
+                    "text": "Continueu sense trobar-ho?",
+                    "link": "Proveu a la pàgina de suport oficial de Ledger"
+                }
+            }
+        },
+        "ledgerTransaction": {
+            "remainderAddress": {
+                "title": "Confirma la resta d'adreça",
+                "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+            },
+            "transaction": {
+                "title": "Confirmar la transacció",
+                "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted."
+            }
+        },
+        "ledgerAddress": {
+            "title": "Confirm receive address",
+            "body": "Confirm that the receive address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+        },
+        "ledgerMigrateIndex": {
+            "title": "Do you need to migrate another Trinity account index?",
+            "body": "You can also migrate later in Advanced Settings."
         }
     },
     "charts": {
@@ -495,6 +635,7 @@
         "outgoingMi": "Sortint {value}",
         "portoflio": "Portafoli",
         "token": "Token",
+        "holdings": "Holdings",
         "accountValue": "Valor del moneder",
         "accountActivity": "Activitat del moneder",
         "timeframe1Hour": "1 hora",
@@ -505,6 +646,8 @@
     "actions": {
         "continue": "Continuar",
         "back": "Tornar",
+        "previous": "Previous",
+        "next": "Next",
         "cancel": "Cancel·lar",
         "close": "Tancar",
         "dismiss": "Omet",
@@ -573,6 +716,7 @@
         "addAccount": "Afegeix moneder",
         "checkForUpdates": "Cerca actualitzacions",
         "reportAnIssue": "Notifica un problema",
+        "restore": "Restore",
         "clear": "Neteja",
         "hideDetails": "Amaga els detalls",
         "yes": "Si",
@@ -592,7 +736,9 @@
         "searchBalances": "Cerca balanços",
         "searchAgain": "Cerca de nou",
         "searching": "Cercant...",
-        "closeFirefly": "Tanca Firefly"
+        "closeFirefly": "Tanca Firefly",
+        "generateAddress": "Generar adreça",
+        "migrateAgain": "Migrate another index"
     },
     "general": {
         "password": "Contrasenya",
@@ -607,6 +753,7 @@
         "received": "Rebut",
         "sendPayment": "Envia el pagament",
         "moveFunds": "Transferència interna",
+        "sendTo": "Send To",
         "sendFunds": "Enviar fons",
         "sendToAddress": "Enviar a l’adreça",
         "scanQrOrPaste": "Escaneja un codi QR o enganxa una adreça",
@@ -625,6 +772,8 @@
         "myAddress": "La meva adreça",
         "shareAddress": "Compartir una adreça",
         "yourAddress": "La teva adreça",
+        "newRemainder": "New Remainder",
+        "remainder": "Remainder",
         "generateNewAddress": "Generar una nova adreça",
         "copyAddress": "Copiar l'adreça",
         "import": "Importar",
@@ -661,6 +810,7 @@
         "messageId": "ID del Missatge",
         "inputAddress": "Enviar adreça",
         "receiveAddress": "Adreça de recepció",
+        "newAddress": "New Address",
         "date": "Data",
         "status": "Estat",
         "confirmed": "Confirmat",
@@ -672,11 +822,13 @@
         "firstSync": "Sinconitzant l'historial, això pot durar una estona...",
         "transferSyncing": "Sincronitzant moneder",
         "transferSelectingInputs": "Selecció d’entrades",
-        "transferRemainderAddress": "S'està generant l'adreça de dipòsit restant",
+        "transferRemainderAddress": "Generating remainder address",
+        "transferPreparedTransaction": "Preparing transaction",
         "transferSigning": "Signatura de la transacció",
         "transferPow": "Realització de la PoW",
         "transferBroadcasting": "Promocionant transacció",
         "transferComplete": "Transferència completada",
+        "generatingReceiveAddress": "Generating receive address",
         "creatingAccount": "Creant moneder, si us plau, espereu...",
         "updatingAccount": "Actualitzant moneder, si us plau, espereu...",
         "accountSyncing": "El moneder s'està actualitzant",
@@ -708,7 +860,8 @@
         "sending": "Enviant",
         "legacyNetwork": "Xarxa Legacy",
         "capsLock": "El bloqueig de majúscules està activat",
-        "version": "Versió {version}"
+        "version": "Versió {version}",
+        "unknown": "Desconegut"
     },
     "dates": {
         "today": "Avui",
@@ -732,8 +885,7 @@
         "minutesRemaining": "{minutes, plural, one {1 minut restant} other {# minuts restants}}",
         "copiedToClipboard": "Copiat al porta-retalls",
         "accountsSynchronized": "Sincronització completa del moneder",
-        "migratedAccountChrysalisDown": "Els teus fons estaran disponibles després de Chrysalis el 28 d'abril",
-        "migratedAccountChrysalisUp": "Els teus fons estaran disponibles en breu"
+        "fundsAvailableSoon": "Your funds will become available shortly"
     },
     "error": {
         "profile": {
@@ -770,7 +922,10 @@
             "tilde": "El nom de perfil no pot començar amb el caràcter '~'.",
             "control": "Un nom de perfil no pot contenir cap caràcter de control.",
             "startDot": "Un nom de perfil no pot començar amb el caràcter '.'.",
-            "chars": "Un nom de perfil no pot contenir els caràcters següents <>:\"/\\|?*"
+            "chars": "Un nom de perfil no pot contenir els caràcters següents <>:\"/\\|?*",
+            "index": "Your account index must be a number between 0 and 2,147,483,647.",
+            "page": "Your account page must be a number between 0 and 2,147,483,647.",
+            "syncing": "There was an error syncing your wallets."
         },
         "send": {
             "addressLength": "Les adreces han de tenir {length, plural, one {1 caràcter} other {# caràcters}} més.",
@@ -784,10 +939,13 @@
             "insufficientFunds": "Aquest moneder no té prou fons.",
             "noToAccount": "No heu seleccionat cap moneder on enviar els fons.",
             "sendingDust": "No es possible enviar menys d'1 Mi.",
-            "leavingDust": "No és possible deixar menys d'1 Mi a la teva adreça."
+            "leavingDust": "No és possible deixar menys d'1 Mi a la teva adreça.",
+            "cancelled": "The transaction was cancelled.",
+            "transaction": "There was an error sending your transaction. Please try again."
         },
         "node": {
             "invalid": "Si us plau, introdueix una URL vàlida.",
+            "dns": "Could not resolve DNS for node.",
             "https": "Es requereix HTTPS. Configureu un perfil de desenvolupador per utilitzar connexions HTTP no segures.",
             "duplicate": "Aquest node ja s'ha afegit.",
             "unsynced": "El node no esta sincronitzat.",
@@ -805,6 +963,28 @@
             "phraseWordCount": "Hi ha d'haver 24 paraules a la frase de recuperació, actualment {length, plural, one {és 1} other {són #}}.",
             "phraseUnrecognizedWord": "Paraula no reconeguda \"{word}\" a la frase de recuperació",
             "phraseCaseWord": "La paraula \"{word}\" ha d'estar en minúscules"
+        },
+        "ledger": {
+            "appNotOpen": "You must open the IOTA app on your Ledger device.",
+            "generic": "S’ha produït un problema en connectar amb el teu dispositiu Ledger.",
+            "legacyConnected": "L'aplicació incorrecta està oberta al teu dispositu Ledger.",
+            "locked": "Si us plau, desbloqueja el teu dispositiu Ledger utilitzant el PIN.",
+            "mnemonicMismatch": "Has connectat un dispositiu Ledger equivocat or el mnemonic ha canviat.",
+            "notDetected": "Cap dispositiu Ledger detectat.",
+            "notFound": "No s'ha trobat el dispositiu Ledger.",
+            "otherConnected": "L'aplicació incorrecta està oberta al teu dispositu Ledger.",
+            "generateAddress": "Hi ha hagut un error generant l'adreça.",
+            "timeout": "Your Ledger device timed out.",
+            "disconnected": "Your Ledger device was disconnected."
+        },
+        "popup": {
+            "preventClose": "This popup is unable to be closed."
+        },
+        "migration": {
+            "missingBundle": "An error occurred while trying to find the transaction bundle."
+        },
+        "crypto": {
+            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
         }
     },
     "tooltips": {

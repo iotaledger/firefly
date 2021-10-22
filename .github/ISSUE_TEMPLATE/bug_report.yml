@@ -1,0 +1,75 @@
+name: Found a bug?
+description: Fill in this form to report it, and help us improve.
+labels: bug
+
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Issue description
+      description: Briefly describe the issue.
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Firefly version
+      description: Which version of the wallet are you using?
+      placeholder: Version number, commit, or branch
+    validations:
+      required: true
+
+  - type: input
+    id: os_details
+    attributes:
+      label: OS details
+      description: Mac/Windows/Linux (including version and/or distro)
+      placeholder: ex. Windows 10 Pro 10.0.19042 Build 19042
+    validations:
+      required: true
+
+  - type: dropdown
+    id: can_repro
+    attributes:
+      label: Can the issue be reliably reproduced?
+      options:
+        - 'Yes'
+        - 'No'
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro_steps
+    attributes:
+      label: Steps to reproduce the issue
+      description: Explain how the maintainer can reproduce the issue.
+      value: |
+        1.
+        2.
+        3.
+        ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_behaviour
+    attributes:
+      label: Expected behaviour
+      description: A concise description of what you expected to happen.
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual_behaviour
+    attributes:
+      label: Actual behaviour
+      description: A concise description of what you're experiencing.
+    validations:
+      required: true
+
+  - type: textarea
+    id: errors
+    attributes:
+      label: Errors
+      description: Paste any errors that you see from the Error Log in the Firefly menu or share screenshots of the issue.

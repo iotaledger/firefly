@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "ایجاد پروفایل",
+            "profileName": "نام پروفایل",
             "body1": "شما میتوانید برای نگهداری توکن های خود به صورت جداگانه و ارتقای حریم خصوصی، چندین پروفایل کاربری درست کنید.",
-            "body2": "فعلا با نام اولین پروفایل خود شروع کنید، شما بعدا میتوانید پروفایل های بیشتری اضافه کنید.",
-            "profileName": "نام پروفایل"
+            "body2": {
+                "first": "For now, let's start with your first profile name.",
+                "nonFirst": "For now, let's start with your profile name."
+            },
+            "addMore": "You can add more profiles later."
         },
         "setup": {
             "title": "راه اندازی کیف پول",
@@ -29,6 +33,32 @@
             "title": "ایمن سازی کیف پول",
             "body1": "قالب PDF کیت بازیابی را ذخیره و پرینت کنید.",
             "body2": "اگر کیت بازیابی خود را پر کرده و در جایی امن نگهداری کنید، همیشه می توانید کیف پول خود را بازیابی کنید."
+        },
+        "create": {
+            "title": "Create a wallet",
+            "body": "Create a new wallet. You can choose a regular software wallet or if you have a Ledger device you can set up a hardware wallet.",
+            "softwareAccount": {
+                "title": "I want a software wallet",
+                "description": "Create a 24-word Recovery Phrase"
+            },
+            "ledgerAccount": {
+                "title": "I want a hardware wallet",
+                "description": "Ledger Nano S or Nano X required"
+            }
+        },
+        "setupLedger": {
+            "progress1": "Connect your Ledger",
+            "progress2": "Generate address",
+            "progress3": "Switch Ledger app",
+            "progress4": "Transfer funds",
+            "watchVideo": "Watch video guide",
+            "videoGuide": "Ledger migration video guide"
+        },
+        "ledgerInstallationGuide": {
+            "title": "Have you installed the necessary Ledger apps?",
+            "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
+            "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
+            "action": "Yes, I've installed these apps"
         },
         "password": {
             "title": "ایجاد رمز عبور",
@@ -85,9 +115,11 @@
         },
         "congratulations": {
             "title": "راه اندازی کیف پول کامل شد",
-            "body": "کیف پول جدید شما آماده استفاده میباشد.",
             "fundsMigrated": "وجوه منتقل شد",
-            "success": "شما با موفقیت وجوه خود را به شبکه جدید منتقل کردید",
+            "body": "کیف پول جدید شما آماده استفاده میباشد.",
+            "softwareMigratedBody": "You have successfully migrated your funds to the new network",
+            "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
             "exportMigration": "گرفتن گزارش انتقال و اتمام راه اندازی"
         },
         "import": {
@@ -98,7 +130,9 @@
             "importMnemonic": "عبارت بازیابی Firefly را در اختیار دارم",
             "importMnemonicDescription": "جهت بازگردانی کیف پول های خود عبارت بازیابی را وارد کنید",
             "importFile": "فایل پشتیبان در اختیار دارم",
-            "importFileDescription": "فایل SeedVault یا Stronghold را ارسال کنید"
+            "importFileDescription": "فایل SeedVault یا Stronghold را ارسال کنید",
+            "importLedger": "I have a Ledger backup",
+            "importLedgerDescription": "Restore or migrate a Ledger profile"
         },
         "importFromText": {
             "seed": {
@@ -119,18 +153,63 @@
             "title": "بازگردانی کیف پول توسط فایل بک آپ",
             "body": "جهت بازگردانی کیف پول های خود، فایل بک آپ را وارد کنید. فایل بک آپ میتواند یک استرانگ هُلد (stronghold.) و یا ترینیتی سیدوالت (kdbx.) باشد."
         },
+        "importFromLedger": {
+            "title": "Restore or Migrate your Ledger",
+            "body": "Restore an existing Firefly Ledger profile, or migrate your funds from Trinity.",
+            "haveFireflyLedger": "I have a Firefly Ledger backup",
+            "haveFireflyLedgerDescription": "Restore a Firefly profile",
+            "haveTrinityLedger": "I have a Trinity Ledger backup",
+            "haveTrinityLedgerDescription": "Migrate a Trinity profile"
+        },
+        "connectLedger": {
+            "title": "Connect your Ledger to Firefly",
+            "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed.",
+            "trafficLight1": "Connect and unlock your Ledger with your PIN",
+            "trafficLight2": "Open the new IOTA app on your Ledger",
+            "tips": "Tips if your Ledger isn’t connecting"
+        },
+        "restoreFromFireflyLedger": {
+            "title": "Restore Your Ledger Profile",
+            "body": "Press restore to complete the setup process and restore your wallets, balances and transaction history.",
+            "restoring": "Restoring from Ledger..."
+        },
+        "legacyLedgerIntro": {
+            "title": "Start your Ledger migration using Firefly",
+            "body1": "Firefly will help you to transfer your tokens to the new Chrysalis network.",
+            "body2": "After the migration, you will be able to send and receive your tokens using your Ledger with Firefly.",
+            "readMore": "What to expect from the migration process"
+        },
+        "generateNewLedgerAddress": {
+            "title": "تولید آدرس جدید",
+            "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
+            "confirmTitle": "Confirm the new address",
+            "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
+            "confirmedTitle": "Address confirmed",
+            "confirmedBody": "You have confirmed that the address in Firefly matches the one on your Ledger device.",
+            "generating": "Generating address"
+        },
+        "switchLedgerApps": {
+            "title": "Switch Ledger apps",
+            "body": "Please switch to the {legacy} app on your Ledger device to continue migration. When ready, press continue."
+        },
+        "selectLedgerAccountIndex": {
+            "title": "Choose Ledger account index",
+            "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
+            "accountIndex": "Account Index",
+            "accountPage": "Account Page",
+            "standard": "Standard",
+            "expert": "Expert",
+            "takingAWhile": "This is taking a while...",
+            "notGeneratingAddresses": "Is your Ledger generating addresses?",
+            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
+        },
         "importBackupPassword": {
-            "title": "بازگردانی کیف پول توسط SeedVault یا Stronghold",
             "body1": "لطفا رمز عبور بک آپ خود را وارد کنید.",
             "body2": "این رمز عبوریست که برای اولین بار در گرفتن بک آپ آن را وارد کردید."
         },
         "importSuccess": {
             "title": "شما با موفقیت بک آپ خود را بازیابی کردید",
-            "body": "اکنون میتوانید کیف پول جدید خود را راه اندازی کنید.",
-            "seedvaultTitle": "با موفقیت وارد شد",
-            "seedvaultBody": "رمز عبور شما درست است٬ میتوانید ادامه دهید.",
-            "strongholdTitle": "با موفقیت وارد شد",
-            "strongholdBody": "رمز عبور شما درست است٬ میتوانید ادامه دهید."
+            "body": "اکنون میتوانید کیف پول جدید خود را راه اندازی کنید."
         },
         "migrate": {
             "title": "توکن های خود را انتقال دائمی دهید",
@@ -153,7 +232,7 @@
             "miningBundle": "در حال استخراج دسته تراکنش ها",
             "problemRestoringWallet": "بازیابی کیف پول شما با مشکل مواجه شد. لطفا دوباره سعی کنید.",
             "minimumMigrationAmountSpentAddresses": "حداقل مبلغ انتقال برای هر آدرس 1 Mi است. موجودی خود را دوباره کنترل کنید.",
-            "tooManyAddressesToMigrate": "تعداد آدرس‌های با موجودی پایین شما جهت انتقال، بیش از حد است. موجودی خود را دوباره کنترل کنید.",
+            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
             "cannotMigrateAllYourFunds": "امکان انتقال تمام وجوه شما به دلیل موجودی بسیار کم بعضی از آدرس‌ها وجود ندارد. با این حال می‌توانید ادامه دهید. مقدار {value} از دست خواهد رفت.",
             "error": "انتقال وجوه شما با مشکل مواجه شد. لطفا دوباره سعی کنید."
         },
@@ -184,6 +263,7 @@
         },
         "transferFragmentedFunds": {
             "body1": "اکنون Firefly برای انتقال وجوه شما اقدام می‌کند. این کار ممکن است مدتی طول بکشد.",
+            "body2": "Ensure your Ledger is connected and the {legacy} app is open at all times during migration.",
             "migrate": "انتقال وجوه",
             "transaction": "تراکنش {number}",
             "rerun": "تلاش مجدد"
@@ -196,7 +276,8 @@
             "title": "موجودی شما",
             "body": "پیش از ادامه از موجودی خود مطمئن شوید. اگر مواردی صحیح نبود می‌توانید دوباره بررسی کنید.",
             "error": "حداقل مبلغ انتقال برای هر آدرس 1 Mi است. اگر موجودی شما صحیح نیست، دوباره کنترل کنید.",
-            "zeroBalance": "دوباره کنترل کنید. اگر کماکان موجودی شما صحیح نیست احتمالا seed را اشتباه وارد کرده‌اید."
+            "zeroBalance": "دوباره کنترل کنید. اگر کماکان موجودی شما صحیح نیست احتمالا seed را اشتباه وارد کرده‌اید.",
+            "zeroBalanceLedgerLegacy": "Try checking again. If you still can't find your balance you might have selected the wrong account index."
         },
         "settings": {
             "settings": "تنظیمات",
@@ -314,6 +395,10 @@
                 "title": "عیب شناسی",
                 "description": "نمایش اطلاعات سیستم و اپلیکیشن"
             },
+            "migrateLedgerIndex": {
+                "title": "Migrate Ledger Index",
+                "description": "Migrate another Trinity account index"
+            },
             "stateExport": {
                 "title": "ایجاد فایل گزارش کلی",
                 "description": "استخراج سوابق ترکنش ها به صورت فایل csv"
@@ -357,7 +442,15 @@
                 },
                 "hardwareDevice": {
                     "title": "دستگاه سخت افزاری",
-                    "noneDetected": "چیزی یافت نشد"
+                    "statuses": {
+                        "appNotOpen": "IOTA App Not Open",
+                        "connected": "Connected",
+                        "legacyConnected": "{legacy} App Open",
+                        "locked": "قفل شد",
+                        "mnemonicMismatch": "Wrong Ledger or Mnemonic",
+                        "notDetected": "Not Detected",
+                        "otherConnected": "App Open"
+                    }
                 },
                 "strongholdStatus": {
                     "title": "وضعیت کیف پول",
@@ -488,6 +581,53 @@
             "body": "بروزرسانی شبکه Chrysalis آغاز شده است.",
             "bodyMigration": "نقل و انتقال تا تکمیل آن غیرفعال است.",
             "bodyFirefly": "Firefly تا زمان تکمیل آن غیرفعال شده است. پس از آن انتقال توکن امکان پذیر است."
+        },
+        "ledgerNotConnected": {
+            "connect": "Open the new IOTA app on your Ledger device to continue",
+            "connectLegacy": "Open the {legacy} app on your Ledger device to continue"
+        },
+        "ledgerConfirmation": {
+            "confirm": "To proceed, confirm the prompt displayed on your Ledger device"
+        },
+        "ledgerAppGuide": {
+            "title": "Guide to installing the Ledger apps",
+            "steps": {
+                "0": "Install and open the Ledger Live application",
+                "1": "Ensure that your Ledger is connected",
+                "2": "Search for apps: {legacy} and IOTA (MIOTA)",
+                "3": "Install both apps: {legacy} and IOTA (MIOTA)",
+                "4": "Remember that it's important to close Ledger Live before returning to Firefly"
+            }
+        },
+        "ledgerConnectionGuide": {
+            "title": "Tips if your Ledger isn’t connecting",
+            "steps": {
+                "0": "Make sure Ledger Live is not open on your computer",
+                "1": "Ensure you have unlocked your Ledger device with your PIN",
+                "2": "Open the new IOTA app on your Ledger device",
+                "3": {
+                    "text": "Still no luck?",
+                    "link": "Try the official Ledger support page"
+                }
+            }
+        },
+        "ledgerTransaction": {
+            "remainderAddress": {
+                "title": "Confirm remainder address",
+                "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+            },
+            "transaction": {
+                "title": "تایید تراکنش",
+                "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted."
+            }
+        },
+        "ledgerAddress": {
+            "title": "Confirm receive address",
+            "body": "Confirm that the receive address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+        },
+        "ledgerMigrateIndex": {
+            "title": "Do you need to migrate another Trinity account index?",
+            "body": "You can also migrate later in Advanced Settings."
         }
     },
     "charts": {
@@ -495,6 +635,7 @@
         "outgoingMi": "خروجی {value} Mi",
         "portoflio": "سبد سهام",
         "token": "توکن",
+        "holdings": "Holdings",
         "accountValue": "مقدار کیف پول",
         "accountActivity": "فعالیت کیف پول",
         "timeframe1Hour": "۱ ساعت",
@@ -505,6 +646,8 @@
     "actions": {
         "continue": "ادامه",
         "back": "بازگشت",
+        "previous": "Previous",
+        "next": "Next",
         "cancel": "لغو",
         "close": "بستن",
         "dismiss": "نادیده گرفتن",
@@ -573,6 +716,7 @@
         "addAccount": "اضافه کردن کیف پول",
         "checkForUpdates": "بررسی برای بروزرسانی",
         "reportAnIssue": "گزارش مشکل",
+        "restore": "Restore",
         "clear": "پاک کردن",
         "hideDetails": "پنهان کردن جزئیات",
         "yes": "بله",
@@ -592,7 +736,9 @@
         "searchBalances": "جستجو برای موجودی",
         "searchAgain": "جستجوی مجدد",
         "searching": "درحال جستجو...",
-        "closeFirefly": "بستن Firefly"
+        "closeFirefly": "بستن Firefly",
+        "generateAddress": "Generate address",
+        "migrateAgain": "Migrate another index"
     },
     "general": {
         "password": "رمز عبور",
@@ -607,6 +753,7 @@
         "received": "دریافت شده",
         "sendPayment": "ارسال پرداخت",
         "moveFunds": "انتقال داخلی",
+        "sendTo": "Send To",
         "sendFunds": "ارسال وجه",
         "sendToAddress": "ارسال به آدرس",
         "scanQrOrPaste": "کد QR یا آدرس را وارد کنید",
@@ -625,6 +772,8 @@
         "myAddress": "آدرس من",
         "shareAddress": "اشتراک گذاری یک آدرس",
         "yourAddress": "آدرس شما",
+        "newRemainder": "New Remainder",
+        "remainder": "Remainder",
         "generateNewAddress": "تولید آدرس جدید",
         "copyAddress": "کپی کردن آدرس",
         "import": "وارد کردن",
@@ -661,6 +810,7 @@
         "messageId": "شناسه پیام",
         "inputAddress": "ارسال آدرس",
         "receiveAddress": "آدرس گیرنده",
+        "newAddress": "New Address",
         "date": "تاریخ",
         "status": "وضعیت",
         "confirmed": "تایید شده",
@@ -672,11 +822,13 @@
         "firstSync": "همگام سازی تاریخچه، ممکن است مدتی طول بکشد...",
         "transferSyncing": "همگام سازی کیف پول",
         "transferSelectingInputs": "در حال انتخاب ورودی ها",
-        "transferRemainderAddress": "در حال تولید آدرس موجودی باقیمانده",
+        "transferRemainderAddress": "Generating remainder address",
+        "transferPreparedTransaction": "Preparing transaction",
         "transferSigning": "در حال صحه گذاری تراکنش",
         "transferPow": "در حال انجام اثبات کار",
         "transferBroadcasting": "در حال انتشار تراکنش",
         "transferComplete": "انتقال کامل شد",
+        "generatingReceiveAddress": "Generating receive address",
         "creatingAccount": "در حال ساختن کیف پول، لطفا صبر کنید...",
         "updatingAccount": "در حال بروزرسانی کیف پول، لطفا صبر کنید...",
         "accountSyncing": "کیف پول در حال همگام سازی است",
@@ -708,7 +860,8 @@
         "sending": "در حال ارسال",
         "legacyNetwork": "شبکه قدیمی",
         "capsLock": "کلید caps lock روشن است",
-        "version": "نسخه {version}"
+        "version": "نسخه {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "امروز",
@@ -732,8 +885,7 @@
         "minutesRemaining": "{minutes, plural, one {1 دقیقه باقی مانده } other {# دقیقه باقی مانده}}",
         "copiedToClipboard": "در کلیپ‌بورد کپی شد",
         "accountsSynchronized": "همگام سازی حساب کامل شد",
-        "migratedAccountChrysalisDown": "وجوه شما از ۲۸ آوریل بر روی Chrysalis قابل دسترس میباشد.",
-        "migratedAccountChrysalisUp": "وجوه شما به زودی قابل استفاده خواهد شد"
+        "fundsAvailableSoon": "Your funds will become available shortly"
     },
     "error": {
         "profile": {
@@ -770,7 +922,10 @@
             "tilde": "اسم پروفایل نمیتواند با کاراکتر '~' شروع شود.",
             "control": "اسم پروفایل نمیتواند از کاراکتر کنترلی تشکیل شده باشد.",
             "startDot": "اسم پروفایل نمیتواند با کاراکتر '.' شروع شود.",
-            "chars": "اسم پروفایل نمیتواند از کاراکترهای <>:\"/\\|?* تشکیل شده باشد"
+            "chars": "اسم پروفایل نمیتواند از کاراکترهای <>:\"/\\|?* تشکیل شده باشد",
+            "index": "Your account index must be a number between 0 and 2,147,483,647.",
+            "page": "Your account page must be a number between 0 and 2,147,483,647.",
+            "syncing": "There was an error syncing your wallets."
         },
         "send": {
             "addressLength": "آدرس ها باید {length, plural, one {1 کاراکتری} other {# کاراکتری}} باشند.",
@@ -784,10 +939,13 @@
             "insufficientFunds": "این کیف پول موجودی کافی ندارد.",
             "noToAccount": "کیف پول مقصد را انتخاب نکرده‌اید.",
             "sendingDust": "شما کمتر از 1Mi نمیتوانید ارسال کنید.",
-            "leavingDust": "در آدرس شما کمتر از 1Mi نمیتواند باشد."
+            "leavingDust": "در آدرس شما کمتر از 1Mi نمیتواند باشد.",
+            "cancelled": "The transaction was cancelled.",
+            "transaction": "There was an error sending your transaction. Please try again."
         },
         "node": {
             "invalid": "لطفا یک URL معتبر وارد کنید.",
+            "dns": "Could not resolve DNS for node.",
             "https": "HTTPS لازم است. برای استفاده از اتصالات HTTP بدون امنیت، یک پروفایل برنامه نویس تنظیم کنید.",
             "duplicate": "این نود قبلا اضافه شده است.",
             "unsynced": "این نود هماهنگ نیست.",
@@ -805,6 +963,28 @@
             "phraseWordCount": "عبارت بازیابی شما باید 24 کلمه ای باشد٬ در حال حاضر {length, plural, one {1 کلمه ایست} other {کلمه ایست #}}.",
             "phraseUnrecognizedWord": "کلمه نا آشنا \"{word}\" در عبارت بازیابی شما یافت شد",
             "phraseCaseWord": "کلمه \"{word} \" می بایست حروف کوچک باشد"
+        },
+        "ledger": {
+            "appNotOpen": "You must open the IOTA app on your Ledger device.",
+            "generic": "There was an error connecting to your Ledger device.",
+            "legacyConnected": "The wrong app is open on your Ledger device.",
+            "locked": "Please unlock your Ledger device by entering the PIN.",
+            "mnemonicMismatch": "You have connected the wrong Ledger device or the mnemonic has changed.",
+            "notDetected": "No Ledger device detected.",
+            "notFound": "Ledger device not found.",
+            "otherConnected": "The wrong app is open on your Ledger device.",
+            "generateAddress": "There was an error generating an address.",
+            "timeout": "Your Ledger device timed out.",
+            "disconnected": "Your Ledger device was disconnected."
+        },
+        "popup": {
+            "preventClose": "This popup is unable to be closed."
+        },
+        "migration": {
+            "missingBundle": "An error occurred while trying to find the transaction bundle."
+        },
+        "crypto": {
+            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
         }
     },
     "tooltips": {

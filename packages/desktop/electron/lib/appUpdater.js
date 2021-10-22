@@ -4,7 +4,7 @@ const { autoUpdater, CancellationToken } = require('electron-updater')
 const packageJson = require('../../package.json')
 const electronLog = require('electron-log')
 
-let versionDetails = {
+const versionDetails = {
     upToDate: true,
     currentVersion: packageJson.version,
     newVersion: '',

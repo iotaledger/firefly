@@ -1,45 +1,49 @@
 <script lang="typescript">
-    import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
-    import { loggedIn, mobile } from 'shared/lib/app'
-    import { appSettings } from 'shared/lib/appSettings'
-    import { getVersionDetails, pollVersion, versionDetails } from 'shared/lib/appUpdater'
-    import { Electron } from 'shared/lib/electron'
-    import { addError } from 'shared/lib/errors'
-    import { goto } from 'shared/lib/helpers'
-    import { dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
-    import { pollMarketData } from 'shared/lib/marketData'
-    import { openPopup, popupState } from 'shared/lib/popup'
-    import { cleanupEmptyProfiles, cleanupInProgressProfiles } from 'shared/lib/profile'
-    import { dashboardRoute, initRouter, routerNext, routerPrevious, walletRoute } from 'shared/lib/router'
-    import { AppRoute, Tabs } from 'shared/lib/typings/routes'
+    import { Popup,Route,TitleBar,ToastContainer } from 'shared/components';
+    import { loggedIn,mobile } from 'shared/lib/app';
+    import { appSettings } from 'shared/lib/appSettings';
+    import { getVersionDetails,pollVersion,versionDetails } from 'shared/lib/appUpdater';
+    import { Electron } from 'shared/lib/electron';
+    import { addError } from 'shared/lib/errors';
+    import { goto } from 'shared/lib/helpers';
+    import { dir,isLocaleLoaded,setupI18n,_ } from 'shared/lib/i18n';
+    import { pollMarketData } from 'shared/lib/market';
+    import { showAppNotification } from 'shared/lib/notifications';
+    import { openPopup,popupState } from 'shared/lib/popup';
+    import { cleanupEmptyProfiles,cleanupInProgressProfiles } from 'shared/lib/profile';
+    import { dashboardRoute,initRouter,routerNext,routerPrevious,walletRoute } from 'shared/lib/router';
+    import type { Locale } from 'shared/lib/typings/i18n';
+    import { AppRoute,Tabs } from 'shared/lib/typings/routes';
     import {
-        Appearance,
-        Backup,
-        Balance,
-        Congratulations,
-        Dashboard,
-        Import,
-        Legal,
-        Login,
-        Migrate,
-        Password,
-        Protect,
-        Secure,
-        Settings,
-        Setup,
-        Profile,
-        Splash,
-        Welcome,
-    } from 'shared/routes'
-    import { onMount } from 'svelte'
-    import { get } from 'svelte/store'
-    import { getLocalisedMenuItems } from './lib/helpers'
+    Appearance,
+    Backup,
+    Balance,
+    Congratulations,
+    Create,
+    Dashboard,
+    Import,
+    Ledger,
+    Legal,
+    Login,
+    Migrate,
+    Password,
+    Profile,
+    Protect,
+    Secure,
+    Settings,
+    Setup,
+    Splash,
+    Welcome
+    } from 'shared/routes';
+    import { onDestroy,onMount } from 'svelte';
+    import { get } from 'svelte/store';
+    import { getLocalisedMenuItems } from './lib/helpers';
 
     $: $appSettings.darkMode ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')
     $: {
         isLocaleLoaded.subscribe((loaded) => {
             if (loaded) {
-                Electron.updateMenu('strings', getLocalisedMenuItems($_))
+                Electron.updateMenu('strings', getLocalisedMenuItems($_ as Locale))
             }
         })
     }
@@ -52,7 +56,7 @@
     let splash = true
     let settings = false
 
-    setupI18n({ withLocale: $appSettings.language })
+    void setupI18n({ fallbackLocale: 'en', initialLocale: $appSettings.language })
     onMount(async () => {
         setTimeout(() => {
             splash = false
@@ -62,9 +66,10 @@
         await pollMarketData()
 
         // @ts-ignore: This value is replaced by Webpack DefinePlugin
+        /* eslint-disable no-undef */
         if (!devMode) {
             await getVersionDetails()
-            await pollVersion()
+            pollVersion()
         }
         Electron.onEvent('menu-navigate-wallet', (route) => {
             if (get(dashboardRoute) !== Tabs.Wallet) {
@@ -81,7 +86,7 @@
                 settings = true
             }
         })
-        Electron.onEvent('menu-check-for-update', async () => {
+        Electron.onEvent('menu-check-for-update', () => {
             openPopup({
                 type: 'version',
                 props: {
@@ -89,19 +94,32 @@
                 },
             })
         })
-        Electron.onEvent('menu-error-log', async () => {
+        Electron.onEvent('menu-error-log', () => {
             openPopup({ type: 'errorLog' })
         })
-        Electron.onEvent('menu-diagnostics', async () => {
+        Electron.onEvent('menu-diagnostics', () => {
             openPopup({ type: 'diagnostics' })
         })
         Electron.hookErrorLogger((err) => {
             addError(err)
         })
 
+        Electron.onEvent('deep-link-request', showDeepLinkNotification)
+
         await cleanupInProgressProfiles()
         await cleanupEmptyProfiles()
     })
+
+    onDestroy(() => {
+        Electron.removeListenersForEvent('deep-link-request')
+        Electron.DeepLinkManager.clearDeepLinkRequest()
+    })
+
+    const showDeepLinkNotification = () => {
+        if(!$loggedIn) {
+            showAppNotification({ type: 'info', message: $_('notifications.deepLinkingRequest.recievedWhileLoggedOut') })
+        }
+    }
 </script>
 
 <style global type="text/scss">
@@ -231,6 +249,14 @@
         <Route route={AppRoute.Setup}>
             <Setup on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
         </Route>
+        <!-- TODO: fix ledger -->
+        <Route route={AppRoute.Create}>
+            <Create on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        </Route>
+        <Route route={AppRoute.LedgerSetup}>
+            <Ledger on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        </Route>
+        <!--  -->
         <Route route={AppRoute.Secure}>
             <Secure on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
         </Route>

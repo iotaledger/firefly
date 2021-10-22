@@ -4,8 +4,11 @@ export enum AppRoute {
     Appearance = 'appearance',
     Profile = 'profile',
     Setup = 'setup',
+    // TODO: ledger replace create
+    Create = 'create',
     Secure = 'secure',
     Password = 'password',
+    LedgerSetup = 'ledgerSetup',
     Protect = 'protect',
     Backup = 'backup',
     Import = 'import',
@@ -23,6 +26,18 @@ export enum SetupType {
     Seed = 'seed',
     Stronghold = 'stronghold',
     Seedvault = 'seedvault',
+    TrinityLedger = 'trinityLedger',
+    FireflyLedger = 'fireflyLedger',
+}
+
+export enum LedgerRoutes {
+    Connect = 'connect',
+    RestoreFromLedger = 'restoreFromLedger',
+    LegacyIntro = 'legacyIntro',
+    InstallationGuide = 'installationGuide',
+    GenerateAddress = 'generateAddress',
+    SwitchApps = 'switchApps',
+    AccountIndex = 'accountIndex',
 }
 
 export enum WalletRoutes {
@@ -87,25 +102,26 @@ export enum SecuritySettings {
 export enum AdvancedSettings {
     NodeSettings = 'nodeSettings',
     ProofOfWork = 'proofOfWork',
-    //DeveloperMode = 'developerMode',
-    //DeepLinks = 'deepLinks',
+    // DeveloperMode = 'developerMode',
+    DeepLinks = 'deepLinks',
     BalanceFinder = 'balanceFinder',
     HiddenAccounts = 'hiddenAccounts',
     ErrorLog = 'errorLog',
     Diagnostics = 'diagnostics',
+    MigrateLedgerIndex = 'migrateLedgerIndex',
     // TODO: Implement and enable
-    //StateExport = 'stateExport',
+    // StateExport = 'stateExport',
 }
 
 export enum AdvancedSettingsNoProfile {
-    //DeveloperMode = 'developerMode',
-    //DeepLinks = 'deepLinks',
+    // DeveloperMode = 'developerMode',
+    DeepLinks = 'deepLinks',
     ErrorLog = 'errorLog',
     Diagnostics = 'diagnostics',
 }
 
 export enum HelpAndInfo {
-    //Troubleshoot = 'troubleshoot',
+    // Troubleshoot = 'troubleshoot',
     Documentation = 'documentation',
     FAQ = 'faq',
     Discord = 'discord',

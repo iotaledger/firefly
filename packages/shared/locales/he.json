@@ -15,9 +15,13 @@
         },
         "profile": {
             "title": "צור פרופיל",
+            "profileName": "שם הפרופיל",
             "body1": "ניתן ליצור פרופילים מרובים כדי לארגן את הארנקים שלך ולשפר פרטיות.",
-            "body2": "בינתיים, נתחיל עם פתיחת הפרופיל הראשון שלך. תוכל ליצור פרופילים נוספים בעתיד.",
-            "profileName": "שם הפרופיל"
+            "body2": {
+                "first": "בתור התחלה, נא ציין את השם הפרטי לפרופיל שלך.",
+                "nonFirst": "כעת, נא ציין את שם הפרופיל שלך."
+            },
+            "addMore": "תוכל להוסיף פרופילים נוספים בהמשך."
         },
         "setup": {
             "title": "הגדר ארנק",
@@ -29,6 +33,32 @@
             "title": "אבטח את הארנק שלך",
             "body1": "שמור והדפס את תבנית מסמך הPDF של ערכת השחזור.",
             "body2": "אם תמלא את פרטי ערכת השחזור ותשמור אותם בבטחה, תוכל תמיד לשחזר את הארנקים שלך."
+        },
+        "create": {
+            "title": "צור ארנק",
+            "body": "צור ארנק חדש. תוכל לבחור בארנקים תוכנתיים או אם ברשותך מכשיר Ledger תוכל להתקין ארנק חומרתי.",
+            "softwareAccount": {
+                "title": "אני מעדיף ארנק תוכנתי",
+                "description": "צור מפתח שחזור בן 24 מילים"
+            },
+            "ledgerAccount": {
+                "title": "אני מעדיף ארנק חומרתי",
+                "description": "דרוש Ledger Nano s או Ledger Nano X"
+            }
+        },
+        "setupLedger": {
+            "progress1": "חבר את הLedger שברשותך",
+            "progress2": "צור כתובת",
+            "progress3": "החלף אפליקציית Ledger",
+            "progress4": "העבר כסף",
+            "watchVideo": "צפה בסרטון הדרכה",
+            "videoGuide": "וידאו הדרכה למיגרציית Ledger"
+        },
+        "ledgerInstallationGuide": {
+            "title": "האם התקנת את אפליקציות הLedger הדרושות?",
+            "body1": "לפני שתמשיך, תגרש להתקין את אפליקציית {legacy} ואת האפליקציה החדשה של IOTA באמצעות Ledger Live.",
+            "body2": "ודא כי קושחת הLedger מעודכנת. כל אפליקציה שהותקנה צריכה להיות מעודכנת בגירסתה.",
+            "action": "כן, התקנתי את האפליקציות האלו"
         },
         "password": {
             "title": "צור סיסמא חדשה",
@@ -85,9 +115,11 @@
         },
         "congratulations": {
             "title": "הגדרת הארנק הושלמה",
-            "body": "הארנק שלך מוכן לשימוש.",
             "fundsMigrated": "הגירת הכספים בוצעה",
-            "success": "ביצעת בהצלחה את הגירת הכספים שלך לרשת החדשה",
+            "body": "הארנק שלך מוכן לשימוש.",
+            "softwareMigratedBody": "הצלחת להעביר את כספך לרשת החדשה",
+            "fireflyLedgerBody": "משתמש הLedger שלך שוחזר בהצלחה, תוכל להמשיך כעת.",
+            "trinityLedgerBody": "הצלחת להעביר את הLedger ברשותך לרשת החדשה.",
             "exportMigration": "יצא דוח הגירה וסיים את התהליך"
         },
         "import": {
@@ -98,7 +130,9 @@
             "importMnemonic": "יש ברשותי ביטוי שחזור של Firefly",
             "importMnemonicDescription": "הזן את ביטוי השחזור שלך כדי לשחזר את הארנקים שלך",
             "importFile": "יש לי קובץ גיבוי",
-            "importFileDescription": "תעלה קובץ Seedvault או Stronghold"
+            "importFileDescription": "תעלה קובץ Seedvault או Stronghold",
+            "importLedger": "יש ברשותי גיבוי של Ledger",
+            "importLedgerDescription": "שחזר או העבר פרופיל של Ledger"
         },
         "importFromText": {
             "seed": {
@@ -119,18 +153,63 @@
             "title": "שחזר את הארנקים שלך בעזרת קובץ גיבוי",
             "body": "יבא קובץ גיבוי כדי לשחזר את הארנקים שלך. גיבויים יכולים להיות קבצי (stronghold.) או (kdbx.)."
         },
+        "importFromLedger": {
+            "title": "שחזר או העבר את פרופיל הLedger שלך",
+            "body": "שחזר חשבון Firefly Ledger קיים, או העבר כסף מTrinty.",
+            "haveFireflyLedger": "יש ברשותי גיבוי של Firefly Ledger",
+            "haveFireflyLedgerDescription": "שחזר חשבון Firefly",
+            "haveTrinityLedger": "יש ברשותי גיבוי של Trinity Ledger",
+            "haveTrinityLedgerDescription": "העבר חשבון Trinity"
+        },
+        "connectLedger": {
+            "title": "חבר את הLedger ברשותך לFirefly",
+            "body": "על מנת שFirefly ימצא את מכשיר הLedger שברשותך, ודא כי אפליקציית הLedger Live סגורה.",
+            "trafficLight1": "התחבר ופתח את הLedger שברשותך בעזרת קוד",
+            "trafficLight2": "פתח את האפליקציה החדשה של IOTA בLedger שברשותך",
+            "tips": "טיפים במידה והLedger שברשותך לא מחובר"
+        },
+        "restoreFromFireflyLedger": {
+            "title": "שחזר את חשבון הLedger שלך",
+            "body": "לחץ שחזר כדי להשלים את תהליך ההתקנה ושחזר את הארנקים שלך, היתרות והטרנזאקציות שלך.",
+            "restoring": "משחזר מLedger..."
+        },
+        "legacyLedgerIntro": {
+            "title": "Start your Ledger migration using Firefly",
+            "body1": "Firefly will help you to transfer your tokens to the new Chrysalis network.",
+            "body2": "After the migration, you will be able to send and receive your tokens using your Ledger with Firefly.",
+            "readMore": "What to expect from the migration process"
+        },
+        "generateNewLedgerAddress": {
+            "title": "צור כתובת חדשה",
+            "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
+            "confirmTitle": "Confirm the new address",
+            "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
+            "confirmedTitle": "Address confirmed",
+            "confirmedBody": "You have confirmed that the address in Firefly matches the one on your Ledger device.",
+            "generating": "Generating address"
+        },
+        "switchLedgerApps": {
+            "title": "Switch Ledger apps",
+            "body": "Please switch to the {legacy} app on your Ledger device to continue migration. When ready, press continue."
+        },
+        "selectLedgerAccountIndex": {
+            "title": "Choose Ledger account index",
+            "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
+            "accountIndex": "Account Index",
+            "accountPage": "Account Page",
+            "standard": "Standard",
+            "expert": "Expert",
+            "takingAWhile": "This is taking a while...",
+            "notGeneratingAddresses": "Is your Ledger generating addresses?",
+            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
+        },
         "importBackupPassword": {
-            "title": "שחזר את הארנקים שלך מSeedVault או מStronghold",
             "body1": "בבקשה הזן את סיסמאת הגיבוי שלך.",
             "body2": "זו הסיסמא שהגדרת כאשר יצרת את הגיבוי שלך לראשונה."
         },
         "importSuccess": {
             "title": "שחזרת את הגיבוי שלך בהצלחה",
-            "body": "תוכל כעט להגדיר את הפרופיל החדש שלך.",
-            "seedvaultTitle": "יִבּוּא הושלם בהצלחה",
-            "seedvaultBody": "הסיסמא שלך נכונה, אתה יכול להמשיך עכשיו.",
-            "strongholdTitle": "יבוא המידע הושלם בהצלחה",
-            "strongholdBody": "הסיסמא שלך נכונה, אתה יכול להמשיך עכשיו."
+            "body": "תוכל כעט להגדיר את הפרופיל החדש שלך."
         },
         "migrate": {
             "title": "הגר את הכספים שלך",
@@ -153,7 +232,7 @@
             "miningBundle": "כורה חבילה",
             "problemRestoringWallet": "הרעה שגיאת רשת בזמן שחזור הארנק. אנא נסה שוב.",
             "minimumMigrationAmountSpentAddresses": "הסכום המינימלי לביצוע הגירה עבור כתובת אחת הוא 1 Mi. בדוק שוב שהמאזן תקין.",
-            "tooManyAddressesToMigrate": "יש לך יותר מדי כתובות עם מאזן נמוך מדי מכדי ביצוע הגירה. בדוק שוב שהמאזן תקין.",
+            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
             "cannotMigrateAllYourFunds": "איננו יכולים להגר את כל הכספים שלך בגלל שחלק מהכתובות שלך מכילות ערך נמוך מדי. תוכל להמשיך בכל מקרה. אך {value} יאבדו.",
             "error": "הרעה שגיאה בהגירת הכספים, אנא נסה/י שוב."
         },
@@ -184,6 +263,7 @@
         },
         "transferFragmentedFunds": {
             "body1": "Firefly will now proceed to migrate your funds. This may take a while.",
+            "body2": "Ensure your Ledger is connected and the {legacy} app is open at all times during migration.",
             "migrate": "Migrate funds",
             "transaction": "Transaction {number}",
             "rerun": "נסה שנית"
@@ -196,7 +276,8 @@
             "title": "היתרה שלך:",
             "body": "Make sure your balance is correct before continuing. You can check again if things don't look correct.",
             "error": "The minimum migration amount is 1 Mi. Check again if your balance doesn't look right.",
-            "zeroBalance": "Try checking again. If you still can't find your balance you might have entered your seed incorrectly."
+            "zeroBalance": "Try checking again. If you still can't find your balance you might have entered your seed incorrectly.",
+            "zeroBalanceLedgerLegacy": "Try checking again. If you still can't find your balance you might have selected the wrong account index."
         },
         "settings": {
             "settings": "הגדרות",
@@ -314,6 +395,10 @@
                 "title": "Diagnostics",
                 "description": "View system and application information"
             },
+            "migrateLedgerIndex": {
+                "title": "Migrate Ledger Index",
+                "description": "Migrate another Trinity account index"
+            },
             "stateExport": {
                 "title": "State export",
                 "description": "Export your transaction history to a .csv file"
@@ -357,7 +442,15 @@
                 },
                 "hardwareDevice": {
                     "title": "Hardware Device",
-                    "noneDetected": "None detected"
+                    "statuses": {
+                        "appNotOpen": "IOTA App Not Open",
+                        "connected": "Connected",
+                        "legacyConnected": "{legacy} App Open",
+                        "locked": "נעול",
+                        "mnemonicMismatch": "Wrong Ledger or Mnemonic",
+                        "notDetected": "Not Detected",
+                        "otherConnected": "App Open"
+                    }
                 },
                 "strongholdStatus": {
                     "title": "Wallet Status",
@@ -488,6 +581,53 @@
             "body": "The Chrysalis network upgrade has begun.",
             "bodyMigration": "Migration is disabled until it is complete.",
             "bodyFirefly": "Firefly is disabled until it is complete. Token migration will still be possible afterwards."
+        },
+        "ledgerNotConnected": {
+            "connect": "Open the new IOTA app on your Ledger device to continue",
+            "connectLegacy": "Open the {legacy} app on your Ledger device to continue"
+        },
+        "ledgerConfirmation": {
+            "confirm": "To proceed, confirm the prompt displayed on your Ledger device"
+        },
+        "ledgerAppGuide": {
+            "title": "Guide to installing the Ledger apps",
+            "steps": {
+                "0": "Install and open the Ledger Live application",
+                "1": "Ensure that your Ledger is connected",
+                "2": "Search for apps: {legacy} and IOTA (MIOTA)",
+                "3": "Install both apps: {legacy} and IOTA (MIOTA)",
+                "4": "Remember that it's important to close Ledger Live before returning to Firefly"
+            }
+        },
+        "ledgerConnectionGuide": {
+            "title": "טיפים במידה והLedger שברשותך לא מחובר",
+            "steps": {
+                "0": "Make sure Ledger Live is not open on your computer",
+                "1": "Ensure you have unlocked your Ledger device with your PIN",
+                "2": "Open the new IOTA app on your Ledger device",
+                "3": {
+                    "text": "Still no luck?",
+                    "link": "Try the official Ledger support page"
+                }
+            }
+        },
+        "ledgerTransaction": {
+            "remainderAddress": {
+                "title": "Confirm remainder address",
+                "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+            },
+            "transaction": {
+                "title": "אימות העברה",
+                "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted."
+            }
+        },
+        "ledgerAddress": {
+            "title": "Confirm receive address",
+            "body": "Confirm that the receive address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+        },
+        "ledgerMigrateIndex": {
+            "title": "Do you need to migrate another Trinity account index?",
+            "body": "You can also migrate later in Advanced Settings."
         }
     },
     "charts": {
@@ -495,6 +635,7 @@
         "outgoingMi": "Outgoing {value}",
         "portoflio": "Portfolio",
         "token": "Token",
+        "holdings": "Holdings",
         "accountValue": "Wallet Value",
         "accountActivity": "Wallet Activity",
         "timeframe1Hour": "שעה",
@@ -505,6 +646,8 @@
     "actions": {
         "continue": "המשך",
         "back": "הקודם",
+        "previous": "Previous",
+        "next": "Next",
         "cancel": "ביטול",
         "close": "סגור",
         "dismiss": "Dismiss",
@@ -573,6 +716,7 @@
         "addAccount": "הוסף ארנק",
         "checkForUpdates": "חפש עדכונים",
         "reportAnIssue": "דווח על תקלה",
+        "restore": "Restore",
         "clear": "נקה",
         "hideDetails": "הסתר פרטים",
         "yes": "כן",
@@ -592,7 +736,9 @@
         "searchBalances": "Search for balances",
         "searchAgain": "Search again",
         "searching": "Searching...",
-        "closeFirefly": "Close Firefly"
+        "closeFirefly": "Close Firefly",
+        "generateAddress": "צור כתובת",
+        "migrateAgain": "Migrate another index"
     },
     "general": {
         "password": "Password",
@@ -607,6 +753,7 @@
         "received": "התקבל",
         "sendPayment": "שלח תשלום",
         "moveFunds": "Internal Transfer",
+        "sendTo": "Send To",
         "sendFunds": "Send funds",
         "sendToAddress": "Send to address",
         "scanQrOrPaste": "Scan a QR code or paste an Address",
@@ -625,6 +772,8 @@
         "myAddress": "הכתובת שלי",
         "shareAddress": "שתף כתובת",
         "yourAddress": "הכתובות שלך",
+        "newRemainder": "New Remainder",
+        "remainder": "Remainder",
         "generateNewAddress": "צור כתובת חדשה",
         "copyAddress": "העתק כתובת",
         "import": "Import",
@@ -661,6 +810,7 @@
         "messageId": "Message ID",
         "inputAddress": "Send Address",
         "receiveAddress": "Receive Address",
+        "newAddress": "New Address",
         "date": "תאריך",
         "status": "סטטוס",
         "confirmed": "אושר",
@@ -672,11 +822,13 @@
         "firstSync": "Syncing history, this may take a while...",
         "transferSyncing": "Syncing wallet",
         "transferSelectingInputs": "Selecting inputs",
-        "transferRemainderAddress": "Generating remainder deposit address",
+        "transferRemainderAddress": "Generating remainder address",
+        "transferPreparedTransaction": "Preparing transaction",
         "transferSigning": "Signing the transaction",
         "transferPow": "Performing PoW",
         "transferBroadcasting": "Broadcasting transaction",
         "transferComplete": "Transfer complete",
+        "generatingReceiveAddress": "Generating receive address",
         "creatingAccount": "Creating wallet, please wait...",
         "updatingAccount": "Updating wallet, please wait...",
         "accountSyncing": "Wallet is syncing",
@@ -708,7 +860,8 @@
         "sending": "Sending",
         "legacyNetwork": "Legacy Network",
         "capsLock": "Caps Lock is on",
-        "version": "Version {version}"
+        "version": "Version {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "Today",
@@ -732,8 +885,7 @@
         "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "Copied to clipboard",
         "accountsSynchronized": "Wallet synchronization complete",
-        "migratedAccountChrysalisDown": "Your funds will become available after Chrysalis on 28th April",
-        "migratedAccountChrysalisUp": "Your funds will become available shortly"
+        "fundsAvailableSoon": "Your funds will become available shortly"
     },
     "error": {
         "profile": {
@@ -770,7 +922,10 @@
             "tilde": "שם הפרופיל לא יכול להתחיל עם תו '~'.",
             "control": "שם פרופיל לא יכול להכיל תווים אשר מספרם 0 – 31 בטבלת הASCII.",
             "startDot": "שם פרופיל לא יכול להתחיל ב'.'.",
-            "chars": "שם פרופיל לא יכול להכיל את התווים הבאים <>:\"/\\|?*"
+            "chars": "שם פרופיל לא יכול להכיל את התווים הבאים <>:\"/\\|?*",
+            "index": "Your account index must be a number between 0 and 2,147,483,647.",
+            "page": "Your account page must be a number between 0 and 2,147,483,647.",
+            "syncing": "There was an error syncing your wallets."
         },
         "send": {
             "addressLength": "כתובות צריכות להיות באורך {length, plural, one {1 character} other {# characters}}.",
@@ -784,10 +939,13 @@
             "insufficientFunds": "לארנק זה אין מספיק כספים.",
             "noToAccount": "לא בחרת ארנק נמען להעברת הכספים.",
             "sendingDust": "לא תוכל לשלוח פחות מ1 Mi.",
-            "leavingDust": "לא תוכל להשאיר פחות מ1Mi בכתובת שלך."
+            "leavingDust": "לא תוכל להשאיר פחות מ1Mi בכתובת שלך.",
+            "cancelled": "The transaction was cancelled.",
+            "transaction": "There was an error sending your transaction. Please try again."
         },
         "node": {
             "invalid": "אנא הזן כתובת אינטרנט חוקית.",
+            "dns": "Could not resolve DNS for node.",
             "https": "HTTPS is required. Set up a developer profile to use unsecured HTTP connections.",
             "duplicate": "This node has already been added.",
             "unsynced": "The node is not in sync.",
@@ -805,6 +963,28 @@
             "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
             "phraseUnrecognizedWord": "מילה לא מוכרת \"{word}\" בביטוי השחזור",
             "phraseCaseWord": "המילה \"{word}\" צריכה להיות באותיות קטנות"
+        },
+        "ledger": {
+            "appNotOpen": "You must open the IOTA app on your Ledger device.",
+            "generic": "There was an error connecting to your Ledger device.",
+            "legacyConnected": "The wrong app is open on your Ledger device.",
+            "locked": "Please unlock your Ledger device by entering the PIN.",
+            "mnemonicMismatch": "You have connected the wrong Ledger device or the mnemonic has changed.",
+            "notDetected": "No Ledger device detected.",
+            "notFound": "Ledger device not found.",
+            "otherConnected": "The wrong app is open on your Ledger device.",
+            "generateAddress": "There was an error generating an address.",
+            "timeout": "Your Ledger device timed out.",
+            "disconnected": "Your Ledger device was disconnected."
+        },
+        "popup": {
+            "preventClose": "This popup is unable to be closed."
+        },
+        "migration": {
+            "missingBundle": "An error occurred while trying to find the transaction bundle."
+        },
+        "crypto": {
+            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
         }
     },
     "tooltips": {

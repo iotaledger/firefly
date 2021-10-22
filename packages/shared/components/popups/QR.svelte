@@ -1,6 +1,9 @@
 <script lang="typescript">
     import { Text, QR } from 'shared/components'
-    export let locale
+    import { Locale } from 'shared/lib/typings/i18n'
+
+    export let locale: Locale
+
     export let data
 </script>
 
