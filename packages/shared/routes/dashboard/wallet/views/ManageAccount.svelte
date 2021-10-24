@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Input, Text, Icon } from 'shared/components'
+    import { Button, Input, Text, Icon, WalletPreview } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
@@ -112,6 +112,9 @@
                 submitHandler={handleSaveClick}
                 disabled={isBusy} />
         </div>
+        <!-- wallet preview -->
+        <WalletPreview color={updatedColor} name={accountAlias} pattern={updatedPattern} />
+
         <!-- set wallet color -->
         <div class="w-full h-auto flex flex-col justify-center pb-5">
             <div class="flex flex-row mb-6">
@@ -137,7 +140,7 @@
             <div class="flex-col grid grid-cols-4 gap-4">
                 {#each availablePatterns as availablePattern}
                     <div
-                        class="rounded-lg bg-cover bg-{updatedPattern === availablePattern ? updatedColor : 'blue-50'} cursor-pointer hover:opacity-50 relative"
+                        class="rounded-xl h-28 bg-cover bg-{updatedPattern === availablePattern ? updatedColor : 'blue-50'} cursor-pointer hover:opacity-50 relative"
                         style="height: 100%; width: 100%"
                         on:click={() => handlePatternClick(availablePattern)}>
                         <img
