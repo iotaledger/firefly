@@ -14,6 +14,18 @@
 
     const { accounts } = $wallet
 
+    let availableColors = [
+        'blue-400',
+        'lightblue-500',
+        'turquoise-500',
+        'green-100',
+        'yellow-500',
+        'orange-500',
+        'red-500',
+        'purple-500',
+    ]
+    let availablePatterns = ['default', 'circles', 'clouds', 'clover', 'organic', 'rain', 'shapes', 'wind']
+
     let accountAlias = alias
     let isBusy = false
 
@@ -42,19 +54,21 @@
             isBusy = true
             api.setAlias($selectedAccountId, trimmedAccountAlias, {
                 onSuccess(res) {
-                    accounts.update((_accounts) => _accounts.map((account) => {
-                        if (account.id === $selectedAccountId) {
-                            return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                                {} as WalletAccount,
-                                account,
-                                {
-                                    alias: trimmedAccountAlias,
-                                }
-                            )
-                        }
+                    accounts.update((_accounts) =>
+                        _accounts.map((account) => {
+                            if (account.id === $selectedAccountId) {
+                                return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
+                                    {} as WalletAccount,
+                                    account,
+                                    {
+                                        alias: trimmedAccountAlias,
+                                    }
+                                )
+                            }
 
-                        return account
-                    }))
+                            return account
+                        })
+                    )
 
                     isBusy = false
                     selectedAccountId.set(null)
@@ -78,7 +92,7 @@
         <div class="flex flex-row mb-6">
             <Text type="h5">{locale('general.manageAccount')}</Text>
         </div>
-        <div class="w-full h-full flex flex-col justify-between">
+        <div class="w-full h-auto flex flex-col justify-between pb-5">
             <Input
                 {error}
                 bind:value={accountAlias}
@@ -86,6 +100,29 @@
                 autofocus
                 submitHandler={handleSaveClick}
                 disabled={isBusy} />
+        </div>
+        <!-- set wallet color -->
+        <div class="w-full h-auto flex flex-col justify-center pb-5">
+            <div class="flex flex-row mb-6">
+                <Text type="h5">Wallet color</Text>
+            </div>
+            <div class="w-full h-full grid md:grid-cols-8 sm:grid-cols-4 gap-6">
+                {#each availableColors as availableColor}
+                    <div class="bg-{availableColor} rounded-lg w-8 h-8 cursor-pointer hover:opacity-50 focus:ring-4" />
+                {/each}
+            </div>
+        </div>
+        <!-- set wallet pattern -->
+        <div class="w-full h-auto flex flex-col justify-center">
+            <div class="flex flex-row mb-6">
+                <Text type="h5">Wallet pattern</Text>
+            </div>
+            <div class="grid grid-cols-4 gap-4 justify-center">
+                {#each availablePatterns as availablePattern}
+                    <div
+                        class="h-20 w-20 rounded-lg bg-cover bg-blue-500 bg-{availablePattern} cursor-pointer hover:opacity-50" />
+                {/each}
+            </div>
         </div>
     </div>
     <!-- Action -->
@@ -97,7 +134,10 @@
             <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()} disbled={isBusy}>
                 {locale('actions.cancel')}
             </Button>
-            <Button classes="-mx-2 w-1/2" onClick={() => handleSaveClick()} disabled={!getTrimmedLength(accountAlias) || isBusy}>
+            <Button
+                classes="-mx-2 w-1/2"
+                onClick={() => handleSaveClick()}
+                disabled={!getTrimmedLength(accountAlias) || isBusy}>
                 {locale('actions.save')}
             </Button>
         </div>
