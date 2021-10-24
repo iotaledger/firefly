@@ -14,7 +14,7 @@
 
     const { accounts } = $wallet
 
-    let availableColors = [
+    const availableColors = [
         'blue-400',
         'lightblue-500',
         'turquoise-500',
@@ -24,7 +24,8 @@
         'red-500',
         'purple-500',
     ]
-    let availablePatterns = ['default', 'circles', 'clouds', 'clover', 'organic', 'rain', 'shapes', 'wind']
+    
+    const availablePatterns = ['default', 'circles', 'clouds', 'clover', 'organic', 'rain', 'shapes', 'wind']
 
     let updatedColor
     let updatedPattern
