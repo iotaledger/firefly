@@ -155,9 +155,8 @@
                             alt="" />
                         {#if updatedPattern === availablePattern}
                             <div
-                                class="bg-green-800 rounded-full absolute bottom-5 left-9 w-full h-full"
-                                style="height: 25px; width: 25px">
-                                <Icon icon="checkmark" classes="text-white justify-self-center" />
+                                class="bg-green-600 rounded-full absolute bottom-5 left-9">
+                                <Icon icon="checkmark" classes="h-full w-full text-white justify-self-center" />
                             </div>
                         {/if}
                     </div>
@@ -165,14 +164,14 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Action -->
     {#if isBusy && !error}
         <Text secondary classes="mb-3">{locale('general.updatingAccount')}</Text>
     {/if}
     {#if !isBusy}
         <div class="flex flex-row justify-between px-2">
-            <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()} disbled={isBusy}>
+            <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()} disabled={isBusy}>
                 {locale('actions.cancel')}
             </Button>
             <Button
