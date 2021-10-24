@@ -115,7 +115,7 @@
         <!-- set wallet color -->
         <div class="w-full h-auto flex flex-col justify-center pb-5">
             <div class="flex flex-row mb-6">
-                <Text type="h5">Wallet color</Text>
+                <Text type="h5">{locale('general.walletColor')}</Text>
             </div>
             <div class="w-full h-full grid md:grid-cols-8 sm:grid-cols-4 gap-6">
                 {#each availableColors as availableColor}
@@ -132,7 +132,7 @@
         <!-- set wallet pattern -->
         <div class="w-full h-auto flex flex-col justify-between">
             <div class="flex flex-row mb-6">
-                <Text type="h5">Wallet pattern</Text>
+                <Text type="h5">{locale('general.walletBackground')}</Text>
             </div>
             <div class="flex-col grid grid-cols-4 gap-4">
                 {#each availablePatterns as availablePattern}
