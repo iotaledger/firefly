@@ -217,6 +217,9 @@ const handleError = (
 
     // TODO: Add full type list to remove this temporary fix
     const _getError = () => {
+        if (error.includes('Snapshot is too short to be valid') || error.includes('is this really a snapshot file?')) {
+            return 'error.backup.invalid'
+        }
         if (error.includes('try another password')) {
             return 'error.password.incorrect'
         }
