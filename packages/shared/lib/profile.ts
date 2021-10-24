@@ -80,8 +80,6 @@ export const createProfile = (profileName: string, isDeveloperProfile: boolean):
             includeOfficialNodes: true,
             disabledNodes: undefined,
             lockScreenTimeout: 5,
-            color: '',
-            pattern: '',
             chartSelectors: {
                 currency: AvailableExchangeRates.USD,
                 timeframe: HistoryDataProps.SEVEN_DAYS,

@@ -33,6 +33,7 @@ export type BalanceOverview = {
 export type WalletState = {
     balanceOverview: Writable<BalanceOverview>
     accounts: Writable<WalletAccount[]>
+    style: { color: string; pattern: string }
     accountsLoaded: Writable<boolean>
     internalTransfersInProgress: Writable<{
         [key: string]: {

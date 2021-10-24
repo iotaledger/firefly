@@ -221,7 +221,7 @@
     <actions class="absolute right-0 top-2.5 h-8 flex flex-row items-center text-12 text-gray-500 dark:text-white">
         <button
             on:click={onMaxClick}
-            class={`pr-2 ${disabled ? 'cursor-auto' : 'hover:text-blue-500 focus:text-blue-500 cursor-pointer'}`}
+            class={`pr-2 ${disabled ? 'cursor-auto' : ':text-blue-500 focus:text-blue-500 cursor-pointer'}`}
             {disabled}>{locale('actions.max').toUpperCase()}</button>
         <button
             on:click={(e) => {

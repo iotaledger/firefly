@@ -26,7 +26,7 @@
     $: accountAlias, (error = '')
 
     const handleCreateClick = () => {
-        const trimmedAccountAlias = accountAlias.trim()
+         const trimmedAccountAlias = accountAlias.trim()
         if (trimmedAccountAlias) {
             error = ''
 

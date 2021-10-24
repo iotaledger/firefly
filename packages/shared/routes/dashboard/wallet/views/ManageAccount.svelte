@@ -3,11 +3,13 @@
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
-    import { activeProfile, updateProfile } from 'shared/lib/profile'
+    import { updateWalletStyle } from 'shared/lib/wallet'
     import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccountId, wallet } from 'shared/lib/wallet'
     import { Locale } from 'shared/lib/typings/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { WalletDetails } from '.'
+    import { getContext } from 'svelte'
+    import type { Writable } from 'svelte/store'
 
     export let locale: Locale
 
@@ -16,10 +18,18 @@
     export let balance
     export let balanceEquiv
 
-    let selectedColor = $activeProfile?.settings?.color;
-    let selectedPattern = $activeProfile?.settings?.pattern
+    let selectedColor = $wallet.style.color;
+    let selectedPattern = $wallet?.style?.pattern
+
+    const account = getContext<Writable<WalletAccount>>('selectedAccount')
+    const viewableAccounts = getContext<Writable<WalletAccount[]>>('viewableAccounts')
+
 
     const { accounts } = $wallet
+    let navAccounts
+    $: navAccounts = $account
+        ? $viewableAccounts.map(({ id, alias, color }) => ({ id, alias, color, active: $account.id === id }))
+        : []
 
     const accountAlias = alias
     let isBusy = false
@@ -27,9 +37,17 @@
     // This looks odd but sets a reactive dependency on accountAlias, so when it changes the error will clear
     $: accountAlias, (error = '')
 
+    const setGlobalColor = () => {
+        const active = navAccounts.find(acc => acc.active)
+
+        active.color = selectedColor
+    }
+
     const handleSaveClick = () => {
-        updateProfile('settings.color', selectedColor)
-        updateProfile('settings.pattern', selectedPattern)
+        // updateProfile('settings.color', selectedColor)
+        // updateProfile('settings.pattern', selectedPattern)
+        setGlobalColor()
+        updateWalletStyle(selectedColor, selectedPattern)
     
         const trimmedAccountAlias = accountAlias.trim()
         if (trimmedAccountAlias === alias) {

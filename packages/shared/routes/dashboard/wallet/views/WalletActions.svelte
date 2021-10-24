@@ -3,7 +3,7 @@
     import { activeProfile, isLedgerProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
-    import { selectedAccountId } from 'shared/lib/wallet'
+    import { selectedAccountId, wallet } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable } from 'svelte/store'
     import { Receive, Send } from '.'
@@ -43,7 +43,7 @@
                     class="grid {$viewableAccounts.length === 1 ? 'grid-cols-1' : 'grid-cols-2'} auto-rows-max gap-4 flex-auto overflow-y-auto h-1 -mr-2 pr-2 scroll-secondary">
                     {#each $viewableAccounts as account}
                         <AccountTile
-                            color={$activeProfile?.settings?.color}
+                            color={$wallet?.style?.color}
                             name={account.alias}
                             balance={account.balance}
                             balanceEquiv={account.balanceEquiv}
@@ -51,7 +51,7 @@
                             hidden={hiddenAccounts.includes(account.id)}
                             onClick={() => handleAccountClick(account.id)}
                             ledger={$isLedgerProfile} 
-                            pattern={$activeProfile?.settings?.pattern}
+                            pattern={$wallet?.style?.pattern}
                             />
                     {/each}
                 </div>

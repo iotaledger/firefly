@@ -98,6 +98,10 @@ export const wallet = writable<WalletState>({
         balanceRaw: 0,
         balanceFiat: '$ 0.00',
     }),
+    style: {
+        color: '',
+        pattern: '',
+    },
     accounts: writable<WalletAccount[]>([]),
     accountsLoaded: writable<boolean>(false),
     internalTransfersInProgress: writable<{
@@ -109,7 +113,7 @@ export const wallet = writable<WalletState>({
 })
 
 export const resetWallet = (): void => {
-    const { balanceOverview, accounts, accountsLoaded, internalTransfersInProgress } = get(wallet)
+    const { balanceOverview, style, accounts, accountsLoaded, internalTransfersInProgress } = get(wallet)
     balanceOverview.set({
         incoming: '0 Mi',
         incomingRaw: 0,
@@ -1178,6 +1182,13 @@ export const updateBalanceOverview = (balance: number, incoming: number, outgoin
             ),
         })
     )
+}
+
+export const updateWalletStyle = (colorValue: string, patternValue: string): void => {
+    const { style } = get(wallet)
+
+    style.color = colorValue
+    style.pattern = patternValue
 }
 
 /**
