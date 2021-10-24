@@ -24,7 +24,7 @@
         'red-500',
         'purple-500',
     ]
-    
+
     const availablePatterns = ['default', 'circles', 'clouds', 'clover', 'organic', 'rain', 'shapes', 'wind']
 
     let updatedColor
@@ -113,6 +113,7 @@
                 submitHandler={handleSaveClick}
                 disabled={isBusy} />
         </div>
+
         <!-- wallet preview -->
         <WalletPreview color={updatedColor} name={accountAlias} pattern={updatedPattern} />
 
@@ -133,6 +134,7 @@
                 {/each}
             </div>
         </div>
+
         <!-- set wallet pattern -->
         <div class="w-full h-auto flex flex-col justify-between">
             <div class="flex flex-row mb-6">
@@ -163,6 +165,7 @@
             </div>
         </div>
     </div>
+    
     <!-- Action -->
     {#if isBusy && !error}
         <Text secondary classes="mb-3">{locale('general.updatingAccount')}</Text>
