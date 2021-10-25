@@ -109,6 +109,10 @@
         <div class="flex flex-row mb-6">
             <Text type="h5">{locale('general.manageAccount')}</Text>
         </div>
+
+        <!-- wallet preview -->
+        <WalletPreview color={selectedColor} name={accountAlias} pattern={selectedPattern} />
+
         <div class="w-full h-auto flex flex-col justify-between pb-5">
             <Input
                 {error}

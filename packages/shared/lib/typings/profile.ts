@@ -45,7 +45,7 @@ export interface UserSettings {
     chartSelectors: ChartSelectors
     hideNetworkStatistics?: boolean
     color: string
-    pattern: string
+    pattern: string 
 }
 
 /**

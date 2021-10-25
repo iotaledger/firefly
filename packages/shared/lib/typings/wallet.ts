@@ -13,6 +13,7 @@ export interface WalletAccount extends Account {
     rawIotaBalance: number
     balance: string
     balanceEquiv: string
+    color: string
 }
 
 export interface AccountMessage extends Message {
