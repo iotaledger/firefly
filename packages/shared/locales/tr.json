@@ -635,6 +635,7 @@
         "outgoingMi": "Giden {value}",
         "portoflio": "Portföy",
         "token": "Token",
+        "holdings": "Holdings",
         "accountValue": "Cüzdan Değeri",
         "accountActivity": "Cüzdan Aktivitesi",
         "timeframe1Hour": "1 saat",
@@ -859,7 +860,8 @@
         "sending": "Gönderiliyor",
         "legacyNetwork": "Eski Ağ",
         "capsLock": "Caps Lock açık",
-        "version": "Sürüm {version}"
+        "version": "Sürüm {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "Bugün",
@@ -943,6 +945,7 @@
         },
         "node": {
             "invalid": "Lütfen geçerli bir URL giriniz.",
+            "dns": "Could not resolve DNS for node.",
             "https": "HTTPS gerekmektedir. Güvenli olmayan HTTP bağlantılarını kullanmak için bir geliştirici profili oluşturun.",
             "duplicate": "Bu sunucu zaten eklenmiş.",
             "unsynced": "Ağ senkronize değil.",
@@ -979,6 +982,9 @@
         },
         "migration": {
             "missingBundle": "İşlem paketini bulmaya çalışırken bir hata oluştu."
+        },
+        "crypto": {
+            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
         }
     },
     "tooltips": {

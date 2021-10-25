@@ -1,6 +1,5 @@
 <script lang="typescript">
     import { Icon, Text, Error } from 'shared/components'
-    import { clickOutside } from 'shared/lib/actions'
     import { onMount } from 'svelte'
 
     export let value = undefined
@@ -11,11 +10,15 @@
     export let sortItems = false
     export let items = []
     export let small = false
-    export let onSelect = (_) => {}
     export let contentWidth = false
     export let error = ''
     export let classes = ''
     export let autofocus = false
+    export let valueTextType = 'p'
+    export let itemTextType = 'p'
+    export let showBorderWhenClosed = true
+
+    export let onSelect = (..._: any[]): void => {}
 
     let dropdown = false
     let navContainer
@@ -48,7 +51,7 @@
     }
 
     const focusItem = (itemId) => {
-        let elem = document.getElementById(itemId)
+        const elem = document.getElementById(itemId)
         focusedItem = elem
     }
 
@@ -100,7 +103,6 @@
         .selection {
             min-height: 50px;
             border-radius: 0.625rem; // TODO: add to tailwind
-            @apply border;
             @apply border-solid;
             @apply py-4;
             @apply pl-3;
@@ -121,6 +123,11 @@
         &.disabled {
             @apply pointer-events-none;
             @apply opacity-50;
+        }
+        &.hasBorder {
+            .selection {
+                @apply border;
+            }
         }
         nav {
             .inner {
@@ -196,20 +203,21 @@
         e.stopPropagation()
         toggleDropDown()
     }}
-    use:clickOutside
+    use:handleClickOutside
     on:clickOutside={handleClickOutside}
     on:keydown={handleKey}
     class:active={dropdown}
     class:small
     class:floating-active={value && label}
     class:disabled
+    class:hasBorder={showBorderWhenClosed || dropdown}
     style={navWidth}>
     <div
         class="selection relative flex items-center w-full whitespace-nowrap cursor-pointer
-    bg-white dark:bg-gray-800 focus:border-blue-500 {dropdown ? 'border-blue-500' : 'border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700'}"
+    bg-white dark:bg-gray-800 focus:border-blue-500 {dropdown ? 'border-blue-500' : showBorderWhenClosed ? 'border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700' : ''}"
         tabindex="0"
         bind:this={divContainer}>
-        <div class="w-full text-12 leading-140 text-gray-800 dark:text-white">{value || placeholder}</div>
+        <div class="w-full text-12 leading-140 text-gray-800 dark:text-white"><Text type={valueTextType} smaller>{value || placeholder}</Text></div>
         <Icon
             icon={small ? 'small-chevron-down' : 'chevron-down'}
             width={small ? 16 : 24}
@@ -238,7 +246,7 @@
                     on:click={() => onSelect(item)}
                     on:focus={() => focusItem(item[valueKey])}
                     tabindex={dropdown ? 0 : -1}
-                    class:active={item[valueKey] === value}><Text type="p" smaller>{item[valueKey]}</Text></button>
+                    class:active={item[valueKey] === value}><Text type={itemTextType} smaller>{item[valueKey]}</Text></button>
             {/each}
         </div>
     </nav>

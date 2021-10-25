@@ -635,6 +635,7 @@
         "outgoingMi": "Yên çûyî {value}",
         "portoflio": "Portfolio",
         "token": "Token",
+        "holdings": "Holdings",
         "accountValue": "Mayîna Cuzdankê",
         "accountActivity": "Çalakîya Cuzdankê",
         "timeframe1Hour": "1 demjimêr",
@@ -859,7 +860,8 @@
         "sending": "Tê şandin",
         "legacyNetwork": "Tora Kevn",
         "capsLock": "Caps Lock is on",
-        "version": "Version {version}"
+        "version": "Version {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "Evro",
@@ -943,6 +945,7 @@
         },
         "node": {
             "invalid": "Ji kerema xwe URL'yeke derbasdar bikevê.",
+            "dns": "Could not resolve DNS for node.",
             "https": "Pêdiviya HTTPS ê heye. Jibo karanîna HTTP ko ne ewleh hesabekî pêşvebir çêkin.",
             "duplicate": "Jixwe ev pêşkeşkar hatîye zêdekirin.",
             "unsynced": "Girê ne sekronîzeye.",
@@ -979,6 +982,9 @@
         },
         "migration": {
             "missingBundle": "An error occurred while trying to find the transaction bundle."
+        },
+        "crypto": {
+            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
         }
     },
     "tooltips": {

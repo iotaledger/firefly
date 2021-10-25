@@ -3,12 +3,8 @@
     "compilerOptions": {
         "outDir": "out",
         "baseUrl": "./",
-        "lib": [
-            "DOM",
-            "ESNext"
-        ]
+        "lib": ["DOM", "ESNext"]
     },
-    "include": [
-        "./lib"
-    ]
+    "include": ["./lib"],
+    "exclude": ["**/node_modules", "**/tests"]
 }

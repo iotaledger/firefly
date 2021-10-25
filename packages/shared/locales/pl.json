@@ -2,7 +2,7 @@
     "views": {
         "onboarding1": {
             "title": "Wysyłaj, odbieraj i zarządzaj swoimi tokenami IOTA",
-            "body": "Firefly jest oficjalnym oprogramowaniem portfela IOTA."
+            "body": "Firefly to oficjalna aplikacja portfela IOTA."
         },
         "legal": {
             "title": "Polityka prywatności i Warunki świadczenia usług",
@@ -124,26 +124,26 @@
         },
         "import": {
             "title": "Odzyskaj lub migruj środki",
-            "body": "Jeśli posiadasz już klucz seed lub plik kopii zapasowej portfela, możesz zaimportować go tutaj. Jeśli posiadasz środki w starszej sieci IOTA, zostaniesz przeprowadzony przez proces migracji środków do sieci Chrysalis.",
+            "body": "Jeśli posiadasz już klucz seed lub plik kopii zapasowej portfela, możesz zaimportować je tutaj. Jeżeli posiadasz środki w starej sieci IOTA, zostaniesz przeprowadzony przez proces migracji środków do sieci Chrysalis.",
             "importSeed": "Mam klucz seed (81 znaków)",
-            "importSeedDescription": "Wprowadź seed i migruj środki do Chrysalis",
-            "importMnemonic": "Mam wyrazy ratunkowe z Firefly",
-            "importMnemonicDescription": "Wprowadź wyrazy ratunkowe, aby przywrócić swoje portfele",
+            "importSeedDescription": "Wprowadzanie klucza seed i migracja do Chrysalis",
+            "importMnemonic": "Mam 24 wyrazy ratunkowe z Firefly",
+            "importMnemonicDescription": "Wprowadzanie wyrazów ratunkowych w celu przywrócenia swoich portfeli Firefly",
             "importFile": "Mam plik kopii zapasowej",
-            "importFileDescription": "Prześlij plik Seedvault lub Stronghold",
-            "importLedger": "Mam kopię zapasową Ledger",
-            "importLedgerDescription": "Przywróć lub migruj profil z urządzenia Ledger"
+            "importFileDescription": "Przesyłanie pliku Seedvault lub Stronghold",
+            "importLedger": "Posiadam portfel sprzętowy Ledger",
+            "importLedgerDescription": "Przywracanie lub migracja profilu z urządzenia Ledger"
         },
         "importFromText": {
             "seed": {
                 "title": "Wpisz swój seed aby rozpocząć migrację",
-                "body": "Klucz seed składa się z 81 znaków. Jest on używany do odzyskiwania danych ze starszej aplikacji Trinity.",
+                "body": "Klucz seed składa się z 81 znaków. Jest on używany do odzyskiwania danych ze starej aplikacji Trinity.",
                 "enter": "Wprowadź swój seed"
             },
             "mnemonic": {
                 "title": "Wpisz swoje wyrazy ratunkowe",
                 "body": "Wyrazy ratunkowe składają się z 24 słów pisanych małymi literami oraz oddzielonych od siebie spacją. Są one używane w celu odzyskania istniejących portfeli Firefly.",
-                "enter": "Wprowadź swoje tajne wyrazy odzyskiwania"
+                "enter": "Wprowadź swoje tajne wyrazy ratunkowe"
             },
             "seedDetected": "Wykryto seed o długości 81 znaków",
             "phraseDetected": "Wykryto wyrazy ratunkowe (24 słowa)",
@@ -154,12 +154,12 @@
             "body": "Importuj plik kopii zapasowej, aby przywrócić portfele. Możliwe rodzaje kopii zapasowych to Stronghold (.stronghold) lub Trinity SeedVault (.kdbx)."
         },
         "importFromLedger": {
-            "title": "Przywróć lub migruj swój Ledger",
+            "title": "Przywróć lub migruj swoje urządzenie Ledger",
             "body": "Przywróć istniejący profil Firefly Ledger lub migruj swoje środki z Trinity.",
-            "haveFireflyLedger": "Mam kopię zapasową Ledger z portfela Firefly",
-            "haveFireflyLedgerDescription": "Przywróć profil Firefly",
-            "haveTrinityLedger": "Mam kopię zapasową Ledger z portfela Trinity",
-            "haveTrinityLedgerDescription": "Migruj profil z Trinity"
+            "haveFireflyLedger": "Chcę przywrócić profil Ledger do Firefly",
+            "haveFireflyLedgerDescription": "Przywracanie istniejącego profilu Ledger Firefly",
+            "haveTrinityLedger": "Chcę migrować środki Ledger ze starego portfela Trinity",
+            "haveTrinityLedgerDescription": "Proces migracji środków Ledger do nowej sieci"
         },
         "connectLedger": {
             "title": "Połącz swój Ledger z Firefly",
@@ -183,7 +183,7 @@
             "title": "Wygeneruj nowy adres",
             "body": "Musisz wygenerować nowy adres, aby migrować tokeny za pomocą Firefly. Kliknij poniższy przycisk, aby kontynuować.",
             "confirmTitle": "Potwierdź nowy adres",
-            "confirmBody": "Dla bezpieczeństwa, proszę porównać adres wygenerowany na urządzeniu Ledger z adresem wyświetlonym poniżej. Jeśli pasują, naciśnij oba przyciski na swoim Ledger zgodnie z instrukcją.",
+            "confirmBody": "Dla bezpieczeństwa, proszę porównać adres wygenerowany na urządzeniu Ledger z adresem wyświetlonym poniżej. Jeśli wszystko się zgadza, naciśnij oba przyciski na Ledger zgodnie z instrukcją.",
             "confirmedTitle": "Adres potwierdzony",
             "confirmedBody": "Potwierdziłeś, że adres w Firefly pasuje do tego na twoim urządzeniu Ledger.",
             "generating": "Generowanie adresu"
@@ -556,7 +556,7 @@
             "userPath": "Ścieżka użytkownika"
         },
         "transaction": {
-            "title": "Potwierdź transakcję",
+            "title": "Potwierdzanie transakcji",
             "body": "Zamierzasz wysłać {amount} do"
         },
         "balanceFinder": {
@@ -614,20 +614,20 @@
         "ledgerTransaction": {
             "remainderAddress": {
                 "title": "Potwierdź adres zwrotny",
-                "info": "Potwierdź, że adres zwrotny wyświetlany na Twoim urządzeniu Ledger pasuje do tego podanego poniżej. Jeśli pasują, naciśnij oba przyciski na Twoim Ledger zgodnie z instrukcją."
+                "info": "Potwierdź, że adres zwrotny wyświetlany na Twoim urządzeniu Ledger pasuje do adresu podanego poniżej. Jeśli wszystko się zgadza, naciśnij oba przyciski na Ledger zgodnie z instrukcją."
             },
             "transaction": {
-                "title": "Potwierdź transakcję",
+                "title": "Potwierdzanie transakcji",
                 "info": "Potwierdź, że informacje o transakcjach wyświetlane na Twoim urządzeniu Ledger pasują do informacji wyświetlanych poniżej. Jeśli wszystko się zgadza, naciśnij oba przyciski na Ledger zgodnie z instrukcją."
             }
         },
         "ledgerAddress": {
             "title": "Potwierdź adres odbiorczy",
-            "body": "Potwierdź, że adres odbiorczy wyświetlany na Twoim urządzeniu Ledger pasuje do adresu wyświetlanego poniżej. Jeśli adresy pasują, naciśnij oba przyciski na Twoim Ledger zgodnie z instrukcją."
+            "body": "Potwierdź, że adres odbiorczy wyświetlany na Twoim urządzeniu Ledger pasuje do adresu wyświetlanego poniżej. Jeśli wszystko się zgadza, naciśnij oba przyciski na Ledger zgodnie z instrukcją."
         },
         "ledgerMigrateIndex": {
-            "title": "Czy chcesz przenieść kolejny indeks konta z Trinity?",
-            "body": "Możesz również migrować później w panelu ustawień zaawansowanych."
+            "title": "Czy chcesz migrować kolejny indeks z Trinity?",
+            "body": "Możesz tego dokonać później, w panelu ustawień zaawansowanych."
         }
     },
     "charts": {
@@ -635,6 +635,7 @@
         "outgoingMi": "Wychodzące {value}",
         "portoflio": "Portfolio",
         "token": "Token",
+        "holdings": "Kapitał",
         "accountValue": "Wartość portfela",
         "accountActivity": "Aktywność portfela",
         "timeframe1Hour": "1 godzina",
@@ -655,8 +656,8 @@
         "importSeed": "Importuj istniejący klucz seed",
         "restoreWallet": "Migruj lub przywróć portfel",
         "restoreWalletDescription": "Migracja do sieci Chrysalis lub przywrócenie istniejącego portfela",
-        "createWallet": "Stwórz nowy portfel",
-        "createWalletDescription": "Utwórz nowy portfel działający w sieci Chrysalis",
+        "createWallet": "Utwórz nowy portfel",
+        "createWalletDescription": "Tworzenie nowego portfela w sieci Chrysalis",
         "savePassword": "Zapisz hasło",
         "useBiometric": "Użyj zabezpieczeń biometrycznych",
         "setupPin": "Ustaw kod PIN",
@@ -771,8 +772,8 @@
         "myAddress": "Mój adres",
         "shareAddress": "Udostępnij adres",
         "yourAddress": "Twój adres",
-        "newRemainder": "Nowa reszta",
-        "remainder": "Reszta",
+        "newRemainder": "Nowy adres zwrotny",
+        "remainder": "Zwrot",
         "generateNewAddress": "Wygeneruj nowy adres",
         "copyAddress": "Kopiuj adres",
         "import": "Importuj",
@@ -818,7 +819,7 @@
         "loadingAccounts": "Wczytywanie, proszę czekać...",
         "addProfile": "Dodaj profil",
         "noRecentHistory": "Brak ostatniej aktywności",
-        "firstSync": "Synchronizowanie historii, może to zająć chwilę...",
+        "firstSync": "Synchronizowanie historii, może to chwilę potrwać...",
         "transferSyncing": "Synchronizowanie portfela",
         "transferSelectingInputs": "Wybieranie danych wejściowych",
         "transferRemainderAddress": "Generowanie adresu zwrotnego",
@@ -859,7 +860,8 @@
         "sending": "Wysyłanie",
         "legacyNetwork": "Poprzednia sieć",
         "capsLock": "Caps Lock jest włączony",
-        "version": "Wersja {version}"
+        "version": "Wersja {version}",
+        "unknown": "Brak informacji"
     },
     "dates": {
         "today": "Dzisiaj",
@@ -943,6 +945,7 @@
         },
         "node": {
             "invalid": "Wprowadź prawidłowy adres URL.",
+            "dns": "Nie można uzyskać wyniku DNS dla serwera.",
             "https": "HTTPS jest wymagany. Skonfiguruj profil dewelopera, aby używać niezabezpieczonych połączeń HTTP.",
             "duplicate": "Ten serwer został już wcześniej dodany.",
             "unsynced": "Serwer nie jest zsynchronizowany.",
@@ -979,6 +982,9 @@
         },
         "migration": {
             "missingBundle": "Wystąpił błąd podczas próby znalezienia pakietu transakcji."
+        },
+        "crypto": {
+            "cannotDecodeBech32": "Nie można odkodować ciągu znaków jako adresu Bech32."
         }
     },
     "tooltips": {

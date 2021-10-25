@@ -40,7 +40,7 @@ const handleError = (errorType, error, isRenderProcessError) => {
         lastError = {
             diagnostics: getDiagnostics(),
             errorType,
-            error
+            error,
         }
 
         openErrorWindow()
@@ -53,13 +53,13 @@ const handleError = (errorType, error, isRenderProcessError) => {
     }
 }
 
-process.on('uncaughtException', error => {
+process.on('uncaughtException', (error) => {
     handleError('Main Unhandled Error', error)
-});
+})
 
-process.on('unhandledRejection', error => {
+process.on('unhandledRejection', (error) => {
     handleError('Main Unhandled Promise Rejection', error)
-});
+})
 
 /**
  * Define wallet windows
@@ -67,10 +67,10 @@ process.on('unhandledRejection', error => {
 const windows = {
     main: null,
     about: null,
-    error: null
+    error: null,
 }
 
-let paths = {
+const paths = {
     preload: '',
     html: '',
     aboutHtml: '',
@@ -143,7 +143,7 @@ const handleNavigation = (e, url) => {
             shell.openExternal(url)
         }
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
 }
 
@@ -160,10 +160,10 @@ function createWindow() {
             callback(request.url.replace('iota:/', app.getAppPath()).split('?')[0].split('#')[0])
         })
     } catch (error) {
-        console.log(error) //eslint-disable-line no-console
+        console.error(error)
     }
 
-    const mainWindowState = windowStateKeeper('main', 'settings.json');
+    const mainWindowState = windowStateKeeper('main', 'settings.json')
 
     // Create the browser window
     windows.main = new BrowserWindow({
@@ -183,10 +183,10 @@ function createWindow() {
     })
 
     if (mainWindowState.isMaximized) {
-        windows.main.maximize();
+        windows.main.maximize()
     }
 
-    mainWindowState.track(windows.main);
+    mainWindowState.track(windows.main)
 
     if (!app.isPackaged) {
         // Enable dev tools only in developer mode
@@ -256,6 +256,7 @@ export const getWindow = function (windowName) {
  * @returns {BrowserWindow} Requested window
  */
 export const getOrInitWindow = (windowName) => {
+    /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
     if (!windows[windowName]) {
         if (windowName === 'main') {
             return createWindow()
@@ -278,7 +279,7 @@ initMenu()
 app.allowRendererProcessReuse = false
 
 // Quit when all windows are closed.
-app.on('window-all-closed', function () {
+app.on('window-all-closed', () => {
     // On macOS it is common for applications and their menu bar
     // to stay active until the user quits explicitly with Cmd + Q
     if (process.platform !== 'darwin') {
@@ -286,46 +287,35 @@ app.on('window-all-closed', function () {
     }
 })
 
-app.on('activate', function () {
-    // On macOS it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
-    if (BrowserWindow.getAllWindows().length === 0) {
-        createWindow()
-    }
-})
-
 app.once('ready', () => {
     ipcMain.handle('error-data', () => lastError)
+    app.on('activate', () => {
+        // On macOS it's common to re-create a window in the app when the
+        // dock icon is clicked and there are no other windows open.
+        //
+        // This listener must be created once the app is ready,
+        // otherwise we run into https://github.com/iotaledger/firefly/issues/1006
+        // because the `activate` event is also emitted when the app is launched for the first time
+        if (BrowserWindow.getAllWindows().length === 0) {
+            createWindow()
+        }
+    })
 })
 
 // IPC handlers for APIs exposed from main proces
 
 // URLs
-ipcMain.handle('open-url', (_e, url) => {
-    return handleNavigation(_e, url)
-})
+ipcMain.handle('open-url', (_e, url) => handleNavigation(_e, url))
 
 // Keychain
-ipcMain.handle('keychain-getAll', (_e) => {
-    return Keychain.getAll()
-})
-ipcMain.handle('keychain-get', (_e, key) => {
-    return Keychain.get(key)
-})
-ipcMain.handle('keychain-set', (_e, key, content) => {
-    return Keychain.set(key, content)
-})
-ipcMain.handle('keychain-remove', (_e, key) => {
-    return Keychain.remove(key)
-})
+ipcMain.handle('keychain-getAll', (_e) => Keychain.getAll())
+ipcMain.handle('keychain-get', (_e, key) => Keychain.get(key))
+ipcMain.handle('keychain-set', (_e, key, content) => Keychain.set(key, content))
+ipcMain.handle('keychain-remove', (_e, key) => Keychain.remove(key))
 
 // Dialogs
-ipcMain.handle('show-open-dialog', (_e, options) => {
-    return dialog.showOpenDialog(options)
-})
-ipcMain.handle('show-save-dialog', (_e, options) => {
-    return dialog.showSaveDialog(options)
-})
+ipcMain.handle('show-open-dialog', (_e, options) => dialog.showOpenDialog(options))
+ipcMain.handle('show-save-dialog', (_e, options) => dialog.showSaveDialog(options))
 
 // Miscellaneous
 ipcMain.handle('get-path', (_e, path) => {
@@ -354,8 +344,8 @@ const getDiagnostics = () => {
         [8, ['Tiger', '10.4']],
         [7, ['Panther', '10.3']],
         [6, ['Jaguar', '10.2']],
-        [5, ['Puma', '10.1']]
-    ]);
+        [5, ['Puma', '10.1']],
+    ])
 
     let platform = os.platform()
     let platformVersion = os.release()
@@ -367,7 +357,7 @@ const getDiagnostics = () => {
         if (!Number.isNaN(num)) {
             const [_, version] = osXNameMap.get(num)
             if (version) {
-               platformVersion = version
+                platformVersion = version
             }
         }
     }
@@ -379,22 +369,17 @@ const getDiagnostics = () => {
         { label: 'popups.diagnostics.cpuCount', value: os.cpus().length },
         { label: 'popups.diagnostics.totalMem', value: `${(os.totalmem() / 1048576).toFixed(1)} MB` },
         { label: 'popups.diagnostics.freeMem', value: `${(os.freemem() / 1048576).toFixed(1)} MB` },
-        { label: 'popups.diagnostics.userPath', value: app.getPath('userData') },
     ]
 }
 
-ipcMain.handle('diagnostics', (_e) => {
-    return getDiagnostics()
-})
+ipcMain.handle('diagnostics', (_e) => getDiagnostics())
 
 ipcMain.handle('handle-error', (_e, errorType, error) => {
     handleError(errorType, error, true)
 })
 
 // Os
-ipcMain.handle('get-os', (_e) => {
-    return process.platform
-})
+ipcMain.handle('get-os', (_e) => process.platform)
 
 /**
  * Define deep link state
@@ -426,40 +411,46 @@ app.on('second-instance', (_e, args) => {
     }
 })
 
-// TODO: re-enable deep links
 /**
  * Register iota:// protocol for deep links
  * Set Firefly as the default handler for iota:// protocol
  */
-// protocol.registerSchemesAsPrivileged([{ scheme: 'iota', privileges: { secure: true, standard: true } }])
-// if (process.defaultApp) {
-//     if (process.argv.length >= 2) {
-//         app.setAsDefaultProtocolClient('iota', process.execPath, [path.resolve(process.argv[1])])
-//     }
-// } else {
-//     app.setAsDefaultProtocolClient('iota')
-// }
+protocol.registerSchemesAsPrivileged([{ scheme: 'iota', privileges: { secure: true, standard: true } }])
+if (process.defaultApp) {
+    if (process.argv.length >= 2) {
+        app.setAsDefaultProtocolClient('iota', process.execPath, [path.resolve(process.argv[1])])
+    }
+} else {
+    app.setAsDefaultProtocolClient('iota')
+}
 
-// /**
-//  * Proxy deep link event to the wallet application
-//  */
-// app.on('open-url', (event, url) => {
-//     event.preventDefault()
-//     deepLinkUrl = url
-//     if (windows.main) {
-//         windows.main.webContents.send('deep-link-params', url)
-//     }
-// })
+/**
+ * Proxy deep link event to the wallet application
+ */
+app.on('open-url', (event, url) => {
+    event.preventDefault()
+    deepLinkUrl = url
+    if (windows.main) {
+        windows.main.webContents.send('deep-link-params', deepLinkUrl)
+        windows.main.webContents.send('deep-link-request')
+    }
+})
 
-// /**
-//  * Proxy deep link event to the wallet application
-//  */
-// ipcMain.on('deep-link-request', () => {
-//     if (deepLinkUrl) {
-//         windows.main.webContents.send('deep-link-params', deepLinkUrl)
-//         deepLinkUrl = null
-//     }
-// })
+/**
+ * Check if a deep link request/event currently exists and has not been cleared
+ */
+ipcMain.on('check-deep-link-request-exists', () => {
+    if (deepLinkUrl) {
+        windows.main.webContents.send('deep-link-params', deepLinkUrl)
+    }
+})
+
+/**
+ * Clear deep link request/event
+ */
+ipcMain.on('clear-deep-link-request', () => {
+    deepLinkUrl = null
+})
 
 /**
  * Proxy notification activated to the wallet application
@@ -474,6 +465,7 @@ ipcMain.on('notification-activated', (ev, contextData) => {
  * @returns {BrowserWindow} About window
  */
 export const openAboutWindow = () => {
+    /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
     if (windows.about !== null) {
         windows.about.focus()
         return windows.about
@@ -510,6 +502,7 @@ export const openAboutWindow = () => {
 }
 
 export const closeAboutWindow = () => {
+    /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
     if (windows.about) {
         windows.about.close()
         windows.about = null
@@ -521,6 +514,7 @@ export const closeAboutWindow = () => {
  * @returns {BrowserWindow} Error window
  */
 export const openErrorWindow = () => {
+    /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
     if (windows.error !== null) {
         windows.error.focus()
         return windows.error
@@ -555,15 +549,15 @@ export const openErrorWindow = () => {
 }
 
 export const closeErrorWindow = () => {
+    /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
     if (windows.error) {
         windows.error.close()
         windows.error = null
     }
 }
 
-
 function windowStateKeeper(windowName, settingsFilename) {
-    let window, windowState;
+    let window, windowState
 
     function setBounds() {
         const settings = loadJsonConfig(settingsFilename)
@@ -579,13 +573,13 @@ function windowStateKeeper(windowName, settingsFilename) {
             y: undefined,
             width: 1280,
             height: 720,
-        };
+        }
     }
 
     function saveState() {
-        windowState.isMaximized = window.isMaximized();
+        windowState.isMaximized = window.isMaximized()
         if (!windowState.isMaximized) {
-            windowState = window.getBounds();
+            windowState = window.getBounds()
         }
 
         let settings = loadJsonConfig(settingsFilename)
@@ -598,13 +592,13 @@ function windowStateKeeper(windowName, settingsFilename) {
     }
 
     function track(win) {
-        window = win;
-        ['resize', 'move', 'close'].forEach(event => {
-            win.on(event, saveState);
-        });
+        window = win
+        ;['resize', 'move', 'close'].forEach((event) => {
+            win.on(event, saveState)
+        })
     }
 
-    setBounds();
+    setBounds()
 
     return {
         x: windowState.x,
@@ -612,8 +606,8 @@ function windowStateKeeper(windowName, settingsFilename) {
         width: windowState.width,
         height: windowState.height,
         isMaximized: windowState.isMaximized,
-        track
-    };
+        track,
+    }
 }
 
 function saveJsonConfig(filename, data) {

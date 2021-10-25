@@ -635,6 +635,7 @@
         "outgoingMi": "سبکدوش ہونے والے {value}",
         "portoflio": "پورٹفولیو",
         "token": "ٹوکن",
+        "holdings": "Holdings",
         "accountValue": "والٹ کی قیمت",
         "accountActivity": "والٹ کی سرگرمی",
         "timeframe1Hour": "1 گھنٹہ",
@@ -859,7 +860,8 @@
         "sending": "بھیجے جا رہے",
         "legacyNetwork": "لیگیسی نیٹ ورک",
         "capsLock": "کیپس لاک آن ہے",
-        "version": "ورژن {version}"
+        "version": "ورژن {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "آج",
@@ -943,6 +945,7 @@
         },
         "node": {
             "invalid": "براہ کرم ایک درست URL درج کریں.",
+            "dns": "Could not resolve DNS for node.",
             "https": "HTTPS ضروری ہے۔ غیر محفوظ شدہ HTTP رابطوں کو استعمال کرنے کے لئے ایک ڈویلپر پروفائل ترتیب دیں.",
             "duplicate": "یہ نوڈ پہلے ہی شامل کی جا چکی ہے.",
             "unsynced": "یہ نوڈ سنک میں نہیں ہے.",
@@ -979,6 +982,9 @@
         },
         "migration": {
             "missingBundle": "An error occurred while trying to find the transaction bundle."
+        },
+        "crypto": {
+            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
         }
     },
     "tooltips": {

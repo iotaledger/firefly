@@ -1,29 +1,39 @@
 <script lang="typescript">
-    import { Button, Checkbox, HR, Radio, Text } from 'shared/components'
+    import { Button,Checkbox,HR,Radio,Text } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
     import { loggedIn } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
+    import { Electron } from 'shared/lib/electron'
     import { navigateToNewIndexMigration } from 'shared/lib/ledger'
     import { getOfficialNodes } from 'shared/lib/network'
     import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, isLedgerProfile, updateProfile } from 'shared/lib/profile'
-    import { buildAccountNetworkSettings, updateAccountNetworkSettings } from 'shared/lib/wallet'
+    import { activeProfile,isLedgerProfile,updateProfile } from 'shared/lib/profile'
+    import type { Locale } from 'shared/lib/typings/i18n';
+    import { buildAccountNetworkSettings,updateAccountNetworkSettings } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
 
-    export let locale
+    export let locale: Locale
 
     let deepLinkingChecked = $appSettings.deepLinking
 
-    let isDeveloperProfile = get(activeProfile)?.isDeveloperProfile
+    const isDeveloperProfile = get(activeProfile)?.isDeveloperProfile
     let showHiddenAccounts = get(activeProfile)?.settings.showHiddenAccounts
 
-    let { automaticNodeSelection, includeOfficialNodes, nodes, primaryNodeUrl, localPow } = buildAccountNetworkSettings()
+    let {
+        automaticNodeSelection,
+        includeOfficialNodes,
+        nodes,
+        primaryNodeUrl,
+        localPow,
+    } = buildAccountNetworkSettings()
 
     let contextPosition = { x: 0, y: 0 }
     let nodeContextMenu = undefined
     let nodesContainer
 
     $: $appSettings.deepLinking = deepLinkingChecked
+
+    $: $appSettings.deepLinking && Electron.DeepLinkManager.checkDeepLinkRequestExists()
 
     $: updateProfile('settings.showHiddenAccounts', showHiddenAccounts)
     $: updateProfile('isDeveloperProfile', isDeveloperProfile)
@@ -39,12 +49,12 @@
         }
 
         const allEnabled = nodes.filter((n) => !n.disabled)
-        let primaryNode = allEnabled.find((n) => n.url === primaryNodeUrl)
+        const primaryNode = allEnabled.find((n) => n.url === primaryNodeUrl)
         if (!primaryNode && allEnabled.length > 0) {
             primaryNodeUrl = allEnabled[0].url
         }
     }
-    $: updateAccountNetworkSettings(automaticNodeSelection, includeOfficialNodes, nodes, primaryNodeUrl, localPow)
+    $: void updateAccountNetworkSettings(automaticNodeSelection, includeOfficialNodes, nodes, primaryNodeUrl, localPow)
 
     function handleAddNodeClick() {
         openPopup({
@@ -211,7 +221,11 @@
                         </div>
                     {/if}
                 </div>
-                <Button medium inlineStyle="min-width: 156px;" classes="w-1/4 mt-4" onClick={() => handleAddNodeClick()}>
+                <Button
+                    medium
+                    inlineStyle="min-width: 156px;"
+                    classes="w-1/4 mt-4"
+                    onClick={() => handleAddNodeClick()}>
                     {locale('actions.addNode')}
                 </Button>
             </section>
@@ -232,13 +246,12 @@
         </section>
         <HR classes="pb-5 mt-5 justify-center" />
     {/if} -->
-    <!-- TODO: re-enable deep links -->
-    <!-- <section id="deepLinks" class="w-3/4">
+    <section id="deepLinks" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.deepLinks.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.deepLinks.description')}</Text>
         <Checkbox label={locale('actions.enableDeepLinks')} bind:checked={deepLinkingChecked} />
         <HR classes="pb-5 mt-5 justify-center" />
-    </section> -->
+    </section>
     {#if $loggedIn}
         <section id="balanceFinder" class="w-3/4">
             <Text type="h4" classes="mb-3">{locale('views.settings.balanceFinder.title')}</Text>

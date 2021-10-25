@@ -5,8 +5,10 @@
     import { onMount } from 'svelte'
     import { formatDate } from 'shared/lib/i18n'
     import { Electron } from 'shared/lib/electron';
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     let hasAutoUpdate = true
 
     function handleDownload() {
@@ -17,18 +19,19 @@
         }
         closePopup()
     }
-    function handleCancelClick() {
+    function handleCloseClick() {
         closePopup()
     }
 
     onMount(async () => {
         // @ts-ignore: This value is replaced by Webpack DefinePlugin
+        /* eslint-disable no-undef */
         if (!devMode) {
             await getVersionDetails()
-            await updateCheck()
+            updateCheck()
         }
         const os = await Electron.getOS()
-        hasAutoUpdate = os !== "win32"
+        hasAutoUpdate = os !== 'win32'
     })
 </script>
 
@@ -54,7 +57,7 @@
             </Text>
         </div>
         <div class="flex flex-row justify-center w-full">
-            <Button secondary onClick={() => handleCancelClick()}>{locale('actions.cancel')}</Button>
+            <Button secondary onClick={() => handleCloseClick()}>{locale('actions.close')}</Button>
         </div>
     {:else}
         <div class="my-6">
@@ -77,7 +80,7 @@
             {/if}
         </div>
         <div class="flex flex-row justify-between space-x-4 w-full px-8">
-            <Button secondary classes="w-1/2" onClick={() => handleCancelClick()}>{locale('actions.cancel')}</Button>
+            <Button secondary classes="w-1/2" onClick={() => handleCloseClick()}>{locale('actions.cancel')}</Button>
             <Button classes="w-1/2" onClick={() => handleDownload()} disabled={$updateBusy}>
                 {locale('actions.updateFirefly')}
             </Button>

@@ -199,7 +199,7 @@
             "accountPage": "Kontoseite",
             "standard": "Standard",
             "expert": "Experte",
-            "takingAWhile": "Das dauert ein bisschen...",
+            "takingAWhile": "Dies kann eine Weile dauern...",
             "notGeneratingAddresses": "Generiert dein Ledger Adressen?",
             "reinstallLegacy": "Falls nicht, trenne das Gerät und versuche es noch einmal. Sollte der Fehler weiterhin bestehen, musst du die {legacy} App ggf. erneut installieren."
         },
@@ -232,7 +232,7 @@
             "miningBundle": "Bundle minen",
             "problemRestoringWallet": "Beim Wiederherstellen deiner Wallet ist ein Problem aufgetreten. Bitte versuche es erneut.",
             "minimumMigrationAmountSpentAddresses": "Der minimale Migrationsbetrag für jede wiederverwendete Adresse beträgt 1 Mi. Versuche es erneut, wenn der Betrag nicht richtig ist.",
-            "tooManyAddressesToMigrate": "Du hast für die Migration zu viele Adressen mit zu wenig Guthaben. Prüfe erneut, wenn dein Gesamtguthaben nicht richtig ist.",
+            "tooManyAddressesToMigrate": "Für die Migration hast du zu viele Adressen mit geringem Guthaben. Prüfe erneut, wenn dein Gesamtguthaben nicht richtig ist.",
             "cannotMigrateAllYourFunds": "Wir können nicht alle Guthaben migrieren, da einige Adressen zu wenig Guthaben aufweisen. Du kannst trotzdem fortfahren. {value} gehen verloren.",
             "error": "Beim Migrieren der Guthaben ist ein Fehler aufgetreten. Bitte versuche es erneut."
         },
@@ -263,7 +263,7 @@
         },
         "transferFragmentedFunds": {
             "body1": "Firefly wird nun dein Guthaben migrieren. Dies kann eine Weile dauern.",
-            "body2": "Stelle sicher, dass dein Ledger-Gerät verbunden ist und die {legacy} App während der Migration durchgehend geöffnet ist.",
+            "body2": "Stelle sicher, dass dein Ledger-Gerät verbunden, und die {legacy} App während der Migration durchgehend geöffnet ist.",
             "migrate": "Guthaben migrieren",
             "transaction": "Transaktion {number}",
             "rerun": "Erneut versuchen"
@@ -635,6 +635,7 @@
         "outgoingMi": "Ausgehende {value}",
         "portoflio": "Portfolio",
         "token": "Token",
+        "holdings": "Bestände",
         "accountValue": "Wallet-Wert",
         "accountActivity": "Wallet-Aktivität",
         "timeframe1Hour": "1 Stunde",
@@ -821,13 +822,13 @@
         "firstSync": "Verlauf wird synchronisiert, dies kann eine Weile dauern...",
         "transferSyncing": "Synchronisiere Wallet",
         "transferSelectingInputs": "Wähle Inputs",
-        "transferRemainderAddress": "Erzeuge Restadresse",
+        "transferRemainderAddress": "Restadresse wird generiert",
         "transferPreparedTransaction": "Bereite Transaktion vor",
         "transferSigning": "Signieren der Transaktion",
         "transferPow": "Führe PoW aus",
         "transferBroadcasting": "Übermittlung der Transaktion",
         "transferComplete": "Überweisung abgeschlossen",
-        "generatingReceiveAddress": "Erzeuge Empfangsadresse",
+        "generatingReceiveAddress": "Empfangsadresse wird generiert",
         "creatingAccount": "Erstelle Wallet, bitte warten...",
         "updatingAccount": "Aktualisiere Wallet, bitte warten...",
         "accountSyncing": "Wallet wird synchronisiert",
@@ -859,7 +860,8 @@
         "sending": "Sende",
         "legacyNetwork": "Altes Netzwerk",
         "capsLock": "Feststelltaste ist aktiviert",
-        "version": "Version {version}"
+        "version": "Version {version}",
+        "unknown": "Unbekannt"
     },
     "dates": {
         "today": "Heute",
@@ -943,6 +945,7 @@
         },
         "node": {
             "invalid": "Gib eine gültige URL ein.",
+            "dns": "DNS für Node konnte nicht aufgelöst werden.",
             "https": "HTTPS wird benötigt. Benutze ein Entwicklerprofil, um ungesicherte HTTP-Verbindungen zu nutzen.",
             "duplicate": "Dieser Node wurde bereits hinzugefügt.",
             "unsynced": "Der Node ist nicht synchronisiert.",
@@ -979,6 +982,9 @@
         },
         "migration": {
             "missingBundle": "Beim Versuch, das Transaktionsbundle zu finden, ist ein Fehler aufgetreten."
+        },
+        "crypto": {
+            "cannotDecodeBech32": "String konnte nicht als Bech32-Adresse dekodiert werden."
         }
     },
     "tooltips": {

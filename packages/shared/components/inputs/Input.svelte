@@ -2,6 +2,9 @@
     import { Error, Text } from 'shared/components'
     import { formatNumber, getAllDecimalSeparators, getDecimalSeparator, parseCurrency } from 'shared/lib/currency'
     import { onMount } from 'svelte'
+    import { Locale } from 'shared/lib/typings/i18n'
+
+    export let locale: Locale
 
     export let value = ''
     export let classes = ''
@@ -19,12 +22,11 @@
     export let isFocused = false
     export let maxDecimals = undefined
     export let disableContextMenu = false
-    export let locale = undefined
     export let capsLockWarning = false
 
     let inputElement
-    let allDecimalSeparators = getAllDecimalSeparators()
-    let decimalSeparator = getDecimalSeparator()
+    const allDecimalSeparators = getAllDecimalSeparators()
+    const decimalSeparator = getDecimalSeparator()
     let capsLockOn = false
     let hasFocus = false
 
@@ -85,7 +87,7 @@
                 if (Number.isNaN(val)) {
                     e.preventDefault()
                 } else if (maxDecimals !== undefined) {
-                    value = formatNumber(val, maxDecimals, undefined, 0)
+                    value = formatNumber(val, undefined, maxDecimals, 0)
                     e.preventDefault()
                 }
             } else if (integer) {

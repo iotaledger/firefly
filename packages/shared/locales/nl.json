@@ -635,6 +635,7 @@
         "outgoingMi": "Uitgaande {value}",
         "portoflio": "Portfolio",
         "token": "Token",
+        "holdings": "Bezittingen",
         "accountValue": "Waarde Portemonnee",
         "accountActivity": "Activiteit Portemonnee",
         "timeframe1Hour": "1 uur",
@@ -859,7 +860,8 @@
         "sending": "Verzenden",
         "legacyNetwork": "Verouderd netwerk",
         "capsLock": "Caps Lock staat aan",
-        "version": "Versie {version}"
+        "version": "Versie {version}",
+        "unknown": "Onbekend"
     },
     "dates": {
         "today": "Vandaag",
@@ -943,6 +945,7 @@
         },
         "node": {
             "invalid": "Voer een geldige URL in.",
+            "dns": "DNS voor node kon niet worden opgelost.",
             "https": "HTTPS is vereist. Stel een ontwikkelaarsprofiel in om onbeveiligde HTTP-verbindingen te gebruiken.",
             "duplicate": "Deze node is reeds toegevoegd.",
             "unsynced": "De node is niet gesynchroniseerd.",
@@ -979,6 +982,9 @@
         },
         "migration": {
             "missingBundle": "Er is een fout opgetreden tijdens het zoeken van de transactiebundel."
+        },
+        "crypto": {
+            "cannotDecodeBech32": "Kan tekenreeks niet decoderen als Bech32 adres."
         }
     },
     "tooltips": {
