@@ -1,11 +1,11 @@
 <script lang="typescript">
-    import { Button, Input, Spinner, Text } from 'shared/components'
+    import { Button, Input, Spinner, Text, Icon, WalletPreview } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import { MAX_ACCOUNT_NAME_LENGTH, wallet } from 'shared/lib/wallet'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
-    import { isLedgerProfile } from 'shared/lib/profile'
+    import { isLedgerProfile, activeProfile } from 'shared/lib/profile'
     import { showAppNotification } from 'shared/lib/notifications'
     import { localize } from 'shared/lib/i18n'
     import { Locale } from 'shared/lib/typings/i18n'
@@ -18,11 +18,35 @@
 
     const { accounts } = $wallet
 
+    const availableColors = [
+        'blue-400',
+        'lightblue-500',
+        'turquoise-500',
+        'green-100',
+        'yellow-500',
+        'orange-500',
+        'red-500',
+        'purple-500',
+    ]
+
+    const availablePatterns = ['default', 'circles', 'clouds', 'clover', 'organic', 'rain', 'shapes', 'wind']
+
+    let selectedColor = $activeProfile?.settings?.color
+    let selectedPattern = $activeProfile?.settings?.pattern
+
     let accountAlias = ''
     let isBusy = false
 
     // This looks odd but sets a reactive dependency on accountAlias, so when it changes the error will clear
     $: accountAlias, (error = '')
+
+    const handleColorClick = (color) => {
+        selectedColor = color
+    }
+
+    const handlePatternClick = (pattern) => {
+        selectedPattern = pattern
+    }
 
     const handleCreateClick = () => {
         const trimmedAccountAlias = accountAlias.trim()
@@ -79,8 +103,13 @@
     <div>
         <div class="flex flex-row mb-6">
             <Text type="h5">{locale('general.createAccount')}</Text>
-        </div>
-        <div class="w-full h-full flex flex-col justify-between">
+        </div> 
+
+        <!-- wallet preview -->
+        <WalletPreview color={selectedColor} name={accountAlias} pattern={selectedPattern} />
+
+        <!-- wallet alias -->
+        <div class="w-full h-auto flex flex-col justify-between pb-5">
             <Input
                 {error}
                 bind:value={accountAlias}
@@ -88,6 +117,52 @@
                 autofocus
                 submitHandler={handleCreateClick}
                 disabled={isBusy} />
+        </div>
+
+          <!-- set wallet color -->
+          <div class="w-full h-auto flex flex-col justify-center pb-5">
+            <div class="flex flex-row mb-6">
+                <Text type="h5">{locale('general.walletColor')}</Text>
+            </div>
+            <div class="w-full h-full grid md:grid-cols-8 sm:grid-cols-4 gap-6">
+                {#each availableColors as availableColor}
+                    <div
+                        class="bg-{availableColor} rounded-lg w-8 h-8 cursor-pointer hover:opacity-50 focus:ring-2 focus:ring-blue-600"
+                        on:click={() => handleColorClick(availableColor)}>
+                        {#if selectedColor === availableColor}
+                            <Icon icon="checkmark" classes="h-full w-full text-white justify-self-center" />
+                        {/if}
+                    </div>
+                {/each}
+            </div>
+        </div>
+
+        <!-- set wallet pattern -->
+        <div class="w-full h-auto flex flex-col justify-between">
+            <div class="flex flex-row mb-6">
+                <Text type="h5">{locale('general.walletBackground')}</Text>
+            </div>
+            <div class="flex-col grid grid-cols-4 gap-4">
+                {#each availablePatterns as availablePattern}
+                    <div
+                        class="rounded-xl h-28 bg-cover bg-{selectedPattern === availablePattern ? selectedColor : 'blue-50'} cursor-pointer hover:opacity-50 relative"
+                        style="height: 100%; width: 100%"
+                        on:click={() => handlePatternClick(availablePattern)}>
+                        <img
+                            class="object-cover z-0"
+                            style={selectedPattern === availablePattern ? selectedColor : 'filter: invert(.5) sepia(1) saturate(5) hue-rotate(175deg);'}
+                            width="100%"
+                            height="100%"
+                            src={`assets/patterns/wallet-backgrounds/${availablePattern}.svg`}
+                            alt="" />
+                        {#if selectedPattern === availablePattern}
+                            <div class="bg-green-600 rounded-full absolute bottom-5 left-9">
+                                <Icon icon="checkmark" classes="h-full w-full text-white justify-self-center" />
+                            </div>
+                        {/if}
+                    </div>
+                {/each}
+            </div>
         </div>
     </div>
     <!-- Action -->

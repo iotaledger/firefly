@@ -75,6 +75,8 @@ export const createProfile = (profileName: string, isDeveloperProfile: boolean):
         lastStrongholdBackupTime: null,
         isDeveloperProfile,
         settings: {
+            color: '',
+            pattern: '',
             currency: AvailableExchangeRates.USD,
             automaticNodeSelection: true,
             includeOfficialNodes: true,

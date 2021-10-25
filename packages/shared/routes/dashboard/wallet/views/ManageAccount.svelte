@@ -1,11 +1,12 @@
 <script lang="typescript">
     import { Button, Input, Text, Icon, WalletPreview } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
-    import { accountRoute, walletRoute } from 'shared/lib/router'
+    import { accountRoute, settingsChildRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccountId, wallet } from 'shared/lib/wallet'
     import { Locale } from 'shared/lib/typings/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { updateProfile, activeProfile } from 'shared/lib/profile'
 
     export let locale: Locale
 
@@ -27,8 +28,8 @@
 
     const availablePatterns = ['default', 'circles', 'clouds', 'clover', 'organic', 'rain', 'shapes', 'wind']
 
-    let updatedColor
-    let updatedPattern
+    let selectedColor = $activeProfile?.settings?.color
+    let selectedPattern = $activeProfile?.settings?.pattern
 
     let accountAlias = alias
     let isBusy = false
@@ -36,17 +37,21 @@
     // This looks odd but sets a reactive dependency on accountAlias, so when it changes the error will clear
     $: accountAlias, (error = '')
 
-    const handleColorClick = (selectedColor) => {
-        updatedColor = selectedColor
+    const handleColorClick = (color) => {
+        selectedColor = color
     }
 
-    const handlePatternClick = (selectedPattern) => {
-        updatedPattern = selectedPattern
+    const handlePatternClick = (pattern) => {
+        selectedPattern = pattern
     }
 
     const handleSaveClick = () => {
+        updateProfile('settings.color', selectedColor)
+        updateProfile('settings.pattern', selectedPattern)
+
         const trimmedAccountAlias = accountAlias.trim()
         if (trimmedAccountAlias === alias) {
+            /* TODO use this Id */
             selectedAccountId.set(null)
             walletRoute.set(WalletRoutes.Init)
             return
@@ -115,7 +120,7 @@
         </div>
 
         <!-- wallet preview -->
-        <WalletPreview color={updatedColor} name={accountAlias} pattern={updatedPattern} />
+        <WalletPreview color={selectedColor} name={accountAlias} pattern={selectedPattern} />
 
         <!-- set wallet color -->
         <div class="w-full h-auto flex flex-col justify-center pb-5">
@@ -127,7 +132,7 @@
                     <div
                         class="bg-{availableColor} rounded-lg w-8 h-8 cursor-pointer hover:opacity-50 focus:ring-2 focus:ring-blue-600"
                         on:click={() => handleColorClick(availableColor)}>
-                        {#if updatedColor === availableColor}
+                        {#if selectedColor === availableColor}
                             <Icon icon="checkmark" classes="h-full w-full text-white justify-self-center" />
                         {/if}
                     </div>
@@ -143,19 +148,18 @@
             <div class="flex-col grid grid-cols-4 gap-4">
                 {#each availablePatterns as availablePattern}
                     <div
-                        class="rounded-xl h-28 bg-cover bg-{updatedPattern === availablePattern ? updatedColor : 'blue-50'} cursor-pointer hover:opacity-50 relative"
+                        class="rounded-xl h-28 bg-cover bg-{selectedPattern === availablePattern ? selectedColor : 'blue-50'} cursor-pointer hover:opacity-50 relative"
                         style="height: 100%; width: 100%"
                         on:click={() => handlePatternClick(availablePattern)}>
                         <img
                             class="object-cover z-0"
-                            style={updatedPattern === availablePattern ? updatedColor : 'filter: invert(.5) sepia(1) saturate(5) hue-rotate(175deg);'}
+                            style={selectedPattern === availablePattern ? selectedColor : 'filter: invert(.5) sepia(1) saturate(5) hue-rotate(175deg);'}
                             width="100%"
                             height="100%"
                             src={`assets/patterns/wallet-backgrounds/${availablePattern}.svg`}
                             alt="" />
-                        {#if updatedPattern === availablePattern}
-                            <div
-                                class="bg-green-600 rounded-full absolute bottom-5 left-9">
+                        {#if selectedPattern === availablePattern}
+                            <div class="bg-green-600 rounded-full absolute bottom-5 left-9">
                                 <Icon icon="checkmark" classes="h-full w-full text-white justify-self-center" />
                             </div>
                         {/if}

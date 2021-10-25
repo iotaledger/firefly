@@ -44,6 +44,16 @@ export interface UserSettings {
     showHiddenAccounts?: boolean
     chartSelectors: ChartSelectors
     hideNetworkStatistics?: boolean
+    color: string
+    pattern: string
+    /**
+     * walletStyles: [
+        {
+          walletID
+          color
+          style
+        }
+    ]*/
 }
 
 /**
