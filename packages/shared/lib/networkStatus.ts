@@ -44,7 +44,7 @@ async function pollNetworkStatusInternal(): Promise<void> {
         const account0 = accs[0]
         const { clientOptions } = account0
 
-        let node = clientOptions.nodes.find((n) => n.isPrimary)
+        let node = clientOptions?.nodes.find((n) => n.isPrimary)
         if (node?.url !== networkConfig?.nodes.find((n) => n.isPrimary)?.url) {
             /**
              * NOTE: If the network configuration and client options do NOT

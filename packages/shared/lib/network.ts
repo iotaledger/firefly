@@ -231,12 +231,16 @@ export const isNodeAuthValid = (auth: NodeAuth): boolean => {
  * @returns {string | undefined}
  */
 export const checkNodeUrlValidity = (nodesList: Node[], newUrl: string, allowInsecure: boolean): string | undefined => {
-    // Check if URL is valid
     if (!isValidUrl(newUrl)) {
         return 'error.node.invalid'
     }
 
-    // Only allow HTTPS nodes
+    /**
+     * CAUTION: We are going to wait for HTTP support to
+     * be audited. Until then this assignment statement
+     * must stay.
+     */
+    allowInsecure = false
     if (!allowInsecure && !isValidHttpsUrl(newUrl)) {
         return 'error.node.https'
     }
@@ -246,7 +250,6 @@ export const checkNodeUrlValidity = (nodesList: Node[], newUrl: string, allowIns
         newUrl = newUrl.slice(0, -4)
     }
 
-    // Check whether the node was already added to the list
     /* eslint-disable @typescript-eslint/prefer-regexp-exec */
     if (nodesList && nodesList.some(({ url }) => (url.endsWith(':443') ? url.slice(0, -4) : url).match(newUrl))) {
         return 'error.node.duplicate'

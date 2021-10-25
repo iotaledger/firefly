@@ -1004,7 +1004,7 @@
             "refused": "The connection was refused.",
             "handshake": "Could not complete handshake with node.",
             "invalidCertificate": "Could not connect with invalid certificate.",
-            "https": "HTTPS is required. Set up a developer profile to use unsecured HTTP connections.",
+            "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
             "duplicate": "This node has already been added.",
             "unsynced": "The node is not in sync.",
             "noSynced": "No synced nodes are available.",
