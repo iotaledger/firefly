@@ -119,9 +119,6 @@
                 disabled={isBusy} />
         </div>
 
-        <!-- wallet preview -->
-        <WalletPreview color={selectedColor} name={accountAlias} pattern={selectedPattern} />
-
         <!-- set wallet color -->
         <div class="w-full h-auto flex flex-col justify-center pb-5">
             <div class="flex flex-row mb-6">

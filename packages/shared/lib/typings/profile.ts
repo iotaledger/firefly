@@ -46,14 +46,6 @@ export interface UserSettings {
     hideNetworkStatistics?: boolean
     color: string
     pattern: string
-    /**
-     * walletStyles: [
-        {
-          walletID
-          color
-          style
-        }
-    ]*/
 }
 
 /**
