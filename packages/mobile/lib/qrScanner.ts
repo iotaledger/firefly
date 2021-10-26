@@ -11,33 +11,28 @@ export const prepare = async (): Promise<void> => {
 }
 
 export const startScanner = async (onSuccess: (response: string) => void, onError: () => void): Promise<void> => {
-    await didUserGrantPermission()
-        .then(async (granted) => {
-            if (granted) {
-                try {
-                    await BarcodeScanner.hideBackground()
-                    document.body.classList.add(openQRBodyClass)
-                    const result: ScanResult = await BarcodeScanner.startScan()
-                    if (result?.hasContent && result?.content) {
-                        document.body.classList.remove(openQRBodyClass)
-                        onSuccess(result.content)
-                    }
-                } catch (err) {
-                    onError()
-                }
-            } else {
-                void checkPermission()
+    try {
+        const permissionGranted = await didUserGrantPermission()
+        if (permissionGranted) {
+            await BarcodeScanner.hideBackground()
+            document.body.classList.add(openQRBodyClass)
+            const result: ScanResult = await BarcodeScanner.startScan()
+            if (result?.hasContent && result?.content) {
+                document.body.classList.remove(openQRBodyClass)
+                onSuccess(result.content)
             }
-        })
-        .catch(async () => {
-            try {
-                await stopScanner()
-            } catch (err) {
-                // eslint-disable-next-line no-empty
-            }
-            document.body.classList.remove(openQRBodyClass)
-            onError()
-        })
+        } else {
+            await checkPermission()
+        }
+    } catch (err) {
+        try {
+            await stopScanner()
+        } catch (err) {
+            // eslint-disable-next-line no-empty
+        }
+        document.body.classList.remove(openQRBodyClass)
+        onError()
+    }
 }
 
 export const stopScanner = async (): Promise<void> => {

@@ -14,7 +14,7 @@ export const openUrl = (url: string): void => {
     }
 }
 
-export const startQRScanner = async (_onSuccess: (result: string) => void, _onError: () => void): Promise<void> => {
+export const startQRScanner = (_onSuccess: (result: string) => void, _onError: () => void): void => {
     if (get(mobile)) {
         showCameraScanner.set(true)
         const onSuccess = (result: string) => {
@@ -25,16 +25,16 @@ export const startQRScanner = async (_onSuccess: (result: string) => void, _onEr
             showCameraScanner.set(false)
             _onError()
         }
-        await startScanner(onSuccess, onError)
+        void startScanner(onSuccess, onError)
     } else {
         // nothing to do here
     }
 }
 
-export const stopQRScanner = async (): Promise<void> => {
+export const stopQRScanner = (): void => {
     if (get(mobile)) {
-        await stopScanner()
         showCameraScanner.set(false)
+        void stopScanner()
     } else {
         // nothing to do here
     }
