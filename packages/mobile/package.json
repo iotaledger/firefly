@@ -26,6 +26,7 @@
         "webpack-dev-server": "^3.11.2"
     },
     "dependencies": {
+        "@capacitor-community/barcode-scanner": "^2.0.1",
         "shared-modules": "link:../shared"
     },
     "engineStrict": true,
