@@ -15,7 +15,6 @@ export enum SettingsIcons {
     deepLinks = 'link',
     developerMode = 'dev',
     networkConfiguration = 'wifi',
-    proofOfWork = 'work',
     errorLog = 'warning',
     diagnostics = 'tools',
     migrateLedgerIndex = 'ledger',

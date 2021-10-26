@@ -359,7 +359,7 @@
             <HR classes="pb-5 mt-5 justify-center" />
         {/if}
         <section id="proofOfWork" class="w-3/4">
-            <Text type="h4" classes="mb-3">{locale('views.settings.proofOfWork.title')}</Text>
+            <Text type="h5" classes="mb-3">{locale('views.settings.proofOfWork.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.proofOfWork.description')}</Text>
             <Checkbox label={locale('actions.localProofOfWork')} bind:checked={networkConfig.localPow} />
         </section>
