@@ -163,7 +163,7 @@
         }
     }
 
-    function getAccounts() {
+    function loadAccounts() {
         const _onError = (error: any = null) => {
             if ($isLedgerProfile) {
                 if (!LedgerErrorType[error.type]) {
@@ -556,7 +556,7 @@
         // an active profile, only init if there is a profile
         if ($activeProfile) {
             if (!$accountsLoaded) {
-                getAccounts()
+                loadAccounts()
             }
 
             removeEventListeners($activeProfile.id)
