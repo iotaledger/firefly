@@ -18,8 +18,8 @@
             "profileName": "Όνομα Προφίλ",
             "body1": "Μπορείτε να δημιουργήσετε πολλαπλά προφίλ χρηστών για να οργανώσετε τα πορτοφόλια σας και να βελτιώσετε την ιδιωτικότητά σας.",
             "body2": {
-                "first": "For now, let's start with your first profile name.",
-                "nonFirst": "For now, let's start with your profile name."
+                "first": "Προς το παρόν, ας ξεκινήσουμε με το όνομα του πρώτου σας προφίλ.",
+                "nonFirst": "Προς το παρόν, ας ξεκινήσουμε με το όνομα του προφίλ σας."
             },
             "addMore": "You can add more profiles later."
         },
@@ -635,6 +635,7 @@
         "outgoingMi": "Εξερχόμενα {value}",
         "portoflio": "Χαρτοφυλάκιο",
         "token": "Νομίσματα",
+        "holdings": "Holdings",
         "accountValue": "Αξία Πορτοφολιού",
         "accountActivity": "Δραστηριότητα Πορτοφολιού",
         "timeframe1Hour": "1 ώρα",
@@ -944,6 +945,7 @@
         },
         "node": {
             "invalid": "Εισαγάγετε μια έγκυρη διεύθυνση URL.",
+            "dns": "Could not resolve DNS for node.",
             "https": "Απαιτείται HTTPS. Ρυθμίστε ένα προφίλ προγραμματιστή για να χρησιμοποιήσετε μη ασφαλείς συνδέσεις HTTP.",
             "duplicate": "Αυτός ο κόμβος έχει ήδη προστεθεί.",
             "unsynced": "Ο κόμβος δεν είναι σε συγχρονισμό.",
@@ -980,6 +982,9 @@
         },
         "migration": {
             "missingBundle": "An error occurred while trying to find the transaction bundle."
+        },
+        "crypto": {
+            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
         }
     },
     "tooltips": {
