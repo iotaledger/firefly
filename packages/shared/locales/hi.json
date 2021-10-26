@@ -635,6 +635,7 @@
         "outgoingMi": "निवर्तमान {value}",
         "portoflio": "पोर्टफोलियो",
         "token": "टोकन",
+        "holdings": "Holdings",
         "accountValue": "वॉलेट शेष राशि",
         "accountActivity": "वॉलेट गतिविधि",
         "timeframe1Hour": "1 घंटा",
@@ -944,6 +945,7 @@
         },
         "node": {
             "invalid": "मान्य URL दर्ज करे",
+            "dns": "Could not resolve DNS for node.",
             "https": "HTTPS की आवश्यकता है। असुरक्षित HTTP कनेक्शन का उपयोग करने के लिए एक डेवलपर प्रोफ़ाइल सेट करें।",
             "duplicate": "उस नोड को पहले से जोड़ा गया है",
             "unsynced": "नोड सिंक में नहीं है",
@@ -980,6 +982,9 @@
         },
         "migration": {
             "missingBundle": "An error occurred while trying to find the transaction bundle."
+        },
+        "crypto": {
+            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
         }
     },
     "tooltips": {

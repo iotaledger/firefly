@@ -635,6 +635,7 @@
         "outgoingMi": "Küldött: {value}",
         "portoflio": "Portfólió",
         "token": "Token",
+        "holdings": "Befektetések",
         "accountValue": "Tárca egyenleg",
         "accountActivity": "Tárca előzmények",
         "timeframe1Hour": "1 óra",
@@ -944,6 +945,7 @@
         },
         "node": {
             "invalid": "Kérjük, adjon meg egy érvényes URL címet!",
+            "dns": "A node címét nem sikerült feloldani.",
             "https": "HTTPS szükséges. Állítson be fejlesztőprofilt a nem biztonságos HTTP-kapcsolatok használatához.",
             "duplicate": "Ez a csomópont már korábban hozzá lett adva.",
             "unsynced": "A csomópont nincs szinkronban.",
@@ -980,6 +982,9 @@
         },
         "migration": {
             "missingBundle": "Hiba történt a tranzakciós csomag keresése közben."
+        },
+        "crypto": {
+            "cannotDecodeBech32": "A megadott karakterlánc nem értelmezhető Bech32 címként."
         }
     },
     "tooltips": {
