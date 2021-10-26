@@ -997,5 +997,11 @@
             "low": "Low",
             "veryLow": "Very low"
         }
+    },
+    "permissions": {
+        "camera": {
+            "request": "We need your permission to use your camera to be able to scan QR codes.",
+            "requestInAppSettings": "If you want to grant permission for using your camera to scan QR codes, please enable it in the app settings."
+        }
     }
 }
