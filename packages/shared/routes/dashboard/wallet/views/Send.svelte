@@ -466,7 +466,7 @@
                 message: locale('error.global.generic'),
             })
         }
-        startQRScanner(onSuccess, onError)
+        void startQRScanner(onSuccess, onError)
     }
 
     onMount(() => {

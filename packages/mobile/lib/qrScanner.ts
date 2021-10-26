@@ -22,8 +22,7 @@ export const startScanner = async (onSuccess: (response: string) => void, onErro
                         document.body.classList.remove(openQRBodyClass)
                         onSuccess(result.content)
                     }
-                }
-                catch (err) {
+                } catch (err) {
                     onError()
                 }
             } else {
@@ -33,10 +32,10 @@ export const startScanner = async (onSuccess: (response: string) => void, onErro
         .catch(async () => {
             try {
                 await stopScanner()
+            } catch (err) {
+                // eslint-disable-next-line no-empty
             }
-            // eslint-disable-next-line no-empty
-            catch (err) { }
-            document.body.classList.remove(openQRBodyClass);
+            document.body.classList.remove(openQRBodyClass)
             onError()
         })
 }
@@ -46,23 +45,23 @@ export const stopScanner = async (): Promise<void> => {
         document.body.classList.remove(openQRBodyClass)
         await BarcodeScanner.showBackground()
         await BarcodeScanner.stopScan()
+    } catch (err) {
+        // eslint-disable-next-line no-empty
     }
-    // eslint-disable-next-line no-empty
-    catch (err) { }
 }
 
 export const checkPermission = async (): Promise<void> => {
-    const status: CheckPermissionResult = await BarcodeScanner.checkPermission();
+    const status: CheckPermissionResult = await BarcodeScanner.checkPermission()
     if (status.denied) {
         // the user denied permission for good
         // redirect user to app settings if they want to grant it anyway
         // eslint-disable-next-line no-alert
-        const c = confirm(localize('permissions.camera.requestInAppSettings'));
+        const c = confirm(localize('permissions.camera.requestInAppSettings'))
         if (c) {
-            await BarcodeScanner.openAppSettings();
+            await BarcodeScanner.openAppSettings()
         }
     }
-};
+}
 
 export const didUserGrantPermission = async (): Promise<boolean> => {
     // check if user already granted permission
@@ -85,7 +84,7 @@ export const didUserGrantPermission = async (): Promise<boolean> => {
         // it is advised to show the user some sort of prompt
         // this way you will not waste your only chance to ask for the permission
         // eslint-disable-next-line no-alert
-        const c = confirm(localize('permissions.camera.request'));
+        const c = confirm(localize('permissions.camera.request'))
         if (!c) {
             return false
         }
