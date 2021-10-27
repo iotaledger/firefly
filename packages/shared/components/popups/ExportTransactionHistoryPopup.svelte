@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { generateTransactionHistoryCsvFromAccount, generateTransactionHistoryCsvFileName } from 'shared/lib/transactionHistory'
+    import { generateTransactionHistoryCsvFromAccount, generateTransactionHistoryFileName } from 'shared/lib/transactionHistory'
     import { Button,Password,Spinner,Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { displayNotificationForLedgerProfile,isLedgerConnected } from 'shared/lib/ledger'
@@ -35,8 +35,8 @@
             }
 
             for (const walletAccount of $accounts) {
-                    const fileName = generateTransactionHistoryCsvFileName(profileName, walletAccount.alias)
-                    const contents = generateTransactionHistoryCsvFromAccount(walletAccount)
+                    const fileName = generateTransactionHistoryFileName(profileName, walletAccount.alias)
+                    const contents = generateTransactionHistoryCsvFromAccount(walletAccount, {id: true, timestamp: true, internal: true, value: true, remainderValue: true})
                     try {
                         const filePath = await Electron.exportTransactionHistory(fileName, contents)
                         if(!filePath) {
