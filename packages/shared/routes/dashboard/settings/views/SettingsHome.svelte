@@ -3,6 +3,7 @@
     import { loggedIn, mobile } from 'shared/lib/app'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { settingsChildRoute, settingsRoute } from 'shared/lib/router'
+    import { Locale } from 'shared/lib/typings/i18n'
     import { SettingsIcons } from 'shared/lib/typings/icons'
     import {
         AdvancedSettings,
@@ -13,7 +14,6 @@
         SecuritySettings,
         SettingsRoutes,
     } from 'shared/lib/typings/routes'
-    import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -30,7 +30,7 @@
     }
 </script>
 
-<div class="h-full w-full flex flex-col">
+<div class="flex flex-col flex-1 md:flex-initial pb-10 md:pb-0 md:h-full md:w-full">
     {#if !$mobile}
         <Text type="h2" classes="mb-14">{locale('views.settings.settings')}</Text>
     {/if}

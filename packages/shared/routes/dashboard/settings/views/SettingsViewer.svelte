@@ -3,6 +3,7 @@
     import { loggedIn, mobile } from 'shared/lib/app'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { settingsChildRoute, settingsRoute } from 'shared/lib/router'
+    import { Locale } from 'shared/lib/typings/i18n'
     import { SettingsIcons } from 'shared/lib/typings/icons'
     import {
         AdvancedSettings,
@@ -15,8 +16,8 @@
         SettingsRoutesNoProfile,
     } from 'shared/lib/typings/routes'
     import { onMount } from 'svelte'
+    import { fly } from 'svelte/transition'
     import { Advanced, General, Help, Security } from './'
-    import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -71,15 +72,17 @@
         settingsRoute.set(SettingsRoutes.Init)
     }
     onMount(() => {
-        const child = $settingsChildRoute
-        settingsChildRoute.set(null)
-        if (child) {
-            scrollIntoView(child, { behavior: 'auto' })
+        if (!$mobile) {
+            const child = $settingsChildRoute
+            settingsChildRoute.set(null)
+            if (child) {
+                scrollIntoView(child, { behavior: 'auto' })
+            }
         }
     })
 </script>
 
-<div class="flex flex-1 flex-row items-start">
+<div class="flex flex-1 flex-row items-start" in:fly={{ duration: $mobile ? 200 : 0, x: 200 }}>
     {#if !$mobile}
         <button data-label="back-button" class="absolute top-8 left-8" on:click={handleBackClick}>
             <div class="flex items-center space-x-3">

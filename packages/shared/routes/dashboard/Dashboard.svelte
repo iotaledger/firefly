@@ -1,13 +1,18 @@
 <script lang="typescript">
     import { Idle, Sidebar } from 'shared/components'
-    import { loggedIn, logout } from 'shared/lib/app'
+    import { loggedIn, logout, mobile } from 'shared/lib/app'
     import { Electron } from 'shared/lib/electron'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
-    import { NOTIFICATION_TIMEOUT_NEVER, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
+    import {
+        NOTIFICATION_TIMEOUT_NEVER,
+        removeDisplayNotification,
+        showAppNotification,
+    } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
     import { accountRoute, dashboardRoute, routerNext, walletRoute } from 'shared/lib/router'
+    import type { Locale } from 'shared/lib/typings/i18n'
     import { AccountRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
     import {
         api,
@@ -19,7 +24,6 @@
     import { Settings, Wallet } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -227,6 +231,11 @@
 <Idle />
 <div class="flex flex-row w-full h-full">
     <Sidebar {locale} />
-    <!-- Dashboard Pane -->
-    <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
+    {#if $mobile}
+        {#each Object.values(tabs) as component}
+            <svelte:component this={component} {locale} on:next={routerNext} />
+        {/each}
+    {:else}
+        <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
+    {/if}
 </div>
