@@ -1,12 +1,19 @@
 import { cleanupSignup, login, mobile, strongholdPassword, walletPin } from 'shared/lib/app'
 import { activeProfile, profiles, setProfileType } from 'shared/lib/profile'
 import {
-    AccountRoutes, AdvancedSettings,
-    AdvancedSettingsNoProfile, AppRoute, GeneralSettings,
-    GeneralSettingsNoProfile, HelpAndInfo, LedgerRoutes, SecuritySettings, SettingsRoutes,
+    AccountRoutes,
+    AdvancedSettings,
+    AdvancedSettingsNoProfile,
+    AppRoute,
+    GeneralSettings,
+    GeneralSettingsNoProfile,
+    HelpAndInfo,
+    LedgerRoutes,
+    SecuritySettings,
+    SettingsRoutes,
     SetupType,
     Tabs,
-    WalletRoutes
+    WalletRoutes,
 } from 'shared/lib/typings/routes'
 import { selectedAccountId } from 'shared/lib/wallet'
 import { get, readable, writable } from 'svelte/store'
@@ -91,7 +98,14 @@ export const settingsRoute = writable<SettingsRoutes>(SettingsRoutes.Init)
 /**
  * Settings child route
  */
-export const settingsChildRoute = writable<GeneralSettings | GeneralSettingsNoProfile | SecuritySettings | AdvancedSettings | AdvancedSettingsNoProfile | HelpAndInfo>(null)
+export const settingsChildRoute = writable<
+    | GeneralSettings
+    | GeneralSettingsNoProfile
+    | SecuritySettings
+    | AdvancedSettings
+    | AdvancedSettingsNoProfile
+    | HelpAndInfo
+>(null)
 
 /**
  * Navigate to initial route
