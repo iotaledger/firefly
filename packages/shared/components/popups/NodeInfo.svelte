@@ -19,7 +19,7 @@
         const accounts = get($wallet.accounts)
         asyncGetNodeInfo(accounts[0]?.id, node?.url, cleanNodeAuth(node?.auth))
             .then((nodeInfo) => {
-                nodeContent = combineNodeInfo(nodeInfo)
+                nodeContent = combineNodeInfo(node?.url, nodeInfo)
             })
             .catch((err) => {
                 closePopup()
@@ -30,9 +30,9 @@
             })
     })
 
-    const combineNodeInfo = (nodeInfo: NodeInfo): string => {
+    const combineNodeInfo = (nodeUrl: string, nodeInfo: NodeInfo): string => {
         const usedKeys = ['name', 'networkId', 'bech32HRP', 'features', 'confirmedMilestoneIndex', 'pruningIndex', 'messagesPerSecond', 'referencedRate']
-        return usedKeys.map((k) => {
+        return [`${locale('popups.node.info.url')}: ${nodeUrl}`].concat(usedKeys.map((k) => {
             let keyLocale = `popups.node.info.${k}`
             let val
             if (k === 'name') {
@@ -48,7 +48,7 @@
             }
 
             return `${locale(keyLocale)}: ${val}`
-        }).join('\r\n')
+        })).join('\r\n')
     }
 
     const handleCopyNodeInfoClick = () => {

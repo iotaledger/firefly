@@ -43,17 +43,7 @@
     }
 
     let canRemoveAllNodes
-    $: {
-        if(networkConfig.nodes.length === 0) {
-            canRemoveAllNodes = false
-        } else {
-            if(networkConfig.includeOfficialNodes) {
-                canRemoveAllNodes = networkConfig.nodes.length !== getOfficialNodes(networkConfig.network.type).length
-            } else {
-                canRemoveAllNodes = true
-            }
-        }
-    }
+    $: canRemoveAllNodes = networkConfig.nodes.length !== 0
 
     let canConfigureNodes
     $: {
@@ -191,11 +181,8 @@
             props: {
                 removeAll: true,
                 onSuccess: () => {
-                    networkConfig.nodes = networkConfig.includeOfficialNodes
-                        ? getOfficialNodes(networkConfig.network.type)
-                        : []
-
-                    ensureOnePrimaryNode()
+                    networkConfig.includeOfficialNodes = false
+                    networkConfig.nodes = []
                 }
             }
         })
@@ -225,20 +212,22 @@
         <section id="networkConfiguration">
             <Text type="h4" classes="mb-3">{locale('views.settings.networkConfiguration.title2')}</Text>
             <Text type="p" secondary classes="mb-3">{locale(`views.settings.networkConfiguration.description.${$activeProfile.isDeveloperProfile ? 'dev' : 'nonDev'}`)}</Text>
-            <div class="flex flex-row justify-between w-3/4">
-                <div>
-                    <Text type="p" classes="inline" secondary>{locale('views.settings.networkConfiguration.connectedTo')}:</Text>
-                    <Text type="p" highlighted>{networkConfig.network.name}</Text>
-                </div>
-                <div>
-                    <Text type="p" classes="inline" secondary>{locale('views.dashboard.network.status')}:</Text>
+            {#if $activeProfile?.isDeveloperProfile}
+                <div class="flex flex-row justify-between w-3/4">
                     <div>
-                        <p class="text-13 text-{NETWORK_HEALTH_COLORS[$networkStatus.health || 0]}-500">
-                            {locale(`views.dashboard.network.${$networkStatus.healthText || NetworkStatusHealthText.Down}`)}
-                        </p>
+                        <Text type="p" classes="inline" secondary>{locale('views.settings.networkConfiguration.connectedTo')}:</Text>
+                        <Text type="p" highlighted>{networkConfig.network.name}</Text>
+                    </div>
+                    <div>
+                        <Text type="p" classes="inline" secondary>{locale('views.dashboard.network.status')}:</Text>
+                        <div>
+                            <p class="text-13 text-{NETWORK_HEALTH_COLORS[$networkStatus.health || 0]}-500">
+                                {locale(`views.dashboard.network.${$networkStatus.healthText || NetworkStatusHealthText.Down}`)}
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            {/if}
         </section>
         <HR classes="pb-5 mt-5 justify-center" />
         {#if canConfigureNodes}

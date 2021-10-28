@@ -561,6 +561,7 @@
             "removeConfirmation": "Are you sure you want to remove this node?",
             "removeAllConfirmation": "Are you sure you want to remove all nodes?",
             "info": {
+                "url": "URL",
                 "software": "Software",
                 "networkId": "Network ID",
                 "bech32HRP": "Bech32 HRP",
