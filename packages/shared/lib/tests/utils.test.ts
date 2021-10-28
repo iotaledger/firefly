@@ -35,6 +35,26 @@ describe('File: utils.ts', () => {
             expect(migrateObjects(o1, o2)).toEqual(o1)
         })
 
+        it('should NOT migrate objects with the same props', () => {
+            const o1: Complex = {
+                id: 'Object 01',
+                data: {
+                    path: 'path/to/all-of-the/data',
+                    simple1: { flag1: true },
+                    simple2: { prop2: 'PROP', flag2: false },
+                },
+            }
+            const o2: Complex = {
+                id: 'Object 02',
+                data: {
+                    path: 'path/to/all/of/the/data',
+                    simple1: { flag1: false },
+                    simple2: { prop2: 'PROPPP', flag2: true },
+                },
+            }
+            expect(migrateObjects(o1, o2)).toEqual(o1)
+        })
+
         it('should migrate objects with entirely different props', () => {
             const o1: Simple = {
                 prop1: 'First prop',

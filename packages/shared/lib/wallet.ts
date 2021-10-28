@@ -269,12 +269,6 @@ interface IWalletApi {
         auth: NodeAuth,
         callbacks: { onSuccess: (response: Event<NodeInfo>) => void; onError: (err: ErrorEventPayload) => void }
     )
-    getNodeInfoWithAuth(
-        accountId: string,
-        url: string,
-        auth: NodeAuth,
-        callbacks: { onSuccess: (response: Event<NodeInfo>) => void; onError: (err: ErrorEventPayload) => void }
-    )
 
     // Legacy seed APIs
     getLegacySeedChecksum(

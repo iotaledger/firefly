@@ -23,6 +23,7 @@ describe('File: network.ts', () => {
     ): Node => ({
         url,
         network,
+        auth: { username: '', password: '' },
         isPrimary,
         isDisabled,
     })
@@ -194,7 +195,9 @@ describe('File: network.ts', () => {
         })
         it('may or may NOT catch insecure URLs', () => {
             expect(_check('http://mainnet.tanglebay.com')).toEqual(UrlError.Insecure)
-            expect(_check('http://mainnet.tanglebay.com', true)).toBeUndefined()
+
+            // TODO: Enable this test when HTTP support has been audited
+            // expect(_check('http://mainnet.tanglebay.com', true)).toBeUndefined()
         })
     })
 
