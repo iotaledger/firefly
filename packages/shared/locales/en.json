@@ -24,7 +24,7 @@
             "addMore": "You can add more profiles later.",
             "developer": {
                 "label": "Developer profile",
-                "info": "Connect to testnets and private networks"
+                "info": "Connect to public and private IOTA networks"
             }
         },
         "setup": {
@@ -366,10 +366,6 @@
             "deepLinks": {
                 "title": "IOTA links",
                 "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
-            },
-            "developerMode": {
-                "title": "Developer mode",
-                "description": "Connect to testnets and other developer features"
             },
             "networkConfiguration": {
                 "title": "Network config",
@@ -837,8 +833,6 @@
         "accounts": "Wallets",
         "myAccounts": "My Wallets",
         "profiles": "Profiles",
-        "developerProfile": "Developer Profile",
-        "developerProfileDescription": "Allows you to connect to testnets",
         "dev": "Dev",
         "createAccount": "Create a Wallet",
         "accountName": "Wallet name",
