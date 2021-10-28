@@ -1,17 +1,9 @@
 <script lang="typescript">
     import { HR } from 'shared/components'
     import { loggedIn, mobile } from 'shared/lib/app'
-    import { appSettings } from 'shared/lib/appSettings'
-    import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { settingsChildRoute } from 'shared/lib/router'
     import { GeneralSettings } from 'shared/lib/typings/routes'
     import { Currency, Language, NetworkStatus, Notifications, Theme } from './'
-
-    let notificationsChecked = $appSettings.notifications
-    let hideNetworkStatistics = $activeProfile?.settings.hideNetworkStatistics
-
-    $: $appSettings.notifications = notificationsChecked
-    $: updateProfile('settings.hideNetworkStatistics', hideNetworkStatistics)
 
     const settings = [
         { component: Theme, childRoute: GeneralSettings.Theme },
