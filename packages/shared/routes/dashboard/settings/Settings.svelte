@@ -34,11 +34,18 @@
         drawer?.close()
     }
 
+    /**
+     * Scroll top each time a route changes
+     * Mobile only
+     */
+    $: $mobile, $dashboardRoute, $settingsChildRoute, scrollTop()
+
     function handleBackClick() {
         if ($settingsRoute === SettingsRoutes.Init) {
             closeSettings()
         } else {
             settingsRoute.set(SettingsRoutes.Init)
+            settingsChildRoute.set(null)
         }
     }
 
@@ -47,6 +54,15 @@
         walletRoute.set(WalletRoutes.Init)
         accountRoute.set(AccountRoutes.Init)
         selectedAccountId.set(null)
+    }
+
+    function scrollTop() {
+        if ($mobile && ($dashboardRoute === Tabs.Settings || $settingsChildRoute)) {
+            const scroller = document.getElementById('scroller')
+            if (scroller) {
+                scroller.scrollTop = 0
+            }
+        }
     }
 
     onDestroy(() => {
@@ -76,7 +92,7 @@
                     {locale($settingsRoute === SettingsRoutes.Init ? 'general.yourWallets' : `views.settings.${$settingsChildRoute}.title`)}
                 </Text>
             </div>
-            <div class="flex-1 overflow-y-auto px-6">
+            <div class="flex-1 overflow-y-auto px-6" id="scroller">
                 {#if $settingsRoute === SettingsRoutes.Init}
                     <!-- TODO: add real profile data -->
                     <div class="flex flex-row items-center space-x-6 mb-7 w-full">
