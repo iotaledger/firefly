@@ -12,26 +12,23 @@
 
     $: $appSettings.notifications = notificationsChecked
     $: updateProfile('settings.hideNetworkStatistics', hideNetworkStatistics)
+
+    const settings = [
+        { component: Theme, childRoute: GeneralSettings.Theme },
+        { component: Language, childRoute: GeneralSettings.Language },
+        { component: Currency, childRoute: GeneralSettings.Currency, requireLogin: true },
+        { component: Notifications, childRoute: GeneralSettings.Notifications },
+        { component: NetworkStatus, childRoute: GeneralSettings.NetworkStatus, requireLogin: true },
+    ]
 </script>
 
 <div>
-    {#if !$mobile || ($mobile && $settingsChildRoute === GeneralSettings.Theme)}
-        <Theme />
-        <HR classes="pb-5 mt-5 justify-center hidden md:block" />
-    {/if}
-    {#if !$mobile || ($mobile && $settingsChildRoute === GeneralSettings.Language)}
-        <Language />
-        <HR classes="pb-5 mt-5 justify-center hidden md:block" />
-    {/if}
-    {#if $loggedIn && (!$mobile || ($mobile && $settingsChildRoute === GeneralSettings.Currency))}
-        <Currency />
-        <HR classes="pb-5 mt-5 justify-center hidden md:block" />
-    {/if}
-    {#if !$mobile || ($mobile && $settingsChildRoute === GeneralSettings.Notifications)}
-        <Notifications />
-        <HR classes="pb-5 mt-5 justify-center hidden md:block" />
-    {/if}
-    {#if $loggedIn && (!$mobile || ($mobile && $settingsChildRoute === GeneralSettings.NetworkStatus))}
-        <NetworkStatus />
-    {/if}
+    {#each settings as { component, childRoute, requireLogin }, index}
+        {#if (!requireLogin || (requireLogin && $loggedIn)) && (!$mobile || ($mobile && $settingsChildRoute === childRoute))}
+            <svelte:component this={component} />
+            {#if index < settings.length - 1}
+                <HR classes="pb-5 mt-5 justify-center hidden md:block" />
+            {/if}
+        {/if}
+    {/each}
 </div>
