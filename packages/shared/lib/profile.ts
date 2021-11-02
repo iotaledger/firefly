@@ -102,16 +102,17 @@ export const createProfile = (profileName: string, isDeveloperProfile: boolean):
  * @returns {void}
  */
 export const disposeNewProfile = async (): Promise<void> => {
-    const np = get(newProfile)
-    if (np) {
+    const _newProfile = get(newProfile)
+    if (_newProfile) {
         try {
             await asyncRemoveStorage()
-            await removeProfileFolder(np.name)
+            await removeProfileFolder(_newProfile.name)
         } catch (err) {
             console.error(err)
         }
-        destroyActor(np.id)
+        destroyActor(_newProfile.id)
     }
+
     newProfile.set(null)
     activeProfileId.set(null)
 }

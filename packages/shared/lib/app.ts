@@ -84,15 +84,15 @@ export const login = (): void => {
  */
 export const logout = (): Promise<void> =>
     new Promise<void>((resolve) => {
-        const ap = get(activeProfile)
+        const _activeProfile = get(activeProfile)
 
         const _cleanup = () => {
             /**
              * CAUTION: Be sure to make any necessary API calls before
              * the event actor is destroyed!
              */
-            if (ap) {
-                destroyActor(ap.id)
+            if (_activeProfile) {
+                destroyActor(_activeProfile.id)
             }
 
             if (get(isSoftwareProfile)) {
