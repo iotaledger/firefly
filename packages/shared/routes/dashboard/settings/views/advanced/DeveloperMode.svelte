@@ -1,7 +1,7 @@
 <script language="typescript">
     import { Checkbox, Text } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
-    import { activeProfile } from 'shared/lib/profile'
+    import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { get } from 'svelte/store'
 
     export let id
