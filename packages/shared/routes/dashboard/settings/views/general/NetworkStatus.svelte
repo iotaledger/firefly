@@ -9,10 +9,8 @@
     $: updateProfile('settings.hideNetworkStatistics', hideNetworkStatistics)
 </script>
 
-<section id="networkStatus" class="w-full md:w-3/4">
-    {#if !$mobile}
-        <Text type="h4" classes="mb-3">{localize('views.settings.networkStatus.title')}</Text>
-    {/if}
-    <Text type="p" secondary classes="mb-5">{localize('views.settings.networkStatus.description')}</Text>
-    <Checkbox label={localize('actions.hideNetworkStatistics')} bind:checked={hideNetworkStatistics} />
-</section>
+{#if !$mobile}
+    <Text type="h4" classes="mb-3">{localize('views.settings.networkStatus.title')}</Text>
+{/if}
+<Text type="p" secondary classes="mb-5">{localize('views.settings.networkStatus.description')}</Text>
+<Checkbox label={localize('actions.hideNetworkStatistics')} bind:checked={hideNetworkStatistics} />

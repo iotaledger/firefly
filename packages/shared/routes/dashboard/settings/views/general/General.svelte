@@ -21,7 +21,9 @@
 <div>
     {#each settings as { component, childRoute, requireLogin }, index}
         {#if (!requireLogin || (requireLogin && $loggedIn)) && (!$mobile || ($mobile && $settingsChildRoute === childRoute))}
-            <svelte:component this={component} />
+            <section id={childRoute} class="w-full sm:w-3/4">
+                <svelte:component this={component} />
+            </section>
             {#if index < settings.length - 1}
                 <HR classes="pb-5 mt-5 justify-center hidden md:block" />
             {/if}

@@ -31,25 +31,23 @@
     }
 </style>
 
-<section id="currency" class="w-full md:w-3/4">
-    {#if $mobile}
-        <div class="flex flex-col flex-wrap space-y-2 overflow-y-auto">
-            {#each currencyList as currency}
-                <button
-                    class="relative flex items-center p-2 w-full whitespace-nowrap rounded-md"
-                    on:click={() => handleCurrencySelect(currency)}
-                    class:active={currency?.label === $activeProfile?.settings.currency}>
-                    <Text type="p" smaller>{currency?.label}</Text>
-                </button>
-            {/each}
-        </div>
-    {:else}
-        <Text type="h4" classes="mb-3">{localize('views.settings.currency.title')}</Text>
-        <Text type="p" secondary classes="mb-5">{localize('views.settings.currency.description')}</Text>
-        <Dropdown
-            sortItems={true}
-            onSelect={handleCurrencySelect}
-            value={$activeProfile?.settings.currency}
-            items={currencyList} />
-    {/if}
-</section>
+{#if $mobile}
+    <div class="flex flex-col flex-wrap space-y-2 overflow-y-auto">
+        {#each currencyList as currency}
+            <button
+                class="relative flex items-center p-2 w-full whitespace-nowrap rounded-md"
+                on:click={() => handleCurrencySelect(currency)}
+                class:active={currency?.label === $activeProfile?.settings.currency}>
+                <Text type="p" smaller>{currency?.label}</Text>
+            </button>
+        {/each}
+    </div>
+{:else}
+    <Text type="h4" classes="mb-3">{localize('views.settings.currency.title')}</Text>
+    <Text type="p" secondary classes="mb-5">{localize('views.settings.currency.description')}</Text>
+    <Dropdown
+        sortItems={true}
+        onSelect={handleCurrencySelect}
+        value={$activeProfile?.settings.currency}
+        items={currencyList} />
+{/if}

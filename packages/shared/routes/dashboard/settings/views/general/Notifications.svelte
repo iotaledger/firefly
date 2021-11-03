@@ -21,10 +21,8 @@
     }
 </style>
 
-<section id="notifications" class="w-full md:w-3/4">
-    {#if !$mobile}
-        <Text type="h4" classes="mb-3">{localize('views.settings.notifications.title')}</Text>
-    {/if}
-    <Text type="p" secondary classes="mb-5">{localize('views.settings.notifications.description')}</Text>
-    <Checkbox label={localize('actions.enableSystemNotifications')} bind:checked={notificationsChecked} />
-</section>
+{#if !$mobile}
+    <Text type="h4" classes="mb-3">{localize('views.settings.notifications.title')}</Text>
+{/if}
+<Text type="p" secondary classes="mb-5">{localize('views.settings.notifications.description')}</Text>
+<Checkbox label={localize('actions.enableSystemNotifications')} bind:checked={notificationsChecked} />

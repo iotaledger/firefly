@@ -26,24 +26,18 @@
     }
 </style>
 
-<section id="language" class="w-full md:w-3/4">
-    {#if $mobile}
-        <div class="flex flex-col flex-wrap space-y-2 overflow-y-auto">
-            {#each languageList as language}
-                <button
-                    class="relative flex items-center p-2 w-full whitespace-nowrap rounded-md"
-                    on:click={() => handleLanguage(language)}
-                    class:active={language?.label === locales[$appSettings.language]}>
-                    <Text type="p" smaller>{language?.label}</Text>
-                </button>
-            {/each}
-        </div>
-    {:else}
-        <Text type="h4" classes="mb-3">{localize('views.settings.language.title')}</Text>
-        <Dropdown
-            sortItems={true}
-            onSelect={handleLanguage}
-            value={locales[$appSettings.language]}
-            items={languageList} />
-    {/if}
-</section>
+{#if $mobile}
+    <div class="flex flex-col flex-wrap space-y-2 overflow-y-auto">
+        {#each languageList as language}
+            <button
+                class="relative flex items-center p-2 w-full whitespace-nowrap rounded-md"
+                on:click={() => handleLanguage(language)}
+                class:active={language?.label === locales[$appSettings.language]}>
+                <Text type="p" smaller>{language?.label}</Text>
+            </button>
+        {/each}
+    </div>
+{:else}
+    <Text type="h4" classes="mb-3">{localize('views.settings.language.title')}</Text>
+    <Dropdown sortItems={true} onSelect={handleLanguage} value={locales[$appSettings.language]} items={languageList} />
+{/if}
