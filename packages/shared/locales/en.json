@@ -307,7 +307,8 @@
             },
             "theme": {
                 "title": "Theme",
-                "description": ""
+                "description": "",
+                "advice": "Restart the Firefly application for changes to the system theme to take effect"
             },
             "language": {
                 "title": "Language",
@@ -323,7 +324,7 @@
             },
             "networkStatus": {
                 "title": "Network status",
-                "description": "Displays the status of the node you are currently connected to."
+                "description": "Displays the status of the node you are currently connected to"
             },
             "exportStronghold": {
                 "title": "Export Backup",
@@ -781,8 +782,9 @@
         "stronghold": "Stronghold",
         "language": "Language",
         "appearance": "Appearance",
-        "lightTheme": "Light theme",
-        "darkTheme": "Dark theme",
+        "lightTheme": "Light",
+        "darkTheme": "Dark",
+        "systemTheme": "System",
         "balance": "Balance",
         "accountBalance": "Wallet Balance",
         "incoming": "Incoming",
