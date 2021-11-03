@@ -12,26 +12,10 @@ import { activeProfile } from './profile'
 export const CHRYSALIS_MAINNET_ID = 'chrysalis-mainnet'
 export const CHRYSALIS_MAINNET_NAME = 'Chrysalis Mainnet'
 export const CHRYSALIS_MAINNET_BECH32_HRP = 'iota'
+
 export const CHRYSALIS_DEVNET_ID = 'chrysalis-devnet'
 export const CHRYSALIS_DEVNET_NAME = 'Chrysalis Devnet'
 export const CHRYSALIS_DEVNET_BECH32_HRP = 'atoi'
-
-export const getClientOptions = (): ClientOptions => {
-    const { id, type } =
-        get(activeProfile)?.settings?.networkConfig.network || getOfficialNetwork(NetworkType.ChrysalisMainnet)
-
-    const node = getOfficialNodes(type)[0]
-    node.isPrimary = true
-
-    return {
-        node,
-        nodes: getOfficialNodes(type).map((n) => ({ ...n, isPrimary: n.url === node.url })),
-        network: id,
-        automaticNodeSelection: true,
-        includeOfficialNodes: true,
-        localPow: true,
-    }
-}
 
 /**
  * Given the type of IOTA network, construct the default official network
@@ -72,13 +56,16 @@ export const getOfficialNetwork = (type: NetworkType): Network => {
                 bech32Hrp: CHRYSALIS_DEVNET_BECH32_HRP,
             }
         case NetworkType.ChrysalisMainnet:
-        default:
             return {
                 id: CHRYSALIS_MAINNET_ID,
                 name: CHRYSALIS_MAINNET_NAME,
-                type: type || NetworkType.ChrysalisMainnet,
+                type,
                 bech32Hrp: CHRYSALIS_MAINNET_BECH32_HRP,
             }
+        case NetworkType.PrivateNet:
+            return <Network>{ type }
+        default:
+            return <Network>{}
     }
 }
 
@@ -160,7 +147,7 @@ export const getNetworkById = (id: string): Network => {
                 bech32Hrp: CHRYSALIS_DEVNET_BECH32_HRP,
             }
         case NetworkType.PrivateNet:
-            return <Network>{ id, type }
+            return <Network>{ id, type, name: 'Private Net' }
         default:
             return <Network>{}
     }
@@ -268,13 +255,7 @@ export const checkNodeUrlValidity = (nodesList: Node[], newUrl: string, allowIns
  * @returns {void}
  */
 export const updateClientOptions = (config: NetworkConfig): void => {
-    const nodeCandidates = getNodeCandidates(config).map((n) => ({ ...n, network: config.network }))
-    const clientOptions: ClientOptions = {
-        ...config,
-        node: nodeCandidates.find((n) => n.isPrimary),
-        nodes: nodeCandidates,
-        network: config.network.id,
-    }
+    const clientOptions = buildClientOptions(config)
     if (!clientOptions.node) {
         console.error('Error: The client options does not have a primary node.')
         return
@@ -299,6 +280,33 @@ export const updateClientOptions = (config: NetworkConfig): void => {
             console.error(err)
         },
     })
+}
+
+export const buildClientOptions = (config: NetworkConfig): ClientOptions => {
+    const nodeCandidates = getNodeCandidates(config).map((n) => ({ ...n, network: config.network }))
+    return {
+        ...config,
+        node: nodeCandidates.find((n) => n.isPrimary),
+        nodes: nodeCandidates,
+        network: config.network.id,
+    }
+}
+
+export const getDefaultClientOptions = (): ClientOptions => {
+    const { id, type } =
+        get(activeProfile)?.settings?.networkConfig.network || getOfficialNetwork(NetworkType.ChrysalisMainnet)
+
+    const node = getOfficialNodes(type)[0]
+    node.isPrimary = true
+
+    return {
+        node,
+        nodes: getOfficialNodes(type).map((n) => ({ ...n, isPrimary: n.url === node.url })),
+        network: id,
+        automaticNodeSelection: true,
+        includeOfficialNodes: true,
+        localPow: true,
+    }
 }
 
 /**

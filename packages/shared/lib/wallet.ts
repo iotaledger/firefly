@@ -52,7 +52,7 @@ import { CurrencyTypes } from './typings/currency'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
 import { HistoryDataProps, PriceData } from './typings/market'
 import { ProfileType } from './typings/profile'
-import { getClientOptions } from './network'
+import { buildClientOptions } from './network'
 import { Electron } from './electron'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
@@ -606,7 +606,9 @@ export const asyncCreateAccount = (alias?: string): Promise<WalletAccount> =>
             {
                 alias: alias || `${localize('general.account')} ${accounts.length + 1}`,
                 signerType: getSignerType(get(activeProfile)?.type),
-                clientOptions: accounts.length ? accounts[0]?.clientOptions : getClientOptions(),
+                clientOptions: accounts.length
+                    ? accounts[0]?.clientOptions
+                    : buildClientOptions(get(activeProfile)?.settings.networkConfig),
             },
             {
                 onSuccess(response) {

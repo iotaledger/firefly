@@ -1,9 +1,9 @@
 import { get, writable } from 'svelte/store'
 import { asyncGetNodeInfo, wallet } from './wallet'
-import { cleanNodeAuth, getOfficialNodes, updateClientOptions } from './network'
+import { cleanNodeAuth, getOfficialNodes, isOfficialNetwork, updateClientOptions } from './network'
 import type { NetworkStatus } from './typings/network'
-import { activeProfile } from './profile'
 import { NetworkStatusHealthText } from './typings/network'
+import { activeProfile } from './profile'
 import type { Node } from './typings/node'
 
 export const NETWORK_HEALTH_COLORS = {
@@ -85,34 +85,43 @@ async function pollNetworkStatusInternal(): Promise<void> {
  * @returns {Promise<void>}
  */
 export const updateNetworkStatus = async (accountId: string, node: Node): Promise<void> => {
-    const response = await asyncGetNodeInfo(accountId, node?.url, cleanNodeAuth(node?.auth))
-    const timeSinceLastMsInMinutes = (Date.now() - response.nodeinfo.latestMilestoneTimestamp * 1000) / 60000
+    if (node || isOfficialNetwork(get(activeProfile)?.settings.networkConfig.network.type)) {
+        const response = await asyncGetNodeInfo(accountId, node?.url, cleanNodeAuth(node?.auth))
+        const timeSinceLastMsInMinutes = (Date.now() - response.nodeinfo.latestMilestoneTimestamp * 1000) / 60000
 
-    let health = 0 // bad
-    if (timeSinceLastMsInMinutes < 2) {
-        health = 2 // good
-    } else if (timeSinceLastMsInMinutes < 5) {
-        health = 1 // degraded
+        let health = 0 // bad
+        if (timeSinceLastMsInMinutes < 2) {
+            health = 2 // good
+        } else if (timeSinceLastMsInMinutes < 5) {
+            health = 1 // degraded
+        }
+
+        let healthText: NetworkStatusHealthText
+        switch (health) {
+            case 2:
+                healthText = NetworkStatusHealthText.Operational
+                break
+            case 1:
+                healthText = NetworkStatusHealthText.Degraded
+                break
+            case 0:
+            default:
+                healthText = NetworkStatusHealthText.Down
+                break
+        }
+
+        networkStatus.set({
+            messagesPerSecond: response.nodeinfo.messagesPerSecond,
+            referencedRate: response.nodeinfo.referencedRate,
+            health,
+            healthText,
+        })
+    } else {
+        networkStatus.set({
+            messagesPerSecond: 0,
+            referencedRate: 0,
+            health: 0,
+            healthText: NetworkStatusHealthText.Down,
+        })
     }
-
-    let healthText: NetworkStatusHealthText
-    switch (health) {
-        case 2:
-            healthText = NetworkStatusHealthText.Operational
-            break
-        case 1:
-            healthText = NetworkStatusHealthText.Degraded
-            break
-        case 0:
-        default:
-            healthText = NetworkStatusHealthText.Down
-            break
-    }
-
-    networkStatus.set({
-        messagesPerSecond: response.nodeinfo.messagesPerSecond,
-        referencedRate: response.nodeinfo.referencedRate,
-        health,
-        healthText,
-    })
 }

@@ -13,7 +13,6 @@
         isSoftwareProfile,
         isStrongholdLocked,
         setMissingProfileType,
-        updateProfile,
     } from 'shared/lib/profile'
     import { walletRoute } from 'shared/lib/router'
     import { LedgerErrorType, TransferProgressEventType } from 'shared/lib/typings/events'
@@ -58,7 +57,6 @@
     import { onMount, setContext } from 'svelte'
     import { derived, Readable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
-    import { getClientOptions } from 'shared/lib/network'
 
     export let locale: Locale
 

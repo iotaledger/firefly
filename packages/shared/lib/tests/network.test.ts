@@ -2,7 +2,7 @@ import {
     checkNodeUrlValidity,
     cleanNodeAuth,
     ensureSinglePrimaryNode,
-    getClientOptions,
+    getDefaultClientOptions,
     getNetworkById,
     getNodeCandidates,
     getOfficialNetwork,
@@ -76,7 +76,7 @@ describe('File: network.ts', () => {
 
     describe('Function: getClientOptions', () => {
         it('should return the client options of the active profile if present', () => {
-            const clientOpts = getClientOptions()
+            const clientOpts = getDefaultClientOptions()
             expect(clientOpts).toEqual(<ClientOptions>{
                 network: 'chrysalis-mainnet',
                 automaticNodeSelection: true,
@@ -92,9 +92,10 @@ describe('File: network.ts', () => {
         it('should return the correct official network metadata given a valid network type', () => {
             expect(getOfficialNetwork(NetworkType.ChrysalisMainnet)).toEqual(MAINNET)
             expect(getOfficialNetwork(NetworkType.ChrysalisDevnet)).toEqual(DEVNET)
+            expect(getOfficialNetwork(NetworkType.PrivateNet)).toEqual(<Network>{ type: NetworkType.PrivateNet })
         })
-        it('should return the mainnet given an invalid network type', () => {
-            expect(getOfficialNetwork(undefined)).toEqual(MAINNET)
+        it('should return an empty network given an invalid network type', () => {
+            expect(getOfficialNetwork(undefined)).toEqual(<Network>{})
         })
     })
 
@@ -134,6 +135,7 @@ describe('File: network.ts', () => {
         it('should return partial metadata for unofficial networks', () => {
             expect(getNetworkById('another-tangle')).toEqual(<Network>{
                 id: 'another-tangle',
+                name: 'Private Net',
                 type: NetworkType.PrivateNet,
             })
         })

@@ -248,6 +248,9 @@ const handleError = (
         if (error.includes('Failed to get an answer from all nodes')) {
             return 'error.node.answer'
         }
+        if (error.includes('forbidden')) {
+            return 'error.node.forbidden'
+        }
 
         return getErrorMessage(type)
     }

@@ -67,13 +67,11 @@
         } as NetworkConfig
 
         try {
-            await asyncRemoveWalletAccounts(get($wallet.accounts).map((a) => a.id))
-            await asyncCreateAccount(`${locale('general.account')} 1`)
-
-            resetWallet()
             updateClientOptions(newConfig)
             updateProfile('settings.networkConfig', newConfig)
 
+            await asyncRemoveWalletAccounts(get($wallet.accounts).map((a) => a.id))
+            await asyncCreateAccount(`${locale('general.account')} 1`)
             await logout()
         } catch (err) {
             isSwitchingNetwork = false

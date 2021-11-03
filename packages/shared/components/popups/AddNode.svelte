@@ -24,8 +24,7 @@
     export let network: Network
     export let isAddingNode: boolean = true
 
-    export let onSuccess = (..._: any[]): void => {
-    }
+    export let onSuccess = (..._: any[]): void => {}
 
     const { accounts } = $wallet
 
@@ -67,8 +66,8 @@
             addressError = locale('error.network.notReachable')
         } else if (id !== network.id) {
             if ($activeProfile.isDeveloperProfile) {
-                isNetworkSwitch = true
                 newNetwork = getNetworkById(id)
+                isNetworkSwitch = true
             } else {
                 addressError = locale('error.network.mismatch', { values: { networkId: id } })
             }
@@ -133,7 +132,7 @@
 </script>
 
 {#if isNetworkSwitch}
-    <SwitchNetwork {locale} network={newNetwork} node={{ url: nodeUrl, auth: optNodeAuth, isPrimary: true, }} />
+    <SwitchNetwork {locale} network={newNetwork} node={{ url: cleanNodeUrl(nodeUrl), auth: optNodeAuth, isPrimary: true, }} />
 {:else}
     <Text type="h4" classes="mb-6">{locale(`popups.node.title${isAddingNode ? 'Add' : 'Update'}`)}</Text>
     <form id="node-config-form" class="w-full h-full">

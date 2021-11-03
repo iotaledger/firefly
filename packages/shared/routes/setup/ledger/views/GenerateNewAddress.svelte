@@ -7,7 +7,7 @@
         displayNotificationForLedgerProfile,
         promptUserToConnectLedger,
     } from 'shared/lib/ledger'
-    import { getClientOptions } from 'shared/lib/network'
+    import { getDefaultClientOptions } from 'shared/lib/network'
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { Locale } from 'shared/lib/typings/i18n'
@@ -36,7 +36,7 @@
         const _createAccount = (idx) => {
             api.createAccount(
                 {
-                    clientOptions: getClientOptions(),
+                    clientOptions: getDefaultClientOptions(),
                     alias: `${locale('general.account')} ${idx}`,
                     signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
                     allowCreateMultipleEmptyAccounts: true,
