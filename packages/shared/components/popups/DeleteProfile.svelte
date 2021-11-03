@@ -6,7 +6,7 @@
     import { activeProfile, isSoftwareProfile, profiles, removeProfile, removeProfileFolder } from 'shared/lib/profile'
     import { setRoute } from 'shared/lib/router'
     import { AppRoute } from 'shared/lib/typings/routes'
-    import { api } from 'shared/lib/wallet'
+    import { api, asyncRemoveStorage, asyncRemoveWalletAccounts, wallet } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
 
@@ -22,7 +22,7 @@
         if ($isSoftwareProfile) {
             api.setStrongholdPassword(password, {
                 async onSuccess() {
-                    await triggerDeletProfile()
+                    await triggerDeleteProfile()
                 },
                 onError(err) {
                     isBusy = false
@@ -30,42 +30,57 @@
                 },
             })
         } else {
-            await triggerDeletProfile()
+            await triggerDeleteProfile()
         }
     }
 
-    async function triggerDeletProfile() {
+    async function triggerDeleteProfile() {
         try {
-            const ap = get(activeProfile)
+            const _activeProfile = get(activeProfile)
+            if (!_activeProfile) return
 
-            // We have to logout before the profile is removed
-            // from the profile list otherwise the activeProfile which is
-            // derived from profiles is undefined and the actor
-            // is not destroyed
+            /**
+             * CAUTION: The individual accounts must be removed from wallet.rs.
+             */
+            await asyncRemoveWalletAccounts(get(get(wallet).accounts).map((a) => a.id))
+
+            /**
+             * CAUTION: The storage for wallet.rs must also be deleted in order
+             * to free the locks on the files within the profile folder (removed
+             * later).
+             */
+            await asyncRemoveStorage()
+
+            /**
+             * CAUTION: Logout must occur before the profile is removed
+             * from the Svelte store list of profiles, otherwise the
+             * actor is not able to be destroyed.
+             */
             await logout()
 
-            // Now that all the resources have been freed we try
-            // and remove the profile folder, this will retry until locks
-            // can be gained
-            if (ap) {
-                // Remove the profile from the active list of profiles
-                removeProfile(ap.id)
+            /**
+             * CAUTION: The profile must be removed from the
+             * app's list of profiles that lives as a Svelte store.
+             */
+            removeProfile(_activeProfile.id)
 
-                // If after removing the profile there are none left
-                // we need to make sure the router gets reset to the welcome screen
-                // by default it will go to the profile selection
-                if (get(profiles).length === 0) {
-                    setRoute(AppRoute.Welcome)
-                }
-
-                // Remove the profile folder this will wait until it can get
-                // the lock on the resources
-                await removeProfileFolder(ap.name)
+            /**
+             * NOTE: If there are no more profiles then the user should be
+             * routed to the welcome screen.
+             */
+            if (get(profiles).length === 0) {
+                setRoute(AppRoute.Welcome)
             }
+
+            /**
+             * CAUTION: This removes the actual directory for the profile,
+             * so it should occur last.
+             */
+            await removeProfileFolder(_activeProfile.name)
         } catch (err) {
             showAppNotification({
                 type: 'error',
-                message: locale('Something bad happened'),
+                message: locale('error.global.generic'),
             })
         } finally {
             isBusy = false
