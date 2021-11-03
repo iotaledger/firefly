@@ -13,7 +13,6 @@
         isSoftwareProfile,
         isStrongholdLocked,
         setMissingProfileType,
-        updateProfile,
     } from 'shared/lib/profile'
     import { walletRoute } from 'shared/lib/router'
     import { LedgerErrorType, TransferProgressEventType } from 'shared/lib/typings/events'
@@ -30,7 +29,9 @@
     } from 'shared/lib/typings/wallet'
     import {
         api,
+        asyncCreateAccount,
         asyncSyncAccounts,
+        asyncSyncAccountOffline,
         getAccountMessages,
         getAccountMeta,
         getAccountsBalanceHistory,
@@ -160,7 +161,7 @@
         }
     }
 
-    function getAccounts() {
+    function loadAccounts() {
         const _onError = (error: any = null) => {
             if ($isLedgerProfile) {
                 if (!LedgerErrorType[error.type]) {
@@ -250,9 +251,7 @@
                             completeCount++
 
                             if (completeCount === accountsResponse.payload.length) {
-                                accounts.update((accounts) =>
-                                    [...accounts, ...newAccounts].sort((a, b) => a.index - b.index)
-                                )
+                                accounts.update((_accounts) => newAccounts.sort((a, b) => a.index - b.index))
                                 processMigratedTransactions(
                                     payloadAccount.id,
                                     payloadAccount.messages,
@@ -374,117 +373,17 @@
         }
     }
 
-    function onCreateAccount(alias, completeCallback) {
-        const _create = () => {
-            const reuseAccountId = findReuseAccount()
-            if (reuseAccountId) {
-                api.setAlias(reuseAccountId, alias, {
-                    onSuccess() {
-                        let hasUpdated = false
-                        accounts.update((_accounts) =>
-                            _accounts.map((account) => {
-                                if (account.id === reuseAccountId) {
-                                    hasUpdated = true
-                                    return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                                        {} as WalletAccount,
-                                        account,
-                                        {
-                                            alias,
-                                        }
-                                    )
-                                }
+    async function onCreateAccount(alias, onComplete) {
+        const _create = async (): Promise<unknown> => {
+            try {
+                const account = await asyncCreateAccount(alias)
+                await asyncSyncAccountOffline(account)
 
-                                return account
-                            })
-                        )
+                walletRoute.set(WalletRoutes.Init)
 
-                        // We didn't have the account in the list to update
-                        // so we need to retrieve the details from the wallet manually
-                        if (!hasUpdated) {
-                            api.getAccounts({
-                                onSuccess(accountsResponse) {
-                                    const ac = accountsResponse.payload.find((a) => a.id === reuseAccountId)
-                                    if (ac) {
-                                        getAccountMeta(reuseAccountId, (err, meta) => {
-                                            if (!err) {
-                                                const account = prepareAccountInfo(ac, meta)
-                                                accounts.update((accounts) => [...accounts, account] as WalletAccount[])
-                                            }
-                                        })
-                                    }
-                                },
-                                onError() {},
-                            })
-                        }
-
-                        const hiddenAccounts = ($activeProfile?.hiddenAccounts ?? []).filter(
-                            (a) => a !== reuseAccountId
-                        )
-                        updateProfile('hiddenAccounts', hiddenAccounts)
-
-                        walletRoute.set(WalletRoutes.Init)
-                        completeCallback()
-                    },
-                    onError(err) {
-                        completeCallback(err)
-                    },
-                })
-            } else {
-                api.createAccount(
-                    {
-                        alias,
-                        signerType: $accounts[0]?.signerType,
-                        clientOptions: $accounts[0]?.clientOptions,
-                    },
-                    {
-                        onSuccess(createAccountResponse) {
-                            const account = prepareAccountInfo(createAccountResponse.payload, {
-                                balance: 0,
-                                incoming: 0,
-                                outgoing: 0,
-                                depositAddress: createAccountResponse.payload.addresses[0].address,
-                            }) as WalletAccount
-
-                            // immediately store the account; we update it later after sync
-                            // we do this to allow offline account creation
-                            accounts.update((accounts) => [...accounts, account])
-                            return new Promise((resolve) => {
-                                api.syncAccount(createAccountResponse.payload.id, {
-                                    onSuccess(_syncAccountResponse) {
-                                        getAccountMeta(createAccountResponse.payload.id, (err, meta) => {
-                                            if (!err) {
-                                                const account = prepareAccountInfo(
-                                                    createAccountResponse.payload,
-                                                    meta
-                                                ) as WalletAccount
-                                                accounts.update((storedAccounts) =>
-                                                    storedAccounts.map((storedAccount) => {
-                                                        if (storedAccount.id === account.id) {
-                                                            return account
-                                                        }
-                                                        return storedAccount
-                                                    })
-                                                )
-                                            }
-                                            resolve(null)
-                                        })
-                                    },
-                                    onError() {
-                                        // we ignore sync errors since the user can recover from it later
-                                        // this allows an account to be created by an offline user
-                                        resolve(null)
-                                    },
-                                })
-                            }).then(() => {
-                                walletRoute.set(WalletRoutes.Init)
-                                completeCallback()
-                            })
-                        },
-                        onError(err) {
-                            completeCallback(err)
-                        },
-                    }
-                )
+                onComplete()
+            } catch (err) {
+                onComplete(err)
             }
         }
 
@@ -494,7 +393,7 @@
                     if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
                         openPopup({ type: 'password', props: { onSuccess: _create } })
                     } else {
-                        _create()
+                        void _create()
                     }
                 },
                 onError(error) {
@@ -502,7 +401,7 @@
                 },
             })
         } else {
-            _create()
+            await _create()
         }
     }
 
@@ -655,7 +554,7 @@
         // an active profile, only init if there is a profile
         if ($activeProfile) {
             if (!$accountsLoaded) {
-                getAccounts()
+                loadAccounts()
             }
 
             removeEventListeners($activeProfile.id)

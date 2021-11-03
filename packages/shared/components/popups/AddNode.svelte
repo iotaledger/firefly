@@ -1,82 +1,165 @@
 <script lang="typescript">
-    import { Button, Input, Password, Text } from 'shared/components'
+    import { Button, Checkbox, Input, Password, Spinner, Text } from 'shared/components'
+    import SwitchNetwork from './SwitchNetwork.svelte'
     import { stripSpaces, stripTrailingSlash } from 'shared/lib/helpers'
-    import { isNodeUrlValid } from 'shared/lib/network'
+    import {
+        cleanNodeAuth,
+        getNetworkById,
+        checkNodeUrlValidity,
+    } from 'shared/lib/network'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
+    import { asyncGetNodeInfo, wallet } from 'shared/lib/wallet'
     import { Locale } from 'shared/lib/typings/i18n'
+    import { Node, NodeAuth, NodeInfo } from 'shared/lib/typings/node'
+    import { Network } from 'shared/lib/typings/network'
+    import { activeProfile } from 'shared/lib/profile'
+    import { updateNetworkStatus } from '../../lib/networkStatus'
+    import { get } from 'svelte/store'
 
     export let locale: Locale
 
-    export let node
-    export let nodes
+    export let node: Node = { url: '', isPrimary: false }
+    export let nodes: Node[] = []
+    export let network: Network
+    export let isAddingNode: boolean = true
 
     export let onSuccess = (..._: any[]): void => {}
 
-    let url = node?.url ?? ''
-    let username = node?.auth?.username ?? ''
-    let password = node?.auth?.password ?? ''
+    const { accounts } = $wallet
+
+    let nodeUrl: string = node?.url || ''
+    const optNodeAuth: NodeAuth = node?.auth || { username: '', password: '', jwt: '' }
+
     let addressError = ''
+    let addressWarn = ''
     const authError = ''
+
     let isBusy = false
+    let isSuccess = true
+    let isNetworkSwitch = false
+    let newNetwork: Network
 
-    function addCustomNode() {
-        try {
-            isBusy = true
-            addressError = ''
+    $: nodeUrl, (addressError = '')
+    $: {
+        addressWarn = ''
+        node.url = stripSpaces(node.url)
+        if (!$activeProfile?.isDeveloperProfile && /^http:\/\//.exec(node.url)) {
+            addressWarn = locale('warning.node.http')
+        }
+    }
 
-            url = stripSpaces(url)
-            url = stripTrailingSlash(url)
+    const cleanNodeUrl = (_url: string): string => stripTrailingSlash(stripSpaces(_url))
 
-            let allNodes = nodes ?? []
-            // If this is an update not an add then remove the current node from the list
-            // before checking for dupes
-            if (node) {
-                allNodes = allNodes.filter((n) => n.url !== node.url)
-            }
-            const validErr = isNodeUrlValid(allNodes, url)
-            if (validErr) {
-                addressError = locale(validErr)
-            }
-        } catch (err) {
-            showAppNotification({
-                type: 'error',
-                message: locale(err.error),
-            })
-        } finally {
-            isBusy = false
+    const constructNodes = (): Node[] => node ? nodes.filter((n) => cleanNodeUrl(node.url) !== cleanNodeUrl(n.url)) : nodes
 
-            if (!addressError) {
-                closePopup()
+    const cleanNodeFormData = (): void => {
+        const _nodes = constructNodes()
+        const validErr = checkNodeUrlValidity(_nodes, cleanNodeUrl(nodeUrl), $activeProfile.isDeveloperProfile)
+        if (validErr) {
+            addressError = locale(validErr)
+        }
+    }
 
-                if (onSuccess) {
-                    onSuccess({
-                        url,
-                        auth: {
-                            username,
-                            password
-                        }
-                    })
-                }
+    const checkNetworkId = (id: string): void => {
+        if (!id) {
+            addressError = locale('error.network.notReachable')
+        } else if (id !== network.id) {
+            if ($activeProfile.isDeveloperProfile) {
+                newNetwork = getNetworkById(id)
+                isNetworkSwitch = true
+            } else {
+                addressError = locale('error.network.mismatch', { values: { networkId: id } })
             }
         }
     }
+
+    const handleAddNodeClick = async (): Promise<void> => {
+        isBusy = true
+        addressError = ''
+
+        let nodeInfo: NodeInfo
+
+        try {
+            if (node) {
+                cleanNodeFormData()
+
+                if (!addressError) {
+                    nodeInfo = await asyncGetNodeInfo($accounts[0].id, cleanNodeUrl(nodeUrl), cleanNodeAuth(optNodeAuth))
+
+                    checkNetworkId(nodeInfo?.nodeinfo?.networkId)
+                }
+
+            }
+        } catch (err) {
+            isBusy = false
+            isSuccess = false
+
+            showAppNotification({
+                type: 'error',
+                message: locale(err?.error),
+            })
+
+            return
+        }
+
+        if (!addressError) {
+            if (!isNetworkSwitch) {
+                await updateNetworkStatus(get($wallet.accounts)[0]?.id, <Node>{ url: nodeUrl, auth: optNodeAuth, isPrimary: node?.isPrimary })
+                    .then(() => {
+                        isBusy = false
+
+                        onSuccess(
+                            false,
+                            {
+                                url: cleanNodeUrl(nodeUrl),
+                                auth: optNodeAuth,
+                                network: getNetworkById(nodeInfo?.nodeinfo.networkId),
+                                isPrimary: node?.isPrimary || false,
+                            },
+                        )
+                        closePopup()
+                    })
+                    .catch((err) => {
+                        isBusy = false
+                        return
+                    })
+            }
+        }
+
+        isBusy = false
+    }
 </script>
 
-<Text type="h4" classes="mb-5">{locale(`popups.node.title${node ? 'Update' : 'Add'}`)}</Text>
-<div class="w-full h-full">
-    <Input bind:value={url} placeholder={locale('popups.node.nodeAddress')} error={addressError} disabled={isBusy} autofocus />
-    <Input
-        classes="mt-3"
-        bind:value={username}
-        placeholder={locale('popups.node.optionalUsername')}
-        error={authError}
-        disabled={isBusy} />
-    <Password classes="mt-3 mb-8" bind:value={password} placeholder={locale('popups.node.optionalPassword')} disabled={isBusy} />
-</div>
-<div class="flex flex-row justify-between space-x-4 w-full px-8 ">
-    <Button secondary classes="w-1/2" onClick={() => closePopup()} disabled={isBusy}>{locale('actions.cancel')}</Button>
-    <Button disabled={!url || isBusy} classes="w-1/2" onClick={() => addCustomNode()}>
-        {locale(`actions.${node ? 'updateNode' : 'addNode'}`)}
-    </Button>
-</div>
+{#if isNetworkSwitch}
+    <SwitchNetwork {locale} network={newNetwork} node={{ url: cleanNodeUrl(nodeUrl), auth: optNodeAuth, isPrimary: true, }} />
+{:else}
+    <Text type="h4" classes="mb-6">{locale(`popups.node.title${isAddingNode ? 'Add' : 'Update'}`)}</Text>
+    <form id="node-config-form" class="w-full h-full">
+        <Input bind:value={nodeUrl} placeholder={locale('popups.node.nodeAddress')} error={addressError} disabled={isBusy} autofocus />
+        {#if addressWarn}
+            <Text overrideColor classes="text-orange-500 mt-2">{addressWarn}</Text>
+        {/if}
+        <Input
+            classes="mt-3"
+            bind:value={optNodeAuth.username}
+            placeholder={locale('popups.node.optionalUsername')}
+            error={authError}
+            disabled={isBusy} />
+        <Password classes="mt-3" bind:value={optNodeAuth.password} placeholder={locale('popups.node.optionalPassword')} disabled={isBusy} />
+        <Password classes="mt-3" bind:value={optNodeAuth.jwt} placeholder={locale('popups.node.optionalJwt')} disabled={isBusy} />
+        <Checkbox label={locale('popups.node.setAsPrimaryNode')} bind:checked={node.isPrimary} disabled={isBusy} classes="mt-4 mb-8" />
+    </form>
+    <div class="flex flex-row justify-between space-x-4 w-full px-8 ">
+        <Button secondary classes="w-1/2" onClick={() => closePopup()} disabled={isBusy}>
+            {locale('actions.cancel')}
+        </Button>
+        <Button disabled={!nodeUrl || isBusy} type="submit" form="node-config-form" classes="w-1/2" onClick={handleAddNodeClick}>
+            {#if isBusy}
+                <Spinner busy={isBusy} message={locale(`popups.node.${isAddingNode ? 'addingNode' : 'updatingNode'}`)} classes="justify-center" />
+            {:else}
+                {locale(`actions.${isAddingNode ? 'addNode' : 'updateNode'}`)}
+            {/if}
+        </Button>
+    </div>
+{/if}
