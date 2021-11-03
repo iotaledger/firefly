@@ -95,8 +95,10 @@
 
     async function handleBackClick() {
         cleanupSignup()
+        cleanupInProgressProfiles()
+
         await disposeNewProfile()
-        await cleanupInProgressProfiles()
+
         dispatch('previous')
     }
 </script>

@@ -1,7 +1,7 @@
 import { persistent } from 'shared/lib/helpers'
 import { ledgerSimulator } from 'shared/lib/ledger'
 import { generateRandomId } from 'shared/lib/utils'
-import { destroyActor, getStoragePath, getWalletStoragePath } from 'shared/lib/wallet'
+import { asyncRemoveStorage, destroyActor, getStoragePath, getWalletStoragePath } from 'shared/lib/wallet'
 import { derived, get, Readable, writable } from 'svelte/store'
 import { Electron } from './electron'
 import type { ValuesOf } from './typings/utils'
@@ -102,15 +102,17 @@ export const createProfile = (profileName: string, isDeveloperProfile: boolean):
  * @returns {void}
  */
 export const disposeNewProfile = async (): Promise<void> => {
-    const np = get(newProfile)
-    if (np) {
+    const _newProfile = get(newProfile)
+    if (_newProfile) {
         try {
-            await removeProfileFolder(np.name)
+            await asyncRemoveStorage()
+            await removeProfileFolder(_newProfile.name)
         } catch (err) {
             console.error(err)
         }
-        destroyActor(np.id)
+        destroyActor(_newProfile.id)
     }
+
     newProfile.set(null)
     activeProfileId.set(null)
 }
@@ -198,11 +200,10 @@ export const updateProfile = (path: string, value: ValuesOf<Profile> | ValuesOf<
  *
  * @returns {void}
  */
-export const cleanupInProgressProfiles = async (): Promise<void> => {
+export const cleanupInProgressProfiles = (): void => {
     const inProgressProfile = get(profileInProgress)
     if (inProgressProfile) {
         profileInProgress.update(() => undefined)
-        await removeProfileFolder(inProgressProfile)
     }
 }
 
