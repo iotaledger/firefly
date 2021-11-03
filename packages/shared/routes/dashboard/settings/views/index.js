@@ -1,4 +1,4 @@
-export { default as Advanced } from './Advanced.svelte'
+export { default as Advanced } from './advanced/Advanced.svelte'
 export { default as General } from './general/General.svelte'
 export { default as Help } from './Help.svelte'
 export { default as Security } from './Security.svelte'
