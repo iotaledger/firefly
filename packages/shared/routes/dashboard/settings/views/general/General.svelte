@@ -5,7 +5,11 @@
     import { GeneralSettings } from 'shared/lib/typings/routes'
     import { Currency, Language, NetworkStatus, Notifications, Theme } from './'
 
-    const settings = [
+    const settings: {
+        component: unknown
+        childRoute: GeneralSettings
+        requireLogin?: boolean
+    }[] = [
         { component: Theme, childRoute: GeneralSettings.Theme },
         { component: Language, childRoute: GeneralSettings.Language },
         { component: Currency, childRoute: GeneralSettings.Currency, requireLogin: true },
