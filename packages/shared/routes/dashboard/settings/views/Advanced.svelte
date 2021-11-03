@@ -27,10 +27,12 @@
     let showHiddenAccounts = $activeProfile?.settings.showHiddenAccounts
 
     const networkConfig: NetworkConfig = $activeProfile?.settings.networkConfig || getOfficialNetworkConfig(NetworkType.ChrysalisMainnet)
+    networkConfig
 
     if (networkConfig.nodes.length !== 0) {
         ensureOnePrimaryNode()
-        ensureValidNodeSelection()
+
+        networkConfig.nodes = getNodeCandidates(networkConfig)
     }
 
     $: $appSettings.deepLinking = deepLinkingChecked
@@ -80,6 +82,9 @@
         if (networkConfig.automaticNodeSelection) return
 
         networkConfig.nodes = getNodeCandidates(networkConfig)
+        if (!networkConfig.includeOfficialNodes) {
+            networkConfig.nodes = networkConfig.nodes.filter((n) => !getOfficialNodes(networkConfig.network.type).map((_n) => _n.url.includes(n.url)))
+        }
     }
 
     function ensureOnePrimaryNode(): void {
@@ -243,12 +248,14 @@
             <section id="configureNodeList">
                 <Text type="h5" classes="mb-3">{locale('views.settings.configureNodeList.title')}</Text>
                 <Text type="p" secondary classes="mb-5">{locale('views.settings.configureNodeList.description')}</Text>
-                <Checkbox
-                    label={locale('views.settings.configureNodeList.includeOfficialNodeList')}
-                    disabled={!canConfigureNodes}
-                    bind:checked={networkConfig.includeOfficialNodes}
-                    onClick={handleIncludeOfficialNodesClick}
-                    classes="mb-5" />
+                {#if isOfficialNetwork(networkConfig.network.type)}
+                    <Checkbox
+                        label={locale('views.settings.configureNodeList.includeOfficialNodeList')}
+                        disabled={!canConfigureNodes}
+                        bind:checked={networkConfig.includeOfficialNodes}
+                        onClick={handleIncludeOfficialNodesClick}
+                        classes="mb-5" />
+                {/if}
                 <div
                     class="nodes-container flex flex-col border border-solid border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 rounded-2xl overflow-auto"
                     bind:this={nodesContainer}>

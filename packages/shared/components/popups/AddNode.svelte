@@ -45,7 +45,7 @@
     $: {
         addressWarn = ''
         node.url = stripSpaces(node.url)
-        if (!$activeProfile.isDeveloperProfile && /^http:\/\//.exec(node.url)) {
+        if (!$activeProfile?.isDeveloperProfile && /^http:\/\//.exec(node.url)) {
             addressWarn = locale('warning.node.http')
         }
     }
@@ -113,7 +113,7 @@
                         onSuccess(
                             false,
                             {
-                                url: nodeUrl,
+                                url: cleanNodeUrl(nodeUrl),
                                 auth: optNodeAuth,
                                 network: getNetworkById(nodeInfo?.nodeinfo.networkId),
                                 isPrimary: node?.isPrimary || false,
