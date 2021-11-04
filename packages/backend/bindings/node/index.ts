@@ -62,7 +62,6 @@ import { NodeAuth } from '../../../shared/lib/typings/node'
 // @ts-ignore
 import addon = require('../index.node')
 
-const mailbox = []
 const onMessageListeners: ((payload: MessageResponse) => void)[] = []
 
 function _poll(
@@ -91,7 +90,6 @@ export function init(id: string, storagePath?: string): { destroy: () => void; r
         runtime,
         (error, data) => {
             const message = error || data
-            mailbox.push(message)
             // @ts-ignore
             onMessageListeners.forEach((listener) => listener(message))
         },

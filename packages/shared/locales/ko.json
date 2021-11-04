@@ -635,6 +635,7 @@
         "outgoingMi": "{value} 보냄",
         "portoflio": "포트폴리오",
         "token": "토큰",
+        "holdings": "Holdings",
         "accountValue": "지갑 밸류",
         "accountActivity": "지갑 활동 내역",
         "timeframe1Hour": "1시간",
@@ -944,6 +945,7 @@
         },
         "node": {
             "invalid": "유효한 URL을 입력하세요.",
+            "dns": "Could not resolve DNS for node.",
             "https": "HTTPS 연결이 필요합니다. 사용자를 개발자로 설정해야 보안되지 않은 HTTP 연결을 사용할 수 있습니다.",
             "duplicate": "이미 추가된 노드입니다.",
             "unsynced": "동기화되지 않은 노드입니다.",
@@ -980,6 +982,9 @@
         },
         "migration": {
             "missingBundle": "거래 번들을 찾는 동안 에러가 발생하였습니다."
+        },
+        "crypto": {
+            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
         }
     },
     "tooltips": {

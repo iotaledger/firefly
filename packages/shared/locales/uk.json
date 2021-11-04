@@ -635,6 +635,7 @@
         "outgoingMi": "Відправлено",
         "portoflio": "Портфоліо",
         "token": "Токен",
+        "holdings": "Holdings",
         "accountValue": "Вартість гаманця",
         "accountActivity": "Активність гаманця",
         "timeframe1Hour": "1 година",
@@ -860,7 +861,7 @@
         "legacyNetwork": "Застаріла мережа",
         "capsLock": "Caps Lock увімкнуто",
         "version": "Версія {version}",
-        "unknown": "Unknown"
+        "unknown": "Невідомо"
     },
     "dates": {
         "today": "Сьогодні",
@@ -944,6 +945,7 @@
         },
         "node": {
             "invalid": "Будь ласка, введіть правильну адресу.",
+            "dns": "Could not resolve DNS for node.",
             "https": "Потрібно HTTPS. Налаштуйте профіль розробника для використання небезпечних HTTP-з'єднань.",
             "duplicate": "Цей вузол вже був доданий.",
             "unsynced": "Вузол не синхронізований.",
@@ -980,6 +982,9 @@
         },
         "migration": {
             "missingBundle": "Під час спроби знайти пакет транзакцій сталася помилка."
+        },
+        "crypto": {
+            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
         }
     },
     "tooltips": {

@@ -9,11 +9,11 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { localize } from 'shared/lib/i18n'
     import { Locale } from 'shared/lib/typings/i18n'
+    import { popupState } from 'shared/lib/popup'
 
     export let locale: Locale
 
     export let error = ''
-
     export let onCreate = (..._: any[]): void => {}
 
     const { accounts } = $wallet
@@ -23,6 +23,18 @@
 
     // This looks odd but sets a reactive dependency on accountAlias, so when it changes the error will clear
     $: accountAlias, (error = '')
+
+    $: {
+        /**
+         * CAUTION: isBusy becomes true whenever the Stronghold password popup
+         * becomes active (by Wallet.svelte), so we must be sure that it gets
+         * set to false again in case the user cancels the popup. This is safe
+         * because it's within a reactive dependency.
+         */
+        if (!$popupState.active) {
+            isBusy = false
+        }
+    }
 
     const handleCreateClick = () => {
         const trimmedAccountAlias = accountAlias.trim()

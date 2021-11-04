@@ -6,7 +6,7 @@
         ledgerSimulator,
         promptUserToConnectLedger,
     } from 'shared/lib/ledger'
-    import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
+    import { getDefaultClientOptions } from 'shared/lib/network'
     import { activeProfile } from 'shared/lib/profile'
     import { Locale } from 'shared/lib/typings/i18n'
     import { api } from 'shared/lib/wallet'
@@ -24,23 +24,17 @@
     $: animation = !newAddress
         ? 'ledger-generate-address-desktop'
         : confirmed
-            ? 'ledger-address-confirmed-desktop'
-            : 'ledger-confirm-address-desktop'
+        ? 'ledger-address-confirmed-desktop'
+        : 'ledger-confirm-address-desktop'
 
     function generateNewAddress() {
         newAddress = null
         busy = true
 
         const _createAccount = (idx) => {
-            const officialNodes = getOfficialNodes()
-            const officialNetwork = getOfficialNetwork()
             api.createAccount(
                 {
-                    clientOptions: {
-                        nodes: officialNodes,
-                        node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
-                        network: officialNetwork,
-                    },
+                    clientOptions: getDefaultClientOptions(),
                     alias: `${locale('general.account')} ${idx}`,
                     signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
                     allowCreateMultipleEmptyAccounts: true,

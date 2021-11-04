@@ -306,15 +306,15 @@
                 "description": ""
             },
             "theme": {
-                "title": "テーマ：",
+                "title": "テーマ",
                 "description": ""
             },
             "language": {
-                "title": "言語:",
+                "title": "言語",
                 "description": ""
             },
             "currency": {
-                "title": "通貨：",
+                "title": "通貨",
                 "description": "残高変換を調整し、チャートオプションを更新します"
             },
             "notifications": {
@@ -323,7 +323,7 @@
             },
             "networkStatus": {
                 "title": "ネットワークのステータス",
-                "description": "現在接続しているノードの状態を表示します。"
+                "description": "現在接続しているノードの状態を表示します"
             },
             "exportStronghold": {
                 "title": "バックアップのエクスポート",
@@ -635,6 +635,7 @@
         "outgoingMi": "{value} 出金",
         "portoflio": "ポートフォリオ",
         "token": "トークン",
+        "holdings": "Holdings",
         "accountValue": "ウォレットの価値",
         "accountActivity": "ウォレットのアクティビティ",
         "timeframe1Hour": "1時間",
@@ -944,6 +945,7 @@
         },
         "node": {
             "invalid": "有効なURLを入力してください。",
+            "dns": "Could not resolve DNS for node.",
             "https": "HTTPSが必要です。保護されていないHTTP接続を使用 できるように開発者プロファイルを設定します。",
             "duplicate": "このノードは既に追加されています。",
             "unsynced": "ノードは同期されていません。",
@@ -980,6 +982,9 @@
         },
         "migration": {
             "missingBundle": "An error occurred while trying to find the transaction bundle."
+        },
+        "crypto": {
+            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
         }
     },
     "tooltips": {
