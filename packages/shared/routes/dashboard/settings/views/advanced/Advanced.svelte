@@ -25,9 +25,10 @@
         localPow,
     } = buildAccountNetworkSettings()
 
-    let props = {}
-
-    $: $settingsChildRoute, updateProps()
+    $: props = {
+        [AdvancedSettings.NodeSettings]: { automaticNodeSelection, includeOfficialNodes, nodes, primaryNodeUrl },
+        [AdvancedSettings.ProofOfWork]: { localPow },
+    }
 
     $: {
         const officialNodes = getOfficialNodes()
@@ -65,23 +66,13 @@
         { component: MigrateLedgerIndex, childRoute: AdvancedSettings.MigrateLedgerIndex, requireLedger: true },
         // { component: StateExport, childRoute: AdvancedSettings.StateExport, requireLogin: true },
     ]
-
-    function updateProps(): void {
-        if ($settingsChildRoute === AdvancedSettings.NodeSettings) {
-            props = { automaticNodeSelection, includeOfficialNodes, nodes, primaryNodeUrl }
-        } else if ($settingsChildRoute === AdvancedSettings.ProofOfWork) {
-            props = { localPow }
-        } else {
-            props = {}
-        }
-    }
 </script>
 
 <div>
     {#each settings as { component, childRoute, requireLogin, requireLedger }, index}
         {#if (!requireLogin || (requireLogin && $loggedIn)) && (!requireLedger || (requireLedger && $isLedgerProfile)) && (!$mobile || ($mobile && $settingsChildRoute === childRoute))}
             <section id={childRoute} class="w-full sm:w-3/4">
-                <svelte:component this={component} id={childRoute} {...props} />
+                <svelte:component this={component} id={childRoute} {...props[childRoute]} />
             </section>
             {#if index < settings.length - 1}
                 <HR classes="pb-5 mt-5 justify-center hidden md:block" />
