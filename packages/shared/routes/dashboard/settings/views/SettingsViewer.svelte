@@ -108,13 +108,13 @@
                 {#if !$mobile}
                     <Text type="h2" classes="mb-7">{locale(`views.settings.${$settingsRoute}.title`)}</Text>
                 {/if}
-                {#if $settingsRoute === 'generalSettings'}
+                {#if $settingsRoute === SettingsRoutes.GeneralSettings}
                     <General />
-                {:else if $settingsRoute === 'security'}
-                    <Security {locale} />
-                {:else if $settingsRoute === 'advancedSettings'}
-                    <Advanced {locale} />
-                {:else if $settingsRoute === 'helpAndInfo'}
+                {:else if $settingsRoute === SettingsRoutes.Security}
+                    <Security />
+                {:else if $settingsRoute === SettingsRoutes.AdvancedSettings}
+                    <Advanced />
+                {:else if $settingsRoute === SettingsRoutes.HelpAndInfo}
                     <Help {locale} />
                 {/if}
             </div>
