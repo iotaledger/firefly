@@ -1,4 +1,5 @@
 export { default as BalanceFinder } from './BalanceFinder.svelte'
+export { default as DeepLinks } from './DeepLinks.svelte'
 export { default as DeveloperMode } from './DeveloperMode.svelte'
 export { default as Diagnostics } from './Diagnostics.svelte'
 export { default as ErrorLog } from './ErrorLog.svelte'
