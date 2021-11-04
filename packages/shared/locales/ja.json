@@ -306,15 +306,15 @@
                 "description": ""
             },
             "theme": {
-                "title": "テーマ：",
+                "title": "テーマ",
                 "description": ""
             },
             "language": {
-                "title": "言語:",
+                "title": "言語",
                 "description": ""
             },
             "currency": {
-                "title": "通貨：",
+                "title": "通貨",
                 "description": "残高変換を調整し、チャートオプションを更新します"
             },
             "notifications": {
@@ -323,7 +323,7 @@
             },
             "networkStatus": {
                 "title": "ネットワークのステータス",
-                "description": "現在接続しているノードの状態を表示します。"
+                "description": "現在接続しているノードの状態を表示します"
             },
             "exportStronghold": {
                 "title": "バックアップのエクスポート",

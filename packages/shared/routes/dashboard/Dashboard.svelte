@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { Idle, Sidebar } from 'shared/components'
+    import { Settings, Wallet } from 'shared/routes'
     import { loggedIn, logout, sendParams } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { deepLinkRequestActive, parseDeepLink } from 'shared/lib/deepLinking/deepLinking'
@@ -25,9 +26,9 @@
         STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
         wallet,
     } from 'shared/lib/wallet'
-    import { Settings, Wallet } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
+    import { clearPollNetworkInterval, pollNetworkStatus } from 'shared/lib/networkStatus'
 
     export let locale: Locale
     export let mobile
@@ -44,6 +45,14 @@
     let fundsSoonNotificationId
 
     const LEDGER_STATUS_POLL_INTERVAL = 2000
+
+    const unsubscribeAccountsLoaded = accountsLoaded.subscribe((val) => {
+        if (val) {
+            void pollNetworkStatus()
+        } else {
+            clearPollNetworkInterval()
+        }
+    })
 
     // TODO: add missing unsubscribe to onDestroy
     ongoingSnapshot.subscribe((os) => {
@@ -104,6 +113,7 @@
     })
 
     onDestroy(() => {
+        unsubscribeAccountsLoaded()
         Electron.DeepLinkManager.clearDeepLinkRequest()
         Electron.removeListenersForEvent('deep-link-params')
 

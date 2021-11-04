@@ -104,9 +104,10 @@
             addError(err)
         })
 
+        cleanupInProgressProfiles()
+
         Electron.onEvent('deep-link-request', showDeepLinkNotification)
 
-        await cleanupInProgressProfiles()
         await cleanupEmptyProfiles()
     })
 
@@ -152,7 +153,7 @@
             @apply rounded-2xl;
             border-width: 7px;
             /* This needs to match the background it is displayed on
-               and can be override in local components using the secondary 
+               and can be override in local components using the secondary
                and tertiary styles */
             @apply border-white;
         }
