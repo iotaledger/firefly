@@ -1,4 +1,4 @@
-<script language="typescript">
+<script lang="typescript">
     import { Checkbox, Text } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import { buildAccountNetworkSettings } from 'shared/lib/wallet'

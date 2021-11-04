@@ -1,4 +1,4 @@
-<script language="typescript">
+<script lang="typescript">
     import { Button, Text } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import { navigateToNewIndexMigration } from 'shared/lib/ledger'

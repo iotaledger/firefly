@@ -1,4 +1,4 @@
-<script language="typescript">
+<script lang="typescript">
     import { Button, Checkbox, HR, Radio, Text } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
     import { localize } from 'shared/lib/i18n'
