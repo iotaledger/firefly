@@ -115,7 +115,7 @@
                 {:else if $settingsRoute === SettingsRoutes.AdvancedSettings}
                     <Advanced />
                 {:else if $settingsRoute === SettingsRoutes.HelpAndInfo}
-                    <Help {locale} />
+                    <Help />
                 {/if}
             </div>
         </Scroller>
