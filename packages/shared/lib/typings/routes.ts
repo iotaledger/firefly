@@ -58,6 +58,7 @@ export enum AccountRoutes {
 export enum Tabs {
     Wallet = 'wallet',
     Settings = 'settings',
+    Staking = 'staking',
 }
 
 export enum SettingsRoutes {

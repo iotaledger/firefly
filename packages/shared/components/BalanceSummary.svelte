@@ -6,8 +6,8 @@
 
     export let color = 'blue' // TODO: profiles will have different colors
 
-    export let balanceRaw
-    export let balanceFiat
+    export let balanceRaw = 0
+    export let balanceFiat = 0
 
     let balanceBox
     let parentWidth = 0
@@ -48,7 +48,9 @@
             {showPreciseBalance ? formatUnitPrecision(balanceRaw, Unit.Mi) : formatUnitBestMatch(balanceRaw, true, 3)}
         </Text>
     </balance-box>
-    <Text type="p" overrideColor smaller classes="text-{color}-200 dark:text-blue-300">{balanceFiat}</Text>
+    {#if balanceFiat}
+        <Text type="p" overrideColor smaller classes="text-{color}-200 dark:text-blue-300">{balanceFiat}</Text>
+    {/if}
     {#if showTooltip}
         <Tooltip {parentTop} {parentLeft} {parentWidth}>
             <Text type="p">

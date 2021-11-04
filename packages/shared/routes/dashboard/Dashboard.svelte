@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Idle, Sidebar } from 'shared/components'
-    import { Settings, Wallet } from 'shared/routes'
+    import { Settings, Staking, Wallet } from 'shared/routes'
     import { loggedIn, logout, sendParams } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { deepLinkRequestActive, parseDeepLink } from 'shared/lib/deepLinking/deepLinking'
@@ -38,6 +38,7 @@
     const tabs = {
         wallet: Wallet,
         settings: Settings,
+        staking: Staking,
     }
 
     let startInit
