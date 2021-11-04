@@ -27,7 +27,6 @@
     let showHiddenAccounts = $activeProfile?.settings.showHiddenAccounts
 
     const networkConfig: NetworkConfig = $activeProfile?.settings.networkConfig || getOfficialNetworkConfig(NetworkType.ChrysalisMainnet)
-    networkConfig
 
     if (networkConfig.nodes.length !== 0) {
         ensureOnePrimaryNode()
@@ -44,15 +43,8 @@
         updateProfile('settings.networkConfig', networkConfig)
     }
 
-    let canRemoveAllNodes
     $: canRemoveAllNodes = networkConfig.nodes.length !== 0
-
-    let canConfigureNodes
-    $: {
-        canConfigureNodes = isOfficialNetwork(networkConfig.network.type)
-    }
-
-    $: updateProfile('settings.showHiddenAccounts', showHiddenAccounts)
+    $: canConfigureNodes = isOfficialNetwork(networkConfig.network.type)
 
     let contextPosition = { x: 0, y: 0 }
     let nodeContextMenu: Node = undefined
