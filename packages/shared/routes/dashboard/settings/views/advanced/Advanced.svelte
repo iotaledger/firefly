@@ -1,53 +1,18 @@
 <script lang="typescript">
     import { HR } from 'shared/components'
     import { loggedIn, mobile } from 'shared/lib/app'
-    import { getOfficialNodes } from 'shared/lib/network'
     import { isLedgerProfile } from 'shared/lib/profile'
     import { settingsChildRoute } from 'shared/lib/router'
     import { AdvancedSettings } from 'shared/lib/typings/routes'
-    import { buildAccountNetworkSettings, updateAccountNetworkSettings } from 'shared/lib/wallet'
     import {
         BalanceFinder,
+        DeepLinks,
         Diagnostics,
         ErrorLog,
         HiddenAccounts,
         MigrateLedgerIndex,
-        NodeSettings,
-        ProofOfWork,
+        NetworkConfiguration,
     } from './'
-
-    // TODO: wait for developer profile PR to polish this
-    let {
-        automaticNodeSelection,
-        includeOfficialNodes,
-        nodes,
-        primaryNodeUrl,
-        localPow,
-    } = buildAccountNetworkSettings()
-
-    $: props = {
-        [AdvancedSettings.NodeSettings]: { automaticNodeSelection, includeOfficialNodes, nodes, primaryNodeUrl },
-        [AdvancedSettings.ProofOfWork]: { localPow },
-    }
-
-    $: {
-        const officialNodes = getOfficialNodes()
-        const nonOfficialNodes = nodes.filter((n) => !officialNodes.find((d) => d.url === n.url))
-
-        if (includeOfficialNodes) {
-            nodes = [...officialNodes, ...nonOfficialNodes]
-        } else {
-            nodes = [...nonOfficialNodes]
-        }
-
-        const allEnabled = nodes.filter((n) => !n.disabled)
-        const primaryNode = allEnabled.find((n) => n.url === primaryNodeUrl)
-        if (!primaryNode && allEnabled.length > 0) {
-            primaryNodeUrl = allEnabled[0].url
-        }
-    }
-
-    $: void updateAccountNetworkSettings(automaticNodeSelection, includeOfficialNodes, nodes, primaryNodeUrl, localPow)
 
     const settings: {
         component: unknown
@@ -55,10 +20,9 @@
         requireLogin?: boolean
         requireLedger?: boolean
     }[] = [
-        { component: NodeSettings, childRoute: AdvancedSettings.NodeSettings, requireLogin: true },
-        { component: ProofOfWork, childRoute: AdvancedSettings.ProofOfWork, requireLogin: true },
+        { component: NetworkConfiguration, childRoute: AdvancedSettings.NetworkConfiguration, requireLogin: true },
+        { component: DeepLinks, childRoute: AdvancedSettings.DeepLinks },
         // { component: DeveloperMode, childRoute: AdvancedSettings.DeveloperMode, requireLogin: true },
-        // { component: DeepLinks, childRoute: AdvancedSettings.DeepLinks },
         { component: BalanceFinder, childRoute: AdvancedSettings.BalanceFinder, requireLogin: true },
         { component: HiddenAccounts, childRoute: AdvancedSettings.HiddenAccounts, requireLogin: true },
         { component: ErrorLog, childRoute: AdvancedSettings.ErrorLog },
@@ -72,7 +36,7 @@
     {#each settings as { component, childRoute, requireLogin, requireLedger }, index}
         {#if (!requireLogin || (requireLogin && $loggedIn)) && (!requireLedger || (requireLedger && $isLedgerProfile)) && (!$mobile || ($mobile && $settingsChildRoute === childRoute))}
             <section id={childRoute} class="w-full sm:w-3/4">
-                <svelte:component this={component} id={childRoute} {...props[childRoute]} />
+                <svelte:component this={component} id={childRoute} />
             </section>
             {#if index < settings.length - 1}
                 <HR classes="pb-5 mt-5 justify-center hidden md:block" />

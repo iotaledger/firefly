@@ -1,9 +1,10 @@
 <script lang="typescript">
     import { HR, Modal, Text } from 'shared/components'
-    import { networkStatus } from 'shared/lib/networkStatus'
+    import { NETWORK_HEALTH_COLORS, networkStatus } from 'shared/lib/networkStatus'
     import { activeProfile } from 'shared/lib/profile'
     import { onDestroy } from 'svelte'
     import { Locale } from 'shared/lib/typings/i18n'
+    import { NetworkStatusHealthText } from 'shared/lib/typings/network'
 
     export let locale: Locale
 
@@ -13,15 +14,9 @@
     let messagesPerSecond = 0
     let referencedRate = 0
 
-    const NETWORK_HEALTH_COLORS = {
-        0: 'red',
-        1: 'yellow',
-        2: 'green',
-    }
-
     const unsubscribe = networkStatus.subscribe((data) => {
         healthStatus = data.health ?? 0
-        healthStatusText = healthStatus === 0 ? 'networkDown' : healthStatus === 1 ? 'networkDegraded' : 'networkOperational'
+        healthStatusText = data.healthText ?? NetworkStatusHealthText.Down
         messagesPerSecond = data.messagesPerSecond ?? 0
         referencedRate = data.referencedRate ?? 0
     })
@@ -33,7 +28,11 @@
 
 <Modal bind:isActive position={{ left: '80px', bottom: '25px' }}>
     <network-indicator-content class="flex flex-col">
-        <Text type="h3" classes="px-7 pt-5">{locale('views.dashboard.network.status')}</Text>
+        {#if $activeProfile.isDeveloperProfile}
+            <Text type="h3" classes="px-7 pt-5">{locale('general.network')}</Text>
+            <Text type="p" highlighted classes="px-7">{$activeProfile.settings.networkConfig.network.name}</Text>
+        {/if}
+        <Text type="h3" classes="px-7 pt-{$activeProfile.isDeveloperProfile ? '2' : '5'}">{locale('views.dashboard.network.status')}</Text>
         <div class="px-7 pb-5 text-13 text-{NETWORK_HEALTH_COLORS[healthStatus]}-500">
             {locale(`views.dashboard.network.${healthStatusText}`)}
         </div>

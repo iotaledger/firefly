@@ -4,11 +4,12 @@
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
-    import { selectedAccountId, selectedMessage } from 'shared/lib/wallet'
+    import { asyncRemoveWalletAccount, selectedAccountId, selectedMessage } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { get } from 'svelte/store'
 
     export let locale: Locale
 
@@ -58,7 +59,9 @@
             props: {
                 account,
                 hasMultipleAccounts: $viewableAccounts.length > 1,
-                deleteAccount: (id) => {
+                deleteAccount: async (id) => {
+                    await asyncRemoveWalletAccount(get(account).id)
+
                     if (!hiddenAccounts.includes(id)) {
                         hiddenAccounts.push(id)
                         updateProfile('hiddenAccounts', hiddenAccounts)

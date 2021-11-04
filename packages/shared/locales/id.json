@@ -51,7 +51,7 @@
             "progress2": "Generate address",
             "progress3": "Switch Ledger app",
             "progress4": "Transfer funds",
-            "watchVideo": "Watch video guide",
+            "watchVideo": "Lihat petunjuk video",
             "videoGuide": "Ledger migration video guide"
         },
         "ledgerInstallationGuide": {
@@ -182,7 +182,7 @@
         "generateNewLedgerAddress": {
             "title": "Buatkan alamat baru",
             "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
-            "confirmTitle": "Confirm the new address",
+            "confirmTitle": "Konfirmasi alamat baru",
             "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
             "confirmedTitle": "Address confirmed",
             "confirmedBody": "You have confirmed that the address in Firefly matches the one on your Ledger device.",
@@ -197,8 +197,8 @@
             "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
             "accountIndex": "Account Index",
             "accountPage": "Account Page",
-            "standard": "Standard",
-            "expert": "Expert",
+            "standard": "Standar",
+            "expert": "Ahli",
             "takingAWhile": "This is taking a while...",
             "notGeneratingAddresses": "Is your Ledger generating addresses?",
             "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
@@ -322,7 +322,7 @@
                 "description": "Pemberitahuan sistem untuk transaksi"
             },
             "networkStatus": {
-                "title": "Network status",
+                "title": "Status Jaringan",
                 "description": "Displays the status of the node you are currently connected to."
             },
             "exportStronghold": {
@@ -506,7 +506,7 @@
             "title": "Menghapus {name}?",
             "body": "This wallet has no transaction history. It can safely be deleted.",
             "typePassword": "Ketik kata sandi dompet Anda untuk mengonfirmasi.",
-            "hideAccount": "Delete wallet",
+            "hideAccount": "Hapus dompet",
             "errorTitle": "Tidak dapat menghapus {name}",
             "errorBody1": "You cannot delete this wallet, you must have at least one."
         },
@@ -556,7 +556,7 @@
             "userPath": "Jalur pengguna"
         },
         "transaction": {
-            "title": "Confirm transaction",
+            "title": "Konfirmasi transaksi",
             "body": "You’re about to send {amount} to"
         },
         "balanceFinder": {
@@ -574,7 +574,7 @@
             "title": "Warning: funds at risk during migration",
             "body": "You have funds on spent addresses, but the information needed to secure them was not found. This can happen if you made transactions a long time ago. You can proceed but {value} are at risk during migration.",
             "learnMore": "Learn more about spent addresses",
-            "proceed": "I understand the risk"
+            "proceed": "Saya mengerti risikonya"
         },
         "snapshot": {
             "title": "Sedang meningkatkan jaringan",
@@ -617,7 +617,7 @@
                 "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
             },
             "transaction": {
-                "title": "Confirm transaction",
+                "title": "Konfirmasi transaksi",
                 "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted."
             }
         },
@@ -635,18 +635,19 @@
         "outgoingMi": "Outgoing {value}",
         "portoflio": "Portofolio",
         "token": "Token",
+        "holdings": "Holdings",
         "accountValue": "Wallet Value",
         "accountActivity": "Wallet Activity",
-        "timeframe1Hour": "1 hour",
-        "timeframe1Day": "1 day",
-        "timeframe1Week": "1 week",
-        "timeframe1Month": "1 month"
+        "timeframe1Hour": "1 jam",
+        "timeframe1Day": "1 hari",
+        "timeframe1Week": "1 minggu",
+        "timeframe1Month": "1 bulan"
     },
     "actions": {
         "continue": "Lanjutkan",
         "back": "Kembali",
-        "previous": "Previous",
-        "next": "Next",
+        "previous": "Sebelumnya",
+        "next": "Selanjutnya",
         "cancel": "Batal",
         "close": "Tutup",
         "dismiss": "Menyingkirkan",
@@ -694,9 +695,9 @@
         "saveBackup": "Save Stronghold backup",
         "customizeAcount": "Customise wallet",
         "viewAddressHistory": "Lihat riwayat alamat",
-        "hideAccount": "Hide wallet",
+        "hideAccount": "Sembunyikan dompet",
         "showAccount": "Unhide wallet",
-        "deleteAccount": "Delete wallet",
+        "deleteAccount": "Hapus dompet",
         "max": "Maksimal",
         "addNode": "Tambah Node",
         "updateNode": "Update node",
@@ -712,20 +713,20 @@
         "copy": "Salin",
         "paste": "Tempelkan",
         "selectAll": "Pilih Semua",
-        "addAccount": "Add Wallet",
+        "addAccount": "Tambahkan Dompet",
         "checkForUpdates": "Periksa pembaruan",
         "reportAnIssue": "Laporkan Masalah",
-        "restore": "Restore",
+        "restore": "Pulihkan",
         "clear": "Hapus",
         "hideDetails": "Sembunyikan Rincian",
         "yes": "Iya",
         "no": "Tidak",
-        "skip": "Skip",
+        "skip": "Lewati",
         "reset": "Setel ulang",
         "downloadRecoveryKit": "Save Recovery Kit template",
-        "skipBackup": "Skip file backup",
-        "finishSetup": "Finish setup",
-        "readDocumentation": "Read the documentation",
+        "skipBackup": "Lewati backup file",
+        "finishSetup": "Selesai Setup",
+        "readDocumentation": "Baca dokumentasi",
         "visitFaq": "Visit FAQ",
         "viewStatus": "View status",
         "showHiddenAccounts": "Show hidden wallets",
@@ -733,9 +734,9 @@
         "hideNetworkStatistics": "Hide network statistics",
         "findBalances": "Find balances",
         "searchBalances": "Search for balances",
-        "searchAgain": "Search again",
-        "searching": "Searching...",
-        "closeFirefly": "Close Firefly",
+        "searchAgain": "Cari kembali",
+        "searching": "Mencari...",
+        "closeFirefly": "Tutup Firefly",
         "generateAddress": "Generate address",
         "migrateAgain": "Migrate another index"
     },
@@ -750,15 +751,15 @@
         "recentActivity": "Aktivitas Terbaru",
         "sent": "Terkirim",
         "received": "Diterima",
-        "sendPayment": "Send Payment",
+        "sendPayment": "Kirim Pembayaran",
         "moveFunds": "Internal Transfer",
-        "sendTo": "Send To",
+        "sendTo": "Kirim ke",
         "sendFunds": "Kirim dana",
-        "sendToAddress": "Send to address",
+        "sendToAddress": "Kirim ke alamat",
         "scanQrOrPaste": "Pindai kode QR atau salin sebuah Alamat",
         "moveFundsBetweenAccounts": "Move funds between wallets",
         "sendTokensToAddress": "Kirim token ke suatu alamat",
-        "manageAccount": "Manage Wallet",
+        "manageAccount": "Kelola Dompet",
         "customizeAcount": "Customize your wallet",
         "account": "Dompet",
         "sendingToAddress": "Mengirim ke alamat",
@@ -782,26 +783,26 @@
         "appearance": "Tampilan",
         "lightTheme": "Motif terang",
         "darkTheme": "Motif gelap",
-        "balance": "Balance",
-        "accountBalance": "Wallet Balance",
+        "balance": "Saldo",
+        "accountBalance": "Saldo Dompet",
         "incoming": "Pemasukkan",
         "outgoing": "Pengeluaran",
         "totalIn": "Jumlah pemasukan",
         "totalOut": "Total keluar",
-        "accounts": "Wallets",
-        "myAccounts": "My Wallets",
+        "accounts": "Dompet",
+        "myAccounts": "Dompet saya",
         "automaticNodeSelection": "Pilih Node otomatis",
         "manualNodeSelection": "Pilihan Node manual",
         "profiles": "Profil",
         "developerProfile": "Profil pengembang",
         "developerProfileDescription": "Memungkinkan Anda terhubung ke testnets",
         "dev": "Pengembang",
-        "createAccount": "Create a Wallet",
-        "accountName": "Wallet name",
+        "createAccount": "Buat dompet",
+        "accountName": "Nama Dompet",
         "latestTransactions": "Transaksi terbaru",
         "transactions": "Transaksi",
         "security": "Keamanan",
-        "accountAddress": "Wallet Address",
+        "accountAddress": "Alamat Dompet",
         "nodes": "Nodes",
         "wallet": "Dompet",
         "help": "Bantuan",
@@ -809,12 +810,12 @@
         "messageId": "ID Pesan",
         "inputAddress": "Kirim Alamat",
         "receiveAddress": "Mendapatkan alamat",
-        "newAddress": "New Address",
+        "newAddress": "Alamat Baru",
         "date": "Tanggal",
         "status": "Status",
         "confirmed": "Konfirmasi",
         "pending": "Tertunda",
-        "noAccounts": "You have no wallets, please create one.",
+        "noAccounts": "Anda tidak memiliki dompet, harap buat satu.",
         "loadingAccounts": "Sedang memuat, mohon tunggu...",
         "addProfile": "Tambah profil",
         "noRecentHistory": "Tidak ada riwayat terkini",
@@ -822,7 +823,7 @@
         "transferSyncing": "Syncing wallet",
         "transferSelectingInputs": "Memilih masukan",
         "transferRemainderAddress": "Generating remainder address",
-        "transferPreparedTransaction": "Preparing transaction",
+        "transferPreparedTransaction": "Mempersiapkan transaksi",
         "transferSigning": "Menandatangani transaksi",
         "transferPow": "Melakukan Pow",
         "transferBroadcasting": "Transaksi penyiaran",
@@ -858,8 +859,8 @@
         "receiving": "Menerima",
         "sending": "Mengirim",
         "legacyNetwork": "Legacy Network",
-        "capsLock": "Caps Lock is on",
-        "version": "Version {version}",
+        "capsLock": "Caps Lock menyala",
+        "version": "Versi {version}",
         "unknown": "Unknown"
     },
     "dates": {
@@ -944,6 +945,7 @@
         },
         "node": {
             "invalid": "Silakan masukkan URL yang valid.",
+            "dns": "Could not resolve DNS for node.",
             "https": "HTTPS diperlukan. Siapkan profil pengembang untuk menggunakan koneksi HTTP tidak aman.",
             "duplicate": "Node ini telah ditambahkan.",
             "unsynced": "Node tidak sinkron.",
@@ -980,6 +982,9 @@
         },
         "migration": {
             "missingBundle": "An error occurred while trying to find the transaction bundle."
+        },
+        "crypto": {
+            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
         }
     },
     "tooltips": {

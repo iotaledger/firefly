@@ -1,9 +1,12 @@
 <script lang="typescript">
     import { Idle, Sidebar } from 'shared/components'
-    import { loggedIn, logout, mobile } from 'shared/lib/app'
+    import { loggedIn, logout, mobile, sendParams } from 'shared/lib/app'
+    import { appSettings } from 'shared/lib/appSettings'
+    import { deepLinkRequestActive, parseDeepLink } from 'shared/lib/deepLinking/deepLinking'
     import { Electron } from 'shared/lib/electron'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
+    import { clearPollNetworkInterval, pollNetworkStatus } from 'shared/lib/networkStatus'
     import {
         NOTIFICATION_TIMEOUT_NEVER,
         removeDisplayNotification,
@@ -11,9 +14,18 @@
     } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
-    import { accountRoute, dashboardRoute, routerNext, walletRoute } from 'shared/lib/router'
+    import {
+        accountRoute,
+        dashboardRoute,
+        routerNext,
+        settingsChildRoute,
+        settingsRoute,
+        walletRoute,
+    } from 'shared/lib/router'
+    import { DeepLinkingContexts } from 'shared/lib/typings/deepLinking/deepLinking'
+    import { WalletOperations } from 'shared/lib/typings/deepLinking/walletContext'
     import type { Locale } from 'shared/lib/typings/i18n'
-    import { AccountRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
+    import { AccountRoutes, AdvancedSettings, SettingsRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
     import {
         api,
         isBackgroundSyncing,
@@ -27,18 +39,26 @@
 
     export let locale: Locale
 
+    const { accountsLoaded, accounts } = $wallet
+
     const tabs = {
         wallet: Wallet,
         settings: Settings,
     }
-
-    const { accountsLoaded } = $wallet
 
     let startInit
     let busy
     let fundsSoonNotificationId
 
     const LEDGER_STATUS_POLL_INTERVAL = 2000
+
+    const unsubscribeAccountsLoaded = accountsLoaded.subscribe((val) => {
+        if (val) {
+            void pollNetworkStatus()
+        } else {
+            clearPollNetworkInterval()
+        }
+    })
 
     // TODO: add missing unsubscribe to onDestroy
     ongoingSnapshot.subscribe((os) => {
@@ -73,10 +93,6 @@
             )
         }
 
-        // TODO: Re-enable deep links
-        // Electron.DeepLinkManager.requestDeepLink()
-        // Electron.onEvent('deep-link-params', (data) => handleDeepLinkRequest(data))
-
         Electron.onEvent('menu-logout', () => {
             void logout()
         })
@@ -84,7 +100,9 @@
         Electron.onEvent('notification-activated', (contextData) => {
             if (contextData) {
                 if (
-                    (contextData.type === 'confirmed' || contextData.type === 'failed' || contextData.type === 'valueTx') &&
+                    (contextData.type === 'confirmed' ||
+                        contextData.type === 'failed' ||
+                        contextData.type === 'valueTx') &&
                     contextData.accountId
                 ) {
                     selectedAccountId.set(contextData.accountId)
@@ -96,9 +114,15 @@
                 }
             }
         })
+
+        Electron.onEvent('deep-link-params', (data: string) => handleDeepLinkRequest(data))
     })
 
     onDestroy(() => {
+        unsubscribeAccountsLoaded()
+        Electron.DeepLinkManager.clearDeepLinkRequest()
+        Electron.removeListenersForEvent('deep-link-params')
+
         if (fundsSoonNotificationId) {
             removeDisplayNotification(fundsSoonNotificationId)
         }
@@ -106,40 +130,6 @@
             stopPollingLedgerStatus()
         }
     })
-
-    // TODO: re-enable deep links
-    // /**
-    //  * Handles deep link request
-    //  * If deep linking is enabled, fill send input parameters
-    //  * If deep linking is disabled, direct user to settings
-    //  */
-    // const handleDeepLinkRequest = (data) => {
-    //     const parsedData = parseDeepLink(data)
-    //     const _redirect = (tab) => {
-    //         deepLinkRequestActive.set(true)
-    //         if (get(dashboardRoute) !== tab) {
-    //             dashboardRoute.set(tab)
-    //         }
-    //     }
-
-    //     if (!$appSettings.deepLinking) {
-    //         _redirect(Tabs.Settings)
-    //         // TODO: Add alert system
-    //         console.log('deep linking not enabled')
-    //     } else if (parsedData) {
-    //         _redirect(Tabs.Wallet)
-    //         sendParams.set(parsedData)
-    //     } else {
-    //         console.log('error parsing')
-    //     }
-    // }
-
-    // $: {
-    //     if ($deepLinkRequestActive && $appSettings.deepLinking) {
-    //         walletRoute.set(WalletRoutes.Send)
-    //         deepLinkRequestActive.set(false)
-    //     }
-    // }
 
     if ($walletRoute === WalletRoutes.Init && !$accountsLoaded && $loggedIn) {
         startInit = Date.now()
@@ -153,6 +143,7 @@
             })
         }
     }
+
     $: {
         if ($accountsLoaded) {
             const minTimeElapsed = 3000 - (Date.now() - startInit)
@@ -161,6 +152,7 @@
                 if (get(popupState).type === 'busy') {
                     closePopup()
                 }
+                Electron.DeepLinkManager.checkDeepLinkRequestExists()
             }
             if (minTimeElapsed < 0) {
                 cancelBusyState()
@@ -168,6 +160,51 @@
                 setTimeout(() => {
                     cancelBusyState()
                 }, minTimeElapsed)
+            }
+        }
+    }
+
+    /**
+     * Handles deep link request
+     */
+    const handleDeepLinkRequest = (data) => {
+        const _redirect = (tab) => {
+            deepLinkRequestActive.set(true)
+            if (get(dashboardRoute) !== tab) {
+                dashboardRoute.set(tab)
+            }
+        }
+        if (!$appSettings.deepLinking) {
+            _redirect(Tabs.Settings)
+            settingsRoute.set(SettingsRoutes.AdvancedSettings)
+            settingsChildRoute.set(AdvancedSettings.DeepLinks)
+            showAppNotification({ type: 'warning', message: locale('notifications.deepLinkingRequest.notEnabled') })
+        } else {
+            if ($accounts && $accounts.length > 0) {
+                const addressPrefix = $accounts[0].depositAddress.split('1')[0]
+                const parsedDeepLink = parseDeepLink(addressPrefix, data)
+                if (
+                    parsedDeepLink &&
+                    parsedDeepLink.context === DeepLinkingContexts.Wallet &&
+                    parsedDeepLink.operation === WalletOperations.Send &&
+                    parsedDeepLink.params
+                ) {
+                    _redirect(Tabs.Wallet)
+                    sendParams.set({
+                        ...parsedDeepLink.params,
+                        isInternal: false,
+                    })
+                    showAppNotification({
+                        type: parsedDeepLink.notification.type,
+                        message: parsedDeepLink.notification.message,
+                    })
+                } else {
+                    showAppNotification({
+                        type: 'error',
+                        message: locale('notifications.deepLinkingRequest.invalidFormat'),
+                    })
+                }
+                Electron.DeepLinkManager.clearDeepLinkRequest()
             }
         }
     }

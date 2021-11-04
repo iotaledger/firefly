@@ -2,7 +2,7 @@
     import { Icon, Logo, NetworkIndicator, ProfileActionsModal } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { getInitials } from 'shared/lib/helpers'
-    import { networkStatus } from 'shared/lib/networkStatus'
+    import { NETWORK_HEALTH_COLORS, networkStatus } from 'shared/lib/networkStatus'
     import { activeProfile } from 'shared/lib/profile'
     import { dashboardRoute, resetWalletRoute, settingsRoute } from 'shared/lib/router'
     import type { Locale } from 'shared/lib/typings/i18n'
@@ -16,12 +16,6 @@
     let healthStatus = 2
     let showProfile = false
     const profileColor = 'blue' // TODO: each profile has a different color
-
-    const NETWORK_HEALTH_COLORS = {
-        0: 'red',
-        1: 'yellow',
-        2: 'green',
-    }
 
     const profileInitial = getInitials(get(activeProfile)?.name, 1)
 

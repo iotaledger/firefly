@@ -10,30 +10,35 @@
         isFiatCurrency,
         parseCurrency,
     } from 'shared/lib/currency'
-    import { ledgerDeviceState, displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
+    import {
+        displayNotificationForLedgerProfile,
+        ledgerDeviceState,
+        promptUserToConnectLedger,
+    } from 'shared/lib/ledger'
     import { displayNotifications, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
+    import { CurrencyTypes } from 'shared/lib/typings/currency'
     import {
         GeneratingRemainderDepositAddressEvent,
-        PreparedTransactionEvent, TransactionEventData,
+        PreparedTransactionEvent,
+        TransactionEventData,
         TransferProgressEventData,
         TransferProgressEventType,
         TransferState,
     } from 'shared/lib/typings/events'
+    import { Locale } from 'shared/lib/typings/i18n'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import type { NotificationType } from 'shared/lib/typings/notification'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
     import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
     import { DUST_THRESHOLD, isTransferring, transferState, wallet } from 'shared/lib/wallet'
     import { getContext, onDestroy, onMount } from 'svelte'
     import type { Readable } from 'svelte/store'
     import { get } from 'svelte/store'
-    import { Locale } from 'shared/lib/typings/i18n'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
-    import { CurrencyTypes } from 'shared/lib/typings/currency'
 
     export let locale: Locale
 
@@ -177,12 +182,12 @@
             case TransferProgressEventType.GeneratingRemainderDepositAddress:
                 transactionEventData = data
 
-                /**
+            /**
              * NOTE: The break statement is omitted in this case to allow the next block of code
              * (under SigningTransaction) to be executed.
              */
 
-                /* eslint-disable no-fallthrough */
+            /* eslint-disable no-fallthrough */
             case TransferProgressEventType.SigningTransaction:
                 ledgerAwaitingConfirmation = true
 
@@ -199,7 +204,7 @@
                 break
 
             case TransferProgressEventType.PreparedTransaction:
-            /**
+                /**
                  * CAUTION: The Ledger confirmation doesn't always trigger
                  * the popup to close, so it is programmatically enforced here.
                  */
@@ -240,7 +245,7 @@
          */
         switch (state) {
             case LedgerDeviceState.Connected:
-                if(transactionNotificationId) {
+                if (transactionNotificationId) {
                     removeDisplayNotification(transactionNotificationId)
 
                     transactionNotificationId = null
@@ -259,7 +264,12 @@
                 break
 
             default:
-                transactionNotificationId = displayNotificationForLedgerProfile(notificationType, false, false, ignoreNotDetected)
+                transactionNotificationId = displayNotificationForLedgerProfile(
+                    notificationType,
+                    false,
+                    false,
+                    ignoreNotDetected
+                )
 
                 break
         }
@@ -304,13 +314,14 @@
          * aren't precise enough, so we have to ensure that the
          * actual max amount is applied when the user clicks
          * the button.
-        */
+         */
 
         const isFiat = isFiatCurrency(unit)
-        const isMaxAmount = amount === convertToFiat(from.balance, $currencies[CurrencyTypes.USD], $exchangeRates[unit]).toString()
+        const isMaxAmount =
+            amount === convertToFiat(from.balance, $currencies[CurrencyTypes.USD], $exchangeRates[unit]).toString()
         const hasDustRemaining = Math.abs(from.balance - _amount) < DUST_THRESHOLD
 
-        return (isFiat && isMaxAmount && hasDustRemaining) ? from.balance : _amount
+        return isFiat && isMaxAmount && hasDustRemaining ? from.balance : _amount
     }
 
     const handleSendClick = () => {
@@ -361,15 +372,16 @@
 
         if (!amountError && !addressError && !toError) {
             // If this is an external send but the dest address is in one of
-            // the other accounts switch it to an internal transfer
-            let internal = selectedSendType === SEND_TYPE.INTERNAL
+            // the other accounts, detect it to display the right popup
+            // but keep the tx external to keep the original entered address
+            const internal = selectedSendType === SEND_TYPE.INTERNAL
+            let accountAlias = internal ? to.alias : undefined
 
             if (!internal) {
                 for (const acc of $accounts) {
                     const internalAddress = acc.addresses.find((a) => a.address === address)
                     if (internalAddress) {
-                        internal = true
-                        to = acc
+                        accountAlias = acc.alias
                         break
                     }
                 }
@@ -378,10 +390,10 @@
             openPopup({
                 type: 'transaction',
                 props: {
-                    internal,
+                    internal: internal || accountAlias,
                     amount: amountRaw,
                     unit,
-                    to: internal ? to.alias : address,
+                    to: accountAlias ?? address,
                     onConfirm: () => triggerSend(internal),
                 },
             })
@@ -397,13 +409,13 @@
              * case that we are masquerading as an internal transfer by sending to an address
              * in another account. Send parameters are reset once the transfer completes.
              */
-             isInternal
+            isInternal
                 ? onInternalTransfer(from.id, to.id, amountRaw, selectedSendType === SEND_TYPE.INTERNAL)
                 : onSend(from.id, address, amountRaw)
 
-        if($isSoftwareProfile) {
+        if ($isSoftwareProfile) {
             _send(isInternal)
-        } else if($isLedgerProfile) {
+        } else if ($isLedgerProfile) {
             promptUserToConnectLedger(false, () => _send(isInternal), undefined)
         }
     }
@@ -429,11 +441,12 @@
             : formatUnitPrecision(from.balance, unit, false)
     }
 
-    const updateFromSendParams = (s) => {
-        selectedSendType = s.isInternal && $liveAccounts.length > 1 ? SEND_TYPE.INTERNAL : SEND_TYPE.EXTERNAL
-        unit = s.amount === 0 ? Unit.Mi : Unit.i
-        amount = s.amount === 0 ? '' : formatUnitPrecision(s.amount, Unit.i, false)
-        address = s.address
+    const updateFromSendParams = (sendParams) => {
+        selectedSendType = sendParams.isInternal && $liveAccounts.length > 1 ? SEND_TYPE.INTERNAL : SEND_TYPE.EXTERNAL
+        unit = sendParams.unit ?? (sendParams.amount === 0 ? Unit.Mi : Unit.i)
+        const rawAmount = changeUnits(sendParams.amount, unit, Unit.i)
+        amount = sendParams.amount === 0 ? '' : formatUnitPrecision(rawAmount, unit, false)
+        address = sendParams.address
         if (from && accountsDropdownItems) {
             to = $liveAccounts.length === 2 ? accountsDropdownItems[from.id === $liveAccounts[0].id ? 1 : 0] : to
         }
@@ -478,7 +491,10 @@
                     disabled={$isTransferring}
                     class={$isTransferring ? 'cursor-auto' : 'cursor-pointer'}
                     class:active={SEND_TYPE.EXTERNAL === selectedSendType && !$isTransferring}>
-                    <Text classes="text-left" type="h5" secondary={SEND_TYPE.EXTERNAL !== selectedSendType || $isTransferring}>
+                    <Text
+                        classes="text-left"
+                        type="h5"
+                        secondary={SEND_TYPE.EXTERNAL !== selectedSendType || $isTransferring}>
                         {locale(`general.${SEND_TYPE.EXTERNAL}`)}
                     </Text>
                 </button>
@@ -551,7 +567,9 @@
     </div>
     {#if !$isTransferring}
         <div class="flex flex-row justify-between px-2">
-            <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}>{locale('actions.cancel')}</Button>
+            <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}>
+                {locale('actions.cancel')}
+            </Button>
             <Button classes="-mx-2 w-1/2" onClick={() => handleSendClick()}>{locale('actions.send')}</Button>
         </div>
     {/if}

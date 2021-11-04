@@ -1,8 +1,6 @@
 <script lang="typescript">
     import { Drawer, Icon, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
-    import { appSettings } from 'shared/lib/appSettings'
-    import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { getInitials } from 'shared/lib/helpers'
     import { isLocaleLoaded } from 'shared/lib/i18n'
     import { activeProfile } from 'shared/lib/profile'
@@ -20,13 +18,6 @@
     let drawer: Drawer
 
     const profileColor = 'blue' // TODO: each profile has a different color
-
-    $: {
-        if ($deepLinkRequestActive && !$appSettings.deepLinking) {
-            settingsRoute.set(SettingsRoutes.AdvancedSettings)
-            deepLinkRequestActive.set(false)
-        }
-    }
 
     $: if ($mobile && $dashboardRoute === Tabs.Settings) {
         drawer?.open()
