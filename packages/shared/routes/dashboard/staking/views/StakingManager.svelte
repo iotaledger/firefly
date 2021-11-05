@@ -10,9 +10,9 @@
     }
 </script>
 
-<div class="p-8 flex flex-col space-y-6 w-full h-full">
+<div class="p-8 flex flex-col justify-between space-y-6 w-full h-full">
     <Text type="h5" classes="text-2xl h-1/6">{locale('views.staking.title')}</Text>
-    <div class="h-1/3">
+    <div class="h-2/6">
         <Text type="h5" classes="text-3xl">
             7.38 Gi
         </Text>
@@ -20,10 +20,7 @@
             {locale('views.staking.manager.availableForStaking')}
         </Text>
     </div>
-    <div class="1/6"></div>
-    <div class="h-1/3">
-        <Button classes="w-full" onClick={handleStakeFundsClick}>
-            {locale('actions.stakeFunds')}
-        </Button>
-    </div>
+    <Button classes="w-full" onClick={handleStakeFundsClick}>
+        {locale('actions.stakeFunds')}
+    </Button>
 </div>
