@@ -1,9 +1,12 @@
 <script lang="typescript">
-    import { Link, Text } from 'shared/components'
+    import { Illustration, Link, Text } from 'shared/components'
+    import { Electron } from 'shared/lib/electron'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    const handleExternalLinkClick = () => {
-        /* eslint-disable no-console */
-        console.log('EXTERNAL FAQ!')
+    export let locale: Locale
+
+    const handleExternalLinkClick = (): void => {
+        Electron.openUrl('https://firefly.iota.org/')
     }
 </script>
 
@@ -19,37 +22,26 @@
     }
 </style>
 
-<div class="px-6 pb-6 flex flex-col space-y-3 w-full h-full">
-    <div class="px-9 py-12 h-1/3">
-        <Text type="p" classes="text-center text-xl">
-            Staking events are live
-        </Text>
-    </div>
-    <div class="flex flex-col justify-between h-2/3">
-        <Text type="p" classes="text-xl">Staking in Firefly</Text>
-        <div>
-            <Text type="p" secondary>
-                Claim SHM and ASM tokens ahead of the network launch in 2022.
-                Staking temporarily locks your IOTAs, but you still have complete ownership and control at all times.
-            </Text>
-            <ul>
-                <li>
-                    <Text type="p" secondary>
-                        Unstake to send or add to your staked funds.
-                    </Text>
-                </li>
-                <li>
-                    <Text type="p" secondary>
-                        You can stake or unstake without limits.
-                    </Text>
-                </li>
-                <li>
-                    <Text type="p" secondary>
-                        Rewards are continually airdropped to you.
-                    </Text>
-                </li>
-            </ul>
+<div class="flex flex-col space-y-6 w-full h-full bg-yellow-50">
+    <div class="flex flex-col h-2/6">
+        <div class="absolute flex flex-col justify-center self-center h-1/6">
+            <Text type="h5" classes="text-xl">{locale('views.staking.info.stakingIsLive')}</Text>
         </div>
-        <Link onClick="" classes="self-center" icon="info">How it works</Link>
+        <Illustration illustration="staking-info" classes="h-full transform -translate-y-5" />
+    </div>
+    <div class="1/6"></div>
+    <div class="px-8 pb-6 h-3/6">
+        <Text type="h5" classes="mb-6 text-2xl">
+            {locale('views.staking.info.title')}
+        </Text>
+        <Text type="p" classes="mb-3">
+            {locale('views.staking.info.description')}
+        </Text>
+        <ul class="mb-6">
+            {#each locale('views.staking.info.bullets') as stakingInfoBullet}
+                <li><Text type="p">{stakingInfoBullet}</Text></li>
+            {/each}
+        </ul>
+        <Link onClick={handleExternalLinkClick} classes="self-center">{locale('actions.seeHowItWorks')}></Link>
     </div>
 </div>

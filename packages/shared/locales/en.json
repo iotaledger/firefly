@@ -490,6 +490,38 @@
                 "allSettings": "All settings",
                 "logout": "Log out"
             }
+        },
+        "staking": {
+            "title": "Staking",
+            "manager": {
+                "availableForStaking": "Available for staking",
+                "currentlyStaked": "Currently staked"
+            },
+            "info": {
+                "title": "Staking in Firefly",
+                "description": "Claim SHM and ASM tokens ahead of the network launch in 2022. Staking temporarily locks your IOTAs, but you have complete ownership and control at all times.",
+                "bullets": [
+                    "Unstake to send or add to your staked funds.",
+                    "You can stake or unstake without limits.",
+                    "Rewards are continually airdropped to you."
+                ],
+                "stakingBegins": "Airdrop events begin",
+                "stakingBeginsAt": "Dec 15th 2021",
+                "stakingIsLive": "Staking events are live",
+                "stakingEnded": "Staking events ended"
+            },
+            "airdrops": {
+                "remaining": "Remaining",
+                "collectedRewards": "Collected rewards",
+                "assembly": {
+                    "name": "Assembly",
+                    "description": "Lorem Ipsum is simply dummy text of the printing industry. Lorem Ipsum has been the industry's standard dummy text since the 1500s."
+                },
+                "shimmer": {
+                    "name": "Shimmer",
+                    "description": "Lorem Ipsum is simply dummy text of the printing industry. Lorem Ipsum has been the industry's standard dummy text since the 1500s."
+                }
+            }
         }
     },
     "popups": {
@@ -780,7 +812,12 @@
         "searching": "Searching...",
         "closeFirefly": "Close Firefly",
         "generateAddress": "Generate address",
-        "migrateAgain": "Migrate another index"
+        "migrateAgain": "Migrate another index",
+        "learnMore": "Learn more",
+        "seeHowItWorks": "See how it works",
+        "stake": "Stake",
+        "stakeFunds": "Stake funds",
+        "manageStake": "Manage stake"
     },
     "general": {
         "password": "Password",
@@ -902,7 +939,8 @@
         "capsLock": "Caps Lock is on",
         "version": "Version {version}",
         "unknown": "Unknown",
-        "none": "None"
+        "none": "None",
+        "days": "day(s)"
     },
     "dates": {
         "today": "Today",

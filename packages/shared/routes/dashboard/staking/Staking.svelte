@@ -1,7 +1,9 @@
 <script lang="typescript">
     import { DashboardPane } from 'shared/components'
     import { StakingAirdrop, StakingInfo, StakingManager } from './views'
+    import { Locale } from 'shared/lib/typings/i18n'
 
+    export let locale: Locale
 </script>
 
 <style type="text/scss">
@@ -14,17 +16,17 @@
     <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
         <div class="h-full flex flex-col space-y-3">
             <DashboardPane classes="w-full h-1/3">
-                <StakingManager />
+                <StakingManager {locale} />
             </DashboardPane>
             <DashboardPane classes="w-full h-2/3">
-                <StakingInfo />
+                <StakingInfo {locale} />
             </DashboardPane>
         </div>
         <DashboardPane classes="h-full">
-            <StakingAirdrop />
+            <StakingAirdrop {locale} airdrop={'assembly'} />
         </DashboardPane>
         <DashboardPane classes="h-full">
-            <StakingAirdrop />
+            <StakingAirdrop {locale} airdrop={'shimmer'}/>
         </DashboardPane>
     </div>
 </div>
