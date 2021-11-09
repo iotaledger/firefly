@@ -58,3 +58,6 @@ export { default as Chart } from './charts/Index.svelte'
 export { default as BarChart } from './charts/Bar.svelte'
 export { default as LineChart } from './charts/Line.svelte'
 export * as ChartDefaults from './charts/defaults'
+
+// Staking
+export { default as StakingIndicator } from './StakingIndicator.svelte'

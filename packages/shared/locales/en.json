@@ -495,7 +495,9 @@
             "title": "Staking",
             "manager": {
                 "availableForStaking": "Available for staking",
-                "currentlyStaked": "Currently staked"
+                "currentlyStaked": "Currently staked",
+                "fundsStaked": "Funds staked",
+                "fundsUnstaked": "Funds unstaked"
             },
             "info": {
                 "title": "Staking in Firefly",
