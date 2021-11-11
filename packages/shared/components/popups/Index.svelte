@@ -26,6 +26,7 @@
     import Password from './Password.svelte'
     import QR from './QR.svelte'
     import RemoveNode from './RemoveNode.svelte'
+    import StakingNotice from './StakingNotice.svelte'
     import SwitchNetwork from './SwitchNetwork.svelte'
     import RiskFunds from './RiskFunds.svelte'
     import Snapshot from './Snapshot.svelte'
@@ -96,6 +97,7 @@
         balanceFinder: BalanceFinder,
         snapshot: Snapshot,
         video: Video,
+        stakingNotice: StakingNotice,
     }
 
     const onkey = (e) => {

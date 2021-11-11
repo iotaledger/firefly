@@ -38,7 +38,7 @@
                         clip-rule={path.clipRule || ''}
                         stroke-width={path.strokeWidth || ''}
                         stroke-linecap={path.strokeLinecap || ''}
-                        stroke={path.strokeColor || ''}
+                        stroke={path.strokeColor || 'white-100'}
                         opacity={path.opacity || 1}
                         fill={path.fill || ''} />
                 {/each}

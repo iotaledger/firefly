@@ -58,7 +58,7 @@
                 <Icon icon="wallet" />
             </button>
             <button class="{$dashboardRoute === Tabs.Staking ? 'text-blue-500' : 'text-gray-500'}" on:click={openStaking}>
-                <Icon icon="staking" />
+                <Icon icon="tokens" />
             </button>
         </div>
         <span class="flex flex-col items-center">
