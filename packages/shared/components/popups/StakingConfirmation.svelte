@@ -20,10 +20,20 @@
     }
 </script>
 
-<Illustration illustration="staking-confirmation" classes="mt-2 mb-6" />
+<div class="flex flex-col">
+    <div class="absolute flex flex-col self-center text-center transform translate-y-28">
+        <Text type="p" classes="text-2xl font-extrabold">
+            {formatUnitBestMatch(stakingAmount)}
+        </Text>
+        <Text type="p" highlighted classes="text-lg">
+            You're about to stake
+        </Text>
+    </div>
+    <Illustration illustration="staking-confirmation" classes="mt-2 mb-6" />
+</div>
 <div class="flex flex-row mb-6 space-x-2">
     {#each Object.keys(StakingAirdrop) as airdrop}
-        <div class="p-2 text-center">
+        <div class="p-4 text-center border border-1 border-solid border-gray-300 rounded-xl">
             <div class="mb-2 flex flex-row justify-center">
                 <Text type="p" classes="font-extrabold text-lg">
                     {airdrop}
@@ -32,7 +42,7 @@
                     ({STAKING_AIRDROP_TOKENS[airdrop]})
                 </Text>
             </div>
-            <Text type="p" secondary classes="mb-2">
+            <Text type="p" secondary classes="mb-4">
                 Stake for 90 days and receive an estimated airdrop of:
             </Text>
             <Text type="p" classes="text-2xl">
