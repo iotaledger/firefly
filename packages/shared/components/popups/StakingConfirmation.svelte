@@ -2,11 +2,16 @@
     import { Button, Illustration, Text } from 'shared/components'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { calculateStakingAirdrop, STAKING_AIRDROP_TOKENS } from 'shared/lib/staking'
+    import { formatUnitBestMatch } from 'shared/lib/units'
     import { StakingAirdrop } from 'shared/lib/typings/staking'
     import { Locale } from 'shared/lib/typings/i18n'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
 
     export let locale: Locale
-    export let stakingAmount = 5.37
+    export let accountsToStake: WalletAccount[] = []
+
+    const stakingAmount =
+        accountsToStake.map((a) => a.rawIotaBalance).reduce((tot, cur) => tot + cur, 0)
 
     const handleStakeClick = () => {
         openPopup({
@@ -30,8 +35,8 @@
             <Text type="p" secondary classes="mb-2">
                 Stake for 90 days and receive an estimated airdrop of:
             </Text>
-            <Text type="p" classes="text-xl">
-                {calculateStakingAirdrop(stakingAmount, airdrop)}
+            <Text type="p" classes="text-2xl">
+                {formatUnitBestMatch(calculateStakingAirdrop(stakingAmount, airdrop))}
             </Text>
         </div>
     {/each}
