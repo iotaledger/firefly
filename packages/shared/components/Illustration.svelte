@@ -60,9 +60,17 @@
         },
 
         // Staking
+        'staking-confirmation': {
+            lightmode: 'staking/staking-confirmation.svg',
+            darkmode: 'staking/staking-confirmation.svg',
+        },
         'staking-info': {
             lightmode: 'staking/staking-info-bg.svg',
             darkmode: 'staking/staking-info-bg.svg',
+        },
+        'staking-notice': {
+            lightmode: 'staking/staking-notice.svg',
+            darkmode: 'staking/staking-notice.svg'
         },
         'assembly-airdrop-bg': {
             lightmode: 'staking/assembly-airdrop-bg.svg',

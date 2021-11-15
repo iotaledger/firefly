@@ -27,6 +27,9 @@
     import QR from './QR.svelte'
     import RemoveNode from './RemoveNode.svelte'
     import StakingNotice from './StakingNotice.svelte'
+    import StakingSelection from './StakingSelection.svelte'
+    import StakingConfirmation from './StakingConfirmation.svelte'
+    import StakingCompletion from './StakingCompletion.svelte'
     import SwitchNetwork from './SwitchNetwork.svelte'
     import RiskFunds from './RiskFunds.svelte'
     import Snapshot from './Snapshot.svelte'
@@ -98,6 +101,9 @@
         snapshot: Snapshot,
         video: Video,
         stakingNotice: StakingNotice,
+        stakingSelection: StakingSelection,
+        stakingConfirmation: StakingConfirmation,
+        stakingCompletion: StakingCompletion,
     }
 
     const onkey = (e) => {
