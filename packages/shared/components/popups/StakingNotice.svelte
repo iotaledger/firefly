@@ -14,7 +14,7 @@
 </script>
 
 <Illustration illustration="staking-notice" classes="mt-2 mb-6" />
-<Text type="h5" classes="mb-4">
+<Text type="h4" classes="mb-4">
     Staking commences December 15th
 </Text>
 <Text type="p" secondary classes="mb-6">

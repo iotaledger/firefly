@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store'
+import { get, writable } from 'svelte/store'
 import { StakingAirdrop, StakingEventStatus } from './typings/participation'
 import type { WalletAccount } from './typings/wallet'
 import { persistent } from './helpers'
@@ -16,6 +16,9 @@ export const STAKING_AIRDROP_TOKENS: { [key in StakingAirdrop]: string } = {
     [StakingAirdrop.Assembly]: 'ASM',
     [StakingAirdrop.Shimmer]: 'SHMR',
 }
+
+export const isAccountStaked = (accountId: string): boolean =>
+    get(stakedAccounts).find((a) => a.id === accountId) !== undefined
 
 export const estimateStakingAirdropReward = (amount: number, airdrop: StakingAirdrop): number => {
     switch (airdrop) {

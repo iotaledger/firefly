@@ -4,9 +4,8 @@
     import { Locale } from 'shared/lib/typings/i18n'
     import { get } from 'svelte/store'
     import { DUST_THRESHOLD, wallet } from 'shared/lib/wallet'
-    import { stakedAccounts } from 'shared/lib/participation'
+    import { isAccountStaked, stakedAccounts } from 'shared/lib/participation'
     import { StakingAction, StakingSelection } from '../../lib/typings/participation'
-    import { WalletAccount } from '../../lib/typings/wallet'
 
     export let locale: Locale
 
@@ -14,11 +13,10 @@
     let stakingSelections: StakingSelection[] =
         get($wallet.accounts).map((a) => ({ action: StakingAction.Nothing, account: a }))
 
+    $: canProceed = stakingSelections.filter((ss) => ss.action === StakingAction.Stake || ss.action === StakingAction.Unstake).length
+
     const canDoSelectionAction = (selection: StakingSelection): boolean =>
         selection.account.rawIotaBalance >= DUST_THRESHOLD
-
-    const isAccountStaked = (account: WalletAccount): boolean =>
-        $stakedAccounts.find((a) => a.id === account.id) !== undefined
 
     const shouldSelectionBeActive = (selection: StakingSelection): boolean => {
         switch (selection.action) {
@@ -37,7 +35,7 @@
         if (!canDoSelectionAction(selection)) return
 
         let { account, action } = selection
-        if (isAccountStaked(account)) {
+        if (isAccountStaked(account.id)) {
             action = action === StakingAction.Nothing ? StakingAction.Unstake : StakingAction.Nothing
         } else {
             action = action === StakingAction.Nothing ? StakingAction.Stake : StakingAction.Nothing
@@ -74,7 +72,7 @@
 
 <div class="flex flex-col space-y-5">
     {#if hasStakedAccounts}
-        <Text type="h5">
+        <Text type="h4">
             Manage your staked wallets
         </Text>
     {:else}
@@ -119,11 +117,11 @@
             {locale('actions.cancel')}
         </Button>
         {#if hasStakedAccounts}
-            <Button classes="w-1/2" onClick={handleSaveClick}>
+            <Button classes="w-1/2" disabled={!canProceed} onClick={handleSaveClick}>
                 Save
             </Button>
         {:else}
-            <Button classes="w-1/2" onClick={handleStakeClick}>
+            <Button classes="w-1/2" disabled={!canProceed} onClick={handleStakeClick}>
                 Stake
             </Button>
         {/if}

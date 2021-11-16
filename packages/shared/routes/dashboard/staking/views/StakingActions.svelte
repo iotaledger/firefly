@@ -2,12 +2,10 @@
     import { Button, StakingIndicator, Text } from 'shared/components'
     import { Locale } from 'shared/lib/typings/i18n'
     import { stakedAccounts, stakingEventStatus } from 'shared/lib/participation'
-    import { openPopup } from 'shared/lib/popup'
+    import { openPopup, popupState } from 'shared/lib/popup'
     import { StakingEventStatus } from 'shared/lib/typings/participation'
 
     export let locale: Locale
-
-    stakedAccounts.set([])
 
     $: hasStakedAccounts = $stakedAccounts.length !== 0
 
