@@ -2,63 +2,64 @@
     import { Button, Icon, Text } from 'shared/components'
     import { Locale } from 'shared/lib/typings/i18n'
     import { closePopup } from 'shared/lib/popup'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
     import { showAppNotification } from 'shared/lib/notifications'
     import { onMount } from 'svelte'
-    import { stakedAccounts } from '../../lib/staking'
+    import { StakingAction, StakingSelection } from '../../lib/typings/participation'
     import { asyncForEach, sleep } from '../../lib/utils'
+    import { stakedAccounts } from '../../lib/participation'
 
     export let locale: Locale
-    export let accountsToStake: WalletAccount[] = []
+    export let stakingSelections: StakingSelection[] = []
 
-    let accountBeingStaked: WalletAccount
-    let hasCompletedStaking: boolean = false
+    let currentSelection: StakingSelection
+    let hasCompletedSelectionActions: boolean = false
 
-    const isAccountStaked = (account: WalletAccount): boolean =>
-        $stakedAccounts.find((a) => a.id === account.id) !== undefined
-
-    const isAccountBeingStaked = (account: WalletAccount): boolean =>
-        accountBeingStaked?.id === account.id
-
-    const checkForAccountsToStake = (): void => {
-        if (accountsToStake.length === 0) {
+    const checkForStakingSelections = (): boolean => {
+        if (stakingSelections.length === 0) {
             showAppNotification({
                 type: 'error',
-                message: 'Unable to find wallets for staking.',
+                message: 'Unable to find accounts for staking.',
             })
-            closePopup(true)
+
+            return false
         }
+
+        return true
     }
 
-    const stakeAccounts = async (): Promise<void> => {
-        /**
-         * NOTE: This exists so that the view can be updated
-         * as progress is happening (since we're using an array,
-         * the only way to do this is actually re-assign the value).
-         */
-        const _reset = () => accountsToStake = accountsToStake
+    const resetSelections = (): void => {
+        stakingSelections = stakingSelections
+    }
 
-        await asyncForEach(accountsToStake, async (account, idx, arr) => {
-            accountBeingStaked = account
-            _reset()
+    const executeStakes = async (): Promise<void> => {
+        await asyncForEach(stakingSelections.filter((ss) => ss.action === StakingAction.Stake), async (selection: StakingSelection, idx, arr) => {
+            currentSelection = selection
+            resetSelections()
 
-            await sleep(2400)
+            await sleep(1500)
 
-            stakedAccounts.update((_stakedAccounts) => [..._stakedAccounts, account])
-            _reset()
-
-            accountBeingStaked = undefined
+            stakedAccounts.set([...$stakedAccounts, selection.account])
+            currentSelection = undefined
+            resetSelections()
         })
+    }
 
-        hasCompletedStaking = true
+    const executeUnstakes = async (): Promise<void> => {
+
+    }
+
+    const executeSelectionActions = async (): Promise<void> => {
+        await executeStakes()
+        await executeUnstakes()
     }
 
     onMount(async () => {
-        checkForAccountsToStake()
+        if (!checkForStakingSelections()) return
 
-        await stakeAccounts()
+        await executeSelectionActions()
     })
 </script>
+
 <div class="flex flex-col space-y-5">
     <Text type="h5">
         Staking wallets
@@ -69,7 +70,7 @@
         then you won’t get full staking rewards.
     </Text>
     <div class="staking flex flex-col scrollable-y">
-        {#each accountsToStake as account}
+        {#each stakingSelections as account}
             <div
                 class="w-full space-x-4 mb-4 flex flex-row px-4 py-3 rounded-xl border border-1 border-solid items-center justify-between border-gray-300 dark:border-gray-700"
             >
@@ -102,7 +103,7 @@
     </div>
     <div></div>
     <div class="flex flex-row space-x-1">
-        <Button classes="w-full" onClick={() => closePopup(true)} disabled={!hasCompletedStaking}>
+        <Button classes="w-full" onClick={() => closePopup(true)} disabled={!hasCompletedSelectionActions}>
             Done
         </Button>
     </div>

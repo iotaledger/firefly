@@ -1,17 +1,22 @@
 <script lang="typescript">
     import { Button, Illustration, Text } from 'shared/components'
     import { closePopup, openPopup } from 'shared/lib/popup'
-    import { calculateStakingAirdrop, STAKING_AIRDROP_TOKENS } from 'shared/lib/staking'
+    import { estimateStakingAirdropReward, STAKING_AIRDROP_TOKENS } from 'shared/lib/participation'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { StakingAirdrop } from 'shared/lib/typings/staking'
+    import {
+        StakingAction,
+        StakingAirdrop,
+        StakingSelection
+    } from 'shared/lib/typings/participation'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
 
     export let locale: Locale
-    export let accountsToStake: WalletAccount[] = []
+    export let stakingSelections: StakingSelection[] = []
 
-    const stakingAmount =
-        accountsToStake.map((a) => a.rawIotaBalance).reduce((tot, cur) => tot + cur, 0)
+    const stakingAmount = stakingSelections
+        .filter((ss) => ss.action === StakingAction.Stake)
+        .map((ss) => ss.account.rawIotaBalance)
+        .reduce((amt, cur) => amt + cur, 0)
 
     const handleStakeClick = () => {
         openPopup({
@@ -19,7 +24,7 @@
             hideClose: true,
             preventClose: true,
             props: {
-                accountsToStake,
+                stakingSelections,
             },
         }, true)
     }
@@ -51,7 +56,7 @@
                 Stake for 90 days and receive an estimated airdrop of:
             </Text>
             <Text type="p" classes="text-2xl">
-                {formatUnitBestMatch(calculateStakingAirdrop(stakingAmount, airdrop))}
+                {formatUnitBestMatch(estimateStakingAirdropReward(stakingAmount, airdrop))}
             </Text>
         </div>
     {/each}
