@@ -42,6 +42,6 @@
                 <li><Text type="p">{stakingInfoBullet}</Text></li>
             {/each}
         </ul>
-        <Link onClick={handleExternalLinkClick} classes="self-center">{locale('actions.seeHowItWorks')}></Link>
+        <Link onClick={handleExternalLinkClick} classes="self-center">{locale('actions.seeHowItWorks')} ></Link>
     </div>
 </div>
