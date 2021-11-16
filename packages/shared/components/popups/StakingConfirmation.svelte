@@ -16,7 +16,12 @@
     const handleStakeClick = () => {
         openPopup({
             type: 'stakingCompletion',
-        })
+            hideClose: true,
+            preventClose: true,
+            props: {
+                accountsToStake,
+            },
+        }, true)
     }
 </script>
 

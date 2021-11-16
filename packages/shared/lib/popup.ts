@@ -29,16 +29,17 @@ export const openPopup = ({
     preventClose = false,
     fullScreen = false,
     transition = undefined,
-}: Omit<PopupState, 'active'>): void => {
-    modifyPopupState({ active: true, type, hideClose, preventClose, fullScreen, transition, props })
-}
+}: Omit<PopupState, 'active'>, forceClose: boolean = false): void =>
+    modifyPopupState(
+        { active: true, type, hideClose, preventClose, fullScreen, transition, props },
+        forceClose,
+    )
 
-export const closePopup = (forceClose: boolean = false): void => {
+export const closePopup = (forceClose: boolean = false): void =>
     modifyPopupState(
         { active: false, type: null, hideClose: false, preventClose: false, fullScreen: false, props: null },
-        forceClose
+        forceClose,
     )
-}
 
 const modifyPopupState = (state: PopupState, forceClose: boolean = false): void => {
     /**

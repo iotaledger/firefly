@@ -11,6 +11,7 @@
     interface StakingAccount extends WalletAccount {
         willStake: boolean
     }
+
     let stakableAccounts: StakingAccount[] = get($wallet.accounts).map((a) => ({ ...a, willStake: false }))
 
     const canAccountBeStaked = (account: StakingAccount): boolean =>
@@ -31,7 +32,7 @@
             hideClose: true,
             props: {
                 accountsToStake: stakableAccounts.filter((a) => a.willStake),
-            }
+            },
         })
     }
 </script>
@@ -75,11 +76,6 @@
                     classes="justify-self-start"
                 />
             </div>
-            <button
-                on:click={() => handleStakeAccountToggle(account)}
-                class=""
-            >
-            </button>
         {/each}
     </div>
     <div></div>

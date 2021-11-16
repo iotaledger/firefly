@@ -234,3 +234,12 @@ export const migrateObjects = <T>(oldObj: T, newObj: T): T => {
  */
 export const generateRandomInteger = (beginning: number, end: number): number =>
     Math.floor(Math.random() * end + beginning)
+
+export const asyncForEach = async (array: unknown[], callback: any): Promise<void> => {
+    for (let idx = 0; idx < array.length; idx++) {
+        await callback(array[idx], idx, array)
+    }
+}
+
+export const sleep = (ms: number): Promise<number> =>
+    new Promise((resolve, reject) => setTimeout(resolve, ms))

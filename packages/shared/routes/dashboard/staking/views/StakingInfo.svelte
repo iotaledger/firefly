@@ -24,10 +24,10 @@
 
 <div class="flex flex-col space-y-6 w-full h-full bg-yellow-50">
     <div class="flex flex-col h-2/6">
-        <div class="absolute flex flex-col justify-center self-center h-1/6">
+        <div class="absolute flex flex-col justify-center self-center transform translate-y-10">
             <Text type="h5" classes="text-xl">{locale('views.staking.info.stakingIsLive')}</Text>
         </div>
-        <Illustration illustration="staking-info" classes="h-full transform -translate-y-5" />
+        <Illustration illustration="staking-info" />
     </div>
     <div class="1/6"></div>
     <div class="px-8 pb-6 h-3/6">
