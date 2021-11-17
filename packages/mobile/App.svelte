@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Route, Toggle, ToastContainer } from 'shared/components'
+    import { Popup, Route, Toggle, ToastContainer } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { goto } from 'shared/lib/helpers'
@@ -23,11 +23,11 @@
         Profile,
         Protect,
         Secure,
-        Settings,
         Setup,
         Splash,
         Welcome,
     } from 'shared/routes'
+    import { popupState } from 'shared/lib/popup'
     import { onMount } from 'svelte'
 
     mobile.set(true)
@@ -127,4 +127,15 @@
     </Route>
 
     <ToastContainer />
+
+    {#if $popupState.active}
+        <Popup
+            type={$popupState.type}
+            props={$popupState.props}
+            hideClose={$popupState.hideClose}
+            fullScreen={$popupState.fullScreen}
+            transition={$popupState.transition}
+            locale={$_}
+        />
+    {/if}
 {/if}

@@ -5,9 +5,9 @@
     import { openPopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute, walletSetupType } from 'shared/lib/router'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
     import { AccountRoutes, SetupType, WalletRoutes } from 'shared/lib/typings/routes'
-    import { AccountMessage } from 'shared/lib/typings/wallet'
+    import type { AccountMessage, WalletAccount } from 'shared/lib/typings/wallet'
     import {
         api,
         asyncSyncAccounts,
@@ -17,15 +17,12 @@
         isSyncing,
         selectedAccountId,
         selectedMessage,
-        WalletAccount,
     } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable, Writable } from 'svelte/store'
     import { get } from 'svelte/store'
 
     export let locale: Locale
-
-    let drawer: Drawer
 
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
     const transactions = getContext<Readable<AccountMessage[]>>('walletTransactions')
@@ -41,7 +38,6 @@
             console.error('Could not find source account')
         }
         accountRoute.set(AccountRoutes.Init)
-        if ($mobile) drawer.open()
     }
 
     function handleSyncAccountOptions() {
@@ -119,25 +115,27 @@
             {/if}
         </TransactionTabs>
     </div>
-    <Drawer bind:this={drawer} dimLength={200} opened={false}>
-        <!-- 👉 mockup data - replace by component route -->
-        <div class="p-5 overflow-y-scroll h-full scroll-secondary">
-            <Text type="h3">Transaction</Text>
-            <div class="mt-10">
-                <Text secondary>Reference</Text>
-                <Text>For the pizza</Text>
+    {#if $selectedMessage}
+        <Drawer dimLength={200}>
+            <!-- 👉 mockup data - replace by component route -->
+            <div class="p-5 overflow-y-scroll h-full scroll-secondary">
+                <Text type="h3">Transaction</Text>
+                <div class="mt-10">
+                    <Text secondary>Reference</Text>
+                    <Text>For the pizza</Text>
+                </div>
+                <div class="mt-10 pr-5">
+                    <Text secondary>Input Address</Text>
+                    <Text type="pre">iota1qq2hdmvm9k3z5uvq6atreclgy6gc98dpshj3nd872jgqyn3dstzdvkx9crx</Text>
+                </div>
+                <div class="mt-10">
+                    <Text secondary>Receive Address</Text>
+                    <Text type="pre">iota1qq2hdmvm9k3z5uvq6atreclgy6gc98dpshj3nd872jgqyn3dstzdvkx9crx</Text>
+                </div>
             </div>
-            <div class="mt-10 pr-5">
-                <Text secondary>Input Address</Text>
-                <Text type="pre">iota1qq2hdmvm9k3z5uvq6atreclgy6gc98dpshj3nd872jgqyn3dstzdvkx9crx</Text>
-            </div>
-            <div class="mt-10">
-                <Text secondary>Receive Address</Text>
-                <Text type="pre">iota1qq2hdmvm9k3z5uvq6atreclgy6gc98dpshj3nd872jgqyn3dstzdvkx9crx</Text>
-            </div>
-        </div>
-        <!-- end mockup data -->
-    </Drawer>
+            <!-- end mockup data -->
+        </Drawer>
+    {/if}
 {:else}
     <div data-label="latest-transactions" class="h-full pt-6 pb-8 px-8 flex-grow flex flex-col">
         <div class="w-full flex flex-row justify-between items-start">

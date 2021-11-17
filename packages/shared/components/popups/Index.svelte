@@ -1,6 +1,8 @@
 <script lang="typescript">
-    import { Icon } from 'shared/components'
+    import { Drawer, Icon } from 'shared/components'
+    import { mobile } from 'shared/lib/app'
     import { closePopup, popupState } from 'shared/lib/popup'
+    import type { Locale } from 'shared/lib/typings/i18n'
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
     import AddNode from './AddNode.svelte'
@@ -26,13 +28,12 @@
     import Password from './Password.svelte'
     import QR from './QR.svelte'
     import RemoveNode from './RemoveNode.svelte'
-    import SwitchNetwork from './SwitchNetwork.svelte'
     import RiskFunds from './RiskFunds.svelte'
     import Snapshot from './Snapshot.svelte'
+    import SwitchNetwork from './SwitchNetwork.svelte'
     import Transaction from './Transaction.svelte'
     import Version from './Version.svelte'
     import Video from './Video.svelte'
-    import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -108,9 +109,11 @@
     }
 
     const focusableElements = () =>
-        [...popupContent.querySelectorAll('a, button, input, textarea, select, details,[tabindex]:not([tabindex="-1"])')].filter(
-            (el) => !el.hasAttribute('disabled')
-        )
+        [
+            ...popupContent.querySelectorAll(
+                'a, button, input, textarea, select, details,[tabindex]:not([tabindex="-1"])'
+            ),
+        ].filter((el) => !el.hasAttribute('disabled'))
 
     const handleFocusFirst = (e) => {
         const elems = focusableElements()
@@ -157,22 +160,30 @@
 </style>
 
 <svelte:window on:keydown={onkey} />
-<popup
-    in:fade={{ duration: transition ? 100 : 0 }}
-    class={`flex items-center justify-center fixed top-0 left-0 w-screen p-6
-                h-full overflow-hidden z-10 ${fullScreen ? 'bg-white dark:bg-gray-900' : 'bg-gray-800 bg-opacity-40'}`}>
-    <div tabindex="0" on:focus={handleFocusFirst} />
-    <popup-content
-        bind:this={popupContent}
-        class={`${size} bg-white rounded-xl pt-6 px-8 pb-8 relative ${fullScreen ? 'full-screen dark:bg-gray-900' : 'dark:bg-gray-900'}`}>
-        {#if !hideClose}
-            <button
-                on:click={() => closePopup($popupState?.preventClose)}
-                class="absolute top-6 right-8 text-gray-800 dark:text-white focus:text-blue-500">
-                <Icon icon="close" />
-            </button>
-        {/if}
-        <svelte:component this={types[type]} {...props} {locale} />
-    </popup-content>
-    <div tabindex="0" on:focus={handleFocusLast} />
-</popup>
+{#if $mobile && !fullScreen}
+    <Drawer opened={true} preventClose={hideClose} on:close={() => closePopup($popupState?.preventClose)}>
+        <div bind:this={popupContent} class="p-8">
+            <svelte:component this={types[type]} {...props} {locale} />
+        </div>
+    </Drawer>
+{:else}
+    <popup
+        in:fade={{ duration: transition ? 100 : 0 }}
+        class={`flex items-center justify-center fixed top-0 left-0 w-screen p-6
+                    h-full overflow-hidden z-10 ${fullScreen ? 'bg-white dark:bg-gray-900' : 'bg-gray-800 bg-opacity-40'}`}>
+        <div tabindex="0" on:focus={handleFocusFirst} />
+        <popup-content
+            bind:this={popupContent}
+            class={`${size} bg-white rounded-xl pt-6 px-8 pb-8 relative ${fullScreen ? 'full-screen dark:bg-gray-900' : 'dark:bg-gray-900'}`}>
+            {#if !hideClose}
+                <button
+                    on:click={() => closePopup($popupState?.preventClose)}
+                    class="absolute top-6 right-8 text-gray-800 dark:text-white focus:text-blue-500">
+                    <Icon icon="close" />
+                </button>
+            {/if}
+            <svelte:component this={types[type]} {...props} {locale} />
+        </popup-content>
+        <div tabindex="0" on:focus={handleFocusLast} />
+    </popup>
+{/if}

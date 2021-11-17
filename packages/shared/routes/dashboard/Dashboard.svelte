@@ -268,11 +268,5 @@
 <Idle />
 <div class="flex flex-row w-full h-full">
     <Sidebar {locale} />
-    {#if $mobile}
-        {#each Object.values(tabs) as component}
-            <svelte:component this={component} {locale} on:next={routerNext} />
-        {/each}
-    {:else}
-        <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
-    {/if}
+    <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
 </div>

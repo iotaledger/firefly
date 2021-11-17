@@ -15,15 +15,7 @@
     export let locale: Locale
     export let handleClose
 
-    let drawer: Drawer
-
     const profileColor = 'blue' // TODO: each profile has a different color
-
-    $: if ($mobile && $dashboardRoute === Tabs.Settings) {
-        drawer?.open()
-    } else if ($mobile && $dashboardRoute === Tabs.Wallet) {
-        drawer?.close()
-    }
 
     /**
      * Scroll top each time a route changes
@@ -67,13 +59,7 @@
 </script>
 
 {#if $mobile}
-    <Drawer
-        fromRight={true}
-        dimLength={0}
-        opened={$dashboardRoute === Tabs.Settings}
-        fullScreen
-        classes="flex"
-        bind:this={drawer}>
+    <Drawer fromRight dimLength={0} fullScreen classes="flex">
         <div class="flex w-full h-full relative z-0 pt-20">
             <div
                 class="fixed top-0 cursor-pointer w-full px-8 py-3 flex items-centers justify-center bg-white dark:bg-gray-800"

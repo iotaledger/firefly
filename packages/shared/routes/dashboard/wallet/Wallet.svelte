@@ -550,10 +550,6 @@
         }
     }
 
-    $: if (mobile && drawer && $walletRoute === WalletRoutes.CreateAccount) {
-        drawer.open()
-    }
-
     onMount(() => {
         // If we are in settings when logged out the router reset
         // switches back to the wallet, but there is no longer
@@ -600,11 +596,7 @@
                     <WalletBalance {locale} />
                     <WalletActions {isGeneratingAddress} {onSend} {onInternalTransfer} {onGenerateAddress} {locale} />
                     {#if $walletRoute === WalletRoutes.CreateAccount}
-                        <Drawer
-                            dimLength={180}
-                            opened={true}
-                            bind:this={drawer}
-                            on:close={() => walletRoute.set(WalletRoutes.Init)}>
+                        <Drawer dimLength={180} on:close={() => walletRoute.set(WalletRoutes.Init)}>
                             <CreateAccount onCreate={onCreateAccount} {locale} />
                         </Drawer>
                     {/if}
