@@ -20,7 +20,7 @@
     <Text type="p" classes="mb-2" secondary>{locale('popups.missingBundle.body', { values: { value: balance } })}</Text>
     <Link onClick={() => Electron.openUrl('https://firefly.iota.org/faq#spent-addresses')}>{locale('popups.missingBundle.learnMore')}</Link>
 </div>
-<div class="flex flex-row justify-between w-full space-x-4 px-8">
+<div class="flex flex-row justify-between w-full space-x-4 md:px-8">
     <Button secondary classes="w-full" onClick={handleCancelClick}>{locale('actions.cancel')}</Button>
     <Button classes="w-full" onClick={onProceed}>{locale('popups.missingBundle.proceed')}</Button>
 </div>
