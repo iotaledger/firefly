@@ -71,6 +71,11 @@
     const calculateSelectionFunds = (selections: StakingSelection[]): string =>
         formatUnitBestMatch(selections.map((s) => s.account.rawIotaBalance).reduce((amt, cur) => amt + cur, 0))
 
+    const handleDoneClick = (): void => {
+
+        closePopup(true)
+    }
+
     onMount(async () => {
         if (!checkForStakingSelections()) return
 
@@ -172,7 +177,7 @@
     {/if}
     <div></div>
     <div class="flex flex-row space-x-1">
-        <Button classes="w-full" onClick={() => closePopup(true)} disabled={!hasCompletedSelectionActions}>
+        <Button classes="w-full" onClick={handleDoneClick} disabled={!hasCompletedSelectionActions}>
             Done
         </Button>
     </div>

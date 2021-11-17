@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { DashboardPane } from 'shared/components'
-    import { StakingAirdrop, StakingInfo, StakingActions } from './views'
+    import { StakingAirdrop, StakingHeader, StakingInfo, StakingActions } from './views'
     import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
@@ -12,7 +12,8 @@
     }
 </style>
 
-<div class="staking-wrapper w-full h-full flex flex-col p-10 flex-1 bg-gray-50 dark:bg-gray-900">
+<div class="staking-wrapper w-full h-full flex flex-col flex-nowrap p-10 flex-1 bg-gray-50 dark:bg-gray-900">
+    <StakingHeader {locale} />
     <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
         <div class="h-full flex flex-col space-y-3">
             <DashboardPane classes="w-full h-1/3">
