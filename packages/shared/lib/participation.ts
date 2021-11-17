@@ -14,7 +14,7 @@ export const stakedAccounts = persistent<WalletAccount[]>('stakedAccounts', [])
 
 export const STAKING_AIRDROP_TOKENS: { [key in StakingAirdrop]: string } = {
     [StakingAirdrop.Assembly]: 'ASM',
-    [StakingAirdrop.Shimmer]: 'SHMR',
+    [StakingAirdrop.Shimmer]: 'SMR',
 }
 
 export const isAccountStaked = (accountId: string): boolean =>

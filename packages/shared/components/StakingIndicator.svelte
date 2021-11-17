@@ -7,6 +7,7 @@
 
     export let locale: Locale
 
+    // TODO: Remove and let polling automatically handle event statuses
     stakingEventStatus.set(StakingEventStatus.Active)
 
     $: indicatorIcon = getIndicatorIcon($stakingEventStatus, $stakedAccounts.length > 0)

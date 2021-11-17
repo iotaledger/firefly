@@ -1,8 +1,8 @@
 import type { WalletAccount } from './wallet'
 
 export enum StakingAirdrop {
-    Assembly = 'Assembly',
-    Shimmer = 'Shimmer',
+    Assembly = 'assembly',
+    Shimmer = 'shimmer',
 }
 
 export enum StakingEventStatus {

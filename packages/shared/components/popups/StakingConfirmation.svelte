@@ -49,14 +49,14 @@
                     {airdrop}
                 </Text>
                 <Text type="p" classes="ml-1 text-lg">
-                    ({STAKING_AIRDROP_TOKENS[airdrop]})
+                    ({STAKING_AIRDROP_TOKENS[airdrop.toLowerCase()]})
                 </Text>
             </div>
             <Text type="p" secondary classes="mb-4">
                 Stake for 90 days and receive an estimated airdrop of:
             </Text>
             <Text type="p" classes="text-2xl">
-                {formatUnitBestMatch(estimateStakingAirdropReward(stakingAmount, airdrop))}
+                {formatUnitBestMatch(estimateStakingAirdropReward(stakingAmount, airdrop.toLowerCase()))}
             </Text>
         </div>
     {/each}

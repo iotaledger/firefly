@@ -6,7 +6,7 @@
 </script>
 
 <div class="flex flex-row items-center py-5">
-    <Text type="h5" classes="text-2xl mr-4">
+    <Text type="h5" classes="text-2xl mr-5">
         Staking
     </Text>
     <StakingIndicator />

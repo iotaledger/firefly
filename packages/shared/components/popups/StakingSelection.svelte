@@ -45,8 +45,6 @@
             ...ss,
             action: ss.account.id === account.id ? action : ss.action
         }))
-
-        console.log('SELECTION: ', stakingSelections.find((ss) => ss.account.id === account.id))
     }
 
     const handleActionClick = (popupType: string): void => {

@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { DashboardPane } from 'shared/components'
     import { StakingAirdrop, StakingHeader, StakingInfo, StakingActions } from './views'
+    import { StakingAirdrop as Airdrop } from 'shared/lib/typings/participation'
     import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
@@ -24,10 +25,10 @@
             </DashboardPane>
         </div>
         <DashboardPane classes="h-full">
-            <StakingAirdrop {locale} airdrop={'assembly'} />
+            <StakingAirdrop {locale} airdrop={Airdrop.Assembly} />
         </DashboardPane>
         <DashboardPane classes="h-full">
-            <StakingAirdrop {locale} airdrop={'shimmer'}/>
+            <StakingAirdrop {locale} airdrop={Airdrop.Shimmer}/>
         </DashboardPane>
     </div>
 </div>

@@ -13,6 +13,7 @@
 
     let hasStakedAccounts
     $: hasStakedAccounts = $stakedAccounts.length !== 0
+    $: unstakedAccounts = get($wallet.accounts).filter((a) => !$stakedAccounts.map((sa) => sa.id).includes(a.id))
 
     // TODO: Remove later once polling handles automatically updating the stake
     stakingEventStatus.set(StakingEventStatus.PreStake)
@@ -32,30 +33,19 @@
 </script>
 
 <div class="p-8 flex flex-col justify-between space-y-6 w-full h-full">
-    {#if hasStakedAccounts}
-        <div class="h-2/6">
-            <Text type="h5" classes="text-3xl">
-                {calculateBalanceFromAccounts($stakedAccounts)}
-            </Text>
-<!--            <BalanceSummary balanceRaw={sumRawAccountBalances($stakedAccounts)} />-->
-            <Text type="p" secondary>
-                Staked funds
-            </Text>
-        </div>
-        <Button classes="w-full" secondary onClick={handleStakeFundsClick}>
-            Manage stake
-        </Button>
-    {:else}
-        <div class="h-2/6">
-            <Text type="h5" classes="text-3xl">
-                {calculateBalanceFromAccounts(get($wallet.accounts))}
-            </Text>
-            <Text type="p" secondary>
-                Available for staking
-            </Text>
-        </div>
-        <Button classes="w-full" onClick={handleStakeFundsClick}>
-            Stake funds
-        </Button>
-    {/if}
+    <div class="h-2/6 flex flex-col justify-between">
+        <Text type="p" secondary classes="mb-6">
+            Staked funds
+        </Text>
+        <Text type="h5" classes="text-3xl">
+            {calculateBalanceFromAccounts($stakedAccounts)}
+        </Text>
+        <Text type="p" secondary>
+            {calculateBalanceFromAccounts(unstakedAccounts)}
+            Unstaked
+        </Text>
+    </div>
+    <Button classes="w-full" secondary={hasStakedAccounts} onClick={handleStakeFundsClick}>
+        {hasStakedAccounts ? 'Manage stake' : 'Stake funds'}
+    </Button>
 </div>

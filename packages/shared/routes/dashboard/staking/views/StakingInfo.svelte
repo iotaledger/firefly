@@ -6,7 +6,7 @@
     export let locale: Locale
 
     const handleExternalLinkClick = (): void => {
-        Electron.openUrl('https://firefly.iota.org/')
+        Electron.openUrl('https://firefly.iota.org')
     }
 </script>
 
@@ -29,7 +29,6 @@
         </div>
         <Illustration illustration="staking-info" />
     </div>
-    <div class="1/6"></div>
     <div class="px-8 pb-6 h-3/6">
         <Text type="h5" classes="mb-6 text-2xl">
             {locale('views.staking.info.title')}
@@ -42,6 +41,8 @@
                 <li><Text type="p">{stakingInfoBullet}</Text></li>
             {/each}
         </ul>
-        <Link onClick={handleExternalLinkClick} classes="self-center">{locale('actions.seeHowItWorks')} ></Link>
+        <Link onClick={handleExternalLinkClick} classes="self-center">
+            {locale('actions.seeHowItWorks')} >
+        </Link>
     </div>
 </div>
