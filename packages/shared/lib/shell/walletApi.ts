@@ -40,9 +40,17 @@ const eventsApiToResponseTypeMap = {
     onTransferProgress: ResponseTypes.TransferProgress,
     onLedgerAddressGeneration: ResponseTypes.LedgerAddressGeneration,
     onMigrationProgress: ResponseTypes.MigrationProgress,
+
+    // Staking
+    onStakingOverview: ResponseTypes.StakingOverview,
+    onStakedAccount: ResponseTypes.StakedAccount,
+    onUnstakedAccount: ResponseTypes.UnstakedAccount,
+    onAdditionalFundsStaked: ResponseTypes.AdditionalFundsStaked,
 }
 
 const apiToResponseTypeMap = {
+    ...eventsApiToResponseTypeMap,
+
     removeAccount: ResponseTypes.RemovedAccount,
     createAccount: ResponseTypes.CreatedAccount,
     getAccount: ResponseTypes.ReadAccount,
@@ -78,7 +86,6 @@ const apiToResponseTypeMap = {
     getNodeInfo: ResponseTypes.NodeInfo,
     mineBundle: ResponseTypes.MinedBundle,
     getLegacyAddressChecksum: ResponseTypes.LegacyAddressChecksum,
-    ...eventsApiToResponseTypeMap,
 }
 
 /**
