@@ -31,13 +31,8 @@
         updateProfile('settings.networkConfig', networkConfig)
     }
 
-    let canRemoveAllNodes
     $: canRemoveAllNodes = networkConfig.nodes.length !== 0
-
-    let canConfigureNodes
-    $: {
-        canConfigureNodes = isOfficialNetwork(networkConfig.network.type)
-    }
+    $: canConfigureNodes = isOfficialNetwork(networkConfig.network.type)
 
     let contextPosition = { x: 0, y: 0 }
     let nodeContextMenu: Node = undefined
