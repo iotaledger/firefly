@@ -13,7 +13,7 @@
 -->
 <script lang="typescript">
     import { appSettings } from 'shared/lib/appSettings'
-    import { createEventDispatcher, onMount } from 'svelte'
+    import { createEventDispatcher } from 'svelte'
     import { quintOut } from 'svelte/easing'
     import { tweened } from 'svelte/motion'
     import { fly } from 'svelte/transition'
@@ -29,7 +29,7 @@
     $: darkModeEnabled = $appSettings.darkMode
     $: dimOpacity = getScale(fromRight ? $coords.x : $coords.y, 1000)
 
-    let viewportLength = fromRight ? window.innerWidth : window.innerHeight
+    const viewportLength = fromRight ? window.innerWidth : window.innerHeight
 
     const coords = tweened(
         {
@@ -39,7 +39,8 @@
         { duration: 0 }
     )
 
-    function slidable(node: HTMLElement): { destroy(): void } {
+    function slidable(node: HTMLElement, use: boolean = true): { destroy(): void } {
+        if (!use) return
         let x: number
         let y: number
         let init: number
@@ -124,7 +125,7 @@
         )
     }
 
-    export function close(): void {
+    function close(): void {
         if (!preventClose) {
             dispatch('close')
         }
@@ -182,7 +183,7 @@
 <drawer class="absolute top-0 z-30">
     <slide-zone
         class="fixed h-screen w-screen"
-        use:slidable
+        use:slidable={!preventClose}
         on:slideMove={handleSlideMove}
         on:slideEnd={handleSlideEnd}
         on:tap={close}>
