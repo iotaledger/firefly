@@ -28,7 +28,7 @@
 
 <style type="text/scss">
     .log {
-        max-height: 58vh;
+        max-height: 50vh;
         @screen md {
             max-height: 30vh;
         }
