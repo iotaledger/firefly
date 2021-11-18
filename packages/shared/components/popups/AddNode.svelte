@@ -150,7 +150,7 @@
         <Password classes="mt-3" bind:value={optNodeAuth.jwt} placeholder={locale('popups.node.optionalJwt')} disabled={isBusy} />
         <Checkbox label={locale('popups.node.setAsPrimaryNode')} bind:checked={node.isPrimary} disabled={isBusy} classes="mt-4 mb-8" />
     </form>
-    <div class="flex flex-row justify-between space-x-4 w-full px-8 ">
+    <div class="flex flex-row justify-between space-x-4 w-full md:px-8 ">
         <Button secondary classes="w-1/2" onClick={() => closePopup()} disabled={isBusy}>
             {locale('actions.cancel')}
         </Button>

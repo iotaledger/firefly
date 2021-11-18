@@ -21,7 +21,7 @@
 <div class="w-full h-full mb-7">
     <Text>{locale(`popups.node.remove${removeAll ? 'All' : ''}Confirmation`)}</Text>
 </div>
-<div class="flex flex-row justify-between space-x-4 w-full px-8 ">
+<div class="flex flex-row justify-between space-x-4 w-full md:px-8 ">
     <Button secondary classes="w-1/2" onClick={() => closePopup()}>{locale('actions.no')}</Button>
     <Button classes="w-1/2" onClick={() => removeCustomNode()}>{locale('actions.yes')}</Button>
 </div>
