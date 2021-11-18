@@ -96,21 +96,8 @@ dependencies = [
  "pin-project-lite",
  "tokio",
  "tokio-rustls",
- "tungstenite 0.13.0",
+ "tungstenite",
  "webpki-roots 0.21.1",
-]
-
-[[package]]
-name = "async-tungstenite"
-version = "0.16.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a0d06e9a20f1c0d64b6067ef6aa9fdf59e194ecde93575591fb4c78063692324"
-dependencies = [
- "futures-io",
- "futures-util",
- "log",
- "pin-project-lite",
- "tungstenite 0.16.0",
 ]
 
 [[package]]
@@ -1341,15 +1328,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "instant"
-version = "0.1.12"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7a5bbe824c507c5da5956355e86a746d82e0e1464f65d862cc5e71da70e94b2c"
-dependencies = [
- "cfg-if 1.0.0",
-]
-
-[[package]]
 name = "iota-bundle-miner"
 version = "0.1.0-alpha.0"
 source = "git+https://github.com/iotaledger/iota.rs?rev=8d6e152103048cfefd15c69b956156fae15a9643#8d6e152103048cfefd15c69b956156fae15a9643"
@@ -1796,15 +1774,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7fb9b38af92608140b86b693604b9ffcc5824240a484d1ecd4795bacb2fe88f3"
 
 [[package]]
-name = "lock_api"
-version = "0.4.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "712a4d093c9976e24e7dbca41db895dabcbac38eb5f4045393d17a95bdfb1109"
-dependencies = [
- "scopeguard",
-]
-
-[[package]]
 name = "log"
 version = "0.4.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2103,31 +2072,6 @@ dependencies = [
  "libc",
  "pkg-config",
  "vcpkg",
-]
-
-[[package]]
-name = "parking_lot"
-version = "0.11.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7d17b78036a60663b797adeaee46f5c9dfebb86948d1255007a1d6be0271ff99"
-dependencies = [
- "instant",
- "lock_api",
- "parking_lot_core",
-]
-
-[[package]]
-name = "parking_lot_core"
-version = "0.8.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d76e8e1493bcac0d2766c42737f34458f1c8c50c0d23bcb24ea953affb273216"
-dependencies = [
- "cfg-if 1.0.0",
- "instant",
- "libc",
- "redox_syscall",
- "smallvec",
- "winapi",
 ]
 
 [[package]]
@@ -2573,7 +2517,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e63ee9fd315db8880bf3fd3c20684dee03ca42cdd59b7d5cfdd4378f100a2aa0"
 dependencies = [
  "async-channel",
- "async-tungstenite 0.13.1",
+ "async-tungstenite",
  "bytes",
  "http",
  "log",
@@ -2870,15 +2814,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7fdf1b9db47230893d76faad238fd6097fd6d6a9245cd7a4d90dbd639536bbd2"
 
 [[package]]
-name = "signal-hook-registry"
-version = "1.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e51e73328dc4ac0c7ccbda3a494dfa03df1de2f46018127f60c693f2648455b0"
-dependencies = [
- "libc",
-]
-
-[[package]]
 name = "signature"
 version = "1.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3146,10 +3081,7 @@ dependencies = [
  "memchr",
  "mio",
  "num_cpus",
- "once_cell",
- "parking_lot",
  "pin-project-lite",
- "signal-hook-registry",
  "tokio-macros",
  "winapi",
 ]
@@ -3263,25 +3195,6 @@ dependencies = [
  "utf-8",
  "webpki 0.21.4",
  "webpki-roots 0.21.1",
-]
-
-[[package]]
-name = "tungstenite"
-version = "0.16.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6ad3713a14ae247f22a728a0456a545df14acf3867f905adff84be99e23b3ad1"
-dependencies = [
- "base64",
- "byteorder",
- "bytes",
- "http",
- "httparse",
- "log",
- "rand 0.8.4",
- "sha-1",
- "thiserror",
- "url",
- "utf-8",
 ]
 
 [[package]]
@@ -3433,7 +3346,7 @@ dependencies = [
 name = "wallet-actor-system"
 version = "0.1.0"
 dependencies = [
- "iota-client 1.1.0",
+ "bee-common",
  "iota-wallet",
  "log",
  "once_cell",
@@ -3621,11 +3534,11 @@ dependencies = [
 
 [[package]]
 name = "ws_stream_tungstenite"
-version = "0.6.2"
+version = "0.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "731baf455859d711228d7131b9359ff958431eead2f3ee36c16ed4e647a8ad9a"
+checksum = "34c786fc3d0a792f8a6e7a69f3b85afa1cf7b2560bbd434d7d5c32a580e153c0"
 dependencies = [
- "async-tungstenite 0.16.0",
+ "async-tungstenite",
  "async_io_stream",
  "bitflags",
  "futures-core",
@@ -3636,7 +3549,7 @@ dependencies = [
  "pharos",
  "rustc_version",
  "tokio",
- "tungstenite 0.16.0",
+ "tungstenite",
 ]
 
 [[package]]
