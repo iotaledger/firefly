@@ -62,7 +62,7 @@
 
 
 {#if $stakingEventStatus !== StakingEventStatus.Ended}
-    <div class="p-4 flex flex-row justify-between items-center rounded-2xl bg-blue-100">
+    <div class="p-3 flex flex-row justify-between items-center rounded-2xl bg-blue-100">
         <Icon icon={indicatorIcon} classes="fill-current text-blue-500" />
         <Text type="p" classes="mx-3">
             {indicatorText}
