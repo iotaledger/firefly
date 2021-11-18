@@ -27,6 +27,6 @@
         {locale('actions.cancel')}
     </Button>
     <Button classes="w-1/2" onClick={handleContinueClick}>
-        Continue anyway
+        Ok, I understand
     </Button>
 </div>

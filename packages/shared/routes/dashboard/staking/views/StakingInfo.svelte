@@ -29,7 +29,7 @@
         </div>
         <Illustration illustration="staking-info" />
     </div>
-    <div class="px-8 pb-6 h-3/6">
+    <div class="px-8 pb-8 h-3/6">
         <Text type="h5" classes="mb-6 text-2xl">
             {locale('views.staking.info.title')}
         </Text>

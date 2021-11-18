@@ -27,12 +27,12 @@
     }
 </script>
 
-<div class="flex flex-col space-y-6 w-full h-full bg-{airdrop}-bg">
-    <div class="h-2/6">
+<div class="flex flex-col space-y-12 w-full h-full bg-{airdrop}-bg">
+    <div class="h-4/12">
         <Illustration illustration="{airdrop}-airdrop-bg" />
     </div>
-    <div class="h-1/6"></div>
-    <div class="px-8 h-3/6">
+    <div class="h-2/12"></div>
+    <div class="px-8 h-6/12">
         <Text type="h5" classes="mb-6 text-2xl text-{isAssembly() ? 'black' : 'white'}">
             {locale(`views.staking.airdrops.${airdrop}.name`)}
         </Text>

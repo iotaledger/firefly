@@ -32,6 +32,10 @@ export const STAKING_AIRDROP_TOKENS: { [key in StakingAirdrop]: string } = {
 export const isAccountStaked = (accountId: string): boolean =>
     get(stakedAccounts).find((a) => a.id === accountId) !== undefined
 
+export const isAccountPartiallyStaked = (accountId: string): boolean => {
+    return true
+}
+
 export const estimateStakingAirdropReward = (amount: number, airdrop: StakingAirdrop): number => {
     switch (airdrop) {
         case StakingAirdrop.Assembly:
