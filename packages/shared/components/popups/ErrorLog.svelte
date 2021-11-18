@@ -26,16 +26,19 @@
     }
 </script>
 
-<style>
-    .history {
-        max-height: 30vh;
+<style type="text/scss">
+    .log {
+        max-height: 58vh;
+        @screen md {
+            max-height: 30vh;
+        }
     }
 </style>
 
 <div class="mb-5">
     <Text type="h4">{locale('popups.errorLog.title')}</Text>
 </div>
-<div class="history overflow-y-auto">
+<div class="log overflow-y-auto">
     {#if $errorLog.length > 0}
         {#each $errorLog as error}
             <div class="mb-7">
