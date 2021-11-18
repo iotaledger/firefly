@@ -21,7 +21,7 @@
         { component: DeleteProfile, childRoute: SecuritySettings.DeleteProfile },
     ]
 
-    let props = {
+    const props = {
         [SecuritySettings.ExportStronghold]: { exportStronghold },
         [SecuritySettings.ChangePassword]: { exportStronghold },
     }

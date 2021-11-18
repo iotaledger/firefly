@@ -2,8 +2,6 @@
     import { Button, Text } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import { navigateToNewIndexMigration } from 'shared/lib/ledger'
-
-    export let id
 </script>
 
 <Text type="h4" classes="mb-3">{localize('views.settings.migrateLedgerIndex.title')}</Text>
