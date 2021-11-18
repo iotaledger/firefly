@@ -126,3 +126,10 @@ export enum HelpAndInfo {
     Discord = 'discord',
     ReportAnIssue = 'reportAnIssue',
 }
+
+export enum ExternalRoute {
+    Documentation = 'https://chrysalis.docs.iota.org/',
+    Discord = 'https://discord.iota.org',
+    FAQ = 'https://firefly.iota.org/faq',
+    IssueReport = 'https://github.com/iotaledger/firefly/issues',
+}

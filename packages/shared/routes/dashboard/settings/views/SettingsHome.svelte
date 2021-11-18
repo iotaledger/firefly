@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { SettingsMenu, Text } from 'shared/components'
     import { loggedIn, mobile } from 'shared/lib/app'
+    import { openUrl } from 'shared/lib/device'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import { Locale } from 'shared/lib/typings/i18n'
@@ -8,6 +9,7 @@
     import {
         AdvancedSettings,
         AdvancedSettingsNoProfile,
+        ExternalRoute,
         GeneralSettings,
         GeneralSettingsNoProfile,
         HelpAndInfo,
@@ -28,6 +30,37 @@
     $: if (!$isLedgerProfile) {
         delete advancedSettings.MigrateLedgerIndex
     }
+
+    function onSettingClick(
+        route: SettingsRoutes,
+        childRoute:
+            | SecuritySettings
+            | AdvancedSettings
+            | GeneralSettings
+            | GeneralSettingsNoProfile
+            | AdvancedSettingsNoProfile
+            | HelpAndInfo
+    ) {
+        if (route === SettingsRoutes.HelpAndInfo && $mobile) {
+            switch (childRoute) {
+                case HelpAndInfo.Documentation:
+                    openUrl(ExternalRoute.Documentation)
+                    break
+                case HelpAndInfo.Discord:
+                    openUrl(ExternalRoute.Discord)
+                    break
+                case HelpAndInfo.FAQ:
+                    openUrl(ExternalRoute.FAQ)
+                    break
+                case HelpAndInfo.ReportAnIssue:
+                    openUrl(ExternalRoute.FAQ)
+                    break
+            }
+        } else {
+            settingsRoute.set(route)
+            settingsChildRoute.set(childRoute)
+        }
+    }
 </script>
 
 <div class="flex flex-col flex-1 md:flex-initial pb-10 md:pb-0 md:h-full md:w-full">
@@ -41,10 +74,7 @@
             activeSettings={$loggedIn ? GeneralSettings : GeneralSettingsNoProfile}
             title={locale('views.settings.generalSettings.title')}
             description=""
-            onClick={(setting) => {
-                settingsRoute.set(SettingsRoutes.GeneralSettings)
-                settingsChildRoute.set(setting)
-            }}
+            onClick={(setting) => onSettingClick(SettingsRoutes.GeneralSettings, setting)}
             {locale} />
         <SettingsMenu
             icons={SettingsIcons}
@@ -52,10 +82,7 @@
             activeSettings={$loggedIn ? SecuritySettings : undefined}
             title={locale('views.settings.security.title')}
             description=""
-            onClick={(setting) => {
-                settingsRoute.set(SettingsRoutes.Security)
-                settingsChildRoute.set(setting)
-            }}
+            onClick={(setting) => onSettingClick(SettingsRoutes.Security, setting)}
             {locale} />
         <SettingsMenu
             icons={SettingsIcons}
@@ -63,10 +90,7 @@
             activeSettings={$loggedIn ? advancedSettings : AdvancedSettingsNoProfile}
             title={locale('views.settings.advancedSettings.title')}
             description=""
-            onClick={(setting) => {
-                settingsRoute.set(SettingsRoutes.AdvancedSettings)
-                settingsChildRoute.set(setting)
-            }}
+            onClick={(setting) => onSettingClick(SettingsRoutes.AdvancedSettings, setting)}
             {locale} />
         <SettingsMenu
             icons={SettingsIcons}
@@ -74,10 +98,7 @@
             activeSettings={HelpAndInfo}
             title={locale('views.settings.helpAndInfo.title')}
             description=""
-            onClick={(setting) => {
-                settingsRoute.set(SettingsRoutes.HelpAndInfo)
-                settingsChildRoute.set(setting)
-            }}
+            onClick={(setting) => onSettingClick(SettingsRoutes.HelpAndInfo, setting)}
             {locale} />
     </div>
 </div>

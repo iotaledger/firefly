@@ -2,9 +2,10 @@
     import { Button, Text } from 'shared/components'
     import { openUrl } from 'shared/lib/device'
     import { localize } from 'shared/lib/i18n'
+    import { ExternalRoute } from 'shared/lib/typings/routes'
 
     const handleClick = () => {
-        openUrl('https://discord.iota.org')
+        openUrl(ExternalRoute.Discord)
     }
 </script>
 

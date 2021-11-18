@@ -86,6 +86,7 @@
     }
 </script>
 
+<!-- TODO: improve UX for mobile, 3 step screen -->
 <form on:submit={changePincode} id="pincode-change-form">
     <Text type="h4" classes="mb-3">{localize('views.settings.changePincode.title')}</Text>
     <Text type="p" secondary classes="mb-5">{localize('views.settings.changePincode.description')}</Text>
