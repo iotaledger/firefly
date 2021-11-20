@@ -7,17 +7,10 @@ export enum StakingAirdrop {
     Shimmer = 'shimmer',
 }
 
-export type StakingAirdropRewards = { [key in StakingAirdrop]: number }
-
 export enum StakingEventStatus {
     PreStake = 'prestake',
     Active = 'active',
     Ended = 'ended',
-}
-
-export type Participation = {
-    eventId: string;
-    answers: string[];
 }
 
 export enum ParticipationAction {
@@ -26,13 +19,13 @@ export enum ParticipationAction {
     Vote = 'vote',
 }
 
-export type EventStatus = {
+export type ParticipationEventStatus = {
     milestoneIndex: number;
     status: string;
     checksum: string;
 }
 
-export type EventInformation = {
+export type ParticipationEventInformation = {
     milestoneIndexCommence: number;
     milestoneIndexStart: number;
     milestoneIndexEnd: number;
@@ -41,8 +34,8 @@ export type EventInformation = {
 
 export type ParticipationEvent = {
     eventId: string;
-    information: EventInformation;
-    status: EventStatus
+    information: ParticipationEventInformation;
+    status: ParticipationEventStatus
 }
 
 export interface ParticipateResponsePayload {
@@ -50,7 +43,12 @@ export interface ParticipateResponsePayload {
     messages: Message[]
 }
 
-export type StakingAccountOverview = {
+export type Participation = {
+    eventId: string;
+    answers: string[];
+}
+
+export type AccountParticipationOverview = {
     accountIndex: string
     assemblyRewards: number
     assemblyUnstakedFunds: number
@@ -58,19 +56,13 @@ export type StakingAccountOverview = {
     shimmerRewards: number
     shimmerStakedFunds: number
     shimmerUnstakedFunds: number
-    participation: Participation[]
+    participations: Participation[]
 }
 
+// TODO: Change wallet.rs to return array directly instead of wrapped one.
+export type ParticipationOverview = AccountParticipationOverview[]
 export type ParticipationOverviewResponse = {
-    accounts: StakingAccountOverview[]
-}
-
-// TODO: Should it be ParticipationOverview for consistency?
-export type StakingOverview = StakingAccountOverview[]
-
-export type StakedAccountPayload = {
-    accountId: string
-    messages: Message[]
+    accounts: AccountParticipationOverview[]
 }
 
 /**

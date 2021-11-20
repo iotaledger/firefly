@@ -5,13 +5,16 @@
     import { StakingAirdrop as Airdrop } from 'shared/lib/typings/participation'
     import { Locale } from 'shared/lib/typings/i18n'
 
-    import { getParticipationEvents, getParticipationOverview } from 'shared/lib/participation'
+    import {
+        getParticipationEvents,
+        pollParticipationOverview
+    } from 'shared/lib/participation'
 
     export let locale: Locale
 
     onMount(async () => {
-        await getParticipationOverview()
         await getParticipationEvents()
+        await pollParticipationOverview()
     })
 </script>
 

@@ -6,7 +6,7 @@ import type { Message } from './message'
 import type { NodeInfo } from './node'
 import type { MigrationBundle, MigrationData, SendMigrationBundleResponse, MigrationAddress } from './migration'
 import type { StrongholdStatus } from './wallet'
-import type { StakedAccountPayload, StakingOverview } from './participation'
+import type { ParticipateResponsePayload, ParticipationOverviewResponse } from './participation'
 
 export interface Actor {
     destroy(): void
@@ -148,10 +148,10 @@ export type LegacyAddressChecksumResponse = Response<ResponseTypes.LegacyAddress
 /**
  * Staking responses
  */
-export type StakingOverviewResponse = Response<ResponseTypes.StakingOverview, StakingOverview>
-export type StakedAccountResponse = Response<ResponseTypes.StakedAccount, StakedAccountPayload>
-export type UnstakedAccountResponse = Response<ResponseTypes.UnstakedAccount, StakedAccountPayload>
-export type AdditionalFundsStakedResponse = Response<ResponseTypes.AdditionalFundsStaked, StakedAccountPayload>
+export type StakingOverviewResponse = Response<ResponseTypes.StakingOverview, ParticipationOverviewResponse>
+export type StakedAccountResponse = Response<ResponseTypes.StakedAccount, ParticipateResponsePayload>
+export type UnstakedAccountResponse = Response<ResponseTypes.UnstakedAccount, ParticipateResponsePayload>
+export type AdditionalFundsStakedResponse = Response<ResponseTypes.AdditionalFundsStaked, ParticipateResponsePayload>
 
 export type MessageResponse =
     | RemovedAccountResponse

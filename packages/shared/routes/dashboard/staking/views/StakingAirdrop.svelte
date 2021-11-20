@@ -2,14 +2,13 @@
     import { HR, Illustration, Link, Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { STAKING_AIRDROP_TOKENS } from '../../../../lib/participation'
-    import { StakingAirdrop } from '../../../../lib/typings/participation'
-
-    import { 
+    import { STAKING_AIRDROP_TOKENS } from 'shared/lib/participation'
+    import { StakingAirdrop } from 'shared/lib/typings/participation'
+    import {
         assemblyStakingRemainingDays,
-        shimmerStakingRemainingDays, 
+        shimmerStakingRemainingDays,
         assemblyRewards,
-        shimmerRewards 
+        shimmerRewards
     } from 'shared/lib/participation'
 
     export let locale: Locale
@@ -53,15 +52,23 @@
         <div class="flex flex-row space-x-2">
             <div class="flex flex-col w-1/2">
                 <div>
-                    <Text type="p" classes="font-bold text-2xl inline text-{isAssembly() ? 'black' : 'white'}">{isAssembly() ? `${$assemblyStakingRemainingDays} days` : `${$shimmerStakingRemainingDays} days`}</Text>
-                    <Text type="p" secondary classes="text-lg inline">{locale('general.days')}</Text>
+                    <Text type="p" classes="font-bold text-2xl inline text-{isAssembly() ? 'black' : 'white'}">
+                        {isAssembly() ? `${$assemblyStakingRemainingDays}` : `${$shimmerStakingRemainingDays}`}
+                    </Text>
+                    <Text type="p" secondary classes="text-lg inline">
+                        {locale('general.days')}
+                    </Text>
                 </div>
                 <Text type="p" secondary>{locale('views.staking.airdrops.remaining')}</Text>
             </div>
             <div class="flex flex-col w-1/2">
                 <div>
-                    <Text type="p" classes="font-bold text-2xl inline text-{isAssembly() ? 'black' : 'white'}">{isAssembly() ? $assemblyRewards : $shimmerRewards}</Text>
-                    <Text type="p" secondary classes="text-lg inline">{STAKING_AIRDROP_TOKENS[airdrop]}</Text>
+                    <Text type="p" classes="font-bold text-2xl inline text-{isAssembly() ? 'black' : 'white'}">
+                        {isAssembly() ? $assemblyRewards : $shimmerRewards}
+                    </Text>
+                    <Text type="p" secondary classes="text-lg inline">
+                        {STAKING_AIRDROP_TOKENS[airdrop]}
+                    </Text>
                 </div>
                 <Text type="p" secondary>{locale('views.staking.airdrops.collectedRewards')}</Text>
             </div>

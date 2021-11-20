@@ -1,20 +1,18 @@
-import { derived, get, writable } from 'svelte/store'
+import { derived, get, Readable, writable } from 'svelte/store'
 import {
     ParticipateResponsePayload,
     Participation,
     ParticipationEvent,
+    ParticipationOverview,
     ParticipationOverviewResponse,
-    StakingAirdrop,
-    StakingAirdropRewards,
-    StakingEventStatus,
-    StakingOverview
+    StakingAirdrop, StakingEventStatus,
 } from './typings/participation'
 import type { WalletAccount } from './typings/wallet'
 import type { Event, } from './typings/events'
 import { persistent } from './helpers'
 import { api } from './wallet'
 import { showAppNotification } from './notifications'
-import { participation } from './typings'
+import { MILLISECONDS_PER_SECOND } from './time'
 
 /** Assembly event ID */
 const ASSEMBLY_EVENT_ID = 'c4f23236b3ce22f9fe22583176813618b304bbfcfd24da68cbddf66196b0d8fd';
@@ -32,32 +30,38 @@ const STAKING_PARTICIPATIONS: Participation[] = [{
     answers: []
 }];
 
-/** Overview / Statistics about participation. See #StakingAccountOverview for more details. */
-export const participationOverview = writable<StakingOverview>([])
+//==============================================================================
 
+/**
+ * The overview / statistics about participation. See #AccountParticipationOverview for more details.
+ */
+export const participationOverview = writable<ParticipationOverview>([])
+
+/**
+ * The specific participation events available.
+ */
 export const participationEvents = writable<ParticipationEvent[]>([])
 
-/** Shimmer staking remaining days */
-export const shimmerStakingRemainingDays = writable<number>(0)
+// TODO: Derive this value later / make this better
+export const stakingEventStatus = writable<StakingEventStatus>(StakingEventStatus.PreStake)
 
-/** Assembly staking remaining days */
-export const assemblyStakingRemainingDays = writable<number>(0)
+/**
+ * The amount of funds that are currently staked.
+ */
+export const stakedAmount: Readable<number> = derived(
+    participationOverview,
+    (overview) =>
+        overview.reduce((total, accountOverview) => total + accountOverview?.shimmerStakedFunds, 0)
+)
 
-/** Total staked amount for all accounts */
-export const stakedAmount = derived(participationOverview, (overview) => overview.reduce((acc, accountOverview) => {
-    // Since firefly stakes both assembly & shimmer as a whole, just pick one
-    acc += accountOverview.shimmerStakedFunds;
-
-    return acc;
-}, 0))
-
-/** Total unstaked amount for all accounts */
-export const unstakedAmount = derived(participationOverview, (overview) => overview.reduce((acc, accountOverview) => {
-    // Since firefly stakes both assembly & shimmer as a whole, just pick one
-    acc += accountOverview.shimmerUnstakedFunds;
-
-    return acc;
-}, 0))
+/**
+ * The amount of funds that are currently unstaked.
+ */
+export const unstakedAmount: Readable<number> = derived(
+    participationOverview,
+    (overview) =>
+        overview.reduce((total, accountOverview) => total + accountOverview?.shimmerUnstakedFunds, 0)
+)
 
 /** Total shimmer rewards for all accounts */
 export const shimmerRewards = derived(participationOverview, (overview) => overview.reduce((acc, accountOverview) => acc += accountOverview.shimmerRewards, 0))
@@ -65,18 +69,17 @@ export const shimmerRewards = derived(participationOverview, (overview) => overv
 /** Total assembly rewards for all accounts */
 export const assemblyRewards = derived(participationOverview, (overview) => overview.reduce((acc, accountOverview) => acc += accountOverview.assemblyRewards, 0))
 
+// TODO: Write functions for calculating / formatting remaining these times.
+// TODO: Change time from days to milliseconds (more exact and flexible).
 /**
- * The store for if a user currently has partially staked funds on a staked
- * account or not. This is updated regularly by the polling in `wallet.rs`.
+ * The remaining time for Shimmer staking.
  */
-export const hasPartiallyStakedFunds = writable<boolean>(true)
+export const shimmerStakingRemainingDays = writable<number>(0)
 
 /**
- * The store for the current status of the staking events. This is the source of truth
- * across the app determining whether the staking is enabled, what UI to show, i.e. anything
- * dependent on the state of the events. This is updated regularly by the polling in `wallet.rs`.
+ * The remaining time for Assembly staking.
  */
-export const stakingEventStatus = writable<StakingEventStatus>(null)
+export const assemblyStakingRemainingDays = writable<number>(0)
 
 /**
  * The store for accounts that are currently staked. This is NOT to hold accounts
@@ -89,6 +92,17 @@ export const stakedAccounts = persistent<WalletAccount[]>('stakedAccounts', [])
 export const STAKING_AIRDROP_TOKENS: { [key in StakingAirdrop]: string } = {
     [StakingAirdrop.Assembly]: 'ASM',
     [StakingAirdrop.Shimmer]: 'SMR',
+}
+
+let pollInterval
+
+export async function pollParticipationOverview(): Promise<void> {
+    await getParticipationOverview()
+    /* eslint-disable @typescript-eslint/no-misused-promises */
+    pollInterval = setInterval(
+        async () => await getParticipationOverview(),
+        MILLISECONDS_PER_SECOND * 10
+    )
 }
 
 /**
@@ -169,7 +183,7 @@ export function getParticipationOverview(): Promise<void> {
     return new Promise<void>((resolve, reject) => {
         api.getParticipationOverview({
             onSuccess(overview: Event<ParticipationOverviewResponse>) {
-                participationOverview.set(overview.payload.accounts)
+                participationOverview.set(overview?.payload.accounts)
 
                 resolve()
             },
@@ -233,8 +247,9 @@ export function participate(account: WalletAccount): Promise<void> {
             STAKING_PARTICIPATIONS,
             {
                 onSuccess(response: Event<ParticipateResponsePayload>) {
-                    console.log('PARTICIPATED: ', response.payload)
-                    stakedAccounts.update((_stakedAccounts) => [..._stakedAccounts, account])
+                    stakedAccounts.update((_stakedAccounts) =>
+                        [..._stakedAccounts, account]
+                    )
 
                     resolve()
                 },

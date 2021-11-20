@@ -1,25 +1,19 @@
 <script lang="typescript">
-    import { BalanceSummary, Button, Icon, Text } from 'shared/components'
+    import { Button, Icon, Text } from 'shared/components'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { hasPartiallyStakedFunds, stakedAccounts, stakingEventStatus, stakedAmount, unstakedAmount  } from 'shared/lib/participation'
+    import { stakedAmount, unstakedAmount } from 'shared/lib/participation'
     import { openPopup } from 'shared/lib/popup'
-    import { StakingEventStatus } from 'shared/lib/typings/participation'
-    import { wallet } from '../../../../lib/wallet'
-    import { get } from 'svelte/store'
-    import { formatUnitBestMatch } from '../../../../lib/units'
-    import { WalletAccount } from '../../../../lib/typings/wallet'
+    import { formatUnitBestMatch } from 'shared/lib/units'
 
     export let locale: Locale
 
-    let hasStaked
-    $: hasStaked = $stakedAmount > 0
-
-    // TODO: Remove later once polling handles automatically updating the stake
-    stakingEventStatus.set(StakingEventStatus.PreStake)
+    let isStaked
+    $: isStaked = $stakedAmount > 0
 
     const handleStakeFundsClick = () => {
-        const isPreStake = $stakingEventStatus === StakingEventStatus.PreStake
-        const type = !hasStaked && isPreStake ? 'stakingNotice' : 'stakingManager'
+        // TODO: Calculate this value instead...
+        const isPreStake = true
+        const type = !isStaked && isPreStake ? 'stakingNotice' : 'stakingManager'
         const preventClose = type === 'stakingManager'
 
         openPopup({ type, hideClose: true, preventClose })
@@ -32,7 +26,7 @@
             <Text type="p" secondary classes="mb-6">
                 Staked funds
             </Text>
-            {#if $hasPartiallyStakedFunds && hasStaked}
+            {#if false}
                 <Icon icon="exclamation" classes="fill-current text-yellow-600" />
             {/if}
         </div>
@@ -46,10 +40,10 @@
     </div>
     <Button
         classes="w-full"
-        caution={hasStaked && $hasPartiallyStakedFunds}
-        secondary={hasStaked && !$hasPartiallyStakedFunds}
+        caution={isStaked}
+        secondary={isStaked}
         onClick={handleStakeFundsClick}
     >
-        {hasStaked ? 'Manage stake' : 'Stake funds'}
+        {isStaked ? 'Manage stake' : 'Stake funds'}
     </Button>
 </div>
