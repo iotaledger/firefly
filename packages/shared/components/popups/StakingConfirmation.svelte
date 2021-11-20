@@ -1,21 +1,12 @@
 <script lang="typescript">
     import { Button, Illustration, Text } from 'shared/components'
-    import { closePopup, openPopup } from 'shared/lib/popup'
     import { estimateStakingAirdropReward, STAKING_AIRDROP_TOKENS } from 'shared/lib/participation'
-    import { formatUnitBestMatch } from 'shared/lib/units'
-    import {
-        ParticipationAction,
-        StakingAction,
-        StakingAirdrop,
-        StakingSelection
-    } from 'shared/lib/typings/participation'
+    import { openPopup } from 'shared/lib/popup'
+    import { isSoftwareProfile } from 'shared/lib/profile'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { WalletAccount } from '../../lib/typings/wallet'
-    import { onMount } from 'svelte'
-    import { isSoftwareProfile } from '../../lib/profile'
-    import { api } from '../../lib/wallet'
-    import { checkStronghold } from '../../lib/stronghold'
-    import { promptUserToConnectLedger } from '../../lib/ledger'
+    import { ParticipationAction, StakingAirdrop } from 'shared/lib/typings/participation'
+    import { checkStronghold } from 'shared/lib/stronghold'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
 
     export let locale: Locale
     export let accountToStake: WalletAccount
@@ -47,15 +38,6 @@
             console.log('TODO: Handle staking flow for Ledger')
         }
     }
-
-    onMount(() => {
-        // TODO: Properly handle this later with a notification
-        // AND closing the popup. The user should likely never see
-        // this error message.
-        if (!accountToStake) {
-            console.error('ERROR: No account to stake')
-        }
-    })
 </script>
 
 <div class="mb-2 w-full flex flex-row justify-between items-center">
@@ -92,10 +74,10 @@
                 </Text>
             </div>
             <Text type="p" secondary classes="mb-4">
-                Stake for 90 days and receive an estimated airdrop of:
+                Stake for the remaining time and receive an estimated airdrop of:
             </Text>
             <Text type="p" classes="text-2xl">
-                TODO
+                {estimateStakingAirdropReward(airdrop.toLowerCase(), accountToStake?.rawIotaBalance)}
             </Text>
         </div>
     {/each}

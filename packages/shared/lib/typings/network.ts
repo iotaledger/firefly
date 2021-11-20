@@ -44,6 +44,7 @@ export type NetworkStatus = {
     referencedRate?: number
     health?: number
     healthText?: NetworkStatusHealthText
+    currentMilestone?: number
 }
 
 export enum NetworkStatusHealthText {

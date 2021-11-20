@@ -1,12 +1,11 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { get } from 'svelte/store'
     import { DashboardPane } from 'shared/components'
     import { StakingAirdrop, StakingHeader, StakingInfo, StakingSummary } from './views'
     import { StakingAirdrop as Airdrop } from 'shared/lib/typings/participation'
     import { Locale } from 'shared/lib/typings/i18n'
 
-    import { getParticipationOverview, getParticipationEvents, participateWithRemainingFunds } from 'shared/lib/participation'
+    import { getParticipationEvents, getParticipationOverview } from 'shared/lib/participation'
 
     export let locale: Locale
 

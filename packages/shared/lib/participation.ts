@@ -1,29 +1,28 @@
-import { get, writable, derived } from 'svelte/store'
+import { derived, get, writable } from 'svelte/store'
 import {
-    StakingAirdrop,
-    StakingEventStatus,
-    StakingOverview,
-    StakingOverviewResponse,
+    ParticipateResponsePayload,
+    Participation,
     ParticipationEvent,
-    ParticipateResponsePayload, Participation
+    ParticipationOverviewResponse,
+    StakingAirdrop,
+    StakingAirdropRewards,
+    StakingEventStatus,
+    StakingOverview
 } from './typings/participation'
 import type { WalletAccount } from './typings/wallet'
-import type {
-    Event,
-} from './typings/events'
+import type { Event, } from './typings/events'
 import { persistent } from './helpers'
 import { api } from './wallet'
-import { SECONDS_PER_DAY } from './time'
-import { getAccount } from './typings/account'
 import { showAppNotification } from './notifications'
-
-/** Shimmer event ID. */
-const SHIMMER_EVENT_ID = '415267d375c85531aec13e6471c04a01622dfcc9b285a009629dd2c9231da517';
+import { participation } from './typings'
 
 /** Assembly event ID */
 const ASSEMBLY_EVENT_ID = 'c4f23236b3ce22f9fe22583176813618b304bbfcfd24da68cbddf66196b0d8fd';
 
-const STAKING_EVENT_IDS = [SHIMMER_EVENT_ID, ASSEMBLY_EVENT_ID];
+/** Shimmer event ID. */
+const SHIMMER_EVENT_ID = '415267d375c85531aec13e6471c04a01622dfcc9b285a009629dd2c9231da517';
+
+const STAKING_EVENT_IDS: string[] = [ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID]
 
 const STAKING_PARTICIPATIONS: Participation[] = [{
     eventId: SHIMMER_EVENT_ID,
@@ -35,6 +34,8 @@ const STAKING_PARTICIPATIONS: Participation[] = [{
 
 /** Overview / Statistics about participation. See #StakingAccountOverview for more details. */
 export const participationOverview = writable<StakingOverview>([])
+
+export const participationEvents = writable<ParticipationEvent[]>([])
 
 /** Shimmer staking remaining days */
 export const shimmerStakingRemainingDays = writable<number>(0)
@@ -90,12 +91,75 @@ export const STAKING_AIRDROP_TOKENS: { [key in StakingAirdrop]: string } = {
     [StakingAirdrop.Shimmer]: 'SMR',
 }
 
-
+/**
+ * Determines whether an account is currently being staked or not.
+ *
+ * @method isAccountStaked
+ *
+ * @param {string} accountId
+ *
+ * @returns {boolean}
+ */
 export const isAccountStaked = (accountId: string): boolean =>
     get(stakedAccounts).find((sa) => sa.id === accountId) !== undefined
 
+const estimateAssemblyReward = (amount: number, currentMilestone: number, endMilestone: number): number => {
+    const multiplier = 1.0
+    const amountMiotas = amount / 1_000_000
+    const numMilestones = endMilestone - currentMilestone
+
+    return multiplier * amountMiotas * numMilestones + 1
+}
+
+const estimateShimmerReward = (amount: number, currentMilestone: number, endMilestone: number): number => {
+    const multiplier = 1.0
+    const amountMiotas = amount / 1_000_000
+    const numMilestones = endMilestone - currentMilestone
+
+    return multiplier * amountMiotas * numMilestones
+}
+
+const getStakingEventFromAirdrop = (airdrop: StakingAirdrop): ParticipationEvent => {
+    let stakingEventId
+    switch (airdrop) {
+        case StakingAirdrop.Assembly:
+            stakingEventId = ASSEMBLY_EVENT_ID
+            break
+        case StakingAirdrop.Shimmer:
+            stakingEventId = SHIMMER_EVENT_ID
+            break
+        default:
+            break
+    }
+
+    return get(participationEvents).find((pe) => pe.eventId === stakingEventId)
+}
+
+export const estimateStakingAirdropReward = (airdrop: StakingAirdrop, amountToStake: number): number => {
+    const stakingEvent = getStakingEventFromAirdrop(airdrop)
+    if (!stakingEvent) {
+        showAppNotification({
+            type: 'error',
+            message: 'Unable to find staking event.',
+        })
+    }
+
+    switch (airdrop) {
+        case StakingAirdrop.Assembly:
+            return estimateAssemblyReward(
+                amountToStake, stakingEvent?.status?.milestoneIndex, stakingEvent?.information?.milestoneIndexEnd
+            )
+        case StakingAirdrop.Shimmer:
+            return estimateShimmerReward(
+                amountToStake, stakingEvent?.status?.milestoneIndex, stakingEvent?.information?.milestoneIndexEnd
+            )
+        default:
+            return 0
+    }
+}
+
 /**
- * Gets participation overview
+ * Gets participation overview.
  *
  * @method getParticipationOverview
  *
@@ -104,7 +168,7 @@ export const isAccountStaked = (accountId: string): boolean =>
 export function getParticipationOverview(): Promise<void> {
     return new Promise<void>((resolve, reject) => {
         api.getParticipationOverview({
-            onSuccess(overview: Event<StakingOverviewResponse>) {
+            onSuccess(overview: Event<ParticipationOverviewResponse>) {
                 participationOverview.set(overview.payload.accounts)
 
                 resolve()
@@ -120,30 +184,19 @@ export function getParticipationOverview(): Promise<void> {
 }
 
 /**
- * Gets participation event details
+ * Gets participation event details.
  *
  * @method getParticipationEvents
  *
- * @returns {Promise<void>}
+ * @returns {Promise<ParticipationEvent[]>}
  */
-export function getParticipationEvents(): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
+export function getParticipationEvents(): Promise<ParticipationEvent[]> {
+    return new Promise<ParticipationEvent[]>((resolve, reject) => {
         api.getParticipationEvents({
-            onSuccess(participationEvents: Event<ParticipationEvent[]>) {
-                const events = participationEvents.payload.filter(
-                    (participationEvent) => participationEvent.eventId === SHIMMER_EVENT_ID || participationEvent.eventId === ASSEMBLY_EVENT_ID)
+            onSuccess(response: Event<ParticipationEvent[]>) {
+                participationEvents.set(response?.payload)
 
-                events.forEach((event) => {
-                    const duration = event.information.milestoneIndexEnd - event.status.milestoneIndex;
-
-                    const days = Math.ceil(duration * 10 / SECONDS_PER_DAY)
-
-                    shimmerStakingRemainingDays.set(days)
-                    assemblyStakingRemainingDays.set(days)
-
-                })
-
-                resolve()
+                resolve(response?.payload)
             },
             onError(error) {
                 // TODO: What to do in case of error?
@@ -156,9 +209,11 @@ export function getParticipationEvents(): Promise<void> {
 }
 
 /**
- * Participate in events
+ * Participate in events.
  *
  * @method participate
+ *
+ * @param {WalletAccount} account
  *
  * @returns {Promise<void>}
  */
@@ -194,9 +249,11 @@ export function participate(account: WalletAccount): Promise<void> {
 }
 
 /**
- * Stop paticipating in events
+ * Stop paticipating in events.
  *
  * @method stopParticipating
+ *
+ * @param {WalletAccount} account
  *
  * @returns {Promise<void>}
  */
@@ -234,9 +291,11 @@ export function participate(account: WalletAccount): Promise<void> {
 }
 
 /**
- * Participate with remaining funds in events
+ * Participate with remaining funds in events.
  *
  * @method participateWithRemainingFunds
+ *
+ * @param {string} accountId
  *
  * @returns {Promise<void>}
  */

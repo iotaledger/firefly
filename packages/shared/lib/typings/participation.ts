@@ -7,6 +7,8 @@ export enum StakingAirdrop {
     Shimmer = 'shimmer',
 }
 
+export type StakingAirdropRewards = { [key in StakingAirdrop]: number }
+
 export enum StakingEventStatus {
     PreStake = 'prestake',
     Active = 'active',
@@ -59,7 +61,7 @@ export type StakingAccountOverview = {
     participation: Participation[]
 }
 
-export type StakingOverviewResponse = {
+export type ParticipationOverviewResponse = {
     accounts: StakingAccountOverview[]
 }
 

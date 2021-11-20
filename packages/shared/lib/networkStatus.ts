@@ -115,6 +115,7 @@ export const updateNetworkStatus = async (accountId: string, node: Node): Promis
             referencedRate: response.nodeinfo.referencedRate,
             health,
             healthText,
+            currentMilestone: response.nodeinfo.confirmedMilestoneIndex,
         })
     } else {
         networkStatus.set({
@@ -122,6 +123,7 @@ export const updateNetworkStatus = async (accountId: string, node: Node): Promis
             referencedRate: 0,
             health: 0,
             healthText: NetworkStatusHealthText.Down,
+            currentMilestone: -1
         })
     }
 }
