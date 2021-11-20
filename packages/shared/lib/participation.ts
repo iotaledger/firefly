@@ -14,6 +14,8 @@ import type {
 import { persistent } from './helpers'
 import { api } from './wallet'
 import { SECONDS_PER_DAY } from './time'
+import { getAccount } from './typings/account'
+import { showAppNotification } from './notifications'
 
 /** Shimmer event ID. */
 const SHIMMER_EVENT_ID = '415267d375c85531aec13e6471c04a01622dfcc9b285a009629dd2c9231da517';
@@ -88,29 +90,9 @@ export const STAKING_AIRDROP_TOKENS: { [key in StakingAirdrop]: string } = {
     [StakingAirdrop.Shimmer]: 'SMR',
 }
 
+
 export const isAccountStaked = (accountId: string): boolean =>
-    get(stakedAccounts).find((a) => a.id === accountId) !== undefined
-
-export const isAccountPartiallyStaked = (accountId: string): boolean => {
-    return true
-}
-
-export const estimateStakingAirdropReward = (amount: number, airdrop: StakingAirdrop): number => {
-    switch (airdrop) {
-        case StakingAirdrop.Assembly:
-            return amount * 10
-        case StakingAirdrop.Shimmer:
-            return amount * 20
-        default:
-            // TODO: Handle invalid cases better than setting to 0
-            return 0
-    }
-}
-
-// OLD
-export const queryStakingEventStatus = (): StakingEventStatus => {
-    return StakingEventStatus.PreStake
-}
+    get(stakedAccounts).find((sa) => sa.id === accountId) !== undefined
 
 /**
  * Gets participation overview
@@ -123,13 +105,15 @@ export function getParticipationOverview(): Promise<void> {
     return new Promise<void>((resolve, reject) => {
         api.getParticipationOverview({
             onSuccess(overview: Event<StakingOverviewResponse>) {
-                participationOverview.set(overview.payload.accounts);
+                participationOverview.set(overview.payload.accounts)
+
                 resolve()
             },
             onError(error) {
                 // TODO: What to do in case of error? Probably throw a notification here.
-                console.error(error);
-                reject(error);
+                console.error(error)
+
+                reject(error)
             }
         })
     })
@@ -154,16 +138,18 @@ export function getParticipationEvents(): Promise<void> {
 
                     const days = Math.ceil(duration * 10 / SECONDS_PER_DAY)
 
-                    shimmerStakingRemainingDays.set(days);
+                    shimmerStakingRemainingDays.set(days)
                     assemblyStakingRemainingDays.set(days)
 
                 })
+
                 resolve()
             },
             onError(error) {
                 // TODO: What to do in case of error?
-                console.error(error);
-                reject(error);
+                console.error(error)
+
+                reject(error)
             }
         })
     })
@@ -176,19 +162,32 @@ export function getParticipationEvents(): Promise<void> {
  *
  * @returns {Promise<void>}
  */
-export function participate(accountId: string): Promise<void> {
+export function participate(account: WalletAccount): Promise<void> {
+    if (!account) {
+        showAppNotification({
+            type: 'error',
+            message: 'Unable to use this account data.'
+        })
+
+        return
+    }
+
     return new Promise<void>((resolve, reject) => {
         api.participate(
-            accountId,
+            account?.id,
             STAKING_PARTICIPATIONS,
             {
                 onSuccess(response: Event<ParticipateResponsePayload>) {
+                    console.log('PARTICIPATED: ', response.payload)
+                    stakedAccounts.update((_stakedAccounts) => [..._stakedAccounts, account])
+
                     resolve()
                 },
                 onError(error) {
                     // TODO: What to do in case of error?
-                    console.error(error);
-                    reject(error);
+                    console.error(error)
+
+                    reject(error)
                 }
             })
     })
@@ -201,19 +200,34 @@ export function participate(accountId: string): Promise<void> {
  *
  * @returns {Promise<void>}
  */
- export function stopParticipating(accountId: string): Promise<void> {
+ export function stopParticipating(account: WalletAccount): Promise<void> {
+     if (!account) {
+         showAppNotification({
+             type: 'error',
+             message: 'Unable to use this account data.'
+         })
+
+         return
+     }
+
     return new Promise<void>((resolve, reject) => {
         api.stopParticipating(
-            accountId,
+            account?.id,
             STAKING_EVENT_IDS,
             {
                 onSuccess(response: Event<ParticipateResponsePayload>) {
+                    stakedAccounts.update((_stakedAccounts) =>
+                        _stakedAccounts.filter((sa) => sa.id !== account?.id)
+                    )
+
                     resolve()
                 },
                 onError(error) {
                     // TODO: What to do in case of error?
-                    console.error(error);
-                    reject(error);
+                    console.error(error)
+
+                    reject(error)
+
                 }
             })
     })

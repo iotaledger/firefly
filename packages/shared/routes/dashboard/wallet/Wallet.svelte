@@ -57,6 +57,7 @@
     import { onMount, setContext } from 'svelte'
     import { derived, Readable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
+    import { checkStronghold } from '../../../lib/stronghold'
 
     export let locale: Locale
 
@@ -457,18 +458,7 @@
         }
 
         if ($isSoftwareProfile) {
-            api.getStrongholdStatus({
-                onSuccess(strongholdStatusResponse) {
-                    if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                        openPopup({ type: 'password', props: { onSuccess: _send } })
-                    } else {
-                        _send()
-                    }
-                },
-                onError(error) {
-                    console.error(error)
-                },
-            })
+            checkStronghold(_send)
         } else {
             _send()
         }

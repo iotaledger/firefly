@@ -13,20 +13,15 @@ export enum StakingEventStatus {
     Ended = 'ended',
 }
 
-export enum StakingAction {
-    Stake = 'stake',
-    Unstake = 'unstake',
-    Nothing = 'nothing',
-}
-
-export interface StakingSelection {
-    account: WalletAccount
-    action: StakingAction
-}
-
 export type Participation = {
     eventId: string;
     answers: string[];
+}
+
+export enum ParticipationAction {
+    Stake = 'stake',
+    Unstake = 'unstake',
+    Vote = 'vote',
 }
 
 export type EventStatus = {

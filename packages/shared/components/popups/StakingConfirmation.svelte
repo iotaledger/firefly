@@ -4,6 +4,7 @@
     import { estimateStakingAirdropReward, STAKING_AIRDROP_TOKENS } from 'shared/lib/participation'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import {
+        ParticipationAction,
         StakingAction,
         StakingAirdrop,
         StakingSelection
@@ -11,6 +12,10 @@
     import { Locale } from 'shared/lib/typings/i18n'
     import { WalletAccount } from '../../lib/typings/wallet'
     import { onMount } from 'svelte'
+    import { isSoftwareProfile } from '../../lib/profile'
+    import { api } from '../../lib/wallet'
+    import { checkStronghold } from '../../lib/stronghold'
+    import { promptUserToConnectLedger } from '../../lib/ledger'
 
     export let locale: Locale
     export let accountToStake: WalletAccount
@@ -23,15 +28,24 @@
         }, true)
     }
 
-    const handleStakeClick = (): void => {
-        openPopup({
-            type: 'stakingManager',
-            hideClose: true,
-            preventClose: true,
-            props: {
-                accountToStake
-            },
-        }, true)
+    const handleConfirmClick = (): void => {
+        const _onConfirm = (): void => {
+            openPopup({
+                type: 'stakingManager',
+                hideClose: true,
+                preventClose: true,
+                props: {
+                    accountToAction: accountToStake,
+                    participationAction: ParticipationAction.Stake,
+                },
+            }, true)
+        }
+
+        if ($isSoftwareProfile) {
+            checkStronghold(_onConfirm)
+        } else {
+            console.log('TODO: Handle staking flow for Ledger')
+        }
     }
 
     onMount(() => {
@@ -45,7 +59,7 @@
 </script>
 
 <div class="mb-2 w-full flex flex-row justify-between items-center">
-    <div on:click={handleBackClick}>
+    <div on:click={handleBackClick} class="cursor-pointer">
         <Text type="p" classes="text-xl font-extrabold">
             ←
         </Text>
@@ -87,7 +101,7 @@
     {/each}
 </div>
 <div class="flex flex-row space-x-1">
-    <Button classes="w-full" onClick={handleStakeClick}>
+    <Button classes="w-full" onClick={handleConfirmClick}>
         Confirm
     </Button>
 </div>
