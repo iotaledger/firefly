@@ -46,8 +46,7 @@ export const stakedAmount = derived(participationOverview, (overview) => overvie
     acc += accountOverview.shimmerStakedFunds;
 
     return acc;
-}, 0)
-)
+}, 0))
 
 /** Total unstaked amount for all accounts */
 export const unstakedAmount = derived(participationOverview, (overview) => overview.reduce((acc, accountOverview) => {

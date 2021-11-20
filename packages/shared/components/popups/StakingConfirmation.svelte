@@ -9,34 +9,59 @@
         StakingSelection
     } from 'shared/lib/typings/participation'
     import { Locale } from 'shared/lib/typings/i18n'
+    import { WalletAccount } from '../../lib/typings/wallet'
+    import { onMount } from 'svelte'
 
     export let locale: Locale
-    export let stakingSelections: StakingSelection[] = []
+    export let accountToStake: WalletAccount
 
-    const stakingAmount = stakingSelections
-        .filter((ss) => ss.action === StakingAction.Stake)
-        .map((ss) => ss.account.rawIotaBalance)
-        .reduce((amt, cur) => amt + cur, 0)
-
-    const handleStakeClick = () => {
+    const handleBackClick = (): void => {
         openPopup({
-            type: 'stakingCompletion',
+            type: 'stakingManager',
+            hideClose: true,
+            preventClose: true,
+        }, true)
+    }
+
+    const handleStakeClick = (): void => {
+        openPopup({
+            type: 'stakingManager',
             hideClose: true,
             preventClose: true,
             props: {
-                stakingSelections,
+                accountToStake
             },
         }, true)
     }
+
+    onMount(() => {
+        // TODO: Properly handle this later with a notification
+        // AND closing the popup. The user should likely never see
+        // this error message.
+        if (!accountToStake) {
+            console.error('ERROR: No account to stake')
+        }
+    })
 </script>
 
+<div class="mb-2 w-full flex flex-row justify-between items-center">
+    <div on:click={handleBackClick}>
+        <Text type="p" classes="text-xl font-extrabold">
+            ←
+        </Text>
+    </div>
+    <Text type="p" classes="font-extrabold">
+        {accountToStake.alias}
+    </Text>
+    <Text> </Text>
+</div>
 <div class="flex flex-col">
     <div class="absolute flex flex-col self-center text-center transform translate-y-28">
-        <Text type="p" classes="text-2xl font-extrabold">
-            {formatUnitBestMatch(stakingAmount)}
-        </Text>
         <Text type="p" highlighted classes="text-lg">
             You're about to stake
+        </Text>
+        <Text type="p" classes="text-2xl font-extrabold">
+            {accountToStake.balance}
         </Text>
     </div>
     <Illustration illustration="staking-confirmation" classes="mt-2 mb-6" />
@@ -56,16 +81,13 @@
                 Stake for 90 days and receive an estimated airdrop of:
             </Text>
             <Text type="p" classes="text-2xl">
-                {formatUnitBestMatch(estimateStakingAirdropReward(stakingAmount, airdrop.toLowerCase()))}
+                TODO
             </Text>
         </div>
     {/each}
 </div>
-<div class="flex flex-row space-x-2">
-    <Button secondary classes="w-1/2" onClick={closePopup}>
-        {locale('actions.cancel')}
-    </Button>
-    <Button classes="w-1/2" onClick={handleStakeClick}>
-        Stake
+<div class="flex flex-row space-x-1">
+    <Button classes="w-full" onClick={handleStakeClick}>
+        Confirm
     </Button>
 </div>

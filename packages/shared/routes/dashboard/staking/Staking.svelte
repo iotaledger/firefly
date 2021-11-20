@@ -2,7 +2,7 @@
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { DashboardPane } from 'shared/components'
-    import { StakingAirdrop, StakingHeader, StakingInfo, StakingActions } from './views'
+    import { StakingAirdrop, StakingHeader, StakingInfo, StakingSummary } from './views'
     import { StakingAirdrop as Airdrop } from 'shared/lib/typings/participation'
     import { Locale } from 'shared/lib/typings/i18n'
 
@@ -13,8 +13,6 @@
     onMount(async () => {
         await getParticipationOverview()
         await getParticipationEvents()
-
-        await participateWithRemainingFunds('wallet-account://5617300f2f424d8ac236eef8d3163a8b95f275ce5c519a6434e12e987137a295')
     })
 </script>
 
@@ -29,7 +27,7 @@
     <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
         <div class="h-full flex flex-col space-y-3">
             <DashboardPane classes="w-full h-1/3">
-                <StakingActions {locale} />
+                <StakingSummary {locale} />
             </DashboardPane>
             <DashboardPane classes="w-full h-2/3">
                 <StakingInfo {locale} />

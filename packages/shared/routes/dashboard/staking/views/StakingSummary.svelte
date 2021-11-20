@@ -11,24 +11,18 @@
 
     export let locale: Locale
 
-    let hasStakedAccounts
-    $: hasStakedAccounts = $stakedAccounts.length !== 0
-    $: unstakedAccounts = get($wallet.accounts).filter((a) => !$stakedAccounts.map((sa) => sa.id).includes(a.id))
+    let hasStaked
+    $: hasStaked = $stakedAmount > 0
 
     // TODO: Remove later once polling handles automatically updating the stake
     stakingEventStatus.set(StakingEventStatus.PreStake)
 
-    const sumRawAccountBalances = (accounts: WalletAccount[]): number =>
-        accounts.map((a) => a.rawIotaBalance).reduce((amt, cur) => amt + cur, 0)
-
-    const calculateBalanceFromAccounts = (accounts: WalletAccount[]): string =>
-        formatUnitBestMatch(accounts.map((a) => a.rawIotaBalance).reduce((amt, cur) => amt + cur, 0))
-
     const handleStakeFundsClick = () => {
         const isPreStake = $stakingEventStatus === StakingEventStatus.PreStake
-        const type = !hasStakedAccounts && isPreStake ? 'stakingNotice' : 'stakingSelection'
+        const type = !hasStaked && isPreStake ? 'stakingNotice' : 'stakingManager'
+        const preventClose = type === 'stakingManager'
 
-        openPopup({ type, hideClose: true })
+        openPopup({ type, hideClose: true, preventClose })
     }
 </script>
 
@@ -38,7 +32,7 @@
             <Text type="p" secondary classes="mb-6">
                 Staked funds
             </Text>
-            {#if $hasPartiallyStakedFunds && hasStakedAccounts}
+            {#if $hasPartiallyStakedFunds && hasStaked}
                 <Icon icon="exclamation" classes="fill-current text-yellow-600" />
             {/if}
         </div>
@@ -52,10 +46,10 @@
     </div>
     <Button
         classes="w-full"
-        caution={hasStakedAccounts && $hasPartiallyStakedFunds}
-        secondary={hasStakedAccounts && !$hasPartiallyStakedFunds}
+        caution={hasStaked && $hasPartiallyStakedFunds}
+        secondary={hasStaked && !$hasPartiallyStakedFunds}
         onClick={handleStakeFundsClick}
     >
-        {hasStakedAccounts ? 'Manage stake' : 'Stake funds'}
+        {hasStaked ? 'Manage stake' : 'Stake funds'}
     </Button>
 </div>

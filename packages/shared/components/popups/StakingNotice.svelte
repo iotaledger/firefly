@@ -7,8 +7,9 @@
 
     const handleContinueClick = () => {
         openPopup({
-            type: 'stakingSelection',
+            type: 'stakingManager',
             hideClose: true,
+            preventClose: true,
         })
     }
 </script>

@@ -2,11 +2,16 @@
     import { Illustration, Link, Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { Locale } from 'shared/lib/typings/i18n'
+    import { participationOverview } from 'shared/lib/participation'
 
     export let locale: Locale
 
     const handleExternalLinkClick = (): void => {
         Electron.openUrl('https://firefly.iota.org')
+    }
+
+    $: {
+        console.log('OVERVIEW: ', $participationOverview)
     }
 </script>
 
