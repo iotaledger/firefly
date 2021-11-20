@@ -40,8 +40,8 @@
     </div>
     <Button
         classes="w-full"
-        caution={isStaked}
-        secondary={isStaked}
+        caution={isStaked && false}
+        secondary={isStaked && !false}
         onClick={handleStakeFundsClick}
     >
         {isStaked ? 'Manage stake' : 'Stake funds'}

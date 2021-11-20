@@ -7,14 +7,13 @@
 
     import {
         getParticipationEvents,
-        pollParticipationOverview
+
     } from 'shared/lib/participation'
 
     export let locale: Locale
 
     onMount(async () => {
         await getParticipationEvents()
-        await pollParticipationOverview()
     })
 </script>
 

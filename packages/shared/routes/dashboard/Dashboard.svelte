@@ -29,6 +29,7 @@
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { clearPollNetworkInterval, pollNetworkStatus } from 'shared/lib/networkStatus'
+    import { clearPollParticipationOverviewInterval, pollParticipationOverview } from '../../lib/participation'
 
     export let locale: Locale
     export let mobile
@@ -50,8 +51,10 @@
     const unsubscribeAccountsLoaded = accountsLoaded.subscribe((val) => {
         if (val) {
             void pollNetworkStatus()
+            void pollParticipationOverview()
         } else {
             clearPollNetworkInterval()
+            clearPollParticipationOverviewInterval()
         }
     })
 

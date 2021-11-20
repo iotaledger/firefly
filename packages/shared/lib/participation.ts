@@ -10,7 +10,7 @@ import {
 import type { WalletAccount } from './typings/wallet'
 import type { Event, } from './typings/events'
 import { persistent } from './helpers'
-import { api } from './wallet'
+import { api, DUST_THRESHOLD } from './wallet'
 import { showAppNotification } from './notifications'
 import { MILLISECONDS_PER_SECOND } from './time'
 
@@ -38,14 +38,6 @@ const STAKING_PARTICIPATIONS: Participation[] = [{
 export const participationOverview = writable<ParticipationOverview>([])
 
 /**
- * The specific participation events available.
- */
-export const participationEvents = writable<ParticipationEvent[]>([])
-
-// TODO: Derive this value later / make this better
-export const stakingEventStatus = writable<StakingEventStatus>(StakingEventStatus.PreStake)
-
-/**
  * The amount of funds that are currently staked.
  */
 export const stakedAmount: Readable<number> = derived(
@@ -69,6 +61,11 @@ export const shimmerRewards = derived(participationOverview, (overview) => overv
 /** Total assembly rewards for all accounts */
 export const assemblyRewards = derived(participationOverview, (overview) => overview.reduce((acc, accountOverview) => acc += accountOverview.assemblyRewards, 0))
 
+/**
+ * The specific participation events available.
+ */
+export const participationEvents = writable<ParticipationEvent[]>([])
+
 // TODO: Write functions for calculating / formatting remaining these times.
 // TODO: Change time from days to milliseconds (more exact and flexible).
 /**
@@ -80,6 +77,9 @@ export const shimmerStakingRemainingDays = writable<number>(0)
  * The remaining time for Assembly staking.
  */
 export const assemblyStakingRemainingDays = writable<number>(0)
+
+// TODO: Derive this value later / make this better
+export const stakingEventStatus = writable<StakingEventStatus>(StakingEventStatus.PreStake)
 
 /**
  * The store for accounts that are currently staked. This is NOT to hold accounts
@@ -103,6 +103,10 @@ export async function pollParticipationOverview(): Promise<void> {
         async () => await getParticipationOverview(),
         MILLISECONDS_PER_SECOND * 10
     )
+}
+
+export function clearPollParticipationOverviewInterval(): void {
+    clearInterval(pollInterval)
 }
 
 /**
@@ -172,6 +176,10 @@ export const estimateStakingAirdropReward = (airdrop: StakingAirdrop, amountToSt
     }
 }
 
+export const canAccountParticipate = (account: WalletAccount): boolean => {
+    return account?.rawIotaBalance >= DUST_THRESHOLD
+}
+
 /**
  * Gets participation overview.
  *
@@ -184,6 +192,7 @@ export function getParticipationOverview(): Promise<void> {
         api.getParticipationOverview({
             onSuccess(overview: Event<ParticipationOverviewResponse>) {
                 participationOverview.set(overview?.payload.accounts)
+                console.log('OVERVIEW: ', get(participationOverview))
 
                 resolve()
             },
@@ -250,6 +259,7 @@ export function participate(account: WalletAccount): Promise<void> {
                     stakedAccounts.update((_stakedAccounts) =>
                         [..._stakedAccounts, account]
                     )
+                    console.log('STAKED: ', get(stakedAccounts))
 
                     resolve()
                 },
@@ -291,6 +301,7 @@ export function participate(account: WalletAccount): Promise<void> {
                     stakedAccounts.update((_stakedAccounts) =>
                         _stakedAccounts.filter((sa) => sa.id !== account?.id)
                     )
+                    console.log('UNSTAKED: ', get(stakedAccounts))
 
                     resolve()
                 },
