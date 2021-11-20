@@ -562,6 +562,8 @@
             initialiseListeners()
 
             if ($isSoftwareProfile) {
+
+
                 api.getStrongholdStatus({
                     onSuccess(strongholdStatusResponse) {
                         isStrongholdLocked.set(strongholdStatusResponse.payload.snapshot.status === 'Locked')

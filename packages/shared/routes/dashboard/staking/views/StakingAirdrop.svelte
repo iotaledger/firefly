@@ -5,6 +5,13 @@
     import { STAKING_AIRDROP_TOKENS } from '../../../../lib/participation'
     import { StakingAirdrop } from '../../../../lib/typings/participation'
 
+    import { 
+        assemblyStakingRemainingDays,
+        shimmerStakingRemainingDays, 
+        assemblyRewards,
+        shimmerRewards 
+    } from 'shared/lib/participation'
+
     export let locale: Locale
     export let airdrop: StakingAirdrop
 
@@ -46,14 +53,14 @@
         <div class="flex flex-row space-x-2">
             <div class="flex flex-col w-1/2">
                 <div>
-                    <Text type="p" classes="font-bold text-2xl inline text-{isAssembly() ? 'black' : 'white'}">28</Text>
+                    <Text type="p" classes="font-bold text-2xl inline text-{isAssembly() ? 'black' : 'white'}">{isAssembly() ? `${$assemblyStakingRemainingDays} days` : `${$shimmerStakingRemainingDays} days`}</Text>
                     <Text type="p" secondary classes="text-lg inline">{locale('general.days')}</Text>
                 </div>
                 <Text type="p" secondary>{locale('views.staking.airdrops.remaining')}</Text>
             </div>
             <div class="flex flex-col w-1/2">
                 <div>
-                    <Text type="p" classes="font-bold text-2xl inline text-{isAssembly() ? 'black' : 'white'}">473.24</Text>
+                    <Text type="p" classes="font-bold text-2xl inline text-{isAssembly() ? 'black' : 'white'}">{isAssembly() ? $assemblyRewards : $shimmerRewards}</Text>
                     <Text type="p" secondary classes="text-lg inline">{STAKING_AIRDROP_TOKENS[airdrop]}</Text>
                 </div>
                 <Text type="p" secondary>{locale('views.staking.airdrops.collectedRewards')}</Text>

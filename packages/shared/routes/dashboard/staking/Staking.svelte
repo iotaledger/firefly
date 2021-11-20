@@ -1,10 +1,21 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
+    import { get } from 'svelte/store'
     import { DashboardPane } from 'shared/components'
     import { StakingAirdrop, StakingHeader, StakingInfo, StakingActions } from './views'
     import { StakingAirdrop as Airdrop } from 'shared/lib/typings/participation'
     import { Locale } from 'shared/lib/typings/i18n'
 
+    import { getParticipationOverview, getParticipationEvents, participateWithRemainingFunds } from 'shared/lib/participation'
+
     export let locale: Locale
+
+    onMount(async () => {
+        await getParticipationOverview()
+        await getParticipationEvents()
+
+        await participateWithRemainingFunds('wallet-account://5617300f2f424d8ac236eef8d3163a8b95f275ce5c519a6434e12e987137a295')
+    })
 </script>
 
 <style type="text/scss">
@@ -28,7 +39,7 @@
             <StakingAirdrop {locale} airdrop={Airdrop.Assembly} />
         </DashboardPane>
         <DashboardPane classes="h-full">
-            <StakingAirdrop {locale} airdrop={Airdrop.Shimmer}/>
+            <StakingAirdrop {locale} airdrop={Airdrop.Shimmer} />
         </DashboardPane>
     </div>
 </div>

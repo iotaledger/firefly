@@ -823,6 +823,11 @@ export default class ValidatorService {
             [ResponseTypes.MinedBundle]: this.createBaseValidator().getFirst(),
             [ResponseTypes.MineBundle]: this.createBaseValidator().getFirst(),
 
+            // Participation
+            [ResponseTypes.ParticipationOverview]: this.createBaseEventValidator().getFirst(),
+            [ResponseTypes.EventsData]: this.createBaseEventValidator().getFirst(),
+            [ResponseTypes.SentParticipation]: this.createBaseEventValidator().getFirst(),
+
             // Events
             [ResponseTypes.StrongholdStatusChange]: this.createBaseEventValidator().getFirst(),
             [ResponseTypes.NewTransaction]: this.createBaseEventValidator().getFirst(),

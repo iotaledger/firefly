@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { BalanceSummary, Button, Icon, Text } from 'shared/components'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { hasPartiallyStakedFunds, stakedAccounts, stakingEventStatus } from 'shared/lib/participation'
+    import { hasPartiallyStakedFunds, stakedAccounts, stakingEventStatus, stakedAmount, unstakedAmount  } from 'shared/lib/participation'
     import { openPopup } from 'shared/lib/popup'
     import { StakingEventStatus } from 'shared/lib/typings/participation'
     import { wallet } from '../../../../lib/wallet'
@@ -43,10 +43,10 @@
             {/if}
         </div>
         <Text type="h5" classes="text-3xl">
-            {calculateBalanceFromAccounts($stakedAccounts)}
+            {formatUnitBestMatch($stakedAmount)}
         </Text>
         <Text type="p" secondary>
-            {calculateBalanceFromAccounts(unstakedAccounts)}
+            {formatUnitBestMatch($unstakedAmount)}
             Unstaked
         </Text>
     </div>

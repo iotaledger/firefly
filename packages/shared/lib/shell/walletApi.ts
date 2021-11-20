@@ -86,6 +86,11 @@ const apiToResponseTypeMap = {
     getNodeInfo: ResponseTypes.NodeInfo,
     mineBundle: ResponseTypes.MinedBundle,
     getLegacyAddressChecksum: ResponseTypes.LegacyAddressChecksum,
+
+    // Participation
+    getParticipationOverview: ResponseTypes.ParticipationOverview,
+    getParticipationEvents: ResponseTypes.EventsData,
+    participate: ResponseTypes.SentParticipation
 }
 
 /**

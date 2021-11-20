@@ -59,6 +59,17 @@ import {
 import { ClientOptions } from '../../../shared/lib/typings/client'
 import { NodeAuth } from '../../../shared/lib/typings/node'
 
+// Participation (staking, voting)
+// Staking
+import {
+    getParticipationOverview as _getParticipationOverview,
+    getParticipationEvents as _getParticipationEvents,
+    participate as _participate,
+    stopParticipating as _stopParticipating,
+    participateWithRemainingFunds as _participateWithRemainingFunds,
+    Participation
+} from '../../../shared/lib/typings/participation'
+
 // @ts-ignore
 import addon = require('../index.node')
 
@@ -337,6 +348,24 @@ export const api = {
     getLegacyAddressChecksum: function (address: string): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _getLegacyAddressChecksum(sendMessage, __ids, address)
     },
+
+    // Participation related methods (voting / staking)
+    getParticipationOverview: function (): (__ids: CommunicationIds) => Promise<string> {
+        return (__ids: CommunicationIds) => _getParticipationOverview(sendMessage, __ids)
+    },
+    getParticipationEvents: function (): (__ids: CommunicationIds) => Promise<string> {
+        return (__ids: CommunicationIds) => _getParticipationEvents(sendMessage, __ids)
+    },
+    participate: function (accountId: string, participations: Participation[]): (__ids: CommunicationIds) => Promise<string> {
+        return (__ids: CommunicationIds) => _participate(sendMessage, __ids, accountId, participations)
+    },
+    stopParticipating: function (accountId: string, eventIds: string[]): (__ids: CommunicationIds) => Promise<string> {
+        return (__ids: CommunicationIds) => _stopParticipating(sendMessage, __ids, accountId, eventIds)
+    },
+    participateWithRemainingFunds: function (accountId: string, participations: Participation[]): (__ids: CommunicationIds) => Promise<string> {
+        return (__ids: CommunicationIds) => _participateWithRemainingFunds(sendMessage, __ids, accountId, participations)
+    },
+
     // Event emitters
     onError: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'ErrorThrown')

@@ -55,6 +55,9 @@ import { ProfileType } from './typings/profile'
 import { buildClientOptions } from './network'
 import { Electron } from './electron'
 
+import type { StakingOverviewResponse, ParticipationEvent, ParticipateResponsePayload, Participation } from './typings/participation'
+
+
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
 export const MAX_PROFILE_NAME_LENGTH = 20
@@ -378,6 +381,29 @@ interface IWalletApi {
     getLegacyAddressChecksum(
         address: string,
         callbacks: { onSuccess: (response: Event<string>) => void; onError: (err: ErrorEventPayload) => void }
+    )
+
+    // Participation (voting / staking)
+    getParticipationOverview(
+        callbacks: { onSuccess: (response: Event<StakingOverviewResponse>) => void; onError: (err: ErrorEventPayload) => void }
+    )
+    getParticipationEvents(
+        callbacks: { onSuccess: (response: Event<ParticipationEvent[]>) => void; onError: (err: ErrorEventPayload) => void }
+    )
+    participate(
+        accountId: string,
+        participations: Participation[],
+        callbacks: { onSuccess: (response: Event<ParticipateResponsePayload>) => void; onError: (err: ErrorEventPayload) => void }
+    )
+    stopParticipating(
+        accountId: string,
+        eventIds: string[],
+        callbacks: { onSuccess: (response: Event<ParticipateResponsePayload>) => void; onError: (err: ErrorEventPayload) => void }
+    )
+    participateWithRemainingFunds(
+        accountId: string,
+        participations: Participation[],
+        callbacks: { onSuccess: (response: Event<ParticipateResponsePayload>) => void; onError: (err: ErrorEventPayload) => void }
     )
 }
 

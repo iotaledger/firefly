@@ -83,6 +83,9 @@ export enum ResponseTypes {
     LegacyAddressChecksum = 'GetLegacyAddressChecksum',
 
     // Staking
+    ParticipationOverview = 'ParticipationOverview',
+    EventsData = 'EventsData',
+    SentParticipation = 'SentParticipation',
     StakingOverview = 'StakingOverview',
     StakedAccount = 'StakedAccount',
     UnstakedAccount = 'UnstakedAccount',
