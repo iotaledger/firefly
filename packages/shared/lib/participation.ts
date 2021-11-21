@@ -93,6 +93,8 @@ export const stakingEventStatus: Readable<StakingEventStatus> = derived(
     [networkStatus, participationEvents],
     ([$networkStatus, $participationEvents]) => {
         const stakingEvent = $participationEvents.filter((pe) => STAKING_EVENT_IDS.includes(pe.eventId))[0]
+        if (!stakingEvent) return StakingEventStatus.Inactive
+
         const {
             milestoneIndexCommence,
             milestoneIndexStart,
