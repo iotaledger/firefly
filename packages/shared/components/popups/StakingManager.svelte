@@ -20,15 +20,16 @@
     let isPerformingAction = false
 
     const resetView = (): void => {
+        isPerformingAction = false
+
         accountToAction = undefined
         participationAction = undefined
-        isPerformingAction = false
 
         /**
          * NOTE: This is necessary for the page
          * to be re-rendered because updating arrays
          * in place will not update the UI (requires
-         * new assignment of variable to cause re-render).
+         * variable re-assignment).
          */
         accounts = accounts
     }

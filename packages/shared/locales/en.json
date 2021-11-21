@@ -942,7 +942,17 @@
         "version": "Version {version}",
         "unknown": "Unknown",
         "none": "None",
-        "days": "day(s)"
+        "days": "day(s)",
+        "time": {
+            "days": "days",
+            "day": "day",
+            "hours": "hours",
+            "hour": "hour",
+            "minutes": "minutes",
+            "minute": "minute",
+            "seconds": "seconds",
+            "second": "second"
+        }
     },
     "dates": {
         "today": "Today",

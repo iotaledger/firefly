@@ -13,7 +13,7 @@ import type { Event, } from './typings/events'
 import { persistent } from './helpers'
 import { api, DUST_THRESHOLD } from './wallet'
 import { showAppNotification } from './notifications'
-import { MILLISECONDS_PER_SECOND } from './time'
+import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from './time'
 import { networkStatus } from './networkStatus'
 
 /** Assembly event ID */
@@ -40,7 +40,8 @@ const STAKING_PARTICIPATIONS: Participation[] = [{
 export const participationOverview = writable<ParticipationOverview>([])
 
 /**
- * The amount of funds that are currently staked.
+ * The amount of funds across all accounts that are
+ * currently staked.
  */
 export const stakedAmount: Readable<number> = derived(
     participationOverview,
@@ -49,7 +50,8 @@ export const stakedAmount: Readable<number> = derived(
 )
 
 /**
- * The amount of funds that are currently unstaked.
+ * The amount of funds across all accounts that are
+ * currently unstaked.
  */
 export const unstakedAmount: Readable<number> = derived(
     participationOverview,
@@ -57,38 +59,36 @@ export const unstakedAmount: Readable<number> = derived(
         overview.reduce((total, accountOverview) => total + accountOverview?.shimmerUnstakedFunds, 0)
 )
 
-/** Total shimmer rewards for all accounts */
-export const shimmerRewards = derived(
-    participationOverview,
-    (overview) =>
-        overview.reduce((total, accountOverview) => total + accountOverview.shimmerRewards, 0)
-)
-
-/** Total assembly rewards for all accounts */
-export const assemblyRewards = derived(
+/**
+ * The total accumulated Shimmer rewards for all
+ * accounts that have been staked (even if they have
+ * been unstaked).
+ */
+export const assemblyStakingRewards = derived(
     participationOverview,
     (overview) =>
         overview.reduce((total, accountOverview) => total + accountOverview.assemblyRewards, 0)
 )
 
 /**
- * The specific participation events available.
+ * The total accumulated Shimmer rewards for all
+ * accounts that have been staked (even if they have
+ * been unstaked).
+ */
+export const shimmerStakingRewards = derived(
+    participationOverview,
+    (overview) =>
+        overview.reduce((total, accountOverview) => total + accountOverview.shimmerRewards, 0)
+)
+
+/**
+ * The available participation events (staking AND voting).
  */
 export const participationEvents = writable<ParticipationEvent[]>([])
 
-// TODO: Write functions for calculating / formatting remaining these times.
-// TODO: Change time from days to milliseconds (more exact and flexible).
 /**
- * The remaining time for Shimmer staking.
+ * The status of the staking event, calculated from the milestone information.
  */
-export const shimmerStakingRemainingDays = writable<number>(0)
-
-/**
- * The remaining time for Assembly staking.
- */
-export const assemblyStakingRemainingDays = writable<number>(0)
-
-// TODO: Derive this value later / make this better
 export const stakingEventStatus: Readable<StakingEventStatus> = derived(
     [networkStatus, participationEvents],
     ([$networkStatus, $participationEvents]) => {
@@ -112,6 +112,48 @@ export const stakingEventStatus: Readable<StakingEventStatus> = derived(
             return StakingEventStatus.Ended
         }
     }
+)
+
+const calculateRemainingStakingTime = (
+    currentMilestone: number,
+    stakingEvent: ParticipationEvent
+): number => {
+    if (!stakingEvent) return 0
+
+    const startMilestone = stakingEvent?.information?.milestoneIndexStart
+    const endMilestone = stakingEvent?.information?.milestoneIndexEnd
+    if (currentMilestone < startMilestone) {
+        return 0
+    } else if (currentMilestone >= endMilestone) {
+        return 0
+    } else {
+        const timeLeftInMilestones = endMilestone - currentMilestone
+        return timeLeftInMilestones * SECONDS_PER_MILESTONE * MILLISECONDS_PER_SECOND
+    }
+}
+
+/**
+ * The remaining time until the Assembly staking event ends (in milliseconds).
+ */
+export const assemblyStakingRemainingTime: Readable<number> = derived(
+    [networkStatus, participationEvents],
+    ([$networkStatus, $participationEvents]) =>
+        calculateRemainingStakingTime(
+            $networkStatus?.currentMilestone,
+            $participationEvents.find((pe) => pe.eventId === ASSEMBLY_EVENT_ID)
+        )
+)
+
+/**
+ * The remaining time until the Shimmer staking event ends (in milliseconds).
+ */
+export const shimmerStakingRemainingTime: Readable<number> = derived(
+    [networkStatus, participationEvents],
+    ([$networkStatus, $participationEvents]) =>
+        calculateRemainingStakingTime(
+            $networkStatus?.currentMilestone,
+            $participationEvents.find((pe) => pe.eventId === SHIMMER_EVENT_ID)
+        )
 )
 
 /**

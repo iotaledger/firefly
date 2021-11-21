@@ -5,17 +5,25 @@
     import { STAKING_AIRDROP_TOKENS } from 'shared/lib/participation'
     import { StakingAirdrop } from 'shared/lib/typings/participation'
     import {
-        assemblyStakingRemainingDays,
-        shimmerStakingRemainingDays,
-        assemblyRewards,
-        shimmerRewards
+        assemblyStakingRemainingTime,
+        shimmerStakingRemainingTime,
+        assemblyStakingRewards,
+        shimmerStakingRewards
     } from 'shared/lib/participation'
+    import { getBestTimeDuration } from 'shared/lib/time'
 
     export let locale: Locale
     export let airdrop: StakingAirdrop
 
     const isAssembly = (): boolean => airdrop === StakingAirdrop.Assembly
     const isShimmer = (): boolean => airdrop === StakingAirdrop.Shimmer
+
+    let remainingTimeAmount, remainingTimeUnit
+    $: {
+        [remainingTimeAmount, remainingTimeUnit] = getBestTimeDuration(
+            isAssembly() ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
+        ).split(' ')
+    }
 
     const handleLearnMoreClick = (): void => {
         Electron.openUrl(getLearnMoreUrl())
@@ -50,13 +58,13 @@
         </Link>
         <HR classes="my-6" />
         <div class="flex flex-row space-x-2">
-            <div class="flex flex-col w-1/2">
+            <div class="flex flex-col w-2/3">
                 <div>
                     <Text type="p" classes="font-bold text-2xl inline text-{isAssembly() ? 'black' : 'white'}">
-                        {isAssembly() ? `${$assemblyStakingRemainingDays}` : `${$shimmerStakingRemainingDays}`}
+                        {remainingTimeAmount}
                     </Text>
                     <Text type="p" secondary classes="text-lg inline">
-                        {locale('general.days')}
+                        {remainingTimeUnit}
                     </Text>
                 </div>
                 <Text type="p" secondary>{locale('views.staking.airdrops.remaining')}</Text>
@@ -64,7 +72,7 @@
             <div class="flex flex-col w-1/2">
                 <div>
                     <Text type="p" classes="font-bold text-2xl inline text-{isAssembly() ? 'black' : 'white'}">
-                        {isAssembly() ? $assemblyRewards : $shimmerRewards}
+                        {isAssembly() ? $assemblyStakingRewards : $shimmerStakingRewards}
                     </Text>
                     <Text type="p" secondary classes="text-lg inline">
                         {STAKING_AIRDROP_TOKENS[airdrop]}
