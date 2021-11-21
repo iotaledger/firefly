@@ -15,13 +15,17 @@
         },
         "profile": {
             "title": "Loo profiil",
-            "profileName": "Profiili nimi",
+            "profileName": "Profile name",
             "body1": "Sa saad luua mitu kasutajaprofiili, et oma rahakotte organiseerida ja privaatsust parendada.",
             "body2": {
                 "first": "Alustame praegu sinu esimese profiili nimega.",
                 "nonFirst": "Alustame praegu sinu profiili nimega."
             },
-            "addMore": "Sa saad hiljem veel profiile lisada."
+            "addMore": "Sa saad hiljem veel profiile lisada.",
+            "developer": {
+                "label": "Developer profile",
+                "info": "Connect to public and private IOTA networks"
+            }
         },
         "setup": {
             "title": "Sea üles rahakott",
@@ -307,7 +311,8 @@
             },
             "theme": {
                 "title": "Kujundus",
-                "description": ""
+                "description": "",
+                "advice": "Restart the Firefly application for changes to the system theme to take effect"
             },
             "language": {
                 "title": "Keel",
@@ -323,14 +328,14 @@
             },
             "networkStatus": {
                 "title": "Võrgu staatus",
-                "description": "Displays the status of the node you are currently connected to."
+                "description": "Displays the status of the node you are currently connected to"
             },
             "exportStronghold": {
-                "title": "Ekspordi tagavara",
+                "title": "Export backup",
                 "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
             },
             "appLock": {
-                "title": "Automaatne lukustus",
+                "title": "Automatic lock",
                 "description": "Inactivity time before your wallets lock and you are logged out",
                 "durationMinute": "{time, plural, one {1 minut} other {# minutit}}",
                 "durationHour": "{time, plural, one {1 tund} other {# tundi}}"
@@ -360,28 +365,39 @@
                 "description": "Kustutab su terve profiili, rahakotid ja tehinguajalugu. Tee kindlaks, et sul on tagavara"
             },
             "deepLinks": {
-                "title": "Deep links",
-                "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
+                "title": "IOTA links",
+                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
             },
-            "developerMode": {
-                "title": "Arendaja režiim",
-                "description": "Connect to testnets and other developer features"
-            },
-            "nodeSettings": {
-                "title": "Sõlme seaded",
-                "description": "Select Manual to configure the node settings and connect to your own node"
+            "networkConfiguration": {
+                "title": "Network config",
+                "title2": "Network configuration",
+                "description": {
+                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
+                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                },
+                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
+                "resetWallet": "Your wallet state has been reset.",
+                "connectedTo": "Connected to",
+                "nodeConfiguration": {
+                    "title": "Node selection",
+                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
+                    "automatic": "Automatic",
+                    "manual": "Manual"
+                }
             },
             "configureNodeList": {
-                "title": "Vali sõlm",
-                "description": "Manage the list of IOTA network nodes you connect to",
+                "title": "Node configuration",
+                "description": "Manage the list of nodes you connect to",
                 "primaryNode": "Peamine sõlm",
                 "excludeNode": "Exclude node",
                 "includeNode": "Include node",
-                "viewDetails": "Vaata üksikasju",
+                "editDetails": "Edit details",
+                "viewInfo": "View info",
                 "setAsPrimary": "Määra peamiseks",
                 "removeNode": "Eemalda sõlm",
                 "includeOfficialNodeList": "Include official node list",
-                "noNodes": "There are no nodes, automatic selection will be used instead"
+                "noNodes": "There are no nodes, unable to connect to the network",
+                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "Töötõend",
@@ -396,7 +412,7 @@
                 "description": "Vaata süsteemi ja rakenduse teavet"
             },
             "migrateLedgerIndex": {
-                "title": "Migrate Ledger Index",
+                "title": "Migrate Ledger index",
                 "description": "Migrate another Trinity account index"
             },
             "stateExport": {
@@ -413,7 +429,7 @@
             },
             "faq": {
                 "title": "KKK",
-                "title2": "Korduma Kippuvad Küsimused",
+                "title2": "Frequently asked questions",
                 "description": "View the FAQs to get help with a common problem or question"
             },
             "discord": {
@@ -528,12 +544,37 @@
             "titleAdd": "Lisa sõlm",
             "titleUpdate": "Uuenda sõlme",
             "titleRemove": "Eemalda sõlm",
+            "titleRemoveAll": "Remove all nodes",
             "titleDetails": "Sõlme üksikasjad",
+            "titleInfo": "Node info",
+            "addingNode": "Adding node",
+            "updatingNode": "Updating node",
+            "loadingNodeInfo": "Loading node info",
             "nodeAddress": "Sõlme aadress",
             "optionalUsername": "Kasutajanimi (valikuline)",
             "optionalPassword": "Salasõna (valikuline)",
+            "optionalJwt": "JSON web token (optional)",
             "setAsPrimaryNode": "Määra peamiseks sõlmeks",
-            "removeConfirmation": "Oled kindel, et soovid selle sõlme eemaldada?"
+            "removeConfirmation": "Oled kindel, et soovid selle sõlme eemaldada?",
+            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "info": {
+                "url": "URL",
+                "software": "Software",
+                "networkId": "Network ID",
+                "bech32HRP": "Bech32 HRP",
+                "features": "Features",
+                "confirmedMilestoneIndex": "Confirmed milestone index",
+                "pruningIndex": "Pruning index",
+                "messagesPerSecond": "Sõnumit sekundis",
+                "referencedRate": "Viidatute määr"
+            }
+        },
+        "switchNetwork": {
+            "title": "Switch network",
+            "newNetwork": "New network",
+            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
+            "switchingNetwork": "Switching network",
+            "typePassword": "Type your password to switch to:"
         },
         "errorLog": {
             "title": "Vealogi",
@@ -684,7 +725,7 @@
         "syncAll": "Sync all",
         "export": "Ekspordi",
         "exportNewStronghold": "Export a new Stronghold",
-        "enableDeepLinks": "Enable deep links",
+        "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "Enable developer mode",
         "enableSystemNotifications": "Luba süsteemiteavitused",
         "exportState": "Export state",
@@ -702,6 +743,7 @@
         "addNode": "Lisa sõlm",
         "updateNode": "Uuenda sõlme",
         "removeNode": "Eemalda sõlm",
+        "removeAllNodes": "Remove all nodes",
         "hide": "Peida",
         "hideOthers": "Peida teised",
         "showAll": "Kuva kõik",
@@ -781,8 +823,9 @@
         "stronghold": "Stronghold",
         "language": "Keel",
         "appearance": "Välimus",
-        "lightTheme": "Hele välimus",
-        "darkTheme": "Tume välimus",
+        "lightTheme": "Light",
+        "darkTheme": "Dark",
+        "systemTheme": "System",
         "balance": "Kontojääk",
         "accountBalance": "Wallet Balance",
         "incoming": "Sissetulev",
@@ -791,11 +834,7 @@
         "totalOut": "Kokku välja",
         "accounts": "Rahakotid",
         "myAccounts": "Minu rahakotid",
-        "automaticNodeSelection": "Automatic node selection",
-        "manualNodeSelection": "Manual node selection",
         "profiles": "Profiilid",
-        "developerProfile": "Arendaja profiil",
-        "developerProfileDescription": "Allows you to connect to testnets",
         "dev": "Arendaja",
         "createAccount": "Loo rahakott",
         "accountName": "Rahakoti nimi",
@@ -803,6 +842,7 @@
         "transactions": "Tehingud",
         "security": "Turvalisus",
         "accountAddress": "Rahakoti aadress",
+        "network": "Network",
         "nodes": "Sõlmed",
         "wallet": "Rahakott",
         "help": "Abi",
@@ -861,7 +901,8 @@
         "legacyNetwork": "Legacy Network",
         "capsLock": "Caps Lock on sees",
         "version": "Versioon {version}",
-        "unknown": "Unknown"
+        "unknown": "Unknown",
+        "none": "None"
     },
     "dates": {
         "today": "Täna",
@@ -885,7 +926,17 @@
         "minutesRemaining": "{minutes, plural, one {1 minut jäänud} other {# minutit jäänud}}",
         "copiedToClipboard": "Kopeeritud lõikelauale",
         "accountsSynchronized": "Wallet synchronization complete",
-        "fundsAvailableSoon": "Your funds will become available shortly"
+        "fundsAvailableSoon": "Your funds will become available shortly",
+        "deepLinkingRequest": {
+            "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
+            "notEnabled": "IOTA links are not enabled",
+            "invalidFormat": "The IOTA link you followed is invalid",
+            "wallet": {
+                "send": {
+                    "success": "Payment details added from IOTA link"
+                }
+            }
+        }
     },
     "error": {
         "profile": {
@@ -945,11 +996,23 @@
         },
         "node": {
             "invalid": "Please enter a valid URL.",
-            "dns": "Could not resolve DNS for node.",
-            "https": "HTTPS is required. Set up a developer profile to use unsecured HTTP connections.",
+            "dns": "Could not find DNS resolution for node.",
+            "timedOut": "The connection timed out.",
+            "refused": "The connection was refused.",
+            "handshake": "Could not complete handshake with node.",
+            "invalidCertificate": "Could not connect with invalid certificate.",
+            "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
             "duplicate": "This node has already been added.",
             "unsynced": "The node is not in sync.",
-            "noSynced": "No synced nodes are available."
+            "noSynced": "No synced nodes are available.",
+            "answer": "Failed to get an answer from all nodes.",
+            "forbidden": "This node connection is forbidden."
+        },
+        "network": {
+            "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
+            "notReachable": "The network ID for this node could not be retrieved, unable to add node.",
+            "badNodes": "Unable to connect to the network with current node configuration.",
+            "nonEmptyAccount": "You must transfer all balances before switching networks."
         },
         "global": {
             "generic": "Midagi läks valesti."
@@ -985,6 +1048,11 @@
         },
         "crypto": {
             "cannotDecodeBech32": "Unable to decode string as Bech32 address."
+        }
+    },
+    "warning": {
+        "node": {
+            "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
         }
     },
     "tooltips": {

@@ -15,13 +15,17 @@
         },
         "profile": {
             "title": "Създаване на профил",
-            "profileName": "Име на профил",
+            "profileName": "Име на профила",
             "body1": "Можете да имате няколко профила, за да организирате портфейлите си и подобрите поверителността.",
             "body2": {
                 "first": "Нека да започнем с името на Вашия първи профил.",
                 "nonFirst": "Нека да започнем с името на Вашия профил."
             },
-            "addMore": "Можете да добавите още профили по-късно."
+            "addMore": "Можете да добавите още профили по-късно.",
+            "developer": {
+                "label": "Режим на разработчик",
+                "info": "Connect to public and private IOTA networks"
+            }
         },
         "setup": {
             "title": "Създаване на портфейл",
@@ -307,7 +311,8 @@
             },
             "theme": {
                 "title": "Тема",
-                "description": ""
+                "description": "",
+                "advice": "Restart the Firefly application for changes to the system theme to take effect"
             },
             "language": {
                 "title": "Език",
@@ -323,14 +328,14 @@
             },
             "networkStatus": {
                 "title": "Състояние на мрежата",
-                "description": "Показване на статуса на node сървъра, към който сте свързани."
+                "description": "Displays the status of the node you are currently connected to"
             },
             "exportStronghold": {
-                "title": "Създаване резервно копие",
+                "title": "Export backup",
                 "description": "Експортиране в Stronghold файл - пълно криптирано резервно копие на портфейла и история на последните трансакции"
             },
             "appLock": {
-                "title": "Автоматично заключване",
+                "title": "Automatic lock",
                 "description": "Време на неактивност преди заключване на портфейла и изход от профила",
                 "durationMinute": "{time, plural, one {1 минута} other {# минути}}",
                 "durationHour": "{time, plural, one {1 час} other {# часа}}"
@@ -360,28 +365,39 @@
                 "description": "Изтриване на потребителския профил, портфейл и история на трансакциите. Уверете се, че имате резервно копие"
             },
             "deepLinks": {
-                "title": "Специални линкове",
-                "description": "Автоматично попълване на данни за трансакциите във Firefly, след щракане върху iota:// линк"
+                "title": "IOTA links",
+                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
             },
-            "developerMode": {
-                "title": "Режим на разработчик",
-                "description": "Свързване с тестови мрежи testnets и други настройки за програмиста"
-            },
-            "nodeSettings": {
-                "title": "Настройка Node сървъри",
-                "description": "Ръчен избор за настройки на Node сървър и свързване към собствен Node сървър"
+            "networkConfiguration": {
+                "title": "Network config",
+                "title2": "Network configuration",
+                "description": {
+                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
+                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                },
+                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
+                "resetWallet": "Your wallet state has been reset.",
+                "connectedTo": "Connected to",
+                "nodeConfiguration": {
+                    "title": "Node selection",
+                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
+                    "automatic": "Automatic",
+                    "manual": "Manual"
+                }
             },
             "configureNodeList": {
-                "title": "Изберете Node сървър",
-                "description": "Управление на списъка със Node сървъри в мрежата на IOTA, към които сте свързан",
+                "title": "Node configuration",
+                "description": "Manage the list of nodes you connect to",
                 "primaryNode": "Основен Node сървър",
                 "excludeNode": "Игнорирай Node сървър",
                 "includeNode": "Използвай Node сървър",
-                "viewDetails": "Виж детайли",
+                "editDetails": "Edit details",
+                "viewInfo": "View info",
                 "setAsPrimary": "Задай като основен",
                 "removeNode": "Премахни Node сървър",
                 "includeOfficialNodeList": "Избери официалния списък с Node сървъри",
-                "noNodes": "Няма избрани Node сървъри, автоматичен избор ще бъде използван"
+                "noNodes": "There are no nodes, unable to connect to the network",
+                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "Доказателство за работа PoW",
@@ -396,7 +412,7 @@
                 "description": "Виж системна и за приложението информация"
             },
             "migrateLedgerIndex": {
-                "title": "Мигриране на Ledger index",
+                "title": "Migrate Ledger index",
                 "description": "Мигриране на друг Trinity account index"
             },
             "stateExport": {
@@ -413,7 +429,7 @@
             },
             "faq": {
                 "title": "ЧЗВ",
-                "title2": "Често задавани въпроси",
+                "title2": "Frequently asked questions",
                 "description": "Посетете ЧЗВ-FAQ за да получите помощ с често срещани проблеми и въпроси"
             },
             "discord": {
@@ -528,12 +544,37 @@
             "titleAdd": "Добави Node сървър",
             "titleUpdate": "Обнови Node сървър",
             "titleRemove": "Премахни Node сървър",
+            "titleRemoveAll": "Remove all nodes",
             "titleDetails": "Детайли за Node сървър",
+            "titleInfo": "Node info",
+            "addingNode": "Adding node",
+            "updatingNode": "Updating node",
+            "loadingNodeInfo": "Loading node info",
             "nodeAddress": "Адрес Node сървър",
             "optionalUsername": "Потребителско име (незадължително)",
             "optionalPassword": "Парола (незадължителна)",
+            "optionalJwt": "JSON web token (optional)",
             "setAsPrimaryNode": "Задай основен Node сървър",
-            "removeConfirmation": "Сигурни ли сте, че искате да премахнете този Node сървър?"
+            "removeConfirmation": "Сигурни ли сте, че искате да премахнете този Node сървър?",
+            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "info": {
+                "url": "URL",
+                "software": "Software",
+                "networkId": "Network ID",
+                "bech32HRP": "Bech32 HRP",
+                "features": "Features",
+                "confirmedMilestoneIndex": "Confirmed milestone index",
+                "pruningIndex": "Pruning index",
+                "messagesPerSecond": "Съобщения/трансакции в секунда",
+                "referencedRate": "Referenced rate"
+            }
+        },
+        "switchNetwork": {
+            "title": "Switch network",
+            "newNetwork": "New network",
+            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
+            "switchingNetwork": "Switching network",
+            "typePassword": "Type your password to switch to:"
         },
         "errorLog": {
             "title": "Регистър на грешки",
@@ -684,7 +725,7 @@
         "syncAll": "Синхронизиране на всички",
         "export": "Експорт",
         "exportNewStronghold": "Експортиране на нов Stronghold",
-        "enableDeepLinks": "Разрешаване на специални линкове",
+        "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "Включване на режима за разработчици",
         "enableSystemNotifications": "Разрешаване на системни известия",
         "exportState": "Експорт състояние",
@@ -702,6 +743,7 @@
         "addNode": "Добави Node сървър",
         "updateNode": "Обнови Node сървър",
         "removeNode": "Премахни Node сървър",
+        "removeAllNodes": "Remove all nodes",
         "hide": "Скриване",
         "hideOthers": "Скриване на другите",
         "showAll": "Показване на всички",
@@ -781,8 +823,9 @@
         "stronghold": "Stronghold",
         "language": "Език",
         "appearance": "Изглед",
-        "lightTheme": "Светла тема",
-        "darkTheme": "Тъмна тема",
+        "lightTheme": "Light",
+        "darkTheme": "Dark",
+        "systemTheme": "System",
         "balance": "Баланс/сума",
         "accountBalance": "Наличност в портфейла",
         "incoming": "Входящи",
@@ -791,11 +834,7 @@
         "totalOut": "Сума изходящи",
         "accounts": "Портфейли",
         "myAccounts": "Моите Портфейли",
-        "automaticNodeSelection": "Автоматичен избор на Node сървър",
-        "manualNodeSelection": "Ръчен избор на Node сървър",
         "profiles": "Профили",
-        "developerProfile": "Режим на разработчик",
-        "developerProfileDescription": "Позволява свързване с тестовата мрежа-testnet",
         "dev": "За разработчици",
         "createAccount": "Създаване на портфейл",
         "accountName": "Име на портфейла",
@@ -803,6 +842,7 @@
         "transactions": "Транзакции",
         "security": "Сигурност",
         "accountAddress": "Адрес на портфейла",
+        "network": "Network",
         "nodes": "Node сървъри",
         "wallet": "Портфейл",
         "help": "Помощ",
@@ -861,7 +901,8 @@
         "legacyNetwork": "Стара мрежа",
         "capsLock": "Caps Lock е включен",
         "version": "Версия {version}",
-        "unknown": "Неизвестен"
+        "unknown": "Неизвестен",
+        "none": "None"
     },
     "dates": {
         "today": "Днес",
@@ -885,7 +926,17 @@
         "minutesRemaining": "{minutes, plural, one {оставащи 1 минута} other {оставащи # минути}}",
         "copiedToClipboard": "Копирано в клипборда",
         "accountsSynchronized": "Синхронизацията на портфейла завършена",
-        "fundsAvailableSoon": "Вашите средства ще бъдат налични скоро"
+        "fundsAvailableSoon": "Вашите средства ще бъдат налични скоро",
+        "deepLinkingRequest": {
+            "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
+            "notEnabled": "IOTA links are not enabled",
+            "invalidFormat": "The IOTA link you followed is invalid",
+            "wallet": {
+                "send": {
+                    "success": "Payment details added from IOTA link"
+                }
+            }
+        }
     },
     "error": {
         "profile": {
@@ -945,11 +996,23 @@
         },
         "node": {
             "invalid": "Моля, въведете валиден URL адрес.",
-            "dns": "Could not resolve DNS for node.",
-            "https": "Изисква се сигурна HTTPS връзка. Настройте режим за разработчици, за да използвате несигурна HTTP връзка.",
+            "dns": "Could not find DNS resolution for node.",
+            "timedOut": "The connection timed out.",
+            "refused": "The connection was refused.",
+            "handshake": "Could not complete handshake with node.",
+            "invalidCertificate": "Could not connect with invalid certificate.",
+            "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
             "duplicate": "Този Node сървър вече е добавен.",
             "unsynced": "Node сървърът не в синхронизиран.",
-            "noSynced": "Няма налични синхронизирани Node сървъри."
+            "noSynced": "Няма налични синхронизирани Node сървъри.",
+            "answer": "Failed to get an answer from all nodes.",
+            "forbidden": "This node connection is forbidden."
+        },
+        "network": {
+            "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
+            "notReachable": "The network ID for this node could not be retrieved, unable to add node.",
+            "badNodes": "Unable to connect to the network with current node configuration.",
+            "nonEmptyAccount": "You must transfer all balances before switching networks."
         },
         "global": {
             "generic": "Възникна грешка."
@@ -985,6 +1048,11 @@
         },
         "crypto": {
             "cannotDecodeBech32": "Unable to decode string as Bech32 address."
+        }
+    },
+    "warning": {
+        "node": {
+            "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
         }
     },
     "tooltips": {

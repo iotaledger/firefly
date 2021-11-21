@@ -15,13 +15,17 @@
         },
         "profile": {
             "title": "Krei profilon",
-            "profileName": "Profilnomo",
+            "profileName": "Profile name",
             "body1": "Vi povas krei kelkajn uzantoprofilojn por organizi viajn monujojn kaj plibonigi la privatecon.",
             "body2": {
                 "first": "Nuntempe, ni komencu per via unua profilnomo.",
                 "nonFirst": "Nuntempe, ni komencu per via profilnomo."
             },
-            "addMore": "Vi povas aldoni pliajn profilojn poste."
+            "addMore": "Vi povas aldoni pliajn profilojn poste.",
+            "developer": {
+                "label": "Developer profile",
+                "info": "Connect to public and private IOTA networks"
+            }
         },
         "setup": {
             "title": "Agordu monujon",
@@ -307,7 +311,8 @@
             },
             "theme": {
                 "title": "Etoso",
-                "description": ""
+                "description": "",
+                "advice": "Restart the Firefly application for changes to the system theme to take effect"
             },
             "language": {
                 "title": "Lingvo",
@@ -323,14 +328,14 @@
             },
             "networkStatus": {
                 "title": "Reta stato",
-                "description": "Montras la staton de la nodo al kiu vi estas nuntempe konektita."
+                "description": "Displays the status of the node you are currently connected to"
             },
             "exportStronghold": {
-                "title": "Eksporti Savkopio",
+                "title": "Export backup",
                 "description": "Eksporti al Stronghold dosiero - kompleta ĉifrita sekurkopio de viaj monujoj kaj plej nova transakcia historio"
             },
             "appLock": {
-                "title": "Aŭtomata Ŝlosado",
+                "title": "Automatic lock",
                 "description": "Neaktiva tempo antaŭ ol viaj monujoj ŝlosiĝas kaj vi estas elsalutita",
                 "durationMinute": "{time, plural, one {1 minuto} other {# minutoj}}",
                 "durationHour": "{time, plural, one {1 horo} other {# horoj}}"
@@ -360,28 +365,39 @@
                 "description": "Forigas vian tutan profilon, monujojn kaj transakcian historion. Certigu, ke vi havas sekurkopion"
             },
             "deepLinks": {
-                "title": "Profundaj ligiloj",
-                "description": "Aŭtomate plenigu transakciajn datumojn en Firefly alklakante iota: // ligilon"
+                "title": "IOTA links",
+                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
             },
-            "developerMode": {
-                "title": "Reĝimo por evoluigadoj",
-                "description": "Konektiĝu al retretoj kaj aliaj programistoj"
-            },
-            "nodeSettings": {
-                "title": "Nod-agordoj",
-                "description": "Elektu Manlibron por agordi la nodajn agordojn kaj konekti al via propra nodo"
+            "networkConfiguration": {
+                "title": "Network config",
+                "title2": "Network configuration",
+                "description": {
+                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
+                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                },
+                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
+                "resetWallet": "Your wallet state has been reset.",
+                "connectedTo": "Connected to",
+                "nodeConfiguration": {
+                    "title": "Node selection",
+                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
+                    "automatic": "Automatic",
+                    "manual": "Manual"
+                }
             },
             "configureNodeList": {
-                "title": "Elektu nodon",
-                "description": "Administru la liston de IOTA ret-nodoj, al kiuj vi konektas",
+                "title": "Node configuration",
+                "description": "Manage the list of nodes you connect to",
                 "primaryNode": "Ĉefa nodo",
                 "excludeNode": "Ekskluzivi nodon",
                 "includeNode": "Inkluzivi nodon",
-                "viewDetails": "Vidu detalojn",
+                "editDetails": "Edit details",
+                "viewInfo": "View info",
                 "setAsPrimary": "Agordi kiel la ĉefa",
                 "removeNode": "Forigi nodon",
                 "includeOfficialNodeList": "Inkluzivi oficialan nod-liston",
-                "noNodes": "Ne ekzistas nodoj, aŭtomata elektado estos uzata anstataŭe"
+                "noNodes": "There are no nodes, unable to connect to the network",
+                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "Pruvo de funkciado",
@@ -396,7 +412,7 @@
                 "description": "Vidi la informojn de la sistemo kaj la apo"
             },
             "migrateLedgerIndex": {
-                "title": "Migri Ledger-Indekson",
+                "title": "Migrate Ledger index",
                 "description": "Migru alian Trinity-kontan indekson"
             },
             "stateExport": {
@@ -413,7 +429,7 @@
             },
             "faq": {
                 "title": "Oftaj demandoj",
-                "title2": "Oftaj Demandoj",
+                "title2": "Frequently asked questions",
                 "description": "Rigardu la Demandojn por ricevi helpon pri ofta problemo aŭ demando"
             },
             "discord": {
@@ -528,12 +544,37 @@
             "titleAdd": "Aldoni nodon",
             "titleUpdate": "Ĝisdatigu nodon",
             "titleRemove": "Forigu nodon",
+            "titleRemoveAll": "Remove all nodes",
             "titleDetails": "Nodo detaloj",
+            "titleInfo": "Node info",
+            "addingNode": "Adding node",
+            "updatingNode": "Updating node",
+            "loadingNodeInfo": "Loading node info",
             "nodeAddress": "Nodo adreso",
             "optionalUsername": "Uzantnomo (nedeviga)",
             "optionalPassword": "Pasvorto (nedeviga)",
+            "optionalJwt": "JSON web token (optional)",
             "setAsPrimaryNode": "Agordi kiel la ĉefa nodo",
-            "removeConfirmation": "Ĉu vi certe volas forigi ĉi tiun nodon?"
+            "removeConfirmation": "Ĉu vi certe volas forigi ĉi tiun nodon?",
+            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "info": {
+                "url": "URL",
+                "software": "Software",
+                "networkId": "Network ID",
+                "bech32HRP": "Bech32 HRP",
+                "features": "Features",
+                "confirmedMilestoneIndex": "Confirmed milestone index",
+                "pruningIndex": "Pruning index",
+                "messagesPerSecond": "Mesaĝoj po sekundo",
+                "referencedRate": "Referencita indico"
+            }
+        },
+        "switchNetwork": {
+            "title": "Switch network",
+            "newNetwork": "New network",
+            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
+            "switchingNetwork": "Switching network",
+            "typePassword": "Type your password to switch to:"
         },
         "errorLog": {
             "title": "Eraroj registroj",
@@ -684,7 +725,7 @@
         "syncAll": "Sinkronigi ĉion",
         "export": "Eksporti",
         "exportNewStronghold": "Eksporti novan Stronghold",
-        "enableDeepLinks": "Aktivigi profundajn ligilojn",
+        "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "Aktivigi programan modon",
         "enableSystemNotifications": "Aktivigi sistemajn sciigojn",
         "exportState": "Eksporta ŝtato",
@@ -702,6 +743,7 @@
         "addNode": "Aldoni nodon",
         "updateNode": "Ĝisdatigu la nodon",
         "removeNode": "Forigi nodon",
+        "removeAllNodes": "Remove all nodes",
         "hide": "Kaŝi",
         "hideOthers": "Kaŝi aliajn",
         "showAll": "Montri ĉion",
@@ -781,8 +823,9 @@
         "stronghold": "Stronghold",
         "language": "Lingvo",
         "appearance": "Aspekto",
-        "lightTheme": "Hela etoso",
-        "darkTheme": "Malhela etoso",
+        "lightTheme": "Light",
+        "darkTheme": "Dark",
+        "systemTheme": "System",
         "balance": "Saldo",
         "accountBalance": "Bilanco de Monujo",
         "incoming": "Enirante",
@@ -791,11 +834,7 @@
         "totalOut": "Entuta eliro",
         "accounts": "Monujoj",
         "myAccounts": "Miaj monujoj",
-        "automaticNodeSelection": "Aŭtomata nodelekto",
-        "manualNodeSelection": "Mana nodelekto",
         "profiles": "Profiloj",
-        "developerProfile": "Profilo de programisto",
-        "developerProfileDescription": "Permesas vin konekti al testaj retoj",
         "dev": "Programisto",
         "createAccount": "Krei monujon",
         "accountName": "Nomo de la monujo",
@@ -803,6 +842,7 @@
         "transactions": "Transakcioj",
         "security": "Sekureco",
         "accountAddress": "Monujo-adreso",
+        "network": "Network",
         "nodes": "Nodo",
         "wallet": "Monujo",
         "help": "Helpo",
@@ -861,7 +901,8 @@
         "legacyNetwork": "Malnova Reto",
         "capsLock": "Majuskla aktivigita",
         "version": "Versio {version}",
-        "unknown": "Nekonata"
+        "unknown": "Nekonata",
+        "none": "None"
     },
     "dates": {
         "today": "Hodiaŭ",
@@ -885,7 +926,17 @@
         "minutesRemaining": "{minutes, plural, one {1 minuto restas} other {# minutoj restas}}",
         "copiedToClipboard": "Copied al dosierujo",
         "accountsSynchronized": "Monujo-sinkronigado finiĝis",
-        "fundsAvailableSoon": "Viaj fondusoj baldaŭ disponeblos"
+        "fundsAvailableSoon": "Viaj fondusoj baldaŭ disponeblos",
+        "deepLinkingRequest": {
+            "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
+            "notEnabled": "IOTA links are not enabled",
+            "invalidFormat": "The IOTA link you followed is invalid",
+            "wallet": {
+                "send": {
+                    "success": "Payment details added from IOTA link"
+                }
+            }
+        }
     },
     "error": {
         "profile": {
@@ -945,11 +996,23 @@
         },
         "node": {
             "invalid": "Bonvolu enigi validan URL.",
-            "dns": "Neeblas trovi nodan DNS.",
-            "https": "HTTPS necesas. Starigu programan profilon por uzi nesekurigitajn HTTP-ligilojn.",
+            "dns": "Could not find DNS resolution for node.",
+            "timedOut": "The connection timed out.",
+            "refused": "The connection was refused.",
+            "handshake": "Could not complete handshake with node.",
+            "invalidCertificate": "Could not connect with invalid certificate.",
+            "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
             "duplicate": "Ĉi tiu nodo jam estis aldonita.",
             "unsynced": "La nodo ne estas sinkronigita.",
-            "noSynced": "Neniuj sinkronigitaj nodoj disponeblas."
+            "noSynced": "Neniuj sinkronigitaj nodoj disponeblas.",
+            "answer": "Failed to get an answer from all nodes.",
+            "forbidden": "This node connection is forbidden."
+        },
+        "network": {
+            "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
+            "notReachable": "The network ID for this node could not be retrieved, unable to add node.",
+            "badNodes": "Unable to connect to the network with current node configuration.",
+            "nonEmptyAccount": "You must transfer all balances before switching networks."
         },
         "global": {
             "generic": "Io fuŝiĝis."
@@ -985,6 +1048,11 @@
         },
         "crypto": {
             "cannotDecodeBech32": "Ne eblas deĉifri ĉenon kiel Bech32-adreso."
+        }
+    },
+    "warning": {
+        "node": {
+            "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
         }
     },
     "tooltips": {
