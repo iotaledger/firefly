@@ -1,5 +1,4 @@
 import type { Bridge, CommunicationIds } from './bridge'
-import type { WalletAccount } from './wallet'
 import type { Message } from './message'
 
 export enum StakingAirdrop {
@@ -8,7 +7,8 @@ export enum StakingAirdrop {
 }
 
 export enum StakingEventStatus {
-    PreStake = 'prestake',
+    Inactive = 'inactive', // TODO: Do we need a state for before the commencing, is there a better name ...?
+    Commencing = 'commencing',
     Active = 'active',
     Ended = 'ended',
 }

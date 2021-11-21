@@ -2,6 +2,7 @@
     import { Illustration, Link, Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { Locale } from 'shared/lib/typings/i18n'
+    import { stakingEventStatus } from 'shared/lib/participation'
 
     export let locale: Locale
 
@@ -25,7 +26,9 @@
 <div class="flex flex-col space-y-6 w-full h-full bg-yellow-50">
     <div class="flex flex-col h-2/6">
         <div class="absolute flex flex-col justify-center self-center transform translate-y-10">
-            <Text type="h5" classes="text-xl">{locale('views.staking.info.stakingIsLive')}</Text>
+            <Text type="h5" classes="text-xl">
+                {$stakingEventStatus}
+            </Text>
         </div>
         <Illustration illustration="staking-info" />
     </div>

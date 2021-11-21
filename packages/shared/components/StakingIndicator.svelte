@@ -7,10 +7,10 @@
 
     export let locale: Locale
 
-    // TODO: Remove and let polling automatically handle event statuses
-    stakingEventStatus.set(StakingEventStatus.Active)
-
+    let indicatorIcon = ''
     $: indicatorIcon = getIndicatorIcon($stakingEventStatus, $stakedAccounts.length > 0)
+
+    let indicatorText = ''
     $: indicatorText = getIndicatorText($stakingEventStatus, $stakedAccounts.length > 0)
 
     let showTooltip = false
@@ -38,7 +38,7 @@
 
     const getIndicatorIcon = (status: StakingEventStatus, isActive: boolean): string => {
         switch (status) {
-            case StakingEventStatus.PreStake:
+            case StakingEventStatus.Commencing:
                 return isActive ? 'timer' : 'unlock'
             case StakingEventStatus.Active:
                 return isActive ? 'lock' : 'unlock'
@@ -52,7 +52,7 @@
         switch (status) {
             case StakingEventStatus.Active:
                 return isActive ? 'Staking active' : 'Staking inactive'
-            case StakingEventStatus.PreStake:
+            case StakingEventStatus.Commencing:
             case StakingEventStatus.Ended:
             default:
                 return 'Staking inactive'

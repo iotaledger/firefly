@@ -5,7 +5,8 @@ import {
     ParticipationEvent,
     ParticipationOverview,
     ParticipationOverviewResponse,
-    StakingAirdrop, StakingEventStatus,
+    StakingAirdrop,
+    StakingEventStatus,
 } from './typings/participation'
 import type { WalletAccount } from './typings/wallet'
 import type { Event, } from './typings/events'
@@ -13,6 +14,7 @@ import { persistent } from './helpers'
 import { api, DUST_THRESHOLD } from './wallet'
 import { showAppNotification } from './notifications'
 import { MILLISECONDS_PER_SECOND } from './time'
+import { networkStatus } from './networkStatus'
 
 /** Assembly event ID */
 const ASSEMBLY_EVENT_ID = 'c4f23236b3ce22f9fe22583176813618b304bbfcfd24da68cbddf66196b0d8fd';
@@ -56,10 +58,18 @@ export const unstakedAmount: Readable<number> = derived(
 )
 
 /** Total shimmer rewards for all accounts */
-export const shimmerRewards = derived(participationOverview, (overview) => overview.reduce((acc, accountOverview) => acc += accountOverview.shimmerRewards, 0))
+export const shimmerRewards = derived(
+    participationOverview,
+    (overview) =>
+        overview.reduce((total, accountOverview) => total + accountOverview.shimmerRewards, 0)
+)
 
 /** Total assembly rewards for all accounts */
-export const assemblyRewards = derived(participationOverview, (overview) => overview.reduce((acc, accountOverview) => acc += accountOverview.assemblyRewards, 0))
+export const assemblyRewards = derived(
+    participationOverview,
+    (overview) =>
+        overview.reduce((total, accountOverview) => total + accountOverview.assemblyRewards, 0)
+)
 
 /**
  * The specific participation events available.
@@ -79,7 +89,28 @@ export const shimmerStakingRemainingDays = writable<number>(0)
 export const assemblyStakingRemainingDays = writable<number>(0)
 
 // TODO: Derive this value later / make this better
-export const stakingEventStatus = writable<StakingEventStatus>(StakingEventStatus.PreStake)
+export const stakingEventStatus: Readable<StakingEventStatus> = derived(
+    [networkStatus, participationEvents],
+    ([$networkStatus, $participationEvents]) => {
+        const stakingEvent = $participationEvents.filter((pe) => STAKING_EVENT_IDS.includes(pe.eventId))[0]
+        const {
+            milestoneIndexCommence,
+            milestoneIndexStart,
+            milestoneIndexEnd,
+        } = stakingEvent?.information
+        const currentMilestone = $networkStatus?.currentMilestone
+
+        if (currentMilestone < milestoneIndexCommence) {
+            return StakingEventStatus.Inactive
+        } else if (currentMilestone < milestoneIndexStart) {
+            return StakingEventStatus.Commencing
+        } else if (currentMilestone < milestoneIndexEnd) {
+            return StakingEventStatus.Active
+        } else {
+            return StakingEventStatus.Ended
+        }
+    }
+)
 
 /**
  * The store for accounts that are currently staked. This is NOT to hold accounts
@@ -162,14 +193,21 @@ export const estimateStakingAirdropReward = (airdrop: StakingAirdrop, amountToSt
         })
     }
 
+    /**
+     * NOTE: We can use either of these, however since the network status is polled reguarly
+     * it will seem more dynamic rather than re-calculating within this function.
+     */
+    const currentMilestone = get(networkStatus)?.currentMilestone || stakingEvent?.status?.milestoneIndex
+    const endMilestone = stakingEvent?.information?.milestoneIndexEnd
+
     switch (airdrop) {
         case StakingAirdrop.Assembly:
             return estimateAssemblyReward(
-                amountToStake, stakingEvent?.status?.milestoneIndex, stakingEvent?.information?.milestoneIndexEnd
+                amountToStake, currentMilestone, endMilestone
             )
         case StakingAirdrop.Shimmer:
             return estimateShimmerReward(
-                amountToStake, stakingEvent?.status?.milestoneIndex, stakingEvent?.information?.milestoneIndexEnd
+                amountToStake, currentMilestone, endMilestone
             )
         default:
             return 0
