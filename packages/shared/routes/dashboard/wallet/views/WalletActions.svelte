@@ -9,6 +9,7 @@
     import { Receive, Send } from '.'
     import { Locale } from 'shared/lib/typings/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { isAccountStaked } from 'shared/lib/participation'
 
     export let locale: Locale
 
@@ -50,7 +51,9 @@
                             size={$viewableAccounts.length === 1 ? 'l' : 'm'}
                             hidden={hiddenAccounts.includes(account.id)}
                             onClick={() => handleAccountClick(account.id)}
-                            ledger={$isLedgerProfile} />
+                            ledger={$isLedgerProfile}
+                            staked={isAccountStaked(account.id)}
+                        />
                     {/each}
                 </div>
             {:else}
