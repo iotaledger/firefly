@@ -21,7 +21,11 @@
                 "first": "Zacznijmy od Twojej pierwszej nazwy profilu.",
                 "nonFirst": "Zacznijmy od Twojej nazwy profilu."
             },
-            "addMore": "Będziesz mógł dodać więcej profili później."
+            "addMore": "Będziesz mógł dodać więcej profili później.",
+            "developer": {
+                "label": "Profil dewelopera",
+                "info": "Połącz się z publicznymi i prywatnymi sieciami IOTA"
+            }
         },
         "setup": {
             "title": "Skonfiguruj portfel",
@@ -307,7 +311,8 @@
             },
             "theme": {
                 "title": "Motyw",
-                "description": ""
+                "description": "",
+                "advice": "Uruchom ponownie Firefly, aby zastosować zmianę motywu"
             },
             "language": {
                 "title": "Język",
@@ -323,14 +328,14 @@
             },
             "networkStatus": {
                 "title": "Status sieci",
-                "description": "Wyświetla stan serwera, do którego jesteś obecnie podłączony."
+                "description": "Wyświetla status serwera, do którego jesteś obecnie podłączony"
             },
             "exportStronghold": {
                 "title": "Eksportuj kopię zapasową",
                 "description": "Eksport do pliku Stronghold - kompletna zaszyfrowana kopia zapasowa portfeli wraz z ostatnią historią transakcji"
             },
             "appLock": {
-                "title": "Automatyczna blokada ekranu",
+                "title": "Automatyczna blokada",
                 "description": "Czas bezczynności przed zablokowaniem ekranu aplikacji i wylogowaniem z portfeli",
                 "durationMinute": "{time, plural, one {1 minuta} few {# minuty} many {# minut} other {# minuty}}",
                 "durationHour": "{time, plural, one {1 godzina} few {# godziny} many {# godzin} other {# godziny}}"
@@ -360,28 +365,39 @@
                 "description": "Ta opcja usuwa cały Twój profil, portfele oraz historię transakcji. Upewnij się, że posiadasz kopię zapasową"
             },
             "deepLinks": {
-                "title": "Deep linki",
-                "description": "Automatyczne wypełnianie danych transakcji w Firefly po kliknięciu na link iota://"
+                "title": "Linki IOTA",
+                "description": "Automatyczne wypełnianie danych transakcji w Firefly po kliknięciu na link IOTA"
             },
-            "developerMode": {
-                "title": "Tryb deweloperski",
-                "description": "Łączenie z sieciami testowymi i inne funkcje programistyczne"
-            },
-            "nodeSettings": {
-                "title": "Ustawienia serwera",
-                "description": "Wybierz manualne ustawienie, aby wybrać serwer z listy lub dodać swój własny serwer"
+            "networkConfiguration": {
+                "title": "Konfiguracja sieci",
+                "title2": "Konfiguracja sieci",
+                "description": {
+                    "dev": "Ustawienia Twojej sieci będą aktualizowane automatycznie zgodnie z aktualną konfiguracją serwera (przełączenie sieci spowoduje zresetowanie stanu portfela)",
+                    "nonDev": "Twoje ustawienia sieci zostaną automatycznie zaktualizowane zgodnie z aktualną konfiguracją serwera"
+                },
+                "switchedNetworks": "Pomyślnie zmieniono sieć na \"{networkName}\".",
+                "resetWallet": "Twój stan portfela został zresetowany.",
+                "connectedTo": "Połączono z",
+                "nodeConfiguration": {
+                    "title": "Wybór serwera",
+                    "description": "Wybierz \"Manualne\", aby skonfigurować ustawienia serwera i połączyć się z własnymi serwerami",
+                    "automatic": "Automatyczne",
+                    "manual": "Manualne"
+                }
             },
             "configureNodeList": {
-                "title": "Wybierz serwer",
-                "description": "Zarządzaj listą serwerów sieciowych IOTA, z którymi się łączysz",
+                "title": "Konfiguracja serwera",
+                "description": "Zarządzaj listą serwerów, z którymi się łączysz",
                 "primaryNode": "Serwer główny",
                 "excludeNode": "Wyklucz serwer",
                 "includeNode": "Uwzględnij serwer",
-                "viewDetails": "Pokaż szczegóły",
+                "editDetails": "Edytuj szczegóły",
+                "viewInfo": "Zobacz informacje",
                 "setAsPrimary": "Ustaw jako główny",
                 "removeNode": "Usuń serwer",
                 "includeOfficialNodeList": "Uwzględnij oficjalną listę serwerów",
-                "noNodes": "Brak serwerów, zamiast tego zostanie użyty automatyczny wybór"
+                "noNodes": "Brak serwerów, nie można połączyć się z siecią",
+                "noNodesAuto": "Nie ma żadnych serwerów, zamiast tego zostanie użyty automatyczny wybór"
             },
             "proofOfWork": {
                 "title": "Proof of work",
@@ -396,7 +412,7 @@
                 "description": "Zobacz informacje o systemie i aplikacji"
             },
             "migrateLedgerIndex": {
-                "title": "Migracja indeksu Ledger",
+                "title": "Migruj indeks Ledger",
                 "description": "Migracja innego indeksu konta z Trinity"
             },
             "stateExport": {
@@ -528,12 +544,37 @@
             "titleAdd": "Dodaj serwer",
             "titleUpdate": "Aktualizuj serwer",
             "titleRemove": "Usuń serwer",
+            "titleRemoveAll": "Usuń wszystkie serwery",
             "titleDetails": "Szczegóły serwera",
+            "titleInfo": "Informacje o serwerze",
+            "addingNode": "Dodawanie serwera",
+            "updatingNode": "Aktualizacja serwera",
+            "loadingNodeInfo": "Wczytywanie informacji o serwerze",
             "nodeAddress": "Adres serwera",
             "optionalUsername": "Nazwa użytkownika (opcjonalnie)",
             "optionalPassword": "Hasło (opcjonalnie)",
+            "optionalJwt": "JSON web token (opcjonalnie)",
             "setAsPrimaryNode": "Ustaw jako serwer główny",
-            "removeConfirmation": "Czy na pewno chcesz usunąć ten serwer?"
+            "removeConfirmation": "Czy na pewno chcesz usunąć ten serwer?",
+            "removeAllConfirmation": "Czy na pewno chcesz usunąć wszystkie serwery?",
+            "info": {
+                "url": "Adres URL",
+                "software": "Oprogramowanie",
+                "networkId": "ID sieci",
+                "bech32HRP": "Bech32 HRP",
+                "features": "Funkcje",
+                "confirmedMilestoneIndex": "Confirmed milestone index",
+                "pruningIndex": "Pruning index",
+                "messagesPerSecond": "Wiadomości na sekundę",
+                "referencedRate": "Potwierdzeń w sieci"
+            }
+        },
+        "switchNetwork": {
+            "title": "Przełącz sieć",
+            "newNetwork": "Nowa sieć",
+            "resetWarning": "Zmiana sieci spowoduje wylogowanie i zresetowanie wszystkich kont, sald i historii transakcji dla tego profilu.",
+            "switchingNetwork": "Przełączanie sieci",
+            "typePassword": "Wpisz hasło, aby przełączyć na:"
         },
         "errorLog": {
             "title": "Dziennik błędów",
@@ -684,7 +725,7 @@
         "syncAll": "Synchronizuj wszystko",
         "export": "Eksportuj",
         "exportNewStronghold": "Eksportuj zaktualizowany plik Stronghold",
-        "enableDeepLinks": "Włącz deep linki",
+        "enableDeepLinks": "Włącz linki IOTA",
         "enableDeveloperMode": "Włącz tryb deweloperski",
         "enableSystemNotifications": "Włącz powiadomienia systemowe",
         "exportState": "Eksportuj stan",
@@ -702,6 +743,7 @@
         "addNode": "Dodaj serwer",
         "updateNode": "Aktualizuj serwer",
         "removeNode": "Usuń serwer",
+        "removeAllNodes": "Usuń wszystkie serwery",
         "hide": "Ukryj",
         "hideOthers": "Ukryj pozostałe",
         "showAll": "Pokaż wszystkie",
@@ -781,8 +823,9 @@
         "stronghold": "Stronghold",
         "language": "Język",
         "appearance": "Wygląd",
-        "lightTheme": "Tryb jasny",
-        "darkTheme": "Tryb ciemny",
+        "lightTheme": "Jasny",
+        "darkTheme": "Ciemny",
+        "systemTheme": "Systemowy",
         "balance": "Saldo",
         "accountBalance": "Saldo portfela",
         "incoming": "Odebrano",
@@ -791,11 +834,7 @@
         "totalOut": "Łącznie wychodzące",
         "accounts": "Portfele",
         "myAccounts": "Moje portfele",
-        "automaticNodeSelection": "Automatyczny wybór serwera",
-        "manualNodeSelection": "Manualny wybór serwera",
         "profiles": "Profile",
-        "developerProfile": "Profil deweloperski",
-        "developerProfileDescription": "Pozwala na połączenie z sieciami testowymi",
         "dev": "Deweloper",
         "createAccount": "Utwórz portfel",
         "accountName": "Nazwa portfela",
@@ -803,6 +842,7 @@
         "transactions": "Transakcje",
         "security": "Bezpieczeństwo",
         "accountAddress": "Adres portfela",
+        "network": "Sieć",
         "nodes": "Serwery",
         "wallet": "Portfel",
         "help": "Pomoc",
@@ -861,7 +901,8 @@
         "legacyNetwork": "Poprzednia sieć",
         "capsLock": "Caps Lock jest włączony",
         "version": "Wersja {version}",
-        "unknown": "Brak informacji"
+        "unknown": "Brak informacji",
+        "none": "Brak"
     },
     "dates": {
         "today": "Dzisiaj",
@@ -885,7 +926,17 @@
         "minutesRemaining": "{minutes, plural, one {pozostała 1 minuta} few {pozostały # minuty} many {pozostało # minut} other {pozostało # minut}}",
         "copiedToClipboard": "Skopiowano do schowka",
         "accountsSynchronized": "Synchronizacja portfela ukończona",
-        "fundsAvailableSoon": "Twoje środki wkrótce staną się dostępne"
+        "fundsAvailableSoon": "Twoje środki wkrótce staną się dostępne",
+        "deepLinkingRequest": {
+            "recievedWhileLoggedOut": "Zaloguj się, aby zainicjować link IOTA",
+            "notEnabled": "Linki IOTA nie są włączone",
+            "invalidFormat": "Link IOTA, który wybrałeś, jest nieprawidłowy",
+            "wallet": {
+                "send": {
+                    "success": "Szczegóły płatności dodane z linku IOTA"
+                }
+            }
+        }
     },
     "error": {
         "profile": {
@@ -945,11 +996,23 @@
         },
         "node": {
             "invalid": "Wprowadź prawidłowy adres URL.",
-            "dns": "Nie można uzyskać wyniku DNS dla serwera.",
-            "https": "HTTPS jest wymagany. Skonfiguruj profil dewelopera, aby używać niezabezpieczonych połączeń HTTP.",
+            "dns": "Nie można odnaleźć odpowiedzi DNS dla serwera.",
+            "timedOut": "Przekroczono limit czasu połączenia.",
+            "refused": "Połączenie zostało odrzucone.",
+            "handshake": "Nie można uzyskać potwierdzenia z serwera.",
+            "invalidCertificate": "Nie można połączyć się z nieprawidłowym certyfikatem.",
+            "https": "HTTPS jest wymagany; niezabezpieczone połączenia przez HTTP nie są obecnie obsługiwane.",
             "duplicate": "Ten serwer został już wcześniej dodany.",
             "unsynced": "Serwer nie jest zsynchronizowany.",
-            "noSynced": "Brak zsynchronizowanych serwerów."
+            "noSynced": "Brak zsynchronizowanych serwerów.",
+            "answer": "Nie udało się uzyskać odpowiedzi od wszystkich serwerów.",
+            "forbidden": "Połączenie z tym serwerem jest zabronione."
+        },
+        "network": {
+            "mismatch": "ID sieci dla tego węzła to \"{networkId}\", które nie pasuje do bieżącej sieci.",
+            "notReachable": "Nie można pobrać ID sieci dla tego serwera, nie można dodać serwera.",
+            "badNodes": "Nie można połączyć się z siecią przy użyciu bieżącej konfiguracji serwera.",
+            "nonEmptyAccount": "Musisz przenieść wszystkie salda przed przełączeniem sieci."
         },
         "global": {
             "generic": "Coś poszło nie tak."
@@ -985,6 +1048,11 @@
         },
         "crypto": {
             "cannotDecodeBech32": "Nie można odkodować ciągu znaków jako adresu Bech32."
+        }
+    },
+    "warning": {
+        "node": {
+            "http": "Korzystanie z węzłów przez HTTP powoduje, że ruch jest niezaszyfrowany i może stanowić zagrożenie dla bezpieczeństwa."
         }
     },
     "tooltips": {

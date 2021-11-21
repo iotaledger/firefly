@@ -21,7 +21,11 @@
                 "first": "이제 여러분의 첫번째 프로필 이름부터 만들어볼까요.",
                 "nonFirst": "이제 여러분의 프로필 이름부터 만들어볼까요."
             },
-            "addMore": "나중에 다른 프로필도 더 추가할 수 있습니다."
+            "addMore": "나중에 다른 프로필도 더 추가할 수 있습니다.",
+            "developer": {
+                "label": "개발자 프로필",
+                "info": "공용 및 사설 IOTA 네트워크로 연결"
+            }
         },
         "setup": {
             "title": "지갑 설정하기",
@@ -307,7 +311,8 @@
             },
             "theme": {
                 "title": "테마",
-                "description": ""
+                "description": "",
+                "advice": "시스템 테마를 적용하려면 Firefly 앱을 다시 시작하십시오."
             },
             "language": {
                 "title": "언어",
@@ -323,7 +328,7 @@
             },
             "networkStatus": {
                 "title": "네트워크 상태",
-                "description": "현재 연결되어있는 노드의 상태를 표시합니다."
+                "description": "현재 연결하고 있는 노드의 상태를 표시합니다"
             },
             "exportStronghold": {
                 "title": "백업 내보내기",
@@ -360,28 +365,39 @@
                 "description": "지갑, 프로필 및 거래 내역 전체를 삭제합니다. 삭제 전에 백업해 놓았는지 확인해주세요"
             },
             "deepLinks": {
-                "title": "딥 링크",
-                "description": "iota:// 로 시작하는 주소에 접근할 경우 자동으로 Firefly에 거래 관련 데이터 입력"
+                "title": "IOTA 링크",
+                "description": "IOTA 링크에 접근할 경우 자동으로 Firefly에 거래 관련 데이터 입력"
             },
-            "developerMode": {
-                "title": "개발자 모드",
-                "description": "테스트넷 접속 및 기타 개발자 기능들"
-            },
-            "nodeSettings": {
-                "title": "노드 설정",
-                "description": "수동을 선택하여 접속할 노드를 목록에서 수동으로 고르거나 직접 추가"
+            "networkConfiguration": {
+                "title": "네트워크 구성",
+                "title2": "네트워크 구성",
+                "description": {
+                    "dev": "현재 노드 구성에 의해 네트워크 설정이 자동으로 갱신될 것입니다 (네트워크 변경 시 지갑 상태가 초기화됩니다)",
+                    "nonDev": "현재 노드 구성에 의해 네트워크 설정이 자동으로 갱신될 것입니다"
+                },
+                "switchedNetworks": "\"{networkName}\" 네트워크로 성공적으로 변경했습니다.",
+                "resetWallet": "지갑 상태가 초기화되었습니다.",
+                "connectedTo": "연결함:",
+                "nodeConfiguration": {
+                    "title": "노드 선택",
+                    "description": "\"수동\"을 선택하여 노드 설정을 구성하고 노드로 연결",
+                    "automatic": "자동",
+                    "manual": "수동"
+                }
             },
             "configureNodeList": {
-                "title": "노드 선택",
-                "description": "연결하는 IOTA 네트워크 노드 목록을 관리합니다",
+                "title": "노드 구성",
+                "description": "연결한 노드 목록을 관리합니다",
                 "primaryNode": "주 노드",
                 "excludeNode": "이 노드 제외하기",
                 "includeNode": "포함 노드",
-                "viewDetails": "상세 보기",
+                "editDetails": "세부 정보 수정",
+                "viewInfo": "정보 보기",
                 "setAsPrimary": "주 노드로 설정",
                 "removeNode": "노드 삭제",
                 "includeOfficialNodeList": "공식 노드 목록 포함",
-                "noNodes": "노드가 없으며 대신 자동 선택이 사용됩니다"
+                "noNodes": "노드가 없으며, 네트워크에 연결할 수 없습니다",
+                "noNodesAuto": "노드가 없으며 대신 자동 선택이 사용됩니다"
             },
             "proofOfWork": {
                 "title": "작업증명",
@@ -528,12 +544,37 @@
             "titleAdd": "노드 추가",
             "titleUpdate": "노드 변경",
             "titleRemove": "노드 삭제",
+            "titleRemoveAll": "모든 노드 삭제",
             "titleDetails": "노드 세부사항",
+            "titleInfo": "노드 정보",
+            "addingNode": "노드 추가 중",
+            "updatingNode": "노드 갱신 중",
+            "loadingNodeInfo": "추가 정보를 불러오는 중",
             "nodeAddress": "노드 주소",
             "optionalUsername": "사용자 이름 (선택사항)",
             "optionalPassword": "비밀번호 (선택사항)",
+            "optionalJwt": "JSON 웹 토큰 (선택)",
             "setAsPrimaryNode": "주 노드로 설정",
-            "removeConfirmation": "이 노드를 삭제하시겠습니까?"
+            "removeConfirmation": "이 노드를 삭제하시겠습니까?",
+            "removeAllConfirmation": "정말로 모든 노드를 삭제하시겠습니까?",
+            "info": {
+                "url": "URL",
+                "software": "소프트웨어",
+                "networkId": "네트워크 ID",
+                "bech32HRP": "Bech32 HRP",
+                "features": "기능",
+                "confirmedMilestoneIndex": "승인한 마일스톤 지수",
+                "pruningIndex": "절약 지수",
+                "messagesPerSecond": "초당 메세지",
+                "referencedRate": "참조 비율"
+            }
+        },
+        "switchNetwork": {
+            "title": "네트워크 변경",
+            "newNetwork": "새 네트워크",
+            "resetWarning": "네트워크를 변경하면 로그아웃되며 이 프로필의 모든 계정, 잔액, 처리 내역이 초기화됩니다.",
+            "switchingNetwork": "네트워크 변경 중",
+            "typePassword": "변경하려면 비밀번호를 입력하세요:"
         },
         "errorLog": {
             "title": "오류 로그",
@@ -635,7 +676,7 @@
         "outgoingMi": "{value} 보냄",
         "portoflio": "포트폴리오",
         "token": "토큰",
-        "holdings": "Holdings",
+        "holdings": "대기",
         "accountValue": "지갑 밸류",
         "accountActivity": "지갑 활동 내역",
         "timeframe1Hour": "1시간",
@@ -684,7 +725,7 @@
         "syncAll": "모두 동기화하기",
         "export": "내보내기",
         "exportNewStronghold": "새 Stronghold 내보내기",
-        "enableDeepLinks": "딥 링크 활성화",
+        "enableDeepLinks": "IOTA 링크 활성화",
         "enableDeveloperMode": "개발자 모드 활성화하기",
         "enableSystemNotifications": "시스템 알림 켜기",
         "exportState": "상태 내보내기",
@@ -702,6 +743,7 @@
         "addNode": "노드 추가",
         "updateNode": "노드 변경",
         "removeNode": "노드 삭제",
+        "removeAllNodes": "모든 노드 삭제",
         "hide": "숨기기",
         "hideOthers": "나머지 숨기기",
         "showAll": "모두 보기",
@@ -781,8 +823,9 @@
         "stronghold": "Stronghold",
         "language": "언어",
         "appearance": "모양새",
-        "lightTheme": "밝은 테마",
-        "darkTheme": "어두운 테마",
+        "lightTheme": "밝게",
+        "darkTheme": "어둡게",
+        "systemTheme": "시스템",
         "balance": "잔고",
         "accountBalance": "지갑 잔고",
         "incoming": "받음",
@@ -791,11 +834,7 @@
         "totalOut": "전체 보낸 양",
         "accounts": "지갑",
         "myAccounts": "내 지갑",
-        "automaticNodeSelection": "자동으로 노드 선택",
-        "manualNodeSelection": "수동으로 노드 선택",
         "profiles": "프로필",
-        "developerProfile": "개발자 프로필",
-        "developerProfileDescription": "테스트 넷에 연결할 수 있습니다",
         "dev": "개발자",
         "createAccount": "지갑 만들기",
         "accountName": "지갑 이름",
@@ -803,6 +842,7 @@
         "transactions": "거래내역",
         "security": "보안",
         "accountAddress": "지갑 주소",
+        "network": "네트워크",
         "nodes": "노드",
         "wallet": "지갑",
         "help": "도움말",
@@ -861,7 +901,8 @@
         "legacyNetwork": "예전 네트워크",
         "capsLock": "Caps Lock 켜짐",
         "version": "{version} 버전",
-        "unknown": "알 수 없음"
+        "unknown": "알 수 없음",
+        "none": "없음"
     },
     "dates": {
         "today": "오늘",
@@ -885,7 +926,17 @@
         "minutesRemaining": "{minutes, plural, other {남은 시간 #분}}",
         "copiedToClipboard": "클립보드에 복사되었습니다.",
         "accountsSynchronized": "지갑 동기화 완료",
-        "fundsAvailableSoon": "자금이 곧 사용가능해질 것입니다."
+        "fundsAvailableSoon": "자금이 곧 사용가능해질 것입니다.",
+        "deepLinkingRequest": {
+            "recievedWhileLoggedOut": "IOTA 링크를 시작하려면 로그인하십시오",
+            "notEnabled": "IOTA 링크 비활성화됨",
+            "invalidFormat": "IOTA 링크가 유효하지 않습니다",
+            "wallet": {
+                "send": {
+                    "success": "IOTA 링크에서 결제 세부 사항 추가됨"
+                }
+            }
+        }
     },
     "error": {
         "profile": {
@@ -945,11 +996,23 @@
         },
         "node": {
             "invalid": "유효한 URL을 입력하세요.",
-            "dns": "Could not resolve DNS for node.",
-            "https": "HTTPS 연결이 필요합니다. 사용자를 개발자로 설정해야 보안되지 않은 HTTP 연결을 사용할 수 있습니다.",
+            "dns": "노드용 DNS 리졸브를 찾을 수 없습니다.",
+            "timedOut": "연결 시간이 초과되었습니다.",
+            "refused": "연결이 거부되었습니다.",
+            "handshake": "노드와의 핸드셰이크를 실패했습니다.",
+            "invalidCertificate": "인증서가 유효하지 않아 연결할 수 없습니다.",
+            "https": "HTTPS 연결이 필요합니다. 현재 HTTP로 안전하지 않은 연결을 하는 것은 지원하지 않습니다.",
             "duplicate": "이미 추가된 노드입니다.",
             "unsynced": "동기화되지 않은 노드입니다.",
-            "noSynced": "사용할 수 있는 동기화된 노드가 없습니다."
+            "noSynced": "사용할 수 있는 동기화된 노드가 없습니다.",
+            "answer": "모든 노드로부터 응답을 받을 수 없습니다.",
+            "forbidden": "이 노드 연결은 금지되었습니다."
+        },
+        "network": {
+            "mismatch": "노드의 네트워크 ID는 \"{networkId}\"이며, 현재 네트워크에 맞지 않습니다.",
+            "notReachable": "이 노드의 네트워크 ID를 회수할 수 없으며, 노드를 추가할 수 없습니다.",
+            "badNodes": "현재 노드 구성으로는 네트워크에 연결할 수 없습니다.",
+            "nonEmptyAccount": "네트워크를 변경하기 전 모든 잔액을 전송해야 합니다."
         },
         "global": {
             "generic": "문제가 발생했습니다"
@@ -984,7 +1047,12 @@
             "missingBundle": "거래 번들을 찾는 동안 에러가 발생하였습니다."
         },
         "crypto": {
-            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
+            "cannotDecodeBech32": "문자열을 Bech32 주소로 디코드할 수 없습니다."
+        }
+    },
+    "warning": {
+        "node": {
+            "http": "HTTP를 기반으로 노드를 이용하는 경우 트래픽이 암호화되지 않으며 보안 위험을 초래할 수 있습니다."
         }
     },
     "tooltips": {

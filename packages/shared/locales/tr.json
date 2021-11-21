@@ -15,13 +15,17 @@
         },
         "profile": {
             "title": "Profil oluştur",
-            "profileName": "Profil Adı",
+            "profileName": "Profile name",
             "body1": "Cüzdanlarınızı düzenlemek ve gizliliği artırmak için birden fazla kullanıcı profili oluşturabilirsiniz.",
             "body2": {
                 "first": "Şimdilik, ilk profil adınızla başlayalım.",
                 "nonFirst": "Şimdilik, profil adınızla başlayalım."
             },
-            "addMore": "Daha sonra daha fazla profil ekleyebilirsiniz."
+            "addMore": "Daha sonra daha fazla profil ekleyebilirsiniz.",
+            "developer": {
+                "label": "Developer profile",
+                "info": "Connect to public and private IOTA networks"
+            }
         },
         "setup": {
             "title": "Bir cüzdan oluşturun",
@@ -307,7 +311,8 @@
             },
             "theme": {
                 "title": "Tema",
-                "description": ""
+                "description": "",
+                "advice": "Restart the Firefly application for changes to the system theme to take effect"
             },
             "language": {
                 "title": "Dil",
@@ -323,14 +328,14 @@
             },
             "networkStatus": {
                 "title": "Ağ durumu",
-                "description": "Şu anda bağlı olduğunuz node'un durumunu görüntüler."
+                "description": "Displays the status of the node you are currently connected to"
             },
             "exportStronghold": {
-                "title": "Yedeği dışa aktar",
+                "title": "Export backup",
                 "description": "Bir Stronghold dosyasına aktarın - cüzdanlarınızın ve en son işlem geçmişinizin şifrelenmiş tam yedeği"
             },
             "appLock": {
-                "title": "Otomatik Kilitleme",
+                "title": "Automatic lock",
                 "description": "Cüzdanlarınız kilitlenmeden ve çıkış yapılmadan önce hareketsizlik süresi",
                 "durationMinute": "{time, plural,one {1 dakika}other {# dakikalar}}",
                 "durationHour": "{time, plural,one {1 saat}other {#saatler}}"
@@ -360,28 +365,39 @@
                 "description": "Tüm profilinizi, cüzdanlarınızı ve işlem geçmişinizi siler. Bir yedeğiniz olduğundan emin olun"
             },
             "deepLinks": {
-                "title": "Derin Bağlantılar",
-                "description": "Firefly’daki işlem bilgisini, iota:// linkine tıkladığında otomatik olarak doldur"
+                "title": "IOTA links",
+                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
             },
-            "developerMode": {
-                "title": "Geliştirici Modu",
-                "description": "Testnetlere ve diğer geliştirici özelliklerine bağlan"
-            },
-            "nodeSettings": {
-                "title": "Ağ Ayarları",
-                "description": "Düğüm ayarlarınızı yapmak ve kendi düğümünüze bağlanmak için Manual’i seçiniz"
+            "networkConfiguration": {
+                "title": "Network config",
+                "title2": "Network configuration",
+                "description": {
+                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
+                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                },
+                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
+                "resetWallet": "Your wallet state has been reset.",
+                "connectedTo": "Connected to",
+                "nodeConfiguration": {
+                    "title": "Node selection",
+                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
+                    "automatic": "Automatic",
+                    "manual": "Manual"
+                }
             },
             "configureNodeList": {
-                "title": "Seçilmiş Sayfa",
-                "description": "Bağlandığınız IOTA ağ nodelarının listesini yönetin",
+                "title": "Node configuration",
+                "description": "Manage the list of nodes you connect to",
                 "primaryNode": "Birincil düğüm",
                 "excludeNode": "Düğümü hariç tut",
                 "includeNode": "Düğümü dahil et",
-                "viewDetails": "Detayları göster",
+                "editDetails": "Edit details",
+                "viewInfo": "View info",
                 "setAsPrimary": "Birincil düğüm olarak ayarla",
                 "removeNode": "Düğüm kaldır",
                 "includeOfficialNodeList": "Resmi düğüm listesini dahil et",
-                "noNodes": "Node bulunmamakta, bunun yerine otomatik seçim kullanılacak"
+                "noNodes": "There are no nodes, unable to connect to the network",
+                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "İş Kanıtı",
@@ -396,7 +412,7 @@
                 "description": "Sistem ve uygulama bilgilerini görüntüleyin"
             },
             "migrateLedgerIndex": {
-                "title": "Ledger İndeksini Taşıma",
+                "title": "Migrate Ledger index",
                 "description": "Başka bir Trinity hesap indeksini taşıyın"
             },
             "stateExport": {
@@ -413,7 +429,7 @@
             },
             "faq": {
                 "title": "SSS",
-                "title2": "Sıkça Sorulan Sorular",
+                "title2": "Frequently asked questions",
                 "description": "Yaygın bir sorun veya soru ile ilgili yardım almak için SSS'leri görüntüleyin"
             },
             "discord": {
@@ -528,12 +544,37 @@
             "titleAdd": "Bir node ekle",
             "titleUpdate": "Bir düğümü güncelleyin",
             "titleRemove": "Düğüm kaldır",
+            "titleRemoveAll": "Remove all nodes",
             "titleDetails": "Node detayları",
+            "titleInfo": "Node info",
+            "addingNode": "Adding node",
+            "updatingNode": "Updating node",
+            "loadingNodeInfo": "Loading node info",
             "nodeAddress": "Node adresi",
             "optionalUsername": "Kullanıcı adı (opsiyonel)",
             "optionalPassword": "Şifre (opsiyonel)",
+            "optionalJwt": "JSON web token (optional)",
             "setAsPrimaryNode": "Birincil düğüm olarak ayarla",
-            "removeConfirmation": "Bu klasörü kaldırmak istediğinize emin misiniz?"
+            "removeConfirmation": "Bu klasörü kaldırmak istediğinize emin misiniz?",
+            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "info": {
+                "url": "URL",
+                "software": "Software",
+                "networkId": "Network ID",
+                "bech32HRP": "Bech32 HRP",
+                "features": "Features",
+                "confirmedMilestoneIndex": "Confirmed milestone index",
+                "pruningIndex": "Pruning index",
+                "messagesPerSecond": "Saniye başına mesaj sayısı",
+                "referencedRate": "Referans alınan oran"
+            }
+        },
+        "switchNetwork": {
+            "title": "Switch network",
+            "newNetwork": "New network",
+            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
+            "switchingNetwork": "Switching network",
+            "typePassword": "Type your password to switch to:"
         },
         "errorLog": {
             "title": "Hata Geçmişi",
@@ -684,7 +725,7 @@
         "syncAll": "Tümünü eşitle",
         "export": "Dışarı Aktar",
         "exportNewStronghold": "Yeni bir Stronghold dışa aktarın",
-        "enableDeepLinks": "Derin bağlantıları etkinleştir",
+        "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "Geliştirici modunu etkinleştir",
         "enableSystemNotifications": "Bildirimleri etkinleştir",
         "exportState": "State dışa aktarın",
@@ -702,6 +743,7 @@
         "addNode": "Düğüm ekle",
         "updateNode": "Düğümü güncelle",
         "removeNode": "Düğüm kaldır",
+        "removeAllNodes": "Remove all nodes",
         "hide": "Sakla",
         "hideOthers": "Diğerlerini sakla",
         "showAll": "Hepsini göster",
@@ -781,8 +823,9 @@
         "stronghold": "Stronghold",
         "language": "Dil",
         "appearance": "Görünüm",
-        "lightTheme": "Aydınlık tema",
-        "darkTheme": "Karanlık tema",
+        "lightTheme": "Light",
+        "darkTheme": "Dark",
+        "systemTheme": "System",
         "balance": "Bakiye",
         "accountBalance": "Cüzdan Bakiyesi",
         "incoming": "Gelen",
@@ -791,11 +834,7 @@
         "totalOut": "Toplam çıkış",
         "accounts": "Cüzdanlar",
         "myAccounts": "Cüzdanlarım",
-        "automaticNodeSelection": "Otomatik düğüm seçimi",
-        "manualNodeSelection": "Manuel seçim",
         "profiles": "Profiller",
-        "developerProfile": "Geliştirici hesabı",
-        "developerProfileDescription": "Test ağlarına bağlanmanıza izin verir",
         "dev": "Geliştirici",
         "createAccount": "Cüzdan Oluştur",
         "accountName": "Cüzdan adı",
@@ -803,6 +842,7 @@
         "transactions": "Transferler",
         "security": "Güvenlik",
         "accountAddress": "Cüzdan Adresi",
+        "network": "Network",
         "nodes": "Düğümler",
         "wallet": "Cüzdan",
         "help": "Yardım",
@@ -861,7 +901,8 @@
         "legacyNetwork": "Eski Ağ",
         "capsLock": "Caps Lock açık",
         "version": "Sürüm {version}",
-        "unknown": "Unknown"
+        "unknown": "Unknown",
+        "none": "None"
     },
     "dates": {
         "today": "Bugün",
@@ -885,7 +926,17 @@
         "minutesRemaining": "{minutes, plural, one {1 dakika kaldı} other {# dakika kaldı}}",
         "copiedToClipboard": "Panoya kopyalandı",
         "accountsSynchronized": "Cüzdan senkronizasyonu tamamlandı",
-        "fundsAvailableSoon": "Bakiyeniz kısa süre içinde kullanılabilir hale gelecektir"
+        "fundsAvailableSoon": "Bakiyeniz kısa süre içinde kullanılabilir hale gelecektir",
+        "deepLinkingRequest": {
+            "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
+            "notEnabled": "IOTA links are not enabled",
+            "invalidFormat": "The IOTA link you followed is invalid",
+            "wallet": {
+                "send": {
+                    "success": "Payment details added from IOTA link"
+                }
+            }
+        }
     },
     "error": {
         "profile": {
@@ -945,11 +996,23 @@
         },
         "node": {
             "invalid": "Lütfen geçerli bir URL giriniz.",
-            "dns": "Could not resolve DNS for node.",
-            "https": "HTTPS gerekmektedir. Güvenli olmayan HTTP bağlantılarını kullanmak için bir geliştirici profili oluşturun.",
+            "dns": "Could not find DNS resolution for node.",
+            "timedOut": "The connection timed out.",
+            "refused": "The connection was refused.",
+            "handshake": "Could not complete handshake with node.",
+            "invalidCertificate": "Could not connect with invalid certificate.",
+            "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
             "duplicate": "Bu sunucu zaten eklenmiş.",
             "unsynced": "Ağ senkronize değil.",
-            "noSynced": "Senkronize node bulunamadı."
+            "noSynced": "Senkronize node bulunamadı.",
+            "answer": "Failed to get an answer from all nodes.",
+            "forbidden": "This node connection is forbidden."
+        },
+        "network": {
+            "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
+            "notReachable": "The network ID for this node could not be retrieved, unable to add node.",
+            "badNodes": "Unable to connect to the network with current node configuration.",
+            "nonEmptyAccount": "You must transfer all balances before switching networks."
         },
         "global": {
             "generic": "Bir şeyler yanlış gitti."
@@ -985,6 +1048,11 @@
         },
         "crypto": {
             "cannotDecodeBech32": "Unable to decode string as Bech32 address."
+        }
+    },
+    "warning": {
+        "node": {
+            "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
         }
     },
     "tooltips": {
