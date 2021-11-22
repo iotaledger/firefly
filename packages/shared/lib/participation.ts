@@ -1,4 +1,4 @@
-import { derived, get, Readable, writable } from 'svelte/store'
+import { derived, get, Readable, Writable, writable } from 'svelte/store'
 import {
     ParticipateResponsePayload,
     Participation,
@@ -16,10 +16,14 @@ import { showAppNotification } from './notifications'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from './time'
 import { networkStatus } from './networkStatus'
 
-/** Assembly event ID */
+/**
+ * Assembly event ID
+ */
 const ASSEMBLY_EVENT_ID = 'c4f23236b3ce22f9fe22583176813618b304bbfcfd24da68cbddf66196b0d8fd';
 
-/** Shimmer event ID. */
+/**
+ * Shimmer event ID
+ */
 const SHIMMER_EVENT_ID = '415267d375c85531aec13e6471c04a01622dfcc9b285a009629dd2c9231da517';
 
 const STAKING_EVENT_IDS: string[] = [ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID]
@@ -31,8 +35,6 @@ const STAKING_PARTICIPATIONS: Participation[] = [{
     eventId: ASSEMBLY_EVENT_ID,
     answers: []
 }];
-
-//==============================================================================
 
 /**
  * The overview / statistics about participation. See #AccountParticipationOverview for more details.
@@ -48,16 +50,32 @@ export const participationOverview = writable<ParticipationOverview>([])
  * in `wallet.rs`.
  */
 export const stakedAccounts: Readable<WalletAccount[]> = derived(
-    [participationOverview, wallet],
-    ([$participationOverview, $wallet]) => {
+    [participationOverview],
+    ([$participationOverview]) => {
         const activeAccountIndices =
             $participationOverview
                 .filter((apo) => apo.participations.length > 0)
                 .map((apo) => apo.accountIndex)
 
-        return get($wallet.accounts).filter((wa) => activeAccountIndices.includes(wa.index))
+        /**
+         * CAUTION: Ideally the accounts Svelte store would
+         * be derived, but doing so results in a "cannot
+         * access _ before initialization" error.
+         */
+        const accounts = get(wallet).accounts
+        if (!accounts) return []
+        else return get(accounts).filter((wa) => activeAccountIndices.includes(wa.index))
     }
 )
+
+/**
+ * The store for accounts that contain partially staked funds.
+ *
+ * Accounts are added if upon receiving a new transaction they
+ * are currently staked (checks stakedAccounts). Accounts are removed
+ * within the staking flow.
+ */
+export const partiallyStakedAccounts = writable<WalletAccount[]>([])
 
 /**
  * The amount of funds across all accounts that are
@@ -176,29 +194,57 @@ export const shimmerStakingRemainingTime: Readable<number> = derived(
         )
 )
 
+/**
+ * Currency symbols for the staking airdrops.
+ */
 export const STAKING_AIRDROP_TOKENS: { [key in StakingAirdrop]: string } = {
     [StakingAirdrop.Assembly]: 'ASM',
     [StakingAirdrop.Shimmer]: 'SMR',
 }
 
-let pollInterval
+const PARTICIPATION_POLL_DURATION = 10
 
+let participationPollInterval
+
+/**
+ * Begins polling of the participation overview.
+ *
+ * @method pollParticipationOverview
+ *
+ * @returns {Promise<void>}
+ */
 export async function pollParticipationOverview(): Promise<void> {
     await getParticipationOverview()
     /* eslint-disable @typescript-eslint/no-misused-promises */
-    pollInterval = setInterval(
+    participationPollInterval = setInterval(
         async () => await getParticipationOverview(),
-        MILLISECONDS_PER_SECOND * 10
+        PARTICIPATION_POLL_DURATION * MILLISECONDS_PER_SECOND
     )
 }
 
+/**
+ * Clears the polling interval for the participation overview.
+ *
+ * @method clearPollParticipationOverviewInterval
+ *
+ * @returns {void}
+ */
 export function clearPollParticipationOverviewInterval(): void {
-    clearInterval(pollInterval)
+    clearInterval(participationPollInterval)
 }
 
+/**
+ * Resets the non-derived store variables relevant for participation.
+ *
+ * @method resetParticipation
+ *
+ * @returns {void}
+ */
 export const resetParticipation = (): void => {
     participationOverview.set([])
     participationEvents.set([])
+
+    partiallyStakedAccounts.set([])
 }
 
 /**
@@ -245,6 +291,16 @@ const getStakingEventFromAirdrop = (airdrop: StakingAirdrop): ParticipationEvent
     return get(participationEvents).find((pe) => pe.eventId === stakingEventId)
 }
 
+/**
+ * Calculates the reward estimate for a particular staking airdrop.
+ *
+ * @method estimateStakingAirdropReward
+ *
+ * @param {StakingAirdrop} airdrop
+ * @param {number} amountToStake
+ *
+ * @returns {number}
+ */
 export const estimateStakingAirdropReward = (airdrop: StakingAirdrop, amountToStake: number): number => {
     const stakingEvent = getStakingEventFromAirdrop(airdrop)
     if (!stakingEvent) {
@@ -275,6 +331,15 @@ export const estimateStakingAirdropReward = (airdrop: StakingAirdrop, amountToSt
     }
 }
 
+/**
+ * Determines whether an account can participate in an event.
+ *
+ * @method canAccountParticipate
+ *
+ * @param {WalletAccount} account
+ *
+ * @returns {boolean}
+ */
 export const canAccountParticipate = (account: WalletAccount): boolean => {
     return account?.rawIotaBalance >= DUST_THRESHOLD
 }
@@ -317,6 +382,7 @@ export function getParticipationEvents(): Promise<ParticipationEvent[]> {
         api.getParticipationEvents({
             onSuccess(response: Event<ParticipationEvent[]>) {
                 participationEvents.set(response?.payload)
+                console.log('EVENTS: ', get(participationEvents))
 
                 resolve(response?.payload)
             },

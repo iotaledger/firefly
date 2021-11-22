@@ -54,9 +54,8 @@ import { HistoryDataProps, PriceData } from './typings/market'
 import { ProfileType } from './typings/profile'
 import { buildClientOptions } from './network'
 import { Electron } from './electron'
-
+import { isAccountStaked, partiallyStakedAccounts } from './participation'
 import type { ParticipationOverviewResponse, ParticipationEvent, ParticipateResponsePayload, Participation } from './typings/participation'
-
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -809,7 +808,8 @@ export const initialiseListeners = (): void => {
     api.onNewTransaction({
         onSuccess(response) {
             const { accounts } = get(wallet)
-            const account = get(accounts).find((account) => account.id === response.payload.accountId)
+            const accountId = response.payload.accountId
+            const account = get(accounts).find((account) => account.id === accountId)
             const { message } = response.payload
 
             if (message.payload.type === 'Transaction') {
@@ -830,7 +830,18 @@ export const initialiseListeners = (): void => {
                 }
 
                 // Update account with new message
-                saveNewMessage(response.payload.accountId, response.payload.message)
+                saveNewMessage(accountId, response.payload.message)
+
+                if (isAccountStaked(accountId)) {
+                    console.log('INCOMING PARTIAL FUNDS!')
+
+                    partiallyStakedAccounts.update((_partiallyStakedAccounts) => {
+                        const alreadyPartiallyStaked =
+                            _partiallyStakedAccounts.find((psa) => psa.id === accountId) !== undefined
+                        if (alreadyPartiallyStaked) return _partiallyStakedAccounts
+                        else return [..._partiallyStakedAccounts, account]
+                    })
+                }
 
                 const notificationMessage = localize('notifications.valueTx')
                     .replace('{{value}}', formatUnitBestMatch(message.payload.data.essence.data.value, true, 3))
