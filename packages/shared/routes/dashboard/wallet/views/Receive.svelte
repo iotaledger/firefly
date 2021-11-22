@@ -10,6 +10,7 @@
     import { AccountIdentifier } from 'shared/lib/typings/account'
     import { Locale } from 'shared/lib/typings/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { isAccountStaked } from 'shared/lib/participation'
 
     export let locale: Locale
 
@@ -53,7 +54,7 @@
                 <Dropdown
                     valueKey={'alias'}
                     value={selectedAccount.alias}
-                    items={$liveAccounts}
+                    items={$liveAccounts.filter((acc) => !isAccountStaked(acc.id))}
                     onSelect={handleDropdownSelect}
                     disabled={$liveAccounts.length === 1} />
             </div>
