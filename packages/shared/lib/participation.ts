@@ -1,16 +1,15 @@
-import { derived, get, Readable, Writable, writable } from 'svelte/store'
+import { derived, get, Readable, writable } from 'svelte/store'
 import {
     ParticipateResponsePayload,
     Participation,
     ParticipationEvent,
+    ParticipationEventState,
     ParticipationOverview,
     ParticipationOverviewResponse,
     StakingAirdrop,
-    StakingEventStatus,
 } from './typings/participation'
 import type { WalletAccount } from './typings/wallet'
 import type { Event, } from './typings/events'
-import { persistent } from './helpers'
 import { api, DUST_THRESHOLD, wallet } from './wallet'
 import { showAppNotification } from './notifications'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from './time'
@@ -127,11 +126,11 @@ export const participationEvents = writable<ParticipationEvent[]>([])
 /**
  * The status of the staking event, calculated from the milestone information.
  */
-export const stakingEventStatus: Readable<StakingEventStatus> = derived(
+export const stakingEventState: Readable<ParticipationEventState> = derived(
     [networkStatus, participationEvents],
     ([$networkStatus, $participationEvents]) => {
         const stakingEvent = $participationEvents.filter((pe) => STAKING_EVENT_IDS.includes(pe.eventId))[0]
-        if (!stakingEvent) return StakingEventStatus.Inactive
+        if (!stakingEvent) return ParticipationEventState.Ended
 
         const {
             milestoneIndexCommence,
@@ -141,13 +140,13 @@ export const stakingEventStatus: Readable<StakingEventStatus> = derived(
         const currentMilestone = $networkStatus?.currentMilestone
 
         if (currentMilestone < milestoneIndexCommence) {
-            return StakingEventStatus.Inactive
+            return ParticipationEventState.Upcoming
         } else if (currentMilestone < milestoneIndexStart) {
-            return StakingEventStatus.Commencing
+            return ParticipationEventState.Commencing
         } else if (currentMilestone < milestoneIndexEnd) {
-            return StakingEventStatus.Active
+            return ParticipationEventState.Holding
         } else {
-            return StakingEventStatus.Ended
+            return ParticipationEventState.Ended
         }
     }
 )
@@ -241,10 +240,9 @@ export function clearPollParticipationOverviewInterval(): void {
  * @returns {void}
  */
 export const resetParticipation = (): void => {
+    partiallyStakedAccounts.set([])
     participationOverview.set([])
     participationEvents.set([])
-
-    partiallyStakedAccounts.set([])
 }
 
 /**

@@ -6,46 +6,56 @@ export enum StakingAirdrop {
     Shimmer = 'shimmer',
 }
 
-export enum StakingEventStatus {
-    Inactive = 'inactive', // TODO: Do we need a state for before the commencing, is there a better name ...?
-    Commencing = 'commencing',
-    Active = 'active',
-    Ended = 'ended',
-}
-
 export enum ParticipationAction {
     Stake = 'stake',
     Unstake = 'unstake',
     Vote = 'vote',
 }
 
+export enum ParticipationEventState {
+    Upcoming = 'upcoming',
+    Commencing = 'commencing',
+    Holding = 'holding',
+    Ended = 'ended',
+}
+
 export type ParticipationEventStatus = {
-    milestoneIndex: number;
-    status: string;
-    checksum: string;
+    milestoneIndex: number
+    /**
+     * CAUTION: Ideally this property should be named
+     * "state" to avoid confusion, but this is not possible
+     * because of deserialization wallet.rs-side.
+     */
+    status: ParticipationEventState
+    checksum: string
 }
 
 export type ParticipationEventInformation = {
-    milestoneIndexCommence: number;
-    milestoneIndexStart: number;
-    milestoneIndexEnd: number;
-    additionalInfo: string;
+    milestoneIndexCommence: number
+    milestoneIndexStart: number
+    milestoneIndexEnd: number
+    additionalInfo: string
 }
 
 export type ParticipationEvent = {
-    eventId: string;
-    information: ParticipationEventInformation;
+    eventId: string
+    information: ParticipationEventInformation
+    /**
+     * CAUTION: Be careful not to confuse this
+     * property with the nested "status" property
+     * on this type.
+     */
     status: ParticipationEventStatus
 }
 
 export interface ParticipateResponsePayload {
-    accountId: string;
+    accountId: string
     messages: Message[]
 }
 
 export type Participation = {
-    eventId: string;
-    answers: string[];
+    eventId: string
+    answers: string[]
 }
 
 export type AccountParticipationOverview = {
