@@ -11,7 +11,7 @@ import {
 import type { WalletAccount } from './typings/wallet'
 import type { Event, } from './typings/events'
 import { persistent } from './helpers'
-import { api, DUST_THRESHOLD } from './wallet'
+import { api, DUST_THRESHOLD, wallet } from './wallet'
 import { showAppNotification } from './notifications'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from './time'
 import { networkStatus } from './networkStatus'
@@ -40,6 +40,26 @@ const STAKING_PARTICIPATIONS: Participation[] = [{
 export const participationOverview = writable<ParticipationOverview>([])
 
 /**
+ * The store for accounts that are currently staked. This is NOT to hold accounts
+ * that have been selected for staking / unstaking. In other words, if an account is
+ * in this array, then it is currently being staked.
+ *
+ * This is updated regularly by the polling
+ * in `wallet.rs`.
+ */
+export const stakedAccounts: Readable<WalletAccount[]> = derived(
+    [participationOverview, wallet],
+    ([$participationOverview, $wallet]) => {
+        const activeAccountIndices =
+            $participationOverview
+                .filter((apo) => apo.participations.length > 0)
+                .map((apo) => apo.accountIndex)
+
+        return get($wallet.accounts).filter((wa) => activeAccountIndices.includes(wa.index))
+    }
+)
+
+/**
  * The amount of funds across all accounts that are
  * currently staked.
  */
@@ -64,7 +84,7 @@ export const unstakedAmount: Readable<number> = derived(
  * accounts that have been staked (even if they have
  * been unstaked).
  */
-export const assemblyStakingRewards = derived(
+export const assemblyStakingRewards: Readable<number> = derived(
     participationOverview,
     (overview) =>
         overview.reduce((total, accountOverview) => total + accountOverview.assemblyRewards, 0)
@@ -75,7 +95,7 @@ export const assemblyStakingRewards = derived(
  * accounts that have been staked (even if they have
  * been unstaked).
  */
-export const shimmerStakingRewards = derived(
+export const shimmerStakingRewards: Readable<number> = derived(
     participationOverview,
     (overview) =>
         overview.reduce((total, accountOverview) => total + accountOverview.shimmerRewards, 0)
@@ -156,14 +176,6 @@ export const shimmerStakingRemainingTime: Readable<number> = derived(
         )
 )
 
-/**
- * The store for accounts that are currently staked. This is NOT to hold accounts
- * that have been selected for staking / unstaking. In other words, if an account is
- * in this array, then it is currently being staked. This is updated regularly by the polling
- * in `wallet.rs`.
- */
-export const stakedAccounts = persistent<WalletAccount[]>('stakedAccounts', [])
-
 export const STAKING_AIRDROP_TOKENS: { [key in StakingAirdrop]: string } = {
     [StakingAirdrop.Assembly]: 'ASM',
     [StakingAirdrop.Shimmer]: 'SMR',
@@ -182,6 +194,11 @@ export async function pollParticipationOverview(): Promise<void> {
 
 export function clearPollParticipationOverviewInterval(): void {
     clearInterval(pollInterval)
+}
+
+export const resetParticipation = (): void => {
+    participationOverview.set([])
+    participationEvents.set([])
 }
 
 /**
@@ -338,9 +355,9 @@ export function participate(account: WalletAccount): Promise<void> {
             STAKING_PARTICIPATIONS,
             {
                 onSuccess(response: Event<ParticipateResponsePayload>) {
-                    stakedAccounts.update((_stakedAccounts) =>
-                        [..._stakedAccounts, account]
-                    )
+                    // stakedAccounts.update((_stakedAccounts) =>
+                    //     [..._stakedAccounts, account]
+                    // )
                     console.log('STAKED: ', get(stakedAccounts))
 
                     resolve()
@@ -380,9 +397,9 @@ export function participate(account: WalletAccount): Promise<void> {
             STAKING_EVENT_IDS,
             {
                 onSuccess(response: Event<ParticipateResponsePayload>) {
-                    stakedAccounts.update((_stakedAccounts) =>
-                        _stakedAccounts.filter((sa) => sa.id !== account?.id)
-                    )
+                    // stakedAccounts.update((_stakedAccounts) =>
+                    //     _stakedAccounts.filter((sa) => sa.id !== account?.id)
+                    // )
                     console.log('UNSTAKED: ', get(stakedAccounts))
 
                     resolve()

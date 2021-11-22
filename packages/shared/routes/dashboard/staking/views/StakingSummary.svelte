@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, Icon, Text } from 'shared/components'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { stakedAmount, unstakedAmount } from 'shared/lib/participation'
+    import { stakedAccounts, stakedAmount, unstakedAmount } from 'shared/lib/participation'
     import { openPopup } from 'shared/lib/popup'
     import { formatUnitBestMatch } from 'shared/lib/units'
 
@@ -9,6 +9,10 @@
 
     let isStaked
     $: isStaked = $stakedAmount > 0
+
+    $: {
+        console.log('STAKED ACCS: ', $stakedAccounts)
+    }
 
     const handleStakeFundsClick = () => {
         // TODO: Calculate this value instead...

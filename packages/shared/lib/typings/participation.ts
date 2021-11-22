@@ -49,7 +49,7 @@ export type Participation = {
 }
 
 export type AccountParticipationOverview = {
-    accountIndex: string
+    accountIndex: number
     assemblyRewards: number
     assemblyUnstakedFunds: number
     assemblyStakedFunds: number
