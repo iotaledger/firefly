@@ -9,7 +9,8 @@
     import { Receive, Send } from '.'
     import { Locale } from 'shared/lib/typings/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
-    import { isAccountStaked } from 'shared/lib/participation'
+    import { assemblyStakingRewards, isAccountStaked, shimmerStakingRewards } from 'shared/lib/participation'
+    import { StakingAirdrop } from 'shared/lib/typings/participation'
 
     export let locale: Locale
 
@@ -55,6 +56,20 @@
                             staked={isAccountStaked(account.id)}
                         />
                     {/each}
+                    {#if $assemblyStakingRewards}
+                        <AccountTile
+                            airdrop={StakingAirdrop.Assembly}
+                            balance={$assemblyStakingRewards}
+                            size="m"
+                        />
+                    {/if}
+                    {#if $shimmerStakingRewards}
+                        <AccountTile
+                            airdrop={StakingAirdrop.Shimmer}
+                            balance={$shimmerStakingRewards}
+                            size="m"
+                        />
+                    {/if}
                 </div>
             {:else}
                 <Text>{locale('general.noAccounts')}</Text>

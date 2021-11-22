@@ -1,17 +1,41 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
+    import { STAKING_AIRDROP_TOKENS } from 'shared/lib/participation'
+    import { StakingAirdrop } from 'shared/lib/typings/participation'
 
     export let name = ''
     export let balance = ''
     export let balanceEquiv = ''
     export let color = 'turquoise'
     export let ledger = false
+    export let airdrop: StakingAirdrop = undefined
     export let staked = false
     export let size = 'm' // m, l
     export let hidden = false
     export let disabled = false
 
     export let onClick = (): void | string => ''
+
+    if (airdrop) {
+        disabled = true
+    }
+
+    const getName = (): string => {
+        if (name) {
+            return name
+        } else if (airdrop) {
+            switch (airdrop) {
+                case StakingAirdrop.Assembly:
+                    return 'Assembly'
+                case StakingAirdrop.Shimmer:
+                    return 'Shimmer'
+                default:
+                    return ''
+            }
+        } else {
+            return ''
+        }
+    }
 </script>
 
 <style type="text/scss">
@@ -39,13 +63,15 @@
             bold
             smaller={size === 's'}
             overrideColor
-            classes="text-gray-800 dark:text-white {staked ? '' : 'group-hover:text-white'} overflow-hidden overflow-ellipsis">
-            {name}
+            classes="text-gray-800 dark:text-white {staked ? '' : 'group-hover:text-white'} overflow-hidden overflow-ellipsis"
+        >
+            {getName()}
         </Text>
         {#if staked}
             <Icon icon="lock" width="18" height="18" classes="fill-current text-gray-500" />
-        {/if}
-        {#if ledger}
+        {:else if airdrop}
+            <Icon icon={airdrop} width="18" height="18" classes="fill-current text-gray-600" />
+        {:else if ledger}
             <Icon
                 icon="ledger"
                 classes="text-gray-400 dark:text-gray-700"
@@ -55,7 +81,14 @@
     </div>
     <div
         class="flex {size === 'l' ? 'flex-row space-x-4' : 'flex-col space-y-1'} justify-between w-full flex-{size === 'l' ? 'nowrap' : 'wrap'}">
-        <Text smaller overrideColor classes="block text-gray-800 dark:text-white {staked ? '' : 'group-hover:text-white'}">{balance}</Text>
-        <Text smaller overrideColor classes="block text-blue-500 dark:text-gray-600 {staked ? '' : 'group-hover:text-white'}">{balanceEquiv}</Text>
+        <Text smaller overrideColor classes="block text-gray-800 dark:text-white {staked ? '' : 'group-hover:text-white'}">
+            {balance}
+            {#if airdrop}
+                {STAKING_AIRDROP_TOKENS[airdrop.toLowerCase()]}
+            {/if}
+        </Text>
+        <Text smaller overrideColor classes="block text-blue-500 dark:text-gray-600 {staked ? '' : 'group-hover:text-white'}">
+            {balanceEquiv}
+        </Text>
     </div>
 </button>
