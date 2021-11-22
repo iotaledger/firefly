@@ -235,11 +235,52 @@ export const migrateObjects = <T>(oldObj: T, newObj: T): T => {
 export const generateRandomInteger = (beginning: number, end: number): number =>
     Math.floor(Math.random() * end + beginning)
 
-export const asyncForEach = async (array: unknown[], callback: any): Promise<void> => {
-    for (let idx = 0; idx < array.length; idx++) {
-        await callback(array[idx], idx, array)
+/**
+ * Decodes an array of bytes to its UTF-8 string representation.
+ *
+ * @method stringFromUtf8Array
+ *
+ * @param {Uint8Array | number[]} bytes
+ *
+ * @returns {string}
+ */
+export const stringFromUtf8Array = (bytes: Uint8Array | number[]): string => {
+    const extraByteMap = [1, 1, 1, 1, 2, 2, 3, 0]
+    const charCount = bytes.length
+
+    let result = ''
+
+    for (let idx = 0; idx < charCount;) {
+        let char = bytes[idx++]
+        if (char & 0x80) {
+            let extraChar = extraByteMap[(char >> 3) & 0x07]
+            if (!(char & 0x40) || !extraChar || ((idx + extraChar) > charCount))
+                return null
+
+            char = char & (0x3F >> extraChar)
+            for (; extraChar > 0; extraChar--) {
+                const _char = bytes[idx++]
+                if ((_char & 0xC0) != 0x80)
+                    return null
+
+                char = (char << 6) | (_char & 0x3F)
+            }
+        }
+
+        result += String.fromCharCode(char)
     }
+
+    return result
 }
 
+/**
+ * Returns a promise that sets a timeout for the given duration (in milliseconds).
+ *
+ * @method sleep
+ *
+ * @param {number} ms
+ *
+ * @returns {Promise<number>}
+ */
 export const sleep = (ms: number): Promise<number> =>
     new Promise((resolve, reject) => setTimeout(resolve, ms))

@@ -4,6 +4,7 @@
     import { stakedAccounts, stakedAmount, unstakedAmount } from 'shared/lib/participation'
     import { openPopup } from 'shared/lib/popup'
     import { formatUnitBestMatch } from 'shared/lib/units'
+    import { stringFromUtf8Array } from '../../../../lib/utils'
 
     export let locale: Locale
 
@@ -11,7 +12,18 @@
     $: isStaked = $stakedAmount > 0
 
     $: {
-        console.log('STAKED ACCS: ', $stakedAccounts)
+        if ($stakedAccounts.length > 0) {
+            console.log('STAKED ACCS: ', $stakedAccounts)
+            const acc = $stakedAccounts[0]
+            const numMessages = acc.messages.length
+            const lastMessage = acc.messages[numMessages - 1]
+            console.log('LAST MESSAGE: ', lastMessage)
+
+            // @ts-ignore
+            const bytes = lastMessage?.payload?.data?.essence?.data?.payload?.data?.index
+            console.log('BYTES: ', bytes)
+            console.log('STRING: ', stringFromUtf8Array(bytes))
+        }
     }
 
     const handleStakeFundsClick = () => {
