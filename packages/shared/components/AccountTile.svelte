@@ -70,7 +70,7 @@
         {#if staked}
             <Icon icon="lock" width="18" height="18" classes="fill-current text-gray-500" />
         {:else if airdrop}
-            <Icon icon={airdrop} width="18" height="18" classes="fill-current text-gray-600" />
+            <Icon icon={airdrop} classes="fill-current text-gray-600" />
         {:else if ledger}
             <Icon
                 icon="ledger"
