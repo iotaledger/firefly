@@ -15,7 +15,7 @@
     ul {
         display: block;
         list-style-type: disc;
-        margin-block-start: 1em;
+        margin-block-start: 0.5em;
         margin-block-end: 1em;
         margin-inline-start: 0px;
         margin-inline-end: 0px;
@@ -23,29 +23,25 @@
     }
 </style>
 
-<div class="flex flex-col space-y-6 w-full h-full bg-yellow-50">
+<div class="flex flex-col w-full h-full bg-yellow-50 space-y-4">
     <div class="flex flex-col h-2/6">
         <div class="absolute flex flex-col justify-center self-center transform translate-y-10">
-            <Text type="h5" classes="text-xl">
-                {$stakingEventStatus}
-            </Text>
+            <Text type="h5" classes="text-xl">{$stakingEventStatus}</Text>
         </div>
         <Illustration illustration="staking-info" />
     </div>
     <div class="px-8 pb-8 h-3/6">
-        <Text type="h5" classes="mb-6 text-2xl">
-            {locale('views.staking.info.title')}
-        </Text>
-        <Text type="p" classes="mb-3">
+        <Text type="h3" classes="mb-2">{locale('views.staking.info.title')}</Text>
+        <Text type="p" smaller overrideColor overrideLeading classes="text-gray-700 font-normal leading-140">
             {locale('views.staking.info.description')}
         </Text>
         <ul class="mb-6">
             {#each locale('views.staking.info.bullets') as stakingInfoBullet}
-                <li><Text type="p">{stakingInfoBullet}</Text></li>
+                <li>
+                    <Text type="p" smaller overrideColor classes="text-gray-700 font-normal">{stakingInfoBullet}</Text>
+                </li>
             {/each}
         </ul>
-        <Link onClick={handleExternalLinkClick} classes="self-center">
-            {locale('actions.seeHowItWorks')} >
-        </Link>
+        <Link onClick={handleExternalLinkClick} classes="self-center text-14">{locale('actions.howItWorks')}</Link>
     </div>
 </div>

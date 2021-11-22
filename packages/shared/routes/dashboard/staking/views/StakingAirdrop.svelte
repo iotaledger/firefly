@@ -8,7 +8,7 @@
         assemblyStakingRemainingTime,
         shimmerStakingRemainingTime,
         assemblyStakingRewards,
-        shimmerStakingRewards
+        shimmerStakingRewards,
     } from 'shared/lib/participation'
     import { getBestTimeDuration } from 'shared/lib/time'
 
@@ -20,7 +20,7 @@
 
     let remainingTimeAmount, remainingTimeUnit
     $: {
-        [remainingTimeAmount, remainingTimeUnit] = getBestTimeDuration(
+        ;[remainingTimeAmount, remainingTimeUnit] = getBestTimeDuration(
             isAssembly() ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
         ).split(' ')
     }
@@ -30,7 +30,7 @@
     }
 
     const getLearnMoreUrl = (): string => {
-        switch(airdrop) {
+        switch (airdrop) {
             case StakingAirdrop.Assembly:
                 return 'https://shimmer.network'
             case StakingAirdrop.Shimmer:
@@ -41,44 +41,71 @@
     }
 </script>
 
-<div class="flex flex-col space-y-12 w-full h-full bg-{airdrop}-bg">
-    <div class="h-4/12">
+<style type="text/scss">
+    .airdrop-grid {
+        @apply grid;
+        grid-template-rows: 50% 50%;
+    }
+</style>
+
+<div class="airdrop-grid space-y-3 w-full h-full bg-{airdrop}-bg">
+    <div>
         <Illustration illustration="{airdrop}-airdrop-bg" />
     </div>
-    <div class="h-2/12"></div>
-    <div class="px-8 h-6/12">
-        <Text type="h5" classes="mb-6 text-2xl text-{isAssembly() ? 'black' : 'white'}">
-            {locale(`views.staking.airdrops.${airdrop}.name`)}
-        </Text>
-        <Text type="p" classes="mb-3 text-{isAssembly() ? 'black' : 'white'}">
-            {locale(`views.staking.airdrops.${airdrop}.description`)}
-        </Text>
-        <Link onClick={handleLearnMoreClick} classes="text-{airdrop}-highlight">
-            {locale('actions.learnMore')} >
-        </Link>
-        <HR classes="my-6" />
-        <div class="flex flex-row space-x-2">
-            <div class="flex flex-col w-2/3">
-                <div>
-                    <Text type="p" classes="font-bold text-2xl inline text-{isAssembly() ? 'black' : 'white'}">
-                        {remainingTimeAmount}
-                    </Text>
-                    <Text type="p" secondary classes="text-lg inline">
-                        {remainingTimeUnit}
+    <div class="px-8 flex flex-col justify-evenly h-full pb-9">
+        <div>
+            <Text type="h3" classes="mb-2 text-{isAssembly() ? 'gray-800' : 'white'}">
+                {locale(`views.staking.airdrops.${airdrop}.name`)}
+            </Text>
+            <Text
+                type="p"
+                overrideColor
+                overrideLeading
+                classes="mb-3 font-normal text-sm  leading-140 text-{isAssembly() ? 'gray-700' : 'gray-300'}">
+                {locale(`views.staking.airdrops.${airdrop}.description`)}
+            </Text>
+            <Link onClick={handleLearnMoreClick} classes="text-{airdrop}-highlight text-14">
+                {locale('actions.visitWebsite')}
+            </Link>
+        </div>
+        <div>
+            <HR classes="my-6" />
+            <div class="flex flex-row space-x-2">
+                <div class="flex flex-col w-2/3">
+                    <div>
+                        <Text type="p" classes="font-bold text-lg inline text-{isAssembly() ? 'gray-800' : 'white'}">
+                            {remainingTimeAmount}
+                        </Text>
+                        <Text
+                            type="p"
+                            overrideColor
+                            classes="text-sm inline text-{isAssembly() ? 'gray-600' : 'gray-400'}">
+                            {remainingTimeUnit}
+                        </Text>
+                    </div>
+                    <Text
+                        type="p"
+                        smaller
+                        overrideColor
+                        classes="font-normal text-sm mt-0.5 text-{isAssembly() ? 'gray-700' : 'gray-400'}">
+                        {locale('views.staking.airdrops.remaining')}
                     </Text>
                 </div>
-                <Text type="p" secondary>{locale('views.staking.airdrops.remaining')}</Text>
-            </div>
-            <div class="flex flex-col w-1/2">
-                <div>
-                    <Text type="p" classes="font-bold text-2xl inline text-{isAssembly() ? 'black' : 'white'}">
-                        {isAssembly() ? $assemblyStakingRewards : $shimmerStakingRewards}
-                    </Text>
-                    <Text type="p" secondary classes="text-lg inline">
-                        {STAKING_AIRDROP_TOKENS[airdrop]}
+                <div class="flex flex-col w-1/2">
+                    <div>
+                        <Text type="p" classes="font-bold text-lg inline text-{isAssembly() ? 'gray-800' : 'white'}">
+                            {isAssembly() ? $assemblyStakingRewards : $shimmerStakingRewards}
+                        </Text>
+                        <Text type="p" secondary classes="text-sm inline">{STAKING_AIRDROP_TOKENS[airdrop]}</Text>
+                    </div>
+                    <Text
+                        type="p"
+                        smaller
+                        overrideColor
+                        classes="font-normal mt-0.5 text-{isAssembly() ? 'gray-700' : 'gray-400'}">
+                        {locale('views.staking.airdrops.collectedRewards')}
                     </Text>
                 </div>
-                <Text type="p" secondary>{locale('views.staking.airdrops.collectedRewards')}</Text>
             </div>
         </div>
     </div>

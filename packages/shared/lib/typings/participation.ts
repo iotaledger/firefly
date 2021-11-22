@@ -7,10 +7,10 @@ export enum StakingAirdrop {
 }
 
 export enum StakingEventStatus {
-    Inactive = 'inactive', // TODO: Do we need a state for before the commencing, is there a better name ...?
+    Inactive = 'Inactive', // TODO: Do we need a state for before the commencing, is there a better name ...?
     Commencing = 'commencing',
-    Active = 'active',
-    Ended = 'ended',
+    Active = 'Staking event is live',
+    Ended = 'Event ended',
 }
 
 export enum ParticipationAction {

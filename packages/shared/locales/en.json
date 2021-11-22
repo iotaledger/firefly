@@ -499,6 +499,26 @@
                 "fundsStaked": "Funds staked",
                 "fundsUnstaked": "Funds unstaked"
             },
+            "status":{
+                "active": "Staking active",
+                "inactive": "Staking inactive",
+                "tooltip":{
+                    "title": "Event has not started yet",
+                    "body": "Your staked wallets are ready to start receiving airdrops from December 15th 2021 00:01 CET. You do not have to take further action at this time."
+                }
+            },
+            "summary": {
+                "stakedFunds": "Staked funds",
+                "unstaked": "Unstaked",
+                "manageStake": "Manage Stake",
+                "stakeFunds": "Stake Funds"
+            },
+            "indicator": {
+                "stakedFunds": "Staked funds",
+                "unstaked": "Unstaked",
+                "manageStake": "Manage Stake",
+                "stakeFunds": "Stake Funds"
+            },            
             "info": {
                 "title": "Staking in Firefly",
                 "description": "Claim SHM and ASM tokens ahead of the network launch in 2022. Staking temporarily locks your IOTAs, but you have complete ownership and control at all times.",
@@ -517,12 +537,17 @@
                 "collectedRewards": "Collected rewards",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Lorem Ipsum is simply dummy text of the printing industry. Lorem Ipsum has been the industry's standard dummy text since the 1500s."
+                    "description": "The incentivized staging network to advance major innovations from IOTA. Learn, build, earn and grow together."
                 },
                 "shimmer": {
                     "name": "Shimmer",
-                    "description": "Lorem Ipsum is simply dummy text of the printing industry. Lorem Ipsum has been the industry's standard dummy text since the 1500s."
+                    "description": "Lorem Ipsum is simply dummy text of the printing industry. Lorem Ipsum has been the industry's standard dummy text since"
                 }
+            },
+            "notice": {
+                "date": "Staking commences December 15th",
+                "body": "By locking your funds for staking before the event starts, you will automatically commence active staking when the staking event starts (no additional rewards will be earned).",
+                "ok": "Ok, I understand"
             }
         }
     },
@@ -815,8 +840,8 @@
         "closeFirefly": "Close Firefly",
         "generateAddress": "Generate address",
         "migrateAgain": "Migrate another index",
-        "learnMore": "Learn more",
-        "seeHowItWorks": "See how it works",
+        "visitWebsite": "Visit Website",
+        "howItWorks": "How it works",
         "stake": "Stake",
         "stakeFunds": "Stake funds",
         "manageStake": "Manage stake"

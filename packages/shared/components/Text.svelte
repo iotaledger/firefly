@@ -8,6 +8,7 @@
     export let bigger = false
     export let error = false
     export let overrideColor = false
+    export let overrideLeading = false
     export let classes = '' // ISSUE: https://github.com/tailwindlabs/tailwindcss/discussions/1446
 </script>
 
@@ -15,7 +16,9 @@
     p {
         &.smaller {
             @apply text-12;
-            @apply leading-120;
+            &:not(.overrideLeading) {
+                @apply leading-120;
+            }
         }
         &.bigger {
             @apply text-16;
@@ -106,12 +109,13 @@
     </h5>
 {:else if type === 'p'}
     <p
-        class={`text-13 leading-160 ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
+        class={`text-13 ${overrideLeading ? '' : 'leading-160'}  ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
         class:secondary
         class:disabled
         class:highlighted
         class:error
         class:smaller
+        class:overrideLeading
         class:bigger
         class:font-bold={bold}>
         <slot />
