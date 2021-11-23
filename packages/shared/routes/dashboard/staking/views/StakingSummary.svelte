@@ -3,7 +3,7 @@
     import { Locale } from 'shared/lib/typings/i18n'
     import {
         canParticipate,
-        partiallyStakedAccounts, participationOverview,
+        partiallyStakedAccounts, participationOverview, stakedAccounts,
         stakedAmount,
         stakingEventState,
         unstakedAmount
@@ -14,13 +14,16 @@
 
     export let locale: Locale
 
+    $: participationOverview, $stakedAccounts, $partiallyStakedAccounts
+
     let canStake
+
     $: canStake = canParticipate($stakingEventState)
-
     let isStaked
-    $: isStaked = $stakedAmount > 0
 
+    $: isStaked = $stakedAmount > 0
     let isPartiallyStaked
+
     $: isPartiallyStaked = $partiallyStakedAccounts.length > 0
 
     const handleStakeFundsClick = () => {
@@ -35,7 +38,7 @@
     <div class="flex flex-col justify-between">
         <div class="flex flex-row justify-between items-start">
             <Text type="p" overrideColor classes="mb-2 text-gray-700 text-13 font-normal">
-                {locale('views.staking.summary.stakedFunds')}
+                {locale('general.stakedFunds')}
             </Text>
             {#if isPartiallyStaked}
                 <Icon icon="exclamation" classes="fill-current text-yellow-600" />
@@ -44,7 +47,7 @@
         <Text type="h5" classes="text-3xl">{formatUnitBestMatch($stakedAmount)}</Text>
         <Text type="p" smaller overrideColor classes="mt-1 text-gray-500">
             {formatUnitBestMatch($unstakedAmount)}
-            {locale('views.staking.summary.unstaked')}
+            {locale('general.unstaked')}
         </Text>
     </div>
     <Button
@@ -54,6 +57,6 @@
         secondary={isStaked && !isPartiallyStaked}
         onClick={handleStakeFundsClick}
     >
-        {isStaked ?  locale('views.staking.summary.manageStake') :  locale('views.staking.summary.stakeFunds')}
+        {locale(`actions.${isStaked ? 'manageStake' : 'stakeFunds'}`)}
     </Button>
 </div>

@@ -79,7 +79,7 @@
                         <Text
                             type="p"
                             overrideColor
-                            classes="text-sm inline text-{isAssembly() ? 'gray-600' : 'gray-400'}">
+                            classes="text-sm inline text-{isAssembly() ? 'gray-500' : 'gray-400'}">
                             {remainingTimeUnit}
                         </Text>
                     </div>
