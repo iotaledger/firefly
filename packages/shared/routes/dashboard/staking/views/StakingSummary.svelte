@@ -3,7 +3,7 @@
     import { Locale } from 'shared/lib/typings/i18n'
     import {
         canParticipate,
-        partiallyStakedAccounts,
+        partiallyStakedAccounts, participationOverview,
         stakedAmount,
         stakingEventState,
         unstakedAmount
@@ -26,9 +26,8 @@
     const handleStakeFundsClick = () => {
         const isUpcoming = $stakingEventState === ParticipationEventState.Upcoming
         const type = !isStaked && isUpcoming ? 'stakingNotice' : 'stakingManager'
-        const preventClose = type === 'stakingManager'
 
-        openPopup({ type, hideClose: true, preventClose })
+        openPopup({ type, hideClose: false })
     }
 </script>
 

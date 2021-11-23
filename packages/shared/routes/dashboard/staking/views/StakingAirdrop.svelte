@@ -54,13 +54,13 @@
             {locale(`views.staking.airdrops.${airdrop}.description`)}
         </Text>
         <Link onClick={handleLearnMoreClick} classes="text-{airdrop}-highlight">
-            {locale('actions.learnMore')} >
+            Visit website >
         </Link>
         <HR classes="my-6" />
         <div class="flex flex-row space-x-2">
             <div class="flex flex-col w-2/3">
                 <div>
-                    <Text type="p" classes="font-bold text-2xl inline text-{isAssembly() ? 'black' : 'white'}">
+                    <Text type="p" classes="font-bold text-xl inline text-{isAssembly() ? 'black' : 'white'}">
                         {remainingTimeAmount}
                     </Text>
                     <Text type="p" secondary classes="text-lg inline">
@@ -71,7 +71,7 @@
             </div>
             <div class="flex flex-col w-1/2">
                 <div>
-                    <Text type="p" classes="font-bold text-2xl inline text-{isAssembly() ? 'black' : 'white'}">
+                    <Text type="p" classes="font-bold text-xl inline text-{isAssembly() ? 'black' : 'white'}">
                         {isAssembly() ? $assemblyStakingRewards : $shimmerStakingRewards}
                     </Text>
                     <Text type="p" secondary classes="text-lg inline">

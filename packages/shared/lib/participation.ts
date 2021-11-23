@@ -337,7 +337,14 @@ export const estimateStakingAirdropReward = (airdrop: StakingAirdrop, amountToSt
     }
 }
 
-export const getPartiallyStakedFunds = (account: WalletAccount): number => {
+export const getStakedFunds = (account: WalletAccount): number => {
+    const accountParticipation = get(participationOverview).find((apo) => apo.accountIndex === account?.index)
+    console.log('PART: ', accountParticipation)
+    if (!accountParticipation) return 0
+    else return accountParticipation.shimmerStakedFunds
+}
+
+export const getUnstakedFunds = (account: WalletAccount): number => {
     const accountParticipation = get(participationOverview).find((apo) => apo.accountIndex === account?.index)
     if (!accountParticipation) return 0
     else return accountParticipation.shimmerUnstakedFunds
@@ -435,12 +442,12 @@ export function getParticipationEvents(): Promise<ParticipationEvent[]> {
  *
  * @method participate
  *
- * @param {WalletAccount} account
+ * @param {string} accountId
  *
  * @returns {Promise<void>}
  */
-export function participate(account: WalletAccount): Promise<void> {
-    if (!account) {
+export function participate(accountId: string): Promise<void> {
+    if (!accountId) {
         showAppNotification({
             type: 'error',
             message: 'Unable to use this account data.'
@@ -451,7 +458,7 @@ export function participate(account: WalletAccount): Promise<void> {
 
     return new Promise<void>((resolve, reject) => {
         api.participate(
-            account?.id,
+            accountId,
             STAKING_PARTICIPATIONS,
             {
                 onSuccess(response: Event<ParticipateResponsePayload>) {
@@ -472,12 +479,12 @@ export function participate(account: WalletAccount): Promise<void> {
  *
  * @method stopParticipating
  *
- * @param {WalletAccount} account
+ * @param {string} accountId
  *
  * @returns {Promise<void>}
  */
- export function stopParticipating(account: WalletAccount): Promise<void> {
-     if (!account) {
+ export function stopParticipating(accountId: string): Promise<void> {
+     if (!accountId) {
          showAppNotification({
              type: 'error',
              message: 'Unable to use this account data.'
@@ -488,7 +495,7 @@ export function participate(account: WalletAccount): Promise<void> {
 
     return new Promise<void>((resolve, reject) => {
         api.stopParticipating(
-            account?.id,
+            accountId,
             STAKING_EVENT_IDS,
             {
                 onSuccess(response: Event<ParticipateResponsePayload>) {
