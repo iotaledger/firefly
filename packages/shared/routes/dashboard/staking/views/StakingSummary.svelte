@@ -1,18 +1,27 @@
 <script lang="typescript">
     import { Button, Icon, Text } from 'shared/components'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { canParticipate, stakedAmount, stakingEventState, unstakedAmount } from 'shared/lib/participation'
+    import {
+        canParticipate,
+        partiallyStakedAccounts,
+        stakedAmount,
+        stakingEventState,
+        unstakedAmount
+    } from 'shared/lib/participation'
     import { openPopup } from 'shared/lib/popup'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { ParticipationEventState } from 'shared/lib/typings/participation'
 
     export let locale: Locale
 
+    let canStake
+    $: canStake = canParticipate($stakingEventState)
+
     let isStaked
     $: isStaked = $stakedAmount > 0
 
-    let canStake
-    $: canStake = canParticipate($stakingEventState)
+    let isPartiallyStaked
+    $: isPartiallyStaked = $partiallyStakedAccounts.length > 0
 
     const handleStakeFundsClick = () => {
         const isUpcoming = $stakingEventState === ParticipationEventState.Upcoming
@@ -29,7 +38,7 @@
             <Text type="p" overrideColor classes="mb-2 text-gray-700 text-13 font-normal">
                 {locale('views.staking.summary.stakedFunds')}
             </Text>
-            {#if false}
+            {#if isPartiallyStaked}
                 <Icon icon="exclamation" classes="fill-current text-yellow-600" />
             {/if}
         </div>
@@ -42,9 +51,9 @@
     <Button
         classes="w-full text-14"
         disabled={!canStake}
-        caution={isStaked && false}
-        secondary={isStaked && !false}
-        onClick={handleStakeFundsClick}>
+        caution={isStaked && isPartiallyStaked}
+        secondary={isStaked && !isPartiallyStaked}
+        onClick={handleStakeFundsClick}
         {isStaked ?  locale('views.staking.summary.manageStake') :  locale('views.staking.summary.stakeFunds')}
     </Button>
 </div>
