@@ -77,8 +77,8 @@
             darkmode: 'staking/assembly-airdrop-bg.svg',
         },
         'shimmer-airdrop-bg': {
-            lightmode: 'staking/assembly-airdrop-bg.svg',
-            darkmode: 'staking/assembly-airdrop-bg.svg',
+            lightmode: 'staking/shimmer-airdrop-bg.svg',
+            darkmode: 'staking/shimmer-airdrop-bg.svg',
         },
     }
 </script>

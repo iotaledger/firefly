@@ -31,31 +31,29 @@
     }
 </script>
 
-<div class="p-8 flex flex-col justify-between space-y-6 w-full h-full">
-    <div class="h-2/6 flex flex-col justify-between">
+<div class="p-5 flex flex-col justify-between space-y-6 w-full h-full">
+    <div class="flex flex-col justify-between">
         <div class="flex flex-row justify-between items-start">
-            <Text type="p" secondary classes="mb-6">
-                Staked funds
+            <Text type="p" overrideColor classes="mb-2 text-gray-700 text-13 font-normal">
+                {locale('views.staking.summary.stakedFunds')}
             </Text>
             {#if isPartiallyStaked}
                 <Icon icon="exclamation" classes="fill-current text-yellow-600" />
             {/if}
         </div>
-        <Text type="h5" classes="text-3xl">
-            {formatUnitBestMatch($stakedAmount)}
-        </Text>
-        <Text type="p" secondary>
+        <Text type="h5" classes="text-3xl">{formatUnitBestMatch($stakedAmount)}</Text>
+        <Text type="p" smaller overrideColor classes="mt-1 text-gray-500">
             {formatUnitBestMatch($unstakedAmount)}
-            Unstaked
+            {locale('views.staking.summary.unstaked')}
         </Text>
     </div>
     <Button
-        classes="w-full"
+        classes="w-full text-14"
         disabled={!canStake}
         caution={isStaked && isPartiallyStaked}
         secondary={isStaked && !isPartiallyStaked}
         onClick={handleStakeFundsClick}
     >
-        {isStaked ? 'Manage stake' : 'Stake funds'}
+        {isStaked ?  locale('views.staking.summary.manageStake') :  locale('views.staking.summary.stakeFunds')}
     </Button>
 </div>

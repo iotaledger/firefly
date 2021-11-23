@@ -68,31 +68,19 @@
     }
 </script>
 
-
-<div class="p-3 flex flex-row justify-between items-center rounded-2xl bg-blue-100">
+<div class="px-3 py-2 flex flex-row justify-between items-center rounded-2xl bg-blue-100">
     <Icon icon={indicatorIcon} classes="fill-current text-blue-500" />
-    <Text type="p" classes="mx-3">
-        {indicatorText}
-    </Text>
+    <Text type="p" classes="mx-3">{indicatorText}</Text>
     <div>
         <!--            bind:this={indicatorBox}-->
         <!--            on:mouseenter={toggleTooltip}-->
         <!--            on:mouseleave={toggleTooltip}-->
-        <Icon
-            icon="info-filled"
-            classes="fill-current text-gray-600 transform translate-y-1"
-        />
+        <Icon icon="info-filled" classes="fill-current text-gray-600 transform translate-y-1" />
     </div>
 </div>
 {#if showTooltip}
     <Tooltip {parentTop} {parentLeft} {parentWidth}>
-        <Text type="p" classes="">
-            Event has not started yet
-        </Text>
-        <Text type="p" secondary classes="">
-            Your staked wallets are ready to start receiving
-            airdrops from December 15th 2021 00:01 CET. You do not
-            have to take further action at this time.
-        </Text>
+        <Text type="p">{locale('views.staking.status.tooltip.title')}</Text>
+        <Text type="p" secondary>{locale('views.staking.status.tooltip.body')}</Text>
     </Tooltip>
 {/if}
