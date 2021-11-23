@@ -1,19 +1,22 @@
 <script lang="typescript">
     import { Button, Icon, Text } from 'shared/components'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { stakedAmount, unstakedAmount } from 'shared/lib/participation'
+    import { canParticipate, stakedAmount, stakingEventState, unstakedAmount } from 'shared/lib/participation'
     import { openPopup } from 'shared/lib/popup'
     import { formatUnitBestMatch } from 'shared/lib/units'
+    import { ParticipationEventState } from 'shared/lib/typings/participation'
 
     export let locale: Locale
 
     let isStaked
     $: isStaked = $stakedAmount > 0
 
+    let canStake
+    $: canStake = canParticipate($stakingEventState)
+
     const handleStakeFundsClick = () => {
-        // TODO: Calculate this value instead...
-        const isPreStake = true
-        const type = !isStaked && isPreStake ? 'stakingNotice' : 'stakingManager'
+        const isUpcoming = $stakingEventState === ParticipationEventState.Upcoming
+        const type = !isStaked && isUpcoming ? 'stakingNotice' : 'stakingManager'
         const preventClose = type === 'stakingManager'
 
         openPopup({ type, hideClose: true, preventClose })
@@ -37,8 +40,8 @@
         </Text>
     </div>
     <Button
-        small
         classes="w-full text-14"
+        disabled={!canStake}
         caution={isStaked && false}
         secondary={isStaked && !false}
         onClick={handleStakeFundsClick}>

@@ -1,17 +1,17 @@
 <script lang="typescript">
     import { Icon, Text, Tooltip } from 'shared/components'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { stakedAccounts, stakingEventStatus } from '../lib/participation'
-    import { StakingEventStatus } from '../lib/typings/participation'
+    import { stakedAccounts, stakingEventState } from '../lib/participation'
+    import { ParticipationEventState } from '../lib/typings/participation'
     import { tick } from 'svelte'
 
     export let locale: Locale
 
     let indicatorIcon = ''
-    $: indicatorIcon = getIndicatorIcon($stakingEventStatus, $stakedAccounts.length > 0)
+    $: indicatorIcon = getIndicatorIcon($stakingEventState, $stakedAccounts.length > 0)
 
     let indicatorText = ''
-    $: indicatorText = getIndicatorText($stakingEventStatus, $stakedAccounts.length > 0)
+    $: indicatorText = getIndicatorText($stakingEventState, $stakedAccounts.length > 0)
 
     let showTooltip = false
 
@@ -36,24 +36,32 @@
         showTooltip = !showTooltip
     }
 
-    const getIndicatorIcon = (status: StakingEventStatus, isActive: boolean): string => {
-        switch (status) {
-            case StakingEventStatus.Commencing:
-                return isActive ? 'timer' : 'unlock'
-            case StakingEventStatus.Active:
-                return isActive ? 'lock' : 'unlock'
-            case StakingEventStatus.Ended:
+    const getIndicatorIcon = (state: ParticipationEventState, isStaked: boolean): string => {
+        if (!isStaked) return 'unlock'
+
+        switch (state) {
+            case ParticipationEventState.Upcoming:
+                return 'unlock'
+            case ParticipationEventState.Commencing:
+                return 'timer'
+            case ParticipationEventState.Holding:
+                return 'lock'
+            case ParticipationEventState.Ended:
             default:
                 return 'unlock'
         }
     }
- 
-    const getIndicatorText = (status: StakingEventStatus, isActive: boolean): string => {
-        switch (status) {
-            case StakingEventStatus.Active:
-                return isActive ? 'Staking active' : 'Staking inactive'
-            case StakingEventStatus.Commencing:
-            case StakingEventStatus.Ended:
+
+    const getIndicatorText = (state: ParticipationEventState, isStaked: boolean): string => {
+        switch (state) {
+            case ParticipationEventState.Upcoming:
+                return 'Staking upcoming'
+            case ParticipationEventState.Commencing:
+                return isStaked ? 'Staking commencing' : 'Staking inactive'
+            case ParticipationEventState.Holding:
+                return isStaked ? 'Staking active' : 'Staking inactive'
+            case ParticipationEventState.Ended:
+                return 'Staking ended'
             default:
                 return 'Staking inactive'
         }
@@ -77,4 +85,5 @@
             <Text type="p" secondary>{locale('views.staking.status.tooltip.body')}</Text>
         </Tooltip>
     {/if}
+
 {/if}
