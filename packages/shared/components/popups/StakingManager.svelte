@@ -17,7 +17,9 @@
         participate,
         stakedAccounts,
         stakingEventState,
-        stopParticipating
+        stopParticipating,
+        STAKING_EVENT_IDS,
+        STAKING_PARTICIPATIONS
     } from 'shared/lib/participation'
     import { ParticipationAction } from 'shared/lib/typings/participation'
     import { isSoftwareProfile } from 'shared/lib/profile'
@@ -60,7 +62,7 @@
 
         switch (participationAction) {
             case ParticipationAction.Stake:
-                await participate(accountToAction)
+                await participate(accountToAction, STAKING_PARTICIPATIONS)
                     .catch((err) => {
                         console.error(err)
 
@@ -68,7 +70,7 @@
                     })
                 break
             case ParticipationAction.Unstake:
-                await stopParticipating(accountToAction)
+                await stopParticipating(accountToAction, STAKING_EVENT_IDS)
                     .catch((err) => {
                         console.error(err)
 
