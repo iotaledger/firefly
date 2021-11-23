@@ -6,11 +6,14 @@
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { onMount } from 'svelte'
+    import { formatUnitBestMatch } from 'shared/lib/units'
     import {
         canAccountParticipate,
         canParticipate,
+        getPartiallyStakedFunds,
         getParticipationOverview,
         isAccountStaked,
+        isAccountPartiallyStaked,
         participate,
         stakedAccounts,
         stakingEventState,
@@ -90,6 +93,10 @@
         }, true)
     }
 
+    const handlePartialStakeClick = (account: WalletAccount): void => {
+        console.log('PARTIAL: ', account)
+    }
+
     const handleUnstakeClick = (account: WalletAccount): void => {
         console.log('UNSTAKE FOR: ', account)
 
@@ -155,44 +162,73 @@
         {#each accounts as account}
             {#if canAccountParticipate(account)}
                 <div
-                    class="w-full space-x-4 mb-4 flex flex-row px-4 py-3 rounded-xl border border-1 border-solid items-center justify-between border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-gray-500 focus:hover:border-gray-700"
+                    class="w-full mb-4 flex flex-col rounded-xl border border-1 border-solid border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-gray-500 focus:hover:border-gray-700"
                 >
-                    {#if isAccountStaked(account)}
-                        <div class="bg-green-100 rounded-2xl">
-                            <Icon icon="success-check" classes="text-white" />
-                        </div>
-                    {:else}
-                        <Icon icon="unlock" />
-                    {/if}
-                    <div class="flex flex-col w-3/4">
-                        <Text type="p" classes="font-extrabold">
-                            {account.alias}
-                        </Text>
-                        <Text type="p" secondary classes="font-extrabold">
-                            {account.balance} •
-                            <Text type="p" secondary classes="inline">
-                                {account.balanceEquiv}
-                            </Text>
-                        </Text>
-                    </div>
-                    <Button
-                        disabled={isPerformingAction}
-                        secondary={isAccountStaked(account?.id)}
-                        onClick={() => isAccountStaked(account?.id)
-                        ? handleUnstakeClick(account)
-                        : handleStakeClick(account)
-                    }
-                    >
-                        {#if accountToAction?.id === account?.id}
-                            <Spinner
-                                busy={isPerformingAction}
-                                message={participationAction === ParticipationAction.Stake ? 'Staking' : 'Unstaking'}
-                                classes="justify-center"
-                            />
+                    <div class="w-full space-x-4 px-5 py-3 flex flex-row justify-between items-center">
+                        {#if isAccountStaked(account?.id)}
+                            <div class="bg-green-100 rounded-2xl">
+                                <Icon icon="success-check" width="18" height="18" classes="text-white" />
+                            </div>
                         {:else}
-                            {isAccountStaked(account?.id) ? 'Unstake' : 'Stake'}
+                            <Icon icon="unlock" width="18" height="18" />
                         {/if}
-                    </Button>
+                        <div class="flex flex-col w-3/4">
+                            <Text type="p" classes="font-extrabold">
+                                {account.alias}
+                            </Text>
+                            <Text type="p" secondary classes="font-extrabold">
+                                {account.balance} •
+                                <Text type="p" secondary classes="inline">
+                                    {account.balanceEquiv}
+                                </Text>
+                            </Text>
+                        </div>
+                        <Button
+                            disabled={isPerformingAction}
+                            secondary={isAccountStaked(account?.id)}
+                            onClick={() => isAccountStaked(account?.id)
+                                ? handleUnstakeClick(account)
+                                : handleStakeClick(account)
+                            }
+                        >
+                            {#if accountToAction?.id === account?.id}
+                                <Spinner
+                                    busy={isPerformingAction}
+                                    message={participationAction === ParticipationAction.Stake ? 'Staking' : 'Unstaking'}
+                                    classes="justify-center"
+                                />
+                            {:else}
+                                {isAccountStaked(account?.id) ? 'Unstake' : 'Stake'}
+                            {/if}
+                        </Button>
+                    </div>
+                    {#if isAccountPartiallyStaked(account?.id)}
+                        <div class="space-x-4 mx-1 mb-1 px-4 py-3 flex flex-row justify-between items-center rounded-lg bg-yellow-50">
+                            <Icon icon="exclamation" width="18" height="18" classes="fill-current text-yellow-600" />
+                            <div class="flex flex-col w-3/4">
+                                <Text type="p" classes="font-extrabold">
+                                    Unstaked funds
+                                </Text>
+                                <Text type="p" secondary classes="font-extrabold">
+                                    {formatUnitBestMatch(getPartiallyStakedFunds(account))}
+                                </Text>
+                            </div>
+                            <Button
+                                disabled={isPerformingAction}
+                                onClick={() => handlePartialStakeClick(account)}
+                            >
+                                {#if accountToAction?.id === account?.id}
+                                    <Spinner
+                                        busy={isPerformingAction}
+                                        message="Staking"
+                                        classes="justify-center"
+                                    />
+                                {:else}
+                                    Stake
+                                {/if}
+                            </Button>
+                        </div>
+                    {/if}
                 </div>
             {/if}
         {/each}

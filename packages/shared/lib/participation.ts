@@ -74,7 +74,13 @@ export const stakedAccounts: Readable<WalletAccount[]> = derived(
  * are currently staked (checks stakedAccounts). Accounts are removed
  * within the staking flow.
  */
-export const partiallyStakedAccounts = writable<WalletAccount[]>([])
+export const partiallyStakedAccounts: Readable<WalletAccount[]> = derived(
+    [participationOverview],
+    ([$participationOverview]) =>
+        $participationOverview
+            .filter((apo) => apo.shimmerStakedFunds > 0 && apo.shimmerUnstakedFunds > 0)
+            .map((apo) => get(get(wallet).accounts).find((wa) => wa.index === apo.accountIndex))
+)
 
 /**
  * The amount of funds across all accounts that are
@@ -240,7 +246,6 @@ export function clearPollParticipationOverviewInterval(): void {
  * @returns {void}
  */
 export const resetParticipation = (): void => {
-    partiallyStakedAccounts.set([])
     participationOverview.set([])
     participationEvents.set([])
 }
@@ -256,6 +261,9 @@ export const resetParticipation = (): void => {
  */
 export const isAccountStaked = (accountId: string): boolean =>
     get(stakedAccounts).find((sa) => sa.id === accountId) !== undefined
+
+export const isAccountPartiallyStaked = (accountId: string): boolean =>
+    get(partiallyStakedAccounts).find((psa) => psa.id === accountId) !== undefined
 
 const estimateAssemblyReward = (amount: number, currentMilestone: number, endMilestone: number): number => {
     const multiplier = 1.0
@@ -327,6 +335,12 @@ export const estimateStakingAirdropReward = (airdrop: StakingAirdrop, amountToSt
         default:
             return 0
     }
+}
+
+export const getPartiallyStakedFunds = (account: WalletAccount): number => {
+    const accountParticipation = get(participationOverview).find((apo) => apo.accountIndex === account?.index)
+    if (!accountParticipation) return 0
+    else return accountParticipation.shimmerUnstakedFunds
 }
 
 /**
