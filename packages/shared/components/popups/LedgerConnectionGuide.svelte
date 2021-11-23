@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Animation, Button, Illustration, Link, Text } from 'shared/components'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform'
     import { closePopup } from 'shared/lib/popup'
     import { Locale } from 'shared/lib/typings/i18n'
 
@@ -49,7 +49,7 @@
             <Text secondary classes="inline-block">{locale(`popups.ledgerConnectionGuide.steps.${stepIndex}.text`)}</Text>
             <Link
                 classes="ml-0.5 inline-block text-13 leading-160"
-                onClick={() => Electron.openUrl('https://support.ledger.com/hc/en-us/articles/360019868977-Fix-USB-connection-issues-with-Ledger-Live?support=true')}>
+                onClick={() => Platform.openUrl('https://support.ledger.com/hc/en-us/articles/360019868977-Fix-USB-connection-issues-with-Ledger-Live?support=true')}>
                 {locale(`popups.ledgerConnectionGuide.steps.${stepIndex}.link`)}
             </Link>
         {/if}

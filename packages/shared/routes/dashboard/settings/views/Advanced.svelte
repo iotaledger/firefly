@@ -3,7 +3,7 @@
     import { clickOutside } from 'shared/lib/actions'
     import { loggedIn } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform'
     import { navigateToNewIndexMigration } from 'shared/lib/ledger'
     import {
         ensureSinglePrimaryNode,
@@ -16,9 +16,9 @@
     import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, updateProfile } from 'shared/lib/profile'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
     import { NetworkConfig, NetworkStatusHealthText, NetworkType } from 'shared/lib/typings/network'
-    import { Node } from 'shared/lib/typings/node'
+    import type { Node } from 'shared/lib/typings/node'
     import { wallet } from 'shared/lib/wallet'
 
     export let locale: Locale
@@ -36,7 +36,7 @@
     }
 
     $: $appSettings.deepLinking = deepLinkingChecked
-    $: $appSettings.deepLinking && Electron.DeepLinkManager.checkDeepLinkRequestExists()
+    $: $appSettings.deepLinking && Platform.DeepLinkManager.checkDeepLinkRequestExists()
 
     $: updateProfile('settings.showHiddenAccounts', showHiddenAccounts)
     $: {

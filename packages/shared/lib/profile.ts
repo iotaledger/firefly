@@ -3,7 +3,7 @@ import { ledgerSimulator } from 'shared/lib/ledger'
 import { generateRandomId, migrateObjects } from 'shared/lib/utils'
 import { asyncRemoveStorage, destroyActor, getStoragePath, getWalletStoragePath } from 'shared/lib/wallet'
 import { derived, get, Readable, writable } from 'svelte/store'
-import { Electron } from './electron'
+import { Platform } from './platform'
 import type { ValuesOf } from './typings/utils'
 import type { Profile, UserSettings } from './typings/profile'
 import { ProfileType } from './typings/profile'
@@ -12,6 +12,7 @@ import { AvailableExchangeRates } from './typings/currency'
 import type { WalletAccount } from './typings/wallet'
 import { getOfficialNetworkConfig } from './network'
 import { NetworkConfig, NetworkType } from './typings/network'
+import { Electron } from './electron'
 
 export const activeProfileId = writable<string | null>(null)
 
@@ -259,9 +260,9 @@ export const cleanupInProgressProfiles = (): void => {
  */
 export const removeProfileFolder = async (profileName: string): Promise<void> => {
     try {
-        const userDataPath = await Electron.getUserDataPath()
+        const userDataPath = await Platform.getUserDataPath()
         const profileStoragePath = getStoragePath(userDataPath, profileName)
-        await Electron.removeProfileFolder(profileStoragePath)
+        await Platform.removeProfileFolder(profileStoragePath)
     } catch (err) {
         console.error(err)
     }
@@ -276,9 +277,9 @@ export const removeProfileFolder = async (profileName: string): Promise<void> =>
  */
 export const cleanupEmptyProfiles = async (): Promise<void> => {
     try {
-        const userDataPath = await Electron.getUserDataPath()
+        const userDataPath = await Platform.getUserDataPath()
         const profileStoragePath = getWalletStoragePath(userDataPath)
-        const storedProfiles = await Electron.listProfileFolders(profileStoragePath)
+        const storedProfiles = await Platform.listProfileFolders(profileStoragePath)
 
         profiles.update((_profiles) => _profiles.filter((p) => storedProfiles.includes(p.name)))
 

@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Logo, Password, Spinner, Text } from 'shared/components'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform'
     import { getBackupWarningColor } from 'shared/lib/helpers'
     import { closePopup } from 'shared/lib/popup'
     import { updateProfile } from 'shared/lib/profile'
@@ -27,7 +27,7 @@
         error = ''
         api.setStrongholdPassword(password, {
             onSuccess() {
-                Electron.getStrongholdBackupDestination(getDefaultStrongholdName())
+                Platform.getStrongholdBackupDestination(getDefaultStrongholdName())
                     .then((result) => {
                         if (result) {
                             busy = true

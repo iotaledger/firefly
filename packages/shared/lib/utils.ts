@@ -1,5 +1,5 @@
 import { Bech32 } from 'shared/lib/bech32'
-import { Electron } from 'shared/lib/electron'
+import { Platform } from 'shared/lib/platform'
 import { localize } from 'shared/lib/i18n'
 import { showAppNotification } from 'shared/lib/notifications'
 import validUrl from 'valid-url'
@@ -169,7 +169,7 @@ export const downloadRecoveryKit = (): void => {
     fetch('assets/docs/recovery-kit.pdf')
         .then((response) => response.arrayBuffer())
         .then((data) => {
-            void Electron.saveRecoveryKit(data)
+            void Platform.saveRecoveryKit(data)
         })
         .catch((err) => {
             console.error(err)

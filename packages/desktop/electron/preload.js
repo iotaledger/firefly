@@ -23,14 +23,13 @@ window.addEventListener('unhandledrejection', (event) => {
 try {
     const fs = require('fs')
     const binding = require('wallet-nodejs-binding')
-    const PincodeManager = require('./lib/pincodeManager')
-    const DeepLinkManager = require('./lib/deepLinkManager')
-    const NotificationManager = require('./lib/notificationManager')
+    const ElectronPincodeManager = require('./lib/electronPincodeManager')
+    const ElectronDeepLinkManager = require('./lib/electronDeepLinkManager')
+    const ElectronNotificationManager = require('./lib/electronNotificationManager')
     const { menuState } = require('./lib/menuState')
     const kdbx = require('./lib/kdbx')
     const { proxyApi } = require('shared/lib/shell/walletApi')
     const { hookErrorLogger } = require('shared/lib/shell/errorLogger')
-    const ledger = require('./lib/Ledger').default
 
     let activeProfileId = null
 
@@ -76,9 +75,9 @@ try {
                 }
             })
         },
-        PincodeManager,
-        DeepLinkManager,
-        NotificationManager,
+        PincodeManager: ElectronPincodeManager,
+        DeepLinkManager: ElectronDeepLinkManager,
+        NotificationManager: ElectronNotificationManager,
         getStrongholdBackupDestination: (defaultPath) =>
             ipcRenderer
                 .invoke('show-save-dialog', {
@@ -371,7 +370,6 @@ try {
          * @returns
          */
         hookErrorLogger,
-        ledger,
     }
 
     contextBridge.exposeInMainWorld('__WALLET_INIT__', {

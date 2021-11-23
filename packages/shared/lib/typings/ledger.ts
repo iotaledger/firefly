@@ -1,3 +1,13 @@
+export interface ILedger {
+    connected: boolean
+    listeners: { (...data: unknown[]): void }[]
+    selectSeed(index: number, page: number, security: number): Promise<void | null>
+    awaitConnection(): Promise<void>
+    awaitApplication(index: number, page: number, security: number): Promise<void>
+    onMessage(...data: unknown[]): void
+    addListener(...data: unknown[]): void
+    removeListener(...data: unknown[]): void
+}
 export interface LedgerApp {
     name: string
     version: string

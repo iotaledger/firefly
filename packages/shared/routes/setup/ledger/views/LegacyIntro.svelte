@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Link, OnboardingLayout, Text, Video } from 'shared/components'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform'
     import { initialiseMigrationListeners, LEDGER_MIGRATION_VIDEO } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { api, isBackgroundSyncing } from 'shared/lib/wallet'
@@ -13,7 +13,7 @@
     const dispatch = createEventDispatcher()
 
     function handleReadMoreClick() {
-        Electron.openUrl('https://firefly.iota.org/faq#migration')
+        Platform.openUrl('https://firefly.iota.org/faq#migration')
     }
 
     function handleNextClick() {

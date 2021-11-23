@@ -1,10 +1,10 @@
 <script lang="typescript">
     import { BundleMiningLayout, Button, Icon, Text } from 'shared/components'
-    import { openUrl } from 'shared/lib/device'
+    import { Platform } from 'shared/lib/platform'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
     import { createEventDispatcher } from 'svelte'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -32,7 +32,7 @@
         <Text type="p" secondary classes="mb-4 text-center">{locale('views.bundleMiningWarning.body1')}</Text>
         <Text type="p" secondary classes="mb-8 text-center">{locale('views.bundleMiningWarning.body2')}</Text>
         <div class="flex flex-col flex-grow items-center">
-            <Button secondary classes="w-56" onClick={() => openUrl('https://firefly.iota.org/faq#spent-addresses')}>
+            <Button secondary classes="w-56" onClick={() => Platform.openUrl('https://firefly.iota.org/faq#spent-addresses')}>
                 {locale('views.bundleMiningWarning.learn')}
             </Button>
         </div>

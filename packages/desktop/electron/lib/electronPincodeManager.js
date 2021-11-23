@@ -2,7 +2,7 @@ const { ipcRenderer } = require('electron')
 
 /** Pincode Manager  */
 // Runs in renderer process
-const PincodeManager = {
+const ElectronPincodeManager = {
     /**
      * Sets pincode in keychain
      *
@@ -44,4 +44,4 @@ const PincodeManager = {
     },
 }
 
-module.exports = PincodeManager
+module.exports = ElectronPincodeManager

@@ -1,11 +1,11 @@
 <script lang="typescript">
     import { Icon, Pin, Profile, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { activeProfile } from 'shared/lib/profile'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
     import { validatePinFormat } from 'shared/lib/utils'
     import { api, getStoragePath, initialise } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy } from 'svelte'
@@ -70,10 +70,10 @@
 
             isBusy = true
 
-            Electron.PincodeManager.verify(profile.id, pinCode)
+            Platform.PincodeManager.verify(profile.id, pinCode)
                 .then((verified) => {
                     if (verified === true) {
-                        return Electron.getUserDataPath().then((path) => {
+                        return Platform.getUserDataPath().then((path) => {
                             initialise(profile.id, getStoragePath(path, profile.name))
                             api.setStoragePassword(pinCode, {
                                 onSuccess() {

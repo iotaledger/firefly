@@ -7,7 +7,7 @@
         exchangeRates,
         formatCurrency,
     } from 'shared/lib/currency'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import {
         ADDRESS_SECURITY_LEVEL,
@@ -29,7 +29,7 @@
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
 
     export let locale: Locale
@@ -170,7 +170,7 @@
         if (legacyLedger) {
             // TODO: add ledger legacy popup when PR merged
             const _onConnected = () => {
-                Electron.ledger
+                Platform.ledger
                     .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
                     .then(({ iota, callback }) => getLedgerMigrationData(iota.getAddress, callback))
                     .then(() => {
