@@ -54,6 +54,7 @@
         caution={isStaked && isPartiallyStaked}
         secondary={isStaked && !isPartiallyStaked}
         onClick={handleStakeFundsClick}
+    >
         {isStaked ?  locale('views.staking.summary.manageStake') :  locale('views.staking.summary.stakeFunds')}
     </Button>
 </div>
