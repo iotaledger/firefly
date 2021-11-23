@@ -330,6 +330,28 @@ export const estimateStakingAirdropReward = (airdrop: StakingAirdrop, amountToSt
 }
 
 /**
+ * Determines if a staking or voting event is available for participation, based
+ * off of its current state.
+ *
+ * @method canParticipate
+ *
+ * @param {ParticipationEventState} eventState
+ *
+ * @returns {boolean}
+ */
+export const canParticipate = (eventState: ParticipationEventState): boolean => {
+    switch (eventState) {
+        case ParticipationEventState.Commencing:
+        case ParticipationEventState.Holding:
+            return true
+        case ParticipationEventState.Upcoming:
+        case ParticipationEventState.Ended:
+        default:
+            return false
+    }
+}
+
+/**
  * Determines whether an account can participate in an event.
  *
  * @method canAccountParticipate
@@ -419,11 +441,6 @@ export function participate(account: WalletAccount): Promise<void> {
             STAKING_PARTICIPATIONS,
             {
                 onSuccess(response: Event<ParticipateResponsePayload>) {
-                    // stakedAccounts.update((_stakedAccounts) =>
-                    //     [..._stakedAccounts, account]
-                    // )
-                    console.log('STAKED: ', get(stakedAccounts))
-
                     resolve()
                 },
                 onError(error) {
@@ -461,11 +478,6 @@ export function participate(account: WalletAccount): Promise<void> {
             STAKING_EVENT_IDS,
             {
                 onSuccess(response: Event<ParticipateResponsePayload>) {
-                    // stakedAccounts.update((_stakedAccounts) =>
-                    //     _stakedAccounts.filter((sa) => sa.id !== account?.id)
-                    // )
-                    console.log('UNSTAKED: ', get(stakedAccounts))
-
                     resolve()
                 },
                 onError(error) {

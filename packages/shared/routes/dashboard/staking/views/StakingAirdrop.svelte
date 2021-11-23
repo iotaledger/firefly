@@ -2,14 +2,14 @@
     import { HR, Illustration, Link, Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { STAKING_AIRDROP_TOKENS } from 'shared/lib/participation'
-    import { StakingAirdrop } from 'shared/lib/typings/participation'
     import {
         assemblyStakingRemainingTime,
-        shimmerStakingRemainingTime,
         assemblyStakingRewards,
-        shimmerStakingRewards
+        shimmerStakingRemainingTime,
+        shimmerStakingRewards,
+        STAKING_AIRDROP_TOKENS,
     } from 'shared/lib/participation'
+    import { StakingAirdrop } from 'shared/lib/typings/participation'
     import { getBestTimeDuration } from 'shared/lib/time'
 
     export let locale: Locale

@@ -3,20 +3,33 @@
     import { Button, Icon, Spinner, Text } from 'shared/components'
     import { Locale } from 'shared/lib/typings/i18n'
     import { wallet } from 'shared/lib/wallet'
-    import { WalletAccount } from '../../lib/typings/wallet'
-    import { closePopup, openPopup, popupState } from '../../lib/popup'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { onMount } from 'svelte'
-    import { canAccountParticipate, getParticipationOverview, isAccountStaked, participate, stopParticipating } from '../../lib/participation'
-    import { ParticipationAction } from '../../lib/typings/participation'
-    import { isSoftwareProfile } from '../../lib/profile'
-    import { checkStronghold } from '../../lib/stronghold'
+    import {
+        canAccountParticipate,
+        canParticipate,
+        getParticipationOverview,
+        isAccountStaked,
+        participate,
+        stakedAccounts,
+        stakingEventState,
+        stopParticipating
+    } from 'shared/lib/participation'
+    import { ParticipationAction } from 'shared/lib/typings/participation'
+    import { isSoftwareProfile } from 'shared/lib/profile'
+    import { checkStronghold } from 'shared/lib/stronghold'
 
     export let locale: Locale
 
     export let accountToAction: WalletAccount
     export let participationAction: ParticipationAction
 
+    let canStake
+    $: canStake = canParticipate($stakingEventState)
+
     let accounts = get($wallet.accounts)
+    let hasStakedAccounts = $stakedAccounts.length > 0
     let isPerformingAction = false
 
     const resetView = (): void => {
@@ -35,6 +48,7 @@
     }
 
     const handleParticipationAction = async (): Promise<void> => {
+        if (!canStake) return
         if (!accountToAction || !participationAction) return
 
         isPerformingAction = true
@@ -123,9 +137,15 @@
 
 
 <div class="flex flex-col space-y-5">
-    <Text type="h5">
-        Choose which wallets you want to stake
-    </Text>
+    {#if hasStakedAccounts}
+        <Text type="h5">
+            Manage your staked wallets
+        </Text>
+    {:else}
+        <Text type="h5">
+            Choose which wallets you want to stake
+        </Text>
+    {/if}
     <Text type="p" secondary>
         When you stake a wallet, your funds are cocked.
         You can unlock these wallets at any time, but
