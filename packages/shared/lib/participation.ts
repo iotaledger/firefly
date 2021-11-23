@@ -25,9 +25,9 @@ const ASSEMBLY_EVENT_ID = 'c4f23236b3ce22f9fe22583176813618b304bbfcfd24da68cbddf
  */
 const SHIMMER_EVENT_ID = '415267d375c85531aec13e6471c04a01622dfcc9b285a009629dd2c9231da517';
 
-const STAKING_EVENT_IDS: string[] = [ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID]
+export const STAKING_EVENT_IDS: string[] = [ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID]
 
-const STAKING_PARTICIPATIONS: Participation[] = [{
+export const STAKING_PARTICIPATIONS: Participation[] = [{
     eventId: SHIMMER_EVENT_ID,
     answers: []
 }, {
@@ -337,7 +337,14 @@ export const estimateStakingAirdropReward = (airdrop: StakingAirdrop, amountToSt
     }
 }
 
-export const getPartiallyStakedFunds = (account: WalletAccount): number => {
+export const getStakedFunds = (account: WalletAccount): number => {
+    const accountParticipation = get(participationOverview).find((apo) => apo.accountIndex === account?.index)
+    console.log('PART: ', accountParticipation)
+    if (!accountParticipation) return 0
+    else return accountParticipation.shimmerStakedFunds
+}
+
+export const getUnstakedFunds = (account: WalletAccount): number => {
     const accountParticipation = get(participationOverview).find((apo) => apo.accountIndex === account?.index)
     if (!accountParticipation) return 0
     else return accountParticipation.shimmerUnstakedFunds
@@ -436,11 +443,12 @@ export function getParticipationEvents(): Promise<ParticipationEvent[]> {
  * @method participate
  *
  * @param {WalletAccount} account
+ * @param {Participation[]} participations
  *
  * @returns {Promise<void>}
  */
-export function participate(account: WalletAccount): Promise<void> {
-    if (!account) {
+export function participate(accountId: string, participations: Participation[]): Promise<void> {
+    if (!accountId) {
         showAppNotification({
             type: 'error',
             message: 'Unable to use this account data.'
@@ -451,8 +459,8 @@ export function participate(account: WalletAccount): Promise<void> {
 
     return new Promise<void>((resolve, reject) => {
         api.participate(
-            account?.id,
-            STAKING_PARTICIPATIONS,
+            accountId,
+            participations,
             {
                 onSuccess(response: Event<ParticipateResponsePayload>) {
                     resolve()
@@ -473,11 +481,12 @@ export function participate(account: WalletAccount): Promise<void> {
  * @method stopParticipating
  *
  * @param {WalletAccount} account
+ * @param {string[]} eventIds
  *
  * @returns {Promise<void>}
  */
- export function stopParticipating(account: WalletAccount): Promise<void> {
-     if (!account) {
+ export function stopParticipating(accountId: string, eventIds: string[]): Promise<void> {
+     if (!accountId) {
          showAppNotification({
              type: 'error',
              message: 'Unable to use this account data.'
@@ -488,8 +497,8 @@ export function participate(account: WalletAccount): Promise<void> {
 
     return new Promise<void>((resolve, reject) => {
         api.stopParticipating(
-            account?.id,
-            STAKING_EVENT_IDS,
+            accountId,
+            eventIds,
             {
                 onSuccess(response: Event<ParticipateResponsePayload>) {
                     resolve()
@@ -511,14 +520,15 @@ export function participate(account: WalletAccount): Promise<void> {
  * @method participateWithRemainingFunds
  *
  * @param {string} accountId
+ * @param {Participation[]} participations
  *
  * @returns {Promise<void>}
  */
- export function participateWithRemainingFunds(accountId: string): Promise<void> {
+ export function participateWithRemainingFunds(accountId: string, participations: Participation[]): Promise<void> {
     return new Promise<void>((resolve, reject) => {
         api.participateWithRemainingFunds(
             accountId,
-            STAKING_PARTICIPATIONS,
+            participations,
             {
                 onSuccess(response: Event<ParticipateResponsePayload>) {
                     resolve()
