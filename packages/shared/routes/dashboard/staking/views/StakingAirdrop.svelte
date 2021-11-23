@@ -44,15 +44,15 @@
 <style type="text/scss">
     .airdrop-grid {
         @apply grid;
-        grid-template-rows: 50% 50%;
+        grid-template-rows: 45% 55%;
     }
 </style>
 
 <div class="airdrop-grid space-y-3 w-full h-full bg-{airdrop}-bg">
-    <div>
-        <Illustration illustration="{airdrop}-airdrop-bg" />
+    <div class="flex flex-column justify-center">
+        <Illustration illustration="{airdrop}-airdrop-bg" width="100%" height="100%"/>
     </div>
-    <div class="px-8 flex flex-col justify-evenly h-full pb-9">
+    <div class="px-8 h-full pb-5">
         <div>
             <Text type="h3" classes="mb-2 text-{isAssembly() ? 'gray-800' : 'white'}">
                 {locale(`views.staking.airdrops.${airdrop}.name`)}
@@ -69,7 +69,7 @@
             </Link>
         </div>
         <div>
-            <HR classes="my-6" />
+            <HR classes="my-8" />
             <div class="flex flex-row space-x-2">
                 <div class="flex flex-col w-2/3">
                     <div>

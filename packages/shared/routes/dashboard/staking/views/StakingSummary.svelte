@@ -21,7 +21,7 @@
 </script>
 
 <div class="p-5 flex flex-col justify-between space-y-6 w-full h-full">
-    <div class="h-2/6 flex flex-col justify-between">
+    <div class="flex flex-col justify-between">
         <div class="flex flex-row justify-between items-start">
             <Text type="p" overrideColor classes="mb-2 text-gray-700 text-13 font-normal">
                 {locale('views.staking.summary.stakedFunds')}
