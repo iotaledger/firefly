@@ -25,9 +25,9 @@ const ASSEMBLY_EVENT_ID = 'c4f23236b3ce22f9fe22583176813618b304bbfcfd24da68cbddf
  */
 const SHIMMER_EVENT_ID = '415267d375c85531aec13e6471c04a01622dfcc9b285a009629dd2c9231da517';
 
-const STAKING_EVENT_IDS: string[] = [ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID]
+export const STAKING_EVENT_IDS: string[] = [ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID]
 
-const STAKING_PARTICIPATIONS: Participation[] = [{
+export const STAKING_PARTICIPATIONS: Participation[] = [{
     eventId: SHIMMER_EVENT_ID,
     answers: []
 }, {
@@ -442,11 +442,12 @@ export function getParticipationEvents(): Promise<ParticipationEvent[]> {
  *
  * @method participate
  *
- * @param {string} accountId
+ * @param {WalletAccount} account
+ * @param {Participation[]} participations
  *
  * @returns {Promise<void>}
  */
-export function participate(accountId: string): Promise<void> {
+export function participate(accountId: string, participations: Participation[]): Promise<void> {
     if (!accountId) {
         showAppNotification({
             type: 'error',
@@ -459,7 +460,7 @@ export function participate(accountId: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
         api.participate(
             accountId,
-            STAKING_PARTICIPATIONS,
+            participations,
             {
                 onSuccess(response: Event<ParticipateResponsePayload>) {
                     resolve()
@@ -479,11 +480,12 @@ export function participate(accountId: string): Promise<void> {
  *
  * @method stopParticipating
  *
- * @param {string} accountId
+ * @param {WalletAccount} account
+ * @param {string[]} eventIds
  *
  * @returns {Promise<void>}
  */
- export function stopParticipating(accountId: string): Promise<void> {
+ export function stopParticipating(accountId: string, eventIds: string[]): Promise<void> {
      if (!accountId) {
          showAppNotification({
              type: 'error',
@@ -496,7 +498,7 @@ export function participate(accountId: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
         api.stopParticipating(
             accountId,
-            STAKING_EVENT_IDS,
+            eventIds,
             {
                 onSuccess(response: Event<ParticipateResponsePayload>) {
                     resolve()
@@ -518,14 +520,15 @@ export function participate(accountId: string): Promise<void> {
  * @method participateWithRemainingFunds
  *
  * @param {string} accountId
+ * @param {Participation[]} participations
  *
  * @returns {Promise<void>}
  */
- export function participateWithRemainingFunds(accountId: string): Promise<void> {
+ export function participateWithRemainingFunds(accountId: string, participations: Participation[]): Promise<void> {
     return new Promise<void>((resolve, reject) => {
         api.participateWithRemainingFunds(
             accountId,
-            STAKING_PARTICIPATIONS,
+            participations,
             {
                 onSuccess(response: Event<ParticipateResponsePayload>) {
                     resolve()

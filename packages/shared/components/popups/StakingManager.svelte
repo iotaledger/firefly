@@ -14,12 +14,15 @@
         getStakedFunds,
         getUnstakedFunds,
         isAccountPartiallyStaked,
-        isAccountStaked, partiallyStakedAccounts,
+        isAccountStaked,
+        partiallyStakedAccounts,
         participate,
         participateWithRemainingFunds,
         stakedAccounts,
         stakingEventState,
         stopParticipating,
+        STAKING_EVENT_IDS,
+        STAKING_PARTICIPATIONS
     } from 'shared/lib/participation'
     import { ParticipationAction } from 'shared/lib/typings/participation'
     import { activeProfile, isSoftwareProfile } from 'shared/lib/profile'
@@ -73,28 +76,25 @@
 
         console.log('PERFORMING ACTION: ', participationAction, '\nFOR ACCOUNT: ', accountToAction)
 
-        try {
-            switch (participationAction) {
-                case ParticipationAction.Stake:
-                    if (isAccountPartiallyStaked(accountToAction.id)) {
-                        await participateWithRemainingFunds(accountToAction?.id)
-                    } else {
-                        await participate(accountToAction?.id)
-                    }
-                    break
-                case ParticipationAction.Unstake:
-                    await stopParticipating(accountToAction?.id)
-                    break
-                default:
-                    break
-            }
-        } catch (err) {
-            console.error(err)
-            showAppNotification({
-                type: 'error',
-                message: locale(err?.error || err)
-            })
-            resetView()
+        switch (participationAction) {
+            case ParticipationAction.Stake:
+                await participate(accountToAction?.id, STAKING_PARTICIPATIONS)
+                    .catch((err) => {
+                        console.error(err)
+
+                        resetView()
+                    })
+                break
+            case ParticipationAction.Unstake:
+                await stopParticipating(accountToAction?.id, STAKING_EVENT_IDS)
+                    .catch((err) => {
+                        console.error(err)
+
+                        resetView()
+                    })
+                break
+            default:
+                break
         }
 
         await getParticipationOverview()
