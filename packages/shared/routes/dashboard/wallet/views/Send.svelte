@@ -39,6 +39,7 @@
     import { getContext, onDestroy, onMount } from 'svelte'
     import type { Readable } from 'svelte/store'
     import { get } from 'svelte/store'
+    import { isAccountStaked } from 'shared/lib/participation'
 
     export let locale: Locale
 
@@ -120,7 +121,10 @@
     let accountsDropdownItems
     let from
     $: {
-        accountsDropdownItems = $liveAccounts.map((acc) => format(acc))
+        accountsDropdownItems =
+            $liveAccounts
+                .map((acc) => format(acc))
+                .filter((acc) => !isAccountStaked(acc.id))
 
         if (from) {
             from = accountsDropdownItems.find((a) => a.id === from.id)

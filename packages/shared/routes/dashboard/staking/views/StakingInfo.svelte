@@ -2,7 +2,7 @@
     import { Illustration, Link, Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { stakingEventStatus } from 'shared/lib/participation'
+    import { stakingEventState } from 'shared/lib/participation'
 
     export let locale: Locale
 
@@ -26,7 +26,9 @@
 <div class="flex flex-col w-full h-full bg-yellow-50">
     <div class="flex flex-col">
         <div class="absolute flex flex-col justify-center self-center transform translate-y-10">
-            <Text type="h5" classes="text-xl">{$stakingEventStatus}</Text>
+            <Text type="h5" classes="text-xl">
+                {$stakingEventState}
+            </Text>
         </div>
         <Illustration illustration="staking-info" />
     </div>

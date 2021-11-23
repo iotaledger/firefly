@@ -9,6 +9,7 @@ import { closePopup } from './popup'
 import { activeProfile, clearActiveProfile, isLedgerProfile, isStrongholdLocked } from './profile'
 import { resetRouter } from './router'
 import { api, destroyActor, resetWallet } from './wallet'
+import { resetParticipation } from './participation'
 
 /**
  * Mobile mode
@@ -107,6 +108,7 @@ export const logout = (): Promise<void> =>
             clearSendParams()
             closePopup(true)
             clearActiveProfile()
+            resetParticipation()
             resetWallet()
             resetRouter()
 

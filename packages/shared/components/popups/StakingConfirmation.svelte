@@ -1,6 +1,12 @@
 <script lang="typescript">
     import { Button, Illustration, Text } from 'shared/components'
-    import { estimateStakingAirdropReward, STAKING_AIRDROP_TOKENS } from 'shared/lib/participation'
+    import { formatUnitBestMatch } from 'shared/lib/units'
+    import {
+        estimateStakingAirdropReward,
+        getUnstakedFunds,
+        isAccountPartiallyStaked,
+        STAKING_AIRDROP_TOKENS
+    } from 'shared/lib/participation'
     import { openPopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
     import { Locale } from 'shared/lib/typings/i18n'
@@ -11,11 +17,11 @@
     export let locale: Locale
     export let accountToStake: WalletAccount
 
+    const isPartialStake = isAccountPartiallyStaked(accountToStake?.id)
+
     const handleBackClick = (): void => {
         openPopup({
             type: 'stakingManager',
-            hideClose: true,
-            preventClose: true,
         }, true)
     }
 
@@ -23,8 +29,6 @@
         const _onConfirm = (): void => {
             openPopup({
                 type: 'stakingManager',
-                hideClose: true,
-                preventClose: true,
                 props: {
                     accountToAction: accountToStake,
                     participationAction: ParticipationAction.Stake,
@@ -57,7 +61,10 @@
             {locale('views.staking.confirmation.title')}
         </Text>
         <Text type="p" classes="text-2xl font-extrabold">
-            {accountToStake.balance}
+            {isPartialStake
+                ? formatUnitBestMatch(getUnstakedFunds(accountToStake))
+                : accountToStake.balance
+            }
         </Text>
     </div>
     <Illustration illustration="staking-confirmation" classes="mt-2 mb-6" />

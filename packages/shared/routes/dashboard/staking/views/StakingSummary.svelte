@@ -1,22 +1,33 @@
 <script lang="typescript">
     import { Button, Icon, Text } from 'shared/components'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { stakedAmount, unstakedAmount } from 'shared/lib/participation'
+    import {
+        canParticipate,
+        partiallyStakedAccounts, participationOverview,
+        stakedAmount,
+        stakingEventState,
+        unstakedAmount
+    } from 'shared/lib/participation'
     import { openPopup } from 'shared/lib/popup'
     import { formatUnitBestMatch } from 'shared/lib/units'
+    import { ParticipationEventState } from 'shared/lib/typings/participation'
 
     export let locale: Locale
+
+    let canStake
+    $: canStake = canParticipate($stakingEventState)
 
     let isStaked
     $: isStaked = $stakedAmount > 0
 
-    const handleStakeFundsClick = () => {
-        // TODO: Calculate this value instead...
-        const isPreStake = true
-        const type = !isStaked && isPreStake ? 'stakingNotice' : 'stakingManager'
-        const preventClose = type === 'stakingManager'
+    let isPartiallyStaked
+    $: isPartiallyStaked = $partiallyStakedAccounts.length > 0
 
-        openPopup({ type, hideClose: true, preventClose })
+    const handleStakeFundsClick = () => {
+        const isUpcoming = $stakingEventState === ParticipationEventState.Upcoming
+        const type = !isStaked && isUpcoming ? 'stakingNotice' : 'stakingManager'
+
+        openPopup({ type, hideClose: false })
     }
 </script>
 
@@ -26,7 +37,7 @@
             <Text type="p" overrideColor classes="mb-2 text-gray-700 text-13 font-normal">
                 {locale('views.staking.summary.stakedFunds')}
             </Text>
-            {#if false}
+            {#if isPartiallyStaked}
                 <Icon icon="exclamation" classes="fill-current text-yellow-600" />
             {/if}
         </div>
@@ -42,6 +53,7 @@
         caution={isStaked && isPartiallyStaked}
         secondary={isStaked && !isPartiallyStaked}
         onClick={handleStakeFundsClick}
+    >
         {isStaked ?  locale('views.staking.summary.manageStake') :  locale('views.staking.summary.stakeFunds')}
     </Button>
 </div>
