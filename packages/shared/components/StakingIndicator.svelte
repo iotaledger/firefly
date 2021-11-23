@@ -65,25 +65,22 @@
             default:
                 return 'Staking inactive'
         }
-    } 
+    }
 </script>
 
-{#if $stakingEventStatus !== StakingEventStatus.Ended}
-    <div class="px-3 py-2 flex flex-row justify-between items-center rounded-2xl bg-blue-100">
-        <Icon icon={indicatorIcon} classes="fill-current text-blue-500" />
-        <Text type="p" classes="mx-3">{indicatorText}</Text>
-        <div>
-            <!--            bind:this={indicatorBox}-->
-            <!--            on:mouseenter={toggleTooltip}-->
-            <!--            on:mouseleave={toggleTooltip}-->
-            <Icon icon="info-filled" classes="fill-current text-gray-600 transform translate-y-1" />
-        </div>
+<div class="px-3 py-2 flex flex-row justify-between items-center rounded-2xl bg-blue-100">
+    <Icon icon={indicatorIcon} classes="fill-current text-blue-500" />
+    <Text type="p" classes="mx-3">{indicatorText}</Text>
+    <div>
+        <!--            bind:this={indicatorBox}-->
+        <!--            on:mouseenter={toggleTooltip}-->
+        <!--            on:mouseleave={toggleTooltip}-->
+        <Icon icon="info-filled" classes="fill-current text-gray-600 transform translate-y-1" />
     </div>
-    {#if showTooltip}
-        <Tooltip {parentTop} {parentLeft} {parentWidth}>
-            <Text type="p">{locale('views.staking.status.tooltip.title')}</Text>
-            <Text type="p" secondary>{locale('views.staking.status.tooltip.body')}</Text>
-        </Tooltip>
-    {/if}
-
+</div>
+{#if showTooltip}
+    <Tooltip {parentTop} {parentLeft} {parentWidth}>
+        <Text type="p">{locale('views.staking.status.tooltip.title')}</Text>
+        <Text type="p" secondary>{locale('views.staking.status.tooltip.body')}</Text>
+    </Tooltip>
 {/if}
