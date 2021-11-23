@@ -37,11 +37,11 @@
         </Text>
     </div>
     <Button
-        small
         classes="w-full text-14"
-        caution={isStaked && false}
-        secondary={isStaked && !false}
-        onClick={handleStakeFundsClick}>
+        disabled={!canStake}
+        caution={isStaked && isPartiallyStaked}
+        secondary={isStaked && !isPartiallyStaked}
+        onClick={handleStakeFundsClick}
         {isStaked ?  locale('views.staking.summary.manageStake') :  locale('views.staking.summary.stakeFunds')}
     </Button>
 </div>

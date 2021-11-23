@@ -47,7 +47,7 @@
                 return 'unlock'
         }
     }
- 
+
     const getIndicatorText = (status: StakingEventStatus, isActive: boolean): string => {
         switch (status) {
             case StakingEventStatus.Active:
@@ -57,11 +57,14 @@
             default:
                 return 'Staking inactive'
         }
-    } 
+    }
 </script>
 
 {#if $stakingEventStatus !== StakingEventStatus.Ended}
-    <div class="px-3 py-2 flex flex-row justify-between items-center rounded-2xl bg-blue-100">
+    <div
+        class="px-3 py-2 flex flex-row justify-between items-center rounded-2xl bg-blue-100"
+        on:mouseenter={toggleTooltip}
+        on:mouseleave={toggleTooltip}>
         <Icon icon={indicatorIcon} classes="fill-current text-blue-500" />
         <Text type="p" classes="mx-3">{indicatorText}</Text>
         <div>
@@ -73,7 +76,7 @@
     </div>
     {#if showTooltip}
         <Tooltip {parentTop} {parentLeft} {parentWidth}>
-            <Text type="p">{locale('views.staking.status.tooltip.title')}</Text>
+            <Text type="p">"{locale('views.staking.status.tooltip.title')}"</Text>
             <Text type="p" secondary>{locale('views.staking.status.tooltip.body')}</Text>
         </Tooltip>
     {/if}

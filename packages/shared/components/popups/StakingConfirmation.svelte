@@ -46,7 +46,7 @@
             ←
         </Text>
     </div>
-    <Text type="p" classes="font-extrabold">
+    <Text type="h3" classes="font-extrabold">
         {accountToStake.alias}
     </Text>
     <Text> </Text>
@@ -54,7 +54,7 @@
 <div class="flex flex-col">
     <div class="absolute flex flex-col self-center text-center transform translate-y-28">
         <Text type="p" highlighted classes="text-lg">
-            You're about to stake
+            {locale('views.staking.confirmation.title')}
         </Text>
         <Text type="p" classes="text-2xl font-extrabold">
             {accountToStake.balance}
@@ -74,7 +74,7 @@
                 </Text>
             </div>
             <Text type="p" secondary classes="mb-4">
-                Stake for the remaining time and receive an estimated airdrop of:
+                {locale('views.staking.confirmation.body')}
             </Text>
             <Text type="p" classes="text-2xl">
                 {estimateStakingAirdropReward(airdrop.toLowerCase(), accountToStake?.rawIotaBalance)}
@@ -84,6 +84,6 @@
 </div>
 <div class="flex flex-row space-x-1">
     <Button classes="w-full" onClick={handleConfirmClick}>
-        Confirm
+        {locale('views.staking.confirmation.next')}
     </Button>
 </div>

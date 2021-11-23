@@ -548,7 +548,17 @@
                 "date": "Staking commences December 15th",
                 "body": "By locking your funds for staking before the event starts, you will automatically commence active staking when the staking event starts (no additional rewards will be earned).",
                 "ok": "Ok, I understand"
+            },
+            "chooseWallet": {
+                "title": "Choose which wallets you want to stake",
+                "body": "When you stake a wallet, your funds are cocked. You can unlock these wallets at any time, but then you won’t get full staking rewards."
+            },
+            "confirmation": {
+                "title": "You're about to stake",
+                "body": "Stake for the remaining time and receive an estimated airdrop of:",
+                "next": "Next"
             }
+
         }
     },
     "popups": {

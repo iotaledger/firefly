@@ -19,6 +19,7 @@
     let accounts = get($wallet.accounts)
     let isPerformingAction = false
 
+
     const resetView = (): void => {
         isPerformingAction = false
 
@@ -122,14 +123,12 @@
 </script>
 
 
-<div class="flex flex-col space-y-5">
-    <Text type="h5">
-        Choose which wallets you want to stake
+<div class="flex flex-col space-y-4">
+    <Text type="h4">
+        {locale('views.staking.chooseWallet.title')}
     </Text>
     <Text type="p" secondary>
-        When you stake a wallet, your funds are cocked.
-        You can unlock these wallets at any time, but
-        then you won’t get full staking rewards.
+        {locale('views.staking.chooseWallet.body')}
     </Text>
     <div class="staking flex flex-col scrollable-y">
         {#each accounts as account}
@@ -137,12 +136,12 @@
                 <div
                     class="w-full space-x-4 mb-4 flex flex-row px-4 py-3 rounded-xl border border-1 border-solid items-center justify-between border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-gray-500 focus:hover:border-gray-700"
                 >
-                    {#if isAccountStaked(account)}
+                    {#if isAccountStaked(account?.id)}
                         <div class="bg-green-100 rounded-2xl">
-                            <Icon icon="success-check" classes="text-white" />
+                            <Icon icon="success-check" classes="text-white w-4 h-4" />
                         </div>
                     {:else}
-                        <Icon icon="unlock" />
+                        <Icon icon="unlock" classes="text-gray-500"  />
                     {/if}
                     <div class="flex flex-col w-3/4">
                         <Text type="p" classes="font-extrabold">
