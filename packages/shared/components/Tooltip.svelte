@@ -1,11 +1,12 @@
 <script lang="typescript">
     import { appSettings } from 'shared/lib/appSettings'
     import { onMount } from 'svelte'
+
     export let classes = ''
     export let parentLeft = 0
     export let parentTop = 0
     export let parentWidth = 0
-    export let position = undefined
+    export let position: undefined | 'top' | 'right' = undefined
 
     let tooltip
     let top = 0
