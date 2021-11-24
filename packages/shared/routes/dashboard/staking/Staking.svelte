@@ -1,10 +1,7 @@
 <script lang="typescript">
     import { DashboardPane } from 'shared/components'
-    import { StakingAirdrop, StakingHeader, StakingInfo, StakingSummary } from './views'
     import { StakingAirdrop as Airdrop } from 'shared/lib/typings/participation'
-    import { Locale } from 'shared/lib/typings/i18n'
-
-    export let locale: Locale
+    import { StakingAirdrop, StakingHeader, StakingInfo, StakingSummary } from './views'
 </script>
 
 <style type="text/scss">
@@ -14,21 +11,21 @@
 </style>
 
 <div class="staking-wrapper w-full h-full flex flex-col flex-nowrap px-10 py-8 flex-1 bg-gray-50 dark:bg-gray-900">
-    <StakingHeader {locale} />
+    <StakingHeader />
     <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
         <div class="h-full flex flex-col space-y-3">
-            <DashboardPane classes="w-full h-1/3">
-                <StakingSummary {locale} />
+            <DashboardPane classes="w-full">
+                <StakingSummary />
             </DashboardPane>
-            <DashboardPane classes="w-full h-2/3">
-                <StakingInfo {locale} />
+            <DashboardPane classes="w-full flex-grow">
+                <StakingInfo />
             </DashboardPane>
         </div>
         <DashboardPane classes="h-full">
-            <StakingAirdrop {locale} airdrop={Airdrop.Assembly} />
+            <StakingAirdrop airdrop={Airdrop.Assembly} />
         </DashboardPane>
         <DashboardPane classes="h-full">
-            <StakingAirdrop {locale} airdrop={Airdrop.Shimmer} />
+            <StakingAirdrop airdrop={Airdrop.Shimmer} />
         </DashboardPane>
     </div>
 </div>

@@ -1,24 +1,21 @@
 <script lang="typescript">
     import { Icon, Text, Tooltip } from 'shared/components'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { localize } from 'shared/lib/i18n'
+    import { tick } from 'svelte'
     import { stakedAccounts, stakingEventState } from '../lib/participation'
     import { ParticipationEventState } from '../lib/typings/participation'
-    import { tick } from 'svelte'
 
-    export let locale: Locale
-
-    let indicatorIcon = ''
     $: indicatorIcon = getIndicatorIcon($stakingEventState, $stakedAccounts.length > 0)
-
-    let indicatorText = ''
-    $: indicatorText = getIndicatorText($stakingEventState, $stakedAccounts.length > 0)
+    $: indicatorText = getLocalizedIndicatorText($stakingEventState, $stakedAccounts.length > 0)
+    $: tooltipText = getLocalizedTooltipText($stakingEventState, $stakedAccounts.length > 0)
 
     let showTooltip = false
-
     let indicatorBox
     let parentWidth = 0
     let parentLeft = 0
     let parentTop = 0
+
+    $: indicatorBox, showTooltip, void refreshIndicatorBox()
 
     const refreshIndicatorBox = async (): Promise<void> => {
         if (!indicatorBox || !showTooltip) return
@@ -29,8 +26,6 @@
         parentLeft = indicatorBox?.getBoundingClientRect().left ?? 0
         parentTop = indicatorBox?.getBoundingClientRect().top ?? 0
     }
-
-    $: indicatorBox, showTooltip, void refreshIndicatorBox()
 
     const toggleTooltip = (): void => {
         showTooltip = !showTooltip
@@ -52,35 +47,51 @@
         }
     }
 
-    const getIndicatorText = (state: ParticipationEventState, isStaked: boolean): string => {
+    const getLocalizedIndicatorText = (state: ParticipationEventState, isStaked: boolean): string => {
+        let stateText: string
         switch (state) {
             case ParticipationEventState.Upcoming:
-                return 'Staking upcoming'
+                stateText = 'upcoming'
             case ParticipationEventState.Commencing:
-                return isStaked ? 'Staking commencing' : 'Staking inactive'
+                stateText = isStaked ? 'commencing' : 'inactive'
             case ParticipationEventState.Holding:
-                return isStaked ? 'Staking active' : 'Staking inactive'
+                stateText = isStaked ? 'active' : 'inactive'
             case ParticipationEventState.Ended:
-                return 'Staking ended'
+                stateText = 'ended'
             default:
-                return 'Staking inactive'
+                stateText = 'inactive'
+        }
+        return localize(`views.staking.status.${stateText}`)
+    }
+
+    const getLocalizedTooltipText = (
+        state: ParticipationEventState,
+        isStaked: boolean
+    ): { title: string; body: string } => {
+        // TODO: add tooltip text for each state
+        let stateText: string = 'inactive'
+
+        return {
+            title: localize(`tooltips.staking.${stateText}.title`),
+            body: localize(`tooltips.staking.${stateText}.body`),
         }
     }
 </script>
 
-<div class="px-3 py-2 flex flex-row justify-between items-center rounded-2xl bg-blue-100">
+<div
+    class="px-3 py-2 flex flex-row justify-between items-center rounded-2xl bg-blue-100 dark:bg-gray-800"
+    bind:this={indicatorBox}
+    on:mouseenter={toggleTooltip}
+    on:mouseleave={toggleTooltip}>
     <Icon icon={indicatorIcon} classes="fill-current text-blue-500" />
     <Text type="p" classes="mx-3">{indicatorText}</Text>
     <div>
-        <!--            bind:this={indicatorBox}-->
-        <!--            on:mouseenter={toggleTooltip}-->
-        <!--            on:mouseleave={toggleTooltip}-->
         <Icon icon="info-filled" classes="fill-current text-gray-600 transform translate-y-1" />
     </div>
 </div>
 {#if showTooltip}
-    <Tooltip {parentTop} {parentLeft} {parentWidth}>
-        <Text type="p">{locale('views.staking.status.tooltip.title')}</Text>
-        <Text type="p" secondary>{locale('views.staking.status.tooltip.body')}</Text>
+    <Tooltip {parentTop} {parentLeft} {parentWidth} position="right">
+        <Text type="p" classes="text-gray-900 bold mb-1 text-left">{tooltipText?.title}</Text>
+        <Text type="p" secondary classes="text-left">{tooltipText?.body}</Text>
     </Tooltip>
 {/if}
