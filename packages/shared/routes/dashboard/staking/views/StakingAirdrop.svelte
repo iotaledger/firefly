@@ -53,6 +53,7 @@
         <Illustration illustration="{airdrop}-airdrop-bg" width="100%" height="100%" classes="fill-current text-white" />
     </div>
     <div class="px-8 h-full pb-10 flex flex-col justify-end">
+
         <div>
             <Text type="h3" classes="mb-2 text-{isAssembly() ? 'gray-800' : 'white'}">
                 {locale(`views.staking.airdrops.${airdrop}.name`)}
