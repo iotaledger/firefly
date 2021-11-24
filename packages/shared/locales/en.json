@@ -497,13 +497,11 @@
                 "availableForStaking": "Available for staking",
                 "currentlyStaked": "Currently staked"
             },
-            "status":{
+            "status": {
                 "active": "Staking active",
                 "inactive": "Staking inactive",
-                "tooltip":{
-                    "title": "Event has not started yet",
-                    "body": "Your staked wallets are ready to start receiving airdrops from December 15th 2021 00:01 CET. You do not have to take further action at this time."
-                }
+                "commencing": "Staking commencing",
+                "ended": "Staking ended"
             },
             "summary": {
                 "stakedFunds": "Staked funds",
@@ -549,9 +547,8 @@
                 "title": "You're about to stake",
                 "body": "Stake for the remaining time and receive an estimated airdrop of:",
                 "next": "Next"
-
-            }
-
+            },
+            "event": {}
         }
     },
     "popups": {
@@ -1153,6 +1150,12 @@
             "medium": "Medium",
             "low": "Low",
             "veryLow": "Very low"
+        }, 
+        "staking": {
+            "inactive": {
+                "title": "Event has not yet started",
+                "body": "Your staked wallets are ready to start receiving airdrops from December 15th 2021 00:01 CET. You do not have to take further action at this time."
+            }
         }
     }
 }

@@ -1,17 +1,13 @@
 <script lang="typescript">
     import { Icon, Text, Tooltip } from 'shared/components'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { localize } from 'shared/lib/i18n'
+    import { tick } from 'svelte'
     import { stakedAccounts, stakingEventState } from '../lib/participation'
     import { ParticipationEventState } from '../lib/typings/participation'
-    import { tick } from 'svelte'
 
-    export let locale: Locale
-
-    let indicatorIcon = ''
     $: indicatorIcon = getIndicatorIcon($stakingEventState, $stakedAccounts.length > 0)
-
-    let indicatorText = ''
-    $: indicatorText = getIndicatorText($stakingEventState, $stakedAccounts.length > 0)
+    $: indicatorText = getLocalizedIndicatorText($stakingEventState, $stakedAccounts.length > 0)
+    $: tooltipText = getLocalizedTooltipText($stakingEventState, $stakedAccounts.length > 0)
 
     let showTooltip = false
     let indicatorBox
@@ -51,18 +47,33 @@
         }
     }
 
-    const getIndicatorText = (state: ParticipationEventState, isStaked: boolean): string => {
+    const getLocalizedIndicatorText = (state: ParticipationEventState, isStaked: boolean): string => {
+        let stateText: string
         switch (state) {
             case ParticipationEventState.Upcoming:
-                return 'Staking upcoming'
+                stateText = 'upcoming'
             case ParticipationEventState.Commencing:
-                return isStaked ? 'Staking commencing' : 'Staking inactive'
+                stateText = isStaked ? 'commencing' : 'inactive'
             case ParticipationEventState.Holding:
-                return isStaked ? 'Staking active' : 'Staking inactive'
+                stateText = isStaked ? 'active' : 'inactive'
             case ParticipationEventState.Ended:
-                return 'Staking ended'
+                stateText = 'ended'
             default:
-                return 'Staking inactive'
+                stateText = 'inactive'
+        }
+        return localize(`views.staking.status.${stateText}`)
+    }
+
+    const getLocalizedTooltipText = (
+        state: ParticipationEventState,
+        isStaked: boolean
+    ): { title: string; body: string } => {
+        // TODO: add tooltip text for each state
+        let stateText: string = 'inactive'
+
+        return {
+            title: localize(`tooltips.staking.${stateText}.title`),
+            body: localize(`tooltips.staking.${stateText}.body`),
         }
     }
 </script>
@@ -75,16 +86,12 @@
     <Icon icon={indicatorIcon} classes="fill-current text-blue-500" />
     <Text type="p" classes="mx-3">{indicatorText}</Text>
     <div>
-
         <Icon icon="info-filled" classes="fill-current text-gray-600 transform translate-y-1" />
     </div>
 </div>
 {#if showTooltip}
     <Tooltip {parentTop} {parentLeft} {parentWidth} position="right">
-        <Text type="p" classes="text-gray-900 bold mb-1 text-left">Event has not yet started</Text>
-        <Text type="p" secondary classes="text-left">
-            Your staked wallets are ready to start receiving airdrops from December 15th 2021 00:01 CET. You do not have
-            to take further action at this time.
-        </Text>
+        <Text type="p" classes="text-gray-900 bold mb-1 text-left">{tooltipText?.title}</Text>
+        <Text type="p" secondary classes="text-left">{tooltipText?.body}</Text>
     </Tooltip>
- {/if}
+{/if}
