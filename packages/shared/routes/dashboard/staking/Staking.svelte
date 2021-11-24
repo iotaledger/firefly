@@ -17,10 +17,10 @@
     <StakingHeader {locale} />
     <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
         <div class="h-full flex flex-col space-y-3">
-            <DashboardPane classes="w-full h-1/3">
+            <DashboardPane classes="w-full">
                 <StakingSummary {locale} />
             </DashboardPane>
-            <DashboardPane classes="w-full h-2/3">
+            <DashboardPane classes="w-full flex-grow">
                 <StakingInfo {locale} />
             </DashboardPane>
         </div>

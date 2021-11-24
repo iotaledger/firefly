@@ -23,7 +23,7 @@
     }
 </style>
 
-<div class="flex flex-col w-full h-full bg-yellow-50 dark:bg-gray-800">
+<div class="flex flex-col justify-between w-full h-full bg-yellow-50 dark:bg-gray-800">
     <div class="flex flex-col">
         <div class="absolute flex flex-col justify-center self-center transform translate-y-10">
             <Text type="h5" classes="text-xl">
@@ -32,7 +32,7 @@
         </div>
         <Illustration illustration="staking-info" />
     </div>
-    <div class="px-8 flex space-between flex-col">
+    <div class="px-8 pb-10 flex justify-between flex-col">
         <Text type="h3" classes="mb-2">{locale('views.staking.info.title')}</Text>
         <div>
             <Text type="p" overrideColor smaller classes="text-gray-700 font-normal dark:text-white">
