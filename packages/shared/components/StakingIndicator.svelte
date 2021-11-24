@@ -82,8 +82,8 @@
 </div>
 {#if showTooltip}
     <Tooltip {parentTop} {parentLeft} {parentWidth} {position}>
-        <Text type="p" bigger classes="text-gray-900 text-15 mb-2">Event has not yet started</Text>
-        <Text type="p" secondary>
+        <Text type="p" classes="text-gray-900 bold mb-1 text-left">Event has not yet started</Text>
+        <Text type="p" secondary classes="text-left">
             Your staked wallets are ready to start receiving airdrops from December 15th 2021 00:01 CET. You do not have
             to take further action at this time.
         </Text>
