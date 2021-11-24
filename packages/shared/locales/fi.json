@@ -21,7 +21,11 @@
                 "first": "Aloitetaan nyt ensimmäisen profiilisi nimellä.",
                 "nonFirst": "Aloitetaan nyt profiilisi nimellä."
             },
-            "addMore": "Voit tehdä lisää profiileja myöhemmin."
+            "addMore": "Voit tehdä lisää profiileja myöhemmin.",
+            "developer": {
+                "label": "Kehittäjäprofiili",
+                "info": "Yhdistä julkisiin ja yksityisiin IOTA-verkkoihin"
+            }
         },
         "setup": {
             "title": "Määritä lompakko",
@@ -307,7 +311,8 @@
             },
             "theme": {
                 "title": "Teema",
-                "description": ""
+                "description": "",
+                "advice": "Käynnistä Firefly uudelleen, jotta muutokset järjestelmän teemaan tulevat voimaan"
             },
             "language": {
                 "title": "Kieli",
@@ -323,7 +328,7 @@
             },
             "networkStatus": {
                 "title": "Verkon tila",
-                "description": "Näyttää tilan solmulle, johon olet tällä hetkellä yhteydessä."
+                "description": "Näyttää tilan solmulle, johon olet tällä hetkellä yhteydessä"
             },
             "exportStronghold": {
                 "title": "Vie varmuuskopio",
@@ -360,28 +365,39 @@
                 "description": "Poistaa koko profiilisi, lompakkosi ja transaktiohistoriasi. Varmista, että sinulla on varmuuskopio"
             },
             "deepLinks": {
-                "title": "Syvälinkit",
-                "description": "Täytä transaktiotiedot automaattisesti Fireflyssa, kun klikkaat iota://-linkkiä"
+                "title": "IOTA-linkit",
+                "description": "Täytä transaktiotiedot automaattisesti Fireflyssä, kun klikkaat IOTA-linkkiä"
             },
-            "developerMode": {
-                "title": "Kehittäjätila",
-                "description": "Yhdistä testiverkkoihin ja muut kehittäjäominaisuudet"
-            },
-            "nodeSettings": {
-                "title": "Solmuasetukset",
-                "description": "Valitse Manuaalinen määrittääksesi solmuasetukset ja yhdistääksesi omaan solmuusi"
+            "networkConfiguration": {
+                "title": "Verkkoasetukset",
+                "title2": "Verkkoasetukset",
+                "description": {
+                    "dev": "Verkkoasetuksesi päivittyvät automaattisesti nykyisten solmuasetusten mukaan (verkon vaihtaminen johtaa lompakon tilan nollaamiseen)",
+                    "nonDev": "Verkkoasetuksesi päivittyvät automaattisesti nykyisten solmuasetusten mukaan"
+                },
+                "switchedNetworks": "Siirrytty onnistuneesti verkkoon \"{networkName}\".",
+                "resetWallet": "Lompakon tila on nollattu.",
+                "connectedTo": "Yhdistetty",
+                "nodeConfiguration": {
+                    "title": "Solmun valinta",
+                    "description": "Valitse \"Manuaalinen\" määrittääksesi solmuasetukset ja yhdistääksesi omaan solmuusi",
+                    "automatic": "Automaattinen",
+                    "manual": "Manuaalinen"
+                }
             },
             "configureNodeList": {
-                "title": "Valitse solmu",
-                "description": "Hallitse listaa IOTA-verkon solmuista, joihin yhdistät",
+                "title": "Solmuasetukset",
+                "description": "Hallinnoi listaa solmuista, joihin yhdistät",
                 "primaryNode": "Ensisijainen solmu",
                 "excludeNode": "Hylkää solmu",
                 "includeNode": "Sisällytä solmu",
-                "viewDetails": "Näytä yksityiskohdat",
+                "editDetails": "Muokkaa tietoja",
+                "viewInfo": "Näytä tiedot",
                 "setAsPrimary": "Aseta ensisijaiseksi",
                 "removeNode": "Poista solmu",
                 "includeOfficialNodeList": "Sisällytä virallinen solmulista",
-                "noNodes": "Ei solmuja, sen sijaan käytetään automaattista valintaa"
+                "noNodes": "Solmuja ei ole, yhteyden muodostaminen verkkoon ei ole mahdollista",
+                "noNodesAuto": "Solmuja ei ole, käytetään sen sijaan automaattista valintaa"
             },
             "proofOfWork": {
                 "title": "Todiste työstä (PoW)",
@@ -528,12 +544,37 @@
             "titleAdd": "Lisää solmu",
             "titleUpdate": "Päivitä solmu",
             "titleRemove": "Poista solmu",
+            "titleRemoveAll": "Poista kaikki solmut",
             "titleDetails": "Solmun tiedot",
+            "titleInfo": "Solmun tiedot",
+            "addingNode": "Lisätään solmua",
+            "updatingNode": "Päivitetään solmua",
+            "loadingNodeInfo": "Ladataan solmun tietoja",
             "nodeAddress": "Solmun osoite",
             "optionalUsername": "Käyttäjänimi (valinnainen)",
             "optionalPassword": "Salasana (valinnainen)",
+            "optionalJwt": "JSON web token (vapaaehtoinen)",
             "setAsPrimaryNode": "Aseta ensisijaiseksi solmuksi",
-            "removeConfirmation": "Haluatko varmasti poistaa tämän solmun?"
+            "removeConfirmation": "Haluatko varmasti poistaa tämän solmun?",
+            "removeAllConfirmation": "Haluatko varmasti poistaa kaikki solmut?",
+            "info": {
+                "url": "Osoite",
+                "software": "Ohjelmisto",
+                "networkId": "Verkkotunnus",
+                "bech32HRP": "Bech32 HRP",
+                "features": "Ominaisuudet",
+                "confirmedMilestoneIndex": "Vahvistettu milestone-indeksi",
+                "pruningIndex": "Pruning-indeksi",
+                "messagesPerSecond": "Viestejä sekunnissa",
+                "referencedRate": "Viittausaste"
+            }
+        },
+        "switchNetwork": {
+            "title": "Vaihda verkko",
+            "newNetwork": "Uusi verkko",
+            "resetWarning": "Verkon vaihtaminen kirjaa sinut ulos ja nollaa kaikki tilisi, saldosi ja transaktiohistoriasi tässä profiilissa.",
+            "switchingNetwork": "Vaihdetaan verkkoa",
+            "typePassword": "Syötä salasanasi vaihtaaksesi:"
         },
         "errorLog": {
             "title": "Virheloki",
@@ -684,7 +725,7 @@
         "syncAll": "Synkronoi kaikki",
         "export": "Vie",
         "exportNewStronghold": "Vie uuteen Strongholdiin",
-        "enableDeepLinks": "Ota syvälinkit käyttöön",
+        "enableDeepLinks": "Ota IOTA-linkit käyttöön",
         "enableDeveloperMode": "Ota kehittäjätila käyttöön",
         "enableSystemNotifications": "Ota järjestelmäilmoitukset käyttöön",
         "exportState": "Vie tila",
@@ -702,6 +743,7 @@
         "addNode": "Lisää solmu",
         "updateNode": "Päivitä solmu",
         "removeNode": "Poista solmu",
+        "removeAllNodes": "Poista kaikki solmut",
         "hide": "Piilota",
         "hideOthers": "Piilota Muut",
         "showAll": "Näytä kaikki",
@@ -781,8 +823,9 @@
         "stronghold": "Stronghold",
         "language": "Kieli",
         "appearance": "Ulkoasu",
-        "lightTheme": "Vaalea teema",
-        "darkTheme": "Tumma teema",
+        "lightTheme": "Vaalea",
+        "darkTheme": "Tumma",
+        "systemTheme": "Järjestelmä",
         "balance": "Saldo",
         "accountBalance": "Lompakon saldo",
         "incoming": "Saapuva",
@@ -791,11 +834,7 @@
         "totalOut": "Yhteensä ulos",
         "accounts": "Lompakot",
         "myAccounts": "Minun lompakkoni",
-        "automaticNodeSelection": "Automaattinen solmun valinta",
-        "manualNodeSelection": "Manuaalinen solmun valinta",
         "profiles": "Profiilit",
-        "developerProfile": "Kehittäjäprofiili",
-        "developerProfileDescription": "Mahdollistaa yhdistämisen testiverkkoihin",
         "dev": "Kehitys",
         "createAccount": "Luo lompakko",
         "accountName": "Lompakon nimi",
@@ -803,6 +842,7 @@
         "transactions": "Transaktiot",
         "security": "Suojaus",
         "accountAddress": "Lompakon osoite",
+        "network": "Verkko",
         "nodes": "Solmut",
         "wallet": "Lompakko",
         "help": "Ohje",
@@ -861,7 +901,8 @@
         "legacyNetwork": "Vanha verkko",
         "capsLock": "Caps Lock on päällä",
         "version": "Versio {version}",
-        "unknown": "Tuntematon"
+        "unknown": "Tuntematon",
+        "none": "Ei mikään"
     },
     "dates": {
         "today": "Tänään",
@@ -885,7 +926,17 @@
         "minutesRemaining": "{minutes, plural, one {1 minuutti jäljellä} other {# minuuttia jäljellä}}",
         "copiedToClipboard": "Kopioitu leikepöydälle",
         "accountsSynchronized": "Lompakon synkronointi valmis",
-        "fundsAvailableSoon": "Varasi ovat käytettävissä pian"
+        "fundsAvailableSoon": "Varasi ovat käytettävissä pian",
+        "deepLinkingRequest": {
+            "recievedWhileLoggedOut": "Ole hyvä ja kirjaudu aloittaaksesi IOTA-linkin",
+            "notEnabled": "IOTA-linkit eivät ole käytössä",
+            "invalidFormat": "Seuraamasi IOTA-linkki on virheellinen",
+            "wallet": {
+                "send": {
+                    "success": "Maksutiedot lisätty IOTA-linkistä"
+                }
+            }
+        }
     },
     "error": {
         "profile": {
@@ -945,11 +996,23 @@
         },
         "node": {
             "invalid": "Syötä kelvollinen URL-osoite.",
-            "dns": "Solmun DNS-selvitys ei onnistunut.",
-            "https": "HTTPS vaaditaan. Määritä kehittäjäprofiili käyttääksesi suojaamattomia HTTP-yhteyksiä.",
+            "dns": "Solmun DNS-selvitystä ei löytynyt.",
+            "timedOut": "Yhteys aikakatkaistiin.",
+            "refused": "Yhteydestä kieltäydyttiin.",
+            "handshake": "Kättelyä solmun kanssa ei voitu suorittaa.",
+            "invalidCertificate": "Ei voitu yhdistää virheellisellä varmenteella.",
+            "https": "HTTPS on pakollinen; turvattomia yhteyksiä HTTP:n yli ei tueta tällä hetkellä.",
             "duplicate": "Tämä solmu on jo lisätty.",
             "unsynced": "Solmu ei ole synkronoitu.",
-            "noSynced": "Synkronoituja solmuja ei ole saatavilla."
+            "noSynced": "Synkronoituja solmuja ei ole saatavilla.",
+            "answer": "Vastauksen saaminen kaikilta solmuilta epäonnistui.",
+            "forbidden": "Tämä solmuyhteys on kielletty."
+        },
+        "network": {
+            "mismatch": "Tämän solmun verkkotunnus on \"{networkId}\", joka ei vastaa nykyistä verkkoa.",
+            "notReachable": "Tämän solmun verkkotunnusta ei voitu hakea, ei voida lisätä solmua.",
+            "badNodes": "Yhteyden muodostaminen verkkoon ei ole mahdollista nykyisillä solmuasetuksilla.",
+            "nonEmptyAccount": "Sinun on siirrettävä kaikki saldot ennen verkon vaihtamista."
         },
         "global": {
             "generic": "Jokin meni pieleen."
@@ -985,6 +1048,11 @@
         },
         "crypto": {
             "cannotDecodeBech32": "Merkkijonon dekoodaus Bech32-osoitteena ei onnistu."
+        }
+    },
+    "warning": {
+        "node": {
+            "http": "Solmujen käyttäminen HTTP:n yli jättää liikenteen salaamattomaksi ja voi aiheuttaa turvallisuusriskin."
         }
     },
     "tooltips": {

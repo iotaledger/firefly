@@ -15,13 +15,17 @@
         },
         "profile": {
             "title": "Opret en profil",
-            "profileName": "Profilnavn",
+            "profileName": "Profile name",
             "body1": "Du kan oprette flere brugerprofiler for at organisere dine wallets og øge din fortrolighed.",
             "body2": {
                 "first": "For now, let's start with your first profile name.",
                 "nonFirst": "For now, let's start with your profile name."
             },
-            "addMore": "You can add more profiles later."
+            "addMore": "You can add more profiles later.",
+            "developer": {
+                "label": "Developer profile",
+                "info": "Connect to public and private IOTA networks"
+            }
         },
         "setup": {
             "title": "Konfigurér en wallet",
@@ -307,7 +311,8 @@
             },
             "theme": {
                 "title": "Tema",
-                "description": ""
+                "description": "",
+                "advice": "Restart the Firefly application for changes to the system theme to take effect"
             },
             "language": {
                 "title": "Sprog",
@@ -323,14 +328,14 @@
             },
             "networkStatus": {
                 "title": "Netværksstatus",
-                "description": "Viser status for den node du er forbundet til lige nu."
+                "description": "Displays the status of the node you are currently connected to"
             },
             "exportStronghold": {
-                "title": "Eksporter sikkerhedskopi",
+                "title": "Export backup",
                 "description": "Eksporter til en Stronghold fil - en komplet krypteret sikkerhedskopi af dine wallets og den seneste transaktionshistorik"
             },
             "appLock": {
-                "title": "Automatisk lås",
+                "title": "Automatic lock",
                 "description": "Inaktivitetstid før dine tegnebøger låses, og du bliver logget ud",
                 "durationMinute": "{time, plural, one {# måned} other {# måneder}} siden",
                 "durationHour": "{time, plural, one {1 time} other {# timer}}"
@@ -360,28 +365,39 @@
                 "description": "Sletter hele din profil, wallets og transaktionshistorik. Sørg for at du har en sikkerhedskopi"
             },
             "deepLinks": {
-                "title": "Dybe Links",
-                "description": "Udfyld automatisk transaktionsdata i Firefly ved at klikke på et iota:// link"
+                "title": "IOTA links",
+                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
             },
-            "developerMode": {
-                "title": "Udviklertilstand",
-                "description": "Opret forbindelse til testnet og andre udviklerfunktioner"
-            },
-            "nodeSettings": {
-                "title": "Nodeindstillinger",
-                "description": "Vælg Manuel for at konfigurere nodeindstillingerne og oprette forbindelse til din egen node"
+            "networkConfiguration": {
+                "title": "Network config",
+                "title2": "Network configuration",
+                "description": {
+                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
+                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                },
+                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
+                "resetWallet": "Your wallet state has been reset.",
+                "connectedTo": "Connected to",
+                "nodeConfiguration": {
+                    "title": "Node selection",
+                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
+                    "automatic": "Automatic",
+                    "manual": "Manual"
+                }
             },
             "configureNodeList": {
-                "title": "Vælg en node",
-                "description": "Administrer listen over IOTA netværksnoder, du opretter forbindelse til",
+                "title": "Node configuration",
+                "description": "Manage the list of nodes you connect to",
                 "primaryNode": "Primær node",
                 "excludeNode": "Udeluk node",
                 "includeNode": "Inkludér node",
-                "viewDetails": "Vis detaljer",
+                "editDetails": "Edit details",
+                "viewInfo": "View info",
                 "setAsPrimary": "Sæt som primær",
                 "removeNode": "Fjern node",
                 "includeOfficialNodeList": "Inkludér den officielle node-liste",
-                "noNodes": "Der er ingen noder, automatisk valg vil blive foretaget i stedet"
+                "noNodes": "There are no nodes, unable to connect to the network",
+                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "Bevis for arbejde",
@@ -396,7 +412,7 @@
                 "description": "Vis system og applikationsinformation"
             },
             "migrateLedgerIndex": {
-                "title": "Migrate Ledger Index",
+                "title": "Migrate Ledger index",
                 "description": "Migrate another Trinity account index"
             },
             "stateExport": {
@@ -413,7 +429,7 @@
             },
             "faq": {
                 "title": "FAQ",
-                "title2": "Ofte Stillede Spørgsmål",
+                "title2": "Frequently asked questions",
                 "description": "Se ofte stillede spørgsmål for at få hjælp til et typisk problem eller spørgsmål"
             },
             "discord": {
@@ -528,12 +544,37 @@
             "titleAdd": "Tilføj en node",
             "titleUpdate": "Opdater en node",
             "titleRemove": "Fjern en node",
+            "titleRemoveAll": "Remove all nodes",
             "titleDetails": "Node detaljer",
+            "titleInfo": "Node info",
+            "addingNode": "Adding node",
+            "updatingNode": "Updating node",
+            "loadingNodeInfo": "Loading node info",
             "nodeAddress": "Node addresse",
             "optionalUsername": "Brugernavn (valgfrit)",
             "optionalPassword": "Adgangskode (valgfrit)",
+            "optionalJwt": "JSON web token (optional)",
             "setAsPrimaryNode": "Sæt som primær node",
-            "removeConfirmation": "Er du sikker på, at du vil du fjerne denne node?"
+            "removeConfirmation": "Er du sikker på, at du vil du fjerne denne node?",
+            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "info": {
+                "url": "URL",
+                "software": "Software",
+                "networkId": "Network ID",
+                "bech32HRP": "Bech32 HRP",
+                "features": "Features",
+                "confirmedMilestoneIndex": "Confirmed milestone index",
+                "pruningIndex": "Pruning index",
+                "messagesPerSecond": "Beskeder pr. sekund",
+                "referencedRate": "Refereret sats"
+            }
+        },
+        "switchNetwork": {
+            "title": "Switch network",
+            "newNetwork": "New network",
+            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
+            "switchingNetwork": "Switching network",
+            "typePassword": "Type your password to switch to:"
         },
         "errorLog": {
             "title": "Fejllog",
@@ -684,7 +725,7 @@
         "syncAll": "Synkronisér alle",
         "export": "Eksportér",
         "exportNewStronghold": "Eksportér en ny Stronghold",
-        "enableDeepLinks": "Aktivér dybe links",
+        "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "Aktiver udviklertilstand",
         "enableSystemNotifications": "Aktiver notifikationer",
         "exportState": "Eksportér tilstand",
@@ -702,6 +743,7 @@
         "addNode": "Tilføj node",
         "updateNode": "Opdater node",
         "removeNode": "Fjern node",
+        "removeAllNodes": "Remove all nodes",
         "hide": "Skjul",
         "hideOthers": "Skjul øvrige",
         "showAll": "Vis alle",
@@ -781,8 +823,9 @@
         "stronghold": "Stronghold",
         "language": "Sprog",
         "appearance": "Udseende",
-        "lightTheme": "Lyst tema",
-        "darkTheme": "Mørkt tema",
+        "lightTheme": "Light",
+        "darkTheme": "Dark",
+        "systemTheme": "System",
         "balance": "Saldo",
         "accountBalance": "Wallet Saldo",
         "incoming": "Indgående",
@@ -791,11 +834,7 @@
         "totalOut": "I alt udgående",
         "accounts": "Wallets",
         "myAccounts": "Mine Wallets",
-        "automaticNodeSelection": "Automatisk valg af node",
-        "manualNodeSelection": "Manuelt valg af node",
         "profiles": "Profiler",
-        "developerProfile": "Udvikler Profil",
-        "developerProfileDescription": "Tillader dig at oprette forbindelse til testnet",
         "dev": "Udvikler",
         "createAccount": "Opret ny Wallet",
         "accountName": "Wallet navn",
@@ -803,6 +842,7 @@
         "transactions": "Transaktioner",
         "security": "Sikkerhed",
         "accountAddress": "Wallet-adresse",
+        "network": "Network",
         "nodes": "Noder",
         "wallet": "Wallet",
         "help": "Hjælp",
@@ -861,7 +901,8 @@
         "legacyNetwork": "Legacy Netværk",
         "capsLock": "Caps Lock er slået til",
         "version": "Version {version}",
-        "unknown": "Unknown"
+        "unknown": "Unknown",
+        "none": "None"
     },
     "dates": {
         "today": "I dag",
@@ -885,7 +926,17 @@
         "minutesRemaining": "{minutes, plural, one {1 minut tilbage} other {# minutter tilbage}}",
         "copiedToClipboard": "Kopieret til udklipsholder",
         "accountsSynchronized": "Synkronisering af wallet fuldført",
-        "fundsAvailableSoon": "Your funds will become available shortly"
+        "fundsAvailableSoon": "Your funds will become available shortly",
+        "deepLinkingRequest": {
+            "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
+            "notEnabled": "IOTA links are not enabled",
+            "invalidFormat": "The IOTA link you followed is invalid",
+            "wallet": {
+                "send": {
+                    "success": "Payment details added from IOTA link"
+                }
+            }
+        }
     },
     "error": {
         "profile": {
@@ -945,11 +996,23 @@
         },
         "node": {
             "invalid": "Indtast venligst en gyldig URL.",
-            "dns": "Could not resolve DNS for node.",
-            "https": "HTTPS er påkrævet. Opsæt en udviklerprofil for at bruge usikrede HTTP-forbindelser.",
+            "dns": "Could not find DNS resolution for node.",
+            "timedOut": "The connection timed out.",
+            "refused": "The connection was refused.",
+            "handshake": "Could not complete handshake with node.",
+            "invalidCertificate": "Could not connect with invalid certificate.",
+            "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
             "duplicate": "Denne node er allerede blevet tilføjet.",
             "unsynced": "Noden er ikke synkroniseret.",
-            "noSynced": "Ingen synkroniserede noder er tilgængelige."
+            "noSynced": "Ingen synkroniserede noder er tilgængelige.",
+            "answer": "Failed to get an answer from all nodes.",
+            "forbidden": "This node connection is forbidden."
+        },
+        "network": {
+            "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
+            "notReachable": "The network ID for this node could not be retrieved, unable to add node.",
+            "badNodes": "Unable to connect to the network with current node configuration.",
+            "nonEmptyAccount": "You must transfer all balances before switching networks."
         },
         "global": {
             "generic": "Noget gik galt."
@@ -985,6 +1048,11 @@
         },
         "crypto": {
             "cannotDecodeBech32": "Unable to decode string as Bech32 address."
+        }
+    },
+    "warning": {
+        "node": {
+            "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
         }
     },
     "tooltips": {
