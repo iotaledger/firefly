@@ -18,12 +18,12 @@ import { networkStatus } from './networkStatus'
 /**
  * Assembly event ID
  */
-const ASSEMBLY_EVENT_ID = 'c4f23236b3ce22f9fe22583176813618b304bbfcfd24da68cbddf66196b0d8fd';
+const ASSEMBLY_EVENT_ID = 'cbdfbf8bde20c5a8ac81f573d24d1652d334f60f2fb2a529b5e8d051beb75b7b';
 
 /**
  * Shimmer event ID
  */
-const SHIMMER_EVENT_ID = '415267d375c85531aec13e6471c04a01622dfcc9b285a009629dd2c9231da517';
+const SHIMMER_EVENT_ID = '9e861a1945c6bf7abff4dae6d772a5c3ff980c0e3d3f569dc5a6b3ce5028711a';
 
 export const STAKING_EVENT_IDS: string[] = [ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID]
 
@@ -53,16 +53,17 @@ export const stakedAccounts: Readable<WalletAccount[]> = derived(
     ([$participationOverview]) => {
         const activeAccountIndices =
             $participationOverview
-                .filter((apo) => apo.participations.length > 0)
+                // TODO: Not sure why we are doing this?
+                // .filter((apo) => apo.participations.length > 0)
+                .filter((overview) => overview.shimmerStakedFunds > 0)
                 .map((apo) => apo.accountIndex)
-
         /**
          * CAUTION: Ideally the accounts Svelte store would
          * be derived, but doing so results in a "cannot
          * access _ before initialization" error.
          */
         const accounts = get(wallet).accounts
-        if (!accounts) return []
+        if (!get(accounts)) return []
         else return get(accounts).filter((wa) => activeAccountIndices.includes(wa.index))
     }
 )
@@ -259,8 +260,7 @@ export const resetParticipation = (): void => {
  *
  * @returns {boolean}
  */
-export const isAccountStaked = (accountId: string): boolean =>
-    get(stakedAccounts).find((sa) => sa.id === accountId) !== undefined
+export const isAccountStaked = (accountId: string): boolean => get(stakedAccounts).find((sa) => sa.id === accountId) !== undefined
 
 export const isAccountPartiallyStaked = (accountId: string): boolean =>
     get(partiallyStakedAccounts).find((psa) => psa.id === accountId) !== undefined
@@ -381,9 +381,7 @@ export const canParticipate = (eventState: ParticipationEventState): boolean => 
  *
  * @returns {boolean}
  */
-export const canAccountParticipate = (account: WalletAccount): boolean => {
-    return account?.rawIotaBalance >= DUST_THRESHOLD
-}
+export const canAccountParticipate = (account: WalletAccount): boolean => account?.rawIotaBalance >= DUST_THRESHOLD
 
 /**
  * Gets participation overview.

@@ -32,6 +32,7 @@
                 props: {
                     accountToAction: accountToStake,
                     participationAction: ParticipationAction.Stake,
+                    shouldParticipateOnMount: true
                 },
             }, true)
         }
@@ -39,6 +40,7 @@
         if ($isSoftwareProfile) {
             checkStronghold(_onConfirm)
         } else {
+            _onConfirm();
             console.log('TODO: Handle staking flow for Ledger')
         }
     }
