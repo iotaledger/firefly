@@ -70,7 +70,7 @@
 </script>
 
 <div
-    class="px-3 py-2 flex flex-row justify-between items-center rounded-2xl bg-blue-100"
+    class="px-3 py-2 flex flex-row justify-between items-center rounded-2xl bg-blue-100 dark:bg-gray-800"
     bind:this={indicatorBox}
     on:mouseenter={toggleTooltip}
     on:mouseleave={toggleTooltip}>

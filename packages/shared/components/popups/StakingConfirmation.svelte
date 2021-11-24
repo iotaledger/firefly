@@ -60,7 +60,7 @@
         <Text type="p" highlighted classes="text-lg">
             {locale('views.staking.confirmation.title')}
         </Text>
-        <Text type="p" classes="text-2xl font-extrabold">
+        <Text type="p" overrideColor classes="text-2xl font-extrabold text-gray-800">
             {isPartialStake
                 ? formatUnitBestMatch(getUnstakedFunds(accountToStake))
                 : accountToStake.balance

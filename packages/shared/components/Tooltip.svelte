@@ -27,7 +27,7 @@
             left = parentLeft - tooltip.offsetWidth / 2 + parentWidth
         } else if (position === 'right') {
             top = parentTop < tooltip.offsetHeight ? parentTop - 10 : parentTop - tooltip.offsetHeight / 2 - 15
-            left = parentLeft + parentWidth * 2 + 12
+            left = parentLeft + parentWidth * 2 + 15
         }
     }
 </script>
@@ -75,10 +75,23 @@
             inner-dark {
                 border-width: 12px;
                 @apply border-b-0;
-                left: -1rem;
-                @apply top-5;
+                left: -18px;
+                @apply top-6;
                 @apply transform;
                 @apply rotate-90;
+            }
+            &.darkmode {
+                triangle {
+                    @apply border-gray-700;
+                    @apply border-l-transparent;
+                    @apply border-r-transparent;
+                    inner-dark {
+                        @apply block;
+                        left: -12px;
+                        transform: none;
+                        top: -14px;
+                    }
+                }
             }
         }
     }

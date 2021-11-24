@@ -34,7 +34,7 @@
 <div class="p-5 flex flex-col justify-between space-y-6 w-full h-full">
     <div class="flex flex-col justify-between">
         <div class="flex flex-row justify-between items-start">
-            <Text type="p" overrideColor classes="mb-2 text-gray-700 text-13 font-normal">
+            <Text type="p" overrideColor classes="mb-2 text-gray-700 text-13 font-normal dark:text-white">
                 {locale('views.staking.summary.stakedFunds')}
             </Text>
             {#if isPartiallyStaked}
@@ -42,7 +42,7 @@
             {/if}
         </div>
         <Text type="h5" classes="text-3xl">{formatUnitBestMatch($stakedAmount)}</Text>
-        <Text type="p" smaller overrideColor classes="mt-1 text-gray-500">
+        <Text type="p" smaller overrideColor classes="mt-1 text-gray-500 dark:text-gray-600">
             {formatUnitBestMatch($unstakedAmount)}
             {locale('views.staking.summary.unstaked')}
         </Text>
