@@ -21,7 +21,7 @@
 
     $: indicatorBox, showTooltip, void refreshIndicatorBox()
 
-    async function refreshIndicatorBox() {
+    const refreshIndicatorBox = async (): Promise<void> => {
         if (!indicatorBox || !showTooltip) return
 
         await tick()
