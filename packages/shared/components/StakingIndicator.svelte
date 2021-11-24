@@ -14,13 +14,15 @@
     $: indicatorText = getIndicatorText($stakingEventState, $stakedAccounts.length > 0)
 
     let showTooltip = false
-
     let indicatorBox
     let parentWidth = 0
     let parentLeft = 0
     let parentTop = 0
+    let position = ""
 
-    const refreshIndicatorBox = async (): Promise<void> => {
+    $: indicatorBox, showTooltip, void refreshIndicatorBox()
+
+    async function refreshIndicatorBox() {
         if (!indicatorBox || !showTooltip) return
 
         await tick()
@@ -28,9 +30,8 @@
         parentWidth = indicatorBox?.offsetWidth / 2 ?? 0
         parentLeft = indicatorBox?.getBoundingClientRect().left ?? 0
         parentTop = indicatorBox?.getBoundingClientRect().top ?? 0
+        position = "right"
     }
-
-    $: indicatorBox, showTooltip, void refreshIndicatorBox()
 
     const toggleTooltip = (): void => {
         showTooltip = !showTooltip
@@ -68,19 +69,23 @@
     }
 </script>
 
-<div class="px-3 py-2 flex flex-row justify-between items-center rounded-2xl bg-blue-100">
+<div
+    class="px-3 py-2 flex flex-row justify-between items-center rounded-2xl bg-blue-100"
+    bind:this={indicatorBox}
+    on:mouseenter={toggleTooltip}
+    on:mouseleave={toggleTooltip}>
     <Icon icon={indicatorIcon} classes="fill-current text-blue-500" />
     <Text type="p" classes="mx-3">{indicatorText}</Text>
     <div>
-        <!--            bind:this={indicatorBox}-->
-        <!--            on:mouseenter={toggleTooltip}-->
-        <!--            on:mouseleave={toggleTooltip}-->
         <Icon icon="info-filled" classes="fill-current text-gray-600 transform translate-y-1" />
     </div>
 </div>
 {#if showTooltip}
-    <Tooltip {parentTop} {parentLeft} {parentWidth}>
-        <Text type="p">{locale('views.staking.status.tooltip.title')}</Text>
-        <Text type="p" secondary>{locale('views.staking.status.tooltip.body')}</Text>
+    <Tooltip {parentTop} {parentLeft} {parentWidth} {position}>
+        <Text type="p" bigger classes="text-gray-900 text-15 mb-2">Event has not yet started</Text>
+        <Text type="p" secondary>
+            Your staked wallets are ready to start receiving airdrops from December 15th 2021 00:01 CET. You do not have
+            to take further action at this time.
+        </Text>
     </Tooltip>
-{/if}
+ {/if}
