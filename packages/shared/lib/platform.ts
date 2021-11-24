@@ -1,4 +1,7 @@
 import { Electron } from 'shared/lib/electron'
+import { CapacitorDeepLinkManager } from './deepLinking/deepLinkManager'
+import { CapacitorNotificationManager } from './notificationManager'
+import { CapacitorPincodeManager } from './pincodeManager'
 import { IPlatform, Platforms } from './typings/platform'
 
 const PLATFORM = process.env.PLATFORM
@@ -37,11 +40,26 @@ export const Platform: IPlatform = {
         }
     },
 
-    PincodeManager: Electron.PincodeManager,
+    PincodeManager:
+        PLATFORM == Platforms.DESKTOP
+            ? Electron.PincodeManager
+            : PLATFORM == Platforms.MOBILE
+            ? CapacitorPincodeManager
+            : undefined,
 
-    DeepLinkManager: Electron.DeepLinkManager,
+    DeepLinkManager:
+        PLATFORM == Platforms.DESKTOP
+            ? Electron.DeepLinkManager
+            : PLATFORM == Platforms.MOBILE
+            ? CapacitorDeepLinkManager
+            : undefined,
 
-    NotificationManager: Electron.NotificationManager,
+    NotificationManager:
+        PLATFORM == Platforms.DESKTOP
+            ? Electron.NotificationManager
+            : PLATFORM == Platforms.MOBILE
+            ? CapacitorNotificationManager
+            : undefined,
 
     getStrongholdBackupDestination: (defaultPath) => {
         switch (PLATFORM) {
