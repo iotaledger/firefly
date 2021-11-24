@@ -77,6 +77,7 @@
     <Icon icon={indicatorIcon} classes="fill-current text-blue-500" />
     <Text type="p" classes="mx-3">{indicatorText}</Text>
     <div>
+
         <Icon icon="info-filled" classes="fill-current text-gray-600 transform translate-y-1" />
     </div>
 </div>
