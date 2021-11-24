@@ -43,7 +43,6 @@
     let accounts = get($wallet.accounts)
     let hasStakedAccounts = $stakedAccounts.length > 0
 
-
     console.log('STAKED ACCOUNTS: ', $stakedAccounts)
 
     const resetView = (): void => {
