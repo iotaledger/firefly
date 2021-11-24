@@ -18,7 +18,6 @@
     let parentWidth = 0
     let parentLeft = 0
     let parentTop = 0
-    let position = ""
 
     $: indicatorBox, showTooltip, void refreshIndicatorBox()
 
@@ -30,7 +29,6 @@
         parentWidth = indicatorBox?.offsetWidth / 2 ?? 0
         parentLeft = indicatorBox?.getBoundingClientRect().left ?? 0
         parentTop = indicatorBox?.getBoundingClientRect().top ?? 0
-        position = "right"
     }
 
     const toggleTooltip = (): void => {
@@ -81,7 +79,7 @@
     </div>
 </div>
 {#if showTooltip}
-    <Tooltip {parentTop} {parentLeft} {parentWidth} {position}>
+    <Tooltip {parentTop} {parentLeft} {parentWidth} position="right">
         <Text type="p" classes="text-gray-900 bold mb-1 text-left">Event has not yet started</Text>
         <Text type="p" secondary classes="text-left">
             Your staked wallets are ready to start receiving airdrops from December 15th 2021 00:01 CET. You do not have
