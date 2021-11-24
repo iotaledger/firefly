@@ -21,7 +21,11 @@
                 "first": "Beginnen wir zunächst mit deinem ersten Profilnamen.",
                 "nonFirst": "Beginnen wir zunächst mit deinem Profilnamen."
             },
-            "addMore": "Du kannst später weitere Profile hinzufügen."
+            "addMore": "Du kannst später weitere Profile hinzufügen.",
+            "developer": {
+                "label": "Entwicklerprofil",
+                "info": "Mit öffentlichen und privaten IOTA-Netzwerken verbinden"
+            }
         },
         "setup": {
             "title": "Richte eine Wallet ein",
@@ -67,7 +71,7 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Richte eine PIN ein, um sicherzustellen, dass nur Du auf dein Profil zugreifen kannst.",
+            "body1": "Richte eine PIN ein, um sicherzustellen, dass nur du auf dein Profil zugreifen kannst.",
             "body2": "Bewahre deine PIN sicher auf!"
         },
         "pin": {
@@ -307,7 +311,8 @@
             },
             "theme": {
                 "title": "Erscheinungsbild",
-                "description": ""
+                "description": "",
+                "advice": "Starte die Firefly Anwendung neu, damit Änderungen am System-Erscheinungsbild wirksam werden"
             },
             "language": {
                 "title": "Sprache",
@@ -323,7 +328,7 @@
             },
             "networkStatus": {
                 "title": "Netzwerkstatus",
-                "description": "Zeigt den Status des Nodes an, mit welchem du gerade verbunden bist."
+                "description": "Zeigt den Status des Nodes an, mit welchem du gerade verbunden bist"
             },
             "exportStronghold": {
                 "title": "Backup exportieren",
@@ -360,28 +365,39 @@
                 "description": "Löscht dein gesamtes Profil, inklusive Wallets und Transaktionsverläufe. Stelle sicher, dass du ein Backup besitzt"
             },
             "deepLinks": {
-                "title": "Deep Links",
-                "description": "Transaktionsdaten automatisch in Firefly ausfüllen, wenn auf einen iota:// Link geklickt wird"
+                "title": "IOTA-Links",
+                "description": "Transaktionsdaten automatisch in Firefly ausfüllen, wenn auf einen IOTA-Link geklickt wird"
             },
-            "developerMode": {
-                "title": "Entwicklermodus",
-                "description": "Mit Testnetzwerken verbinden und andere Entwickleroptionen"
-            },
-            "nodeSettings": {
-                "title": "Node-Einstellungen",
-                "description": "Wähle Manuell, um die Node-Einstellungen zu konfigurieren und dich mit deinem eigenen Node zu verbinden"
+            "networkConfiguration": {
+                "title": "Netzwerkkonfiguration",
+                "title2": "Netzwerkkonfiguration",
+                "description": {
+                    "dev": "Deine Netzwerkeinstellungen werden automatisch entsprechend der aktuellen Node-Konfiguration aktualisiert (Netzwerkwechsel führt zum Zurücksetzen der Wallet)",
+                    "nonDev": "Deine Netzwerkeinstellungen werden automatisch entsprechend der aktuellen Node-Konfiguration aktualisiert"
+                },
+                "switchedNetworks": "Netzwerk erfolgreich auf \"{networkName} \" umgestellt.",
+                "resetWallet": "Deine Wallet wurde zurückgesetzt.",
+                "connectedTo": "Verbunden mit",
+                "nodeConfiguration": {
+                    "title": "Node-Auswahl",
+                    "description": "Wähle Manuell, um die Node-Einstellungen zu konfigurieren und dich mit deinen eigenen Nodes zu verbinden",
+                    "automatic": "Automatisch",
+                    "manual": "Manuell"
+                }
             },
             "configureNodeList": {
-                "title": "Wähle einen Node aus",
-                "description": "Verwalte die Liste der IOTA Nodes mit denen du dich verbinden kannst",
+                "title": "Node-Konfiguration",
+                "description": "Verwalte die Liste der Nodes, mit denen du dich verbindest",
                 "primaryNode": "Primärer Node",
                 "excludeNode": "Node ausschließen",
                 "includeNode": "Node einbeziehen",
-                "viewDetails": "Details anzeigen",
+                "editDetails": "Bearbeiten",
+                "viewInfo": "Info anzeigen",
                 "setAsPrimary": "Als Primäre festlegen",
                 "removeNode": "Node entfernen",
                 "includeOfficialNodeList": "Offizielle Node-Liste einbeziehen",
-                "noNodes": "Es sind keine Nodes vorhanden, stattdessen wird eine automatische Auswahl getroffen"
+                "noNodes": "Es sind keine Nodes vorhanden, Verbindung zum Netzwerk fehlgeschlagen",
+                "noNodesAuto": "Es sind keine Nodes vorhanden, automatische Auswahl wird stattdessen verwendet"
             },
             "proofOfWork": {
                 "title": "Proof of Work",
@@ -528,12 +544,37 @@
             "titleAdd": "Node hinzufügen",
             "titleUpdate": "Node aktualisieren",
             "titleRemove": "Node entfernen",
+            "titleRemoveAll": "Alle Nodes entfernen",
             "titleDetails": "Node Details",
+            "titleInfo": "Node-Informationen",
+            "addingNode": "Node hinzufügen",
+            "updatingNode": "Node aktualisieren",
+            "loadingNodeInfo": "Lade Node-Informationen",
             "nodeAddress": "Node Adresse",
             "optionalUsername": "Benutzername (optional)",
             "optionalPassword": "Passwort (optional)",
+            "optionalJwt": "JSON-Web-Token (optional)",
             "setAsPrimaryNode": "Als primären Node festlegen",
-            "removeConfirmation": "Willst du diesen Node wirklich löschen?"
+            "removeConfirmation": "Willst du diesen Node wirklich löschen?",
+            "removeAllConfirmation": "Bist du sicher, dass du alle Nodes entfernen möchtest?",
+            "info": {
+                "url": "URL",
+                "software": "Software",
+                "networkId": "Netzwerk-ID",
+                "bech32HRP": "Bech32 HRP",
+                "features": "Features",
+                "confirmedMilestoneIndex": "Bestätigter Milestone-Index",
+                "pruningIndex": "Pruning-Index",
+                "messagesPerSecond": "Nachrichten pro Sekunde",
+                "referencedRate": "Bestätigungsrate"
+            }
+        },
+        "switchNetwork": {
+            "title": "Netzwerk wechseln",
+            "newNetwork": "Neues Netzwerk",
+            "resetWarning": "Das wechseln des Netzwerks meldet dich ab und setzt alle Konten, Bestände und Transaktionsverläufe für dieses Profil zurück.",
+            "switchingNetwork": "Netzwerk wird gewechselt",
+            "typePassword": "Gib dein Passwort ein, um zu folgendem Netzwerk zu wechseln:"
         },
         "errorLog": {
             "title": "Fehlerprotokoll",
@@ -684,7 +725,7 @@
         "syncAll": "Alle synchronisieren",
         "export": "Exportieren",
         "exportNewStronghold": "Neuen Stronghold exportieren",
-        "enableDeepLinks": "Deep Links aktivieren",
+        "enableDeepLinks": "IOTA-Links aktivieren",
         "enableDeveloperMode": "Entwicklermodus aktivieren",
         "enableSystemNotifications": "Systembenachrichtigungen aktivieren",
         "exportState": "Status exportieren",
@@ -702,6 +743,7 @@
         "addNode": "Node hinzufügen",
         "updateNode": "Node aktualisieren",
         "removeNode": "Node entfernen",
+        "removeAllNodes": "Alle Nodes entfernen",
         "hide": "Ausblenden",
         "hideOthers": "Andere ausblenden",
         "showAll": "Alle anzeigen",
@@ -781,8 +823,9 @@
         "stronghold": "Stronghold",
         "language": "Sprache",
         "appearance": "Erscheinungsbild",
-        "lightTheme": "Heller Modus",
-        "darkTheme": "Dunkler Modus",
+        "lightTheme": "Hell",
+        "darkTheme": "Dunkel",
+        "systemTheme": "System",
         "balance": "Guthaben",
         "accountBalance": "Wallet Guthaben",
         "incoming": "Eingehend",
@@ -791,11 +834,7 @@
         "totalOut": "Gesamt ausgehend",
         "accounts": "Wallets",
         "myAccounts": "Meine Wallets",
-        "automaticNodeSelection": "Automatische Node-Verwaltung",
-        "manualNodeSelection": "Manuelle Node-Verwaltung",
         "profiles": "Profile",
-        "developerProfile": "Entwicklerprofil",
-        "developerProfileDescription": "Ermöglicht die Verbindung zu Testnetzen",
         "dev": "Entwickler",
         "createAccount": "Wallet erstellen",
         "accountName": "Wallet-Name",
@@ -803,6 +842,7 @@
         "transactions": "Transaktionen",
         "security": "Sicherheit",
         "accountAddress": "Wallet-Adresse",
+        "network": "Netzwerk",
         "nodes": "Nodes",
         "wallet": "Wallet",
         "help": "Hilfe",
@@ -861,7 +901,8 @@
         "legacyNetwork": "Altes Netzwerk",
         "capsLock": "Feststelltaste ist aktiviert",
         "version": "Version {version}",
-        "unknown": "Unbekannt"
+        "unknown": "Unbekannt",
+        "none": "Keine"
     },
     "dates": {
         "today": "Heute",
@@ -885,7 +926,17 @@
         "minutesRemaining": "{minutes, plural, one {1 Minute verbleibend} other {# Minuten verbleibend}}",
         "copiedToClipboard": "In die Zwischenablage kopiert",
         "accountsSynchronized": "Synchronisierung der Wallet abgeschlossen",
-        "fundsAvailableSoon": "Dein Guthaben wird in Kürze verfügbar sein"
+        "fundsAvailableSoon": "Dein Guthaben wird in Kürze verfügbar sein",
+        "deepLinkingRequest": {
+            "recievedWhileLoggedOut": "Bitte melde dich an, um den IOTA-Link zu initiieren",
+            "notEnabled": "IOTA-Links sind nicht aktiviert",
+            "invalidFormat": "Der von dir gefolgte IOTA-Link ist ungültig",
+            "wallet": {
+                "send": {
+                    "success": "Zahlungsinformationen aus IOTA-Link hinzugefügt"
+                }
+            }
+        }
     },
     "error": {
         "profile": {
@@ -945,11 +996,23 @@
         },
         "node": {
             "invalid": "Gib eine gültige URL ein.",
-            "dns": "DNS für Node konnte nicht aufgelöst werden.",
-            "https": "HTTPS wird benötigt. Benutze ein Entwicklerprofil, um ungesicherte HTTP-Verbindungen zu nutzen.",
+            "dns": "DNS-Auflösung für Node nicht gefunden.",
+            "timedOut": "Zeitüberschreitung bei der Verbindung.",
+            "refused": "Die Verbindung wurde abgelehnt.",
+            "handshake": "Handshake mit Node konnte nicht abgeschlossen werden.",
+            "invalidCertificate": "Verbindung mit ungültigem Zertifikat konnte nicht hergestellt werden.",
+            "https": "HTTPS wird benötigt; unsichere Verbindungen über HTTP werden derzeit nicht unterstützt.",
             "duplicate": "Dieser Node wurde bereits hinzugefügt.",
             "unsynced": "Der Node ist nicht synchronisiert.",
-            "noSynced": "Keine synchronisierten Nodes verfügbar."
+            "noSynced": "Keine synchronisierten Nodes verfügbar.",
+            "answer": "Abrufen einer Antwort aller Nodes gescheitert.",
+            "forbidden": "Diese Node-Verbindung ist verboten."
+        },
+        "network": {
+            "mismatch": "Die Netzwerk-ID für diesen Node ist \"{networkId}\", was nicht mit dem aktuellen Netzwerk übereinstimmt.",
+            "notReachable": "Die Netzwerk-ID für diesen Node konnte nicht abgerufen werden. Hinzufügen des Nodes nicht möglich.",
+            "badNodes": "Verbindung zum Netzwerk mit aktueller Node-Konfiguration nicht möglich.",
+            "nonEmptyAccount": "Du musst alle Guthaben transferieren, bevor du das Netzwerk wechseln kannst."
         },
         "global": {
             "generic": "Ein Fehler ist aufgetreten."
@@ -985,6 +1048,11 @@
         },
         "crypto": {
             "cannotDecodeBech32": "String konnte nicht als Bech32-Adresse dekodiert werden."
+        }
+    },
+    "warning": {
+        "node": {
+            "http": "Die Verwendung von Nodes über HTTP lässt den Datenverkehr unverschlüsselt und kann ein Sicherheitsrisiko darstellen."
         }
     },
     "tooltips": {

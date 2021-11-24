@@ -15,13 +15,17 @@
         },
         "profile": {
             "title": "Buat Profil",
-            "profileName": "Nama Profil",
+            "profileName": "Profile name",
             "body1": "Anda dapat membuat beberapa profil pengguna untuk mengatur dompet Anda dan meningkatkan privasi.",
             "body2": {
                 "first": "For now, let's start with your first profile name.",
                 "nonFirst": "For now, let's start with your profile name."
             },
-            "addMore": "You can add more profiles later."
+            "addMore": "You can add more profiles later.",
+            "developer": {
+                "label": "Developer profile",
+                "info": "Connect to public and private IOTA networks"
+            }
         },
         "setup": {
             "title": "Atur dompet Anda",
@@ -196,7 +200,7 @@
             "title": "Choose Ledger account index",
             "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
             "accountIndex": "Account Index",
-            "accountPage": "Account Page",
+            "accountPage": "Halaman Akun",
             "standard": "Standar",
             "expert": "Ahli",
             "takingAWhile": "This is taking a while...",
@@ -307,7 +311,8 @@
             },
             "theme": {
                 "title": "Motif",
-                "description": ""
+                "description": "",
+                "advice": "Restart the Firefly application for changes to the system theme to take effect"
             },
             "language": {
                 "title": "Bahasa",
@@ -323,14 +328,14 @@
             },
             "networkStatus": {
                 "title": "Status Jaringan",
-                "description": "Displays the status of the node you are currently connected to."
+                "description": "Displays the status of the node you are currently connected to"
             },
             "exportStronghold": {
-                "title": "Ekspor Cadangan",
+                "title": "Export backup",
                 "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
             },
             "appLock": {
-                "title": "Kunci Otomatis",
+                "title": "Automatic lock",
                 "description": "Waktu tidak aktif sebelum dompet Anda terkunci dan Anda keluar",
                 "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
                 "durationHour": "{time, plural, one {1 hour} other {# hours}}"
@@ -360,28 +365,39 @@
                 "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
             },
             "deepLinks": {
-                "title": "Tautan Dalam",
-                "description": "Secara otomatis mengisi data transaksi di Firefly dengan mengklik link iota: //"
+                "title": "IOTA links",
+                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
             },
-            "developerMode": {
-                "title": "Mode pengembang",
-                "description": "Hubungkan ke testnets dan fitur pengembang lainnya"
-            },
-            "nodeSettings": {
-                "title": "Pengaturan Node",
-                "description": "Pilih Manual untuk mengkonfigurasi pengaturan node dan menghubungkan ke node Anda sendiri"
+            "networkConfiguration": {
+                "title": "Network config",
+                "title2": "Network configuration",
+                "description": {
+                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
+                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                },
+                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
+                "resetWallet": "Your wallet state has been reset.",
+                "connectedTo": "Connected to",
+                "nodeConfiguration": {
+                    "title": "Node selection",
+                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
+                    "automatic": "Automatic",
+                    "manual": "Manual"
+                }
             },
             "configureNodeList": {
-                "title": "Pilih node",
-                "description": "Manage the list of IOTA network nodes you connect to",
+                "title": "Node configuration",
+                "description": "Manage the list of nodes you connect to",
                 "primaryNode": "Node utama",
                 "excludeNode": "Kecualikan node",
                 "includeNode": "Sertakan node",
-                "viewDetails": "Lihat detail",
+                "editDetails": "Edit details",
+                "viewInfo": "View info",
                 "setAsPrimary": "Set sebagai utama",
                 "removeNode": "Menghapus Node",
                 "includeOfficialNodeList": "Sertakan daftar node resmi",
-                "noNodes": "There are no nodes, automatic selection will be used instead"
+                "noNodes": "There are no nodes, unable to connect to the network",
+                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "Bukti kerja",
@@ -396,7 +412,7 @@
                 "description": "Lihat informasi sistem dan aplikasi"
             },
             "migrateLedgerIndex": {
-                "title": "Migrate Ledger Index",
+                "title": "Migrate Ledger index",
                 "description": "Migrate another Trinity account index"
             },
             "stateExport": {
@@ -413,7 +429,7 @@
             },
             "faq": {
                 "title": "FAQ",
-                "title2": "Pertanyaan yg sering ditanyakan",
+                "title2": "Frequently asked questions",
                 "description": "Lihat FAQ untuk mendapatkan bantuan tentang masalah atau pertanyaan umum"
             },
             "discord": {
@@ -528,12 +544,37 @@
             "titleAdd": "Tambahkan Node",
             "titleUpdate": "Perbarui node",
             "titleRemove": "Menghapus Node",
+            "titleRemoveAll": "Remove all nodes",
             "titleDetails": "Node detailnya",
+            "titleInfo": "Node info",
+            "addingNode": "Adding node",
+            "updatingNode": "Updating node",
+            "loadingNodeInfo": "Loading node info",
             "nodeAddress": "Alamat Node",
             "optionalUsername": "Nama pengguna (opsional)",
             "optionalPassword": "Kata Sandi (opsional)",
+            "optionalJwt": "JSON web token (optional)",
             "setAsPrimaryNode": "Ditetapkan sebagai Node utama",
-            "removeConfirmation": "Anda yakin ingin menghapus node ini?"
+            "removeConfirmation": "Anda yakin ingin menghapus node ini?",
+            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "info": {
+                "url": "URL",
+                "software": "Software",
+                "networkId": "Network ID",
+                "bech32HRP": "Bech32 HRP",
+                "features": "Features",
+                "confirmedMilestoneIndex": "Confirmed milestone index",
+                "pruningIndex": "Pruning index",
+                "messagesPerSecond": "Pesan per detik",
+                "referencedRate": "Referenced rate"
+            }
+        },
+        "switchNetwork": {
+            "title": "Switch network",
+            "newNetwork": "New network",
+            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
+            "switchingNetwork": "Switching network",
+            "typePassword": "Type your password to switch to:"
         },
         "errorLog": {
             "title": "Catatan eror",
@@ -684,7 +725,7 @@
         "syncAll": "Sinkronkan semua",
         "export": "Ekspor",
         "exportNewStronghold": "Ekspor Stronghold baru",
-        "enableDeepLinks": "Memungkinkan deep links",
+        "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "Aktifkan Alat Pengembang",
         "enableSystemNotifications": "Aktifkan notifikasi sistem",
         "exportState": "Ekspor status",
@@ -702,6 +743,7 @@
         "addNode": "Tambah Node",
         "updateNode": "Update node",
         "removeNode": "Menghapus Node",
+        "removeAllNodes": "Remove all nodes",
         "hide": "Menyembunyikan",
         "hideOthers": "Sembunyikan Lainnya",
         "showAll": "Tunjukkan Semua",
@@ -781,8 +823,9 @@
         "stronghold": "Stronghold",
         "language": "Bahasa",
         "appearance": "Tampilan",
-        "lightTheme": "Motif terang",
-        "darkTheme": "Motif gelap",
+        "lightTheme": "Light",
+        "darkTheme": "Dark",
+        "systemTheme": "System",
         "balance": "Saldo",
         "accountBalance": "Saldo Dompet",
         "incoming": "Pemasukkan",
@@ -791,11 +834,7 @@
         "totalOut": "Total keluar",
         "accounts": "Dompet",
         "myAccounts": "Dompet saya",
-        "automaticNodeSelection": "Pilih Node otomatis",
-        "manualNodeSelection": "Pilihan Node manual",
         "profiles": "Profil",
-        "developerProfile": "Profil pengembang",
-        "developerProfileDescription": "Memungkinkan Anda terhubung ke testnets",
         "dev": "Pengembang",
         "createAccount": "Buat dompet",
         "accountName": "Nama Dompet",
@@ -803,6 +842,7 @@
         "transactions": "Transaksi",
         "security": "Keamanan",
         "accountAddress": "Alamat Dompet",
+        "network": "Network",
         "nodes": "Nodes",
         "wallet": "Dompet",
         "help": "Bantuan",
@@ -861,7 +901,8 @@
         "legacyNetwork": "Legacy Network",
         "capsLock": "Caps Lock menyala",
         "version": "Versi {version}",
-        "unknown": "Unknown"
+        "unknown": "Unknown",
+        "none": "None"
     },
     "dates": {
         "today": "Hari ini",
@@ -885,7 +926,17 @@
         "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {#sisa menit}}",
         "copiedToClipboard": "Salin ke papan klip",
         "accountsSynchronized": "Wallet synchronization complete",
-        "fundsAvailableSoon": "Your funds will become available shortly"
+        "fundsAvailableSoon": "Your funds will become available shortly",
+        "deepLinkingRequest": {
+            "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
+            "notEnabled": "IOTA links are not enabled",
+            "invalidFormat": "The IOTA link you followed is invalid",
+            "wallet": {
+                "send": {
+                    "success": "Payment details added from IOTA link"
+                }
+            }
+        }
     },
     "error": {
         "profile": {
@@ -945,11 +996,23 @@
         },
         "node": {
             "invalid": "Silakan masukkan URL yang valid.",
-            "dns": "Could not resolve DNS for node.",
-            "https": "HTTPS diperlukan. Siapkan profil pengembang untuk menggunakan koneksi HTTP tidak aman.",
+            "dns": "Could not find DNS resolution for node.",
+            "timedOut": "The connection timed out.",
+            "refused": "The connection was refused.",
+            "handshake": "Could not complete handshake with node.",
+            "invalidCertificate": "Could not connect with invalid certificate.",
+            "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
             "duplicate": "Node ini telah ditambahkan.",
             "unsynced": "Node tidak sinkron.",
-            "noSynced": "Tidak ada node yang disinkronkan yang tersedia."
+            "noSynced": "Tidak ada node yang disinkronkan yang tersedia.",
+            "answer": "Failed to get an answer from all nodes.",
+            "forbidden": "This node connection is forbidden."
+        },
+        "network": {
+            "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
+            "notReachable": "The network ID for this node could not be retrieved, unable to add node.",
+            "badNodes": "Unable to connect to the network with current node configuration.",
+            "nonEmptyAccount": "You must transfer all balances before switching networks."
         },
         "global": {
             "generic": "Ada yang salah."
@@ -985,6 +1048,11 @@
         },
         "crypto": {
             "cannotDecodeBech32": "Unable to decode string as Bech32 address."
+        }
+    },
+    "warning": {
+        "node": {
+            "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
         }
     },
     "tooltips": {

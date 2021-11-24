@@ -15,13 +15,17 @@
         },
         "profile": {
             "title": "إنشاء ملف شخصي",
-            "profileName": "اسم الملف الشخصي",
+            "profileName": "Profile name",
             "body1": "يمكنك إنشاء ملفات شخصية متعددة للمستخدمين لتنظيم محافظك وتحسين الخصوصية.",
             "body2": {
                 "first": "For now, let's start with your first profile name.",
                 "nonFirst": "For now, let's start with your profile name."
             },
-            "addMore": "You can add more profiles later."
+            "addMore": "You can add more profiles later.",
+            "developer": {
+                "label": "Developer profile",
+                "info": "Connect to public and private IOTA networks"
+            }
         },
         "setup": {
             "title": "تأسيس محفظة",
@@ -307,7 +311,8 @@
             },
             "theme": {
                 "title": "الموضوع",
-                "description": ""
+                "description": "",
+                "advice": "Restart the Firefly application for changes to the system theme to take effect"
             },
             "language": {
                 "title": "اللغة",
@@ -323,14 +328,14 @@
             },
             "networkStatus": {
                 "title": "حالة الشبكة",
-                "description": "يعرض حالة الnode التي تتصل بها حاليًا."
+                "description": "Displays the status of the node you are currently connected to"
             },
             "exportStronghold": {
-                "title": "تصدير النسخ الاحتياطي",
+                "title": "Export backup",
                 "description": "تصدير إلى ملف Stronghold - نسخة احتياطية مشفرة كاملة من محفظاتك وأحدث سجل المعاملات"
             },
             "appLock": {
-                "title": "قفل تلقائي",
+                "title": "Automatic lock",
                 "description": "فترة عدم النشاط قبل قفل محافظك وتسجيل الخروج",
                 "durationMinute": "{time, plural, one {1 دقيقة} other {# دقائق}}",
                 "durationHour": "{time, plural, one {1 ساعة} other {# ساعات}}"
@@ -360,28 +365,39 @@
                 "description": "يحذف كامل ملفك الشخصي ومحفظاتك وسجل المعاملات. تأكد من أن لديك نسخة احتياطية"
             },
             "deepLinks": {
-                "title": "روابط عميقة",
-                "description": "ملء بيانات المعاملات تلقائياً في Firefly عند النقر فوق رابط iota://"
+                "title": "IOTA links",
+                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
             },
-            "developerMode": {
-                "title": "وضع المبرمج",
-                "description": "الاتصال بالشبكات الاختبارية ومميزات المطور الأخرى"
-            },
-            "nodeSettings": {
-                "title": "إعدادات العقدة node",
-                "description": "إختر التحديث اليدوي لتغيير إعدادات العقد و الإتصال بعقدك الخاص"
+            "networkConfiguration": {
+                "title": "Network config",
+                "title2": "Network configuration",
+                "description": {
+                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
+                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                },
+                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
+                "resetWallet": "Your wallet state has been reset.",
+                "connectedTo": "Connected to",
+                "nodeConfiguration": {
+                    "title": "Node selection",
+                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
+                    "automatic": "Automatic",
+                    "manual": "Manual"
+                }
             },
             "configureNodeList": {
-                "title": "اختر عقدة node",
-                "description": "إدارة قائمة عقد شبكة IOTA التي تتصل بها",
+                "title": "Node configuration",
+                "description": "Manage the list of nodes you connect to",
                 "primaryNode": "العقدة الرئيسية",
                 "excludeNode": "استبعاد العقدة",
                 "includeNode": "ضمن العدقة",
-                "viewDetails": "عرض التفاصيل",
+                "editDetails": "Edit details",
+                "viewInfo": "View info",
                 "setAsPrimary": "تعيين كعقدة أساسية",
                 "removeNode": "إزالة العقدة node",
                 "includeOfficialNodeList": "تضمين قائمة العقد الرسمية",
-                "noNodes": "لا توجد عقد، سيتم استخدام التحديد التلقائي بدلاً من ذلك"
+                "noNodes": "There are no nodes, unable to connect to the network",
+                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "إثبات العمل",
@@ -396,7 +412,7 @@
                 "description": "عرض معلومات النظام والتطبيق"
             },
             "migrateLedgerIndex": {
-                "title": "Migrate Ledger Index",
+                "title": "Migrate Ledger index",
                 "description": "Migrate another Trinity account index"
             },
             "stateExport": {
@@ -413,7 +429,7 @@
             },
             "faq": {
                 "title": "أسئلة متكررة",
-                "title2": "الأسئلة المتكررة",
+                "title2": "Frequently asked questions",
                 "description": "عرض الأسئلة المتكررة للحصول على المساعدة في مشكلة أو سؤال شائع"
             },
             "discord": {
@@ -528,12 +544,37 @@
             "titleAdd": "إضافة عقدة node",
             "titleUpdate": "تحديث وحدة",
             "titleRemove": "إزالة عقدة node",
+            "titleRemoveAll": "Remove all nodes",
             "titleDetails": "تفاصيل العقدة node",
+            "titleInfo": "Node info",
+            "addingNode": "Adding node",
+            "updatingNode": "Updating node",
+            "loadingNodeInfo": "Loading node info",
             "nodeAddress": "عنوان العقدة node",
             "optionalUsername": "اسم المستخدم (اختياري)",
             "optionalPassword": "كلمة المرور (اختياري)",
+            "optionalJwt": "JSON web token (optional)",
             "setAsPrimaryNode": "تعيين كعقدة node أساسية",
-            "removeConfirmation": "هل أنت متأكد من أنك تريد إزالة هذه العقدة node؟"
+            "removeConfirmation": "هل أنت متأكد من أنك تريد إزالة هذه العقدة node؟",
+            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "info": {
+                "url": "URL",
+                "software": "Software",
+                "networkId": "Network ID",
+                "bech32HRP": "Bech32 HRP",
+                "features": "Features",
+                "confirmedMilestoneIndex": "Confirmed milestone index",
+                "pruningIndex": "Pruning index",
+                "messagesPerSecond": "الرسائل في الثانية",
+                "referencedRate": "المعدل المشار إليه"
+            }
+        },
+        "switchNetwork": {
+            "title": "Switch network",
+            "newNetwork": "New network",
+            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
+            "switchingNetwork": "Switching network",
+            "typePassword": "Type your password to switch to:"
         },
         "errorLog": {
             "title": "سجل الأخطاء",
@@ -684,7 +725,7 @@
         "syncAll": "مزامنة الكل",
         "export": "تصدير",
         "exportNewStronghold": "تصدير ملف محصّن جديد",
-        "enableDeepLinks": "تمكين الروابط العميقة",
+        "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "تمكين وضع المبرمج",
         "enableSystemNotifications": "تمكين إشعارات النظام",
         "exportState": "تصدير الحالة",
@@ -702,6 +743,7 @@
         "addNode": "إضافة عقدة node",
         "updateNode": "تحديث العقدة",
         "removeNode": "إزالة العقدة node",
+        "removeAllNodes": "Remove all nodes",
         "hide": "إخفاء",
         "hideOthers": "إخفاء الآخرين",
         "showAll": "إظهار الكل",
@@ -781,8 +823,9 @@
         "stronghold": "ملف محصّن stronghold",
         "language": "اللغة",
         "appearance": "المظهر",
-        "lightTheme": "المظهر الفاتح",
-        "darkTheme": "المظهر الداكن",
+        "lightTheme": "Light",
+        "darkTheme": "Dark",
+        "systemTheme": "System",
         "balance": "الرصيد",
         "accountBalance": "رصيد المحفظة",
         "incoming": "الواردة",
@@ -791,11 +834,7 @@
         "totalOut": "إجمالي المدفوعات",
         "accounts": "المحافظ",
         "myAccounts": "محافظي",
-        "automaticNodeSelection": "اختيار تلقائي للعقدة node",
-        "manualNodeSelection": "اختيار يدوي للعقدة node",
         "profiles": "الملفات الشخصية",
-        "developerProfile": "الملف الشخصي للمبرمج",
-        "developerProfileDescription": "يسمح لك بالاتصال بالشبكات التجريبية",
         "dev": "المطور",
         "createAccount": "إنشاء محفظة",
         "accountName": "اسم المحفظة",
@@ -803,6 +842,7 @@
         "transactions": "المعاملات",
         "security": "الحماية",
         "accountAddress": "عنوان المحفظة",
+        "network": "Network",
         "nodes": "العقد",
         "wallet": "المحفظة",
         "help": "مساعدة",
@@ -861,7 +901,8 @@
         "legacyNetwork": "الشبكة القديمة",
         "capsLock": "Caps Lock مفعل",
         "version": "الإصدار {version}",
-        "unknown": "Unknown"
+        "unknown": "Unknown",
+        "none": "None"
     },
     "dates": {
         "today": "اليوم",
@@ -885,7 +926,17 @@
         "minutesRemaining": "{minutes, plural, one {1 دقيقة متبقية} other {# دقائق متبقية}}",
         "copiedToClipboard": "تم النسخ إلى الحافظة",
         "accountsSynchronized": "اكتملت مزامنة المحفظة",
-        "fundsAvailableSoon": "Your funds will become available shortly"
+        "fundsAvailableSoon": "Your funds will become available shortly",
+        "deepLinkingRequest": {
+            "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
+            "notEnabled": "IOTA links are not enabled",
+            "invalidFormat": "The IOTA link you followed is invalid",
+            "wallet": {
+                "send": {
+                    "success": "Payment details added from IOTA link"
+                }
+            }
+        }
     },
     "error": {
         "profile": {
@@ -945,11 +996,23 @@
         },
         "node": {
             "invalid": "الرجاء إدخال عنوان URL صالح.",
-            "dns": "Could not resolve DNS for node.",
-            "https": "HTTPS مطلوب. إعداد ملف شخصي للمبرمج لاستخدام اتصالات HTTP غير آمنة.",
+            "dns": "Could not find DNS resolution for node.",
+            "timedOut": "The connection timed out.",
+            "refused": "The connection was refused.",
+            "handshake": "Could not complete handshake with node.",
+            "invalidCertificate": "Could not connect with invalid certificate.",
+            "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
             "duplicate": "تمت إضافة هذه العقدة node مسبقاً.",
             "unsynced": "العقدة node غير متزامنة.",
-            "noSynced": "لا يوجد عقد node متزامنة متاحة."
+            "noSynced": "لا يوجد عقد node متزامنة متاحة.",
+            "answer": "Failed to get an answer from all nodes.",
+            "forbidden": "This node connection is forbidden."
+        },
+        "network": {
+            "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
+            "notReachable": "The network ID for this node could not be retrieved, unable to add node.",
+            "badNodes": "Unable to connect to the network with current node configuration.",
+            "nonEmptyAccount": "You must transfer all balances before switching networks."
         },
         "global": {
             "generic": "حدث خطأ ما."
@@ -985,6 +1048,11 @@
         },
         "crypto": {
             "cannotDecodeBech32": "Unable to decode string as Bech32 address."
+        }
+    },
+    "warning": {
+        "node": {
+            "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
         }
     },
     "tooltips": {
