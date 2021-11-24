@@ -2,7 +2,6 @@
     import { Icon } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
-    import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { isLocaleLoaded } from 'shared/lib/i18n'
     import { accountRoute, dashboardRoute, settingsChildRoute, settingsRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, SettingsRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
@@ -13,13 +12,6 @@
 
     export let locale: Locale
     export let handleClose
-
-    $: {
-        if ($deepLinkRequestActive && !$appSettings.deepLinking) {
-            settingsRoute.set(SettingsRoutes.AdvancedSettings)
-            deepLinkRequestActive.set(false)
-        }
-    }
 
     function closeSettings() {
         dashboardRoute.set(Tabs.Wallet)

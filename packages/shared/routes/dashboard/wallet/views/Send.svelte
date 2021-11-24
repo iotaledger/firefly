@@ -374,15 +374,16 @@
 
         if (!amountError && !addressError && !toError) {
             // If this is an external send but the dest address is in one of
-            // the other accounts switch it to an internal transfer
-            let internal = selectedSendType === SEND_TYPE.INTERNAL
+            // the other accounts, detect it to display the right popup
+            // but keep the tx external to keep the original entered address
+            const internal = selectedSendType === SEND_TYPE.INTERNAL
+            let accountAlias = internal ? to.alias : undefined
 
             if (!internal) {
                 for (const acc of $accounts) {
                     const internalAddress = acc.addresses.find((a) => a.address === address)
                     if (internalAddress) {
-                        internal = true
-                        to = acc
+                        accountAlias = acc.alias
                         break
                     }
                 }
@@ -391,10 +392,10 @@
             openPopup({
                 type: 'transaction',
                 props: {
-                    internal,
+                    internal: internal || accountAlias,
                     amount: amountRaw,
                     unit,
-                    to: internal ? to.alias : address,
+                    to: accountAlias ?? address,
                     onConfirm: () => triggerSend(internal),
                 },
             })
@@ -442,11 +443,12 @@
             : formatUnitPrecision(from.balance, unit, false)
     }
 
-    const updateFromSendParams = (s) => {
-        selectedSendType = s.isInternal && $liveAccounts.length > 1 ? SEND_TYPE.INTERNAL : SEND_TYPE.EXTERNAL
-        unit = s.amount === 0 ? Unit.Mi : Unit.i
-        amount = s.amount === 0 ? '' : formatUnitPrecision(s.amount, Unit.i, false)
-        address = s.address
+    const updateFromSendParams = (sendParams) => {
+        selectedSendType = sendParams.isInternal && $liveAccounts.length > 1 ? SEND_TYPE.INTERNAL : SEND_TYPE.EXTERNAL
+        unit = sendParams.unit ?? (sendParams.amount === 0 ? Unit.Mi : Unit.i)
+        const rawAmount = changeUnits(sendParams.amount, unit, Unit.i)
+        amount = sendParams.amount === 0 ? '' : formatUnitPrecision(rawAmount, unit, false)
+        address = sendParams.address
         if (from && accountsDropdownItems) {
             to = $liveAccounts.length === 2 ? accountsDropdownItems[from.id === $liveAccounts[0].id ? 1 : 0] : to
         }

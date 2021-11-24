@@ -20,7 +20,7 @@
         }
         closePopup()
     }
-    function handleCancelClick() {
+    function handleCloseClick() {
         closePopup()
     }
 
@@ -58,7 +58,7 @@
             </Text>
         </div>
         <div class="flex flex-row justify-center w-full">
-            <Button secondary onClick={() => handleCancelClick()}>{locale('actions.cancel')}</Button>
+            <Button secondary onClick={() => handleCloseClick()}>{locale('actions.close')}</Button>
         </div>
     {:else}
         <div class="my-6">
@@ -81,7 +81,7 @@
             {/if}
         </div>
         <div class="flex flex-row justify-between space-x-4 w-full px-8">
-            <Button secondary classes="w-1/2" onClick={() => handleCancelClick()}>{locale('actions.cancel')}</Button>
+            <Button secondary classes="w-1/2" onClick={() => handleCloseClick()}>{locale('actions.cancel')}</Button>
             <Button classes="w-1/2" onClick={() => handleDownload()} disabled={$updateBusy}>
                 {locale('actions.updateFirefly')}
             </Button>

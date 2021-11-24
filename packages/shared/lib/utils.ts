@@ -1,13 +1,10 @@
+import { Bech32 } from 'shared/lib/bech32'
 import { Electron } from 'shared/lib/electron'
 import { localize } from 'shared/lib/i18n'
 import { showAppNotification } from 'shared/lib/notifications'
 import validUrl from 'valid-url'
-import { Bech32 } from 'shared/lib/bech32'
-import type { ParsedAddress } from './typings/address'
 import type { Event } from './typings/events'
 
-export const VALID_MAINNET_ADDRESS: RegExp = /^iota1[02-9ac-hj-np-z]{59}$/
-export const VALID_DEVNET_ADDRESS: RegExp = /^atoi1[02-9ac-hj-np-z]{59}$/
 export const ADDRESS_LENGTH = 64
 export const PIN_LENGTH = 6
 
@@ -51,84 +48,10 @@ export const generateRandomId = (): string =>
     )
 
 /**
- * Parse a deep link (iota://)
- * @param  {string} data Deep link data
- * @return {ParsedAddress}  The parsed address, message and/or amount values
- */
-export const parseDeepLink = (data: string): ParsedAddress => {
-    const parsed = parseAddress(data)
-    if (!parsed) {
-        return null
-    }
-
-    return {
-        address: parsed.address,
-        message: parsed.message || '',
-        amount: parsed.amount ? parsed.amount.toString() : '0',
-    }
-}
-
-/** Parse an IOTA address input
- * @param {string} input
- * @returns {ParsedAddress} - The parsed address, message and/or amount values
- */
-export const parseAddress = (input: string): ParsedAddress => {
-    const result = {
-        address: null,
-        message: null,
-        amount: null,
-    }
-
-    if (!input || typeof input !== 'string') {
-        return null
-    }
-
-    if (VALID_MAINNET_ADDRESS.exec(input) || VALID_DEVNET_ADDRESS.exec(input)) {
-        result.address = input
-        return result
-    }
-
-    try {
-        let parsed = {
-            address: null,
-            message: null,
-            amount: null,
-        }
-
-        if (input.toLowerCase().indexOf('iota:') === 0) {
-            const url = new URL(input)
-            parsed.address = url.hostname.toLowerCase()
-            parsed.message = url.searchParams.get('message')
-            parsed.amount = url.searchParams.get('amount')
-        } else {
-            parsed = JSON.parse(input)
-        }
-
-        if (parsed.address.match(VALID_MAINNET_ADDRESS) || parsed.address.match(VALID_DEVNET_ADDRESS)) {
-            result.address = parsed.address
-        } else {
-            return null
-        }
-
-        if (parsed.message && typeof parsed.message === 'string') {
-            result.message = parsed.message
-        }
-
-        if (parsed.amount && String(parsed.amount) === String(parseInt(parsed.amount, 10))) {
-            result.amount = Math.abs(parseInt(parsed.amount, 10))
-        }
-    } catch (error) {
-        return null
-    }
-
-    return result
-}
-
-/**
  * Checks if a URL is valid
  * @method isValidUrl
  *
- * @param  {string}  url
+ * @param {string}  url
  * @returns {Boolean}
  */
 export const isValidUrl = (url: string): boolean => {
@@ -185,9 +108,9 @@ export const validateBech32Address = (prefix: string, addr: string): undefined |
 }
 
 /**
- * Debounce the opertation
- * @param callback The callback to call in completion
- * @param wait How to long wait before calling callback
+ * Debounce the operation
+ * @param callback Callback to execute after debouncing
+ * @param wait Length of time (millis) before executing the callback
  */
 export function debounce(callback: () => void, wait = 500): (...args: unknown[]) => void {
     let _timeout
@@ -252,3 +175,62 @@ export const downloadRecoveryKit = (): void => {
             console.error(err)
         })
 }
+
+/**
+ * Migrates an object to a newer version keeping old data if it already exists and
+ * adds new data if the property doesn't exist.
+ *
+ * @param oldObj The object whose keys and data will be used if found and matching the newer version
+ * @param newObj The object whose keys and data will be used if not found on older version
+ *
+ * @returns The resulting object of migrating from an older version to a newer one (i.e. updated keys and / or data)
+ */
+export const migrateObjects = <T>(oldObj: T, newObj: T): T => {
+    /* eslint-disable @typescript-eslint/no-explicit-any */
+    const _helper = (curObj: any, oldObj: any, newObj: any): any => {
+        // Iterate through each key of a new object...
+        for (const k in newObj) {
+            // If key also exists in old object then...
+            if (k in oldObj) {
+                // If corresponding value in the new object is also an object and is not undefined or null then...
+                if (typeof newObj[k] === 'object' && newObj[k] !== undefined && newObj[k] !== null) {
+                    // If corresponding value is actually an array (b/c an "Array" is an object in JS) then...
+                    if (Array.isArray(newObj[k])) {
+                        // Create key-value pair with array from new object or old object if it already exists
+                        curObj[k] = Array.isArray(oldObj[k]) ? oldObj[k] : newObj[k]
+                        // Else corresponding value is really an object, so...
+                    } else {
+                        // Create key-value pair with this function called on nested object
+                        curObj[k] = _helper({}, oldObj[k], newObj[k])
+                    }
+                    // Else corresponding value is NOT an object, so...
+                } else {
+                    // We can just simply assign the value from the old object
+                    curObj[k] = oldObj[k]
+                }
+                // Else the key does NOT exist in the old object, so...
+            } else {
+                // We create a new key-value pair with the value from the new object
+                curObj[k] = newObj[k]
+            }
+        }
+
+        return curObj
+    }
+
+    return _helper({}, oldObj, newObj) as T
+}
+
+/**
+ * Generates a random number between a given beginning and end. This is NOT
+ * cryptographically secure.
+ *
+ * @method generateRandomInteger
+ *
+ * @param {number} beginning
+ * @param {number} end
+ *
+ * @returns {number}
+ */
+export const generateRandomInteger = (beginning: number, end: number): number =>
+    Math.floor(Math.random() * end + beginning)

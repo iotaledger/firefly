@@ -82,6 +82,8 @@
                 break
             }
             case ImportState.FileImport: {
+                error = ''
+
                 const strongholdRegex = /\.(stronghold)$/i
                 const seedvaultRegex = /\.(kdbx)$/i
                 const { file, fileName, filePath } = params

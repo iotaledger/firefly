@@ -1,6 +1,6 @@
-name: Report a Firefly issue
-description: Create a report to help us improve
-labels: bug
+name: Found a bug?
+description: Fill in this form to report it, and help us improve.
+labels: type:bug
 
 body:
   - type: textarea

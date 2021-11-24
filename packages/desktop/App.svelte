@@ -8,9 +8,11 @@
     import { goto } from 'shared/lib/helpers'
     import { dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
     import { pollMarketData } from 'shared/lib/market'
+    import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup, popupState } from 'shared/lib/popup'
     import { cleanupEmptyProfiles, cleanupInProgressProfiles } from 'shared/lib/profile'
     import { dashboardRoute, initRouter, routerNext, routerPrevious, walletRoute } from 'shared/lib/router'
+    import type { Locale } from 'shared/lib/typings/i18n'
     import { AppRoute, Tabs } from 'shared/lib/typings/routes'
     import {
         Appearance,
@@ -33,12 +35,13 @@
         Splash,
         Welcome,
     } from 'shared/routes'
-    import { onMount } from 'svelte'
+    import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { getLocalisedMenuItems } from './lib/helpers'
-    import { Locale } from 'shared/lib/typings/i18n'
 
-    $: $appSettings.darkMode ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')
+    $: $appSettings.darkMode
+        ? document.body.classList.add('scheme-dark')
+        : document.body.classList.remove('scheme-dark')
     $: {
         isLocaleLoaded.subscribe((loaded) => {
             if (loaded) {
@@ -103,9 +106,26 @@
             addError(err)
         })
 
-        await cleanupInProgressProfiles()
+        cleanupInProgressProfiles()
+
+        Electron.onEvent('deep-link-request', showDeepLinkNotification)
+
         await cleanupEmptyProfiles()
     })
+
+    onDestroy(() => {
+        Electron.removeListenersForEvent('deep-link-request')
+        Electron.DeepLinkManager.clearDeepLinkRequest()
+    })
+
+    const showDeepLinkNotification = () => {
+        if (!$loggedIn) {
+            showAppNotification({
+                type: 'info',
+                message: $_('notifications.deepLinkingRequest.recievedWhileLoggedOut'),
+            })
+        }
+    }
 </script>
 
 <style global type="text/scss">
@@ -138,7 +158,7 @@
             @apply rounded-2xl;
             border-width: 7px;
             /* This needs to match the background it is displayed on
-               and can be override in local components using the secondary 
+               and can be override in local components using the secondary
                and tertiary styles */
             @apply border-white;
         }
@@ -218,7 +238,8 @@
                 hideClose={$popupState.hideClose}
                 fullScreen={$popupState.fullScreen}
                 transition={$popupState.transition}
-                locale={$_} />
+                locale={$_}
+            />
         {/if}
         <Route route={AppRoute.Welcome}>
             <Welcome on:next={routerNext} on:previous={routerPrevious} locale={$_} />
