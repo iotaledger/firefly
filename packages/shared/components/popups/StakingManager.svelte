@@ -2,7 +2,7 @@
     import { get } from 'svelte/store'
     import { Button, Icon, Spinner, Text } from 'shared/components'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { wallet } from 'shared/lib/wallet'
+    import { asyncSyncAccounts, wallet } from 'shared/lib/wallet'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { onMount } from 'svelte'
@@ -30,22 +30,117 @@
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from '../../lib/currency'
     import { AvailableExchangeRates, CurrencyTypes } from '../../lib/typings/currency'
     import { showAppNotification } from '../../lib/notifications'
+    import { transferState } from 'shared/lib/wallet'
+    import {
+        GeneratingRemainderDepositAddressEvent,
+        PreparedTransactionEvent,
+        TransactionEventData,
+        TransferProgressEventData,
+        TransferProgressEventType,
+        TransferState,
+    } from 'shared/lib/typings/events'
 
     export let locale: Locale
 
     export let accountToAction: WalletAccount
     export let participationAction: ParticipationAction
 
+    export let shouldParticipateOnMount = false
+
     let canStake
     $: canStake = canParticipate($stakingEventState)
 
-    let isPerformingAction = false
+    export let isPerformingAction = false
     let accounts = get($wallet.accounts)
     let hasStakedAccounts = $stakedAccounts.length > 0
 
-    console.log('STAKED ACCOUNTS: ', $stakedAccounts)
+    let transactionEventData: TransferProgressEventData = null
+
+   // TODO: This is an exact copy of a method defined in Wallet.svelte. Need to move it to shared. 
+   const handleTransactionEventData = (eventData: TransferProgressEventData): TransactionEventData => {
+        if (!eventData) return {}
+
+        const remainderData = eventData as GeneratingRemainderDepositAddressEvent
+        if (remainderData?.address) return { remainderAddress: remainderData?.address }
+
+        const txData = eventData as PreparedTransactionEvent
+        if (!(txData?.inputs && txData?.outputs) || txData?.inputs.length <= 0 || txData?.outputs.length <= 0) return {}
+
+        const numOutputs = txData.outputs.length
+        if (numOutputs === 1) {
+            return {
+                toAddress: txData.outputs[0].address,
+                toAmount: txData.outputs[0].amount,
+            }
+        } else if (numOutputs > 1) {
+            return {
+                toAddress: txData.outputs[0].address,
+                toAmount: txData.outputs[0].amount,
+
+                remainderAddress: txData.outputs[numOutputs - 1].address,
+                remainderAmount: txData.outputs[numOutputs - 1].amount,
+            }
+        } else {
+            return txData
+        }
+    }
+
+    const handleTransferState = (state: TransferState): void => {
+        if (!state) return
+
+        const _onCancel = () => {
+            transferState.set(null)
+
+            closePopup(true)
+        }
+
+        const { data, type } = state
+        switch (type) {
+            // If a user presses "Accept" on ledger, this is the next transfer progress item.
+            case TransferProgressEventType.PerformingPoW:
+                // Close the current pop up i.e., the one with ledger transaction details
+                closePopup(true)
+                // Re-open the staking manager pop up
+                openPopup({
+                    type: 'stakingManager',
+                    props: {
+                        accountToAction,
+                        participationAction,
+                        isPerformingAction: true
+                    },
+                })
+                break
+                
+            case TransferProgressEventType.SigningTransaction:
+                openPopup({
+                    type: 'ledgerTransaction',
+                    hideClose: true,
+                    props: {
+                        onCancel: _onCancel,
+                        ...handleTransactionEventData(transactionEventData),
+                    },
+                })
+
+                break
+
+            case TransferProgressEventType.PreparedTransaction:
+                transactionEventData = data
+
+                break
+
+            default:
+                break
+        }
+    }
 
     const resetView = (): void => {
+        if (!isSoftwareProfile) {
+            transferState.set(null);
+
+        }
+
+       closePopup(true);
+
         isPerformingAction = false
 
         accountToAction = undefined
@@ -73,29 +168,46 @@
 
         console.log('PERFORMING ACTION: ', participationAction, '\nFOR ACCOUNT: ', accountToAction)
 
-        try {
-            switch (participationAction) {
-                case ParticipationAction.Stake:
-                    await participate(accountToAction?.id, STAKING_PARTICIPATIONS)
-                    break
-                case ParticipationAction.Unstake:
-                    await stopParticipating(accountToAction?.id, STAKING_EVENT_IDS)
-                    break
-                default:
-                    break
-            }
-
-            await getParticipationOverview()
-
+        const _displaySuccessNotification = () => {
             showAppNotification({
-                type: 'info',
-                message: locale(''),
+            type: 'info',
+            message: 'Congratulations, you have staked / unstaked your funds!'
             })
-        } catch (err) {
+        };
 
+        const _sync = () => {
+            // Add a delay to cover for the transaction confirmation time
+            // TODO: Might need to rethink of a better solution here.
+            return new Promise((resolve) => setTimeout(resolve, 11000))
+            .then(() => asyncSyncAccounts())
+                    .then(() => getParticipationOverview())
+                    .then(() => {
+                         resetView()
+                        _displaySuccessNotification()
+                    })
         }
 
-        resetView()
+        switch (participationAction) {
+            case ParticipationAction.Stake:
+                await participate(accountToAction?.id, STAKING_PARTICIPATIONS)
+                    .then(() => _sync())
+                    .catch((err) => {
+                        console.error(err)
+                        resetView()
+                    })
+                break
+            case ParticipationAction.Unstake:
+                await stopParticipating(accountToAction?.id, STAKING_EVENT_IDS)
+                   .then(() => _sync())
+                    .catch((err) => {
+                        console.error(err)
+
+                        resetView()
+                    })
+                break
+            default:
+                break
+        }
     }
 
     const handleStakeClick = (account: WalletAccount): void => {
@@ -117,6 +229,7 @@
                     props: {
                         accountToAction: account,
                         participationAction: ParticipationAction.Unstake,
+                        shouldParticipateOnMount: true
                     },
                 })
             } else {
@@ -130,7 +243,7 @@
         if ($isSoftwareProfile) {
             checkStronghold(_unstake)
         } else {
-            console.log('TODO: Handle unstake flow for Ledger')
+            _unstake()
         }
     }
 
@@ -142,7 +255,16 @@
          * We can safely assume here that there are no more confirmations to approve,
          * so we will perform the action (of either staking or unstaking).
          */
-        await handleParticipationAction()
+        if (shouldParticipateOnMount) {
+            await handleParticipationAction()
+        }
+    })
+
+    /** Subscribe to transfer state */
+    transferState.subscribe((state) => {
+        if (!$isSoftwareProfile) {
+            handleTransferState(state)
+        }
     })
 </script>
 

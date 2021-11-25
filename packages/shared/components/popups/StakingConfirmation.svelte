@@ -29,21 +29,20 @@
 
     const handleConfirmClick = (): void => {
         const _onConfirm = (): void => {
-            openPopup(
-                {
-                    type: 'stakingManager',
-                    props: {
-                        accountToAction: accountToStake,
-                        participationAction: ParticipationAction.Stake,
-                    },
+            openPopup({
+                type: 'stakingManager',
+                props: {
+                    accountToAction: accountToStake,
+                    participationAction: ParticipationAction.Stake,
+                    shouldParticipateOnMount: true
                 },
-                true
-            )
+            }, true)
         }
 
         if ($isSoftwareProfile) {
             checkStronghold(_onConfirm)
         } else {
+            _onConfirm();
             console.log('TODO: Handle staking flow for Ledger')
         }
     }
