@@ -256,10 +256,7 @@ export const checkNodeUrlValidity = (nodesList: Node[], newUrl: string, allowIns
  */
 export const updateClientOptions = (config: NetworkConfig): void => {
     const clientOptions = buildClientOptions(config)
-    if (!clientOptions.node) {
-        console.error('Error: The client options does not have a primary node.')
-        return
-    }
+    if (!clientOptions.node) return
 
     const hasMismatchedNetwork = clientOptions.node?.network?.id !== clientOptions.network
     if (hasMismatchedNetwork && isNewNotification('warning')) {
@@ -322,14 +319,15 @@ export const getNodeCandidates = (config: NetworkConfig): Node[] => {
     if (!config) return []
 
     const useAutomaticSelection = config.nodes.length === 0 || config.automaticNodeSelection
+    const officialNodes = getOfficialNodes(config.network.type).map((n, idx) => ({ ...n, isPrimary: false }))
 
     let nodeCandidates
     if (useAutomaticSelection) {
-        nodeCandidates = getOfficialNodes(config.network.type).map((n, idx) => ({ ...n, isPrimary: idx === 0 }))
+        nodeCandidates = officialNodes
     } else {
         nodeCandidates = config.includeOfficialNodes
             ? addOfficialNodes(config.network.type, config.nodes)
-            : config.nodes
+            : config.nodes.filter((n) => officialNodes.find((_n) => _n.url === n.url) === undefined)
     }
 
     return ensureSinglePrimaryNode(nodeCandidates)

@@ -67,16 +67,7 @@
     }
 
     function ensureValidNodeSelection(): void {
-        /**
-         * NOTE: There's no need to ensure a valid node
-         * selection if it will be handled automatically.
-         */
-        if (networkConfig.automaticNodeSelection) return
-
         networkConfig.nodes = getNodeCandidates(networkConfig)
-        if (!networkConfig.includeOfficialNodes) {
-            networkConfig.nodes = networkConfig.nodes.filter((n) => !getOfficialNodes(networkConfig.network.type).map((_n) => _n.url.includes(n.url)))
-        }
     }
 
     function ensureOnePrimaryNode(): void {
