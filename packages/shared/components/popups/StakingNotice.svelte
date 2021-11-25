@@ -18,6 +18,6 @@
 <Text type="h4" classes="mb-4">{locale('views.staking.notice.date')}</Text>
 <Text type="p" secondary classes="mb-6">{locale('views.staking.notice.body')}</Text>
 <div class="flex flex-row space-x-2">
-    <Button secondary active="false" classes="w-1/2" onClick={closePopup}>{locale('actions.cancel')}</Button>
+    <Button secondary classes="w-1/2" onClick={closePopup}>{locale('actions.cancel')}</Button>
     <Button classes="w-1/2" onClick={handleContinueClick}>{locale('views.staking.notice.ok')}</Button>
 </div>

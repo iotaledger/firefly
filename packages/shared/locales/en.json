@@ -495,17 +495,13 @@
             "title": "Staking",
             "manager": {
                 "availableForStaking": "Available for staking",
-                "currentlyStaked": "Currently staked",
-                "fundsStaked": "Funds staked",
-                "fundsUnstaked": "Funds unstaked"
+                "currentlyStaked": "Currently staked"
             },
-            "status":{
+            "status": {
                 "active": "Staking active",
                 "inactive": "Staking inactive",
-                "tooltip":{
-                    "title": "Event has not started yet",
-                    "body": "Your staked wallets are ready to start receiving airdrops from December 15th 2021 00:01 CET. You do not have to take further action at this time."
-                }
+                "commencing": "Staking commencing",
+                "ended": "Staking ended"
             },
             "summary": {
                 "stakedFunds": "Staked funds",
@@ -513,12 +509,6 @@
                 "manageStake": "Manage Stake",
                 "stakeFunds": "Stake Funds"
             },
-            "indicator": {
-                "stakedFunds": "Staked funds",
-                "unstaked": "Unstaked",
-                "manageStake": "Manage Stake",
-                "stakeFunds": "Stake Funds"
-            },            
             "info": {
                 "title": "Staking in Firefly",
                 "description": "Claim SHM and ASM tokens ahead of the network launch in 2022. Staking temporarily locks your IOTAs, but you have complete ownership and control at all times.",
@@ -548,7 +538,17 @@
                 "date": "Staking commences December 15th",
                 "body": "By locking your funds for staking before the event starts, you will automatically commence active staking when the staking event starts (no additional rewards will be earned).",
                 "ok": "Ok, I understand"
-            }
+            },
+            "chooseWallet": {
+                "title": "Choose which wallets you want to stake",
+                "body": "When you stake a wallet, your funds are cocked. You can unlock these wallets at any time, but then you won’t get full staking rewards."
+            },
+            "confirmation": {
+                "title": "You're about to stake",
+                "body": "Stake for the remaining time and receive an estimated airdrop of:",
+                "next": "Next"
+            },
+            "event": {}
         }
     },
     "popups": {
@@ -728,6 +728,11 @@
         "ledgerMigrateIndex": {
             "title": "Do you need to migrate another Trinity account index?",
             "body": "You can also migrate later in Advanced Settings."
+        },
+        "stakingManager": {
+            "titleWithStake": "Manage your stake wallets",
+            "titleWithNoStake": "Choose which wallets you want to stake",
+            "description": "When you stake a wallet, your funds are locked. You can unlock these wallets at any time, but then you won’t get full staking rewards."
         }
     },
     "charts": {
@@ -840,9 +845,10 @@
         "closeFirefly": "Close Firefly",
         "generateAddress": "Generate address",
         "migrateAgain": "Migrate another index",
-        "visitWebsite": "Visit Website",
+        "visitWebsite": "Visit website",
         "howItWorks": "How it works",
         "stake": "Stake",
+        "unstake": "Unstake",
         "stakeFunds": "Stake funds",
         "manageStake": "Manage stake"
     },
@@ -977,7 +983,13 @@
             "minute": "minute",
             "seconds": "seconds",
             "second": "second"
-        }
+        },
+        "staked": "Staked",
+        "unstaked": "Unstaked",
+        "staking": "Staking",
+        "unstaking": "Unstaking",
+        "stakedFunds": "Staked funds",
+        "unstakedFunds": "Unstaked funds"
     },
     "dates": {
         "today": "Today",
@@ -1138,6 +1150,12 @@
             "medium": "Medium",
             "low": "Low",
             "veryLow": "Very low"
+        }, 
+        "staking": {
+            "inactive": {
+                "title": "Event has not yet started",
+                "body": "Your staked wallets are ready to start receiving airdrops from December 15th 2021 00:01 CET. You do not have to take further action at this time."
+            }
         }
     }
 }

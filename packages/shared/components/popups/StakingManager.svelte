@@ -160,11 +160,6 @@
         return formatCurrency(convertToFiat(amount, $currencies[CurrencyTypes.USD], $exchangeRates[currency]), currency)
     }
 
-    const isStakingAccount = (account: WalletAccount): boolean => {
-        if (participationAction !== ParticipationAction.Stake) return false
-        else return accountToAction?.id !== account?.id
-    }
-
     const handleParticipationAction = async (): Promise<void> => {
         if (!canStake) return
         if (!accountToAction || !participationAction) return
@@ -273,19 +268,11 @@
     })
 </script>
 
-{#if hasStakedAccounts}
-    <Text type="h5">
-        Manage your staked wallets
-    </Text>
-{:else}
-    <Text type="h5">
-        Choose which wallets you want to stake
-    </Text>
-{/if}
+<Text type="h5">
+    {locale(`popups.stakingManager.titleWith${hasStakedAccounts ? '' : 'No'}Stake`)}
+</Text>
 <Text type="p" secondary classes="mt-6 mb-2">
-    When you stake a wallet, your funds are cocked.
-    You can unlock these wallets at any time, but
-    then you won’t get full staking rewards.
+    {locale('popups.stakingManager.description')}
 </Text>
 <div class="staking flex flex-col scrollable-y">
     {#each accounts as account}
@@ -294,7 +281,7 @@
                 class="w-full mt-4 flex flex-col rounded-xl border border-1 border-solid border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-gray-500 focus:hover:border-gray-700"
             >
                 <div class="w-full space-x-4 px-5 py-3 flex flex-row justify-between items-center">
-                    {#if isAccountStaked(account?.id) && !isStakingAccount(account)}
+                    {#if isAccountStaked(account?.id)}
                         <div class="bg-green-100 rounded-2xl">
                             <Icon icon="success-check" width="18" height="18" classes="text-white" />
                         </div>
@@ -330,45 +317,40 @@
                         disabled={isPerformingAction}
                         secondary={isAccountStaked(account?.id)}
                         onClick={() => isAccountStaked(account?.id)
-                                ? handleUnstakeClick(account)
-                                : handleStakeClick(account)
-                            }
+                                    ? handleUnstakeClick(account)
+                                    : handleStakeClick(account)
+                                }
                     >
                         {#if accountToAction?.id === account?.id}
                             <Spinner
                                 busy={isPerformingAction}
-                                message={participationAction === ParticipationAction.Stake ? 'Staking' : 'Unstaking'}
+                                message={locale(`general.${participationAction === ParticipationAction.Stake ? 'staking' : 'unstaking'}`)}
                                 classes="justify-center"
                             />
                         {:else}
-                            {isAccountStaked(account?.id) ? 'Unstake' : 'Stake'}
+                            {locale(`actions.${isAccountStaked(account?.id) ? 'unstake' : 'stake'}`)}
                         {/if}
                     </Button>
                 </div>
-                {#if isAccountPartiallyStaked(account?.id) && !isStakingAccount(account)}
+                {#if isAccountPartiallyStaked(account?.id) && accountToAction?.id !== account?.id}
                     <div class="space-x-4 mx-1 mb-1 px-4 py-3 flex flex-row justify-between items-center rounded-lg bg-yellow-50">
                         <Icon icon="exclamation" width="18" height="18" classes="fill-current text-yellow-600" />
                         <div class="flex flex-col w-3/4">
                             <Text type="p" classes="font-extrabold">
-                                Unstaked funds
+                                {locale('general.unstakedFunds')}
                             </Text>
                             <Text type="p" secondary classes="font-extrabold">
-                                {formatUnitBestMatch(getUnstakedFunds(account))}
+                                {formatUnitBestMatch(getUnstakedFunds(account))} •
+                                <Text type="p" secondary classes="inline">
+                                    {getFormattedFiatAmount(getUnstakedFunds(account))}
+                                </Text>
                             </Text>
                         </div>
                         <Button
                             disabled={isPerformingAction}
                             onClick={() => handleStakeClick(account)}
                         >
-                            {#if accountToAction?.id === account?.id}
-                                <Spinner
-                                    busy={isPerformingAction}
-                                    message="Staking"
-                                    classes="justify-center"
-                                />
-                            {:else}
-                                Stake
-                            {/if}
+                            {locale('actions.stake')}
                         </Button>
                     </div>
                 {/if}
