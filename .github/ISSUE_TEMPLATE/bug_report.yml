@@ -1,6 +1,6 @@
 name: Found a bug?
 description: Fill in this form to report it, and help us improve.
-labels: bug
+labels: type:bug
 
 body:
   - type: textarea

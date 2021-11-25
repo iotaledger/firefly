@@ -7,7 +7,7 @@
         displayNotificationForLedgerProfile,
         promptUserToConnectLedger,
     } from 'shared/lib/ledger'
-    import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
+    import { getDefaultClientOptions } from 'shared/lib/network'
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { Locale } from 'shared/lib/typings/i18n'
@@ -34,15 +34,9 @@
         busy = true
 
         const _createAccount = (idx) => {
-            const officialNodes = getOfficialNodes()
-            const officialNetwork = getOfficialNetwork()
             api.createAccount(
                 {
-                    clientOptions: {
-                        nodes: officialNodes,
-                        node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
-                        network: officialNetwork,
-                    },
+                    clientOptions: getDefaultClientOptions(),
                     alias: `${locale('general.account')} ${idx}`,
                     signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
                     allowCreateMultipleEmptyAccounts: true,

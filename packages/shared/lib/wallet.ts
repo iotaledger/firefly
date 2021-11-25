@@ -1,19 +1,3 @@
-import { mnemonic } from 'shared/lib/app'
-import { stripTrailingSlash } from 'shared/lib/helpers'
-import { localize } from 'shared/lib/i18n'
-import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
-import { showAppNotification, showSystemNotification } from 'shared/lib/notifications'
-import { activeProfile, isLedgerProfile, isStrongholdLocked, updateProfile } from 'shared/lib/profile'
-import type {
-    Account,
-    Account as BaseAccount,
-    AccountToCreate,
-    Balance,
-    SyncAccountOptions,
-    SyncedAccount,
-} from 'shared/lib/typings/account'
-import type { Address } from 'shared/lib/typings/address'
-import type { Actor, GetMigrationAddressResponse } from 'shared/lib/typings/bridge'
 import type {
     BalanceChangeEventPayload,
     ConfirmationStateChangeEventPayload,
@@ -35,11 +19,36 @@ import type {
 } from 'shared/lib/typings/migration'
 import { formatUnitBestMatch } from 'shared/lib/units'
 import { get, writable } from 'svelte/store'
+import { mnemonic } from './app'
+import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
+import { Electron } from './electron'
+import { localize } from './i18n'
+import { displayNotificationForLedgerProfile } from './ledger'
+import { didInitialiseMigrationListeners } from './migration'
+import { buildClientOptions } from './network'
+import { showAppNotification, showSystemNotification } from './notifications'
 import { openPopup } from './popup'
+import { activeProfile, isLedgerProfile, isStrongholdLocked, updateProfile } from './profile'
+import { walletSetupType } from './router'
+import type {
+    Account,
+    Account as BaseAccount,
+    AccountToCreate,
+    Balance,
+    SignerType,
+    SyncAccountOptions,
+    SyncedAccount,
+} from './typings/account'
+import type { Address } from './typings/address'
+import type { Actor, GetMigrationAddressResponse } from './typings/bridge'
 import type { ClientOptions } from './typings/client'
+import { CurrencyTypes } from './typings/currency'
 import type { LedgerStatus } from './typings/ledger'
+import { HistoryDataProps, PriceData } from './typings/market'
 import type { Message } from './typings/message'
-import type { Node, NodeAuth, NodeInfo } from './typings/node'
+import type { RecoveryPhrase } from './typings/mnemonic'
+import type { NodeAuth, NodeInfo } from './typings/node'
+import { ProfileType } from './typings/profile'
 import { SetupType } from './typings/routes'
 import type {
     AccountMessage,
@@ -51,14 +60,6 @@ import type {
     WalletAccount,
     WalletState,
 } from './typings/wallet'
-import { displayNotificationForLedgerProfile } from './ledger'
-import { walletSetupType } from './router'
-import { didInitialiseMigrationListeners } from 'shared/lib/migration'
-import type { RecoveryPhrase } from './typings/mnemonic'
-import { CurrencyTypes } from './typings/currency'
-import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
-import { HistoryDataProps, PriceData } from './typings/market'
-import { ProfileType } from './typings/profile'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -148,7 +149,7 @@ export const isFirstSessionSync = writable<boolean>(true)
 export const isFirstManualSync = writable<boolean>(true)
 export const isBackgroundSyncing = writable<boolean>(false)
 
-export const api: {
+interface IWalletApi {
     generateMnemonic(callbacks: {
         onSuccess: (response: Event<string>) => void
         onError: (err: ErrorEventPayload) => void
@@ -270,8 +271,8 @@ export const api: {
     )
     getNodeInfo(
         accountId: string,
-        url: string | undefined,
-        auth: NodeAuth | undefined,
+        url: string,
+        auth: NodeAuth,
         callbacks: { onSuccess: (response: Event<NodeInfo>) => void; onError: (err: ErrorEventPayload) => void }
     )
 
@@ -384,7 +385,50 @@ export const api: {
         address: string,
         callbacks: { onSuccess: (response: Event<string>) => void; onError: (err: ErrorEventPayload) => void }
     )
-} = window['__WALLET_API__']
+}
+
+export const api: IWalletApi = new Proxy(
+    { ...window['__WALLET_API__'] },
+    {
+        get: (target, propKey) => {
+            /* eslint-disable @typescript-eslint/no-explicit-any */
+            const _handleCallbackError = (err: any) => {
+                const title = `Callback Error ${propKey.toString()}`
+
+                console.error(title, err)
+                void Electron.unhandledException(title, { message: err?.message, stack: err?.stack })
+            }
+
+            /* eslint-disable @typescript-eslint/no-explicit-any */
+            const _handleCallbackResult = (args: any[], idx: number, result: 'onSuccess' | 'onError'): any[] => {
+                const originalResultFn = args[idx][result]
+
+                args[idx][result] = (payload) => {
+                    try {
+                        originalResultFn(payload)
+                    } catch (err) {
+                        _handleCallbackError(err)
+                    }
+                }
+
+                return args
+            }
+
+            const originalMethod = target[propKey]
+            return (...args) => {
+                for (let i = args.length - 1; i >= 0; i--) {
+                    if (args[i]?.onSuccess) {
+                        args = _handleCallbackResult(args, i, 'onSuccess')
+                    } else if (args[i]?.onError) {
+                        args = _handleCallbackResult(args, i, 'onError')
+                    }
+                }
+
+                return originalMethod.apply(target, args)
+            }
+        },
+    }
+)
 
 export const getWalletStoragePath = (appPath: string): string => `${appPath}/${WALLET_STORAGE_DIRECTORY}/`
 
@@ -561,23 +605,28 @@ export const asyncRestoreBackup = (importFilePath: string, password: string): Pr
         })
     })
 
-export const asyncCreateAccount = (): Promise<void> =>
-    new Promise<void>((resolve, reject) => {
-        const officialNodes = getOfficialNodes()
-        const officialNetwork = getOfficialNetwork()
+export const asyncCreateAccount = (alias?: string): Promise<WalletAccount> =>
+    new Promise<WalletAccount>((resolve, reject) => {
+        const accounts = get(get(wallet)?.accounts)
         api.createAccount(
             {
-                signerType: { type: 'Stronghold' },
-                clientOptions: {
-                    nodes: officialNodes,
-                    node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
-                    network: officialNetwork,
-                },
-                alias: `${localize('general.account')} 1`,
+                alias: alias || `${localize('general.account')} ${accounts.length + 1}`,
+                signerType: getSignerType(get(activeProfile)?.type),
+                clientOptions: accounts.length
+                    ? accounts[0]?.clientOptions
+                    : buildClientOptions(get(activeProfile)?.settings.networkConfig),
             },
             {
-                onSuccess() {
-                    resolve()
+                onSuccess(response) {
+                    const preparedAccount = prepareAccountInfo(response.payload, {
+                        balance: 0,
+                        incoming: 0,
+                        outgoing: 0,
+                        depositAddress: response.payload.addresses[0].address,
+                    }) as WalletAccount
+                    get(wallet)?.accounts.update((_accounts) => [..._accounts, preparedAccount])
+
+                    resolve(preparedAccount)
                 },
                 onError(err) {
                     reject(err)
@@ -585,6 +634,41 @@ export const asyncCreateAccount = (): Promise<void> =>
             }
         )
     })
+
+const getSignerType = (profileType: ProfileType): SignerType | undefined => {
+    if (!profileType) return undefined
+
+    switch (profileType) {
+        case ProfileType.Software:
+            return { type: 'Stronghold' }
+        case ProfileType.Ledger:
+            return { type: 'LedgerNano' }
+        case ProfileType.LedgerSimulator:
+            return { type: 'LedgerNanoSimulator' }
+    }
+}
+
+export const asyncRemoveWalletAccount = (accountId: string): Promise<void> =>
+    new Promise<void>((resolve, reject) => {
+        api.removeAccount(accountId, {
+            onSuccess() {
+                /**
+                 * CAUTION: If an account is successfully removed in wallet.rs then it should also be
+                 * removed in the Firefly store. This is "inefficient" (esp. for batch deletes) but it
+                 * at least ensures data integrity / consistency between Firefly and the backend.
+                 */
+                get(wallet).accounts.update((_accounts) => _accounts.filter((wa) => wa.id !== accountId))
+
+                resolve()
+            },
+            onError(err) {
+                reject(err)
+            },
+        })
+    })
+
+export const asyncRemoveWalletAccounts = (accountIds: string[]): Promise<void[]> =>
+    Promise.all(accountIds.map((id) => asyncRemoveWalletAccount(id)))
 
 export const asyncRemoveStorage = (): Promise<void> =>
     new Promise<void>((resolve, reject) => {
@@ -638,6 +722,31 @@ export const asyncSyncAccounts = (
                 } else {
                     reject(err)
                 }
+            },
+        })
+    })
+
+export const asyncSyncAccountOffline = (account: WalletAccount): Promise<void> =>
+    new Promise((resolve) => {
+        api.syncAccount(account.id, {
+            onSuccess(response) {
+                getAccountMeta(account.id, (err, meta) => {
+                    if (!err) {
+                        const _account = prepareAccountInfo(account, meta) as WalletAccount
+                        get(wallet)?.accounts.update((_accounts) =>
+                            _accounts.map((a) => (a.id === _account.id ? _account : a))
+                        )
+                        updateProfile(
+                            'hiddenAccounts',
+                            (get(activeProfile)?.hiddenAccounts || []).filter((id) => id !== _account.id)
+                        )
+                    }
+
+                    resolve()
+                })
+            },
+            onError(err) {
+                resolve()
             },
         })
     })
@@ -1550,165 +1659,6 @@ export const processMigratedTransactions = (accountId: string, messages: Message
             }
         })
     }
-}
-
-export const buildAccountNetworkSettings = (): unknown => {
-    const activeProfileSettings = get(activeProfile)?.settings
-
-    const automaticNodeSelection = activeProfileSettings?.automaticNodeSelection ?? true
-    const includeOfficialNodes = activeProfileSettings?.includeOfficialNodes ?? true
-    const disabledNodes = activeProfileSettings?.disabledNodes ?? []
-
-    const { accounts } = get(wallet)
-    const actualAccounts = get(accounts)
-
-    let clientOptionNodes = []
-    let primaryNodeUrl = ''
-    let officialNodes = getOfficialNodes()
-    let localPow = true
-
-    if (actualAccounts && actualAccounts.length > 0) {
-        const { clientOptions } = actualAccounts[0]
-        if (clientOptions) {
-            clientOptionNodes = clientOptions.nodes ?? []
-            localPow = clientOptions.localPow ?? true
-
-            if (clientOptions.node) {
-                primaryNodeUrl = stripTrailingSlash(clientOptions.node.url)
-            }
-        }
-    }
-
-    // If we are in automatic node selection make sure none of the offical nodes
-    // are disabled
-    if (automaticNodeSelection) {
-        officialNodes = officialNodes.map((o) => ({ ...o, disabled: false }))
-    }
-
-    // First populate the nodes with the official ones if needed
-    let nodes = []
-    if (includeOfficialNodes || automaticNodeSelection || clientOptionNodes.length === 0) {
-        nodes = [...officialNodes]
-    }
-
-    // Now go through the nodes from the client options and add
-    // any that were not in the official list, setting their custom flag as well
-    for (const clientOptionNode of clientOptionNodes) {
-        if (!nodes.find((n) => n.url == stripTrailingSlash(clientOptionNode.url))) {
-            clientOptionNode.isCustom = true
-            nodes.push({
-                ...clientOptionNode,
-                url: stripTrailingSlash(clientOptionNode.url),
-            })
-        }
-    }
-
-    // Iterate through the complete disabled node list and mark any
-    // Use this instead of the flag on the client option nodes
-    // as we may have been in automatic mode which disables all
-    // non official nodes
-    for (const disabledNode of disabledNodes) {
-        const foundNode = nodes.find((n) => n.url === stripTrailingSlash(disabledNode))
-        if (foundNode) {
-            foundNode.disabled = true
-        }
-    }
-
-    // If the primary node is not set or its not in the list
-    // or in the list and disabled find the
-    // first node from the list that is not disabled
-    const allEnabled = nodes.filter((n) => !n.disabled)
-    if (allEnabled.length > 0 && (!primaryNodeUrl || !allEnabled.find((n) => n.url === primaryNodeUrl))) {
-        primaryNodeUrl = allEnabled[0].url
-    }
-
-    return {
-        automaticNodeSelection,
-        includeOfficialNodes,
-        nodes,
-        primaryNodeUrl,
-        localPow,
-    }
-}
-
-export const updateAccountNetworkSettings = (
-    automaticNodeSelection: boolean,
-    includeOfficialNodes: boolean,
-    nodes: Node[],
-    primaryNodeUrl: string,
-    localPow: boolean
-): void => {
-    updateProfile('settings.automaticNodeSelection', automaticNodeSelection)
-    updateProfile('settings.includeOfficialNodes', includeOfficialNodes)
-
-    const disabledNodes = nodes.filter((n) => n.disabled).map((n) => n.url)
-    updateProfile('settings.disabledNodes', disabledNodes)
-
-    let clientNodes = []
-    let officialNodes = getOfficialNodes()
-
-    // Get the list of non official nodes
-    const nonOfficialNodes = nodes.filter((n) => !officialNodes.find((d) => d.url === n.url))
-
-    // If we are in automatic node selection make sure none of the offical nodes
-    // are disabled
-    if (automaticNodeSelection) {
-        officialNodes = officialNodes.map((o) => ({ ...o, disabled: false }))
-    }
-
-    // If we are in automatic mode, or including the official nodes in manual mode
-    // or in manual mode and there are no non official nodes
-    if (automaticNodeSelection || includeOfficialNodes || nonOfficialNodes.length === 0) {
-        clientNodes = [...officialNodes]
-    }
-
-    // Now add back the non official nodes, if we are in automatic mode we should
-    // disable them, otherwise retain their current disabled state
-    if (nonOfficialNodes.length > 0) {
-        clientNodes = [
-            ...clientNodes,
-            ...nonOfficialNodes.map((o) => ({ ...o, disabled: automaticNodeSelection ? true : o.disabled })),
-        ]
-    }
-
-    // Get all the enabled nodes and make sure the primary url is enabled
-    const allEnabled = clientNodes.filter((n) => !n.disabled)
-    let clientNode = allEnabled.find((n) => n.url === primaryNodeUrl)
-
-    if (!clientNode && allEnabled.length > 0) {
-        clientNode = allEnabled[0]
-    }
-
-    const clientOptions = {
-        nodes: clientNodes,
-        node: clientNode,
-        localPow,
-    }
-
-    api.setClientOptions(clientOptions, {
-        onSuccess() {
-            const { accounts } = get(wallet)
-
-            accounts.update((_accounts) =>
-                _accounts.map((_account) =>
-                    Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>({} as WalletAccount, _account, {
-                        clientOptions,
-                    })
-                )
-            )
-        },
-        onError(err) {
-            const shouldHideErrorNotification =
-                err && err.type === 'ClientError' && err.error === 'error.node.chrysalisNodeInactive'
-
-            if (!shouldHideErrorNotification) {
-                showAppNotification({
-                    type: 'error',
-                    message: localize(err.error),
-                })
-            }
-        },
-    })
 }
 
 /**

@@ -15,13 +15,17 @@
         },
         "profile": {
             "title": "Stvori novi profil",
-            "profileName": "Ime profila",
+            "profileName": "Profile name",
             "body1": "Možete stvoriti više korisničkih računa kako biste organizirali svoje novčanike i poboljšali privatnost.",
             "body2": {
-                "first": "For now, let's start with your first profile name.",
-                "nonFirst": "For now, let's start with your profile name."
+                "first": "Počnimo s imenom tvojeg prvog profila.",
+                "nonFirst": "Počnimo s imenom tvojeg profila."
             },
-            "addMore": "You can add more profiles later."
+            "addMore": "Kasnije možeš dodati još profila.",
+            "developer": {
+                "label": "Developer profile",
+                "info": "Connect to public and private IOTA networks"
+            }
         },
         "setup": {
             "title": "Postavite svoj novčanik",
@@ -49,14 +53,14 @@
         "setupLedger": {
             "progress1": "Spoji svoj Ledger",
             "progress2": "Generiraj adresu",
-            "progress3": "Switch Ledger app",
+            "progress3": "Promijeni Ledger app",
             "progress4": "Prebaci sredstva",
             "watchVideo": "Pogledaj video s uputama",
-            "videoGuide": "Ledger migration video guide"
+            "videoGuide": "Video upute za Ledger migraciju"
         },
         "ledgerInstallationGuide": {
             "title": "Jesi li instalirao potrebne Ledger aplikacije?",
-            "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
+            "body1": "Prije nastavka potrebno je kroz Ledger Live pronaći i instalirati obje aplikacije: staru {legacy} aplikaciju i novu IOTA aplikaciju.",
             "body2": "Uvjeri se da je tvoj Ledger na najnovijoj verziji firmwarea. Sve predinstalirane aplikacije trebaju biti na najnovijim verzijama.",
             "action": "Da, instalirao sam sve potrebne aplikacije"
         },
@@ -103,9 +107,9 @@
         },
         "backupWallet": {
             "title": "Spremite pričuvnu kopiju u Stronghold datoteku",
-            "body1": "Unesite svoju lozinku kako biste spremili pričuvne kopije svojih novčanika u Stronghold datoteku. Vašu lozinku koristimo za enkripciju pričuvne kopije.",
+            "body1": "Unesi svoju lozinku kako bi spremio pričuvne kopije svojih novčanika u Stronghold datoteku. Tu lozinku koristimo za enkripciju pričuvne kopije.",
             "body2": "Zašto su digitalne pričuvne kopije tako važne:",
-            "reason1": "Jednostavno oporavite svoje novčanike bez upisivanja fraze za oporavak",
+            "reason1": "Jednostavno oporavi svoje novčanike bez upisivanja fraze za oporavak",
             "reason2": "Uvezite svoje novčanike s drugih uređaja",
             "reason3": "Oporavite povijest svojih transakcija"
         },
@@ -118,8 +122,8 @@
             "fundsMigrated": "Sredstva su prebačena",
             "body": "Vaš novi novčanik spreman je za upotrebu.",
             "softwareMigratedBody": "Sredstva su uspješno prebačena na novu mrežu",
-            "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
+            "fireflyLedgerBody": "Tvoj Ledger račun uspješno je oporavljen te stoga možeš nastaviti.",
+            "trinityLedgerBody": "Tvoj je Ledger uspješno migriran na novu mrežu.",
             "exportMigration": "Izvezite detalje o migraciji i dovršite postupak"
         },
         "import": {
@@ -131,8 +135,8 @@
             "importMnemonicDescription": "Za oporavak novčanika unesite svoju frazu za oporavak",
             "importFile": "Imam datoteku s pričuvnom kopijom",
             "importFileDescription": "Uvezite Seedvault ili Stronghold datoteku",
-            "importLedger": "I have a Ledger backup",
-            "importLedgerDescription": "Restore or migrate a Ledger profile"
+            "importLedger": "Imam Ledger pričuvnu kopiju",
+            "importLedgerDescription": "Oporavak ili migracija Ledger profila"
         },
         "importFromText": {
             "seed": {
@@ -154,54 +158,54 @@
             "body": "Za obnovu svojih novčanika uvezite datoteku s pričuvnom kopijom. To može biti Stronghold (.stronghold) ili Trinity SeedVault (.kdbx) datoteka."
         },
         "importFromLedger": {
-            "title": "Restore or Migrate your Ledger",
-            "body": "Restore an existing Firefly Ledger profile, or migrate your funds from Trinity.",
-            "haveFireflyLedger": "I have a Firefly Ledger backup",
-            "haveFireflyLedgerDescription": "Restore a Firefly profile",
-            "haveTrinityLedger": "I have a Trinity Ledger backup",
-            "haveTrinityLedgerDescription": "Migrate a Trinity profile"
+            "title": "Oporavi ili migriraj svoj Ledger",
+            "body": "Oporavi postojeći Firefly Ledger profil ili migriraj sredstva s Trinityja.",
+            "haveFireflyLedger": "Imam Firefly Ledger pričuvnu kopiju",
+            "haveFireflyLedgerDescription": "Oporavi Firefly profil",
+            "haveTrinityLedger": "Imam Trinity Ledger pričuvnu kopiju",
+            "haveTrinityLedgerDescription": "Migriraj Trinity profil"
         },
         "connectLedger": {
-            "title": "Connect your Ledger to Firefly",
-            "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed.",
-            "trafficLight1": "Connect and unlock your Ledger with your PIN",
-            "trafficLight2": "Open the new IOTA app on your Ledger",
-            "tips": "Tips if your Ledger isn’t connecting"
+            "title": "Spoji svoj Ledger s Firefly novčanikom",
+            "body": "Kako bi Firefly mogao pronaći tvoj Ledger uređaj, prvo se uvjeri da je službena Ledger Live aplikacija zatvorena.",
+            "trafficLight1": "Spoji svoj Ledger i otključaj ga PINom",
+            "trafficLight2": "Otvori novu IOTA aplikaciju na svom Ledgeru",
+            "tips": "Savjeti u slučaju da se tvoj Ledger ne želi spojiti"
         },
         "restoreFromFireflyLedger": {
-            "title": "Restore Your Ledger Profile",
-            "body": "Press restore to complete the setup process and restore your wallets, balances and transaction history.",
-            "restoring": "Restoring from Ledger..."
+            "title": "Oporavi svoj Ledger profil",
+            "body": "Pritisni oporavi za završetak postupak postavljanja i oporavak svojih novčanika, sredstava i povijesti transakcija.",
+            "restoring": "Oporavljam s Ledgera..."
         },
         "legacyLedgerIntro": {
-            "title": "Start your Ledger migration using Firefly",
-            "body1": "Firefly will help you to transfer your tokens to the new Chrysalis network.",
+            "title": "Započni svoju Ledger migraciju pomoću Fireflyja",
+            "body1": "Firefly će ti pomoći da prebaciš svoja sredstva na novu Chrysalis mrežu.",
             "body2": "Nakon migracije moći ćete slati i primati tokene koristeći Ledger i Firefly.",
-            "readMore": "What to expect from the migration process"
+            "readMore": "Što očekivati od postupka migracije"
         },
         "generateNewLedgerAddress": {
             "title": "Stvorite novu adresu",
-            "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
-            "confirmTitle": "Confirm the new address",
-            "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
-            "confirmedTitle": "Address confirmed",
-            "confirmedBody": "You have confirmed that the address in Firefly matches the one on your Ledger device.",
-            "generating": "Generating address"
+            "body": "Za migraciju pomoću Fireflyja prvo moraš generirati novu adresu. Klikni ispod za početak.",
+            "confirmTitle": "Potvrdi novu adresu",
+            "confirmBody": "Zbog sigurnosti te molimo da provjeriš adresu generiranu na tvojem Ledger uređaju s adresom koju ti prikazujemo ispod. Ukoliko su iste, pritisni oba gumba na svojem Ledgeru kada te uređaj to zatraži.",
+            "confirmedTitle": "Adresa je potvrđena",
+            "confirmedBody": "Potvrdio si da adresa u Fireflyju odgovara onoj koju ti je prikazao Ledger uređaj.",
+            "generating": "Generiram adresu"
         },
         "switchLedgerApps": {
-            "title": "Switch Ledger apps",
-            "body": "Please switch to the {legacy} app on your Ledger device to continue migration. When ready, press continue."
+            "title": "Promijeni Ledger app",
+            "body": "Molimo da za nastavak migracije na Ledgeru upališ staru {legacy} aplikaciju. Kada je sve spremno, pritisni nastavak."
         },
         "selectLedgerAccountIndex": {
-            "title": "Choose Ledger account index",
-            "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
-            "accountIndex": "Account Index",
-            "accountPage": "Account Page",
-            "standard": "Standard",
-            "expert": "Expert",
-            "takingAWhile": "This is taking a while...",
-            "notGeneratingAddresses": "Is your Ledger generating addresses?",
-            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
+            "title": "Odaberi indeks Ledger računa",
+            "body": "Odaberi index Ledger računa korišten s Trinityjem. Kod većine korisnika ova će vrijednost biti 0.",
+            "accountIndex": "Indeks računa",
+            "accountPage": "Stranica računa",
+            "standard": "Standardno",
+            "expert": "Ekspert",
+            "takingAWhile": "Ovo bi moglo potrajati...",
+            "notGeneratingAddresses": "Generira li tvoj Ledger adrese?",
+            "reinstallLegacy": "Ukoliko ne, odspoji uređaj i pokušaj ponovo. Ukoliko se problem ponavlja, možda ćeš morati ponovo instalirati {legacy} aplikaciju."
         },
         "importBackupPassword": {
             "body1": "Molimo vas da unesete svoju lozinku za pričuvnu kopiju.",
@@ -232,7 +236,7 @@
             "miningBundle": "Rudarim skup",
             "problemRestoringWallet": "Došlo je do greške mreže prilikom oporavka vašeg novčanika. Molimo pokušajte ponovno.",
             "minimumMigrationAmountSpentAddresses": "Najmanji mogući iznos za migraciju je 1 Mi po iskorištenoj adresi. Provjerite još jednom izgleda li iznos ispravno.",
-            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
+            "tooManyAddressesToMigrate": "Imaš previše adresa s malim iznosima za migraciju. Provjeri još jednom izgleda li ukupan iznos ispravno.",
             "cannotMigrateAllYourFunds": "Ne možemo migrirati sve vaše adrese jer neke imaju premalo sredstava. Možete nastaviti ali nepovratno ćete izgubiti {value}.",
             "error": "Došlo je pogreške u migraciji vaših sredstava. Molimo Vas, pokušajte ponovno."
         },
@@ -263,7 +267,7 @@
         },
         "transferFragmentedFunds": {
             "body1": "Firefly će sada započeti migraciju. Ovo bi moglo potrajati.",
-            "body2": "Ensure your Ledger is connected and the {legacy} app is open at all times during migration.",
+            "body2": "Uvjeri se da je tvoj Ledger spojen i da je {legacy} aplikacija upaljena tijekom cijele migracije.",
             "migrate": "Prebaci sredstva",
             "transaction": "Transakcija {number}",
             "rerun": "Pokušaj ponovo"
@@ -277,7 +281,7 @@
             "body": "Uvjerite se da je stanje sredstava ispravno prije no što započete. Ako stvari ne izgledaju točno, možete provjeriti još jednom.",
             "error": "Najmanji mogući iznos za migraciju je 1 Mi po adresi. Ukoliko iznos ne izgleda ispravno, provjerite ponovo.",
             "zeroBalance": "Provjerite još jednom. Ukoliko i dalje ne vidite ispravan iznos, možda ste krivo unijeli seed.",
-            "zeroBalanceLedgerLegacy": "Try checking again. If you still can't find your balance you might have selected the wrong account index."
+            "zeroBalanceLedgerLegacy": "Provjeri još jednom. Ukoliko i dalje ne vidiš ispravan iznos, možda je odabran krivi index računa."
         },
         "settings": {
             "settings": "Postavke",
@@ -307,7 +311,8 @@
             },
             "theme": {
                 "title": "Tema",
-                "description": ""
+                "description": "",
+                "advice": "Restart the Firefly application for changes to the system theme to take effect"
             },
             "language": {
                 "title": "Jezik",
@@ -322,15 +327,15 @@
                 "description": "Obavijesti sustava o provedenim transakcijama"
             },
             "networkStatus": {
-                "title": "Network status",
-                "description": "Displays the status of the node you are currently connected to."
+                "title": "Status mreže",
+                "description": "Displays the status of the node you are currently connected to"
             },
             "exportStronghold": {
-                "title": "Izvezi sigurnosnu kopiju",
+                "title": "Export backup",
                 "description": "Izvoz u Stronghold datoteku - potpunu enkriptiranu kopiju vaših novčanika i najnovijih transakcija"
             },
             "appLock": {
-                "title": "Automatsko zaključavanje",
+                "title": "Automatic lock",
                 "description": "Vrijeme neaktivnosti preostalo do zaključavanja novčanika i odjave iz sustava",
                 "durationMinute": "{time, plural, one {# minuta} few {# minute} other {# minuta}}",
                 "durationHour": "{time, plural, one {# sat} few {# sata} other {# sati}}"
@@ -360,28 +365,39 @@
                 "description": "Brisanje čitavog profila, svih novčanika i povijesti transakcija. Uvjerite se da imate pričuvnu kopiju"
             },
             "deepLinks": {
-                "title": "Deep Links",
-                "description": "Automatski ispuni podatke o transakciji unutar Fireflyja nakon klika na iota:// poveznicu"
+                "title": "IOTA links",
+                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
             },
-            "developerMode": {
-                "title": "Razvojno okruženje",
-                "description": "Spoji se na testnet i ostale razvojne alate"
-            },
-            "nodeSettings": {
-                "title": "Node postavke",
-                "description": "Odaberi Ručno za konfiguriranje nodea i spajanje na vlastiti node"
+            "networkConfiguration": {
+                "title": "Network config",
+                "title2": "Network configuration",
+                "description": {
+                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
+                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                },
+                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
+                "resetWallet": "Your wallet state has been reset.",
+                "connectedTo": "Connected to",
+                "nodeConfiguration": {
+                    "title": "Node selection",
+                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
+                    "automatic": "Automatic",
+                    "manual": "Manual"
+                }
             },
             "configureNodeList": {
-                "title": "Odaberi node",
-                "description": "Upravljate popisom IOTA mrežnih nodeova s kojima se spajate",
+                "title": "Node configuration",
+                "description": "Manage the list of nodes you connect to",
                 "primaryNode": "Primarni node",
                 "excludeNode": "Izuzmi node",
                 "includeNode": "Priključi node",
-                "viewDetails": "Pogledaj detalje",
+                "editDetails": "Edit details",
+                "viewInfo": "View info",
                 "setAsPrimary": "Koristi kao primarno",
                 "removeNode": "Ukloni node",
                 "includeOfficialNodeList": "Uključi popis službenih nodeova",
-                "noNodes": "Nema nodeova na raspolaganju. Upotrijebit ćemo automatski odabir"
+                "noNodes": "There are no nodes, unable to connect to the network",
+                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "Proof of Work",
@@ -396,8 +412,8 @@
                 "description": "Vidi informacije o sustavu i aplikaciji"
             },
             "migrateLedgerIndex": {
-                "title": "Migrate Ledger Index",
-                "description": "Migrate another Trinity account index"
+                "title": "Migrate Ledger index",
+                "description": "Migriraj neki drugi index Trinity računa"
             },
             "stateExport": {
                 "title": "Izvoz stanja",
@@ -413,7 +429,7 @@
             },
             "faq": {
                 "title": "Često postavljana pitanja",
-                "title2": "Često postavljana pitanja",
+                "title2": "Frequently asked questions",
                 "description": "Vidi često postavljana pitanja za pomoć s rješavanjem uobičajenih problema"
             },
             "discord": {
@@ -443,13 +459,13 @@
                 "hardwareDevice": {
                     "title": "Hardverski uređaj",
                     "statuses": {
-                        "appNotOpen": "IOTA App Not Open",
-                        "connected": "Connected",
-                        "legacyConnected": "{legacy} App Open",
+                        "appNotOpen": "IOTA aplikacija nije pokrenuta",
+                        "connected": "Povezano",
+                        "legacyConnected": "Pokrenuta je {legacy} aplikacija",
                         "locked": "Zaključano",
-                        "mnemonicMismatch": "Wrong Ledger or Mnemonic",
-                        "notDetected": "Not Detected",
-                        "otherConnected": "App Open"
+                        "mnemonicMismatch": "Krivi Ledger ili fraza za oporavak",
+                        "notDetected": "Nije otkriveno",
+                        "otherConnected": "Aplikacija je otvorena"
                     }
                 },
                 "strongholdStatus": {
@@ -528,12 +544,37 @@
             "titleAdd": "Dodaj node",
             "titleUpdate": "Obnovi node",
             "titleRemove": "Ukloni node",
+            "titleRemoveAll": "Remove all nodes",
             "titleDetails": "Pojedinosti nodea",
+            "titleInfo": "Node info",
+            "addingNode": "Adding node",
+            "updatingNode": "Updating node",
+            "loadingNodeInfo": "Loading node info",
             "nodeAddress": "Adresa nodea",
             "optionalUsername": "Korisničko ime (opcionalno)",
             "optionalPassword": "Lozinka (opcionalno)",
+            "optionalJwt": "JSON web token (optional)",
             "setAsPrimaryNode": "Postavi kao glavni node",
-            "removeConfirmation": "Jeste li sigurni da želite ukloniti ovaj node?"
+            "removeConfirmation": "Jeste li sigurni da želite ukloniti ovaj node?",
+            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "info": {
+                "url": "URL",
+                "software": "Software",
+                "networkId": "Network ID",
+                "bech32HRP": "Bech32 HRP",
+                "features": "Features",
+                "confirmedMilestoneIndex": "Confirmed milestone index",
+                "pruningIndex": "Pruning index",
+                "messagesPerSecond": "Poruka u sekundi",
+                "referencedRate": "Referenced rate"
+            }
+        },
+        "switchNetwork": {
+            "title": "Switch network",
+            "newNetwork": "New network",
+            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
+            "switchingNetwork": "Switching network",
+            "typePassword": "Type your password to switch to:"
         },
         "errorLog": {
             "title": "Evidencija grešaka",
@@ -583,24 +624,24 @@
             "bodyFirefly": "Firefly je onemogućen tijekom unaprijeđenja mreže. Migracija tokens opet će biti moguća po završetku."
         },
         "ledgerNotConnected": {
-            "connect": "Open the new IOTA app on your Ledger device to continue",
-            "connectLegacy": "Open the {legacy} app on your Ledger device to continue"
+            "connect": "Za nastavak na svojem Ledgeru otvori novu IOTA aplikaciju",
+            "connectLegacy": "Za nastavak na svojem Ledgeru otvori {legacy} aplikaciju"
         },
         "ledgerConfirmation": {
-            "confirm": "To proceed, confirm the prompt displayed on your Ledger device"
+            "confirm": "Za nastavak potvrdi ovaj korak na svojem Ledger uređaju"
         },
         "ledgerAppGuide": {
-            "title": "Guide to installing the Ledger apps",
+            "title": "Vodič za instaliranje Ledger aplikacija",
             "steps": {
-                "0": "Install and open the Ledger Live application",
-                "1": "Ensure that your Ledger is connected",
+                "0": "Instaliraj i otvori Ledger Live aplikaciju",
+                "1": "Uvjeri se da je tvoj Ledger spojen",
                 "2": "Search for apps: {legacy} and IOTA (MIOTA)",
                 "3": "Install both apps: {legacy} and IOTA (MIOTA)",
                 "4": "Remember that it's important to close Ledger Live before returning to Firefly"
             }
         },
         "ledgerConnectionGuide": {
-            "title": "Tips if your Ledger isn’t connecting",
+            "title": "Savjeti u slučaju da se tvoj Ledger ne želi spojiti",
             "steps": {
                 "0": "Make sure Ledger Live is not open on your computer",
                 "1": "Ensure you have unlocked your Ledger device with your PIN",
@@ -635,6 +676,7 @@
         "outgoingMi": "Šalje se {value}",
         "portoflio": "Portfolio",
         "token": "Token",
+        "holdings": "Holdings",
         "accountValue": "Vrijednost novčanika",
         "accountActivity": "Aktivnost novčanika",
         "timeframe1Hour": "1 sat",
@@ -683,7 +725,7 @@
         "syncAll": "Sinkroniziraj sve",
         "export": "Izvezi",
         "exportNewStronghold": "Izvezi novi Stronghold",
-        "enableDeepLinks": "Omogući duboke poveznice",
+        "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "Umogući razvojne alate",
         "enableSystemNotifications": "Omogući obavijesti",
         "exportState": "Izvezi stanje (State)",
@@ -701,6 +743,7 @@
         "addNode": "Dodaj node",
         "updateNode": "Obnovi node",
         "removeNode": "Ukloni node",
+        "removeAllNodes": "Remove all nodes",
         "hide": "Sakrij",
         "hideOthers": "Sakrij ostalo",
         "showAll": "Pokaži sve",
@@ -780,8 +823,9 @@
         "stronghold": "Stronghold",
         "language": "Jezik",
         "appearance": "Prikaz",
-        "lightTheme": "Svijetla tema",
-        "darkTheme": "Tamna tema",
+        "lightTheme": "Light",
+        "darkTheme": "Dark",
+        "systemTheme": "System",
         "balance": "Stanje računa",
         "accountBalance": "Stanje novčanika",
         "incoming": "Dolazni",
@@ -790,11 +834,7 @@
         "totalOut": "Ukupno van",
         "accounts": "Novčanici",
         "myAccounts": "Moji novčanici",
-        "automaticNodeSelection": "Automatski odabir nodea",
-        "manualNodeSelection": "Ručni odabir nodea",
         "profiles": "Profili",
-        "developerProfile": "Developer profil",
-        "developerProfileDescription": "Omogućuje vam spajanje na testnet",
         "dev": "Programer",
         "createAccount": "Stvori novčanik",
         "accountName": "Ime novčanika",
@@ -802,6 +842,7 @@
         "transactions": "Transakcije",
         "security": "Sigurnost",
         "accountAddress": "Adresa novčanika",
+        "network": "Network",
         "nodes": "Nodeovi",
         "wallet": "Novčanik",
         "help": "Pomoć",
@@ -860,7 +901,8 @@
         "legacyNetwork": "Stara mreža",
         "capsLock": "Caps Lock je uključen",
         "version": "Verzija {version}",
-        "unknown": "Unknown"
+        "unknown": "Nepoznato",
+        "none": "None"
     },
     "dates": {
         "today": "Danas",
@@ -884,7 +926,17 @@
         "minutesRemaining": "{minutes, plural, one {minuta} few {# minute} other {# minuta}}",
         "copiedToClipboard": "Kopirano u međuspremnik",
         "accountsSynchronized": "Sinkronizacija novčanika je završena",
-        "fundsAvailableSoon": "Your funds will become available shortly"
+        "fundsAvailableSoon": "Your funds will become available shortly",
+        "deepLinkingRequest": {
+            "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
+            "notEnabled": "IOTA links are not enabled",
+            "invalidFormat": "The IOTA link you followed is invalid",
+            "wallet": {
+                "send": {
+                    "success": "Payment details added from IOTA link"
+                }
+            }
+        }
     },
     "error": {
         "profile": {
@@ -944,10 +996,23 @@
         },
         "node": {
             "invalid": "Molimo unesite valjani URL.",
-            "https": "HTTPS je obavezan. Postavite developerski profil kako biste koristili nesigurne HTTP veze.",
+            "dns": "Could not find DNS resolution for node.",
+            "timedOut": "The connection timed out.",
+            "refused": "The connection was refused.",
+            "handshake": "Could not complete handshake with node.",
+            "invalidCertificate": "Could not connect with invalid certificate.",
+            "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
             "duplicate": "Ovaj je node već dodan.",
             "unsynced": "Node nije sinkroniziran.",
-            "noSynced": "Nema dostupnih sinkroniziranih nodeova."
+            "noSynced": "Nema dostupnih sinkroniziranih nodeova.",
+            "answer": "Failed to get an answer from all nodes.",
+            "forbidden": "This node connection is forbidden."
+        },
+        "network": {
+            "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
+            "notReachable": "The network ID for this node could not be retrieved, unable to add node.",
+            "badNodes": "Unable to connect to the network with current node configuration.",
+            "nonEmptyAccount": "You must transfer all balances before switching networks."
         },
         "global": {
             "generic": "Došlo je do greške."
@@ -980,6 +1045,14 @@
         },
         "migration": {
             "missingBundle": "An error occurred while trying to find the transaction bundle."
+        },
+        "crypto": {
+            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
+        }
+    },
+    "warning": {
+        "node": {
+            "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
         }
     },
     "tooltips": {

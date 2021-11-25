@@ -22,9 +22,11 @@
     import LedgerNotConnected from './LedgerNotConnected.svelte'
     import LedgerTransaction from './LedgerTransaction.svelte'
     import MissingBundle from './MissingBundle.svelte'
+    import NodeInfo from './NodeInfo.svelte'
     import Password from './Password.svelte'
     import QR from './QR.svelte'
     import RemoveNode from './RemoveNode.svelte'
+    import SwitchNetwork from './SwitchNetwork.svelte'
     import RiskFunds from './RiskFunds.svelte'
     import Snapshot from './Snapshot.svelte'
     import Transaction from './Transaction.svelte'
@@ -73,7 +75,6 @@
         deleteAccount: DeleteAccount,
         hideAccount: HideAccount,
         addressHistory: AddressHistory,
-        addNode: AddNode,
         ledgerNotConnected: LedgerNotConnected,
         ledgerConfirmation: LedgerConfirmation,
         ledgerAppGuide: LedgerAppGuide,
@@ -82,7 +83,10 @@
         ledgerLegacyTransaction: LedgerLegacyTransaction,
         ledgerAddress: LedgerAddress,
         ledgerMigrateIndex: LedgerMigrateIndex,
+        nodeInfo: NodeInfo,
+        addNode: AddNode,
         removeNode: RemoveNode,
+        switchNetwork: SwitchNetwork,
         busy: Busy,
         errorLog: ErrorLog,
         deleteProfile: DeleteProfile,

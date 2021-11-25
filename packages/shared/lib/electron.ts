@@ -22,7 +22,8 @@ export interface INotificationManager {
 }
 
 export interface IDeepLinkManager {
-    requestDeepLink(): void
+    checkDeepLinkRequestExists(): void
+    clearDeepLinkRequest(): void
 }
 
 export interface IPincodeManager {
@@ -39,6 +40,7 @@ interface ElectronEventMap {
     'menu-error-log': void
     'menu-diagnostics': void
     'log-error': void
+    'deep-link-request': void
     'deep-link-params': string
     'version-details': VersionDetails
     'version-progress': NativeProgress
@@ -91,13 +93,14 @@ export interface IElectron {
     updateCancel(): Promise<void>
     updateDownload(): Promise<void>
 
-    unhandledException(title: string, err: Error): Promise<void>
+    unhandledException(title: string, err: Error | unknown): Promise<void>
 
     // SeedVault API methods
     importLegacySeed(buffer: unknown, password: string): Promise<string>
     validateSeedVault(buffer: unknown): Promise<boolean>
 
     onEvent<K extends keyof ElectronEventMap>(eventName: K, callback: (param: ElectronEventMap[K]) => void)
+    removeListenersForEvent<K extends keyof ElectronEventMap>(eventName: K)
 }
 
 export const Electron: IElectron = window['Electron']
