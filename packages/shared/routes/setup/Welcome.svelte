@@ -28,7 +28,7 @@
             })
             
             await WalletPlugin.sendMessage({
-                payload: {
+                message: {
                     actorId,
                     id: '987123',
                     cmd: 'SetStrongholdPassword',
@@ -36,7 +36,7 @@
                 }
             })
             // await WalletPlugin.sendMessage({
-            //     payload: {
+            //     message: {
             //         actorId,
             //         id: '121112',
             //         cmd: 'GenerateMnemonic'
@@ -44,7 +44,7 @@
             // })
             let mnemonic = 'flag once dwarf put month scene mouse summer dirt expect comic fiction dinner verb vehicle melody burger cargo little coral kite spoon brown reward'
             await WalletPlugin.sendMessage({
-                payload: {
+                message: {
                     actorId,
                     id: '121112',
                     cmd: 'StoreMnemonic',

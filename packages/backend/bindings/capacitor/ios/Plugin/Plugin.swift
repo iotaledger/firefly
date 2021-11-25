@@ -49,21 +49,17 @@ public class WalletPlugin: CAPPlugin {
     }
 
     @objc func sendMessage(_ call: CAPPluginCall) {
-        do {
-            guard let payload = call.getObject("message") else {
-                return call.reject("message is required")
-            }
-            guard JSONSerialization.isValidJSONObject(message) else {
-                return call.reject("Invalid JSON object")
-            }
-            let jsonData = try? JSONSerialization.data(withJSONObject: message)
-            // TODO: replacing for urls slashes temporaly, make better using Codable structs with URL type?
-            let jsonString = String(data: jsonData!, encoding: .utf8)!.replacingOccurrences(of: "\\", with: "")
-            iota_send_message(jsonString)
-            call.resolve()
-        } catch {
-            call.reject("failed to serialize message")
+        guard let payload = call.getObject("message") else {
+            return call.reject("message is required")
         }
+        guard JSONSerialization.isValidJSONObject(message) else {
+            return call.reject("Invalid JSON object")
+        }
+        let jsonData = try? JSONSerialization.data(withJSONObject: message)
+        // TODO: replacing for urls slashes temporaly, make better using Codable structs with URL type?
+        let jsonString = String(data: jsonData!, encoding: .utf8)!.replacingOccurrences(of: "\\", with: "")
+        iota_send_message(jsonString)
+        call.resolve()
     }
 
     @objc func listen(_ call: CAPPluginCall) {
