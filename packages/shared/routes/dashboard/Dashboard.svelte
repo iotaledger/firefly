@@ -30,7 +30,7 @@
         settings: Settings,
     }
 
-    const { accountsLoaded, accounts } = $wallet
+    const { accountsLoaded } = $wallet
 
     let startInit
     let busy
