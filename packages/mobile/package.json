@@ -26,7 +26,8 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "shared-modules": "link:../shared"
+    "shared-modules": "link:../shared",
+    "wallet-actor-system-capacitor-binding": "../backend/bindings/capacitor/"
   },
   "engineStrict": true,
   "engines": {
