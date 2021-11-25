@@ -198,7 +198,7 @@
     }
 
     function handleExportTransactionHistoryClick() {
-        openPopup({ type: 'exportTransactionHistory', hideClose: true })
+        openPopup({ type: 'exportTransactionHistory', hideClose: false })
     }
 </script>
 
