@@ -90,8 +90,28 @@ try {
                     if (result.canceled) {
                         return null
                     }
-
                     return result.filePath
+                }),
+
+        exportTransactionHistory: async (defaultPath, contents) =>
+            ipcRenderer
+                .invoke('show-save-dialog', {
+                    properties: ['createDirectory', 'showOverwriteConfirmation'],
+                    defaultPath,
+                    filters: [{ name: 'CSV Files', extensions: ['csv'] }],
+                })
+                .then((result) => {
+                    if (result.canceled) {
+                        return null
+                    }
+                    return new Promise((resolve, reject) => {
+                        try {
+                            fs.writeFileSync(result.filePath, contents)
+                            resolve(result.filePath)
+                        } catch (err) {
+                            reject(err)
+                        }
+                    })
                 }),
 
         /**

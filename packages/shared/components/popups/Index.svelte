@@ -1,39 +1,40 @@
 <script lang="typescript">
-    import { Icon } from 'shared/components'
-    import { clickOutside } from 'shared/lib/actions'
-    import { closePopup, popupState } from 'shared/lib/popup'
-    import type { Locale } from 'shared/lib/typings/i18n'
-    import { onMount } from 'svelte'
-    import { fade } from 'svelte/transition'
-    import AddNode from './AddNode.svelte'
-    import AddressHistory from './AddressHistory.svelte'
-    import Backup from './Backup.svelte'
-    import BalanceFinder from './BalanceFinder.svelte'
-    import Busy from './Busy.svelte'
-    import DeleteAccount from './DeleteAccount.svelte'
-    import DeleteProfile from './DeleteProfile.svelte'
-    import Diagnostics from './Diagnostics.svelte'
-    import ErrorLog from './ErrorLog.svelte'
-    import HideAccount from './HideAccount.svelte'
-    import LedgerAddress from './LedgerAddress.svelte'
-    import LedgerAppGuide from './LedgerAppGuide.svelte'
-    import LedgerConfirmation from './LedgerConfirmation.svelte'
-    import LedgerConnectionGuide from './LedgerConnectionGuide.svelte'
-    import LedgerLegacyTransaction from './LedgerLegacyTransaction.svelte'
-    import LedgerMigrateIndex from './LedgerMigrateIndex.svelte'
-    import LedgerNotConnected from './LedgerNotConnected.svelte'
-    import LedgerTransaction from './LedgerTransaction.svelte'
-    import MissingBundle from './MissingBundle.svelte'
-    import NodeInfo from './NodeInfo.svelte'
-    import Password from './Password.svelte'
-    import QR from './QR.svelte'
-    import RemoveNode from './RemoveNode.svelte'
-    import RiskFunds from './RiskFunds.svelte'
-    import Snapshot from './Snapshot.svelte'
-    import SwitchNetwork from './SwitchNetwork.svelte'
-    import Transaction from './Transaction.svelte'
-    import Version from './Version.svelte'
-    import Video from './Video.svelte'
+    import { Icon } from 'shared/components';
+    import { clickOutside } from 'shared/lib/actions';
+    import { closePopup,popupState } from 'shared/lib/popup';
+    import type { Locale } from 'shared/lib/typings/i18n';
+    import { onMount } from 'svelte';
+    import { fade } from 'svelte/transition';
+    import AddNode from './AddNode.svelte';
+    import AddressHistory from './AddressHistory.svelte';
+    import Backup from './Backup.svelte';
+    import BalanceFinder from './BalanceFinder.svelte';
+    import Busy from './Busy.svelte';
+    import DeleteAccount from './DeleteAccount.svelte';
+    import DeleteProfile from './DeleteProfile.svelte';
+    import Diagnostics from './Diagnostics.svelte';
+    import ErrorLog from './ErrorLog.svelte';
+    import ExportTransactionHistoryPopup from './ExportTransactionHistoryPopup.svelte';
+    import HideAccount from './HideAccount.svelte';
+    import LedgerAddress from './LedgerAddress.svelte';
+    import LedgerAppGuide from './LedgerAppGuide.svelte';
+    import LedgerConfirmation from './LedgerConfirmation.svelte';
+    import LedgerConnectionGuide from './LedgerConnectionGuide.svelte';
+    import LedgerLegacyTransaction from './LedgerLegacyTransaction.svelte';
+    import LedgerMigrateIndex from './LedgerMigrateIndex.svelte';
+    import LedgerNotConnected from './LedgerNotConnected.svelte';
+    import LedgerTransaction from './LedgerTransaction.svelte';
+    import MissingBundle from './MissingBundle.svelte';
+    import NodeInfo from './NodeInfo.svelte';
+    import Password from './Password.svelte';
+    import QR from './QR.svelte';
+    import RemoveNode from './RemoveNode.svelte';
+    import RiskFunds from './RiskFunds.svelte';
+    import Snapshot from './Snapshot.svelte';
+    import SwitchNetwork from './SwitchNetwork.svelte';
+    import Transaction from './Transaction.svelte';
+    import Version from './Version.svelte';
+    import Video from './Video.svelte';
 
     export let locale: Locale
 
@@ -97,6 +98,7 @@
         balanceFinder: BalanceFinder,
         snapshot: Snapshot,
         video: Video,
+        exportTransactionHistory: ExportTransactionHistoryPopup
     }
 
     const onkey = (e) => {
