@@ -1,24 +1,24 @@
 <script lang="typescript">
-    import { Button, Checkbox, HR, Radio, Text } from 'shared/components'
-    import { clickOutside } from 'shared/lib/actions'
-    import { localize } from 'shared/lib/i18n'
+    import { Button,Checkbox,Drawer,HR,Radio,Text } from 'shared/components';
+    import { mobile } from 'shared/lib/app';
+    import { localize } from 'shared/lib/i18n';
     import {
-        ensureSinglePrimaryNode,
-        getNodeCandidates,
-        getOfficialNetworkConfig,
-        getOfficialNodes,
-        isOfficialNetwork,
-        updateClientOptions,
-    } from 'shared/lib/network'
-    import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
-    import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, updateProfile } from 'shared/lib/profile'
-    import { NetworkConfig, NetworkStatusHealthText, NetworkType } from 'shared/lib/typings/network'
-    import { Node } from 'shared/lib/typings/node'
+    ensureSinglePrimaryNode,
+    getNodeCandidates,
+    getOfficialNetworkConfig,
+    getOfficialNodes,
+    isOfficialNetwork,
+    updateClientOptions
+    } from 'shared/lib/network';
+    import { networkStatus,NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus';
+    import { openPopup } from 'shared/lib/popup';
+    import { activeProfile,updateProfile } from 'shared/lib/profile';
+    import { NetworkConfig,NetworkStatusHealthText,NetworkType } from 'shared/lib/typings/network';
+    import type { Node } from 'shared/lib/typings/node';
+    import NodeConfigOptions from './NodeConfigOptions.svelte';
 
-    const networkConfig: NetworkConfig =
+    let networkConfig: NetworkConfig =
         $activeProfile?.settings.networkConfig || getOfficialNetworkConfig(NetworkType.ChrysalisMainnet)
-    networkConfig
 
     if (networkConfig.nodes.length !== 0) {
         ensureOnePrimaryNode()
@@ -62,14 +62,6 @@
         networkConfig.nodes = ensureSinglePrimaryNode(networkConfig.nodes)
     }
 
-    function handleSetPrimaryNode(node: Node) {
-        networkConfig.nodes = networkConfig.nodes.map((n) => ({ ...n, isPrimary: n.url === node.url }))
-        nodeContextMenu = undefined
-
-        updateClientOptions(networkConfig)
-        updateProfile('settings.networkConfig', networkConfig)
-    }
-
     function handleAddNodeClick() {
         openPopup({
             type: 'addNode',
@@ -96,59 +88,6 @@
                          */
                         nodesContainer.scrollTop = nodesContainer.scrollHeight
                     }, 100)
-                },
-            },
-        })
-    }
-
-    function handleEditNodeDetailsClick(node) {
-        openPopup({
-            type: 'addNode',
-            props: {
-                isAddingNode: false,
-                node,
-                nodes: networkConfig.nodes,
-                network: networkConfig.network,
-                onSuccess: (isNetworkSwitch: boolean, node: Node) => {
-                    const idx = networkConfig.nodes.findIndex((n) => n.url === node.url)
-                    if (idx >= 0) {
-                        if (node.isPrimary) {
-                            networkConfig.nodes = networkConfig.nodes.map((n) => ({
-                                ...n,
-                                isPrimary: n.url === node.url,
-                            }))
-                        } else if (!networkConfig.nodes.some((n) => n.isPrimary)) {
-                            node.isPrimary = true
-                        }
-
-                        networkConfig.nodes[idx] = node
-
-                        updateClientOptions(networkConfig)
-                        updateProfile('settings.networkConfig', networkConfig)
-                    }
-                },
-            },
-        })
-    }
-
-    function handleViewNodeInfoClick(node: Node) {
-        openPopup({
-            type: 'nodeInfo',
-            props: {
-                node,
-            },
-        })
-    }
-
-    function handleRemoveNodeClick(node: Node) {
-        openPopup({
-            type: 'removeNode',
-            props: {
-                node,
-                onSuccess: (node) => {
-                    networkConfig.nodes = networkConfig.nodes.filter((n) => n.url !== node.url)
-
-                    ensureOnePrimaryNode()
                 },
             },
         })
@@ -240,87 +179,45 @@
                 {/if}
                 {#each networkConfig.nodes as node}
                     <div
+                        on:click={() => {
+                            if ($mobile) nodeContextMenu = node
+                        }}
                         class="flex flex-row items-center justify-between py-4 px-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20">
-                        <div class="flex flex-row items-center overflow-hidden">
+                        <div class="flex flex-row items-center space-x-4 overflow-hidden">
                             <Text
                                 classes={`self-start overflow-hidden whitespace-nowrap overflow-ellipsis ${node.isDisabled ? 'opacity-50' : ''}`}>
                                 {node.url}
                             </Text>
-                            <Text highlighted classes="mx-4">
+                            <Text highlighted>
                                 {node.isPrimary ? localize('views.settings.configureNodeList.primaryNode') : ''}
                             </Text>
                         </div>
-                        <button
-                            on:click={(e) => {
-                                nodeContextMenu = node
-                                contextPosition = { x: e.clientX, y: e.clientY }
-                            }}
-                            class="dark:text-white">...</button>
+                        {#if !$mobile}
+                            <button
+                                on:click={(e) => {
+                                    nodeContextMenu = node
+                                    contextPosition = { x: e.clientX, y: e.clientY }
+                                }}
+                                class="dark:text-white">...</button>
+                        {/if}
                     </div>
                 {/each}
                 {#if nodeContextMenu}
-                    <div
-                        class="fixed flex flex-col border border-solid bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 rounded-lg overflow-hidden"
-                        use:clickOutside={{ includeScroll: true }}
-                        on:clickOutside={() => (nodeContextMenu = undefined)}
-                        style={`left: ${contextPosition.x - 10}px; top: ${contextPosition.y - 10}px`}>
-                        {#if !nodeContextMenu.isDisabled}
-                            <button
-                                on:click={() => handleSetPrimaryNode(nodeContextMenu)}
-                                class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20">
-                                <Text smaller>{localize('views.settings.configureNodeList.setAsPrimary')}</Text>
-                            </button>
-                            <button
-                                on:click={() => {
-                                    handleViewNodeInfoClick(nodeContextMenu)
-                                    nodeContextMenu = undefined
-                                }}
-                                class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20">
-                                <Text smaller>{localize('views.settings.configureNodeList.viewInfo')}</Text>
-                            </button>
-                        {/if}
-                        {#if !getOfficialNodes(networkConfig.network.type)
-                            .map((n) => n.url)
-                            .includes(nodeContextMenu.url)}
-                            <button
-                                on:click={() => {
-                                    handleEditNodeDetailsClick(nodeContextMenu)
-                                    nodeContextMenu = undefined
-                                }}
-                                class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20">
-                                <Text smaller>{localize('views.settings.configureNodeList.editDetails')}</Text>
-                            </button>
-                        {/if}
-                        {#if nodeContextMenu.url !== networkConfig.nodes.find((n) => n.isPrimary)?.url}
-                            <button
-                                on:click={() => {
-                                    nodeContextMenu.isDisabled = !nodeContextMenu.isDisabled
-                                    networkConfig.nodes = networkConfig.nodes.map((n) => ({
-                                        ...n,
-                                        isDisabled: n.url === nodeContextMenu.url && nodeContextMenu.isDisabled,
-                                    }))
-                                    nodeContextMenu = undefined
-                                }}
-                                class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20">
-                                <Text smaller>
-                                    {localize(nodeContextMenu.isDisabled ? 'views.settings.configureNodeList.includeNode' : 'views.settings.configureNodeList.excludeNode')}
-                                </Text>
-                            </button>
-                        {/if}
-                        {#if !getOfficialNodes(networkConfig.network.type)
-                            .map((n) => n.url)
-                            .includes(nodeContextMenu.url)}
-                            <HR />
-                            <button
-                                on:click={() => {
-                                    handleRemoveNodeClick(nodeContextMenu)
-                                    nodeContextMenu = undefined
-                                }}
-                                class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20">
-                                <Text smaller error>{localize('views.settings.configureNodeList.removeNode')}</Text>
-                            </button>
-                        {/if}
-                    </div>
+                    {#if $mobile}
+                        <Drawer dimLength={180} on:close={() => nodeContextMenu = undefined}>
+                            <NodeConfigOptions
+                                bind:nodeContextMenu
+                                bind:networkConfig
+                                {contextPosition}
+                                {ensureOnePrimaryNode} />
+                        </Drawer>
+                    {:else}
+                        <NodeConfigOptions
+                            bind:nodeContextMenu
+                            bind:networkConfig
+                            {contextPosition}
+                            {ensureOnePrimaryNode} />
+                    {/if}
                 {/if}
             </div>
             <div class="flex flex-row justify-between space-x-3 w-full mt-4">

@@ -5,7 +5,6 @@
 	Uses a Svelte Action to generate custom syntetic slide, swipe and tap events.
 	
 	@prop {number} [dimLength] - Dim length in CSS pixels.
-	@prop {boolean} [opened] - Opens drawer on load.
 	@prop {boolean} [fromRight] - Slide from right side.
 	
 	@function {() => Promise<viod>} open - Opens drawer.
@@ -180,7 +179,7 @@
     }
 </style>
 
-<drawer class="absolute top-0 z-30">
+<drawer class="fixed left-0 top-0 z-30">
     <slide-zone
         class="fixed h-screen w-screen"
         use:slidable={!preventClose}
@@ -190,7 +189,7 @@
         <div id="dim" class="h-screen" style="--opacity: {dimOpacity}" />
     </slide-zone>
     <main
-        class="fixed overflow-y-auto w-screen h-screen bg-white dark:bg-gray-800 {classes}"
+        class="fixed overflow-y-auto overflow-x-hidden w-screen h-screen bg-white dark:bg-gray-800 {classes}"
         class:darkmode={darkModeEnabled}
         class:fullScreen
         in:fly={{ x: fromRight ? viewportLength : 0, y: fromRight ? 0 : viewportLength, duration: 350, easing: quintOut }}
