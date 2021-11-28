@@ -22,6 +22,7 @@
     export let inlineStyle = ''
     export let showHoverText = undefined
     export let iconOnly = false
+    export let unstyled = false
 
     export let onClick = (): void | string => ''
 
@@ -38,7 +39,7 @@
 </script>
 
 <style type="text/scss">
-    button {
+    button:not(.unstyled) {
         @apply bg-blue-500;
         min-width: 100px;
         span {
@@ -340,6 +341,7 @@
         class:active
         class:with-icon={icon}
         class:darkmode={darkModeEnabled}
+        class:unstyled
         style={inlineStyle}
         {disabled}
         bind:this={buttonElement}>
@@ -352,7 +354,7 @@
     <button
         {type}
         {form}
-        class="cursor-pointer text-center rounded-xl px-3 pt-2.5 pb-3.5 {classes}"
+        class="cursor-pointer {!unstyled && 'text-center rounded-xl px-3 pt-2.5 pb-3.5'} {classes}"
         use:bindEvents={events}
         on:click={onClick}
         class:secondary
@@ -364,6 +366,7 @@
         class:active
         class:darkmode={darkModeEnabled}
         class:showHoverText
+        class:unstyled
         style={inlineStyle}
         {disabled}
         bind:this={buttonElement}>
