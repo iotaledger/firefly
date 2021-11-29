@@ -1,9 +1,10 @@
 <script lang="typescript">
-    import { Button, Icon, Text } from 'shared/components'
+    import { Button, Icon, Text, Tooltip } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import {
         canParticipate,
         partiallyStakedAccounts,
+        partiallyStakedAmount,
         participationOverview,
         stakedAccounts,
         stakedAmount,
@@ -13,6 +14,7 @@
     import { openPopup } from 'shared/lib/popup'
     import { ParticipationEventState } from 'shared/lib/typings/participation'
     import { formatUnitBestMatch } from 'shared/lib/units'
+    import { tick } from 'svelte'
 
     $: participationOverview, $stakedAccounts, $partiallyStakedAccounts
 
@@ -25,6 +27,29 @@
     let isPartiallyStaked
 
     $: isPartiallyStaked = $partiallyStakedAccounts.length > 0
+
+    let showTooltip = false
+    let iconBox
+    let parentWidth = 0
+    let parentLeft = 0
+    let parentTop = 0
+
+    $: iconBox, showTooltip, void refreshIconBox()
+
+    const refreshIconBox = async (): Promise<void> => {
+        if (!iconBox || !showTooltip) return
+
+        await tick()
+
+        parentWidth = iconBox?.offsetWidth / 2 ?? 0
+        parentLeft = iconBox?.getBoundingClientRect().left ?? 0
+        const top = iconBox?.getBoundingClientRect().top ?? 0
+        parentTop = top * 1.6
+    }
+
+    const toggleTooltip = (): void => {
+        showTooltip = !showTooltip
+    }
 
     const handleStakeFundsClick = () => {
         const isUpcoming = $stakingEventState === ParticipationEventState.Upcoming
@@ -41,7 +66,13 @@
                 {localize('views.staking.summary.stakedFunds')}
             </Text>
             {#if isPartiallyStaked}
-                <Icon icon="exclamation" classes="fill-current text-yellow-600" />
+                <div
+                    bind:this={iconBox}
+                    on:mouseenter={toggleTooltip}
+                    on:mouseleave={toggleTooltip}
+                >
+                    <Icon icon="exclamation" classes="fill-current text-yellow-600" />
+                </div>
             {/if}
         </div>
         <Text type="h5" classes="text-3xl">{formatUnitBestMatch($stakedAmount)}</Text>
@@ -59,3 +90,19 @@
         {localize(`actions.${isStaked ? 'manageStake' : 'stakeFunds'}`)}
     </Button>
 </div>
+{#if showTooltip}
+    <Tooltip {parentTop} {parentLeft} {parentWidth} position="right">
+        <Text type="p" classes="text-gray-900 bold mb-1 text-left">
+            {#if $partiallyStakedAmount !== undefined}
+                New unstaked funds: {formatUnitBestMatch($partiallyStakedAmount)}
+            {:else}
+                New unstaked funds
+            {/if}
+        </Text>
+        <Text type="p" secondary classes="text-left">
+            You have received new funds on a staked wallet. For these
+            new funds to also be staked, you will need to merge them with
+            other funds in the manage stake panel.
+        </Text>
+    </Tooltip>
+{/if}

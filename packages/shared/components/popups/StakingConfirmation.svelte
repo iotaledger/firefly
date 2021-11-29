@@ -48,11 +48,11 @@
     }
 </script>
 
-<div class="mb-2 w-full flex flex-row justify-between items-center">
+<div class="mb-2 w-full flex flex-row justify-between items-start">
     <div on:click={handleBackClick} class="cursor-pointer">
         <Text type="p" classes="text-xl font-extrabold">←</Text>
     </div>
-    <Text type="h3" classes="font-extrabold">{accountToStake.alias}</Text>
+    <Text type="h3" classes="text-center font-extrabold">{accountToStake.alias}</Text>
     <Text />
 </div>
 <div class="flex flex-col">

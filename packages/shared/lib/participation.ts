@@ -83,6 +83,18 @@ export const partiallyStakedAccounts: Readable<WalletAccount[]> = derived(
             .map((apo) => get(get(wallet).accounts).find((wa) => wa.index === apo.accountIndex))
 )
 
+export const partiallyStakedAmount: Readable<number> = derived(
+    [participationOverview, partiallyStakedAccounts],
+    ([$participationOverview, $partiallyStakedAccounts]) => {
+        const partialParticipationOverviews = $participationOverview
+            .filter((apo) => $partiallyStakedAccounts.map((psa) => psa.index).includes(apo.accountIndex))
+
+        return $partiallyStakedAccounts
+            .map((psa) => psa.rawIotaBalance)
+            .reduce((total, current) => total + current, 0)
+    }
+)
+
 /**
  * The amount of funds across all accounts that are
  * currently staked.

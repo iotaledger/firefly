@@ -498,9 +498,10 @@
                 "currentlyStaked": "Currently staked"
             },
             "status": {
+                "upcoming": "Staking upcoming",
+                "commencing": "Staking commencing",
                 "active": "Staking active",
                 "inactive": "Staking inactive",
-                "commencing": "Staking commencing",
                 "ended": "Staking ended"
             },
             "summary": {
@@ -529,11 +530,11 @@
                 "collectedRewards": "Collected rewards",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "The incentivized staging network to advance major innovations from IOTA. Whatever happens, happens - the future of Assembly will be up to you. Learn, build, earn and grow together."
+                    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
                 },
                 "shimmer": {
                     "name": "Shimmer",
-                    "description": "The incentivized staging network to advance major innovations from IOTA. Whatever happens, happens - the future of Shimmer will be up to you. Learn, build, earn and grow together."
+                    "description": "The incentivized staging network to advance major innovations from IOTA. Learn, build, earn and grow together."
                 }
             },
             "notice": {
@@ -1153,9 +1154,25 @@
             "veryLow": "Very low"
         },
         "staking": {
+            "upcoming": {
+                "title": "Events are upcoming",
+                "body": "You will be able to pre-stake your IOTA holdings to claim Assembly and Shimmer tokens ahead of their network launches."
+            },
+            "commencing": {
+                "title": "Events have not yet started",
+                "body": "Once staking begins, you will automatically start receiving airdrops every milestone (approx. every 10 seconds)."
+            },
+            "active": {
+                "title": "Your funds are staked!",
+                "body": "You will receive airdrops for your staked funds every milestone (approx. 10 seconds)."
+            },
             "inactive": {
-                "title": "Event has not yet started",
-                "body": "Your staked wallets are ready to start receiving airdrops from December 15th 2021 00:01 CET. You do not have to take further action at this time."
+                "title": "No funds are staked",
+                "body": "Stake your funds to receive airdrops every milestone (approx. 10 seconds)."
+            },
+            "ended": {
+                "title": "Events have ended",
+                "body": "Assembly and Shimmer tokens will be distributed to the staked wallets when their repspective networks launch."
             }
         }
     }

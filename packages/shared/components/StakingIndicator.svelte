@@ -52,15 +52,21 @@
         switch (state) {
             case ParticipationEventState.Upcoming:
                 stateText = 'upcoming'
+                break
             case ParticipationEventState.Commencing:
-                stateText = isStaked ? 'commencing' : 'inactive'
+                stateText = 'commencing'
+                break
             case ParticipationEventState.Holding:
                 stateText = isStaked ? 'active' : 'inactive'
+                break
             case ParticipationEventState.Ended:
                 stateText = 'ended'
+                break
             default:
                 stateText = 'inactive'
+                break
         }
+
         return localize(`views.staking.status.${stateText}`)
     }
 
@@ -68,8 +74,10 @@
         state: ParticipationEventState,
         isStaked: boolean
     ): { title: string; body: string } => {
-        // TODO: add tooltip text for each state
-        let stateText: string = 'inactive'
+        let stateText: string =
+            $stakingEventState === ParticipationEventState.Holding
+            ? isStaked ? 'active' : 'inactive'
+            : $stakingEventState
 
         return {
             title: localize(`tooltips.staking.${stateText}.title`),
