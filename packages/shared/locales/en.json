@@ -517,21 +517,23 @@
                     "You can stake or unstake without limits.",
                     "Rewards are continually airdropped to you."
                 ],
-                "stakingBegins": "Airdrop events begin",
-                "stakingBeginsAt": "Dec 15th 2021",
-                "stakingIsLive": "Staking events are live",
-                "stakingEnded": "Staking events ended"
+                "upcoming": "Dec 15th 2021",
+                "upcomingSubheader": "Staking events commence",
+                "commencing": "Dec 16th 2021",
+                "commencingSubheader": "Staking events begin",
+                "holding": "Staking events are live",
+                "ended": "Staking events ended"
             },
             "airdrops": {
                 "remaining": "Remaining",
                 "collectedRewards": "Collected rewards",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "The incentivized staging network to advance major innovations from IOTA. Learn, build, earn and grow together."
+                    "description": "The incentivized staging network to advance major innovations from IOTA. Whatever happens, happens - the future of Assembly will be up to you. Learn, build, earn and grow together."
                 },
                 "shimmer": {
                     "name": "Shimmer",
-                    "description": "Lorem Ipsum is simply dummy text of the printing industry. Lorem Ipsum has been the industry's standard dummy text since"
+                    "description": "The incentivized staging network to advance major innovations from IOTA. Whatever happens, happens - the future of Shimmer will be up to you. Learn, build, earn and grow together."
                 }
             },
             "notice": {
@@ -547,8 +549,7 @@
                 "title": "You're about to stake",
                 "body": "Stake for the remaining time and receive an estimated airdrop of:",
                 "next": "Next"
-            },
-            "event": {}
+            }
         }
     },
     "popups": {
@@ -1150,7 +1151,7 @@
             "medium": "Medium",
             "low": "Low",
             "veryLow": "Very low"
-        }, 
+        },
         "staking": {
             "inactive": {
                 "title": "Event has not yet started",

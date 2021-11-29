@@ -18,12 +18,12 @@ import { networkStatus } from './networkStatus'
 /**
  * Assembly event ID
  */
-const ASSEMBLY_EVENT_ID = 'cbdfbf8bde20c5a8ac81f573d24d1652d334f60f2fb2a529b5e8d051beb75b7b';
+const ASSEMBLY_EVENT_ID = '11bf14a0b4c4e60554c73a261b878e09d67e4772b876808d2b3c42570eaeb614'
 
 /**
  * Shimmer event ID
  */
-const SHIMMER_EVENT_ID = '9e861a1945c6bf7abff4dae6d772a5c3ff980c0e3d3f569dc5a6b3ce5028711a';
+const SHIMMER_EVENT_ID = 'e5501ea9c8d950bceffc635275e7ce179a2334c42e9cc4e31c0f3c2c74db3d6a'
 
 export const STAKING_EVENT_IDS: string[] = [ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID]
 

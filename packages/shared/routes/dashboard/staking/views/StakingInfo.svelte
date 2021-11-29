@@ -3,6 +3,7 @@
     import { Electron } from 'shared/lib/electron'
     import { localize } from 'shared/lib/i18n'
     import { stakingEventState } from 'shared/lib/participation'
+    import { ParticipationEventState } from 'shared/lib/typings/participation'
 
     const handleExternalLinkClick = (): void => {
         Electron.openUrl('https://firefly.iota.org')
@@ -23,8 +24,11 @@
 
 <div class="flex flex-col justify-between w-full h-full bg-yellow-50 dark:bg-gray-800">
     <div class="flex flex-col">
-        <div class="absolute flex flex-col justify-center self-center transform translate-y-10">
-            <Text type="h5" classes="text-xl">{$stakingEventState}</Text>
+        <div class="absolute flex flex-col text-center justify-center self-center transform translate-y-10">
+            {#if $stakingEventState === ParticipationEventState.Upcoming || $stakingEventState === ParticipationEventState.Commencing}
+                <Text type="p" secondary classes="font-normal text-xl">{localize(`views.staking.info.${$stakingEventState}Subheader`)}</Text>
+            {/if}
+            <Text type="h5" classes="text-xl">{localize(`views.staking.info.${$stakingEventState}`)}</Text>
         </div>
         <Illustration illustration="staking-info" />
     </div>
