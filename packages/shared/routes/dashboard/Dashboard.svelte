@@ -55,8 +55,8 @@
     const unsubscribeAccountsLoaded = accountsLoaded.subscribe((val) => {
         if (val) {
             void pollNetworkStatus()
-            void pollParticipationOverview()
             void getParticipationEvents()
+            void pollParticipationOverview()
         } else {
             clearPollNetworkInterval()
             clearPollParticipationOverviewInterval()

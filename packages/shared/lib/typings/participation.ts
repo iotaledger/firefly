@@ -61,9 +61,11 @@ export type Participation = {
 export type AccountParticipationOverview = {
     accountIndex: number
     assemblyRewards: number
-    assemblyUnstakedFunds: number
+    assemblyRewardsBelowMinimum: number
     assemblyStakedFunds: number
+    assemblyUnstakedFunds: number
     shimmerRewards: number
+    shimmerRewardsBelowMinimum: number
     shimmerStakedFunds: number
     shimmerUnstakedFunds: number
     participations: Participation[]
