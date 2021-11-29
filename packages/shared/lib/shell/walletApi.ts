@@ -135,7 +135,11 @@ Wallet.onMessage((message: MessageResponse) => {
         // There is no message id
         // Something lower level has thrown an error
         // We should stop processing at this point
-        const newError = { type: ErrorType.ClientError, message: JSON.stringify(message), time: Date.now() }
+        let messageData = JSON.stringify(message)
+        if (messageData == '{}') {
+            messageData = message.toString()
+        }
+        const newError = { type: ErrorType.ClientError, message: messageData, time: Date.now() }
         logError(newError)
         return
     }
