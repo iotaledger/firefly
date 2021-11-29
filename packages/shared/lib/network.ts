@@ -289,6 +289,7 @@ export const buildClientOptions = (config: NetworkConfig): ClientOptions => {
         node: nodeCandidates.find((n) => n.isPrimary),
         nodes: nodeCandidates,
         network: config.network.id,
+        mqttEnabled: false,
     }
 }
 
@@ -306,6 +307,7 @@ export const getDefaultClientOptions = (): ClientOptions => {
         automaticNodeSelection: true,
         includeOfficialNodes: true,
         localPow: true,
+        mqttEnabled: false,
     }
 }
 

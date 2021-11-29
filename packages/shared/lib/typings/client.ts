@@ -14,4 +14,5 @@ export interface ClientOptions {
     localPow?: boolean
     nodeSyncEnabled?: boolean
     nodePoolUrls?: string[]
+    mqttEnabled?: boolean
 }
