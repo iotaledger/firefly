@@ -38,6 +38,7 @@
     } from 'shared/lib/typings/events'
     import { NodePlugin } from 'shared/lib/typings/node'
     import { networkStatus } from 'shared/lib/networkStatus'
+    import { MILLISECONDS_PER_SECOND } from '../../lib/time'
 
     export let locale: Locale
 
@@ -164,21 +165,25 @@
 
         const _displaySuccessNotification = () => {
             showAppNotification({
-            type: 'info',
-            message: 'Congratulations, you have staked / unstaked your funds!'
+                type: 'info',
+                message: locale(`popups.stakingManager.${
+                    participationAction === ParticipationAction.Stake
+                        ? 'hasStaked'
+                        : 'hasUnstaked'
+                }`)
             })
         };
 
         const _sync = () => {
             // Add a delay to cover for the transaction confirmation time
             // TODO: Might need to rethink of a better solution here.
-            return new Promise((resolve) => setTimeout(resolve, 11000))
-            .then(() => asyncSyncAccounts())
-            .then(() => getParticipationOverview())
-            .then(() => {
-                 resetView()
-                _displaySuccessNotification()
-            })
+            return new Promise((resolve) => setTimeout(resolve, 6 * MILLISECONDS_PER_SECOND))
+                .then(() => asyncSyncAccounts())
+                .then(() => getParticipationOverview())
+                .then(() => {
+                    _displaySuccessNotification()
+                     resetView()
+                })
         }
 
         const hasParticipationPlugin = $networkStatus.nodePlugins.includes(NodePlugin.Participation)
@@ -330,7 +335,7 @@
                             <Spinner
                                 busy={isPerformingAction}
                                 message={locale(`general.${participationAction === ParticipationAction.Stake ? 'staking' : 'unstaking'}`)}
-                                classes="justify-center"
+                                classes="mx-1 justify-center"
                             />
                         {:else}
                             {locale(`actions.${isAccountStaked(account?.id) ? 'unstake' : 'stake'}`)}
