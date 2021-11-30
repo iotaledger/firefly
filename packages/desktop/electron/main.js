@@ -330,6 +330,8 @@ ipcMain.handle('get-path', (_e, path) => {
 // Diagnostics
 const getDiagnostics = () => {
     const osXNameMap = new Map([
+        // Source: https://en.wikipedia.org/wiki/Darwin_(operating_system)#Release_history
+        [21, ['Monterey', '12']],
         [20, ['Big Sur', '11']],
         [19, ['Catalina', '10.15']],
         [18, ['Mojave', '10.14']],
