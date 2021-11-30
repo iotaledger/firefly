@@ -90,7 +90,7 @@ export function init(id: string, storagePath?: string): { destroy: () => void; r
         runtime,
         (error, data) => {
             // Swallow error thrown when poll returns after the actor is destroyed
-            if (error && error.message.includes("receiving on a closed channel")) return
+            if (error && error.message.includes('receiving on a closed channel')) return
             const message = error || data
             // @ts-ignore
             onMessageListeners.forEach((listener) => listener(message))
