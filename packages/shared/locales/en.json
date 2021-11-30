@@ -736,6 +736,7 @@
             "titleWithStake": "Manage your stake wallets",
             "titleWithNoStake": "Choose which wallets you want to stake",
             "description": "When you stake a wallet, your funds are locked. You can unlock these wallets at any time, but then you won’t get full staking rewards.",
+            "totalFundsStaked": "Total funds staked",
             "hasStaked": "Congratulations! \uD83C\uDF89Your funds have been staked.",
             "hasUnstaked": "Your funds have been unstaked."
         }

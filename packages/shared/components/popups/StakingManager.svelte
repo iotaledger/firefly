@@ -17,6 +17,7 @@
         isAccountStaked,
         participate, participationOverview,
         stakedAccounts,
+        stakedAmount,
         STAKING_EVENT_IDS,
         STAKING_PARTICIPATIONS,
         stakingEventState,
@@ -38,7 +39,7 @@
     } from 'shared/lib/typings/events'
     import { NodePlugin } from 'shared/lib/typings/node'
     import { networkStatus } from 'shared/lib/networkStatus'
-    import { MILLISECONDS_PER_SECOND } from '../../lib/time'
+    import { MILLISECONDS_PER_SECOND } from 'shared/lib/time'
 
     export let locale: Locale
 
@@ -372,14 +373,11 @@
         {/if}
     {/each}
 </div>
-<!--    <div></div>-->
-<!--    <div class="flex flex-row space-x-1">-->
-<!--        <Button-->
-<!--            disabled={isPerformingAction}-->
-<!--            secondary-->
-<!--            classes="w-full"-->
-<!--            onClick={handleDoneClick}-->
-<!--        >-->
-<!--            Done-->
-<!--        </Button>-->
-<!--    </div>-->
+<div class="mt-2 text-center">
+    <Text type="p" secondary classes="inline">
+        {locale('popups.stakingManager.totalFundsStaked')}:
+        <Text type="p" secondary bold classes="inline">
+            {formatUnitBestMatch($stakedAmount)}
+        </Text>
+    </Text>
+</div>
