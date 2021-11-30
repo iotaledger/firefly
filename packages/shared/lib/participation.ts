@@ -214,7 +214,7 @@ export const STAKING_AIRDROP_TOKENS: { [key in StakingAirdrop]: string } = {
     [StakingAirdrop.Shimmer]: 'SMR',
 }
 
-const PARTICIPATION_POLL_DURATION = 10
+const PARTICIPATION_POLL_DURATION = 10 * MILLISECONDS_PER_SECOND
 
 let participationPollInterval
 
@@ -230,7 +230,7 @@ export async function pollParticipationOverview(): Promise<void> {
     /* eslint-disable @typescript-eslint/no-misused-promises */
     participationPollInterval = setInterval(
         async () => await getParticipationOverview(),
-        PARTICIPATION_POLL_DURATION * MILLISECONDS_PER_SECOND
+        PARTICIPATION_POLL_DURATION
     )
 }
 

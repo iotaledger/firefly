@@ -15,7 +15,7 @@
         getUnstakedFunds,
         isAccountPartiallyStaked,
         isAccountStaked,
-        participate,
+        participate, participationOverview,
         stakedAccounts,
         STAKING_EVENT_IDS,
         STAKING_PARTICIPATIONS,
@@ -133,6 +133,18 @@
         }
     }
 
+    const resetAccounts = (): void => {
+        /**
+         * NOTE: This is necessary for the page
+         * to be re-rendered because updating arrays
+         * in place will not update the UI (requires
+         * variable re-assignment).
+         */
+        accounts = accounts
+    }
+
+    $: $participationOverview, resetAccounts()
+
     const resetView = (): void => {
         if (!isSoftwareProfile) {
             transferState.set(null)
@@ -143,13 +155,7 @@
         accountToAction = undefined
         participationAction = undefined
 
-        /**
-         * NOTE: This is necessary for the page
-         * to be re-rendered because updating arrays
-         * in place will not update the UI (requires
-         * variable re-assignment).
-         */
-        accounts = accounts
+        resetAccounts()
     }
 
     const getFormattedFiatAmount = (amount: number): string => {
@@ -230,8 +236,6 @@
     }
 
     const handleUnstakeClick = (account: WalletAccount): void => {
-        console.log('UNSTAKE FOR: ', account)
-
         const _unstake = async () => {
             if ($popupState.type !== 'stakingManager') {
                 openPopup({
@@ -335,7 +339,7 @@
                             <Spinner
                                 busy={isPerformingAction}
                                 message={locale(`general.${participationAction === ParticipationAction.Stake ? 'staking' : 'unstaking'}`)}
-                                classes="mx-1 justify-center"
+                                classes="mx-2 justify-center"
                             />
                         {:else}
                             {locale(`actions.${isAccountStaked(account?.id) ? 'unstake' : 'stake'}`)}

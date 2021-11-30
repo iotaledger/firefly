@@ -18,7 +18,14 @@ export const NETWORK_HEALTH_COLORS = {
  */
 const DEFAULT_NETWORK_STATUS_POLL_INTERVAL = 10 * MILLISECONDS_PER_SECOND
 
-export const networkStatus = writable<NetworkStatus>({})
+export const networkStatus = writable<NetworkStatus>({
+    messagesPerSecond: 0,
+    referencedRate: 0,
+    health: 2,
+    healthText: NetworkStatusHealthText.Operational,
+    currentMilestone: -1,
+    nodePlugins: [],
+})
 
 let pollInterval
 
