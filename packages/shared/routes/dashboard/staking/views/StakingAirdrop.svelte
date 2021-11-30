@@ -83,8 +83,8 @@
                         </Text>
                         <Text
                             type="p"
-                            overrideColor
-                            classes="text-sm inline text-{isAssembly() ? 'gray-600' : 'gray-400'} dark:text-gray-400">
+                            secondary
+                            classes="text-sm inline">
                             {remainingTimeUnit}
                         </Text>
                     </div>

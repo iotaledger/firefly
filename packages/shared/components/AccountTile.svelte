@@ -1,7 +1,11 @@
 <script lang="typescript">
-    import { Icon, Text } from 'shared/components'
-    import { STAKING_AIRDROP_TOKENS } from 'shared/lib/participation'
+    import { Icon, Text, Tooltip } from 'shared/components'
+    import { partiallyStakedAccounts, partiallyStakedAmount, stakedAccounts, STAKING_AIRDROP_TOKENS } from 'shared/lib/participation'
     import { StakingAirdrop } from 'shared/lib/typings/participation'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { formatUnitBestMatch } from 'shared/lib/units'
+    import { localize } from 'shared/lib/i18n'
+    import { tick } from 'svelte'
 
     export let name = ''
     export let balance = ''
@@ -9,15 +13,57 @@
     export let color = 'turquoise'
     export let ledger = false
     export let airdrop: StakingAirdrop = undefined
-    export let staked = false
     export let size = 'm' // m, l
     export let hidden = false
     export let disabled = false
 
     export let onClick = (): void | string => ''
+    let doOnClick = true
 
     if (airdrop) {
         disabled = true
+    }
+
+    const _hasAccount = (accounts: WalletAccount[]): boolean => accounts.find((account) => account.alias === name) !== undefined
+
+    let isPartiallyStaked = false
+    $: isPartiallyStaked = _hasAccount($partiallyStakedAccounts)
+
+    let isStaked = false
+    $: isStaked = _hasAccount($stakedAccounts)
+
+    let showPartialStakeTooltip = false
+    let iconBox
+    let parentWidth = 0
+    let parentLeft = 0
+    let parentTop = 0
+
+    $: iconBox, showPartialStakeTooltip, void refreshIconBox()
+
+    const refreshIconBox = async (): Promise<void> => {
+        if (!iconBox || !showPartialStakeTooltip) return
+
+        await tick()
+
+        parentWidth = iconBox?.offsetWidth / 2 ?? 0
+        parentLeft = iconBox?.getBoundingClientRect().left ?? 0
+
+        /**
+         * CAUTION: The top requires a specific multiplier that
+         * does seem to play nicely with responsiveness.
+         */
+        const top = iconBox?.getBoundingClientRect().top ?? 0
+        parentTop = top * 1.145
+    }
+
+    const togglePartialStakeTooltip = (): void => {
+        showPartialStakeTooltip = !showPartialStakeTooltip
+
+        /**
+         * CAUTION: We must toggle this variable so that if the tooltip
+         * is being shown we don't navigate to the account view.
+         */
+        doOnClick = !doOnClick
     }
 
     const getName = (): string => {
@@ -35,6 +81,10 @@
         } else {
             return ''
         }
+    }
+
+    const handleTileClick = (): void => {
+        if (doOnClick) onClick()
     }
 </script>
 
@@ -54,41 +104,77 @@
 </style>
 
 <button
-    on:click={staked ? () => {} : onClick}
-    class="size-{size} group rounded-xl {staked ? 'bg-yellow-50 cursor-default' : `bg-gray-100 dark:bg-gray-900 hover:bg-${color}-500`} font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'} {hidden ? 'opacity-50' : ''}"
+    on:click={handleTileClick}
+    class="size-{size} group rounded-xl {isStaked ? 'bg-yellow-50 cursor-default' : `bg-gray-100 dark:bg-gray-900 hover:bg-${color}-500`} font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'} {hidden ? 'opacity-50' : ''}"
     {disabled}
 >
-    <div class="mb-2 w-full flex flex-row justify-between items-start space-x-1.5">
-        <Text
-            bold
-            smaller={size === 's'}
-            overrideColor
-            classes="text-gray-800 dark:text-white {staked ? '' : 'group-hover:text-white'} overflow-hidden overflow-ellipsis"
-        >
-            {getName()}
-        </Text>
-        {#if staked}
-            <Icon icon="lock" width="18" height="18" classes="fill-current text-gray-500" />
-        {:else if airdrop}
-            <Icon icon={airdrop} classes="fill-current text-gray-600" />
+    <div class="mb-3 w-full h-auto flex flex-row justify-between items-center space-x-1.5">
+        <div class="w-3/4 h-full flex flex-row items-center">
+            {#if isPartiallyStaked}
+                <div
+                    bind:this={iconBox}
+                    on:mouseenter={togglePartialStakeTooltip}
+                    on:mouseleave={togglePartialStakeTooltip}
+                    class="self-center mr-2"
+                >
+                    <Icon icon="exclamation" width="16" height="16" classes="fill-current text-yellow-600" />
+                </div>
+            {:else if isStaked}
+                <div class="self-end mr-2">
+                    <Icon icon="tokens" width="16" height="16" classes="fill-current text-blue-500" />
+                </div>
+            {/if}
+            <Text
+                bold
+                smaller={size === 's'}
+                overrideColor
+                classes="inline text-gray-800 dark:text-white {isStaked ? '' : 'group-hover:text-white'} overflow-hidden overflow-ellipsis"
+            >
+                {getName()}
+            </Text>
+        </div>
+        {#if airdrop}
+            <Icon
+                icon={airdrop}
+                classes="fill-current text-gray-{disabled ? '500' : '400'} dark:text-gray-700"
+                width={size === 's' ? 13 : 21}
+                height={size === 's' ? 13 : 21}
+            />
         {:else if ledger}
             <Icon
                 icon="ledger"
-                classes="text-gray-400 dark:text-gray-700"
+                classes="fill-current text-gray-400 dark:text-gray-700"
                 width={size === 's' ? 13 : 21}
-                height={size === 's' ? 13 : 21} />
+                height={size === 's' ? 13 : 21}
+            />
         {/if}
     </div>
     <div
-        class="flex {size === 'l' ? 'flex-row space-x-4' : 'flex-col space-y-1'} justify-between w-full flex-{size === 'l' ? 'nowrap' : 'wrap'}">
-        <Text smaller overrideColor classes="block text-gray-800 dark:text-white {staked ? '' : 'group-hover:text-white'}">
+        class="flex {size === 'l' ? 'flex-row space-x-4' : 'flex-col space-y-1'} justify-between w-full flex-{size === 'l' ? 'nowrap' : 'wrap'}"
+    >
+        <Text smaller overrideColor classes="block text-gray-800 dark:text-white {isStaked ? '' : 'group-hover:text-white'}">
             {balance}
             {#if airdrop}
                 {STAKING_AIRDROP_TOKENS[airdrop.toLowerCase()]}
             {/if}
         </Text>
-        <Text smaller overrideColor classes="block text-blue-500 dark:text-gray-600 {staked ? '' : 'group-hover:text-white'}">
+        <Text smaller overrideColor classes="block text-blue-500 dark:text-gray-600 {isStaked ? '' : 'group-hover:text-white'}">
             {balanceEquiv}
         </Text>
     </div>
 </button>
+{#if showPartialStakeTooltip}
+    <Tooltip {parentTop} {parentLeft} {parentWidth} position="right">
+        <Text type="p" classes="text-gray-900 bold mb-1 text-left">
+            {localize(
+                `tooltips.partiallyStakedFunds.title${$partiallyStakedAmount !== undefined ? '' : 'NoFunds'}`,
+                $partiallyStakedAmount !== undefined
+                    ? { values: { amount: formatUnitBestMatch($partiallyStakedAmount) } }
+                    : { }
+            )}
+        </Text>
+        <Text type="p" secondary classes="text-left">
+            {localize('tooltips.partiallyStakedFunds.body')}
+        </Text>
+    </Tooltip>
+{/if}

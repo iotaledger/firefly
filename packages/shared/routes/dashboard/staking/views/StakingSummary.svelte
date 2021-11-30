@@ -43,6 +43,11 @@
 
         parentWidth = iconBox?.offsetWidth / 2 ?? 0
         parentLeft = iconBox?.getBoundingClientRect().left ?? 0
+
+        /**
+         * CAUTION: The top requires a specific multiplier that
+         * does seem to play nicely with responsiveness.
+         */
         const top = iconBox?.getBoundingClientRect().top ?? 0
         parentTop = top * 1.6
     }
@@ -93,16 +98,16 @@
 {#if showTooltip}
     <Tooltip {parentTop} {parentLeft} {parentWidth} position="right">
         <Text type="p" classes="text-gray-900 bold mb-1 text-left">
-            {#if $partiallyStakedAmount !== undefined}
-                New unstaked funds: {formatUnitBestMatch($partiallyStakedAmount)}
-            {:else}
-                New unstaked funds
-            {/if}
+            {localize(
+                `tooltips.partiallyStakedFunds.title${$partiallyStakedAmount !== undefined ? '' : 'NoFunds'}`,
+                $partiallyStakedAmount !== undefined
+                    ? { values: { amount: formatUnitBestMatch($partiallyStakedAmount) } }
+                    : { }
+            )}
         </Text>
         <Text type="p" secondary classes="text-left">
-            You have received new funds on a staked wallet. For these
-            new funds to also be staked, you will need to merge them with
-            other funds in the manage stake panel.
+            {localize('tooltips.partiallyStakedFunds.preBody')}
+            {localize('tooltips.partiallyStakedFunds.body')}
         </Text>
     </Tooltip>
 {/if}

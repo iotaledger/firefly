@@ -1157,7 +1157,7 @@
             "low": "Low",
             "veryLow": "Very low"
         },
-        "staking": {
+        "stakingIndicator": {
             "upcoming": {
                 "title": "Events are upcoming",
                 "body": "You will be able to pre-stake your IOTA holdings to claim Assembly and Shimmer tokens ahead of their network launches."
@@ -1182,6 +1182,12 @@
                 "title": "Events have ended",
                 "body": "Assembly and Shimmer tokens will be distributed to the staked wallets when their repspective networks launch."
             }
+        },
+        "partiallyStakedFunds": {
+            "title": "New unstaked funds: {amount}",
+            "titleNoFunds": "New unstaked funds",
+            "preBody": "You have received new funds on a staked wallet.",
+            "body": "For these new funds to be staked, you will need to merge them in the manage stake panel."
         }
     }
 }

@@ -85,7 +85,7 @@ export const partiallyStakedAmount: Readable<number> = derived(
     ([$participationOverview, $partiallyStakedAccounts]) =>
         $participationOverview
             .filter((apo) => $partiallyStakedAccounts.map((psa) => psa.index).includes(apo.accountIndex))
-            .map((apo) => Math.abs(apo.shimmerStakedFunds - apo.shimmerUnstakedFunds))
+            .map((apo) => apo.shimmerUnstakedFunds)
             .reduce((total, current) => total + current, 0)
 )
 

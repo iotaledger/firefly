@@ -81,8 +81,8 @@
             : $stakingEventState
 
         return {
-            title: localize(`tooltips.staking.${stateText}${isHoldingPhase ? 'Holding' : ''}.title`),
-            body: localize(`tooltips.staking.${stateText}${isHoldingPhase ? 'Holding' : ''}.body`),
+            title: localize(`tooltips.stakingIndicator.${stateText}${isHoldingPhase ? 'Holding' : ''}.title`),
+            body: localize(`tooltips.stakingIndicator.${stateText}${isHoldingPhase ? 'Holding' : ''}.body`),
         }
     }
 </script>
