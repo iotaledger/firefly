@@ -53,7 +53,6 @@
                             hidden={hiddenAccounts.includes(account.id)}
                             onClick={() => handleAccountClick(account.id)}
                             ledger={$isLedgerProfile}
-                            staked={isAccountStaked(account.id)}
                         />
                     {/each}
                     {#if $assemblyStakingRewards}

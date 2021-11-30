@@ -24,7 +24,13 @@
 
         parentWidth = indicatorBox?.offsetWidth / 2 ?? 0
         parentLeft = indicatorBox?.getBoundingClientRect().left ?? 0
-        parentTop = indicatorBox?.getBoundingClientRect().top ?? 0
+
+        /**
+         * CAUTION: The top requires a specific multiplier that
+         * does seem to play nicely with responsiveness.
+         */
+        const top = indicatorBox?.getBoundingClientRect().top ?? 0
+        parentTop = top * 0.765
     }
 
     const toggleTooltip = (): void => {
@@ -89,12 +95,14 @@
 
 <div
     class="px-3 py-2 flex flex-row justify-between items-center rounded-2xl bg-blue-100 dark:bg-gray-800"
-    bind:this={indicatorBox}
     on:mouseenter={toggleTooltip}
-    on:mouseleave={toggleTooltip}>
+    on:mouseleave={toggleTooltip}
+>
     <Icon icon={indicatorIcon} classes="fill-current text-blue-500" />
     <Text type="p" classes="mx-3">{indicatorText}</Text>
-    <div>
+    <div
+        bind:this={indicatorBox}
+    >
         <Icon icon="info-filled" classes="fill-current text-gray-600 transform translate-y-1" />
     </div>
 </div>

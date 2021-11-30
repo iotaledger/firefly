@@ -170,26 +170,20 @@
 
         isPerformingAction = true
 
-        const _displaySuccessNotification = () => {
-            showAppNotification({
-                type: 'info',
-                message: locale(`popups.stakingManager.${
-                    participationAction === ParticipationAction.Stake
-                        ? 'hasStaked'
-                        : 'hasUnstaked'
-                }`)
-            })
-        };
-
         const _sync = () => {
             // Add a delay to cover for the transaction confirmation time
             // TODO: Might need to rethink of a better solution here.
-            return new Promise((resolve) => setTimeout(resolve, 6 * MILLISECONDS_PER_SECOND))
-                .then(() => asyncSyncAccounts())
-                .then(() => getParticipationOverview())
+            return getParticipationOverview()
                 .then(() => {
-                    _displaySuccessNotification()
-                     resetView()
+                    showAppNotification({
+                        type: 'info',
+                        message: locale(`popups.stakingManager.${
+                            participationAction === ParticipationAction.Stake
+                                ? 'hasStaked'
+                                : 'hasUnstaked'
+                        }`)
+                    })
+                    resetView()
                 })
         }
 
@@ -373,6 +367,7 @@
         {/if}
     {/each}
 </div>
+
 <div class="mt-2 text-center">
     <Text type="p" secondary classes="inline">
         {locale('popups.stakingManager.totalFundsStaked')}:

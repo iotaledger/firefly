@@ -79,5 +79,5 @@
     {/each}
 </div>
 <div class="flex flex-row space-x-1">
-    <Button classes="w-full" onClick={handleConfirmClick}>{localize('views.staking.confirmation.next')}</Button>
+    <Button classes="w-full" onClick={handleConfirmClick}>{localize('actions.confirm')}</Button>
 </div>

@@ -18,7 +18,6 @@
     export let disabled = false
 
     export let onClick = (): void | string => ''
-    let doOnClick = true
 
     if (airdrop) {
         disabled = true
@@ -58,12 +57,6 @@
 
     const togglePartialStakeTooltip = (): void => {
         showPartialStakeTooltip = !showPartialStakeTooltip
-
-        /**
-         * CAUTION: We must toggle this variable so that if the tooltip
-         * is being shown we don't navigate to the account view.
-         */
-        doOnClick = !doOnClick
     }
 
     const getName = (): string => {
@@ -84,7 +77,7 @@
     }
 
     const handleTileClick = (): void => {
-        if (doOnClick) onClick()
+        onClick()
     }
 </script>
 
@@ -105,7 +98,7 @@
 
 <button
     on:click={handleTileClick}
-    class="size-{size} group rounded-xl {isStaked ? 'bg-yellow-50 cursor-default' : `bg-gray-100 dark:bg-gray-900 hover:bg-${color}-500`} font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'} {hidden ? 'opacity-50' : ''}"
+    class="size-{size} group rounded-xl {isStaked ? 'bg-yellow-100 hover:bg-yellow-400' : `bg-gray-100 dark:bg-gray-900 hover:bg-${color}-500`} font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'} {hidden ? 'opacity-50' : ''}"
     {disabled}
 >
     <div class="mb-3 w-full h-auto flex flex-row justify-between items-center space-x-1.5">
@@ -117,7 +110,7 @@
                     on:mouseleave={togglePartialStakeTooltip}
                     class="self-center mr-2"
                 >
-                    <Icon icon="exclamation" width="16" height="16" classes="fill-current text-yellow-600" />
+                    <Icon icon="exclamation" width="16" height="16" classes="fill-current text-yellow-700" />
                 </div>
             {:else if isStaked}
                 <div class="self-end mr-2">
