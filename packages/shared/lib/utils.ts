@@ -284,3 +284,20 @@ export const stringFromUtf8Array = (bytes: Uint8Array | number[]): string => {
  */
 export const sleep = (ms: number): Promise<number> =>
     new Promise((resolve, reject) => setTimeout(resolve, ms))
+
+/**
+ * Returns a random value from a list of values.
+ *
+ * @method pick
+ *
+ * @param {any[]} arr
+ *
+ * @returns {any | undefined}
+ */
+export const pick = <T>(arr: T[]): T | undefined => {
+    const length = arr?.length
+    if (length < 1) return undefined
+
+    const randIdx = Math.floor(Math.random() * length)
+    return arr[randIdx] || undefined
+}

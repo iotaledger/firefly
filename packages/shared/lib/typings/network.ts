@@ -1,4 +1,4 @@
-import type { Node } from './node'
+import type { Node, NodePlugin } from './node'
 
 export enum NetworkType {
     ChrysalisMainnet = 'chrysalis-mainnet',
@@ -45,6 +45,7 @@ export type NetworkStatus = {
     health?: number
     healthText?: NetworkStatusHealthText
     currentMilestone?: number
+    nodePlugins?: NodePlugin[]
 }
 
 export enum NetworkStatusHealthText {

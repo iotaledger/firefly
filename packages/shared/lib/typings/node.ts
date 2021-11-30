@@ -26,10 +26,15 @@ export interface NodeInfo {
         latestMilestoneTimestamp: number
         confirmedMilestoneIndex: number
         pruningIndex: number
-        features: string[]
+        features: NodePlugin[]
         messagesPerSecond: number
         referencedMessagesPerSecond: number
         referencedRate: number
     }
     url: string
+}
+
+export enum NodePlugin {
+    Participation = 'Participation',
+    ProofOfWork = 'PoW',
 }

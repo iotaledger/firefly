@@ -523,7 +523,8 @@
                 "commencing": "Dec 16th 2021",
                 "commencingSubheader": "Staking events begin",
                 "holding": "Staking events are live",
-                "ended": "Staking events ended"
+                "ended": "Staking events ended",
+                "inactive": "Staking events inactive"
             },
             "airdrops": {
                 "remaining": "Remaining",
@@ -1095,7 +1096,8 @@
             "unsynced": "The node is not in sync.",
             "noSynced": "No synced nodes are available.",
             "answer": "Failed to get an answer from all nodes.",
-            "forbidden": "This node connection is forbidden."
+            "forbidden": "This node connection is forbidden.",
+            "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node."
         },
         "network": {
             "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
@@ -1162,13 +1164,17 @@
                 "title": "Events have not yet started",
                 "body": "Once staking begins, you will automatically start receiving airdrops every milestone (approx. every 10 seconds)."
             },
-            "active": {
+            "activeHolding": {
                 "title": "Your funds are staked!",
                 "body": "You will receive airdrops for your staked funds every milestone (approx. 10 seconds)."
             },
-            "inactive": {
+            "inactiveHolding": {
                 "title": "No funds are staked",
                 "body": "Stake your funds to receive airdrops every milestone (approx. 10 seconds)."
+            },
+            "inactive": {
+                "title": "Events are inactive",
+                "body": "There are no active staking events. If this is incorrect, see the network configuration settings to ensure that the current node has the \"Participation\" feature."
             },
             "ended": {
                 "title": "Events have ended",

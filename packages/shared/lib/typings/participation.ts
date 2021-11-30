@@ -17,6 +17,7 @@ export enum ParticipationEventState {
     Commencing = 'commencing',
     Holding = 'holding',
     Ended = 'ended',
+    Inactive = 'inactive',
 }
 
 export type ParticipationEventStatus = {

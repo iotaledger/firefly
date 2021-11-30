@@ -62,6 +62,7 @@
             case ParticipationEventState.Ended:
                 stateText = 'ended'
                 break
+            case ParticipationEventState.Inactive:
             default:
                 stateText = 'inactive'
                 break
@@ -74,14 +75,14 @@
         state: ParticipationEventState,
         isStaked: boolean
     ): { title: string; body: string } => {
-        let stateText: string =
-            $stakingEventState === ParticipationEventState.Holding
+        const isHoldingPhase = $stakingEventState === ParticipationEventState.Holding
+        let stateText: string = isHoldingPhase
             ? isStaked ? 'active' : 'inactive'
             : $stakingEventState
 
         return {
-            title: localize(`tooltips.staking.${stateText}.title`),
-            body: localize(`tooltips.staking.${stateText}.body`),
+            title: localize(`tooltips.staking.${stateText}${isHoldingPhase ? 'Holding' : ''}.title`),
+            body: localize(`tooltips.staking.${stateText}${isHoldingPhase ? 'Holding' : ''}.body`),
         }
     }
 </script>

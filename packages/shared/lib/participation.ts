@@ -42,8 +42,7 @@ export const participationOverview = writable<ParticipationOverview>([])
 
 /**
  * The store for accounts that are currently staked. This is NOT to hold accounts
- * that have been selected for staking / unstaking. In other words, if an account is
- * in this array, then it is currently being staked.
+ * that have been selected for staking / unstaking or have staked in the past.
  *
  * This is updated regularly by the polling
  * in `wallet.rs`.
@@ -53,10 +52,8 @@ export const stakedAccounts: Readable<WalletAccount[]> = derived(
     ([$participationOverview]) => {
         const activeAccountIndices =
             $participationOverview
-                // TODO: Not sure why we are doing this?
-                // .filter((apo) => apo.participations.length > 0)
-                .filter((overview) => overview.shimmerStakedFunds > 0)
-                .map((apo) => apo.accountIndex)
+                .filter((overview) => overview.participations.length > 0 && overview.shimmerStakedFunds > 0)
+                .map((overview) => overview.accountIndex)
         /**
          * CAUTION: Ideally the accounts Svelte store would
          * be derived, but doing so results in a "cannot
@@ -85,14 +82,11 @@ export const partiallyStakedAccounts: Readable<WalletAccount[]> = derived(
 
 export const partiallyStakedAmount: Readable<number> = derived(
     [participationOverview, partiallyStakedAccounts],
-    ([$participationOverview, $partiallyStakedAccounts]) => {
-        const partialParticipationOverviews = $participationOverview
+    ([$participationOverview, $partiallyStakedAccounts]) =>
+        $participationOverview
             .filter((apo) => $partiallyStakedAccounts.map((psa) => psa.index).includes(apo.accountIndex))
-
-        return $partiallyStakedAccounts
-            .map((psa) => psa.rawIotaBalance)
+            .map((apo) => Math.abs(apo.shimmerStakedFunds - apo.shimmerUnstakedFunds))
             .reduce((total, current) => total + current, 0)
-    }
 )
 
 /**
@@ -149,7 +143,7 @@ export const stakingEventState: Readable<ParticipationEventState> = derived(
     [networkStatus, participationEvents],
     ([$networkStatus, $participationEvents]) => {
         const stakingEvent = $participationEvents.filter((pe) => STAKING_EVENT_IDS.includes(pe.eventId))[0]
-        if (!stakingEvent) return ParticipationEventState.Ended
+        if (!stakingEvent) return ParticipationEventState.Inactive
 
         const {
             milestoneIndexCommence,
@@ -412,7 +406,6 @@ export function getParticipationOverview(): Promise<void> {
                 resolve()
             },
             onError(error) {
-                // TODO: What to do in case of error? Probably throw a notification here.
                 console.error(error)
 
                 reject(error)
@@ -438,7 +431,6 @@ export function getParticipationEvents(): Promise<ParticipationEvent[]> {
                 resolve(response?.payload)
             },
             onError(error) {
-                // TODO: What to do in case of error?
                 console.error(error)
 
                 reject(error)
@@ -452,7 +444,7 @@ export function getParticipationEvents(): Promise<ParticipationEvent[]> {
  *
  * @method participate
  *
- * @param {WalletAccount} account
+ * @param {string} accountId
  * @param {Participation[]} participations
  *
  * @returns {Promise<void>}
@@ -476,7 +468,6 @@ export function participate(accountId: string, participations: Participation[]):
                     resolve()
                 },
                 onError(error) {
-                    // TODO: What to do in case of error?
                     console.error(error)
 
                     reject(error)
@@ -490,7 +481,7 @@ export function participate(accountId: string, participations: Participation[]):
  *
  * @method stopParticipating
  *
- * @param {WalletAccount} account
+ * @param {string} accountId
  * @param {string[]} eventIds
  *
  * @returns {Promise<void>}
@@ -514,7 +505,6 @@ export function participate(accountId: string, participations: Participation[]):
                     resolve()
                 },
                 onError(error) {
-                    // TODO: What to do in case of error?
                     console.error(error)
 
                     reject(error)
@@ -544,8 +534,8 @@ export function participate(accountId: string, participations: Participation[]):
                     resolve()
                 },
                 onError(error) {
-                    // TODO: What to do in case of error?
                     console.error(error);
+
                     reject(error);
                 }
             })

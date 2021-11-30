@@ -770,8 +770,15 @@ export const asyncSyncAccountOffline = (account: WalletAccount): Promise<void> =
         })
     })
 
-export const asyncGetNodeInfo = (accountId: string, url?: string, auth?: NodeAuth): Promise<NodeInfo> =>
-    new Promise<NodeInfo>((resolve, reject) => {
+export const asyncGetNodeInfo = (accountId: string, url?: string, auth?: NodeAuth): Promise<NodeInfo> => {
+    if (!url || (!url && !auth)) {
+        const node = get(activeProfile)?.settings?.networkConfig?.nodes.find((n) => n.isPrimary)
+
+        url = node?.url
+        auth = node?.auth
+    }
+
+    return new Promise<NodeInfo>((resolve, reject) => {
         api.getNodeInfo(accountId, url, auth, {
             onSuccess(response) {
                 resolve(response.payload)
@@ -781,6 +788,7 @@ export const asyncGetNodeInfo = (accountId: string, url?: string, auth?: NodeAut
             },
         })
     })
+}
 
 /**
  * Initialises event listeners from wallet library

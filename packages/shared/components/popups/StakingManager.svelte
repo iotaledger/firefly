@@ -2,7 +2,7 @@
     import { get } from 'svelte/store'
     import { Button, Icon, Spinner, Text } from 'shared/components'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { asyncSyncAccounts, wallet } from 'shared/lib/wallet'
+    import { asyncSyncAccounts, transferState, wallet } from 'shared/lib/wallet'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { onMount } from 'svelte'
@@ -15,22 +15,19 @@
         getUnstakedFunds,
         isAccountPartiallyStaked,
         isAccountStaked,
-        partiallyStakedAccounts,
         participate,
-        participateWithRemainingFunds,
         stakedAccounts,
-        stakingEventState,
-        stopParticipating,
         STAKING_EVENT_IDS,
-        STAKING_PARTICIPATIONS
+        STAKING_PARTICIPATIONS,
+        stakingEventState,
+        stopParticipating
     } from 'shared/lib/participation'
     import { ParticipationAction } from 'shared/lib/typings/participation'
     import { activeProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { checkStronghold } from 'shared/lib/stronghold'
-    import { convertToFiat, currencies, exchangeRates, formatCurrency } from '../../lib/currency'
-    import { AvailableExchangeRates, CurrencyTypes } from '../../lib/typings/currency'
-    import { showAppNotification } from '../../lib/notifications'
-    import { transferState } from 'shared/lib/wallet'
+    import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
+    import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
+    import { showAppNotification } from 'shared/lib/notifications'
     import {
         GeneratingRemainderDepositAddressEvent,
         PreparedTransactionEvent,
@@ -39,6 +36,8 @@
         TransferProgressEventType,
         TransferState,
     } from 'shared/lib/typings/events'
+    import { NodePlugin } from 'shared/lib/typings/node'
+    import { networkStatus } from 'shared/lib/networkStatus'
 
     export let locale: Locale
 
@@ -56,7 +55,7 @@
 
     let transactionEventData: TransferProgressEventData = null
 
-   // TODO: This is an exact copy of a method defined in Wallet.svelte. Need to move it to shared. 
+   // TODO: This is an exact copy of a method defined in Wallet.svelte. Need to move it to shared.
    const handleTransactionEventData = (eventData: TransferProgressEventData): TransactionEventData => {
         if (!eventData) return {}
 
@@ -110,7 +109,7 @@
                     },
                 })
                 break
-                
+
             case TransferProgressEventType.SigningTransaction:
                 openPopup({
                     type: 'ledgerTransaction',
@@ -135,11 +134,8 @@
 
     const resetView = (): void => {
         if (!isSoftwareProfile) {
-            transferState.set(null);
-
+            transferState.set(null)
         }
-
-       closePopup(true);
 
         isPerformingAction = false
 
@@ -166,8 +162,6 @@
 
         isPerformingAction = true
 
-        console.log('PERFORMING ACTION: ', participationAction, '\nFOR ACCOUNT: ', accountToAction)
-
         const _displaySuccessNotification = () => {
             showAppNotification({
             type: 'info',
@@ -180,11 +174,23 @@
             // TODO: Might need to rethink of a better solution here.
             return new Promise((resolve) => setTimeout(resolve, 11000))
             .then(() => asyncSyncAccounts())
-                    .then(() => getParticipationOverview())
-                    .then(() => {
-                         resetView()
-                        _displaySuccessNotification()
-                    })
+            .then(() => getParticipationOverview())
+            .then(() => {
+                 resetView()
+                _displaySuccessNotification()
+            })
+        }
+
+        const hasParticipationPlugin = $networkStatus.nodePlugins.includes(NodePlugin.Participation)
+        if (!hasParticipationPlugin) {
+            showAppNotification({
+                type: 'error',
+                message: locale('error.node.pluginNotAvailable', { values: { nodePlugin: NodePlugin.Participation } }),
+            })
+
+            resetView()
+
+            return
         }
 
         switch (participationAction) {
@@ -198,10 +204,9 @@
                 break
             case ParticipationAction.Unstake:
                 await stopParticipating(accountToAction?.id, STAKING_EVENT_IDS)
-                   .then(() => _sync())
+                    .then(() => _sync())
                     .catch((err) => {
                         console.error(err)
-
                         resetView()
                     })
                 break
