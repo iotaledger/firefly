@@ -3,6 +3,7 @@ const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session } = requir
 const path = require('path')
 const os = require('os')
 const fs = require('fs')
+const { execSync } = require('child_process')
 const Keychain = require('./lib/keychain')
 const { initMenu, contextMenu } = require('./lib/menu')
 
@@ -352,12 +353,18 @@ const getDiagnostics = () => {
 
     if (platform === 'darwin') {
         platform = 'macOS'
-        const verSplit = platformVersion.split('.')
-        const num = Number.parseInt(verSplit[0], 10)
-        if (!Number.isNaN(num)) {
-            const [_, version] = osXNameMap.get(num)
-            if (version) {
-                platformVersion = version
+
+        try {
+            platformVersion = execSync('sw_vers -productVersion').toString().trim()
+        } catch (_err) {
+            // Fall back to Darwin version map
+            const verSplit = platformVersion.split('.')
+            const num = Number.parseInt(verSplit[0], 10)
+            if (!Number.isNaN(num)) {
+                const [_, version] = osXNameMap.get(num)
+                if (version) {
+                    platformVersion = version
+                }
             }
         }
     }
