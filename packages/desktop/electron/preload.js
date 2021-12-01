@@ -23,9 +23,9 @@ window.addEventListener('unhandledrejection', (event) => {
 try {
     const fs = require('fs')
     const binding = require('wallet-nodejs-binding')
-    const ElectronPincodeManager = require('./lib/electronPincodeManager')
-    const ElectronDeepLinkManager = require('./lib/electronDeepLinkManager')
-    const ElectronNotificationManager = require('./lib/electronNotificationManager')
+    const PincodeManager = require('./lib/pincodeManager')
+    const DeepLinkManager = require('./lib/deepLinkManager')
+    const NotificationManager = require('./lib/notificationManager')
     const { menuState } = require('./lib/menuState')
     const kdbx = require('./lib/kdbx')
     const { proxyApi } = require('shared/lib/shell/walletApi')
@@ -75,9 +75,9 @@ try {
                 }
             })
         },
-        PincodeManager: ElectronPincodeManager,
-        DeepLinkManager: ElectronDeepLinkManager,
-        NotificationManager: ElectronNotificationManager,
+        PincodeManager: PincodeManager,
+        DeepLinkManager: DeepLinkManager,
+        NotificationManager: NotificationManager,
         getStrongholdBackupDestination: (defaultPath) =>
             ipcRenderer
                 .invoke('show-save-dialog', {
