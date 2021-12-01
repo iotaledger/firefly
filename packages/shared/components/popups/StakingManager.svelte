@@ -5,9 +5,10 @@
     import { asyncSyncAccounts, transferState, wallet } from 'shared/lib/wallet'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-    import { onMount } from 'svelte'
+    import { onDestroy, onMount } from 'svelte'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import {
+        accountToParticipate,
         canAccountParticipate,
         canParticipate,
         getParticipationOverview,
@@ -15,7 +16,9 @@
         getUnstakedFunds,
         isAccountPartiallyStaked,
         isAccountStaked,
-        participate, participationOverview,
+        participate,
+        participationAction,
+        participationOverview,
         stakedAccounts,
         stakedAmount,
         STAKING_EVENT_IDS,
@@ -39,19 +42,15 @@
     } from 'shared/lib/typings/events'
     import { NodePlugin } from 'shared/lib/typings/node'
     import { networkStatus } from 'shared/lib/networkStatus'
-    import { MILLISECONDS_PER_SECOND } from 'shared/lib/time'
 
     export let locale: Locale
 
-    export let accountToAction: WalletAccount
-    export let participationAction: ParticipationAction
-
+    export let isPerformingAction = false
     export let shouldParticipateOnMount = false
 
     let canStake
     $: canStake = canParticipate($stakingEventState)
 
-    export let isPerformingAction = false
     let accounts = get($wallet.accounts)
     let hasStakedAccounts = $stakedAccounts.length > 0
 
@@ -105,8 +104,8 @@
                 openPopup({
                     type: 'stakingManager',
                     props: {
-                        accountToAction,
-                        participationAction,
+                        accountToAction: $accountToParticipate,
+                        participationAction: $participationAction,
                         isPerformingAction: true
                     },
                 })
@@ -153,8 +152,8 @@
 
         isPerformingAction = false
 
-        accountToAction = undefined
-        participationAction = undefined
+        accountToParticipate.set(undefined)
+        participationAction.set(undefined)
 
         resetAccounts()
     }
@@ -166,25 +165,24 @@
 
     const handleParticipationAction = async (): Promise<void> => {
         if (!canStake) return
-        if (!accountToAction || !participationAction) return
+        if (!$accountToParticipate || !$participationAction) return
 
         isPerformingAction = true
 
-        const _sync = () => {
+        const _sync = async () => {
             // Add a delay to cover for the transaction confirmation time
             // TODO: Might need to rethink of a better solution here.
-            return getParticipationOverview()
-                .then(() => {
-                    showAppNotification({
-                        type: 'info',
-                        message: locale(`popups.stakingManager.${
-                            participationAction === ParticipationAction.Stake
-                                ? 'hasStaked'
-                                : 'hasUnstaked'
-                        }`)
-                    })
-                    resetView()
-                })
+            await getParticipationOverview()
+
+            showAppNotification({
+                type: 'info',
+                message: locale(`popups.stakingManager.${
+                    $participationAction === ParticipationAction.Stake
+                        ? 'hasStaked'
+                        : 'hasUnstaked'
+                }`)
+            })
+            resetView()
         }
 
         const hasParticipationPlugin = $networkStatus.nodePlugins.includes(NodePlugin.Participation)
@@ -199,9 +197,9 @@
             return
         }
 
-        switch (participationAction) {
+        switch ($participationAction) {
             case ParticipationAction.Stake:
-                await participate(accountToAction?.id, STAKING_PARTICIPATIONS)
+                await participate($accountToParticipate?.id, STAKING_PARTICIPATIONS)
                     .then(() => _sync())
                     .catch((err) => {
                         console.error(err)
@@ -209,7 +207,7 @@
                     })
                 break
             case ParticipationAction.Unstake:
-                await stopParticipating(accountToAction?.id, STAKING_EVENT_IDS)
+                await stopParticipating($accountToParticipate?.id, STAKING_EVENT_IDS)
                     .then(() => _sync())
                     .catch((err) => {
                         console.error(err)
@@ -232,19 +230,17 @@
 
     const handleUnstakeClick = (account: WalletAccount): void => {
         const _unstake = async () => {
+            accountToParticipate.set(account)
+            participationAction.set(ParticipationAction.Unstake)
+
             if ($popupState.type !== 'stakingManager') {
                 openPopup({
                     type: 'stakingManager',
                     props: {
-                        accountToAction: account,
-                        participationAction: ParticipationAction.Unstake,
                         shouldParticipateOnMount: true
                     },
                 })
             } else {
-                accountToAction = account
-                participationAction = ParticipationAction.Unstake
-
                 await handleParticipationAction()
             }
         }
@@ -270,10 +266,14 @@
     })
 
     /** Subscribe to transfer state */
-    transferState.subscribe((state) => {
+    const unsubscribeFromTransferState = transferState.subscribe((state) => {
         if (!$isSoftwareProfile) {
             handleTransferState(state)
         }
+    })
+
+    onDestroy(() => {
+        unsubscribeFromTransferState()
     })
 </script>
 
@@ -326,14 +326,13 @@
                         disabled={isPerformingAction}
                         secondary={isAccountStaked(account?.id)}
                         onClick={() => isAccountStaked(account?.id)
-                                    ? handleUnstakeClick(account)
-                                    : handleStakeClick(account)
-                                }
+                            ? handleUnstakeClick(account)
+                            : handleStakeClick(account)
+                        }
                     >
-                        {#if accountToAction?.id === account?.id}
+                        {#if $accountToParticipate?.id === account?.id && $accountToParticipate && $participationAction}
                             <Spinner
                                 busy={isPerformingAction}
-                                message={locale(`general.${participationAction === ParticipationAction.Stake ? 'staking' : 'unstaking'}`)}
                                 classes="mx-2 justify-center"
                             />
                         {:else}
@@ -341,7 +340,7 @@
                         {/if}
                     </Button>
                 </div>
-                {#if isAccountPartiallyStaked(account?.id) && accountToAction?.id !== account?.id}
+                {#if isAccountPartiallyStaked(account?.id) && accountToParticipate?.id !== account?.id}
                     <div class="space-x-4 mx-1 mb-1 px-4 py-3 flex flex-row justify-between items-center rounded-lg bg-yellow-50">
                         <Icon icon="exclamation" width="18" height="18" classes="fill-current text-yellow-600" />
                         <div class="flex flex-col w-3/4">

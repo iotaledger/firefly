@@ -1,18 +1,20 @@
 <script lang="typescript">
-    import { Button, Icon, Text, Tooltip } from 'shared/components'
+    import { Button, Icon, Spinner, Text, Tooltip } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import {
         canParticipate,
+        accountToParticipate,
         partiallyStakedAccounts,
         partiallyStakedAmount,
+        participationAction,
         participationOverview,
         stakedAccounts,
         stakedAmount,
         stakingEventState,
         unstakedAmount,
     } from 'shared/lib/participation'
-    import { openPopup } from 'shared/lib/popup'
-    import { ParticipationEventState } from 'shared/lib/typings/participation'
+    import { openPopup, popupState } from 'shared/lib/popup'
+    import { ParticipationAction, ParticipationEventState } from 'shared/lib/typings/participation'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { tick } from 'svelte'
 
@@ -27,6 +29,7 @@
     let isPartiallyStaked
 
     $: isPartiallyStaked = $partiallyStakedAccounts.length > 0
+    $: showSpinner = !$popupState.active && $participationAction && $accountToParticipate
 
     let showTooltip = false
     let iconBox
@@ -88,11 +91,20 @@
     </div>
     <Button
         classes="w-full text-14"
-        disabled={!canStake}
+        disabled={!canStake || showSpinner}
         caution={isStaked && isPartiallyStaked}
         secondary={isStaked && !isPartiallyStaked}
-        onClick={handleStakeFundsClick}>
-        {localize(`actions.${isStaked ? 'manageStake' : 'stakeFunds'}`)}
+        onClick={handleStakeFundsClick}
+    >
+        {#if showSpinner}
+            <Spinner
+                busy
+                message={localize(`general.${$participationAction === ParticipationAction.Stake ? 'staking' : 'unstaking'}`)}
+                classes="mx-2 justify-center"
+            />
+        {:else}
+            {localize(`actions.${isStaked ? 'manageStake' : 'stakeFunds'}`)}
+        {/if}
     </Button>
 </div>
 {#if showTooltip}

@@ -2,9 +2,11 @@
     import { Button, Illustration, Text } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import {
+        accountToParticipate,
         estimateStakingAirdropReward,
         getUnstakedFunds,
         isAccountPartiallyStaked,
+        participationAction,
         STAKING_AIRDROP_TOKENS,
     } from 'shared/lib/participation'
     import { openPopup } from 'shared/lib/popup'
@@ -29,11 +31,12 @@
 
     const handleConfirmClick = (): void => {
         const _onConfirm = (): void => {
+            accountToParticipate.set(accountToStake)
+            participationAction.set(ParticipationAction.Stake)
+
             openPopup({
                 type: 'stakingManager',
                 props: {
-                    accountToAction: accountToStake,
-                    participationAction: ParticipationAction.Stake,
                     shouldParticipateOnMount: true
                 },
             }, true)

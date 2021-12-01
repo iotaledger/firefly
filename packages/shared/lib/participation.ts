@@ -1,7 +1,7 @@
 import { derived, get, Readable, writable } from 'svelte/store'
 import {
     ParticipateResponsePayload,
-    Participation,
+    Participation, ParticipationAction,
     ParticipationEvent,
     ParticipationEventState,
     ParticipationOverview,
@@ -14,6 +14,7 @@ import { api, DUST_THRESHOLD, wallet } from './wallet'
 import { showAppNotification } from './notifications'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from './time'
 import { networkStatus } from './networkStatus'
+import { localize } from './i18n'
 
 /**
  * Assembly event ID
@@ -34,6 +35,26 @@ export const STAKING_PARTICIPATIONS: Participation[] = [{
     eventId: ASSEMBLY_EVENT_ID,
     answers: []
 }];
+
+/**
+ * The store for an account that is selected to participate in an event. This is
+ * mostly useful for showing background participation progress, otherwise it can
+ * just be shown within a designated component (i.e. popup or dashboard tile).
+ *
+ * If this store is empty (e.g. undefined or null), then there is NOT an account
+ * currently trying to participate (or stop) in an event.
+ */
+export const accountToParticipate = writable<WalletAccount>(null)
+
+/**
+ * The store for the participation action to perform for the "accountToParticipate". Similar
+ * to the "accountToParticipate", this is mostly useful for showing background participation
+ * progress.
+ *
+ * If this store is empty (e.g. undefined or null), then there is NOT an account
+ * currently trying to participate (or stop) in an event.
+ */
+export const participationAction = writable<ParticipationAction>(null)
 
 /**
  * The overview / statistics about participation. See #AccountParticipationOverview for more details.
@@ -318,7 +339,7 @@ export const estimateStakingAirdropReward = (airdrop: StakingAirdrop, amountToSt
     if (!stakingEvent) {
         showAppNotification({
             type: 'error',
-            message: 'Unable to find staking event.',
+            message: localize('error.participation.cannotFindStakingEvent'),
         })
     }
 
@@ -453,7 +474,7 @@ export function participate(accountId: string, participations: Participation[]):
     if (!accountId) {
         showAppNotification({
             type: 'error',
-            message: 'Unable to use this account data.'
+            message: localize('error.participation.cannotUseAccount')
         })
 
         return
@@ -490,7 +511,7 @@ export function participate(accountId: string, participations: Participation[]):
      if (!accountId) {
          showAppNotification({
              type: 'error',
-             message: 'Unable to use this account data.'
+             message: localize('error.participation.cannotUseAccount')
          })
 
          return
