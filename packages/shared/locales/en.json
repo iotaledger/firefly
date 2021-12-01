@@ -531,7 +531,7 @@
                 "collectedRewards": "Collected rewards",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                    "description": "A scalable multi-chain network, built on top of sharded, composable smart contracts powered by IOTA."
                 },
                 "shimmer": {
                     "name": "Shimmer",
@@ -1145,7 +1145,8 @@
         },
         "participation": {
             "cannotUseAccount": "Unable to use the specified account.",
-            "cannotFindStakingEvent": "Unable to find staking event."
+            "cannotFindStakingEvent": "Unable to find staking event.",
+            "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website."
         }
     },
     "warning": {

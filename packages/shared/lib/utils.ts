@@ -301,3 +301,17 @@ export const pick = <T>(arr: T[]): T | undefined => {
     const randIdx = Math.floor(Math.random() * length)
     return arr[randIdx] || undefined
 }
+
+/**
+ * Returns a capitalized version of a particular string.
+ *
+ * @method capitalize
+ *
+ * @param {string} str
+ *
+ * @returns {string}
+ */
+export const capitalize = (str: string): string => {
+    if (!str) return str
+    else return str[0].toUpperCase() + str.substr(1).toLowerCase()
+}

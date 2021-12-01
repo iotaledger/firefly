@@ -11,6 +11,8 @@
     } from 'shared/lib/participation'
     import { getBestTimeDuration } from 'shared/lib/time'
     import { StakingAirdrop } from 'shared/lib/typings/participation'
+    import { showAppNotification } from 'shared/lib/notifications'
+    import { capitalize } from 'shared/lib/utils'
 
     export let airdrop: StakingAirdrop
 
@@ -25,13 +27,24 @@
     }
 
     const handleLearnMoreClick = (): void => {
+        const url = getLearnMoreUrl()
+        if (!url) {
+            showAppNotification({
+                type: 'error',
+                message: localize(
+                    'error.participation.cannotVisitAirdropWebsite',
+                    { values: { airdrop: capitalize(airdrop) } }
+                )
+            })
+        }
+
         Electron.openUrl(getLearnMoreUrl())
     }
 
     const getLearnMoreUrl = (): string => {
         switch (airdrop) {
             case StakingAirdrop.Assembly:
-                return 'https://shimmer.network'
+                return 'https://assembly.sc'
             case StakingAirdrop.Shimmer:
                 return 'https://shimmer.network'
             default:

@@ -115,14 +115,23 @@ if (app.isPackaged) {
  */
 function isUrlAllowed(targetUrl) {
     const externalAllowlist = [
-        'privacy@iota.org',
-        'iota.org',
-        'github.com/iotaledger/firefly/issues',
-        'discord.iota.org',
+        // IOTA Foundation
+        'blog.iota.org',
         'chrysalis.iota.org',
         'chrysalis.docs.iota.org',
+        'discord.iota.org',
         'firefly.iota.org',
-        'blog.iota.org',
+        'iota.org',
+        'privacy@iota.org',
+
+        // Assembly / Shimmer
+        'assembly.sc',
+        'shimmer.network',
+
+        // GitHub
+        'github.com/iotaledger/firefly/issues',
+
+        // Other
         'support.ledger.com',
     ]
 

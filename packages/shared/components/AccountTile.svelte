@@ -130,15 +130,15 @@
             <Icon
                 icon={airdrop}
                 classes="fill-current text-gray-{disabled ? '500' : '400'} dark:text-gray-700"
-                width={size === 's' ? 13 : 21}
-                height={size === 's' ? 13 : 21}
+                width={size === 's' ? 13 : 18}
+                height={size === 's' ? 13 : 18}
             />
         {:else if ledger}
             <Icon
                 icon="ledger"
                 classes="fill-current text-gray-400 dark:text-gray-700"
-                width={size === 's' ? 13 : 21}
-                height={size === 's' ? 13 : 21}
+                width={size === 's' ? 13 : 18}
+                height={size === 's' ? 13 : 18}
             />
         {/if}
     </div>
