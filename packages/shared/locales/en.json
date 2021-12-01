@@ -493,6 +493,7 @@
         },
         "staking": {
             "title": "Staking",
+            "welcome": "Welcome to the staking dashboard!",
             "manager": {
                 "availableForStaking": "Available for staking",
                 "currentlyStaked": "Currently staked"

@@ -33,7 +33,7 @@
         clearPollParticipationOverviewInterval,
         getParticipationEvents,
         pollParticipationOverview
-    } from '../../lib/participation'
+    } from 'shared/lib/participation'
 
     export let locale: Locale
     export let mobile

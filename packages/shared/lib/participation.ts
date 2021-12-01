@@ -15,6 +15,7 @@ import { showAppNotification } from './notifications'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from './time'
 import { networkStatus } from './networkStatus'
 import { localize } from './i18n'
+import { persistent } from './helpers'
 
 /**
  * Assembly event ID
@@ -35,6 +36,13 @@ export const STAKING_PARTICIPATIONS: Participation[] = [{
     eventId: ASSEMBLY_EVENT_ID,
     answers: []
 }];
+
+/**
+ * The persisted store variable for if the staking feature is new for a Firefly installation.
+ * Once the user navigates to the staking dashboard, this is set to false. This helps the UX
+ * to highlight the new feature.
+ */
+export const isStakingFeatureNew = persistent('isStakingFeatureNew', true)
 
 /**
  * The store for an account that is selected to participate in an event. This is

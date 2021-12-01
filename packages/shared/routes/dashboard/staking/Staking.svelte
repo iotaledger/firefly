@@ -2,6 +2,26 @@
     import { DashboardPane } from 'shared/components'
     import { StakingAirdrop as Airdrop } from 'shared/lib/typings/participation'
     import { StakingAirdrop, StakingHeader, StakingInfo, StakingSummary } from './views'
+    import { isStakingFeatureNew } from 'shared/lib/participation'
+    import { MILLISECONDS_PER_SECOND } from 'shared/lib/time'
+    import { showAppNotification } from 'shared/lib/notifications'
+    import { localize } from 'shared/lib/i18n'
+    import { onMount } from 'svelte'
+
+    const handleNewStakingFeature = (): void => {
+        if ($isStakingFeatureNew) {
+            showAppNotification({
+                type: 'info',
+                message: localize('views.staking.welcome')
+            })
+
+            isStakingFeatureNew.set(false)
+        }
+    }
+
+    onMount(() => {
+        setTimeout(handleNewStakingFeature, MILLISECONDS_PER_SECOND)
+    })
 </script>
 
 <style type="text/scss">

@@ -1,10 +1,11 @@
 <script lang="typescript">
-    import { Icon, Logo, NetworkIndicator, ProfileActionsModal } from 'shared/components'
+    import { Icon, Logo, NetworkIndicator, ProfileActionsModal, Text } from 'shared/components'
     import { getInitials } from 'shared/lib/helpers'
     import { NETWORK_HEALTH_COLORS, networkStatus } from 'shared/lib/networkStatus'
     import { activeProfile } from 'shared/lib/profile'
     import { dashboardRoute, settingsRoute, resetWalletRoute } from 'shared/lib/router'
     import { SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
+    import { isStakingFeatureNew } from 'shared/lib/participation'
     import { onDestroy } from 'svelte'
     import { get } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
@@ -15,6 +16,8 @@
     let healthStatus = 2
     let showProfile = false
     const profileColor = 'blue' // TODO: each profile has a different color
+
+    $: $isStakingFeatureNew
 
     const profileInitial = getInitials(get(activeProfile)?.name, 1)
 
@@ -57,8 +60,14 @@
             <button class="mb-8 {$dashboardRoute === Tabs.Wallet ? 'text-blue-500' : 'text-gray-500'}" on:click={openWallet}>
                 <Icon icon="wallet" />
             </button>
-            <button class="{$dashboardRoute === Tabs.Staking ? 'text-blue-500' : 'text-gray-500'}" on:click={openStaking}>
+            <button class="{$dashboardRoute === Tabs.Staking ? 'text-blue-500' : 'text-gray-500'} relative" on:click={openStaking}>
                 <Icon icon="tokens" />
+                {#if $isStakingFeatureNew}
+                    <span class="absolute -top-2 -left-2 flex justify-center items-center h-3 w-3">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-300 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                    </span>
+                {/if}
             </button>
         </div>
         <span class="flex flex-col items-center">
