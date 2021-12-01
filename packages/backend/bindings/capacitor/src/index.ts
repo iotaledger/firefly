@@ -1,8 +1,8 @@
-import { registerPlugin } from '@capacitor/core';
+import { registerPlugin } from '@capacitor/core'
 
-import type { WalletPlugin } from './definitions';
+import type { WalletPluginTypes } from './definitions'
 
-const Wallet = registerPlugin<WalletPlugin>('Wallet');
+const WalletPlugin = registerPlugin<WalletPluginTypes>('WalletPlugin')
 
-export * from './definitions';
-export { Wallet };
+export * from './definitions'
+export { WalletPlugin }

@@ -1,6 +1,6 @@
-export interface WalletPlugin {
-  initialize(actorId: String): Promise<void>;
-  destroy(actorId: String): Promise<void>;
-  sendMessage(message: { [key: string]: any }): Promise<void>;
-  addListener(actorId: String, id: String, event: { [key: string]: any }): Promise<void>;
+export interface WalletPluginTypes {
+  initialize(actorId: { [key: string]: any }): Promise<void>
+  destroy(actorId: { [key: string]: any }): Promise<void>
+  sendMessage(message: { [key: string]: any }): Promise<void>
+  addListener(walletEvent: 'walletEvent', cb: (jsonResponse: String) => void): void
 }
