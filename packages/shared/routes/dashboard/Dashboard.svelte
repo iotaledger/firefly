@@ -54,9 +54,13 @@
 
     const unsubscribeAccountsLoaded = accountsLoaded.subscribe((val) => {
         if (val) {
+            void getParticipationEvents()
+
             void pollNetworkStatus()
+            void pollParticipationOverview()
         } else {
             clearPollNetworkInterval()
+            clearPollParticipationOverviewInterval()
         }
     })
 
@@ -93,9 +97,6 @@
             )
         }
 
-        void getParticipationEvents()
-        void pollParticipationOverview()
-
         Electron.onEvent('menu-logout', () => {
             void logout()
         })
@@ -123,7 +124,6 @@
 
     onDestroy(() => {
         unsubscribeAccountsLoaded()
-        clearPollParticipationOverviewInterval()
 
         Electron.DeepLinkManager.clearDeepLinkRequest()
         Electron.removeListenersForEvent('deep-link-params')

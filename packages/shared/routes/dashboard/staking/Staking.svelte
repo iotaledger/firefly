@@ -19,8 +19,10 @@
         }
     }
 
-    onMount(() => {
-        setTimeout(handleNewStakingFeature, MILLISECONDS_PER_SECOND)
+    onMount(async () => {
+        if ($isStakingFeatureNew) {
+            setTimeout(handleNewStakingFeature, MILLISECONDS_PER_SECOND)
+        }
     })
 </script>
 

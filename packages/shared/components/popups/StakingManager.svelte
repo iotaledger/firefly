@@ -2,7 +2,7 @@
     import { get } from 'svelte/store'
     import { Button, Icon, Spinner, Text } from 'shared/components'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { transferState, wallet } from 'shared/lib/wallet'
+    import { asyncSyncAccounts, transferState, wallet } from 'shared/lib/wallet'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { onDestroy, onMount } from 'svelte'
@@ -55,6 +55,9 @@
     let hasStakedAccounts = $stakedAccounts.length > 0
 
     let transactionEventData: TransferProgressEventData = null
+
+    $: $stakedAccounts, async () => await getParticipationOverview()
+    $: $accountToParticipate, async () => await getParticipationOverview()
 
    // TODO: This is an exact copy of a method defined in Wallet.svelte. Need to move it to shared.
    const handleTransactionEventData = (eventData: TransferProgressEventData): TransactionEventData => {
@@ -172,6 +175,7 @@
         const _sync = async () => {
             // Add a delay to cover for the transaction confirmation time
             // TODO: Might need to rethink of a better solution here.
+            await asyncSyncAccounts()
             await getParticipationOverview()
 
             showAppNotification({
@@ -182,7 +186,6 @@
                         : 'hasUnstaked'
                 }`)
             })
-            resetView()
         }
 
         const hasParticipationPlugin = $networkStatus.nodePlugins.includes(NodePlugin.Participation)
@@ -217,6 +220,8 @@
             default:
                 break
         }
+
+        resetView()
     }
 
     const handleStakeClick = (account: WalletAccount): void => {
@@ -335,7 +340,7 @@
                         {/if}
                     </Button>
                 </div>
-                {#if isAccountPartiallyStaked(account?.id) && (!$accountToParticipate && !$participationAction)}
+                {#if isAccountPartiallyStaked(account?.id) && $accountToParticipate?.id !== account?.id}
                     <div class="space-x-4 mx-1 mb-1 px-4 py-3 flex flex-row justify-between items-center rounded-lg bg-yellow-50">
                         <Icon icon="exclamation" width="18" height="18" classes="fill-current text-yellow-600" />
                         <div class="flex flex-col w-3/4">

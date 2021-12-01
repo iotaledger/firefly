@@ -246,7 +246,7 @@ export const shimmerStakingRemainingTime: Readable<number> = derived(
  * Currency symbols for the staking airdrops.
  */
 export const STAKING_AIRDROP_TOKENS: { [key in StakingAirdrop]: string } = {
-    [StakingAirdrop.Assembly]: 'ASM',
+    [StakingAirdrop.Assembly]: 'ASMB',
     [StakingAirdrop.Shimmer]: 'SMR',
 }
 
@@ -308,14 +308,22 @@ export const isAccountPartiallyStaked = (accountId: string): boolean =>
     get(partiallyStakedAccounts).find((psa) => psa.id === accountId) !== undefined
 
 const estimateAssemblyReward = (amount: number, currentMilestone: number, endMilestone: number): number => {
-    const multiplier = 1.0
+    /**
+     * NOTE: This represents the amount of ASMB per 1 Mi received every milestone,
+     * which is currently 2 mASMB (or 0.000002 ASMB).
+     */
+    const multiplier = 0.000002
     const amountMiotas = amount / 1_000_000
     const numMilestones = endMilestone - currentMilestone
 
-    return multiplier * amountMiotas * numMilestones + 1
+    return Number((multiplier * amountMiotas * numMilestones).toFixed(6))
 }
 
 const estimateShimmerReward = (amount: number, currentMilestone: number, endMilestone: number): number => {
+    /**
+     * NOTE: This represents the amount of SMR per 1 Mi received every milestone,
+     * which is currently 1 SMR.
+     */
     const multiplier = 1.0
     const amountMiotas = amount / 1_000_000
     const numMilestones = endMilestone - currentMilestone
