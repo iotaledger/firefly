@@ -54,7 +54,7 @@
                 <Dropdown
                     valueKey={'alias'}
                     value={selectedAccount.alias}
-                    items={$liveAccounts.filter((acc) => !isAccountStaked(acc.id))}
+                    items={$liveAccounts}
                     onSelect={handleDropdownSelect}
                     disabled={$liveAccounts.length === 1} />
             </div>

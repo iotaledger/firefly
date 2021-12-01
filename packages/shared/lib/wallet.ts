@@ -815,16 +815,15 @@ export const initialiseListeners = (): void => {
      */
     api.onNewTransaction({
         onSuccess(response) {
-            const { accounts } = get(wallet)
-            const accountId = response.payload.accountId
+            const { balanceOverview, accounts } = get(wallet)
+            const { accountId, message } = response.payload
             const account = get(accounts).find((account) => account.id === accountId)
-            const { message } = response.payload
+            if (!account || !message) return
 
             if (message.payload.type === 'Transaction') {
                 const { essence } = message.payload.data
 
                 if (!essence.data.internal) {
-                    const { balanceOverview } = get(wallet)
                     const overview = get(balanceOverview)
 
                     const incoming = essence.data.incoming
@@ -838,11 +837,11 @@ export const initialiseListeners = (): void => {
                 }
 
                 // Update account with new message
-                saveNewMessage(accountId, response.payload.message)
+                saveNewMessage(accountId, message)
 
                 const notificationMessage = localize('notifications.valueTx')
-                    .replace('{{value}}', formatUnitBestMatch(message.payload.data.essence.data.value, true, 3))
-                    .replace('{{account}}', account.alias)
+                    .replace('{{value}}', formatUnitBestMatch(message?.payload.data.essence.data.value, true, 3))
+                    .replace('{{account}}', account?.alias)
 
                 showSystemNotification({
                     type: 'info',
@@ -851,10 +850,10 @@ export const initialiseListeners = (): void => {
                 })
             } else if (message.payload.type === 'Milestone') {
                 // Update account with new message
-                saveNewMessage(response.payload.accountId, response.payload.message)
+                saveNewMessage(accountId, message)
                 processMigratedTransactions(
-                    response.payload.accountId,
-                    [response.payload.message],
+                    accountId,
+                    [message],
 
                     // New transaction will only emit an event for fluid migrations
                     []

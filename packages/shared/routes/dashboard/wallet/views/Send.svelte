@@ -124,7 +124,6 @@
         accountsDropdownItems =
             $liveAccounts
                 .map((acc) => format(acc))
-                .filter((acc) => !isAccountStaked(acc.id))
 
         if (from) {
             from = accountsDropdownItems.find((a) => a.id === from.id)

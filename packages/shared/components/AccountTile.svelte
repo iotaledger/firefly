@@ -52,7 +52,7 @@
          * does seem to play nicely with responsiveness.
          */
         const top = iconBox?.getBoundingClientRect().top ?? 0
-        parentTop = top * 1.145
+        parentTop = top * 1.15
     }
 
     const togglePartialStakeTooltip = (): void => {

@@ -2,7 +2,7 @@
     import { get } from 'svelte/store'
     import { Button, Icon, Spinner, Text } from 'shared/components'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { asyncSyncAccounts, transferState, wallet } from 'shared/lib/wallet'
+    import { transferState, wallet } from 'shared/lib/wallet'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { onDestroy, onMount } from 'svelte'
@@ -297,31 +297,26 @@
                     {:else}
                         <Icon icon="unlock" width="18" height="18" />
                     {/if}
-                    {#if isAccountPartiallyStaked(account?.id)}
-                        <div class="flex flex-col w-3/4">
-                            <Text type="p" classes="font-extrabold">
-                                {account.alias}
-                            </Text>
+                    <div class="flex flex-col w-3/4">
+                        <Text type="p" classes="font-extrabold">
+                            {account.alias}
+                        </Text>
+                        {#if isAccountPartiallyStaked(account?.id)}
                             <Text type="p" secondary classes="font-extrabold">
                                 {formatUnitBestMatch(getStakedFunds(account))} •
                                 <Text type="p" secondary classes="inline">
                                     {getFormattedFiatAmount(getStakedFunds(account))}
                                 </Text>
                             </Text>
-                        </div>
-                    {:else}
-                        <div class="flex flex-col w-3/4">
-                            <Text type="p" classes="font-extrabold">
-                                {account.alias}
-                            </Text>
+                        {:else}
                             <Text type="p" secondary classes="font-extrabold">
                                 {account.balance} •
                                 <Text type="p" secondary classes="inline">
                                     {account.balanceEquiv}
                                 </Text>
                             </Text>
-                        </div>
-                    {/if}
+                        {/if}
+                    </div>
                     <Button
                         disabled={isPerformingAction}
                         secondary={isAccountStaked(account?.id)}
@@ -340,7 +335,7 @@
                         {/if}
                     </Button>
                 </div>
-                {#if isAccountPartiallyStaked(account?.id) && accountToParticipate?.id !== account?.id}
+                {#if isAccountPartiallyStaked(account?.id) && (!$accountToParticipate && !$participationAction)}
                     <div class="space-x-4 mx-1 mb-1 px-4 py-3 flex flex-row justify-between items-center rounded-lg bg-yellow-50">
                         <Icon icon="exclamation" width="18" height="18" classes="fill-current text-yellow-600" />
                         <div class="flex flex-col w-3/4">
