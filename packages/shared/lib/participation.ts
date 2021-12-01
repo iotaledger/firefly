@@ -16,6 +16,7 @@ import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from './time'
 import { networkStatus } from './networkStatus'
 import { localize } from './i18n'
 import { persistent } from './helpers'
+import { account } from './typings'
 
 /**
  * Assembly event ID
@@ -145,8 +146,11 @@ export const unstakedAmount: Readable<number> = derived(
  */
 export const assemblyStakingRewards: Readable<number> = derived(
     participationOverview,
-    (overview) =>
-        overview.reduce((total, accountOverview) => total + accountOverview.assemblyRewards, 0)
+    (overview) => {
+        const rewards = overview.reduce((total, accountOverview) => total + accountOverview.assemblyRewards, 0)
+        if (rewards <= 0) return overview.reduce((total, accountOverview) => total + accountOverview.assemblyRewardsBelowMinimum, 0)
+        else return rewards
+    }
 )
 
 /**
@@ -156,8 +160,11 @@ export const assemblyStakingRewards: Readable<number> = derived(
  */
 export const shimmerStakingRewards: Readable<number> = derived(
     participationOverview,
-    (overview) =>
-        overview.reduce((total, accountOverview) => total + accountOverview.shimmerRewards, 0)
+    (overview) => {
+        const rewards = overview.reduce((total, accountOverview) => total + accountOverview.shimmerRewards, 0)
+        if (rewards <= 0) return overview.reduce((total, accountOverview) => total + accountOverview.shimmerRewardsBelowMinimum, 0)
+        else return rewards
+    }
 )
 
 /**
