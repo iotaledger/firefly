@@ -4,8 +4,8 @@
     import { Locale } from 'shared/lib/typings/i18n'
     import { asyncSyncAccounts, transferState, wallet } from 'shared/lib/wallet'
     import { WalletAccount } from 'shared/lib/typings/wallet'
-    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-    import { onDestroy, onMount } from 'svelte'
+    import { openPopup, popupState } from 'shared/lib/popup'
+    import { onMount } from 'svelte'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import {
         accountToParticipate,
@@ -32,14 +32,6 @@
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { showAppNotification } from 'shared/lib/notifications'
-    import {
-        GeneratingRemainderDepositAddressEvent,
-        PreparedTransactionEvent,
-        TransactionEventData,
-        TransferProgressEventData,
-        TransferProgressEventType,
-        TransferState,
-    } from 'shared/lib/typings/events'
     import { NodePlugin } from 'shared/lib/typings/node'
     import { networkStatus } from 'shared/lib/networkStatus'
 
@@ -54,87 +46,89 @@
     let accounts = get($wallet.accounts)
     let hasStakedAccounts = $stakedAccounts.length > 0
 
-    let transactionEventData: TransferProgressEventData = null
+    // let transactionEventData: TransferProgressEventData = null
 
     $: $stakedAccounts, async () => await getParticipationOverview()
     $: $accountToParticipate, async () => await getParticipationOverview()
 
-   // TODO: This is an exact copy of a method defined in Wallet.svelte. Need to move it to shared.
-   const handleTransactionEventData = (eventData: TransferProgressEventData): TransactionEventData => {
-        if (!eventData) return {}
+   // // TODO: This is an exact copy of a method defined in Wallet.svelte. Need to move it to shared.
+   // const handleTransactionEventData = (eventData: TransferProgressEventData): TransactionEventData => {
+   //      if (!eventData) return {}
+   //
+   //      const remainderData = eventData as GeneratingRemainderDepositAddressEvent
+   //      if (remainderData?.address) return { remainderAddress: remainderData?.address }
+   //
+   //      const txData = eventData as PreparedTransactionEvent
+   //      if (!(txData?.inputs && txData?.outputs) || txData?.inputs.length <= 0 || txData?.outputs.length <= 0) return {}
+   //
+   //      const numOutputs = txData.outputs.length
+   //      if (numOutputs === 1) {
+   //          return {
+   //              toAddress: txData.outputs[0].address,
+   //              toAmount: txData.outputs[0].amount,
+   //          }
+   //      } else if (numOutputs > 1) {
+   //          return {
+   //              toAddress: txData.outputs[0].address,
+   //              toAmount: txData.outputs[0].amount,
+   //
+   //              remainderAddress: txData.outputs[numOutputs - 1].address,
+   //              remainderAmount: txData.outputs[numOutputs - 1].amount,
+   //          }
+   //      } else {
+   //          return txData
+   //      }
+   //  }
 
-        const remainderData = eventData as GeneratingRemainderDepositAddressEvent
-        if (remainderData?.address) return { remainderAddress: remainderData?.address }
-
-        const txData = eventData as PreparedTransactionEvent
-        if (!(txData?.inputs && txData?.outputs) || txData?.inputs.length <= 0 || txData?.outputs.length <= 0) return {}
-
-        const numOutputs = txData.outputs.length
-        if (numOutputs === 1) {
-            return {
-                toAddress: txData.outputs[0].address,
-                toAmount: txData.outputs[0].amount,
-            }
-        } else if (numOutputs > 1) {
-            return {
-                toAddress: txData.outputs[0].address,
-                toAmount: txData.outputs[0].amount,
-
-                remainderAddress: txData.outputs[numOutputs - 1].address,
-                remainderAmount: txData.outputs[numOutputs - 1].amount,
-            }
-        } else {
-            return txData
-        }
-    }
-
-    const handleTransferState = (state: TransferState): void => {
-        if (!state) return
-
-        const _onCancel = () => {
-            transferState.set(null)
-
-            closePopup(true)
-        }
-
-        const { data, type } = state
-        switch (type) {
-            // If a user presses "Accept" on ledger, this is the next transfer progress item.
-            case TransferProgressEventType.PerformingPoW:
-                // Close the current pop up i.e., the one with ledger transaction details
-                closePopup(true)
-                // Re-open the staking manager pop up
-                openPopup({
-                    type: 'stakingManager',
-                    props: {
-                        accountToAction: $accountToParticipate,
-                        participationAction: $participationAction,
-                        isPerformingAction: true
-                    },
-                })
-                break
-
-            case TransferProgressEventType.SigningTransaction:
-                openPopup({
-                    type: 'ledgerTransaction',
-                    hideClose: true,
-                    props: {
-                        onCancel: _onCancel,
-                        ...handleTransactionEventData(transactionEventData),
-                    },
-                })
-
-                break
-
-            case TransferProgressEventType.PreparedTransaction:
-                transactionEventData = data
-
-                break
-
-            default:
-                break
-        }
-    }
+    // const handleTransferState = (state: TransferState): void => {
+    //     if (!state) return
+    //
+    //     const _onCancel = () => {
+    //         transferState.set(null)
+    //
+    //         closePopup(true)
+    //     }
+    //
+    //     const { data, type } = state
+    //     console.log('TRANSFER STATE: ', type, '\nTRANSFER DATA: ', data)
+    //     switch (type) {
+    //         // If a user presses "Accept" on ledger, this is the next transfer progress item.
+    //         case TransferProgressEventType.PerformingPoW:
+    //             // Close the current pop up i.e., the one with ledger transaction details
+    //             closePopup(true)
+    //             // Re-open the staking manager pop up
+    //             openPopup({
+    //                 type: 'stakingManager',
+    //                 props: {
+    //                     accountToAction: $accountToParticipate,
+    //                     participationAction: $participationAction,
+    //                     isPerformingAction: true
+    //                 },
+    //             }, true)
+    //             break
+    //
+    //         case TransferProgressEventType.SigningTransaction:
+    //             openPopup({
+    //                 type: 'ledgerTransaction',
+    //                 hideClose: true,
+    //                 preventClose: true,
+    //                 props: {
+    //                     ...handleTransactionEventData(transactionEventData),
+    //                     onCancel: _onCancel,
+    //                 },
+    //             }, true)
+    //
+    //             break
+    //
+    //         case TransferProgressEventType.PreparedTransaction:
+    //             transactionEventData = data
+    //
+    //             break
+    //
+    //         default:
+    //             break
+    //     }
+    // }
 
     const resetAccounts = (): void => {
         /**
@@ -186,6 +180,8 @@
                         : 'hasUnstaked'
                 }`)
             })
+
+            resetView()
         }
 
         const hasParticipationPlugin = $networkStatus.nodePlugins.includes(NodePlugin.Participation)
@@ -220,8 +216,6 @@
             default:
                 break
         }
-
-        resetView()
     }
 
     const handleStakeClick = (account: WalletAccount): void => {
@@ -270,16 +264,16 @@
         }
     })
 
-    /** Subscribe to transfer state */
-    const unsubscribeFromTransferState = transferState.subscribe((state) => {
-        if (!$isSoftwareProfile) {
-            handleTransferState(state)
-        }
-    })
-
-    onDestroy(() => {
-        unsubscribeFromTransferState()
-    })
+    // /** Subscribe to transfer state */
+    // const unsubscribeFromTransferState = transferState.subscribe((state) => {
+    //     if (!$isSoftwareProfile) {
+    //         handleTransferState(state)
+    //     }
+    // })
+    //
+    // onDestroy(() => {
+    //     unsubscribeFromTransferState()
+    // })
 </script>
 
 <Text type="h5">

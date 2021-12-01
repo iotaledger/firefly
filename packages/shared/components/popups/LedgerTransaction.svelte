@@ -7,7 +7,6 @@
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { CallbackFn } from 'shared/lib/typings/utils'
 
     export let locale: Locale
 
