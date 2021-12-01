@@ -1151,6 +1151,9 @@
     "warning": {
         "node": {
             "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
+        },
+        "participation": {
+            "noAccounts": "You do not have any accounts available to participate."
         }
     },
     "tooltips": {

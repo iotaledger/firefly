@@ -11,25 +11,30 @@
         stakedAccounts,
         stakedAmount,
         stakingEventState,
-        unstakedAmount,
+        unstakedAmount, canAccountParticipate,
     } from 'shared/lib/participation'
     import { openPopup, popupState } from 'shared/lib/popup'
     import { ParticipationAction, ParticipationEventState } from 'shared/lib/typings/participation'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { tick } from 'svelte'
+    import { get } from 'svelte/store'
+    import { wallet } from '../../../../lib/wallet'
+    import { showAppNotification } from '../../../../lib/notifications'
 
     $: participationOverview, $stakedAccounts, $partiallyStakedAccounts
+    $: showSpinner = !$popupState.active && $participationAction && $accountToParticipate
 
     let canStake
-
     $: canStake = canParticipate($stakingEventState)
+
+    let canStakeAnAccount
+    $: canStakeAnAccount = get($wallet.accounts).filter((wa) => canAccountParticipate(wa)).length > 0
+
     let isStaked
-
     $: isStaked = $stakedAmount > 0
-    let isPartiallyStaked
 
+    let isPartiallyStaked
     $: isPartiallyStaked = $partiallyStakedAccounts.length > 0
-    $: showSpinner = !$popupState.active && $participationAction && $accountToParticipate
 
     let showTooltip = false
     let iconBox
@@ -59,7 +64,16 @@
         showTooltip = !showTooltip
     }
 
-    const handleStakeFundsClick = () => {
+    const handleStakeFundsClick = (): void => {
+        if (!canStakeAnAccount) {
+            showAppNotification({
+                type: 'warning',
+                message: localize('warning.participation.noAccounts'),
+            })
+
+            return
+        }
+
         const isUpcoming = $stakingEventState === ParticipationEventState.Upcoming
         const type = !isStaked && isUpcoming ? 'stakingNotice' : 'stakingManager'
 
