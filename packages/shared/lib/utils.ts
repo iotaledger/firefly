@@ -242,9 +242,11 @@ export const generateRandomInteger = (beginning: number, end: number): number =>
  *
  * @param {Uint8Array | number[]} bytes
  *
- * @returns {string}
+ * @returns {string | undefined}
  */
-export const stringFromUtf8Array = (bytes: Uint8Array | number[]): string => {
+export const stringFromUtf8Array = (bytes: Uint8Array | number[]): string | undefined => {
+    if (!bytes || bytes.length <= 0) return undefined
+
     const extraByteMap = [1, 1, 1, 1, 2, 2, 3, 0]
     const charCount = bytes.length
 
