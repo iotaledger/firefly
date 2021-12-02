@@ -1,7 +1,5 @@
 import { Electron } from 'shared/lib/electron'
-import { CapacitorDeepLinkManager } from './deepLinking/deepLinkManager'
-import { CapacitorNotificationManager } from './notificationManager'
-import { CapacitorPincodeManager } from './pincodeManager'
+import { CapacitorApi } from '../../mobile/capacitor/capacitorApi'
 import { IPlatform, Platforms } from './typings/platform'
 
 const PLATFORM = process.env.PLATFORM
@@ -12,7 +10,7 @@ export const Platform: IPlatform = {
             case Platforms.DESKTOP:
                 return Electron.updateActiveProfile(id)
             case Platforms.MOBILE:
-                return
+                return CapacitorApi.updateActiveProfile(id)
             default:
                 return
         }
@@ -23,7 +21,7 @@ export const Platform: IPlatform = {
             case Platforms.DESKTOP:
                 return Electron.removeProfileFolder(profilePath)
             case Platforms.MOBILE:
-                return
+                return CapacitorApi.removeProfileFolder(profilePath)
             default:
                 return
         }
@@ -34,7 +32,7 @@ export const Platform: IPlatform = {
             case Platforms.DESKTOP:
                 return Electron.listProfileFolders(profileStoragePath)
             case Platforms.MOBILE:
-                return
+                return CapacitorApi.listProfileFolders(profileStoragePath)
             default:
                 return
         }
@@ -44,21 +42,21 @@ export const Platform: IPlatform = {
         PLATFORM == Platforms.DESKTOP
             ? Electron.PincodeManager
             : PLATFORM == Platforms.MOBILE
-            ? CapacitorPincodeManager
+            ? CapacitorApi.PincodeManager
             : undefined,
 
     DeepLinkManager:
         PLATFORM == Platforms.DESKTOP
             ? Electron.DeepLinkManager
             : PLATFORM == Platforms.MOBILE
-            ? CapacitorDeepLinkManager
+            ? CapacitorApi.DeepLinkManager
             : undefined,
 
     NotificationManager:
         PLATFORM == Platforms.DESKTOP
             ? Electron.NotificationManager
             : PLATFORM == Platforms.MOBILE
-            ? CapacitorNotificationManager
+            ? CapacitorApi.NotificationManager
             : undefined,
 
     getStrongholdBackupDestination: (defaultPath) => {
@@ -66,7 +64,7 @@ export const Platform: IPlatform = {
             case Platforms.DESKTOP:
                 return Electron.getStrongholdBackupDestination(defaultPath)
             case Platforms.MOBILE:
-                return
+                return CapacitorApi.getStrongholdBackupDestination(defaultPath)
             default:
                 return
         }
@@ -87,7 +85,7 @@ export const Platform: IPlatform = {
             case Platforms.DESKTOP:
                 return Electron.exportMigrationLog(sourcePath, defaultFileName)
             case Platforms.MOBILE:
-                return
+                return CapacitorApi.exportMigrationLog(sourcePath, defaultFileName)
             default:
                 return
         }
@@ -108,7 +106,7 @@ export const Platform: IPlatform = {
             case Platforms.DESKTOP:
                 return Electron.exportLedgerMigrationLog(content, defaultFileName)
             case Platforms.MOBILE:
-                return
+                return CapacitorApi.exportLedgerMigrationLog(content, defaultFileName)
             default:
                 return
         }
@@ -129,7 +127,7 @@ export const Platform: IPlatform = {
             case Platforms.DESKTOP:
                 return Electron.importLegacySeed(buffer, password)
             case Platforms.MOBILE:
-                return
+                return CapacitorApi.importLegacySeed(buffer, password)
             default:
                 return
         }
@@ -149,7 +147,7 @@ export const Platform: IPlatform = {
             case Platforms.DESKTOP:
                 return Electron.validateSeedVault(buffer)
             case Platforms.MOBILE:
-                return
+                return CapacitorApi.validateSeedVault(buffer)
             default:
                 return
         }
@@ -167,7 +165,7 @@ export const Platform: IPlatform = {
             case Platforms.DESKTOP:
                 return Electron.getUserDataPath()
             case Platforms.MOBILE:
-                return
+                return CapacitorApi.getUserDataPath()
             default:
                 return
         }
@@ -185,7 +183,7 @@ export const Platform: IPlatform = {
             case Platforms.DESKTOP:
                 return Electron.getDiagnostics()
             case Platforms.MOBILE:
-                return
+                return CapacitorApi.getDiagnostics()
             default:
                 return
         }
@@ -203,7 +201,7 @@ export const Platform: IPlatform = {
             case Platforms.DESKTOP:
                 return Electron.getOS()
             case Platforms.MOBILE:
-                return
+                return CapacitorApi.getOS()
             default:
                 return
         }
@@ -221,7 +219,7 @@ export const Platform: IPlatform = {
             case Platforms.DESKTOP:
                 return Electron.updateDownload()
             case Platforms.MOBILE:
-                return
+                return CapacitorApi.updateDownload()
             default:
                 return
         }
@@ -239,7 +237,7 @@ export const Platform: IPlatform = {
             case Platforms.DESKTOP:
                 return Electron.updateCancel()
             case Platforms.MOBILE:
-                return
+                return CapacitorApi.updateCancel()
             default:
                 return
         }
@@ -257,7 +255,7 @@ export const Platform: IPlatform = {
             case Platforms.DESKTOP:
                 return Electron.updateInstall()
             case Platforms.MOBILE:
-                return
+                return CapacitorApi.updateInstall()
             default:
                 return
         }
@@ -275,7 +273,7 @@ export const Platform: IPlatform = {
             case Platforms.DESKTOP:
                 return Electron.updateCheck()
             case Platforms.MOBILE:
-                return
+                return CapacitorApi.updateCheck()
             default:
                 return
         }
@@ -293,7 +291,7 @@ export const Platform: IPlatform = {
             case Platforms.DESKTOP:
                 return Electron.getVersionDetails()
             case Platforms.MOBILE:
-                return
+                return CapacitorApi.getVersionDetails()
             default:
                 return
         }
@@ -310,7 +308,7 @@ export const Platform: IPlatform = {
             case Platforms.DESKTOP:
                 return Electron.updateMenu(attribute, value)
             case Platforms.MOBILE:
-                return
+                return CapacitorApi.updateMenu(attribute, value)
             default:
                 return
         }
@@ -325,7 +323,7 @@ export const Platform: IPlatform = {
             case Platforms.DESKTOP:
                 return Electron.popupMenu()
             case Platforms.MOBILE:
-                return
+                return CapacitorApi.popupMenu()
             default:
                 return
         }
@@ -340,7 +338,7 @@ export const Platform: IPlatform = {
             case Platforms.DESKTOP:
                 return Electron.minimize()
             case Platforms.MOBILE:
-                return
+                return CapacitorApi.minimize()
             default:
                 return
         }
@@ -355,7 +353,7 @@ export const Platform: IPlatform = {
             case Platforms.DESKTOP:
                 return Electron.maximize()
             case Platforms.MOBILE:
-                return
+                return CapacitorApi.maximize()
             default:
                 return
         }
@@ -370,7 +368,7 @@ export const Platform: IPlatform = {
             case Platforms.DESKTOP:
                 return Electron.isMaximized()
             case Platforms.MOBILE:
-                return
+                return CapacitorApi.isMaximized()
             default:
                 return
         }
@@ -385,7 +383,7 @@ export const Platform: IPlatform = {
             case Platforms.DESKTOP:
                 return Electron.close()
             case Platforms.MOBILE:
-                return
+                return CapacitorApi.close()
             default:
                 return
         }
@@ -401,7 +399,7 @@ export const Platform: IPlatform = {
             case Platforms.DESKTOP:
                 return Electron.openUrl(url)
             case Platforms.MOBILE:
-                return
+                return CapacitorApi.openUrl(url)
             default:
                 return
         }
@@ -417,7 +415,7 @@ export const Platform: IPlatform = {
             case Platforms.DESKTOP:
                 return Electron.unhandledException(errorType, error)
             case Platforms.MOBILE:
-                return
+                return CapacitorApi.unhandledException(errorType, error)
             default:
                 return
         }
@@ -434,7 +432,7 @@ export const Platform: IPlatform = {
             case Platforms.DESKTOP:
                 return Electron.onEvent(event, callback)
             case Platforms.MOBILE:
-                return
+                return CapacitorApi.onEvent(event, callback)
             default:
                 return
         }
@@ -451,7 +449,7 @@ export const Platform: IPlatform = {
             case Platforms.DESKTOP:
                 return Electron.removeListenersForEvent(event)
             case Platforms.MOBILE:
-                return
+                return CapacitorApi.removeListenersForEvent(event)
             default:
                 return
         }
@@ -466,7 +464,7 @@ export const Platform: IPlatform = {
             case Platforms.DESKTOP:
                 return Electron.saveRecoveryKit(recoverKitData)
             case Platforms.MOBILE:
-                return
+                return CapacitorApi.saveRecoveryKit(recoverKitData)
             default:
                 return
         }
@@ -481,7 +479,7 @@ export const Platform: IPlatform = {
             case Platforms.DESKTOP:
                 return Electron.hookErrorLogger(logger)
             case Platforms.MOBILE:
-                return
+                return CapacitorApi.hookErrorLogger(logger)
             default:
                 return
         }
