@@ -73,7 +73,6 @@ import type {
     WalletAccount,
     WalletState,
 } from './typings/wallet'
-import { setAccountTheme } from 'shared/lib/accountsTheme'
 
 export enum AccountColors {
     Default = 'turquoise',
@@ -110,17 +109,6 @@ export const DUST_THRESHOLD: number = 1_000_000
 export const STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS = 0
 
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
-
-export interface WalletAccount extends Account {
-    depositAddress: string;
-    rawIotaBalance: number;
-    balance: string;
-    balanceEquiv: string;
-}
-
-export interface AccountMessage extends Message {
-    account: number;
-}
 
 interface ActorState {
     [id: string]: Actor
@@ -706,7 +694,6 @@ export const asyncCreateAccount = (alias?: string): Promise<WalletAccount> =>
                         depositAddress: response.payload.addresses[0].address,
                     }) as WalletAccount
                     get(wallet)?.accounts.update((_accounts) => [..._accounts, preparedAccount])
-                    setAccountTheme(preparedAccount.id)
 
                     resolve(preparedAccount)
                 },

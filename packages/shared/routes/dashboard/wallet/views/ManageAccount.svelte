@@ -59,9 +59,8 @@
                                     }
                                 )
                             }
-
-                        return account
-                    }))
+                        })
+                    })
 
                     isBusy = false
                     selectedAccountId.set(null)

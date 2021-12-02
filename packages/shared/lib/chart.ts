@@ -1,7 +1,7 @@
 import { Unit } from '@iota/unit-converter'
 import { convertToFiat, currencies, exchangeRates } from 'shared/lib/currency'
 import { localize } from 'shared/lib/i18n'
-import { activeProfile, updateProfile, getColor } from 'shared/lib/profile'
+import { activeProfile, updateProfile } from 'shared/lib/profile'
 import { formatUnitPrecision } from 'shared/lib/units'
 import { isSelfTransaction, wallet, AccountColors } from 'shared/lib/wallet'
 import { formatDate } from 'shared/lib/i18n'
