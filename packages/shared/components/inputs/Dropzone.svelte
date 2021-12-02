@@ -1,18 +1,19 @@
 <script lang="typescript">
     import { Text, Button } from 'shared/components'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale = undefined
-    export let onFile = (event?) => {}
+    export let locale: Locale = undefined
+    export let onDrop = (event?: Event): void => {}
     export let extentionsLabel = ''
     export let allowedExtensions
     export let dropping
     export let fileName
 
-    const onEnter = () => {
+    const onEnter = (): void => {
         dropping = true
     }
 
-    const onLeave = () => {
+    const onLeave = (): void => {
         dropping = false
     }
 </script>
@@ -33,7 +34,7 @@
 
 <dropzone
     class="flex items-center justify-center p-7 w-full rounded-lg border border-solid bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-700"
-    on:drop={onFile}
+    on:drop={onDrop}
     on:dragenter={onEnter}
     on:dragleave={onLeave}
     on:dragover|preventDefault>
@@ -61,11 +62,11 @@
             <input
                 class="absolute opacity-0 w-full h-full"
                 type="file"
-                on:change={onFile}
+                on:change={onDrop}
                 accept={allowedExtensions ? allowedExtensions.map((e) => `.${e}`).join(',') : '*'} />
             <Text type="h4">{locale('actions.dragDrop')}</Text>
             <Text classes="mb-12" type="p" secondary smaller>{extentionsLabel}</Text>
-            <Button secondary onClick={onFile}>{locale('actions.chooseFile')}</Button>
+            <Button secondary onClick={onDrop}>{locale('actions.chooseFile')}</Button>
         {/if}
     </content>
 </dropzone>

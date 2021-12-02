@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { BundleMiningLayout, Button, Icon, ProgressBar, Text } from 'shared/components'
-    import { openUrl } from 'shared/lib/device'
+    import { Platform } from 'shared/lib/platform'
     import {
         createMigrationBundle,
         getInputIndexesForBundle,
@@ -11,8 +11,9 @@
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
+    import type { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
     const dispatch = createEventDispatcher()
 
@@ -20,7 +21,7 @@
     let progressBarMessage = `${progressBarPercent} % completed`
     let timeElapsed = 0
 
-    let legacyLedger = $walletSetupType === SetupType.TrinityLedger
+    const legacyLedger = $walletSetupType === SetupType.TrinityLedger
 
     let timeout
     let interval
@@ -64,7 +65,7 @@
                             })
                     }
                     return createMigrationBundle(getInputIndexesForBundle(bundle), bundle.miningRuns * 10 ** 8, true)
-                        .then((result) => {
+                        .then((data) => {
                             _updateOnSuccess()
                         })
                         .catch((error) => {
@@ -84,7 +85,7 @@
     }
 
     function updateProgress() {
-        progressBarPercent = Math.floor((timeElapsed / (MINING_TIMEOUT_SECONDS * $selectedBundlesToMine.length)) * 100)
+        progressBarPercent = Math.floor(timeElapsed / (MINING_TIMEOUT_SECONDS * $selectedBundlesToMine.length) * 100)
         progressBarMessage = progressBarPercent.toString() + '% completed'
     }
 
@@ -116,7 +117,7 @@
         </Text>
         <Text type="p" secondary classes="mb-8 text-center">{locale('views.securingSpentAddresses.body2')}</Text>
         <div class="flex flex-col flex-grow items-center">
-            <Button secondary classes="w-56" onClick={() => openUrl('https://firefly.iota.org/faq#spent-addresses')}>
+            <Button secondary classes="w-56" onClick={() => Platform.openUrl('https://firefly.iota.org/faq#spent-addresses')}>
                 {locale('views.bundleMiningWarning.learn')}
             </Button>
         </div>

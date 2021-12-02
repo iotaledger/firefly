@@ -1,18 +1,21 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
     import { getInitials as _getInitials } from 'shared/lib/helpers'
+    import { Locale } from 'shared/lib/typings/i18n'
+
+    export let locale: Locale
 
     export let classes = undefined
-    export let locale
 
     export let name = ''
     export let id = ''
     export let isDeveloper = false
     export let isLedgerProfile = false
-    export let onClick = () => ''
     export let bgColor
 
-    let slots = $$props.$$slots
+    export let onClick = (): void | string => ''
+
+    const slots = $$props.$$slots
 
     function getInitials() {
         const initials = _getInitials(name)
@@ -43,7 +46,7 @@
             <Text type="h5" classes="text-center">{name}</Text>
         </div>
         {#if isDeveloper}
-            <div class="bg-gray-500 dark:bg-gray-700 dark:bg-opacity-20 rounded-full px-2 py-1 mt-4">
+            <div class="bg-gray-500 dark:bg-gray-700 dark:bg-opacity-20 rounded-full px-2 py-1 mt-3">
                 <Text type="p" smaller classes="text-white">{locale('general.dev').toUpperCase()}</Text>
             </div>
         {/if}

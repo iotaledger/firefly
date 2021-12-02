@@ -3,71 +3,10 @@
     import { mobile } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { locales, setLanguage, _ } from 'shared/lib/i18n'
-    import { createEventDispatcher, onMount, onDestroy } from 'svelte'
+    import { createEventDispatcher } from 'svelte'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    const actorId = 'testActor'
-    let walletListener
-
-    onMount(async () => {
-        if (Capacitor) {
-            const { WalletPlugin } = Capacitor.Plugins
-            
-            // Subscribe to wallet response events
-            walletListener = WalletPlugin.addListener(
-                'walletEvent', 
-                response => alert(JSON.stringify(response))
-            )
-            
-            //await WalletPlugin.destroy({ actorId })
-            WalletPlugin.initialize({ actorId })
-            
-            await WalletPlugin.listen({
-                actorId,
-                id: '',
-                event: 'ErrorThrown'
-            })
-            
-            await WalletPlugin.sendMessage({
-                message: {
-                    actorId,
-                    id: '987123',
-                    cmd: 'SetStrongholdPassword',
-                    payload: 'testpass'
-                }
-            })
-            // await WalletPlugin.sendMessage({
-            //     message: {
-            //         actorId,
-            //         id: '121112',
-            //         cmd: 'GenerateMnemonic'
-            //     }
-            // })
-            let mnemonic = 'flag once dwarf put month scene mouse summer dirt expect comic fiction dinner verb vehicle melody burger cargo little coral kite spoon brown reward'
-            await WalletPlugin.sendMessage({
-                message: {
-                    actorId,
-                    id: '121112',
-                    cmd: 'StoreMnemonic',
-                    payload: {
-                        mnemonic,
-                        signerType: {
-                            type: 'Stronghold'
-                        }
-                    }
-                }
-            })
-        }
-    })
-
-    onDestroy(() => {
-        if (Capacitor) {
-            Capacitor.Plugins.WalletPlugin.destroy({ actorId })
-            walletListener.remove()
-        }
-    })
-
-
-    export let locale
+    export let locale: Locale
 
     const dispatch = createEventDispatcher()
 

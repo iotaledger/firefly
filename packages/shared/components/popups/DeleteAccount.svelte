@@ -3,10 +3,13 @@
     import { closePopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
     import { api, selectedAccountId } from 'shared/lib/wallet'
+    import { AccountIdentifier } from 'shared/lib/typings/account'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     export let account
-    export let deleteAccount = (selectedAccountId) => {}
+    export let deleteAccount = (selectedAccountId: AccountIdentifier): void => {}
     export let hasMultipleAccounts
 
     let password
@@ -44,9 +47,9 @@
 </script>
 
 <div class="mb-5">
-    <Text type="h4">
-        {locale(`popups.deleteAccount.${hasMultipleAccounts ? 'title' : 'errorTitle'}`, { values: { name: $account?.alias } })}
-    </Text>
+   <Text type="h4">
+       {locale(`popups.deleteAccount.${hasMultipleAccounts ? 'title' : 'errorTitle'}`, { values: { name: $account?.alias } })}
+   </Text>
 </div>
 <div class="flex w-full flex-row flex-wrap">
     {#if hasMultipleAccounts}
@@ -67,17 +70,19 @@
     {:else}
         <Text type="p" secondary classes="mb-5">{locale('popups.deleteAccount.errorBody1')}</Text>
     {/if}
-    <div class={`flex flex-row w-full space-x-4 px-8 justify-center`}>
+    <div class={'flex flex-row w-full space-x-4 px-8 justify-center'}>
         <Button secondary classes="w-1/2" onClick={() => handleCancelClick()} disabled={isBusy}>
-            {locale('actions.cancel')}
+            {locale(hasMultipleAccounts ? 'actions.cancel' : 'actions.close')}
         </Button>
-        <Button
-            warning
-            classes="w-1/2"
-            onClick={() => handleDeleteClick()}
-            type="submit"
-            disabled={(!password && $isSoftwareProfile) || isBusy}>
-            {locale('actions.deleteAccount')}
-        </Button>
+        {#if hasMultipleAccounts}
+            <Button
+                warning
+                classes="w-1/2"
+                onClick={() => handleDeleteClick()}
+                type="submit"
+                disabled={(!password && $isSoftwareProfile) || isBusy}>
+                {locale('actions.deleteAccount')}
+            </Button>
+        {/if}
     </div>
 </div>

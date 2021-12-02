@@ -18,10 +18,10 @@
             "profileName": "שם הפרופיל",
             "body1": "ניתן ליצור פרופילים מרובים כדי לארגן את הארנקים שלך ולשפר פרטיות.",
             "body2": {
-                "first": "For now, let's start with your first profile name.",
-                "nonFirst": "For now, let's start with your profile name."
+                "first": "בתור התחלה, נא ציין את השם הפרטי לפרופיל שלך.",
+                "nonFirst": "כעת, נא ציין את שם הפרופיל שלך."
             },
-            "addMore": "You can add more profiles later."
+            "addMore": "תוכל להוסיף פרופילים נוספים בהמשך."
         },
         "setup": {
             "title": "הגדר ארנק",
@@ -35,30 +35,30 @@
             "body2": "אם תמלא את פרטי ערכת השחזור ותשמור אותם בבטחה, תוכל תמיד לשחזר את הארנקים שלך."
         },
         "create": {
-            "title": "Create a wallet",
-            "body": "Create a new wallet. You can choose a regular software wallet or if you have a Ledger device you can set up a hardware wallet.",
+            "title": "צור ארנק",
+            "body": "צור ארנק חדש. תוכל לבחור בארנקים תוכנתיים או אם ברשותך מכשיר Ledger תוכל להתקין ארנק חומרתי.",
             "softwareAccount": {
-                "title": "I want a software wallet",
-                "description": "Create a 24-word Recovery Phrase"
+                "title": "אני מעדיף ארנק תוכנתי",
+                "description": "צור מפתח שחזור בן 24 מילים"
             },
             "ledgerAccount": {
-                "title": "I want a hardware wallet",
-                "description": "Ledger Nano S or Nano X required"
+                "title": "אני מעדיף ארנק חומרתי",
+                "description": "דרוש Ledger Nano s או Ledger Nano X"
             }
         },
         "setupLedger": {
-            "progress1": "Connect your Ledger",
-            "progress2": "Generate address",
-            "progress3": "Switch Ledger app",
-            "progress4": "Transfer funds",
-            "watchVideo": "Watch video guide",
-            "videoGuide": "Ledger migration video guide"
+            "progress1": "חבר את הLedger שברשותך",
+            "progress2": "צור כתובת",
+            "progress3": "החלף אפליקציית Ledger",
+            "progress4": "העבר כסף",
+            "watchVideo": "צפה בסרטון הדרכה",
+            "videoGuide": "וידאו הדרכה למיגרציית Ledger"
         },
         "ledgerInstallationGuide": {
-            "title": "Have you installed the necessary Ledger apps?",
-            "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
-            "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
-            "action": "Yes, I've installed these apps"
+            "title": "האם התקנת את אפליקציות הLedger הדרושות?",
+            "body1": "לפני שתמשיך, תגרש להתקין את אפליקציית {legacy} ואת האפליקציה החדשה של IOTA באמצעות Ledger Live.",
+            "body2": "ודא כי קושחת הLedger מעודכנת. כל אפליקציה שהותקנה צריכה להיות מעודכנת בגירסתה.",
+            "action": "כן, התקנתי את האפליקציות האלו"
         },
         "password": {
             "title": "צור סיסמא חדשה",
@@ -117,9 +117,9 @@
             "title": "הגדרת הארנק הושלמה",
             "fundsMigrated": "הגירת הכספים בוצעה",
             "body": "הארנק שלך מוכן לשימוש.",
-            "softwareMigratedBody": "You have successfully migrated your funds to the new network",
-            "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
+            "softwareMigratedBody": "הצלחת להעביר את כספך לרשת החדשה",
+            "fireflyLedgerBody": "משתמש הLedger שלך שוחזר בהצלחה, תוכל להמשיך כעת.",
+            "trinityLedgerBody": "הצלחת להעביר את הLedger ברשותך לרשת החדשה.",
             "exportMigration": "יצא דוח הגירה וסיים את התהליך"
         },
         "import": {
@@ -131,8 +131,8 @@
             "importMnemonicDescription": "הזן את ביטוי השחזור שלך כדי לשחזר את הארנקים שלך",
             "importFile": "יש לי קובץ גיבוי",
             "importFileDescription": "תעלה קובץ Seedvault או Stronghold",
-            "importLedger": "I have a Ledger backup",
-            "importLedgerDescription": "Restore or migrate a Ledger profile"
+            "importLedger": "יש ברשותי גיבוי של Ledger",
+            "importLedgerDescription": "שחזר או העבר פרופיל של Ledger"
         },
         "importFromText": {
             "seed": {
@@ -154,24 +154,24 @@
             "body": "יבא קובץ גיבוי כדי לשחזר את הארנקים שלך. גיבויים יכולים להיות קבצי (stronghold.) או (kdbx.)."
         },
         "importFromLedger": {
-            "title": "Restore or Migrate your Ledger",
-            "body": "Restore an existing Firefly Ledger profile, or migrate your funds from Trinity.",
-            "haveFireflyLedger": "I have a Firefly Ledger backup",
-            "haveFireflyLedgerDescription": "Restore a Firefly profile",
-            "haveTrinityLedger": "I have a Trinity Ledger backup",
-            "haveTrinityLedgerDescription": "Migrate a Trinity profile"
+            "title": "שחזר או העבר את פרופיל הLedger שלך",
+            "body": "שחזר חשבון Firefly Ledger קיים, או העבר כסף מTrinty.",
+            "haveFireflyLedger": "יש ברשותי גיבוי של Firefly Ledger",
+            "haveFireflyLedgerDescription": "שחזר חשבון Firefly",
+            "haveTrinityLedger": "יש ברשותי גיבוי של Trinity Ledger",
+            "haveTrinityLedgerDescription": "העבר חשבון Trinity"
         },
         "connectLedger": {
-            "title": "Connect your Ledger to Firefly",
-            "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed.",
-            "trafficLight1": "Connect and unlock your Ledger with your PIN",
-            "trafficLight2": "Open the new IOTA app on your Ledger",
-            "tips": "Tips if your Ledger isn’t connecting"
+            "title": "חבר את הLedger ברשותך לFirefly",
+            "body": "על מנת שFirefly ימצא את מכשיר הLedger שברשותך, ודא כי אפליקציית הLedger Live סגורה.",
+            "trafficLight1": "התחבר ופתח את הLedger שברשותך בעזרת קוד",
+            "trafficLight2": "פתח את האפליקציה החדשה של IOTA בLedger שברשותך",
+            "tips": "טיפים במידה והLedger שברשותך לא מחובר"
         },
         "restoreFromFireflyLedger": {
-            "title": "Restore Your Ledger Profile",
-            "body": "Press restore to complete the setup process and restore your wallets, balances and transaction history.",
-            "restoring": "Restoring from Ledger..."
+            "title": "שחזר את חשבון הLedger שלך",
+            "body": "לחץ שחזר כדי להשלים את תהליך ההתקנה ושחזר את הארנקים שלך, היתרות והטרנזאקציות שלך.",
+            "restoring": "משחזר מLedger..."
         },
         "legacyLedgerIntro": {
             "title": "Start your Ledger migration using Firefly",
@@ -600,7 +600,7 @@
             }
         },
         "ledgerConnectionGuide": {
-            "title": "Tips if your Ledger isn’t connecting",
+            "title": "טיפים במידה והLedger שברשותך לא מחובר",
             "steps": {
                 "0": "Make sure Ledger Live is not open on your computer",
                 "1": "Ensure you have unlocked your Ledger device with your PIN",
@@ -635,6 +635,7 @@
         "outgoingMi": "Outgoing {value}",
         "portoflio": "Portfolio",
         "token": "Token",
+        "holdings": "Holdings",
         "accountValue": "Wallet Value",
         "accountActivity": "Wallet Activity",
         "timeframe1Hour": "שעה",
@@ -736,7 +737,7 @@
         "searchAgain": "Search again",
         "searching": "Searching...",
         "closeFirefly": "Close Firefly",
-        "generateAddress": "Generate address",
+        "generateAddress": "צור כתובת",
         "migrateAgain": "Migrate another index"
     },
     "general": {
@@ -859,7 +860,8 @@
         "sending": "Sending",
         "legacyNetwork": "Legacy Network",
         "capsLock": "Caps Lock is on",
-        "version": "Version {version}"
+        "version": "Version {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "Today",
@@ -943,6 +945,7 @@
         },
         "node": {
             "invalid": "אנא הזן כתובת אינטרנט חוקית.",
+            "dns": "Could not resolve DNS for node.",
             "https": "HTTPS is required. Set up a developer profile to use unsecured HTTP connections.",
             "duplicate": "This node has already been added.",
             "unsynced": "The node is not in sync.",
@@ -979,6 +982,9 @@
         },
         "migration": {
             "missingBundle": "An error occurred while trying to find the transaction bundle."
+        },
+        "crypto": {
+            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
         }
     },
     "tooltips": {

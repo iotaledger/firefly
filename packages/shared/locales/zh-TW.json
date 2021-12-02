@@ -635,6 +635,7 @@
         "outgoingMi": "支出 {value}",
         "portoflio": "總資產",
         "token": "代幣",
+        "holdings": "Holdings",
         "accountValue": "錢包總值",
         "accountActivity": "錢包活動",
         "timeframe1Hour": "一小時",
@@ -859,7 +860,8 @@
         "sending": "轉帳中",
         "legacyNetwork": "舊版網絡",
         "capsLock": "大寫鎖定已啟用",
-        "version": "版本 {version}"
+        "version": "版本 {version}",
+        "unknown": "Unknown"
     },
     "dates": {
         "today": "今天",
@@ -943,6 +945,7 @@
         },
         "node": {
             "invalid": "請輸入有效的 URL。",
+            "dns": "Could not resolve DNS for node.",
             "https": "需要HTTPS。先建立開發人員檔案才能使用不安全的HTTP連接。",
             "duplicate": "該節點已被添加。",
             "unsynced": "此節點尚未同步。",
@@ -979,6 +982,9 @@
         },
         "migration": {
             "missingBundle": "試圖尋找交易組時發生錯誤"
+        },
+        "crypto": {
+            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
         }
     },
     "tooltips": {

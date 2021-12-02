@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { Animation, Button, Icon, Link, OnboardingLayout, Spinner, Text } from 'shared/components'
     import {
         getLedgerDeviceStatus,
@@ -8,24 +8,25 @@
         pollLedgerDeviceStatus,
         stopPollingLedgerStatus,
     } from 'shared/lib/ledger'
-    import { getOfficialNetwork, getOfficialNodes } from 'shared/lib/network'
+    import { getDefaultClientOptions } from 'shared/lib/network'
     import { openPopup } from 'shared/lib/popup'
     import { walletSetupType } from 'shared/lib/router'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { SetupType } from 'shared/lib/typings/routes'
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
     let polling = false
 
-    let legacyLedger = $walletSetupType === SetupType.TrinityLedger
+    const legacyLedger = $walletSetupType === SetupType.TrinityLedger
 
-    let newLedgerProfile = $walletSetupType === SetupType.New
+    const newLedgerProfile = $walletSetupType === SetupType.New
     let creatingAccount = false
 
-    let LEDGER_STATUS_POLL_INTERVAL = 1500
+    const LEDGER_STATUS_POLL_INTERVAL = 1500
 
     let isConnected = false
     let isAppOpen = false
@@ -36,8 +37,8 @@
     $: animation = !isConnected
         ? 'ledger-disconnected-desktop'
         : isAppOpen
-        ? 'ledger-connected-desktop'
-        : 'ledger-app-closed-desktop'
+            ? 'ledger-connected-desktop'
+            : 'ledger-app-closed-desktop'
 
     const dispatch = createEventDispatcher()
 
@@ -51,15 +52,9 @@
     function createAccount() {
         creatingAccount = true
 
-        const officialNodes = getOfficialNodes()
-        const officialNetwork = getOfficialNetwork()
         api.createAccount(
             {
-                clientOptions: {
-                    nodes: officialNodes,
-                    node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
-                    network: officialNetwork,
-                },
+                clientOptions: getDefaultClientOptions(),
                 alias: `${locale('general.account')} 1`,
                 signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
             },
@@ -136,7 +131,7 @@
         </Link>
         <Button
             classes="w-full"
-            disabled={(polling && (!isConnected || !isAppOpen)) || creatingAccount}
+            disabled={polling && (!isConnected || !isAppOpen) || creatingAccount}
             onClick={handleContinueClick}>
             {#if creatingAccount}
                 <Spinner busy message={locale('general.creatingAccount')} classes="justify-center" />

@@ -3,15 +3,17 @@
     import { debounce } from 'shared/lib/utils'
     import { asyncGetLegacySeedChecksum, asyncVerifyMnemonic } from 'shared/lib/wallet'
     import { english } from 'shared/lib/wordlists/english'
+    import { Locale } from 'shared/lib/typings/i18n'
 
     enum Type {
         Seed = 'seed',
         Mnemonic = 'mnemonic',
     }
 
+    export let locale: Locale
+
     export let value = undefined
     export let type: Type = Type.Seed
-    export let locale
 
     export let disabled = false
 
@@ -60,6 +62,7 @@
         }
     }
 
+    /* eslint-disable @typescript-eslint/no-misused-promises */
     const handleKeyDown = async () => {
         value = ''
         statusMessage = ''
@@ -71,7 +74,7 @@
             .replace(/\n/g, '')
             .replace(/  +/g, ' ')
 
-        let trimmedContent = content.trim()
+        const trimmedContent = content.trim()
 
         if (trimmedContent.length >= 3) {
             const words = trimmedContent.split(' ')

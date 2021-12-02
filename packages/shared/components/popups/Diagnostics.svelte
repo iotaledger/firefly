@@ -2,18 +2,19 @@
     import { Button, Text } from 'shared/components'
     import { appSettings } from 'shared/lib/appSettings'
     import { versionDetails } from 'shared/lib/appUpdater'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform'
     import { activeProfile } from 'shared/lib/profile'
     import { setClipboard } from 'shared/lib/utils'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
     let contentApp = ''
     let contentSystem = ''
 
     const combineValues = (values) => values.map((c) => (c.label ? `${locale(c.label)}: ${c.value}` : c.value)).join('\r\n')
 
-    let appVars = [
+    const appVars = [
         {
             label: '',
             value: locale('views.dashboard.security.version.title', { values: { version: $versionDetails.currentVersion } }),
@@ -30,14 +31,16 @@
             value: $activeProfile.settings.currency,
         })
         appVars.push({
-            label: 'views.settings.nodeSettings.title',
-            value: locale(`general.${$activeProfile.settings.automaticNodeSelection ? 'automaticNodeSelection' : 'manualNodeSelection'}`),
+            label: 'views.settings.networkConfiguration.nodeConfiguration.title',
+            value: locale(`views.settings.networkConfiguration.nodeConfiguration.${
+                $activeProfile.settings.networkConfig.automaticNodeSelection ? 'automatic' : 'manual'
+            }`),
         })
     }
 
     contentApp = combineValues(appVars)
 
-    Electron.getDiagnostics().then((values) => (contentSystem = combineValues(values)))
+    void Platform.getDiagnostics().then((values) => (contentSystem = combineValues(values)))
 
     const handleCopyClick = () => {
         setClipboard(contentApp + '\r\n' + contentSystem)

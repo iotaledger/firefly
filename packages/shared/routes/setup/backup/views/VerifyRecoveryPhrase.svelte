@@ -1,14 +1,15 @@
 <script lang="typescript">
     import { Button, Icon, OnboardingLayout, RecoveryPhrase, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
+    import type { Locale } from 'shared/lib/typings/i18n'
     import { english } from 'shared/lib/wordlists/english'
     import { createEventDispatcher, onMount } from 'svelte'
 
-    export let locale
+    export let locale: Locale
     export let mnemonic
     export let busy = false
 
-    let verifyRecoveryPhrase = []
+    const verifyRecoveryPhrase = []
     let wordChoices = ['', '', '']
     let verifyIndex = 0
     let verified = false
@@ -36,8 +37,10 @@
     }
 
     const handleChoice = (word) => {
-        let wordElement = document.getElementById(`recovery-word-${verifyIndex}`)
-        wordElement?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        if ($mobile) {
+            let wordElement = document.getElementById(`recovery-word-${verifyIndex}`)
+            wordElement?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        }
         verifyRecoveryPhrase[verifyIndex] = word
         if (mnemonic[verifyIndex] === word) {
             if (verifyIndex === mnemonic.length - 1) {
@@ -94,7 +97,9 @@
     </div>
     <div slot="leftpane__action">
         {#if verified}
-            <Button classes="w-full" onClick={() => handleContinue()} disabled={busy}>{locale('actions.continue')}</Button>
+            <Button classes="w-full" onClick={() => handleContinue()} disabled={busy}>
+                {locale('actions.continue')}
+            </Button>
         {:else if $mobile && !verified}
             <Text type="p" classes="mb-4">{locale('views.verifyRecoveryPhrase.word')} #{verifyIndex + 1}</Text>
             {#each wordChoices as word}

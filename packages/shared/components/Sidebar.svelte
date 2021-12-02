@@ -2,27 +2,22 @@
     import { Drawer, Icon, Logo, NetworkIndicator, ProfileActionsModal, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { getInitials } from 'shared/lib/helpers'
-    import { networkStatus } from 'shared/lib/networkStatus'
+    import { NETWORK_HEALTH_COLORS, networkStatus } from 'shared/lib/networkStatus'
     import { activeProfile } from 'shared/lib/profile'
     import { dashboardRoute, resetWalletRoute, settingsRoute } from 'shared/lib/router'
     import { SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
     import { Settings } from 'shared/routes'
     import { onDestroy } from 'svelte'
     import { get } from 'svelte/store'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
     let showNetwork = false
     let healthStatus = 2
     let showProfile = false
-    let profileColor = 'blue' // TODO: each profile has a different color
     let drawer: Drawer
-
-    const NETWORK_HEALTH_COLORS = {
-        0: 'red',
-        1: 'yellow',
-        2: 'green',
-    }
+    const profileColor = 'blue' // TODO: each profile has a different color
 
     const profileInitial = getInitials(get(activeProfile)?.name, 1)
 
@@ -45,13 +40,13 @@
 
     function handleBackClick() {
         if ($settingsRoute === SettingsRoutes.Init) {
-            drawer.close()
+            drawer?.close()
         } else {
             settingsRoute.set(SettingsRoutes.Init)
         }
     }
 
-    const hasTitleBar = document.body.classList.contains(`platform-win32`)
+    const hasTitleBar = document.body.classList.contains('platform-win32')
 </script>
 
 <style type="text/scss">

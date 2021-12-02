@@ -1,34 +1,36 @@
 <script lang="typescript">
     import { Button, Logo, Text } from 'shared/components'
     import { getVersionDetails, updateBusy, updateCheck, updateDownload, versionDetails } from 'shared/lib/appUpdater'
-    import { openUrl } from 'shared/lib/device'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform'
     import { formatDate } from 'shared/lib/i18n'
     import { closePopup } from 'shared/lib/popup'
     import { onMount } from 'svelte'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     let hasAutoUpdate = true
 
     function handleDownload() {
         if (hasAutoUpdate) {
             updateDownload()
         } else {
-            openUrl('https://firefly.iota.org')
+            Platform.openUrl('https://firefly.iota.org')
         }
         closePopup()
     }
-    function handleCancelClick() {
+    function handleCloseClick() {
         closePopup()
     }
 
     onMount(async () => {
         // @ts-ignore: This value is replaced by Webpack DefinePlugin
+        /* eslint-disable no-undef */
         if (!devMode) {
             await getVersionDetails()
-            await updateCheck()
+            updateCheck()
         }
-        const os = await Electron.getOS()
+        const os = await Platform.getOS()
         hasAutoUpdate = os !== 'win32'
     })
 </script>
@@ -55,7 +57,7 @@
             </Text>
         </div>
         <div class="flex flex-row justify-center w-full">
-            <Button secondary onClick={() => handleCancelClick()}>{locale('actions.cancel')}</Button>
+            <Button secondary onClick={() => handleCloseClick()}>{locale('actions.close')}</Button>
         </div>
     {:else}
         <div class="my-6">
@@ -78,7 +80,7 @@
             {/if}
         </div>
         <div class="flex flex-row justify-between space-x-4 w-full px-8">
-            <Button secondary classes="w-1/2" onClick={() => handleCancelClick()}>{locale('actions.cancel')}</Button>
+            <Button secondary classes="w-1/2" onClick={() => handleCloseClick()}>{locale('actions.cancel')}</Button>
             <Button classes="w-1/2" onClick={() => handleDownload()} disabled={$updateBusy}>
                 {locale('actions.updateFirefly')}
             </Button>

@@ -8,16 +8,13 @@ module.exports = {
         require('postcss-url')({
             url:
                 mode === 'production'
-                    ? (asset) => {
-                          return (
-                              path
-                                  .relative(__dirname, asset.absolutePath)
-                                  .replace('..', '../shared')
-                                  // on Windows the path resolution doesn't work unless we change the path separator
-                                  .replace(/\\/g, '/')
-                          )
-                      }
+                    ? (asset) =>
+                          path
+                              .relative(__dirname, asset.absolutePath)
+                              .replace('..', '../shared')
+                              // on Windows the path resolution doesn't work unless we change the path separator
+                              .replace(/\\/g, '/')
                     : undefined,
         }),
-    ]
+    ],
 }

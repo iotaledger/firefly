@@ -2,14 +2,12 @@
     import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import {
-        AvailableExchangeRates,
         convertToFiat,
         currencies,
-        CurrencyTypes,
         exchangeRates,
         formatCurrency,
     } from 'shared/lib/currency'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform'
     import { promptUserToConnectLedger } from 'shared/lib/ledger'
     import { LOG_FILE_NAME, migration, migrationLog, resetMigrationState, totalMigratedBalance } from 'shared/lib/migration'
     import {
@@ -27,12 +25,14 @@
     import { getStoragePath } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
+    import type { Locale } from 'shared/lib/typings/i18n'
+    import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
 
-    export let locale
+    export let locale: Locale
 
     const { didComplete } = $migration
 
-    let wasMigrated = $didComplete
+    const wasMigrated = $didComplete
 
     let localizedBody = 'body'
     let localizedValues = {}
@@ -64,7 +64,7 @@
 
     const dispatch = createEventDispatcher()
 
-    let fiatbalance = formatCurrency(
+    const fiatbalance = formatCurrency(
         convertToFiat(
             // Only show actually migrated balance to user
             $totalMigratedBalance,
@@ -88,13 +88,13 @@
                 }
             }
             const _exportMigrationLog = () => {
-                Electron.getUserDataPath()
+                Platform.getUserDataPath()
                     .then((path) => {
                         const source = getStoragePath(path, $activeProfile.name)
 
                         return $walletSetupType === SetupType.TrinityLedger
-                            ? Electron.exportLedgerMigrationLog($migrationLog, `${$activeProfile.name}-${LOG_FILE_NAME}`)
-                            : Electron.exportMigrationLog(`${source}/${LOG_FILE_NAME}`, `${$activeProfile.name}-${LOG_FILE_NAME}`)
+                            ? Platform.exportLedgerMigrationLog($migrationLog, `${$activeProfile.name}-${LOG_FILE_NAME}`)
+                            : Platform.exportMigrationLog(`${source}/${LOG_FILE_NAME}`, `${$activeProfile.name}-${LOG_FILE_NAME}`)
                     })
                     .then((result) => {
                         if (result) {

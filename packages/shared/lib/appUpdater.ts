@@ -1,14 +1,15 @@
-import { Electron, NativeProgress, VersionDetails } from 'shared/lib/electron'
+import { Platform } from 'shared/lib/platform'
 import { localize } from 'shared/lib/i18n'
 import {
     NOTIFICATION_TIMEOUT_NEVER,
     removeDisplayNotification,
     showAppNotification,
     updateDisplayNotification,
-    updateDisplayNotificationProgress
+    updateDisplayNotificationProgress,
 } from 'shared/lib/notifications'
 import type { NotificationData } from 'shared/lib/typings/notification'
 import { writable } from 'svelte/store'
+import type { NativeProgress, VersionDetails } from './typings/appUpdater'
 
 const DEFAULT_APP_UPDATER_POLL_INTERVAL = 900000 // 15 Minutes
 
@@ -26,33 +27,31 @@ export const updateBusy = writable<boolean>(false)
 export const updateComplete = writable<boolean>(false)
 export const updateError = writable<boolean>(false)
 
-// TODO: commented for mobile dev only, uncomment after we remove explicit Electron declarations 
-/* 
-Electron.onEvent('version-details', (nativeVersionDetails) => {
+Platform.onEvent('version-details', (nativeVersionDetails) => {
     versionDetails.set(nativeVersionDetails)
 })
 
-Electron.onEvent('version-progress', (nativeVersionProgress: NativeProgress) => {
+Platform.onEvent('version-progress', (nativeVersionProgress: NativeProgress) => {
     updateProgress.set(nativeVersionProgress.percent)
 
-    const bytesRemaining = ((100 - nativeVersionProgress.percent) / 100) * nativeVersionProgress.total;
+    const bytesRemaining = ((100 - nativeVersionProgress.percent) / 100) * nativeVersionProgress.total
     if (nativeVersionProgress.bytesPerSecond > 0) {
-        updateMinutesRemaining.set((bytesRemaining / nativeVersionProgress.bytesPerSecond) / 60)
+        updateMinutesRemaining.set(bytesRemaining / nativeVersionProgress.bytesPerSecond / 60)
     }
 })
 
-Electron.onEvent('version-complete', () => {
+Platform.onEvent('version-complete', () => {
     updateBusy.set(false)
     updateError.set(false)
     updateComplete.set(true)
     updateMinutesRemaining.set(0)
 })
 
-Electron.onEvent('version-error', (nativeVersionError) => {
-    console.log(nativeVersionError)
+Platform.onEvent('version-error', (nativeVersionError) => {
+    console.error(nativeVersionError)
     updateError.set(true)
 })
- */
+
 export function updateDownload(): void {
     updateProgress.set(0)
     updateMinutesRemaining.set(-1)
@@ -60,21 +59,21 @@ export function updateDownload(): void {
     updateComplete.set(false)
     updateError.set(false)
 
-    let progressSubscription;
-    let minutesRemainingSubscription;
-    let completeSubscription;
-    let errorSubscription;
+    let progressSubscription = null
+    let minutesRemainingSubscription = null
+    let completeSubscription = null
+    let errorSubscription = null
 
     const cleanup = () => {
         removeDisplayNotification(notificationId)
-        progressSubscription();
-        completeSubscription();
-        errorSubscription();
-        minutesRemainingSubscription();
+        progressSubscription()
+        completeSubscription()
+        errorSubscription()
+        minutesRemainingSubscription()
     }
 
     const downloadingNotification: NotificationData = {
-        type: "info",
+        type: 'info',
         message: localize('notifications.downloadingUpdate'),
         progress: 0,
         subMessage: localize('notifications.calcMinutesRemaining'),
@@ -83,87 +82,85 @@ export function updateDownload(): void {
                 label: localize('actions.cancel'),
                 callback: () => {
                     updateCancel()
-                    cleanup();
-                }
-            }
+                    cleanup()
+                },
+            },
         ],
-        timeout: NOTIFICATION_TIMEOUT_NEVER
+        timeout: NOTIFICATION_TIMEOUT_NEVER,
     }
 
     const notificationId = showAppNotification(downloadingNotification)
 
-    progressSubscription = updateProgress.subscribe(progress => {
-        updateDisplayNotificationProgress(notificationId, progress);
-    });
+    progressSubscription = updateProgress.subscribe((progress) => {
+        updateDisplayNotificationProgress(notificationId, progress)
+    })
 
-    minutesRemainingSubscription = updateMinutesRemaining.subscribe(minutesRemaining => {
+    minutesRemainingSubscription = updateMinutesRemaining.subscribe((minutesRemaining) => {
         if (minutesRemaining > 0) {
             updateDisplayNotification(notificationId, {
                 ...downloadingNotification,
-                subMessage: minutesRemaining === -1
-                    ? localize('notifications.calcMinutesRemaining')
-                    : (minutesRemaining < 1 ? "< " : "")
-                    + localize('notifications.minutesRemaining', {
-                        values: {
-                            minutes: Math.ceil(minutesRemaining).toString()
-                        }
-                    })
-            });
+                subMessage:
+                    minutesRemaining === -1
+                        ? localize('notifications.calcMinutesRemaining')
+                        : (minutesRemaining < 1 ? '< ' : '') +
+                          localize('notifications.minutesRemaining', {
+                              values: {
+                                  minutes: Math.ceil(minutesRemaining).toString(),
+                              },
+                          }),
+            })
         }
-    });
+    })
 
     completeSubscription = updateComplete.subscribe((isComplete) => {
         if (isComplete) {
-            updateDisplayNotification(
-                notificationId,
-                {
-                    ...downloadingNotification,
-                    message: localize('notifications.updateReady'),
-                    subMessage: localize('notifications.restartInstall'),
-                    progress: undefined,
-                    actions: [
-                        {
-                            label: localize('actions.restartNow'),
-                            callback: () => {
-                                cleanup()
-                                updateInstall()
-                            },
-                            isPrimary: true
+            updateDisplayNotification(notificationId, {
+                ...downloadingNotification,
+                message: localize('notifications.updateReady'),
+                subMessage: localize('notifications.restartInstall'),
+                progress: undefined,
+                actions: [
+                    {
+                        label: localize('actions.restartNow'),
+                        callback: () => {
+                            cleanup()
+                            updateInstall()
                         },
-                        {
-                            label: localize('actions.dismiss'),
-                            callback: () => cleanup()
-                        }
-                    ]
-                })
+                        isPrimary: true,
+                    },
+                    {
+                        label: localize('actions.dismiss'),
+                        callback: () => cleanup(),
+                    },
+                ],
+            })
         }
-    });
+    })
 
     errorSubscription = updateError.subscribe((isError) => {
         if (isError) {
-            updateDisplayNotification(
-                notificationId,
-                {
-                    ...downloadingNotification,
-                    type: "error",
-                    message: localize('notifications.updateError'),
-                    progress: undefined,
-                    actions: [
-                        {
-                            label: localize('actions.dismiss'),
-                            callback: () => cleanup(),
-                            isPrimary: true
-                        }
-                    ]
-                })
+            updateDisplayNotification(notificationId, {
+                ...downloadingNotification,
+                type: 'error',
+                message: localize('notifications.updateError'),
+                progress: undefined,
+                actions: [
+                    {
+                        label: localize('actions.dismiss'),
+                        callback: () => cleanup(),
+                        isPrimary: true,
+                    },
+                ],
+            })
         }
-    });
+    })
 
-    Electron.updateDownload()
+    void Platform.updateDownload()
 }
 
 export function updateCancel(): void {
-    Electron.updateCancel()
+    void Platform.updateCancel()
+
     updateProgress.set(0)
     updateBusy.set(false)
     updateComplete.set(false)
@@ -172,18 +169,18 @@ export function updateCancel(): void {
 }
 
 export function updateInstall(): void {
-    Electron.updateInstall()
+    void Platform.updateInstall()
 }
 
 export function updateCheck(): void {
-    Electron.updateCheck()
+    void Platform.updateCheck()
 }
 
 export async function getVersionDetails(): Promise<void> {
-    const verDetails = await Electron.getVersionDetails();
+    const verDetails = await Platform.getVersionDetails()
     versionDetails.set(verDetails)
 }
 
-export async function pollVersion(): Promise<void> {
-    setInterval(async () => updateCheck(), DEFAULT_APP_UPDATER_POLL_INTERVAL)
+export function pollVersion(): void {
+    setInterval(() => updateCheck(), DEFAULT_APP_UPDATER_POLL_INTERVAL)
 }

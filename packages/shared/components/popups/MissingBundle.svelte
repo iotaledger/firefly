@@ -1,11 +1,14 @@
 <script lang="typescript">
     import { Button, Text, Link } from 'shared/components'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform'
     import { closePopup } from 'shared/lib/popup'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     export let balance = ''
-    export let onProceed: () => {}
+
+    export let onProceed = (): void => {}
 
     function handleCancelClick() {
         closePopup()
@@ -15,7 +18,7 @@
 <div class="mb-8">
     <Text type="h4" classes="mb-5">{locale('popups.missingBundle.title')}</Text>
     <Text type="p" classes="mb-2" secondary>{locale('popups.missingBundle.body', { values: { value: balance } })}</Text>
-    <Link onClick={() => Electron.openUrl('https://firefly.iota.org/faq#spent-addresses')}>{locale('popups.missingBundle.learnMore')}</Link>
+    <Link onClick={() => Platform.openUrl('https://firefly.iota.org/faq#spent-addresses')}>{locale('popups.missingBundle.learnMore')}</Link>
 </div>
 <div class="flex flex-row justify-between w-full space-x-4 px-8">
     <Button secondary classes="w-full" onClick={handleCancelClick}>{locale('actions.cancel')}</Button>

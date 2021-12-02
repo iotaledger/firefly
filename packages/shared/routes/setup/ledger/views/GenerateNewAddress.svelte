@@ -1,15 +1,18 @@
 <script lang="typescript">
-    import { Animation,Button,Icon,OnboardingLayout,Spinner,Text } from 'shared/components';
+    import { Animation, Button, Icon, OnboardingLayout, Spinner, Text } from 'shared/components'
     import {
-    displayNotificationForLedgerProfile,formatAddressForLedger,
-    ledgerSimulator,promptUserToConnectLedger
-    } from 'shared/lib/ledger';
-    import { getOfficialNetwork,getOfficialNodes } from 'shared/lib/network';
-    import { activeProfile } from 'shared/lib/profile';
-    import { api } from 'shared/lib/wallet';
-    import { createEventDispatcher } from 'svelte';
+        displayNotificationForLedgerProfile,
+        formatAddressForLedger,
+        ledgerSimulator,
+        promptUserToConnectLedger,
+    } from 'shared/lib/ledger'
+    import { getDefaultClientOptions } from 'shared/lib/network'
+    import { activeProfile } from 'shared/lib/profile'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { api } from 'shared/lib/wallet'
+    import { createEventDispatcher } from 'svelte'
 
-    export let locale
+    export let locale: Locale
 
     let newAddress = null
 
@@ -29,15 +32,9 @@
         busy = true
 
         const _createAccount = (idx) => {
-            const officialNodes = getOfficialNodes()
-            const officialNetwork = getOfficialNetwork()
             api.createAccount(
                 {
-                    clientOptions: {
-                        nodes: officialNodes,
-                        node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
-                        network: officialNetwork,
-                    },
+                    clientOptions: getDefaultClientOptions(),
                     alias: `${locale('general.account')} ${idx}`,
                     signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
                     allowCreateMultipleEmptyAccounts: true,
@@ -64,7 +61,8 @@
                 onSuccess(getAccountsResponse) {
                     if (getAccountsResponse.payload.length > 0) {
                         if (getAccountsResponse.payload[$activeProfile.ledgerMigrationCount]) {
-                            newAddress = getAccountsResponse.payload[$activeProfile.ledgerMigrationCount].addresses[0].address
+                            newAddress =
+                                getAccountsResponse.payload[$activeProfile.ledgerMigrationCount].addresses[0].address
                             displayAddress()
                         } else {
                             _createAccount($activeProfile.ledgerMigrationCount + 1)
@@ -141,11 +139,16 @@
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
         {#if newAddress}
-            <Button classes="w-full" disabled={!confirmed} onClick={handleContinueClick}>{locale('actions.continue')}</Button>
+            <Button classes="w-full" disabled={!confirmed} onClick={handleContinueClick}>
+                {locale('actions.continue')}
+            </Button>
         {:else}
             <Button classes="w-full" disabled={busy} onClick={generateNewAddress}>
                 {#if busy}
-                    <Spinner busy={true} message={locale('views.generateNewLedgerAddress.generating')} classes="justify-center" />
+                    <Spinner
+                        busy={true}
+                        message={locale('views.generateNewLedgerAddress.generating')}
+                        classes="justify-center" />
                 {:else}{locale('actions.generateAddress')}{/if}
             </Button>
         {/if}

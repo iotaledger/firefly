@@ -1,26 +1,29 @@
 <script lang="typescript">
     import { Checkbox, Dropdown, HR, Radio, Text } from 'shared/components'
     import { loggedIn } from 'shared/lib/app'
-    import { appSettings } from 'shared/lib/appSettings'
+    import { appSettings, AppTheme, shouldBeDarkMode } from 'shared/lib/appSettings'
     import { exchangeRates } from 'shared/lib/currency'
     import { locales, setLanguage, _ } from 'shared/lib/i18n'
-    import { addProfileCurrencyPriceData } from 'shared/lib/marketData'
+    import { addProfileCurrencyPriceData } from 'shared/lib/market'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { refreshBalanceOverview, updateAccountsBalanceEquiv } from 'shared/lib/wallet'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
-    let darkModeEnabled = $appSettings.darkMode
     let notificationsChecked = $appSettings.notifications
     let hideNetworkStatistics = $activeProfile?.settings.hideNetworkStatistics
 
-    $: $appSettings.darkMode = darkModeEnabled
+    let appTheme: AppTheme = $appSettings.theme
+    $: $appSettings.theme = appTheme
+    $: $appSettings.darkMode = shouldBeDarkMode($appSettings.theme)
+
     $: $appSettings.notifications = notificationsChecked
     $: updateProfile('settings.hideNetworkStatistics', hideNetworkStatistics)
 
     const handleCurrencySelect = (item) => {
         updateProfile('settings.currency', item.value)
-        addProfileCurrencyPriceData()
+        void addProfileCurrencyPriceData()
         refreshBalanceOverview()
         updateAccountsBalanceEquiv()
     }
@@ -42,8 +45,12 @@
     <HR classes="pb-5 mt-5 justify-center" /> -->
     <section id="theme" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.theme.title')}</Text>
-        <Radio value={false} bind:group={darkModeEnabled} label={locale('general.lightTheme')} />
-        <Radio value={true} bind:group={darkModeEnabled} label={locale('general.darkTheme')} />
+        <Radio value={'light'} bind:group={appTheme} label={locale('general.lightTheme')} />
+        <Radio value={'dark'} bind:group={appTheme} label={locale('general.darkTheme')} />
+        <Radio value={'system'} bind:group={appTheme} label={locale('general.systemTheme')} />
+        {#if appTheme === 'system'}
+            <Text type="p" secondary classes="mb-5">{locale('views.settings.theme.advice')}</Text>
+        {/if}
     </section>
     <HR classes="pb-5 mt-5 justify-center" />
     <section id="language" class="w-3/4">

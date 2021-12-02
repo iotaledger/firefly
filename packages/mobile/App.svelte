@@ -1,12 +1,13 @@
 <script lang="typescript">
-    import { Route, Toggle } from 'shared/components'
+    import { Route, Toggle, ToastContainer } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { goto } from 'shared/lib/helpers'
     import { dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
-    import { fetchMarketData } from 'shared/lib/marketData'
+    import { fetchMarketData } from 'shared/lib/market'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
     import { initRouter, routerNext, routerPrevious, setRoute } from 'shared/lib/router'
+import { Platforms } from 'shared/lib/typings/platform';
     import { AppRoute } from 'shared/lib/typings/routes'
     import {
         Appearance,
@@ -30,7 +31,7 @@
     } from 'shared/routes'
     import { onMount } from 'svelte'
 
-    mobile.set(true)
+    mobile.set(process.env.PLATFORM == Platforms.MOBILE)
 
     $: $appSettings.darkMode ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')
 
@@ -40,7 +41,7 @@
 
     let splash = true
 
-    setupI18n()
+    void setupI18n()
     onMount(async () => {
         setTimeout(() => {
             splash = false
@@ -69,25 +70,6 @@
     .setup-anim-aspect-ratio {
         aspect-ratio: 19/15;
     }
-
-    // dummy toggles
-    .dummy-toggles {
-        position: absolute;
-        right: 5px;
-        top: 5px;
-        z-index: 10;
-        font-size: 12px;
-        display: flex;
-        padding: 5px;
-        background: #8080803d;
-        border-radius: 10px;
-        button {
-            background: var(--button-bg-color);
-            padding: 0 7px;
-            border-radius: 10px;
-            color: var(--button-text-color);
-        }
-    }
 </style>
 
 <!-- empty div to avoid auto-purge removing dark classes -->
@@ -95,13 +77,6 @@
 {#if !$isLocaleLoaded || splash}
     <Splash />
 {:else}
-    <!-- TODO: remove!! Dummy toggles, dev only -->
-    <div class="dummy-toggles flex flex-row">
-        <div class="mr-4">
-            <Toggle active={$appSettings.darkMode} onClick={() => ($appSettings.darkMode = !$appSettings.darkMode)} />
-        </div>
-    </div>
-    <!--  -->
     <!-- TODO: remove locale={$_} everywhere -->
     <Route route={AppRoute.Welcome}>
         <Welcome on:next={routerNext} on:previous={routerPrevious} locale={$_} />
@@ -151,4 +126,6 @@
     <Route route={AppRoute.Login}>
         <Login on:next={routerNext} on:previous={routerPrevious} locale={$_} {goto} />
     </Route>
+
+    <ToastContainer />
 {/if}

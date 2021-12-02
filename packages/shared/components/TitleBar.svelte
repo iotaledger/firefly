@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { appSettings } from 'shared/lib/appSettings'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform'
     import { popupState } from 'shared/lib/popup'
     import { dashboardRoute } from 'shared/lib/router'
     import { Tabs } from 'shared/lib/typings/routes'
@@ -23,18 +23,20 @@
     const fullConfig = resolveConfig(tailwindConfig)
 
     onMount(async () => {
-        os = await Electron.getOS()
-        isMaximized = await Electron.isMaximized()
+        os = await Platform.getOS()
+        isMaximized = await Platform.isMaximized()
         document.body.classList.add(`platform-${os}`)
+        /* eslint-disable @typescript-eslint/no-misused-promises */
         window.addEventListener('resize', handleResize)
     })
 
     onDestroy(() => {
+        /* eslint-disable @typescript-eslint/no-misused-promises */
         window.removeEventListener('resize', handleResize)
     })
 
     async function handleResize() {
-        isMaximized = await Electron.isMaximized()
+        isMaximized = await Platform.isMaximized()
     }
 </script>
 
@@ -44,7 +46,7 @@
             class={`fixed z-10 left-0 right-0 top-0 flex flex-row h-12 justify-between ${showingDashboard && !showingSettings ? 'bg-gray-50' : 'bg-white'} dark:bg-gray-900`}>
             <div class="absolute left-16 top-1 right-36 h-9" style="-webkit-app-region: drag" />
             <button
-                on:click={() => Electron.popupMenu()}
+                on:click={() => Platform.popupMenu()}
                 class={`flex justify-center p-4 stroke-current text-gray-500 dark:text-gray-100 w-20 ${showingDashboard ? 'bg-white dark:bg-gray-800 border-solid border-r border-gray-100 dark:border-gray-800' : ''}`}
                 style="-webkit-app-region: none">
                 <svg width="16" height="16" viewBox="0 0 16 16">
@@ -55,7 +57,7 @@
             </button>
             <div class="flex flex-row mr-3">
                 <button
-                    on:click={() => Electron.minimize()}
+                    on:click={() => Platform.minimize()}
                     class="p-2 mr-2 stroke-current text-gray-500 dark:text-gray-100"
                     style="-webkit-app-region: none">
                     <svg width="16" height="16" viewBox="0 0 16 16">
@@ -63,7 +65,7 @@
                     </svg>
                 </button>
                 <button
-                    on:click={async () => (isMaximized = await Electron.maximize())}
+                    on:click={async () => (isMaximized = await Platform.maximize())}
                     class="p-2 mr-2 stroke-current text-gray-500 dark:text-gray-100 fill-current"
                     style="-webkit-app-region: none">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -83,7 +85,7 @@
                     </svg>
                 </button>
                 <button
-                    on:click={() => Electron.close()}
+                    on:click={() => Platform.close()}
                     class="p-2 mr-2 stroke-current text-gray-500 dark:text-gray-100"
                     style="-webkit-app-region: none">
                     <svg width="16" height="16" viewBox="0 0 16 16">

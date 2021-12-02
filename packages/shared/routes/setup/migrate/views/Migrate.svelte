@@ -2,15 +2,12 @@
     import { Animation, Box, Button, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import {
-        AvailableExchangeRates,
         convertToFiat,
         currencies,
-        CurrencyTypes,
         exchangeRates,
         formatCurrency,
     } from 'shared/lib/currency'
-    import { openUrl } from 'shared/lib/device'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform'
     import { getLegacyErrorMessage, promptUserToConnectLedger } from 'shared/lib/ledger'
     import {
         ADDRESS_SECURITY_LEVEL,
@@ -34,17 +31,19 @@
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
+    import type { Locale } from 'shared/lib/typings/i18n'
+    import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
 
-    export let locale
+    export let locale: Locale
 
     const dispatch = createEventDispatcher()
 
     const { didComplete, bundles, data } = $migration
     const { balance } = $data
 
-    let migratableBalance = balance - $unselectedInputs.reduce((acc, input) => acc + input.balance, 0)
+    const migratableBalance = balance - $unselectedInputs.reduce((acc, input) => acc + input.balance, 0)
 
-    let fiatbalance = formatCurrency(
+    const fiatbalance = formatCurrency(
         convertToFiat(migratableBalance, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[AvailableExchangeRates.USD]),
         AvailableExchangeRates.USD
     )
@@ -55,7 +54,7 @@
 
     let singleMigrationBundleHash
 
-    let legacyLedger = $walletSetupType === SetupType.TrinityLedger
+    const legacyLedger = $walletSetupType === SetupType.TrinityLedger
     $: animation = legacyLedger ? 'ledger-migrate-desktop' : 'migrate-desktop'
 
     let closeTransport = () => {}
@@ -76,7 +75,7 @@
 
             if (legacyLedger) {
                 const _onConnected = () => {
-                    Electron.ledger
+                    Platform.ledger
                         .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
                         .then(({ iota, callback }) => {
                             closeTransport = callback
@@ -114,9 +113,9 @@
                 promptUserToConnectLedger(true, _onConnected, _onCancel)
             } else {
                 createMigrationBundle(getInputIndexesForBundle($bundles[0]), 0, false)
-                    .then((response) => {
-                        singleMigrationBundleHash = response.payload.bundleHash
-                        return sendMigrationBundle(response.payload.bundleHash).then(() => {
+                    .then((data) => {
+                        singleMigrationBundleHash = data.bundleHash
+                        return sendMigrationBundle(data.bundleHash).then(() => {
                             // Save profile
                             saveProfile($newProfile)
                             setActiveProfile($newProfile.id)
@@ -143,9 +142,9 @@
         }
     }
 
-    //TODO: complete function functionality
+    // TODO: complete function functionality
     function learnAboutMigrationsClick() {
-        openUrl('https://blog.iota.org/firefly-token-migration/')
+        Platform.openUrl('https://blog.iota.org/firefly-token-migration/')
     }
 
     onDestroy(() => {

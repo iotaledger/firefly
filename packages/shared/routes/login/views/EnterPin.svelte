@@ -1,17 +1,18 @@
 <script lang="typescript">
     import { Icon, Pin, Profile, Text } from 'shared/components'
-    import { Electron } from 'shared/lib/electron'
+    import { mobile } from 'shared/lib/app'
+    import { Platform } from 'shared/lib/platform'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { activeProfile } from 'shared/lib/profile'
+    import type { Locale } from 'shared/lib/typings/i18n'
     import { validatePinFormat } from 'shared/lib/utils'
     import { api, getStoragePath, initialise } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
 
-    export let locale
-    export let mobile 
-    
+    export let locale: Locale
+
     let attempts = 0
     let pinCode = ''
     let isBusy = false
@@ -29,7 +30,7 @@
     $: hasReachedMaxAttempts = attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS
     $: {
         if (validatePinFormat(pinCode)) {
-            onSubmit()
+            void onSubmit()
         }
     }
 
@@ -60,7 +61,7 @@
         }
     }
 
-    async function onSubmit() {
+    function onSubmit() {
         if (get(ongoingSnapshot) === true) {
             return openSnapshotPopup()
         }
@@ -69,10 +70,10 @@
 
             isBusy = true
 
-            Electron.PincodeManager.verify(profile.id, pinCode)
+            Platform.PincodeManager.verify(profile.id, pinCode)
                 .then((verified) => {
                     if (verified === true) {
-                        return Electron.getUserDataPath().then((path) => {
+                        return Platform.getUserDataPath().then((path) => {
                             initialise(profile.id, getStoragePath(path, profile.name))
                             api.setStoragePassword(pinCode, {
                                 onSuccess() {
@@ -121,7 +122,7 @@
     })
 </script>
 
-{#if mobile}
+{#if $mobile}
     <div>foo</div>
 {:else}
     <div class="relative w-full h-full bg-white dark:bg-gray-900">

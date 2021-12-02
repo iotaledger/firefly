@@ -1,19 +1,20 @@
 <script lang="typescript">
     import { Button, Logo, Password, Spinner, Text } from 'shared/components'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform'
     import { getBackupWarningColor } from 'shared/lib/helpers'
-    import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
     import { updateProfile } from 'shared/lib/profile'
     import { getDefaultStrongholdName } from 'shared/lib/utils'
     import { api } from 'shared/lib/wallet'
     import { formatDate } from 'shared/lib/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     export let lastBackupDate
     export let lastBackupDateFormatted
 
-    let color = getBackupWarningColor(lastBackupDate)
+    const color = getBackupWarningColor(lastBackupDate)
     let password = ''
     let busy = false
     let error = ''
@@ -26,7 +27,7 @@
         error = ''
         api.setStrongholdPassword(password, {
             onSuccess() {
-                Electron.getStrongholdBackupDestination(getDefaultStrongholdName())
+                Platform.getStrongholdBackupDestination(getDefaultStrongholdName())
                     .then((result) => {
                         if (result) {
                             busy = true

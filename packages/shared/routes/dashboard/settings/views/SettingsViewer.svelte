@@ -16,8 +16,9 @@
     } from 'shared/lib/typings/routes'
     import { onMount } from 'svelte'
     import { Advanced, General, Help, Security } from './'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
     let scroller
     let index

@@ -8,10 +8,11 @@
     import { flip } from 'svelte/animate'
     import * as easing from 'svelte/easing'
     import { fly } from 'svelte/transition'
+    import { Locale } from 'shared/lib/typings/i18n'
 
     export let list = []
     export let selected = 0
-    export let locale
+    export let locale: Locale
 
     const tabs = ['All', 'Incoming', 'Outgoing']
     let current = tabs[selected]

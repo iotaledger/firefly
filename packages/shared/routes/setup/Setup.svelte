@@ -1,11 +1,12 @@
 <script lang="typescript">
-    import { Animation, Button, Link, Logo, OnboardingLayout, Text } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
-    import { openUrl } from 'shared/lib/device'
-    import { SetupType } from 'shared/lib/typings/routes'
-    import { createEventDispatcher } from 'svelte'
+    import { Platform } from 'shared/lib/platform';
+    import { Animation,Button,Link,Logo,OnboardingLayout,Text } from 'shared/components';
+    import { mobile } from 'shared/lib/app';
+    import type { Locale } from 'shared/lib/typings/i18n';
+    import { SetupType } from 'shared/lib/typings/routes';
+    import { createEventDispatcher } from 'svelte';
 
-    export let locale
+    export let locale: Locale
 
     const dispatch = createEventDispatcher()
 
@@ -28,7 +29,7 @@
             </div>
             <Text type="h3" classes="mb-6 text-center">{locale('views.setup.chrysalisTitle')}</Text>
             <Text type="p" secondary classes="mb-8">{locale('views.setup.chrysalisBody')}</Text>
-            <Link onClick={() => openUrl('https://blog.iota.org/firefly-token-migration/')}>
+            <Link onClick={() => Platform.openUrl('https://blog.iota.org/firefly-token-migration/')}>
                 {locale('views.setup.learnMore')}
             </Link>
         </div>

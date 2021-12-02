@@ -1,11 +1,19 @@
 <script lang="typescript">
     import { Animation } from 'shared/components'
     import { mobile } from 'shared/lib/app'
+    import { appSettings, shouldBeDarkMode } from 'shared/lib/appSettings'
     import { pollChrysalisSnapshot } from 'shared/lib/migration'
     import { onMount } from 'svelte'
 
+    /**
+     * NOTE: This reactive dependency ensures that darkMode is set to the
+     * correct value in the case that the system's settings have changed since
+     * the app was last opened.
+     */
+    $: $appSettings.darkMode = shouldBeDarkMode($appSettings.theme)
+
     onMount(() => {
-        pollChrysalisSnapshot()
+        void pollChrysalisSnapshot()
     })
 </script>
 

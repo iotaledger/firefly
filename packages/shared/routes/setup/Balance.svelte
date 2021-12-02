@@ -2,14 +2,12 @@
     import { Animation, Box, Button, OnboardingLayout, Spinner, Text, Toast } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import {
-        AvailableExchangeRates,
         convertToFiat,
         currencies,
-        CurrencyTypes,
         exchangeRates,
         formatCurrency,
     } from 'shared/lib/currency'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import {
         ADDRESS_SECURITY_LEVEL,
@@ -31,11 +29,13 @@
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
+    import type { Locale } from 'shared/lib/typings/i18n'
+    import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
 
-    export let locale
+    export let locale: Locale
 
     let isCheckingForBalance
-    let legacyLedger = $walletSetupType === SetupType.TrinityLedger
+    const legacyLedger = $walletSetupType === SetupType.TrinityLedger
 
     const { seed, data, bundles } = $migration
 
@@ -170,11 +170,9 @@
         if (legacyLedger) {
             // TODO: add ledger legacy popup when PR merged
             const _onConnected = () => {
-                Electron.ledger
+                Platform.ledger
                     .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
-                    .then(({ iota, callback }) => {
-                        return getLedgerMigrationData(iota.getAddress, callback)
-                    })
+                    .then(({ iota, callback }) => getLedgerMigrationData(iota.getAddress, callback))
                     .then(() => {
                         isCheckingForBalance = false
                     })
