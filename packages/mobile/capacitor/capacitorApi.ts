@@ -3,10 +3,20 @@ import { NotificationManager } from '../../mobile/capacitor/lib/notificationMana
 import { PincodeManager } from '../../mobile/capacitor/lib/pincodeManager'
 import type { IPlatform } from 'shared/lib/typings/platform'
 import type { VersionDetails } from 'shared/lib/typings/appUpdater'
+import { hookErrorLogger } from '../../shared/lib/shell/errorLogger'
+import { proxyApi } from '../../shared/lib/shell/walletApi'
+import * as binding from './walletPluginApi'
+
+let activeProfileId = null
+window['__WALLET_INIT__'] = {
+    run: binding.init,
+}
+window['__WALLET_API__'] = proxyApi(() => activeProfileId)
+const eventListeners = {}
 
 export const CapacitorApi: IPlatform = {
     updateActiveProfile(id) {
-        return
+        activeProfileId = id
     },
 
     removeProfileFolder(profilePath) {
@@ -245,7 +255,12 @@ export const CapacitorApi: IPlatform = {
      * @returns {undefined}
      */
     onEvent: (event, callback) => {
-        return new Promise<void>((resolve, reject) => {})
+        let listeners = eventListeners[event]
+        if (!listeners) {
+            listeners = eventListeners[event] = []
+        }
+        listeners.push(callback)
+        console.log({listeners})
     },
 
     /**
@@ -255,7 +270,7 @@ export const CapacitorApi: IPlatform = {
      * @returns {undefined}
      */
     removeListenersForEvent: (event) => {
-        return new Promise<void>((resolve, reject) => {})
+        eventListeners[event] = []
     },
 
     /**
@@ -270,8 +285,6 @@ export const CapacitorApi: IPlatform = {
      * Hook the logger
      * @returns
      */
-    hookErrorLogger: (logger) => {
-        return new Promise<void>((resolve, reject) => {})
-    },
+    hookErrorLogger,
     ledger: undefined,
 }
