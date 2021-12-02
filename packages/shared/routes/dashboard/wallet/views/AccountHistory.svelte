@@ -5,11 +5,15 @@
     import { isLedgerProfile } from 'shared/lib/profile'
     import { displayNotificationForLedgerProfile } from 'shared/lib/ledger'
     import { Locale } from 'shared/lib/typings/i18n'
+    import { AccountMessage } from '../../../../lib/typings/wallet'
+    import { aggregateParticipationMessages } from '../../../../lib/participation'
 
     export let locale: Locale
 
     export let transactions = []
     export let color = 'blue'
+
+    $: console.log('TXs: ', transactions)
 
     function handleTransactionClick(transaction) {
         selectedMessage.set(transaction)
@@ -46,6 +50,10 @@
             })
         }
     }
+
+    const getTransactions = (): AccountMessage[] => {
+        return aggregateParticipationMessages(transactions)
+    }
 </script>
 
 <div class="h-full p-8 flex flex-col flex-auto flex-grow flex-shrink-0">
@@ -71,7 +79,7 @@
     {:else}
         <div class="overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2 scroll-secondary">
             {#if transactions.length}
-                {#each transactions as transaction}
+                {#each getTransactions() as transaction}
                     <ActivityRow onClick={() => handleTransactionClick(transaction)} {...transaction} {color} {locale} />
                 {/each}
             {:else}

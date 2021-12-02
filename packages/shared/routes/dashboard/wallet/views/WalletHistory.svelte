@@ -20,6 +20,7 @@
     import { get } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
     import { AccountMessage, WalletAccount } from 'shared/lib/typings/wallet'
+    import { aggregateParticipationMessages } from 'shared/lib/participation'
 
     export let locale: Locale
 
@@ -93,6 +94,10 @@
             $walletSetupType !== SetupType.New &&
             $transactions.length === 0
     }
+
+    function getTransactions(): AccountMessage[] {
+        return aggregateParticipationMessages($transactions)
+    }
 </script>
 
 <div data-label="latest-transactions" class="h-full pt-6 pb-8 px-8 flex-grow flex flex-col">
@@ -108,7 +113,7 @@
                 <Text secondary>{locale('general.firstSync')}</Text>
             </div>
         {:else if $transactions?.length}
-            {#each $transactions as transaction}
+            {#each getTransactions() as transaction}
                 <ActivityRow
                     {...transaction}
                     onClick={() => handleTransactionClick(transaction)}

@@ -1,14 +1,16 @@
 import { derived, get, Readable, writable } from 'svelte/store'
 import {
     ParticipateResponsePayload,
-    Participation, ParticipationAction,
+    Participation,
+    ParticipationAction,
     ParticipationEvent,
     ParticipationEventState,
     ParticipationOverview,
     ParticipationOverviewResponse,
+    ParticipationTransaction,
     StakingAirdrop,
 } from './typings/participation'
-import type { WalletAccount } from './typings/wallet'
+import type { AccountMessage, WalletAccount } from './typings/wallet'
 import type { Event, } from './typings/events'
 import { api, DUST_THRESHOLD, wallet } from './wallet'
 import { showAppNotification } from './notifications'
@@ -16,7 +18,6 @@ import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from './time'
 import { networkStatus } from './networkStatus'
 import { localize } from './i18n'
 import { persistent } from './helpers'
-import { account } from './typings'
 
 /**
  * Assembly event ID
@@ -64,6 +65,31 @@ export const accountToParticipate = writable<WalletAccount>(null)
  * currently trying to participate (or stop) in an event.
  */
 export const participationAction = writable<ParticipationAction>(null)
+
+export const participationTransactions = persistent<ParticipationTransaction[]>('participationTransactions', [])
+
+const addParticipationTransaction = (tx: ParticipationTransaction): void => {
+    participationTransactions.update((ptxs) => [...ptxs, tx])
+}
+
+export const aggregateParticipationMessages = (messages: AccountMessage[]): AccountMessage[] => {
+    const aggregates: { [id: string]: AccountMessage } = { }
+    const $participationTransactions = get(participationTransactions)
+    return messages.filter((msg) => {
+        const isParticipating = $participationTransactions.find((ptx) => ptx.messageId === msg.id) !== undefined
+        if (isParticipating) {
+            if (!aggregates[msg.id]) {
+                aggregates[msg.id] = msg
+
+                return true
+            } else {
+                return false
+            }
+        } else {
+            return true
+        }
+    })
+}
 
 /**
  * The overview / statistics about participation. See #AccountParticipationOverview for more details.
@@ -509,6 +535,14 @@ export function participate(accountId: string, participations: Participation[]):
             participations,
             {
                 onSuccess(response: Event<ParticipateResponsePayload>) {
+                    response?.payload.forEach((msg) => {
+                        if (!msg) return
+
+                        addParticipationTransaction({
+                            action: ParticipationAction.Stake,
+                            messageId: msg.id,
+                        })
+                    })
                     resolve()
                 },
                 onError(error) {
@@ -546,6 +580,14 @@ export function participate(accountId: string, participations: Participation[]):
             eventIds,
             {
                 onSuccess(response: Event<ParticipateResponsePayload>) {
+                    response?.payload.forEach((msg) => {
+                        if (!msg) return
+
+                        addParticipationTransaction({
+                            action: ParticipationAction.Unstake,
+                            messageId: msg.id,
+                        })
+                    })
                     resolve()
                 },
                 onError(error) {
