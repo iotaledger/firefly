@@ -1,5 +1,6 @@
 import Validator from 'shared/lib/validator'
-import * as Wallet from 'wallet-nodejs-binding'
+//import * as Wallet from 'wallet-nodejs-binding'
+import * as Wallet from '../../../mobile/capacitor/walletPluginApi'
 import type {
     CreatedAccountResponse,
     LatestAddressResponse,
