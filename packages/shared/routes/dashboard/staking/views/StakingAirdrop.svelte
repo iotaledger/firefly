@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { HR, Illustration, Link, Text } from 'shared/components'
+    import { HR, Illustration, Link, StakingAirdropIndicator, Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { localize } from 'shared/lib/i18n'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -67,14 +67,17 @@
             illustration="airdrop-{airdrop}-bg"
             width="100%"
             height="100%"
-            classes="fill-current text-white"
+            classes="{airdrop === StakingAirdrop.Assembly ? 'opacity-20' : ''} fill-current text-white"
         />
     </div>
     <div class="px-8 h-full pb-10 flex flex-col justify-end">
         <div>
-            <Text type="h3" classes="mb-2 text-white text-2xl">
-                {localize(`views.staking.airdrops.${airdrop}.name`)}
-            </Text>
+            <div class="mb-4 flex flex-row items-center">
+                <Text type="h3" classes="mr-4 text-white text-2xl">
+                    {localize(`views.staking.airdrops.${airdrop}.name`)}
+                </Text>
+                <StakingAirdropIndicator {airdrop} />
+            </div>
             <Text type="p" overrideColor overrideLeading classes="mb-3 font-normal text-sm  leading-140 text-gray-300 dark:text-gray-300">
                 {localize(`views.staking.airdrops.${airdrop}.description`)}
             </Text>

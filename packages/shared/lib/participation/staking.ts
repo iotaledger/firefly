@@ -47,7 +47,16 @@ const estimateShimmerReward = (amount: number, currentMilestone: number, endMile
     return multiplier * amountMiotas * numMilestones
 }
 
-const getStakingEventFromAirdrop = (airdrop: StakingAirdrop): ParticipationEvent => {
+/**
+ * Get the corresponding staking participation event data from its airdrop enumeration.
+ *
+ * @method getStakingEventFromAirdrop
+ *
+ * @param {StakingAirdrop} airdrop
+ *
+ * @returns {ParticipationEvent}
+ */
+export const getStakingEventFromAirdrop = (airdrop: StakingAirdrop): ParticipationEvent => {
     let stakingEventId
     switch (airdrop) {
         case StakingAirdrop.Assembly:

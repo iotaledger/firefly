@@ -60,4 +60,5 @@ export { default as LineChart } from './charts/Line.svelte'
 export * as ChartDefaults from './charts/defaults'
 
 // Staking
+export { default as StakingAirdropIndicator } from './StakingAirdropIndicator.svelte'
 export { default as StakingIndicator } from './StakingIndicator.svelte'
