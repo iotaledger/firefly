@@ -10,6 +10,12 @@ export enum ParticipationAction {
     Stake = 'stake',
     Unstake = 'unstake',
     Vote = 'vote',
+    Unvote = 'unvote',
+}
+
+export type ParticipationTransaction = {
+    action: ParticipationAction
+    messageId: string
 }
 
 export enum ParticipationEventState {
@@ -49,10 +55,11 @@ export type ParticipationEvent = {
     status: ParticipationEventStatus
 }
 
-export interface ParticipateResponsePayload {
-    accountId: string
-    messages: Message[]
-}
+export type ParticipateResponsePayload = Message[]
+// export interface ParticipateResponsePayload {
+//     accountId: string
+//     messages: Message[]
+// }
 
 export type Participation = {
     eventId: string

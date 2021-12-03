@@ -57,7 +57,7 @@
     import { onMount, setContext } from 'svelte'
     import { derived, Readable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
-    import { checkStronghold } from '../../../lib/stronghold'
+    import { checkStronghold } from 'shared/lib/stronghold'
 
     export let locale: Locale
 

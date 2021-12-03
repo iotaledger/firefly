@@ -15,6 +15,9 @@
     import { ParticipationAction, StakingAirdrop } from 'shared/lib/typings/participation'
     import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
+    import { ledgerDeviceState } from 'shared/lib/ledger'
+    import { LedgerDeviceState } from 'shared/lib/typings/ledger'
+    import { showAppNotification } from 'shared/lib/notifications'
 
     export let accountToStake: WalletAccount
 
@@ -45,8 +48,14 @@
         if ($isSoftwareProfile) {
             checkStronghold(_onConfirm)
         } else {
-            _onConfirm();
-            console.log('TODO: Handle staking flow for Ledger')
+            if ($ledgerDeviceState !== LedgerDeviceState.Connected) {
+                showAppNotification({
+                    type: 'warning',
+                    message: localize('error.ledger.appNotOpen')
+                })
+            } else {
+                _onConfirm()
+            }
         }
     }
 </script>

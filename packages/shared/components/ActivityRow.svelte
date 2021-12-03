@@ -17,9 +17,12 @@
     import type { Writable } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { participationTransactions } from 'shared/lib/participation'
+    import { ParticipationAction } from 'shared/lib/typings/participation'
 
     export let locale: Locale
 
+    export let id
     export let timestamp
     export let confirmed
     export let color
@@ -73,6 +76,8 @@
     $: receiverAccount =
         getIncomingFlag(txPayload) || getInternalFlag(txPayload) ? findAccountWithAnyAddress(receiverAddresses, senderAccount) : null
 
+    let participationTransaction = $participationTransactions.find((ptx) => ptx.messageId === id)
+
     let initialsColor
     let accountAlias = ''
 
@@ -122,29 +127,67 @@
             }
         }
     }
+
+    const getParticipationColor = (action: ParticipationAction): string => {
+        switch (action) {
+            case ParticipationAction.Stake:
+            case ParticipationAction.Vote:
+                return 'blue-500'
+            case ParticipationAction.Unstake:
+            case ParticipationAction.Unvote:
+            default:
+                return 'yellow-600'
+        }
+    }
+
+    const getParticipationIcon = (action: ParticipationAction): string => {
+        switch (action) {
+            case ParticipationAction.Stake:
+            case ParticipationAction.Unstake:
+                return 'staking'
+            case ParticipationAction.Vote:
+            case ParticipationAction.Unvote:
+                return 'voting'
+            default:
+                return ''
+        }
+    }
 </script>
 
 <button
     on:click={onClick}
     data-label="transaction-row"
     class="w-full text-left flex rounded-2xl items-center bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 p-4 {(!confirmed || hasCachedMigrationTx) && 'opacity-50'} {hasCachedMigrationTx && 'pointer-events-none'} overflow-hidden"
-    disabled={hasCachedMigrationTx}>
-    <div class="w-8">
+    disabled={hasCachedMigrationTx}
+>
+    <div class="w-8 flex flex-row justify-center items-center">
         {#if hasCachedMigrationTx || milestonePayload}
             <Icon boxed classes="text-white" boxClasses="bg-gray-500 dark:bg-gray-900" icon="double-chevron-right" />
+        {:else if participationTransaction}
+            <Icon
+                boxed
+                classes="text-white"
+                boxClasses="bg-{getParticipationColor(participationTransaction?.action)}"
+                icon={getParticipationIcon(participationTransaction?.action)}
+            />
         {:else}
             <Icon
                 boxed
                 classes={`text-white dark:text-${initialsColor}-600`}
                 boxClasses="bg-{initialsColor ? `${initialsColor}-500` : txPayload.data.essence.data.internal ? 'gray-500' : `${color}-${txPayload.data.essence.data.internal ? '500' : '600'}`} dark:bg-gray-900"
-                icon={txPayload.data.essence.data.internal ? 'transfer' : txPayload.data.essence.data.incoming ? 'chevron-down' : 'chevron-up'} />
+                icon={txPayload.data.essence.data.internal ? 'transfer' : txPayload.data.essence.data.incoming ? 'chevron-down' : 'chevron-up'}
+            />
         {/if}
     </div>
     <div class="flex flex-col ml-3.5 space-y-1.5 overflow-hidden">
         <Text type="p" bold smaller classes="overflow-hidden overflow-ellipsis multiwrap-line2">
-            {hasCachedMigrationTx || milestonePayload ? locale('general.fundMigration') : locale(direction, {
-                      values: { account: accountAlias },
-                  })}
+            {#if hasCachedMigrationTx || milestonePayload}
+                {locale('general.fundMigration')}
+            {:else if participationTransaction}
+                {locale(`general.${participationTransaction?.action}dFor`, { values: { account: accountAlias } })}
+            {:else}
+                {locale(direction, { values: { account: accountAlias } })}
+            {/if}
         </Text>
         <p class="text-10 leading-120 text-gray-500">
             {formatDate(new Date(timestamp), {

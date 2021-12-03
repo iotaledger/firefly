@@ -2,11 +2,23 @@
     import { DashboardPane } from 'shared/components'
     import { StakingAirdrop as Airdrop } from 'shared/lib/typings/participation'
     import { StakingAirdrop, StakingHeader, StakingInfo, StakingSummary } from './views'
-    import { isStakingFeatureNew } from 'shared/lib/participation'
+    import { accountToParticipate, isStakingFeatureNew, participationAction } from 'shared/lib/participation'
     import { MILLISECONDS_PER_SECOND } from 'shared/lib/time'
     import { showAppNotification } from 'shared/lib/notifications'
     import { localize } from 'shared/lib/i18n'
-    import { onMount } from 'svelte'
+    import { onDestroy, onMount } from 'svelte'
+    import { transferState } from '../../../lib/wallet'
+    import {
+        GeneratingRemainderDepositAddressEvent, PreparedTransactionEvent,
+        TransactionEventData,
+        TransferProgressEventData,
+        TransferProgressEventType,
+        TransferState
+    } from '../../../lib/typings/events'
+    import { closePopup, openPopup } from '../../../lib/popup'
+    import { isSoftwareProfile } from '../../../lib/profile'
+
+    $: console.log('TRANSFER STATE:: ', $transferState)
 
     const handleNewStakingFeature = (): void => {
         if ($isStakingFeatureNew) {
@@ -19,8 +31,102 @@
         }
     }
 
-    onMount(() => {
-        setTimeout(handleNewStakingFeature, MILLISECONDS_PER_SECOND)
+    // TODO: This is an exact copy of a method defined in Wallet.svelte. Need to move it to shared.
+    const handleTransactionEventData = (eventData: TransferProgressEventData): TransactionEventData => {
+        if (!eventData) return {}
+
+        const remainderData = eventData as GeneratingRemainderDepositAddressEvent
+        if (remainderData?.address) return { remainderAddress: remainderData?.address }
+
+        const txData = eventData as PreparedTransactionEvent
+        if (!(txData?.inputs && txData?.outputs) || txData?.inputs.length <= 0 || txData?.outputs.length <= 0) return {}
+
+        const numOutputs = txData.outputs.length
+        if (numOutputs === 1) {
+            return {
+                toAddress: txData.outputs[0].address,
+                toAmount: txData.outputs[0].amount,
+            }
+        } else if (numOutputs > 1) {
+            return {
+                toAddress: txData.outputs[0].address,
+                toAmount: txData.outputs[0].amount,
+
+                remainderAddress: txData.outputs[numOutputs - 1].address,
+                remainderAmount: txData.outputs[numOutputs - 1].amount,
+            }
+        } else {
+            return txData
+        }
+    }
+
+    let transactionEventData: TransferProgressEventData = null
+
+    const handleTransferState = (state: TransferState): void => {
+        if (!state) return
+
+        const _onCancel = () => {
+            transferState.set(null)
+
+            closePopup(true)
+        }
+
+        const { data, type } = state
+        console.log('TRANSFER STATE: ', type, '\nTRANSFER DATA: ', data)
+        switch (type) {
+            // If a user presses "Accept" on ledger, this is the next transfer progress item.
+            case TransferProgressEventType.PerformingPoW:
+                // Close the current pop up i.e., the one with ledger transaction details
+                closePopup(true)
+                // Re-open the staking manager pop up
+                openPopup({
+                    type: 'stakingManager',
+                    props: {
+                        accountToAction: $accountToParticipate,
+                        participationAction: $participationAction,
+                        isPerformingAction: true
+                    },
+                }, true)
+                break
+
+            case TransferProgressEventType.SigningTransaction:
+                openPopup({
+                    type: 'ledgerTransaction',
+                    hideClose: true,
+                    preventClose: true,
+                    props: {
+                        ...handleTransactionEventData(transactionEventData),
+                        onCancel: _onCancel,
+                    },
+                }, true)
+
+                break
+
+            case TransferProgressEventType.PreparedTransaction:
+                transactionEventData = data
+
+                break
+
+            default:
+                break
+        }
+    }
+
+    onMount(async () => {
+        if ($isStakingFeatureNew) {
+            setTimeout(handleNewStakingFeature, MILLISECONDS_PER_SECOND)
+        }
+    })
+
+    /** Subscribe to transfer state */
+    const unsubscribeFromTransferState = transferState.subscribe((state) => {
+        if (!$isSoftwareProfile) {
+            handleTransferState(state)
+        }
+    })
+
+    onDestroy(() => {
+        unsubscribeFromTransferState()
     })
 </script>
 

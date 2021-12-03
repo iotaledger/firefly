@@ -1,14 +1,16 @@
 import { derived, get, Readable, writable } from 'svelte/store'
 import {
     ParticipateResponsePayload,
-    Participation, ParticipationAction,
+    Participation,
+    ParticipationAction,
     ParticipationEvent,
     ParticipationEventState,
     ParticipationOverview,
     ParticipationOverviewResponse,
+    ParticipationTransaction,
     StakingAirdrop,
 } from './typings/participation'
-import type { WalletAccount } from './typings/wallet'
+import type { AccountMessage, WalletAccount } from './typings/wallet'
 import type { Event, } from './typings/events'
 import { api, DUST_THRESHOLD, wallet } from './wallet'
 import { showAppNotification } from './notifications'
@@ -63,6 +65,31 @@ export const accountToParticipate = writable<WalletAccount>(null)
  * currently trying to participate (or stop) in an event.
  */
 export const participationAction = writable<ParticipationAction>(null)
+
+export const participationTransactions = persistent<ParticipationTransaction[]>('participationTransactions', [])
+
+const addParticipationTransaction = (tx: ParticipationTransaction): void => {
+    participationTransactions.update((ptxs) => [...ptxs, tx])
+}
+
+export const aggregateParticipationMessages = (messages: AccountMessage[]): AccountMessage[] => {
+    const aggregates: { [id: string]: AccountMessage } = { }
+    const $participationTransactions = get(participationTransactions)
+    return messages.filter((msg) => {
+        const isParticipating = $participationTransactions.find((ptx) => ptx.messageId === msg.id) !== undefined
+        if (isParticipating) {
+            if (!aggregates[msg.id]) {
+                aggregates[msg.id] = msg
+
+                return true
+            } else {
+                return false
+            }
+        } else {
+            return true
+        }
+    })
+}
 
 /**
  * The overview / statistics about participation. See #AccountParticipationOverview for more details.
@@ -145,8 +172,11 @@ export const unstakedAmount: Readable<number> = derived(
  */
 export const assemblyStakingRewards: Readable<number> = derived(
     participationOverview,
-    (overview) =>
-        overview.reduce((total, accountOverview) => total + accountOverview.assemblyRewards, 0)
+    (overview) => {
+        const rewards = overview.reduce((total, accountOverview) => total + accountOverview.assemblyRewards, 0)
+        if (rewards <= 0) return overview.reduce((total, accountOverview) => total + accountOverview.assemblyRewardsBelowMinimum, 0)
+        else return rewards
+    }
 )
 
 /**
@@ -156,8 +186,11 @@ export const assemblyStakingRewards: Readable<number> = derived(
  */
 export const shimmerStakingRewards: Readable<number> = derived(
     participationOverview,
-    (overview) =>
-        overview.reduce((total, accountOverview) => total + accountOverview.shimmerRewards, 0)
+    (overview) => {
+        const rewards = overview.reduce((total, accountOverview) => total + accountOverview.shimmerRewards, 0)
+        if (rewards <= 0) return overview.reduce((total, accountOverview) => total + accountOverview.shimmerRewardsBelowMinimum, 0)
+        else return rewards
+    }
 )
 
 /**
@@ -239,7 +272,7 @@ export const shimmerStakingRemainingTime: Readable<number> = derived(
  * Currency symbols for the staking airdrops.
  */
 export const STAKING_AIRDROP_TOKENS: { [key in StakingAirdrop]: string } = {
-    [StakingAirdrop.Assembly]: 'ASM',
+    [StakingAirdrop.Assembly]: 'ASMB',
     [StakingAirdrop.Shimmer]: 'SMR',
 }
 
@@ -301,14 +334,22 @@ export const isAccountPartiallyStaked = (accountId: string): boolean =>
     get(partiallyStakedAccounts).find((psa) => psa.id === accountId) !== undefined
 
 const estimateAssemblyReward = (amount: number, currentMilestone: number, endMilestone: number): number => {
-    const multiplier = 1.0
+    /**
+     * NOTE: This represents the amount of ASMB per 1 Mi received every milestone,
+     * which is currently 2 mASMB (or 0.000002 ASMB).
+     */
+    const multiplier = 0.000002
     const amountMiotas = amount / 1_000_000
     const numMilestones = endMilestone - currentMilestone
 
-    return multiplier * amountMiotas * numMilestones + 1
+    return Number((multiplier * amountMiotas * numMilestones).toFixed(6))
 }
 
 const estimateShimmerReward = (amount: number, currentMilestone: number, endMilestone: number): number => {
+    /**
+     * NOTE: This represents the amount of SMR per 1 Mi received every milestone,
+     * which is currently 1 SMR.
+     */
     const multiplier = 1.0
     const amountMiotas = amount / 1_000_000
     const numMilestones = endMilestone - currentMilestone
@@ -494,6 +535,14 @@ export function participate(accountId: string, participations: Participation[]):
             participations,
             {
                 onSuccess(response: Event<ParticipateResponsePayload>) {
+                    response?.payload.forEach((msg) => {
+                        if (!msg) return
+
+                        addParticipationTransaction({
+                            action: ParticipationAction.Stake,
+                            messageId: msg.id,
+                        })
+                    })
                     resolve()
                 },
                 onError(error) {
@@ -531,6 +580,14 @@ export function participate(accountId: string, participations: Participation[]):
             eventIds,
             {
                 onSuccess(response: Event<ParticipateResponsePayload>) {
+                    response?.payload.forEach((msg) => {
+                        if (!msg) return
+
+                        addParticipationTransaction({
+                            action: ParticipationAction.Unstake,
+                            messageId: msg.id,
+                        })
+                    })
                     resolve()
                 },
                 onError(error) {
