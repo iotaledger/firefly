@@ -205,11 +205,13 @@
             >
                 <div class="w-full space-x-4 px-5 py-3 flex flex-row justify-between items-center">
                     {#if isAccountStaked(account?.id)}
-                        <div class="bg-green-100 rounded-2xl">
+                        <div
+                            class="bg-{$accountToParticipate?.id === account?.id && $accountToParticipate && $participationAction && $participationAction !== ParticipationAction.Unstake ? 'yellow-600' : 'green-100'} rounded-2xl"
+                        >
                             <Icon icon="success-check" width="18" height="18" classes="text-white" />
                         </div>
                     {:else}
-                        <Icon icon="unlock" width="18" height="18" />
+                        <Icon icon="unlock" width="18" height="18" classes="{$accountToParticipate?.id === account?.id ? 'text-gray-500' : ''}" />
                     {/if}
                     <div class="flex flex-col w-3/4">
                         <Text type="p" classes="font-extrabold">
