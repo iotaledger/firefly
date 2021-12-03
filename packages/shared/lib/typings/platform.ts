@@ -19,6 +19,7 @@ export interface IPlatform {
     getUserDataPath(): Promise<string>
     getDiagnostics(): Promise<{ label: string; value: string }[]>
     getOS(): Promise<string>
+    getActiveProfile(): string
     updateActiveProfile(id: string): void
     removeProfileFolder(profilePath: string): Promise<void>
     listProfileFolders(profileStoragePath: string): Promise<string[]>

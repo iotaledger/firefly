@@ -54,6 +54,7 @@ import { HistoryDataProps, PriceData } from './typings/market'
 import { ProfileType } from './typings/profile'
 import { buildClientOptions } from './network'
 import { Platform } from './platform'
+import { WALLET, WalletApi } from './shell/walletApi'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -143,7 +144,7 @@ export const isFirstSessionSync = writable<boolean>(true)
 export const isFirstManualSync = writable<boolean>(true)
 export const isBackgroundSyncing = writable<boolean>(false)
 
-interface IWalletApi {
+export interface IWalletApi {
     generateMnemonic(callbacks: {
         onSuccess: (response: Event<string>) => void
         onError: (err: ErrorEventPayload) => void
@@ -382,7 +383,7 @@ interface IWalletApi {
 }
 
 export const api: IWalletApi = new Proxy(
-    { ...window['__WALLET_API__'] },
+    { ...WalletApi },
     {
         get: (target, propKey) => {
             /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -409,6 +410,7 @@ export const api: IWalletApi = new Proxy(
             }
 
             const originalMethod = target[propKey]
+
             return (...args) => {
                 for (let i = args.length - 1; i >= 0; i--) {
                     if (args[i]?.onSuccess) {
@@ -433,7 +435,8 @@ export const initialise = (id: string, storagePath: string): void => {
     if (Object.keys(actors).length > 0) {
         console.error('Initialise called when another actor already initialised')
     }
-    const actor: Actor = window['__WALLET_INIT__'].run(id, storagePath)
+
+    const actor: Actor = WALLET.init(id, storagePath)
 
     actors[id] = actor
 }

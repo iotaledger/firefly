@@ -4,17 +4,14 @@ import { PincodeManager } from '../../mobile/capacitor/lib/pincodeManager'
 import type { IPlatform } from 'shared/lib/typings/platform'
 import type { VersionDetails } from 'shared/lib/typings/appUpdater'
 import { hookErrorLogger } from '../../shared/lib/shell/errorLogger'
-import { proxyApi } from '../../shared/lib/shell/walletApi'
-import * as binding from './walletPluginApi'
 
 let activeProfileId = null
-window['__WALLET_INIT__'] = {
-    run: binding.init,
-}
-window['__WALLET_API__'] = proxyApi(() => activeProfileId)
-const eventListeners = {}
 
 export const CapacitorApi: IPlatform = {
+    getActiveProfile() {
+        return activeProfileId
+    },
+
     updateActiveProfile(id) {
         activeProfileId = id
     },
@@ -100,7 +97,9 @@ export const CapacitorApi: IPlatform = {
      * @returns {Promise}
      */
     getUserDataPath: () => {
-        return new Promise<string>((resolve, reject) => {})
+        return new Promise<string>((resolve, reject) => {
+            resolve('DATA')
+        })
     },
 
     /**
@@ -255,12 +254,7 @@ export const CapacitorApi: IPlatform = {
      * @returns {undefined}
      */
     onEvent: (event, callback) => {
-        let listeners = eventListeners[event]
-        if (!listeners) {
-            listeners = eventListeners[event] = []
-        }
-        listeners.push(callback)
-        console.log({listeners})
+        return new Promise<void>((resolve, reject) => {})
     },
 
     /**
@@ -270,7 +264,7 @@ export const CapacitorApi: IPlatform = {
      * @returns {undefined}
      */
     removeListenersForEvent: (event) => {
-        eventListeners[event] = []
+        return new Promise<void>((resolve, reject) => {})
     },
 
     /**

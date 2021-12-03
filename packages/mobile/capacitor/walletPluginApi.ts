@@ -1,53 +1,52 @@
-import type { BridgeMessage, MessageResponse, CommunicationIds } from '../../shared/lib/typings/bridge'
+import { WalletPlugin } from 'wallet-actor-system-capacitor-binding'
 import {
-    AccountToCreate,
     AccountIdentifier,
-    ListMessagesFilter,
-    SyncAccountOptions,
+    AccountToCreate,
+    areLatestAddressesUnused as _areLatestAddressesUnused,
     createAccount as _createAccount,
-    removeAccount as _removeAccount,
+    generateAddress as _generateAddress,
     getAccount as _getAccount,
     getAccounts as _getAccounts,
-    syncAccounts as _syncAccounts,
-    internalTransfer as _internalTransfer,
-    generateAddress as _generateAddress,
-    getUnusedAddress as _getUnusedAddress,
-    listMessages as _listMessages,
-    listAddresses as _listAddresses,
     getBalance as _getBalance,
-    latestAddress as _latestAddress,
-    syncAccount as _syncAccount,
-    isLatestAddressUnused as _isLatestAddressUnused,
-    areLatestAddressesUnused as _areLatestAddressesUnused,
-    setAlias as _setAlias,
     getNodeInfo as _getNodeInfo,
+    getUnusedAddress as _getUnusedAddress,
+    internalTransfer as _internalTransfer,
+    isLatestAddressUnused as _isLatestAddressUnused,
+    latestAddress as _latestAddress,
+    listAddresses as _listAddresses,
+    listMessages as _listMessages,
+    ListMessagesFilter,
+    removeAccount as _removeAccount,
+    setAlias as _setAlias,
     startBackgroundSync as _startBackgroundSync,
     stopBackgroundSync as _stopBackgroundSync,
+    syncAccount as _syncAccount,
+    SyncAccountOptions,
+    syncAccounts as _syncAccounts,
 } from '../../shared/lib/typings/account'
-import { Transfer, reattach as _reattach } from '../../shared/lib/typings/message'
+import type { BridgeMessage, CommunicationIds, MessageResponse } from '../../shared/lib/typings/bridge'
+import type { ClientOptions } from '../../shared/lib/typings/client'
+import { reattach as _reattach, Transfer } from '../../shared/lib/typings/message'
+import type { NodeAuth } from '../../shared/lib/typings/node'
 import {
-    LoggerConfig,
-    Duration,
     backup as _backup,
-    restoreBackup as _restoreBackup,
-    setStrongholdPassword as _setStrongholdPassword,
-    setStoragePassword as _setStoragePassword,
-    send as _send,
+    changeStrongholdPassword as _changeStrongholdPassword,
+    Duration,
     generateMnemonic as _generateMnemonic,
+    getLedgerDeviceStatus as _getLedgerDeviceStatus,
+    getLegacySeedChecksum as _getLegacySeedChecksum,
+    getStrongholdStatus as _getStrongholdStatus,
+    lockStronghold as _lockStronghold,
+    removeStorage as _removeStorage,
+    restoreBackup as _restoreBackup,
+    send as _send,
+    setClientOptions as _setClientOptions,
+    setStoragePassword as _setStoragePassword,
+    setStrongholdPassword as _setStrongholdPassword,
+    setStrongholdPasswordClearInterval as _setStrongholdPasswordClearInterval,
     storeMnemonic as _storeMnemonic,
     verifyMnemonic as _verifyMnemonic,
-    getStrongholdStatus as _getStrongholdStatus,
-    removeStorage as _removeStorage,
-    lockStronghold as _lockStronghold,
-    changeStrongholdPassword as _changeStrongholdPassword,
-    setClientOptions as _setClientOptions,
-    getLedgerDeviceStatus as _getLedgerDeviceStatus,
-    setStrongholdPasswordClearInterval as _setStrongholdPasswordClearInterval,
-    getLegacySeedChecksum as _getLegacySeedChecksum,
 } from '../../shared/lib/typings/wallet'
-import type { ClientOptions } from '../../shared/lib/typings/client'
-import type { NodeAuth } from '../../shared/lib/typings/node'
-import { WalletPlugin } from 'wallet-actor-system-capacitor-binding'
 
 const onMessageListeners: ((payload: MessageResponse) => void)[] = []
 
@@ -78,7 +77,7 @@ export function init(
     removeEventListeners: () => void
 } {
     const walletListener = WalletPlugin.addListener('walletEvent', (message) => {
-        const { walletResponse } = JSON.parse(message)
+        const { walletResponse } = JSON.parse(message.toString())
         onMessageListeners.forEach((listener) => listener(walletResponse))
     })
     void WalletPlugin.initialize({
@@ -90,7 +89,7 @@ export function init(
             void WalletPlugin.destroy({ actorId: id })
         },
         removeEventListeners() {
-            void walletListener.remove()
+            // void walletListener.remove()
         },
     }
 }
@@ -323,75 +322,102 @@ export const api = {
     // Event emitters
     onError: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) =>
-            WalletPlugin.listen({
-                actorId: __ids.actorId,
-                id: __ids.messageId,
-                event: 'ErrorThrown',
+            new Promise<string>((resolve) => {
+                resolve('error')
             })
+        // WalletPlugin.listen({
+        //     actorId: __ids.actorId,
+        //     id: __ids.messageId,
+        //     event: 'ErrorThrown',
+        // })
     },
     onBalanceChange: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) =>
-            WalletPlugin.listen({
-                actorId: __ids.actorId,
-                id: __ids.messageId,
-                event: 'BalanceChange',
+            new Promise<string>((resolve) => {
+                resolve('error')
             })
+        // WalletPlugin.listen({
+        //     actorId: __ids.actorId,
+        //     id: __ids.messageId,
+        //     event: 'BalanceChange',
+        // })
     },
     onNewTransaction: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) =>
-            WalletPlugin.listen({
-                actorId: __ids.actorId,
-                id: __ids.messageId,
-                event: 'NewTransaction',
+            new Promise<string>((resolve) => {
+                resolve('onNewTransaction')
             })
+        // WalletPlugin.listen({
+        //     actorId: __ids.actorId,
+        //     id: __ids.messageId,
+        //     event: 'NewTransaction',
+        // })
     },
     onConfirmationStateChange: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) =>
-            WalletPlugin.listen({
-                actorId: __ids.actorId,
-                id: __ids.messageId,
-                event: 'ConfirmationStateChange',
+            new Promise<string>((resolve) => {
+                resolve('onConfirmationStateChange')
             })
+        // WalletPlugin.listen({
+        //     actorId: __ids.actorId,
+        //     id: __ids.messageId,
+        //     event: 'ConfirmationStateChange',
+        // })
     },
     onReattachment: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) =>
-            WalletPlugin.listen({
-                actorId: __ids.actorId,
-                id: __ids.messageId,
-                event: 'Reattachment',
+            new Promise<string>((resolve) => {
+                resolve('onReattachment')
             })
+        // WalletPlugin.listen({
+        //     actorId: __ids.actorId,
+        //     id: __ids.messageId,
+        //     event: 'Reattachment',
+        // })
     },
     onBroadcast: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) =>
-            WalletPlugin.listen({
-                actorId: __ids.actorId,
-                id: __ids.messageId,
-                event: 'Broadcast',
+            new Promise<string>((resolve) => {
+                resolve('onBroadcast')
             })
+        // WalletPlugin.listen({
+        //     actorId: __ids.actorId,
+        //     id: __ids.messageId,
+        //     event: 'Broadcast',
+        // })
     },
     onStrongholdStatusChange: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) =>
-            WalletPlugin.listen({
-                actorId: __ids.actorId,
-                id: __ids.messageId,
-                event: 'StrongholdStatusChange',
+            new Promise<string>((resolve) => {
+                resolve('onStrongholdStatusChange')
             })
+        // WalletPlugin.listen({
+        //     actorId: __ids.actorId,
+        //     id: __ids.messageId,
+        //     event: 'StrongholdStatusChange',
+        // })
     },
     onTransferProgress: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) =>
-            WalletPlugin.listen({
-                actorId: __ids.actorId,
-                id: __ids.messageId,
-                event: 'TransferProgress',
+            new Promise<string>((resolve) => {
+                resolve('onTransferProgress')
             })
+        // WalletPlugin.listen({
+        //     actorId: __ids.actorId,
+        //     id: __ids.messageId,
+        //     event: 'TransferProgress',
+        // })
     },
     onLedgerAddressGeneration: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) =>
-            WalletPlugin.listen({
-                actorId: __ids.actorId,
-                id: __ids.messageId,
-                event: 'LedgerAddressGeneration',
+            new Promise<string>((resolve) => {
+                resolve('onLedgerAddressGeneration')
             })
+        // WalletPlugin.listen({
+        //     actorId: __ids.actorId,
+        //     id: __ids.messageId,
+        //     event: 'LedgerAddressGeneration',
+        // })
     },
     getLedgerDeviceStatus: function (isSimulator: boolean): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _getLedgerDeviceStatus(sendMessage, __ids, isSimulator)
