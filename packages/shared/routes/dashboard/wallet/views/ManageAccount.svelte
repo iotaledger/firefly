@@ -48,19 +48,18 @@
             isBusy = true
             api.setAlias($selectedAccountId, trimmedAccountAlias, {
                 onSuccess(res) {
-                    accounts.update((_accounts) => {
-                        return _accounts.map((account) => {
-                            if (account.id === $selectedAccountId) {
-                                return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                                    {} as WalletAccount,
-                                    account,
-                                    {
-                                        alias: trimmedAccountAlias,
-                                    }
-                                )
-                            }
-                        })
-                    })
+                    accounts.update((_accounts) => _accounts.map((account) => {
+                        if (account.id === $selectedAccountId) {
+                            return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
+                                {} as WalletAccount,
+                                account,
+                                {
+                                    alias: trimmedAccountAlias,
+                                }
+                            )
+                        }
+                        return account
+                    }))
 
                     isBusy = false
                     selectedAccountId.set(null)

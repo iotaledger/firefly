@@ -120,7 +120,12 @@ export const getAccountActivityData = (
         label: localize('general.incoming'),
         color: account.color || AccountColors.Default,
     } // TODO: profile colors
-    const outgoing: ChartData = { data: [], tooltips: [], label: localize('general.outgoing'), color: AccountColors.Default } // TODO: profile colors
+    const outgoing: ChartData = {
+        data: [],
+        tooltips: [],
+        label: localize('general.outgoing'),
+        color: AccountColors.Default,
+    } // TODO: profile colors
     const labels: string[] = []
     const messages: Message[] =
         account.messages

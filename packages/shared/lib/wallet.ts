@@ -1748,11 +1748,9 @@ export const prepareAccountInfo = (
         rawIotaBalance: balance,
         signerType,
         balance: formatUnitBestMatch(balance, true, 3),
-        balanceEquiv: formatCurrency(convertToFiat(
-            balance,
-            get(currencies)[CurrencyTypes.USD],
-            get(exchangeRates)[activeCurrency]
-        )),
+        balanceEquiv: formatCurrency(
+            convertToFiat(balance, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[activeCurrency])
+        ),
     })
 }
 

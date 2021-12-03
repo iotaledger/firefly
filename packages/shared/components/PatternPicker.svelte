@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Text, Icon } from "shared/components"
+    import { Text, Icon } from 'shared/components'
     import { AccountColors, AccountPatterns } from 'shared/lib/wallet'
 
     export let locale
