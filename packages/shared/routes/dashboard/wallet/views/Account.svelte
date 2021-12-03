@@ -43,7 +43,7 @@
                     <AccountBalance
                         {locale}
                         color={getColor($activeProfile, $account.id)}
-                        balance={$account.balance}
+                        balance={$account.rawIotaBalance}
                         balanceEquiv={$account.balanceEquiv}
                         onMenuClick={handleMenuClick} />
                     <DashboardPane classes="h-full -mt-5 z-0">
