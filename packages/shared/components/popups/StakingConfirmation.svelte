@@ -22,9 +22,7 @@
     export let accountToStake: WalletAccount
 
     const getRewards = (airdrop: StakingAirdrop): [string, string] => {
-        const rewards = estimateStakingAirdropReward(airdrop, accountToStake?.rawIotaBalance, true)
-        console.log('REWARDS: ', rewards)
-        if (!rewards) return ['', '']
+        const rewards = estimateStakingAirdropReward(StakingAirdrop[airdrop], accountToStake?.rawIotaBalance, true)
         return (rewards as string).split(' ')
     }
 
@@ -92,12 +90,8 @@
             </div>
             <Text type="p" secondary classes="mb-4">{localize('views.staking.confirmation.body')}</Text>
             <div class="flex flex-col">
-                <Text
-                    type="p"
-                    classes="font-bold text-lg inline">
-                    {getRewards(airdrop)[0]}
-                </Text>
-                <Text type="p" secondary classes="text-sm inline">{getRewards(airdrop)[1]}</Text>
+                <Text type="p" classes="font-bold text-xl inline">{getRewards(airdrop)[0]}</Text>
+                <Text type="p" secondary classes="text-lg inline">{getRewards(airdrop)[1]}</Text>
             </div>
         </div>
     {/each}

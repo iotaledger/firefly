@@ -381,6 +381,8 @@ export const estimateStakingAirdropReward = (airdrop: StakingAirdrop, amountToSt
             type: 'error',
             message: localize('error.participation.cannotFindStakingEvent'),
         })
+
+        return formatAmount ? '0' : 0
     }
 
     /**
