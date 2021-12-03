@@ -20,7 +20,6 @@
     import { get } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
     import { AccountMessage, WalletAccount } from 'shared/lib/typings/wallet'
-    import { aggregateParticipationMessages } from 'shared/lib/participation'
 
     export let locale: Locale
 
@@ -96,7 +95,7 @@
     }
 
     function getTransactions(): AccountMessage[] {
-        return aggregateParticipationMessages($transactions)
+        return $transactions
     }
 </script>
 

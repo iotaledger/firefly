@@ -17,7 +17,6 @@
     import type { Writable } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
-    import { participationTransactions } from 'shared/lib/participation'
     import { ParticipationAction } from 'shared/lib/typings/participation'
 
     export let locale: Locale
@@ -76,7 +75,7 @@
     $: receiverAccount =
         getIncomingFlag(txPayload) || getInternalFlag(txPayload) ? findAccountWithAnyAddress(receiverAddresses, senderAccount) : null
 
-    let participationTransaction = $participationTransactions.find((ptx) => ptx.messageId === id)
+    let participationTransaction = undefined//$participationTransactions.find((ptx) => ptx.messageId === id)
 
     let initialsColor
     let accountAlias = ''

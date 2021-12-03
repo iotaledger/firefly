@@ -4,6 +4,7 @@ import { localize } from 'shared/lib/i18n'
 import { showAppNotification } from 'shared/lib/notifications'
 import validUrl from 'valid-url'
 import type { Event } from './typings/events'
+import { Buffer } from 'buffer'
 
 export const ADDRESS_LENGTH = 64
 export const PIN_LENGTH = 6
@@ -244,7 +245,7 @@ export const generateRandomInteger = (beginning: number, end: number): number =>
  *
  * @returns {string | undefined}
  */
-export const stringFromUtf8Array = (bytes: Uint8Array | number[]): string | undefined => {
+export const toUtf8String = (bytes: Uint8Array | number[]): string | undefined => {
     if (!bytes || bytes.length <= 0) return undefined
 
     const extraByteMap = [1, 1, 1, 1, 2, 2, 3, 0]
@@ -273,6 +274,44 @@ export const stringFromUtf8Array = (bytes: Uint8Array | number[]): string | unde
     }
 
     return result
+}
+
+/**
+ * Deserializes an array of bytes into hexadecimal format.
+ *
+ * @method toHexString
+ *
+ * @param {number[]} bytes
+ *
+ * @returns {string | undefined}
+ */
+export const toHexString = (bytes: number[]): string | undefined => {
+    if (!bytes || bytes.length <= 0) return undefined
+
+    return bytes.map((byte) => (byte & 0xFF).toString(16).padStart(2, '0')).join('')
+}
+
+/**
+ * Returns an array of strings as the result of splitting the given string into chunks of a given size.
+ *
+ * @method chunkString
+ *
+ * @param {string} str
+ * @param {number} size
+ *
+ * @returns {string[]}
+ */
+export const chunkString = (str: string, size: number = 0): string[] => {
+    if (!str) return []
+
+    const numChunks = Math.ceil(str.length / size)
+    const chunks = new Array(numChunks)
+
+    for (let i = 0, o = 0; i < numChunks; ++i, o += size) {
+        chunks[i] = str.substr(o, size)
+    }
+
+    return chunks
 }
 
 /**

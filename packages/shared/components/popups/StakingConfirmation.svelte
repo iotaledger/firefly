@@ -21,6 +21,13 @@
 
     export let accountToStake: WalletAccount
 
+    const getRewards = (airdrop: StakingAirdrop): [string, string] => {
+        const rewards = estimateStakingAirdropReward(airdrop, accountToStake?.rawIotaBalance, true)
+        console.log('REWARDS: ', rewards)
+        if (!rewards) return ['', '']
+        return (rewards as string).split(' ')
+    }
+
     const isPartialStake = isAccountPartiallyStaked(accountToStake?.id)
 
     const handleBackClick = (): void => {
@@ -84,9 +91,14 @@
                 <Text type="p" classes="ml-1 text-lg">({STAKING_AIRDROP_TOKENS[airdrop.toLowerCase()]})</Text>
             </div>
             <Text type="p" secondary classes="mb-4">{localize('views.staking.confirmation.body')}</Text>
-            <Text type="p" classes="text-2xl">
-                {estimateStakingAirdropReward(airdrop.toLowerCase(), accountToStake?.rawIotaBalance)}
-            </Text>
+            <div class="flex flex-col">
+                <Text
+                    type="p"
+                    classes="font-bold text-lg inline">
+                    {getRewards(airdrop)[0]}
+                </Text>
+                <Text type="p" secondary classes="text-sm inline">{getRewards(airdrop)[1]}</Text>
+            </div>
         </div>
     {/each}
 </div>

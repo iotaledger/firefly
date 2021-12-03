@@ -7,10 +7,9 @@ import {
     ParticipationEventState,
     ParticipationOverview,
     ParticipationOverviewResponse,
-    ParticipationTransaction,
     StakingAirdrop,
 } from './typings/participation'
-import type { AccountMessage, WalletAccount } from './typings/wallet'
+import type { WalletAccount } from './typings/wallet'
 import type { Event, } from './typings/events'
 import { api, DUST_THRESHOLD, wallet } from './wallet'
 import { showAppNotification } from './notifications'
@@ -22,12 +21,12 @@ import { persistent } from './helpers'
 /**
  * Assembly event ID
  */
-const ASSEMBLY_EVENT_ID = '11bf14a0b4c4e60554c73a261b878e09d67e4772b876808d2b3c42570eaeb614'
+const ASSEMBLY_EVENT_ID = 'e5501ea9c8d950bceffc635275e7ce179a2334c42e9cc4e31c0f3c2c74db3d6a'
 
 /**
  * Shimmer event ID
  */
-const SHIMMER_EVENT_ID = 'e5501ea9c8d950bceffc635275e7ce179a2334c42e9cc4e31c0f3c2c74db3d6a'
+const SHIMMER_EVENT_ID = '11bf14a0b4c4e60554c73a261b878e09d67e4772b876808d2b3c42570eaeb614'
 
 export const STAKING_EVENT_IDS: string[] = [ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID]
 
@@ -65,31 +64,6 @@ export const accountToParticipate = writable<WalletAccount>(null)
  * currently trying to participate (or stop) in an event.
  */
 export const participationAction = writable<ParticipationAction>(null)
-
-export const participationTransactions = persistent<ParticipationTransaction[]>('participationTransactions', [])
-
-const addParticipationTransaction = (tx: ParticipationTransaction): void => {
-    participationTransactions.update((ptxs) => [...ptxs, tx])
-}
-
-export const aggregateParticipationMessages = (messages: AccountMessage[]): AccountMessage[] => {
-    const aggregates: { [id: string]: AccountMessage } = { }
-    const $participationTransactions = get(participationTransactions)
-    return messages.filter((msg) => {
-        const isParticipating = $participationTransactions.find((ptx) => ptx.messageId === msg.id) !== undefined
-        if (isParticipating) {
-            if (!aggregates[msg.id]) {
-                aggregates[msg.id] = msg
-
-                return true
-            } else {
-                return false
-            }
-        } else {
-            return true
-        }
-    })
-}
 
 /**
  * The overview / statistics about participation. See #AccountParticipationOverview for more details.
@@ -336,13 +310,13 @@ export const isAccountPartiallyStaked = (accountId: string): boolean =>
 const estimateAssemblyReward = (amount: number, currentMilestone: number, endMilestone: number): number => {
     /**
      * NOTE: This represents the amount of ASMB per 1 Mi received every milestone,
-     * which is currently 2 mASMB (or 0.000002 ASMB).
+     * which is currently 0.000004 ASMB (4 µASMB).
      */
-    const multiplier = 0.000002
+    const multiplier = 0.000004
     const amountMiotas = amount / 1_000_000
     const numMilestones = endMilestone - currentMilestone
 
-    return Number((multiplier * amountMiotas * numMilestones).toFixed(6))
+    return Math.floor((multiplier * amountMiotas * numMilestones) * 1_000_000) / 1_000_000
 }
 
 const estimateShimmerReward = (amount: number, currentMilestone: number, endMilestone: number): number => {
@@ -373,6 +347,22 @@ const getStakingEventFromAirdrop = (airdrop: StakingAirdrop): ParticipationEvent
     return get(participationEvents).find((pe) => pe.eventId === stakingEventId)
 }
 
+const formatStakingAirdropReward = (airdrop: StakingAirdrop, amount: number): string => {
+    switch (airdrop) {
+        case StakingAirdrop.Assembly: {
+            type AssemblyDenomination = 'µ' | 'm' | ''
+            const denomination: AssemblyDenomination =
+                amount >= 1.0 ? '' : amount >= 0.001 ? 'm' : 'µ'
+
+            return `${amount} ${denomination}${STAKING_AIRDROP_TOKENS[airdrop]}`
+        }
+        case StakingAirdrop.Shimmer:
+            return `${amount} ${STAKING_AIRDROP_TOKENS[airdrop]}`
+        default:
+            return '0'
+    }
+}
+
 /**
  * Calculates the reward estimate for a particular staking airdrop.
  *
@@ -380,10 +370,11 @@ const getStakingEventFromAirdrop = (airdrop: StakingAirdrop): ParticipationEvent
  *
  * @param {StakingAirdrop} airdrop
  * @param {number} amountToStake
+ * @param {boolean} formatAmount
  *
- * @returns {number}
+ * @returns {number | string}
  */
-export const estimateStakingAirdropReward = (airdrop: StakingAirdrop, amountToStake: number): number => {
+export const estimateStakingAirdropReward = (airdrop: StakingAirdrop, amountToStake: number, formatAmount: boolean = false): number | string => {
     const stakingEvent = getStakingEventFromAirdrop(airdrop)
     if (!stakingEvent) {
         showAppNotification({
@@ -399,18 +390,23 @@ export const estimateStakingAirdropReward = (airdrop: StakingAirdrop, amountToSt
     const currentMilestone = get(networkStatus)?.currentMilestone || stakingEvent?.status?.milestoneIndex
     const endMilestone = stakingEvent?.information?.milestoneIndexEnd
 
+    let estimation
     switch (airdrop) {
         case StakingAirdrop.Assembly:
-            return estimateAssemblyReward(
+            estimation = estimateAssemblyReward(
                 amountToStake, currentMilestone, endMilestone
             )
+            break
         case StakingAirdrop.Shimmer:
-            return estimateShimmerReward(
+            estimation = estimateShimmerReward(
                 amountToStake, currentMilestone, endMilestone
             )
+            break
         default:
             return 0
     }
+
+    return formatAmount ? formatStakingAirdropReward(airdrop, estimation) : estimation
 }
 
 export const getStakedFunds = (account: WalletAccount): number => {
@@ -535,14 +531,6 @@ export function participate(accountId: string, participations: Participation[]):
             participations,
             {
                 onSuccess(response: Event<ParticipateResponsePayload>) {
-                    response?.payload.forEach((msg) => {
-                        if (!msg) return
-
-                        addParticipationTransaction({
-                            action: ParticipationAction.Stake,
-                            messageId: msg.id,
-                        })
-                    })
                     resolve()
                 },
                 onError(error) {
@@ -581,12 +569,6 @@ export function participate(accountId: string, participations: Participation[]):
             {
                 onSuccess(response: Event<ParticipateResponsePayload>) {
                     response?.payload.forEach((msg) => {
-                        if (!msg) return
-
-                        addParticipationTransaction({
-                            action: ParticipationAction.Unstake,
-                            messageId: msg.id,
-                        })
                     })
                     resolve()
                 },

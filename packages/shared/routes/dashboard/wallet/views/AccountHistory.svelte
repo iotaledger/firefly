@@ -5,15 +5,26 @@
     import { isLedgerProfile } from 'shared/lib/profile'
     import { displayNotificationForLedgerProfile } from 'shared/lib/ledger'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { AccountMessage } from '../../../../lib/typings/wallet'
-    import { aggregateParticipationMessages } from '../../../../lib/participation'
+    import { AccountMessage } from 'shared/lib/typings/wallet'
+    import { chunkString, toHexString, toUtf8String } from 'shared/lib/utils'
 
     export let locale: Locale
 
     export let transactions = []
     export let color = 'blue'
 
-    $: console.log('TXs: ', transactions)
+    $: console.log('TX PAYLOADs: ', transactions.slice(0, 10).map((tx) => {
+        const embeddedData = tx.payload.data.essence.data.payload?.data
+        if (!embeddedData) return ''
+
+        return [
+            toUtf8String(embeddedData?.index),
+            chunkString(
+                toHexString(embeddedData?.data),
+                64
+            )
+        ]
+    }))
 
     function handleTransactionClick(transaction) {
         selectedMessage.set(transaction)
@@ -52,7 +63,7 @@
     }
 
     const getTransactions = (): AccountMessage[] => {
-        return aggregateParticipationMessages(transactions)
+        return transactions
     }
 </script>
 

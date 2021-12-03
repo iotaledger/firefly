@@ -13,11 +13,6 @@ export enum ParticipationAction {
     Unvote = 'unvote',
 }
 
-export type ParticipationTransaction = {
-    action: ParticipationAction
-    messageId: string
-}
-
 export enum ParticipationEventState {
     Upcoming = 'upcoming',
     Commencing = 'commencing',

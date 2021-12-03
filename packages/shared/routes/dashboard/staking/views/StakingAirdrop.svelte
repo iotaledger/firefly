@@ -21,7 +21,7 @@
 
     let remainingTimeAmount, remainingTimeUnit
     $: {
-        ;[remainingTimeAmount, remainingTimeUnit] = getBestTimeDuration(
+        [remainingTimeAmount, remainingTimeUnit] = getBestTimeDuration(
             isAssembly() ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
         ).split(' ')
     }
