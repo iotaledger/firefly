@@ -49,7 +49,7 @@ public class WalletPlugin: CAPPlugin {
     }
 
     @objc func sendMessage(_ call: CAPPluginCall) {
-        guard let payload = call.getObject("message") else {
+        guard let message = call.getObject("message") else {
             return call.reject("message is required")
         }
         guard JSONSerialization.isValidJSONObject(message) else {
@@ -63,6 +63,7 @@ public class WalletPlugin: CAPPlugin {
     }
 
     @objc func listen(_ call: CAPPluginCall) {
+        guard isInitialized else { return call.reject("actor not initialized") }
         guard let actorId = call.getString("actorId") else {
             return call.reject("actorId is required")
         }
