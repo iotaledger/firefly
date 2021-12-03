@@ -20,7 +20,9 @@
     export let to = ''
     export let amount = 0
     export let unit = Unit.i
-    export let onConfirm = (..._: any[]): void => {}
+    export let onConfirm = (..._: any[]): void => {};
+
+    export let isSendingFromParticpatingAccount = false;
 
     const displayAmount = getFormattedAmount()
 
@@ -56,8 +58,11 @@
         <Illustration illustration="balance-desktop" />
     </div>
     <div class="w-full text-center my-9 px-10">
-        <Text type="h4" highlighted classes="mb-3">
+        <Text type="h4" highlighted classes="mb-2">
             {locale('popups.transaction.body', { values: { amount: displayAmount } })}
+        </Text>
+        <Text type="h5" error classes="mb-2">
+            {locale('popups.transaction.sendingFromStakedAccount')}
         </Text>
         <Text type={internal ? 'p' : 'pre'} secondary bigger>{to}</Text>
     </div>
