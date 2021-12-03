@@ -2,17 +2,18 @@
     import { HR, Illustration, Link, Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { localize } from 'shared/lib/i18n'
+    import { showAppNotification } from 'shared/lib/notifications'
+    import { getBestTimeDuration } from 'shared/lib/time'
+    import { capitalize } from 'shared/lib/utils'
+
+    import { STAKING_AIRDROP_TOKENS } from 'shared/lib/participation/constants'
     import {
         assemblyStakingRemainingTime,
         assemblyStakingRewards,
         shimmerStakingRemainingTime,
-        shimmerStakingRewards,
-        STAKING_AIRDROP_TOKENS,
-    } from 'shared/lib/participation'
-    import { getBestTimeDuration } from 'shared/lib/time'
-    import { StakingAirdrop } from 'shared/lib/typings/participation'
-    import { showAppNotification } from 'shared/lib/notifications'
-    import { capitalize } from 'shared/lib/utils'
+        shimmerStakingRewards
+    } from 'shared/lib/participation/stores'
+    import { StakingAirdrop } from 'shared/lib/participation/types'
 
     export let airdrop: StakingAirdrop
 

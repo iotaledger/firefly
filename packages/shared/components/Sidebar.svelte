@@ -1,14 +1,14 @@
 <script lang="typescript">
+    import { onDestroy } from 'svelte'
+    import { get } from 'svelte/store'
     import { Icon, Logo, NetworkIndicator, ProfileActionsModal, Text } from 'shared/components'
     import { getInitials } from 'shared/lib/helpers'
+    import { Locale } from 'shared/lib/typings/i18n'
     import { NETWORK_HEALTH_COLORS, networkStatus } from 'shared/lib/networkStatus'
+    import { isStakingFeatureNew } from 'shared/lib/participation/stores'
     import { activeProfile } from 'shared/lib/profile'
     import { dashboardRoute, settingsRoute, resetWalletRoute } from 'shared/lib/router'
     import { SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
-    import { isStakingFeatureNew } from 'shared/lib/participation'
-    import { onDestroy } from 'svelte'
-    import { get } from 'svelte/store'
-    import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 

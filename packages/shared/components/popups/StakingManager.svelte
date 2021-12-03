@@ -1,39 +1,40 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
     import { get } from 'svelte/store'
+
     import { Button, Icon, Spinner, Text } from 'shared/components'
+    import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
+    import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { Locale } from 'shared/lib/typings/i18n'
+    import { networkStatus } from 'shared/lib/networkStatus'
+    import { NodePlugin } from 'shared/lib/typings/node'
+    import { showAppNotification } from 'shared/lib/notifications'
+    import { openPopup, popupState } from 'shared/lib/popup'
+    import { activeProfile, isSoftwareProfile } from 'shared/lib/profile'
+    import { checkStronghold } from 'shared/lib/stronghold'
+    import { formatUnitBestMatch } from 'shared/lib/units'
     import { asyncSyncAccounts, transferState, wallet } from 'shared/lib/wallet'
     import { WalletAccount } from 'shared/lib/typings/wallet'
-    import { openPopup, popupState } from 'shared/lib/popup'
-    import { onMount } from 'svelte'
-    import { formatUnitBestMatch } from 'shared/lib/units'
+
+    import { getParticipationOverview, participate, stopParticipating } from 'shared/lib/participation/api'
+    import { STAKING_EVENT_IDS, STAKING_PARTICIPATIONS } from 'shared/lib/participation/constants'
     import {
-        accountToParticipate,
         canAccountParticipate,
         canParticipate,
-        getParticipationOverview,
         getStakedFunds,
         getUnstakedFunds,
         isAccountPartiallyStaked,
-        isAccountStaked,
-        participate,
+        isAccountStaked
+    } from 'shared/lib/participation'
+    import {
+        accountToParticipate,
         participationAction,
         participationOverview,
         stakedAccounts,
         stakedAmount,
-        STAKING_EVENT_IDS,
-        STAKING_PARTICIPATIONS,
-        stakingEventState,
-        stopParticipating
-    } from 'shared/lib/participation'
-    import { ParticipationAction } from 'shared/lib/typings/participation'
-    import { activeProfile, isSoftwareProfile } from 'shared/lib/profile'
-    import { checkStronghold } from 'shared/lib/stronghold'
-    import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
-    import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
-    import { showAppNotification } from 'shared/lib/notifications'
-    import { NodePlugin } from 'shared/lib/typings/node'
-    import { networkStatus } from 'shared/lib/networkStatus'
+        stakingEventState
+    } from 'shared/lib/participation/stores'
+    import { ParticipationAction } from 'shared/lib/participation/types'
 
     export let locale: Locale
 

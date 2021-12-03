@@ -6,7 +6,7 @@ import type { Message } from './message'
 import type { NodeInfo } from './node'
 import type { MigrationBundle, MigrationData, SendMigrationBundleResponse, MigrationAddress } from './migration'
 import type { StrongholdStatus } from './wallet'
-import type { ParticipateResponsePayload, ParticipationOverviewResponse } from './participation'
+import type { ParticipateResponsePayload, ParticipationOverviewResponse } from '../participation/types'
 
 export interface Actor {
     destroy(): void

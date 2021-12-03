@@ -1,8 +1,15 @@
 <script lang="typescript">
+    import { tick } from 'svelte'
+    import { get } from 'svelte/store'
     import { Button, Icon, Spinner, Text, Tooltip } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
+    import { showAppNotification } from 'shared/lib/notifications'
+    import { openPopup, popupState } from 'shared/lib/popup'
+    import { formatUnitBestMatch } from 'shared/lib/units'
+    import { wallet } from 'shared/lib/wallet'
+
+    import { canAccountParticipate, canParticipate } from 'shared/lib/participation'
     import {
-        canParticipate,
         accountToParticipate,
         partiallyStakedAccounts,
         partiallyStakedAmount,
@@ -11,17 +18,13 @@
         stakedAccounts,
         stakedAmount,
         stakingEventState,
-        unstakedAmount, canAccountParticipate,
-    } from 'shared/lib/participation'
-    import { openPopup, popupState } from 'shared/lib/popup'
-    import { ParticipationAction, ParticipationEventState } from 'shared/lib/typings/participation'
-    import { formatUnitBestMatch } from 'shared/lib/units'
-    import { tick } from 'svelte'
-    import { get } from 'svelte/store'
-    import { wallet } from '../../../../lib/wallet'
-    import { showAppNotification } from '../../../../lib/notifications'
+        unstakedAmount,
+    } from 'shared/lib/participation/stores'
+    import { ParticipationAction, ParticipationEventState } from 'shared/lib/participation/types'
 
-    $: participationOverview, $stakedAccounts, $partiallyStakedAccounts
+    $: $participationOverview, $stakedAccounts, $partiallyStakedAccounts
+
+    let showSpinner
     $: showSpinner = !$popupState.active && $participationAction && $accountToParticipate
 
     let canStake

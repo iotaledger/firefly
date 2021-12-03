@@ -1,24 +1,24 @@
 <script lang="typescript">
-    import { DashboardPane } from 'shared/components'
-    import { StakingAirdrop as Airdrop } from 'shared/lib/typings/participation'
-    import { StakingAirdrop, StakingHeader, StakingInfo, StakingSummary } from './views'
-    import { accountToParticipate, isStakingFeatureNew, participationAction } from 'shared/lib/participation'
-    import { MILLISECONDS_PER_SECOND } from 'shared/lib/time'
-    import { showAppNotification } from 'shared/lib/notifications'
-    import { localize } from 'shared/lib/i18n'
     import { onDestroy, onMount } from 'svelte'
-    import { transferState } from '../../../lib/wallet'
+    import { DashboardPane } from 'shared/components'
+    import { StakingAirdrop, StakingHeader, StakingInfo, StakingSummary } from './views'
     import {
-        GeneratingRemainderDepositAddressEvent, PreparedTransactionEvent,
+        GeneratingRemainderDepositAddressEvent,
+        PreparedTransactionEvent,
         TransactionEventData,
         TransferProgressEventData,
         TransferProgressEventType,
         TransferState
-    } from '../../../lib/typings/events'
-    import { closePopup, openPopup } from '../../../lib/popup'
-    import { isSoftwareProfile } from '../../../lib/profile'
+    } from 'shared/lib/typings/events'
+    import { localize } from 'shared/lib/i18n'
+    import { showAppNotification } from 'shared/lib/notifications'
+    import { closePopup, openPopup } from 'shared/lib/popup'
+    import { isSoftwareProfile } from 'shared/lib/profile'
+    import { MILLISECONDS_PER_SECOND } from 'shared/lib/time'
+    import { transferState } from 'shared/lib/wallet'
 
-    $: console.log('TRANSFER STATE:: ', $transferState)
+    import { accountToParticipate, isStakingFeatureNew, participationAction } from 'shared/lib/participation/stores'
+    import { StakingAirdrop as _StakingAirdrop } from 'shared/lib/participation/types'
 
     const handleNewStakingFeature = (): void => {
         if ($isStakingFeatureNew) {
@@ -148,10 +148,10 @@
             </DashboardPane>
         </div>
         <DashboardPane classes="h-full">
-            <StakingAirdrop airdrop={Airdrop.Assembly} />
+            <StakingAirdrop airdrop={_StakingAirdrop.Assembly} />
         </DashboardPane>
         <DashboardPane classes="h-full">
-            <StakingAirdrop airdrop={Airdrop.Shimmer} />
+            <StakingAirdrop airdrop={_StakingAirdrop.Shimmer} />
         </DashboardPane>
     </div>
 </div>

@@ -1,4 +1,7 @@
 <script lang="typescript">
+    import { getContext, onDestroy, onMount } from 'svelte'
+    import { get } from 'svelte/store'
+    import type { Readable } from 'svelte/store'
     import { Unit } from '@iota/unit-converter'
     import { Address, Amount, Button, Dropdown, Icon, ProgressBar, Text } from 'shared/components'
     import { clearSendParams, sendParams } from 'shared/lib/app'
@@ -10,15 +13,6 @@
         isFiatCurrency,
         parseCurrency,
     } from 'shared/lib/currency'
-    import {
-        displayNotificationForLedgerProfile,
-        ledgerDeviceState,
-        promptUserToConnectLedger,
-    } from 'shared/lib/ledger'
-    import { displayNotifications, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
-    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-    import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
-    import { accountRoute, walletRoute } from 'shared/lib/router'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
     import {
         GeneratingRemainderDepositAddressEvent,
@@ -29,17 +23,23 @@
         TransferState,
     } from 'shared/lib/typings/events'
     import { Locale } from 'shared/lib/typings/i18n'
+    import {
+        displayNotificationForLedgerProfile,
+        ledgerDeviceState,
+        promptUserToConnectLedger,
+    } from 'shared/lib/ledger'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
+    import { displayNotifications, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import type { NotificationType } from 'shared/lib/typings/notification'
+    import { isAccountStaked } from 'shared/lib/participation'
+    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
+    import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
+    import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
     import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
     import { DUST_THRESHOLD, isTransferring, transferState, wallet } from 'shared/lib/wallet'
-    import { getContext, onDestroy, onMount } from 'svelte'
-    import type { Readable } from 'svelte/store'
-    import { get } from 'svelte/store'
-    import { isAccountStaked } from 'shared/lib/participation'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
 
     export let locale: Locale
 

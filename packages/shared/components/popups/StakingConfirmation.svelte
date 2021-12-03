@@ -1,23 +1,19 @@
 <script lang="typescript">
     import { Button, Illustration, Text } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
-    import {
-        accountToParticipate,
-        estimateStakingAirdropReward,
-        getUnstakedFunds,
-        isAccountPartiallyStaked,
-        participationAction,
-        STAKING_AIRDROP_TOKENS,
-    } from 'shared/lib/participation'
-    import { openPopup } from 'shared/lib/popup'
-    import { isSoftwareProfile } from 'shared/lib/profile'
-    import { checkStronghold } from 'shared/lib/stronghold'
-    import { ParticipationAction, StakingAirdrop } from 'shared/lib/typings/participation'
-    import type { WalletAccount } from 'shared/lib/typings/wallet'
-    import { formatUnitBestMatch } from 'shared/lib/units'
     import { ledgerDeviceState } from 'shared/lib/ledger'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
+    import { openPopup } from 'shared/lib/popup'
+    import { isSoftwareProfile } from 'shared/lib/profile'
+    import { checkStronghold } from 'shared/lib/stronghold'
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
+    import { formatUnitBestMatch } from 'shared/lib/units'
+
+    import { STAKING_AIRDROP_TOKENS } from 'shared/lib/participation/constants'
+    import { estimateStakingAirdropReward, isAccountPartiallyStaked } from 'shared/lib/participation'
+    import { accountToParticipate, participationAction } from 'shared/lib/participation/stores'
+    import { ParticipationAction, StakingAirdrop } from 'shared/lib/participation/types'
 
     export let accountToStake: WalletAccount
 

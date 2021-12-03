@@ -1,16 +1,15 @@
 <script lang="typescript">
+    import { getContext } from 'svelte'
+    import type { Readable } from 'svelte/store'
     import { Button, Dropdown, Icon, QR, Spinner, Text } from 'shared/components'
+    import { AccountIdentifier } from 'shared/lib/typings/account'
+    import { Locale } from 'shared/lib/typings/i18n'
     import { isLedgerProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { setClipboard } from 'shared/lib/utils'
     import { hasGeneratedALedgerReceiveAddress, isSyncing } from 'shared/lib/wallet'
-    import { getContext } from 'svelte'
-    import type { Readable } from 'svelte/store'
-    import { AccountIdentifier } from 'shared/lib/typings/account'
-    import { Locale } from 'shared/lib/typings/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
-    import { isAccountStaked } from 'shared/lib/participation'
 
     export let locale: Locale
 

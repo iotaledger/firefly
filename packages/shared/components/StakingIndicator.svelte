@@ -1,9 +1,9 @@
 <script lang="typescript">
+    import { tick } from 'svelte'
     import { Icon, Text, Tooltip } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
-    import { tick } from 'svelte'
-    import { stakedAccounts, stakingEventState } from '../lib/participation'
-    import { ParticipationEventState } from '../lib/typings/participation'
+    import { stakedAccounts, stakingEventState } from 'shared/lib/participation/stores'
+    import { ParticipationEventState } from 'shared/lib/participation/types'
 
     $: indicatorIcon = getIndicatorIcon($stakingEventState, $stakedAccounts.length > 0)
     $: indicatorText = getLocalizedIndicatorText($stakingEventState, $stakedAccounts.length > 0)

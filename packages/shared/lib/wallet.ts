@@ -54,8 +54,14 @@ import { HistoryDataProps, PriceData } from './typings/market'
 import { ProfileType } from './typings/profile'
 import { buildClientOptions } from './network'
 import { Electron } from './electron'
-import { isAccountStaked, partiallyStakedAccounts } from './participation'
-import type { ParticipationOverviewResponse, ParticipationEvent, ParticipateResponsePayload, Participation } from './typings/participation'
+
+// PARTICIPATION
+import type {
+    ParticipateResponsePayload,
+    Participation,
+    ParticipationEvent,
+    ParticipationOverviewResponse
+} from './participation/types'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 

@@ -13,7 +13,6 @@ import * as message from './message'
 import * as migration from './migration'
 import * as network from './network'
 import * as notification from './notification'
-import * as participation from './participation'
 import * as utils from './utils'
 import * as wallet from './wallet'
 
@@ -33,7 +32,6 @@ export {
     migration,
     network,
     notification,
-    participation,
     utils,
     wallet,
 }

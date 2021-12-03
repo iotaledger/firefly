@@ -9,7 +9,7 @@ import { closePopup } from './popup'
 import { activeProfile, clearActiveProfile, isLedgerProfile, isStrongholdLocked } from './profile'
 import { resetRouter } from './router'
 import { api, destroyActor, resetWallet } from './wallet'
-import { resetParticipation } from './participation'
+import { resetParticipation } from './participation/participation'
 
 /**
  * Mobile mode

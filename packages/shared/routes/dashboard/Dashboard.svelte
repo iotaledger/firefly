@@ -1,11 +1,14 @@
 <script lang="typescript">
+    import { onDestroy, onMount } from 'svelte'
+    import { get } from 'svelte/store'
+
     import { Idle, Sidebar } from 'shared/components'
     import { Settings, Staking, Wallet } from 'shared/routes'
     import { loggedIn, logout, sendParams } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { deepLinkRequestActive, parseDeepLink } from 'shared/lib/deepLinking/deepLinking'
-    import { DeepLinkingContexts } from 'shared/lib/typings/deepLinking/deepLinking';
-    import { WalletOperations } from 'shared/lib/typings/deepLinking/walletContext';
+    import { DeepLinkingContexts } from 'shared/lib/typings/deepLinking/deepLinking'
+    import { WalletOperations } from 'shared/lib/typings/deepLinking/walletContext'
     import { Electron } from 'shared/lib/electron'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
@@ -26,14 +29,9 @@
         STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
         wallet,
     } from 'shared/lib/wallet'
-    import { onDestroy, onMount } from 'svelte'
-    import { get } from 'svelte/store'
     import { clearPollNetworkInterval, pollNetworkStatus } from 'shared/lib/networkStatus'
-    import {
-        clearPollParticipationOverviewInterval,
-        getParticipationEvents,
-        pollParticipationOverview
-    } from 'shared/lib/participation'
+    import { getParticipationEvents } from 'shared/lib/participation/api'
+    import { clearPollParticipationOverviewInterval, pollParticipationOverview } from 'shared/lib/participation'
 
     export let locale: Locale
     export let mobile

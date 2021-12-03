@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, Illustration, Text } from 'shared/components'
-    import { closePopup, openPopup } from 'shared/lib/popup'
     import { Locale } from 'shared/lib/typings/i18n'
+    import { closePopup, openPopup } from 'shared/lib/popup'
 
     export let locale: Locale
 

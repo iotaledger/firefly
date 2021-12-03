@@ -1,8 +1,12 @@
 <script lang="typescript">
+    import { getContext } from 'svelte'
+    import type { Writable } from 'svelte/store'
     import { Icon, Text } from 'shared/components'
     import { truncateString } from 'shared/lib/helpers'
     import { formatDate } from 'shared/lib/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
     import type { Milestone, Payload, Transaction } from 'shared/lib/typings/message'
+    import { ParticipationAction } from 'shared/lib/participation/types'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import {
         findAccountWithAddress,
@@ -13,11 +17,7 @@
         receiverAddressesFromTransactionPayload,
         sendAddressFromTransactionPayload,
     } from 'shared/lib/wallet'
-    import { getContext } from 'svelte'
-    import type { Writable } from 'svelte/store'
-    import { Locale } from 'shared/lib/typings/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
-    import { ParticipationAction } from 'shared/lib/typings/participation'
 
     export let locale: Locale
 

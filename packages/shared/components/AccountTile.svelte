@@ -1,11 +1,12 @@
 <script lang="typescript">
-    import { Icon, Text, Tooltip } from 'shared/components'
-    import { partiallyStakedAccounts, partiallyStakedAmount, stakedAccounts, STAKING_AIRDROP_TOKENS } from 'shared/lib/participation'
-    import { StakingAirdrop } from 'shared/lib/typings/participation'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
-    import { formatUnitBestMatch } from 'shared/lib/units'
-    import { localize } from 'shared/lib/i18n'
     import { tick } from 'svelte'
+    import { Icon, Text, Tooltip } from 'shared/components'
+    import { localize } from 'shared/lib/i18n'
+    import { STAKING_AIRDROP_TOKENS } from 'shared/lib/participation/constants'
+    import { partiallyStakedAccounts, partiallyStakedAmount, stakedAccounts } from 'shared/lib/participation/stores'
+    import { StakingAirdrop } from 'shared/lib/participation/types'
+    import { formatUnitBestMatch } from 'shared/lib/units'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
 
     export let name = ''
     export let balance = ''

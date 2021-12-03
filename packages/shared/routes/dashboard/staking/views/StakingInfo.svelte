@@ -2,8 +2,9 @@
     import { Illustration, Link, Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { localize } from 'shared/lib/i18n'
-    import { stakingEventState } from 'shared/lib/participation'
-    import { ParticipationEventState } from 'shared/lib/typings/participation'
+
+    import { stakingEventState } from 'shared/lib/participation/stores'
+    import { ParticipationEventState } from 'shared/lib/participation/types'
 
     const handleExternalLinkClick = (): void => {
         Electron.openUrl('https://firefly.iota.org')
