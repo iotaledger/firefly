@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Illustration, Text } from 'shared/components'
-    import { localize } from 'shared/lib/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
     import { ledgerDeviceState } from 'shared/lib/ledger'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -11,10 +11,11 @@
     import { formatUnitBestMatch } from 'shared/lib/units'
 
     import { STAKING_AIRDROP_TOKENS } from 'shared/lib/participation/constants'
-    import { estimateStakingAirdropReward, isAccountPartiallyStaked } from 'shared/lib/participation'
+    import { estimateStakingAirdropReward, getUnstakedFunds, isAccountPartiallyStaked } from 'shared/lib/participation'
     import { accountToParticipate, participationAction } from 'shared/lib/participation/stores'
     import { ParticipationAction, StakingAirdrop } from 'shared/lib/participation/types'
 
+    export let locale: Locale
     export let accountToStake: WalletAccount
 
     const getRewards = (airdrop: StakingAirdrop): [string, string] => {
@@ -52,7 +53,7 @@
             if ($ledgerDeviceState !== LedgerDeviceState.Connected) {
                 showAppNotification({
                     type: 'warning',
-                    message: localize('error.ledger.appNotOpen')
+                    message: locale('error.ledger.appNotOpen')
                 })
             } else {
                 _onConfirm()
@@ -70,7 +71,7 @@
 </div>
 <div class="flex flex-col">
     <div class="absolute flex flex-col self-center text-center transform translate-y-28">
-        <Text type="p" highlighted classes="text-lg">{localize('views.staking.confirmation.title')}</Text>
+        <Text type="p" highlighted classes="text-lg">{locale('views.staking.confirmation.title')}</Text>
         <Text type="p" overrideColor classes="text-2xl font-extrabold text-gray-800">
             {isPartialStake ? formatUnitBestMatch(getUnstakedFunds(accountToStake)) : accountToStake.balance}
         </Text>
@@ -84,7 +85,7 @@
                 <Text type="p" classes="font-extrabold text-lg">{airdrop}</Text>
                 <Text type="p" classes="ml-1 text-lg">({STAKING_AIRDROP_TOKENS[airdrop.toLowerCase()]})</Text>
             </div>
-            <Text type="p" secondary classes="mb-4">{localize('views.staking.confirmation.body')}</Text>
+            <Text type="p" secondary classes="mb-4">{locale('views.staking.confirmation.body')}</Text>
             <div class="flex flex-col">
                 <Text type="p" classes="font-bold text-xl inline">{getRewards(airdrop)[0]}</Text>
                 <Text type="p" secondary classes="text-lg inline">{getRewards(airdrop)[1]}</Text>
@@ -93,5 +94,5 @@
     {/each}
 </div>
 <div class="flex flex-row space-x-1">
-    <Button classes="w-full" onClick={handleConfirmClick}>{localize('actions.confirm')}</Button>
+    <Button classes="w-full" onClick={handleConfirmClick}>{locale('actions.confirm')}</Button>
 </div>

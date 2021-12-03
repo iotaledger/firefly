@@ -824,7 +824,7 @@ export const initialiseListeners = (): void => {
             const { balanceOverview, accounts } = get(wallet)
             const { accountId, message } = response.payload
             const account = get(accounts).find((account) => account.id === accountId)
-            if (!account || !message) return
+            // if (!account || !message) return
 
             if (message.payload.type === 'Transaction') {
                 const { essence } = message.payload.data

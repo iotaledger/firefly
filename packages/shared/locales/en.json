@@ -532,11 +532,11 @@
                 "collectedRewards": "Collected rewards",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "A scalable multi-chain network, built on top of sharded, composable smart contracts powered by IOTA."
+                    "description": "Assembly is a decentralized network to build and connect open worls on a feeless, scalable multi-chain network. Assembly. A feeless, scalable multi-chain network for Web3."
                 },
                 "shimmer": {
                     "name": "Shimmer",
-                    "description": "The incentivized staging network to advance major innovations from IOTA. Learn, build, earn and grow together."
+                    "description": "The incentivized staging network to advance major innovations from IOTA. Whatever happens, happens - the future of Shimmer will be up to you. Learn, build, earn and grow together."
                 }
             },
             "notice": {

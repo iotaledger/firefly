@@ -63,14 +63,25 @@ const getStakingEventFromAirdrop = (airdrop: StakingAirdrop): ParticipationEvent
     return get(participationEvents).find((pe) => pe.eventId === stakingEventId)
 }
 
+type AssemblyDenomination = 'µ' | 'm' | ''
+
+const getAssemblyTokenMultiplier = (denomination: AssemblyDenomination): number => {
+    switch(denomination) {
+        case 'm':
+            return 1_000
+        case 'µ':
+            return 1_000_000
+        default:
+            return 1
+    }
+}
+
 const formatStakingAirdropReward = (airdrop: StakingAirdrop, amount: number): string => {
     switch (airdrop) {
         case StakingAirdrop.Assembly: {
-            const multiplier =
-                amount >= 1.0 ? 1 : amount >= 0.001 ? 1_000 : 1_000_000
-            type AssemblyDenomination = 'µ' | 'm' | ''
             const denomination: AssemblyDenomination =
                 amount >= 1.0 ? '' : amount >= 0.001 ? 'm' : 'µ'
+            const multiplier = getAssemblyTokenMultiplier(denomination)
 
             return `${amount * multiplier} ${denomination}${STAKING_AIRDROP_TOKENS[airdrop]}`
         }
