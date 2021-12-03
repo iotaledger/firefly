@@ -173,8 +173,8 @@ module.exports = {
                 highlight: '#17E1D5',
             },
             assembly: {
-                bg: '#FFFFFF',
-                highlight: '#0066FF',
+                bg: '#0B0A0E',
+                highlight: '#FF3FF2',
             },
         },
         extend: {
