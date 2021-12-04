@@ -519,13 +519,17 @@
                     "You can stake or unstake without limits.",
                     "Rewards are continually airdropped to you."
                 ],
-                "upcoming": "Dec 15th 2021",
-                "upcomingSubheader": "Staking events commence",
-                "commencing": "Dec 16th 2021",
-                "commencingSubheader": "Staking events begin",
-                "holding": "Staking events are live",
-                "ended": "Staking events ended",
-                "inactive": "Staking events inactive"
+                "upcomingSubheader": "Airdrop events commences",
+                "upcomingHeader": "Dec 15th 2021",
+                "commencingSubheader": "Airdrop events commencing",
+                "commencingHeader": "Pre-stake phase",
+                "holdingSubheader": "Airdrop events ongoing",
+                "holdingHeaderHolding": "{duration} left",
+                "holdingHeaderNotHolding": "Events started",
+                "endedSubheader": "Thank you!",
+                "endedHeader": "Events ended",
+                "inactiveHeader": "Airdrop events inactive",
+                "inactiveSubeader": "Not detected"
             },
             "airdrops": {
                 "remaining": "Remaining",
@@ -740,7 +744,9 @@
             "description": "When you stake a wallet, your funds are locked. You can unlock these wallets at any time, but then you won’t get full staking rewards.",
             "totalFundsStaked": "Total funds staked",
             "hasStaked": "Congratulations! \uD83C\uDF89Your funds have been staked.",
-            "hasUnstaked": "Your funds have been unstaked."
+            "hasPartiallyStaked": "Congratulations! \uD83C\uDF89The rest of your funds have been staked.",
+            "hasUnstaked": "Your funds have been unstaked.",
+            "hasPartiallyUnstaked": "Your remaining funds have been unstaked."
         }
     },
     "charts": {
@@ -855,6 +861,7 @@
         "migrateAgain": "Migrate another index",
         "visitWebsite": "Visit website",
         "howItWorks": "How it works",
+        "learnAboutStaking": "Learn about staking",
         "stake": "Stake",
         "unstake": "Unstake",
         "stakeFunds": "Stake funds",

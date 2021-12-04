@@ -2,11 +2,62 @@
     import { Illustration, Link, Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { localize } from 'shared/lib/i18n'
-
-    import { stakingEventState } from 'shared/lib/participation/stores'
-    import { ParticipationEventState } from 'shared/lib/participation/types'
+    import {
+        assemblyStakingRemainingTime,
+        participationOverview, shimmerStakingRemainingTime,
+        stakedAccounts,
+        stakingEventState
+    } from 'shared/lib/participation/stores'
+    import { ParticipationEventState, ParticipationOverview } from 'shared/lib/participation/types'
+    import { getBestTimeDuration } from 'shared/lib/time'
 
     const handleExternalLinkClick = (): void => {
+        Electron.openUrl('https://firefly.iota.org')
+    }
+
+    const getIllustration = (state: ParticipationEventState, overview: ParticipationOverview): string => {
+        const prefix = 'staking-info'
+        if (!state || !overview) return `${prefix}-upcoming`
+
+        if (state === ParticipationEventState.Holding) {
+            let maxParticipations = overview.map((apo) => apo.participations.length).sort()[overview.length - 1]
+            if (maxParticipations >= 2) {
+                maxParticipations = 2
+            }
+
+            return `${prefix}-${state}-${maxParticipations}`
+        } else {
+            return `${prefix}-${state}`
+        }
+    }
+
+    let localePath
+    $: localePath = `views.staking.info.${$stakingEventState}`
+    $: $assemblyStakingRemainingTime, $shimmerStakingRemainingTime
+
+    const getHeaders = (): [string, string] => {
+        if ($stakingEventState === ParticipationEventState.Holding) {
+            const isStaking = $stakedAccounts.length > 0
+            const localePathExtra = $stakedAccounts.length > 0 ? 'Holding' : 'NotHolding'
+
+            return [
+                localize(
+                    `${localePath}Header${localePathExtra}`,
+                    isStaking
+                        ? { values: { duration: getBestTimeDuration($assemblyStakingRemainingTime) } }
+                        : {}
+                ),
+                localize(`views.staking.info.${$stakingEventState}Subheader`)
+            ]
+        } else {
+            return [localize(`${localePath}Header`), localize(`views.staking.info.${$stakingEventState}Subheader`)]
+        }
+    }
+
+    let header, subHeader
+    $: $participationOverview, [header, subHeader] = getHeaders()
+
+    const handleLearnMoreClick = (): void => {
         Electron.openUrl('https://firefly.iota.org')
     }
 </script>
@@ -23,34 +74,13 @@
     }
 </style>
 
-<div class="flex flex-col justify-between w-full h-full bg-yellow-50 dark:bg-gray-800">
-    <div class="flex flex-col">
-        <div class="absolute flex flex-col text-center justify-center self-center transform translate-y-10">
-            {#if $stakingEventState === ParticipationEventState.Upcoming || $stakingEventState === ParticipationEventState.Commencing}
-                <Text type="p" secondary classes="font-normal text-xl">{localize(`views.staking.info.${$stakingEventState}Subheader`)}</Text>
-            {/if}
-            <Text type="h5" classes="text-xl">{localize(`views.staking.info.${$stakingEventState}`)}</Text>
-        </div>
-        <Illustration illustration="staking-info" />
-    </div>
-    <div class="px-8 pb-10 flex justify-between flex-col">
-        <Text type="h3" classes="mb-2">{localize('views.staking.info.title')}</Text>
-        <div>
-            <Text type="p" overrideColor smaller classes="text-gray-700 font-normal dark:text-white">
-                {localize('views.staking.info.description')}
-            </Text>
-            <ul class="mb-6">
-                {#each localize('views.staking.info.bullets') as stakingInfoBullet}
-                    <li class="dark:text-white">
-                        <Text type="p" smaller overrideColor classes="text-gray-700 font-normal dark:text-white">
-                            {stakingInfoBullet}
-                        </Text>
-                    </li>
-                {/each}
-            </ul>
-            <Link onClick={handleExternalLinkClick} classes="self-center text-14">
-                {localize('actions.howItWorks')}
-            </Link>
-        </div>
+<div class="p-8 flex flex-col justify-center items-center w-full h-full bg-gradient-to-t from-blue-400 to-lightblue-500">
+    <Illustration illustration={getIllustration($stakingEventState, $participationOverview)} />
+    <div class="mt-8 flex flex-col justify-between text-center">
+        <Text type="p" classes="text-xl">{subHeader}</Text>
+        <Text type="p" classes="font-extrabold text-2xl">{header}</Text>
+        <Link onClick={handleLearnMoreClick} classes="mt-2 text-lightblue-200">
+            {localize('actions.learnAboutStaking')}
+        </Link>
     </div>
 </div>

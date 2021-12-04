@@ -27,7 +27,7 @@
         isAccountStaked
     } from 'shared/lib/participation'
     import {
-        accountToParticipate,
+        accountToParticipate, partiallyStakedAccounts,
         participationAction,
         participationOverview,
         stakedAccounts,
@@ -86,6 +86,8 @@
 
         isPerformingAction = true
 
+        const isPartialStake = $partiallyStakedAccounts.find((psa) => psa.id === $accountToParticipate?.id) !== undefined
+
         const _sync = async () => {
             // Add a delay to cover for the transaction confirmation time
             // TODO: Might need to rethink of a better solution here.
@@ -96,8 +98,8 @@
                 type: 'info',
                 message: locale(`popups.stakingManager.${
                     $participationAction === ParticipationAction.Stake
-                        ? 'hasStaked'
-                        : 'hasUnstaked'
+                        ? `has${isPartialStake ? 'Partially' : ''}Staked`
+                        : `has${isPartialStake ? 'Partially' : ''}Unstaked`
                 }`)
             })
 
@@ -211,23 +213,43 @@
                             <Icon icon="success-check" width="18" height="18" classes="text-white" />
                         </div>
                     {:else}
-                        <Icon icon="unlock" width="18" height="18" classes="{$accountToParticipate?.id === account?.id ? 'text-gray-500' : ''}" />
+                        <Icon icon="unlock" width="18" height="18" classes="{$accountToParticipate?.id === account?.id ? 'text-gray-400' : ''}" />
                     {/if}
                     <div class="flex flex-col w-3/4">
-                        <Text type="p" classes="font-extrabold">
+                        <Text type="p" classes="font-extrabold" disabled={$accountToParticipate?.id === account?.id}>
                             {account.alias}
                         </Text>
                         {#if isAccountPartiallyStaked(account?.id)}
-                            <Text type="p" secondary classes="font-extrabold">
+                            <Text
+                                type="p"
+                                secondary={$accountToParticipate?.id !== account?.id}
+                                disabled={$accountToParticipate?.id === account?.id}
+                                classes="font-extrabold"
+                            >
                                 {formatUnitBestMatch(getStakedFunds(account))} •
-                                <Text type="p" secondary classes="inline">
+                                <Text
+                                    type="p"
+                                    secondary={$accountToParticipate?.id !== account?.id}
+                                    disabled={$accountToParticipate?.id === account?.id}
+                                    classes="inline"
+                                >
                                     {getFormattedFiatAmount(getStakedFunds(account))}
                                 </Text>
                             </Text>
                         {:else}
-                            <Text type="p" secondary classes="font-extrabold">
+                            <Text
+                                type="p"
+                                secondary={$accountToParticipate?.id !== account?.id}
+                                disabled={$accountToParticipate?.id === account?.id}
+                                classes="font-extrabold"
+                            >
                                 {account.balance} •
-                                <Text type="p" secondary classes="inline">
+                                <Text
+                                    type="p"
+                                    secondary={$accountToParticipate?.id !== account?.id}
+                                    disabled={$accountToParticipate?.id === account?.id}
+                                    classes="inline"
+                                >
                                     {account.balanceEquiv}
                                 </Text>
                             </Text>
