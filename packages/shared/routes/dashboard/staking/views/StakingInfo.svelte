@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Illustration, Link, Text } from 'shared/components'
+    import { Button, Illustration, Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { localize } from 'shared/lib/i18n'
     import {
@@ -76,11 +76,11 @@
 
 <div class="p-8 flex flex-col justify-center items-center w-full h-full bg-gradient-to-t from-blue-400 to-lightblue-500">
     <Illustration illustration={getIllustration($stakingEventState, $participationOverview)} />
-    <div class="mt-4 flex flex-col justify-between text-center">
+    <div class="w-full mt-4 flex flex-col justify-between items-center text-center">
         <Text type="p" classes="text-xl">{subHeader}</Text>
-        <Text type="p" classes="font-extrabold text-2xl">{header}</Text>
-        <Link onClick={handleLearnMoreClick} classes="mt-2 text-lightblue-200">
-            {localize('actions.learnAboutStaking')}
-        </Link>
+        <Text type="p" classes="mb-2 font-extrabold text-2xl">{header}</Text>
+        <Button onClick={handleLearnMoreClick} secondary outline>
+            <Text type="p">{localize('actions.learnAboutStaking')}</Text>
+        </Button>
     </div>
 </div>
