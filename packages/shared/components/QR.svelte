@@ -5,22 +5,32 @@
     export let data
     export let size = 150
 
-    let qr
     let cells
 
-    $: darkModeEnabled = $appSettings.darkMode
-    $: data, create()
-
-    function create() {
+    const createCells = (): void => {
         try {
-            qr = new QRCode(-1, 1)
-            qr.addData(data)
+            const qr = new QRCode(-1, 1)
+
+            /**
+             * "For presentation, lowercase is usually preferable, but
+             * inside QR codes uppercase SHOULD be used, as those permit
+             * the use of alphanumeric mode, which is 45% more compact than
+             * the normal byte mode." - BIP-0173
+             */
+            const qrData = typeof data === 'string' ? data.toUpperCase() : data
+            qr.addData(qrData)
             qr.make()
+
+            /* eslint-disable no-console */
+            console.log('CREATE CELLS: ', qr.modules)
+
             cells = qr.modules
-        } catch (e) {
-            console.error(e)
+        } catch (err) {
+            console.error(err)
         }
     }
+
+    $: data, createCells()
 </script>
 
 <style>
@@ -39,7 +49,7 @@
                     <rect
                         height={1}
                         key={cellIndex}
-                        style="fill: {cell ? (darkModeEnabled ? '#ffffff' : '#000000') : 'none'};"
+                        style="fill: {cell ? ($appSettings.darkMode ? '#ffffff' : '#000000') : 'none'};"
                         width={1}
                         x={cellIndex}
                         y={rowIndex} />
