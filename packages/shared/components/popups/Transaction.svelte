@@ -20,10 +20,9 @@
     export let to = ''
     export let amount = 0
     export let unit = Unit.i
-    export let isStaked = false
-    export let onConfirm = (..._: any[]): void => {};
+    export let isSendingFromParticpatingAccount = false
 
-    export let isSendingFromParticpatingAccount = false;
+    export let onConfirm = (..._: any[]): void => {}
 
     const displayAmount = getFormattedAmount()
 
@@ -37,8 +36,23 @@
         return isFiat ? `${fiatAmount} (${iotaAmount})` : `${iotaAmount} (${fiatAmount})`
     }
 
+    let mustAcknowledgeParticipationWarning = isSendingFromParticpatingAccount
+
+    function handleNextClick() {
+        /**
+         * NOTE: We are setting to false because once
+         * it has been acknowledged it does not have to
+         * be acknowledged anymore.
+         */
+        mustAcknowledgeParticipationWarning = false
+    }
+
     function handleCancelClick() {
         closePopup()
+    }
+
+    const getButtonAction = (): string => {
+        return mustAcknowledgeParticipationWarning ? 'next' : 'confirm'
     }
 </script>
 
@@ -55,8 +69,8 @@
 
 <Text type="h4" classes="mb-6">{locale('popups.transaction.title')}</Text>
 <div class="flex w-full flex-row flex-wrap">
-    {#if isStaked}
-        <div class="relative flex flex-col items-center bg-red-50 dark:bg-red-100 rounded-2xl mt-6 p-3">
+    {#if mustAcknowledgeParticipationWarning}
+        <div class="relative flex flex-col items-center bg-red-50 dark:bg-red-100 rounded-2xl mt-6 mb-9 p-3">
             <div class="bg-red-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
                 <Icon icon="warning" classes="text-white" />
             </div>
@@ -68,15 +82,23 @@
         <div class="illustration w-full bg-pastel-yellow dark:bg-gray-900 flex justify-center">
             <Illustration illustration="balance-desktop" />
         </div>
+        <div class="w-full text-center my-6 px-10">
+            <Text type="h4" highlighted classes="mb-2">
+                {locale('popups.transaction.body', { values: { amount: displayAmount } })}
+            </Text>
+            <Text type={internal ? 'p' : 'pre'} secondary bigger>{to}</Text>
+        </div>
     {/if}
-    <div class="w-full text-center my-6 px-10">
-        <Text type="h4" highlighted classes="mb-2">
-            {locale('popups.transaction.body', { values: { amount: displayAmount } })}
-        </Text>
-        <Text type={internal ? 'p' : 'pre'} secondary bigger>{to}</Text>
-    </div>
     <div class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" secondary onClick={() => handleCancelClick()}>{locale('actions.cancel')}</Button>
-        <Button classes="w-full" onClick={onConfirm}>{locale('actions.confirm')}</Button>
+        {#if mustAcknowledgeParticipationWarning}
+            <Button classes="w-full" onClick={handleNextClick}>
+                {locale('actions.next')}
+            </Button>
+        {:else}
+            <Button classes="w-full" onClick={onConfirm}>
+                {locale('actions.confirm')}
+            </Button>
+        {/if}
     </div>
 </div>

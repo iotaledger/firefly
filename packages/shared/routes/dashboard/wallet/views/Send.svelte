@@ -394,7 +394,6 @@
                 type: 'transaction',
                 props: {
                     isSendingFromParticpatingAccount: isAccountStaked($account.id),
-                    isStaked: isAccountStaked($account.id),
                     internal: internal || accountAlias,
                     amount: amountRaw,
                     unit,
