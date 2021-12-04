@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Unit } from '@iota/unit-converter'
-    import { Button, Illustration, Text } from 'shared/components'
+    import { Button, Icon, Illustration, Text } from 'shared/components'
     import {
         convertToFiat,
         currencies,
@@ -20,6 +20,7 @@
     export let to = ''
     export let amount = 0
     export let unit = Unit.i
+    export let isStaked = false
     export let onConfirm = (..._: any[]): void => {};
 
     export let isSendingFromParticpatingAccount = false;
@@ -54,15 +55,23 @@
 
 <Text type="h4" classes="mb-6">{locale('popups.transaction.title')}</Text>
 <div class="flex w-full flex-row flex-wrap">
-    <div class="illustration w-full bg-pastel-yellow dark:bg-gray-900 flex justify-center">
-        <Illustration illustration="balance-desktop" />
-    </div>
-    <div class="w-full text-center my-9 px-10">
+    {#if isStaked}
+        <div class="relative flex flex-col items-center bg-red-50 dark:bg-red-100 rounded-2xl mt-6 p-3">
+            <div class="bg-red-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
+                <Icon icon="warning" classes="text-white" />
+            </div>
+            <Text type="p" classes="dark:text-white mx-4 mb-4 mt-6">
+                {locale('popups.transaction.sendingFromStakedAccount')}
+            </Text>
+        </div>
+    {:else}
+        <div class="illustration w-full bg-pastel-yellow dark:bg-gray-900 flex justify-center">
+            <Illustration illustration="balance-desktop" />
+        </div>
+    {/if}
+    <div class="w-full text-center my-6 px-10">
         <Text type="h4" highlighted classes="mb-2">
             {locale('popups.transaction.body', { values: { amount: displayAmount } })}
-        </Text>
-        <Text type="h5" error classes="mb-2">
-            {locale('popups.transaction.sendingFromStakedAccount')}
         </Text>
         <Text type={internal ? 'p' : 'pre'} secondary bigger>{to}</Text>
     </div>
