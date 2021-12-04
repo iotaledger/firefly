@@ -1007,6 +1007,7 @@
         "unstaked": "Unstaked",
         "staking": "Staking",
         "unstaking": "Unstaking",
+        "notStaking": "Not staking",
         "stakedFunds": "Staked funds",
         "unstakedFunds": "Unstaked funds"
     },
