@@ -60,15 +60,14 @@ import { ClientOptions } from '../../../shared/lib/typings/client'
 import { NodeAuth } from '../../../shared/lib/typings/node'
 
 // Participation (staking, voting)
-// Staking
 import {
-    getParticipationOverview as _getParticipationOverview,
     getParticipationEvents as _getParticipationEvents,
+    getParticipationOverview as _getParticipationOverview,
     participate as _participate,
-    stopParticipating as _stopParticipating,
     participateWithRemainingFunds as _participateWithRemainingFunds,
-    Participation
-} from '../../../shared/lib/typings/participation'
+    stopParticipating as _stopParticipating,
+} from '../../../shared/lib/participation/bridge'
+import { Participation } from '../../../shared/lib/participation/types'
 
 // @ts-ignore
 import addon = require('../index.node')
