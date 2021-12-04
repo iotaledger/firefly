@@ -666,7 +666,7 @@
         "transaction": {
             "title": "Confirm transaction",
             "body": "You’re about to send {amount} to",
-            "sendingFromStakedAccount": "This account is participating in a staking event - sending this transaction will unstake your funds."
+            "sendingFromStakedAccount": "This account is participating in a staking event - sending this transaction will unstake some or all of your funds."
         },
         "balanceFinder": {
             "title": "Balance finder",

@@ -27,7 +27,8 @@
         isAccountStaked
     } from 'shared/lib/participation'
     import {
-        accountToParticipate, partiallyStakedAccounts,
+        accountToParticipate,
+        partiallyStakedAccounts,
         participationAction,
         participationOverview,
         stakedAccounts,
