@@ -5,7 +5,7 @@
     export let data
     export let size = 150
 
-    let cells
+    let cells: boolean[][]
 
     const createCells = (): void => {
         try {
@@ -20,9 +20,6 @@
             const qrData = typeof data === 'string' ? data.toUpperCase() : data
             qr.addData(qrData)
             qr.make()
-
-            /* eslint-disable no-console */
-            console.log('CREATE CELLS: ', qr.modules)
 
             cells = qr.modules
         } catch (err) {
