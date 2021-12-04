@@ -76,7 +76,7 @@
 
 <div class="p-8 flex flex-col justify-center items-center w-full h-full bg-gradient-to-t from-blue-400 to-lightblue-500">
     <Illustration illustration={getIllustration($stakingEventState, $participationOverview)} />
-    <div class="mt-8 flex flex-col justify-between text-center">
+    <div class="mt-4 flex flex-col justify-between text-center">
         <Text type="p" classes="text-xl">{subHeader}</Text>
         <Text type="p" classes="font-extrabold text-2xl">{header}</Text>
         <Link onClick={handleLearnMoreClick} classes="mt-2 text-lightblue-200">

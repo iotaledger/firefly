@@ -529,7 +529,7 @@
                 "endedSubheader": "Thank you!",
                 "endedHeader": "Events ended",
                 "inactiveHeader": "Airdrop events inactive",
-                "inactiveSubeader": "Not detected"
+                "inactiveSubheader": "Not detected"
             },
             "airdrops": {
                 "remaining": "Remaining",

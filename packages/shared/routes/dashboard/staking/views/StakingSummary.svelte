@@ -20,7 +20,8 @@
         stakingEventState,
         unstakedAmount,
     } from 'shared/lib/participation/stores'
-    import { ParticipationAction, ParticipationEventState } from 'shared/lib/participation/types'
+    import { ParticipationAction, ParticipationEventState, ParticipationOverview } from 'shared/lib/participation/types'
+    import { WalletAccount } from '../../../../lib/typings/wallet'
 
     $: $participationOverview, $stakedAccounts, $partiallyStakedAccounts
 
@@ -60,7 +61,8 @@
          * does seem to play nicely with responsiveness.
          */
         const top = iconBox?.getBoundingClientRect().top ?? 0
-        parentTop = top * 1.6
+        const topMultiplier = isPartiallyStaked ? 1.6 : isStakeConfirming ? 1.5 : -10000
+        parentTop = top * topMultiplier
     }
 
     const toggleTooltip = (): void => {
@@ -82,6 +84,24 @@
 
         openPopup({ type, hideClose: false })
     }
+
+    const isConfirmingStake = (account: WalletAccount, overview: ParticipationOverview): boolean => {
+        if (account) {
+            const accountOverview = overview.find((apo) => apo.accountIndex === account.index)
+            if (accountOverview) {
+                const isStaked = $stakedAccounts.find((sa) => sa.id === account.id) !== undefined
+                const isStakedAndConfirming = isStaked && (accountOverview.assemblyStakedFunds <= 0 || accountOverview.shimmerStakedFunds <= 0)
+                const isUnstakedAndConfirming = !isStaked && (accountOverview.assemblyUnstakedFunds <= 0 || accountOverview.shimmerUnstakedFunds <= 0)
+
+                return isStakedAndConfirming || isUnstakedAndConfirming
+            }
+        }
+
+        return false
+    }
+
+    let isStakeConfirming
+    $: isStakeConfirming = isConfirmingStake($accountToParticipate, $participationOverview)
 </script>
 
 <div class="p-5 flex flex-col justify-between space-y-6 w-full h-full">
@@ -90,13 +110,17 @@
             <Text type="p" overrideColor classes="mb-2 text-gray-700 text-13 font-normal dark:text-white">
                 {localize('views.staking.summary.stakedFunds')}
             </Text>
-            {#if isPartiallyStaked}
+            {#if isPartiallyStaked || isStakeConfirming}
                 <div
                     bind:this={iconBox}
                     on:mouseenter={toggleTooltip}
                     on:mouseleave={toggleTooltip}
                 >
-                    <Icon icon="exclamation" classes="fill-current text-yellow-600" />
+                    {#if isPartiallyStaked}
+                        <Icon icon="exclamation" classes="fill-current text-yellow-600" />
+                    {:else if isStakeConfirming}
+                        <Spinner busy classes="justify-center" />
+                    {/if}
                 </div>
             {/if}
         </div>
@@ -126,17 +150,26 @@
 </div>
 {#if showTooltip}
     <Tooltip {parentTop} {parentLeft} {parentWidth} position="right">
-        <Text type="p" classes="text-gray-900 bold mb-1 text-left">
-            {localize(
-                `tooltips.partiallyStakedFunds.title${$partiallyStakedAmount !== undefined ? '' : 'NoFunds'}`,
-                $partiallyStakedAmount !== undefined
-                    ? { values: { amount: formatUnitBestMatch($partiallyStakedAmount) } }
-                    : { }
-            )}
-        </Text>
-        <Text type="p" secondary classes="text-left">
-            {localize('tooltips.partiallyStakedFunds.preBody')}
-            {localize('tooltips.partiallyStakedFunds.body')}
-        </Text>
+        {#if isPartiallyStaked}
+            <Text type="p" classes="text-gray-900 bold mb-1 text-left">
+                {localize(
+                    `tooltips.partiallyStakedFunds.title${$partiallyStakedAmount !== undefined ? '' : 'NoFunds'}`,
+                    $partiallyStakedAmount !== undefined
+                        ? { values: { amount: formatUnitBestMatch($partiallyStakedAmount) } }
+                        : { }
+                )}
+            </Text>
+            <Text type="p" secondary classes="text-left">
+                {localize('tooltips.partiallyStakedFunds.preBody')}
+                {localize('tooltips.partiallyStakedFunds.body')}
+            </Text>
+        {:else if isStakeConfirming}
+            <Text type="p" classes="text-gray-900 bold mb-1 text-left">
+                Waiting to confirm stake
+            </Text>
+            <Text type="p" secondary classes="text-left">
+                The transaction to stake your funds has been broadcasted, but has yet to be confirmed.
+            </Text>
+        {/if}
     </Tooltip>
 {/if}
