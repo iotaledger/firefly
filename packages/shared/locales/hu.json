@@ -15,13 +15,17 @@
         },
         "profile": {
             "title": "Profil létrehozása",
-            "profileName": "Profil név",
+            "profileName": "Profilnév",
             "body1": "Több felhasználói profilt is létrehozhat a tokenek elkülönítése és a biztonság növelésének érdekében.",
             "body2": {
                 "first": "Egyelőre kezdjük az első profiljának nevével.",
                 "nonFirst": "Egyelőre kezdjük a profiljának nevével."
             },
-            "addMore": "Később további profilokat is felvehet."
+            "addMore": "Később további profilokat is felvehet.",
+            "developer": {
+                "label": "Fejlesztői profil",
+                "info": "Kapcsolódás publikus és privát IOTA hálózatokhoz"
+            }
         },
         "setup": {
             "title": "Tárca létrehozása",
@@ -307,7 +311,8 @@
             },
             "theme": {
                 "title": "Megjelenés",
-                "description": ""
+                "description": "",
+                "advice": "Az új megjelenéshez indítsa újra a Firefly-t"
             },
             "language": {
                 "title": "Nyelv",
@@ -323,7 +328,7 @@
             },
             "networkStatus": {
                 "title": "Hálózat állapota",
-                "description": "A jelenleg használt csomópont állapotát jeleníti meg."
+                "description": "A jelenleg használt csomópont státuszának megjelenítése"
             },
             "exportStronghold": {
                 "title": "Biztonsági mentés",
@@ -360,28 +365,39 @@
                 "description": "A teljes profil, tárcák és tranzakciós előzmények törlése. Győzödjön meg róla, hogy van biztonsági mentése"
             },
             "deepLinks": {
-                "title": "Mélyhivatkozások",
-                "description": "A tranzakciós adatok automatikus kitöltése a Firefly-ban egy iota:// hivatkozásra kattintva"
+                "title": "IOTA hivatkozások",
+                "description": "A tranzakciós adatok automatikus kitöltése Firefly-ban egy IOTA hivatkozásra kattintva"
             },
-            "developerMode": {
-                "title": "Fejlesztői mód",
-                "description": "Csatlakozás teszt hálózatokhoz és egyéb fejlesztői funkciók"
-            },
-            "nodeSettings": {
-                "title": "Csomópont beállításai",
-                "description": "Használja a kézi csomópont kiválasztást a csomópont beállításainak módosításához és saját csomópont használatához"
+            "networkConfiguration": {
+                "title": "Hálózati beállítás",
+                "title2": "Hálózati beállítás",
+                "description": {
+                    "dev": "A hálózati beállítások a jelenlegi csomópont beállítások szerint automatikusan frissülnek (a hálózatok közötti váltás a tárca állapotának alaphelyzetbe állításával jár)",
+                    "nonDev": "A hálózati beállítások a jelenlegi csomópont beállítások szerint automatikusan frissülnek"
+                },
+                "switchedNetworks": "Sikeresen átváltott a \"{networkName}\" hálózatra.",
+                "resetWallet": "A tárca alaphelyzetbe lett állítva.",
+                "connectedTo": "Csatlakoztatva",
+                "nodeConfiguration": {
+                    "title": "Csomópont kiválasztása",
+                    "description": "Használja a \"kézi\" csomópont kiválasztást és csatlakozzon a saját csomópontjához",
+                    "automatic": "Automatikus",
+                    "manual": "Kézi"
+                }
             },
             "configureNodeList": {
-                "title": "Válasszon egy csomópontot",
-                "description": "Állítsa be, mely IOTA csomópontokhoz kapcsolódjon tárcája",
+                "title": "Csomópont beállítása",
+                "description": "A tárca által használható csomópontok listájának módosítása",
                 "primaryNode": "Elsődleges csomópont",
                 "excludeNode": "Csomópont mellőzése",
                 "includeNode": "Csomópont használata",
-                "viewDetails": "Részletek megtekintése",
+                "editDetails": "Részletek szerkesztése",
+                "viewInfo": "Információk megjelenítése",
                 "setAsPrimary": "Beállítás elsődlegesként",
                 "removeNode": "Csomópont eltávolítása",
                 "includeOfficialNodeList": "Hivatalos csomópont lista használata",
-                "noNodes": "Nincs egyetlen csomópont sem. Automatikus csomópont kiválasztás engedélyezve"
+                "noNodes": "Nincs csomópont, a hálózathoz nem lehet csatlakozni",
+                "noNodesAuto": "Nincs csomópont, automatikus csomópont kiválasztás engedélyezve"
             },
             "proofOfWork": {
                 "title": "Tranzakcíók hitelesítéséhez szükséges számítás",
@@ -528,12 +544,37 @@
             "titleAdd": "Csomópont hozzáadása",
             "titleUpdate": "Csomópont frissítése",
             "titleRemove": "Csomópont eltávolítása",
+            "titleRemoveAll": "Összes csomópont eltávolítása",
             "titleDetails": "Csomópont adatai",
+            "titleInfo": "Csomópont információk",
+            "addingNode": "Csomópont hozzáadása",
+            "updatingNode": "Csomópont frissítése",
+            "loadingNodeInfo": "Csomópont információk betöltése",
             "nodeAddress": "Csomópont címe",
             "optionalUsername": "Felhasználónév (nem kötelező)",
             "optionalPassword": "Jelszó (nem kötelező)",
+            "optionalJwt": "JSON web token (opcionális)",
             "setAsPrimaryNode": "Beállítás elsődleges csomópontként",
-            "removeConfirmation": "Biztos el kívánja távolítani ezt a csomópontot?"
+            "removeConfirmation": "Biztos el kívánja távolítani ezt a csomópontot?",
+            "removeAllConfirmation": "Biztosan el kívánja távolítani az összes csomópontot?",
+            "info": {
+                "url": "URL",
+                "software": "Szoftver",
+                "networkId": "Hálózati azonosító",
+                "bech32HRP": "Bech32 olvasható része",
+                "features": "Funkciók",
+                "confirmedMilestoneIndex": "Utoljára elfogadott milestone index",
+                "pruningIndex": "Legkisebb törölhető index",
+                "messagesPerSecond": "Üzenet / másodperc",
+                "referencedRate": "Hivatkozási arány"
+            }
+        },
+        "switchNetwork": {
+            "title": "Hálózat váltása",
+            "newNetwork": "Új hálózat",
+            "resetWarning": "A hálózat váltásakor a rendszer kilépteti és az ehhez a profilhoz tartozó összes tárcáját, egyenlegét és tranzakciós történetét törli.",
+            "switchingNetwork": "Hálózat váltása",
+            "typePassword": "Adja meg jelszavát a hálózat váltáshoz:"
         },
         "errorLog": {
             "title": "Hibanapló",
@@ -684,7 +725,7 @@
         "syncAll": "Minden szinkronizálása",
         "export": "Exportálás",
         "exportNewStronghold": "Új Stronghold exportálása",
-        "enableDeepLinks": "Mélylinkek engedélyezése",
+        "enableDeepLinks": "IOTA hivatkozások engedélyezése",
         "enableDeveloperMode": "Fejlesztői mód engedélyezése",
         "enableSystemNotifications": "Rendszer értesítések engedélyezése",
         "exportState": "Állapot exportálása",
@@ -702,6 +743,7 @@
         "addNode": "Csomópont hozzáadása",
         "updateNode": "Csomópont frissítése",
         "removeNode": "Csomópont eltávolítása",
+        "removeAllNodes": "Összes csomópont eltávolítása",
         "hide": "Elrejt",
         "hideOthers": "Többi elrejtése",
         "showAll": "Összes megjelenítése",
@@ -781,8 +823,9 @@
         "stronghold": "Stronghold",
         "language": "Nyelv",
         "appearance": "Megjelenés",
-        "lightTheme": "Világos megjelenés",
-        "darkTheme": "Sötét megjelenés",
+        "lightTheme": "Világos",
+        "darkTheme": "Sötét",
+        "systemTheme": "Rendszer",
         "balance": "Egyenleg",
         "accountBalance": "Tárca egyenleg",
         "incoming": "Bejövő",
@@ -791,11 +834,7 @@
         "totalOut": "Összes kimenő",
         "accounts": "Tárcák",
         "myAccounts": "Tárcáim",
-        "automaticNodeSelection": "Automatikus csomópont kiválasztás",
-        "manualNodeSelection": "Kézi csomópont kiválasztás",
         "profiles": "Profilok",
-        "developerProfile": "Fejlesztői profil",
-        "developerProfileDescription": "Lehetővé teszi a csatlakozást teszthálózatokhoz",
         "dev": "Fejlesztő",
         "createAccount": "Tárca létrehozása",
         "accountName": "Tárca neve",
@@ -803,6 +842,7 @@
         "transactions": "Tranzakciók",
         "security": "Biztonság",
         "accountAddress": "Tárca címei",
+        "network": "Hálózat",
         "nodes": "Csomópontok",
         "wallet": "Tárca",
         "help": "Segítség",
@@ -861,7 +901,8 @@
         "legacyNetwork": "Régi hálózat",
         "capsLock": "A nagybetűzár be van kapcsolva",
         "version": "{version} verzió",
-        "unknown": "Ismeretlen"
+        "unknown": "Ismeretlen",
+        "none": "Nincs"
     },
     "dates": {
         "today": "Ma",
@@ -885,7 +926,17 @@
         "minutesRemaining": "{minutes, plural, one {1 perc van hátra} other {# perc van hátra}}",
         "copiedToClipboard": "A vágólapra másolva",
         "accountsSynchronized": "Tárca szinkronizálva",
-        "fundsAvailableSoon": "Egyenlege hamarosan elérhető lesz"
+        "fundsAvailableSoon": "Egyenlege hamarosan elérhető lesz",
+        "deepLinkingRequest": {
+            "recievedWhileLoggedOut": "Kérjük, jelentkezzen be az IOTA hivatkozás megnyitásához",
+            "notEnabled": "Az IOTA hivatkozások nincsenek engedélyezve",
+            "invalidFormat": "Az IOTA hivatkozás érvénytelen",
+            "wallet": {
+                "send": {
+                    "success": "Fizetés részletei az IOTA hivatkozás alapján kitöltve"
+                }
+            }
+        }
     },
     "error": {
         "profile": {
@@ -945,11 +996,23 @@
         },
         "node": {
             "invalid": "Kérjük, adjon meg egy érvényes URL címet!",
-            "dns": "A node címét nem sikerült feloldani.",
-            "https": "HTTPS szükséges. Állítson be fejlesztőprofilt a nem biztonságos HTTP-kapcsolatok használatához.",
+            "dns": "A csomópont címét nem sikerült feloldani.",
+            "timedOut": "A kapcsolat időtúllépés miatt megszakadt.",
+            "refused": "A kapcsolat felépítését visszautasították.",
+            "handshake": "A kézfogás nem sikerült a csomóponttal.",
+            "invalidCertificate": "Érvénytelen tanúsítvány miatt a csatlakozás sikertelen.",
+            "https": "HTTPS kapcsolat használata kötelező. Biztonsági okokból a HTTP kapcsolat használata jelenleg nem támogatott.",
             "duplicate": "Ez a csomópont már korábban hozzá lett adva.",
             "unsynced": "A csomópont nincs szinkronban.",
-            "noSynced": "Nincs elérhető szinkronizált csomópont."
+            "noSynced": "Nincs elérhető szinkronizált csomópont.",
+            "answer": "Nem minden csomóponttól érkezett válasz.",
+            "forbidden": "Ezzel a csomóponttal tiltott a kapcsolatfelépítés."
+        },
+        "network": {
+            "mismatch": "A csomópont hálózati azonosítója \"{networkId}\", amely nem egyezik a jelenleg használt hálózattal.",
+            "notReachable": "A csomóponthoz nem sikerült a hálózati azonosítót lekérdezni, emiatt a csomópont hozzadása nem lehetséges.",
+            "badNodes": "A jelenlegi csomópont beállításokkal nem lehetséges a hálózathoz csatlakozni.",
+            "nonEmptyAccount": "A hálózatok közötti váltás előtt a teljes egyenlegét át kell utalnia."
         },
         "global": {
             "generic": "Valami hiba történt."
@@ -985,6 +1048,11 @@
         },
         "crypto": {
             "cannotDecodeBech32": "A megadott karakterlánc nem értelmezhető Bech32 címként."
+        }
+    },
+    "warning": {
+        "node": {
+            "http": "A csomópontok HTTP kapcsolaton történő elérése a titkosítatlan adatforgalom miatt biztonsági kockázattal jár."
         }
     },
     "tooltips": {

@@ -21,7 +21,11 @@
                 "first": "För tillfället, låt oss börja med ditt första profilnamn.",
                 "nonFirst": "För tillfället, låt oss börja med ditt profilnamn."
             },
-            "addMore": "Du kan lägga till fler profiler senare."
+            "addMore": "Du kan lägga till fler profiler senare.",
+            "developer": {
+                "label": "Utvecklarprofil",
+                "info": "Anslut till publika och privata IOTA-nätverk"
+            }
         },
         "setup": {
             "title": "Konfigurera en plånbok",
@@ -307,7 +311,8 @@
             },
             "theme": {
                 "title": "Teman",
-                "description": ""
+                "description": "",
+                "advice": "Starta om Firefly för att ändringarna i systemtemat skall träda i kraft"
             },
             "language": {
                 "title": "Språk",
@@ -323,7 +328,7 @@
             },
             "networkStatus": {
                 "title": "Nätverksstatus",
-                "description": "Visar status för noden du är ansluten till."
+                "description": "Visar status för noden du är ansluten till"
             },
             "exportStronghold": {
                 "title": "Exportera säkerhetskopian",
@@ -360,28 +365,39 @@
                 "description": "Tar bort hela din profil, dina plånböcker samt transaktionshistorik. Se till att du har en säkerhetskopia"
             },
             "deepLinks": {
-                "title": "Hyperlänkar",
+                "title": "IOTA-länkar",
                 "description": "Fyll automatiskt i transaktionsdata i Firefly när du klickar på en iota:// länk"
             },
-            "developerMode": {
-                "title": "Utvecklarläge",
-                "description": "Anslut till testnät och andra utvecklarfunktioner"
-            },
-            "nodeSettings": {
-                "title": "Nod-inställningar",
-                "description": "Välj Manuell för att konfigurera nodinställningarna och ansluta till din egen nod"
+            "networkConfiguration": {
+                "title": "Nätverkskonfiguration",
+                "title2": "Nätverkskonfiguration",
+                "description": {
+                    "dev": "Dina nätverksinställningar uppdateras automatiskt enligt nuvarande nodkonfiguration (byte av nätverk resulterar i att plånbokens tillstånd återställs)",
+                    "nonDev": "Dina nätverksinställningar uppdateras automatiskt enligt nuvarande nodkonfiguration"
+                },
+                "switchedNetworks": "Nätverket ändrades framgångsrikt till \"{networkName}\".",
+                "resetWallet": "Plånbokens tillstånd har återställts.",
+                "connectedTo": "Ansluten till",
+                "nodeConfiguration": {
+                    "title": "Val av nod",
+                    "description": "Välj \"Manuell\" för att konfigurera nodinställningarna och ansluta till din egen nod",
+                    "automatic": "Automatisk",
+                    "manual": "Manuell"
+                }
             },
             "configureNodeList": {
-                "title": "Välj en nod",
-                "description": "Hantera listan över IOTA-nätverksnoder som du ansluter till",
+                "title": "Konfiguration av nod",
+                "description": "Hantera listan över noder som du ansluter till",
                 "primaryNode": "Primär nod",
                 "excludeNode": "Exkludera nod",
                 "includeNode": "Inkludera nod",
-                "viewDetails": "Visa detaljer",
+                "editDetails": "Redigera detaljer",
+                "viewInfo": "Visa information",
                 "setAsPrimary": "Ange som primär",
                 "removeNode": "Ta bort nod",
                 "includeOfficialNodeList": "Inkludera officiell nodlista",
-                "noNodes": "Det finns inga noder, val av nod kommer ske automatiskt istället"
+                "noNodes": "Det finns inga noder, det går inte att ansluta till nätverket",
+                "noNodesAuto": "Det finns inga noder, val av nod kommer ske automatiskt istället"
             },
             "proofOfWork": {
                 "title": "Proof of work",
@@ -396,7 +412,7 @@
                 "description": "Visa system- och applikationsinformation"
             },
             "migrateLedgerIndex": {
-                "title": "Migrera Ledger Index",
+                "title": "Migrera Ledger-index",
                 "description": "Migrera ett annat kontoindex från Trinity"
             },
             "stateExport": {
@@ -528,12 +544,37 @@
             "titleAdd": "Lägg till nod",
             "titleUpdate": "Uppdatera en nod",
             "titleRemove": "Ta bort en nod",
+            "titleRemoveAll": "Ta bort alla noder",
             "titleDetails": "Nod-detaljer",
+            "titleInfo": "Nodinformation",
+            "addingNode": "Lägger till nod",
+            "updatingNode": "Uppdaterar nod",
+            "loadingNodeInfo": "Laddar nodinfo",
             "nodeAddress": "Nod-adress",
             "optionalUsername": "Användarnamn (valfritt)",
             "optionalPassword": "Lösenord (valfritt)",
+            "optionalJwt": "JSON webb-token (valfritt)",
             "setAsPrimaryNode": "Ställ in som primär nod",
-            "removeConfirmation": "Är du säker på att du vill ta bort den här noden?"
+            "removeConfirmation": "Är du säker på att du vill ta bort den här noden?",
+            "removeAllConfirmation": "Är du säker på att du vill ta bort alla noder?",
+            "info": {
+                "url": "Länk",
+                "software": "Programvara",
+                "networkId": "Nätverks-ID",
+                "bech32HRP": "Bech32 HRP",
+                "features": "Funktioner",
+                "confirmedMilestoneIndex": "Bekräftad milstone-index",
+                "pruningIndex": "Rensnings-index",
+                "messagesPerSecond": "Meddelanden per sekund",
+                "referencedRate": "Bekräftade meddelanden"
+            }
+        },
+        "switchNetwork": {
+            "title": "Växla nätverk",
+            "newNetwork": "Nytt nätverk",
+            "resetWarning": "Om du byter nätverk kommer du att logga ut och återställa alla konton, saldon och transaktionshistorik för denna profil.",
+            "switchingNetwork": "Byter nätverk",
+            "typePassword": "Ange ditt lösenord för att byta till:"
         },
         "errorLog": {
             "title": "Felmeddelanden",
@@ -684,7 +725,7 @@
         "syncAll": "Synkronisera alla",
         "export": "Exportera",
         "exportNewStronghold": "Exportera en ny Stronghold",
-        "enableDeepLinks": "Aktivera hyperlänkar",
+        "enableDeepLinks": "Aktivera IOTA-länkar",
         "enableDeveloperMode": "Aktivera utvecklarläge",
         "enableSystemNotifications": "Aktivera systemaviseringar",
         "exportState": "Exportera tillstånd",
@@ -702,6 +743,7 @@
         "addNode": "Lägg till nod",
         "updateNode": "Uppdatera nod",
         "removeNode": "Ta bort nod",
+        "removeAllNodes": "Ta bort alla noder",
         "hide": "Dölj",
         "hideOthers": "Dölj övriga",
         "showAll": "Visa alla",
@@ -781,8 +823,9 @@
         "stronghold": "Stronghold",
         "language": "Språk",
         "appearance": "Utseende",
-        "lightTheme": "Ljust tema",
-        "darkTheme": "Mörkt tema",
+        "lightTheme": "Ljust",
+        "darkTheme": "Mörkt",
+        "systemTheme": "System",
         "balance": "Saldo",
         "accountBalance": "Plånbokssaldo",
         "incoming": "Inkommande",
@@ -791,11 +834,7 @@
         "totalOut": "Totalt ut",
         "accounts": "Plånböcker",
         "myAccounts": "Mina plånböcker",
-        "automaticNodeSelection": "Automatiskt val av nod",
-        "manualNodeSelection": "Manuellt val av nod",
         "profiles": "Profiler",
-        "developerProfile": "Utvecklarprofil",
-        "developerProfileDescription": "Låter dig ansluta till testnät",
         "dev": "Utvecklare",
         "createAccount": "Skapa en plånbok",
         "accountName": "Plånboksnamn",
@@ -803,6 +842,7 @@
         "transactions": "Transaktioner",
         "security": "Säkerhet",
         "accountAddress": "Plånbokens adress",
+        "network": "Nätverk",
         "nodes": "Noder",
         "wallet": "Plånbok",
         "help": "Hjälp",
@@ -861,7 +901,8 @@
         "legacyNetwork": "Ursprungliga nätverket",
         "capsLock": "Caps Lock är på",
         "version": "Version {version}",
-        "unknown": "Okänd"
+        "unknown": "Okänd",
+        "none": "Ingen"
     },
     "dates": {
         "today": "Idag",
@@ -885,7 +926,17 @@
         "minutesRemaining": "{minutes, plural, one {1 minut kvar} other {# minuter kvar}}",
         "copiedToClipboard": "Kopierad till urklipp",
         "accountsSynchronized": "Plånbokssynkronisering slutförd",
-        "fundsAvailableSoon": "Dina IOTA kommer inom kort att bli tillgängliga"
+        "fundsAvailableSoon": "Dina IOTA kommer inom kort att bli tillgängliga",
+        "deepLinkingRequest": {
+            "recievedWhileLoggedOut": "Logga in för att initiera IOTA-länken",
+            "notEnabled": "IOTA-länkar är inte aktiverade",
+            "invalidFormat": "IOTA-länken du följde är ogiltig",
+            "wallet": {
+                "send": {
+                    "success": "Betalningsinformation tillagd från IOTA-länk"
+                }
+            }
+        }
     },
     "error": {
         "profile": {
@@ -945,11 +996,23 @@
         },
         "node": {
             "invalid": "Ange en giltig URL.",
-            "dns": "Kunde inte lösa DNS för nod.",
-            "https": "HTTPS krävs. Konfigurera en utvecklarprofil för att använda osäkra HTTP-anslutningar.",
+            "dns": "Kunde inte hitta DNS-upplösning för nod.",
+            "timedOut": "Anslutningen tog för lång tid.",
+            "refused": "Anslutningen avvisades.",
+            "handshake": "Kunde inte slutföra handskakning med nod.",
+            "invalidCertificate": "Kunde inte ansluta med ett ogiltigt certifikat.",
+            "https": "HTTPS krävs; osäkra anslutningar över HTTP stöds inte just nu.",
             "duplicate": "Den här noden har redan lagts till.",
             "unsynced": "Noden är inte synkroniserad.",
-            "noSynced": "Inga synkroniserade noder är tillgängliga."
+            "noSynced": "Inga synkroniserade noder är tillgängliga.",
+            "answer": "Det gick inte att få svar från alla noder.",
+            "forbidden": "Denna nodanslutning är förbjuden."
+        },
+        "network": {
+            "mismatch": "Nätverks-ID för denna nod är \"{networkId}\", som inte matchar det nuvarande nätverket.",
+            "notReachable": "Nätverks-ID för denna nod kunde inte hämtas, går ej att lägga till nod.",
+            "badNodes": "Det gick inte att ansluta till nätverket med den nuvarande nodkonfigurationen.",
+            "nonEmptyAccount": "Du måste överföra alla saldon innan du byter nätverk."
         },
         "global": {
             "generic": "Något gick fel."
@@ -985,6 +1048,11 @@
         },
         "crypto": {
             "cannotDecodeBech32": "Det går inte att avkoda strängen som Bech32-adress."
+        }
+    },
+    "warning": {
+        "node": {
+            "http": "Att använda noder över HTTP lämnar trafik okrypterad och kan utgöra en säkerhetsrisk."
         }
     },
     "tooltips": {

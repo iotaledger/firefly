@@ -15,13 +15,17 @@
         },
         "profile": {
             "title": "Profîlekê çêke",
-            "profileName": "Navê Profîlê",
+            "profileName": "Profile name",
             "body1": "Jibo hûn tokenên xwe cuda bigirîn û ewlehîyê zêde bikîn, dikarîn profîlên bikarhênerên ciyawaz saz bikî.",
             "body2": {
                 "first": "For now, let's start with your first profile name.",
                 "nonFirst": "For now, let's start with your profile name."
             },
-            "addMore": "You can add more profiles later."
+            "addMore": "You can add more profiles later.",
+            "developer": {
+                "label": "Developer profile",
+                "info": "Connect to public and private IOTA networks"
+            }
         },
         "setup": {
             "title": "Cazdankekê saz bike",
@@ -307,7 +311,8 @@
             },
             "theme": {
                 "title": "Mijad",
-                "description": ""
+                "description": "",
+                "advice": "Restart the Firefly application for changes to the system theme to take effect"
             },
             "language": {
                 "title": "Ziman",
@@ -323,14 +328,14 @@
             },
             "networkStatus": {
                 "title": "Network status",
-                "description": "Displays the status of the node you are currently connected to."
+                "description": "Displays the status of the node you are currently connected to"
             },
             "exportStronghold": {
-                "title": "Cîgirê bikşîne derve",
+                "title": "Export backup",
                 "description": "Barê dosyayek Stronghold bikin\n- cîhgira hatî pêborîkirin cuzdank û bûyerên kiryarên we yên dawî"
             },
             "appLock": {
-                "title": "Kilîda Otomatîk",
+                "title": "Automatic lock",
                 "description": "Dema bêçalaktiyê berî ku çenteyên we kilît bibin û hûn ji nav derkevin",
                 "durationMinute": "Berî {time, plural, one {1 xulek} other {# xulek}}",
                 "durationHour": "{time, plural, one {1 demjimêr} other {# demjimêr}}"
@@ -360,28 +365,39 @@
                 "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
             },
             "deepLinks": {
-                "title": "Girêdanên kûr",
-                "description": "Dema pêl iota:// girêdana bikê kiryarên Firefly otomatîk dadigire"
+                "title": "IOTA links",
+                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
             },
-            "developerMode": {
-                "title": "Mode ya pêşdebir",
-                "description": "Girêdanê li testnest û taybetiyên pêşbirinê re bikin"
-            },
-            "nodeSettings": {
-                "title": "Sazkirina girêk",
-                "description": "Jibo mîhengên girêyê û girêdana mihengên xwe çêkî manûel jêbigire"
+            "networkConfiguration": {
+                "title": "Network config",
+                "title2": "Network configuration",
+                "description": {
+                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
+                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                },
+                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
+                "resetWallet": "Your wallet state has been reset.",
+                "connectedTo": "Connected to",
+                "nodeConfiguration": {
+                    "title": "Node selection",
+                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
+                    "automatic": "Automatic",
+                    "manual": "Manual"
+                }
             },
             "configureNodeList": {
-                "title": "Girêkê jêbigir",
-                "description": "Manage the list of IOTA network nodes you connect to",
+                "title": "Node configuration",
+                "description": "Manage the list of nodes you connect to",
                 "primaryNode": "Girêdana yekemîn",
                 "excludeNode": "Girêdanê lê neke",
                 "includeNode": "Girêdanê lê bike",
-                "viewDetails": "Hurgulîyan bibîn",
+                "editDetails": "Edit details",
+                "viewInfo": "View info",
                 "setAsPrimary": "Wekî yekemîn bihesibîn",
                 "removeNode": "Girêdanê jêbibe",
                 "includeOfficialNodeList": "Lîsteya girêdanên fermî tevil bike",
-                "noNodes": "There are no nodes, automatic selection will be used instead"
+                "noNodes": "There are no nodes, unable to connect to the network",
+                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "Delîlên kar",
@@ -396,7 +412,7 @@
                 "description": "Zanyarîyên sîstem û sazîyê bibînin"
             },
             "migrateLedgerIndex": {
-                "title": "Migrate Ledger Index",
+                "title": "Migrate Ledger index",
                 "description": "Migrate another Trinity account index"
             },
             "stateExport": {
@@ -413,7 +429,7 @@
             },
             "faq": {
                 "title": "Pirsên tê kirin",
-                "title2": "Pirsên Pir Tên Pirsîn",
+                "title2": "Frequently asked questions",
                 "description": "PPP bibînin ku ji pirsgirêk an pirsek hevpar re bibin alîkar"
             },
             "discord": {
@@ -528,12 +544,37 @@
             "titleAdd": "Girêkê zêde bike",
             "titleUpdate": "Girêk nûjen",
             "titleRemove": "Girêdanê jêbibe",
+            "titleRemoveAll": "Remove all nodes",
             "titleDetails": "Derbarê girê",
+            "titleInfo": "Node info",
+            "addingNode": "Adding node",
+            "updatingNode": "Updating node",
+            "loadingNodeInfo": "Loading node info",
             "nodeAddress": "Navnîşana girê",
             "optionalUsername": "Bikarhêner (optional)",
             "optionalPassword": "Pêborîn (optional)",
+            "optionalJwt": "JSON web token (optional)",
             "setAsPrimaryNode": "Wekî girêya yekemîn bihesibîn",
-            "removeConfirmation": "Tu jêbirana dosyê piştrastî?"
+            "removeConfirmation": "Tu jêbirana dosyê piştrastî?",
+            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "info": {
+                "url": "URL",
+                "software": "Software",
+                "networkId": "Network ID",
+                "bech32HRP": "Bech32 HRP",
+                "features": "Features",
+                "confirmedMilestoneIndex": "Confirmed milestone index",
+                "pruningIndex": "Pruning index",
+                "messagesPerSecond": "Peyam di sanîyek de",
+                "referencedRate": "Referenced rate"
+            }
+        },
+        "switchNetwork": {
+            "title": "Switch network",
+            "newNetwork": "New network",
+            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
+            "switchingNetwork": "Switching network",
+            "typePassword": "Type your password to switch to:"
         },
         "errorLog": {
             "title": "Bûyerên çewtîyê",
@@ -684,7 +725,7 @@
         "syncAll": "Hemîyê bike wekhev",
         "export": "Barkirina Derve",
         "exportNewStronghold": "Stronghold'ek nû barbikê derve",
-        "enableDeepLinks": "Girêdanên kur çalak bike",
+        "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "Moda pêkirinê çalak bike",
         "enableSystemNotifications": "Danezanên sîstemî bigre",
         "exportState": "Statê barbikê derve",
@@ -702,6 +743,7 @@
         "addNode": "Girêkê zêde bike",
         "updateNode": "Girêk nûjen",
         "removeNode": "Girê jêbibe",
+        "removeAllNodes": "Remove all nodes",
         "hide": "Veşartin\n",
         "hideOthers": "Veşartinên Din\n",
         "showAll": "Hemî nîşan bide\n",
@@ -781,8 +823,9 @@
         "stronghold": "Stronghold",
         "language": "Ziman",
         "appearance": "Dîtin",
-        "lightTheme": "Rûkara Ronî",
-        "darkTheme": "Rûkara tarî",
+        "lightTheme": "Light",
+        "darkTheme": "Dark",
+        "systemTheme": "System",
         "balance": "Mayîn",
         "accountBalance": "Mayîna Cuzdankê",
         "incoming": "Yên hatî",
@@ -791,11 +834,7 @@
         "totalOut": "Derçûna giştî",
         "accounts": "Cuzdank",
         "myAccounts": "Cuzdank",
-        "automaticNodeSelection": "Jêgirtina girê ya otomatîk",
-        "manualNodeSelection": "Jêgirtina node ya manuel",
         "profiles": "Profîl",
-        "developerProfile": "Hesaba Pêşvebir",
-        "developerProfileDescription": "Destûrê dide ku hûn bi torên testê re têkilî daynin",
         "dev": "Pêşvebir",
         "createAccount": "Cuzdanek nû çêke",
         "accountName": "Navê Cuzdankê",
@@ -803,6 +842,7 @@
         "transactions": "Lîsteya Transferan",
         "security": "Ewlehî",
         "accountAddress": "Navnîşana Cuzdankê",
+        "network": "Network",
         "nodes": "Girê",
         "wallet": "Cuzdank",
         "help": "Alîkarî",
@@ -861,7 +901,8 @@
         "legacyNetwork": "Tora Kevn",
         "capsLock": "Caps Lock is on",
         "version": "Version {version}",
-        "unknown": "Unknown"
+        "unknown": "Unknown",
+        "none": "None"
     },
     "dates": {
         "today": "Evro",
@@ -885,7 +926,17 @@
         "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# xulek maye}}",
         "copiedToClipboard": "Li rûnûsgehê hate kopîkirin",
         "accountsSynchronized": "Senkronîzekirina Cuzdankê serkeft",
-        "fundsAvailableSoon": "Your funds will become available shortly"
+        "fundsAvailableSoon": "Your funds will become available shortly",
+        "deepLinkingRequest": {
+            "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
+            "notEnabled": "IOTA links are not enabled",
+            "invalidFormat": "The IOTA link you followed is invalid",
+            "wallet": {
+                "send": {
+                    "success": "Payment details added from IOTA link"
+                }
+            }
+        }
     },
     "error": {
         "profile": {
@@ -945,11 +996,23 @@
         },
         "node": {
             "invalid": "Ji kerema xwe URL'yeke derbasdar bikevê.",
-            "dns": "Could not resolve DNS for node.",
-            "https": "Pêdiviya HTTPS ê heye. Jibo karanîna HTTP ko ne ewleh hesabekî pêşvebir çêkin.",
+            "dns": "Could not find DNS resolution for node.",
+            "timedOut": "The connection timed out.",
+            "refused": "The connection was refused.",
+            "handshake": "Could not complete handshake with node.",
+            "invalidCertificate": "Could not connect with invalid certificate.",
+            "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
             "duplicate": "Jixwe ev pêşkeşkar hatîye zêdekirin.",
             "unsynced": "Girê ne sekronîzeye.",
-            "noSynced": "Çi girê ne amade ye."
+            "noSynced": "Çi girê ne amade ye.",
+            "answer": "Failed to get an answer from all nodes.",
+            "forbidden": "This node connection is forbidden."
+        },
+        "network": {
+            "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
+            "notReachable": "The network ID for this node could not be retrieved, unable to add node.",
+            "badNodes": "Unable to connect to the network with current node configuration.",
+            "nonEmptyAccount": "You must transfer all balances before switching networks."
         },
         "global": {
             "generic": "Hinek tişt şaş çûn."
@@ -985,6 +1048,11 @@
         },
         "crypto": {
             "cannotDecodeBech32": "Unable to decode string as Bech32 address."
+        }
+    },
+    "warning": {
+        "node": {
+            "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
         }
     },
     "tooltips": {

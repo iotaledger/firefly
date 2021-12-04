@@ -15,13 +15,17 @@
         },
         "profile": {
             "title": "Créer un profil",
-            "profileName": "Nom du Profil",
+            "profileName": "Nom du profil",
             "body1": "Vous pouvez créer plusieurs profils utilisateurs pour organiser vos portefeuilles et augmenter votre confidentialité.",
             "body2": {
                 "first": "Pour l'instant, commençons par nommer votre profil.",
                 "nonFirst": "Pour l'instant, commençons par nommer votre profil."
             },
-            "addMore": "Vous pourrez créer d'autres profils par la suite."
+            "addMore": "Vous pourrez créer d'autres profils par la suite.",
+            "developer": {
+                "label": "Profil développeur",
+                "info": "Se connecter aux réseaux IOTA publics et privés"
+            }
         },
         "setup": {
             "title": "Création d'un portefeuille",
@@ -307,7 +311,8 @@
             },
             "theme": {
                 "title": "Thème",
-                "description": ""
+                "description": "",
+                "advice": "Redémarrez l'application Firefly pour que les modifications du thème visuel prennent effet"
             },
             "language": {
                 "title": "Langue",
@@ -323,10 +328,10 @@
             },
             "networkStatus": {
                 "title": "État du réseau",
-                "description": "Affiche le statut du noeud auquel vous êtes actuellement connecté."
+                "description": "Affiche le statut du noeud auquel vous êtes actuellement connecté"
             },
             "exportStronghold": {
-                "title": "Exportation de la sauvegarde",
+                "title": "Exporter la sauvegarde",
                 "description": "Exporter vers un fichier Stronghold - une sauvegarde chiffrée complète de vos portefeuilles et l'historique récent des transactions"
             },
             "appLock": {
@@ -360,28 +365,39 @@
                 "description": "Supprime l'intégralité de votre profil, de vos portefeuilles et de l'historique des transactions. Assurez-vous d'avoir une sauvegarde"
             },
             "deepLinks": {
-                "title": "Liens profonds",
-                "description": "Remplissez automatiquement les données de transaction dans Firefly en cliquant sur un lien iota://"
+                "title": "Liens IOTA",
+                "description": "Remplissez automatiquement les données de transaction dans Firefly en cliquant sur un lien IOTA"
             },
-            "developerMode": {
-                "title": "Mode développeur",
-                "description": "Se connecter aux réseaux de test et autres fonctionnalités de développement"
-            },
-            "nodeSettings": {
-                "title": "Paramètres du serveur",
-                "description": "Sélectionnez le mode Manuel pour configurer les nœuds et vous connecter à votre propre nœud"
+            "networkConfiguration": {
+                "title": "Configuration du réseau",
+                "title2": "Configuration du réseau",
+                "description": {
+                    "dev": "Vos paramètres de réseau seront automatiquement mis à jour en fonction de la configuration actuelle du nœud (les changements de réseau entraîneront la réinitialisation de l'état du portefeuille)",
+                    "nonDev": "Vos paramètres réseau seront mis à jour automatiquement en fonction de la configuration actuelle du noeud"
+                },
+                "switchedNetworks": "Le réseau a été basculé avec succès vers \"{networkName}\".",
+                "resetWallet": "L'état de votre portefeuille a été réinitialisé.",
+                "connectedTo": "Connecté à",
+                "nodeConfiguration": {
+                    "title": "Sélection du noeud",
+                    "description": "Sélectionnez le mode Manuel pour la configuration des nœuds et pour vous connecter à votre propre nœud",
+                    "automatic": "Automatique",
+                    "manual": "Manuel"
+                }
             },
             "configureNodeList": {
-                "title": "Sélectionner un serveur",
-                "description": "Gérer la liste des nœuds réseau IOTA auxquels vous vous connectez",
+                "title": "Configuration du noeud",
+                "description": "Gérer la liste des nœuds auxquels vous vous connectez",
                 "primaryNode": "Noeud principal",
                 "excludeNode": "Exclure le noeud",
                 "includeNode": "Inclure le noeud",
-                "viewDetails": "Voir les détails",
+                "editDetails": "Modifier les informations",
+                "viewInfo": "Voir les infos",
                 "setAsPrimary": "Définir comme noeud principal",
                 "removeNode": "Supprimer le noeud",
                 "includeOfficialNodeList": "Inclure la liste officielle des nœuds",
-                "noNodes": "Il n'y a pas de nœud, la sélection automatique sera utilisée à la place"
+                "noNodes": "Il n'y a aucun nœud, impossible de se connecter au réseau",
+                "noNodesAuto": "Il n'y a pas de nœud, la sélection automatique sera utilisée à la place"
             },
             "proofOfWork": {
                 "title": "Preuve de travail",
@@ -413,7 +429,7 @@
             },
             "faq": {
                 "title": "FAQ",
-                "title2": "Foire aux questions",
+                "title2": "Foire Aux Questions (Faq)",
                 "description": "Consultez la FAQ pour obtenir de l'aide sur un problème commun ou une question"
             },
             "discord": {
@@ -528,12 +544,37 @@
             "titleAdd": "Ajouter un nœud",
             "titleUpdate": "Mettre à jour un noeud",
             "titleRemove": "Supprimer un noeud",
+            "titleRemoveAll": "Supprimer tous les nœuds",
             "titleDetails": "Détails du nœud",
+            "titleInfo": "Infos sur le noeud",
+            "addingNode": "Ajouter un nœud",
+            "updatingNode": "Mise à jour du noeud",
+            "loadingNodeInfo": "Chargement des informations du noeud",
             "nodeAddress": "Adresse du noeud",
             "optionalUsername": "Nom d'utilisateur (facultatif)",
             "optionalPassword": "Mot de passe (facultatif)",
+            "optionalJwt": "Jeton web JSON (facultatif)",
             "setAsPrimaryNode": "Définir comme noeud principal",
-            "removeConfirmation": "Êtes-vous sûr de vouloir supprimer ce noeud ?"
+            "removeConfirmation": "Êtes-vous sûr de vouloir supprimer ce noeud ?",
+            "removeAllConfirmation": "Êtes-vous sûr de vouloir supprimer tous les nœuds ?",
+            "info": {
+                "url": "URL",
+                "software": "Logiciel",
+                "networkId": "ID du réseau",
+                "bech32HRP": "Bech32 HRP",
+                "features": "Caractéristiques",
+                "confirmedMilestoneIndex": "Index des jalons confirmés",
+                "pruningIndex": "Index d'avancement de l'effacement",
+                "messagesPerSecond": "Messages par seconde",
+                "referencedRate": "Taux référencé"
+            }
+        },
+        "switchNetwork": {
+            "title": "Changer de réseau",
+            "newNetwork": "Nouveau réseau",
+            "resetWarning": "Changer de réseau vous déconnectera et réinitialisera tous les comptes, soldes et historique des transactions pour ce profil.",
+            "switchingNetwork": "Changement de réseau",
+            "typePassword": "Tapez votre mot de passe pour passer à :"
         },
         "errorLog": {
             "title": "Journal d'erreur",
@@ -684,7 +725,7 @@
         "syncAll": "Tout synchroniser",
         "export": "Exporter",
         "exportNewStronghold": "Exporter une nouvelle Stronghold",
-        "enableDeepLinks": "Activer les liens profonds",
+        "enableDeepLinks": "Activer les liens IOTA",
         "enableDeveloperMode": "Activer le mode développeur",
         "enableSystemNotifications": "Activer les notifications système",
         "exportState": "Exporter l'état",
@@ -702,6 +743,7 @@
         "addNode": "Ajouter un nœud",
         "updateNode": "Mettre à jour le noeud",
         "removeNode": "Supprimer un noeud",
+        "removeAllNodes": "Supprimer tous les nœuds",
         "hide": "Masquer",
         "hideOthers": "Masquer les autres",
         "showAll": "Montrer Tout",
@@ -781,8 +823,9 @@
         "stronghold": "Stronghold",
         "language": "Langue",
         "appearance": "Apparence",
-        "lightTheme": "Thème Clair",
-        "darkTheme": "Thème Sombre",
+        "lightTheme": "Clair",
+        "darkTheme": "Sombre",
+        "systemTheme": "Système",
         "balance": "Solde",
         "accountBalance": "Solde du Portefeuille",
         "incoming": "Entrant",
@@ -791,11 +834,7 @@
         "totalOut": "Total sorties",
         "accounts": "Portefeuilles",
         "myAccounts": "Mes Portefeuilles",
-        "automaticNodeSelection": "Sélection de nœud automatique",
-        "manualNodeSelection": "Sélection de nœud manuelle",
         "profiles": "Profils",
-        "developerProfile": "Profil Développeur",
-        "developerProfileDescription": "Vous permet de vous connecter aux réseaux de test",
         "dev": "Dév",
         "createAccount": "Créer un Portefeuille",
         "accountName": "Nom du portefeuille",
@@ -803,6 +842,7 @@
         "transactions": "Transactions",
         "security": "Sécurité",
         "accountAddress": "Adresse du Portefeuille",
+        "network": "Réseau",
         "nodes": "Nœuds",
         "wallet": "Portefeuille",
         "help": "Aide",
@@ -861,7 +901,8 @@
         "legacyNetwork": "Ancien Réseau",
         "capsLock": "Majuscules activées",
         "version": "Version {version}",
-        "unknown": "Inconnu"
+        "unknown": "Inconnu",
+        "none": "Aucun"
     },
     "dates": {
         "today": "Aujourd'hui",
@@ -885,7 +926,17 @@
         "minutesRemaining": "{minutes, plural, one {Il reste 1 minute} other {# minutes restantes}}",
         "copiedToClipboard": "Copié dans le presse-papier",
         "accountsSynchronized": "Synchronisation du portefeuille terminée",
-        "fundsAvailableSoon": "Vos fonds seront bientôt disponibles"
+        "fundsAvailableSoon": "Vos fonds seront bientôt disponibles",
+        "deepLinkingRequest": {
+            "recievedWhileLoggedOut": "Veuillez vous connecter pour initialiser le lien IOTA",
+            "notEnabled": "Les liens IOTA ne sont pas activés",
+            "invalidFormat": "Le lien IOTA que vous avez suivi n'est pas valide",
+            "wallet": {
+                "send": {
+                    "success": "Détails de paiement ajoutés à partir du lien IOTA"
+                }
+            }
+        }
     },
     "error": {
         "profile": {
@@ -945,11 +996,23 @@
         },
         "node": {
             "invalid": "Veuillez saisir une URL valide.",
-            "dns": "Impossible de trouver le DNS du noeud.",
-            "https": "HTTPS est requis. Configurez un profil développeur pour utiliser des connexions HTTP non sécurisées.",
+            "dns": "Impossible de trouver la résolution DNS pour le noeud.",
+            "timedOut": "La connexion a expiré.",
+            "refused": "La connexion a été refusée.",
+            "handshake": "Impossible de terminer le handshake avec le noeud.",
+            "invalidCertificate": "Impossible de se connecter en raison d'un certificat invalide.",
+            "https": "HTTPS est requis ; les connexions non sécurisées via HTTP ne sont pas supportées pour le moment.",
             "duplicate": "Ce noeud a déjà été ajouté.",
             "unsynced": "Le noeud n'est pas synchronisé.",
-            "noSynced": "Aucun nœud synchronisé disponible."
+            "noSynced": "Aucun nœud synchronisé disponible.",
+            "answer": "Impossible d'obtenir une réponse de tous les nœuds.",
+            "forbidden": "La connexion à ce nœud est interdite."
+        },
+        "network": {
+            "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
+            "notReachable": "The network ID for this node could not be retrieved, unable to add node.",
+            "badNodes": "Unable to connect to the network with current node configuration.",
+            "nonEmptyAccount": "You must transfer all balances before switching networks."
         },
         "global": {
             "generic": "Une erreur s'est produite."
@@ -985,6 +1048,11 @@
         },
         "crypto": {
             "cannotDecodeBech32": "Impossible de décoder la chaîne en tant qu'adresse Bech32."
+        }
+    },
+    "warning": {
+        "node": {
+            "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
         }
     },
     "tooltips": {

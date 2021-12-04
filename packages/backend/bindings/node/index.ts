@@ -77,10 +77,10 @@ const onMessageListeners: ((payload: MessageResponse) => void)[] = []
 
 function _poll(
     runtime: typeof addon.ActorSystem,
-    cb: (error: string, data: unknown) => void,
+    cb: (error: Error, data: unknown) => void,
     shouldStop: () => boolean
 ) {
-    runtime.poll((err: string, data: string) => {
+    runtime.poll((err: Error, data: string) => {
         cb(err, err ? null : JSON.parse(data))
         if (!shouldStop()) {
             _poll(runtime, cb, shouldStop)
@@ -100,6 +100,8 @@ export function init(id: string, storagePath?: string): { destroy: () => void; r
     _poll(
         runtime,
         (error, data) => {
+            // Swallow error thrown when poll returns after the actor is destroyed
+            if (error && error.message.includes('receiving on a closed channel')) return
             const message = error || data
             // @ts-ignore
             onMessageListeners.forEach((listener) => listener(message))

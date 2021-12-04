@@ -1,18 +1,3 @@
-import { mnemonic } from './app'
-import { localize } from './i18n'
-import { showAppNotification, showSystemNotification } from './notifications'
-import { activeProfile, isLedgerProfile, isStrongholdLocked, updateProfile } from './profile'
-import type {
-    Account,
-    Account as BaseAccount,
-    AccountToCreate,
-    Balance,
-    SignerType,
-    SyncAccountOptions,
-    SyncedAccount,
-} from './typings/account'
-import type { Address } from './typings/address'
-import type { Actor, GetMigrationAddressResponse } from './typings/bridge'
 import type {
     BalanceChangeEventPayload,
     ConfirmationStateChangeEventPayload,
@@ -24,15 +9,46 @@ import type {
     TransactionEventPayload,
     TransferProgressEventPayload,
     TransferState,
-} from './typings/events'
-import type { Message, Payload, Transaction } from './typings/message'
-import type { AddressInput, MigrationBundle, MigrationData, SendMigrationBundleResponse } from './typings/migration'
-import { formatUnitBestMatch } from './units'
+} from 'shared/lib/typings/events'
+import type { Payload } from 'shared/lib/typings/message'
+import type {
+    AddressInput,
+    MigrationBundle,
+    MigrationData,
+    SendMigrationBundleResponse,
+} from 'shared/lib/typings/migration'
+import { formatUnitBestMatch } from 'shared/lib/units'
 import { get, writable } from 'svelte/store'
+import { mnemonic } from './app'
+import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
+import { Electron } from './electron'
+import { localize } from './i18n'
+import { displayNotificationForLedgerProfile } from './ledger'
+import { didInitialiseMigrationListeners } from './migration'
+import { buildClientOptions } from './network'
+import { showAppNotification, showSystemNotification } from './notifications'
 import { openPopup } from './popup'
+import { activeProfile, isLedgerProfile, isStrongholdLocked, updateProfile } from './profile'
+import { walletSetupType } from './router'
+import type {
+    Account,
+    Account as BaseAccount,
+    AccountToCreate,
+    Balance,
+    SignerType,
+    SyncAccountOptions,
+    SyncedAccount,
+} from './typings/account'
+import type { Address } from './typings/address'
+import type { Actor, GetMigrationAddressResponse } from './typings/bridge'
 import type { ClientOptions } from './typings/client'
+import { CurrencyTypes } from './typings/currency'
 import type { LedgerStatus } from './typings/ledger'
+import { HistoryDataProps, PriceData } from './typings/market'
+import type { Message } from './typings/message'
+import type { RecoveryPhrase } from './typings/mnemonic'
 import type { NodeAuth, NodeInfo } from './typings/node'
+import { ProfileType } from './typings/profile'
 import { SetupType } from './typings/routes'
 import type {
     AccountMessage,
@@ -44,16 +60,6 @@ import type {
     WalletAccount,
     WalletState,
 } from './typings/wallet'
-import { displayNotificationForLedgerProfile } from './ledger'
-import { walletSetupType } from './router'
-import { didInitialiseMigrationListeners } from './migration'
-import type { RecoveryPhrase } from './typings/mnemonic'
-import { CurrencyTypes } from './typings/currency'
-import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
-import { HistoryDataProps, PriceData } from './typings/market'
-import { ProfileType } from './typings/profile'
-import { buildClientOptions } from './network'
-import { Electron } from './electron'
 
 // PARTICIPATION
 import type {
