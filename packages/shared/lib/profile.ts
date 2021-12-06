@@ -12,7 +12,6 @@ import { AvailableExchangeRates } from './typings/currency'
 import type { WalletAccount } from './typings/wallet'
 import { getOfficialNetworkConfig } from './network'
 import { NetworkConfig, NetworkType } from './typings/network'
-import { Electron } from './electron'
 
 export const activeProfileId = writable<string | null>(null)
 
@@ -34,7 +33,7 @@ export const activeProfile: Readable<Profile | undefined> = derived(
 )
 
 activeProfileId.subscribe((profileId) => {
-    Electron?.updateActiveProfile(profileId)
+    Platform.updateActiveProfile(profileId)
 })
 
 export const isSoftwareProfile: Readable<boolean> = derived(
