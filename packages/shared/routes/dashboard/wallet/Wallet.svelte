@@ -53,6 +53,7 @@
         transferState,
         updateBalanceOverview,
         wallet,
+        isParticipationPayload
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
     import { derived, Readable, Writable } from 'svelte/store'
@@ -216,7 +217,7 @@
                             // Check if the message sends to another address in the same account
                             const isSelf = isSelfTransaction(internalMessage.payload, payloadAccount)
 
-                            if (isSelf) {
+                            if (isSelf && !isParticipationPayload(internalMessage.payload)) {
                                 // It's a transfer between two addresses in the same account
                                 // Try and find the other side of the pair where the message id
                                 // would be the same and the incoming flag the opposite

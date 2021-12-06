@@ -1701,6 +1701,33 @@ export const processMigratedTransactions = (accountId: string, messages: Message
 }
 
 /**
+ * Gets indexation string
+ *
+ * @method getIndexationString
+ *
+ * @param {Payload} payload
+ *
+ * @returns {undefined | string}
+ */
+export const getIndexationString = (payload: Payload): string | undefined => {
+    if (payload && payload.type === 'Transaction') {
+        const indexationBytes = payload.data.essence.data.payload.data.index;
+        return String.fromCharCode(...indexationBytes);
+    }
+};
+
+/**
+ * Checks if indexation string corresponds to participation
+ *
+ * @method isParticipationPayload
+ *
+ * @param {Payload} payload
+ *
+ * @returns {boolean}
+ */
+export const isParticipationPayload = (payload: Payload): boolean => getIndexationString(payload) === 'PARTICIPATE';
+
+/**
  * Check if a message was emitted and received by the provided account
  *
  * @method getWalletBalanceHistory

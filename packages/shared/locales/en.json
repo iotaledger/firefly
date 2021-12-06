@@ -496,7 +496,8 @@
             "welcome": "Welcome to the staking dashboard!",
             "manager": {
                 "availableForStaking": "Available for staking",
-                "currentlyStaked": "Currently staked"
+                "currentlyStaked": "Currently staked",
+                "stakedFunds": "Staked funds"
             },
             "status": {
                 "upcoming": "Staking upcoming",
