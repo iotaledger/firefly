@@ -15,13 +15,17 @@
         },
         "profile": {
             "title": "新建配置文件",
-            "profileName": "配置名称",
+            "profileName": "Profile name",
             "body1": "您可创建多个用户配置文件来分别存储您的Token以确保安全。",
             "body2": {
                 "first": "现在，让我们从您的第一个配置文件的名称开始。",
                 "nonFirst": "现在，让我们从您的配置名称开始。"
             },
-            "addMore": "您可以稍后添加更多配置文件。"
+            "addMore": "您可以稍后添加更多配置文件。",
+            "developer": {
+                "label": "Developer profile",
+                "info": "Connect to public and private IOTA networks"
+            }
         },
         "setup": {
             "title": "设置钱包",
@@ -307,7 +311,8 @@
             },
             "theme": {
                 "title": "主题",
-                "description": ""
+                "description": "",
+                "advice": "Restart the Firefly application for changes to the system theme to take effect"
             },
             "language": {
                 "title": "语言",
@@ -323,14 +328,14 @@
             },
             "networkStatus": {
                 "title": "网络状态",
-                "description": "显示你现在所连接的节点状态。"
+                "description": "Displays the status of the node you are currently connected to"
             },
             "exportStronghold": {
-                "title": "导出备份",
+                "title": "Export backup",
                 "description": "导出到 Stronghold文件 - 完整加密备份您的钱包及其最新交易记录"
             },
             "appLock": {
-                "title": "自动锁定",
+                "title": "Automatic lock",
                 "description": "自动锁定钱包并登出的待机时间",
                 "durationMinute": "{time, plural, one {1分钟} other {# 分钟}}",
                 "durationHour": "{time, plural, one {1小时} other {# 小时}}"
@@ -360,28 +365,39 @@
                 "description": "删除您的整个账户信息、钱包和交易历史。请确保您有一个备份"
             },
             "deepLinks": {
-                "title": "深链接",
-                "description": "在点击 iota:// 链接时自动填写Fifrefly 的交易数据"
+                "title": "IOTA links",
+                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
             },
-            "developerMode": {
-                "title": "开发者模式",
-                "description": "连接到测试网和其他开发者功能"
-            },
-            "nodeSettings": {
-                "title": "节点设置",
-                "description": "请启用手动配置来设置并连接到您自己的节点"
+            "networkConfiguration": {
+                "title": "Network config",
+                "title2": "Network configuration",
+                "description": {
+                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
+                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                },
+                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
+                "resetWallet": "Your wallet state has been reset.",
+                "connectedTo": "Connected to",
+                "nodeConfiguration": {
+                    "title": "Node selection",
+                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
+                    "automatic": "Automatic",
+                    "manual": "Manual"
+                }
             },
             "configureNodeList": {
-                "title": "选择节点",
-                "description": "管理您连接的 IOTA网络节点列表",
+                "title": "Node configuration",
+                "description": "Manage the list of nodes you connect to",
                 "primaryNode": "主节点",
                 "excludeNode": "排除此节点",
                 "includeNode": "包含此节点",
-                "viewDetails": "查看详细信息",
+                "editDetails": "Edit details",
+                "viewInfo": "View info",
                 "setAsPrimary": "设为主要节点",
                 "removeNode": "删除节点",
                 "includeOfficialNodeList": "包含官方节点列表",
-                "noNodes": "尚未配置节点，将使用节点自动选择功能"
+                "noNodes": "There are no nodes, unable to connect to the network",
+                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "工作量证明",
@@ -396,7 +412,7 @@
                 "description": "查看系统和应用程序信息"
             },
             "migrateLedgerIndex": {
-                "title": "迁移Ledger账户索引",
+                "title": "Migrate Ledger index",
                 "description": "迁移另一个 Trinity 帐户索引"
             },
             "stateExport": {
@@ -413,7 +429,7 @@
             },
             "faq": {
                 "title": "常见问题",
-                "title2": "常见问题",
+                "title2": "Frequently asked questions",
                 "description": "查看常见问题以获得帮助"
             },
             "discord": {
@@ -528,12 +544,37 @@
             "titleAdd": "添加节点",
             "titleUpdate": "更新节点",
             "titleRemove": "删除节点",
+            "titleRemoveAll": "Remove all nodes",
             "titleDetails": "节点详细信息",
+            "titleInfo": "Node info",
+            "addingNode": "Adding node",
+            "updatingNode": "Updating node",
+            "loadingNodeInfo": "Loading node info",
             "nodeAddress": "节点地址",
             "optionalUsername": "用户名(选填)",
             "optionalPassword": "密码 (选填)",
+            "optionalJwt": "JSON web token (optional)",
             "setAsPrimaryNode": "设为主节点",
-            "removeConfirmation": "您确定要删除此节点吗？"
+            "removeConfirmation": "您确定要删除此节点吗？",
+            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "info": {
+                "url": "URL",
+                "software": "Software",
+                "networkId": "Network ID",
+                "bech32HRP": "Bech32 HRP",
+                "features": "Features",
+                "confirmedMilestoneIndex": "Confirmed milestone index",
+                "pruningIndex": "Pruning index",
+                "messagesPerSecond": "每秒信息数",
+                "referencedRate": "确认率"
+            }
+        },
+        "switchNetwork": {
+            "title": "Switch network",
+            "newNetwork": "New network",
+            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
+            "switchingNetwork": "Switching network",
+            "typePassword": "Type your password to switch to:"
         },
         "errorLog": {
             "title": "错误日志",
@@ -684,7 +725,7 @@
         "syncAll": "全部同步",
         "export": "导出",
         "exportNewStronghold": "导出一个新的Stronghold",
-        "enableDeepLinks": "启用深链接",
+        "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "打开开发者模式",
         "enableSystemNotifications": "启用系统通知",
         "exportState": "导出状态",
@@ -702,6 +743,7 @@
         "addNode": "添加节点",
         "updateNode": "更新节点",
         "removeNode": "删除节点",
+        "removeAllNodes": "Remove all nodes",
         "hide": "隐藏",
         "hideOthers": "隐藏其它",
         "showAll": "显示全部",
@@ -781,8 +823,9 @@
         "stronghold": "Stronghold",
         "language": "语言",
         "appearance": "外观",
-        "lightTheme": "浅色主题",
-        "darkTheme": "深色主题",
+        "lightTheme": "Light",
+        "darkTheme": "Dark",
+        "systemTheme": "System",
         "balance": "余额",
         "accountBalance": "钱包余额",
         "incoming": "收到",
@@ -791,11 +834,7 @@
         "totalOut": "支出总计",
         "accounts": "钱包列表",
         "myAccounts": "我的钱包",
-        "automaticNodeSelection": "自动选择节点",
-        "manualNodeSelection": "手动选择节点",
         "profiles": "用户配置",
-        "developerProfile": "开发者模式",
-        "developerProfileDescription": "允许您连接到测试网",
         "dev": "开发者",
         "createAccount": "创建钱包",
         "accountName": "钱包名称",
@@ -803,6 +842,7 @@
         "transactions": "交易",
         "security": "安全设置",
         "accountAddress": "钱包地址",
+        "network": "Network",
         "nodes": "节点",
         "wallet": "钱包",
         "help": "帮助",
@@ -861,7 +901,8 @@
         "legacyNetwork": "旧的网络",
         "capsLock": "大写锁定键已开启",
         "version": "版本 {version}",
-        "unknown": "Unknown"
+        "unknown": "Unknown",
+        "none": "None"
     },
     "dates": {
         "today": "今日",
@@ -885,7 +926,17 @@
         "minutesRemaining": "{minutes, plural, one {还剩最后一分钟...} other {还剩余 # 分钟...}}",
         "copiedToClipboard": "复制到剪贴板",
         "accountsSynchronized": "钱包同步完成",
-        "fundsAvailableSoon": "您的资金将很快变为可用资金。"
+        "fundsAvailableSoon": "您的资金将很快变为可用资金。",
+        "deepLinkingRequest": {
+            "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
+            "notEnabled": "IOTA links are not enabled",
+            "invalidFormat": "The IOTA link you followed is invalid",
+            "wallet": {
+                "send": {
+                    "success": "Payment details added from IOTA link"
+                }
+            }
+        }
     },
     "error": {
         "profile": {
@@ -945,11 +996,23 @@
         },
         "node": {
             "invalid": "请输入有效的URL",
-            "dns": "Could not resolve DNS for node.",
-            "https": "HTTPS 必须。可以设置一个开发者配置文件来使用不安全的 HTTP 连接。",
+            "dns": "Could not find DNS resolution for node.",
+            "timedOut": "The connection timed out.",
+            "refused": "The connection was refused.",
+            "handshake": "Could not complete handshake with node.",
+            "invalidCertificate": "Could not connect with invalid certificate.",
+            "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
             "duplicate": "此节点已被添加。",
             "unsynced": "节点未同步。",
-            "noSynced": "没有可用的同步节点。"
+            "noSynced": "没有可用的同步节点。",
+            "answer": "Failed to get an answer from all nodes.",
+            "forbidden": "This node connection is forbidden."
+        },
+        "network": {
+            "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
+            "notReachable": "The network ID for this node could not be retrieved, unable to add node.",
+            "badNodes": "Unable to connect to the network with current node configuration.",
+            "nonEmptyAccount": "You must transfer all balances before switching networks."
         },
         "global": {
             "generic": "发生了一些错误。"
@@ -985,6 +1048,11 @@
         },
         "crypto": {
             "cannotDecodeBech32": "Unable to decode string as Bech32 address."
+        }
+    },
+    "warning": {
+        "node": {
+            "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
         }
     },
     "tooltips": {

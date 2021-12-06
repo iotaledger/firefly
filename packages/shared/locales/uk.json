@@ -15,13 +15,17 @@
         },
         "profile": {
             "title": "Створити профіль",
-            "profileName": "Ім'я профілю",
+            "profileName": "Profile name",
             "body1": "Ви можете створити декілька профілів користувачів для організації ваших гаманців та покращення конфіденційності.",
             "body2": {
                 "first": "Почніть з назви вашого першого профілю.",
                 "nonFirst": "Почніть з назви вашого профілю."
             },
-            "addMore": "Ви можете додати більше профілів пізніше."
+            "addMore": "Ви можете додати більше профілів пізніше.",
+            "developer": {
+                "label": "Developer profile",
+                "info": "Connect to public and private IOTA networks"
+            }
         },
         "setup": {
             "title": "Налаштування гаманця",
@@ -307,7 +311,8 @@
             },
             "theme": {
                 "title": "Тема",
-                "description": ""
+                "description": "",
+                "advice": "Restart the Firefly application for changes to the system theme to take effect"
             },
             "language": {
                 "title": "Мова",
@@ -323,14 +328,14 @@
             },
             "networkStatus": {
                 "title": "Статус мережі",
-                "description": "Відображає стан вузла, до якого ви зараз підключені."
+                "description": "Displays the status of the node you are currently connected to"
             },
             "exportStronghold": {
-                "title": "Експорт резервної копії",
+                "title": "Export backup",
                 "description": "Експорт у файл Stronghold - повна зашифрована резервна копія ваших гаманців та найновіша історія транзакцій"
             },
             "appLock": {
-                "title": "Автоматичне блокування",
+                "title": "Automatic lock",
                 "description": "Час бездіяльності, перш ніж ваші гаманці заблокуються, і ви вийдете",
                 "durationMinute": "{time, plural, one {1 хвилину} other {# хвилини}}",
                 "durationHour": "{time, plural, one {1 година} other {# години}}"
@@ -360,28 +365,39 @@
                 "description": "Видаляє весь ваш профіль, гаманці та історію транзакцій. Переконайтеся, що у вас є резервна копія"
             },
             "deepLinks": {
-                "title": "Глибокі посилання",
-                "description": "Автоматично заповнити дані транзакцій в Firefly при натисканні на посилання iota://"
+                "title": "IOTA links",
+                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
             },
-            "developerMode": {
-                "title": "Режим розробника",
-                "description": "Підключитися до testnets та інших функцій розробника"
-            },
-            "nodeSettings": {
-                "title": "Налаштування Node",
-                "description": "Виберіть Вручну, щоб налаштування параметрів вузла і підключення до вашого власного вузла"
+            "networkConfiguration": {
+                "title": "Network config",
+                "title2": "Network configuration",
+                "description": {
+                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
+                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                },
+                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
+                "resetWallet": "Your wallet state has been reset.",
+                "connectedTo": "Connected to",
+                "nodeConfiguration": {
+                    "title": "Node selection",
+                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
+                    "automatic": "Automatic",
+                    "manual": "Manual"
+                }
             },
             "configureNodeList": {
-                "title": "Оберіть вузол",
-                "description": "Керуйте списком мережевих вузлів IOTA, до яких ви підключаєтесь",
+                "title": "Node configuration",
+                "description": "Manage the list of nodes you connect to",
                 "primaryNode": "Основний вузол",
                 "excludeNode": "Виключити вузол",
                 "includeNode": "Включити вузол",
-                "viewDetails": "Подивитися деталі",
+                "editDetails": "Edit details",
+                "viewInfo": "View info",
                 "setAsPrimary": "Встановити як основний",
                 "removeNode": "Видалити вузол",
                 "includeOfficialNodeList": "Включити список офіційних вузлів",
-                "noNodes": "Немає вузлів, замість них буде використовуватися автоматичний вибір"
+                "noNodes": "There are no nodes, unable to connect to the network",
+                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "Proof of work",
@@ -396,7 +412,7 @@
                 "description": "Перегляд інформації про систему і додаток"
             },
             "migrateLedgerIndex": {
-                "title": "Перенесення індексу Ledger",
+                "title": "Migrate Ledger index",
                 "description": "Перенести інший індекс з Trinity"
             },
             "stateExport": {
@@ -413,7 +429,7 @@
             },
             "faq": {
                 "title": "Питання, що часто ставляться",
-                "title2": "Поширені запитання",
+                "title2": "Frequently asked questions",
                 "description": "Переглянути поширені запитання для отримання допомоги із загальною проблемою або питанням"
             },
             "discord": {
@@ -528,12 +544,37 @@
             "titleAdd": "Додати вузол",
             "titleUpdate": "Оновити вузол",
             "titleRemove": "Видалити вузол",
+            "titleRemoveAll": "Remove all nodes",
             "titleDetails": "Деталі вузла",
+            "titleInfo": "Node info",
+            "addingNode": "Adding node",
+            "updatingNode": "Updating node",
+            "loadingNodeInfo": "Loading node info",
             "nodeAddress": "Адреса вузла",
             "optionalUsername": "Ім'я користувача (опціонально)",
             "optionalPassword": "Пароль (опціонально)",
+            "optionalJwt": "JSON web token (optional)",
             "setAsPrimaryNode": "Встановити як основний вузол",
-            "removeConfirmation": "Ти впевнений, що хочете видалити цей вузол?"
+            "removeConfirmation": "Ти впевнений, що хочете видалити цей вузол?",
+            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "info": {
+                "url": "URL",
+                "software": "Software",
+                "networkId": "Network ID",
+                "bech32HRP": "Bech32 HRP",
+                "features": "Features",
+                "confirmedMilestoneIndex": "Confirmed milestone index",
+                "pruningIndex": "Pruning index",
+                "messagesPerSecond": "Повідомлень в секунду",
+                "referencedRate": "Referenced rate"
+            }
+        },
+        "switchNetwork": {
+            "title": "Switch network",
+            "newNetwork": "New network",
+            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
+            "switchingNetwork": "Switching network",
+            "typePassword": "Type your password to switch to:"
         },
         "errorLog": {
             "title": "Журнал помилок",
@@ -684,7 +725,7 @@
         "syncAll": "Синхронізувати все",
         "export": "Експортувати",
         "exportNewStronghold": "Експортувати новий Stronghold",
-        "enableDeepLinks": "Активувати смарт лінки",
+        "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "Активувати режим розробника",
         "enableSystemNotifications": "Увімкнути систему сповіщень",
         "exportState": "Експортувати звіт",
@@ -702,6 +743,7 @@
         "addNode": "Додати вузол",
         "updateNode": "Оновити вузол",
         "removeNode": "Видалити вузол",
+        "removeAllNodes": "Remove all nodes",
         "hide": "Приховати",
         "hideOthers": "Приховати інші",
         "showAll": "Показати все",
@@ -781,8 +823,9 @@
         "stronghold": "Stronghold",
         "language": "Мова",
         "appearance": "Оформлення",
-        "lightTheme": "Світлий фон",
-        "darkTheme": "Темний фон",
+        "lightTheme": "Light",
+        "darkTheme": "Dark",
+        "systemTheme": "System",
         "balance": "Баланс",
         "accountBalance": "Баланс гаманця",
         "incoming": "Вхідні",
@@ -791,11 +834,7 @@
         "totalOut": "Всього (вих.)",
         "accounts": "Гаманці",
         "myAccounts": "Мої гаманці",
-        "automaticNodeSelection": "Автоматичний вибір Node",
-        "manualNodeSelection": "Ручний вибір Node",
         "profiles": "Профілі",
-        "developerProfile": "Профіль розробника",
-        "developerProfileDescription": "Дозволяє підключатися до тестових мереж",
         "dev": "Розробник",
         "createAccount": "Створити гаманець",
         "accountName": "Назва гаманця",
@@ -803,6 +842,7 @@
         "transactions": "Транзакції",
         "security": "Безпека",
         "accountAddress": "Адреса гаманця",
+        "network": "Network",
         "nodes": "Вузли",
         "wallet": "Гаманець",
         "help": "Допомога",
@@ -861,7 +901,8 @@
         "legacyNetwork": "Застаріла мережа",
         "capsLock": "Caps Lock увімкнуто",
         "version": "Версія {version}",
-        "unknown": "Невідомо"
+        "unknown": "Невідомо",
+        "none": "None"
     },
     "dates": {
         "today": "Сьогодні",
@@ -885,7 +926,17 @@
         "minutesRemaining": "{minutes, plural, one {Залишилось 1 хвилина} other { Залишилось # хвилин}}",
         "copiedToClipboard": "Скопійовано в буфер обміну",
         "accountsSynchronized": "Синхронізацію гаманця завершено",
-        "fundsAvailableSoon": "Незабаром ваші кошти стануть доступними"
+        "fundsAvailableSoon": "Незабаром ваші кошти стануть доступними",
+        "deepLinkingRequest": {
+            "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
+            "notEnabled": "IOTA links are not enabled",
+            "invalidFormat": "The IOTA link you followed is invalid",
+            "wallet": {
+                "send": {
+                    "success": "Payment details added from IOTA link"
+                }
+            }
+        }
     },
     "error": {
         "profile": {
@@ -945,11 +996,23 @@
         },
         "node": {
             "invalid": "Будь ласка, введіть правильну адресу.",
-            "dns": "Could not resolve DNS for node.",
-            "https": "Потрібно HTTPS. Налаштуйте профіль розробника для використання небезпечних HTTP-з'єднань.",
+            "dns": "Could not find DNS resolution for node.",
+            "timedOut": "The connection timed out.",
+            "refused": "The connection was refused.",
+            "handshake": "Could not complete handshake with node.",
+            "invalidCertificate": "Could not connect with invalid certificate.",
+            "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
             "duplicate": "Цей вузол вже був доданий.",
             "unsynced": "Вузол не синхронізований.",
-            "noSynced": "Немає доступних синхронізованих вузлів."
+            "noSynced": "Немає доступних синхронізованих вузлів.",
+            "answer": "Failed to get an answer from all nodes.",
+            "forbidden": "This node connection is forbidden."
+        },
+        "network": {
+            "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
+            "notReachable": "The network ID for this node could not be retrieved, unable to add node.",
+            "badNodes": "Unable to connect to the network with current node configuration.",
+            "nonEmptyAccount": "You must transfer all balances before switching networks."
         },
         "global": {
             "generic": "Щось пішло не так."
@@ -985,6 +1048,11 @@
         },
         "crypto": {
             "cannotDecodeBech32": "Unable to decode string as Bech32 address."
+        }
+    },
+    "warning": {
+        "node": {
+            "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
         }
     },
     "tooltips": {

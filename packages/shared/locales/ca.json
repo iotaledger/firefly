@@ -21,7 +21,11 @@
                 "first": "Per ara, comencem amb el vostre primer nom de perfil.",
                 "nonFirst": "Per ara, comencem amb el vostre nom de perfil."
             },
-            "addMore": "Després podreu afegir més perfils."
+            "addMore": "Després podreu afegir més perfils.",
+            "developer": {
+                "label": "Perfil de desenvolupador",
+                "info": "Connecta a les xarxes IOTA públiques i privades"
+            }
         },
         "setup": {
             "title": "Configura un moneder",
@@ -307,7 +311,8 @@
             },
             "theme": {
                 "title": "Tema",
-                "description": ""
+                "description": "",
+                "advice": "Restart the Firefly application for changes to the system theme to take effect"
             },
             "language": {
                 "title": "Llengua",
@@ -323,14 +328,14 @@
             },
             "networkStatus": {
                 "title": "Estat de la xarxa",
-                "description": "Mostra l'estat del node al que esteu connectat."
+                "description": "Displays the status of the node you are currently connected to"
             },
             "exportStronghold": {
-                "title": "Exportar còpia de seguretat",
+                "title": "Export backup",
                 "description": "Exporta a un fitxer Stronghold - una còpia completa de seguretat xifrada dels vostres moneders i l'historial de les darreres transaccions"
             },
             "appLock": {
-                "title": "Bloquejar automàticament",
+                "title": "Automatic lock",
                 "description": "Temps d'inactivitat abans que els moneders es bloquegin i us tanqui la sessió",
                 "durationMinute": "{time, plural, one {1 minut} other {# minuts}}",
                 "durationHour": "{time, plural, one {1 hora} other {# hores}}"
@@ -360,28 +365,39 @@
                 "description": "Elimineu el vostre perfil complet, moneders i llistat de transaccions. Assegureu-vos de tenir una còpia de seguretat"
             },
             "deepLinks": {
-                "title": "Enllaços profunds",
-                "description": "Empleneu automàticament les dades de transaccions a Firefly al fer clic a un enllaç iota://"
+                "title": "Enllaços IOTA",
+                "description": "Ompliu automàticament dades de transaccions a Firefly clicant un enllaç IOTA"
             },
-            "developerMode": {
-                "title": "Mode de desenvolupador",
-                "description": "Connectar a les xarxes de proves i altres funcions per a desenvolupadors"
-            },
-            "nodeSettings": {
-                "title": "Configuració dels dispositius",
-                "description": "Selecciona Manual per triar a la llista de nodes i connectar-te al teu propi node"
+            "networkConfiguration": {
+                "title": "Network config",
+                "title2": "Network configuration",
+                "description": {
+                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
+                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                },
+                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
+                "resetWallet": "Your wallet state has been reset.",
+                "connectedTo": "Connected to",
+                "nodeConfiguration": {
+                    "title": "Node selection",
+                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
+                    "automatic": "Automatic",
+                    "manual": "Manual"
+                }
             },
             "configureNodeList": {
-                "title": "Selecciona el node",
-                "description": "Gestioneu la llista de nodes de la xarxa IOTA on us voleu connectar",
+                "title": "Node configuration",
+                "description": "Manage the list of nodes you connect to",
                 "primaryNode": "Node primari",
                 "excludeNode": "Excloure node",
                 "includeNode": "Incloure node",
-                "viewDetails": "Mostrar els detalls",
+                "editDetails": "Edit details",
+                "viewInfo": "View info",
                 "setAsPrimary": "Estableix com a primari",
                 "removeNode": "Elimina el node",
                 "includeOfficialNodeList": "Afegir llista oficial de nodes",
-                "noNodes": "No hi ha nodes, en lloc d'això s'utilitzarà la selecció automàtica"
+                "noNodes": "There are no nodes, unable to connect to the network",
+                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "Prova de Treball",
@@ -396,7 +412,7 @@
                 "description": "Veure la informació del sistema i de l'aplicació"
             },
             "migrateLedgerIndex": {
-                "title": "Migra l'índex del Ledger",
+                "title": "Migrate Ledger index",
                 "description": "Migra un altre índex de compte Trinity"
             },
             "stateExport": {
@@ -413,7 +429,7 @@
             },
             "faq": {
                 "title": "FAQ",
-                "title2": "Preguntes Freqüents",
+                "title2": "Frequently asked questions",
                 "description": "Consulteu les FAQ per obtenir ajuda amb un problema"
             },
             "discord": {
@@ -528,12 +544,37 @@
             "titleAdd": "Afegeix un node",
             "titleUpdate": "Actualitzar el node",
             "titleRemove": "Traieu un node",
+            "titleRemoveAll": "Remove all nodes",
             "titleDetails": "Detalls del node",
+            "titleInfo": "Node info",
+            "addingNode": "Adding node",
+            "updatingNode": "Updating node",
+            "loadingNodeInfo": "Loading node info",
             "nodeAddress": "Adreça del node",
             "optionalUsername": "Nom d'usuari (opcional)",
             "optionalPassword": "Contrasenya (opcional)",
+            "optionalJwt": "JSON web token (optional)",
             "setAsPrimaryNode": "Estableix com a node principal",
-            "removeConfirmation": "Esteu segur que voleu eliminar aquest node?"
+            "removeConfirmation": "Esteu segur que voleu eliminar aquest node?",
+            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "info": {
+                "url": "URL",
+                "software": "Software",
+                "networkId": "Network ID",
+                "bech32HRP": "Bech32 HRP",
+                "features": "Features",
+                "confirmedMilestoneIndex": "Confirmed milestone index",
+                "pruningIndex": "Pruning index",
+                "messagesPerSecond": "Missatges per segon",
+                "referencedRate": "Taxa referenciada"
+            }
+        },
+        "switchNetwork": {
+            "title": "Switch network",
+            "newNetwork": "New network",
+            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
+            "switchingNetwork": "Switching network",
+            "typePassword": "Type your password to switch to:"
         },
         "errorLog": {
             "title": "Registre d'errors",
@@ -614,7 +655,7 @@
         "ledgerTransaction": {
             "remainderAddress": {
                 "title": "Confirma la resta d'adreça",
-                "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+                "info": "Confirmeu que la resta de l'adreça que es mostra al vostre Ledger coincideix amb la que es mostra a continuació. Si coincideixen, premeu els dos botons del Ledger com es demana."
             },
             "transaction": {
                 "title": "Confirmar la transacció",
@@ -684,7 +725,7 @@
         "syncAll": "Sincronitza-ho tot",
         "export": "Exportar",
         "exportNewStronghold": "Exporteu un nou Stronghold",
-        "enableDeepLinks": "Activa els enllaços profunds",
+        "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "Activa el mode de desenvolupador",
         "enableSystemNotifications": "Activa les notificacions del sistema",
         "exportState": "Estat d'exportació",
@@ -702,6 +743,7 @@
         "addNode": "Afegeix un node",
         "updateNode": "Actualitzar el node",
         "removeNode": "Elimina el node",
+        "removeAllNodes": "Remove all nodes",
         "hide": "Oculta",
         "hideOthers": "Amaga els altres",
         "showAll": "Mostrar tots",
@@ -781,8 +823,9 @@
         "stronghold": "Stronghold",
         "language": "Llengua",
         "appearance": "Aspecte",
-        "lightTheme": "Tema clar",
-        "darkTheme": "Tema fosc",
+        "lightTheme": "Light",
+        "darkTheme": "Dark",
+        "systemTheme": "System",
         "balance": "Balanç",
         "accountBalance": "Balanç del moneder",
         "incoming": "Entrant",
@@ -791,11 +834,7 @@
         "totalOut": "Total sortint",
         "accounts": "Moneders",
         "myAccounts": "Els meus moneders",
-        "automaticNodeSelection": "Selecció automàtica de nodes",
-        "manualNodeSelection": "Selecció manual de nodes",
         "profiles": "Perfils",
-        "developerProfile": "Mode de desenvolupador",
-        "developerProfileDescription": "Us permet connectar-vos a les testnets",
         "dev": "Dev",
         "createAccount": "Crea un moneder",
         "accountName": "Nom del moneder",
@@ -803,6 +842,7 @@
         "transactions": "Transaccions",
         "security": "Seguretat",
         "accountAddress": "Adreça del moneder",
+        "network": "Network",
         "nodes": "Nodes",
         "wallet": "Cartera",
         "help": "Ajuda",
@@ -861,7 +901,8 @@
         "legacyNetwork": "Xarxa Legacy",
         "capsLock": "El bloqueig de majúscules està activat",
         "version": "Versió {version}",
-        "unknown": "Desconegut"
+        "unknown": "Desconegut",
+        "none": "None"
     },
     "dates": {
         "today": "Avui",
@@ -885,7 +926,17 @@
         "minutesRemaining": "{minutes, plural, one {1 minut restant} other {# minuts restants}}",
         "copiedToClipboard": "Copiat al porta-retalls",
         "accountsSynchronized": "Sincronització completa del moneder",
-        "fundsAvailableSoon": "Your funds will become available shortly"
+        "fundsAvailableSoon": "Your funds will become available shortly",
+        "deepLinkingRequest": {
+            "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
+            "notEnabled": "IOTA links are not enabled",
+            "invalidFormat": "The IOTA link you followed is invalid",
+            "wallet": {
+                "send": {
+                    "success": "Payment details added from IOTA link"
+                }
+            }
+        }
     },
     "error": {
         "profile": {
@@ -945,11 +996,23 @@
         },
         "node": {
             "invalid": "Si us plau, introdueix una URL vàlida.",
-            "dns": "Could not resolve DNS for node.",
-            "https": "Es requereix HTTPS. Configureu un perfil de desenvolupador per utilitzar connexions HTTP no segures.",
+            "dns": "Could not find DNS resolution for node.",
+            "timedOut": "The connection timed out.",
+            "refused": "The connection was refused.",
+            "handshake": "Could not complete handshake with node.",
+            "invalidCertificate": "Could not connect with invalid certificate.",
+            "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
             "duplicate": "Aquest node ja s'ha afegit.",
             "unsynced": "El node no esta sincronitzat.",
-            "noSynced": "No hi ha nodes sincronitzats disponibles."
+            "noSynced": "No hi ha nodes sincronitzats disponibles.",
+            "answer": "Failed to get an answer from all nodes.",
+            "forbidden": "This node connection is forbidden."
+        },
+        "network": {
+            "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
+            "notReachable": "The network ID for this node could not be retrieved, unable to add node.",
+            "badNodes": "Unable to connect to the network with current node configuration.",
+            "nonEmptyAccount": "You must transfer all balances before switching networks."
         },
         "global": {
             "generic": "Alguna cosa ha anat malament."
@@ -985,6 +1048,11 @@
         },
         "crypto": {
             "cannotDecodeBech32": "Unable to decode string as Bech32 address."
+        }
+    },
+    "warning": {
+        "node": {
+            "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
         }
     },
     "tooltips": {

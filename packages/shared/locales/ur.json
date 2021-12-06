@@ -15,13 +15,17 @@
         },
         "profile": {
             "title": "ایک پروفائل بنائیں",
-            "profileName": "پروفائل کا نام",
+            "profileName": "Profile name",
             "body1": "آپ اپنے والیٹ کو منظم کرنے اور رازداری کو بہتر بنانے کے لئے متعدد صارف پروفائلز تشکیل دے سکتے ہیں.",
             "body2": {
                 "first": "For now, let's start with your first profile name.",
                 "nonFirst": "For now, let's start with your profile name."
             },
-            "addMore": "You can add more profiles later."
+            "addMore": "You can add more profiles later.",
+            "developer": {
+                "label": "Developer profile",
+                "info": "Connect to public and private IOTA networks"
+            }
         },
         "setup": {
             "title": "ایک والیٹ بنائیں",
@@ -307,7 +311,8 @@
             },
             "theme": {
                 "title": "تھیم",
-                "description": ""
+                "description": "",
+                "advice": "Restart the Firefly application for changes to the system theme to take effect"
             },
             "language": {
                 "title": "زبان",
@@ -323,14 +328,14 @@
             },
             "networkStatus": {
                 "title": "نیٹ ورک اسٹیٹس",
-                "description": "اس نوڈ کی حیثیت کو ظاہر کرتا ہے جس سے آپ فی الحال جڑے ہوئے ہیں۔"
+                "description": "Displays the status of the node you are currently connected to"
             },
             "exportStronghold": {
-                "title": "بیک اپ برآمد کریں",
+                "title": "Export backup",
                 "description": "ایک سٹرانگ ہولڈ کی فائل میں برآمد کریں - آپ کے والیٹس اور ٹرانزیکشن کی تازہ ترین تاریخ کا ایک مکمل مرموز کردہ بیک اپ"
             },
             "appLock": {
-                "title": "خودکار لاک",
+                "title": "Automatic lock",
                 "description": "غیر فعال ہونے کا وقت جب آپ کے والیٹس لاک ہوجاتے ہیں اور آپ لاگ آؤٹ ہوجاتے ہیں",
                 "durationMinute": "{time, plural, one {1 منٹ} other {# منٹ}}",
                 "durationHour": "{time, plural, one {1 گھنٹہ} other {# گھنٹے}}"
@@ -360,28 +365,39 @@
                 "description": "آپ کی پوری پروفائل، والٹس اور ٹرانزیکشن کی تاریخ کو حذف کرتا ہے۔ یقینی بنائیں کہ آپ کے پاس ایک بیک اپ موجود ہے"
             },
             "deepLinks": {
-                "title": "گہرے لنکس",
-                "description": "//:iota لنک پر کلک کرنے پر فائر فلی میں ٹرانزیکشن کا ڈیٹا خود بخود پُر کریں"
+                "title": "IOTA links",
+                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
             },
-            "developerMode": {
-                "title": "ڈویلپر موڈ",
-                "description": "ٹیسٹ نیٹس اور دیگر ڈویلپر خصوصیات سے کنکٹ کریں"
-            },
-            "nodeSettings": {
-                "title": "نوڈ کی ترتیبات",
-                "description": "نوڈ کی ترتیبات کو تشکیل دینے اور اپنے اپنے نوڈ سے جڑنے کے لیئے مینول کا انتخاب کریں"
+            "networkConfiguration": {
+                "title": "Network config",
+                "title2": "Network configuration",
+                "description": {
+                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
+                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                },
+                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
+                "resetWallet": "Your wallet state has been reset.",
+                "connectedTo": "Connected to",
+                "nodeConfiguration": {
+                    "title": "Node selection",
+                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
+                    "automatic": "Automatic",
+                    "manual": "Manual"
+                }
             },
             "configureNodeList": {
-                "title": "نوڈ منتخب کریں",
-                "description": "IOTA نیٹ ورک کے نوڈذ کی فہرست کا نظم کریں جس سے آپ کنکٹ ہوتے ہیں",
+                "title": "Node configuration",
+                "description": "Manage the list of nodes you connect to",
                 "primaryNode": "بنیادی نوڈ",
                 "excludeNode": "نوڈ خارج کریں",
                 "includeNode": "نوڈ شامل کریں",
-                "viewDetails": "تفصیلات دیکھیں",
+                "editDetails": "Edit details",
+                "viewInfo": "View info",
                 "setAsPrimary": "بنیادی نوڈ کے طور پر سیٹ کریں",
                 "removeNode": "نوڈ ہٹائیں",
                 "includeOfficialNodeList": "آفیشیل نوڈ لسٹ شامل کریں",
-                "noNodes": "کوئی نوڈز نہیں ہیں ، اس کی بجائے خودکار انتخاب کا استعمال کیا جائے گا"
+                "noNodes": "There are no nodes, unable to connect to the network",
+                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "پروف آف ورک",
@@ -396,7 +412,7 @@
                 "description": "نظام اور ایپلیکیشن کی معلومات دیکھیں"
             },
             "migrateLedgerIndex": {
-                "title": "Migrate Ledger Index",
+                "title": "Migrate Ledger index",
                 "description": "Migrate another Trinity account index"
             },
             "stateExport": {
@@ -413,7 +429,7 @@
             },
             "faq": {
                 "title": "عمومی سوالات",
-                "title2": "اکثر پوچھے گئے سوالات",
+                "title2": "Frequently asked questions",
                 "description": "عام پریشانی یا سوال سے متعلق مدد حاصل کرنے کے لئے عمومی سوالنامہ دیکھیں"
             },
             "discord": {
@@ -528,12 +544,37 @@
             "titleAdd": "ایک نوڈ شامل کریں",
             "titleUpdate": "ایک نوڈ کو اپ ڈیٹ کریں",
             "titleRemove": "ایک نوڈ کو ہٹائیں",
+            "titleRemoveAll": "Remove all nodes",
             "titleDetails": "نوڈ کی تفصیلات",
+            "titleInfo": "Node info",
+            "addingNode": "Adding node",
+            "updatingNode": "Updating node",
+            "loadingNodeInfo": "Loading node info",
             "nodeAddress": "نوڈ ایڈریس",
             "optionalUsername": "صارفی نام (اختیاری)",
             "optionalPassword": "پاس ورڈ (اختیاری)",
+            "optionalJwt": "JSON web token (optional)",
             "setAsPrimaryNode": "بنیادی نوڈ کے طور پر سیٹ کریں",
-            "removeConfirmation": "کیا آپ یقین کے ساتھ اس نوڈ کو مٹانا چاہتے ہیں؟"
+            "removeConfirmation": "کیا آپ یقین کے ساتھ اس نوڈ کو مٹانا چاہتے ہیں؟",
+            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "info": {
+                "url": "URL",
+                "software": "Software",
+                "networkId": "Network ID",
+                "bech32HRP": "Bech32 HRP",
+                "features": "Features",
+                "confirmedMilestoneIndex": "Confirmed milestone index",
+                "pruningIndex": "Pruning index",
+                "messagesPerSecond": "میسجز فی سیکنڈ",
+                "referencedRate": "ریفرینسڈ ریٹ"
+            }
+        },
+        "switchNetwork": {
+            "title": "Switch network",
+            "newNetwork": "New network",
+            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
+            "switchingNetwork": "Switching network",
+            "typePassword": "Type your password to switch to:"
         },
         "errorLog": {
             "title": "خرابی کا لاگ",
@@ -684,7 +725,7 @@
         "syncAll": "سب کو سنک کریں",
         "export": "برآمد کریں",
         "exportNewStronghold": "ایک نیا سٹرانگ ہولڈ برآمد کریں",
-        "enableDeepLinks": "ڈیپ لنکس کو فعال کریں",
+        "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "ڈیولپر موڈ میں فعال کریں",
         "enableSystemNotifications": "اطلاعات کو فعال بنائیں",
         "exportState": "حالت برآمد کریں",
@@ -702,6 +743,7 @@
         "addNode": "نوڈ شامل کریں",
         "updateNode": "نوڈ اپ ڈیٹ کریں",
         "removeNode": "نوڈ ہٹائیں",
+        "removeAllNodes": "Remove all nodes",
         "hide": "چھپائیں",
         "hideOthers": "دیگر چھپائیں",
         "showAll": "سب دکھائیں",
@@ -781,8 +823,9 @@
         "stronghold": "سٹرانگ ہولڈ",
         "language": "زبان",
         "appearance": "وضع",
-        "lightTheme": "لائٹ تھیم",
-        "darkTheme": "سیاہ تھیم",
+        "lightTheme": "Light",
+        "darkTheme": "Dark",
+        "systemTheme": "System",
         "balance": "بیلنس",
         "accountBalance": "والیٹ کا بیلینس",
         "incoming": "آنے والی",
@@ -791,11 +834,7 @@
         "totalOut": "کل ملا کر ارسال شدہ",
         "accounts": "والیٹس",
         "myAccounts": "میرا والیٹ",
-        "automaticNodeSelection": "خودکار نوڈ کا انتخاب",
-        "manualNodeSelection": "دستی نوڈ کا انتخاب",
         "profiles": "پروفائلز",
-        "developerProfile": "ڈویلپر پروفائل",
-        "developerProfileDescription": "آپ کو ٹیسٹ نیٹ سے کنکٹ ہونے کی اجازت دیتا ہے",
         "dev": "ڈیو",
         "createAccount": "ایک نیا والیٹ بنائیں",
         "accountName": "والیٹ کا نام",
@@ -803,6 +842,7 @@
         "transactions": "ٹرانزیکشنز",
         "security": "سیکورٹی",
         "accountAddress": "والیٹ کا ایڈریس",
+        "network": "Network",
         "nodes": "نوڈذ",
         "wallet": "والیٹ",
         "help": "مدد",
@@ -861,7 +901,8 @@
         "legacyNetwork": "لیگیسی نیٹ ورک",
         "capsLock": "کیپس لاک آن ہے",
         "version": "ورژن {version}",
-        "unknown": "Unknown"
+        "unknown": "Unknown",
+        "none": "None"
     },
     "dates": {
         "today": "آج",
@@ -885,7 +926,17 @@
         "minutesRemaining": "{minutes, plural, one {1 منٹ باقی} other {# منٹس باقی}}",
         "copiedToClipboard": "کلپ بورڈ میں کاپی ہو گیا",
         "accountsSynchronized": "والٹ کی سنک مکمل",
-        "fundsAvailableSoon": "Your funds will become available shortly"
+        "fundsAvailableSoon": "Your funds will become available shortly",
+        "deepLinkingRequest": {
+            "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
+            "notEnabled": "IOTA links are not enabled",
+            "invalidFormat": "The IOTA link you followed is invalid",
+            "wallet": {
+                "send": {
+                    "success": "Payment details added from IOTA link"
+                }
+            }
+        }
     },
     "error": {
         "profile": {
@@ -945,11 +996,23 @@
         },
         "node": {
             "invalid": "براہ کرم ایک درست URL درج کریں.",
-            "dns": "Could not resolve DNS for node.",
-            "https": "HTTPS ضروری ہے۔ غیر محفوظ شدہ HTTP رابطوں کو استعمال کرنے کے لئے ایک ڈویلپر پروفائل ترتیب دیں.",
+            "dns": "Could not find DNS resolution for node.",
+            "timedOut": "The connection timed out.",
+            "refused": "The connection was refused.",
+            "handshake": "Could not complete handshake with node.",
+            "invalidCertificate": "Could not connect with invalid certificate.",
+            "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
             "duplicate": "یہ نوڈ پہلے ہی شامل کی جا چکی ہے.",
             "unsynced": "یہ نوڈ سنک میں نہیں ہے.",
-            "noSynced": "کوئی سنک شدہ نوڈ دستیاب نہیں."
+            "noSynced": "کوئی سنک شدہ نوڈ دستیاب نہیں.",
+            "answer": "Failed to get an answer from all nodes.",
+            "forbidden": "This node connection is forbidden."
+        },
+        "network": {
+            "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
+            "notReachable": "The network ID for this node could not be retrieved, unable to add node.",
+            "badNodes": "Unable to connect to the network with current node configuration.",
+            "nonEmptyAccount": "You must transfer all balances before switching networks."
         },
         "global": {
             "generic": "کچھ غلط ہو گیا."
@@ -985,6 +1048,11 @@
         },
         "crypto": {
             "cannotDecodeBech32": "Unable to decode string as Bech32 address."
+        }
+    },
+    "warning": {
+        "node": {
+            "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
         }
     },
     "tooltips": {
