@@ -77,19 +77,26 @@ export function init(
     removeEventListeners: () => void
 } {
     const walletListener = WalletPlugin.addListener('walletEvent', (message) => {
-        const { walletResponse } = JSON.parse(message.toString())
-        onMessageListeners.forEach((listener) => listener(walletResponse))
+        const { walletResponse } = message
+        const parsedResponse = JSON.parse(walletResponse)
+        onMessageListeners.forEach((listener) => listener(parsedResponse))
     })
     void WalletPlugin.initialize({
         // storagePath: 'data/data/com.iota.wallet/cache/database',
         actorId: id,
     })
+    // for testing purposes
+    // void WalletPlugin.listen({
+    //     actorId: id,
+    //     id: '',
+    //     event: 'ErrorThrown',
+    // })
     return {
         destroy() {
             void WalletPlugin.destroy({ actorId: id })
         },
         removeEventListeners() {
-            // void walletListener.remove()
+            void walletListener.remove()
         },
     }
 }
@@ -322,91 +329,67 @@ export const api = {
     // Event emitters
     onError: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) =>
-            new Promise<string>((resolve) => {
-                resolve('error')
+            WalletPlugin.listen({
+                actorId: __ids.actorId,
+                id: __ids.messageId,
+                event: 'ErrorThrown',
             })
-        // WalletPlugin.listen({
-        //     actorId: __ids.actorId,
-        //     id: __ids.messageId,
-        //     event: 'ErrorThrown',
-        // })
     },
     onBalanceChange: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) =>
-            new Promise<string>((resolve) => {
-                resolve('error')
+            WalletPlugin.listen({
+                actorId: __ids.actorId,
+                id: __ids.messageId,
+                event: 'BalanceChange',
             })
-        // WalletPlugin.listen({
-        //     actorId: __ids.actorId,
-        //     id: __ids.messageId,
-        //     event: 'BalanceChange',
-        // })
     },
     onNewTransaction: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) =>
-            new Promise<string>((resolve) => {
-                resolve('onNewTransaction')
+            WalletPlugin.listen({
+                actorId: __ids.actorId,
+                id: __ids.messageId,
+                event: 'NewTransaction',
             })
-        // WalletPlugin.listen({
-        //     actorId: __ids.actorId,
-        //     id: __ids.messageId,
-        //     event: 'NewTransaction',
-        // })
     },
     onConfirmationStateChange: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) =>
-            new Promise<string>((resolve) => {
-                resolve('onConfirmationStateChange')
+            WalletPlugin.listen({
+                actorId: __ids.actorId,
+                id: __ids.messageId,
+                event: 'ConfirmationStateChange',
             })
-        // WalletPlugin.listen({
-        //     actorId: __ids.actorId,
-        //     id: __ids.messageId,
-        //     event: 'ConfirmationStateChange',
-        // })
     },
     onReattachment: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) =>
-            new Promise<string>((resolve) => {
-                resolve('onReattachment')
+            WalletPlugin.listen({
+                actorId: __ids.actorId,
+                id: __ids.messageId,
+                event: 'Reattachment',
             })
-        // WalletPlugin.listen({
-        //     actorId: __ids.actorId,
-        //     id: __ids.messageId,
-        //     event: 'Reattachment',
-        // })
     },
     onBroadcast: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) =>
-            new Promise<string>((resolve) => {
-                resolve('onBroadcast')
+            WalletPlugin.listen({
+                actorId: __ids.actorId,
+                id: __ids.messageId,
+                event: 'Broadcast',
             })
-        // WalletPlugin.listen({
-        //     actorId: __ids.actorId,
-        //     id: __ids.messageId,
-        //     event: 'Broadcast',
-        // })
     },
     onStrongholdStatusChange: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) =>
-            new Promise<string>((resolve) => {
-                resolve('onStrongholdStatusChange')
+            WalletPlugin.listen({
+                actorId: __ids.actorId,
+                id: __ids.messageId,
+                event: 'StrongholdStatusChange',
             })
-        // WalletPlugin.listen({
-        //     actorId: __ids.actorId,
-        //     id: __ids.messageId,
-        //     event: 'StrongholdStatusChange',
-        // })
     },
     onTransferProgress: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) =>
-            new Promise<string>((resolve) => {
-                resolve('onTransferProgress')
+            WalletPlugin.listen({
+                actorId: __ids.actorId,
+                id: __ids.messageId,
+                event: 'TransferProgress',
             })
-        // WalletPlugin.listen({
-        //     actorId: __ids.actorId,
-        //     id: __ids.messageId,
-        //     event: 'TransferProgress',
-        // })
     },
     onLedgerAddressGeneration: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) =>
@@ -422,11 +405,15 @@ export const api = {
     getLedgerDeviceStatus: function (isSimulator: boolean): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _getLedgerDeviceStatus(sendMessage, __ids, isSimulator)
     },
-    // onMigrationProgress: function (): (__ids: CommunicationIds) => Promise<string> {
-    //     return (__ids: CommunicationIds) => WalletPlugin.listen({
-    //         actorId: __ids.actorId || 'test',
-    //         id: __ids.messageId,
-    //         event: 'MigrationProgress'
-    //     })
-    // },
+    onMigrationProgress: function (): (__ids: CommunicationIds) => Promise<string> {
+        return (__ids: CommunicationIds) =>
+            new Promise<string>((resolve) => {
+                resolve('onMigrationProgress')
+            })
+        // WalletPlugin.listen({
+        //     actorId: __ids.actorId,
+        //     id: __ids.messageId,
+        //     event: 'MigrationProgress'
+        // })
+    },
 }
