@@ -26,17 +26,6 @@ try {
 
     const Wallet = binding
 
-    // TODO: Make dependent on environment variable
-    Wallet.initLogger({
-        color_enabled: true,
-        outputs: [
-            {
-                name: 'wallet.log',
-                level_filter: 'debug',
-            },
-        ],
-    })
-
     contextBridge.exposeInMainWorld('__WALLET__', Wallet)
 
     contextBridge.exposeInMainWorld('Electron', ElectronApi)
