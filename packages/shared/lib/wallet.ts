@@ -75,11 +75,11 @@ import type {
 } from './typings/wallet'
 
 export enum AccountColors {
-    Default = 'turquoise',
-    Green = 'green',
-    Orange = 'orange',
-    Yellow = 'yellow',
+    Default = 'lightblue',
     Purple = 'purple',
+    Turquoise = 'turquoise',
+    Red = 'red',
+    Green = 'green',
     Pink = 'pink',
 }
 
