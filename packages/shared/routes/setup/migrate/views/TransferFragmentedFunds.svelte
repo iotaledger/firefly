@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Animation, Button, OnboardingLayout, Spinner, Text, TransactionItem } from 'shared/components'
     import { mobile } from 'shared/lib/app'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform'
     import { displayNotificationForLedgerProfile, ledgerDeviceState, promptUserToConnectLedger } from 'shared/lib/ledger'
     import {
         ADDRESS_SECURITY_LEVEL,
@@ -25,7 +25,7 @@
     import { SetupType } from 'shared/lib/typings/routes'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -147,7 +147,7 @@
                     .then((acc) => {
                         if (legacyLedger) {
                             if (transaction.trytes && transaction.trytes.length) {
-                                return Electron.ledger
+                                return Platform.ledger
                                     .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
                                     .then(({ iota, callback }) => {
                                         closeTransport = callback
@@ -167,7 +167,7 @@
                                     })
                             }
 
-                            return Electron.ledger
+                            return Platform.ledger
                                 .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
                                 .then(({ iota, callback }) => {
                                     closeTransport = callback
@@ -281,7 +281,7 @@
                     .then((acc) => {
                         if (legacyLedger) {
                             if (transaction.trytes && transaction.trytes.length) {
-                                return Electron.ledger
+                                return Platform.ledger
                                     .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
                                     .then(({ iota, callback }) => {
                                         closeTransport = callback
@@ -315,7 +315,7 @@
                                     })
                             }
 
-                            return Electron.ledger
+                            return Platform.ledger
                                 .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
                                 .then(({ iota, callback }) => {
                                     closeTransport = callback

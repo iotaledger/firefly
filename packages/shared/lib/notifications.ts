@@ -1,7 +1,7 @@
 import { appSettings } from 'shared/lib/appSettings'
 import { generateRandomId } from 'shared/lib/utils'
 import { get, writable } from 'svelte/store'
-import { Electron } from './electron'
+import { Platform } from './platform'
 import type { NotificationData, NotificationType } from './typings/notification'
 
 const NOTIFICATION_TIMEOUT_DEFAULT = 5000
@@ -30,8 +30,8 @@ export function showNotification(notificationData: NotificationData, showSystemN
         notificationData.progress = Math.min(Math.max(notificationData.progress, 0), 100)
     }
 
-    if (showSystemNotification && get(appSettings).notifications && Electron.NotificationManager) {
-        Electron.NotificationManager.notify(notificationData.message, notificationData.contextData)
+    if (showSystemNotification && get(appSettings).notifications && Platform.NotificationManager) {
+        Platform.NotificationManager.notify(notificationData.message, notificationData.contextData)
     } else {
         for (const action of notificationData.actions) {
             if (!action.callback) {

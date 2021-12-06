@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Link, Text } from 'shared/components'
-    import { openUrl } from 'shared/lib/device'
+    import { Platform } from 'shared/lib/platform'
 </script>
 
 <div class="mb-8">
@@ -98,7 +98,7 @@
     <Text type="h2" classes="mt-8 mb-5">2. Data Protection</Text>
     <Text type="p" secondary classes="mb-4">
         IOTA does not collect any of your personal data through the App. Please refer to the Firefly Privacy Policy (
-        <Link onClick={() => openUrl('https://firefly.iota.org/privacy')}>https://firefly.iota.org/privacy</Link>) for information
+        <Link onClick={() => Platform.openUrl('https://firefly.iota.org/privacy')}>https://firefly.iota.org/privacy</Link>) for information
         on how we and our third-party service providers process data in relation to the App.
     </Text>
 
@@ -375,7 +375,7 @@
         This Privacy Policy is dedicated to the users of the App. If you would like to know more about how the IOTA Foundation
         (hereinafter "IOTA", "we", "us", "our") processes Personal Data collected and processed in connection with other services
         and activities offered by IOTA, please see IOTA's general Privacy Policy available at
-        <Link onClick={() => openUrl('https://www.iota.org/privacy-policy')}>https://www.iota.org/privacy-policy</Link>
+        <Link onClick={() => Platform.openUrl('https://www.iota.org/privacy-policy')}>https://www.iota.org/privacy-policy</Link>
         .
     </Text>
 

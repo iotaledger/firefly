@@ -53,7 +53,7 @@ import { convertToFiat, currencies, exchangeRates, formatCurrency } from './curr
 import { HistoryDataProps, PriceData } from './typings/market'
 import { ProfileType } from './typings/profile'
 import { buildClientOptions } from './network'
-import { Electron } from './electron'
+import { Platform } from './platform'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -390,7 +390,7 @@ export const api: IWalletApi = new Proxy(
                 const title = `Callback Error ${propKey.toString()}`
 
                 console.error(title, err)
-                void Electron.unhandledException(title, { message: err?.message, stack: err?.stack })
+                void Platform.unhandledException(title, { message: err?.message, stack: err?.stack })
             }
 
             /* eslint-disable @typescript-eslint/no-explicit-any */

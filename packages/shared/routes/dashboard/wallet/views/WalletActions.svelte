@@ -8,8 +8,8 @@
     import { getContext } from 'svelte'
     import type { Readable } from 'svelte/store'
     import { Receive, Send } from '.'
-    import { Locale } from 'shared/lib/typings/i18n'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
+    import type { Locale } from 'shared/lib/typings/i18n'
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
 
     export let locale: Locale
 
@@ -21,7 +21,7 @@
 
     let drawer: Drawer
 
-    $: if (($mobile && drawer && $walletRoute === WalletRoutes.Receive) || $walletRoute === WalletRoutes.Send) {
+    $: if (($mobile && drawer && $walletRoute === WalletRoutes.Receive) || drawer && $walletRoute === WalletRoutes.Send) {
         drawer.open()
     }
 

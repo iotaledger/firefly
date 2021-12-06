@@ -2,7 +2,7 @@
     import { Button, Text } from 'shared/components'
     import { appSettings } from 'shared/lib/appSettings'
     import { versionDetails } from 'shared/lib/appUpdater'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform'
     import { activeProfile } from 'shared/lib/profile'
     import { setClipboard } from 'shared/lib/utils'
     import { Locale } from 'shared/lib/typings/i18n'
@@ -40,7 +40,7 @@
 
     contentApp = combineValues(appVars)
 
-    void Electron.getDiagnostics().then((values) => (contentSystem = combineValues(values)))
+    void Platform.getDiagnostics().then((values) => (contentSystem = combineValues(values)))
 
     const handleCopyClick = () => {
         setClipboard(contentApp + '\r\n' + contentSystem)

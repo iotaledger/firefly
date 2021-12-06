@@ -6,7 +6,7 @@
     import { deepLinkRequestActive, parseDeepLink } from 'shared/lib/deepLinking/deepLinking'
     import { DeepLinkingContexts } from 'shared/lib/typings/deepLinking/deepLinking';
     import { WalletOperations } from 'shared/lib/typings/deepLinking/walletContext';
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import {
@@ -86,11 +86,11 @@
             )
         }
 
-        Electron.onEvent('menu-logout', () => {
+        Platform.onEvent('menu-logout', () => {
             void logout()
         })
 
-        Electron.onEvent('notification-activated', (contextData) => {
+        Platform.onEvent('notification-activated', (contextData) => {
             if (contextData) {
                 if (
                     (contextData.type === 'confirmed' ||
@@ -108,13 +108,13 @@
             }
         })
 
-        Electron.onEvent('deep-link-params', (data: string) => handleDeepLinkRequest(data))
+        Platform.onEvent('deep-link-params', (data: string) => handleDeepLinkRequest(data))
     })
 
     onDestroy(() => {
         unsubscribeAccountsLoaded()
-        Electron.DeepLinkManager.clearDeepLinkRequest()
-        Electron.removeListenersForEvent('deep-link-params')
+        Platform.DeepLinkManager.clearDeepLinkRequest()
+        Platform.removeListenersForEvent('deep-link-params')
 
         if (fundsSoonNotificationId) {
             removeDisplayNotification(fundsSoonNotificationId)
@@ -145,7 +145,7 @@
                 if (get(popupState).type === 'busy') {
                     closePopup()
                 }
-                Electron.DeepLinkManager.checkDeepLinkRequestExists()
+                Platform.DeepLinkManager.checkDeepLinkRequestExists()
             }
             if (minTimeElapsed < 0) {
                 cancelBusyState()
@@ -191,7 +191,7 @@
                 } else {
                     showAppNotification({ type: 'error', message: locale('notifications.deepLinkingRequest.invalidFormat') })
                 }
-                Electron.DeepLinkManager.clearDeepLinkRequest()
+                Platform.DeepLinkManager.clearDeepLinkRequest()
             }
         }
     }

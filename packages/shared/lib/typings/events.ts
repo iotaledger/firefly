@@ -1,5 +1,24 @@
+import type { NativeProgress, VersionDetails } from './appUpdater'
 import type { ResponseTypes } from './bridge'
 import type { Message, UTXOEventData } from './message'
+import type { WalletRoutes } from './routes'
+
+export interface EventMap {
+    'menu-logout': void
+    'menu-navigate-wallet': WalletRoutes
+    'menu-navigate-settings': void
+    'menu-check-for-update': void
+    'menu-error-log': void
+    'menu-diagnostics': void
+    'log-error': void
+    'deep-link-request': void
+    'deep-link-params': string
+    'version-details': VersionDetails
+    'version-progress': NativeProgress
+    'version-complete': void
+    'version-error': Error
+    'notification-activated': unknown
+}
 
 // Reference: https://github.com/iotaledger/wallet.rs/blob/develop/src/error.rs
 export enum ErrorType {

@@ -8,12 +8,12 @@
     "license": "Apache-2.0",
     "scripts": {
         "preinstall": "cd ./../shared && yarn && cd ./../mobile",
-        "build": "NODE_ENV=production webpack",
+        "build": "NODE_ENV=production PLATFORM=mobile webpack",
         "ios": "cap copy ios && cap open ios",
         "ios:update": "cap sync ios && cap open ios",
         "android": "cap copy android && cap open android",
         "android:update": "cap sync android && cap open android",
-        "dev": "NODE_ENV=development webpack serve --content-base public --host 0.0.0.0 --client-log-level none"
+        "dev": "NODE_ENV=development PLATFORM=mobile webpack serve --content-base public --host 0.0.0.0 --client-log-level none"
     },
     "devDependencies": {
         "@capacitor/android": "3.2.0",

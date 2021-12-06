@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Animation, Button, ButtonCheckbox, Input, OnboardingLayout, Text } from 'shared/components'
     import { cleanupSignup, mobile } from 'shared/lib/app'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform'
     import { getTrimmedLength, validateFilenameChars } from 'shared/lib/helpers'
     import { initialiseMigrationListeners } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -14,7 +14,7 @@
         profileInProgress,
         profiles,
     } from 'shared/lib/profile'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
     import { destroyActor, getStoragePath, initialise, MAX_PROFILE_NAME_LENGTH } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
@@ -75,7 +75,7 @@
                     profile = createProfile(trimmedProfileName, isDeveloperProfile)
                     profileInProgress.set(trimmedProfileName)
 
-                    const userDataPath = await Electron.getUserDataPath()
+                    const userDataPath = await Platform.getUserDataPath()
                     initialise($newProfile.id, getStoragePath(userDataPath, $newProfile.name))
 
                     initialiseMigrationListeners()

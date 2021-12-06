@@ -1,12 +1,12 @@
 <script lang="typescript">
     import { Animation, Button, Number, OnboardingLayout, Spinner, Text, Toggle, Icon } from 'shared/components'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { ADDRESS_SECURITY_LEVEL, getLedgerMigrationData, hardwareIndexes } from 'shared/lib/migration'
     import { popupState } from 'shared/lib/popup'
     import { onDestroy, createEventDispatcher } from 'svelte'
     import { LedgerAppName } from 'shared/lib/typings/ledger'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -59,7 +59,7 @@
         busy = true
         const _onConnected = () => {
             infoTimeout = setTimeout(() => (showInfo = true), 180000)
-            Electron.ledger
+            Platform.ledger
                 .selectSeed(index, page, ADDRESS_SECURITY_LEVEL)
                 .then(({ iota, callback }) => getLedgerMigrationData(iota.getAddress, callback))
                 .then((data) => {

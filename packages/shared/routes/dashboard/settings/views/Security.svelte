@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Checkbox, Dropdown, HR, Password, Pin, Spinner, Text } from 'shared/components'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform'
     import { showAppNotification } from 'shared/lib/notifications'
     import passwordInfo from 'shared/lib/password'
     import { openPopup } from 'shared/lib/popup'
@@ -9,7 +9,7 @@
     import { api, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
     import zxcvbn from 'zxcvbn'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -85,7 +85,7 @@
     }
 
     function exportStronghold(password: string, callback?: (cancelled: boolean, err?: string) => void) {
-        Electron.getStrongholdBackupDestination(getDefaultStrongholdName())
+        Platform.getStrongholdBackupDestination(getDefaultStrongholdName())
             .then((result) => {
                 if (result) {
                     api.backup(result, password, {
@@ -213,13 +213,13 @@
                     }
                 }
 
-                Electron.PincodeManager.verify(get(activeProfile)?.id, currentPincode)
+                Platform.PincodeManager.verify(get(activeProfile)?.id, currentPincode)
                     .then((valid) => {
                         if (valid) {
                             return new Promise<void>((resolve, reject) => {
                                 api.setStoragePassword(newPincode, {
                                     onSuccess() {
-                                        Electron.PincodeManager.set(get(activeProfile)?.id, newPincode)
+                                        Platform.PincodeManager.set(get(activeProfile)?.id, newPincode)
                                             .then(() => {
                                                 currentPincode = ''
                                                 newPincode = ''
