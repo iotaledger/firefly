@@ -14,7 +14,7 @@ export const PincodeManager: IPincodeManager = {
      * @returns {Promise}
      */
     set(key, pincode) {
-        return new Promise<void>(() => {})
+        return new Promise<void>((resolve) => resolve())
     },
     /**
      * Verifies user entered pincode against the one stored in keychain
