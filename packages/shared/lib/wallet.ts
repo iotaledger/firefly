@@ -1,60 +1,37 @@
-import { mnemonic } from './app'
-import { localize } from './i18n'
-import { showAppNotification, showSystemNotification } from './notifications'
-import { activeProfile, isLedgerProfile, isStrongholdLocked, updateProfile } from './profile'
-import type {
-    Account,
-    Account as BaseAccount,
-    AccountToCreate,
-    Balance,
-    SignerType,
-    SyncAccountOptions,
-    SyncedAccount,
-} from './typings/account'
-import type { Address } from './typings/address'
-import type { Actor, GetMigrationAddressResponse } from './typings/bridge'
-import type {
-    BalanceChangeEventPayload,
-    ConfirmationStateChangeEventPayload,
-    ErrorEventPayload,
-    Event,
-    LedgerAddressGenerationEventPayload,
-    MigrationProgressEventPayload,
-    ReattachmentEventPayload,
-    TransactionEventPayload,
-    TransferProgressEventPayload,
-    TransferState,
-} from './typings/events'
-import type { Message, Payload, Transaction } from './typings/message'
-import type { AddressInput, MigrationBundle, MigrationData, SendMigrationBundleResponse } from './typings/migration'
-import { formatUnitBestMatch } from './units'
 import { get, writable } from 'svelte/store'
+import { mnemonic } from './app'
+import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
+import { localize } from './i18n'
+import { displayNotificationForLedgerProfile } from './ledger'
+import { didInitialiseMigrationListeners } from './migration'
+import { buildClientOptions } from './network'
+import { showAppNotification, showSystemNotification } from './notifications'
+import { Platform } from './platform'
 import { openPopup } from './popup'
-import type { ClientOptions } from './typings/client'
-import type { LedgerStatus } from './typings/ledger'
+import { activeProfile, isLedgerProfile, isStrongholdLocked, updateProfile } from './profile'
+import { walletSetupType } from './router'
+import { WALLET, WalletApi } from './shell/walletApi'
+import type { Account, Account as BaseAccount, SignerType, SyncAccountOptions, SyncedAccount } from './typings/account'
+import type { Address } from './typings/address'
+import type { Actor } from './typings/bridge'
+import { CurrencyTypes } from './typings/currency'
+import type { ErrorEventPayload, Event, TransferState } from './typings/events'
+import { HistoryDataProps, PriceData } from './typings/market'
+import type { Message, Payload } from './typings/message'
+import type { RecoveryPhrase } from './typings/mnemonic'
 import type { NodeAuth, NodeInfo } from './typings/node'
+import { ProfileType } from './typings/profile'
 import { SetupType } from './typings/routes'
 import type {
     AccountMessage,
     AccountsBalanceHistory,
     BalanceHistory,
     BalanceOverview,
-    Duration,
-    StrongholdStatus,
     WalletAccount,
     WalletState,
 } from './typings/wallet'
-import { displayNotificationForLedgerProfile } from './ledger'
-import { walletSetupType } from './router'
-import { didInitialiseMigrationListeners } from './migration'
-import type { RecoveryPhrase } from './typings/mnemonic'
-import { CurrencyTypes } from './typings/currency'
-import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
-import { HistoryDataProps, PriceData } from './typings/market'
-import { ProfileType } from './typings/profile'
-import { buildClientOptions } from './network'
-import { Platform } from './platform'
-import { WALLET, WalletApi } from './shell/walletApi'
+import type { IWalletApi } from './typings/walletApi'
+import { formatUnitBestMatch } from './units'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -143,244 +120,6 @@ export const isSyncing = writable<boolean>(false)
 export const isFirstSessionSync = writable<boolean>(true)
 export const isFirstManualSync = writable<boolean>(true)
 export const isBackgroundSyncing = writable<boolean>(false)
-
-export interface IWalletApi {
-    generateMnemonic(callbacks: {
-        onSuccess: (response: Event<string>) => void
-        onError: (err: ErrorEventPayload) => void
-    })
-    storeMnemonic(
-        mnemonic: string,
-        callbacks: { onSuccess: (response: Event<string>) => void; onError: (err: ErrorEventPayload) => void }
-    )
-    verifyMnemonic(
-        mnemonic: string,
-        callbacks: { onSuccess: (response: Event<string>) => void; onError: (err: ErrorEventPayload) => void }
-    )
-    getAccounts(callbacks: {
-        onSuccess: (response: Event<Account[]>) => void
-        onError: (err: ErrorEventPayload) => void
-    })
-    getBalance(
-        accountId: string,
-        callbacks: { onSuccess: (response: Event<Balance>) => void; onError: (err: ErrorEventPayload) => void }
-    )
-    latestAddress(
-        accountId: string,
-        callbacks: { onSuccess: (response: Event<Address>) => void; onError: (err: ErrorEventPayload) => void }
-    )
-    areLatestAddressesUnused(callbacks: {
-        onSuccess: (response: Event<boolean>) => void
-        onError: (err: ErrorEventPayload) => void
-    })
-    getUnusedAddress(
-        accountId: string,
-        callbacks: { onSuccess: (response: Event<Address>) => void; onError: (err: ErrorEventPayload) => void }
-    )
-    getStrongholdStatus(callbacks: {
-        onSuccess: (response: Event<StrongholdStatus>) => void
-        onError: (err: ErrorEventPayload) => void
-    })
-    syncAccounts(
-        addressIndex: number,
-        gapLimit: number,
-        accountDiscoveryThreshold: number,
-        callbacks: { onSuccess: (response: Event<SyncedAccount[]>) => void; onError: (err: ErrorEventPayload) => void }
-    )
-    syncAccount(
-        accountId: string,
-        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
-    )
-    startBackgroundSync(
-        pollingInterval: Duration,
-        automaticOutputConsolidation: boolean,
-        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
-    )
-    stopBackgroundSync(callbacks: {
-        onSuccess: (response: Event<void>) => void
-        onError: (err: ErrorEventPayload) => void
-    })
-    createAccount(
-        account: AccountToCreate,
-        callbacks: { onSuccess: (response: Event<Account>) => void; onError: (err: ErrorEventPayload) => void }
-    )
-    send(
-        accountId: string,
-        transfer: {
-            amount: number
-            address: string
-            remainder_value_strategy: {
-                strategy: string
-            }
-            indexation: { index: string; data: number[] }
-        },
-        callbacks: { onSuccess: (response: Event<Message>) => void; onError: (err: ErrorEventPayload) => void }
-    )
-    internalTransfer(
-        fromId: string,
-        toId: string,
-        amount: number,
-        callbacks: { onSuccess: (response: Event<Message>) => void; onError: (err: ErrorEventPayload) => void }
-    )
-    setAlias(
-        accountId: string,
-        alias: string,
-        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
-    )
-    lockStronghold(callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void })
-    setStrongholdPassword(
-        password: string,
-        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
-    )
-    changeStrongholdPassword(
-        currentPassword: string,
-        newPassword: string,
-        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
-    )
-    backup(
-        strongholdPath: string,
-        password: string,
-        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
-    )
-    restoreBackup(
-        strongholdPath: string,
-        password: string,
-        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
-    )
-    removeAccount(
-        accountId: string,
-        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
-    )
-    setStoragePassword(
-        newPinCode: string,
-        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
-    )
-    removeStorage(callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void })
-    setClientOptions(
-        clientOptions: ClientOptions,
-        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
-    )
-    setStrongholdPasswordClearInterval(
-        interval: Duration,
-        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
-    )
-    getNodeInfo(
-        accountId: string,
-        url: string,
-        auth: NodeAuth,
-        callbacks: { onSuccess: (response: Event<NodeInfo>) => void; onError: (err: ErrorEventPayload) => void }
-    )
-
-    // Legacy seed APIs
-    getLegacySeedChecksum(
-        seed: string,
-        callbacks: { onSuccess: (response: Event<string>) => void; onError: (err: ErrorEventPayload) => void }
-    )
-
-    onStrongholdStatusChange(callbacks: {
-        onSuccess: (response: Event<StrongholdStatus>) => void
-        onError: (err: ErrorEventPayload) => void
-    })
-    onNewTransaction(callbacks: {
-        onSuccess: (response: Event<TransactionEventPayload>) => void
-        onError: (err: ErrorEventPayload) => void
-    })
-    onReattachment(callbacks: {
-        onSuccess: (response: Event<ReattachmentEventPayload>) => void
-        onError: (err: ErrorEventPayload) => void
-    })
-    onConfirmationStateChange(callbacks: {
-        onSuccess: (response: Event<ConfirmationStateChangeEventPayload>) => void
-        onError: (err: ErrorEventPayload) => void
-    })
-    onBalanceChange(callbacks: {
-        onSuccess: (response: Event<BalanceChangeEventPayload>) => void
-        onError: (err: ErrorEventPayload) => void
-    })
-    onTransferProgress(callbacks: {
-        onSuccess: (response: Event<TransferProgressEventPayload>) => void
-        onError: (err: ErrorEventPayload) => void
-    })
-    onLedgerAddressGeneration(callbacks: {
-        onSuccess: (response: Event<LedgerAddressGenerationEventPayload>) => void
-        onError: (err: ErrorEventPayload) => void
-    })
-    onMigrationProgress(callbacks: {
-        onSuccess: (response: Event<MigrationProgressEventPayload>) => void
-        onError: (err: ErrorEventPayload) => void
-    })
-
-    // Migration
-    getMigrationData(
-        seed: string,
-        nodes: string[],
-        securityLevel: number,
-        initialAddressIndex: number,
-        permanode: string | undefined,
-        callbacks: { onSuccess: (response: Event<MigrationData>) => void; onError: (err: ErrorEventPayload) => void }
-    )
-    createMigrationBundle(
-        seed: string,
-        inputAddressIndexes: number[],
-        mine: boolean,
-        timeoutSeconds: number,
-        offset: number,
-        logFilePath: string,
-        callbacks: { onSuccess: (response: Event<MigrationBundle>) => void; onError: (err: ErrorEventPayload) => void }
-    )
-    sendMigrationBundle(
-        node: string[],
-        bundleHash: string,
-        mwm: number,
-        callbacks: {
-            onSuccess: (response: Event<SendMigrationBundleResponse>) => void
-            onError: (err: ErrorEventPayload) => void
-        }
-    )
-    getMigrationAddress(
-        prompt: boolean,
-        accountIndex: number,
-        callbacks: {
-            onSuccess: (response: Event<GetMigrationAddressResponse>) => void
-            onError: (err: ErrorEventPayload) => void
-        }
-    )
-    mineBundle(
-        bundle: string[],
-        spentBundleHashes: string[],
-        securityLevel: number,
-        timeout: number,
-        offset: number,
-        callbacks: {
-            onSuccess: (response: Event<{ bundle: string[]; crackability: number }>) => void
-            onError: (err: ErrorEventPayload) => void
-        }
-    )
-    getLedgerMigrationData(
-        addresses: AddressInput[],
-        nodes: string[],
-        permanode: string,
-        securityLevel: number,
-        callbacks: { onSuccess: (response: Event<MigrationData>) => void; onError: (err: ErrorEventPayload) => void }
-    )
-    sendLedgerMigrationBundle(
-        node: string[],
-        bundle: string[],
-        mwm: number,
-        callbacks: {
-            onSuccess: (response: Event<SendMigrationBundleResponse>) => void
-            onError: (err: ErrorEventPayload) => void
-        }
-    )
-    getLedgerDeviceStatus(
-        ledgerSimulator: boolean,
-        callbacks: { onSuccess: (response: Event<LedgerStatus>) => void; onError: (err: ErrorEventPayload) => void }
-    )
-    getLegacyAddressChecksum(
-        address: string,
-        callbacks: { onSuccess: (response: Event<string>) => void; onError: (err: ErrorEventPayload) => void }
-    )
-}
 
 export const api: IWalletApi = new Proxy(
     { ...WalletApi },

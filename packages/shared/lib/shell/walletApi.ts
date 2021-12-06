@@ -14,7 +14,7 @@ import { logError } from './errorLogger'
 import { getErrorMessage } from './walletErrors'
 import { ErrorTypes as ValidatorErrorTypes } from '../typings/validator'
 import { Platform } from 'shared/lib/platform'
-import type { IWalletApi } from 'lib/wallet'
+import type { IWalletApi } from 'shared/lib/typings/walletApi'
 
 export let WALLET = window['__WALLET__']
 

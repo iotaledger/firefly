@@ -1,4 +1,4 @@
-import { Capacitor } from "@capacitor/core";
+import { Capacitor } from '@capacitor/core'
 import { DeepLinkManager } from '../../mobile/capacitor/lib/deepLinkManager'
 import { NotificationManager } from '../../mobile/capacitor/lib/notificationManager'
 import { PincodeManager } from '../../mobile/capacitor/lib/pincodeManager'
@@ -122,7 +122,7 @@ export const CapacitorApi: IPlatform = {
      * @returns {Promise}
      */
     getOS: () => {
-        return new Promise<string>(resolve => resolve(Capacitor.getPlatform()))
+        return new Promise<string>((resolve) => resolve(Capacitor.getPlatform()))
     },
 
     /**
