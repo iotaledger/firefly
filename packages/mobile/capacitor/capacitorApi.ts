@@ -1,12 +1,20 @@
+import { Capacitor } from '@capacitor/core'
 import { DeepLinkManager } from '../../mobile/capacitor/lib/deepLinkManager'
 import { NotificationManager } from '../../mobile/capacitor/lib/notificationManager'
 import { PincodeManager } from '../../mobile/capacitor/lib/pincodeManager'
 import type { IPlatform } from 'shared/lib/typings/platform'
 import type { VersionDetails } from 'shared/lib/typings/appUpdater'
+import { hookErrorLogger } from '../../shared/lib/shell/errorLogger'
+
+let activeProfileId = null
 
 export const CapacitorApi: IPlatform = {
+    getActiveProfile() {
+        return activeProfileId
+    },
+
     updateActiveProfile(id) {
-        return
+        activeProfileId = id
     },
 
     removeProfileFolder(profilePath) {
@@ -90,7 +98,9 @@ export const CapacitorApi: IPlatform = {
      * @returns {Promise}
      */
     getUserDataPath: () => {
-        return new Promise<string>((resolve, reject) => {})
+        return new Promise<string>((resolve, reject) => {
+            resolve('DATA')
+        })
     },
 
     /**
@@ -112,7 +122,7 @@ export const CapacitorApi: IPlatform = {
      * @returns {Promise}
      */
     getOS: () => {
-        return new Promise<string>((resolve, reject) => {})
+        return new Promise<string>((resolve) => resolve(Capacitor.getPlatform()))
     },
 
     /**
@@ -270,8 +280,6 @@ export const CapacitorApi: IPlatform = {
      * Hook the logger
      * @returns
      */
-    hookErrorLogger: (logger) => {
-        return new Promise<void>((resolve, reject) => {})
-    },
+    hookErrorLogger,
     ledger: undefined,
 }

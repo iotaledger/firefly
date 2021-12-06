@@ -23,27 +23,10 @@ window.addEventListener('unhandledrejection', (event) => {
 
 try {
     const binding = require('wallet-nodejs-binding')
-    const { proxyApi } = require('shared/lib/shell/walletApi')
 
     const Wallet = binding
 
-    Wallet.initLogger({
-        color_enabled: true,
-        outputs: [
-            {
-                name: 'wallet.log',
-                level_filter: 'debug',
-            },
-        ],
-    })
-
-    Wallet.api = proxyApi(ElectronApi.getActiveProfile)
-
-    contextBridge.exposeInMainWorld('__WALLET_INIT__', {
-        run: Wallet.init,
-    })
-
-    contextBridge.exposeInMainWorld('__WALLET_API__', Wallet.api)
+    contextBridge.exposeInMainWorld('__WALLET__', Wallet)
 
     contextBridge.exposeInMainWorld('Electron', ElectronApi)
 } catch (error) {

@@ -1,10 +1,27 @@
 import { Electron } from 'shared/lib/electron'
 import { CapacitorApi } from '../../mobile/capacitor/capacitorApi'
 import { IPlatform, Platforms } from './typings/platform'
+import * as binding from '../../mobile/capacitor/walletPluginApi'
 
 const PLATFORM = process.env.PLATFORM
 
+if (PLATFORM == Platforms.MOBILE) {
+    const Wallet = binding
+    window['__WALLET__'] = Wallet
+}
+
 export const Platform: IPlatform = {
+    getActiveProfile() {
+        switch (PLATFORM) {
+            case Platforms.DESKTOP:
+                return Electron.getActiveProfile()
+            case Platforms.MOBILE:
+                return CapacitorApi.getActiveProfile()
+            default:
+                return
+        }
+    },
+
     updateActiveProfile(id) {
         switch (PLATFORM) {
             case Platforms.DESKTOP:

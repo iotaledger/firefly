@@ -6,7 +6,7 @@
     import { asyncChangeStrongholdPassword, asyncSetStrongholdPassword, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import zxcvbn from 'zxcvbn'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -70,7 +70,7 @@
         <Text type="h2">{locale('views.password.title')}</Text>
     </div>
     <div slot="leftpane__content">
-        <form on:submit={handleContinueClick} id="password-form">
+        <form on:submit|preventDefault={handleContinueClick} id="password-form">
             <Text type="p" classes="mb-4" secondary>{locale('views.password.body1')}</Text>
             <Text type="p" classes="mb-10" secondary>{locale('views.password.body2')}</Text>
             <Password
