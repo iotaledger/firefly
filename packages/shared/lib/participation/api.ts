@@ -3,9 +3,9 @@ import { get } from 'svelte/store'
 import { localize } from '../i18n'
 import type { Event } from '../typings/events'
 import { showAppNotification } from '../notifications'
-import { api } from '../wallet'
+import { api, saveNewMessage } from '../wallet'
 
-import { participationEvents, participationOverview } from './stores'
+import { participationEvents, participationOverview, addNewPendingParticipationTransactionIds } from './stores'
 import type {
     ParticipateResponsePayload,
     Participation,
@@ -90,6 +90,9 @@ export function participate(accountId: string, participations: Participation[]):
             participations,
             {
                 onSuccess(response: Event<ParticipateResponsePayload>) {
+                    response.payload.forEach((message) => saveNewMessage(accountId, message));
+
+                    addNewPendingParticipationTransactionIds(response.payload);
                     resolve()
                 },
                 onError(error) {
@@ -127,8 +130,9 @@ export function stopParticipating(accountId: string, eventIds: string[]): Promis
             eventIds,
             {
                 onSuccess(response: Event<ParticipateResponsePayload>) {
-                    response?.payload.forEach((msg) => {
-                    })
+                    response.payload.forEach((message) => saveNewMessage(accountId, message));
+                    addNewPendingParticipationTransactionIds(response.payload);
+
                     resolve()
                 },
                 onError(error) {

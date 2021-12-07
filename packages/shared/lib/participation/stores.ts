@@ -11,8 +11,14 @@ import {
     ParticipationAction,
     ParticipationEvent,
     ParticipationEventState,
-    ParticipationOverview
+    ParticipationOverview,
+    ParticipateResponsePayload
 } from './types'
+
+/**
+ * The store for keeping track of transaction ids generated as part of participation events.
+ */
+ export const pendingParticipationTransactionIds = writable<string[]>([])
 
 /**
  * The persisted store variable for if the staking feature is new for a Firefly installation.
@@ -218,3 +224,29 @@ export const shimmerStakingRemainingTime: Readable<number> = derived(
             $participationEvents.find((pe) => pe.eventId === SHIMMER_EVENT_ID)
         )
 )
+
+/**
+ * Adds newly broadcasted (yet unconfirmed) message ids that were generated as part of participation event.
+ *
+ * @method addNewPendingParticipationTransactionIds
+ *
+ * @param {ParticipateResponsePayload} payload
+ *
+ * @returns {void}
+ */
+export const addNewPendingParticipationTransactionIds = (payload: ParticipateResponsePayload): void => {
+    pendingParticipationTransactionIds.update((txs) => [...txs, ...payload.map((tx) => tx.id)]);
+};
+
+/**
+ * Removes pending participation transaction id (after it has confirmed)
+ *
+ * @method removePendingParticipationTransactionIds
+ *
+ * @param {ParticipateResponsePayload} payload
+ *
+ * @returns {void}
+ */
+ export const removePendingParticipationTransactionIds = (ids: string[]): void => {
+    pendingParticipationTransactionIds.update((txs) => txs.filter((id) => !ids.includes(id)));
+};

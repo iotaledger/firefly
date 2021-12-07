@@ -62,7 +62,7 @@
         }
     }
 
-    const getTransactions = (): AccountMessage[] => {
+    const getTransactions = (): AccountMessage[] => {        
         return transactions
     }
 </script>
