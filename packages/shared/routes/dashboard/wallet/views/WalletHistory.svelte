@@ -13,7 +13,7 @@
         isSyncing,
         selectedAccountId,
         selectedMessage,
-        isFirstManualSync
+        isFirstManualSync,
     } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable, Writable } from 'svelte/store'
@@ -39,12 +39,12 @@
     }
 
     function handleSyncAccountOptions() {
-        if(get(isFirstManualSync)) {
+        if (get(isFirstManualSync)) {
             isFirstManualSync.set(true)
 
             return {
                 gapLimit: $isSoftwareProfile ? 10 : 1,
-                accountDiscoveryThreshold: 1
+                accountDiscoveryThreshold: 1,
             }
         } else {
             return getSyncAccountOptions(true)
@@ -60,7 +60,9 @@
                     if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
                         openPopup({
                             type: 'password',
-                            props: { onSuccess: async () => asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false) }
+                            props: {
+                                onSuccess: async () => asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false),
+                            },
                         })
                     } else {
                         void asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
@@ -88,10 +90,9 @@
          *      3. The wallet setup type cannot be new (if it's new then there's no tx history to sync)
          *      4. Account must have no transactions (the length of $transactions must be zero)
          */
-        return $isFirstSessionSync &&
-            $walletSetupType &&
-            $walletSetupType !== SetupType.New &&
-            $transactions.length === 0
+        return (
+            $isFirstSessionSync && $walletSetupType && $walletSetupType !== SetupType.New && $transactions.length === 0
+        )
     }
 </script>
 

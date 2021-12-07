@@ -1,10 +1,11 @@
 <script lang="typescript">
     import { ActivityDetail, ActivityRow, Icon, Text } from 'shared/components'
-    import { showAppNotification } from 'shared/lib/notifications'
-    import { api, isSyncing, selectedAccountId, selectedMessage } from 'shared/lib/wallet'
-    import { isLedgerProfile } from 'shared/lib/profile'
     import { displayNotificationForLedgerProfile } from 'shared/lib/ledger'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { showAppNotification } from 'shared/lib/notifications'
+    import { openPopup } from 'shared/lib/popup'
+    import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
+    import type { Locale } from 'shared/lib/typings/i18n'
+    import { api, isSyncing, selectedAccountId, selectedMessage } from 'shared/lib/wallet'
 
     export let locale: Locale
 
@@ -21,29 +22,53 @@
 
     const handleSyncAccountClick = () => {
         if (!$isSyncing) {
-            $isSyncing = true
+            const _syncAccount = () => {
+                $isSyncing = true
+                api.syncAccount($selectedAccountId, {
+                    onSuccess() {
+                        $isSyncing = false
+                    },
+                    onError(err) {
+                        $isSyncing = false
 
-            api.syncAccount($selectedAccountId, {
-                onSuccess() {
-                    $isSyncing = false
-                },
-                onError(err) {
-                    $isSyncing = false
-
-                    const shouldHideErrorNotification =
-                        err && err.type === 'ClientError' && err.error === 'error.node.chrysalisNodeInactive'
-                    if (!shouldHideErrorNotification) {
-                        if ($isLedgerProfile) {
-                            displayNotificationForLedgerProfile('error', true, true, false, false, err)
-                        } else {
-                            showAppNotification({
-                                type: 'error',
-                                message: locale(err.error),
-                            })
+                        const shouldHideErrorNotification =
+                            err && err.type === 'ClientError' && err.error === 'error.node.chrysalisNodeInactive'
+                        if (!shouldHideErrorNotification) {
+                            if ($isLedgerProfile) {
+                                displayNotificationForLedgerProfile('error', true, true, false, false, err)
+                            } else {
+                                showAppNotification({
+                                    type: 'error',
+                                    message: locale(err.error),
+                                })
+                            }
                         }
-                    }
-                }
-            })
+                    },
+                })
+            }
+
+            if ($isSoftwareProfile) {
+                api.getStrongholdStatus({
+                    onSuccess(strongholdStatusResponse) {
+                        if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
+                            openPopup({
+                                type: 'password',
+                                props: { onSuccess: () => _syncAccount() },
+                            })
+                        } else {
+                            void _syncAccount()
+                        }
+                    },
+                    onError(err) {
+                        showAppNotification({
+                            type: 'error',
+                            message: locale(err.error),
+                        })
+                    },
+                })
+            } else {
+                void _syncAccount()
+            }
         }
     }
 </script>
@@ -60,7 +85,9 @@
                 <Text type="h5">{locale('general.transactions')}</Text>
                 {#if !$selectedMessage}
                     <button on:click={handleSyncAccountClick} class:pointer-events-none={$isSyncing}>
-                        <Icon icon="refresh" classes="{$isSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white" />
+                        <Icon
+                            icon="refresh"
+                            classes="{$isSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white" />
                     </button>
                 {/if}
             </div>
@@ -72,7 +99,11 @@
         <div class="overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2 scroll-secondary">
             {#if transactions.length}
                 {#each transactions as transaction}
-                    <ActivityRow onClick={() => handleTransactionClick(transaction)} {...transaction} {color} {locale} />
+                    <ActivityRow
+                        onClick={() => handleTransactionClick(transaction)}
+                        {...transaction}
+                        {color}
+                        {locale} />
                 {/each}
             {:else}
                 <div class="h-full flex flex-col items-center justify-center text-center">
