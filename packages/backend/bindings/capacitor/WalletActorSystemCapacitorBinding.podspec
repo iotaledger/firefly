@@ -5,7 +5,7 @@
     s.summary = 'Capacitor binding to the Wallet\'s actor system'
     s.license = { :type => 'MIT' }
     s.homepage = 'https://github.com/iotaledger/firefly'
-    s.author = 'Pasquale Ambrosini <pasquale.ambrosini@gmail.com, Lucas Nogueira <lucas.nogueira@iota.org>'
+    s.author = 'IOTA Stiftung'
     s.source = { :git => 'https://github.com/iotaledger/firefly', :tag => s.version.to_s }
     s.source_files = 'ios/Plugin/**/*.{swift,h,m,c,cc,mm,cpp}'
     s.ios.deployment_target  = '12.0'

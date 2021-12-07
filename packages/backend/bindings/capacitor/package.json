@@ -24,13 +24,17 @@
     "preinstall": "npm run clean && npm run build"
   },
   "private": true,
-  "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/iotaledger/firefly.git"
   },
   "bugs": {
     "url": "https://github.com/iotaledger/firefly/issues"
+  },
+  "author": "IOTA Stiftung",
+  "license": "MIT",
+  "dependencies": {
+    "@capacitor/core": "latest"
   },
   "devDependencies": {
     "@capacitor/android": "^3.0.0",

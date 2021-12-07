@@ -1,3 +1,6 @@
+import type { ErrorEventPayload, TransferState } from 'shared/lib/typings/events'
+import type { Payload } from 'shared/lib/typings/message'
+import { formatUnitBestMatch } from 'shared/lib/units'
 import { get, writable } from 'svelte/store'
 import { mnemonic } from './app'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
@@ -15,9 +18,8 @@ import type { Account, Account as BaseAccount, SignerType, SyncAccountOptions, S
 import type { Address } from './typings/address'
 import type { Actor } from './typings/bridge'
 import { CurrencyTypes } from './typings/currency'
-import type { ErrorEventPayload, Event, TransferState } from './typings/events'
 import { HistoryDataProps, PriceData } from './typings/market'
-import type { Message, Payload } from './typings/message'
+import type { Message } from './typings/message'
 import type { RecoveryPhrase } from './typings/mnemonic'
 import type { NodeAuth, NodeInfo } from './typings/node'
 import { ProfileType } from './typings/profile'
@@ -31,7 +33,6 @@ import type {
     WalletState,
 } from './typings/wallet'
 import type { IWalletApi } from './typings/walletApi'
-import { formatUnitBestMatch } from './units'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
