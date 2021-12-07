@@ -8,7 +8,11 @@ function handleKeychain(): IPincodeManager {
     async function set(key: string, pin: string): Promise<void> {
         try {
             const { value } = await SecureStoragePlugin.set({ key, value: pin })
-            if (value) return
+            if (value) {
+                return
+            } else {
+                throw new Error('pincode can not be stored')
+            }
         } catch (error) {
             console.error(error)
         }
