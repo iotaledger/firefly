@@ -21,10 +21,10 @@
     import {
         canAccountParticipate,
         canParticipate,
-        getStakedFunds,
+        getStakedFunds, getStakingEventFromAirdrop,
         getUnstakedFunds,
         isAccountPartiallyStaked,
-        isAccountStaked
+        isAccountStaked,
     } from 'shared/lib/participation'
     import {
         accountToParticipate,
@@ -35,12 +35,14 @@
         stakedAmount,
         stakingEventState
     } from 'shared/lib/participation/stores'
-    import { ParticipationAction } from 'shared/lib/participation/types'
+    import { Participation, ParticipationAction, StakingAirdrop } from 'shared/lib/participation/types'
 
     export let locale: Locale
 
     export let isPerformingAction = false
     export let shouldParticipateOnMount = false
+    export let airdropSelections: StakingAirdrop[] = []
+    console.log('SELECTIONS: ', airdropSelections)
 
     let canStake
     $: canStake = canParticipate($stakingEventState)
@@ -122,16 +124,27 @@
         }
 
         switch ($participationAction) {
-            case ParticipationAction.Stake:
-                await participate($accountToParticipate?.id, STAKING_PARTICIPATIONS)
+            case ParticipationAction.Stake: {
+                const participations: Participation[] = airdropSelections.map((as) => (<Participation>{
+                    eventId: getStakingEventFromAirdrop(<StakingAirdrop>as.toLowerCase()).eventId,
+                    answers: [],
+                }))
+                console.log('PARTS: ', participations)
+                await participate($accountToParticipate?.id, participations)
                     .then(() => _sync())
                     .catch((err) => {
                         console.error(err)
                         resetView()
                     })
                 break
+            }
             case ParticipationAction.Unstake:
-                await stopParticipating($accountToParticipate?.id, STAKING_EVENT_IDS)
+                await stopParticipating($accountToParticipate?.id, STAKING_EVENT_IDS.concat(
+                    "e5501ea9c8d950bceffc635275e7ce179a2334c42e9cc4e31c0f3c2c74db3d6a",
+                    "11bf14a0b4c4e60554c73a261b878e09d67e4772b876808d2b3c42570eaeb614",
+                    "415267d375c85531aec13e6471c04a01622dfcc9b285a009629dd2c9231da517",
+                    "c4f23236b3ce22f9fe22583176813618b304bbfcfd24da68cbddf66196b0d8fd"
+                ))
                     .then(() => _sync())
                     .catch((err) => {
                         console.error(err)
@@ -161,7 +174,7 @@
                 openPopup({
                     type: 'stakingManager',
                     props: {
-                        shouldParticipateOnMount: true
+                        shouldParticipateOnMount: true,
                     },
                 })
             } else {

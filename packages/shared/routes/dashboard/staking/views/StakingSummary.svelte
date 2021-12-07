@@ -41,6 +41,11 @@
     $: isPartiallyStaked = $partiallyStakedAccounts.length > 0
 
     let showTooltip = false
+    $: {
+        if (!isPartiallyStaked && !isStakeConfirming)
+            showTooltip = false
+    }
+
     let iconBox
     let parentWidth = 0
     let parentLeft = 0

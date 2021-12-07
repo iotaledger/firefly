@@ -50,7 +50,7 @@
         <div
             class="pl-10 pr-5 py-2 rounded-2xl bg-opacity-20 bg-white dark:bg-white"
         >
-            <Text type="p" classes="text-white dark:text-white">{localize(`general.${isStaked ? 'staking' : 'notStaking'}`)}</Text>
+            <Text type="p" classes="text-white dark:text-white">{localize(`general.${isStaked ? 'staking' : 'notStaked'}`)}</Text>
         </div>
     </div>
 {/if}

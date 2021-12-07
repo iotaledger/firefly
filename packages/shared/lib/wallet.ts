@@ -1711,8 +1711,10 @@ export const processMigratedTransactions = (accountId: string, messages: Message
  */
 export const getIndexationString = (payload: Payload): string | undefined => {
     if (payload && payload.type === 'Transaction') {
-        const indexationBytes = payload.data.essence.data.payload.data.index;
-        return String.fromCharCode(...indexationBytes);
+        const indexationPayload = payload.data.essence.data.payload?.data
+        if (!indexationPayload) return undefined
+
+        return String.fromCharCode(...indexationPayload?.index);
     }
 };
 

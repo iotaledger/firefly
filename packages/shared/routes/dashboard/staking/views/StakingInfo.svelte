@@ -20,12 +20,22 @@
         if (!state || !overview) return `${prefix}-upcoming`
 
         if (state === ParticipationEventState.Holding) {
-            let maxParticipations = overview.map((apo) => apo.participations.length).sort()[overview.length - 1]
-            if (maxParticipations >= 2) {
-                maxParticipations = 2
+            let participations: { [eventId: string]: boolean } = { }
+            overview.forEach((apo) => apo.participations.forEach((p) => {
+                participations[p.eventId] = true
+            }))
+            const numParticipations = Object.keys(participations).length
+
+            let fileNumber
+            if (numParticipations >= 2) {
+                fileNumber = 2
+            } else if (numParticipations === 1) {
+                fileNumber = 1
+            } else {
+                fileNumber = 0
             }
 
-            return `${prefix}-${state}-${maxParticipations}`
+            return `${prefix}-${state}-${fileNumber}`
         } else {
             return `${prefix}-${state}`
         }

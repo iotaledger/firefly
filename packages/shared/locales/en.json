@@ -521,7 +521,7 @@
                     "Rewards are continually airdropped to you."
                 ],
                 "upcomingSubheader": "Airdrop events commences",
-                "upcomingHeader": "wen",
+                "upcomingHeader": "December 1st",
                 "commencingSubheader": "Airdrop events commencing",
                 "commencingHeader": "Pre-stake phase",
                 "holdingSubheader": "Airdrop events ongoing",
@@ -545,7 +545,7 @@
                 }
             },
             "notice": {
-                "date": "Staking commences u-dont-know-wen",
+                "date": "Staking commences Dec 1st",
                 "body": "By locking your funds for staking before the event starts, you will automatically commence active staking when the staking event starts (no additional rewards will be earned).",
                 "ok": "Ok, I understand"
             },
@@ -555,7 +555,7 @@
             },
             "confirmation": {
                 "title": "You're about to stake",
-                "body": "Stake for the remaining time and receive an estimated airdrop of:",
+                "body": "Estimated airdrop",
                 "next": "Next"
             }
         }
@@ -1017,7 +1017,7 @@
         "unstaked": "Unstaked",
         "staking": "Staking",
         "unstaking": "Unstaking",
-        "notStaking": "Not staking",
+        "notStaked": "Not staked",
         "stakedFunds": "Staked funds",
         "unstakedFunds": "Unstaked funds"
     },

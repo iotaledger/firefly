@@ -5,7 +5,7 @@ import { networkStatus } from '../networkStatus'
 import { showAppNotification } from '../notifications'
 import type { WalletAccount } from '../typings/wallet'
 
-import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID, STAKING_AIRDROP_TOKENS } from './constants'
+import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID, STAKING_AIRDROP_TOKENS, STAKING_EVENT_IDS } from './constants'
 import { partiallyStakedAccounts, participationEvents, participationOverview, stakedAccounts } from './stores'
 import { ParticipationEvent, StakingAirdrop } from './types'
 
@@ -19,6 +19,27 @@ import { ParticipationEvent, StakingAirdrop } from './types'
  * @returns {boolean}
  */
 export const isAccountStaked = (accountId: string): boolean => get(stakedAccounts).find((sa) => sa.id === accountId) !== undefined
+
+const getAirdropEventId = (airdrop: StakingAirdrop): string => {
+    switch(airdrop) {
+        case StakingAirdrop.Assembly:
+            return STAKING_EVENT_IDS[0]
+        case StakingAirdrop.Shimmer:
+            return STAKING_EVENT_IDS[1]
+        default:
+            return undefined
+    }
+}
+
+export const isAccountStakedForAirdrop = (accountId: string, airdrop: StakingAirdrop): boolean => {
+    const account = get(stakedAccounts).find((sa) => sa.id === accountId)
+    if (!account) return false
+
+    const accountOverview = get(participationOverview).find((apo) => apo.accountIndex === account.index)
+    if (!accountOverview) return false
+
+    return accountOverview.participations.find((p) => p.eventId === getAirdropEventId(airdrop)) !== undefined
+}
 
 export const isAccountPartiallyStaked = (accountId: string): boolean =>
     get(partiallyStakedAccounts).find((psa) => psa.id === accountId) !== undefined
@@ -85,14 +106,16 @@ const getAssemblyTokenMultiplier = (denomination: AssemblyDenomination): number 
     }
 }
 
-const formatStakingAirdropReward = (airdrop: StakingAirdrop, amount: number): string => {
+const formatStakingAirdropReward = (airdrop: StakingAirdrop, amount: number, decimalPlaces: number): string => {
     switch (airdrop) {
         case StakingAirdrop.Assembly: {
             const denomination: AssemblyDenomination =
                 amount >= 1.0 ? '' : amount >= 0.001 ? 'm' : 'µ'
             const multiplier = getAssemblyTokenMultiplier(denomination)
 
-            return `${amount * multiplier} ${denomination}${STAKING_AIRDROP_TOKENS[airdrop]}`
+            if (decimalPlaces > 6) decimalPlaces = 6
+
+            return `${(amount * multiplier).toFixed(decimalPlaces)} ${denomination}${STAKING_AIRDROP_TOKENS[airdrop]}`
         }
         case StakingAirdrop.Shimmer:
             return `${amount} ${STAKING_AIRDROP_TOKENS[airdrop]}`
@@ -109,10 +132,16 @@ const formatStakingAirdropReward = (airdrop: StakingAirdrop, amount: number): st
  * @param {StakingAirdrop} airdrop
  * @param {number} amountToStake
  * @param {boolean} formatAmount
+ * @param {number} decimalPlaces
  *
  * @returns {number | string}
  */
-export const estimateStakingAirdropReward = (airdrop: StakingAirdrop, amountToStake: number, formatAmount: boolean = false): number | string => {
+export const estimateStakingAirdropReward = (
+    airdrop: StakingAirdrop,
+    amountToStake: number,
+    formatAmount: boolean = false,
+    decimalPlaces: number = 6
+): number | string => {
     const stakingEvent = getStakingEventFromAirdrop(airdrop)
     if (!stakingEvent) {
         showAppNotification({
@@ -146,7 +175,7 @@ export const estimateStakingAirdropReward = (airdrop: StakingAirdrop, amountToSt
             return 0
     }
 
-    return formatAmount ? formatStakingAirdropReward(airdrop, estimation) : estimation
+    return formatAmount ? formatStakingAirdropReward(airdrop, estimation, decimalPlaces) : estimation
 }
 
 export const getStakedFunds = (account: WalletAccount): number => {
