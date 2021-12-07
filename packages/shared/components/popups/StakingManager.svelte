@@ -192,6 +192,8 @@
                 message: locale('error.node.pluginNotAvailable', { values: { nodePlugin: NodePlugin.Participation } }),
             })
 
+            resetView()
+
             return
         }
 

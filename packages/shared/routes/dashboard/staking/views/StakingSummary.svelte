@@ -22,6 +22,8 @@
     } from 'shared/lib/participation/stores'
     import { ParticipationAction, ParticipationEventState, ParticipationOverview } from 'shared/lib/participation/types'
     import { WalletAccount } from '../../../../lib/typings/wallet'
+    import { hasNodePlugin, networkStatus } from '../../../../lib/networkStatus'
+    import { NodePlugin } from '../../../../lib/typings/node'
 
     $: $participationOverview, $stakedAccounts, $partiallyStakedAccounts
 
@@ -43,6 +45,9 @@
     const NUM_CHANCES = 5
     const LUCKY_NUM = 3
     $: showSteak = Math.floor(Math.random() * NUM_CHANCES) + 1 === LUCKY_NUM
+
+    let canParticipateWithNode = false
+    $: $networkStatus, canParticipateWithNode = hasNodePlugin(NodePlugin.Participation)
 
     let showTooltip = false
     $: {
@@ -146,7 +151,7 @@
         disabled={!canStake || showSpinner}
         caution={isStaked && isPartiallyStaked}
         secondary={isStaked && !isPartiallyStaked}
-        onClick={handleStakeFundsClick}
+        onClick={() => canParticipateWithNode ? handleStakeFundsClick() : showAppNotification({ type: 'warning', message: localize('error.node.pluginNotAvailable', { values: { nodePlugin: NodePlugin.Participation } }) })}
     >
         {#if showSpinner}
             <Spinner
