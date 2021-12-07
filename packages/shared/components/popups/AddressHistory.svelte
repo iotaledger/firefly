@@ -38,6 +38,7 @@
 <div class="history scrollable-y flex flex-row flex-wrap space-y-7">
     {#each addresses as _addr}
         <div class="flex flex-row flex-wrap space-y-1">
+            <Text type="pre">{_addr.keyIndex}:{_addr.internal}</Text>
             <button class="text-left" on:click={() => setClipboard(_addr.address.toLowerCase())}>
                 <Text type="pre">{_addr.address}</Text>
             </button>
