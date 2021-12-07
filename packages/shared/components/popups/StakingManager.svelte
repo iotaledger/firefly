@@ -159,8 +159,14 @@
     const handleStakeClick = (account: WalletAccount): void => {
         openPopup({
             type: 'stakingConfirmation',
+            hideBack: false,
             props: {
                 accountToStake: account,
+                onBack: () => {
+                    openPopup({
+                        type: 'stakingManager'
+                    }, true)
+                }
             },
         }, true)
     }

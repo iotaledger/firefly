@@ -39,15 +39,6 @@
         airdropSelections[airdrop] = !airdropSelections[airdrop]
     }
 
-    const handleBackClick = (): void => {
-        openPopup(
-            {
-                type: 'stakingManager',
-            },
-            true
-        )
-    }
-
     const handleConfirmClick = (): void => {
         const _onConfirm = (): void => {
             accountToParticipate.set(accountToStake)
@@ -77,21 +68,15 @@
     }
 </script>
 
-<div class="mb-2 w-full flex flex-row justify-between items-start">
-    <div on:click={handleBackClick} class="cursor-pointer">
-        <Text type="p" classes="text-xl font-extrabold">←</Text>
-    </div>
-    <Text type="h3" classes="text-center font-extrabold">{accountToStake.alias}</Text>
-    <Text />
-</div>
+<Text type="h3" classes="mb-2 text-center font-extrabold">{accountToStake.alias}</Text>
 <div class="flex flex-col">
-    <div class="absolute flex flex-col self-center text-center transform translate-y-28">
+    <div class="absolute flex flex-col self-center text-center transform translate-y-16">
         <Text type="p" highlighted classes="text-lg">{locale('views.staking.confirmation.title')}</Text>
         <Text type="p" overrideColor classes="text-2xl font-extrabold text-gray-800">
             {isPartialStake ? formatUnitBestMatch(getUnstakedFunds(accountToStake)) : accountToStake.balance}
         </Text>
     </div>
-    <Illustration illustration="staking-confirmation" classes="mt-2 mb-6" />
+    <Illustration illustration="staking-confirmation" classes="mt-2 mb-6 rounded-2xl" />
 </div>
 <div class="flex flex-row justify-between items-center mb-6 space-x-2">
     {#each Object.keys(StakingAirdrop).map((sa) => sa.toLowerCase()) as airdrop}

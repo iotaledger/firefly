@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Icon } from 'shared/components';
+    import { Icon, Text } from 'shared/components';
     import { clickOutside } from 'shared/lib/actions';
     import { closePopup,popupState } from 'shared/lib/popup';
     import type { Locale } from 'shared/lib/typings/i18n';
@@ -46,8 +46,11 @@
     export let type = undefined
     export let props = undefined
     export let hideClose = undefined
+    export let hideBack = undefined
     export let fullScreen = undefined
     export let transition = true
+
+    console.log('HIDE BACK: ', hideBack)
 
     enum PopupSize {
         Small = 'small',
@@ -187,11 +190,21 @@
         use:clickOutside
         on:clickOutside={tryClosePopup}
         bind:this={popupContent}
-        class={`${size} bg-white rounded-xl pt-6 px-8 pb-8 relative ${fullScreen ? 'full-screen dark:bg-gray-900' : 'dark:bg-gray-900'}`}>
+        class={`${size} bg-white rounded-xl pt-6 px-8 pb-8 relative ${fullScreen ? 'full-screen dark:bg-gray-900' : 'dark:bg-gray-900'}`}
+    >
+        {#if !hideBack}
+            <button
+                on:click={props?.onBack}
+                class="absolute top-6 left-8 text-gray-800 dark:text-white focus:text-blue-500"
+            >
+                <Text type="p" classes="font-extrabold text-xl">←</Text>
+            </button>
+        {/if}
         {#if !hideClose}
             <button
                 on:click={tryClosePopup}
-                class="absolute top-6 right-8 text-gray-800 dark:text-white focus:text-blue-500">
+                class="absolute top-6 right-8 text-gray-800 dark:text-white focus:text-blue-500"
+            >
                 <Icon icon="close" />
             </button>
         {/if}
