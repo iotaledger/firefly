@@ -13,6 +13,7 @@ import {
     ParticipationEventState,
     ParticipationOverview
 } from './types'
+import { NodePlugin } from '../typings/node'
 
 /**
  * The persisted store variable for if the staking feature is new for a Firefly installation.
@@ -156,7 +157,9 @@ export const stakingEventState: Readable<ParticipationEventState> = derived(
     [networkStatus, participationEvents],
     ([$networkStatus, $participationEvents]) => {
         const stakingEvent = $participationEvents.filter((pe) => STAKING_EVENT_IDS.includes(pe.eventId))[0]
-        if (!stakingEvent) return ParticipationEventState.Inactive
+        if (!stakingEvent || !$networkStatus.nodePlugins.includes(NodePlugin.Participation)) {
+            return ParticipationEventState.Inactive
+        }
 
         const {
             milestoneIndexCommence,
