@@ -196,6 +196,9 @@
     }
 
     onMount(async () => {
+        // Fetch participation overview when this component mounts
+        await getParticipationOverview()
+
         /**
          * NOTE: Because of Stronghold and Ledger prompts to "unlock"
          * the wallets, this popup MAY BE instantiated with an "accountToAction",
