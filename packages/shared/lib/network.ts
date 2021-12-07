@@ -334,7 +334,16 @@ export const getNodeCandidates = (config: NetworkConfig): Node[] => {
 }
 
 const addOfficialNodes = (networkType: NetworkType, nodes: Node[]): Node[] => {
-    const officialNodes = getOfficialNodes(networkType)
+    let officialNodes = getOfficialNodes(networkType)
+
+    // If an official node is currently set as primary then keep it as primary
+    officialNodes = officialNodes.map((n) =>
+        Object.assign(
+            n,
+            nodes.find((p) => p.isPrimary && n.url === p.url)
+        )
+    )
+
     const nonOfficialNodes = nodes.filter((n) => !officialNodes.map((_n) => _n.url).includes(n.url))
 
     return [...officialNodes, ...nonOfficialNodes]
