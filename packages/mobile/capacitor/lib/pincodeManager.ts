@@ -1,45 +1,52 @@
 import type { IPincodeManager } from 'shared/lib/typings/pincodeManager'
+import { SecureStoragePlugin } from 'capacitor-secure-storage-plugin';
 
-/** Pincode Manager  */
-// Runs in renderer process
-export const PincodeManager: IPincodeManager = {
-    /**
-     * Sets pincode in keychain
-     *
-     * @method set
-     *
-     * @param {string} key
-     * @param {string} pincode
-     *
-     * @returns {Promise}
-     */
-    set(key, pincode) {
-        return new Promise<void>((resolve) => resolve())
-    },
-    /**
-     * Verifies user entered pincode against the one stored in keychain
-     *
-     * @method verify
-     *
-     * @param {string} key
-     * @param {string} pincode
-     *
-     * @returns {Promise}
-     */
-    verify(key, pincode) {
-        return new Promise<boolean>(() => true)
-    },
+/** Mobile Pincode Manager  */
+export const PincodeManager = handleKeychain()
 
-    /**
-     * Removes pincode entry from the keychain
-     *
-     * @method remove
-     *
-     * @param {string} key
-     *
-     * @returns {Promise}
-     */
-    remove(key) {
-        return new Promise<boolean>(() => true)
-    },
+function handleKeychain(): IPincodeManager {
+    async function set(key: string, pin: string): Promise<void> {
+        try {
+            const { value } = await SecureStoragePlugin.set({ key, value: pin })
+            if (value) return
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    async function verify(key: string, pin: string): Promise<boolean> {
+        try {
+            const { value } = await SecureStoragePlugin.get({ key })
+            return value === pin
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    async function remove(key: string): Promise<boolean> {
+        try {
+            const { value } = await SecureStoragePlugin.remove({ key })
+            return value
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    return {
+        /**
+         * Sets pincode in keychain
+         * @method set
+         */
+        set,
+        /**
+         * Gets pincode from keychain
+         * @method get
+         */
+        verify,
+        /**
+         * Removes pincode entry from the keychain
+         * @method remove
+         */
+        remove
+    }
 }
