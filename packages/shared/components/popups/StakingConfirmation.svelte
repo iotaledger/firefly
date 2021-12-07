@@ -13,10 +13,10 @@
 
     import { STAKING_AIRDROP_TOKENS } from 'shared/lib/participation/constants'
     import {
-        estimateStakingAirdropReward, getStakingEventFromAirdrop,
+        estimateStakingAirdropReward,
+        getStakingEventFromAirdrop,
         getUnstakedFunds,
         isAccountPartiallyStaked,
-        isAccountStakedForAirdrop,
     } from 'shared/lib/participation'
     import { accountToParticipate, participationAction } from 'shared/lib/participation/stores'
     import { Participation, ParticipationAction, StakingAirdrop } from 'shared/lib/participation/types'
@@ -29,8 +29,8 @@
     const isPartialStake = isAccountPartiallyStaked(accountToStake?.id)
 
     let airdropSelections: { [key in StakingAirdrop]: boolean } = {
-        [StakingAirdrop.Assembly]: isAccountStakedForAirdrop(accountToStake?.id, StakingAirdrop.Assembly),
-        [StakingAirdrop.Shimmer]: isAccountStakedForAirdrop(accountToStake?.id, StakingAirdrop.Shimmer),
+        [StakingAirdrop.Assembly]: true,
+        [StakingAirdrop.Shimmer]: true,
     }
 
     $: airdropSelections
@@ -107,7 +107,9 @@
             </div>
             <Text type="p" secondary disabled={!airdropSelections[airdrop]}>{locale('views.staking.confirmation.body')}:</Text>
             <Checkbox bind:checked={airdropSelections[airdrop]} onClick={() => toggleAirdropSelection(airdrop)} classes="my-5" />
-            <Text type="p" disabled={!airdropSelections[airdrop]} classes="font-bold text-lg">{getRewards(capitalize(airdrop))}</Text>
+            <Text type="p" disabled={!airdropSelections[airdrop]} classes="font-bold text-lg">
+                {airdropSelections[airdrop] ? getRewards(capitalize(airdrop)) : estimateStakingAirdropReward(airdrop, 0, true, 0)}
+            </Text>
         </div>
     {/each}
 </div>

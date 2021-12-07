@@ -109,11 +109,14 @@ const getAssemblyTokenMultiplier = (denomination: AssemblyDenomination): number 
 const formatStakingAirdropReward = (airdrop: StakingAirdrop, amount: number, decimalPlaces: number): string => {
     switch (airdrop) {
         case StakingAirdrop.Assembly: {
+            const absAmount = Math.abs(amount)
             const denomination: AssemblyDenomination =
-                amount >= 1.0 ? '' : amount >= 0.001 ? 'm' : 'µ'
+                absAmount >= 1.0 ? '' : absAmount >= 0.001 ? 'm' : absAmount === 0 ? '' : 'µ'
             const multiplier = getAssemblyTokenMultiplier(denomination)
 
-            if (decimalPlaces > 6) decimalPlaces = 6
+            if (denomination === '') decimalPlaces = decimalPlaces > 6 ? 6 : decimalPlaces < 0 ? 0 : decimalPlaces
+            else if (denomination === 'm') decimalPlaces = decimalPlaces > 3 ? 3 : decimalPlaces < 0 ? 0 : decimalPlaces
+            else if (denomination === 'µ') decimalPlaces = 0
 
             return `${(amount * multiplier).toFixed(decimalPlaces)} ${denomination}${STAKING_AIRDROP_TOKENS[airdrop]}`
         }
@@ -148,8 +151,10 @@ export const estimateStakingAirdropReward = (
             type: 'error',
             message: localize('error.participation.cannotFindStakingEvent'),
         })
+    }
 
-        return formatAmount ? '0' : 0
+    if (!stakingEvent || amountToStake <= 0) {
+        return formatAmount ? formatStakingAirdropReward(airdrop, 0, decimalPlaces) : 0
     }
 
     /**

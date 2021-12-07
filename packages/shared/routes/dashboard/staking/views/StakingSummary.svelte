@@ -42,9 +42,9 @@
     let isPartiallyStaked
     $: isPartiallyStaked = $partiallyStakedAccounts.length > 0
 
-    const NUM_CHANCES = 5
+    const NUM_CHANCES = 300
     const LUCKY_NUM = 3
-    $: showSteak = Math.floor(Math.random() * NUM_CHANCES) + 1 === LUCKY_NUM
+    let showSteak = Math.floor(Math.random() * NUM_CHANCES) + 1 === LUCKY_NUM
 
     let canParticipateWithNode = false
     $: $networkStatus, canParticipateWithNode = hasNodePlugin(NodePlugin.Participation)
