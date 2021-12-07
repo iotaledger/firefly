@@ -46,11 +46,8 @@
     export let type = undefined
     export let props = undefined
     export let hideClose = undefined
-    export let hideBack = undefined
     export let fullScreen = undefined
     export let transition = true
-
-    console.log('HIDE BACK: ', hideBack)
 
     enum PopupSize {
         Small = 'small',
@@ -192,14 +189,6 @@
         bind:this={popupContent}
         class={`${size} bg-white rounded-xl pt-6 px-8 pb-8 relative ${fullScreen ? 'full-screen dark:bg-gray-900' : 'dark:bg-gray-900'}`}
     >
-        {#if !hideBack}
-            <button
-                on:click={props?.onBack}
-                class="absolute top-6 left-8 text-gray-800 dark:text-white focus:text-blue-500"
-            >
-                <Text type="p" classes="font-extrabold text-xl">←</Text>
-            </button>
-        {/if}
         {#if !hideClose}
             <button
                 on:click={tryClosePopup}

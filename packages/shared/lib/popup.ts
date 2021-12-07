@@ -7,7 +7,6 @@ interface PopupState {
     type: string
     hideClose?: boolean
     preventClose?: boolean
-    hideBack?: boolean
     fullScreen?: boolean
     transition?: boolean
     props?: Record<string, unknown>
@@ -18,7 +17,6 @@ export const popupState = writable<PopupState>({
     type: null,
     hideClose: false,
     preventClose: false,
-    hideBack: true,
     fullScreen: false,
     transition: undefined,
     props: null,
@@ -29,18 +27,17 @@ export const openPopup = ({
     props = null,
     hideClose = false,
     preventClose = false,
-    hideBack = true,
     fullScreen = false,
     transition = undefined,
 }: Omit<PopupState, 'active'>, forceClose: boolean = false): void =>
     modifyPopupState(
-        { active: true, type, hideClose, preventClose, hideBack, fullScreen, transition, props },
+        { active: true, type, hideClose, preventClose, fullScreen, transition, props },
         forceClose,
     )
 
 export const closePopup = (forceClose: boolean = false): void =>
     modifyPopupState(
-        { active: false, type: null, hideClose: false, preventClose: false, hideBack: true, fullScreen: false, props: null },
+        { active: false, type: null, hideClose: false, preventClose: false, fullScreen: false, props: null },
         forceClose,
     )
 

@@ -39,6 +39,12 @@
         airdropSelections[airdrop] = !airdropSelections[airdrop]
     }
 
+    const handleBackClick = (): void => {
+        openPopup({
+            type: 'stakingManager',
+        }, true)
+    }
+
     const handleConfirmClick = (): void => {
         const _onConfirm = (): void => {
             accountToParticipate.set(accountToStake)
@@ -68,6 +74,12 @@
     }
 </script>
 
+<button
+    on:click={handleBackClick}
+    class="absolute top-6 left-8 text-gray-800 dark:text-white focus:text-blue-500"
+>
+    <Text type="p" classes="font-extrabold text-xl">←</Text>
+</button>
 <Text type="h3" classes="mb-2 text-center font-extrabold">{accountToStake.alias}</Text>
 <div class="flex flex-col">
     <div class="absolute flex flex-col self-center text-center transform translate-y-16">
