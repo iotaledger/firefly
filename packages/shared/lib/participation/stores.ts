@@ -14,6 +14,7 @@ import {
     ParticipationOverview,
     ParticipateResponsePayload
 } from './types'
+import { NodePlugin } from '../typings/node'
 
 /**
  * The store for keeping track of transaction ids generated as part of participation events.
@@ -162,7 +163,9 @@ export const stakingEventState: Readable<ParticipationEventState> = derived(
     [networkStatus, participationEvents],
     ([$networkStatus, $participationEvents]) => {
         const stakingEvent = $participationEvents.filter((pe) => STAKING_EVENT_IDS.includes(pe.eventId))[0]
-        if (!stakingEvent) return ParticipationEventState.Inactive
+        if (!stakingEvent || !$networkStatus.nodePlugins.includes(NodePlugin.Participation)) {
+            return ParticipationEventState.Inactive
+        }
 
         const {
             milestoneIndexCommence,

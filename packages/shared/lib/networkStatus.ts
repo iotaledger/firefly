@@ -140,3 +140,5 @@ export const updateNetworkStatus = async (accountId: string, node: Node): Promis
         })
     }
 }
+
+export const hasNodePlugin = (plugin: NodePlugin): boolean => get(networkStatus).nodePlugins.includes(plugin)

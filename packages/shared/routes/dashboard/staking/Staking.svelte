@@ -19,6 +19,7 @@
 
     import { accountToParticipate, isStakingFeatureNew, participationAction } from 'shared/lib/participation/stores'
     import { StakingAirdrop as _StakingAirdrop } from 'shared/lib/participation/types'
+    import { getParticipationEvents, getParticipationOverview } from '../../../lib/participation/api'
 
     const handleNewStakingFeature = (): void => {
         if ($isStakingFeatureNew) {
@@ -113,6 +114,9 @@
     }
 
     onMount(async () => {
+        await getParticipationEvents()
+        await getParticipationOverview()
+
         if ($isStakingFeatureNew) {
             setTimeout(handleNewStakingFeature, MILLISECONDS_PER_SECOND)
         }
