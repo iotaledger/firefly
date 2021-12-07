@@ -6,7 +6,7 @@
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { networkStatus } from 'shared/lib/networkStatus'
+    import { hasNodePlugin, networkStatus } from 'shared/lib/networkStatus'
     import { NodePlugin } from 'shared/lib/typings/node'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup, popupState } from 'shared/lib/popup'
@@ -42,7 +42,8 @@
     export let isPerformingAction = false
     export let shouldParticipateOnMount = false
     export let airdropSelections: StakingAirdrop[] = []
-    console.log('SELECTIONS: ', airdropSelections)
+    export let participations: Participation[] = []
+    console.log('PARTs: ', participations)
 
     let canStake
     $: canStake = canParticipate($stakingEventState)
@@ -94,7 +95,7 @@
         const _sync = async () => {
             // Add a delay to cover for the transaction confirmation time
             // TODO: Might need to rethink of a better solution here.
-            await new Promise((resolve) => setTimeout(resolve, 11000));
+            // await new Promise((resolve) => setTimeout(resolve, 11000));
 
             await asyncSyncAccounts()
             await getParticipationOverview()
@@ -125,11 +126,6 @@
 
         switch ($participationAction) {
             case ParticipationAction.Stake: {
-                const participations: Participation[] = airdropSelections.map((as) => (<Participation>{
-                    eventId: getStakingEventFromAirdrop(<StakingAirdrop>as.toLowerCase()).eventId,
-                    answers: [],
-                }))
-                console.log('PARTS: ', participations)
                 await participate($accountToParticipate?.id, participations)
                     .then(() => _sync())
                     .catch((err) => {
@@ -139,12 +135,7 @@
                 break
             }
             case ParticipationAction.Unstake:
-                await stopParticipating($accountToParticipate?.id, STAKING_EVENT_IDS.concat(
-                    "e5501ea9c8d950bceffc635275e7ce179a2334c42e9cc4e31c0f3c2c74db3d6a",
-                    "11bf14a0b4c4e60554c73a261b878e09d67e4772b876808d2b3c42570eaeb614",
-                    "415267d375c85531aec13e6471c04a01622dfcc9b285a009629dd2c9231da517",
-                    "c4f23236b3ce22f9fe22583176813618b304bbfcfd24da68cbddf66196b0d8fd"
-                ))
+                await stopParticipating($accountToParticipate?.id, STAKING_EVENT_IDS)
                     .then(() => _sync())
                     .catch((err) => {
                         console.error(err)
@@ -159,7 +150,6 @@
     const handleStakeClick = (account: WalletAccount): void => {
         openPopup({
             type: 'stakingConfirmation',
-            hideBack: false,
             props: {
                 accountToStake: account,
                 onBack: () => {
@@ -196,8 +186,14 @@
     }
 
     onMount(async () => {
-        // Fetch participation overview when this component mounts
-        await getParticipationOverview()
+        if (!hasNodePlugin(NodePlugin.Participation)) {
+            showAppNotification({
+                type: 'warning',
+                message: locale('error.node.pluginNotAvailable', { values: { nodePlugin: NodePlugin.Participation } }),
+            })
+
+            return
+        }
 
         /**
          * NOTE: Because of Stronghold and Ledger prompts to "unlock"

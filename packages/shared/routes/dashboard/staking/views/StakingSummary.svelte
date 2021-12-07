@@ -40,9 +40,13 @@
     let isPartiallyStaked
     $: isPartiallyStaked = $partiallyStakedAccounts.length > 0
 
+    const NUM_CHANCES = 5
+    const LUCKY_NUM = 3
+    $: showSteak = Math.floor(Math.random() * NUM_CHANCES) + 1 === LUCKY_NUM
+
     let showTooltip = false
     $: {
-        if (!isPartiallyStaked && !isStakeConfirming)
+        if (!isPartiallyStaked && !ongoingParticipationConfirmation)
             showTooltip = false
     }
 
@@ -66,7 +70,7 @@
          * does seem to play nicely with responsiveness.
          */
         const top = iconBox?.getBoundingClientRect().top ?? 0
-        const topMultiplier = isPartiallyStaked ? 1.6 : isStakeConfirming ? 1.5 : -10000
+        const topMultiplier = isPartiallyStaked ? 1.6 : ongoingParticipationConfirmation ? 1.5 : -10000
         parentTop = top * topMultiplier
     }
 
@@ -90,7 +94,7 @@
         openPopup({ type, hideClose: false })
     }
 
-    const isConfirmingStake = (account: WalletAccount, overview: ParticipationOverview): boolean => {
+    const isConfirmingParticipationAction = (account: WalletAccount, overview: ParticipationOverview): ParticipationAction | undefined => {
         if (account) {
             const accountOverview = overview.find((apo) => apo.accountIndex === account.index)
             if (accountOverview) {
@@ -98,15 +102,17 @@
                 const isStakedAndConfirming = isStaked && (accountOverview.assemblyStakedFunds <= 0 || accountOverview.shimmerStakedFunds <= 0)
                 const isUnstakedAndConfirming = !isStaked && (accountOverview.assemblyUnstakedFunds <= 0 || accountOverview.shimmerUnstakedFunds <= 0)
 
-                return isStakedAndConfirming || isUnstakedAndConfirming
+                if (isStakedAndConfirming) return ParticipationAction.Stake
+                else if (isUnstakedAndConfirming) return ParticipationAction.Unstake
+                else return undefined
             }
         }
 
-        return false
+        return undefined
     }
 
-    let isStakeConfirming
-    $: isStakeConfirming = isConfirmingStake($accountToParticipate, $participationOverview)
+    let ongoingParticipationConfirmation: ParticipationAction
+    $: ongoingParticipationConfirmation = isConfirmingParticipationAction($accountToParticipate, $participationOverview)
 </script>
 
 <div class="p-5 flex flex-col justify-between space-y-6 w-full h-full">
@@ -115,7 +121,7 @@
             <Text type="p" overrideColor classes="mb-2 text-gray-700 text-13 font-normal dark:text-white">
                 {localize('views.staking.summary.stakedFunds')}
             </Text>
-            {#if isPartiallyStaked || isStakeConfirming}
+            {#if isPartiallyStaked || (ongoingParticipationConfirmation && !$popupState.active)}
                 <div
                     bind:this={iconBox}
                     on:mouseenter={toggleTooltip}
@@ -123,7 +129,7 @@
                 >
                     {#if isPartiallyStaked}
                         <Icon icon="exclamation" classes="fill-current text-yellow-600" />
-                    {:else if isStakeConfirming}
+                    {:else if ongoingParticipationConfirmation}
                         <Spinner busy classes="justify-center" />
                     {/if}
                 </div>
@@ -149,7 +155,7 @@
                 classes="mx-2 justify-center"
             />
         {:else}
-            {localize(`actions.${isStaked ? 'manageStake' : 'stakeFunds'}`)}
+            {localize(`actions.${isStaked ? 'manageStake' : showSteak ? 'gimmeSteak' : 'stakeFunds'}`)}
         {/if}
     </Button>
 </div>
@@ -168,12 +174,19 @@
                 {localize('tooltips.partiallyStakedFunds.preBody')}
                 {localize('tooltips.partiallyStakedFunds.body')}
             </Text>
-        {:else if isStakeConfirming}
+        {:else if ongoingParticipationConfirmation === ParticipationAction.Stake}
             <Text type="p" classes="text-gray-900 bold mb-1 text-left">
-                Waiting to confirm stake
+                Waiting to confirm
             </Text>
             <Text type="p" secondary classes="text-left">
-                The transaction to stake your funds has been broadcasted, but has yet to be confirmed.
+                The transaction to stake your funds has been broadcasted, but has not yet been confirmed.
+            </Text>
+        {:else if ongoingParticipationConfirmation === ParticipationAction.Unstake}
+            <Text type="p" classes="text-gray-900 bold mb-1 text-left">
+                Waiting to confirm
+            </Text>
+            <Text type="p" secondary classes="text-left">
+                The transaction to unstake your funds has been broadcasted, but has not yet been confirmed.
             </Text>
         {/if}
     </Tooltip>

@@ -13,13 +13,13 @@
 
     import { STAKING_AIRDROP_TOKENS } from 'shared/lib/participation/constants'
     import {
-        estimateStakingAirdropReward,
+        estimateStakingAirdropReward, getStakingEventFromAirdrop,
         getUnstakedFunds,
         isAccountPartiallyStaked,
         isAccountStakedForAirdrop,
     } from 'shared/lib/participation'
     import { accountToParticipate, participationAction } from 'shared/lib/participation/stores'
-    import { ParticipationAction, StakingAirdrop } from 'shared/lib/participation/types'
+    import { Participation, ParticipationAction, StakingAirdrop } from 'shared/lib/participation/types'
 
     export let locale: Locale
     export let accountToStake: WalletAccount
@@ -50,11 +50,16 @@
             accountToParticipate.set(accountToStake)
             participationAction.set(ParticipationAction.Stake)
 
+            const selections = Object.keys(airdropSelections).filter((as) => airdropSelections[as])
+            const participations: Participation[] = selections.map((selection) => (<Participation>{
+                eventId: getStakingEventFromAirdrop(<StakingAirdrop>selection.toLowerCase()).eventId,
+                answers: [],
+            }))
             openPopup({
                 type: 'stakingManager',
                 props: {
                     shouldParticipateOnMount: true,
-                    airdropSelections: Object.keys(StakingAirdrop).filter((sa) => airdropSelections[sa.toLowerCase()])
+                    participations,
                 },
             }, true)
         }

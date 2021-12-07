@@ -875,7 +875,8 @@
         "stake": "Stake",
         "unstake": "Unstake",
         "stakeFunds": "Stake funds",
-        "manageStake": "Manage stake"
+        "manageStake": "Manage stake",
+        "gimmeSteak": "Gimme Steak"
     },
     "general": {
         "password": "Password",
