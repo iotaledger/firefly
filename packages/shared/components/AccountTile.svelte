@@ -33,7 +33,7 @@
     export let name = ''
     export let balance = ''
     export let balanceEquiv = ''
-    export let color = AccountColors.Default
+    export let color = ''
     export let airdrop: StakingAirdrop = undefined
     export let size = 'm' // m, l
     export let hidden = false
@@ -43,6 +43,8 @@
     export let pattern = AccountPatterns.Default
 
     $: darkModeEnabled = $appSettings.darkMode
+
+    $: textColor = color.match(/([0-9]{3})+/g)?.some(c => parseInt(c, 10) >= 160) ? 'black' : 'white'
 
     if (airdrop) {
         disabled = true
@@ -274,18 +276,26 @@
         &.hidden-wallet {
             @apply opacity-50;
         }
+
+        &.disabled-hover {
+            background-color: rgb(var(--account-color));
+        }
+
+        &:not(.disabled-hover):hover {
+            background-color: rgb(var(--account-color));
+        }
     }
 </style>
 
 <button
     on:click={handleTileClick}
-    class="{disabledHover ? `bg-${color}-500` : `bg-gray-100 dark:bg-gray-900 hover:bg-${color}-500`} size-{size} group rounded-xl font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'} bg-no-repeat bg-right-top bg-contain"
+    class="{disabledHover ? 'disabled-hover' : 'bg-gray-100 dark:bg-gray-900'} size-{size} group rounded-xl font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'} bg-no-repeat bg-right-top bg-contain"
     class:staked={isActivelyStaking}
     class:partial-stake={showWarningState}
     class:airdrop
     class:hidden-wallet={hidden}
     class:darkmode={darkModeEnabled}
-    style={pattern ? `background-image: url("assets/patterns/${pattern}-gradient.svg")` : null}
+    style="--account-color: {color}; color: {textColor}; {pattern ? `background-image: url("assets/patterns/${pattern}-gradient.svg")` : null}"
     {disabled}>
     <div class="mb-2 w-full flex flex-row justify-between items-start space-x-1.5">
         <div class="flex flex-row space-x-1.5 items-start w-full whitespace-nowrap">
