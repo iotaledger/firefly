@@ -7,10 +7,8 @@ import type { WalletAccount } from '../typings/wallet'
 
 import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID, STAKING_AIRDROP_TOKENS, STAKING_EVENT_IDS } from './constants'
 import { partiallyStakedAccounts, participationEvents, participationOverview, stakedAccounts } from './stores'
-import { ParticipationEvent, StakingAirdrop, Participation } from './types'
-import { chunkString, delineateNumber } from '../utils'
-import { getDecimalSeparator } from '../currency'
-import { activeProfile } from '../profile'
+import { Participation, ParticipationEvent, StakingAirdrop } from './types'
+import { delineateNumber } from '../utils'
 
 /**
  * Determines whether an account is currently being staked or not.
@@ -94,6 +92,28 @@ export const getStakingEventFromAirdrop = (airdrop: StakingAirdrop): Participati
     }
 
     return get(participationEvents).find((pe) => pe.eventId === stakingEventId)
+}
+
+/**
+ * Determines the staking airdrop from a given participation event ID.
+ *
+ * @method getAirdropFromEventId
+ *
+ * @param {string} eventId
+ *
+ * @returns {StakingAirdrop | undefined}
+ */
+export const getAirdropFromEventId = (eventId: string): StakingAirdrop | undefined => {
+    if (!eventId) return undefined
+
+    if (!STAKING_EVENT_IDS.includes(eventId)) {
+        showAppNotification({
+            type: 'error',
+            message: localize('error.participation.invalidStakingEventId')
+        })
+    }
+
+    return eventId === ASSEMBLY_EVENT_ID ? StakingAirdrop.Assembly : StakingAirdrop.Shimmer
 }
 
 type AssemblyDenomination = 'µ' | 'm' | ''
