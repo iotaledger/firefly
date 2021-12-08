@@ -667,7 +667,7 @@
         "transaction": {
             "title": "Confirm transaction",
             "body": "You’re about to send {amount} to",
-            "sendingFromStakedAccount": "This account is participating in a staking event - sending this transaction will unstake some or all of your funds."
+            "sendingFromStakedAccount": "You are sending funds from a staked wallet participating in airdrops. By proceeding to send this transaction, it will unstake some or all of your funds. By pressing cancel your funds will continue to be staked and airdrops will be received as normal."
         },
         "balanceFinder": {
             "title": "Balance finder",
