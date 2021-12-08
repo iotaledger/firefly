@@ -3,6 +3,8 @@
     import { get } from 'svelte/store'
     import { Button, Icon, Spinner, Text, Tooltip } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
+    import { hasNodePlugin, networkStatus } from 'shared/lib/networkStatus'
+    import { NodePlugin } from 'shared/lib/typings/node'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup, popupState } from 'shared/lib/popup'
     import { formatUnitBestMatch } from 'shared/lib/units'
@@ -20,10 +22,7 @@
         stakingEventState,
         unstakedAmount,
     } from 'shared/lib/participation/stores'
-    import { ParticipationAction, ParticipationEventState, ParticipationOverview } from 'shared/lib/participation/types'
-    import { WalletAccount } from '../../../../lib/typings/wallet'
-    import { hasNodePlugin, networkStatus } from '../../../../lib/networkStatus'
-    import { NodePlugin } from '../../../../lib/typings/node'
+    import { ParticipationAction, ParticipationEventState} from 'shared/lib/participation/types'
 
     $: $participationOverview, $stakedAccounts, $partiallyStakedAccounts
 
@@ -44,14 +43,14 @@
 
     const NUM_CHANCES = 300
     const LUCKY_NUM = 3
-    let showSteak = Math.floor(Math.random() * NUM_CHANCES) + 1 === LUCKY_NUM
+    const showSteak = Math.floor(Math.random() * NUM_CHANCES) + 1 === LUCKY_NUM
 
     let canParticipateWithNode = false
     $: $networkStatus, canParticipateWithNode = hasNodePlugin(NodePlugin.Participation)
 
     let showTooltip = false
     $: {
-        if (!isPartiallyStaked && !ongoingParticipationConfirmation)
+        if (!isPartiallyStaked)
             showTooltip = false
     }
 
@@ -75,7 +74,7 @@
          * does seem to play nicely with responsiveness.
          */
         const top = iconBox?.getBoundingClientRect().top ?? 0
-        const topMultiplier = isPartiallyStaked ? 1.6 : ongoingParticipationConfirmation ? 1.5 : -10000
+        const topMultiplier = isPartiallyStaked ? 1.6 : -10000
         parentTop = top * topMultiplier
     }
 
@@ -93,31 +92,11 @@
             return
         }
 
-        const isUpcoming = $stakingEventState === ParticipationEventState.Upcoming
-        const type = !isStaked && isUpcoming ? 'stakingNotice' : 'stakingManager'
+        const showNotice = $stakingEventState === ParticipationEventState.Upcoming || $stakingEventState === ParticipationEventState.Commencing
+        const type = !isStaked && showNotice ? 'stakingNotice' : 'stakingManager'
 
         openPopup({ type, hideClose: false })
     }
-
-    const isConfirmingParticipationAction = (account: WalletAccount, overview: ParticipationOverview): ParticipationAction | undefined => {
-        if (account) {
-            const accountOverview = overview.find((apo) => apo.accountIndex === account.index)
-            if (accountOverview) {
-                const isStaked = $stakedAccounts.find((sa) => sa.id === account.id) !== undefined
-                const isStakedAndConfirming = isStaked && (accountOverview.assemblyStakedFunds <= 0 || accountOverview.shimmerStakedFunds <= 0)
-                const isUnstakedAndConfirming = !isStaked && (accountOverview.assemblyUnstakedFunds <= 0 || accountOverview.shimmerUnstakedFunds <= 0)
-
-                if (isStakedAndConfirming) return ParticipationAction.Stake
-                else if (isUnstakedAndConfirming) return ParticipationAction.Unstake
-                else return undefined
-            }
-        }
-
-        return undefined
-    }
-
-    let ongoingParticipationConfirmation: ParticipationAction
-    $: ongoingParticipationConfirmation = isConfirmingParticipationAction($accountToParticipate, $participationOverview)
 </script>
 
 <div class="p-5 flex flex-col justify-between space-y-6 w-full h-full">
@@ -126,7 +105,7 @@
             <Text type="p" overrideColor classes="mb-2 text-gray-700 text-13 font-normal dark:text-white">
                 {localize('views.staking.summary.stakedFunds')}
             </Text>
-            {#if isPartiallyStaked || (ongoingParticipationConfirmation && !$popupState.active)}
+            {#if isPartiallyStaked}
                 <div
                     bind:this={iconBox}
                     on:mouseenter={toggleTooltip}
@@ -134,8 +113,6 @@
                 >
                     {#if isPartiallyStaked}
                         <Icon icon="exclamation" classes="fill-current text-yellow-600" />
-                    {:else if ongoingParticipationConfirmation}
-                        <Spinner busy classes="justify-center" />
                     {/if}
                 </div>
             {/if}
@@ -178,20 +155,6 @@
             <Text type="p" secondary classes="text-left">
                 {localize('tooltips.partiallyStakedFunds.preBody')}
                 {localize('tooltips.partiallyStakedFunds.body')}
-            </Text>
-        {:else if ongoingParticipationConfirmation === ParticipationAction.Stake}
-            <Text type="p" classes="text-gray-900 bold mb-1 text-left">
-                Waiting to confirm
-            </Text>
-            <Text type="p" secondary classes="text-left">
-                The transaction to stake your funds has been broadcasted, but has not yet been confirmed.
-            </Text>
-        {:else if ongoingParticipationConfirmation === ParticipationAction.Unstake}
-            <Text type="p" classes="text-gray-900 bold mb-1 text-left">
-                Waiting to confirm
-            </Text>
-            <Text type="p" secondary classes="text-left">
-                The transaction to unstake your funds has been broadcasted, but has not yet been confirmed.
             </Text>
         {/if}
     </Tooltip>
