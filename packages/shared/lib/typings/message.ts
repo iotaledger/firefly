@@ -22,6 +22,7 @@ export interface RegularEssence {
     payload?: {
         type: 'Indexation'
         data: {
+            data: number[];
             index: number[]
         }
     }

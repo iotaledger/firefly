@@ -7,7 +7,7 @@ import type { WalletAccount } from '../typings/wallet'
 
 import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID, STAKING_AIRDROP_TOKENS, STAKING_EVENT_IDS } from './constants'
 import { partiallyStakedAccounts, participationEvents, participationOverview, stakedAccounts } from './stores'
-import { ParticipationEvent, StakingAirdrop } from './types'
+import { ParticipationEvent, StakingAirdrop, Participation } from './types'
 
 /**
  * Determines whether an account is currently being staked or not.
@@ -194,4 +194,34 @@ export const getUnstakedFunds = (account: WalletAccount): number => {
     const accountParticipation = get(participationOverview).find((apo) => apo.accountIndex === account?.index)
     if (!accountParticipation) return 0
     else return accountParticipation.shimmerUnstakedFunds
+}
+
+/**
+ * Determines if partipations include shimmer event id
+ *
+ * @method isStakingForShimmer
+ *
+ * @param {Participation[]} participations
+ *
+ * @returns {boolean}
+ */
+export const isStakingForShimmer = (participations: Participation[]): boolean => {
+    const eventIds = participations.map((participation) => participation.eventId);
+
+    return eventIds.includes(SHIMMER_EVENT_ID);
+}
+
+/**
+ * Determines if partipations include assembly event id
+ *
+ * @method isStakingForAssembly
+ *
+ * @param {Participation[]} participations
+ *
+ * @returns {boolean}
+ */
+ export const isStakingForAssembly = (participations: Participation[]): boolean => {
+    const eventIds = participations.map((participation) => participation.eventId);
+
+    return eventIds.includes(ASSEMBLY_EVENT_ID);
 }
