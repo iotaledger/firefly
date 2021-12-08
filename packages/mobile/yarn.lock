@@ -36,6 +36,13 @@
   dependencies:
     tslib "^2.1.0"
 
+"@capacitor/core@latest":
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/@capacitor/core/-/core-3.3.2.tgz#dde52353ad5d261635ef0ec38401e70ffb9722de"
+  integrity sha512-pyI3dQdQjA1L5iEw0jkeKCogx9t5d5kIFTB5M3CJRg9Uj5MIpU2J5CRj+74A7BflvZJo8IBd6IfMJaOArRumaw==
+  dependencies:
+    tslib "^2.1.0"
+
 "@capacitor/ios@3.2.0":
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/@capacitor/ios/-/ios-3.2.0.tgz#46f8cdf34d45a2791d002e9640472eef65b11ff6"
@@ -3671,6 +3678,11 @@ vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=
+
+wallet-actor-system-capacitor-binding@../backend/bindings/capacitor/:
+  version "0.0.1"
+  dependencies:
+    "@capacitor/core" latest
 
 warning@^4.0.3:
   version "4.0.3"

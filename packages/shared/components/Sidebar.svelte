@@ -9,7 +9,7 @@
     import { Settings } from 'shared/routes'
     import { onDestroy } from 'svelte'
     import { get } from 'svelte/store'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -58,11 +58,11 @@
 
 {#if $mobile}
     <button
-        class="absolute top-10 right-8 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100"
+        class="absolute right-8 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100"
         on:click={() => drawer.open()}>
         <span class="text-12 text-center text-white uppercase">{profileInitial || 'A'}</span>
     </button>
-    <Drawer bind:this={drawer} fromRight={true} dimLength={0} opened={false} fullScreen classes="flex">
+    <Drawer bind:this={drawer} fromRight={true} dimLength={0} opened={false} fullScreen classes="flex pt-safe">
         <div class="flex flex-col flex-1">
             <div
                 class="cursor-pointer w-full px-8 py-3 mb-6 flex items-centers justify-center bg-white dark:bg-gray-800"

@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Icon, Pin, Profile, Text } from 'shared/components'
+    import { Icon, Pin, Profile, Text, SafeArea } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { Platform } from 'shared/lib/platform'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
@@ -123,7 +123,40 @@
 </script>
 
 {#if $mobile}
-    <div>foo</div>
+<SafeArea top bottom>
+    <div class="relative w-full h-full bg-white dark:bg-gray-900">
+        <button
+            data-label="back-button"
+            class="absolute top-0 left-5 disabled:opacity-50 cursor-pointer disabled:cursor-auto"
+            disabled={hasReachedMaxAttempts}
+            on:click={handleBackClick}>
+            <div class="flex items-center space-x-3">
+                <Icon icon="arrow-left" classes="text-blue-500" />
+                <Text type="h5">{locale('general.profiles')}</Text>
+            </div>
+        </button>
+        <div class="pt-40 pb-16 flex w-full h-full flex-col items-center justify-between">
+            <div class="w-96 flex flex-col flex-wrap items-center mb-20">
+                <Profile name={$activeProfile?.name} bgColor="blue" />
+                <Pin
+                    bind:this={pinRef}
+                    bind:value={pinCode}
+                    classes="mt-10 {shake && 'animate-shake'}"
+                    on:submit={onSubmit}
+                    disabled={hasReachedMaxAttempts || isBusy}
+                    autofocus />
+                <Text type="p" bold classes="mt-4 text-center">
+                    {attempts > 0 ? locale('views.login.incorrectAttempts', {
+                              values: { attempts: attempts.toString() },
+                          }) : locale('actions.enterYourPin')}
+                </Text>
+                {#if hasReachedMaxAttempts}
+                    <Text error classes="mt-6">{buttonText}</Text>
+                {/if}
+            </div>
+        </div>
+    </div>
+</SafeArea>
 {:else}
     <div class="relative w-full h-full bg-white dark:bg-gray-900">
         <button

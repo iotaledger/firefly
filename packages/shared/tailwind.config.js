@@ -254,6 +254,7 @@ module.exports = {
         cursor: ['responsive', 'disabled'],
     },
     plugins: [
+        require('tailwindcss-safe-area'),
         // Add individual border colors
         // Source: https://github.com/tailwindlabs/tailwindcss/issues/559#issuecomment-639118372
         plugin(({ addUtilities, theme, config }) => {

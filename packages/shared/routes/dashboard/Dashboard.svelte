@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Idle, Sidebar } from 'shared/components'
+    import { Idle, Sidebar, SafeArea } from 'shared/components'
     import { Settings, Wallet } from 'shared/routes'
     import { loggedIn, logout, sendParams } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
@@ -253,8 +253,11 @@
 </script>
 
 <Idle />
-<div class="flex flex-row w-full h-full">
-    <Sidebar {locale} />
-    <!-- Dashboard Pane -->
-    <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
-</div>
+<SafeArea top>
+    <div class="flex flex-row w-full h-full">
+        <Sidebar {locale} />
+        <!-- Dashboard Pane -->
+        <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
+    </div>
+</SafeArea>
+

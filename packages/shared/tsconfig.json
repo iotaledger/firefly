@@ -6,5 +6,10 @@
         "lib": ["DOM", "ESNext"]
     },
     "include": ["./lib"],
-    "exclude": ["**/node_modules", "**/tests"]
+    "exclude": ["**/node_modules", "**/tests"],
+    "paths": {
+        "shared": "./shared/",
+        "mobile": "./mobile/",
+        "desktop": "./desktop/"
+    }
 }

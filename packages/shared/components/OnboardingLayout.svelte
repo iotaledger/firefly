@@ -1,9 +1,9 @@
 <script lang="typescript">
-    import { Icon, ProgressFlow, Text } from 'shared/components'
+    import { Icon, ProgressFlow, Text, SafeArea} from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { ledgerMigrationProgresses, LEDGER_MIGRATION_VIDEO } from 'shared/lib/migration'
     import { openPopup } from 'shared/lib/popup'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type  { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -16,7 +16,10 @@
     export let onBackClick = (): void => {}
 
     function handleWatchVideoClick() {
-        openPopup({ type: 'video', props: { video: LEDGER_MIGRATION_VIDEO, title: locale('views.setupLedger.videoGuide') } })
+        openPopup({
+            type: 'video',
+            props: { video: LEDGER_MIGRATION_VIDEO, title: locale('views.setupLedger.videoGuide') },
+        })
     }
 </script>
 
@@ -40,37 +43,42 @@
 {/if}
 <!--  -->
 {#if $mobile}
-    <div data-label="mobile-onboarding-layout" class="relative h-full px-5 flex flex-col justify-between">
-        <div class="mobile-top-bar relative w-full flex justify-center px-8 py-3">
-            <Text type="h4" classes="text-center">
-                <slot name="title" />
-            </Text>
-            {#if allowBack}
-                <button on:click={onBackClick} class="absolute top-3 left-0" disabled={busy}>
-                    <Icon
-                        icon="arrow-left"
-                        classes={busy ? 'pointer-events-none text-gray-500' : 'cursor-pointer text-blue-500'} />
-                </button>
-            {/if}
-        </div>
-        <!-- TODO: fix flex-col-reverse scrolls mobile-top-content to bottom -->
-        <div
-            data-label="mobile-top-content"
-            class="flex {reverseContent ? 'flex-col-reverse' : 'flex-col'} overflow-y-auto flex-auto h-1 pt-5">
-            <div>
-                <slot name="rightpane" />
+    <SafeArea top bottom>
+        <div data-label="mobile-onboarding-layout" class="relative h-full px-5 flex flex-col justify-between">
+            <div class="mobile-top-bar relative w-full flex justify-center px-8 py-3">
+                <Text type="h4" classes="text-center">
+                    <slot name="title" />
+                </Text>
+                {#if allowBack}
+                    <button on:click={onBackClick} class="absolute top-3 left-0" disabled={busy}>
+                        <Icon
+                            icon="arrow-left"
+                            classes={busy ? 'pointer-events-none text-gray-500' : 'cursor-pointer text-blue-500'} />
+                    </button>
+                {/if}
             </div>
-            <div>
-                <slot name="leftpane__content" />
+            <!-- TODO: fix flex-col-reverse scrolls mobile-top-content to bottom -->
+            <div
+                data-label="mobile-top-content"
+                class="flex {reverseContent ? 'flex-col-reverse' : 'flex-col'} overflow-y-auto flex-auto h-1 pt-5">
+                <div>
+                    <slot name="rightpane" />
+                </div>
+                <div>
+                    <slot name="leftpane__content" />
+                </div>
+            </div>
+            <div class="py-3">
+                <slot name="leftpane__action" />
             </div>
         </div>
-        <div class="py-3">
-            <slot name="leftpane__action" />
-        </div>
-    </div>
+    </SafeArea>
 {:else}
     <div data-label="onboarding-layout" class="relative w-full h-full flex flex-row">
-        <div data-label="leftpane" class="h-full flex justify-center p-10 bg-white dark:bg-gray-800" style="width: 38%;">
+        <div
+            data-label="leftpane"
+            class="h-full flex justify-center p-10 bg-white dark:bg-gray-800"
+            style="width: 38%;">
             <div class="w-full h-full flex flex-col justify-between" style="max-width: 406px;">
                 <div class="flex flex-col h-full">
                     {#if allowBack}
