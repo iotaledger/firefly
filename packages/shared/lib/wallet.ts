@@ -69,6 +69,8 @@ import type {
     ParticipationOverviewResponse
 } from './participation/types'
 
+import { removePendingParticipationTransactionIds } from './participation/stores'
+
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
 export const MAX_PROFILE_NAME_LENGTH = 20
@@ -886,6 +888,9 @@ export const initialiseListeners = (): void => {
             const { message } = response.payload
 
             if (message.payload.type === 'Transaction') {
+                // For participation
+                removePendingParticipationTransactionIds([message.id]);
+
                 const { confirmed } = response.payload
                 const { essence } = message.payload.data
 

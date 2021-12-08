@@ -93,11 +93,6 @@
         const isPartialStake = $partiallyStakedAccounts.find((psa) => psa.id === $accountToParticipate?.id) !== undefined
 
         const _sync = async () => {
-            // Add a delay to cover for the transaction confirmation time
-            // TODO: Might need to rethink of a better solution here.
-            // await new Promise((resolve) => setTimeout(resolve, 11000));
-
-            await asyncSyncAccounts()
             await getParticipationOverview()
 
             showAppNotification({
