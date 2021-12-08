@@ -5,7 +5,7 @@ import type { Event } from '../typings/events'
 import { showAppNotification } from '../notifications'
 import { api, saveNewMessage } from '../wallet'
 
-import { participationEvents, participationOverview, addNewPendingParticipationTransactionIds } from './stores'
+import { participationEvents, participationOverview } from './stores'
 import type {
     ParticipateResponsePayload,
     Participation,
@@ -92,7 +92,6 @@ export function participate(accountId: string, participations: Participation[]):
                 onSuccess(response: Event<ParticipateResponsePayload>) {
                     response.payload.forEach((message) => saveNewMessage(accountId, message));
 
-                    addNewPendingParticipationTransactionIds(response.payload);
                     resolve()
                 },
                 onError(error) {
@@ -131,7 +130,6 @@ export function stopParticipating(accountId: string, eventIds: string[]): Promis
             {
                 onSuccess(response: Event<ParticipateResponsePayload>) {
                     response.payload.forEach((message) => saveNewMessage(accountId, message));
-                    addNewPendingParticipationTransactionIds(response.payload);
 
                     resolve()
                 },
