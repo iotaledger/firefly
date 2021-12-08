@@ -344,7 +344,7 @@ const addOfficialNodes = (networkType: NetworkType, nodes: Node[]): Node[] => {
         )
     )
 
-    const nonOfficialNodes = nodes.filter((n) => !officialNodes.map((_n) => _n.url).includes(n.url))
+    const nonOfficialNodes = nodes.filter((n) => officialNodes.find((_n) => _n.url === n.url) === undefined)
 
     return [...officialNodes, ...nonOfficialNodes]
 }
