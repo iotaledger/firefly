@@ -12,7 +12,7 @@
     const { balanceOverview } = $wallet
 
     let addressIndex = 0
-    const gapIndex = $isLedgerProfile ? 10 : 25
+    let gapLimit = $isLedgerProfile ? 10 : 25
     let accountDiscoveryThreshold = $isLedgerProfile ? 3 : 10
     let password = ''
     let error = ''
@@ -33,9 +33,9 @@
                 return
             }
 
-            await asyncSyncAccounts(addressIndex, gapIndex, accountDiscoveryThreshold, false)
+            await asyncSyncAccounts(addressIndex, gapLimit, accountDiscoveryThreshold, false)
 
-            addressIndex += gapIndex
+            gapLimit+=gapLimit
             accountDiscoveryThreshold++
         } catch (err) {
             error = locale(err.error)
