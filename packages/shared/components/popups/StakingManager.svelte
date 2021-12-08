@@ -13,15 +13,15 @@
     import { activeProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { checkStronghold } from 'shared/lib/stronghold'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { asyncSyncAccounts, transferState, wallet } from 'shared/lib/wallet'
+    import { transferState, wallet } from 'shared/lib/wallet'
     import { WalletAccount } from 'shared/lib/typings/wallet'
 
     import { getParticipationOverview, participate, stopParticipating } from 'shared/lib/participation/api'
-    import { STAKING_EVENT_IDS, STAKING_PARTICIPATIONS } from 'shared/lib/participation/constants'
+    import { STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
     import {
         canAccountParticipate,
         canParticipate,
-        getStakedFunds, getStakingEventFromAirdrop,
+        getStakedFunds,
         getUnstakedFunds,
         isAccountPartiallyStaked,
         isAccountStaked,
@@ -35,21 +35,19 @@
         stakedAmount,
         stakingEventState
     } from 'shared/lib/participation/stores'
-    import { Participation, ParticipationAction, StakingAirdrop } from 'shared/lib/participation/types'
+    import { Participation, ParticipationAction } from 'shared/lib/participation/types'
 
     export let locale: Locale
 
     export let isPerformingAction = false
     export let shouldParticipateOnMount = false
-    export let airdropSelections: StakingAirdrop[] = []
     export let participations: Participation[] = []
-    console.log('PARTs: ', participations)
 
     let canStake
     $: canStake = canParticipate($stakingEventState)
 
     let accounts = get($wallet.accounts)
-    let hasStakedAccounts = $stakedAccounts.length > 0
+    const hasStakedAccounts = $stakedAccounts.length > 0
 
     $: $stakedAccounts, async () => await getParticipationOverview()
     $: $accountToParticipate, async () => await getParticipationOverview()
@@ -226,7 +224,7 @@
                 <div class="w-full space-x-4 px-5 py-3 flex flex-row justify-between items-center">
                     {#if isAccountStaked(account?.id)}
                         <div
-                            class="bg-{$accountToParticipate?.id === account?.id && $accountToParticipate && $participationAction && $participationAction !== ParticipationAction.Unstake ? 'yellow-600' : 'green-100'} rounded-2xl"
+                            class="bg-green-100 rounded-2xl"
                         >
                             <Icon icon="success-check" width="18" height="18" classes="text-white" />
                         </div>
