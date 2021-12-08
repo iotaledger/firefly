@@ -12,6 +12,7 @@ import type {
     ParticipationEvent,
     ParticipationOverviewResponse
 } from './types'
+import { resetParticipation } from './participation'
 
 
 /**
@@ -31,6 +32,7 @@ export function getParticipationOverview(): Promise<void> {
                 resolve()
             },
             onError(error) {
+                resetParticipation()
                 console.error(error)
 
                 reject(error)

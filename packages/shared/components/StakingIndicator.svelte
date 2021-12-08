@@ -5,8 +5,13 @@
     import { stakedAccounts, stakingEventState } from 'shared/lib/participation/stores'
     import { ParticipationEventState } from 'shared/lib/participation/types'
 
+    let indicatorIcon
     $: indicatorIcon = getIndicatorIcon($stakingEventState, $stakedAccounts.length > 0)
+
+    let indicatorText
     $: indicatorText = getLocalizedIndicatorText($stakingEventState, $stakedAccounts.length > 0)
+
+    let tooltipText
     $: tooltipText = getLocalizedTooltipText($stakingEventState, $stakedAccounts.length > 0)
 
     let showTooltip = false

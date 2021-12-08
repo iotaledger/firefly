@@ -10,7 +10,7 @@
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { wallet } from 'shared/lib/wallet'
 
-    import { canAccountParticipate, canParticipate } from 'shared/lib/participation'
+    import { canAccountParticipate } from 'shared/lib/participation'
     import {
         accountToParticipate,
         partiallyStakedAccounts,
@@ -28,9 +28,6 @@
 
     let showSpinner
     $: showSpinner = !$popupState.active && $participationAction && $accountToParticipate
-
-    let canStake
-    $: canStake = canParticipate($stakingEventState)
 
     let canStakeAnAccount
     $: canStakeAnAccount = get($wallet.accounts).filter((wa) => canAccountParticipate(wa)).length > 0
@@ -125,7 +122,7 @@
     </div>
     <Button
         classes="w-full text-14"
-        disabled={!canStake || showSpinner}
+        disabled={showSpinner}
         caution={isStaked && isPartiallyStaked}
         secondary={isStaked && !isPartiallyStaked}
         onClick={() => canParticipateWithNode ? handleStakeFundsClick() : showAppNotification({ type: 'warning', message: localize('error.node.pluginNotAvailable', { values: { nodePlugin: NodePlugin.Participation } }) })}

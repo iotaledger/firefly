@@ -109,7 +109,7 @@ const getAssemblyTokenMultiplier = (denomination: AssemblyDenomination): number 
     }
 }
 
-const formatStakingAirdropReward = (airdrop: StakingAirdrop, amount: number, decimalPlaces: number): string => {
+export const formatStakingAirdropReward = (airdrop: StakingAirdrop, amount: number, decimalPlaces: number): string => {
     switch (airdrop) {
         case StakingAirdrop.Assembly: {
             const absAmount = Math.abs(amount)
