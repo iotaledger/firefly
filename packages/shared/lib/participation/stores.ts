@@ -104,23 +104,33 @@ export const partiallyStakedAmount: Readable<number> = derived(
 )
 
 /**
- * The amount of funds across all accounts that are
- * currently staked.
+ * The amount of funds that are currently staked. This amount may differ
+ * between airdrops, so we pick the highest number (this is only possible
+ * because the same funds may be staked for both airdrops).
  */
 export const stakedAmount: Readable<number> = derived(
     participationOverview,
-    (overview) =>
-        overview.reduce((total, accountOverview) => total + accountOverview?.shimmerStakedFunds, 0)
+    (overview) => {
+        const assemblyStakedFunds = overview.reduce((total, accountOverview) => total + accountOverview?.assemblyStakedFunds, 0)
+        const shimmerStakedFunds = overview.reduce((total, accountOverview) => total + accountOverview?.shimmerStakedFunds, 0)
+
+        return Math.max(assemblyStakedFunds, shimmerStakedFunds)
+    }
 )
 
 /**
- * The amount of funds across all accounts that are
- * currently unstaked.
+ * The amount of funds that are currently unstaked. This amount may differ
+ * between airdrops, so we pick the lowest number (this is only possible
+ * because the same funds may be staked for both airdrops).
  */
 export const unstakedAmount: Readable<number> = derived(
     participationOverview,
-    (overview) =>
-        overview.reduce((total, accountOverview) => total + accountOverview?.shimmerUnstakedFunds, 0)
+    (overview) => {
+        const assemblyUnstakedFunds = overview.reduce((total, accountOverview) => total + accountOverview?.assemblyUnstakedFunds, 0)
+        const shimmerUnstakedFunds = overview.reduce((total, accountOverview) => total + accountOverview?.shimmerUnstakedFunds, 0)
+
+        return Math.min(assemblyUnstakedFunds, shimmerUnstakedFunds)
+    }
 )
 
 /**

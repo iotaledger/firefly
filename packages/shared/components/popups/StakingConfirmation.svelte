@@ -24,7 +24,7 @@
     export let locale: Locale
     export let accountToStake: WalletAccount
 
-    const getRewards = (airdrop: StakingAirdrop): string => <string>estimateStakingAirdropReward(StakingAirdrop[airdrop], accountToStake?.rawIotaBalance, true, 3)
+    const getRewards = (airdrop: StakingAirdrop): string => <string>estimateStakingAirdropReward(StakingAirdrop[airdrop], accountToStake?.rawIotaBalance, true)
 
     const isPartialStake = isAccountPartiallyStaked(accountToStake?.id)
 
@@ -32,8 +32,6 @@
         [StakingAirdrop.Assembly]: true,
         [StakingAirdrop.Shimmer]: true,
     }
-
-    $: airdropSelections
 
     const toggleAirdropSelection = (airdrop: StakingAirdrop): void => {
         airdropSelections[airdrop] = !airdropSelections[airdrop]
