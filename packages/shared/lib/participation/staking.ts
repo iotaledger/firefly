@@ -8,6 +8,9 @@ import type { WalletAccount } from '../typings/wallet'
 import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID, STAKING_AIRDROP_TOKENS, STAKING_EVENT_IDS } from './constants'
 import { partiallyStakedAccounts, participationEvents, participationOverview, stakedAccounts } from './stores'
 import { ParticipationEvent, StakingAirdrop, Participation } from './types'
+import { chunkString, delineateNumber } from '../utils'
+import { getDecimalSeparator } from '../currency'
+import { activeProfile } from '../profile'
 
 /**
  * Determines whether an account is currently being staked or not.
@@ -118,10 +121,12 @@ const formatStakingAirdropReward = (airdrop: StakingAirdrop, amount: number, dec
             else if (denomination === 'm') decimalPlaces = decimalPlaces > 3 ? 3 : decimalPlaces < 0 ? 0 : decimalPlaces
             else if (denomination === 'µ') decimalPlaces = 0
 
-            return `${(amount * multiplier).toFixed(decimalPlaces)} ${denomination}${STAKING_AIRDROP_TOKENS[airdrop]}`
+            const [integer, float] = (amount * multiplier).toFixed(decimalPlaces).split('.')
+            return `${delineateNumber(integer, ',')}${Number(float) > 0 ? '.' + parseFloat(float) : ''} ${denomination}${STAKING_AIRDROP_TOKENS[airdrop]}`
         }
-        case StakingAirdrop.Shimmer:
-            return `${amount} ${STAKING_AIRDROP_TOKENS[airdrop]}`
+        case StakingAirdrop.Shimmer: {
+            return `${delineateNumber(String(amount), ',')} ${STAKING_AIRDROP_TOKENS[airdrop]}`
+        }
         default:
             return '0'
     }

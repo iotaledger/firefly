@@ -106,7 +106,9 @@
             <Text type="p" secondary disabled={!airdropSelections[airdrop]}>{locale('views.staking.confirmation.body')}:</Text>
             <Checkbox bind:checked={airdropSelections[airdrop]} onClick={() => toggleAirdropSelection(airdrop)} classes="my-5" />
             <Text type="p" disabled={!airdropSelections[airdrop]} classes="font-bold text-lg">
-                {airdropSelections[airdrop] ? getRewards(capitalize(airdrop)) : estimateStakingAirdropReward(airdrop, 0, true, 0)}
+                {(airdropSelections[airdrop] ? getRewards(capitalize(airdrop)) : estimateStakingAirdropReward(airdrop, 0, true, 0)).split(' ')[0]}
+            </Text><Text type="p" secondary disabled={!airdropSelections[airdrop]} classes="font-bold text-lg">
+                {(airdropSelections[airdrop] ? getRewards(capitalize(airdrop)) : estimateStakingAirdropReward(airdrop, 0, true, 0)).split(' ')[1]}
             </Text>
         </div>
     {/each}

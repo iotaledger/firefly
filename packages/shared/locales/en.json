@@ -965,6 +965,8 @@
         "transferBroadcasting": "Broadcasting transaction",
         "transferComplete": "Transfer complete",
         "generatingReceiveAddress": "Generating receive address",
+        "broadcasting": "Broadcasting",
+        "confirming": "Confirming",
         "creatingAccount": "Creating wallet, please wait...",
         "updatingAccount": "Updating wallet, please wait...",
         "accountSyncing": "Wallet is syncing",

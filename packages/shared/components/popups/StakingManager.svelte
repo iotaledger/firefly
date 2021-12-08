@@ -176,7 +176,7 @@
         if ($isSoftwareProfile) {
             checkStronghold(_unstake)
         } else {
-            _unstake()
+            void _unstake()
         }
     }
 
