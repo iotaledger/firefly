@@ -5,10 +5,13 @@
     import { participationOverview, stakedAccounts, stakingEventState } from 'shared/lib/participation/stores'
     import { ParticipationEventState } from 'shared/lib/participation/types'
 
+    let accountOverviewBelowMinimum
+    $: accountOverviewBelowMinimum = $participationOverview.find((apo) => apo.participations.length > 0 && (apo.assemblyRewardsBelowMinimum > 0 || apo.shimmerRewardsBelowMinimum > 0)) !== undefined
+
     let isBelowMinimumStakingRewards
-    $: isBelowMinimumStakingRewards = $stakingEventState === ParticipationEventState.Holding &&
-        $stakedAccounts.length > 0 &&
-        $participationOverview.find((apo) => apo.participations.length > 0 && (apo.assemblyRewardsBelowMinimum > 0 || apo.shimmerRewardsBelowMinimum > 0)) !== undefined
+    $: isBelowMinimumStakingRewards = accountOverviewBelowMinimum &&
+        $stakingEventState === ParticipationEventState.Holding &&
+        $stakedAccounts.length > 0
 
     let indicatorIcon
     $: indicatorIcon = getIndicatorIcon($stakingEventState, $stakedAccounts.length > 0)
@@ -110,7 +113,11 @@
     on:mouseleave={toggleTooltip}
 >
     <div bind:this={indicatorBox} class="ml-2 mr-1">
-        <Icon icon="info-filled" classes="fill-current text-gray-600 transform translate-y-1" />
+        {#if isBelowMinimumStakingRewards}
+            <Icon icon='exclamation' width=18 height=18 classes="mr-1 fill-current text-black" />
+        {:else}
+            <Icon icon='info-filled' classes="fill-current text-gray-600 transform translate-y-1" />
+        {/if}
     </div>
     <Text type="p">{indicatorText}</Text>
     <Icon icon={indicatorIcon} classes="ml-2 mr-1 fill-current text-{isBelowMinimumStakingRewards ? 'yellow-700' : 'blue-500'}" />
