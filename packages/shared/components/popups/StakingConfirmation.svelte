@@ -81,35 +81,38 @@
 
 <button
     on:click={handleBackClick}
-    class="absolute top-6 left-8 text-gray-800 dark:text-white focus:text-blue-500"
+    class="absolute top-5 left-8 text-gray-800 dark:text-white focus:text-blue-500"
 >
-    <Text type="p" classes="font-extrabold text-xl">←</Text>
+    <Text type="p" classes="text-xl">&lt;</Text>
 </button>
 <Text type="h3" classes="mb-2 text-center font-extrabold">{accountToStake.alias}</Text>
 <div class="flex flex-col">
     <div class="absolute flex flex-col self-center text-center transform translate-y-16">
-        <Text type="p" highlighted classes="text-lg">{locale('views.staking.confirmation.title')}</Text>
+        <Text type="p" highlighted classes="text-lg">{locale('popups.stakingConfirmation.title')}</Text>
         <Text type="p" overrideColor classes="text-2xl font-extrabold text-gray-800">
             {isPartialStake ? formatUnitBestMatch(getUnstakedFunds(accountToStake)) : accountToStake.balance}
         </Text>
     </div>
-    <Illustration illustration="staking-confirmation" classes="mt-2 mb-6 rounded-2xl" />
+    <Illustration illustration="staking-confirmation" classes="my-2 rounded-2xl" />
+    <Text type="p" secondary classes="text-center mt-3 mb-6">
+        {locale('popups.stakingConfirmation.body')}
+    </Text>
 </div>
 <div class="flex flex-row justify-between items-center mb-6 space-x-2">
     {#each Object.keys(StakingAirdrop).map((sa) => sa.toLowerCase()) as airdrop}
         <div
-            on:click={!activeAirdrops.includes(airdrop) ? () => {} : () => toggleAirdropSelection(airdrop)}
+            on:click={(activeAirdrops.length > 0 && !activeAirdrops.includes(airdrop)) ? () => {} : () => toggleAirdropSelection(airdrop)}
             class="p-4 w-1/2 flex flex-col items-center text-center border border-1 border-solid border-gray-300 rounded-xl {activeAirdrops?.length && !activeAirdrops?.includes(airdrop) ? 'cursor-default' : 'cursor-pointer hover:bg-blue-50 hover:border-blue-500 focus:border-blue-500 focus:bg-blue-50'}"
         >
             <div class="mb-2 flex flex-row justify-center">
-                <Text type="p" disabled={!airdropSelections[airdrop] || !activeAirdrops.includes(airdrop)} classes="font-extrabold text-lg">{capitalize(airdrop)}&nbsp;</Text>
-                <Text type="p" disabled={!airdropSelections[airdrop] || !activeAirdrops.includes(airdrop)} classes="text-lg inline">({STAKING_AIRDROP_TOKENS[airdrop]})</Text>
+                <Text type="p" disabled={!airdropSelections[airdrop] || (activeAirdrops.length > 0 && !activeAirdrops.includes(airdrop))} classes="font-extrabold text-lg">{capitalize(airdrop)}&nbsp;</Text>
+                <Text type="p" disabled={!airdropSelections[airdrop] || (activeAirdrops.length > 0 && !activeAirdrops.includes(airdrop))} classes="text-lg inline">({STAKING_AIRDROP_TOKENS[airdrop]})</Text>
             </div>
-            <Text type="p" secondary disabled={!airdropSelections[airdrop] || !activeAirdrops.includes(airdrop)}>{locale('views.staking.confirmation.body')}:</Text>
-            <Checkbox bind:checked={airdropSelections[airdrop]} onClick={() => toggleAirdropSelection(airdrop)} disabled={!activeAirdrops.includes(airdrop)} classes="my-5" />
-            <Text type="p" disabled={!airdropSelections[airdrop] || !activeAirdrops.includes(airdrop)} classes="font-bold text-lg">
+            <Text type="p" secondary disabled={!airdropSelections[airdrop] || (activeAirdrops.length > 0 && !activeAirdrops.includes(airdrop))}>{locale('popups.stakingConfirmation.estimatedAirdrop')}:</Text>
+            <Checkbox bind:checked={airdropSelections[airdrop]} onClick={() => toggleAirdropSelection(airdrop)} disabled={(activeAirdrops.length > 0 && !activeAirdrops.includes(airdrop))} classes="my-5" />
+            <Text type="p" disabled={!airdropSelections[airdrop] || (activeAirdrops.length > 0 && !activeAirdrops.includes(airdrop))} classes="font-bold text-lg">
                 {(airdropSelections[airdrop] ? getRewards(capitalize(airdrop)) : estimateStakingAirdropReward(airdrop, 0, true, 0)).split(' ')[0]}
-            </Text><Text type="p" secondary disabled={!airdropSelections[airdrop] || !activeAirdrops.includes(airdrop)} classes="font-bold text-lg">
+            </Text><Text type="p" secondary disabled={!airdropSelections[airdrop] || (activeAirdrops.length > 0 && !activeAirdrops.includes(airdrop))} classes="font-bold text-lg">
                 {(airdropSelections[airdrop] ? getRewards(capitalize(airdrop)) : estimateStakingAirdropReward(airdrop, 0, true, 0)).split(' ')[1]}
             </Text>
         </div>

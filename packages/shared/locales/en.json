@@ -543,20 +543,6 @@
                     "name": "Shimmer",
                     "description": "The incentivized staging network to advance major innovations from IOTA. Whatever happens, happens - the future of Shimmer will be up to you. Learn, build, earn and grow together."
                 }
-            },
-            "notice": {
-                "date": "Staking commences Dec 1st",
-                "body": "By locking your funds for staking before the event starts, you will automatically commence active staking when the staking event starts (no additional rewards will be earned).",
-                "ok": "Ok, I understand"
-            },
-            "chooseWallet": {
-                "title": "Choose which wallets you want to stake",
-                "body": "When you stake a wallet, your funds are cocked. You can unlock these wallets at any time, but you won’t get full staking rewards."
-            },
-            "confirmation": {
-                "title": "You're about to stake",
-                "body": "Estimated airdrop",
-                "next": "Next"
             }
         }
     },
@@ -747,6 +733,11 @@
             "typePassword": "Type your password to allow exporting"
 
         },
+        "stakingNotice": {
+            "date": "Staking commences Dec 1st",
+            "body": "By locking your funds for staking before the event starts, you will automatically commence active staking when the staking event starts (no additional rewards will be earned).",
+            "ok": "Ok, I understand"
+        },
         "stakingManager": {
             "titleWithStake": "Manage your stake wallets",
             "titleWithNoStake": "Choose which wallets you want to stake",
@@ -756,6 +747,11 @@
             "hasPartiallyStaked": "Congratulations! \uD83C\uDF89The rest of your funds have been staked.",
             "hasUnstaked": "Your funds have been unstaked.",
             "hasPartiallyUnstaked": "Your remaining funds have been unstaked."
+        },
+        "stakingConfirmation": {
+            "title": "You're about to stake",
+            "body": "If you do not wish to participate in both airdrops, you may opt-out by deselecting below. Re-stake at any time to opt back in.",
+            "estimatedAirdrop": "Estimated airdrop"
         }
     },
     "charts": {

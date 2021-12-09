@@ -36,19 +36,6 @@
             opacity: 0;
         }
     }
-
-    .animate--pulse {
-        animation: -pulse 2500ms cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    }
-
-    @keyframes -pulse {
-        0%, 100% {
-            opacity: 1;
-        }
-        50% {
-            opacity: 0.7;
-        }
-    }
 </style>
 
 
@@ -60,7 +47,7 @@
             {#if isStaked}
                 <span id="indicator-ping" class="animate--ping absolute inline-flex h-full w-full rounded-full bg-{isStaked ? 'green' : 'red'}-400 opacity-75"></span>
             {/if}
-            <span id="indicator-pulse" class="{isStaked ? '' : 'animate--pulse'} relative inline-flex rounded-full h-2 w-2 bg-{isStaked ? 'green' : 'red'}-600"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-{isStaked ? 'green' : 'red'}-600"></span>
         </span>
         <div
             class="pl-10 pr-5 py-2 rounded-2xl bg-opacity-20 bg-white dark:bg-white"
