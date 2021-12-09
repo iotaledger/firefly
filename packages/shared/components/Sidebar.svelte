@@ -58,10 +58,10 @@
     <nav class="flex flex-grow flex-col items-center justify-between">
         <div class="flex flex-col">
             <button class="mb-8 {$dashboardRoute === Tabs.Wallet ? 'text-blue-500' : 'text-gray-500'}" on:click={openWallet}>
-                <Icon icon="wallet" />
+                <Icon width="24" height="24" icon="wallet" />
             </button>
             <button class="{$dashboardRoute === Tabs.Staking ? 'text-blue-500' : 'text-gray-500'} relative" on:click={openStaking}>
-                <Icon icon="tokens" />
+                <Icon width="24" height="24" icon="tokens" />
                 {#if $isStakingFeatureNew}
                     <span class="absolute -top-2 -left-2 flex justify-center items-center h-3 w-3">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-300 opacity-75"></span>
@@ -72,7 +72,7 @@
         </div>
         <span class="flex flex-col items-center">
             <button class="mb-7 health-status" on:click={() => (showNetwork = true)}>
-                <Icon icon="network" classes="text-{NETWORK_HEALTH_COLORS[healthStatus]}-500" />
+                <Icon width="24" height="24" icon="network" classes="text-{NETWORK_HEALTH_COLORS[healthStatus]}-500" />
             </button>
             <button
                 class="w-8 h-8 flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100"
