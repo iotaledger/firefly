@@ -2,8 +2,16 @@
     import { tick } from 'svelte'
     import { Icon, Text, Tooltip } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
-    import { stakedAccounts, stakingEventState } from 'shared/lib/participation/stores'
+    import { participationOverview, stakedAccounts, stakingEventState } from 'shared/lib/participation/stores'
     import { ParticipationEventState } from 'shared/lib/participation/types'
+
+    let accountOverviewBelowMinimum
+    $: accountOverviewBelowMinimum = $participationOverview.find((apo) => apo.participations.length > 0 && (apo.assemblyRewardsBelowMinimum > 0 || apo.shimmerRewardsBelowMinimum > 0)) !== undefined
+
+    let isBelowMinimumStakingRewards
+    $: isBelowMinimumStakingRewards = accountOverviewBelowMinimum &&
+        $stakingEventState === ParticipationEventState.Holding &&
+        $stakedAccounts.length > 0
 
     let indicatorIcon
     $: indicatorIcon = getIndicatorIcon($stakingEventState, $stakedAccounts.length > 0)
@@ -68,7 +76,7 @@
                 stateText = 'commencing'
                 break
             case ParticipationEventState.Holding:
-                stateText = isStaked ? 'active' : 'inactive'
+                stateText = isStaked ? isBelowMinimumStakingRewards ? 'minRewards' : 'active' : 'inactive'
                 break
             case ParticipationEventState.Ended:
                 stateText = 'ended'
@@ -91,25 +99,28 @@
             ? isStaked ? 'active' : 'inactive'
             : $stakingEventState
 
+        const localePath = isBelowMinimumStakingRewards ? 'minRewards' : `${stateText}${isHoldingPhase ? 'Holding' : ''}`
         return {
-            title: localize(`tooltips.stakingIndicator.${stateText}${isHoldingPhase ? 'Holding' : ''}.title`),
-            body: localize(`tooltips.stakingIndicator.${stateText}${isHoldingPhase ? 'Holding' : ''}.body`),
+            title: localize(`tooltips.stakingIndicator.${localePath}.title`),
+            body: localize(`tooltips.stakingIndicator.${localePath}.body`, isBelowMinimumStakingRewards ? { values: { duration: '0 days' } } : {}),
         }
     }
 </script>
 
 <div
-    class="px-3 py-2 flex flex-row justify-between items-center rounded-2xl bg-blue-100 dark:bg-gray-800"
+    class="px-3 py-2 flex flex-row justify-between items-center rounded-2xl {isBelowMinimumStakingRewards ? 'bg-yellow-200' : 'bg-blue-100'} dark:bg-gray-800"
     on:mouseenter={toggleTooltip}
     on:mouseleave={toggleTooltip}
 >
-    <Icon icon={indicatorIcon} classes="fill-current text-blue-500" />
-    <Text type="p" classes="mx-3">{indicatorText}</Text>
-    <div
-        bind:this={indicatorBox}
-    >
-        <Icon icon="info-filled" classes="fill-current text-gray-600 transform translate-y-1" />
+    <div bind:this={indicatorBox} class="ml-2 mr-1">
+        {#if isBelowMinimumStakingRewards}
+            <Icon icon='exclamation' width=18 height=18 classes="mr-1 fill-current text-black" />
+        {:else}
+            <Icon icon='info-filled' classes="fill-current text-gray-600 transform translate-y-1" />
+        {/if}
     </div>
+    <Text type="p">{indicatorText}</Text>
+    <Icon icon={indicatorIcon} classes="ml-2 mr-1 fill-current text-{isBelowMinimumStakingRewards ? 'yellow-700' : 'blue-500'}" />
 </div>
 {#if showTooltip}
     <Tooltip {parentTop} {parentLeft} {parentWidth} position="right">

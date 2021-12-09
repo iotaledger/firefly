@@ -857,7 +857,7 @@ export const initialiseListeners = (): void => {
             const { balanceOverview, accounts } = get(wallet)
             const { accountId, message } = response.payload
             const account = get(accounts).find((account) => account.id === accountId)
-            // if (!account || !message) return
+            if (!account || !message) return
 
             if (message.payload.type === 'Transaction') {
                 const { essence } = message.payload.data
@@ -885,7 +885,7 @@ export const initialiseListeners = (): void => {
                 showSystemNotification({
                     type: 'info',
                     message: notificationMessage,
-                    contextData: { type: 'valueTx', accountId: account.id },
+                    contextData: { type: 'valueTx', accountId, },
                 })
             } else if (message.payload.type === 'Milestone') {
                 // Update account with new message

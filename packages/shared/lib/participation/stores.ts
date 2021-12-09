@@ -2,6 +2,7 @@ import { derived, get, Readable, writable } from 'svelte/store'
 
 import { persistent } from '../helpers'
 import { networkStatus } from '../networkStatus'
+import { NodePlugin } from '../typings/node'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
 import { wallet } from '../wallet'
 import type { WalletAccount } from '../typings/wallet'
@@ -15,7 +16,6 @@ import {
     PendingParticpation,
     ParticipateResponsePayload,
 } from './types'
-import { NodePlugin } from '../typings/node'
 
 /**
  * The store for keeping track of pending participations.
@@ -81,30 +81,6 @@ export const stakedAccounts: Readable<WalletAccount[]> = derived(
 )
 
 /**
- * The store for accounts that contain partially staked funds.
- *
- * Accounts are added if upon receiving a new transaction they
- * are currently staked (checks stakedAccounts). Accounts are removed
- * within the staking flow.
- */
-export const partiallyStakedAccounts: Readable<WalletAccount[]> = derived(
-    [participationOverview],
-    ([$participationOverview]) =>
-        $participationOverview
-            .filter((apo) => apo.shimmerStakedFunds > 0 && apo.shimmerUnstakedFunds > 0)
-            .map((apo) => get(get(wallet).accounts).find((wa) => wa.index === apo.accountIndex))
-)
-
-export const partiallyStakedAmount: Readable<number> = derived(
-    [participationOverview, partiallyStakedAccounts],
-    ([$participationOverview, $partiallyStakedAccounts]) =>
-        $participationOverview
-            .filter((apo) => $partiallyStakedAccounts.map((psa) => psa.index).includes(apo.accountIndex))
-            .map((apo) => apo.shimmerUnstakedFunds)
-            .reduce((total, current) => total + current, 0)
-)
-
-/**
  * The amount of funds that are currently staked. This amount may differ
  * between airdrops, so we pick the highest number (this is only possible
  * because the same funds may be staked for both airdrops).
@@ -132,6 +108,30 @@ export const unstakedAmount: Readable<number> = derived(
 
         return Math.min(assemblyUnstakedFunds, shimmerUnstakedFunds)
     }
+)
+
+/**
+ * The store for accounts that contain partially staked funds.
+ *
+ * Accounts are added if upon receiving a new transaction they
+ * are currently staked (checks stakedAccounts). Accounts are removed
+ * within the staking flow.
+ */
+export const partiallyStakedAccounts: Readable<WalletAccount[]> = derived(
+    [participationOverview],
+    ([$participationOverview]) =>
+        $participationOverview
+            .filter((apo) => apo.shimmerStakedFunds > 0 && apo.shimmerUnstakedFunds > 0)
+            .map((apo) => get(get(wallet).accounts).find((wa) => wa.index === apo.accountIndex))
+)
+
+export const partiallyStakedAmount: Readable<number> = derived(
+    [participationOverview, partiallyStakedAccounts],
+    ([$participationOverview, $partiallyStakedAccounts]) =>
+        $participationOverview
+            .filter((apo) => $partiallyStakedAccounts.map((psa) => psa.index).includes(apo.accountIndex))
+            .map((apo) => apo.shimmerUnstakedFunds)
+            .reduce((total, current) => total + current, 0)
 )
 
 /**

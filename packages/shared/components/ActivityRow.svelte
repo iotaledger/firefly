@@ -171,10 +171,19 @@
 >
     <div class="w-8 flex flex-row justify-center items-center">
         {#if hasCachedMigrationTx || milestonePayload}
-            <Icon boxed classes="text-white" boxClasses="bg-gray-500 dark:bg-gray-900" icon="double-chevron-right" />
+            <Icon 
+                width="24" 
+                height="24" 
+                boxed 
+                classes="text-white" 
+                boxClasses="bg-gray-500 dark:bg-gray-900" 
+                icon="double-chevron-right" 
+            />
         {:else if isParticipationPayload(txPayload)}
             <Icon
                 boxed
+                width="24" 
+                height="24"
                 classes="text-white"
                 boxClasses="bg-{getParticipationColor(ParticipationAction.Stake)}"
                 icon={getParticipationIcon(ParticipationAction.Stake)}

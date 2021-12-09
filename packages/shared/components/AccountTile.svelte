@@ -102,28 +102,23 @@
     class="size-{size} group rounded-xl {isStaked ? 'bg-yellow-100 hover:bg-yellow-400' : `bg-gray-100 dark:bg-gray-900 hover:bg-${color}-500`} font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'} {hidden ? 'opacity-50' : ''}"
     {disabled}
 >
-    <div class="mb-3 w-full h-auto flex flex-row justify-between items-center space-x-1.5">
-        <div class="w-3/4 h-full flex flex-row items-center">
+    <div class="mb-2 w-full flex flex-row justify-between items-start space-x-1.5">
+        <div class="flex flex-row space-x-1.5 items-start">
             {#if isPartiallyStaked}
                 <div
                     bind:this={iconBox}
                     on:mouseenter={togglePartialStakeTooltip}
-                    on:mouseleave={togglePartialStakeTooltip}
-                    class="self-center mr-2"
-                >
-                    <Icon icon="exclamation" width="16" height="16" classes="fill-current text-yellow-700" />
+                    on:mouseleave={togglePartialStakeTooltip}>
+                    <Icon icon="exclamation" width="16" height="16" classes="mt-0.5 fill-current text-gray-800" />
                 </div>
             {:else if isStaked}
-                <div class="self-end mr-2">
-                    <Icon icon="tokens" width="16" height="16" classes="fill-current text-blue-500" />
-                </div>
+                <Icon icon="tokens" width="16" height="16" classes="mt-0.5 fill-current text-gray-800" />
             {/if}
             <Text
                 bold
                 smaller={size === 's'}
                 overrideColor
-                classes="inline text-gray-800 dark:text-white {isStaked ? '' : 'group-hover:text-white'} overflow-hidden overflow-ellipsis"
-            >
+                classes="inline text-gray-800 {isStaked ? '' : 'dark:text-white group-hover:text-white'} overflow-hidden overflow-ellipsis">
                 {getName()}
             </Text>
         </div>
@@ -132,21 +127,19 @@
                 icon={airdrop}
                 classes="fill-current text-gray-{disabled ? '500' : '400'} dark:text-gray-700"
                 width={size === 's' ? 13 : 18}
-                height={size === 's' ? 13 : 18}
-            />
+                height={size === 's' ? 13 : 18} />
         {:else if ledger}
             <Icon
                 icon="ledger"
                 classes="fill-current text-gray-400 dark:text-gray-700"
                 width={size === 's' ? 13 : 18}
-                height={size === 's' ? 13 : 18}
-            />
+                height={size === 's' ? 13 : 18} />
         {/if}
     </div>
     <div
         class="flex {size === 'l' ? 'flex-row space-x-4' : 'flex-col space-y-1'} justify-between w-full flex-{size === 'l' ? 'nowrap' : 'wrap'}"
     >
-        <Text smaller overrideColor classes="block text-gray-800 dark:text-white {isStaked ? '' : 'group-hover:text-white'}">
+        <Text smaller overrideColor classes="block text-gray-800 {isStaked ? '' : 'dark:text-white group-hover:text-white'}">
             {balance}
             {#if airdrop}
                 {STAKING_AIRDROP_TOKENS[airdrop.toLowerCase()]}
