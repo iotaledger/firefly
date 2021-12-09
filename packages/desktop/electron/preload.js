@@ -98,8 +98,28 @@ try {
                     if (result.canceled) {
                         return null
                     }
-
                     return result.filePath
+                }),
+
+        exportTransactionHistory: async (defaultPath, contents) =>
+            ipcRenderer
+                .invoke('show-save-dialog', {
+                    properties: ['createDirectory', 'showOverwriteConfirmation'],
+                    defaultPath,
+                    filters: [{ name: 'CSV Files', extensions: ['csv'] }],
+                })
+                .then((result) => {
+                    if (result.canceled) {
+                        return null
+                    }
+                    return new Promise((resolve, reject) => {
+                        try {
+                            fs.writeFileSync(result.filePath, contents)
+                            resolve(result.filePath)
+                        } catch (err) {
+                            reject(err)
+                        }
+                    })
                 }),
 
         /**
@@ -330,13 +350,24 @@ try {
             let listeners = eventListeners[event]
             if (!listeners) {
                 listeners = eventListeners[event] = []
-                ipcRenderer.on(event, (e, args) => {
-                    listeners.forEach((call) => {
-                        call(args)
-                    })
-                })
             }
             listeners.push(callback)
+            ipcRenderer.removeAllListeners(event)
+            ipcRenderer.on(event, (e, args) => {
+                listeners.forEach((call) => {
+                    call(args)
+                })
+            })
+        },
+        /**
+         * Remove native window wallet event listener
+         * @param {string} event - Target event name
+         * @param {function} callback - Event trigger callback
+         * @returns {undefined}
+         */
+        removeListenersForEvent: (event) => {
+            eventListeners[event] = []
+            ipcRenderer.removeAllListeners(event)
         },
         /**
          * Save the recovery kit

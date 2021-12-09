@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Animation, Button, ButtonRadio, OnboardingLayout, Text } from 'shared/components'
-    import { appSettings } from 'shared/lib/appSettings'
+    import { appSettings, AppTheme, shouldBeDarkMode } from 'shared/lib/appSettings'
     import { createEventDispatcher, onMount } from 'svelte'
     import { Locale } from 'shared/lib/typings/i18n'
 
@@ -14,15 +14,15 @@
         [1, 200],
     ]
 
-    let darkModeEnabled = $appSettings.darkMode
-
     let _clonedVariable = undefined
     let segments = BLINK_SEGMENTS
 
-    $: $appSettings.darkMode = darkModeEnabled
+    let appTheme: AppTheme = $appSettings.theme
+    $: $appSettings.theme = appTheme
+    $: $appSettings.darkMode = shouldBeDarkMode($appSettings.theme)
 
-    $: if (_clonedVariable !== undefined && _clonedVariable !== darkModeEnabled) {
-        _clonedVariable = darkModeEnabled // ghetto reactive implementation
+    $: if (_clonedVariable !== undefined && _clonedVariable !== appTheme) {
+        _clonedVariable = appTheme // ghetto reactive implementation
         segments = SWITCH_SEGMENTS
     }
 
@@ -36,7 +36,7 @@
     }
 
     onMount(() => {
-        _clonedVariable = darkModeEnabled
+        _clonedVariable = appTheme
     })
 </script>
 
@@ -48,10 +48,9 @@
             <Text type="h2" classes="mb-5">{locale('views.appearance.title')}</Text>
             <Text type="p" secondary classes="mb-8">{locale('views.appearance.body')}</Text>
             <Text type="p" secondary classes="mb-2 mt-4" smaller>{locale('general.appearance')}</Text>
-            <ButtonRadio icon="theme-light" value={false} bind:group={darkModeEnabled}>
-                {locale('general.lightTheme')}
-            </ButtonRadio>
-            <ButtonRadio icon="theme-dark" value={true} bind:group={darkModeEnabled}>{locale('general.darkTheme')}</ButtonRadio>
+            <ButtonRadio icon="theme-light" value={'light'} bind:group={appTheme}>{locale('general.lightTheme')}</ButtonRadio>
+            <ButtonRadio icon="theme-dark" value={'dark'} bind:group={appTheme}>{locale('general.darkTheme')}</ButtonRadio>
+            <ButtonRadio icon="settings" value={'system'} bind:group={appTheme}>{locale('general.systemTheme')}</ButtonRadio>
         </div>
         <div slot="leftpane__action">
             <Button onClick={() => handleContinueClick()} classes="w-full">{locale('actions.continue')}</Button>

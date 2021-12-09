@@ -1,14 +1,14 @@
 [package]
 name = "wallet-actor-system"
 version = "0.1.0"
-authors = ["Lucas Nogueira <lucas.nogueira@iota.org>"]
+authors = ["IOTA Stiftung"]
 edition = "2018"
 exclude = ["/bindings", "/api-wrapper"]
 
 [dependencies]
 tokio = { version = "1.3", features = ["full"] }
 once_cell = "1.5.0"
-iota-wallet = { git = "https://github.com/iotaledger/wallet.rs", rev = "8c1af4496cfecc6e17abc188ecc1a6b08e0b27b5", default-features = false, features = ["stronghold", "ledger-nano", "ledger-nano-simulator"] }
+iota-wallet = { git = "https://github.com/iotaledger/wallet.rs", rev = "32c9667abca5635b9267bc454b1b5cfe6392af92", default-features = false, features = ["stronghold", "ledger-nano", "ledger-nano-simulator"] }
 serde_json = "1.0"
 riker = "0.4"
 serde = "1.0"

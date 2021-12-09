@@ -13,7 +13,7 @@
     export let message: string
     export let subMessage: string
     export let progress: number
-    export let actions: Action[]
+    export let actions: Action[] = []
 
     const TOAST_STYLE = {
         info: {
@@ -64,7 +64,7 @@
         {/if}
         {#if subMessage}<span class="flex text-11 text-{TOAST_STYLE[type].subMessageColor}">{subMessage}</span>{/if}
     </div>
-    {#if actions}
+    {#if actions.length > 0}
         <div class="flex flex-col" style="min-width:90px">
             {#each actions as action}
                 <button

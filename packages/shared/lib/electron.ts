@@ -23,7 +23,8 @@ export interface INotificationManager {
 }
 
 export interface IDeepLinkManager {
-    requestDeepLink(): void
+    checkDeepLinkRequestExists(): void
+    clearDeepLinkRequest(): void
 }
 
 export interface IPincodeManager {
@@ -40,6 +41,7 @@ interface ElectronEventMap {
     'menu-error-log': void
     'menu-diagnostics': void
     'log-error': void
+    'deep-link-request': void
     'deep-link-params': string
     'version-details': VersionDetails
     'version-progress': NativeProgress
@@ -62,6 +64,7 @@ interface ILedger {
 export interface IElectron {
     ledger: ILedger
     getStrongholdBackupDestination(defaultPath: string): Promise<string | null>
+    exportTransactionHistory(defaultPath: string, contents: string): Promise<string | null>
     exportMigrationLog(sourcePath: string, defaultFileName: string): Promise<boolean | null>
     exportLedgerMigrationLog(content: unknown, defaultFileName: string): Promise<boolean | null>
     getUserDataPath(): Promise<string>
@@ -99,6 +102,7 @@ export interface IElectron {
     validateSeedVault(buffer: unknown): Promise<boolean>
 
     onEvent<K extends keyof ElectronEventMap>(eventName: K, callback: (param: ElectronEventMap[K]) => void)
+    removeListenersForEvent<K extends keyof ElectronEventMap>(eventName: K)
 }
 
 export const Electron: IElectron = window['Electron']

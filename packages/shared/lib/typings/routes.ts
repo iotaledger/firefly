@@ -101,22 +101,20 @@ export enum SecuritySettings {
 }
 
 export enum AdvancedSettings {
-    NodeSettings = 'nodeSettings',
-    ProofOfWork = 'proofOfWork',
+    NetworkConfiguration = 'networkConfiguration',
     // DeveloperMode = 'developerMode',
-    // DeepLinks = 'deepLinks',
+    DeepLinks = 'deepLinks',
     BalanceFinder = 'balanceFinder',
     HiddenAccounts = 'hiddenAccounts',
     ErrorLog = 'errorLog',
     Diagnostics = 'diagnostics',
     MigrateLedgerIndex = 'migrateLedgerIndex',
-    // TODO: Implement and enable
-    // StateExport = 'stateExport',
+    TransactionHistory = 'transactionHistory',
 }
 
 export enum AdvancedSettingsNoProfile {
     // DeveloperMode = 'developerMode',
-    // DeepLinks = 'deepLinks',
+    DeepLinks = 'deepLinks',
     ErrorLog = 'errorLog',
     Diagnostics = 'diagnostics',
 }

@@ -62,15 +62,14 @@ import { NodeAuth } from '../../../shared/lib/typings/node'
 // @ts-ignore
 import addon = require('../index.node')
 
-const mailbox = []
 const onMessageListeners: ((payload: MessageResponse) => void)[] = []
 
 function _poll(
     runtime: typeof addon.ActorSystem,
-    cb: (error: string, data: unknown) => void,
+    cb: (error: Error, data: unknown) => void,
     shouldStop: () => boolean
 ) {
-    runtime.poll((err: string, data: string) => {
+    runtime.poll((err: Error, data: string) => {
         cb(err, err ? null : JSON.parse(data))
         if (!shouldStop()) {
             _poll(runtime, cb, shouldStop)
@@ -98,8 +97,9 @@ export function init(
     _poll(
         runtime,
         (error, data) => {
+            // Swallow error thrown when poll returns after the actor is destroyed
+            if (error && error.message.includes('receiving on a closed channel')) return
             const message = error || data
-            mailbox.push(message)
             // @ts-ignore
             onMessageListeners.forEach((listener) => listener(message))
         },

@@ -4,6 +4,7 @@ const path = require('path')
 const os = require('os')
 const fs = require('fs')
 const Sentry = require('@sentry/electron')
+const { execSync } = require('child_process')
 const Keychain = require('./lib/keychain')
 const { initMenu, contextMenu } = require('./lib/menu')
 
@@ -192,7 +193,7 @@ function createWindow() {
             callback(request.url.replace('iota:/', app.getAppPath()).split('?')[0].split('#')[0])
         })
     } catch (error) {
-        console.log(error) // eslint-disable-line no-console
+        console.error(error)
     }
 
     const mainWindowState = windowStateKeeper('main', 'settings.json')
@@ -361,6 +362,8 @@ ipcMain.handle('get-path', (_e, path) => {
 // Diagnostics
 const getDiagnostics = () => {
     const osXNameMap = new Map([
+        // Source: https://en.wikipedia.org/wiki/Darwin_(operating_system)#Release_history
+        [21, ['Monterey', '12']],
         [20, ['Big Sur', '11']],
         [19, ['Catalina', '10.15']],
         [18, ['Mojave', '10.14']],
@@ -384,12 +387,18 @@ const getDiagnostics = () => {
 
     if (platform === 'darwin') {
         platform = 'macOS'
-        const verSplit = platformVersion.split('.')
-        const num = Number.parseInt(verSplit[0], 10)
-        if (!Number.isNaN(num)) {
-            const [_, version] = osXNameMap.get(num)
-            if (version) {
-                platformVersion = version
+
+        try {
+            platformVersion = execSync('sw_vers -productVersion').toString().trim()
+        } catch (_err) {
+            // Fall back to Darwin version map
+            const verSplit = platformVersion.split('.')
+            const num = Number.parseInt(verSplit[0], 10)
+            if (!Number.isNaN(num)) {
+                const [_, version] = osXNameMap.get(num)
+                if (version) {
+                    platformVersion = version
+                }
             }
         }
     }
@@ -401,7 +410,6 @@ const getDiagnostics = () => {
         { label: 'popups.diagnostics.cpuCount', value: os.cpus().length },
         { label: 'popups.diagnostics.totalMem', value: `${(os.totalmem() / 1048576).toFixed(1)} MB` },
         { label: 'popups.diagnostics.freeMem', value: `${(os.freemem() / 1048576).toFixed(1)} MB` },
-        { label: 'popups.diagnostics.userPath', value: app.getPath('userData') },
     ]
 }
 
@@ -420,7 +428,7 @@ ipcMain.handle('update-app-settings', (_e, settings) => updateSettings(settings)
 /**
  * Define deep link state
  */
-const deepLinkUrl = null
+let deepLinkUrl = null
 
 /**
  * Create a single instance only
@@ -447,40 +455,46 @@ app.on('second-instance', (_e, args) => {
     }
 })
 
-// TODO: re-enable deep links
 /**
  * Register iota:// protocol for deep links
  * Set Firefly as the default handler for iota:// protocol
  */
-// protocol.registerSchemesAsPrivileged([{ scheme: 'iota', privileges: { secure: true, standard: true } }])
-// if (process.defaultApp) {
-//     if (process.argv.length >= 2) {
-//         app.setAsDefaultProtocolClient('iota', process.execPath, [path.resolve(process.argv[1])])
-//     }
-// } else {
-//     app.setAsDefaultProtocolClient('iota')
-// }
+protocol.registerSchemesAsPrivileged([{ scheme: 'iota', privileges: { secure: true, standard: true } }])
+if (process.defaultApp) {
+    if (process.argv.length >= 2) {
+        app.setAsDefaultProtocolClient('iota', process.execPath, [path.resolve(process.argv[1])])
+    }
+} else {
+    app.setAsDefaultProtocolClient('iota')
+}
 
-// /**
-//  * Proxy deep link event to the wallet application
-//  */
-// app.on('open-url', (event, url) => {
-//     event.preventDefault()
-//     deepLinkUrl = url
-//     if (windows.main) {
-//         windows.main.webContents.send('deep-link-params', url)
-//     }
-// })
+/**
+ * Proxy deep link event to the wallet application
+ */
+app.on('open-url', (event, url) => {
+    event.preventDefault()
+    deepLinkUrl = url
+    if (windows.main) {
+        windows.main.webContents.send('deep-link-params', deepLinkUrl)
+        windows.main.webContents.send('deep-link-request')
+    }
+})
 
-// /**
-//  * Proxy deep link event to the wallet application
-//  */
-// ipcMain.on('deep-link-request', () => {
-//     if (deepLinkUrl) {
-//         windows.main.webContents.send('deep-link-params', deepLinkUrl)
-//         deepLinkUrl = null
-//     }
-// })
+/**
+ * Check if a deep link request/event currently exists and has not been cleared
+ */
+ipcMain.on('check-deep-link-request-exists', () => {
+    if (deepLinkUrl) {
+        windows.main.webContents.send('deep-link-params', deepLinkUrl)
+    }
+})
+
+/**
+ * Clear deep link request/event
+ */
+ipcMain.on('clear-deep-link-request', () => {
+    deepLinkUrl = null
+})
 
 /**
  * Proxy notification activated to the wallet application

@@ -10,7 +10,7 @@
     "watch": "tsc --watch",
     "prepublishOnly": "npm run build"
   },
-  "author": "Lucas Nogueira <lucas.nogueira@iota.org>",
+  "author": "IOTA Stiftung",
   "license": "MIT",
   "dependencies": {
     "@capacitor/core": "latest"
