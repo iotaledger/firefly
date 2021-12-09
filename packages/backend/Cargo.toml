@@ -7,7 +7,7 @@ exclude = ["/bindings", "/api-wrapper"]
 
 [dependencies]
 bee-common = { version = "0.4.1", default-features = false }
-iota-wallet = { git = "https://github.com/iotaledger/wallet.rs", rev = "d3d50b21f71f35e2783518c430193a03d68d1627", default-features = false, features = ["stronghold", "ledger-nano", "ledger-nano-simulator"] }
+iota-wallet = { git = "https://github.com/iotaledger/wallet.rs", rev = "35828b87b2a15f05b6db56b7743c3de4a6224c85", default-features = false, features = ["stronghold", "ledger-nano", "ledger-nano-simulator"] }
 log = { version = "0.4.14", default-features = false }
 once_cell = { version = "1.8.0", default-features = false }
 serde = { version = "1.0.130", default-features = false }
