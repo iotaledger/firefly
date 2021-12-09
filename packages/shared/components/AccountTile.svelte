@@ -3,10 +3,11 @@
     import { Icon, Text, Tooltip } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import { STAKING_AIRDROP_TOKENS } from 'shared/lib/participation/constants'
-    import { partiallyStakedAccounts, partiallyStakedAmount, stakedAccounts } from 'shared/lib/participation/stores'
+    import { partiallyStakedAccounts, partiallyStakedAmount, stakedAccounts, stakingEventState } from 'shared/lib/participation/stores'
     import { StakingAirdrop } from 'shared/lib/participation/types'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { ParticipationEventState} from 'shared/lib/participation/types'
 
     export let name = ''
     export let balance = ''
@@ -26,11 +27,14 @@
 
     const _hasAccount = (accounts: WalletAccount[]): boolean => accounts.find((account) => account.alias === name) !== undefined
 
+    let stakingHasEnded
+    $: stakingHasEnded = $stakingEventState === ParticipationEventState.Ended
+
     let isPartiallyStaked = false
-    $: isPartiallyStaked = _hasAccount($partiallyStakedAccounts)
+    $: isPartiallyStaked = _hasAccount($partiallyStakedAccounts) && !stakingHasEnded
 
     let isStaked = false
-    $: isStaked = _hasAccount($stakedAccounts)
+    $: isStaked = _hasAccount($stakedAccounts) && !stakingHasEnded
 
     let showPartialStakeTooltip = false
     let iconBox
