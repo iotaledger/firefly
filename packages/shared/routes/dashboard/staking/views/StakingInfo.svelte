@@ -1,12 +1,13 @@
 <script lang="typescript">
-    import { Button, Illustration, Text } from 'shared/components'
+    import { Illustration, Link, Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { localize } from 'shared/lib/i18n'
     import {
         assemblyStakingRemainingTime,
-        participationOverview, shimmerStakingRemainingTime,
+        participationOverview,
+        shimmerStakingRemainingTime,
         stakedAccounts,
-        stakingEventState
+        stakingEventState,
     } from 'shared/lib/participation/stores'
     import { ParticipationEventState, ParticipationOverview } from 'shared/lib/participation/types'
     import { getBestTimeDuration } from 'shared/lib/time'
@@ -84,13 +85,12 @@
     }
 </style>
 
-<div class="p-8 flex flex-col justify-center items-center w-full h-full bg-gradient-to-t from-blue-400 to-lightblue-500">
+<div
+    class="p-8 flex flex-col justify-center items-center w-full h-full bg-gradient-to-t from-blue-400 to-lightblue-500">
     <Illustration illustration={getIllustration($stakingEventState, $participationOverview)} />
     <div class="w-full mt-4 flex flex-col justify-between items-center text-center">
-        <Text type="p" classes="text-xl">{subHeader}</Text>
-        <Text type="p" classes="mb-2 font-extrabold text-2xl">{header}</Text>
-        <Button onClick={handleLearnMoreClick} secondary outline>
-            <Text type="p">{localize('actions.learnAboutStaking')}</Text>
-        </Button>
+        <Text type="p" bigger classes="text-gray-900 mb-1" overrideColor>{subHeader}</Text>
+        <Text type="h2" classes="text-gray-900 mb-2" overrideColor>{header}</Text>
+        <Link onClick={handleLearnMoreClick} classes="text-14">{localize('actions.learnAboutStaking')}</Link>
     </div>
 </div>

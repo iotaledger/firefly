@@ -81,7 +81,7 @@
             <Text type="p" overrideColor overrideLeading classes="mb-3 font-normal text-sm  leading-140 text-gray-300 dark:text-gray-300">
                 {localize(`views.staking.airdrops.${airdrop}.description`)}
             </Text>
-            <Link onClick={handleLearnMoreClick} classes="text-{airdrop}-highlight text-14">
+            <Link onClick={handleLearnMoreClick} classes="text-14">
                 {localize('actions.visitWebsite')}
             </Link>
         </div>
