@@ -28,12 +28,12 @@
 
     const isPartialStake = isAccountPartiallyStaked(accountToStake?.id)
 
-    let airdropSelections: { [key in StakingAirdrop]: boolean } = {
-        [StakingAirdrop.Assembly]: true,
-        [StakingAirdrop.Shimmer]: true,
-    }
-
     const activeAirdrops = $participationOverview.find((apo) => apo.accountIndex === accountToStake.index)?.participations.map((p) => getAirdropFromEventId(p.eventId)) || []
+
+    let airdropSelections: { [key in StakingAirdrop]: boolean } = {
+        [StakingAirdrop.Assembly]: activeAirdrops?.length > 0 ? activeAirdrops?.includes(StakingAirdrop.Assembly) : true,
+        [StakingAirdrop.Shimmer]: activeAirdrops?.length > 0 ? activeAirdrops?.includes(StakingAirdrop.Shimmer) : true,
+    }
 
     const toggleAirdropSelection = (airdrop: StakingAirdrop): void => {
         airdropSelections[airdrop] = !airdropSelections[airdrop]
@@ -98,18 +98,18 @@
 <div class="flex flex-row justify-between items-center mb-6 space-x-2">
     {#each Object.keys(StakingAirdrop).map((sa) => sa.toLowerCase()) as airdrop}
         <div
-            on:click={activeAirdrops.includes(airdrop) ? () => {} : () => toggleAirdropSelection(airdrop)}
-            class="p-4 w-1/2 flex flex-col items-center text-center border border-1 border-solid border-gray-300 rounded-xl cursor-pointer hover:bg-blue-50 hover:border-blue-500 focus:border-blue-500 focus:bg-blue-50"
+            on:click={!activeAirdrops.includes(airdrop) ? () => {} : () => toggleAirdropSelection(airdrop)}
+            class="p-4 w-1/2 flex flex-col items-center text-center border border-1 border-solid border-gray-300 rounded-xl {activeAirdrops?.length && !activeAirdrops?.includes(airdrop) ? 'cursor-default' : 'cursor-pointer hover:bg-blue-50 hover:border-blue-500 focus:border-blue-500 focus:bg-blue-50'}"
         >
             <div class="mb-2 flex flex-row justify-center">
-                <Text type="p" disabled={!airdropSelections[airdrop] || activeAirdrops.includes(airdrop)} classes="font-extrabold text-lg">{capitalize(airdrop)}&nbsp;</Text>
-                <Text type="p" disabled={!airdropSelections[airdrop] || activeAirdrops.includes(airdrop)} classes="text-lg inline">({STAKING_AIRDROP_TOKENS[airdrop]})</Text>
+                <Text type="p" disabled={!airdropSelections[airdrop] || !activeAirdrops.includes(airdrop)} classes="font-extrabold text-lg">{capitalize(airdrop)}&nbsp;</Text>
+                <Text type="p" disabled={!airdropSelections[airdrop] || !activeAirdrops.includes(airdrop)} classes="text-lg inline">({STAKING_AIRDROP_TOKENS[airdrop]})</Text>
             </div>
-            <Text type="p" secondary disabled={!airdropSelections[airdrop] || activeAirdrops.includes(airdrop)}>{locale('views.staking.confirmation.body')}:</Text>
-            <Checkbox bind:checked={airdropSelections[airdrop]} onClick={() => toggleAirdropSelection(airdrop)} disabled={activeAirdrops.includes(airdrop)} classes="my-5" />
-            <Text type="p" disabled={!airdropSelections[airdrop] || activeAirdrops.includes(airdrop)} classes="font-bold text-lg">
+            <Text type="p" secondary disabled={!airdropSelections[airdrop] || !activeAirdrops.includes(airdrop)}>{locale('views.staking.confirmation.body')}:</Text>
+            <Checkbox bind:checked={airdropSelections[airdrop]} onClick={() => toggleAirdropSelection(airdrop)} disabled={!activeAirdrops.includes(airdrop)} classes="my-5" />
+            <Text type="p" disabled={!airdropSelections[airdrop] || !activeAirdrops.includes(airdrop)} classes="font-bold text-lg">
                 {(airdropSelections[airdrop] ? getRewards(capitalize(airdrop)) : estimateStakingAirdropReward(airdrop, 0, true, 0)).split(' ')[0]}
-            </Text><Text type="p" secondary disabled={!airdropSelections[airdrop] || activeAirdrops.includes(airdrop)} classes="font-bold text-lg">
+            </Text><Text type="p" secondary disabled={!airdropSelections[airdrop] || !activeAirdrops.includes(airdrop)} classes="font-bold text-lg">
                 {(airdropSelections[airdrop] ? getRewards(capitalize(airdrop)) : estimateStakingAirdropReward(airdrop, 0, true, 0)).split(' ')[1]}
             </Text>
         </div>
