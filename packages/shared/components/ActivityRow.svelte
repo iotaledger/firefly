@@ -179,7 +179,7 @@
                 boxClasses="bg-gray-500 dark:bg-gray-900" 
                 icon="double-chevron-right" 
             />
-        {:else if !isParticipationPayload(txPayload)}
+        {:else if isParticipationPayload(txPayload)}
             <Icon
                 boxed
                 width="24" 
