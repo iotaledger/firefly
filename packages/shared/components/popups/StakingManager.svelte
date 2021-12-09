@@ -6,25 +6,25 @@
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { networkStatus } from 'shared/lib/networkStatus'
+    import { hasNodePlugin, networkStatus } from 'shared/lib/networkStatus'
     import { NodePlugin } from 'shared/lib/typings/node'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { checkStronghold } from 'shared/lib/stronghold'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { asyncSyncAccounts, transferState, wallet } from 'shared/lib/wallet'
+    import { transferState, wallet } from 'shared/lib/wallet'
     import { WalletAccount } from 'shared/lib/typings/wallet'
 
     import { getParticipationOverview, participate, stopParticipating } from 'shared/lib/participation/api'
-    import { STAKING_EVENT_IDS, STAKING_PARTICIPATIONS } from 'shared/lib/participation/constants'
+    import { STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
     import {
         canAccountParticipate,
         canParticipate,
         getStakedFunds,
         getUnstakedFunds,
         isAccountPartiallyStaked,
-        isAccountStaked
+        isAccountStaked,
     } from 'shared/lib/participation'
     import {
         accountToParticipate,
@@ -35,18 +35,19 @@
         stakedAmount,
         stakingEventState
     } from 'shared/lib/participation/stores'
-    import { ParticipationAction } from 'shared/lib/participation/types'
+    import { Participation, ParticipationAction } from 'shared/lib/participation/types'
 
     export let locale: Locale
 
     export let isPerformingAction = false
     export let shouldParticipateOnMount = false
+    export let participations: Participation[] = []
 
     let canStake
     $: canStake = canParticipate($stakingEventState)
 
     let accounts = get($wallet.accounts)
-    let hasStakedAccounts = $stakedAccounts.length > 0
+    const hasStakedAccounts = $stakedAccounts.length > 0
 
     $: $stakedAccounts, async () => await getParticipationOverview()
     $: $accountToParticipate, async () => await getParticipationOverview()
@@ -90,9 +91,6 @@
         const isPartialStake = $partiallyStakedAccounts.find((psa) => psa.id === $accountToParticipate?.id) !== undefined
 
         const _sync = async () => {
-            // Add a delay to cover for the transaction confirmation time
-            // TODO: Might need to rethink of a better solution here.
-            await asyncSyncAccounts()
             await getParticipationOverview()
 
             showAppNotification({
@@ -120,14 +118,15 @@
         }
 
         switch ($participationAction) {
-            case ParticipationAction.Stake:
-                await participate($accountToParticipate?.id, STAKING_PARTICIPATIONS)
+            case ParticipationAction.Stake: {
+                await participate($accountToParticipate?.id, participations)
                     .then(() => _sync())
                     .catch((err) => {
                         console.error(err)
                         resetView()
                     })
                 break
+            }
             case ParticipationAction.Unstake:
                 await stopParticipating($accountToParticipate?.id, STAKING_EVENT_IDS)
                     .then(() => _sync())
@@ -146,6 +145,11 @@
             type: 'stakingConfirmation',
             props: {
                 accountToStake: account,
+                onBack: () => {
+                    openPopup({
+                        type: 'stakingManager'
+                    }, true)
+                }
             },
         }, true)
     }
@@ -159,7 +163,7 @@
                 openPopup({
                     type: 'stakingManager',
                     props: {
-                        shouldParticipateOnMount: true
+                        shouldParticipateOnMount: true,
                     },
                 })
             } else {
@@ -170,11 +174,22 @@
         if ($isSoftwareProfile) {
             checkStronghold(_unstake)
         } else {
-            _unstake()
+            void _unstake()
         }
     }
 
     onMount(async () => {
+        if (!hasNodePlugin(NodePlugin.Participation)) {
+            showAppNotification({
+                type: 'warning',
+                message: locale('error.node.pluginNotAvailable', { values: { nodePlugin: NodePlugin.Participation } }),
+            })
+
+            resetView()
+
+            return
+        }
+
         /**
          * NOTE: Because of Stronghold and Ledger prompts to "unlock"
          * the wallets, this popup MAY BE instantiated with an "accountToAction",
@@ -209,7 +224,7 @@
                 <div class="w-full space-x-4 px-5 py-3 flex flex-row justify-between items-center">
                     {#if isAccountStaked(account?.id)}
                         <div
-                            class="bg-{$accountToParticipate?.id === account?.id && $accountToParticipate && $participationAction && $participationAction !== ParticipationAction.Unstake ? 'yellow-600' : 'green-100'} rounded-2xl"
+                            class="bg-green-100 rounded-2xl"
                         >
                             <Icon icon="success-check" width="18" height="18" classes="text-white" />
                         </div>
@@ -274,7 +289,7 @@
                         {/if}
                     </Button>
                 </div>
-                {#if isAccountPartiallyStaked(account?.id) && $accountToParticipate?.id !== account?.id}
+                {#if isAccountPartiallyStaked(account?.id) && $accountToParticipate && $accountToParticipate?.id !== account?.id}
                     <div class="space-x-4 mx-1 mb-1 px-4 py-3 flex flex-row justify-between items-center rounded-lg bg-yellow-50">
                         <Icon icon="exclamation" width="18" height="18" classes="fill-current text-yellow-600" />
                         <div class="flex flex-col w-3/4">

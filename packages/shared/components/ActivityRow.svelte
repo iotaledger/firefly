@@ -16,6 +16,7 @@
         getMilestoneMessageValue,
         receiverAddressesFromTransactionPayload,
         sendAddressFromTransactionPayload,
+        isParticipationPayload
     } from 'shared/lib/wallet'
     import { WalletAccount } from 'shared/lib/typings/wallet'
 
@@ -49,12 +50,15 @@
         if (milestonePayload) {
             return formatUnitBestMatch(getMilestoneMessageValue(milestonePayload, $accounts), true, 3)
         }
-        return `${!txPayload.data.essence.data.incoming ? '-' : ''}${formatUnitBestMatch(
+
+        return `${(!txPayload.data.essence.data.incoming && !isParticipationPayload(txPayload)) ? '-' : ''}${formatUnitBestMatch(
             txPayload.data.essence.data.value,
             true,
             2
         )}`
     }
+
+    
 
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
 
@@ -108,13 +112,18 @@
     $: {
         if (txPayload) {
             if (includeFullSender) {
-                direction = confirmed
+                if (isParticipationPayload(txPayload)) {
+                    direction = `staking.stakedFunds`;
+                } else {
+                   direction = confirmed
                     ? txPayload.data.essence.data.incoming
                         ? 'general.receivedTo'
                         : 'general.sentFrom'
                     : txPayload.data.essence.data.incoming
                         ? 'general.receivingTo'
                         : 'general.sendingFrom'
+                }
+        
             } else {
                 direction = confirmed
                     ? txPayload.data.essence.data.incoming
@@ -131,11 +140,12 @@
         switch (action) {
             case ParticipationAction.Stake:
             case ParticipationAction.Vote:
-                return 'blue-500'
+                return 'yellow-600'
             case ParticipationAction.Unstake:
             case ParticipationAction.Unvote:
             default:
-                return 'yellow-600'
+                return 'blue-500'
+
         }
     }
 
@@ -162,12 +172,12 @@
     <div class="w-8 flex flex-row justify-center items-center">
         {#if hasCachedMigrationTx || milestonePayload}
             <Icon boxed classes="text-white" boxClasses="bg-gray-500 dark:bg-gray-900" icon="double-chevron-right" />
-        {:else if participationTransaction}
+        {:else if isParticipationPayload(txPayload)}
             <Icon
                 boxed
                 classes="text-white"
-                boxClasses="bg-{getParticipationColor(participationTransaction?.action)}"
-                icon={getParticipationIcon(participationTransaction?.action)}
+                boxClasses="bg-{getParticipationColor(ParticipationAction.Stake)}"
+                icon={getParticipationIcon(ParticipationAction.Stake)}
             />
         {:else}
             <Icon
@@ -182,8 +192,8 @@
         <Text type="p" bold smaller classes="overflow-hidden overflow-ellipsis multiwrap-line2">
             {#if hasCachedMigrationTx || milestonePayload}
                 {locale('general.fundMigration')}
-            {:else if participationTransaction}
-                {locale(`general.${participationTransaction?.action}dFor`, { values: { account: accountAlias } })}
+            {:else if isParticipationPayload(txPayload)}
+                {locale(`general.stakedFor`, { values: { account: accountAlias } })}
             {:else}
                 {locale(direction, { values: { account: accountAlias } })}
             {/if}

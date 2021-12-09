@@ -84,7 +84,7 @@ export const getOfficialNodes = (type: NetworkType): Node[] =>
 const getOfficialNodeUrls = (networkType: NetworkType): string[] => {
     switch (networkType) {
         case NetworkType.ChrysalisDevnet:
-            return ['https://api.lb-0.h.chrysalis-devnet.iota.cafe', 'https://api.lb-1.h.chrysalis-devnet.iota.cafe']
+            return ['https://devnet01.hornet.zone']
         case NetworkType.ChrysalisMainnet:
             return ['https://chrysalis-nodes.iota.org', 'https://chrysalis-nodes.iota.cafe']
         default:
@@ -256,10 +256,7 @@ export const checkNodeUrlValidity = (nodesList: Node[], newUrl: string, allowIns
  */
 export const updateClientOptions = (config: NetworkConfig): void => {
     const clientOptions = buildClientOptions(config)
-    if (!clientOptions.node) {
-        console.error('Error: The client options does not have a primary node.')
-        return
-    }
+    if (!clientOptions.node) return
 
     const hasMismatchedNetwork = clientOptions.node?.network?.id !== clientOptions.network
     if (hasMismatchedNetwork && isNewNotification('warning')) {
@@ -322,22 +319,32 @@ export const getNodeCandidates = (config: NetworkConfig): Node[] => {
     if (!config) return []
 
     const useAutomaticSelection = config.nodes.length === 0 || config.automaticNodeSelection
+    const officialNodes = getOfficialNodes(config.network.type).map((n, idx) => ({ ...n, isPrimary: false }))
 
     let nodeCandidates
     if (useAutomaticSelection) {
-        nodeCandidates = getOfficialNodes(config.network.type).map((n, idx) => ({ ...n, isPrimary: idx === 0 }))
+        nodeCandidates = officialNodes
     } else {
         nodeCandidates = config.includeOfficialNodes
             ? addOfficialNodes(config.network.type, config.nodes)
-            : config.nodes
+            : config.nodes.filter((n) => officialNodes.find((_n) => _n.url === n.url) === undefined)
     }
 
     return ensureSinglePrimaryNode(nodeCandidates)
 }
 
 const addOfficialNodes = (networkType: NetworkType, nodes: Node[]): Node[] => {
-    const officialNodes = getOfficialNodes(networkType)
-    const nonOfficialNodes = nodes.filter((n) => !officialNodes.map((_n) => _n.url).includes(n.url))
+    let officialNodes = getOfficialNodes(networkType)
+
+    // If an official node is currently set as primary then keep it as primary
+    officialNodes = officialNodes.map((n) =>
+        Object.assign(
+            n,
+            nodes.find((p) => p.isPrimary && n.url === p.url)
+        )
+    )
+
+    const nonOfficialNodes = nodes.filter((n) => officialNodes.find((_n) => _n.url === n.url) === undefined)
 
     return [...officialNodes, ...nonOfficialNodes]
 }

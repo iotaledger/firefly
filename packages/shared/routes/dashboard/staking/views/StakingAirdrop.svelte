@@ -6,7 +6,7 @@
     import { getBestTimeDuration } from 'shared/lib/time'
     import { capitalize } from 'shared/lib/utils'
 
-    import { STAKING_AIRDROP_TOKENS } from 'shared/lib/participation/constants'
+    import { formatStakingAirdropReward } from 'shared/lib/participation'
     import {
         assemblyStakingRemainingTime,
         assemblyStakingRewards,
@@ -71,7 +71,7 @@
         />
     </div>
     <div class="px-8 h-full pb-10 flex flex-col justify-end">
-        <div>
+        <div class="h-1/2 flex flex-col justify-between">
             <div class="mb-4 flex flex-row items-center">
                 <Text type="h3" classes="mr-4 text-white text-2xl">
                     {localize(`views.staking.airdrops.${airdrop}.name`)}
@@ -88,7 +88,7 @@
         <div>
             <HR classes="my-8" />
             <div class="flex flex-row space-x-2">
-                <div class="flex flex-col w-2/3">
+                <div class="flex flex-col w-1/2">
                     <div>
                         <Text type="p" classes="font-bold text-lg inline text-white dark:text-white">{remainingTimeAmount}</Text>
                         <Text type="p" secondary classes="text-sm inline">{remainingTimeUnit}</Text>
@@ -100,9 +100,11 @@
                 <div class="flex flex-col w-1/2">
                     <div>
                         <Text type="p" classes="font-bold text-lg inline text-white dark:text-gray-400">
-                            {isAssembly() ? $assemblyStakingRewards : $shimmerStakingRewards}
+                            {formatStakingAirdropReward(airdrop, isAssembly() ? $assemblyStakingRewards : $shimmerStakingRewards, 6).split(' ')[0]}
                         </Text>
-                        <Text type="p" secondary classes="text-sm inline">{STAKING_AIRDROP_TOKENS[airdrop]}</Text>
+                        <Text type="p" secondary classes="text-sm inline">
+                            {formatStakingAirdropReward(airdrop, isAssembly() ? $assemblyStakingRewards : $shimmerStakingRewards, 6).split(' ')[1]}
+                        </Text>
                     </div>
                     <Text type="p" smaller overrideColor classes="font-normal mt-0.5 text-gray-400 dark:text-gray-400">
                         {localize('views.staking.airdrops.collectedRewards')}

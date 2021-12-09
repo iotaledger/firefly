@@ -315,6 +315,22 @@ export const chunkString = (str: string, size: number = 0): string[] => {
 }
 
 /**
+ * Formats a number into a more readable format separated by a specified delineator.
+ *
+ * @method delineateNumber
+ *
+ * @param {string} str
+ * @param {',' | '.' | ''} delineator
+ *
+ * @returns {string}
+ */
+export const delineateNumber = (str: string, delineator: ',' | '.' | '' = ','): string => {
+    if (!str) return ''
+
+    return str.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+}
+
+/**
  * Returns a promise that sets a timeout for the given duration (in milliseconds).
  *
  * @method sleep

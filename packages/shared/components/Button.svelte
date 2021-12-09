@@ -11,6 +11,7 @@
     export let caution = false
     export let warning = false
     export let active = false
+    export let outline = false
     export let icon = undefined
     export let iconReverse = false
     export let xl = false
@@ -155,6 +156,35 @@
                     span {
                         @apply text-gray-700;
                     }
+                }
+            }
+        }
+        &.outline {
+            @apply bg-opacity-0;
+            @apply border-2;
+            span {
+                @apply text-blue-500;
+            }
+            &.secondary {
+                @apply border-white;
+                span {
+                    @apply text-white;
+                }
+            }
+            &.caution {
+                span {
+                    @apply text-yellow-600;
+                }
+            }
+            &.warning {
+                span {
+                    @apply text-red-500;
+                }
+            }
+            &:hover {
+                @apply border-opacity-0;
+                span {
+                    @apply text-gray-900;
                 }
             }
         }
@@ -380,6 +410,7 @@
         class:warning
         class:medium
         class:small
+        class:outline
         class:with-icon={icon}
         class:iconReverse
         class:active

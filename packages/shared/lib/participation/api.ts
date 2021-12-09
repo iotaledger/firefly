@@ -3,7 +3,7 @@ import { get } from 'svelte/store'
 import { localize } from '../i18n'
 import type { Event } from '../typings/events'
 import { showAppNotification } from '../notifications'
-import { api } from '../wallet'
+import { api, saveNewMessage } from '../wallet'
 
 import { participationEvents, participationOverview } from './stores'
 import type {
@@ -12,6 +12,7 @@ import type {
     ParticipationEvent,
     ParticipationOverviewResponse
 } from './types'
+import { resetParticipation } from './participation'
 
 
 /**
@@ -31,6 +32,7 @@ export function getParticipationOverview(): Promise<void> {
                 resolve()
             },
             onError(error) {
+                resetParticipation()
                 console.error(error)
 
                 reject(error)
@@ -90,6 +92,8 @@ export function participate(accountId: string, participations: Participation[]):
             participations,
             {
                 onSuccess(response: Event<ParticipateResponsePayload>) {
+                    response.payload.forEach((message) => saveNewMessage(accountId, message));
+
                     resolve()
                 },
                 onError(error) {
@@ -127,8 +131,8 @@ export function stopParticipating(accountId: string, eventIds: string[]): Promis
             eventIds,
             {
                 onSuccess(response: Event<ParticipateResponsePayload>) {
-                    response?.payload.forEach((msg) => {
-                    })
+                    response.payload.forEach((message) => saveNewMessage(accountId, message));
+
                     resolve()
                 },
                 onError(error) {

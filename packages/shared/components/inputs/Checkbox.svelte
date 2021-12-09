@@ -44,7 +44,7 @@
 
         onClick()
     }}>
-    <Icon icon={checked ? 'checkbox' : 'checkbox-unchecked'} classes={`mr-3 ${checked ? 'active' : ''}`} />
+    <Icon icon={checked ? 'checkbox' : 'checkbox-unchecked'} classes={`${label ? 'mr-3' : ''} ${checked ? 'active' : ''}`} />
     {#if label}
         <Text type="p" secondary={!checked || disabled}>{label}</Text>
     {/if}

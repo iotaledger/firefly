@@ -393,7 +393,7 @@
             openPopup({
                 type: 'transaction',
                 props: {
-                    isSendingFromParticpatingAccount: isAccountStaked($account.id),
+                    isSendingFromParticpatingAccount: isAccountStaked(from.id),
                     internal: internal || accountAlias,
                     amount: amountRaw,
                     unit,

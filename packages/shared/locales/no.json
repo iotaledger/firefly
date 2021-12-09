@@ -21,7 +21,11 @@
                 "first": "La oss nå starte med det første profilnavnet ditt.",
                 "nonFirst": "La oss nå starte med profilnavnet ditt."
             },
-            "addMore": "Du kan legge til flere profiler senere."
+            "addMore": "Du kan legge til flere profiler senere.",
+            "developer": {
+                "label": "Utviklerprofil",
+                "info": "Koble til offentlige og private IOTA-nettverk"
+            }
         },
         "setup": {
             "title": "Sett opp en lommebok",
@@ -307,7 +311,8 @@
             },
             "theme": {
                 "title": "Tema",
-                "description": ""
+                "description": "",
+                "advice": "Start Firefly appen på nytt for at endringer i systemtemaet skal tre i kraft"
             },
             "language": {
                 "title": "Språk",
@@ -323,14 +328,14 @@
             },
             "networkStatus": {
                 "title": "Nettverksstatus",
-                "description": "Viser statusen til noden du er koblet til."
+                "description": "Viser statusen til noden du er koblet til"
             },
             "exportStronghold": {
                 "title": "Eksporter sikkerhetskopi",
                 "description": "Eksporter til en Stronghold-fil - en fullstendig kryptert sikkerhetskopi av lommeboken din og den seneste transaksjonshistorikken"
             },
             "appLock": {
-                "title": "Automatisk lås",
+                "title": "Lås automatisk",
                 "description": "Inaktivitetstid før lommeboken låses og du blir logget ut",
                 "durationMinute": "{time, plural, one {1 minutt} other {# minutter}}",
                 "durationHour": "{time, plural, one {1 time} other {# timer}}"
@@ -360,28 +365,39 @@
                 "description": "Sletter hele lommeboken, profilen og transaksjonshistorikken. Pass på at du har en sikkerhetskopi"
             },
             "deepLinks": {
-                "title": "Dyplenker",
-                "description": "Fyll automatisk inn transaksjonsdata i Firefly ved å klikke en iota:// lenke"
+                "title": "IOTA-linker",
+                "description": "Fyll automatisk inn transaksjonsdata i Firefly ved å klikke en IOTA-lenke"
             },
-            "developerMode": {
-                "title": "Utviklermodus",
-                "description": "Koble til testnett og andre utviklerfunksjoner"
-            },
-            "nodeSettings": {
-                "title": "Node-innstillinger",
-                "description": "Velg Manuell for å konfigurere node-innstillinger og koble til din egen node"
+            "networkConfiguration": {
+                "title": "Nettverks konfigurasjon",
+                "title2": "Nettverkskonfigurasjon",
+                "description": {
+                    "dev": "Dine nettverksinnstillinger vil oppdateres automatisk i henhold til gjeldende node-konfigurasjon (hvis nettverket byttes vil det resultere i at lommebokstatusen tilbakestilles)",
+                    "nonDev": "Dine nettverksinnstillinger vil oppdateres automatisk i henhold til gjeldende node-konfigurasjon"
+                },
+                "switchedNetworks": "Nettverket ble endret til \"{networkName}.",
+                "resetWallet": "Din lommebokstatus er tilbakestilt.",
+                "connectedTo": "Koblet til",
+                "nodeConfiguration": {
+                    "title": "Valg av node",
+                    "description": "Velg \"Manual\" for å konfigurere node-innstillinger og koble til en eller flere egne noder",
+                    "automatic": "Automatisk",
+                    "manual": "Manuelt"
+                }
             },
             "configureNodeList": {
-                "title": "Velg en node",
-                "description": "Administrer listen over IOTA nettverksnoder du kobler til",
+                "title": "Rediger nodekonfigurasjon",
+                "description": "Administrer listen med noder du kobler til",
                 "primaryNode": "Primær node",
                 "excludeNode": "Ekskluder node",
                 "includeNode": "Inkluder node",
-                "viewDetails": "Se detaljer",
+                "editDetails": "Rediger detaljer",
+                "viewInfo": "Vis informasjon",
                 "setAsPrimary": "Sett som primær",
                 "removeNode": "Fjern node",
                 "includeOfficialNodeList": "Inkluder offisiell liste over noder",
-                "noNodes": "Ingen noder, automatisk selektering brukes i stedet"
+                "noNodes": "Det er ingen noder, og klarer derfor ikke å koble til nettverket",
+                "noNodesAuto": "Ingen noder, automatisk selektering av noder brukes i stedet"
             },
             "proofOfWork": {
                 "title": "Proof of work",
@@ -528,12 +544,37 @@
             "titleAdd": "Legg til en node",
             "titleUpdate": "Oppdater en node",
             "titleRemove": "Fjern en node",
+            "titleRemoveAll": "Fjern alle noder",
             "titleDetails": "Detaljer om node",
+            "titleInfo": "Informasjon om node",
+            "addingNode": "Legger til node",
+            "updatingNode": "Oppdaterer node",
+            "loadingNodeInfo": "Laster nodeinformasjon",
             "nodeAddress": "Node-adresse",
             "optionalUsername": "Brukernavn (valgfritt)",
             "optionalPassword": "Passord (valgfritt)",
+            "optionalJwt": "JSON webtoken (valgfritt)",
             "setAsPrimaryNode": "Velg som hoved-node",
-            "removeConfirmation": "Er du sikker på at du ønsker å fjerne denne noden?"
+            "removeConfirmation": "Er du sikker på at du ønsker å fjerne denne noden?",
+            "removeAllConfirmation": "Er du sikker på at du vil fjerne alle noder?",
+            "info": {
+                "url": "Nettadresse",
+                "software": "Programvare",
+                "networkId": "Nettverks-ID",
+                "bech32HRP": "Bech32 HRP",
+                "features": "Funksjoner",
+                "confirmedMilestoneIndex": "Bekreftet milestone indeks",
+                "pruningIndex": "Ryddeeindeks",
+                "messagesPerSecond": "Meldinger per sekund",
+                "referencedRate": "Referert-rate"
+            }
+        },
+        "switchNetwork": {
+            "title": "Bytt nettverk",
+            "newNetwork": "Nytt nettverk",
+            "resetWarning": "Endring av nettverk vil logge deg ut og tilbakestille alle kontoer, saldoer og transaksjonslogger for denne profilen.",
+            "switchingNetwork": "Bytter nettverk",
+            "typePassword": "Skriv inn passordet ditt for å bytte til:"
         },
         "errorLog": {
             "title": "Feilmeldingslogg",
@@ -635,7 +676,7 @@
         "outgoingMi": "Utgående {value}",
         "portoflio": "Portefølje",
         "token": "Token",
-        "holdings": "Holdings",
+        "holdings": "Beholdning",
         "accountValue": "Lommebokens verdi",
         "accountActivity": "Lommebokaktivitet",
         "timeframe1Hour": "1 time",
@@ -684,7 +725,7 @@
         "syncAll": "Synkroniser alle",
         "export": "Eksporter",
         "exportNewStronghold": "Eksporter en ny Stronghold",
-        "enableDeepLinks": "Tillat dype lenker.",
+        "enableDeepLinks": "Aktiver IOTA-linker",
         "enableDeveloperMode": "Aktiver utviklermodus",
         "enableSystemNotifications": "Aktiver varsler",
         "exportState": "Eksporter status",
@@ -702,6 +743,7 @@
         "addNode": "Legg til node",
         "updateNode": "Oppdater node",
         "removeNode": "Fjern node",
+        "removeAllNodes": "Fjern alle noder",
         "hide": "Skjul",
         "hideOthers": "Skjul andre",
         "showAll": "Vis alle",
@@ -781,8 +823,9 @@
         "stronghold": "Stronghold",
         "language": "Språk",
         "appearance": "Utseende",
-        "lightTheme": "Lyst tema",
-        "darkTheme": "Mørkt tema",
+        "lightTheme": "Lyst",
+        "darkTheme": "Mørkt",
+        "systemTheme": "System",
         "balance": "Saldo",
         "accountBalance": "Lommebokens saldo",
         "incoming": "Innkommende",
@@ -791,11 +834,7 @@
         "totalOut": "Totalt ut",
         "accounts": "Lommebøker",
         "myAccounts": "Lommebøkene mine",
-        "automaticNodeSelection": "Automatisk node selektering",
-        "manualNodeSelection": "Manuell node selektering",
         "profiles": "Profiler",
-        "developerProfile": "Utviklerprofil",
-        "developerProfileDescription": "Lar deg koble til testnett",
         "dev": "Utvikling",
         "createAccount": "Opprette lommebok",
         "accountName": "Navn på lommebok",
@@ -803,6 +842,7 @@
         "transactions": "Transaksjoner",
         "security": "Sikkerhet",
         "accountAddress": "Adressen til lommeboken",
+        "network": "Nettverk",
         "nodes": "Noder",
         "wallet": "Lommebok",
         "help": "Hjelp",
@@ -861,7 +901,8 @@
         "legacyNetwork": "Gammelt Nettverk",
         "capsLock": "Caps Lock er på",
         "version": "Versjon {version}",
-        "unknown": "Unknown"
+        "unknown": "Ukjent",
+        "none": "Ingen"
     },
     "dates": {
         "today": "I dag",
@@ -885,7 +926,17 @@
         "minutesRemaining": "{minutes, plural, one {1 minutt gjenstår} other {# minutter gjenstår}}",
         "copiedToClipboard": "Kopiert til utklippstavle",
         "accountsSynchronized": "Synkronisering av lommebok fullført",
-        "fundsAvailableSoon": "Dine midler vil bli tilgjengelig innen kort tid"
+        "fundsAvailableSoon": "Dine midler vil bli tilgjengelig innen kort tid",
+        "deepLinkingRequest": {
+            "recievedWhileLoggedOut": "Logg inn for å starte IOTA-linken",
+            "notEnabled": "IOTA-linker er ikke aktivert",
+            "invalidFormat": "IOTA-linken du fulgte er ugyldig",
+            "wallet": {
+                "send": {
+                    "success": "Betalingsdetaljer lagt til fra IOTA-link"
+                }
+            }
+        }
     },
     "error": {
         "profile": {
@@ -945,11 +996,23 @@
         },
         "node": {
             "invalid": "Vennligst angi en gyldig URL-adresse.",
-            "dns": "Could not resolve DNS for node.",
-            "https": "HTTPS må fylles ut. Sett opp en utviklerprofil for å bruke usikrede HTTP-tilkoblinger.",
+            "dns": "Finner ikke DNS-løsning for node.",
+            "timedOut": "Tilkoblingen ble tidsavbrutt.",
+            "refused": "Tilkoblingen ble avvist.",
+            "handshake": "Kan ikke fullføre tilkoblingen med noden.",
+            "invalidCertificate": "Kunne ikke koble til med ugyldig sertifikat.",
+            "https": "HTTPS er nødvendig; usikker tilkopling over HTTP støttes ikke på dette tidspunktet.",
             "duplicate": "Denne noden har allerede blitt lagt til.",
             "unsynced": "Noden er ikke synkronisert.",
-            "noSynced": "Ingen synkroniserte noder er tilgjengelige."
+            "noSynced": "Ingen synkroniserte noder er tilgjengelige.",
+            "answer": "Fikk ikke svar fra alle noder.",
+            "forbidden": "Denne node-tilkoblingen er forbudt."
+        },
+        "network": {
+            "mismatch": "Nettverk-IDen for denne noden er \"{networkId}\", og samsvarer ikke med det gjeldende nettverket.",
+            "notReachable": "Nettverks-IDen for denne noden kunne ikke hentes, klarer ikke å legge til node.",
+            "badNodes": "Kan ikke koble til nettverket med gjeldende node konfigurasjon.",
+            "nonEmptyAccount": "Du må overføre alle saldoer før du bytter nettverk."
         },
         "global": {
             "generic": "Noe gikk galt."
@@ -984,7 +1047,12 @@
             "missingBundle": "Det oppsto en feil under forsøk på å finne transaksjonspakken."
         },
         "crypto": {
-            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
+            "cannotDecodeBech32": "Kan ikke avkode streng som Bech32-adresse."
+        }
+    },
+    "warning": {
+        "node": {
+            "http": "Bruk noder over HTTP lar trafikken være ukryptert og kan utgjøre en sikkerhetsrisiko."
         }
     },
     "tooltips": {

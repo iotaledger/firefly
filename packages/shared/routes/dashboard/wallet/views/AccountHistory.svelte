@@ -1,12 +1,13 @@
 <script lang="typescript">
     import { ActivityDetail, ActivityRow, Icon, Text } from 'shared/components'
-    import { showAppNotification } from 'shared/lib/notifications'
-    import { api, isSyncing, selectedAccountId, selectedMessage } from 'shared/lib/wallet'
-    import { isLedgerProfile } from 'shared/lib/profile'
     import { displayNotificationForLedgerProfile } from 'shared/lib/ledger'
-    import { Locale } from 'shared/lib/typings/i18n'
-    import { AccountMessage } from 'shared/lib/typings/wallet'
+    import { showAppNotification } from 'shared/lib/notifications'
+    import { openPopup } from 'shared/lib/popup'
+    import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
+    import { api, isSyncing, selectedAccountId, selectedMessage } from 'shared/lib/wallet'
     import { chunkString, toHexString, toUtf8String } from 'shared/lib/utils'
+    import type { Locale } from 'shared/lib/typings/i18n'
+    import type { AccountMessage } from 'shared/lib/typings/wallet'
 
     export let locale: Locale
 
@@ -36,33 +37,57 @@
 
     const handleSyncAccountClick = () => {
         if (!$isSyncing) {
-            $isSyncing = true
+            const _syncAccount = () => {
+                $isSyncing = true
+                api.syncAccount($selectedAccountId, {
+                    onSuccess() {
+                        $isSyncing = false
+                    },
+                    onError(err) {
+                        $isSyncing = false
 
-            api.syncAccount($selectedAccountId, {
-                onSuccess() {
-                    $isSyncing = false
-                },
-                onError(err) {
-                    $isSyncing = false
-
-                    const shouldHideErrorNotification =
-                        err && err.type === 'ClientError' && err.error === 'error.node.chrysalisNodeInactive'
-                    if (!shouldHideErrorNotification) {
-                        if ($isLedgerProfile) {
-                            displayNotificationForLedgerProfile('error', true, true, false, false, err)
-                        } else {
-                            showAppNotification({
-                                type: 'error',
-                                message: locale(err.error),
-                            })
+                        const shouldHideErrorNotification =
+                            err && err.type === 'ClientError' && err.error === 'error.node.chrysalisNodeInactive'
+                        if (!shouldHideErrorNotification) {
+                            if ($isLedgerProfile) {
+                                displayNotificationForLedgerProfile('error', true, true, false, false, err)
+                            } else {
+                                showAppNotification({
+                                    type: 'error',
+                                    message: locale(err.error),
+                                })
+                            }
                         }
-                    }
-                }
-            })
+                    },
+                })
+            }
+
+            if ($isSoftwareProfile) {
+                api.getStrongholdStatus({
+                    onSuccess(strongholdStatusResponse) {
+                        if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
+                            openPopup({
+                                type: 'password',
+                                props: { onSuccess: () => _syncAccount() },
+                            })
+                        } else {
+                            void _syncAccount()
+                        }
+                    },
+                    onError(err) {
+                        showAppNotification({
+                            type: 'error',
+                            message: locale(err.error),
+                        })
+                    },
+                })
+            } else {
+                void _syncAccount()
+            }
         }
     }
 
-    const getTransactions = (): AccountMessage[] => {
+    const getTransactions = (): AccountMessage[] => {        
         return transactions
     }
 </script>
@@ -79,7 +104,9 @@
                 <Text type="h5">{locale('general.transactions')}</Text>
                 {#if !$selectedMessage}
                     <button on:click={handleSyncAccountClick} class:pointer-events-none={$isSyncing}>
-                        <Icon icon="refresh" classes="{$isSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white" />
+                        <Icon
+                            icon="refresh"
+                            classes="{$isSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white" />
                     </button>
                 {/if}
             </div>

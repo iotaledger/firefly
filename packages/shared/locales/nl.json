@@ -15,13 +15,17 @@
         },
         "profile": {
             "title": "Een profiel aanmaken",
-            "profileName": "Profielnaam",
+            "profileName": "Profiel naam",
             "body1": "U kunt meerdere gebruikersprofielen aanmaken om uw portemonnees te organiseren en de privacy te verbeteren.",
             "body2": {
                 "first": "Om te beginnen, laten we starten met de naam van je eerste profiel.",
                 "nonFirst": "Om te beginnen, laten we starten met de naam van je profiel."
             },
-            "addMore": "Je kunt later meer profielen toevoegen."
+            "addMore": "Je kunt later meer profielen toevoegen.",
+            "developer": {
+                "label": "Ontwikkelaar profiel",
+                "info": "Verbinding maken met publieke en private IOTA-netwerken"
+            }
         },
         "setup": {
             "title": "Stel een portemonnee in",
@@ -307,7 +311,8 @@
             },
             "theme": {
                 "title": "Thema",
-                "description": ""
+                "description": "",
+                "advice": "Herstart de Firefly applicatie voor veranderingen aan het systeem thema effect te hebben"
             },
             "language": {
                 "title": "Taal",
@@ -323,10 +328,10 @@
             },
             "networkStatus": {
                 "title": "Netwerk status",
-                "description": "Toont de status van de node waarmee u momenteel verbonden bent."
+                "description": "Toont de status van de node waarmee u momenteel verbonden bent"
             },
             "exportStronghold": {
-                "title": "Back-up exporteren",
+                "title": "Exporteer back-up",
                 "description": "Exporteren naar een Stronghold bestand - een complete versleutelde back-up van uw portemonnees en de nieuwste transactiegeschiedenis"
             },
             "appLock": {
@@ -360,28 +365,39 @@
                 "description": "Verwijdert uw hele profiel, portemonnees en transactiegeschiedenis. Zorg ervoor dat u een back-up hebt"
             },
             "deepLinks": {
-                "title": "Diepe links",
-                "description": "Vul transactiedata automatisch aan in Firefly bij het klikken op een iota:// link"
+                "title": "IOTA links",
+                "description": "Vul automatisch transactiegegevens in Firefly in wanneer je op een IOTA-link klikt"
             },
-            "developerMode": {
-                "title": "Ontwikkelaarsmodus",
-                "description": "Maak verbinding met test-netwerken en andere ontwikkelaarsfuncties"
-            },
-            "nodeSettings": {
-                "title": "Node instellingen",
-                "description": "Selecteer Handmatig om de node instellingen in te stellen en verbinding te maken met uw eigen node"
+            "networkConfiguration": {
+                "title": "Netwerk configuratie",
+                "title2": "Netwerk configuratie",
+                "description": {
+                    "dev": "Uw netwerkinstellingen worden automatisch bijgewerkt volgens de huidige node configuratie (van netwerken wisselen zal resulteren in het opnieuw instellen van de portemonnee status)",
+                    "nonDev": "Uw netwerkinstellingen worden automatisch bijgewerkt volgens de huidige node configuratie"
+                },
+                "switchedNetworks": "Netwerk succesvol gewisseld naar \"{networkName}\".",
+                "resetWallet": "Uw portemonnee staat is gereset.",
+                "connectedTo": "Verbonden met",
+                "nodeConfiguration": {
+                    "title": "Node selectie",
+                    "description": "Selecteer \"Handmatig\" om node instellingen te configureren en verbinding te maken met uw eigen node(s)",
+                    "automatic": "Automatisch",
+                    "manual": "Handmatig"
+                }
             },
             "configureNodeList": {
-                "title": "Selecteer een node",
-                "description": "Beheer de lijst van IOTA-netwerkknooppunten waarmee u verbinding maakt",
+                "title": "Node configuratie",
+                "description": "Beheer de lijst met nodes waarmee u verbinding maakt",
                 "primaryNode": "Primaire node",
                 "excludeNode": "Node uitsluiten",
                 "includeNode": "Node toevoegen",
-                "viewDetails": "Details weergeven",
+                "editDetails": "Bewerk details",
+                "viewInfo": "Info bekijken",
                 "setAsPrimary": "Instellen als primair",
                 "removeNode": "Verwijder node",
                 "includeOfficialNodeList": "Voeg officiële node lijst toe",
-                "noNodes": "Er zijn geen nodes, automatische selectie zal in plaats daarvan worden gebruikt"
+                "noNodes": "Er zijn geen nodes, niet mogelijk om verbinding te maken met het netwerk",
+                "noNodesAuto": "Er zijn geen nodes, automatische selectie zal in plaats daarvan worden gebruikt"
             },
             "proofOfWork": {
                 "title": "Proof of work",
@@ -528,12 +544,37 @@
             "titleAdd": "Node toevoegen",
             "titleUpdate": "Een node bijwerken",
             "titleRemove": "Verwijder node",
+            "titleRemoveAll": "Alle nodes verwijderen",
             "titleDetails": "Node details",
+            "titleInfo": "Node info",
+            "addingNode": "Toevoegen node",
+            "updatingNode": "Node bijwerken",
+            "loadingNodeInfo": "Laden van node info",
             "nodeAddress": "Node adres",
             "optionalUsername": "Gebruikersnaam (optioneel)",
             "optionalPassword": "Wachtwoord (optioneel)",
+            "optionalJwt": "JSON webtoken (optioneel)",
             "setAsPrimaryNode": "Instellen als primaire node",
-            "removeConfirmation": "Weet je zeker dat je deze node wil verwijderen?"
+            "removeConfirmation": "Weet je zeker dat je deze node wil verwijderen?",
+            "removeAllConfirmation": "Weet u zeker dat u alle nodes wilt verwijderen?",
+            "info": {
+                "url": "URL",
+                "software": "Software",
+                "networkId": "Netwerk ID",
+                "bech32HRP": "Bech32 HRP",
+                "features": "Kenmerken",
+                "confirmedMilestoneIndex": "Bevestigde mijlpaalindex",
+                "pruningIndex": "Index opschonen",
+                "messagesPerSecond": "Berichten per seconde",
+                "referencedRate": "Bevestigings percentage"
+            }
+        },
+        "switchNetwork": {
+            "title": "Wissel van netwerk",
+            "newNetwork": "Nieuw netwerk",
+            "resetWarning": "Het veranderen van netwerken zal u uitloggen en alle rekeningen, saldi en transactiegeschiedenis voor dit profiel resetten.",
+            "switchingNetwork": "Wissel van netwerk",
+            "typePassword": "Typ uw wachtwoord om naar te schakelen:"
         },
         "errorLog": {
             "title": "Foutenlogboek",
@@ -684,7 +725,7 @@
         "syncAll": "Synchroniseer alles",
         "export": "Exporteer",
         "exportNewStronghold": "Exporteer een nieuwe Stronghold",
-        "enableDeepLinks": "Diepe links inschakelen",
+        "enableDeepLinks": "IOTA links inschakelen",
         "enableDeveloperMode": "Ontwikkelaarsmodus inschakelen",
         "enableSystemNotifications": "Notificaties inschakelen",
         "exportState": "Status exporteren",
@@ -702,6 +743,7 @@
         "addNode": "Node toevoegen",
         "updateNode": "Node bijwerken",
         "removeNode": "Verwijder node",
+        "removeAllNodes": "Alle nodes verwijderen",
         "hide": "Verberg",
         "hideOthers": "Verberg Andere",
         "showAll": "Toon Alles",
@@ -781,8 +823,9 @@
         "stronghold": "Stronghold",
         "language": "Taal",
         "appearance": "Vormgeving",
-        "lightTheme": "Lichte modus",
-        "darkTheme": "Donkere modus",
+        "lightTheme": "Licht",
+        "darkTheme": "Donker",
+        "systemTheme": "Systeem",
         "balance": "Saldo",
         "accountBalance": "Portemonnee saldo",
         "incoming": "Inkomend",
@@ -791,11 +834,7 @@
         "totalOut": "Totaal uitgaand",
         "accounts": "Portemonnees",
         "myAccounts": "Mijn Portemonnees",
-        "automaticNodeSelection": "Automatische node selectie",
-        "manualNodeSelection": "Handmatige node selectie",
         "profiles": "Profielen",
-        "developerProfile": "Ontwikkelaar Profiel",
-        "developerProfileDescription": "Maakt het mogelijk om verbinding te maken met testnets",
         "dev": "Ontwikkelaar",
         "createAccount": "Maak een portemonnee aan",
         "accountName": "Naam portemonnee",
@@ -803,6 +842,7 @@
         "transactions": "Transacties",
         "security": "Beveiliging",
         "accountAddress": "Portemonnee adres",
+        "network": "Netwerk",
         "nodes": "Nodes",
         "wallet": "Portemonnee",
         "help": "Help",
@@ -861,7 +901,8 @@
         "legacyNetwork": "Verouderd netwerk",
         "capsLock": "Caps Lock staat aan",
         "version": "Versie {version}",
-        "unknown": "Onbekend"
+        "unknown": "Onbekend",
+        "none": "Geen"
     },
     "dates": {
         "today": "Vandaag",
@@ -885,7 +926,17 @@
         "minutesRemaining": "{minutes, plural, one {1 minuut resterend} other {# minuten resterend}}",
         "copiedToClipboard": "Gekopieerd naar het klembord",
         "accountsSynchronized": "Portemonnee synchronisatie voltooid",
-        "fundsAvailableSoon": "Uw saldo wordt binnenkort beschikbaar"
+        "fundsAvailableSoon": "Uw saldo wordt binnenkort beschikbaar",
+        "deepLinkingRequest": {
+            "recievedWhileLoggedOut": "Log alstublieft in om de IOTA link te starten",
+            "notEnabled": "IOTA links zijn niet ingeschakeld",
+            "invalidFormat": "De IOTA link die u hebt gevolgd is ongeldig",
+            "wallet": {
+                "send": {
+                    "success": "Betalingsgegevens toegevoegd via IOTA link"
+                }
+            }
+        }
     },
     "error": {
         "profile": {
@@ -945,11 +996,23 @@
         },
         "node": {
             "invalid": "Voer een geldige URL in.",
-            "dns": "DNS voor node kon niet worden opgelost.",
-            "https": "HTTPS is vereist. Stel een ontwikkelaarsprofiel in om onbeveiligde HTTP-verbindingen te gebruiken.",
+            "dns": "Kan de DNS-resolutie voor node niet vinden.",
+            "timedOut": "Time-out van de verbinding.",
+            "refused": "De verbinding werd geweigerd.",
+            "handshake": "Handshake met node kon niet worden voltooid.",
+            "invalidCertificate": "Kan niet verbinden met ongeldig certificaat.",
+            "https": "HTTPS is vereist; onveilige verbindingen over HTTP worden op dit moment niet ondersteund.",
             "duplicate": "Deze node is reeds toegevoegd.",
             "unsynced": "De node is niet gesynchroniseerd.",
-            "noSynced": "Er zijn geen gesynchroniseerde nodes beschikbaar."
+            "noSynced": "Er zijn geen gesynchroniseerde nodes beschikbaar.",
+            "answer": "Het ophalen van een antwoord van alle knooppunten is mislukt.",
+            "forbidden": "Deze node verbinding is verboden."
+        },
+        "network": {
+            "mismatch": "De netwerk-ID voor deze node is \"{networkId}\", welke niet overeenkomt met het huidige netwerk.",
+            "notReachable": "Het netwerk-ID voor deze node kon niet worden opgehaald, kan node niet toevoegen.",
+            "badNodes": "Kan geen verbinding maken met het netwerk met de huidige node configuratie.",
+            "nonEmptyAccount": "Je moet alle saldi overdragen om van netwerk te wisselen."
         },
         "global": {
             "generic": "Er ging iets mis."
@@ -985,6 +1048,11 @@
         },
         "crypto": {
             "cannotDecodeBech32": "Kan tekenreeks niet decoderen als Bech32 adres."
+        }
+    },
+    "warning": {
+        "node": {
+            "http": "Het gebruik van nodes over HTTP laat verkeer onversleuteld en kan een veiligheidsrisico opleveren."
         }
     },
     "tooltips": {

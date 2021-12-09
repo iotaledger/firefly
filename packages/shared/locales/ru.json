@@ -15,13 +15,17 @@
         },
         "profile": {
             "title": "Создать профиль",
-            "profileName": "Имя профиля",
+            "profileName": "Profile name",
             "body1": "Вы можете создать несколько профилей, чтобы организовать ваши кошельки и повысить безопасность.",
             "body2": {
                 "first": "А сейчас, давайте начнем с вашего первого имени профиля.",
                 "nonFirst": "А сейчас, давайте начнем с вашего имени профиля."
             },
-            "addMore": "Вы можете добавить больше профилей позже."
+            "addMore": "Вы можете добавить больше профилей позже.",
+            "developer": {
+                "label": "Developer profile",
+                "info": "Connect to public and private IOTA networks"
+            }
         },
         "setup": {
             "title": "Настройте кошелек",
@@ -307,7 +311,8 @@
             },
             "theme": {
                 "title": "Внешний Вид",
-                "description": ""
+                "description": "",
+                "advice": "Restart the Firefly application for changes to the system theme to take effect"
             },
             "language": {
                 "title": "Язык",
@@ -323,14 +328,14 @@
             },
             "networkStatus": {
                 "title": "Статус сети",
-                "description": "Отображает стутус узла, к которому вы в данный момент подключены."
+                "description": "Displays the status of the node you are currently connected to"
             },
             "exportStronghold": {
-                "title": "Экспорт резервной копии",
+                "title": "Export backup",
                 "description": "Экспорт в файл Stronghold - полная зашифрованная резервная копия ваших кошельков и последней истории транзакций"
             },
             "appLock": {
-                "title": "Автоматическая блокировка",
+                "title": "Automatic lock",
                 "description": "Время бездействия до блокировки кошелька и выхода из системы",
                 "durationMinute": "{time, plural, one {1 минута} other {# минут}}",
                 "durationHour": "{time, plural, one {1 час} other {# часов}}"
@@ -360,28 +365,39 @@
                 "description": "Удаляет весь ваш профиль, кошельки и историю транзакций. Убедитесь, что у вас есть резервная копия"
             },
             "deepLinks": {
-                "title": "Умные ссылки",
-                "description": "Автоматически заполнить данные транзакций в Firefly при нажатии на ссылку iota://"
+                "title": "Ссылки IOTA",
+                "description": "Автоматически заполнить данные о транзакциях в Firefly при нажатии на ссылку IOTA"
             },
-            "developerMode": {
-                "title": "Режим Разработчика",
-                "description": "Подключиться к testnets и другим функциям разработчика"
-            },
-            "nodeSettings": {
-                "title": "Настройка Node (точка подключения к сети)",
-                "description": "Выберите Вручную для настройки параметров узла и подключения к вашему собственному узлу"
+            "networkConfiguration": {
+                "title": "Network config",
+                "title2": "Network configuration",
+                "description": {
+                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
+                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                },
+                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
+                "resetWallet": "Your wallet state has been reset.",
+                "connectedTo": "Connected to",
+                "nodeConfiguration": {
+                    "title": "Node selection",
+                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
+                    "automatic": "Automatic",
+                    "manual": "Manual"
+                }
             },
             "configureNodeList": {
-                "title": "Выберите узел",
-                "description": "Управляйте списком узлов сети IOTA, к которым вы подключаетесь",
+                "title": "Node configuration",
+                "description": "Manage the list of nodes you connect to",
                 "primaryNode": "Основной узел",
                 "excludeNode": "Исключить узел",
                 "includeNode": "Включить узел",
-                "viewDetails": "Посмотреть детали",
+                "editDetails": "Edit details",
+                "viewInfo": "View info",
                 "setAsPrimary": "Установить как основной",
                 "removeNode": "Удалить узел",
                 "includeOfficialNodeList": "Включить список официальных узлов",
-                "noNodes": "Узлов нет, вместо них будет использоваться автоматический выбор"
+                "noNodes": "There are no nodes, unable to connect to the network",
+                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "Доказательство Работы (PoW)",
@@ -396,7 +412,7 @@
                 "description": "Просмотр информации о системе и приложении"
             },
             "migrateLedgerIndex": {
-                "title": "Мигрировать индекс Ledger",
+                "title": "Migrate Ledger index",
                 "description": "Миграция другого индекса аккаунта Trinity"
             },
             "stateExport": {
@@ -413,7 +429,7 @@
             },
             "faq": {
                 "title": "ЧАВО",
-                "title2": "Часто задаваемые вопросы",
+                "title2": "Frequently asked questions",
                 "description": "Просмотреть часто задаваемые вопросы для получения помощи с общей проблемой или вопросом"
             },
             "discord": {
@@ -528,12 +544,37 @@
             "titleAdd": "Добавить узел",
             "titleUpdate": "Обновить узел",
             "titleRemove": "Удалить узел",
+            "titleRemoveAll": "Remove all nodes",
             "titleDetails": "Детали узла",
+            "titleInfo": "Node info",
+            "addingNode": "Adding node",
+            "updatingNode": "Updating node",
+            "loadingNodeInfo": "Loading node info",
             "nodeAddress": "Адрес узла",
             "optionalUsername": "Имя пользователя (опционально)",
             "optionalPassword": "Пароль (опционально)",
+            "optionalJwt": "JSON web token (optional)",
             "setAsPrimaryNode": "Установить как основной узел",
-            "removeConfirmation": "Ты уверен, что хотешь удалить этот узел?"
+            "removeConfirmation": "Ты уверен, что хотешь удалить этот узел?",
+            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "info": {
+                "url": "URL",
+                "software": "Software",
+                "networkId": "Network ID",
+                "bech32HRP": "Bech32 HRP",
+                "features": "Features",
+                "confirmedMilestoneIndex": "Confirmed milestone index",
+                "pruningIndex": "Pruning index",
+                "messagesPerSecond": "Сообщений в секунду",
+                "referencedRate": "Базовая ставка"
+            }
+        },
+        "switchNetwork": {
+            "title": "Switch network",
+            "newNetwork": "New network",
+            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
+            "switchingNetwork": "Switching network",
+            "typePassword": "Type your password to switch to:"
         },
         "errorLog": {
             "title": "Журнал ошибок",
@@ -635,7 +676,7 @@
         "outgoingMi": "Исходящие {value}",
         "portoflio": "Портфолио",
         "token": "Токен",
-        "holdings": "Holdings",
+        "holdings": "Владения",
         "accountValue": "Стоимость кошелька",
         "accountActivity": "Активность кошелька",
         "timeframe1Hour": "1 час",
@@ -684,7 +725,7 @@
         "syncAll": "Синхронизировать все",
         "export": "Экспортировать",
         "exportNewStronghold": "Экспортировать новый Stronghold",
-        "enableDeepLinks": "Активировать умные ссылки",
+        "enableDeepLinks": "Включить ссылки IOTA",
         "enableDeveloperMode": "Активировать режим Разработчика",
         "enableSystemNotifications": "Включить систему уведомлений",
         "exportState": "Экспортировать отчет",
@@ -702,6 +743,7 @@
         "addNode": "Добавить узел",
         "updateNode": "Обновить узел",
         "removeNode": "Удалить узел",
+        "removeAllNodes": "Remove all nodes",
         "hide": "Скрыть",
         "hideOthers": "Скрыть остальные",
         "showAll": "Показать всё",
@@ -781,8 +823,9 @@
         "stronghold": "Stronghold",
         "language": "Язык",
         "appearance": "Внешний вид",
-        "lightTheme": "Светлая тема",
-        "darkTheme": "Тёмная тема",
+        "lightTheme": "Light",
+        "darkTheme": "Dark",
+        "systemTheme": "System",
         "balance": "Баланс",
         "accountBalance": "Баланс кошелька",
         "incoming": "Входящие",
@@ -791,11 +834,7 @@
         "totalOut": "Всего (исх.)",
         "accounts": "Кошельки",
         "myAccounts": "Мои кошельки",
-        "automaticNodeSelection": "Авто подбор Node (точка подключения к сети)",
-        "manualNodeSelection": "Ручной выбор Node (точка подключения к сети)",
         "profiles": "Профили",
-        "developerProfile": "Профиль разработчика",
-        "developerProfileDescription": "Позволяет подключаться к тестовым сетям",
         "dev": "Разработчик",
         "createAccount": "Создать кошелёк",
         "accountName": "Имя кошелька",
@@ -803,6 +842,7 @@
         "transactions": "Транзакции",
         "security": "Настройки Безопасности",
         "accountAddress": "Адрес кошелька",
+        "network": "Network",
         "nodes": "Узлы",
         "wallet": "Кошелёк",
         "help": "Помощь",
@@ -861,7 +901,8 @@
         "legacyNetwork": "Устаревшая сеть",
         "capsLock": "Включен Caps Lock",
         "version": "Версия {version}",
-        "unknown": "Неизвестно"
+        "unknown": "Неизвестно",
+        "none": "None"
     },
     "dates": {
         "today": "Сегодня",
@@ -885,7 +926,17 @@
         "minutesRemaining": "{minutes, plural, one {Осталась 1 минута} other { Осталось # минут}}",
         "copiedToClipboard": "Скопировано в буфер обмена",
         "accountsSynchronized": "Синхронизация кошелька завершена",
-        "fundsAvailableSoon": "Ваши средства будут доступны в ближайшее время"
+        "fundsAvailableSoon": "Ваши средства будут доступны в ближайшее время",
+        "deepLinkingRequest": {
+            "recievedWhileLoggedOut": "Пожалуйста, войдите в систему, чтобы открыть ссылку IOTA",
+            "notEnabled": "Ссылки IOTA не включены",
+            "invalidFormat": "Ссылка на IOTA, по которой вы перешли, недействительна",
+            "wallet": {
+                "send": {
+                    "success": "Платежные реквизиты добавлены из ссылки IOTA"
+                }
+            }
+        }
     },
     "error": {
         "profile": {
@@ -945,11 +996,23 @@
         },
         "node": {
             "invalid": "Пожалуйста, введите правильный адрес.",
-            "dns": "Could not resolve DNS for node.",
-            "https": "Требуется HTTPS. Настройте профиль разработчика для использования небезопасных HTTP-соединений.",
+            "dns": "Could not find DNS resolution for node.",
+            "timedOut": "The connection timed out.",
+            "refused": "The connection was refused.",
+            "handshake": "Could not complete handshake with node.",
+            "invalidCertificate": "Could not connect with invalid certificate.",
+            "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
             "duplicate": "Этот узел уже был добавлен.",
             "unsynced": "Узел не синхронизирован.",
-            "noSynced": "Нет доступных синхронизированных узлов."
+            "noSynced": "Нет доступных синхронизированных узлов.",
+            "answer": "Failed to get an answer from all nodes.",
+            "forbidden": "This node connection is forbidden."
+        },
+        "network": {
+            "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
+            "notReachable": "The network ID for this node could not be retrieved, unable to add node.",
+            "badNodes": "Unable to connect to the network with current node configuration.",
+            "nonEmptyAccount": "You must transfer all balances before switching networks."
         },
         "global": {
             "generic": "Что-то пошло не так."
@@ -984,7 +1047,12 @@
             "missingBundle": "Произошла ошибка при попытке найти узел транзакции."
         },
         "crypto": {
-            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
+            "cannotDecodeBech32": "Невозможно декодировать строку как Bech32 адрес."
+        }
+    },
+    "warning": {
+        "node": {
+            "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
         }
     },
     "tooltips": {

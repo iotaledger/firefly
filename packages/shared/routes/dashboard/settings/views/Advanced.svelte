@@ -1,24 +1,25 @@
 <script lang="typescript">
-    import { Button,Checkbox,HR,Radio,Text } from 'shared/components'
-    import { clickOutside } from 'shared/lib/actions'
-    import { loggedIn } from 'shared/lib/app'
-    import { appSettings } from 'shared/lib/appSettings'
-    import { Electron } from 'shared/lib/electron'
-    import { navigateToNewIndexMigration } from 'shared/lib/ledger'
+    import { Button,Checkbox,HR,Radio,Text } from 'shared/components';
+    import { clickOutside } from 'shared/lib/actions';
+    import { loggedIn } from 'shared/lib/app';
+    import { appSettings } from 'shared/lib/appSettings';
+    import { Electron } from 'shared/lib/electron';
+    import { navigateToNewIndexMigration } from 'shared/lib/ledger';
     import {
-        ensureSinglePrimaryNode, getNodeCandidates,
+        ensureSinglePrimaryNode,getNodeCandidates,
         getOfficialNetworkConfig,
         getOfficialNodes,
         isOfficialNetwork,
-        updateClientOptions,
-    } from 'shared/lib/network'
-    import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, isLedgerProfile, updateProfile } from 'shared/lib/profile'
-    import { wallet } from 'shared/lib/wallet'
-    import { Locale } from 'shared/lib/typings/i18n'
-    import { Node } from 'shared/lib/typings/node'
-    import { NetworkConfig, NetworkStatusHealthText, NetworkType } from 'shared/lib/typings/network'
-    import { NETWORK_HEALTH_COLORS, networkStatus } from 'shared/lib/networkStatus'
+        updateClientOptions
+    } from 'shared/lib/network';
+    import { networkStatus,NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus';
+    import { openPopup } from 'shared/lib/popup';
+    import { activeProfile,isLedgerProfile,updateProfile } from 'shared/lib/profile';
+    import type { Locale } from 'shared/lib/typings/i18n';
+    import { NetworkConfig,NetworkStatusHealthText,NetworkType } from 'shared/lib/typings/network';
+    import type { Node } from 'shared/lib/typings/node';
+    import { wallet } from 'shared/lib/wallet';
+    import { get } from 'svelte/store';
 
     export let locale: Locale
 
@@ -26,7 +27,7 @@
 
     let showHiddenAccounts = $activeProfile?.settings.showHiddenAccounts
 
-    const networkConfig: NetworkConfig = $activeProfile?.settings.networkConfig || getOfficialNetworkConfig(NetworkType.ChrysalisMainnet)
+    const networkConfig: NetworkConfig = get(activeProfile)?.settings.networkConfig || getOfficialNetworkConfig(NetworkType.ChrysalisMainnet)
 
     if (networkConfig.nodes.length !== 0) {
         ensureOnePrimaryNode()
@@ -67,16 +68,7 @@
     }
 
     function ensureValidNodeSelection(): void {
-        /**
-         * NOTE: There's no need to ensure a valid node
-         * selection if it will be handled automatically.
-         */
-        if (networkConfig.automaticNodeSelection) return
-
         networkConfig.nodes = getNodeCandidates(networkConfig)
-        if (!networkConfig.includeOfficialNodes) {
-            networkConfig.nodes = networkConfig.nodes.filter((n) => !getOfficialNodes(networkConfig.network.type).map((_n) => _n.url.includes(n.url)))
-        }
     }
 
     function ensureOnePrimaryNode(): void {
@@ -86,9 +78,6 @@
     function handleSetPrimaryNode(node: Node) {
         networkConfig.nodes = networkConfig.nodes.map((n) => ({ ...n, isPrimary: n.url === node.url }))
         nodeContextMenu = undefined
-
-        updateClientOptions(networkConfig)
-        updateProfile('settings.networkConfig', networkConfig)
     }
 
     function handleAddNodeClick() {
@@ -106,9 +95,6 @@
 
                     networkConfig.nodes = [...networkConfig.nodes.filter((n) => n.url !== node.url), node]
                     if(networkConfig.nodes.length === 0) networkConfig.nodes = [node]
-
-                    updateClientOptions(networkConfig)
-                    updateProfile('settings.networkConfig', networkConfig)
 
                     setTimeout(() => {
                         /**
@@ -140,9 +126,6 @@
                         }
 
                         networkConfig.nodes[idx] = node
-
-                        updateClientOptions(networkConfig)
-                        updateProfile('settings.networkConfig', networkConfig)
                     }
                 },
             },
@@ -196,23 +179,31 @@
     function handleBalanceFinderClick() {
         openPopup({ type: 'balanceFinder', hideClose: true })
     }
+
+    function handleExportTransactionHistoryClick() {
+        openPopup({ type: 'exportTransactionHistory', hideClose: false })
+    }
 </script>
 
 <style type="text/scss">
-  .nodes-container {
-    max-height: 338px;
-  }
+    .nodes-container {
+        max-height: 338px;
+    }
 </style>
 
 <div>
     {#if $loggedIn}
         <section id="networkConfiguration">
             <Text type="h4" classes="mb-3">{locale('views.settings.networkConfiguration.title2')}</Text>
-            <Text type="p" secondary classes="mb-3">{locale(`views.settings.networkConfiguration.description.${$activeProfile.isDeveloperProfile ? 'dev' : 'nonDev'}`)}</Text>
+            <Text type="p" secondary classes="mb-3">
+                {locale(`views.settings.networkConfiguration.description.${$activeProfile.isDeveloperProfile ? 'dev' : 'nonDev'}`)}
+            </Text>
             {#if $activeProfile?.isDeveloperProfile}
                 <div class="flex flex-row justify-between w-3/4">
                     <div>
-                        <Text type="p" classes="inline" secondary>{locale('views.settings.networkConfiguration.connectedTo')}:</Text>
+                        <Text type="p" classes="inline" secondary>
+                            {locale('views.settings.networkConfiguration.connectedTo')}:
+                        </Text>
                         <Text type="p" highlighted>{networkConfig.network.name}</Text>
                     </div>
                     <div>
@@ -229,10 +220,21 @@
         <HR classes="pb-5 mt-5 justify-center" />
         {#if canConfigureNodes}
             <section id="nodeConfiguration">
-                <Text type="h5" classes="mb-3">{locale('views.settings.networkConfiguration.nodeConfiguration.title')}</Text>
-                <Text type="p" secondary classes="mb-5">{locale('views.settings.networkConfiguration.nodeConfiguration.description')}</Text>
-                <Radio value={true} bind:group={networkConfig.automaticNodeSelection} label={locale('views.settings.networkConfiguration.nodeConfiguration.automatic')} subLabel='Connect to official nodes from the IOTA Foundation' />
-                <Radio value={false} bind:group={networkConfig.automaticNodeSelection} label={locale('views.settings.networkConfiguration.nodeConfiguration.manual')} />
+                <Text type="h5" classes="mb-3">
+                    {locale('views.settings.networkConfiguration.nodeConfiguration.title')}
+                </Text>
+                <Text type="p" secondary classes="mb-5">
+                    {locale('views.settings.networkConfiguration.nodeConfiguration.description')}
+                </Text>
+                <Radio
+                    value={true}
+                    bind:group={networkConfig.automaticNodeSelection}
+                    label={locale('views.settings.networkConfiguration.nodeConfiguration.automatic')}
+                    subLabel="Connect to official nodes from the IOTA Foundation" />
+                <Radio
+                    value={false}
+                    bind:group={networkConfig.automaticNodeSelection}
+                    label={locale('views.settings.networkConfiguration.nodeConfiguration.manual')} />
             </section>
             <HR classes="pb-5 mt-5 justify-center" />
         {/if}
@@ -297,7 +299,9 @@
                                     <Text smaller>{locale('views.settings.configureNodeList.viewInfo')}</Text>
                                 </button>
                             {/if}
-                            {#if !getOfficialNodes(networkConfig.network.type).map((n) => n.url).includes(nodeContextMenu.url)}
+                            {#if !getOfficialNodes(networkConfig.network.type)
+                                .map((n) => n.url)
+                                .includes(nodeContextMenu.url)}
                                 <button
                                     on:click={() => {
                                         handleEditNodeDetailsClick(nodeContextMenu)
@@ -311,8 +315,10 @@
                                 <button
                                     on:click={() => {
                                         nodeContextMenu.isDisabled = !nodeContextMenu.isDisabled
-                                        networkConfig.nodes
-                                            = networkConfig.nodes.map((n) => ({ ...n, isDisabled: (n.url === nodeContextMenu.url && nodeContextMenu.isDisabled) }))
+                                        networkConfig.nodes = networkConfig.nodes.map((n) => ({
+                                            ...n,
+                                            isDisabled: n.url === nodeContextMenu.url && nodeContextMenu.isDisabled,
+                                        }))
                                         nodeContextMenu = undefined
                                     }}
                                     class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20">
@@ -321,7 +327,9 @@
                                     </Text>
                                 </button>
                             {/if}
-                            {#if !getOfficialNodes(networkConfig.network.type).map((n) => n.url).includes(nodeContextMenu.url)}
+                            {#if !getOfficialNodes(networkConfig.network.type)
+                                .map((n) => n.url)
+                                .includes(nodeContextMenu.url)}
                                 <HR />
                                 <button
                                     on:click={() => {
@@ -339,7 +347,13 @@
                     <Button medium inlineStyle="min-width: 156px;" classes="w-1/2" onClick={handleAddNodeClick}>
                         {locale('actions.addNode')}
                     </Button>
-                    <Button disabled={!canRemoveAllNodes} warning medium inlineStyle="min-width: 156px;" classes="w-1/2" onClick={handleRemoveAllNodesClick}>
+                    <Button
+                        disabled={!canRemoveAllNodes}
+                        warning
+                        medium
+                        inlineStyle="min-width: 156px;"
+                        classes="w-1/2"
+                        onClick={handleRemoveAllNodesClick}>
                         {locale('actions.removeAllNodes')}
                     </Button>
                 </div>
@@ -402,13 +416,18 @@
             </Button>
         </section>
     {/if}
-    <!-- TODO: Implement state export -->
-    <!-- {#if $loggedIn}
-    <HR classes="pb-5 mt-5 justify-center" />
-    <section id="stateExport" class="w-3/4 opacity-50">
-        <Text type="h4" classes="mb-3">{locale('views.settings.stateExport.title')}</Text>
-        <Text type="p" secondary classes="mb-5">{locale('views.settings.stateExport.description')}</Text>
-        <Button medium inlineStyle="min-width: 156px;" disabled onClick={() => {}}>{locale('actions.exportState')}</Button>
-    </section>
-    {/if} -->
+    {#if $loggedIn}
+        <HR classes="pb-5 mt-5 justify-center" />
+        <section id="transactionHistory" class="w-3/4">
+            <Text type="h4" classes="mb-3">{locale('views.settings.transactionHistory.title')}</Text>
+            <Text type="p" secondary classes="mb-5">{locale('views.settings.transactionHistory.description')}</Text>
+            <Button
+                classes="px-10"
+                medium
+                inlineStyle="min-width: 156px;"
+                onClick={handleExportTransactionHistoryClick}>
+                {locale('actions.exportTransactionHistory')}
+            </Button>
+        </section>
+    {/if}
 </div>

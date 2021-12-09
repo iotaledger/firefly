@@ -415,9 +415,9 @@
                 "title": "Migrate Ledger index",
                 "description": "Migrate another Trinity account index"
             },
-            "stateExport": {
-                "title": "State export",
-                "description": "Export your transaction history to a .csv file"
+            "transactionHistory": {
+                "title": "Transaction history",
+                "description": "Export the transaction history of your accounts as .csv files"
             },
             "troubleshoot": {
                 "title": "Troubleshoot",
@@ -496,7 +496,8 @@
             "welcome": "Welcome to the staking dashboard!",
             "manager": {
                 "availableForStaking": "Available for staking",
-                "currentlyStaked": "Currently staked"
+                "currentlyStaked": "Currently staked",
+                "stakedFunds": "Staked funds"
             },
             "status": {
                 "upcoming": "Staking upcoming",
@@ -520,7 +521,7 @@
                     "Rewards are continually airdropped to you."
                 ],
                 "upcomingSubheader": "Airdrop events commences",
-                "upcomingHeader": "Dec 15th 2021",
+                "upcomingHeader": "December 1st",
                 "commencingSubheader": "Airdrop events commencing",
                 "commencingHeader": "Pre-stake phase",
                 "holdingSubheader": "Airdrop events ongoing",
@@ -544,7 +545,7 @@
                 }
             },
             "notice": {
-                "date": "Staking commences December 15th",
+                "date": "Staking commences Dec 1st",
                 "body": "By locking your funds for staking before the event starts, you will automatically commence active staking when the staking event starts (no additional rewards will be earned).",
                 "ok": "Ok, I understand"
             },
@@ -554,7 +555,7 @@
             },
             "confirmation": {
                 "title": "You're about to stake",
-                "body": "Stake for the remaining time and receive an estimated airdrop of:",
+                "body": "Estimated airdrop",
                 "next": "Next"
             }
         }
@@ -666,7 +667,7 @@
         "transaction": {
             "title": "Confirm transaction",
             "body": "You’re about to send {amount} to",
-            "sendingFromStakedAccount": "This account is participating in a staking event - sending this transaction will unstake some or all of your funds."
+            "sendingFromStakedAccount": "You are sending funds from a staked wallet participating in airdrops. By proceeding to send this transaction, it will unstake some or all of your funds. By pressing cancel your funds will continue to be staked and airdrops will be received as normal."
         },
         "balanceFinder": {
             "title": "Balance finder",
@@ -738,6 +739,14 @@
             "title": "Do you need to migrate another Trinity account index?",
             "body": "You can also migrate later in Advanced Settings."
         },
+        "exportTransactionHistory": {
+            "title": "Export transaction history",
+            "body": "Export your transaction history for all accounts consecutively within this profile. Exports will be in a CSV format.",
+            "profileName": "Profile name:",
+            "numberOfAccounts": "Number of accounts:",
+            "typePassword": "Type your password to allow exporting"
+
+        },
         "stakingManager": {
             "titleWithStake": "Manage your stake wallets",
             "titleWithNoStake": "Choose which wallets you want to stake",
@@ -802,11 +811,12 @@
         "dropHere": "Drop your file here",
         "syncAll": "Sync all",
         "export": "Export",
+        "exporting": "Exporting",
         "exportNewStronghold": "Export a new Stronghold",
         "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "Enable developer mode",
         "enableSystemNotifications": "Enable system notifications",
-        "exportState": "Export state",
+        "exportTransactionHistory": "Export transaction history",
         "localProofOfWork": "Local proof of work",
         "unlock": "Unlock",
         "updateFirefly": "Update Firefly",
@@ -865,7 +875,8 @@
         "stake": "Stake",
         "unstake": "Unstake",
         "stakeFunds": "Stake funds",
-        "manageStake": "Manage stake"
+        "manageStake": "Manage stake",
+        "gimmeSteak": "Gimme steak"
     },
     "general": {
         "password": "Password",
@@ -954,6 +965,8 @@
         "transferBroadcasting": "Broadcasting transaction",
         "transferComplete": "Transfer complete",
         "generatingReceiveAddress": "Generating receive address",
+        "broadcasting": "Broadcasting",
+        "confirming": "Confirming",
         "creatingAccount": "Creating wallet, please wait...",
         "updatingAccount": "Updating wallet, please wait...",
         "accountSyncing": "Wallet is syncing",
@@ -1007,7 +1020,7 @@
         "unstaked": "Unstaked",
         "staking": "Staking",
         "unstaking": "Unstaking",
-        "notStaking": "Not staking",
+        "notStaked": "Not staked",
         "stakedFunds": "Staked funds",
         "unstakedFunds": "Unstaked funds"
     },
@@ -1034,6 +1047,10 @@
         "copiedToClipboard": "Copied to clipboard",
         "accountsSynchronized": "Wallet synchronization complete",
         "fundsAvailableSoon": "Your funds will become available shortly",
+        "exportTransactionHistory": {
+            "success": "Transaction history for {accountAlias} was successfully saved to {filePath}",
+            "error": "Unable to export transaction history for {accountAlias}"
+        },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
             "notEnabled": "IOTA links are not enabled",
@@ -1160,7 +1177,8 @@
         "participation": {
             "cannotUseAccount": "Unable to use the specified account.",
             "cannotFindStakingEvent": "Unable to find staking event.",
-            "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website."
+            "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
+            "invalidStakingEventId": "Invalid staking event ID."
         }
     },
     "warning": {

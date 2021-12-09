@@ -21,7 +21,10 @@ export interface RegularEssence {
     outputs: Output[]
     payload?: {
         type: 'Indexation'
-        data: unknown
+        data: {
+            data: number[];
+            index: number[]
+        }
     }
     incoming: boolean
     internal: boolean
