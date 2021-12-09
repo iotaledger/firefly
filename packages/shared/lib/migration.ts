@@ -26,7 +26,6 @@ import { derived, get, writable } from 'svelte/store'
 import { localize } from './i18n'
 import { showAppNotification } from './notifications'
 import { LedgerMigrationProgress } from 'shared/lib/typings/migration'
-import type { Event } from './typings/events'
 
 const LEGACY_ADDRESS_WITHOUT_CHECKSUM_LENGTH = 81
 

@@ -1,15 +1,9 @@
-declare module "@capacitor/core" {
-  interface PluginRegistry {
-    WalletPlugin: WalletPlugin;
-  }
-}
-
-export interface InitOptions {
-  storagePath?: string
-}
-
-export interface WalletPlugin {
-  initialize(options?: InitOptions): void;
-  sendMessage(message: { [k: string]: any }): Promise<void>;
-  addListener(event: 'walletMessageReceived', cb: (message: any) => void): void;
+import type { PluginListenerHandle } from "@capacitor/core";
+//import type { MessageResponse } from '../../../../shared/lib/typings/bridge'
+export interface WalletPluginTypes {
+  initialize(options: { actorId: string }): Promise<void>
+  listen(options: { actorId: string, id: string, event: string }): Promise<string>
+  destroy(options: { actorId: string }): Promise<void>
+  sendMessage(message: { [key: string]: any }): Promise<void>
+  addListener(walletEvent: 'walletEvent', cb: (message: {walletResponse: any}) => void): PluginListenerHandle
 }

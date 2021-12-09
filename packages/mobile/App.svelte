@@ -7,6 +7,7 @@
     import { fetchMarketData } from 'shared/lib/market'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
     import { initRouter, routerNext, routerPrevious } from 'shared/lib/router'
+    import { Platforms } from 'shared/lib/typings/platform';
     import { AppRoute } from 'shared/lib/typings/routes'
     import {
         Appearance,
@@ -29,7 +30,7 @@
     } from 'shared/routes'
     import { onMount } from 'svelte'
 
-    mobile.set(true)
+    mobile.set(process.env.PLATFORM == Platforms.MOBILE)
 
     $: $appSettings.darkMode
         ? document.body.classList.add('scheme-dark')
