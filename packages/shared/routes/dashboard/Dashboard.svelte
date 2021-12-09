@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Idle, Sidebar, SafeArea } from 'shared/components'
     import { Settings, Wallet } from 'shared/routes'
-    import { loggedIn, logout, sendParams } from 'shared/lib/app'
+    import { loggedIn, logout, mobile, sendParams } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { deepLinkRequestActive, parseDeepLink } from 'shared/lib/deepLinking/deepLinking'
     import { DeepLinkingContexts } from 'shared/lib/typings/deepLinking/deepLinking';
@@ -253,11 +253,19 @@
 </script>
 
 <Idle />
+{#if $mobile}
 <SafeArea top>
-    <div class="flex flex-row w-full h-full">
-        <Sidebar {locale} />
-        <!-- Dashboard Pane -->
-        <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
-    </div>
+<div class="flex flex-row w-full h-full">
+    <Sidebar {locale} />
+    <!-- Dashboard Pane -->
+    <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
+</div>
 </SafeArea>
+{:else}
+<div class="flex flex-row w-full h-full">
+    <Sidebar {locale} />
+    <!-- Dashboard Pane -->
+    <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
+</div>
+{/if}
 

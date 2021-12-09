@@ -53,6 +53,7 @@ export { default as ProgressFlow } from './ProgressFlow.svelte'
 export { default as Video } from './Video.svelte'
 export { default as TransactionTabs } from './TransactionTabs.svelte'
 export { default as Drawer } from './Drawer.svelte'
+export { default as SafeArea } from './SafeArea.svelte'
 
 export * from './modals'
 // Charts
