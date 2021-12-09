@@ -103,13 +103,11 @@
     on:mouseenter={toggleTooltip}
     on:mouseleave={toggleTooltip}
 >
-    <Icon icon={indicatorIcon} classes="fill-current text-blue-500" />
-    <Text type="p" classes="mx-3">{indicatorText}</Text>
-    <div
-        bind:this={indicatorBox}
-    >
+    <div bind:this={indicatorBox} class="mx-1">
         <Icon icon="info-filled" classes="fill-current text-gray-600 transform translate-y-1" />
     </div>
+    <Text type="p">{indicatorText}</Text>
+    <Icon icon={indicatorIcon} classes="mx-1 fill-current text-blue-500" />
 </div>
 {#if showTooltip}
     <Tooltip {parentTop} {parentLeft} {parentWidth} position="right">

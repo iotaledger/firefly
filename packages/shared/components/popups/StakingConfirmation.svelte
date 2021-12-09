@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Checkbox, Illustration, Text } from 'shared/components'
+    import { Button, Checkbox, Icon, Illustration, Text } from 'shared/components'
     import { Locale } from 'shared/lib/typings/i18n'
     import { ledgerDeviceState } from 'shared/lib/ledger'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
@@ -81,9 +81,9 @@
 
 <button
     on:click={handleBackClick}
-    class="absolute top-5 left-8 text-gray-800 dark:text-white focus:text-blue-500"
+    class="absolute top-6 left-8 text-gray-800 dark:text-white focus:text-blue-500"
 >
-    <Text type="p" classes="text-xl">&lt;</Text>
+    <Icon icon="chevron-left" />
 </button>
 <Text type="h3" classes="mb-2 text-center font-extrabold">{accountToStake.alias}</Text>
 <div class="flex flex-col">
