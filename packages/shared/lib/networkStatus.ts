@@ -96,6 +96,8 @@ async function pollNetworkStatusInternal(): Promise<void> {
  * @returns {Promise<void>}
  */
 export const updateNetworkStatus = async (accountId: string, node: Node): Promise<void> => {
+    if (!accountId || !node) return
+
     if (node || isOfficialNetwork(get(activeProfile)?.settings.networkConfig.network.type)) {
         const response = await asyncGetNodeInfo(accountId, node?.url, cleanNodeAuth(node?.auth))
         const timeSinceLastMsInMinutes = (Date.now() - response.nodeinfo.latestMilestoneTimestamp * MILLISECONDS_PER_SECOND) / (MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE)
@@ -127,7 +129,7 @@ export const updateNetworkStatus = async (accountId: string, node: Node): Promis
             health,
             healthText,
             currentMilestone: response.nodeinfo.confirmedMilestoneIndex,
-            nodePlugins: response.nodeinfo.features as NodePlugin[],
+            nodePlugins: response.nodeinfo.features,
         })
     } else {
         networkStatus.set({
