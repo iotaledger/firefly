@@ -104,18 +104,16 @@
 >
     <div class="mb-2 w-full flex flex-row justify-between items-start space-x-1.5">
         <div class="flex flex-row space-x-1.5 items-start">
-            <div class="pt-0.5">
-                {#if isPartiallyStaked}
-                    <div
-                        bind:this={iconBox}
-                        on:mouseenter={togglePartialStakeTooltip}
-                        on:mouseleave={togglePartialStakeTooltip}>
-                        <Icon icon="exclamation" width="16" height="16" classes="fill-current text-gray-800" />
-                    </div>
-                {:else if isStaked}
-                    <Icon icon="tokens" width="16" height="16" classes="fill-current text-gray-800" />
-                {/if}
-            </div>
+            {#if isPartiallyStaked}
+                <div
+                    bind:this={iconBox}
+                    on:mouseenter={togglePartialStakeTooltip}
+                    on:mouseleave={togglePartialStakeTooltip}>
+                    <Icon icon="exclamation" width="16" height="16" classes="mt-0.5 fill-current text-gray-800" />
+                </div>
+            {:else if isStaked}
+                <Icon icon="tokens" width="16" height="16" classes="mt-0.5 fill-current text-gray-800" />
+            {/if}
             <Text
                 bold
                 smaller={size === 's'}
