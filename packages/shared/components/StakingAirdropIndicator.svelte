@@ -50,7 +50,7 @@
             <span class="relative inline-flex rounded-full h-2 w-2 bg-{isStaked ? 'green' : 'red'}-600"></span>
         </span>
         <div
-            class="pl-10 pr-5 py-2 rounded-2xl bg-opacity-20 bg-white dark:bg-white"
+            class="pl-10 pr-5 py-2 rounded-2xl bg-white bg-opacity-20"
         >
             <Text type="p" classes="text-white dark:text-white">{localize(`general.${isStaked ? 'staking' : 'notStaked'}`)}</Text>
         </div>
