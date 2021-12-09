@@ -70,46 +70,44 @@
             classes="{airdrop === StakingAirdrop.Assembly ? 'opacity-20' : ''} fill-current text-white"
         />
     </div>
-    <div class="px-8 h-full pb-10 flex flex-col justify-end">
-        <div class="h-1/2 flex flex-col justify-between">
-            <div class="mb-4 flex flex-row items-center">
+    <div class="px-8 h-full pb-10 flex flex-col justify-end space-y-5">
+        <div class="flex flex-col space-y-3">
+            <div class="flex flex-row items-center">
                 <Text type="h3" classes="mr-4 text-white text-2xl">
                     {localize(`views.staking.airdrops.${airdrop}.name`)}
                 </Text>
                 <StakingAirdropIndicator {airdrop} />
             </div>
-            <Text type="p" overrideColor overrideLeading classes="mb-3 font-normal text-sm  leading-140 text-gray-300 dark:text-gray-300">
+            <Text type="p" overrideColor overrideLeading classes="font-normal text-sm leading-140 text-gray-300 dark:text-gray-300">
                 {localize(`views.staking.airdrops.${airdrop}.description`)}
             </Text>
             <Link onClick={handleLearnMoreClick} classes="text-14">
                 {localize('actions.visitWebsite')}
             </Link>
         </div>
-        <div>
-            <HR classes="my-8" />
-            <div class="flex flex-row space-x-2">
-                <div class="flex flex-col w-1/2">
-                    <div>
-                        <Text type="p" classes="font-bold text-lg inline text-white dark:text-white">{remainingTimeAmount}</Text>
-                        <Text type="p" secondary classes="text-sm inline">{remainingTimeUnit}</Text>
-                    </div>
-                    <Text type="p" smaller overrideColor classes="font-normal text-sm mt-0.5 text-gray-400 dark:text-gray-400">
-                        {localize('views.staking.airdrops.remaining')}
+        <HR />
+        <div class="flex flex-row space-x-2">
+            <div class="flex flex-col w-1/2">
+                <div>
+                    <Text type="p" classes="font-bold text-lg inline text-white dark:text-white">{remainingTimeAmount}</Text>
+                    <Text type="p" secondary classes="text-sm inline">{remainingTimeUnit}</Text>
+                </div>
+                <Text type="p" smaller overrideColor classes="font-normal text-sm mt-0.5 text-gray-400 dark:text-gray-400">
+                    {localize('views.staking.airdrops.remaining')}
+                </Text>
+            </div>
+            <div class="flex flex-col w-1/2">
+                <div>
+                    <Text type="p" classes="font-bold text-lg inline text-white dark:text-gray-400">
+                        {formatStakingAirdropReward(airdrop, isAssembly() ? $assemblyStakingRewards : $shimmerStakingRewards, 6).split(' ')[0]}
+                    </Text>
+                    <Text type="p" secondary classes="text-sm inline">
+                        {formatStakingAirdropReward(airdrop, isAssembly() ? $assemblyStakingRewards : $shimmerStakingRewards, 6).split(' ')[1]}
                     </Text>
                 </div>
-                <div class="flex flex-col w-1/2">
-                    <div>
-                        <Text type="p" classes="font-bold text-lg inline text-white dark:text-gray-400">
-                            {formatStakingAirdropReward(airdrop, isAssembly() ? $assemblyStakingRewards : $shimmerStakingRewards, 6).split(' ')[0]}
-                        </Text>
-                        <Text type="p" secondary classes="text-sm inline">
-                            {formatStakingAirdropReward(airdrop, isAssembly() ? $assemblyStakingRewards : $shimmerStakingRewards, 6).split(' ')[1]}
-                        </Text>
-                    </div>
-                    <Text type="p" smaller overrideColor classes="font-normal mt-0.5 text-gray-400 dark:text-gray-400">
-                        {localize('views.staking.airdrops.collectedRewards')}
-                    </Text>
-                </div>
+                <Text type="p" smaller overrideColor classes="font-normal mt-0.5 text-gray-400 dark:text-gray-400">
+                    {localize('views.staking.airdrops.collectedRewards')}
+                </Text>
             </div>
         </div>
     </div>
