@@ -396,7 +396,12 @@ export const api: IWalletApi = new Proxy(
                 const title = `Callback Error ${propKey.toString()}`
 
                 console.error(title, err)
-                void Electron.unhandledException(title, { message: err?.message, stack: err?.stack })
+                void Electron.unhandledException(title, {
+                    time: Date.now(),
+                    type: 'UnhandledException',
+                    message: err?.message ?? '',
+                    stack: err?.stack,
+                })
             }
 
             /* eslint-disable @typescript-eslint/no-explicit-any */
