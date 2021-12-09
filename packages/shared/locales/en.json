@@ -755,7 +755,9 @@
             "hasStaked": "Congratulations! \uD83C\uDF89Your funds have been staked.",
             "hasPartiallyStaked": "Congratulations! \uD83C\uDF89The rest of your funds have been staked.",
             "hasUnstaked": "Your funds have been unstaked.",
-            "hasPartiallyUnstaked": "Your remaining funds have been unstaked."
+            "hasPartiallyUnstaked": "Your remaining funds have been unstaked.",
+            "stakedSuccessfully": "Your funds have been staked from {account}.",
+            "unstakedSuccessfully": "Your funds have been unstaked from {account}."
         }
     },
     "charts": {

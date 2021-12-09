@@ -62,12 +62,17 @@ import type {
 } from './typings/wallet'
 
 // PARTICIPATION
-import type {
+import {
     ParticipateResponsePayload,
     Participation,
+    ParticipationAction,
     ParticipationEvent,
-    ParticipationOverviewResponse
+    ParticipationOverviewResponse,
+    PendingParticpation
 } from './participation/types'
+
+import { removePendingParticipations, hasPendingParticipation, getPendingParticipation } from './participation/stores'
+import { getParticipationOverview } from './participation/api'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -803,6 +808,28 @@ export const asyncGetNodeInfo = (accountId: string, url?: string, auth?: NodeAut
 }
 
 /**
+ * Displays participation (stake/unstake) notification
+ * 
+ * @method displayParticipationNotification
+ * 
+ * @param {PendingParticpation} pendingParticipation
+ * 
+ * @return void
+ */
+function displayParticipationNotification(pendingParticipation: PendingParticpation): void {
+    if (pendingParticipation) {
+        const { accounts } = get(wallet);
+        const account = get(accounts).find((_account) => _account.id === pendingParticipation.accountId);
+
+        showAppNotification({
+            type: 'info',
+            message: localize(`popups.stakingManager.${pendingParticipation.action === ParticipationAction.Stake ? 'staked' : 'unstaked'}Successfully`,
+                { values: { account: account.alias } }),
+        })
+    }
+}
+
+/**
  * Initialises event listeners from wallet library
  *
  * @method initialiseListeners
@@ -884,6 +911,18 @@ export const initialiseListeners = (): void => {
         onSuccess(response) {
             const { accounts } = get(wallet)
             const { message } = response.payload
+
+            // Checks if this was a message sent for participating in an event
+            if (hasPendingParticipation(message.id)) {
+                // Instantly pull in latest participation overview.
+                void getParticipationOverview();
+
+                // If it is a message related to any participation event, display a notification 
+                displayParticipationNotification(getPendingParticipation(message.id));
+
+                // Remvoe the pending participation from local store
+                removePendingParticipations([message.id]);
+            }
 
             if (message.payload.type === 'Transaction') {
                 const { confirmed } = response.payload

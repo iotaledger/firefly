@@ -78,3 +78,9 @@ export type ParticipationOverview = AccountParticipationOverview[]
 export type ParticipationOverviewResponse = {
     accounts: AccountParticipationOverview[]
 }
+
+export interface PendingParticpation {
+    messageId: string;
+    accountId: string;
+    action: ParticipationAction
+}

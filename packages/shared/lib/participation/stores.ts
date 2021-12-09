@@ -12,9 +12,15 @@ import {
     ParticipationEvent,
     ParticipationEventState,
     ParticipationOverview,
-    ParticipateResponsePayload
+    PendingParticpation,
+    ParticipateResponsePayload,
 } from './types'
 import { NodePlugin } from '../typings/node'
+
+/**
+ * The store for keeping track of pending participations.
+ */
+export const pendingParticipations = writable<PendingParticpation[]>([])
 
 /**
  * The persisted store variable for if the staking feature is new for a Firefly installation.
@@ -232,3 +238,61 @@ export const shimmerStakingRemainingTime: Readable<number> = derived(
             $participationEvents.find((pe) => pe.eventId === SHIMMER_EVENT_ID)
         )
 )
+
+/**
+ * Adds newly broadcasted (yet unconfirmed) participations
+ *
+ * @method addNewPendingParticipation
+ *
+ * @param {ParticipateResponsePayload} payload
+ * @param {string} accountId
+ * @param {ParticipationAction} action
+ *
+ * @returns {void}
+ */
+export const addNewPendingParticipation = (payload: ParticipateResponsePayload, accountId: string, action: ParticipationAction): void => {
+    const _pendingParticipation = {
+        accountId,
+        action
+    };
+
+    pendingParticipations.update((participations) => [
+        ...participations,
+        ...payload.map((tx) => Object.assign({}, _pendingParticipation, { messageId: tx.id }))
+    ]);
+};
+
+/**
+ * Removes pending participation (after it has confirmed)
+ *
+ * @method removePendingParticipations
+ *
+ * @param {string[]} ids
+ *
+ * @returns {void}
+ */
+export const removePendingParticipations = (ids: string[]): void => {
+    pendingParticipations.update((participations) => participations.filter((participation) => !ids.includes(participation.messageId)));
+};
+
+/**
+ * Determines if has a pending participation
+ *
+ * @method hasPendingParticipation
+ *
+ * @param {string} id
+ *
+ * @returns {boolean}
+ */
+export const hasPendingParticipation = (id: string): boolean => get(pendingParticipations).some((participation) => participation.messageId === id);
+
+/**
+ * Gets a pending participation
+ *
+ * @method getPendingParticipation
+ *
+ * @param {string} id
+ *
+ * @returns {PendingParticpation | undefined}
+ */
+ export const getPendingParticipation = (id: string): PendingParticpation | undefined => get(pendingParticipations).find((participation) => participation.messageId === id);

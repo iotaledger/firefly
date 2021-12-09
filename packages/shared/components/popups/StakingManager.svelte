@@ -33,7 +33,8 @@
         participationOverview,
         stakedAccounts,
         stakedAmount,
-        stakingEventState
+        stakingEventState,
+        pendingParticipations
     } from 'shared/lib/participation/stores'
     import { Participation, ParticipationAction } from 'shared/lib/participation/types'
 
@@ -48,6 +49,24 @@
 
     let accounts = get($wallet.accounts)
     const hasStakedAccounts = $stakedAccounts.length > 0
+
+    let pendingParticipationIds = []
+    let previousPendingParticipationsLength = 0
+
+    pendingParticipations.subscribe((participations) => {
+        const currentParticipationsLength = participations.length
+
+    if (currentParticipationsLength < previousPendingParticipationsLength) {
+            const latestParticipationIds = participations.map((participation) => participation.messageId);
+            
+            if (latestParticipationIds.length === 0) {
+                resetView();
+            }
+
+            pendingParticipationIds = latestParticipationIds;
+            previousPendingParticipationsLength = currentParticipationsLength;
+        }   
+    })
 
     $: $stakedAccounts, async () => await getParticipationOverview()
     $: $accountToParticipate, async () => await getParticipationOverview()
@@ -90,19 +109,10 @@
 
         const isPartialStake = $partiallyStakedAccounts.find((psa) => psa.id === $accountToParticipate?.id) !== undefined
 
-        const _sync = async () => {
-            await getParticipationOverview()
+        const _sync = async (messageIds: string[]) => {
+            messageIds.forEach((id) => pendingParticipationIds.push(id));
 
-            showAppNotification({
-                type: 'info',
-                message: locale(`popups.stakingManager.${
-                    $participationAction === ParticipationAction.Stake
-                        ? `has${isPartialStake ? 'Partially' : ''}Staked`
-                        : `has${isPartialStake ? 'Partially' : ''}Unstaked`
-                }`)
-            })
-
-            resetView()
+            previousPendingParticipationsLength = messageIds.length;
         }
 
         const hasParticipationPlugin = $networkStatus.nodePlugins.includes(NodePlugin.Participation)
@@ -120,7 +130,7 @@
         switch ($participationAction) {
             case ParticipationAction.Stake: {
                 await participate($accountToParticipate?.id, participations)
-                    .then(() => _sync())
+                    .then((messageIds) => _sync(messageIds))
                     .catch((err) => {
                         console.error(err)
                         resetView()
@@ -129,7 +139,7 @@
             }
             case ParticipationAction.Unstake:
                 await stopParticipating($accountToParticipate?.id, STAKING_EVENT_IDS)
-                    .then(() => _sync())
+                    .then((messageIds) => _sync(messageIds))
                     .catch((err) => {
                         console.error(err)
                         resetView()

@@ -5,13 +5,15 @@ import type { Event } from '../typings/events'
 import { showAppNotification } from '../notifications'
 import { api, saveNewMessage } from '../wallet'
 
-import { participationEvents, participationOverview } from './stores'
+import { participationEvents, participationOverview, addNewPendingParticipation } from './stores'
 import type {
     ParticipateResponsePayload,
     Participation,
     ParticipationEvent,
-    ParticipationOverviewResponse
+    ParticipationOverviewResponse,
 } from './types'
+
+import { ParticipationAction } from './types';
 import { resetParticipation } from './participation'
 
 
@@ -76,7 +78,7 @@ export function getParticipationEvents(): Promise<ParticipationEvent[]> {
  *
  * @returns {Promise<void>}
  */
-export function participate(accountId: string, participations: Participation[]): Promise<void> {
+export function participate(accountId: string, participations: Participation[]): Promise<string[]> {
     if (!accountId) {
         showAppNotification({
             type: 'error',
@@ -86,7 +88,7 @@ export function participate(accountId: string, participations: Participation[]):
         return
     }
 
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<string[]>((resolve, reject) => {
         api.participate(
             accountId,
             participations,
@@ -94,7 +96,8 @@ export function participate(accountId: string, participations: Participation[]):
                 onSuccess(response: Event<ParticipateResponsePayload>) {
                     response.payload.forEach((message) => saveNewMessage(accountId, message));
 
-                    resolve()
+                    addNewPendingParticipation(response.payload, accountId, ParticipationAction.Stake)
+                    resolve(response.payload.map((message) => message.id))
                 },
                 onError(error) {
                     console.error(error)
@@ -115,7 +118,7 @@ export function participate(accountId: string, participations: Participation[]):
  *
  * @returns {Promise<void>}
  */
-export function stopParticipating(accountId: string, eventIds: string[]): Promise<void> {
+export function stopParticipating(accountId: string, eventIds: string[]): Promise<string[]> {
     if (!accountId) {
         showAppNotification({
             type: 'error',
@@ -125,7 +128,7 @@ export function stopParticipating(accountId: string, eventIds: string[]): Promis
         return
     }
 
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<string[]>((resolve, reject) => {
         api.stopParticipating(
             accountId,
             eventIds,
@@ -133,7 +136,9 @@ export function stopParticipating(accountId: string, eventIds: string[]): Promis
                 onSuccess(response: Event<ParticipateResponsePayload>) {
                     response.payload.forEach((message) => saveNewMessage(accountId, message));
 
-                    resolve()
+                    addNewPendingParticipation(response.payload, accountId, ParticipationAction.Unstake)
+
+                    resolve(response.payload.map((message) => message.id))
                 },
                 onError(error) {
                     console.error(error)
@@ -155,14 +160,18 @@ export function stopParticipating(accountId: string, eventIds: string[]): Promis
  *
  * @returns {Promise<void>}
  */
-export function participateWithRemainingFunds(accountId: string, participations: Participation[]): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
+export function participateWithRemainingFunds(accountId: string, participations: Participation[]): Promise<string[]> {
+    return new Promise<string[]>((resolve, reject) => {
         api.participateWithRemainingFunds(
             accountId,
             participations,
             {
                 onSuccess(response: Event<ParticipateResponsePayload>) {
-                    resolve()
+                    response.payload.forEach((message) => saveNewMessage(accountId, message));
+
+                    addNewPendingParticipation(response.payload, accountId, ParticipationAction.Stake)
+
+                    resolve(response.payload.map((message) => message.id))
                 },
                 onError(error) {
                     console.error(error);
