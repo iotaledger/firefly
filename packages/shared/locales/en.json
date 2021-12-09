@@ -504,7 +504,8 @@
                 "commencing": "Staking commencing",
                 "active": "Staking active",
                 "inactive": "Staking inactive",
-                "ended": "Staking ended"
+                "ended": "Staking ended",
+                "minRewards": "Minimum rewards not met"
             },
             "summary": {
                 "stakedFunds": "Staked funds",
@@ -1218,6 +1219,10 @@
             "ended": {
                 "title": "Events have ended",
                 "body": "Assembly and Shimmer tokens will be distributed to the staked wallets when their repspective networks launch."
+            },
+            "minRewards": {
+                "title": "Minimum rewards not met",
+                "body": "Your funds have not been staked long enough to reach minimum airdrop rewards. Please continue staking for {duration}."
             }
         },
         "partiallyStakedFunds": {
