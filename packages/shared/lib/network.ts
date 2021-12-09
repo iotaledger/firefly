@@ -84,7 +84,7 @@ export const getOfficialNodes = (type: NetworkType): Node[] =>
 const getOfficialNodeUrls = (networkType: NetworkType): string[] => {
     switch (networkType) {
         case NetworkType.ChrysalisDevnet:
-            return ['https://api.lb-0.h.chrysalis-devnet.iota.cafe', 'https://api.lb-1.h.chrysalis-devnet.iota.cafe']
+            return ['https://devnet01.hornet.zone']
         case NetworkType.ChrysalisMainnet:
             return ['https://chrysalis-nodes.iota.org', 'https://chrysalis-nodes.iota.cafe']
         default:
