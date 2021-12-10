@@ -11,9 +11,8 @@ import type {
     ParticipateResponsePayload,
     Participation,
     ParticipationEvent,
-    ParticipationOverviewResponse
+    ParticipationOverviewResponse,
 } from './types'
-
 
 /**
  * Gets participation overview.
@@ -27,7 +26,6 @@ export function getParticipationOverview(): Promise<void> {
         api.getParticipationOverview({
             onSuccess(overview: Event<ParticipationOverviewResponse>) {
                 participationOverview.set(overview?.payload.accounts)
-                console.log('OVERVIEW: ', get(participationOverview))
 
                 resolve()
             },
@@ -36,7 +34,7 @@ export function getParticipationOverview(): Promise<void> {
                 console.error(error)
 
                 reject(error)
-            }
+            },
         })
     })
 }
@@ -53,7 +51,6 @@ export function getParticipationEvents(): Promise<ParticipationEvent[]> {
         api.getParticipationEvents({
             onSuccess(response: Event<ParticipationEvent[]>) {
                 participationEvents.set(response?.payload)
-                console.log('EVENTS: ', get(participationEvents))
 
                 resolve(response?.payload)
             },
@@ -61,7 +58,7 @@ export function getParticipationEvents(): Promise<ParticipationEvent[]> {
                 console.error(error)
 
                 reject(error)
-            }
+            },
         })
     })
 }
@@ -80,28 +77,25 @@ export function participate(accountId: string, participations: Participation[]):
     if (!accountId) {
         showAppNotification({
             type: 'error',
-            message: localize('error.participation.cannotUseAccount')
+            message: localize('error.participation.cannotUseAccount'),
         })
 
         return
     }
 
     return new Promise<void>((resolve, reject) => {
-        api.participate(
-            accountId,
-            participations,
-            {
-                onSuccess(response: Event<ParticipateResponsePayload>) {
-                    response.payload.forEach((message) => saveNewMessage(accountId, message));
+        api.participate(accountId, participations, {
+            onSuccess(response: Event<ParticipateResponsePayload>) {
+                response.payload.forEach((message) => saveNewMessage(accountId, message))
 
-                    resolve()
-                },
-                onError(error) {
-                    console.error(error)
+                resolve()
+            },
+            onError(error) {
+                console.error(error)
 
-                    reject(error)
-                }
-            })
+                reject(error)
+            },
+        })
     })
 }
 
@@ -119,29 +113,25 @@ export function stopParticipating(accountId: string, eventIds: string[]): Promis
     if (!accountId) {
         showAppNotification({
             type: 'error',
-            message: localize('error.participation.cannotUseAccount')
+            message: localize('error.participation.cannotUseAccount'),
         })
 
         return
     }
 
     return new Promise<void>((resolve, reject) => {
-        api.stopParticipating(
-            accountId,
-            eventIds,
-            {
-                onSuccess(response: Event<ParticipateResponsePayload>) {
-                    response.payload.forEach((message) => saveNewMessage(accountId, message));
+        api.stopParticipating(accountId, eventIds, {
+            onSuccess(response: Event<ParticipateResponsePayload>) {
+                response.payload.forEach((message) => saveNewMessage(accountId, message))
 
-                    resolve()
-                },
-                onError(error) {
-                    console.error(error)
+                resolve()
+            },
+            onError(error) {
+                console.error(error)
 
-                    reject(error)
-
-                }
-            })
+                reject(error)
+            },
+        })
     })
 }
 
@@ -157,18 +147,15 @@ export function stopParticipating(accountId: string, eventIds: string[]): Promis
  */
 export function participateWithRemainingFunds(accountId: string, participations: Participation[]): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-        api.participateWithRemainingFunds(
-            accountId,
-            participations,
-            {
-                onSuccess(response: Event<ParticipateResponsePayload>) {
-                    resolve()
-                },
-                onError(error) {
-                    console.error(error);
+        api.participateWithRemainingFunds(accountId, participations, {
+            onSuccess(response: Event<ParticipateResponsePayload>) {
+                resolve()
+            },
+            onError(error) {
+                console.error(error)
 
-                    reject(error);
-                }
-            })
+                reject(error)
+            },
+        })
     })
 }

@@ -14,19 +14,6 @@
     export let transactions = []
     export let color = 'blue'
 
-    $: console.log('TX PAYLOADs: ', transactions.slice(0, 10).map((tx) => {
-        const embeddedData = tx.payload.data.essence.data.payload?.data
-        if (!embeddedData) return ''
-
-        return [
-            toUtf8String(embeddedData?.index),
-            chunkString(
-                toHexString(embeddedData?.data),
-                64
-            )
-        ]
-    }))
-
     function handleTransactionClick(transaction) {
         selectedMessage.set(transaction)
     }
@@ -87,7 +74,7 @@
         }
     }
 
-    const getTransactions = (): AccountMessage[] => {        
+    const getTransactions = (): AccountMessage[] => {
         return transactions
     }
 </script>

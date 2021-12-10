@@ -6,7 +6,7 @@
     export let parentLeft = 0
     export let parentTop = 0
     export let parentWidth = 0
-    export let position: undefined | 'top' | 'right' = undefined
+    export let position: undefined | 'top' | 'bottom' | 'right' = undefined
 
     let tooltip
     let top = 0
@@ -29,6 +29,9 @@
         } else if (position === 'right') {
             top = parentTop < tooltip.offsetHeight ? parentTop - 10 : parentTop - tooltip.offsetHeight / 2 - 15
             left = parentLeft + parentWidth * 2 + 15
+        } else if (position === 'bottom') {
+            top = parentTop + 50
+            left = parentLeft
         }
     }
 </script>
@@ -92,6 +95,26 @@
                         transform: none;
                         top: -14px;
                     }
+                }
+            }
+        }
+        &.bottom {
+            box-shadow: 0 20px 25px 7px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            @apply w-60;
+            triangle,
+            inner-dark {
+                border-width: 12px;
+                @apply border-b-0;
+                left: 100px;
+                top: -12px;
+                @apply transform;
+                @apply rotate-180;
+            }
+            &.darkmode {
+                triangle {
+                    @apply border-gray-700;
+                    @apply border-l-transparent;
+                    @apply border-r-transparent;
                 }
             }
         }

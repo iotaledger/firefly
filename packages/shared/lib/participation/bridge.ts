@@ -51,15 +51,20 @@ export function getParticipationEvents(bridge: Bridge, __ids: CommunicationIds):
  *
  * @returns {Promise<string>}
  */
-export function participate(bridge: Bridge, __ids: CommunicationIds, accountId: string, participations: Participation[]): Promise<string> {
+export function participate(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+    accountId: string,
+    participations: Participation[]
+): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
         cmd: 'Participate',
         payload: {
             account_identifier: accountId,
-            participations
-        }
+            participations,
+        },
     })
 }
 
@@ -75,15 +80,20 @@ export function participate(bridge: Bridge, __ids: CommunicationIds, accountId: 
  *
  * @returns {Promise<string>}
  */
-export function stopParticipating(bridge: Bridge, __ids: CommunicationIds, accountId: string, eventIds: string[]): Promise<string> {
+export function stopParticipating(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+    accountId: string,
+    eventIds: string[]
+): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
         cmd: 'StopParticipating',
         payload: {
             account_identifier: accountId,
-            event_ids: eventIds
-        }
+            event_ids: eventIds,
+        },
     })
 }
 
@@ -99,14 +109,19 @@ export function stopParticipating(bridge: Bridge, __ids: CommunicationIds, accou
  *
  * @returns {Promise<string>}
  */
-export function participateWithRemainingFunds(bridge: Bridge, __ids: CommunicationIds, accountId: string, participations: Participation[]): Promise<string> {
+export function participateWithRemainingFunds(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+    accountId: string,
+    participations: Participation[]
+): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
         cmd: 'ParticipateWithRemainingFunds',
         payload: {
             account_identifier: accountId,
-            participations
-        }
+            participations,
+        },
     })
 }
