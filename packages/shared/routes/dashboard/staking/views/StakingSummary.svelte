@@ -118,7 +118,7 @@
             {/if}
         </div>
         <Text type="h5" classes="text-3xl">{formatUnitBestMatch(stakingHasEnded ? 0 : $stakedAmount)}</Text>
-        {#if !stakingHasEnded} 
+        {#if !stakingHasEnded}
             <Text type="p" smaller overrideColor classes="mt-1 text-gray-500 dark:text-gray-600">
                 {formatUnitBestMatch($unstakedAmount)}
                 {localize('general.unstaked')}

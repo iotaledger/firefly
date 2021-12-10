@@ -18,7 +18,12 @@
         getUnstakedFunds,
         isAccountPartiallyStaked,
     } from 'shared/lib/participation'
-    import { accountToParticipate, participationAction, participationOverview } from 'shared/lib/participation/stores'
+    import {
+        accountToParticipate,
+        participationAction,
+        participationOverview,
+        stakingEventState,
+    } from 'shared/lib/participation/stores'
     import { Participation, ParticipationAction, StakingAirdrop } from 'shared/lib/participation/types'
 
     export let locale: Locale
@@ -52,7 +57,7 @@
 
             const selections = Object.keys(airdropSelections).filter((as) => airdropSelections[as])
             const participations: Participation[] = selections.map((selection) => (<Participation>{
-                eventId: getStakingEventFromAirdrop(<StakingAirdrop>selection.toLowerCase()).eventId,
+                eventId: getStakingEventFromAirdrop(<StakingAirdrop>selection.toLowerCase())?.eventId,
                 answers: [],
             }))
             openPopup({

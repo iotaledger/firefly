@@ -189,15 +189,23 @@ export const stakingEventState: Readable<ParticipationEventState> = derived(
 const calculateRemainingStakingTime = (currentMilestone: number, stakingEvent: ParticipationEvent): number => {
     if (!stakingEvent) return 0
 
+    const commenceMilestone = stakingEvent?.information?.milestoneIndexCommence
     const startMilestone = stakingEvent?.information?.milestoneIndexStart
     const endMilestone = stakingEvent?.information?.milestoneIndexEnd
-    if (currentMilestone < startMilestone) {
-        return 0
-    } else if (currentMilestone >= endMilestone) {
-        return 0
-    } else {
-        const timeLeftInMilestones = endMilestone - currentMilestone
+
+    const _calculateRemainingTime = (firstMilestone: number, secondMilestone: number): number => {
+        const timeLeftInMilestones = secondMilestone - firstMilestone
         return timeLeftInMilestones * SECONDS_PER_MILESTONE * MILLISECONDS_PER_SECOND
+    }
+
+    if (currentMilestone < commenceMilestone) {
+        _calculateRemainingTime(currentMilestone, commenceMilestone)
+    } else if (currentMilestone < startMilestone) {
+        _calculateRemainingTime(currentMilestone, startMilestone)
+    } else if (currentMilestone < endMilestone) {
+        _calculateRemainingTime(currentMilestone, endMilestone)
+    } else {
+        return 0
     }
 }
 
