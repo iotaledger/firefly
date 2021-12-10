@@ -415,9 +415,9 @@
                 "title": "Migrate Ledger index",
                 "description": "Migrate another Trinity account index"
             },
-            "stateExport": {
-                "title": "تصدير الحالة",
-                "description": "تصدير سجل المعاملات الخاص بك إلى ملف .csv"
+            "transactionHistory": {
+                "title": "Transaction history",
+                "description": "Export the transaction history of your accounts as .csv files"
             },
             "troubleshoot": {
                 "title": "حل المشاكل",
@@ -669,6 +669,13 @@
         "ledgerMigrateIndex": {
             "title": "Do you need to migrate another Trinity account index?",
             "body": "You can also migrate later in Advanced Settings."
+        },
+        "exportTransactionHistory": {
+            "title": "Export transaction history",
+            "body": "Export your transaction history for all accounts consecutively within this profile. Exports will be in a CSV format.",
+            "profileName": "Profile name:",
+            "numberOfAccounts": "Number of accounts:",
+            "typePassword": "Type your password to allow exporting"
         }
     },
     "charts": {
@@ -724,11 +731,12 @@
         "dropHere": "أسقط ملفك هنا",
         "syncAll": "مزامنة الكل",
         "export": "تصدير",
+        "exporting": "Exporting",
         "exportNewStronghold": "تصدير ملف محصّن جديد",
         "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "تمكين وضع المبرمج",
         "enableSystemNotifications": "تمكين إشعارات النظام",
-        "exportState": "تصدير الحالة",
+        "exportTransactionHistory": "Export transaction history",
         "localProofOfWork": "إثباث العمل محليّاً",
         "unlock": "فتح",
         "updateFirefly": "تحديث فايرفلاي",
@@ -927,6 +935,10 @@
         "copiedToClipboard": "تم النسخ إلى الحافظة",
         "accountsSynchronized": "اكتملت مزامنة المحفظة",
         "fundsAvailableSoon": "Your funds will become available shortly",
+        "exportTransactionHistory": {
+            "success": "Transaction history for {accountAlias} was successfully saved to {filePath}",
+            "error": "Unable to export transaction history for {accountAlias}"
+        },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
             "notEnabled": "IOTA links are not enabled",

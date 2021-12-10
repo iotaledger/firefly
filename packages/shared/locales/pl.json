@@ -415,9 +415,9 @@
                 "title": "Migruj indeks Ledger",
                 "description": "Migracja innego indeksu konta z Trinity"
             },
-            "stateExport": {
-                "title": "Eksport stanu portfela",
-                "description": "Eksportuj historię transakcji do pliku .csv"
+            "transactionHistory": {
+                "title": "Historia transakcji",
+                "description": "Eksportuj historię transakcji swoich kont jako pliki .csv"
             },
             "troubleshoot": {
                 "title": "Rozwiązywanie problemów",
@@ -669,6 +669,13 @@
         "ledgerMigrateIndex": {
             "title": "Czy chcesz migrować kolejny indeks z Trinity?",
             "body": "Możesz tego dokonać później, w panelu ustawień zaawansowanych."
+        },
+        "exportTransactionHistory": {
+            "title": "Eksportuj historię transakcji",
+            "body": "Eksportuj historię transakcji dla wszystkich kont w tym profilu po kolei. Eksport odbędzie się w formacie CSV.",
+            "profileName": "Nazwa profilu:",
+            "numberOfAccounts": "Liczba kont:",
+            "typePassword": "Wpisz hasło, aby umożliwić eksport"
         }
     },
     "charts": {
@@ -724,11 +731,12 @@
         "dropHere": "Upuść plik tutaj",
         "syncAll": "Synchronizuj wszystko",
         "export": "Eksportuj",
+        "exporting": "Eksportowanie",
         "exportNewStronghold": "Eksportuj zaktualizowany plik Stronghold",
         "enableDeepLinks": "Włącz linki IOTA",
         "enableDeveloperMode": "Włącz tryb deweloperski",
         "enableSystemNotifications": "Włącz powiadomienia systemowe",
-        "exportState": "Eksportuj stan",
+        "exportTransactionHistory": "Eksportuj historię transakcji",
         "localProofOfWork": "Lokalny tryb proof of work",
         "unlock": "Odblokuj",
         "updateFirefly": "Zaktualizuj Firefly",
@@ -927,6 +935,10 @@
         "copiedToClipboard": "Skopiowano do schowka",
         "accountsSynchronized": "Synchronizacja portfela ukończona",
         "fundsAvailableSoon": "Twoje środki wkrótce staną się dostępne",
+        "exportTransactionHistory": {
+            "success": "Historia transakcji dla {accountAlias} została pomyślnie zapisana w {filePath}",
+            "error": "Nie można wyeksportować historii transakcji dla {accountAlias}"
+        },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "Zaloguj się, aby zainicjować link IOTA",
             "notEnabled": "Linki IOTA nie są włączone",

@@ -415,9 +415,9 @@
                 "title": "Migrer Ledger-indeks",
                 "description": "Overfør en annen Trinity kontoindeks"
             },
-            "stateExport": {
-                "title": "Tilstands-eksportering",
-                "description": "Eksporter transaksjonshistorikken til en .csv-fil"
+            "transactionHistory": {
+                "title": "Transaction history",
+                "description": "Export the transaction history of your accounts as .csv files"
             },
             "troubleshoot": {
                 "title": "Feilsøking",
@@ -669,6 +669,13 @@
         "ledgerMigrateIndex": {
             "title": "Trenger du å overføre til en ny Trinity kontoindeks?",
             "body": "Du kan også migrere senere i Avanserte Innstillinger."
+        },
+        "exportTransactionHistory": {
+            "title": "Export transaction history",
+            "body": "Export your transaction history for all accounts consecutively within this profile. Exports will be in a CSV format.",
+            "profileName": "Profile name:",
+            "numberOfAccounts": "Number of accounts:",
+            "typePassword": "Type your password to allow exporting"
         }
     },
     "charts": {
@@ -724,11 +731,12 @@
         "dropHere": "Slipp filen her",
         "syncAll": "Synkroniser alle",
         "export": "Eksporter",
+        "exporting": "Exporting",
         "exportNewStronghold": "Eksporter en ny Stronghold",
         "enableDeepLinks": "Aktiver IOTA-linker",
         "enableDeveloperMode": "Aktiver utviklermodus",
         "enableSystemNotifications": "Aktiver varsler",
-        "exportState": "Eksporter status",
+        "exportTransactionHistory": "Export transaction history",
         "localProofOfWork": "Lokal proof of work",
         "unlock": "Lås opp",
         "updateFirefly": "Oppdater Firefly",
@@ -927,6 +935,10 @@
         "copiedToClipboard": "Kopiert til utklippstavle",
         "accountsSynchronized": "Synkronisering av lommebok fullført",
         "fundsAvailableSoon": "Dine midler vil bli tilgjengelig innen kort tid",
+        "exportTransactionHistory": {
+            "success": "Transaction history for {accountAlias} was successfully saved to {filePath}",
+            "error": "Unable to export transaction history for {accountAlias}"
+        },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "Logg inn for å starte IOTA-linken",
             "notEnabled": "IOTA-linker er ikke aktivert",

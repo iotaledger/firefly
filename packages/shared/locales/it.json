@@ -15,7 +15,7 @@
         },
         "profile": {
             "title": "Crea un profilo",
-            "profileName": "Profile name",
+            "profileName": "Profilo",
             "body1": "È possibile creare più profili utente per organizzare i wallet e migliorare la privacy.",
             "body2": {
                 "first": "Per ora, iniziamo con il nome del tuo primo profilo.",
@@ -23,8 +23,8 @@
             },
             "addMore": "È possibile aggiungere ulteriori profili successivamente.",
             "developer": {
-                "label": "Developer profile",
-                "info": "Connect to public and private IOTA networks"
+                "label": "Profilo Sviluppatore",
+                "info": "Connettiti a reti IOTA pubbliche e private"
             }
         },
         "setup": {
@@ -312,7 +312,7 @@
             "theme": {
                 "title": "Tema",
                 "description": "",
-                "advice": "Restart the Firefly application for changes to the system theme to take effect"
+                "advice": "Riavvia l'applicazione Firefly per rendere effettive le modifiche al tema di sistema"
             },
             "language": {
                 "title": "Lingua",
@@ -328,14 +328,14 @@
             },
             "networkStatus": {
                 "title": "Stato della rete",
-                "description": "Displays the status of the node you are currently connected to"
+                "description": "Visualizza lo stato del nodo a cui sei attualmente connesso"
             },
             "exportStronghold": {
-                "title": "Export backup",
+                "title": "Esporta backup",
                 "description": "Esporta in un file Stronghold - un backup crittografato completo del tuo wallet e l'ultima cronologia delle transazioni"
             },
             "appLock": {
-                "title": "Automatic lock",
+                "title": "Blocco Automatico",
                 "description": "Tempo di inattività prima del blocco dei wallet e disconnessione",
                 "durationMinute": "{time, plural, one {1 minuto} other {# minuti}}",
                 "durationHour": "{time, plural, one {1 ora} other {# ore}}"
@@ -365,39 +365,39 @@
                 "description": "Elimina l'intero profilo, wallet e cronologia delle transazioni. Assicurati di avere un backup"
             },
             "deepLinks": {
-                "title": "IOTA links",
-                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
+                "title": "Collegamenti IOTA",
+                "description": "Riempi automaticamente i dati delle transazioni in Firefly facendo clic su un collegamento iota://"
             },
             "networkConfiguration": {
-                "title": "Network config",
-                "title2": "Network configuration",
+                "title": "Configurazione di rete",
+                "title2": "Configurazione di rete",
                 "description": {
-                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
-                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                    "dev": "Le impostazioni di rete si aggiorneranno automaticamente in base alla configurazione del nodo corrente (modificare le connessioni di rete comporterà il ripristino dello stato del portafoglio)",
+                    "nonDev": "Le impostazioni di rete verranno aggiornate automaticamente in base alla configurazione del nodo corrente"
                 },
-                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
-                "resetWallet": "Your wallet state has been reset.",
-                "connectedTo": "Connected to",
+                "switchedNetworks": "Rete commutata con successo a \"{networkName}\".",
+                "resetWallet": "Il tuo stato del portafoglio è stato resettato.",
+                "connectedTo": "Connesso a",
                 "nodeConfiguration": {
-                    "title": "Node selection",
-                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
-                    "automatic": "Automatic",
-                    "manual": "Manual"
+                    "title": "Selezione del nodo",
+                    "description": "Selezionare \"Manuale\" per configurare le impostazioni del nodo e connettersi ai propri nodi",
+                    "automatic": "Automatico",
+                    "manual": "Manuale"
                 }
             },
             "configureNodeList": {
-                "title": "Node configuration",
-                "description": "Manage the list of nodes you connect to",
+                "title": "Configurazione del nodo",
+                "description": "Gestisci l'elenco dei nodi a cui si connette il tuo wallet",
                 "primaryNode": "Nodo primario",
                 "excludeNode": "Escludi nodo",
                 "includeNode": "Includi nodo",
-                "editDetails": "Edit details",
-                "viewInfo": "View info",
+                "editDetails": "Modifica i dettagli",
+                "viewInfo": "Visualizza informazioni",
                 "setAsPrimary": "Imposta come primario",
                 "removeNode": "Rimuovi Nodo",
                 "includeOfficialNodeList": "Includi la lista dei nodi ufficiali",
-                "noNodes": "There are no nodes, unable to connect to the network",
-                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
+                "noNodes": "Non ci sono nodi, impossibile connettersi alla rete",
+                "noNodesAuto": "Non ci sono nodi, verrà utilizzata la selezione automatica"
             },
             "proofOfWork": {
                 "title": "Proof of Work",
@@ -412,12 +412,12 @@
                 "description": "Visualizza informazioni di sistema e di applicazione"
             },
             "migrateLedgerIndex": {
-                "title": "Migrate Ledger index",
+                "title": "Migra l'indice del Ledger",
                 "description": "Migra un altro indice dell'account Trinity"
             },
-            "stateExport": {
-                "title": "Esportazione dello stato",
-                "description": "Esporta la cronologia delle transazioni in un file .csv"
+            "transactionHistory": {
+                "title": "Cronologia delle operazioni",
+                "description": "Esporta la cronologia delle transazioni dei tuoi conti come file .csv"
             },
             "troubleshoot": {
                 "title": "Risoluzione dei Problemi",
@@ -429,7 +429,7 @@
             },
             "faq": {
                 "title": "FAQ",
-                "title2": "Frequently asked questions",
+                "title2": "Domande frequenti",
                 "description": "Visualizza le FAQ per ottenere aiuto con un problema o una domanda comune"
             },
             "discord": {
@@ -544,37 +544,37 @@
             "titleAdd": "Aggiungi un nodo",
             "titleUpdate": "Aggiorna un nodo",
             "titleRemove": "Rimuovere un nodo",
-            "titleRemoveAll": "Remove all nodes",
+            "titleRemoveAll": "Rimuovere tutti i nodi",
             "titleDetails": "Dettagli del nodo",
-            "titleInfo": "Node info",
-            "addingNode": "Adding node",
-            "updatingNode": "Updating node",
-            "loadingNodeInfo": "Loading node info",
+            "titleInfo": "Informazioni sul nodo",
+            "addingNode": "Aggiungi nodo",
+            "updatingNode": "Aggiorna nodo",
+            "loadingNodeInfo": "Caricamento informazioni nodo",
             "nodeAddress": "Indirizzo del nodo",
             "optionalUsername": "Nome utente (Facoltativo)",
             "optionalPassword": "Password (facoltativa)",
-            "optionalJwt": "JSON web token (optional)",
+            "optionalJwt": "Token web JSON (opzionale)",
             "setAsPrimaryNode": "Imposta come nodo primario",
             "removeConfirmation": "Sei sicuro di voler rimuovere questo nodo?",
-            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "removeAllConfirmation": "Sei sicuro di voler rimuovere tutti i nodi?",
             "info": {
                 "url": "URL",
                 "software": "Software",
-                "networkId": "Network ID",
+                "networkId": "ID rete",
                 "bech32HRP": "Bech32 HRP",
-                "features": "Features",
-                "confirmedMilestoneIndex": "Confirmed milestone index",
-                "pruningIndex": "Pruning index",
+                "features": "Funzionalità",
+                "confirmedMilestoneIndex": "Indice milestone confermato",
+                "pruningIndex": "Indice di \"Pruning\" \n",
                 "messagesPerSecond": "Messaggi al secondo",
                 "referencedRate": "Tasso di riferimento"
             }
         },
         "switchNetwork": {
-            "title": "Switch network",
-            "newNetwork": "New network",
-            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
-            "switchingNetwork": "Switching network",
-            "typePassword": "Type your password to switch to:"
+            "title": "Cambia rete",
+            "newNetwork": "Nuova rete",
+            "resetWarning": "Cambiare le reti ti disconnetterà e resetterà tutti gli account, i saldi e la cronologia delle transazioni per questo profilo.",
+            "switchingNetwork": "Cambio rete",
+            "typePassword": "Digita la password per passare a:"
         },
         "errorLog": {
             "title": "Log degli errori",
@@ -669,6 +669,13 @@
         "ledgerMigrateIndex": {
             "title": "Hai bisogno di migrare un altro indice dell'account Trinity?",
             "body": "È inoltre possibile migrare in seguito in Impostazioni avanzate."
+        },
+        "exportTransactionHistory": {
+            "title": "Esporta lo storico delle transazioni",
+            "body": "Export your transaction history for all accounts consecutively within this profile. Exports will be in a CSV format.",
+            "profileName": "Profile name:",
+            "numberOfAccounts": "Number of accounts:",
+            "typePassword": "Type your password to allow exporting"
         }
     },
     "charts": {
@@ -724,11 +731,12 @@
         "dropHere": "Trascina qui il tuo file",
         "syncAll": "Sincronizza tutto",
         "export": "Esporta",
+        "exporting": "Exporting",
         "exportNewStronghold": "Esporta un nuovo Stronghold",
         "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "Abilita Modalità Sviluppatore",
         "enableSystemNotifications": "Abilita notifiche di sistema",
-        "exportState": "Esporta stato",
+        "exportTransactionHistory": "Esporta lo storico delle transazioni",
         "localProofOfWork": "Proof of work locale",
         "unlock": "Sblocca",
         "updateFirefly": "Aggiorna Firefly",
@@ -743,7 +751,7 @@
         "addNode": "Aggiungi nodo",
         "updateNode": "Aggiorna nodo",
         "removeNode": "Rimuovi Nodo",
-        "removeAllNodes": "Remove all nodes",
+        "removeAllNodes": "Rimuovere tutti i nodi",
         "hide": "Nascondi",
         "hideOthers": "Nascondi altri",
         "showAll": "Mostra tutto",
@@ -927,6 +935,10 @@
         "copiedToClipboard": "Copiato negli appunti",
         "accountsSynchronized": "Sincronizzazione wallet completata",
         "fundsAvailableSoon": "I tuoi fondi saranno disponibili a breve",
+        "exportTransactionHistory": {
+            "success": "Transaction history for {accountAlias} was successfully saved to {filePath}",
+            "error": "Unable to export transaction history for {accountAlias}"
+        },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
             "notEnabled": "IOTA links are not enabled",

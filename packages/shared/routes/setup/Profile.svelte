@@ -60,10 +60,11 @@
 
             const previousInitializedId = $newProfile?.id
             const nameChanged = $newProfile?.name !== trimmedProfileName
+            const isDeveloperProfileChanged = $newProfile?.isDeveloperProfile !== isDeveloperProfile
 
             // If the name has changed from the previous initialization
             // then make sure we cleanup the last profile and actor
-            if (nameChanged && previousInitializedId) {
+            if ((nameChanged || isDeveloperProfileChanged) && previousInitializedId) {
                 // The initialized profile name has changed
                 // so we need to destroy the previous actor
                 destroyActor(previousInitializedId)
@@ -72,7 +73,7 @@
             try {
                 busy = true
 
-                if (nameChanged) {
+                if (nameChanged || isDeveloperProfileChanged) {
                     profile = createProfile(trimmedProfileName, isDeveloperProfile)
                     profileInProgress.set(trimmedProfileName)
 
