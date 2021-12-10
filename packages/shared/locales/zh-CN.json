@@ -415,9 +415,9 @@
                 "title": "Migrate Ledger index",
                 "description": "迁移另一个 Trinity 帐户索引"
             },
-            "stateExport": {
-                "title": "状态导出",
-                "description": "将您的交易历史记录导出到.csv文件"
+            "transactionHistory": {
+                "title": "Transaction history",
+                "description": "Export the transaction history of your accounts as .csv files"
             },
             "troubleshoot": {
                 "title": "故障排除",
@@ -669,6 +669,13 @@
         "ledgerMigrateIndex": {
             "title": "您需要迁移另一个 Trinity 帐户索引吗？",
             "body": "您也可以稍后在高级设置中迁移Ledger索引。"
+        },
+        "exportTransactionHistory": {
+            "title": "Export transaction history",
+            "body": "Export your transaction history for all accounts consecutively within this profile. Exports will be in a CSV format.",
+            "profileName": "Profile name:",
+            "numberOfAccounts": "Number of accounts:",
+            "typePassword": "Type your password to allow exporting"
         }
     },
     "charts": {
@@ -724,11 +731,12 @@
         "dropHere": "将您的文件拖放至此处",
         "syncAll": "全部同步",
         "export": "导出",
+        "exporting": "Exporting",
         "exportNewStronghold": "导出一个新的Stronghold",
         "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "打开开发者模式",
         "enableSystemNotifications": "启用系统通知",
-        "exportState": "导出状态",
+        "exportTransactionHistory": "Export transaction history",
         "localProofOfWork": "本地工作量证明",
         "unlock": "解锁",
         "updateFirefly": "更新Firefly",
@@ -927,6 +935,10 @@
         "copiedToClipboard": "复制到剪贴板",
         "accountsSynchronized": "钱包同步完成",
         "fundsAvailableSoon": "您的资金将很快变为可用资金。",
+        "exportTransactionHistory": {
+            "success": "Transaction history for {accountAlias} was successfully saved to {filePath}",
+            "error": "Unable to export transaction history for {accountAlias}"
+        },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
             "notEnabled": "IOTA links are not enabled",

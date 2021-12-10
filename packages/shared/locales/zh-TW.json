@@ -335,7 +335,7 @@
                 "description": "匯出到Stronghold檔案 - 完整加密備份您的錢包與最新交易紀錄。"
             },
             "appLock": {
-                "title": "Automatic lock",
+                "title": "自動鎖定",
                 "description": "錢包鎖定並登出前的閒置時間",
                 "durationMinute": "{time, plural, one {1 分鐘} other {# 分鐘}}",
                 "durationHour": "{time, plural, one {1 小時} other {# 小時}}"
@@ -366,7 +366,7 @@
             },
             "deepLinks": {
                 "title": "IOTA links",
-                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
+                "description": "點擊 IOTA 連結以自動填入交易資料。"
             },
             "networkConfiguration": {
                 "title": "Network config",
@@ -379,9 +379,9 @@
                 "resetWallet": "Your wallet state has been reset.",
                 "connectedTo": "Connected to",
                 "nodeConfiguration": {
-                    "title": "Node selection",
+                    "title": "選取節點",
                     "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
-                    "automatic": "Automatic",
+                    "automatic": "自動",
                     "manual": "Manual"
                 }
             },
@@ -415,9 +415,9 @@
                 "title": "Migrate Ledger index",
                 "description": "遷移另一個 Trinity 帳戶索引"
             },
-            "stateExport": {
-                "title": "匯出狀態",
-                "description": "將您的交易記錄匯出成 .csv 檔案"
+            "transactionHistory": {
+                "title": "Transaction history",
+                "description": "Export the transaction history of your accounts as .csv files"
             },
             "troubleshoot": {
                 "title": "疑難排解",
@@ -429,7 +429,7 @@
             },
             "faq": {
                 "title": "常見問題",
-                "title2": "Frequently asked questions",
+                "title2": "常見問題",
                 "description": "查看《常見問題》獲取幫助"
             },
             "discord": {
@@ -544,11 +544,11 @@
             "titleAdd": "增加節點",
             "titleUpdate": "更新節點",
             "titleRemove": "刪除節點",
-            "titleRemoveAll": "Remove all nodes",
+            "titleRemoveAll": "移除所有節點",
             "titleDetails": "節點詳細資訊",
-            "titleInfo": "Node info",
-            "addingNode": "Adding node",
-            "updatingNode": "Updating node",
+            "titleInfo": "節點資訊",
+            "addingNode": "增加節點",
+            "updatingNode": "更新節點",
             "loadingNodeInfo": "Loading node info",
             "nodeAddress": "節點地址",
             "optionalUsername": "使用者名稱 (選填)",
@@ -556,11 +556,11 @@
             "optionalJwt": "JSON web token (optional)",
             "setAsPrimaryNode": "設定為主要節點",
             "removeConfirmation": "您確定要刪除此節點嗎？",
-            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "removeAllConfirmation": "您確定要刪除所有節點?",
             "info": {
-                "url": "URL",
-                "software": "Software",
-                "networkId": "Network ID",
+                "url": "網址",
+                "software": "軟體",
+                "networkId": "網路ID",
                 "bech32HRP": "Bech32 HRP",
                 "features": "Features",
                 "confirmedMilestoneIndex": "Confirmed milestone index",
@@ -570,11 +570,11 @@
             }
         },
         "switchNetwork": {
-            "title": "Switch network",
-            "newNetwork": "New network",
+            "title": "切換網路",
+            "newNetwork": "新的網路",
             "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
-            "switchingNetwork": "Switching network",
-            "typePassword": "Type your password to switch to:"
+            "switchingNetwork": "切換網路",
+            "typePassword": "輸入密碼以切換到："
         },
         "errorLog": {
             "title": "錯誤紀錄檔",
@@ -669,6 +669,13 @@
         "ledgerMigrateIndex": {
             "title": "您是否需要遷移另一個 Trinity 帳戶索引？",
             "body": "您也可以稍後在「進階設定」中進行遷移。"
+        },
+        "exportTransactionHistory": {
+            "title": "Export transaction history",
+            "body": "Export your transaction history for all accounts consecutively within this profile. Exports will be in a CSV format.",
+            "profileName": "Profile name:",
+            "numberOfAccounts": "Number of accounts:",
+            "typePassword": "Type your password to allow exporting"
         }
     },
     "charts": {
@@ -724,11 +731,12 @@
         "dropHere": "將檔案拖至此處",
         "syncAll": "同步全部",
         "export": "匯出",
+        "exporting": "Exporting",
         "exportNewStronghold": "輸出一個新的 Stronghold",
         "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "開啟開發者模式",
         "enableSystemNotifications": "啟用系統通知",
-        "exportState": "匯出狀態",
+        "exportTransactionHistory": "Export transaction history",
         "localProofOfWork": "本地工作量證明",
         "unlock": "解鎖",
         "updateFirefly": "更新 Firefly",
@@ -743,7 +751,7 @@
         "addNode": "增加節點",
         "updateNode": "更新節點",
         "removeNode": "移除節點",
-        "removeAllNodes": "Remove all nodes",
+        "removeAllNodes": "移除所有節點",
         "hide": "隱藏",
         "hideOthers": "隱藏其他",
         "showAll": "全部顯示",
@@ -927,6 +935,10 @@
         "copiedToClipboard": "複製到剪貼簿",
         "accountsSynchronized": "錢包同步完成",
         "fundsAvailableSoon": "您的資金很快就可以使用",
+        "exportTransactionHistory": {
+            "success": "Transaction history for {accountAlias} was successfully saved to {filePath}",
+            "error": "Unable to export transaction history for {accountAlias}"
+        },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
             "notEnabled": "IOTA links are not enabled",
@@ -997,7 +1009,7 @@
         "node": {
             "invalid": "請輸入有效的 URL。",
             "dns": "Could not find DNS resolution for node.",
-            "timedOut": "The connection timed out.",
+            "timedOut": "連線逾時。",
             "refused": "The connection was refused.",
             "handshake": "Could not complete handshake with node.",
             "invalidCertificate": "Could not connect with invalid certificate.",

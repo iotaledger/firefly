@@ -415,9 +415,9 @@
                 "title": "Migrate Ledger index",
                 "description": "Migrovat jiný Trinity index"
             },
-            "stateExport": {
-                "title": "Export stavu",
-                "description": "Exportovat historii transakcí do .csv souboru"
+            "transactionHistory": {
+                "title": "Historie transakcí",
+                "description": "Exportovat historii transakcí vašich účtů jako .csv soubory"
             },
             "troubleshoot": {
                 "title": "Řešení problémů",
@@ -669,6 +669,13 @@
         "ledgerMigrateIndex": {
             "title": "Potřebujete migrovat jiný Trinity index?",
             "body": "Můžete také migrovat později v pokročilém nastavení."
+        },
+        "exportTransactionHistory": {
+            "title": "Exportovat historii transakcí",
+            "body": "Exportovat historii transakcí pro všechny účty postupně v rámci tohoto profilu. Export bude ve formátu CSV.",
+            "profileName": "Název profilu:",
+            "numberOfAccounts": "Počet účtů:",
+            "typePassword": "Zadejte heslo pro povolení exportu"
         }
     },
     "charts": {
@@ -724,11 +731,12 @@
         "dropHere": "Přesuňte soubor sem",
         "syncAll": "Synchronizovat vše",
         "export": "Exportovat",
+        "exporting": "Exportuji",
         "exportNewStronghold": "Exportovat nový Stronghold",
         "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "Povolit vývojářský režim",
         "enableSystemNotifications": "Povolit upozornění",
-        "exportState": "Exportovat stav",
+        "exportTransactionHistory": "Exportovat historii transakcí",
         "localProofOfWork": "Lokální proof-of-work",
         "unlock": "Odemknout",
         "updateFirefly": "Aktualizovat Firefly",
@@ -927,6 +935,10 @@
         "copiedToClipboard": "Zkopírováno do schránky",
         "accountsSynchronized": "Synchronizace peněženky dokončena",
         "fundsAvailableSoon": "Vaše prostředky budou brzy k dispozici",
+        "exportTransactionHistory": {
+            "success": "Historie transakcí pro {accountAlias} byla úspěšně uložena do {filePath}",
+            "error": "Nelze exportovat historii transakcí pro {accountAlias}"
+        },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
             "notEnabled": "IOTA links are not enabled",

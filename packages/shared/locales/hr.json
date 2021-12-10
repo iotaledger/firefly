@@ -15,7 +15,7 @@
         },
         "profile": {
             "title": "Stvori novi profil",
-            "profileName": "Profile name",
+            "profileName": "Ime profila",
             "body1": "Možete stvoriti više korisničkih računa kako biste organizirali svoje novčanike i poboljšali privatnost.",
             "body2": {
                 "first": "Počnimo s imenom tvojeg prvog profila.",
@@ -23,8 +23,8 @@
             },
             "addMore": "Kasnije možeš dodati još profila.",
             "developer": {
-                "label": "Developer profile",
-                "info": "Connect to public and private IOTA networks"
+                "label": "Profil developera",
+                "info": "Povežite se na javne i privatne IOTA mreže"
             }
         },
         "setup": {
@@ -85,7 +85,7 @@
             "body2": "Za nastavak ponovo unesite PIN. "
         },
         "backup": {
-            "title": "Napravite pričuvnu kopiju svojeg novčanika",
+            "title": "Napravite sigurnosnu kopiju svojeg novčanika",
             "body1": "Sada ćemo vam pokazati frazu za oporavak. Zapišite ju u svoj Recovery Kit.",
             "body2": "Frazu za oporavak nemojte dijeliti ni sa kime. Ona omogućuje pristup vašim tokenima odasvud.",
             "body3": "Izgubite li svoju frazu za oporavak, možete izgubiti sva sredstva."
@@ -106,16 +106,16 @@
             "verifiedBody": "Držite ju na sigurnom, izvan dosega drugih."
         },
         "backupWallet": {
-            "title": "Spremite pričuvnu kopiju u Stronghold datoteku",
-            "body1": "Unesi svoju lozinku kako bi spremio pričuvne kopije svojih novčanika u Stronghold datoteku. Tu lozinku koristimo za enkripciju pričuvne kopije.",
-            "body2": "Zašto su digitalne pričuvne kopije tako važne:",
+            "title": "Spremite sigurnosnu kopiju u Stronghold datoteku",
+            "body1": "Unesi svoju lozinku kako bi spremio sigurnosne kopije svojih novčanika u Stronghold datoteku. Tu lozinku koristimo za enkripciju sigurnosne kopije.",
+            "body2": "Razlozi zašto su digitalne sigurnosne kopije tako važne:",
             "reason1": "Jednostavno oporavi svoje novčanike bez upisivanja fraze za oporavak",
             "reason2": "Uvezite svoje novčanike s drugih uređaja",
             "reason3": "Oporavite povijest svojih transakcija"
         },
         "recoveryPhraseSaved": {
-            "title": "Pričuvna kopija je uspješno napravljena",
-            "body": "Napravili ste Stronghold pričuvnu kopiju svojih novčanika."
+            "title": "Sigurnosna kopija je uspješno napravljena",
+            "body": "Napravili ste Stronghold sigurnosnu kopiju svojih novčanika."
         },
         "congratulations": {
             "title": "Postavljanje novčanika je završeno",
@@ -135,7 +135,7 @@
             "importMnemonicDescription": "Za oporavak novčanika unesite svoju frazu za oporavak",
             "importFile": "Imam datoteku s pričuvnom kopijom",
             "importFileDescription": "Uvezite Seedvault ili Stronghold datoteku",
-            "importLedger": "Imam Ledger pričuvnu kopiju",
+            "importLedger": "Imam Ledger sigurnosnu kopiju",
             "importLedgerDescription": "Oporavak ili migracija Ledger profila"
         },
         "importFromText": {
@@ -312,7 +312,7 @@
             "theme": {
                 "title": "Tema",
                 "description": "",
-                "advice": "Restart the Firefly application for changes to the system theme to take effect"
+                "advice": "Ponovno pokrenite Firefly aplikaciju da bi se promjene sistemske teme mogle biti primijeniti"
             },
             "language": {
                 "title": "Jezik",
@@ -328,14 +328,14 @@
             },
             "networkStatus": {
                 "title": "Status mreže",
-                "description": "Displays the status of the node you are currently connected to"
+                "description": "Prikazuje status node-a s kojim ste trenutno spojeni"
             },
             "exportStronghold": {
-                "title": "Export backup",
+                "title": "Izvezi pričuvnu kopiju",
                 "description": "Izvoz u Stronghold datoteku - potpunu enkriptiranu kopiju vaših novčanika i najnovijih transakcija"
             },
             "appLock": {
-                "title": "Automatic lock",
+                "title": "Automatsko zaključavanje",
                 "description": "Vrijeme neaktivnosti preostalo do zaključavanja novčanika i odjave iz sustava",
                 "durationMinute": "{time, plural, one {# minuta} few {# minute} other {# minuta}}",
                 "durationHour": "{time, plural, one {# sat} few {# sata} other {# sati}}"
@@ -362,42 +362,42 @@
             },
             "deleteProfile": {
                 "title": "Izbrišite profil",
-                "description": "Brisanje čitavog profila, svih novčanika i povijesti transakcija. Uvjerite se da imate pričuvnu kopiju"
+                "description": "Brisanje čitavog profila, svih novčanika i povijesti transakcija. Uvjerite se da imate sigurnosnu kopiju"
             },
             "deepLinks": {
-                "title": "IOTA links",
-                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
+                "title": "IOTA poveznice",
+                "description": "Automatski ispuni podatke o transakciji unutar Firefly-a nakon klika na IOTA poveznicu"
             },
             "networkConfiguration": {
-                "title": "Network config",
-                "title2": "Network configuration",
+                "title": "Mrežna konfiguracija",
+                "title2": "Mrežna konfiguracija",
                 "description": {
-                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
-                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                    "dev": "Tvoje mrežne postavke će se automatski ažurirati u skladu s trenutnom node konfiguracijom (promjena mreže rezultirat će resetiranjem stanja novčanika)",
+                    "nonDev": "Tvoje mrežne postavke će se automatski ažurirati u skladu s trenutnom node konfiguracijom"
                 },
-                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
-                "resetWallet": "Your wallet state has been reset.",
-                "connectedTo": "Connected to",
+                "switchedNetworks": "Mreža uspješno promijenjena na \"{networkName}\".",
+                "resetWallet": "Stanje vašeg novčanika je resetirano.",
+                "connectedTo": "Povezano s",
                 "nodeConfiguration": {
-                    "title": "Node selection",
-                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
-                    "automatic": "Automatic",
-                    "manual": "Manual"
+                    "title": "Odabir node-a",
+                    "description": "Odaberi \"Ručni odabir node-a\" za konfiguriranje node-a i spajanje na vlastiti node",
+                    "automatic": "Automatski",
+                    "manual": "Ručni"
                 }
             },
             "configureNodeList": {
-                "title": "Node configuration",
-                "description": "Manage the list of nodes you connect to",
+                "title": "Node konfiguracija",
+                "description": "Upravljanje popisom node-ova na koje se spajate",
                 "primaryNode": "Primarni node",
                 "excludeNode": "Izuzmi node",
                 "includeNode": "Priključi node",
-                "editDetails": "Edit details",
-                "viewInfo": "View info",
+                "editDetails": "Uredi pojedinosti",
+                "viewInfo": "Pogledaj informacije",
                 "setAsPrimary": "Koristi kao primarno",
                 "removeNode": "Ukloni node",
                 "includeOfficialNodeList": "Uključi popis službenih nodeova",
-                "noNodes": "There are no nodes, unable to connect to the network",
-                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
+                "noNodes": "Nema node-ova, nije se moguće povezati s mrežom",
+                "noNodesAuto": "Nema node-ova na raspolaganju. Upotrijebit ćemo automatski odabir."
             },
             "proofOfWork": {
                 "title": "Proof of Work",
@@ -412,12 +412,12 @@
                 "description": "Vidi informacije o sustavu i aplikaciji"
             },
             "migrateLedgerIndex": {
-                "title": "Migrate Ledger index",
+                "title": "Migriraj Ledger index",
                 "description": "Migriraj neki drugi index Trinity računa"
             },
-            "stateExport": {
-                "title": "Izvoz stanja",
-                "description": "Izvezi povijest transakcija u .csv datoteku"
+            "transactionHistory": {
+                "title": "Povijest transakcija",
+                "description": "Izvezi povijest transakcija svojih računa kao .csv datoteku"
             },
             "troubleshoot": {
                 "title": "Rješavanje problema",
@@ -429,7 +429,7 @@
             },
             "faq": {
                 "title": "Često postavljana pitanja",
-                "title2": "Frequently asked questions",
+                "title2": "Često postavljana pitanja (FAQ)",
                 "description": "Vidi često postavljana pitanja za pomoć s rješavanjem uobičajenih problema"
             },
             "discord": {
@@ -544,37 +544,37 @@
             "titleAdd": "Dodaj node",
             "titleUpdate": "Obnovi node",
             "titleRemove": "Ukloni node",
-            "titleRemoveAll": "Remove all nodes",
+            "titleRemoveAll": "Ukloni sve node-ove",
             "titleDetails": "Pojedinosti nodea",
-            "titleInfo": "Node info",
-            "addingNode": "Adding node",
-            "updatingNode": "Updating node",
-            "loadingNodeInfo": "Loading node info",
+            "titleInfo": "Informacije o node-u",
+            "addingNode": "Dodajem node",
+            "updatingNode": "Ažuriranje node-a",
+            "loadingNodeInfo": "Učitavanje podataka o node-u",
             "nodeAddress": "Adresa nodea",
             "optionalUsername": "Korisničko ime (opcionalno)",
             "optionalPassword": "Lozinka (opcionalno)",
-            "optionalJwt": "JSON web token (optional)",
+            "optionalJwt": "JSON web token (opcionalno)",
             "setAsPrimaryNode": "Postavi kao glavni node",
             "removeConfirmation": "Jeste li sigurni da želite ukloniti ovaj node?",
-            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "removeAllConfirmation": "Jeste li sigurni da želite ukloniti sve node-ove?",
             "info": {
                 "url": "URL",
-                "software": "Software",
-                "networkId": "Network ID",
+                "software": "Softver",
+                "networkId": "ID mreže",
                 "bech32HRP": "Bech32 HRP",
-                "features": "Features",
-                "confirmedMilestoneIndex": "Confirmed milestone index",
-                "pruningIndex": "Pruning index",
+                "features": "Značajke",
+                "confirmedMilestoneIndex": "Potvrđeni milestone indeks",
+                "pruningIndex": "Pruning indeks",
                 "messagesPerSecond": "Poruka u sekundi",
                 "referencedRate": "Referenced rate"
             }
         },
         "switchNetwork": {
-            "title": "Switch network",
-            "newNetwork": "New network",
-            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
-            "switchingNetwork": "Switching network",
-            "typePassword": "Type your password to switch to:"
+            "title": "Promijeni mrežu",
+            "newNetwork": "Nova mreža",
+            "resetWarning": "Promjena mreže će vas odjaviti te resetirati vaše račune, stanja i povijest transakcija za ovaj profil.",
+            "switchingNetwork": "Promjena mreže",
+            "typePassword": "Unesite svoju lozinku da bi se prebacili na:"
         },
         "errorLog": {
             "title": "Evidencija grešaka",
@@ -635,40 +635,47 @@
             "steps": {
                 "0": "Instaliraj i otvori Ledger Live aplikaciju",
                 "1": "Uvjeri se da je tvoj Ledger spojen",
-                "2": "Search for apps: {legacy} and IOTA (MIOTA)",
-                "3": "Install both apps: {legacy} and IOTA (MIOTA)",
-                "4": "Remember that it's important to close Ledger Live before returning to Firefly"
+                "2": "Pronađi aplikacije: {legacy} i IOTA (MIOTA)",
+                "3": "Instaliraj obje aplikacije: {legacy} i IOTA (MIOTA)",
+                "4": "Ne zaboravi da je važno zatvoriti Ledger Live prije povratka u Firefly"
             }
         },
         "ledgerConnectionGuide": {
             "title": "Savjeti u slučaju da se tvoj Ledger ne želi spojiti",
             "steps": {
-                "0": "Make sure Ledger Live is not open on your computer",
-                "1": "Ensure you have unlocked your Ledger device with your PIN",
-                "2": "Open the new IOTA app on your Ledger device",
+                "0": "Pobrini se da Ledger Live aplikacija nije otvorena na tvom računalu",
+                "1": "Pobrini se da je tvoj Ledger uređaj otključan PIN-om",
+                "2": "Otvori novu IOTA aplikaciju na svom Ledger uređaju",
                 "3": {
-                    "text": "Still no luck?",
-                    "link": "Try the official Ledger support page"
+                    "text": "Prethodni savjeti nisu pomogli?",
+                    "link": "Potraži pomoć na službenoj stranici podrške za Ledger"
                 }
             }
         },
         "ledgerTransaction": {
             "remainderAddress": {
-                "title": "Confirm remainder address",
-                "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+                "title": "Potvrdi adresu za polog ostatka",
+                "info": "Potvrdi da je adresa za polog ostatka, koja je trenutno prikazana na tvom Ledgeru, istovjetna onoj prikazanoj ispod. Ukoliko su obje adrese iste, pritisni oba gumba na svom Ledgeru kada te uređaj to zatraži."
             },
             "transaction": {
                 "title": "Potvrdi transakciju",
-                "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted."
+                "info": "Potvrdi da je informacija o transakciji, trenutno prikazana na tvom Ledger uređaju, istovjetna informaciji prikazanoj ispod. Ukoliko su obje informacije jednake, pritisni oba gumba na svom Ledgeru kada te uređaj to zatraži."
             }
         },
         "ledgerAddress": {
-            "title": "Confirm receive address",
-            "body": "Confirm that the receive address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+            "title": "Potvrdi adresu primatelja",
+            "body": "Potvrdi da je adresa primatelja, trenutno prikazana na tvom Ledger uređaju, istovjetna adresi prikazanoj ispod. Ukoliko su obje adrese jednake, pritisni oba gumba na svom Ledgeru kada te uređaj to zatraži."
         },
         "ledgerMigrateIndex": {
-            "title": "Do you need to migrate another Trinity account index?",
-            "body": "You can also migrate later in Advanced Settings."
+            "title": "Želiš li migrirati neki drugi index Trinity računa?",
+            "body": "Također je moguće migrirati kasnije u Naprednim postavkama."
+        },
+        "exportTransactionHistory": {
+            "title": "Izvezi povijest transakcija",
+            "body": "Izvezi povijest transakcija za sve račune uzastopno unutar ovog profila. Izvoz će biti u CSV formatu.",
+            "profileName": "Ime profila:",
+            "numberOfAccounts": "Broj računa:",
+            "typePassword": "Unesite svoju lozinku da bi dopustili izvoz"
         }
     },
     "charts": {
@@ -676,7 +683,7 @@
         "outgoingMi": "Šalje se {value}",
         "portoflio": "Portfolio",
         "token": "Token",
-        "holdings": "Holdings",
+        "holdings": "Imovina",
         "accountValue": "Vrijednost novčanika",
         "accountActivity": "Aktivnost novčanika",
         "timeframe1Hour": "1 sat",
@@ -687,8 +694,8 @@
     "actions": {
         "continue": "Nastavi",
         "back": "Natrag",
-        "previous": "Previous",
-        "next": "Next",
+        "previous": "Prethodno",
+        "next": "Sljedeće",
         "cancel": "Poništi",
         "close": "Zatvori",
         "dismiss": "Odbaci",
@@ -724,11 +731,12 @@
         "dropHere": "Ispustite datoteku ovdje",
         "syncAll": "Sinkroniziraj sve",
         "export": "Izvezi",
+        "exporting": "Izvoz u tijeku",
         "exportNewStronghold": "Izvezi novi Stronghold",
-        "enableDeepLinks": "Enable IOTA links",
+        "enableDeepLinks": "Omogući IOTA poveznice",
         "enableDeveloperMode": "Umogući razvojne alate",
         "enableSystemNotifications": "Omogući obavijesti",
-        "exportState": "Izvezi stanje (State)",
+        "exportTransactionHistory": "Izvezi povijest transakcija",
         "localProofOfWork": "Lokalni Proof of work",
         "unlock": "Otključaj",
         "updateFirefly": "Ažuriraj Firefly",
@@ -743,7 +751,7 @@
         "addNode": "Dodaj node",
         "updateNode": "Obnovi node",
         "removeNode": "Ukloni node",
-        "removeAllNodes": "Remove all nodes",
+        "removeAllNodes": "Ukloni sve node-ove",
         "hide": "Sakrij",
         "hideOthers": "Sakrij ostalo",
         "showAll": "Pokaži sve",
@@ -758,7 +766,7 @@
         "addAccount": "Dodaj novčanik",
         "checkForUpdates": "Potraži ažuriranja",
         "reportAnIssue": "Prijavi problem",
-        "restore": "Restore",
+        "restore": "Vrati",
         "clear": "Očisti",
         "hideDetails": "Sakrij detalje",
         "yes": "Da",
@@ -766,21 +774,21 @@
         "skip": "Preskoči",
         "reset": "Resetiraj",
         "downloadRecoveryKit": "Spremi predložak Recovery Kita",
-        "skipBackup": "Preskoči izradu pričuvne kopije",
+        "skipBackup": "Preskoči izradu sigurnosne kopije",
         "finishSetup": "Završi postavljanje",
         "readDocumentation": "Pročitajte dokumentaciju",
         "visitFaq": "Posjeti često postavljana pitanja",
         "viewStatus": "Vidi status",
         "showHiddenAccounts": "Prikaži skrivene novčanike",
         "confirm": "Potvrdi",
-        "hideNetworkStatistics": "Hide network statistics",
+        "hideNetworkStatistics": "Sakrij statistiku mreže",
         "findBalances": "Pronalazak sredstava",
         "searchBalances": "Traži sredstva",
         "searchAgain": "Traži ponovno",
         "searching": "Pretraga...",
         "closeFirefly": "Zatvori Firefly",
         "generateAddress": "Generiraj adresu",
-        "migrateAgain": "Migrate another index"
+        "migrateAgain": "Migriraj drugi index"
     },
     "general": {
         "password": "Lozinka",
@@ -795,7 +803,7 @@
         "received": "Primljeno",
         "sendPayment": "Pošalji uplatu",
         "moveFunds": "Interni prijenos",
-        "sendTo": "Send To",
+        "sendTo": "Pošalji",
         "sendFunds": "Pošaljite sredstva",
         "sendToAddress": "Slanje na adresu",
         "scanQrOrPaste": "Skenirajte QR kod ili zalijepite Adresu",
@@ -814,8 +822,8 @@
         "myAddress": "Moja adresa",
         "shareAddress": "Podijelite adresu",
         "yourAddress": "Vaša adresa",
-        "newRemainder": "New Remainder",
-        "remainder": "Remainder",
+        "newRemainder": "Novi ostatak",
+        "remainder": "Ostatak",
         "generateNewAddress": "Stvorite novu adresu",
         "copyAddress": "Kopiraj adresu",
         "import": "Uvezi",
@@ -823,9 +831,9 @@
         "stronghold": "Stronghold",
         "language": "Jezik",
         "appearance": "Prikaz",
-        "lightTheme": "Light",
-        "darkTheme": "Dark",
-        "systemTheme": "System",
+        "lightTheme": "Svijetla",
+        "darkTheme": "Tamna",
+        "systemTheme": "Sistemska",
         "balance": "Stanje računa",
         "accountBalance": "Stanje novčanika",
         "incoming": "Dolazni",
@@ -842,15 +850,15 @@
         "transactions": "Transakcije",
         "security": "Sigurnost",
         "accountAddress": "Adresa novčanika",
-        "network": "Network",
+        "network": "Mreža",
         "nodes": "Nodeovi",
         "wallet": "Novčanik",
         "help": "Pomoć",
         "you": "Ti",
         "messageId": "ID poruke",
         "inputAddress": "Adresa s koje je poslano",
-        "receiveAddress": "Adresa na koju je poslano",
-        "newAddress": "New Address",
+        "receiveAddress": "Adresa primatelja",
+        "newAddress": "Nova adresa",
         "date": "Datum",
         "status": "Stanje",
         "confirmed": "Potvrđeno",
@@ -862,13 +870,13 @@
         "firstSync": "Sinkronizirano povijest aktivnosti, ovo bi moglo potrajati...",
         "transferSyncing": "Sinkronizacija novčanika",
         "transferSelectingInputs": "Odabir inputa",
-        "transferRemainderAddress": "Generating remainder address",
-        "transferPreparedTransaction": "Preparing transaction",
+        "transferRemainderAddress": "Generiranje adrese za polog ostatka",
+        "transferPreparedTransaction": "Priprema transakcije",
         "transferSigning": "Potpisivanje transakcije",
         "transferPow": "Izvodim PoW (Proof of Work)",
         "transferBroadcasting": "Odašiljem transakciju",
         "transferComplete": "Transakcija dovršena",
-        "generatingReceiveAddress": "Generating receive address",
+        "generatingReceiveAddress": "Generiranje adrese primatelja",
         "creatingAccount": "Stvaram novčanik, molim pričekajte...",
         "updatingAccount": "Usklađujem novčanik, molim pričekajte...",
         "accountSyncing": "Novčanik se sinkronizira",
@@ -902,7 +910,7 @@
         "capsLock": "Caps Lock je uključen",
         "version": "Verzija {version}",
         "unknown": "Nepoznato",
-        "none": "None"
+        "none": "Nijedan"
     },
     "dates": {
         "today": "Danas",
@@ -926,14 +934,18 @@
         "minutesRemaining": "{minutes, plural, one {minuta} few {# minute} other {# minuta}}",
         "copiedToClipboard": "Kopirano u međuspremnik",
         "accountsSynchronized": "Sinkronizacija novčanika je završena",
-        "fundsAvailableSoon": "Your funds will become available shortly",
+        "fundsAvailableSoon": "Vaša će sredstva biti dostupna uskoro",
+        "exportTransactionHistory": {
+            "success": "Povijest transakcija za {accountAlias} je uspješno spremljena u {filePath}",
+            "error": "Nije moguće izvesti povijest transakcija za {accountAlias}"
+        },
         "deepLinkingRequest": {
-            "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
-            "notEnabled": "IOTA links are not enabled",
-            "invalidFormat": "The IOTA link you followed is invalid",
+            "recievedWhileLoggedOut": "Potrebno se prijaviti za pokretanje IOTA poveznice",
+            "notEnabled": "IOTA poveznice nisu omogućene",
+            "invalidFormat": "IOTA poveznica koju ste slijedili nije važeća",
             "wallet": {
                 "send": {
-                    "success": "Payment details added from IOTA link"
+                    "success": "Podaci o plaćanju dodani s IOTA poveznice"
                 }
             }
         }
@@ -974,9 +986,9 @@
             "control": "Ime profila ne smije sadržavati Ctrl znak.",
             "startDot": "Ime profila ne može početi točkom.",
             "chars": "Ime profila ne smije uključivati neki od sljedećih znakova <>:\"/\\|?*",
-            "index": "Your account index must be a number between 0 and 2,147,483,647.",
-            "page": "Your account page must be a number between 0 and 2,147,483,647.",
-            "syncing": "There was an error syncing your wallets."
+            "index": "Indeks vašeg računa mora biti broj između 0 i 2,147,483,647.",
+            "page": "Stranica vašeg računa mora biti broj između 0 i 2,147,483,647.",
+            "syncing": "Došlo je do greške prilikom sinkroniziranja vaših novčanika."
         },
         "send": {
             "addressLength": "Adrese moraju sadržavati {length, plural, one {1 znak} few {# znaka} other {# znakova}}.",
@@ -991,36 +1003,36 @@
             "noToAccount": "Niste odabrali novčanik na koji želite poslati sredstva.",
             "sendingDust": "Ne možete slati manje od 1 Mi.",
             "leavingDust": "Ne možet ostaviti manje od 1 Mi na svojoj adresi.",
-            "cancelled": "The transaction was cancelled.",
-            "transaction": "There was an error sending your transaction. Please try again."
+            "cancelled": "Transakcija je otkazana.",
+            "transaction": "Došlo je do greške prilikom slanja vaše transakcije. Molimo pokušajte ponovno."
         },
         "node": {
             "invalid": "Molimo unesite valjani URL.",
-            "dns": "Could not find DNS resolution for node.",
-            "timedOut": "The connection timed out.",
-            "refused": "The connection was refused.",
-            "handshake": "Could not complete handshake with node.",
-            "invalidCertificate": "Could not connect with invalid certificate.",
-            "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
+            "dns": "Nije bilo moguće izvršiti DNS rezoluciju za node.",
+            "timedOut": "Veza je istekla.",
+            "refused": "Veza je odbijena.",
+            "handshake": "Nije bilo moguće dovršiti rukovanje s node-om.",
+            "invalidCertificate": "Nije bilo moguće povezivanje s nevažećim certifikatom.",
+            "https": "HTTPS je obavezan; nesigurne veze putem HTTP-a trenutno nisu podržane.",
             "duplicate": "Ovaj je node već dodan.",
             "unsynced": "Node nije sinkroniziran.",
             "noSynced": "Nema dostupnih sinkroniziranih nodeova.",
-            "answer": "Failed to get an answer from all nodes.",
-            "forbidden": "This node connection is forbidden."
+            "answer": "Nije bilo moguće dobiti odgovor od svih node-ova.",
+            "forbidden": "Povezivanje s ovim node-om je zabranjeno."
         },
         "network": {
-            "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
-            "notReachable": "The network ID for this node could not be retrieved, unable to add node.",
-            "badNodes": "Unable to connect to the network with current node configuration.",
-            "nonEmptyAccount": "You must transfer all balances before switching networks."
+            "mismatch": "Mrežni ID ovog node-a je \"{networkId}\", što se ne podudara s trenutnom mrežom.",
+            "notReachable": "Nije bilo moguće dohvatiti mrežni ID za ovaj node, nije moguće dodati node.",
+            "badNodes": "Nije se moguće povezati s mrežom s trenutnom node konfiguracijom.",
+            "nonEmptyAccount": "Potrebno je prenijeti sva stanja prije promjene mreže."
         },
         "global": {
             "generic": "Došlo je do greške."
         },
         "backup": {
             "invalid": "Sigurnosna kopija nije prepoznata.",
-            "destination": "Destinacija za pričuvnu kopiju je nevažeća.",
-            "mnemonic": "Mnemonic nije ispravan.",
+            "destination": "Destinacija za sigurnosnu kopiju je nevažeća.",
+            "mnemonic": "Fraza za oporavak nije ispravna.",
             "seedTooShort": "Seed mora imati 81 znak, trenutno ih ima {length, plural, one {jedan} other {#}}",
             "seedCharacters": "Seed može sadržavati samo slova od A do Z i broj 9",
             "phraseWordCount": "Vaša fraza za oporavak mora se sastojati od 24 riječi. Trenutno {length, plural, one {je samo jedna} other {ih ima samo #}}.",
@@ -1028,31 +1040,31 @@
             "phraseCaseWord": "Riječ \"{word}\" treba započeti malim slovom"
         },
         "ledger": {
-            "appNotOpen": "You must open the IOTA app on your Ledger device.",
-            "generic": "There was an error connecting to your Ledger device.",
-            "legacyConnected": "The wrong app is open on your Ledger device.",
-            "locked": "Please unlock your Ledger device by entering the PIN.",
-            "mnemonicMismatch": "You have connected the wrong Ledger device or the mnemonic has changed.",
-            "notDetected": "No Ledger device detected.",
-            "notFound": "Ledger device not found.",
-            "otherConnected": "The wrong app is open on your Ledger device.",
-            "generateAddress": "There was an error generating an address.",
-            "timeout": "Your Ledger device timed out.",
-            "disconnected": "Your Ledger device was disconnected."
+            "appNotOpen": "Potrebno je otvoriti IOTA aplikaciju na Ledger uređaju.",
+            "generic": "Došlo je do greške prilikom povezivanja s Ledger uređajem.",
+            "legacyConnected": "Pogrešna aplikacija je otvorena na Ledger uređaju.",
+            "locked": "Otključaj svoj Ledger uređaj PIN-om.",
+            "mnemonicMismatch": "Povezali ste krivi Ledger uređaj ili je fraza za oporavak promijenjena.",
+            "notDetected": "Ledger uređaj nije detektiran.",
+            "notFound": "Ledger uređaj nije pronađen.",
+            "otherConnected": "Pogrešna aplikacija je otvorena na Ledger uređaju.",
+            "generateAddress": "Došlo je do greške prilikom generiranja adrese.",
+            "timeout": "Isteklo je vrijeme korištenja Ledger uređaja.",
+            "disconnected": "Izgubljena je veza s Ledger uređajem."
         },
         "popup": {
-            "preventClose": "This popup is unable to be closed."
+            "preventClose": "Ovaj popup nije moguće zatvoriti."
         },
         "migration": {
-            "missingBundle": "An error occurred while trying to find the transaction bundle."
+            "missingBundle": "Došlo je do greške prilikom pokušaja pronalaženja transakcijskog skupa."
         },
         "crypto": {
-            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
+            "cannotDecodeBech32": "Nije bilo moguće dekodirati string kao Bech32 adresu."
         }
     },
     "warning": {
         "node": {
-            "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
+            "http": "Korištenje node-ova preko HTTP-a ostavlja promet nešifriranim i može predstavljati sigurnosni rizik."
         }
     },
     "tooltips": {

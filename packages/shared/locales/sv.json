@@ -415,9 +415,9 @@
                 "title": "Migrera Ledger-index",
                 "description": "Migrera ett annat kontoindex från Trinity"
             },
-            "stateExport": {
-                "title": "Tillstånds-exportering",
-                "description": "Exportera din transaktionshistorik till en .csv-fil"
+            "transactionHistory": {
+                "title": "Transaktionshistorik",
+                "description": "Exportera transaktionshistoriken för dina konton som .csv-filer"
             },
             "troubleshoot": {
                 "title": "Felsök",
@@ -669,6 +669,13 @@
         "ledgerMigrateIndex": {
             "title": "Behöver du migrera ytterligare ett Trinity kontoindex?",
             "body": "Du kan också migrera senare i Avancerade inställningar."
+        },
+        "exportTransactionHistory": {
+            "title": "Exportera transaktionshistoriken",
+            "body": "Exportera din transaktionshistorik för alla konton i följd inom denna profil. Exporten kommer att vara i ett CSV-format.",
+            "profileName": "Profilnamn:",
+            "numberOfAccounts": "Antal konton:",
+            "typePassword": "Ange ditt lösenord för att tillåta export"
         }
     },
     "charts": {
@@ -724,11 +731,12 @@
         "dropHere": "Släpp din fil här",
         "syncAll": "Synkronisera alla",
         "export": "Exportera",
+        "exporting": "Exporterar",
         "exportNewStronghold": "Exportera en ny Stronghold",
         "enableDeepLinks": "Aktivera IOTA-länkar",
         "enableDeveloperMode": "Aktivera utvecklarläge",
         "enableSystemNotifications": "Aktivera systemaviseringar",
-        "exportState": "Exportera tillstånd",
+        "exportTransactionHistory": "Exportera transaktionshistoriken",
         "localProofOfWork": "Lokalt proof of work",
         "unlock": "Lås upp",
         "updateFirefly": "Uppdatera Firefly",
@@ -927,6 +935,10 @@
         "copiedToClipboard": "Kopierad till urklipp",
         "accountsSynchronized": "Plånbokssynkronisering slutförd",
         "fundsAvailableSoon": "Dina IOTA kommer inom kort att bli tillgängliga",
+        "exportTransactionHistory": {
+            "success": "Transaktionshistorik för {accountAlias} har sparats till {filePath}",
+            "error": "Det gick inte att exportera transaktionshistorik för {accountAlias}"
+        },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "Logga in för att initiera IOTA-länken",
             "notEnabled": "IOTA-länkar är inte aktiverade",

@@ -415,9 +415,9 @@
                 "title": "Migrate Ledger index",
                 "description": "Перенести інший індекс з Trinity"
             },
-            "stateExport": {
-                "title": "Експорт звіту",
-                "description": "Експорт історії транзакцій в .csv файл"
+            "transactionHistory": {
+                "title": "Transaction history",
+                "description": "Export the transaction history of your accounts as .csv files"
             },
             "troubleshoot": {
                 "title": "Виправлення помилок",
@@ -669,6 +669,13 @@
         "ledgerMigrateIndex": {
             "title": "Вам потрібно перенести інший індекс облікового запису Trinity?",
             "body": "Крім того, можна перенести пізніше в Розширених налаштуваннях."
+        },
+        "exportTransactionHistory": {
+            "title": "Export transaction history",
+            "body": "Export your transaction history for all accounts consecutively within this profile. Exports will be in a CSV format.",
+            "profileName": "Profile name:",
+            "numberOfAccounts": "Number of accounts:",
+            "typePassword": "Type your password to allow exporting"
         }
     },
     "charts": {
@@ -724,11 +731,12 @@
         "dropHere": "Перетягніть файл сюди",
         "syncAll": "Синхронізувати все",
         "export": "Експортувати",
+        "exporting": "Exporting",
         "exportNewStronghold": "Експортувати новий Stronghold",
         "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "Активувати режим розробника",
         "enableSystemNotifications": "Увімкнути систему сповіщень",
-        "exportState": "Експортувати звіт",
+        "exportTransactionHistory": "Export transaction history",
         "localProofOfWork": "Локальне доказ виконання роботи",
         "unlock": "Розблокувати",
         "updateFirefly": "Оновити Firefly",
@@ -927,6 +935,10 @@
         "copiedToClipboard": "Скопійовано в буфер обміну",
         "accountsSynchronized": "Синхронізацію гаманця завершено",
         "fundsAvailableSoon": "Незабаром ваші кошти стануть доступними",
+        "exportTransactionHistory": {
+            "success": "Transaction history for {accountAlias} was successfully saved to {filePath}",
+            "error": "Unable to export transaction history for {accountAlias}"
+        },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
             "notEnabled": "IOTA links are not enabled",
