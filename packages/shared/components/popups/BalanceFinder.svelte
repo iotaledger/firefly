@@ -11,7 +11,7 @@
 
     const { balanceOverview } = $wallet
 
-    let addressIndex = 0
+    const addressIndex = 0
     const gapLimitIncrement = $isLedgerProfile ? 10 : 25
     let currentGapLimit = gapLimitIncrement
     let accountDiscoveryThreshold = $isLedgerProfile ? 3 : 10
