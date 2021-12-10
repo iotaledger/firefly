@@ -36,14 +36,15 @@
         await tick()
 
         parentWidth = indicatorBox?.offsetWidth / 2 ?? 0
-        parentLeft = indicatorBox?.getBoundingClientRect().left ?? 0
-
         /**
-         * CAUTION: The top requires a specific multiplier that
-         * does seem to play nicely with responsiveness.
+         * CAUTION: The positioning requires a specific multiplier
+         * to play nicely with responsiveness.
          */
+        const left = indicatorBox?.getBoundingClientRect().left ?? 0
+        parentLeft = left / 1.04
+
         const top = indicatorBox?.getBoundingClientRect().top ?? 0
-        parentTop = top * 0.765
+        parentTop = top * 0.8
     }
 
     const toggleTooltip = (): void => {
@@ -123,7 +124,7 @@
     <Icon icon={indicatorIcon} classes="ml-2 mr-1 fill-current text-{isBelowMinimumStakingRewards ? 'yellow-700' : 'blue-500'}" />
 </div>
 {#if showTooltip}
-    <Tooltip {parentTop} {parentLeft} {parentWidth} position="right">
+    <Tooltip {parentTop} {parentLeft} {parentWidth} position="bottom">
         <Text type="p" classes="text-gray-900 bold mb-1 text-left">{tooltipText?.title}</Text>
         <Text type="p" secondary classes="text-left">{tooltipText?.body}</Text>
     </Tooltip>

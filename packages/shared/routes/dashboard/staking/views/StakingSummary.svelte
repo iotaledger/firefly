@@ -32,11 +32,14 @@
     let canStakeAnAccount
     $: canStakeAnAccount = get($wallet.accounts).filter((wa) => canAccountParticipate(wa)).length > 0
 
+    let stakingHasEnded
+    $: stakingHasEnded = $stakingEventState === ParticipationEventState.Ended
+
     let isStaked
-    $: isStaked = $stakedAmount > 0
+    $: isStaked = $stakedAmount > 0 && !stakingHasEnded
 
     let isPartiallyStaked
-    $: isPartiallyStaked = $partiallyStakedAccounts.length > 0
+    $: isPartiallyStaked = $partiallyStakedAccounts.length > 0 && !stakingHasEnded
 
     const NUM_CHANCES = 1000
     const LUCKY_NUM = 3
@@ -114,15 +117,17 @@
                 </div>
             {/if}
         </div>
-        <Text type="h5" classes="text-3xl">{formatUnitBestMatch($stakedAmount)}</Text>
-        <Text type="p" smaller overrideColor classes="mt-1 text-gray-500 dark:text-gray-600">
-            {formatUnitBestMatch($unstakedAmount)}
-            {localize('general.unstaked')}
-        </Text>
+        <Text type="h5" classes="text-3xl">{formatUnitBestMatch(stakingHasEnded ? 0 : $stakedAmount)}</Text>
+        {#if !stakingHasEnded} 
+            <Text type="p" smaller overrideColor classes="mt-1 text-gray-500 dark:text-gray-600">
+                {formatUnitBestMatch($unstakedAmount)}
+                {localize('general.unstaked')}
+            </Text>
+        {/if}
     </div>
     <Button
         classes="w-full text-14"
-        disabled={showSpinner}
+        disabled={showSpinner || stakingHasEnded}
         caution={isStaked && isPartiallyStaked}
         secondary={isStaked && !isPartiallyStaked}
         onClick={() => canParticipateWithNode ? handleStakeFundsClick() : showAppNotification({ type: 'warning', message: localize('error.node.pluginNotAvailable', { values: { nodePlugin: NodePlugin.Participation } }) })}
