@@ -5,6 +5,7 @@ import type { Event } from '../typings/events'
 import { showAppNotification } from '../notifications'
 import { api, saveNewMessage } from '../wallet'
 
+import { resetParticipation } from './participation'
 import { participationEvents, participationOverview } from './stores'
 import type {
     ParticipateResponsePayload,
@@ -12,7 +13,6 @@ import type {
     ParticipationEvent,
     ParticipationOverviewResponse
 } from './types'
-import { resetParticipation } from './participation'
 
 
 /**

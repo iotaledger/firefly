@@ -3,12 +3,12 @@ import { get } from 'svelte/store'
 import { localize } from '../i18n'
 import { networkStatus } from '../networkStatus'
 import { showAppNotification } from '../notifications'
+import { delineateNumber } from '../utils'
 import type { WalletAccount } from '../typings/wallet'
 
 import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID, STAKING_AIRDROP_TOKENS, STAKING_EVENT_IDS } from './constants'
 import { partiallyStakedAccounts, participationEvents, participationOverview, stakedAccounts } from './stores'
 import { Participation, ParticipationEvent, StakingAirdrop } from './types'
-import { delineateNumber } from '../utils'
 
 /**
  * Determines whether an account is currently being staked or not.

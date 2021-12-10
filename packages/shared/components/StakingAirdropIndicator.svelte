@@ -13,7 +13,7 @@
             /**
              * NOTE: This searches each account overviews participations array for a matching event ID.
              */
-            (apo) => apo.participations.find((p) => p.eventId === stakingEvent.eventId) !== undefined
+            (apo) => apo.participations.find((p) => p.eventId === stakingEvent?.eventId) !== undefined
         ) !== undefined
     }
 

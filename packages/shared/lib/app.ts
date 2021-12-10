@@ -5,11 +5,11 @@ import { get, writable } from 'svelte/store'
 import { localize } from './i18n'
 import { stopPollingLedgerStatus } from './ledger'
 import { showAppNotification } from './notifications'
+import { resetParticipation } from './participation'
 import { closePopup } from './popup'
 import { activeProfile, clearActiveProfile, isLedgerProfile, isStrongholdLocked } from './profile'
 import { resetRouter } from './router'
 import { api, destroyActor, resetWallet } from './wallet'
-import { resetParticipation } from './participation/participation'
 
 /**
  * Mobile mode

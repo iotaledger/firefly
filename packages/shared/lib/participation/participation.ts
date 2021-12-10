@@ -1,12 +1,12 @@
+import { toHexString } from '../utils'
 import { DUST_THRESHOLD } from '../wallet'
 import type { WalletAccount } from '../typings/wallet'
 
 import { getParticipationOverview } from './api'
 import { PARTICIPATION_POLL_DURATION } from './constants'
-import { participationEvents, participationOverview } from './stores'
+import { accountToParticipate, participationAction, participationEvents, participationOverview } from './stores'
 import { ParticipationEventState, Participation } from './types'
 
-import { toHexString } from '../utils';
 
 let participationPollInterval
 
@@ -45,8 +45,10 @@ export function clearPollParticipationOverviewInterval(): void {
  * @returns {void}
  */
 export const resetParticipation = (): void => {
-    participationOverview.set([])
+    accountToParticipate.set(null)
+    participationAction.set(null)
     participationEvents.set([])
+    participationOverview.set([])
 }
 
 /**
