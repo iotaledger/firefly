@@ -27,6 +27,9 @@ export function getParticipationOverview(): Promise<void> {
             onSuccess(overview: Event<ParticipationOverviewResponse>) {
                 participationOverview.set(overview?.payload.accounts)
 
+                /* eslint-disable no-console */
+                console.log('PARTICIPATION OVERVIEW:\n', get(participationOverview))
+
                 resolve()
             },
             onError(error) {
@@ -118,6 +121,13 @@ export function stopParticipating(accountId: string, eventIds: string[]): Promis
 
         return
     }
+
+    eventIds.push(
+        ...[
+            'c87b676749ad07819ba70ce1cee6349f3740a38bf94e0ae5c198b6870c683661',
+            '7991ace8e7b98d8120777a5889e4474f9499fdad88b8b69241d054d49272f0c7',
+        ]
+    )
 
     return new Promise<void>((resolve, reject) => {
         api.stopParticipating(accountId, eventIds, {

@@ -8,7 +8,9 @@ import { showAppNotification } from './notifications'
 import { localize } from './i18n'
 import { isLedgerProfile } from './profile'
 
-export const checkStronghold = (callback: () => void): void => {
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+export const checkStronghold = (callback: any): void => {
     if (get(isLedgerProfile)) {
         showAppNotification({
             type: 'error',
