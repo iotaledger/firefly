@@ -127,13 +127,12 @@ export function stopParticipating(accountId: string, eventIds: string[]): Promis
      * may end up with straggling participation event IDs whenever switching
      * events with funds staked.
      */
+    console.log('EVENT IDs: ', eventIds)
     eventIds.push(
-        ...[
-            'c87b676749ad07819ba70ce1cee6349f3740a38bf94e0ae5c198b6870c683661',
-            '7991ace8e7b98d8120777a5889e4474f9499fdad88b8b69241d054d49272f0c7',
-            '139333a7c3ed6314a7361537e720ed52ccf79ad2f794545bc1537018640b3ec7',
-            '83ac8c9887b42bde8fefe729b5c98620f5cbfe757581589e4be993a11d3fcbba',
-        ]
+        'c87b676749ad07819ba70ce1cee6349f3740a38bf94e0ae5c198b6870c683661',
+        '7991ace8e7b98d8120777a5889e4474f9499fdad88b8b69241d054d49272f0c7',
+        '139333a7c3ed6314a7361537e720ed52ccf79ad2f794545bc1537018640b3ec7',
+        '83ac8c9887b42bde8fefe729b5c98620f5cbfe757581589e4be993a11d3fcbba'
     )
 
     return new Promise<string[]>((resolve, reject) => {

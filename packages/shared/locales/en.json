@@ -737,8 +737,9 @@
 
         },
         "stakingNotice": {
-            "date": "Staking commences Dec 1st",
-            "body": "By locking your funds for staking before the event starts, you will automatically commence active staking when the staking event starts (no additional rewards will be earned).",
+            "upcomingDate": "Staking commences Dec 1st",
+            "commencingDate": "Staking begins Dec 1st",
+            "body": "By locking your funds for staking while the event is commencing, you will automatically begin receiving airdrops when the event starts (no additional rewards will be earned).",
             "ok": "Ok, I understand"
         },
         "stakingManager": {
