@@ -9,9 +9,9 @@
     import { formatStakingAirdropReward } from 'shared/lib/participation'
     import {
         assemblyStakingRemainingTime,
-        assemblyStakingRewards,
+        assemblyStakingRewards, participationOverview,
         shimmerStakingRemainingTime,
-        shimmerStakingRewards
+        shimmerStakingRewards,
     } from 'shared/lib/participation/stores'
     import { StakingAirdrop } from 'shared/lib/participation/types'
 
@@ -21,11 +21,9 @@
     const isShimmer = (): boolean => airdrop === StakingAirdrop.Shimmer
 
     let remainingTimeAmount, remainingTimeUnit
-    $: {
-        [remainingTimeAmount, remainingTimeUnit] = getBestTimeDuration(
+    $: $participationOverview, [remainingTimeAmount, remainingTimeUnit] = getBestTimeDuration(
             isAssembly() ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
-        ).split(' ')
-    }
+    ).split(' ')
 
     const handleLearnMoreClick = (): void => {
         const url = getLearnMoreUrl()
