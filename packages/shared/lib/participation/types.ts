@@ -79,7 +79,7 @@ export type ParticipationOverviewResponse = {
     accounts: AccountParticipationOverview[]
 }
 
-export interface PendingParticpation {
+export interface PendingParticipation {
     messageId: string
     accountId: string
     action: ParticipationAction
