@@ -1,3 +1,5 @@
+import './mocks/matchMedia'
+
 import {
     getBestTimeDuration,
     HOURS_PER_DAY,
