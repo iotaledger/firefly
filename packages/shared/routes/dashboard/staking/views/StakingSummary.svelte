@@ -38,7 +38,7 @@
     let isPartiallyStaked
     $: isPartiallyStaked = $partiallyStakedAccounts.length > 0
 
-    const NUM_CHANCES = 300
+    const NUM_CHANCES = 1000
     const LUCKY_NUM = 3
     const showSteak = Math.floor(Math.random() * NUM_CHANCES) + 1 === LUCKY_NUM
 

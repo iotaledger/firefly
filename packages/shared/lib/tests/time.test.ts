@@ -3,7 +3,7 @@ import {
     HOURS_PER_DAY,
     MILLISECONDS_PER_SECOND,
     MINUTES_PER_HOUR,
-    SECONDS_PER_MINUTE
+    SECONDS_PER_MINUTE,
 } from '../time'
 
 describe('File: time.ts', () => {

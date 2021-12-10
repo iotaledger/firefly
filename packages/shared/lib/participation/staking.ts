@@ -19,10 +19,11 @@ import { Participation, ParticipationEvent, StakingAirdrop } from './types'
  *
  * @returns {boolean}
  */
-export const isAccountStaked = (accountId: string): boolean => get(stakedAccounts).find((sa) => sa.id === accountId) !== undefined
+export const isAccountStaked = (accountId: string): boolean =>
+    get(stakedAccounts).find((sa) => sa.id === accountId) !== undefined
 
 const getAirdropEventId = (airdrop: StakingAirdrop): string => {
-    switch(airdrop) {
+    switch (airdrop) {
         case StakingAirdrop.Assembly:
             return STAKING_EVENT_IDS[0]
         case StakingAirdrop.Shimmer:
@@ -32,6 +33,16 @@ const getAirdropEventId = (airdrop: StakingAirdrop): string => {
     }
 }
 
+/**
+ * Determines whether an accounts is staked for a particular airdrop.
+ *
+ * @method isAccountStakedForAirdrop
+ *
+ * @param {string} accountId
+ * @param {StakingAirdrop} airdrop
+ *
+ * @returns {boolean}
+ */
 export const isAccountStakedForAirdrop = (accountId: string, airdrop: StakingAirdrop): boolean => {
     const account = get(stakedAccounts).find((sa) => sa.id === accountId)
     if (!account) return false
@@ -42,6 +53,14 @@ export const isAccountStakedForAirdrop = (accountId: string, airdrop: StakingAir
     return accountOverview.participations.find((p) => p.eventId === getAirdropEventId(airdrop)) !== undefined
 }
 
+/**
+ * Determines if an account is partially staked.
+ *
+ * @method isAccountPartiallyStaked
+ *
+ * @param {string} accountId
+ * @returns {boolean}
+ */
 export const isAccountPartiallyStaked = (accountId: string): boolean =>
     get(partiallyStakedAccounts).find((psa) => psa.id === accountId) !== undefined
 
@@ -54,7 +73,7 @@ const estimateAssemblyReward = (amount: number, currentMilestone: number, endMil
     const amountMiotas = amount / 1_000_000
     const numMilestones = endMilestone - currentMilestone
 
-    return Math.floor((multiplier * amountMiotas * numMilestones) * 1_000_000) / 1_000_000
+    return Math.floor(multiplier * amountMiotas * numMilestones * 1_000_000) / 1_000_000
 }
 
 const estimateShimmerReward = (amount: number, currentMilestone: number, endMilestone: number): number => {
@@ -109,7 +128,7 @@ export const getAirdropFromEventId = (eventId: string): StakingAirdrop | undefin
     if (!STAKING_EVENT_IDS.includes(eventId)) {
         showAppNotification({
             type: 'error',
-            message: localize('error.participation.invalidStakingEventId')
+            message: localize('error.participation.invalidStakingEventId'),
         })
     }
 
@@ -119,7 +138,7 @@ export const getAirdropFromEventId = (eventId: string): StakingAirdrop | undefin
 type AssemblyDenomination = 'µ' | 'm' | ''
 
 const getAssemblyTokenMultiplier = (denomination: AssemblyDenomination): number => {
-    switch(denomination) {
+    switch (denomination) {
         case 'm':
             return 1_000
         case 'µ':
@@ -129,6 +148,17 @@ const getAssemblyTokenMultiplier = (denomination: AssemblyDenomination): number 
     }
 }
 
+/**
+ * Returns a formatted version of the rewards for a particular airdrop.
+ *
+ * @method formatStakingAirdropReward
+ *
+ * @param {StakingAirdrop} airdrop
+ * @param {number} amount
+ * @param {number} decimalPlaces
+ *
+ * @returns {string}
+ */
 export const formatStakingAirdropReward = (airdrop: StakingAirdrop, amount: number, decimalPlaces: number): string => {
     switch (airdrop) {
         case StakingAirdrop.Assembly: {
@@ -142,7 +172,9 @@ export const formatStakingAirdropReward = (airdrop: StakingAirdrop, amount: numb
             else if (denomination === 'µ') decimalPlaces = 0
 
             const [integer, float] = (amount * multiplier).toFixed(decimalPlaces).split('.')
-            return `${delineateNumber(integer, ',')}${Number(float) > 0 ? '.' + parseFloat(float) : ''} ${denomination}${STAKING_AIRDROP_TOKENS[airdrop]}`
+            return `${delineateNumber(integer, ',')}${
+                Number(float) > 0 ? '.' + parseFloat(float) : ''
+            } ${denomination}${STAKING_AIRDROP_TOKENS[airdrop]}`
         }
         case StakingAirdrop.Shimmer: {
             return `${delineateNumber(String(amount), ',')} ${STAKING_AIRDROP_TOKENS[airdrop]}`
@@ -192,14 +224,10 @@ export const estimateStakingAirdropReward = (
     let estimation
     switch (airdrop) {
         case StakingAirdrop.Assembly:
-            estimation = estimateAssemblyReward(
-                amountToStake, currentMilestone, endMilestone
-            )
+            estimation = estimateAssemblyReward(amountToStake, currentMilestone, endMilestone)
             break
         case StakingAirdrop.Shimmer:
-            estimation = estimateShimmerReward(
-                amountToStake, currentMilestone, endMilestone
-            )
+            estimation = estimateShimmerReward(amountToStake, currentMilestone, endMilestone)
             break
         default:
             return 0
@@ -208,13 +236,30 @@ export const estimateStakingAirdropReward = (
     return formatAmount ? formatStakingAirdropReward(airdrop, estimation, decimalPlaces) : estimation
 }
 
+/**
+ * Calculate the staked funds for a particular account.
+ *
+ * @method getStakedFunds
+ *
+ * @param {WalletAccount} account
+ *
+ * @returns {number}
+ */
 export const getStakedFunds = (account: WalletAccount): number => {
     const accountParticipation = get(participationOverview).find((apo) => apo.accountIndex === account?.index)
-    console.log('PART: ', accountParticipation)
     if (!accountParticipation) return 0
     else return accountParticipation.shimmerStakedFunds
 }
 
+/**
+ * Calculate the unstaked funds for a particular account.
+ *
+ * @method getUnstakedFunds
+ *
+ * @param {WalletAccount} account
+ *
+ * @returns {number}
+ */
 export const getUnstakedFunds = (account: WalletAccount): number => {
     const accountParticipation = get(participationOverview).find((apo) => apo.accountIndex === account?.index)
     if (!accountParticipation) return 0
@@ -231,9 +276,9 @@ export const getUnstakedFunds = (account: WalletAccount): number => {
  * @returns {boolean}
  */
 export const isStakingForShimmer = (participations: Participation[]): boolean => {
-    const eventIds = participations.map((participation) => participation.eventId);
+    const eventIds = participations.map((participation) => participation.eventId)
 
-    return eventIds.includes(SHIMMER_EVENT_ID);
+    return eventIds.includes(SHIMMER_EVENT_ID)
 }
 
 /**
@@ -245,8 +290,8 @@ export const isStakingForShimmer = (participations: Participation[]): boolean =>
  *
  * @returns {boolean}
  */
- export const isStakingForAssembly = (participations: Participation[]): boolean => {
-    const eventIds = participations.map((participation) => participation.eventId);
+export const isStakingForAssembly = (participations: Participation[]): boolean => {
+    const eventIds = participations.map((participation) => participation.eventId)
 
-    return eventIds.includes(ASSEMBLY_EVENT_ID);
+    return eventIds.includes(ASSEMBLY_EVENT_ID)
 }

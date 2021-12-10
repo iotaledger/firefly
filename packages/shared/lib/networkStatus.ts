@@ -100,7 +100,9 @@ export const updateNetworkStatus = async (accountId: string, node: Node): Promis
 
     if (node || isOfficialNetwork(get(activeProfile)?.settings.networkConfig.network.type)) {
         const response = await asyncGetNodeInfo(accountId, node?.url, cleanNodeAuth(node?.auth))
-        const timeSinceLastMsInMinutes = (Date.now() - response.nodeinfo.latestMilestoneTimestamp * MILLISECONDS_PER_SECOND) / (MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE)
+        const timeSinceLastMsInMinutes =
+            (Date.now() - response.nodeinfo.latestMilestoneTimestamp * MILLISECONDS_PER_SECOND) /
+            (MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE)
 
         let health = 0 // bad
         if (timeSinceLastMsInMinutes < 2) {

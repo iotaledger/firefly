@@ -50,8 +50,8 @@
     let accounts = get($wallet.accounts)
     const hasStakedAccounts = $stakedAccounts.length > 0
 
-    $: $stakedAccounts, async () => await getParticipationOverview()
-    $: $accountToParticipate, async () => await getParticipationOverview()
+    $: $stakedAccounts, async () => getParticipationOverview()
+    $: $accountToParticipate, async () => getParticipationOverview()
 
     const resetAccounts = (): void => {
         /**
@@ -176,7 +176,7 @@
         }
 
         if ($isSoftwareProfile) {
-            checkStronghold(_unstake)
+            checkStronghold(void _unstake)
         } else {
             void _unstake()
         }

@@ -357,14 +357,21 @@ export const api = {
     getParticipationEvents: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _getParticipationEvents(sendMessage, __ids)
     },
-    participate: function (accountId: string, participations: Participation[]): (__ids: CommunicationIds) => Promise<string> {
+    participate: function (
+        accountId: string,
+        participations: Participation[]
+    ): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _participate(sendMessage, __ids, accountId, participations)
     },
     stopParticipating: function (accountId: string, eventIds: string[]): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _stopParticipating(sendMessage, __ids, accountId, eventIds)
     },
-    participateWithRemainingFunds: function (accountId: string, participations: Participation[]): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _participateWithRemainingFunds(sendMessage, __ids, accountId, participations)
+    participateWithRemainingFunds: function (
+        accountId: string,
+        participations: Participation[]
+    ): (__ids: CommunicationIds) => Promise<string> {
+        return (__ids: CommunicationIds) =>
+            _participateWithRemainingFunds(sendMessage, __ids, accountId, participations)
     },
 
     // Event emitters

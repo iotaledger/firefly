@@ -66,7 +66,7 @@ import type {
     ParticipateResponsePayload,
     Participation,
     ParticipationEvent,
-    ParticipationOverviewResponse
+    ParticipationOverviewResponse,
 } from './participation/types'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
@@ -395,26 +395,37 @@ interface IWalletApi {
     )
 
     // Participation (voting / staking)
-    getParticipationOverview(
-        callbacks: { onSuccess: (response: Event<ParticipationOverviewResponse>) => void; onError: (err: ErrorEventPayload) => void }
-    )
-    getParticipationEvents(
-        callbacks: { onSuccess: (response: Event<ParticipationEvent[]>) => void; onError: (err: ErrorEventPayload) => void }
-    )
+    getParticipationOverview(callbacks: {
+        onSuccess: (response: Event<ParticipationOverviewResponse>) => void
+        onError: (err: ErrorEventPayload) => void
+    })
+    getParticipationEvents(callbacks: {
+        onSuccess: (response: Event<ParticipationEvent[]>) => void
+        onError: (err: ErrorEventPayload) => void
+    })
     participate(
         accountId: string,
         participations: Participation[],
-        callbacks: { onSuccess: (response: Event<ParticipateResponsePayload>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: {
+            onSuccess: (response: Event<ParticipateResponsePayload>) => void
+            onError: (err: ErrorEventPayload) => void
+        }
     )
     stopParticipating(
         accountId: string,
         eventIds: string[],
-        callbacks: { onSuccess: (response: Event<ParticipateResponsePayload>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: {
+            onSuccess: (response: Event<ParticipateResponsePayload>) => void
+            onError: (err: ErrorEventPayload) => void
+        }
     )
     participateWithRemainingFunds(
         accountId: string,
         participations: Participation[],
-        callbacks: { onSuccess: (response: Event<ParticipateResponsePayload>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: {
+            onSuccess: (response: Event<ParticipateResponsePayload>) => void
+            onError: (err: ErrorEventPayload) => void
+        }
     )
 }
 
@@ -858,7 +869,7 @@ export const initialiseListeners = (): void => {
                 showSystemNotification({
                     type: 'info',
                     message: notificationMessage,
-                    contextData: { type: 'valueTx', accountId, },
+                    contextData: { type: 'valueTx', accountId },
                 })
             } else if (message.payload.type === 'Milestone') {
                 // Update account with new message
@@ -1714,9 +1725,9 @@ export const getIndexationString = (payload: Payload): string | undefined => {
         const indexationPayload = payload.data.essence.data.payload?.data
         if (!indexationPayload) return undefined
 
-        return String.fromCharCode(...indexationPayload?.index);
+        return String.fromCharCode(...indexationPayload?.index)
     }
-};
+}
 
 /**
  * Checks if indexation string corresponds to participation
@@ -1727,7 +1738,7 @@ export const getIndexationString = (payload: Payload): string | undefined => {
  *
  * @returns {boolean}
  */
-export const isParticipationPayload = (payload: Payload): boolean => getIndexationString(payload) === 'PARTICIPATE';
+export const isParticipationPayload = (payload: Payload): boolean => getIndexationString(payload) === 'PARTICIPATE'
 
 /**
  * Check if a message was emitted and received by the provided account

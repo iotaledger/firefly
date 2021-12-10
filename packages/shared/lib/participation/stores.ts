@@ -52,11 +52,10 @@ export const participationOverview = writable<ParticipationOverview>([])
 export const stakedAccounts: Readable<WalletAccount[]> = derived(
     [participationOverview],
     ([$participationOverview]) => {
-        const activeAccountIndices =
-            $participationOverview
-                // .filter((overview) => overview.shimmerStakedFunds > 0)
-                .filter((overview) => overview.participations.length > 0)
-                .map((overview) => overview.accountIndex)
+        const activeAccountIndices = $participationOverview
+            // .filter((overview) => overview.shimmerStakedFunds > 0)
+            .filter((overview) => overview.participations.length > 0)
+            .map((overview) => overview.accountIndex)
         /**
          * CAUTION: Ideally the accounts Svelte store would
          * be derived, but doing so results in a "cannot
@@ -73,30 +72,36 @@ export const stakedAccounts: Readable<WalletAccount[]> = derived(
  * between airdrops, so we pick the highest number (this is only possible
  * because the same funds may be staked for both airdrops).
  */
-export const stakedAmount: Readable<number> = derived(
-    participationOverview,
-    (overview) => {
-        const assemblyStakedFunds = overview.reduce((total, accountOverview) => total + accountOverview?.assemblyStakedFunds, 0)
-        const shimmerStakedFunds = overview.reduce((total, accountOverview) => total + accountOverview?.shimmerStakedFunds, 0)
+export const stakedAmount: Readable<number> = derived(participationOverview, (overview) => {
+    const assemblyStakedFunds = overview.reduce(
+        (total, accountOverview) => total + accountOverview?.assemblyStakedFunds,
+        0
+    )
+    const shimmerStakedFunds = overview.reduce(
+        (total, accountOverview) => total + accountOverview?.shimmerStakedFunds,
+        0
+    )
 
-        return Math.max(assemblyStakedFunds, shimmerStakedFunds)
-    }
-)
+    return Math.max(assemblyStakedFunds, shimmerStakedFunds)
+})
 
 /**
  * The amount of funds that are currently unstaked. This amount may differ
  * between airdrops, so we pick the lowest number (this is only possible
  * because the same funds may be staked for both airdrops).
  */
-export const unstakedAmount: Readable<number> = derived(
-    participationOverview,
-    (overview) => {
-        const assemblyUnstakedFunds = overview.reduce((total, accountOverview) => total + accountOverview?.assemblyUnstakedFunds, 0)
-        const shimmerUnstakedFunds = overview.reduce((total, accountOverview) => total + accountOverview?.shimmerUnstakedFunds, 0)
+export const unstakedAmount: Readable<number> = derived(participationOverview, (overview) => {
+    const assemblyUnstakedFunds = overview.reduce(
+        (total, accountOverview) => total + accountOverview?.assemblyUnstakedFunds,
+        0
+    )
+    const shimmerUnstakedFunds = overview.reduce(
+        (total, accountOverview) => total + accountOverview?.shimmerUnstakedFunds,
+        0
+    )
 
-        return Math.min(assemblyUnstakedFunds, shimmerUnstakedFunds)
-    }
-)
+    return Math.min(assemblyUnstakedFunds, shimmerUnstakedFunds)
+})
 
 /**
  * The store for accounts that contain partially staked funds.
@@ -109,7 +114,11 @@ export const partiallyStakedAccounts: Readable<WalletAccount[]> = derived(
     [participationOverview],
     ([$participationOverview]) =>
         $participationOverview
-            .filter((apo) => (apo.assemblyStakedFunds > 0 && apo.assemblyUnstakedFunds > 0) || (apo.shimmerStakedFunds > 0 && apo.shimmerUnstakedFunds > 0))
+            .filter(
+                (apo) =>
+                    (apo.assemblyStakedFunds > 0 && apo.assemblyUnstakedFunds > 0) ||
+                    (apo.shimmerStakedFunds > 0 && apo.shimmerUnstakedFunds > 0)
+            )
             .map((apo) => get(get(wallet).accounts).find((wa) => wa.index === apo.accountIndex))
 )
 
@@ -127,28 +136,24 @@ export const partiallyStakedAmount: Readable<number> = derived(
  * accounts that have been staked (even if they have
  * been unstaked).
  */
-export const assemblyStakingRewards: Readable<number> = derived(
-    participationOverview,
-    (overview) => {
-        const rewards = overview.reduce((total, accountOverview) => total + accountOverview.assemblyRewards, 0)
-        if (rewards <= 0) return overview.reduce((total, accountOverview) => total + accountOverview.assemblyRewardsBelowMinimum, 0)
-        else return rewards
-    }
-)
+export const assemblyStakingRewards: Readable<number> = derived(participationOverview, (overview) => {
+    const rewards = overview.reduce((total, accountOverview) => total + accountOverview.assemblyRewards, 0)
+    if (rewards <= 0)
+        return overview.reduce((total, accountOverview) => total + accountOverview.assemblyRewardsBelowMinimum, 0)
+    else return rewards
+})
 
 /**
  * The total accumulated Shimmer rewards for all
  * accounts that have been staked (even if they have
  * been unstaked).
  */
-export const shimmerStakingRewards: Readable<number> = derived(
-    participationOverview,
-    (overview) => {
-        const rewards = overview.reduce((total, accountOverview) => total + accountOverview.shimmerRewards, 0)
-        if (rewards <= 0) return overview.reduce((total, accountOverview) => total + accountOverview.shimmerRewardsBelowMinimum, 0)
-        else return rewards
-    }
-)
+export const shimmerStakingRewards: Readable<number> = derived(participationOverview, (overview) => {
+    const rewards = overview.reduce((total, accountOverview) => total + accountOverview.shimmerRewards, 0)
+    if (rewards <= 0)
+        return overview.reduce((total, accountOverview) => total + accountOverview.shimmerRewardsBelowMinimum, 0)
+    else return rewards
+})
 
 /**
  * The available participation events (staking AND voting).
@@ -166,11 +171,7 @@ export const stakingEventState: Readable<ParticipationEventState> = derived(
             return ParticipationEventState.Inactive
         }
 
-        const {
-            milestoneIndexCommence,
-            milestoneIndexStart,
-            milestoneIndexEnd,
-        } = stakingEvent?.information
+        const { milestoneIndexCommence, milestoneIndexStart, milestoneIndexEnd } = stakingEvent?.information
         const currentMilestone = $networkStatus?.currentMilestone
 
         if (currentMilestone < milestoneIndexCommence) {
@@ -185,10 +186,7 @@ export const stakingEventState: Readable<ParticipationEventState> = derived(
     }
 )
 
-const calculateRemainingStakingTime = (
-    currentMilestone: number,
-    stakingEvent: ParticipationEvent
-): number => {
+const calculateRemainingStakingTime = (currentMilestone: number, stakingEvent: ParticipationEvent): number => {
     if (!stakingEvent) return 0
 
     const startMilestone = stakingEvent?.information?.milestoneIndexStart
