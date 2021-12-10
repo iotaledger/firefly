@@ -29,11 +29,12 @@
     import {
         accountToParticipate,
         partiallyStakedAccounts,
+        participatedAccountsMapPerSession,
         participationAction,
         participationOverview,
         stakedAccounts,
         stakedAmount,
-        stakingEventState
+        stakingEventState,
     } from 'shared/lib/participation/stores'
     import { Participation, ParticipationAction } from 'shared/lib/participation/types'
 
@@ -87,6 +88,7 @@
         if (!$accountToParticipate || !$participationAction) return
 
         isPerformingAction = true
+        $participatedAccountsMapPerSession.set($accountToParticipate?.id, false)
 
         const isPartialStake = $partiallyStakedAccounts.find((psa) => psa.id === $accountToParticipate?.id) !== undefined
 
@@ -101,6 +103,8 @@
                         : `has${isPartialStake ? 'Partially' : ''}Unstaked`
                 }`)
             })
+
+            $participatedAccountsMapPerSession.set($accountToParticipate?.id, true)
 
             resetView()
         }
@@ -289,7 +293,7 @@
                         {/if}
                     </Button>
                 </div>
-                {#if isAccountPartiallyStaked(account?.id) && $accountToParticipate?.id !== account?.id}
+                {#if isAccountPartiallyStaked(account?.id) && $accountToParticipate?.id !== account?.id && !$participatedAccountsMapPerSession.get($accountToParticipate?.id)}
                     <div class="space-x-4 mx-1 mb-1 px-4 py-3 flex flex-row justify-between items-center rounded-lg bg-yellow-50">
                         <Icon icon="exclamation" width="18" height="18" classes="fill-current text-yellow-600" />
                         <div class="flex flex-col w-3/4">

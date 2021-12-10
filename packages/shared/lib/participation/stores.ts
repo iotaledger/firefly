@@ -109,7 +109,7 @@ export const partiallyStakedAccounts: Readable<WalletAccount[]> = derived(
     [participationOverview],
     ([$participationOverview]) =>
         $participationOverview
-            .filter((apo) => apo.shimmerStakedFunds > 0 && apo.shimmerUnstakedFunds > 0)
+            .filter((apo) => (apo.assemblyStakedFunds > 0 && apo.assemblyUnstakedFunds > 0) || (apo.shimmerStakedFunds > 0 && apo.shimmerUnstakedFunds > 0))
             .map((apo) => get(get(wallet).accounts).find((wa) => wa.index === apo.accountIndex))
 )
 
@@ -226,3 +226,9 @@ export const shimmerStakingRemainingTime: Readable<number> = derived(
             $participationEvents.find((pe) => pe.eventId === SHIMMER_EVENT_ID)
         )
 )
+
+/**
+ * The accounts that have participation of some kind in this session. This is useful for some
+ * UI components around partial staking.
+ */
+export const participatedAccountsMapPerSession = writable<Map<string, boolean>>(new Map())
