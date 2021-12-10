@@ -415,9 +415,9 @@
                 "title": "Ledger számlasorszám migrálása",
                 "description": "Másik Trinity számlasorszám migrálása"
             },
-            "stateExport": {
-                "title": "Állapot exportálása",
-                "description": "A tranzakciós előzmények .csv fájlba exportálása"
+            "transactionHistory": {
+                "title": "Korábbi tranzakciók",
+                "description": "Korábbi tranzakciók exportálása .csv fájlba"
             },
             "troubleshoot": {
                 "title": "Hibaelhárítás",
@@ -669,6 +669,13 @@
         "ledgerMigrateIndex": {
             "title": "Szeretne egy másik Trinity számlasorszámot migrálni?",
             "body": "Később a haladó beállításokban is indíthat migrálást."
+        },
+        "exportTransactionHistory": {
+            "title": "Korábbi tranzakciók exportálása",
+            "body": "Exportálja az összes ehhez a profilhoz tartozó számlájának korábbi tranzakcióit. A mentés CSV fájl formátumban készül.",
+            "profileName": "Profil neve:",
+            "numberOfAccounts": "Számlák darabszáma:",
+            "typePassword": "Adja meg jelszavát az exportálás engedélyezéséhez"
         }
     },
     "charts": {
@@ -724,11 +731,12 @@
         "dropHere": "Húzza ide a fájlt",
         "syncAll": "Minden szinkronizálása",
         "export": "Exportálás",
+        "exporting": "Exportálás",
         "exportNewStronghold": "Új Stronghold exportálása",
         "enableDeepLinks": "IOTA hivatkozások engedélyezése",
         "enableDeveloperMode": "Fejlesztői mód engedélyezése",
         "enableSystemNotifications": "Rendszer értesítések engedélyezése",
-        "exportState": "Állapot exportálása",
+        "exportTransactionHistory": "Korábbi tranzakciók exportálása",
         "localProofOfWork": "Számítás elvégzése helyben",
         "unlock": "Felold",
         "updateFirefly": "Firefly frissítése",
@@ -927,6 +935,10 @@
         "copiedToClipboard": "A vágólapra másolva",
         "accountsSynchronized": "Tárca szinkronizálva",
         "fundsAvailableSoon": "Egyenlege hamarosan elérhető lesz",
+        "exportTransactionHistory": {
+            "success": "A(z) {accountAlias} számla korábbi tranzakciói a {filePath} fájlba sikeresen elmentve",
+            "error": "A(z) {accountAlias} számla korábbi tranzakcióinak mentése sikertelen"
+        },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "Kérjük, jelentkezzen be az IOTA hivatkozás megnyitásához",
             "notEnabled": "Az IOTA hivatkozások nincsenek engedélyezve",

@@ -73,7 +73,6 @@
         }
 
         const { data, type } = state
-        console.log('TRANSFER STATE: ', type, '\nTRANSFER DATA: ', data)
         switch (type) {
             // If a user presses "Accept" on ledger, this is the next transfer progress item.
             case TransferProgressEventType.PerformingPoW:

@@ -415,9 +415,9 @@
                 "title": "Migrate Ledger index",
                 "description": "Migreer 'n ander Trinity rekeningindeks"
             },
-            "stateExport": {
-                "title": "State export",
-                "description": "Voer jou transaksiegeskiedenis uit na 'n .csv-lêer"
+            "transactionHistory": {
+                "title": "Transaksie geskiedenis",
+                "description": "Voer die transaksiegeskiedenis van jou rekeninge as .csv-lêers uit"
             },
             "troubleshoot": {
                 "title": "Probleemoplossing",
@@ -669,6 +669,13 @@
         "ledgerMigrateIndex": {
             "title": "Moet jy 'n ander Trinity rekeningindeks migreer?",
             "body": "Jy kan ook later in Gevorderde instellings migreer."
+        },
+        "exportTransactionHistory": {
+            "title": "Voer transaksiegeskiedenis uit",
+            "body": "Voer jou transaksiegeskiedenis vir alle rekeninge agtereenvolgens binne hierdie profiel uit. Uitvoere sal in 'n CSV-formaat wees.",
+            "profileName": "Profiel Naam:",
+            "numberOfAccounts": "Aantal rekeninge:",
+            "typePassword": "Tik jou wagwoord om uitvoer toe te laat"
         }
     },
     "charts": {
@@ -724,11 +731,12 @@
         "dropHere": "Sit jou lêer hier neer",
         "syncAll": "Sinkroniseer almal",
         "export": "Export",
+        "exporting": "Uitvoer",
         "exportNewStronghold": "Export n nuwe Stronghold",
         "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "Activeer ontwikkelaarsmode",
         "enableSystemNotifications": "Aktiveer stelselkennisgewings",
-        "exportState": "Export staat",
+        "exportTransactionHistory": "Voer transaksiegeskiedenis uit",
         "localProofOfWork": "Local proof of work",
         "unlock": "Ontsluit",
         "updateFirefly": "Update Firefly",
@@ -927,6 +935,10 @@
         "copiedToClipboard": "Kopieer na knipbord",
         "accountsSynchronized": "Beursie sinchronisasie voltooi",
         "fundsAvailableSoon": "Jou fondse sal binnekort beskikbaar wees",
+        "exportTransactionHistory": {
+            "success": "Transaksiegeskiedenis vir {accountAlias} is suksesvol gestoor na {filePath}",
+            "error": "Kan nie transaksiegeskiedenis vir {accountAlias} uitvoer nie"
+        },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
             "notEnabled": "IOTA links are not enabled",

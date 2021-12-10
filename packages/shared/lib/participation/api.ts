@@ -1,21 +1,16 @@
-import { get } from 'svelte/store'
-
 import { localize } from '../i18n'
-import type { Event } from '../typings/events'
 import { showAppNotification } from '../notifications'
+import type { Event } from '../typings/events'
 import { api, saveNewMessage } from '../wallet'
-
-import { participationEvents, participationOverview, addNewPendingParticipation } from './stores'
+import { resetParticipation } from './participation'
+import { addNewPendingParticipation, participationEvents, participationOverview } from './stores'
 import type {
     ParticipateResponsePayload,
     Participation,
     ParticipationEvent,
     ParticipationOverviewResponse,
 } from './types'
-
-import { ParticipationAction } from './types';
-import { resetParticipation } from './participation'
-
+import { ParticipationAction } from './types'
 
 /**
  * Gets participation overview.
@@ -29,7 +24,6 @@ export function getParticipationOverview(): Promise<void> {
         api.getParticipationOverview({
             onSuccess(overview: Event<ParticipationOverviewResponse>) {
                 participationOverview.set(overview?.payload.accounts)
-                console.log('OVERVIEW: ', get(participationOverview))
 
                 resolve()
             },
@@ -38,7 +32,7 @@ export function getParticipationOverview(): Promise<void> {
                 console.error(error)
 
                 reject(error)
-            }
+            },
         })
     })
 }
@@ -55,7 +49,6 @@ export function getParticipationEvents(): Promise<ParticipationEvent[]> {
         api.getParticipationEvents({
             onSuccess(response: Event<ParticipationEvent[]>) {
                 participationEvents.set(response?.payload)
-                console.log('EVENTS: ', get(participationEvents))
 
                 resolve(response?.payload)
             },
@@ -63,7 +56,7 @@ export function getParticipationEvents(): Promise<ParticipationEvent[]> {
                 console.error(error)
 
                 reject(error)
-            }
+            },
         })
     })
 }
@@ -82,29 +75,26 @@ export function participate(accountId: string, participations: Participation[]):
     if (!accountId) {
         showAppNotification({
             type: 'error',
-            message: localize('error.participation.cannotUseAccount')
+            message: localize('error.participation.cannotUseAccount'),
         })
 
         return
     }
 
     return new Promise<string[]>((resolve, reject) => {
-        api.participate(
-            accountId,
-            participations,
-            {
-                onSuccess(response: Event<ParticipateResponsePayload>) {
-                    response.payload.forEach((message) => saveNewMessage(accountId, message));
+        api.participate(accountId, participations, {
+            onSuccess(response: Event<ParticipateResponsePayload>) {
+                response.payload.forEach((message) => saveNewMessage(accountId, message))
 
-                    addNewPendingParticipation(response.payload, accountId, ParticipationAction.Stake)
-                    resolve(response.payload.map((message) => message.id))
-                },
-                onError(error) {
-                    console.error(error)
+                addNewPendingParticipation(response.payload, accountId, ParticipationAction.Stake)
+                resolve(response.payload.map((message) => message.id))
+            },
+            onError(error) {
+                console.error(error)
 
-                    reject(error)
-                }
-            })
+                reject(error)
+            },
+        })
     })
 }
 
@@ -122,31 +112,26 @@ export function stopParticipating(accountId: string, eventIds: string[]): Promis
     if (!accountId) {
         showAppNotification({
             type: 'error',
-            message: localize('error.participation.cannotUseAccount')
+            message: localize('error.participation.cannotUseAccount'),
         })
 
         return
     }
-
     return new Promise<string[]>((resolve, reject) => {
-        api.stopParticipating(
-            accountId,
-            eventIds,
-            {
-                onSuccess(response: Event<ParticipateResponsePayload>) {
-                    response.payload.forEach((message) => saveNewMessage(accountId, message));
+        api.stopParticipating(accountId, eventIds, {
+            onSuccess(response: Event<ParticipateResponsePayload>) {
+                response.payload.forEach((message) => saveNewMessage(accountId, message))
 
-                    addNewPendingParticipation(response.payload, accountId, ParticipationAction.Unstake)
+                addNewPendingParticipation(response.payload, accountId, ParticipationAction.Unstake)
 
-                    resolve(response.payload.map((message) => message.id))
-                },
-                onError(error) {
-                    console.error(error)
+                resolve(response.payload.map((message) => message.id))
+            },
+            onError(error) {
+                console.error(error)
 
-                    reject(error)
-
-                }
-            })
+                reject(error)
+            },
+        })
     })
 }
 
@@ -162,22 +147,19 @@ export function stopParticipating(accountId: string, eventIds: string[]): Promis
  */
 export function participateWithRemainingFunds(accountId: string, participations: Participation[]): Promise<string[]> {
     return new Promise<string[]>((resolve, reject) => {
-        api.participateWithRemainingFunds(
-            accountId,
-            participations,
-            {
-                onSuccess(response: Event<ParticipateResponsePayload>) {
-                    response.payload.forEach((message) => saveNewMessage(accountId, message));
+        api.participateWithRemainingFunds(accountId, participations, {
+            onSuccess(response: Event<ParticipateResponsePayload>) {
+                response.payload.forEach((message) => saveNewMessage(accountId, message))
 
-                    addNewPendingParticipation(response.payload, accountId, ParticipationAction.Stake)
+                addNewPendingParticipation(response.payload, accountId, ParticipationAction.Stake)
 
-                    resolve(response.payload.map((message) => message.id))
-                },
-                onError(error) {
-                    console.error(error);
+                resolve(response.payload.map((message) => message.id))
+            },
+            onError(error) {
+                console.error(error)
 
-                    reject(error);
-                }
-            })
+                reject(error)
+            },
+        })
     })
 }

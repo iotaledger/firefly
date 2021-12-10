@@ -80,7 +80,7 @@ export type ParticipationOverviewResponse = {
 }
 
 export interface PendingParticpation {
-    messageId: string;
-    accountId: string;
+    messageId: string
+    accountId: string
     action: ParticipationAction
 }

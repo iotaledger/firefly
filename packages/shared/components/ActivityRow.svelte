@@ -58,7 +58,7 @@
         )}`
     }
 
-    
+
 
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
 
@@ -78,8 +78,6 @@
     let receiverAccount: WalletAccount
     $: receiverAccount =
         getIncomingFlag(txPayload) || getInternalFlag(txPayload) ? findAccountWithAnyAddress(receiverAddresses, senderAccount) : null
-
-    let participationTransaction = undefined//$participationTransactions.find((ptx) => ptx.messageId === id)
 
     let initialsColor
     let accountAlias = ''
@@ -113,7 +111,7 @@
         if (txPayload) {
             if (includeFullSender) {
                 if (isParticipationPayload(txPayload)) {
-                    direction = `staking.stakedFunds`;
+                    direction = 'staking.stakedFunds'
                 } else {
                    direction = confirmed
                     ? txPayload.data.essence.data.incoming
@@ -123,7 +121,6 @@
                         ? 'general.receivingTo'
                         : 'general.sendingFrom'
                 }
-        
             } else {
                 direction = confirmed
                     ? txPayload.data.essence.data.incoming
@@ -171,18 +168,18 @@
 >
     <div class="w-8 flex flex-row justify-center items-center">
         {#if hasCachedMigrationTx || milestonePayload}
-            <Icon 
-                width="24" 
-                height="24" 
-                boxed 
-                classes="text-white" 
-                boxClasses="bg-gray-500 dark:bg-gray-900" 
-                icon="double-chevron-right" 
+            <Icon
+                width="24"
+                height="24"
+                boxed
+                classes="text-white"
+                boxClasses="bg-gray-500 dark:bg-gray-900"
+                icon="double-chevron-right"
             />
         {:else if isParticipationPayload(txPayload)}
             <Icon
                 boxed
-                width="24" 
+                width="24"
                 height="24"
                 classes="text-white"
                 boxClasses="bg-{getParticipationColor(ParticipationAction.Stake)}"
@@ -202,7 +199,7 @@
             {#if hasCachedMigrationTx || milestonePayload}
                 {locale('general.fundMigration')}
             {:else if isParticipationPayload(txPayload)}
-                {locale(`general.stakedFor`, { values: { account: accountAlias } })}
+                {locale('general.stakedFor', { values: { account: accountAlias } })}
             {:else}
                 {locale(direction, { values: { account: accountAlias } })}
             {/if}

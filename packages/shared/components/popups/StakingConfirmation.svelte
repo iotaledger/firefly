@@ -30,7 +30,7 @@
 
     const activeAirdrops = $participationOverview.find((apo) => apo.accountIndex === accountToStake.index)?.participations.map((p) => getAirdropFromEventId(p.eventId)) || []
 
-    let airdropSelections: { [key in StakingAirdrop]: boolean } = {
+    const airdropSelections: { [key in StakingAirdrop]: boolean } = {
         [StakingAirdrop.Assembly]: activeAirdrops?.length > 0 ? activeAirdrops?.includes(StakingAirdrop.Assembly) : true,
         [StakingAirdrop.Shimmer]: activeAirdrops?.length > 0 ? activeAirdrops?.includes(StakingAirdrop.Shimmer) : true,
     }

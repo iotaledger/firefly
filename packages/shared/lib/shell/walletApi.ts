@@ -90,7 +90,7 @@ const apiToResponseTypeMap = {
     // Participation
     getParticipationOverview: ResponseTypes.ParticipationOverview,
     getParticipationEvents: ResponseTypes.EventsData,
-    participate: ResponseTypes.SentParticipation
+    participate: ResponseTypes.SentParticipation,
 }
 
 /**

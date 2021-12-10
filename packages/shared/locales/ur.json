@@ -15,16 +15,16 @@
         },
         "profile": {
             "title": "ایک پروفائل بنائیں",
-            "profileName": "Profile name",
+            "profileName": "پروفائل کا نام",
             "body1": "آپ اپنے والیٹ کو منظم کرنے اور رازداری کو بہتر بنانے کے لئے متعدد صارف پروفائلز تشکیل دے سکتے ہیں.",
             "body2": {
-                "first": "For now, let's start with your first profile name.",
-                "nonFirst": "For now, let's start with your profile name."
+                "first": "پہلے، آپ کی سب سے پہلی پروفائل کے نام سے شروع کرتے ہیں",
+                "nonFirst": "پہلے، آپ کی پروفائل کے نام سے شروع کرتے ہیں"
             },
-            "addMore": "You can add more profiles later.",
+            "addMore": "آپ بعد میں مزید پروفائلزبنا سکتے ہیں۔",
             "developer": {
-                "label": "Developer profile",
-                "info": "Connect to public and private IOTA networks"
+                "label": "ڈویلپر پروفائل",
+                "info": "پبلک اور پرائیویٹ نیٹورکس سے کنیکٹ کریں"
             }
         },
         "setup": {
@@ -39,30 +39,30 @@
             "body2": "اگر آپ ریکوری کٹ کو بھرتے ہیں اور اسے محفوظ طریقے سے اسٹور کرتے ہیں تو ، آپ ہمیشہ اپنے والیٹس ریکور کرسکیں گے."
         },
         "create": {
-            "title": "Create a wallet",
-            "body": "Create a new wallet. You can choose a regular software wallet or if you have a Ledger device you can set up a hardware wallet.",
+            "title": "ایک نیا والیٹ بنائیں",
+            "body": "ایک نیا والٹ بنائیں۔ آپ ایک عام سافٹوئیر والٹ یا اگر آپ کے پاس لیجر ڈیوائس ہے تو ہارڈوئیر والٹ بنا سکتے ہیں۔",
             "softwareAccount": {
-                "title": "I want a software wallet",
-                "description": "Create a 24-word Recovery Phrase"
+                "title": "مجھے ایک سافٹوئیر والٹ چاہیے",
+                "description": "24۔الفاظ کا ریکوری فریز بنائیں"
             },
             "ledgerAccount": {
-                "title": "I want a hardware wallet",
-                "description": "Ledger Nano S or Nano X required"
+                "title": "مجھے ایک ہارڈوئیر والٹ چاہیے",
+                "description": "Ledger Nano S یا Nano X درکار ہے"
             }
         },
         "setupLedger": {
-            "progress1": "Connect your Ledger",
-            "progress2": "Generate address",
-            "progress3": "Switch Ledger app",
-            "progress4": "Transfer funds",
-            "watchVideo": "Watch video guide",
-            "videoGuide": "Ledger migration video guide"
+            "progress1": "اپنا لیجر کنیکٹ کریں",
+            "progress2": "ایڈریس بنائیں",
+            "progress3": "لیجر ایپ سویچ کریں",
+            "progress4": "فنڈز ٹرانسفر کریں",
+            "watchVideo": "ویڈیو گایڈ دیکھیں",
+            "videoGuide": "لیجر مائیگریٹ کرنے کی ویڈیو گایڈ"
         },
         "ledgerInstallationGuide": {
-            "title": "Have you installed the necessary Ledger apps?",
-            "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
-            "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
-            "action": "Yes, I've installed these apps"
+            "title": "کیا آپ نے درکار لیجر اہپس انسٹال کی ہیں؟",
+            "body1": "آگے بڑھنے سے پہلے،لیجر لائیو سے {legacy} ایپ اور نئی IOTA ایپ انسٹال کریں۔",
+            "body2": "یقینی بنائیں کہ آپکا لیجر فرم وئیر اپ۔ ٹو۔ ڈیٹ ہے۔ پہلے سے انسٹال شدہ تمام ایپس کے ان کے تازہ ترین ورژن پہ اپ ڈیٹ کریں۔",
+            "action": "ہاں، میں نے یہ ایپس انسٹال کر لی ہیں"
         },
         "password": {
             "title": "پاس ورڈ تخلیق کریں",
@@ -121,9 +121,9 @@
             "title": "والیٹ کا سیٹ اپ مکمل ہوگیا",
             "fundsMigrated": "فنڈز منتقل ہو چکے",
             "body": "آپ کا نیا والیٹ استعمال کرنے کے لئے تیار ہے.",
-            "softwareMigratedBody": "You have successfully migrated your funds to the new network",
-            "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
+            "softwareMigratedBody": "آپ نے اپنے فنڈز کو کامیابی کے ساتھ نئے نیٹ ورک پر منتقل کردیا ہے",
+            "fireflyLedgerBody": "آپکا لیجر اکاونٹ کامیابی کیساتھ ریکور ہو گیا ہے اور اب آپ آگے بڑھ سکتے ہیں۔",
+            "trinityLedgerBody": "آپ نے اپنے لیجر کو کامیابی کے ساتھ نئے نیٹ ورک پر منتقل کردیا ہے.",
             "exportMigration": "منتقلی لاگ برآمد اور سیٹ اپ ختم کریں"
         },
         "import": {
@@ -135,7 +135,7 @@
             "importMnemonicDescription": "اپنے والیٹس ریکور کرنے کیلئے اپنا خفیہ جملہ درج کریں",
             "importFile": "میرے پاس فائل بیک اپ ہے",
             "importFileDescription": "سیڈ والٹ یا سٹرانگ ہولڈ کی فائل اپ لوڈ کریں",
-            "importLedger": "I have a Ledger backup",
+            "importLedger": "میرے پاس لیجر بیک اپ ہے",
             "importLedgerDescription": "Restore or migrate a Ledger profile"
         },
         "importFromText": {
@@ -415,9 +415,9 @@
                 "title": "Migrate Ledger index",
                 "description": "Migrate another Trinity account index"
             },
-            "stateExport": {
-                "title": "حالت کی برآمد",
-                "description": "اپنی ٹرانزیکشن ہسٹری کو csv. فائل میں ایکسپورٹ کریں"
+            "transactionHistory": {
+                "title": "لین دین کا ریکارڈ",
+                "description": "اپنے اکاونٹس کے لین دین کے ریکارڈ کو csv فائل میں ایکسپورٹ کریں"
             },
             "troubleshoot": {
                 "title": "دشواری کا حل",
@@ -669,6 +669,13 @@
         "ledgerMigrateIndex": {
             "title": "Do you need to migrate another Trinity account index?",
             "body": "You can also migrate later in Advanced Settings."
+        },
+        "exportTransactionHistory": {
+            "title": "لین دین کے ریکارڈ کو ایکسپورٹ کریں",
+            "body": "اس پروفائل کے تمام اکاونٹس کے لین دین کے ریکارڑ کو ایک ایک کر کے ایکسپورٹ کریں۔ تمام ایکسپورٹس CSV فارمیٹ میں ہونگی۔",
+            "profileName": "پروفائل کا نام:",
+            "numberOfAccounts": "اکاونٹس کی تعداد: ",
+            "typePassword": "ایکسپورٹ کرنے کی اجازت دینے کے لئے اپنا پاس ورڈ ٹائپ کریں"
         }
     },
     "charts": {
@@ -724,11 +731,12 @@
         "dropHere": "اپنی فائل یہاں ڈراپ کریں",
         "syncAll": "سب کو سنک کریں",
         "export": "برآمد کریں",
+        "exporting": "ایکسپورٹ زیر عمل ہے",
         "exportNewStronghold": "ایک نیا سٹرانگ ہولڈ برآمد کریں",
         "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "ڈیولپر موڈ میں فعال کریں",
         "enableSystemNotifications": "اطلاعات کو فعال بنائیں",
-        "exportState": "حالت برآمد کریں",
+        "exportTransactionHistory": "لین دین کے ریکارڈ کو ایکسپورٹ کریں",
         "localProofOfWork": "مقامی پروف آف ورک",
         "unlock": "ان لاک کریں",
         "updateFirefly": "فائر فلائی اپ ڈیٹ کریں",
@@ -779,7 +787,7 @@
         "searchAgain": "دوبارہ تلاش کریں",
         "searching": "تلاش ہو رہا ہے...",
         "closeFirefly": "فائر فلائی بند کریں",
-        "generateAddress": "Generate address",
+        "generateAddress": "ایڈریس بنائیں",
         "migrateAgain": "Migrate another index"
     },
     "general": {
@@ -927,6 +935,10 @@
         "copiedToClipboard": "کلپ بورڈ میں کاپی ہو گیا",
         "accountsSynchronized": "والٹ کی سنک مکمل",
         "fundsAvailableSoon": "Your funds will become available shortly",
+        "exportTransactionHistory": {
+            "success": "{accountAlias} کے لین دین کا ریکارڈ کامیابی کے ساتھ {filePath} میں محفوظ ہو گیا ہے",
+            "error": "{accountAlias} کے لین دین کا ریکارڈ ایکسپورٹ نہیں کیا جا سکا"
+        },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
             "notEnabled": "IOTA links are not enabled",

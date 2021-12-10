@@ -415,9 +415,9 @@
                 "title": "Migrate Ledger index",
                 "description": "Migru alian Trinity-kontan indekson"
             },
-            "stateExport": {
-                "title": "Ŝtata eksportado",
-                "description": "Eksportu vian transakcio-historion al .csv dosiero"
+            "transactionHistory": {
+                "title": "Transaction history",
+                "description": "Export the transaction history of your accounts as .csv files"
             },
             "troubleshoot": {
                 "title": "Problemsolvi",
@@ -669,6 +669,13 @@
         "ledgerMigrateIndex": {
             "title": "Ĉu vi bezonas migri alian Trinity-kontan indekson?",
             "body": "Vi ankaŭ povas migri poste en Altnivelaj Agordoj."
+        },
+        "exportTransactionHistory": {
+            "title": "Export transaction history",
+            "body": "Export your transaction history for all accounts consecutively within this profile. Exports will be in a CSV format.",
+            "profileName": "Profile name:",
+            "numberOfAccounts": "Number of accounts:",
+            "typePassword": "Type your password to allow exporting"
         }
     },
     "charts": {
@@ -724,11 +731,12 @@
         "dropHere": "Ĵetu vian dosieron ĉi tien",
         "syncAll": "Sinkronigi ĉion",
         "export": "Eksporti",
+        "exporting": "Exporting",
         "exportNewStronghold": "Eksporti novan Stronghold",
         "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "Aktivigi programan modon",
         "enableSystemNotifications": "Aktivigi sistemajn sciigojn",
-        "exportState": "Eksporta ŝtato",
+        "exportTransactionHistory": "Export transaction history",
         "localProofOfWork": "Loka pruvo de laboro",
         "unlock": "Malŝlosi",
         "updateFirefly": "Ĝisdatigu Firefly",
@@ -927,6 +935,10 @@
         "copiedToClipboard": "Copied al dosierujo",
         "accountsSynchronized": "Monujo-sinkronigado finiĝis",
         "fundsAvailableSoon": "Viaj fondusoj baldaŭ disponeblos",
+        "exportTransactionHistory": {
+            "success": "Transaction history for {accountAlias} was successfully saved to {filePath}",
+            "error": "Unable to export transaction history for {accountAlias}"
+        },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
             "notEnabled": "IOTA links are not enabled",

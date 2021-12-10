@@ -68,7 +68,7 @@ import {
     ParticipationAction,
     ParticipationEvent,
     ParticipationOverviewResponse,
-    PendingParticpation
+    PendingParticipation,
 } from './participation/types'
 
 import { removePendingParticipations, hasPendingParticipation, getPendingParticipation } from './participation/stores'
@@ -400,26 +400,37 @@ interface IWalletApi {
     )
 
     // Participation (voting / staking)
-    getParticipationOverview(
-        callbacks: { onSuccess: (response: Event<ParticipationOverviewResponse>) => void; onError: (err: ErrorEventPayload) => void }
-    )
-    getParticipationEvents(
-        callbacks: { onSuccess: (response: Event<ParticipationEvent[]>) => void; onError: (err: ErrorEventPayload) => void }
-    )
+    getParticipationOverview(callbacks: {
+        onSuccess: (response: Event<ParticipationOverviewResponse>) => void
+        onError: (err: ErrorEventPayload) => void
+    })
+    getParticipationEvents(callbacks: {
+        onSuccess: (response: Event<ParticipationEvent[]>) => void
+        onError: (err: ErrorEventPayload) => void
+    })
     participate(
         accountId: string,
         participations: Participation[],
-        callbacks: { onSuccess: (response: Event<ParticipateResponsePayload>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: {
+            onSuccess: (response: Event<ParticipateResponsePayload>) => void
+            onError: (err: ErrorEventPayload) => void
+        }
     )
     stopParticipating(
         accountId: string,
         eventIds: string[],
-        callbacks: { onSuccess: (response: Event<ParticipateResponsePayload>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: {
+            onSuccess: (response: Event<ParticipateResponsePayload>) => void
+            onError: (err: ErrorEventPayload) => void
+        }
     )
     participateWithRemainingFunds(
         accountId: string,
         participations: Participation[],
-        callbacks: { onSuccess: (response: Event<ParticipateResponsePayload>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: {
+            onSuccess: (response: Event<ParticipateResponsePayload>) => void
+            onError: (err: ErrorEventPayload) => void
+        }
     )
 }
 
@@ -809,22 +820,26 @@ export const asyncGetNodeInfo = (accountId: string, url?: string, auth?: NodeAut
 
 /**
  * Displays participation (stake/unstake) notification
- * 
+ *
  * @method displayParticipationNotification
- * 
- * @param {PendingParticpation} pendingParticipation
- * 
+ *
+ * @param {PendingParticipation} pendingParticipation
+ *
  * @return void
  */
-function displayParticipationNotification(pendingParticipation: PendingParticpation): void {
+function displayParticipationNotification(pendingParticipation: PendingParticipation): void {
     if (pendingParticipation) {
-        const { accounts } = get(wallet);
-        const account = get(accounts).find((_account) => _account.id === pendingParticipation.accountId);
+        const { accounts } = get(wallet)
+        const account = get(accounts).find((_account) => _account.id === pendingParticipation.accountId)
 
         showAppNotification({
             type: 'info',
-            message: localize(`popups.stakingManager.${pendingParticipation.action === ParticipationAction.Stake ? 'staked' : 'unstaked'}Successfully`,
-                { values: { account: account.alias } }),
+            message: localize(
+                `popups.stakingManager.${
+                    pendingParticipation.action === ParticipationAction.Stake ? 'staked' : 'unstaked'
+                }Successfully`,
+                { values: { account: account.alias } }
+            ),
         })
     }
 }
@@ -885,7 +900,7 @@ export const initialiseListeners = (): void => {
                 showSystemNotification({
                     type: 'info',
                     message: notificationMessage,
-                    contextData: { type: 'valueTx', accountId, },
+                    contextData: { type: 'valueTx', accountId },
                 })
             } else if (message.payload.type === 'Milestone') {
                 // Update account with new message
@@ -915,13 +930,13 @@ export const initialiseListeners = (): void => {
             // Checks if this was a message sent for participating in an event
             if (hasPendingParticipation(message.id)) {
                 // Instantly pull in latest participation overview.
-                void getParticipationOverview();
+                void getParticipationOverview()
 
-                // If it is a message related to any participation event, display a notification 
-                displayParticipationNotification(getPendingParticipation(message.id));
+                // If it is a message related to any participation event, display a notification
+                displayParticipationNotification(getPendingParticipation(message.id))
 
                 // Remvoe the pending participation from local store
-                removePendingParticipations([message.id]);
+                removePendingParticipations([message.id])
             }
 
             if (message.payload.type === 'Transaction') {
@@ -1753,9 +1768,9 @@ export const getIndexationString = (payload: Payload): string | undefined => {
         const indexationPayload = payload.data.essence.data.payload?.data
         if (!indexationPayload) return undefined
 
-        return String.fromCharCode(...indexationPayload?.index);
+        return String.fromCharCode(...indexationPayload?.index)
     }
-};
+}
 
 /**
  * Checks if indexation string corresponds to participation
@@ -1766,7 +1781,7 @@ export const getIndexationString = (payload: Payload): string | undefined => {
  *
  * @returns {boolean}
  */
-export const isParticipationPayload = (payload: Payload): boolean => getIndexationString(payload) === 'PARTICIPATE';
+export const isParticipationPayload = (payload: Payload): boolean => getIndexationString(payload) === 'PARTICIPATE'
 
 /**
  * Check if a message was emitted and received by the provided account

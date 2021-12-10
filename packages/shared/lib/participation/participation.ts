@@ -1,12 +1,11 @@
+import { toHexString } from '../utils'
 import { DUST_THRESHOLD } from '../wallet'
 import type { WalletAccount } from '../typings/wallet'
 
 import { getParticipationOverview } from './api'
 import { PARTICIPATION_POLL_DURATION } from './constants'
-import { participationEvents, participationOverview } from './stores'
+import { accountToParticipate, participationAction, participationEvents, participationOverview } from './stores'
 import { ParticipationEventState, Participation } from './types'
-
-import { toHexString } from '../utils';
 
 let participationPollInterval
 
@@ -20,10 +19,7 @@ let participationPollInterval
 export async function pollParticipationOverview(): Promise<void> {
     await getParticipationOverview()
     /* eslint-disable @typescript-eslint/no-misused-promises */
-    participationPollInterval = setInterval(
-        async () => await getParticipationOverview(),
-        PARTICIPATION_POLL_DURATION
-    )
+    participationPollInterval = setInterval(async () => getParticipationOverview(), PARTICIPATION_POLL_DURATION)
 }
 
 /**
@@ -45,8 +41,10 @@ export function clearPollParticipationOverviewInterval(): void {
  * @returns {void}
  */
 export const resetParticipation = (): void => {
-    participationOverview.set([])
+    accountToParticipate.set(null)
+    participationAction.set(null)
     participationEvents.set([])
+    participationOverview.set([])
 }
 
 /**
@@ -95,39 +93,39 @@ export const canAccountParticipate = (account: WalletAccount): boolean => accoun
  *
  * @returns {Participation[]}
  */
- function extractParticipations(array: number[]): Participation[] {
-    const eventIdBytes = 32;
+function extractParticipations(array: number[]): Participation[] {
+    const eventIdBytes = 32
 
     // First byte is participation count
-    const participationCount = array[0];
+    const participationCount = array[0]
 
-    const _participations = [];
+    const _participations = []
 
     // Start from the second (index = 1) byte
-    let startByteIndex = 1;
+    let startByteIndex = 1
 
     Array.from({ length: participationCount }).forEach(() => {
         // Extract event id
-        const eventId = toHexString(array.slice(startByteIndex, startByteIndex + eventIdBytes));
+        const eventId = toHexString(array.slice(startByteIndex, startByteIndex + eventIdBytes))
 
         // Increment the byte index
-        startByteIndex += eventIdBytes;
+        startByteIndex += eventIdBytes
 
-        const answersCount = array[startByteIndex];
+        const answersCount = array[startByteIndex]
 
-        startByteIndex++;
+        startByteIndex++
 
         // Extract answers
-        const answers = [];
-        Array.from({ length: answersCount }).forEach((_, idx) => answers.push(array[startByteIndex + idx]));
+        const answers = []
+        Array.from({ length: answersCount }).forEach((_, idx) => answers.push(array[startByteIndex + idx]))
 
         _participations.push({
             eventId,
-            answers
-        });
+            answers,
+        })
 
-        startByteIndex += answersCount;
-    });
+        startByteIndex += answersCount
+    })
 
-    return _participations;
+    return _participations
 }

@@ -593,7 +593,9 @@
         },
         "addressHistory": {
             "title": "{name} address history",
-            "currentBalance": "Current balance: {balance}"
+            "currentBalance": "Balance: {balance}",
+            "internal": "Internal Address",
+            "external": "Deposit Address"
         },
         "node": {
             "titleAdd": "Add a node",
@@ -875,7 +877,8 @@
         "unstake": "Unstake",
         "stakeFunds": "Stake funds",
         "manageStake": "Manage stake",
-        "gimmeSteak": "Gimme steak"
+        "gimmeSteak": "Gimme steak",
+        "done": "Done"
     },
     "general": {
         "password": "Password",
@@ -1162,7 +1165,8 @@
             "otherConnected": "The wrong app is open on your Ledger device.",
             "generateAddress": "There was an error generating an address.",
             "timeout": "Your Ledger device timed out.",
-            "disconnected": "Your Ledger device was disconnected."
+            "disconnected": "Your Ledger device was disconnected.",
+            "noStronghold": "Unable to use Stronghold with Ledger profile."
         },
         "popup": {
             "preventClose": "This popup is unable to be closed."

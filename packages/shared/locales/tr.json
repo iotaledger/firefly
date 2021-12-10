@@ -415,9 +415,9 @@
                 "title": "Migrate Ledger index",
                 "description": "Başka bir Trinity hesap indeksini taşıyın"
             },
-            "stateExport": {
-                "title": "State dışa aktar",
-                "description": "İşlem geçmişinizi bir .csv dosyasına aktarın"
+            "transactionHistory": {
+                "title": "Transaction history",
+                "description": "Export the transaction history of your accounts as .csv files"
             },
             "troubleshoot": {
                 "title": "Sorun giderme",
@@ -669,6 +669,13 @@
         "ledgerMigrateIndex": {
             "title": "Başka bir Trinity hesap indeksini taşımanız gerekiyor mu?",
             "body": "Daha sonra Gelişmiş Ayarlar'dan da geçiş yapabilirsiniz."
+        },
+        "exportTransactionHistory": {
+            "title": "Export transaction history",
+            "body": "Export your transaction history for all accounts consecutively within this profile. Exports will be in a CSV format.",
+            "profileName": "Profile name:",
+            "numberOfAccounts": "Number of accounts:",
+            "typePassword": "Type your password to allow exporting"
         }
     },
     "charts": {
@@ -724,11 +731,12 @@
         "dropHere": "Dosyanızı buraya bırakın",
         "syncAll": "Tümünü eşitle",
         "export": "Dışarı Aktar",
+        "exporting": "Exporting",
         "exportNewStronghold": "Yeni bir Stronghold dışa aktarın",
         "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "Geliştirici modunu etkinleştir",
         "enableSystemNotifications": "Bildirimleri etkinleştir",
-        "exportState": "State dışa aktarın",
+        "exportTransactionHistory": "Export transaction history",
         "localProofOfWork": "Lokal iş kanıtı",
         "unlock": "Kilidi Aç",
         "updateFirefly": "Firefly'ı güncelle",
@@ -927,6 +935,10 @@
         "copiedToClipboard": "Panoya kopyalandı",
         "accountsSynchronized": "Cüzdan senkronizasyonu tamamlandı",
         "fundsAvailableSoon": "Bakiyeniz kısa süre içinde kullanılabilir hale gelecektir",
+        "exportTransactionHistory": {
+            "success": "Transaction history for {accountAlias} was successfully saved to {filePath}",
+            "error": "Unable to export transaction history for {accountAlias}"
+        },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
             "notEnabled": "IOTA links are not enabled",

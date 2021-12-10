@@ -1,23 +1,8 @@
 <script lang="typescript">
-    import { onMount } from 'svelte'
-    import { get } from 'svelte/store'
-
     import { Button, Icon, Spinner, Text } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
-    import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
-    import { Locale } from 'shared/lib/typings/i18n'
     import { hasNodePlugin, networkStatus } from 'shared/lib/networkStatus'
-    import { NodePlugin } from 'shared/lib/typings/node'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { openPopup, popupState } from 'shared/lib/popup'
-    import { activeProfile, isSoftwareProfile } from 'shared/lib/profile'
-    import { checkStronghold } from 'shared/lib/stronghold'
-    import { formatUnitBestMatch } from 'shared/lib/units'
-    import { transferState, wallet } from 'shared/lib/wallet'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
-
-    import { getParticipationOverview, participate, stopParticipating } from 'shared/lib/participation/api'
-    import { STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
     import {
         canAccountParticipate,
         canParticipate,
@@ -26,17 +11,30 @@
         isAccountPartiallyStaked,
         isAccountStaked,
     } from 'shared/lib/participation'
+    import { getParticipationOverview, participate, stopParticipating } from 'shared/lib/participation/api'
+    import { STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
     import {
         accountToParticipate,
-        partiallyStakedAccounts,
+        participatedAccountsMapPerSession,
         participationAction,
         participationOverview,
+        pendingParticipations,
         stakedAccounts,
         stakedAmount,
         stakingEventState,
-        pendingParticipations
     } from 'shared/lib/participation/stores'
     import { Participation, ParticipationAction } from 'shared/lib/participation/types'
+    import { openPopup, popupState } from 'shared/lib/popup'
+    import { activeProfile, isSoftwareProfile } from 'shared/lib/profile'
+    import { checkStronghold } from 'shared/lib/stronghold'
+    import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { NodePlugin } from 'shared/lib/typings/node'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { formatUnitBestMatch } from 'shared/lib/units'
+    import { transferState, wallet } from 'shared/lib/wallet'
+    import { onMount } from 'svelte'
+    import { get } from 'svelte/store'
 
     export let locale: Locale
 
@@ -56,20 +54,20 @@
     pendingParticipations.subscribe((participations) => {
         const currentParticipationsLength = participations.length
 
-    if (currentParticipationsLength < previousPendingParticipationsLength) {
-            const latestParticipationIds = participations.map((participation) => participation.messageId);
-            
+        if (currentParticipationsLength < previousPendingParticipationsLength) {
+            const latestParticipationIds = participations.map((participation) => participation.messageId)
+
             if (latestParticipationIds.length === 0) {
-                resetView();
+                resetView()
             }
 
-            pendingParticipationIds = latestParticipationIds;
-            previousPendingParticipationsLength = currentParticipationsLength;
-        }   
+            pendingParticipationIds = latestParticipationIds
+            previousPendingParticipationsLength = currentParticipationsLength
+        }
     })
 
-    $: $stakedAccounts, async () => await getParticipationOverview()
-    $: $accountToParticipate, async () => await getParticipationOverview()
+    $: $stakedAccounts, async () => getParticipationOverview()
+    $: $accountToParticipate, async () => getParticipationOverview()
 
     const resetAccounts = (): void => {
         /**
@@ -106,13 +104,13 @@
         if (!$accountToParticipate || !$participationAction) return
 
         isPerformingAction = true
+        $participatedAccountsMapPerSession.set($accountToParticipate?.id, false)
 
-        const isPartialStake = $partiallyStakedAccounts.find((psa) => psa.id === $accountToParticipate?.id) !== undefined
+        const _sync = (messageIds: string[]) => {
+            messageIds.forEach((id) => pendingParticipationIds.push(id))
+            previousPendingParticipationsLength = messageIds.length
 
-        const _sync = async (messageIds: string[]) => {
-            messageIds.forEach((id) => pendingParticipationIds.push(id));
-
-            previousPendingParticipationsLength = messageIds.length;
+            $participatedAccountsMapPerSession.set($accountToParticipate?.id, true)
         }
 
         const hasParticipationPlugin = $networkStatus.nodePlugins.includes(NodePlugin.Participation)
@@ -151,17 +149,23 @@
     }
 
     const handleStakeClick = (account: WalletAccount): void => {
-        openPopup({
-            type: 'stakingConfirmation',
-            props: {
-                accountToStake: account,
-                onBack: () => {
-                    openPopup({
-                        type: 'stakingManager'
-                    }, true)
-                }
+        openPopup(
+            {
+                type: 'stakingConfirmation',
+                props: {
+                    accountToStake: account,
+                    onBack: () => {
+                        openPopup(
+                            {
+                                type: 'stakingManager',
+                            },
+                            true
+                        )
+                    },
+                },
             },
-        }, true)
+            true
+        )
     }
 
     const handleUnstakeClick = (account: WalletAccount): void => {
@@ -182,7 +186,7 @@
         }
 
         if ($isSoftwareProfile) {
-            checkStronghold(_unstake)
+            checkStronghold(void _unstake)
         } else {
             void _unstake()
         }
@@ -219,27 +223,24 @@
     }
 </style>
 
-<Text type="h5">
-    {locale(`popups.stakingManager.titleWith${hasStakedAccounts ? '' : 'No'}Stake`)}
-</Text>
-<Text type="p" secondary classes="mt-6 mb-2">
-    {locale('popups.stakingManager.description')}
-</Text>
+<Text type="h5">{locale(`popups.stakingManager.titleWith${hasStakedAccounts ? '' : 'No'}Stake`)}</Text>
+<Text type="p" secondary classes="mt-6 mb-2">{locale('popups.stakingManager.description')}</Text>
 <div class="staking flex flex-col scrollable-y">
     {#each accounts as account}
         {#if canAccountParticipate(account)}
             <div
-                class="w-full mt-4 flex flex-col rounded-xl border border-1 border-solid border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-gray-500 focus:hover:border-gray-700"
-            >
+                class="w-full mt-4 flex flex-col rounded-xl border border-1 border-solid border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-gray-500 focus:hover:border-gray-700">
                 <div class="w-full space-x-4 px-5 py-3 flex flex-row justify-between items-center">
                     {#if isAccountStaked(account?.id)}
-                        <div
-                            class="bg-green-100 rounded-2xl"
-                        >
+                        <div class="bg-green-100 rounded-2xl">
                             <Icon icon="success-check" width="18" height="18" classes="text-white" />
                         </div>
                     {:else}
-                        <Icon icon="unlock" width="18" height="18" classes="{$accountToParticipate?.id === account?.id ? 'text-gray-400' : ''}" />
+                        <Icon
+                            icon="unlock"
+                            width="18"
+                            height="18"
+                            classes={$accountToParticipate?.id === account?.id ? 'text-gray-400' : ''} />
                     {/if}
                     <div class="flex flex-col w-3/4">
                         <Text type="p" classes="font-extrabold" disabled={$accountToParticipate?.id === account?.id}>
@@ -250,15 +251,14 @@
                                 type="p"
                                 secondary={$accountToParticipate?.id !== account?.id}
                                 disabled={$accountToParticipate?.id === account?.id}
-                                classes="font-extrabold"
-                            >
-                                {formatUnitBestMatch(getStakedFunds(account))} •
+                                classes="font-extrabold">
+                                {formatUnitBestMatch(getStakedFunds(account))}
+                                •
                                 <Text
                                     type="p"
                                     secondary={$accountToParticipate?.id !== account?.id}
                                     disabled={$accountToParticipate?.id === account?.id}
-                                    classes="inline"
-                                >
+                                    classes="inline">
                                     {getFormattedFiatAmount(getStakedFunds(account))}
                                 </Text>
                             </Text>
@@ -267,15 +267,14 @@
                                 type="p"
                                 secondary={$accountToParticipate?.id !== account?.id}
                                 disabled={$accountToParticipate?.id === account?.id}
-                                classes="font-extrabold"
-                            >
-                                {account.balance} •
+                                classes="font-extrabold">
+                                {account.balance}
+                                •
                                 <Text
                                     type="p"
                                     secondary={$accountToParticipate?.id !== account?.id}
                                     disabled={$accountToParticipate?.id === account?.id}
-                                    classes="inline"
-                                >
+                                    classes="inline">
                                     {account.balanceEquiv}
                                 </Text>
                             </Text>
@@ -284,39 +283,27 @@
                     <Button
                         disabled={isPerformingAction}
                         secondary={isAccountStaked(account?.id)}
-                        onClick={() => isAccountStaked(account?.id)
-                            ? handleUnstakeClick(account)
-                            : handleStakeClick(account)
-                        }
-                    >
+                        onClick={() => (isAccountStaked(account?.id) ? handleUnstakeClick(account) : handleStakeClick(account))}>
                         {#if $accountToParticipate?.id === account?.id && $accountToParticipate && $participationAction}
-                            <Spinner
-                                busy={isPerformingAction}
-                                classes="mx-2 justify-center"
-                            />
-                        {:else}
-                            {locale(`actions.${isAccountStaked(account?.id) ? 'unstake' : 'stake'}`)}
-                        {/if}
+                            <Spinner busy={isPerformingAction} classes="mx-2 justify-center" />
+                        {:else}{locale(`actions.${isAccountStaked(account?.id) ? 'unstake' : 'stake'}`)}{/if}
                     </Button>
                 </div>
-                {#if isAccountPartiallyStaked(account?.id) && $accountToParticipate?.id !== account?.id}
-                    <div class="space-x-4 mx-1 mb-1 px-4 py-3 flex flex-row justify-between items-center rounded-lg bg-yellow-50">
+                {#if isAccountPartiallyStaked(account?.id) && $accountToParticipate?.id !== account?.id && !$participatedAccountsMapPerSession.get($accountToParticipate?.id)}
+                    <div
+                        class="space-x-4 mx-1 mb-1 px-4 py-3 flex flex-row justify-between items-center rounded-lg bg-yellow-50">
                         <Icon icon="exclamation" width="18" height="18" classes="fill-current text-yellow-600" />
                         <div class="flex flex-col w-3/4">
-                            <Text type="p" classes="font-extrabold">
-                                {locale('general.unstakedFunds')}
-                            </Text>
+                            <Text type="p" classes="font-extrabold">{locale('general.unstakedFunds')}</Text>
                             <Text type="p" secondary classes="font-extrabold">
-                                {formatUnitBestMatch(getUnstakedFunds(account))} •
+                                {formatUnitBestMatch(getUnstakedFunds(account))}
+                                •
                                 <Text type="p" secondary classes="inline">
                                     {getFormattedFiatAmount(getUnstakedFunds(account))}
                                 </Text>
                             </Text>
                         </div>
-                        <Button
-                            disabled={isPerformingAction}
-                            onClick={() => handleStakeClick(account)}
-                        >
+                        <Button disabled={isPerformingAction} onClick={() => handleStakeClick(account)}>
                             {locale('actions.stake')}
                         </Button>
                     </div>
@@ -329,8 +316,7 @@
 <div class="mt-2 text-center">
     <Text type="p" secondary classes="inline">
         {locale('popups.stakingManager.totalFundsStaked')}:
-        <Text type="p" secondary bold classes="inline">
-            {formatUnitBestMatch($stakedAmount)}
-        </Text>
+
+        <Text type="p" secondary bold classes="inline">{formatUnitBestMatch($stakedAmount)}</Text>
     </Text>
 </div>

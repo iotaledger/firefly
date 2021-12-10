@@ -50,10 +50,6 @@
     function handleCancelClick() {
         closePopup()
     }
-
-    const getButtonAction = (): string => {
-        return mustAcknowledgeParticipationWarning ? 'next' : 'confirm'
-    }
 </script>
 
 <style type="text/scss">

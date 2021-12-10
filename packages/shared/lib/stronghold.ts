@@ -1,31 +1,36 @@
+import { get } from 'svelte/store'
+
 import { openPopup } from './popup'
 import { api } from './wallet'
 import type { Event } from './typings/events'
 import type { StrongholdStatus } from './typings/wallet'
 import { showAppNotification } from './notifications'
 import { localize } from './i18n'
-import { isSoftwareProfile } from './profile'
+import { isLedgerProfile } from './profile'
 
-// TODO: Use better function name later
-export const checkStronghold = (callback: any): void => {
-    if (!isSoftwareProfile) {
+export const checkStronghold = (callback: () => void): void => {
+    if (get(isLedgerProfile)) {
         showAppNotification({
             type: 'error',
-            // TODO: Add to the locale later
-            message: 'Ledger profiles do not have a Stronghold.',
+            message: localize('error.ledger.noStronghold'),
         })
+
+        return
     }
 
     api.getStrongholdStatus({
         onSuccess(response: Event<StrongholdStatus>) {
             const isLocked = response.payload.snapshot.status === 'Locked'
             if (isLocked) {
-                openPopup({
-                    type: 'password',
-                    props: {
-                        onSuccess: callback
-                    }
-                }, true)
+                openPopup(
+                    {
+                        type: 'password',
+                        props: {
+                            onSuccess: callback,
+                        },
+                    },
+                    true
+                )
             } else {
                 callback()
             }
@@ -35,6 +40,6 @@ export const checkStronghold = (callback: any): void => {
                 type: 'error',
                 message: localize(err?.error),
             })
-        }
+        },
     })
 }

@@ -58,6 +58,4 @@ export const generateTransactionHistoryFileName = (profileName: string, accountA
 }
 
 // TODO: Refactor out of this file
-const sanatiseFilename = (s: string) => {
-    return s.replace(/[^a-z0-9-]/gi, '-').replace(/-{2,}/g, '-')
-}
+const sanatiseFilename = (s: string) => s.replace(/[^a-z0-9-]/gi, '-').replace(/-{2,}/g, '-')

@@ -21,7 +21,7 @@
         if (!state || !overview) return `${prefix}-upcoming`
 
         if (state === ParticipationEventState.Holding) {
-            let participations: { [eventId: string]: boolean } = { }
+            const participations: { [eventId: string]: boolean } = { }
             overview.forEach((apo) => apo.participations.forEach((p) => {
                 participations[p.eventId] = true
             }))

@@ -20,13 +20,16 @@ export const STAKING_EVENT_IDS: string[] = [ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID]
 /**
  * The array of staking participations to use for the API.
  */
-export const STAKING_PARTICIPATIONS: Participation[] = [{
-    eventId: SHIMMER_EVENT_ID,
-    answers: []
-}, {
-    eventId: ASSEMBLY_EVENT_ID,
-    answers: []
-}];
+export const STAKING_PARTICIPATIONS: Participation[] = [
+    {
+        eventId: SHIMMER_EVENT_ID,
+        answers: [],
+    },
+    {
+        eventId: ASSEMBLY_EVENT_ID,
+        answers: [],
+    },
+]
 
 /**
  * The different ticker symbols for Assembly and Shimmer.

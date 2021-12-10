@@ -75,7 +75,7 @@
             "body2": "PIN을 안전하게 보관하세요!"
         },
         "pin": {
-            "title": "PIN코드 설정하기",
+            "title": "PIN 번호 설정하기",
             "body1": "프로필에 접근하기 위해 사용할 숫자로 된 6자리 PIN을 입력해 주세요.",
             "body2": "숫자만 입력 가능"
         },
@@ -415,9 +415,9 @@
                 "title": "Ledger 인덱스 마이그레이션",
                 "description": "다른 Trinity 계정 인덱스를 마이그레이션"
             },
-            "stateExport": {
-                "title": "상태 내보내기",
-                "description": "거래 내역을 .csv 파일로 내보내기"
+            "transactionHistory": {
+                "title": "거래 내역",
+                "description": "이 계정의 거래 내역을 .csv 파일로 내보냅니다"
             },
             "troubleshoot": {
                 "title": "문제 해결",
@@ -669,6 +669,13 @@
         "ledgerMigrateIndex": {
             "title": "다른 Trinity 계정 인덱스를 마이그레이션 하시겠습니까?",
             "body": "나중에 고급 설정에서 마이그레이션할 수도 있습니다."
+        },
+        "exportTransactionHistory": {
+            "title": "거래 내역 내보내기",
+            "body": "이 프로필 내 모든 계정의 거래 내역을 연속적으로 내보냅니다. CSV 파일로 내보내집니다.",
+            "profileName": "프로필 이름:",
+            "numberOfAccounts": "계정 수:",
+            "typePassword": "내보내기를 허용하려면 암호를 입력해주세요"
         }
     },
     "charts": {
@@ -701,9 +708,9 @@
         "createWalletDescription": "Chrysalis에서 실행되는 새로운 지갑 만들기",
         "savePassword": "비밀번호 저장하기",
         "useBiometric": "생체 인증 사용하기",
-        "setupPin": "PIN코드 설정하기",
-        "setPin": "PIN코드 설정",
-        "confirmPin": "PIN코드 확인하기",
+        "setupPin": "PIN 번호 설정하기",
+        "setPin": "PIN 번호 설정하기",
+        "confirmPin": "PIN 번호 확인하기",
         "enterYourPin": "PIN 입력하기",
         "saveBackupFile": "백업 파일 저장하기",
         "iveWrittenRecoveryPhrase": "복원 문구를 옮겨 적었습니다",
@@ -724,11 +731,12 @@
         "dropHere": "파일을 여기로 끌어넣으세요.",
         "syncAll": "모두 동기화하기",
         "export": "내보내기",
+        "exporting": "내보내는 중",
         "exportNewStronghold": "새 Stronghold 내보내기",
         "enableDeepLinks": "IOTA 링크 활성화",
         "enableDeveloperMode": "개발자 모드 활성화하기",
         "enableSystemNotifications": "시스템 알림 켜기",
-        "exportState": "상태 내보내기",
+        "exportTransactionHistory": "거래 내역 내보내기",
         "localProofOfWork": "내 기기로 작업증명",
         "unlock": "잠금 해제",
         "updateFirefly": "Firefly 업데이트",
@@ -927,6 +935,10 @@
         "copiedToClipboard": "클립보드에 복사되었습니다.",
         "accountsSynchronized": "지갑 동기화 완료",
         "fundsAvailableSoon": "자금이 곧 사용가능해질 것입니다.",
+        "exportTransactionHistory": {
+            "success": "{accountAlias}의 거래 내역이 {filePath}에 성공적으로 저장되었습니다",
+            "error": "{accountAlias}의 거래 내역을 내보낼 수 없습니다"
+        },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "IOTA 링크를 시작하려면 로그인하십시오",
             "notEnabled": "IOTA 링크 비활성화됨",
