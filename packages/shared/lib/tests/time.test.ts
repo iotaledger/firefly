@@ -1,3 +1,4 @@
+import './mocks/i18n'
 import './mocks/matchMedia'
 
 import {
