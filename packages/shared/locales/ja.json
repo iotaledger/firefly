@@ -415,9 +415,9 @@
                 "title": "Ledgerインデックスの移行",
                 "description": "別の Trinity アカウントインデックスを移行"
             },
-            "stateExport": {
-                "title": "状態のエクスポート",
-                "description": "取引履歴を .csv ファイルにエクスポートします"
+            "transactionHistory": {
+                "title": "取引履歴",
+                "description": "アカウントの取引履歴を .csv ファイルとして出力する"
             },
             "troubleshoot": {
                 "title": "トラブルシューティング",
@@ -564,7 +564,7 @@
                 "bech32HRP": "Bech32 HRP",
                 "features": "特徴",
                 "confirmedMilestoneIndex": "確認済みのマイルストーンインデックス",
-                "pruningIndex": "Pruning index",
+                "pruningIndex": "Pruningインデックス",
                 "messagesPerSecond": "毎秒あたりのメッセージ",
                 "referencedRate": "参照元"
             }
@@ -637,15 +637,15 @@
                 "1": "Ledgerが接続されていることを確認して ください",
                 "2": "アプリを検索: {legacy} と IOTA(MIOTA)",
                 "3": "両方のアプリをインストール: {legacy} と IOTA(MIOTA)",
-                "4": "Remember that it's important to close Ledger Live before returning to Firefly"
+                "4": "Firefly に戻る前に、Ledger Liveを閉じることが重要です。"
             }
         },
         "ledgerConnectionGuide": {
             "title": "Ledgerが接続されていない場合の 案内",
             "steps": {
-                "0": "Make sure Ledger Live is not open on your computer",
-                "1": "Ensure you have unlocked your Ledger device with your PIN",
-                "2": "Open the new IOTA app on your Ledger device",
+                "0": "Ledger Liveがお使いのコンピュータで開いていないことを確認してください",
+                "1": "PINを使用してLedgerデバイスのロックを解除したことを確認してください",
+                "2": "Ledgerで新しいIOTAアプリを開く",
                 "3": {
                     "text": "まだ問題は解決していませんか",
                     "link": "Ledgerの公式サポートページをお試しください"
@@ -667,8 +667,15 @@
             "body": "Ledgerに表示される、入金アドレスと下に表示されるアドレスが一致していることを確認してください。それらが一致する場合は、要求に応じてLedgerの両方のボタンを押してください"
         },
         "ledgerMigrateIndex": {
-            "title": "Do you need to migrate another Trinity account index?",
-            "body": "You can also migrate later in Advanced Settings."
+            "title": "他のTrinityアカウントインデックスを移行する必要がありますか",
+            "body": "後から 詳細設定で移行することもできます"
+        },
+        "exportTransactionHistory": {
+            "title": "取引履歴を出力する",
+            "body": "このプロファイル内のすべてのアカウントの取引履歴を出力します。出力はCSV形式になります。",
+            "profileName": "プロファイル名:",
+            "numberOfAccounts": "アカウント数:",
+            "typePassword": "出力を許可するにはパスワードを入力してください"
         }
     },
     "charts": {
@@ -676,7 +683,7 @@
         "outgoingMi": "{value} 出金",
         "portoflio": "ポートフォリオ",
         "token": "トークン",
-        "holdings": "Holdings",
+        "holdings": "保有",
         "accountValue": "ウォレットの価値",
         "accountActivity": "ウォレットのアクティビティ",
         "timeframe1Hour": "1時間",
@@ -724,11 +731,12 @@
         "dropHere": "ここにファイルをドロップ",
         "syncAll": "すべて同期",
         "export": "エクスポート",
+        "exporting": "エクスポート中です",
         "exportNewStronghold": "新しい Stronghold をエクスポート",
         "enableDeepLinks": "IOTAリンクを有効にする",
         "enableDeveloperMode": "開発者モードを有効にする",
         "enableSystemNotifications": "システム通知を有効にする",
-        "exportState": "ステータス をエクスポート",
+        "exportTransactionHistory": "取引履歴を出力する",
         "localProofOfWork": "ローカル・プルーフ・オブ・ワーク",
         "unlock": "ロック解除",
         "updateFirefly": "Firefly を更新",
@@ -862,7 +870,7 @@
         "firstSync": "履歴を同期中、しばらく時間がかかることがあります...",
         "transferSyncing": "ウォレットを同期中",
         "transferSelectingInputs": "入力を選択",
-        "transferRemainderAddress": "Generating remainder address",
+        "transferRemainderAddress": "残りのアドレスの作成中",
         "transferPreparedTransaction": "取引を準備中",
         "transferSigning": "取引署名中",
         "transferPow": "PoW（プルーフ・オブ・ワーク）の実行",
@@ -926,7 +934,11 @@
         "minutesRemaining": "{minutes, plural, one { 残り1分 } other {# 残り分 }}",
         "copiedToClipboard": "クリップボードにコピーしました",
         "accountsSynchronized": "ウォレット同期が完了しました",
-        "fundsAvailableSoon": "Your funds will become available shortly",
+        "fundsAvailableSoon": "資金はまもなく利用可能になります",
+        "exportTransactionHistory": {
+            "success": "{accountAlias} の取引履歴は {filePath} に正常に保存されました",
+            "error": "{accountAlias} の取引履歴を出力できません"
+        },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "IOTAリンクを開始するにはログインしてください",
             "notEnabled": "IOTAリンクは有効になっていません",
@@ -992,7 +1004,7 @@
             "sendingDust": "1 Mi未満の送金はできません。",
             "leavingDust": "アドレスに1Mi 未満を残すことはできません。",
             "cancelled": "取引はキャンセルされました。",
-            "transaction": "There was an error sending your transaction. Please try again."
+            "transaction": "取引の送信中にエラーが発生しました。もう一度やり直してください。"
         },
         "node": {
             "invalid": "有効なURLを入力してください。",
@@ -1044,7 +1056,7 @@
             "preventClose": "このポップアップは閉じることができません。"
         },
         "migration": {
-            "missingBundle": "An error occurred while trying to find the transaction bundle."
+            "missingBundle": "取引バンドルの検索中にエラーが発生しました"
         },
         "crypto": {
             "cannotDecodeBech32": "Bech32 アドレスとして文字列をデコードできません。"

@@ -415,9 +415,9 @@
                 "title": "Ledger-Index migrieren",
                 "description": "Einen weiteren Trinity Kontoindex migrieren"
             },
-            "stateExport": {
-                "title": "Status exportieren",
-                "description": "Exportiere deinen Transaktionsverlauf in eine .csv-Datei"
+            "transactionHistory": {
+                "title": "Transaktionsverlauf",
+                "description": "Exportiere den Transaktionsverlauf deiner Konten als .csv Dateien"
             },
             "troubleshoot": {
                 "title": "Fehlerbehebung",
@@ -669,6 +669,13 @@
         "ledgerMigrateIndex": {
             "title": "Möchtest du einen weiteren Trinity Kontoindex migrieren?",
             "body": "Du kannst später weitere Migrationen in den Einstellungen vornehmen."
+        },
+        "exportTransactionHistory": {
+            "title": "Transaktionsverlauf exportieren",
+            "body": "Exportiere deinen Transaktionsverlauf für alle Konten in diesem Profil. Export erfolgt in einem CSV-Format.",
+            "profileName": "Profilname:",
+            "numberOfAccounts": "Anzahl der Konten:",
+            "typePassword": "Gib dein Passwort ein, um den Export zu erlauben"
         }
     },
     "charts": {
@@ -724,11 +731,12 @@
         "dropHere": "Datei hier ablegen",
         "syncAll": "Alle synchronisieren",
         "export": "Exportieren",
+        "exporting": "Wird exportiert",
         "exportNewStronghold": "Neuen Stronghold exportieren",
         "enableDeepLinks": "IOTA-Links aktivieren",
         "enableDeveloperMode": "Entwicklermodus aktivieren",
         "enableSystemNotifications": "Systembenachrichtigungen aktivieren",
-        "exportState": "Status exportieren",
+        "exportTransactionHistory": "Transaktionsverlauf exportieren",
         "localProofOfWork": "Lokaler Proof-of-Work",
         "unlock": "Entsperren",
         "updateFirefly": "Firefly aktualisieren",
@@ -927,6 +935,10 @@
         "copiedToClipboard": "In die Zwischenablage kopiert",
         "accountsSynchronized": "Synchronisierung der Wallet abgeschlossen",
         "fundsAvailableSoon": "Dein Guthaben wird in Kürze verfügbar sein",
+        "exportTransactionHistory": {
+            "success": "Transaktionsverlauf für {accountAlias} wurde erfolgreich in {filePath} gespeichert",
+            "error": "Transaktionsverlauf für {accountAlias} konnte nicht exportiert werden"
+        },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "Bitte melde dich an, um den IOTA-Link zu initiieren",
             "notEnabled": "IOTA-Links sind nicht aktiviert",

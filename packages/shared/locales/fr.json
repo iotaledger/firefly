@@ -415,9 +415,9 @@
                 "title": "Effectuer la migration de l'index Ledger",
                 "description": "Faire migrer un autre index de compte Trinity"
             },
-            "stateExport": {
-                "title": "Exportation de l'état",
-                "description": "Exporter l'historique de vos transactions vers un fichier .csv"
+            "transactionHistory": {
+                "title": "Historique des transactions",
+                "description": "Exporter l'historique des transactions de vos comptes sous forme de fichiers .csv"
             },
             "troubleshoot": {
                 "title": "Dépannage",
@@ -669,6 +669,13 @@
         "ledgerMigrateIndex": {
             "title": "Avez-vous besoin de faire migrer un autre index de compte Trinity?",
             "body": "Vous pouvez également effectuer la migration plus tard dans Paramètres Avancés."
+        },
+        "exportTransactionHistory": {
+            "title": "Exporter l'historique des transactions",
+            "body": "Exportez votre historique de transactions au format CSV pour tous les comptes dans ce profil.",
+            "profileName": "Nom du profil:",
+            "numberOfAccounts": "Nombre de comptes:",
+            "typePassword": "Saisissez votre mot de passe pour autoriser l'exportation"
         }
     },
     "charts": {
@@ -724,11 +731,12 @@
         "dropHere": "Déposez votre fichier ici",
         "syncAll": "Tout synchroniser",
         "export": "Exporter",
+        "exporting": "Exportation",
         "exportNewStronghold": "Exporter une nouvelle Stronghold",
         "enableDeepLinks": "Activer les liens IOTA",
         "enableDeveloperMode": "Activer le mode développeur",
         "enableSystemNotifications": "Activer les notifications système",
-        "exportState": "Exporter l'état",
+        "exportTransactionHistory": "Exporter l'historique des transactions",
         "localProofOfWork": "Preuve de travail locale",
         "unlock": "Déverrouiller",
         "updateFirefly": "Mettre à jour Firefly",
@@ -927,6 +935,10 @@
         "copiedToClipboard": "Copié dans le presse-papier",
         "accountsSynchronized": "Synchronisation du portefeuille terminée",
         "fundsAvailableSoon": "Vos fonds seront bientôt disponibles",
+        "exportTransactionHistory": {
+            "success": "L'historique des transactions pour {accountAlias} a été enregistré avec succès dans {filePath}",
+            "error": "Impossible d'exporter l'historique des transactions pour {accountAlias}"
+        },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "Veuillez vous connecter pour initialiser le lien IOTA",
             "notEnabled": "Les liens IOTA ne sont pas activés",

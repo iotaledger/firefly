@@ -15,7 +15,7 @@
         },
         "profile": {
             "title": "Loo profiil",
-            "profileName": "Profile name",
+            "profileName": "Profiili nimi",
             "body1": "Sa saad luua mitu kasutajaprofiili, et oma rahakotte organiseerida ja privaatsust parendada.",
             "body2": {
                 "first": "Alustame praegu sinu esimese profiili nimega.",
@@ -335,7 +335,7 @@
                 "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
             },
             "appLock": {
-                "title": "Automatic lock",
+                "title": "Automaatne lukustus",
                 "description": "Inactivity time before your wallets lock and you are logged out",
                 "durationMinute": "{time, plural, one {1 minut} other {# minutit}}",
                 "durationHour": "{time, plural, one {1 tund} other {# tundi}}"
@@ -365,7 +365,7 @@
                 "description": "Kustutab su terve profiili, rahakotid ja tehinguajalugu. Tee kindlaks, et sul on tagavara"
             },
             "deepLinks": {
-                "title": "IOTA links",
+                "title": "IOTA lingid",
                 "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
             },
             "networkConfiguration": {
@@ -391,7 +391,7 @@
                 "primaryNode": "Peamine sõlm",
                 "excludeNode": "Exclude node",
                 "includeNode": "Include node",
-                "editDetails": "Edit details",
+                "editDetails": "Muuda üksikasju",
                 "viewInfo": "View info",
                 "setAsPrimary": "Määra peamiseks",
                 "removeNode": "Eemalda sõlm",
@@ -415,9 +415,9 @@
                 "title": "Migrate Ledger index",
                 "description": "Migrate another Trinity account index"
             },
-            "stateExport": {
-                "title": "State export",
-                "description": "Export your transaction history to a .csv file"
+            "transactionHistory": {
+                "title": "Transaction history",
+                "description": "Export the transaction history of your accounts as .csv files"
             },
             "troubleshoot": {
                 "title": "Tõrkeotsing",
@@ -429,7 +429,7 @@
             },
             "faq": {
                 "title": "KKK",
-                "title2": "Frequently asked questions",
+                "title2": "Korduma kippuvad küsimused",
                 "description": "View the FAQs to get help with a common problem or question"
             },
             "discord": {
@@ -559,8 +559,8 @@
             "removeAllConfirmation": "Are you sure you want to remove all nodes?",
             "info": {
                 "url": "URL",
-                "software": "Software",
-                "networkId": "Network ID",
+                "software": "Tarkvara",
+                "networkId": "Võrgu ID",
                 "bech32HRP": "Bech32 HRP",
                 "features": "Features",
                 "confirmedMilestoneIndex": "Confirmed milestone index",
@@ -669,6 +669,13 @@
         "ledgerMigrateIndex": {
             "title": "Do you need to migrate another Trinity account index?",
             "body": "You can also migrate later in Advanced Settings."
+        },
+        "exportTransactionHistory": {
+            "title": "Export transaction history",
+            "body": "Export your transaction history for all accounts consecutively within this profile. Exports will be in a CSV format.",
+            "profileName": "Profile name:",
+            "numberOfAccounts": "Number of accounts:",
+            "typePassword": "Type your password to allow exporting"
         }
     },
     "charts": {
@@ -724,18 +731,19 @@
         "dropHere": "Lohista oma fail siia",
         "syncAll": "Sync all",
         "export": "Ekspordi",
+        "exporting": "Exporting",
         "exportNewStronghold": "Export a new Stronghold",
         "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "Enable developer mode",
         "enableSystemNotifications": "Luba süsteemiteavitused",
-        "exportState": "Export state",
+        "exportTransactionHistory": "Export transaction history",
         "localProofOfWork": "Local proof of work",
         "unlock": "Ava",
         "updateFirefly": "Uuenda Firefly",
         "restartNow": "Taaskäivita kohe",
         "saveBackup": "Save Stronghold backup",
         "customizeAcount": "Customise wallet",
-        "viewAddressHistory": "View address history",
+        "viewAddressHistory": "Vaata aadressi ajalugu",
         "hideAccount": "Peida rahakott",
         "showAccount": "Unhide wallet",
         "deleteAccount": "Kustuta rahakott",
@@ -825,7 +833,7 @@
         "appearance": "Välimus",
         "lightTheme": "Light",
         "darkTheme": "Dark",
-        "systemTheme": "System",
+        "systemTheme": "Süsteem",
         "balance": "Kontojääk",
         "accountBalance": "Wallet Balance",
         "incoming": "Sissetulev",
@@ -927,6 +935,10 @@
         "copiedToClipboard": "Kopeeritud lõikelauale",
         "accountsSynchronized": "Wallet synchronization complete",
         "fundsAvailableSoon": "Your funds will become available shortly",
+        "exportTransactionHistory": {
+            "success": "Transaction history for {accountAlias} was successfully saved to {filePath}",
+            "error": "Unable to export transaction history for {accountAlias}"
+        },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
             "notEnabled": "IOTA links are not enabled",

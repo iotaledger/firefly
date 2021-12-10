@@ -15,7 +15,7 @@
         },
         "profile": {
             "title": "Criar um perfil",
-            "profileName": "Profile name",
+            "profileName": "Nome do Perfil",
             "body1": "Você pode criar vários perfis de usuário para organizar suas carteiras e melhorar a privacidade.",
             "body2": {
                 "first": "Inicialmente, vamos começar com o nome de seu primeiro perfil.",
@@ -23,8 +23,8 @@
             },
             "addMore": "Você pode criar mais perfis posteriormente.",
             "developer": {
-                "label": "Developer profile",
-                "info": "Connect to public and private IOTA networks"
+                "label": "Perfil Desenvolvedor",
+                "info": "Conectar a redes IOTA públicas e privadas"
             }
         },
         "setup": {
@@ -312,7 +312,7 @@
             "theme": {
                 "title": "Tema",
                 "description": "",
-                "advice": "Restart the Firefly application for changes to the system theme to take effect"
+                "advice": "Reiniciar o aplicativo Firefly para que as alterações no tema do sistema entrem em vigor"
             },
             "language": {
                 "title": "Idioma",
@@ -328,14 +328,14 @@
             },
             "networkStatus": {
                 "title": "Status de rede",
-                "description": "Displays the status of the node you are currently connected to"
+                "description": "Exibe o status do nó de rede ao qual você está conectado no momento"
             },
             "exportStronghold": {
-                "title": "Export backup",
+                "title": "Exportar backup",
                 "description": "Exportar para um arquivo Stronghold - um backup criptografado completo de suas carteiras e do histórico de transações mais recente"
             },
             "appLock": {
-                "title": "Automatic lock",
+                "title": "Bloqueio Automático",
                 "description": "Tempo de inatividade antes do bloqueio de suas carteiras e você ser desconectado",
                 "durationMinute": "{time, plural, one {1 minuto} other {# minutos}}",
                 "durationHour": "{time, plural, one {1 hora} other {# horas}}"
@@ -365,39 +365,39 @@
                 "description": "Exclui seu perfil inteiro, carteiras e histórico de transações. Certifique-se de ter um backup"
             },
             "deepLinks": {
-                "title": "IOTA links",
-                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
+                "title": "Links IOTA",
+                "description": "Preenche automaticamente dados da transação na Firefly ao clicar no link IOTA"
             },
             "networkConfiguration": {
-                "title": "Network config",
-                "title2": "Network configuration",
+                "title": "Configuração de rede",
+                "title2": "Configuração de rede",
                 "description": {
-                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
-                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                    "dev": "Suas configurações de rede serão atualizadas automaticamente de acordo com a configuração atual do nó (alterando a rede resultará em redefinir o estado da carteira)",
+                    "nonDev": "Suas configurações de rede serão atualizadas automaticamente de acordo com a configuração atual do nó"
                 },
-                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
-                "resetWallet": "Your wallet state has been reset.",
-                "connectedTo": "Connected to",
+                "switchedNetworks": "Rede alterada com sucesso para \"{networkName}\".",
+                "resetWallet": "O estado da sua carteira foi redefinido.",
+                "connectedTo": "Conectado em",
                 "nodeConfiguration": {
-                    "title": "Node selection",
-                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
-                    "automatic": "Automatic",
+                    "title": "Seleção de nó",
+                    "description": "Selecione \"Manual\" para configurar as opções de nó da rede e conecte-se ao seu próprio nó",
+                    "automatic": "Automático",
                     "manual": "Manual"
                 }
             },
             "configureNodeList": {
-                "title": "Node configuration",
-                "description": "Manage the list of nodes you connect to",
+                "title": "Configuração do Nó",
+                "description": "Gerencie a lista de nós que você se conecta",
                 "primaryNode": "Nó de rede primário",
                 "excludeNode": "Excluir nó de rede",
                 "includeNode": "Incluir nó de rede",
-                "editDetails": "Edit details",
-                "viewInfo": "View info",
+                "editDetails": "Editar detalhes",
+                "viewInfo": "Ver informações",
                 "setAsPrimary": "Definir como primário",
                 "removeNode": "Remover nó de rede",
                 "includeOfficialNodeList": "Incluir lista de nós de rede oficial",
-                "noNodes": "There are no nodes, unable to connect to the network",
-                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
+                "noNodes": "Não há nós, não foi possível conectar-se à rede",
+                "noNodesAuto": "Não há nós, a seleção automática será usada em vez disso"
             },
             "proofOfWork": {
                 "title": "Prova de Trabalho",
@@ -412,12 +412,12 @@
                 "description": "Visualizar informações de sistema e de aplicativo"
             },
             "migrateLedgerIndex": {
-                "title": "Migrate Ledger index",
+                "title": "Migrar índice da Ledger",
                 "description": "Migrar outro índice de conta Trinity"
             },
-            "stateExport": {
-                "title": "Exportar Estado",
-                "description": "Exporte seu histórico de transações para um arquivo .csv"
+            "transactionHistory": {
+                "title": "Histórico das transações",
+                "description": "Exportar o histórico de transações de suas contas como arquivos .csv"
             },
             "troubleshoot": {
                 "title": "Resolução de Problemas",
@@ -429,7 +429,7 @@
             },
             "faq": {
                 "title": "Perguntas Frequentes",
-                "title2": "Frequently asked questions",
+                "title2": "Perguntas frequentes",
                 "description": "Veja as FAQs para obter ajuda para um problema ou pergunta comum"
             },
             "discord": {
@@ -544,37 +544,37 @@
             "titleAdd": "Adicionar um nó de rede",
             "titleUpdate": "Atualizar um nó de rede",
             "titleRemove": "Remover um nó de rede",
-            "titleRemoveAll": "Remove all nodes",
+            "titleRemoveAll": "Remover todos os nós",
             "titleDetails": "Detalhes do nó de rede",
-            "titleInfo": "Node info",
-            "addingNode": "Adding node",
-            "updatingNode": "Updating node",
-            "loadingNodeInfo": "Loading node info",
+            "titleInfo": "Informações do nó",
+            "addingNode": "Adicionar nó",
+            "updatingNode": "Atualizar nó",
+            "loadingNodeInfo": "Carregando informações do nó",
             "nodeAddress": "Endereço de nó de rede",
             "optionalUsername": "Nome de usuário (opcional)",
             "optionalPassword": "Senha (opcional)",
-            "optionalJwt": "JSON web token (optional)",
+            "optionalJwt": "Token web JSON (opcional)",
             "setAsPrimaryNode": "Definir como nó de rede primário",
             "removeConfirmation": "Você tem certeza que deseja remover este nó de rede?",
-            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "removeAllConfirmation": "Você tem certeza que deseja remover todos os nós?",
             "info": {
                 "url": "URL",
                 "software": "Software",
-                "networkId": "Network ID",
+                "networkId": "ID da Rede",
                 "bech32HRP": "Bech32 HRP",
-                "features": "Features",
-                "confirmedMilestoneIndex": "Confirmed milestone index",
-                "pruningIndex": "Pruning index",
+                "features": "Recursos",
+                "confirmedMilestoneIndex": "Índice de marco confirmado",
+                "pruningIndex": "Limpando índice",
                 "messagesPerSecond": "Mensagens por segundo",
                 "referencedRate": "Taxa de referência"
             }
         },
         "switchNetwork": {
-            "title": "Switch network",
-            "newNetwork": "New network",
-            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
-            "switchingNetwork": "Switching network",
-            "typePassword": "Type your password to switch to:"
+            "title": "Trocar rede",
+            "newNetwork": "Nova Rede",
+            "resetWarning": "Alterando a rede você será deslogado e será redefinida todas as contas, saldos e histórico de transações deste perfil.",
+            "switchingNetwork": "Trocando de rede",
+            "typePassword": "Digite sua senha para confirmar:"
         },
         "errorLog": {
             "title": "Relatório de Erros",
@@ -669,6 +669,13 @@
         "ledgerMigrateIndex": {
             "title": "Você precisa migrar outro índice de conta Trinity?",
             "body": "Você também pode migrar mais tarde em \"Configurações Avançadas\"."
+        },
+        "exportTransactionHistory": {
+            "title": "Exportar histórico de transações",
+            "body": "Exportar seu histórico de transações para todas as contas deste perfil. As exportações estarão em um formato CSV.",
+            "profileName": "Nome de Perfil:",
+            "numberOfAccounts": "Número de Contas:",
+            "typePassword": "Digite sua senha para permitir a exportação"
         }
     },
     "charts": {
@@ -676,7 +683,7 @@
         "outgoingMi": "Enviando {value}",
         "portoflio": "Portfólio",
         "token": "Token",
-        "holdings": "Holdings",
+        "holdings": "Em espera",
         "accountValue": "Valor da carteira",
         "accountActivity": "Atividade da carteira",
         "timeframe1Hour": "1 hora",
@@ -724,11 +731,12 @@
         "dropHere": "Solte seu arquivo aqui",
         "syncAll": "Sincronizar tudo",
         "export": "Exportar",
+        "exporting": "Exportando",
         "exportNewStronghold": "Exportar uma nova Stronghold",
-        "enableDeepLinks": "Enable IOTA links",
+        "enableDeepLinks": "Ativar links IOTA",
         "enableDeveloperMode": "Ativar modo de desenvolvedor",
         "enableSystemNotifications": "Habilitar notificações do sistema",
-        "exportState": "Exportar estado",
+        "exportTransactionHistory": "Exportar histórico de transações",
         "localProofOfWork": "Prova de trabalho local",
         "unlock": "Desbloquear",
         "updateFirefly": "Atualizar a Firefly",
@@ -743,7 +751,7 @@
         "addNode": "Adicionar servidor",
         "updateNode": "Atualizar nó de rede",
         "removeNode": "Remover servidor",
-        "removeAllNodes": "Remove all nodes",
+        "removeAllNodes": "Remover todos os nós",
         "hide": "Ocultar",
         "hideOthers": "Ocultar Outros",
         "showAll": "Exibir Tudo",
@@ -823,9 +831,9 @@
         "stronghold": "Stronghold",
         "language": "Idioma",
         "appearance": "Aparência",
-        "lightTheme": "Light",
-        "darkTheme": "Dark",
-        "systemTheme": "System",
+        "lightTheme": "Claro",
+        "darkTheme": "Escuro",
+        "systemTheme": "Sistema",
         "balance": "Saldo",
         "accountBalance": "Saldo da carteira",
         "incoming": "Recebendo",
@@ -842,7 +850,7 @@
         "transactions": "Transações",
         "security": "Segurança",
         "accountAddress": "Endereço da carteira",
-        "network": "Network",
+        "network": "Rede",
         "nodes": "Servidores",
         "wallet": "Carteira",
         "help": "Ajuda",
@@ -901,8 +909,8 @@
         "legacyNetwork": "Rede Legada",
         "capsLock": "O Caps Lock está ativado",
         "version": "Versão {version}",
-        "unknown": "Unknown",
-        "none": "None"
+        "unknown": "Desconhecido",
+        "none": "Nenhum"
     },
     "dates": {
         "today": "Hoje",
@@ -927,13 +935,17 @@
         "copiedToClipboard": "Copiado para área de transferência",
         "accountsSynchronized": "Sincronização da carteira completa",
         "fundsAvailableSoon": "Seu saldo estará disponível em breve",
+        "exportTransactionHistory": {
+            "success": "Histórico de transações para {accountAlias} foi salvo com sucesso em {filePath}",
+            "error": "Não foi possível exportar o histórico de transações para {accountAlias}"
+        },
         "deepLinkingRequest": {
-            "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
-            "notEnabled": "IOTA links are not enabled",
-            "invalidFormat": "The IOTA link you followed is invalid",
+            "recievedWhileLoggedOut": "Por favor, faça o login para iniciar o link IOTA",
+            "notEnabled": "Links IOTA não estão ativados",
+            "invalidFormat": "O link IOTA que você seguiu é inválido",
             "wallet": {
                 "send": {
-                    "success": "Payment details added from IOTA link"
+                    "success": "Detalhes de pagamento adicionados a partir do link IOTA"
                 }
             }
         }
@@ -996,23 +1008,23 @@
         },
         "node": {
             "invalid": "Por favor, insira uma URL válida.",
-            "dns": "Could not find DNS resolution for node.",
-            "timedOut": "The connection timed out.",
-            "refused": "The connection was refused.",
-            "handshake": "Could not complete handshake with node.",
-            "invalidCertificate": "Could not connect with invalid certificate.",
-            "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
+            "dns": "Não foi possível encontrar resolução DNS para o nó.",
+            "timedOut": "A conexão expirou.",
+            "refused": "A conexão foi recusada.",
+            "handshake": "Não foi possível completar a comunicação com o nó.",
+            "invalidCertificate": "Não foi possível conectar com um certificado inválido.",
+            "https": "É necessário utilizar HTTPS; conexões inseguras por HTTP não são suportadas neste momento.",
             "duplicate": "Este servidor já foi adicionado.",
             "unsynced": "O servidor não está em sincronia.",
             "noSynced": "Nenhum servidor sincronizado disponível.",
-            "answer": "Failed to get an answer from all nodes.",
-            "forbidden": "This node connection is forbidden."
+            "answer": "Falha ao obter uma resposta de todos os nós.",
+            "forbidden": "Esta conexão ao nó é proibida."
         },
         "network": {
-            "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
-            "notReachable": "The network ID for this node could not be retrieved, unable to add node.",
-            "badNodes": "Unable to connect to the network with current node configuration.",
-            "nonEmptyAccount": "You must transfer all balances before switching networks."
+            "mismatch": "O ID da rede para este nó é \"{networkId}\", que não corresponde à rede atual.",
+            "notReachable": "O ID da rede para este nó não pôde ser recuperado, não foi possível adicionar o nó.",
+            "badNodes": "Não foi possível conectar à rede com a configuração atual do nó.",
+            "nonEmptyAccount": "Você deve transferir todos seus saldos antes de mudar de rede."
         },
         "global": {
             "generic": "Algo deu errado."
@@ -1047,12 +1059,12 @@
             "missingBundle": "Ocorreu um erro ao tentar encontrar o pacote de transações."
         },
         "crypto": {
-            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
+            "cannotDecodeBech32": "Não é possível decodificar a palavra como endereço Bech32."
         }
     },
     "warning": {
         "node": {
-            "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
+            "http": "Usando nós através do HTTP deixa o tráfego não criptografado e pode representar um risco à segurança."
         }
     },
     "tooltips": {

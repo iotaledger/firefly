@@ -415,9 +415,9 @@
                 "title": "Migrate Ledger index",
                 "description": "एक और ट्रिनिटी खाता अनुक्रमणिका माइग्रेट करें"
             },
-            "stateExport": {
-                "title": "स्टेट एक्सपोर्ट",
-                "description": "अपने लेनदेन इतिहास को एक .csv फ़ाइल में निर्यात करें"
+            "transactionHistory": {
+                "title": "Transaction history",
+                "description": "Export the transaction history of your accounts as .csv files"
             },
             "troubleshoot": {
                 "title": "समस्या निवारण",
@@ -669,6 +669,13 @@
         "ledgerMigrateIndex": {
             "title": "क्या आपको किसी अन्य ट्रिनिटी खाता अनुक्रमणिका को माइग्रेट करने की आवश्यकता है?",
             "body": "आप बाद में उन्नत सेटिंग्स में भी माइग्रेट कर सकते हैं।"
+        },
+        "exportTransactionHistory": {
+            "title": "Export transaction history",
+            "body": "Export your transaction history for all accounts consecutively within this profile. Exports will be in a CSV format.",
+            "profileName": "Profile name:",
+            "numberOfAccounts": "Number of accounts:",
+            "typePassword": "Type your password to allow exporting"
         }
     },
     "charts": {
@@ -724,11 +731,12 @@
         "dropHere": "अपनी फाइल को यहां छोड़ें",
         "syncAll": "सभी सिंक करें",
         "export": "एक्सपोर्ट करे",
+        "exporting": "Exporting",
         "exportNewStronghold": "एक नया स्ट्रॉन्गहोल्ड निर्यात करें",
         "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "डेवलपर मोड सक्षम करें",
         "enableSystemNotifications": "नोटिफिकेशंस सक्षम करें",
-        "exportState": "स्थिति निर्यात करें",
+        "exportTransactionHistory": "Export transaction history",
         "localProofOfWork": "स्थानीय प्रूफ ऑफ़ वर्क",
         "unlock": "अनलॉक करें",
         "updateFirefly": "अपडेट फायरफ्लाई",
@@ -927,6 +935,10 @@
         "copiedToClipboard": "क्लिपबोर्ड में कॉपी हो गया",
         "accountsSynchronized": "वॉलेट तुल्यकालन पूरा",
         "fundsAvailableSoon": "जल्द ही आपके फंड उपलब्ध हो जाएंगे",
+        "exportTransactionHistory": {
+            "success": "Transaction history for {accountAlias} was successfully saved to {filePath}",
+            "error": "Unable to export transaction history for {accountAlias}"
+        },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
             "notEnabled": "IOTA links are not enabled",

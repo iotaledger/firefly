@@ -15,7 +15,7 @@
         },
         "profile": {
             "title": "Δημιουργήστε ένα προφίλ",
-            "profileName": "Profile name",
+            "profileName": "Όνομα προφίλ",
             "body1": "Μπορείτε να δημιουργήσετε πολλαπλά προφίλ χρηστών για να οργανώσετε τα πορτοφόλια σας και να βελτιώσετε την ιδιωτικότητά σας.",
             "body2": {
                 "first": "Προς το παρόν, ας ξεκινήσουμε με το όνομα του πρώτου σας προφίλ.",
@@ -23,8 +23,8 @@
             },
             "addMore": "Μπορείτε να προσθέσετε περισσότερα προφίλ αργότερα.",
             "developer": {
-                "label": "Developer profile",
-                "info": "Connect to public and private IOTA networks"
+                "label": "Προφίλ Προγραμματιστή",
+                "info": "Σύνδεση σε δημόσια και ιδιωτικά δίκτυα IOTA"
             }
         },
         "setup": {
@@ -312,7 +312,7 @@
             "theme": {
                 "title": "Θεματικό",
                 "description": "",
-                "advice": "Restart the Firefly application for changes to the system theme to take effect"
+                "advice": "Επανεκκινήστε την εφαρμογή Firefly για να τεθούν σε ισχύ οι αλλαγές στο θεματικό του συστήματος"
             },
             "language": {
                 "title": "Γλώσσα",
@@ -328,14 +328,14 @@
             },
             "networkStatus": {
                 "title": "Κατάσταση δικτύου",
-                "description": "Displays the status of the node you are currently connected to"
+                "description": "Εμφανίζει την κατάσταση του κόμβου στον οποίο είστε συνδεδεμένοι"
             },
             "exportStronghold": {
-                "title": "Export backup",
+                "title": "Εξαγωγή αντιγράφου ασφαλείας",
                 "description": "Εξαγωγή σε ένα αρχείο Stronghold - ένα πλήρες κρυπτογραφημένο αντίγραφο ασφαλείας των πορτοφολιών σας και το τελευταίο ιστορικό συναλλαγών"
             },
             "appLock": {
-                "title": "Automatic lock",
+                "title": "Αυτόματο Κλείδωμα",
                 "description": "Χρόνος αδράνειας πριν από το κλείδωμα του πορτοφολιού σας και αποσυνδεθείτε",
                 "durationMinute": "{time, plural, one {1 λεπτό} other {# λεπτά}}",
                 "durationHour": "{time, plural, one {1 ώρα} other {# ώρες}}"
@@ -369,35 +369,35 @@
                 "description": "Αυτόματη συμπλήρωση δεδομένων συναλλαγών στο Firefly μόλις κάνετε κλικ σε έναν σύνδεσμο iota"
             },
             "networkConfiguration": {
-                "title": "Network config",
-                "title2": "Network configuration",
+                "title": "Ρυθμίσεις δικτύου",
+                "title2": "Διαμόρφωση δικτύου",
                 "description": {
-                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
-                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                    "dev": "Οι ρυθμίσεις του δικτύου σας θα ενημερώνονται αυτόματα σύμφωνα με την τρέχουσα διαμόρφωση του κόμβου (η αλλαγή δικτύων θα έχει ως αποτέλεσμα την επαναφορά της κατάστασης του πορτοφολιού)",
+                    "nonDev": "Οι ρυθμίσεις του δικτύου σας θα ενημερώνονται αυτόματα σύμφωνα με την τρέχουσα διαμόρφωση του κόμβου"
                 },
-                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
-                "resetWallet": "Your wallet state has been reset.",
-                "connectedTo": "Connected to",
+                "switchedNetworks": "Επιτυχής εναλλαγή δικτύου σε \"{networkName}\".",
+                "resetWallet": "Έχει γίνει επαναφορά της κατάστασης του πορτοφολιού σας.",
+                "connectedTo": "Έγινε σύνδεση με",
                 "nodeConfiguration": {
-                    "title": "Node selection",
-                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
-                    "automatic": "Automatic",
-                    "manual": "Manual"
+                    "title": "Επιλογή κόμβου",
+                    "description": "Επιλέξτε \"Χειροκίνητο\" για να ρυθμίσετε τις ρυθμίσεις κόμβου και να συνδεθείτε με τον δικό σας κόμβο(ους)",
+                    "automatic": "Αυτόματο",
+                    "manual": "Χειροκίνητο"
                 }
             },
             "configureNodeList": {
-                "title": "Node configuration",
-                "description": "Manage the list of nodes you connect to",
+                "title": "Ρύθμιση παραμέτρων κόμβου",
+                "description": "Διαχειριστείτε τη λίστα των κόμβων δικτύου στις οποίες συνδέεστε",
                 "primaryNode": "Πρωτεύων κόμβος",
                 "excludeNode": "Εξαίρεση κόμβου",
                 "includeNode": "Συμπερίληψη κόμβου",
-                "editDetails": "Edit details",
-                "viewInfo": "View info",
+                "editDetails": "Επεξεργασία λεπτομερειών",
+                "viewInfo": "Προβολή πληροφοριών",
                 "setAsPrimary": "Ορισμός ως πρωτεύον",
                 "removeNode": "Αφαίρεση κόμβου",
                 "includeOfficialNodeList": "Συμπερίληψη επίσημης λίστας κόμβων",
-                "noNodes": "There are no nodes, unable to connect to the network",
-                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
+                "noNodes": "Δεν υπάρχουν κόμβοι, δεν είναι δυνατή η σύνδεση στο δίκτυο",
+                "noNodesAuto": "Δεν υπάρχουν κόμβοι, θα χρησιμοποιηθεί αυτόματη επιλογή"
             },
             "proofOfWork": {
                 "title": "Απόδειξη της εργασίας (Proof of work)",
@@ -412,12 +412,12 @@
                 "description": "Προβολή πληροφοριών συστήματος και εφαρμογών"
             },
             "migrateLedgerIndex": {
-                "title": "Migrate Ledger index",
+                "title": "Μετεγκατάσταση Δείκτη Ledger",
                 "description": "Μετεγκατάσταση άλλου ευρετηρίου λογαριασμού Trinity"
             },
-            "stateExport": {
-                "title": "Εξαγωγή Κατάστασης",
-                "description": "Εξαγωγή του ιστορικού συναλλαγών σας σε ένα αρχείο .csv"
+            "transactionHistory": {
+                "title": "Ιστορικό συναλλαγών",
+                "description": "Εξαγωγή του ιστορικού συναλλαγών των λογαριασμών σας ως αρχεία .csv"
             },
             "troubleshoot": {
                 "title": "Αντιμετώπιση προβλημάτων",
@@ -429,7 +429,7 @@
             },
             "faq": {
                 "title": "Συχνές Ερωτήσεις",
-                "title2": "Frequently asked questions",
+                "title2": "Συχνές ερωτήσεις",
                 "description": "Δείτε τις Συχνές Ερωτήσεις για να λάβετε βοήθεια με ένα κοινό πρόβλημα ή ερώτηση"
             },
             "discord": {
@@ -544,37 +544,37 @@
             "titleAdd": "Προσθήκη κόμβου",
             "titleUpdate": "Ενημέρωση κόμβου",
             "titleRemove": "Αφαίρεση ενός κόμβου",
-            "titleRemoveAll": "Remove all nodes",
+            "titleRemoveAll": "Αφαίρεση όλων των κόμβων",
             "titleDetails": "Λεπτομέρειες κόμβου",
-            "titleInfo": "Node info",
-            "addingNode": "Adding node",
-            "updatingNode": "Updating node",
-            "loadingNodeInfo": "Loading node info",
+            "titleInfo": "Πληροφορίες κόμβου",
+            "addingNode": "Προσθήκη κόμβου",
+            "updatingNode": "Ενημέρωση κόμβου",
+            "loadingNodeInfo": "Φόρτωση πληροφοριών κόμβου",
             "nodeAddress": "Διεύθυνση κόμβου",
             "optionalUsername": "Όνομα Χρήστη (Προαιρετικό)",
             "optionalPassword": "Κωδικός (προαιρετικός)",
-            "optionalJwt": "JSON web token (optional)",
+            "optionalJwt": "JSON web token (προαιρετικό)",
             "setAsPrimaryNode": "Ορισμός ως πρωτεύων κόμβος",
             "removeConfirmation": "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε τον κόμβο;",
-            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "removeAllConfirmation": "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε όλους τους κόμβους;",
             "info": {
-                "url": "URL",
-                "software": "Software",
-                "networkId": "Network ID",
+                "url": "Διεύθυνση URL",
+                "software": "Λογισμικό",
+                "networkId": "ID Δικτύου",
                 "bech32HRP": "Bech32 HRP",
-                "features": "Features",
-                "confirmedMilestoneIndex": "Confirmed milestone index",
-                "pruningIndex": "Pruning index",
+                "features": "Δυνατότητες",
+                "confirmedMilestoneIndex": "Επιβεβαιωμένος δείκτης ορόσημου",
+                "pruningIndex": "Δείκτης κλαδέματος",
                 "messagesPerSecond": "Μηνύματα ανά δευτερόλεπτο",
                 "referencedRate": "Αναφερόμενη τιμή"
             }
         },
         "switchNetwork": {
-            "title": "Switch network",
-            "newNetwork": "New network",
-            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
-            "switchingNetwork": "Switching network",
-            "typePassword": "Type your password to switch to:"
+            "title": "Εναλλαγή δικτύου",
+            "newNetwork": "Νέο Δίκτυο",
+            "resetWarning": "Αλλάζοντας τα δίκτυα θα αποσυνδεθείτε και θα επαναφέρετε όλους τους λογαριασμούς, τα υπόλοιπα και το ιστορικό συναλλαγών για αυτό το προφίλ.",
+            "switchingNetwork": "Εναλλαγή δικτύου",
+            "typePassword": "Πληκτρολογήστε τον κωδικό πρόσβασής σας για να μεταβείτε:"
         },
         "errorLog": {
             "title": "Αρχείο Σφαλμάτων",
@@ -669,6 +669,13 @@
         "ledgerMigrateIndex": {
             "title": "Θα πρέπει να μετεγκαταστήσετε ένα άλλο Trinity ευρετήριο λογαριασμού;",
             "body": "Μπορείτε επίσης να μετεγκαταστήσετε αργότερα στις Ρυθμίσεις για προχωρημένους."
+        },
+        "exportTransactionHistory": {
+            "title": "Εξαγωγή ιστορικού συναλλαγών",
+            "body": "Εξαγωγή του ιστορικού συναλλαγών σας για όλους τους λογαριασμούς διαδοχικά μέσα σε αυτό το προφίλ. Οι εξαγωγές θα είναι σε μορφή CSV.",
+            "profileName": "Όνομα Προφίλ:",
+            "numberOfAccounts": "Αριθμός λογαριασμών:",
+            "typePassword": "Πληκτρολογήστε τον κωδικό πρόσβασης για να επιτρέψετε την εξαγωγή"
         }
     },
     "charts": {
@@ -724,11 +731,12 @@
         "dropHere": "Τοποθετήστε το αρχείο σας εδώ",
         "syncAll": "Συγχρονισμός όλων",
         "export": "Εξαγωγή",
+        "exporting": "Εξαγωγή",
         "exportNewStronghold": "Εξαγωγή ενός νέου Stronghold",
         "enableDeepLinks": "Ενεργοποίηση συνδέσμων IOTA",
         "enableDeveloperMode": "Ενεργοποίηση λειτουργίας προγραμματιστή",
         "enableSystemNotifications": "Ενεργοποίηση ειδοποιήσεων συστήματος",
-        "exportState": "Εξαγωγή κατάστασης",
+        "exportTransactionHistory": "Εξαγωγή ιστορικού συναλλαγών",
         "localProofOfWork": "Τοπική απόδειξη εργασίας (proof of work)",
         "unlock": "Ξεκλείδωμα",
         "updateFirefly": "Ενημέρωση Firefly",
@@ -743,7 +751,7 @@
         "addNode": "Προσθήκη κόμβου",
         "updateNode": "Ενημέρωση κόμβου",
         "removeNode": "Αφαίρεση κόμβου",
-        "removeAllNodes": "Remove all nodes",
+        "removeAllNodes": "Αφαίρεση όλων των κόμβων",
         "hide": "Απόκρυψη",
         "hideOthers": "Απόκρυψη Άλλων",
         "showAll": "Εμφάνιση Όλων",
@@ -823,9 +831,9 @@
         "stronghold": "Stronghold",
         "language": "Γλώσσα",
         "appearance": "Εμφάνιση",
-        "lightTheme": "Light",
-        "darkTheme": "Dark",
-        "systemTheme": "System",
+        "lightTheme": "Φωτεινό",
+        "darkTheme": "Σκοτεινό",
+        "systemTheme": "Σύστημα",
         "balance": "Υπόλοιπο",
         "accountBalance": "Υπόλοιπο Πορτοφολιού",
         "incoming": "Εισερχόμενο",
@@ -842,7 +850,7 @@
         "transactions": "Συναλλαγές",
         "security": "Ασφάλεια",
         "accountAddress": "Διεύθυνση πορτοφολιού",
-        "network": "Network",
+        "network": "Δίκτυο",
         "nodes": "Κόμβοι",
         "wallet": "Πορτοφόλι",
         "help": "Βοήθεια",
@@ -902,7 +910,7 @@
         "capsLock": "Το Caps Lock είναι ενεργοποιημένο",
         "version": "Έκδοση {version}",
         "unknown": "Άγνωστο",
-        "none": "None"
+        "none": "Κανένα"
     },
     "dates": {
         "today": "Σήμερα",
@@ -927,6 +935,10 @@
         "copiedToClipboard": "Αντιγράφηκε στο πρόχειρο",
         "accountsSynchronized": "Ο συγχρονισμός πορτοφολιού ολοκληρώθηκε",
         "fundsAvailableSoon": "Τα κεφάλαια σας θα είναι διαθέσιμα σύντομα",
+        "exportTransactionHistory": {
+            "success": "Το ιστορικό συναλλαγών για το {accountAlias} αποθηκεύτηκε με επιτυχία στο {filePath}",
+            "error": "Δεν είναι δυνατή η εξαγωγή ιστορικού συναλλαγών για {accountAlias}"
+        },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "Παρακαλούμε συνδεθείτε για να εκκινήσετε το σύνδεσμο IOTA",
             "notEnabled": "Οι σύνδεσμοι IOTA δεν είναι ενεργοποιημένοι",
@@ -996,23 +1008,23 @@
         },
         "node": {
             "invalid": "Εισαγάγετε μια έγκυρη διεύθυνση URL.",
-            "dns": "Could not find DNS resolution for node.",
-            "timedOut": "The connection timed out.",
-            "refused": "The connection was refused.",
-            "handshake": "Could not complete handshake with node.",
-            "invalidCertificate": "Could not connect with invalid certificate.",
-            "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
+            "dns": "Αδυναμία εύρεσης ανάλυσης DNS για τον κόμβο.",
+            "timedOut": "Η σύνδεση έχει λήξει.",
+            "refused": "Η σύνδεση απορρίφθηκε.",
+            "handshake": "Αδυναμία ολοκλήρωσης χειραψίας με κόμβο.",
+            "invalidCertificate": "Αδυναμία σύνδεσης με μη έγκυρο πιστοποιητικό.",
+            "https": "Απαιτείται HTTPS. Δεν υποστηρίζονται επισφαλείς συνδέσεις μέσω HTTP αυτή τη στιγμή.",
             "duplicate": "Αυτός ο κόμβος έχει ήδη προστεθεί.",
             "unsynced": "Ο κόμβος δεν είναι σε συγχρονισμό.",
             "noSynced": "Δεν υπάρχουν διαθέσιμοι συγχρονισμένοι κόμβοι.",
-            "answer": "Failed to get an answer from all nodes.",
-            "forbidden": "This node connection is forbidden."
+            "answer": "Αποτυχία λήψης απάντησης από όλους τους κόμβους.",
+            "forbidden": "Απαγορεύεται η σύνδεση κόμβου."
         },
         "network": {
-            "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
-            "notReachable": "The network ID for this node could not be retrieved, unable to add node.",
-            "badNodes": "Unable to connect to the network with current node configuration.",
-            "nonEmptyAccount": "You must transfer all balances before switching networks."
+            "mismatch": "Το ID για αυτόν τον κόμβο είναι το \"{networkId}\", το οποίο δεν ταιριάζει με το τρέχον δίκτυο.",
+            "notReachable": "Δεν ήταν δυνατή η ανάκτηση του ID δικτύου για αυτόν τον κόμβο, αδυναμία προσθήκης κόμβου.",
+            "badNodes": "Δεν είναι δυνατή η σύνδεση στο δίκτυο με τις τρέχουσες ρυθμίσεις κόμβου.",
+            "nonEmptyAccount": "Πρέπει να μεταφέρετε όλα τα υπόλοιπα πριν αλλάξετε δίκτυα."
         },
         "global": {
             "generic": "Κάτι πήγε στραβά."
@@ -1052,7 +1064,7 @@
     },
     "warning": {
         "node": {
-            "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
+            "http": "Η χρήση κόμβων μέσω HTTP αφήνει την κυκλοφορία μη κρυπτογραφημένη και θα μπορούσε να θέσει σε κίνδυνο την ασφάλεια."
         }
     },
     "tooltips": {
