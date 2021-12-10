@@ -54,8 +54,8 @@ export const generateTransactionHistoryFileName = (profileName: string, accountA
         .replace('{{accountAlias}}', accountAlias.toLowerCase())
         .replace('{{date}}', date)
 
-    return sanatiseFilename(fileName)
+    return sanitiseFilename(fileName)
 }
 
 // TODO: Refactor out of this file
-const sanatiseFilename = (s: string) => s.replace(/[^a-z0-9-]/gi, '-').replace(/-{2,}/g, '-')
+const sanitiseFilename = (s: string) => s.replace(/[^a-z0-9-]/gi, '-').replace(/-{2,}/g, '-')
