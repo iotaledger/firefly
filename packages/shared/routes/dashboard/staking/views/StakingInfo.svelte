@@ -21,11 +21,13 @@
         if (!state || !overview) return `${prefix}-upcoming`
 
         if (state === ParticipationEventState.Holding) {
-            const participations: { [eventId: string]: boolean } = { }
-            overview.forEach((apo) => apo.participations.forEach((p) => {
-                participations[p.eventId] = true
-            }))
-            const numParticipations = Object.keys(participations).length
+            let numParticipations = 0
+
+            if (overview.some((apo) => apo.shimmerStakedFunds > 0 && apo.assemblyStakedFunds > 0)) {
+                numParticipations = 2;
+            } else if (overview.some((apo) => apo.shimmerStakedFunds > 0 || apo.assemblyStakedFunds > 0)) {
+                numParticipations = 1;
+            }
 
             let fileNumber
             if (numParticipations >= 2) {
@@ -54,11 +56,9 @@
             return [
                 localize(
                     `${localePath}Header${localePathExtra}`,
-                    isStaking
-                        ? { values: { duration: getBestTimeDuration($assemblyStakingRemainingTime) } }
-                        : {}
+                    isStaking ? { values: { duration: getBestTimeDuration($assemblyStakingRemainingTime) } } : {}
                 ),
-                localize(`views.staking.info.${$stakingEventState}Subheader`)
+                localize(`views.staking.info.${$stakingEventState}Subheader`),
             ]
         } else {
             return [localize(`${localePath}Header`), localize(`views.staking.info.${$stakingEventState}Subheader`)]
@@ -66,7 +66,7 @@
     }
 
     let header, subHeader
-    $: $participationOverview, [header, subHeader] = getHeaders()
+    $: $participationOverview, ([header, subHeader] = getHeaders())
 
     const handleLearnMoreClick = (): void => {
         Electron.openUrl('https://firefly.iota.org')

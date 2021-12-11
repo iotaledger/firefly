@@ -835,8 +835,7 @@ function displayParticipationNotification(pendingParticipation: PendingParticipa
         showAppNotification({
             type: 'info',
             message: localize(
-                `popups.stakingManager.${
-                    pendingParticipation.action === ParticipationAction.Stake ? 'staked' : 'unstaked'
+                `popups.stakingManager.${pendingParticipation.action === ParticipationAction.Stake ? 'staked' : 'unstaked'
                 }Successfully`,
                 { values: { account: account.alias } }
             ),
@@ -923,19 +922,19 @@ export const initialiseListeners = (): void => {
      * Event listener for transfer confirmation state change
      */
     api.onConfirmationStateChange({
-        onSuccess(response) {
+        async onSuccess(response) {
             const { accounts } = get(wallet)
             const { message } = response.payload
 
             // Checks if this was a message sent for participating in an event
             if (hasPendingParticipation(message.id)) {
                 // Instantly pull in latest participation overview.
-                void getParticipationOverview()
+                await getParticipationOverview()
 
                 // If it is a message related to any participation event, display a notification
                 displayParticipationNotification(getPendingParticipation(message.id))
 
-                // Remvoe the pending participation from local store
+                // Remove the pending participation from local store
                 removePendingParticipations([message.id])
             }
 
