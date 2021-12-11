@@ -8,21 +8,22 @@
     export let airdrop: StakingAirdrop
 
     const isStakedForAirdrop = (overview: ParticipationOverview): boolean => {
-        const stakingEvent = getStakingEventFromAirdrop(airdrop)
-        return overview.find(
-            /**
-             * NOTE: This searches each account overviews participations array for a matching event ID.
-             */
-            (apo) => apo.participations.find((p) => p.eventId === stakingEvent?.eventId) !== undefined
-        ) !== undefined
+        return overview.some((_overview) => {
+            if (airdrop === StakingAirdrop.Assembly) {
+                return _overview.assemblyStakedFunds > 0
+            }
+
+            return _overview.shimmerStakedFunds > 0
+        })
     }
 
     let isStaked
     $: isStaked = isStakedForAirdrop($participationOverview)
 
     let showIndicator
-    $: showIndicator = $stakingEventState === ParticipationEventState.Commencing ||
-                       $stakingEventState === ParticipationEventState.Holding
+    $: showIndicator =
+        $stakingEventState === ParticipationEventState.Commencing ||
+        $stakingEventState === ParticipationEventState.Holding
 </script>
 
 <style>
@@ -31,28 +32,29 @@
     }
 
     @keyframes -ping {
-        30%, 100% {
+        30%,
+        100% {
             transform: scale(2);
             opacity: 0;
         }
     }
 </style>
 
-
 {#if showIndicator}
-    <div
-        class="flex flex-row justify-between items-center"
-    >
+    <div class="flex flex-row justify-between items-center">
         <span class="ml-4 absolute flex justify-center items-center h-3 w-3">
             {#if isStaked}
-                <span id="indicator-ping" class="animate--ping absolute inline-flex h-full w-full rounded-full bg-{isStaked ? 'green' : 'red'}-400 opacity-75"></span>
+                <span
+                    id="indicator-ping"
+                    class="animate--ping absolute inline-flex h-full w-full rounded-full bg-{isStaked ? 'green' : 'red'}-400
+                    opacity-75" />
             {/if}
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-{isStaked ? 'green' : 'red'}-600"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-{isStaked ? 'green' : 'red'}-600" />
         </span>
-        <div
-            class="pl-10 pr-5 py-2 rounded-2xl bg-white bg-opacity-20"
-        >
-            <Text type="p" classes="text-white dark:text-white">{localize(`general.${isStaked ? 'staking' : 'notStaked'}`)}</Text>
+        <div class="pl-10 pr-5 py-2 rounded-2xl bg-white bg-opacity-20">
+            <Text type="p" classes="text-white dark:text-white">
+                {localize(`general.${isStaked ? 'staking' : 'notStaked'}`)}
+            </Text>
         </div>
     </div>
 {/if}
