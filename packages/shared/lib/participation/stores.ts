@@ -65,8 +65,8 @@ export const stakedAccounts: Readable<WalletAccount[]> = derived(
     [participationOverview],
     ([$participationOverview]) => {
         const activeAccountIndices = $participationOverview
-            // .filter((overview) => overview.shimmerStakedFunds > 0)
-            .filter((overview) => overview.participations.length > 0)
+            .filter((overview) => overview.shimmerStakedFunds > 0 || overview.assemblyStakedFunds > 0)
+            // .filter((overview) => overview.participations.length > 0)
             .map((overview) => overview.accountIndex)
         /**
          * CAUTION: Ideally the accounts Svelte store would
