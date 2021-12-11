@@ -135,11 +135,13 @@ export const partiallyStakedAmount: Readable<number> = derived(
  * The total accumulated Assembly rewards for all
  * accounts that have been staked at some point (even
  * if they are currently unstaked).
+ *
+ * Be cautious that this value is in microASMB, so it is likely to be larger.
  */
 export const assemblyStakingRewards: Readable<number> = derived(participationOverview, (overview) => {
-    const rewards = overview.reduce((total, accountOverview) => total + accountOverview.assemblyRewards, 0) / 6
+    const rewards = overview.reduce((total, accountOverview) => total + accountOverview.assemblyRewards, 0)
     if (rewards <= 0)
-        return overview.reduce((total, accountOverview) => total + accountOverview.assemblyRewardsBelowMinimum, 0) / 6
+        return overview.reduce((total, accountOverview) => total + accountOverview.assemblyRewardsBelowMinimum, 0)
     else return rewards
 })
 
