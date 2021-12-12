@@ -57,33 +57,25 @@
     }
 </script>
 
-<style type="text/scss">
-    .airdrop-grid {
-        @apply grid;
-        grid-template-rows: 45% 55%;
-    }
-</style>
-
 <div 
-    class="airdrop-grid w-full h-full bg-{airdrop}-bg dark:bg-{airdrop}-bg" 
+    class="relative z-0 flex w-full h-full bg-{airdrop}-bg dark:bg-{airdrop}-bg" 
     on:mouseenter={video[airdrop]?.play()}
     on:mouseleave={video[airdrop]?.pause()}
     >
-    <div class="flex flex-column justify-center">
-        <!-- svelte-ignore a11y-media-has-caption -->
-        <video 
-            width="100%" 
-            height="auto"
-            controls={false}
-            muted
-            playsinline
-            loop
-            bind:this={video[airdrop]}
-        >
-            <source src="assets/videos/airdrop-{airdrop}.mp4" type="video/mp4" />
-        </video>
-    </div>
-    <div class="px-8 h-full pb-10 flex flex-col justify-end space-y-5">
+    <!-- svelte-ignore a11y-media-has-caption -->
+    <video 
+        class="absolute top-0 left-0 w-full h-auto z-0"
+        width="100%" 
+        height="auto"
+        controls={false}
+        muted
+        playsinline
+        loop
+        bind:this={video[airdrop]}
+    >
+        <source src="assets/videos/airdrop-{airdrop}.mp4" type="video/mp4" />
+    </video>
+    <div class="px-8 h-full pb-10 flex flex-col justify-end space-y-5 z-0">
         <div class="flex flex-col space-y-3">
             <div class="flex flex-row items-center">
                 <Text type="h3" classes="mr-4 text-white text-2xl">
