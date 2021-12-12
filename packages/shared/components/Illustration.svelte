@@ -58,16 +58,7 @@
             lightmode: 'onboarding/ledger-support.svg',
             darkmode: 'onboarding/ledger-support.svg',
         },
-
         // Staking
-        'airdrop-assembly-bg': {
-            lightmode: 'staking/airdrop-assembly.svg',
-            darkmode: 'staking/airdrop-assembly.svg',
-        },
-        'airdrop-shimmer-bg': {
-            lightmode: 'staking/airdrop-shimmer.svg',
-            darkmode: 'staking/airdrop-shimmer.svg',
-        },
         'staking-confirmation': {
             lightmode: 'staking/staking-confirmation.svg',
             darkmode: 'staking/staking-confirmation.svg',

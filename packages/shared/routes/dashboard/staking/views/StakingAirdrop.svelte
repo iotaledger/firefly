@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { HR, Illustration, Link, StakingAirdropIndicator, Text } from 'shared/components'
+    import { HR, Link, StakingAirdropIndicator, Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { localize } from 'shared/lib/i18n'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -24,6 +24,11 @@
     $: $participationOverview, [remainingTimeAmount, remainingTimeUnit] = getBestTimeDuration(
             isAssembly() ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
     ).split(' ')
+
+    let video = {
+        [StakingAirdrop.Assembly]: null,
+        [StakingAirdrop.Shimmer]: null
+    }
 
     const handleLearnMoreClick = (): void => {
         const url = getLearnMoreUrl()
@@ -59,14 +64,24 @@
     }
 </style>
 
-<div class="airdrop-grid w-full h-full bg-{airdrop}-bg dark:bg-{airdrop}-bg">
+<div 
+    class="airdrop-grid w-full h-full bg-{airdrop}-bg dark:bg-{airdrop}-bg" 
+    on:mouseenter={video[airdrop]?.play()}
+    on:mouseleave={video[airdrop]?.pause()}
+    >
     <div class="flex flex-column justify-center">
-        <Illustration
-            illustration="airdrop-{airdrop}-bg"
-            width="100%"
-            height="100%"
-            classes="{airdrop === StakingAirdrop.Assembly ? 'opacity-20' : ''} fill-current text-white"
-        />
+        <!-- svelte-ignore a11y-media-has-caption -->
+        <video 
+            width="100%" 
+            height="auto"
+            controls={false}
+            muted
+            playsinline
+            loop
+            bind:this={video[airdrop]}
+        >
+            <source src="assets/videos/airdrop-{airdrop}.mp4" type="video/mp4" />
+        </video>
     </div>
     <div class="px-8 h-full pb-10 flex flex-col justify-end space-y-5">
         <div class="flex flex-col space-y-3">
