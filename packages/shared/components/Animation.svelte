@@ -139,6 +139,31 @@
             lightmode: 'ledger-app-closed-desktop.json',
             darkmode: 'ledger-app-closed-desktop.json',
         },
+        // Staking
+        'staking-info-commencing': {
+            lightmode: 'staking/info-commencing.json',
+            darkmode: 'staking/info-commencing.json',
+        },
+        'staking-info-ended': {
+            lightmode: 'staking/info-ended.json',
+            darkmode: 'staking/info-ended.json',
+        },
+        'staking-info-holding-0': {
+            lightmode: 'staking/info-holding-0.json',
+            darkmode: 'staking/info-holding-0.json',
+        },
+        'staking-info-holding-1': {
+            lightmode: 'staking/info-holding-1.json',
+            darkmode: 'staking/info-holding-1.json',
+        },
+        'staking-info-holding-2': {
+            lightmode: 'staking/info-holding-2.json',
+            darkmode: 'staking/info-holding-2.json',
+        },
+        'staking-info-upcoming': {
+            lightmode: 'staking/info-upcoming.json',
+            darkmode: 'staking/info-upcoming.json',
+        },
     }
 
     let container

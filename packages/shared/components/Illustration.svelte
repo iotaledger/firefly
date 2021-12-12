@@ -68,30 +68,6 @@
             lightmode: 'staking/airdrop-shimmer.svg',
             darkmode: 'staking/airdrop-shimmer.svg',
         },
-        'staking-info-commencing': {
-            lightmode: 'staking/info-commencing.svg',
-            darkmode: 'staking/info-commencing.svg',
-        },
-        'staking-info-ended': {
-            lightmode: 'staking/info-ended.svg',
-            darkmode: 'staking/info-ended.svg',
-        },
-        'staking-info-holding-0': {
-            lightmode: 'staking/info-holding-0.svg',
-            darkmode: 'staking/info-holding-0.svg',
-        },
-        'staking-info-holding-1': {
-            lightmode: 'staking/info-holding-1.svg',
-            darkmode: 'staking/info-holding-1.svg',
-        },
-        'staking-info-holding-2': {
-            lightmode: 'staking/info-holding-2.svg',
-            darkmode: 'staking/info-holding-2.svg',
-        },
-        'staking-info-upcoming': {
-            lightmode: 'staking/info-upcoming.svg',
-            darkmode: 'staking/info-upcoming.svg',
-        },
         'staking-confirmation': {
             lightmode: 'staking/staking-confirmation.svg',
             darkmode: 'staking/staking-confirmation.svg',
