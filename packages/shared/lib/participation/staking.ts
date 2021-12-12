@@ -9,6 +9,8 @@ import type { WalletAccount } from '../typings/wallet'
 import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID, STAKING_AIRDROP_TOKENS, STAKING_EVENT_IDS } from './constants'
 import { partiallyStakedAccounts, participationEvents, participationOverview, stakedAccounts } from './stores'
 import { Participation, ParticipationEvent, StakingAirdrop } from './types'
+import { activeProfile } from '../profile'
+import { getDecimalSeparator } from '../currency'
 
 /**
  * Determines whether an account is currently being staked or not.
@@ -64,16 +66,38 @@ export const isAccountStakedForAirdrop = (accountId: string, airdrop: StakingAir
 export const isAccountPartiallyStaked = (accountId: string): boolean =>
     get(partiallyStakedAccounts).find((psa) => psa.id === accountId) !== undefined
 
+/**
+ * Determines the staking airdrop from a given participation event ID.
+ *
+ * @method getAirdropFromEventId
+ *
+ * @param {string} eventId
+ *
+ * @returns {StakingAirdrop | undefined}
+ */
+export const getAirdropFromEventId = (eventId: string): StakingAirdrop | undefined => {
+    if (!eventId) return undefined
+
+    if (!STAKING_EVENT_IDS.includes(eventId)) {
+        showAppNotification({
+            type: 'error',
+            message: localize('error.participation.invalidStakingEventId'),
+        })
+    }
+
+    return eventId === ASSEMBLY_EVENT_ID ? StakingAirdrop.Assembly : StakingAirdrop.Shimmer
+}
+
 const estimateAssemblyReward = (amount: number, currentMilestone: number, endMilestone: number): number => {
     /**
      * NOTE: This represents the amount of ASMB per 1 Mi received every milestone,
-     * which is currently 0.000004 ASMB (4 µASMB).
+     * which is currently 4 microASMB (0.000004 ASMB).
      */
-    const multiplier = 0.000004
+    const multiplier = 4.0
     const amountMiotas = amount / 1_000_000
     const numMilestones = endMilestone - currentMilestone
 
-    return Math.floor(multiplier * amountMiotas * numMilestones * 1_000_000) / 1_000_000
+    return Math.floor(multiplier * amountMiotas * numMilestones)
 }
 
 const estimateShimmerReward = (amount: number, currentMilestone: number, endMilestone: number): number => {
@@ -86,6 +110,53 @@ const estimateShimmerReward = (amount: number, currentMilestone: number, endMile
     const numMilestones = endMilestone - currentMilestone
 
     return multiplier * amountMiotas * numMilestones
+}
+
+type AssemblyTokenUnit = '' | 'micro'
+
+const getAssemblyTokenMultiplier = (unit: AssemblyTokenUnit): number => {
+    switch (unit) {
+        case 'micro':
+            return 1
+        default:
+            return 0.000001
+    }
+}
+
+/**
+ * Returns a formatted version of the rewards for a particular airdrop.
+ *
+ * CAUTION: The formatting for the ASMB token assumes that the amount passed
+ * is in microASMB.
+ *
+ * @method formatStakingAirdropReward
+ *
+ * @param {StakingAirdrop} airdrop
+ * @param {number} amount
+ * @param {number} decimalPlaces
+ *
+ * @returns {string}
+ */
+export const formatStakingAirdropReward = (airdrop: StakingAirdrop, amount: number, decimalPlaces: number): string => {
+    const decimalSeparator = getDecimalSeparator(get(activeProfile)?.settings?.currency)
+    const thousandthSeparator = decimalSeparator === '.' ? ',' : '.'
+
+    switch (airdrop) {
+        case StakingAirdrop.Assembly: {
+            const denomination: AssemblyTokenUnit = Math.abs(amount) >= 1_000_000 ? '' : amount === 0 ? '' : 'micro'
+            const multiplier = getAssemblyTokenMultiplier(denomination)
+
+            const [integer, float] = (amount * multiplier).toFixed(decimalPlaces).split('.')
+            return `${delineateNumber(integer, thousandthSeparator)}${
+                Number(float) > 0 ? decimalSeparator + parseFloat(float) : ''
+            } ${denomination}${STAKING_AIRDROP_TOKENS[airdrop]}`
+        }
+        case StakingAirdrop.Shimmer: {
+            return `${delineateNumber(String(amount), thousandthSeparator)} ${STAKING_AIRDROP_TOKENS[airdrop]}`
+        }
+        default:
+            return '0'
+    }
 }
 
 /**
@@ -114,77 +185,6 @@ export const getStakingEventFromAirdrop = (airdrop: StakingAirdrop): Participati
 }
 
 /**
- * Determines the staking airdrop from a given participation event ID.
- *
- * @method getAirdropFromEventId
- *
- * @param {string} eventId
- *
- * @returns {StakingAirdrop | undefined}
- */
-export const getAirdropFromEventId = (eventId: string): StakingAirdrop | undefined => {
-    if (!eventId) return undefined
-
-    if (!STAKING_EVENT_IDS.includes(eventId)) {
-        showAppNotification({
-            type: 'error',
-            message: localize('error.participation.invalidStakingEventId'),
-        })
-    }
-
-    return eventId === ASSEMBLY_EVENT_ID ? StakingAirdrop.Assembly : StakingAirdrop.Shimmer
-}
-
-type AssemblyDenomination = 'µ' | 'm' | ''
-
-const getAssemblyTokenMultiplier = (denomination: AssemblyDenomination): number => {
-    switch (denomination) {
-        case 'm':
-            return 1_000
-        case 'µ':
-            return 1_000_000
-        default:
-            return 1
-    }
-}
-
-/**
- * Returns a formatted version of the rewards for a particular airdrop.
- *
- * @method formatStakingAirdropReward
- *
- * @param {StakingAirdrop} airdrop
- * @param {number} amount
- * @param {number} decimalPlaces
- *
- * @returns {string}
- */
-export const formatStakingAirdropReward = (airdrop: StakingAirdrop, amount: number, decimalPlaces: number): string => {
-    switch (airdrop) {
-        case StakingAirdrop.Assembly: {
-            const absAmount = Math.abs(amount)
-            const denomination: AssemblyDenomination =
-                absAmount >= 1.0 ? '' : absAmount >= 0.001 ? 'm' : absAmount === 0 ? '' : 'µ'
-            const multiplier = getAssemblyTokenMultiplier(denomination)
-
-            if (denomination === '') decimalPlaces = decimalPlaces > 6 ? 6 : decimalPlaces < 0 ? 0 : decimalPlaces
-            else if (denomination === 'm') decimalPlaces = decimalPlaces > 3 ? 3 : decimalPlaces < 0 ? 0 : decimalPlaces
-            else if (denomination === 'µ') decimalPlaces = 0
-
-            const [integer, float] = (amount * multiplier).toFixed(decimalPlaces).split('.')
-            return `${delineateNumber(integer, ',')}${
-                Number(float) > 0 ? '.' + parseFloat(float) : ''
-            } ${denomination}${STAKING_AIRDROP_TOKENS[airdrop]}`
-        }
-        case StakingAirdrop.Shimmer: {
-            return `${delineateNumber(String(amount), ',')} ${STAKING_AIRDROP_TOKENS[airdrop]}`
-        }
-        default:
-            return '0'
-    }
-}
-
-/**
  * Calculates the reward estimate for a particular staking airdrop.
  *
  * @method estimateStakingAirdropReward
@@ -203,13 +203,6 @@ export const estimateStakingAirdropReward = (
     decimalPlaces: number = 6
 ): number | string => {
     const stakingEvent = getStakingEventFromAirdrop(airdrop)
-    if (!stakingEvent) {
-        showAppNotification({
-            type: 'error',
-            message: localize('error.participation.cannotFindStakingEvent'),
-        })
-    }
-
     if (!stakingEvent || amountToStake <= 0) {
         return formatAmount ? formatStakingAirdropReward(airdrop, 0, decimalPlaces) : 0
     }
@@ -219,18 +212,23 @@ export const estimateStakingAirdropReward = (
      * it will seem more dynamic rather than re-calculating within this function.
      */
     const currentMilestone = get(networkStatus)?.currentMilestone || stakingEvent?.status?.milestoneIndex
+    const beginMilestone =
+        currentMilestone < stakingEvent?.information?.milestoneIndexStart
+            ? stakingEvent?.information?.milestoneIndexStart
+            : currentMilestone
     const endMilestone = stakingEvent?.information?.milestoneIndexEnd
 
     let estimation
     switch (airdrop) {
         case StakingAirdrop.Assembly:
-            estimation = estimateAssemblyReward(amountToStake, currentMilestone, endMilestone)
+            estimation = estimateAssemblyReward(amountToStake, beginMilestone, endMilestone)
             break
         case StakingAirdrop.Shimmer:
-            estimation = estimateShimmerReward(amountToStake, currentMilestone, endMilestone)
+            estimation = estimateShimmerReward(amountToStake, beginMilestone, endMilestone)
             break
         default:
-            return 0
+            estimation = 0
+            break
     }
 
     return formatAmount ? formatStakingAirdropReward(airdrop, estimation, decimalPlaces) : estimation

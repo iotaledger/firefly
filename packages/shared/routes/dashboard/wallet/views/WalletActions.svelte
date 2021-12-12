@@ -42,14 +42,14 @@
             </div>
             {#if $viewableAccounts.length > 0}
                 <div
-                    class="grid {$viewableAccounts.length === 1 ? 'grid-cols-1' : 'grid-cols-2'} auto-rows-max gap-4 flex-auto overflow-y-auto h-1 -mr-2 pr-2 scroll-secondary">
+                    class="grid {$viewableAccounts.length === 1 && (!$assemblyStakingRewards && !$shimmerStakingRewards) ? 'grid-cols-1' : 'grid-cols-2'} auto-rows-max gap-4 flex-auto overflow-y-auto h-1 -mr-2 pr-2 scroll-secondary">
                     {#each $viewableAccounts as account}
                         <AccountTile
                             color={account.color}
                             name={account.alias}
                             balance={account.balance}
                             balanceEquiv={account.balanceEquiv}
-                            size={$viewableAccounts.length === 1 ? 'l' : 'm'}
+                            size={$viewableAccounts.length === 1 && (!$assemblyStakingRewards || !$shimmerStakingRewards) ? 'l' : 'm'}
                             hidden={hiddenAccounts.includes(account.id)}
                             onClick={() => handleAccountClick(account.id)}
                             ledger={$isLedgerProfile}
