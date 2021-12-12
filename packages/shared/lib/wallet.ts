@@ -835,7 +835,8 @@ function displayParticipationNotification(pendingParticipation: PendingParticipa
         showAppNotification({
             type: 'info',
             message: localize(
-                `popups.stakingManager.${pendingParticipation.action === ParticipationAction.Stake ? 'staked' : 'unstaked'
+                `popups.stakingManager.${
+                    pendingParticipation.action === ParticipationAction.Stake ? 'staked' : 'unstaked'
                 }Successfully`,
                 { values: { account: account.alias } }
             ),
