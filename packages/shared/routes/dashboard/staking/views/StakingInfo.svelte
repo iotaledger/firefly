@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Illustration, Link, Text } from 'shared/components'
+    import { Animation, Link, Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { localize } from 'shared/lib/i18n'
     import {
@@ -16,7 +16,7 @@
         Electron.openUrl('https://firefly.iota.org')
     }
 
-    const getIllustration = (state: ParticipationEventState, overview: ParticipationOverview): string => {
+    const getAnimation = (state: ParticipationEventState, overview: ParticipationOverview): string => {
         const prefix = 'staking-info'
         if (!state || !overview) return `${prefix}-upcoming`
 
@@ -86,11 +86,11 @@
 </style>
 
 <div
-    class="p-8 flex flex-col justify-center items-center w-full h-full bg-gradient-to-t from-blue-400 to-lightblue-500">
-    <Illustration illustration={getIllustration($stakingEventState, $participationOverview)} />
-    <div class="w-full mt-4 flex flex-col justify-between items-center text-center">
-        <Text type="p" bigger classes="text-gray-900 mb-1" overrideColor>{subHeader}</Text>
-        <Text type="h2" classes="text-gray-900 mb-2" overrideColor>{header}</Text>
+    class="p-8 flex flex-col justify-center items-center w-full h-full bg-blue-100 dark:bg-gray-800">
+    <Animation animation={getAnimation($stakingEventState, $participationOverview)} />
+    <div class="w-full mt-4 flex flex-col items-center text-center">
+        <Text type="p" bigger classes="mb-1">{subHeader}</Text>
+        <Text type="h2" classes="mb-2">{header}</Text>
         <Link onClick={handleLearnMoreClick} classes="text-14">{localize('actions.learnAboutStaking')}</Link>
     </div>
 </div>

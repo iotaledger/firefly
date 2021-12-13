@@ -173,6 +173,11 @@
             &.full-screen {
                 box-shadow: none;
             }
+
+            &:not(.full-screen) {
+                @apply overflow-y-auto;
+                max-height: calc(100vh - 50px);
+            }
         }
     }
 </style>
