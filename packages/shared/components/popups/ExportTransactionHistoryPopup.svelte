@@ -36,7 +36,7 @@
 
             for (const walletAccount of $accounts) {
                     const fileName = generateTransactionHistoryFileName(profileName, walletAccount.alias)
-                    const contents = generateTransactionHistoryCsvFromAccount(walletAccount, {id: true, timestamp: true, internal: true, value: true, remainderValue: false})
+                    const contents = generateTransactionHistoryCsvFromAccount(walletAccount, {id: true, internal: true, value: true, remainderValue: false, date: true, time: true})
                     try {
                         const filePath = await Electron.exportTransactionHistory(fileName, contents)
                         if(!filePath) {

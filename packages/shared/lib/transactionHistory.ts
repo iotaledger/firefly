@@ -2,7 +2,8 @@ import type { WalletAccount } from './typings/wallet'
 
 interface ITransactionHistoryHeaderParameters {
     id?: boolean
-    timestamp?: boolean
+    date?: boolean
+    time?: boolean
     internal?: boolean
     value?: boolean
     remainderValue?: boolean
@@ -17,9 +18,10 @@ export const generateTransactionHistoryCsvFromAccount = (
     const headerParts = []
     headerParams.id && headerParts.push('message id')
     headerParams.internal && headerParts.push('internal')
-    headerParams.timestamp && headerParts.push('timestamp')
     headerParams.value && headerParts.push('value')
     headerParams.remainderValue && headerParts.push('remainder value')
+    headerParams.date && headerParts.push('date')
+    headerParams.time && headerParts.push('time (UTC)')
 
     let csv = headerParts.join(',') + NEW_LINE
 
@@ -29,12 +31,15 @@ export const generateTransactionHistoryCsvFromAccount = (
             const { internal, incoming, value, remainderValue } = message.payload.data.essence.data
             const valueString = incoming ? String(value) : '-' + value
 
+            const timestampParts = timestamp.split(/[TZ.]/, 2)
+
             const csvLineParts: string[] = []
             headerParams.id && csvLineParts.push(String(id))
             headerParams.internal && csvLineParts.push(String(internal))
-            headerParams.timestamp && csvLineParts.push(String(timestamp))
             headerParams.value && csvLineParts.push(valueString)
             headerParams.remainderValue && csvLineParts.push(String(remainderValue))
+            headerParams.date && csvLineParts.push(String(timestampParts[0]))
+            headerParams.date && csvLineParts.push(timestampParts[1])
 
             const csvLine = csvLineParts.join(',') + NEW_LINE
             csv = csv + csvLine
