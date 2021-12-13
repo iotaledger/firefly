@@ -240,7 +240,7 @@
                             icon="unlock"
                             width="18"
                             height="18"
-                            classes={$accountToParticipate?.id === account?.id ? 'text-gray-400' : ''} />
+                            classes={$accountToParticipate?.id === account?.id ? 'text-gray-400' : 'text-gray-800 dark:text-white'} />
                     {/if}
                     <div class="flex flex-col w-3/4">
                         <Text type="p" classes="font-extrabold" disabled={$accountToParticipate?.id === account?.id}>
