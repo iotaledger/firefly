@@ -1225,7 +1225,7 @@
             },
             "ended": {
                 "title": "Events have ended",
-                "body": "Assembly and Shimmer tokens will be distributed to the staked wallets when their repspective networks launch."
+                "body": "Assembly and Shimmer tokens will be distributed to the staked wallets when their respective networks launch."
             },
             "minRewards": {
                 "title": "Minimum rewards not met",
