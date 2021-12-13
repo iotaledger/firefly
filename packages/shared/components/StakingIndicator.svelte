@@ -30,21 +30,14 @@
 
     $: indicatorBox, showTooltip, void refreshIndicatorBox()
 
-    const refreshIndicatorBox = async (): Promise<void> => {
-        if (!indicatorBox || !showTooltip) return
-
+    async function refreshIndicatorBox() {
+        if (!indicatorBox || !showTooltip) {
+            return
+        }
         await tick()
-
-        parentWidth = indicatorBox?.offsetWidth / 2 ?? 0
-        /**
-         * CAUTION: The positioning requires a specific multiplier
-         * to play nicely with responsiveness.
-         */
-        const left = indicatorBox?.getBoundingClientRect().left ?? 0
-        parentLeft = left / 1.04
-
-        const top = indicatorBox?.getBoundingClientRect().top ?? 0
-        parentTop = top * 0.8
+        parentWidth = indicatorBox?.offsetWidth / 2
+        parentLeft = indicatorBox?.getBoundingClientRect().left ?? 0
+        parentTop = indicatorBox?.getBoundingClientRect().top ?? 0
     }
 
     const toggleTooltip = (): void => {
