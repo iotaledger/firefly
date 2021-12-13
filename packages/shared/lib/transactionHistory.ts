@@ -15,11 +15,11 @@ export const generateTransactionHistoryCsvFromAccount = (
     headerParams: ITransactionHistoryHeaderParameters
 ): string => {
     const headerParts = []
-    headerParams.id && headerParts.push('id')
+    headerParams.id && headerParts.push('message id')
     headerParams.internal && headerParts.push('internal')
     headerParams.timestamp && headerParts.push('timestamp')
     headerParams.value && headerParts.push('value')
-    headerParams.remainderValue && headerParts.push('remainderValue')
+    headerParams.remainderValue && headerParts.push('remainder value')
 
     let csv = headerParts.join(',') + NEW_LINE
 
