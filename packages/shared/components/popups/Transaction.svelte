@@ -13,6 +13,8 @@
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
     import { Locale } from 'shared/lib/typings/i18n'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
+    import { stakingEventState } from '../../lib/participation/stores'
+    import { ParticipationEventState } from '../../lib/participation/types'
 
     export let locale: Locale
 
@@ -36,7 +38,11 @@
         return isFiat ? `${fiatAmount} (${iotaAmount})` : `${iotaAmount} (${fiatAmount})`
     }
 
-    let mustAcknowledgeParticipationWarning = isSendingFromParticpatingAccount
+    let canParticipateInEvent
+    $: canParticipateInEvent = $stakingEventState !== ParticipationEventState.Ended && $stakingEventState !== ParticipationEventState.Inactive
+
+    let mustAcknowledgeParticipationWarning
+    $: mustAcknowledgeParticipationWarning = isSendingFromParticpatingAccount && canParticipateInEvent
 
     function handleNextClick() {
         /**
