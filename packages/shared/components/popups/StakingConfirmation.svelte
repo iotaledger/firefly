@@ -19,7 +19,7 @@
         isAccountPartiallyStaked,
     } from 'shared/lib/participation'
     import {
-        accountToParticipate,
+        accountToParticipate, partiallyStakedAccounts,
         participationAction,
         participationOverview,
         stakingEventState,
@@ -29,9 +29,13 @@
     export let locale: Locale
     export let accountToStake: WalletAccount
 
-    const getRewards = (airdrop: StakingAirdrop): string => <string>estimateStakingAirdropReward(StakingAirdrop[airdrop], accountToStake?.rawIotaBalance, true)
-
     const isPartialStake = isAccountPartiallyStaked(accountToStake?.id)
+
+    const getRewards = (airdrop: StakingAirdrop): string => <string>estimateStakingAirdropReward(
+        StakingAirdrop[airdrop],
+        isPartialStake ? getUnstakedFunds(accountToStake) : accountToStake?.rawIotaBalance,
+        true
+    )
 
     const activeAirdrops = $participationOverview.find((apo) => apo.accountIndex === accountToStake.index)?.participations.map((p) => getAirdropFromEventId(p.eventId)) || []
 
@@ -117,7 +121,8 @@
             <Checkbox bind:checked={airdropSelections[airdrop]} onClick={() => toggleAirdropSelection(airdrop)} disabled={(activeAirdrops.length > 0 && !activeAirdrops.includes(airdrop))} classes="my-5" />
             <Text type="p" disabled={!airdropSelections[airdrop] || (activeAirdrops.length > 0 && !activeAirdrops.includes(airdrop))} classes="font-bold text-lg">
                 {(airdropSelections[airdrop] ? getRewards(capitalize(airdrop)) : estimateStakingAirdropReward(airdrop, 0, true, 0)).split(' ')[0]}
-            </Text><Text type="p" secondary disabled={!airdropSelections[airdrop] || (activeAirdrops.length > 0 && !activeAirdrops.includes(airdrop))} classes="font-bold text-lg">
+            </Text>
+            <Text type="p" secondary disabled={!airdropSelections[airdrop] || (activeAirdrops.length > 0 && !activeAirdrops.includes(airdrop))} classes="font-bold text-lg">
                 {(airdropSelections[airdrop] ? getRewards(capitalize(airdrop)) : estimateStakingAirdropReward(airdrop, 0, true, 0)).split(' ')[1]}
             </Text>
         </div>
