@@ -16,9 +16,8 @@
         promptUserToConnectLedger,
     } from 'shared/lib/ledger'
     import { displayNotifications, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
-    import { isAccountStaked } from 'shared/lib/participation'
+    import { isAccountStaked, isStakingPossible } from 'shared/lib/participation'
     import { stakingEventState } from 'shared/lib/participation/stores'
-    import { ParticipationEventState } from 'shared/lib/participation/types'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
@@ -74,9 +73,6 @@
     let transactionEventData: TransferProgressEventData = null
     let transactionTimeoutId = null
     let transactionNotificationId = null
-
-    let stakingHasEnded
-    $: stakingHasEnded = $stakingEventState === ParticipationEventState.Ended
 
     // This looks odd but sets a reactive dependency on amount, so when it changes the error will clear
     $: amount, (amountError = '')
@@ -396,7 +392,7 @@
             openPopup({
                 type: 'transaction',
                 props: {
-                    isSendingFromParticpatingAccount: isAccountStaked(from.id) && !get(stakingHasEnded),
+                    isSendingFromParticpatingAccount: isAccountStaked(from.id) && !isStakingPossible(get(stakingEventState)),
                     internal: internal || accountAlias,
                     amount: amountRaw,
                     unit,

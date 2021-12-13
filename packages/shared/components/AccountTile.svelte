@@ -1,9 +1,9 @@
 <script lang="typescript">
     import { Icon, Text, Tooltip } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
-    import { formatStakingAirdropReward, getUnstakedFunds } from 'shared/lib/participation'
+    import { formatStakingAirdropReward, getUnstakedFunds, isStakingPossible } from 'shared/lib/participation'
     import { partiallyStakedAccounts, stakedAccounts, stakingEventState } from 'shared/lib/participation/stores'
-    import { ParticipationEventState, StakingAirdrop } from 'shared/lib/participation/types'
+    import { StakingAirdrop } from 'shared/lib/participation/types'
     import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { tick } from 'svelte'
@@ -26,14 +26,11 @@
     const _getAccount = (accounts: WalletAccount[]): WalletAccount => accounts.find((account) => account.alias === name)
     const _hasAccount = (accounts: WalletAccount[]): boolean => _getAccount(accounts) !== undefined
 
-    let stakingHasEnded
-    $: stakingHasEnded = $stakingEventState === ParticipationEventState.Ended
-
     let isPartiallyStaked = false
-    $: isPartiallyStaked = _hasAccount($partiallyStakedAccounts) && !stakingHasEnded
+    $: isPartiallyStaked = _hasAccount($partiallyStakedAccounts) && !isStakingPossible($stakingEventState)
 
     let isStaked = false
-    $: isStaked = _hasAccount($stakedAccounts) && !stakingHasEnded
+    $: isStaked = _hasAccount($stakedAccounts) && !isStakingPossible($stakingEventState)
 
     let showPartialStakeTooltip = false
     let iconBox

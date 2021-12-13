@@ -1,16 +1,14 @@
 import { get } from 'svelte/store'
-
+import { getDecimalSeparator } from '../currency'
 import { localize } from '../i18n'
 import { networkStatus } from '../networkStatus'
 import { showAppNotification } from '../notifications'
-import { clamp, delineateNumber } from '../utils'
+import { activeProfile } from '../profile'
 import type { WalletAccount } from '../typings/wallet'
-
+import { clamp, delineateNumber } from '../utils'
 import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID, STAKING_AIRDROP_TOKENS, STAKING_EVENT_IDS } from './constants'
 import { partiallyStakedAccounts, participationEvents, participationOverview, stakedAccounts } from './stores'
-import { Participation, ParticipationEvent, StakingAirdrop } from './types'
-import { activeProfile } from '../profile'
-import { getDecimalSeparator } from '../currency'
+import { Participation, ParticipationEvent, ParticipationEventState, StakingAirdrop } from './types'
 
 /**
  * Determines whether an account is currently being staked or not.
@@ -296,3 +294,15 @@ export const isStakingForAssembly = (participations: Participation[]): boolean =
 
     return eventIds.includes(ASSEMBLY_EVENT_ID)
 }
+
+/**
+ * Determines if partipations include assembly event id
+ *
+ * @method isStakingForAssembly
+ *
+ * @param {Participation[]} participations
+ *
+ * @returns {boolean}
+ */
+export const isStakingPossible = (stakingEventState: ParticipationEventState): boolean => stakingEventState !== ParticipationEventState.Ended && stakingEventState !== ParticipationEventState.Inactive
+
