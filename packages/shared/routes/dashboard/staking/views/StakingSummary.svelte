@@ -14,7 +14,7 @@
     import {
         accountToParticipate,
         partiallyStakedAccounts,
-        partiallyStakedAmount,
+        partiallyUnstakedAmount,
         participationAction,
         participationOverview,
         stakedAccounts,
@@ -144,9 +144,9 @@
         {#if isPartiallyStaked}
             <Text type="p" classes="text-gray-900 bold mb-1 text-left">
                 {localize(
-                    `tooltips.partiallyStakedFunds.title${$partiallyStakedAmount !== undefined ? '' : 'NoFunds'}`,
-                    $partiallyStakedAmount !== undefined
-                        ? { values: { amount: formatUnitBestMatch($partiallyStakedAmount) } }
+                    `tooltips.partiallyStakedFunds.title${$partiallyStakedAccounts.length > 0 ? '' : 'NoFunds'}`,
+                    $partiallyStakedAccounts.length > 0
+                        ? { values: { amount: formatUnitBestMatch($partiallyUnstakedAmount) } }
                         : { }
                 )}
             </Text>

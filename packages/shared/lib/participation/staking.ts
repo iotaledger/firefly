@@ -249,7 +249,7 @@ export const estimateStakingAirdropReward = (
 export const getStakedFunds = (account: WalletAccount): number => {
     const accountParticipation = get(participationOverview).find((apo) => apo.accountIndex === account?.index)
     if (!accountParticipation) return 0
-    else return accountParticipation.shimmerStakedFunds
+    else return Math.max(accountParticipation.assemblyStakedFunds, accountParticipation.shimmerStakedFunds)
 }
 
 /**
@@ -264,7 +264,7 @@ export const getStakedFunds = (account: WalletAccount): number => {
 export const getUnstakedFunds = (account: WalletAccount): number => {
     const accountParticipation = get(participationOverview).find((apo) => apo.accountIndex === account?.index)
     if (!accountParticipation) return 0
-    else return accountParticipation.shimmerUnstakedFunds
+    else return Math.min(accountParticipation.assemblyUnstakedFunds, accountParticipation.shimmerUnstakedFunds)
 }
 
 /**

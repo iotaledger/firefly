@@ -2,9 +2,8 @@
     import { tick } from 'svelte'
     import { Icon, Text, Tooltip } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
-    import { STAKING_AIRDROP_TOKENS } from 'shared/lib/participation/constants'
-    import { formatStakingAirdropReward } from 'shared/lib/participation'
-    import { partiallyStakedAccounts, partiallyStakedAmount, stakedAccounts, stakingEventState } from 'shared/lib/participation/stores'
+    import { formatStakingAirdropReward, getUnstakedFunds } from 'shared/lib/participation'
+    import { partiallyStakedAccounts, stakedAccounts, stakingEventState } from 'shared/lib/participation/stores'
     import { ParticipationEventState, StakingAirdrop } from 'shared/lib/participation/types'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { WalletAccount } from 'shared/lib/typings/wallet'
@@ -25,7 +24,8 @@
         disabled = true
     }
 
-    const _hasAccount = (accounts: WalletAccount[]): boolean => accounts.find((account) => account.alias === name) !== undefined
+    const _getAccount = (accounts: WalletAccount[]): WalletAccount => accounts.find((account) => account.alias === name)
+    const _hasAccount = (accounts: WalletAccount[]): boolean => _getAccount(accounts) !== undefined
 
     let stakingHasEnded
     $: stakingHasEnded = $stakingEventState === ParticipationEventState.Ended
@@ -159,9 +159,9 @@
     <Tooltip {parentTop} {parentLeft} {parentWidth} position="right">
         <Text type="p" classes="text-gray-900 bold mb-1 text-left">
             {localize(
-                `tooltips.partiallyStakedFunds.title${$partiallyStakedAmount !== undefined ? '' : 'NoFunds'}`,
-                $partiallyStakedAmount !== undefined
-                    ? { values: { amount: formatUnitBestMatch($partiallyStakedAmount) } }
+                `tooltips.partiallyStakedFunds.title${$partiallyStakedAccounts.length > 0 ? '' : 'NoFunds'}`,
+                $partiallyStakedAccounts.length > 0
+                    ? { values: { amount: formatUnitBestMatch(getUnstakedFunds(_getAccount($partiallyStakedAccounts))) } }
                     : { }
             )}
         </Text>
