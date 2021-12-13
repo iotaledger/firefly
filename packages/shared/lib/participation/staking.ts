@@ -3,7 +3,7 @@ import { get } from 'svelte/store'
 import { localize } from '../i18n'
 import { networkStatus } from '../networkStatus'
 import { showAppNotification } from '../notifications'
-import { delineateNumber } from '../utils'
+import { clamp, delineateNumber } from '../utils'
 import type { WalletAccount } from '../typings/wallet'
 
 import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID, STAKING_AIRDROP_TOKENS, STAKING_EVENT_IDS } from './constants'
@@ -93,11 +93,10 @@ const estimateAssemblyReward = (amount: number, currentMilestone: number, endMil
      * NOTE: This represents the amount of ASMB per 1 Mi received every milestone,
      * which is currently 4 microASMB (0.000004 ASMB).
      */
-    const multiplier = 4.0
-    const amountMiotas = amount / 1_000_000
+    const multiplier = 0.000004
     const numMilestones = endMilestone - currentMilestone
 
-    return Math.floor(multiplier * amountMiotas * numMilestones)
+    return Math.floor(multiplier * amount * numMilestones)
 }
 
 const estimateShimmerReward = (amount: number, currentMilestone: number, endMilestone: number): number => {
@@ -141,22 +140,26 @@ export const formatStakingAirdropReward = (airdrop: StakingAirdrop, amount: numb
     const decimalSeparator = getDecimalSeparator(get(activeProfile)?.settings?.currency)
     const thousandthSeparator = decimalSeparator === '.' ? ',' : '.'
 
+    let reward
     switch (airdrop) {
         case StakingAirdrop.Assembly: {
-            const denomination: AssemblyTokenUnit = Math.abs(amount) >= 1_000_000 ? '' : amount === 0 ? '' : 'micro'
-            const multiplier = getAssemblyTokenMultiplier(denomination)
+            decimalPlaces = clamp(decimalPlaces, 0, 6)
 
-            const [integer, float] = (amount * multiplier).toFixed(decimalPlaces).split('.')
-            return `${delineateNumber(integer, thousandthSeparator)}${
-                Number(float) > 0 ? decimalSeparator + parseFloat(float) : ''
-            } ${denomination}${STAKING_AIRDROP_TOKENS[airdrop]}`
+            const [integer, float] = (amount / 1_000_000).toFixed(decimalPlaces).split('.')
+            reward = parseFloat(delineateNumber(integer, thousandthSeparator) + decimalSeparator + float)
+
+            break
         }
         case StakingAirdrop.Shimmer: {
-            return `${delineateNumber(String(amount), thousandthSeparator)} ${STAKING_AIRDROP_TOKENS[airdrop]}`
+            reward = delineateNumber(String(amount), thousandthSeparator)
+            break
         }
         default:
-            return '0'
+            reward = '0'
+            break
     }
+
+    return `${reward} ${STAKING_AIRDROP_TOKENS[airdrop]}`
 }
 
 /**
@@ -246,7 +249,7 @@ export const estimateStakingAirdropReward = (
 export const getStakedFunds = (account: WalletAccount): number => {
     const accountParticipation = get(participationOverview).find((apo) => apo.accountIndex === account?.index)
     if (!accountParticipation) return 0
-    else return accountParticipation.shimmerStakedFunds
+    else return Math.max(accountParticipation.assemblyStakedFunds, accountParticipation.shimmerStakedFunds)
 }
 
 /**
@@ -261,7 +264,7 @@ export const getStakedFunds = (account: WalletAccount): number => {
 export const getUnstakedFunds = (account: WalletAccount): number => {
     const accountParticipation = get(participationOverview).find((apo) => apo.accountIndex === account?.index)
     if (!accountParticipation) return 0
-    else return accountParticipation.shimmerUnstakedFunds
+    else return Math.min(accountParticipation.assemblyUnstakedFunds, accountParticipation.shimmerUnstakedFunds)
 }
 
 /**

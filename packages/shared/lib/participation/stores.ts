@@ -134,13 +134,29 @@ export const partiallyStakedAccounts: Readable<WalletAccount[]> = derived(
             .map((apo) => get(get(wallet).accounts).find((wa) => wa.index === apo.accountIndex))
 )
 
-export const partiallyStakedAmount: Readable<number> = derived(
+/**
+ * The store for the total amount of funds that are partially (un)staked for
+ * all accounts.
+ */
+export const partiallyUnstakedAmount: Readable<number> = derived(
     [participationOverview, partiallyStakedAccounts],
-    ([$participationOverview, $partiallyStakedAccounts]) =>
-        $participationOverview
-            .filter((apo) => $partiallyStakedAccounts.map((psa) => psa.index).includes(apo.accountIndex))
-            .map((apo) => apo.shimmerUnstakedFunds)
-            .reduce((total, current) => total + current, 0)
+    ([$participationOverview, $partiallyStakedAccounts]) => {
+        if ($partiallyStakedAccounts.length <= 0) return 0
+
+        const partiallyStakedOverviews = $partiallyStakedAccounts.map((psa) =>
+            $participationOverview.find((apo) => apo.accountIndex === psa.index)
+        )
+        const assemblyUnstakedFunds = partiallyStakedOverviews.reduce(
+            (total, apo) => total + apo.assemblyUnstakedFunds,
+            0
+        )
+        const shimmerUnstakedFunds = partiallyStakedOverviews.reduce(
+            (total, apo) => total + apo.shimmerUnstakedFunds,
+            0
+        )
+
+        return Math.max(assemblyUnstakedFunds, shimmerUnstakedFunds)
+    }
 )
 
 /**

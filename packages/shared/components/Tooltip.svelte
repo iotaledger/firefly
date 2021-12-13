@@ -19,6 +19,8 @@
 
     onMount(refreshPosition)
 
+    // TODO: refactor all this component to use anchor prop instead of parent
+    // and move all the logic here to position and display the tooltip
     function refreshPosition() {
         if (!tooltip) {
             return
@@ -31,7 +33,7 @@
             left = parentLeft + parentWidth * 2 + 15
         } else if (position === 'bottom') {
             top = parentTop + 50
-            left = parentLeft
+            left = parentLeft - tooltip.offsetWidth / 2 + parentWidth
         }
     }
 </script>
@@ -104,11 +106,18 @@
             triangle,
             inner-dark {
                 border-width: 12px;
-                @apply border-b-0;
-                left: 100px;
                 top: -12px;
+                @apply border-b-0;
                 @apply transform;
+                @apply -translate-x-1/2;
+                @apply left-1/2;
+            }
+            triangle {
                 @apply rotate-180;
+                top: -12px;
+            }
+            inner-dark {
+                top: -13px;
             }
             &.darkmode {
                 triangle {
