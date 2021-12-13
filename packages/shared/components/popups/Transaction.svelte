@@ -11,7 +11,7 @@
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile } from 'shared/lib/profile'
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
 
     export let locale: Locale

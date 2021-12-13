@@ -6,7 +6,7 @@
     import { partiallyStakedAccounts, partiallyStakedAmount, stakedAccounts, stakingEventState } from 'shared/lib/participation/stores'
     import { StakingAirdrop } from 'shared/lib/participation/types'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { ParticipationEventState} from 'shared/lib/participation/types'
 
     export let name = ''
