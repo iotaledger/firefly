@@ -225,13 +225,13 @@
                 <div class="w-full space-x-4 px-5 py-3 flex flex-row justify-between items-center">
                     {#if isAccountStaked(account?.id)}
                         <div class="bg-green-100 rounded-2xl">
-                            <Icon icon="success-check" width="18" height="18" classes="text-white" />
+                            <Icon icon="success-check" width="19" height="19" classes="text-white" />
                         </div>
                     {:else}
                         <Icon
                             icon="unlock"
-                            width="18"
-                            height="18"
+                            width="24"
+                            height="24"
                             classes={$accountToParticipate?.id === account?.id ? 'text-gray-400' : 'text-gray-800 dark:text-white'} />
                     {/if}
                     <div class="flex flex-col w-3/4">
@@ -284,7 +284,7 @@
                 {#if isAccountPartiallyStaked(account?.id) && $accountToParticipate?.id !== account?.id && !$participatedAccountsMapPerSession.get($accountToParticipate?.id)}
                     <div
                         class="space-x-4 mx-1 mb-1 px-4 py-3 flex flex-row justify-between items-center rounded-lg bg-yellow-50">
-                        <Icon icon="exclamation" width="18" height="18" classes="fill-current text-yellow-600" />
+                        <Icon icon="exclamation" width="24" height="24" classes="fill-current text-yellow-600" />
                         <div class="flex flex-col w-3/4">
                             <Text type="p" classes="font-extrabold">{locale('general.unstakedFunds')}</Text>
                             <Text type="p" secondary classes="font-extrabold">
