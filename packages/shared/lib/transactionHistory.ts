@@ -1,12 +1,13 @@
 import type { WalletAccount } from './typings/wallet'
+import { formatUnitBestMatch } from './units'
 
 interface ITransactionHistoryHeaderParameters {
     id?: boolean
-    date?: boolean
-    time?: boolean
     internal?: boolean
     value?: boolean
-    remainderValue?: boolean
+    formattedValue?: boolean
+    date?: boolean
+    time?: boolean
 }
 
 const NEW_LINE = '\r\n'
@@ -18,8 +19,8 @@ export const generateTransactionHistoryCsvFromAccount = (
     const headerParts = []
     headerParams.id && headerParts.push('message id')
     headerParams.internal && headerParts.push('internal')
-    headerParams.value && headerParts.push('value')
-    headerParams.remainderValue && headerParts.push('remainder value')
+    headerParams.value && headerParts.push('raw value (iota)')
+    headerParams.formattedValue && headerParts.push('formatted value')
     headerParams.date && headerParts.push('date')
     headerParams.time && headerParts.push('time (UTC)')
 
@@ -28,8 +29,11 @@ export const generateTransactionHistoryCsvFromAccount = (
     WalletAccount.messages.forEach((message) => {
         const { id, timestamp } = message
         if (message.payload.type === 'Transaction') {
-            const { internal, incoming, value, remainderValue } = message.payload.data.essence.data
+            const { internal, incoming, value } = message.payload.data.essence.data
             const valueString = incoming ? String(value) : '-' + value
+            const formattedValueString = incoming
+                ? formatUnitBestMatch(value, true)
+                : '-' + formatUnitBestMatch(value, true)
 
             const timestampParts = timestamp.split(/[TZ.]/, 2)
 
@@ -37,7 +41,7 @@ export const generateTransactionHistoryCsvFromAccount = (
             headerParams.id && csvLineParts.push(String(id))
             headerParams.internal && csvLineParts.push(String(internal))
             headerParams.value && csvLineParts.push(valueString)
-            headerParams.remainderValue && csvLineParts.push(String(remainderValue))
+            headerParams.formattedValue && csvLineParts.push(formattedValueString)
             headerParams.date && csvLineParts.push(String(timestampParts[0]))
             headerParams.date && csvLineParts.push(timestampParts[1])
 
