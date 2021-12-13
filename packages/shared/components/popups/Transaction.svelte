@@ -66,7 +66,7 @@
 <Text type="h4" classes="mb-6">{locale('popups.transaction.title')}</Text>
 <div class="flex w-full flex-row flex-wrap">
     {#if mustAcknowledgeParticipationWarning}
-        <div class="relative flex flex-col items-center bg-red-50 dark:bg-red-100 rounded-2xl mt-6 mb-9 p-3">
+        <div class="relative flex flex-col items-center bg-red-500 bg-opacity-10 rounded-2xl mt-6 mb-9 p-3">
             <div class="bg-red-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
                 <Icon icon="warning" classes="text-white" />
             </div>
