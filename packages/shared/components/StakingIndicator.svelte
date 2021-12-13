@@ -109,19 +109,19 @@
 </script>
 
 <div
-    class="px-3 py-2 flex flex-row justify-between items-center rounded-2xl {isBelowMinimumStakingRewards ? 'bg-yellow-200' : 'bg-blue-100'} dark:bg-gray-800"
+    class="px-3 py-2 flex flex-row space-x-2 items-center rounded-2xl {isBelowMinimumStakingRewards ? 'bg-yellow-200' : 'bg-blue-100'} dark:bg-gray-800"
     on:mouseenter={toggleTooltip}
     on:mouseleave={toggleTooltip}
 >
-    <div bind:this={indicatorBox} class="ml-2 mr-1">
+    <div bind:this={indicatorBox}>
         {#if isBelowMinimumStakingRewards}
-            <Icon icon='exclamation' width=18 height=18 classes="mr-1 fill-current text-black" />
+            <Icon icon='exclamation' width="16" height="16" classes="text-gray-800 dark:text-white" />
         {:else}
-            <Icon icon='info-filled' classes="fill-current text-gray-600 transform translate-y-1" />
+            <Icon icon='info-filled' width="16" height="16" classes="text-gray-600" />
         {/if}
     </div>
     <Text type="p">{indicatorText}</Text>
-    <Icon icon={indicatorIcon} classes="ml-2 mr-1 fill-current text-{isBelowMinimumStakingRewards ? 'yellow-700' : 'blue-500'}" />
+    <Icon icon={indicatorIcon} width="24" height="24" classes="text-{isBelowMinimumStakingRewards ? 'yellow-700' : 'blue-500'}" />
 </div>
 {#if showTooltip}
     <Tooltip {parentTop} {parentLeft} {parentWidth} position="bottom">
