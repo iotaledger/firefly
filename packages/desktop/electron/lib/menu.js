@@ -214,7 +214,7 @@ const buildTemplate = () => {
             {
                 label: state.strings.documentation,
                 click: function () {
-                    shell.openExternal('https://chrysalis.docs.iota.org/')
+                    shell.openExternal('https://wiki.iota.org/learn/networks/iota-1.5-chrysalis/')
                 },
             },
             {

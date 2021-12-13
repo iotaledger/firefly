@@ -10,7 +10,7 @@
     // }
 
     const handleDocumentationClick = () => {
-        Electron.openUrl('https://chrysalis.docs.iota.org/')
+        Electron.openUrl('https://wiki.iota.org/learn/networks/iota-1.5-chrysalis/')
     }
 
     const handleFaqClick = () => {
