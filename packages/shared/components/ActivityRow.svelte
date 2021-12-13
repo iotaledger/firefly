@@ -58,8 +58,6 @@
         )}`
     }
 
-
-
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
 
     let senderAddress: string
@@ -199,7 +197,11 @@
             {#if hasCachedMigrationTx || milestonePayload}
                 {locale('general.fundMigration')}
             {:else if isParticipationPayload(txPayload)}
-                {locale('general.stakedFor', { values: { account: accountAlias } })}
+                {#if includeFullSender}
+                    {locale('general.stakedFor', { values: { account: accountAlias } })}
+                {:else}
+                    {locale('general.staked')}
+                {/if}
             {:else}
                 {locale(direction, { values: { account: accountAlias } })}
             {/if}
