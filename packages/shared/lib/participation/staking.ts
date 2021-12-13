@@ -296,13 +296,13 @@ export const isStakingForAssembly = (participations: Participation[]): boolean =
 }
 
 /**
- * Determines if partipations include assembly event id
+ * Determines whether staking is currently in the pre-stake or holding period
  *
- * @method isStakingForAssembly
+ * @method isStakingPossible
  *
- * @param {Participation[]} participations
+ * @param {ParticipationEventState} stakingEventState
  *
  * @returns {boolean}
  */
-export const isStakingPossible = (stakingEventState: ParticipationEventState): boolean => stakingEventState !== ParticipationEventState.Ended && stakingEventState !== ParticipationEventState.Inactive
-
+export const isStakingPossible = (stakingEventState: ParticipationEventState): boolean =>
+    stakingEventState !== ParticipationEventState.Ended && stakingEventState !== ParticipationEventState.Inactive
