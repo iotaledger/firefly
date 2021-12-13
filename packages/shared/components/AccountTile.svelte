@@ -3,11 +3,11 @@
     import { Icon, Text, Tooltip } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import { STAKING_AIRDROP_TOKENS } from 'shared/lib/participation/constants'
+    import { formatStakingAirdropReward } from 'shared/lib/participation'
     import { partiallyStakedAccounts, partiallyStakedAmount, stakedAccounts, stakingEventState } from 'shared/lib/participation/stores'
-    import { StakingAirdrop } from 'shared/lib/participation/types'
+    import { ParticipationEventState, StakingAirdrop } from 'shared/lib/participation/types'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { WalletAccount } from 'shared/lib/typings/wallet'
-    import { ParticipationEventState} from 'shared/lib/participation/types'
 
     export let name = ''
     export let balance = ''
@@ -144,9 +144,10 @@
         class="flex {size === 'l' ? 'flex-row space-x-4' : 'flex-col space-y-1'} justify-between w-full flex-{size === 'l' ? 'nowrap' : 'wrap'}"
     >
         <Text smaller overrideColor classes="block text-gray-800 {isStaked ? '' : 'dark:text-white group-hover:text-white'}">
-            {balance}
             {#if airdrop}
-                {STAKING_AIRDROP_TOKENS[airdrop.toLowerCase()]}
+                {formatStakingAirdropReward(airdrop, Number(balance), 6)}
+            {:else}
+                {balance}
             {/if}
         </Text>
         <Text smaller overrideColor classes="block text-blue-500 dark:text-gray-600 {isStaked ? '' : 'group-hover:text-white'}">

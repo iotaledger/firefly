@@ -22,28 +22,24 @@
         stakingEventState,
         unstakedAmount,
     } from 'shared/lib/participation/stores'
-    import { ParticipationAction, ParticipationEventState} from 'shared/lib/participation/types'
+    import { ParticipationAction, ParticipationEventState } from 'shared/lib/participation/types'
 
     $: $participationOverview, $stakedAccounts, $partiallyStakedAccounts
 
     let showSpinner
     $: showSpinner = !$popupState.active && $participationAction && $accountToParticipate
 
+    let canParticipateInEvent
+    $: canParticipateInEvent = $stakingEventState !== ParticipationEventState.Ended && $stakingEventState !== ParticipationEventState.Inactive
+
     let canStakeAnAccount
     $: canStakeAnAccount = get($wallet.accounts).filter((wa) => canAccountParticipate(wa)).length > 0
 
-    let stakingHasEnded
-    $: stakingHasEnded = $stakingEventState === ParticipationEventState.Ended
-
     let isStaked
-    $: isStaked = $stakedAmount > 0 && !stakingHasEnded
+    $: isStaked = $stakedAmount > 0 && canParticipateInEvent
 
     let isPartiallyStaked
-    $: isPartiallyStaked = $partiallyStakedAccounts.length > 0 && !stakingHasEnded
-
-    const NUM_CHANCES = 1000
-    const LUCKY_NUM = 3
-    const showSteak = Math.floor(Math.random() * NUM_CHANCES) + 1 === LUCKY_NUM
+    $: isPartiallyStaked = $partiallyStakedAccounts.length > 0 && canParticipateInEvent
 
     let canParticipateWithNode = false
     $: $networkStatus, canParticipateWithNode = hasNodePlugin(NodePlugin.Participation)
@@ -117,8 +113,8 @@
                 </div>
             {/if}
         </div>
-        <Text type="h5" classes="text-3xl">{formatUnitBestMatch(stakingHasEnded ? 0 : $stakedAmount)}</Text>
-        {#if !stakingHasEnded}
+        <Text type="h5" classes="text-3xl">{formatUnitBestMatch(canParticipateInEvent ? $stakedAmount : 0)}</Text>
+        {#if canParticipateInEvent}
             <Text type="p" smaller overrideColor classes="mt-1 text-gray-500 dark:text-gray-600">
                 {formatUnitBestMatch($unstakedAmount)}
                 {localize('general.unstaked')}
@@ -127,7 +123,7 @@
     </div>
     <Button
         classes="w-full text-14"
-        disabled={showSpinner || stakingHasEnded}
+        disabled={showSpinner || !canParticipateInEvent}
         caution={isStaked && isPartiallyStaked}
         secondary={isStaked && !isPartiallyStaked}
         onClick={() => canParticipateWithNode ? handleStakeFundsClick() : showAppNotification({ type: 'warning', message: localize('error.node.pluginNotAvailable', { values: { nodePlugin: NodePlugin.Participation } }) })}
@@ -139,7 +135,7 @@
                 classes="mx-2 justify-center"
             />
         {:else}
-            {localize(`actions.${isStaked ? 'manageStake' : showSteak ? 'gimmeSteak' : 'stakeFunds'}`)}
+            {localize(`actions.${isStaked ? 'manageStake' : 'stakeFunds'}`)}
         {/if}
     </Button>
 </div>

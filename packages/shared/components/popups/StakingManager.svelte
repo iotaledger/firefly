@@ -154,14 +154,6 @@
                 type: 'stakingConfirmation',
                 props: {
                     accountToStake: account,
-                    onBack: () => {
-                        openPopup(
-                            {
-                                type: 'stakingManager',
-                            },
-                            true
-                        )
-                    },
                 },
             },
             true
