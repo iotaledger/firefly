@@ -27,7 +27,7 @@ export const generateTransactionHistoryCsvFromAccount = (
         const { id, timestamp } = message
         if (message.payload.type === 'Transaction') {
             const { internal, incoming, value, remainderValue } = message.payload.data.essence.data
-            const valueString = incoming ? '-' + value : String(value)
+            const valueString = incoming ? String(value) : '-' + value
 
             const csvLineParts: string[] = []
             headerParams.id && csvLineParts.push(String(id))
