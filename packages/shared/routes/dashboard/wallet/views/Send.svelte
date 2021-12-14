@@ -16,8 +16,7 @@
         promptUserToConnectLedger,
     } from 'shared/lib/ledger'
     import { displayNotifications, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
-    import { isAccountStaked, isStakingPossible } from 'shared/lib/participation'
-    import { stakingEventState } from 'shared/lib/participation/stores'
+    import { isAccountStaked } from 'shared/lib/participation'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
@@ -392,7 +391,7 @@
             openPopup({
                 type: 'transaction',
                 props: {
-                    isSendingFromParticpatingAccount: isAccountStaked(from.id) && !isStakingPossible(get(stakingEventState)),
+                    isSendingFromParticpatingAccount: isAccountStaked(from.id),
                     internal: internal || accountAlias,
                     amount: amountRaw,
                     unit,
