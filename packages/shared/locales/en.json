@@ -1076,5 +1076,15 @@
             "low": "Low",
             "veryLow": "Very low"
         }
+    },
+    "exports": {
+        "transactionHistoryCsv": {
+            "messageId": "Message ID",
+            "internal": "Internal",
+            "rawValue": "Raw Value",
+            "formattedValue": "Formatted Value",
+            "date": "Date",
+            "time": "Time"
+        }
     }
 }

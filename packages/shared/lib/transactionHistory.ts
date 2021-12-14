@@ -1,6 +1,7 @@
 import { formatDate } from './i18n'
 import type { WalletAccount } from './typings/wallet'
 import { formatUnitBestMatch } from './units'
+import { localize } from 'shared/lib/i18n'
 
 interface ITransactionHistoryHeaderParameters {
     id?: boolean
@@ -18,12 +19,12 @@ export const generateTransactionHistoryCsvFromAccount = (
     headerParams: ITransactionHistoryHeaderParameters
 ): string => {
     const headerParts = []
-    headerParams.id && headerParts.push('message id')
-    headerParams.internal && headerParts.push('internal')
-    headerParams.value && headerParts.push('raw value (iota)')
-    headerParams.formattedValue && headerParts.push('formatted value')
-    headerParams.date && headerParts.push('date')
-    headerParams.time && headerParts.push('time')
+    headerParams.id && headerParts.push(localize('exports.transactionHistoryCsv.messageId'))
+    headerParams.internal && headerParts.push(localize('exports.transactionHistoryCsv.internal'))
+    headerParams.value && headerParts.push(localize('exports.transactionHistoryCsv.rawValue'))
+    headerParams.formattedValue && headerParts.push(localize('exports.transactionHistoryCsv.formattedValue'))
+    headerParams.date && headerParts.push(localize('exports.transactionHistoryCsv.date'))
+    headerParams.time && headerParts.push(localize('exports.transactionHistoryCsv.time'))
 
     let csv = headerParts.join(',') + NEW_LINE
 
