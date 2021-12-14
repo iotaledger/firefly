@@ -755,6 +755,16 @@
             "subtitle": "You're about to stake",
             "body": "If you do not wish to participate in both airdrops, you may opt-out by deselecting below. Re-stake at any time to opt back in.",
             "estimatedAirdrop": "Estimated airdrop"
+        },
+        "shimmer-info": {
+            "title": "About Shimmer",
+            "body1": "If you do not wish to participate in both airdrops, you may opt-out by deselecting below. The incentivized staging network to advance major innovations from IOTA. Whatever happens, happens - the future of Shimmer will be up to you. Learn, build, earn and grow together.-stake at any time to opt back in.",
+            "body2": "The incentivized staging network to advance major innovations from IOTA. Whatever happens, happens - the future of Shimmer will be up to you. Learn, build, earn and grow together."
+        },
+        "assembly-info": {
+            "title": "About Assembly",
+            "body1": "If you do not wish to participate in both airdrops, you may opt-out by deselecting below. The incentivized staging network to advance major innovations from IOTA. Whatever happens, happens - the future of Shimmer will be up to you. Learn, build, earn and grow together.-stake at any time to opt back in.",
+            "body2": "The incentivized staging network to advance major innovations from IOTA. Whatever happens, happens - the future of Shimmer will be up to you. Learn, build, earn and grow together."
         }
     },
     "charts": {

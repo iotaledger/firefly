@@ -63,6 +63,14 @@
             lightmode: 'staking/staking-notice.svg',
             darkmode: 'staking/staking-notice.svg'
         },
+        'shimmer-info-bg': {
+            lightmode: 'staking/shimmer-info.jpg',
+            darkmode: 'staking/shimmer-info-bg.jpg'
+        },
+        'assembly-info-bg': {
+            lightmode: 'staking/assembly-info.jpg',
+            darkmode: 'staking/assembly-info-bg.jpg'
+        },
     }
 </script>
 
