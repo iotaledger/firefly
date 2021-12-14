@@ -286,28 +286,26 @@ export const isStakingPossible = (stakingEventState: ParticipationEventState): b
 
 type MinimumRewardInfo = [number, StakingAirdrop, number]
 
-const getMinRewardInfo = (): MinimumRewardInfo => {
-    const overview = get(participationOverview)
-    if (overview.length < 1) return [0, undefined, 0]
+const getMinRewardInfo = (account: WalletAccount): MinimumRewardInfo => {
+    const overview = get(participationOverview).find((apo) => apo.accountIndex === account.index)
+    if (!overview) return [0, undefined, 0]
 
     let smallestMinRewards: number = MAX_NUM_IOTAS
     let smallestMinAirdrop: StakingAirdrop = undefined
     let amountStaked: number = 0
-    overview.forEach((apo) => {
-        apo.participations.forEach((p) => {
-            const airdrop = getAirdropFromEventId(p.eventId)
+    overview.participations.forEach((p) => {
+        const airdrop = getAirdropFromEventId(p.eventId)
 
-            const rewards = apo[`${airdrop}Rewards`]
-            const rewardsBelowMinimum = apo[`${airdrop}RewardsBelowMinimum`]
+        const rewards = overview[`${airdrop}Rewards`]
+        const rewardsBelowMinimum = overview[`${airdrop}RewardsBelowMinimum`]
 
-            if (rewardsBelowMinimum > 0 && rewards <= 0) {
-                if (rewardsBelowMinimum < smallestMinRewards) {
-                    smallestMinRewards = rewardsBelowMinimum
-                    smallestMinAirdrop = airdrop
-                    amountStaked = apo[`${airdrop}StakedFunds`]
-                }
+        if (rewardsBelowMinimum > 0 && rewards <= 0) {
+            if (rewardsBelowMinimum < smallestMinRewards) {
+                smallestMinRewards = rewardsBelowMinimum
+                smallestMinAirdrop = airdrop
+                amountStaked = overview[`${airdrop}StakedFunds`]
             }
-        })
+        }
     })
 
     return [smallestMinRewards, smallestMinAirdrop, amountStaked]
@@ -352,12 +350,13 @@ const calculateTimeUntilMinimumReward = (rewards: number, airdrop: StakingAirdro
  *
  * @method calculateMinimumRewardTime
  *
+ * @param {WalletAccount} account
  * @param {boolean} format
  *
  * @returns {number | string}
  */
-export const getTimeUntilMinimumReward = (format: boolean = false): number | string => {
-    const [minRewards, minAirdrop, amountStaked] = getMinRewardInfo()
+export const getTimeUntilMinimumReward = (account: WalletAccount, format: boolean = false): number | string => {
+    const [minRewards, minAirdrop, amountStaked] = getMinRewardInfo(account)
     const remainingTime = calculateTimeUntilMinimumReward(minRewards, minAirdrop, amountStaked)
 
     return format ? getBestTimeDuration(remainingTime) : remainingTime

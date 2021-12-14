@@ -2,20 +2,8 @@
     import { tick } from 'svelte'
     import { Icon, Text, Tooltip } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
-    import {
-        participationEvents,
-        participationOverview,
-        stakedAccounts,
-        stakingEventState,
-    } from 'shared/lib/participation/stores'
+    import { stakedAccounts, stakingEventState } from 'shared/lib/participation/stores'
     import { ParticipationEventState } from 'shared/lib/participation/types'
-    import { getTimeUntilMinimumReward, isStakingPossible } from '../lib/participation'
-
-    let accountOverviewBelowMinimum
-    $: accountOverviewBelowMinimum = $participationOverview.find((apo) => apo.participations.length > 0 && (apo.assemblyRewardsBelowMinimum > 0 || apo.shimmerRewardsBelowMinimum > 0)) !== undefined
-
-    let isBelowMinimumStakingRewards
-    $: isBelowMinimumStakingRewards = accountOverviewBelowMinimum && isStakingPossible($stakingEventState) || $stakingEventState === ParticipationEventState.Ended
 
     let indicatorIcon
     $: indicatorIcon = getIndicatorIcon($stakingEventState, $stakedAccounts.length > 0)
@@ -74,7 +62,7 @@
                 stateText = 'commencing'
                 break
             case ParticipationEventState.Holding:
-                stateText = isStaked ? isBelowMinimumStakingRewards ? 'minRewards' : 'active' : 'inactive'
+                stateText = isStaked ? 'active' : 'inactive'
                 break
             case ParticipationEventState.Ended:
                 stateText = 'ended'
@@ -91,44 +79,34 @@
     const getLocalizedTooltipText = (
         state: ParticipationEventState,
         isStaked: boolean
-    ): { title: string; body: string, continue: string } => {
+    ): { title: string; body: string } => {
         const isHoldingPhase = $stakingEventState === ParticipationEventState.Holding
         const stateText: string = isHoldingPhase
             ? isStaked ? 'active' : 'inactive'
             : $stakingEventState
 
-        const localePath = isBelowMinimumStakingRewards ? 'minRewards' : `${stateText}${isHoldingPhase ? 'Holding' : ''}`
+        const localePath = `${stateText}${isHoldingPhase ? 'Holding' : ''}`
         return {
             title: localize(`tooltips.stakingIndicator.${localePath}.title`),
-            body: localize(
-                `tooltips.stakingIndicator.${localePath}.body`,
-                isBelowMinimumStakingRewards ? { values: { duration: getTimeUntilMinimumReward(true) } } : {}
-            ),
-            continue: isBelowMinimumStakingRewards && isStakingPossible($stakingEventState)
-                ? localize(`tooltips.stakingIndicator.${localePath}.continue`, { values: { duration: getTimeUntilMinimumReward(true) } })
-                : '',
+            body: localize(`tooltips.stakingIndicator.${localePath}.body`),
         }
     }
 </script>
 
 <div
-    class="px-3 py-2 flex flex-row space-x-2 items-center rounded-2xl {isBelowMinimumStakingRewards ? 'bg-yellow-200' : 'bg-blue-100'} dark:bg-gray-800"
+    class="px-3 py-2 flex flex-row space-x-2 items-center rounded-2xl bg-blue-100 dark:bg-gray-800"
     on:mouseenter={toggleTooltip}
     on:mouseleave={toggleTooltip}
 >
     <div bind:this={indicatorBox}>
-        {#if isBelowMinimumStakingRewards}
-            <Icon icon='exclamation' width="16" height="16" classes="text-gray-800 dark:text-white" />
-        {:else}
-            <Icon icon='info-filled' width="16" height="16" classes="text-gray-600" />
-        {/if}
+        <Icon icon='info-filled' width="16" height="16" classes="text-gray-600" />
     </div>
     <Text type="p">{indicatorText}</Text>
-    <Icon icon={indicatorIcon} width="24" height="24" classes="text-{isBelowMinimumStakingRewards ? 'yellow-700' : 'blue-500'}" />
+    <Icon icon={indicatorIcon} width="24" height="24" classes="text-blue-500" />
 </div>
 {#if showTooltip}
     <Tooltip {parentTop} {parentLeft} {parentWidth} position="bottom">
         <Text type="p" classes="text-gray-900 bold mb-1 text-left">{tooltipText?.title}</Text>
-        <Text type="p" secondary classes="text-left">{tooltipText?.body} {tooltipText?.continue}</Text>
+        <Text type="p" secondary classes="text-left">{tooltipText?.body}</Text>
     </Tooltip>
 {/if}

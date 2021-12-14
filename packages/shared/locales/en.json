@@ -1228,11 +1228,6 @@
             "ended": {
                 "title": "Events have ended",
                 "body": "Assembly and Shimmer tokens will be distributed to the staked wallets when their respective networks launch."
-            },
-            "minRewards": {
-                "title": "Minimum rewards not met",
-                "body": "Your funds have not been staked long enough to reach minimum airdrop rewards.",
-                "continue": "Please continue staking for {duration}."
             }
         },
         "partiallyStakedFunds": {
@@ -1240,6 +1235,12 @@
             "titleNoFunds": "New unstaked funds",
             "preBody": "You have received new funds on a staked wallet.",
             "body": "For these new funds to be staked, you will need to merge them in the manage stake panel."
+        },
+        "stakingMinRewards": {
+            "title": "Minimum rewards not met",
+            "body": "Your funds have not been staked long enough to reach minimum airdrop rewards.",
+            "bodyNoTime": "You do not have enough IOTA staked to reach minimum airdrop rewards.",
+            "continue": "Please continue staking for {duration}."
         }
     }
 }

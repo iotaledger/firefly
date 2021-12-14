@@ -1,12 +1,24 @@
 <script lang="typescript">
     import { Icon, Text, Tooltip } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
-    import { formatStakingAirdropReward, getUnstakedFunds, isStakingPossible } from 'shared/lib/participation'
-    import { partiallyStakedAccounts, stakedAccounts, stakingEventState } from 'shared/lib/participation/stores'
-    import { StakingAirdrop } from 'shared/lib/participation/types'
+    import {
+        formatStakingAirdropReward,
+        getTimeUntilMinimumReward,
+        getUnstakedFunds,
+        isStakingPossible,
+    } from 'shared/lib/participation'
+    import {
+        assemblyStakingRemainingTime,
+        partiallyStakedAccounts,
+        participationOverview, shimmerStakingRemainingTime,
+        stakedAccounts,
+        stakingEventState,
+    } from 'shared/lib/participation/stores'
+    import { ParticipationEventState, ParticipationOverview, StakingAirdrop } from 'shared/lib/participation/types'
     import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { tick } from 'svelte'
+    import { getBestTimeDuration } from '../lib/time'
     export let name = ''
     export let balance = ''
     export let balanceEquiv = ''
@@ -32,16 +44,25 @@
     let isStaked = false
     $: isStaked = _hasAccount($stakedAccounts) && isStakingPossible($stakingEventState)
 
-    let showPartialStakeTooltip = false
+    let isBelowMinimumStakingRewards
+    $: {
+        const account = _getAccount($stakedAccounts)
+        if (account) {
+            const accountOverview = $participationOverview.find((apo) => apo.accountIndex === account.index)
+            isBelowMinimumStakingRewards = accountOverview.assemblyRewardsBelowMinimum > 0 || accountOverview.shimmerRewardsBelowMinimum > 0
+        }
+    }
+
+    let showTooltip = false
     let iconBox
     let parentWidth = 0
     let parentLeft = 0
     let parentTop = 0
 
-    $: iconBox, showPartialStakeTooltip, void refreshIconBox()
+    $: iconBox, showTooltip, void refreshIconBox()
 
     const refreshIconBox = async (): Promise<void> => {
-        if (!iconBox || !showPartialStakeTooltip) return
+        if (!iconBox || !showTooltip) return
 
         await tick()
 
@@ -56,8 +77,8 @@
         parentTop = top * 1.15
     }
 
-    const togglePartialStakeTooltip = (): void => {
-        showPartialStakeTooltip = !showPartialStakeTooltip
+    const toggleTooltip = (): void => {
+        showTooltip = !showTooltip
     }
 
     const getName = (): string => {
@@ -74,6 +95,33 @@
             }
         } else {
             return ''
+        }
+    }
+
+    let tooltipText
+    $: tooltipText = getLocalizedTooltipText($participationOverview)
+
+    const getLocalizedTooltipText = (
+        overview: ParticipationOverview
+    ): { title: string, body: string } => {
+        if (isPartiallyStaked) {
+            return {
+                title: localize(`tooltips.partiallyStakedFunds.title${$partiallyStakedAccounts.length > 0 ? '' : 'NoFunds'}`, $partiallyStakedAccounts.length > 0 ? { values: { amount: formatUnitBestMatch(getUnstakedFunds(_getAccount($partiallyStakedAccounts))) } } : {}),
+                body: localize('tooltips.partiallyStakedFunds.body'),
+            }
+        } else if (isBelowMinimumStakingRewards) {
+            const timeNeeded = <number>getTimeUntilMinimumReward(_getAccount($stakedAccounts))
+            if (timeNeeded > $assemblyStakingRemainingTime || timeNeeded > $shimmerStakingRemainingTime) {
+                return {
+                    title: localize('tooltips.stakingMinRewards.title'),
+                    body: localize('tooltips.stakingMinRewards.bodyNoFunds'),
+                }
+            } else {
+                return {
+                    title: localize('tooltips.stakingMinRewards.title'),
+                    body: `${localize('tooltips.stakingMinRewards.body')} ${localize('tooltips.stakingMinRewards.continue', { values: { duration: getBestTimeDuration(timeNeeded) } })}`,
+                }
+            }
         }
     }
 
@@ -106,8 +154,8 @@
             {#if isPartiallyStaked}
                 <div
                     bind:this={iconBox}
-                    on:mouseenter={togglePartialStakeTooltip}
-                    on:mouseleave={togglePartialStakeTooltip}>
+                    on:mouseenter={toggleTooltip}
+                    on:mouseleave={toggleTooltip}>
                     <Icon icon="exclamation" width="16" height="16" classes="mt-0.5 fill-current text-gray-800" />
                 </div>
             {:else if isStaked}
@@ -155,11 +203,9 @@
         </Text>
     </div>
 </button>
-{#if showPartialStakeTooltip}
+{#if showTooltip}
     <Tooltip {parentTop} {parentLeft} {parentWidth} position="right">
-        <Text type="p" classes="text-gray-900 bold mb-1 text-left">
-            {localize(`tooltips.partiallyStakedFunds.title${$partiallyStakedAccounts.length > 0 ? '' : 'NoFunds'}`, $partiallyStakedAccounts.length > 0 ? { values: { amount: formatUnitBestMatch(getUnstakedFunds(_getAccount($partiallyStakedAccounts))) } } : {})}
-        </Text>
-        <Text type="p" secondary classes="text-left">{localize('tooltips.partiallyStakedFunds.body')}</Text>
+        <Text type="p" classes="text-gray-900 bold mb-1 text-left">{tooltipText?.title}</Text>
+        <Text type="p" secondary classes="text-left">{tooltipText?.body}</Text>
     </Tooltip>
 {/if}
