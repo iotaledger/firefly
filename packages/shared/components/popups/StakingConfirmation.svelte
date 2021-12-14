@@ -109,7 +109,7 @@
     {#each Object.keys(StakingAirdrop).map((sa) => sa.toLowerCase()) as airdrop}
         <div
             on:click={(activeAirdrops.length > 0 && activeAirdrops.includes(airdrop)) ? () => {} : () => toggleAirdropSelection(airdrop)}
-            class="p-4 w-1/2 flex flex-col items-center text-center border border-1 border-solid rounded-2xl {activeAirdrops?.length && !activeAirdrops?.includes(airdrop) ? 'cursor-default' : 'cursor-pointer hover:bg-blue-50 hover:border-blue-500 focus:border-blue-500 focus:bg-blue-50 dark:hover:bg-gray-800'} {!airdropSelections[airdrop] || (activeAirdrops.length > 0 && activeAirdrops.includes(airdrop)) ? 'opacity-50 border-gray-300' : 'border-blue-500'}"
+            class="p-4 w-1/2 flex flex-col items-center text-center border border-1 border-solid rounded-2xl {activeAirdrops?.length && activeAirdrops?.includes(airdrop) ? 'cursor-default' : 'cursor-pointer hover:bg-blue-50 hover:border-blue-500 focus:border-blue-500 focus:bg-blue-50 dark:hover:bg-gray-800'} {!airdropSelections[airdrop] || (activeAirdrops.length > 0 && activeAirdrops.includes(airdrop)) ? 'opacity-50 border-gray-300' : 'border-blue-500'}"
         >
             <div class="mb-2 flex flex-row justify-center">
                 <Text type="p" bigger classes="font-extrabold">{capitalize(airdrop)}&nbsp;</Text>
