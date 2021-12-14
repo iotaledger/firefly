@@ -305,4 +305,4 @@ export const isStakingForAssembly = (participations: Participation[]): boolean =
  * @returns {boolean}
  */
 export const isStakingPossible = (stakingEventState: ParticipationEventState): boolean =>
-    stakingEventState !== ParticipationEventState.Ended && stakingEventState !== ParticipationEventState.Inactive
+    stakingEventState === ParticipationEventState.Commencing || stakingEventState === ParticipationEventState.Holding
