@@ -1,7 +1,4 @@
 <script lang="typescript">
-    import { getContext, onDestroy, onMount } from 'svelte'
-    import { get } from 'svelte/store'
-    import type { Readable } from 'svelte/store'
     import { Unit } from '@iota/unit-converter'
     import { Address, Amount, Button, Dropdown, Icon, ProgressBar, Text } from 'shared/components'
     import { clearSendParams, sendParams } from 'shared/lib/app'
@@ -13,6 +10,17 @@
         isFiatCurrency,
         parseCurrency,
     } from 'shared/lib/currency'
+    import {
+        displayNotificationForLedgerProfile,
+        ledgerDeviceState,
+        promptUserToConnectLedger,
+    } from 'shared/lib/ledger'
+    import { displayNotifications, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
+    import { isAccountStaked, isStakingPossible } from 'shared/lib/participation'
+    import { stakingEventState } from 'shared/lib/participation/stores'
+    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
+    import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
+    import { accountRoute, walletRoute } from 'shared/lib/router'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
     import {
         GeneratingRemainderDepositAddressEvent,
@@ -22,24 +30,17 @@
         TransferProgressEventType,
         TransferState,
     } from 'shared/lib/typings/events'
-    import { Locale } from 'shared/lib/typings/i18n'
-    import {
-        displayNotificationForLedgerProfile,
-        ledgerDeviceState,
-        promptUserToConnectLedger,
-    } from 'shared/lib/ledger'
+    import type { Locale } from 'shared/lib/typings/i18n'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
-    import { displayNotifications, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import type { NotificationType } from 'shared/lib/typings/notification'
-    import { isAccountStaked } from 'shared/lib/participation'
-    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-    import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
-    import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
     import { DUST_THRESHOLD, isTransferring, transferState, wallet } from 'shared/lib/wallet'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { getContext, onDestroy, onMount } from 'svelte'
+    import type { Readable } from 'svelte/store'
+    import { get } from 'svelte/store'
 
     export let locale: Locale
 
@@ -121,9 +122,7 @@
     let accountsDropdownItems
     let from
     $: {
-        accountsDropdownItems =
-            $liveAccounts
-                .map((acc) => format(acc))
+        accountsDropdownItems = $liveAccounts.map((acc) => format(acc))
 
         if (from) {
             from = accountsDropdownItems.find((a) => a.id === from.id)
@@ -393,7 +392,7 @@
             openPopup({
                 type: 'transaction',
                 props: {
-                    isSendingFromParticpatingAccount: isAccountStaked(from.id),
+                    isSendingFromParticpatingAccount: isAccountStaked(from.id) && !isStakingPossible(get(stakingEventState)),
                     internal: internal || accountAlias,
                     amount: amountRaw,
                     unit,

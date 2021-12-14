@@ -10,7 +10,7 @@
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { wallet } from 'shared/lib/wallet'
 
-    import { canAccountParticipate } from 'shared/lib/participation'
+    import { canAccountParticipate, isStakingPossible } from 'shared/lib/participation'
     import {
         accountToParticipate,
         partiallyStakedAccounts,
@@ -30,7 +30,7 @@
     $: showSpinner = !$popupState.active && $participationAction && $accountToParticipate
 
     let canParticipateInEvent
-    $: canParticipateInEvent = $stakingEventState !== ParticipationEventState.Ended && $stakingEventState !== ParticipationEventState.Inactive
+    $: canParticipateInEvent = isStakingPossible($stakingEventState)
 
     let canStakeAnAccount
     $: canStakeAnAccount = get($wallet.accounts).filter((wa) => canAccountParticipate(wa)).length > 0
