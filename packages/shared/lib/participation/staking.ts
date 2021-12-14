@@ -356,6 +356,8 @@ const calculateTimeUntilMinimumReward = (rewards: number, airdrop: StakingAirdro
  * @returns {number | string}
  */
 export const getTimeUntilMinimumReward = (account: WalletAccount, format: boolean = false): number | string => {
+    if (!account) return format ? getBestTimeDuration(0) : 0
+
     const [minRewards, minAirdrop, amountStaked] = getMinRewardInfo(account)
     const remainingTime = calculateTimeUntilMinimumReward(minRewards, minAirdrop, amountStaked)
 

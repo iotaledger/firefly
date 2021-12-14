@@ -14,11 +14,12 @@
         stakedAccounts,
         stakingEventState,
     } from 'shared/lib/participation/stores'
-    import { ParticipationEventState, ParticipationOverview, StakingAirdrop } from 'shared/lib/participation/types'
+    import { ParticipationOverview, StakingAirdrop } from 'shared/lib/participation/types'
     import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { tick } from 'svelte'
-    import { getBestTimeDuration } from '../lib/time'
+    import { getBestTimeDuration } from 'shared/lib/time'
+
     export let name = ''
     export let balance = ''
     export let balanceEquiv = ''
@@ -48,10 +49,12 @@
     $: {
         const account = _getAccount($stakedAccounts)
         if (account) {
-            const accountOverview = $participationOverview.find((apo) => apo.accountIndex === account.index)
-            isBelowMinimumStakingRewards = accountOverview.assemblyRewardsBelowMinimum > 0 || accountOverview.shimmerRewardsBelowMinimum > 0
+            const accountOverview = $participationOverview.find((apo) => apo.accountIndex === account?.index)
+            isBelowMinimumStakingRewards = accountOverview?.assemblyRewardsBelowMinimum > 0 || accountOverview?.shimmerRewardsBelowMinimum > 0
         }
     }
+
+    $: showWarningState = isPartiallyStaked || isBelowMinimumStakingRewards
 
     let showTooltip = false
     let iconBox
@@ -147,11 +150,11 @@
 
 <button
     on:click={handleTileClick}
-    class="size-{size} group rounded-xl {isPartiallyStaked ? 'bg-yellow-100 hover:bg-yellow-400' : `border-gray-100 dark:border-gray-900 hover:bg-${color}-500 ${isStaked ? `border border-1 border-solid border-gray-200 dark:border-gray-900 hover:border-${color}-500` : 'bg-gray-100 dark:bg-gray-900'}`} font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'} {hidden ? 'opacity-50' : ''}"
+    class="size-{size} group rounded-xl {showWarningState ? 'bg-yellow-100 hover:bg-yellow-400' : `border-gray-100 dark:border-gray-900 hover:bg-${color}-500 ${isStaked ? `border border-1 border-solid border-gray-200 dark:border-gray-900 hover:border-${color}-500` : 'bg-gray-100 dark:bg-gray-900'}`} font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'} {hidden ? 'opacity-50' : ''}"
     {disabled}>
     <div class="mb-2 w-full flex flex-row justify-between items-start space-x-1.5">
         <div class="flex flex-row space-x-1.5 items-start">
-            {#if isPartiallyStaked}
+            {#if showWarningState}
                 <div
                     bind:this={iconBox}
                     on:mouseenter={toggleTooltip}
@@ -169,7 +172,7 @@
                 bold
                 smaller={size === 's'}
                 overrideColor
-                classes="inline text-gray-800 {isPartiallyStaked ? '' : 'dark:text-white group-hover:text-white'} overflow-hidden overflow-ellipsis">
+                classes="inline text-gray-800 {showWarningState ? '' : 'dark:text-white group-hover:text-white'} overflow-hidden overflow-ellipsis">
                 {getName()}
             </Text>
         </div>
@@ -192,13 +195,13 @@
         <Text
             smaller
             overrideColor
-            classes="block text-gray-800 {isPartiallyStaked ? '' : 'dark:text-white group-hover:text-white'}">
+            classes="block text-gray-800 {showWarningState ? '' : 'dark:text-white group-hover:text-white'}">
             {#if airdrop}{formatStakingAirdropReward(airdrop, Number(balance), 6)}{:else}{balance}{/if}
         </Text>
         <Text
             smaller
             overrideColor
-            classes="block text-blue-500 dark:text-gray-600 {isPartiallyStaked ? '' : 'group-hover:text-white'}">
+            classes="block text-blue-500 dark:text-gray-600 {showWarningState ? '' : 'group-hover:text-white'}">
             {balanceEquiv}
         </Text>
     </div>
