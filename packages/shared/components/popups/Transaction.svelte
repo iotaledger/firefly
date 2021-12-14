@@ -1,20 +1,14 @@
 <script lang="typescript">
     import { Unit } from '@iota/unit-converter'
+    import { isStakingPossible } from 'shared/lib/participation'
     import { Button, Icon, Illustration, Text } from 'shared/components'
-    import {
-        convertToFiat,
-        currencies,
-        exchangeRates,
-        formatCurrency,
-        isFiatCurrency,
-    } from 'shared/lib/currency'
+    import { convertToFiat, currencies, exchangeRates, formatCurrency, isFiatCurrency } from 'shared/lib/currency'
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile } from 'shared/lib/profile'
-    import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
-    import { Locale } from 'shared/lib/typings/i18n'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
+    import type { Locale } from 'shared/lib/typings/i18n'
+    import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
     import { stakingEventState } from '../../lib/participation/stores'
-    import { ParticipationEventState } from '../../lib/participation/types'
 
     export let locale: Locale
 
@@ -33,16 +27,16 @@
         const currency = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
 
         const iotaAmount = isFiat ? formatUnitBestMatch(amount) : formatUnitPrecision(amount, unit)
-        const fiatAmount = formatCurrency(convertToFiat(amount, $currencies[CurrencyTypes.USD], $exchangeRates[currency]), currency)
+        const fiatAmount = formatCurrency(
+            convertToFiat(amount, $currencies[CurrencyTypes.USD], $exchangeRates[currency]),
+            currency
+        )
 
         return isFiat ? `${fiatAmount} (${iotaAmount})` : `${iotaAmount} (${fiatAmount})`
     }
 
-    let canParticipateInEvent
-    $: canParticipateInEvent = $stakingEventState !== ParticipationEventState.Ended && $stakingEventState !== ParticipationEventState.Inactive
-
     let mustAcknowledgeParticipationWarning
-    $: mustAcknowledgeParticipationWarning = isSendingFromParticpatingAccount && canParticipateInEvent
+    $: mustAcknowledgeParticipationWarning = isSendingFromParticpatingAccount && isStakingPossible($stakingEventState)
 
     function handleNextClick() {
         /**
@@ -94,13 +88,9 @@
     <div class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" secondary onClick={() => handleCancelClick()}>{locale('actions.cancel')}</Button>
         {#if mustAcknowledgeParticipationWarning}
-            <Button classes="w-full" onClick={handleNextClick}>
-                {locale('actions.next')}
-            </Button>
+            <Button classes="w-full" onClick={handleNextClick}>{locale('actions.next')}</Button>
         {:else}
-            <Button classes="w-full" onClick={onConfirm}>
-                {locale('actions.confirm')}
-            </Button>
+            <Button classes="w-full" onClick={onConfirm}>{locale('actions.confirm')}</Button>
         {/if}
     </div>
 </div>
