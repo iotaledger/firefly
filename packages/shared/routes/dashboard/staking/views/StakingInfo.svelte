@@ -16,7 +16,7 @@
         Electron.openUrl('https://firefly.iota.org')
     }
 
-    const getAnimation = (state: ParticipationEventState, overview: ParticipationOverview): string => {
+    const updateAnimation = (state: ParticipationEventState, overview: ParticipationOverview): string => {
         const prefix = 'staking-info'
         if (!state || !overview) return `${prefix}-upcoming`
 
@@ -43,6 +43,9 @@
             return `${prefix}-${state}`
         }
     }
+
+    let animation = 'staking-info-holding-0'
+    $: animation = updateAnimation($stakingEventState, $participationOverview)
 
     let localePath
     $: localePath = `views.staking.info.${$stakingEventState}`
@@ -87,7 +90,7 @@
 
 <div
     class="p-8 flex flex-col justify-center items-center w-full h-full bg-blue-100 dark:bg-gray-800">
-    <Animation animation={getAnimation($stakingEventState, $participationOverview)} />
+    <Animation animation={animation} />
     <div class="w-full mt-4 flex flex-col items-center text-center">
         <Text type="p" bigger classes="mb-1">{subHeader}</Text>
         <Text type="h2" classes="mb-2">{header}</Text>
