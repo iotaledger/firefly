@@ -15,16 +15,16 @@
         },
         "profile": {
             "title": "建立個人設定檔",
-            "profileName": "Profile name",
+            "profileName": "設定檔名稱",
             "body1": "您可以創建多個使用者設定檔來整理您的錢包並加強隱私。",
             "body2": {
-                "first": "現在，讓我們從您的第一個個人設定檔的名稱開始",
-                "nonFirst": "現在，讓我們從您的個人設定檔的名稱開始"
+                "first": "現在，讓我們從您的第一個設定檔名稱開始。",
+                "nonFirst": "現在，讓我們從您的設定檔名稱開始。"
             },
             "addMore": "您可以在之後添加更多的設定檔",
             "developer": {
-                "label": "Developer profile",
-                "info": "Connect to public and private IOTA networks"
+                "label": "開發者設定檔",
+                "info": "連線到公共和私人的 IOTA 網路"
             }
         },
         "setup": {
@@ -35,7 +35,7 @@
         },
         "secure": {
             "title": "保護你的錢包",
-            "body1": "儲存並列印助記套件 PDF 範本。",
+            "body1": "存檔並列印 Recovery Kit PDF 範本。",
             "body2": "如果您有填好並妥善保存助記套件，你就隨時都能夠恢復您的錢包。"
         },
         "create": {
@@ -56,7 +56,7 @@
             "progress3": "切換 Ledger app",
             "progress4": "轉帳",
             "watchVideo": "觀看影音導覽",
-            "videoGuide": "Ledger 遷移視頻指南"
+            "videoGuide": "Ledger 遷移影片教學"
         },
         "ledgerInstallationGuide": {
             "title": "你是否已安裝必須的 Ledger apps？",
@@ -86,16 +86,16 @@
         },
         "backup": {
             "title": "備份您的錢包",
-            "body1": "您現在會看到一組還原助記詞。請把它寫到您的 Recovery Kit 裡。",
+            "body1": "您現在會看到一組助記詞。請把它寫到您的 Recovery Kit 裡。",
             "body2": "不要與任何人分享您的助記詞。它可用於從任何地方存提您的代幣。",
-            "body3": "一旦助記詞遺失，您的資金也可能遺失。"
+            "body3": "一旦遺失了助記詞，您的資金也可能隨之遺失。"
         },
         "recoveryPhrase": {
-            "title": "還原助記詞",
+            "title": "助記詞",
             "body1": "在 Recovery Kit 中，按照顯示的確切順序寫下單字。",
             "body2": "將此內容保密並安全地存儲。",
             "body3": "進行書面備份很重要。電腦往往會故障，文件亦可能會損壞。",
-            "revealRecoveryPhrase": "顯示助記詞",
+            "revealRecoveryPhrase": "揭示助記詞",
             "hideRecoveryPhrase": "隱藏助記詞"
         },
         "verifyRecoveryPhrase": {
@@ -109,9 +109,9 @@
             "title": "備份至一個 Stronghold 檔案",
             "body1": "輸入密碼以將您的錢包備份至 Stronghold 檔案。您的密碼將用於加密此備份檔案。",
             "body2": "數位備份之所以重要的原因：",
-            "reason1": "無需輸入助記詞即可輕鬆還原錢包",
+            "reason1": "無需輸入助記詞即可輕鬆恢復錢包",
             "reason2": "將您的錢包導入其他設備",
-            "reason3": "還原您的完整交易記錄"
+            "reason3": "恢復您的完整交易記錄"
         },
         "recoveryPhraseSaved": {
             "title": "備份成功",
@@ -122,8 +122,8 @@
             "fundsMigrated": "資金遷移完成",
             "body": "您的新錢包可以使用了。",
             "softwareMigratedBody": "您已成功將資金遷移到新網路",
-            "fireflyLedgerBody": "您的 Ledger 帳號已成功還原，現在可以繼續使用。",
-            "trinityLedgerBody": "您已經成功地從Ledger 遷移到新網路.",
+            "fireflyLedgerBody": "您的 Ledgar 帳號已成功復原，現在可繼續使用。",
+            "trinityLedgerBody": "您已經成功把 Ledger 遷移到新網路。",
             "exportMigration": "導出遷移紀錄檔並結束設定"
         },
         "import": {
@@ -234,9 +234,9 @@
             "signingBundle": "交易組簽發中",
             "broadcastingBundle": "交易組廣播中",
             "miningBundle": "交易組挖掘中",
-            "problemRestoringWallet": "還原您的錢包時出現網絡錯誤。 請再試一次。",
+            "problemRestoringWallet": "還原您的錢包時出現網路錯誤。 請再試一次。",
             "minimumMigrationAmountSpentAddresses": "每個「已支出地址」的最小遷移數量是 1Mi。如果您的餘額看起來不對，請再次檢查。",
-            "tooManyAddressesToMigrate": "您有太多小額地址需要遷移. 請再次檢查您的餘額是否正確",
+            "tooManyAddressesToMigrate": "您有太多小額地址需要遷移。若您的餘額看起來不對，請再次檢查。",
             "cannotMigrateAllYourFunds": "我們無法遷移您所有的資金，因為有些地址的金額太低。您仍舊可以進行遷移，但是 {value} 將會遺失。",
             "error": "遷移您的資金時發生錯誤，請重試。"
         },
@@ -312,7 +312,7 @@
             "theme": {
                 "title": "佈景主題",
                 "description": "",
-                "advice": "Restart the Firefly application for changes to the system theme to take effect"
+                "advice": "重新啟動 Firefly，使系統佈景主題的變更生效。"
             },
             "language": {
                 "title": "語言",
@@ -328,10 +328,10 @@
             },
             "networkStatus": {
                 "title": "網路狀態",
-                "description": "Displays the status of the node you are currently connected to"
+                "description": "顯示您目前所連接的節點狀態"
             },
             "exportStronghold": {
-                "title": "Export backup",
+                "title": "匯出備份",
                 "description": "匯出到Stronghold檔案 - 完整加密備份您的錢包與最新交易紀錄。"
             },
             "appLock": {
@@ -365,39 +365,39 @@
                 "description": "刪除您全部的設定檔、錢包和交易記錄。請確認您已經備份。"
             },
             "deepLinks": {
-                "title": "IOTA links",
+                "title": "IOTA 連結",
                 "description": "點擊 IOTA 連結以自動填入交易資料。"
             },
             "networkConfiguration": {
-                "title": "Network config",
-                "title2": "Network configuration",
+                "title": "網路設定",
+                "title2": "網路設定",
                 "description": {
-                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
-                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                    "dev": "你的網絡會根據目前節點的設定自動更新(切換網絡將會重置錢包的狀態)",
+                    "nonDev": "你的網絡設定會根據目前節點的設定自動更新"
                 },
-                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
-                "resetWallet": "Your wallet state has been reset.",
-                "connectedTo": "Connected to",
+                "switchedNetworks": "網絡成功切換至 \"{networkName}\"",
+                "resetWallet": "您的錢包狀態已重置。",
+                "connectedTo": "已連接至",
                 "nodeConfiguration": {
                     "title": "選取節點",
-                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
+                    "description": "選擇\"手動\"方式變更節點設定並連接上你的節點",
                     "automatic": "自動",
-                    "manual": "Manual"
+                    "manual": "手動設定"
                 }
             },
             "configureNodeList": {
-                "title": "Node configuration",
-                "description": "Manage the list of nodes you connect to",
+                "title": "節點設定",
+                "description": "管理你連接的節點列表",
                 "primaryNode": "主節點",
                 "excludeNode": "排除節點",
                 "includeNode": "加入節點",
-                "editDetails": "Edit details",
-                "viewInfo": "View info",
+                "editDetails": "編輯(節點)資料",
+                "viewInfo": "檢視(節點)資訊",
                 "setAsPrimary": "設為主要節點",
                 "removeNode": "移除節點",
                 "includeOfficialNodeList": "加入官方節點列表",
-                "noNodes": "There are no nodes, unable to connect to the network",
-                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
+                "noNodes": "目前找不到結點，無法連上網絡",
+                "noNodesAuto": "找不到節點，將改採自動選擇方式"
             },
             "proofOfWork": {
                 "title": "工作證明",
@@ -412,12 +412,12 @@
                 "description": "查看系統和應用程序訊息"
             },
             "migrateLedgerIndex": {
-                "title": "Migrate Ledger index",
+                "title": "轉換帳本index",
                 "description": "遷移另一個 Trinity 帳戶索引"
             },
             "transactionHistory": {
-                "title": "Transaction history",
-                "description": "Export the transaction history of your accounts as .csv files"
+                "title": "交易紀錄",
+                "description": "將你的帳號交易記錄匯出為.csv檔案"
             },
             "troubleshoot": {
                 "title": "疑難排解",
@@ -538,7 +538,9 @@
         },
         "addressHistory": {
             "title": "{name} 地址記錄",
-            "currentBalance": "目前餘額: {balance}"
+            "currentBalance": "餘額：{balance}",
+            "internal": "內部地址",
+            "external": "入金地址"
         },
         "node": {
             "titleAdd": "增加節點",
@@ -547,13 +549,13 @@
             "titleRemoveAll": "移除所有節點",
             "titleDetails": "節點詳細資訊",
             "titleInfo": "節點資訊",
-            "addingNode": "增加節點",
-            "updatingNode": "更新節點",
-            "loadingNodeInfo": "Loading node info",
+            "addingNode": "增加節點中...",
+            "updatingNode": "更新節點中...",
+            "loadingNodeInfo": "節點資訊讀取中...",
             "nodeAddress": "節點地址",
             "optionalUsername": "使用者名稱 (選填)",
             "optionalPassword": "密碼 (選填)",
-            "optionalJwt": "JSON web token (optional)",
+            "optionalJwt": "JSON web token (選填)",
             "setAsPrimaryNode": "設定為主要節點",
             "removeConfirmation": "您確定要刪除此節點嗎？",
             "removeAllConfirmation": "您確定要刪除所有節點?",
@@ -562,9 +564,9 @@
                 "software": "軟體",
                 "networkId": "網路ID",
                 "bech32HRP": "Bech32 HRP",
-                "features": "Features",
-                "confirmedMilestoneIndex": "Confirmed milestone index",
-                "pruningIndex": "Pruning index",
+                "features": "功能",
+                "confirmedMilestoneIndex": "已確認的里程碑指標",
+                "pruningIndex": "修剪指標",
                 "messagesPerSecond": "每秒訊息量",
                 "referencedRate": "參照率"
             }
@@ -572,8 +574,8 @@
         "switchNetwork": {
             "title": "切換網路",
             "newNetwork": "新的網路",
-            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
-            "switchingNetwork": "切換網路",
+            "resetWarning": "變更網路會登出並重置所有帳戶、餘額和此設定檔的交易記錄。",
+            "switchingNetwork": "切換網路中...",
             "typePassword": "輸入密碼以切換到："
         },
         "errorLog": {
@@ -664,26 +666,26 @@
         },
         "ledgerAddress": {
             "title": "確認接收地址",
-            "body": "確認您的Ledger顯示的接收地址和下方顯示的地址相同。若相同，請依提示於Ledger按下按鈕。"
+            "body": "請確認在您Ledger上顯示的接收地址和下方顯示的相同。若相同，請依提示把Ledger上的兩個按鈕一起按下。"
         },
         "ledgerMigrateIndex": {
             "title": "您是否需要遷移另一個 Trinity 帳戶索引？",
             "body": "您也可以稍後在「進階設定」中進行遷移。"
         },
         "exportTransactionHistory": {
-            "title": "Export transaction history",
-            "body": "Export your transaction history for all accounts consecutively within this profile. Exports will be in a CSV format.",
-            "profileName": "Profile name:",
-            "numberOfAccounts": "Number of accounts:",
-            "typePassword": "Type your password to allow exporting"
+            "title": "匯出交易記錄",
+            "body": "將此設定檔內所有帳戶的交易記錄連續匯出。匯出格式為CSV。",
+            "profileName": "設定檔名稱:",
+            "numberOfAccounts": "帳戶數量：",
+            "typePassword": "輸入您的密碼以允許匯出"
         }
     },
     "charts": {
-        "incomingMi": "傳入 {value}",
+        "incomingMi": "收入 {value}",
         "outgoingMi": "支出 {value}",
         "portoflio": "總資產",
         "token": "代幣",
-        "holdings": "Holdings",
+        "holdings": "持有狀況",
         "accountValue": "錢包總值",
         "accountActivity": "錢包活動",
         "timeframe1Hour": "一小時",
@@ -715,34 +717,34 @@
         "saveBackupFile": "儲存備份檔案",
         "iveWrittenRecoveryPhrase": "我已寫下助記詞了",
         "verifyRecoveryPhrase": "驗證助記詞",
-        "revealRecoveryPhrase": "檢視助記詞",
+        "revealRecoveryPhrase": "顯示助記詞",
         "importSeedvault": "匯入 SeedVault",
         "checkAgain": "請再次檢查",
         "importFromFile": "從檔案匯入",
-        "send": "傳送",
+        "send": "發送",
         "receive": "收款",
         "create": "建立",
         "beginTransfer": "開始交易",
         "tryAgain": "重新嘗試",
         "visitDiscord": "探訪 Discord",
-        "dragDrop": "拖拽並釋放",
+        "dragDrop": "拖曳並釋放",
         "importExtentions": ".kdbx 或 .stronghold 文件",
         "chooseFile": "選擇一個檔案",
         "dropHere": "將檔案拖至此處",
         "syncAll": "同步全部",
         "export": "匯出",
-        "exporting": "Exporting",
+        "exporting": "正在匯出",
         "exportNewStronghold": "輸出一個新的 Stronghold",
-        "enableDeepLinks": "Enable IOTA links",
+        "enableDeepLinks": "啟用 IOTA 連結",
         "enableDeveloperMode": "開啟開發者模式",
         "enableSystemNotifications": "啟用系統通知",
-        "exportTransactionHistory": "Export transaction history",
+        "exportTransactionHistory": "匯出交易記錄",
         "localProofOfWork": "本地工作量證明",
         "unlock": "解鎖",
         "updateFirefly": "更新 Firefly",
         "restartNow": "立即重新啟動",
         "saveBackup": "保存 Stronghold 備份",
-        "customizeAcount": "自定義錢包",
+        "customizeAcount": "自訂錢包",
         "viewAddressHistory": "檢視地址歷史紀錄",
         "hideAccount": "隱藏錢包",
         "showAccount": "取消隱藏錢包",
@@ -788,7 +790,8 @@
         "searching": "搜尋中...",
         "closeFirefly": "關閉 Firefly",
         "generateAddress": "產生新地址",
-        "migrateAgain": "遷移另一個索引"
+        "migrateAgain": "遷移另一個索引",
+        "done": "完成"
     },
     "general": {
         "password": "密碼",
@@ -831,9 +834,9 @@
         "stronghold": "Stronghold",
         "language": "語言",
         "appearance": "界面外觀",
-        "lightTheme": "Light",
-        "darkTheme": "Dark",
-        "systemTheme": "System",
+        "lightTheme": "亮色",
+        "darkTheme": "深色",
+        "systemTheme": "系統",
         "balance": "餘額",
         "accountBalance": "錢包餘額",
         "incoming": "傳入",
@@ -849,8 +852,8 @@
         "latestTransactions": "最新交易",
         "transactions": "交易紀錄",
         "security": "安全性",
-        "accountAddress": "錢包位置",
-        "network": "Network",
+        "accountAddress": "錢包位址",
+        "network": "網路",
         "nodes": "節點",
         "wallet": "錢包",
         "help": "幫助",
@@ -900,17 +903,17 @@
         "creatingProfile": "正在創建設定檔，請稍候...",
         "fundMigration": "資金遷移",
         "accountRemoved": "此錢包是隱藏的。 取消隱藏即可執行傳送。",
-        "receivingTo": "接收中 {account}",
-        "sendingFrom": "從 {account} 轉帳",
+        "receivingTo": "接收到 {account}",
+        "sendingFrom": "從 {account} 發送中",
         "receivedTo": "已收到 {account}",
-        "sentFrom": "轉帳自 {account}",
+        "sentFrom": "發送自 {account}",
         "receiving": "收款中",
-        "sending": "轉帳中",
-        "legacyNetwork": "舊版網絡",
+        "sending": "正在發送",
+        "legacyNetwork": "舊版網路",
         "capsLock": "大寫鎖定已啟用",
         "version": "版本 {version}",
-        "unknown": "Unknown",
-        "none": "None"
+        "unknown": "不明",
+        "none": "無"
     },
     "dates": {
         "today": "今天",
@@ -922,68 +925,71 @@
     },
     "notifications": {
         "valueTx": "從 {{account}} 收到 {{value}}",
-        "confirmed": "{{account}} 轉出的 {{value}} 已被確認",
+        "confirmed": "從 {{account}} 轉出的 {{value}} 已被確認",
         "confirmedInternal": "{{value}} 從 {{senderAccount}} 到 {{receiverAccount}} 已確認",
         "confirmedInternalNoAccounts": "{{value}} 內部傳送已確認",
-        "failed": "{{account}} 轉出的 {{value}} 發生錯誤",
+        "failed": "從 {{account}} 轉出的 {{value}} 發生錯誤",
         "downloadingUpdate": "下載更新中",
         "updateReady": "準備更新",
         "updateError": "更新時發生錯誤，請重試。",
-        "restartInstall": "重新安裝",
+        "restartInstall": "重新啟動以進行安裝",
         "calcMinutesRemaining": "正在計算剩餘時間...",
-        "minutesRemaining": "分鐘, 複數, 一 剩下一分鐘 其他 剩下一分鐘",
-        "copiedToClipboard": "複製到剪貼簿",
+        "minutesRemaining": "{minutes, plural, one {剩下 1 分鐘} other {剩下 # 分鐘}}",
+        "copiedToClipboard": "已複製到剪貼簿",
         "accountsSynchronized": "錢包同步完成",
         "fundsAvailableSoon": "您的資金很快就可以使用",
         "exportTransactionHistory": {
-            "success": "Transaction history for {accountAlias} was successfully saved to {filePath}",
-            "error": "Unable to export transaction history for {accountAlias}"
+            "success": "{accountAlias} 的交易紀錄已順利儲存到 {filePath}",
+            "error": "無法匯出 {accountAlias} 的交易記錄"
         },
         "deepLinkingRequest": {
-            "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
-            "notEnabled": "IOTA links are not enabled",
-            "invalidFormat": "The IOTA link you followed is invalid",
+            "recievedWhileLoggedOut": "請登入以發起 IOTA 連結",
+            "notEnabled": "IOTA 連結未啟用",
+            "invalidFormat": "你所追蹤的 IOTA 連結無效",
             "wallet": {
                 "send": {
-                    "success": "Payment details added from IOTA link"
+                    "success": "由 IOTA 連結所加入的支付細節"
                 }
             }
         }
     },
     "error": {
         "profile": {
-            "length": "您的使用者檔案稱不能超過 {length, plural, one {1 character} other {# 字符}}.",
-            "duplicate": "以此為名的設定檔已存在"
+            "length": "您的設定檔名稱不能超過 {length, plural, one {1 character} other {# 字符}}。",
+            "duplicate": "相同名稱的設定檔已存在。",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
-            "doNotMatch": "密碼不符.",
+            "doNotMatch": "密碼不吻合。",
             "tooWeak": "您的新密碼強度太弱。",
-            "row": "太簡單的密碼組合很容易被猜測",
-            "pattern": "過短的密碼很容易被猜到",
-            "names": "常見的名字和姓氏很容易被猜到",
-            "repeats": "像 ’aaa‘ 這樣的重複格式很容易被猜到",
-            "repeats2": "像 ‘abcabcabc’ 這樣重複的格式很容易被猜到",
-            "sequence": "字符序列很容易被猜到",
-            "years": "近年來很容易猜到",
-            "dates": "日期很容易被猜到",
-            "common": "這是非常常見的密碼.",
-            "similar": "這和常用密碼非常類似.",
-            "word": "只有一個單字很容易被猜到",
+            "row": "直列按鍵組合很容易被猜中。",
+            "pattern": "短鍵盤模式很容易被猜中。",
+            "names": "常見的名字和姓氏很容易被猜中。",
+            "repeats": "像 ’aaa‘ 這樣的重複格式很容易被猜中。",
+            "repeats2": "像 ‘abcabcabc’ 這樣重複的格式很容易被猜中。",
+            "sequence": "字符序列很容易被猜中。",
+            "years": "最近的年份很容易猜中。",
+            "dates": "日期很容易被猜中。",
+            "common": "這是很常見的密碼。",
+            "similar": "這和常見的密碼相似。",
+            "word": "只有一個單字很容易被猜中。",
             "incorrect": "密碼不正確",
-            "length": "你的密碼長度不能超過 {length, plural, one {1 character} other {# 字符}}."
+            "length": "你的密碼長度不能超過 {length, plural, one {1 character} other {# 字符}}。"
         },
         "pincode": {
-            "length": "你的 PIN 必須符合長度 {length, plural, one {1 digit} other {# 數字}} ",
+            "length": "你的 PIN 必須符合長度 {length, plural, one {1 位數} other {# 位數}}",
             "match": "PIN 碼不相符",
             "incorrect": "您輸入的 PIN 碼不正確"
         },
         "account": {
-            "length": "您的錢包名稱長度不能超過 {length, plural, one {1 character} other {# 字符}}.",
+            "length": "您的錢包名稱長度不能超過 {length, plural, one {1 character} other {# 字符}}。",
             "empty": "在您創建新的錢包之前，您必須使用最後存在的錢包。",
             "notEmpty": "您必須先轉移餘額，才能刪除此錢包。",
             "duplicate": "具有相同名稱的錢包已經存在。",
-            "tilde": "檔案名稱不能以“〜”字符開頭。",
-            "control": "檔案名稱不能包含控制字符。",
+            "tilde": "設定檔名稱不能以“〜”字符開頭。",
+            "control": "設定檔名稱不能包含控制字符。",
             "startDot": "檔案名稱不能以 “.” 開頭。",
             "chars": "檔案名稱不可包含 <>:\"/\\|?* 等字元。",
             "index": "您的帳戶索引必須是0至2,147,483,647之間的數字。",
@@ -1008,23 +1014,23 @@
         },
         "node": {
             "invalid": "請輸入有效的 URL。",
-            "dns": "Could not find DNS resolution for node.",
+            "dns": "無法找到此節點的DNS解析。",
             "timedOut": "連線逾時。",
-            "refused": "The connection was refused.",
-            "handshake": "Could not complete handshake with node.",
-            "invalidCertificate": "Could not connect with invalid certificate.",
-            "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
+            "refused": "此連線被拒絕。",
+            "handshake": "無法與節點進行連線交握。",
+            "invalidCertificate": "無法以無效憑證連線。",
+            "https": "必須由 HTTPS 安全連線，目前尚未支援以 HTTP 進行的不安全連線。",
             "duplicate": "該節點已被添加。",
             "unsynced": "此節點尚未同步。",
             "noSynced": "沒有可用的同步節點。",
-            "answer": "Failed to get an answer from all nodes.",
-            "forbidden": "This node connection is forbidden."
+            "answer": "無法向所有節點取得回應。",
+            "forbidden": "此節點連結已被禁用。"
         },
         "network": {
-            "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
-            "notReachable": "The network ID for this node could not be retrieved, unable to add node.",
-            "badNodes": "Unable to connect to the network with current node configuration.",
-            "nonEmptyAccount": "You must transfer all balances before switching networks."
+            "mismatch": "此節點的Network ID為: \"{networkId}\"`，與當前網路不相符。",
+            "notReachable": "因為無法取得該節點的 Network ID，無法添加節點。",
+            "badNodes": "無法以目前的節點設定連線至網路。",
+            "nonEmptyAccount": "切換網路前，您必須轉移所有餘額。"
         },
         "global": {
             "generic": "出現錯誤。"
@@ -1036,7 +1042,7 @@
             "seedTooShort": "種子 (Seed) 長度必須為 81 個字符長，目前{length, plural, one {is 1} other {長度是 #}}。",
             "seedCharacters": "種子 (Seed) 應僅包含字符 A-Z 或 9",
             "phraseWordCount": "您的助記詞中應該有24個單字，{length, plural, one {is 1} other {目前有 #}}個。",
-            "phraseUnrecognizedWord": "您的助記詞中有無法辨識的單詞“ {word}”",
+            "phraseUnrecognizedWord": "您的助記詞中有無法辨識的單詞 “{word}”",
             "phraseCaseWord": "這個字\"{word}\" 應該要是小寫"
         },
         "ledger": {
@@ -1056,15 +1062,15 @@
             "preventClose": "無法關閉此彈出視窗。"
         },
         "migration": {
-            "missingBundle": "試圖尋找交易組時發生錯誤"
+            "missingBundle": "試圖尋找交易組時發生錯誤。"
         },
         "crypto": {
-            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
+            "cannotDecodeBech32": "無法將此字串解析成 Bech32 地址。"
         }
     },
     "warning": {
         "node": {
-            "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
+            "http": "透過 HTTP 未加密連接來使用節點，可能會造成安全性風險。"
         }
     },
     "tooltips": {

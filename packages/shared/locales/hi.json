@@ -538,7 +538,9 @@
         },
         "addressHistory": {
             "title": "{name} खाता पता इतिहास",
-            "currentBalance": "वर्तमान बैलेंस: {balance}"
+            "currentBalance": "Balance: {balance}",
+            "internal": "Internal Address",
+            "external": "Deposit Address"
         },
         "node": {
             "titleAdd": "नया नोड जोड़ें",
@@ -788,7 +790,8 @@
         "searching": "खोज रहे हैं...",
         "closeFirefly": "फायरफ्लाई बंद करे",
         "generateAddress": "नया पता उत्पन्न करें",
-        "migrateAgain": "एक और इंडेक्स माइग्रेट करें"
+        "migrateAgain": "एक और इंडेक्स माइग्रेट करें",
+        "done": "Done"
     },
     "general": {
         "password": "पासवर्ड",
@@ -953,7 +956,10 @@
     "error": {
         "profile": {
             "length": "आपका प्रोफ़ाइल नाम {length, plural, one {1 अक्षर} other {# अक्षर}} से अधिक लंबा नहीं हो सकता है|",
-            "duplicate": "इस नाम का प्रोफ़ाइल पहले से मौजूद है।"
+            "duplicate": "इस नाम का प्रोफ़ाइल पहले से मौजूद है।",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "पासवर्ड मैच नहीं करता है।",

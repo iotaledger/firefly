@@ -538,7 +538,9 @@
         },
         "addressHistory": {
             "title": "Історія адрес: {name}",
-            "currentBalance": "Поточний баланс: {balance}"
+            "currentBalance": "Balance: {balance}",
+            "internal": "Internal Address",
+            "external": "Deposit Address"
         },
         "node": {
             "titleAdd": "Додати вузол",
@@ -788,7 +790,8 @@
         "searching": "Пошук...",
         "closeFirefly": "Закрити Firefly",
         "generateAddress": "Створити адресу",
-        "migrateAgain": "Перенести інший індекс"
+        "migrateAgain": "Перенести інший індекс",
+        "done": "Done"
     },
     "general": {
         "password": "Пароль",
@@ -953,7 +956,10 @@
     "error": {
         "profile": {
             "length": "Ім'я твого профілю не може бути довшим {length, plural, one {1 символа} few {# символи} many {# символів} other {# символів}}.",
-            "duplicate": "Профіль з таким ім'ям вже існує."
+            "duplicate": "Профіль з таким ім'ям вже існує.",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "Паролі не співпадають.",

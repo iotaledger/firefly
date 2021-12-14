@@ -538,7 +538,9 @@
         },
         "addressHistory": {
             "title": "{name} adresse historik",
-            "currentBalance": "Nuværende saldo: {balance}"
+            "currentBalance": "Balance: {balance}",
+            "internal": "Internal Address",
+            "external": "Deposit Address"
         },
         "node": {
             "titleAdd": "Tilføj en node",
@@ -788,7 +790,8 @@
         "searching": "Søger...",
         "closeFirefly": "Luk Firefly",
         "generateAddress": "Generér adresse",
-        "migrateAgain": "Migrate another index"
+        "migrateAgain": "Migrate another index",
+        "done": "Done"
     },
     "general": {
         "password": "Adgangskode",
@@ -953,7 +956,10 @@
     "error": {
         "profile": {
             "length": "Dit profilnavn kan ikke være længere end {length, plural, one {1 tegn} other {# tegn}}.",
-            "duplicate": "En profil med dette navn findes allerede."
+            "duplicate": "En profil med dette navn findes allerede.",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "Adgangskoderne er ikke ens.",

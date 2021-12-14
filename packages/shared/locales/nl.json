@@ -538,7 +538,9 @@
         },
         "addressHistory": {
             "title": "{name} adresgeschiedenis",
-            "currentBalance": "Huidig saldo: {balance}"
+            "currentBalance": "Saldo: {balance}",
+            "internal": "Intern adres",
+            "external": "Ontvangstadres"
         },
         "node": {
             "titleAdd": "Node toevoegen",
@@ -788,7 +790,8 @@
         "searching": "Zoeken...",
         "closeFirefly": "Sluit Firefly",
         "generateAddress": "Genereer een adres",
-        "migrateAgain": "Migreer een andere index"
+        "migrateAgain": "Migreer een andere index",
+        "done": "Voltooid"
     },
     "general": {
         "password": "Wachtwoord",
@@ -953,7 +956,10 @@
     "error": {
         "profile": {
             "length": "Uw profielnaam kan niet langer zijn dan {length, plural, one {1 teken} other {# tekens}}.",
-            "duplicate": "Een account met deze naam bestaat al."
+            "duplicate": "Een account met deze naam bestaat al.",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "Wachtwoorden komen niet overeen.",
