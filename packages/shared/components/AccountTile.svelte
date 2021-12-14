@@ -1,13 +1,12 @@
 <script lang="typescript">
-    import { tick } from 'svelte'
     import { Icon, Text, Tooltip } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
-    import { formatStakingAirdropReward, getUnstakedFunds } from 'shared/lib/participation'
+    import { formatStakingAirdropReward, getUnstakedFunds, isStakingPossible } from 'shared/lib/participation'
     import { partiallyStakedAccounts, stakedAccounts, stakingEventState } from 'shared/lib/participation/stores'
-    import { ParticipationEventState, StakingAirdrop } from 'shared/lib/participation/types'
+    import { StakingAirdrop } from 'shared/lib/participation/types'
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
-
+    import { tick } from 'svelte'
     export let name = ''
     export let balance = ''
     export let balanceEquiv = ''
@@ -27,14 +26,11 @@
     const _getAccount = (accounts: WalletAccount[]): WalletAccount => accounts.find((account) => account.alias === name)
     const _hasAccount = (accounts: WalletAccount[]): boolean => _getAccount(accounts) !== undefined
 
-    let stakingHasEnded
-    $: stakingHasEnded = $stakingEventState === ParticipationEventState.Ended
-
     let isPartiallyStaked = false
-    $: isPartiallyStaked = _hasAccount($partiallyStakedAccounts) && !stakingHasEnded
+    $: isPartiallyStaked = _hasAccount($partiallyStakedAccounts) && !isStakingPossible($stakingEventState)
 
     let isStaked = false
-    $: isStaked = _hasAccount($stakedAccounts) && !stakingHasEnded
+    $: isStaked = _hasAccount($stakedAccounts) && !isStakingPossible($stakingEventState)
 
     let showPartialStakeTooltip = false
     let iconBox
@@ -103,9 +99,8 @@
 
 <button
     on:click={handleTileClick}
-    class="size-{size} group rounded-xl {isPartiallyStaked ? 'bg-yellow-100 hover:bg-yellow-400' : `border-gray-100 dark:border-gray-900 hover:bg-${color}-500 ${isStaked ? `border border-1 border-solid border-gray-200 dark:border-gray-900 hover:border-${color}-500` : 'bg-gray-100 dark:bg-gray-900'}` } font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'} {hidden ? 'opacity-50' : ''}"
-    {disabled}
->
+    class="size-{size} group rounded-xl {isPartiallyStaked ? 'bg-yellow-100 hover:bg-yellow-400' : `border-gray-100 dark:border-gray-900 hover:bg-${color}-500 ${isStaked ? `border border-1 border-solid border-gray-200 dark:border-gray-900 hover:border-${color}-500` : 'bg-gray-100 dark:bg-gray-900'}`} font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'} {hidden ? 'opacity-50' : ''}"
+    {disabled}>
     <div class="mb-2 w-full flex flex-row justify-between items-start space-x-1.5">
         <div class="flex flex-row space-x-1.5 items-start">
             {#if isPartiallyStaked}
@@ -116,7 +111,11 @@
                     <Icon icon="exclamation" width="16" height="16" classes="mt-0.5 fill-current text-gray-800" />
                 </div>
             {:else if isStaked}
-                <Icon icon="tokens" width="16" height="16" classes="fill-current mt-0.5 text-gray-800 dark:text-white" />
+                <Icon
+                    icon="tokens"
+                    width="16"
+                    height="16"
+                    classes="fill-current mt-0.5 text-gray-800 dark:text-white" />
             {/if}
             <Text
                 bold
@@ -141,16 +140,17 @@
         {/if}
     </div>
     <div
-        class="flex {size === 'l' ? 'flex-row space-x-4' : 'flex-col space-y-1'} justify-between w-full flex-{size === 'l' ? 'nowrap' : 'wrap'}"
-    >
-        <Text smaller overrideColor classes="block text-gray-800 {isPartiallyStaked ? '' : 'dark:text-white group-hover:text-white'}">
-            {#if airdrop}
-                {formatStakingAirdropReward(airdrop, Number(balance), 6)}
-            {:else}
-                {balance}
-            {/if}
+        class="flex {size === 'l' ? 'flex-row space-x-4' : 'flex-col space-y-1'} justify-between w-full flex-{size === 'l' ? 'nowrap' : 'wrap'}">
+        <Text
+            smaller
+            overrideColor
+            classes="block text-gray-800 {isPartiallyStaked ? '' : 'dark:text-white group-hover:text-white'}">
+            {#if airdrop}{formatStakingAirdropReward(airdrop, Number(balance), 6)}{:else}{balance}{/if}
         </Text>
-        <Text smaller overrideColor classes="block text-blue-500 dark:text-gray-600 {isPartiallyStaked ? '' : 'group-hover:text-white'}">
+        <Text
+            smaller
+            overrideColor
+            classes="block text-blue-500 dark:text-gray-600 {isPartiallyStaked ? '' : 'group-hover:text-white'}">
             {balanceEquiv}
         </Text>
     </div>
@@ -158,15 +158,8 @@
 {#if showPartialStakeTooltip}
     <Tooltip {parentTop} {parentLeft} {parentWidth} position="right">
         <Text type="p" classes="text-gray-900 bold mb-1 text-left">
-            {localize(
-                `tooltips.partiallyStakedFunds.title${$partiallyStakedAccounts.length > 0 ? '' : 'NoFunds'}`,
-                $partiallyStakedAccounts.length > 0
-                    ? { values: { amount: formatUnitBestMatch(getUnstakedFunds(_getAccount($partiallyStakedAccounts))) } }
-                    : { }
-            )}
+            {localize(`tooltips.partiallyStakedFunds.title${$partiallyStakedAccounts.length > 0 ? '' : 'NoFunds'}`, $partiallyStakedAccounts.length > 0 ? { values: { amount: formatUnitBestMatch(getUnstakedFunds(_getAccount($partiallyStakedAccounts))) } } : {})}
         </Text>
-        <Text type="p" secondary classes="text-left">
-            {localize('tooltips.partiallyStakedFunds.body')}
-        </Text>
+        <Text type="p" secondary classes="text-left">{localize('tooltips.partiallyStakedFunds.body')}</Text>
     </Tooltip>
 {/if}
