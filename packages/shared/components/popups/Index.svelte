@@ -105,8 +105,7 @@
         // Participation (voting / staking)
         stakingConfirmation: StakingConfirmation,
         stakingManager: StakingManager,
-        stakingNotice: StakingNotice,
-        exportTransactionHistory: ExportTransactionHistory,
+        stakingNotice: StakingNotice
     }
 
     const onkey = (e) => {
