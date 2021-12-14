@@ -91,8 +91,8 @@
             </Link>
         </div>
         <HR />
-        <div class="flex flex-row space-x-2">
-            <div class="flex flex-col w-1/2">
+        <div class="flex flex-row justify-between space-x-4">
+            <div class="flex flex-col">
                 <div>
                     <Text type="p" classes="font-bold text-lg inline text-white dark:text-white">{remainingTimeAmount}</Text>
                     <Text type="p" secondary classes="text-sm inline">{remainingTimeUnit}</Text>
@@ -101,9 +101,9 @@
                     {localize('views.staking.airdrops.remaining')}
                 </Text>
             </div>
-            <div class="flex flex-col w-1/2">
+            <div class="flex flex-col">
                 <div>
-                    <Text type="p" classes="font-bold text-lg inline text-white dark:text-gray-400">
+                    <Text type="p" classes="font-bold text-lg inline text-white dark:text-gray-400 break-all">
                         {formatStakingAirdropReward(airdrop, isAssembly() ? $assemblyStakingRewards : $shimmerStakingRewards, 6).split(' ')[0]}
                     </Text>
                     <Text type="p" secondary classes="text-sm inline">
