@@ -69,7 +69,7 @@
 </script>
 
 <div
-    class="relative z-0 flex w-full h-full bg-{airdrop}-bg dark:bg-{airdrop}-bg"
+    class="relative z-0 flex w-full h-full bg-{airdrop}-bg"
     on:mouseenter={video[airdrop]?.play()}
     on:mouseleave={video[airdrop]?.pause()}>
     <!-- svelte-ignore a11y-media-has-caption -->

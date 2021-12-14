@@ -755,7 +755,8 @@
             "hasPartiallyUnstaked": "Your remaining funds have been unstaked."
         },
         "stakingConfirmation": {
-            "title": "You're about to stake",
+            "title": "Select airdrops",
+            "subtitle": "You're about to stake",
             "body": "If you do not wish to participate in both airdrops, you may opt-out by deselecting below. Re-stake at any time to opt back in.",
             "estimatedAirdrop": "Estimated airdrop"
         }
