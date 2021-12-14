@@ -95,7 +95,7 @@
                 {/each}
             </div>
             <div class="flex flex-row items-center mb-3">
-                <Text type="h3" classes="mr-4 text-white text-2xl">
+                <Text type="h3" classes="mr-4 text-white text-xl">
                     {localize(`views.staking.airdrops.${airdrop}.name`)}
                 </Text>
                 <StakingAirdropIndicator {airdrop} />
@@ -104,7 +104,8 @@
                 type="p"
                 overrideColor
                 overrideLeading
-                classes="font-normal text-sm leading-140 text-gray-300 dark:text-gray-300 mb-3">
+                smaller
+                classes="font-normal text-gray-300 dark:text-gray-300 mb-3">
                 {localize(`views.staking.airdrops.${airdrop}.description`)}
             </Text>
             <Link onClick={handleLearnMoreClick} classes="text-14">{localize('actions.visitWebsite')}</Link>
