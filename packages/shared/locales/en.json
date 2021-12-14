@@ -415,10 +415,6 @@
                 "title": "Migrate Ledger index",
                 "description": "Migrate another Trinity account index"
             },
-            "transactionHistory": {
-                "title": "Transaction history",
-                "description": "Export the transaction history of your accounts as .csv files"
-            },
             "troubleshoot": {
                 "title": "Troubleshoot",
                 "description": "Use the troubleshooting wizard to solve common problems"
@@ -730,9 +726,9 @@
         },
         "exportTransactionHistory": {
             "title": "Export transaction history",
-            "body": "Export your transaction history for all accounts consecutively within this profile. Exports will be in a CSV format.",
+            "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
             "profileName": "Profile name:",
-            "numberOfAccounts": "Number of accounts:",
+            "accountName": "Account name:",
             "typePassword": "Type your password to allow exporting"
 
         },
@@ -1240,6 +1236,16 @@
             "titleNoFunds": "New unstaked funds",
             "preBody": "You have received new funds on a staked wallet.",
             "body": "For these new funds to be staked, you will need to merge them in the manage stake panel."
+        }
+    },
+    "exports": {
+        "transactionHistoryCsv": {
+            "messageId": "Message ID",
+            "internal": "Internal",
+            "rawValue": "Raw Value",
+            "formattedValue": "Formatted Value",
+            "date": "Date",
+            "time": "Time"
         }
     }
 }

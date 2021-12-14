@@ -538,7 +538,9 @@
         },
         "addressHistory": {
             "title": "{name} Adressverlauf",
-            "currentBalance": "Aktuelles Guthaben: {balance}"
+            "currentBalance": "Guthaben: {balance}",
+            "internal": "Interne Adresse",
+            "external": "Einzahlungsadresse"
         },
         "node": {
             "titleAdd": "Node hinzufügen",
@@ -788,7 +790,8 @@
         "searching": "Suche läuft...",
         "closeFirefly": "Firefly schließen",
         "generateAddress": "Adresse generieren",
-        "migrateAgain": "Einen anderen Index migrieren"
+        "migrateAgain": "Einen anderen Index migrieren",
+        "done": "Fertig"
     },
     "general": {
         "password": "Passwort",
@@ -953,7 +956,10 @@
     "error": {
         "profile": {
             "length": "Dein Profilname darf nicht länger als {length, plural, one {1 Zeichen} other {# Zeichen}} sein.",
-            "duplicate": "Ein Profil mit diesem Namen existiert bereits."
+            "duplicate": "Ein Profil mit diesem Namen existiert bereits.",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "Die Passwörter stimmen nicht überein.",

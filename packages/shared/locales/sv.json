@@ -538,7 +538,9 @@
         },
         "addressHistory": {
             "title": "{name} adresshistorik",
-            "currentBalance": "Nuvarande saldo: {balance}"
+            "currentBalance": "Saldo: {balance}",
+            "internal": "Intern adress",
+            "external": "Insättningsadress"
         },
         "node": {
             "titleAdd": "Lägg till nod",
@@ -788,7 +790,8 @@
         "searching": "Söker...",
         "closeFirefly": "Stäng Firefly",
         "generateAddress": "Generera adress",
-        "migrateAgain": "Migrera ett annat index"
+        "migrateAgain": "Migrera ett annat index",
+        "done": "Klar"
     },
     "general": {
         "password": "Lösenord",
@@ -953,7 +956,10 @@
     "error": {
         "profile": {
             "length": "Ditt profilnamn kan inte vara längre än {length, plural, one {1 tecken} other {# tecken}}.",
-            "duplicate": "En profil med detta namn finns redan."
+            "duplicate": "En profil med detta namn finns redan.",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "Lösenorden matchar inte.",

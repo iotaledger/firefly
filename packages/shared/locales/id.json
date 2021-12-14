@@ -538,7 +538,9 @@
         },
         "addressHistory": {
             "title": "riwayat alamat {name}",
-            "currentBalance": "Saldo saat ini: {balance}"
+            "currentBalance": "Balance: {balance}",
+            "internal": "Internal Address",
+            "external": "Deposit Address"
         },
         "node": {
             "titleAdd": "Tambahkan Node",
@@ -788,7 +790,8 @@
         "searching": "Mencari...",
         "closeFirefly": "Tutup Firefly",
         "generateAddress": "Generate address",
-        "migrateAgain": "Migrate another index"
+        "migrateAgain": "Migrate another index",
+        "done": "Done"
     },
     "general": {
         "password": "Kata sandi",
@@ -953,7 +956,10 @@
     "error": {
         "profile": {
             "length": "Nama profil Anda tidak boleh lebih dari {length, plural, one {1 karakter} other {# karakter}}.",
-            "duplicate": "Profil dengan nama ini sudah ada."
+            "duplicate": "Profil dengan nama ini sudah ada.",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "Kata sandi tidak cocok.",

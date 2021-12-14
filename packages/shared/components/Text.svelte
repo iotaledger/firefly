@@ -1,7 +1,7 @@
 
 <script lang="typescript">
     import { appSettings } from 'shared/lib/appSettings'
-    
+
     export let type = 'p'
     export let secondary = false
     export let disabled = false
@@ -50,7 +50,7 @@
             @apply text-gray-500;
         }
         &.disabled {
-            @apply text-gray-900;
+            @apply text-gray-400;
             &.darkmode {
                 @apply text-gray-600;
             }

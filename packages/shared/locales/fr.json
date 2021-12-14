@@ -538,7 +538,9 @@
         },
         "addressHistory": {
             "title": "Historique de l'adresse {name}",
-            "currentBalance": "Solde actuel : {balance}"
+            "currentBalance": "Solde: {balance}",
+            "internal": "Adresse Interne",
+            "external": "Adresse de Dépôt"
         },
         "node": {
             "titleAdd": "Ajouter un nœud",
@@ -788,7 +790,8 @@
         "searching": "Recherche en cours...",
         "closeFirefly": "Fermer Firefly",
         "generateAddress": "Générer une adresse",
-        "migrateAgain": "Faire migrer un autre index"
+        "migrateAgain": "Faire migrer un autre index",
+        "done": "Terminé"
     },
     "general": {
         "password": "Mot de passe",
@@ -953,7 +956,10 @@
     "error": {
         "profile": {
             "length": "Le nom de votre profil ne doit pas contenir plus de {length, plural, one {1 caractère} other {# caractères}}.",
-            "duplicate": "Un profil portant ce nom existe déjà."
+            "duplicate": "Un profil portant ce nom existe déjà.",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "Les mots de passe ne correspondent pas.",
@@ -1021,10 +1027,10 @@
             "forbidden": "La connexion à ce nœud est interdite."
         },
         "network": {
-            "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
-            "notReachable": "The network ID for this node could not be retrieved, unable to add node.",
-            "badNodes": "Unable to connect to the network with current node configuration.",
-            "nonEmptyAccount": "You must transfer all balances before switching networks."
+            "mismatch": "L'ID réseau pour ce nœud est \"{networkId}\", ce qui ne correspond pas au réseau actuel.",
+            "notReachable": "L'ID réseau de ce nœud n'a pas pu être récupéré, impossible d'ajouter un nœud.",
+            "badNodes": "Impossible de se connecter au réseau avec la configuration actuelle.",
+            "nonEmptyAccount": "Vous devez transférer tous les soldes avant de changer de réseau."
         },
         "global": {
             "generic": "Une erreur s'est produite."
@@ -1064,7 +1070,7 @@
     },
     "warning": {
         "node": {
-            "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
+            "http": "L'utilisation de nœuds en HTTP laisse le trafic non chiffré et pourrait poser un risque de sécurité."
         }
     },
     "tooltips": {

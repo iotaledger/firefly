@@ -538,7 +538,9 @@
         },
         "addressHistory": {
             "title": "{name} historial de direcciones",
-            "currentBalance": "Saldo actual: {balance}"
+            "currentBalance": "Balance: {balance}",
+            "internal": "Internal Address",
+            "external": "Deposit Address"
         },
         "node": {
             "titleAdd": "Añadir un nodo",
@@ -788,7 +790,8 @@
         "searching": "Buscando...",
         "closeFirefly": "Cerrar Firefly",
         "generateAddress": "Generar una address",
-        "migrateAgain": "Migrar otro índice"
+        "migrateAgain": "Migrar otro índice",
+        "done": "Done"
     },
     "general": {
         "password": "Contraseña",
@@ -953,7 +956,10 @@
     "error": {
         "profile": {
             "length": "Tu nombre de cuenta no puede tener más de {length, plural, one {1 character} other {# caracteres}}.",
-            "duplicate": "Ya existe un perfil con este nombre."
+            "duplicate": "Ya existe un perfil con este nombre.",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "Las contraseñas no coinciden.",

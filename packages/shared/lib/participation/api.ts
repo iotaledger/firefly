@@ -129,7 +129,9 @@ export function stopParticipating(accountId: string, eventIds: string[]): Promis
      */
     eventIds.push(
         'c87b676749ad07819ba70ce1cee6349f3740a38bf94e0ae5c198b6870c683661',
-        '7991ace8e7b98d8120777a5889e4474f9499fdad88b8b69241d054d49272f0c7'
+        '7991ace8e7b98d8120777a5889e4474f9499fdad88b8b69241d054d49272f0c7',
+        '9cf7821a6f041c0a99aa4b415f6cd93c385992bdda07e5df9a5cbdb1a1454ecc',
+        '5fea3ff4e80c6b8f853038c131a67a2d18cc68bb621191884aad7acfd3cd9d1c'
     )
 
     return new Promise<string[]>((resolve, reject) => {
