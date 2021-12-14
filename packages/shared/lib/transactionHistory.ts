@@ -1,11 +1,15 @@
+import { formatDate } from './i18n'
 import type { WalletAccount } from './typings/wallet'
+import { formatUnitBestMatch } from './units'
+import { localize } from 'shared/lib/i18n'
 
 interface ITransactionHistoryHeaderParameters {
     id?: boolean
-    timestamp?: boolean
     internal?: boolean
     value?: boolean
-    remainderValue?: boolean
+    formattedValue?: boolean
+    date?: boolean
+    time?: boolean
 }
 
 const NEW_LINE = '\r\n'
@@ -15,26 +19,41 @@ export const generateTransactionHistoryCsvFromAccount = (
     headerParams: ITransactionHistoryHeaderParameters
 ): string => {
     const headerParts = []
-    headerParams.id && headerParts.push('id')
-    headerParams.internal && headerParts.push('internal')
-    headerParams.timestamp && headerParts.push('timestamp')
-    headerParams.value && headerParts.push('value')
-    headerParams.remainderValue && headerParts.push('remainderValue')
+    headerParams.id && headerParts.push(localize('exports.transactionHistoryCsv.messageId'))
+    headerParams.internal && headerParts.push(localize('exports.transactionHistoryCsv.internal'))
+    headerParams.value && headerParts.push(localize('exports.transactionHistoryCsv.rawValue'))
+    headerParams.formattedValue && headerParts.push(localize('exports.transactionHistoryCsv.formattedValue'))
+    headerParams.date && headerParts.push(localize('exports.transactionHistoryCsv.date'))
+    headerParams.time && headerParts.push(localize('exports.transactionHistoryCsv.time'))
 
     let csv = headerParts.join(',') + NEW_LINE
 
     WalletAccount.messages.forEach((message) => {
         const { id, timestamp } = message
         if (message.payload.type === 'Transaction') {
-            const { internal, incoming, value, remainderValue } = message.payload.data.essence.data
-            const valueString = incoming ? '-' + value : String(value)
+            const { internal, incoming, value } = message.payload.data.essence.data
+            const valueString = incoming ? String(value) : '-' + value
+            const formattedValueString = incoming
+                ? formatUnitBestMatch(value, true)
+                : '-' + formatUnitBestMatch(value, true)
+            const date = formatDate(new Date(timestamp), {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+            })
+            const time = formatDate(new Date(timestamp), {
+                hour: 'numeric',
+                minute: 'numeric',
+                timeZoneName: 'short',
+            })
 
             const csvLineParts: string[] = []
             headerParams.id && csvLineParts.push(String(id))
             headerParams.internal && csvLineParts.push(String(internal))
-            headerParams.timestamp && csvLineParts.push(String(timestamp))
             headerParams.value && csvLineParts.push(valueString)
-            headerParams.remainderValue && csvLineParts.push(String(remainderValue))
+            headerParams.formattedValue && csvLineParts.push(formattedValueString)
+            headerParams.date && csvLineParts.push(date)
+            headerParams.time && csvLineParts.push(time)
 
             const csvLine = csvLineParts.join(',') + NEW_LINE
             csv = csv + csvLine

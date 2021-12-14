@@ -14,7 +14,7 @@
     import DeleteProfile from './DeleteProfile.svelte';
     import Diagnostics from './Diagnostics.svelte';
     import ErrorLog from './ErrorLog.svelte';
-    import ExportTransactionHistoryPopup from './ExportTransactionHistoryPopup.svelte';
+    import ExportTransactionHistory from './ExportTransactionHistory.svelte';
     import HideAccount from './HideAccount.svelte';
     import LedgerAddress from './LedgerAddress.svelte';
     import LedgerAppGuide from './LedgerAppGuide.svelte';
@@ -98,7 +98,7 @@
         balanceFinder: BalanceFinder,
         snapshot: Snapshot,
         video: Video,
-        exportTransactionHistory: ExportTransactionHistoryPopup
+        exportTransactionHistory: ExportTransactionHistory
     }
 
     const onkey = (e) => {

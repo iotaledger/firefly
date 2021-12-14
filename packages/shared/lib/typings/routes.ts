@@ -108,7 +108,6 @@ export enum AdvancedSettings {
     ErrorLog = 'errorLog',
     Diagnostics = 'diagnostics',
     MigrateLedgerIndex = 'migrateLedgerIndex',
-    TransactionHistory = 'transactionHistory',
 }
 
 export enum AdvancedSettingsNoProfile {
