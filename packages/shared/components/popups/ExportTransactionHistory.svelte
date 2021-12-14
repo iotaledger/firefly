@@ -40,6 +40,7 @@
                     try {
                         const filePath = await Electron.exportTransactionHistory(fileName, contents)
                         if(filePath) {
+                            closePopup()
                             showAppNotification({type: 'info', message: locale('notifications.exportTransactionHistory.success', {values: {accountAlias: $account.alias, filePath: filePath}})})
                         }
                     } catch {
