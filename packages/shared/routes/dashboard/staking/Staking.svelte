@@ -1,31 +1,30 @@
 <script lang="typescript">
-    import { onDestroy, onMount } from 'svelte'
     import { DashboardPane } from 'shared/components'
-    import { StakingAirdrop, StakingHeader, StakingInfo, StakingSummary } from './views'
+    import { localize } from 'shared/lib/i18n'
+    import { showAppNotification } from 'shared/lib/notifications'
+    import { accountToParticipate, isStakingFeatureNew, participationAction } from 'shared/lib/participation/stores'
+    import { StakingAirdrop as _StakingAirdrop } from 'shared/lib/participation/types'
+    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
+    import { isSoftwareProfile } from 'shared/lib/profile'
+    import { MILLISECONDS_PER_SECOND } from 'shared/lib/time'
     import {
         GeneratingRemainderDepositAddressEvent,
         PreparedTransactionEvent,
         TransactionEventData,
         TransferProgressEventData,
         TransferProgressEventType,
-        TransferState
+        TransferState,
     } from 'shared/lib/typings/events'
-    import { localize } from 'shared/lib/i18n'
-    import { showAppNotification } from 'shared/lib/notifications'
-    import { closePopup, openPopup } from 'shared/lib/popup'
-    import { isSoftwareProfile } from 'shared/lib/profile'
-    import { MILLISECONDS_PER_SECOND } from 'shared/lib/time'
     import { transferState } from 'shared/lib/wallet'
-
-    import { accountToParticipate, isStakingFeatureNew, participationAction } from 'shared/lib/participation/stores'
-    import { StakingAirdrop as _StakingAirdrop } from 'shared/lib/participation/types'
+    import { onDestroy, onMount } from 'svelte'
     import { getParticipationEvents, getParticipationOverview } from '../../../lib/participation/api'
+    import { StakingAirdrop, StakingHeader, StakingInfo, StakingSummary } from './views'
 
     const handleNewStakingFeature = (): void => {
         if ($isStakingFeatureNew) {
             showAppNotification({
                 type: 'info',
-                message: localize('views.staking.welcome')
+                message: localize('views.staking.welcome'),
             })
 
             isStakingFeatureNew.set(false)
@@ -62,6 +61,7 @@
     }
 
     let transactionEventData: TransferProgressEventData = null
+    let ledgerAwaitingConfirmation = false
 
     const handleTransferState = (state: TransferState): void => {
         if (!state) return
@@ -79,26 +79,33 @@
                 // Close the current pop up i.e., the one with ledger transaction details
                 closePopup(true)
                 // Re-open the staking manager pop up
-                openPopup({
-                    type: 'stakingManager',
-                    props: {
-                        accountToAction: $accountToParticipate,
-                        participationAction: $participationAction,
-                        isPerformingAction: true
+                openPopup(
+                    {
+                        type: 'stakingManager',
+                        props: {
+                            accountToAction: $accountToParticipate,
+                            participationAction: $participationAction,
+                            isPerformingAction: true,
+                        },
                     },
-                }, true)
+                    true
+                )
                 break
 
             case TransferProgressEventType.SigningTransaction:
-                openPopup({
-                    type: 'ledgerTransaction',
-                    hideClose: true,
-                    preventClose: true,
-                    props: {
-                        ...handleTransactionEventData(transactionEventData),
-                        onCancel: _onCancel,
+                ledgerAwaitingConfirmation = true
+                openPopup(
+                    {
+                        type: 'ledgerTransaction',
+                        hideClose: true,
+                        preventClose: true,
+                        props: {
+                            ...handleTransactionEventData(transactionEventData),
+                            onCancel: _onCancel,
+                        },
                     },
-                }, true)
+                    true
+                )
 
                 break
 
@@ -110,6 +117,10 @@
             default:
                 break
         }
+    }
+
+    $: if (!$participationAction && ledgerAwaitingConfirmation && $popupState.type === 'ledgerTransaction') {
+        closePopup(true)
     }
 
     onMount(async () => {
