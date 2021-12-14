@@ -1231,7 +1231,8 @@
             },
             "minRewards": {
                 "title": "Minimum rewards not met",
-                "body": "Your funds have not been staked long enough to reach minimum airdrop rewards. Please continue staking for {duration}."
+                "body": "Your funds have not been staked long enough to reach minimum airdrop rewards.",
+                "continue": "Please continue staking for {duration}."
             }
         },
         "partiallyStakedFunds": {

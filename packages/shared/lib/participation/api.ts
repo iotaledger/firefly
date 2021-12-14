@@ -1,17 +1,19 @@
 import { get } from 'svelte/store'
+
 import { localize } from '../i18n'
 import { showAppNotification } from '../notifications'
 import type { Event } from '../typings/events'
 import { api, saveNewMessage } from '../wallet'
+
 import { resetParticipation } from './participation'
 import { addNewPendingParticipation, participationEvents, participationOverview } from './stores'
-import type {
+import {
+    ParticipationAction,
     ParticipateResponsePayload,
     Participation,
     ParticipationEvent,
     ParticipationOverviewResponse,
 } from './types'
-import { ParticipationAction } from './types'
 
 /**
  * Gets participation overview.

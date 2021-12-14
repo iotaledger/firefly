@@ -2,16 +2,20 @@
     import { tick } from 'svelte'
     import { Icon, Text, Tooltip } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
-    import { participationOverview, stakedAccounts, stakingEventState } from 'shared/lib/participation/stores'
+    import {
+        participationEvents,
+        participationOverview,
+        stakedAccounts,
+        stakingEventState,
+    } from 'shared/lib/participation/stores'
     import { ParticipationEventState } from 'shared/lib/participation/types'
+    import { getTimeUntilMinimumReward, isStakingPossible } from '../lib/participation'
 
     let accountOverviewBelowMinimum
     $: accountOverviewBelowMinimum = $participationOverview.find((apo) => apo.participations.length > 0 && (apo.assemblyRewardsBelowMinimum > 0 || apo.shimmerRewardsBelowMinimum > 0)) !== undefined
 
     let isBelowMinimumStakingRewards
-    $: isBelowMinimumStakingRewards = accountOverviewBelowMinimum &&
-        $stakingEventState === ParticipationEventState.Holding &&
-        $stakedAccounts.length > 0
+    $: isBelowMinimumStakingRewards = accountOverviewBelowMinimum && isStakingPossible($stakingEventState) || $stakingEventState === ParticipationEventState.Ended
 
     let indicatorIcon
     $: indicatorIcon = getIndicatorIcon($stakingEventState, $stakedAccounts.length > 0)
@@ -87,7 +91,7 @@
     const getLocalizedTooltipText = (
         state: ParticipationEventState,
         isStaked: boolean
-    ): { title: string; body: string } => {
+    ): { title: string; body: string, continue: string } => {
         const isHoldingPhase = $stakingEventState === ParticipationEventState.Holding
         const stateText: string = isHoldingPhase
             ? isStaked ? 'active' : 'inactive'
@@ -96,7 +100,13 @@
         const localePath = isBelowMinimumStakingRewards ? 'minRewards' : `${stateText}${isHoldingPhase ? 'Holding' : ''}`
         return {
             title: localize(`tooltips.stakingIndicator.${localePath}.title`),
-            body: localize(`tooltips.stakingIndicator.${localePath}.body`, isBelowMinimumStakingRewards ? { values: { duration: '0 days' } } : {}),
+            body: localize(
+                `tooltips.stakingIndicator.${localePath}.body`,
+                isBelowMinimumStakingRewards ? { values: { duration: getTimeUntilMinimumReward(true) } } : {}
+            ),
+            continue: isBelowMinimumStakingRewards && isStakingPossible($stakingEventState)
+                ? localize(`tooltips.stakingIndicator.${localePath}.continue`, { values: { duration: getTimeUntilMinimumReward(true) } })
+                : '',
         }
     }
 </script>
@@ -119,6 +129,6 @@
 {#if showTooltip}
     <Tooltip {parentTop} {parentLeft} {parentWidth} position="bottom">
         <Text type="p" classes="text-gray-900 bold mb-1 text-left">{tooltipText?.title}</Text>
-        <Text type="p" secondary classes="text-left">{tooltipText?.body}</Text>
+        <Text type="p" secondary classes="text-left">{tooltipText?.body} {tooltipText?.continue}</Text>
     </Tooltip>
 {/if}
