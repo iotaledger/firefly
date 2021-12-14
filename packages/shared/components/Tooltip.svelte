@@ -17,7 +17,11 @@
 
     $: parentLeft, parentTop, parentWidth, refreshPosition()
 
-    onMount(refreshPosition)
+    onMount(() => {
+        // Bugfix: Tooltip z-index was not being applied
+        document?.body?.appendChild(tooltip)
+        refreshPosition()
+    })
 
     // TODO: refactor all this component to use anchor prop instead of parent
     // and move all the logic here to position and display the tooltip
