@@ -538,7 +538,9 @@
         },
         "addressHistory": {
             "title": "{name} adreshistorio",
-            "currentBalance": "Aktuala bilanco: {balance}"
+            "currentBalance": "Balance: {balance}",
+            "internal": "Internal Address",
+            "external": "Deposit Address"
         },
         "node": {
             "titleAdd": "Aldoni nodon",
@@ -788,7 +790,8 @@
         "searching": "Serĉante...",
         "closeFirefly": "Fermu Firefly",
         "generateAddress": "Generi adreson",
-        "migrateAgain": "Migrigu alian Indekson"
+        "migrateAgain": "Migrigu alian Indekson",
+        "done": "Done"
     },
     "general": {
         "password": "Pasvorto",
@@ -953,7 +956,10 @@
     "error": {
         "profile": {
             "length": "Via profilnomo ne povas esti pli longa ol {length, plural, one {1 signo} other {# signoj}}.",
-            "duplicate": "Profilo kun ĉi tiu nomo jam ekzistas."
+            "duplicate": "Profilo kun ĉi tiu nomo jam ekzistas.",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "Pasvortoj ne kongruas.",

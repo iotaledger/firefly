@@ -14,7 +14,7 @@
     import { getParticipationOverview, participate, stopParticipating } from 'shared/lib/participation/api'
     import { STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
     import {
-        accountToParticipate,
+        accountToParticipate, partiallyStakedAccounts,
         participatedAccountsMapPerSession,
         participationAction,
         participationOverview,
@@ -281,7 +281,7 @@
                         {:else}{locale(`actions.${isAccountStaked(account?.id) ? 'unstake' : 'stake'}`)}{/if}
                     </Button>
                 </div>
-                {#if isAccountPartiallyStaked(account?.id) && $accountToParticipate?.id !== account?.id && !$participatedAccountsMapPerSession.get($accountToParticipate?.id)}
+                {#if isAccountPartiallyStaked(account?.id) && $accountToParticipate?.id !== account?.id}
                     <div
                         class="space-x-4 mx-1 mb-1 px-4 py-3 flex flex-row justify-between items-center rounded-lg bg-yellow-50">
                         <Icon icon="exclamation" width="24" height="24" classes="fill-current text-yellow-600" />

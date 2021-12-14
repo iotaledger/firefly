@@ -538,7 +538,9 @@
         },
         "addressHistory": {
             "title": "{name} dîroka navnîşanê",
-            "currentBalance": "Mayîna niha: {balance}"
+            "currentBalance": "Balance: {balance}",
+            "internal": "Internal Address",
+            "external": "Deposit Address"
         },
         "node": {
             "titleAdd": "Girêkê zêde bike",
@@ -788,7 +790,8 @@
         "searching": "Lêdigere...",
         "closeFirefly": "Firefly bigire",
         "generateAddress": "Navnîşanekê çêke",
-        "migrateAgain": "Migrate another index"
+        "migrateAgain": "Migrate another index",
+        "done": "Done"
     },
     "general": {
         "password": "Şîfre",
@@ -953,7 +956,10 @@
     "error": {
         "profile": {
             "length": "Navê profîla we {length, plural, one {1 character} other {# Tîpa}} zêdetir nabe.",
-            "duplicate": "Li ser vî navî jixwe bikarhênerek heye."
+            "duplicate": "Li ser vî navî jixwe bikarhênerek heye.",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "Pêborîn li hev nayên.",

@@ -538,7 +538,9 @@
         },
         "addressHistory": {
             "title": "{name} addressi ajalugu",
-            "currentBalance": "Hetke kontojääk: {balance}"
+            "currentBalance": "Balance: {balance}",
+            "internal": "Internal Address",
+            "external": "Deposit Address"
         },
         "node": {
             "titleAdd": "Lisa sõlm",
@@ -788,7 +790,8 @@
         "searching": "Otsin...",
         "closeFirefly": "Sulge Firefly",
         "generateAddress": "Loo aadress",
-        "migrateAgain": "Migrate another index"
+        "migrateAgain": "Migrate another index",
+        "done": "Done"
     },
     "general": {
         "password": "Salasõna",
@@ -953,7 +956,10 @@
     "error": {
         "profile": {
             "length": "Your profile name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "duplicate": "Sellenimeline profiil on juba olemas."
+            "duplicate": "Sellenimeline profiil on juba olemas.",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "Salasõnad ei ühti.",

@@ -538,7 +538,9 @@
         },
         "addressHistory": {
             "title": "Hístória adries konta {name} \n",
-            "currentBalance": "Aktuálny zostatok: {balance}"
+            "currentBalance": "Balance: {balance}",
+            "internal": "Internal Address",
+            "external": "Deposit Address"
         },
         "node": {
             "titleAdd": "Pridať uzol",
@@ -788,7 +790,8 @@
         "searching": "Vyhľadávanie...",
         "closeFirefly": "Zavrieť Firefly",
         "generateAddress": "Vygenerovať adresu",
-        "migrateAgain": "Migrovať ďalší index"
+        "migrateAgain": "Migrovať ďalší index",
+        "done": "Done"
     },
     "general": {
         "password": "Heslo",
@@ -953,7 +956,10 @@
     "error": {
         "profile": {
             "length": "Názov vášho profilu nemôže byť dlhší ako {length, plural, one {1 znak}\n few {# znaky}\n other {# znakov}}.",
-            "duplicate": "Profil s týmto názvom už existuje."
+            "duplicate": "Profil s týmto názvom už existuje.",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "Heslá sa nezhodujú.",

@@ -15,16 +15,16 @@
         },
         "profile": {
             "title": "Criar um perfil",
-            "profileName": "Profile name",
+            "profileName": "Nome do Perfil",
             "body1": "Poderá criar vários perfis de utilizadores para manter a sua carteira organizada e melhorar a privacidade.",
             "body2": {
-                "first": "For now, let's start with your first profile name.",
-                "nonFirst": "For now, let's start with your profile name."
+                "first": "Por agora, vamos começar com o nome do seu primeiro perfil.",
+                "nonFirst": "Por agora, vamos começar com o nome do seu primeiro perfil."
             },
-            "addMore": "You can add more profiles later.",
+            "addMore": "Você pode adicionar mais perfis mais tarde.",
             "developer": {
-                "label": "Developer profile",
-                "info": "Connect to public and private IOTA networks"
+                "label": "Perfil do Desenvolvedor",
+                "info": "Conectar a redes IOTA públicas e privadas"
             }
         },
         "setup": {
@@ -39,30 +39,30 @@
             "body2": "Se preencher o Kit de Recuperação e armazená-lo de forma segura, sempre poderá recuperar as suas carteiras."
         },
         "create": {
-            "title": "Create a wallet",
-            "body": "Create a new wallet. You can choose a regular software wallet or if you have a Ledger device you can set up a hardware wallet.",
+            "title": "Criar uma Carteira",
+            "body": "Crie uma nova carteira. Pode escolher uma carteira de software ou, se tiver um dispositivo Ledger, poderá configurar uma carteira de hardware.",
             "softwareAccount": {
-                "title": "I want a software wallet",
-                "description": "Create a 24-word Recovery Phrase"
+                "title": "Eu quero uma carteira de software",
+                "description": "Crie uma frase de recuperação de 24 palavras"
             },
             "ledgerAccount": {
-                "title": "I want a hardware wallet",
-                "description": "Ledger Nano S or Nano X required"
+                "title": "Eu quero uma carteira de software",
+                "description": "Ledger Nano S ou Nano X necessária"
             }
         },
         "setupLedger": {
-            "progress1": "Connect your Ledger",
-            "progress2": "Generate address",
-            "progress3": "Switch Ledger app",
-            "progress4": "Transfer funds",
-            "watchVideo": "Watch video guide",
-            "videoGuide": "Ledger migration video guide"
+            "progress1": "Conecte o seu Ledger",
+            "progress2": "Gerar endereço",
+            "progress3": "Alternar aplicação Ledger",
+            "progress4": "Transferir Fundos",
+            "watchVideo": "Assista ao guia em vídeo",
+            "videoGuide": "Guia em vídeo para migração da Ledger"
         },
         "ledgerInstallationGuide": {
-            "title": "Have you installed the necessary Ledger apps?",
-            "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
-            "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
-            "action": "Yes, I've installed these apps"
+            "title": "Instalou as aplicações Ledger necessárias?",
+            "body1": "Antes de continuar, deve encontrar e instalar através da Ledger Live tanto a aplicação IOTA {legacy} quanto o novo.",
+            "body2": "Certifique-se de que o firmware da sua Ledger esteja atualizado. Todo Las as aplicações pré-instaladas devem ser atualizados para a sua versão mais recente.",
+            "action": "Sim, instalei estas apps"
         },
         "password": {
             "title": "Criar uma palavra-passe",
@@ -121,9 +121,9 @@
             "title": "Configuração da carteira concluída",
             "fundsMigrated": "Fundos migrados",
             "body": "A sua nova carteira está pronta para ser usada.",
-            "softwareMigratedBody": "You have successfully migrated your funds to the new network",
-            "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
+            "softwareMigratedBody": "Migrou os seus fundos com sucesso para a nova rede",
+            "fireflyLedgerBody": "A sua conta Ledger foi recuperada com sucesso e pode continuar agora.",
+            "trinityLedgerBody": "Migrou os seus fundos com sucesso para a nova rede.",
             "exportMigration": "Exportar log de migração e concluir a configuração"
         },
         "import": {
@@ -135,8 +135,8 @@
             "importMnemonicDescription": "Digite a sua frase de recuperação para recuperar as suas carteiras",
             "importFile": "Eu tenho um ficheiro de backup",
             "importFileDescription": "Enviar a Seedvault ou o ficheiro de Stronghold",
-            "importLedger": "I have a Ledger backup",
-            "importLedgerDescription": "Restore or migrate a Ledger profile"
+            "importLedger": "Tenho um backup da Ledger",
+            "importLedgerDescription": "Restaurar ou migrar um perfil Ledger"
         },
         "importFromText": {
             "seed": {
@@ -158,22 +158,22 @@
             "body": "Importe um arquivo de backup para restaurar as suas carteiras. Backups podem ser arquivos Stronghold (.stronghold) ou Trinity SeedVault (.kdbx)."
         },
         "importFromLedger": {
-            "title": "Restore or Migrate your Ledger",
-            "body": "Restore an existing Firefly Ledger profile, or migrate your funds from Trinity.",
-            "haveFireflyLedger": "I have a Firefly Ledger backup",
-            "haveFireflyLedgerDescription": "Restore a Firefly profile",
-            "haveTrinityLedger": "I have a Trinity Ledger backup",
-            "haveTrinityLedgerDescription": "Migrate a Trinity profile"
+            "title": "Restaurar ou migrar o seu Ledger",
+            "body": "Restaure um perfil Ledger existente da Firefly, ou migre os seus fundos da Trinity.",
+            "haveFireflyLedger": "Eu tenho um backup Ledger da Firefly",
+            "haveFireflyLedgerDescription": "Restaurar um perfil Firefly",
+            "haveTrinityLedger": "Tenho um backup Ledger da Trinity",
+            "haveTrinityLedgerDescription": "Migrar um perfil da Trinity"
         },
         "connectLedger": {
-            "title": "Connect your Ledger to Firefly",
-            "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed.",
-            "trafficLight1": "Connect and unlock your Ledger with your PIN",
-            "trafficLight2": "Open the new IOTA app on your Ledger",
-            "tips": "Tips if your Ledger isn’t connecting"
+            "title": "Conecte a sua Ledger à Firefly",
+            "body": "Para que o seu dispositivo Ledger seja encontrado pela Firefly, certifique-se de que o aplicativo oficial Ledger Live esteja fechado.",
+            "trafficLight1": "Conecte e desbloqueie a sua Ledger com o seu PIN",
+            "trafficLight2": "Abra a nova aplicação IOTA na sua Ledger",
+            "tips": "Dicas caso a sua Ledger não esteja a conectar"
         },
         "restoreFromFireflyLedger": {
-            "title": "Restore Your Ledger Profile",
+            "title": "Restaurar o seu perfil Ledger",
             "body": "Press restore to complete the setup process and restore your wallets, balances and transaction history.",
             "restoring": "Restoring from Ledger..."
         },
@@ -538,7 +538,9 @@
         },
         "addressHistory": {
             "title": "{name} histórico de endereços",
-            "currentBalance": "Saldo atual: {balance}"
+            "currentBalance": "Balance: {balance}",
+            "internal": "Internal Address",
+            "external": "Deposit Address"
         },
         "node": {
             "titleAdd": "Adicionar servidor",
@@ -641,7 +643,7 @@
             }
         },
         "ledgerConnectionGuide": {
-            "title": "Tips if your Ledger isn’t connecting",
+            "title": "Dicas caso a sua Ledger não esteja a conectar",
             "steps": {
                 "0": "Make sure Ledger Live is not open on your computer",
                 "1": "Ensure you have unlocked your Ledger device with your PIN",
@@ -787,8 +789,9 @@
         "searchAgain": "Pesquisar novamente",
         "searching": "Pesquisando...",
         "closeFirefly": "Fechar Firefly",
-        "generateAddress": "Generate address",
-        "migrateAgain": "Migrate another index"
+        "generateAddress": "Gerar endereço",
+        "migrateAgain": "Migrate another index",
+        "done": "Done"
     },
     "general": {
         "password": "Palavra-passe",
@@ -953,7 +956,10 @@
     "error": {
         "profile": {
             "length": "O seu nome de perfil não pode ter mais do que {length, plural, one {1 caractere} other {# caracteres}}.",
-            "duplicate": "Já existe um perfil com este nome."
+            "duplicate": "Já existe um perfil com este nome.",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "As palavras-passe não coincidem.",
