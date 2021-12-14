@@ -17,9 +17,17 @@ let participationPollInterval
  * @returns {Promise<void>}
  */
 export async function pollParticipationOverview(): Promise<void> {
-    await getParticipationOverview()
-    /* eslint-disable @typescript-eslint/no-misused-promises */
-    participationPollInterval = setInterval(async () => getParticipationOverview(), PARTICIPATION_POLL_DURATION)
+    try {
+        await getParticipationOverview()
+        /* eslint-disable @typescript-eslint/no-misused-promises */
+        participationPollInterval = setInterval(async () => getParticipationOverview(), PARTICIPATION_POLL_DURATION)
+
+    } catch (error) {
+        if (error && error?.error.includes('pluginNotFound')) {
+            clearPollParticipationOverviewInterval()
+        }
+    }
+
 }
 
 /**
