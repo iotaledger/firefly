@@ -27,10 +27,10 @@
     const _hasAccount = (accounts: WalletAccount[]): boolean => _getAccount(accounts) !== undefined
 
     let isPartiallyStaked = false
-    $: isPartiallyStaked = _hasAccount($partiallyStakedAccounts) && !isStakingPossible($stakingEventState)
+    $: isPartiallyStaked = _hasAccount($partiallyStakedAccounts) && isStakingPossible($stakingEventState)
 
     let isStaked = false
-    $: isStaked = _hasAccount($stakedAccounts) && !isStakingPossible($stakingEventState)
+    $: isStaked = _hasAccount($stakedAccounts) && isStakingPossible($stakingEventState)
 
     let showPartialStakeTooltip = false
     let iconBox
