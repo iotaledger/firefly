@@ -107,9 +107,7 @@
                     on:mouseenter={toggleTooltip}
                     on:mouseleave={toggleTooltip}
                 >
-                    {#if isPartiallyStaked}
-                        <Icon icon="exclamation" classes="fill-current text-yellow-600" />
-                    {/if}
+                    <Icon icon="exclamation" classes="fill-current text-yellow-600" />
                 </div>
             {/if}
         </div>
