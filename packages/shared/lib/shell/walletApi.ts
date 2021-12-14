@@ -14,6 +14,7 @@ import { ErrorType } from '../typings/events'
 import { logError } from './errorLogger'
 import { getErrorMessage } from './walletErrors'
 import { ErrorTypes as ValidatorErrorTypes } from '../typings/validator'
+import { NodePlugin } from '../typings/node'
 
 type CallbacksStore = {
     [id: string]: CallbacksPattern
@@ -180,7 +181,7 @@ Wallet.onMessage((message: MessageResponse) => {
         const { onSuccess, onError } = callbacksStore[id]
 
         if (message.type === ResponseTypes.Error) {
-            onError(handleError(message.payload.type, message.payload.error))
+            onError(handleError(message.payload.type, message.payload.error, message.action))
         } else if (message.type === ResponseTypes.Panic) {
             onError(handleError(ErrorType.Panic, message.payload))
         } else {
@@ -225,11 +226,19 @@ const storeCallbacks = (__id: string, type: ResponseTypes, callbacks?: Callbacks
  */
 const handleError = (
     type: ErrorType | ValidatorErrorTypes,
-    error: string
+    error: string,
+    action?: string
 ): { type: ErrorType | ValidatorErrorTypes; error: string } => {
     const newError = { type, message: error, time: Date.now() }
 
-    logError(newError)
+    if (error.includes('Response error with status code 403')) {
+        if (action && action.includes(NodePlugin.Participation)) {
+            newError.message = `${NodePlugin.Participation} not available on your current node. Please try a different node and try again.`
+            logError(newError)
+        }
+    } else {
+        logError(newError)
+    }
 
     // TODO: Add full type list to remove this temporary fix
     const _getError = () => {
