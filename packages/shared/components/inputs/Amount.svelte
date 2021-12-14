@@ -74,7 +74,7 @@
             const rawAmount = changeUnits(amountAsFloat, unit as Unit, Unit.i)
             const fiatAmount = convertToFiat(rawAmount, $currencies[CurrencyTypes.USD], $exchangeRates[currency])
 
-            return fiatAmount === 0 ? replaceCurrencyDecimal('< 0.01') : formatCurrency(fiatAmount)
+            return fiatAmount === 0 ? rawAmount === 0 ? formatCurrency(0) : '< ' + formatCurrency(0.01) : formatCurrency(fiatAmount)
         }
 
         return convertAmount(_amount, undefined, _convert)
@@ -92,10 +92,8 @@
     }
 
     const convertAmount = (_amount, _unit, convertFn) => {
-        if (!amount) return null
-
         const amountAsFloat = parseCurrency(_amount, _unit)
-        if (amountAsFloat === 0 || Number.isNaN(amountAsFloat)) return null
+        if (Number.isNaN(amountAsFloat)) return null
 
         return convertFn(amountAsFloat)
     }
@@ -114,7 +112,7 @@
 
         // IOTA -> FIAT
         if (isFiatCurrency(toUnit)) {
-            amount = convertAmountToFiat(amount).slice(2)
+            amount = parseFloat(convertAmountToFiat(amount).slice(2))
         } else {
             let rawAmount
 
