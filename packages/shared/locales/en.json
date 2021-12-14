@@ -959,7 +959,7 @@
             "length": "Your profile name can't be longer than {length, plural, one {1 character} other {# characters}}.",
             "duplicate": "A profile with this name already exists.",
             "delete": {
-                "nonEmptyAccounts": "Cannot delete profile as one or more accounts are non empty."
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
             }
         },
         "password": {
