@@ -113,7 +113,7 @@
                 </div>
             {/if}
         </div>
-        <Text type="h5" classes="text-3xl">{formatUnitBestMatch(canParticipateInEvent ? $stakedAmount : 0)}</Text>
+        <Text type="h2">{formatUnitBestMatch(canParticipateInEvent ? $stakedAmount : 0)}</Text>
         {#if canParticipateInEvent}
             <Text type="p" smaller overrideColor classes="mt-1 text-gray-500 dark:text-gray-600">
                 {formatUnitBestMatch($unstakedAmount)}
