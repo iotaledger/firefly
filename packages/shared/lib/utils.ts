@@ -325,7 +325,7 @@ export const chunkString = (str: string, size: number = 0): string[] => {
 export const delineateNumber = (str: string, delineator: ',' | '.' | '' = ','): string => {
     if (!str) return ''
 
-    return str.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    return str.toString().replace(/\B(?=(\d{3})+(?!\d))/g, delineator)
 }
 
 /**
