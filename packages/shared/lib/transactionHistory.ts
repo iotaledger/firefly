@@ -1,3 +1,4 @@
+import { formatDate } from './i18n'
 import type { WalletAccount } from './typings/wallet'
 import { formatUnitBestMatch } from './units'
 
@@ -22,7 +23,7 @@ export const generateTransactionHistoryCsvFromAccount = (
     headerParams.value && headerParts.push('raw value (iota)')
     headerParams.formattedValue && headerParts.push('formatted value')
     headerParams.date && headerParts.push('date')
-    headerParams.time && headerParts.push('time (UTC)')
+    headerParams.time && headerParts.push('time')
 
     let csv = headerParts.join(',') + NEW_LINE
 
@@ -34,16 +35,24 @@ export const generateTransactionHistoryCsvFromAccount = (
             const formattedValueString = incoming
                 ? formatUnitBestMatch(value, true)
                 : '-' + formatUnitBestMatch(value, true)
-
-            const timestampParts = timestamp.split(/[TZ.]/, 2)
+            const date = formatDate(new Date(timestamp), {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+            })
+            const time = formatDate(new Date(timestamp), {
+                hour: 'numeric',
+                minute: 'numeric',
+                timeZoneName: 'short',
+            })
 
             const csvLineParts: string[] = []
             headerParams.id && csvLineParts.push(String(id))
             headerParams.internal && csvLineParts.push(String(internal))
             headerParams.value && csvLineParts.push(valueString)
             headerParams.formattedValue && csvLineParts.push(formattedValueString)
-            headerParams.date && csvLineParts.push(String(timestampParts[0]))
-            headerParams.date && csvLineParts.push(timestampParts[1])
+            headerParams.date && csvLineParts.push(date)
+            headerParams.time && csvLineParts.push(time)
 
             const csvLine = csvLineParts.join(',') + NEW_LINE
             csv = csv + csvLine
