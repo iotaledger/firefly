@@ -538,7 +538,9 @@
         },
         "addressHistory": {
             "title": "تاریخچه آدرس {name}",
-            "currentBalance": "موجودی در حال حاضر: {balance}"
+            "currentBalance": "Balance: {balance}",
+            "internal": "Internal Address",
+            "external": "Deposit Address"
         },
         "node": {
             "titleAdd": "اضافه کردن نود",
@@ -788,7 +790,8 @@
         "searching": "درحال جستجو...",
         "closeFirefly": "بستن Firefly",
         "generateAddress": "Generate address",
-        "migrateAgain": "Migrate another index"
+        "migrateAgain": "Migrate another index",
+        "done": "Done"
     },
     "general": {
         "password": "رمز عبور",
@@ -953,7 +956,10 @@
     "error": {
         "profile": {
             "length": "پروفایل شما نمیتواند بیشتر از {length, plural, one {1 کاراکتر} other {# کاراکتر}} باشد.",
-            "duplicate": "یک پروفایل با این نام وجود دارد."
+            "duplicate": "یک پروفایل با این نام وجود دارد.",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "رمزهای عبور یکسان نیستند.",

@@ -15,7 +15,7 @@
         },
         "profile": {
             "title": "Skep 'n Profiel",
-            "profileName": "Profile name",
+            "profileName": "Profiel Naam",
             "body1": "Jy kan verskeie gebruikersprofiele skep om jou tokens apart te hou en privaatheid te verbeter.",
             "body2": {
                 "first": "Laat ons eers begin met jou eerste profielnaam.",
@@ -23,8 +23,8 @@
             },
             "addMore": "Jy kan later meer profiele byvoeg.",
             "developer": {
-                "label": "Developer profile",
-                "info": "Connect to public and private IOTA networks"
+                "label": "Ontwikkelaarsprofiel",
+                "info": "Koppel aan publieke en private IOTA-netwerke"
             }
         },
         "setup": {
@@ -312,7 +312,7 @@
             "theme": {
                 "title": "Tema",
                 "description": "",
-                "advice": "Restart the Firefly application for changes to the system theme to take effect"
+                "advice": "Herbegin die Firefly app sodat veranderinge aan die stelseltema in werking tree"
             },
             "language": {
                 "title": "Taal",
@@ -328,14 +328,14 @@
             },
             "networkStatus": {
                 "title": "Netwerk status",
-                "description": "Displays the status of the node you are currently connected to"
+                "description": "Vertoon die status van die nodes waaraan jy tans gekoppel is"
             },
             "exportStronghold": {
-                "title": "Export backup",
+                "title": "Voer back-up uit",
                 "description": "Uitvoer na 'n Stronghold lêer - 'n volledige geïnkripteer back-up van jou beursies en die nuutste transaksiegeskiedenis"
             },
             "appLock": {
-                "title": "Automatic lock",
+                "title": "Sluit outomaties",
                 "description": "Onaktiwiteitstyd voordat jou beursies sluit en jou uitgeteken",
                 "durationMinute": "{time, plural, one {1 minuut} other {# minute}}",
                 "durationHour": "{time, plural, one {1 huur} other {# ure}}"
@@ -366,38 +366,38 @@
             },
             "deepLinks": {
                 "title": "IOTA links",
-                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
+                "description": "Vul transaksiedata outomaties in Firefly deur op 'n IOTA link te click"
             },
             "networkConfiguration": {
-                "title": "Network config",
-                "title2": "Network configuration",
+                "title": "Netwerk konfigurasie",
+                "title2": "Netwerk konfigurasie",
                 "description": {
-                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
-                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                    "dev": "Jou netwerkinstellings sal outomaties opgedateer word volgens die huidige noduskonfigurasie (om van netwerke om te skakel sal lei tot die terugstelling van die beursiestatus)",
+                    "nonDev": "Jou netwerkinstellings sal outomaties opgedateer word volgens die huidige noduskonfigurasie"
                 },
-                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
-                "resetWallet": "Your wallet state has been reset.",
-                "connectedTo": "Connected to",
+                "switchedNetworks": "Het netwerk suksesvol na \"{networkName}\" oorgeskakel.",
+                "resetWallet": "Jou beursiestatus is teruggestel.",
+                "connectedTo": "Gekoppel aan",
                 "nodeConfiguration": {
-                    "title": "Node selection",
-                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
+                    "title": "Node keuse",
+                    "description": "Kies \"Manual\" om nodusinstellings op te stel en aan jou eie node(s) te koppel",
                     "automatic": "Automatic",
                     "manual": "Manual"
                 }
             },
             "configureNodeList": {
-                "title": "Node configuration",
-                "description": "Manage the list of nodes you connect to",
+                "title": "Node konfigurasie",
+                "description": "Bestuur die lys van nodes waaraan jy kan koppel",
                 "primaryNode": "Primêre node",
                 "excludeNode": "Exclude node",
                 "includeNode": "Include node",
-                "editDetails": "Edit details",
-                "viewInfo": "View info",
+                "editDetails": "Redigeer details",
+                "viewInfo": "Wys inligting",
                 "setAsPrimary": "Stel as primêre Node",
                 "removeNode": "Verwyder node",
                 "includeOfficialNodeList": "Sluit die amptelike nodelys in",
-                "noNodes": "There are no nodes, unable to connect to the network",
-                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
+                "noNodes": "Daar is geen nodes nie, kan nie aan die netwerk koppel nie",
+                "noNodesAuto": "Daar is geen nodes nie, outomatiese seleksie sal eerder gebruik word"
             },
             "proofOfWork": {
                 "title": "Proof of work",
@@ -412,7 +412,7 @@
                 "description": "Kyk na stelsel- en toepassingsinligting"
             },
             "migrateLedgerIndex": {
-                "title": "Migrate Ledger index",
+                "title": "Migreer Ledger indeks",
                 "description": "Migreer 'n ander Trinity rekeningindeks"
             },
             "transactionHistory": {
@@ -429,7 +429,7 @@
             },
             "faq": {
                 "title": "FAQ",
-                "title2": "Frequently asked questions",
+                "title2": "Gereelde vrae",
                 "description": "Kyk na die algemene vrae om hulp te kry met algemene probleme of vrae"
             },
             "discord": {
@@ -538,31 +538,33 @@
         },
         "addressHistory": {
             "title": "{name} adresgeskiedenis",
-            "currentBalance": "Huidige balaans: {balance}"
+            "currentBalance": "Balans: {balance}",
+            "internal": "Interne adres",
+            "external": "Deposito adres"
         },
         "node": {
             "titleAdd": "Add Node",
             "titleUpdate": "Dateer 'n node op",
             "titleRemove": "Verwyder 'n node",
-            "titleRemoveAll": "Remove all nodes",
+            "titleRemoveAll": "Verwyder alle nodes",
             "titleDetails": "Node besonderhede",
-            "titleInfo": "Node info",
-            "addingNode": "Adding node",
-            "updatingNode": "Updating node",
-            "loadingNodeInfo": "Loading node info",
+            "titleInfo": "Node inligting",
+            "addingNode": "Voeg node tans by",
+            "updatingNode": "Dateer tans node op",
+            "loadingNodeInfo": "Opdatering van node inligting",
             "nodeAddress": "Node adres",
             "optionalUsername": "Username (opsioneel)",
             "optionalPassword": "Wagwoord (opsioneel)",
-            "optionalJwt": "JSON web token (optional)",
+            "optionalJwt": "JSON-webtoken (opsioneel)",
             "setAsPrimaryNode": "Stel as primêre Node",
             "removeConfirmation": "Is jy seker dat ujy hierdie node wil verwyder?",
-            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "removeAllConfirmation": "Is jy seker dat jy al die nodes wil verwyder?",
             "info": {
                 "url": "URL",
                 "software": "Software",
                 "networkId": "Network ID",
                 "bech32HRP": "Bech32 HRP",
-                "features": "Features",
+                "features": "Funksies",
                 "confirmedMilestoneIndex": "Confirmed milestone index",
                 "pruningIndex": "Pruning index",
                 "messagesPerSecond": "Boodskappe per sekondes",
@@ -570,11 +572,11 @@
             }
         },
         "switchNetwork": {
-            "title": "Switch network",
-            "newNetwork": "New network",
-            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
-            "switchingNetwork": "Switching network",
-            "typePassword": "Type your password to switch to:"
+            "title": "Skakel netwerk oor",
+            "newNetwork": "Nuwe netwerk",
+            "resetWarning": "Verandering van netwerke sal jou afmeld en alle rekeninge, balanse en transaksiegeskiedenis vir hierdie profiel terugstel.",
+            "switchingNetwork": "Skakel netwerk oor",
+            "typePassword": "Tik in you wagwoord om oor te skakel na:"
         },
         "errorLog": {
             "title": "Foutlêer",
@@ -751,7 +753,7 @@
         "addNode": "Add Node",
         "updateNode": "Dateer node op",
         "removeNode": "Verwyder node",
-        "removeAllNodes": "Remove all nodes",
+        "removeAllNodes": "Verwyder alle nodes",
         "hide": "Versteek",
         "hideOthers": "Versteek Ander",
         "showAll": "Vertoon alles",
@@ -788,7 +790,8 @@
         "searching": "Soek tans...",
         "closeFirefly": "Maak Firefly toe",
         "generateAddress": "Genereer nuwe adres",
-        "migrateAgain": "Migreer 'n ander ndeks"
+        "migrateAgain": "Migreer 'n ander ndeks",
+        "done": "Done"
     },
     "general": {
         "password": "Wagwoord",
@@ -953,7 +956,10 @@
     "error": {
         "profile": {
             "length": "Jou profielnaam mag nie langer as {length, plural, one {1 karakter} other {# karakters}}.",
-            "duplicate": "Daar bestaan ​​reeds 'n profiel met hierdie naam."
+            "duplicate": "Daar bestaan ​​reeds 'n profiel met hierdie naam.",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "Wagwoorde stem nie ooreen nie.",

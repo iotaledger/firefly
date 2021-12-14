@@ -538,7 +538,9 @@
         },
         "addressHistory": {
             "title": "주소 {name} 이력",
-            "currentBalance": "현재 잔액: {balance}"
+            "currentBalance": "잔액: {balance}",
+            "internal": "내부 주소",
+            "external": "입금 주소"
         },
         "node": {
             "titleAdd": "노드 추가",
@@ -788,7 +790,8 @@
         "searching": "검색 중...",
         "closeFirefly": "Firefly 닫기",
         "generateAddress": "주소 생성",
-        "migrateAgain": "다른 인덱스 마이그레이션"
+        "migrateAgain": "다른 인덱스 마이그레이션",
+        "done": "완료"
     },
     "general": {
         "password": "비밀번호",
@@ -953,7 +956,10 @@
     "error": {
         "profile": {
             "length": "사용자 이름은 {length, plural, other {#글자}} 보다 길 수 없습니다.",
-            "duplicate": "같은 이름의 사용자가 이미 존재합니다"
+            "duplicate": "같은 이름의 사용자가 이미 존재합니다",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "비밀번호가 맞지 않습니다.",

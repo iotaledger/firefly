@@ -538,7 +538,9 @@
         },
         "addressHistory": {
             "title": "Historial d'adreces de {name}",
-            "currentBalance": "Saldo actual: {balance}"
+            "currentBalance": "Balance: {balance}",
+            "internal": "Internal Address",
+            "external": "Deposit Address"
         },
         "node": {
             "titleAdd": "Afegeix un node",
@@ -788,7 +790,8 @@
         "searching": "Cercant...",
         "closeFirefly": "Tanca Firefly",
         "generateAddress": "Generar adreça",
-        "migrateAgain": "Migrate another index"
+        "migrateAgain": "Migrate another index",
+        "done": "Done"
     },
     "general": {
         "password": "Contrasenya",
@@ -953,7 +956,10 @@
     "error": {
         "profile": {
             "length": "El nom del vostre perfil no pot superar {length, plural, one {1 caràcter} other {# caràcters}}.",
-            "duplicate": "Ja existeix un perfil amb aquest nom."
+            "duplicate": "Ja existeix un perfil amb aquest nom.",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "Les contrasenyes no coincideixen.",

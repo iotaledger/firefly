@@ -538,7 +538,9 @@
         },
         "addressHistory": {
             "title": "{name} история на адрес",
-            "currentBalance": "Наличност: {balance}"
+            "currentBalance": "Balance: {balance}",
+            "internal": "Internal Address",
+            "external": "Deposit Address"
         },
         "node": {
             "titleAdd": "Добави Node сървър",
@@ -788,7 +790,8 @@
         "searching": "Търсене...",
         "closeFirefly": "Затвори Firefly",
         "generateAddress": "Генериране на адрес",
-        "migrateAgain": "Мигриране на друг индекс"
+        "migrateAgain": "Мигриране на друг индекс",
+        "done": "Done"
     },
     "general": {
         "password": "Парола",
@@ -953,7 +956,10 @@
     "error": {
         "profile": {
             "length": "Името на профила не може да бъде по-дълго от {length, plural, one {1 символ} other {# символа}}.",
-            "duplicate": "Профил с това име вече съществува."
+            "duplicate": "Профил с това име вече съществува.",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "Паролите не съвпадат.",

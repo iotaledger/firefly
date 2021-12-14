@@ -538,7 +538,9 @@
         },
         "addressHistory": {
             "title": "{name} povijest adresa",
-            "currentBalance": "Trenutno stanje računa {balance}"
+            "currentBalance": "Stanje: {balance}",
+            "internal": "Interna adresa",
+            "external": "Adresa za depozit"
         },
         "node": {
             "titleAdd": "Dodaj node",
@@ -788,7 +790,8 @@
         "searching": "Pretraga...",
         "closeFirefly": "Zatvori Firefly",
         "generateAddress": "Generiraj adresu",
-        "migrateAgain": "Migriraj drugi index"
+        "migrateAgain": "Migriraj drugi index",
+        "done": "Izvršeno"
     },
     "general": {
         "password": "Lozinka",
@@ -953,7 +956,10 @@
     "error": {
         "profile": {
             "length": "Ime profila ne smije biti dulje od {length, plural, one {1 znaka} few {# znaka} other {# znakova}}.",
-            "duplicate": "Profil s ovim imenom već postoji."
+            "duplicate": "Profil s ovim imenom već postoji.",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "Lozinke nisu iste.",

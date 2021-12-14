@@ -538,7 +538,9 @@
         },
         "addressHistory": {
             "title": "{name} 地址历史记录",
-            "currentBalance": "当前余额: {balance}"
+            "currentBalance": "Balance: {balance}",
+            "internal": "Internal Address",
+            "external": "Deposit Address"
         },
         "node": {
             "titleAdd": "添加节点",
@@ -788,7 +790,8 @@
         "searching": "搜索中...",
         "closeFirefly": "关闭Firefly",
         "generateAddress": "生成地址",
-        "migrateAgain": "迁移另一个Ledger索引"
+        "migrateAgain": "迁移另一个Ledger索引",
+        "done": "Done"
     },
     "general": {
         "password": "密码",
@@ -953,7 +956,10 @@
     "error": {
         "profile": {
             "length": "您的配置名称不能超过 {length, plural, one {1 个字符} other {# 字符}}。",
-            "duplicate": "同名配置文件已存在。"
+            "duplicate": "同名配置文件已存在。",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "密码不匹配。",
