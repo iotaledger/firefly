@@ -94,11 +94,11 @@
 </script>
 
 <div
-    class="px-3 py-2 flex flex-row space-x-2 items-center rounded-2xl bg-blue-100 dark:bg-gray-800"
+    class="pl-4 pr-3 py-2 flex flex-row space-x-2 items-center rounded-2xl bg-blue-100 dark:bg-gray-800"
     on:mouseenter={toggleTooltip}
     on:mouseleave={toggleTooltip}
 >
-    <div bind:this={indicatorBox}>
+    <div bind:this={indicatorBox} class="mr-1">
         <Icon icon='info-filled' width="16" height="16" classes="text-gray-600" />
     </div>
     <Text type="p">{indicatorText}</Text>

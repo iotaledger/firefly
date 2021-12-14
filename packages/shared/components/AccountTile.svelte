@@ -54,6 +54,7 @@
         }
     }
 
+    let showWarningState = false
     $: showWarningState = isPartiallyStaked || isBelowMinimumStakingRewards
 
     let showTooltip = false
@@ -117,12 +118,12 @@
             if (timeNeeded > $assemblyStakingRemainingTime || timeNeeded > $shimmerStakingRemainingTime) {
                 return {
                     title: localize('tooltips.stakingMinRewards.title'),
-                    body: localize('tooltips.stakingMinRewards.bodyNoFunds'),
+                    body: localize('tooltips.stakingMinRewards.bodyWillNotReachMin'),
                 }
             } else {
                 return {
                     title: localize('tooltips.stakingMinRewards.title'),
-                    body: `${localize('tooltips.stakingMinRewards.body')} ${localize('tooltips.stakingMinRewards.continue', { values: { duration: getBestTimeDuration(timeNeeded) } })}`,
+                    body: `${localize('tooltips.stakingMinRewards.bodyWillReachMin')} ${localize('tooltips.stakingMinRewards.continue', { values: { duration: getBestTimeDuration(timeNeeded) } })}`,
                 }
             }
         }
