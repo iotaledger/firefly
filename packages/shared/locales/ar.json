@@ -538,7 +538,9 @@
         },
         "addressHistory": {
             "title": "عرض سجل عمليات العنوان {name}",
-            "currentBalance": "الرصيد الحالي: {balance}"
+            "currentBalance": "Balance: {balance}",
+            "internal": "Internal Address",
+            "external": "Deposit Address"
         },
         "node": {
             "titleAdd": "إضافة عقدة node",
@@ -788,7 +790,8 @@
         "searching": "جاري البحث...",
         "closeFirefly": "إغلاق الفايرفلاي",
         "generateAddress": "Generate address",
-        "migrateAgain": "Migrate another index"
+        "migrateAgain": "Migrate another index",
+        "done": "Done"
     },
     "general": {
         "password": "كلمة المرور",
@@ -953,7 +956,10 @@
     "error": {
         "profile": {
             "length": "لا يمكن أن يكون اسم ملفك الشخصي أطول من {length, plural, zero {} one {1 حرف} two {# حروف} few {# حروف} many {# حروف} other {# حروف}}.",
-            "duplicate": "يوجد بالفعل حساب بهذا الاسم."
+            "duplicate": "يوجد بالفعل حساب بهذا الاسم.",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "كلمة المرور غير متطابقة.",

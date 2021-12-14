@@ -538,7 +538,9 @@
         },
         "addressHistory": {
             "title": "Историја на адресата на {name}",
-            "currentBalance": "Актуелен биланс: {balance}"
+            "currentBalance": "Balance: {balance}",
+            "internal": "Internal Address",
+            "external": "Deposit Address"
         },
         "node": {
             "titleAdd": "Додај јазол",
@@ -788,7 +790,8 @@
         "searching": "Се пребарува...",
         "closeFirefly": "Затвори го Firefly",
         "generateAddress": "Generate address",
-        "migrateAgain": "Migrate another index"
+        "migrateAgain": "Migrate another index",
+        "done": "Done"
     },
     "general": {
         "password": "Лозинка",
@@ -953,7 +956,10 @@
     "error": {
         "profile": {
             "length": "Името на вашиот профил не може биде подолго од {length, plural, one {1 карактер} other {# карактери}}.",
-            "duplicate": "Профил со ова име веќе постои."
+            "duplicate": "Профил со ова име веќе постои.",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "Лозинките не се совпаѓаат.",

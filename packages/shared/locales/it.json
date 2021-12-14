@@ -538,7 +538,9 @@
         },
         "addressHistory": {
             "title": "cronologia degli indirizzi di {name}",
-            "currentBalance": "Saldo attuale: {balance}"
+            "currentBalance": "Saldo: {balance}",
+            "internal": "Indirizzi interni",
+            "external": "Indirizzo di deposito"
         },
         "node": {
             "titleAdd": "Aggiungi un nodo",
@@ -672,10 +674,10 @@
         },
         "exportTransactionHistory": {
             "title": "Esporta lo storico delle transazioni",
-            "body": "Export your transaction history for all accounts consecutively within this profile. Exports will be in a CSV format.",
-            "profileName": "Profile name:",
-            "numberOfAccounts": "Number of accounts:",
-            "typePassword": "Type your password to allow exporting"
+            "body": "Esporta la cronologia delle transazioni per tutti gli account consecutivamente all'interno di questo profilo. Le esportazioni saranno in formato CSV.",
+            "profileName": "Nome profilo:",
+            "numberOfAccounts": "Numero di conti:",
+            "typePassword": "Digita la tua password per consentire l'esportazione"
         }
     },
     "charts": {
@@ -683,7 +685,7 @@
         "outgoingMi": "In uscita {value}",
         "portoflio": "Portafoglio",
         "token": "Token",
-        "holdings": "Holdings",
+        "holdings": "Capitale",
         "accountValue": "Valore Wallet",
         "accountActivity": "Attività Wallet",
         "timeframe1Hour": "1 ora",
@@ -731,9 +733,9 @@
         "dropHere": "Trascina qui il tuo file",
         "syncAll": "Sincronizza tutto",
         "export": "Esporta",
-        "exporting": "Exporting",
+        "exporting": "Sto esportando",
         "exportNewStronghold": "Esporta un nuovo Stronghold",
-        "enableDeepLinks": "Enable IOTA links",
+        "enableDeepLinks": "Abilita i link di IOTA",
         "enableDeveloperMode": "Abilita Modalità Sviluppatore",
         "enableSystemNotifications": "Abilita notifiche di sistema",
         "exportTransactionHistory": "Esporta lo storico delle transazioni",
@@ -788,7 +790,8 @@
         "searching": "Ricerca...",
         "closeFirefly": "Chiudi Firefly",
         "generateAddress": "Genera un indirizzo",
-        "migrateAgain": "Migra un altro indice"
+        "migrateAgain": "Migra un altro indice",
+        "done": "Completato"
     },
     "general": {
         "password": "Password",
@@ -831,9 +834,9 @@
         "stronghold": "Stronghold",
         "language": "Lingua",
         "appearance": "Aspetto",
-        "lightTheme": "Light",
-        "darkTheme": "Dark",
-        "systemTheme": "System",
+        "lightTheme": "Chiaro",
+        "darkTheme": "Scuro",
+        "systemTheme": "Sistema",
         "balance": "Saldo",
         "accountBalance": "Saldo Wallet",
         "incoming": "In entrata",
@@ -850,7 +853,7 @@
         "transactions": "Transazioni",
         "security": "Sicurezza",
         "accountAddress": "Indirizzo Wallet",
-        "network": "Network",
+        "network": "Rete",
         "nodes": "Nodi",
         "wallet": "Portafoglio",
         "help": "Aiuto",
@@ -910,7 +913,7 @@
         "capsLock": "Blocco maiuscole è attivo",
         "version": "Versione {version}",
         "unknown": "Sconosciuto",
-        "none": "None"
+        "none": "Nessuno"
     },
     "dates": {
         "today": "Oggi",
@@ -936,16 +939,16 @@
         "accountsSynchronized": "Sincronizzazione wallet completata",
         "fundsAvailableSoon": "I tuoi fondi saranno disponibili a breve",
         "exportTransactionHistory": {
-            "success": "Transaction history for {accountAlias} was successfully saved to {filePath}",
-            "error": "Unable to export transaction history for {accountAlias}"
+            "success": "La cronologia delle transazioni per {accountAlias} è stata salvata correttamente in {filePath}",
+            "error": "Impossibile esportare la cronologia delle transazioni per {accountAlias}"
         },
         "deepLinkingRequest": {
-            "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
-            "notEnabled": "IOTA links are not enabled",
-            "invalidFormat": "The IOTA link you followed is invalid",
+            "recievedWhileLoggedOut": "Effettua il login per avviare il link IOTA",
+            "notEnabled": "I link di IOTA non sono abilitati",
+            "invalidFormat": "Il link di IOTA che hai seguito non è valido",
             "wallet": {
                 "send": {
-                    "success": "Payment details added from IOTA link"
+                    "success": "Dettagli di pagamento aggiunti dal link di IOTA"
                 }
             }
         }
@@ -953,7 +956,10 @@
     "error": {
         "profile": {
             "length": "Il nome del tuo profilo non può essere più lungo di {length, plural, one {1 carattere} other {# caratteri}}.",
-            "duplicate": "Esiste già un profilo con questo nome."
+            "duplicate": "Esiste già un profilo con questo nome.",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "Le password non corrispondono.",
@@ -1008,23 +1014,23 @@
         },
         "node": {
             "invalid": "Per favore, inserisci un URL valido.",
-            "dns": "Could not find DNS resolution for node.",
-            "timedOut": "The connection timed out.",
-            "refused": "The connection was refused.",
-            "handshake": "Could not complete handshake with node.",
-            "invalidCertificate": "Could not connect with invalid certificate.",
-            "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
+            "dns": "Impossibile trovare la risoluzione DNS per il nodo.",
+            "timedOut": "Timeout della connessione.",
+            "refused": "La connessione è stata rifiutata.",
+            "handshake": "Impossibile completare l' handshake con il nodo.",
+            "invalidCertificate": "Impossibile connettersi con un certificato non valido.",
+            "https": "HTTPS è richiesto; connessioni non sicure tramite HTTP non sono supportate in questo momento.",
             "duplicate": "Questo nodo è già stato aggiunto.",
             "unsynced": "Il nodo non è sincronizzato.",
             "noSynced": "Nessun nodo sincronizzato disponibile.",
-            "answer": "Failed to get an answer from all nodes.",
-            "forbidden": "This node connection is forbidden."
+            "answer": "Impossibile ottenere una risposta da tutti i nodi.",
+            "forbidden": "Questa connessione del nodo è vietata."
         },
         "network": {
-            "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
-            "notReachable": "The network ID for this node could not be retrieved, unable to add node.",
-            "badNodes": "Unable to connect to the network with current node configuration.",
-            "nonEmptyAccount": "You must transfer all balances before switching networks."
+            "mismatch": "L'ID di rete per questo nodo è \"{networkId}\", e non corrisponde alla rete corrente.",
+            "notReachable": "L'ID di rete per questo nodo non può essere recuperato, impossibile aggiungere il nodo.",
+            "badNodes": "Impossibile connettersi alla rete con la configurazione del nodo corrente.",
+            "nonEmptyAccount": "È necessario trasferire tutti i saldi prima di cambiare rete."
         },
         "global": {
             "generic": "Si è verificato un errore."
@@ -1059,12 +1065,12 @@
             "missingBundle": "Si è verificato un errore cercando di trovare il bundle delle transazioni."
         },
         "crypto": {
-            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
+            "cannotDecodeBech32": "Impossibile decodificare la stringa come indirizzo Bech32."
         }
     },
     "warning": {
         "node": {
-            "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
+            "http": "Utilizzando nodi in HTTP lascia il traffico non crittografato e potrebbe rappresentare un rischio per la sicurezza."
         }
     },
     "tooltips": {
