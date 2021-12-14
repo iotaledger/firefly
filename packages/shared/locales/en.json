@@ -670,7 +670,7 @@
         },
         "exportTransactionHistory": {
             "title": "Export transaction history",
-            "body": "Export the transaction history for the selected account. This export will be in csv format.",
+            "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
             "profileName": "Profile name:",
             "accountName": "Account name:",
             "typePassword": "Type your password to allow exporting"
