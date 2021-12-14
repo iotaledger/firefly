@@ -30,7 +30,7 @@
         "setup": {
             "title": "Set up a wallet",
             "chrysalisTitle": "Chrysalis Network Update",
-            "chrysalisBody": "From April 21st, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
+            "chrysalisBody": "From April 21st 2021, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
             "learnMore": "Learn about the migration"
         },
         "secure": {
@@ -415,10 +415,6 @@
                 "title": "Migrate Ledger index",
                 "description": "Migrate another Trinity account index"
             },
-            "transactionHistory": {
-                "title": "Transaction history",
-                "description": "Export the transaction history of your accounts as .csv files"
-            },
             "troubleshoot": {
                 "title": "Troubleshoot",
                 "description": "Use the troubleshooting wizard to solve common problems"
@@ -730,9 +726,9 @@
         },
         "exportTransactionHistory": {
             "title": "Export transaction history",
-            "body": "Export your transaction history for all accounts consecutively within this profile. Exports will be in a CSV format.",
+            "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
             "profileName": "Profile name:",
-            "numberOfAccounts": "Number of accounts:",
+            "accountName": "Account name:",
             "typePassword": "Type your password to allow exporting"
 
         },
@@ -1241,6 +1237,16 @@
             "body": "Your funds have not been staked long enough to reach minimum airdrop rewards.",
             "bodyNoTime": "You do not have enough IOTA staked to reach minimum airdrop rewards.",
             "continue": "Please continue staking for {duration}."
+        }
+    },
+    "exports": {
+        "transactionHistoryCsv": {
+            "messageId": "Message ID",
+            "internal": "Internal",
+            "rawValue": "Raw Value",
+            "formattedValue": "Formatted Value",
+            "date": "Date",
+            "time": "Time"
         }
     }
 }

@@ -23,8 +23,8 @@
             },
             "addMore": "Będziesz mógł dodać więcej profili później.",
             "developer": {
-                "label": "Profil dewelopera",
-                "info": "Połącz się z publicznymi i prywatnymi sieciami IOTA"
+                "label": "Profil deweloperski",
+                "info": "Połącz się z publicznymi oraz prywatnymi sieciami IOTA"
             }
         },
         "setup": {
@@ -531,14 +531,16 @@
             "body": "Portfel można odkryć później poprzez włączenie opcji \"Pokaż ukryte portfele\" w ustawieniach zaawansowanych.",
             "typePassword": "Wpisz hasło portfela, aby potwierdzić.",
             "hideAccount": "Ukryj portfel",
-            "errorTitle": "Nie można ukryć portfela {name}",
+            "errorTitle": "Nie można ukryć {name}",
             "errorBody1": "Aby ukryć portfel, jego saldo musi wynosić 0.",
             "errorBody2": "Obecnie posiadasz {balance} na tym portfelu. Przenieś te środki na inny portfel i spróbuj ponownie.",
             "errorBody3": "Nie możesz ukryć tego portfela. Co najmniej jeden portfel musi pozostać aktywny."
         },
         "addressHistory": {
-            "title": "Historia adresów dla portfela {name}",
-            "currentBalance": "Aktualne saldo: {balance}"
+            "title": "Historia adresów dla {name}",
+            "currentBalance": "Saldo: {balance}",
+            "internal": "Adres wewnętrzny",
+            "external": "Adres do wpłaty"
         },
         "node": {
             "titleAdd": "Dodaj serwer",
@@ -667,7 +669,7 @@
             "body": "Potwierdź, że adres odbiorczy wyświetlany na Twoim urządzeniu Ledger pasuje do adresu wyświetlanego poniżej. Jeśli wszystko się zgadza, naciśnij oba przyciski na Ledger zgodnie z instrukcją."
         },
         "ledgerMigrateIndex": {
-            "title": "Czy chcesz migrować kolejny indeks z Trinity?",
+            "title": "Czy potrzebujesz migrować kolejny indeks konta z Trinity?",
             "body": "Możesz tego dokonać później, w panelu ustawień zaawansowanych."
         },
         "exportTransactionHistory": {
@@ -681,9 +683,9 @@
     "charts": {
         "incomingMi": "Przychodzące {value}",
         "outgoingMi": "Wychodzące {value}",
-        "portoflio": "Portfolio",
-        "token": "Token",
-        "holdings": "Kapitał",
+        "portoflio": "Wartość",
+        "token": "Kurs",
+        "holdings": "Ilość",
         "accountValue": "Wartość portfela",
         "accountActivity": "Aktywność portfela",
         "timeframe1Hour": "1 godzina",
@@ -788,7 +790,8 @@
         "searching": "Wyszukiwanie...",
         "closeFirefly": "Zamknij Firefly",
         "generateAddress": "Generowanie adresu",
-        "migrateAgain": "Migruj kolejny indeks"
+        "migrateAgain": "Migruj kolejny indeks",
+        "done": "Gotowe"
     },
     "general": {
         "password": "Hasło",
@@ -921,11 +924,11 @@
         "yearsAgo": "{time, plural, one {# rok} few {# lata} many {# lat} other {# lat}} temu"
     },
     "notifications": {
-        "valueTx": "Odbieranie {{value}} na portfel {{account}}",
-        "confirmed": "Transakcja wychodząca {{value}} z portfela {{account}} została potwierdzona",
+        "valueTx": "Odbieranie {{value}} na {{account}}",
+        "confirmed": "Transakcja wychodząca {{value}} z {{account}} została potwierdzona",
         "confirmedInternal": "Transfer {{value}} z {{senderAccount}} na {{receiverAccount}} został potwierdzony",
         "confirmedInternalNoAccounts": "Wewnętrzny transfer {{value}} został potwierdzony",
-        "failed": "Wysyłka {{value}} z portfela {{account}} nie powiodła się",
+        "failed": "Transakcja wychodząca {{value}} z {{account}} nie powiodła się",
         "downloadingUpdate": "Pobieranie aktualizacji",
         "updateReady": "Aktualizacja jest gotowa",
         "updateError": "Podczas aktualizacji wystąpił błąd, spróbuj ponownie",
@@ -945,7 +948,7 @@
             "invalidFormat": "Link IOTA, który wybrałeś, jest nieprawidłowy",
             "wallet": {
                 "send": {
-                    "success": "Szczegóły płatności dodane z linku IOTA"
+                    "success": "Szczegóły płatności zostały wypełnione przy użyciu linku IOTA"
                 }
             }
         }
@@ -953,7 +956,10 @@
     "error": {
         "profile": {
             "length": "Twoja nazwa profilu nie może być dłuższa niż {length, plural, one {1 znak} few {# znaki} many {# znaków} other {# znaków}}.",
-            "duplicate": "Profil o takiej nazwie już istnieje."
+            "duplicate": "Profil o takiej nazwie już istnieje.",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "Hasła nie są zgodne.",

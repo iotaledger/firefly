@@ -538,7 +538,9 @@
         },
         "addressHistory": {
             "title": "{name} アドレス履歴",
-            "currentBalance": "現在の残高: {balance}"
+            "currentBalance": "残高: {balance}",
+            "internal": "ウォレット内アドレス",
+            "external": "入金先アドレス"
         },
         "node": {
             "titleAdd": "ノードの追加",
@@ -683,7 +685,7 @@
         "outgoingMi": "{value} 出金",
         "portoflio": "ポートフォリオ",
         "token": "トークン",
-        "holdings": "保有",
+        "holdings": "保有資産",
         "accountValue": "ウォレットの価値",
         "accountActivity": "ウォレットのアクティビティ",
         "timeframe1Hour": "1時間",
@@ -788,7 +790,8 @@
         "searching": "検索しています...",
         "closeFirefly": "Firefly を閉じる",
         "generateAddress": "アドレスを生成",
-        "migrateAgain": "別のインデックスを移行"
+        "migrateAgain": "別のインデックスを移行",
+        "done": "完了しました"
     },
     "general": {
         "password": "パスワード",
@@ -953,7 +956,10 @@
     "error": {
         "profile": {
             "length": "プロファイル名は{length, plural, one {1 文字} other {# 文字}}より長くすることはできません。",
-            "duplicate": "この名前のプロファイルは既に存在します。"
+            "duplicate": "この名前のプロファイルは既に存在します。",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "パスワードが一致しません。",

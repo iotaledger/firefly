@@ -538,7 +538,9 @@
         },
         "addressHistory": {
             "title": "{name} address history",
-            "currentBalance": "Current balance: {balance}"
+            "currentBalance": "Balance: {balance}",
+            "internal": "Internal Address",
+            "external": "Deposit Address"
         },
         "node": {
             "titleAdd": "Dodaj Node",
@@ -788,7 +790,8 @@
         "searching": "Searching...",
         "closeFirefly": "Close Firefly",
         "generateAddress": "Generiraj naslov",
-        "migrateAgain": "Migrate another index"
+        "migrateAgain": "Migrate another index",
+        "done": "Done"
     },
     "general": {
         "password": "Password",
@@ -953,7 +956,10 @@
     "error": {
         "profile": {
             "length": "Your profile name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "duplicate": "A profile with this name already exists."
+            "duplicate": "A profile with this name already exists.",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "Passwords do not match.",

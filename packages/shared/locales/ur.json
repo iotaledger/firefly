@@ -538,7 +538,9 @@
         },
         "addressHistory": {
             "title": "{name} کے ایڈریسس کی تاریخ",
-            "currentBalance": "موجودہ بیلینس: {balance}"
+            "currentBalance": "Balance: {balance}",
+            "internal": "Internal Address",
+            "external": "Deposit Address"
         },
         "node": {
             "titleAdd": "ایک نوڈ شامل کریں",
@@ -788,7 +790,8 @@
         "searching": "تلاش ہو رہا ہے...",
         "closeFirefly": "فائر فلائی بند کریں",
         "generateAddress": "ایڈریس بنائیں",
-        "migrateAgain": "Migrate another index"
+        "migrateAgain": "Migrate another index",
+        "done": "Done"
     },
     "general": {
         "password": "پاس ورڈ",
@@ -953,7 +956,10 @@
     "error": {
         "profile": {
             "length": "آپ کے پروفائل کا نام {length, plural, one {1 حرف} other {# حروف}} سے زیادہ لمبا نہیں ہوسکتا ہے.",
-            "duplicate": "اس نام کی پروفائل پہلے سے موجود ہے."
+            "duplicate": "اس نام کی پروفائل پہلے سے موجود ہے.",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "پاس ورڈ ایک جیسے نہیں ہیں.",

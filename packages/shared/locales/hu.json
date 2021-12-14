@@ -538,7 +538,9 @@
         },
         "addressHistory": {
             "title": "{name} korábban használt címei",
-            "currentBalance": "Aktuális egyenleg: {balance}"
+            "currentBalance": "Egyenleg: {balance}",
+            "internal": "Privát cím",
+            "external": "Publikus cím"
         },
         "node": {
             "titleAdd": "Csomópont hozzáadása",
@@ -788,7 +790,8 @@
         "searching": "Keresés...",
         "closeFirefly": "Firefly bezárása",
         "generateAddress": "Új cím létrehozása",
-        "migrateAgain": "Másik számlasorszám migrálása"
+        "migrateAgain": "Másik számlasorszám migrálása",
+        "done": "Kész"
     },
     "general": {
         "password": "Jelszó",
@@ -953,7 +956,10 @@
     "error": {
         "profile": {
             "length": "A profil neve nem lehet {length, plural, one {1 karakternél} other {# karakternél}} hosszabb.",
-            "duplicate": "Már létezik ilyen nevű profil."
+            "duplicate": "Már létezik ilyen nevű profil.",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "A jelszavak nem egyeznek.",

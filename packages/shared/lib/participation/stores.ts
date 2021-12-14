@@ -15,6 +15,7 @@ import {
     ParticipationOverview,
     PendingParticipation,
     ParticipateResponsePayload,
+    AccountParticipationOverview,
 } from './types'
 
 /**
@@ -143,19 +144,20 @@ export const partiallyUnstakedAmount: Readable<number> = derived(
     ([$participationOverview, $partiallyStakedAccounts]) => {
         if ($partiallyStakedAccounts.length <= 0) return 0
 
-        const partiallyStakedOverviews = $partiallyStakedAccounts.map((psa) =>
-            $participationOverview.find((apo) => apo.accountIndex === psa.index)
-        )
-        const assemblyUnstakedFunds = partiallyStakedOverviews.reduce(
-            (total, apo) => total + apo.assemblyUnstakedFunds,
-            0
-        )
-        const shimmerUnstakedFunds = partiallyStakedOverviews.reduce(
-            (total, apo) => total + apo.shimmerUnstakedFunds,
-            0
-        )
+        const _eval = (overview: AccountParticipationOverview): number => {
+            const assemblyPartialFunds =
+                overview.assemblyStakedFunds > 0 && overview.assemblyUnstakedFunds > 0
+                    ? overview.assemblyUnstakedFunds
+                    : 0
+            const shimmerPartialFunds =
+                overview.shimmerStakedFunds > 0 && overview.shimmerUnstakedFunds > 0 ? overview.shimmerUnstakedFunds : 0
 
-        return Math.max(assemblyUnstakedFunds, shimmerUnstakedFunds)
+            return Math.max(assemblyPartialFunds, shimmerPartialFunds)
+        }
+
+        return $partiallyStakedAccounts
+            .map((psa) => $participationOverview.find((apo) => apo.accountIndex === psa.index))
+            .reduce((total, apo) => total + _eval(apo), 0)
     }
 )
 

@@ -538,7 +538,9 @@
         },
         "addressHistory": {
             "title": "Lompakon {name} osoitehistoria",
-            "currentBalance": "Nykyinen saldo: {balance}"
+            "currentBalance": "Saldo: {balance}",
+            "internal": "Sisäinen osoite",
+            "external": "Talletusosoite"
         },
         "node": {
             "titleAdd": "Lisää solmu",
@@ -788,7 +790,8 @@
         "searching": "Haetaan...",
         "closeFirefly": "Sulje Firefly",
         "generateAddress": "Luo osoite",
-        "migrateAgain": "Siirrä toinen indeksi"
+        "migrateAgain": "Siirrä toinen indeksi",
+        "done": "Valmis"
     },
     "general": {
         "password": "Salasana",
@@ -953,7 +956,10 @@
     "error": {
         "profile": {
             "length": "Profiilisi nimi ei voi olla pidempi kuin {length, plural, one {1 merkki} other {# merkkiä}}.",
-            "duplicate": "Samanniminen profiili on jo olemassa."
+            "duplicate": "Samanniminen profiili on jo olemassa.",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "Salasanat eivät täsmää.",
