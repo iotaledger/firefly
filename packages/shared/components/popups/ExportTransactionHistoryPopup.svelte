@@ -8,11 +8,12 @@
     import { activeProfile,isLedgerProfile,isSoftwareProfile,isStrongholdLocked } from 'shared/lib/profile'
     import type { Locale } from 'shared/lib/typings/i18n'
     import { asyncSetStrongholdPassword,wallet } from 'shared/lib/wallet'
-    import { get } from 'svelte/store'
+    import { get, Readable } from 'svelte/store'
+    import type { WalletAccount } from 'shared/lib/typings/wallet';
 
     export let locale: Locale
+    export let account: Readable<WalletAccount>
 
-    const { accounts } = $wallet
     const profileName = get(activeProfile)?.name
 
     let password = ''
@@ -34,19 +35,16 @@
                 return
             }
 
-            for (const walletAccount of $accounts) {
-                    const fileName = generateTransactionHistoryFileName(profileName, walletAccount.alias)
-                    const contents = generateTransactionHistoryCsvFromAccount(walletAccount, {id: true, internal: true, value: true, formattedValue: true, date: true, time: true})
+                    const fileName = generateTransactionHistoryFileName(profileName, $account.alias)
+                    const contents = generateTransactionHistoryCsvFromAccount($account, {id: true, internal: true, value: true, formattedValue: true, date: true, time: true})
                     try {
                         const filePath = await Electron.exportTransactionHistory(fileName, contents)
-                        if(!filePath) {
-                            break;
+                        if(filePath) {
+                            showAppNotification({type: 'info', message: locale('notifications.exportTransactionHistory.success', {values: {accountAlias: $account.alias, filePath: filePath}})})
                         }
-                        showAppNotification({type: 'info', message: locale('notifications.exportTransactionHistory.success', {values: {accountAlias: walletAccount.alias, filePath: filePath}})})
                     } catch {
-                        showAppNotification({type: 'error', message: locale('notifications.exportTransactionHistory.error', {value: {accountAlias: walletAccount.alias}})})
+                        showAppNotification({type: 'error', message: locale('notifications.exportTransactionHistory.error', {value: {accountAlias: $account.alias}})})
                     }
-            }
 
             isBusy = false
 
@@ -79,8 +77,8 @@
         <Text type="p" highlighted>{profileName}</Text>
     </div>
     <div class="flex w-full flex-row flex-wrap mb-1 justify-between">
-        <Text type="p">{locale('popups.exportTransactionHistory.numberOfAccounts')}</Text>
-        <Text type="p" highlighted>{$accounts.length}</Text>
+        <Text type="p">{locale('popups.exportTransactionHistory.accountName')}</Text>
+        <Text type="p" highlighted>{$account.alias}</Text>
     </div>
     <div class="flex w-full flex-row flex-wrap mt-4 mb-6 justify-between">
         {#if $isSoftwareProfile && $isStrongholdLocked}
