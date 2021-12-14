@@ -14,7 +14,7 @@ import { ErrorType } from '../typings/events'
 import { logError } from './errorLogger'
 import { getErrorMessage } from './walletErrors'
 import { ErrorTypes as ValidatorErrorTypes } from '../typings/validator'
-import { NodePlugin } from '../typings/node';
+import { NodePlugin } from '../typings/node'
 
 type CallbacksStore = {
     [id: string]: CallbacksPattern
@@ -231,9 +231,9 @@ const handleError = (
 ): { type: ErrorType | ValidatorErrorTypes; error: string } => {
     const newError = { type, message: error, time: Date.now() }
 
-     if (error.includes('Response error with status code 403')) {
+    if (error.includes('Response error with status code 403')) {
         if (action && action.includes(NodePlugin.Participation)) {
-            newError.message = `${NodePlugin.Participation} not available on your current node. Please try a different node and try again.`;
+            newError.message = `${NodePlugin.Participation} not available on your current node. Please try a different node and try again.`
             logError(newError)
         }
     } else {
