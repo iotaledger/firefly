@@ -112,7 +112,7 @@
 
         // IOTA -> FIAT
         if (isFiatCurrency(toUnit)) {
-            amount = parseFloat(convertAmountToFiat(amount).slice(2))
+            amount = parseFloat(convertAmountToFiat(amount).slice(2)).toString()
         } else {
             let rawAmount
 
@@ -186,28 +186,28 @@
 </script>
 
 <style type="text/scss">
-    amount-input {
-        nav {
-            &.dropdown {
-                @apply opacity-100;
-                @apply pointer-events-auto;
-            }
-        }
-
-        &.disabled {
-            @apply pointer-events-none;
-            actions {
-                @apply opacity-50;
-            }
-        }
+  amount-input {
+    nav {
+      &.dropdown {
+        @apply opacity-100;
+        @apply pointer-events-auto;
+      }
     }
+
+    &.disabled {
+      @apply pointer-events-none;
+      actions {
+        @apply opacity-50;
+      }
+    }
+  }
 </style>
 
 <svelte:window on:click={onOutsideClick} />
 <amount-input class:disabled class="relative block {classes}" on:keydown={handleKey}>
     <Input
         {error}
-        label={amountForLabel ?? (label || locale('general.amount'))}
+        label={amountForLabel || locale('general.amount')}
         placeholder={placeholder || locale('general.amount')}
         bind:value={amount}
         maxlength={17}
