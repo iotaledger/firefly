@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { tick } from 'svelte'
+    import { get } from 'svelte/store'
     import { Icon, Text, Tooltip } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import {
@@ -21,6 +22,7 @@
     import { getBestTimeDuration } from 'shared/lib/time'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { capitalize } from 'shared/lib/utils'
+    import { wallet } from 'shared/lib/wallet'
     import type { WalletAccount } from 'shared/lib/typings/wallet'
 
     export let name = ''
@@ -50,7 +52,7 @@
 
     let isBelowMinimumStakingRewards
     $: {
-        const account = _getAccount($stakedAccounts)
+        const account = _getAccount(get($wallet.accounts))
         if (account) {
             const accountOverview = $participationOverview.find((apo) => apo.accountIndex === account?.index)
             isBelowMinimumStakingRewards = accountOverview?.assemblyRewardsBelowMinimum > 0 || accountOverview?.shimmerRewardsBelowMinimum > 0
@@ -117,7 +119,12 @@
                 body: localize('tooltips.partiallyStakedFunds.body'),
             }
         } else if (isBelowMinimumStakingRewards) {
-            const account = _getAccount($stakedAccounts)
+            /**
+             * NOTE: We are selecting from all available accounts
+             * so that if an unstaked account is still under the
+             * airdrop minimum.
+             */
+            const account = _getAccount(get($wallet.accounts))
 
             const [minRewards, minAirdrop, amountStaked] = getMinimumAirdropRewardInfo(account)
             const rewardMin = formatStakingAirdropReward(

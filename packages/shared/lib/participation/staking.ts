@@ -292,25 +292,29 @@ export const getMinimumAirdropRewardInfo = (account: WalletAccount): MinimumRewa
     const overview = get(participationOverview).find((apo) => apo.accountIndex === account.index)
     if (!overview) return [0, undefined, 0]
 
-    let smallestMinRewards: number = MAX_NUM_IOTAS
+    let smallestMinRewards: number = Number.MAX_SAFE_INTEGER
     let smallestMinAirdrop: StakingAirdrop = undefined
     let amountStaked: number = 0
-    overview.participations.forEach((p) => {
-        const airdrop = getAirdropFromEventId(p.eventId)
 
-        const rewards = overview[`${airdrop}Rewards`]
-        const rewardsBelowMinimum = overview[`${airdrop}RewardsBelowMinimum`]
-
-        if (rewardsBelowMinimum > 0 && rewards <= 0) {
-            if (rewardsBelowMinimum < smallestMinRewards) {
-                smallestMinRewards = rewardsBelowMinimum
-                smallestMinAirdrop = airdrop
-                amountStaked = overview[`${airdrop}StakedFunds`]
-            }
+    const { assemblyRewards, assemblyRewardsBelowMinimum, assemblyStakedFunds } = overview
+    if (assemblyRewardsBelowMinimum > 0 && assemblyRewards <= 0) {
+        if (assemblyRewardsBelowMinimum < smallestMinRewards) {
+            smallestMinRewards = assemblyRewardsBelowMinimum
+            smallestMinAirdrop = StakingAirdrop.Assembly
+            amountStaked = assemblyStakedFunds
         }
-    })
+    }
 
-    return [smallestMinRewards, smallestMinAirdrop, amountStaked]
+    const { shimmerRewards, shimmerRewardsBelowMinimum, shimmerStakedFunds } = overview
+    if (shimmerRewardsBelowMinimum > 0 && shimmerRewards <= 0) {
+        if (shimmerRewardsBelowMinimum < smallestMinRewards) {
+            smallestMinRewards = shimmerRewardsBelowMinimum
+            smallestMinAirdrop = StakingAirdrop.Shimmer
+            amountStaked = shimmerStakedFunds
+        }
+    }
+
+    return [smallestMinRewards === Number.MAX_SAFE_INTEGER ? 0 : smallestMinRewards, smallestMinAirdrop, amountStaked]
 }
 
 const calculateNumMilestonesUntilMinimumReward = (
