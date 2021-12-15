@@ -139,12 +139,14 @@ export const formatStakingAirdropReward = (airdrop: StakingAirdrop, amount: numb
             decimalPlaces = clamp(decimalPlaces, 0, 6)
 
             const [integer, float] = (amount / 1_000_000).toFixed(decimalPlaces).split('.')
-            reward = parseFloat(delineateNumber(integer, thousandthSeparator) + decimalSeparator + float)
+            reward = `${delineateNumber(integer, thousandthSeparator)}${
+                Number(float) > 0 ? decimalSeparator + float : ''
+            }`
 
             break
         }
         case StakingAirdrop.Shimmer: {
-            reward = delineateNumber(String(amount), thousandthSeparator)
+            reward = delineateNumber(String(Math.floor(amount)), thousandthSeparator)
             break
         }
         default:
