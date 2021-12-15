@@ -65,11 +65,11 @@
                   @apply text-white;
                 }
                 &:hover {
-                  @apply bg-yellow-600;
+                  @apply bg-yellow-700;
                 }
                 &:active,
                 &:focus {
-                  @apply bg-yellow-700;
+                  @apply bg-yellow-800;
                 }
                 &:disabled {
                   @apply pointer-events-none;

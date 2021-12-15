@@ -124,6 +124,7 @@ function isUrlAllowed(targetUrl) {
         'firefly.iota.org',
         'iota.org',
         'privacy@iota.org',
+        'wiki.iota.org',
 
         // Assembly / Shimmer
         'assembly.sc',

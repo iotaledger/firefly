@@ -135,7 +135,7 @@
         switch (action) {
             case ParticipationAction.Stake:
             case ParticipationAction.Vote:
-                return 'yellow-600'
+                return 'orange-500'
             case ParticipationAction.Unstake:
             case ParticipationAction.Unvote:
             default:

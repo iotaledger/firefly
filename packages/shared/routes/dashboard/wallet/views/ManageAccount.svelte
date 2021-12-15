@@ -90,7 +90,7 @@
     </div>
     <!-- Action -->
     {#if isBusy && !error}
-        <Text secondary classes="mb-3">{locale('general.updatingAccount')}</Text>
+        <Text secondary classes="mb-3 text-center">{locale('general.updatingAccount')}</Text>
     {/if}
     {#if !isBusy}
         <div class="flex flex-row justify-between px-2">
