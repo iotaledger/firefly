@@ -224,7 +224,7 @@
     {#each accounts as account}
         {#if canAccountParticipate(account)}
             <div
-                class="w-full mt-4 flex flex-col rounded-xl border border-1 border-solid border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-gray-500 focus:hover:border-gray-700">
+                class="w-full mt-4 flex flex-col rounded-xl border-2 border-solid border-yellow-600">
                 <div class="w-full space-x-4 px-5 py-3 flex flex-row justify-between items-center">
                     {#if isAccountStaked(account?.id)}
                         <div class="bg-green-100 rounded-2xl">
@@ -286,10 +286,10 @@
                 </div>
                 {#if isAccountPartiallyStaked(account?.id) && $accountToParticipate?.id !== account?.id}
                     <div
-                        class="space-x-4 mx-1 mb-1 px-4 py-3 flex flex-row justify-between items-center rounded-lg bg-yellow-50">
+                        class="space-x-4 mx-2 mb-2 px-4 py-3 flex flex-row justify-between items-center rounded-lg border-2 border-solid border-gray-200 dark:border-gray-600">
                         <Icon icon="exclamation" width="24" height="24" classes="fill-current text-yellow-600" />
                         <div class="flex flex-col w-3/4">
-                            <Text type="p" classes="text-gray-800 font-extrabold" overrideColor>
+                            <Text type="p" classes="font-extrabold">
                                 {locale('general.unstakedFunds')}
                             </Text>
                             <Text type="p" secondary classes="font-extrabold">
@@ -300,7 +300,10 @@
                                 </Text>
                             </Text>
                         </div>
-                        <Button disabled={$isPerformingParticipation} onClick={() => handleStakeClick(account)}>
+                        <Button
+                            caution={isAccountPartiallyStaked(account?.id) && $accountToParticipate?.id !== account?.id}
+                            disabled={$isPerformingParticipation}
+                            onClick={() => handleStakeClick(account)}>
                             {locale('actions.stake')}
                         </Button>
                     </div>

@@ -177,7 +177,7 @@
         &.partial-stake {
             @apply border;
             @apply border-solid;
-            @apply border-orange-500;
+            @apply border-yellow-600;
             &:not(:hover) {
                 @apply bg-transparent;
             }
@@ -187,7 +187,7 @@
             &.darkmode {
                 @apply border;
                 @apply border-solid;
-                @apply border-orange-500;
+                @apply border-yellow-600;
                 &:hover {
                     @apply border-transparent;
                 }
@@ -248,7 +248,7 @@
                         icon="exclamation"
                         width="16"
                         height="16"
-                        classes="mt-0.5 fill-current text-orange-500 group-hover:text-white" />
+                        classes="mt-0.5 fill-current text-yellow-600 group-hover:text-white" />
                 </div>
             {:else if isStaked}
                 <Icon
