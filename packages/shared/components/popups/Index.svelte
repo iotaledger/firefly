@@ -7,6 +7,7 @@
     import { fade } from 'svelte/transition'
     import AddNode from './AddNode.svelte'
     import AddressHistory from './AddressHistory.svelte'
+    import AirdropNetworkInfo from './AirdropNetworkInfo.svelte'
     import Backup from './Backup.svelte'
     import BalanceFinder from './BalanceFinder.svelte'
     import Busy from './Busy.svelte'
@@ -105,7 +106,8 @@
         // Participation (voting / staking)
         stakingConfirmation: StakingConfirmation,
         stakingManager: StakingManager,
-        stakingNotice: StakingNotice
+        stakingNotice: StakingNotice,
+        airdropNetworkInfo: AirdropNetworkInfo,
     }
 
     const onkey = (e) => {

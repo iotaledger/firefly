@@ -5,7 +5,8 @@
     import { localize } from 'shared/lib/i18n'
     import {
         formatStakingAirdropReward,
-        getMinimumAirdropRewardInfo, getStakingEventFromAirdrop,
+        getMinimumAirdropRewardInfo,
+        getStakingEventFromAirdrop,
         getTimeUntilMinimumAirdropReward,
         getUnstakedFunds,
         isStakingPossible,
@@ -19,6 +20,7 @@
         stakingEventState,
     } from 'shared/lib/participation/stores'
     import { ParticipationOverview, StakingAirdrop } from 'shared/lib/participation/types'
+    import { openPopup } from 'shared/lib/popup'
     import { getBestTimeDuration } from 'shared/lib/time'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { capitalize } from 'shared/lib/utils'
@@ -55,7 +57,8 @@
         const account = _getAccount(get($wallet.accounts))
         if (account) {
             const accountOverview = $participationOverview.find((apo) => apo.accountIndex === account?.index)
-            isBelowMinimumStakingRewards = accountOverview?.assemblyRewardsBelowMinimum > 0 || accountOverview?.shimmerRewardsBelowMinimum > 0
+            isBelowMinimumStakingRewards =
+                accountOverview?.assemblyRewardsBelowMinimum > 0 || accountOverview?.shimmerRewardsBelowMinimum > 0
         }
     }
 
@@ -110,12 +113,19 @@
     let tooltipText
     $: tooltipText = getLocalizedTooltipText($participationOverview)
 
-    const getLocalizedTooltipText = (
-        overview: ParticipationOverview
-    ): { title: string, body: string } => {
+    const getLocalizedTooltipText = (overview: ParticipationOverview): { title: string; body: string } => {
         if (isPartiallyStaked) {
             return {
-                title: localize(`tooltips.partiallyStakedFunds.title${$partiallyStakedAccounts.length > 0 ? '' : 'NoFunds'}`, $partiallyStakedAccounts.length > 0 ? { values: { amount: formatUnitBestMatch(getUnstakedFunds(_getAccount($partiallyStakedAccounts))) } } : {}),
+                title: localize(
+                    `tooltips.partiallyStakedFunds.title${$partiallyStakedAccounts.length > 0 ? '' : 'NoFunds'}`,
+                    $partiallyStakedAccounts.length > 0
+                        ? {
+                              values: {
+                                  amount: formatUnitBestMatch(getUnstakedFunds(_getAccount($partiallyStakedAccounts))),
+                              },
+                          }
+                        : {}
+                ),
                 body: localize('tooltips.partiallyStakedFunds.body'),
             }
         } else if (isBelowMinimumStakingRewards) {
@@ -134,23 +144,34 @@
             )
 
             const timeNeeded = <number>getTimeUntilMinimumAirdropReward(account)
-            const remainingTime = airdrop === StakingAirdrop.Assembly ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
+            const remainingTime =
+                airdrop === StakingAirdrop.Assembly ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
             if (timeNeeded > remainingTime) {
                 return {
                     title: localize('tooltips.stakingMinRewards.title'),
-                    body: `${localize('tooltips.stakingMinRewards.bodyBelowMin', { values: { airdrop: capitalize(minAirdrop), rewardMin, } })} ${localize('tooltips.stakingMinRewards.bodyWillNotReachMin')}`,
+                    body: `${localize('tooltips.stakingMinRewards.bodyBelowMin', {
+                        values: { airdrop: capitalize(minAirdrop), rewardMin },
+                    })} ${localize('tooltips.stakingMinRewards.bodyWillNotReachMin')}`,
                 }
             } else {
                 return {
                     title: localize('tooltips.stakingMinRewards.title'),
-                    body: `${localize('tooltips.stakingMinRewards.bodyBelowMin', { values: { airdrop: capitalize(minAirdrop), rewardMin, } })} ${localize('tooltips.stakingMinRewards.bodyWillReachMin', { values: { duration: getBestTimeDuration(timeNeeded) } })}`,
+                    body: `${localize('tooltips.stakingMinRewards.bodyBelowMin', {
+                        values: { airdrop: capitalize(minAirdrop), rewardMin },
+                    })} ${localize('tooltips.stakingMinRewards.bodyWillReachMin', {
+                        values: { duration: getBestTimeDuration(timeNeeded) },
+                    })}`,
                 }
             }
         }
     }
 
     const handleTileClick = (): void => {
-        onClick()
+        if (airdrop) {
+            openPopup({ type: 'airdropNetworkInfo', props: { airdrop } })
+        } else {
+            onClick()
+        }
     }
 </script>
 
@@ -162,24 +183,16 @@
         &.size-l {
             min-height: 140px;
         }
-        &:disabled {
-            @apply pointer-events-none;
-            @apply opacity-50;
-        }
     }
 </style>
 
 <button
     on:click={handleTileClick}
-    class="size-{size} group rounded-xl {showWarningState ? 'bg-yellow-100 hover:bg-yellow-400' : `border-gray-100 dark:border-gray-900 hover:bg-${color}-500 ${isStaked ? `border border-1 border-solid border-gray-200 dark:border-gray-900 hover:border-${color}-500` : 'bg-gray-100 dark:bg-gray-900'}`} font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'} {hidden ? 'opacity-50' : ''}"
-    {disabled}>
+    class="size-{size} group rounded-xl {showWarningState ? 'bg-yellow-100 hover:bg-yellow-400' : `border-gray-100 dark:border-gray-900 hover:bg-${color}-500 ${isStaked ? `border border-1 border-solid border-gray-200 dark:border-gray-900 hover:border-${color}-500` : 'bg-gray-100 dark:bg-gray-900'}`} font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'} {hidden ? 'opacity-50' : ''} {airdrop ? 'opacity-50 bg-gray-100 dark:bg-gray-900 hover:bg-gray-700 dark:hover:bg-gray-600' : ''}">
     <div class="mb-2 w-full flex flex-row justify-between items-start space-x-1.5">
         <div class="flex flex-row space-x-1.5 items-start">
             {#if showWarningState}
-                <div
-                    bind:this={iconBox}
-                    on:mouseenter={toggleTooltip}
-                    on:mouseleave={toggleTooltip}>
+                <div bind:this={iconBox} on:mouseenter={toggleTooltip} on:mouseleave={toggleTooltip}>
                     <Icon icon="exclamation" width="16" height="16" classes="mt-0.5 fill-current text-gray-800" />
                 </div>
             {:else if isStaked}

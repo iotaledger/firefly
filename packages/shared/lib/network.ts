@@ -8,6 +8,7 @@ import { localize } from './i18n'
 import type { ClientOptions } from './typings/client'
 import { get } from 'svelte/store'
 import { activeProfile } from './profile'
+import { pollParticipationOverview } from './participation/participation'
 
 export const CHRYSALIS_MAINNET_ID = 'chrysalis-mainnet'
 export const CHRYSALIS_MAINNET_NAME = 'Chrysalis Mainnet'
@@ -270,6 +271,9 @@ export const updateClientOptions = (config: NetworkConfig): void => {
 
     api.setClientOptions(clientOptions, {
         onSuccess() {
+            // On a successful node change message, reinitialise polling for getting participation overview
+            void pollParticipationOverview()
+
             const { accounts } = get(wallet)
             accounts.set(get(accounts).map((a) => ({ ...a, clientOptions })))
         },

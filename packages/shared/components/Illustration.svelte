@@ -59,13 +59,17 @@
             darkmode: 'onboarding/ledger-support.svg',
         },
         // Staking
-        'staking-confirmation': {
-            lightmode: 'staking/staking-confirmation.svg',
-            darkmode: 'staking/staking-confirmation.svg',
-        },
         'staking-notice': {
             lightmode: 'staking/staking-notice.svg',
             darkmode: 'staking/staking-notice.svg'
+        },
+        'shimmer-info-bg': {
+            lightmode: 'staking/shimmer-info.png',
+            darkmode: 'staking/shimmer-info.png'
+        },
+        'assembly-info-bg': {
+            lightmode: 'staking/assembly-info.png',
+            darkmode: 'staking/assembly-info.png'
         },
     }
 </script>
