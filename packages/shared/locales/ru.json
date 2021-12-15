@@ -30,7 +30,7 @@
         "setup": {
             "title": "Настройте кошелек",
             "chrysalisTitle": "Обновление сети Chrysalis",
-            "chrysalisBody": "С 21 апреля пользователи могут перенести их токены в новую сеть Chrysalis. Мы рекомендуем вам как можно скорее перенести ваши токены.",
+            "chrysalisBody": "С 21 апреля 2021 года пользователи могут перевести свои токены в новую сеть Chrysalis. Мы рекомендуем вам перевести имеющиеся токены как можно скорее.",
             "learnMore": "Узнайте о миграции"
         },
         "secure": {
@@ -415,10 +415,6 @@
                 "title": "Мигрировать индекс Ledger",
                 "description": "Миграция другого индекса аккаунта Trinity"
             },
-            "transactionHistory": {
-                "title": "История транзакций",
-                "description": "Экспортировать историю транзакций ваших аккаунтов в .csv файлы"
-            },
             "troubleshoot": {
                 "title": "Диагностика",
                 "description": "Используй ассистент по устранению неполадок для решения общих проблем"
@@ -489,6 +485,48 @@
             "profileModal": {
                 "allSettings": "Все настройки",
                 "logout": "Выйти"
+            }
+        },
+        "staking": {
+            "title": "Стейкинг",
+            "welcome": "Добро пожаловать на панель управления стейкинг",
+            "status": {
+                "upcoming": "Событие не началось",
+                "commencing": "Предварительный стэйкинг открыт",
+                "holdingActive": "Стейкинг в процессе",
+                "holdingInactive": "Стейкинг открыт",
+                "inactive": "Стейкинг не обнаружен",
+                "ended": "Стейкинг завершён"
+            },
+            "summary": {
+                "stakedFunds": "Стейкинг средства"
+            },
+            "info": {
+                "upcomingSubheader": "Событие не началось",
+                "upcomingHeader": "Проверить позже",
+                "commencingSubheader": "Приготовиться к стейкинг",
+                "commencingHeader": "Предварительно внесите свои токены в стэйк!",
+                "holdingSubheaderHolding": "Теперь зарабатываем вознаграждения за стейкинг",
+                "holdingSubheaderNotHolding": "Зарабатывайте вознаграждения, делая IOTA стейкинг",
+                "holdingHeaderHolding": "Осталось {duration}",
+                "holdingHeaderNotHolding": "Внесите свои токены!",
+                "endedSubheader": "Стейкинг завершён",
+                "endedHeader": "Спасибо!",
+                "inactiveHeader": "Попытка изменить узел",
+                "inactiveSubheader": "Стейкинг не обнаружен"
+            },
+            "airdrops": {
+                "holding": "Остаток",
+                "commencing": "До начала стейкинг",
+                "collectedRewards": "Собранные выплаты",
+                "assembly": {
+                    "name": "Сборка",
+                    "description": "Assembly - это открытая, высокомасштабируемая многоцепочечная сеть для создания и развертывания составных смарт-контрактов. Assembly - это будущее web3. "
+                },
+                "shimmer": {
+                    "name": "Shimmer",
+                    "description": "Стимулируемая промежуточная сеть для продвижения основных инноваций на IOTA. Все, что происходит, происходит. Как будет развиваться Shimmer, зависит от вас."
+                }
             }
         }
     },
@@ -600,7 +638,8 @@
         },
         "transaction": {
             "title": "Подтвердить транзакцию",
-            "body": "Вы собираетесь отправить {amount}"
+            "body": "Вы собираетесь отправить {amount}",
+            "sendingFromStakedAccount": "Вы отправляете перевод с кошелька, который в настоящее время находится в стадии стэйкинга. Это может привести к тому, что ваши токены будут выведены из стэйка. Не стесняйтесь отправлять перевод, но вам может потребоваться повторный залог оставшихся токенов."
         },
         "balanceFinder": {
             "title": "Определитель баланса",
@@ -674,10 +713,41 @@
         },
         "exportTransactionHistory": {
             "title": "Экспортировать историю транзакций",
-            "body": "Экспортировать историю транзакций по всем счетам последовательно в рамках данного профиля. Экспорт будет осуществляться в формате CSV.",
+            "body": "Экспорт истории транзакций для выбранного кошелька. Экспортируемый файл будет иметь формат .csv.",
             "profileName": "Имя профиля:",
-            "numberOfAccounts": "Количество аккаунтов:",
+            "accountName": "Название счёта:",
             "typePassword": "Введите пароль для разрешения экспорта"
+        },
+        "stakingNotice": {
+            "upcomingDate": "Стэйкинг еще не начат",
+            "commencingDate": "Стэйкинг еще не начат",
+            "body": "Предварительно внеся свои средства в стэйкинг вы автоматически начнете получать вознаграждение, когда начнётся стэйкинг.",
+            "ok": "Хорошо, я понял"
+        },
+        "stakingManager": {
+            "title": "Управление стэйкингом",
+            "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
+            "totalFundsStaked": "Total funds staked",
+            "stakedSuccessfully": "Your funds have been staked for {account}.",
+            "unstakedSuccessfully": "Your funds have been unstaked for {account}."
+        },
+        "stakingConfirmation": {
+            "title": "Airdrop Participation",
+            "subtitleStake": "You are about to stake",
+            "subtitleMerge": "You are about to merge",
+            "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
+            "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
+            "estimatedAirdrop": "Estimated rewards"
+        },
+        "shimmer-info": {
+            "title": "About Shimmer",
+            "body1": "Congratulations you have earned SMR tokens as a staking reward. Shimmer is an incentivized staging network to test major upgrades on IOTA.",
+            "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
+        },
+        "assembly-info": {
+            "title": "About Assembly",
+            "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
+            "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
         }
     },
     "charts": {
@@ -791,6 +861,15 @@
         "closeFirefly": "Закрыть Firefly",
         "generateAddress": "Сгенерировать адрес",
         "migrateAgain": "Мигрировать другой индекс",
+        "visitWebsite": "Visit website",
+        "howItWorks": "How it works",
+        "learnAboutStaking": "Learn about staking",
+        "stake": "Stake",
+        "unstake": "Unstake",
+        "stakeFunds": "Stake funds",
+        "manageStake": "Manage stake",
+        "merge": "Merge",
+        "mergeFunds": "Merge funds",
         "done": "Выполнено"
     },
     "general": {
@@ -880,6 +959,8 @@
         "transferBroadcasting": "Отправка транзакции",
         "transferComplete": "Передача завершена",
         "generatingReceiveAddress": "Генерирование адреса приема",
+        "broadcasting": "Broadcasting",
+        "confirming": "Confirming",
         "creatingAccount": "Создание кошелька, пожалуйста, подождите...",
         "updatingAccount": "Обновление кошелька, пожалуйста, подождите...",
         "accountSyncing": "Кошелек синхронизируется",
@@ -907,13 +988,35 @@
         "sendingFrom": "Отправка с {account}",
         "receivedTo": "Поступило на {account}",
         "sentFrom": "Отправлено с {account}",
+        "stakedFor": "Staked for {account}",
+        "unstakedFor": "Unstaked for {account}",
+        "votedFor": "Voted for {account}",
+        "unvotedFor": "Unvoted for {account}",
         "receiving": "Поступление",
         "sending": "Отправление",
         "legacyNetwork": "Устаревшая сеть",
         "capsLock": "Включен Caps Lock",
         "version": "Версия {version}",
         "unknown": "Неизвестно",
-        "none": "Отсутствует"
+        "none": "Отсутствует",
+        "days": "day(s)",
+        "time": {
+            "days": "days",
+            "day": "day",
+            "hours": "hours",
+            "hour": "hour",
+            "minutes": "minutes",
+            "minute": "minute",
+            "seconds": "seconds",
+            "second": "second"
+        },
+        "staked": "Staked",
+        "unstaked": "Unstaked",
+        "staking": "Стейкинг",
+        "unstaking": "Unstaking",
+        "notStaked": "Not staked",
+        "stakedFunds": "Стейкинг средства",
+        "unstakedFunds": "Unstaked funds"
     },
     "dates": {
         "today": "Сегодня",
@@ -1024,7 +1127,8 @@
             "unsynced": "Узел не синхронизирован.",
             "noSynced": "Нет доступных синхронизированных узлов.",
             "answer": "Не удалось получить ответ от всех узлов.",
-            "forbidden": "Соединение с этим узлом запрещено."
+            "forbidden": "Соединение с этим узлом запрещено.",
+            "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node."
         },
         "network": {
             "mismatch": "Идентификатор сети для этого узла - это \" {networkId}\", что не соответствует текущей сети.",
@@ -1056,7 +1160,8 @@
             "otherConnected": "На вашем устройстве Ledger открыто неправильное приложение.",
             "generateAddress": "Произошла ошибка при генерировании адреса.",
             "timeout": "Время работы вашего устройства Ledger истекло.",
-            "disconnected": "Ваше устройство Ledger было отключено."
+            "disconnected": "Ваше устройство Ledger было отключено.",
+            "noStronghold": "Unable to use Stronghold with Ledger profile."
         },
         "popup": {
             "preventClose": "Это всплывающее окно невозможно закрыть."
@@ -1066,11 +1171,20 @@
         },
         "crypto": {
             "cannotDecodeBech32": "Невозможно декодировать строку как Bech32 адрес."
+        },
+        "participation": {
+            "cannotUseAccount": "Unable to use the specified account.",
+            "cannotFindStakingEvent": "Unable to find staking event.",
+            "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
+            "invalidStakingEventId": "Invalid staking event ID."
         }
     },
     "warning": {
         "node": {
             "http": "Использование узлов через HTTP оставляет трафик незашифрованным и может представлять угрозу безопасности."
+        },
+        "participation": {
+            "noAccounts": "You do not have any accounts available to participate."
         }
     },
     "tooltips": {
@@ -1081,6 +1195,58 @@
             "medium": "Средний",
             "low": "Низкий",
             "veryLow": "Очень низкий"
+        },
+        "stakingIndicator": {
+            "upcoming": {
+                "title": "Staking has not started yet",
+                "body": "Check back later. The staking event has not begun."
+            },
+            "commencing": {
+                "title": "Pre-staking is now open",
+                "body": "Pre-stake your tokens, and once staking begins, you will automatically start receiving rewards every 10 seconds."
+            },
+            "activeHolding": {
+                "title": "Staking is now in progress",
+                "body": "Good job. You will receive rewards every 10 seconds."
+            },
+            "inactiveHolding": {
+                "title": "Staking is now open",
+                "body": "Stake your IOTA tokens to receive rewards every 10 seconds."
+            },
+            "inactive": {
+                "title": "No staking events detected",
+                "body": "Open network configuration in Advanced Settings and make sure the current node has the \"Participation\" feature by clicking \"View Info\"."
+            },
+            "ended": {
+                "title": "Стейкинг завершён",
+                "body": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch."
+            }
+        },
+        "partiallyStakedFunds": {
+            "title": "New unstaked funds: {amount}",
+            "titleNoFunds": "New unstaked funds",
+            "preBody": "You have received tokens on a staked wallet.",
+            "body": "You need to manually stake these new funds to receive airdrop rewards for them."
+        },
+        "stakingMinRewards": {
+            "title": "Below minimum reward value",
+            "titleMinBalance": "{amount} minimum balance required",
+            "bodyMinBalace": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
+            "continue": "Please continue staking for another {duration}.",
+            "bodyBelowMin": "This wallet has not reached the minimum reward value for {airdrop} ({airdropRewardMin}).",
+            "bodyWillReachMin": "You must stake for another {duration} to reach the minimum.",
+            "bodyWillNotReachMin": "You will not reach the minimum during the remaining staking period unless you stake more IOTA.",
+            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum rewards for {airdrop} ({airdropRewardMin})."
+        }
+    },
+    "exports": {
+        "transactionHistoryCsv": {
+            "messageId": "ID сообщения",
+            "internal": "Internal",
+            "rawValue": "Raw Value",
+            "formattedValue": "Formatted Value",
+            "date": "Дата",
+            "time": "Time"
         }
     }
 }

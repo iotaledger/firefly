@@ -30,7 +30,7 @@
         "setup": {
             "title": "Configurează un portofel",
             "chrysalisTitle": "Actualizare rețea Chrysalis",
-            "chrysalisBody": "Începând cu 21 aprilie, utilizatorii pot migra monedele lor în noua rețea Chrysalis. Vă recomandăm să migrați monedele existente cât mai curând posibil.",
+            "chrysalisBody": "From April 21st 2021, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
             "learnMore": "Află mai multe despre migrație"
         },
         "secure": {
@@ -415,10 +415,6 @@
                 "title": "Migrate Ledger index",
                 "description": "Migrate another Trinity account index"
             },
-            "transactionHistory": {
-                "title": "Transaction history",
-                "description": "Export the transaction history of your accounts as .csv files"
-            },
             "troubleshoot": {
                 "title": "Depanare",
                 "description": "Foloseşte asistentul de depanare pentru a rezolva problemele comune"
@@ -489,6 +485,48 @@
             "profileModal": {
                 "allSettings": "Toate setările",
                 "logout": "Deconectează-te"
+            }
+        },
+        "staking": {
+            "title": "Mizare",
+            "welcome": "Bine ați venit la panoul de control pentru mizare",
+            "status": {
+                "upcoming": "Evenimentul nu a început",
+                "commencing": "Pre-mizarea este deschisa",
+                "holdingActive": "Mizare aflată în curs",
+                "holdingInactive": "Mizare deschisă",
+                "inactive": "Mizare nedetectată",
+                "ended": "Mizarea s-a încheiat"
+            },
+            "summary": {
+                "stakedFunds": "Fonduri mizate"
+            },
+            "info": {
+                "upcomingSubheader": "Evenimentul nu a început",
+                "upcomingHeader": "Întoarceti-va mai târziu",
+                "commencingSubheader": "Pregătește-te pentru mizare",
+                "commencingHeader": "Pre-mizeaza-ti monedele!",
+                "holdingSubheaderHolding": "Acum incasezi recompense din mizare",
+                "holdingSubheaderNotHolding": "Câștigă recompense mizând cu IOTA",
+                "holdingHeaderHolding": "{duration} rămase",
+                "holdingHeaderNotHolding": "Mizeaza-ti monedele!",
+                "endedSubheader": "Mizarea s-a încheiat acum",
+                "endedHeader": "Mulțumim!",
+                "inactiveHeader": "Încercați să schimbați nodul",
+                "inactiveSubheader": "Mizare nedetectată"
+            },
+            "airdrops": {
+                "holding": "Rămase",
+                "commencing": "Până la începerea mizarii",
+                "collectedRewards": "Recompense colectate",
+                "assembly": {
+                    "name": "Assembly",
+                    "description": "Assembly este o rețea multi-lanț, lipsită de permisiuni, de mare amploare, pentru a construi și a implementa contracte inteligente compuse. Assembly este viitorul web3. "
+                },
+                "shimmer": {
+                    "name": "Shimmer",
+                    "description": "Rețeaua de stagii stimulată pentru a avansa inovații majore în IOTA. Orice se întâmplă, se întâmplă. Cum evoluează Shimmer depinde de dumneavoastra."
+                }
             }
         }
     },
@@ -600,7 +638,8 @@
         },
         "transaction": {
             "title": "Confirmați tranzacția",
-            "body": "You’re about to send {amount} to"
+            "body": "You’re about to send {amount} to",
+            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards."
         },
         "balanceFinder": {
             "title": "Balance finder",
@@ -674,10 +713,41 @@
         },
         "exportTransactionHistory": {
             "title": "Export transaction history",
-            "body": "Export your transaction history for all accounts consecutively within this profile. Exports will be in a CSV format.",
+            "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
             "profileName": "Profile name:",
-            "numberOfAccounts": "Number of accounts:",
+            "accountName": "Account name:",
             "typePassword": "Type your password to allow exporting"
+        },
+        "stakingNotice": {
+            "upcomingDate": "Mizarea încă nu a început",
+            "commencingDate": "Mizarea încă nu a început",
+            "body": "Prin pre-mizarea fondurilor dumneavoastră înainte de a începe mizarea propriu-zisa, veți începe automat să primiți recompense la începerea mizarii.",
+            "ok": "Ok, am înțeles"
+        },
+        "stakingManager": {
+            "title": "Managementul mizarii",
+            "description": "Atunci când mizati cu un portofel, trimiteți o tranzacție pentru a vă marca aceste fonduri ca fiind „mizate\". Puteti transfera jetoanele în orice moment, dar nu veti continua să primiti recompense in urma mizarii.",
+            "totalFundsStaked": "Total fonduri mizate",
+            "stakedSuccessfully": "Your funds have been staked for {account}.",
+            "unstakedSuccessfully": "Your funds have been unstaked for {account}."
+        },
+        "stakingConfirmation": {
+            "title": "Airdrop Participation",
+            "subtitleStake": "You are about to stake",
+            "subtitleMerge": "You are about to merge",
+            "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
+            "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
+            "estimatedAirdrop": "Estimated rewards"
+        },
+        "shimmer-info": {
+            "title": "About Shimmer",
+            "body1": "Felicitări ati câștigat jetoane SMR ca o recompensă din mizare. Shimmer este o rețea stimulată de stagii pentru a testa îmbunătățiri majore la IOTA.",
+            "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
+        },
+        "assembly-info": {
+            "title": "About Assembly",
+            "body1": "Felicitări ai câștigat jetoane ASMB ca o recompensă din mizare. Assembly este o rețea multi-lanț pentru implementarea de contracte inteligente scalabile pe IOTA.",
+            "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
         }
     },
     "charts": {
@@ -791,6 +861,15 @@
         "closeFirefly": "Close Firefly",
         "generateAddress": "Generate address",
         "migrateAgain": "Migrate another index",
+        "visitWebsite": "Visit website",
+        "howItWorks": "How it works",
+        "learnAboutStaking": "Află mai multe despre mizare",
+        "stake": "Stake",
+        "unstake": "Unstake",
+        "stakeFunds": "Stake funds",
+        "manageStake": "Manage stake",
+        "merge": "Merge",
+        "mergeFunds": "Merge funds",
         "done": "Done"
     },
     "general": {
@@ -880,6 +959,8 @@
         "transferBroadcasting": "Broadcasting transaction",
         "transferComplete": "Transfer complete",
         "generatingReceiveAddress": "Generating receive address",
+        "broadcasting": "Broadcasting",
+        "confirming": "Confirming",
         "creatingAccount": "Creating wallet, please wait...",
         "updatingAccount": "Updating wallet, please wait...",
         "accountSyncing": "Wallet is syncing",
@@ -907,13 +988,35 @@
         "sendingFrom": "Sending from {account}",
         "receivedTo": "Received to {account}",
         "sentFrom": "Sent from {account}",
+        "stakedFor": "Staked for {account}",
+        "unstakedFor": "Unstaked for {account}",
+        "votedFor": "Voted for {account}",
+        "unvotedFor": "Unvoted for {account}",
         "receiving": "Se primește",
         "sending": "Se trimite",
         "legacyNetwork": "Legacy Network",
         "capsLock": "Caps Lock is on",
         "version": "Version {version}",
         "unknown": "Unknown",
-        "none": "None"
+        "none": "None",
+        "days": "day(s)",
+        "time": {
+            "days": "days",
+            "day": "day",
+            "hours": "hours",
+            "hour": "hour",
+            "minutes": "minutes",
+            "minute": "minute",
+            "seconds": "seconds",
+            "second": "second"
+        },
+        "staked": "Staked",
+        "unstaked": "Unstaked",
+        "staking": "Mizare",
+        "unstaking": "Oprirea mizarii",
+        "notStaked": "Not staked",
+        "stakedFunds": "Fonduri mizate",
+        "unstakedFunds": "Unstaked funds"
     },
     "dates": {
         "today": "Today",
@@ -1024,7 +1127,8 @@
             "unsynced": "The node is not in sync.",
             "noSynced": "No synced nodes are available.",
             "answer": "Failed to get an answer from all nodes.",
-            "forbidden": "This node connection is forbidden."
+            "forbidden": "This node connection is forbidden.",
+            "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node."
         },
         "network": {
             "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
@@ -1056,7 +1160,8 @@
             "otherConnected": "The wrong app is open on your Ledger device.",
             "generateAddress": "There was an error generating an address.",
             "timeout": "Your Ledger device timed out.",
-            "disconnected": "Your Ledger device was disconnected."
+            "disconnected": "Your Ledger device was disconnected.",
+            "noStronghold": "Unable to use Stronghold with Ledger profile."
         },
         "popup": {
             "preventClose": "This popup is unable to be closed."
@@ -1066,11 +1171,20 @@
         },
         "crypto": {
             "cannotDecodeBech32": "Unable to decode string as Bech32 address."
+        },
+        "participation": {
+            "cannotUseAccount": "Unable to use the specified account.",
+            "cannotFindStakingEvent": "Evenimentul de mizat nu poate fi găsit.",
+            "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
+            "invalidStakingEventId": "ID eveniment de mizare nevalid."
         }
     },
     "warning": {
         "node": {
             "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
+        },
+        "participation": {
+            "noAccounts": "You do not have any accounts available to participate."
         }
     },
     "tooltips": {
@@ -1081,6 +1195,58 @@
             "medium": "Medium",
             "low": "Low",
             "veryLow": "Very low"
+        },
+        "stakingIndicator": {
+            "upcoming": {
+                "title": "Mizarea încă nu a început",
+                "body": "Check back later. The staking event has not begun."
+            },
+            "commencing": {
+                "title": "Pre-mizarea este acum deschisă",
+                "body": "Pre-stake your tokens, and once staking begins, you will automatically start receiving rewards every 10 seconds."
+            },
+            "activeHolding": {
+                "title": "Mizare aflată în curs",
+                "body": "Good job. You will receive rewards every 10 seconds."
+            },
+            "inactiveHolding": {
+                "title": "Mizarea este acum deschisă",
+                "body": "Stake your IOTA tokens to receive rewards every 10 seconds."
+            },
+            "inactive": {
+                "title": "Nici un eveniment de mizare detectat",
+                "body": "Open network configuration in Advanced Settings and make sure the current node has the \"Participation\" feature by clicking \"View Info\"."
+            },
+            "ended": {
+                "title": "Mizarea s-a încheiat acum",
+                "body": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch."
+            }
+        },
+        "partiallyStakedFunds": {
+            "title": "New unstaked funds: {amount}",
+            "titleNoFunds": "New unstaked funds",
+            "preBody": "You have received tokens on a staked wallet.",
+            "body": "You need to manually stake these new funds to receive airdrop rewards for them."
+        },
+        "stakingMinRewards": {
+            "title": "Below minimum reward value",
+            "titleMinBalance": "{amount} minimum balance required",
+            "bodyMinBalace": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
+            "continue": "Vă rugăm să continuați să mizati pentru inca {duration}.",
+            "bodyBelowMin": "This wallet has not reached the minimum reward value for {airdrop} ({airdropRewardMin}).",
+            "bodyWillReachMin": "You must stake for another {duration} to reach the minimum.",
+            "bodyWillNotReachMin": "Nu veti atinge minimul în perioada de mizare rămasă decât dacă mizati mai multa IOTA.",
+            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum rewards for {airdrop} ({airdropRewardMin})."
+        }
+    },
+    "exports": {
+        "transactionHistoryCsv": {
+            "messageId": "Message ID",
+            "internal": "Internal",
+            "rawValue": "Raw Value",
+            "formattedValue": "Formatted Value",
+            "date": "Date",
+            "time": "Time"
         }
     }
 }

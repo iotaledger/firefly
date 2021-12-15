@@ -30,7 +30,7 @@
         "setup": {
             "title": "Skonfiguruj portfel",
             "chrysalisTitle": "Aktualizacja sieci Chrysalis",
-            "chrysalisBody": "Od 21 kwietnia użytkownicy mogą przenieść swoje tokeny do nowej sieci Chrysalis. Zalecamy jak najszybszą migrację Twoich tokenów.",
+            "chrysalisBody": "Od 21 kwietnia 2021, użytkownicy mogą przenieść swoje tokeny do nowej sieci Chrysalis. Zalecamy jak najszybszą migrację Twoich tokenów.",
             "learnMore": "Dowiedz się więcej o migracji"
         },
         "secure": {
@@ -392,7 +392,7 @@
                 "excludeNode": "Wyklucz serwer",
                 "includeNode": "Uwzględnij serwer",
                 "editDetails": "Edytuj szczegóły",
-                "viewInfo": "Zobacz informacje",
+                "viewInfo": "Wyświetl informacje",
                 "setAsPrimary": "Ustaw jako główny",
                 "removeNode": "Usuń serwer",
                 "includeOfficialNodeList": "Uwzględnij oficjalną listę serwerów",
@@ -414,10 +414,6 @@
             "migrateLedgerIndex": {
                 "title": "Migruj indeks Ledger",
                 "description": "Migracja innego indeksu konta z Trinity"
-            },
-            "transactionHistory": {
-                "title": "Historia transakcji",
-                "description": "Eksportuj historię transakcji swoich kont jako pliki .csv"
             },
             "troubleshoot": {
                 "title": "Rozwiązywanie problemów",
@@ -489,6 +485,48 @@
             "profileModal": {
                 "allSettings": "Wszystkie ustawienia",
                 "logout": "Wyloguj się"
+            }
+        },
+        "staking": {
+            "title": "Staking",
+            "welcome": "Witaj w panelu stakingu",
+            "status": {
+                "upcoming": "Wydarzenie nie zostało rozpoczęte",
+                "commencing": "Pre-staking otwarty",
+                "holdingActive": "Staking w toku",
+                "holdingInactive": "Staking otwarty",
+                "inactive": "Staking nie wykryty",
+                "ended": "Staking zakończony"
+            },
+            "summary": {
+                "stakedFunds": "Stakowane środki"
+            },
+            "info": {
+                "upcomingSubheader": "Wydarzenie nie rozpoczęło się",
+                "upcomingHeader": "Sprawdź ponownie później",
+                "commencingSubheader": "Przygotuj się do stakingu",
+                "commencingHeader": "Pre-stakuj swoje tokeny!",
+                "holdingSubheaderHolding": "Teraz otrzymujesz nagrody za stakowanie",
+                "holdingSubheaderNotHolding": "Zdobywaj nagrody poprzez stakowanie IOTA",
+                "holdingHeaderHolding": "{duration} do końca",
+                "holdingHeaderNotHolding": "Stakuj swoje tokeny!",
+                "endedSubheader": "Staking zakończył się",
+                "endedHeader": "Dziękujemy!",
+                "inactiveHeader": "Spróbuj zmienić serwer",
+                "inactiveSubheader": "Staking nie wykryty"
+            },
+            "airdrops": {
+                "holding": "Pozostało",
+                "commencing": "Do momentu rozpoczęcia stakingu",
+                "collectedRewards": "Zebrane nagrody",
+                "assembly": {
+                    "name": "Assembly",
+                    "description": "Assembly jest wysoce skalowalną, wielołańcuchową siecią typu permissionless. Służy do budowania i wdrażania złożonych smart kontraktów. Assembly jest przyszłością web3. "
+                },
+                "shimmer": {
+                    "name": "Shimmer",
+                    "description": "Sieć stagingowa motywowana do rozwoju głównych innowacji IOTA. Co będzie, to będzie. To, jak Shimmer będzie się rozwijał, zależy od Ciebie."
+                }
             }
         }
     },
@@ -600,7 +638,8 @@
         },
         "transaction": {
             "title": "Potwierdzanie transakcji",
-            "body": "Zamierzasz wysłać {amount} do"
+            "body": "Zamierzasz wysłać {amount} do",
+            "sendingFromStakedAccount": "Wysyłasz przelew z portfela, który jest obecnie stakowany. Może to spowodować wycofanie Twoich tokenów ze stakingu. Możesz dokonać transferu, ale może zajść potrzeba ponownego stakingu pozostałych środków."
         },
         "balanceFinder": {
             "title": "Wyszukiwarka środków",
@@ -674,10 +713,41 @@
         },
         "exportTransactionHistory": {
             "title": "Eksportuj historię transakcji",
-            "body": "Eksportuj historię transakcji dla wszystkich kont w tym profilu po kolei. Eksport odbędzie się w formacie CSV.",
+            "body": "Eksportuj historię transakcji dla wybranego portfela. Eksportowany plik będzie w formacie .csv.",
             "profileName": "Nazwa profilu:",
-            "numberOfAccounts": "Liczba kont:",
+            "accountName": "Nazwa konta:",
             "typePassword": "Wpisz hasło, aby umożliwić eksport"
+        },
+        "stakingNotice": {
+            "upcomingDate": "Staking jeszcze się nie rozpoczął",
+            "commencingDate": "Staking jeszcze się nie rozpoczął",
+            "body": "Dzięki pre-stakowaniu swoich środków, automatycznie zaczniesz otrzymywać nagrody w momencie rozpoczęcia właściwego wydarzenia stakingu.",
+            "ok": "Ok, rozumiem"
+        },
+        "stakingManager": {
+            "title": "Zarządzanie stakingiem",
+            "description": "Kiedy wykonujesz staking portfela, wysyłasz do siebie transakcję oznaczając te środki jako \"staked\". Możesz transferować tokeny w dowolnym momencie, ale nie będziesz kontynuował otrzymywania nagród za stakowanie.",
+            "totalFundsStaked": "Stakujesz łącznie",
+            "stakedSuccessfully": "Twoje fundusze zostały stakowane z {account}.",
+            "unstakedSuccessfully": "Środki zostały odstakowane dla {account}."
+        },
+        "stakingConfirmation": {
+            "title": "Uczestnictwo w airdropie",
+            "subtitleStake": "Zamierzasz stakować",
+            "subtitleMerge": "Zamierzasz scalić",
+            "bodyStake": "Jeśli nie chcesz uczestniczyć w obu airdropach, możesz dokonać wyboru poniżej. W każdej chwili możesz odstakować oraz ponownie stakować swoje tokeny.",
+            "bodyMerge": "Twoje środki zostaną stakowane na {airdrop}. Aby zmienić airdropy, w których chcesz uczestniczyć, odstakuj ten portfel i stakuj go ponownie.",
+            "estimatedAirdrop": "Szacowane nagrody"
+        },
+        "shimmer-info": {
+            "title": "O Shimmer",
+            "body1": "Gratulujemy, zdobyłeś tokeny SMR jako nagrodę za staking. Shimmer to sieć rozwojowa do testowania głównych udoskonaleń IOTA.",
+            "body2": "Naszym celem jest uruchomienie Shimmer w 2022 roku. Twoje tokeny będą dostępne do transferu po uruchomieniu sieci."
+        },
+        "assembly-info": {
+            "title": "O Assembly",
+            "body1": "Gratulujemy, zdobyłeś tokeny ASMB jako nagrodę za staking. Assembly to wielołańcuchowa sieć do wdrażania skalowalnych smart kontraktów IOTA.",
+            "body2": "Naszym celem jest uruchomienie Assembly w 2022 roku. Twoje tokeny będą dostępne do transferu po uruchomieniu sieci."
         }
     },
     "charts": {
@@ -791,6 +861,15 @@
         "closeFirefly": "Zamknij Firefly",
         "generateAddress": "Generowanie adresu",
         "migrateAgain": "Migruj kolejny indeks",
+        "visitWebsite": "Odwiedź stronę",
+        "howItWorks": "Jak to działa",
+        "learnAboutStaking": "Dowiedz się więcej o stakingu",
+        "stake": "Stakuj",
+        "unstake": "Odstakuj",
+        "stakeFunds": "Stakuj środki",
+        "manageStake": "Zarządzaj stakingiem",
+        "merge": "Scal",
+        "mergeFunds": "Scal środki",
         "done": "Gotowe"
     },
     "general": {
@@ -880,6 +959,8 @@
         "transferBroadcasting": "Nadawanie transakcji",
         "transferComplete": "Transfer ukończony",
         "generatingReceiveAddress": "Generowanie adresu odbiorczego",
+        "broadcasting": "Nadawanie",
+        "confirming": "Potwierdzanie",
         "creatingAccount": "Tworzenie portfela, proszę czekać...",
         "updatingAccount": "Aktualizowanie portfela, proszę czekać...",
         "accountSyncing": "Portfel jest synchronizowany",
@@ -907,13 +988,35 @@
         "sendingFrom": "Wysyłanie z {account}",
         "receivedTo": "Odebrano na {account}",
         "sentFrom": "Wysłano z {account}",
+        "stakedFor": "Stakowano z {account}",
+        "unstakedFor": "Odstakowano z {account}",
+        "votedFor": "Zagłosowano z {account}",
+        "unvotedFor": "Wycofano głos z {account}",
         "receiving": "Odbieranie",
         "sending": "Wysyłanie",
         "legacyNetwork": "Poprzednia sieć",
         "capsLock": "Caps Lock jest włączony",
         "version": "Wersja {version}",
         "unknown": "Brak informacji",
-        "none": "Brak"
+        "none": "Brak",
+        "days": "dzień (dni)",
+        "time": {
+            "days": "dni",
+            "day": "dzień",
+            "hours": "godzin",
+            "hour": "godzina",
+            "minutes": "minut",
+            "minute": "minuta",
+            "seconds": "sekund",
+            "second": "sekunda"
+        },
+        "staked": "Stakowano",
+        "unstaked": "Niestakowano",
+        "staking": "Staking",
+        "unstaking": "Wycofaj",
+        "notStaked": "Nie stakujesz",
+        "stakedFunds": "Stakowane środki",
+        "unstakedFunds": "Niestakowane środki"
     },
     "dates": {
         "today": "Dzisiaj",
@@ -958,7 +1061,7 @@
             "length": "Twoja nazwa profilu nie może być dłuższa niż {length, plural, one {1 znak} few {# znaki} many {# znaków} other {# znaków}}.",
             "duplicate": "Profil o takiej nazwie już istnieje.",
             "delete": {
-                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+                "nonEmptyAccounts": "Musisz przetransferować wszystkie środki zanim będziesz mógł usunąć swój profil."
             }
         },
         "password": {
@@ -1024,7 +1127,8 @@
             "unsynced": "Serwer nie jest zsynchronizowany.",
             "noSynced": "Brak zsynchronizowanych serwerów.",
             "answer": "Nie udało się uzyskać odpowiedzi od wszystkich serwerów.",
-            "forbidden": "Połączenie z tym serwerem jest zabronione."
+            "forbidden": "Połączenie z tym serwerem jest zabronione.",
+            "pluginNotAvailable": "Wtyczka \"{nodePlugin}\" nie jest dostępna na bieżącym serwerze."
         },
         "network": {
             "mismatch": "ID sieci dla tego węzła to \"{networkId}\", które nie pasuje do bieżącej sieci.",
@@ -1056,7 +1160,8 @@
             "otherConnected": "Na Twoim urządzeniu Ledger otwarto nieprawidłową aplikację.",
             "generateAddress": "Podczas generowania adresu wystąpił błąd.",
             "timeout": "Upłynął limit czasu Twojego urządzenia Ledger.",
-            "disconnected": "Twoje urządzenie Ledger zostało odłączone."
+            "disconnected": "Twoje urządzenie Ledger zostało odłączone.",
+            "noStronghold": "Nie można używać Stronghold z profilem Ledger."
         },
         "popup": {
             "preventClose": "Nie można zamknąć tego okienka."
@@ -1066,11 +1171,20 @@
         },
         "crypto": {
             "cannotDecodeBech32": "Nie można odkodować ciągu znaków jako adresu Bech32."
+        },
+        "participation": {
+            "cannotUseAccount": "Nie można użyć określonego konta.",
+            "cannotFindStakingEvent": "Nie można znaleźć wydarzenia stakingu.",
+            "cannotVisitAirdropWebsite": "Nie można otworzyć strony {airdrop}.",
+            "invalidStakingEventId": "Nieprawidłowe ID wydarzenia stakingu."
         }
     },
     "warning": {
         "node": {
             "http": "Korzystanie z węzłów przez HTTP powoduje, że ruch jest niezaszyfrowany i może stanowić zagrożenie dla bezpieczeństwa."
+        },
+        "participation": {
+            "noAccounts": "Nie posiadasz żadnych kont dostępnych do uczestnictwa w wydarzeniu."
         }
     },
     "tooltips": {
@@ -1081,6 +1195,58 @@
             "medium": "Średni",
             "low": "Niski",
             "veryLow": "Bardzo niski"
+        },
+        "stakingIndicator": {
+            "upcoming": {
+                "title": "Staking jeszcze się nie rozpoczął",
+                "body": "Sprawdź ponownie później. Wydarzenie stakingu nie rozpoczęło się."
+            },
+            "commencing": {
+                "title": "Pre-staking jest już dostępny",
+                "body": "Pre-stakuj swoje tokeny, a gdy staking wystartuje, automatycznie zaczniesz otrzymywać nagrody co 10 sekund."
+            },
+            "activeHolding": {
+                "title": "Staking jest w toku",
+                "body": "Dobra robota. Będziesz otrzymywać nagrody co 10 sekund."
+            },
+            "inactiveHolding": {
+                "title": "Staking jest już dostępny",
+                "body": "Stakuj swoje tokeny IOTA, aby otrzymywać nagrody co 10 sekund."
+            },
+            "inactive": {
+                "title": "Nie wykryto wydarzeń stakingu",
+                "body": "Otwórz konfigurację sieci w Ustawieniach zaawansowanych i upewnij się, że bieżący serwer posiada funkcję \"Participation\", poprzez kliknięcie w \"Wyświetl informacje\"."
+            },
+            "ended": {
+                "title": "Staking zakończył się",
+                "body": "Nagrody Assembly i Shimmer zostaną przekazane do Waszych portfeli po uruchomieniu każdej z sieci."
+            }
+        },
+        "partiallyStakedFunds": {
+            "title": "Nowe niestakowane środki: {amount}",
+            "titleNoFunds": "Nowe niestakowane środki",
+            "preBody": "Otrzymałeś tokeny na stakowany portfel.",
+            "body": "Musisz ręcznie stakować te nowe środki, aby otrzymać za nie nagrody airdrop."
+        },
+        "stakingMinRewards": {
+            "title": "Poniżej minimalnej wartości nagrody",
+            "titleMinBalance": "Wymagane minimalne saldo {amount}",
+            "bodyMinBalace": "Ten portfel nie ma wystarczającej ilości tokenów IOTA, aby osiągnąć minimalną nagrodę w airdropie i dlatego nie może być on stakowany.",
+            "continue": "Kontynuuj stakowanie jeszcze przez {duration}.",
+            "bodyBelowMin": "Ten portfel nie osiągnął minimalnej wartości nagrody dla {airdrop} ({airdropRewardMin}).",
+            "bodyWillReachMin": "Musisz stakować przez kolejne {duration}, aby osiągnąć minimum.",
+            "bodyWillNotReachMin": "Nie osiągniesz minimum podczas pozostałego okresu stakingu, dopóki nie ulokujesz większej ilości IOTA.",
+            "bodyDidNotReachMin": "Nie stakowałeś wystarczającej ilości IOTA, aby osiągnąć minimalną nagrodę za {airdrop} ({airdropRewardMin})."
+        }
+    },
+    "exports": {
+        "transactionHistoryCsv": {
+            "messageId": "ID wiadomości",
+            "internal": "Wewnątrz",
+            "rawValue": "Wartości surowe",
+            "formattedValue": "Wartości sformatowane",
+            "date": "Data",
+            "time": "Godzina"
         }
     }
 }

@@ -30,7 +30,7 @@
         "setup": {
             "title": "設定一個錢包",
             "chrysalisTitle": "Chrysalis網路升級",
-            "chrysalisBody": "從四月21日開始，使用者可以將他們的代幣遷移到Chrysalis網路．我們建議您儘早遷移您的既存代幣",
+            "chrysalisBody": "從 2021 年 4 月 21 日開始，使用者可以將他們的代幣遷移到新的 Chrysalis 網路。我們建議您把現有的代幣儘早遷移。",
             "learnMore": "深入瞭解「遷移」"
         },
         "secure": {
@@ -415,10 +415,6 @@
                 "title": "轉換帳本index",
                 "description": "遷移另一個 Trinity 帳戶索引"
             },
-            "transactionHistory": {
-                "title": "交易紀錄",
-                "description": "將你的帳號交易記錄匯出為.csv檔案"
-            },
             "troubleshoot": {
                 "title": "疑難排解",
                 "description": "透過疑難排解員解決常見問題"
@@ -489,6 +485,48 @@
             "profileModal": {
                 "allSettings": "所有設定",
                 "logout": "登出"
+            }
+        },
+        "staking": {
+            "title": "質押",
+            "welcome": "歡迎來到質押儀錶板",
+            "status": {
+                "upcoming": "活動尚未開始",
+                "commencing": "預先質押已開放",
+                "holdingActive": "質押進行中",
+                "holdingInactive": "質押已開放",
+                "inactive": "未偵測到質押",
+                "ended": "質押已結束"
+            },
+            "summary": {
+                "stakedFunds": "已質押的資金"
+            },
+            "info": {
+                "upcomingSubheader": "活動尚未開始",
+                "upcomingHeader": "請稍後再查看",
+                "commencingSubheader": "為質押做好準備",
+                "commencingHeader": "預先質押您的代幣！",
+                "holdingSubheaderHolding": "正在賺取質押獎勵",
+                "holdingSubheaderNotHolding": "質押 IOTA 來賺取獎勵",
+                "holdingHeaderHolding": "剩下 {duration}",
+                "holdingHeaderNotHolding": "質押您的代幣！",
+                "endedSubheader": "質押現在已經結束",
+                "endedHeader": "謝謝您！",
+                "inactiveHeader": "請嘗試更換節點",
+                "inactiveSubheader": "未偵測到質押"
+            },
+            "airdrops": {
+                "holding": "剩下",
+                "commencing": "到質押開始前",
+                "collectedRewards": "已領取的獎勵",
+                "assembly": {
+                    "name": "Assembly",
+                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
+                },
+                "shimmer": {
+                    "name": "Shimmer",
+                    "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
+                }
             }
         }
     },
@@ -600,7 +638,8 @@
         },
         "transaction": {
             "title": "確認交易",
-            "body": "您即將發送 {amount} 到"
+            "body": "您即將發送 {amount} 到",
+            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards."
         },
         "balanceFinder": {
             "title": "餘額查詢",
@@ -674,10 +713,41 @@
         },
         "exportTransactionHistory": {
             "title": "匯出交易記錄",
-            "body": "將此設定檔內所有帳戶的交易記錄連續匯出。匯出格式為CSV。",
+            "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
             "profileName": "設定檔名稱:",
-            "numberOfAccounts": "帳戶數量：",
+            "accountName": "帳戶名稱：",
             "typePassword": "輸入您的密碼以允許匯出"
+        },
+        "stakingNotice": {
+            "upcomingDate": "質押尚未開始",
+            "commencingDate": "質押尚未開始",
+            "body": "By pre-staking your funds before staking starts, you will automatically begin receiving rewards when staking begins.",
+            "ok": "好的，我瞭解了"
+        },
+        "stakingManager": {
+            "title": "質押管理",
+            "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
+            "totalFundsStaked": "質押資金總額",
+            "stakedSuccessfully": "Your funds have been staked for {account}.",
+            "unstakedSuccessfully": "Your funds have been unstaked for {account}."
+        },
+        "stakingConfirmation": {
+            "title": "參加空投",
+            "subtitleStake": "您即將質押",
+            "subtitleMerge": "您即將合併",
+            "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
+            "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
+            "estimatedAirdrop": "估計獎勵"
+        },
+        "shimmer-info": {
+            "title": "關於 Shimmer",
+            "body1": "Congratulations you have earned SMR tokens as a staking reward. Shimmer is an incentivized staging network to test major upgrades on IOTA.",
+            "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
+        },
+        "assembly-info": {
+            "title": "關於 Assembly",
+            "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
+            "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
         }
     },
     "charts": {
@@ -791,6 +861,15 @@
         "closeFirefly": "關閉 Firefly",
         "generateAddress": "產生新地址",
         "migrateAgain": "遷移另一個索引",
+        "visitWebsite": "前往網站",
+        "howItWorks": "運作方式",
+        "learnAboutStaking": "深入瞭解質押",
+        "stake": "質押",
+        "unstake": "解除質押",
+        "stakeFunds": "質押資金",
+        "manageStake": "管理質押",
+        "merge": "合併",
+        "mergeFunds": "合併資金",
         "done": "完成"
     },
     "general": {
@@ -816,7 +895,7 @@
         "customizeAcount": "自訂您的錢包",
         "account": "錢包",
         "sendingToAddress": "正傳送到地址",
-        "amount": "金額",
+        "amount": "數量",
         "addAddress": "添加地址",
         "reference": "參照",
         "from": "由",
@@ -840,7 +919,7 @@
         "balance": "餘額",
         "accountBalance": "錢包餘額",
         "incoming": "傳入",
-        "outgoing": "傳出",
+        "outgoing": "發送",
         "totalIn": "合計",
         "totalOut": "總支出",
         "accounts": "錢包",
@@ -880,6 +959,8 @@
         "transferBroadcasting": "廣播交易",
         "transferComplete": "轉移完成",
         "generatingReceiveAddress": "產生接收地址",
+        "broadcasting": "Broadcasting",
+        "confirming": "Confirming",
         "creatingAccount": "正在創建錢包，請稍候...",
         "updatingAccount": "正在更新錢包，請稍候...",
         "accountSyncing": "錢包正在同步",
@@ -907,13 +988,35 @@
         "sendingFrom": "從 {account} 發送中",
         "receivedTo": "已收到 {account}",
         "sentFrom": "發送自 {account}",
+        "stakedFor": "Staked for {account}",
+        "unstakedFor": "Unstaked for {account}",
+        "votedFor": "Voted for {account}",
+        "unvotedFor": "Unvoted for {account}",
         "receiving": "收款中",
         "sending": "正在發送",
         "legacyNetwork": "舊版網路",
         "capsLock": "大寫鎖定已啟用",
         "version": "版本 {version}",
         "unknown": "不明",
-        "none": "無"
+        "none": "無",
+        "days": "day(s)",
+        "time": {
+            "days": "days",
+            "day": "day",
+            "hours": "hours",
+            "hour": "hour",
+            "minutes": "minutes",
+            "minute": "minute",
+            "seconds": "seconds",
+            "second": "second"
+        },
+        "staked": "Staked",
+        "unstaked": "Unstaked",
+        "staking": "質押",
+        "unstaking": "Unstaking",
+        "notStaked": "Not staked",
+        "stakedFunds": "已質押的資金",
+        "unstakedFunds": "Unstaked funds"
     },
     "dates": {
         "today": "今天",
@@ -958,7 +1061,7 @@
             "length": "您的設定檔名稱不能超過 {length, plural, one {1 character} other {# 字符}}。",
             "duplicate": "相同名稱的設定檔已存在。",
             "delete": {
-                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+                "nonEmptyAccounts": "您必須先轉出全部餘額，然後才能刪除您的設定檔。"
             }
         },
         "password": {
@@ -1024,7 +1127,8 @@
             "unsynced": "此節點尚未同步。",
             "noSynced": "沒有可用的同步節點。",
             "answer": "無法向所有節點取得回應。",
-            "forbidden": "此節點連結已被禁用。"
+            "forbidden": "此節點連結已被禁用。",
+            "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node."
         },
         "network": {
             "mismatch": "此節點的Network ID為: \"{networkId}\"`，與當前網路不相符。",
@@ -1056,7 +1160,8 @@
             "otherConnected": "您的Ledger裝置開啟了錯誤的應用程式",
             "generateAddress": "產生地址時發生錯誤",
             "timeout": "您的 Ledger 裝置已逾時。",
-            "disconnected": "您的 Ledger 裝置已斷線。"
+            "disconnected": "您的 Ledger 裝置已斷線。",
+            "noStronghold": "Unable to use Stronghold with Ledger profile."
         },
         "popup": {
             "preventClose": "無法關閉此彈出視窗。"
@@ -1066,11 +1171,20 @@
         },
         "crypto": {
             "cannotDecodeBech32": "無法將此字串解析成 Bech32 地址。"
+        },
+        "participation": {
+            "cannotUseAccount": "Unable to use the specified account.",
+            "cannotFindStakingEvent": "Unable to find staking event.",
+            "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
+            "invalidStakingEventId": "Invalid staking event ID."
         }
     },
     "warning": {
         "node": {
             "http": "透過 HTTP 未加密連接來使用節點，可能會造成安全性風險。"
+        },
+        "participation": {
+            "noAccounts": "You do not have any accounts available to participate."
         }
     },
     "tooltips": {
@@ -1081,6 +1195,58 @@
             "medium": "中等",
             "low": "低",
             "veryLow": "非常低"
+        },
+        "stakingIndicator": {
+            "upcoming": {
+                "title": "Staking has not started yet",
+                "body": "Check back later. The staking event has not begun."
+            },
+            "commencing": {
+                "title": "Pre-staking is now open",
+                "body": "Pre-stake your tokens, and once staking begins, you will automatically start receiving rewards every 10 seconds."
+            },
+            "activeHolding": {
+                "title": "Staking is now in progress",
+                "body": "Good job. You will receive rewards every 10 seconds."
+            },
+            "inactiveHolding": {
+                "title": "Staking is now open",
+                "body": "Stake your IOTA tokens to receive rewards every 10 seconds."
+            },
+            "inactive": {
+                "title": "未偵測到質押活動",
+                "body": "在進階設定中開啟網路設定，按下「檢視資訊」並確認現在的節點擁有「參加」功能。"
+            },
+            "ended": {
+                "title": "質押現在已經結束",
+                "body": "Assembly 和 Shimmer 獎勵將在它們各自的網路啟動後分配到您的錢包。"
+            }
+        },
+        "partiallyStakedFunds": {
+            "title": "新的未質押資金：{amount}",
+            "titleNoFunds": "新的未質押資金",
+            "preBody": "您質押的錢包已收到代幣。",
+            "body": "您必須手動質押這些新資金，才能收到屬於它們的空投獎勵。"
+        },
+        "stakingMinRewards": {
+            "title": "低於最低獎勵門檻",
+            "titleMinBalance": "須要最低餘額 {amount}",
+            "bodyMinBalace": "此錢包內的 IOTA 代幣不足以達到最低空投獎勵門檻，因此無法質押。",
+            "continue": "請再繼續質押 {duration}。",
+            "bodyBelowMin": "此錢包尚未達到 {airdrop} ({airdropRewardMin}) 的最低獎勵門檻。",
+            "bodyWillReachMin": "您必須再質押 {duration} 才能達到最低門檻。",
+            "bodyWillNotReachMin": "除非您質押更多 IOTA，在剩餘的質押期間您將無法達到最低門檻。",
+            "bodyDidNotReachMin": "您尚未質押足夠的 IOTA 來達到 {airdrop} ({airdropRewardMin}) 的最低獎勵。"
+        }
+    },
+    "exports": {
+        "transactionHistoryCsv": {
+            "messageId": "訊息編號",
+            "internal": "内部的",
+            "rawValue": "原始數值",
+            "formattedValue": "格式化數值",
+            "date": "日期",
+            "time": "時間"
         }
     }
 }

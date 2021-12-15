@@ -7,7 +7,7 @@
         "legal": {
             "title": "Personvernerklæring & Vilkår for Bruk",
             "body": "Vennligst gå gjennom Personvernerklæring og Vilkår for Bruk.",
-            "checkbox": "Jeg har lest og godtar retningslinjer for personvern og tjenestevilkår"
+            "checkbox": "Jeg har lest og godtar tjenestevilkårene og retningslinjene for personvern"
         },
         "appearance": {
             "title": "Utseende",
@@ -30,12 +30,12 @@
         "setup": {
             "title": "Sett opp en lommebok",
             "chrysalisTitle": "Chrysalis Nettverksoppdatering",
-            "chrysalisBody": "Fra 21. april kan brukere migrere tokens til det nye Chrysalis-nettverket. Vi anbefaler at du migrerer dine eksisterende tokens så fort som mulig.",
+            "chrysalisBody": "Fra 21.April 2021, kan brukere migrere deres tokens til det nye Chrysalis nettverket. Vi anbefaler deg å migrere dine tokens så snart som mulig.",
             "learnMore": "Lær om migreringen"
         },
         "secure": {
             "title": "Sikre lommeboken din",
-            "body1": "Last ned og skriv ut Recovery Kit PDF-malen.",
+            "body1": "Lagre og skriv ut PDF-malen for Recovery Kit.",
             "body2": "Hvis du fyller ut Recovery Kit og oppbevarer det trygt, vil du alltid kunne gjenopprette lommebøkene dine."
         },
         "create": {
@@ -415,10 +415,6 @@
                 "title": "Migrer Ledger-indeks",
                 "description": "Overfør en annen Trinity kontoindeks"
             },
-            "transactionHistory": {
-                "title": "Transaction history",
-                "description": "Export the transaction history of your accounts as .csv files"
-            },
             "troubleshoot": {
                 "title": "Feilsøking",
                 "description": "Bruk feilsøkingsveiviseren for å løse vanlige problemer"
@@ -490,6 +486,48 @@
                 "allSettings": "Alle innstillinger",
                 "logout": "Logg ut"
             }
+        },
+        "staking": {
+            "title": "Staking",
+            "welcome": "Velkommen til dashbord for staking",
+            "status": {
+                "upcoming": "Staking ikke startet",
+                "commencing": "Pre-staking åpen",
+                "holdingActive": "Staking pågår",
+                "holdingInactive": "Staking åpen",
+                "inactive": "Ingen staking oppdaget",
+                "ended": "Staking avsluttet"
+            },
+            "summary": {
+                "stakedFunds": "Stakede midler"
+            },
+            "info": {
+                "upcomingSubheader": "Staking har ikke startet",
+                "upcomingHeader": "Sjekk igjen senere",
+                "commencingSubheader": "Klargjør til staking",
+                "commencingHeader": "Pre-stake dine tokener!",
+                "holdingSubheaderHolding": "Opptjener nå staking belønninger",
+                "holdingSubheaderNotHolding": "Få belønninger ved å stake IOTA",
+                "holdingHeaderHolding": "{duration} gjenstår",
+                "holdingHeaderNotHolding": "Stake dine tokens!",
+                "endedSubheader": "Stakingen er nå avsluttet",
+                "endedHeader": "Tusen takk!",
+                "inactiveHeader": "Prøv å endre node",
+                "inactiveSubheader": "Ingen staking oppdaget"
+            },
+            "airdrops": {
+                "holding": "Gjenstående",
+                "commencing": "Inntil staking starter",
+                "collectedRewards": "Innsamlede belønninger",
+                "assembly": {
+                    "name": "Assembly",
+                    "description": "Assembly er et frittstående, svært skalerbart multi-chain nettverk for å bygge opp og utnytte sammensatte smartkontrakter. Assembly er fremtiden for web3. "
+                },
+                "shimmer": {
+                    "name": "Shimmer",
+                    "description": "Det incentiverte staging nettverket vil bidra til enorm innovasjon på IOTA. Uansett hva som skjer, hvordan Shimmer utvikler seg er opp til deg."
+                }
+            }
         }
     },
     "popups": {
@@ -538,9 +576,9 @@
         },
         "addressHistory": {
             "title": "{name} adressehistorikk",
-            "currentBalance": "Balance: {balance}",
-            "internal": "Internal Address",
-            "external": "Deposit Address"
+            "currentBalance": "Balanse",
+            "internal": "Intern adresse",
+            "external": "Innskuddsadresse"
         },
         "node": {
             "titleAdd": "Legg til en node",
@@ -600,7 +638,8 @@
         },
         "transaction": {
             "title": "Bekreft transaksjon",
-            "body": "Du er i ferd med å sende {amount} til"
+            "body": "Du er i ferd med å sende {amount} til",
+            "sendingFromStakedAccount": "Du sender en transaksjon fra en lommebok som for tiden blir staket. Dette kan stanse stakingen av dine tokens. Du kan gjennomføre transaksjonen, men du må kanskje starte staking på nytt for gjenværende tokens."
         },
         "balanceFinder": {
             "title": "Saldo-finner",
@@ -673,11 +712,42 @@
             "body": "Du kan også migrere senere i Avanserte Innstillinger."
         },
         "exportTransactionHistory": {
-            "title": "Export transaction history",
-            "body": "Export your transaction history for all accounts consecutively within this profile. Exports will be in a CSV format.",
-            "profileName": "Profile name:",
-            "numberOfAccounts": "Number of accounts:",
-            "typePassword": "Type your password to allow exporting"
+            "title": "Eksport transaksjon historie",
+            "body": "Eksporter transaksjon historie for valgt lommebok. Den eksporterte filen vil bli i .csv format.",
+            "profileName": "Profil navn",
+            "accountName": "Konto navn",
+            "typePassword": "Skriv inn passord for å tillate eksportering"
+        },
+        "stakingNotice": {
+            "upcomingDate": "Staking har ikke startet ennå",
+            "commencingDate": "Staking har ikke startet ennå",
+            "body": "Ved å forhånds-stake dine midler før stakingen starter, vil du automatisk begynne å motta belønning når staking starter.",
+            "ok": "OK, jeg forstår"
+        },
+        "stakingManager": {
+            "title": "Staking administrering",
+            "description": "Når du staker en lommebok, sendes det en transaksjon til deg selv som markerer midlene dine som \"staket\". Du kan overføre dine tokens til en hver tid, men du vil da ikke fortsette å motta opptjening fra staking.",
+            "totalFundsStaked": "Totalt antall stakede midler",
+            "stakedSuccessfully": "Dine tokens har blitt staket for {account}.",
+            "unstakedSuccessfully": "Staking av tokens er avsluttet for {account}."
+        },
+        "stakingConfirmation": {
+            "title": "Airdrop-deltakelse",
+            "subtitleStake": "Du er i ferd med å stake",
+            "subtitleMerge": "Du er i ferd med å sette sammen",
+            "bodyStake": "Dersom du ikke ønsker å delta i airdrop for begge tokens, kan du velge dette under. Du kan endre dette ved å stoppe og starte staking til en hver tid.",
+            "bodyMerge": "Dine midler vil bli staket for {airdrop}. For å endre hvilken airdrop du ønsker å delta i, stopp staking av denne lommeboken og start staking på nytt.",
+            "estimatedAirdrop": "Estimert belønning"
+        },
+        "shimmer-info": {
+            "title": "Om Shimmer",
+            "body1": "Gratulerer, du har opptjent SMR tokens som et resultat av staking. Shimmer er et insentivert nettverk for å iscenesette og teste ut store oppdateringer ment for IOTA.",
+            "body2": "Vi sikter oss inn på å lansere Shimmer i 2022. Dine tokens vil bli tilgjengelige å transfere når nettverket lanseres."
+        },
+        "assembly-info": {
+            "title": "Om Assembly",
+            "body1": "Gratulerer, du har tjent ASMB-tokens som belønning for staking. Assembly er et multi-kjede-nettverk for skalerbare smartkontrakter på IOTA.",
+            "body2": "Vi sikter oss inn på å lansere Assembly i 2022. Dine tokens vil bli tilgjengelig å transfere når nettverket lanseres."
         }
     },
     "charts": {
@@ -733,12 +803,12 @@
         "dropHere": "Slipp filen her",
         "syncAll": "Synkroniser alle",
         "export": "Eksporter",
-        "exporting": "Exporting",
+        "exporting": "Eksporterer",
         "exportNewStronghold": "Eksporter en ny Stronghold",
         "enableDeepLinks": "Aktiver IOTA-linker",
         "enableDeveloperMode": "Aktiver utviklermodus",
         "enableSystemNotifications": "Aktiver varsler",
-        "exportTransactionHistory": "Export transaction history",
+        "exportTransactionHistory": "Eksporter transaksjonshistorie",
         "localProofOfWork": "Lokal proof of work",
         "unlock": "Lås opp",
         "updateFirefly": "Oppdater Firefly",
@@ -791,7 +861,16 @@
         "closeFirefly": "Lukk Firefly",
         "generateAddress": "Generer adresse",
         "migrateAgain": "Migrer en annen indeks",
-        "done": "Done"
+        "visitWebsite": "Besøk nettside",
+        "howItWorks": "Hvordan det fungerer",
+        "learnAboutStaking": "Lær om staking",
+        "stake": "Stake",
+        "unstake": "Avslutt staking",
+        "stakeFunds": "Stake midler",
+        "manageStake": "Administrér staking",
+        "merge": "Slå sammen",
+        "mergeFunds": "Slå sammen midler",
+        "done": "Ferdig"
     },
     "general": {
         "password": "Passord",
@@ -880,6 +959,8 @@
         "transferBroadcasting": "Promoterer transaksjonen",
         "transferComplete": "Overføring fullført",
         "generatingReceiveAddress": "Genererer mottaksadresse",
+        "broadcasting": "Kringkasting",
+        "confirming": "Bekrefter",
         "creatingAccount": "Oppretter lommebok, vennligst vent...",
         "updatingAccount": "Oppdaterer lommebok, vennligst vent...",
         "accountSyncing": "Lommebok synkroniserer",
@@ -907,13 +988,35 @@
         "sendingFrom": "Sender fra {account}",
         "receivedTo": "Mottar til {account}",
         "sentFrom": "Sendt fra {account}",
+        "stakedFor": "Staket for {account}",
+        "unstakedFor": "Stoppet staking for {account}",
+        "votedFor": "Stemte på {account}",
+        "unvotedFor": "Fjernet stemme på {account}",
         "receiving": "Mottar",
         "sending": "Sender",
         "legacyNetwork": "Gammelt Nettverk",
         "capsLock": "Caps Lock er på",
         "version": "Versjon {version}",
         "unknown": "Ukjent",
-        "none": "Ingen"
+        "none": "Ingen",
+        "days": "dag(er)",
+        "time": {
+            "days": "dager",
+            "day": "dag",
+            "hours": "timer",
+            "hour": "time",
+            "minutes": "minutter",
+            "minute": "minutt",
+            "seconds": "sekunder",
+            "second": "sekund"
+        },
+        "staked": "Staket",
+        "unstaked": "Avsluttet staking",
+        "staking": "Staking",
+        "unstaking": "Avslutter staking",
+        "notStaked": "Ikke staket",
+        "stakedFunds": "Stakede midler",
+        "unstakedFunds": "Ikke-stakede midler"
     },
     "dates": {
         "today": "I dag",
@@ -939,8 +1042,8 @@
         "accountsSynchronized": "Synkronisering av lommebok fullført",
         "fundsAvailableSoon": "Dine midler vil bli tilgjengelig innen kort tid",
         "exportTransactionHistory": {
-            "success": "Transaction history for {accountAlias} was successfully saved to {filePath}",
-            "error": "Unable to export transaction history for {accountAlias}"
+            "success": "Transaksjonshistorikk for {accountAlias} ble lagret vellykket på {filePath}",
+            "error": "Kan ikke eksportere transaksjonshistorikk for {accountAlias}"
         },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "Logg inn for å starte IOTA-linken",
@@ -958,7 +1061,7 @@
             "length": "Profilnavnet ditt kan ikke være lenger enn {length, plural, one {1 tegn} other {# tegn}}.",
             "duplicate": "En profil med dette navnet eksisterer allerede.",
             "delete": {
-                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+                "nonEmptyAccounts": "Du må overføre hele balansen før du kan slette profilen din."
             }
         },
         "password": {
@@ -1024,7 +1127,8 @@
             "unsynced": "Noden er ikke synkronisert.",
             "noSynced": "Ingen synkroniserte noder er tilgjengelige.",
             "answer": "Fikk ikke svar fra alle noder.",
-            "forbidden": "Denne node-tilkoblingen er forbudt."
+            "forbidden": "Denne node-tilkoblingen er forbudt.",
+            "pluginNotAvailable": "\"{nodePlugin}\"-plug-in-en er ikke tilgjengelig på den nåværende noden."
         },
         "network": {
             "mismatch": "Nettverk-IDen for denne noden er \"{networkId}\", og samsvarer ikke med det gjeldende nettverket.",
@@ -1056,7 +1160,8 @@
             "otherConnected": "Feil app er åpen på Ledger-enheten din.",
             "generateAddress": "Det oppstod en feil under generering av adresse.",
             "timeout": "Det oppstod et tidsavbrudd for Ledger-enheten.",
-            "disconnected": "Ledger-enheten ble frakoblet."
+            "disconnected": "Ledger-enheten ble frakoblet.",
+            "noStronghold": "Klarte ikke å bruke Stronghold med Ledger-profil."
         },
         "popup": {
             "preventClose": "Denne popup kan ikke stenges."
@@ -1066,11 +1171,20 @@
         },
         "crypto": {
             "cannotDecodeBech32": "Kan ikke avkode streng som Bech32-adresse."
+        },
+        "participation": {
+            "cannotUseAccount": "Klarte ikke å bruke den valgte kontoen.",
+            "cannotFindStakingEvent": "Klarer ikke å finne staking-hendelsen.",
+            "cannotVisitAirdropWebsite": "Klarte ikke å åpne {airdrop}-nettsiden.",
+            "invalidStakingEventId": "Ugyldig staking-ID."
         }
     },
     "warning": {
         "node": {
             "http": "Bruk noder over HTTP lar trafikken være ukryptert og kan utgjøre en sikkerhetsrisiko."
+        },
+        "participation": {
+            "noAccounts": "Du har ingen tilgjengelige kontoer å delta med."
         }
     },
     "tooltips": {
@@ -1081,6 +1195,58 @@
             "medium": "Middels",
             "low": "Lavt",
             "veryLow": "Veldig lavt"
+        },
+        "stakingIndicator": {
+            "upcoming": {
+                "title": "Staking har ikke startet ennå",
+                "body": "Prøv igjen senere. Stakingen har ikke startet."
+            },
+            "commencing": {
+                "title": "Pre-stakingen er nå åpen",
+                "body": "Pre-stake dine tokens. Når stakingen starter, vil du automatisk motta gevinst hvert 10 sekund."
+            },
+            "activeHolding": {
+                "title": "Stakingen er nå i gang",
+                "body": "Bra jobbet. Du vil motta gevinst hvert 10 sekund."
+            },
+            "inactiveHolding": {
+                "title": "Staking er nå åpen",
+                "body": "Stake dine IOTA tokens for å motta gevinst hvert 10 sekund."
+            },
+            "inactive": {
+                "title": "Ingen staking oppdaget",
+                "body": "Åpne nettverkskonfigurasjon i \"Avanserte Innstillinger\" og forsikre deg om at nåværende node har \"Deltakelse\"-egenskapen ved å klikke på \"Se Info\"."
+            },
+            "ended": {
+                "title": "Stakingen er nå avsluttet",
+                "body": "Assembly- og Shimmer-gevinster blir distribuert til lommeboken din når hvert av disse nettverkene lanseres."
+            }
+        },
+        "partiallyStakedFunds": {
+            "title": "Nytt antall ikke-stakede midler: {amount}",
+            "titleNoFunds": "Nye ikke-stakede midler",
+            "preBody": "Du har mottatt tokens i en staket lommebok.",
+            "body": "Du må manuelt stake disse nye myntene for å motta airdrop-gevinstene for dem."
+        },
+        "stakingMinRewards": {
+            "title": "Under minimumsverdi for gevinst",
+            "titleMinBalance": "{amount} minimum saldo påkrevd",
+            "bodyMinBalace": "Denne lommeboken har ikke nok IOTA-tokens til å nå den laveste mulige airdrop-belønningen, og kan derfor ikke stakes.",
+            "continue": "Vennligst fortsett å stake i ytterligere {duration}.",
+            "bodyBelowMin": "Denne lommeboken har ikke nådd minimum belønningsverdi for {airdrop} ({airdropRewardMin}).",
+            "bodyWillReachMin": "Du må fortsette å stake i {duration} for å oppnå minsteverdi.",
+            "bodyWillNotReachMin": "Du vil ikke nå minimumet i løpet av gjenværende staking periode med mindre du staker mer IOTA.",
+            "bodyDidNotReachMin": "Du staket ikke nok IOTA for å oppnå minimum gevinst for {airdrop} ({airdropRewardMin})."
+        }
+    },
+    "exports": {
+        "transactionHistoryCsv": {
+            "messageId": "Meldings-ID",
+            "internal": "Intern",
+            "rawValue": "Rå verdi",
+            "formattedValue": "Formatert verdi",
+            "date": "Dato",
+            "time": "Tid"
         }
     }
 }
