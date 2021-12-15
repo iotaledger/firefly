@@ -9,7 +9,7 @@
         getTimeUntilMinimumAirdropReward,
         getUnstakedFunds,
         isStakingPossible,
-    } from 'shared/lib/participation'
+    } from 'shared/lib/participation/staking'
     import {
         assemblyStakingRemainingTime,
         partiallyStakedAccounts,
