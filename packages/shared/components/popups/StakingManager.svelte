@@ -1,20 +1,8 @@
 <script lang="typescript">
-    import { onMount } from 'svelte'
-    import { get } from 'svelte/store'
     import { Button, Icon, Spinner, Text } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
-    import type { Locale } from 'shared/lib/typings/i18n'
-    import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { hasNodePlugin, networkStatus } from 'shared/lib/networkStatus'
-    import { NodePlugin } from 'shared/lib/typings/node'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { openPopup, popupState } from 'shared/lib/popup'
-    import { activeProfile, isSoftwareProfile } from 'shared/lib/profile'
-    import { checkStronghold } from 'shared/lib/stronghold'
-    import { formatUnitBestMatch } from 'shared/lib/units'
-    import { transferState, wallet } from 'shared/lib/wallet'
-    import type { WalletAccount } from 'shared/lib/typings/wallet'
-
     import {
         canAccountParticipate,
         canParticipate,
@@ -35,6 +23,17 @@
         stakingEventState,
     } from 'shared/lib/participation/stores'
     import { Participation, ParticipationAction } from 'shared/lib/participation/types'
+    import { openPopup, popupState } from 'shared/lib/popup'
+    import { activeProfile, isSoftwareProfile } from 'shared/lib/profile'
+    import { checkStronghold } from 'shared/lib/stronghold'
+    import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
+    import type { Locale } from 'shared/lib/typings/i18n'
+    import { NodePlugin } from 'shared/lib/typings/node'
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
+    import { formatUnitBestMatch } from 'shared/lib/units'
+    import { transferState, wallet } from 'shared/lib/wallet'
+    import { onMount } from 'svelte'
+    import { get } from 'svelte/store'
 
     export let locale: Locale
 
@@ -96,11 +95,11 @@
 
     const displayErrorNotification = (error): void => {
         showAppNotification({
-                type: 'error',
-                message: locale(error.error)
+            type: 'error',
+            message: locale(error.error),
         })
     }
- 
+
     const getFormattedFiatAmount = (amount: number): string => {
         const currency = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
         return formatCurrency(convertToFiat(amount, $currencies[CurrencyTypes.USD], $exchangeRates[currency]), currency)
@@ -136,7 +135,7 @@
                     .catch((err) => {
                         console.error(err)
 
-                        displayErrorNotification(err);
+                        displayErrorNotification(err)
                         resetView()
                     })
                 break
@@ -147,7 +146,7 @@
                     .catch((err) => {
                         console.error(err)
 
-                        displayErrorNotification(err);
+                        displayErrorNotification(err)
                         resetView()
                     })
                 break
@@ -294,7 +293,9 @@
                         class="space-x-4 mx-1 mb-1 px-4 py-3 flex flex-row justify-between items-center rounded-lg bg-yellow-50">
                         <Icon icon="exclamation" width="24" height="24" classes="fill-current text-yellow-600" />
                         <div class="flex flex-col w-3/4">
-                            <Text type="p" classes="text-gray-800 font-extrabold" overrideColor>{locale('general.unstakedFunds')}</Text>
+                            <Text type="p" classes="text-gray-800 font-extrabold" overrideColor>
+                                {locale('general.unstakedFunds')}
+                            </Text>
                             <Text type="p" secondary classes="font-extrabold">
                                 {formatUnitBestMatch(getUnstakedFunds(account))}
                                 •
