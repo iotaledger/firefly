@@ -5,7 +5,14 @@ import { localize } from '../i18n'
 import { networkStatus } from '../networkStatus'
 import { showAppNotification } from '../notifications'
 import { activeProfile } from '../profile'
-import { getBestTimeDuration, MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
+import {
+    getBestTimeDuration,
+    HOURS_PER_DAY,
+    MILLISECONDS_PER_SECOND,
+    MINUTES_PER_HOUR,
+    SECONDS_PER_MILESTONE,
+    SECONDS_PER_MINUTE,
+} from '../time'
 import { clamp, delineateNumber } from '../utils'
 import type { WalletAccount } from '../typings/wallet'
 
@@ -19,6 +26,7 @@ import {
     shimmerStakingRemainingTime,
     shimmerStakingRewards,
     stakedAccounts,
+    stakingEventState,
 } from './stores'
 import { Participation, ParticipationEvent, ParticipationEventState, StakingAirdrop } from './types'
 import { formatUnitBestMatch } from '../units'
@@ -387,6 +395,9 @@ export const getTimeUntilMinimumAirdropReward = (account: WalletAccount, format:
 }
 
 const getNumRemainingMilestones = (airdrop: StakingAirdrop): number => {
+    const event = getStakingEventFromAirdrop(airdrop)
+    if (!event || !isStakingPossible(event?.status?.status)) return 0
+
     const timeLeft =
         airdrop === StakingAirdrop.Assembly
             ? get(assemblyStakingRemainingTime)
@@ -394,7 +405,10 @@ const getNumRemainingMilestones = (airdrop: StakingAirdrop): number => {
             ? get(shimmerStakingRemainingTime)
             : 0
 
-    return timeLeft / SECONDS_PER_MILESTONE
+    const isInHolding = event?.status?.status === ParticipationEventState.Holding
+    const { milestoneIndexStart, milestoneIndexEnd } = event?.information
+
+    return isInHolding ? timeLeft / SECONDS_PER_MILESTONE : milestoneIndexEnd - milestoneIndexStart
 }
 
 const calculateIotasUntilMinimumReward = (rewards: number, airdrop: StakingAirdrop): number => {
