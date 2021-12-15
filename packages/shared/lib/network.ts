@@ -30,13 +30,9 @@ export const CHRYSALIS_DEVNET_BECH32_HRP = 'atoi'
  * @returns {NetworkConfig}
  */
 export const getOfficialNetworkConfig = (type: NetworkType): NetworkConfig => {
-    const officialNodes = getOfficialNodes(type)
-    const randIdx = Math.floor(Math.random() * officialNodes.length)
-    const officialNodesWithPrimary = officialNodes.map((n, idx) => ({ ...n, isPrimary: idx === randIdx }))
-
     return {
         network: getOfficialNetwork(type),
-        nodes: officialNodesWithPrimary,
+        nodes: setRandomPrimaryNode(getOfficialNodes(type)),
         automaticNodeSelection: true,
         includeOfficialNodes: true,
         localPow: true,
@@ -374,12 +370,16 @@ export const ensureSinglePrimaryNode = (nodes: Node[]): Node[] => {
 
     const numPrimaryNodes = nodes.filter((n) => n.isPrimary).length
     if (numPrimaryNodes === 0) {
-        const randIdx = Math.floor(Math.random() * nodes.length)
-        return nodes.map((n, idx) => ({ ...n, isPrimary: idx === randIdx }))
+        return setRandomPrimaryNode(nodes)
     } else if (numPrimaryNodes === 1) {
         return nodes
     } else if (numPrimaryNodes > 1) {
         const activeNode = nodes.find((n) => n.isPrimary)
         return nodes.map((n, idx) => ({ ...n, isPrimary: n.url === activeNode.url }))
     }
+}
+
+const setRandomPrimaryNode = (nodes: Node[]): Node[] => {
+    const randIdx = Math.floor(Math.random() * nodes.length)
+    return nodes.map((n, idx) => ({ ...n, isPrimary: idx === randIdx }))
 }
