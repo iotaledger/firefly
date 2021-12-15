@@ -301,7 +301,7 @@
                             </Text>
                         </div>
                         <Button disabled={$isPerformingParticipation} onClick={() => handleStakeClick(account)}>
-                            {locale('actions.stake')}
+                            {locale('actions.merge')}
                         </Button>
                     </div>
                 {/if}
