@@ -94,10 +94,10 @@
         resetAccounts()
     }
 
-    const displayErrorNotification = (action: ParticipationAction): void => {
+    const displayErrorNotification = (error): void => {
         showAppNotification({
                 type: 'error',
-                message: locale('error.participation.errorOccurred', { values: { action } })
+                message: locale(error.error)
         })
     }
  
@@ -136,7 +136,7 @@
                     .catch((err) => {
                         console.error(err)
 
-                        displayErrorNotification($participationAction);
+                        displayErrorNotification(err);
                         resetView()
                     })
                 break
@@ -147,7 +147,7 @@
                     .catch((err) => {
                         console.error(err)
 
-                        displayErrorNotification($participationAction);
+                        displayErrorNotification(err);
                         resetView()
                     })
                 break
