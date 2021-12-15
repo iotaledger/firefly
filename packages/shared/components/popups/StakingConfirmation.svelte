@@ -104,7 +104,7 @@
 <Text type="p" secondary classes="text-center mt-5 mb-6">
     {locale('popups.stakingConfirmation.body')}
 </Text>
-<div class="flex flex-row justify-between items-center mb-6 space-x-2">
+<div class="flex flex-row mb-6 space-x-2 flex-1">
     {#each Object.keys(StakingAirdrop).map((sa) => sa.toLowerCase()) as airdrop}
         <div
             on:click={(activeAirdrops.length > 0 && activeAirdrops.includes(airdrop)) ? () => {} : () => toggleAirdropSelection(airdrop)}
@@ -116,7 +116,7 @@
             </div>
             <Text type="p" secondary>{locale('popups.stakingConfirmation.estimatedAirdrop')}:</Text>
             <Checkbox round bind:checked={airdropSelections[airdrop]} onClick={() => toggleAirdropSelection(airdrop)} disabled={(activeAirdrops.length > 0 && activeAirdrops.includes(airdrop))} classes="my-5" />
-            <Text type="p" classes="font-bold text-lg">
+            <Text type="p" classes="font-bold text-lg w-full break-all">
                 {(airdropSelections[airdrop] ? getRewards(capitalize(airdrop)) : estimateStakingAirdropReward(airdrop, 0, true, 0)).split(' ')[0]}
             </Text>
             <Text type="p" secondary classes="font-bold text-lg">
