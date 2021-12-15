@@ -21,7 +21,7 @@
         stakingEventState,
         unstakedAmount,
     } from 'shared/lib/participation/stores'
-    import { ParticipationAction, ParticipationEventState } from 'shared/lib/participation/types'
+    import { AccountParticipationAbility, ParticipationAction, ParticipationEventState } from 'shared/lib/participation/types'
 
     $: $participationOverview, $stakedAccounts, $partiallyStakedAccounts
 
@@ -29,7 +29,8 @@
 
     $: canParticipateInEvent = isStakingPossible($stakingEventState)
 
-    $: canStakeAnAccount = get($wallet.accounts).filter((wa) => canAccountParticipate(wa)).length > 0
+    let { accounts } = $wallet
+    $: canStakeAnAccount = $accounts.some((wa) => canAccountParticipate(wa) === AccountParticipationAbility.Yes)
 
     $: isStaked = $stakedAmount > 0 && canParticipateInEvent
 
