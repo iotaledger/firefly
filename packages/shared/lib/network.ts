@@ -29,13 +29,19 @@ export const CHRYSALIS_DEVNET_BECH32_HRP = 'atoi'
  *
  * @returns {NetworkConfig}
  */
-export const getOfficialNetworkConfig = (type: NetworkType): NetworkConfig => ({
-    network: getOfficialNetwork(type),
-    nodes: getOfficialNodes(type),
-    automaticNodeSelection: true,
-    includeOfficialNodes: true,
-    localPow: true,
-})
+export const getOfficialNetworkConfig = (type: NetworkType): NetworkConfig => {
+    const officialNodes = getOfficialNodes(type)
+    const randIdx = Math.floor(Math.random() * officialNodes.length)
+    const officialNodesWithPrimary = officialNodes.map((n, idx) => ({ ...n, isPrimary: idx === randIdx }))
+
+    return {
+        network: getOfficialNetwork(type),
+        nodes: officialNodesWithPrimary,
+        automaticNodeSelection: true,
+        includeOfficialNodes: true,
+        localPow: true,
+    }
+}
 
 /**
  * Constructs an official IOTA network object given the type of network
