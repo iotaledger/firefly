@@ -14,7 +14,7 @@
     import { getParticipationOverview, participate, stopParticipating } from 'shared/lib/participation/api'
     import { STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
     import {
-        accountToParticipate, partiallyStakedAccounts,
+        accountToParticipate,
         participatedAccountsMapPerSession,
         participationAction,
         participationOverview,
@@ -22,6 +22,7 @@
         stakedAccounts,
         stakedAmount,
         stakingEventState,
+        isPerformingParticipation
     } from 'shared/lib/participation/stores'
     import { Participation, ParticipationAction } from 'shared/lib/participation/types'
     import { openPopup, popupState } from 'shared/lib/popup'
@@ -38,7 +39,6 @@
 
     export let locale: Locale
 
-    export let isPerformingAction = false
     export let shouldParticipateOnMount = false
     export let participations: Participation[] = []
 
@@ -86,7 +86,7 @@
             transferState.set(null)
         }
 
-        isPerformingAction = false
+        isPerformingParticipation.set(false)
 
         accountToParticipate.set(undefined)
         participationAction.set(undefined)
@@ -103,7 +103,7 @@
         if (!canStake) return
         if (!$accountToParticipate || !$participationAction) return
 
-        isPerformingAction = true
+        isPerformingParticipation.set(true)
         $participatedAccountsMapPerSession.set($accountToParticipate?.id, false)
 
         const _sync = (messageIds: string[]) => {
@@ -273,11 +273,11 @@
                         {/if}
                     </div>
                     <Button
-                        disabled={isPerformingAction}
+                        disabled={$isPerformingParticipation}
                         secondary={isAccountStaked(account?.id)}
                         onClick={() => (isAccountStaked(account?.id) ? handleUnstakeClick(account) : handleStakeClick(account))}>
                         {#if $accountToParticipate?.id === account?.id && $accountToParticipate && $participationAction}
-                            <Spinner busy={isPerformingAction} classes="mx-2 justify-center" />
+                            <Spinner busy={$isPerformingParticipation} classes="mx-2 justify-center" />
                         {:else}{locale(`actions.${isAccountStaked(account?.id) ? 'unstake' : 'stake'}`)}{/if}
                     </Button>
                 </div>
@@ -295,7 +295,7 @@
                                 </Text>
                             </Text>
                         </div>
-                        <Button disabled={isPerformingAction} onClick={() => handleStakeClick(account)}>
+                        <Button disabled={$isPerformingParticipation} onClick={() => handleStakeClick(account)}>
                             {locale('actions.stake')}
                         </Button>
                     </div>
