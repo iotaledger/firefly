@@ -51,14 +51,15 @@
     const getHeaders = (): [string, string] => {
         if ($stakingEventState === ParticipationEventState.Holding) {
             const isStaking = $stakedAccounts.length > 0
-            const localePathExtra = $stakedAccounts.length > 0 ? 'Holding' : 'NotHolding'
+            const localiseHoldingHeader = $stakedAccounts.length > 0 ? 'Holding' : 'NotHolding'
+            const localiseHoldingSubHeader = $stakedAccounts.length > 0 ? 'Holding' : 'NotHolding'
 
             return [
                 localize(
-                    `${localePath}Header${localePathExtra}`,
+                    `${localePath}Header${localiseHoldingHeader}`,
                     isStaking ? { values: { duration: getBestTimeDuration($assemblyStakingRemainingTime) } } : {}
                 ),
-                localize(`views.staking.info.${$stakingEventState}Subheader`),
+                localize(`${localePath}Subheader${localiseHoldingSubHeader}`),
             ]
         } else {
             return [localize(`${localePath}Header`), localize(`views.staking.info.${$stakingEventState}Subheader`)]

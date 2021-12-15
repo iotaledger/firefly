@@ -4,7 +4,7 @@
     import { getInitials } from 'shared/lib/helpers'
     import { localize } from 'shared/lib/i18n'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { formatStakingAirdropReward } from 'shared/lib/participation'
+    import { formatStakingAirdropReward, isStakingPossible } from 'shared/lib/participation'
     import {
         assemblyStakingRemainingTime,
         assemblyStakingRewards,
@@ -12,8 +12,9 @@
         shimmerStakingRemainingTime,
         shimmerStakingRewards,
         stakedAccounts,
+        stakingEventState,
     } from 'shared/lib/participation/stores'
-    import { StakingAirdrop } from 'shared/lib/participation/types'
+    import { ParticipationEventState, StakingAirdrop } from 'shared/lib/participation/types'
     import { getBestTimeDuration } from 'shared/lib/time'
     import { capitalize } from 'shared/lib/utils'
 
@@ -32,8 +33,8 @@
         $stakedAccounts?.filter((account) =>
             $participationOverview?.some(
                 (partAccount) =>
-                    partAccount?.[isAssembly() ? 'assemblyStakedFunds' : 'shimmerStakedFunds'] >
-                        0 && partAccount.accountIndex === account.index
+                    partAccount?.[isAssembly() ? 'assemblyStakedFunds' : 'shimmerStakedFunds'] > 0 &&
+                    partAccount.accountIndex === account.index
             )
         ) ?? []
 
@@ -65,6 +66,23 @@
             default:
                 return ''
         }
+    }
+
+    const getLocalizedDurationText = (state: ParticipationEventState): string => {
+        let stateText: string
+        switch (state) {
+            case ParticipationEventState.Commencing:
+                stateText = 'commencing'
+                break
+            case ParticipationEventState.Holding:
+                stateText = 'holding'
+                break
+            default:
+                stateText = 'remaining'
+                break
+        }
+
+        return localize(`views.staking.airdrops.${stateText}`)
     }
 </script>
 
@@ -125,21 +143,23 @@
                     {localize('views.staking.airdrops.collectedRewards')}
                 </Text>
             </div>
-            <div class="flex flex-col text-right">
-                <div>
-                    <Text type="p" classes="font-bold text-lg inline text-white dark:text-white">
-                        {remainingTimeAmount}
+            {#if isStakingPossible($stakingEventState)}
+                <div class="flex flex-col text-right">
+                    <div>
+                        <Text type="p" classes="font-bold text-lg inline text-white dark:text-white">
+                            {remainingTimeAmount}
+                        </Text>
+                        <Text type="p" secondary classes="text-sm inline">{remainingTimeUnit}</Text>
+                    </div>
+                    <Text
+                        type="p"
+                        smaller
+                        overrideColor
+                        classes="font-normal text-sm mt-0.5 text-gray-400 dark:text-gray-400">
+                        {getLocalizedDurationText($stakingEventState)}
                     </Text>
-                    <Text type="p" secondary classes="text-sm inline">{remainingTimeUnit}</Text>
                 </div>
-                <Text
-                    type="p"
-                    smaller
-                    overrideColor
-                    classes="font-normal text-sm mt-0.5 text-gray-400 dark:text-gray-400">
-                    {localize('views.staking.airdrops.remaining')}
-                </Text>
-            </div>
+            {/if}
         </div>
     </div>
 </div>

@@ -219,7 +219,7 @@
     }
 </style>
 
-<Text type="h5">{locale(`popups.stakingManager.titleWith${hasStakedAccounts ? '' : 'No'}Stake`)}</Text>
+<Text type="h5">{locale('popups.stakingManager.title')}</Text>
 <Text type="p" secondary classes="mt-6 mb-2">{locale('popups.stakingManager.description')}</Text>
 <div class="staking flex flex-col scrollable-y">
     {#each $accounts as account}

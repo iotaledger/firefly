@@ -489,49 +489,43 @@
         },
         "staking": {
             "title": "Staking",
-            "welcome": "Welcome to the staking dashboard!",
-            "manager": {
-                "availableForStaking": "Available for staking",
-                "currentlyStaked": "Currently staked",
-                "stakedFunds": "Staked funds"
-            },
+            "welcome": "Welcome to the staking dashboard",
             "status": {
-                "upcoming": "Staking upcoming",
-                "commencing": "Staking commencing",
-                "active": "Staking active",
-                "inactive": "Staking inactive",
-                "ended": "Staking ended",
-                "minRewards": "Minimum rewards not met"
+                "upcoming": "Event not started",
+                "commencing": "Pre-staking open",
+                "holdingActive": "Staking in progress",
+                "holdingInactive": "Staking open",
+                "inactive": "Staking not detected",
+                "ended": "Staking ended"
             },
             "summary": {
-                "stakedFunds": "Staked funds",
-                "unstaked": "Unstaked",
-                "manageStake": "Manage Stake",
-                "stakeFunds": "Stake Funds"
+                "stakedFunds": "Staked funds"
             },
             "info": {
-                "upcomingSubheader": "Airdrop events commences",
-                "upcomingHeader": "December 1st",
-                "commencingSubheader": "Airdrop events commencing",
-                "commencingHeader": "Pre-stake phase",
-                "holdingSubheader": "Airdrop events ongoing",
+                "upcomingSubheader": "Event has not started",
+                "upcomingHeader": "Check back later",
+                "commencingSubheader": "Get ready for staking",
+                "commencingHeader": "Pre-stake your tokens!",
+                "holdingSubheaderHolding": "Now earning staking rewards",
+                "holdingSubheaderNotHolding": "Earn rewards by staking IOTA",
                 "holdingHeaderHolding": "{duration} left",
-                "holdingHeaderNotHolding": "Events started",
-                "endedSubheader": "Thank you!",
-                "endedHeader": "Events ended",
-                "inactiveHeader": "Airdrop events inactive",
-                "inactiveSubheader": "Not detected"
+                "holdingHeaderNotHolding": "Stake your tokens!",
+                "endedSubheader": "Staking has now ended",
+                "endedHeader": "Thank you!",
+                "inactiveHeader": "Try changing node",
+                "inactiveSubheader": "Staking not detected"
             },
             "airdrops": {
-                "remaining": "Remaining",
+                "holding": "Remaining",
+                "commencing": "Til staking begins",
                 "collectedRewards": "Collected rewards",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly is a decentralized network to build and connect open worlds on a feeless, scalable multi-chain network. Assembly. A feeless, scalable multi-chain network for Web3."
+                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
                 },
                 "shimmer": {
                     "name": "Shimmer",
-                    "description": "The incentivized staging network to advance major innovations from IOTA. Whatever happens, happens - the future of Shimmer will be up to you. Learn, build, earn and grow together."
+                    "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
                 }
             }
         }
@@ -645,7 +639,7 @@
         "transaction": {
             "title": "Confirm transaction",
             "body": "You’re about to send {amount} to",
-            "sendingFromStakedAccount": "You are sending funds from a staked wallet participating in airdrops. By proceeding to send this transaction, it will unstake some or all of your funds. By pressing cancel your funds will continue to be staked and airdrops will be received as normal."
+            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards."
         },
         "balanceFinder": {
             "title": "Balance finder",
@@ -732,33 +726,29 @@
             "ok": "Ok, I understand"
         },
         "stakingManager": {
-            "titleWithStake": "Manage your stake wallets",
-            "titleWithNoStake": "Choose which wallets you want to stake",
-            "description": "When you stake a wallet, your funds are locked. You can unlock these wallets at any time, but then you won’t get full staking rewards.",
+            "title": "Staking Management",
+            "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
             "totalFundsStaked": "Total funds staked",
-            "hasStaked": "Congratulations! \uD83C\uDF89Your funds have been staked.",
-            "hasPartiallyStaked": "Congratulations! \uD83C\uDF89The rest of your funds have been staked.",
-            "hasUnstaked": "Your funds have been unstaked.",
-            "stakedSuccessfully": "Your funds have been staked from {account}.",
-            "unstakedSuccessfully": "Your funds have been unstaked from {account}.",
-            "hasPartiallyUnstaked": "Your remaining funds have been unstaked."
+            "stakedSuccessfully": "Your funds have been staked for {account}.",
+            "unstakedSuccessfully": "Your funds have been unstaked for {account}."
         },
         "stakingConfirmation": {
-            "title": "Select airdrops",
-            "subtitleStake": "You're about to stake",
-            "subtitleMerge": "You're about to merge",
-            "body": "If you do not wish to participate in both airdrops, you may opt-out by deselecting below. Re-stake at any time to opt back in.",
-            "estimatedAirdrop": "Estimated airdrop"
+            "title": "Airdrop Participation",
+            "subtitleStake": "You are about to stake",
+            "subtitleMerge": "You are about to merge",
+            "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
+            "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
+            "estimatedAirdrop": "Estimated rewards"
         },
         "shimmer-info": {
             "title": "About Shimmer",
-            "body1": "Dummy text. Will provide info on what Shimmer is and about the tokens not being available yet.",
-            "body2": "Dummy text. Will provide info on what Shimmer is and about the tokens not being available yet."
+            "body1": "Congratulations you have earned SMR tokens as a staking reward. Shimmer is an incentivized staging network to test major upgrades on IOTA.",
+            "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
         },
         "assembly-info": {
             "title": "About Assembly",
-            "body1": "Dummy text. Will provide info on what Assembly is and about the tokens not being available yet.",
-            "body2": "Dummy text. Will provide info on what Assembly is and about the tokens not being available yet."
+            "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is multi-chain network for deploying scalable smart contracts on IOTA.",
+            "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
         }
     },
     "charts": {
@@ -1209,45 +1199,45 @@
         },
         "stakingIndicator": {
             "upcoming": {
-                "title": "Events are upcoming",
-                "body": "You will be able to pre-stake your IOTA holdings to claim Assembly and Shimmer tokens ahead of their network launches."
+                "title": "Staking has not started yet",
+                "body": "Check back later. The staking event has not begun."
             },
             "commencing": {
-                "title": "Events have not yet started",
-                "body": "Once staking begins, you will automatically start receiving airdrops every milestone (approx. every 10 seconds)."
+                "title": "Pre-staking is now open",
+                "body": "Pre-stake your tokens, and once staking begins, you will automatically start receiving rewards every 10 seconds."
             },
             "activeHolding": {
-                "title": "Your funds are staked!",
-                "body": "You will receive airdrops for your staked funds every milestone (approx. every 10 seconds)."
+                "title": "Staking is now in progress",
+                "body": "Good job. You will receive rewards every 10 seconds."
             },
             "inactiveHolding": {
-                "title": "No funds are staked",
-                "body": "Stake your funds to receive airdrops every milestone (approx. every 10 seconds)."
+                "title": "Staking is now open",
+                "body": "Stake your IOTA tokens to receive rewards every 10 seconds."
             },
             "inactive": {
-                "title": "Events are inactive",
-                "body": "There are no active staking events. If this is incorrect, see the network configuration settings to ensure that the current node has the \"Participation\" feature."
+                "title": "No staking events detected",
+                "body": "Open network configuration in Advanced Settings and make sure the current node has the \"Participation\" feature by clicking \"View Info\"."
             },
             "ended": {
-                "title": "Events have ended",
-                "body": "Assembly and Shimmer tokens will be distributed to their staked wallets when their respective networks launch."
+                "title": "Staking has now ended",
+                "body": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch."
             }
         },
         "partiallyStakedFunds": {
             "title": "New unstaked funds: {amount}",
             "titleNoFunds": "New unstaked funds",
-            "preBody": "You have received new funds on a staked wallet.",
-            "body": "For these new funds to be staked, you will need to merge them in the manage stake panel."
+            "preBody": "You have received tokens on a staked wallet.",
+            "body": "You need to manually stake these new funds to receive airdrop rewards for them."
         },
         "stakingMinRewards": {
-            "title": "Minimum rewards not met",
+            "title": "Below minimum reward value",
             "titleMinBalance": "{amount} minimum balance required",
-            "bodyMinBalace": "Due to low funds, this wallet will not reach the minimum airdrop reward and is unavailable for staking.",
+            "bodyMinBalace": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
             "continue": "Please continue staking for another {duration}.",
-            "bodyBelowMin": "This wallet is below the minimum airdrop for {airdrop} ({airdropRewardMin}).",
+            "bodyBelowMin": "This wallet has not reached the minimum reward value for {airdrop} ({airdropRewardMin}).",
             "bodyWillReachMin": "You must stake for another {duration} to reach the minimum.",
-            "bodyWillNotReachMin": "You will not be able to reach the minimum during the remaining staking period unless you stake more IOTA.",
-            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum airdrop for {airdrop} ({airdropRewardMin})."
+            "bodyWillNotReachMin": "You will not reach the minimum during the remaining staking period unless you stake more IOTA.",
+            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum rewards for {airdrop} ({airdropRewardMin})."
         }
     },
     "exports": {
