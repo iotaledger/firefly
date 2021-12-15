@@ -84,8 +84,7 @@
                         type: 'stakingManager',
                         props: {
                             accountToAction: $accountToParticipate,
-                            participationAction: $participationAction,
-                            isPerformingAction: true,
+                            participationAction: $participationAction
                         },
                     },
                     true
