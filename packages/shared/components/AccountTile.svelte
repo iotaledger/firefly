@@ -2,9 +2,9 @@
     import { Icon, Text, Tooltip } from 'shared/components'
     import { appSettings } from 'shared/lib/appSettings'
     import { localize } from 'shared/lib/i18n'
+    import { getAccountParticipationAbility } from 'shared/lib/participation'
     import {
         formatStakingAirdropReward,
-        getAccountParticipationAbility,
         getMinimumAirdropRewardInfo,
         getStakingEventFromAirdrop,
         getTimeUntilMinimumAirdropReward,
