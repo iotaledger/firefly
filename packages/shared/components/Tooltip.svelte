@@ -17,7 +17,7 @@
     let tooltip: HTMLElement
     let top = 0
     let left = 0
-    let anchorBox: {
+    const anchorBox: {
         top: number
         left: number
         width: number
