@@ -11,7 +11,7 @@
         getStakedFunds,
         getUnstakedFunds,
         isAccountPartiallyStaked,
-        isAccountStaked,
+        isAccountStaked, getIotasUntilMinimumAirdropReward,
     } from 'shared/lib/participation'
     import { getParticipationOverview, participate, stopParticipating } from 'shared/lib/participation/api'
     import { STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
@@ -212,16 +212,19 @@
     })
 
     let showTooltip = false
-    let tooltipAnchor
+    let tooltipAnchor: unknown
     const tooltipAnchors: { [accountIndex: number]: unknown } = {}
+    let tooltipMinBalance: string = ''
 
-    const toggleTooltip = (accountIndex: string): void => {
+    const toggleTooltip = (account: WalletAccount): void => {
         showTooltip = !showTooltip
 
         if(showTooltip) {
-            tooltipAnchor = tooltipAnchors[accountIndex]
+            tooltipAnchor = tooltipAnchors[account?.index]
+            tooltipMinBalance = <string>getIotasUntilMinimumAirdropReward(account, true)
         } else {
             tooltipAnchor = undefined
+            tooltipMinBalance = ''
         }
     }
 </script>
@@ -244,7 +247,8 @@
                         <div class="bg-green-100 rounded-2xl">
                             <Icon icon="success-check" width="19" height="19" classes="text-white" />
                         </div>
-                    {:else if getAccountParticipationAbility(account) === AccountParticipationAbility.NoWillNotReachMinAirdrop}
+                    <!--{:else if getAccountParticipationAbility(account) === AccountParticipationAbility.NoWillNotReachMinAirdrop}-->
+                    {:else if true}
                         <div
                             bind:this={tooltipAnchors[account?.index]}
                             on:mouseenter={() => toggleTooltip(account?.index)}
@@ -343,7 +347,7 @@
 {#if showTooltip}
     <Tooltip anchor={tooltipAnchor} position="right">
         <Text type="p" classes="text-gray-900 bold mb-1 text-left">
-            {locale('tooltips.stakingMinRewards.titleMinBalance', { valuse: { amount: '' } })}
+            {locale('tooltips.stakingMinRewards.titleMinBalance', { values: { amount: tooltipMinBalance } })}
         </Text>
         <Text type="p" secondary classes="text-left">
             {locale('tooltips.stakingMinRewards.bodyMinBalance')}
