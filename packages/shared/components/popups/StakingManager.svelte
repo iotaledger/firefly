@@ -1,5 +1,6 @@
 <script lang="typescript">
-    import { Button, Icon, Spinner, Text } from 'shared/components'
+    import { onMount } from 'svelte'
+    import { Button, Icon, Spinner, Text, Tooltip } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { promptUserToConnectLedger } from 'shared/lib/ledger'
     import { hasNodePlugin, networkStatus } from 'shared/lib/networkStatus'
@@ -34,8 +35,6 @@
     import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { transferState, wallet } from 'shared/lib/wallet'
-    import { onMount } from 'svelte'
-    import { get } from 'svelte/store'
 
     export let locale: Locale
 
@@ -46,7 +45,7 @@
     $: canStake = canParticipate($stakingEventState)
 
     let { accounts } = $wallet
-    
+
     const hasStakedAccounts = $stakedAccounts.length > 0
 
     let pendingParticipationIds = []
@@ -211,6 +210,20 @@
             await handleParticipationAction()
         }
     })
+
+    let showTooltip = false
+    let tooltipAnchor
+    const tooltipAnchors: { [accountIndex: number]: unknown } = {}
+
+    const toggleTooltip = (accountIndex: string): void => {
+        showTooltip = !showTooltip
+
+        if(showTooltip) {
+            tooltipAnchor = tooltipAnchors[accountIndex]
+        } else {
+            tooltipAnchor = undefined
+        }
+    }
 </script>
 
 <style>
@@ -230,6 +243,14 @@
                     {#if isAccountStaked(account?.id)}
                         <div class="bg-green-100 rounded-2xl">
                             <Icon icon="success-check" width="19" height="19" classes="text-white" />
+                        </div>
+                    {:else if getAccountParticipationAbility(account) === AccountParticipationAbility.NoWillNotReachMinAirdrop}
+                        <div
+                            bind:this={tooltipAnchors[account?.index]}
+                            on:mouseenter={() => toggleTooltip(account?.index)}
+                            on:mouseleave={() => toggleTooltip(account?.index)}
+                        >
+                            <Icon icon="exclamation" width="18" height="18" classes="text-orange-500" />
                         </div>
                     {:else}
                         <Icon
@@ -277,7 +298,7 @@
                         {/if}
                     </div>
                     <Button
-                        disabled={$isPerformingParticipation || getAccountParticipationAbility(account) === AccountParticipationAbility.NoHasPendingTransaction}
+                        disabled={$isPerformingParticipation || getAccountParticipationAbility(account) === AccountParticipationAbility.NoHasPendingTransaction || getAccountParticipationAbility(account) === AccountParticipationAbility.NoWillNotReachMinAirdrop}
                         secondary={isAccountStaked(account?.id)}
                         onClick={() => (isAccountStaked(account?.id) ? handleUnstakeClick(account) : handleStakeClick(account))}>
                         {#if $accountToParticipate?.id === account?.id && $accountToParticipate && $participationAction}
@@ -285,7 +306,7 @@
                         {:else}{locale(`actions.${isAccountStaked(account?.id) ? 'unstake' : 'stake'}`)}{/if}
                     </Button>
                 </div>
-                {#if isAccountPartiallyStaked(account?.id) && $accountToParticipate?.id !== account?.id}
+                {#if isAccountPartiallyStaked(account?.id) && $accountToParticipate?.id !== account?.id && getAccountParticipationAbility(account) !== AccountParticipationAbility.NoWillNotReachMinAirdrop}
                     <div
                         class="space-x-4 mx-1 mb-1 px-4 py-3 flex flex-row justify-between items-center rounded-lg bg-yellow-50">
                         <Icon icon="exclamation" width="24" height="24" classes="fill-current text-yellow-600" />
@@ -318,3 +339,14 @@
         <Text type="p" secondary bold classes="inline">{formatUnitBestMatch($stakedAmount)}</Text>
     </Text>
 </div>
+
+{#if showTooltip}
+    <Tooltip anchor={tooltipAnchor} position="right">
+        <Text type="p" classes="text-gray-900 bold mb-1 text-left">
+            {locale('tooltips.stakingMinRewards.titleMinBalance', { valuse: { amount: '' } })}
+        </Text>
+        <Text type="p" secondary classes="text-left">
+            {locale('tooltips.stakingMinRewards.bodyMinBalance')}
+        </Text>
+    </Tooltip>
+{/if}

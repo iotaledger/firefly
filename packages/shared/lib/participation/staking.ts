@@ -6,12 +6,18 @@ import { networkStatus } from '../networkStatus'
 import { showAppNotification } from '../notifications'
 import { activeProfile } from '../profile'
 import { getBestTimeDuration, MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
-import { MAX_NUM_IOTAS } from '../units'
 import { clamp, delineateNumber } from '../utils'
 import type { WalletAccount } from '../typings/wallet'
 
 import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID, STAKING_AIRDROP_TOKENS, STAKING_EVENT_IDS } from './constants'
-import { partiallyStakedAccounts, participationEvents, participationOverview, stakedAccounts } from './stores'
+import {
+    assemblyStakingRewards,
+    partiallyStakedAccounts,
+    participationEvents,
+    participationOverview,
+    shimmerStakingRewards,
+    stakedAccounts,
+} from './stores'
 import { Participation, ParticipationEvent, ParticipationEventState, StakingAirdrop } from './types'
 
 /**
@@ -370,7 +376,30 @@ export const getTimeUntilMinimumAirdropReward = (account: WalletAccount, format:
     if (!account) return format ? getBestTimeDuration(0) : 0
 
     const [minRewards, minAirdrop, amountStaked] = getMinimumAirdropRewardInfo(account)
-    const remainingTime = calculateTimeUntilMinimumReward(minRewards, minAirdrop, amountStaked)
+    const timeRequired = calculateTimeUntilMinimumReward(minRewards, minAirdrop, amountStaked)
 
-    return format ? getBestTimeDuration(remainingTime) : remainingTime
+    return format ? getBestTimeDuration(timeRequired) : timeRequired
+}
+
+/**
+ * Determines whether an account will be able to reach rewards minimums
+ * for both airdrops. This will return false if only one airdrop's minimum
+ * is able to be reached.
+ *
+ * @method canAccountReachMinimumAirdrop
+ *
+ * @param {WalletAccount} account
+ *
+ * @returns {boolean}
+ */
+export const canAccountReachMinimumAirdrop = (account: WalletAccount): boolean => {
+    if (!account) return false
+
+    const [minRewards, minAirdrop, amountStaked] = getMinimumAirdropRewardInfo(account)
+    if (!minAirdrop) return true
+
+    const timeRequired = calculateTimeUntilMinimumReward(minRewards, minAirdrop, amountStaked)
+    const timeLeft = get(minAirdrop === StakingAirdrop.Assembly ? assemblyStakingRewards : shimmerStakingRewards)
+
+    return timeRequired <= timeLeft
 }

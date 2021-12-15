@@ -21,7 +21,6 @@
     import {
         AccountParticipationAbility,
         ParticipationEventState,
-        ParticipationOverview,
         StakingAirdrop,
     } from 'shared/lib/participation/types'
     import { openPopup } from 'shared/lib/popup'
@@ -139,7 +138,6 @@
                 const timeNeeded = <number>getTimeUntilMinimumAirdropReward(account)
                 const remainingTime =
                     airdrop === StakingAirdrop.Assembly ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
-
                 if (timeNeeded > remainingTime) {
                     return {
                         title: localize('tooltips.stakingMinRewards.title'),

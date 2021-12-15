@@ -4,14 +4,16 @@ import type { WalletAccount } from '../typings/wallet'
 
 import { getParticipationOverview } from './api'
 import { PARTICIPATION_POLL_DURATION } from './constants'
+import { canAccountReachMinimumAirdrop } from './staking'
 import {
     accountToParticipate,
+    isPerformingParticipation,
     participationAction,
     participationEvents,
     participationOverview,
     pendingParticipations,
 } from './stores'
-import { ParticipationEventState, Participation, AccountParticipationAbility } from './types'
+import { AccountParticipationAbility, Participation, ParticipationEventState } from './types'
 
 let participationPollInterval
 
@@ -54,6 +56,7 @@ export function clearPollParticipationOverviewInterval(): void {
  */
 export const resetParticipation = (): void => {
     accountToParticipate.set(null)
+    isPerformingParticipation.set(false)
     participationAction.set(null)
     participationEvents.set([])
     participationOverview.set([])
@@ -96,6 +99,8 @@ export const getAccountParticipationAbility = (account: WalletAccount): AccountP
         return AccountParticipationAbility.NoHasDustAmount
     } else if (account?.messages.some((message) => !message.confirmed)) {
         return AccountParticipationAbility.NoHasPendingTransaction
+    } else if (!canAccountReachMinimumAirdrop(account)) {
+        return AccountParticipationAbility.NoWillNotReachMinAirdrop
     } else {
         return AccountParticipationAbility.Yes
     }

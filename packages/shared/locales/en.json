@@ -1242,7 +1242,7 @@
         "stakingMinRewards": {
             "title": "Minimum rewards not met",
             "titleMinBalance": "{amount} minimum balance required",
-            "bodyMinBalace": "Due to low funds, this wallet will not reach the minimum airdrop reward and is unavailable for staking.",
+            "bodyMinBalance": "Due to low funds, this wallet will not reach the minimum airdrop reward and is unavailable for staking.",
             "continue": "Please continue staking for another {duration}.",
             "bodyAboveAndBelowMin": "An address in this wallet has already met the minimum airdrop for {airdrop} ({airdropRewardMin}), but is currently staking on an address that has not met the minimum.",
             "bodyBelowMin": "This wallet is below the minimum airdrop for {airdrop} ({airdropRewardMin}).",

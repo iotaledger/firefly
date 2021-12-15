@@ -1,5 +1,4 @@
 <script lang="typescript">
-    import { get } from 'svelte/store'
     import { Button, Icon, Spinner, Text, Tooltip } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import { hasNodePlugin, networkStatus } from 'shared/lib/networkStatus'

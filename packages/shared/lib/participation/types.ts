@@ -4,6 +4,7 @@ export enum AccountParticipationAbility {
     Yes = 'yes',
     NoHasDustAmount = 'noHasDustAmount',
     NoHasPendingTransaction = 'noHasPendingTransaction',
+    NoWillNotReachMinAirdrop = 'noWillNotReachMinAirdrop',
 }
 
 /**
