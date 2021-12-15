@@ -247,8 +247,7 @@
                         <div class="bg-green-100 rounded-2xl">
                             <Icon icon="success-check" width="19" height="19" classes="text-white" />
                         </div>
-                    <!--{:else if getAccountParticipationAbility(account) === AccountParticipationAbility.NoWillNotReachMinAirdrop}-->
-                    {:else if true}
+                    {:else if getAccountParticipationAbility(account) === AccountParticipationAbility.NoWillNotReachMinAirdrop}
                         <div
                             bind:this={tooltipAnchors[account?.index]}
                             on:mouseenter={() => toggleTooltip(account?.index)}

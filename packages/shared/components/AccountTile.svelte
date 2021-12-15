@@ -8,7 +8,8 @@
         getMinimumAirdropRewardInfo,
         getStakingEventFromAirdrop,
         getTimeUntilMinimumAirdropReward,
-        getUnstakedFunds, hasAccountReachedMinimumAirdrop,
+        getUnstakedFunds,
+        hasAccountReachedMinimumAirdrop,
         isStakingPossible,
     } from 'shared/lib/participation'
     import {
