@@ -17,9 +17,9 @@
     import { MILLISECONDS_PER_SECOND } from 'shared/lib/time'
     import { transferState } from 'shared/lib/wallet'
 
+    import { getParticipationEvents, getParticipationOverview } from 'shared/lib/participation/api'
     import { accountToParticipate, isStakingFeatureNew, participationAction } from 'shared/lib/participation/stores'
     import { StakingAirdrop as _StakingAirdrop } from 'shared/lib/participation/types'
-    import { getParticipationEvents, getParticipationOverview } from '../../../lib/participation/api'
 
     const handleNewStakingFeature = (): void => {
         if ($isStakingFeatureNew) {

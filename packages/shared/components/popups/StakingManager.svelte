@@ -1,8 +1,20 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
+    import { get } from 'svelte/store'
     import { Button, Icon, Spinner, Text } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
+    import type { Locale } from 'shared/lib/typings/i18n'
+    import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { hasNodePlugin, networkStatus } from 'shared/lib/networkStatus'
+    import { NodePlugin } from 'shared/lib/typings/node'
     import { showAppNotification } from 'shared/lib/notifications'
+    import { openPopup, popupState } from 'shared/lib/popup'
+    import { activeProfile, isSoftwareProfile } from 'shared/lib/profile'
+    import { checkStronghold } from 'shared/lib/stronghold'
+    import { formatUnitBestMatch } from 'shared/lib/units'
+    import { transferState, wallet } from 'shared/lib/wallet'
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
+
     import {
         canAccountParticipate,
         canParticipate,
@@ -14,8 +26,7 @@
     import { getParticipationOverview, participate, stopParticipating } from 'shared/lib/participation/api'
     import { STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
     import {
-        accountToParticipate, partiallyStakedAccounts,
-        participatedAccountsMapPerSession,
+        accountToParticipate,
         participationAction,
         participationOverview,
         pendingParticipations,
@@ -24,17 +35,6 @@
         stakingEventState,
     } from 'shared/lib/participation/stores'
     import { Participation, ParticipationAction } from 'shared/lib/participation/types'
-    import { openPopup, popupState } from 'shared/lib/popup'
-    import { activeProfile, isSoftwareProfile } from 'shared/lib/profile'
-    import { checkStronghold } from 'shared/lib/stronghold'
-    import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
-    import type { Locale } from 'shared/lib/typings/i18n'
-    import { NodePlugin } from 'shared/lib/typings/node'
-    import type { WalletAccount } from 'shared/lib/typings/wallet'
-    import { formatUnitBestMatch } from 'shared/lib/units'
-    import { transferState, wallet } from 'shared/lib/wallet'
-    import { onMount } from 'svelte'
-    import { get } from 'svelte/store'
 
     export let locale: Locale
 
@@ -104,13 +104,10 @@
         if (!$accountToParticipate || !$participationAction) return
 
         isPerformingAction = true
-        $participatedAccountsMapPerSession.set($accountToParticipate?.id, false)
 
         const _sync = (messageIds: string[]) => {
             messageIds.forEach((id) => pendingParticipationIds.push(id))
             previousPendingParticipationsLength = messageIds.length
-
-            $participatedAccountsMapPerSession.set($accountToParticipate?.id, true)
         }
 
         const hasParticipationPlugin = $networkStatus.nodePlugins.includes(NodePlugin.Participation)
