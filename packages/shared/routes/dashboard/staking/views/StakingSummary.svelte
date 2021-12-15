@@ -9,7 +9,7 @@
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { wallet } from 'shared/lib/wallet'
 
-    import { canAccountParticipate, isStakingPossible } from 'shared/lib/participation'
+    import { getAccountParticipationAbility, isStakingPossible } from 'shared/lib/participation'
     import {
         accountToParticipate,
         partiallyStakedAccounts,
@@ -21,7 +21,7 @@
         stakingEventState,
         unstakedAmount,
     } from 'shared/lib/participation/stores'
-    import { ParticipationAction, ParticipationEventState } from 'shared/lib/participation/types'
+    import { AccountParticipationAbility, ParticipationAction, ParticipationEventState } from 'shared/lib/participation/types'
 
     $: $participationOverview, $stakedAccounts, $partiallyStakedAccounts
 
@@ -29,7 +29,8 @@
 
     $: canParticipateInEvent = isStakingPossible($stakingEventState)
 
-    $: canStakeAnAccount = get($wallet.accounts).filter((wa) => canAccountParticipate(wa)).length > 0
+    let { accounts } = $wallet
+    $: canStakeAnAccount = $accounts.some((wa) => getAccountParticipationAbility(wa) === AccountParticipationAbility.Yes)
 
     $: isStaked = $stakedAmount > 0 && canParticipateInEvent
 

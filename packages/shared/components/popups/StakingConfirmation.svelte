@@ -96,7 +96,7 @@
 </button>
 <Text type="h3" classes="px-4 mb-4 text-center">{locale('popups.stakingConfirmation.title')}</Text>
 <div class="rounded-2xl	flex flex-col space-y-1 self-center text-center p-5 bg-gray-100 dark:bg-gray-800">
-    <Text type="p" highlighted bigger>{locale('popups.stakingConfirmation.subtitle')}</Text>
+    <Text type="p" highlighted bigger>{locale(`popups.stakingConfirmation.subtitle${isPartialStake ? 'Merge' : 'Stake'}`)}</Text>
     <Text type="h1">
         {isPartialStake ? formatUnitBestMatch(getUnstakedFunds(accountToStake)) : accountToStake.balance}
     </Text>
