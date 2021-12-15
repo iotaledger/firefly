@@ -38,10 +38,11 @@
 {#if showIndicator}
     <div class="rounded-2xl bg-white bg-opacity-20 px-2 py-1 flex flex-row space-x-2 items-center">
         <span class="relative flex justify-center items-center h-3 w-3">
-            <span
-                class:pulse={isStaked}
-                class="absolute inline-flex h-full w-full rounded-full bg-{isStaked ? 'green' : 'red'}-400
+            {#if isStaked}
+                <span
+                    class="pulse absolute inline-flex h-full w-full rounded-full bg-green-400
                     opacity-75" />
+            {/if}
             <span class="relative inline-flex rounded-full h-2 w-2 bg-{isStaked ? 'green' : 'red'}-600" />
         </span>
         <Text type="p" classes="text-white dark:text-white">
