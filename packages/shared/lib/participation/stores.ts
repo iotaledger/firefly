@@ -56,6 +56,11 @@ export const participationAction = writable<ParticipationAction>(null)
 export const participationOverview = writable<ParticipationOverview>([])
 
 /**
+ * Whether the user is currently staking or unstaking
+ */
+export const isPerformingParticipation = writable<boolean>(false)
+
+/**
  * The store for accounts that are currently staked. This is NOT to hold accounts
  * that have been selected for staking / unstaking or have staked in the past.
  *
@@ -328,9 +333,3 @@ export const hasPendingParticipation = (id: string): boolean =>
  */
 export const getPendingParticipation = (id: string): PendingParticipation | undefined =>
     get(pendingParticipations).find((participation) => participation.messageId === id)
-
-/**
- * The accounts that have participation of some kind in this session. This is useful for some
- * UI components around partial staking.
- */
-export const participatedAccountsMapPerSession = writable<Map<string, boolean>>(new Map())

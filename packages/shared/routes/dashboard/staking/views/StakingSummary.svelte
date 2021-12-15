@@ -1,5 +1,4 @@
 <script lang="typescript">
-    import { tick } from 'svelte'
     import { get } from 'svelte/store'
     import { Button, Icon, Spinner, Text, Tooltip } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
@@ -10,7 +9,7 @@
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { wallet } from 'shared/lib/wallet'
 
-    import { canAccountParticipate, isStakingPossible } from 'shared/lib/participation'
+    import { getAccountParticipationAbility, isStakingPossible } from 'shared/lib/participation'
     import {
         accountToParticipate,
         partiallyStakedAccounts,
@@ -22,23 +21,19 @@
         stakingEventState,
         unstakedAmount,
     } from 'shared/lib/participation/stores'
-    import { ParticipationAction, ParticipationEventState } from 'shared/lib/participation/types'
+    import { AccountParticipationAbility, ParticipationAction, ParticipationEventState } from 'shared/lib/participation/types'
 
     $: $participationOverview, $stakedAccounts, $partiallyStakedAccounts
 
-    let showSpinner
     $: showSpinner = !$popupState.active && $participationAction && $accountToParticipate
 
-    let canParticipateInEvent
     $: canParticipateInEvent = isStakingPossible($stakingEventState)
 
-    let canStakeAnAccount
-    $: canStakeAnAccount = get($wallet.accounts).filter((wa) => canAccountParticipate(wa)).length > 0
+    let { accounts } = $wallet
+    $: canStakeAnAccount = $accounts.some((wa) => getAccountParticipationAbility(wa) === AccountParticipationAbility.Yes)
 
-    let isStaked
     $: isStaked = $stakedAmount > 0 && canParticipateInEvent
 
-    let isPartiallyStaked
     $: isPartiallyStaked = $partiallyStakedAccounts.length > 0 && canParticipateInEvent
 
     let canParticipateWithNode = false
@@ -50,29 +45,7 @@
             showTooltip = false
     }
 
-    let iconBox
-    let parentWidth = 0
-    let parentLeft = 0
-    let parentTop = 0
-
-    $: iconBox, showTooltip, void refreshIconBox()
-
-    const refreshIconBox = async (): Promise<void> => {
-        if (!iconBox || !showTooltip) return
-
-        await tick()
-
-        parentWidth = iconBox?.offsetWidth / 2 ?? 0
-        parentLeft = iconBox?.getBoundingClientRect().left ?? 0
-
-        /**
-         * CAUTION: The top requires a specific multiplier that
-         * does seem to play nicely with responsiveness.
-         */
-        const top = iconBox?.getBoundingClientRect().top ?? 0
-        const topMultiplier = isPartiallyStaked ? 1.6 : -10000
-        parentTop = top * topMultiplier
-    }
+    let tooltipAnchor
 
     const toggleTooltip = (): void => {
         showTooltip = !showTooltip
@@ -103,7 +76,7 @@
             </Text>
             {#if isPartiallyStaked}
                 <div
-                    bind:this={iconBox}
+                    bind:this={tooltipAnchor}
                     on:mouseenter={toggleTooltip}
                     on:mouseleave={toggleTooltip}
                 >
@@ -138,7 +111,7 @@
     </Button>
 </div>
 {#if showTooltip}
-    <Tooltip {parentTop} {parentLeft} {parentWidth} position="right">
+    <Tooltip anchor={tooltipAnchor} position="right">
         {#if isPartiallyStaked}
             <Text type="p" classes="text-gray-900 bold mb-1 text-left">
                 {localize(

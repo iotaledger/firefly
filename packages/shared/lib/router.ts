@@ -65,6 +65,11 @@ const history = writable<string[]>([])
 export const dashboardRoute = writable<Tabs>(Tabs.Wallet)
 
 /**
+ * Previous dashboard tab
+ */
+export const previousDashboardRoute = writable<Tabs>(undefined)
+
+/**
  * Ledger setup route
  */
 export const ledgerRoute = writable<LedgerRoutes>(LedgerRoutes.LegacyIntro)

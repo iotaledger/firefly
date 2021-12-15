@@ -1,11 +1,12 @@
 <script lang="typescript">
     import { Button, Icon, Spinner, Text } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
+    import { promptUserToConnectLedger } from 'shared/lib/ledger'
     import { hasNodePlugin, networkStatus } from 'shared/lib/networkStatus'
     import { showAppNotification } from 'shared/lib/notifications'
     import {
-        canAccountParticipate,
         canParticipate,
+        getAccountParticipationAbility,
         getStakedFunds,
         getUnstakedFunds,
         isAccountPartiallyStaked,
@@ -15,6 +16,7 @@
     import { STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
     import {
         accountToParticipate,
+        isPerformingParticipation,
         participationAction,
         participationOverview,
         pendingParticipations,
@@ -22,7 +24,7 @@
         stakedAmount,
         stakingEventState,
     } from 'shared/lib/participation/stores'
-    import { Participation, ParticipationAction } from 'shared/lib/participation/types'
+    import { AccountParticipationAbility, Participation, ParticipationAction } from 'shared/lib/participation/types'
     import { openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { checkStronghold } from 'shared/lib/stronghold'
@@ -33,18 +35,17 @@
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { transferState, wallet } from 'shared/lib/wallet'
     import { onMount } from 'svelte'
-    import { get } from 'svelte/store'
 
     export let locale: Locale
 
-    export let isPerformingAction = false
     export let shouldParticipateOnMount = false
     export let participations: Participation[] = []
 
     let canStake
     $: canStake = canParticipate($stakingEventState)
 
-    let accounts = get($wallet.accounts)
+    let { accounts } = $wallet
+
     const hasStakedAccounts = $stakedAccounts.length > 0
 
     let pendingParticipationIds = []
@@ -85,7 +86,7 @@
             transferState.set(null)
         }
 
-        isPerformingAction = false
+        isPerformingParticipation.set(false)
 
         accountToParticipate.set(undefined)
         participationAction.set(undefined)
@@ -109,7 +110,7 @@
         if (!canStake) return
         if (!$accountToParticipate || !$participationAction) return
 
-        isPerformingAction = true
+        isPerformingParticipation.set(true)
 
         const _sync = (messageIds: string[]) => {
             messageIds.forEach((id) => pendingParticipationIds.push(id))
@@ -156,19 +157,25 @@
     }
 
     const handleStakeClick = (account: WalletAccount): void => {
-        openPopup(
-            {
-                type: 'stakingConfirmation',
-                props: {
-                    accountToStake: account,
+        const openStakingConfirmationPopup = () =>
+            openPopup(
+                {
+                    type: 'stakingConfirmation',
+                    props: {
+                        accountToStake: account,
+                    },
                 },
-            },
-            true
-        )
+                true
+            )
+        if ($isSoftwareProfile) {
+            openStakingConfirmationPopup()
+        } else {
+            promptUserToConnectLedger(false, () => openStakingConfirmationPopup(), undefined, true)
+        }
     }
 
     const handleUnstakeClick = (account: WalletAccount): void => {
-        const _unstake = async () => {
+        const _unstake = () => {
             accountToParticipate.set(account)
             participationAction.set(ParticipationAction.Unstake)
 
@@ -180,14 +187,14 @@
                     },
                 })
             } else {
-                await handleParticipationAction()
+                void handleParticipationAction()
             }
         }
 
         if ($isSoftwareProfile) {
             checkStronghold(_unstake)
         } else {
-            void _unstake()
+            promptUserToConnectLedger(false, () => _unstake(), undefined, true)
         }
     }
 
@@ -222,13 +229,12 @@
     }
 </style>
 
-<Text type="h5">{locale(`popups.stakingManager.titleWith${hasStakedAccounts ? '' : 'No'}Stake`)}</Text>
+<Text type="h5">{locale('popups.stakingManager.title')}</Text>
 <Text type="p" secondary classes="mt-6 mb-2">{locale('popups.stakingManager.description')}</Text>
 <div class="staking flex flex-col scrollable-y">
-    {#each accounts as account}
-        {#if canAccountParticipate(account)}
-            <div
-                class="w-full mt-4 flex flex-col rounded-xl border border-1 border-solid border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-gray-500 focus:hover:border-gray-700">
+    {#each $accounts as account}
+        {#if getAccountParticipationAbility(account) === AccountParticipationAbility.Yes || getAccountParticipationAbility(account) === AccountParticipationAbility.NoHasPendingTransaction}
+            <div class="w-full mt-4 flex flex-col rounded-xl border-2 border-solid border-yellow-600">
                 <div class="w-full space-x-4 px-5 py-3 flex flex-row justify-between items-center">
                     {#if isAccountStaked(account?.id)}
                         <div class="bg-green-100 rounded-2xl">
@@ -280,22 +286,20 @@
                         {/if}
                     </div>
                     <Button
-                        disabled={isPerformingAction}
+                        disabled={$isPerformingParticipation || getAccountParticipationAbility(account) === AccountParticipationAbility.NoHasPendingTransaction}
                         secondary={isAccountStaked(account?.id)}
                         onClick={() => (isAccountStaked(account?.id) ? handleUnstakeClick(account) : handleStakeClick(account))}>
                         {#if $accountToParticipate?.id === account?.id && $accountToParticipate && $participationAction}
-                            <Spinner busy={isPerformingAction} classes="mx-2 justify-center" />
+                            <Spinner busy={$isPerformingParticipation} classes="mx-2 justify-center" />
                         {:else}{locale(`actions.${isAccountStaked(account?.id) ? 'unstake' : 'stake'}`)}{/if}
                     </Button>
                 </div>
                 {#if isAccountPartiallyStaked(account?.id) && $accountToParticipate?.id !== account?.id}
                     <div
-                        class="space-x-4 mx-1 mb-1 px-4 py-3 flex flex-row justify-between items-center rounded-lg bg-yellow-50">
+                        class="space-x-4 mx-2 mb-2 px-4 py-3 flex flex-row justify-between items-center rounded-lg border-2 border-solid border-gray-200 dark:border-gray-600">
                         <Icon icon="exclamation" width="24" height="24" classes="fill-current text-yellow-600" />
                         <div class="flex flex-col w-3/4">
-                            <Text type="p" classes="text-gray-800 font-extrabold" overrideColor>
-                                {locale('general.unstakedFunds')}
-                            </Text>
+                            <Text type="p" classes="font-extrabold">{locale('general.unstakedFunds')}</Text>
                             <Text type="p" secondary classes="font-extrabold">
                                 {formatUnitBestMatch(getUnstakedFunds(account))}
                                 •
@@ -304,8 +308,11 @@
                                 </Text>
                             </Text>
                         </div>
-                        <Button disabled={isPerformingAction} onClick={() => handleStakeClick(account)}>
-                            {locale('actions.stake')}
+                        <Button
+                            caution={isAccountPartiallyStaked(account?.id) && $accountToParticipate?.id !== account?.id}
+                            disabled={$isPerformingParticipation || getAccountParticipationAbility(account) === AccountParticipationAbility.NoHasPendingTransaction}
+                            onClick={() => handleStakeClick(account)}>
+                            {locale('actions.merge')}
                         </Button>
                     </div>
                 {/if}

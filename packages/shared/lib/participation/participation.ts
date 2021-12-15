@@ -11,7 +11,7 @@ import {
     participationOverview,
     pendingParticipations,
 } from './stores'
-import { ParticipationEventState, Participation } from './types'
+import { ParticipationEventState, Participation, AccountParticipationAbility } from './types'
 
 let participationPollInterval
 
@@ -85,13 +85,21 @@ export const canParticipate = (eventState: ParticipationEventState): boolean => 
 /**
  * Determines whether an account can participate in an event.
  *
- * @method canAccountParticipate
+ * @method getAccountParticipationAbility
  *
  * @param {WalletAccount} account
  *
  * @returns {boolean}
  */
-export const canAccountParticipate = (account: WalletAccount): boolean => account?.rawIotaBalance >= DUST_THRESHOLD
+export const getAccountParticipationAbility = (account: WalletAccount): AccountParticipationAbility => {
+    if (account?.rawIotaBalance < DUST_THRESHOLD) {
+        return AccountParticipationAbility.NoHasDustAmount
+    } else if (account?.messages.some((message) => !message.confirmed)) {
+        return AccountParticipationAbility.NoHasPendingTransaction
+    } else {
+        return AccountParticipationAbility.Yes
+    }
+}
 
 /**
  * Extracts participations from indexation payload
