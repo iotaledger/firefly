@@ -18,12 +18,16 @@ export const UNIT_MAP: { [unit in Unit]: { val: number; dp: number } } = {
 }
 
 /**
+ * The maximum number of IOTA tokens in the network.
+ */
+export const MAX_NUM_IOTAS = 2_779_530_283_000_000
+
+/**
  * Formats IOTA value
  *
  * @method formatUnitBestMatch
  *
  * @param {number} value
- * @param {number} decimalPlaces
  * @param {boolean} includeUnits Include the units in the output
  * @param {number} overrideDecimalPlaces Override the default decimal places.
  *

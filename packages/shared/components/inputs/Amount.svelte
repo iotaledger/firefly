@@ -9,10 +9,9 @@
         formatCurrency,
         isFiatCurrency,
         parseCurrency,
-        replaceCurrencyDecimal,
     } from 'shared/lib/currency'
     import { activeProfile } from 'shared/lib/profile'
-    import { changeUnits, formatUnitBestMatch, formatUnitPrecision, UNIT_MAP } from 'shared/lib/units'
+    import { changeUnits, formatUnitBestMatch, formatUnitPrecision, MAX_NUM_IOTAS, UNIT_MAP } from 'shared/lib/units'
     import { Locale } from 'shared/lib/typings/i18n'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
 
@@ -33,7 +32,6 @@
 
     const currency: AvailableExchangeRates = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
     const Units: AmountUnit[] = [currency].concat(Object.values(Unit).filter((u) => u !== 'Pi'))
-    const MAX_VALUE = 2_779_530_283_000_000
 
     let showDropdown = false
 
@@ -51,14 +49,14 @@
             if (!isFiatCurrency(unit)) {
                 const amountAsFloat = parseCurrency(amount)
                 const rawAmount = changeUnits(Number.isNaN(amountAsFloat) ? 0 : amountAsFloat, unit as Unit, Unit.i)
-                if (rawAmount > MAX_VALUE) {
-                    amount = formatUnitPrecision(MAX_VALUE, unit as Unit, false)
+                if (rawAmount > MAX_NUM_IOTAS) {
+                    amount = formatUnitPrecision(MAX_NUM_IOTAS, unit as Unit, false)
                 }
             } else {
                 const rawAmount = convertFromFiat(amount, $currencies[CurrencyTypes.USD], $exchangeRates[currency])
-                if (rawAmount > MAX_VALUE) {
+                if (rawAmount > MAX_NUM_IOTAS) {
                     amount = convertToFiat(
-                        MAX_VALUE,
+                        MAX_NUM_IOTAS,
                         $currencies[CurrencyTypes.USD],
                         $exchangeRates[currency]
                     ).toString()
@@ -112,7 +110,8 @@
 
         // IOTA -> FIAT
         if (isFiatCurrency(toUnit)) {
-            amount = parseFloat(convertAmountToFiat(amount).slice(2))
+            let _amount = parseFloat(convertAmountToFiat(amount).slice(2)) ?? 0
+            amount = isNaN(_amount)  ? '0' : _amount.toString()
         } else {
             let rawAmount
 
@@ -186,28 +185,28 @@
 </script>
 
 <style type="text/scss">
-    amount-input {
-        nav {
-            &.dropdown {
-                @apply opacity-100;
-                @apply pointer-events-auto;
-            }
-        }
-
-        &.disabled {
-            @apply pointer-events-none;
-            actions {
-                @apply opacity-50;
-            }
-        }
+  amount-input {
+    nav {
+      &.dropdown {
+        @apply opacity-100;
+        @apply pointer-events-auto;
+      }
     }
+
+    &.disabled {
+      @apply pointer-events-none;
+      actions {
+        @apply opacity-50;
+      }
+    }
+  }
 </style>
 
 <svelte:window on:click={onOutsideClick} />
 <amount-input class:disabled class="relative block {classes}" on:keydown={handleKey}>
     <Input
         {error}
-        label={amountForLabel ?? (label || locale('general.amount'))}
+        label={amountForLabel || locale('general.amount')}
         placeholder={placeholder || locale('general.amount')}
         bind:value={amount}
         maxlength={17}

@@ -231,7 +231,9 @@ const handleError = (
 ): { type: ErrorType | ValidatorErrorTypes; error: string } => {
     const newError = { type, message: error, time: Date.now() }
 
-    if (error.includes('Response error with status code 403')) {
+    const hasStatusCode403 = error.includes('Response error with status code 403')
+
+    if (hasStatusCode403) {
         if (action && action.includes(NodePlugin.Participation)) {
             newError.message = `${NodePlugin.Participation} not available on your current node. Please try a different node and try again.`
             logError(newError)
@@ -275,6 +277,10 @@ const handleError = (
         }
         if (error.includes('forbidden')) {
             return 'error.node.forbidden'
+        }
+
+        if (hasStatusCode403) {
+            return 'error.node.pluginNotFound'
         }
 
         return getErrorMessage(type)

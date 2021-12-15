@@ -1,11 +1,15 @@
 import { get } from 'svelte/store'
+
 import { getDecimalSeparator } from '../currency'
 import { localize } from '../i18n'
 import { networkStatus } from '../networkStatus'
 import { showAppNotification } from '../notifications'
 import { activeProfile } from '../profile'
-import type { WalletAccount } from '../typings/wallet'
+import { getBestTimeDuration, MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
+import { MAX_NUM_IOTAS } from '../units'
 import { clamp, delineateNumber } from '../utils'
+import type { WalletAccount } from '../typings/wallet'
+
 import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID, STAKING_AIRDROP_TOKENS, STAKING_EVENT_IDS } from './constants'
 import { partiallyStakedAccounts, participationEvents, participationOverview, stakedAccounts } from './stores'
 import { Participation, ParticipationEvent, ParticipationEventState, StakingAirdrop } from './types'
@@ -86,38 +90,29 @@ export const getAirdropFromEventId = (eventId: string): StakingAirdrop | undefin
     return eventId === ASSEMBLY_EVENT_ID ? StakingAirdrop.Assembly : StakingAirdrop.Shimmer
 }
 
-const estimateAssemblyReward = (amount: number, currentMilestone: number, endMilestone: number): number => {
-    /**
-     * NOTE: This represents the amount of ASMB per 1 Mi received every milestone,
-     * which is currently 4 microASMB (0.000004 ASMB).
-     */
-    const multiplier = 0.000004
-    const numMilestones = endMilestone - currentMilestone
-
-    return Math.floor(multiplier * amount * numMilestones)
-}
-
-const estimateShimmerReward = (amount: number, currentMilestone: number, endMilestone: number): number => {
-    /**
-     * NOTE: This represents the amount of SMR per 1 Mi received every milestone,
-     * which is currently 1 SMR.
-     */
-    const multiplier = 1.0
-    const amountMiotas = amount / 1_000_000
-    const numMilestones = endMilestone - currentMilestone
-
-    return multiplier * amountMiotas * numMilestones
-}
-
-type AssemblyTokenUnit = '' | 'micro'
-
-const getAssemblyTokenMultiplier = (unit: AssemblyTokenUnit): number => {
-    switch (unit) {
-        case 'micro':
-            return 1
+/**
+ * Get the corresponding staking participation event data from its airdrop enumeration.
+ *
+ * @method getStakingEventFromAirdrop
+ *
+ * @param {StakingAirdrop} airdrop
+ *
+ * @returns {ParticipationEvent}
+ */
+export const getStakingEventFromAirdrop = (airdrop: StakingAirdrop): ParticipationEvent => {
+    let stakingEventId
+    switch (airdrop) {
+        case StakingAirdrop.Assembly:
+            stakingEventId = ASSEMBLY_EVENT_ID
+            break
+        case StakingAirdrop.Shimmer:
+            stakingEventId = SHIMMER_EVENT_ID
+            break
         default:
-            return 0.000001
+            break
     }
+
+    return get(participationEvents).find((pe) => pe.eventId === stakingEventId)
 }
 
 /**
@@ -144,12 +139,14 @@ export const formatStakingAirdropReward = (airdrop: StakingAirdrop, amount: numb
             decimalPlaces = clamp(decimalPlaces, 0, 6)
 
             const [integer, float] = (amount / 1_000_000).toFixed(decimalPlaces).split('.')
-            reward = parseFloat(delineateNumber(integer, thousandthSeparator) + decimalSeparator + float)
+            reward = `${delineateNumber(integer, thousandthSeparator)}${
+                Number(float) > 0 ? decimalSeparator + float : ''
+            }`
 
             break
         }
         case StakingAirdrop.Shimmer: {
-            reward = delineateNumber(String(amount), thousandthSeparator)
+            reward = delineateNumber(String(Math.floor(amount)), thousandthSeparator)
             break
         }
         default:
@@ -161,29 +158,16 @@ export const formatStakingAirdropReward = (airdrop: StakingAirdrop, amount: numb
 }
 
 /**
- * Get the corresponding staking participation event data from its airdrop enumeration.
- *
- * @method getStakingEventFromAirdrop
- *
- * @param {StakingAirdrop} airdrop
- *
- * @returns {ParticipationEvent}
+ * The amount of microASMB per 1 Mi received every milestone,
+ * which is currently 4 microASMB (0.000004 ASMB).
  */
-export const getStakingEventFromAirdrop = (airdrop: StakingAirdrop): ParticipationEvent => {
-    let stakingEventId
-    switch (airdrop) {
-        case StakingAirdrop.Assembly:
-            stakingEventId = ASSEMBLY_EVENT_ID
-            break
-        case StakingAirdrop.Shimmer:
-            stakingEventId = SHIMMER_EVENT_ID
-            break
-        default:
-            break
-    }
+const ASSEMBLY_REWARD_MULTIPLIER = 4.0
 
-    return get(participationEvents).find((pe) => pe.eventId === stakingEventId)
-}
+/**
+ * The amount of SMR per 1 Mi received every milestone,
+ * which is currently 1 SMR.
+ */
+const SHIMMER_REWARD_MULTIPLIER = 1.0
 
 /**
  * Calculates the reward estimate for a particular staking airdrop.
@@ -219,18 +203,13 @@ export const estimateStakingAirdropReward = (
             : currentMilestone
     const endMilestone = stakingEvent?.information?.milestoneIndexEnd
 
-    let estimation
-    switch (airdrop) {
-        case StakingAirdrop.Assembly:
-            estimation = estimateAssemblyReward(amountToStake, beginMilestone, endMilestone)
-            break
-        case StakingAirdrop.Shimmer:
-            estimation = estimateShimmerReward(amountToStake, beginMilestone, endMilestone)
-            break
-        default:
-            estimation = 0
-            break
-    }
+    const multiplier =
+        airdrop === StakingAirdrop.Assembly
+            ? ASSEMBLY_REWARD_MULTIPLIER
+            : airdrop === StakingAirdrop.Shimmer
+            ? SHIMMER_REWARD_MULTIPLIER
+            : 0
+    const estimation = multiplier * (amountToStake / 1_000_000) * (endMilestone - beginMilestone)
 
     return formatAmount ? formatStakingAirdropReward(airdrop, estimation, decimalPlaces) : estimation
 }
@@ -306,3 +285,92 @@ export const isStakingForAssembly = (participations: Participation[]): boolean =
  */
 export const isStakingPossible = (stakingEventState: ParticipationEventState): boolean =>
     stakingEventState === ParticipationEventState.Commencing || stakingEventState === ParticipationEventState.Holding
+
+type MinimumRewardInfo = [number, StakingAirdrop, number]
+
+export const getMinimumAirdropRewardInfo = (account: WalletAccount): MinimumRewardInfo => {
+    const overview = get(participationOverview).find((apo) => apo.accountIndex === account.index)
+    if (!overview) return [0, undefined, 0]
+
+    /**
+     * NOTE: MAX_SAFE_INTEGER is used here just to ensure
+     * that any number compared to it will with certainty
+     * be smaller (since we're comparing minimums).
+     */
+    let smallestMinRewards: number = Number.MAX_SAFE_INTEGER
+    let smallestMinAirdrop: StakingAirdrop = undefined
+    let amountStaked: number = 0
+
+    const { assemblyRewards, assemblyRewardsBelowMinimum, assemblyStakedFunds } = overview
+    if (assemblyRewardsBelowMinimum > 0 && assemblyRewards <= 0) {
+        if (assemblyRewardsBelowMinimum < smallestMinRewards) {
+            smallestMinRewards = assemblyRewardsBelowMinimum
+            smallestMinAirdrop = StakingAirdrop.Assembly
+            amountStaked = assemblyStakedFunds
+        }
+    }
+
+    const { shimmerRewards, shimmerRewardsBelowMinimum, shimmerStakedFunds } = overview
+    if (shimmerRewardsBelowMinimum > 0 && shimmerRewards <= 0) {
+        if (shimmerRewardsBelowMinimum < smallestMinRewards) {
+            smallestMinRewards = shimmerRewardsBelowMinimum
+            smallestMinAirdrop = StakingAirdrop.Shimmer
+            amountStaked = shimmerStakedFunds
+        }
+    }
+
+    return [smallestMinRewards === Number.MAX_SAFE_INTEGER ? 0 : smallestMinRewards, smallestMinAirdrop, amountStaked]
+}
+
+const calculateNumMilestonesUntilMinimumReward = (
+    rewardsNeeded: number,
+    airdrop: StakingAirdrop,
+    amountStaked: number
+): number => {
+    const multiplier =
+        airdrop === StakingAirdrop.Assembly
+            ? ASSEMBLY_REWARD_MULTIPLIER
+            : airdrop === StakingAirdrop.Shimmer
+            ? SHIMMER_REWARD_MULTIPLIER
+            : 0
+    const amountMiotas = amountStaked / 1_000_000
+
+    return rewardsNeeded / (multiplier * amountMiotas)
+}
+
+const calculateTimeUntilMinimumReward = (rewards: number, airdrop: StakingAirdrop, amountStaked: number): number => {
+    const event = getStakingEventFromAirdrop(airdrop)
+    if (!event) return 0
+
+    const rewardsRequired = event.information.payload.requiredMinimumRewards
+    if (rewards >= rewardsRequired) return 0
+
+    const rewardsStillNeeded = rewardsRequired - rewards
+    return (
+        calculateNumMilestonesUntilMinimumReward(rewardsStillNeeded, airdrop, amountStaked) *
+        SECONDS_PER_MILESTONE *
+        MILLISECONDS_PER_SECOND
+    )
+}
+
+/**
+ * Calculates the remaining time needed to continue staking in order to
+ * reach the minimum airdrop amount. If called with format = true then
+ * will return human-readable duration, else it will return amount of time
+ * in millis.
+ *
+ * @method calculateMinimumRewardTime
+ *
+ * @param {WalletAccount} account
+ * @param {boolean} format
+ *
+ * @returns {number | string}
+ */
+export const getTimeUntilMinimumAirdropReward = (account: WalletAccount, format: boolean = false): number | string => {
+    if (!account) return format ? getBestTimeDuration(0) : 0
+
+    const [minRewards, minAirdrop, amountStaked] = getMinimumAirdropRewardInfo(account)
+    const remainingTime = calculateTimeUntilMinimumReward(minRewards, minAirdrop, amountStaked)
+
+    return format ? getBestTimeDuration(remainingTime) : remainingTime
+}
