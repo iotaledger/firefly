@@ -251,7 +251,7 @@
 <div class="staking flex flex-col scrollable-y">
     {#each $accounts as account}
         {#if getAccountParticipationAbility(account) === AccountParticipationAbility.Yes || getAccountParticipationAbility(account) === AccountParticipationAbility.NoHasPendingTransaction}
-            <div class="w-full mt-4 flex flex-col rounded-xl border-2 border-solid border-yellow-600">
+            <div class={`w-full mt-4 flex flex-col rounded-xl border-2 border-solid ${isAccountPartiallyStaked(account?.id) ? 'border-yellow-600' : 'border-gray-200 dark:border-gray-600'}`}>
                 <div class="w-full space-x-4 px-5 py-3 flex flex-row justify-between items-center">
                     {#if isAccountStaked(account?.id)}
                         <div class="bg-green-100 rounded-2xl">
