@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Button, Icon, Spinner, Text } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
+    import { promptUserToConnectLedger } from 'shared/lib/ledger'
     import { hasNodePlugin, networkStatus } from 'shared/lib/networkStatus'
     import { showAppNotification } from 'shared/lib/notifications'
     import {
@@ -15,6 +16,7 @@
     import { STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
     import {
         accountToParticipate,
+        isPerformingParticipation,
         participatedAccountsMapPerSession,
         participationAction,
         participationOverview,
@@ -22,10 +24,9 @@
         stakedAccounts,
         stakedAmount,
         stakingEventState,
-        isPerformingParticipation
     } from 'shared/lib/participation/stores'
     import { Participation, ParticipationAction } from 'shared/lib/participation/types'
-    import { openPopup, popupState } from 'shared/lib/popup'
+    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { checkStronghold } from 'shared/lib/stronghold'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
@@ -149,19 +150,25 @@
     }
 
     const handleStakeClick = (account: WalletAccount): void => {
-        openPopup(
-            {
-                type: 'stakingConfirmation',
-                props: {
-                    accountToStake: account,
+        const openStakingConfirmationPopup = () =>
+            openPopup(
+                {
+                    type: 'stakingConfirmation',
+                    props: {
+                        accountToStake: account,
+                    },
                 },
-            },
-            true
-        )
+                true
+            )
+        if ($isSoftwareProfile) {
+            openStakingConfirmationPopup()
+        } else {
+            promptUserToConnectLedger(false, () => openStakingConfirmationPopup(), undefined, true)
+        }
     }
 
     const handleUnstakeClick = (account: WalletAccount): void => {
-        const _unstake = async () => {
+        const _unstake = () => {
             accountToParticipate.set(account)
             participationAction.set(ParticipationAction.Unstake)
 
@@ -173,14 +180,14 @@
                     },
                 })
             } else {
-                await handleParticipationAction()
+                void handleParticipationAction()
             }
         }
 
         if ($isSoftwareProfile) {
             checkStronghold(_unstake)
         } else {
-            void _unstake()
+            return promptUserToConnectLedger(false, () => _unstake(), undefined, true)
         }
     }
 
