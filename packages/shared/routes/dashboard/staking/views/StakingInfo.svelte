@@ -77,7 +77,7 @@
     .animation-wrapper {
         max-height: calc(100% - 80px);
         max-width: 700px;
-        padding-bottom: 50%;
+        padding-bottom: 66.56%;
     }
 </style>
 
