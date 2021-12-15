@@ -1,36 +1,17 @@
 <script lang="typescript">
-    import { tick } from 'svelte'
     import { Icon, Text, Tooltip } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import { stakedAccounts, stakingEventState } from 'shared/lib/participation/stores'
     import { ParticipationEventState } from 'shared/lib/participation/types'
 
-    let indicatorIcon
     $: indicatorIcon = getIndicatorIcon($stakingEventState, $stakedAccounts.length > 0)
 
-    let indicatorText
     $: indicatorText = getLocalizedIndicatorText($stakingEventState, $stakedAccounts.length > 0)
 
-    let tooltipText
     $: tooltipText = getLocalizedTooltipText($stakingEventState, $stakedAccounts.length > 0)
 
     let showTooltip = false
-    let indicatorBox
-    let parentWidth = 0
-    let parentLeft = 0
-    let parentTop = 0
-
-    $: indicatorBox, showTooltip, void refreshIndicatorBox()
-
-    async function refreshIndicatorBox() {
-        if (!indicatorBox || !showTooltip) {
-            return
-        }
-        await tick()
-        parentWidth = indicatorBox?.offsetWidth / 2
-        parentLeft = indicatorBox?.getBoundingClientRect().left ?? 0
-        parentTop = indicatorBox?.getBoundingClientRect().top ?? 0
-    }
+    let tooltipAnchor
 
     const toggleTooltip = (): void => {
         showTooltip = !showTooltip
@@ -98,14 +79,14 @@
     on:mouseenter={toggleTooltip}
     on:mouseleave={toggleTooltip}
 >
-    <div bind:this={indicatorBox} class="mr-1">
+    <div bind:this={tooltipAnchor} class="mr-1">
         <Icon icon='info-filled' width="16" height="16" classes="text-gray-600" />
     </div>
     <Text type="p">{indicatorText}</Text>
     <Icon icon={indicatorIcon} width="24" height="24" classes="text-blue-500" />
 </div>
 {#if showTooltip}
-    <Tooltip {parentTop} {parentLeft} {parentWidth} position="bottom">
+    <Tooltip anchor={tooltipAnchor} position="bottom">
         <Text type="p" classes="text-gray-900 bold mb-1 text-left">{tooltipText?.title}</Text>
         <Text type="p" secondary classes="text-left">{tooltipText?.body}</Text>
     </Tooltip>

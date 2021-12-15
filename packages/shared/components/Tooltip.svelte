@@ -2,20 +2,36 @@
     import { appSettings } from 'shared/lib/appSettings'
     import { onMount } from 'svelte'
 
-    export let classes = ''
-    export let parentLeft = 0
-    export let parentTop = 0
-    export let parentWidth = 0
-    export let position: undefined | 'top' | 'bottom' | 'right' = undefined
+    enum Position {
+        Top = 'top',
+        Bottom = 'bottom',
+        Left = 'left',
+        Right = 'right',
+    }
 
-    let tooltip
+    export let classes = ''
+    export let anchor: HTMLElement | null = null
+    export let position: Position = Position.Top
+    export let refresh: boolean // prop used to refresh the tooltip position
+
+    let tooltip: HTMLElement
     let top = 0
     let left = 0
+    let anchorBox: {
+        top: number
+        left: number
+        width: number
+        height: number
+    } = {
+        top: 0,
+        left: 0,
+        width: 0,
+        height: 0,
+    }
+    const OFFSET = 8
 
-    let darkModeEnabled
     $: darkModeEnabled = $appSettings.darkMode
-
-    $: parentLeft, parentTop, parentWidth, refreshPosition()
+    $: refresh, refreshPosition()
 
     onMount(() => {
         // Bugfix: Tooltip z-index was not being applied
@@ -23,71 +39,105 @@
         refreshPosition()
     })
 
-    // TODO: refactor all this component to use anchor prop instead of parent
-    // and move all the logic here to position and display the tooltip
-    function refreshPosition() {
+    function refreshAnchorBox(): void {
+        anchorBox.top = anchor?.getBoundingClientRect()?.top ?? 0
+        anchorBox.left = anchor?.getBoundingClientRect()?.left ?? 0
+        anchorBox.width = anchor?.offsetWidth ?? 0
+        anchorBox.height = anchor?.offsetHeight ?? 0
+    }
+
+    function refreshPosition(): void {
         if (!tooltip) {
             return
         }
-        if (position === 'top' || !position) {
-            top = parentTop - tooltip.offsetHeight - 15
-            left = parentLeft - tooltip.offsetWidth / 2 + parentWidth
-        } else if (position === 'right') {
-            top = parentTop < tooltip.offsetHeight ? parentTop - 10 : parentTop - tooltip.offsetHeight / 2 - 15
-            left = parentLeft + parentWidth * 2 + 15
-        } else if (position === 'bottom') {
-            top = parentTop + 50
-            left = parentLeft - tooltip.offsetWidth / 2 + parentWidth
+        refreshAnchorBox()
+        switch (position) {
+            case Position.Top:
+                top = anchorBox.top - tooltip.offsetHeight - OFFSET
+                left = anchorBox.left - tooltip.offsetWidth / 2 + anchorBox.width / 2
+                break
+            case Position.Bottom:
+                top = anchorBox.top + anchorBox.height + OFFSET
+                left = anchorBox.left - tooltip.offsetWidth / 2 + anchorBox.width / 2
+                break
+            case Position.Left:
+                top = anchorBox.top - tooltip.offsetHeight / 2 + anchorBox.height / 2
+                left = anchorBox.left - tooltip.offsetWidth - OFFSET
+                break
+            case Position.Right:
+                top = anchorBox.top - tooltip.offsetHeight / 2 + anchorBox.height / 2
+                left = anchorBox.left + anchorBox.width + OFFSET
+                break
         }
     }
 </script>
 
 <style type="text/scss">
     tooltip {
+        max-width: 300px;
+        box-shadow: 0 20px 25px 7px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         triangle,
-        inner-dark {
+        inner-triangle {
             @apply h-0;
             @apply w-0;
-            @apply absolute;
             @apply border-solid;
             @apply border-8;
             @apply border-b-0;
             @apply border-white;
             @apply border-l-transparent;
             @apply border-r-transparent;
+        }
+        triangle {
+            @apply absolute;
             @apply transform;
             @apply -translate-x-1/2;
-            @apply -bottom-2;
             @apply left-1/2;
-
-            inner-dark {
-                bottom: 1px;
-                @apply hidden;
-                @apply border-gray-900;
-                @apply border-l-transparent;
-                @apply border-r-transparent;
-            }
+        }
+        inner-triangle {
+            @apply hidden;
+            @apply relative;
+            @apply border-gray-900;
+            @apply border-l-transparent;
+            @apply border-r-transparent;
         }
         &.darkmode {
             triangle {
                 @apply border-gray-700;
                 @apply border-l-transparent;
                 @apply border-r-transparent;
-                inner-dark {
+                inner-triangle {
                     @apply block;
                 }
             }
         }
-        &.right {
-            box-shadow: 0 20px 25px 7px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            @apply w-60;
+        &.top {
+            triangle {
+                bottom: -8px;
+            }
+            inner-triangle {
+                bottom: 9px;
+                left: -8px;
+            }
+        }
+        &.bottom {
+            triangle {
+                @apply -rotate-180;
+                top: -8px;
+            }
+            inner-triangle {
+                top: -9px;
+                left: -8px;
+            }
+        }
+        &.right,
+        &.left {
             triangle,
-            inner-dark {
-                border-width: 12px;
+            inner-triangle {
                 @apply border-b-0;
-                left: -18px;
-                @apply top-6;
-                @apply transform;
+            }
+            triangle {
+                @apply top-1/2;
+                @apply -translate-y-1/2;
                 @apply rotate-90;
             }
             &.darkmode {
@@ -95,40 +145,23 @@
                     @apply border-gray-700;
                     @apply border-l-transparent;
                     @apply border-r-transparent;
-                    inner-dark {
-                        @apply block;
-                        left: -12px;
-                        transform: none;
-                        top: -14px;
+                    inner-triangle {
+                        bottom: 9px;
+                        right: 8px;
                     }
                 }
             }
         }
-        &.bottom {
-            box-shadow: 0 20px 25px 7px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            @apply w-60;
-            triangle,
-            inner-dark {
-                border-width: 12px;
-                top: -12px;
-                @apply border-b-0;
-                @apply transform;
-                @apply -translate-x-1/2;
-                @apply left-1/2;
-            }
+        &.right {
             triangle {
-                @apply rotate-180;
-                top: -12px;
+                left: -5px;
             }
-            inner-dark {
-                top: -13px;
-            }
-            &.darkmode {
-                triangle {
-                    @apply border-gray-700;
-                    @apply border-l-transparent;
-                    @apply border-r-transparent;
-                }
+        }
+        &.left {
+            triangle {
+                left: unset;
+                right: -20px;
+                @apply -rotate-90;
             }
         }
     }
@@ -141,6 +174,6 @@
     bind:this={tooltip}>
     <slot />
     <triangle>
-        <inner-dark class="border-gray-700" />
+        <inner-triangle class="border-gray-700" />
     </triangle>
 </tooltip>

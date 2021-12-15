@@ -1,5 +1,4 @@
 <script lang="typescript">
-    import { tick } from 'svelte'
     import { get } from 'svelte/store'
     import { Icon, Text, Tooltip } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
@@ -74,28 +73,7 @@
     $: showWarningState = isPartiallyStaked || isBelowMinimumStakingRewards
 
     let showTooltip = false
-    let iconBox
-    let parentWidth = 0
-    let parentLeft = 0
-    let parentTop = 0
-
-    $: iconBox, showTooltip, void refreshIconBox()
-
-    const refreshIconBox = async (): Promise<void> => {
-        if (!iconBox || !showTooltip) return
-
-        await tick()
-
-        parentWidth = iconBox?.offsetWidth / 2 ?? 0
-        parentLeft = iconBox?.getBoundingClientRect().left ?? 0
-
-        /**
-         * CAUTION: The top requires a specific multiplier that
-         * does seem to play nicely with responsiveness.
-         */
-        const top = iconBox?.getBoundingClientRect().top ?? 0
-        parentTop = top * 1.15
-    }
+    let tooltipAnchor
 
     const toggleTooltip = (): void => {
         showTooltip = !showTooltip
@@ -118,7 +96,6 @@
         }
     }
 
-    let tooltipText
     $: tooltipText = getLocalizedTooltipText($participationOverview)
 
     const getLocalizedTooltipText = (overview: ParticipationOverview): { title: string; body: string } => {
@@ -205,7 +182,7 @@
     <div class="mb-2 w-full flex flex-row justify-between items-start space-x-1.5">
         <div class="flex flex-row space-x-1.5 items-start">
             {#if showWarningState}
-                <div bind:this={iconBox} on:mouseenter={toggleTooltip} on:mouseleave={toggleTooltip}>
+                <div bind:this={tooltipAnchor} on:mouseenter={toggleTooltip} on:mouseleave={toggleTooltip}>
                     <Icon icon="exclamation" width="16" height="16" classes="mt-0.5 fill-current text-gray-800" />
                 </div>
             {:else if isStaked}
@@ -254,7 +231,7 @@
     </div>
 </button>
 {#if showTooltip}
-    <Tooltip {parentTop} {parentLeft} {parentWidth} position="right">
+    <Tooltip anchor={tooltipAnchor} position="right">
         <Text type="p" classes="text-gray-900 bold mb-1 text-left">{tooltipText?.title}</Text>
         <Text type="p" secondary classes="text-left">{tooltipText?.body}</Text>
     </Tooltip>
