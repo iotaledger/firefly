@@ -5,6 +5,7 @@
     export let checked = false
     export let classes = ''
     export let disabled = false
+    export let round = false
     export let onClick = (..._: any[]): void => {}
 </script>
 
@@ -36,7 +37,7 @@
 
 <button
     data-label="checkbox-input"
-    class={`flex items-center text-left cursor-pointer ${classes}`}
+    class="flex items-center text-left cursor-pointer {classes}"
     type="button"
     {disabled}
     on:click={() => {
@@ -44,7 +45,7 @@
 
         onClick()
     }}>
-    <Icon icon={checked ? 'checkbox' : 'checkbox-unchecked'} classes={`${label ? 'mr-3' : ''} ${checked ? 'active' : ''}`} />
+    <Icon icon={checked ? `checkbox${round ? '-round' : ''}` : `checkbox-unchecked${round ? '-round' : ''}`} classes={`${label ? 'mr-3' : ''} ${checked ? 'active' : ''}`} />
     {#if label}
         <Text type="p" secondary={!checked || disabled}>{label}</Text>
     {/if}

@@ -1,12 +1,14 @@
 <script lang="typescript">
     import { Icon, Text, Tooltip } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
+    import { openPopup } from 'shared/lib/popup'
     import { formatStakingAirdropReward, getUnstakedFunds, isStakingPossible } from 'shared/lib/participation'
     import { partiallyStakedAccounts, stakedAccounts, stakingEventState } from 'shared/lib/participation/stores'
     import { StakingAirdrop } from 'shared/lib/participation/types'
     import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { tick } from 'svelte'
+    
     export let name = ''
     export let balance = ''
     export let balanceEquiv = ''
@@ -78,7 +80,11 @@
     }
 
     const handleTileClick = (): void => {
-        onClick()
+        if (airdrop) {
+            openPopup({ type: 'airdropNetworkInfo', props: { airdrop } })
+        } else {
+            onClick()
+        }
     }
 </script>
 
@@ -90,17 +96,13 @@
         &.size-l {
             min-height: 140px;
         }
-        &:disabled {
-            @apply pointer-events-none;
-            @apply opacity-50;
-        }
     }
 </style>
 
 <button
     on:click={handleTileClick}
-    class="size-{size} group rounded-xl {isPartiallyStaked ? 'bg-yellow-100 hover:bg-yellow-400' : `border-gray-100 dark:border-gray-900 hover:bg-${color}-500 ${isStaked ? `border border-1 border-solid border-gray-200 dark:border-gray-900 hover:border-${color}-500` : 'bg-gray-100 dark:bg-gray-900'}`} font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'} {hidden ? 'opacity-50' : ''}"
-    {disabled}>
+    class="size-{size} group rounded-xl {isPartiallyStaked ? 'bg-yellow-100 hover:bg-yellow-400' : `border-gray-100 dark:border-gray-900 hover:bg-${color}-500 ${isStaked ? `border border-1 border-solid border-gray-200 dark:border-gray-900 hover:border-${color}-500` : 'bg-gray-100 dark:bg-gray-900'}`} font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'} {hidden ? 'opacity-50' : ''} {airdrop ? 'opacity-50 bg-gray-100 dark:bg-gray-900 hover:bg-gray-700 dark:hover:bg-gray-600' : ''}"
+>
     <div class="mb-2 w-full flex flex-row justify-between items-start space-x-1.5">
         <div class="flex flex-row space-x-1.5 items-start">
             {#if isPartiallyStaked}

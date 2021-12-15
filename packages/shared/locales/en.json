@@ -751,9 +751,20 @@
             "hasPartiallyUnstaked": "Your remaining funds have been unstaked."
         },
         "stakingConfirmation": {
-            "title": "You're about to stake",
+            "title": "Select airdrops",
+            "subtitle": "You're about to stake",
             "body": "If you do not wish to participate in both airdrops, you may opt-out by deselecting below. Re-stake at any time to opt back in.",
             "estimatedAirdrop": "Estimated airdrop"
+        },
+        "shimmer-info": {
+            "title": "About Shimmer",
+            "body1": "Dummy text. Will provide info on what Shimmer is and about the tokens not being available yet.",
+            "body2": "Dummy text. Will provide info on what Shimmer is and about the tokens not being available yet."
+        },
+        "assembly-info": {
+            "title": "About Assembly",
+            "body1": "Dummy text. Will provide info on what Assembly is and about the tokens not being available yet.",
+            "body2": "Dummy text. Will provide info on what Assembly is and about the tokens not being available yet."
         }
     },
     "charts": {

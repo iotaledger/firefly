@@ -98,7 +98,7 @@
 <div class="p-5 flex flex-col justify-between space-y-6 w-full h-full">
     <div class="flex flex-col justify-between">
         <div class="flex flex-row justify-between items-start">
-            <Text type="p" overrideColor classes="mb-2 text-gray-700 text-13 font-normal dark:text-white">
+            <Text type="p" smaller overrideColor classes="mb-3 text-gray-700 dark:text-gray-500">
                 {localize('views.staking.summary.stakedFunds')}
             </Text>
             {#if isPartiallyStaked}
@@ -111,9 +111,9 @@
                 </div>
             {/if}
         </div>
-        <Text type="h5" classes="text-3xl">{formatUnitBestMatch(canParticipateInEvent ? $stakedAmount : 0)}</Text>
+        <Text type="h2">{formatUnitBestMatch(canParticipateInEvent ? $stakedAmount : 0)}</Text>
         {#if canParticipateInEvent}
-            <Text type="p" smaller overrideColor classes="mt-1 text-gray-500 dark:text-gray-600">
+            <Text type="p" smaller secondary classes="mt-2">
                 {formatUnitBestMatch($unstakedAmount)}
                 {localize('general.unstaked')}
             </Text>
