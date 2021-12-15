@@ -30,7 +30,7 @@
         "setup": {
             "title": "Postavite svoj novčanik",
             "chrysalisTitle": "Chrysalis unaprijeđenje mreže",
-            "chrysalisBody": "Od 21. travnja, korisnici mogu obaviti migraciju svojih tokens na novu Chrysalis mrežu. Preporučamo da svoje tokene prebacite čim prije.",
+            "chrysalisBody": "Od 21. travnja 2021. godine, korisnici mogu obaviti migraciju svojih tokena na novu Chrysalis mrežu. Preporučamo da svoje tokene migrirate čim prije.",
             "learnMore": "Saznajte detalje o migraciji"
         },
         "secure": {
@@ -149,7 +149,7 @@
                 "body": "Fraza za oporavak sastoji se od 24 riječi, pisanih malim slovima, s razmacima između svake. Služi za oporavak postojećih Firefly novčanika.",
                 "enter": "Unesite tajnu frazu za oporavak"
             },
-            "seedDetected": "81 znakova seeda prepoznati",
+            "seedDetected": "Detektiran je seed od 81-og znaka",
             "phraseDetected": "Fraza od 24 riječi je prepoznata",
             "checksum": "Kontrolni zbroj"
         },
@@ -415,10 +415,6 @@
                 "title": "Migriraj Ledger index",
                 "description": "Migriraj neki drugi index Trinity računa"
             },
-            "transactionHistory": {
-                "title": "Povijest transakcija",
-                "description": "Izvezi povijest transakcija svojih računa kao .csv datoteku"
-            },
             "troubleshoot": {
                 "title": "Rješavanje problema",
                 "description": "Upotrijebi čarobnjaka za greške u svrhu rješavanja uobičajenih problema"
@@ -464,7 +460,7 @@
                         "legacyConnected": "Pokrenuta je {legacy} aplikacija",
                         "locked": "Zaključano",
                         "mnemonicMismatch": "Krivi Ledger ili fraza za oporavak",
-                        "notDetected": "Nije otkriveno",
+                        "notDetected": "Nije detektiran",
                         "otherConnected": "Aplikacija je otvorena"
                     }
                 },
@@ -489,6 +485,48 @@
             "profileModal": {
                 "allSettings": "Sve postavke",
                 "logout": "Odjavi se"
+            }
+        },
+        "staking": {
+            "title": "Staking",
+            "welcome": "Dobro došli u nadzornu ploču za staking",
+            "status": {
+                "upcoming": "Događaj nije započeo",
+                "commencing": "Pred-staking je otvoren",
+                "holdingActive": "Staking u tijeku",
+                "holdingInactive": "Staking otvoren",
+                "inactive": "Staking nije detektiran",
+                "ended": "Staking je završio"
+            },
+            "summary": {
+                "stakedFunds": "Sredstva na stake-u"
+            },
+            "info": {
+                "upcomingSubheader": "Događaj nije započeo",
+                "upcomingHeader": "Provjerite kasnije",
+                "commencingSubheader": "Pripremite se za staking",
+                "commencingHeader": "Pokrenite pred-staking svojih tokena!",
+                "holdingSubheaderHolding": "Zarada od staking-a u tijeku",
+                "holdingSubheaderNotHolding": "Zaradite nagrade stakingom IOTA-e",
+                "holdingHeaderHolding": "{duration} preostalo",
+                "holdingHeaderNotHolding": "Pokrenite staking svojih tokena!",
+                "endedSubheader": "Staking je završio",
+                "endedHeader": "Hvala!",
+                "inactiveHeader": "Pokušajte promijeniti node",
+                "inactiveSubheader": "Staking nije detektiran"
+            },
+            "airdrops": {
+                "holding": "Preostalo",
+                "commencing": "Do početka staking-a",
+                "collectedRewards": "Prikupljene nagrade",
+                "assembly": {
+                    "name": "Assembly",
+                    "description": "Assembly je visoko skalabilna multi-chain mreža namijenjena izgradnji te implementaciji pametnih ugovora. Assembly predstavlja budućnost za web3. "
+                },
+                "shimmer": {
+                    "name": "Shimmer",
+                    "description": "Testna mreža s poticajima namijenjena razvoju i testiranju većih inovacija kojima će glavna IOTA mreža naposljetku biti nadograđena. Što god se dogodi, dogodi se. Kako će se Shimmer razvijati ovisi o vama."
+                }
             }
         }
     },
@@ -600,7 +638,8 @@
         },
         "transaction": {
             "title": "Potvrdi transakciju",
-            "body": "Ovim ćete poslati {amount} na račun"
+            "body": "Ovim ćete poslati {amount} na račun",
+            "sendingFromStakedAccount": "Šaljete transfer s novčanika koji trenutno stake-a. Ovo može prekinuti stake vaših tokena. Možete slobodno poslati transfer, no možda ćete nakon toga morati ponovno pokrenuti stake vaših preostalih tokena."
         },
         "balanceFinder": {
             "title": "Pronalazak sredstava",
@@ -674,10 +713,41 @@
         },
         "exportTransactionHistory": {
             "title": "Izvezi povijest transakcija",
-            "body": "Izvezi povijest transakcija za sve račune uzastopno unutar ovog profila. Izvoz će biti u CSV formatu.",
+            "body": "Izvezi povijest transakcija za odabrani novčanik. Izvezena datoteka će biti u .csv formatu.",
             "profileName": "Ime profila:",
-            "numberOfAccounts": "Broj računa:",
+            "accountName": "Ime računa:",
             "typePassword": "Unesite svoju lozinku da bi dopustili izvoz"
+        },
+        "stakingNotice": {
+            "upcomingDate": "Staking još nije započeo",
+            "commencingDate": "Staking još nije započeo",
+            "body": "Pokretanjem pred-staking-a vaših sredstava, automatski ćete početi dobivati nagrade kad staking događaj započne.",
+            "ok": "Ok, razumio sam"
+        },
+        "stakingManager": {
+            "title": "Upravljanje staking-om",
+            "description": "Kada pokrećete stake novčanika, šaljete sami sebi transakciju kojom obilježavate ta sredstva kao \"stake-ana\". Možete obaviti transfer tih tokena u bilo koje vrijeme, ali nećete nastaviti dobivati nagrade od stake-a.",
+            "totalFundsStaked": "Ukupna sredstva na staking-u",
+            "stakedSuccessfully": "Vaša sredstva su stake-ana za {account}.",
+            "unstakedSuccessfully": "Vaša sredstva više nisu na stake-u za {account}."
+        },
+        "stakingConfirmation": {
+            "title": "Sudjelovanje u Airdrop-u",
+            "subtitleStake": "Upravo ćete pokrenuti staking",
+            "subtitleMerge": "Upravo ćete spojiti sredstva",
+            "bodyStake": "Ukoliko ne želite sudjelovati u oba airdrop-a, možete odustati od jednog od njih ispod. Možete prekinuti staking i ponovno ga započeti za pojedini airdrop u bilo koje vrijeme.",
+            "bodyMerge": "Vaša sredstva će biti na stake-u za {airdrop}. Da biste promijenili u kojem airdrop-u želite sudjelovati, potrebno je prekinuti te zatim ponovno pokrenuti stake za ovaj novčanik.",
+            "estimatedAirdrop": "Procijenjene nagrade"
+        },
+        "shimmer-info": {
+            "title": "O Shimmer-u",
+            "body1": "Čestitamo, zaradili ste SMR tokene kao nagradu za staking. Shimmer je mreža s poticajima namijenjena razvoju i testiranju većih inovacija kojima će glavna IOTA mreža naposljetku biti nadograđena.",
+            "body2": "Cilj nam je pokrenuti Shimmer u 2022. Vaši tokeni će postati dostupni za transfer nakon pokretanja Shimmer mreže."
+        },
+        "assembly-info": {
+            "title": "O Assembly-u",
+            "body1": "Čestitamo, zaradili ste ASMB tokene kao nagradu za staking. Assembly je multi-chain mreža namijenjena implementaciji pametnih ugovora na IOTA-i.",
+            "body2": "Cilj nam je pokrenuti Assembly u 2022. Vaši tokeni će postati dostupni za transfer nakon pokretanja Assembly mreže."
         }
     },
     "charts": {
@@ -791,6 +861,15 @@
         "closeFirefly": "Zatvori Firefly",
         "generateAddress": "Generiraj adresu",
         "migrateAgain": "Migriraj drugi index",
+        "visitWebsite": "Posjeti web-stranicu",
+        "howItWorks": "Kako funkcionira",
+        "learnAboutStaking": "Saznajte više o staking-u",
+        "stake": "Pokreni staking",
+        "unstake": "Prekini staking",
+        "stakeFunds": "Stake-aj sredstva",
+        "manageStake": "Upravljaj staking-om",
+        "merge": "Spoji",
+        "mergeFunds": "Spoji sredstva",
         "done": "Izvršeno"
     },
     "general": {
@@ -880,6 +959,8 @@
         "transferBroadcasting": "Odašiljem transakciju",
         "transferComplete": "Transakcija dovršena",
         "generatingReceiveAddress": "Generiranje adrese primatelja",
+        "broadcasting": "Emitiranje",
+        "confirming": "Potvrđenjo",
         "creatingAccount": "Stvaram novčanik, molim pričekajte...",
         "updatingAccount": "Usklađujem novčanik, molim pričekajte...",
         "accountSyncing": "Novčanik se sinkronizira",
@@ -907,13 +988,35 @@
         "sendingFrom": "Šalje se sa {account}",
         "receivedTo": "Primljeno na {account} račun",
         "sentFrom": "Poslano sa {account} računa",
+        "stakedFor": "Staking pokrenut za {account}",
+        "unstakedFor": "Staking prekinut za {account}",
+        "votedFor": "Glasano za {account}",
+        "unvotedFor": "Glas poništen za {account}",
         "receiving": "Primanje u tijeku",
         "sending": "Slanje u tijeku",
         "legacyNetwork": "Stara mreža",
         "capsLock": "Caps Lock je uključen",
         "version": "Verzija {version}",
         "unknown": "Nepoznato",
-        "none": "Nijedan"
+        "none": "Nijedan",
+        "days": "dan(a)",
+        "time": {
+            "days": "dana",
+            "day": "dan",
+            "hours": "sati",
+            "hour": "sat",
+            "minutes": "minute",
+            "minute": "minuta",
+            "seconds": "sekundi",
+            "second": "sekunda"
+        },
+        "staked": "Staked",
+        "unstaked": "Staking prekinut",
+        "staking": "Staking",
+        "unstaking": "Poništenje staking-a",
+        "notStaked": "Staking nije pokrenut",
+        "stakedFunds": "Sredstva na stake-u",
+        "unstakedFunds": "Sredstva koja nisu na stake-u"
     },
     "dates": {
         "today": "Danas",
@@ -958,7 +1061,7 @@
             "length": "Ime profila ne smije biti dulje od {length, plural, one {1 znaka} few {# znaka} other {# znakova}}.",
             "duplicate": "Profil s ovim imenom već postoji.",
             "delete": {
-                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+                "nonEmptyAccounts": "Potrebno je prebaciti sva sredstva prije brisanja profila."
             }
         },
         "password": {
@@ -1024,7 +1127,8 @@
             "unsynced": "Node nije sinkroniziran.",
             "noSynced": "Nema dostupnih sinkroniziranih nodeova.",
             "answer": "Nije bilo moguće dobiti odgovor od svih node-ova.",
-            "forbidden": "Povezivanje s ovim node-om je zabranjeno."
+            "forbidden": "Povezivanje s ovim node-om je zabranjeno.",
+            "pluginNotAvailable": "\"{nodePlugin}\" plugin nije dostupan na trenutnom node-u."
         },
         "network": {
             "mismatch": "Mrežni ID ovog node-a je \"{networkId}\", što se ne podudara s trenutnom mrežom.",
@@ -1056,7 +1160,8 @@
             "otherConnected": "Pogrešna aplikacija je otvorena na Ledger uređaju.",
             "generateAddress": "Došlo je do greške prilikom generiranja adrese.",
             "timeout": "Isteklo je vrijeme korištenja Ledger uređaja.",
-            "disconnected": "Izgubljena je veza s Ledger uređajem."
+            "disconnected": "Izgubljena je veza s Ledger uređajem.",
+            "noStronghold": "Nije moguće koristiti Stronghold s Ledger profilom."
         },
         "popup": {
             "preventClose": "Ovaj popup nije moguće zatvoriti."
@@ -1066,11 +1171,20 @@
         },
         "crypto": {
             "cannotDecodeBech32": "Nije bilo moguće dekodirati string kao Bech32 adresu."
+        },
+        "participation": {
+            "cannotUseAccount": "Nije moguće koristiti odabrani račun.",
+            "cannotFindStakingEvent": "Nije moguće pronaći staking događaj.",
+            "cannotVisitAirdropWebsite": "Nije moguće otvoriti {airdrop} web stranicu.",
+            "invalidStakingEventId": "Nevažeći ID staking događaja."
         }
     },
     "warning": {
         "node": {
             "http": "Korištenje node-ova preko HTTP-a ostavlja promet nešifriranim i može predstavljati sigurnosni rizik."
+        },
+        "participation": {
+            "noAccounts": "Trenutno nemate niti jedan račun dostupan za sudjelovanje."
         }
     },
     "tooltips": {
@@ -1081,6 +1195,58 @@
             "medium": "Srednja",
             "low": "Niska",
             "veryLow": "Vrlo niska"
+        },
+        "stakingIndicator": {
+            "upcoming": {
+                "title": "Staking još nije započeo",
+                "body": "Provjerite kasnije. Staking događaj još nije počeo."
+            },
+            "commencing": {
+                "title": "Pred-staking je otvoren",
+                "body": "Unaprijed pokrenite staking svojih tokena, kako bi automatski počeli primati nagrade svakih 10 sekundi nakon početka staking događaja."
+            },
+            "activeHolding": {
+                "title": "Staking je sada u tijeku",
+                "body": "Odlično. Nagrade ćete primati svakih 10 sekundi."
+            },
+            "inactiveHolding": {
+                "title": "Staking je aktiviran",
+                "body": "Pokrenite staking svojih IOTA tokena da bi dobili nagrade svakih 10 sekundi."
+            },
+            "inactive": {
+                "title": "Nisu detektirani staking događaji",
+                "body": "Otvorite mrežnu konfiguraciju u Naprednim postavkama i provjerite ima li trenutni node značajku \"Sudjelovanje\" klikom na \"Prikaži informacije\"."
+            },
+            "ended": {
+                "title": "Staking je završio",
+                "body": "Assembly i Shimmer nagrade će biti distribuirane u vaše novčanike nakon pokretanja svake od pripadajućih mreža."
+            }
+        },
+        "partiallyStakedFunds": {
+            "title": "Nova sredstva koja nisu na stake-u: {amount}",
+            "titleNoFunds": "Nova sredstva koja nisu na stake-u",
+            "preBody": "Primili ste tokene na novčanik koji trenutno stake-a.",
+            "body": "Potrebno je ručno stake-ati ova sredstva kako bi primili airdrop nagrade za njih."
+        },
+        "stakingMinRewards": {
+            "title": "Ispod minimalne vrijednosti nagrade",
+            "titleMinBalance": "Potrebno minimalno stanje od {amount}",
+            "bodyMinBalace": "Ovaj novčanik nema dovoljno IOTA tokena za postizanje minimalne nagrade za airdrop, te stoga ne može biti stake-an.",
+            "continue": "Molimo nastavite sa staking-om još {duration}.",
+            "bodyBelowMin": "Ovaj novčanik nije dosegao minimalnu vrijednost nagrade za {airdrop} ({airdropRewardMin}).",
+            "bodyWillReachMin": "Morate stake-ati još {duration} da bi dosegli minimum.",
+            "bodyWillNotReachMin": "Nećete dosegnuti minimum tijekom preostalog razdoblja staking-a osim ako ne stake-ate još IOTA tokena.",
+            "bodyDidNotReachMin": "Niste stake-ali dovoljno IOTA tokena da bi dosegli minimalnu nagradu za {airdrop} ({airdropRewardMin})."
+        }
+    },
+    "exports": {
+        "transactionHistoryCsv": {
+            "messageId": "ID poruke",
+            "internal": "Interna",
+            "rawValue": "Neobrađena vrijednost",
+            "formattedValue": "Formatirana vrijednost",
+            "date": "Datum",
+            "time": "Vrijeme"
         }
     }
 }
