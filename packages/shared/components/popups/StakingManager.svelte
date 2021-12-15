@@ -5,8 +5,8 @@
     import { hasNodePlugin, networkStatus } from 'shared/lib/networkStatus'
     import { showAppNotification } from 'shared/lib/notifications'
     import {
-        getAccountParticipationAbility,
         canParticipate,
+        getAccountParticipationAbility,
         getStakedFunds,
         getUnstakedFunds,
         isAccountPartiallyStaked,
@@ -35,7 +35,6 @@
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { transferState, wallet } from 'shared/lib/wallet'
     import { onMount } from 'svelte'
-    import { get } from 'svelte/store'
 
     export let locale: Locale
 
@@ -46,7 +45,7 @@
     $: canStake = canParticipate($stakingEventState)
 
     let { accounts } = $wallet
-    
+
     const hasStakedAccounts = $stakedAccounts.length > 0
 
     let pendingParticipationIds = []
@@ -95,6 +94,13 @@
         resetAccounts()
     }
 
+    const displayErrorNotification = (error): void => {
+        showAppNotification({
+            type: 'error',
+            message: locale(error.error),
+        })
+    }
+
     const getFormattedFiatAmount = (amount: number): string => {
         const currency = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
         return formatCurrency(convertToFiat(amount, $currencies[CurrencyTypes.USD], $exchangeRates[currency]), currency)
@@ -129,6 +135,8 @@
                     .then((messageIds) => _sync(messageIds))
                     .catch((err) => {
                         console.error(err)
+
+                        displayErrorNotification(err)
                         resetView()
                     })
                 break
@@ -138,6 +146,8 @@
                     .then((messageIds) => _sync(messageIds))
                     .catch((err) => {
                         console.error(err)
+
+                        displayErrorNotification(err)
                         resetView()
                     })
                 break
@@ -224,8 +234,7 @@
 <div class="staking flex flex-col scrollable-y">
     {#each $accounts as account}
         {#if getAccountParticipationAbility(account) === AccountParticipationAbility.Yes || getAccountParticipationAbility(account) === AccountParticipationAbility.NoHasPendingTransaction}
-            <div
-                class="w-full mt-4 flex flex-col rounded-xl border-2 border-solid border-yellow-600">
+            <div class="w-full mt-4 flex flex-col rounded-xl border-2 border-solid border-yellow-600">
                 <div class="w-full space-x-4 px-5 py-3 flex flex-row justify-between items-center">
                     {#if isAccountStaked(account?.id)}
                         <div class="bg-green-100 rounded-2xl">
@@ -290,9 +299,7 @@
                         class="space-x-4 mx-2 mb-2 px-4 py-3 flex flex-row justify-between items-center rounded-lg border-2 border-solid border-gray-200 dark:border-gray-600">
                         <Icon icon="exclamation" width="24" height="24" classes="fill-current text-yellow-600" />
                         <div class="flex flex-col w-3/4">
-                            <Text type="p" classes="font-extrabold">
-                                {locale('general.unstakedFunds')}
-                            </Text>
+                            <Text type="p" classes="font-extrabold">{locale('general.unstakedFunds')}</Text>
                             <Text type="p" secondary classes="font-extrabold">
                                 {formatUnitBestMatch(getUnstakedFunds(account))}
                                 •
