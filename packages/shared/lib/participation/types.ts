@@ -20,6 +20,11 @@ export enum ParticipationEventState {
     Inactive = 'inactive',
 }
 
+export enum ParticipationEventType {
+    Voting = 0,
+    Staking = 1,
+}
+
 export type ParticipationEventStatus = {
     milestoneIndex: number
     /**
@@ -31,11 +36,22 @@ export type ParticipationEventStatus = {
     checksum: string
 }
 
+export type ParticipationEventInformationPayload = {
+    type: ParticipationEventType
+    numerator: number
+    denominator: number
+    requiredMinimumRewards: number
+    symbol: string
+    text: string
+    additionalInfo: string
+}
+
 export type ParticipationEventInformation = {
     milestoneIndexCommence: number
     milestoneIndexStart: number
     milestoneIndexEnd: number
     additionalInfo: string
+    payload: ParticipationEventInformationPayload
 }
 
 export type ParticipationEvent = {

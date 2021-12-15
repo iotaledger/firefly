@@ -1,14 +1,32 @@
 <script lang="typescript">
+    import { tick } from 'svelte'
+    import { get } from 'svelte/store'
     import { Icon, Text, Tooltip } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
+    import {
+        formatStakingAirdropReward,
+        getMinimumAirdropRewardInfo,
+        getStakingEventFromAirdrop,
+        getTimeUntilMinimumAirdropReward,
+        getUnstakedFunds,
+        isStakingPossible,
+    } from 'shared/lib/participation'
+    import {
+        assemblyStakingRemainingTime,
+        partiallyStakedAccounts,
+        participationOverview,
+        shimmerStakingRemainingTime,
+        stakedAccounts,
+        stakingEventState,
+    } from 'shared/lib/participation/stores'
+    import { ParticipationEventState, ParticipationOverview, StakingAirdrop } from 'shared/lib/participation/types'
     import { openPopup } from 'shared/lib/popup'
-    import { formatStakingAirdropReward, getUnstakedFunds, isStakingPossible } from 'shared/lib/participation'
-    import { partiallyStakedAccounts, stakedAccounts, stakingEventState } from 'shared/lib/participation/stores'
-    import { StakingAirdrop } from 'shared/lib/participation/types'
-    import type { WalletAccount } from 'shared/lib/typings/wallet'
+    import { getBestTimeDuration } from 'shared/lib/time'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { tick } from 'svelte'
-    
+    import { capitalize } from 'shared/lib/utils'
+    import { wallet } from 'shared/lib/wallet'
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
+
     export let name = ''
     export let balance = ''
     export let balanceEquiv = ''
@@ -34,16 +52,37 @@
     let isStaked = false
     $: isStaked = _hasAccount($stakedAccounts) && isStakingPossible($stakingEventState)
 
-    let showPartialStakeTooltip = false
+    let isBelowMinimumStakingRewards
+    $: {
+        /**
+         * NOTE: We are selecting from staked accounts ONLY.
+         * Accounts that have been unstaked will NOT have this warning
+         * tooltip shown.
+         *
+         * If we wish to check unstaked accounts also, then we can use the
+         * accounts on the wallet Svelte store.
+         */
+        const account = _getAccount($stakedAccounts)
+        if (account) {
+            const accountOverview = $participationOverview.find((apo) => apo.accountIndex === account?.index)
+            isBelowMinimumStakingRewards =
+                accountOverview?.assemblyRewardsBelowMinimum > 0 || accountOverview?.shimmerRewardsBelowMinimum > 0
+        }
+    }
+
+    let showWarningState = false
+    $: showWarningState = isPartiallyStaked || isBelowMinimumStakingRewards
+
+    let showTooltip = false
     let iconBox
     let parentWidth = 0
     let parentLeft = 0
     let parentTop = 0
 
-    $: iconBox, showPartialStakeTooltip, void refreshIconBox()
+    $: iconBox, showTooltip, void refreshIconBox()
 
     const refreshIconBox = async (): Promise<void> => {
-        if (!iconBox || !showPartialStakeTooltip) return
+        if (!iconBox || !showTooltip) return
 
         await tick()
 
@@ -58,8 +97,8 @@
         parentTop = top * 1.15
     }
 
-    const togglePartialStakeTooltip = (): void => {
-        showPartialStakeTooltip = !showPartialStakeTooltip
+    const toggleTooltip = (): void => {
+        showTooltip = !showTooltip
     }
 
     const getName = (): string => {
@@ -76,6 +115,67 @@
             }
         } else {
             return ''
+        }
+    }
+
+    let tooltipText
+    $: tooltipText = getLocalizedTooltipText($participationOverview)
+
+    const getLocalizedTooltipText = (overview: ParticipationOverview): { title: string; body: string } => {
+        if (isPartiallyStaked) {
+            return {
+                title: localize(
+                    `tooltips.partiallyStakedFunds.title${$partiallyStakedAccounts.length > 0 ? '' : 'NoFunds'}`,
+                    $partiallyStakedAccounts.length > 0
+                        ? {
+                              values: {
+                                  amount: formatUnitBestMatch(getUnstakedFunds(_getAccount($partiallyStakedAccounts))),
+                              },
+                          }
+                        : {}
+                ),
+                body: localize('tooltips.partiallyStakedFunds.body'),
+            }
+        } else if (isBelowMinimumStakingRewards) {
+            const account = _getAccount($stakedAccounts)
+            const [minRewards, minAirdrop, amountStaked] = getMinimumAirdropRewardInfo(account)
+            const airdropRewardMin = formatStakingAirdropReward(
+                minAirdrop,
+                getStakingEventFromAirdrop(minAirdrop)?.information.payload.requiredMinimumRewards,
+                minAirdrop === StakingAirdrop.Assembly ? 6 : 0
+            )
+
+            if ($stakingEventState === ParticipationEventState.Ended) {
+                return {
+                    title: localize('tooltips.stakingMinRewards.title'),
+                    body: localize(
+                        'tooltips.stakingMinRewards.bodyDidNotReachMin',
+                        { values: { airdrop: capitalize(airdrop), airdropRewardMin, } }
+                    )
+                }
+            } else {
+                const timeNeeded = <number>getTimeUntilMinimumAirdropReward(account)
+                const remainingTime =
+                    airdrop === StakingAirdrop.Assembly ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
+
+                if (timeNeeded > remainingTime) {
+                    return {
+                        title: localize('tooltips.stakingMinRewards.title'),
+                        body: `${localize('tooltips.stakingMinRewards.bodyBelowMin', {
+                            values: { airdrop: capitalize(minAirdrop), airdropRewardMin, },
+                        })} ${localize('tooltips.stakingMinRewards.bodyWillNotReachMin')}`,
+                    }
+                } else {
+                    return {
+                        title: localize('tooltips.stakingMinRewards.title'),
+                        body: `${localize('tooltips.stakingMinRewards.bodyBelowMin', {
+                            values: { airdrop: capitalize(minAirdrop), airdropRewardMin, },
+                        })} ${localize('tooltips.stakingMinRewards.bodyWillReachMin', {
+                            values: { duration: getBestTimeDuration(timeNeeded) },
+                        })}`,
+                    }
+                }
+            }
         }
     }
 
@@ -101,15 +201,11 @@
 
 <button
     on:click={handleTileClick}
-    class="size-{size} group rounded-xl {isPartiallyStaked ? 'bg-yellow-100 hover:bg-yellow-400' : `border-gray-100 dark:border-gray-900 hover:bg-${color}-500 ${isStaked ? `border border-1 border-solid border-gray-200 dark:border-gray-900 hover:border-${color}-500` : 'bg-gray-100 dark:bg-gray-900'}`} font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'} {hidden ? 'opacity-50' : ''} {airdrop ? 'opacity-50 bg-gray-100 dark:bg-gray-900 hover:bg-gray-700 dark:hover:bg-gray-600' : ''}"
->
+    class="size-{size} group rounded-xl {showWarningState ? 'bg-yellow-100 hover:bg-yellow-400' : `border-gray-100 dark:border-gray-900 hover:bg-${color}-500 ${isStaked ? `border border-1 border-solid border-gray-200 dark:border-gray-900 hover:border-${color}-500` : 'bg-gray-100 dark:bg-gray-900'}`} font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'} {hidden ? 'opacity-50' : ''} {airdrop ? 'opacity-50 bg-gray-100 dark:bg-gray-900 hover:bg-gray-700 dark:hover:bg-gray-600' : ''}">
     <div class="mb-2 w-full flex flex-row justify-between items-start space-x-1.5">
         <div class="flex flex-row space-x-1.5 items-start">
-            {#if isPartiallyStaked}
-                <div
-                    bind:this={iconBox}
-                    on:mouseenter={togglePartialStakeTooltip}
-                    on:mouseleave={togglePartialStakeTooltip}>
+            {#if showWarningState}
+                <div bind:this={iconBox} on:mouseenter={toggleTooltip} on:mouseleave={toggleTooltip}>
                     <Icon icon="exclamation" width="16" height="16" classes="mt-0.5 fill-current text-gray-800" />
                 </div>
             {:else if isStaked}
@@ -123,7 +219,7 @@
                 bold
                 smaller={size === 's'}
                 overrideColor
-                classes="inline text-gray-800 {isPartiallyStaked ? '' : 'dark:text-white group-hover:text-white'} overflow-hidden overflow-ellipsis">
+                classes="inline text-gray-800 {showWarningState ? '' : 'dark:text-white group-hover:text-white'} overflow-hidden overflow-ellipsis">
                 {getName()}
             </Text>
         </div>
@@ -146,22 +242,20 @@
         <Text
             smaller
             overrideColor
-            classes="block text-gray-800 {isPartiallyStaked ? '' : 'dark:text-white group-hover:text-white'}">
+            classes="block text-gray-800 {showWarningState ? '' : 'dark:text-white group-hover:text-white'}">
             {#if airdrop}{formatStakingAirdropReward(airdrop, Number(balance), 6)}{:else}{balance}{/if}
         </Text>
         <Text
             smaller
             overrideColor
-            classes="block text-blue-500 dark:text-gray-600 {isPartiallyStaked ? '' : 'group-hover:text-white'}">
+            classes="block text-blue-500 dark:text-gray-600 {showWarningState ? '' : 'group-hover:text-white'}">
             {balanceEquiv}
         </Text>
     </div>
 </button>
-{#if showPartialStakeTooltip}
+{#if showTooltip}
     <Tooltip {parentTop} {parentLeft} {parentWidth} position="right">
-        <Text type="p" classes="text-gray-900 bold mb-1 text-left">
-            {localize(`tooltips.partiallyStakedFunds.title${$partiallyStakedAccounts.length > 0 ? '' : 'NoFunds'}`, $partiallyStakedAccounts.length > 0 ? { values: { amount: formatUnitBestMatch(getUnstakedFunds(_getAccount($partiallyStakedAccounts))) } } : {})}
-        </Text>
-        <Text type="p" secondary classes="text-left">{localize('tooltips.partiallyStakedFunds.body')}</Text>
+        <Text type="p" classes="text-gray-900 bold mb-1 text-left">{tooltipText?.title}</Text>
+        <Text type="p" secondary classes="text-left">{tooltipText?.body}</Text>
     </Tooltip>
 {/if}
