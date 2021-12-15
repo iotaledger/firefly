@@ -94,6 +94,13 @@
         resetAccounts()
     }
 
+    const displayErrorNotification = (action: ParticipationAction): void => {
+        showAppNotification({
+                type: 'error',
+                message: locale('error.participation.errorOccurred', { values: { action } })
+        })
+    }
+ 
     const getFormattedFiatAmount = (amount: number): string => {
         const currency = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
         return formatCurrency(convertToFiat(amount, $currencies[CurrencyTypes.USD], $exchangeRates[currency]), currency)
@@ -128,6 +135,8 @@
                     .then((messageIds) => _sync(messageIds))
                     .catch((err) => {
                         console.error(err)
+
+                        displayErrorNotification($participationAction);
                         resetView()
                     })
                 break
@@ -137,6 +146,8 @@
                     .then((messageIds) => _sync(messageIds))
                     .catch((err) => {
                         console.error(err)
+
+                        displayErrorNotification($participationAction);
                         resetView()
                     })
                 break
