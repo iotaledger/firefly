@@ -241,7 +241,7 @@
     class:hidden-wallet={hidden}
     class:darkmode={darkModeEnabled}>
     <div class="mb-2 w-full flex flex-row justify-between items-start space-x-1.5">
-        <div class="flex flex-row space-x-1.5 items-start">
+        <div class="flex flex-row space-x-1.5 items-start w-full whitespace-nowrap">
             {#if showWarningState}
                 <div bind:this={tooltipAnchor} on:mouseenter={toggleTooltip} on:mouseleave={toggleTooltip}>
                     <Icon
