@@ -403,3 +403,22 @@ export const canAccountReachMinimumAirdrop = (account: WalletAccount): boolean =
 
     return timeRequired <= timeLeft
 }
+
+/**
+ * Determines whether an account has reached the reward minimum
+ * for either airdrop.
+ *
+ * @method hasAccountReachedMinimumAirdrop
+ *
+ * @param {WalletAccount} account
+ *
+ * @returns {boolean}
+ */
+export const hasAccountReachedMinimumAirdrop = (account: WalletAccount): boolean => {
+    if (!account) return false
+
+    const overview = get(participationOverview).find((apo) => apo.accountIndex === account?.index)
+    if (!overview) return false
+
+    return overview.assemblyRewards > 0 || overview.shimmerRewards > 0
+}

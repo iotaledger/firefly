@@ -7,7 +7,7 @@
         getMinimumAirdropRewardInfo,
         getStakingEventFromAirdrop,
         getTimeUntilMinimumAirdropReward,
-        getUnstakedFunds,
+        getUnstakedFunds, hasAccountReachedMinimumAirdrop,
         isStakingPossible,
     } from 'shared/lib/participation'
     import {
@@ -66,9 +66,17 @@
          */
         const account = _getAccount($stakedAccounts)
         if (account && getAccountParticipationAbility(account) !== AccountParticipationAbility.NoHasDustAmount) {
-            const accountOverview = $participationOverview.find((apo) => apo.accountIndex === account?.index)
-            isBelowMinimumStakingRewards =
-                accountOverview?.assemblyRewardsBelowMinimum > 0 || accountOverview?.shimmerRewardsBelowMinimum > 0
+            /**
+             * NOTE: If the account has reached minimum airdrop already (on another address) and staking is NOT
+             * possible then we won't display the tooltip.
+             */
+            if (hasAccountReachedMinimumAirdrop(account) && !isStakingPossible($stakingEventState)) {
+                isBelowMinimumStakingRewards = false
+            } else {
+                const accountOverview = $participationOverview.find((apo) => apo.accountIndex === account?.index)
+                isBelowMinimumStakingRewards =
+                    accountOverview?.assemblyRewardsBelowMinimum > 0 || accountOverview?.shimmerRewardsBelowMinimum > 0
+            }
         }
     }
 
