@@ -169,7 +169,7 @@
 <style type="text/scss">
     button {
         height: auto;
-        min-height: 100px;
+        min-height: 110px;
         max-height: 100%;
         &.size-l {
             min-height: 140px;
