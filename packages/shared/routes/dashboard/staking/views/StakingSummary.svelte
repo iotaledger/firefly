@@ -9,7 +9,7 @@
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { wallet } from 'shared/lib/wallet'
 
-    import { canAccountParticipate, isStakingPossible } from 'shared/lib/participation'
+    import { getAccountParticipationAbility, isStakingPossible } from 'shared/lib/participation'
     import {
         accountToParticipate,
         partiallyStakedAccounts,
@@ -30,7 +30,7 @@
     $: canParticipateInEvent = isStakingPossible($stakingEventState)
 
     let { accounts } = $wallet
-    $: canStakeAnAccount = $accounts.some((wa) => canAccountParticipate(wa) === AccountParticipationAbility.Yes)
+    $: canStakeAnAccount = $accounts.some((wa) => getAccountParticipationAbility(wa) === AccountParticipationAbility.Yes)
 
     $: isStaked = $stakedAmount > 0 && canParticipateInEvent
 

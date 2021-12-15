@@ -85,13 +85,13 @@ export const canParticipate = (eventState: ParticipationEventState): boolean => 
 /**
  * Determines whether an account can participate in an event.
  *
- * @method canAccountParticipate
+ * @method getAccountParticipationAbility
  *
  * @param {WalletAccount} account
  *
  * @returns {boolean}
  */
-export const canAccountParticipate = (account: WalletAccount): AccountParticipationAbility => {
+export const getAccountParticipationAbility = (account: WalletAccount): AccountParticipationAbility => {
     if (account?.rawIotaBalance < DUST_THRESHOLD) {
         return AccountParticipationAbility.NoHasDustAmount
     } else if (account?.messages.some((message) => !message.confirmed)) {
