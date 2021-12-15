@@ -1,24 +1,27 @@
 <script lang="typescript">
+    import { tick } from 'svelte'
     import { Icon, Text, Tooltip } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import {
         formatStakingAirdropReward,
-        getTimeUntilMinimumReward,
+        getMinimumAirdropRewardInfo, getStakingEventFromAirdrop,
+        getTimeUntilMinimumAirdropReward,
         getUnstakedFunds,
         isStakingPossible,
     } from 'shared/lib/participation'
     import {
         assemblyStakingRemainingTime,
         partiallyStakedAccounts,
-        participationOverview, shimmerStakingRemainingTime,
+        participationOverview,
+        shimmerStakingRemainingTime,
         stakedAccounts,
         stakingEventState,
     } from 'shared/lib/participation/stores'
     import { ParticipationOverview, StakingAirdrop } from 'shared/lib/participation/types'
-    import type { WalletAccount } from 'shared/lib/typings/wallet'
-    import { formatUnitBestMatch } from 'shared/lib/units'
-    import { tick } from 'svelte'
     import { getBestTimeDuration } from 'shared/lib/time'
+    import { formatUnitBestMatch } from 'shared/lib/units'
+    import { capitalize } from 'shared/lib/utils'
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
 
     export let name = ''
     export let balance = ''
@@ -114,16 +117,26 @@
                 body: localize('tooltips.partiallyStakedFunds.body'),
             }
         } else if (isBelowMinimumStakingRewards) {
-            const timeNeeded = <number>getTimeUntilMinimumReward(_getAccount($stakedAccounts))
-            if (timeNeeded > $assemblyStakingRemainingTime || timeNeeded > $shimmerStakingRemainingTime) {
+            const account = _getAccount($stakedAccounts)
+
+            const [minRewards, minAirdrop, amountStaked] = getMinimumAirdropRewardInfo(account)
+            const rewardMin = formatStakingAirdropReward(
+                minAirdrop,
+                getStakingEventFromAirdrop(minAirdrop)?.information.payload.requiredMinimumRewards,
+                minAirdrop === StakingAirdrop.Assembly ? 6 : 0
+            )
+
+            const timeNeeded = <number>getTimeUntilMinimumAirdropReward(account)
+            const remainingTime = airdrop === StakingAirdrop.Assembly ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
+            if (timeNeeded > remainingTime) {
                 return {
                     title: localize('tooltips.stakingMinRewards.title'),
-                    body: localize('tooltips.stakingMinRewards.bodyWillNotReachMin'),
+                    body: `${localize('tooltips.stakingMinRewards.bodyBelowMin', { values: { airdrop: capitalize(minAirdrop), rewardMin, } })} ${localize('tooltips.stakingMinRewards.bodyWillNotReachMin')}`,
                 }
             } else {
                 return {
                     title: localize('tooltips.stakingMinRewards.title'),
-                    body: `${localize('tooltips.stakingMinRewards.bodyWillReachMin')} ${localize('tooltips.stakingMinRewards.continue', { values: { duration: getBestTimeDuration(timeNeeded) } })}`,
+                    body: `${localize('tooltips.stakingMinRewards.bodyBelowMin', { values: { airdrop: capitalize(minAirdrop), rewardMin, } })} ${localize('tooltips.stakingMinRewards.bodyWillReachMin', { values: { duration: getBestTimeDuration(timeNeeded) } })}`,
                 }
             }
         }

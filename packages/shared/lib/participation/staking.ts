@@ -288,7 +288,7 @@ export const isStakingPossible = (stakingEventState: ParticipationEventState): b
 
 type MinimumRewardInfo = [number, StakingAirdrop, number]
 
-const getMinRewardInfo = (account: WalletAccount): MinimumRewardInfo => {
+export const getMinimumAirdropRewardInfo = (account: WalletAccount): MinimumRewardInfo => {
     const overview = get(participationOverview).find((apo) => apo.accountIndex === account.index)
     if (!overview) return [0, undefined, 0]
 
@@ -357,10 +357,10 @@ const calculateTimeUntilMinimumReward = (rewards: number, airdrop: StakingAirdro
  *
  * @returns {number | string}
  */
-export const getTimeUntilMinimumReward = (account: WalletAccount, format: boolean = false): number | string => {
+export const getTimeUntilMinimumAirdropReward = (account: WalletAccount, format: boolean = false): number | string => {
     if (!account) return format ? getBestTimeDuration(0) : 0
 
-    const [minRewards, minAirdrop, amountStaked] = getMinRewardInfo(account)
+    const [minRewards, minAirdrop, amountStaked] = getMinimumAirdropRewardInfo(account)
     const remainingTime = calculateTimeUntilMinimumReward(minRewards, minAirdrop, amountStaked)
 
     return format ? getBestTimeDuration(remainingTime) : remainingTime

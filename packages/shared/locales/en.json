@@ -1234,9 +1234,10 @@
         },
         "stakingMinRewards": {
             "title": "Minimum rewards not met",
-            "bodyWillReachMin": "Your funds have not been staked long enough to reach the minimum airdrop rewards.",
-            "bodyWillNotReachMin": "You do not have enough IOTA staked to reach the minimum airdrop rewards.",
-            "continue": "Please continue staking for another {duration}."
+            "continue": "Please continue staking for another {duration}.",
+            "bodyBelowMin": "This wallet is below the minimum airdrop for {airdrop} ({rewardMin}).",
+            "bodyWillReachMin": "Stake for another {duration} to reach the minimum.",
+            "bodyWillNotReachMin": "You will not be able to reach the minimum during the remaining staking period unless you stake more IOTA."
         }
     },
     "exports": {
