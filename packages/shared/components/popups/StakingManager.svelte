@@ -5,7 +5,7 @@
     import { hasNodePlugin, networkStatus } from 'shared/lib/networkStatus'
     import { showAppNotification } from 'shared/lib/notifications'
     import {
-        canAccountParticipate,
+        getAccountParticipationAbility,
         canParticipate,
         getStakedFunds,
         getUnstakedFunds,
@@ -24,7 +24,7 @@
         stakedAmount,
         stakingEventState,
     } from 'shared/lib/participation/stores'
-    import { Participation, ParticipationAction } from 'shared/lib/participation/types'
+    import { AccountParticipationAbility, Participation, ParticipationAction } from 'shared/lib/participation/types'
     import { openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { checkStronghold } from 'shared/lib/stronghold'
@@ -45,7 +45,8 @@
     let canStake
     $: canStake = canParticipate($stakingEventState)
 
-    let accounts = get($wallet.accounts)
+    let { accounts } = $wallet
+    
     const hasStakedAccounts = $stakedAccounts.length > 0
 
     let pendingParticipationIds = []
@@ -221,8 +222,8 @@
 <Text type="h5">{locale(`popups.stakingManager.titleWith${hasStakedAccounts ? '' : 'No'}Stake`)}</Text>
 <Text type="p" secondary classes="mt-6 mb-2">{locale('popups.stakingManager.description')}</Text>
 <div class="staking flex flex-col scrollable-y">
-    {#each accounts as account}
-        {#if canAccountParticipate(account)}
+    {#each $accounts as account}
+        {#if getAccountParticipationAbility(account) === AccountParticipationAbility.Yes || getAccountParticipationAbility(account) === AccountParticipationAbility.NoHasPendingTransaction}
             <div
                 class="w-full mt-4 flex flex-col rounded-xl border border-1 border-solid border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-gray-500 focus:hover:border-gray-700">
                 <div class="w-full space-x-4 px-5 py-3 flex flex-row justify-between items-center">
@@ -276,7 +277,7 @@
                         {/if}
                     </div>
                     <Button
-                        disabled={$isPerformingParticipation}
+                        disabled={$isPerformingParticipation || getAccountParticipationAbility(account) === AccountParticipationAbility.NoHasPendingTransaction}
                         secondary={isAccountStaked(account?.id)}
                         onClick={() => (isAccountStaked(account?.id) ? handleUnstakeClick(account) : handleStakeClick(account))}>
                         {#if $accountToParticipate?.id === account?.id && $accountToParticipate && $participationAction}
@@ -300,7 +301,7 @@
                                 </Text>
                             </Text>
                         </div>
-                        <Button disabled={$isPerformingParticipation} onClick={() => handleStakeClick(account)}>
+                        <Button disabled={$isPerformingParticipation || getAccountParticipationAbility(account) === AccountParticipationAbility.NoHasPendingTransaction} onClick={() => handleStakeClick(account)}>
                             {locale('actions.merge')}
                         </Button>
                     </div>

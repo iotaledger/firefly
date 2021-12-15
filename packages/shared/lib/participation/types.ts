@@ -1,5 +1,11 @@
 import type { Message } from '../typings/message'
 
+export enum AccountParticipationAbility {
+    Yes = 'yes',
+    NoHasDustAmount = 'noHasDustAmount',
+    NoHasPendingTransaction = 'noHasPendingTransaction',
+}
+
 /**
  * The official staking airdrops, Assembly (ASMB) and Shimmer (SMR).
  */
