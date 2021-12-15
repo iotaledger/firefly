@@ -54,7 +54,15 @@
 
     let isBelowMinimumStakingRewards
     $: {
-        const account = _getAccount(get($wallet.accounts))
+        /**
+         * NOTE: We are selecting from staked accounts ONLY.
+         * Accounts that have been unstaked will NOT have this warning
+         * tooltip shown.
+         *
+         * If we wish to check unstaked accounts also, then we can use the
+         * accounts on the wallet Svelte store.
+         */
+        const account = _getAccount($stakedAccounts)
         if (account) {
             const accountOverview = $participationOverview.find((apo) => apo.accountIndex === account?.index)
             isBelowMinimumStakingRewards =
@@ -129,13 +137,7 @@
                 body: localize('tooltips.partiallyStakedFunds.body'),
             }
         } else if (isBelowMinimumStakingRewards) {
-            /**
-             * NOTE: We are selecting from all available accounts
-             * so that if an unstaked account is still under the
-             * airdrop minimum.
-             */
-            const account = _getAccount(get($wallet.accounts))
-
+            const account = _getAccount($stakedAccounts)
             const [minRewards, minAirdrop, amountStaked] = getMinimumAirdropRewardInfo(account)
             const airdropRewardMin = formatStakingAirdropReward(
                 minAirdrop,
