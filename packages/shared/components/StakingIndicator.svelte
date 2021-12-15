@@ -43,7 +43,7 @@
                 stateText = 'commencing'
                 break
             case ParticipationEventState.Holding:
-                stateText = isStaked ? 'active' : 'inactive'
+                stateText = isStaked ? 'holdingActive' : 'holdingInactive'
                 break
             case ParticipationEventState.Ended:
                 stateText = 'ended'
