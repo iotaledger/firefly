@@ -1,10 +1,16 @@
 import type { Message } from '../typings/message'
 
+/**
+ * The official staking airdrops, Assembly (ASMB) and Shimmer (SMR).
+ */
 export enum StakingAirdrop {
     Assembly = 'assembly',
     Shimmer = 'shimmer',
 }
 
+/**
+ * The possible actions a user can do regarding participation.
+ */
 export enum ParticipationAction {
     Stake = 'stake',
     Unstake = 'unstake',
@@ -12,6 +18,10 @@ export enum ParticipationAction {
     Unvote = 'unvote',
 }
 
+/**
+ * The possible participation event states, including an extra "inactive"
+ * phase for extra cases (e.g. when the node doesn't have the participation plugin).
+ */
 export enum ParticipationEventState {
     Upcoming = 'upcoming',
     Commencing = 'commencing',
@@ -20,11 +30,17 @@ export enum ParticipationEventState {
     Inactive = 'inactive',
 }
 
+/**
+ * The possible types of participation events (only voting and staking).
+ */
 export enum ParticipationEventType {
     Voting = 0,
     Staking = 1,
 }
 
+/**
+ * The status of a participation event.
+ */
 export type ParticipationEventStatus = {
     milestoneIndex: number
     /**
@@ -36,6 +52,10 @@ export type ParticipationEventStatus = {
     checksum: string
 }
 
+/**
+ * An additional information payload embedded in ParticipationEventInformation,
+ * containing more specific data regarding the event's reward system.
+ */
 export type ParticipationEventInformationPayload = {
     type: ParticipationEventType
     numerator: number
@@ -46,6 +66,10 @@ export type ParticipationEventInformationPayload = {
     additionalInfo: string
 }
 
+/**
+ * The more specific particiaption event information, indicating
+ * the event's specific phase milestone transitions, and some more data.
+ */
 export type ParticipationEventInformation = {
     milestoneIndexCommence: number
     milestoneIndexStart: number
@@ -54,6 +78,10 @@ export type ParticipationEventInformation = {
     payload: ParticipationEventInformationPayload
 }
 
+/**
+ * The data corresponding to a participation event, including
+ * both staking and voting events.
+ */
 export type ParticipationEvent = {
     eventId: string
     information: ParticipationEventInformation
@@ -65,17 +93,25 @@ export type ParticipationEvent = {
     status: ParticipationEventStatus
 }
 
+/**
+ * The response returned from wallet.rs containing the
+ * participation (protocol) messages.
+ */
 export type ParticipateResponsePayload = Message[]
-// export interface ParticipateResponsePayload {
-//     accountId: string
-//     messages: Message[]
-// }
 
+/**
+ * An individual participation struct.
+ */
 export type Participation = {
     eventId: string
     answers: string[]
 }
 
+/**
+ * The struct containing all account-specific information
+ * regarding staking, airdrop, rewards, participations
+ * (including voting), and so on.
+ */
 export type AccountParticipationOverview = {
     accountIndex: number
     assemblyRewards: number
@@ -89,12 +125,23 @@ export type AccountParticipationOverview = {
     participations: Participation[]
 }
 
-// TODO: Change wallet.rs to return array directly instead of wrapped one.
+/**
+ * The unwrapped array of account participation overviews.
+ */
 export type ParticipationOverview = AccountParticipationOverview[]
+
+/**
+ * The response struct returned from wallet.rs containing the participation
+ * overview.
+ */
 export type ParticipationOverviewResponse = {
     accounts: AccountParticipationOverview[]
 }
 
+/**
+ * Pending participations type, useful for distinguishing between participations
+ * that have or have not been confirmed yet.
+ */
 export interface PendingParticipation {
     messageId: string
     accountId: string

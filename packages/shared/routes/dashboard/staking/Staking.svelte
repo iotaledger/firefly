@@ -117,7 +117,7 @@
         await getParticipationOverview()
 
         if ($isStakingFeatureNew) {
-            setTimeout(handleNewStakingFeature, MILLISECONDS_PER_SECOND)
+            handleNewStakingFeature()
         }
     })
 

@@ -62,8 +62,7 @@
         }
     })
 
-    // TODO: add missing unsubscribe to onDestroy
-    ongoingSnapshot.subscribe((os) => {
+    const unsubscribeOngoingSnapshot = ongoingSnapshot.subscribe((os) => {
         if (os) {
             openSnapshotPopup()
         }
@@ -122,6 +121,7 @@
 
     onDestroy(() => {
         unsubscribeAccountsLoaded()
+        unsubscribeOngoingSnapshot()
 
         Electron.DeepLinkManager.clearDeepLinkRequest()
         Electron.removeListenersForEvent('deep-link-params')
