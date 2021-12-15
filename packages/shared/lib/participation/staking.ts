@@ -22,6 +22,7 @@ import {
 } from './stores'
 import { Participation, ParticipationEvent, ParticipationEventState, StakingAirdrop } from './types'
 import { formatUnitBestMatch } from '../units'
+import { wallet } from '../wallet'
 
 /**
  * Determines whether an account is currently being staked or not.
@@ -448,7 +449,7 @@ export const canAccountReachMinimumAirdrop = (account: WalletAccount): boolean =
 }
 
 /**
- * Determines whether an account has reached the reward minimum
+ * Determines whether a given account has reached the reward minimum
  * for either airdrop.
  *
  * @method hasAccountReachedMinimumAirdrop
@@ -465,3 +466,14 @@ export const hasAccountReachedMinimumAirdrop = (account: WalletAccount): boolean
 
     return overview.assemblyRewards > 0 || overview.shimmerRewards > 0
 }
+
+/**
+ * Determines whether any account has reached the reward minimum
+ * for either airdrop.
+ *
+ * @method hasAnAccountReachedMinimumAirdrop
+ *
+ * @returns {boolean}
+ */
+export const hasAnAccountReachedMinimumAirdrop = (): boolean =>
+    get(get(wallet).accounts).some((a) => hasAccountReachedMinimumAirdrop(a))
