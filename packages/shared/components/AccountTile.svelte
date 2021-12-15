@@ -19,7 +19,7 @@
         stakedAccounts,
         stakingEventState,
     } from 'shared/lib/participation/stores'
-    import { ParticipationOverview, StakingAirdrop } from 'shared/lib/participation/types'
+    import { ParticipationEventState, ParticipationOverview, StakingAirdrop } from 'shared/lib/participation/types'
     import { openPopup } from 'shared/lib/popup'
     import { getBestTimeDuration } from 'shared/lib/time'
     import { formatUnitBestMatch } from 'shared/lib/units'
@@ -137,30 +137,41 @@
             const account = _getAccount(get($wallet.accounts))
 
             const [minRewards, minAirdrop, amountStaked] = getMinimumAirdropRewardInfo(account)
-            const rewardMin = formatStakingAirdropReward(
+            const airdropRewardMin = formatStakingAirdropReward(
                 minAirdrop,
                 getStakingEventFromAirdrop(minAirdrop)?.information.payload.requiredMinimumRewards,
                 minAirdrop === StakingAirdrop.Assembly ? 6 : 0
             )
 
-            const timeNeeded = <number>getTimeUntilMinimumAirdropReward(account)
-            const remainingTime =
-                airdrop === StakingAirdrop.Assembly ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
-            if (timeNeeded > remainingTime) {
+            if ($stakingEventState === ParticipationEventState.Ended) {
                 return {
                     title: localize('tooltips.stakingMinRewards.title'),
-                    body: `${localize('tooltips.stakingMinRewards.bodyBelowMin', {
-                        values: { airdrop: capitalize(minAirdrop), rewardMin },
-                    })} ${localize('tooltips.stakingMinRewards.bodyWillNotReachMin')}`,
+                    body: localize(
+                        'tooltips.stakingMinRewards.bodyDidNotReachMin',
+                        { values: { airdrop: capitalize(airdrop), airdropRewardMin, } }
+                    )
                 }
             } else {
-                return {
-                    title: localize('tooltips.stakingMinRewards.title'),
-                    body: `${localize('tooltips.stakingMinRewards.bodyBelowMin', {
-                        values: { airdrop: capitalize(minAirdrop), rewardMin },
-                    })} ${localize('tooltips.stakingMinRewards.bodyWillReachMin', {
-                        values: { duration: getBestTimeDuration(timeNeeded) },
-                    })}`,
+                const timeNeeded = <number>getTimeUntilMinimumAirdropReward(account)
+                const remainingTime =
+                    airdrop === StakingAirdrop.Assembly ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
+
+                if (timeNeeded > remainingTime) {
+                    return {
+                        title: localize('tooltips.stakingMinRewards.title'),
+                        body: `${localize('tooltips.stakingMinRewards.bodyBelowMin', {
+                            values: { airdrop: capitalize(minAirdrop), airdropRewardMin, },
+                        })} ${localize('tooltips.stakingMinRewards.bodyWillNotReachMin')}`,
+                    }
+                } else {
+                    return {
+                        title: localize('tooltips.stakingMinRewards.title'),
+                        body: `${localize('tooltips.stakingMinRewards.bodyBelowMin', {
+                            values: { airdrop: capitalize(minAirdrop), airdropRewardMin, },
+                        })} ${localize('tooltips.stakingMinRewards.bodyWillReachMin', {
+                            values: { duration: getBestTimeDuration(timeNeeded) },
+                        })}`,
+                    }
                 }
             }
         }

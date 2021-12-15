@@ -292,6 +292,11 @@ export const getMinimumAirdropRewardInfo = (account: WalletAccount): MinimumRewa
     const overview = get(participationOverview).find((apo) => apo.accountIndex === account.index)
     if (!overview) return [0, undefined, 0]
 
+    /**
+     * NOTE: MAX_SAFE_INTEGER is used here just to ensure
+     * that any number compared to it will with certainty
+     * be smaller (since we're comparing minimums).
+     */
     let smallestMinRewards: number = Number.MAX_SAFE_INTEGER
     let smallestMinAirdrop: StakingAirdrop = undefined
     let amountStaked: number = 0
