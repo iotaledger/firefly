@@ -126,23 +126,19 @@
     })}
 </Text>
 {#if !isPartialStake}
-    <div class="flex flex-row justify-between items-center mb-6 space-x-2">
+    <div class="flex flex-row mb-6 space-x-2 flex-1">
         {#each Object.keys(StakingAirdrop).map((sa) => sa.toLowerCase()) as airdrop}
             <div
-                on:click={activeAirdrops.length > 0 && activeAirdrops.includes(airdrop) ? () => {} : () => toggleAirdropSelection(airdrop)}
-                class="p-4 w-1/2 flex flex-col items-center text-center border border-1 border-solid rounded-2xl {activeAirdrops?.length && activeAirdrops?.includes(airdrop) ? 'cursor-default' : 'cursor-pointer hover:bg-blue-50 hover:border-blue-500 focus:border-blue-500 focus:bg-blue-50 dark:hover:bg-gray-800'} {!airdropSelections[airdrop] || (activeAirdrops.length > 0 && activeAirdrops.includes(airdrop)) ? 'opacity-50 border-gray-300' : 'border-blue-500'}">
+                on:click={(activeAirdrops.length > 0 && activeAirdrops.includes(airdrop)) ? () => {} : () => toggleAirdropSelection(airdrop)}
+                class="p-4 w-1/2 flex flex-col items-center text-center border border-1 border-solid rounded-2xl {activeAirdrops?.length && activeAirdrops?.includes(airdrop) ? 'cursor-default' : 'cursor-pointer hover:bg-blue-50 hover:border-blue-500 focus:border-blue-500 focus:bg-blue-50 dark:hover:bg-gray-800'} {!airdropSelections[airdrop] || (activeAirdrops.length > 0 && activeAirdrops.includes(airdrop)) ? 'opacity-50 border-gray-300' : 'border-blue-500'}"
+            >
                 <div class="mb-2 flex flex-row justify-center">
                     <Text type="p" bigger classes="font-extrabold">{capitalize(airdrop)}&nbsp;</Text>
                     <Text type="p" bigger>({STAKING_AIRDROP_TOKENS[airdrop]})</Text>
                 </div>
                 <Text type="p" secondary>{locale('popups.stakingConfirmation.estimatedAirdrop')}:</Text>
-                <Checkbox
-                    round
-                    bind:checked={airdropSelections[airdrop]}
-                    onClick={() => toggleAirdropSelection(airdrop)}
-                    disabled={activeAirdrops.length > 0 && activeAirdrops.includes(airdrop)}
-                    classes="my-5" />
-                <Text type="p" classes="font-bold text-lg">
+                <Checkbox round bind:checked={airdropSelections[airdrop]} onClick={() => toggleAirdropSelection(airdrop)} disabled={(activeAirdrops.length > 0 && activeAirdrops.includes(airdrop))} classes="my-5" />
+                <Text type="p" classes="font-bold text-lg w-full break-all">
                     {(airdropSelections[airdrop] ? getRewards(capitalize(airdrop)) : estimateStakingAirdropReward(airdrop, 0, true, 0)).split(' ')[0]}
                 </Text>
                 <Text type="p" secondary classes="font-bold text-lg">

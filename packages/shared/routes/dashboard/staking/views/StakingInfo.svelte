@@ -12,21 +12,20 @@
     import { ParticipationEventState, ParticipationOverview } from 'shared/lib/participation/types'
     import { getBestTimeDuration } from 'shared/lib/time'
 
-    const handleExternalLinkClick = (): void => {
-        Electron.openUrl('https://firefly.iota.org')
-    }
-
     const updateAnimation = (state: ParticipationEventState, overview: ParticipationOverview): string => {
         const prefix = 'staking-info'
         if (!state || !overview) return `${prefix}-upcoming`
 
-        if (state === ParticipationEventState.Holding) {
+        if (state === ParticipationEventState.Inactive) {
+            return null
+        }
+        else if (state === ParticipationEventState.Holding) {
             let numParticipations = 0
 
             if (overview.some((apo) => apo.shimmerStakedFunds > 0 && apo.assemblyStakedFunds > 0)) {
-                numParticipations = 2;
+                numParticipations = 2
             } else if (overview.some((apo) => apo.shimmerStakedFunds > 0 || apo.assemblyStakedFunds > 0)) {
-                numParticipations = 1;
+                numParticipations = 1
             }
 
             let fileNumber
@@ -44,10 +43,8 @@
         }
     }
 
-    let animation = 'staking-info-holding-0'
     $: animation = updateAnimation($stakingEventState, $participationOverview)
 
-    let localePath
     $: localePath = `views.staking.info.${$stakingEventState}`
     $: $assemblyStakingRemainingTime, $shimmerStakingRemainingTime
 
@@ -78,20 +75,19 @@
 </script>
 
 <style type="text/scss">
-    ul {
-        display: block;
-        list-style-type: disc;
-        margin-block-start: 0.5em;
-        margin-block-end: 1em;
-        margin-inline-start: 0px;
-        margin-inline-end: 0px;
-        padding-inline-start: 20px;
+    .animation-wrapper {
+        max-height: calc(100% - 80px);
+        max-width: 700px;
+        padding-bottom: 66.56%;
     }
 </style>
 
-<div
-    class="p-8 flex flex-col justify-center items-center w-full h-full bg-blue-100 dark:bg-gray-800">
-    <Animation animation={animation} />
+<div class="p-8 flex flex-col justify-center items-center w-full h-full bg-blue-100 dark:bg-gray-800">
+    {#if animation}
+        <div class="animation-wrapper relative w-full">
+            <Animation {animation} classes="h-full absolute transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+        </div>
+    {/if}
     <div class="w-full mt-4 flex flex-col items-center text-center">
         <Text type="p" bigger classes="mb-1">{subHeader}</Text>
         <Text type="h2" classes="mb-2">{header}</Text>

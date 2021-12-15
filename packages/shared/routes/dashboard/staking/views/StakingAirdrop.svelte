@@ -102,7 +102,7 @@
         bind:this={video[airdrop]}>
         <source src="assets/videos/airdrop-{airdrop}.mp4" type="video/mp4" />
     </video>
-    <div class="px-8 h-full pb-10 flex flex-col justify-end space-y-5 z-0">
+    <div class="w-full h-full px-8 pb-10 flex flex-col justify-end space-y-5 z-0">
         <div class="flex flex-col">
             <div class="flex flex-row flex-wrap mb-2">
                 {#each stakedAccountsInCurrentAirdrop as acc}
@@ -144,7 +144,7 @@
                 </Text>
             </div>
             {#if isStakingPossible($stakingEventState)}
-                <div class="flex flex-col">
+                <div class="flex flex-col text-right">
                     <div>
                         <Text type="p" classes="font-bold text-lg inline text-white dark:text-white">
                             {remainingTimeAmount}

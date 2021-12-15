@@ -152,7 +152,7 @@
     <StakingHeader />
     <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
         <div class="h-full flex flex-col space-y-3 overflow-hidden">
-            <DashboardPane classes="w-full">
+            <DashboardPane classes="w-full flex-shrink-0">
                 <StakingSummary />
             </DashboardPane>
             <DashboardPane classes="w-full flex-grow">
