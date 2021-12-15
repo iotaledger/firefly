@@ -51,7 +51,7 @@ export const isAccountStakedForAirdrop = (accountId: string, airdrop: StakingAir
     const account = get(stakedAccounts).find((sa) => sa.id === accountId)
     if (!account) return false
 
-    const accountOverview = get(participationOverview).find((apo) => apo.accountIndex === account.index)
+    const accountOverview = get(participationOverview).find((apo) => apo.accountIndex === account?.index)
     if (!accountOverview) return false
 
     return accountOverview.participations.find((p) => p.eventId === getAirdropEventId(airdrop)) !== undefined
@@ -289,7 +289,7 @@ export const isStakingPossible = (stakingEventState: ParticipationEventState): b
 type MinimumRewardInfo = [number, StakingAirdrop, number]
 
 export const getMinimumAirdropRewardInfo = (account: WalletAccount): MinimumRewardInfo => {
-    const overview = get(participationOverview).find((apo) => apo.accountIndex === account.index)
+    const overview = get(participationOverview).find((apo) => apo.accountIndex === account?.index)
     if (!overview) return [0, undefined, 0]
 
     /**
@@ -301,8 +301,8 @@ export const getMinimumAirdropRewardInfo = (account: WalletAccount): MinimumRewa
     let smallestMinAirdrop: StakingAirdrop = undefined
     let amountStaked: number = 0
 
-    const { assemblyRewards, assemblyRewardsBelowMinimum, assemblyStakedFunds } = overview
-    if (assemblyRewardsBelowMinimum > 0 && assemblyRewards <= 0) {
+    const { assemblyRewardsBelowMinimum, assemblyStakedFunds } = overview
+    if (assemblyRewardsBelowMinimum > 0) {
         if (assemblyRewardsBelowMinimum < smallestMinRewards) {
             smallestMinRewards = assemblyRewardsBelowMinimum
             smallestMinAirdrop = StakingAirdrop.Assembly
@@ -310,8 +310,8 @@ export const getMinimumAirdropRewardInfo = (account: WalletAccount): MinimumRewa
         }
     }
 
-    const { shimmerRewards, shimmerRewardsBelowMinimum, shimmerStakedFunds } = overview
-    if (shimmerRewardsBelowMinimum > 0 && shimmerRewards <= 0) {
+    const { shimmerRewardsBelowMinimum, shimmerStakedFunds } = overview
+    if (shimmerRewardsBelowMinimum > 0) {
         if (shimmerRewardsBelowMinimum < smallestMinRewards) {
             smallestMinRewards = shimmerRewardsBelowMinimum
             smallestMinAirdrop = StakingAirdrop.Shimmer

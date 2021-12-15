@@ -1242,6 +1242,7 @@
         "stakingMinRewards": {
             "title": "Minimum rewards not met",
             "continue": "Please continue staking for another {duration}.",
+            "bodyAboveAndBelowMin": "An address in this wallet has already met the minimum airdrop for {airdrop} ({airdropRewardMin}), but is currently staking on an address that has not met the minimum.",
             "bodyBelowMin": "This wallet is below the minimum airdrop for {airdrop} ({airdropRewardMin}).",
             "bodyWillReachMin": "You must stake for another {duration} to reach the minimum.",
             "bodyWillNotReachMin": "You will not be able to reach the minimum during the remaining staking period unless you stake more IOTA.",

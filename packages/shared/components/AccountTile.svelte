@@ -1,9 +1,9 @@
 <script lang="typescript">
-    import { get } from 'svelte/store'
     import { Icon, Text, Tooltip } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import {
         formatStakingAirdropReward,
+        getAccountParticipationAbility,
         getMinimumAirdropRewardInfo,
         getStakingEventFromAirdrop,
         getTimeUntilMinimumAirdropReward,
@@ -18,12 +18,16 @@
         stakedAccounts,
         stakingEventState,
     } from 'shared/lib/participation/stores'
-    import { ParticipationEventState, ParticipationOverview, StakingAirdrop } from 'shared/lib/participation/types'
+    import {
+        AccountParticipationAbility,
+        ParticipationEventState,
+        ParticipationOverview,
+        StakingAirdrop,
+    } from 'shared/lib/participation/types'
     import { openPopup } from 'shared/lib/popup'
     import { getBestTimeDuration } from 'shared/lib/time'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { capitalize } from 'shared/lib/utils'
-    import { wallet } from 'shared/lib/wallet'
     import type { WalletAccount } from 'shared/lib/typings/wallet'
 
     export let name = ''
@@ -62,7 +66,7 @@
          * accounts on the wallet Svelte store.
          */
         const account = _getAccount($stakedAccounts)
-        if (account) {
+        if (account && getAccountParticipationAbility(account) !== AccountParticipationAbility.NoHasDustAmount) {
             const accountOverview = $participationOverview.find((apo) => apo.accountIndex === account?.index)
             isBelowMinimumStakingRewards =
                 accountOverview?.assemblyRewardsBelowMinimum > 0 || accountOverview?.shimmerRewardsBelowMinimum > 0
@@ -96,9 +100,10 @@
         }
     }
 
-    $: tooltipText = getLocalizedTooltipText($participationOverview)
+    let tooltipText
+    $: $participationOverview, (tooltipText = getLocalizedTooltipText())
 
-    const getLocalizedTooltipText = (overview: ParticipationOverview): { title: string; body: string } => {
+    const getLocalizedTooltipText = (): { title: string; body: string } => {
         if (isPartiallyStaked) {
             return {
                 title: localize(
