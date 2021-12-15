@@ -30,7 +30,7 @@
         "setup": {
             "title": "Stel jou beursie op",
             "chrysalisTitle": "Chrysalis-netwerkopdatering",
-            "chrysalisBody": "Vanaf 21 April kan gebruikers hul tokens migreer na die nuwe Chrysalis-netwerk. Ons beveel aan dat jy jou bestaande tokens so gou as moontlik migreer.",
+            "chrysalisBody": "Vanaf 21 April 2021, kan gebruikers hul tokens migreer na die nuwe Chrysalis-netwerk. Ons beveel aan dat jy jou bestaande tokens so gou as moontlik migreer.",
             "learnMore": "Leer meer oor die migrasie"
         },
         "secure": {
@@ -415,10 +415,6 @@
                 "title": "Migreer Ledger indeks",
                 "description": "Migreer 'n ander Trinity rekeningindeks"
             },
-            "transactionHistory": {
-                "title": "Transaksie geskiedenis",
-                "description": "Voer die transaksiegeskiedenis van jou rekeninge as .csv-lêers uit"
-            },
             "troubleshoot": {
                 "title": "Probleemoplossing",
                 "description": "Gebruik die wizard vir probleemoplossing om algemene probleme op te los"
@@ -489,6 +485,48 @@
             "profileModal": {
                 "allSettings": "Alle instellings",
                 "logout": "Log out"
+            }
+        },
+        "staking": {
+            "title": "Staking",
+            "welcome": "Welkom by die Staking dashboard",
+            "status": {
+                "upcoming": "Staking geleentheid het nog nie begin nie",
+                "commencing": "Pre-Staking is oop",
+                "holdingActive": "Staking ann die gang",
+                "holdingInactive": "Staking is oop",
+                "inactive": "Staking nie bespeur nie",
+                "ended": "Staking is verby"
+            },
+            "summary": {
+                "stakedFunds": "Staked fondse"
+            },
+            "info": {
+                "upcomingSubheader": "Staking geleentheid het nog nie begin nie",
+                "upcomingHeader": "Kom later terug",
+                "commencingSubheader": "Maak gereed vir Staking",
+                "commencingHeader": "Pre-Stake jou tokens vooraf!",
+                "holdingSubheaderHolding": "No besig om Staking rewards te verdien",
+                "holdingSubheaderNotHolding": "Verdien Staking rewards om IOTA te Stake",
+                "holdingHeaderHolding": "{duration} oor",
+                "holdingHeaderNotHolding": "Stake jou tokens!",
+                "endedSubheader": "Staking het geëindig",
+                "endedHeader": "Dankie!",
+                "inactiveHeader": "Probeer om node te verander",
+                "inactiveSubheader": "Staking was nie bespeur nie"
+            },
+            "airdrops": {
+                "holding": "Oorblywende",
+                "commencing": "Totdat staking begin",
+                "collectedRewards": "Ingesamelde beloning",
+                "assembly": {
+                    "name": "Assembly",
+                    "description": "Assembly is 'n toestemminglose, hoogs skaalbare multi-chain netwerk om saamstelbare smart-contracts te bou en te ontplooi. Assembly is die toekoms van web3. "
+                },
+                "shimmer": {
+                    "name": "Shimmer",
+                    "description": "Die aangespoorde verhoognetwerk om groot innovasies op IOTA te bevorder. Wat ook al gebeur, gebeur. Hoe Shimmer ontwikkel, is aan jou."
+                }
             }
         }
     },
@@ -600,7 +638,8 @@
         },
         "transaction": {
             "title": "Bevestig die transaksie",
-            "body": "Jy is op die punt om {amount} na"
+            "body": "Jy is op die punt om {amount} na",
+            "sendingFromStakedAccount": "Jy stuur 'n oordrag vanaf 'n beursie wat tans in Staking is. Dit kan jou tokens unstake. Stuur gerus die oordrag, maar jy sal dalk jou oorblywende tokens daarna moet weer stake."
         },
         "balanceFinder": {
             "title": "Balans-finder",
@@ -674,10 +713,41 @@
         },
         "exportTransactionHistory": {
             "title": "Voer transaksiegeskiedenis uit",
-            "body": "Voer jou transaksiegeskiedenis vir alle rekeninge agtereenvolgens binne hierdie profiel uit. Uitvoere sal in 'n CSV-formaat wees.",
+            "body": "Voer die transaksiegeskiedenis vir die geselekteerde beursie uit. Die uitgevoerde lêer sal in .csv-formaat wees.",
             "profileName": "Profiel Naam:",
-            "numberOfAccounts": "Aantal rekeninge:",
+            "accountName": "Rekening naam:",
             "typePassword": "Tik jou wagwoord om uitvoer toe te laat"
+        },
+        "stakingNotice": {
+            "upcomingDate": "Staking het nog nie begin nie",
+            "commencingDate": "Staking het nog nie begin nie",
+            "body": "Deur vooraf jou fondse in te sit voor die staking begin, sal jy outomaties belonings begin ontvang wanneer die staking begin.",
+            "ok": "Ok, Ek verstaan"
+        },
+        "stakingManager": {
+            "title": "Staking Management",
+            "description": "Wanneer jy 'n beursie stake, stuur jy 'n transaksie aan jouself en merk daardie fondse as \"staked\". Jy kan die tokens enige tyd oordra, maar jy sal nie aanhou om staking belonings te ontvang nie.",
+            "totalFundsStaked": "Totale fondse staked",
+            "stakedSuccessfully": "Jou fondse is Staked vir {account}.",
+            "unstakedSuccessfully": "Jou fondse is un-Staked vir {account}."
+        },
+        "stakingConfirmation": {
+            "title": "Airdrop-deelname",
+            "subtitleStake": "Jy is op die punt om te Stake",
+            "subtitleMerge": "Jy is op die punt om te kombineer",
+            "bodyStake": "As jy nie aan beide airdrops wil deelneem nie, kan jy hieronder onttrek. Jy kan enige tyd unstake en stake om weer in te teken.",
+            "bodyMerge": "Jou fondse sal ge Stake word vir {airdrop}. Om te verander aan watter airdrops jy wil deelneem, un stake hierdie beursie en stake dit weer.",
+            "estimatedAirdrop": "Geskatte belonings"
+        },
+        "shimmer-info": {
+            "title": "Oor Shimmer",
+            "body1": "Baie geluk, jy het SMR-tokens verdien as 'n Staking beloning. Shimmer is 'n aangespoorde staking netwerk om groot opgraderings op IOTA te toets.",
+            "body2": "Ons beoog om Shimmer in 2022 bekend te stel. Jou tokens sal beskikbaar wees om oor te dra sodra die netwerk begin."
+        },
+        "assembly-info": {
+            "title": "Oor Assembly",
+            "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
+            "body2": "Ons beoog om Assembly in 2022 bekend te stel. Jou tokens sal beskikbaar wees om oor te dra sodra die netwerk begin."
         }
     },
     "charts": {
@@ -735,7 +805,7 @@
         "export": "Export",
         "exporting": "Uitvoer",
         "exportNewStronghold": "Export n nuwe Stronghold",
-        "enableDeepLinks": "Enable IOTA links",
+        "enableDeepLinks": "Aktiveer IOTA deep links",
         "enableDeveloperMode": "Activeer ontwikkelaarsmode",
         "enableSystemNotifications": "Aktiveer stelselkennisgewings",
         "exportTransactionHistory": "Voer transaksiegeskiedenis uit",
@@ -791,7 +861,16 @@
         "closeFirefly": "Maak Firefly toe",
         "generateAddress": "Genereer nuwe adres",
         "migrateAgain": "Migreer 'n ander ndeks",
-        "done": "Done"
+        "visitWebsite": "Besoek webwerf",
+        "howItWorks": "Hoe dit werk",
+        "learnAboutStaking": "Leer oor staking",
+        "stake": "Stake",
+        "unstake": "Unstake",
+        "stakeFunds": "Stake fondse",
+        "manageStake": "Bestuur stake",
+        "merge": "Kombineer",
+        "mergeFunds": "Kombineer fondse",
+        "done": "Klaar"
     },
     "general": {
         "password": "Wagwoord",
@@ -834,9 +913,9 @@
         "stronghold": "Stronghold",
         "language": "Taal",
         "appearance": "Voorkoms",
-        "lightTheme": "Light",
-        "darkTheme": "Dark",
-        "systemTheme": "System",
+        "lightTheme": "Ligte",
+        "darkTheme": "Donker",
+        "systemTheme": "Stelsel",
         "balance": "Balans",
         "accountBalance": "Beursie Waarde",
         "incoming": "Inkomende",
@@ -853,7 +932,7 @@
         "transactions": "Transaksies",
         "security": "Sekuriteit",
         "accountAddress": "Beursie se Adres",
-        "network": "Network",
+        "network": "Netwerk",
         "nodes": "Nodes",
         "wallet": "Beursie",
         "help": "Hulp",
@@ -880,6 +959,8 @@
         "transferBroadcasting": "Uitsaai van die transaksie",
         "transferComplete": "Oordrag voltooi",
         "generatingReceiveAddress": "Genereer deposito adres",
+        "broadcasting": "Broadcasting",
+        "confirming": "Confirming",
         "creatingAccount": "Skep tans beursie, wag asseblief...",
         "updatingAccount": "Opdatering van beursie, wag asseblief...",
         "accountSyncing": "Die beursie word tans gesinkroniseer",
@@ -907,13 +988,35 @@
         "sendingFrom": "Stuur vanaf {account}",
         "receivedTo": "Ontvangs na {account}",
         "sentFrom": "Stuur vanaf {account}",
+        "stakedFor": "Staked vir {account}",
+        "unstakedFor": "Unstaked vir {account}",
+        "votedFor": "Gestem vir {account}",
+        "unvotedFor": "Ongestem vir {account}",
         "receiving": "Ontvangs",
         "sending": "Besig om te stuur",
         "legacyNetwork": "Erfenisnetwerk",
         "capsLock": "Hoofletterslot is aan",
         "version": "Weergawe {version}",
-        "unknown": "Unknown",
-        "none": "None"
+        "unknown": "Onbekend",
+        "none": "Geen",
+        "days": "dag(e)",
+        "time": {
+            "days": "dae",
+            "day": "dag",
+            "hours": "ure",
+            "hour": "uur",
+            "minutes": "minute",
+            "minute": "minuut",
+            "seconds": "sekondes",
+            "second": "sekonde"
+        },
+        "staked": "Stake",
+        "unstaked": "Unstake",
+        "staking": "Staking",
+        "unstaking": "Unstaking",
+        "notStaked": "Nie staked",
+        "stakedFunds": "Staked fondse",
+        "unstakedFunds": "Unstaked fondse"
     },
     "dates": {
         "today": "Vandag",
@@ -943,12 +1046,12 @@
             "error": "Kan nie transaksiegeskiedenis vir {accountAlias} uitvoer nie"
         },
         "deepLinkingRequest": {
-            "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
-            "notEnabled": "IOTA links are not enabled",
-            "invalidFormat": "The IOTA link you followed is invalid",
+            "recievedWhileLoggedOut": "Login om die IOTA link te begin",
+            "notEnabled": "IOTA links is nie geaktiveer nie",
+            "invalidFormat": "Die IOTA link wat jy gevolg het, is ongeldig",
             "wallet": {
                 "send": {
-                    "success": "Payment details added from IOTA link"
+                    "success": "Betaalbesonderhede bygevoeg vanaf IOTA link"
                 }
             }
         }
@@ -958,7 +1061,7 @@
             "length": "Jou profielnaam mag nie langer as {length, plural, one {1 karakter} other {# karakters}}.",
             "duplicate": "Daar bestaan ​​reeds 'n profiel met hierdie naam.",
             "delete": {
-                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+                "nonEmptyAccounts": "Jy moet alle saldo's oordra voordat jy jou profiel kan uitvee."
             }
         },
         "password": {
@@ -1014,23 +1117,24 @@
         },
         "node": {
             "invalid": "Sleutel 'n geldige URL in.",
-            "dns": "Could not find DNS resolution for node.",
-            "timedOut": "The connection timed out.",
-            "refused": "The connection was refused.",
-            "handshake": "Could not complete handshake with node.",
-            "invalidCertificate": "Could not connect with invalid certificate.",
-            "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
+            "dns": "Kon nie DNS-resolusie vir die node vind nie.",
+            "timedOut": "Die konneksie tyd is verstreke.",
+            "refused": "Die konneksie was geweier.",
+            "handshake": "Kon nie handdruk met node voltooi nie.",
+            "invalidCertificate": "Kon nie met ongeldige sertifikaat die konneksie maak nie.",
+            "https": "HTTPS word vereis; onveilige konneksie oor HTTP is nie tans ondersteun nie.",
             "duplicate": "Hierdie Node is reeds gebruik.",
             "unsynced": "Die node is nie gesinkroniseer nie.",
             "noSynced": "Geen gesinkroniseerde node is beskikbaar nie.",
-            "answer": "Failed to get an answer from all nodes.",
-            "forbidden": "This node connection is forbidden."
+            "answer": "Kon nie 'n antwoord van alle nodes kry nie.",
+            "forbidden": "Hierdie nodusverbinding is verbode.",
+            "pluginNotAvailable": "Die \"{nodePlugin}\" plugin is nie op die huidige node beskikbaar nie."
         },
         "network": {
-            "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
-            "notReachable": "The network ID for this node could not be retrieved, unable to add node.",
-            "badNodes": "Unable to connect to the network with current node configuration.",
-            "nonEmptyAccount": "You must transfer all balances before switching networks."
+            "mismatch": "Die netwerk-ID vir hierdie node is \"{networkId}\", wat nie ooreenstem met die huidige netwerk nie.",
+            "notReachable": "Die netwerk-ID vir hierdie node kon nie herwin word nie, dus kan nie node byvoeg nie.",
+            "badNodes": "Kan nie aan die netwerk koppel met huidige node opstelling nie.",
+            "nonEmptyAccount": "Jy moet alle saldo's oordra voordat jy die netwerk kan verander."
         },
         "global": {
             "generic": "Iets het skeefgeloop."
@@ -1056,7 +1160,8 @@
             "otherConnected": "Die verkeerde app is oop op Ledger toestel.",
             "generateAddress": "Kon nie 'n adres genereer nie.",
             "timeout": "Jou Ledger toestel timed out.",
-            "disconnected": "Jou Ledger toestel is ontkoppel."
+            "disconnected": "Jou Ledger toestel is ontkoppel.",
+            "noStronghold": "Kan nie Stronghold met Ledger profiel gebruik nie."
         },
         "popup": {
             "preventClose": "Hierdie popup kan nie togemaak word nie."
@@ -1065,12 +1170,21 @@
             "missingBundle": "'N Fout het voorgekom tydens die poging om die transaksiebundel te vind."
         },
         "crypto": {
-            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
+            "cannotDecodeBech32": "Kan nie string as Bech32-adres dekodeer nie."
+        },
+        "participation": {
+            "cannotUseAccount": "Kan nie die gespesifiseerde rekening gebruik nie.",
+            "cannotFindStakingEvent": "Kan nie staking event vind nie.",
+            "cannotVisitAirdropWebsite": "Kan nie die {airdrop} webwerf oopmaak nie.",
+            "invalidStakingEventId": "Ongeldige staking event ID."
         }
     },
     "warning": {
         "node": {
-            "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
+            "http": "Die gebruik van node oor HTTP laat verkeer ongeënkripteer wees en kan 'n sekuriteitsrisiko inhou."
+        },
+        "participation": {
+            "noAccounts": "Jy het geen rekeninge beskikbaar om deel te neem nie."
         }
     },
     "tooltips": {
@@ -1081,6 +1195,58 @@
             "medium": "Gemiddeld",
             "low": "Laag",
             "veryLow": "Baie laag"
+        },
+        "stakingIndicator": {
+            "upcoming": {
+                "title": "Staking het nog nie begin nie",
+                "body": "Kom kyk later weer. Die staking geleentheid het nie begin nie."
+            },
+            "commencing": {
+                "title": "Pre-staking is nou oop",
+                "body": "Pre-stake tokens vooraf in, en sodra die staking begin, sal jy outomaties elke 10 sekondes belonings begin ontvang."
+            },
+            "activeHolding": {
+                "title": "Staking aan die gang",
+                "body": "Goeie werk. Jy sal elke 10 sekondes belonings ontvang."
+            },
+            "inactiveHolding": {
+                "title": "Staking het geëindig",
+                "body": "Stake jou IOTA-tokens om elke 10 sekondes belonings te ontvang."
+            },
+            "inactive": {
+                "title": "Geen staking gebeurtenisse bespeur nie",
+                "body": "Maak netwerkkonfigurasie in Gevorderde instellings oop en maak seker dat die huidige node die \"Participation\"-funksie het deur op \"Bekyk inligting\" te klik."
+            },
+            "ended": {
+                "title": "Staking het geëindig",
+                "body": "Assembly en Shimmer belonings sal aan jou beursies uitgedeel word wanneer elk van die onderskeie netwerke begin."
+            }
+        },
+        "partiallyStakedFunds": {
+            "title": "Nuwe unstaked fondse:{amount}",
+            "titleNoFunds": "Nuwe unstaked fondse",
+            "preBody": "Jy het tokens op 'n staked beursie ontvang.",
+            "body": "Jy moet hierdie nuwe fondse met weer Stake om airdrop belonings daarvoor te ontvang."
+        },
+        "stakingMinRewards": {
+            "title": "Onder minimum beloningswaarde",
+            "titleMinBalance": "{amount} minimum balans benodig",
+            "bodyMinBalace": "Hierdie beursie het nie genoeg IOTA-tokens om die minimum airdrop beloning te bereik nie en kan dus nie ge stake word nie.",
+            "continue": "Gaan asseblief voort om vir 'n nog {duration} te stake.",
+            "bodyBelowMin": "Hierdie beursie het nie die minimum beloningswaarde bereik vir {airdrop} nie. ({airdropRewardMin}).",
+            "bodyWillReachMin": "Jy moet nog vir {duration} stake om die minimum te bereik.",
+            "bodyWillNotReachMin": "Jy sal nie die minimum bereik gedurende die oorblywende staking periode nie, tensy jy meer IOTA insit.",
+            "bodyDidNotReachMin": "Jy het nie genoeg IOTA ingesit om die minimum belonings te bereik nie {airdrop} ({airdropRewardMin})."
+        }
+    },
+    "exports": {
+        "transactionHistoryCsv": {
+            "messageId": "Message ID",
+            "internal": "Interne",
+            "rawValue": "Rou waarde",
+            "formattedValue": "Geformateerde waarde",
+            "date": "Datum",
+            "time": "Tyd"
         }
     }
 }

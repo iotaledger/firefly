@@ -30,7 +30,7 @@
         "setup": {
             "title": "Configura un wallet",
             "chrysalisTitle": "Chrysalis Network Update",
-            "chrysalisBody": "Dal 21 aprile, gli utenti possono migrare i loro token alla nuova rete Chrysalis. Si consiglia di migrare i tuoi token esistenti il prima possibile.",
+            "chrysalisBody": "Dal 21 aprile 2021, gli utenti possono migrare i loro token alla nuova rete Chrysalis. Si consiglia di migrare i token esistenti il prima possibile.",
             "learnMore": "Approfondimenti sulla migrazione"
         },
         "secure": {
@@ -415,10 +415,6 @@
                 "title": "Migra l'indice del Ledger",
                 "description": "Migra un altro indice dell'account Trinity"
             },
-            "transactionHistory": {
-                "title": "Cronologia delle operazioni",
-                "description": "Esporta la cronologia delle transazioni dei tuoi conti come file .csv"
-            },
             "troubleshoot": {
                 "title": "Risoluzione dei Problemi",
                 "description": "Usa la procedura guidata per risolvere i problemi comuni"
@@ -489,6 +485,48 @@
             "profileModal": {
                 "allSettings": "Tutte le impostazioni",
                 "logout": "Esci"
+            }
+        },
+        "staking": {
+            "title": "Staking",
+            "welcome": "Benvenuto nella dashboard per lo staking",
+            "status": {
+                "upcoming": "Evento non iniziato",
+                "commencing": "Pre-staking iniziato",
+                "holdingActive": "Staking in corso",
+                "holdingInactive": "Staking avviato",
+                "inactive": "Staking non attivo",
+                "ended": "Staking terminato"
+            },
+            "summary": {
+                "stakedFunds": "Fondi in staking"
+            },
+            "info": {
+                "upcomingSubheader": "Evento non iniziato",
+                "upcomingHeader": "Controlla più tardi",
+                "commencingSubheader": "Preparati per lo staking",
+                "commencingHeader": "Metti in pre-stake i tuoi token!",
+                "holdingSubheaderHolding": "Avviato guadagno ricompense di staking",
+                "holdingSubheaderNotHolding": "Guadagna ricompense con lo staking di IOTA",
+                "holdingHeaderHolding": "{duration} rimanenti",
+                "holdingHeaderNotHolding": "Metti in stake i tuoi token!",
+                "endedSubheader": "Lo staking è terminato",
+                "endedHeader": "Grazie!",
+                "inactiveHeader": "Prova a cambiare nodo",
+                "inactiveSubheader": "Staking non rilevato"
+            },
+            "airdrops": {
+                "holding": "Restanti",
+                "commencing": "Fino all'inizio dello staking",
+                "collectedRewards": "Ricompense raccolte",
+                "assembly": {
+                    "name": "Assembly",
+                    "description": "Assemblaggio è una rete permissionless, multi-chain altamente scalabile per costruire e distribuire smart contract componibili. Assembly è il futuro del web3. "
+                },
+                "shimmer": {
+                    "name": "Shimmer",
+                    "description": "La rete di staging incentivata per promuovere importanti innovazioni su IOTA. Che sarà, sarà. L'evoluzione di Shimmer è nelle vostre mani."
+                }
             }
         }
     },
@@ -600,7 +638,8 @@
         },
         "transaction": {
             "title": "Conferma la transazione",
-            "body": "Stai per inviare {amount} a"
+            "body": "Stai per inviare {amount} a",
+            "sendingFromStakedAccount": "Stai inviando un trasferimento da un wallet che si trova attualmente in staking. Questo potrebbe annullare lo staking dei token. L'invio della transazione è possible, ma è necessario rimettere in stake i token rimanenti."
         },
         "balanceFinder": {
             "title": "Rivaluta il saldo",
@@ -674,10 +713,41 @@
         },
         "exportTransactionHistory": {
             "title": "Esporta lo storico delle transazioni",
-            "body": "Esporta la cronologia delle transazioni per tutti gli account consecutivamente all'interno di questo profilo. Le esportazioni saranno in formato CSV.",
+            "body": "Esporta la cronologia delle transazioni per il wallet selezionato. Il file esportato sarà in formato .csv.",
             "profileName": "Nome profilo:",
-            "numberOfAccounts": "Numero di conti:",
+            "accountName": "Nome account:",
             "typePassword": "Digita la tua password per consentire l'esportazione"
+        },
+        "stakingNotice": {
+            "upcomingDate": "Lo staking non è ancora iniziato",
+            "commencingDate": "Lo staking non è ancora iniziato",
+            "body": "Mettendo in pre-staking i token prima dell'inizio del periodo di staking, riceverai automaticamente ricompense all'avvio del periodo di staking.",
+            "ok": "Ok, ho capito"
+        },
+        "stakingManager": {
+            "title": "Gestione Staking",
+            "description": "Mettendo un wallet in staking, si invia una transazione allo stesso wallet che contrassegna quei fondi come \"staked\". È possibile trasferire i token in qualsiasi momento, ma non si riceverranno ulteriori ricompense.",
+            "totalFundsStaked": "Totale fondi in staking",
+            "stakedSuccessfully": "I fondi sono stati messi in stake per {account}.",
+            "unstakedSuccessfully": "I fondi sono stati tolti dallo stake per {account}."
+        },
+        "stakingConfirmation": {
+            "title": "Partecipazione Airdrop",
+            "subtitleStake": "Stai per mettere in stake",
+            "subtitleMerge": "Stai per unire",
+            "bodyStake": "Se non si desidera partecipare a entrambe le airdrop, è possibile fare opt-out qui sotto. È possibile annullare e riavviare per optare di nuovo in qualsiasi momento.",
+            "bodyMerge": "I tuoi fondi saranno messi in stake per {airdrop}. Per modificare gli airdtop ai quali si vuole partecipare, togliere dallo stake questo wallet e rimettere in stake.",
+            "estimatedAirdrop": "Ricompense stimate"
+        },
+        "shimmer-info": {
+            "title": "Informazioni su Shimmer",
+            "body1": "Congratulazioni hai ottenuto token SMR come ricompensa per lo staking. Shimmer è una rete di staging incentivata per testare gli aggiornamenti su IOTA.",
+            "body2": "Miriamo a lanciare Shimmer nel 2022. I token saranno disponibili per il trasferimento una volta avviata la rete."
+        },
+        "assembly-info": {
+            "title": "Informazioni Assembly",
+            "body1": "Congratulazioni hai ottenuto token ASMB come ricompensa per lo staking. Assembly è una rete multi-catena per smart contract scalabili su IOTA.",
+            "body2": "Miriamo a lanciare Assembly nel 2022. I token saranno disponibili per il trasferimento una volta avviata la rete."
         }
     },
     "charts": {
@@ -791,6 +861,15 @@
         "closeFirefly": "Chiudi Firefly",
         "generateAddress": "Genera un indirizzo",
         "migrateAgain": "Migra un altro indice",
+        "visitWebsite": "Visita il sito",
+        "howItWorks": "Come funziona",
+        "learnAboutStaking": "Scopri di più sullo staking",
+        "stake": "Stake",
+        "unstake": "Togli dallo stake",
+        "stakeFunds": "Metti fondi in stake",
+        "manageStake": "Gestisci stake",
+        "merge": "Unisci",
+        "mergeFunds": "Unisci fondi",
         "done": "Completato"
     },
     "general": {
@@ -880,6 +959,8 @@
         "transferBroadcasting": "Trasmissione della transazione",
         "transferComplete": "Trasferimento completato",
         "generatingReceiveAddress": "Generazione indirizzo di ricezione",
+        "broadcasting": "Trasmissione",
+        "confirming": "Conferma",
         "creatingAccount": "Creazione del wallet, attendere prego...",
         "updatingAccount": "Wallet in aggiornamento, attendere prego...",
         "accountSyncing": "Sincronizzazione wallet",
@@ -907,13 +988,35 @@
         "sendingFrom": "Invio da {account}",
         "receivedTo": "Ricevuto in {account}",
         "sentFrom": "Inviato da {account}",
+        "stakedFor": "In stake per {account}",
+        "unstakedFor": "Tolto dallo stake per {account}",
+        "votedFor": "Votato per {account}",
+        "unvotedFor": "Tolto dal voto per {account}",
         "receiving": "Ricezione",
         "sending": "Invio",
         "legacyNetwork": "Rete Legacy",
         "capsLock": "Blocco maiuscole è attivo",
         "version": "Versione {version}",
         "unknown": "Sconosciuto",
-        "none": "Nessuno"
+        "none": "Nessuno",
+        "days": "giorno(i)",
+        "time": {
+            "days": "giorni",
+            "day": "giorno",
+            "hours": "ore",
+            "hour": "ora",
+            "minutes": "minuti",
+            "minute": "minuto",
+            "seconds": "secondi",
+            "second": "secondo"
+        },
+        "staked": "In staking",
+        "unstaked": "Tolto dallo staking",
+        "staking": "Staking",
+        "unstaking": "Togliere dallo staking",
+        "notStaked": "Non in stake",
+        "stakedFunds": "Fondi in staking",
+        "unstakedFunds": "Fondi non in staking"
     },
     "dates": {
         "today": "Oggi",
@@ -958,7 +1061,7 @@
             "length": "Il nome del tuo profilo non può essere più lungo di {length, plural, one {1 carattere} other {# caratteri}}.",
             "duplicate": "Esiste già un profilo con questo nome.",
             "delete": {
-                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+                "nonEmptyAccounts": "Devi trasferire tutti i saldi prima di poter eliminare il tuo profilo."
             }
         },
         "password": {
@@ -1024,7 +1127,8 @@
             "unsynced": "Il nodo non è sincronizzato.",
             "noSynced": "Nessun nodo sincronizzato disponibile.",
             "answer": "Impossibile ottenere una risposta da tutti i nodi.",
-            "forbidden": "Questa connessione del nodo è vietata."
+            "forbidden": "Questa connessione del nodo è vietata.",
+            "pluginNotAvailable": "Il plugin \"{nodePlugin}\" non è disponibile sul nodo corrente."
         },
         "network": {
             "mismatch": "L'ID di rete per questo nodo è \"{networkId}\", e non corrisponde alla rete corrente.",
@@ -1056,7 +1160,8 @@
             "otherConnected": "Sul tuo dispositivo Ledger è aperta l'app IOTA sbagliata.",
             "generateAddress": "Si è verificato un errore nel generare un indirizzo.",
             "timeout": "Il tuo dispositivo Ledger è scaduto.",
-            "disconnected": "Il dispositivo è stato disconnesso."
+            "disconnected": "Il dispositivo è stato disconnesso.",
+            "noStronghold": "Impossibile usare Stronghold con un profilo Ledger."
         },
         "popup": {
             "preventClose": "Questo popup non può essere chiuso."
@@ -1066,11 +1171,20 @@
         },
         "crypto": {
             "cannotDecodeBech32": "Impossibile decodificare la stringa come indirizzo Bech32."
+        },
+        "participation": {
+            "cannotUseAccount": "Impossibile utilizzare l'account specificato.",
+            "cannotFindStakingEvent": "Impossibile trovare l'evento di staking.",
+            "cannotVisitAirdropWebsite": "Impossibile aprire il sito web {airdrop}.",
+            "invalidStakingEventId": "ID evento staking non valido."
         }
     },
     "warning": {
         "node": {
             "http": "Utilizzando nodi in HTTP lascia il traffico non crittografato e potrebbe rappresentare un rischio per la sicurezza."
+        },
+        "participation": {
+            "noAccounts": "Non è disponibile alcun account per partecipare."
         }
     },
     "tooltips": {
@@ -1081,6 +1195,58 @@
             "medium": "Medio",
             "low": "Basso",
             "veryLow": "Molto basso"
+        },
+        "stakingIndicator": {
+            "upcoming": {
+                "title": "Lo staking non è ancora iniziato",
+                "body": "Controlla più tardi. L'evento di staking non è iniziato."
+            },
+            "commencing": {
+                "title": "Il pre-staking è ora aperto",
+                "body": "Mettere in pre-stake tuoi token e una volta iniziato lo staking si inizierà automaticamente a ricevere ricompense ogni 10 secondi."
+            },
+            "activeHolding": {
+                "title": "Staking in corso",
+                "body": "Ottimo lavoro. Si riceveranno ricompense ogni 10 secondi."
+            },
+            "inactiveHolding": {
+                "title": "Lo staking è ora aperto",
+                "body": "Mettere in stake i token IOTA per ricevere ricompense ogni 10 secondi."
+            },
+            "inactive": {
+                "title": "Nessun evento di staking rilevato",
+                "body": "Aprire la configurazione di rete in Impostazioni Avanzate e assicurarsi che il nodo corrente abbia la funzione \"Partecipazione\" facendo clic su \"Visualizza informazioni\"."
+            },
+            "ended": {
+                "title": "Lo staking è terminato",
+                "body": "Le ricompense Assembly e Shimmer saranno distribuite ai wallet quando le rispettive reti saranno avviate."
+            }
+        },
+        "partiallyStakedFunds": {
+            "title": "Nuovi fondi non in stake: {amount}",
+            "titleNoFunds": "Nuovi fondi non in stake",
+            "preBody": "Sono stati ricevuti token su un wallet in stake.",
+            "body": "È necessario mettere manualmente in stake i nuovi fondi ricevuti per ricevere ricompense da airdrop."
+        },
+        "stakingMinRewards": {
+            "title": "Sotto il valore minimo per ottenera la ricompensa",
+            "titleMinBalance": "{amount} saldo minimo richiesto",
+            "bodyMinBalace": "Questo wallet non ha abbastanza token IOTA per raggiungere la ricompensa minima di airdrop e non può quindi essere messo in stake.",
+            "continue": "Si prega di continuare a effettuare lo staking per ulteriore {duration}.",
+            "bodyBelowMin": "Questo wallet non ha raggiunto il valore minimo della ricompensa per {airdrop} ({airdropRewardMin}).",
+            "bodyWillReachMin": "È necessario mettere in stake per altro {duration} per raggiungere il minimo.",
+            "bodyWillNotReachMin": "Non raggiungerà il minimo durante il periodo rimanente di stake a meno che si mettano in stake più IOTA.",
+            "bodyDidNotReachMin": "Non sono stati messi in stake abbastanza IOTA per raggiungere le ricompense minime per {airdrop} ({airdropRewardMin})."
+        }
+    },
+    "exports": {
+        "transactionHistoryCsv": {
+            "messageId": "ID messaggio",
+            "internal": "Interno",
+            "rawValue": "Valore grezzo",
+            "formattedValue": "Valore formattato",
+            "date": "Data",
+            "time": "Ora"
         }
     }
 }
