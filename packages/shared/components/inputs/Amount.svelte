@@ -113,7 +113,7 @@
         // IOTA -> FIAT
         if (isFiatCurrency(toUnit)) {
             let _amount = parseFloat(convertAmountToFiat(amount).slice(2)) ?? 0
-            amount = isNaN(_amount)  ? '0' : _amount.toString() 
+            amount = isNaN(_amount)  ? '0' : _amount.toString()
         } else {
             let rawAmount
 
