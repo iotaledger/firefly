@@ -4,7 +4,13 @@ import type { WalletAccount } from '../typings/wallet'
 
 import { getParticipationOverview } from './api'
 import { PARTICIPATION_POLL_DURATION } from './constants'
-import { accountToParticipate, participationAction, participationEvents, participationOverview } from './stores'
+import {
+    accountToParticipate,
+    participationAction,
+    participationEvents,
+    participationOverview,
+    pendingParticipations,
+} from './stores'
 import { ParticipationEventState, Participation } from './types'
 
 let participationPollInterval
@@ -51,6 +57,7 @@ export const resetParticipation = (): void => {
     participationAction.set(null)
     participationEvents.set([])
     participationOverview.set([])
+    pendingParticipations.set([])
 }
 
 /**

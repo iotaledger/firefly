@@ -510,13 +510,6 @@
                 "stakeFunds": "Stake Funds"
             },
             "info": {
-                "title": "Staking in Firefly",
-                "description": "Claim SHM and ASM tokens ahead of the network launch in 2022. Staking temporarily locks your IOTAs, but you have complete ownership and control at all times.",
-                "bullets": [
-                    "Unstake to send or add to your staked funds.",
-                    "You can stake or unstake without limits.",
-                    "Rewards are continually airdropped to you."
-                ],
                 "upcomingSubheader": "Airdrop events commences",
                 "upcomingHeader": "December 1st",
                 "commencingSubheader": "Airdrop events commencing",
@@ -1222,11 +1215,11 @@
             },
             "activeHolding": {
                 "title": "Your funds are staked!",
-                "body": "You will receive airdrops for your staked funds every milestone (approx. 10 seconds)."
+                "body": "You will receive airdrops for your staked funds every milestone (approx. every 10 seconds)."
             },
             "inactiveHolding": {
                 "title": "No funds are staked",
-                "body": "Stake your funds to receive airdrops every milestone (approx. 10 seconds)."
+                "body": "Stake your funds to receive airdrops every milestone (approx. every 10 seconds)."
             },
             "inactive": {
                 "title": "Events are inactive",
@@ -1234,7 +1227,7 @@
             },
             "ended": {
                 "title": "Events have ended",
-                "body": "Assembly and Shimmer tokens will be distributed to the staked wallets when their respective networks launch."
+                "body": "Assembly and Shimmer tokens will be distributed to their staked wallets when their respective networks launch."
             }
         },
         "partiallyStakedFunds": {

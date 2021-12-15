@@ -6,7 +6,6 @@
     import { StakingAirdrop as _StakingAirdrop } from 'shared/lib/participation/types'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
-    import { MILLISECONDS_PER_SECOND } from 'shared/lib/time'
     import {
         GeneratingRemainderDepositAddressEvent,
         PreparedTransactionEvent,
@@ -84,7 +83,7 @@
                         type: 'stakingManager',
                         props: {
                             accountToAction: $accountToParticipate,
-                            participationAction: $participationAction
+                            participationAction: $participationAction,
                         },
                     },
                     true
@@ -127,7 +126,7 @@
         await getParticipationOverview()
 
         if ($isStakingFeatureNew) {
-            setTimeout(handleNewStakingFeature, MILLISECONDS_PER_SECOND)
+            handleNewStakingFeature()
         }
     })
 

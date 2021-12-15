@@ -17,7 +17,6 @@
     import {
         accountToParticipate,
         isPerformingParticipation,
-        participatedAccountsMapPerSession,
         participationAction,
         participationOverview,
         pendingParticipations,
@@ -26,7 +25,7 @@
         stakingEventState,
     } from 'shared/lib/participation/stores'
     import { Participation, ParticipationAction } from 'shared/lib/participation/types'
-    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
+    import { openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { checkStronghold } from 'shared/lib/stronghold'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
@@ -105,13 +104,10 @@
         if (!$accountToParticipate || !$participationAction) return
 
         isPerformingParticipation.set(true)
-        $participatedAccountsMapPerSession.set($accountToParticipate?.id, false)
 
         const _sync = (messageIds: string[]) => {
             messageIds.forEach((id) => pendingParticipationIds.push(id))
             previousPendingParticipationsLength = messageIds.length
-
-            $participatedAccountsMapPerSession.set($accountToParticipate?.id, true)
         }
 
         const hasParticipationPlugin = $networkStatus.nodePlugins.includes(NodePlugin.Participation)
@@ -293,7 +289,9 @@
                         class="space-x-4 mx-1 mb-1 px-4 py-3 flex flex-row justify-between items-center rounded-lg bg-yellow-50">
                         <Icon icon="exclamation" width="24" height="24" classes="fill-current text-yellow-600" />
                         <div class="flex flex-col w-3/4">
-                            <Text type="p" classes="text-gray-800 font-extrabold" overrideColor>{locale('general.unstakedFunds')}</Text>
+                            <Text type="p" classes="text-gray-800 font-extrabold" overrideColor>
+                                {locale('general.unstakedFunds')}
+                            </Text>
                             <Text type="p" secondary classes="font-extrabold">
                                 {formatUnitBestMatch(getUnstakedFunds(account))}
                                 •

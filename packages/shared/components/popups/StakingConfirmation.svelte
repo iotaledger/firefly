@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Checkbox, Icon, Illustration, Text } from 'shared/components'
+    import { Button, Checkbox, Icon, Text } from 'shared/components'
     import { Locale } from 'shared/lib/typings/i18n'
     import { ledgerDeviceState } from 'shared/lib/ledger'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
@@ -19,10 +19,9 @@
         isAccountPartiallyStaked,
     } from 'shared/lib/participation'
     import {
-        accountToParticipate, partiallyStakedAccounts,
+        accountToParticipate,
         participationAction,
         participationOverview,
-        stakingEventState,
     } from 'shared/lib/participation/stores'
     import { Participation, ParticipationAction, StakingAirdrop } from 'shared/lib/participation/types'
 
