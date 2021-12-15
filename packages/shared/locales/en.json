@@ -745,7 +745,8 @@
         },
         "stakingConfirmation": {
             "title": "Select airdrops",
-            "subtitle": "You're about to stake",
+            "subtitleStake": "You're about to stake",
+            "subtitleMerge": "You're about to merge",
             "body": "If you do not wish to participate in both airdrops, you may opt-out by deselecting below. Re-stake at any time to opt back in.",
             "estimatedAirdrop": "Estimated airdrop"
         },
@@ -878,6 +879,8 @@
         "unstake": "Unstake",
         "stakeFunds": "Stake funds",
         "manageStake": "Manage stake",
+        "merge": "Merge",
+        "mergeFunds": "Merge funds",
         "done": "Done"
     },
     "general": {

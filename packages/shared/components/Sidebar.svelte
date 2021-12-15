@@ -7,7 +7,7 @@
     import { NETWORK_HEALTH_COLORS, networkStatus } from 'shared/lib/networkStatus'
     import { isStakingFeatureNew } from 'shared/lib/participation/stores'
     import { activeProfile } from 'shared/lib/profile'
-    import { dashboardRoute, settingsRoute, resetWalletRoute } from 'shared/lib/router'
+    import { dashboardRoute, settingsRoute, resetWalletRoute, previousDashboardRoute } from 'shared/lib/router'
     import { SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
 
     export let locale: Locale
@@ -30,6 +30,7 @@
     })
 
     function openSettings() {
+        previousDashboardRoute.set(get(dashboardRoute))
         dashboardRoute.set(Tabs.Settings)
         settingsRoute.set(SettingsRoutes.Init)
     }

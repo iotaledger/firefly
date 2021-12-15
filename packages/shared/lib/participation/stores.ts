@@ -333,9 +333,3 @@ export const hasPendingParticipation = (id: string): boolean =>
  */
 export const getPendingParticipation = (id: string): PendingParticipation | undefined =>
     get(pendingParticipations).find((participation) => participation.messageId === id)
-
-/**
- * The accounts that have participation of some kind in this session. This is useful for some
- * UI components around partial staking.
- */
-export const participatedAccountsMapPerSession = writable<Map<string, boolean>>(new Map())
