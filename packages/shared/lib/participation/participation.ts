@@ -94,11 +94,7 @@ export const canParticipate = (eventState: ParticipationEventState): boolean => 
 export const canAccountParticipate = (account: WalletAccount): AccountParticipationAbility => {
     if (account?.rawIotaBalance < DUST_THRESHOLD) {
         return AccountParticipationAbility.NoHasDustAmount
-    } else if (
-        account?.messages.some((message) => {
-            return !message.confirmed
-        })
-    ) {
+    } else if (account?.messages.some((message) => !message.confirmed)) {
         return AccountParticipationAbility.NoHasPendingTransaction
     } else {
         return AccountParticipationAbility.Yes
