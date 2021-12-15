@@ -21,13 +21,11 @@ export async function pollParticipationOverview(): Promise<void> {
         await getParticipationOverview()
         /* eslint-disable @typescript-eslint/no-misused-promises */
         participationPollInterval = setInterval(async () => getParticipationOverview(), PARTICIPATION_POLL_DURATION)
-
     } catch (error) {
         if (error && error?.error.includes('pluginNotFound')) {
             clearPollParticipationOverviewInterval()
         }
     }
-
 }
 
 /**
