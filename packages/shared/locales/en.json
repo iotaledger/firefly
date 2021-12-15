@@ -517,7 +517,7 @@
             },
             "airdrops": {
                 "holding": "Remaining",
-                "commencing": "Til staking begins",
+                "commencing": "Until staking begins",
                 "collectedRewards": "Collected rewards",
                 "assembly": {
                     "name": "Assembly",
