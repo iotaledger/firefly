@@ -56,6 +56,11 @@ export const participationAction = writable<ParticipationAction>(null)
 export const participationOverview = writable<ParticipationOverview>([])
 
 /**
+ * Whether the user is currently staking or unstaking
+ */
+export const isPerformingParticipation = writable<boolean>(false)
+
+/**
  * The store for accounts that are currently staked. This is NOT to hold accounts
  * that have been selected for staking / unstaking or have staked in the past.
  *

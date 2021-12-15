@@ -1,20 +1,9 @@
 <script lang="typescript">
-    import { onMount } from 'svelte'
-    import { get } from 'svelte/store'
     import { Button, Icon, Spinner, Text } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
-    import type { Locale } from 'shared/lib/typings/i18n'
-    import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
+    import { promptUserToConnectLedger } from 'shared/lib/ledger'
     import { hasNodePlugin, networkStatus } from 'shared/lib/networkStatus'
-    import { NodePlugin } from 'shared/lib/typings/node'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { openPopup, popupState } from 'shared/lib/popup'
-    import { activeProfile, isSoftwareProfile } from 'shared/lib/profile'
-    import { checkStronghold } from 'shared/lib/stronghold'
-    import { formatUnitBestMatch } from 'shared/lib/units'
-    import { transferState, wallet } from 'shared/lib/wallet'
-    import type { WalletAccount } from 'shared/lib/typings/wallet'
-
     import {
         canAccountParticipate,
         canParticipate,
@@ -27,6 +16,7 @@
     import { STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
     import {
         accountToParticipate,
+        isPerformingParticipation,
         participationAction,
         participationOverview,
         pendingParticipations,
@@ -35,10 +25,20 @@
         stakingEventState,
     } from 'shared/lib/participation/stores'
     import { Participation, ParticipationAction } from 'shared/lib/participation/types'
+    import { openPopup, popupState } from 'shared/lib/popup'
+    import { activeProfile, isSoftwareProfile } from 'shared/lib/profile'
+    import { checkStronghold } from 'shared/lib/stronghold'
+    import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
+    import type { Locale } from 'shared/lib/typings/i18n'
+    import { NodePlugin } from 'shared/lib/typings/node'
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
+    import { formatUnitBestMatch } from 'shared/lib/units'
+    import { transferState, wallet } from 'shared/lib/wallet'
+    import { onMount } from 'svelte'
+    import { get } from 'svelte/store'
 
     export let locale: Locale
 
-    export let isPerformingAction = false
     export let shouldParticipateOnMount = false
     export let participations: Participation[] = []
 
@@ -86,7 +86,7 @@
             transferState.set(null)
         }
 
-        isPerformingAction = false
+        isPerformingParticipation.set(false)
 
         accountToParticipate.set(undefined)
         participationAction.set(undefined)
@@ -103,7 +103,7 @@
         if (!canStake) return
         if (!$accountToParticipate || !$participationAction) return
 
-        isPerformingAction = true
+        isPerformingParticipation.set(true)
 
         const _sync = (messageIds: string[]) => {
             messageIds.forEach((id) => pendingParticipationIds.push(id))
@@ -146,19 +146,25 @@
     }
 
     const handleStakeClick = (account: WalletAccount): void => {
-        openPopup(
-            {
-                type: 'stakingConfirmation',
-                props: {
-                    accountToStake: account,
+        const openStakingConfirmationPopup = () =>
+            openPopup(
+                {
+                    type: 'stakingConfirmation',
+                    props: {
+                        accountToStake: account,
+                    },
                 },
-            },
-            true
-        )
+                true
+            )
+        if ($isSoftwareProfile) {
+            openStakingConfirmationPopup()
+        } else {
+            promptUserToConnectLedger(false, () => openStakingConfirmationPopup(), undefined, true)
+        }
     }
 
     const handleUnstakeClick = (account: WalletAccount): void => {
-        const _unstake = async () => {
+        const _unstake = () => {
             accountToParticipate.set(account)
             participationAction.set(ParticipationAction.Unstake)
 
@@ -170,14 +176,14 @@
                     },
                 })
             } else {
-                await handleParticipationAction()
+                void handleParticipationAction()
             }
         }
 
         if ($isSoftwareProfile) {
             checkStronghold(_unstake)
         } else {
-            void _unstake()
+            promptUserToConnectLedger(false, () => _unstake(), undefined, true)
         }
     }
 
@@ -270,11 +276,11 @@
                         {/if}
                     </div>
                     <Button
-                        disabled={isPerformingAction}
+                        disabled={$isPerformingParticipation}
                         secondary={isAccountStaked(account?.id)}
                         onClick={() => (isAccountStaked(account?.id) ? handleUnstakeClick(account) : handleStakeClick(account))}>
                         {#if $accountToParticipate?.id === account?.id && $accountToParticipate && $participationAction}
-                            <Spinner busy={isPerformingAction} classes="mx-2 justify-center" />
+                            <Spinner busy={$isPerformingParticipation} classes="mx-2 justify-center" />
                         {:else}{locale(`actions.${isAccountStaked(account?.id) ? 'unstake' : 'stake'}`)}{/if}
                     </Button>
                 </div>
@@ -283,7 +289,9 @@
                         class="space-x-4 mx-1 mb-1 px-4 py-3 flex flex-row justify-between items-center rounded-lg bg-yellow-50">
                         <Icon icon="exclamation" width="24" height="24" classes="fill-current text-yellow-600" />
                         <div class="flex flex-col w-3/4">
-                            <Text type="p" classes="text-gray-800 font-extrabold" overrideColor>{locale('general.unstakedFunds')}</Text>
+                            <Text type="p" classes="text-gray-800 font-extrabold" overrideColor>
+                                {locale('general.unstakedFunds')}
+                            </Text>
                             <Text type="p" secondary classes="font-extrabold">
                                 {formatUnitBestMatch(getUnstakedFunds(account))}
                                 •
@@ -292,7 +300,7 @@
                                 </Text>
                             </Text>
                         </div>
-                        <Button disabled={isPerformingAction} onClick={() => handleStakeClick(account)}>
+                        <Button disabled={$isPerformingParticipation} onClick={() => handleStakeClick(account)}>
                             {locale('actions.stake')}
                         </Button>
                     </div>
