@@ -381,7 +381,7 @@
                 "nodeConfiguration": {
                     "title": "Node selection",
                     "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
-                    "automatic": "Automatic",
+                    "automatic": "خود بخود",
                     "manual": "Manual"
                 }
             },
@@ -511,12 +511,12 @@
                 "holdingHeaderHolding": "{duration} left",
                 "holdingHeaderNotHolding": "Stake your tokens!",
                 "endedSubheader": "Staking has now ended",
-                "endedHeader": "Thank you!",
+                "endedHeader": "شکریہ!",
                 "inactiveHeader": "Try changing node",
                 "inactiveSubheader": "Staking not detected"
             },
             "airdrops": {
-                "holding": "Remaining",
+                "holding": "باقی",
                 "commencing": "Until staking begins",
                 "collectedRewards": "Collected rewards",
                 "assembly": {
@@ -997,18 +997,18 @@
         "legacyNetwork": "لیگیسی نیٹ ورک",
         "capsLock": "کیپس لاک آن ہے",
         "version": "ورژن {version}",
-        "unknown": "Unknown",
+        "unknown": "اجنبی",
         "none": "None",
         "days": "day(s)",
         "time": {
-            "days": "days",
-            "day": "day",
-            "hours": "hours",
-            "hour": "hour",
-            "minutes": "minutes",
-            "minute": "minute",
-            "seconds": "seconds",
-            "second": "second"
+            "days": "دنوں",
+            "day": "دن",
+            "hours": "گھنٹے",
+            "hour": "گھنٹہ",
+            "minutes": "منٹ",
+            "minute": "منٹ",
+            "seconds": "سیکنڑ",
+            "second": "سیکنڑ"
         },
         "staked": "Staked",
         "unstaked": "Unstaked",

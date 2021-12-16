@@ -9,13 +9,14 @@ import type { WalletAccount } from '../typings/wallet'
 
 import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID, STAKING_EVENT_IDS } from './constants'
 import {
+    AccountParticipationOverview,
+    ParticipateResponsePayload,
     ParticipationAction,
     ParticipationEvent,
     ParticipationEventState,
     ParticipationOverview,
     PendingParticipation,
-    ParticipateResponsePayload,
-    AccountParticipationOverview,
+    StakingAirdrop,
 } from './types'
 
 /**
@@ -91,16 +92,18 @@ export const stakedAccounts: Readable<WalletAccount[]> = derived(
  * because the same funds may be staked for both airdrops).
  */
 export const stakedAmount: Readable<number> = derived(participationOverview, (overview) => {
-    const assemblyStakedFunds = overview.reduce(
-        (total, accountOverview) => total + accountOverview?.assemblyStakedFunds,
-        0
-    )
-    const shimmerStakedFunds = overview.reduce(
-        (total, accountOverview) => total + accountOverview?.shimmerStakedFunds,
-        0
-    )
+    return overview.reduce((total, accountOverview) => {
+        const { shimmerStakedFunds, assemblyStakedFunds } = accountOverview
 
-    return Math.max(assemblyStakedFunds, shimmerStakedFunds)
+        if (shimmerStakedFunds > 0 && assemblyStakedFunds > 0) {
+            total += Math.max(shimmerStakedFunds, assemblyStakedFunds)
+        } else {
+            total += shimmerStakedFunds
+            total += assemblyStakedFunds
+        }
+
+        return total
+    }, 0)
 })
 
 /**
@@ -109,16 +112,13 @@ export const stakedAmount: Readable<number> = derived(participationOverview, (ov
  * because the same funds may be staked for both airdrops).
  */
 export const unstakedAmount: Readable<number> = derived(participationOverview, (overview) => {
-    const assemblyUnstakedFunds = overview.reduce(
-        (total, accountOverview) => total + accountOverview?.assemblyUnstakedFunds,
-        0
-    )
-    const shimmerUnstakedFunds = overview.reduce(
-        (total, accountOverview) => total + accountOverview?.shimmerUnstakedFunds,
-        0
-    )
+    return overview.reduce((total, accountOverview) => {
+        const { shimmerUnstakedFunds, assemblyUnstakedFunds } = accountOverview
 
-    return Math.min(assemblyUnstakedFunds, shimmerUnstakedFunds)
+        total += Math.min(shimmerUnstakedFunds, assemblyUnstakedFunds)
+
+        return total
+    }, 0)
 })
 
 /**
@@ -166,6 +166,34 @@ export const partiallyUnstakedAmount: Readable<number> = derived(
     }
 )
 
+const sumStakingRewards = (airdrop: StakingAirdrop, overview: ParticipationOverview): number => {
+    if (!overview || overview?.length < 1) return 0
+
+    const rewardsKey = `${airdrop}Rewards`
+    const rewardsBelowMinimumKey = `${airdrop}RewardsBelowMinimum`
+
+    const rewards = overview.reduce(
+        (total, accountOverview) => total + (rewardsKey in accountOverview ? accountOverview[rewardsKey] : 0),
+        0
+    )
+    const rewardsBelowMinimum = overview.reduce(
+        (total, accountOverview) =>
+            total + (rewardsBelowMinimumKey in accountOverview ? accountOverview[rewardsBelowMinimumKey] : 0),
+        0
+    )
+
+    if (rewards <= 0) {
+        return rewardsBelowMinimum
+    } else {
+        /**
+         * NOTE: We return the sum of rewards and rewardsBelowMinimum here because it is possible that an
+         * account has accumulated more than min rewards for an airdrop, but has unstaked and moved the funds
+         * to another address that has NOT reach the minimum.
+         */
+        return rewards + rewardsBelowMinimum
+    }
+}
+
 /**
  * The total accumulated Assembly rewards for all
  * accounts that have been staked at some point (even
@@ -173,24 +201,18 @@ export const partiallyUnstakedAmount: Readable<number> = derived(
  *
  * Be cautious that this value is in microASMB, so it is likely to be larger.
  */
-export const assemblyStakingRewards: Readable<number> = derived(participationOverview, (overview) => {
-    const rewards = overview.reduce((total, accountOverview) => total + accountOverview.assemblyRewards, 0)
-    if (rewards <= 0)
-        return overview.reduce((total, accountOverview) => total + accountOverview.assemblyRewardsBelowMinimum, 0)
-    else return rewards
-})
+export const assemblyStakingRewards: Readable<number> = derived(participationOverview, (overview) =>
+    sumStakingRewards(StakingAirdrop.Assembly, overview)
+)
 
 /**
  * The total accumulated Shimmer rewards for all
  * accounts that have been staked at some point (even
  * if they are currently unstaked).
  */
-export const shimmerStakingRewards: Readable<number> = derived(participationOverview, (overview) => {
-    const rewards = overview.reduce((total, accountOverview) => total + accountOverview.shimmerRewards, 0)
-    if (rewards <= 0)
-        return overview.reduce((total, accountOverview) => total + accountOverview.shimmerRewardsBelowMinimum, 0)
-    else return rewards
-})
+export const shimmerStakingRewards: Readable<number> = derived(participationOverview, (overview) =>
+    sumStakingRewards(StakingAirdrop.Shimmer, overview)
+)
 
 /**
  * The available participation events (staking AND voting).

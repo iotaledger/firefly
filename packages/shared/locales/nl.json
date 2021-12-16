@@ -87,7 +87,7 @@
         "backup": {
             "title": "Maak een back-up van je wallet",
             "body1": "U krijgt nu een herstelzin te zien. Schrijf het op in uw herstelkit.",
-            "body2": "Deel u herstelzin met niemand. Deze kan worden gebruikt om overal toegang te krijgen tot uw tokens.",
+            "body2": "Deel uw herstelzin met niemand. Deze kan worden gebruikt om overal toegang te krijgen tot uw tokens.",
             "body3": "Als u de herstelzin verliest, kun je ook de toegang tot uw tokens verliezen."
         },
         "recoveryPhrase": {
@@ -746,8 +746,8 @@
         },
         "assembly-info": {
             "title": "Over Assembly",
-            "body1": "Gefeliciteerd met de ontvangen ASMB tokens als beloning voor het inzetten van je saldo. Assembly is het multi-chain netwerk voor schaalbare smart contracts op IOTA.",
-            "body2": "We streven naar een start van Assembly in 2022. Je tokens komen beschikbaar zodra het netwerk is gelanceerd."
+            "body1": "Gefeliciteerd, u heeft ASMB tokens verdiend als stake beloning. Assembly is een multi-chain netwerk voor het inzetten van schaalbare smart contracts op IOTA.",
+            "body2": "We streven naar een launch van Assembly in 2022. Uw tokens zullen beschikbaar zijn zodra het netwerk gelanceerd is."
         }
     },
     "charts": {
@@ -786,7 +786,7 @@
         "enterYourPin": "Voer uw pincode in",
         "saveBackupFile": "Bewaar back-upbestand",
         "iveWrittenRecoveryPhrase": "Ik heb mijn herstelzin opgeschreven",
-        "verifyRecoveryPhrase": "Verifieer jouw herstelzin",
+        "verifyRecoveryPhrase": "Verifieer uw herstelzin",
         "revealRecoveryPhrase": "Toon herstelzin",
         "importSeedvault": "Importeer SeedVault",
         "checkAgain": "Controleer Opnieuw",
@@ -800,7 +800,7 @@
         "dragDrop": "Drag & drop",
         "importExtentions": ".kdbx of .stronghold bestand",
         "chooseFile": "Kies een bestand",
-        "dropHere": "Sleep je bestand hier naartoe",
+        "dropHere": "Sleep uw bestand hier naartoe",
         "syncAll": "Synchroniseer alles",
         "export": "Exporteer",
         "exporting": "Exporteren",
@@ -878,7 +878,7 @@
         "currentPassword": "Huidig wachtwoord",
         "newPassword": "Nieuw wachtwoord",
         "confirmNewPassword": "Bevestig het nieuwe wachtwoord",
-        "yourSeed": "Je Seed",
+        "yourSeed": "Uw Seed",
         "recoveryPhrase": "Herstelzin",
         "recentActivity": "Recente activiteit",
         "sent": "Verzonden",
@@ -1061,7 +1061,7 @@
             "length": "Uw profielnaam kan niet langer zijn dan {length, plural, one {1 teken} other {# tekens}}.",
             "duplicate": "Een account met deze naam bestaat al.",
             "delete": {
-                "nonEmptyAccounts": "Je moet eerst alle saldi overboeken voordat je je profiel kunt verwijderen."
+                "nonEmptyAccounts": "U moet eerst alle saldo's overdragen voordat u uw profiel kunt verwijderen."
             }
         },
         "password": {
@@ -1082,7 +1082,7 @@
             "length": "Uw wachtwoord kan niet langer zijn dan {length, plural, one {1 teken} other {# tekens}}."
         },
         "pincode": {
-            "length": "Je pincode moet {length, plural, one {1 cijfer} other {# cijfers}} lang zijn.",
+            "length": "Uw pincode moet {length, plural, one {1 cijfer} other {# cijfers}} lang zijn.",
             "match": "Pincodes komen niet overeen.",
             "incorrect": "Uw huidige pincode is onjuist."
         },
@@ -1095,13 +1095,13 @@
             "control": "Een profielnaam mag geen controleteken bevatten.",
             "startDot": "Een profielnaam kan niet beginnen met het '.' karakter.",
             "chars": "Een profielnaam mag de volgende tekens niet bevatten <>:\"/\\×?*",
-            "index": "Je rekeningindex moet een nummer zijn tussen 0 en 2,147.483.647.",
+            "index": "Uw rekeningindex moet een nummer zijn tussen 0 en 2,147.483.647.",
             "page": "Uw accountpagina moet een nummer zijn tussen 0 en 2,147.483.647.",
             "syncing": "Er is een fout opgetreden bij het synchroniseren van uw portemonnees."
         },
         "send": {
             "addressLength": "Adressen moeten {length, plural, one {1 teken} other {# tekens}} lang zijn.",
-            "amountTooHigh": "Dit is hoger dan je beschikbare saldo.",
+            "amountTooHigh": "Dit is hoger dan uw beschikbare saldo.",
             "amountNoFloat": "Als de eenheden `i` zijn, kunt u geen cijfers achter de comma gebruiken.",
             "amountInvalidFormat": "De opgegeven waarde lijkt een ongeldige waarde te zijn.",
             "amountZero": "De waarde moet groter zijn dan 0.",
@@ -1134,7 +1134,7 @@
             "mismatch": "De netwerk-ID voor deze node is \"{networkId}\", welke niet overeenkomt met het huidige netwerk.",
             "notReachable": "Het netwerk-ID voor deze node kon niet worden opgehaald, kan node niet toevoegen.",
             "badNodes": "Kan geen verbinding maken met het netwerk met de huidige node configuratie.",
-            "nonEmptyAccount": "Je moet alle saldi overdragen om van netwerk te wisselen."
+            "nonEmptyAccount": "U moet alle saldo's overdragen om van netwerk te wisselen."
         },
         "global": {
             "generic": "Er ging iets mis."
@@ -1153,12 +1153,12 @@
             "appNotOpen": "U moet de IOTA app op uw Ledger apparaat openen.",
             "generic": "Er is een fout opgetreden bij het verbinden met uw Ledger apparaat.",
             "legacyConnected": "De verkeerde app staat open op uw Ledger apparaat.",
-            "locked": "Ontgrendel je Ledger apparaat door de pincode in te voeren.",
+            "locked": "Ontgrendel uw Ledger apparaat door de pincode in te voeren.",
             "mnemonicMismatch": "U heeft het verkeerde Ledger apparaat verbonden of de mnemonic is veranderd.",
             "notDetected": "Geen Ledger apparaat gedetecteerd.",
             "notFound": "Ledger apparaat niet gevonden.",
             "otherConnected": "De verkeerde app staat open op uw Ledger apparaat.",
-            "generateAddress": "Er is iets misgegaan bij het genereren van je adres.",
+            "generateAddress": "Er is iets misgegaan bij het genereren van uw adres.",
             "timeout": "Uw Ledger apparaat heeft een time-out gekregen.",
             "disconnected": "Uw Ledger apparaat is losgekoppeld.",
             "noStronghold": "Kan Stronghold met Ledger profiel niet gebruiken."
@@ -1184,7 +1184,7 @@
             "http": "Het gebruik van nodes over HTTP laat verkeer onversleuteld en kan een veiligheidsrisico opleveren."
         },
         "participation": {
-            "noAccounts": "Je hebt geen accounts beschikbaar om deel te nemen."
+            "noAccounts": "U hebt geen accounts beschikbaar om deel te nemen."
         }
     },
     "tooltips": {
@@ -1203,15 +1203,15 @@
             },
             "commencing": {
                 "title": "Pre-staking is nu open",
-                "body": "Zet je saldo van te voren in. Wanneer de Inzetting begint, zal je automatisch elke 10 seconden de vergoeding ontvangen."
+                "body": "Pre-stake uw tokens, en zodra het staken begint, ontvangt u automatisch elke 10 seconden beloningen."
             },
             "activeHolding": {
                 "title": "Staking is actief",
-                "body": "Goed gedaan! Je zult elke 10 seconden vergoedingen ontvangen."
+                "body": "Goed gedaan! U zult elke 10 seconden beloningen ontvangen."
             },
             "inactiveHolding": {
                 "title": "Staking is nu open",
-                "body": "Zet je IOTA saldo in om elke 10 seconden vergoedingen te ontvangen."
+                "body": "Stake uw IOTA tokens om elke 10 seconden beloningen te ontvangen."
             },
             "inactive": {
                 "title": "Geen staking gebeurtenissen gedetecteerd",
@@ -1225,18 +1225,18 @@
         "partiallyStakedFunds": {
             "title": "Nieuw niet ingezet saldo: {amount}",
             "titleNoFunds": "Nieuw niet ingezet saldo",
-            "preBody": "Je hebt tokens ontvangen op een ingezette wallet.",
-            "body": "Je moet handmatig dit nieuwe saldo inzetten om airdrop vergoedingen te kunnen ontvangen."
+            "preBody": "U heeft tokens ontvangen op een gestakete wallet.",
+            "body": "U moet de nieuwe tokens opnieuw staken om er beloningen voor te ontvangen."
         },
         "stakingMinRewards": {
             "title": "Onder minimum beloning waarde",
             "titleMinBalance": "{amount} minimum saldo vereist",
-            "bodyMinBalace": "Deze wallet bevat niet genoeg IOTA saldo om de minimale airdrop beloning te bereiken. Je kunt het saldo daarom niet inzetten.",
+            "bodyMinBalace": "Deze wallet heeft niet genoeg IOTA tokens om de minimale airdrop beloning te bereiken en kan hierdoor niet worden gestaked.",
             "continue": "Ga door met inzetten voor nog {duration}.",
             "bodyBelowMin": "Deze wallet heeft de minimum vergoeding voor {airdrop} ({airdropRewardMin}) niet bereikt.",
-            "bodyWillReachMin": "Je moet inzetten voor nog {duration} om het minimum te bereiken.",
-            "bodyWillNotReachMin": "Je zult het minimum niet bereiken tijdens de resterende inzet periode tenzij je meer IOTA inzet.",
-            "bodyDidNotReachMin": "Je hebt niet genoeg IOTA ingezet om de minimum vergoeding te ontvangen voor {airdrop} ({airdropRewardMin})."
+            "bodyWillReachMin": "U moet staken voor nog {duration} om het minimum te bereiken.",
+            "bodyWillNotReachMin": "U zult het minimum niet bereiken tijdens de resterende staking periode tenzij u meer IOTA staked.",
+            "bodyDidNotReachMin": "U heeft niet genoeg IOTA gestaket om de minimum beloning te ontvangen voor {airdrop} ({airdropRewardMin})."
         }
     },
     "exports": {

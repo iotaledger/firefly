@@ -1,5 +1,4 @@
 <script lang="typescript">
-    import { get } from 'svelte/store'
     import { Button, Icon, Spinner, Text, Tooltip } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import { hasNodePlugin, networkStatus } from 'shared/lib/networkStatus'
@@ -30,7 +29,7 @@
     $: canParticipateInEvent = isStakingPossible($stakingEventState)
 
     let { accounts } = $wallet
-    $: canStakeAnAccount = $accounts.some((wa) => getAccountParticipationAbility(wa) === AccountParticipationAbility.Yes)
+    $: cannotStakeAnAccount = $accounts.every((wa) => getAccountParticipationAbility(wa) === AccountParticipationAbility.HasDustAmount)
 
     $: isStaked = $stakedAmount > 0 && canParticipateInEvent
 
@@ -52,7 +51,7 @@
     }
 
     const handleStakeFundsClick = (): void => {
-        if (!canStakeAnAccount) {
+        if (cannotStakeAnAccount) {
             showAppNotification({
                 type: 'warning',
                 message: localize('warning.participation.noAccounts'),

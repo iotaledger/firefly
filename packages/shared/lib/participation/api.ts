@@ -29,7 +29,6 @@ export function getParticipationOverview(): Promise<void> {
                 resolve()
             },
             onError(error) {
-                resetParticipation()
                 console.error(error)
 
                 reject(error)

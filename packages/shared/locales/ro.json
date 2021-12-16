@@ -728,16 +728,16 @@
             "title": "Managementul mizarii",
             "description": "Atunci când mizati cu un portofel, trimiteți o tranzacție pentru a vă marca aceste fonduri ca fiind „mizate\". Puteti transfera jetoanele în orice moment, dar nu veti continua să primiti recompense in urma mizarii.",
             "totalFundsStaked": "Total fonduri mizate",
-            "stakedSuccessfully": "Your funds have been staked for {account}.",
-            "unstakedSuccessfully": "Your funds have been unstaked for {account}."
+            "stakedSuccessfully": "Fondurile dumneavoastra au fost mizate din contul {account}.",
+            "unstakedSuccessfully": "Fondurile dumneavoastra au fost scoase din mizare din contul {account}."
         },
         "stakingConfirmation": {
-            "title": "Airdrop Participation",
-            "subtitleStake": "You are about to stake",
-            "subtitleMerge": "You are about to merge",
-            "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
-            "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
-            "estimatedAirdrop": "Estimated rewards"
+            "title": "Participare la Airdrop",
+            "subtitleStake": "Sunteți pe cale să mizati",
+            "subtitleMerge": "Sunteți pe cale să fuzionați",
+            "bodyStake": "Dacă nu doriţi să participaţi la ambele airdrop-uri, puteţi opta pentru excluderea voluntară de mai jos. Puteti renunţa şi să optati în orice moment.",
+            "bodyMerge": "Fondurile dumneavoastra vor fi alocate pentru {airdrop}. Pentru a schimba în ce airdrop-uri doriți să participați, opriti mizarea pe acest portofel și dati-i drumul din nou.",
+            "estimatedAirdrop": "Recompense estimate"
         },
         "shimmer-info": {
             "title": "About Shimmer",
@@ -1207,19 +1207,19 @@
             },
             "activeHolding": {
                 "title": "Mizare aflată în curs",
-                "body": "Good job. You will receive rewards every 10 seconds."
+                "body": "Bună treabă. Veti primi recompense la fiecare 10 secunde."
             },
             "inactiveHolding": {
                 "title": "Mizarea este acum deschisă",
-                "body": "Stake your IOTA tokens to receive rewards every 10 seconds."
+                "body": "Mizati jetoanele IOTA pentru a primi recompense la fiecare 10 secunde."
             },
             "inactive": {
                 "title": "Nici un eveniment de mizare detectat",
-                "body": "Open network configuration in Advanced Settings and make sure the current node has the \"Participation\" feature by clicking \"View Info\"."
+                "body": "Deschideti configurarea rețelei în Setări Avansate și asigurati-va că nodul curent are funcția \"Participare\" făcând clic pe \"Vezi informația\"."
             },
             "ended": {
                 "title": "Mizarea s-a încheiat acum",
-                "body": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch."
+                "body": "Recompensele Assembly și Shimmer vor fi distribuite portofelelor dumneavoastra atunci când fiecare rețea va fi lansată."
             }
         },
         "partiallyStakedFunds": {
@@ -1229,14 +1229,14 @@
             "body": "You need to manually stake these new funds to receive airdrop rewards for them."
         },
         "stakingMinRewards": {
-            "title": "Below minimum reward value",
-            "titleMinBalance": "{amount} minimum balance required",
-            "bodyMinBalace": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
+            "title": "Sub valoarea minimă a recompensei",
+            "titleMinBalance": "Soldul minim {amount} este necesar",
+            "bodyMinBalace": "Acest portofel nu are suficiente monede IOTA pentru a ajunge la recompensa minimă pentru airdrop și, prin urmare, nu poate fi mizat.",
             "continue": "Vă rugăm să continuați să mizati pentru inca {duration}.",
-            "bodyBelowMin": "This wallet has not reached the minimum reward value for {airdrop} ({airdropRewardMin}).",
-            "bodyWillReachMin": "You must stake for another {duration} to reach the minimum.",
+            "bodyBelowMin": "Acest portofel nu a atins valoarea minimă de recompensă pentru {airdrop} ({airdropRewardMin}).",
+            "bodyWillReachMin": "Trebuie să mizati pentru inca {duration} să ajungeti la minimum.",
             "bodyWillNotReachMin": "Nu veti atinge minimul în perioada de mizare rămasă decât dacă mizati mai multa IOTA.",
-            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum rewards for {airdrop} ({airdropRewardMin})."
+            "bodyDidNotReachMin": "Nu ati mizat cu suficienta IOTA pentru a ajunge la recompensele minime pentru {airdrop} ({airdropRewardMin})."
         }
     },
     "exports": {
