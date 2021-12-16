@@ -69,7 +69,7 @@
          * accounts on the wallet Svelte store.
          */
         const account = _getAccount($stakedAccounts)
-        if (account && getAccountParticipationAbility(account) !== AccountParticipationAbility.NoHasDustAmount) {
+        if (account && getAccountParticipationAbility(account) !== AccountParticipationAbility.HasDustAmount) {
             /**
              * NOTE: If the account has reached minimum airdrop already (on another address) and staking is NOT
              * possible then we won't display the tooltip.

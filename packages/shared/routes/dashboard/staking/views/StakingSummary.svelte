@@ -29,7 +29,7 @@
     $: canParticipateInEvent = isStakingPossible($stakingEventState)
 
     let { accounts } = $wallet
-    $: canStakeAnAccount = $accounts.some((wa) => getAccountParticipationAbility(wa) === AccountParticipationAbility.Yes)
+    $: cannotStakeAnAccount = $accounts.every((wa) => getAccountParticipationAbility(wa) === AccountParticipationAbility.HasDustAmount)
 
     $: isStaked = $stakedAmount > 0 && canParticipateInEvent
 
@@ -51,7 +51,7 @@
     }
 
     const handleStakeFundsClick = (): void => {
-        if (!canStakeAnAccount) {
+        if (cannotStakeAnAccount) {
             showAppNotification({
                 type: 'warning',
                 message: localize('warning.participation.noAccounts'),

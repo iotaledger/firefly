@@ -13,7 +13,7 @@ import {
     participationOverview,
     pendingParticipations,
 } from './stores'
-import { AccountParticipationAbility, Participation, ParticipationEventState } from './types'
+import { AccountParticipationAbility, Participation, ParticipationEventState, StakingAirdrop } from './types'
 
 let participationPollInterval
 
@@ -96,13 +96,13 @@ export const canParticipate = (eventState: ParticipationEventState): boolean => 
  */
 export const getAccountParticipationAbility = (account: WalletAccount): AccountParticipationAbility => {
     if (account?.rawIotaBalance < DUST_THRESHOLD) {
-        return AccountParticipationAbility.NoHasDustAmount
+        return AccountParticipationAbility.HasDustAmount
     } else if (account?.messages.some((message) => !message.confirmed)) {
-        return AccountParticipationAbility.NoHasPendingTransaction
-    } else if (!canAccountReachMinimumAirdrop(account)) {
-        return AccountParticipationAbility.NoWillNotReachMinAirdrop
+        return AccountParticipationAbility.HasPendingTransaction
+    } else if (!canAccountReachMinimumAirdrop(account, StakingAirdrop.Assembly)) {
+        return AccountParticipationAbility.WillNotReachMinAirdrop
     } else {
-        return AccountParticipationAbility.Yes
+        return AccountParticipationAbility.Ok
     }
 }
 
