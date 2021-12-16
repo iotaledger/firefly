@@ -30,7 +30,7 @@
         "setup": {
             "title": "Tárca létrehozása",
             "chrysalisTitle": "Chrysalis hálózati frissítés",
-            "chrysalisBody": "From April 21st 2021, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
+            "chrysalisBody": "2021. április 21-től a felhasználók migrálhatják tokenjeiket az új Chrysalis hálózatra. Javasoljuk, hogy amint lehet, migrálja meglévő tokenjeit!",
             "learnMore": "Tudjon meg többet a migrálásról"
         },
         "secure": {
@@ -489,43 +489,43 @@
         },
         "staking": {
             "title": "Staking",
-            "welcome": "Welcome to the staking dashboard",
+            "welcome": "Üdvözöljük a staking irányítópulton",
             "status": {
-                "upcoming": "Event not started",
-                "commencing": "Pre-staking open",
-                "holdingActive": "Staking in progress",
-                "holdingInactive": "Staking open",
-                "inactive": "Staking not detected",
-                "ended": "Staking ended"
+                "upcoming": "Az esemény még nem kezdődött el",
+                "commencing": "Előzetes staking megnyitva",
+                "holdingActive": "Staking folyamatban",
+                "holdingInactive": "Staking megnyitva",
+                "inactive": "Staking nem található",
+                "ended": "Staking vége"
             },
             "summary": {
-                "stakedFunds": "Staked funds"
+                "stakedFunds": "Staking-ben részt vevő összeg"
             },
             "info": {
-                "upcomingSubheader": "Event has not started",
-                "upcomingHeader": "Check back later",
-                "commencingSubheader": "Get ready for staking",
-                "commencingHeader": "Pre-stake your tokens!",
-                "holdingSubheaderHolding": "Now earning staking rewards",
-                "holdingSubheaderNotHolding": "Earn rewards by staking IOTA",
-                "holdingHeaderHolding": "{duration} left",
-                "holdingHeaderNotHolding": "Stake your tokens!",
-                "endedSubheader": "Staking has now ended",
+                "upcomingSubheader": "Az esemény még nem kezdődött el",
+                "upcomingHeader": "Kérjük jöjjön vissza később",
+                "commencingSubheader": "Készüljön fel a staking eseményre",
+                "commencingHeader": "Előzetesen stake-elje tokenjeit!",
+                "holdingSubheaderHolding": "Jelenleg staking jutalomban részesül",
+                "holdingSubheaderNotHolding": "IOTA tokenjei révén részesüljön staking jutalomban",
+                "holdingHeaderHolding": "{duration} maradt hátra",
+                "holdingHeaderNotHolding": "Stake-elje tokenjeit!",
+                "endedSubheader": "A staking véget ért",
                 "endedHeader": "Thank you!",
-                "inactiveHeader": "Try changing node",
-                "inactiveSubheader": "Staking not detected"
+                "inactiveHeader": "Próbáljon csomópontot váltani",
+                "inactiveSubheader": "Staking nem található"
             },
             "airdrops": {
-                "holding": "Remaining",
-                "commencing": "Until staking begins",
-                "collectedRewards": "Collected rewards",
+                "holding": "Fennmaradó idő",
+                "commencing": "Amíg a staking elkezdődik",
+                "collectedRewards": "Elnyert jutalmak",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
+                    "description": "Az Assembly egy jogosultságok nélkül használható nagymértékben skálázható többláncú hálózat, mely okos szerződések létrehozásához és életbe léptetésére használható. Az Assembly a web3 jövője."
                 },
                 "shimmer": {
                     "name": "Shimmer",
-                    "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
+                    "description": "A Shimmer az IOTA ösztönzőkkel ellátott teszt hálózata, ahova a jövőbeli nagy fejlesztések először kerülnek fel. A Shimmer további fejlődésének kulcsa a felhasználók kezében van."
                 }
             }
         }
@@ -639,7 +639,7 @@
         "transaction": {
             "title": "Küldés jóváhagyása",
             "body": "{amount} küldése",
-            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards."
+            "sendingFromStakedAccount": "Olyan tárcából kíván küldeni, amely jelenleg staking eseményen vesz részt. Ez azzal járhat, hogy a továbbiakban tokenjei nem vesznek részt a staking eseményen. A tranzakciót nyugodtan végrehajthatja, de a fennmaradó összeget valószínűleg újra stake-elnie kell majd."
         },
         "balanceFinder": {
             "title": "Egyenlegkereső",
@@ -713,41 +713,41 @@
         },
         "exportTransactionHistory": {
             "title": "Korábbi tranzakciók exportálása",
-            "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
+            "body": "Exportálja a kiválasztott tárcához tartozó korábbi tranzakciókat. Az exportált fájl formátuma .csv.",
             "profileName": "Profil neve:",
-            "accountName": "Számadásnév:",
+            "accountName": "Számla neve:",
             "typePassword": "Adja meg jelszavát az exportálás engedélyezéséhez"
         },
         "stakingNotice": {
-            "upcomingDate": "Staking has not started yet",
-            "commencingDate": "Staking has not started yet",
-            "body": "By pre-staking your funds before staking starts, you will automatically begin receiving rewards when staking begins.",
+            "upcomingDate": "A staking még nem kezdődött el",
+            "commencingDate": "A staking még nem kezdődött el",
+            "body": "A tokenjei előzetes stake-elésével biztosíthatja, hogy a staking kezdetétől fogva automatikusan megkapja a tokenjei után a jutalmat.",
             "ok": "Ok, értem"
         },
         "stakingManager": {
-            "title": "Staking Management",
-            "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
-            "totalFundsStaked": "Total funds staked",
-            "stakedSuccessfully": "Your funds have been staked for {account}.",
-            "unstakedSuccessfully": "Your funds have been unstaked for {account}."
+            "title": "Staking beállítások",
+            "description": "Egy tárca stake-elésével saját magának küld egy tranzakciót, melyben jelzi, hogy a tokenjeivel részt kíván venni a staking eseményen. A tokenjeit bármikor elköltheti, de ebben az esetben a továbbiakban nem kap staking jutalmat.",
+            "totalFundsStaked": "Teljes stake-elt összeg",
+            "stakedSuccessfully": "A(z) {account} számlán lévő tokenjei részt vesznek a staking eseményen.",
+            "unstakedSuccessfully": "A(z) {account} számlán lévő tokenjei nem vesznek részt a staking eseményen."
         },
         "stakingConfirmation": {
             "title": "Airdrop Részvétel",
-            "subtitleStake": "You are about to stake",
+            "subtitleStake": "Részt fog venni a staking eseményen",
             "subtitleMerge": "You are about to merge",
-            "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
-            "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
+            "bodyStake": "Ha nem kíván mindkét jutalomban részesülni, alább kiszállhat. Később bármikor kiléphet a staking eseményből, majd újra visszaléphet.",
+            "bodyMerge": "A tokenjei részt vesznek a(z) {airdrop} jutalommal járó staking eseményen. Ha szeretné később megváltoztatni, hogy melyik jutalomban részesüljön, akkor lépjen ki ezzel a tárcával a staking eseményből, majd lépjen be újra.",
             "estimatedAirdrop": "Becsült jutalmak"
         },
         "shimmer-info": {
             "title": "Shimmerről",
-            "body1": "Congratulations you have earned SMR tokens as a staking reward. Shimmer is an incentivized staging network to test major upgrades on IOTA.",
-            "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
+            "body1": "Gratulálunk! A staging eseményen SMR tokeneket kapott jutalmul. A Shimmer egy ösztönzőkkel ellátott teszt hálózat az IOTA hálózat nagyobb fejlesztéseinek kipróbálásához.",
+            "body2": "A Shimmer hálózatot várhatóan 2022-ben fogjuk elindítani. A hálózat indulásakor fogja tudni az SMR tokenjeit felhasználni."
         },
         "assembly-info": {
-            "title": "About Assembly",
-            "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
-            "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
+            "title": "Az Assembly-ről",
+            "body1": "Gratulálunk! A staging eseményen ASMB tokeneket kapott jutalmul. Az Assembly egy többláncú hálózat, mely okos szerződések létrehozásához és életbe léptetésére használható az IOTA hálózat felett.",
+            "body2": "Az Assembly hálózatot várhatóan 2022-ben fogjuk elindítani. A hálózat indulásakor fogja tudni az SMR tokenjeit felhasználni."
         }
     },
     "charts": {
@@ -861,9 +861,9 @@
         "closeFirefly": "Firefly bezárása",
         "generateAddress": "Új cím létrehozása",
         "migrateAgain": "Másik számlasorszám migrálása",
-        "visitWebsite": "Visit website",
-        "howItWorks": "How it works",
-        "learnAboutStaking": "Learn about staking",
+        "visitWebsite": "Weboldal megnyitása",
+        "howItWorks": "Hogy működik",
+        "learnAboutStaking": "Tudjon meg többet a staking eseményről",
         "stake": "Stake",
         "unstake": "Unstake",
         "stakeFunds": "Stake funds",
@@ -1015,7 +1015,7 @@
         "staking": "Staking",
         "unstaking": "Unstaking",
         "notStaked": "Not staked",
-        "stakedFunds": "Staked funds",
+        "stakedFunds": "Staking-ben részt vevő összeg",
         "unstakedFunds": "Unstaked funds"
     },
     "dates": {
@@ -1218,7 +1218,7 @@
                 "body": "Open network configuration in Advanced Settings and make sure the current node has the \"Participation\" feature by clicking \"View Info\"."
             },
             "ended": {
-                "title": "Staking has now ended",
+                "title": "A staking véget ért",
                 "body": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch."
             }
         },
@@ -1229,24 +1229,24 @@
             "body": "You need to manually stake these new funds to receive airdrop rewards for them."
         },
         "stakingMinRewards": {
-            "title": "Below minimum reward value",
-            "titleMinBalance": "{amount} minimum balance required",
-            "bodyMinBalace": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
-            "continue": "Please continue staking for another {duration}.",
-            "bodyBelowMin": "This wallet has not reached the minimum reward value for {airdrop} ({airdropRewardMin}).",
-            "bodyWillReachMin": "You must stake for another {duration} to reach the minimum.",
-            "bodyWillNotReachMin": "You will not reach the minimum during the remaining staking period unless you stake more IOTA.",
-            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum rewards for {airdrop} ({airdropRewardMin})."
+            "title": "Várható jutalom minimumérték alatt",
+            "titleMinBalance": "Legalább {amount} összeg szükséges",
+            "bodyMinBalace": "A tárcában nincs elegendő IOTA token, hogy a minimum jóváírható jutalmat megkapja, ezért a staking eseményen nem tud részt venni.",
+            "continue": "Kérjük még további {duration} ideig vegyen részt a staking eseményen.",
+            "bodyBelowMin": "Ez a tárca nem érte el a minimálisan jóváírható {airdrop} jutalmat ({airdropRewardMin}).",
+            "bodyWillReachMin": "Még legalább {duration} ideig részt kell vennie a staking eseményen a minimálisan jóváírható jutalomhoz.",
+            "bodyWillNotReachMin": "Nem fogja elérni a minimálisan jóváírható jutalmat a staking esemény végéig, hacsak nem vesz részt több IOTA tokennel.",
+            "bodyDidNotReachMin": "Nem vett részt elegendő IOTA tokennel ahhoz, hogy elérje a minimálisan jóváírható {airdrop} jutalmat ({airdropRewardMin})."
         }
     },
     "exports": {
         "transactionHistoryCsv": {
             "messageId": "Üzenetazonosító",
-            "internal": "Internal",
-            "rawValue": "Raw Value",
-            "formattedValue": "Formatted Value",
+            "internal": "Privát",
+            "rawValue": "Nyers adat",
+            "formattedValue": "Formázott adat",
             "date": "Dátum",
-            "time": "Time"
+            "time": "Idő"
         }
     }
 }

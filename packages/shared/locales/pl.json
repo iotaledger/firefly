@@ -510,7 +510,7 @@
                 "holdingSubheaderNotHolding": "Nagrody za staking IOTA",
                 "holdingHeaderHolding": "{duration} do końca",
                 "holdingHeaderNotHolding": "Stakuj swoje tokeny!",
-                "endedSubheader": "Staking zakończył się",
+                "endedSubheader": "Staking został zakończony",
                 "endedHeader": "Dziękujemy!",
                 "inactiveHeader": "Spróbuj zmienić serwer",
                 "inactiveSubheader": "Nie wykryto stakingu"
@@ -518,7 +518,7 @@
             "airdrops": {
                 "holding": "Pozostało",
                 "commencing": "Do momentu rozpoczęcia stakingu",
-                "collectedRewards": "Zebrane nagrody",
+                "collectedRewards": "Otrzymane nagrody",
                 "assembly": {
                     "name": "Assembly",
                     "description": "Assembly jest wysoce skalowalną, wielołańcuchową siecią typu permissionless. Służy do budowania i wdrażania złożonych smart kontraktów. Assembly jest przyszłością web3. "
@@ -603,7 +603,7 @@
                 "networkId": "ID sieci",
                 "bech32HRP": "Bech32 HRP",
                 "features": "Funkcje",
-                "confirmedMilestoneIndex": "Confirmed milestone index",
+                "confirmedMilestoneIndex": "Potwierdzony indeks milestone",
                 "pruningIndex": "Pruning index",
                 "messagesPerSecond": "Wiadomości na sekundę",
                 "referencedRate": "Potwierdzeń w sieci"
@@ -863,7 +863,7 @@
         "migrateAgain": "Migruj kolejny indeks",
         "visitWebsite": "Odwiedź stronę",
         "howItWorks": "Jak to działa",
-        "learnAboutStaking": "Dowiedz się więcej o stakingu",
+        "learnAboutStaking": "Czym jest staking?",
         "stake": "Stakuj",
         "unstake": "Odstakuj",
         "stakeFunds": "Stakuj środki",
@@ -1218,7 +1218,7 @@
                 "body": "Otwórz konfigurację sieci w Ustawieniach zaawansowanych i upewnij się, że bieżący serwer posiada funkcję \"Participation\", poprzez kliknięcie w \"Wyświetl informacje\"."
             },
             "ended": {
-                "title": "Staking zakończył się",
+                "title": "Staking został zakończony",
                 "body": "Nagrody Assembly i Shimmer zostaną przekazane do Waszych portfeli po uruchomieniu każdej z sieci."
             }
         },
