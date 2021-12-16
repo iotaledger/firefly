@@ -30,7 +30,7 @@
         {#each Object.values(AccountPatterns) as pattern}
             <li
                 class="h-16 rounded-lg {pattern === active ? `active opacity-100 ring-4 hover:ring-opacity-40
-                focus:ring-opacity-40` : `bg-gray-300 opacity-80 hover:opacity-100 focus:opacity-100`} bg-no-repeat
+                focus:ring-opacity-40` : `bg-gray-300 dark:bg-gray-900 opacity-80 hover:opacity-100 focus:opacity-100`} bg-no-repeat
                 bg-center bg-cover bg cursor-pointer flex justify-center items-center"
                 style={pattern ? `background-image: url("assets/patterns/${pattern}.svg");` : null}
                 on:click={() => handleClick(pattern)} on:keypress={(event) => handleKeyPress(event, pattern)}
