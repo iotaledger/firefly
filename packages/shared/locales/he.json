@@ -15,7 +15,7 @@
         },
         "profile": {
             "title": "צור פרופיל",
-            "profileName": "Profile name",
+            "profileName": "שם הפרופיל",
             "body1": "ניתן ליצור פרופילים מרובים כדי לארגן את הארנקים שלך ולשפר פרטיות.",
             "body2": {
                 "first": "בתור התחלה, נא ציין את השם הפרטי לפרופיל שלך.",
@@ -23,14 +23,14 @@
             },
             "addMore": "תוכל להוסיף פרופילים נוספים בהמשך.",
             "developer": {
-                "label": "Developer profile",
-                "info": "Connect to public and private IOTA networks"
+                "label": "פרופיל מפתח",
+                "info": "התחבר לתקשורת איוטה ציבורית ופרטית"
             }
         },
         "setup": {
             "title": "הגדר ארנק",
             "chrysalisTitle": "עדכון רשת הChrysalis",
-            "chrysalisBody": "From April 21st 2021, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
+            "chrysalisBody": "החל מאפריל 21, משתמשים יכולים לבצע העברה של האסימונים שלהם לרשת הקריסליס החדשה. אנו ממליצים להעביר את כל האסימונים שלך בהקדם האפשרי.",
             "learnMore": "למד אודות ההגירה"
         },
         "secure": {
@@ -179,31 +179,31 @@
         },
         "legacyLedgerIntro": {
             "title": "Start your Ledger migration using Firefly",
-            "body1": "Firefly will help you to transfer your tokens to the new Chrysalis network.",
-            "body2": "After the migration, you will be able to send and receive your tokens using your Ledger with Firefly.",
-            "readMore": "What to expect from the migration process"
+            "body1": "פיירפליי יעזור לך לבצע העברה של האסימונים שלך לרשת קרסילס החדשה",
+            "body2": "אחרי העברה, תהיה זמין לשלוח ולקבל את האסימונים באמצעות ארנק הלדג'ר עם פיירפליי",
+            "readMore": "מה לצפות מתהליך העברה"
         },
         "generateNewLedgerAddress": {
             "title": "צור כתובת חדשה",
-            "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
-            "confirmTitle": "Confirm the new address",
-            "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
-            "confirmedTitle": "Address confirmed",
-            "confirmedBody": "You have confirmed that the address in Firefly matches the one on your Ledger device.",
-            "generating": "Generating address"
+            "body": "עלייך ליצור כתובת חדשה כדי להעביר את האסימונים שלך עם פיירפליי. תלחץ על הכפתור למטה כדי להמשיך",
+            "confirmTitle": "תאשר את הכתובת החדשה",
+            "confirmBody": "למען הביטחון, אנא השווה את הכתובת בארנק הלדג'ר שלך לכתובת שמופיעה מטה. אם הן מתאימות, לחץ על שני הכפתורים בארנק הלדג'ר שלך כמבוקש.",
+            "confirmedTitle": "הכתובת אושרה",
+            "confirmedBody": "אישרת שהכתובת בפיירליי תואמת לזו שבארנק הלדג'ר",
+            "generating": "יצירת כתובת"
         },
         "switchLedgerApps": {
-            "title": "Switch Ledger apps",
-            "body": "Please switch to the {legacy} app on your Ledger device to continue migration. When ready, press continue."
+            "title": "החלף אפליקציות לדג'ר",
+            "body": "בבקשה החלף לאפליקציית {legacy} בארנק הלדג'ר שלך כדי להצשיך את תהליך ההעברה. מתי שאתה מוכן, לחץ המשך."
         },
         "selectLedgerAccountIndex": {
-            "title": "Choose Ledger account index",
-            "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
-            "accountIndex": "Account Index",
-            "accountPage": "Account Page",
-            "standard": "Standard",
-            "expert": "Expert",
-            "takingAWhile": "This is taking a while...",
+            "title": "תבחר אינדקס חשבונות לדג'ר",
+            "body": "תבחר את אינדקס החשבונות בלדג'ר שאתה משתמש עם טריניטי. לרוב המשתמשים זה יהיה אינדקס ברירת מחדל של 0",
+            "accountIndex": "אינדקס החשבון",
+            "accountPage": "עמוד החשבון",
+            "standard": "סטנדרטי",
+            "expert": "מומחה",
+            "takingAWhile": "זה לוקח זמן...",
             "notGeneratingAddresses": "Is your Ledger generating addresses?",
             "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
         },

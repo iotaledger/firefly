@@ -15,7 +15,7 @@
         },
         "profile": {
             "title": "新建配置文件",
-            "profileName": "Profile name",
+            "profileName": "配置名称",
             "body1": "您可创建多个用户配置文件来分别存储您的Token以确保安全。",
             "body2": {
                 "first": "现在，让我们从您的第一个配置文件的名称开始。",
@@ -23,14 +23,14 @@
             },
             "addMore": "您可以稍后添加更多配置文件。",
             "developer": {
-                "label": "Developer profile",
-                "info": "Connect to public and private IOTA networks"
+                "label": "开发者模式",
+                "info": "连接到公共或私用IOTA网络"
             }
         },
         "setup": {
             "title": "设置钱包",
             "chrysalisTitle": "Chrysalis网络更新",
-            "chrysalisBody": "From April 21st 2021, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
+            "chrysalisBody": "从2021年4月21日起，用户可以将他们的代币迁移到新的 Chrysalis 网络。我们建议您尽快迁移您现有的代币。",
             "learnMore": "了解迁移信息"
         },
         "secure": {
@@ -312,7 +312,7 @@
             "theme": {
                 "title": "主题",
                 "description": "",
-                "advice": "Restart the Firefly application for changes to the system theme to take effect"
+                "advice": "重新启动Firefly应用程序以使系统主题生效。"
             },
             "language": {
                 "title": "语言",
@@ -328,14 +328,14 @@
             },
             "networkStatus": {
                 "title": "网络状态",
-                "description": "Displays the status of the node you are currently connected to"
+                "description": "显示你现在所连接的节点状态"
             },
             "exportStronghold": {
-                "title": "Export backup",
+                "title": "导出备份",
                 "description": "导出到 Stronghold文件 - 完整加密备份您的钱包及其最新交易记录"
             },
             "appLock": {
-                "title": "Automatic lock",
+                "title": "自动锁定",
                 "description": "自动锁定钱包并登出的待机时间",
                 "durationMinute": "{time, plural, one {1分钟} other {# 分钟}}",
                 "durationHour": "{time, plural, one {1小时} other {# 小时}}"
@@ -365,39 +365,39 @@
                 "description": "删除您的整个账户信息、钱包和交易历史。请确保您有一个备份"
             },
             "deepLinks": {
-                "title": "IOTA links",
-                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
+                "title": "IOTA链接",
+                "description": "点击IOTA链接自动填写Firefly交易数据"
             },
             "networkConfiguration": {
-                "title": "Network config",
-                "title2": "Network configuration",
+                "title": "网络配置",
+                "title2": "网络配置",
                 "description": {
-                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
-                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                    "dev": "您的网络设置将根据当前节点配置自动更新(切换网络将导致重置钱包状态)",
+                    "nonDev": "您的网络设置将根据当前节点配置自动更新"
                 },
-                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
-                "resetWallet": "Your wallet state has been reset.",
-                "connectedTo": "Connected to",
+                "switchedNetworks": "成功切换到\"{networkName}\"。",
+                "resetWallet": "您的钱包状态已重置。",
+                "connectedTo": "已连接到",
                 "nodeConfiguration": {
-                    "title": "Node selection",
-                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
-                    "automatic": "Automatic",
-                    "manual": "Manual"
+                    "title": "节点选择",
+                    "description": "选择“手动”来配置节点设置并连接到您自己的节点",
+                    "automatic": "自动",
+                    "manual": "手动"
                 }
             },
             "configureNodeList": {
-                "title": "Node configuration",
-                "description": "Manage the list of nodes you connect to",
+                "title": "节点配置",
+                "description": "管理您连接的节点列表",
                 "primaryNode": "主节点",
                 "excludeNode": "排除此节点",
                 "includeNode": "包含此节点",
-                "editDetails": "Edit details",
-                "viewInfo": "View info",
+                "editDetails": "编辑详情",
+                "viewInfo": "查看信息",
                 "setAsPrimary": "设为主要节点",
                 "removeNode": "删除节点",
                 "includeOfficialNodeList": "包含官方节点列表",
-                "noNodes": "There are no nodes, unable to connect to the network",
-                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
+                "noNodes": "没有节点，无法连接到网络",
+                "noNodesAuto": "尚未配置节点，将使用节点自动选择功能"
             },
             "proofOfWork": {
                 "title": "工作量证明",
@@ -412,7 +412,7 @@
                 "description": "查看系统和应用程序信息"
             },
             "migrateLedgerIndex": {
-                "title": "Migrate Ledger index",
+                "title": "迁移Ledger索引",
                 "description": "迁移另一个 Trinity 帐户索引"
             },
             "troubleshoot": {
@@ -425,7 +425,7 @@
             },
             "faq": {
                 "title": "常见问题",
-                "title2": "Frequently asked questions",
+                "title2": "常见问题",
                 "description": "查看常见问题以获得帮助"
             },
             "discord": {
@@ -488,44 +488,44 @@
             }
         },
         "staking": {
-            "title": "Staking",
-            "welcome": "Welcome to the staking dashboard",
+            "title": "质押",
+            "welcome": "欢迎来到质押仪表板",
             "status": {
-                "upcoming": "Event not started",
-                "commencing": "Pre-staking open",
-                "holdingActive": "Staking in progress",
-                "holdingInactive": "Staking open",
-                "inactive": "Staking not detected",
-                "ended": "Staking ended"
+                "upcoming": "活动尚未开始",
+                "commencing": "预约质押开始",
+                "holdingActive": "质押进行中",
+                "holdingInactive": "质押开启",
+                "inactive": "未检测到质押",
+                "ended": "质押已结束"
             },
             "summary": {
-                "stakedFunds": "Staked funds"
+                "stakedFunds": "质押资金"
             },
             "info": {
-                "upcomingSubheader": "Event has not started",
-                "upcomingHeader": "Check back later",
-                "commencingSubheader": "Get ready for staking",
-                "commencingHeader": "Pre-stake your tokens!",
-                "holdingSubheaderHolding": "Now earning staking rewards",
-                "holdingSubheaderNotHolding": "Earn rewards by staking IOTA",
-                "holdingHeaderHolding": "{duration} left",
-                "holdingHeaderNotHolding": "Stake your tokens!",
-                "endedSubheader": "Staking has now ended",
-                "endedHeader": "Thank you!",
-                "inactiveHeader": "Try changing node",
-                "inactiveSubheader": "Staking not detected"
+                "upcomingSubheader": "活动尚未开始",
+                "upcomingHeader": "稍后再试",
+                "commencingSubheader": "已准备好进行质押",
+                "commencingHeader": "预先质押您的代币",
+                "holdingSubheaderHolding": "正在赚取质押奖励",
+                "holdingSubheaderNotHolding": "通过质押IOTA获得奖励",
+                "holdingHeaderHolding": "剩余{duration}",
+                "holdingHeaderNotHolding": "质押您的代币",
+                "endedSubheader": "质押已结束",
+                "endedHeader": "谢谢!",
+                "inactiveHeader": "尝试更改节点",
+                "inactiveSubheader": "未检测到质押"
             },
             "airdrops": {
-                "holding": "Remaining",
-                "commencing": "Until staking begins",
-                "collectedRewards": "Collected rewards",
+                "holding": "剩余",
+                "commencing": "直到质押开始",
+                "collectedRewards": "已领取的奖励",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
+                    "description": "Assembly是一个无需许可的、高度可扩展的多链网络，用于构建和部署可组合的智能合约。Assembly是web3的未来。 "
                 },
                 "shimmer": {
                     "name": "Shimmer",
-                    "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
+                    "description": "一个推进IOTA上的重大创新的激励性的阶段性网络，让我们静观其变。Shimmer如何演化取决于你。"
                 }
             }
         }
@@ -576,45 +576,45 @@
         },
         "addressHistory": {
             "title": "{name} 地址历史记录",
-            "currentBalance": "Balance: {balance}",
-            "internal": "Internal Address",
-            "external": "Deposit Address"
+            "currentBalance": "余额：{balance}",
+            "internal": "内部地址",
+            "external": "充值地址"
         },
         "node": {
             "titleAdd": "添加节点",
             "titleUpdate": "更新节点",
             "titleRemove": "删除节点",
-            "titleRemoveAll": "Remove all nodes",
+            "titleRemoveAll": "删除所有节点",
             "titleDetails": "节点详细信息",
-            "titleInfo": "Node info",
-            "addingNode": "Adding node",
-            "updatingNode": "Updating node",
-            "loadingNodeInfo": "Loading node info",
+            "titleInfo": "节点信息",
+            "addingNode": "添加节点",
+            "updatingNode": "更新节点",
+            "loadingNodeInfo": "加载节点信息",
             "nodeAddress": "节点地址",
             "optionalUsername": "用户名(选填)",
             "optionalPassword": "密码 (选填)",
-            "optionalJwt": "JSON web token (optional)",
+            "optionalJwt": "JSON web token (可选)",
             "setAsPrimaryNode": "设为主节点",
             "removeConfirmation": "您确定要删除此节点吗？",
-            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "removeAllConfirmation": "您确定要删除所有节点吗？",
             "info": {
                 "url": "URL",
-                "software": "Software",
-                "networkId": "Network ID",
+                "software": "软件",
+                "networkId": "网络 ID",
                 "bech32HRP": "Bech32 HRP",
-                "features": "Features",
-                "confirmedMilestoneIndex": "Confirmed milestone index",
-                "pruningIndex": "Pruning index",
+                "features": "技术特性",
+                "confirmedMilestoneIndex": "已确认的里程碑索引",
+                "pruningIndex": "裁剪索引",
                 "messagesPerSecond": "每秒信息数",
                 "referencedRate": "确认率"
             }
         },
         "switchNetwork": {
-            "title": "Switch network",
-            "newNetwork": "New network",
-            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
-            "switchingNetwork": "Switching network",
-            "typePassword": "Type your password to switch to:"
+            "title": "切换网络",
+            "newNetwork": "新建网络",
+            "resetWarning": "更改网络将注销并重置此配置文件的所有账户、余额和交易历史记录。",
+            "switchingNetwork": "切换网络",
+            "typePassword": "输入您的密码以切换到："
         },
         "errorLog": {
             "title": "错误日志",
@@ -639,7 +639,7 @@
         "transaction": {
             "title": "确认交易",
             "body": "您将要发送 {amount} 到",
-            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards."
+            "sendingFromStakedAccount": "您正在从目前正在质押的钱包中发送转账。这可能会取消质押您的令牌。 您可以随时发送传输，但您可能需要稍后重新质押您剩余的代币。"
         },
         "balanceFinder": {
             "title": "寻找余额",
@@ -712,42 +712,42 @@
             "body": "您也可以稍后在高级设置中迁移Ledger索引。"
         },
         "exportTransactionHistory": {
-            "title": "Export transaction history",
-            "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
-            "profileName": "Profile name:",
-            "accountName": "Account name:",
-            "typePassword": "Type your password to allow exporting"
+            "title": "导出交易历史记录",
+            "body": "导出所选钱包的交易历史记录。导出的文件将使用.csv格式。",
+            "profileName": "配置名称:",
+            "accountName": "账户名称:",
+            "typePassword": "输入您的密码以允许导出"
         },
         "stakingNotice": {
-            "upcomingDate": "Staking has not started yet",
-            "commencingDate": "Staking has not started yet",
-            "body": "By pre-staking your funds before staking starts, you will automatically begin receiving rewards when staking begins.",
-            "ok": "Ok, I understand"
+            "upcomingDate": "质押尚未开始",
+            "commencingDate": "质押尚未开始",
+            "body": "通过在质押开始前预先质押，你就可以在质押开始后自动收到奖励。",
+            "ok": "是的，我了解了！"
         },
         "stakingManager": {
-            "title": "Staking Management",
-            "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
-            "totalFundsStaked": "Total funds staked",
-            "stakedSuccessfully": "Your funds have been staked for {account}.",
-            "unstakedSuccessfully": "Your funds have been unstaked for {account}."
+            "title": "质押管理",
+            "description": "如果你质押了一个钱包，你发送给你自己的交易将使这些资金变成“质押”状态。你可以随时转移这些代币，但是你讲不能继续收到质押奖励。",
+            "totalFundsStaked": "总质押资金",
+            "stakedSuccessfully": "您的资金已经为 {account} 进行质押。",
+            "unstakedSuccessfully": "您已经为 {account} 的资金取消了质押。"
         },
         "stakingConfirmation": {
-            "title": "Airdrop Participation",
-            "subtitleStake": "You are about to stake",
-            "subtitleMerge": "You are about to merge",
-            "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
-            "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
-            "estimatedAirdrop": "Estimated rewards"
+            "title": "空投参与度",
+            "subtitleStake": "你将要质押",
+            "subtitleMerge": "你将要汇总",
+            "bodyStake": "如果你不想参与者两个质押，您可以选择退出。您随时可以取消或重新质押。",
+            "bodyMerge": "您的资金将为 {airdrop} 进行质押。要更改您想要参与的空投，请取消这个钱包的质押并重新质押。",
+            "estimatedAirdrop": "估计奖励"
         },
         "shimmer-info": {
-            "title": "About Shimmer",
-            "body1": "Congratulations you have earned SMR tokens as a staking reward. Shimmer is an incentivized staging network to test major upgrades on IOTA.",
-            "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
+            "title": "关于 Shimmer",
+            "body1": "恭喜您已经获得SMR代币作为分期奖励。Shimmer 是一个激励性的阶段性网络，用于测试IOTA上的重大升级。",
+            "body2": "我们的目标是在2022年启动Shimmer。一旦网络启动，您的代币将可进行传输。"
         },
         "assembly-info": {
-            "title": "About Assembly",
-            "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
-            "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
+            "title": "关于Assembly",
+            "body1": "恭喜您获得的 ASMB 代币作为质押奖励。Assembly 是一个在IOTA上部署的可缩放的智能合约的多链网络。",
+            "body2": "我们的目标是在2022年启动Assembly。一旦网络启动，您的代币将可进行传输。"
         }
     },
     "charts": {
@@ -755,7 +755,7 @@
         "outgoingMi": "发送 {value}",
         "portoflio": "资产组合",
         "token": "Token",
-        "holdings": "Holdings",
+        "holdings": "持有",
         "accountValue": "钱包金额",
         "accountActivity": "钱包活动",
         "timeframe1Hour": "1 小时",
@@ -803,12 +803,12 @@
         "dropHere": "将您的文件拖放至此处",
         "syncAll": "全部同步",
         "export": "导出",
-        "exporting": "Exporting",
+        "exporting": "导出中",
         "exportNewStronghold": "导出一个新的Stronghold",
-        "enableDeepLinks": "Enable IOTA links",
+        "enableDeepLinks": "启用 IOTA链接",
         "enableDeveloperMode": "打开开发者模式",
         "enableSystemNotifications": "启用系统通知",
-        "exportTransactionHistory": "Export transaction history",
+        "exportTransactionHistory": "导出交易历史记录",
         "localProofOfWork": "本地工作量证明",
         "unlock": "解锁",
         "updateFirefly": "更新Firefly",
@@ -823,7 +823,7 @@
         "addNode": "添加节点",
         "updateNode": "更新节点",
         "removeNode": "删除节点",
-        "removeAllNodes": "Remove all nodes",
+        "removeAllNodes": "删除所有节点",
         "hide": "隐藏",
         "hideOthers": "隐藏其它",
         "showAll": "显示全部",
@@ -861,16 +861,16 @@
         "closeFirefly": "关闭Firefly",
         "generateAddress": "生成地址",
         "migrateAgain": "迁移另一个Ledger索引",
-        "visitWebsite": "Visit website",
-        "howItWorks": "How it works",
-        "learnAboutStaking": "Learn about staking",
-        "stake": "Stake",
-        "unstake": "Unstake",
-        "stakeFunds": "Stake funds",
-        "manageStake": "Manage stake",
-        "merge": "Merge",
-        "mergeFunds": "Merge funds",
-        "done": "Done"
+        "visitWebsite": "访问网站",
+        "howItWorks": "运行原理",
+        "learnAboutStaking": "了解质押",
+        "stake": "质押",
+        "unstake": "解除质押",
+        "stakeFunds": "质押资金",
+        "manageStake": "管理质押",
+        "merge": "合并",
+        "mergeFunds": "合并资金",
+        "done": "已完成"
     },
     "general": {
         "password": "密码",
@@ -913,9 +913,9 @@
         "stronghold": "Stronghold",
         "language": "语言",
         "appearance": "外观",
-        "lightTheme": "Light",
-        "darkTheme": "Dark",
-        "systemTheme": "System",
+        "lightTheme": "亮色",
+        "darkTheme": "暗色",
+        "systemTheme": "系统",
         "balance": "余额",
         "accountBalance": "钱包余额",
         "incoming": "收到",
@@ -932,7 +932,7 @@
         "transactions": "交易",
         "security": "安全设置",
         "accountAddress": "钱包地址",
-        "network": "Network",
+        "network": "网络",
         "nodes": "节点",
         "wallet": "钱包",
         "help": "帮助",
@@ -959,8 +959,8 @@
         "transferBroadcasting": "正在广播交易...",
         "transferComplete": "转账完毕",
         "generatingReceiveAddress": "生成接收地址",
-        "broadcasting": "Broadcasting",
-        "confirming": "Confirming",
+        "broadcasting": "广播中",
+        "confirming": "正在确认",
         "creatingAccount": "正在创建钱包，请稍候...",
         "updatingAccount": "正在更新钱包，请稍候...",
         "accountSyncing": "正在同步钱包",
@@ -988,35 +988,35 @@
         "sendingFrom": "正在从 {account} 发送",
         "receivedTo": "已接收至 {account}",
         "sentFrom": "已从 {account} 发送",
-        "stakedFor": "Staked for {account}",
-        "unstakedFor": "Unstaked for {account}",
-        "votedFor": "Voted for {account}",
-        "unvotedFor": "Unvoted for {account}",
+        "stakedFor": "已为 {account} 质押",
+        "unstakedFor": "已为 {account} 解除质押",
+        "votedFor": "投票给 {account}",
+        "unvotedFor": "取消投票给 {account}",
         "receiving": "接收",
         "sending": "发送",
         "legacyNetwork": "旧的网络",
         "capsLock": "大写锁定键已开启",
         "version": "版本 {version}",
-        "unknown": "Unknown",
-        "none": "None",
-        "days": "day(s)",
+        "unknown": "未知",
+        "none": "无",
+        "days": "天",
         "time": {
-            "days": "days",
-            "day": "day",
-            "hours": "hours",
-            "hour": "hour",
-            "minutes": "minutes",
-            "minute": "minute",
-            "seconds": "seconds",
-            "second": "second"
+            "days": "天",
+            "day": "天",
+            "hours": "小时",
+            "hour": "小时",
+            "minutes": "分钟",
+            "minute": "分钟",
+            "seconds": "秒",
+            "second": "秒"
         },
-        "staked": "Staked",
-        "unstaked": "Unstaked",
-        "staking": "Staking",
-        "unstaking": "Unstaking",
-        "notStaked": "Not staked",
-        "stakedFunds": "Staked funds",
-        "unstakedFunds": "Unstaked funds"
+        "staked": "已质押",
+        "unstaked": "解除质押",
+        "staking": "质押",
+        "unstaking": "正在解除质押",
+        "notStaked": "未质押",
+        "stakedFunds": "质押资金",
+        "unstakedFunds": "未质押的资金"
     },
     "dates": {
         "today": "今日",
@@ -1042,16 +1042,16 @@
         "accountsSynchronized": "钱包同步完成",
         "fundsAvailableSoon": "您的资金将很快变为可用资金。",
         "exportTransactionHistory": {
-            "success": "Transaction history for {accountAlias} was successfully saved to {filePath}",
-            "error": "Unable to export transaction history for {accountAlias}"
+            "success": "{accountAlias} 的交易历史记录已成功保存到 {filePath}",
+            "error": "无法导出 {accountAlias} 的交易历史记录"
         },
         "deepLinkingRequest": {
-            "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
-            "notEnabled": "IOTA links are not enabled",
-            "invalidFormat": "The IOTA link you followed is invalid",
+            "recievedWhileLoggedOut": "请登录以启动IOTA链接",
+            "notEnabled": "IOTA链接未启用",
+            "invalidFormat": "您遵循的 IOTA 链接无效",
             "wallet": {
                 "send": {
-                    "success": "Payment details added from IOTA link"
+                    "success": "从 IOTA 链接添加的付款详细信息"
                 }
             }
         }
@@ -1061,7 +1061,7 @@
             "length": "您的配置名称不能超过 {length, plural, one {1 个字符} other {# 字符}}。",
             "duplicate": "同名配置文件已存在。",
             "delete": {
-                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+                "nonEmptyAccounts": "您必须先转移所有余额才能删除您的账户。"
             }
         },
         "password": {
@@ -1117,24 +1117,24 @@
         },
         "node": {
             "invalid": "请输入有效的URL",
-            "dns": "Could not find DNS resolution for node.",
-            "timedOut": "The connection timed out.",
-            "refused": "The connection was refused.",
-            "handshake": "Could not complete handshake with node.",
-            "invalidCertificate": "Could not connect with invalid certificate.",
-            "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
+            "dns": "找不到节点的DNS解析。",
+            "timedOut": "连接超时",
+            "refused": "连接被拒绝",
+            "handshake": "无法完成节点握手。",
+            "invalidCertificate": "无法与无效证书连接。",
+            "https": "需要HTTPS。目前不支持通过 HTTP 进行不安全的连接。",
             "duplicate": "此节点已被添加。",
             "unsynced": "节点未同步。",
             "noSynced": "没有可用的同步节点。",
-            "answer": "Failed to get an answer from all nodes.",
-            "forbidden": "This node connection is forbidden.",
-            "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node."
+            "answer": "无法从所有节点获得响应。",
+            "forbidden": "此节点连接被禁止。",
+            "pluginNotAvailable": "\"{nodePlugin}\"插件在当前节点上不可用。"
         },
         "network": {
-            "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
-            "notReachable": "The network ID for this node could not be retrieved, unable to add node.",
-            "badNodes": "Unable to connect to the network with current node configuration.",
-            "nonEmptyAccount": "You must transfer all balances before switching networks."
+            "mismatch": "此节点的网络ID是 \"{networkId}\"，与当前网络不匹配。",
+            "notReachable": "无法检索此节点的网络ID，无法添加节点。",
+            "badNodes": "使用当前节点配置无法连接到网络。",
+            "nonEmptyAccount": "在切换网络之前，您必须转移所有余额。"
         },
         "global": {
             "generic": "发生了一些错误。"
@@ -1161,7 +1161,7 @@
             "generateAddress": "地址生成出错。",
             "timeout": "您的Ledger设备连接超时。",
             "disconnected": "您的Ledger设备已断开.",
-            "noStronghold": "Unable to use Stronghold with Ledger profile."
+            "noStronghold": "无法通过 Ledger 配置文件使用Stronghold。"
         },
         "popup": {
             "preventClose": "此弹出窗口无法关闭。"
@@ -1170,21 +1170,21 @@
             "missingBundle": "试图查找交易包信息时发生错误"
         },
         "crypto": {
-            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
+            "cannotDecodeBech32": "无法解码字符串为 Bech32 地址。"
         },
         "participation": {
-            "cannotUseAccount": "Unable to use the specified account.",
-            "cannotFindStakingEvent": "Unable to find staking event.",
-            "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
-            "invalidStakingEventId": "Invalid staking event ID."
+            "cannotUseAccount": "无法使用指定的帐户。",
+            "cannotFindStakingEvent": "找不到质押活动。",
+            "cannotVisitAirdropWebsite": "无法打开 {airdrop} 网站。",
+            "invalidStakingEventId": "无效的 质押活动 ID。"
         }
     },
     "warning": {
         "node": {
-            "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
+            "http": "通过 HTTP 使用节点使得流量未加密，可能造成安全风险。"
         },
         "participation": {
-            "noAccounts": "You do not have any accounts available to participate."
+            "noAccounts": "您没有任何帐户可以参加。"
         }
     },
     "tooltips": {
@@ -1198,55 +1198,55 @@
         },
         "stakingIndicator": {
             "upcoming": {
-                "title": "Staking has not started yet",
-                "body": "Check back later. The staking event has not begun."
+                "title": "质押尚未开始",
+                "body": "稍后再检查。质押活动尚未开始。"
             },
             "commencing": {
-                "title": "Pre-staking is now open",
-                "body": "Pre-stake your tokens, and once staking begins, you will automatically start receiving rewards every 10 seconds."
+                "title": "预先质押已开放",
+                "body": "预先质押您的代币，一旦质押开始，您将每隔10秒自动开始获得奖励。"
             },
             "activeHolding": {
-                "title": "Staking is now in progress",
-                "body": "Good job. You will receive rewards every 10 seconds."
+                "title": "质押进行中",
+                "body": "干得好。你将每10秒获得奖励。"
             },
             "inactiveHolding": {
-                "title": "Staking is now open",
-                "body": "Stake your IOTA tokens to receive rewards every 10 seconds."
+                "title": "质押正在开放",
+                "body": "质押您的 IOTA代币，每隔10秒获得奖励。"
             },
             "inactive": {
-                "title": "No staking events detected",
-                "body": "Open network configuration in Advanced Settings and make sure the current node has the \"Participation\" feature by clicking \"View Info\"."
+                "title": "未检测到质押活动",
+                "body": "在高级设置中打开网络配置，并点击“查看信息”以确保当前节点具备“参与”功能。"
             },
             "ended": {
-                "title": "Staking has now ended",
-                "body": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch."
+                "title": "质押已结束",
+                "body": "Assembly 和 Shimmer 的奖励将在各自的网络启动时分配到你的钱包。"
             }
         },
         "partiallyStakedFunds": {
-            "title": "New unstaked funds: {amount}",
-            "titleNoFunds": "New unstaked funds",
-            "preBody": "You have received tokens on a staked wallet.",
-            "body": "You need to manually stake these new funds to receive airdrop rewards for them."
+            "title": "新的未质押资金： {amount}",
+            "titleNoFunds": "新的未质押资金",
+            "preBody": "您已经在一个已质押的钱包中收到了代币。",
+            "body": "您需要手动质押这些新的资金才能获得空投奖励。"
         },
         "stakingMinRewards": {
-            "title": "Below minimum reward value",
-            "titleMinBalance": "{amount} minimum balance required",
-            "bodyMinBalace": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
-            "continue": "Please continue staking for another {duration}.",
-            "bodyBelowMin": "This wallet has not reached the minimum reward value for {airdrop} ({airdropRewardMin}).",
-            "bodyWillReachMin": "You must stake for another {duration} to reach the minimum.",
-            "bodyWillNotReachMin": "You will not reach the minimum during the remaining staking period unless you stake more IOTA.",
-            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum rewards for {airdrop} ({airdropRewardMin})."
+            "title": "低于最低奖励值",
+            "titleMinBalance": "需要 {amount} 的最低余额",
+            "bodyMinBalace": "这个钱包没有足够的 IOTA 代币来达到最低空投奖励，因此不能被质押。",
+            "continue": "请继续为另一个 {duration} 进行质押",
+            "bodyBelowMin": "这个钱包还没有达到 {airdrop} 的最低奖励值({airdropRewardMin})。",
+            "bodyWillReachMin": "您必须再质押 {duration} 能达到最低值。",
+            "bodyWillNotReachMin": "除非您质押更多IOTA，否则您将无法达到最低值。",
+            "bodyDidNotReachMin": "您没有质押足够的IOTA来达到 {airdrop} 的最低奖励 ({airdropRewardMin})。"
         }
     },
     "exports": {
         "transactionHistoryCsv": {
             "messageId": "消息 ID",
-            "internal": "Internal",
-            "rawValue": "Raw Value",
-            "formattedValue": "Formatted Value",
+            "internal": "内部",
+            "rawValue": "原始值",
+            "formattedValue": "格式化值",
             "date": "日期",
-            "time": "Time"
+            "time": "时间"
         }
     }
 }
