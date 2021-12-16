@@ -48,6 +48,8 @@
     export let fullScreen = undefined
     export let transition = true
 
+    let autofocusContent = true
+
     enum PopupSize {
         Small = 'small',
         Medium = 'medium',
@@ -64,6 +66,9 @@
         case 'ledgerAppGuide':
         case 'ledgerConnectionGuide':
             size = PopupSize.Large
+            break
+        case 'stakingManager':
+            autofocusContent = false
             break
         default:
             size = PopupSize.Medium
@@ -148,8 +153,10 @@
     }
 
     onMount(() => {
-        const elems = focusableElements()
-        elems?.[0]?.focus()
+        let elems = focusableElements()
+        if (elems && elems.length > 0) {
+            elems[hideClose || elems.length === 1 || !autofocusContent ? 0 : 1].focus()
+        }
     })
 </script>
 
