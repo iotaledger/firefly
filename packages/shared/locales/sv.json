@@ -505,11 +505,11 @@
                 "upcomingSubheader": "Eventet har inte startat",
                 "upcomingHeader": "Kom tillbaka senare",
                 "commencingSubheader": "Gör dig redo för staking",
-                "commencingHeader": "För-stakea dina tokens!",
+                "commencingHeader": "För-staka dina tokens!",
                 "holdingSubheaderHolding": "Tjänar nu staking-belöningar",
-                "holdingSubheaderNotHolding": "Tjäna belöningar genom att stakea IOTA",
+                "holdingSubheaderNotHolding": "Tjäna belöningar genom att staka IOTA",
                 "holdingHeaderHolding": "{duration} kvar",
-                "holdingHeaderNotHolding": "Stakea dina tokens!",
+                "holdingHeaderNotHolding": "Staka dina tokens!",
                 "endedSubheader": "Staking har nu avslutats",
                 "endedHeader": "Tack så mycket!",
                 "inactiveHeader": "Försök att ändra nod",
@@ -639,7 +639,7 @@
         "transaction": {
             "title": "Bekräfta transaktion",
             "body": "Du håller på att skicka {amount} till",
-            "sendingFromStakedAccount": "Du skickar en överföring från en plånbok som för närvarande används för staking. Detta kan innebära att dina tokens slutar stakeas. Fortsätt att skicka överföringen om du vill, men du kan behöva stakea dina återstående tokens på nytt."
+            "sendingFromStakedAccount": "Du skickar en överföring från en plånbok som för närvarande används för staking. Detta kan innebära att dina tokens slutar stakas. Fortsätt att skicka överföringen om du vill, men du kan behöva staka dina återstående tokens på nytt."
         },
         "balanceFinder": {
             "title": "Hitta saldo",
@@ -726,17 +726,17 @@
         },
         "stakingManager": {
             "title": "Staking-hantering",
-            "description": "När du stakear en plånbok skickar du en transaktion till dig själv som markerar dessa tillgångar som \"staked\". Du kan överföra dessa IOTA när som helst, men du kommer inte att fortsätta att få belöningar för dem.",
+            "description": "När du stakar en plånbok skickar du en transaktion till dig själv som markerar dessa tillgångar som \"staked\". Du kan överföra dessa IOTA när som helst, men du kommer inte fortsätta att få belöningar för dem.",
             "totalFundsStaked": "Totala tillgångar för staking",
             "stakedSuccessfully": "Dina tillgångar har blivit stakade för {account}.",
             "unstakedSuccessfully": "Din tillgångar är inte längre stakade för {account}."
         },
         "stakingConfirmation": {
             "title": "Airdrop-deltagande",
-            "subtitleStake": "Du är på väg att stakea",
+            "subtitleStake": "Du är på väg att staka",
             "subtitleMerge": "Du är på väg att slå ihop",
             "bodyStake": "Om du inte vill delta i båda airdropsen kan du välja bort dem nedan. Du kan ta bort dina stakade tillgångar och sedan välja att gå tillbaka när som helst.",
-            "bodyMerge": "Dina tillgångar kommer att stakeas för {airdrop}. För att ändra vilka airdrops du vill delta i, ta bort tillgångarna för staking i denna plånbok och välj sedan att stakea dem igen.",
+            "bodyMerge": "Dina tillgångar kommer att stakas för {airdrop}. För att ändra vilka airdrops du vill delta i, ta bort tillgångarna för staking i denna plånbok och välj sedan att staka dem igen.",
             "estimatedAirdrop": "Beräknade belöningar"
         },
         "shimmer-info": {
@@ -864,9 +864,9 @@
         "visitWebsite": "Besök webbplats",
         "howItWorks": "Så funkar det",
         "learnAboutStaking": "Lär dig om staking",
-        "stake": "Stakea",
-        "unstake": "Avstakea",
-        "stakeFunds": "Stakea tillgångar",
+        "stake": "Staka",
+        "unstake": "Avstaka",
+        "stakeFunds": "Staka tillgångar",
         "manageStake": "Hantera staking",
         "merge": "Slå ihop",
         "mergeFunds": "Slå ihop tillgångar",
@@ -1226,16 +1226,16 @@
             "title": "Nya ostakade tillgångar: {amount}",
             "titleNoFunds": "Nya ostakade tillgångar",
             "preBody": "Du har fått tokens till en stakad plånbok.",
-            "body": "Du måste manuellt stakea dessa nya tillgångar för att få airdrop-belöningar för dem."
+            "body": "Du måste manuellt staka dessa nya tillgångar för att få airdrop-belöningar för dem."
         },
         "stakingMinRewards": {
             "title": "Under minsta belöningsvärde",
             "titleMinBalance": "{amount} minsta saldo krävs",
             "bodyMinBalace": "Denna plånbok har inte tillräckligt med IOTA tokens för att nå den minsta airdrop-belöningen och kan därför inte bli stakad.",
-            "continue": "Vänligen fortsätt stakea för ytterligare {duration}.",
+            "continue": "Vänligen fortsätt staka för ytterligare {duration}.",
             "bodyBelowMin": "Denna plånbok har inte nått det lägsta belöningsvärdet för {airdrop} ({airdropRewardMin}).",
-            "bodyWillReachMin": "Du måste stakea ytterligare {duration} för att nå minimum.",
-            "bodyWillNotReachMin": "Du når inte minimum under den återstående staking-perioden om du inte stakear mer IOTA.",
+            "bodyWillReachMin": "Du måste staka ytterligare {duration} för att nå minimum.",
+            "bodyWillNotReachMin": "Du når inte minimum under den återstående staking-perioden om du inte stakar mer IOTA.",
             "bodyDidNotReachMin": "Du stakade inte tillräckligt med IOTA för att nå den lägsta belöningen för {airdrop} ({airdropRewardMin})."
         }
     },

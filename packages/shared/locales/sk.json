@@ -15,7 +15,7 @@
         },
         "profile": {
             "title": "Vytvoriť profil",
-            "profileName": "Profile name",
+            "profileName": "Názov profilu",
             "body1": "Môžete si vytvoriť viaceré používateľské profily pre organizáciu vašich peňaženiek a zvýšenie súkromia.",
             "body2": {
                 "first": "Začnime s menom vášho prvého profilu.",
@@ -23,7 +23,7 @@
             },
             "addMore": "Viac profilov viete pridať neskôr.",
             "developer": {
-                "label": "Developer profile",
+                "label": "Vývojársky profil",
                 "info": "Connect to public and private IOTA networks"
             }
         },
@@ -369,17 +369,17 @@
                 "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
             },
             "networkConfiguration": {
-                "title": "Network config",
+                "title": "Nastavenie siete",
                 "title2": "Network configuration",
                 "description": {
-                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
-                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                    "dev": "Nastavenia vašej siete sa aktualizujú automaticky podľa aktuálnych nastavení uzla (pepínanie medzi sieťami spôsobi obnovenie stavu peňaženky)",
+                    "nonDev": "Nastavenia vašej siete sa aktualizujú automaticky podľa aktuálnych nastavení uzla"
                 },
-                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
-                "resetWallet": "Your wallet state has been reset.",
-                "connectedTo": "Connected to",
+                "switchedNetworks": "Sieť úspešne zmenaná na \"{networkName}\".",
+                "resetWallet": "Stav vašej peňaženky bol obnovený.",
+                "connectedTo": "Pripojené k",
                 "nodeConfiguration": {
-                    "title": "Node selection",
+                    "title": "Výber uzla",
                     "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
                     "automatic": "Automatic",
                     "manual": "Manual"
@@ -499,24 +499,24 @@
                 "ended": "Staking ended"
             },
             "summary": {
-                "stakedFunds": "Staked funds"
+                "stakedFunds": "Stakované prostriedky"
             },
             "info": {
                 "upcomingSubheader": "Event has not started",
                 "upcomingHeader": "Check back later",
                 "commencingSubheader": "Get ready for staking",
-                "commencingHeader": "Pre-stake your tokens!",
+                "commencingHeader": "Pred-stakuj svoje tokeny!",
                 "holdingSubheaderHolding": "Now earning staking rewards",
                 "holdingSubheaderNotHolding": "Earn rewards by staking IOTA",
                 "holdingHeaderHolding": "{duration} left",
-                "holdingHeaderNotHolding": "Stake your tokens!",
+                "holdingHeaderNotHolding": "Stakuj svoje tokeny!",
                 "endedSubheader": "Staking has now ended",
                 "endedHeader": "Thank you!",
                 "inactiveHeader": "Try changing node",
                 "inactiveSubheader": "Staking not detected"
             },
             "airdrops": {
-                "holding": "Remaining",
+                "holding": "Zostáva",
                 "commencing": "Until staking begins",
                 "collectedRewards": "Collected rewards",
                 "assembly": {
@@ -639,7 +639,7 @@
         "transaction": {
             "title": "Potvrdenie transakcie",
             "body": "Chcete poslať {amount} ",
-            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards."
+            "sendingFromStakedAccount": "Posielaš prevod z peňaženky, ktorá je práve stakovaná. Tento prevod odstakuje tvoje tokeny. Prevod pokojne vykonaj, avšak zvyšné tokeny bude potom treba znovu stakovať."
         },
         "balanceFinder": {
             "title": "Vyhľadávač zostatkov",
@@ -714,29 +714,29 @@
         "exportTransactionHistory": {
             "title": "Export transaction history",
             "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
-            "profileName": "Profile name:",
-            "accountName": "Account name:",
+            "profileName": "Názov profilu:",
+            "accountName": "Názov účtu:",
             "typePassword": "Type your password to allow exporting"
         },
         "stakingNotice": {
-            "upcomingDate": "Staking has not started yet",
-            "commencingDate": "Staking has not started yet",
+            "upcomingDate": "Stakovanie ešte nezačalo",
+            "commencingDate": "Stakovanie ešte nezačalo",
             "body": "By pre-staking your funds before staking starts, you will automatically begin receiving rewards when staking begins.",
             "ok": "Ok, I understand"
         },
         "stakingManager": {
             "title": "Staking Management",
-            "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
-            "totalFundsStaked": "Total funds staked",
-            "stakedSuccessfully": "Your funds have been staked for {account}.",
-            "unstakedSuccessfully": "Your funds have been unstaked for {account}."
+            "description": "Keď stakuješ peňaženku, pošleš transakciu sebe samému, čím tieto prostriedky označíš ako staknuté. Svoje tokeny môžeš kedykoľvek presunúť, avšak staking odmeny už nebudeš naďalej dostávať.",
+            "totalFundsStaked": "Suma stakovaných prostriedkov",
+            "stakedSuccessfully": "Tvoje prostriedky boli stakované pre {account}.",
+            "unstakedSuccessfully": "Tvoje prostriedky boli odstakované pre {account}."
         },
         "stakingConfirmation": {
             "title": "Airdrop Participation",
-            "subtitleStake": "You are about to stake",
+            "subtitleStake": "Chystáte sa stakovať",
             "subtitleMerge": "You are about to merge",
-            "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
-            "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
+            "bodyStake": "Ak sa nechceš zúčastniť oboch airdropov, odhlásiť sa môžeš nižšie. Odstakovať a znovu stakovať môžeš kedykoľvek.",
+            "bodyMerge": "Tvoje prostriedky budú stakované pre {airdrop}. Pre zmenu airdropov na ktorých sa chceš podielať, odstakuj túto peňaženku a stakuj ju znovu.",
             "estimatedAirdrop": "Estimated rewards"
         },
         "shimmer-info": {
@@ -864,10 +864,10 @@
         "visitWebsite": "Visit website",
         "howItWorks": "How it works",
         "learnAboutStaking": "Learn about staking",
-        "stake": "Stake",
-        "unstake": "Unstake",
-        "stakeFunds": "Stake funds",
-        "manageStake": "Manage stake",
+        "stake": "Stakovať",
+        "unstake": "Odstakovať",
+        "stakeFunds": "Stakuj prostriedky",
+        "manageStake": "Upraviť stake",
         "merge": "Merge",
         "mergeFunds": "Merge funds",
         "done": "Done"
@@ -988,35 +988,35 @@
         "sendingFrom": "Odosielam z {account}",
         "receivedTo": "Prijaté na {account}",
         "sentFrom": "Odoslané z {account}",
-        "stakedFor": "Staked for {account}",
-        "unstakedFor": "Unstaked for {account}",
-        "votedFor": "Voted for {account}",
-        "unvotedFor": "Unvoted for {account}",
+        "stakedFor": "Stakované za {account}",
+        "unstakedFor": "Odstakované za {account}",
+        "votedFor": "Hlasované za {account}",
+        "unvotedFor": "Hlasované za {account}",
         "receiving": "Prijímané",
         "sending": "Odosielané",
         "legacyNetwork": "Zastaralá sieť",
         "capsLock": "Caps Lock je zapnutý",
         "version": "Verzia {version}",
-        "unknown": "Unknown",
-        "none": "None",
+        "unknown": "Neuvedené",
+        "none": "Žiadne",
         "days": "day(s)",
         "time": {
-            "days": "days",
-            "day": "day",
+            "days": "dni",
+            "day": "deň",
             "hours": "hours",
-            "hour": "hour",
-            "minutes": "minutes",
-            "minute": "minute",
-            "seconds": "seconds",
-            "second": "second"
+            "hour": "hodina",
+            "minutes": "minúty",
+            "minute": "minúta",
+            "seconds": "sekundy",
+            "second": "sekunda"
         },
-        "staked": "Staked",
-        "unstaked": "Unstaked",
-        "staking": "Staking",
+        "staked": "Stakované",
+        "unstaked": "Odstakované",
+        "staking": "Stakovanie",
         "unstaking": "Unstaking",
-        "notStaked": "Not staked",
-        "stakedFunds": "Staked funds",
-        "unstakedFunds": "Unstaked funds"
+        "notStaked": "Nestakované",
+        "stakedFunds": "Stakované prostriedky",
+        "unstakedFunds": "Odstakované prostriedky"
     },
     "dates": {
         "today": "Dnes",
@@ -1042,7 +1042,7 @@
         "accountsSynchronized": "Synchronizácia peňaženky je kompletná",
         "fundsAvailableSoon": "Vaše prostriedky budú čoskoro k dispozícii",
         "exportTransactionHistory": {
-            "success": "Transaction history for {accountAlias} was successfully saved to {filePath}",
+            "success": "História transakcií pre {accountAlias} bola úspešne uložená do {filePath}",
             "error": "Unable to export transaction history for {accountAlias}"
         },
         "deepLinkingRequest": {
@@ -1174,9 +1174,9 @@
         },
         "participation": {
             "cannotUseAccount": "Unable to use the specified account.",
-            "cannotFindStakingEvent": "Unable to find staking event.",
-            "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
-            "invalidStakingEventId": "Invalid staking event ID."
+            "cannotFindStakingEvent": "Nie je možné nájsť staking udalosť.",
+            "cannotVisitAirdropWebsite": "Nie je možné otvoriť {airdrop} stránku.",
+            "invalidStakingEventId": "Nesprávne staking event ID."
         }
     },
     "warning": {
@@ -1184,7 +1184,7 @@
             "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
         },
         "participation": {
-            "noAccounts": "You do not have any accounts available to participate."
+            "noAccounts": "Pre zúčastnenie nemáš dostupné žiadne kontá."
         }
     },
     "tooltips": {
@@ -1198,55 +1198,55 @@
         },
         "stakingIndicator": {
             "upcoming": {
-                "title": "Staking has not started yet",
+                "title": "Stakovanie ešte nezačalo",
                 "body": "Check back later. The staking event has not begun."
             },
             "commencing": {
-                "title": "Pre-staking is now open",
-                "body": "Pre-stake your tokens, and once staking begins, you will automatically start receiving rewards every 10 seconds."
+                "title": "Pred-stakovanie je otvorené",
+                "body": "Pred-stakni svoje tokeny a akonáhle staking začne, automaticky začneš každých 10 sekúnd dostávať odmeny."
             },
             "activeHolding": {
-                "title": "Staking is now in progress",
-                "body": "Good job. You will receive rewards every 10 seconds."
+                "title": "Prebieha stakovanie",
+                "body": "Dobrá práca. Odmeny budeš dostávať každých 10 sekúnd."
             },
             "inactiveHolding": {
-                "title": "Staking is now open",
-                "body": "Stake your IOTA tokens to receive rewards every 10 seconds."
+                "title": "Stakovanie je otvorené",
+                "body": "Stakni svoje IOTA tokeny a dostávaj odmeny každých 10 sekúnd."
             },
             "inactive": {
-                "title": "No staking events detected",
-                "body": "Open network configuration in Advanced Settings and make sure the current node has the \"Participation\" feature by clicking \"View Info\"."
+                "title": "Nebola zistená žiadna staking udalosť",
+                "body": "Otvor nastavenie siete v pokročilých nastaveniach a kliknutím na \"Zobraziť Informácie\" sa uisti, že aktuálny uzol má hodnotu \"Ùčasť\"."
             },
             "ended": {
-                "title": "Staking has now ended",
-                "body": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch."
+                "title": "Stakovanie teraz skončilo",
+                "body": "Assembly a Shimmer odmeny budú prevedené do tvojich peňaženiek keď sa tieto siete spustia."
             }
         },
         "partiallyStakedFunds": {
-            "title": "New unstaked funds: {amount}",
-            "titleNoFunds": "New unstaked funds",
-            "preBody": "You have received tokens on a staked wallet.",
-            "body": "You need to manually stake these new funds to receive airdrop rewards for them."
+            "title": "Nové odstakované prostriedky: {amount}",
+            "titleNoFunds": "Nové odstakované prostriedky",
+            "preBody": "Dostal si tokeny na stakovanej peňaženke.",
+            "body": "Tieto nové prostriedky musíš manuálne staknúť aby si pre ne mohol dostať airdrop odmeny."
         },
         "stakingMinRewards": {
-            "title": "Below minimum reward value",
-            "titleMinBalance": "{amount} minimum balance required",
-            "bodyMinBalace": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
-            "continue": "Please continue staking for another {duration}.",
-            "bodyBelowMin": "This wallet has not reached the minimum reward value for {airdrop} ({airdropRewardMin}).",
-            "bodyWillReachMin": "You must stake for another {duration} to reach the minimum.",
-            "bodyWillNotReachMin": "You will not reach the minimum during the remaining staking period unless you stake more IOTA.",
-            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum rewards for {airdrop} ({airdropRewardMin})."
+            "title": "Pod minimálnou hodnotou odmeny",
+            "titleMinBalance": "{amount} minimálny požadovaný stav",
+            "bodyMinBalace": "Táto peňaženka nemá dostatok IOTA prostriedkov na dosiahnutie minimálnej airdrop odmeny a preto nemôže byť stakovaná.",
+            "continue": "Prosím pokračuj v stakovaní dalších {duration}.",
+            "bodyBelowMin": "Táto peňaženka nedosiahla minimálnu hodnotu odmeny pre {airdrop} ({airdropRewardMin}).",
+            "bodyWillReachMin": "Musíš stakovať ešte {duration} na dosiahnutie minima.",
+            "bodyWillNotReachMin": "Nedosiahneš minimum počas stakovacieho obdobia, pokiaľ nestakneš viac IOTA tokenov.",
+            "bodyDidNotReachMin": "Nestakol si dostatok IOTA tokenov na dosiahnutie minimálnych odmient pre {airdrop} ({airdropRewardMin})."
         }
     },
     "exports": {
         "transactionHistoryCsv": {
             "messageId": "ID správy",
-            "internal": "Internal",
+            "internal": "Interná",
             "rawValue": "Raw Value",
             "formattedValue": "Formatted Value",
             "date": "Dátum",
-            "time": "Time"
+            "time": "Čas"
         }
     }
 }

@@ -492,10 +492,10 @@
             "welcome": "Witaj w panelu stakingu",
             "status": {
                 "upcoming": "Wydarzenie nie zostało rozpoczęte",
-                "commencing": "Pre-staking otwarty",
+                "commencing": "Pre-staking możliwy",
                 "holdingActive": "Staking w toku",
-                "holdingInactive": "Staking otwarty",
-                "inactive": "Staking nie wykryty",
+                "holdingInactive": "Staking możliwy",
+                "inactive": "Nie wykryto stakingu",
                 "ended": "Staking zakończony"
             },
             "summary": {
@@ -506,14 +506,14 @@
                 "upcomingHeader": "Sprawdź ponownie później",
                 "commencingSubheader": "Przygotuj się do stakingu",
                 "commencingHeader": "Pre-stakuj swoje tokeny!",
-                "holdingSubheaderHolding": "Teraz otrzymujesz nagrody za stakowanie",
-                "holdingSubheaderNotHolding": "Zdobywaj nagrody poprzez stakowanie IOTA",
+                "holdingSubheaderHolding": "Otrzymujesz nagrody za staking",
+                "holdingSubheaderNotHolding": "Nagrody za staking IOTA",
                 "holdingHeaderHolding": "{duration} do końca",
                 "holdingHeaderNotHolding": "Stakuj swoje tokeny!",
                 "endedSubheader": "Staking zakończył się",
                 "endedHeader": "Dziękujemy!",
                 "inactiveHeader": "Spróbuj zmienić serwer",
-                "inactiveSubheader": "Staking nie wykryty"
+                "inactiveSubheader": "Nie wykryto stakingu"
             },
             "airdrops": {
                 "holding": "Pozostało",
@@ -525,7 +525,7 @@
                 },
                 "shimmer": {
                     "name": "Shimmer",
-                    "description": "Sieć stagingowa motywowana do rozwoju głównych innowacji IOTA. Co będzie, to będzie. To, jak Shimmer będzie się rozwijał, zależy od Ciebie."
+                    "description": "Sieć stagingowa motywowana do rozwoju głównych innowacji w technologii IOTA. Co będzie, to będzie. To, jak Shimmer będzie się rozwijał, zależy od Ciebie."
                 }
             }
         }
@@ -578,7 +578,7 @@
             "title": "Historia adresów dla {name}",
             "currentBalance": "Saldo: {balance}",
             "internal": "Adres wewnętrzny",
-            "external": "Adres do wpłaty"
+            "external": "Adres odbiorczy"
         },
         "node": {
             "titleAdd": "Dodaj serwer",
@@ -713,7 +713,7 @@
         },
         "exportTransactionHistory": {
             "title": "Eksportuj historię transakcji",
-            "body": "Eksportuj historię transakcji dla wybranego portfela. Eksportowany plik będzie w formacie .csv.",
+            "body": "Eksportuj historię transakcji dla wybranego portfela. Eksportowany plik zostanie zapisany w formacie CSV.",
             "profileName": "Nazwa profilu:",
             "accountName": "Nazwa konta:",
             "typePassword": "Wpisz hasło, aby umożliwić eksport"
@@ -726,10 +726,10 @@
         },
         "stakingManager": {
             "title": "Zarządzanie stakingiem",
-            "description": "Kiedy wykonujesz staking portfela, wysyłasz do siebie transakcję oznaczając te środki jako \"staked\". Możesz transferować tokeny w dowolnym momencie, ale nie będziesz kontynuował otrzymywania nagród za stakowanie.",
+            "description": "Kiedy stakujesz portfel, wysyłasz do siebie transakcję, oznaczając te środki jako \"staked\". Możesz używać tych tokenów w dowolnym momencie, ale przestaniesz wtedy otrzymywać nagrody za ich stakowanie.",
             "totalFundsStaked": "Stakujesz łącznie",
-            "stakedSuccessfully": "Twoje fundusze zostały stakowane z {account}.",
-            "unstakedSuccessfully": "Środki zostały odstakowane dla {account}."
+            "stakedSuccessfully": "Twoje środki zostały stakowane przez {account}.",
+            "unstakedSuccessfully": "Środki zostały odstakowane przez {account}."
         },
         "stakingConfirmation": {
             "title": "Uczestnictwo w airdropie",
@@ -737,17 +737,17 @@
             "subtitleMerge": "Zamierzasz scalić",
             "bodyStake": "Jeśli nie chcesz uczestniczyć w obu airdropach, możesz dokonać wyboru poniżej. W każdej chwili możesz odstakować oraz ponownie stakować swoje tokeny.",
             "bodyMerge": "Twoje środki zostaną stakowane na {airdrop}. Aby zmienić airdropy, w których chcesz uczestniczyć, odstakuj ten portfel i stakuj go ponownie.",
-            "estimatedAirdrop": "Szacowane nagrody"
+            "estimatedAirdrop": "Szacowana nagroda"
         },
         "shimmer-info": {
             "title": "O Shimmer",
-            "body1": "Gratulujemy, zdobyłeś tokeny SMR jako nagrodę za staking. Shimmer to sieć rozwojowa do testowania głównych udoskonaleń IOTA.",
-            "body2": "Naszym celem jest uruchomienie Shimmer w 2022 roku. Twoje tokeny będą dostępne do transferu po uruchomieniu sieci."
+            "body1": "Gratulacje, zdobyłeś tokeny SMR jako nagrodę za staking. Shimmer to sieć rozwojowa do testowania głównych udoskonaleń technologii IOTA.",
+            "body2": "Uruchomienie Shimmer jest naszym celem na rok 2022. Twoje tokeny będą dostępne do transferu po uruchomieniu sieci."
         },
         "assembly-info": {
             "title": "O Assembly",
-            "body1": "Gratulujemy, zdobyłeś tokeny ASMB jako nagrodę za staking. Assembly to wielołańcuchowa sieć do wdrażania skalowalnych smart kontraktów IOTA.",
-            "body2": "Naszym celem jest uruchomienie Assembly w 2022 roku. Twoje tokeny będą dostępne do transferu po uruchomieniu sieci."
+            "body1": "Gratulacje, zdobyłeś tokeny ASMB jako nagrodę za staking. Assembly to wielołańcuchowa sieć do wdrażania skalowalnych smart kontraktów IOTA.",
+            "body2": "Uruchomienie Assembly jest naszym celem na rok 2022. Twoje tokeny będą dostępne do transferu po uruchomieniu sieci."
         }
     },
     "charts": {
@@ -988,10 +988,10 @@
         "sendingFrom": "Wysyłanie z {account}",
         "receivedTo": "Odebrano na {account}",
         "sentFrom": "Wysłano z {account}",
-        "stakedFor": "Stakowano z {account}",
-        "unstakedFor": "Odstakowano z {account}",
-        "votedFor": "Zagłosowano z {account}",
-        "unvotedFor": "Wycofano głos z {account}",
+        "stakedFor": "Staking przez {account}",
+        "unstakedFor": "Odstakowano przez {account}",
+        "votedFor": "Zagłosowano przez {account}",
+        "unvotedFor": "Wycofano głos przez {account}",
         "receiving": "Odbieranie",
         "sending": "Wysyłanie",
         "legacyNetwork": "Poprzednia sieć",
@@ -1011,9 +1011,9 @@
             "second": "sekunda"
         },
         "staked": "Stakowano",
-        "unstaked": "Niestakowano",
+        "unstaked": "Niestakowane",
         "staking": "Staking",
-        "unstaking": "Wycofaj",
+        "unstaking": "Wycofywanie środków",
         "notStaked": "Nie stakujesz",
         "stakedFunds": "Stakowane środki",
         "unstakedFunds": "Niestakowane środki"
@@ -1029,7 +1029,7 @@
     "notifications": {
         "valueTx": "Odbieranie {{value}} na {{account}}",
         "confirmed": "Transakcja wychodząca {{value}} z {{account}} została potwierdzona",
-        "confirmedInternal": "Transfer {{value}} z {{senderAccount}} na {{receiverAccount}} został potwierdzony",
+        "confirmedInternal": "Transfer {{value}} z {{senderAccount}} do {{receiverAccount}} został potwierdzony",
         "confirmedInternalNoAccounts": "Wewnętrzny transfer {{value}} został potwierdzony",
         "failed": "Transakcja wychodząca {{value}} z {{account}} nie powiodła się",
         "downloadingUpdate": "Pobieranie aktualizacji",
@@ -1088,7 +1088,7 @@
         },
         "account": {
             "length": "Nazwa Twojego portfela nie może być dłuższa niż {length, plural, one {1 znak} few {# znaki} many {# znaków} other {# znaków}}.",
-            "empty": "Przed utworzeniem nowego portfela musisz skorzystać z poprzedniego.",
+            "empty": "Przed utworzeniem nowego portfela musisz użyć poprzedniego.",
             "notEmpty": "Musisz przenieść swoje środki przed usunięciem tego portfela.",
             "duplicate": "Portfel o tej nazwie już istnieje.",
             "tilde": "Nazwa profilu nie może zaczynać się od znaku '~'.",
@@ -1184,7 +1184,7 @@
             "http": "Korzystanie z węzłów przez HTTP powoduje, że ruch jest niezaszyfrowany i może stanowić zagrożenie dla bezpieczeństwa."
         },
         "participation": {
-            "noAccounts": "Nie posiadasz żadnych kont dostępnych do uczestnictwa w wydarzeniu."
+            "noAccounts": "Nie masz żadnych kont zdolnych do udziału w wydarzeniu."
         }
     },
     "tooltips": {
@@ -1230,9 +1230,9 @@
         },
         "stakingMinRewards": {
             "title": "Poniżej minimalnej wartości nagrody",
-            "titleMinBalance": "Wymagane minimalne saldo {amount}",
+            "titleMinBalance": "Potrzeba minimum {amount}",
             "bodyMinBalace": "Ten portfel nie ma wystarczającej ilości tokenów IOTA, aby osiągnąć minimalną nagrodę w airdropie i dlatego nie może być on stakowany.",
-            "continue": "Kontynuuj stakowanie jeszcze przez {duration}.",
+            "continue": "Kontynuuj staking jeszcze przez {duration}.",
             "bodyBelowMin": "Ten portfel nie osiągnął minimalnej wartości nagrody dla {airdrop} ({airdropRewardMin}).",
             "bodyWillReachMin": "Musisz stakować przez kolejne {duration}, aby osiągnąć minimum.",
             "bodyWillNotReachMin": "Nie osiągniesz minimum podczas pozostałego okresu stakingu, dopóki nie ulokujesz większej ilości IOTA.",
@@ -1242,9 +1242,9 @@
     "exports": {
         "transactionHistoryCsv": {
             "messageId": "ID wiadomości",
-            "internal": "Wewnątrz",
-            "rawValue": "Wartości surowe",
-            "formattedValue": "Wartości sformatowane",
+            "internal": "Transfer wewnętrzny",
+            "rawValue": "Wartość surowa",
+            "formattedValue": "Wartość sformatowana",
             "date": "Data",
             "time": "Godzina"
         }
