@@ -8,7 +8,7 @@
     export let title = locale('views.pickers.color')
     export let classes = ''
 
-    const accountColors = Object.values(AccountColors)
+    const accountColors = Object.values(AccountColors).filter(c => /[#]/.test(c as string))
     const hex2rgb = hex => hex.match(/\w\w/g)?.map(x => parseInt(x, 16)).join(',')
 
     const activeAccountColorIndex = accountColors.findIndex((_, i) => accountColors[i] === active)
@@ -45,10 +45,10 @@
 
 <div style="--account-color: {inputValue ? hex2rgb(active) : ''}" class={classes}>
     <div class="flex flex-row mb-4">
-        <Text type="h5">{title} {inputValue}</Text>
+        <Text type="h5">{title}</Text>
     </div>
     <ul class="flex flex-row justify-between">
-        {#each Object.values(AccountColors) as color, i}
+        {#each Object.keys(AccountColors).reduce((acc, val) => /[#]/.test(val) ? acc : [...acc, val.toLowerCase()], []) as color, i}
             <li tabindex="0" class='w-8 h-8 rounded-lg ring-opacity-30 hover:ring-opacity-40 cursor-pointer flex justify-center items-center
             bg-{color}-500 hover:bg-{color}-600 focus:bg-{color}-600 ring-{color}-500' class:ring-4="{activeElement === i}"
             on:click={() => handleColorClick(i)} on:keypress={(event) => handleKeyPress(event, i)} aria-label={color}>

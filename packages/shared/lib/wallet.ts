@@ -73,14 +73,13 @@ import type {
     WalletAccount,
     WalletState,
 } from './typings/wallet'
-import { setProfileAccount } from 'shared/lib/profile'
 import resolveConfig from 'tailwindcss/resolveConfig'
 import tailwindConfig from 'shared/tailwind.config.js'
 
 const configColors = resolveConfig(tailwindConfig).theme.colors
 
 export enum AccountColors {
-    Default = configColors['blue']['500'],
+    Blue = configColors['blue']['500'],
     Green = configColors['green']['500'],
     Yellow = configColors['yellow']['500'],
     Red = configColors['red']['500'],

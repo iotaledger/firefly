@@ -20,7 +20,7 @@
 
     let accountAlias = ''
     let isBusy = false
-    let color = AccountColors.Default
+    let color = AccountColors.Blue
     let pattern = AccountPatterns.Default
 
     // This looks odd but sets a reactive dependency on accountAlias, so when it changes the error will clear

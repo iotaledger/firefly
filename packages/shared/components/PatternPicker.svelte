@@ -4,11 +4,14 @@
 
     export let locale
     export let title = locale('views.pickers.pattern')
-    export let color = AccountColors.Default
+    export let color = AccountColors.Blue
     export let active = AccountPatterns.Default
+    export let classes = ''
 
     const handleKeyPress = (event, pattern) => event.key === 'Enter' && (active = pattern)
     const handleClick = (pattern) => active = pattern
+
+    const hex2rgb = hex => hex.match(/\w\w/g)?.map(x => parseInt(x, 16)).join(',')
 </script>
 
 <style type="text/scss">
@@ -19,14 +22,14 @@
     }
 </style>
 
-<div style="--account-color: {color}">
+<div style="--account-color: {hex2rgb(color)}" class={classes}>
     <div class="flex flex-row mb-4">
         <Text type="h5">{title}</Text>
     </div>
     <ul class="grid grid-cols-4 grid-rows-2 gap-4">
         {#each Object.values(AccountPatterns) as pattern}
             <li
-                class="h-20 rounded-lg {pattern === active ? `active opacity-100 ring-4 hover:ring-opacity-40
+                class="h-16 rounded-lg {pattern === active ? `active opacity-100 ring-4 hover:ring-opacity-40
                 focus:ring-opacity-40` : `bg-gray-300 opacity-80 hover:opacity-100 focus:opacity-100`} bg-no-repeat
                 bg-center bg-cover bg cursor-pointer flex justify-center items-center"
                 style={pattern ? `background-image: url("assets/patterns/${pattern}.svg");` : null}

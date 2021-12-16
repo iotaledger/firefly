@@ -118,13 +118,13 @@ export const getAccountActivityData = (
         data: [],
         tooltips: [],
         label: localize('general.incoming'),
-        color: account.color || AccountColors.Default,
+        color: account.color || AccountColors.Blue,
     } // TODO: profile colors
     const outgoing: ChartData = {
         data: [],
         tooltips: [],
         label: localize('general.outgoing'),
-        color: AccountColors.Default,
+        color: AccountColors.Blue,
     } // TODO: profile colors
     const labels: string[] = []
     const messages: Message[] =

@@ -401,13 +401,13 @@ export const setProfileAccount = (activeProfile: Profile, profileAccount: Profil
  *
  * @returns {string}
  */
-export const getColor = (activeProfile: Profile, accountId: string): string => {
+export const getColor = (activeProfile: Profile, accountId: string): string | AccountColors => {
     const { accounts } = activeProfile
 
     if (accounts?.length) {
-        return accounts.find((account) => account.id === accountId)?.color || AccountColors.Default
+        return accounts.find((account) => account.id === accountId)?.color || AccountColors.Blue
     }
-    return AccountColors.Default
+    return AccountColors.Blue
 }
 
 /**
