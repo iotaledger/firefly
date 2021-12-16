@@ -726,16 +726,16 @@
         },
         "stakingManager": {
             "title": "Управление стэйкингом",
-            "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
-            "totalFundsStaked": "Total funds staked",
-            "stakedSuccessfully": "Your funds have been staked for {account}.",
-            "unstakedSuccessfully": "Your funds have been unstaked for {account}."
+            "description": "Когда вы перевели кошелек в режим стейкинга, вы отправляете транзакцию себе, помечая эти средства как участвующие в стейкинге. Вы можете перевести токены в любое время, но вы не будете продолжать получать доход.",
+            "totalFundsStaked": "Всего средств, участвующих в стейкинге",
+            "stakedSuccessfully": "Ваши средства теперь участвуют в стейкинге на {account}.",
+            "unstakedSuccessfully": "Ваши средства были сняты со стейкинга на {account}."
         },
         "stakingConfirmation": {
-            "title": "Airdrop Participation",
-            "subtitleStake": "You are about to stake",
-            "subtitleMerge": "You are about to merge",
-            "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
+            "title": "Участие в Airdrop",
+            "subtitleStake": "Вы собираетесь принять участие в стейкинге",
+            "subtitleMerge": "Вы собираетесь объединить",
+            "bodyStake": "Если вы не хотите участвовать в обоих аирдропах, вы можете отказаться от участия ниже. Вы можете отозвать и возобновить стейкинг в любое время.",
             "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
             "estimatedAirdrop": "Estimated rewards"
         },

@@ -504,28 +504,28 @@
             "info": {
                 "upcomingSubheader": "活動尚未開始",
                 "upcomingHeader": "請稍後再查看",
-                "commencingSubheader": "為質押做好準備",
+                "commencingSubheader": "準備質押",
                 "commencingHeader": "預先質押您的代幣！",
-                "holdingSubheaderHolding": "正在賺取質押獎勵",
+                "holdingSubheaderHolding": "現正賺取質押獎勵",
                 "holdingSubheaderNotHolding": "質押 IOTA 來賺取獎勵",
                 "holdingHeaderHolding": "剩下 {duration}",
                 "holdingHeaderNotHolding": "質押您的代幣！",
-                "endedSubheader": "質押現在已經結束",
+                "endedSubheader": "質押現已結束",
                 "endedHeader": "謝謝您！",
                 "inactiveHeader": "請嘗試更換節點",
                 "inactiveSubheader": "未偵測到質押"
             },
             "airdrops": {
                 "holding": "剩下",
-                "commencing": "到質押開始前",
+                "commencing": "直到質押開始前",
                 "collectedRewards": "已領取的獎勵",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
+                    "description": "Assembly是一個無須授權, 高擴展性的多鏈網絡, 用來建置和佈署組合式的智能合約. Assembly是Web3的未來. "
                 },
                 "shimmer": {
                     "name": "Shimmer",
-                    "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
+                    "description": "利用先行的激勵網絡來推進IOTA的重大創新. 無論未來會如何發展, Shimmer的演進由你決定."
                 }
             }
         }
@@ -639,7 +639,7 @@
         "transaction": {
             "title": "確認交易",
             "body": "您即將發送 {amount} 到",
-            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards."
+            "sendingFromStakedAccount": "您正在從質押中的錢包發送交易。這將解除您的代幣質押。交易可繼續進行，但交易後您將需要重新質押剩餘的代幣。"
         },
         "balanceFinder": {
             "title": "餘額查詢",
@@ -713,7 +713,7 @@
         },
         "exportTransactionHistory": {
             "title": "匯出交易記錄",
-            "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
+            "body": "匯出錢包的交易紀錄. 匯出檔案內容為csv格式.",
             "profileName": "設定檔名稱:",
             "accountName": "帳戶名稱：",
             "typePassword": "輸入您的密碼以允許匯出"
@@ -721,33 +721,33 @@
         "stakingNotice": {
             "upcomingDate": "質押尚未開始",
             "commencingDate": "質押尚未開始",
-            "body": "By pre-staking your funds before staking starts, you will automatically begin receiving rewards when staking begins.",
+            "body": "在質押正式啟動前預先質押你的資金，在質押啟動時你就能自動開始收到質押獎勵。",
             "ok": "好的，我瞭解了"
         },
         "stakingManager": {
             "title": "質押管理",
-            "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
+            "description": "當你質押一個錢包時, 代表你對自己發出一筆交易, 使得錢包內的資金狀態轉為\"已質押\". 你還是可以隨時轉出資金, 但你將不再收到質押獎勵.",
             "totalFundsStaked": "質押資金總額",
-            "stakedSuccessfully": "Your funds have been staked for {account}.",
-            "unstakedSuccessfully": "Your funds have been unstaked for {account}."
+            "stakedSuccessfully": "您的資金已爲 {account} 質押。",
+            "unstakedSuccessfully": "您的資金已從 {account} 解除質押。"
         },
         "stakingConfirmation": {
             "title": "參加空投",
-            "subtitleStake": "您即將質押",
+            "subtitleStake": "您將要質押",
             "subtitleMerge": "您即將合併",
-            "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
-            "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
+            "bodyStake": "如果你不想參與兩項空投，你可以在下面選擇退出。你可以隨時解除質押並重新質押以重新加入。",
+            "bodyMerge": "你的資金將爲 {airdrop} 質押。要切換你想參與的空投項目，請解除質押此錢包並重新質押。",
             "estimatedAirdrop": "估計獎勵"
         },
         "shimmer-info": {
             "title": "關於 Shimmer",
-            "body1": "Congratulations you have earned SMR tokens as a staking reward. Shimmer is an incentivized staging network to test major upgrades on IOTA.",
-            "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
+            "body1": "恭喜你已賺取SMR代幣的質押獎勵. Shimmer是一個先行激勵網絡, 用來預先測試IOTA鏈上的主要更新.",
+            "body2": "我們預計於2022年啟動Shimmer網絡. 一旦網絡啟動你就能開始操作你的SMR token."
         },
         "assembly-info": {
             "title": "關於 Assembly",
-            "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
-            "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
+            "body1": "恭喜你已賺取ASMB代幣的質押獎勵. Assembly是一個多鏈網絡, 用來將高擴展性智能合約佈署於IOTA上.",
+            "body2": "我們預計於2022年啟動Assembly網絡. 一旦網絡啟動你就能開始操作你的ASMB token."
         }
     },
     "charts": {
@@ -959,8 +959,8 @@
         "transferBroadcasting": "廣播交易",
         "transferComplete": "轉移完成",
         "generatingReceiveAddress": "產生接收地址",
-        "broadcasting": "Broadcasting",
-        "confirming": "Confirming",
+        "broadcasting": "廣播中",
+        "confirming": "確認中",
         "creatingAccount": "正在創建錢包，請稍候...",
         "updatingAccount": "正在更新錢包，請稍候...",
         "accountSyncing": "錢包正在同步",
@@ -988,10 +988,10 @@
         "sendingFrom": "從 {account} 發送中",
         "receivedTo": "已收到 {account}",
         "sentFrom": "發送自 {account}",
-        "stakedFor": "Staked for {account}",
-        "unstakedFor": "Unstaked for {account}",
-        "votedFor": "Voted for {account}",
-        "unvotedFor": "Unvoted for {account}",
+        "stakedFor": "已為 {account} 質押",
+        "unstakedFor": "已為 {account} 解除質押",
+        "votedFor": "已為 {account} 投票",
+        "unvotedFor": "已為 {account} 取消投票",
         "receiving": "收款中",
         "sending": "正在發送",
         "legacyNetwork": "舊版網路",
@@ -999,24 +999,24 @@
         "version": "版本 {version}",
         "unknown": "不明",
         "none": "無",
-        "days": "day(s)",
+        "days": "天",
         "time": {
-            "days": "days",
-            "day": "day",
-            "hours": "hours",
-            "hour": "hour",
-            "minutes": "minutes",
-            "minute": "minute",
-            "seconds": "seconds",
-            "second": "second"
+            "days": "天",
+            "day": "天",
+            "hours": "小時",
+            "hour": "小時",
+            "minutes": "分鐘",
+            "minute": "分鐘",
+            "seconds": "秒",
+            "second": "秒"
         },
-        "staked": "Staked",
-        "unstaked": "Unstaked",
+        "staked": "已質押",
+        "unstaked": "已解除質押",
         "staking": "質押",
-        "unstaking": "Unstaking",
-        "notStaked": "Not staked",
+        "unstaking": "正在解除質押",
+        "notStaked": "未質押",
         "stakedFunds": "已質押的資金",
-        "unstakedFunds": "Unstaked funds"
+        "unstakedFunds": "未質押的資金"
     },
     "dates": {
         "today": "今天",
@@ -1128,7 +1128,7 @@
             "noSynced": "沒有可用的同步節點。",
             "answer": "無法向所有節點取得回應。",
             "forbidden": "此節點連結已被禁用。",
-            "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node."
+            "pluginNotAvailable": "在目前的節點上無法使用 \"{nodePlugin}\" 插件."
         },
         "network": {
             "mismatch": "此節點的Network ID為: \"{networkId}\"`，與當前網路不相符。",
@@ -1161,7 +1161,7 @@
             "generateAddress": "產生地址時發生錯誤",
             "timeout": "您的 Ledger 裝置已逾時。",
             "disconnected": "您的 Ledger 裝置已斷線。",
-            "noStronghold": "Unable to use Stronghold with Ledger profile."
+            "noStronghold": "Ledger設定檔無法使用Stronghold功能."
         },
         "popup": {
             "preventClose": "無法關閉此彈出視窗。"
@@ -1173,10 +1173,10 @@
             "cannotDecodeBech32": "無法將此字串解析成 Bech32 地址。"
         },
         "participation": {
-            "cannotUseAccount": "Unable to use the specified account.",
-            "cannotFindStakingEvent": "Unable to find staking event.",
-            "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
-            "invalidStakingEventId": "Invalid staking event ID."
+            "cannotUseAccount": "無法使用該指定帳戶。",
+            "cannotFindStakingEvent": "未能找到質押活動。",
+            "cannotVisitAirdropWebsite": "無法開啟{airdrop} 網站。",
+            "invalidStakingEventId": "無效的質押活動ID。"
         }
     },
     "warning": {
@@ -1184,7 +1184,7 @@
             "http": "透過 HTTP 未加密連接來使用節點，可能會造成安全性風險。"
         },
         "participation": {
-            "noAccounts": "You do not have any accounts available to participate."
+            "noAccounts": "您沒有任何可參與的帳號。"
         }
     },
     "tooltips": {
@@ -1198,27 +1198,27 @@
         },
         "stakingIndicator": {
             "upcoming": {
-                "title": "Staking has not started yet",
-                "body": "Check back later. The staking event has not begun."
+                "title": "質押尚未開始",
+                "body": "稍後再檢查。質押活動尚未開始。"
             },
             "commencing": {
-                "title": "Pre-staking is now open",
-                "body": "Pre-stake your tokens, and once staking begins, you will automatically start receiving rewards every 10 seconds."
+                "title": "現已開放預先質押",
+                "body": "預先質押你的token, 一旦質押功能正式啟動, 你每十秒會收到一筆質押獎勵."
             },
             "activeHolding": {
-                "title": "Staking is now in progress",
-                "body": "Good job. You will receive rewards every 10 seconds."
+                "title": "現在質押正在進行中",
+                "body": "恭喜。您將在每10秒獲得獎勵。"
             },
             "inactiveHolding": {
-                "title": "Staking is now open",
-                "body": "Stake your IOTA tokens to receive rewards every 10 seconds."
+                "title": "質押現已開放",
+                "body": "質押您的IOTA代幣以獲得每10秒一次的獎勵。"
             },
             "inactive": {
                 "title": "未偵測到質押活動",
                 "body": "在進階設定中開啟網路設定，按下「檢視資訊」並確認現在的節點擁有「參加」功能。"
             },
             "ended": {
-                "title": "質押現在已經結束",
+                "title": "質押現已結束",
                 "body": "Assembly 和 Shimmer 獎勵將在它們各自的網路啟動後分配到您的錢包。"
             }
         },

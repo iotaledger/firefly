@@ -722,7 +722,7 @@
             "upcomingDate": "Staking još nije započeo",
             "commencingDate": "Staking još nije započeo",
             "body": "Pokretanjem pred-staking-a vaših sredstava, automatski ćete početi dobivati nagrade kad staking događaj započne.",
-            "ok": "Ok, razumio sam"
+            "ok": "U redu, razumijem"
         },
         "stakingManager": {
             "title": "Upravljanje staking-om",
@@ -960,7 +960,7 @@
         "transferComplete": "Transakcija dovršena",
         "generatingReceiveAddress": "Generiranje adrese primatelja",
         "broadcasting": "Emitiranje",
-        "confirming": "Potvrđenjo",
+        "confirming": "Potvrđivanje u tijeku",
         "creatingAccount": "Stvaram novčanik, molim pričekajte...",
         "updatingAccount": "Usklađujem novčanik, molim pričekajte...",
         "accountSyncing": "Novčanik se sinkronizira",
@@ -1010,7 +1010,7 @@
             "seconds": "sekundi",
             "second": "sekunda"
         },
-        "staked": "Staked",
+        "staked": "Staking pokrenut",
         "unstaked": "Staking prekinut",
         "staking": "Staking",
         "unstaking": "Poništenje staking-a",
