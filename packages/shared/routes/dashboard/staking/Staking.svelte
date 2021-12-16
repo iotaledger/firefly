@@ -2,8 +2,13 @@
     import { DashboardPane } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { accountToParticipate, isStakingFeatureNew, participationAction } from 'shared/lib/participation/stores'
-    import { StakingAirdrop as _StakingAirdrop } from 'shared/lib/participation/types'
+    import {
+        accountToParticipate,
+        isStakingFeatureNew,
+        participationAction,
+        stakingEventState,
+    } from 'shared/lib/participation/stores'
+    import { ParticipationEventState, StakingAirdrop as _StakingAirdrop } from 'shared/lib/participation/types'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
     import {
@@ -118,6 +123,10 @@
     }
 
     $: if (!$participationAction && ledgerAwaitingConfirmation && $popupState.type === 'ledgerTransaction') {
+        closePopup(true)
+    }
+
+    $: if ($popupState.type === 'stakingManager' && $stakingEventState === ParticipationEventState.Inactive) {
         closePopup(true)
     }
 
