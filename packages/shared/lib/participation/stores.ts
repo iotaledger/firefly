@@ -92,16 +92,16 @@ export const stakedAccounts: Readable<WalletAccount[]> = derived(
  */
 export const stakedAmount: Readable<number> = derived(participationOverview, (overview) => {
     return overview.reduce((total, accountOverview) => {
-        const { shimmerStakedFunds, assemblyStakedFunds } = accountOverview;
+        const { shimmerStakedFunds, assemblyStakedFunds } = accountOverview
 
         if (shimmerStakedFunds > 0 && assemblyStakedFunds > 0) {
-            total += Math.max(shimmerStakedFunds, assemblyStakedFunds);
+            total += Math.max(shimmerStakedFunds, assemblyStakedFunds)
         } else {
-            total += shimmerStakedFunds;
-            total += assemblyStakedFunds;
+            total += shimmerStakedFunds
+            total += assemblyStakedFunds
         }
 
-        return total;
+        return total
     }, 0)
 })
 
@@ -112,11 +112,11 @@ export const stakedAmount: Readable<number> = derived(participationOverview, (ov
  */
 export const unstakedAmount: Readable<number> = derived(participationOverview, (overview) => {
     return overview.reduce((total, accountOverview) => {
-        const { shimmerUnstakedFunds, assemblyUnstakedFunds } = accountOverview;
+        const { shimmerUnstakedFunds, assemblyUnstakedFunds } = accountOverview
 
-        total += Math.min(shimmerUnstakedFunds, assemblyUnstakedFunds);
+        total += Math.min(shimmerUnstakedFunds, assemblyUnstakedFunds)
 
-        return total;
+        return total
     }, 0)
 })
 
