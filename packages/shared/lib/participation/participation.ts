@@ -4,14 +4,16 @@ import type { WalletAccount } from '../typings/wallet'
 
 import { getParticipationOverview } from './api'
 import { PARTICIPATION_POLL_DURATION } from './constants'
+import { canAccountReachMinimumAirdrop } from './staking'
 import {
     accountToParticipate,
+    isPerformingParticipation,
     participationAction,
     participationEvents,
     participationOverview,
     pendingParticipations,
 } from './stores'
-import { ParticipationEventState, Participation, AccountParticipationAbility } from './types'
+import { AccountParticipationAbility, Participation, ParticipationEventState, StakingAirdrop } from './types'
 
 let participationPollInterval
 
@@ -23,6 +25,7 @@ let participationPollInterval
  * @returns {Promise<void>}
  */
 export async function pollParticipationOverview(): Promise<void> {
+    clearPollParticipationOverviewInterval()
     try {
         await getParticipationOverview()
         /* eslint-disable @typescript-eslint/no-misused-promises */
@@ -54,6 +57,7 @@ export function clearPollParticipationOverviewInterval(): void {
  */
 export const resetParticipation = (): void => {
     accountToParticipate.set(null)
+    isPerformingParticipation.set(false)
     participationAction.set(null)
     participationEvents.set([])
     participationOverview.set([])
@@ -93,11 +97,13 @@ export const canParticipate = (eventState: ParticipationEventState): boolean => 
  */
 export const getAccountParticipationAbility = (account: WalletAccount): AccountParticipationAbility => {
     if (account?.rawIotaBalance < DUST_THRESHOLD) {
-        return AccountParticipationAbility.NoHasDustAmount
+        return AccountParticipationAbility.HasDustAmount
     } else if (account?.messages.some((message) => !message.confirmed)) {
-        return AccountParticipationAbility.NoHasPendingTransaction
+        return AccountParticipationAbility.HasPendingTransaction
+    } else if (!canAccountReachMinimumAirdrop(account, StakingAirdrop.Assembly)) {
+        return AccountParticipationAbility.WillNotReachMinAirdrop
     } else {
-        return AccountParticipationAbility.Yes
+        return AccountParticipationAbility.Ok
     }
 }
 

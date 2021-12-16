@@ -2,12 +2,14 @@
     import { Icon, Text, Tooltip } from 'shared/components'
     import { appSettings } from 'shared/lib/appSettings'
     import { localize } from 'shared/lib/i18n'
+    import { getAccountParticipationAbility } from 'shared/lib/participation'
     import {
         formatStakingAirdropReward,
         getMinimumAirdropRewardInfo,
         getStakingEventFromAirdrop,
         getTimeUntilMinimumAirdropReward,
         getUnstakedFunds,
+        hasAccountReachedMinimumAirdrop,
         isStakingPossible,
     } from 'shared/lib/participation/staking'
     import {
@@ -18,12 +20,16 @@
         stakedAccounts,
         stakingEventState,
     } from 'shared/lib/participation/stores'
-    import { ParticipationEventState, ParticipationOverview, StakingAirdrop } from 'shared/lib/participation/types'
+    import {
+        AccountParticipationAbility,
+        ParticipationEventState,
+        StakingAirdrop,
+    } from 'shared/lib/participation/types'
     import { openPopup } from 'shared/lib/popup'
     import { getBestTimeDuration } from 'shared/lib/time'
-    import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { capitalize } from 'shared/lib/utils'
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
 
     export let name = ''
     export let balance = ''
@@ -63,10 +69,18 @@
          * accounts on the wallet Svelte store.
          */
         const account = _getAccount($stakedAccounts)
-        if (account) {
-            const accountOverview = $participationOverview.find((apo) => apo.accountIndex === account?.index)
-            isBelowMinimumStakingRewards =
-                accountOverview?.assemblyRewardsBelowMinimum > 0 || accountOverview?.shimmerRewardsBelowMinimum > 0
+        if (account && getAccountParticipationAbility(account) !== AccountParticipationAbility.HasDustAmount) {
+            /**
+             * NOTE: If the account has reached minimum airdrop already (on another address) and staking is NOT
+             * possible then we won't display the tooltip.
+             */
+            if (hasAccountReachedMinimumAirdrop(account) && !isStakingPossible($stakingEventState)) {
+                isBelowMinimumStakingRewards = false
+            } else {
+                const accountOverview = $participationOverview.find((apo) => apo.accountIndex === account?.index)
+                isBelowMinimumStakingRewards =
+                    accountOverview?.assemblyRewardsBelowMinimum > 0 || accountOverview?.shimmerRewardsBelowMinimum > 0
+            }
         }
     }
 
@@ -97,9 +111,10 @@
         }
     }
 
-    $: tooltipText = getLocalizedTooltipText($participationOverview)
+    let tooltipText
+    $: $participationOverview, (tooltipText = getLocalizedTooltipText())
 
-    const getLocalizedTooltipText = (overview: ParticipationOverview): { title: string; body: string } => {
+    const getLocalizedTooltipText = (): { title: string; body: string } => {
         if (isPartiallyStaked) {
             return {
                 title: localize(
@@ -135,7 +150,6 @@
                 const timeNeeded = <number>getTimeUntilMinimumAirdropReward(account)
                 const remainingTime =
                     airdrop === StakingAirdrop.Assembly ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
-
                 if (timeNeeded > remainingTime) {
                     return {
                         title: localize('tooltips.stakingMinRewards.title'),

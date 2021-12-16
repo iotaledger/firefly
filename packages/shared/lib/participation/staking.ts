@@ -6,13 +6,21 @@ import { networkStatus } from '../networkStatus'
 import { showAppNotification } from '../notifications'
 import { activeProfile } from '../profile'
 import { getBestTimeDuration, MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
-import { MAX_NUM_IOTAS } from '../units'
 import { clamp, delineateNumber } from '../utils'
 import type { WalletAccount } from '../typings/wallet'
 
 import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID, STAKING_AIRDROP_TOKENS, STAKING_EVENT_IDS } from './constants'
-import { partiallyStakedAccounts, participationEvents, participationOverview, stakedAccounts } from './stores'
+import {
+    assemblyStakingRemainingTime,
+    partiallyStakedAccounts,
+    participationEvents,
+    participationOverview,
+    shimmerStakingRemainingTime,
+    stakedAccounts,
+} from './stores'
 import { Participation, ParticipationEvent, ParticipationEventState, StakingAirdrop } from './types'
+import { formatUnitBestMatch } from '../units'
+import { wallet } from '../wallet'
 
 /**
  * Determines whether an account is currently being staked or not.
@@ -51,7 +59,7 @@ export const isAccountStakedForAirdrop = (accountId: string, airdrop: StakingAir
     const account = get(stakedAccounts).find((sa) => sa.id === accountId)
     if (!account) return false
 
-    const accountOverview = get(participationOverview).find((apo) => apo.accountIndex === account.index)
+    const accountOverview = get(participationOverview).find((apo) => apo.accountIndex === account?.index)
     if (!accountOverview) return false
 
     return accountOverview.participations.find((p) => p.eventId === getAirdropEventId(airdrop)) !== undefined
@@ -289,7 +297,7 @@ export const isStakingPossible = (stakingEventState: ParticipationEventState): b
 type MinimumRewardInfo = [number, StakingAirdrop, number]
 
 export const getMinimumAirdropRewardInfo = (account: WalletAccount): MinimumRewardInfo => {
-    const overview = get(participationOverview).find((apo) => apo.accountIndex === account.index)
+    const overview = get(participationOverview).find((apo) => apo.accountIndex === account?.index)
     if (!overview) return [0, undefined, 0]
 
     /**
@@ -301,8 +309,8 @@ export const getMinimumAirdropRewardInfo = (account: WalletAccount): MinimumRewa
     let smallestMinAirdrop: StakingAirdrop = undefined
     let amountStaked: number = 0
 
-    const { assemblyRewards, assemblyRewardsBelowMinimum, assemblyStakedFunds } = overview
-    if (assemblyRewardsBelowMinimum > 0 && assemblyRewards <= 0) {
+    const { assemblyRewardsBelowMinimum, assemblyStakedFunds } = overview
+    if (assemblyRewardsBelowMinimum > 0) {
         if (assemblyRewardsBelowMinimum < smallestMinRewards) {
             smallestMinRewards = assemblyRewardsBelowMinimum
             smallestMinAirdrop = StakingAirdrop.Assembly
@@ -310,8 +318,8 @@ export const getMinimumAirdropRewardInfo = (account: WalletAccount): MinimumRewa
         }
     }
 
-    const { shimmerRewards, shimmerRewardsBelowMinimum, shimmerStakedFunds } = overview
-    if (shimmerRewardsBelowMinimum > 0 && shimmerRewards <= 0) {
+    const { shimmerRewardsBelowMinimum, shimmerStakedFunds } = overview
+    if (shimmerRewardsBelowMinimum > 0) {
         if (shimmerRewardsBelowMinimum < smallestMinRewards) {
             smallestMinRewards = shimmerRewardsBelowMinimum
             smallestMinAirdrop = StakingAirdrop.Shimmer
@@ -322,32 +330,34 @@ export const getMinimumAirdropRewardInfo = (account: WalletAccount): MinimumRewa
     return [smallestMinRewards === Number.MAX_SAFE_INTEGER ? 0 : smallestMinRewards, smallestMinAirdrop, amountStaked]
 }
 
+const getAirdropRewardMultipler = (airdrop: StakingAirdrop): number => {
+    return airdrop === StakingAirdrop.Assembly
+        ? ASSEMBLY_REWARD_MULTIPLIER
+        : airdrop === StakingAirdrop.Shimmer
+        ? SHIMMER_REWARD_MULTIPLIER
+        : 0
+}
+
 const calculateNumMilestonesUntilMinimumReward = (
     rewardsNeeded: number,
     airdrop: StakingAirdrop,
     amountStaked: number
-): number => {
-    const multiplier =
-        airdrop === StakingAirdrop.Assembly
-            ? ASSEMBLY_REWARD_MULTIPLIER
-            : airdrop === StakingAirdrop.Shimmer
-            ? SHIMMER_REWARD_MULTIPLIER
-            : 0
-    const amountMiotas = amountStaked / 1_000_000
+): number => (rewardsNeeded * 1_000_000) / (amountStaked * getAirdropRewardMultipler(airdrop))
 
-    return rewardsNeeded / (multiplier * amountMiotas)
-}
-
-const calculateTimeUntilMinimumReward = (rewards: number, airdrop: StakingAirdrop, amountStaked: number): number => {
+const getMinimumRewardsRequired = (rewards: number, airdrop: StakingAirdrop): number => {
     const event = getStakingEventFromAirdrop(airdrop)
     if (!event) return 0
 
     const rewardsRequired = event.information.payload.requiredMinimumRewards
     if (rewards >= rewardsRequired) return 0
 
-    const rewardsStillNeeded = rewardsRequired - rewards
+    return rewardsRequired - rewards
+}
+
+const calculateTimeUntilMinimumReward = (rewards: number, airdrop: StakingAirdrop, amountStaked: number): number => {
+    const minRewardsRequired = getMinimumRewardsRequired(rewards, airdrop)
     return (
-        calculateNumMilestonesUntilMinimumReward(rewardsStillNeeded, airdrop, amountStaked) *
+        calculateNumMilestonesUntilMinimumReward(minRewardsRequired, airdrop, amountStaked) *
         SECONDS_PER_MILESTONE *
         MILLISECONDS_PER_SECOND
     )
@@ -355,9 +365,8 @@ const calculateTimeUntilMinimumReward = (rewards: number, airdrop: StakingAirdro
 
 /**
  * Calculates the remaining time needed to continue staking in order to
- * reach the minimum airdrop amount. If called with format = true then
- * will return human-readable duration, else it will return amount of time
- * in millis.
+ * reach the minimum airdrop amount. If called with format = true then returns
+ * human-readable duration, else returns the amount of time in millis.
  *
  * @method calculateMinimumRewardTime
  *
@@ -370,7 +379,144 @@ export const getTimeUntilMinimumAirdropReward = (account: WalletAccount, format:
     if (!account) return format ? getBestTimeDuration(0) : 0
 
     const [minRewards, minAirdrop, amountStaked] = getMinimumAirdropRewardInfo(account)
-    const remainingTime = calculateTimeUntilMinimumReward(minRewards, minAirdrop, amountStaked)
+    const timeRequired = calculateTimeUntilMinimumReward(minRewards, minAirdrop, amountStaked)
 
-    return format ? getBestTimeDuration(remainingTime) : remainingTime
+    return format ? getBestTimeDuration(timeRequired) : timeRequired
 }
+
+const getNumRemainingMilestones = (airdrop: StakingAirdrop): number => {
+    const event = getStakingEventFromAirdrop(airdrop)
+    if (!event || !isStakingPossible(event?.status?.status)) return 0
+
+    // Remaining time is in milliseconds
+    const timeLeft =
+        airdrop === StakingAirdrop.Assembly
+            ? get(assemblyStakingRemainingTime)
+            : airdrop === StakingAirdrop.Shimmer
+            ? get(shimmerStakingRemainingTime)
+            : 0
+
+    const isInHolding = event?.status?.status === ParticipationEventState.Holding
+    const { milestoneIndexStart, milestoneIndexEnd } = event?.information
+
+    return isInHolding
+        ? timeLeft / MILLISECONDS_PER_SECOND / SECONDS_PER_MILESTONE
+        : milestoneIndexEnd - milestoneIndexStart
+}
+
+const calculateIotasUntilMinimumReward = (rewards: number, airdrop: StakingAirdrop): number => {
+    const minRewardsRequired = getMinimumRewardsRequired(rewards, airdrop)
+    const numRemainingMilestones = getNumRemainingMilestones(airdrop)
+
+    return minRewardsRequired / ((getAirdropRewardMultipler(airdrop) / 1_000_000) * numRemainingMilestones)
+}
+
+/**
+ * Calculates the remaining number of IOTAs needed to reach the minimum airdrop amount.
+ * If called with format = true then returns best unit match for amount of IOTAs, else
+ * returns the raw number of IOTAs.
+ *
+ * @method getIotasUntilMinimumAirdropReward
+ *
+ * @param {WalletAccount} account
+ * @param {boolean} format
+ *
+ * @returns {number | string}
+ */
+export const getIotasUntilMinimumAirdropReward = (
+    account: WalletAccount,
+    airdrop: StakingAirdrop,
+    format: boolean = false
+): number | string => {
+    if (!account) return format ? formatUnitBestMatch(0) : 0
+
+    const currentRewards = getCurrentRewardsForAirdrop(account, airdrop)
+    const iotasRequired = Math.round(calculateIotasUntilMinimumReward(currentRewards, airdrop))
+
+    return format ? formatUnitBestMatch(iotasRequired) : iotasRequired
+}
+
+/**
+ * Determines whether an account will be able to reach rewards minimums
+ * for both airdrops. This will return false if only one airdrop's minimum
+ * is able to be reached.
+ *
+ * @method canAccountReachMinimumAirdrop
+ *
+ * @param {WalletAccount} account
+ *
+ * @returns {boolean}
+ */
+export const canAccountReachMinimumAirdrop = (account: WalletAccount, airdrop: StakingAirdrop): boolean => {
+    if (!account) return false
+
+    const currentRewards = getCurrentRewardsForAirdrop(account, airdrop)
+    const timeRequired = calculateTimeUntilMinimumReward(currentRewards, airdrop, account.rawIotaBalance)
+    const timeLeft = get(assemblyStakingRemainingTime)
+
+    return timeRequired <= timeLeft
+}
+
+/**
+ * Returns current rewards for a given airdrop
+ *
+ * @method getCurrentRewardsForAirdrop
+ *
+ * @param {AccountParticipationOverview} overview
+ * @param {StakingAirdrop} airdrop
+ *
+ * @returns {number}
+ */
+export const getCurrentRewardsForAirdrop = (account: WalletAccount, airdrop: StakingAirdrop): number => {
+    const overview = get(participationOverview).find((apo) => apo.accountIndex === account?.index)
+    if (!overview) return 0
+
+    return airdrop === StakingAirdrop.Assembly ? overview.assemblyRewards : overview.shimmerRewards
+}
+
+/**
+ * Returns current stake for a given airdrop
+ *
+ * @method getCurrentStakeForAirdrop
+ *
+ * @param {AccountParticipationOverview} overview
+ * @param {StakingAirdrop} airdrop
+ *
+ * @returns {number}
+ */
+export const getCurrentStakeForAccount = (account: WalletAccount, airdrop: StakingAirdrop): number => {
+    const overview = get(participationOverview).find((apo) => apo.accountIndex === account?.index)
+    if (!overview) return 0
+
+    return airdrop === StakingAirdrop.Assembly ? overview.assemblyStakedFunds : overview.shimmerUnstakedFunds
+}
+
+/**
+ * Determines whether a given account has reached the reward minimum
+ * for either airdrop.
+ *
+ * @method hasAccountReachedMinimumAirdrop
+ *
+ * @param {WalletAccount} account
+ *
+ * @returns {boolean}
+ */
+export const hasAccountReachedMinimumAirdrop = (account: WalletAccount): boolean => {
+    if (!account) return false
+
+    const overview = get(participationOverview).find((apo) => apo.accountIndex === account?.index)
+    if (!overview) return false
+
+    return overview.assemblyRewards > 0 || overview.shimmerRewards > 0
+}
+
+/**
+ * Determines whether any account has reached the reward minimum
+ * for either airdrop.
+ *
+ * @method hasAnAccountReachedMinimumAirdrop
+ *
+ * @returns {boolean}
+ */
+export const hasAnAccountReachedMinimumAirdrop = (): boolean =>
+    get(get(wallet).accounts).some((a) => hasAccountReachedMinimumAirdrop(a))

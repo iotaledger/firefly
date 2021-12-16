@@ -1220,7 +1220,8 @@
             },
             "ended": {
                 "title": "Staking has now ended",
-                "body": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch."
+                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
+                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
             }
         },
         "partiallyStakedFunds": {
@@ -1232,12 +1233,12 @@
         "stakingMinRewards": {
             "title": "Below minimum reward value",
             "titleMinBalance": "{amount} minimum balance required",
-            "bodyMinBalace": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
+            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
             "continue": "Please continue staking for another {duration}.",
             "bodyBelowMin": "This wallet has not reached the minimum reward value for {airdrop} ({airdropRewardMin}).",
             "bodyWillReachMin": "You must stake for another {duration} to reach the minimum.",
-            "bodyWillNotReachMin": "You will not reach the minimum during the remaining staking period unless you stake more IOTA.",
-            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum rewards for {airdrop} ({airdropRewardMin})."
+            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you stake more IOTA.",
+            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin})."
         }
     },
     "exports": {

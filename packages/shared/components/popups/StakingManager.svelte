@@ -1,5 +1,6 @@
 <script lang="typescript">
-    import { Button, Icon, Spinner, Text } from 'shared/components'
+    import { onMount } from 'svelte'
+    import { Button, Icon, Spinner, Text, Tooltip } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { promptUserToConnectLedger } from 'shared/lib/ledger'
     import { hasNodePlugin, networkStatus } from 'shared/lib/networkStatus'
@@ -10,7 +11,7 @@
         getStakedFunds,
         getUnstakedFunds,
         isAccountPartiallyStaked,
-        isAccountStaked,
+        isAccountStaked, getIotasUntilMinimumAirdropReward,
     } from 'shared/lib/participation'
     import { getParticipationOverview, participate, stopParticipating } from 'shared/lib/participation/api'
     import { STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
@@ -24,7 +25,7 @@
         stakedAmount,
         stakingEventState,
     } from 'shared/lib/participation/stores'
-    import { AccountParticipationAbility, Participation, ParticipationAction } from 'shared/lib/participation/types'
+    import { AccountParticipationAbility, Participation, ParticipationAction, StakingAirdrop } from 'shared/lib/participation/types'
     import { openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { checkStronghold } from 'shared/lib/stronghold'
@@ -34,7 +35,6 @@
     import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { transferState, wallet } from 'shared/lib/wallet'
-    import { onMount } from 'svelte'
 
     export let locale: Locale
 
@@ -221,6 +221,24 @@
             await handleParticipationAction()
         }
     })
+
+    let showTooltip = false
+    let tooltipAnchor: unknown
+    const tooltipAnchors: { [accountIndex: number]: unknown } = {}
+    let tooltipMinBalance: string = ''
+
+    const toggleTooltip = (account: WalletAccount): void => {
+        showTooltip = !showTooltip
+
+        if(showTooltip) {
+            tooltipAnchor = tooltipAnchors[account?.index]
+            // Check for Assembly only because it has lower reward requirements
+            tooltipMinBalance = <string>getIotasUntilMinimumAirdropReward(account, StakingAirdrop.Assembly, true)
+        } else {
+            tooltipAnchor = undefined
+            tooltipMinBalance = ''
+        }
+    }
 </script>
 
 <style>
@@ -230,15 +248,23 @@
 </style>
 
 <Text type="h5">{locale('popups.stakingManager.title')}</Text>
-<Text type="p" secondary classes="mt-6 mb-2">{locale('popups.stakingManager.description')}</Text>
+<Text type="p" secondary classes="mt-6 mb-4">{locale('popups.stakingManager.description')}</Text>
 <div class="staking flex flex-col scrollable-y">
     {#each $accounts as account}
-        {#if getAccountParticipationAbility(account) === AccountParticipationAbility.Yes || getAccountParticipationAbility(account) === AccountParticipationAbility.NoHasPendingTransaction}
+        {#if getAccountParticipationAbility(account) !== AccountParticipationAbility.HasDustAmount}
             <div class={`w-full mt-4 flex flex-col rounded-xl border-2 border-solid ${isAccountPartiallyStaked(account?.id) ? 'border-yellow-600' : 'border-gray-200 dark:border-gray-600'}`}>
                 <div class="w-full space-x-4 px-5 py-3 flex flex-row justify-between items-center">
                     {#if isAccountStaked(account?.id)}
                         <div class="bg-green-100 rounded-2xl">
                             <Icon icon="success-check" width="19" height="19" classes="text-white" />
+                        </div>
+                    {:else if getAccountParticipationAbility(account) === AccountParticipationAbility.WillNotReachMinAirdrop}
+                        <div
+                            bind:this={tooltipAnchors[account?.index]}
+                            on:mouseenter={() => toggleTooltip(account)}
+                            on:mouseleave={() => toggleTooltip(account)}
+                        >
+                            <Icon icon="exclamation" width="18" height="18" classes="text-orange-500" />
                         </div>
                     {:else}
                         <Icon
@@ -286,7 +312,7 @@
                         {/if}
                     </div>
                     <Button
-                        disabled={$isPerformingParticipation || getAccountParticipationAbility(account) === AccountParticipationAbility.NoHasPendingTransaction}
+                        disabled={$isPerformingParticipation || getAccountParticipationAbility(account) === AccountParticipationAbility.HasPendingTransaction || getAccountParticipationAbility(account) === AccountParticipationAbility.WillNotReachMinAirdrop}
                         secondary={isAccountStaked(account?.id)}
                         onClick={() => (isAccountStaked(account?.id) ? handleUnstakeClick(account) : handleStakeClick(account))}>
                         {#if $accountToParticipate?.id === account?.id && $accountToParticipate && $participationAction}
@@ -294,7 +320,7 @@
                         {:else}{locale(`actions.${isAccountStaked(account?.id) ? 'unstake' : 'stake'}`)}{/if}
                     </Button>
                 </div>
-                {#if isAccountPartiallyStaked(account?.id) && $accountToParticipate?.id !== account?.id}
+                {#if isAccountPartiallyStaked(account?.id) && $accountToParticipate?.id !== account?.id && getAccountParticipationAbility(account) !== AccountParticipationAbility.WillNotReachMinAirdrop}
                     <div
                         class="space-x-4 mx-2 mb-2 px-4 py-3 flex flex-row justify-between items-center rounded-lg border-2 border-solid border-gray-200 dark:border-gray-600">
                         <Icon icon="exclamation" width="24" height="24" classes="fill-current text-yellow-600" />
@@ -310,7 +336,7 @@
                         </div>
                         <Button
                             caution={isAccountPartiallyStaked(account?.id) && $accountToParticipate?.id !== account?.id}
-                            disabled={$isPerformingParticipation || getAccountParticipationAbility(account) === AccountParticipationAbility.NoHasPendingTransaction}
+                            disabled={$isPerformingParticipation || getAccountParticipationAbility(account) === AccountParticipationAbility.HasPendingTransaction}
                             onClick={() => handleStakeClick(account)}>
                             {locale('actions.merge')}
                         </Button>
@@ -328,3 +354,14 @@
         <Text type="p" secondary bold classes="inline">{formatUnitBestMatch($stakedAmount)}</Text>
     </Text>
 </div>
+
+{#if showTooltip}
+    <Tooltip anchor={tooltipAnchor} position="right">
+        <Text type="p" classes="text-gray-900 bold mb-1 text-left">
+            {locale('tooltips.stakingMinRewards.titleMinBalance', { values: { amount: tooltipMinBalance } })}
+        </Text>
+        <Text type="p" secondary classes="text-left">
+            {locale('tooltips.stakingMinRewards.bodyMinBalance')}
+        </Text>
+    </Tooltip>
+{/if}

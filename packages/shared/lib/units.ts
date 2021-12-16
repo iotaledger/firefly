@@ -20,7 +20,7 @@ export const UNIT_MAP: { [unit in Unit]: { val: number; dp: number } } = {
 /**
  * The maximum number of IOTA tokens in the network.
  */
-export const MAX_NUM_IOTAS = 2_779_530_283_000_000
+export const MAX_NUM_IOTAS = 2_779_530_283_277_761
 
 /**
  * Formats IOTA value

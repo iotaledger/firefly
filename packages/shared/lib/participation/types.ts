@@ -1,9 +1,10 @@
 import type { Message } from '../typings/message'
 
 export enum AccountParticipationAbility {
-    Yes = 'yes',
-    NoHasDustAmount = 'noHasDustAmount',
-    NoHasPendingTransaction = 'noHasPendingTransaction',
+    Ok = 'ok',
+    HasDustAmount = 'hasDustAmount',
+    HasPendingTransaction = 'hasPendingTransaction',
+    WillNotReachMinAirdrop = 'willNotReachMinAirdrop',
 }
 
 /**
