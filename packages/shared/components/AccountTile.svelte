@@ -27,6 +27,7 @@
     import { capitalize } from 'shared/lib/utils'
     import { wallet, AccountColors, AccountPatterns } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
+    import { isBright } from 'shared/lib/helpers'
 
     const NEW_LINE = '\r\n'
 
@@ -38,13 +39,14 @@
     export let size = 'm' // m, l
     export let hidden = false
     export let disabled = false
+    export let classes = ''
     export let onClick = (): void | string => ''
     export let disabledHover = false
     export let pattern = AccountPatterns.Default
 
     $: darkModeEnabled = $appSettings.darkMode
 
-    $: textColor = color.match(/([0-9]{3})+/g)?.some(c => parseInt(c, 10) >= 160) ? 'black' : 'white'
+    $: textColor = isBright(color) ? 'gray-800' : 'white'
 
     if (airdrop) {
         disabled = true
@@ -278,24 +280,33 @@
         }
 
         &.disabled-hover {
-            background-color: rgb(var(--account-color));
+            background-color: var(--account-color);
+
+            &.bg-blend-exclusion {
+                background-blend-mode: exclusion;
+            }
         }
 
         &:not(.disabled-hover):hover {
-            background-color: rgb(var(--account-color));
+            background-color: var(--account-color);
+
+            &.bg-blend-exclusion {
+                background-blend-mode: exclusion;
+            }
         }
     }
 </style>
 
 <button
     on:click={handleTileClick}
-    class="{disabledHover ? 'disabled-hover' : 'bg-gray-100 dark:bg-gray-900'} size-{size} group rounded-xl font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'} bg-no-repeat bg-right-top bg-contain"
+    class="{classes} {disabledHover ? 'disabled-hover' : 'bg-gray-100 dark:bg-gray-900'} size-{size} group rounded-xl font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'} bg-no-repeat bg-right-top bg-auto"
     class:staked={isActivelyStaking}
     class:partial-stake={showWarningState}
     class:airdrop
     class:hidden-wallet={hidden}
     class:darkmode={darkModeEnabled}
-    style="--account-color: {color}; color: {textColor}; {pattern ? `background-image: url("assets/patterns/${pattern}-gradient.svg")` : null}"
+    class:bg-blend-exclusion={isBright(color)}
+    style="--account-color: {color}; {pattern ? `background-image: url("assets/patterns/${pattern}-gradient.svg")` : null}"
     {disabled}>
     <div class="mb-2 w-full flex flex-row justify-between items-start space-x-1.5">
         <div class="flex flex-row space-x-1.5 items-start w-full whitespace-nowrap">
@@ -318,7 +329,7 @@
                 bold
                 smaller={size === 's'}
                 overrideColor
-                classes="inline text-gray-800 {disabledHover ? 'text-white' : 'dark:text-white group-hover:text-white'} overflow-hidden overflow-ellipsis">
+                classes="inline text-gray-800 {disabledHover ? `text-${textColor}` : `text-gray-800 dark:text-white group-hover:text-${textColor}`} overflow-hidden overflow-ellipsis">
                 {getName()}
             </Text>
         </div>
@@ -332,10 +343,10 @@
     </div>
     <div
         class="flex {size === 'l' ? 'flex-row space-x-4' : 'flex-col space-y-1'} justify-between w-full flex-{size === 'l' ? 'nowrap' : 'wrap'}">
-        <Text smaller overrideColor classes="block {disabledHover ? 'text-white' : 'text-gray-800 dark:text-white group-hover:text-white'}">
+        <Text smaller overrideColor classes="block {disabledHover ? `text-${textColor}` : `text-gray-800 dark:text-white group-hover:text-${textColor}`}">
             {#if airdrop}{formatStakingAirdropReward(airdrop, Number(balance), 6)}{:else}{balance}{/if}
         </Text>
-        <Text smaller overrideColor classes="block {disabledHover ? 'text-white' : 'text-blue-500 dark:text-gray-600 group-hover:text-white'}">
+        <Text smaller overrideColor classes="block {disabledHover ? `text-${textColor}` : `text-blue-500 dark:text-gray-600 group-hover:text-${textColor}`}">
             {balanceEquiv}
         </Text>
     </div>

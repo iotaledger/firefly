@@ -1,32 +1,34 @@
 <script lang="typescript">
     import { Text, Icon } from 'shared/components'
     import { AccountColors } from 'shared/lib/wallet'
-    import resolveConfig from 'tailwindcss/resolveConfig'
-    import tailwindConfig from 'shared/tailwind.config.js'
+    import { isBright } from 'shared/lib/helpers'
 
     export let active
     export let locale
     export let title = locale('views.pickers.color')
+    export let classes = ''
 
-    const configColors = resolveConfig(tailwindConfig).theme.colors
     const accountColors = Object.values(AccountColors)
+    const hex2rgb = hex => hex.match(/\w\w/g)?.map(x => parseInt(x, 16)).join(',')
 
-    let activeElement = 0
+    const activeAccountColorIndex = accountColors.findIndex((_, i) => accountColors[i] === active)
+    let activeElement = activeAccountColorIndex >= 0 ? activeAccountColorIndex : accountColors.length
 
     const handleKeyPress = (event, i) => event.key === 'Enter' && (activeElement = i)
     const handleColorClick = (i) => activeElement = i
     const handleInputClick = () => activeElement = accountColors.length
 
-    const hex2rgb = hex => hex.match(/\w\w/g)?.map(x => parseInt(x, 16)).join(',')
-
     $: if (activeElement >= accountColors.length) {
-        active = inputValue.length >= 7 ? hex2rgb(inputValue) : ''
+        active = inputValue.length >= 7 ? inputValue : '#FFFFFF'
     } else {
-        active = hex2rgb(configColors[accountColors[activeElement]]['500'])
+        active = accountColors[activeElement]
     }
-
-    $: inputValue = `#${inputValue?.match(/[^#]+/) || ''}`
-    $: inputColor = (inputValue.length >= 7 && inputValue.match(/([A-f][0-f])/g)) ? 'black' : 'white'
+    let inputValue = activeAccountColorIndex >= 0 ? '#' : active
+    $: inputValue = `#${inputValue?.match(/[0-9|a-f|A-F]+/) || ''}`
+    let inputColor
+    $: if (inputValue.length >= 7) {
+        inputColor = isBright(inputValue) ? 'gray-800' : 'white'
+    }
 </script>
 
 <style type="text/scss">
@@ -41,9 +43,9 @@
     }
 </style>
 
-<div style="--account-color: {active}">
+<div style="--account-color: {inputValue ? hex2rgb(active) : ''}" class={classes}>
     <div class="flex flex-row mb-4">
-        <Text type="h5">{title}</Text>
+        <Text type="h5">{title} {inputValue}</Text>
     </div>
     <ul class="flex flex-row justify-between">
         {#each Object.values(AccountColors) as color, i}
@@ -54,8 +56,10 @@
             </li>
         {/each}
         <li><input type="text" placeholder="#FFFFFF" pattern="[A-F0-9]{10}" maxlength="7" bind:value={inputValue} on:click={() => handleInputClick()}
-            class='w-24 h-full text-16 leading-140 border border-solid text-gray-800 dark:text-white bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700
-            hover:border-gray-500 dark:hover:border-gray-700 p-1 rounded text-center {activeElement === accountColors.length ? 'ring-4' : ''}'
-            class:active={activeElement === accountColors.length} style={activeElement === accountColors.length ? `color: ${inputColor}` : ''}></li>
+            class='w-24 h-full text-16 uppercase leading-140 border border-solid
+            {inputValue.length >= 7 && activeElement === accountColors.length ? `text-${inputColor} border-none` : 'text-gray-800 dark:text-white'}
+            bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 p-1 rounded text-center
+            {activeElement === accountColors.length ? 'ring-4' : ''}'
+            class:active={activeElement === accountColors.length && inputValue.length >= 7}></li>
     </ul>
 </div>

@@ -3,7 +3,7 @@
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
-    import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccountId, wallet, AccountColors, AccountPatterns } from 'shared/lib/wallet'
+    import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccountId, wallet } from 'shared/lib/wallet'
     import type { Locale } from 'shared/lib/typings/i18n'
     import type { WalletAccount } from 'shared/lib/typings/wallet'
 
@@ -78,12 +78,12 @@
     }
 </script>
 
-<div class="w-full h-full flex flex-col justify-between p-8">
+<div class="w-full h-full flex flex-col justify-between p-8 pt-10">
     <div>
         <div class="flex flex-row mb-6">
             <Text type="h5">{locale('general.manageAccount')}</Text>
         </div>
-        <div class="w-full h-full flex flex-col justify-between">
+        <div class="w-full flex flex-col justify-between">
             <AccountTile
                 balance={account.balance}
                 balanceEquiv={account.balanceEquiv}
@@ -91,16 +91,18 @@
                 disabledHover=true
                 name={accountAlias || account.alias}
                 {pattern}
-                size='l' />
+                size='m'
+                classes='mb-4' />
             <Input
                 {error}
                 bind:value={accountAlias}
                 placeholder={locale('general.accountName')}
                 autofocus
                 submitHandler={handleSaveClick}
-                disabled={isBusy} />
-            <ColorPicker title={locale('general.accountColor')} bind:active={color} {locale} />
-            <PatternPicker title={locale('general.accountPattern')} bind:color bind:active={pattern} {locale} />
+                disabled={isBusy}
+                classes='mb-4' />
+            <ColorPicker title={locale('general.accountColor')} bind:active={color} {locale} classes='mb-4' />
+            <PatternPicker title={locale('general.accountPattern')} bind:color bind:active={pattern} {locale} classes='mb-4' />
         </div>
     </div>
     <!-- Action -->

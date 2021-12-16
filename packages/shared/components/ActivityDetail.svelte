@@ -2,10 +2,10 @@
     import { CopyButton, Icon, Link, Text } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { Electron } from 'shared/lib/electron'
-    import { getInitials, truncateString } from 'shared/lib/helpers'
-    import { formatDate } from 'shared/lib/i18n'
-    import { activeProfile } from 'shared/lib/profile'
     import type { Payload } from 'shared/lib/typings/message'
+    import { getInitials, truncateString, isBright } from 'shared/lib/helpers'
+    import { formatDate } from 'shared/lib/i18n'
+    import { activeProfile, getColor } from 'shared/lib/profile'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import {
         findAccountWithAddress,
@@ -114,11 +114,18 @@
         }
     }
     $: currencyValue = convertToFiat(value, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings.currency])
+
+    const senderColor = getColor($activeProfile, senderAccount.id) || 'gray'
+    const receiverColor = getColor($activeProfile, receiverAccount.id) || 'gray'
 </script>
 
 <style type="text/scss">
     .visualization {
         min-height: 84px;
+    }
+
+    .account-color {
+        background-color: var(--account-color);
     }
 </style>
 
@@ -128,7 +135,9 @@
         <div class="flex flex-col flex-wrap justify-center items-center text-center">
             {#if senderAccount}
                 <div
-                    class="flex items-center justify-center w-8 h-8 rounded-xl p-2 mb-2 text-12 leading-100 font-bold text-center bg-{senderAccount?.color ?? AccountColors.Default}-500 text-white dark:text-gray-900">
+                    style="--account-color: {senderColor}"
+                    class="flex items-center justify-center w-8 h-8 rounded-xl p-2 mb-2 text-12 leading-100 font-bold text-center account-color
+                    {isBright(senderColor) ? 'text-gray-900' : 'text-white'}">
                     {getInitials(senderAccount.alias, 2)}
                 </div>
                 <Text smaller>{locale('general.you')}</Text>
@@ -142,7 +151,9 @@
         <div class="flex flex-col flex-wrap justify-center items-center text-center">
             {#if receiverAccount}
                 <div
-                    class="flex items-center justify-center w-8 h-8 rounded-xl p-2 mb-2 text-12 leading-100 font-bold bg-{receiverAccount?.color ?? AccountColors.Default}-500 text-white dark:text-gray-900">
+                    style="--account-color: {receiverColor}"
+                    class="flex items-center justify-center w-8 h-8 rounded-xl p-2 mb-2 text-12 leading-100 font-bold account-color
+                    {isBright(receiverColor) ? 'text-gray-900' : 'text-white'}">
                     {getInitials(receiverAccount.alias, 2)}
                 </div>
                 <Text smaller>{locale('general.you')}</Text>

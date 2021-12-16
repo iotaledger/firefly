@@ -102,16 +102,18 @@
                 disabledHover=true
                 name={accountAlias || locale('general.accountName')}
                 {pattern}
-                size='l' />
+                size='l'
+                classes='mb-4' />
             <Input
                 {error}
                 bind:value={accountAlias}
                 placeholder={locale('general.accountName')}
                 autofocus
                 submitHandler={handleCreateClick}
-                disabled={isBusy} />
-            <ColorPicker title={locale('general.accountColor')} bind:active={color} {locale} />
-            <PatternPicker title={locale('general.accountPattern')} bind:color bind:active={pattern} {locale} />
+                disabled={isBusy}
+                classes='mb-4' />
+            <ColorPicker title={locale('general.accountColor')} bind:active={color} {locale} classes='mb-4' />
+            <PatternPicker title={locale('general.accountPattern')} bind:color bind:active={pattern} {locale} classes='mb-4' />
         </div>
     </div>
     <!-- Action -->
