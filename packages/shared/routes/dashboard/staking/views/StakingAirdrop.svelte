@@ -107,9 +107,9 @@
             <div class="flex flex-row flex-wrap mb-2">
                 {#each stakedAccountsInCurrentAirdrop as acc}
                     <div
-                        class="mb-2 mr-2 w-8 h-8 rounded-xl p-1 flex items-center justify-center bg-{acc.color}-500">
+                        class="mb-2 mr-2 w-8 h-8 rounded-lg p-1 flex items-center justify-center bg-{acc.color}-500">
                         <span
-                            class="text-14 leading-100 font-bold text-center text-white">{getInitials(acc.alias, 2)}</span>
+                            class="text-12 leading-100 font-bold text-center text-white">{getInitials(acc.alias, 2)}</span>
                     </div>
                 {/each}
             </div>
