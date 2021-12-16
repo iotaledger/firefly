@@ -492,7 +492,7 @@
             "welcome": "Willkommen im Staking-Dashboard",
             "status": {
                 "upcoming": "Event hat noch nicht begonnen",
-                "commencing": "Pre-Staking begonnen",
+                "commencing": "Pre-Staking offen",
                 "holdingActive": "Staking läuft",
                 "holdingInactive": "Staking offen",
                 "inactive": "Staking nicht erkannt",
@@ -503,11 +503,11 @@
             },
             "info": {
                 "upcomingSubheader": "Event hat noch nicht begonnen",
-                "upcomingHeader": "Schau später noch einmal vorbei",
+                "upcomingHeader": "Schaue später noch einmal vorbei",
                 "commencingSubheader": "Mach dich bereit zum Staken",
                 "commencingHeader": "Pre-Stake deine Token!",
-                "holdingSubheaderHolding": "Erhalte Staking Belohnungen",
-                "holdingSubheaderNotHolding": "Verdiene Staking Rewards durch Staken von IOTA",
+                "holdingSubheaderHolding": "Erhalte Staking-Rewards",
+                "holdingSubheaderNotHolding": "Verdiene Staking-Rewards durch das Staken von IOTA",
                 "holdingHeaderHolding": "{duration} verbleibend",
                 "holdingHeaderNotHolding": "Stake deine Token!",
                 "endedSubheader": "Staking ist jetzt beendet",
@@ -521,11 +521,11 @@
                 "collectedRewards": "Gesammelte Rewards",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly ist ein öffentliches, hoch-skalierbares Multi-Chain Netzwerk, um interoperable Smart Contracts zu erstellen und bereitzustellen. Assembly ist die Zukunft des web3. "
+                    "description": "Assembly ist ein offenes, hoch skalierbares Multi-Chain Netzwerk, welches es ermöglicht, interoperable Smart-Contracts zu entwickeln und bereitzustellen. Assembly ist die Zukunft des Web3. "
                 },
                 "shimmer": {
                     "name": "Shimmer",
-                    "description": "Das incentivierte Staging-Netzwerk als Treiber wichtiger Innovationen auf IOTA. Alles ist möglich. Die Zukunft von Shimmer liegt in Deinen Händen."
+                    "description": "Das Staging-Netzwerk als Treiber wichtiger Innovationen auf IOTA. Alles ist möglich. Wie sich Shimmer in Zukunft entwickelt, liegt ganz bei dir."
                 }
             }
         }
@@ -639,7 +639,7 @@
         "transaction": {
             "title": "Transaktion bestätigen",
             "body": "Du sendest {amount} an",
-            "sendingFromStakedAccount": "Du versendest Token von einer Wallet, die für ein Airdrop-Event angemeldet sind. Es besteht die Möglichkeit, dass Du nach dem Versenden deine verbleibenden Token erneut für das Event anmelden musst."
+            "sendingFromStakedAccount": "Du versendest Token von einer Wallet, auf welcher Guthaben gestaked wird. Dies kann zur Aufhebung des Stakens führen. Du kannst diese Token versenden aber es kann sein, dass du verbleibendes Guthaben erneut staken musst."
         },
         "balanceFinder": {
             "title": "Guthabensuche",
@@ -726,7 +726,7 @@
         },
         "stakingManager": {
             "title": "Staking Verwaltung",
-            "description": "Wenn du mit einer Wallet am Staking teilnimmst, sendest du eine Transaktion zu dir selbst und markierst die Token in der Wallet als \"staked\". Du kannst die Token jederzeit transferieren, bekommst für diese aber keine weiteren Staking Rewards.",
+            "description": "Wenn du mit einer Wallet am Staking teilnimmst, sendest du eine Transaktion an dich selbst und markierst deine Token somit als \"gestaked\". Du kannst deine Token jederzeit transferieren, bekommst für diese dann aber keine weiteren Staking-Rewards.",
             "totalFundsStaked": "Gesamtes gestaktes Guthaben",
             "stakedSuccessfully": "Dein Guthaben aus {account} wurde gestaked.",
             "unstakedSuccessfully": "Dein Guthaben in {account} wird nicht mehr gestaked."

@@ -15,16 +15,16 @@
         },
         "profile": {
             "title": "प्रोफ़ाइल बनाएँ",
-            "profileName": "Profile name",
+            "profileName": "प्रोफ़ाइल नाम",
             "body1": "आप अपने वॉलेट को व्यवस्थित करने और गोपनीयता में सुधार करने के लिए कई उपयोगकर्ता प्रोफ़ाइल बना सकते हैं",
             "body2": {
-                "first": "For now, let's start with your first profile name.",
-                "nonFirst": "For now, let's start with your profile name."
+                "first": "अभी के लिए, चलिए आपके पहले प्रोफ़ाइल नाम से शुरू करते हैं।",
+                "nonFirst": "अभी के लिए, चलिए आपके प्रोफ़ाइल नाम से शुरू करते हैं।"
             },
-            "addMore": "You can add more profiles later.",
+            "addMore": "आप बाद में और प्रोफाइल जोड़ सकते हैं।",
             "developer": {
-                "label": "Developer profile",
-                "info": "Connect to public and private IOTA networks"
+                "label": "डेवलपर प्रोफ़ाइल",
+                "info": "सार्वजनिक और निजी ऐ ओ टा नेटवर्क से कनेक्ट करें"
             }
         },
         "setup": {

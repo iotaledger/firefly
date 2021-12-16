@@ -30,7 +30,7 @@
         "setup": {
             "title": "Configurar uma carteira",
             "chrysalisTitle": "Atualização da Rede Chrysalis",
-            "chrysalisBody": "From April 21st 2021, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
+            "chrysalisBody": "Desde 21 de abril de 2021, os usuários podem migrar seus tokens para a nova rede Chrysalis. Recomendamos que você migre seus tokens existentes o mais rápido possível.",
             "learnMore": "Saiba mais sobre a migração"
         },
         "secure": {
@@ -488,44 +488,44 @@
             }
         },
         "staking": {
-            "title": "Staking",
-            "welcome": "Welcome to the staking dashboard",
+            "title": "Apostando",
+            "welcome": "Bem-vindo ao painel de controle de apostas",
             "status": {
-                "upcoming": "Event not started",
-                "commencing": "Pre-staking open",
-                "holdingActive": "Staking in progress",
-                "holdingInactive": "Staking open",
-                "inactive": "Staking not detected",
-                "ended": "Staking ended"
+                "upcoming": "Evento não começou",
+                "commencing": "Pré-aposta aberta",
+                "holdingActive": "Aposta em andamento",
+                "holdingInactive": "Aposta aberta",
+                "inactive": "Aposta não detectada",
+                "ended": "Aposta terminada"
             },
             "summary": {
-                "stakedFunds": "Staked funds"
+                "stakedFunds": "Fundos de aposta"
             },
             "info": {
-                "upcomingSubheader": "Event has not started",
-                "upcomingHeader": "Check back later",
-                "commencingSubheader": "Get ready for staking",
-                "commencingHeader": "Pre-stake your tokens!",
-                "holdingSubheaderHolding": "Now earning staking rewards",
-                "holdingSubheaderNotHolding": "Earn rewards by staking IOTA",
-                "holdingHeaderHolding": "{duration} left",
-                "holdingHeaderNotHolding": "Stake your tokens!",
-                "endedSubheader": "Staking has now ended",
-                "endedHeader": "Thank you!",
-                "inactiveHeader": "Try changing node",
-                "inactiveSubheader": "Staking not detected"
+                "upcomingSubheader": "Evento não começou",
+                "upcomingHeader": "Volte mais tarde",
+                "commencingSubheader": "Prepare-se para aposta",
+                "commencingHeader": "Faça pré-aposta de seus tokens!",
+                "holdingSubheaderHolding": "Agora você está ganhando recompensas de apostas",
+                "holdingSubheaderNotHolding": "Ganhe recompensas ao apostar IOTA",
+                "holdingHeaderHolding": "{duration} restante",
+                "holdingHeaderNotHolding": "Aposte seus tokens!",
+                "endedSubheader": "O período de apostas terminou",
+                "endedHeader": "Obrigado!",
+                "inactiveHeader": "Tente mudar o servidor",
+                "inactiveSubheader": "Aposta não detectada"
             },
             "airdrops": {
-                "holding": "Remaining",
-                "commencing": "Until staking begins",
-                "collectedRewards": "Collected rewards",
+                "holding": "Restante",
+                "commencing": "Até que a aposta comece",
+                "collectedRewards": "Recompensas coletadas",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
+                    "description": "Assembly é uma rede multicadeia de permissões altamente escalável para construir e implantar contratos inteligentes compostáveis. Assembly é o futuro da web3. "
                 },
                 "shimmer": {
                     "name": "Shimmer",
-                    "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
+                    "description": "A rede de incentivos trará grandes inovações para IOTA. O que quer que aconteça, acontecerá. Como o Shimmer evoluirá depende de você."
                 }
             }
         }
@@ -639,7 +639,7 @@
         "transaction": {
             "title": "Confirmar transação",
             "body": "Você está prestes a enviar {amount} para",
-            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards."
+            "sendingFromStakedAccount": "Você está enviando uma transferência a partir de uma carteira que está sendo locada no momento. Isso pode desfazer seus tokens. Fique à vontade para enviar a transferência, mas você pode precisar reter os seus tokens restantes depois."
         },
         "balanceFinder": {
             "title": "Localizador de saldo",
@@ -713,41 +713,41 @@
         },
         "exportTransactionHistory": {
             "title": "Exportar histórico de transações",
-            "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
+            "body": "Exporte o histórico de transações da carteira selecionada. O arquivo exportado será no formato .csv.",
             "profileName": "Nome de Perfil:",
-            "accountName": "Account name:",
+            "accountName": "Nome da conta:",
             "typePassword": "Digite sua senha para permitir a exportação"
         },
         "stakingNotice": {
-            "upcomingDate": "Staking has not started yet",
-            "commencingDate": "Staking has not started yet",
-            "body": "By pre-staking your funds before staking starts, you will automatically begin receiving rewards when staking begins.",
-            "ok": "Ok, I understand"
+            "upcomingDate": "O período de apostas ainda não começou",
+            "commencingDate": "O período de apostas ainda não começou",
+            "body": "Ao pré-apostar seus fundos antes de começar o período de apostas, você automaticamente receberá recompensas quando o ele começar.",
+            "ok": "Ok, eu entendi"
         },
         "stakingManager": {
-            "title": "Staking Management",
-            "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
-            "totalFundsStaked": "Total funds staked",
-            "stakedSuccessfully": "Your funds have been staked for {account}.",
-            "unstakedSuccessfully": "Your funds have been unstaked for {account}."
+            "title": "Gerenciamento de Aposta",
+            "description": "Quando você faz aposta de uma carteira, você envia uma transação para si mesmo, marcando esses fundos como \"apostado\". Você pode transferir os tokens a qualquer momento, mas não vai continuar recebendo recompensas pela aposta.",
+            "totalFundsStaked": "Total de fundos apostados",
+            "stakedSuccessfully": "Seus fundos foram apostados para {account}.",
+            "unstakedSuccessfully": "Seus fundos não foram apostados para {account}."
         },
         "stakingConfirmation": {
-            "title": "Airdrop Participation",
-            "subtitleStake": "You are about to stake",
-            "subtitleMerge": "You are about to merge",
-            "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
-            "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
-            "estimatedAirdrop": "Estimated rewards"
+            "title": "Participação Airdrop",
+            "subtitleStake": "Você está prestes a apostar",
+            "subtitleMerge": "Você está prestes a mesclar",
+            "bodyStake": "Se você não quiser participar de ambos airdrops, você pode optar logo abaixo. Você pode desfazer e apostar novamente a qualquer momento.",
+            "bodyMerge": "Seus fundos serão apostados por {airdrop}. Para mudar em quais airdrops você deseja participar, faça a aposta novamente.",
+            "estimatedAirdrop": "Recompensas estimadas"
         },
         "shimmer-info": {
-            "title": "About Shimmer",
-            "body1": "Congratulations you have earned SMR tokens as a staking reward. Shimmer is an incentivized staging network to test major upgrades on IOTA.",
-            "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
+            "title": "Sobre o Shimmer",
+            "body1": "Parabéns você ganhou tokens SMR como uma recompensa de aposta. Shimmer é uma rede incentivada para testar grandes melhorias em IOTA.",
+            "body2": "Nosso objetivo é lançar Shimmer em 2022. Seus tokens estarão disponíveis para transferência assim que a rede for lançada."
         },
         "assembly-info": {
-            "title": "About Assembly",
-            "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
-            "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
+            "title": "Sobre o Assembly",
+            "body1": "Parabéns você ganhou tokens ASMB como uma recompensa de aposta. Assembly é uma rede multi-cadeia para implantar contratos inteligentes de escalabilidade em IOTA.",
+            "body2": "Nosso objetivo é lançar Assembly em 2022. Seus tokens estarão disponíveis para transferência assim que a rede for lançada."
         }
     },
     "charts": {
@@ -861,15 +861,15 @@
         "closeFirefly": "Fechar Firefly",
         "generateAddress": "Gerar endereço",
         "migrateAgain": "Migrar outro índice",
-        "visitWebsite": "Visit website",
-        "howItWorks": "How it works",
-        "learnAboutStaking": "Learn about staking",
-        "stake": "Stake",
-        "unstake": "Unstake",
-        "stakeFunds": "Stake funds",
-        "manageStake": "Manage stake",
-        "merge": "Merge",
-        "mergeFunds": "Merge funds",
+        "visitWebsite": "Visite o website",
+        "howItWorks": "Como isto funciona",
+        "learnAboutStaking": "Aprenda sobre apostas",
+        "stake": "Aposta",
+        "unstake": "Não apostado",
+        "stakeFunds": "Fundos de aposta",
+        "manageStake": "Gerenciar aposta",
+        "merge": "Mesclar",
+        "mergeFunds": "Mesclar fundos",
         "done": "Concluir"
     },
     "general": {
@@ -959,8 +959,8 @@
         "transferBroadcasting": "Transmitindo transação",
         "transferComplete": "Transferência concluída",
         "generatingReceiveAddress": "Gerando endereço de recebimento",
-        "broadcasting": "Broadcasting",
-        "confirming": "Confirming",
+        "broadcasting": "Transmitindo",
+        "confirming": "Confirmando",
         "creatingAccount": "Criando carteira, por favor aguarde...",
         "updatingAccount": "Atualizando carteira, por favor aguarde...",
         "accountSyncing": "a carteira está sincronizando",
@@ -988,10 +988,10 @@
         "sendingFrom": "Enviando de {account}",
         "receivedTo": "Recebido a {account}",
         "sentFrom": "Enviado de {account}",
-        "stakedFor": "Staked for {account}",
-        "unstakedFor": "Unstaked for {account}",
-        "votedFor": "Voted for {account}",
-        "unvotedFor": "Unvoted for {account}",
+        "stakedFor": "Apostado para {account}",
+        "unstakedFor": "Não apostado para {account}",
+        "votedFor": "Votado para {account}",
+        "unvotedFor": "Não votado para {account}",
         "receiving": "Recebendo",
         "sending": "Enviando",
         "legacyNetwork": "Rede Legada",
@@ -999,24 +999,24 @@
         "version": "Versão {version}",
         "unknown": "Desconhecido",
         "none": "Nenhum",
-        "days": "day(s)",
+        "days": "dia(s)",
         "time": {
-            "days": "days",
-            "day": "day",
-            "hours": "hours",
-            "hour": "hour",
-            "minutes": "minutes",
-            "minute": "minute",
-            "seconds": "seconds",
-            "second": "second"
+            "days": "dias",
+            "day": "dia",
+            "hours": "horas",
+            "hour": "hora",
+            "minutes": "minutos",
+            "minute": "minuto",
+            "seconds": "segundos",
+            "second": "segundo"
         },
-        "staked": "Staked",
-        "unstaked": "Unstaked",
-        "staking": "Staking",
-        "unstaking": "Unstaking",
-        "notStaked": "Not staked",
-        "stakedFunds": "Staked funds",
-        "unstakedFunds": "Unstaked funds"
+        "staked": "Apostado",
+        "unstaked": "Não apostado",
+        "staking": "Apostando",
+        "unstaking": "Não apostando",
+        "notStaked": "Não apostado",
+        "stakedFunds": "Fundos de aposta",
+        "unstakedFunds": "Fundos não apostado"
     },
     "dates": {
         "today": "Hoje",
@@ -1128,7 +1128,7 @@
             "noSynced": "Nenhum servidor sincronizado disponível.",
             "answer": "Falha ao obter uma resposta de todos os nós.",
             "forbidden": "Esta conexão ao nó é proibida.",
-            "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node."
+            "pluginNotAvailable": "O plugin \"{nodePlugin}\" não está disponível no nó atual."
         },
         "network": {
             "mismatch": "O ID da rede para este nó é \"{networkId}\", que não corresponde à rede atual.",
@@ -1161,7 +1161,7 @@
             "generateAddress": "Ocorreu um erro ao gerar um endereço.",
             "timeout": "A conexão de sua Ledger expirou.",
             "disconnected": "Seu dispositivo Ledger foi desconectado.",
-            "noStronghold": "Unable to use Stronghold with Ledger profile."
+            "noStronghold": "Não é possível usar a fortaleza com perfil da Ledger."
         },
         "popup": {
             "preventClose": "Este menu não pode ser fechado."
@@ -1173,10 +1173,10 @@
             "cannotDecodeBech32": "Não é possível decodificar a palavra como endereço Bech32."
         },
         "participation": {
-            "cannotUseAccount": "Unable to use the specified account.",
-            "cannotFindStakingEvent": "Unable to find staking event.",
-            "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
-            "invalidStakingEventId": "Invalid staking event ID."
+            "cannotUseAccount": "Não foi possível usar a conta especificada.",
+            "cannotFindStakingEvent": "Não foi possível encontrar o evento apostado.",
+            "cannotVisitAirdropWebsite": "Não foi possível abrir o site do {airdrop}.",
+            "invalidStakingEventId": "ID do evento de aposta inválido."
         }
     },
     "warning": {
@@ -1184,7 +1184,7 @@
             "http": "Usando nós através do HTTP deixa o tráfego não criptografado e pode representar um risco à segurança."
         },
         "participation": {
-            "noAccounts": "You do not have any accounts available to participate."
+            "noAccounts": "Você não tem nenhuma conta disponível para participar."
         }
     },
     "tooltips": {
@@ -1198,55 +1198,55 @@
         },
         "stakingIndicator": {
             "upcoming": {
-                "title": "Staking has not started yet",
-                "body": "Check back later. The staking event has not begun."
+                "title": "O período de apostas ainda não começou",
+                "body": "Verifique novamente mais tarde. O evento de aposta não começou."
             },
             "commencing": {
-                "title": "Pre-staking is now open",
-                "body": "Pre-stake your tokens, and once staking begins, you will automatically start receiving rewards every 10 seconds."
+                "title": "O período pré-aposta está aberto",
+                "body": "Pré-aposte seus tokens, e uma vez que o período de aposta comece, você automaticamente começará a receber recompensas a cada 10 segundos."
             },
             "activeHolding": {
-                "title": "Staking is now in progress",
-                "body": "Good job. You will receive rewards every 10 seconds."
+                "title": "O período de apostas está em andamento",
+                "body": "Bom trabalho. Você receberá recompensas a cada 10 segundos."
             },
             "inactiveHolding": {
-                "title": "Staking is now open",
-                "body": "Stake your IOTA tokens to receive rewards every 10 seconds."
+                "title": "O período de apostas está aberto",
+                "body": "Aposte seus tokens IOTA para receber recompensas a cada 10 segundos."
             },
             "inactive": {
-                "title": "No staking events detected",
-                "body": "Open network configuration in Advanced Settings and make sure the current node has the \"Participation\" feature by clicking \"View Info\"."
+                "title": "Nenhum evento de aposta detectado",
+                "body": "Abra a configuração de rede em Configurações Avançadas e certifique-se de que o nó atual possui o recurso \"Participação\", clicando em \"Ver Informações\"."
             },
             "ended": {
-                "title": "Staking has now ended",
-                "body": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch."
+                "title": "O período de apostas terminou",
+                "body": "Recompensas de Assembly e Shimmer serão distribuídas para suas carteiras quando cada uma das respectivas redes forem lançadas."
             }
         },
         "partiallyStakedFunds": {
-            "title": "New unstaked funds: {amount}",
-            "titleNoFunds": "New unstaked funds",
-            "preBody": "You have received tokens on a staked wallet.",
-            "body": "You need to manually stake these new funds to receive airdrop rewards for them."
+            "title": "Novos fundos não apostado: {amount}",
+            "titleNoFunds": "Novos fundos não apostado",
+            "preBody": "Você recebeu tokens em uma carteira de aposta.",
+            "body": "Você precisa colocar aportar manualmente esses novos fundos para receber recompensas por eles."
         },
         "stakingMinRewards": {
-            "title": "Below minimum reward value",
-            "titleMinBalance": "{amount} minimum balance required",
-            "bodyMinBalace": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
-            "continue": "Please continue staking for another {duration}.",
-            "bodyBelowMin": "This wallet has not reached the minimum reward value for {airdrop} ({airdropRewardMin}).",
-            "bodyWillReachMin": "You must stake for another {duration} to reach the minimum.",
-            "bodyWillNotReachMin": "You will not reach the minimum during the remaining staking period unless you stake more IOTA.",
-            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum rewards for {airdrop} ({airdropRewardMin})."
+            "title": "Abaixo do valor mínimo de recompensa",
+            "titleMinBalance": "{amount} saldo mínimo necessário",
+            "bodyMinBalace": "Esta carteira não tem tokens IOTA suficientes para alcançar a recompensa mínima e, portanto, não pode ser locada.",
+            "continue": "Por favor, continue apostando por mais {duration}.",
+            "bodyBelowMin": "Esta carteira não atingiu o valor mínimo de recompensa para {airdrop} ({airdropRewardMin}).",
+            "bodyWillReachMin": "Você deve apostar por mais {duration} para alcançar o valor mínimo.",
+            "bodyWillNotReachMin": "Você não alcançará o mínimo durante o período de apostagem restante, a menos que você aposte mais IOTA.",
+            "bodyDidNotReachMin": "Você não estocou IOTA o suficiente para alcançar as recompensas mínimas de {airdrop} ({airdropRewardMin})."
         }
     },
     "exports": {
         "transactionHistoryCsv": {
             "messageId": "ID da Mensagem",
-            "internal": "Internal",
-            "rawValue": "Raw Value",
-            "formattedValue": "Formatted Value",
+            "internal": "Interno",
+            "rawValue": "Valor bruto",
+            "formattedValue": "Valor Formatado",
             "date": "Data",
-            "time": "Time"
+            "time": "Horário"
         }
     }
 }
