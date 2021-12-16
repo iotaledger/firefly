@@ -69,6 +69,10 @@
     let header, subHeader
     $: $participationOverview, ([header, subHeader] = getHeaders())
 
+    stakingEventState.subscribe(() => {
+        [header, subHeader] = getHeaders()
+    })
+
     const handleLearnMoreClick = (): void => {
         Electron.openUrl('https://firefly.iota.org')
     }
