@@ -75,6 +75,7 @@ import type {
 } from './typings/wallet'
 import resolveConfig from 'tailwindcss/resolveConfig'
 import tailwindConfig from 'shared/tailwind.config.js'
+import { setProfileAccount } from 'shared/lib/profile'
 
 const configColors = resolveConfig(tailwindConfig).theme.colors
 
@@ -677,7 +678,7 @@ export const asyncRestoreBackup = (importFilePath: string, password: string): Pr
         })
     })
 
-export const asyncCreateAccount = (alias?: string): Promise<WalletAccount> =>
+export const asyncCreateAccount = (alias?: string, color?: string, pattern?: string): Promise<WalletAccount> =>
     new Promise<WalletAccount>((resolve, reject) => {
         const accounts = get(get(wallet)?.accounts)
         api.createAccount(
@@ -697,6 +698,7 @@ export const asyncCreateAccount = (alias?: string): Promise<WalletAccount> =>
                         depositAddress: response.payload.addresses[0].address,
                     }) as WalletAccount
                     get(wallet)?.accounts.update((_accounts) => [..._accounts, preparedAccount])
+                    setProfileAccount(get(activeProfile), { id: preparedAccount.id, color, pattern })
 
                     resolve(preparedAccount)
                 },

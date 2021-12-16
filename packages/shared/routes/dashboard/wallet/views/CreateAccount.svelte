@@ -94,7 +94,7 @@
         <div class="flex flex-row mb-6">
             <Text type="h5">{locale('general.createAccount')}</Text>
         </div>
-        <div class="w-full h-full flex flex-col justify-between">
+        <div class="w-full flex flex-col justify-between">
             <AccountTile
                 balance={'0 Mi'}
                 balanceEquiv={'US$ 0,00'}
