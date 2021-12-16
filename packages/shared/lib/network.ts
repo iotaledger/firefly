@@ -273,9 +273,6 @@ export const updateClientOptions = (config: NetworkConfig): void => {
 
     api.setClientOptions(clientOptions, {
         onSuccess() {
-            // On a successful node change message, reinitialise polling for getting participation overview
-            void pollParticipationOverview()
-
             const { accounts } = get(wallet)
             accounts.set(get(accounts).map((a) => ({ ...a, clientOptions })))
         },

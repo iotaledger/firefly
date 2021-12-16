@@ -25,6 +25,7 @@ let participationPollInterval
  * @returns {Promise<void>}
  */
 export async function pollParticipationOverview(): Promise<void> {
+    clearPollParticipationOverviewInterval()
     try {
         await getParticipationOverview()
         /* eslint-disable @typescript-eslint/no-misused-promises */
