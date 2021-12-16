@@ -92,16 +92,18 @@ export const stakedAccounts: Readable<WalletAccount[]> = derived(
  * because the same funds may be staked for both airdrops).
  */
 export const stakedAmount: Readable<number> = derived(participationOverview, (overview) => {
-    const assemblyStakedFunds = overview.reduce(
-        (total, accountOverview) => total + accountOverview?.assemblyStakedFunds,
-        0
-    )
-    const shimmerStakedFunds = overview.reduce(
-        (total, accountOverview) => total + accountOverview?.shimmerStakedFunds,
-        0
-    )
+    return overview.reduce((total, accountOverview) => {
+        const { shimmerStakedFunds, assemblyStakedFunds } = accountOverview
 
-    return Math.max(assemblyStakedFunds, shimmerStakedFunds)
+        if (shimmerStakedFunds > 0 && assemblyStakedFunds > 0) {
+            total += Math.max(shimmerStakedFunds, assemblyStakedFunds)
+        } else {
+            total += shimmerStakedFunds
+            total += assemblyStakedFunds
+        }
+
+        return total
+    }, 0)
 })
 
 /**
@@ -110,16 +112,13 @@ export const stakedAmount: Readable<number> = derived(participationOverview, (ov
  * because the same funds may be staked for both airdrops).
  */
 export const unstakedAmount: Readable<number> = derived(participationOverview, (overview) => {
-    const assemblyUnstakedFunds = overview.reduce(
-        (total, accountOverview) => total + accountOverview?.assemblyUnstakedFunds,
-        0
-    )
-    const shimmerUnstakedFunds = overview.reduce(
-        (total, accountOverview) => total + accountOverview?.shimmerUnstakedFunds,
-        0
-    )
+    return overview.reduce((total, accountOverview) => {
+        const { shimmerUnstakedFunds, assemblyUnstakedFunds } = accountOverview
 
-    return Math.min(assemblyUnstakedFunds, shimmerUnstakedFunds)
+        total += Math.min(shimmerUnstakedFunds, assemblyUnstakedFunds)
+
+        return total
+    }, 0)
 })
 
 /**
