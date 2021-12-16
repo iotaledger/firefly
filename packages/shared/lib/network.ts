@@ -302,6 +302,12 @@ export const getDefaultClientOptions = (): ClientOptions => {
         getOfficialNetwork(isDevProfile ? NetworkType.ChrysalisDevnet : NetworkType.ChrysalisMainnet)
 
     const node = pick<Node>(getOfficialNodes(type))
+    if (!node) {
+        showAppNotification({
+            type: 'error',
+            message: localize('error.node.unableToFindNode'),
+        })
+    }
     node.isPrimary = true
 
     /**
