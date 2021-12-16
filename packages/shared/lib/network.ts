@@ -1,6 +1,6 @@
 import type { Node, NodeAuth } from './typings/node'
-import { isValidHttpsUrl, isValidUrl } from './utils'
-import type { Network, NetworkConfig } from './typings/network'
+import { isValidHttpsUrl, isValidUrl, pick } from './utils'
+import type { Network, NetworkConfig, NetworkId } from './typings/network'
 import { NetworkType } from './typings/network'
 import { api, wallet } from './wallet'
 import { isNewNotification, showAppNotification } from './notifications'
@@ -261,7 +261,7 @@ export const updateClientOptions = (config: NetworkConfig): void => {
     const clientOptions = buildClientOptions(config)
     if (!clientOptions.node) return
 
-    const hasMismatchedNetwork = clientOptions.node?.network?.id !== clientOptions.network
+    const hasMismatchedNetwork = (clientOptions.node?.network as Network)?.id !== clientOptions.network
     if (hasMismatchedNetwork && isNewNotification('warning')) {
         showAppNotification({
             type: 'error',
@@ -286,25 +286,33 @@ export const updateClientOptions = (config: NetworkConfig): void => {
 }
 
 export const buildClientOptions = (config: NetworkConfig): ClientOptions => {
-    const nodeCandidates = getNodeCandidates(config).map((n) => ({ ...n, network: config.network }))
+    const nodeCandidates = getNodeCandidates(config).map((n) => ({ ...n, network: config?.network?.id }))
     return {
         ...config,
         node: nodeCandidates.find((n) => n.isPrimary),
         nodes: nodeCandidates,
-        network: config.network.id,
+        network: config?.network?.id,
     }
 }
 
 export const getDefaultClientOptions = (): ClientOptions => {
+    const isDevProfile = get(activeProfile)?.isDeveloperProfile
     const { id, type } =
-        get(activeProfile)?.settings?.networkConfig.network || getOfficialNetwork(NetworkType.ChrysalisMainnet)
+        get(activeProfile)?.settings?.networkConfig?.network ||
+        getOfficialNetwork(isDevProfile ? NetworkType.ChrysalisDevnet : NetworkType.ChrysalisMainnet)
 
-    const node = getOfficialNodes(type)[0]
+    const node = pick<Node>(getOfficialNodes(type))
     node.isPrimary = true
+
+    /**
+     * CAUTION: This statement is necessary because wallet.rs uses "network"
+     * to mean the network ID.
+     */
+    node.network = (node.network as Network).id || node.network
 
     return {
         node,
-        nodes: getOfficialNodes(type).map((n) => ({ ...n, isPrimary: n.url === node.url })),
+        nodes: getOfficialNodes(type).map((n) => ({ ...n, isPrimary: n.url === node.url, network: node.network })),
         network: id,
         automaticNodeSelection: true,
         includeOfficialNodes: true,

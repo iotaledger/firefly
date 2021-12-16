@@ -1,4 +1,4 @@
-import type { Network } from './network'
+import type { Network, NetworkId } from './network'
 
 export interface NodeAuth {
     jwt?: string
@@ -9,7 +9,7 @@ export interface NodeAuth {
 export interface Node {
     url: string
     auth?: NodeAuth
-    network?: Network
+    network?: Network | NetworkId
     isPrimary?: boolean
     isDisabled?: boolean
 }

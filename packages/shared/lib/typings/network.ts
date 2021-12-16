@@ -7,7 +7,7 @@ export enum NetworkType {
 }
 
 /**
- * The specific ID of an IOTA network or Tangle.
+ * The specific ID of an IOTA network.
  */
 export type NetworkId = string
 
