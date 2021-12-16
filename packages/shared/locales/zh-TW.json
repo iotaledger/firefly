@@ -521,11 +521,11 @@
                 "collectedRewards": "已領取的獎勵",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly是一個無須授權, 高擴展性的多鏈網絡, 用來建置和佈署組合式的智能合約. Assembly是Web3的未來. "
+                    "description": "Assembly 是一個無須授權，高擴展性的多鏈網絡，用來建置和佈署組合式的智能合約。Assembly 是 Web3 的未來。"
                 },
                 "shimmer": {
                     "name": "Shimmer",
-                    "description": "利用先行的激勵網絡來推進IOTA的重大創新. 無論未來會如何發展, Shimmer的演進由你決定."
+                    "description": "利用先行的激勵網路來推進 IOTA 的重大創新。無論未來如何發展，Shimmer 的演進由你決定。"
                 }
             }
         }
@@ -713,7 +713,7 @@
         },
         "exportTransactionHistory": {
             "title": "匯出交易記錄",
-            "body": "匯出錢包的交易紀錄. 匯出檔案內容為csv格式.",
+            "body": "匯出錢包的交易紀錄。匯出檔案為 .csv 格式。",
             "profileName": "設定檔名稱:",
             "accountName": "帳戶名稱：",
             "typePassword": "輸入您的密碼以允許匯出"
@@ -721,12 +721,12 @@
         "stakingNotice": {
             "upcomingDate": "質押尚未開始",
             "commencingDate": "質押尚未開始",
-            "body": "在質押正式啟動前預先質押你的資金，在質押啟動時你就能自動開始收到質押獎勵。",
+            "body": "在質押正式啟動前預先質押您的資金，您將在質押啟動時自動開始獲得獎勵。",
             "ok": "好的，我瞭解了"
         },
         "stakingManager": {
             "title": "質押管理",
-            "description": "當你質押一個錢包時, 代表你對自己發出一筆交易, 使得錢包內的資金狀態轉為\"已質押\". 你還是可以隨時轉出資金, 但你將不再收到質押獎勵.",
+            "description": "質押一個錢包時，您會對自己發送一筆交易，將其資金標示為「已質押」。您仍可以隨時轉出這些代幣，但將不再收到質押獎勵。",
             "totalFundsStaked": "質押資金總額",
             "stakedSuccessfully": "您的資金已爲 {account} 質押。",
             "unstakedSuccessfully": "您的資金已從 {account} 解除質押。"
@@ -735,19 +735,19 @@
             "title": "參加空投",
             "subtitleStake": "您將要質押",
             "subtitleMerge": "您即將合併",
-            "bodyStake": "如果你不想參與兩項空投，你可以在下面選擇退出。你可以隨時解除質押並重新質押以重新加入。",
+            "bodyStake": "如果不想同時參與兩項空投，您可以在下面選擇退出。您可以隨時解除質押並重新質押以再次加入。",
             "bodyMerge": "你的資金將爲 {airdrop} 質押。要切換你想參與的空投項目，請解除質押此錢包並重新質押。",
             "estimatedAirdrop": "估計獎勵"
         },
         "shimmer-info": {
             "title": "關於 Shimmer",
-            "body1": "恭喜你已賺取SMR代幣的質押獎勵. Shimmer是一個先行激勵網絡, 用來預先測試IOTA鏈上的主要更新.",
-            "body2": "我們預計於2022年啟動Shimmer網絡. 一旦網絡啟動你就能開始操作你的SMR token."
+            "body1": "恭喜您已賺取質押獎勵的 SMR 代幣。Shimmer 是個先行激勵網路，用來預先測試 IOTA 主網的重要升級。",
+            "body2": "我們的目標是 2022 年啟動 Shimmer。您的 SMR 代幣將在網路啟動時開放轉帳。"
         },
         "assembly-info": {
             "title": "關於 Assembly",
-            "body1": "恭喜你已賺取ASMB代幣的質押獎勵. Assembly是一個多鏈網絡, 用來將高擴展性智能合約佈署於IOTA上.",
-            "body2": "我們預計於2022年啟動Assembly網絡. 一旦網絡啟動你就能開始操作你的ASMB token."
+            "body1": "恭喜您已賺取質押獎勵的 ASMB 代幣。Assembly 是個多鏈網路，用來把高擴展性智能合約佈署到 IOTA 上。",
+            "body2": "我們的目標是 2022 年啟動 Assembly。您的 ASMB 代幣將在網路啟動時開放轉帳。"
         }
     },
     "charts": {
@@ -1176,7 +1176,7 @@
             "cannotUseAccount": "無法使用該指定帳戶。",
             "cannotFindStakingEvent": "未能找到質押活動。",
             "cannotVisitAirdropWebsite": "無法開啟{airdrop} 網站。",
-            "invalidStakingEventId": "無效的質押活動ID。"
+            "invalidStakingEventId": "質押活動ID無效。"
         }
     },
     "warning": {
@@ -1203,14 +1203,14 @@
             },
             "commencing": {
                 "title": "現已開放預先質押",
-                "body": "預先質押你的token, 一旦質押功能正式啟動, 你每十秒會收到一筆質押獎勵."
+                "body": "預先質押您的代幣。一旦開始質押活動，您將自動於每十秒獲得一次質押獎勵。"
             },
             "activeHolding": {
                 "title": "現在質押正在進行中",
                 "body": "恭喜。您將在每10秒獲得獎勵。"
             },
             "inactiveHolding": {
-                "title": "質押現已開放",
+                "title": "現在已開放質押",
                 "body": "質押您的IOTA代幣以獲得每10秒一次的獎勵。"
             },
             "inactive": {
@@ -1219,7 +1219,7 @@
             },
             "ended": {
                 "title": "質押現已結束",
-                "body": "Assembly 和 Shimmer 獎勵將在它們各自的網路啟動後分配到您的錢包。"
+                "body": "Assembly 和 Shimmer 獎勵將於各自網路開啟後，分發到您的錢包。"
             }
         },
         "partiallyStakedFunds": {
@@ -1231,7 +1231,7 @@
         "stakingMinRewards": {
             "title": "低於最低獎勵門檻",
             "titleMinBalance": "須要最低餘額 {amount}",
-            "bodyMinBalace": "此錢包內的 IOTA 代幣不足以達到最低空投獎勵門檻，因此無法質押。",
+            "bodyMinBalace": "此錢包的IOTA代幣低於空投獎勵的最低門檻，因此無法質押。",
             "continue": "請再繼續質押 {duration}。",
             "bodyBelowMin": "此錢包尚未達到 {airdrop} ({airdropRewardMin}) 的最低獎勵門檻。",
             "bodyWillReachMin": "您必須再質押 {duration} 才能達到最低門檻。",

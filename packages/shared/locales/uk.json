@@ -15,7 +15,7 @@
         },
         "profile": {
             "title": "Створити профіль",
-            "profileName": "Profile name",
+            "profileName": "Ім'я профілю",
             "body1": "Ви можете створити декілька профілів користувачів для організації ваших гаманців та покращення конфіденційності.",
             "body2": {
                 "first": "Почніть з назви вашого першого профілю.",
@@ -23,8 +23,8 @@
             },
             "addMore": "Ви можете додати більше профілів пізніше.",
             "developer": {
-                "label": "Developer profile",
-                "info": "Connect to public and private IOTA networks"
+                "label": "Профіль розробника",
+                "info": "Підключіться до публічних і приватних мереж IOTA"
             }
         },
         "setup": {
@@ -312,7 +312,7 @@
             "theme": {
                 "title": "Тема",
                 "description": "",
-                "advice": "Restart the Firefly application for changes to the system theme to take effect"
+                "advice": "Щоб теми оновилися і набули чинності, додаток Firefly треба перевантажити"
             },
             "language": {
                 "title": "Мова",
@@ -328,14 +328,14 @@
             },
             "networkStatus": {
                 "title": "Статус мережі",
-                "description": "Displays the status of the node you are currently connected to"
+                "description": "Відображає стан вузла, до якого ви зараз підключені"
             },
             "exportStronghold": {
-                "title": "Export backup",
+                "title": "Експортувати резервну копію",
                 "description": "Експорт у файл Stronghold - повна зашифрована резервна копія ваших гаманців та найновіша історія транзакцій"
             },
             "appLock": {
-                "title": "Automatic lock",
+                "title": "Автоблокування",
                 "description": "Час бездіяльності, перш ніж ваші гаманці заблокуються, і ви вийдете",
                 "durationMinute": "{time, plural, one {1 хвилину} other {# хвилини}}",
                 "durationHour": "{time, plural, one {1 година} other {# години}}"
@@ -365,33 +365,33 @@
                 "description": "Видаляє весь ваш профіль, гаманці та історію транзакцій. Переконайтеся, що у вас є резервна копія"
             },
             "deepLinks": {
-                "title": "IOTA links",
-                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
+                "title": "IOTA посилання",
+                "description": "Автоматично заповнювати дані транзакції у Firefly при кліку на IOTA посилання"
             },
             "networkConfiguration": {
-                "title": "Network config",
-                "title2": "Network configuration",
+                "title": "Налаштування мережі",
+                "title2": "Конфігурація мережі",
                 "description": {
-                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
-                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                    "dev": "Ваші налаштування мережі оновляться автоматично відповідно до поточної конфігурації вузла (перемикання мереж призведе до скидання стану гаманця)",
+                    "nonDev": "Ваші налаштування мережі оновляться автоматично відповідно до поточної конфігурації вузла"
                 },
-                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
-                "resetWallet": "Your wallet state has been reset.",
-                "connectedTo": "Connected to",
+                "switchedNetworks": "Успішно переключено мережу на \"{networkName}\".",
+                "resetWallet": "Стан вашого гаманця скинуто.",
+                "connectedTo": "Підключено до",
                 "nodeConfiguration": {
-                    "title": "Node selection",
-                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
-                    "automatic": "Automatic",
-                    "manual": "Manual"
+                    "title": "Вибір вузла",
+                    "description": "Виберіть «Вручну», щоб налаштувати параметри вузла та підключитися до власних вузла(ів)",
+                    "automatic": "Автоматично",
+                    "manual": "Вручну"
                 }
             },
             "configureNodeList": {
-                "title": "Node configuration",
-                "description": "Manage the list of nodes you connect to",
+                "title": "Конфігурація вузла",
+                "description": "Керуйте списком вузлів, до яких ви підключаєтеся",
                 "primaryNode": "Основний вузол",
                 "excludeNode": "Виключити вузол",
                 "includeNode": "Включити вузол",
-                "editDetails": "Edit details",
+                "editDetails": "Редагувати деталі",
                 "viewInfo": "View info",
                 "setAsPrimary": "Встановити як основний",
                 "removeNode": "Видалити вузол",

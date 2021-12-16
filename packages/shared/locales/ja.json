@@ -488,37 +488,37 @@
             }
         },
         "staking": {
-            "title": "Staking",
-            "welcome": "Welcome to the staking dashboard",
+            "title": "ステーキング",
+            "welcome": "ステーキングダッシュボードへようこそ",
             "status": {
-                "upcoming": "Event not started",
+                "upcoming": "イベントは開始されていません",
                 "commencing": "Pre-staking open",
                 "holdingActive": "Staking in progress",
-                "holdingInactive": "Staking open",
-                "inactive": "Staking not detected",
-                "ended": "Staking ended"
+                "holdingInactive": "ステーキングオープン",
+                "inactive": "ステーキングが検出されませんでした",
+                "ended": "ステーキング終了"
             },
             "summary": {
                 "stakedFunds": "Staked funds"
             },
             "info": {
-                "upcomingSubheader": "Event has not started",
-                "upcomingHeader": "Check back later",
-                "commencingSubheader": "Get ready for staking",
+                "upcomingSubheader": "イベントは開始されていません",
+                "upcomingHeader": "後で確認する",
+                "commencingSubheader": "ステーキングの準備をする",
                 "commencingHeader": "Pre-stake your tokens!",
-                "holdingSubheaderHolding": "Now earning staking rewards",
-                "holdingSubheaderNotHolding": "Earn rewards by staking IOTA",
-                "holdingHeaderHolding": "{duration} left",
+                "holdingSubheaderHolding": "ステーキング報酬を獲得中",
+                "holdingSubheaderNotHolding": "IOTAステーキングで報酬を獲得",
+                "holdingHeaderHolding": "残り{duration}",
                 "holdingHeaderNotHolding": "Stake your tokens!",
-                "endedSubheader": "Staking has now ended",
-                "endedHeader": "Thank you!",
-                "inactiveHeader": "Try changing node",
-                "inactiveSubheader": "Staking not detected"
+                "endedSubheader": "ステーキングは終了しました",
+                "endedHeader": "ありがとうございます!",
+                "inactiveHeader": "ノードを変更してみてください",
+                "inactiveSubheader": "ステーキングが検出されませんでした"
             },
             "airdrops": {
-                "holding": "Remaining",
+                "holding": "残り",
                 "commencing": "Until staking begins",
-                "collectedRewards": "Collected rewards",
+                "collectedRewards": "報酬を集めました",
                 "assembly": {
                     "name": "Assembly",
                     "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
@@ -715,19 +715,19 @@
             "title": "取引履歴を出力する",
             "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
             "profileName": "プロファイル名:",
-            "accountName": "Account name:",
+            "accountName": "アカウント名:",
             "typePassword": "出力を許可するにはパスワードを入力してください"
         },
         "stakingNotice": {
-            "upcomingDate": "Staking has not started yet",
-            "commencingDate": "Staking has not started yet",
+            "upcomingDate": "ステーキングはまだ開始されていません",
+            "commencingDate": "ステーキングはまだ開始されていません",
             "body": "By pre-staking your funds before staking starts, you will automatically begin receiving rewards when staking begins.",
-            "ok": "Ok, I understand"
+            "ok": "はい。理解しました。"
         },
         "stakingManager": {
-            "title": "Staking Management",
+            "title": "ステーキング管理",
             "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
-            "totalFundsStaked": "Total funds staked",
+            "totalFundsStaked": "賭け金の合計",
             "stakedSuccessfully": "Your funds have been staked for {account}.",
             "unstakedSuccessfully": "Your funds have been unstaked for {account}."
         },
@@ -737,15 +737,15 @@
             "subtitleMerge": "You are about to merge",
             "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
             "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
-            "estimatedAirdrop": "Estimated rewards"
+            "estimatedAirdrop": "推定された報酬"
         },
         "shimmer-info": {
-            "title": "About Shimmer",
+            "title": "Shimmerについて",
             "body1": "Congratulations you have earned SMR tokens as a staking reward. Shimmer is an incentivized staging network to test major upgrades on IOTA.",
             "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
         },
         "assembly-info": {
-            "title": "About Assembly",
+            "title": "Assemblyについて",
             "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
             "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
         }
@@ -861,15 +861,15 @@
         "closeFirefly": "Firefly を閉じる",
         "generateAddress": "アドレスを生成",
         "migrateAgain": "別のインデックスを移行",
-        "visitWebsite": "Visit website",
-        "howItWorks": "How it works",
-        "learnAboutStaking": "Learn about staking",
+        "visitWebsite": "ウェブサイトを開く",
+        "howItWorks": "使い方",
+        "learnAboutStaking": "ステーキングについて学ぶ",
         "stake": "Stake",
         "unstake": "Unstake",
         "stakeFunds": "Stake funds",
         "manageStake": "Manage stake",
-        "merge": "Merge",
-        "mergeFunds": "Merge funds",
+        "merge": "統合",
+        "mergeFunds": "資金を統合",
         "done": "完了しました"
     },
     "general": {
@@ -959,7 +959,7 @@
         "transferBroadcasting": "取引をブロードキャストしています",
         "transferComplete": "転送完了",
         "generatingReceiveAddress": "入金アドレスを作成",
-        "broadcasting": "Broadcasting",
+        "broadcasting": "ブロードキャスト中",
         "confirming": "Confirming",
         "creatingAccount": "ウォレットを作成しています。しばらくお待ちください...",
         "updatingAccount": "ウォレットを更新しています。お待ちください...",
@@ -999,20 +999,20 @@
         "version": "バージョン {version}",
         "unknown": "不明",
         "none": "なし",
-        "days": "day(s)",
+        "days": "日",
         "time": {
-            "days": "days",
-            "day": "day",
-            "hours": "hours",
-            "hour": "hour",
-            "minutes": "minutes",
-            "minute": "minute",
-            "seconds": "seconds",
-            "second": "second"
+            "days": "日",
+            "day": "日",
+            "hours": "時間",
+            "hour": "時間",
+            "minutes": "分",
+            "minute": "分",
+            "seconds": "秒",
+            "second": "秒"
         },
         "staked": "Staked",
         "unstaked": "Unstaked",
-        "staking": "Staking",
+        "staking": "ステーキング",
         "unstaking": "Unstaking",
         "notStaked": "Not staked",
         "stakedFunds": "Staked funds",
@@ -1218,7 +1218,7 @@
                 "body": "Open network configuration in Advanced Settings and make sure the current node has the \"Participation\" feature by clicking \"View Info\"."
             },
             "ended": {
-                "title": "Staking has now ended",
+                "title": "ステーキングは終了しました",
                 "body": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch."
             }
         },
@@ -1242,11 +1242,11 @@
     "exports": {
         "transactionHistoryCsv": {
             "messageId": "メッセージ ID：",
-            "internal": "Internal",
+            "internal": "内部",
             "rawValue": "Raw Value",
-            "formattedValue": "Formatted Value",
+            "formattedValue": "フォーマットされた値",
             "date": "日付",
-            "time": "Time"
+            "time": "時間"
         }
     }
 }

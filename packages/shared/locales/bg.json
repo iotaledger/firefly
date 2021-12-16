@@ -24,13 +24,13 @@
             "addMore": "Можете да добавите още профили по-късно.",
             "developer": {
                 "label": "Режим на разработчик",
-                "info": "Connect to public and private IOTA networks"
+                "info": "Свързване с публични или частни IOTA мрежи"
             }
         },
         "setup": {
             "title": "Създаване на портфейл",
             "chrysalisTitle": "Миграция в мрежата Chrysalis",
-            "chrysalisBody": "From April 21st 2021, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
+            "chrysalisBody": "От 21-ви април 2021, потребителите могат да мигрират своите средста в новата Chrysalis мрежа. Ние препоръчване да мигрирате средствата си възможно най-скоро.",
             "learnMore": "Научете повече за миграцията"
         },
         "secure": {
@@ -312,7 +312,7 @@
             "theme": {
                 "title": "Тема",
                 "description": "",
-                "advice": "Restart the Firefly application for changes to the system theme to take effect"
+                "advice": "Рестартирайте приложението Firefly, за да станат активни промените по визуалната тема"
             },
             "language": {
                 "title": "Език",
@@ -328,14 +328,14 @@
             },
             "networkStatus": {
                 "title": "Състояние на мрежата",
-                "description": "Displays the status of the node you are currently connected to"
+                "description": "Показване на статуса на node сървъра, към който сте свързани"
             },
             "exportStronghold": {
-                "title": "Export backup",
+                "title": "Създаване резервно копие",
                 "description": "Експортиране в Stronghold файл - пълно криптирано резервно копие на портфейла и история на последните трансакции"
             },
             "appLock": {
-                "title": "Automatic lock",
+                "title": "Автоматично заключване",
                 "description": "Време на неактивност преди заключване на портфейла и изход от профила",
                 "durationMinute": "{time, plural, one {1 минута} other {# минути}}",
                 "durationHour": "{time, plural, one {1 час} other {# часа}}"
@@ -365,39 +365,39 @@
                 "description": "Изтриване на потребителския профил, портфейл и история на трансакциите. Уверете се, че имате резервно копие"
             },
             "deepLinks": {
-                "title": "IOTA links",
-                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
+                "title": "IOTA линкове",
+                "description": "Автоматично попълване на данни за трансакциите във Firefly, след щракане върху IOTA линк"
             },
             "networkConfiguration": {
-                "title": "Network config",
-                "title2": "Network configuration",
+                "title": "Мрежови настройки",
+                "title2": "Мрежова конфигурация",
                 "description": {
                     "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
                     "nonDev": "Your network settings will update automatically according to the current node configuration"
                 },
                 "switchedNetworks": "Successfully switched network to \"{networkName}\".",
                 "resetWallet": "Your wallet state has been reset.",
-                "connectedTo": "Connected to",
+                "connectedTo": "Свързан към",
                 "nodeConfiguration": {
-                    "title": "Node selection",
-                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
-                    "automatic": "Automatic",
-                    "manual": "Manual"
+                    "title": "Избор на node сървър",
+                    "description": "Изберете \"Ръчен\", за да управлявате настройките за node сървър и да се свържете към собствен node сървър(и)",
+                    "automatic": "Автоматично",
+                    "manual": "Ръчно"
                 }
             },
             "configureNodeList": {
-                "title": "Node configuration",
-                "description": "Manage the list of nodes you connect to",
+                "title": "Node конфигурация",
+                "description": "Управление на списъка със Node сървъри, към които сте свързан",
                 "primaryNode": "Основен Node сървър",
                 "excludeNode": "Игнорирай Node сървър",
                 "includeNode": "Използвай Node сървър",
-                "editDetails": "Edit details",
-                "viewInfo": "View info",
+                "editDetails": "Редактиране на подробности",
+                "viewInfo": "Показване на информация",
                 "setAsPrimary": "Задай като основен",
                 "removeNode": "Премахни Node сървър",
                 "includeOfficialNodeList": "Избери официалния списък с Node сървъри",
                 "noNodes": "There are no nodes, unable to connect to the network",
-                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
+                "noNodesAuto": "Няма избрани Node сървъри, автоматичен избор ще бъде използван"
             },
             "proofOfWork": {
                 "title": "Доказателство за работа PoW",
@@ -412,7 +412,7 @@
                 "description": "Виж системна и за приложението информация"
             },
             "migrateLedgerIndex": {
-                "title": "Migrate Ledger index",
+                "title": "Мигриране на Ledger index",
                 "description": "Мигриране на друг Trinity account index"
             },
             "troubleshoot": {
@@ -425,7 +425,7 @@
             },
             "faq": {
                 "title": "ЧЗВ",
-                "title2": "Frequently asked questions",
+                "title2": "Често Задавани Въпроси",
                 "description": "Посетете ЧЗВ-FAQ за да получите помощ с често срещани проблеми и въпроси"
             },
             "discord": {
@@ -488,37 +488,37 @@
             }
         },
         "staking": {
-            "title": "Staking",
+            "title": "Залагане",
             "welcome": "Welcome to the staking dashboard",
             "status": {
-                "upcoming": "Event not started",
+                "upcoming": "Събитието не е започнало",
                 "commencing": "Pre-staking open",
-                "holdingActive": "Staking in progress",
+                "holdingActive": "Залагане в прогрес",
                 "holdingInactive": "Staking open",
                 "inactive": "Staking not detected",
-                "ended": "Staking ended"
+                "ended": "Залагането приключи"
             },
             "summary": {
                 "stakedFunds": "Staked funds"
             },
             "info": {
-                "upcomingSubheader": "Event has not started",
-                "upcomingHeader": "Check back later",
-                "commencingSubheader": "Get ready for staking",
+                "upcomingSubheader": "Събитието не е започнало",
+                "upcomingHeader": "Проверете по-късно",
+                "commencingSubheader": "Пригответе се за залагане",
                 "commencingHeader": "Pre-stake your tokens!",
                 "holdingSubheaderHolding": "Now earning staking rewards",
                 "holdingSubheaderNotHolding": "Earn rewards by staking IOTA",
                 "holdingHeaderHolding": "{duration} left",
                 "holdingHeaderNotHolding": "Stake your tokens!",
-                "endedSubheader": "Staking has now ended",
-                "endedHeader": "Thank you!",
+                "endedSubheader": "Залагането приключи",
+                "endedHeader": "Благодарим ви!",
                 "inactiveHeader": "Try changing node",
                 "inactiveSubheader": "Staking not detected"
             },
             "airdrops": {
-                "holding": "Remaining",
+                "holding": "Остава",
                 "commencing": "Until staking begins",
-                "collectedRewards": "Collected rewards",
+                "collectedRewards": "Събрани награди",
                 "assembly": {
                     "name": "Assembly",
                     "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
@@ -576,9 +576,9 @@
         },
         "addressHistory": {
             "title": "{name} история на адрес",
-            "currentBalance": "Balance: {balance}",
+            "currentBalance": "Баланс: {balance}",
             "internal": "Internal Address",
-            "external": "Deposit Address"
+            "external": "Депозит адрес"
         },
         "node": {
             "titleAdd": "Добави Node сървър",
@@ -587,22 +587,22 @@
             "titleRemoveAll": "Remove all nodes",
             "titleDetails": "Детайли за Node сървър",
             "titleInfo": "Node info",
-            "addingNode": "Adding node",
-            "updatingNode": "Updating node",
+            "addingNode": "Добави Node",
+            "updatingNode": "Обнови Node",
             "loadingNodeInfo": "Loading node info",
             "nodeAddress": "Адрес Node сървър",
             "optionalUsername": "Потребителско име (незадължително)",
             "optionalPassword": "Парола (незадължителна)",
-            "optionalJwt": "JSON web token (optional)",
+            "optionalJwt": "JSON уеб токен (незадължителен)",
             "setAsPrimaryNode": "Задай основен Node сървър",
             "removeConfirmation": "Сигурни ли сте, че искате да премахнете този Node сървър?",
             "removeAllConfirmation": "Are you sure you want to remove all nodes?",
             "info": {
                 "url": "URL",
-                "software": "Software",
+                "software": "Софтуер",
                 "networkId": "Network ID",
                 "bech32HRP": "Bech32 HRP",
-                "features": "Features",
+                "features": "Характеристики",
                 "confirmedMilestoneIndex": "Confirmed milestone index",
                 "pruningIndex": "Pruning index",
                 "messagesPerSecond": "Съобщения/трансакции в секунда",
@@ -610,11 +610,11 @@
             }
         },
         "switchNetwork": {
-            "title": "Switch network",
-            "newNetwork": "New network",
+            "title": "Смяна на мрежата",
+            "newNetwork": "Нова мрежа",
             "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
-            "switchingNetwork": "Switching network",
-            "typePassword": "Type your password to switch to:"
+            "switchingNetwork": "Смяна на мрежата",
+            "typePassword": "Въведете своята парола за превключване:"
         },
         "errorLog": {
             "title": "Регистър на грешки",
@@ -712,40 +712,40 @@
             "body": "Можете да мигрирате по-късно в Разширени настройки."
         },
         "exportTransactionHistory": {
-            "title": "Export transaction history",
+            "title": "Изнасяне историята на транзакциите",
             "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
-            "profileName": "Profile name:",
-            "accountName": "Account name:",
-            "typePassword": "Type your password to allow exporting"
+            "profileName": "Име на профила:",
+            "accountName": "Име на акаунт:",
+            "typePassword": "Въведете паролата си, за да разрешите експортиране"
         },
         "stakingNotice": {
-            "upcomingDate": "Staking has not started yet",
-            "commencingDate": "Staking has not started yet",
-            "body": "By pre-staking your funds before staking starts, you will automatically begin receiving rewards when staking begins.",
-            "ok": "Ok, I understand"
+            "upcomingDate": "Залагането не е започнало",
+            "commencingDate": "Залагането не е започнало",
+            "body": "Заложете своите средства предварително, така автоматично ще започнете да получавате паричен интерес, когато залагането започне.",
+            "ok": "Ok, Разбрах"
         },
         "stakingManager": {
-            "title": "Staking Management",
+            "title": "Управление на залагането",
             "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
-            "totalFundsStaked": "Total funds staked",
+            "totalFundsStaked": "Всички заложени средства",
             "stakedSuccessfully": "Your funds have been staked for {account}.",
             "unstakedSuccessfully": "Your funds have been unstaked for {account}."
         },
         "stakingConfirmation": {
             "title": "Airdrop Participation",
-            "subtitleStake": "You are about to stake",
+            "subtitleStake": "Ще заложите",
             "subtitleMerge": "You are about to merge",
             "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
             "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
-            "estimatedAirdrop": "Estimated rewards"
+            "estimatedAirdrop": "Прогнозна печалба"
         },
         "shimmer-info": {
-            "title": "About Shimmer",
+            "title": "За Shimmer",
             "body1": "Congratulations you have earned SMR tokens as a staking reward. Shimmer is an incentivized staging network to test major upgrades on IOTA.",
             "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
         },
         "assembly-info": {
-            "title": "About Assembly",
+            "title": "За Assembly",
             "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
             "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
         }
@@ -755,7 +755,7 @@
         "outgoingMi": "Разходи {value}",
         "portoflio": "Портфолио",
         "token": "Token - монети",
-        "holdings": "Holdings",
+        "holdings": "Притежание",
         "accountValue": "Наличност в портфейла",
         "accountActivity": "Активност на портфейла",
         "timeframe1Hour": "1 час",
@@ -803,12 +803,12 @@
         "dropHere": "Пуснете файла тук",
         "syncAll": "Синхронизиране на всички",
         "export": "Експорт",
-        "exporting": "Exporting",
+        "exporting": "Експортиране",
         "exportNewStronghold": "Експортиране на нов Stronghold",
-        "enableDeepLinks": "Enable IOTA links",
+        "enableDeepLinks": "Разрешаване на IOTA линкове",
         "enableDeveloperMode": "Включване на режима за разработчици",
         "enableSystemNotifications": "Разрешаване на системни известия",
-        "exportTransactionHistory": "Export transaction history",
+        "exportTransactionHistory": "Експортиране историята на транзакциите",
         "localProofOfWork": "Локално доказателство за работа PoW",
         "unlock": "Отключи",
         "updateFirefly": "Обнови Firefly",
@@ -861,16 +861,16 @@
         "closeFirefly": "Затвори Firefly",
         "generateAddress": "Генериране на адрес",
         "migrateAgain": "Мигриране на друг индекс",
-        "visitWebsite": "Visit website",
-        "howItWorks": "How it works",
-        "learnAboutStaking": "Learn about staking",
-        "stake": "Stake",
-        "unstake": "Unstake",
-        "stakeFunds": "Stake funds",
-        "manageStake": "Manage stake",
-        "merge": "Merge",
-        "mergeFunds": "Merge funds",
-        "done": "Done"
+        "visitWebsite": "Посети уебсайта",
+        "howItWorks": "Как работи",
+        "learnAboutStaking": "Научете за залагането",
+        "stake": "Заложи",
+        "unstake": "Прекрати залога",
+        "stakeFunds": "Заложи средства",
+        "manageStake": "Управление на залога",
+        "merge": "Обединяване",
+        "mergeFunds": "Обедини средства",
+        "done": "Готово"
     },
     "general": {
         "password": "Парола",
@@ -913,9 +913,9 @@
         "stronghold": "Stronghold",
         "language": "Език",
         "appearance": "Изглед",
-        "lightTheme": "Light",
-        "darkTheme": "Dark",
-        "systemTheme": "System",
+        "lightTheme": "Светла",
+        "darkTheme": "Тъмна",
+        "systemTheme": "Система",
         "balance": "Баланс/сума",
         "accountBalance": "Наличност в портфейла",
         "incoming": "Входящи",
@@ -932,7 +932,7 @@
         "transactions": "Транзакции",
         "security": "Сигурност",
         "accountAddress": "Адрес на портфейла",
-        "network": "Network",
+        "network": "Мрежа",
         "nodes": "Node сървъри",
         "wallet": "Портфейл",
         "help": "Помощ",
@@ -960,7 +960,7 @@
         "transferComplete": "Прехвърлянето е завършено",
         "generatingReceiveAddress": "Генериране на адрес за получаване",
         "broadcasting": "Broadcasting",
-        "confirming": "Confirming",
+        "confirming": "Потвърждаване",
         "creatingAccount": "Създаване на портфейл, моля изчакайте...",
         "updatingAccount": "Актуализиране на портфейла, моля изчакайте...",
         "accountSyncing": "Портфейлът се синхронизира",
@@ -1001,18 +1001,18 @@
         "none": "None",
         "days": "day(s)",
         "time": {
-            "days": "days",
-            "day": "day",
+            "days": "дни",
+            "day": "ден",
             "hours": "hours",
-            "hour": "hour",
-            "minutes": "minutes",
-            "minute": "minute",
-            "seconds": "seconds",
-            "second": "second"
+            "hour": "час",
+            "minutes": "минути",
+            "minute": "минута",
+            "seconds": "секунди",
+            "second": "секунда"
         },
         "staked": "Staked",
         "unstaked": "Unstaked",
-        "staking": "Staking",
+        "staking": "Залагане",
         "unstaking": "Unstaking",
         "notStaked": "Not staked",
         "stakedFunds": "Staked funds",
@@ -1127,7 +1127,7 @@
             "unsynced": "Node сървърът не в синхронизиран.",
             "noSynced": "Няма налични синхронизирани Node сървъри.",
             "answer": "Failed to get an answer from all nodes.",
-            "forbidden": "This node connection is forbidden.",
+            "forbidden": "Връката с node сървъра не е разрешена.",
             "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node."
         },
         "network": {
@@ -1198,19 +1198,19 @@
         },
         "stakingIndicator": {
             "upcoming": {
-                "title": "Staking has not started yet",
-                "body": "Check back later. The staking event has not begun."
+                "title": "Залагането не е започнало",
+                "body": "Проверете по-късно. Залагането не е започнало."
             },
             "commencing": {
-                "title": "Pre-staking is now open",
+                "title": "Предварителното залагане е започнало",
                 "body": "Pre-stake your tokens, and once staking begins, you will automatically start receiving rewards every 10 seconds."
             },
             "activeHolding": {
-                "title": "Staking is now in progress",
-                "body": "Good job. You will receive rewards every 10 seconds."
+                "title": "Залагането е вече в прогрес",
+                "body": "Добра работа. Ще получавате награди всеки 10 секунди."
             },
             "inactiveHolding": {
-                "title": "Staking is now open",
+                "title": "Залагането е започнало",
                 "body": "Stake your IOTA tokens to receive rewards every 10 seconds."
             },
             "inactive": {
@@ -1218,7 +1218,7 @@
                 "body": "Open network configuration in Advanced Settings and make sure the current node has the \"Participation\" feature by clicking \"View Info\"."
             },
             "ended": {
-                "title": "Staking has now ended",
+                "title": "Залагането приключи",
                 "body": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch."
             }
         },
@@ -1233,7 +1233,7 @@
             "titleMinBalance": "{amount} minimum balance required",
             "bodyMinBalace": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
             "continue": "Please continue staking for another {duration}.",
-            "bodyBelowMin": "This wallet has not reached the minimum reward value for {airdrop} ({airdropRewardMin}).",
+            "bodyBelowMin": "Този портфейл не е достигнал минималното ниво необходимо за отплащане за {airdrop} ({airdropRewardMin}).",
             "bodyWillReachMin": "You must stake for another {duration} to reach the minimum.",
             "bodyWillNotReachMin": "You will not reach the minimum during the remaining staking period unless you stake more IOTA.",
             "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum rewards for {airdrop} ({airdropRewardMin})."
@@ -1242,11 +1242,11 @@
     "exports": {
         "transactionHistoryCsv": {
             "messageId": "ID на съобщението",
-            "internal": "Internal",
-            "rawValue": "Raw Value",
-            "formattedValue": "Formatted Value",
+            "internal": "Вътрешна",
+            "rawValue": "Неформатирана Стойност",
+            "formattedValue": "Форматирана стойност",
             "date": "Дата",
-            "time": "Time"
+            "time": "Време"
         }
     }
 }
