@@ -52,6 +52,7 @@ export function getParticipationEvents(): Promise<ParticipationEvent[]> {
                 participationEvents.set(response?.payload)
 
                 resolve(response?.payload)
+
             },
             onError(error) {
                 console.error(error)
