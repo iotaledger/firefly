@@ -313,7 +313,7 @@
                                 <Text type="p" secondary classes="mb-4">
                                     The IOTA Foundation shall not be liable for any loss or theft of the User's digital assets 
                                     including, but not limited to the loss of the User’s private keys, configuration, 
-                                    installation or transaction errors made by the User,or late execution or late settlement 
+                                    installation or transaction errors made by the User, or late execution or late settlement 
                                     of any transaction.
                                 </Text>
                             </li>
