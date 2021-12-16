@@ -494,7 +494,7 @@
                 "upcoming": "Event hat noch nicht begonnen",
                 "commencing": "Pre-Staking offen",
                 "holdingActive": "Staking läuft",
-                "holdingInactive": "Staking offen",
+                "holdingInactive": "Staking läuft",
                 "inactive": "Staking nicht erkannt",
                 "ended": "Staking beendet"
             },
@@ -516,7 +516,7 @@
                 "inactiveSubheader": "Staking nicht erkannt"
             },
             "airdrops": {
-                "holding": "Verbleibend",
+                "holding": "verbleibend",
                 "commencing": "Bis das Staking begonnen hat",
                 "collectedRewards": "Gesammelte Rewards",
                 "assembly": {
