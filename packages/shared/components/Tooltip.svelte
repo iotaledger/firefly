@@ -12,7 +12,7 @@
     export let classes = ''
     export let anchor: HTMLElement | null = null
     export let position: Position = Position.Top
-    export let refresh: boolean // prop used to refresh the tooltip position
+    export let refresh: boolean = false // prop used to refresh the tooltip position
 
     let tooltip: HTMLElement
     let top = 0
@@ -35,7 +35,9 @@
 
     onMount(() => {
         // Bugfix: Tooltip z-index was not being applied
+        tooltip?.parentNode?.removeChild(tooltip)
         document?.body?.appendChild(tooltip)
+        //
         refreshPosition()
     })
 
