@@ -379,14 +379,14 @@
                 "resetWallet": "Your wallet state has been reset.",
                 "connectedTo": "Connected to",
                 "nodeConfiguration": {
-                    "title": "Node selection",
+                    "title": "Výběr node",
                     "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
-                    "automatic": "Automatic",
-                    "manual": "Manual"
+                    "automatic": "Automaticky",
+                    "manual": "Manuálně"
                 }
             },
             "configureNodeList": {
-                "title": "Node configuration",
+                "title": "Konfigurace uzlu",
                 "description": "Manage the list of nodes you connect to",
                 "primaryNode": "Primární Node",
                 "excludeNode": "Vyloučit node",
@@ -488,37 +488,37 @@
             }
         },
         "staking": {
-            "title": "Staking",
+            "title": "Stakování",
             "welcome": "Vítejte na nástěnce stakingu",
             "status": {
                 "upcoming": "Událost nebyla spuštěna",
-                "commencing": "Pre-staking open",
-                "holdingActive": "Staking in progress",
-                "holdingInactive": "Staking open",
-                "inactive": "Staking not detected",
+                "commencing": "Před-stakování otevřeno",
+                "holdingActive": "Probíhá stakování",
+                "holdingInactive": "Stakování otevřeno",
+                "inactive": "Nelze detekovat stakování",
                 "ended": "Staking ukončen"
             },
             "summary": {
-                "stakedFunds": "Staked funds"
+                "stakedFunds": "Stakované prostředky"
             },
             "info": {
-                "upcomingSubheader": "Event has not started",
-                "upcomingHeader": "Check back later",
-                "commencingSubheader": "Get ready for staking",
-                "commencingHeader": "Pre-stake your tokens!",
-                "holdingSubheaderHolding": "Now earning staking rewards",
-                "holdingSubheaderNotHolding": "Earn rewards by staking IOTA",
-                "holdingHeaderHolding": "{duration} left",
-                "holdingHeaderNotHolding": "Stake your tokens!",
-                "endedSubheader": "Staking has now ended",
-                "endedHeader": "Thank you!",
-                "inactiveHeader": "Try changing node",
-                "inactiveSubheader": "Staking not detected"
+                "upcomingSubheader": "Událost ještě nezačala",
+                "upcomingHeader": "Zkuste později",
+                "commencingSubheader": "Připravte se na stakování",
+                "commencingHeader": "Před-stakujte své tokeny!",
+                "holdingSubheaderHolding": "Nyní získáváte odměnu za stakování",
+                "holdingSubheaderNotHolding": "Získat odměnu za stakování IOTY",
+                "holdingHeaderHolding": "{duration} zbývá",
+                "holdingHeaderNotHolding": "Stakujte své tokeny!",
+                "endedSubheader": "Stakování nyní skončilo",
+                "endedHeader": "Děkujeme!",
+                "inactiveHeader": "Zkuste změnit Node",
+                "inactiveSubheader": "Nelze detekovat stakování"
             },
             "airdrops": {
-                "holding": "Remaining",
+                "holding": "Zbývá",
                 "commencing": "Do začátku stakingu",
-                "collectedRewards": "Collected rewards",
+                "collectedRewards": "Nashromážděné odměny",
                 "assembly": {
                     "name": "Assembly",
                     "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
@@ -713,41 +713,41 @@
         },
         "exportTransactionHistory": {
             "title": "Exportovat historii transakcí",
-            "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
+            "body": "Exportovat historii transakcí pro vybranou peněženku. Exportovaný soubor bude ve formátu .csv.",
             "profileName": "Název profilu:",
-            "accountName": "Account name:",
+            "accountName": "Název účtu:",
             "typePassword": "Zadejte heslo pro povolení exportu"
         },
         "stakingNotice": {
             "upcomingDate": "Staking zatím nezačal",
             "commencingDate": "Staking zatím nezačal",
             "body": "By pre-staking your funds before staking starts, you will automatically begin receiving rewards when staking begins.",
-            "ok": "Ok, I understand"
+            "ok": "Ano, rozumím"
         },
         "stakingManager": {
-            "title": "Staking Management",
-            "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
-            "totalFundsStaked": "Total funds staked",
-            "stakedSuccessfully": "Your funds have been staked for {account}.",
-            "unstakedSuccessfully": "Your funds have been unstaked for {account}."
+            "title": "Správa stakování",
+            "description": "Stakováním peněženky, pošlete transakci sami sobě a označíte vaše prostředky jako \"stakované\". Tokeny můžete kdykoliv převést, ale nebudete nadále dostávat odměny za stakování.",
+            "totalFundsStaked": "Celkem stakovaných prostředků",
+            "stakedSuccessfully": "Vaše finanční prostředky byly stakovány do {account}.",
+            "unstakedSuccessfully": "Vaše finanční prostředky byly odstakovány z {account}."
         },
         "stakingConfirmation": {
-            "title": "Airdrop Participation",
-            "subtitleStake": "You are about to stake",
-            "subtitleMerge": "You are about to merge",
+            "title": "Spoluúčast na Airdrop",
+            "subtitleStake": "Chystáte se stakovat",
+            "subtitleMerge": "Chystáte se sloučit",
             "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
             "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
             "estimatedAirdrop": "Estimated rewards"
         },
         "shimmer-info": {
-            "title": "About Shimmer",
+            "title": "O Shimmer",
             "body1": "Congratulations you have earned SMR tokens as a staking reward. Shimmer is an incentivized staging network to test major upgrades on IOTA.",
-            "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
+            "body2": "Naším cílem je spustit Shimmer v roce 2022. Vaše tokeny si budete moci přenést po spuštění sítě."
         },
         "assembly-info": {
-            "title": "About Assembly",
-            "body1": "Gratulujeme, získali jste žetony ASMB jako odměnu. Assembly je mnohostranná síť pro zavádění škálovatelných inteligentních smluv na IOTA.",
-            "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
+            "title": "O Assembly",
+            "body1": "Gratulujeme, jako odměnu jste získali ASMB tokeny. Assembly je mnohostranná síť pro zavádění škálovatelných smart kontraktů na protokolu IOTA.",
+            "body2": "Naším cílem je spustit Assembly v roce 2022. Vaše tokeny si budete moci přenést po spuštění sítě."
         }
     },
     "charts": {
@@ -1012,10 +1012,10 @@
         },
         "staked": "Staked",
         "unstaked": "Unstaked",
-        "staking": "Staking",
+        "staking": "Stakování",
         "unstaking": "Unstaking",
         "notStaked": "Not staked",
-        "stakedFunds": "Staked funds",
+        "stakedFunds": "Stakované prostředky",
         "unstakedFunds": "Unstaked funds"
     },
     "dates": {
@@ -1218,7 +1218,7 @@
                 "body": "Open network configuration in Advanced Settings and make sure the current node has the \"Participation\" feature by clicking \"View Info\"."
             },
             "ended": {
-                "title": "Staking has now ended",
+                "title": "Stakování nyní skončilo",
                 "body": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch."
             }
         },
@@ -1244,9 +1244,9 @@
             "messageId": "ID zprávy",
             "internal": "Internal",
             "rawValue": "Raw Value",
-            "formattedValue": "Formatted Value",
+            "formattedValue": "Formátovaná hodnota",
             "date": "Datum",
-            "time": "Time"
+            "time": "Čas"
         }
     }
 }

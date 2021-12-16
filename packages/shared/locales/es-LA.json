@@ -23,14 +23,14 @@
             },
             "addMore": "Puedes añadir más perfiles después.",
             "developer": {
-                "label": "Developer profile",
-                "info": "Connect to public and private IOTA networks"
+                "label": "Perfil de desarrollador",
+                "info": "Conectar a redes IOTA públicas y privadas"
             }
         },
         "setup": {
             "title": "Configurar una billetera",
             "chrysalisTitle": "Actualización de red Chrysalis",
-            "chrysalisBody": "From April 21st 2021, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
+            "chrysalisBody": "Desde el 21 de abril de 2021 los usuarios pueden migrar sus tokens a la nueva red Chrysalis. Le recomendamos que migre sus tokens existentes lo antes posible.",
             "learnMore": "Aprende acerca de la migración"
         },
         "secure": {
@@ -331,11 +331,11 @@
                 "description": "Muestra el estado del nodo al que está conectado actualmente"
             },
             "exportStronghold": {
-                "title": "Export backup",
+                "title": "Exportar copia de seguridad",
                 "description": "Exportar a un archivo Stronghold - una copia respaldo completamente encriptada de sus billeteras y el historial de transacciones"
             },
             "appLock": {
-                "title": "Automatic lock",
+                "title": "Bloqueo automático",
                 "description": "Tiempo de inactividad antes de que se bloqueen tus billeteras y se te cierre la sesión",
                 "durationMinute": "{time, plural, one {1 minuto} other {# minutos}}",
                 "durationHour": "{time, plural, one {1 hora} other {# horas}}"
@@ -365,39 +365,39 @@
                 "description": "Elimina por completo su perfil, billeteras e historial de transacciones. Asegúrate de que tienes una copia de seguridad"
             },
             "deepLinks": {
-                "title": "IOTA links",
-                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
+                "title": "Enlaces IOTA",
+                "description": "Completar automáticamente los datos de transacción en Firefly al hacer clic en un enlace IOTA"
             },
             "networkConfiguration": {
-                "title": "Network config",
-                "title2": "Network configuration",
+                "title": "Configuración de red",
+                "title2": "Configuración de red",
                 "description": {
-                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
-                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                    "dev": "Su configuración de red se actualizará automáticamente de acuerdo a la configuración actual del nodo (cambiar de red resultará en restablecer el estado de la billetera)",
+                    "nonDev": "La configuración de red se actualizará automáticamente de acuerdo a la configuración actual del nodo"
                 },
-                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
-                "resetWallet": "Your wallet state has been reset.",
-                "connectedTo": "Connected to",
+                "switchedNetworks": "Se ha cambiado correctamente la red a \"{networkName}\".",
+                "resetWallet": "Su estado de la cartera ha sido restablecido.",
+                "connectedTo": "Conectado a",
                 "nodeConfiguration": {
-                    "title": "Node selection",
-                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
-                    "automatic": "Automatic",
+                    "title": "Selección de nodo",
+                    "description": "Selecciona \"Manual\" para modificar la configuración del nodo y conéctate a tu(s) nodo(s) propio(s)",
+                    "automatic": "Automático",
                     "manual": "Manual"
                 }
             },
             "configureNodeList": {
-                "title": "Node configuration",
-                "description": "Manage the list of nodes you connect to",
+                "title": "Configuración de nodo",
+                "description": "Administrar la lista de nodos a los que se conectas",
                 "primaryNode": "Nodo principal",
                 "excludeNode": "Excluir nodo",
                 "includeNode": "Incluir nodo",
-                "editDetails": "Edit details",
-                "viewInfo": "View info",
+                "editDetails": "Editar detalles",
+                "viewInfo": "Ver info",
                 "setAsPrimary": "Establecer como principal",
                 "removeNode": "Eliminar nodo",
                 "includeOfficialNodeList": "Incluir la lista oficial de nodos",
-                "noNodes": "There are no nodes, unable to connect to the network",
-                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
+                "noNodes": "No hay nodos, no se puede conectar a la red",
+                "noNodesAuto": "No hay nodos, se utilizará la selección automática"
             },
             "proofOfWork": {
                 "title": "Prueba de trabajo",
@@ -412,7 +412,7 @@
                 "description": "Ver información del sistema y de la aplicación"
             },
             "migrateLedgerIndex": {
-                "title": "Migrate Ledger index",
+                "title": "Migrar índice Ledger",
                 "description": "Migrar otro índice de cuenta Trinity"
             },
             "troubleshoot": {
@@ -425,7 +425,7 @@
             },
             "faq": {
                 "title": "Preguntas Frecuentes",
-                "title2": "Frequently asked questions",
+                "title2": "Preguntas frecuentes",
                 "description": "Mira las preguntas frecuentes para obtener ayuda con un problema o pregunta común"
             },
             "discord": {
@@ -489,43 +489,43 @@
         },
         "staking": {
             "title": "Staking",
-            "welcome": "Welcome to the staking dashboard",
+            "welcome": "Bienvenido al panel de control de staking",
             "status": {
-                "upcoming": "Event not started",
-                "commencing": "Pre-staking open",
-                "holdingActive": "Staking in progress",
-                "holdingInactive": "Staking open",
-                "inactive": "Staking not detected",
-                "ended": "Staking ended"
+                "upcoming": "Evento no iniciado",
+                "commencing": "Pre-staking abierto",
+                "holdingActive": "Staking en progreso",
+                "holdingInactive": "Staking abierto",
+                "inactive": "No se ha detectado ningún Staking",
+                "ended": "Staking finalizado"
             },
             "summary": {
-                "stakedFunds": "Staked funds"
+                "stakedFunds": "Fondos en staking"
             },
             "info": {
-                "upcomingSubheader": "Event has not started",
-                "upcomingHeader": "Check back later",
-                "commencingSubheader": "Get ready for staking",
-                "commencingHeader": "Pre-stake your tokens!",
-                "holdingSubheaderHolding": "Now earning staking rewards",
-                "holdingSubheaderNotHolding": "Earn rewards by staking IOTA",
-                "holdingHeaderHolding": "{duration} left",
-                "holdingHeaderNotHolding": "Stake your tokens!",
-                "endedSubheader": "Staking has now ended",
-                "endedHeader": "Thank you!",
-                "inactiveHeader": "Try changing node",
-                "inactiveSubheader": "Staking not detected"
+                "upcomingSubheader": "Evento aún no ha comenzado",
+                "upcomingHeader": "Vuelve a intentarlo más tarde",
+                "commencingSubheader": "Preparate para empezar el Staking",
+                "commencingHeader": "¡Pon tus tokens en pre-stake!",
+                "holdingSubheaderHolding": "Generando recompensas del staking",
+                "holdingSubheaderNotHolding": "Genera recompensas al poner tus IOTA en Staking",
+                "holdingHeaderHolding": "Quedan {duration}",
+                "holdingHeaderNotHolding": "¡Pon tus tokens en Stake!",
+                "endedSubheader": "El Staking ha finalizado",
+                "endedHeader": "¡Gracias!",
+                "inactiveHeader": "Intenta cambiando de nodo",
+                "inactiveSubheader": "No se ha detectado ningún Staking"
             },
             "airdrops": {
-                "holding": "Remaining",
-                "commencing": "Until staking begins",
-                "collectedRewards": "Collected rewards",
+                "holding": "Quedan",
+                "commencing": "Hasta que comience el staking",
+                "collectedRewards": "Recompensas recogidas",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
+                    "description": "Assembly es una red multicadena altamente escalable que no requiere de permiso para construir y desplegar contratos inteligentes. Assembly es el futuro de la web3. "
                 },
                 "shimmer": {
                     "name": "Shimmer",
-                    "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
+                    "description": "La red incentivada de pruebas para promover innovaciones de gran calado en IOTA. Lo que sea, sucederá: la evolución de Shimmer depende de ti."
                 }
             }
         }
@@ -576,45 +576,45 @@
         },
         "addressHistory": {
             "title": "{name} historial de direcciones",
-            "currentBalance": "Balance: {balance}",
-            "internal": "Internal Address",
-            "external": "Deposit Address"
+            "currentBalance": "Saldo: {balance}",
+            "internal": "Dirección interna",
+            "external": "Dirección de depósito"
         },
         "node": {
             "titleAdd": "Añadir un nodo",
             "titleUpdate": "Actualizar un nodo",
             "titleRemove": "Eliminar un nodo",
-            "titleRemoveAll": "Remove all nodes",
+            "titleRemoveAll": "Eliminar todos los nodos",
             "titleDetails": "Detalles del nodo",
-            "titleInfo": "Node info",
-            "addingNode": "Adding node",
-            "updatingNode": "Updating node",
-            "loadingNodeInfo": "Loading node info",
+            "titleInfo": "Información del Nodo",
+            "addingNode": "Añadiendo nodo",
+            "updatingNode": "Actualizando nodo",
+            "loadingNodeInfo": "Cargando información del nodo",
             "nodeAddress": "Dirección del nodo",
             "optionalUsername": "Nombre de usuario (opcional)",
             "optionalPassword": "Contraseña (opcional)",
-            "optionalJwt": "JSON web token (optional)",
+            "optionalJwt": "Token web JSON (opcional)",
             "setAsPrimaryNode": "Establecer como nodo principal",
             "removeConfirmation": "¿Estás seguro de que quieres eliminar este nodo?",
-            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "removeAllConfirmation": "¿Estás seguro que deseas eliminar todas los nodos?",
             "info": {
                 "url": "URL",
                 "software": "Software",
-                "networkId": "Network ID",
+                "networkId": "ID de red",
                 "bech32HRP": "Bech32 HRP",
-                "features": "Features",
-                "confirmedMilestoneIndex": "Confirmed milestone index",
-                "pruningIndex": "Pruning index",
+                "features": "Características",
+                "confirmedMilestoneIndex": "Índice de hitos confirmados",
+                "pruningIndex": "Limpiando índice",
                 "messagesPerSecond": "Mensajes por segundo",
                 "referencedRate": "Tasa referenciada"
             }
         },
         "switchNetwork": {
-            "title": "Switch network",
-            "newNetwork": "New network",
-            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
-            "switchingNetwork": "Switching network",
-            "typePassword": "Type your password to switch to:"
+            "title": "Cambiar de red",
+            "newNetwork": "Nueva Red",
+            "resetWarning": "Cambiar redes te cerrará la sesión y restablecerá todas las cuentas, los saldos y el historial de transacciones de este perfil.",
+            "switchingNetwork": "Cambiando de red",
+            "typePassword": "Escribe tu contraseña para cambiar a:"
         },
         "errorLog": {
             "title": "Registro de errores",
@@ -639,7 +639,7 @@
         "transaction": {
             "title": "Confirmar transacción",
             "body": "Estás a punto de enviar {amount} a",
-            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards."
+            "sendingFromStakedAccount": "Estás enviando una transferencia desde una cartera que está haciendo Staking. Esto puede desvincular tus tokens. Puedes enviar la transferencia sin problemas, pero puede que necesites reiniciar el Staking de los tokens restantes después."
         },
         "balanceFinder": {
             "title": "Buscador de balances",
@@ -712,41 +712,41 @@
             "body": "También puedes migrar más tarde en Configuración Avanzada."
         },
         "exportTransactionHistory": {
-            "title": "Export transaction history",
-            "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
-            "profileName": "Profile name:",
-            "accountName": "Account name:",
-            "typePassword": "Type your password to allow exporting"
+            "title": "Exportar el historial de transacciones",
+            "body": "Exporta el historial de transacciones de la cartera seleccionada. El archivo exportado estará en formato .csv.",
+            "profileName": "Nombre del perfil:",
+            "accountName": "Nombre de la cuenta:",
+            "typePassword": "Escribe tu contraseña para permitir la exportación"
         },
         "stakingNotice": {
-            "upcomingDate": "Staking has not started yet",
-            "commencingDate": "Staking has not started yet",
-            "body": "By pre-staking your funds before staking starts, you will automatically begin receiving rewards when staking begins.",
-            "ok": "Ok, I understand"
+            "upcomingDate": "Staking aún no ha comenzado",
+            "commencingDate": "Staking aún no ha comenzado",
+            "body": "Al pre-stakear tus fondos antes del comienzo de staking, automaticamente estaras recibiendo los incentivos una vez comience el staking.",
+            "ok": "Ok, entiendo"
         },
         "stakingManager": {
-            "title": "Staking Management",
-            "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
-            "totalFundsStaked": "Total funds staked",
-            "stakedSuccessfully": "Your funds have been staked for {account}.",
-            "unstakedSuccessfully": "Your funds have been unstaked for {account}."
+            "title": "Gestión de Staking",
+            "description": "Cuando pones una cartera en staking, estás enviándote una transacción a ti mismo marcando esos fondos como \"staked\". Podrás transferir esos tokens en cualquier momento, pero dejarás de recibir las recompensas del staking correspondientes.",
+            "totalFundsStaked": "Total de fondos en Staking",
+            "stakedSuccessfully": "Tus fondos se han Stakeado para {account}.",
+            "unstakedSuccessfully": "Tus fondos han sido quitados de Staking para {account}."
         },
         "stakingConfirmation": {
-            "title": "Airdrop Participation",
-            "subtitleStake": "You are about to stake",
-            "subtitleMerge": "You are about to merge",
-            "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
-            "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
-            "estimatedAirdrop": "Estimated rewards"
+            "title": "Participación Airdrop",
+            "subtitleStake": "Estás a punto de iniciar el Staking",
+            "subtitleMerge": "Estás a punto de unirte",
+            "bodyStake": "Si no deseas participar en ambos Airdrop, puedes escoger no hacerlo debajo. Puedes dejar el staking y retomarlo en cualquier momento.",
+            "bodyMerge": "Tus fondos serán puestos en staking para el {airdrop}. Para cambiar los airdrops en los que quieres participar, saca esta cartera del staking y vuelve a ponerla en staking de nuevo.",
+            "estimatedAirdrop": "Recompensa estimada"
         },
         "shimmer-info": {
-            "title": "About Shimmer",
-            "body1": "Congratulations you have earned SMR tokens as a staking reward. Shimmer is an incentivized staging network to test major upgrades on IOTA.",
-            "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
+            "title": "Sobre Shimmer",
+            "body1": "Felicitaciones, has ganado tokens SMR como recompensa a tu staking. Shimmer es una red incentivada de staking para probar actualizaciones importantes en IOTA.",
+            "body2": "Nuestro objetivo es lanzar Shimmer en 2022. Tus tokens estarán disponibles para su transferencia una vez que se lance la red."
         },
         "assembly-info": {
-            "title": "About Assembly",
-            "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
+            "title": "Sobre Assembly",
+            "body1": "Felicitaciones, has ganado tokens ASMB como recompensa por tu staking. Assembly es una red multi-cadena para desplegar contratos inteligentes escalables en IOTA.",
             "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
         }
     },
@@ -808,7 +808,7 @@
         "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "Habilitar modo de desarrollador",
         "enableSystemNotifications": "Habilitar notificaciones del sistema",
-        "exportTransactionHistory": "Export transaction history",
+        "exportTransactionHistory": "Exportar el historial de transacciones",
         "localProofOfWork": "Prueba de trabajo local",
         "unlock": "Desbloquear",
         "updateFirefly": "Actualizar Firefly",
@@ -823,7 +823,7 @@
         "addNode": "Añadir nodo",
         "updateNode": "Actualizar nodo",
         "removeNode": "Eliminar nodo",
-        "removeAllNodes": "Remove all nodes",
+        "removeAllNodes": "Eliminar todos los nodos",
         "hide": "Ocultar",
         "hideOthers": "Ocultar otros",
         "showAll": "Mostrar todo",
@@ -1015,7 +1015,7 @@
         "staking": "Staking",
         "unstaking": "Unstaking",
         "notStaked": "Not staked",
-        "stakedFunds": "Staked funds",
+        "stakedFunds": "Fondos en staking",
         "unstakedFunds": "Unstaked funds"
     },
     "dates": {
@@ -1127,14 +1127,14 @@
             "unsynced": "El nodo no está sincronizado.",
             "noSynced": "No hay nodos sincronizados disponibles.",
             "answer": "Failed to get an answer from all nodes.",
-            "forbidden": "This node connection is forbidden.",
-            "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node."
+            "forbidden": "Esta conexión de nodo está prohibida.",
+            "pluginNotAvailable": "El complemento \"{nodePlugin}\" no está disponible en el nodo actual."
         },
         "network": {
-            "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
-            "notReachable": "The network ID for this node could not be retrieved, unable to add node.",
-            "badNodes": "Unable to connect to the network with current node configuration.",
-            "nonEmptyAccount": "You must transfer all balances before switching networks."
+            "mismatch": "El ID de red para este nodo es \"{networkId}\", el cual no coincide con la red actual.",
+            "notReachable": "El ID de red de este nodo no se pudo recuperar, no se puede agregar el nodo.",
+            "badNodes": "No se puede conectar a la red con la configuración actual del nodo.",
+            "nonEmptyAccount": "Debes transferir todos los saldos antes de cambiar de red."
         },
         "global": {
             "generic": "Algo salió mal."
@@ -1161,7 +1161,7 @@
             "generateAddress": "Hubo un error al generar una address.",
             "timeout": "El tiempo de espera de tu Ledger ha expirado.",
             "disconnected": "Tu dispositivo Ledger fue desconectado.",
-            "noStronghold": "Unable to use Stronghold with Ledger profile."
+            "noStronghold": "No se puede utilizar Stronghold con el perfil de Ledger."
         },
         "popup": {
             "preventClose": "Esta ventana emergente no se puede cerrar."
@@ -1170,21 +1170,21 @@
             "missingBundle": "Ha ocurrido un error al buscar el paquete de la transacción."
         },
         "crypto": {
-            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
+            "cannotDecodeBech32": "No se puede decodificar la cadena como dirección Bech32."
         },
         "participation": {
-            "cannotUseAccount": "Unable to use the specified account.",
-            "cannotFindStakingEvent": "Unable to find staking event.",
-            "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
-            "invalidStakingEventId": "Invalid staking event ID."
+            "cannotUseAccount": "No se puede utilizar la cuenta especificada.",
+            "cannotFindStakingEvent": "No se puede encontrar el evento de Staking.",
+            "cannotVisitAirdropWebsite": "No se puede abrir el sitio web de {airdrop}.",
+            "invalidStakingEventId": "ID del evento de Staking es inválido."
         }
     },
     "warning": {
         "node": {
-            "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
+            "http": "El uso de nodos sobre HTTP deja el tráfico sin cifrar y podría plantear un riesgo de seguridad."
         },
         "participation": {
-            "noAccounts": "You do not have any accounts available to participate."
+            "noAccounts": "No tienes ninguna cuenta disponible para participar."
         }
     },
     "tooltips": {
@@ -1198,55 +1198,55 @@
         },
         "stakingIndicator": {
             "upcoming": {
-                "title": "Staking has not started yet",
-                "body": "Check back later. The staking event has not begun."
+                "title": "El Staking aún no ha comenzado",
+                "body": "Vuelve a intentarlo más tarde. El evento de Staking aún no ha comenzado."
             },
             "commencing": {
-                "title": "Pre-staking is now open",
-                "body": "Pre-stake your tokens, and once staking begins, you will automatically start receiving rewards every 10 seconds."
+                "title": "Pre-staking está ahora disponible",
+                "body": "Deja tus monedas en \"pre-stake\", y una vez el período de Staking empiece, automáticamente recibirás los incentivos cada 10 segundos."
             },
             "activeHolding": {
-                "title": "Staking is now in progress",
-                "body": "Good job. You will receive rewards every 10 seconds."
+                "title": "El Staking está en progreso",
+                "body": "Bien hecho. Recibirás recompensas cada 10 segundos."
             },
             "inactiveHolding": {
-                "title": "Staking is now open",
-                "body": "Stake your IOTA tokens to receive rewards every 10 seconds."
+                "title": "El Staking está disponible",
+                "body": "Haz Stake con tus tokens de IOTA para recibir recompensas cada 10 segundos."
             },
             "inactive": {
-                "title": "No staking events detected",
-                "body": "Open network configuration in Advanced Settings and make sure the current node has the \"Participation\" feature by clicking \"View Info\"."
+                "title": "No se han detectado eventos de Staking",
+                "body": "En Configuración Avanzada, abra la configuración de red y asegúrese de que el nodo actual tiene la función \"Participación\" haciendo clic en \"Ver info\"."
             },
             "ended": {
-                "title": "Staking has now ended",
-                "body": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch."
+                "title": "El Staking ha finalizado",
+                "body": "Las recompensas de Assembly y Shimmer se distribuirán a tus carteras respectivamente, cuando se inaugure la red correspondiente."
             }
         },
         "partiallyStakedFunds": {
-            "title": "New unstaked funds: {amount}",
-            "titleNoFunds": "New unstaked funds",
-            "preBody": "You have received tokens on a staked wallet.",
-            "body": "You need to manually stake these new funds to receive airdrop rewards for them."
+            "title": "Nuevos fondos sin Stake: {amount}",
+            "titleNoFunds": "Nuevos fondos sin Stake",
+            "preBody": "Has recibido tokens en una cartera con staking activado.",
+            "body": "Tienes que activar manualmente el staking para estos nuevos fondos para recibir las recompensas de airdrop."
         },
         "stakingMinRewards": {
-            "title": "Below minimum reward value",
-            "titleMinBalance": "{amount} minimum balance required",
-            "bodyMinBalace": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
-            "continue": "Please continue staking for another {duration}.",
-            "bodyBelowMin": "This wallet has not reached the minimum reward value for {airdrop} ({airdropRewardMin}).",
-            "bodyWillReachMin": "You must stake for another {duration} to reach the minimum.",
-            "bodyWillNotReachMin": "You will not reach the minimum during the remaining staking period unless you stake more IOTA.",
-            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum rewards for {airdrop} ({airdropRewardMin})."
+            "title": "Por debajo del valor mínimo de recompensa",
+            "titleMinBalance": "{amount} saldo mínimo requerido",
+            "bodyMinBalace": "Esta cartera no tiene suficientes tokens IOTA para alcanzar la recompensa mínima de airdrop y por lo tanto no puede entrar en modo stake.",
+            "continue": "Por favor continúa con el staking por otros {duration}.",
+            "bodyBelowMin": "Esta cartera no ha alcanzado el valor mínimo de recompensa para {airdrop} ({airdropRewardMin}).",
+            "bodyWillReachMin": "Debes hacer Stake por otros {duration} para alcanzar el mínimo.",
+            "bodyWillNotReachMin": "No alcanzarás el mínimo durante el periodo restante de Stake, a menos que hagas stake de más IOTA.",
+            "bodyDidNotReachMin": "No has hecho Stake con la suficiente cantidad de IOTA para alcanzar las recompensas mínimas de {airdrop} ({airdropRewardMin})."
         }
     },
     "exports": {
         "transactionHistoryCsv": {
             "messageId": "ID del mensaje",
-            "internal": "Internal",
-            "rawValue": "Raw Value",
-            "formattedValue": "Formatted Value",
+            "internal": "Interno",
+            "rawValue": "Valor sin procesar",
+            "formattedValue": "Valor formateado",
             "date": "Fecha",
-            "time": "Time"
+            "time": "Hora"
         }
     }
 }
