@@ -15,7 +15,7 @@
         },
         "profile": {
             "title": "Profîlekê çêke",
-            "profileName": "Profile name",
+            "profileName": "Navê Profîlê",
             "body1": "Jibo hûn tokenên xwe cuda bigirîn û ewlehîyê zêde bikîn, dikarîn profîlên bikarhênerên ciyawaz saz bikî.",
             "body2": {
                 "first": "For now, let's start with your first profile name.",
@@ -1001,14 +1001,14 @@
         "none": "None",
         "days": "day(s)",
         "time": {
-            "days": "days",
-            "day": "day",
-            "hours": "hours",
-            "hour": "hour",
-            "minutes": "minutes",
-            "minute": "minute",
-            "seconds": "seconds",
-            "second": "second"
+            "days": "roj",
+            "day": "roj",
+            "hours": "demjimêr",
+            "hour": "demjimêr",
+            "minutes": "Deqîqe",
+            "minute": "Deqîqe",
+            "seconds": "duyem",
+            "second": "duyem"
         },
         "staked": "Staked",
         "unstaked": "Unstaked",
