@@ -5,9 +5,9 @@
     import { isStakingPossible } from 'shared/lib/participation'
     import { stakingEventState, unstakedAmount } from 'shared/lib/participation/stores'
     import { activeProfile } from 'shared/lib/profile'
-    import { dashboardRoute, previousDashboardRoute, resetWalletRoute, settingsRoute } from 'shared/lib/router'
+    import { dashboardRoute, resetWalletRoute } from 'shared/lib/router'
     import type { Locale } from 'shared/lib/typings/i18n'
-    import { SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
+    import { Tabs } from 'shared/lib/typings/routes'
     import { onDestroy } from 'svelte'
     import { get } from 'svelte/store'
 
@@ -45,12 +45,6 @@
     onDestroy(() => {
         unsubscribe()
     })
-
-    function openSettings() {
-        previousDashboardRoute.set(get(dashboardRoute))
-        dashboardRoute.set(Tabs.Settings)
-        settingsRoute.set(SettingsRoutes.Init)
-    }
 
     function openWallet() {
         resetWalletRoute()
@@ -105,5 +99,5 @@
         </span>
     </nav>
     <NetworkIndicator bind:isActive={showNetwork} {locale} />
-    <ProfileActionsModal bind:isActive={showProfile} {locale} {openSettings} />
+    <ProfileActionsModal bind:isActive={showProfile} {locale} />
 </aside>
