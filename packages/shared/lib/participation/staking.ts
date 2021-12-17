@@ -1,26 +1,26 @@
 import { get } from 'svelte/store'
-
 import { getDecimalSeparator } from '../currency'
 import { localize } from '../i18n'
 import { networkStatus } from '../networkStatus'
 import { showAppNotification } from '../notifications'
 import { activeProfile } from '../profile'
 import { getBestTimeDuration, MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
-import { clamp, delineateNumber } from '../utils'
 import type { WalletAccount } from '../typings/wallet'
-
+import { formatUnitBestMatch } from '../units'
+import { clamp, delineateNumber } from '../utils'
+import { wallet } from '../wallet'
 import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID, STAKING_AIRDROP_TOKENS, STAKING_EVENT_IDS } from './constants'
 import {
     assemblyStakingRemainingTime,
+    calculateRemainingStakingTime,
     partiallyStakedAccounts,
     participationEvents,
     participationOverview,
     shimmerStakingRemainingTime,
     stakedAccounts,
+    stakingEventState,
 } from './stores'
 import { Participation, ParticipationEvent, ParticipationEventState, StakingAirdrop } from './types'
-import { formatUnitBestMatch } from '../units'
-import { wallet } from '../wallet'
 
 /**
  * Determines whether an account is currently being staked or not.
@@ -438,14 +438,18 @@ export const canAccountReachMinimumAirdrop = (account: WalletAccount, airdrop: S
 
     const currentRewards = getCurrentRewardsForAirdrop(account, airdrop)
     const timeRequired = calculateTimeUntilMinimumReward(currentRewards, airdrop, account.rawIotaBalance)
-    const timeLeft =
-        airdrop === StakingAirdrop.Assembly
+    const stakingEvent = getStakingEventFromAirdrop(airdrop)
+    const _getTimeLeft = () => {
+        if (isStakingPossible(get(stakingEventState)))
+            return calculateRemainingStakingTime(stakingEvent?.information?.milestoneIndexStart, stakingEvent)
+        return airdrop === StakingAirdrop.Assembly
             ? get(assemblyStakingRemainingTime)
             : airdrop === StakingAirdrop.Shimmer
             ? get(shimmerStakingRemainingTime)
             : 0
+    }
 
-    return timeRequired <= timeLeft
+    return timeRequired <= _getTimeLeft()
 }
 
 /**
