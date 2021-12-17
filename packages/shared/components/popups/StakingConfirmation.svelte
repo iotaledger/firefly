@@ -1,40 +1,59 @@
 <script lang="typescript">
-    import { Button, Checkbox, Icon, Text } from 'shared/components'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Button, Checkbox, Icon, Text, Tooltip } from 'shared/components'
     import { ledgerDeviceState } from 'shared/lib/ledger'
-    import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { openPopup } from 'shared/lib/popup'
-    import { isSoftwareProfile } from 'shared/lib/profile'
-    import { checkStronghold } from 'shared/lib/stronghold'
-    import type { WalletAccount } from 'shared/lib/typings/wallet'
-    import { formatUnitBestMatch } from 'shared/lib/units'
-    import { capitalize } from 'shared/lib/utils'
-
-    import { STAKING_AIRDROP_TOKENS } from 'shared/lib/participation/constants'
     import {
+        canAccountReachMinimumAirdrop,
         estimateStakingAirdropReward,
         getAirdropFromEventId,
         getStakingEventFromAirdrop,
         getUnstakedFunds,
         isAccountPartiallyStaked,
     } from 'shared/lib/participation'
+    import { STAKING_AIRDROP_TOKENS } from 'shared/lib/participation/constants'
     import { accountToParticipate, participationAction, participationOverview } from 'shared/lib/participation/stores'
     import { Participation, ParticipationAction, StakingAirdrop } from 'shared/lib/participation/types'
+    import { openPopup } from 'shared/lib/popup'
+    import { isSoftwareProfile } from 'shared/lib/profile'
+    import { checkStronghold } from 'shared/lib/stronghold'
+    import type { Locale } from 'shared/lib/typings/i18n'
+    import { LedgerDeviceState } from 'shared/lib/typings/ledger'
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
+    import { formatUnitBestMatch } from 'shared/lib/units'
+    import { capitalize } from 'shared/lib/utils'
 
     export let locale: Locale
     export let accountToStake: WalletAccount
 
+    let tooltipAirdrop
+    let showTooltip = false
+    let tooltipAnchor: unknown
+    const tooltipAnchors: { [airdrop: string]: unknown } = {}
+
+    const toggleTooltip = (airdrop: string): void => {
+        tooltipAirdrop = capitalize(airdrop)
+        showTooltip = !showTooltip
+        if (showTooltip) {
+            tooltipAnchor = tooltipAnchors[airdrop]
+        } else {
+            tooltipAnchor = undefined
+        }
+    }
+
     const isPartialStake = isAccountPartiallyStaked(accountToStake?.id)
 
-    const getRewards = (airdrop: StakingAirdrop): string =>
-        <string>(
+    const canReachAirdropMinimum = (airdrop: string) => canAccountReachMinimumAirdrop(accountToStake, airdrop)
+
+    const getRewards = (airdrop: StakingAirdrop): string => {
+        if (!canReachAirdropMinimum(airdrop)) return `0 ${STAKING_AIRDROP_TOKENS[airdrop]}`
+        return <string>(
             estimateStakingAirdropReward(
-                StakingAirdrop[airdrop],
+                airdrop,
                 isPartialStake ? getUnstakedFunds(accountToStake) : accountToStake?.rawIotaBalance,
                 true
             )
         )
+    }
 
     const activeAirdrops: StakingAirdrop[] =
         $participationOverview
@@ -42,9 +61,8 @@
             ?.participations.map((p) => getAirdropFromEventId(p.eventId)) || []
 
     const airdropSelections: { [key in StakingAirdrop]: boolean } = {
-        [StakingAirdrop.Assembly]:
-            activeAirdrops?.length > 0 ? activeAirdrops?.includes(StakingAirdrop.Assembly) : true,
-        [StakingAirdrop.Shimmer]: activeAirdrops?.length > 0 ? activeAirdrops?.includes(StakingAirdrop.Shimmer) : true,
+        [StakingAirdrop.Assembly]: canReachAirdropMinimum(StakingAirdrop.Assembly) ? true : false,
+        [StakingAirdrop.Shimmer]: canReachAirdropMinimum(StakingAirdrop.Shimmer) ? true : false,
     }
 
     const toggleAirdropSelection = (airdrop: StakingAirdrop): void => {
@@ -103,7 +121,7 @@
         if (activeAirdrops.length === 1) {
             return capitalize(activeAirdrops.join())
         } else {
-            return activeAirdrops.map(a => capitalize(a)).join(' & ')
+            return activeAirdrops.map((a) => capitalize(a)).join(' & ')
         }
     }
 </script>
@@ -129,20 +147,34 @@
     <div class="flex flex-row mb-6 space-x-2 flex-1">
         {#each Object.keys(StakingAirdrop).map((sa) => sa.toLowerCase()) as airdrop}
             <div
-                on:click={(activeAirdrops.length > 0 && activeAirdrops.includes(airdrop)) ? () => {} : () => toggleAirdropSelection(airdrop)}
-                class="p-4 w-1/2 flex flex-col items-center text-center border border-solid rounded-2xl {activeAirdrops?.length && activeAirdrops?.includes(airdrop) ? 'cursor-default' : 'cursor-pointer hover:bg-blue-50 hover:border-blue-500 focus:border-blue-500 focus:bg-blue-50 dark:hover:bg-gray-800'} {!airdropSelections[airdrop] || (activeAirdrops.length > 0 && activeAirdrops.includes(airdrop)) ? 'opacity-50 border-gray-300' : 'border-blue-500'}"
-            >
+                on:click={!canReachAirdropMinimum(airdrop) ? () => {} : () => toggleAirdropSelection(airdrop)}
+                class="airdrop-container p-4 w-1/2 flex flex-col items-center text-center border border-solid rounded-2xl {!canReachAirdropMinimum(airdrop) ? 'cursor-default' : 'cursor-pointer hover:bg-blue-50 hover:border-blue-500 focus:border-blue-500 focus:bg-blue-50 dark:hover:bg-gray-800'} {!airdropSelections[airdrop] || !canReachAirdropMinimum(airdrop) ? 'border-gray-300' : 'border-blue-500'}">
                 <div class="mb-2 flex flex-row justify-center">
                     <Text type="p" bigger classes="font-extrabold">{capitalize(airdrop)}&nbsp;</Text>
                     <Text type="p" bigger>({STAKING_AIRDROP_TOKENS[airdrop]})</Text>
                 </div>
                 <Text type="p" secondary>{locale('popups.stakingConfirmation.estimatedAirdrop')}:</Text>
-                <Checkbox round bind:checked={airdropSelections[airdrop]} onClick={() => toggleAirdropSelection(airdrop)} disabled={(activeAirdrops.length > 0 && activeAirdrops.includes(airdrop))} classes="my-5" />
+                {#if !canReachAirdropMinimum(airdrop)}
+                    <div
+                        class="py-5"
+                        bind:this={tooltipAnchors[airdrop]}
+                        on:mouseenter={() => toggleTooltip(airdrop)}
+                        on:mouseleave={() => toggleTooltip(airdrop)}>
+                        <Icon icon="exclamation" width="30" height="30" classes="text-orange-500" />
+                    </div>
+                {:else}
+                    <Checkbox
+                        round
+                        bind:checked={airdropSelections[airdrop]}
+                        onClick={() => toggleAirdropSelection(airdrop)}
+                        disabled={!canReachAirdropMinimum(airdrop)}
+                        classes="my-5" />
+                {/if}
                 <Text type="p" classes="font-bold text-lg w-full break-all">
-                    {(airdropSelections[airdrop] ? getRewards(capitalize(airdrop)) : estimateStakingAirdropReward(airdrop, 0, true, 0)).split(' ')[0]}
+                    {(airdropSelections[airdrop] ? getRewards(airdrop) : estimateStakingAirdropReward(airdrop, 0, true, 0)).split(' ')[0]}
                 </Text>
                 <Text type="p" secondary classes="font-bold text-lg">
-                    {(airdropSelections[airdrop] ? getRewards(capitalize(airdrop)) : estimateStakingAirdropReward(airdrop, 0, true, 0)).split(' ')[1]}
+                    {(airdropSelections[airdrop] ? getRewards(airdrop) : estimateStakingAirdropReward(airdrop, 0, true, 0)).split(' ')[1]}
                 </Text>
             </div>
         {/each}
@@ -154,3 +186,12 @@
     disabled={!airdropSelections[StakingAirdrop.Assembly] && !airdropSelections[StakingAirdrop.Shimmer]}>
     {locale('actions.confirm')}
 </Button>
+
+{#if showTooltip}
+    <Tooltip anchor={tooltipAnchor} position="right">
+        <Text type="p" classes="text-gray-900 bold mb-1 text-left">
+            {locale('tooltips.stakingMinRewards.title')}
+        </Text>
+        <Text type="p" secondary classes="text-left">{locale('tooltips.stakingMinRewards.bodyMinBalanceAirdrop', { values: { airdrop: tooltipAirdrop } })}</Text>
+    </Tooltip>
+{/if}
