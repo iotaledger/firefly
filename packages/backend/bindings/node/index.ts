@@ -309,9 +309,9 @@ export const api = {
     },
     getMigrationAddress: function (
         prompt: boolean,
-        accountIndex: string | number
+        accountIdentifier: string | number
     ): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _getMigrationAddreess(sendMessage, __ids, prompt, accountIndex)
+        return (__ids: CommunicationIds) => _getMigrationAddreess(sendMessage, __ids, prompt, accountIdentifier)
     },
     mineBundle: function (
         bundle: string[],

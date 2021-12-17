@@ -357,7 +357,7 @@ interface IWalletApi {
     )
     getMigrationAddress(
         prompt: boolean,
-        accountIndex: string | number,
+        accountIdentifier: string | number,
         callbacks: {
             onSuccess: (response: Event<GetMigrationAddressResponse>) => void
             onError: (err: ErrorEventPayload) => void
