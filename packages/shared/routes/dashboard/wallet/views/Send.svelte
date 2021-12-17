@@ -6,7 +6,8 @@
         convertFromFiat,
         convertToFiat,
         currencies,
-        exchangeRates, formatCurrency,
+        exchangeRates,
+        formatNumber,
         isFiatCurrency,
         parseCurrency,
     } from 'shared/lib/currency'
@@ -439,7 +440,7 @@
 
     const handleMaxClick = () => {
         amount = isFiatCurrency(unit)
-            ? formatCurrency(convertToFiat(from.balance, $currencies[CurrencyTypes.USD], $exchangeRates[unit]))
+            ? formatNumber(convertToFiat(from.balance, $currencies[CurrencyTypes.USD], $exchangeRates[unit]))
             : formatUnitPrecision(from.balance, unit, false)
     }
 
