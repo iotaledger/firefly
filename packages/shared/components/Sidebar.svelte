@@ -1,29 +1,43 @@
 <script lang="typescript">
+    import { Icon, Logo, NetworkIndicator, ProfileActionsModal } from 'shared/components'
+    import { getInitials } from 'shared/lib/helpers'
+    import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
+    import { unstakedAmount } from 'shared/lib/participation/stores'
+    import { activeProfile } from 'shared/lib/profile'
+    import { dashboardRoute, previousDashboardRoute, resetWalletRoute, settingsRoute } from 'shared/lib/router'
+    import type { Locale } from 'shared/lib/typings/i18n'
+    import { SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
     import { onDestroy } from 'svelte'
     import { get } from 'svelte/store'
-    import { Icon, Logo, NetworkIndicator, ProfileActionsModal, Text } from 'shared/components'
-    import { getInitials } from 'shared/lib/helpers'
-    import type { Locale } from 'shared/lib/typings/i18n'
-    import { NETWORK_HEALTH_COLORS, networkStatus } from 'shared/lib/networkStatus'
-    import { activeProfile } from 'shared/lib/profile'
-    import { dashboardRoute, settingsRoute, resetWalletRoute, previousDashboardRoute } from 'shared/lib/router'
-    import { SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
 
     export let locale: Locale
 
     let showNetwork = false
     let healthStatus = 2
     let showProfile = false
+    let showStakingNotification = false
+
     const profileColor = 'blue' // TODO: each profile has a different color
 
     const profileInitial = getInitials(get(activeProfile)?.name, 1)
 
-    const unsubscribe = networkStatus.subscribe((data) => {
+    const unsubscribeNetworkStatus = networkStatus.subscribe((data) => {
         healthStatus = data.health ?? 0
     })
 
+    const unSubscribePartialStaking = unstakedAmount.subscribe((_unstakedAmount) => {
+        if (_unstakedAmount > 0 && $dashboardRoute !== Tabs.Staking) {
+            showStakingNotification = true
+        } else {
+            showStakingNotification = false
+        }
+    })
+
+    $: if ($dashboardRoute === Tabs.Staking) showStakingNotification = false
+
     onDestroy(() => {
-        unsubscribe()
+        unsubscribeNetworkStatus()
+        unSubscribePartialStaking()
     })
 
     function openSettings() {
@@ -55,15 +69,20 @@
     <Logo classes="logo mb-9 {hasTitleBar ? 'mt-3' : ''}" width="48px" logo="logo-firefly" />
     <nav class="flex flex-grow flex-col items-center justify-between">
         <div class="flex flex-col">
-            <button class="mb-8 {$dashboardRoute === Tabs.Wallet ? 'text-blue-500' : 'text-gray-500'}" on:click={openWallet}>
+            <button
+                class="mb-8 {$dashboardRoute === Tabs.Wallet ? 'text-blue-500' : 'text-gray-500'}"
+                on:click={openWallet}>
                 <Icon width="24" height="24" icon="wallet" />
             </button>
-            <button class="{$dashboardRoute === Tabs.Staking ? 'text-blue-500' : 'text-gray-500'} relative" on:click={openStaking}>
+            <button
+                class="{$dashboardRoute === Tabs.Staking ? 'text-blue-500' : 'text-gray-500'} relative"
+                on:click={openStaking}>
                 <Icon width="24" height="24" icon="tokens" />
-                {#if !$activeProfile?.hasVisitedStaking}
+                {#if !$activeProfile?.hasVisitedStaking || showStakingNotification}
                     <span class="absolute -top-2 -left-2 flex justify-center items-center h-3 w-3">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-300 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-300 opacity-75" />
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500" />
                     </span>
                 {/if}
             </button>
