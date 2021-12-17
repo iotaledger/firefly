@@ -11,7 +11,7 @@
     import { showAppNotification } from 'shared/lib/notifications';
     import { openPopup,popupState } from 'shared/lib/popup';
     import { cleanupEmptyProfiles,cleanupInProgressProfiles } from 'shared/lib/profile';
-    import { dashboardRoute,initRouter,routerNext,routerPrevious,walletRoute } from 'shared/lib/router';
+    import { dashboardRoute,initRouter,openSettings,routerNext,routerPrevious,walletRoute } from 'shared/lib/router';
     import type { Locale } from 'shared/lib/typings/i18n';
     import { AppRoute,Tabs } from 'shared/lib/typings/routes';
     import {
@@ -80,7 +80,7 @@
         Electron.onEvent('menu-navigate-settings', () => {
             if ($loggedIn) {
                 if (get(dashboardRoute) !== Tabs.Settings) {
-                    dashboardRoute.set(Tabs.Settings)
+                    openSettings()
                 }
             } else {
                 settings = true

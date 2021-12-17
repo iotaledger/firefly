@@ -1,14 +1,14 @@
 <script lang="typescript">
     import { onDestroy } from 'svelte'
     import { get } from 'svelte/store'
-    import { Icon, Logo, NetworkIndicator, ProfileActionsModal, Text } from 'shared/components'
+    import { Icon, Logo, NetworkIndicator, ProfileActionsModal } from 'shared/components'
     import { getInitials } from 'shared/lib/helpers'
     import type { Locale } from 'shared/lib/typings/i18n'
     import { NETWORK_HEALTH_COLORS, networkStatus } from 'shared/lib/networkStatus'
     import { isStakingFeatureNew } from 'shared/lib/participation/stores'
     import { activeProfile } from 'shared/lib/profile'
-    import { dashboardRoute, settingsRoute, resetWalletRoute, previousDashboardRoute } from 'shared/lib/router'
-    import { SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
+    import { dashboardRoute, resetWalletRoute } from 'shared/lib/router'
+    import { Tabs } from 'shared/lib/typings/routes'
 
     export let locale: Locale
 
@@ -28,12 +28,6 @@
     onDestroy(() => {
         unsubscribe()
     })
-
-    function openSettings() {
-        previousDashboardRoute.set(get(dashboardRoute))
-        dashboardRoute.set(Tabs.Settings)
-        settingsRoute.set(SettingsRoutes.Init)
-    }
 
     function openWallet() {
         resetWalletRoute()
@@ -83,5 +77,5 @@
         </span>
     </nav>
     <NetworkIndicator bind:isActive={showNetwork} {locale} />
-    <ProfileActionsModal bind:isActive={showProfile} {locale} {openSettings} />
+    <ProfileActionsModal bind:isActive={showProfile} {locale} />
 </aside>
