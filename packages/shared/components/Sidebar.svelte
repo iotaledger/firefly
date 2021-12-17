@@ -2,7 +2,8 @@
     import { Icon, Logo, NetworkIndicator, ProfileActionsModal } from 'shared/components'
     import { getInitials } from 'shared/lib/helpers'
     import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
-    import { unstakedAmount } from 'shared/lib/participation/stores'
+    import { isStakingPossible } from 'shared/lib/participation'
+    import { stakingEventState, unstakedAmount } from 'shared/lib/participation/stores'
     import { activeProfile } from 'shared/lib/profile'
     import { dashboardRoute, previousDashboardRoute, resetWalletRoute, settingsRoute } from 'shared/lib/router'
     import type { Locale } from 'shared/lib/typings/i18n'
@@ -15,6 +16,7 @@
     let showNetwork = false
     let healthStatus = 2
     let showProfile = false
+    let _prevUnstakedFunds = 0 // store the previous unstaked funds to avoid notifying when unstaked funds decrease
     let showStakingNotification = false
 
     const profileColor = 'blue' // TODO: each profile has a different color
@@ -26,11 +28,16 @@
     })
 
     const unSubscribePartialStaking = unstakedAmount.subscribe((_unstakedAmount) => {
-        if (_unstakedAmount > 0 && $dashboardRoute !== Tabs.Staking) {
+        if (
+            isStakingPossible($stakingEventState) &&
+            _unstakedAmount > _prevUnstakedFunds &&
+            $dashboardRoute !== Tabs.Staking
+        ) {
             showStakingNotification = true
         } else {
             showStakingNotification = false
         }
+        _prevUnstakedFunds = _unstakedAmount
     })
 
     $: if ($dashboardRoute === Tabs.Staking) showStakingNotification = false
