@@ -16,7 +16,7 @@
     let showNetwork = false
     let healthStatus = 2
     let showProfile = false
-    let _prevUnstakedFunds = 0 // store the previous unstaked funds to avoid notifying when unstaked funds decrease
+    let _prevUnstakedAmount = 0 // store the previous unstaked funds to avoid notifying when unstaked funds decrease
     let showStakingNotification = false
 
     const profileColor = 'blue' // TODO: each profile has a different color
@@ -30,14 +30,14 @@
     const unSubscribePartialStaking = unstakedAmount.subscribe((_unstakedAmount) => {
         if (
             isStakingPossible($stakingEventState) &&
-            _unstakedAmount > _prevUnstakedFunds &&
+            _unstakedAmount > _prevUnstakedAmount &&
             $dashboardRoute !== Tabs.Staking
         ) {
             showStakingNotification = true
         } else {
             showStakingNotification = false
         }
-        _prevUnstakedFunds = _unstakedAmount
+        _prevUnstakedAmount = _unstakedAmount
     })
 
     $: if ($dashboardRoute === Tabs.Staking) showStakingNotification = false
