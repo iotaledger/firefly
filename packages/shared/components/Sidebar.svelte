@@ -23,28 +23,27 @@
 
     const profileInitial = getInitials(get(activeProfile)?.name, 1)
 
-    const unsubscribeNetworkStatus = networkStatus.subscribe((data) => {
+    const unsubscribe = networkStatus.subscribe((data) => {
         healthStatus = data.health ?? 0
     })
 
-    const unSubscribePartialStaking = unstakedAmount.subscribe((_unstakedAmount) => {
-        if (
-            isStakingPossible($stakingEventState) &&
-            _unstakedAmount > _prevUnstakedAmount &&
-            $dashboardRoute !== Tabs.Staking
-        ) {
-            showStakingNotification = true
+    $: $dashboardRoute, $stakingEventState, $unstakedAmount, manageUnstakedAmountNotification()
+
+    function manageUnstakedAmountNotification() {
+        if (isStakingPossible($stakingEventState)) {
+            if ($dashboardRoute !== Tabs.Staking && $unstakedAmount > _prevUnstakedAmount) {
+                showStakingNotification = true
+            } else {
+                showStakingNotification = false
+            }
+            _prevUnstakedAmount = $unstakedAmount
         } else {
             showStakingNotification = false
         }
-        _prevUnstakedAmount = _unstakedAmount
-    })
-
-    $: if ($dashboardRoute === Tabs.Staking) showStakingNotification = false
+    }
 
     onDestroy(() => {
-        unsubscribeNetworkStatus()
-        unSubscribePartialStaking()
+        unsubscribe()
     })
 
     function openSettings() {
