@@ -4,13 +4,12 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import {
         accountToParticipate,
-        isStakingFeatureNew,
         participationAction,
         stakingEventState,
     } from 'shared/lib/participation/stores'
     import { ParticipationEventState, StakingAirdrop as _StakingAirdrop } from 'shared/lib/participation/types'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-    import { isSoftwareProfile } from 'shared/lib/profile'
+    import { activeProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
     import {
         GeneratingRemainderDepositAddressEvent,
         PreparedTransactionEvent,
@@ -25,13 +24,13 @@
     import { StakingAirdrop, StakingHeader, StakingInfo, StakingSummary } from './views'
 
     const handleNewStakingFeature = (): void => {
-        if ($isStakingFeatureNew) {
+        if (!$activeProfile?.hasVisitedStaking) {
             showAppNotification({
                 type: 'info',
                 message: localize('views.staking.welcome'),
             })
 
-            isStakingFeatureNew.set(false)
+            updateProfile('hasVisitedStaking', true)
         }
     }
 
@@ -134,7 +133,7 @@
         await getParticipationEvents()
         await getParticipationOverview()
 
-        if ($isStakingFeatureNew) {
+        if (!$activeProfile?.hasVisitedStaking) {
             handleNewStakingFeature()
         }
     })

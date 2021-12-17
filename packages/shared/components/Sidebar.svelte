@@ -5,7 +5,6 @@
     import { getInitials } from 'shared/lib/helpers'
     import type { Locale } from 'shared/lib/typings/i18n'
     import { NETWORK_HEALTH_COLORS, networkStatus } from 'shared/lib/networkStatus'
-    import { isStakingFeatureNew } from 'shared/lib/participation/stores'
     import { activeProfile } from 'shared/lib/profile'
     import { dashboardRoute, settingsRoute, resetWalletRoute, previousDashboardRoute } from 'shared/lib/router'
     import { SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
@@ -16,8 +15,6 @@
     let healthStatus = 2
     let showProfile = false
     const profileColor = 'blue' // TODO: each profile has a different color
-
-    $: $isStakingFeatureNew
 
     const profileInitial = getInitials(get(activeProfile)?.name, 1)
 
@@ -63,7 +60,7 @@
             </button>
             <button class="{$dashboardRoute === Tabs.Staking ? 'text-blue-500' : 'text-gray-500'} relative" on:click={openStaking}>
                 <Icon width="24" height="24" icon="tokens" />
-                {#if $isStakingFeatureNew}
+                {#if !$activeProfile?.hasVisitedStaking}
                     <span class="absolute -top-2 -left-2 flex justify-center items-center h-3 w-3">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-300 opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>

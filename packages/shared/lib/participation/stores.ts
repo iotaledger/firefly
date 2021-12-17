@@ -25,13 +25,6 @@ import {
 export const pendingParticipations = writable<PendingParticipation[]>([])
 
 /**
- * The persisted store variable for if the staking feature is new for a Firefly installation.
- * Once the user navigates to the staking dashboard, this is set to false. This helps the UX
- * to highlight the new feature.
- */
-export const isStakingFeatureNew = persistent('isStakingFeatureNew', true)
-
-/**
  * The store for an account that is selected to participate in an event. This is
  * mostly useful for showing background participation progress, otherwise it can
  * just be shown within a designated component (i.e. popup or dashboard tile).
