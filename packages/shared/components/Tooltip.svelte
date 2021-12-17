@@ -35,7 +35,6 @@
 
     onMount(() => {
         // Bugfix: Tooltip z-index was not being applied
-        tooltip?.parentNode?.removeChild(tooltip)
         document?.body?.appendChild(tooltip)
         //
         refreshPosition()

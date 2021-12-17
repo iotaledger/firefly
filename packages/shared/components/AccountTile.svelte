@@ -257,7 +257,8 @@
     <div class="mb-2 w-full flex flex-row justify-between items-start space-x-1.5">
         <div class="flex flex-row space-x-1.5 items-start w-full whitespace-nowrap">
             {#if showWarningState}
-                <div bind:this={tooltipAnchor} on:mouseenter={toggleTooltip} on:mouseleave={toggleTooltip}>
+                <!-- TODO: remove on:click when Tooltip destruction works as expected -->
+                <div bind:this={tooltipAnchor} on:mouseenter={toggleTooltip} on:mouseleave={toggleTooltip} on:click={() => showTooltip = false}>
                     <Icon
                         icon="exclamation"
                         width="16"
