@@ -452,7 +452,12 @@ export const canAccountReachMinimumAirdrop = (account: WalletAccount, airdrop: S
 
     const currentRewards = getCurrentRewardsForAirdrop(account, airdrop)
     const timeRequired = calculateTimeUntilMinimumReward(currentRewards, airdrop, account.rawIotaBalance)
-    const timeLeft = get(assemblyStakingRemainingTime)
+    const timeLeft =
+        airdrop === StakingAirdrop.Assembly
+            ? get(assemblyStakingRemainingTime)
+            : airdrop === StakingAirdrop.Shimmer
+            ? get(shimmerStakingRemainingTime)
+            : 0
 
     return timeRequired <= timeLeft
 }
