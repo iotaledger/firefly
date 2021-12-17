@@ -21,7 +21,7 @@ import type {
 } from 'shared/lib/typings/migration'
 import { AppRoute, SetupType } from 'shared/lib/typings/routes'
 import Validator from 'shared/lib/validator'
-import { api } from 'shared/lib/wallet'
+import { api, wallet } from 'shared/lib/wallet'
 import { derived, get, writable } from 'svelte/store'
 import { localize } from './i18n'
 import { showAppNotification } from './notifications'
@@ -360,7 +360,11 @@ export const findMigrationBundle = (bundleIndex: number): Bundle => {
  */
 export const mineLedgerBundle = (bundleIndex: number, offset: number): Promise<void> =>
     new Promise((resolve, reject) => {
-        api.getMigrationAddress(false, get(activeProfile).ledgerMigrationCount, {
+        const { accounts } = get(wallet)
+
+        const accountId = get(accounts).find((account) => account.index === get(activeProfile).ledgerMigrationCount).id
+
+        api.getMigrationAddress(false, accountId, {
             onSuccess(response) {
                 resolve(response.payload)
             },
@@ -482,7 +486,11 @@ export const createLedgerMigrationBundle = (
     callback: () => void
 ): Promise<MigrationBundle> =>
     new Promise((resolve, reject) => {
-        api.getMigrationAddress(false, get(activeProfile).ledgerMigrationCount, {
+        const { accounts } = get(wallet)
+
+        const accountId = get(accounts).find((account) => account.index === get(activeProfile).ledgerMigrationCount).id
+
+        api.getMigrationAddress(false, accountId, {
             onSuccess(response) {
                 resolve(response.payload)
             },

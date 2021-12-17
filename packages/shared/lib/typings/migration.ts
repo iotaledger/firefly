@@ -224,7 +224,7 @@ export function getMigrationAddress(
     bridge: Bridge,
     __ids: CommunicationIds,
     ledgerPrompt: boolean,
-    accountIndex: number
+    accountIndex: string | number
 ): Promise<string> {
     return bridge({
         actorId: __ids.actorId,

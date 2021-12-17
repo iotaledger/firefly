@@ -309,7 +309,7 @@ export const api = {
     },
     getMigrationAddress: function (
         prompt: boolean,
-        accountIndex: number
+        accountIndex: string | number
     ): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _getMigrationAddreess(sendMessage, __ids, prompt, accountIndex)
     },
