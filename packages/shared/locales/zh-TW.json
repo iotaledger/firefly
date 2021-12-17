@@ -1128,7 +1128,7 @@
             "noSynced": "沒有可用的同步節點。",
             "answer": "無法向所有節點取得回應。",
             "forbidden": "此節點連結已被禁用。",
-            "pluginNotAvailable": "在目前的節點上無法使用 \"{nodePlugin}\" 插件."
+            "pluginNotAvailable": "在目前的節點上無法使用 \"{nodePlugin}\" 插件。"
         },
         "network": {
             "mismatch": "此節點的Network ID為: \"{networkId}\"`，與當前網路不相符。",
@@ -1161,7 +1161,7 @@
             "generateAddress": "產生地址時發生錯誤",
             "timeout": "您的 Ledger 裝置已逾時。",
             "disconnected": "您的 Ledger 裝置已斷線。",
-            "noStronghold": "Ledger設定檔無法使用Stronghold功能."
+            "noStronghold": "Ledger 設定檔無法使用 Stronghold 功能。"
         },
         "popup": {
             "preventClose": "無法關閉此彈出視窗。"
@@ -1175,7 +1175,7 @@
         "participation": {
             "cannotUseAccount": "無法使用該指定帳戶。",
             "cannotFindStakingEvent": "未能找到質押活動。",
-            "cannotVisitAirdropWebsite": "無法開啟{airdrop} 網站。",
+            "cannotVisitAirdropWebsite": "無法開啟 {airdrop} 網站。",
             "invalidStakingEventId": "質押活動ID無效。"
         }
     },
@@ -1206,11 +1206,11 @@
                 "body": "預先質押您的代幣。一旦開始質押活動，您將自動於每十秒獲得一次質押獎勵。"
             },
             "activeHolding": {
-                "title": "現在質押正在進行中",
+                "title": "質押現正進行中",
                 "body": "恭喜。您將在每10秒獲得獎勵。"
             },
             "inactiveHolding": {
-                "title": "現在已開放質押",
+                "title": "質押現已開放",
                 "body": "質押您的IOTA代幣以獲得每10秒一次的獎勵。"
             },
             "inactive": {
@@ -1219,7 +1219,7 @@
             },
             "ended": {
                 "title": "質押現已結束",
-                "body": "Assembly 和 Shimmer 獎勵將於各自網路開啟後，分發到您的錢包。"
+                "body": "Assembly 和 Shimmer 獎勵將於各自的網路啟動後，分別發放到您的錢包。"
             }
         },
         "partiallyStakedFunds": {
@@ -1231,9 +1231,9 @@
         "stakingMinRewards": {
             "title": "低於最低獎勵門檻",
             "titleMinBalance": "須要最低餘額 {amount}",
-            "bodyMinBalace": "此錢包的IOTA代幣低於空投獎勵的最低門檻，因此無法質押。",
+            "bodyMinBalace": "此錢包的 IOTA 代幣未達最低空投獎勵門檻，故無法質押。",
             "continue": "請再繼續質押 {duration}。",
-            "bodyBelowMin": "此錢包尚未達到 {airdrop} ({airdropRewardMin}) 的最低獎勵門檻。",
+            "bodyBelowMin": "此錢包未達 {airdrop} ({airdropRewardMin}) 的最低獎勵門檻。",
             "bodyWillReachMin": "您必須再質押 {duration} 才能達到最低門檻。",
             "bodyWillNotReachMin": "除非您質押更多 IOTA，在剩餘的質押期間您將無法達到最低門檻。",
             "bodyDidNotReachMin": "您尚未質押足夠的 IOTA 來達到 {airdrop} ({airdropRewardMin}) 的最低獎勵。"
