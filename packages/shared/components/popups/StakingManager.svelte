@@ -312,12 +312,17 @@
                         {/if}
                     </div>
                     <Button
-                        disabled={$isPerformingParticipation || getAccountParticipationAbility(account) === AccountParticipationAbility.HasPendingTransaction || getAccountParticipationAbility(account) === AccountParticipationAbility.WillNotReachMinAirdrop}
+                        disabled={$isPerformingParticipation || getAccountParticipationAbility(account) !== AccountParticipationAbility.Ok}
                         secondary={isAccountStaked(account?.id)}
                         onClick={() => (isAccountStaked(account?.id) ? handleUnstakeClick(account) : handleStakeClick(account))}>
-                        {#if $accountToParticipate?.id === account?.id && $accountToParticipate && $participationAction}
-                            <Spinner busy={$isPerformingParticipation} classes="mx-2 justify-center" />
-                        {:else}{locale(`actions.${isAccountStaked(account?.id) ? 'unstake' : 'stake'}`)}{/if}
+                        {#if ($accountToParticipate?.id === account?.id && $accountToParticipate && $participationAction) || getAccountParticipationAbility(account) === AccountParticipationAbility.HasPendingTransaction}
+                            <Spinner
+                                busy={$isPerformingParticipation}
+                                message={locale(`general.${getAccountParticipationAbility(account) === AccountParticipationAbility.HasPendingTransaction ? 'syncing' : $participationAction === ParticipationAction.Stake ? 'staking' : 'unstaking'}`)}
+                                classes="mx-2 justify-center" />
+                        {:else}
+                            {locale(`actions.${isAccountStaked(account?.id) ? 'unstake' : 'stake'}`)}
+                        {/if}
                     </Button>
                 </div>
                 {#if isAccountPartiallyStaked(account?.id) && $accountToParticipate?.id !== account?.id && getAccountParticipationAbility(account) !== AccountParticipationAbility.WillNotReachMinAirdrop}

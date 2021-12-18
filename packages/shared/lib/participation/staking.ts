@@ -15,6 +15,7 @@ import {
     partiallyStakedAccounts,
     participationEvents,
     participationOverview,
+    pendingParticipations,
     shimmerStakingRemainingTime,
     stakedAccounts,
 } from './stores'
@@ -444,6 +445,7 @@ export const getIotasUntilMinimumAirdropReward = (
  * @method canAccountReachMinimumAirdrop
  *
  * @param {WalletAccount} account
+ * @param {StakingAirdrop} airdrop
  *
  * @returns {boolean}
  */
