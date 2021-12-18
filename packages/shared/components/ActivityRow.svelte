@@ -161,7 +161,7 @@
 <button
     on:click={onClick}
     data-label="transaction-row"
-    class="w-full text-left flex rounded-2xl items-center bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 p-4 {(!confirmed || hasCachedMigrationTx) && 'opacity-50'} {hasCachedMigrationTx && 'pointer-events-none'} overflow-hidden"
+    class="w-full text-left flex rounded-2xl items-center bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 p-4 {(!confirmed || hasCachedMigrationTx) ? 'opacity-50' : ''} {hasCachedMigrationTx ? 'pointer-events-none' : ''} overflow-hidden"
     disabled={hasCachedMigrationTx}
 >
     <div class="w-8 flex flex-row justify-center items-center">
