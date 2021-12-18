@@ -440,7 +440,7 @@ export const canAccountReachMinimumAirdrop = (account: WalletAccount, airdrop: S
     const timeRequired = calculateTimeUntilMinimumReward(currentRewards, airdrop, account.rawIotaBalance)
     const stakingEvent = getStakingEventFromAirdrop(airdrop)
     const _getTimeLeft = () => {
-        if (isStakingPossible(get(stakingEventState)))
+        if (get(stakingEventState) === ParticipationEventState.Commencing)
             return calculateRemainingStakingTime(stakingEvent?.information?.milestoneIndexStart, stakingEvent)
         return airdrop === StakingAirdrop.Assembly
             ? get(assemblyStakingRemainingTime)
