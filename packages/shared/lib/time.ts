@@ -30,24 +30,28 @@ export const getBestTimeDuration = (
     millis: number,
     noDurationUnit: 'days' | 'hours' | 'minutes' | 'seconds' = 'days'
 ): string => {
-    const noDurationInLocale = localize(`general.time.${noDurationUnit}`)
-    if (Number.isNaN(millis)) return `0 ${noDurationInLocale}`
+    const noDurationInLocale = localize(`general.time.${noDurationUnit}`, { values: { [noDurationUnit]: '0' } })
+    if (Number.isNaN(millis)) return noDurationInLocale
 
     const inDays = millis / (HOURS_PER_DAY * MINUTES_PER_HOUR * SECONDS_PER_MINUTE * MILLISECONDS_PER_SECOND)
-    if (inDays > 1) return `${Math.ceil(inDays)} ${localize('general.time.days')}`
-    else if (inDays === 1) return `1 ${localize('general.time.day')}`
+    if (inDays >= 1) {
+        return localize('general.time.days', { values: { days: Math.ceil(inDays).toString() } })
+    }
 
     const inHours = millis / (MINUTES_PER_HOUR * SECONDS_PER_MINUTE * MILLISECONDS_PER_SECOND)
-    if (inHours > 1) return `${Math.ceil(inHours)} ${localize('general.time.hours')}`
-    else if (inHours === 1) return `1 ${localize('general.time.hour')}`
+    if (inHours >= 1) {
+        return localize('general.time.hours', { values: { hours: Math.ceil(inHours).toString() } })
+    }
 
     const inMinutes = millis / (SECONDS_PER_MINUTE * MILLISECONDS_PER_SECOND)
-    if (inMinutes > 1) return `${Math.ceil(inMinutes)} ${localize('general.time.minutes')}`
-    else if (inMinutes === 1) return `1 ${localize('general.time.minute')}`
+    if (inMinutes >= 1) {
+        return localize('general.time.minutes', { values: { minutes: Math.ceil(inMinutes).toString() } })
+    }
 
     const inSeconds = millis / MILLISECONDS_PER_SECOND
-    if (inSeconds > 1) return `${Math.ceil(inSeconds)} ${localize('general.time.seconds')}`
-    else if (inSeconds === 1) return `1 ${localize('general.time.second')}`
+    if (inSeconds >= 1) {
+        return localize('general.time.seconds', { values: { seconds: Math.ceil(inSeconds).toString() } })
+    }
 
-    return `0 ${noDurationInLocale}`
+    return noDurationInLocale
 }
