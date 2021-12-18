@@ -94,10 +94,6 @@
             $isFirstSessionSync && $walletSetupType && $walletSetupType !== SetupType.New && $transactions.length === 0
         )
     }
-
-    function getTransactions(): AccountMessage[] {
-        return $transactions
-    }
 </script>
 
 <div data-label="latest-transactions" class="h-full pt-6 pb-8 px-8 flex-grow flex flex-col">
@@ -113,7 +109,7 @@
                 <Text secondary>{locale('general.firstSync')}</Text>
             </div>
         {:else if $transactions?.length}
-            {#each getTransactions() as transaction}
+            {#each $transactions as transaction}
                 <ActivityRow
                     {...transaction}
                     onClick={() => handleTransactionClick(transaction)}
