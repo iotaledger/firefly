@@ -5,12 +5,12 @@ import { Participation, StakingAirdrop } from './types'
 /**
  * The staking event ID for Assembly.
  */
-export const ASSEMBLY_EVENT_ID = '9351d25acaa9f6d9cf09b8a56eb258ac4bcb1ea6feaaeeeda07f229d6f678848'
+export const ASSEMBLY_EVENT_ID = '92f404d6b1c3a22833dc6d7366a0125a448c3e8fc0b23da995e1d62608733e0e'
 
 /**
  * The staking event ID for Shimmer.
  */
-export const SHIMMER_EVENT_ID = '01306a1016a43b388c6ea9b0ea260753bbac7d9cdf7dacfd18abe472a64c77ef'
+export const SHIMMER_EVENT_ID = '41beeea0f9db50f9d1823712f8a79579871a1033128dc687a67aede284653c09'
 
 /**
  * Useful array of staking event IDs.
