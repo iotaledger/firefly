@@ -38,6 +38,7 @@ import type {
     SignerType,
     SyncAccountOptions,
     SyncedAccount,
+    AccountIdentifier,
 } from './typings/account'
 import type { Address } from './typings/address'
 import type { Actor, GetMigrationAddressResponse } from './typings/bridge'
@@ -357,7 +358,7 @@ interface IWalletApi {
     )
     getMigrationAddress(
         prompt: boolean,
-        accountIndex: number,
+        accountIdentifier: AccountIdentifier,
         callbacks: {
             onSuccess: (response: Event<GetMigrationAddressResponse>) => void
             onError: (err: ErrorEventPayload) => void
