@@ -27,9 +27,9 @@
     } from 'shared/lib/participation/types'
     import { openPopup } from 'shared/lib/popup'
     import { getBestTimeDuration } from 'shared/lib/time'
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { capitalize } from 'shared/lib/utils'
-    import type { WalletAccount } from 'shared/lib/typings/wallet'
 
     export let name = ''
     export let balance = ''
@@ -51,15 +51,7 @@
 
     const _getAccount = (accounts: WalletAccount[]): WalletAccount => accounts.find((account) => account.alias === name)
     const _hasAccount = (accounts: WalletAccount[]): boolean => _getAccount(accounts) !== undefined
-
-    let isPartiallyStaked = false
-    $: isPartiallyStaked = _hasAccount($partiallyStakedAccounts) && isStakingPossible($stakingEventState)
-
-    let isStaked = false
-    $: isStaked = _hasAccount($stakedAccounts) && isStakingPossible($stakingEventState)
-
-    let isBelowMinimumStakingRewards
-    $: {
+    const _isBelowMinimumStakingRewards = (accounts: WalletAccount[]) => {
         /**
          * NOTE: We are selecting from staked accounts ONLY.
          * Accounts that have been unstaked will NOT have this warning
@@ -68,24 +60,27 @@
          * If we wish to check unstaked accounts also, then we can use the
          * accounts on the wallet Svelte store.
          */
-        const account = _getAccount($stakedAccounts)
+        const account = _getAccount(accounts)
         if (account && getAccountParticipationAbility(account) !== AccountParticipationAbility.HasDustAmount) {
             /**
              * NOTE: If the account has reached minimum airdrop already (on another address) and staking is NOT
              * possible then we won't display the tooltip.
              */
             if (hasAccountReachedMinimumAirdrop(account) && !isStakingPossible($stakingEventState)) {
-                isBelowMinimumStakingRewards = false
+                return false
             } else {
                 const accountOverview = $participationOverview.find((apo) => apo.accountIndex === account?.index)
-                isBelowMinimumStakingRewards =
+                return (
                     accountOverview?.assemblyRewardsBelowMinimum > 0 || accountOverview?.shimmerRewardsBelowMinimum > 0
+                )
             }
         }
+        return false
     }
 
-    let showWarningState = false
-    $: showWarningState = isPartiallyStaked || isBelowMinimumStakingRewards
+    $: isPartiallyStaked = _hasAccount($partiallyStakedAccounts) && isStakingPossible($stakingEventState)
+    $: isStaked = _hasAccount($stakedAccounts) && isStakingPossible($stakingEventState)
+    $: isBelowMinimumStakingRewards = _isBelowMinimumStakingRewards($stakedAccounts)
 
     let showTooltip = false
     let tooltipAnchor
@@ -188,7 +183,8 @@
         &.size-l {
             min-height: 140px;
         }
-        &.partial-stake {
+        &.partial-stake,
+        &.below-minimum {
             @apply border;
             @apply border-solid;
             @apply border-yellow-600;
@@ -207,7 +203,7 @@
                 }
             }
         }
-        &.staked:not(.partial-stake) {
+        &.staked:not(.partial-stake):not(.below-minimum) {
             @apply border;
             @apply border-solid;
             @apply border-gray-200;
@@ -250,13 +246,14 @@
     on:click={handleTileClick}
     class="bg-gray-100 dark:bg-gray-900 hover:bg-{color}-500 size-{size} group rounded-xl font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'}"
     class:staked={isStaked}
-    class:partial-stake={showWarningState}
+    class:partial-stake={isPartiallyStaked}
+    class:below-minimum={isBelowMinimumStakingRewards}
     class:airdrop
     class:hidden-wallet={hidden}
     class:darkmode={darkModeEnabled}>
     <div class="mb-2 w-full flex flex-row justify-between items-start space-x-1.5">
         <div class="flex flex-row space-x-1.5 items-start w-full whitespace-nowrap">
-            {#if showWarningState}
+            {#if isPartiallyStaked || isBelowMinimumStakingRewards}
                 <div bind:this={tooltipAnchor} on:mouseenter={toggleTooltip} on:mouseleave={toggleTooltip}>
                     <Icon
                         icon="exclamation"
