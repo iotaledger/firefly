@@ -1,26 +1,26 @@
 import { get } from 'svelte/store'
-
 import { getDecimalSeparator } from '../currency'
 import { localize } from '../i18n'
 import { networkStatus } from '../networkStatus'
 import { showAppNotification } from '../notifications'
 import { activeProfile } from '../profile'
 import { getBestTimeDuration, MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
-import { clamp, delineateNumber } from '../utils'
 import type { WalletAccount } from '../typings/wallet'
-
+import { formatUnitBestMatch } from '../units'
+import { clamp, delineateNumber } from '../utils'
+import { wallet } from '../wallet'
 import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID, STAKING_AIRDROP_TOKENS, STAKING_EVENT_IDS } from './constants'
 import {
     assemblyStakingRemainingTime,
+    calculateRemainingStakingTime,
     partiallyStakedAccounts,
     participationEvents,
     participationOverview,
     shimmerStakingRemainingTime,
     stakedAccounts,
+    stakingEventState,
 } from './stores'
 import { Participation, ParticipationEvent, ParticipationEventState, StakingAirdrop } from './types'
-import { formatUnitBestMatch } from '../units'
-import { wallet } from '../wallet'
 
 /**
  * Determines whether an account is currently being staked or not.
@@ -166,6 +166,22 @@ export const formatStakingAirdropReward = (airdrop: StakingAirdrop, amount: numb
 }
 
 /**
+ * Returns a formatted version of the minimum rewards for a particular airdrop.
+ *
+ * @method getFormattedMinimumRewards
+ *
+ * @param {StakingAirdrop} airdrop
+ *
+ * @returns {string}
+ */
+export const getFormattedMinimumRewards = (airdrop: StakingAirdrop): string =>
+    formatStakingAirdropReward(
+        airdrop,
+        getStakingEventFromAirdrop(airdrop)?.information.payload.requiredMinimumRewards,
+        airdrop === StakingAirdrop.Assembly ? 6 : 0
+    )
+
+/**
  * The amount of microASMB per 1 Mi received every milestone,
  * which is currently 4 microASMB (0.000004 ASMB).
  */
@@ -294,42 +310,6 @@ export const isStakingForAssembly = (participations: Participation[]): boolean =
 export const isStakingPossible = (stakingEventState: ParticipationEventState): boolean =>
     stakingEventState === ParticipationEventState.Commencing || stakingEventState === ParticipationEventState.Holding
 
-type MinimumRewardInfo = [number, StakingAirdrop, number]
-
-export const getMinimumAirdropRewardInfo = (account: WalletAccount): MinimumRewardInfo => {
-    const overview = get(participationOverview).find((apo) => apo.accountIndex === account?.index)
-    if (!overview) return [0, undefined, 0]
-
-    /**
-     * NOTE: MAX_SAFE_INTEGER is used here just to ensure
-     * that any number compared to it will with certainty
-     * be smaller (since we're comparing minimums).
-     */
-    let smallestMinRewards: number = Number.MAX_SAFE_INTEGER
-    let smallestMinAirdrop: StakingAirdrop = undefined
-    let amountStaked: number = 0
-
-    const { assemblyRewardsBelowMinimum, assemblyStakedFunds } = overview
-    if (assemblyRewardsBelowMinimum > 0) {
-        if (assemblyRewardsBelowMinimum < smallestMinRewards) {
-            smallestMinRewards = assemblyRewardsBelowMinimum
-            smallestMinAirdrop = StakingAirdrop.Assembly
-            amountStaked = assemblyStakedFunds
-        }
-    }
-
-    const { shimmerRewardsBelowMinimum, shimmerStakedFunds } = overview
-    if (shimmerRewardsBelowMinimum > 0) {
-        if (shimmerRewardsBelowMinimum < smallestMinRewards) {
-            smallestMinRewards = shimmerRewardsBelowMinimum
-            smallestMinAirdrop = StakingAirdrop.Shimmer
-            amountStaked = shimmerStakedFunds
-        }
-    }
-
-    return [smallestMinRewards === Number.MAX_SAFE_INTEGER ? 0 : smallestMinRewards, smallestMinAirdrop, amountStaked]
-}
-
 const getAirdropRewardMultipler = (airdrop: StakingAirdrop): number => {
     return airdrop === StakingAirdrop.Assembly
         ? ASSEMBLY_REWARD_MULTIPLIER
@@ -368,18 +348,24 @@ const calculateTimeUntilMinimumReward = (rewards: number, airdrop: StakingAirdro
  * reach the minimum airdrop amount. If called with format = true then returns
  * human-readable duration, else returns the amount of time in millis.
  *
- * @method calculateMinimumRewardTime
+ * @method getTimeUntilMinimumAirdropReward
  *
  * @param {WalletAccount} account
+ * @param {StakingAirdrop} airdrop
  * @param {boolean} format
  *
  * @returns {number | string}
  */
-export const getTimeUntilMinimumAirdropReward = (account: WalletAccount, format: boolean = false): number | string => {
+export const getTimeUntilMinimumAirdropReward = (
+    account: WalletAccount,
+    airdrop: StakingAirdrop,
+    format: boolean = false
+): number | string => {
     if (!account) return format ? getBestTimeDuration(0) : 0
 
-    const [minRewards, minAirdrop, amountStaked] = getMinimumAirdropRewardInfo(account)
-    const timeRequired = calculateTimeUntilMinimumReward(minRewards, minAirdrop, amountStaked)
+    const rewards = getCurrentRewardsForAirdrop(account, airdrop)
+    const amountStaked = account?.rawIotaBalance
+    const timeRequired = calculateTimeUntilMinimumReward(rewards, airdrop, amountStaked)
 
     return format ? getBestTimeDuration(timeRequired) : timeRequired
 }
@@ -452,9 +438,18 @@ export const canAccountReachMinimumAirdrop = (account: WalletAccount, airdrop: S
 
     const currentRewards = getCurrentRewardsForAirdrop(account, airdrop)
     const timeRequired = calculateTimeUntilMinimumReward(currentRewards, airdrop, account.rawIotaBalance)
-    const timeLeft = get(assemblyStakingRemainingTime)
+    const stakingEvent = getStakingEventFromAirdrop(airdrop)
+    const _getTimeLeft = () => {
+        if (get(stakingEventState) === ParticipationEventState.Commencing)
+            return calculateRemainingStakingTime(stakingEvent?.information?.milestoneIndexStart, stakingEvent)
+        return airdrop === StakingAirdrop.Assembly
+            ? get(assemblyStakingRemainingTime)
+            : airdrop === StakingAirdrop.Shimmer
+            ? get(shimmerStakingRemainingTime)
+            : 0
+    }
 
-    return timeRequired <= timeLeft
+    return timeRequired <= _getTimeLeft()
 }
 
 /**

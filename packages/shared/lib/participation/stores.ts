@@ -238,7 +238,7 @@ export const stakingEventState: Readable<ParticipationEventState> = derived(
     }
 )
 
-const calculateRemainingStakingTime = (currentMilestone: number, stakingEvent: ParticipationEvent): number => {
+export const calculateRemainingStakingTime = (currentMilestone: number, stakingEvent: ParticipationEvent): number => {
     if (!stakingEvent) return 0
 
     const commenceMilestone = stakingEvent?.information?.milestoneIndexCommence
