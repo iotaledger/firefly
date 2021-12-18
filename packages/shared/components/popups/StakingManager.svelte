@@ -250,15 +250,15 @@
 <Text type="h5">{locale('popups.stakingManager.title')}</Text>
 <Text type="p" secondary classes="mt-6 mb-4">{locale('popups.stakingManager.description')}</Text>
 <div class="staking flex flex-col scrollable-y">
-    {#each $accounts as account}
-        {#if getAccountParticipationAbility(account) !== AccountParticipationAbility.HasDustAmount}
+    {#each $accounts.map((a) => [a, getAccountParticipationAbility(a)]) as [account, participationAbility]}
+        {#if participationAbility !== AccountParticipationAbility.HasDustAmount}
             <div class={`w-full mt-4 flex flex-col rounded-xl border-2 border-solid ${isAccountPartiallyStaked(account?.id) ? 'border-yellow-600' : 'border-gray-200 dark:border-gray-600'}`}>
                 <div class="w-full space-x-4 px-5 py-3 flex flex-row justify-between items-center">
                     {#if isAccountStaked(account?.id)}
                         <div class="bg-green-100 rounded-2xl">
                             <Icon icon="success-check" width="19" height="19" classes="text-white" />
                         </div>
-                    {:else if getAccountParticipationAbility(account) === AccountParticipationAbility.WillNotReachMinAirdrop}
+                    {:else if participationAbility === AccountParticipationAbility.WillNotReachMinAirdrop}
                         <div
                             bind:this={tooltipAnchors[account?.index]}
                             on:mouseenter={() => toggleTooltip(account)}
@@ -312,22 +312,21 @@
                         {/if}
                     </div>
                     <Button
-                        disabled={$isPerformingParticipation || getAccountParticipationAbility(account) !== AccountParticipationAbility.Ok}
+                        disabled={$isPerformingParticipation || participationAbility === AccountParticipationAbility.HasPendingTransaction}
                         secondary={isAccountStaked(account?.id)}
                         onClick={() => (isAccountStaked(account?.id) ? handleUnstakeClick(account) : handleStakeClick(account))}>
-                        {#if ($accountToParticipate?.id === account?.id && $accountToParticipate && $participationAction) || getAccountParticipationAbility(account) === AccountParticipationAbility.HasPendingTransaction}
-                            <Spinner
-                                busy={$isPerformingParticipation}
-                                message={locale(`general.${getAccountParticipationAbility(account) === AccountParticipationAbility.HasPendingTransaction ? 'syncing' : $participationAction === ParticipationAction.Stake ? 'staking' : 'unstaking'}`)}
-                                classes="mx-2 justify-center" />
+                        {#if $accountToParticipate?.id !== account?.id && participationAbility === AccountParticipationAbility.HasPendingTransaction}
+                            {locale('general.syncing')}
+                        {:else if $accountToParticipate && $accountToParticipate?.id === account?.id && $participationAction}
+                            <Spinner busy={$isPerformingParticipation} classes="mx-2 justify-center" />
                         {:else}
                             {locale(`actions.${isAccountStaked(account?.id) ? 'unstake' : 'stake'}`)}
                         {/if}
                     </Button>
                 </div>
-                {#if isAccountPartiallyStaked(account?.id) && $accountToParticipate?.id !== account?.id && getAccountParticipationAbility(account) !== AccountParticipationAbility.WillNotReachMinAirdrop}
+                {#if isAccountPartiallyStaked(account?.id) && $accountToParticipate?.id !== account?.id && participationAbility !== AccountParticipationAbility.WillNotReachMinAirdrop}
                     <div
-                        class="space-x-4 mx-2 mb-2 px-4 py-3 flex flex-row justify-between items-center rounded-lg border-2 border-solid border-gray-200 dark:border-gray-600">
+                        class="space-x-4 mx-2 mb-2 pl-4 pr-2.5 py-3 flex flex-row justify-between items-center rounded-lg border-2 border-solid border-gray-200 dark:border-gray-600">
                         <Icon icon="exclamation" width="24" height="24" classes="fill-current text-yellow-600" />
                         <div class="flex flex-col w-3/4">
                             <Text type="p" classes="font-extrabold">{locale('general.unstakedFunds')}</Text>
@@ -341,7 +340,7 @@
                         </div>
                         <Button
                             caution={isAccountPartiallyStaked(account?.id) && $accountToParticipate?.id !== account?.id}
-                            disabled={$isPerformingParticipation || getAccountParticipationAbility(account) === AccountParticipationAbility.HasPendingTransaction}
+                            disabled={$isPerformingParticipation || participationAbility === AccountParticipationAbility.HasPendingTransaction}
                             onClick={() => handleStakeClick(account)}>
                             {locale('actions.merge')}
                         </Button>

@@ -2018,3 +2018,18 @@ const calculateRegularSyncAccountOptions = (profileType: ProfileType, isManualSy
 
     return { gapLimit, accountDiscoveryThreshold }
 }
+
+/**
+ * Determines whether an account has any currently pending transactions.
+ *
+ * @method hasPendingTransactions
+ *
+ * @param {WalletAccount} account
+ *
+ * @returns {boolean}
+ */
+export const hasPendingTransactions = (account: WalletAccount): boolean => {
+    if (!account) return false
+
+    return account?.messages.some((m) => !m.confirmed)
+}
