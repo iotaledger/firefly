@@ -491,27 +491,27 @@
             "title": "Staking",
             "welcome": "Üdvözöljük a staking irányítópulton",
             "status": {
-                "upcoming": "Az esemény még nem kezdődött el",
+                "upcoming": "Nincs még esemény",
                 "commencing": "Előzetes staking megnyitva",
                 "holdingActive": "Staking folyamatban",
-                "holdingInactive": "Staking megnyitva",
+                "holdingInactive": "Staking esemény megnyitva",
                 "inactive": "Staking nem található",
                 "ended": "Staking vége"
             },
             "summary": {
-                "stakedFunds": "Staking-ben részt vevő összeg"
+                "stakedFunds": "Letétbe helyezett összeg"
             },
             "info": {
                 "upcomingSubheader": "Az esemény még nem kezdődött el",
                 "upcomingHeader": "Kérjük jöjjön vissza később",
                 "commencingSubheader": "Készüljön fel a staking eseményre",
-                "commencingHeader": "Előzetesen stake-elje tokenjeit!",
+                "commencingHeader": "Előzetesen helyezze letétbe tokenjeit!",
                 "holdingSubheaderHolding": "Jelenleg staking jutalomban részesül",
                 "holdingSubheaderNotHolding": "IOTA tokenjei révén részesüljön staking jutalomban",
                 "holdingHeaderHolding": "{duration} maradt hátra",
-                "holdingHeaderNotHolding": "Stake-elje tokenjeit!",
+                "holdingHeaderNotHolding": "Helyezze letétbe tokenjeit!",
                 "endedSubheader": "A staking véget ért",
-                "endedHeader": "Thank you!",
+                "endedHeader": "Köszönjük!",
                 "inactiveHeader": "Próbáljon csomópontot váltani",
                 "inactiveSubheader": "Staking nem található"
             },
@@ -639,7 +639,7 @@
         "transaction": {
             "title": "Küldés jóváhagyása",
             "body": "{amount} küldése",
-            "sendingFromStakedAccount": "Olyan tárcából kíván küldeni, amely jelenleg staking eseményen vesz részt. Ez azzal járhat, hogy a továbbiakban tokenjei nem vesznek részt a staking eseményen. A tranzakciót nyugodtan végrehajthatja, de a fennmaradó összeget valószínűleg újra stake-elnie kell majd."
+            "sendingFromStakedAccount": "Olyan tárcából kíván küldeni, amely jelenleg letétbe van helyezve. Ez azzal járhat, hogy a továbbiakban tokenjei lesznek letétbe helyezve. A tranzakciót nyugodtan végrehajthatja, de a fennmaradó összeget valószínűleg újra letétbe kell majd helyeznie."
         },
         "balanceFinder": {
             "title": "Egyenlegkereső",
@@ -721,32 +721,32 @@
         "stakingNotice": {
             "upcomingDate": "A staking még nem kezdődött el",
             "commencingDate": "A staking még nem kezdődött el",
-            "body": "A tokenjei előzetes stake-elésével biztosíthatja, hogy a staking kezdetétől fogva automatikusan megkapja a tokenjei után a jutalmat.",
-            "ok": "Ok, értem"
+            "body": "A tokenjei előzetes letétbe helyezésével biztosíthatja, hogy a staking kezdetétől fogva automatikusan megkapja a tokenjei után a jutalmat.",
+            "ok": "Rendben, értem"
         },
         "stakingManager": {
-            "title": "Staking beállítások",
-            "description": "Egy tárca stake-elésével saját magának küld egy tranzakciót, melyben jelzi, hogy a tokenjeivel részt kíván venni a staking eseményen. A tokenjeit bármikor elköltheti, de ebben az esetben a továbbiakban nem kap staking jutalmat.",
-            "totalFundsStaked": "Teljes stake-elt összeg",
-            "stakedSuccessfully": "A(z) {account} számlán lévő tokenjei részt vesznek a staking eseményen.",
-            "unstakedSuccessfully": "A(z) {account} számlán lévő tokenjei nem vesznek részt a staking eseményen."
+            "title": "Letétek kezelése",
+            "description": "Egy tárca letétbe helyezésével saját magának küld egy tranzakciót, melyben jelzi, hogy a tokenjeivel részt kíván venni a staking eseményen. A tokenjeit bármikor elköltheti, de ebben az esetben a továbbiakban nem kap staking jutalmat.",
+            "totalFundsStaked": "Teljes letétbe helyezett összeg",
+            "stakedSuccessfully": "A(z) {account} számlán lévő tokenjei letétbe lettek helyezve.",
+            "unstakedSuccessfully": "A(z) {account} számlán lévő tokenjei ki lettek véve a letétből."
         },
         "stakingConfirmation": {
-            "title": "Airdrop Részvétel",
-            "subtitleStake": "Részt fog venni a staking eseményen",
-            "subtitleMerge": "You are about to merge",
-            "bodyStake": "Ha nem kíván mindkét jutalomban részesülni, alább kiszállhat. Később bármikor kiléphet a staking eseményből, majd újra visszaléphet.",
-            "bodyMerge": "A tokenjei részt vesznek a(z) {airdrop} jutalommal járó staking eseményen. Ha szeretné később megváltoztatni, hogy melyik jutalomban részesüljön, akkor lépjen ki ezzel a tárcával a staking eseményből, majd lépjen be újra.",
+            "title": "Airdrop részvétel",
+            "subtitleStake": "Letétbe helyezés megerősítése",
+            "subtitleMerge": "Összevonást kezdeményezett",
+            "bodyStake": "Ha nem kíván mindkét jutalomban részesülni, alább kiszállhat. Később bármikor kiveheti a letétből, majd újra visszahelyezheti.",
+            "bodyMerge": "A tokenjei részt vesznek a(z) {airdrop} jutalommal járó staking eseményen. Ha szeretné később megváltoztatni, hogy melyik jutalomban részesüljön, akkor vegye ki a letétből tárcáját, majd újra helyezze letétbe.",
             "estimatedAirdrop": "Becsült jutalmak"
         },
         "shimmer-info": {
             "title": "Shimmerről",
-            "body1": "Gratulálunk! A staging eseményen SMR tokeneket kapott jutalmul. A Shimmer egy ösztönzőkkel ellátott teszt hálózat az IOTA hálózat nagyobb fejlesztéseinek kipróbálásához.",
+            "body1": "Gratulálunk! A staking eseményen SMR tokeneket kapott jutalmul. A Shimmer egy ösztönzőkkel ellátott teszt hálózat az IOTA hálózat nagyobb fejlesztéseinek kipróbálásához.",
             "body2": "A Shimmer hálózatot várhatóan 2022-ben fogjuk elindítani. A hálózat indulásakor fogja tudni az SMR tokenjeit felhasználni."
         },
         "assembly-info": {
             "title": "Az Assembly-ről",
-            "body1": "Gratulálunk! A staging eseményen ASMB tokeneket kapott jutalmul. Az Assembly egy többláncú hálózat, mely okos szerződések létrehozásához és életbe léptetésére használható az IOTA hálózat felett.",
+            "body1": "Gratulálunk! A staking eseményen ASMB tokeneket kapott jutalmul. Az Assembly egy többláncú hálózat, mely okos szerződések létrehozásához és életbe léptetésére használható az IOTA hálózat felett.",
             "body2": "Az Assembly hálózatot várhatóan 2022-ben fogjuk elindítani. A hálózat indulásakor fogja tudni az SMR tokenjeit felhasználni."
         }
     },
@@ -864,12 +864,12 @@
         "visitWebsite": "Weboldal megnyitása",
         "howItWorks": "Hogy működik",
         "learnAboutStaking": "Tudjon meg többet a staking eseményről",
-        "stake": "Stake",
-        "unstake": "Unstake",
-        "stakeFunds": "Stake funds",
-        "manageStake": "Manage stake",
-        "merge": "Merge",
-        "mergeFunds": "Merge funds",
+        "stake": "Letétbe helyezés",
+        "unstake": "Letétből kivétel",
+        "stakeFunds": "Összeg letétbe helyezése",
+        "manageStake": "Letét kezelés",
+        "merge": "Összevonás",
+        "mergeFunds": "Egyenlegek összevonása",
         "done": "Kész"
     },
     "general": {
@@ -959,8 +959,8 @@
         "transferBroadcasting": "Tranzakció elküldése",
         "transferComplete": "Utalás végrehajtva",
         "generatingReceiveAddress": "Fogadó cím létrehozása",
-        "broadcasting": "Broadcasting",
-        "confirming": "Confirming",
+        "broadcasting": "Tranzakció elküldése",
+        "confirming": "Megerősítés alatt",
         "creatingAccount": "Tárca létrehozása folyamatban. Kérjük, várjon...",
         "updatingAccount": "Tárca frissítése folyamatban. Kérjük, várjon...",
         "accountSyncing": "Tárca szinkronizása folyamatban",
@@ -988,10 +988,10 @@
         "sendingFrom": "Küldés {account} számláról...",
         "receivedTo": "{account} számlára érkezett",
         "sentFrom": "{account} számláról elküldve",
-        "stakedFor": "Staked for {account}",
-        "unstakedFor": "Unstaked for {account}",
-        "votedFor": "Voted for {account}",
-        "unvotedFor": "Unvoted for {account}",
+        "stakedFor": "{account} letétbe helyezve",
+        "unstakedFor": "{account} letétből kivéve",
+        "votedFor": "{account} szavazott",
+        "unvotedFor": "{account} szavazat visszavonva",
         "receiving": "Fogadás...",
         "sending": "Küldés...",
         "legacyNetwork": "Régi hálózat",
@@ -999,24 +999,24 @@
         "version": "{version} verzió",
         "unknown": "Ismeretlen",
         "none": "Nincs",
-        "days": "day(s)",
+        "days": "nap",
         "time": {
-            "days": "days",
-            "day": "day",
-            "hours": "hours",
-            "hour": "hour",
-            "minutes": "minutes",
-            "minute": "minute",
-            "seconds": "seconds",
-            "second": "second"
+            "days": "nap",
+            "day": "nap",
+            "hours": "óra",
+            "hour": "óra",
+            "minutes": "perc",
+            "minute": "perc",
+            "seconds": "másodperc",
+            "second": "másodperc"
         },
-        "staked": "Staked",
-        "unstaked": "Unstaked",
+        "staked": "Letétbe helyezve",
+        "unstaked": "Letétből kivéve",
         "staking": "Staking",
-        "unstaking": "Unstaking",
-        "notStaked": "Not staked",
-        "stakedFunds": "Staking-ben részt vevő összeg",
-        "unstakedFunds": "Unstaked funds"
+        "unstaking": "Letétből kivétel folyamatban",
+        "notStaked": "Nincs letétben",
+        "stakedFunds": "Letétbe helyezett összeg",
+        "unstakedFunds": "Letétben nem lévő összeg"
     },
     "dates": {
         "today": "Ma",
@@ -1128,7 +1128,7 @@
             "noSynced": "Nincs elérhető szinkronizált csomópont.",
             "answer": "Nem minden csomóponttól érkezett válasz.",
             "forbidden": "Ezzel a csomóponttal tiltott a kapcsolatfelépítés.",
-            "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node."
+            "pluginNotAvailable": "A “{nodePlugin}” kiegészítést a jelenlegi csomópont nem támogatja."
         },
         "network": {
             "mismatch": "A csomópont hálózati azonosítója \"{networkId}\", amely nem egyezik a jelenleg használt hálózattal.",
@@ -1161,7 +1161,7 @@
             "generateAddress": "Hiba történt a cím generálása közben.",
             "timeout": "A Ledger eszköze időtúllépés miatt nem elérhető.",
             "disconnected": "Megszakadt a kapcsolat a Ledger eszközével.",
-            "noStronghold": "Unable to use Stronghold with Ledger profile."
+            "noStronghold": "Hardveres tárca profillal nem lehet a Stronghold-ot használni."
         },
         "popup": {
             "preventClose": "A felugró ablakot nem lehet bezárni."
@@ -1173,10 +1173,10 @@
             "cannotDecodeBech32": "A megadott karakterlánc nem értelmezhető Bech32 címként."
         },
         "participation": {
-            "cannotUseAccount": "Unable to use the specified account.",
-            "cannotFindStakingEvent": "Unable to find staking event.",
-            "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
-            "invalidStakingEventId": "Invalid staking event ID."
+            "cannotUseAccount": "A megadott számlát nem lehet használni.",
+            "cannotFindStakingEvent": "A staking esemény nem található.",
+            "cannotVisitAirdropWebsite": "A(z) {airdrop} weboldal nem elérhető.",
+            "invalidStakingEventId": "Hibás staking esemény azonosító."
         }
     },
     "warning": {
@@ -1184,7 +1184,7 @@
             "http": "A csomópontok HTTP kapcsolaton történő elérése a titkosítatlan adatforgalom miatt biztonsági kockázattal jár."
         },
         "participation": {
-            "noAccounts": "You do not have any accounts available to participate."
+            "noAccounts": "Nincs egyetlen számlája sem amivel részt vehetne."
         }
     },
     "tooltips": {
@@ -1198,35 +1198,35 @@
         },
         "stakingIndicator": {
             "upcoming": {
-                "title": "Staking has not started yet",
-                "body": "Check back later. The staking event has not begun."
+                "title": "A staking még nem kezdődött el",
+                "body": "Kérjük jöjjön vissza később. A staking esemény még nem kezdődött el."
             },
             "commencing": {
-                "title": "Pre-staking is now open",
-                "body": "Pre-stake your tokens, and once staking begins, you will automatically start receiving rewards every 10 seconds."
+                "title": "Előzetes letétbe helyezés elérhető",
+                "body": "Helyezze előzetesen letétbe tokenjeit, így amikor a staking elkezdődik, automatikusan megkapja a jutalmat 10 másodpercenként."
             },
             "activeHolding": {
-                "title": "Staking is now in progress",
-                "body": "Good job. You will receive rewards every 10 seconds."
+                "title": "Staking folyamatban",
+                "body": "Szép munka. 10 másodpercenként jutalmat fog kapni."
             },
             "inactiveHolding": {
-                "title": "Staking is now open",
-                "body": "Stake your IOTA tokens to receive rewards every 10 seconds."
+                "title": "Staking esemény elkezdődött",
+                "body": "Helyezze letétbe IOTA tokenjeit, hogy 10 másodpercenként jutalmat kapjon."
             },
             "inactive": {
-                "title": "No staking events detected",
-                "body": "Open network configuration in Advanced Settings and make sure the current node has the \"Participation\" feature by clicking \"View Info\"."
+                "title": "Nincs staking esemény",
+                "body": "Nyissa meg a hálózati beállításokat a haladó beállításokban és győződjön meg róla, hogy a “részvétel” funkciót támogatja a csomópont az “információk megjelenítésére” kattintva."
             },
             "ended": {
                 "title": "A staking véget ért",
-                "body": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch."
+                "body": "Az Assembly és Shimmer tokeneket az egyes hálózatok indulásakor fogja megkapni a tárcájában."
             }
         },
         "partiallyStakedFunds": {
-            "title": "New unstaked funds: {amount}",
-            "titleNoFunds": "New unstaked funds",
-            "preBody": "You have received tokens on a staked wallet.",
-            "body": "You need to manually stake these new funds to receive airdrop rewards for them."
+            "title": "Új letétbe nem helyezett összeg: {amount}",
+            "titleNoFunds": "Új letétbe nem helyezett összeg",
+            "preBody": "Token érkezett a letétbe helyezett tárcájába.",
+            "body": "Az újonnan érkezett tokeneket kézzel letétbe kell helyeznie, hogy jutalmat kapjon értük."
         },
         "stakingMinRewards": {
             "title": "Várható jutalom minimumérték alatt",
@@ -1235,7 +1235,7 @@
             "continue": "Kérjük még további {duration} ideig vegyen részt a staking eseményen.",
             "bodyBelowMin": "Ez a tárca nem érte el a minimálisan jóváírható {airdrop} jutalmat ({airdropRewardMin}).",
             "bodyWillReachMin": "Még legalább {duration} ideig részt kell vennie a staking eseményen a minimálisan jóváírható jutalomhoz.",
-            "bodyWillNotReachMin": "Nem fogja elérni a minimálisan jóváírható jutalmat a staking esemény végéig, hacsak nem vesz részt több IOTA tokennel.",
+            "bodyWillNotReachMin": "Nem fogja elérni a minimálisan jóváírható jutalmat a staking esemény végéig, hacsak nem helyez letétbe még több IOTA tokent.",
             "bodyDidNotReachMin": "Nem vett részt elegendő IOTA tokennel ahhoz, hogy elérje a minimálisan jóváírható {airdrop} jutalmat ({airdropRewardMin})."
         }
     },
