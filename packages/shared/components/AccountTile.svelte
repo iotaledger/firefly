@@ -37,7 +37,6 @@
     export let size = 'm' // m, l
     export let hidden = false
     export let disabled = false
-
     export let onClick = (): void | string => ''
 
     $: darkModeEnabled = $appSettings.darkMode
