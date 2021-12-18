@@ -130,12 +130,11 @@
     }
 
     onMount(async () => {
-        await getParticipationEvents()
-        await getParticipationOverview()
-
         if (!$activeProfile?.hasVisitedStaking) {
             handleNewStakingFeature()
         }
+        await getParticipationEvents()
+        await getParticipationOverview()
     })
 
     /** Subscribe to transfer state */
