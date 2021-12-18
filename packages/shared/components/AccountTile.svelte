@@ -2,14 +2,13 @@
     import { Icon, Text, Tooltip } from 'shared/components'
     import { appSettings } from 'shared/lib/appSettings'
     import { localize } from 'shared/lib/i18n'
-    import { getAccountParticipationAbility } from 'shared/lib/participation'
     import {
         formatStakingAirdropReward,
-        getMinimumAirdropRewardInfo,
-        getStakingEventFromAirdrop,
+        getFormattedMinimumRewards,
         getTimeUntilMinimumAirdropReward,
         getUnstakedFunds,
         hasAccountReachedMinimumAirdrop,
+        isAccountStaked,
         isStakingPossible,
     } from 'shared/lib/participation/staking'
     import {
@@ -20,16 +19,14 @@
         stakedAccounts,
         stakingEventState,
     } from 'shared/lib/participation/stores'
-    import {
-        AccountParticipationAbility,
-        ParticipationEventState,
-        StakingAirdrop,
-    } from 'shared/lib/participation/types'
+    import { ParticipationEventState, StakingAirdrop } from 'shared/lib/participation/types'
     import { openPopup } from 'shared/lib/popup'
     import { getBestTimeDuration } from 'shared/lib/time'
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { capitalize } from 'shared/lib/utils'
-    import type { WalletAccount } from 'shared/lib/typings/wallet'
+    import { wallet } from 'shared/lib/wallet'
+    import { get } from 'svelte/store'
 
     export let name = ''
     export let balance = ''
@@ -55,37 +52,36 @@
     let isPartiallyStaked = false
     $: isPartiallyStaked = _hasAccount($partiallyStakedAccounts) && isStakingPossible($stakingEventState)
 
-    let isStaked = false
-    $: isStaked = _hasAccount($stakedAccounts) && isStakingPossible($stakingEventState)
+    let isActivelyStaking = false
+    $: isActivelyStaking = _hasAccount($stakedAccounts) && isStakingPossible($stakingEventState)
+
+    let isStakingEnded = false
+    $: isStakingEnded = $stakingEventState === ParticipationEventState.Ended
 
     let isBelowMinimumStakingRewards
+    let isBelowMinimumAssemblyRewards
+    let isBelowMinimumShimmerRewards
+
     $: {
-        /**
-         * NOTE: We are selecting from staked accounts ONLY.
-         * Accounts that have been unstaked will NOT have this warning
-         * tooltip shown.
-         *
-         * If we wish to check unstaked accounts also, then we can use the
-         * accounts on the wallet Svelte store.
-         */
-        const account = _getAccount($stakedAccounts)
-        if (account && getAccountParticipationAbility(account) !== AccountParticipationAbility.HasDustAmount) {
-            /**
-             * NOTE: If the account has reached minimum airdrop already (on another address) and staking is NOT
-             * possible then we won't display the tooltip.
-             */
-            if (hasAccountReachedMinimumAirdrop(account) && !isStakingPossible($stakingEventState)) {
-                isBelowMinimumStakingRewards = false
-            } else {
-                const accountOverview = $participationOverview.find((apo) => apo.accountIndex === account?.index)
-                isBelowMinimumStakingRewards =
-                    accountOverview?.assemblyRewardsBelowMinimum > 0 || accountOverview?.shimmerRewardsBelowMinimum > 0
-            }
+        const { accounts } = get(wallet)
+        const account = _getAccount(get(accounts))
+
+        if (hasAccountReachedMinimumAirdrop(account) && !isStakingPossible($stakingEventState)) {
+            isBelowMinimumStakingRewards = false
+        } else {
+            const accountOverview = $participationOverview.find((apo) => apo.accountIndex === account?.index)
+            isBelowMinimumStakingRewards =
+                accountOverview?.assemblyRewardsBelowMinimum > 0 || accountOverview?.shimmerRewardsBelowMinimum > 0
+            isBelowMinimumAssemblyRewards = accountOverview?.assemblyRewardsBelowMinimum > 0
+            isBelowMinimumShimmerRewards = accountOverview?.shimmerRewardsBelowMinimum > 0
         }
     }
 
     let showWarningState = false
-    $: showWarningState = isPartiallyStaked || isBelowMinimumStakingRewards
+    $: showWarningState =
+        isPartiallyStaked ||
+        (isBelowMinimumStakingRewards && !_hasAccount($stakedAccounts) && isStakingPossible($stakingEventState)) ||
+        (isBelowMinimumStakingRewards && isStakingEnded)
 
     let showTooltip = false
     let tooltipAnchor
@@ -115,6 +111,9 @@
     $: $participationOverview, (tooltipText = getLocalizedTooltipText())
 
     const getLocalizedTooltipText = (): { title: string; body: string } => {
+        const { accounts } = get(wallet)
+        const account = _getAccount(get(accounts))
+
         if (isPartiallyStaked) {
             return {
                 title: localize(
@@ -130,42 +129,84 @@
                 body: localize('tooltips.partiallyStakedFunds.body'),
             }
         } else if (isBelowMinimumStakingRewards) {
-            const account = _getAccount($stakedAccounts)
-            const [minRewards, minAirdrop, amountStaked] = getMinimumAirdropRewardInfo(account)
-            const airdropRewardMin = formatStakingAirdropReward(
-                minAirdrop,
-                getStakingEventFromAirdrop(minAirdrop)?.information.payload.requiredMinimumRewards,
-                minAirdrop === StakingAirdrop.Assembly ? 6 : 0
-            )
+            const shimmerMinimumRewards = getFormattedMinimumRewards(StakingAirdrop.Shimmer)
+            const assemblyMinimumRewards = getFormattedMinimumRewards(StakingAirdrop.Assembly)
 
             if ($stakingEventState === ParticipationEventState.Ended) {
+                const _getBody = () => {
+                    let body = ''
+                    if (isBelowMinimumAssemblyRewards) {
+                        body = `${localize('tooltips.stakingMinRewards.bodyDidNotReachMin', {
+                            values: {
+                                airdrop: capitalize(StakingAirdrop.Assembly),
+                                airdropRewardMin: assemblyMinimumRewards,
+                            },
+                        })} `
+                    }
+                    if (isBelowMinimumShimmerRewards) {
+                        body += `${localize('tooltips.stakingMinRewards.bodyDidNotReachMin', {
+                            values: {
+                                airdrop: capitalize(StakingAirdrop.Shimmer),
+                                airdropRewardMin: shimmerMinimumRewards,
+                            },
+                        })} `
+                    }
+                    return body
+                }
                 return {
                     title: localize('tooltips.stakingMinRewards.title'),
-                    body: localize(
-                        'tooltips.stakingMinRewards.bodyDidNotReachMin',
-                        { values: { airdrop: capitalize(airdrop), airdropRewardMin, } }
-                    )
+                    body: _getBody(),
                 }
-            } else {
-                const timeNeeded = <number>getTimeUntilMinimumAirdropReward(account)
+            } else if (!isAccountStaked(account?.id) && isStakingPossible($stakingEventState)) {
+                const timeNeededShimmer = <number>getTimeUntilMinimumAirdropReward(account, StakingAirdrop.Shimmer)
+                const timeNeededAssembly = <number>getTimeUntilMinimumAirdropReward(account, StakingAirdrop.Assembly)
                 const remainingTime =
                     airdrop === StakingAirdrop.Assembly ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
-                if (timeNeeded > remainingTime) {
-                    return {
-                        title: localize('tooltips.stakingMinRewards.title'),
-                        body: `${localize('tooltips.stakingMinRewards.bodyBelowMin', {
-                            values: { airdrop: capitalize(minAirdrop), airdropRewardMin, },
-                        })} ${localize('tooltips.stakingMinRewards.bodyWillNotReachMin')}`,
+                const _getBody = () => {
+                    let body = ''
+                    if (isBelowMinimumAssemblyRewards) {
+                        if (timeNeededAssembly > remainingTime) {
+                            body = `${localize('tooltips.stakingMinRewards.bodyBelowMin', {
+                                values: {
+                                    airdrop: capitalize(StakingAirdrop.Assembly),
+                                    airdropRewardMin: assemblyMinimumRewards,
+                                },
+                            })} ${localize('tooltips.stakingMinRewards.bodyWillNotReachMin')} `
+                        } else {
+                            body = `${localize('tooltips.stakingMinRewards.bodyBelowMin', {
+                                values: {
+                                    airdrop: capitalize(StakingAirdrop.Assembly),
+                                    airdropRewardMin: assemblyMinimumRewards,
+                                },
+                            })} ${localize('tooltips.stakingMinRewards.bodyWillReachMin', {
+                                values: { duration: getBestTimeDuration(timeNeededAssembly) },
+                            })}\n\n`
+                        }
                     }
-                } else {
-                    return {
-                        title: localize('tooltips.stakingMinRewards.title'),
-                        body: `${localize('tooltips.stakingMinRewards.bodyBelowMin', {
-                            values: { airdrop: capitalize(minAirdrop), airdropRewardMin, },
-                        })} ${localize('tooltips.stakingMinRewards.bodyWillReachMin', {
-                            values: { duration: getBestTimeDuration(timeNeeded) },
-                        })}`,
+                    if (isBelowMinimumShimmerRewards) {
+                        if (timeNeededShimmer > remainingTime) {
+                            body += `${localize('tooltips.stakingMinRewards.bodyBelowMin', {
+                                values: {
+                                    airdrop: capitalize(StakingAirdrop.Shimmer),
+                                    airdropRewardMin: shimmerMinimumRewards,
+                                },
+                            })} ${localize('tooltips.stakingMinRewards.bodyWillNotReachMin')}`
+                        } else {
+                            body += `${localize('tooltips.stakingMinRewards.bodyBelowMin', {
+                                values: {
+                                    airdrop: capitalize(StakingAirdrop.Shimmer),
+                                    airdropRewardMin: shimmerMinimumRewards,
+                                },
+                            })} ${localize('tooltips.stakingMinRewards.bodyWillReachMin', {
+                                values: { duration: getBestTimeDuration(timeNeededShimmer) },
+                            })}`
+                        }
                     }
+                    return body
+                }
+                return {
+                    title: localize('tooltips.stakingMinRewards.title'),
+                    body: _getBody(),
                 }
             }
         }
@@ -249,7 +290,7 @@
 <button
     on:click={handleTileClick}
     class="bg-gray-100 dark:bg-gray-900 hover:bg-{color}-500 size-{size} group rounded-xl font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'}"
-    class:staked={isStaked}
+    class:staked={isActivelyStaking}
     class:partial-stake={showWarningState}
     class:airdrop
     class:hidden-wallet={hidden}
@@ -264,7 +305,7 @@
                         height="16"
                         classes="mt-0.5 fill-current text-yellow-600 group-hover:text-white" />
                 </div>
-            {:else if isStaked}
+            {:else if isActivelyStaking}
                 <Icon
                     icon="tokens"
                     width="16"
@@ -305,7 +346,7 @@
 </button>
 {#if showTooltip}
     <Tooltip anchor={tooltipAnchor} position="right">
-        <Text type="p" classes="text-gray-900 bold mb-1 text-left">{tooltipText?.title}</Text>
+        <Text type="p" classes="text-gray-900 bold mb-2 text-left">{tooltipText?.title}</Text>
         <Text type="p" secondary classes="text-left">{tooltipText?.body}</Text>
     </Tooltip>
 {/if}
