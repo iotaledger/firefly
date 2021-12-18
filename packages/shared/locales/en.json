@@ -1000,16 +1000,11 @@
         "version": "Version {version}",
         "unknown": "Unknown",
         "none": "None",
-        "days": "day(s)",
         "time": {
-            "days": "days",
-            "day": "day",
-            "hours": "hours",
-            "hour": "hour",
-            "minutes": "minutes",
-            "minute": "minute",
-            "seconds": "seconds",
-            "second": "second"
+            "days": "{days, plural, one {1 day} other {# days}}",
+            "hours": "{hours, plural, one {1 hour} other {# hours}}",
+            "minutes": "{minutes, plural, one {1 minute} other {# minutes}}",
+            "seconds": "{seconds, plural, one {1 second} other {# seconds}}"
         },
         "staked": "Staked",
         "unstaked": "Unstaked",
