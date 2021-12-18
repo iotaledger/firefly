@@ -525,7 +525,7 @@
                 },
                 "shimmer": {
                     "name": "Shimmer",
-                    "description": "Das Staging-Netzwerk als Treiber wichtiger Innovationen auf IOTA. Alles ist möglich. Wie sich Shimmer in Zukunft entwickelt, liegt ganz bei dir."
+                    "description": "Das incentivierte Staging-Netzwerk, auf welchem wichtige Innovationen für IOTA vorangetrieben werden. Wie sich Shimmer in Zukunft entwickelt, liegt ganz bei dir. Alles ist möglich."
                 }
             }
         }
@@ -726,7 +726,7 @@
         },
         "stakingManager": {
             "title": "Staking Verwaltung",
-            "description": "Wenn du mit einer Wallet am Staking teilnimmst, sendest du eine Transaktion an dich selbst und markierst deine Token somit als \"gestaked\". Du kannst deine Token jederzeit transferieren, bekommst für diese dann aber keine weiteren Staking-Rewards.",
+            "description": "Wenn du mit einer Wallet am Staking teilnimmst, sendest du eine Transaktion an dich selbst und markierst deine Token als \"gestaked\". Du kannst deine Token jederzeit transferieren, bekommst für diese dann aber keine weiteren Staking-Rewards.",
             "totalFundsStaked": "Gestaktes Guthaben (gesamt)",
             "stakedSuccessfully": "Dein Guthaben aus {account} wurde gestaked.",
             "unstakedSuccessfully": "Dein Guthaben in {account} wird nicht mehr gestaked."
@@ -735,8 +735,8 @@
             "title": "Airdrop-Teilnahme",
             "subtitleStake": "Du bist dabei zu staken",
             "subtitleMerge": "Wird zusammengeführt",
-            "bodyStake": "Wenn du an einem Airdrops nicht teilnehmen möchtest, kannst du diesen unten abwählen. Du hast jederzeit die Möglichkeit, das Staking aufzuheben und erneut zu staken.",
-            "bodyMerge": "Deine Guthaben werden für {airdrop} gestaked. Um erneut wählen zu können, an welchen Airdops du teilnimmst, musst du das Staking für deine Wallet aufheben und erneut staken.",
+            "bodyStake": "Wenn du an einem Airdrop nicht teilnehmen möchtest, kannst du diesen unten abwählen. Du hast jederzeit die Möglichkeit, das Staking aufzuheben und erneut zu staken.",
+            "bodyMerge": "Dein Guthaben wird für {airdrop} gestaked. Um erneut wählen zu können, an welchen Airdops du teilnimmst, musst du das Staking für deine Wallet aufheben und erneut staken.",
             "estimatedAirdrop": "Geschätzte Rewards"
         },
         "shimmer-info": {
@@ -1016,7 +1016,7 @@
         "unstaking": "Staking aufheben",
         "notStaked": "Nicht gestaked",
         "stakedFunds": "Gestakte Guthaben",
-        "unstakedFunds": "Ungestakte Guthaben"
+        "unstakedFunds": "Ungestaktes Guthaben"
     },
     "dates": {
         "today": "Heute",
@@ -1223,10 +1223,10 @@
             }
         },
         "partiallyStakedFunds": {
-            "title": "Neue nicht gestakte Guthaben: {amount}",
+            "title": "Neues nicht gestaktes Guthaben: {amount}",
             "titleNoFunds": "Neue nicht gestakte Guthaben",
             "preBody": "Du hast Token auf einer für Staking genutzten Wallet empfangen.",
-            "body": "Du musst die neuen Guthaben manuell staken, um dafür Airdrop-Belohnungen zu erhalten."
+            "body": "Du musst das neue Guthaben manuell staken, um dafür Airdrop-Rewards zu erhalten."
         },
         "stakingMinRewards": {
             "title": "Unterhalb des minimalen Reward-Werts",
