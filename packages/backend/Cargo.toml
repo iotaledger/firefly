@@ -8,7 +8,7 @@ exclude = ["/bindings", "/api-wrapper"]
 [dependencies]
 tokio = { version = "1.12.0", default-features = false }
 once_cell = { version = "1.8.0", default-features = false }
-iota-wallet = { git = "https://github.com/iotaledger/wallet.rs", rev = "e4d09e5fb89c8e6bd57c9732feadfa80b18ed796", default-features = false, features = ["stronghold", "ledger-nano", "ledger-nano-simulator", "participation"] }
+iota-wallet = { git = "https://github.com/iotaledger/wallet.rs", rev = "ed7802db75a076870d7c18c6071e8e272ac4f8b7", default-features = false, features = ["stronghold", "ledger-nano", "ledger-nano-simulator", "participation"] }
 serde = { version = "1.0.130", default-features = false, features = ["derive"] }
 serde_json = { version = "1.0.68", default-features = false }
 riker = "0.4.2"
