@@ -23,8 +23,8 @@
             },
             "addMore": "Více profilů můžete přidat později.",
             "developer": {
-                "label": "Developer profile",
-                "info": "Connect to public and private IOTA networks"
+                "label": "Profil vývojáře",
+                "info": "Připojit se k veřejným a soukromým sítím IOTA"
             }
         },
         "setup": {
@@ -312,7 +312,7 @@
             "theme": {
                 "title": "Motiv",
                 "description": "",
-                "advice": "Restart the Firefly application for changes to the system theme to take effect"
+                "advice": "Restartujte Firefly aplikaci, aby se projevily změny systémového motivu"
             },
             "language": {
                 "title": "Jazyk",
@@ -328,14 +328,14 @@
             },
             "networkStatus": {
                 "title": "Stav sítě",
-                "description": "Displays the status of the node you are currently connected to"
+                "description": "Zobrazí stav uzlu, ke kterému jste aktuálně připojeni"
             },
             "exportStronghold": {
-                "title": "Export backup",
+                "title": "Exportovat zálohu",
                 "description": "Exportovat do Stronghold souboru - kompletní šifrovaná záloha vašich peněženek a poslední historie transakcí"
             },
             "appLock": {
-                "title": "Automatic lock",
+                "title": "Automatický zámek",
                 "description": "Čas nečinnosti před uzamknutím peněženek a odhlášeni",
                 "durationMinute": "{time, plural, one {1 minuta} other {# minut}}",
                 "durationHour": "{time, plural, one {# hodina} other {# hodin}}"
@@ -365,8 +365,8 @@
                 "description": "Odstraní profil, peněženky a historii transakcí. Ujistěte se, že máte zálohu"
             },
             "deepLinks": {
-                "title": "IOTA links",
-                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
+                "title": "IOTA odkazy",
+                "description": "Automaticky vyplnit transakční údaje ve Firefly po kliknutí na odkaz IOTA"
             },
             "networkConfiguration": {
                 "title": "Network config",

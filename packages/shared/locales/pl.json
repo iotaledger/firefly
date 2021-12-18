@@ -470,7 +470,7 @@
                     "unlocked": "Odblokowany"
                 },
                 "strongholdBackup": {
-                    "title": "Kopia zapasowa portfela",
+                    "title": "Kopia zapasowa",
                     "weeksAgo": "{weeks, plural, one {# tydzień} few {# tygodnie} many {# tygodni} other {# tygodni}} temu"
                 }
             },
@@ -552,7 +552,7 @@
             "lastBackup": "Ostatnia kopia została wykonana {date}",
             "backupDescription": "Regularne wykonywanie kopii zapasowej jest bardzo ważne. Mamy wtedy pewność co do bezpieczeństwa swoich portfeli oraz historii transakcji.",
             "backupWarning": "Jeśli utracisz swoją kopię zapasową i wyrazy ratunkowe, stracisz dostęp do swoich środków.",
-            "notBackedUp": "Nie wykonano kopii zapasowej",
+            "notBackedUp": "Nie wykonano",
             "notBackedUpDescription": "Nie wykonałeś kopii zapasowej swoich portfeli",
             "saving": "Zapisywanie..."
         },
@@ -734,20 +734,20 @@
         "stakingConfirmation": {
             "title": "Uczestnictwo w airdropie",
             "subtitleStake": "Zamierzasz stakować",
-            "subtitleMerge": "Zamierzasz scalić",
+            "subtitleMerge": "Zamierzasz dołączyć",
             "bodyStake": "Jeśli nie chcesz uczestniczyć w obu airdropach, możesz dokonać wyboru poniżej. W każdej chwili możesz odstakować oraz ponownie stakować swoje tokeny.",
-            "bodyMerge": "Twoje środki zostaną stakowane na {airdrop}. Aby zmienić airdropy, w których chcesz uczestniczyć, odstakuj ten portfel i stakuj go ponownie.",
+            "bodyMerge": "Te środki zostaną stakowane w ramach {airdrop}. Aby zmienić airdropy, w których chcesz uczestniczyć, odstakuj ten portfel i wykonaj staking ponownie.",
             "estimatedAirdrop": "Szacowana nagroda"
         },
         "shimmer-info": {
             "title": "O Shimmer",
             "body1": "Gratulacje, zdobyłeś tokeny SMR jako nagrodę za staking. Shimmer to sieć rozwojowa do testowania głównych udoskonaleń technologii IOTA.",
-            "body2": "Uruchomienie Shimmer jest naszym celem na rok 2022. Twoje tokeny będą dostępne do transferu po uruchomieniu sieci."
+            "body2": "Uruchomienie Shimmer jest planowane na rok 2022. Twoje tokeny będą dostępne do transferu po uruchomieniu sieci."
         },
         "assembly-info": {
             "title": "O Assembly",
             "body1": "Gratulacje, zdobyłeś tokeny ASMB jako nagrodę za staking. Assembly to wielołańcuchowa sieć do wdrażania skalowalnych smart kontraktów IOTA.",
-            "body2": "Uruchomienie Assembly jest naszym celem na rok 2022. Twoje tokeny będą dostępne do transferu po uruchomieniu sieci."
+            "body2": "Uruchomienie Assembly jest planowane na rok 2022. Twoje tokeny będą dostępne do transferu po uruchomieniu sieci."
         }
     },
     "charts": {
@@ -868,8 +868,8 @@
         "unstake": "Odstakuj",
         "stakeFunds": "Stakuj środki",
         "manageStake": "Zarządzaj stakingiem",
-        "merge": "Scal",
-        "mergeFunds": "Scal środki",
+        "merge": "Dołącz",
+        "mergeFunds": "Dołącz środki",
         "done": "Gotowe"
     },
     "general": {
@@ -988,8 +988,8 @@
         "sendingFrom": "Wysyłanie z {account}",
         "receivedTo": "Odebrano na {account}",
         "sentFrom": "Wysłano z {account}",
-        "stakedFor": "Staking przez {account}",
-        "unstakedFor": "Odstakowano przez {account}",
+        "stakedFor": "Stakowano {account}",
+        "unstakedFor": "Odstakowano {account}",
         "votedFor": "Zagłosowano przez {account}",
         "unvotedFor": "Wycofano głos przez {account}",
         "receiving": "Odbieranie",
@@ -1225,17 +1225,17 @@
         "partiallyStakedFunds": {
             "title": "Nowe niestakowane środki: {amount}",
             "titleNoFunds": "Nowe niestakowane środki",
-            "preBody": "Otrzymałeś tokeny na stakowany portfel.",
-            "body": "Musisz ręcznie stakować te nowe środki, aby otrzymać za nie nagrody airdrop."
+            "preBody": "Otrzymałeś tokeny na portfel, który stakujesz.",
+            "body": "Musisz ręcznie stakować te nowe środki, aby otrzymywać za nie nagrody airdrop."
         },
         "stakingMinRewards": {
             "title": "Poniżej minimalnej wartości nagrody",
-            "titleMinBalance": "Potrzeba minimum {amount}",
+            "titleMinBalance": "Wymagane minimum to {amount}",
             "bodyMinBalace": "Ten portfel nie ma wystarczającej ilości tokenów IOTA, aby osiągnąć minimalną nagrodę w airdropie i dlatego nie może być on stakowany.",
             "continue": "Kontynuuj staking jeszcze przez {duration}.",
             "bodyBelowMin": "Ten portfel nie osiągnął minimalnej wartości nagrody dla {airdrop} ({airdropRewardMin}).",
             "bodyWillReachMin": "Musisz stakować przez kolejne {duration}, aby osiągnąć minimum.",
-            "bodyWillNotReachMin": "Nie osiągniesz minimum podczas pozostałego okresu stakingu, dopóki nie ulokujesz większej ilości IOTA.",
+            "bodyWillNotReachMin": "Nie osiągniesz minimum podczas pozostałego okresu stakingu, dopóki nie stakujesz większej ilości IOTA.",
             "bodyDidNotReachMin": "Nie stakowałeś wystarczającej ilości IOTA, aby osiągnąć minimalną nagrodę za {airdrop} ({airdropRewardMin})."
         }
     },

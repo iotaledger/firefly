@@ -15,22 +15,22 @@
         },
         "profile": {
             "title": "إنشاء ملف شخصي",
-            "profileName": "Profile name",
+            "profileName": "اسم الملف الشخصي",
             "body1": "يمكنك إنشاء ملفات شخصية متعددة للمستخدمين لتنظيم محافظك وتحسين الخصوصية.",
             "body2": {
-                "first": "For now, let's start with your first profile name.",
-                "nonFirst": "For now, let's start with your profile name."
+                "first": "لنبدأ بالتعرف عليك, ماذا ترغب أن يكون عنوان ملفك الشخصي الأول.",
+                "nonFirst": "لنبدأ بالتعرف عليك, ماذا ترغب أن يكون عنوان ملفك الشخصي."
             },
-            "addMore": "You can add more profiles later.",
+            "addMore": "يمكنك إضافة أشخاص آخرين لاحقا.",
             "developer": {
-                "label": "Developer profile",
-                "info": "Connect to public and private IOTA networks"
+                "label": "لمحة شخصية عن مطور البرنامج",
+                "info": "تواصل مع شبكات IOTA العامة والخاصة"
             }
         },
         "setup": {
             "title": "تأسيس محفظة",
             "chrysalisTitle": "تحديث شبكة Chrysalis",
-            "chrysalisBody": "From April 21st 2021, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
+            "chrysalisBody": "ابتداءً من 21 أبريل ، يمكن للمستخدمين ترحيل عملاتهم الرقمية إلى شبكة \"كريسالس\" الجديدة. ننصحك بترحيل عملاتك الرقمية الموجودة في أقرب وقت ممكن.",
             "learnMore": "تعرف على الترحيل"
         },
         "secure": {
@@ -39,30 +39,30 @@
             "body2": "إذا قمت بملء مجموعة الاسترداد وتخزينها بأمان، سوف تكون دائماً قادراً على استرداد محفظتك."
         },
         "create": {
-            "title": "Create a wallet",
-            "body": "Create a new wallet. You can choose a regular software wallet or if you have a Ledger device you can set up a hardware wallet.",
+            "title": "إنشاء محفظة عملات رقمية",
+            "body": "إنشاء محفظة عملات رقمية جديدة, يمكنك الاختيار بين محفظة برمجية على الشبكة أو إذا كان لديك جهاز Ledger خاص بك يمكنك إعداد محفظة محمولة عليه.",
             "softwareAccount": {
-                "title": "I want a software wallet",
-                "description": "Create a 24-word Recovery Phrase"
+                "title": "أريد إشاء محفظة برمجية",
+                "description": "إعداد 24 كلمة لإسترداد محتويات المحفظة في حالات خاصة"
             },
             "ledgerAccount": {
-                "title": "I want a hardware wallet",
-                "description": "Ledger Nano S or Nano X required"
+                "title": "اريد محفظة محمولة مثال: Ledger",
+                "description": "أنت بحاجة الى جهاز Ledger نوع: Nano S أو Nano X لإتمام عملية إنشاء الحساب الخاصة بك"
             }
         },
         "setupLedger": {
-            "progress1": "Connect your Ledger",
-            "progress2": "Generate address",
-            "progress3": "Switch Ledger app",
-            "progress4": "Transfer funds",
-            "watchVideo": "Watch video guide",
-            "videoGuide": "Ledger migration video guide"
+            "progress1": "يرجى توصيل جهاز Ledger الخاص بك",
+            "progress2": "إنشاء رقم حساب خاص بك",
+            "progress3": "إذهب الى تطبيق جهاز Ledger",
+            "progress4": "ابدأ بنقل العملات الرقمية",
+            "watchVideo": "فيديو تعليمي: كيف تقوم بإعداد جهاز Ledger",
+            "videoGuide": "فيديو تعليمي: كيف تقوم بنقل العملات الرقمية من والى جهاز Ledger"
         },
         "ledgerInstallationGuide": {
-            "title": "Have you installed the necessary Ledger apps?",
-            "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
-            "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
-            "action": "Yes, I've installed these apps"
+            "title": "هل قمت بتحميل التطبيقات الخاصة بجهاز Ledger؟",
+            "body1": "قبل المتابعة، يجب عليك العثور على كل من تطبيق {legacy} وتطبيق IOTA الجديد وتثبيته من خلال Ledger Live.",
+            "body2": "تأكد من أن لديك أخر إصدار أو تحديث لتطبيق جهاز Ledger الخاص بك. وأي برامج أخرى مرتبطة مع جهازك Ledger يجب أن تكون بأحدث إصدارتها إيضا.",
+            "action": "نعم، لقد قمت بتثبيت هذه التطبيقات"
         },
         "password": {
             "title": "إنشاء كلمة السر",
@@ -121,9 +121,9 @@
             "title": "اكتمل إعداد المحفظة",
             "fundsMigrated": "تم ترحيل الأموال",
             "body": "محفظتك الجديدة جاهزة للاستخدام.",
-            "softwareMigratedBody": "You have successfully migrated your funds to the new network",
-            "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
+            "softwareMigratedBody": "مبروك, لقد قمت بنقل أرصدتك الى الشبكة الجديدة بنجاح",
+            "fireflyLedgerBody": "مبروك, لقد تم استرداد حساب Ledger الخاص بك بنجاح, يمكنك المتابعة الآن.",
+            "trinityLedgerBody": "مبروك, لقد قمت بنقل أرصدتك من جهاز Ledger الخاص بك الى الشبكة الجديدة.",
             "exportMigration": "تصدير سجل الترحيل وإنهاء الإعداد"
         },
         "import": {
@@ -135,8 +135,8 @@
             "importMnemonicDescription": "أدخل عبارة الاسترداد الخاصة بك لاسترداد محافظك",
             "importFile": "لدي نسخة احتياطية للملف",
             "importFileDescription": "تحميل ملف Seedvault أو Stronghold",
-            "importLedger": "I have a Ledger backup",
-            "importLedgerDescription": "Restore or migrate a Ledger profile"
+            "importLedger": "أحتفظ بنسخة إحتياطية لمحتويات جهاز Ledger الخاص بي",
+            "importLedgerDescription": "إستعادة محتويات جهاز Ledger"
         },
         "importFromText": {
             "seed": {
@@ -158,37 +158,37 @@
             "body": "قم باستيراد نسخة احتياطية لاسترداد محفظتك.\nالنسخ الاحتياطية هي إما ملف محصّن (stronghold.) او محفظة ترينيتي seedvault (.kdbx)."
         },
         "importFromLedger": {
-            "title": "Restore or Migrate your Ledger",
-            "body": "Restore an existing Firefly Ledger profile, or migrate your funds from Trinity.",
-            "haveFireflyLedger": "I have a Firefly Ledger backup",
-            "haveFireflyLedgerDescription": "Restore a Firefly profile",
-            "haveTrinityLedger": "I have a Trinity Ledger backup",
-            "haveTrinityLedgerDescription": "Migrate a Trinity profile"
+            "title": "إستعادة محتويات جهاز Ledger الخاص بك",
+            "body": "قم باستعادة محتويات جهاز Ledger الخاص بك المرتبط مع محفظة Firefly, أو قم بنقل أرصدتك من محفظة Trinity.",
+            "haveFireflyLedger": "أحتفظ بنسخة أحتياطية لمحفظة Firefly المرتبطة بجهاز Ledger الخاص بي",
+            "haveFireflyLedgerDescription": "إستعادة محتويات محفظة Firefly",
+            "haveTrinityLedger": "أحتفظ بنسخة أحتياطية لمحفظة Trinity المرتبطة بجهاز Ledger الخاص بي",
+            "haveTrinityLedgerDescription": "نقل محتويات محفظة Trinity"
         },
         "connectLedger": {
-            "title": "Connect your Ledger to Firefly",
-            "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed.",
-            "trafficLight1": "Connect and unlock your Ledger with your PIN",
-            "trafficLight2": "Open the new IOTA app on your Ledger",
-            "tips": "Tips if your Ledger isn’t connecting"
+            "title": "يرجى توصيل جهاز Ledger الخاص بك بمحفظة Firefly",
+            "body": "لكي يتم العثور على جهاز Ledger الخاص بك بواسطة محفظة Firefly ، يرجى التأكد من إغلاق تطبيق Ledger Live الرسمي.",
+            "trafficLight1": "يرجى توصيل جهاز Ledger الخاص بك وإدخال رقم التعريف الشخصي PIN",
+            "trafficLight2": "يرجى فتح تطبيق IOTA الجديد على جهاز Ledger الخاص بك",
+            "tips": "إذا لم تستطع ربط جهاز Ledger الخاص بك أو لم يتم التعرف عليه, إتبع الارشادات التالية"
         },
         "restoreFromFireflyLedger": {
-            "title": "Restore Your Ledger Profile",
-            "body": "Press restore to complete the setup process and restore your wallets, balances and transaction history.",
-            "restoring": "Restoring from Ledger..."
+            "title": "إستعادة محتويات جهاز Ledger",
+            "body": "إضغط على إستعادة المحتويات لإكمال العملية واستعادة محفظتك وأرصدتك وسجل المعاملات النقدية.",
+            "restoring": "استعادة المحتويات من جهاز Ledger الخاص بك..."
         },
         "legacyLedgerIntro": {
-            "title": "Start your Ledger migration using Firefly",
-            "body1": "Firefly will help you to transfer your tokens to the new Chrysalis network.",
-            "body2": "After the migration, you will be able to send and receive your tokens using your Ledger with Firefly.",
-            "readMore": "What to expect from the migration process"
+            "title": "إبدأ بنقل الارصدة من جهاز Ledger الخاص بك باستخدام محفظة Firefly",
+            "body1": "ستساعدك محفظة Firefly بنقل العملات الرقمية الخاص بك الى شبكة Chrysalis الجديدة.",
+            "body2": "بعد أن تتم عملية النقل بنجاح, ستكون قادرا على ارسال واستقبال العملات الرقمية من خلال جهاز Ledger الخاص بك مباشرة عبر محفظة Firefly.",
+            "readMore": "ما يمكن توقعه من عملية نقل الارصدة"
         },
         "generateNewLedgerAddress": {
             "title": "إنشاء عنوان جديد",
-            "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
-            "confirmTitle": "Confirm the new address",
-            "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
-            "confirmedTitle": "Address confirmed",
+            "body": "يجب عليك أن تنشأ حساب جديد لنقل الارصدة من العملات الرقمية باستخدام محفظة Firefly. انقر على الزر أدناه للمتابعة.",
+            "confirmTitle": "أكد حسابك الجديد",
+            "confirmBody": "للأمان، يرجى مقارنة الحساب الذي تم إنشاؤه على جهاز Ledger الخاص بك مع الحساب المعروض أدناه. إذا كان متطابق ، اضغط على كلا الزرين في Ledger الخاص بك كما هو موضح.",
+            "confirmedTitle": "تم تأكيد الحساب",
             "confirmedBody": "You have confirmed that the address in Firefly matches the one on your Ledger device.",
             "generating": "Generating address"
         },
@@ -491,19 +491,19 @@
             "title": "Staking",
             "welcome": "Welcome to the staking dashboard",
             "status": {
-                "upcoming": "Event not started",
-                "commencing": "Pre-staking open",
-                "holdingActive": "Staking in progress",
-                "holdingInactive": "Staking open",
-                "inactive": "Staking not detected",
-                "ended": "Staking ended"
+                "upcoming": "الفعالية لم تبدأ",
+                "commencing": "التجهيز لعملية الربح من التخزين مفتوح",
+                "holdingActive": "عملية الربح من التخزين في قيد التحضير",
+                "holdingInactive": "عملية الربح من التخزين بدأت",
+                "inactive": "عملية الربح من التخزين غير ظاهرة",
+                "ended": "عملية الربح من التخزين إنتهت"
             },
             "summary": {
-                "stakedFunds": "Staked funds"
+                "stakedFunds": "الارصدة المخزنة"
             },
             "info": {
-                "upcomingSubheader": "Event has not started",
-                "upcomingHeader": "Check back later",
+                "upcomingSubheader": "الفعالية لم تبدأ بعد",
+                "upcomingHeader": "التحقق مرة أخرى لاحقاً",
                 "commencingSubheader": "Get ready for staking",
                 "commencingHeader": "Pre-stake your tokens!",
                 "holdingSubheaderHolding": "Now earning staking rewards",
@@ -513,7 +513,7 @@
                 "endedSubheader": "Staking has now ended",
                 "endedHeader": "Thank you!",
                 "inactiveHeader": "Try changing node",
-                "inactiveSubheader": "Staking not detected"
+                "inactiveSubheader": "عملية الربح من التخزين غير ظاهرة"
             },
             "airdrops": {
                 "holding": "Remaining",
@@ -682,7 +682,7 @@
             }
         },
         "ledgerConnectionGuide": {
-            "title": "Tips if your Ledger isn’t connecting",
+            "title": "إذا لم تستطع ربط جهاز Ledger الخاص بك أو لم يتم التعرف عليه, إتبع الارشادات التالية",
             "steps": {
                 "0": "Make sure Ledger Live is not open on your computer",
                 "1": "Ensure you have unlocked your Ledger device with your PIN",
@@ -859,7 +859,7 @@
         "searchAgain": "البحث مرة أخرى",
         "searching": "جاري البحث...",
         "closeFirefly": "إغلاق الفايرفلاي",
-        "generateAddress": "Generate address",
+        "generateAddress": "إنشاء رقم حساب خاص بك",
         "migrateAgain": "Migrate another index",
         "visitWebsite": "Visit website",
         "howItWorks": "How it works",
@@ -1015,7 +1015,7 @@
         "staking": "Staking",
         "unstaking": "Unstaking",
         "notStaked": "Not staked",
-        "stakedFunds": "Staked funds",
+        "stakedFunds": "الارصدة المخزنة",
         "unstakedFunds": "Unstaked funds"
     },
     "dates": {

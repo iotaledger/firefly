@@ -721,12 +721,12 @@
         "stakingNotice": {
             "upcomingDate": "Staking har inte påbörjats",
             "commencingDate": "Staking har inte påbörjats",
-            "body": "Genom att förbereda staking av dina tillgångar, kommer du automatiskt att börja få belöningar när insatsen börjar.",
+            "body": "Genom att förbereda staking av dina tillgångar, kommer du automatiskt att börja få belöningar när stakingen börjar.",
             "ok": "Ok, jag förstår"
         },
         "stakingManager": {
             "title": "Staking-hantering",
-            "description": "När du stakar en plånbok skickar du en transaktion till dig själv som markerar dessa tillgångar som \"staked\". Du kan överföra dessa IOTA när som helst, men du kommer inte fortsätta att få belöningar för dem.",
+            "description": "När du stakar en plånbok skickar du en transaktion till dig själv som markerar dessa tillgångar som \"stakade\". Du kan överföra dessa IOTA när som helst, men du kommer inte fortsätta att få belöningar för dem.",
             "totalFundsStaked": "Totala tillgångar för staking",
             "stakedSuccessfully": "Dina tillgångar har blivit stakade för {account}.",
             "unstakedSuccessfully": "Din tillgångar är inte längre stakade för {account}."
@@ -746,7 +746,7 @@
         },
         "assembly-info": {
             "title": "Om Assembly",
-            "body1": "Grattis du har tjänat ASMB-tokens som en staking-belöning. Assembly är ett multi-kedje-nätverk för att distribuera skalbara smarta kontrakt på IOTA.",
+            "body1": "Grattis du har förtjänat ASMB-tokens som en stakingbelöning. Assembly är ett multi-kedje-nätverk för att distribuera skalbara smarta kontrakt på IOTA.",
             "body2": "Vi siktar på att lansera Assembly 2022. Dina tokens kommer att bli tillgängliga för överföring när nätverket lanserats."
         }
     },
