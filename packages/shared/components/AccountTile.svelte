@@ -28,6 +28,8 @@
     import { wallet } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
 
+    const NEW_LINE = '\r\n'
+
     export let name = ''
     export let balance = ''
     export let balanceEquiv = ''
@@ -109,7 +111,7 @@
     let tooltipText
     $: $participationOverview, (tooltipText = getLocalizedTooltipText())
 
-    const getLocalizedTooltipText = (): { title: string; body: string } => {
+    const getLocalizedTooltipText = (): { title: string; body: string[] } => {
         const { accounts } = get(wallet)
         const account = _getAccount(get(accounts))
 
@@ -125,7 +127,7 @@
                           }
                         : {}
                 ),
-                body: localize('tooltips.partiallyStakedFunds.body'),
+                body: [localize('tooltips.partiallyStakedFunds.body')],
             }
         } else if (isBelowMinimumStakingRewards) {
             const shimmerMinimumRewards = getFormattedMinimumRewards(StakingAirdrop.Shimmer)
@@ -133,22 +135,22 @@
 
             if ($stakingEventState === ParticipationEventState.Ended) {
                 const _getBody = () => {
-                    let body = ''
+                    let body = []
                     if (isBelowMinimumAssemblyRewards) {
-                        body = `${localize('tooltips.stakingMinRewards.bodyDidNotReachMin', {
+                        body.push(`${localize('tooltips.stakingMinRewards.bodyDidNotReachMin', {
                             values: {
                                 airdrop: capitalize(StakingAirdrop.Assembly),
                                 airdropRewardMin: assemblyMinimumRewards,
                             },
-                        })} `
+                        })}`)
                     }
                     if (isBelowMinimumShimmerRewards) {
-                        body += `${localize('tooltips.stakingMinRewards.bodyDidNotReachMin', {
+                        body.push(`${localize('tooltips.stakingMinRewards.bodyDidNotReachMin', {
                             values: {
                                 airdrop: capitalize(StakingAirdrop.Shimmer),
                                 airdropRewardMin: shimmerMinimumRewards,
                             },
-                        })} `
+                        })}`)
                     }
                     return body
                 }
@@ -162,43 +164,43 @@
                 const remainingTime =
                     airdrop === StakingAirdrop.Assembly ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
                 const _getBody = () => {
-                    let body = ''
+                    let body = []
                     if (isBelowMinimumAssemblyRewards) {
                         if (timeNeededAssembly > remainingTime) {
-                            body = `${localize('tooltips.stakingMinRewards.bodyBelowMin', {
+                            body.push(`${localize('tooltips.stakingMinRewards.bodyBelowMin', {
                                 values: {
                                     airdrop: capitalize(StakingAirdrop.Assembly),
                                     airdropRewardMin: assemblyMinimumRewards,
                                 },
-                            })} ${localize('tooltips.stakingMinRewards.bodyWillNotReachMin')} `
+                            })} ${localize('tooltips.stakingMinRewards.bodyWillNotReachMin')}`)
                         } else {
-                            body = `${localize('tooltips.stakingMinRewards.bodyBelowMin', {
+                            body.push(`${localize('tooltips.stakingMinRewards.bodyBelowMin', {
                                 values: {
                                     airdrop: capitalize(StakingAirdrop.Assembly),
                                     airdropRewardMin: assemblyMinimumRewards,
                                 },
                             })} ${localize('tooltips.stakingMinRewards.bodyWillReachMin', {
                                 values: { duration: getBestTimeDuration(timeNeededAssembly) },
-                            })}\n\n`
+                            })}`)
                         }
                     }
                     if (isBelowMinimumShimmerRewards) {
                         if (timeNeededShimmer > remainingTime) {
-                            body += `${localize('tooltips.stakingMinRewards.bodyBelowMin', {
+                            body.push(`${localize('tooltips.stakingMinRewards.bodyBelowMin', {
                                 values: {
                                     airdrop: capitalize(StakingAirdrop.Shimmer),
                                     airdropRewardMin: shimmerMinimumRewards,
                                 },
-                            })} ${localize('tooltips.stakingMinRewards.bodyWillNotReachMin')}`
+                            })} ${localize('tooltips.stakingMinRewards.bodyWillNotReachMin')}`)
                         } else {
-                            body += `${localize('tooltips.stakingMinRewards.bodyBelowMin', {
+                            body.push(`${localize('tooltips.stakingMinRewards.bodyBelowMin', {
                                 values: {
                                     airdrop: capitalize(StakingAirdrop.Shimmer),
                                     airdropRewardMin: shimmerMinimumRewards,
                                 },
                             })} ${localize('tooltips.stakingMinRewards.bodyWillReachMin', {
                                 values: { duration: getBestTimeDuration(timeNeededShimmer) },
-                            })}`
+                            })}`)
                         }
                     }
                     return body
@@ -343,9 +345,11 @@
         </Text>
     </div>
 </button>
-{#if showTooltip}
+{#if showTooltip && tooltipText?.body}
     <Tooltip anchor={tooltipAnchor} position="right">
         <Text type="p" classes="text-gray-900 bold mb-2 text-left">{tooltipText?.title}</Text>
-        <Text type="p" secondary classes="text-left">{tooltipText?.body}</Text>
+        {#each tooltipText?.body as paragraph}
+            <Text type="p" secondary classes="text-left">{paragraph}</Text>
+        {/each}
     </Tooltip>
 {/if}
