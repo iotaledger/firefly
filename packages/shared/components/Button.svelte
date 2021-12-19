@@ -62,21 +62,28 @@
                 @apply bg-yellow-600;
                 min-width: 100px;
                 span {
-                  @apply text-white;
+                    @apply text-white;
                 }
                 &:hover {
-                  @apply bg-yellow-700;
+                    @apply bg-yellow-700;
                 }
                 &:active,
                 &:focus {
-                  @apply bg-yellow-800;
+                    @apply bg-yellow-800;
                 }
                 &:disabled {
-                  @apply pointer-events-none;
-                  @apply bg-gray-200;
-                  span {
-                    @apply text-gray-500;
-                  }
+                    @apply pointer-events-none;
+                    @apply bg-gray-200;
+                    span {
+                        @apply text-gray-500;
+                    }
+                    &.darkmode {
+                        @apply bg-gray-700;
+                        @apply bg-opacity-10;
+                        span {
+                            @apply text-gray-700;
+                        }
+                    }
                 }
             }
             &.warning {

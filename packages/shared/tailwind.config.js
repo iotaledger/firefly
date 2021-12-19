@@ -169,11 +169,11 @@ module.exports = {
                 purple: '#EFF0FE',
             },
             shimmer: {
-                bg: '#021121',
+                bg: '#020F26',
                 highlight: '#17E1D5',
             },
             assembly: {
-                bg: '#0B0A0E',
+                bg: '#08080C',
                 highlight: '#FF3FF2',
             },
         },
