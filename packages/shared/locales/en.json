@@ -336,9 +336,7 @@
             },
             "appLock": {
                 "title": "Automatic lock",
-                "description": "Inactivity time before your wallets lock and you are logged out",
-                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
-                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
+                "description": "Inactivity time before your wallets lock and you are logged out"
             },
             "changePassword": {
                 "title": "Change password",
@@ -1001,17 +999,6 @@
         "version": "Version {version}",
         "unknown": "Unknown",
         "none": "None",
-        "days": "day(s)",
-        "time": {
-            "days": "days",
-            "day": "day",
-            "hours": "hours",
-            "hour": "hour",
-            "minutes": "minutes",
-            "minute": "minute",
-            "seconds": "seconds",
-            "second": "second"
-        },
         "staked": "Staked",
         "unstaked": "Unstaked",
         "staking": "Staking",
@@ -1027,6 +1014,15 @@
         "weeksAgo": "{time, plural, one {# week} other {# weeks}} ago",
         "monthsAgo": "{time, plural, one {# month} other {# months}} ago",
         "yearsAgo": "{time, plural, one {# year} other {# years}} ago"
+    },
+    "times": {
+        "second": "{time, plural, one {1 second} other {# seconds}}",
+        "minute": "{time, plural, one {1 minute} other {# minutes}}",
+        "hour": "{time, plural, one {1 hour} other {# hours}}",
+        "day": "{time, plural, one {1 day} other {# days}}",
+        "week": "{time, plural, one {1 week} other {# weeks}}",
+        "month": "{time, plural, one {1 month} other {# months}}",
+        "year": "{time, plural, one {1 year} other {# years}}"
     },
     "notifications": {
         "valueTx": "Receiving {{value}} to {{account}}",
@@ -1186,7 +1182,7 @@
             "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
         },
         "participation": {
-            "noAccounts": "You do not have any accounts available to participate."
+            "noAccounts": "You do not have enough balance to stake (minimum 1 Mi)."
         }
     },
     "tooltips": {

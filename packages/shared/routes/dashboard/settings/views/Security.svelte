@@ -15,10 +15,10 @@
 
     function assignTimeoutOptionLabel(timeInMinutes) {
         if (timeInMinutes >= 60) {
-            return locale('views.settings.appLock.durationHour', { values: { time: timeInMinutes / 60 } })
+            return locale('times.hour', { values: { time: timeInMinutes / 60 } })
         }
 
-        return locale('views.settings.appLock.durationMinute', { values: { time: timeInMinutes } })
+        return locale('times.minute', { values: { time: timeInMinutes } })
     }
 
     const lockScreenTimeoutOptions = [1, 5, 10, 30, 60].map((time) => ({

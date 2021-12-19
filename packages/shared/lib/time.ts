@@ -14,6 +14,8 @@ export const SECONDS_PER_MILESTONE = 10
 // DERIVED
 export const SECONDS_PER_DAY = HOURS_PER_DAY * MINUTES_PER_HOUR * SECONDS_PER_MINUTE
 
+type Duration = 'day' | 'hour' | 'minute' | 'second'
+
 /**
  * Formats a duration in milliseconds into the best matching unit, i.e.
  * it will only return a number of days, hours, minutes, or seconds but NOT
@@ -22,32 +24,26 @@ export const SECONDS_PER_DAY = HOURS_PER_DAY * MINUTES_PER_HOUR * SECONDS_PER_MI
  * @method getBestTimeDuration
  *
  * @param {number} millis
- * @param {'days' | 'hours' | 'minutes' | 'seconds'} noDurationUnit
+ * @param {Duration} noDurationUnit
  *
  * @returns {string}
  */
-export const getBestTimeDuration = (
-    millis: number,
-    noDurationUnit: 'days' | 'hours' | 'minutes' | 'seconds' = 'days'
-): string => {
-    const noDurationInLocale = localize(`general.time.${noDurationUnit}`)
-    if (Number.isNaN(millis)) return `0 ${noDurationInLocale}`
+export const getBestTimeDuration = (millis: number, noDurationUnit: Duration = 'day'): string => {
+    const zeroTime = localize(`times.${noDurationUnit || 'day'}`, { values: { time: 0 } })
+
+    if (Number.isNaN(millis)) return zeroTime
 
     const inDays = millis / (HOURS_PER_DAY * MINUTES_PER_HOUR * SECONDS_PER_MINUTE * MILLISECONDS_PER_SECOND)
-    if (inDays > 1) return `${Math.ceil(inDays)} ${localize('general.time.days')}`
-    else if (inDays === 1) return `1 ${localize('general.time.day')}`
+    if (inDays > 1 || inDays === 1) return localize('times.day', { values: { time: Math.floor(inDays) } })
 
     const inHours = millis / (MINUTES_PER_HOUR * SECONDS_PER_MINUTE * MILLISECONDS_PER_SECOND)
-    if (inHours > 1) return `${Math.ceil(inHours)} ${localize('general.time.hours')}`
-    else if (inHours === 1) return `1 ${localize('general.time.hour')}`
+    if (inHours > 1 || inHours === 1) return localize('times.hour', { values: { time: Math.floor(inHours) } })
 
     const inMinutes = millis / (SECONDS_PER_MINUTE * MILLISECONDS_PER_SECOND)
-    if (inMinutes > 1) return `${Math.ceil(inMinutes)} ${localize('general.time.minutes')}`
-    else if (inMinutes === 1) return `1 ${localize('general.time.minute')}`
+    if (inMinutes > 1 || inMinutes === 1) return localize('times.minute', { values: { time: Math.floor(inMinutes) } })
 
     const inSeconds = millis / MILLISECONDS_PER_SECOND
-    if (inSeconds > 1) return `${Math.ceil(inSeconds)} ${localize('general.time.seconds')}`
-    else if (inSeconds === 1) return `1 ${localize('general.time.second')}`
+    if (inSeconds > 1 || inSeconds === 1) return localize('times.second', { values: { time: Math.floor(inSeconds) } })
 
-    return `0 ${noDurationInLocale}`
+    return zeroTime
 }
