@@ -6,15 +6,33 @@
 
 // TODO: Write a function later to flatten all of the object
 //  property paths in locales/en.json.
-const LOCALE_DATA = {
-    'general.time.day': 'day',
-    'general.time.hour': 'hour',
-    'general.time.minute': 'minute',
-    'general.time.second': 'second',
+const getLocaleData = (value?: number) => {
+    const locales = {
+        'times.day': 'day',
+        'times.hour': 'hour',
+        'times.minute': 'minute',
+        'times.second': 'second',
+    }
+
+    if (value !== undefined) {
+        return Object.keys(locales).reduce((acc, key) => {
+            if (value > 1 || value === 0) {
+                acc[key] = `${value} ${locales[key]}s`
+            } else {
+                acc[key] = `${value} ${locales[key]}`
+            }
+
+            return acc
+        }, {})
+    }
+
+    return locales
 }
 
 jest.mock('../../i18n', () => ({
     __esModule: true,
-    locale: (key: string): string => LOCALE_DATA[key] || '',
-    localize: (key: string): string => LOCALE_DATA[key] || '',
+    locale: (key: string, optional?: { values: { time: number } }): string =>
+        getLocaleData(optional.values.time)[key] || '',
+    localize: (key: string, optional?: { values: { time: number } }): string =>
+        getLocaleData(optional.values.time)[key] || '',
 }))
