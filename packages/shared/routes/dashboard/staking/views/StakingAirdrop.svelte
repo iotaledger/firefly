@@ -14,7 +14,7 @@
         stakedAccounts,
         stakingEventState,
     } from 'shared/lib/participation/stores'
-    import { ParticipationEventState, StakingAirdrop } from 'shared/lib/participation/types'
+    import { ParticipationEventState, ParticipationOverview, StakingAirdrop } from 'shared/lib/participation/types'
     import { getBestTimeDuration } from 'shared/lib/time'
     import { capitalize } from 'shared/lib/utils'
 
@@ -23,11 +23,16 @@
     const isAssembly = (): boolean => airdrop === StakingAirdrop.Assembly
     const isShimmer = (): boolean => airdrop === StakingAirdrop.Shimmer
 
+    const parseRemainingTime = (overview: ParticipationOverview): [string, string] => {
+        const formattedValue = getBestTimeDuration(isAssembly() ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime)
+        const timeAmount = parseFloat(formattedValue).toString()
+        const timeUnit = formattedValue.replace(timeAmount.toString(), '')
+
+        return [timeAmount, timeUnit]
+    }
+
     let remainingTimeAmount, remainingTimeUnit
-    $: $participationOverview,
-        ([remainingTimeAmount, remainingTimeUnit] = getBestTimeDuration(
-            isAssembly() ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
-        ).split(' '))
+    $: [remainingTimeAmount, remainingTimeUnit] = parseRemainingTime($participationOverview)
 
     $: stakedAccountsInCurrentAirdrop =
         $stakedAccounts?.filter((account) =>
