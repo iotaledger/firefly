@@ -2,7 +2,7 @@
     import { Animation, Link, Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { localize } from 'shared/lib/i18n'
-    import { STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
+    import { ASSEMBLY_EVENT_ID, STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
     import {
         assemblyStakingRemainingTime,
         participationOverview,
@@ -19,8 +19,7 @@
 
         if (state === ParticipationEventState.Inactive) {
             return null
-        }
-        else if (state === ParticipationEventState.Holding) {
+        } else if (state === ParticipationEventState.Holding) {
             const stakingParticipationIds: string[] = []
             overview.forEach((apo) => {
                 apo.participations.forEach((p) => {
@@ -32,9 +31,13 @@
 
             let fileNumber = 0
             if (stakingParticipationIds.length >= 2) {
-                fileNumber = 2
+                fileNumber = 3
             } else if (stakingParticipationIds.length === 1) {
-                fileNumber = 1
+                if (stakingParticipationIds[0] === ASSEMBLY_EVENT_ID) {
+                    fileNumber = 1
+                } else {
+                    fileNumber = 2
+                }
             }
 
             return `${prefix}-${state}-${fileNumber}`
