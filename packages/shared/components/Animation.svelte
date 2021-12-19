@@ -160,6 +160,10 @@
             lightmode: 'staking/info-holding-2.json',
             darkmode: 'staking/info-holding-2.json',
         },
+        'staking-info-holding-3': {
+            lightmode: 'staking/info-holding-3.json',
+            darkmode: 'staking/info-holding-3.json',
+        },
         'staking-info-upcoming': {
             lightmode: 'staking/info-upcoming.json',
             darkmode: 'staking/info-upcoming.json',

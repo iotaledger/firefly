@@ -579,7 +579,7 @@
 {#if $walletRoute === WalletRoutes.Account && $selectedAccountId}
     <Account {isGeneratingAddress} {onSend} {onInternalTransfer} {onGenerateAddress} {locale} />
 {:else}
-    <div class="wallet-wrapper w-full h-full flex flex-col p-10 flex-1 bg-gray-50 dark:bg-gray-900">
+    <div class="wallet-wrapper relative w-full h-full flex flex-col p-10 flex-1 bg-gray-50 dark:bg-gray-900 z-0">
         <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
             <DashboardPane classes="h-full">
                 <!-- Total Balance, Accounts list & Send/Receive -->
@@ -588,7 +588,7 @@
                         <CreateAccount onCreate={onCreateAccount} {locale} />
                     {:else}
                         <WalletBalance {locale} />
-                        <DashboardPane classes="-mt-5 h-full z-0">
+                        <DashboardPane classes="-mt-5 h-full z-10">
                             <WalletActions
                                 {isGeneratingAddress}
                                 {onSend}

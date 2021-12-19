@@ -310,3 +310,9 @@ export const resetLedgerRoute = (): void => {
     ledgerRoute.set(LedgerRoutes.LegacyIntro)
     ledgerRouteHistory.set([])
 }
+
+export const openSettings = (): void => {
+    previousDashboardRoute.set(get(dashboardRoute))
+    dashboardRoute.set(Tabs.Settings)
+    settingsRoute.set(SettingsRoutes.Init)
+}
