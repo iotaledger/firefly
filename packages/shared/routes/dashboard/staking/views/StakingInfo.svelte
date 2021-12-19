@@ -2,6 +2,7 @@
     import { Animation, Link, Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { localize } from 'shared/lib/i18n'
+    import { STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
     import {
         assemblyStakingRemainingTime,
         participationOverview,
@@ -20,21 +21,20 @@
             return null
         }
         else if (state === ParticipationEventState.Holding) {
-            let numParticipations = 0
+            const stakingParticipationIds: string[] = []
+            overview.forEach((apo) => {
+                apo.participations.forEach((p) => {
+                    if (!stakingParticipationIds.includes(p.eventId) && STAKING_EVENT_IDS.includes(p.eventId)) {
+                        stakingParticipationIds.push(p.eventId)
+                    }
+                })
+            })
 
-            if (overview.some((apo) => apo.shimmerStakedFunds > 0 && apo.assemblyStakedFunds > 0)) {
-                numParticipations = 2
-            } else if (overview.some((apo) => apo.shimmerStakedFunds > 0 || apo.assemblyStakedFunds > 0)) {
-                numParticipations = 1
-            }
-
-            let fileNumber
-            if (numParticipations >= 2) {
+            let fileNumber = 0
+            if (stakingParticipationIds.length >= 2) {
                 fileNumber = 2
-            } else if (numParticipations === 1) {
+            } else if (stakingParticipationIds.length === 1) {
                 fileNumber = 1
-            } else {
-                fileNumber = 0
             }
 
             return `${prefix}-${state}-${fileNumber}`
