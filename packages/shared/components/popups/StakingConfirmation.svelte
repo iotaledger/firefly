@@ -160,7 +160,7 @@
                         bind:this={tooltipAnchors[airdrop]}
                         on:mouseenter={() => toggleTooltip(airdrop)}
                         on:mouseleave={() => toggleTooltip(airdrop)}>
-                        <Icon icon="exclamation" width="30" height="30" classes="text-orange-500" />
+                        <Icon icon="exclamation" width="26" height="26" classes="text-orange-500" />
                     </div>
                 {:else}
                     <Checkbox
