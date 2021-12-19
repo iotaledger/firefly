@@ -30,7 +30,7 @@
         "setup": {
             "title": "ウォレットを設定",
             "chrysalisTitle": "Chrysalisネットワークの更新",
-            "chrysalisBody": "From April 21st 2021, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
+            "chrysalisBody": "2021年4月21日から、ユーザーはトークンを新しいクライサリスネットワークに移行することができます。できるだけ早く既存のトークンを移行することをお勧めします。",
             "learnMore": "移行について詳しく見る"
         },
         "secure": {
@@ -336,9 +336,7 @@
             },
             "appLock": {
                 "title": "自動ロック",
-                "description": "ウォレットがロックされ、ログアウトされるまでの非アクティブ時間",
-                "durationMinute": "{time, plural, one {1 分} other {# 分}}",
-                "durationHour": "{time, plural, one {1 時間} other {# 時間}}"
+                "description": "ウォレットがロックされ、ログアウトされるまでの非アクティブ時間"
             },
             "changePassword": {
                 "title": "パスワードの変更",
@@ -492,24 +490,24 @@
             "welcome": "ステーキングダッシュボードへようこそ",
             "status": {
                 "upcoming": "イベントは開始されていません",
-                "commencing": "Pre-staking open",
-                "holdingActive": "Staking in progress",
+                "commencing": "事前ステーキングオープン",
+                "holdingActive": "ステーキング中",
                 "holdingInactive": "ステーキングオープン",
                 "inactive": "ステーキングが検出されませんでした",
                 "ended": "ステーキング終了"
             },
             "summary": {
-                "stakedFunds": "Staked funds"
+                "stakedFunds": "ステーク資金"
             },
             "info": {
                 "upcomingSubheader": "イベントは開始されていません",
                 "upcomingHeader": "後で確認する",
                 "commencingSubheader": "ステーキングの準備をする",
-                "commencingHeader": "Pre-stake your tokens!",
+                "commencingHeader": "トークンを事前にステーク！",
                 "holdingSubheaderHolding": "ステーキング報酬を獲得中",
                 "holdingSubheaderNotHolding": "IOTAステーキングで報酬を獲得",
                 "holdingHeaderHolding": "残り{duration}",
-                "holdingHeaderNotHolding": "Stake your tokens!",
+                "holdingHeaderNotHolding": "トークンをステークします！",
                 "endedSubheader": "ステーキングは終了しました",
                 "endedHeader": "ありがとうございます!",
                 "inactiveHeader": "ノードを変更してみてください",
@@ -517,11 +515,11 @@
             },
             "airdrops": {
                 "holding": "残り",
-                "commencing": "Until staking begins",
+                "commencing": "ステーキング開始まで",
                 "collectedRewards": "報酬を集めました",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
+                    "description": "Assemblyは、構成可能なスマートコントラクトを構築および展開するための権限のない、拡張性の高いマルチチェーンネットワークです。 Assemblyはweb3の未来です。 "
                 },
                 "shimmer": {
                     "name": "Shimmer",
@@ -727,13 +725,13 @@
         "stakingManager": {
             "title": "ステーキング管理",
             "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
-            "totalFundsStaked": "賭け金の合計",
+            "totalFundsStaked": "ステークの合計",
             "stakedSuccessfully": "Your funds have been staked for {account}.",
             "unstakedSuccessfully": "Your funds have been unstaked for {account}."
         },
         "stakingConfirmation": {
             "title": "Airdrop Participation",
-            "subtitleStake": "You are about to stake",
+            "subtitleStake": "ステークしようとしています",
             "subtitleMerge": "You are about to merge",
             "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
             "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
@@ -864,10 +862,10 @@
         "visitWebsite": "ウェブサイトを開く",
         "howItWorks": "使い方",
         "learnAboutStaking": "ステーキングについて学ぶ",
-        "stake": "Stake",
-        "unstake": "Unstake",
-        "stakeFunds": "Stake funds",
-        "manageStake": "Manage stake",
+        "stake": "ステーク",
+        "unstake": "ステーク解除",
+        "stakeFunds": "ステーク資金",
+        "manageStake": "ステークの管理",
         "merge": "統合",
         "mergeFunds": "資金を統合",
         "done": "完了しました"
@@ -960,7 +958,7 @@
         "transferComplete": "転送完了",
         "generatingReceiveAddress": "入金アドレスを作成",
         "broadcasting": "ブロードキャスト中",
-        "confirming": "Confirming",
+        "confirming": "確認中",
         "creatingAccount": "ウォレットを作成しています。しばらくお待ちください...",
         "updatingAccount": "ウォレットを更新しています。お待ちください...",
         "accountSyncing": "ウォレットを同期しています",
@@ -968,6 +966,7 @@
         "passwordUpdating": "パスワードを更新しています...",
         "passwordSuccess": "パスワードを更新しました",
         "passwordFailed": "パスワードの更新に失敗しました",
+        "syncing": "Syncing",
         "syncingAccounts": "ウォレットを同期中...",
         "exportingStronghold": "Strongholdのエクスポート中...",
         "exportingStrongholdSuccess": "Strongholdのエクスポートに成功しました",
@@ -988,10 +987,10 @@
         "sendingFrom": "{account} から送金中",
         "receivedTo": "{account} へ着金しました",
         "sentFrom": "{account} から送金",
-        "stakedFor": "Staked for {account}",
-        "unstakedFor": "Unstaked for {account}",
-        "votedFor": "Voted for {account}",
-        "unvotedFor": "Unvoted for {account}",
+        "stakedFor": "{account} にステークしました",
+        "unstakedFor": "{account} の解除したステーク",
+        "votedFor": "{account} に投票",
+        "unvotedFor": "{account} の投票を解除",
         "receiving": "着金中",
         "sending": "送金中",
         "legacyNetwork": "レガシーネットワーク",
@@ -999,24 +998,13 @@
         "version": "バージョン {version}",
         "unknown": "不明",
         "none": "なし",
-        "days": "日",
-        "time": {
-            "days": "日",
-            "day": "日",
-            "hours": "時間",
-            "hour": "時間",
-            "minutes": "分",
-            "minute": "分",
-            "seconds": "秒",
-            "second": "秒"
-        },
-        "staked": "Staked",
-        "unstaked": "Unstaked",
+        "staked": "ステーク済み",
+        "unstaked": "解除したステーク",
         "staking": "ステーキング",
-        "unstaking": "Unstaking",
-        "notStaked": "Not staked",
-        "stakedFunds": "Staked funds",
-        "unstakedFunds": "Unstaked funds"
+        "unstaking": "アンステーキング",
+        "notStaked": "ステークされていません",
+        "stakedFunds": "ステーク資金",
+        "unstakedFunds": "解除したステーク資金"
     },
     "dates": {
         "today": "今日",
@@ -1025,6 +1013,15 @@
         "weeksAgo": "{time, plural, one {# 週間} other {# 週間}} 前",
         "monthsAgo": "{time, plural, one {# ヶ月 } other {# ヶ月 }} 前",
         "yearsAgo": "{time, plural, one {# 年 } other {# 年 }} 前"
+    },
+    "times": {
+        "second": "{time, plural, one {1 second} other {# seconds}}",
+        "minute": "{time, plural, one {1 minute} other {# minutes}}",
+        "hour": "{time, plural, one {1 hour} other {# hours}}",
+        "day": "{time, plural, one {1 day} other {# days}}",
+        "week": "{time, plural, one {1 week} other {# weeks}}",
+        "month": "{time, plural, one {1 month} other {# months}}",
+        "year": "{time, plural, one {1 year} other {# years}}"
     },
     "notifications": {
         "valueTx": "{{account}}に{{value}}を着金中",
@@ -1184,7 +1181,7 @@
             "http": "HTTP 経由のノードを使用すると、トラフィックは暗号化されず、セキュリティ上のリスクを引き起こす可能性があります。"
         },
         "participation": {
-            "noAccounts": "You do not have any accounts available to participate."
+            "noAccounts": "You do not have any IOTA."
         }
     },
     "tooltips": {
@@ -1219,24 +1216,26 @@
             },
             "ended": {
                 "title": "ステーキングは終了しました",
-                "body": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch."
+                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
+                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
             }
         },
         "partiallyStakedFunds": {
-            "title": "New unstaked funds: {amount}",
-            "titleNoFunds": "New unstaked funds",
+            "title": "新しい解除したステーク: {amount}",
+            "titleNoFunds": "新しい解除したステーク",
             "preBody": "You have received tokens on a staked wallet.",
             "body": "You need to manually stake these new funds to receive airdrop rewards for them."
         },
         "stakingMinRewards": {
             "title": "Below minimum reward value",
             "titleMinBalance": "{amount} minimum balance required",
-            "bodyMinBalace": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
+            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
             "continue": "Please continue staking for another {duration}.",
             "bodyBelowMin": "This wallet has not reached the minimum reward value for {airdrop} ({airdropRewardMin}).",
             "bodyWillReachMin": "You must stake for another {duration} to reach the minimum.",
-            "bodyWillNotReachMin": "You will not reach the minimum during the remaining staking period unless you stake more IOTA.",
-            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum rewards for {airdrop} ({airdropRewardMin})."
+            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
+            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
         }
     },
     "exports": {

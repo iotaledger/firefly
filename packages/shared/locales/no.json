@@ -1,7 +1,7 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Send, Motta og Håndter dine IOTA tokens",
+            "title": "Send, motta og håndter dine IOTA-tokens",
             "body": "Firefly er den offisielle IOTA-lommeboken."
         },
         "legal": {
@@ -336,9 +336,7 @@
             },
             "appLock": {
                 "title": "Lås automatisk",
-                "description": "Inaktivitetstid før lommeboken låses og du blir logget ut",
-                "durationMinute": "{time, plural, one {1 minutt} other {# minutter}}",
-                "durationHour": "{time, plural, one {1 time} other {# timer}}"
+                "description": "Inaktivitetstid før lommeboken låses og du blir logget ut"
             },
             "changePassword": {
                 "title": "Endre passord",
@@ -505,7 +503,7 @@
                 "upcomingSubheader": "Staking har ikke startet",
                 "upcomingHeader": "Sjekk igjen senere",
                 "commencingSubheader": "Klargjør til staking",
-                "commencingHeader": "Pre-stake dine tokener!",
+                "commencingHeader": "Forhånds-stake dine tokens!",
                 "holdingSubheaderHolding": "Opptjener nå staking belønninger",
                 "holdingSubheaderNotHolding": "Få belønninger ved å stake IOTA",
                 "holdingHeaderHolding": "{duration} gjenstår",
@@ -968,6 +966,7 @@
         "passwordUpdating": "Oppdaterer passord...",
         "passwordSuccess": "Oppdatering av passord var vellykket",
         "passwordFailed": "Oppdatering av passord mislyktes",
+        "syncing": "Syncing",
         "syncingAccounts": "Synkroniserer lommeboken...",
         "exportingStronghold": "Eksporterer Stronghold...",
         "exportingStrongholdSuccess": "Eksporten av Stronghold var vellykket",
@@ -999,17 +998,6 @@
         "version": "Versjon {version}",
         "unknown": "Ukjent",
         "none": "Ingen",
-        "days": "dag(er)",
-        "time": {
-            "days": "dager",
-            "day": "dag",
-            "hours": "timer",
-            "hour": "time",
-            "minutes": "minutter",
-            "minute": "minutt",
-            "seconds": "sekunder",
-            "second": "sekund"
-        },
         "staked": "Staket",
         "unstaked": "Avsluttet staking",
         "staking": "Staking",
@@ -1025,6 +1013,15 @@
         "weeksAgo": "{time, plural, one {# uke} other {# uker}} siden",
         "monthsAgo": "{time, plural, one {# måned} other {# måneder}} siden",
         "yearsAgo": "{time, plural, one {# år} other {# år}} siden"
+    },
+    "times": {
+        "second": "{time, plural, one {1 second} other {# seconds}}",
+        "minute": "{time, plural, one {1 minute} other {# minutes}}",
+        "hour": "{time, plural, one {1 hour} other {# hours}}",
+        "day": "{time, plural, one {1 day} other {# days}}",
+        "week": "{time, plural, one {1 week} other {# weeks}}",
+        "month": "{time, plural, one {1 month} other {# months}}",
+        "year": "{time, plural, one {1 year} other {# years}}"
     },
     "notifications": {
         "valueTx": "Mottar {{value}} til {{account}}",
@@ -1184,7 +1181,7 @@
             "http": "Bruk noder over HTTP lar trafikken være ukryptert og kan utgjøre en sikkerhetsrisiko."
         },
         "participation": {
-            "noAccounts": "Du har ingen tilgjengelige kontoer å delta med."
+            "noAccounts": "You do not have any IOTA."
         }
     },
     "tooltips": {
@@ -1203,7 +1200,7 @@
             },
             "commencing": {
                 "title": "Pre-stakingen er nå åpen",
-                "body": "Pre-stake dine tokens. Når stakingen starter, vil du automatisk motta gevinst hvert 10 sekund."
+                "body": "Forhånds-stake dine tokens. Når stakingen starter, vil du automatisk motta gevinst hvert 10. sekund."
             },
             "activeHolding": {
                 "title": "Stakingen er nå i gang",
@@ -1211,7 +1208,7 @@
             },
             "inactiveHolding": {
                 "title": "Staking er nå åpen",
-                "body": "Stake dine IOTA tokens for å motta gevinst hvert 10 sekund."
+                "body": "Stake dine IOTA tokens for å motta gevinst hvert 10. sekund."
             },
             "inactive": {
                 "title": "Ingen staking oppdaget",
@@ -1219,7 +1216,8 @@
             },
             "ended": {
                 "title": "Stakingen er nå avsluttet",
-                "body": "Assembly- og Shimmer-gevinster blir distribuert til lommeboken din når hvert av disse nettverkene lanseres."
+                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
+                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
             }
         },
         "partiallyStakedFunds": {
@@ -1231,12 +1229,13 @@
         "stakingMinRewards": {
             "title": "Under minimumsverdi for gevinst",
             "titleMinBalance": "{amount} minimum saldo påkrevd",
-            "bodyMinBalace": "Denne lommeboken har ikke nok IOTA-tokens til å nå den laveste mulige airdrop-belønningen, og kan derfor ikke stakes.",
+            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
             "continue": "Vennligst fortsett å stake i ytterligere {duration}.",
             "bodyBelowMin": "Denne lommeboken har ikke nådd minimum belønningsverdi for {airdrop} ({airdropRewardMin}).",
             "bodyWillReachMin": "Du må fortsette å stake i {duration} for å oppnå minsteverdi.",
-            "bodyWillNotReachMin": "Du vil ikke nå minimumet i løpet av gjenværende staking periode med mindre du staker mer IOTA.",
-            "bodyDidNotReachMin": "Du staket ikke nok IOTA for å oppnå minimum gevinst for {airdrop} ({airdropRewardMin})."
+            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
+            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
         }
     },
     "exports": {

@@ -189,23 +189,23 @@
             "confirmTitle": "أكد حسابك الجديد",
             "confirmBody": "للأمان، يرجى مقارنة الحساب الذي تم إنشاؤه على جهاز Ledger الخاص بك مع الحساب المعروض أدناه. إذا كان متطابق ، اضغط على كلا الزرين في Ledger الخاص بك كما هو موضح.",
             "confirmedTitle": "تم تأكيد الحساب",
-            "confirmedBody": "You have confirmed that the address in Firefly matches the one on your Ledger device.",
-            "generating": "Generating address"
+            "confirmedBody": "لقد تم تأكيد تطابق الحسابات بين محفظة Firefly و الحسابات الموجودة على جهاز Ledger الخاص بك.",
+            "generating": "يتم إنشاء الحساب"
         },
         "switchLedgerApps": {
-            "title": "Switch Ledger apps",
-            "body": "Please switch to the {legacy} app on your Ledger device to continue migration. When ready, press continue."
+            "title": "إذهب الى تطبيق جهاز Ledger",
+            "body": "يرجى تشغيل تطبيق {legacy} على جهاز Ledger الخاص بك لاستكمال عملية التحويل. عندما تكون جاهز, اضغط على استمرار."
         },
         "selectLedgerAccountIndex": {
-            "title": "Choose Ledger account index",
-            "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
-            "accountIndex": "Account Index",
-            "accountPage": "Account Page",
-            "standard": "Standard",
-            "expert": "Expert",
-            "takingAWhile": "This is taking a while...",
-            "notGeneratingAddresses": "Is your Ledger generating addresses?",
-            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
+            "title": "يرجى اختيار صندوق المؤشرات المرتبط بحسابك على جهاز Ledger الخاص بك",
+            "body": "يرجى اختيار صندوق المؤشرات المرتبط بحسابك على جهاز Ledger الخاص بك والمستخدم مع محفظة Trinity. لمعظم المستخدمين لن يكون هناك أي ارتباط مع صناديق المؤشرات كعامل افتراضي 0.",
+            "accountIndex": "حساب صندوق المؤشرات",
+            "accountPage": "صفحة حساب صندوق المؤشرات",
+            "standard": "عادي",
+            "expert": "متقدم",
+            "takingAWhile": "هذه العملية ستتطلب بعض الوقت...",
+            "notGeneratingAddresses": "هل جهاز Ledger الخاص يك ينشئ حسابات؟",
+            "reinstallLegacy": "إذا كان الجواب لا, اقطع الاتصال بجهاز Ledger وأعد المحاولة مرة ثانية. إذا استمرت المشكلة, يرجى محاولة حذف تطبيق {legacy} وإعادة تنصيبه."
         },
         "importBackupPassword": {
             "body1": "الرجاء إدخال كلمة مرور النسخ الاحتياطي.",
@@ -332,13 +332,11 @@
             },
             "exportStronghold": {
                 "title": "Export backup",
-                "description": "تصدير إلى ملف Stronghold - نسخة احتياطية مشفرة كاملة من محفظاتك وأحدث سجل المعاملات"
+                "description": "تصدير نسخة احتياطية مشفرة إلى ملف Stronghold - لكامل محتويات المحافظ الخاصة بك مع أخر سجلات المعاملات لديك"
             },
             "appLock": {
                 "title": "Automatic lock",
-                "description": "فترة عدم النشاط قبل قفل محافظك وتسجيل الخروج",
-                "durationMinute": "{time, plural, one {1 دقيقة} other {# دقائق}}",
-                "durationHour": "{time, plural, one {1 ساعة} other {# ساعات}}"
+                "description": "فترة عدم النشاط قبل قفل محافظك وتسجيل الخروج"
             },
             "changePassword": {
                 "title": "تغيير كلمة المرور",
@@ -488,15 +486,15 @@
             }
         },
         "staking": {
-            "title": "Staking",
-            "welcome": "Welcome to the staking dashboard",
+            "title": "فعالية الربح من النخزين",
+            "welcome": "أهلا بك في صفحة فعالية الربح من التخزين",
             "status": {
                 "upcoming": "الفعالية لم تبدأ",
-                "commencing": "التجهيز لعملية الربح من التخزين مفتوح",
-                "holdingActive": "عملية الربح من التخزين في قيد التحضير",
-                "holdingInactive": "عملية الربح من التخزين بدأت",
-                "inactive": "عملية الربح من التخزين غير ظاهرة",
-                "ended": "عملية الربح من التخزين إنتهت"
+                "commencing": "التجهيز لفعالية الربح من التخزين مفتوحة الان",
+                "holdingActive": "فعالية الربح من التخزين في قيد التحضير",
+                "holdingInactive": "فعالية الربح من التخزين بدأت",
+                "inactive": "فعالية الربح من التخزين غير ظاهرة",
+                "ended": "فعالية الربح من التخزين إنتهت"
             },
             "summary": {
                 "stakedFunds": "الارصدة المخزنة"
@@ -504,28 +502,28 @@
             "info": {
                 "upcomingSubheader": "الفعالية لم تبدأ بعد",
                 "upcomingHeader": "التحقق مرة أخرى لاحقاً",
-                "commencingSubheader": "Get ready for staking",
-                "commencingHeader": "Pre-stake your tokens!",
-                "holdingSubheaderHolding": "Now earning staking rewards",
-                "holdingSubheaderNotHolding": "Earn rewards by staking IOTA",
-                "holdingHeaderHolding": "{duration} left",
-                "holdingHeaderNotHolding": "Stake your tokens!",
-                "endedSubheader": "Staking has now ended",
-                "endedHeader": "Thank you!",
-                "inactiveHeader": "Try changing node",
-                "inactiveSubheader": "عملية الربح من التخزين غير ظاهرة"
+                "commencingSubheader": "كن مستعدا لفعالية الربح من التخزين",
+                "commencingHeader": "جهز العملات الرقمية الخاصة بك لفعالية الربح من التخزين!",
+                "holdingSubheaderHolding": "مكاسب أنية من فعالية الربح من التخزين",
+                "holdingSubheaderNotHolding": "اكسب مكافئات عند تخزين IOTA في فعالية الربح من التخزين",
+                "holdingHeaderHolding": "بقي {duration}",
+                "holdingHeaderNotHolding": "خزن العملات الرقمية الخاصة بك!",
+                "endedSubheader": "فعالية الربح من التخزين انتهت الآن",
+                "endedHeader": "شكراً لك!",
+                "inactiveHeader": "حاول تغير وكيل التخزين",
+                "inactiveSubheader": "فعالية الربح من التخزين غير ظاهرة"
             },
             "airdrops": {
-                "holding": "Remaining",
-                "commencing": "Until staking begins",
-                "collectedRewards": "Collected rewards",
+                "holding": "باقي",
+                "commencing": "حتى تبدأ فعالية الربح من التخزين",
+                "collectedRewards": "كشف المكافئات المحصلة",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
+                    "description": "Assembly هي شبكة مفتوحة ومتاحة للجميع للمشاركة في عملية التحقق من صحة المعاملات والبيانات. وهي لامركزية بالكامل. و قابلة للتطوير بشكل كبير لذلك فهي البيئة الامثل لكتابة ونشر عقود ذكية قابلة للتطوير.\n Assembly هي مستقبل web3. "
                 },
                 "shimmer": {
                     "name": "Shimmer",
-                    "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
+                    "description": "شبكة مشجعة ومحفزة للابتكارات ومروجة ومعرفة عنها وتدعم إنشاء المشاريع المتقدمة المبنية على شبكة IOTA.\nماحدث في الماضي قد مضى, والمستقبل مشرق, واليوم بين يديك \nكيف تتطور وتكبر شبكة Shimmer هو أمر مرتبط بك وبنظرتك للمستقبل."
                 }
             }
         }
@@ -576,9 +574,9 @@
         },
         "addressHistory": {
             "title": "عرض سجل عمليات العنوان {name}",
-            "currentBalance": "Balance: {balance}",
-            "internal": "Internal Address",
-            "external": "Deposit Address"
+            "currentBalance": "الرصيد {balance}",
+            "internal": "حساب فرعي داخلي",
+            "external": "حساب الايداع"
         },
         "node": {
             "titleAdd": "إضافة عقدة node",
@@ -611,10 +609,10 @@
         },
         "switchNetwork": {
             "title": "Switch network",
-            "newNetwork": "New network",
-            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
-            "switchingNetwork": "Switching network",
-            "typePassword": "Type your password to switch to:"
+            "newNetwork": "الشبكة الجديد",
+            "resetWarning": "سيؤدي تغيير الشبكات إلى تسجيل خروجك وإعادة تعيين جميع الحسابات والأرصدة وسجل المعاملات لهذا الملف الشخصي.",
+            "switchingNetwork": "الانتقال الى شبكة جديدة",
+            "typePassword": "اكتب كلمة السر الخاصة بك للانتقال الى:"
         },
         "errorLog": {
             "title": "سجل الأخطاء",
@@ -639,7 +637,7 @@
         "transaction": {
             "title": "تأكيد الصفقة",
             "body": "أنت على وشك إرسال {amount} إلى",
-            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards."
+            "sendingFromStakedAccount": "تنبيه: أنت تقوم بتحويل أرصدة من حساب مشارك في فعالية الربح من التخزين في محفظتك, الاستمرار بذلك سيؤدي الى الغاء اشتراكك والخروج من الفعالية. لك كامل الحرية للقيام بذلك. ملاحظة: يمكنك المشاركة بالفعالية لاحقا بالارصدة المتبقية من العملة الرقمية في حسابك وذلك من خلال طلب مشاركة جديد."
         },
         "balanceFinder": {
             "title": "كشف الرصيد",
@@ -660,23 +658,23 @@
         },
         "snapshot": {
             "title": "جاري تحديث الشبكة",
-            "body": "لقد بدأ تحديث شبكة كريزاليس.",
-            "bodyMigration": "تم تعطيل التحويل إلى حين اكتمالها.",
-            "bodyFirefly": "يتم تعطيل الفايرفلاي حتى يتم اكتماله. سوف يبقى تحويل الرموز Tokens ممكن بعد ذلك."
+            "body": "لقد بدأ تطوير شبكة Chrysalis.",
+            "bodyMigration": "تم توقيف عمليات نقل الاموال الى أكتمال التطوير.",
+            "bodyFirefly": "تم توقيف محفظة Firefly حتى يتم اكتمال عملية التطوير. سيكون تحويل العملات الرقمية ممكنا بعد فترة وجيزة."
         },
         "ledgerNotConnected": {
-            "connect": "Open the new IOTA app on your Ledger device to continue",
-            "connectLegacy": "Open the {legacy} app on your Ledger device to continue"
+            "connect": "افتح تطبيق IOTA الجديد على جهاز Ledger الخاص بك للمتابعة",
+            "connectLegacy": "افتح تطبيق {legacy} على جهاز Ledger الخاص بك للمتابعة"
         },
         "ledgerConfirmation": {
-            "confirm": "To proceed, confirm the prompt displayed on your Ledger device"
+            "confirm": "للمتابعة، قم بتأكيد الطلب الظاهر على جهاز Ledger الخاص بك"
         },
         "ledgerAppGuide": {
-            "title": "Guide to installing the Ledger apps",
+            "title": "دليل تثبيت تطبيقات جهاز Ledger",
             "steps": {
-                "0": "Install and open the Ledger Live application",
-                "1": "Ensure that your Ledger is connected",
-                "2": "Search for apps: {legacy} and IOTA (MIOTA)",
+                "0": "قم بتنصيب وفتح تطبيق Ledger Live",
+                "1": "قم بالتأكد من أن جهاز Ledger الخاص بك متصل",
+                "2": "إبحث عن تطبيقات: {legacy} و IOTA (MIOTA)",
                 "3": "Install both apps: {legacy} and IOTA (MIOTA)",
                 "4": "Remember that it's important to close Ledger Live before returning to Firefly"
             }
@@ -719,8 +717,8 @@
             "typePassword": "Type your password to allow exporting"
         },
         "stakingNotice": {
-            "upcomingDate": "Staking has not started yet",
-            "commencingDate": "Staking has not started yet",
+            "upcomingDate": "فعالية الربح من التخزين لم تبدأ بعد",
+            "commencingDate": "فعالية الربح من التخزين لم تبدأ بعد",
             "body": "By pre-staking your funds before staking starts, you will automatically begin receiving rewards when staking begins.",
             "ok": "Ok, I understand"
         },
@@ -740,14 +738,14 @@
             "estimatedAirdrop": "Estimated rewards"
         },
         "shimmer-info": {
-            "title": "About Shimmer",
-            "body1": "Congratulations you have earned SMR tokens as a staking reward. Shimmer is an incentivized staging network to test major upgrades on IOTA.",
-            "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
+            "title": "معلومات عن شبكة Shimmer",
+            "body1": "مبروك لقد ربحت عملة SMR الرقمية كمكافأة لمشاركتك بفعالية الربح من التخزين على شبكة Shimmer.\nShimmer هي شبكة مشجعة ومحفزة للابتكارات ومروجة ومعرفة عنها وتدعم إنشاء المشاريع المتقدمة المبنية على شبكة IOTA.",
+            "body2": "نحن نتطلع إلى إطلاق شبكة Shimmer في عام 2022. سيكون لك حرية التصرف بالعملات الرقمية الخاصة بك بمجرد بدء تشغيل الشبكة."
         },
         "assembly-info": {
-            "title": "About Assembly",
+            "title": "معلومات عن شبكة Assembly",
             "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
-            "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
+            "body2": "نحن نتطلع إلى إطلاق شبكة Assembly في عام 2022. سيكون لك حرية التصرف بالعملات الرقمية الخاصة بك بمجرد بدء تشغيل الشبكة."
         }
     },
     "charts": {
@@ -968,6 +966,7 @@
         "passwordUpdating": "يتم تحديث كلمة المرور...",
         "passwordSuccess": "تم تحديث كلمة المرور بنجاح",
         "passwordFailed": "فشل تحديث كلمة المرور",
+        "syncing": "Syncing",
         "syncingAccounts": "تتم مزامنة المحافظ...",
         "exportingStronghold": "يتم تصدير الملف المحصّن...",
         "exportingStrongholdSuccess": "تم تصدير الملف المحصّن بنجاح",
@@ -999,20 +998,9 @@
         "version": "الإصدار {version}",
         "unknown": "Unknown",
         "none": "None",
-        "days": "day(s)",
-        "time": {
-            "days": "days",
-            "day": "day",
-            "hours": "hours",
-            "hour": "hour",
-            "minutes": "minutes",
-            "minute": "minute",
-            "seconds": "seconds",
-            "second": "second"
-        },
         "staked": "Staked",
         "unstaked": "Unstaked",
-        "staking": "Staking",
+        "staking": "فعالية الربح من النخزين",
         "unstaking": "Unstaking",
         "notStaked": "Not staked",
         "stakedFunds": "الارصدة المخزنة",
@@ -1025,6 +1013,15 @@
         "weeksAgo": "منذ {time, plural, one {# اسبوع} other {# اسابيع}}",
         "monthsAgo": "منذ {time, plural, one {# شهر} other {# اشهر}}",
         "yearsAgo": "منذ {time, plural, one {# سنة} other {# سنوات}}"
+    },
+    "times": {
+        "second": "{time, plural, one {1 second} other {# seconds}}",
+        "minute": "{time, plural, one {1 minute} other {# minutes}}",
+        "hour": "{time, plural, one {1 hour} other {# hours}}",
+        "day": "{time, plural, one {1 day} other {# days}}",
+        "week": "{time, plural, one {1 week} other {# weeks}}",
+        "month": "{time, plural, one {1 month} other {# months}}",
+        "year": "{time, plural, one {1 year} other {# years}}"
     },
     "notifications": {
         "valueTx": "تلقي {{value}} إلى {{account}}",
@@ -1154,37 +1151,37 @@
             "generic": "There was an error connecting to your Ledger device.",
             "legacyConnected": "The wrong app is open on your Ledger device.",
             "locked": "Please unlock your Ledger device by entering the PIN.",
-            "mnemonicMismatch": "You have connected the wrong Ledger device or the mnemonic has changed.",
-            "notDetected": "No Ledger device detected.",
-            "notFound": "Ledger device not found.",
-            "otherConnected": "The wrong app is open on your Ledger device.",
-            "generateAddress": "There was an error generating an address.",
-            "timeout": "Your Ledger device timed out.",
-            "disconnected": "Your Ledger device was disconnected.",
-            "noStronghold": "Unable to use Stronghold with Ledger profile."
+            "mnemonicMismatch": "لقد قمت بتوصيل جهاز Ledger خاطئ أو أن الكلمات السرية تم تغيرها.",
+            "notDetected": "لم يتم الكشف على جهاز Ledger.",
+            "notFound": "لم يتم العثور على جهاز Ledger.",
+            "otherConnected": "التطبيق الخطأ مفتوح على جهاز Ledger الخاص بك.",
+            "generateAddress": "حدث خطأ أثناء إنشاء الحساب.",
+            "timeout": "الوقت المخصص لتوصيل جهاز Ledger الخاص بك إنتهى.",
+            "disconnected": "تم قطع الاتصال بجهاز Ledger الخاص بك.",
+            "noStronghold": "لا يمكن استخدام جدار الحماية Stronghold مع محتويات جهاز Ledger الخاص بك."
         },
         "popup": {
-            "preventClose": "This popup is unable to be closed."
+            "preventClose": "لا يمكن إغلاق الإشعار الظاهر أمامك."
         },
         "migration": {
-            "missingBundle": "An error occurred while trying to find the transaction bundle."
+            "missingBundle": "حدث خطأ أثناء البحث عن رابط المعاملة المالية."
         },
         "crypto": {
-            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
+            "cannotDecodeBech32": "غير قادر على ترجمة الرسالة الصادرة من سلسلة حسابات Bitcoin نوع Bech32."
         },
         "participation": {
-            "cannotUseAccount": "Unable to use the specified account.",
-            "cannotFindStakingEvent": "Unable to find staking event.",
-            "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
-            "invalidStakingEventId": "Invalid staking event ID."
+            "cannotUseAccount": "غير قادر على استخدام الحساب المحدد.",
+            "cannotFindStakingEvent": "غير قادر على إيجاد فعالية الربح من التخزين.",
+            "cannotVisitAirdropWebsite": "غير قادر على فتح فعالية توزيع الجوائز على الموقع.",
+            "invalidStakingEventId": "رقم التصريح لفعالية الربح من التخزين خاطئ."
         }
     },
     "warning": {
         "node": {
-            "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
+            "http": "استخدام ال nodes عبر HTTP يترك المعاملات غير مشفرة وعرضة للإختراق ويضعك في مجازفة خسارة معلوماتك الشخصية."
         },
         "participation": {
-            "noAccounts": "You do not have any accounts available to participate."
+            "noAccounts": "You do not have any IOTA."
         }
     },
     "tooltips": {
@@ -1198,55 +1195,57 @@
         },
         "stakingIndicator": {
             "upcoming": {
-                "title": "Staking has not started yet",
-                "body": "Check back later. The staking event has not begun."
+                "title": "فعالية الربح من التخزين لم تبدأ بعد",
+                "body": "فعالية الربح من التخزين لم تبدأ بعد. تحقق من الفعالية في وقت لاحق."
             },
             "commencing": {
-                "title": "Pre-staking is now open",
-                "body": "Pre-stake your tokens, and once staking begins, you will automatically start receiving rewards every 10 seconds."
+                "title": "مرحلة الإعداد لفعالية الربح من التخزين مفنوحة لمن يرغب بالمشاركة",
+                "body": "يمكنك تخزين العملة الرقمية الخاصة بك بشكل مسبق في فعالية الربح من التخزين وعندما تبدأ الفعالية سوف تنضم للفعالية بشكل تلقائي وستربح جوائز كل عشر ثوان."
             },
             "activeHolding": {
-                "title": "Staking is now in progress",
-                "body": "Good job. You will receive rewards every 10 seconds."
+                "title": "فعالية الربح من التخزين قيد التحضير الآن",
+                "body": "أحسنت صنيعا. ستبدأ باستقبال الجوائز كل 10 ثوان."
             },
             "inactiveHolding": {
-                "title": "Staking is now open",
-                "body": "Stake your IOTA tokens to receive rewards every 10 seconds."
+                "title": "فعالية الربح من التخزين مفتوحة الآن لمن يرغب بالمشاركة",
+                "body": "أدخل عملة IOTA الرقمية التي تمتلكها في فعالية الربح من التخزين للحصول على جوائز كل 10 ثوان."
             },
             "inactive": {
-                "title": "No staking events detected",
-                "body": "Open network configuration in Advanced Settings and make sure the current node has the \"Participation\" feature by clicking \"View Info\"."
+                "title": "لم يتم العثور على فعاليات خاصة بالربح من التخزين",
+                "body": "ضمن الاعدادات المتقدمة يرجى فتح هيكل الشبكة والتأكد من أن الوسيط لدية ميزة \"المشاركة في الفعاليات\" وذلك من خلال الضغط على \"عرض المعلومات\"."
             },
             "ended": {
-                "title": "Staking has now ended",
-                "body": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch."
+                "title": "فعالية الربح من التخزين انتهت الآن",
+                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
+                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
             }
         },
         "partiallyStakedFunds": {
-            "title": "New unstaked funds: {amount}",
-            "titleNoFunds": "New unstaked funds",
-            "preBody": "You have received tokens on a staked wallet.",
-            "body": "You need to manually stake these new funds to receive airdrop rewards for them."
+            "title": "رصيد الأموال التي لم تشارك في فعالية اربح من التخزين: {amount}",
+            "titleNoFunds": "رصيد الأموال التي لم تشارك في فعالية اربح من التخزين",
+            "preBody": "لقد تم استلام عملات رقمية كجوائز على حسابك المشارك في فعالية اربح من التخزين ضمن محفظتك.",
+            "body": "نأسف لذلك, ولكن حتى تستطيع أن تستقبل جوائز من فعالية airdrop على هذه الأموال الجديدة يجب عليك أن تقوم بمشاركة هذه الأموال ضمن الفعالية بشكل يدوي."
         },
         "stakingMinRewards": {
-            "title": "Below minimum reward value",
-            "titleMinBalance": "{amount} minimum balance required",
-            "bodyMinBalace": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
-            "continue": "Please continue staking for another {duration}.",
-            "bodyBelowMin": "This wallet has not reached the minimum reward value for {airdrop} ({airdropRewardMin}).",
-            "bodyWillReachMin": "You must stake for another {duration} to reach the minimum.",
-            "bodyWillNotReachMin": "You will not reach the minimum during the remaining staking period unless you stake more IOTA.",
-            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum rewards for {airdrop} ({airdropRewardMin})."
+            "title": "تحت الحد الأدنى لقيمة المكافأة",
+            "titleMinBalance": "{amount} الحد الأدنى من الرصيد المطلوب",
+            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
+            "continue": "يرجى تجديد المشاركة في فعالية الربح من التخزين لمدة {duration}.",
+            "bodyBelowMin": "لم تصل قيمة هذه المحفظة الى الحد الأدنى الذي يمكنك من خلاله الحصول على أقل كمية من جوائز فعاليات {airdrop} ({airdropRewardMin}).",
+            "bodyWillReachMin": "يجب عليك أن تشارك في فعالية الربح من التخزين لـ {duration} آخر للوصول إلى الحد الأدنى.",
+            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
+            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
         }
     },
     "exports": {
         "transactionHistoryCsv": {
             "messageId": "ID الرسالة",
-            "internal": "Internal",
-            "rawValue": "Raw Value",
+            "internal": "داخلي",
+            "rawValue": "القيمة الصافية",
             "formattedValue": "Formatted Value",
             "date": "التاريخ",
-            "time": "Time"
+            "time": "الزمن"
         }
     }
 }
