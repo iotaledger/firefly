@@ -81,8 +81,8 @@
                 {#if !$activeProfile?.hasVisitedStaking || showStakingNotification}
                     <span class="absolute -top-2 -left-2 flex justify-center items-center h-3 w-3">
                         <span
-                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-300 opacity-75" />
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500" />
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full {showStakingNotification ? 'bg-yellow-400' : 'bg-red-300'} opacity-75" />
+                        <span class="relative inline-flex rounded-full h-2 w-2 {showStakingNotification ? 'bg-yellow-600' : 'bg-red-500'}" />
                     </span>
                 {/if}
             </button>
