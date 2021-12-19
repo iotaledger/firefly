@@ -27,27 +27,27 @@ describe('File: time.ts', () => {
             expect(getBestTimeDuration(0)).toEqual(ZERO_DURATION)
             expect(getBestTimeDuration(100)).toEqual(ZERO_DURATION)
 
-            expect(getBestTimeDuration(0, 'hours')).toEqual('0 hours')
-            expect(getBestTimeDuration(100, 'minutes')).toEqual('0 minutes')
-            expect(getBestTimeDuration(200, 'seconds')).toEqual('0 seconds')
+            expect(getBestTimeDuration(0, 'hour')).toEqual('0 hours')
+            expect(getBestTimeDuration(100, 'minute')).toEqual('0 minutes')
+            expect(getBestTimeDuration(200, 'second')).toEqual('0 seconds')
         })
 
         it('should return best duration for valid values', () => {
             expect(getBestTimeDuration(ONE_DAY_MILLIS * 2)).toEqual('2 days')
-            expect(getBestTimeDuration(ONE_DAY_MILLIS * 1.5)).toEqual('2 days')
+            expect(getBestTimeDuration(ONE_DAY_MILLIS * 1.5)).toEqual('1 day')
             expect(getBestTimeDuration(ONE_DAY_MILLIS)).toEqual('1 day')
 
-            expect(getBestTimeDuration(ONE_HOUR_MILLIS * 25)).toEqual('2 days')
+            expect(getBestTimeDuration(ONE_HOUR_MILLIS * 25)).toEqual('1 day')
             expect(getBestTimeDuration(ONE_HOUR_MILLIS * 24)).toEqual('1 day')
             expect(getBestTimeDuration(ONE_HOUR_MILLIS * 12)).toEqual('12 hours')
             expect(getBestTimeDuration(ONE_HOUR_MILLIS)).toEqual('1 hour')
 
-            expect(getBestTimeDuration(ONE_MINUTE_MILLIS * 61)).toEqual('2 hours')
+            expect(getBestTimeDuration(ONE_MINUTE_MILLIS * 61)).toEqual('1 hour')
             expect(getBestTimeDuration(ONE_MINUTE_MILLIS * 60)).toEqual('1 hour')
             expect(getBestTimeDuration(ONE_MINUTE_MILLIS * 30)).toEqual('30 minutes')
             expect(getBestTimeDuration(ONE_MINUTE_MILLIS)).toEqual('1 minute')
 
-            expect(getBestTimeDuration(MILLISECONDS_PER_SECOND * 61)).toEqual('2 minutes')
+            expect(getBestTimeDuration(MILLISECONDS_PER_SECOND * 61)).toEqual('1 minute')
             expect(getBestTimeDuration(MILLISECONDS_PER_SECOND * 60)).toEqual('1 minute')
             expect(getBestTimeDuration(MILLISECONDS_PER_SECOND * 30)).toEqual('30 seconds')
             expect(getBestTimeDuration(MILLISECONDS_PER_SECOND)).toEqual('1 second')
