@@ -349,7 +349,7 @@
     <Tooltip anchor={tooltipAnchor} position="right">
         <Text type="p" classes="text-gray-900 bold mb-2 text-left">{tooltipText?.title}</Text>
         {#each tooltipText?.body as paragraph}
-            <Text type="p" secondary classes="text-left">{paragraph}</Text>
+            <Text type="p" secondary classes="text-left {tooltipText?.body.indexOf(paragraph) !== tooltipText?.body.length - 1 && 'mb-2'}">{paragraph}</Text>
         {/each}
     </Tooltip>
 {/if}
