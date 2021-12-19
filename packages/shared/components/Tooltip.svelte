@@ -13,7 +13,7 @@
     export let anchor: HTMLElement | null = null
     export let position: Position = Position.Top
     export let refresh: boolean = false // prop used to refresh the tooltip position
-    export let offset: number = 8
+    export let offset: number = 10
     export let inlineStyle: string = ''
 
     let tooltip: HTMLElement
