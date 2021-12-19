@@ -588,7 +588,7 @@
                         <CreateAccount onCreate={onCreateAccount} {locale} />
                     {:else}
                         <WalletBalance {locale} />
-                        <DashboardPane classes="-mt-5 h-full z-0">
+                        <DashboardPane classes="-mt-5 h-full z-10">
                             <WalletActions
                                 {isGeneratingAddress}
                                 {onSend}

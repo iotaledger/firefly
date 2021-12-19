@@ -27,7 +27,6 @@
     import { capitalize } from 'shared/lib/utils'
     import { wallet } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
-    import { onMount } from 'svelte'
 
     export let name = ''
     export let balance = ''
@@ -219,14 +218,6 @@
             onClick()
         }
     }
-    
-    // We append the tooltipWrapper to the document here
-    // because the inherited z-index for tooltip is too low in this case
-    let tooltipWrapper
-    onMount(() => {
-        document?.body?.appendChild(tooltipWrapper)
-        return () => document?.body?.removeChild(tooltipWrapper)
-    })
 </script>
 
 <style type="text/scss">
@@ -352,11 +343,9 @@
         </Text>
     </div>
 </button>
-<div bind:this={tooltipWrapper}>
-    {#if showTooltip}
-        <Tooltip anchor={tooltipAnchor} position="right">
-            <Text type="p" classes="text-gray-900 bold mb-2 text-left">{tooltipText?.title}</Text>
-            <Text type="p" secondary classes="text-left">{tooltipText?.body}</Text>
-        </Tooltip>
-    {/if}
-</div>
+{#if showTooltip}
+    <Tooltip anchor={tooltipAnchor} position="right">
+        <Text type="p" classes="text-gray-900 bold mb-2 text-left">{tooltipText?.title}</Text>
+        <Text type="p" secondary classes="text-left">{tooltipText?.body}</Text>
+    </Tooltip>
+{/if}
