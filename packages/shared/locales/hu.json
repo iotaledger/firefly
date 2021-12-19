@@ -336,9 +336,7 @@
             },
             "appLock": {
                 "title": "Automatikus zárolás",
-                "description": "Tétlenség ideje, mielőtt tárcája automatikusan zárolódik és kilépteti Önt",
-                "durationMinute": "{time, plural, one {1 perc} other {# perc}}",
-                "durationHour": "{time, plural, one {1 óra} other {# óra}}"
+                "description": "Tétlenség ideje, mielőtt tárcája automatikusan zárolódik és kilépteti Önt"
             },
             "changePassword": {
                 "title": "Jelszó módosítása",
@@ -968,6 +966,7 @@
         "passwordUpdating": "Jelszó frissítése...",
         "passwordSuccess": "A jelszó sikeresen frissítve",
         "passwordFailed": "A jelszó frissítése sikertelen",
+        "syncing": "Syncing",
         "syncingAccounts": "Tárcák szinkronizálása...",
         "exportingStronghold": "Stronghold exportálása...",
         "exportingStrongholdSuccess": "Stronghold sikeresen exportálva",
@@ -999,17 +998,6 @@
         "version": "{version} verzió",
         "unknown": "Ismeretlen",
         "none": "Nincs",
-        "days": "nap",
-        "time": {
-            "days": "nap",
-            "day": "nap",
-            "hours": "óra",
-            "hour": "óra",
-            "minutes": "perc",
-            "minute": "perc",
-            "seconds": "másodperc",
-            "second": "másodperc"
-        },
         "staked": "Letétbe helyezve",
         "unstaked": "Letétből kivéve",
         "staking": "Staking",
@@ -1025,6 +1013,15 @@
         "weeksAgo": "{time, plural, one {# héttel} other {# héttel}} ezelőtt",
         "monthsAgo": "{time, plural, one {# hónappal} other {# hónappal}} ezelőtt",
         "yearsAgo": "{time, plural, one {# évvel} other {# évvel}} ezelőtt"
+    },
+    "times": {
+        "second": "{time, plural, one {1 second} other {# seconds}}",
+        "minute": "{time, plural, one {1 minute} other {# minutes}}",
+        "hour": "{time, plural, one {1 hour} other {# hours}}",
+        "day": "{time, plural, one {1 day} other {# days}}",
+        "week": "{time, plural, one {1 week} other {# weeks}}",
+        "month": "{time, plural, one {1 month} other {# months}}",
+        "year": "{time, plural, one {1 year} other {# years}}"
     },
     "notifications": {
         "valueTx": "{{value}} érkezik a(z) {{account}} számlájára",
@@ -1184,7 +1181,7 @@
             "http": "A csomópontok HTTP kapcsolaton történő elérése a titkosítatlan adatforgalom miatt biztonsági kockázattal jár."
         },
         "participation": {
-            "noAccounts": "Nincs egyetlen számlája sem amivel részt vehetne."
+            "noAccounts": "You do not have any IOTA."
         }
     },
     "tooltips": {
@@ -1219,7 +1216,8 @@
             },
             "ended": {
                 "title": "A staking véget ért",
-                "body": "Az Assembly és Shimmer tokeneket az egyes hálózatok indulásakor fogja megkapni a tárcájában."
+                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
+                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
             }
         },
         "partiallyStakedFunds": {
@@ -1231,12 +1229,13 @@
         "stakingMinRewards": {
             "title": "Várható jutalom minimumérték alatt",
             "titleMinBalance": "Legalább {amount} összeg szükséges",
-            "bodyMinBalace": "A tárcában nincs elegendő IOTA token, hogy a minimum jóváírható jutalmat megkapja, ezért a staking eseményen nem tud részt venni.",
+            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
             "continue": "Kérjük még további {duration} ideig vegyen részt a staking eseményen.",
             "bodyBelowMin": "Ez a tárca nem érte el a minimálisan jóváírható {airdrop} jutalmat ({airdropRewardMin}).",
             "bodyWillReachMin": "Még legalább {duration} ideig részt kell vennie a staking eseményen a minimálisan jóváírható jutalomhoz.",
-            "bodyWillNotReachMin": "Nem fogja elérni a minimálisan jóváírható jutalmat a staking esemény végéig, hacsak nem helyez letétbe még több IOTA tokent.",
-            "bodyDidNotReachMin": "Nem vett részt elegendő IOTA tokennel ahhoz, hogy elérje a minimálisan jóváírható {airdrop} jutalmat ({airdropRewardMin})."
+            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
+            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
         }
     },
     "exports": {

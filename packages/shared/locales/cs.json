@@ -336,9 +336,7 @@
             },
             "appLock": {
                 "title": "Automatický zámek",
-                "description": "Čas nečinnosti před uzamknutím peněženek a odhlášeni",
-                "durationMinute": "{time, plural, one {1 minuta} other {# minut}}",
-                "durationHour": "{time, plural, one {# hodina} other {# hodin}}"
+                "description": "Čas nečinnosti před uzamknutím peněženek a odhlášeni"
             },
             "changePassword": {
                 "title": "Změna hesla",
@@ -369,35 +367,35 @@
                 "description": "Automaticky vyplnit transakční údaje ve Firefly po kliknutí na odkaz IOTA"
             },
             "networkConfiguration": {
-                "title": "Network config",
-                "title2": "Network configuration",
+                "title": "Konfigurace sítě",
+                "title2": "Konfigurace sítě",
                 "description": {
-                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
-                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                    "dev": "Nastavení sítě se automaticky aktualizuje podle aktuální konfigurace uzlu (přepínání sítí povede k resetování stavu peněženky)",
+                    "nonDev": "Vaše nastavení sítě se automaticky aktualizuje podle aktuální konfigurace uzlu"
                 },
-                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
-                "resetWallet": "Your wallet state has been reset.",
-                "connectedTo": "Connected to",
+                "switchedNetworks": "Úspěšně přepnutá síť na \"{networkName}\".",
+                "resetWallet": "Stav vaší peněženky byl obnoven.",
+                "connectedTo": "Připojeno k",
                 "nodeConfiguration": {
                     "title": "Výběr node",
-                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
+                    "description": "Vyberte \"Manual\" pro konfiguraci nastavení uzlu a připojení k vašim vlastním uzlům(uzlu)",
                     "automatic": "Automaticky",
                     "manual": "Manuálně"
                 }
             },
             "configureNodeList": {
                 "title": "Konfigurace uzlu",
-                "description": "Manage the list of nodes you connect to",
+                "description": "Spravovat seznam uzlů, ke kterým se připojíte",
                 "primaryNode": "Primární Node",
                 "excludeNode": "Vyloučit node",
                 "includeNode": "Zahrnout node",
-                "editDetails": "Edit details",
-                "viewInfo": "View info",
+                "editDetails": "Upravit podrobnosti",
+                "viewInfo": "Zobrazit informace",
                 "setAsPrimary": "Nastavit jako hlavní",
                 "removeNode": "Odstranit uzel",
                 "includeOfficialNodeList": "Zahrnout oficiální seznam node",
-                "noNodes": "There are no nodes, unable to connect to the network",
-                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
+                "noNodes": "Nejsou k dispozici žádné uzly, nelze se připojit k síti",
+                "noNodesAuto": "Nejsou k dispozici žádné uzly, místo toho bude použit automatický výběr"
             },
             "proofOfWork": {
                 "title": "Proof of Work",
@@ -412,7 +410,7 @@
                 "description": "Zobrazit informace o systému a aplikaci"
             },
             "migrateLedgerIndex": {
-                "title": "Migrate Ledger index",
+                "title": "Migrovat Ledger index",
                 "description": "Migrovat jiný Trinity index"
             },
             "troubleshoot": {
@@ -425,7 +423,7 @@
             },
             "faq": {
                 "title": "Časté dotazy",
-                "title2": "Frequently asked questions",
+                "title2": "Často kladené dotazy",
                 "description": "Podívejte se na FAQ a získejte pomoc s běžnými problémy a otázkami"
             },
             "discord": {
@@ -521,11 +519,11 @@
                 "collectedRewards": "Nashromážděné odměny",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
+                    "description": "Assembly je permissionless, vysoce škálovatelná multi-chain síť pro vytváření a zavádění sestavitelných chytrých smluv. Assembly je budoucností web3. "
                 },
                 "shimmer": {
                     "name": "Shimmer",
-                    "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
+                    "description": "Zkušební síť pro inovace IOTA. Cokoli se stane, stane se. Jak se vyvíjí Shimmer, záleží na vás."
                 }
             }
         }
@@ -578,43 +576,43 @@
             "title": "{name} historie adres",
             "currentBalance": "Zůstatek: {balance}",
             "internal": "Interní adresa",
-            "external": "Deposit Address"
+            "external": "Adresa vkladu"
         },
         "node": {
             "titleAdd": "Přidat uzel",
             "titleUpdate": "Aktualizovat Node",
             "titleRemove": "Odstranit uzel",
-            "titleRemoveAll": "Remove all nodes",
+            "titleRemoveAll": "Odstranit všechny uzly",
             "titleDetails": "Detaily uzlu",
-            "titleInfo": "Node info",
-            "addingNode": "Adding node",
-            "updatingNode": "Updating node",
-            "loadingNodeInfo": "Loading node info",
+            "titleInfo": "Informace o uzlu",
+            "addingNode": "Přidat uzel",
+            "updatingNode": "Aktualizace uzlu",
+            "loadingNodeInfo": "Načítání informací o uzlu",
             "nodeAddress": "Adresa uzlu",
             "optionalUsername": "Uživatelské jméno (volitelné)",
             "optionalPassword": "Heslo (volitelné)",
-            "optionalJwt": "JSON web token (optional)",
+            "optionalJwt": "Webový token JSON (volitelné)",
             "setAsPrimaryNode": "Nastavit jako hlavní uzel",
             "removeConfirmation": "Opravdu chcete odstranit tuto node?",
-            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "removeAllConfirmation": "Jste si jisti, že chcete odstranit všechny uzly?",
             "info": {
                 "url": "URL",
                 "software": "Software",
-                "networkId": "Network ID",
+                "networkId": "ID sítě",
                 "bech32HRP": "Bech32 HRP",
-                "features": "Features",
-                "confirmedMilestoneIndex": "Confirmed milestone index",
+                "features": "Vlastnosti",
+                "confirmedMilestoneIndex": "Potvrzený index milníků",
                 "pruningIndex": "Pruning index",
                 "messagesPerSecond": "Zprávy za sekundu",
                 "referencedRate": "Odkazovaná míra"
             }
         },
         "switchNetwork": {
-            "title": "Switch network",
-            "newNetwork": "New network",
-            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
-            "switchingNetwork": "Switching network",
-            "typePassword": "Type your password to switch to:"
+            "title": "Přepnout síť",
+            "newNetwork": "Nová síť",
+            "resetWarning": "Změna sítí vás odhlásí a obnoví všechny účty, zůstatky a transakční historii tohoto profilu.",
+            "switchingNetwork": "Přepnout síť",
+            "typePassword": "Zadejte heslo pro přepnutí na:"
         },
         "errorLog": {
             "title": "Záznam chyb",
@@ -721,7 +719,7 @@
         "stakingNotice": {
             "upcomingDate": "Staking zatím nezačal",
             "commencingDate": "Staking zatím nezačal",
-            "body": "By pre-staking your funds before staking starts, you will automatically begin receiving rewards when staking begins.",
+            "body": "Pomocí pre-staking vašich prostředků, než stakování začne, automaticky začnete dostávat odměny, když stakování začne.",
             "ok": "Ano, rozumím"
         },
         "stakingManager": {
@@ -735,7 +733,7 @@
             "title": "Spoluúčast na Airdrop",
             "subtitleStake": "Chystáte se stakovat",
             "subtitleMerge": "Chystáte se sloučit",
-            "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
+            "bodyStake": "Pokud se nechcete účastnit obou airdropů, můžete se rozhodnout o neúčasti níže. Můžete kdykoliv zrušit anebo započít stakování.",
             "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
             "estimatedAirdrop": "Estimated rewards"
         },
@@ -823,7 +821,7 @@
         "addNode": "Přidat uzel",
         "updateNode": "Aktualizovat Node",
         "removeNode": "Odstranit uzel",
-        "removeAllNodes": "Remove all nodes",
+        "removeAllNodes": "Odstranit všechny uzly",
         "hide": "Skrýt",
         "hideOthers": "Skrýt ostatní",
         "showAll": "Zobrazit vše",
@@ -968,6 +966,7 @@
         "passwordUpdating": "Aktualizuji heslo...",
         "passwordSuccess": "Heslo bylo úspěšně aktualizováno",
         "passwordFailed": "Aktualizace hesla se nezdařila",
+        "syncing": "Syncing",
         "syncingAccounts": "Synchronizace peněženek...",
         "exportingStronghold": "Exportování Stronghold...",
         "exportingStrongholdSuccess": "Stronghold úspěšně exportován",
@@ -999,17 +998,6 @@
         "version": "Verze {version}",
         "unknown": "Unknown",
         "none": "None",
-        "days": "day(s)",
-        "time": {
-            "days": "days",
-            "day": "day",
-            "hours": "hours",
-            "hour": "hour",
-            "minutes": "minutes",
-            "minute": "minute",
-            "seconds": "seconds",
-            "second": "second"
-        },
         "staked": "Staked",
         "unstaked": "Unstaked",
         "staking": "Stakování",
@@ -1025,6 +1013,15 @@
         "weeksAgo": "před {time, plural, one {# týdnem} other {# týdny}}",
         "monthsAgo": "před {time, plural,\n  one {# měsícem}\n  few {# měsíci}\n  many {# měsíci}\n  other {# měsíci}\n}",
         "yearsAgo": "před {time, plural, one {# týdnem} other {# týdny}}"
+    },
+    "times": {
+        "second": "{time, plural, one {1 second} other {# seconds}}",
+        "minute": "{time, plural, one {1 minute} other {# minutes}}",
+        "hour": "{time, plural, one {1 hour} other {# hours}}",
+        "day": "{time, plural, one {1 day} other {# days}}",
+        "week": "{time, plural, one {1 week} other {# weeks}}",
+        "month": "{time, plural, one {1 month} other {# months}}",
+        "year": "{time, plural, one {1 year} other {# years}}"
     },
     "notifications": {
         "valueTx": "Přijímání {{value}} na {{account}}",
@@ -1184,7 +1181,7 @@
             "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
         },
         "participation": {
-            "noAccounts": "You do not have any accounts available to participate."
+            "noAccounts": "You do not have any IOTA."
         }
     },
     "tooltips": {
@@ -1219,7 +1216,8 @@
             },
             "ended": {
                 "title": "Stakování nyní skončilo",
-                "body": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch."
+                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
+                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
             }
         },
         "partiallyStakedFunds": {
@@ -1231,12 +1229,13 @@
         "stakingMinRewards": {
             "title": "Below minimum reward value",
             "titleMinBalance": "{amount} minimum balance required",
-            "bodyMinBalace": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
+            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
             "continue": "Please continue staking for another {duration}.",
             "bodyBelowMin": "This wallet has not reached the minimum reward value for {airdrop} ({airdropRewardMin}).",
             "bodyWillReachMin": "You must stake for another {duration} to reach the minimum.",
-            "bodyWillNotReachMin": "You will not reach the minimum during the remaining staking period unless you stake more IOTA.",
-            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum rewards for {airdrop} ({airdropRewardMin})."
+            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
+            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
         }
     },
     "exports": {

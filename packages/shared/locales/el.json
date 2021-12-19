@@ -42,7 +42,7 @@
             "title": "Δημιουργήστε ένα πορτοφόλι",
             "body": "Δημιουργήστε ένα νέο πορτοφόλι. Μπορείτε να επιλέξετε ένα κανονικό πορτοφόλι λογισμικού ή αν έχετε μια συσκευή Ledger μπορείτε να ρυθμίσετε ένα hardware πορτοφόλι.",
             "softwareAccount": {
-                "title": "Θέλω ένα software πορτοφόλι",
+                "title": "Θέλω ένα πορτοφόλι λογισμικού",
                 "description": "Δημιουργήστε 24-λέξη Φράση Επαναφοράς"
             },
             "ledgerAccount": {
@@ -202,8 +202,8 @@
             "accountIndex": "Δείκτης Λογαριασμού",
             "accountPage": "Σελίδα Λογαριασμού",
             "standard": "Κανονικός",
-            "expert": "Ειδικός",
-            "takingAWhile": "Αυτό παίρνει λίγη ώρα...",
+            "expert": "Έμπειρος",
+            "takingAWhile": "Αυτό μπορεί να διαρκέσει λίγο...",
             "notGeneratingAddresses": "Το Ledger σας δημιουργεί διευθύνσεις;",
             "reinstallLegacy": "Αν όχι, αποσυνδέστε τη συσκευή και προσπαθήστε ξανά. Εάν το πρόβλημα παραμένει, ίσως χρειαστεί να επανεγκαταστήσετε την εφαρμογή {legacy}."
         },
@@ -336,9 +336,7 @@
             },
             "appLock": {
                 "title": "Αυτόματο Κλείδωμα",
-                "description": "Χρόνος αδράνειας πριν από το κλείδωμα του πορτοφολιού σας και αποσυνδεθείτε",
-                "durationMinute": "{time, plural, one {1 λεπτό} other {# λεπτά}}",
-                "durationHour": "{time, plural, one {1 ώρα} other {# ώρες}}"
+                "description": "Χρόνος αδράνειας πριν από το κλείδωμα του πορτοφολιού σας και αποσυνδεθείτε"
             },
             "changePassword": {
                 "title": "Αλλαγή κωδικού",
@@ -968,6 +966,7 @@
         "passwordUpdating": "Ενημέρωση κωδικού πρόσβασης...",
         "passwordSuccess": "Επιτυχής ενημέρωση κωδικού πρόσβασης",
         "passwordFailed": "Η ενημέρωση κωδικού απέτυχε",
+        "syncing": "Syncing",
         "syncingAccounts": "Συγχρονισμός πορτοφολιών...",
         "exportingStronghold": "Εξαγωγή Stronghold...",
         "exportingStrongholdSuccess": "Επιτυχής εξαγωγή stronghold",
@@ -999,17 +998,6 @@
         "version": "Έκδοση {version}",
         "unknown": "Άγνωστο",
         "none": "Κανένα",
-        "days": "ημέρα (ες)",
-        "time": {
-            "days": "ημέρες",
-            "day": "ημέρα",
-            "hours": "ώρες",
-            "hour": "ώρα",
-            "minutes": "λεπτά",
-            "minute": "λεπτό",
-            "seconds": "δευτερόλεπτα",
-            "second": "δευτερόλεπτο"
-        },
         "staked": "Staked",
         "unstaked": "Unstaked",
         "staking": "Staking (Ποντάρισμα)",
@@ -1025,6 +1013,15 @@
         "weeksAgo": "πριν {time, plural, one {# εβδομάδα} other {# εβδομάδες}}",
         "monthsAgo": "πριν {time, plural, one {# μήνα} other {# μήνες}}",
         "yearsAgo": "πριν {time, plural, one {# χρόνο} other {# χρόνια}}"
+    },
+    "times": {
+        "second": "{time, plural, one {1 second} other {# seconds}}",
+        "minute": "{time, plural, one {1 minute} other {# minutes}}",
+        "hour": "{time, plural, one {1 hour} other {# hours}}",
+        "day": "{time, plural, one {1 day} other {# days}}",
+        "week": "{time, plural, one {1 week} other {# weeks}}",
+        "month": "{time, plural, one {1 month} other {# months}}",
+        "year": "{time, plural, one {1 year} other {# years}}"
     },
     "notifications": {
         "valueTx": "Λήψη {{value}} στο {{account}}",
@@ -1184,7 +1181,7 @@
             "http": "Η χρήση κόμβων μέσω HTTP αφήνει την κυκλοφορία μη κρυπτογραφημένη και θα μπορούσε να θέσει σε κίνδυνο την ασφάλεια."
         },
         "participation": {
-            "noAccounts": "Δεν έχετε κανέναν λογαριασμό διαθέσιμο για να συμμετάσχετε."
+            "noAccounts": "You do not have any IOTA."
         }
     },
     "tooltips": {
@@ -1219,7 +1216,8 @@
             },
             "ended": {
                 "title": "Το staking τελείωσε τώρα",
-                "body": "Οι ανταμοιβές Assembly και Shimmer θα διανεμηθούν στα πορτοφόλια σας όταν ξεκινήσει κάθε ένα από τα αντίστοιχα δίκτυα."
+                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
+                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
             }
         },
         "partiallyStakedFunds": {
@@ -1231,12 +1229,13 @@
         "stakingMinRewards": {
             "title": "Κάτω από την ελάχιστη τιμή ανταμοιβής",
             "titleMinBalance": "{amount} ελάχιστο υπόλοιπο απαιτείται",
-            "bodyMinBalace": "Αυτό το πορτοφόλι δεν έχει αρκετά IOTA token για να μπορέσεις να επιτύχεις την ελάχιστη ανταμοιβή airdrop και ως εκ τούτου δεν μπορεί να πονταριστεί.",
+            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
             "continue": "Παρακαλώ συνεχίστε να κάνετε staking για άλλο {duration}.",
             "bodyBelowMin": "Αυτό το πορτοφόλι δεν έχει φτάσει την ελάχιστη ανταμοιβή για {airdrop} ({airdropRewardMin}).",
             "bodyWillReachMin": "Πρέπει να ποντάρετε για άλλο {duration} για να φτάσετε στο ελάχιστο.",
-            "bodyWillNotReachMin": "Δεν θα φτάσετε στο ελάχιστο κατά τη διάρκεια της staking περιόδου εκτός αν κάνετε stake περισσότερα IOTA.",
-            "bodyDidNotReachMin": "Δεν έχετε κάνει stake αρκετά IOTA για να φτάσετε τις ελάχιστες ανταμοιβές για {airdrop} ({airdropRewardMin})."
+            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
+            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
         }
     },
     "exports": {

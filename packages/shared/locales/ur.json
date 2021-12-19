@@ -336,9 +336,7 @@
             },
             "appLock": {
                 "title": "Automatic lock",
-                "description": "غیر فعال ہونے کا وقت جب آپ کے والیٹس لاک ہوجاتے ہیں اور آپ لاگ آؤٹ ہوجاتے ہیں",
-                "durationMinute": "{time, plural, one {1 منٹ} other {# منٹ}}",
-                "durationHour": "{time, plural, one {1 گھنٹہ} other {# گھنٹے}}"
+                "description": "غیر فعال ہونے کا وقت جب آپ کے والیٹس لاک ہوجاتے ہیں اور آپ لاگ آؤٹ ہوجاتے ہیں"
             },
             "changePassword": {
                 "title": "پاس ورڈ تبدیل کریں",
@@ -968,6 +966,7 @@
         "passwordUpdating": "پاس ورڈ اپ ڈیٹ ہورہا...",
         "passwordSuccess": "پاس ورڈ کامیابی سے اپ ڈیٹ کر دیا گیا",
         "passwordFailed": "پاس ورڈ اپ ڈیٹ ناکام ہوگئی",
+        "syncing": "Syncing",
         "syncingAccounts": "والٹ سنک ہو رہے ہیں...",
         "exportingStronghold": "سٹرانگ ہولڈ برآمد ہو رہا ہے...",
         "exportingStrongholdSuccess": "سٹرانگ ہولڈ کامیابی کے ساتھ برآمد ہو گیا",
@@ -999,17 +998,6 @@
         "version": "ورژن {version}",
         "unknown": "اجنبی",
         "none": "None",
-        "days": "day(s)",
-        "time": {
-            "days": "دنوں",
-            "day": "دن",
-            "hours": "گھنٹے",
-            "hour": "گھنٹہ",
-            "minutes": "منٹ",
-            "minute": "منٹ",
-            "seconds": "سیکنڑ",
-            "second": "سیکنڑ"
-        },
         "staked": "Staked",
         "unstaked": "Unstaked",
         "staking": "Staking",
@@ -1025,6 +1013,15 @@
         "weeksAgo": "{time, plural, one {# ہفتہ} other {# ہفتے}} پہلے",
         "monthsAgo": "{time, plural, one {# مہینہ} other {# مہینے}} پہلے",
         "yearsAgo": "{time, plural, one {# سال} other {# سال}} پہلے"
+    },
+    "times": {
+        "second": "{time, plural, one {1 second} other {# seconds}}",
+        "minute": "{time, plural, one {1 minute} other {# minutes}}",
+        "hour": "{time, plural, one {1 hour} other {# hours}}",
+        "day": "{time, plural, one {1 day} other {# days}}",
+        "week": "{time, plural, one {1 week} other {# weeks}}",
+        "month": "{time, plural, one {1 month} other {# months}}",
+        "year": "{time, plural, one {1 year} other {# years}}"
     },
     "notifications": {
         "valueTx": "{{account}} سے {{value}} وصول ہو رہے ہیں",
@@ -1184,7 +1181,7 @@
             "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
         },
         "participation": {
-            "noAccounts": "You do not have any accounts available to participate."
+            "noAccounts": "You do not have any IOTA."
         }
     },
     "tooltips": {
@@ -1219,7 +1216,8 @@
             },
             "ended": {
                 "title": "Staking has now ended",
-                "body": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch."
+                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
+                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
             }
         },
         "partiallyStakedFunds": {
@@ -1231,12 +1229,13 @@
         "stakingMinRewards": {
             "title": "Below minimum reward value",
             "titleMinBalance": "{amount} minimum balance required",
-            "bodyMinBalace": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
+            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
             "continue": "Please continue staking for another {duration}.",
             "bodyBelowMin": "This wallet has not reached the minimum reward value for {airdrop} ({airdropRewardMin}).",
             "bodyWillReachMin": "You must stake for another {duration} to reach the minimum.",
-            "bodyWillNotReachMin": "You will not reach the minimum during the remaining staking period unless you stake more IOTA.",
-            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum rewards for {airdrop} ({airdropRewardMin})."
+            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
+            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
         }
     },
     "exports": {

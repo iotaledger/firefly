@@ -336,9 +336,7 @@
             },
             "appLock": {
                 "title": "Sluit outomaties",
-                "description": "Onaktiwiteitstyd voordat jou beursies sluit en jou uitgeteken",
-                "durationMinute": "{time, plural, one {1 minuut} other {# minute}}",
-                "durationHour": "{time, plural, one {1 huur} other {# ure}}"
+                "description": "Onaktiwiteitstyd voordat jou beursies sluit en jou uitgeteken"
             },
             "changePassword": {
                 "title": "Verander wagwoord",
@@ -746,7 +744,7 @@
         },
         "assembly-info": {
             "title": "Oor Assembly",
-            "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
+            "body1": "Baie geluk, jy het ASMB-tokens verdien as 'n staking beloning. Assembly is 'n multi-chain netwerk vir die implementering van skaalbare smart-contracts op IOTA.",
             "body2": "Ons beoog om Assembly in 2022 bekend te stel. Jou tokens sal beskikbaar wees om oor te dra sodra die netwerk begin."
         }
     },
@@ -968,6 +966,7 @@
         "passwordUpdating": "Wagwoord opdatering aan die gang...",
         "passwordSuccess": "Wagwoord suksesvol opgedateer",
         "passwordFailed": "Kon nie wagwoord opdateer nie",
+        "syncing": "Syncing",
         "syncingAccounts": "Sinkroniseer beursie...",
         "exportingStronghold": "Voer Stronghold uit...",
         "exportingStrongholdSuccess": "Die Stronghold is suksesvol uitgevoer",
@@ -999,17 +998,6 @@
         "version": "Weergawe {version}",
         "unknown": "Onbekend",
         "none": "Geen",
-        "days": "dag(e)",
-        "time": {
-            "days": "dae",
-            "day": "dag",
-            "hours": "ure",
-            "hour": "uur",
-            "minutes": "minute",
-            "minute": "minuut",
-            "seconds": "sekondes",
-            "second": "sekonde"
-        },
         "staked": "Stake",
         "unstaked": "Unstake",
         "staking": "Staking",
@@ -1025,6 +1013,15 @@
         "weeksAgo": "{time, plural, one {# week} other {# weke}} terug",
         "monthsAgo": "{time, plural, one {# maand} other {# maande}} terug",
         "yearsAgo": "{time, plural, one {# jaar} other {# jare}} terug"
+    },
+    "times": {
+        "second": "{time, plural, one {1 second} other {# seconds}}",
+        "minute": "{time, plural, one {1 minute} other {# minutes}}",
+        "hour": "{time, plural, one {1 hour} other {# hours}}",
+        "day": "{time, plural, one {1 day} other {# days}}",
+        "week": "{time, plural, one {1 week} other {# weeks}}",
+        "month": "{time, plural, one {1 month} other {# months}}",
+        "year": "{time, plural, one {1 year} other {# years}}"
     },
     "notifications": {
         "valueTx": "Ontvang {{value}} na {{account}}",
@@ -1184,7 +1181,7 @@
             "http": "Die gebruik van node oor HTTP laat verkeer ongeënkripteer wees en kan 'n sekuriteitsrisiko inhou."
         },
         "participation": {
-            "noAccounts": "Jy het geen rekeninge beskikbaar om deel te neem nie."
+            "noAccounts": "You do not have any IOTA."
         }
     },
     "tooltips": {
@@ -1219,7 +1216,8 @@
             },
             "ended": {
                 "title": "Staking het geëindig",
-                "body": "Assembly en Shimmer belonings sal aan jou beursies uitgedeel word wanneer elk van die onderskeie netwerke begin."
+                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
+                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
             }
         },
         "partiallyStakedFunds": {
@@ -1231,12 +1229,13 @@
         "stakingMinRewards": {
             "title": "Onder minimum beloningswaarde",
             "titleMinBalance": "{amount} minimum balans benodig",
-            "bodyMinBalace": "Hierdie beursie het nie genoeg IOTA-tokens om die minimum airdrop beloning te bereik nie en kan dus nie ge stake word nie.",
+            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
             "continue": "Gaan asseblief voort om vir 'n nog {duration} te stake.",
             "bodyBelowMin": "Hierdie beursie het nie die minimum beloningswaarde bereik vir {airdrop} nie. ({airdropRewardMin}).",
             "bodyWillReachMin": "Jy moet nog vir {duration} stake om die minimum te bereik.",
-            "bodyWillNotReachMin": "Jy sal nie die minimum bereik gedurende die oorblywende staking periode nie, tensy jy meer IOTA insit.",
-            "bodyDidNotReachMin": "Jy het nie genoeg IOTA ingesit om die minimum belonings te bereik nie {airdrop} ({airdropRewardMin})."
+            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
+            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
         }
     },
     "exports": {

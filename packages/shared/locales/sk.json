@@ -24,13 +24,13 @@
             "addMore": "Viac profilov viete pridať neskôr.",
             "developer": {
                 "label": "Vývojársky profil",
-                "info": "Connect to public and private IOTA networks"
+                "info": "Pripojiť k verejným a súkromným IOTA sieťam"
             }
         },
         "setup": {
             "title": "Nastavte si svoju peňaženku",
             "chrysalisTitle": "Aktualizácia siete Chrysalis",
-            "chrysalisBody": "From April 21st 2021, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
+            "chrysalisBody": "Od 21. apríla 2021 môžu používatelia migrovať svoje tokeny na novú sieť Chrisalis. Odporúčame Vám preniesť si svoje už existujúce tokeny čo najskôr.",
             "learnMore": "Naučte sa o presune"
         },
         "secure": {
@@ -312,7 +312,7 @@
             "theme": {
                 "title": "Motív",
                 "description": "",
-                "advice": "Restart the Firefly application for changes to the system theme to take effect"
+                "advice": "Pre aplikáciu zmien systémovej témy si prosím reštartujte aplikáciu Firefly"
             },
             "language": {
                 "title": "Jazyk",
@@ -328,17 +328,15 @@
             },
             "networkStatus": {
                 "title": "Stav siete",
-                "description": "Displays the status of the node you are currently connected to"
+                "description": "Zobraziť stav nodu ku ktorému ste momentálne pripojený"
             },
             "exportStronghold": {
-                "title": "Export backup",
+                "title": "Exportovať zálohu",
                 "description": "Exportovať do Stronghold súboru - kompletná šifrovaná záloha vašich peňaženiek a najnovšej histórie transakcii"
             },
             "appLock": {
-                "title": "Automatic lock",
-                "description": "Čas nečinnosti, po ktorom sa vaše peňaženky uzamknú a budete odhlásený",
-                "durationMinute": "{time, plural, one {# minúta} few {# minúty} other {# minút}}",
-                "durationHour": "{time, plural, one {# hodina} few {# hodiny} other {# hodín}}"
+                "title": "Automatické uzamknutie",
+                "description": "Čas nečinnosti, po ktorom sa vaše peňaženky uzamknú a budete odhlásený"
             },
             "changePassword": {
                 "title": "Zmeniť heslo",
@@ -365,12 +363,12 @@
                 "description": "Odstráni celý váš profil, peňaženky a históriu transakcii. Uistite sa, že máte zálohu"
             },
             "deepLinks": {
-                "title": "IOTA links",
+                "title": "IOTA linky",
                 "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
             },
             "networkConfiguration": {
                 "title": "Nastavenie siete",
-                "title2": "Network configuration",
+                "title2": "Konfigurácia siete",
                 "description": {
                     "dev": "Nastavenia vašej siete sa aktualizujú automaticky podľa aktuálnych nastavení uzla (pepínanie medzi sieťami spôsobi obnovenie stavu peňaženky)",
                     "nonDev": "Nastavenia vašej siete sa aktualizujú automaticky podľa aktuálnych nastavení uzla"
@@ -381,23 +379,23 @@
                 "nodeConfiguration": {
                     "title": "Výber uzla",
                     "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
-                    "automatic": "Automatic",
-                    "manual": "Manual"
+                    "automatic": "Automatické",
+                    "manual": "Príručka"
                 }
             },
             "configureNodeList": {
-                "title": "Node configuration",
+                "title": "Konfigurácia nodu",
                 "description": "Manage the list of nodes you connect to",
                 "primaryNode": "Hlavný uzol",
                 "excludeNode": "Vylúčiť uzol",
                 "includeNode": "Zahrnúť uzol",
-                "editDetails": "Edit details",
-                "viewInfo": "View info",
+                "editDetails": "Upraviť podrobnosti",
+                "viewInfo": "Zobraziť info",
                 "setAsPrimary": "Nastaviť ako hlavný",
                 "removeNode": "Odstrániť uzol",
                 "includeOfficialNodeList": "Zahrnúť oficiálny zoznam uzlov",
-                "noNodes": "There are no nodes, unable to connect to the network",
-                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
+                "noNodes": "Momentálne nie sú k dispozícii žiadne uzly, nie je množné pripojiť sa k sieti",
+                "noNodesAuto": "Neexistujú žiadne uzly, bude použitý automatický výber"
             },
             "proofOfWork": {
                 "title": "Proof of Work",
@@ -412,7 +410,7 @@
                 "description": "Zobraziť systémové a aplikačné informácie"
             },
             "migrateLedgerIndex": {
-                "title": "Migrate Ledger index",
+                "title": "Migrovať Ledger Index",
                 "description": "Migrujte ďalší Trinity index"
             },
             "troubleshoot": {
@@ -425,7 +423,7 @@
             },
             "faq": {
                 "title": "FAQ",
-                "title2": "Frequently asked questions",
+                "title2": "Často kladené otázky",
                 "description": "Zobraziť FAQ pre získanie pomoci s bežným problémom alebo otázkou"
             },
             "discord": {
@@ -488,21 +486,21 @@
             }
         },
         "staking": {
-            "title": "Staking",
-            "welcome": "Welcome to the staking dashboard",
+            "title": "Stakovanie",
+            "welcome": "Vitaj v staking prehľade",
             "status": {
-                "upcoming": "Event not started",
-                "commencing": "Pre-staking open",
-                "holdingActive": "Staking in progress",
-                "holdingInactive": "Staking open",
-                "inactive": "Staking not detected",
-                "ended": "Staking ended"
+                "upcoming": "Udalosť ešte nezačala",
+                "commencing": "Pre-staking otvorený",
+                "holdingActive": "Prebieha stakovanie",
+                "holdingInactive": "Staking otvorený",
+                "inactive": "Stakovanie nezaznamenané",
+                "ended": "Staking ukončený"
             },
             "summary": {
                 "stakedFunds": "Stakované prostriedky"
             },
             "info": {
-                "upcomingSubheader": "Event has not started",
+                "upcomingSubheader": "Udalosť ešte nezačala",
                 "upcomingHeader": "Check back later",
                 "commencingSubheader": "Get ready for staking",
                 "commencingHeader": "Pred-stakuj svoje tokeny!",
@@ -513,7 +511,7 @@
                 "endedSubheader": "Staking has now ended",
                 "endedHeader": "Thank you!",
                 "inactiveHeader": "Try changing node",
-                "inactiveSubheader": "Staking not detected"
+                "inactiveSubheader": "Stakovanie nezaznamenané"
             },
             "airdrops": {
                 "holding": "Zostáva",
@@ -968,6 +966,7 @@
         "passwordUpdating": "Aktualizácia hesla...",
         "passwordSuccess": "Heslo úspešne aktualizované",
         "passwordFailed": "Aktualizácia hesla zlyhala",
+        "syncing": "Syncing",
         "syncingAccounts": "Synchronizácia peňaženiek...",
         "exportingStronghold": "Exportujem Stronghold...",
         "exportingStrongholdSuccess": "Stronghold úspešne exportovaný",
@@ -999,17 +998,6 @@
         "version": "Verzia {version}",
         "unknown": "Neuvedené",
         "none": "Žiadne",
-        "days": "day(s)",
-        "time": {
-            "days": "dni",
-            "day": "deň",
-            "hours": "hours",
-            "hour": "hodina",
-            "minutes": "minúty",
-            "minute": "minúta",
-            "seconds": "sekundy",
-            "second": "sekunda"
-        },
         "staked": "Stakované",
         "unstaked": "Odstakované",
         "staking": "Stakovanie",
@@ -1025,6 +1013,15 @@
         "weeksAgo": "pred {time, plural,\n  one {1 týždňom}\n  other {# týždňami}\n}",
         "monthsAgo": "pred {time, plural,\n  one {# mesiacom}\n  few {# mesiacmi}\n  other {# mesiacmi}\n}",
         "yearsAgo": "pred {time, plural,\n  one {1 rokom}\n  other {# rokmi}\n}"
+    },
+    "times": {
+        "second": "{time, plural, one {1 second} other {# seconds}}",
+        "minute": "{time, plural, one {1 minute} other {# minutes}}",
+        "hour": "{time, plural, one {1 hour} other {# hours}}",
+        "day": "{time, plural, one {1 day} other {# days}}",
+        "week": "{time, plural, one {1 week} other {# weeks}}",
+        "month": "{time, plural, one {1 month} other {# months}}",
+        "year": "{time, plural, one {1 year} other {# years}}"
     },
     "notifications": {
         "valueTx": "Prijímanie {{value}} na {{account}}",
@@ -1184,7 +1181,7 @@
             "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
         },
         "participation": {
-            "noAccounts": "Pre zúčastnenie nemáš dostupné žiadne kontá."
+            "noAccounts": "You do not have any IOTA."
         }
     },
     "tooltips": {
@@ -1219,7 +1216,8 @@
             },
             "ended": {
                 "title": "Stakovanie teraz skončilo",
-                "body": "Assembly a Shimmer odmeny budú prevedené do tvojich peňaženiek keď sa tieto siete spustia."
+                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
+                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
             }
         },
         "partiallyStakedFunds": {
@@ -1231,12 +1229,13 @@
         "stakingMinRewards": {
             "title": "Pod minimálnou hodnotou odmeny",
             "titleMinBalance": "{amount} minimálny požadovaný stav",
-            "bodyMinBalace": "Táto peňaženka nemá dostatok IOTA prostriedkov na dosiahnutie minimálnej airdrop odmeny a preto nemôže byť stakovaná.",
+            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
             "continue": "Prosím pokračuj v stakovaní dalších {duration}.",
             "bodyBelowMin": "Táto peňaženka nedosiahla minimálnu hodnotu odmeny pre {airdrop} ({airdropRewardMin}).",
             "bodyWillReachMin": "Musíš stakovať ešte {duration} na dosiahnutie minima.",
-            "bodyWillNotReachMin": "Nedosiahneš minimum počas stakovacieho obdobia, pokiaľ nestakneš viac IOTA tokenov.",
-            "bodyDidNotReachMin": "Nestakol si dostatok IOTA tokenov na dosiahnutie minimálnych odmient pre {airdrop} ({airdropRewardMin})."
+            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
+            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
         }
     },
     "exports": {

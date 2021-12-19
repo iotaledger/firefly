@@ -149,7 +149,7 @@
                 "body": "Une phrase de récupération est composée de 24 mots, tous en minuscules, avec un espace entre chaque mot. Elle est utilisée pour récupérer des portefeuilles Firefly existants.",
                 "enter": "Saisissez votre phrase de récupération secrète"
             },
-            "seedDetected": "Graine de 81 caractères détectée",
+            "seedDetected": "81 caractères de départ détectées",
             "phraseDetected": "Phrase de récupération de 24 mots détectée",
             "checksum": "Clef de concordance"
         },
@@ -336,9 +336,7 @@
             },
             "appLock": {
                 "title": "Verrouillage automatique",
-                "description": "Temps d'inactivité avant le verrouillage de vos portefeuilles et vous êtes déconnecté",
-                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
-                "durationHour": "{time, plural, one {1 heure} other {# heures}}"
+                "description": "Temps d'inactivité avant le verrouillage de vos portefeuilles et vous êtes déconnecté"
             },
             "changePassword": {
                 "title": "Modifier le mot de passe",
@@ -505,7 +503,7 @@
                 "upcomingSubheader": "L'évent n'a pas encore commencé",
                 "upcomingHeader": "Revenez plus tard",
                 "commencingSubheader": "Préparez-vous pour le Staking",
-                "commencingHeader": "Placez vos jetons pour le pré-Stake !",
+                "commencingHeader": "Placez vos jetons pour le pré-Staking !",
                 "holdingSubheaderHolding": "Gagnez maintenant des récompenses de Staking",
                 "holdingSubheaderNotHolding": "Gagnez des récompenses en plaçant vos IOTA pour le Staking",
                 "holdingHeaderHolding": "{duration} restants",
@@ -517,7 +515,7 @@
             },
             "airdrops": {
                 "holding": "Restant",
-                "commencing": "Avant que le stacking ne commence",
+                "commencing": "Jusqu'à ce que le Staking commence",
                 "collectedRewards": "Récompenses récupérées",
                 "assembly": {
                     "name": "Assembly",
@@ -968,6 +966,7 @@
         "passwordUpdating": "Mise à jour du mot de passe...",
         "passwordSuccess": "Mot de passe mis à jour avec succès",
         "passwordFailed": "La mise à jour du mot de passe a échoué",
+        "syncing": "Syncing",
         "syncingAccounts": "Synchronisation des portefeuilles en cours...",
         "exportingStronghold": "Export Stronghold en cours...",
         "exportingStrongholdSuccess": "Stronghold exporté avec succès",
@@ -999,17 +998,6 @@
         "version": "Version {version}",
         "unknown": "Inconnu",
         "none": "Aucun",
-        "days": "jour(s)",
-        "time": {
-            "days": "jours",
-            "day": "jour",
-            "hours": "heures",
-            "hour": "heure",
-            "minutes": "minutes",
-            "minute": "minute",
-            "seconds": "secondes",
-            "second": "seconde"
-        },
         "staked": "Placé",
         "unstaked": "Déverrouillé",
         "staking": "Staking",
@@ -1025,6 +1013,15 @@
         "weeksAgo": "Il y a {time, plural, one {# semaine} other {# semaines}}",
         "monthsAgo": "il y a {time, plural, one {# mois} other {# mois}}",
         "yearsAgo": "il y a {time, plural, one {# année} other {# années}}"
+    },
+    "times": {
+        "second": "{time, plural, one {1 second} other {# seconds}}",
+        "minute": "{time, plural, one {1 minute} other {# minutes}}",
+        "hour": "{time, plural, one {1 hour} other {# hours}}",
+        "day": "{time, plural, one {1 day} other {# days}}",
+        "week": "{time, plural, one {1 week} other {# weeks}}",
+        "month": "{time, plural, one {1 month} other {# months}}",
+        "year": "{time, plural, one {1 year} other {# years}}"
     },
     "notifications": {
         "valueTx": "Réception de {{value}} sur {{account}}",
@@ -1184,7 +1181,7 @@
             "http": "L'utilisation de nœuds en HTTP laisse le trafic non chiffré et pourrait poser un risque de sécurité."
         },
         "participation": {
-            "noAccounts": "Vous n'avez aucun compte disponible pour participer."
+            "noAccounts": "You do not have any IOTA."
         }
     },
     "tooltips": {
@@ -1219,7 +1216,8 @@
             },
             "ended": {
                 "title": "Le Staking est maintenant terminée",
-                "body": "Les récompenses d'Assembly et de Shimmer seront distribuées à vos portefeuilles lorsque chacun des réseaux respectifs sera lancé."
+                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
+                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
             }
         },
         "partiallyStakedFunds": {
@@ -1231,12 +1229,13 @@
         "stakingMinRewards": {
             "title": "Valeur de récompense inférieure à la valeur minimale",
             "titleMinBalance": "Solde minimum de {amount} requis",
-            "bodyMinBalace": "Ce portefeuille ne possède pas assez de jetons IOTA pour atteindre la récompense de parachutage minimale et ne peut donc pas être placé pour le Staking.",
+            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
             "continue": "Veuillez continuer à miser pour {duration}.",
             "bodyBelowMin": "Ce portefeuille n'a pas atteint la valeur de récompense minimale pour {airdrop} ({airdropRewardMin}).",
             "bodyWillReachMin": "Vous devez placer pendant {duration} pour atteindre le minimum.",
-            "bodyWillNotReachMin": "Vous n'atteindrez pas le minimum pendant la période de Staking restante à moins que vous ne mettiez en jeu plus d'IOTA.",
-            "bodyDidNotReachMin": "Vous n'avez pas assez d'IOTA placé pour atteindre les récompenses minimales pour {airdrop} ({airdropRewardMin})."
+            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
+            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
         }
     },
     "exports": {

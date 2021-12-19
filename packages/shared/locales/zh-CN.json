@@ -7,7 +7,7 @@
         "legal": {
             "title": "隐私政策和服务条款",
             "body": "请查看隐私政策和服务条款。",
-            "checkbox": "我已读过和接受隐私政策和服务条款"
+            "checkbox": "我已阅读并接受隐私政策和服务条款"
         },
         "appearance": {
             "title": "外观",
@@ -28,7 +28,7 @@
             }
         },
         "setup": {
-            "title": "设置钱包",
+            "title": "配置钱包",
             "chrysalisTitle": "Chrysalis网络更新",
             "chrysalisBody": "从2021年4月21日起，用户可以将他们的代币迁移到新的 Chrysalis 网络。我们建议您尽快迁移您现有的代币。",
             "learnMore": "了解迁移信息"
@@ -43,7 +43,7 @@
             "body": "创建一个新钱包。您可以选择一个普通软件钱包，或者如果您有一个Ledger设备，您可以设置一个硬件钱包。",
             "softwareAccount": {
                 "title": "我想要一个软件钱包",
-                "description": "创建一个24个字的恢复助记词"
+                "description": "创建一个包含24个单词的恢复助记词"
             },
             "ledgerAccount": {
                 "title": "我想要一个硬件钱包",
@@ -77,7 +77,7 @@
         "pin": {
             "title": "设置PIN码",
             "body1": "请在下方输入 6 位数字的 PIN 码。您在登录钱包时需要输入 PIN 码。",
-            "body2": "仅使用数字"
+            "body2": "仅限数字"
         },
         "confirmPin": {
             "title": "请验证您的 PIN",
@@ -336,9 +336,7 @@
             },
             "appLock": {
                 "title": "自动锁定",
-                "description": "自动锁定钱包并登出的待机时间",
-                "durationMinute": "{time, plural, one {1分钟} other {# 分钟}}",
-                "durationHour": "{time, plural, one {1小时} other {# 小时}}"
+                "description": "自动锁定钱包并登出的待机时间"
             },
             "changePassword": {
                 "title": "修改密码",
@@ -968,6 +966,7 @@
         "passwordUpdating": "正在更新密码...",
         "passwordSuccess": "密码更新成功",
         "passwordFailed": "更新密码失败",
+        "syncing": "Syncing",
         "syncingAccounts": "正在同步钱包...",
         "exportingStronghold": "导出Stronghold...",
         "exportingStrongholdSuccess": "Stronghold导出成功",
@@ -999,17 +998,6 @@
         "version": "版本 {version}",
         "unknown": "未知",
         "none": "无",
-        "days": "天",
-        "time": {
-            "days": "天",
-            "day": "天",
-            "hours": "小时",
-            "hour": "小时",
-            "minutes": "分钟",
-            "minute": "分钟",
-            "seconds": "秒",
-            "second": "秒"
-        },
         "staked": "已质押",
         "unstaked": "解除质押",
         "staking": "质押",
@@ -1025,6 +1013,15 @@
         "weeksAgo": "{time, plural, one {# 周} other {# 周}} 前",
         "monthsAgo": "{time, plural, one {# 月} other {# 月}} 前",
         "yearsAgo": "{time, plural, one {# 年} other {# 年}} 前"
+    },
+    "times": {
+        "second": "{time, plural, one {1 second} other {# seconds}}",
+        "minute": "{time, plural, one {1 minute} other {# minutes}}",
+        "hour": "{time, plural, one {1 hour} other {# hours}}",
+        "day": "{time, plural, one {1 day} other {# days}}",
+        "week": "{time, plural, one {1 week} other {# weeks}}",
+        "month": "{time, plural, one {1 month} other {# months}}",
+        "year": "{time, plural, one {1 year} other {# years}}"
     },
     "notifications": {
         "valueTx": "帐户 {{account}} 收到 {{value}}",
@@ -1184,7 +1181,7 @@
             "http": "通过 HTTP 使用节点使得流量未加密，可能造成安全风险。"
         },
         "participation": {
-            "noAccounts": "您没有任何帐户可以参加。"
+            "noAccounts": "You do not have any IOTA."
         }
     },
     "tooltips": {
@@ -1219,7 +1216,8 @@
             },
             "ended": {
                 "title": "质押已结束",
-                "body": "Assembly 和 Shimmer 的奖励将在各自的网络启动时分配到你的钱包。"
+                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
+                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
             }
         },
         "partiallyStakedFunds": {
@@ -1231,12 +1229,13 @@
         "stakingMinRewards": {
             "title": "低于最低奖励值",
             "titleMinBalance": "需要 {amount} 的最低余额",
-            "bodyMinBalace": "这个钱包没有足够的 IOTA 代币来达到最低空投奖励，因此不能被质押。",
+            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
             "continue": "请继续为另一个 {duration} 进行质押",
             "bodyBelowMin": "这个钱包还没有达到 {airdrop} 的最低奖励值({airdropRewardMin})。",
             "bodyWillReachMin": "您必须再质押 {duration} 能达到最低值。",
-            "bodyWillNotReachMin": "除非您质押更多IOTA，否则您将无法达到最低值。",
-            "bodyDidNotReachMin": "您没有质押足够的IOTA来达到 {airdrop} 的最低奖励 ({airdropRewardMin})。"
+            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
+            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
         }
     },
     "exports": {
