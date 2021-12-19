@@ -79,15 +79,16 @@
     class="pl-4 pr-3 py-2 flex flex-row space-x-2 items-center rounded-2xl bg-blue-100 dark:bg-gray-800"
     on:mouseenter={toggleTooltip}
     on:mouseleave={toggleTooltip}
+    bind:this={tooltipAnchor}
 >
-    <div bind:this={tooltipAnchor} class="mr-1">
+    <div  class="mr-1">
         <Icon icon='info-filled' width="16" height="16" classes="text-gray-600" />
     </div>
     <Text type="p">{indicatorText}</Text>
     <Icon icon={indicatorIcon} width="24" height="24" classes="text-blue-500" />
 </div>
 {#if showTooltip}
-    <Tooltip anchor={tooltipAnchor} position="bottom">
+    <Tooltip anchor={tooltipAnchor} position="bottom" inlineStyle='max-width: 200px;'>
         <Text type="p" classes="text-gray-900 bold mb-1 text-left">{tooltipText?.title}</Text>
         <Text type="p" secondary classes="text-left">{tooltipText?.body}</Text>
     </Tooltip>

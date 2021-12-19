@@ -13,6 +13,8 @@
     export let anchor: HTMLElement | null = null
     export let position: Position = Position.Top
     export let refresh: boolean = false // prop used to refresh the tooltip position
+    export let offset: number = 8
+    export let inlineStyle: string = ''
 
     let tooltip: HTMLElement
     let top = 0
@@ -28,18 +30,11 @@
         width: 0,
         height: 0,
     }
-    const OFFSET = 8
 
     $: darkModeEnabled = $appSettings.darkMode
     $: refresh, refreshPosition()
 
-    onMount(() => {
-        // Bugfix: Tooltip z-index was not being applied
-        tooltip?.parentNode?.removeChild(tooltip)
-        document?.body?.appendChild(tooltip)
-        //
-        refreshPosition()
-    })
+    onMount(refreshPosition)
 
     function refreshAnchorBox(): void {
         anchorBox.top = anchor?.getBoundingClientRect()?.top ?? 0
@@ -55,20 +50,20 @@
         refreshAnchorBox()
         switch (position) {
             case Position.Top:
-                top = anchorBox.top - tooltip.offsetHeight - OFFSET
+                top = anchorBox.top - tooltip.offsetHeight - offset
                 left = anchorBox.left - tooltip.offsetWidth / 2 + anchorBox.width / 2
                 break
             case Position.Bottom:
-                top = anchorBox.top + anchorBox.height + OFFSET
+                top = anchorBox.top + anchorBox.height + offset
                 left = anchorBox.left - tooltip.offsetWidth / 2 + anchorBox.width / 2
                 break
             case Position.Left:
                 top = anchorBox.top - tooltip.offsetHeight / 2 + anchorBox.height / 2
-                left = anchorBox.left - tooltip.offsetWidth - OFFSET
+                left = anchorBox.left - tooltip.offsetWidth - offset
                 break
             case Position.Right:
                 top = anchorBox.top - tooltip.offsetHeight / 2 + anchorBox.height / 2
-                left = anchorBox.left + anchorBox.width + OFFSET
+                left = anchorBox.left + anchorBox.width + offset
                 break
         }
     }
@@ -172,7 +167,7 @@
 <tooltip
     class="fixed text-center z-10 py-4 px-4 w-auto max-w-60 shadow-lg rounded-xl border border-solid bg-white dark:bg-gray-900 border-white dark:border-gray-700 {position} {classes}"
     class:darkmode={darkModeEnabled}
-    style="top: {top}px; left:{left}px;"
+    style="top: {top}px; left:{left}px; {inlineStyle}"
     bind:this={tooltip}>
     <slot />
     <triangle>
