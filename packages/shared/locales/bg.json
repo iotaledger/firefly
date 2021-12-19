@@ -336,9 +336,7 @@
             },
             "appLock": {
                 "title": "Автоматично заключване",
-                "description": "Време на неактивност преди заключване на портфейла и изход от профила",
-                "durationMinute": "{time, plural, one {1 минута} other {# минути}}",
-                "durationHour": "{time, plural, one {1 час} other {# часа}}"
+                "description": "Време на неактивност преди заключване на портфейла и изход от профила"
             },
             "changePassword": {
                 "title": "Промяна на паролата",
@@ -968,6 +966,7 @@
         "passwordUpdating": "Обновяване на паролата...",
         "passwordSuccess": "Обновяване на паролата успешно",
         "passwordFailed": "Неуспешно обновяване на паролата",
+        "syncing": "Syncing",
         "syncingAccounts": "Синхронизация портфейли...",
         "exportingStronghold": "Експортиране Stronghold...",
         "exportingStrongholdSuccess": "Експортиране Stronghold успешно",
@@ -999,17 +998,6 @@
         "version": "Версия {version}",
         "unknown": "Неизвестен",
         "none": "None",
-        "days": "day(s)",
-        "time": {
-            "days": "дни",
-            "day": "ден",
-            "hours": "hours",
-            "hour": "час",
-            "minutes": "минути",
-            "minute": "минута",
-            "seconds": "секунди",
-            "second": "секунда"
-        },
         "staked": "Staked",
         "unstaked": "Unstaked",
         "staking": "Залагане",
@@ -1025,6 +1013,15 @@
         "weeksAgo": "преди {time, plural, one {# седмица} other {# седмици}}",
         "monthsAgo": "преди {time, plural, one {# месец} other {# месеца}}",
         "yearsAgo": "преди {time, plural, one {# година} other {# години}}"
+    },
+    "times": {
+        "second": "{time, plural, one {1 second} other {# seconds}}",
+        "minute": "{time, plural, one {1 minute} other {# minutes}}",
+        "hour": "{time, plural, one {1 hour} other {# hours}}",
+        "day": "{time, plural, one {1 day} other {# days}}",
+        "week": "{time, plural, one {1 week} other {# weeks}}",
+        "month": "{time, plural, one {1 month} other {# months}}",
+        "year": "{time, plural, one {1 year} other {# years}}"
     },
     "notifications": {
         "valueTx": "Получаване {{value}} към {{account}}",
@@ -1184,7 +1181,7 @@
             "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
         },
         "participation": {
-            "noAccounts": "You do not have any accounts available to participate."
+            "noAccounts": "You do not have any IOTA."
         }
     },
     "tooltips": {
@@ -1219,7 +1216,8 @@
             },
             "ended": {
                 "title": "Залагането приключи",
-                "body": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch."
+                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
+                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
             }
         },
         "partiallyStakedFunds": {
@@ -1231,12 +1229,13 @@
         "stakingMinRewards": {
             "title": "Below minimum reward value",
             "titleMinBalance": "{amount} minimum balance required",
-            "bodyMinBalace": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
+            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
             "continue": "Please continue staking for another {duration}.",
             "bodyBelowMin": "Този портфейл не е достигнал минималното ниво необходимо за отплащане за {airdrop} ({airdropRewardMin}).",
             "bodyWillReachMin": "You must stake for another {duration} to reach the minimum.",
-            "bodyWillNotReachMin": "You will not reach the minimum during the remaining staking period unless you stake more IOTA.",
-            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum rewards for {airdrop} ({airdropRewardMin})."
+            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
+            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
         }
     },
     "exports": {

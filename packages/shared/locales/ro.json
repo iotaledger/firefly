@@ -336,9 +336,7 @@
             },
             "appLock": {
                 "title": "Automatic lock",
-                "description": "Inactivity time before your wallets lock and you are logged out",
-                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
-                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
+                "description": "Inactivity time before your wallets lock and you are logged out"
             },
             "changePassword": {
                 "title": "Schimbă parola",
@@ -968,6 +966,7 @@
         "passwordUpdating": "Updating password...",
         "passwordSuccess": "Updated password successfully",
         "passwordFailed": "Updating password failed",
+        "syncing": "Syncing",
         "syncingAccounts": "Syncing wallets...",
         "exportingStronghold": "Exporting Stronghold...",
         "exportingStrongholdSuccess": "Exported Stronghold successfully",
@@ -999,17 +998,6 @@
         "version": "Version {version}",
         "unknown": "Unknown",
         "none": "None",
-        "days": "day(s)",
-        "time": {
-            "days": "days",
-            "day": "day",
-            "hours": "hours",
-            "hour": "hour",
-            "minutes": "minutes",
-            "minute": "minute",
-            "seconds": "seconds",
-            "second": "second"
-        },
         "staked": "Staked",
         "unstaked": "Unstaked",
         "staking": "Mizare",
@@ -1025,6 +1013,15 @@
         "weeksAgo": "{time, plural, one {# week} other {# weeks}} ago",
         "monthsAgo": "{time, plural, one {# month} other {# months}} ago",
         "yearsAgo": "{time, plural, one {# year} other {# years}} ago"
+    },
+    "times": {
+        "second": "{time, plural, one {1 second} other {# seconds}}",
+        "minute": "{time, plural, one {1 minute} other {# minutes}}",
+        "hour": "{time, plural, one {1 hour} other {# hours}}",
+        "day": "{time, plural, one {1 day} other {# days}}",
+        "week": "{time, plural, one {1 week} other {# weeks}}",
+        "month": "{time, plural, one {1 month} other {# months}}",
+        "year": "{time, plural, one {1 year} other {# years}}"
     },
     "notifications": {
         "valueTx": "Receiving {{value}} to {{account}}",
@@ -1184,7 +1181,7 @@
             "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
         },
         "participation": {
-            "noAccounts": "You do not have any accounts available to participate."
+            "noAccounts": "You do not have any IOTA."
         }
     },
     "tooltips": {
@@ -1219,7 +1216,8 @@
             },
             "ended": {
                 "title": "Mizarea s-a încheiat acum",
-                "body": "Recompensele Assembly și Shimmer vor fi distribuite portofelelor dumneavoastra atunci când fiecare rețea va fi lansată."
+                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
+                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
             }
         },
         "partiallyStakedFunds": {
@@ -1231,12 +1229,13 @@
         "stakingMinRewards": {
             "title": "Sub valoarea minimă a recompensei",
             "titleMinBalance": "Soldul minim {amount} este necesar",
-            "bodyMinBalace": "Acest portofel nu are suficiente monede IOTA pentru a ajunge la recompensa minimă pentru airdrop și, prin urmare, nu poate fi mizat.",
+            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
             "continue": "Vă rugăm să continuați să mizati pentru inca {duration}.",
             "bodyBelowMin": "Acest portofel nu a atins valoarea minimă de recompensă pentru {airdrop} ({airdropRewardMin}).",
             "bodyWillReachMin": "Trebuie să mizati pentru inca {duration} să ajungeti la minimum.",
-            "bodyWillNotReachMin": "Nu veti atinge minimul în perioada de mizare rămasă decât dacă mizati mai multa IOTA.",
-            "bodyDidNotReachMin": "Nu ati mizat cu suficienta IOTA pentru a ajunge la recompensele minime pentru {airdrop} ({airdropRewardMin})."
+            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
+            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
         }
     },
     "exports": {

@@ -336,9 +336,7 @@
             },
             "appLock": {
                 "title": "Automatisch vergrendelen",
-                "description": "Inactiviteit tijd voordat uw portemonnees vergrendelen en u bent uitgelogd",
-                "durationMinute": "{time, plural, one {1 minuut} other {# minuten}}",
-                "durationHour": "{time, plural, one {1 uur} other {# uur}}"
+                "description": "Inactiviteit tijd voordat uw portemonnees vergrendelen en u bent uitgelogd"
             },
             "changePassword": {
                 "title": "Wachtwoord wijzigen",
@@ -726,7 +724,7 @@
         },
         "stakingManager": {
             "title": "Staking management",
-            "description": "Wanneer u een portemonnee staket, stuurt u een transactie naar uzelf en markeert u die wallet als \"staked\". U kan uw tokens op ieder moment versturen, maar u zal daarna geen beloningen meer ontvangen.",
+            "description": "Wanneer u een portemonnee staket, stuurt u een transactie naar uzelf en markeert u die wallet als \"staked\". U kunt uw tokens op ieder moment versturen, maar u zult dan geen beloningen meer ontvangen.",
             "totalFundsStaked": "Totale hoeveelheid gestaket",
             "stakedSuccessfully": "Uw tokens zijn gestaket voor {account}.",
             "unstakedSuccessfully": "U bent gestopt met staken voor {account}."
@@ -968,6 +966,7 @@
         "passwordUpdating": "Wachtwoord bijwerken...",
         "passwordSuccess": "Wachtwoord succesvol bijgewerkt",
         "passwordFailed": "Wachtwoord bijwerken mislukt",
+        "syncing": "Syncing",
         "syncingAccounts": "Portemonnees synchroniseren...",
         "exportingStronghold": "Exporteren van Stronghold...",
         "exportingStrongholdSuccess": "Stronghold succesvol geexporteerd",
@@ -999,17 +998,6 @@
         "version": "Versie {version}",
         "unknown": "Onbekend",
         "none": "Geen",
-        "days": "dag(en)",
-        "time": {
-            "days": "dagen",
-            "day": "dag",
-            "hours": "uren",
-            "hour": "uur",
-            "minutes": "minuten",
-            "minute": "minuut",
-            "seconds": "seconden",
-            "second": "seconde"
-        },
         "staked": "Gestaket",
         "unstaked": "Niet gestaket",
         "staking": "Staken",
@@ -1025,6 +1013,15 @@
         "weeksAgo": "{time, plural, one {# week} other {# weken}} geleden",
         "monthsAgo": "{time, plural, one {# maand} other {# maanden}} geleden",
         "yearsAgo": "{time, plural, one {# jaar} other {# jaren}} geleden"
+    },
+    "times": {
+        "second": "{time, plural, one {1 second} other {# seconds}}",
+        "minute": "{time, plural, one {1 minute} other {# minutes}}",
+        "hour": "{time, plural, one {1 hour} other {# hours}}",
+        "day": "{time, plural, one {1 day} other {# days}}",
+        "week": "{time, plural, one {1 week} other {# weeks}}",
+        "month": "{time, plural, one {1 month} other {# months}}",
+        "year": "{time, plural, one {1 year} other {# years}}"
     },
     "notifications": {
         "valueTx": "Ontvangst van {{value}} op {{account}}",
@@ -1184,7 +1181,7 @@
             "http": "Het gebruik van nodes over HTTP laat verkeer onversleuteld en kan een veiligheidsrisico opleveren."
         },
         "participation": {
-            "noAccounts": "U hebt geen accounts beschikbaar om deel te nemen."
+            "noAccounts": "You do not have any IOTA."
         }
     },
     "tooltips": {
@@ -1219,7 +1216,8 @@
             },
             "ended": {
                 "title": "Staking is nu beëindigd",
-                "body": "Beloningen voor Assembly en Shimmer zullen worden uitgedeeld aan je portemonnees wanneer elk van de respectievelijke netwerken wordt gelanceerd."
+                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
+                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
             }
         },
         "partiallyStakedFunds": {
@@ -1231,12 +1229,13 @@
         "stakingMinRewards": {
             "title": "Onder minimum beloning waarde",
             "titleMinBalance": "{amount} minimum saldo vereist",
-            "bodyMinBalace": "Deze wallet heeft niet genoeg IOTA tokens om de minimale airdrop beloning te bereiken en kan hierdoor niet worden gestaked.",
-            "continue": "Ga door met inzetten voor nog {duration}.",
+            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
+            "continue": "Ga door met staken voor nog {duration}.",
             "bodyBelowMin": "Deze wallet heeft de minimum vergoeding voor {airdrop} ({airdropRewardMin}) niet bereikt.",
             "bodyWillReachMin": "U moet staken voor nog {duration} om het minimum te bereiken.",
-            "bodyWillNotReachMin": "U zult het minimum niet bereiken tijdens de resterende staking periode tenzij u meer IOTA staked.",
-            "bodyDidNotReachMin": "U heeft niet genoeg IOTA gestaket om de minimum beloning te ontvangen voor {airdrop} ({airdropRewardMin})."
+            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
+            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
         }
     },
     "exports": {

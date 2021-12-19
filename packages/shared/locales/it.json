@@ -336,9 +336,7 @@
             },
             "appLock": {
                 "title": "Blocco Automatico",
-                "description": "Tempo di inattività prima del blocco dei wallet e disconnessione",
-                "durationMinute": "{time, plural, one {1 minuto} other {# minuti}}",
-                "durationHour": "{time, plural, one {1 ora} other {# ore}}"
+                "description": "Tempo di inattività prima del blocco dei wallet e disconnessione"
             },
             "changePassword": {
                 "title": "Cambia password",
@@ -968,6 +966,7 @@
         "passwordUpdating": "Aggiornamento password...",
         "passwordSuccess": "Password aggiornata con successo",
         "passwordFailed": "Aggiornamento password non riuscito",
+        "syncing": "Syncing",
         "syncingAccounts": "Sincronizzazione wallet...",
         "exportingStronghold": "Esportazione stronghold...",
         "exportingStrongholdSuccess": "Stronghold esportato con successo",
@@ -999,17 +998,6 @@
         "version": "Versione {version}",
         "unknown": "Sconosciuto",
         "none": "Nessuno",
-        "days": "giorno(i)",
-        "time": {
-            "days": "giorni",
-            "day": "giorno",
-            "hours": "ore",
-            "hour": "ora",
-            "minutes": "minuti",
-            "minute": "minuto",
-            "seconds": "secondi",
-            "second": "secondo"
-        },
         "staked": "In staking",
         "unstaked": "Tolto dallo staking",
         "staking": "Staking",
@@ -1025,6 +1013,15 @@
         "weeksAgo": "{time, plural, one {# settimana} other {# settimane}} fa",
         "monthsAgo": "{time, plural, one {# mese} other {# mesi}} fa",
         "yearsAgo": "{time, plural, one {# anno} other {# anni}} fa"
+    },
+    "times": {
+        "second": "{time, plural, one {1 second} other {# seconds}}",
+        "minute": "{time, plural, one {1 minute} other {# minutes}}",
+        "hour": "{time, plural, one {1 hour} other {# hours}}",
+        "day": "{time, plural, one {1 day} other {# days}}",
+        "week": "{time, plural, one {1 week} other {# weeks}}",
+        "month": "{time, plural, one {1 month} other {# months}}",
+        "year": "{time, plural, one {1 year} other {# years}}"
     },
     "notifications": {
         "valueTx": "In ricezione {{value}} sul conto {{account}}",
@@ -1184,7 +1181,7 @@
             "http": "Utilizzando nodi in HTTP lascia il traffico non crittografato e potrebbe rappresentare un rischio per la sicurezza."
         },
         "participation": {
-            "noAccounts": "Non è disponibile alcun account per partecipare."
+            "noAccounts": "You do not have any IOTA."
         }
     },
     "tooltips": {
@@ -1219,7 +1216,8 @@
             },
             "ended": {
                 "title": "Lo staking è terminato",
-                "body": "Le ricompense Assembly e Shimmer saranno distribuite ai wallet quando le rispettive reti saranno avviate."
+                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
+                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
             }
         },
         "partiallyStakedFunds": {
@@ -1231,12 +1229,13 @@
         "stakingMinRewards": {
             "title": "Sotto il valore minimo per ottenera la ricompensa",
             "titleMinBalance": "{amount} saldo minimo richiesto",
-            "bodyMinBalace": "Questo wallet non ha abbastanza token IOTA per raggiungere la ricompensa minima di airdrop e non può quindi essere messo in stake.",
+            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
             "continue": "Si prega di continuare a effettuare lo staking per ulteriore {duration}.",
             "bodyBelowMin": "Questo wallet non ha raggiunto il valore minimo della ricompensa per {airdrop} ({airdropRewardMin}).",
             "bodyWillReachMin": "È necessario mettere in stake per altro {duration} per raggiungere il minimo.",
-            "bodyWillNotReachMin": "Non raggiungerà il minimo durante il periodo rimanente di stake a meno che si mettano in stake più IOTA.",
-            "bodyDidNotReachMin": "Non sono stati messi in stake abbastanza IOTA per raggiungere le ricompense minime per {airdrop} ({airdropRewardMin})."
+            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
+            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
         }
     },
     "exports": {

@@ -336,9 +336,7 @@
             },
             "appLock": {
                 "title": "自動鎖定",
-                "description": "錢包鎖定並登出前的閒置時間",
-                "durationMinute": "{time, plural, one {1 分鐘} other {# 分鐘}}",
-                "durationHour": "{time, plural, one {1 小時} other {# 小時}}"
+                "description": "錢包鎖定並登出前的閒置時間"
             },
             "changePassword": {
                 "title": "修改密碼",
@@ -412,7 +410,7 @@
                 "description": "查看系統和應用程序訊息"
             },
             "migrateLedgerIndex": {
-                "title": "轉換帳本index",
+                "title": "遷移帳本索引",
                 "description": "遷移另一個 Trinity 帳戶索引"
             },
             "troubleshoot": {
@@ -662,7 +660,7 @@
             "title": "正在進行網絡升級",
             "body": "Chrysalis 網絡升級已經開始。",
             "bodyMigration": "遷移被禁用，直到網路升級完成。",
-            "bodyFirefly": "在網路更新完成之前 Firefly 被禁止使用。 網路更新之後仍可以進行資金遷移。"
+            "bodyFirefly": "Firefly 在網路更新完成前將無法使用。網路更新後仍可進行資金遷移。"
         },
         "ledgerNotConnected": {
             "connect": "在您的 Ledger 裝置上開啟新版 IOTA app 來接續下一步",
@@ -678,7 +676,7 @@
                 "1": "確保您的 Ledger 裝置已連上",
                 "2": "搜尋應用程式：{legacy} 和 IOTA (MIOTA)",
                 "3": "同時安裝應用程式：{legacy} 和 IOTA (MIOTA)",
-                "4": "重要：再返回 Firefly 之前，記得先關閉 Ledger Live"
+                "4": "重要：返回 Firefly 之前，記得先關閉 Ledger Live"
             }
         },
         "ledgerConnectionGuide": {
@@ -688,7 +686,7 @@
                 "1": "確認您已經輸入 PIN 碼來解鎖您的 Ledger 裝置",
                 "2": "在您的 Ledger 裝置上開啟新版 IOTA app",
                 "3": {
-                    "text": "還是沒成功嗎？",
+                    "text": "仍未成功嗎？",
                     "link": "試試 Ledger 的官方支援頁面"
                 }
             }
@@ -779,7 +777,7 @@
         "createWallet": "建立新錢包",
         "createWalletDescription": "創建一個運行在Chrysalis的新錢包",
         "savePassword": "儲存密碼",
-        "useBiometric": "使用生物識別安全",
+        "useBiometric": "使用生物識別安全機制",
         "setupPin": "設置 PIN 碼",
         "setPin": "設置 PIN 碼",
         "confirmPin": "確認 PIN 碼",
@@ -879,7 +877,7 @@
         "newPassword": "新密碼",
         "confirmNewPassword": "確認新密碼",
         "yourSeed": "您的種子",
-        "recoveryPhrase": "還原助記詞",
+        "recoveryPhrase": "助記詞",
         "recentActivity": "近期活動",
         "sent": "已發送",
         "received": "已接收",
@@ -938,13 +936,13 @@
         "help": "幫助",
         "you": "你",
         "messageId": "訊息編號：",
-        "inputAddress": "發送至地址",
+        "inputAddress": "發出地址",
         "receiveAddress": "收款地址",
         "newAddress": "新地址",
         "date": "日期",
         "status": "狀態",
         "confirmed": "已確認",
-        "pending": "確認中",
+        "pending": "等待中",
         "noAccounts": "您沒有錢包，請創建一個。",
         "loadingAccounts": "加載請稍候...",
         "addProfile": "添加個人檔案",
@@ -968,13 +966,14 @@
         "passwordUpdating": "正在更新密碼...",
         "passwordSuccess": "成功更新密碼",
         "passwordFailed": "更新密碼失敗",
-        "syncingAccounts": "同步錢包...",
-        "exportingStronghold": "導出 Stronghold...",
-        "exportingStrongholdSuccess": "導出 Stronghold成功",
-        "exportingStrongholdFailed": "導出 Stronghold失敗",
+        "syncing": "Syncing",
+        "syncingAccounts": "同步錢包中...",
+        "exportingStronghold": "正在導出 Stronghold...",
+        "exportingStrongholdSuccess": "導出 Stronghold 成功",
+        "exportingStrongholdFailed": "導出 Stronghold 失敗",
         "pinCodeUpdating": "正在更新 PIN 碼...",
         "pinCodeSuccess": "更新 PIN 碼成功",
-        "pinCodeFailed": "更 PIN 碼失敗",
+        "pinCodeFailed": "更新 PIN 碼失敗",
         "passwordStrength": "密碼強度",
         "passwordStrength0": "壞",
         "passwordStrength1": "差",
@@ -999,17 +998,6 @@
         "version": "版本 {version}",
         "unknown": "不明",
         "none": "無",
-        "days": "天",
-        "time": {
-            "days": "天",
-            "day": "天",
-            "hours": "小時",
-            "hour": "小時",
-            "minutes": "分鐘",
-            "minute": "分鐘",
-            "seconds": "秒",
-            "second": "秒"
-        },
         "staked": "已質押",
         "unstaked": "已解除質押",
         "staking": "質押",
@@ -1025,6 +1013,15 @@
         "weeksAgo": "{time, plural, one {# 周} other {# 周}} 前",
         "monthsAgo": "{time, plural, one {# 月} other {# 月}} 前",
         "yearsAgo": "{time, plural, one {# 年} other {# 年}} 前"
+    },
+    "times": {
+        "second": "{time, plural, one {1 second} other {# seconds}}",
+        "minute": "{time, plural, one {1 minute} other {# minutes}}",
+        "hour": "{time, plural, one {1 hour} other {# hours}}",
+        "day": "{time, plural, one {1 day} other {# days}}",
+        "week": "{time, plural, one {1 week} other {# weeks}}",
+        "month": "{time, plural, one {1 month} other {# months}}",
+        "year": "{time, plural, one {1 year} other {# years}}"
     },
     "notifications": {
         "valueTx": "從 {{account}} 收到 {{value}}",
@@ -1068,7 +1065,7 @@
             "doNotMatch": "密碼不吻合。",
             "tooWeak": "您的新密碼強度太弱。",
             "row": "直列按鍵組合很容易被猜中。",
-            "pattern": "短鍵盤模式很容易被猜中。",
+            "pattern": "過短的鍵盤樣式很容易被猜中。",
             "names": "常見的名字和姓氏很容易被猜中。",
             "repeats": "像 ’aaa‘ 這樣的重複格式很容易被猜中。",
             "repeats2": "像 ‘abcabcabc’ 這樣重複的格式很容易被猜中。",
@@ -1184,7 +1181,7 @@
             "http": "透過 HTTP 未加密連接來使用節點，可能會造成安全性風險。"
         },
         "participation": {
-            "noAccounts": "您沒有任何可參與的帳號。"
+            "noAccounts": "You do not have any IOTA."
         }
     },
     "tooltips": {
@@ -1219,7 +1216,8 @@
             },
             "ended": {
                 "title": "質押現已結束",
-                "body": "Assembly 和 Shimmer 獎勵將於各自的網路啟動後，分別發放到您的錢包。"
+                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
+                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
             }
         },
         "partiallyStakedFunds": {
@@ -1231,12 +1229,13 @@
         "stakingMinRewards": {
             "title": "低於最低獎勵門檻",
             "titleMinBalance": "須要最低餘額 {amount}",
-            "bodyMinBalace": "此錢包的 IOTA 代幣未達最低空投獎勵門檻，故無法質押。",
+            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
             "continue": "請再繼續質押 {duration}。",
             "bodyBelowMin": "此錢包未達 {airdrop} ({airdropRewardMin}) 的最低獎勵門檻。",
             "bodyWillReachMin": "您必須再質押 {duration} 才能達到最低門檻。",
-            "bodyWillNotReachMin": "除非您質押更多 IOTA，在剩餘的質押期間您將無法達到最低門檻。",
-            "bodyDidNotReachMin": "您尚未質押足夠的 IOTA 來達到 {airdrop} ({airdropRewardMin}) 的最低獎勵。"
+            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
+            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
         }
     },
     "exports": {
