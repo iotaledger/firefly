@@ -34,7 +34,6 @@
     export let balance = ''
     export let balanceEquiv = ''
     export let color = 'turquoise'
-    export let ledger = false
     export let airdrop: StakingAirdrop = undefined
     export let size = 'm' // m, l
     export let hidden = false
@@ -234,9 +233,6 @@
             @apply border;
             @apply border-solid;
             @apply border-yellow-600;
-            &:not(:hover) {
-                @apply bg-transparent;
-            }
             &:hover {
                 @apply border-transparent;
             }
@@ -253,9 +249,6 @@
             @apply border;
             @apply border-solid;
             @apply border-gray-200;
-            &:not(:hover) {
-                @apply bg-transparent;
-            }
             &:hover {
                 @apply border-transparent;
             }
@@ -325,12 +318,6 @@
             <Icon
                 icon={airdrop}
                 classes="fill-current text-gray-{disabled ? '500' : '400'} dark:text-gray-700 group-hover:text-white"
-                width={size === 's' ? 13 : 18}
-                height={size === 's' ? 13 : 18} />
-        {:else if ledger}
-            <Icon
-                icon="ledger"
-                classes="fill-current text-gray-800 dark:text-white group-hover:text-white"
                 width={size === 's' ? 13 : 18}
                 height={size === 's' ? 13 : 18} />
         {/if}
