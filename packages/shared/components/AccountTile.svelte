@@ -158,8 +158,8 @@
                     body: _getBody(),
                 }
             } else if (!isAccountStaked(account?.id) && isStakingPossible($stakingEventState)) {
-                const timeNeededShimmer = <number>getTimeUntilMinimumAirdropReward(account, StakingAirdrop.Shimmer)
                 const timeNeededAssembly = <number>getTimeUntilMinimumAirdropReward(account, StakingAirdrop.Assembly)
+                const timeNeededShimmer = <number>getTimeUntilMinimumAirdropReward(account, StakingAirdrop.Shimmer)
                 const remainingTime =
                     airdrop === StakingAirdrop.Assembly ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
                 const _getBody = () => {
@@ -172,7 +172,7 @@
                                     airdropRewardMin: assemblyMinimumRewards,
                                 },
                             })} ${localize('tooltips.stakingMinRewards.bodyWillNotReachMin')}`)
-                        } else {
+                        } else if (timeNeededAssembly > 0) {
                             body.push(`${localize('tooltips.stakingMinRewards.bodyBelowMin', {
                                 values: {
                                     airdrop: capitalize(StakingAirdrop.Assembly),
@@ -191,7 +191,7 @@
                                     airdropRewardMin: shimmerMinimumRewards,
                                 },
                             })} ${localize('tooltips.stakingMinRewards.bodyWillNotReachMin')}`)
-                        } else {
+                        } else if (timeNeededShimmer > 0) {
                             body.push(`${localize('tooltips.stakingMinRewards.bodyBelowMin', {
                                 values: {
                                     airdrop: capitalize(StakingAirdrop.Shimmer),
