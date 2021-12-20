@@ -3,7 +3,8 @@
     import { Transition } from 'shared/components'
     import { SelectProfile, EnterPin } from './views/'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { migrateProfile } from 'shared/lib/profile'
+    import { migrateProfile, activeProfileId } from 'shared/lib/profile'
+    import { get } from 'svelte/store'
 
     export let locale: Locale
 
@@ -16,7 +17,7 @@
 
     const dispatch = createEventDispatcher()
 
-    let state: LoginState = LoginState.Init
+    let state: LoginState = get(activeProfileId) ? LoginState.EnterPin : LoginState.Init
     let stateHistory = []
 
     const _next = (event) => {
@@ -49,6 +50,7 @@
         if (prevState) {
             state = prevState
         } else {
+            state = LoginState.Init
             dispatch('previous')
         }
     }
