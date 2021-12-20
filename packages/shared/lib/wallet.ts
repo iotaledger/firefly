@@ -1726,7 +1726,11 @@ export const processMigratedTransactions = (accountId: string, messages: Message
             if (account) {
                 const _activeProfile = get(activeProfile)
 
-                if (_activeProfile.migratedTransactions && _activeProfile.migratedTransactions.length) {
+                if (
+                    _activeProfile &&
+                    _activeProfile.migratedTransactions &&
+                    _activeProfile.migratedTransactions.length
+                ) {
                     const { funds } = message.payload.data.essence.receipt.data
 
                     const tailTransactionHashes = funds.map((fund) => fund.tailTransactionHash)
