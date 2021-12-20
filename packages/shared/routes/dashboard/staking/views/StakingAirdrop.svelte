@@ -1,7 +1,6 @@
 <script lang="typescript">
-    import { HR, Link, StakingAirdropIndicator, Text } from 'shared/components'
+    import { HR, Link, StakingAirdropIndicator, Text, WalletPill } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
-    import { getInitials } from 'shared/lib/helpers'
     import { localize } from 'shared/lib/i18n'
     import { showAppNotification } from 'shared/lib/notifications'
     import { formatStakingAirdropReward, isStakingPossible } from 'shared/lib/participation'
@@ -24,7 +23,9 @@
     const isShimmer = (): boolean => airdrop === StakingAirdrop.Shimmer
 
     const parseRemainingTime = (overview: ParticipationOverview): [string, string] => {
-        const formattedValue = getBestTimeDuration(isAssembly() ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime)
+        const formattedValue = getBestTimeDuration(
+            isAssembly() ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
+        )
         const timeAmount = parseFloat(formattedValue).toString()
         const timeUnit = formattedValue.replace(timeAmount.toString(), '')
 
@@ -111,10 +112,8 @@
         <div class="flex flex-col">
             <div class="flex flex-row flex-wrap mb-2">
                 {#each stakedAccountsInCurrentAirdrop as acc}
-                    <div
-                        class="mb-2 mr-2 w-8 h-8 rounded-lg p-1 flex items-center justify-center bg-{acc.color}-500">
-                        <span
-                            class="text-12 leading-100 font-bold text-center text-white">{getInitials(acc.alias, 2)}</span>
+                    <div class="mb-2 mr-2">
+                        <WalletPill active enableTooltip size="s" name={acc.alias} color={acc.color} classes="cursor-default" />
                     </div>
                 {/each}
             </div>
