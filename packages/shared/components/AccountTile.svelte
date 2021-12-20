@@ -314,7 +314,7 @@
                 {getName()}
             </Text>
         </div>
-        {#if true}
+        {#if airdrop}
             <Icon
                 icon={airdrop}
                 classes="fill-current text-gray-{disabled ? '500' : '400'} dark:text-gray-700 group-hover:text-white"
