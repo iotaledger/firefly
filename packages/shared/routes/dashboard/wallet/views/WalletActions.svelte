@@ -1,16 +1,16 @@
 <script lang="typescript">
-    import { getContext } from 'svelte'
-    import type { Readable } from 'svelte/store'
     import { AccountTile, Button, Text } from 'shared/components'
-    import { Receive, Send } from '.'
-    import type { Locale } from 'shared/lib/typings/i18n'
     import { assemblyStakingRewards, shimmerStakingRewards } from 'shared/lib/participation/stores'
     import { StakingAirdrop } from 'shared/lib/participation/types'
     import { activeProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
+    import type { Locale } from 'shared/lib/typings/i18n'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { selectedAccountId } from 'shared/lib/wallet'
-    import type{ WalletAccount } from 'shared/lib/typings/wallet'
+    import { getContext } from 'svelte'
+    import type { Readable } from 'svelte/store'
+    import { Receive, Send } from '.'
 
     export let locale: Locale
 
@@ -38,11 +38,13 @@
         <div data-label="accounts" class="w-full h-full flex flex-col flex-no-wrap justify-start">
             <div class="flex flex-row mb-4 justify-between items-center">
                 <Text type="h5">{locale('general.myAccounts')}</Text>
-                <Button onClick={handleCreateClick} secondary small showHoverText icon="plus">{locale('actions.create')}</Button>
+                <Button onClick={handleCreateClick} secondary small showHoverText icon="plus">
+                    {locale('actions.create')}
+                </Button>
             </div>
             {#if $viewableAccounts.length > 0}
                 <div
-                    class="grid {$viewableAccounts.length === 1 && (!$assemblyStakingRewards && !$shimmerStakingRewards) ? 'grid-cols-1' : 'grid-cols-2'} auto-rows-max gap-4 flex-auto overflow-y-auto h-1 -mr-2 pr-2 scroll-secondary">
+                    class="grid {$viewableAccounts.length === 1 && !$assemblyStakingRewards && !$shimmerStakingRewards ? 'grid-cols-1' : 'grid-cols-2'} auto-rows-max gap-4 flex-auto overflow-y-auto h-1 -mr-2 pr-2 scroll-secondary">
                     {#each $viewableAccounts as account}
                         <AccountTile
                             color={account.color}
@@ -51,22 +53,13 @@
                             balanceEquiv={account.balanceEquiv}
                             size={$viewableAccounts.length === 1 && (!$assemblyStakingRewards || !$shimmerStakingRewards) ? 'l' : 'm'}
                             hidden={hiddenAccounts.includes(account.id)}
-                            onClick={() => handleAccountClick(account.id)}
-                        />
+                            onClick={() => handleAccountClick(account.id)} />
                     {/each}
                     {#if $assemblyStakingRewards}
-                        <AccountTile
-                            airdrop={StakingAirdrop.Assembly}
-                            balance={$assemblyStakingRewards}
-                            size="m"
-                        />
+                        <AccountTile airdrop={StakingAirdrop.Assembly} balance={$assemblyStakingRewards} size="m" />
                     {/if}
                     {#if $shimmerStakingRewards}
-                        <AccountTile
-                            airdrop={StakingAirdrop.Shimmer}
-                            balance={$shimmerStakingRewards}
-                            size="m"
-                        />
+                        <AccountTile airdrop={StakingAirdrop.Shimmer} balance={$shimmerStakingRewards} size="m" />
                     {/if}
                 </div>
             {:else}
