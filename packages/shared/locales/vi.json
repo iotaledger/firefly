@@ -15,22 +15,22 @@
         },
         "profile": {
             "title": "Tạo một hồ sơ",
-            "profileName": "Profile name",
+            "profileName": "Tên hồ sơ",
             "body1": "Bạn có thể tạo nhiều hồ sơ người dùng để giữ các mã token của bạn riêng biệt và cải thiện quyền riêng tư.",
             "body2": {
-                "first": "For now, let's start with your first profile name.",
-                "nonFirst": "For now, let's start with your profile name."
+                "first": "Bây giờ, hãy bắt đầu với tên hồ sơ đầu tiên của bạn",
+                "nonFirst": "Bây giờ, hãy bắt đầu với tên hồ sơ của bạn"
             },
-            "addMore": "You can add more profiles later.",
+            "addMore": "Bạn có thể thêm nhiều hồ sơ sau này.",
             "developer": {
-                "label": "Developer profile",
-                "info": "Connect to public and private IOTA networks"
+                "label": "Hồ sơ nhà phát triển",
+                "info": "Kết nối với các mạng IOTA công khai và riêng tư"
             }
         },
         "setup": {
             "title": "Thiết lập một ví",
             "chrysalisTitle": "Cập nhật mạng lưới Chrysalis",
-            "chrysalisBody": "From April 21st 2021, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
+            "chrysalisBody": "Từ ngày 21 tháng 4 năm 2021, người dùng có thể di chuyển token của họ tới mạng lưới mới Chrysalis. Chúng tôi khuyến nghị bạn di chuyển những token của bạn sớm nhất có thể.",
             "learnMore": "Tìm hiểu về quá trình di chuyển token"
         },
         "secure": {
@@ -39,30 +39,30 @@
             "body2": "Nếu bạn đã điền vào Bộ Khôi phục và cất giữ nó một cách an toàn, bạn sẽ luôn luôn có thể khôi phục các ví của bạn."
         },
         "create": {
-            "title": "Create a wallet",
-            "body": "Create a new wallet. You can choose a regular software wallet or if you have a Ledger device you can set up a hardware wallet.",
+            "title": "Khởi tạo ví",
+            "body": "Khởi tạo một ví mới. Bạn có thể chọn một phần mềm ví thông thường hoặc nếu bạn có thiết bị Ledger bạn có thể thiết lập một ví cứng.",
             "softwareAccount": {
-                "title": "I want a software wallet",
-                "description": "Create a 24-word Recovery Phrase"
+                "title": "Tôi muốn một phần mềm ví",
+                "description": "Khởi tạo một cụm 24 ký tự khôi phục"
             },
             "ledgerAccount": {
-                "title": "I want a hardware wallet",
-                "description": "Ledger Nano S or Nano X required"
+                "title": "Tôi muốn một ví cứng",
+                "description": "Ledger Nano S hoặc Nano X được yêu cầu"
             }
         },
         "setupLedger": {
-            "progress1": "Connect your Ledger",
-            "progress2": "Generate address",
-            "progress3": "Switch Ledger app",
-            "progress4": "Transfer funds",
-            "watchVideo": "Watch video guide",
-            "videoGuide": "Ledger migration video guide"
+            "progress1": "Kết nối Ledger của bạn",
+            "progress2": "Tạo địa chỉ mới",
+            "progress3": "Chuyển đổi ứng dụng Ledger",
+            "progress4": "Chuyển tiền",
+            "watchVideo": "Xem Video hướng dẫn",
+            "videoGuide": "Video hướng dẫn chuyển sang Ledger"
         },
         "ledgerInstallationGuide": {
-            "title": "Have you installed the necessary Ledger apps?",
-            "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
-            "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
-            "action": "Yes, I've installed these apps"
+            "title": "Bạn đã cài đặt một ứng dụng Ledger cần thiết chưa?",
+            "body1": "Trước khi bạn tiếp tục, bạn phải tìm và cài đặt cả ứng dụng {legacy} và ứng dụng IOTA mới thông qua Ledger Live.",
+            "body2": "Đảm bảo rằng phần mềm Ledger của bạn được cật nhật. Mọi ứng dụng được cài đặt sẵn nên được cật nhật lên phiên bản mới nhất.",
+            "action": "Có, tôi đã cài đặt những ứng dụng này"
         },
         "password": {
             "title": "Tạo mật khẩu",
@@ -103,109 +103,109 @@
             "body": "Hãy kiểm tra lại cụm từ đã được viết xuống một cách chính xác. Chọn các từ theo đúng thứ tự của chúng.",
             "word": "Từ",
             "verified": "Cụm từ khôi phục đã được xác thực",
-            "verifiedBody": "Remember to keep it private and safely stored."
+            "verifiedBody": "Nhớ lưu giữ nó ở nơi riêng tư và được lưu trữ an toàn."
         },
         "backupWallet": {
             "title": "Sao lưu vào tập tin Stronghold",
-            "body1": "Enter your password to backup your wallets to a Stronghold file. Your password is used to encrypt the backup.",
-            "body2": "Reasons why digital backups are important:",
-            "reason1": "Easily recover your wallets without typing in your recovery phrase",
-            "reason2": "Import your wallets on other devices",
-            "reason3": "Recover your full transaction history"
+            "body1": "Nhập mật khẩu ví của bạn để sao lưu các ví của bạn vào tập tin Stronghold. Mật khẩu của bạn sẽ được sử dụng để mã hóa bản sao lưu.",
+            "body2": "Những lý do tại sao những bản sao lưu kỹ thuật số là quan trọng:",
+            "reason1": "Dễ dàng khôi phục các ví của bạn mà không cần phải nhập cụm ký tự khôi phục",
+            "reason2": "Nhập các ví của bạn trên những thiết bị khác",
+            "reason3": "Khôi phục toàn bộ lịch sử giao dịch của bạn"
         },
         "recoveryPhraseSaved": {
             "title": "Sao lưu thành công",
-            "body": "You have backed up your wallets to a Stronghold."
+            "body": "Bạn đã sao lưu các ví của bạn vào Stronghold."
         },
         "congratulations": {
-            "title": "Wallet setup completed",
-            "fundsMigrated": "Funds migrated",
-            "body": "Your new wallet is ready to use.",
-            "softwareMigratedBody": "You have successfully migrated your funds to the new network",
-            "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
-            "exportMigration": "Export migration log and finish setup"
+            "title": "Ví đã được thiết lập hoàn tất",
+            "fundsMigrated": "Tài sản đã được chuyển",
+            "body": "Ví mới của bạn đã sẵn sàng để sử dụng.",
+            "softwareMigratedBody": "Bạn đã chuyển thành công tài sản của bạn lên mạng mới",
+            "fireflyLedgerBody": "Tài khoản Ledger của bạn đã được khôi phục thành công và bạn có thể tiếp tục bây giờ.",
+            "trinityLedgerBody": "Bạn đã chuyển thành công Ledger của bạn lên mạng mới.",
+            "exportMigration": "Xuất nhật ký di chuyển và hoàn tất thiết lập"
         },
         "import": {
-            "title": "Recover or migrate funds",
-            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
-            "importSeed": "I have an 81 character seed",
-            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
-            "importMnemonic": "I have a Firefly recovery phrase",
-            "importMnemonicDescription": "Enter your recovery phrase to recover your wallets",
-            "importFile": "I have a file backup",
-            "importFileDescription": "Upload a Seedvault or Stronghold file",
-            "importLedger": "I have a Ledger backup",
-            "importLedgerDescription": "Restore or migrate a Ledger profile"
+            "title": "Khôi phục hoặc di chuyển tài sản",
+            "body": "Nếu bạn đã có một tệp sao lưu ví hoặc cụm ký tự khôi phục, bạn có thể nhập tại đây. Nếu bạn giữ tài sản mạng cũ hơn, bạn sẽ được thực hiện các bước để chuyển sang mạng lưới Chrysalis.",
+            "importSeed": "Tôi có một cụm 81 ký tự",
+            "importSeedDescription": "Nhập cụm ký tự và chuyển tài sản tới Chrysalis",
+            "importMnemonic": "Tôi có một cụm khôi phục ví Firefly",
+            "importMnemonicDescription": "Nhập cụm ký tự khôi phục của bạn để khôi phục lại ví của bạn",
+            "importFile": "Tôi đã có tập tin sao lưu",
+            "importFileDescription": "Tải lên một Seedvault hoặc tập tin Stronghold",
+            "importLedger": "Tôi có một tập tin sao lưu Ledger",
+            "importLedgerDescription": "Khôi phục hoặc di chuyển một hồ sơ Ledger"
         },
         "importFromText": {
             "seed": {
-                "title": "Type your seed to commence migration",
-                "body": "A seed consists of 81 characters. This is used to recover from the older Trinity app.",
-                "enter": "Enter your seed"
+                "title": "Nhập ký tự của bạn để bắt đầu chuyển",
+                "body": "Một cụm ký tự bao gồm 81 ký tự. Nó được dùng để khôi phục từ ứng dụng Trinity cũ.",
+                "enter": "Nhập cụm ký tự của bạn"
             },
             "mnemonic": {
-                "title": "Type your recovery phrase",
-                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly wallets.",
-                "enter": "Enter your secret recovery phrase"
+                "title": "Nhập cụm từ khôi phục của bạn",
+                "body": "Cụm từ khôi phục dài 24 từ, tất cả đều là chữ thường, có khoảng cách giữa. Cái này được sử dụng để khôi phục ví Firefly hiện có.",
+                "enter": "Nhập cụm từ khôi phục bí mật của bạn"
             },
-            "seedDetected": "81 character seed detected",
-            "phraseDetected": "24 word recovery phrase detected",
-            "checksum": "Checksum"
+            "seedDetected": "Đã phát hiện cụm 81 ký tự",
+            "phraseDetected": "24 cụm từ khôi phục được phát hiện",
+            "checksum": "Tổng kiểm tra"
         },
         "importFromFile": {
-            "title": "Restore your wallets using a backup file",
-            "body": "Import a backup file to restore your wallets. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+            "title": "Khôi phục ví của bạn bằng tệp sao lưu",
+            "body": "Nhập tệp sao lưu để khôi phục ví của bạn. Bản sao lưu có thể là Stronghold (.stronghold) hoặc Trinity SeedVault (.kdbx)."
         },
         "importFromLedger": {
-            "title": "Restore or Migrate your Ledger",
-            "body": "Restore an existing Firefly Ledger profile, or migrate your funds from Trinity.",
-            "haveFireflyLedger": "I have a Firefly Ledger backup",
-            "haveFireflyLedgerDescription": "Restore a Firefly profile",
-            "haveTrinityLedger": "I have a Trinity Ledger backup",
-            "haveTrinityLedgerDescription": "Migrate a Trinity profile"
+            "title": "Khôi phục hoặc di chuyển Ledger của bạn",
+            "body": "Khôi phục hồ sơ Firefly Ledger hiện có hoặc di chuyển tài sản của bạn từ Trinity.",
+            "haveFireflyLedger": "Tôi có một bản sao lưu Firefly Ledger",
+            "haveFireflyLedgerDescription": "Khôi phục hồ sơ Firefly",
+            "haveTrinityLedger": "Tôi có một bản sao lưu Trinity Ledger",
+            "haveTrinityLedgerDescription": "Di chuyển hồ sơ Trinity"
         },
         "connectLedger": {
-            "title": "Connect your Ledger to Firefly",
-            "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed.",
-            "trafficLight1": "Connect and unlock your Ledger with your PIN",
-            "trafficLight2": "Open the new IOTA app on your Ledger",
-            "tips": "Tips if your Ledger isn’t connecting"
+            "title": "Kết nối Ledger của bạn với Firefly",
+            "body": "Để Firefly tìm thấy thiết bị Ledger của bạn, hãy đảm bảo rằng ứng dụng Ledger Live chính thức đã đóng.",
+            "trafficLight1": "Kết nối và mở khóa Ledger bằng mã PIN của bạn",
+            "trafficLight2": "Mở ứng dụng IOTA mới trên Ledger của bạn",
+            "tips": "Một số mẹo nếu Ledger của bạn không kết nối"
         },
         "restoreFromFireflyLedger": {
-            "title": "Restore Your Ledger Profile",
-            "body": "Press restore to complete the setup process and restore your wallets, balances and transaction history.",
-            "restoring": "Restoring from Ledger..."
+            "title": "Khôi phục hồ sơ Ledger của bạn",
+            "body": "Nhấn khôi phục để hoàn tất quá trình thiết lập và khôi phục ví, số dư và lịch sử giao dịch của bạn.",
+            "restoring": "Đang khôi phục từ Ledger..."
         },
         "legacyLedgerIntro": {
-            "title": "Start your Ledger migration using Firefly",
-            "body1": "Firefly will help you to transfer your tokens to the new Chrysalis network.",
-            "body2": "After the migration, you will be able to send and receive your tokens using your Ledger with Firefly.",
-            "readMore": "What to expect from the migration process"
+            "title": "Bắt đầu di chuyển Ledger của bạn bằng Firefly",
+            "body1": "Firefly sẽ giúp bạn chuyển các token của bạn sang mạng Chrysalis mới.",
+            "body2": "Sau khi di chuyển, bạn sẽ có thể gửi và nhận các token của mình bằng Ledger với Firefly.",
+            "readMore": "Điều gì sẽ xảy ra từ quá trình di chuyển"
         },
         "generateNewLedgerAddress": {
             "title": "Tạo địa chỉ ví mới",
-            "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
-            "confirmTitle": "Confirm the new address",
-            "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
-            "confirmedTitle": "Address confirmed",
-            "confirmedBody": "You have confirmed that the address in Firefly matches the one on your Ledger device.",
-            "generating": "Generating address"
+            "body": "Bạn cần tạo một địa chỉ mới để di chuyển các token của mình với Firefly. Nhấn vào nút bên dưới để tiếp tục.",
+            "confirmTitle": "Xác nhận địa chỉ mới",
+            "confirmBody": "Để bảo mật, vui lòng so sánh địa chỉ được tạo trên thiết bị Ledger của bạn với địa chỉ được hiển thị bên dưới. Nếu chúng khớp, hãy nhấn cả hai nút trên Ledger của bạn như được đề cập.",
+            "confirmedTitle": "Đã xác nhận địa chỉ",
+            "confirmedBody": "Bạn đã xác nhận rằng địa chỉ trong Firefly khớp với địa chỉ trên thiết bị Ledger của bạn.",
+            "generating": "Đang khởi tạo địa chỉ mới"
         },
         "switchLedgerApps": {
-            "title": "Switch Ledger apps",
-            "body": "Please switch to the {legacy} app on your Ledger device to continue migration. When ready, press continue."
+            "title": "Chuyển đổi ứng dụng Ledger",
+            "body": "Vui lòng chuyển sang ứng dụng {legacy} trên thiết bị Ledger của bạn để tiếp tục di chuyển. Khi đã sẵn sàng, hãy nhấn tiếp tục"
         },
         "selectLedgerAccountIndex": {
-            "title": "Choose Ledger account index",
-            "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
-            "accountIndex": "Account Index",
-            "accountPage": "Account Page",
-            "standard": "Standard",
-            "expert": "Expert",
-            "takingAWhile": "This is taking a while...",
-            "notGeneratingAddresses": "Is your Ledger generating addresses?",
-            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
+            "title": "Chọn danh mục tài khoản Ledger",
+            "body": "Chọn danh mục tài khoản Ledger mà bạn đã sử dụng với Trinity. Đối với hầu hết người dùng, đây sẽ là danh mục mặc định của 0.",
+            "accountIndex": "Danh mục tài khoản",
+            "accountPage": "Trang tài khoản",
+            "standard": "Tiêu chuẩn",
+            "expert": "Nâng cao",
+            "takingAWhile": "Việc này sẽ mất một lúc ...",
+            "notGeneratingAddresses": "Ledger của bạn có đang tạo địa chỉ không?",
+            "reinstallLegacy": "Nếu không, hãy ngắt kết nối thiết bị và thử lại. Nếu sự cố vẫn tiếp diễn, bạn có thể cần phải cài đặt lại ứng dụng {legacy}."
         },
         "importBackupPassword": {
             "body1": "Vui lòng nhập mật khẩu sao lưu của bạn.",
@@ -213,63 +213,63 @@
         },
         "importSuccess": {
             "title": "Bạn đã khôi phục sao lưu của mình thành công",
-            "body": "You can now set up your new profile."
+            "body": "Bây giờ bạn có thể thiết lập hồ sơ mới của mình."
         },
         "migrate": {
-            "title": "Chuyền tiền của bạn",
-            "body1": "This is an automated process to transfer your funds to your new wallet.",
+            "title": "Chuyền tài sản của bạn",
+            "body1": "Đây là một quy trình tự động để chuyển tài sản của bạn sang ví mới của bạn.",
             "body2": "Nó có thể mất một khoảng thời gian. Không tắt thiết bị của bạn trong quá trình chuyển tiền.",
             "existing": "Ví cũ của bạn",
             "new": "Ví mới của bạn",
             "learn": "Tìm hiểu về quá trình di chuyển token",
-            "beginMigration": "Begin Migration",
-            "migrating": "Migrating funds...",
-            "migrated": "{balance} migrated",
-            "migrationFailed": "Migration Failed",
-            "noAddressesForMigration": "Please select the addresses you wish to secure.",
-            "restoringWallet": "Restoring wallet...",
-            "findingBalance": "Finding balance...",
-            "incorrectSeedVaultPassword": "Incorrect SeedVault password.",
-            "noDataSeedVault": "No data could be found in the SeedVault.",
-            "signingBundle": "Signing bundle",
-            "broadcastingBundle": "Broadcasting bundle",
-            "miningBundle": "Mining bundle",
-            "problemRestoringWallet": "There was a network error restoring your wallet. Please try again.",
-            "minimumMigrationAmountSpentAddresses": "The minimum migration amount for each spent address is 1 Mi. Check again if your balance doesn't look right.",
-            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
-            "cannotMigrateAllYourFunds": "We cannot migrate all of your funds because some addresses are too low in value. You can proceed anyway. {value} will be lost.",
-            "error": "There was an error migrating your funds. Please try again."
+            "beginMigration": "Bắt đầu di chuyển",
+            "migrating": "Đang chuyển tài sản...",
+            "migrated": "{balance} đã chuyển",
+            "migrationFailed": "Chuyển không thành công",
+            "noAddressesForMigration": "Vui lòng chọn địa chỉ bạn muốn bảo mật.",
+            "restoringWallet": "Đang khôi phục ví...",
+            "findingBalance": "Đang tìm kiếm số dư ví...",
+            "incorrectSeedVaultPassword": "Sai mật khẩu SeedVault.",
+            "noDataSeedVault": "Không có dữ liệu được tìm thấy trong SeedVault.",
+            "signingBundle": "Đang ký gói",
+            "broadcastingBundle": "Đang phát gói",
+            "miningBundle": "Đang khai khác gói",
+            "problemRestoringWallet": "Có một mạng lỗi khi đang khôi phục lại ví của bạn. Xin vui lòng thử lại.",
+            "minimumMigrationAmountSpentAddresses": "Số lượng tối thiểu để chuyển cho mỗi địa chỉ đã chi tiêu là 1 Mi. Kiểm tra lại nếu số dư ví không đúng.",
+            "tooManyAddressesToMigrate": "Bạn có quá nhiều địa chỉ với số dư ví thấp để chuyển. Kiểm tra lại nếu tổng số dư của bạn không đúng.",
+            "cannotMigrateAllYourFunds": "Chúng tôi không thể di chuyển toàn bộ tài sản của bạn vì một số địa chỉ có giá trị quá thấp. Bạn có thể tiếp tục. {value} sẽ bị mất.",
+            "error": "Đã có lỗi khi đang chuyển tài sản của bạn. Xin vui lòng thử lại."
         },
         "bundleMiningWarning": {
-            "title": "Warning",
-            "body1": "You have funds on one or more spent addresses.",
-            "body2": "We recommend you run an automated process to help secure and transfer these funds safely.",
-            "body3": "If you close the app you will need to restart the whole migration.",
-            "learn": "Learn about spent addresses"
+            "title": "Cảnh báo",
+            "body1": "Bạn có tài sản trên một hoặc nhiều địa chỉ đã chi tiêu.",
+            "body2": "Chúng tôi khuyến nghị bạn chạy một quy trình tự động để giúp bảo mật và di chuyển những tài sản này an toàn.",
+            "body3": "Nếu bạn đóng ứng dụng bạn sẽ cần khởi chạy lại toàn bộ quá trình chuyển.",
+            "learn": "Tìm hiểu về các địa chỉ ví đã chi tiêu"
         },
         "secureSpentAddresses": {
-            "title": "Secure spent addresses",
-            "body1": "You have funds detected on {number, plural, one {# spent address} other {# spent addresses}}.",
-            "body2": "We recommend you run an automated process to help secure and transfer your funds safely.",
-            "error": "You can’t migrate spent addresses with less than 1 Mi"
+            "title": "Bảo mật các địa chỉ ví đã chi tiêu",
+            "body1": "Bạn có những tài sản được phát hiện trên  {number, plural, one {# các địa chỉ ví đã chi tiêu} other {# các địa chỉ ví đã chi tiêu}}.",
+            "body2": "Chúng tôi khuyến nghị bạn chạy một quy trình tự động để giúp bảo mật và di chuyển những tài sản của bạn an toàn.",
+            "error": "Bạn không thể chuyển các địa chỉ ví đã chi tiêu với ít hơn 1 Mi"
         },
         "securityCheckCompleted": {
-            "title": "Security check completed",
-            "body1": "We have calculated the security risk level. Running this process again may lower your risk level.",
-            "body2": "When you are happy with the risk level(s) press continue.",
-            "rerun": "Rerun process for selected addresses",
-            "continueMigration": "Continue migration"
+            "title": "Xác minh bảo mật thành công",
+            "body1": "Chúng tôi đã tính toán mức độ rủi ro bảo mật. Khởi chạy quy trình này lần nữa có thể làm giảm mức độ rủi ro của bạn.",
+            "body2": "Khi bạn hài lòng với mức độ rủi ro (s) nhấn tiếp tục.",
+            "rerun": "Chạy lại quy trình cho các địa chỉ đã lựa chọn",
+            "continueMigration": "Tiếp tục chuyển"
         },
         "securingSpentAddresses": {
-            "title": "Securing spent addresses...",
-            "body1": "This process will take {minutes, plural, one {1 minute} other {# minutes}}.",
-            "body2": "Your computer will run at full capacity, you may wish to do something else while you wait for this to complete."
+            "title": "Bảo mật các địa chỉ ví đã chi tiêu...",
+            "body1": "Quy trình này sẽ mất {minutes, plural, one {1 minute} other {# minutes}}.",
+            "body2": "Máy tính của bạn sẽ chạy hết công suất, bạn có thể làm việc khác trong khi bạn đợi quá trình này hoàn tất."
         },
         "transferFragmentedFunds": {
-            "body1": "Firefly will now proceed to migrate your funds. This may take a while.",
-            "body2": "Ensure your Ledger is connected and the {legacy} app is open at all times during migration.",
-            "migrate": "Migrate funds",
-            "transaction": "Transaction {number}",
+            "body1": "Ví Firefly sẽ tiến hành chuyển các tài sản của bạn bây giờ. Quá trình này có thể mất một lát.",
+            "body2": "Đảm bảo Ledger của bạn đã được kết nối và ứng dụng {legacy} luôn mở trong quá trình chuyển.",
+            "migrate": "Chuyển tài sản",
+            "transaction": "Giao dịch {number}",
             "rerun": "Thử lại"
         },
         "migrateFailed": {
@@ -278,41 +278,41 @@
         },
         "balance": {
             "title": "Số dư của bạn",
-            "body": "Make sure your balance is correct before continuing. You can check again if things don't look correct.",
-            "error": "The minimum migration amount is 1 Mi. Check again if your balance doesn't look right.",
-            "zeroBalance": "Try checking again. If you still can't find your balance you might have entered your seed incorrectly.",
-            "zeroBalanceLedgerLegacy": "Try checking again. If you still can't find your balance you might have selected the wrong account index."
+            "body": "Đảm bảo số dư ví của bạn chính xác trước khi tiếp tục. Bạn có thể kiểm tra lại nếu những điều này không chính xác.",
+            "error": "Số lượng tối thiểu để chuyển cho mỗi địa chỉ đã chi tiêu là 1 Mi. Kiểm tra lại nếu số dư ví không đúng.",
+            "zeroBalance": "Hãy thử kiểm tra lại. Nếu bạn vẫn không tìm thấy số dư của mình, bạn có thể nhập cụm ký tự không chính xác.",
+            "zeroBalanceLedgerLegacy": "Hãy thử kiểm tra lại. Nếu bạn vẫn không tìm thấy số dư của mình, bạn có thể chọn sai mục tài khoản."
         },
         "settings": {
             "settings": "Cấu hình",
             "generalSettings": {
                 "title": "Thiết lập chung",
-                "description": "Configure your app's appearance and other general settings"
+                "description": "Thiết lập giao diện ứng dụng của bạn và các cặt đặt chung khác"
             },
             "security": {
                 "title": "Bảo mật",
-                "description": "Change your password and adjust security-related settings"
+                "description": "Thay đổi mật khẩu của bạn và chỉnh các cài đặt liên quan bảo mật"
             },
             "advancedSettings": {
                 "title": "Thiết lập nâng cao",
-                "description": "Tools and manual settings for technical users"
+                "description": "Những công cụ và cài đặt thủ công cho người dùng kỹ thuật"
             },
             "helpAndInfo": {
                 "title": "Thông tin trợ giúp",
-                "description": "Find the answer to a question or get help with an issue"
+                "description": "Tìm câu trả lời cho câu hỏi hoặc nhận sự trợ giúp về một lỗi nào đó"
             },
             "profile": {
                 "title": "Hồ sơ cá nhân",
-                "description": "Change your profile name or set an avatar"
+                "description": "Thay đổi tên hồ sơ của bạn và thiết lập ảnh đại diện"
             },
             "sync": {
-                "title": "Sync wallets",
+                "title": "Đồng bộ các ví",
                 "description": ""
             },
             "theme": {
                 "title": "Giao diện",
                 "description": "",
-                "advice": "Restart the Firefly application for changes to the system theme to take effect"
+                "advice": "Khởi động lại ứng dụng Firefly để các thay đổi với chủ đề hệ thống có hiệu lực"
             },
             "language": {
                 "title": "Ngôn ngữ",
@@ -320,128 +320,128 @@
             },
             "currency": {
                 "title": "Tiền tệ",
-                "description": "Adjusts balance conversion and updates chart options"
+                "description": "Chỉnh chuyển đổi số dư và cập nhật các tùy chọn biểu đồ"
             },
             "notifications": {
                 "title": "Các thông báo",
-                "description": "System notifications for transaction events"
+                "description": "Hệ thống thông báo cho các sự kiện giao dịch"
             },
             "networkStatus": {
-                "title": "Network status",
-                "description": "Displays the status of the node you are currently connected to"
+                "title": "Trạng thái mạng",
+                "description": "Hiển thị trạng thái của nút bạn hiện đang kết nối"
             },
             "exportStronghold": {
-                "title": "Export backup",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
+                "title": "Xuất bản sao lưu",
+                "description": "Xuất một tập tin Stronghold - một bản sao lưu được mã hóa của ví của bạn và lịch sử giao dịch mới nhất"
             },
             "appLock": {
-                "title": "Automatic lock",
-                "description": "Inactivity time before your wallets lock and you are logged out"
+                "title": "Tự động khóa",
+                "description": "Thời gian không hoạt động trước khi ví của bạn khóa và bạn đã đăng xuất"
             },
             "changePassword": {
                 "title": "Đổi mật khẩu",
-                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
+                "description": "Mật khẩu của bạn được sử dụng để bảo mật ví của bạn. Bạn phải sử dụng mật khẩu mạnh để bảo vệ tài sản của bạn"
             },
             "changePincode": {
                 "title": "Thay đổi mã PIN",
-                "description": "Your PIN keeps your balance and transactions private",
+                "description": "Mã PIN của bạn giữ số dư và giao dịch của bạn ở chế độ riêng tư",
                 "currentPincode": "Mã PIN hiện tại",
                 "newPincode": "Mã PIN mới",
                 "confirmNewPincode": "Xác nhận mã PIN mới",
                 "action": "Thay đổi mã PIN"
             },
             "balanceFinder": {
-                "title": "Balance finder",
-                "description": "Perform an extended search of your addresses for tokens"
+                "title": "Công cụ tìm số dư",
+                "description": "Thực hiện tìm kiếm mở rộng địa chỉ của bạn để tìm các token"
             },
             "hiddenAccounts": {
-                "title": "Hidden wallets",
-                "description": "Selecting this options will show wallets that were previously hidden"
+                "title": "Các ví ẩn",
+                "description": "Chọn tùy chọn này sẽ hiển thị các ví đã bị ẩn trước đó"
             },
             "deleteProfile": {
-                "title": "Delete profile",
-                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
+                "title": "Xóa hồ sơ",
+                "description": "Xóa toàn bộ hồ sơ, ví và lịch sử giao dịch của bạn. Hãy chắc chắn rằng bạn có một bản sao lưu"
             },
             "deepLinks": {
-                "title": "IOTA links",
-                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
+                "title": "Các liên kết IOTA",
+                "description": "Tự động điền dữ liệu giao dịch trong Firefly khi nhấp vào liên kết IOTA"
             },
             "networkConfiguration": {
-                "title": "Network config",
-                "title2": "Network configuration",
+                "title": "Nhập cấu hình mạng",
+                "title2": "Cấu hình mạng",
                 "description": {
-                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
-                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                    "dev": "Cài đặt mạng của bạn sẽ tự động cập nhật theo cấu hình nút hiện tại (chuyển đổi mạng sẽ dẫn đến việc đặt lại trạng thái ví)",
+                    "nonDev": "Cài đặt mạng của bạn sẽ tự động cập nhật theo cấu hình nút hiện tại"
                 },
-                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
-                "resetWallet": "Your wallet state has been reset.",
-                "connectedTo": "Connected to",
+                "switchedNetworks": "Đã chuyển mạng thành công sang \"{networkName}\".",
+                "resetWallet": "Trạng thái ví của bạn đã được đặt lại.",
+                "connectedTo": "Đã kết nối tới",
                 "nodeConfiguration": {
-                    "title": "Node selection",
-                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
-                    "automatic": "Automatic",
-                    "manual": "Manual"
+                    "title": "Nút lựa chọn",
+                    "description": "Chọn \"Thủ công\" để định cấu hình cài đặt nút và kết nối với (các) nút của riêng bạn",
+                    "automatic": "Tự động",
+                    "manual": "Thủ công"
                 }
             },
             "configureNodeList": {
-                "title": "Node configuration",
-                "description": "Manage the list of nodes you connect to",
-                "primaryNode": "Primary node",
-                "excludeNode": "Exclude node",
-                "includeNode": "Include node",
-                "editDetails": "Edit details",
-                "viewInfo": "View info",
-                "setAsPrimary": "Set as primary",
-                "removeNode": "Remove node",
-                "includeOfficialNodeList": "Include official node list",
-                "noNodes": "There are no nodes, unable to connect to the network",
-                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
+                "title": "Cấu hình nút",
+                "description": "Quản lý danh sách các nút bạn kết nối",
+                "primaryNode": "Nút chính",
+                "excludeNode": "Nút loại trừ",
+                "includeNode": "Nút bao gồm",
+                "editDetails": "Chỉnh sửa chi tiết",
+                "viewInfo": "Xem thông tin",
+                "setAsPrimary": "Đặt làm chính",
+                "removeNode": "Xóa nút",
+                "includeOfficialNodeList": "Bao gồm danh sách nút chính thức",
+                "noNodes": "Không có nút, không thể kết nối với mạng",
+                "noNodesAuto": "Không có nút nào, lựa chọn tự động sẽ được sử dụng để thay thế"
             },
             "proofOfWork": {
                 "title": "Bằng chứng công việc (PoW)",
-                "description": "Complete proof of work locally on your device or outsource to the node"
+                "description": "Hoàn thành bằng chứng công việc cục bộ trên thiết bị của bạn hoặc thuê ngoài nút"
             },
             "errorLog": {
                 "title": "Bản ghi lỗi",
-                "description": "View errors to debug an issue"
+                "description": "Xem các lỗi để gỡ lỗi sự cố"
             },
             "diagnostics": {
-                "title": "Diagnostics",
-                "description": "View system and application information"
+                "title": "Chuẩn đoán",
+                "description": "Xem thông tin hệ thống và ứng dụng"
             },
             "migrateLedgerIndex": {
-                "title": "Migrate Ledger index",
-                "description": "Migrate another Trinity account index"
+                "title": "Chuyển danh mục Ledger",
+                "description": "Chuyển danh mục tài khoản Trinity khác"
             },
             "troubleshoot": {
                 "title": "Xử lý sự cố",
-                "description": "Use the troubleshooting wizard to solve common problems"
+                "description": "Sử dụng trình hướng dẫn khắc phục sự cố để giải quyết các sự cố thường gặp"
             },
             "documentation": {
                 "title": "Tài liệu",
-                "description": "View the documentation for in depth explanations of how things work"
+                "description": "Xem tài liệu để có những giải thích chuyên sâu về cách mọi thứ hoạt động"
             },
             "faq": {
                 "title": "CÂU HỎI THƯỜNG GẶP",
-                "title2": "Frequently asked questions",
-                "description": "View the FAQs to get help with a common problem or question"
+                "title2": "Các câu hỏi thường gặp",
+                "description": "Xem Câu hỏi thường gặp để nhận trợ giúp về một vấn đề hoặc câu hỏi thường gặp"
             },
             "discord": {
                 "title": "Tài khoản Discord",
-                "description": "Get help from the IOTA community on Discord"
+                "description": "Nhận trợ giúp từ cộng đồng IOTA trên Discord"
             },
             "about": {
                 "title": "Thông tin về ứng dụng",
                 "description": ""
             },
             "reportAnIssue": {
-                "title": "Report an issue",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
+                "title": "Báo cáo sự cố",
+                "description": "Báo cáo lỗi cho các nhà phát triển. Kiểm tra lại để đảm bảo rằng nó chưa được báo cáo"
             }
         },
         "login": {
             "pleaseWait": "Vui lòng đợi {time, plural, one {1 second} other {# seconds}}",
-            "incorrectAttempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+            "incorrectAttempts": "{attempts, plural, other {# định nghĩa không chính xác}}"
         },
         "dashboard": {
             "security": {
@@ -453,32 +453,32 @@
                 "hardwareDevice": {
                     "title": "Thiết bị phần cứng",
                     "statuses": {
-                        "appNotOpen": "IOTA App Not Open",
-                        "connected": "Connected",
-                        "legacyConnected": "{legacy} App Open",
-                        "locked": "Locked",
-                        "mnemonicMismatch": "Wrong Ledger or Mnemonic",
-                        "notDetected": "Not Detected",
-                        "otherConnected": "App Open"
+                        "appNotOpen": "Ứng dụng IOTA không mở",
+                        "connected": "Đã kết nối",
+                        "legacyConnected": "{legacy} Mở ứng dụng",
+                        "locked": "Đã khóa",
+                        "mnemonicMismatch": "Sai Ledger hoặc Mnemonic",
+                        "notDetected": "Không phát hiện được",
+                        "otherConnected": "Ứng đụng đã mở"
                     }
                 },
                 "strongholdStatus": {
-                    "title": "Wallet Status",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "title": "Trạng thái ví",
+                    "locked": "Đã khóa",
+                    "unlocked": "Đã mở khóa"
                 },
                 "strongholdBackup": {
-                    "title": "Wallet Backup",
-                    "weeksAgo": "{weeks, plural, one {# week} other {# tuần}} trước đó"
+                    "title": "Sao lưu ví",
+                    "weeksAgo": "{weeks, plural, one {# tuần} other {# tuần}} trước đó"
                 }
             },
             "network": {
                 "networkOperational": "Vận hành mạng",
                 "networkDegraded": "Mạng bị xuống cấp",
-                "networkDown": "Network Disconnected",
+                "networkDown": "Mạng đã ngắt kết nối",
                 "status": "Trạng thái",
                 "messagesPerSecond": "Số tin nhắn trên giây",
-                "referencedRate": "Referenced rate"
+                "referencedRate": "Tỷ lệ tham chiếu"
             },
             "profileModal": {
                 "allSettings": "Tất cả tùy chọn cài đặt",
@@ -486,44 +486,44 @@
             }
         },
         "staking": {
-            "title": "Staking",
-            "welcome": "Welcome to the staking dashboard",
+            "title": "Đặt cọc",
+            "welcome": "Chào mừng tới bản điều khiển đặt cọc\n",
             "status": {
-                "upcoming": "Event not started",
-                "commencing": "Pre-staking open",
-                "holdingActive": "Staking in progress",
-                "holdingInactive": "Staking open",
-                "inactive": "Staking not detected",
-                "ended": "Staking ended"
+                "upcoming": "Sự kiện chưa diễn ra",
+                "commencing": "Mở đặt cọc trước",
+                "holdingActive": "Đang đặt cọc",
+                "holdingInactive": "Mở đặt cọc\n",
+                "inactive": "Đặt cọc không được phát hiện",
+                "ended": "Đặt cọc đã kết thúc"
             },
             "summary": {
-                "stakedFunds": "Staked funds"
+                "stakedFunds": "Tài sản đã đặt cọc"
             },
             "info": {
-                "upcomingSubheader": "Event has not started",
-                "upcomingHeader": "Check back later",
-                "commencingSubheader": "Get ready for staking",
-                "commencingHeader": "Pre-stake your tokens!",
-                "holdingSubheaderHolding": "Now earning staking rewards",
-                "holdingSubheaderNotHolding": "Earn rewards by staking IOTA",
-                "holdingHeaderHolding": "{duration} left",
-                "holdingHeaderNotHolding": "Stake your tokens!",
-                "endedSubheader": "Staking has now ended",
-                "endedHeader": "Thank you!",
-                "inactiveHeader": "Try changing node",
-                "inactiveSubheader": "Staking not detected"
+                "upcomingSubheader": "Sự kiện chưa diễn ra",
+                "upcomingHeader": "Kiểm tra lại sau",
+                "commencingSubheader": "Hãy sẵn sàng cho đặt cọc",
+                "commencingHeader": "Đặt cọc trước Token của bạn",
+                "holdingSubheaderHolding": "Nhận phần thưởng đặt cọc bây giờ",
+                "holdingSubheaderNotHolding": "Nhận phần thưởng bằng đặt cọc IOTA",
+                "holdingHeaderHolding": "{duration} thoát",
+                "holdingHeaderNotHolding": "Đặt cọc Token của bạn!",
+                "endedSubheader": "Đặt cọc đã kết thúc bây giờ",
+                "endedHeader": "Cảm ơn bạn!",
+                "inactiveHeader": "Thử thay đổi nút",
+                "inactiveSubheader": "Đặt cọc không được phát hiện"
             },
             "airdrops": {
-                "holding": "Remaining",
-                "commencing": "Until staking begins",
-                "collectedRewards": "Collected rewards",
+                "holding": "Còn lại",
+                "commencing": "Đến khi đặt cọc bắt đầu",
+                "collectedRewards": "Nhận phần thưởng",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
+                    "description": "Assembly là một mạng đa nền tảng có khả năng mở rộng cao, không cần cấp phép để xây dựng và triển khai các hợp đồng thông minh. Assembly là tương lai của Web3."
                 },
                 "shimmer": {
                     "name": "Shimmer",
-                    "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
+                    "description": "Mạng thử nghiệm được khuyến khích để thúc đẩy cải tiến quan trọng trên IOTA. Bất cứ điều gì xảy ra, diễn ra. Cách Shimmer phát triển tùy thuộc vào bạn."
                 }
             }
         }
@@ -531,8 +531,8 @@
     "popups": {
         "password": {
             "title": "Yêu cầu mật khẩu",
-            "subtitle": "Please enter your password to unlock your wallets",
-            "backup": "Please enter your password to export a backup"
+            "subtitle": "Vui lòng nhập mật khẩu để mở khóa ví của bạn",
+            "backup": "Vui lòng nhập mật khẩu để xuất bản sao lưu"
         },
         "qr": {
             "title": "Mã QR của bạn"
@@ -543,239 +543,239 @@
             "upToDateDescription": "Bạn đang chạy trên phiên bản Firefly mới nhất và an toàn nhất.",
             "updateAvailable": "Phiên bản cập nhật Firefly đang hiện hữu",
             "updateDetails": "Phiên bản {version} - {date}",
-            "noAutoUpdate": "Auto-update is disabled in this Windows version, please go to https://firefly.iota.org to download the update."
+            "noAutoUpdate": "Tự động cập nhật được vô hiệu hóa trong phiên bản Windows này, vui lòng truy cập https://firefly.iota.org để tải bản cập nhật."
         },
         "backup": {
             "title": "Bản sao lưu mới nhất: {date}",
             "lastBackup": "Bạn đã thực hiện sau lưu lần cuối vào ngày {date}",
-            "backupDescription": "It is important to back up regularly to ensure you have a copy of your wallets and transaction history.",
+            "backupDescription": "Điều quan trọng là cần sao lưu thường xuyên để đảm bảo bạn có bản sao các ví và lịch sử giao dịch.",
             "backupWarning": "Nếu bạn mất bản sao lưu của mình và cụm từ khôi phục bạn sẽ mất quyền truy cập vào các tài khoản của mình.",
             "notBackedUp": "Chưa được sao lưu",
-            "notBackedUpDescription": "You have not backed up your wallets",
-            "saving": "Saving..."
+            "notBackedUpDescription": "Bạn đã không thực hiện sao lưu ví của bạn",
+            "saving": "Đang lưu..."
         },
         "deleteAccount": {
-            "title": "Delete {name}?",
-            "body": "This wallet has no transaction history. It can safely be deleted.",
-            "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Delete wallet",
-            "errorTitle": "Unable to delete {name}",
-            "errorBody1": "You cannot delete this wallet, you must have at least one."
+            "title": "Xóa {name}?",
+            "body": "Ví này không có lịch sử giao dịch. Nó có thể được xóa một cách an toàn.",
+            "typePassword": "Nhập mật khẩu ví của bạn để xác nhận.",
+            "hideAccount": "Xóa ví",
+            "errorTitle": "Không thể xóa {name}",
+            "errorBody1": "Bạn không thể xóa ví này, bạn phải có ít nhất một ví."
         },
         "hideAccount": {
-            "title": "Hide {name}?",
-            "body": "You can find this wallet later by enabling \"Show hidden wallets\" in Advanced Settings.",
-            "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Hide wallet",
-            "errorTitle": "Unable to hide {name}",
-            "errorBody1": "To hide a wallet it must have 0 balance.",
-            "errorBody2": "You currently have {balance} remaining on this wallet. Please move these funds to a different wallet and try again.",
-            "errorBody3": "You cannot hide this wallet, you must have at least one."
+            "title": "Ẩn {name}?",
+            "body": "Bạn có thể tìm thấy ví này sau bằng cách bật \"Hiển thị ví ẩn\" trong Cài đặt nâng cao.",
+            "typePassword": "Nhập mật khẩu ví của bạn để xác nhận.",
+            "hideAccount": "Ví ẩn",
+            "errorTitle": "Không thể ẩn {name}",
+            "errorBody1": "Để ẩn một chiếc ví, nó phải có số dư bằng 0.",
+            "errorBody2": "Bạn hiện còn {balance} trên ví này. Vui lòng chuyển những khoản tiền này sang một ví khác và thử lại.",
+            "errorBody3": "Bạn không thể ẩn ví này, bạn phải có ít nhất một ví."
         },
         "addressHistory": {
-            "title": "{name} address history",
-            "currentBalance": "Balance: {balance}",
-            "internal": "Internal Address",
-            "external": "Deposit Address"
+            "title": "{name} lịch sử địa chỉ",
+            "currentBalance": "Số dư: {balance}",
+            "internal": "Địa chỉ nội bộ",
+            "external": "Địa chỉ nạp"
         },
         "node": {
             "titleAdd": "Thêm Node",
-            "titleUpdate": "Update a node",
-            "titleRemove": "Remove a node",
-            "titleRemoveAll": "Remove all nodes",
+            "titleUpdate": "Cật nhật một nút",
+            "titleRemove": "Xóa một nút",
+            "titleRemoveAll": "Xóa tất cả nút",
             "titleDetails": "Các chi tiết node",
-            "titleInfo": "Node info",
-            "addingNode": "Adding node",
-            "updatingNode": "Updating node",
-            "loadingNodeInfo": "Loading node info",
+            "titleInfo": "Thông tin nút",
+            "addingNode": "Thêm nút",
+            "updatingNode": "Cập nhật nút",
+            "loadingNodeInfo": "Đang tải thông tin nút",
             "nodeAddress": "Đia chỉ node",
             "optionalUsername": "Tên người dùng (tùy chọn)",
             "optionalPassword": "Mật khẩu (tùy chọn)",
-            "optionalJwt": "JSON web token (optional)",
+            "optionalJwt": "Token web JSON (tùy chọn)",
             "setAsPrimaryNode": "Thiết lập node chính",
-            "removeConfirmation": "Are you sure you want to remove this node?",
-            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "removeConfirmation": "Bạn có chắc chắn muốn xóa nút này không?",
+            "removeAllConfirmation": "Bạn có chắc chắn muốn xóa tất cả các nút không?",
             "info": {
                 "url": "URL",
-                "software": "Software",
-                "networkId": "Network ID",
+                "software": "Phần mềm",
+                "networkId": "ID mạng",
                 "bech32HRP": "Bech32 HRP",
-                "features": "Features",
-                "confirmedMilestoneIndex": "Confirmed milestone index",
-                "pruningIndex": "Pruning index",
+                "features": "Tính năng",
+                "confirmedMilestoneIndex": "Danh mục cột mốc được xác nhận",
+                "pruningIndex": "Danh mục sơ lược",
                 "messagesPerSecond": "Số tin nhắn trên giây",
-                "referencedRate": "Referenced rate"
+                "referencedRate": "Tỷ lệ tham chiếu"
             }
         },
         "switchNetwork": {
-            "title": "Switch network",
-            "newNetwork": "New network",
-            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
-            "switchingNetwork": "Switching network",
-            "typePassword": "Type your password to switch to:"
+            "title": "Đổi mạng",
+            "newNetwork": "Mạng mới",
+            "resetWarning": "Thay đổi mạng sẽ đăng xuất bạn và đặt lại tất cả tài khoản, số dư và lịch sử giao dịch cho hồ sơ này.",
+            "switchingNetwork": "Đang đổi mạng",
+            "typePassword": "Nhập mật khẩu của bạn để chuyển sang:"
         },
         "errorLog": {
-            "title": "Error Log",
-            "empty": "The error log is empty."
+            "title": "Nhật ký lỗi",
+            "empty": "Nhật ký lỗi trống."
         },
         "deleteProfile": {
-            "title": "Delete profile",
-            "confirmation": "Are you sure you want to delete this profile? This operation cannot be undone.",
-            "typePassword": "Type your password to confirm."
+            "title": "Xóa hồ sơ",
+            "confirmation": "Bạn có chắc chắn muốn xóa hồ sơ này không? Không thể hoàn tác thao tác này.",
+            "typePassword": "Nhập mật khẩu của bạn để xác nhận."
         },
         "diagnostics": {
-            "title": "Diagnostics",
-            "node": "Node",
-            "platform": "Platform",
-            "platformVersion": "Platform Version",
-            "platformArchitecture": "Platform Architecture",
-            "cpuCount": "CPU Count",
-            "totalMem": "Total Memory",
-            "freeMem": "Free Memory",
-            "userPath": "User Path"
+            "title": "Chuẩn đoán",
+            "node": "Nút",
+            "platform": "Nền tảng",
+            "platformVersion": "Phiên bản nền tảng",
+            "platformArchitecture": "Kiến trúc nền tảng",
+            "cpuCount": "Số lượng CPU",
+            "totalMem": "Tổng bộ nhớ",
+            "freeMem": "Bộ nhớ trống",
+            "userPath": "Đường dẫn người dùng"
         },
         "transaction": {
-            "title": "Confirm transaction",
-            "body": "You’re about to send {amount} to",
-            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards."
+            "title": "Xác nhận giao dịch",
+            "body": "Bạn sắp gửi {amount} tới",
+            "sendingFromStakedAccount": "Bạn đang gửi một lệnh chuyển từ một ví đang thực hiện đặt đọc. Việc này có thể làm hủy đặt cọc các token của bạn. Hoàn toàn có thể gửi lệnh chuyển tuy nhiên bạn phải cần đặt cọc lại số Token còn lại sau đó."
         },
         "balanceFinder": {
-            "title": "Balance finder",
-            "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
-            "totalWalletBalance": "Total balance",
-            "typePassword": "Type your password to allow searching."
+            "title": "Công cụ tìm kiếm số dư",
+            "body": "Thực hiện tìm kiếm toàn diện các địa chỉ để tìm số dư còn thiếu. Việc này có thể mất một lát.",
+            "totalWalletBalance": "Tổng số dư",
+            "typePassword": "Nhập mật khẩu của bạn để cho phép tìm kiếm"
         },
         "riskFunds": {
-            "title": "Warning: funds at risk during migration",
-            "body1": "It is strongly recommended that you secure all your funds before proceeding with migration. Your funds are at risk of theft if you do not secure them.",
-            "body2": "It is recommended that you rerun the process for addresses with a medium risk level or above."
+            "title": "Cảnh báo: Tài sản gặp rủi ro trong quá trình chuyển",
+            "body1": "Chúng tôi thực sự khuyến bạn bảo mật tất tài sản của mình trước khi tiến hành chuyển. Tài sản của bạn có nguy cơ bị đánh cắp nếu bạn không bảo mật chúng.",
+            "body2": "Chúng tôi khuyên bạn chạy lại quy trình với các địa chỉ ví với mức độ rủi ro trung bình hoặc cao hơn."
         },
         "missingBundle": {
-            "title": "Warning: funds at risk during migration",
-            "body": "You have funds on spent addresses, but the information needed to secure them was not found. This can happen if you made transactions a long time ago. You can proceed but {value} are at risk during migration.",
-            "learnMore": "Learn more about spent addresses",
-            "proceed": "I understand the risk"
+            "title": "Cảnh báo: Tài sản gặp rủi ro trong quá trình chuyển",
+            "body": "Bạn có tài sản trong các ví đã chi tiêu, nhưng không tìm thấy thông tin cần thiết để bảo mật chúng. Điều này có thể xảy nếu bạn thực hiện giao dịch cách đây khá lâu. Bạn có thể tiến hành nhưng {value} gặp rủi ro trong quá trình chuyển.",
+            "learnMore": "Tìm hiểu thêm về các địa chỉ ví đã chi tiêu",
+            "proceed": "Tôi hiểu rủi ro"
         },
         "snapshot": {
-            "title": "Ongoing network upgrade",
-            "body": "The Chrysalis network upgrade has begun.",
-            "bodyMigration": "Migration is disabled until it is complete.",
-            "bodyFirefly": "Firefly is disabled until it is complete. Token migration will still be possible afterwards."
+            "title": "Tiếp tục nâng cấp mạng",
+            "body": "Nâng cấp mạng Chrysalis đã được bắt đầu.",
+            "bodyMigration": "Quá trình chuyển bị vô hiệu hóa cho tới khi hoàn tất.",
+            "bodyFirefly": "Firefly bị vô hiệu hóa cho tới khi hoàn tất. Token vẫn có thể di chuyển sau đó."
         },
         "ledgerNotConnected": {
-            "connect": "Open the new IOTA app on your Ledger device to continue",
-            "connectLegacy": "Open the {legacy} app on your Ledger device to continue"
+            "connect": "Mở ứng dụng IOTA mới trên thiết bị Ledger của bạn để tiếp tục",
+            "connectLegacy": "Mở ứng dụng {legacy} trên thiết bị Ledger của bạn để tiếp tục"
         },
         "ledgerConfirmation": {
-            "confirm": "To proceed, confirm the prompt displayed on your Ledger device"
+            "confirm": "Để tiến hành, xác nhận lời nhắc được hiển thị trên thiết bị Ledger"
         },
         "ledgerAppGuide": {
-            "title": "Guide to installing the Ledger apps",
+            "title": "Hướng dẫn cài đặt ứng dụng Ledger",
             "steps": {
-                "0": "Install and open the Ledger Live application",
-                "1": "Ensure that your Ledger is connected",
-                "2": "Search for apps: {legacy} and IOTA (MIOTA)",
-                "3": "Install both apps: {legacy} and IOTA (MIOTA)",
-                "4": "Remember that it's important to close Ledger Live before returning to Firefly"
+                "0": "Cài đặt và mở ứng dụng Ledger Live",
+                "1": "Đảm bảo rằng Ledger của bạn được kết nối",
+                "2": "Tìm kiếm ứng dụng: {legacy} và IOTA (MIOTA)",
+                "3": "Cài đặt cả hai ứng dụng: {legacy} và IOTA (MIOTA)",
+                "4": "Hãy nhớ rằng điều quan trọng phải đóng Ledger Live trước khi quay lại Firefly"
             }
         },
         "ledgerConnectionGuide": {
-            "title": "Tips if your Ledger isn’t connecting",
+            "title": "Một số mẹo nếu Ledger của bạn không kết nối",
             "steps": {
-                "0": "Make sure Ledger Live is not open on your computer",
-                "1": "Ensure you have unlocked your Ledger device with your PIN",
-                "2": "Open the new IOTA app on your Ledger device",
+                "0": "Đảm bảo rằng Ledger Live không mở trên máy tính của bạn",
+                "1": "Đảm bảo rằng bạn đã mở khóa thiết bị Ledger của bạn với PIN của bạn",
+                "2": "Mở ứng dụng IOTA mới trên thiết bị Ledger của bạn",
                 "3": {
-                    "text": "Still no luck?",
-                    "link": "Try the official Ledger support page"
+                    "text": "Vẫn không thành công?",
+                    "link": "Hãy thử trang hỗ trợ chính thức của Ledger"
                 }
             }
         },
         "ledgerTransaction": {
             "remainderAddress": {
-                "title": "Confirm remainder address",
-                "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+                "title": "Xác nhận địa chỉ còn lại",
+                "info": "Xác nhận rằng địa chỉ còn lại được hiển thị trên Ledger của bạn khớp với địa chỉ được hiển thị bên dưới. Nếu chúng khớp, hãy nhấn cả hai nút trên Ledger của bạn như được yêu cầu."
             },
             "transaction": {
-                "title": "Confirm transaction",
-                "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted."
+                "title": "Xác nhận giao dịch",
+                "info": "Xác nhận rằng thông tin giao dịch hiển thị trên thiết bị Ledger của bạn khớp với thông tin hiển thị bên dưới. Nếu chúng khớp, hãy nhấn cả hai nút trên Ledger của bạn như được yêu cầu."
             }
         },
         "ledgerAddress": {
-            "title": "Confirm receive address",
-            "body": "Confirm that the receive address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+            "title": "Xác nhận địa chỉ nhận",
+            "body": "Xác nhận rằng địa chỉ nhận được hiển thị trên Ledger của bạn khớp với địa chỉ được hiển thị bên dưới. Nếu chúng khớp, hãy nhấn cả hai nút trên Ledger của bạn như được đề cập."
         },
         "ledgerMigrateIndex": {
-            "title": "Do you need to migrate another Trinity account index?",
-            "body": "You can also migrate later in Advanced Settings."
+            "title": "Bạn có cần di chuyển danh mục tài khoản Trinity khác không?",
+            "body": "Bạn cũng có thể di chuyển sau trong cài đặt nâng cao."
         },
         "exportTransactionHistory": {
-            "title": "Export transaction history",
-            "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
-            "profileName": "Profile name:",
-            "accountName": "Account name:",
-            "typePassword": "Type your password to allow exporting"
+            "title": "Xuất lịch sử giao dịch",
+            "body": "Xuất lịch sử giao dịch cho ví đã chọn. Tệp được xuất sẽ có định dạng .csv.",
+            "profileName": "Tên hồ sơ:",
+            "accountName": "Tên tài khoản:",
+            "typePassword": "Nhập mật khẩu của bạn để cho phép xuất"
         },
         "stakingNotice": {
-            "upcomingDate": "Staking has not started yet",
-            "commencingDate": "Staking has not started yet",
-            "body": "By pre-staking your funds before staking starts, you will automatically begin receiving rewards when staking begins.",
-            "ok": "Ok, I understand"
+            "upcomingDate": "Đặt cọc vẫn chưa được bắt đầu",
+            "commencingDate": "Đặt đọc vẫn chưa bắt đầu",
+            "body": "Bằng cách đặt cọc trước tài sản của bạn trước khi đặt cọc bắt đầu, bạn sẽ tự động nhận phần thưởng khi đặt cọc bắt đầu",
+            "ok": "Được, tôi hiểu"
         },
         "stakingManager": {
-            "title": "Staking Management",
-            "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
-            "totalFundsStaked": "Total funds staked",
-            "stakedSuccessfully": "Your funds have been staked for {account}.",
-            "unstakedSuccessfully": "Your funds have been unstaked for {account}."
+            "title": "Quản lý đặt cọc",
+            "description": "Khi bạn đặt cược vào ví, bạn gửi một giao dịch cho chính mình và đánh dấu các khoản tiền đó là \"đã đặt cọc\". Bạn có thể chuyển mã thông báo bất kỳ lúc nào, nhưng bạn sẽ không tiếp tục nhận được phần thưởng đặt cọc.",
+            "totalFundsStaked": "Tổng tài sản đã đặt cọc",
+            "stakedSuccessfully": "Tài sản của bạn đã được đặt cọc cho {account}.",
+            "unstakedSuccessfully": "Tài sản của bạn đã hủy đặt cọc cho {account}."
         },
         "stakingConfirmation": {
-            "title": "Airdrop Participation",
-            "subtitleStake": "You are about to stake",
-            "subtitleMerge": "You are about to merge",
-            "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
-            "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
-            "estimatedAirdrop": "Estimated rewards"
+            "title": "Tham gia Airdrop",
+            "subtitleStake": "Bạn sắp đặt cọc",
+            "subtitleMerge": "Bạn sắp hợp nhất",
+            "bodyStake": "Nếu bạn không muốn tham gia vào cả hai đợt airdrop, bạn có thể chọn không tham gia bên dưới. Bạn có thể hủy bỏ và thực hiện lại để chọn tham gia lại bất kỳ lúc nào.",
+            "bodyMerge": "Số tiền của bạn sẽ được đặt cọc cho {airdrop}. Để thay đổi airdrop bạn muốn tham gia, hãy hủy bỏ ví này và đặt cọc lại.",
+            "estimatedAirdrop": "Phần thưởng ước tính"
         },
         "shimmer-info": {
-            "title": "About Shimmer",
-            "body1": "Congratulations you have earned SMR tokens as a staking reward. Shimmer is an incentivized staging network to test major upgrades on IOTA.",
-            "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
+            "title": "Về Shimmer",
+            "body1": "Xin chúc mừng, bạn đã kiếm được mã thông báo SMR làm phần thưởng đặt cọc. Shimmer là một mạng thử nghiệm để thử nghiệm các nâng cấp lớn trên IOTA.",
+            "body2": "Chúng tôi dự định ra mắt Shimmer vào năm 2022. Các token của bạn sẽ có sẵn để chuyển khi mạng khởi chạy."
         },
         "assembly-info": {
-            "title": "About Assembly",
-            "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
-            "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
+            "title": "Về Assembly",
+            "body1": "Xin chúc mừng, bạn đã kiếm được token ASMB làm phần thưởng đặt cọc. Assembly là một mạng đa chuỗi để triển khai các hợp đồng thông minh có thể mở rộng trên IOTA.",
+            "body2": "Chúng tôi dự định ra mắt Assembly vào năm 2022. Các token của bạn sẽ có sẵn để chuyển khi mạng khởi chạy."
         }
     },
     "charts": {
-        "incomingMi": "Incoming {value}",
-        "outgoingMi": "Outgoing {value}",
-        "portoflio": "Portfolio",
+        "incomingMi": "Thu vào {value}",
+        "outgoingMi": "Rút ra {value}",
+        "portoflio": "Danh mục",
         "token": "Token",
         "holdings": "Holdings",
-        "accountValue": "Wallet Value",
-        "accountActivity": "Wallet Activity",
-        "timeframe1Hour": "1 hour",
-        "timeframe1Day": "1 day",
-        "timeframe1Week": "1 week",
-        "timeframe1Month": "1 month"
+        "accountValue": "Giá trị Ví",
+        "accountActivity": "Hoạt động Ví",
+        "timeframe1Hour": "1 giờ",
+        "timeframe1Day": "1 ngày",
+        "timeframe1Week": "1 tuần",
+        "timeframe1Month": "1 tháng"
     },
     "actions": {
         "continue": "Tiếp tục",
         "back": "Quay lại",
-        "previous": "Previous",
-        "next": "Next",
+        "previous": "Trước đó",
+        "next": "Tiếp theo",
         "cancel": "Hủy",
         "close": "Đóng",
         "dismiss": "Bỏ qua",
-        "proceedAnyway": "Proceed anyway",
+        "proceedAnyway": "Vẫn tiếp tục",
         "save": "Lưu",
         "importSeed": "Nhập vào một seed hiện có",
-        "restoreWallet": "Migrate or restore a wallet",
-        "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
+        "restoreWallet": "Di chuyển hoặc khôi phục ví",
+        "restoreWalletDescription": "Di chuyển sang Chrysalis hoặc khôi phục ví hiện có",
         "createWallet": "Khởi tạo ví mới",
-        "createWalletDescription": "Create a fresh wallet running on Chrysalis",
+        "createWalletDescription": "Tạo một ví mới chạy trên Chrysalis",
         "savePassword": "Lưu mật khẩu",
         "useBiometric": "Sử dụng bảo mật sinh trắc học",
         "setupPin": "Thiết lập mã PIN",
@@ -787,7 +787,7 @@
         "verifyRecoveryPhrase": "Xác thực cụm từ phục hồi tài khoản ví",
         "revealRecoveryPhrase": "Hiển thị cụm từ khôi phục ví",
         "importSeedvault": "Nhập vào SeedVault",
-        "checkAgain": "Check Again",
+        "checkAgain": "Kiểm tra lại",
         "importFromFile": "Nhập từ tập tin",
         "send": "Gửi",
         "receive": "Nhận",
@@ -796,32 +796,32 @@
         "tryAgain": "Thử lại",
         "visitDiscord": "Thăm Discord",
         "dragDrop": "Kéo và Thả",
-        "importExtentions": ".kdbx or .stronghold file",
+        "importExtentions": "tệp .kdbx hoặc .stronghold",
         "chooseFile": "Chọn một tập tin",
         "dropHere": "Thả tập tin của bạn vào đây",
         "syncAll": "Đồng bộ tất cả",
         "export": "Xuất",
-        "exporting": "Exporting",
+        "exporting": "Đang xuất",
         "exportNewStronghold": "Xuất ra Stronghold",
-        "enableDeepLinks": "Enable IOTA links",
+        "enableDeepLinks": "Thiết lập các liên kết IOTA",
         "enableDeveloperMode": "Bật chế độ nhà phát triển",
         "enableSystemNotifications": "Cho phép thông báo",
-        "exportTransactionHistory": "Export transaction history",
-        "localProofOfWork": "Local proof of work",
+        "exportTransactionHistory": "Xuất lịch sử giao dịch",
+        "localProofOfWork": "Bằng chứng công việc tại địa phương",
         "unlock": "Mở khóa",
         "updateFirefly": "Cập nhật ví Firefly",
         "restartNow": "Khởi động lại ngay",
-        "saveBackup": "Save Stronghold backup",
-        "customizeAcount": "Customise wallet",
+        "saveBackup": "Sao lưu Stronghold",
+        "customizeAcount": "Tùy chỉnh Ví",
         "viewAddressHistory": "Hiển thị lịch sử địa chỉ ví",
-        "hideAccount": "Hide wallet",
-        "showAccount": "Unhide wallet",
-        "deleteAccount": "Delete wallet",
+        "hideAccount": "Ví ẩn",
+        "showAccount": "Hủy ẩn Ví",
+        "deleteAccount": "Xóa ví",
         "max": "Tối đa",
         "addNode": "Thêm Node",
-        "updateNode": "Update node",
-        "removeNode": "Remove node",
-        "removeAllNodes": "Remove all nodes",
+        "updateNode": "Cập nhật Nút",
+        "removeNode": "Xóa nút",
+        "removeAllNodes": "Xóa tất cả nút",
         "hide": "Ẩn",
         "hideOthers": "Ẩn các mục khác",
         "showAll": "Hiện tất cả",
@@ -833,42 +833,42 @@
         "copy": "Sao chép",
         "paste": "Dán",
         "selectAll": "Chọn tất cả",
-        "addAccount": "Add Wallet",
+        "addAccount": "Thêm Ví",
         "checkForUpdates": "Kiểm tra cập nhật",
         "reportAnIssue": "Báo cáo sự cố",
-        "restore": "Restore",
-        "clear": "Clear",
-        "hideDetails": "Hide Details",
-        "yes": "Yes",
-        "no": "No",
-        "skip": "Skip",
-        "reset": "Reset",
-        "downloadRecoveryKit": "Save Recovery Kit template",
-        "skipBackup": "Skip file backup",
-        "finishSetup": "Finish setup",
-        "readDocumentation": "Read the documentation",
-        "visitFaq": "Visit FAQ",
-        "viewStatus": "View status",
-        "showHiddenAccounts": "Show hidden wallets",
-        "confirm": "Confirm",
-        "hideNetworkStatistics": "Hide network statistics",
-        "findBalances": "Find balances",
-        "searchBalances": "Search for balances",
-        "searchAgain": "Search again",
-        "searching": "Searching...",
-        "closeFirefly": "Close Firefly",
-        "generateAddress": "Generate address",
-        "migrateAgain": "Migrate another index",
-        "visitWebsite": "Visit website",
-        "howItWorks": "How it works",
-        "learnAboutStaking": "Learn about staking",
-        "stake": "Stake",
-        "unstake": "Unstake",
-        "stakeFunds": "Stake funds",
-        "manageStake": "Manage stake",
-        "merge": "Merge",
-        "mergeFunds": "Merge funds",
-        "done": "Done"
+        "restore": "Khôi phục",
+        "clear": "Xóa",
+        "hideDetails": "Ẩn chi tiết",
+        "yes": "Có",
+        "no": "Không",
+        "skip": "Bỏ qua",
+        "reset": "Thiết lập lại",
+        "downloadRecoveryKit": "Lưu mẫu bộ phục hồi",
+        "skipBackup": "Bỏ qua tệp sao lưu",
+        "finishSetup": "Hoàn tất cài đặt",
+        "readDocumentation": "Đọc tài liệu",
+        "visitFaq": "Truy cập câu hỏi thường gặp",
+        "viewStatus": "Xem trạng thái",
+        "showHiddenAccounts": "Hiển thị các ví ẩn",
+        "confirm": "Xác nhận",
+        "hideNetworkStatistics": "Ẩn số liệu thống kê mạng",
+        "findBalances": "Tìm số dư",
+        "searchBalances": "Tìm kiếm số dư",
+        "searchAgain": "Tìm kiếm lại",
+        "searching": "Đang tìm kiếm...",
+        "closeFirefly": "Đóng Firefly",
+        "generateAddress": "Tạo địa chỉ mới",
+        "migrateAgain": "Chuyển danh mục khác",
+        "visitWebsite": "Truy cập Website",
+        "howItWorks": "Cách thức hoạt động",
+        "learnAboutStaking": "Tìm hiểu về đặt cọc",
+        "stake": "Đặt cọc",
+        "unstake": "Hủy đặt cọc",
+        "stakeFunds": "Tài sản đặt cọc",
+        "manageStake": "Quản lý đặt cọc",
+        "merge": "Gộp lại",
+        "mergeFunds": "Các tài sản gộp",
+        "done": "Hoàn thành"
     },
     "general": {
         "password": "Mật khẩu",
@@ -881,16 +881,16 @@
         "recentActivity": "Hoạt động gần đây",
         "sent": "Đã gửi",
         "received": "Đã nhận",
-        "sendPayment": "Send Payment",
-        "moveFunds": "Internal Transfer",
-        "sendTo": "Send To",
+        "sendPayment": "Gửi thanh toán",
+        "moveFunds": "Chuyển khoản nội bộ",
+        "sendTo": "Gửi đến",
         "sendFunds": "Gửi tiền",
-        "sendToAddress": "Send to address",
+        "sendToAddress": "Gửi đến địa chỉ",
         "scanQrOrPaste": "Quét mã QR hoặc dán vào một địa chỉ ví",
-        "moveFundsBetweenAccounts": "Move funds between wallets",
+        "moveFundsBetweenAccounts": "Chuyển tài sản giữa các ví",
         "sendTokensToAddress": "Gửi các token tới một địa chỉ ví",
-        "manageAccount": "Manage Wallet",
-        "customizeAcount": "Customize your wallet",
+        "manageAccount": "Quản lý ví",
+        "customizeAcount": "Tùy chỉnh ví của bạn",
         "account": "Ví tiền",
         "sendingToAddress": "Gửi đến địa chỉ",
         "amount": "Số tiền",
@@ -898,12 +898,12 @@
         "reference": "Tham chiếu",
         "from": "Từ",
         "to": "Đến",
-        "receiveFunds": "Receive Funds",
+        "receiveFunds": "Tài sản nhận",
         "myAddress": "Địa chỉ của tôi",
         "shareAddress": "Chia sẻ địa chỉ",
         "yourAddress": "Địa chỉ ví của bạn",
-        "newRemainder": "New Remainder",
-        "remainder": "Remainder",
+        "newRemainder": "Phần còn lại mới",
+        "remainder": "Phần còn lại",
         "generateNewAddress": "Tạo địa chỉ ví mới",
         "copyAddress": "Sao chép địa chỉ",
         "import": "Nhập vào",
@@ -911,123 +911,123 @@
         "stronghold": "Stronghold",
         "language": "Ngôn ngữ",
         "appearance": "Giao diện",
-        "lightTheme": "Light",
-        "darkTheme": "Dark",
-        "systemTheme": "System",
-        "balance": "Balance",
-        "accountBalance": "Wallet Balance",
+        "lightTheme": "Sáng",
+        "darkTheme": "Tối",
+        "systemTheme": "Hệ thống",
+        "balance": "Số dư",
+        "accountBalance": "Số dư Ví",
         "incoming": "Tiền chuyển đến",
         "outgoing": "Tiền chuyển đi",
-        "totalIn": "Total in",
-        "totalOut": "Total out",
-        "accounts": "Wallets",
-        "myAccounts": "My Wallets",
+        "totalIn": "Tổng vào",
+        "totalOut": "Tổng ra",
+        "accounts": "Ví",
+        "myAccounts": "Ví của tôi",
         "profiles": "Hồ sơ cá nhân",
         "dev": "Nhà phát triển",
-        "createAccount": "Create a Wallet",
-        "accountName": "Wallet name",
+        "createAccount": "Khởi tạo ví",
+        "accountName": "Tên ví",
         "latestTransactions": "Các giao dịch mới nhất",
         "transactions": "Các giao dịch",
         "security": "Bảo mật",
-        "accountAddress": "Wallet Address",
-        "network": "Network",
+        "accountAddress": "Địa chỉ Ví",
+        "network": "Mạng",
         "nodes": "Các node",
         "wallet": "Ví tiền",
         "help": "Trợ giúp",
-        "you": "You",
-        "messageId": "Message ID",
-        "inputAddress": "Send Address",
-        "receiveAddress": "Receive Address",
-        "newAddress": "New Address",
-        "date": "Date",
+        "you": "Bạn",
+        "messageId": "ID tin nhắn",
+        "inputAddress": "Địa chỉ gửi",
+        "receiveAddress": "Địa chỉ nhận",
+        "newAddress": "Địa chỉ mới",
+        "date": "Thời điểm",
         "status": "Trạng thái",
-        "confirmed": "Confirmed",
-        "pending": "Pending",
-        "noAccounts": "You have no wallets, please create one.",
-        "loadingAccounts": "Loading, please wait...",
+        "confirmed": "Đã xác nhận",
+        "pending": "Đang chờ xử lý",
+        "noAccounts": "Bạn không có ví, vui lòng tạo một ví.",
+        "loadingAccounts": "Đang tải, vui lòng chờ...",
         "addProfile": "Thêm cấu hình",
-        "noRecentHistory": "No recent history",
-        "firstSync": "Syncing history, this may take a while...",
-        "transferSyncing": "Syncing wallet",
-        "transferSelectingInputs": "Selecting inputs",
-        "transferRemainderAddress": "Generating remainder address",
-        "transferPreparedTransaction": "Preparing transaction",
-        "transferSigning": "Signing the transaction",
-        "transferPow": "Performing PoW",
-        "transferBroadcasting": "Broadcasting transaction",
-        "transferComplete": "Transfer complete",
-        "generatingReceiveAddress": "Generating receive address",
-        "broadcasting": "Broadcasting",
-        "confirming": "Confirming",
-        "creatingAccount": "Creating wallet, please wait...",
-        "updatingAccount": "Updating wallet, please wait...",
-        "accountSyncing": "Wallet is syncing",
-        "accountSyncComplete": "Wallet sync complete",
-        "passwordUpdating": "Updating password...",
-        "passwordSuccess": "Updated password successfully",
-        "passwordFailed": "Updating password failed",
-        "syncing": "Syncing",
-        "syncingAccounts": "Syncing wallets...",
-        "exportingStronghold": "Exporting Stronghold...",
-        "exportingStrongholdSuccess": "Exported Stronghold successfully",
-        "exportingStrongholdFailed": "Exporting Stronghold failed",
-        "pinCodeUpdating": "Updating PIN code...",
-        "pinCodeSuccess": "Updated PIN code successfully",
-        "pinCodeFailed": "Updating PIN code failed",
-        "passwordStrength": "Password strength",
-        "passwordStrength0": "Bad",
-        "passwordStrength1": "Poor",
-        "passwordStrength2": "Weak",
-        "passwordStrength3": "Average",
-        "passwordStrength4": "Strong",
-        "creatingProfile": "Creating profile, please wait...",
-        "fundMigration": "Fund migration",
-        "accountRemoved": "This wallet is hidden. Unhide it to perform transfers.",
-        "receivingTo": "Receiving to {account}",
-        "sendingFrom": "Sending from {account}",
-        "receivedTo": "Received to {account}",
-        "sentFrom": "Sent from {account}",
-        "stakedFor": "Staked for {account}",
-        "unstakedFor": "Unstaked for {account}",
-        "votedFor": "Voted for {account}",
-        "unvotedFor": "Unvoted for {account}",
-        "receiving": "Receiving",
-        "sending": "Sending",
-        "legacyNetwork": "Legacy Network",
-        "capsLock": "Caps Lock is on",
-        "version": "Version {version}",
-        "unknown": "Unknown",
-        "none": "None",
-        "staked": "Staked",
-        "unstaked": "Unstaked",
-        "staking": "Staking",
-        "unstaking": "Unstaking",
-        "notStaked": "Not staked",
-        "stakedFunds": "Staked funds",
-        "unstakedFunds": "Unstaked funds"
+        "noRecentHistory": "Không có lịch sử gần đây",
+        "firstSync": "Đang đồng bộ hóa lịch sử, quá trình này có thể mất một lúc...",
+        "transferSyncing": "Đang đồng bộ Ví",
+        "transferSelectingInputs": "Lựa chọn đầu vào",
+        "transferRemainderAddress": "Đang tạo địa chỉ phần còn lại",
+        "transferPreparedTransaction": "Đang chuẩn bị giao dịch",
+        "transferSigning": "Đang ký giao dịch",
+        "transferPow": "Đang thực hiện bằng chứng công việc",
+        "transferBroadcasting": "Đang phát giao dịch",
+        "transferComplete": "Chuyển hoàn tất",
+        "generatingReceiveAddress": "Đang tạo địa chỉ nhận",
+        "broadcasting": "Đang phát",
+        "confirming": "Đang xác nhận",
+        "creatingAccount": "Đang tạo ví, vui lòng đợi...",
+        "updatingAccount": "Đang cập nhật ví, vui lòng đợi...",
+        "accountSyncing": "Ví đang đồng bộ hóa",
+        "accountSyncComplete": "Đồng bộ hóa ví hoàn tất",
+        "passwordUpdating": "Đang cập nhật mậu khẩu...",
+        "passwordSuccess": "Đã cập nhật mật khẩu thành công",
+        "passwordFailed": "Cập nhật mật khẩu thất bại",
+        "syncing": "Đang đồng bộ",
+        "syncingAccounts": "Đang đồng bộ Ví...",
+        "exportingStronghold": "Đang xuất Stronghold...",
+        "exportingStrongholdSuccess": "Đã xuất thành công Stronghold",
+        "exportingStrongholdFailed": "Xuất Stronghold đã thất bại",
+        "pinCodeUpdating": "Đang cập nhật mã PIN...",
+        "pinCodeSuccess": "Cập nhật mã PIN thành công",
+        "pinCodeFailed": "Cập nhật mã PIN thất bại",
+        "passwordStrength": "Độ mạnh của mật khẩu",
+        "passwordStrength0": "Kém",
+        "passwordStrength1": "Yếu",
+        "passwordStrength2": "Yếu",
+        "passwordStrength3": "Trung bình",
+        "passwordStrength4": "Mạnh",
+        "creatingProfile": "Đang tạo hồ sơ cá nhân, vui lòng đợi...",
+        "fundMigration": "Tài sản chuyển",
+        "accountRemoved": "Ví này bị ẩn. Hiện nó để thực hiện chuyển.",
+        "receivingTo": "Đang nhận tới {account}",
+        "sendingFrom": "Đang gửi từ {account}",
+        "receivedTo": "Đã nhận tới {account}",
+        "sentFrom": "Gửi từ {account}",
+        "stakedFor": "Đặt cọc cho {account}",
+        "unstakedFor": "Hủy đặt cọc cho {account}",
+        "votedFor": "Bình chọn cho {account}",
+        "unvotedFor": "Hủy bình chọn cho {account}",
+        "receiving": "Đang nhận",
+        "sending": "Đang gửi",
+        "legacyNetwork": "Mạng Legacy",
+        "capsLock": "Phím CapsLock đang bật",
+        "version": "Phiên bản {version}",
+        "unknown": "Không biết",
+        "none": "Trống",
+        "staked": "Đã đặt cọc",
+        "unstaked": "Hủy đặt cọc",
+        "staking": "Đặt cọc",
+        "unstaking": "Đang hủy đặt cọc",
+        "notStaked": "Không đặt cọc",
+        "stakedFunds": "Tài sản đã đặt cọc",
+        "unstakedFunds": "Tài sản không đặt cọc"
     },
     "dates": {
         "today": "Ngày hôm nay",
-        "yesterday": "Yesterday",
-        "daysAgo": "{time, plural, one {# week} other {# tuần}} trước đó",
+        "yesterday": "Hôm qua",
+        "daysAgo": "{time, plural, other {# ngày}} trước",
         "weeksAgo": "{time, plural, one {# week} other {# tuần}} trước đó",
-        "monthsAgo": "{time, plural, one {# month} other {# months}} ago",
-        "yearsAgo": "{time, plural, one {# year} other {# years}} ago"
+        "monthsAgo": "{time, plural, other {# Tháng}} trước",
+        "yearsAgo": "{time, plural, other {# Năm}} trước"
     },
     "times": {
-        "second": "{time, plural, one {1 second} other {# seconds}}",
-        "minute": "{time, plural, one {1 minute} other {# minutes}}",
-        "hour": "{time, plural, one {1 hour} other {# hours}}",
-        "day": "{time, plural, one {1 day} other {# days}}",
-        "week": "{time, plural, one {1 week} other {# weeks}}",
-        "month": "{time, plural, one {1 month} other {# months}}",
-        "year": "{time, plural, one {1 year} other {# years}}"
+        "second": "{time, plural, other {# Giây}}",
+        "minute": "{time, plural, other {# phút}}",
+        "hour": "{time, plural, other {# Giờ}}",
+        "day": "{time, plural, other {# Ngày}}",
+        "week": "{time, plural, other {# Tuần}}",
+        "month": "{time, plural, other {# Tháng}}",
+        "year": "{time, plural, other {# Năm}}"
     },
     "notifications": {
         "valueTx": "Đang nhận {{value}} từ {{account}}",
         "confirmed": "Đang gửi đi {{value}} từ {{account}} đã được xác nhận",
-        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
-        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
+        "confirmedInternal": "{{value}} Từ {{senderAccount}} đến {{receiverAccount}} đã được xác nhận",
+        "confirmedInternalNoAccounts": "{{value}} chuyển khoản nội bộ đã được xác nhận",
         "failed": "Đang gửi đi {{value}} từ {{account}} đã thất bại",
         "downloadingUpdate": "Đang tải xuống bản cập nhật",
         "updateReady": "Bản cập nhật đã sẵn sàng",
@@ -1035,217 +1035,217 @@
         "restartInstall": "Khởi động lại để cài đặt",
         "calcMinutesRemaining": "Đang tính toán số phút còn lại...",
         "minutesRemaining": "{minutes, plural, one {1 phút còn lại} other {# số phút còn lại}}",
-        "copiedToClipboard": "Copied to clipboard",
-        "accountsSynchronized": "Wallet synchronization complete",
-        "fundsAvailableSoon": "Your funds will become available shortly",
+        "copiedToClipboard": "Đã sao chép vào bộ nhớ",
+        "accountsSynchronized": "\nĐồng bộ hóa Ví hoàn tất",
+        "fundsAvailableSoon": "Tài sản của bạn sẽ sớm có",
         "exportTransactionHistory": {
-            "success": "Transaction history for {accountAlias} was successfully saved to {filePath}",
-            "error": "Unable to export transaction history for {accountAlias}"
+            "success": "Lịch sử giao dịch cho {accountAlias} đã được lưu thành công tới {filePath}",
+            "error": "Không thể xuất lịch sử giao dịch cho {accountAlias}"
         },
         "deepLinkingRequest": {
-            "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
-            "notEnabled": "IOTA links are not enabled",
-            "invalidFormat": "The IOTA link you followed is invalid",
+            "recievedWhileLoggedOut": "Vui lòng đăng nhập để bắt đầu liên kết IOTA",
+            "notEnabled": "Các liên kết IOTA không được kích hoạt",
+            "invalidFormat": "Liên kết IOTA bạn đã theo dõi không hợp lệ",
             "wallet": {
                 "send": {
-                    "success": "Payment details added from IOTA link"
+                    "success": "Chi tiết thanh toán được thêm từ liên kết IOTA"
                 }
             }
         }
     },
     "error": {
         "profile": {
-            "length": "Your profile name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "duplicate": "A profile with this name already exists.",
+            "length": "Tên hồ sơ của bạn không được dài hơn {length, plural, one {1 ký tự} other {# ký tự}}.",
+            "duplicate": "Hồ sơ có tên này đã tồn tại.",
             "delete": {
-                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+                "nonEmptyAccounts": "Bạn phải chuyển tất cả số dư trước khi có thể xóa hồ sơ của mình."
             }
         },
         "password": {
-            "doNotMatch": "Passwords do not match.",
-            "tooWeak": "Your new password is too weak.",
-            "row": "Straight rows of keys are easy to guess.",
-            "pattern": "Short keyboard patterns are easy to guess.",
-            "names": "Common names and surnames are easy to guess.",
-            "repeats": "Repeats like 'aaa' are easy to guess.",
-            "repeats2": "Repeats like 'abcabcabc' are easy to guess.",
-            "sequence": "Sequences of characters are easy to guess.",
-            "years": "Recent years are easy to guess.",
-            "dates": "Dates are easy to guess.",
-            "common": "This is a very common password.",
-            "similar": "This is similar to a common password.",
-            "word": "A single word is easy to guess.",
-            "incorrect": "Your password is incorrect.",
-            "length": "Your password can't be longer than {length, plural, one {1 character} other {# characters}}."
+            "doNotMatch": "Mật khẩu không khớp.",
+            "tooWeak": "Mật khẩu mới của bạn quá yếu.",
+            "row": "Khóa trên hàng phím thẳng dễ đoán.",
+            "pattern": "Các mẫu mật khẩu ngắn rất dễ đoán.",
+            "names": "Họ và tên thông thường rất dễ đoán.",
+            "repeats": "Việc lặp lại như 'aaa' rất dễ đoán.",
+            "repeats2": "Những lần lặp lại như 'abcabcabc' rất dễ đoán.",
+            "sequence": "Chuỗi ký tự dễ đoán.",
+            "years": "Những năm gần đây rất dễ đoán.",
+            "dates": "Ngày tháng rất dễ đoán.",
+            "common": "Đây là một mật khẩu rất phổ biến.",
+            "similar": "Đây tương tự như một mật khẩu thường gặp.",
+            "word": "Một từ dễ đoán.",
+            "incorrect": "Mật khẩu của bạn không đúng.",
+            "length": "Mật khẩu của bạn không thể dài hơn {length, plural, other {# ký tự}}."
         },
         "pincode": {
-            "length": "Your PIN must be {length, plural, one {1 digit} other {# digits}} long.",
-            "match": "PINs do not match.",
-            "incorrect": "Your current PIN is incorrect."
+            "length": "Mã PIN của bạn phải có {length, plural, other {# số}}.",
+            "match": "Mã PIN không khớp.",
+            "incorrect": "Mã PIN hiện tại của bạn không đúng."
         },
         "account": {
-            "length": "Your wallet name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "empty": "You must use your latest wallet before creating a new one.",
-            "notEmpty": "You must transfer your balance before deleting this wallet.",
-            "duplicate": "A wallet with this name already exists.",
-            "tilde": "A profile name can't start with the '~' character.",
-            "control": "A profile name can't contain a control character.",
-            "startDot": "A profile name can't start with the '.' character.",
-            "chars": "A profile name can't contain the following characters <>:\"/\\|?*",
-            "index": "Your account index must be a number between 0 and 2,147,483,647.",
-            "page": "Your account page must be a number between 0 and 2,147,483,647.",
-            "syncing": "There was an error syncing your wallets."
+            "length": "Tên ví của bạn không thể dài hơn {length, plural, other {# ký tự}}.",
+            "empty": "Bạn phải sử dụng ví mới nhất của mình trước khi tạo ví mới.",
+            "notEmpty": "Bạn phải chuyển số dư của mình trước khi xóa ví này.",
+            "duplicate": "Ví có tên này đã tồn tại.",
+            "tilde": "Tên hồ sơ không được bắt đầu bằng ký tự '~'.",
+            "control": "Tên hồ sơ không được chứa ký tự điều khiển.",
+            "startDot": "Tên hồ sơ không được bắt đầu bằng '.' tính cách.",
+            "chars": "Tên hồ sơ không được chứa các ký tự sau <>: \"/ \\ |? *",
+            "index": "Danh sách tài khoản của bạn phải là một số từ 0 đến 2,147,483,647.",
+            "page": "Trang tài khoản của bạn phải là một số từ 0 đến 2,147,483,647.",
+            "syncing": "Đã xảy ra lỗi khi đồng bộ hóa ví của bạn."
         },
         "send": {
-            "addressLength": "Addresses should be {length, plural, one {1 character} other {# characters}} long.",
-            "amountTooHigh": "This is greater than your available balance.",
-            "amountNoFloat": "If units are `i` you cannot use decimal places.",
-            "amountInvalidFormat": "The amount appears to be an invalid number.",
-            "amountZero": "The amount must be greater than 0.",
-            "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
-            "wrongAddressFormat": "The address is not correctly formatted.",
-            "invalidAddress": "The address is not valid.",
-            "insufficientFunds": "This wallet has insufficient funds.",
-            "noToAccount": "You have not selected a wallet to send the funds to.",
-            "sendingDust": "You cannot send less than 1 Mi.",
-            "leavingDust": "You cannot leave less than 1 Mi on your address.",
-            "cancelled": "The transaction was cancelled.",
-            "transaction": "There was an error sending your transaction. Please try again."
+            "addressLength": "Địa chỉ phải dài {length, plural, other {# ký tự}}.",
+            "amountTooHigh": "Tài sản này lớn hơn số dư hiện có của bạn.",
+            "amountNoFloat": "Nếu đơn vị là `i`, bạn không thể sử dụng vị trí thập phân.",
+            "amountInvalidFormat": "Số tiền dường như là một số không hợp lệ.",
+            "amountZero": "Số tiền phải lớn hơn 0.",
+            "wrongAddressPrefix": "Địa chỉ bắt đầu bằng tiền tố {prefix}.",
+            "wrongAddressFormat": "Địa chỉ không được định dạng đúng.",
+            "invalidAddress": "Địa chỉ không hợp lệ.",
+            "insufficientFunds": "Ví này không đủ tiền.",
+            "noToAccount": "Bạn chưa chọn ví để gửi tài sản tới.",
+            "sendingDust": "Bạn không thể gửi ít hơn 1 Mi.",
+            "leavingDust": "Bạn không thể để lại ít hơn 1 Mi trên địa chỉ của bạn.",
+            "cancelled": "Giao dịch đã bị hủy.",
+            "transaction": "Đã xảy ra lỗi khi gửi giao dịch của bạn. Vui lòng thử lại."
         },
         "node": {
-            "invalid": "Please enter a valid URL.",
-            "dns": "Could not find DNS resolution for node.",
-            "timedOut": "The connection timed out.",
-            "refused": "The connection was refused.",
-            "handshake": "Could not complete handshake with node.",
-            "invalidCertificate": "Could not connect with invalid certificate.",
-            "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
-            "duplicate": "This node has already been added.",
-            "unsynced": "The node is not in sync.",
-            "noSynced": "No synced nodes are available.",
-            "answer": "Failed to get an answer from all nodes.",
-            "forbidden": "This node connection is forbidden.",
-            "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node."
+            "invalid": "Vui lòng nhập một URL hợp lệ.",
+            "dns": "Không thể tìm thấy độ phân giải DNS cho nút.",
+            "timedOut": "Kết nối đã hết thời gian chờ.",
+            "refused": "Kết nối đã bị từ chối.",
+            "handshake": "Không thể hoàn tất quá trình bắt tay với nút.",
+            "invalidCertificate": "Không thể kết nối với chứng chỉ không hợp lệ.",
+            "https": "HTTPS là bắt buộc; các kết nối không an toàn qua HTTP không được hỗ trợ tại thời điểm này.",
+            "duplicate": "Nút này đã được thêm vào.",
+            "unsynced": "Nút không đồng bộ.",
+            "noSynced": "Không có nút được đồng bộ hóa nào khả dụng.",
+            "answer": "Không nhận được câu trả lời từ tất cả các nút.",
+            "forbidden": "Kết nối nút này bị cấm.",
+            "pluginNotAvailable": "Plugin \"{nodePlugin}\" không có sẵn trên nút hiện tại."
         },
         "network": {
-            "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
-            "notReachable": "The network ID for this node could not be retrieved, unable to add node.",
-            "badNodes": "Unable to connect to the network with current node configuration.",
-            "nonEmptyAccount": "You must transfer all balances before switching networks."
+            "mismatch": "ID mạng cho nút này là \"{networkId}\", không khớp với mạng hiện tại.",
+            "notReachable": "Không thể truy xuất ID mạng cho nút này, không thể thêm nút.",
+            "badNodes": "Không thể kết nối với mạng có cấu hình nút hiện tại.",
+            "nonEmptyAccount": "Bạn phải chuyển tất cả số dư trước khi chuyển mạng."
         },
         "global": {
-            "generic": "Something went wrong."
+            "generic": "Đã có lỗi xảy ra."
         },
         "backup": {
-            "invalid": "The backup file was not recognised.",
-            "destination": "The backup destination was not valid.",
-            "mnemonic": "The mnemonic is not valid.",
-            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is 1} other {is #}}",
-            "seedCharacters": "The seed should only contain characters A-Z or 9",
-            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
-            "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase",
-            "phraseCaseWord": "The word \"{word}\" should be lower case"
+            "invalid": "Tệp sao lưu không được nhận dạng.",
+            "destination": "Địa chỉ bản sao lưu không hợp lệ.",
+            "mnemonic": "Mnemonic không hợp lệ.",
+            "seedTooShort": "Cụm ký tự phải dài 81 ký tự, nó {length, plural, other {là #}}",
+            "seedCharacters": "Cụm ký tự chỉ nên chứa các ký tự A-Z hoặc 9",
+            "phraseWordCount": "Phải có 24 từ trong cụm từ khôi phục của bạn, hiện tại ở đó {length, plural, other {là #}}.",
+            "phraseUnrecognizedWord": "Từ không nhận dạng được \"{word}\" trong cụm từ khôi phục của bạn",
+            "phraseCaseWord": "Từ \"{word}\" nên viết thường"
         },
         "ledger": {
-            "appNotOpen": "You must open the IOTA app on your Ledger device.",
-            "generic": "There was an error connecting to your Ledger device.",
-            "legacyConnected": "The wrong app is open on your Ledger device.",
-            "locked": "Please unlock your Ledger device by entering the PIN.",
-            "mnemonicMismatch": "You have connected the wrong Ledger device or the mnemonic has changed.",
-            "notDetected": "No Ledger device detected.",
-            "notFound": "Ledger device not found.",
-            "otherConnected": "The wrong app is open on your Ledger device.",
-            "generateAddress": "There was an error generating an address.",
-            "timeout": "Your Ledger device timed out.",
-            "disconnected": "Your Ledger device was disconnected.",
-            "noStronghold": "Unable to use Stronghold with Ledger profile."
+            "appNotOpen": "Bạn phải mở ứng dụng IOTA trên thiết bị Ledger của bạn.",
+            "generic": "Đã xảy ra lỗi khi kết nối với thiết bị Ledger của bạn.",
+            "legacyConnected": "Ứng dụng sai đang mở trên thiết bị Ledger của bạn.",
+            "locked": "Vui lòng mở khóa thiết bị Ledger của bạn bằng cách nhập mã PIN.",
+            "mnemonicMismatch": "Bạn đã kết nối sai thiết bị Ledger hoặc Mnemonic đã thay đổi.",
+            "notDetected": "Không phát hiện thấy thiết bị Ledger nào.",
+            "notFound": "Không tìm thấy thiết bị Ledger.",
+            "otherConnected": "Ứng dụng sai đang mở trên thiết bị Ledger của bạn.",
+            "generateAddress": "Đã xảy ra lỗi khi tạo địa chỉ.",
+            "timeout": "Thiết bị Ledger của bạn đã hết thời gian chờ.",
+            "disconnected": "Thiết bị Ledger của bạn đã bị ngắt kết nối.",
+            "noStronghold": "Không thể sử dụng Stronghold với hồ sơ Ledger."
         },
         "popup": {
-            "preventClose": "This popup is unable to be closed."
+            "preventClose": "Không thể đóng cửa sổ bật lên này."
         },
         "migration": {
-            "missingBundle": "An error occurred while trying to find the transaction bundle."
+            "missingBundle": "Đã xảy ra lỗi khi cố gắng tìm gói giao dịch."
         },
         "crypto": {
-            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
+            "cannotDecodeBech32": "Không thể giải mã chuỗi dưới dạng địa chỉ Bech32."
         },
         "participation": {
-            "cannotUseAccount": "Unable to use the specified account.",
-            "cannotFindStakingEvent": "Unable to find staking event.",
-            "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
-            "invalidStakingEventId": "Invalid staking event ID."
+            "cannotUseAccount": "Không thể sử dụng tài khoản đã chỉ định.",
+            "cannotFindStakingEvent": "Không thể tìm thấy sự kiện đặt cọc.",
+            "cannotVisitAirdropWebsite": "Không thể mở {airdrop} website.",
+            "invalidStakingEventId": "ID sự kiện đặt cọc không hợp lệ."
         }
     },
     "warning": {
         "node": {
-            "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
+            "http": "Việc sử dụng các nút qua HTTP khiến lưu lượng truy cập không được mã hóa và có thể gây ra rủi ro bảo mật."
         },
         "participation": {
-            "noAccounts": "You do not have any IOTA."
+            "noAccounts": "Bạn không có bất kỳ IOTA nào."
         }
     },
     "tooltips": {
         "risk": {
-            "title": "Risk level: {risk}",
-            "veryHigh": "Very high",
-            "high": "High",
-            "medium": "Medium",
-            "low": "Low",
-            "veryLow": "Very low"
+            "title": "Mức độ rủi ro: {risk}",
+            "veryHigh": "Rất cao",
+            "high": "Cao",
+            "medium": "Trung bình",
+            "low": "Thấp",
+            "veryLow": "Rất thấp"
         },
         "stakingIndicator": {
             "upcoming": {
-                "title": "Staking has not started yet",
-                "body": "Check back later. The staking event has not begun."
+                "title": "Đặt cọc vẫn chưa được bắt đầu",
+                "body": "Kiểm tra lại sau. Sự kiện đặt cọc vẫn chưa bắt đầu."
             },
             "commencing": {
-                "title": "Pre-staking is now open",
-                "body": "Pre-stake your tokens, and once staking begins, you will automatically start receiving rewards every 10 seconds."
+                "title": "Tính năng đặt cọc trước hiện đang mở",
+                "body": "Đặt cọc trước mã thông báo của bạn và sau khi bắt đầu đặt cọc, bạn sẽ tự động bắt đầu nhận phần thưởng sau mỗi 10 giây."
             },
             "activeHolding": {
-                "title": "Staking is now in progress",
-                "body": "Good job. You will receive rewards every 10 seconds."
+                "title": "Đặt cọc hiện đang tiến hành",
+                "body": "Làm tốt lắm. Bạn sẽ nhận được phần thưởng sau mỗi 10 giây."
             },
             "inactiveHolding": {
-                "title": "Staking is now open",
-                "body": "Stake your IOTA tokens to receive rewards every 10 seconds."
+                "title": "Tính năng đặt cọc hiện đang mở",
+                "body": "Đặt cọc các token IOTA của bạn để nhận phần thưởng sau mỗi 10 giây."
             },
             "inactive": {
-                "title": "No staking events detected",
-                "body": "Open network configuration in Advanced Settings and make sure the current node has the \"Participation\" feature by clicking \"View Info\"."
+                "title": "Không có sự kiện đặt cọc nào được phát hiện",
+                "body": "Mở cấu hình mạng trong Cài đặt nâng cao và đảm bảo nút hiện tại có tính năng \"Tham gia\" bằng cách nhấp vào \"Xem thông tin\"."
             },
             "ended": {
-                "title": "Staking has now ended",
-                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
-                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
+                "title": "Đặt cọc đã kết thúc bây giờ",
+                "bodyAboveRewardMin": "Phần thưởng Assembly và Shimmer sẽ được phân phối vào ví của bạn khi mỗi mạng tương ứng ra mắt.",
+                "bodyBelowRewardMin": "Bạn đã không đặt cọc đủ IOTA để đạt được phần thưởng airdrop tối thiểu."
             }
         },
         "partiallyStakedFunds": {
-            "title": "New unstaked funds: {amount}",
-            "titleNoFunds": "New unstaked funds",
-            "preBody": "You have received tokens on a staked wallet.",
-            "body": "You need to manually stake these new funds to receive airdrop rewards for them."
+            "title": "Tài sản hủy đặt cọc mới: {amount}",
+            "titleNoFunds": "Tài sản hủy đặt cọc mới",
+            "preBody": "Bạn đã nhận được các token trên một ví tiền đặt cọc.",
+            "body": "Bạn cần đặt cọc thủ công các khoản tiền mới này để nhận phần thưởng airdrop cho chúng."
         },
         "stakingMinRewards": {
-            "title": "Below minimum reward value",
-            "titleMinBalance": "{amount} minimum balance required",
-            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
-            "continue": "Please continue staking for another {duration}.",
-            "bodyBelowMin": "This wallet has not reached the minimum reward value for {airdrop} ({airdropRewardMin}).",
-            "bodyWillReachMin": "You must stake for another {duration} to reach the minimum.",
-            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
-            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
-            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+            "title": "Dưới giá trị phần thưởng tối thiểu",
+            "titleMinBalance": "{amount} số dư tối thiểu cần thiết",
+            "bodyMinBalance": "Ví này không có đủ các token IOTA để đạt được phần thưởng airdrop tối thiểu và do đó không thể đặt cọc.",
+            "continue": "Hãy tiếp tục đặt cọc cho cái khác {duration}.",
+            "bodyBelowMin": "Ví này chưa đạt đến giá trị phần thưởng tối thiểu cho {airdrop} ({airdropRewardMin}).",
+            "bodyWillReachMin": "Bạn phải đặt cọc trong {duration} nữa để đạt mức tối thiểu.",
+            "bodyWillNotReachMin": "Bạn sẽ không đạt được giá trị phần thưởng tối thiểu trong thời gian đặt cọc còn lại trừ khi bạn thêm nhiều IOTA hơn.",
+            "bodyDidNotReachMin": "Bạn đã không đặt cọc đủ IOTA để đạt được giá trị phần thưởng tối thiểu cho {airdrop}({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "Ví này không có đủ các token IOTA để đạt được phần thưởng airdrop tối thiểu cho {airdrop}."
         }
     },
     "exports": {
         "transactionHistoryCsv": {
-            "messageId": "Message ID",
-            "internal": "Internal",
-            "rawValue": "Raw Value",
-            "formattedValue": "Formatted Value",
-            "date": "Date",
-            "time": "Time"
+            "messageId": "ID tin nhắn",
+            "internal": "Nội bộ",
+            "rawValue": "Giá trị thô",
+            "formattedValue": "Giá trị đã định dạng",
+            "date": "Thời điểm",
+            "time": "Thời gian"
         }
     }
 }

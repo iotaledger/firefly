@@ -15,22 +15,22 @@
         },
         "profile": {
             "title": "Crează un profil",
-            "profileName": "Profile name",
+            "profileName": "Nume profil",
             "body1": "Poți crea mai multe profiluri de utilizator pentru a îți organiza portofelele și pentru a îmbunătăți confidențialitatea.",
             "body2": {
-                "first": "For now, let's start with your first profile name.",
-                "nonFirst": "For now, let's start with your profile name."
+                "first": "Deocamdată, să începem cu primul tău nume de profil.",
+                "nonFirst": "Deocamdată, să începem cu numele de profil."
             },
-            "addMore": "You can add more profiles later.",
+            "addMore": "Puteți adăuga mai multe profiluri mai târziu.",
             "developer": {
-                "label": "Developer profile",
-                "info": "Connect to public and private IOTA networks"
+                "label": "Profil developer",
+                "info": "Conectare la rețelele publice și private IOTA"
             }
         },
         "setup": {
             "title": "Configurează un portofel",
             "chrysalisTitle": "Actualizare rețea Chrysalis",
-            "chrysalisBody": "From April 21st 2021, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
+            "chrysalisBody": "Din 21 aprilie 2021, utilizatorii pot migra tokenurile în noua rețea Chrysalis. Vă recomandăm să migrați tokenurile deținute cât mai curând.",
             "learnMore": "Află mai multe despre migrație"
         },
         "secure": {
@@ -51,18 +51,18 @@
             }
         },
         "setupLedger": {
-            "progress1": "Connect your Ledger",
-            "progress2": "Generate address",
-            "progress3": "Switch Ledger app",
-            "progress4": "Transfer funds",
-            "watchVideo": "Watch video guide",
-            "videoGuide": "Ledger migration video guide"
+            "progress1": "Conectează-ți dispozitivul Ledger",
+            "progress2": "Generează adresa",
+            "progress3": "Comutare aplicație Ledger",
+            "progress4": "Transfer fonduri",
+            "watchVideo": "Urmărește ghidul video",
+            "videoGuide": "Ghid video pentru migrarea Ledger"
         },
         "ledgerInstallationGuide": {
-            "title": "Have you installed the necessary Ledger apps?",
-            "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
-            "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
-            "action": "Yes, I've installed these apps"
+            "title": "Ați instalat aplicațiile Ledger necesare?",
+            "body1": "Înainte de a continua, trebuie să găsiți și să instalați atât aplicația {legacy}, cât și noua aplicație IOTA prin Ledger Live.",
+            "body2": "Asigurați-vă că firmware-ul Ledger este actualizat. Orice aplicație preinstalată trebuie să fie actualizată la cele mai recente versiuni.",
+            "action": "Da, am instalat aceste aplicații"
         },
         "password": {
             "title": "Creează o parolă",
@@ -121,9 +121,9 @@
             "title": "Configurarea portofelului finalizată",
             "fundsMigrated": "Fonduri migrate",
             "body": "Noul tău portofel este gata de utilizare.",
-            "softwareMigratedBody": "You have successfully migrated your funds to the new network",
-            "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
+            "softwareMigratedBody": "Ați migrat cu succes fondurile către noua rețea",
+            "fireflyLedgerBody": "Contul dvs Ledger a fost recuperat cu succes și acum puteți continua.",
+            "trinityLedgerBody": "Ați migrat cu succes Ledger în noua rețea.",
             "exportMigration": "Exportă jurnalul migrarii și finalizează configurarea"
         },
         "import": {
@@ -135,8 +135,8 @@
             "importMnemonicDescription": "Introduceți fraza de recuperare pentru a recupera portofelele",
             "importFile": "Am o copie de rezervă a fișierului",
             "importFileDescription": "Încarcă un Seedvault sau un fișier Stronghold",
-            "importLedger": "I have a Ledger backup",
-            "importLedgerDescription": "Restore or migrate a Ledger profile"
+            "importLedger": "Am o copie de rezervă a Ledger",
+            "importLedgerDescription": "Restaurați sau migrați un profil Ledger"
         },
         "importFromText": {
             "seed": {
@@ -158,7 +158,7 @@
             "body": "Importă un fişier de rezervă pentru a restaura portofelele personale. Fisierele de rezervă pot fi Stronghold (.stronghold) sau Trinity SeedVault (.kdbx)."
         },
         "importFromLedger": {
-            "title": "Restore or Migrate your Ledger",
+            "title": "Restaurați sau migrați Ledger-ul dvs",
             "body": "Restore an existing Firefly Ledger profile, or migrate your funds from Trinity.",
             "haveFireflyLedger": "I have a Firefly Ledger backup",
             "haveFireflyLedgerDescription": "Restore a Firefly profile",
@@ -857,7 +857,7 @@
         "searchAgain": "Caută din nou",
         "searching": "Căutare...",
         "closeFirefly": "Close Firefly",
-        "generateAddress": "Generate address",
+        "generateAddress": "Generează adresa",
         "migrateAgain": "Migrate another index",
         "visitWebsite": "Visit website",
         "howItWorks": "How it works",

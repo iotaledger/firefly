@@ -966,7 +966,7 @@
         "passwordUpdating": "正在更新密码...",
         "passwordSuccess": "密码更新成功",
         "passwordFailed": "更新密码失败",
-        "syncing": "Syncing",
+        "syncing": "同步中",
         "syncingAccounts": "正在同步钱包...",
         "exportingStronghold": "导出Stronghold...",
         "exportingStrongholdSuccess": "Stronghold导出成功",
@@ -1015,13 +1015,13 @@
         "yearsAgo": "{time, plural, one {# 年} other {# 年}} 前"
     },
     "times": {
-        "second": "{time, plural, one {1 second} other {# seconds}}",
-        "minute": "{time, plural, one {1 minute} other {# minutes}}",
-        "hour": "{time, plural, one {1 hour} other {# hours}}",
-        "day": "{time, plural, one {1 day} other {# days}}",
-        "week": "{time, plural, one {1 week} other {# weeks}}",
-        "month": "{time, plural, one {1 month} other {# months}}",
-        "year": "{time, plural, one {1 year} other {# years}}"
+        "second": "{time, plural, one {1 秒} other {# 秒}}",
+        "minute": "{time, plural, one {1 分钟} other {# 分钟}}",
+        "hour": "{time, plural, one {1 小时} other {# 小时}}",
+        "day": "{time, plural, one {1 天} other {# 天}}",
+        "week": "{time, plural, one {1 周} other {# 周}}",
+        "month": "{time, plural, one {1 月} other {# 月}}",
+        "year": "{time, plural, one {1 年} other {# 年}}"
     },
     "notifications": {
         "valueTx": "帐户 {{account}} 收到 {{value}}",
@@ -1181,7 +1181,7 @@
             "http": "通过 HTTP 使用节点使得流量未加密，可能造成安全风险。"
         },
         "participation": {
-            "noAccounts": "You do not have any IOTA."
+            "noAccounts": "您没有任何IOTA。"
         }
     },
     "tooltips": {
@@ -1216,8 +1216,8 @@
             },
             "ended": {
                 "title": "质押已结束",
-                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
-                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
+                "bodyAboveRewardMin": "Assembly 和 Shimmer 的奖励将在各自的网络启动时分配到您的钱包。",
+                "bodyBelowRewardMin": "您质押的IOTA不足以达到空投奖励的最低门槛。"
             }
         },
         "partiallyStakedFunds": {
@@ -1229,13 +1229,13 @@
         "stakingMinRewards": {
             "title": "低于最低奖励值",
             "titleMinBalance": "需要 {amount} 的最低余额",
-            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
+            "bodyMinBalance": "这个钱包没有足够的 IOTA 代币来达到最低空投奖励，因此不能被质押。",
             "continue": "请继续为另一个 {duration} 进行质押",
             "bodyBelowMin": "这个钱包还没有达到 {airdrop} 的最低奖励值({airdropRewardMin})。",
             "bodyWillReachMin": "您必须再质押 {duration} 能达到最低值。",
-            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
-            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
-            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+            "bodyWillNotReachMin": "您需要质押更多的IOTA，否则您将无法达到最低奖励值。",
+            "bodyDidNotReachMin": "您没有质押足够的IOTA来达到 {airdrop} 的最低奖励 ({airdropRewardMin})。",
+            "bodyMinBalanceAirdrop": "这个钱包的 IOTA 代币不足以达到 {airdrop} 的最小空投奖励。"
         }
     },
     "exports": {

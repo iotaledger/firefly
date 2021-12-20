@@ -1,12 +1,12 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Sendu, Ricevu kaj Administru viajn IOTA ĵetonojn",
-            "body": "Firefly estas la oficiala monujo-apo de IOTA."
+            "title": "Send, Receive & Manage your IOTA tokens",
+            "body": "Firefly is the official wallet software of IOTA."
         },
         "legal": {
-            "title": "Regularo pri Privateco kaj Kondiĉoj de Uzado",
-            "body": "Bonvole kontrolu la regularon pri privateco kaj kondiĉojn de uzado.",
+            "title": "Privacy Policy & Terms of Service",
+            "body": "Please review the Privacy Policy and Terms of Service.",
             "checkbox": "Mi legis kaj akceptas la regularon pri privateco kaj kondiĉojn de uzado"
         },
         "appearance": {
@@ -15,7 +15,7 @@
         },
         "profile": {
             "title": "Krei profilon",
-            "profileName": "Profile name",
+            "profileName": "Profila nomo",
             "body1": "Vi povas krei kelkajn uzantoprofilojn por organizi viajn monujojn kaj plibonigi la privatecon.",
             "body2": {
                 "first": "Nuntempe, ni komencu per via unua profilnomo.",
@@ -23,8 +23,8 @@
             },
             "addMore": "Vi povas aldoni pliajn profilojn poste.",
             "developer": {
-                "label": "Developer profile",
-                "info": "Connect to public and private IOTA networks"
+                "label": "Profilo de programisto",
+                "info": "Konekti al publika kaj privata IOTA-retoj"
             }
         },
         "setup": {
@@ -312,7 +312,7 @@
             "theme": {
                 "title": "Etoso",
                 "description": "",
-                "advice": "Restart the Firefly application for changes to the system theme to take effect"
+                "advice": "Rekomenci la Firefly-aplikaĵon por ke ŝanĝoj al la sistema etoso efektiviĝu"
             },
             "language": {
                 "title": "Lingvo",
@@ -328,14 +328,14 @@
             },
             "networkStatus": {
                 "title": "Reta stato",
-                "description": "Displays the status of the node you are currently connected to"
+                "description": "Montras la staton de la nodo al kiu vi estas nuntempe konektita"
             },
             "exportStronghold": {
-                "title": "Export backup",
+                "title": "Eksporti Savkopio",
                 "description": "Eksporti al Stronghold dosiero - kompleta ĉifrita sekurkopio de viaj monujoj kaj plej nova transakcia historio"
             },
             "appLock": {
-                "title": "Automatic lock",
+                "title": "Aŭtomata Ŝlosado",
                 "description": "Neaktiva tempo antaŭ ol viaj monujoj ŝlosiĝas kaj vi estas elsalutita"
             },
             "changePassword": {
@@ -363,39 +363,39 @@
                 "description": "Forigas vian tutan profilon, monujojn kaj transakcian historion. Certigu, ke vi havas sekurkopion"
             },
             "deepLinks": {
-                "title": "IOTA links",
-                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
+                "title": "IOTA ligiloj",
+                "description": "Aŭtomate plenigu transakciajn datumojn en Firefly alklakante IOTA igilon"
             },
             "networkConfiguration": {
-                "title": "Network config",
-                "title2": "Network configuration",
+                "title": "Reto agordo",
+                "title2": "Reta agordo",
                 "description": {
-                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
-                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                    "dev": "Viaj retaj agordoj aŭtomate ĝisdatigos laŭ la nuna noda agordo (ŝanĝi retojn rezultos restarigi la monujon)",
+                    "nonDev": "Viaj retaj agordoj aŭtomate ĝisdatigos laŭ la nuna noda agordo"
                 },
-                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
-                "resetWallet": "Your wallet state has been reset.",
-                "connectedTo": "Connected to",
+                "switchedNetworks": "Sukcese ŝanĝis reton al \"{networkName}\".",
+                "resetWallet": "Via monujo stato estis rekomencigita.",
+                "connectedTo": "Ligita al",
                 "nodeConfiguration": {
-                    "title": "Node selection",
-                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
-                    "automatic": "Automatic",
-                    "manual": "Manual"
+                    "title": "Elekto de nodo",
+                    "description": "Elektu \"Manlibro\" por agordi nodagordojn kaj konekti al via propra nodo(j)",
+                    "automatic": "Aŭtomata",
+                    "manual": "Manlibro"
                 }
             },
             "configureNodeList": {
-                "title": "Node configuration",
-                "description": "Manage the list of nodes you connect to",
+                "title": "Noda agordo",
+                "description": "Administru la liston de nodoj al kiuj vi konektas",
                 "primaryNode": "Ĉefa nodo",
                 "excludeNode": "Ekskluzivi nodon",
                 "includeNode": "Inkluzivi nodon",
-                "editDetails": "Edit details",
-                "viewInfo": "View info",
+                "editDetails": "Redakti detalojn",
+                "viewInfo": "Vidi informojn",
                 "setAsPrimary": "Agordi kiel la ĉefa",
                 "removeNode": "Forigi nodon",
                 "includeOfficialNodeList": "Inkluzivi oficialan nod-liston",
-                "noNodes": "There are no nodes, unable to connect to the network",
-                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
+                "noNodes": "Ne estas nodoj, ne eblas konekti al la reto",
+                "noNodesAuto": "Ne ekzistas nodoj, aŭtomata elektado estos uzata anstataŭe"
             },
             "proofOfWork": {
                 "title": "Pruvo de funkciado",
@@ -410,7 +410,7 @@
                 "description": "Vidi la informojn de la sistemo kaj la apo"
             },
             "migrateLedgerIndex": {
-                "title": "Migrate Ledger index",
+                "title": "Migri Ledger indekson",
                 "description": "Migru alian Trinity-kontan indekson"
             },
             "troubleshoot": {
@@ -423,7 +423,7 @@
             },
             "faq": {
                 "title": "Oftaj demandoj",
-                "title2": "Frequently asked questions",
+                "title2": "Oftaj Demandoj",
                 "description": "Rigardu la Demandojn por ricevi helpon pri ofta problemo aŭ demando"
             },
             "discord": {
@@ -486,37 +486,37 @@
             }
         },
         "staking": {
-            "title": "Staking",
-            "welcome": "Welcome to the staking dashboard",
+            "title": "Stakigante",
+            "welcome": "Bonvenon al la staking panelo",
             "status": {
-                "upcoming": "Event not started",
-                "commencing": "Pre-staking open",
-                "holdingActive": "Staking in progress",
-                "holdingInactive": "Staking open",
-                "inactive": "Staking not detected",
-                "ended": "Staking ended"
+                "upcoming": "Evento ne komenciĝis",
+                "commencing": "Antaŭ-staking malfermita",
+                "holdingActive": "Staking en progreso",
+                "holdingInactive": "Staking malferma",
+                "inactive": "Staking ne detektita",
+                "ended": "Staking finiĝis"
             },
             "summary": {
-                "stakedFunds": "Staked funds"
+                "stakedFunds": "Stakitaj bonhavojn"
             },
             "info": {
-                "upcomingSubheader": "Event has not started",
-                "upcomingHeader": "Check back later",
-                "commencingSubheader": "Get ready for staking",
-                "commencingHeader": "Pre-stake your tokens!",
-                "holdingSubheaderHolding": "Now earning staking rewards",
-                "holdingSubheaderNotHolding": "Earn rewards by staking IOTA",
-                "holdingHeaderHolding": "{duration} left",
-                "holdingHeaderNotHolding": "Stake your tokens!",
-                "endedSubheader": "Staking has now ended",
-                "endedHeader": "Thank you!",
-                "inactiveHeader": "Try changing node",
-                "inactiveSubheader": "Staking not detected"
+                "upcomingSubheader": "Evento ne komenciĝis",
+                "upcomingHeader": "Kontrolu poste",
+                "commencingSubheader": "Preparu por staking",
+                "commencingHeader": "Antaŭ-staku viajn ĵetonojn!",
+                "holdingSubheaderHolding": "Nun gajnante stakajn rekompencojn",
+                "holdingSubheaderNotHolding": "Gajnu rekompencojn per staking de IOTA",
+                "holdingHeaderHolding": "{duration} restas",
+                "holdingHeaderNotHolding": "Stake viajn ĵetonojn!",
+                "endedSubheader": "Staking nun finiĝis",
+                "endedHeader": "Dankon!",
+                "inactiveHeader": "Provu ŝanĝi nodon",
+                "inactiveSubheader": "Staking ne detektita"
             },
             "airdrops": {
-                "holding": "Remaining",
-                "commencing": "Until staking begins",
-                "collectedRewards": "Collected rewards",
+                "holding": "Restanta",
+                "commencing": "Ĝis staking komenciĝas",
+                "collectedRewards": "Kolektitaj rekompencoj",
                 "assembly": {
                     "name": "Assembly",
                     "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
@@ -744,8 +744,8 @@
         },
         "assembly-info": {
             "title": "About Assembly",
-            "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
-            "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
+            "body1": "Gratulon, ke vi gajnis ASMB-ĵetonojn kiel staking rekompencon. Assembly estas plurĉena reto por disfaldi skaleblajn inteligentajn kontraktojn sur IOTA.",
+            "body2": "Ni celas lanĉi Assembly en 2022. Viaj ĵetonoj estos disponeblaj por translokiĝi post kiam la reto estas lanĉita."
         }
     },
     "charts": {
@@ -801,12 +801,12 @@
         "dropHere": "Ĵetu vian dosieron ĉi tien",
         "syncAll": "Sinkronigi ĉion",
         "export": "Eksporti",
-        "exporting": "Exporting",
+        "exporting": "Eksportante",
         "exportNewStronghold": "Eksporti novan Stronghold",
-        "enableDeepLinks": "Enable IOTA links",
+        "enableDeepLinks": "Ebligu IOTA ligilojn",
         "enableDeveloperMode": "Aktivigi programan modon",
         "enableSystemNotifications": "Aktivigi sistemajn sciigojn",
-        "exportTransactionHistory": "Export transaction history",
+        "exportTransactionHistory": "Eksporti transakciajn historion",
         "localProofOfWork": "Loka pruvo de laboro",
         "unlock": "Malŝlosi",
         "updateFirefly": "Ĝisdatigu Firefly",
@@ -821,7 +821,7 @@
         "addNode": "Aldoni nodon",
         "updateNode": "Ĝisdatigu la nodon",
         "removeNode": "Forigi nodon",
-        "removeAllNodes": "Remove all nodes",
+        "removeAllNodes": "Forigu ĉiujn nodojn",
         "hide": "Kaŝi",
         "hideOthers": "Kaŝi aliajn",
         "showAll": "Montri ĉion",
@@ -859,12 +859,12 @@
         "closeFirefly": "Fermu Firefly",
         "generateAddress": "Generi adreson",
         "migrateAgain": "Migrigu alian Indekson",
-        "visitWebsite": "Visit website",
-        "howItWorks": "How it works",
-        "learnAboutStaking": "Learn about staking",
-        "stake": "Stake",
-        "unstake": "Unstake",
-        "stakeFunds": "Stake funds",
+        "visitWebsite": "Vizitu retejon",
+        "howItWorks": "Kiel ĝi funkcias",
+        "learnAboutStaking": "Lernu pri staking",
+        "stake": "Partoprenu",
+        "unstake": "Ĉesu partopreni",
+        "stakeFunds": "Staku bonhavojn",
         "manageStake": "Manage stake",
         "merge": "Merge",
         "mergeFunds": "Merge funds",
@@ -1000,10 +1000,10 @@
         "none": "None",
         "staked": "Staked",
         "unstaked": "Unstaked",
-        "staking": "Staking",
+        "staking": "Stakigante",
         "unstaking": "Unstaking",
         "notStaked": "Not staked",
-        "stakedFunds": "Staked funds",
+        "stakedFunds": "Stakitaj bonhavojn",
         "unstakedFunds": "Unstaked funds"
     },
     "dates": {
@@ -1215,7 +1215,7 @@
                 "body": "Open network configuration in Advanced Settings and make sure the current node has the \"Participation\" feature by clicking \"View Info\"."
             },
             "ended": {
-                "title": "Staking has now ended",
+                "title": "Staking nun finiĝis",
                 "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
                 "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
             }

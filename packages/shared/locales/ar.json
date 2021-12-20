@@ -269,7 +269,7 @@
             "body1": "محفظة فاير فلاي ستبدأ بترحيل أموالك. قد يستغرق هذا بعض الوقت.",
             "body2": "Ensure your Ledger is connected and the {legacy} app is open at all times during migration.",
             "migrate": "ترحيل الأموال",
-            "transaction": "رقم الحركة {number}",
+            "transaction": "المعاملة {number}",
             "rerun": "حاول مرة اخرى"
         },
         "migrateFailed": {
@@ -364,7 +364,7 @@
             },
             "deepLinks": {
                 "title": "IOTA links",
-                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
+                "description": "سيتم تعبئة بيانات المعاملة بشكل تلقائي في محفظة Firefly عند الضغط على رابط IOTA"
             },
             "networkConfiguration": {
                 "title": "Network config",
@@ -635,7 +635,7 @@
             "userPath": "مسار المستخدم"
         },
         "transaction": {
-            "title": "تأكيد الصفقة",
+            "title": "تأكيد المعاملة",
             "body": "أنت على وشك إرسال {amount} إلى",
             "sendingFromStakedAccount": "تنبيه: أنت تقوم بتحويل أرصدة من حساب مشارك في فعالية الربح من التخزين في محفظتك, الاستمرار بذلك سيؤدي الى الغاء اشتراكك والخروج من الفعالية. لك كامل الحرية للقيام بذلك. ملاحظة: يمكنك المشاركة بالفعالية لاحقا بالارصدة المتبقية من العملة الرقمية في حسابك وذلك من خلال طلب مشاركة جديد."
         },
@@ -675,57 +675,57 @@
                 "0": "قم بتنصيب وفتح تطبيق Ledger Live",
                 "1": "قم بالتأكد من أن جهاز Ledger الخاص بك متصل",
                 "2": "إبحث عن تطبيقات: {legacy} و IOTA (MIOTA)",
-                "3": "Install both apps: {legacy} and IOTA (MIOTA)",
-                "4": "Remember that it's important to close Ledger Live before returning to Firefly"
+                "3": "يرجى تنصيب تطبيق كل من {legacy} و IOTA (MIOTA)",
+                "4": "لا تنسى أنه من المهم جدا إغلاق برنامج Ledger Live قبل العودة للعمل على محفظة Firefly الخاصة بك"
             }
         },
         "ledgerConnectionGuide": {
             "title": "إذا لم تستطع ربط جهاز Ledger الخاص بك أو لم يتم التعرف عليه, إتبع الارشادات التالية",
             "steps": {
-                "0": "Make sure Ledger Live is not open on your computer",
-                "1": "Ensure you have unlocked your Ledger device with your PIN",
-                "2": "Open the new IOTA app on your Ledger device",
+                "0": "تأكد من أن برنامج Ledger Live غير مفتوح على جهاز الكمبيوتر الخاص بك",
+                "1": "تأكد من فتح جهاز Ledger الخاص بك باستخدام رمز PIN الخاص بك",
+                "2": "يرجى فتح تطبيق IOTA الجديد على جهاز Ledger الخاص بك",
                 "3": {
-                    "text": "Still no luck?",
-                    "link": "Try the official Ledger support page"
+                    "text": "لم يحالفك الحظ بعد؟",
+                    "link": "حاول التواصل مع صفحة الدعم الرسمية لجهاز Ledger الخاص بك"
                 }
             }
         },
         "ledgerTransaction": {
             "remainderAddress": {
-                "title": "Confirm remainder address",
-                "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+                "title": "أكد حساب الفائض الخاص بك",
+                "info": "يرجى التأكد من أن حسابك الفائض الظاهر على شاشة جهاز Ledger الخاص بك مطابق مع الحساب المعروض أدناه. إذا كان متطابق ، اضغط على كلا الزرين في Ledger الخاص بك كما هو موضح."
             },
             "transaction": {
-                "title": "تأكيد الصفقة",
-                "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted."
+                "title": "تأكيد المعاملة",
+                "info": "يرجى التأكد من أن معلومات تحويل الارصدة الظاهرة على شاشة جهاز Ledger الخاص بك مطابقة للمعلومات المعروض أدناه. إذا كانت متطابقة ، اضغط على كلا الزرين في Ledger الخاص بك كما هو موضح."
             }
         },
         "ledgerAddress": {
-            "title": "Confirm receive address",
-            "body": "Confirm that the receive address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+            "title": "أكد حساب الاستقبال الخاص بك",
+            "body": "يرجى التأكد من أن حسابك المستقبل الظاهر على شاشة جهاز Ledger الخاص بك مطابق للحساب المعروض أدناه. إذا كان متطابق ، اضغط على كلا الزرين في Ledger الخاص بك كما هو موضح."
         },
         "ledgerMigrateIndex": {
-            "title": "Do you need to migrate another Trinity account index?",
+            "title": "هل ترغب في الاشتراك بصندوق مؤشرات آخر من خلال محفظة Trinity؟",
             "body": "You can also migrate later in Advanced Settings."
         },
         "exportTransactionHistory": {
-            "title": "Export transaction history",
-            "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
-            "profileName": "Profile name:",
-            "accountName": "Account name:",
-            "typePassword": "Type your password to allow exporting"
+            "title": "تصدير سجل المعاملات",
+            "body": "تصدير سجل المعاملات من المحفظة المحددة. سيتم تصدير الملف بتنسيق .csv .",
+            "profileName": "اسم الملف الشخصي:",
+            "accountName": "اسم الحساب:",
+            "typePassword": "يرجى كتابة كلمة المرور الخاصة بك للمتابعة بإجراء تصدير سجل المعاملات"
         },
         "stakingNotice": {
             "upcomingDate": "فعالية الربح من التخزين لم تبدأ بعد",
             "commencingDate": "فعالية الربح من التخزين لم تبدأ بعد",
             "body": "By pre-staking your funds before staking starts, you will automatically begin receiving rewards when staking begins.",
-            "ok": "Ok, I understand"
+            "ok": "نعم, لقد استوعبت"
         },
         "stakingManager": {
-            "title": "Staking Management",
-            "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
-            "totalFundsStaked": "Total funds staked",
+            "title": "إدارة فعالية الربح من التخزين",
+            "description": "عندما تقوم بالمشاركة بفعالية الربح من التخزين من خلال محفظتك، أنت بذلك تقوم بإرسال الرصيد المراد المشاركة به لنفسك وبذلك تكون قد وضعت علامة \"مخزنة\" على تلك العملات الرقمية المشاركة بالفعالية. ولك حرية التصرف بذلك الرصيد المخزن في أي وقت، ولكن لن تستمر في تلقي الجوائز الخاصة بالفعالية.",
+            "totalFundsStaked": "إجمالي رصبد الاموال المشاركة في فعالية الربح من التخزين",
             "stakedSuccessfully": "Your funds have been staked for {account}.",
             "unstakedSuccessfully": "Your funds have been unstaked for {account}."
         },
@@ -744,7 +744,7 @@
         },
         "assembly-info": {
             "title": "معلومات عن شبكة Assembly",
-            "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
+            "body1": "مبروك لقد ربحت عملة ASMB الرقمية كمكافأة لمشاركتك بفعالية الربح من التخزين.\nAssembly هي شبكة مفتوحة ومتاحة للجميع للمشاركة في عمليات بناء عقود ذكية قابلة للتطوير وهي مبنية على شبكة IOTA.",
             "body2": "نحن نتطلع إلى إطلاق شبكة Assembly في عام 2022. سيكون لك حرية التصرف بالعملات الرقمية الخاصة بك بمجرد بدء تشغيل الشبكة."
         }
     },
@@ -806,7 +806,7 @@
         "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "تمكين وضع المبرمج",
         "enableSystemNotifications": "تمكين إشعارات النظام",
-        "exportTransactionHistory": "Export transaction history",
+        "exportTransactionHistory": "تصدير سجل المعاملات",
         "localProofOfWork": "إثباث العمل محليّاً",
         "unlock": "فتح",
         "updateFirefly": "تحديث فايرفلاي",
@@ -951,7 +951,7 @@
         "transferSyncing": "يتم مزامنة المحفظة",
         "transferSelectingInputs": "اختيار المدخلات inputs",
         "transferRemainderAddress": "Generating remainder address",
-        "transferPreparedTransaction": "Preparing transaction",
+        "transferPreparedTransaction": "إعداد المعاملة",
         "transferSigning": "توقيع المعاملة",
         "transferPow": "يتم القيام بعملية PoW",
         "transferBroadcasting": "يتم بث المعاملة",
@@ -1039,8 +1039,8 @@
         "accountsSynchronized": "اكتملت مزامنة المحفظة",
         "fundsAvailableSoon": "Your funds will become available shortly",
         "exportTransactionHistory": {
-            "success": "Transaction history for {accountAlias} was successfully saved to {filePath}",
-            "error": "Unable to export transaction history for {accountAlias}"
+            "success": "تم حفظ سجل المعاملات الخاص بـ {accountAlias} بنجاح في العنوان التالي:{filePath}",
+            "error": "غير قادر على تصدير سجل المعاملات الخاص بـ {accountAlias}"
         },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
@@ -1103,14 +1103,14 @@
             "amountInvalidFormat": "يبدو أن المبلغ رقم غير صالح.",
             "amountZero": "يجب أن يكون المبلغ أكبر من 0.",
             "wrongAddressPrefix": "العنواين تبدأ مسبوقة بـ{prefix}.",
-            "wrongAddressFormat": "صياغة العنوان غير صحيحة.",
+            "wrongAddressFormat": "حساب خاطئ يرجى التدقبق في تنسيق كتابة رقم الحساب.",
             "invalidAddress": "هذا العنوان غير صالح.",
             "insufficientFunds": "هذه المحفظة لا تحتوي على أموال كافية.",
             "noToAccount": "لم تقم باختيار محفظة لإرسال الأموال إليها.",
             "sendingDust": "لا يمكنك إرسال أقل من 1 Mi.",
             "leavingDust": "لا يمكنك ترك أقل من 1 Mi على عنوانك.",
-            "cancelled": "The transaction was cancelled.",
-            "transaction": "There was an error sending your transaction. Please try again."
+            "cancelled": "تم إلغاء المعاملة.",
+            "transaction": "حدث خطأ قي عملية الارسال التي قمت بها. الرجاء المحاولة مرة أخرى."
         },
         "node": {
             "invalid": "الرجاء إدخال عنوان URL صالح.",
@@ -1243,7 +1243,7 @@
             "messageId": "ID الرسالة",
             "internal": "داخلي",
             "rawValue": "القيمة الصافية",
-            "formattedValue": "Formatted Value",
+            "formattedValue": "يرجى تحديد قيمة ملف سجل المعاملات التي ترغب بتصديره بصيغة Csv",
             "date": "التاريخ",
             "time": "الزمن"
         }

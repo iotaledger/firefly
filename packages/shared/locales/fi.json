@@ -966,7 +966,7 @@
         "passwordUpdating": "Päivitetään salasanaa...",
         "passwordSuccess": "Salasanan päivitys onnistui",
         "passwordFailed": "Salasanan päivittäminen epäonnistui",
-        "syncing": "Syncing",
+        "syncing": "Synkronoidaan",
         "syncingAccounts": "Synkronoidaan lompakkoja...",
         "exportingStronghold": "Viedään Strongholdia...",
         "exportingStrongholdSuccess": "Stronghold viety onnistuneesti",
@@ -1015,13 +1015,13 @@
         "yearsAgo": "{time, plural, one {# vuosi} other {# vuotta}} sitten"
     },
     "times": {
-        "second": "{time, plural, one {1 second} other {# seconds}}",
-        "minute": "{time, plural, one {1 minute} other {# minutes}}",
-        "hour": "{time, plural, one {1 hour} other {# hours}}",
-        "day": "{time, plural, one {1 day} other {# days}}",
-        "week": "{time, plural, one {1 week} other {# weeks}}",
-        "month": "{time, plural, one {1 month} other {# months}}",
-        "year": "{time, plural, one {1 year} other {# years}}"
+        "second": "{time, plural, one {1 sekunti} other {# sekuntia}}",
+        "minute": "{time, plural, one {1 minuutti} other {# minuuttia}}",
+        "hour": "{time, plural, one {1 tunti} other {# tuntia}}",
+        "day": "{time, plural, one {1 päivä} other {# päivää}}",
+        "week": "{time, plural, one {1 viikko} other {# viikkoa}}",
+        "month": "{time, plural, one {1 kuukausi} other {# kuukautta}}",
+        "year": "{time, plural, one {1 vuosi} other {# vuotta}}"
     },
     "notifications": {
         "valueTx": "Vastaanotetaan {{value}} lompakkoon {{account}}",
@@ -1181,7 +1181,7 @@
             "http": "Solmujen käyttäminen HTTP:n yli jättää liikenteen salaamattomaksi ja voi aiheuttaa turvallisuusriskin."
         },
         "participation": {
-            "noAccounts": "You do not have any IOTA."
+            "noAccounts": "Sinulla ei ole yhtään IOTA tokenia."
         }
     },
     "tooltips": {
@@ -1216,8 +1216,8 @@
             },
             "ended": {
                 "title": "Staking on nyt päättynyt",
-                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
-                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
+                "bodyAboveRewardMin": "Assembly- ja Shimmer-palkkiot jaetaan lompakkoihisi, kun verkot käynnistyvät.",
+                "bodyBelowRewardMin": "Et stakennut tarpeeksi IOTA:a saavuttaaksesi airdropin vähimmäispalkkiota."
             }
         },
         "partiallyStakedFunds": {
@@ -1229,13 +1229,13 @@
         "stakingMinRewards": {
             "title": "Vähimmäispalkkioarvon alapuolella",
             "titleMinBalance": "{amount} vähimmäissaldo vaaditaan",
-            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
+            "bodyMinBalance": "Tässä lompakossa ei ole riittävästi IOTA-tokeneita airdrop-palkkioiden vähimmäismäärän saavuttamiseksi ja näin ollen sitä ei voi staketa.",
             "continue": "Ole hyvä ja jatka stakingia seuraavat {duration}.",
             "bodyBelowMin": "Tämä lompakko ei ole saavuttanut palkkioiden vähimmäisarvoa airdropille {airdrop} ({airdropRewardMin}).",
             "bodyWillReachMin": "Sinun täytyy staketa vielä {duration} saavuttaakseksi vähimmäismäärän.",
-            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
-            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
-            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+            "bodyWillNotReachMin": "Et tule saavuttamaan vähimmäispalkkioarvoa jäljellä olevan staking-jakson aikana, ellet lisää IOTA:a.",
+            "bodyDidNotReachMin": "Et stakennut tarpeeksi IOTA:a saavuttaaksesi vähimmäispalkkioarvoa airdropille {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "Tässä lompakossa ei ole riittävästi IOTA-tokeneita vähimmäispalkkion saavuttamiseksi airdropille {airdrop}."
         }
     },
     "exports": {

@@ -18,19 +18,19 @@
             "profileName": "Navê Profîlê",
             "body1": "Jibo hûn tokenên xwe cuda bigirîn û ewlehîyê zêde bikîn, dikarîn profîlên bikarhênerên ciyawaz saz bikî.",
             "body2": {
-                "first": "For now, let's start with your first profile name.",
-                "nonFirst": "For now, let's start with your profile name."
+                "first": "Ji bo niha, em bi navê profîla xweya yekem dest pê bikin.",
+                "nonFirst": "Ji bo niha, em bi navê profîla xweya yekem dest pê bikin."
             },
-            "addMore": "You can add more profiles later.",
+            "addMore": "Hûn dikarin paşê profîlên din zêde bikin.",
             "developer": {
-                "label": "Developer profile",
-                "info": "Connect to public and private IOTA networks"
+                "label": "Profîla Pêşvebir",
+                "info": "Bi torên giştî û taybet ên IOTA-yê ve girêdin"
             }
         },
         "setup": {
             "title": "Cazdankekê saz bike",
             "chrysalisTitle": "Nûjenkirina Tora Chrysalis'ê",
-            "chrysalisBody": "From April 21st 2021, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
+            "chrysalisBody": "Piştî 21'ê Nîsanê bikarhêner dikarin tokenên xwe bikşînin tora Chrysalis a nû. Em pêşnîyar dikin ko bi demekê zû hûn tokênên xwe yên heyî barbikin.",
             "learnMore": "Jibo barkirinê zanyarî bistînin"
         },
         "secure": {
@@ -53,9 +53,9 @@
         "setupLedger": {
             "progress1": "Ledgera xwe re were girêdan",
             "progress2": "Navnîşanekê çêke",
-            "progress3": "Switch Ledger app",
-            "progress4": "Transfer funds",
-            "watchVideo": "Watch video guide",
+            "progress3": "Ledger app beguherin",
+            "progress4": "Veguheztina krediyê",
+            "watchVideo": "Tutorial vîdyoyê temaşe bikin",
             "videoGuide": "Ledger migration video guide"
         },
         "ledgerInstallationGuide": {

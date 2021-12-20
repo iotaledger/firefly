@@ -966,7 +966,7 @@
         "passwordUpdating": "Ενημέρωση κωδικού πρόσβασης...",
         "passwordSuccess": "Επιτυχής ενημέρωση κωδικού πρόσβασης",
         "passwordFailed": "Η ενημέρωση κωδικού απέτυχε",
-        "syncing": "Syncing",
+        "syncing": "Συγχρονισμός",
         "syncingAccounts": "Συγχρονισμός πορτοφολιών...",
         "exportingStronghold": "Εξαγωγή Stronghold...",
         "exportingStrongholdSuccess": "Επιτυχής εξαγωγή stronghold",
@@ -1015,13 +1015,13 @@
         "yearsAgo": "πριν {time, plural, one {# χρόνο} other {# χρόνια}}"
     },
     "times": {
-        "second": "{time, plural, one {1 second} other {# seconds}}",
-        "minute": "{time, plural, one {1 minute} other {# minutes}}",
-        "hour": "{time, plural, one {1 hour} other {# hours}}",
-        "day": "{time, plural, one {1 day} other {# days}}",
-        "week": "{time, plural, one {1 week} other {# weeks}}",
-        "month": "{time, plural, one {1 month} other {# months}}",
-        "year": "{time, plural, one {1 year} other {# years}}"
+        "second": "{time, plural,\n  one {# δευτερόλεπτο}\n  other {# δευτερόλεπτα}\n}",
+        "minute": "{time, plural, one {1 λεπτό} other {# λεπτά}}",
+        "hour": "{time, plural, one {1 ώρα} other {# ώρες}}",
+        "day": "{time, plural, one {1 ημέρα} other {# ημέρες}}",
+        "week": "{time, plural, one {# εβδομάδα} other {# εβδομάδες}}",
+        "month": "{time, plural, one {1 μήνας} other {# μήνες}}",
+        "year": "{time, plural, one {1 χρόνος} other {# χρόνια}}"
     },
     "notifications": {
         "valueTx": "Λήψη {{value}} στο {{account}}",
@@ -1181,7 +1181,7 @@
             "http": "Η χρήση κόμβων μέσω HTTP αφήνει την κυκλοφορία μη κρυπτογραφημένη και θα μπορούσε να θέσει σε κίνδυνο την ασφάλεια."
         },
         "participation": {
-            "noAccounts": "You do not have any IOTA."
+            "noAccounts": "Δεν έχετε κανένα IOTA."
         }
     },
     "tooltips": {
@@ -1216,8 +1216,8 @@
             },
             "ended": {
                 "title": "Το staking τελείωσε τώρα",
-                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
-                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
+                "bodyAboveRewardMin": "Οι ανταμοιβές Assembly και Shimmer θα διανεμηθούν στα πορτοφόλια σας όταν ξεκινήσει κάθε ένα από τα αντίστοιχα δίκτυα.",
+                "bodyBelowRewardMin": "Δεν έχετε κάνει stake αρκετά IOTA για να φτάσετε τις ελάχιστες ανταμοιβές για airdrop."
             }
         },
         "partiallyStakedFunds": {
@@ -1229,13 +1229,13 @@
         "stakingMinRewards": {
             "title": "Κάτω από την ελάχιστη τιμή ανταμοιβής",
             "titleMinBalance": "{amount} ελάχιστο υπόλοιπο απαιτείται",
-            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
+            "bodyMinBalance": "Αυτό το πορτοφόλι δεν έχει αρκετά IOTA token για να μπορέσεις να επιτύχεις την ελάχιστη ανταμοιβή airdrop και ως εκ τούτου δεν μπορείτε να κάνετε stake.",
             "continue": "Παρακαλώ συνεχίστε να κάνετε staking για άλλο {duration}.",
             "bodyBelowMin": "Αυτό το πορτοφόλι δεν έχει φτάσει την ελάχιστη ανταμοιβή για {airdrop} ({airdropRewardMin}).",
             "bodyWillReachMin": "Πρέπει να ποντάρετε για άλλο {duration} για να φτάσετε στο ελάχιστο.",
-            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
-            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
-            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+            "bodyWillNotReachMin": "Δεν θα φτάσετε στο ελάχιστο όριο ανταμοιβής κατά τη διάρκεια της περιόδου που απέμεινε για το staking εκτός αν κάνετε stake περισσότερα IOTA.",
+            "bodyDidNotReachMin": "Δεν έχετε κάνει stake αρκετά IOTA για να φτάσετε τις ελάχιστες ανταμοιβές για {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "Αυτό το πορτοφόλι δεν έχει αρκετά IOTA token για να φτάσει την ελάχιστη ανταμοιβή airdrop για {airdrop}."
         }
     },
     "exports": {

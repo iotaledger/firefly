@@ -36,11 +36,11 @@
         "secure": {
             "title": "Beveilig uw portemonnee",
             "body1": "Sla op en print de PDF herstelkit.",
-            "body2": "Als u de herstelkit vult en deze veilig opslaat, kunt u uw wallet altijd herstellen."
+            "body2": "Als je de herstelkit vult en deze veilig opslaat, kunt je jouw wallet altijd herstellen."
         },
         "create": {
             "title": "Maak een wallet",
-            "body": "Maak een nieuwe wallet. U kunt kiezen voor een reguliere software wallet of, als u een Ledger apparaat heeft, om een hardware wallet in te stellen.",
+            "body": "Maak een nieuwe wallet. Je kan kiezen voor een reguliere software wallet of, als je een Ledger apparaat hebt, een hardware wallet instellen.",
             "softwareAccount": {
                 "title": "Ik wil een software wallet",
                 "description": "Maak een 24-woord Recovery Phrase"
@@ -59,24 +59,24 @@
             "videoGuide": "Ledger migratie instructie video"
         },
         "ledgerInstallationGuide": {
-            "title": "Heeft u de benodigde Ledger apps geïnstalleerd?",
-            "body1": "Voordat u verder gaat, moet u zowel de {legacy} app als de nieuwe IOTA app vinden en installeren via Ledger Live.",
+            "title": "Heb je de benodigde Ledger apps geïnstalleerd?",
+            "body1": "Voordat je verder gaat, moet je zowel de {legacy} app als de nieuwe IOTA app vinden en installeren via Ledger Live.",
             "body2": "Zorg ervoor dat uw Ledger firmware up-to-date is. Alle vooraf geïnstalleerde apps moeten worden bijgewerkt naar de nieuwste versies.",
             "action": "Ja, ik heb deze apps geïnstalleerd"
         },
         "password": {
             "title": "Geef een wachtwoord op",
-            "body1": "U heeft een sterk wachtwoord nodig om uw saldo te beschermen. Gebruik een combinatie van woorden en vermijd veelgebruikte zinnen, namen of datums.",
+            "body1": "Je hebt een sterk wachtwoord nodig om uw saldo te beschermen. Gebruik een combinatie van woorden en vermijd veelgebruikte zinnen, namen of data.",
             "body2": "Het wordt aanbevolen om uw wachtwoord op te geven in de herstelkit."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Stel een inlog pincode in om er zeker van te zijn dat alleen u toegang hebt tot uw profiel.",
+            "body1": "Stel een inlog pincode in om er zeker van te zijn dat alleen jij toegang hebt tot je profiel.",
             "body2": "Houd uw pincode veilig!"
         },
         "pin": {
             "title": "PIN-code instellen",
-            "body1": "Voer hieronder een PIN-code van 6 cijfers in. U wordt hiernaar gevraagd om toegang tot uw profiel te veschaffen.",
+            "body1": "Voer hieronder een PIN-code van 6 cijfers in. Je wordt hiernaar gevraagd om toegang tot uw profiel te veschaffen.",
             "body2": "Gebruik alleen cijfers"
         },
         "confirmPin": {
@@ -86,9 +86,9 @@
         },
         "backup": {
             "title": "Maak een back-up van je wallet",
-            "body1": "U krijgt nu een herstelzin te zien. Schrijf het op in uw herstelkit.",
+            "body1": "Je krijgt nu een herstelzin te zien. Schrijf deze op in je herstelkit.",
             "body2": "Deel uw herstelzin met niemand. Deze kan worden gebruikt om overal toegang te krijgen tot uw tokens.",
-            "body3": "Als u de herstelzin verliest, kun je ook de toegang tot uw tokens verliezen."
+            "body3": "Als je de herstelzin verliest, kan je ook de toegang tot je tokens verliezen."
         },
         "recoveryPhrase": {
             "title": "Herstelzin",
@@ -100,7 +100,7 @@
         },
         "verifyRecoveryPhrase": {
             "title": "Verifieer u herstelzin",
-            "body": "Laten we controleren of u de zin correct heeft opgeschreven. Selecteer alstublieft elk woord in juiste volgorde.",
+            "body": "Laten we controleren of je de zin correct heeft opgeschreven. Selecteer alsjeblieft elk woord in juiste volgorde.",
             "word": "Woord",
             "verified": "Herstelzin geverifieerd",
             "verifiedBody": "Vergeet niet om het privé te houden en veilig op te slaan."
@@ -115,20 +115,20 @@
         },
         "recoveryPhraseSaved": {
             "title": "Backup succesvol gemaakt",
-            "body": "U hebt een back-up van uw wallets gemaakt naar een Stronghold."
+            "body": "Je hebt een back-up van je wallets gemaakt naar een Stronghold."
         },
         "congratulations": {
             "title": "Portemonnee installatie voltooid",
             "fundsMigrated": "Saldo gemigreerd",
             "body": "Uw nieuwe portemonnee is klaar voor gebruik.",
-            "softwareMigratedBody": "U heeft uw saldo met succes gemigreerd naar het nieuwe netwerk",
-            "fireflyLedgerBody": "Uw Ledger-account is succesvol hersteld en u kunt nu verdergaan.",
-            "trinityLedgerBody": "U heeft uw saldo met succes gemigreerd naar het nieuwe netwerk.",
+            "softwareMigratedBody": "Je hebt je saldo met succes gemigreerd naar het nieuwe netwerk",
+            "fireflyLedgerBody": "Je Ledger-account is succesvol hersteld en je kan nu verdergaan.",
+            "trinityLedgerBody": "Je hebt je saldo met succes overgezet naar het nieuwe netwerk.",
             "exportMigration": "Exporteer migratielogboek en maak set-up af"
         },
         "import": {
             "title": "Saldo herstellen of migreren",
-            "body": "Als u een bestaand seed of portemonnee backup bestand heeft, kunt u het hier importeren. Als u oudere netwerk tegoeden bezit, zult u via de migratiestappen naar het Chrysalis-netwerk worden overgebracht.",
+            "body": "Als je een bestaand seed of portemonnee backup bestand hebt, kan je het hier importeren. Als je tokens op het oude netwerk bezit, zal je via de migratiestappen naar het Chrysalis-netwerk worden overgebracht.",
             "importSeed": "Ik heb een 81 tekenreeks seed",
             "importSeedDescription": "Voer een seed in en migreer tegoeden naar Chrysalis",
             "importMnemonic": "Ik heb een Firefly herstel zin",
@@ -179,17 +179,17 @@
         },
         "legacyLedgerIntro": {
             "title": "Start uw Ledger migratie met Firefly",
-            "body1": "Firefly helpt u om uw tokens over te dragen naar het nieuwe Chrysalis-netwerk.",
-            "body2": "Na de migratie kan u Iota verzenden en ontvangen door gebruik te maken van uw Ledger en Firefly.",
+            "body1": "Firefly helpt je om je tokens over te zetten naar het nieuwe Chrysalis-netwerk.",
+            "body2": "Na de migratie kan je Iota verzenden en ontvangen door gebruik te maken van je Ledger en Firefly.",
             "readMore": "Wat u kunt verwachten van het migratieproces"
         },
         "generateNewLedgerAddress": {
             "title": "Genereer nieuw adres",
-            "body": "U moet een nieuw adres genereren om uw tokens te migreren met Firefly. Klik op de knop hieronder om door te gaan.",
+            "body": "Je moet een nieuw adres genereren om je tokens te migreren met Firefly. Klik op de knop hieronder om door te gaan.",
             "confirmTitle": "Nieuw ontvangstadres bevestigen",
             "confirmBody": "Vergelijk voor de veiligheid het adres dat is gegenereerd op uw Ledger apparaat met het bericht hieronder. Als ze overeenkomen, druk dan op beide knoppen op uw Ledger zoals gevraagd.",
             "confirmedTitle": "Adres bevestigd",
-            "confirmedBody": "U hebt bevestigd dat het adres in Firefly overeenkomt met dat op uw Ledger-apparaat.",
+            "confirmedBody": "Je hebt bevestigd dat het adres in Firefly overeenkomt met dat op je Ledger-apparaat.",
             "generating": "Adres wordt gegenereerd"
         },
         "switchLedgerApps": {
@@ -198,22 +198,22 @@
         },
         "selectLedgerAccountIndex": {
             "title": "Kies Ledger account index",
-            "body": "Kies de Ledger account index die u hebt gebruikt voor Trinity. Voor de meeste gebruikers is dit de standaard index van 0.",
+            "body": "Kies de Ledger account index die je hebt gebruikt voor Trinity. Voor de meeste gebruikers is dit de standaard index van 0.",
             "accountIndex": "Account index",
             "accountPage": "Account pagina",
             "standard": "Standaard",
             "expert": "Expert",
             "takingAWhile": "Dit kan even duren...",
             "notGeneratingAddresses": "Genereert uw Ledger adressen?",
-            "reinstallLegacy": "Zo niet, verbreek dan de verbinding met het apparaat en probeer het opnieuw. Als het probleem zich blijft voordoen, moet u wellicht de app {legacy} opnieuw installeren."
+            "reinstallLegacy": "Zo niet, verbreek dan de verbinding met het apparaat en probeer het opnieuw. Als het probleem zich blijft voordoen, moet je wellicht de app {legacy} opnieuw installeren."
         },
         "importBackupPassword": {
             "body1": "Voer uw back-up wachtwoord in.",
-            "body2": "Dit is het wachtwoord dat u heeft ingesteld toen u de back-up maakte."
+            "body2": "Dit is het wachtwoord dat je hebt ingesteld toen je de back-up maakte."
         },
         "importSuccess": {
-            "title": "U heeft uw back-up succesvol hersteld",
-            "body": "U kunt nu uw nieuwe profiel instellen."
+            "title": "Je hebt je back-up succesvol hersteld",
+            "body": "Je kunt nu je nieuwe profiel instellen."
         },
         "migrate": {
             "title": "Migreer je saldo",
@@ -226,7 +226,7 @@
             "migrating": "Migreren saldo...",
             "migrated": "{balance} gemigreerd",
             "migrationFailed": "Migreren mislukt",
-            "noAddressesForMigration": "Selecteer de adressen die u wilt beveiligen.",
+            "noAddressesForMigration": "Selecteer de adressen die je wilt beveiligen.",
             "restoringWallet": "Herstellen portemonnee...",
             "findingBalance": "Zoeken saldo...",
             "incorrectSeedVaultPassword": "Onjuist SeedVault wachtwoord.",
@@ -236,14 +236,14 @@
             "miningBundle": "Mijnen bundel",
             "problemRestoringWallet": "Er was een netwerkfout bij het herstellen van uw portemonnee. Probeer het opnieuw.",
             "minimumMigrationAmountSpentAddresses": "De minimum migratie bedrag voor elk uitgegeven adres is 1 Mi. Controleer opnieuw als uw saldo niet goed lijkt.",
-            "tooManyAddressesToMigrate": "U heeft te veel adressen met een laag saldo om te migreren. Controleer opnieuw als uw saldo niet juist lijkt.",
-            "cannotMigrateAllYourFunds": "We kunnen niet al uw saldi migreren, omdat sommige adressen een te laag bedrag hebben. U kunt toch doorgaan. {value} zal verloren gaan.",
+            "tooManyAddressesToMigrate": "Je hebt te veel adressen met een laag saldo om te migreren. Controleer opnieuw als je saldo niet juist lijkt.",
+            "cannotMigrateAllYourFunds": "We kunnen niet al je tokens migreren, omdat sommige adressen een te laag bedrag hebben. Je kan alsnog doorgaan. {value} zal verloren gaan.",
             "error": "Er is een fout opgetreden bij het migreren van uw saldi. Probeer het opnieuw."
         },
         "bundleMiningWarning": {
             "title": "Waarschuwing",
-            "body1": "U heeft een saldo op een of meer uitgegeven adressen.",
-            "body2": "Wij raden u aan een geautomatiseerd proces te starten om te helpen deze saldi veilig te stellen en te migreren.",
+            "body1": "Je hebt tokens op een of meer uitgegeven adressen.",
+            "body2": "Wij raden je aan een geautomatiseerd proces te starten om te helpen deze tokens veilig te stellen en over te zetten.",
             "body3": "Als u de app sluit moet u de hele migratie herstarten.",
             "learn": "Leer meer over uitgegeven adressen"
         },
@@ -966,7 +966,7 @@
         "passwordUpdating": "Wachtwoord bijwerken...",
         "passwordSuccess": "Wachtwoord succesvol bijgewerkt",
         "passwordFailed": "Wachtwoord bijwerken mislukt",
-        "syncing": "Syncing",
+        "syncing": "Synchroniseren",
         "syncingAccounts": "Portemonnees synchroniseren...",
         "exportingStronghold": "Exporteren van Stronghold...",
         "exportingStrongholdSuccess": "Stronghold succesvol geexporteerd",
@@ -1015,13 +1015,13 @@
         "yearsAgo": "{time, plural, one {# jaar} other {# jaren}} geleden"
     },
     "times": {
-        "second": "{time, plural, one {1 second} other {# seconds}}",
-        "minute": "{time, plural, one {1 minute} other {# minutes}}",
-        "hour": "{time, plural, one {1 hour} other {# hours}}",
-        "day": "{time, plural, one {1 day} other {# days}}",
-        "week": "{time, plural, one {1 week} other {# weeks}}",
-        "month": "{time, plural, one {1 month} other {# months}}",
-        "year": "{time, plural, one {1 year} other {# years}}"
+        "second": "{time, plural, one {1 seconde} other {# seconden}}",
+        "minute": "{time, plural, one {1 minuut} other {# minuten}}",
+        "hour": "{time, plural, one {1 uur} other {# uur}}",
+        "day": "{time, plural, one {1 dag} other {# dagen}}",
+        "week": "{time, plural, one {1 week} other {# weken}}",
+        "month": "{time, plural, one {1 maand} other {# maanden}}",
+        "year": "{time, plural, one {1 jaar} other {# jaar}}"
     },
     "notifications": {
         "valueTx": "Ontvangst van {{value}} op {{account}}",
@@ -1181,7 +1181,7 @@
             "http": "Het gebruik van nodes over HTTP laat verkeer onversleuteld en kan een veiligheidsrisico opleveren."
         },
         "participation": {
-            "noAccounts": "You do not have any IOTA."
+            "noAccounts": "Je hebt geen IOTA."
         }
     },
     "tooltips": {
@@ -1216,8 +1216,8 @@
             },
             "ended": {
                 "title": "Staking is nu beëindigd",
-                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
-                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
+                "bodyAboveRewardMin": "Assembly en Shimmer beloningen worden naar je wallets gestuurd zodra de respectievelijke netwerken lanceren.",
+                "bodyBelowRewardMin": "Je hebt niet genoeg IOTA gestaket om de minimale airdrop beloning te ontvangen."
             }
         },
         "partiallyStakedFunds": {
@@ -1229,13 +1229,13 @@
         "stakingMinRewards": {
             "title": "Onder minimum beloning waarde",
             "titleMinBalance": "{amount} minimum saldo vereist",
-            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
+            "bodyMinBalance": "Deze wallet heeft niet genoeg IOTA tokens om de minimale airdrop beloning te bereiken en kan hierdoor niet worden gestaket.",
             "continue": "Ga door met staken voor nog {duration}.",
             "bodyBelowMin": "Deze wallet heeft de minimum vergoeding voor {airdrop} ({airdropRewardMin}) niet bereikt.",
             "bodyWillReachMin": "U moet staken voor nog {duration} om het minimum te bereiken.",
-            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
-            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
-            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+            "bodyWillNotReachMin": "Je zal de minimumbeloning niet behalen gedurende de resterend periode tenzij je meer IOTA toevoegt.",
+            "bodyDidNotReachMin": "Je hebt niet genoeg IOTA gestaket om de minimumbeloning te halen voor {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "Deze wallet heeft niet genoeg IOTA tokens om de minimumbeloning te behalen voor airdrop {airdrop}."
         }
     },
     "exports": {

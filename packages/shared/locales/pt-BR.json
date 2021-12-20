@@ -507,7 +507,7 @@
                 "holdingSubheaderHolding": "Recebendo recompensas de staking",
                 "holdingSubheaderNotHolding": "Ganhe recompensas fazendo staking de IOTA",
                 "holdingHeaderHolding": "{duration} restante",
-                "holdingHeaderNotHolding": "Coloque seus tokens em Stake!",
+                "holdingHeaderNotHolding": "Coloque seus tokens em Staking!",
                 "endedSubheader": "O staking terminou",
                 "endedHeader": "Obrigado!",
                 "inactiveHeader": "Tente mudar o servidor",
@@ -862,10 +862,10 @@
         "visitWebsite": "Visite o website",
         "howItWorks": "Como isto funciona",
         "learnAboutStaking": "Aprenda sobre staking",
-        "stake": "Stake",
+        "stake": "Iniciar staking",
         "unstake": "Parar staking",
         "stakeFunds": "Fazer staking",
-        "manageStake": "Gerenciar staking",
+        "manageStake": "Gerenciar Staking",
         "merge": "Mesclar",
         "mergeFunds": "Mesclar fundos",
         "done": "Concluir"
@@ -966,7 +966,7 @@
         "passwordUpdating": "Atualizando senha...",
         "passwordSuccess": "Senha atualizada com sucesso",
         "passwordFailed": "Falha ao atualizar senha",
-        "syncing": "Syncing",
+        "syncing": "Sincronizando",
         "syncingAccounts": "Sincronizando carteiras...",
         "exportingStronghold": "Exportando Stronghold...",
         "exportingStrongholdSuccess": "Stronghold exportada com sucesso",
@@ -1015,13 +1015,13 @@
         "yearsAgo": "{time, plural, one {# ano} other {# anos}} atrás"
     },
     "times": {
-        "second": "{time, plural, one {1 second} other {# seconds}}",
-        "minute": "{time, plural, one {1 minute} other {# minutes}}",
-        "hour": "{time, plural, one {1 hour} other {# hours}}",
-        "day": "{time, plural, one {1 day} other {# days}}",
-        "week": "{time, plural, one {1 week} other {# weeks}}",
-        "month": "{time, plural, one {1 month} other {# months}}",
-        "year": "{time, plural, one {1 year} other {# years}}"
+        "second": "{time, plural, one {1 segundo} other {# segundos}}",
+        "minute": "{time, plural, one {1 minuto} other {# minutos}}",
+        "hour": "{time, plural, one {1 hora} other {# horas}}",
+        "day": "{time, plural, one {1 dia} other {# dias}}",
+        "week": "{time, plural, one {1 semana} other {# semanas}}",
+        "month": "{time, plural, one {1 mês} other {# meses}}",
+        "year": "{time, plural, one {1 ano} other {# anos}}"
     },
     "notifications": {
         "valueTx": "Recebendo {{value}} para {{account}}",
@@ -1181,7 +1181,7 @@
             "http": "Usando nós através do HTTP deixa o tráfego não criptografado e pode representar um risco à segurança."
         },
         "participation": {
-            "noAccounts": "You do not have any IOTA."
+            "noAccounts": "Você não tem nenhum IOTA."
         }
     },
     "tooltips": {
@@ -1200,7 +1200,7 @@
             },
             "commencing": {
                 "title": "O período pré-staking está aberto",
-                "body": "Pré-stake seus tokens e, uma vez que o período de aposta comece, você automaticamente começará a receber recompensas a cada 10 segundos."
+                "body": "Deixe seus tokens em \"pré-stake\" e, uma vez que o período de staking comece, você começará a receber recompensas automaticamente a cada 10 segundos."
             },
             "activeHolding": {
                 "title": "O período de staking está em andamento",
@@ -1216,8 +1216,8 @@
             },
             "ended": {
                 "title": "O staking terminou",
-                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
-                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
+                "bodyAboveRewardMin": "Recompensas de Assembly e Shimmer serão distribuídas para suas carteiras quando cada uma das respectivas redes forem lançadas.",
+                "bodyBelowRewardMin": "Você não fez staking suficiente de IOTA para alcançar as recompensas mínimas."
             }
         },
         "partiallyStakedFunds": {
@@ -1229,13 +1229,13 @@
         "stakingMinRewards": {
             "title": "Abaixo do valor mínimo de recompensa",
             "titleMinBalance": "{amount} saldo mínimo necessário",
-            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
+            "bodyMinBalance": "Esta carteira não tem tokens IOTA suficientes para alcançar a recompensa mínima e, portanto, não pode ser colocada em staking.",
             "continue": "Por favor, continue o staking por mais {duration}.",
             "bodyBelowMin": "Esta carteira não atingiu o valor mínimo de recompensa para {airdrop} ({airdropRewardMin}).",
             "bodyWillReachMin": "Você deve fazer staking por mais {duration} para alcançar o valor mínimo.",
-            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
-            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
-            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+            "bodyWillNotReachMin": "Você não alcançará o valor mínimo de recompensa durante o período de staking restante, a menos que você adicione mais IOTA.",
+            "bodyDidNotReachMin": "Você não fez staking suficiente de IOTA para alcançar o valor mínimo de recompensa de {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "Esta carteira não tem tokens IOTA suficientes para alcançar o mínimo de recompensa de {airdrop}."
         }
     },
     "exports": {

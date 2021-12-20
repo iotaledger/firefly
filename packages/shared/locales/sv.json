@@ -235,7 +235,7 @@
             "broadcastingBundle": "Sänder bundle",
             "miningBundle": "Utvinner säker bundle",
             "problemRestoringWallet": "Det uppstod ett nätverksfel när din plånbok skulle återställas. Försök igen.",
-            "minimumMigrationAmountSpentAddresses": "Minsta migreringsbelopp för varje förbrukad adress är 1 Mi. Kontrollera igen om ditt saldo inte ser rätt ut.",
+            "minimumMigrationAmountSpentAddresses": "Lägsta migreringsbelopp för varje förbrukad adress är 1 Mi. Kontrollera igen om ditt saldo inte ser rätt ut.",
             "tooManyAddressesToMigrate": "Du har för många adresser med lågt saldo för att migrera. Kontrollera igen om ditt totala saldo inte ser rätt ut.",
             "cannotMigrateAllYourFunds": "Vi kan inte migrera alla dina tillgångar eftersom vissa adresser är för låga i värde. Du kan fortsätta ändå. {value} kommer att gå förlorad.",
             "error": "Det gick inte att migrera dina tillgångar. Försök igen."
@@ -279,7 +279,7 @@
         "balance": {
             "title": "Ditt saldo",
             "body": "Se till att ditt saldo är korrekt innan du fortsätter. Du kan kontrollera igen om det inte ser rätt ut.",
-            "error": "Minsta migreringsbelopp är 1 Mi. Kontrollera igen om ditt saldo inte ser rätt ut.",
+            "error": "Lägsta migreringsbelopp är 1 Mi. Kontrollera igen om ditt saldo inte ser rätt ut.",
             "zeroBalance": "Försök kontrollera igen. Om du fortfarande inte hittar ditt saldo kan du ha angett din seed felaktigt.",
             "zeroBalanceLedgerLegacy": "Försök kontrollera igen. Om du fortfarande inte hittar ditt saldo kan du ha angett fel konto-index."
         },
@@ -487,7 +487,7 @@
         },
         "staking": {
             "title": "Staking",
-            "welcome": "Välkommen till den staking-instrumentpanelen",
+            "welcome": "Välkommen till staking-instrumentpanelen",
             "status": {
                 "upcoming": "Event inte startat",
                 "commencing": "För-staking öppen",
@@ -966,7 +966,7 @@
         "passwordUpdating": "Uppdaterar lösenord...",
         "passwordSuccess": "Lösenordet har uppdaterats",
         "passwordFailed": "Det gick inte att uppdatera lösenord",
-        "syncing": "Syncing",
+        "syncing": "Synkroniserar",
         "syncingAccounts": "Synkroniserar plånböcker...",
         "exportingStronghold": "Exporterar Stronghold...",
         "exportingStrongholdSuccess": "Exportering av Stronghold lyckades",
@@ -1015,13 +1015,13 @@
         "yearsAgo": "{time, plural, one {# år} other {# år}} sedan"
     },
     "times": {
-        "second": "{time, plural, one {1 second} other {# seconds}}",
-        "minute": "{time, plural, one {1 minute} other {# minutes}}",
-        "hour": "{time, plural, one {1 hour} other {# hours}}",
-        "day": "{time, plural, one {1 day} other {# days}}",
-        "week": "{time, plural, one {1 week} other {# weeks}}",
-        "month": "{time, plural, one {1 month} other {# months}}",
-        "year": "{time, plural, one {1 year} other {# years}}"
+        "second": "{time, plural, one {1 sekund} other {# sekunder}}",
+        "minute": "{time, plural, one {1 minut} other {# minuter}}",
+        "hour": "{time, plural, one {1 timme} other {# timmar}}",
+        "day": "{time, plural, one {1 dag} other {# dagar}}",
+        "week": "{time, plural, one {1 vecka} other {# veckor}}",
+        "month": "{time, plural, one {1 månad} other {# månader}}",
+        "year": "{time, plural, one {1 år} other {# år}}"
     },
     "notifications": {
         "valueTx": "Tar emot {{value}} till {{account}}",
@@ -1181,7 +1181,7 @@
             "http": "Att använda noder över HTTP lämnar trafik okrypterad och kan utgöra en säkerhetsrisk."
         },
         "participation": {
-            "noAccounts": "You do not have any IOTA."
+            "noAccounts": "Du har inga IOTA."
         }
     },
     "tooltips": {
@@ -1216,8 +1216,8 @@
             },
             "ended": {
                 "title": "Staking har nu avslutats",
-                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
-                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
+                "bodyAboveRewardMin": "Assembly- och Shimmerbelöningar kommer att distribueras till dina plånböcker när var och en av de respektive nätverken lanseras.",
+                "bodyBelowRewardMin": "Du stakade inte tillräckligt med IOTA för att nå den lägsta belöningen."
             }
         },
         "partiallyStakedFunds": {
@@ -1227,15 +1227,15 @@
             "body": "Du måste manuellt staka dessa nya tillgångar för att få airdrop-belöningar för dem."
         },
         "stakingMinRewards": {
-            "title": "Under minsta belöningsvärde",
-            "titleMinBalance": "{amount} minsta saldo krävs",
-            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
+            "title": "Under lägsta belöningsvärde",
+            "titleMinBalance": "{amount} lägsta saldo krävs",
+            "bodyMinBalance": "Denna plånbok har inte tillräckligt med IOTA tokens för att nå den lägsta belöningsnivån och kan därför inte stakas.",
             "continue": "Vänligen fortsätt staka för ytterligare {duration}.",
             "bodyBelowMin": "Denna plånbok har inte nått det lägsta belöningsvärdet för {airdrop} ({airdropRewardMin}).",
             "bodyWillReachMin": "Du måste staka ytterligare {duration} för att nå minimum.",
-            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
-            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
-            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+            "bodyWillNotReachMin": "Du kommer inte att nå den lägsta belöningsnivån under den återstående stakingperioden om du inte lägger till mer IOTA.",
+            "bodyDidNotReachMin": "Du stakade inte tillräckligt med IOTA för att nå den lägsta belöningen för {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "Denna plånbok har inte tillräckligt med IOTA tokens för att nå den lägsta belöningsnivån för {airdrop}."
         }
     },
     "exports": {

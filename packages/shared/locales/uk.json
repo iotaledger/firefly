@@ -966,7 +966,7 @@
         "passwordUpdating": "Оновлення пароля...",
         "passwordSuccess": "Пароль успішно оновлений",
         "passwordFailed": "Не вдалося оновити пароль",
-        "syncing": "Syncing",
+        "syncing": "Синхронізація",
         "syncingAccounts": "Синхронізація гаманців...",
         "exportingStronghold": "Експорт Stronghold...",
         "exportingStrongholdSuccess": "Stronghold успішно експортований",
@@ -1015,13 +1015,13 @@
         "yearsAgo": "{time, plural, one {# рік} other {# роки}} тому"
     },
     "times": {
-        "second": "{time, plural, one {1 second} other {# seconds}}",
-        "minute": "{time, plural, one {1 minute} other {# minutes}}",
-        "hour": "{time, plural, one {1 hour} other {# hours}}",
-        "day": "{time, plural, one {1 day} other {# days}}",
-        "week": "{time, plural, one {1 week} other {# weeks}}",
-        "month": "{time, plural, one {1 month} other {# months}}",
-        "year": "{time, plural, one {1 year} other {# years}}"
+        "second": "{time, plural,one {1секунда}other {#секунд}}",
+        "minute": "{time, plural,one {1хвилина} other {#хвилин}}",
+        "hour": "{time, plural,one {1година} other {#годин}}",
+        "day": "{time, plural,one {1день} other {#днів}}",
+        "week": "{time, plural,one {1тиждень} other {#тижнів}}",
+        "month": "{time, plural,one {1місяць} other {#місяців}}",
+        "year": "{time, plural,one {1рік} other {#років}}"
     },
     "notifications": {
         "valueTx": "Отримання {{value}} в {{account}}",
@@ -1181,7 +1181,7 @@
             "http": "Використання вузлів через HTTP залишає трафік незашифрованим і може становити загрозу безпеці."
         },
         "participation": {
-            "noAccounts": "You do not have any IOTA."
+            "noAccounts": "У вас немає IOTA."
         }
     },
     "tooltips": {
@@ -1216,8 +1216,8 @@
             },
             "ended": {
                 "title": "Ставка закінчена",
-                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
-                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
+                "bodyAboveRewardMin": "Нагороди за Assembly та Shimmer будуть розподілені на ваші гаманці після запуску кожної з відповідних мереж.",
+                "bodyBelowRewardMin": "Ви не поставили достатньо IOTA, щоб досягти мінімальної винагороди за airdrop."
             }
         },
         "partiallyStakedFunds": {
@@ -1229,13 +1229,13 @@
         "stakingMinRewards": {
             "title": "Нижче мінімальної суми для винагороди",
             "titleMinBalance": "{amount} необхідний мінімальний баланс",
-            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
+            "bodyMinBalance": "У цьому гаманці недостатньо токенів IOTA, щоб досягти мінімальної винагороди за airdrop, і тому не можна зробити ставку.",
             "continue": "Будь ласка, продовжуйте ставку для іншого {duration}.",
             "bodyBelowMin": "Цей гаманець не має мінімального значення для винагороди {airdrop} ({airdropRewardMin}).",
             "bodyWillReachMin": "Ви повинні зробити ставку ще {duration}, щоб досягти мінімуму.",
-            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
-            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
-            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+            "bodyWillNotReachMin": "У вас не буде достатній баланс токенів розподілення, протягом періоду, що залишився, якщо ви не поставите більше IOTA.",
+            "bodyDidNotReachMin": "Ви не поставили достатньо IOTA, щоб отримати мінімальну винагороду {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "У цьому гаманці недостатньо токенів IOTA, щоб досягти мінімальної винагороди за {airdrop}."
         }
     },
     "exports": {

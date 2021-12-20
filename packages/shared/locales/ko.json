@@ -30,7 +30,7 @@
         "setup": {
             "title": "지갑 설정하기",
             "chrysalisTitle": "Chrysalis 네트워크 업데이트",
-            "chrysalisBody": "From April 21st 2021, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
+            "chrysalisBody": "2021년 4월 21일부터 토큰을 새로운 Chrysalis 네트워크로 마이그레이션할 수 있습니다. 보유하고 있는 토큰을 서둘러 마이그레이션할 것을 권장합니다.",
             "learnMore": "마이그레이션에 대해 알아보기"
         },
         "secure": {
@@ -486,40 +486,40 @@
             }
         },
         "staking": {
-            "title": "Staking",
-            "welcome": "Welcome to the staking dashboard",
+            "title": "스테이킹",
+            "welcome": "환영합니다. 스테이킹 대시보드입니다.",
             "status": {
-                "upcoming": "Event not started",
-                "commencing": "Pre-staking open",
-                "holdingActive": "Staking in progress",
-                "holdingInactive": "Staking open",
-                "inactive": "Staking not detected",
-                "ended": "Staking ended"
+                "upcoming": "이벤트 실행 전",
+                "commencing": "Pre-staking 시작",
+                "holdingActive": "Staking 진행 중",
+                "holdingInactive": "Staking 시작",
+                "inactive": "Staking 탐지되지 않음",
+                "ended": "Staking 종료"
             },
             "summary": {
-                "stakedFunds": "Staked funds"
+                "stakedFunds": "Staking 자금"
             },
             "info": {
-                "upcomingSubheader": "Event has not started",
-                "upcomingHeader": "Check back later",
-                "commencingSubheader": "Get ready for staking",
-                "commencingHeader": "Pre-stake your tokens!",
-                "holdingSubheaderHolding": "Now earning staking rewards",
-                "holdingSubheaderNotHolding": "Earn rewards by staking IOTA",
+                "upcomingSubheader": "이벤트가 시작되지 않았습니다.",
+                "upcomingHeader": "이후에 다시 확인해보세요.",
+                "commencingSubheader": "Staking을 준비하세요.",
+                "commencingHeader": "여러분의 토큰을 pre-stake 하세요!",
+                "holdingSubheaderHolding": "이제 staking 보상 얻기",
+                "holdingSubheaderNotHolding": "IOTA staking을 통해 보상 받기",
                 "holdingHeaderHolding": "{duration} left",
-                "holdingHeaderNotHolding": "Stake your tokens!",
-                "endedSubheader": "Staking has now ended",
-                "endedHeader": "Thank you!",
-                "inactiveHeader": "Try changing node",
-                "inactiveSubheader": "Staking not detected"
+                "holdingHeaderNotHolding": "여러분의 토큰을 staking 하세요!",
+                "endedSubheader": "Staking이 이제 종료되었습니다.",
+                "endedHeader": "감사합니다!",
+                "inactiveHeader": "노드를 바꿔보세요.",
+                "inactiveSubheader": "Staking 탐지되지 않음"
             },
             "airdrops": {
-                "holding": "Remaining",
-                "commencing": "Until staking begins",
-                "collectedRewards": "Collected rewards",
+                "holding": "잔여수량",
+                "commencing": "Staking이 시작될때까지",
+                "collectedRewards": "보상 수령",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
+                    "description": "Assembly는 허가가 필요없는 확장성이 매우 높은 다중 체인 네트워크로 composable 스마트 컨트랙트를 빌드하고 배포할수 있습니다. Assembly는 web3의 미래입니다. "
                 },
                 "shimmer": {
                     "name": "Shimmer",
@@ -637,7 +637,7 @@
         "transaction": {
             "title": "트랜잭션 확인",
             "body": "{amount} 만큼 보내려고 합니다",
-            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards."
+            "sendingFromStakedAccount": "현재 staking중인 지갑에서 이체를 하고 있습니다. 이로 인해 여러분의 토큰 staking이 취소될 수 있습니다. 자유로이 이체하시되 그후에 남은 토큰을 다시 staking할 필요가 있을 수 있다는 점을 알아두세요."
         },
         "balanceFinder": {
             "title": "잔고 찾기",
@@ -711,41 +711,41 @@
         },
         "exportTransactionHistory": {
             "title": "거래 내역 내보내기",
-            "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
+            "body": "선택한 지갑의 거래 기록을 내보내세요. 내보낸 파일은 .csv 파일형식으로 저장합니다.",
             "profileName": "프로필 이름:",
-            "accountName": "Account name:",
+            "accountName": "계정 이름:",
             "typePassword": "내보내기를 허용하려면 암호를 입력해주세요"
         },
         "stakingNotice": {
-            "upcomingDate": "Staking has not started yet",
-            "commencingDate": "Staking has not started yet",
-            "body": "By pre-staking your funds before staking starts, you will automatically begin receiving rewards when staking begins.",
-            "ok": "Ok, I understand"
+            "upcomingDate": "Staking이 아직 시작되지 않았습니다.",
+            "commencingDate": "Staking이 아직 시작되지 않았습니다.",
+            "body": "여러분의 자금을 staking 전에 pre-staking 하면, staking 시작 시잠에 자동으로 보상을 받기 시작할 것입니다.",
+            "ok": "네. 이해했습니다."
         },
         "stakingManager": {
-            "title": "Staking Management",
-            "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
-            "totalFundsStaked": "Total funds staked",
+            "title": "Staking 관리",
+            "description": "지갑을 staking 하면 해당 자금에 staking 표시를 하여 여러분께 보내게됩니다. 자금은 언제든 이체 가능하지만 staking 보상 수령을 계속 받지는 못하게 됩니다.",
+            "totalFundsStaked": "Staking 총 자금",
             "stakedSuccessfully": "Your funds have been staked for {account}.",
             "unstakedSuccessfully": "Your funds have been unstaked for {account}."
         },
         "stakingConfirmation": {
-            "title": "Airdrop Participation",
-            "subtitleStake": "You are about to stake",
-            "subtitleMerge": "You are about to merge",
-            "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
+            "title": "Airdrop 참여",
+            "subtitleStake": "Staking이 이제 시작됩니다.",
+            "subtitleMerge": "Merge를 곧 시작합니다.",
+            "bodyStake": "만약 두 가지 airdrop에 참여하고 싶지 않다면 아래에서 선택해제할 수 있습니다. 추후에 언제든지 staking 취소 및 재시작할 수 있습니다.",
             "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
-            "estimatedAirdrop": "Estimated rewards"
+            "estimatedAirdrop": "예상 보상"
         },
         "shimmer-info": {
-            "title": "About Shimmer",
+            "title": "Shimmer에 대하여",
             "body1": "Congratulations you have earned SMR tokens as a staking reward. Shimmer is an incentivized staging network to test major upgrades on IOTA.",
-            "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
+            "body2": "Shimmer의 출발은 2022년을 목표로 하고 있습니다. 여러분의 토큰은 네트워크가 열리면 즉시 전송할 수 있게됩니다."
         },
         "assembly-info": {
-            "title": "About Assembly",
-            "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
-            "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
+            "title": "Assemby에 대하여",
+            "body1": "축하합니다. ASMB 토큰을 staking 보상으로 획득하셨습니다. Assembly는 다중체인 네트워크로 IOTA에서 확장성 있는 스마트 컨트랙트를 배포할 수 있습니다.",
+            "body2": "Assembly의 출발은 2022년을 목표로 하고 있습니다. 여러분의 토큰은 네트워크가 열리면 즉시 전송할 수 있게됩니다."
         }
     },
     "charts": {
@@ -1000,10 +1000,10 @@
         "none": "없음",
         "staked": "Staked",
         "unstaked": "Unstaked",
-        "staking": "Staking",
+        "staking": "스테이킹",
         "unstaking": "Unstaking",
         "notStaked": "Not staked",
-        "stakedFunds": "Staked funds",
+        "stakedFunds": "Staking 자금",
         "unstakedFunds": "Unstaked funds"
     },
     "dates": {
@@ -1215,7 +1215,7 @@
                 "body": "Open network configuration in Advanced Settings and make sure the current node has the \"Participation\" feature by clicking \"View Info\"."
             },
             "ended": {
-                "title": "Staking has now ended",
+                "title": "Staking이 이제 종료되었습니다.",
                 "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
                 "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
             }
