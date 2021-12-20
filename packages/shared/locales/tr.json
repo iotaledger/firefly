@@ -1,7 +1,7 @@
 {
     "views": {
         "onboarding1": {
-            "title": "IOTA tokenlerinizi gönderin, alın ve yönetin",
+            "title": "IOTA tokenlerinizi Gönderin, Alın ve Yönetin",
             "body": "Firefly, IOTA'nın resmi cüzdan yazılımıdır."
         },
         "legal": {
@@ -15,7 +15,7 @@
         },
         "profile": {
             "title": "Profil oluştur",
-            "profileName": "Profile name",
+            "profileName": "Profil adı",
             "body1": "Cüzdanlarınızı düzenlemek ve gizliliği artırmak için birden fazla kullanıcı profili oluşturabilirsiniz.",
             "body2": {
                 "first": "Şimdilik, ilk profil adınızla başlayalım.",
@@ -23,14 +23,14 @@
             },
             "addMore": "Daha sonra daha fazla profil ekleyebilirsiniz.",
             "developer": {
-                "label": "Developer profile",
-                "info": "Connect to public and private IOTA networks"
+                "label": "Geliştirici profili",
+                "info": "Genel ve özel IOTA ağlarına bağlan"
             }
         },
         "setup": {
             "title": "Bir cüzdan oluşturun",
             "chrysalisTitle": "Chrysalis Ağ Güncellemesi",
-            "chrysalisBody": "From April 21st 2021, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
+            "chrysalisBody": "21 Nisan 2021'den itibaren kullanıcılar tokenlerini yeni Chrysalis ağına taşıyabilir. Mevcut tokenlerinizi mümkün olan en kısa sürede taşımanızı öneririz.",
             "learnMore": "Taşıma hakkında bilgi edinin"
         },
         "secure": {
@@ -312,7 +312,7 @@
             "theme": {
                 "title": "Tema",
                 "description": "",
-                "advice": "Restart the Firefly application for changes to the system theme to take effect"
+                "advice": "Sistem temasındaki değişikliklerin geçerli olması için Firefly uygulamasını yeniden başlatın"
             },
             "language": {
                 "title": "Dil",
@@ -328,14 +328,14 @@
             },
             "networkStatus": {
                 "title": "Ağ durumu",
-                "description": "Displays the status of the node you are currently connected to"
+                "description": "Şu anda bağlı olduğunuz düğümün durumunu görüntüler"
             },
             "exportStronghold": {
-                "title": "Export backup",
+                "title": "Yedeği dışa aktar",
                 "description": "Bir Stronghold dosyasına aktarın - cüzdanlarınızın ve en son işlem geçmişinizin şifrelenmiş tam yedeği"
             },
             "appLock": {
-                "title": "Automatic lock",
+                "title": "Otomatik kilitleme",
                 "description": "Cüzdanlarınız kilitlenmeden ve çıkış yapılmadan önce hareketsizlik süresi"
             },
             "changePassword": {
@@ -363,39 +363,39 @@
                 "description": "Tüm profilinizi, cüzdanlarınızı ve işlem geçmişinizi siler. Bir yedeğiniz olduğundan emin olun"
             },
             "deepLinks": {
-                "title": "IOTA links",
-                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
+                "title": "IOTA bağlantıları",
+                "description": "Firefly’daki işlem bilgisini, IOTA linkine tıkladığında otomatik olarak doldur"
             },
             "networkConfiguration": {
-                "title": "Network config",
-                "title2": "Network configuration",
+                "title": "Ağ yapılandırma",
+                "title2": "Ağ yapılandırması",
                 "description": {
-                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
-                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                    "dev": "Ağ ayarlarınız, mevcut düğüm yapılandırmasına göre otomatik olarak güncellenecektir (ağları değiştirmek, cüzdan durumunun sıfırlanmasına neden olacaktır)",
+                    "nonDev": "Ağ ayarlarınız, mevcut düğüm yapılandırmasına göre otomatik olarak güncellenecektir"
                 },
-                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
-                "resetWallet": "Your wallet state has been reset.",
-                "connectedTo": "Connected to",
+                "switchedNetworks": "Ağ başarıyla \"{networkName}\" olarak değiştirildi.",
+                "resetWallet": "Cüzdan durumunuz sıfırlandı.",
+                "connectedTo": "Bağlanıldı",
                 "nodeConfiguration": {
-                    "title": "Node selection",
-                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
-                    "automatic": "Automatic",
-                    "manual": "Manual"
+                    "title": "Düğüm Seçimi",
+                    "description": "Düğüm ayarlarınızı yapmak ve kendi düğümünüze bağlanmak için Manual’i seçiniz)",
+                    "automatic": "Otomatik",
+                    "manual": "Manuel"
                 }
             },
             "configureNodeList": {
-                "title": "Node configuration",
-                "description": "Manage the list of nodes you connect to",
+                "title": "Düğüm yapılandırması",
+                "description": "Bağlandığınız düğümlerin listesini yönetin",
                 "primaryNode": "Birincil düğüm",
                 "excludeNode": "Düğümü hariç tut",
                 "includeNode": "Düğümü dahil et",
-                "editDetails": "Edit details",
-                "viewInfo": "View info",
+                "editDetails": "Ayrıntıları düzenle",
+                "viewInfo": "Bilgileri görüntüle",
                 "setAsPrimary": "Birincil düğüm olarak ayarla",
                 "removeNode": "Düğüm kaldır",
                 "includeOfficialNodeList": "Resmi düğüm listesini dahil et",
-                "noNodes": "There are no nodes, unable to connect to the network",
-                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
+                "noNodes": "Düğüm yok, ağa bağlanamıyor",
+                "noNodesAuto": "Düğüm yok, bunun yerine otomatik seçim kullanılacak"
             },
             "proofOfWork": {
                 "title": "İş Kanıtı",
@@ -410,7 +410,7 @@
                 "description": "Sistem ve uygulama bilgilerini görüntüleyin"
             },
             "migrateLedgerIndex": {
-                "title": "Migrate Ledger index",
+                "title": "Ledger İndeksini Taşıma",
                 "description": "Başka bir Trinity hesap indeksini taşıyın"
             },
             "troubleshoot": {
@@ -423,7 +423,7 @@
             },
             "faq": {
                 "title": "SSS",
-                "title2": "Frequently asked questions",
+                "title2": "Sıkça Sorulan Sorular",
                 "description": "Yaygın bir sorun veya soru ile ilgili yardım almak için SSS'leri görüntüleyin"
             },
             "discord": {
@@ -487,43 +487,43 @@
         },
         "staking": {
             "title": "Staking",
-            "welcome": "Welcome to the staking dashboard",
+            "welcome": "Staking paneline hoş geldiniz",
             "status": {
-                "upcoming": "Event not started",
-                "commencing": "Pre-staking open",
-                "holdingActive": "Staking in progress",
-                "holdingInactive": "Staking open",
-                "inactive": "Staking not detected",
-                "ended": "Staking ended"
+                "upcoming": "Etkinlik başlamadı",
+                "commencing": "Ön-staking açık",
+                "holdingActive": "Staking devam ediyor",
+                "holdingInactive": "Staking açık",
+                "inactive": "Staking algılanmadı",
+                "ended": "Staking sona erdi"
             },
             "summary": {
-                "stakedFunds": "Staked funds"
+                "stakedFunds": "Stake edilen fonlar"
             },
             "info": {
-                "upcomingSubheader": "Event has not started",
-                "upcomingHeader": "Check back later",
-                "commencingSubheader": "Get ready for staking",
-                "commencingHeader": "Pre-stake your tokens!",
-                "holdingSubheaderHolding": "Now earning staking rewards",
-                "holdingSubheaderNotHolding": "Earn rewards by staking IOTA",
-                "holdingHeaderHolding": "{duration} left",
-                "holdingHeaderNotHolding": "Stake your tokens!",
-                "endedSubheader": "Staking has now ended",
-                "endedHeader": "Thank you!",
-                "inactiveHeader": "Try changing node",
-                "inactiveSubheader": "Staking not detected"
+                "upcomingSubheader": "Etkinlik açılmadı",
+                "upcomingHeader": "Daha sonra tekrar kontrol edin",
+                "commencingSubheader": "Stake Hazır Olun",
+                "commencingHeader": "Tokenlarınızı stake edin!",
+                "holdingSubheaderHolding": "Staking ödülleri kazanın",
+                "holdingSubheaderNotHolding": "IOTA'yı stake ederek ödüller kazanın",
+                "holdingHeaderHolding": "{duration} kaldı",
+                "holdingHeaderNotHolding": "Tokenlarınızı stake edin!",
+                "endedSubheader": "Staking artık sona erdi",
+                "endedHeader": "Teşekkürler!",
+                "inactiveHeader": "Node değiştirmeyi deneyin",
+                "inactiveSubheader": "Staking algılanmadı"
             },
             "airdrops": {
-                "holding": "Remaining",
-                "commencing": "Until staking begins",
-                "collectedRewards": "Collected rewards",
+                "holding": "Kalan Süre",
+                "commencing": "Stake başlayana kadar",
+                "collectedRewards": "Toplanan ödüller",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
+                    "description": "Assembly, şekillendirilebilir akıllı sözleşmeler oluşturmak ve dağıtmak için izinsiz, yüksek düzeyde ölçeklenebilir çok zincirli bir ağdır. Assembly, web3'ün geleceğidir. "
                 },
                 "shimmer": {
                     "name": "Shimmer",
-                    "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
+                    "description": "IOTA'da büyük yenilikleri ilerletmek için teşvik edilen evreleme ağı. Ne olursa olsun, olur. Shimmer'ın nasıl gelişeceği size kalmış."
                 }
             }
         }
@@ -574,45 +574,45 @@
         },
         "addressHistory": {
             "title": "{name} Adres geçmişi",
-            "currentBalance": "Balance: {balance}",
-            "internal": "Internal Address",
-            "external": "Deposit Address"
+            "currentBalance": "Bakiye {balance}",
+            "internal": "Dahili Adres",
+            "external": "Yatırma Adresi"
         },
         "node": {
             "titleAdd": "Bir node ekle",
             "titleUpdate": "Bir düğümü güncelleyin",
             "titleRemove": "Düğüm kaldır",
-            "titleRemoveAll": "Remove all nodes",
+            "titleRemoveAll": "Tüm düğümleri kaldır",
             "titleDetails": "Node detayları",
-            "titleInfo": "Node info",
-            "addingNode": "Adding node",
-            "updatingNode": "Updating node",
-            "loadingNodeInfo": "Loading node info",
+            "titleInfo": "Düğüm Bilgisi",
+            "addingNode": "Düğüm ekle",
+            "updatingNode": "Düğümü güncelle",
+            "loadingNodeInfo": "Düğüm bilgisi yükleniyor",
             "nodeAddress": "Node adresi",
             "optionalUsername": "Kullanıcı adı (opsiyonel)",
             "optionalPassword": "Şifre (opsiyonel)",
-            "optionalJwt": "JSON web token (optional)",
+            "optionalJwt": "JSON web tokenı (isteğe bağlı)",
             "setAsPrimaryNode": "Birincil düğüm olarak ayarla",
             "removeConfirmation": "Bu klasörü kaldırmak istediğinize emin misiniz?",
-            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "removeAllConfirmation": "Tüm düğümleri kaldırmak istediğine emin misin?",
             "info": {
                 "url": "URL",
-                "software": "Software",
-                "networkId": "Network ID",
+                "software": "Yazılım",
+                "networkId": "Ağ kimliği",
                 "bech32HRP": "Bech32 HRP",
-                "features": "Features",
-                "confirmedMilestoneIndex": "Confirmed milestone index",
-                "pruningIndex": "Pruning index",
+                "features": "Özellikler",
+                "confirmedMilestoneIndex": "Onaylanmış kilometre taşı indeksi",
+                "pruningIndex": "Budama indeksi",
                 "messagesPerSecond": "Saniye başına mesaj sayısı",
                 "referencedRate": "Referans alınan oran"
             }
         },
         "switchNetwork": {
-            "title": "Switch network",
-            "newNetwork": "New network",
-            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
-            "switchingNetwork": "Switching network",
-            "typePassword": "Type your password to switch to:"
+            "title": "Ağ Değiştir",
+            "newNetwork": "Yeni Ağ",
+            "resetWarning": "Ağları değiştirmek, oturumunuzu kapatır ve bu profil için tüm hesapları, bakiyeleri ve işlem geçmişini sıfırlar.",
+            "switchingNetwork": "Ağ Değişimi",
+            "typePassword": "Kilidi açmak için parolanızı yazın:"
         },
         "errorLog": {
             "title": "Hata Geçmişi",
@@ -637,7 +637,7 @@
         "transaction": {
             "title": "İşlemi onayla",
             "body": "Bu kadar miktar göndermek üzeresiniz {amount}",
-            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards."
+            "sendingFromStakedAccount": "Şu anda stake edilen bir cüzdandan transfer gönderiyorsunuz. Bu, tokenlarınızın stake durumunu iptal edebilir. Transferi göndermekten çekinmeyin, ancak daha sonra kalan tokenlarınızı yeniden stake etmeniz gerekebilir."
         },
         "balanceFinder": {
             "title": "Bakiye bulucu",
@@ -710,42 +710,42 @@
             "body": "Daha sonra Gelişmiş Ayarlar'dan da geçiş yapabilirsiniz."
         },
         "exportTransactionHistory": {
-            "title": "Export transaction history",
-            "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
-            "profileName": "Profile name:",
-            "accountName": "Account name:",
-            "typePassword": "Type your password to allow exporting"
+            "title": "İşlem geçmişini dışa aktar",
+            "body": "Seçilen cüzdan için işlem geçmişini dışa aktarın. Dışa aktarılan dosya .csv biçiminde olacaktır.",
+            "profileName": "Profil adı:",
+            "accountName": "Hesap adı:",
+            "typePassword": "Dışa aktarmaya izin vermek için şifrenizi yazın"
         },
         "stakingNotice": {
-            "upcomingDate": "Staking has not started yet",
-            "commencingDate": "Staking has not started yet",
-            "body": "By pre-staking your funds before staking starts, you will automatically begin receiving rewards when staking begins.",
-            "ok": "Ok, I understand"
+            "upcomingDate": "Staking henüz başlamadı",
+            "commencingDate": "Staking henüz başlamadı",
+            "body": "Staking başlamadan önce fonlarınızı stake ederseniz, staking başladığında otomatik olarak ödülleri almaya başlayacaksınız.",
+            "ok": "Tamam, anladım"
         },
         "stakingManager": {
-            "title": "Staking Management",
-            "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
-            "totalFundsStaked": "Total funds staked",
-            "stakedSuccessfully": "Your funds have been staked for {account}.",
-            "unstakedSuccessfully": "Your funds have been unstaked for {account}."
+            "title": "Stake Yönetimi",
+            "description": "Bir cüzdanı stake ettiğinizde, bu fonları \"staked\" olarak işaretleyerek kendinize bir işlem gönderirsiniz. Jetonları istediğiniz zaman transfer edebilirsiniz, ancak stake ödüllerini almaya devam edemezsiniz.",
+            "totalFundsStaked": "Stake edilen toplam fon",
+            "stakedSuccessfully": "Fonlarınız {account} için stake edildi.",
+            "unstakedSuccessfully": "Fonlarınızın {account} için stake'i iptal edildi."
         },
         "stakingConfirmation": {
-            "title": "Airdrop Participation",
-            "subtitleStake": "You are about to stake",
-            "subtitleMerge": "You are about to merge",
-            "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
-            "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
-            "estimatedAirdrop": "Estimated rewards"
+            "title": "Airdrop Katılımı",
+            "subtitleStake": "Stake yapmak üzeresin",
+            "subtitleMerge": "Birleşmek üzeresin",
+            "bodyStake": "Her iki airdropa da katılmak istemiyorsanız aşağıdaki seçenekten vazgeçebilirsiniz. İstediğiniz zaman katılmak için seçeneği işaretleyip stake yapabilirsiniz.",
+            "bodyMerge": "Fonlarınız {airdrop} için stake edilecektir. Hangi airdroplara katılmak istediğinizi değiştirmek için bu cüzdanın stake'ini kaldırın ve tekrar stake yapın.",
+            "estimatedAirdrop": "Tahmini ödüller"
         },
         "shimmer-info": {
-            "title": "About Shimmer",
-            "body1": "Congratulations you have earned SMR tokens as a staking reward. Shimmer is an incentivized staging network to test major upgrades on IOTA.",
-            "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
+            "title": "Shimmer Hakkında",
+            "body1": "Tebrikler, staking ödülü olarak SMR tokenları kazandınız. Shimmer, IOTA'daki büyük yükseltmeleri test etmek için teşvik edilen bir hazırlık ağıdır.",
+            "body2": "Shimmer'ı 2022'de piyasaya sürmeyi hedefliyoruz. Ağ başlatıldığında tokenlarınız transfer edilebilir hale gelecek."
         },
         "assembly-info": {
-            "title": "About Assembly",
-            "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
-            "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
+            "title": "Assembly Hakkında",
+            "body1": "Tebrikler, staking ödülü olarak ASMB tokenları kazandınız. Assembly, IOTA'da ölçeklenebilir akıllı sözleşmeler yerleştirmek için çok zincirli bir ağdır.",
+            "body2": "Assembly'i 2022'de piyasaya sürmeyi hedefliyoruz. Ağ başlatıldığında tokenlarınız transfer edilebilir hale gelecek."
         }
     },
     "charts": {
@@ -753,7 +753,7 @@
         "outgoingMi": "Giden {value}",
         "portoflio": "Portföy",
         "token": "Token",
-        "holdings": "Holdings",
+        "holdings": "Varlıklar",
         "accountValue": "Cüzdan Değeri",
         "accountActivity": "Cüzdan Aktivitesi",
         "timeframe1Hour": "1 saat",
@@ -801,12 +801,12 @@
         "dropHere": "Dosyanızı buraya bırakın",
         "syncAll": "Tümünü eşitle",
         "export": "Dışarı Aktar",
-        "exporting": "Exporting",
+        "exporting": "Dışa aktarılıyor",
         "exportNewStronghold": "Yeni bir Stronghold dışa aktarın",
-        "enableDeepLinks": "Enable IOTA links",
+        "enableDeepLinks": "IOTA bağlantılarını etkinleştir",
         "enableDeveloperMode": "Geliştirici modunu etkinleştir",
         "enableSystemNotifications": "Bildirimleri etkinleştir",
-        "exportTransactionHistory": "Export transaction history",
+        "exportTransactionHistory": "İşlem geçmişini dışa aktar",
         "localProofOfWork": "Lokal iş kanıtı",
         "unlock": "Kilidi Aç",
         "updateFirefly": "Firefly'ı güncelle",
@@ -821,7 +821,7 @@
         "addNode": "Düğüm ekle",
         "updateNode": "Düğümü güncelle",
         "removeNode": "Düğüm kaldır",
-        "removeAllNodes": "Remove all nodes",
+        "removeAllNodes": "Tüm nodeları kaldır",
         "hide": "Sakla",
         "hideOthers": "Diğerlerini sakla",
         "showAll": "Hepsini göster",
@@ -859,16 +859,16 @@
         "closeFirefly": "Firefly'ı Kapat",
         "generateAddress": "Adres oluştur",
         "migrateAgain": "Başka bir indeks taşı",
-        "visitWebsite": "Visit website",
-        "howItWorks": "How it works",
-        "learnAboutStaking": "Learn about staking",
-        "stake": "Stake",
-        "unstake": "Unstake",
-        "stakeFunds": "Stake funds",
-        "manageStake": "Manage stake",
-        "merge": "Merge",
-        "mergeFunds": "Merge funds",
-        "done": "Done"
+        "visitWebsite": "Web sitesini ziyaret et",
+        "howItWorks": "Nasıl çalışır",
+        "learnAboutStaking": "Stake etme hakkında bilgi edinin",
+        "stake": "Stake Et",
+        "unstake": "Stake İptal Et",
+        "stakeFunds": "Fonları stake et",
+        "manageStake": "Stake'i yönet",
+        "merge": "Birleştir",
+        "mergeFunds": "Fonları birleştir",
+        "done": "Tamamlandı"
     },
     "general": {
         "password": "Parola",
@@ -911,9 +911,9 @@
         "stronghold": "Stronghold",
         "language": "Dil",
         "appearance": "Görünüm",
-        "lightTheme": "Light",
-        "darkTheme": "Dark",
-        "systemTheme": "System",
+        "lightTheme": "Açık",
+        "darkTheme": "Koyu",
+        "systemTheme": "Sistem",
         "balance": "Bakiye",
         "accountBalance": "Cüzdan Bakiyesi",
         "incoming": "Gelen",
@@ -930,7 +930,7 @@
         "transactions": "Transferler",
         "security": "Güvenlik",
         "accountAddress": "Cüzdan Adresi",
-        "network": "Network",
+        "network": "Ağ",
         "nodes": "Düğümler",
         "wallet": "Cüzdan",
         "help": "Yardım",
@@ -957,8 +957,8 @@
         "transferBroadcasting": "İşlem yayınlanıyor",
         "transferComplete": "Transfer tamamlandı",
         "generatingReceiveAddress": "Alma adresi oluşturuluyor",
-        "broadcasting": "Broadcasting",
-        "confirming": "Confirming",
+        "broadcasting": "Yayınlanıyor",
+        "confirming": "Onaylanıyor",
         "creatingAccount": "Cüzdan oluşturuluyor, lütfen bekleyin...",
         "updatingAccount": "Cüzdan güncelleniyor, lütfen bekleyin...",
         "accountSyncing": "Cüzdan senkronize ediliyor",
@@ -966,7 +966,7 @@
         "passwordUpdating": "Şifre güncelleniyor...",
         "passwordSuccess": "Şifre başarıyla güncellendi",
         "passwordFailed": "Şifre güncellemesi yapılamadı",
-        "syncing": "Syncing",
+        "syncing": "Senkronize ediliyor",
         "syncingAccounts": "Cüzdanlar senkronize ediliyor...",
         "exportingStronghold": "Stronghold Aktarılıyor...",
         "exportingStrongholdSuccess": "Stronghold başarıyla dışa aktarıldı",
@@ -987,24 +987,24 @@
         "sendingFrom": "{account}'dan gönderiliyor",
         "receivedTo": "{account}'a alındı",
         "sentFrom": "{account}'dan gönderildi",
-        "stakedFor": "Staked for {account}",
-        "unstakedFor": "Unstaked for {account}",
-        "votedFor": "Voted for {account}",
-        "unvotedFor": "Unvoted for {account}",
+        "stakedFor": "{account} için stake edildi",
+        "unstakedFor": "{account} için stake iptal edildi",
+        "votedFor": "{account} için oy verildi",
+        "unvotedFor": "{account} için oy verilmedi",
         "receiving": "Alınıyor",
         "sending": "Gönderiliyor",
         "legacyNetwork": "Eski Ağ",
         "capsLock": "Caps Lock açık",
         "version": "Sürüm {version}",
-        "unknown": "Unknown",
-        "none": "None",
-        "staked": "Staked",
-        "unstaked": "Unstaked",
+        "unknown": "Bilinmeyen",
+        "none": "Hiçbiri",
+        "staked": "Stake edildi",
+        "unstaked": "Stake edilmemiş",
         "staking": "Staking",
-        "unstaking": "Unstaking",
-        "notStaked": "Not staked",
-        "stakedFunds": "Staked funds",
-        "unstakedFunds": "Unstaked funds"
+        "unstaking": "Stake geri alınıyor",
+        "notStaked": "Stake edilmemiş",
+        "stakedFunds": "Stake edilen fonlar",
+        "unstakedFunds": "Tahsis edilmemiş fonlar"
     },
     "dates": {
         "today": "Bugün",
@@ -1015,13 +1015,13 @@
         "yearsAgo": "{time, plural, one {# yıl} other {# yıl}} önce"
     },
     "times": {
-        "second": "{time, plural, one {1 second} other {# seconds}}",
-        "minute": "{time, plural, one {1 minute} other {# minutes}}",
-        "hour": "{time, plural, one {1 hour} other {# hours}}",
-        "day": "{time, plural, one {1 day} other {# days}}",
-        "week": "{time, plural, one {1 week} other {# weeks}}",
-        "month": "{time, plural, one {1 month} other {# months}}",
-        "year": "{time, plural, one {1 year} other {# years}}"
+        "second": "{time, plural, one {1 saniye} other {# saniye}}",
+        "minute": "{time, plural, one {1 dakika} other {# dakika}}",
+        "hour": "{time, plural, one {1 saat} other {# saat}}",
+        "day": "{time, plural, one {1 gün} other {# gün}}",
+        "week": "{time, plural, one {1 hafta} other {# hafta}}",
+        "month": "{time, plural, one {1 ay} other {# ay}}",
+        "year": "{time, plural, one {1 yıl} other {# yıl}}"
     },
     "notifications": {
         "valueTx": "{{account}} 'a {{value}} alınıyor",
@@ -1039,16 +1039,16 @@
         "accountsSynchronized": "Cüzdan senkronizasyonu tamamlandı",
         "fundsAvailableSoon": "Bakiyeniz kısa süre içinde kullanılabilir hale gelecektir",
         "exportTransactionHistory": {
-            "success": "Transaction history for {accountAlias} was successfully saved to {filePath}",
-            "error": "Unable to export transaction history for {accountAlias}"
+            "success": "{accountAlias} için işlem geçmişi başarıyla {filePath} konumuna kaydedildi",
+            "error": "{accountAlias} için işlem geçmişi dışa aktarılamıyor"
         },
         "deepLinkingRequest": {
-            "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
-            "notEnabled": "IOTA links are not enabled",
-            "invalidFormat": "The IOTA link you followed is invalid",
+            "recievedWhileLoggedOut": "IOTA bağlantısını başlatmak için lütfen giriş yapın",
+            "notEnabled": "IOTA bağlantıları etkin değil",
+            "invalidFormat": "İzlediğiniz IOTA bağlantısı geçersiz",
             "wallet": {
                 "send": {
-                    "success": "Payment details added from IOTA link"
+                    "success": "IOTA bağlantısından eklenen ödeme ayrıntıları"
                 }
             }
         }
@@ -1058,7 +1058,7 @@
             "length": "Profil adınız {length, plural, one {1 karakter} other {# karakter}} den uzun olamaz.",
             "duplicate": "Bu isimde bir profil zaten var.",
             "delete": {
-                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+                "nonEmptyAccounts": "Profilinizi silmeden önce tüm bakiyeleri transfer etmelisiniz."
             }
         },
         "password": {
@@ -1114,24 +1114,24 @@
         },
         "node": {
             "invalid": "Lütfen geçerli bir URL giriniz.",
-            "dns": "Could not find DNS resolution for node.",
-            "timedOut": "The connection timed out.",
-            "refused": "The connection was refused.",
-            "handshake": "Could not complete handshake with node.",
-            "invalidCertificate": "Could not connect with invalid certificate.",
-            "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
+            "dns": "Node. js için DNS çözümlemesi bulunamadı.",
+            "timedOut": "Bağlantı zaman aşımına uğradı.",
+            "refused": "Bağlantı reddedildi.",
+            "handshake": "Node ile anlaşma tamamlanamadı.",
+            "invalidCertificate": "Geçersiz sertifika ile bağlanılamadı.",
+            "https": "HTTPS gereklidir; HTTP üzerinden güvenli olmayan bağlantılar şu anda desteklenmemektedir.",
             "duplicate": "Bu sunucu zaten eklenmiş.",
             "unsynced": "Ağ senkronize değil.",
             "noSynced": "Senkronize node bulunamadı.",
-            "answer": "Failed to get an answer from all nodes.",
-            "forbidden": "This node connection is forbidden.",
-            "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node."
+            "answer": "Tüm nodelardan yanıt alınamadı.",
+            "forbidden": "Bu node bağlantısı yasaktır.",
+            "pluginNotAvailable": "\"{nodePlugin}\" eklentisi bu node'da mevcut değil."
         },
         "network": {
-            "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
-            "notReachable": "The network ID for this node could not be retrieved, unable to add node.",
-            "badNodes": "Unable to connect to the network with current node configuration.",
-            "nonEmptyAccount": "You must transfer all balances before switching networks."
+            "mismatch": "Bu düğümün ağ kimliği \"{networkId}\", mevcut ağla eşleşmeyen.",
+            "notReachable": "Bu düğümün ağ kimliği alınamadı, düğüm eklenemedi.",
+            "badNodes": "Geçerli düğüm yapılandırmasıyla ağa bağlanılamıyor.",
+            "nonEmptyAccount": "Ağları değiştirmeden önce tüm bakiyeleri aktarmalısınız."
         },
         "global": {
             "generic": "Bir şeyler yanlış gitti."
@@ -1158,7 +1158,7 @@
             "generateAddress": "Adres oluşturulurken bir hata oluştu.",
             "timeout": "Ledger cihazınız zaman aşımına uğradı.",
             "disconnected": "Ledger cihazınızın bağlantısı kesildi.",
-            "noStronghold": "Unable to use Stronghold with Ledger profile."
+            "noStronghold": "Stronghold, Ledger profiliyle kullanılamıyor."
         },
         "popup": {
             "preventClose": "Bu açılır pencere kapatılamaz."
@@ -1167,21 +1167,21 @@
             "missingBundle": "İşlem paketini bulmaya çalışırken bir hata oluştu."
         },
         "crypto": {
-            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
+            "cannotDecodeBech32": "Dize Bech32 adresi olarak çözülemiyor."
         },
         "participation": {
-            "cannotUseAccount": "Unable to use the specified account.",
-            "cannotFindStakingEvent": "Unable to find staking event.",
-            "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
-            "invalidStakingEventId": "Invalid staking event ID."
+            "cannotUseAccount": "Belirtilen hesap kullanılamıyor.",
+            "cannotFindStakingEvent": "Stake etkinliği bulunamadı.",
+            "cannotVisitAirdropWebsite": "{airdrop} web sitesi açılamıyor.",
+            "invalidStakingEventId": "Geçersiz staking kimliği."
         }
     },
     "warning": {
         "node": {
-            "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
+            "http": "HTTP üzerinden düğümlerin kullanılması trafiği şifrelenmemiş halde bırakır ve bir güvenlik riski oluşturabilir."
         },
         "participation": {
-            "noAccounts": "You do not have any IOTA."
+            "noAccounts": "Hiç IOTA nız yok."
         }
     },
     "tooltips": {
@@ -1195,57 +1195,57 @@
         },
         "stakingIndicator": {
             "upcoming": {
-                "title": "Staking has not started yet",
-                "body": "Check back later. The staking event has not begun."
+                "title": "Staking henüz başlamadı",
+                "body": "Daha sonra kontrol et. Staking etkinliği başlamadı."
             },
             "commencing": {
-                "title": "Pre-staking is now open",
-                "body": "Pre-stake your tokens, and once staking begins, you will automatically start receiving rewards every 10 seconds."
+                "title": "Pre-staking şimdi açık",
+                "body": "Jetonlarınızı önceden stake edin ve staking başladığında, her 10 saniyede bir otomatik olarak ödül almaya başlayacaksınız."
             },
             "activeHolding": {
-                "title": "Staking is now in progress",
-                "body": "Good job. You will receive rewards every 10 seconds."
+                "title": "Staking şu anda devam ediyor",
+                "body": "İyi iş. Her 10 saniyede bir ödül alacaksınız."
             },
             "inactiveHolding": {
-                "title": "Staking is now open",
-                "body": "Stake your IOTA tokens to receive rewards every 10 seconds."
+                "title": "Staking artık açık",
+                "body": "Her 10 saniyede bir ödül almak için IOTA jetonlarınızı kullanın."
             },
             "inactive": {
-                "title": "No staking events detected",
-                "body": "Open network configuration in Advanced Settings and make sure the current node has the \"Participation\" feature by clicking \"View Info\"."
+                "title": "Hiçbir stake olayı algılanmadı",
+                "body": "Gelişmiş Ayarlar'dan ağ yapılandırmasını açın ve mevcut node için \"Bilgi Görüntüle\" ye tıklayarak \"Katılım\" özelliğine sahip olduğundan emin olun."
             },
             "ended": {
-                "title": "Staking has now ended",
-                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
-                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
+                "title": "Staking artık sona erdi",
+                "bodyAboveRewardMin": "Assembly ve Shimmer ödülleri, ilgili ağların her biri başlatıldığında cüzdanlarınıza dağıtılacaktır.",
+                "bodyBelowRewardMin": "Minimum airdrop ödüllerine ulaşmak için yeterli IOTA stake etmediniz."
             }
         },
         "partiallyStakedFunds": {
-            "title": "New unstaked funds: {amount}",
-            "titleNoFunds": "New unstaked funds",
-            "preBody": "You have received tokens on a staked wallet.",
-            "body": "You need to manually stake these new funds to receive airdrop rewards for them."
+            "title": "Yeni stake edilmemiş fonlar: {amount}",
+            "titleNoFunds": "Yeni stake edilmemiş fonlar",
+            "preBody": "Stake edilen bir cüzdanda token aldınız.",
+            "body": "Bu yeni fonlar için airdrop ödülleri almak için manuel olarak stake etmeniz gerekir."
         },
         "stakingMinRewards": {
-            "title": "Below minimum reward value",
-            "titleMinBalance": "{amount} minimum balance required",
-            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
-            "continue": "Please continue staking for another {duration}.",
-            "bodyBelowMin": "This wallet has not reached the minimum reward value for {airdrop} ({airdropRewardMin}).",
-            "bodyWillReachMin": "You must stake for another {duration} to reach the minimum.",
-            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
-            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
-            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+            "title": "Minimum ödül değerinin altında",
+            "titleMinBalance": "{amount} minimum bakiye gerekli",
+            "bodyMinBalance": "Bu cüzdan, minimum airdrop ödülüne ulaşmak için yeterli IOTA tokenine sahip değildir ve bu nedenle stake edilemez.",
+            "continue": "Lütfen {duration} daha staking yapmaya devam edin.",
+            "bodyBelowMin": "Bu cüzdan, {airdrop} için minimum ödül değerine ({airdropRewardMin}) ulaşmadı.",
+            "bodyWillReachMin": "Minimuma ulaşmak için {duration} daha stake etmeniz gerekir.",
+            "bodyWillNotReachMin": "Daha fazla IOTA eklemediğiniz sürece kalan stake süresi boyunca minimum ödül değerine ulaşamazsınız.",
+            "bodyDidNotReachMin": "{airdrop} için minimum ödül değerine ({airdropRewardMin}) ulaşmak için yeterli IOTA stake etmediniz.",
+            "bodyMinBalanceAirdrop": "Bu cüzdanda {airdrop} minimum airdrop ödülüne ulaşmak için yeterli IOTA jetonu yok."
         }
     },
     "exports": {
         "transactionHistoryCsv": {
             "messageId": "Mesaj Kimliği",
-            "internal": "Internal",
-            "rawValue": "Raw Value",
-            "formattedValue": "Formatted Value",
+            "internal": "Dahili",
+            "rawValue": "Ham Değer",
+            "formattedValue": "Biçimlenmiş Değer",
             "date": "Tarih",
-            "time": "Time"
+            "time": "Zaman"
         }
     }
 }

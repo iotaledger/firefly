@@ -364,7 +364,7 @@
             },
             "deepLinks": {
                 "title": "IOTA linky",
-                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
+                "description": "Automaticky vyplní transakčné údaje vo Firefly po kliknutí na IOTA link"
             },
             "networkConfiguration": {
                 "title": "Nastavenie siete",
@@ -378,14 +378,14 @@
                 "connectedTo": "Pripojené k",
                 "nodeConfiguration": {
                     "title": "Výber uzla",
-                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
+                    "description": "Zvoľte \"Manuálne\" pre konfiguráciu uzlov a pripojenie sa na vlastný uzol(y)",
                     "automatic": "Automatické",
                     "manual": "Príručka"
                 }
             },
             "configureNodeList": {
                 "title": "Konfigurácia nodu",
-                "description": "Manage the list of nodes you connect to",
+                "description": "Spravujte zoznam sieťových uzlov ku ktorým sa pripájate",
                 "primaryNode": "Hlavný uzol",
                 "excludeNode": "Vylúčiť uzol",
                 "includeNode": "Zahrnúť uzol",
@@ -502,20 +502,20 @@
             "info": {
                 "upcomingSubheader": "Udalosť ešte nezačala",
                 "upcomingHeader": "Check back later",
-                "commencingSubheader": "Get ready for staking",
+                "commencingSubheader": "Pripravte sa na staking",
                 "commencingHeader": "Pred-stakuj svoje tokeny!",
-                "holdingSubheaderHolding": "Now earning staking rewards",
-                "holdingSubheaderNotHolding": "Earn rewards by staking IOTA",
+                "holdingSubheaderHolding": "Teraz získavate odmeny za staking",
+                "holdingSubheaderNotHolding": "Získajte odmeny stakeing-om IOTA",
                 "holdingHeaderHolding": "{duration} left",
                 "holdingHeaderNotHolding": "Stakuj svoje tokeny!",
                 "endedSubheader": "Staking has now ended",
-                "endedHeader": "Thank you!",
-                "inactiveHeader": "Try changing node",
+                "endedHeader": "Ďakujeme!",
+                "inactiveHeader": "Pokúste sa zmeniť sieťový uzol",
                 "inactiveSubheader": "Stakovanie nezaznamenané"
             },
             "airdrops": {
                 "holding": "Zostáva",
-                "commencing": "Until staking begins",
+                "commencing": "Pokiaľ začne staking",
                 "collectedRewards": "Collected rewards",
                 "assembly": {
                     "name": "Assembly",
@@ -966,7 +966,7 @@
         "passwordUpdating": "Aktualizácia hesla...",
         "passwordSuccess": "Heslo úspešne aktualizované",
         "passwordFailed": "Aktualizácia hesla zlyhala",
-        "syncing": "Syncing",
+        "syncing": "Prebieha synchronizácia",
         "syncingAccounts": "Synchronizácia peňaženiek...",
         "exportingStronghold": "Exportujem Stronghold...",
         "exportingStrongholdSuccess": "Stronghold úspešne exportovaný",

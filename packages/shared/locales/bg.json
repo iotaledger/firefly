@@ -370,11 +370,11 @@
                 "title": "Мрежови настройки",
                 "title2": "Мрежова конфигурация",
                 "description": {
-                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
-                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                    "dev": "Мрежовите настройки ще бъдат автоматично обновени според тези на текущият нод (промяната на мрежа ще довете до нулиране на състоятнието на портфейла)",
+                    "nonDev": "Настройките на мрежата ще се обновят автоматично според конфигурацията на текущият нод"
                 },
-                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
-                "resetWallet": "Your wallet state has been reset.",
+                "switchedNetworks": "Мрежата беше успешно сменена с \"{networkName}\".",
+                "resetWallet": "Състоянието на портфейла беше нулирано.",
                 "connectedTo": "Свързан към",
                 "nodeConfiguration": {
                     "title": "Избор на node сървър",
@@ -394,7 +394,7 @@
                 "setAsPrimary": "Задай като основен",
                 "removeNode": "Премахни Node сървър",
                 "includeOfficialNodeList": "Избери официалния списък с Node сървъри",
-                "noNodes": "There are no nodes, unable to connect to the network",
+                "noNodes": "Има нодове, които не могат да се свържат с мрежата",
                 "noNodesAuto": "Няма избрани Node сървъри, автоматичен избор ще бъде използван"
             },
             "proofOfWork": {
@@ -487,17 +487,17 @@
         },
         "staking": {
             "title": "Залагане",
-            "welcome": "Welcome to the staking dashboard",
+            "welcome": "Добре дошли в таблото за стейкване",
             "status": {
                 "upcoming": "Събитието не е започнало",
-                "commencing": "Pre-staking open",
+                "commencing": "Предстейкването е отворено",
                 "holdingActive": "Залагане в прогрес",
-                "holdingInactive": "Staking open",
-                "inactive": "Staking not detected",
+                "holdingInactive": "Стейкването е отворено",
+                "inactive": "Стейкването не е намерено",
                 "ended": "Залагането приключи"
             },
             "summary": {
-                "stakedFunds": "Staked funds"
+                "stakedFunds": "Стейкнати средства"
             },
             "info": {
                 "upcomingSubheader": "Събитието не е започнало",
@@ -511,7 +511,7 @@
                 "endedSubheader": "Залагането приключи",
                 "endedHeader": "Благодарим ви!",
                 "inactiveHeader": "Try changing node",
-                "inactiveSubheader": "Staking not detected"
+                "inactiveSubheader": "Стейкването не е намерено"
             },
             "airdrops": {
                 "holding": "Остава",
@@ -1003,7 +1003,7 @@
         "staking": "Залагане",
         "unstaking": "Unstaking",
         "notStaked": "Not staked",
-        "stakedFunds": "Staked funds",
+        "stakedFunds": "Стейкнати средства",
         "unstakedFunds": "Unstaked funds"
     },
     "dates": {

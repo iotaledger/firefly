@@ -490,9 +490,9 @@
             "welcome": "Willkommen im Staking-Dashboard",
             "status": {
                 "upcoming": "Event hat noch nicht begonnen",
-                "commencing": "Pre-Staking offen",
+                "commencing": "Pre-Staking möglich",
                 "holdingActive": "Staking läuft",
-                "holdingInactive": "Staking läuft",
+                "holdingInactive": "Staking möglich",
                 "inactive": "Staking nicht erkannt",
                 "ended": "Staking beendet"
             },
@@ -505,10 +505,10 @@
                 "commencingSubheader": "Mach dich bereit zum Staken",
                 "commencingHeader": "Pre-Stake deine Token!",
                 "holdingSubheaderHolding": "Erhalte Staking-Rewards",
-                "holdingSubheaderNotHolding": "Verdiene Airdrop-Rewards durch das Staken von IOTA",
+                "holdingSubheaderNotHolding": "Verdiene Airdrop-Rewards mit IOTA",
                 "holdingHeaderHolding": "{duration} verbleibend",
                 "holdingHeaderNotHolding": "Stake deine Token!",
-                "endedSubheader": "Staking ist beendet",
+                "endedSubheader": "Staking ist nun beendet",
                 "endedHeader": "Vielen Dank!",
                 "inactiveHeader": "Versuche die Node zu wechseln",
                 "inactiveSubheader": "Staking nicht erkannt"
@@ -717,13 +717,13 @@
             "typePassword": "Gib dein Passwort ein, um den Export zu erlauben"
         },
         "stakingNotice": {
-            "upcomingDate": "Das Staking hat noch nicht begonnen",
-            "commencingDate": "Das Staking hat noch nicht begonnen",
+            "upcomingDate": "Staking hat noch nicht begonnen",
+            "commencingDate": "Staking hat noch nicht begonnen",
             "body": "Durch das Pre-Staking deiner Guthaben erhältst du automatisch Belohnungen, sobald das Staking beginnt.",
             "ok": "Ok, verstanden"
         },
         "stakingManager": {
-            "title": "Staking Verwaltung",
+            "title": "Staking-Verwaltung",
             "description": "Wenn du mit einer Wallet am Staking teilnimmst, sendest du eine Transaktion an dich selbst und markierst deine Token als \"gestaked\". Du kannst deine Token jederzeit transferieren, bekommst für diese dann aber keine weiteren Staking-Rewards.",
             "totalFundsStaked": "Gestaktes Guthaben (gesamt)",
             "stakedSuccessfully": "Dein Guthaben aus {account} wurde gestaked.",
@@ -731,10 +731,10 @@
         },
         "stakingConfirmation": {
             "title": "Airdrop-Teilnahme",
-            "subtitleStake": "Du bist dabei zu staken",
+            "subtitleStake": "Du bist dabei folgenden Betrag zu staken:",
             "subtitleMerge": "Wird zusammengeführt",
             "bodyStake": "Wenn du an einem Airdrop nicht teilnehmen möchtest, kannst du diesen unten abwählen. Du hast jederzeit die Möglichkeit, das Staking aufzuheben und erneut zu staken.",
-            "bodyMerge": "Dein Guthaben wird für {airdrop} gestaked. Um erneut wählen zu können, an welchen Airdops du teilnimmst, musst du das Staking für deine Wallet aufheben und erneut staken.",
+            "bodyMerge": "Dein Guthaben wird für {airdrop} gestaked. Um erneut wählen zu können, an welchen Airdops du teilnimmst, musst du das Staking für deine Wallet beenden und erneut staken.",
             "estimatedAirdrop": "Geschätzte Rewards"
         },
         "shimmer-info": {
@@ -863,9 +863,9 @@
         "howItWorks": "Wie es funktioniert",
         "learnAboutStaking": "Erfahre mehr über Staking",
         "stake": "Staken",
-        "unstake": "Staking aufheben",
+        "unstake": "Beenden",
         "stakeFunds": "Guthaben staken",
-        "manageStake": "Stake verwalten",
+        "manageStake": "Staking verwalten",
         "merge": "Staken",
         "mergeFunds": "Guthaben zusammenführen",
         "done": "Fertig"
@@ -966,7 +966,7 @@
         "passwordUpdating": "Ändere Passwort...",
         "passwordSuccess": "Passwort erfolgreich geändert",
         "passwordFailed": "Passwortänderung fehlgeschlagen",
-        "syncing": "Syncing",
+        "syncing": "Synchronisieren...",
         "syncingAccounts": "Synchronisiere Wallets...",
         "exportingStronghold": "Exportiere Stronghold...",
         "exportingStrongholdSuccess": "Stronghold erfolgreich exportiert",
@@ -1001,7 +1001,7 @@
         "staked": "Gestaked",
         "unstaked": "nicht gestaked",
         "staking": "Staking",
-        "unstaking": "Staking aufheben",
+        "unstaking": "Staking beenden",
         "notStaked": "Nicht gestaked",
         "stakedFunds": "Gestaktes Guthaben",
         "unstakedFunds": "Ungestaktes Guthaben"
@@ -1015,13 +1015,13 @@
         "yearsAgo": "Vor {time, plural, one {# Jahr} other {# Jahren}}"
     },
     "times": {
-        "second": "{time, plural, one {1 second} other {# seconds}}",
-        "minute": "{time, plural, one {1 minute} other {# minutes}}",
-        "hour": "{time, plural, one {1 hour} other {# hours}}",
-        "day": "{time, plural, one {1 day} other {# days}}",
-        "week": "{time, plural, one {1 week} other {# weeks}}",
-        "month": "{time, plural, one {1 month} other {# months}}",
-        "year": "{time, plural, one {1 year} other {# years}}"
+        "second": "{time, plural, one {1 Sekunde} other {# Sekunden}}",
+        "minute": "{time, plural, one {1 Minute} other {# Minuten}}",
+        "hour": "{time, plural, one {1 Stunde} other {# Stunden}}",
+        "day": "{time, plural, one {1 Tag} other {# Tage}}",
+        "week": "{time, plural, one {1 Woche} other {# Wochen}}",
+        "month": "{time, plural, one {1 Monat} other {# Monate}}",
+        "year": "{time, plural, one {1 Jahr} other {# Jahre}}"
     },
     "notifications": {
         "valueTx": "Du hast {{value}} in {{account}} erhalten",
@@ -1181,7 +1181,7 @@
             "http": "Die Verwendung von Nodes über HTTP lässt den Datenverkehr unverschlüsselt und kann ein Sicherheitsrisiko darstellen."
         },
         "participation": {
-            "noAccounts": "You do not have any IOTA."
+            "noAccounts": "Du besitzt aktuell keine IOTA Token."
         }
     },
     "tooltips": {
@@ -1199,11 +1199,11 @@
                 "body": "Schaue später wieder vorbei. Das Staking-Event hat noch nicht begonnen."
             },
             "commencing": {
-                "title": "Pre-Staking hat begonnen",
+                "title": "Pre-Staking ist jetzt möglich",
                 "body": "Merke deine Token jetzt zum Staking vor. Sobald das Staking beginnt, erhältst du automatisch alle 10 Sekunden Staking-Rewards."
             },
             "activeHolding": {
-                "title": "Die Staking Phase läuft jetzt",
+                "title": "Staking läuft jetzt",
                 "body": "Gut gemacht. Du wirst nun alle 10 Sekunden Staking-Rewards erhalten."
             },
             "inactiveHolding": {
@@ -1216,8 +1216,8 @@
             },
             "ended": {
                 "title": "Staking ist nun beendet",
-                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
-                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
+                "bodyAboveRewardMin": "Assembly- und Shimmer-Rewards werden an deine Wallets verteilt, sobald die jeweiligen Netzwerke starten.",
+                "bodyBelowRewardMin": "Du hast nicht ausreichend IOTA Token gestaked, um das Minimum an Airdrop-Rewards zu erhalten."
             }
         },
         "partiallyStakedFunds": {
@@ -1227,15 +1227,15 @@
             "body": "Du musst das neue Guthaben manuell staken, um dafür Airdrop-Rewards zu erhalten."
         },
         "stakingMinRewards": {
-            "title": "Unterhalb des minimalen Reward-Werts",
+            "title": "Unterhalb des Mindest-Rewards",
             "titleMinBalance": "{amount} Mindestguthaben erforderlich",
-            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
+            "bodyMinBalance": "Diese Wallet besitzt nicht ausreichend IOTA Token, um das Minimum an Airdrop-Rewards zu erhalten und kann daher nicht gestaked werden.",
             "continue": "Bitte setze das Staking für weitere {duration} fort.",
-            "bodyBelowMin": "Diese Wallet hat den minimalen Reward-Wert für {airdrop} ({airdropRewardMin}) nicht erreicht.",
+            "bodyBelowMin": "Diese Wallet hat den Mindest-Reward für {airdrop} ({airdropRewardMin}) nicht erreicht.",
             "bodyWillReachMin": "Du musst noch {duration} staken, um das Minimum zu erreichen.",
-            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
-            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
-            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+            "bodyWillNotReachMin": "Du wirst das Minimum an Rewards im verbleibenden Staking Event nicht erreichen, wenn du keine weiteren IOTA Token hinzufügst.",
+            "bodyDidNotReachMin": "Du hast nicht ausreichend IOTA Token gestaked, um das Minimum an {airdrop}-Rewards ({airdropRewardMin}) zu erhalten.",
+            "bodyMinBalanceAirdrop": "Diese Wallet besitzt nicht ausreichend IOTA Token, um das Minimum an Airdrop-Rewards für {airdrop} zu erhalten."
         }
     },
     "exports": {

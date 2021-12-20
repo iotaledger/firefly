@@ -490,32 +490,32 @@
             "welcome": "Добро пожаловать на панель управления стейкинг",
             "status": {
                 "upcoming": "Событие не началось",
-                "commencing": "Предварительный стэйкинг открыт",
-                "holdingActive": "Стейкинг в процессе",
-                "holdingInactive": "Стейкинг открыт",
-                "inactive": "Стейкинг не обнаружен",
-                "ended": "Стейкинг завершён"
+                "commencing": "Предварительная ставка открыта",
+                "holdingActive": "Ставка в процессе",
+                "holdingInactive": "Ставка открыта",
+                "inactive": "Ставка не обнаружена",
+                "ended": "Ставка завершёна"
             },
             "summary": {
-                "stakedFunds": "Стейкинг средства"
+                "stakedFunds": "Ставочные средства"
             },
             "info": {
                 "upcomingSubheader": "Событие не началось",
                 "upcomingHeader": "Проверить позже",
-                "commencingSubheader": "Приготовиться к стейкинг",
+                "commencingSubheader": "Приготовиться к ставке",
                 "commencingHeader": "Предварительно внесите свои токены в стэйк!",
-                "holdingSubheaderHolding": "Теперь зарабатываем вознаграждения за стейкинг",
-                "holdingSubheaderNotHolding": "Зарабатывайте вознаграждения, делая IOTA стейкинг",
+                "holdingSubheaderHolding": "Теперь зарабатываем вознаграждения за ставки",
+                "holdingSubheaderNotHolding": "Зарабатывайте вознаграждения, делая ставки IOTA",
                 "holdingHeaderHolding": "Осталось {duration}",
-                "holdingHeaderNotHolding": "Внесите свои токены!",
-                "endedSubheader": "Стейкинг завершён",
+                "holdingHeaderNotHolding": "Ставьте свои токены!",
+                "endedSubheader": "Ставки завершились",
                 "endedHeader": "Спасибо!",
                 "inactiveHeader": "Попытка изменить узел",
-                "inactiveSubheader": "Стейкинг не обнаружен"
+                "inactiveSubheader": "Ставка не обнаружена"
             },
             "airdrops": {
                 "holding": "Остаток",
-                "commencing": "До начала стейкинг",
+                "commencing": "До начала ставок",
                 "collectedRewards": "Собранные выплаты",
                 "assembly": {
                     "name": "Сборка",
@@ -734,18 +734,18 @@
             "subtitleStake": "Вы собираетесь принять участие в стейкинге",
             "subtitleMerge": "Вы собираетесь объединить",
             "bodyStake": "Если вы не хотите участвовать в обоих аирдропах, вы можете отказаться от участия ниже. Вы можете отозвать и возобновить стейкинг в любое время.",
-            "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
-            "estimatedAirdrop": "Estimated rewards"
+            "bodyMerge": "Ваши средства будут поставлены на {airdrop}. Чтобы изменить, в каких воздушных сбросах вы хотите участвовать, отмените ставку этого кошелька и сделайте ее снова.",
+            "estimatedAirdrop": "Предполагаемое вознаграждение"
         },
         "shimmer-info": {
-            "title": "About Shimmer",
-            "body1": "Congratulations you have earned SMR tokens as a staking reward. Shimmer is an incentivized staging network to test major upgrades on IOTA.",
-            "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
+            "title": "О Shimmer",
+            "body1": "Поздравляем, вы заработали токены SMR в качестве вознаграждения за размещение ставок. Shimmer - это стимулируемая сеть для тестирования основных обновлений IOTA.",
+            "body2": "Мы планируем запустить Shimmer в 2022 году. Ваши токены станут доступны для перевода после запуска сети."
         },
         "assembly-info": {
-            "title": "About Assembly",
-            "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
-            "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
+            "title": "О Assembly",
+            "body1": "Поздравляем, вы заработали токены ASMB в качестве вознаграждения за размещение ставок. Assembly - это многоцепочечная сеть для развертывания масштабируемых смарт-контрактов на IOTA.",
+            "body2": "Мы планируем запустить Assembly в 2022 году. Ваши токены станут доступны для перевода после запуска сети."
         }
     },
     "charts": {
@@ -859,15 +859,15 @@
         "closeFirefly": "Закрыть Firefly",
         "generateAddress": "Сгенерировать адрес",
         "migrateAgain": "Мигрировать другой индекс",
-        "visitWebsite": "Visit website",
-        "howItWorks": "How it works",
-        "learnAboutStaking": "Learn about staking",
-        "stake": "Stake",
-        "unstake": "Unstake",
-        "stakeFunds": "Stake funds",
-        "manageStake": "Manage stake",
-        "merge": "Merge",
-        "mergeFunds": "Merge funds",
+        "visitWebsite": "Посетить сайт",
+        "howItWorks": "Как это работает",
+        "learnAboutStaking": "Узнайте о ставках",
+        "stake": "Ставка",
+        "unstake": "Вывести",
+        "stakeFunds": "Ставочные средства",
+        "manageStake": "Управление ставкой",
+        "merge": "Объединить",
+        "mergeFunds": "Объединить средства",
         "done": "Выполнено"
     },
     "general": {
@@ -957,8 +957,8 @@
         "transferBroadcasting": "Отправка транзакции",
         "transferComplete": "Передача завершена",
         "generatingReceiveAddress": "Генерирование адреса приема",
-        "broadcasting": "Broadcasting",
-        "confirming": "Confirming",
+        "broadcasting": "Вещание",
+        "confirming": "Подтверждение",
         "creatingAccount": "Создание кошелька, пожалуйста, подождите...",
         "updatingAccount": "Обновление кошелька, пожалуйста, подождите...",
         "accountSyncing": "Кошелек синхронизируется",
@@ -966,7 +966,7 @@
         "passwordUpdating": "Обновление пароля...",
         "passwordSuccess": "Пароль успешно обновлен",
         "passwordFailed": "Не удалось обновить пароль",
-        "syncing": "Syncing",
+        "syncing": "Синхронизация",
         "syncingAccounts": "Синхронизация кошельков...",
         "exportingStronghold": "Экспортирование Stronghold...",
         "exportingStrongholdSuccess": "Stronghold успешно экспортирован",
@@ -987,10 +987,10 @@
         "sendingFrom": "Отправка с {account}",
         "receivedTo": "Поступило на {account}",
         "sentFrom": "Отправлено с {account}",
-        "stakedFor": "Staked for {account}",
-        "unstakedFor": "Unstaked for {account}",
-        "votedFor": "Voted for {account}",
-        "unvotedFor": "Unvoted for {account}",
+        "stakedFor": "Поставлено на {account}",
+        "unstakedFor": "Выведено из {account}",
+        "votedFor": "Проголосовано за {account}",
+        "unvotedFor": "За {account} голос отменён",
         "receiving": "Поступление",
         "sending": "Отправление",
         "legacyNetwork": "Устаревшая сеть",
@@ -998,13 +998,13 @@
         "version": "Версия {version}",
         "unknown": "Неизвестно",
         "none": "Отсутствует",
-        "staked": "Staked",
-        "unstaked": "Unstaked",
+        "staked": "Поставлено",
+        "unstaked": "Выведено",
         "staking": "Стейкинг",
-        "unstaking": "Unstaking",
-        "notStaked": "Not staked",
-        "stakedFunds": "Стейкинг средства",
-        "unstakedFunds": "Unstaked funds"
+        "unstaking": "Выведение",
+        "notStaked": "Не поставлено",
+        "stakedFunds": "Ставочные средства",
+        "unstakedFunds": "Выведеноные средства"
     },
     "dates": {
         "today": "Сегодня",
@@ -1015,13 +1015,13 @@
         "yearsAgo": "{time, plural, one {# год} other {# лет}} назад"
     },
     "times": {
-        "second": "{time, plural, one {1 second} other {# seconds}}",
-        "minute": "{time, plural, one {1 minute} other {# minutes}}",
-        "hour": "{time, plural, one {1 hour} other {# hours}}",
-        "day": "{time, plural, one {1 day} other {# days}}",
-        "week": "{time, plural, one {1 week} other {# weeks}}",
-        "month": "{time, plural, one {1 month} other {# months}}",
-        "year": "{time, plural, one {1 year} other {# years}}"
+        "second": "{time, plural, one {1 секунда} other {# секунд}}",
+        "minute": "{time, plural, one {1 минута} other {# минут}}",
+        "hour": "{time, plural, one {1 час} other {# часов}}",
+        "day": "{time, plural, one {1 день} other {# дней}}",
+        "week": "{time, plural, one {1 неделя} other {# недели}}",
+        "month": "{time, plural, one {1 месяц} other {# месяцев}}",
+        "year": "{time, plural, one {1 год} other {# лет}}"
     },
     "notifications": {
         "valueTx": "Получение {{value}} в {{account}}",
@@ -1058,7 +1058,7 @@
             "length": "Имя твоего профиля не может быть длиннее {length, plural, one {1 символа} few {# символов} many {# символов} other {# символов}}.",
             "duplicate": "Профиль с таким именем уже существует.",
             "delete": {
-                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+                "nonEmptyAccounts": "Перед удалением профиля вы должны перевести все остатки средств."
             }
         },
         "password": {
@@ -1125,7 +1125,7 @@
             "noSynced": "Нет доступных синхронизированных узлов.",
             "answer": "Не удалось получить ответ от всех узлов.",
             "forbidden": "Соединение с этим узлом запрещено.",
-            "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node."
+            "pluginNotAvailable": "Плагин \"{nodePlugin}\" недоступен на текущем узле."
         },
         "network": {
             "mismatch": "Идентификатор сети для этого узла - это \" {networkId}\", что не соответствует текущей сети.",
@@ -1158,7 +1158,7 @@
             "generateAddress": "Произошла ошибка при генерировании адреса.",
             "timeout": "Время работы вашего устройства Ledger истекло.",
             "disconnected": "Ваше устройство Ledger было отключено.",
-            "noStronghold": "Unable to use Stronghold with Ledger profile."
+            "noStronghold": "Невозможно использовать Stronghold с профилем Ledger."
         },
         "popup": {
             "preventClose": "Это всплывающее окно невозможно закрыть."
@@ -1170,10 +1170,10 @@
             "cannotDecodeBech32": "Невозможно декодировать строку как Bech32 адрес."
         },
         "participation": {
-            "cannotUseAccount": "Unable to use the specified account.",
-            "cannotFindStakingEvent": "Unable to find staking event.",
-            "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
-            "invalidStakingEventId": "Invalid staking event ID."
+            "cannotUseAccount": "Не удается использовать указанный аккаунт.",
+            "cannotFindStakingEvent": "Невозможно найти событие, связанное со ставками.",
+            "cannotVisitAirdropWebsite": "Невозможно открыть веб-сайт {airdrop}.",
+            "invalidStakingEventId": "Неверный ID события ставки."
         }
     },
     "warning": {
@@ -1181,7 +1181,7 @@
             "http": "Использование узлов через HTTP оставляет трафик незашифрованным и может представлять угрозу безопасности."
         },
         "participation": {
-            "noAccounts": "You do not have any IOTA."
+            "noAccounts": "У вас нет IOTA."
         }
     },
     "tooltips": {
@@ -1195,57 +1195,57 @@
         },
         "stakingIndicator": {
             "upcoming": {
-                "title": "Staking has not started yet",
-                "body": "Check back later. The staking event has not begun."
+                "title": "Ставки еще не начались",
+                "body": "Проверьте позже. Ставка еще не началась."
             },
             "commencing": {
-                "title": "Pre-staking is now open",
-                "body": "Pre-stake your tokens, and once staking begins, you will automatically start receiving rewards every 10 seconds."
+                "title": "Предварительные ставки открыты",
+                "body": "Сделайте предварительную ставку, и как только ставка начнется, вы автоматически начнете получать вознаграждение каждые 10 секунд."
             },
             "activeHolding": {
-                "title": "Staking is now in progress",
-                "body": "Good job. You will receive rewards every 10 seconds."
+                "title": "В настоящее время происходит ставка",
+                "body": "Хорошая работа. Вы будете получать вознаграждение каждые 10 секунд."
             },
             "inactiveHolding": {
-                "title": "Staking is now open",
-                "body": "Stake your IOTA tokens to receive rewards every 10 seconds."
+                "title": "Ставки открыты",
+                "body": "Ставьте свои токены IOTA, чтобы получать вознаграждение каждые 10 секунд."
             },
             "inactive": {
-                "title": "No staking events detected",
-                "body": "Open network configuration in Advanced Settings and make sure the current node has the \"Participation\" feature by clicking \"View Info\"."
+                "title": "События, связанные со ставками, не обнаружены",
+                "body": "Откройте конфигурацию сети в разделе \" Расширенные настройки\" и убедитесь, что текущий узел имеет функцию \"Участие\", нажав \"Просмотр информации\"."
             },
             "ended": {
-                "title": "Стейкинг завершён",
-                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
-                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
+                "title": "Ставки завершились",
+                "bodyAboveRewardMin": "Начисления Assembly и Shimmer будут распределены по вашим кошелькам после запуска каждой из соответствующих сетей.",
+                "bodyBelowRewardMin": "Вы не сделали достаточно ставок IOTA, чтобы достичь минимального вознаграждения за воздушный сброс."
             }
         },
         "partiallyStakedFunds": {
-            "title": "New unstaked funds: {amount}",
-            "titleNoFunds": "New unstaked funds",
-            "preBody": "You have received tokens on a staked wallet.",
-            "body": "You need to manually stake these new funds to receive airdrop rewards for them."
+            "title": "Новые выведенные средства: {amount}",
+            "titleNoFunds": "Новые выведенные средства",
+            "preBody": "Вы получили токены на кошелек со ставками.",
+            "body": "Чтобы получить вознаграждение в виде воздушных сбросов, вам нужно вручную сделать ставку на эти новые средства."
         },
         "stakingMinRewards": {
-            "title": "Below minimum reward value",
-            "titleMinBalance": "{amount} minimum balance required",
-            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
-            "continue": "Please continue staking for another {duration}.",
-            "bodyBelowMin": "This wallet has not reached the minimum reward value for {airdrop} ({airdropRewardMin}).",
-            "bodyWillReachMin": "You must stake for another {duration} to reach the minimum.",
-            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
-            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
-            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+            "title": "Ниже минимальной суммы вознаграждения",
+            "titleMinBalance": "{amount} минимально необходимый баланс",
+            "bodyMinBalance": "В этом кошельке недостаточно токенов IOTA для достижения минимального вознаграждения за воздушный сброс, поэтому он не может быть использован.",
+            "continue": "Пожалуйста, продолжайте делать ставки еще на {duration}.",
+            "bodyBelowMin": "Этот кошелек не достиг минимального значения вознаграждения за {airdrop} ({airdropRewardMin}).",
+            "bodyWillReachMin": "Вы должны сделать ставку еще на {duration}, чтобы достичь минимума.",
+            "bodyWillNotReachMin": "Вы не достигнете минимального значения вознаграждения в течение оставшегося периода ставок, если не добавите больше IOTA.",
+            "bodyDidNotReachMin": "Вы сделали недостаточно ставок IOTA, чтобы достичь минимального значения вознаграждения за {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "В этом кошельке недостаточно токенов IOTA для достижения минимального вознаграждения за {airdrop}."
         }
     },
     "exports": {
         "transactionHistoryCsv": {
             "messageId": "ID сообщения",
-            "internal": "Internal",
-            "rawValue": "Raw Value",
-            "formattedValue": "Formatted Value",
+            "internal": "Внутренний",
+            "rawValue": "Необработанное значение",
+            "formattedValue": "Обработанное значение",
             "date": "Дата",
-            "time": "Time"
+            "time": "Время"
         }
     }
 }

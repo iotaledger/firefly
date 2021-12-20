@@ -2,12 +2,12 @@
     "views": {
         "onboarding1": {
             "title": "Pošiljajte, prejemajte in upravljajte svoje IOTA žetone",
-            "body": "Firefly is the official wallet software of IOTA."
+            "body": "Firefly je uradna softverska denarnica kriptovalute IOTA."
         },
         "legal": {
             "title": "Pravilnik o zasebnosti in pogoji storitve",
-            "body": "Please review the Privacy Policy and Terms of Service.",
-            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
+            "body": "Prosimo, preglejte politiko zasebnosti in pogoje storitve.",
+            "checkbox": "Prebral sem in sprejemam politiko zasebnosti in pogoje storitve"
         },
         "appearance": {
             "title": "Videz",
@@ -15,27 +15,27 @@
         },
         "profile": {
             "title": "Ustvari profil",
-            "profileName": "Profile name",
-            "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
+            "profileName": "Ime uporabniškega računa",
+            "body1": "Ustvarite lahko več uporabniških računov, da organizirate svoje denarnice in izboljšate zasebnost.",
             "body2": {
-                "first": "For now, let's start with your first profile name.",
-                "nonFirst": "For now, let's start with your profile name."
+                "first": "Začnimo z imenom vašega prvega uporabniškega računa.",
+                "nonFirst": "Začnimo z imenom vašega uporabniškega računa."
             },
-            "addMore": "You can add more profiles later.",
+            "addMore": "Kasneje lahko dodate več uporabniških računov.",
             "developer": {
-                "label": "Developer profile",
-                "info": "Connect to public and private IOTA networks"
+                "label": "Razvijalčev račun",
+                "info": "Povezava na javno in privatno IOTA omrežje"
             }
         },
         "setup": {
             "title": "Nastavite denarnico",
-            "chrysalisTitle": "Chrysalis Network Update",
-            "chrysalisBody": "From April 21st 2021, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
-            "learnMore": "Learn about the migration"
+            "chrysalisTitle": "Chrysalis popravek",
+            "chrysalisBody": "Od 21. aprila 2021 lahko uporabniki svoje žetone preselijo v novo omrežje Chrysalis. Priporočamo, da svoje obstoječe žetone preselite čim prej.",
+            "learnMore": "Podučite se o migraciji"
         },
         "secure": {
             "title": "Zaščiti svojo denarnico",
-            "body1": "Save and print the Recovery Kit PDF template.",
+            "body1": "Shranite in natisnite PDF predlogo kompleta za obnovitev.",
             "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallets."
         },
         "create": {
@@ -221,7 +221,7 @@
             "body2": "It may take some time. Do not turn off your device during the migration.",
             "existing": "Vaša stara denarnica",
             "new": "Vaša nova denarnica",
-            "learn": "Learn about the migration",
+            "learn": "Podučite se o migraciji",
             "beginMigration": "Begin Migration",
             "migrating": "Migrating funds...",
             "migrated": "{balance} migrated",

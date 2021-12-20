@@ -966,7 +966,7 @@
         "passwordUpdating": "Mise à jour du mot de passe...",
         "passwordSuccess": "Mot de passe mis à jour avec succès",
         "passwordFailed": "La mise à jour du mot de passe a échoué",
-        "syncing": "Syncing",
+        "syncing": "Synchronisation",
         "syncingAccounts": "Synchronisation des portefeuilles en cours...",
         "exportingStronghold": "Export Stronghold en cours...",
         "exportingStrongholdSuccess": "Stronghold exporté avec succès",
@@ -1015,13 +1015,13 @@
         "yearsAgo": "il y a {time, plural, one {# année} other {# années}}"
     },
     "times": {
-        "second": "{time, plural, one {1 second} other {# seconds}}",
+        "second": "{time, plural, one {1 seconde} other {# secondes}}",
         "minute": "{time, plural, one {1 minute} other {# minutes}}",
-        "hour": "{time, plural, one {1 hour} other {# hours}}",
-        "day": "{time, plural, one {1 day} other {# days}}",
-        "week": "{time, plural, one {1 week} other {# weeks}}",
-        "month": "{time, plural, one {1 month} other {# months}}",
-        "year": "{time, plural, one {1 year} other {# years}}"
+        "hour": "{time, plural, one {1 heure} other {# heures}}",
+        "day": "{time, plural, one {1 jour} other {# jours}}",
+        "week": "{time, plural, one {1 semaine} other {# semaines}}",
+        "month": "{time, plural, one {1 mois} other {# mois}}",
+        "year": "{time, plural, one {1 an} other {# ans}}"
     },
     "notifications": {
         "valueTx": "Réception de {{value}} sur {{account}}",
@@ -1181,7 +1181,7 @@
             "http": "L'utilisation de nœuds en HTTP laisse le trafic non chiffré et pourrait poser un risque de sécurité."
         },
         "participation": {
-            "noAccounts": "You do not have any IOTA."
+            "noAccounts": "Vous n'avez pas de IOTA."
         }
     },
     "tooltips": {
@@ -1216,8 +1216,8 @@
             },
             "ended": {
                 "title": "Le Staking est maintenant terminée",
-                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
-                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
+                "bodyAboveRewardMin": "Les récompenses d'Assembly et de Shimmer seront distribuées à vos portefeuilles lorsque chacun des réseaux respectifs sera lancé.",
+                "bodyBelowRewardMin": "Vous n'avez pas engagé assez de IOTA pour atteindre la récompense minimale."
             }
         },
         "partiallyStakedFunds": {
@@ -1229,13 +1229,13 @@
         "stakingMinRewards": {
             "title": "Valeur de récompense inférieure à la valeur minimale",
             "titleMinBalance": "Solde minimum de {amount} requis",
-            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
+            "bodyMinBalance": "Ce portefeuille ne possède pas assez de jetons IOTA pour atteindre la récompense minimale et ne peut donc pas être engagé.",
             "continue": "Veuillez continuer à miser pour {duration}.",
             "bodyBelowMin": "Ce portefeuille n'a pas atteint la valeur de récompense minimale pour {airdrop} ({airdropRewardMin}).",
             "bodyWillReachMin": "Vous devez placer pendant {duration} pour atteindre le minimum.",
-            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
-            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
-            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+            "bodyWillNotReachMin": "Vous n'atteindrez pas la valeur minimale de la récompense sur la période restante, à moins que vous n'ajoutiez plus de IOTA.",
+            "bodyDidNotReachMin": "Vous n'avez pas engagé assez de IOTA pour atteindre la valeur de récompense minimale pour {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "Ce portefeuille ne possède pas assez de jetons IOTA pour atteindre la récompense minimale et ne peut donc pas être engagé pour {airdrop}."
         }
     },
     "exports": {

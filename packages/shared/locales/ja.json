@@ -14,14 +14,14 @@
             "body": "アプリのテーマを選択してください。"
         },
         "profile": {
-            "title": "プロファイルを作成",
+            "title": "プロフィールを作成",
             "profileName": "プロフィール名",
-            "body1": "複数のユーザープロファイルを作成してトークンを分離し、プライバシーを向上させることができます。",
+            "body1": "複数のユーザープロフィールを作成してトークンを分離し、プライバシーを向上させることができます。",
             "body2": {
-                "first": "まずは 、あなたの最初のプロファイル名から始めましょう",
-                "nonFirst": "まずは 、あなたのプロファイル名から始めましょう"
+                "first": "まずは 、あなたの最初のプロフィール名から始めましょう",
+                "nonFirst": "まずは 、あなたのプロフィール名から始めましょう"
             },
-            "addMore": "後でプロファイルを追加できます",
+            "addMore": "後でプロフィールを追加できます",
             "developer": {
                 "label": "開発者プロフィール",
                 "info": "パブリックおよびプライベートIOTAネットワークに接続します"
@@ -76,7 +76,7 @@
         },
         "pin": {
             "title": "PIN コードを設定",
-            "body1": "以下に6桁のPINを入力してください。プロファイルにアクセスすためにPINが必要になります。",
+            "body1": "以下に6桁のPINを入力してください。プロフィールにアクセスすためにPINが必要になります。",
             "body2": "数字のみを使用してください"
         },
         "confirmPin": {
@@ -136,7 +136,7 @@
             "importFile": "ファイルのバックアップがあります",
             "importFileDescription": "SeedvaultまたはStrongholdをアップロード",
             "importLedger": "Ledgerのバックアップがあります",
-            "importLedgerDescription": "Ledgerプロファイルを復元または移行する"
+            "importLedgerDescription": "Ledgerプロフィールを復元または移行する"
         },
         "importFromText": {
             "seed": {
@@ -159,11 +159,11 @@
         },
         "importFromLedger": {
             "title": "Ledgerを復元または移行する",
-            "body": "既存のFirefly Ledgerプロファイルを復元するか、Trinityから資金を移行します。",
+            "body": "既存のFirefly Ledgerプロフィールを復元するか、Trinityから資金を移行します。",
             "haveFireflyLedger": "Firefly Ledgerのバックアップがあります",
-            "haveFireflyLedgerDescription": "Firefly プロファイルを復元",
+            "haveFireflyLedgerDescription": "Firefly プロフィールを復元",
             "haveTrinityLedger": "Trinity Ledgerのバックアップがあります",
-            "haveTrinityLedgerDescription": "Trinityプロファイルを移行"
+            "haveTrinityLedgerDescription": "Trinityプロフィールを移行"
         },
         "connectLedger": {
             "title": "LedgerをFireflyに接続する",
@@ -302,8 +302,8 @@
                 "description": "質問に対する答えを見つけるか、問題のヘルプを表示します"
             },
             "profile": {
-                "title": "プロファイル",
-                "description": "プロファイル名を変更するか、アバターを設定します"
+                "title": "プロフィール",
+                "description": "プロフィール名を変更するか、アバターを設定します"
             },
             "sync": {
                 "title": "ウォレットを同期",
@@ -359,8 +359,8 @@
                 "description": "このオプションを選択すると、以前に非表示になっていたウォレットが表示されます"
             },
             "deleteProfile": {
-                "title": "プロファイルを削除",
-                "description": "プロファイル、ウォレット、取引履歴全体を削除します。バックアップがあることを確認してください"
+                "title": "プロフィールを削除",
+                "description": "プロフィール、ウォレット、取引履歴全体を削除します。バックアップがあることを確認してください"
             },
             "deepLinks": {
                 "title": "IOTAリンク",
@@ -523,7 +523,7 @@
                 },
                 "shimmer": {
                     "name": "Shimmer",
-                    "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
+                    "description": "IOTAの主要なイノベーションを進めるためにインセンティブを与えられたステージングネットワーク。 何が起こります。 Shimmerの進化はあなた次第です。"
                 }
             }
         }
@@ -610,7 +610,7 @@
         "switchNetwork": {
             "title": "ネットワークを切り替える",
             "newNetwork": "新しいネットワーク",
-            "resetWarning": "ネットワークを変更すると、ログアウトされ、このプロファイルのすべてのアカウント、残高、および取引履歴がリセットされます",
+            "resetWarning": "ネットワークを変更すると、ログアウトされ、このプロフィールのすべてのアカウント、残高、および取引履歴がリセットされます",
             "switchingNetwork": "ネットワークの切り替え中",
             "typePassword": "パスワードを入力して切り替えます:"
         },
@@ -619,8 +619,8 @@
             "empty": "エラーログは空です。"
         },
         "deleteProfile": {
-            "title": "プロファイルを削除",
-            "confirmation": "このプロファイルを削除してもよろしいですか？この操作を行うと元には 戻せません。",
+            "title": "プロフィールを削除",
+            "confirmation": "このプロフィールを削除してもよろしいですか？この操作を行うと元には 戻せません。",
             "typePassword": "パスワードを入力して確認してください。"
         },
         "diagnostics": {
@@ -711,8 +711,8 @@
         },
         "exportTransactionHistory": {
             "title": "取引履歴を出力する",
-            "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
-            "profileName": "プロファイル名:",
+            "body": "選択したウォレットの取引履歴をエクスポートします。エクスポートされたファイルは .csv 形式になります。",
+            "profileName": "プロフィール名:",
             "accountName": "アカウント名:",
             "typePassword": "出力を許可するにはパスワードを入力してください"
         },
@@ -726,11 +726,11 @@
             "title": "ステーキング管理",
             "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
             "totalFundsStaked": "ステークの合計",
-            "stakedSuccessfully": "Your funds have been staked for {account}.",
-            "unstakedSuccessfully": "Your funds have been unstaked for {account}."
+            "stakedSuccessfully": "あなたの資金は {account}にステークされました。",
+            "unstakedSuccessfully": "あなたの資金は {account}にステーク解除されました。"
         },
         "stakingConfirmation": {
-            "title": "Airdrop Participation",
+            "title": "エアドロップへの参加",
             "subtitleStake": "ステークしようとしています",
             "subtitleMerge": "You are about to merge",
             "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
@@ -945,7 +945,7 @@
         "pending": "保留中",
         "noAccounts": "ウォレットがありません。ウォレットを作成してください。",
         "loadingAccounts": "読み込んでいます。お待ちください...",
-        "addProfile": "プロファイルを追加",
+        "addProfile": "プロフィールを追加",
         "noRecentHistory": "最近の履歴はありません",
         "firstSync": "履歴を同期中、しばらく時間がかかることがあります...",
         "transferSyncing": "ウォレットを同期中",
@@ -966,7 +966,7 @@
         "passwordUpdating": "パスワードを更新しています...",
         "passwordSuccess": "パスワードを更新しました",
         "passwordFailed": "パスワードの更新に失敗しました",
-        "syncing": "Syncing",
+        "syncing": "同期中",
         "syncingAccounts": "ウォレットを同期中...",
         "exportingStronghold": "Strongholdのエクスポート中...",
         "exportingStrongholdSuccess": "Strongholdのエクスポートに成功しました",
@@ -980,7 +980,7 @@
         "passwordStrength2": "少し弱い",
         "passwordStrength3": "普通",
         "passwordStrength4": "とても強い",
-        "creatingProfile": "プロファイルを作成しています。お待ちください...",
+        "creatingProfile": "プロフィールを作成しています。お待ちください...",
         "fundMigration": "資金の移行",
         "accountRemoved": "このウォレットは非表示になっています。表示にすると転送ができます。",
         "receivingTo": "{account} へ着金中",
@@ -1015,13 +1015,13 @@
         "yearsAgo": "{time, plural, one {# 年 } other {# 年 }} 前"
     },
     "times": {
-        "second": "{time, plural, one {1 second} other {# seconds}}",
-        "minute": "{time, plural, one {1 minute} other {# minutes}}",
-        "hour": "{time, plural, one {1 hour} other {# hours}}",
-        "day": "{time, plural, one {1 day} other {# days}}",
-        "week": "{time, plural, one {1 week} other {# weeks}}",
-        "month": "{time, plural, one {1 month} other {# months}}",
-        "year": "{time, plural, one {1 year} other {# years}}"
+        "second": "{time, plural, one {1 秒} other {# 秒}}",
+        "minute": "{time, plural, one {1 分} other {# 分}}",
+        "hour": "{time, plural, one {1 時間} other {# 時間}}",
+        "day": "{time, plural, one {1 日} other {# 日}}",
+        "week": "{time, plural, one {1 週間} other {# 週間}}",
+        "month": "{time, plural, one {1 ヶ月} other {# ヶ月}}",
+        "year": "{time, plural, one {1 年} other {# 年}}"
     },
     "notifications": {
         "valueTx": "{{account}}に{{value}}を着金中",
@@ -1055,10 +1055,10 @@
     },
     "error": {
         "profile": {
-            "length": "プロファイル名は{length, plural, one {1 文字} other {# 文字}}より長くすることはできません。",
-            "duplicate": "この名前のプロファイルは既に存在します。",
+            "length": "プロフィール名は{length, plural, one {1 文字} other {# 文字}}より長くすることはできません。",
+            "duplicate": "この名前のプロフィールは既に存在します。",
             "delete": {
-                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+                "nonEmptyAccounts": "プロフィールを削除する前に、すべての残高を転送する必要があります。"
             }
         },
         "password": {
@@ -1088,10 +1088,10 @@
             "empty": "新しいウォレットを作成する前に、最新のウォレットを使用する必要があります。",
             "notEmpty": "このウォレットを削除する前に残高を転送する必要があります。",
             "duplicate": "この名前のウォレットは既に存在して います。",
-            "tilde": "プロファイル名は '~' 記号で始まることはできません。",
-            "control": "プロファイル名に制御文字を含めることはできません。",
-            "startDot": "プロファイル名は '.' 記号で始まることはできません。",
-            "chars": "プロファイル名には次の記号を含めることはできません<>:\"/\\|?*",
+            "tilde": "プロフィール名は '~' 記号で始まることはできません。",
+            "control": "プロフィール名に制御文字を含めることはできません。",
+            "startDot": "プロフィール名は '.' 記号で始まることはできません。",
+            "chars": "プロフィール名には次の記号を含めることはできません<>:\"/\\|?*",
             "index": "あなたのアカウントインデックスは0から2,147,483,647の間の数字でなければなりません。",
             "page": "あなたのアカウントページは0から2,147,483,647の間の数字でなければなりません。",
             "syncing": "ウォレットの同期中にエラーが発生しました。"
@@ -1158,7 +1158,7 @@
             "generateAddress": "アドレスの作成 中にエラーが発生しました。",
             "timeout": "Ledgerデバイスがタイムアウトしました。",
             "disconnected": "Ledgerデバイスが切断されました。",
-            "noStronghold": "Unable to use Stronghold with Ledger profile."
+            "noStronghold": "LedgerプロフィールでStrongholdを使用できません。"
         },
         "popup": {
             "preventClose": "このポップアップは閉じることができません。"
@@ -1170,10 +1170,10 @@
             "cannotDecodeBech32": "Bech32 アドレスとして文字列をデコードできません。"
         },
         "participation": {
-            "cannotUseAccount": "Unable to use the specified account.",
-            "cannotFindStakingEvent": "Unable to find staking event.",
-            "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
-            "invalidStakingEventId": "Invalid staking event ID."
+            "cannotUseAccount": "指定されたアカウントを使用できません。",
+            "cannotFindStakingEvent": "ステーキングイベントを見つけることができません。",
+            "cannotVisitAirdropWebsite": "{airdrop} ウェブサイトを開くことができません。",
+            "invalidStakingEventId": "不正なステーキングイベントIDです。"
         }
     },
     "warning": {
@@ -1181,7 +1181,7 @@
             "http": "HTTP 経由のノードを使用すると、トラフィックは暗号化されず、セキュリティ上のリスクを引き起こす可能性があります。"
         },
         "participation": {
-            "noAccounts": "You do not have any IOTA."
+            "noAccounts": "IOTAを持っていません。"
         }
     },
     "tooltips": {
@@ -1195,47 +1195,47 @@
         },
         "stakingIndicator": {
             "upcoming": {
-                "title": "Staking has not started yet",
-                "body": "Check back later. The staking event has not begun."
+                "title": "ステーキングはまだ開始されていません",
+                "body": "後で確認してください。ステーキングイベントはまだ始まっていません。"
             },
             "commencing": {
-                "title": "Pre-staking is now open",
+                "title": "事前ステーキングは現在開いています",
                 "body": "Pre-stake your tokens, and once staking begins, you will automatically start receiving rewards every 10 seconds."
             },
             "activeHolding": {
-                "title": "Staking is now in progress",
-                "body": "Good job. You will receive rewards every 10 seconds."
+                "title": "ステーキングが進行中です",
+                "body": "よくできました。10秒ごとに報酬がもらえます。"
             },
             "inactiveHolding": {
-                "title": "Staking is now open",
-                "body": "Stake your IOTA tokens to receive rewards every 10 seconds."
+                "title": "ステーキングは現在開いています",
+                "body": "IOTAトークンをステークすると、10秒ごとに報酬がもらえます。"
             },
             "inactive": {
-                "title": "No staking events detected",
+                "title": "ステーキングイベントが検出されませんでした",
                 "body": "Open network configuration in Advanced Settings and make sure the current node has the \"Participation\" feature by clicking \"View Info\"."
             },
             "ended": {
                 "title": "ステーキングは終了しました",
-                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
-                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
+                "bodyAboveRewardMin": "各ネットワークの起動時に、Assembly とShimmer の報酬がウォレットに配布されます。",
+                "bodyBelowRewardMin": "最低限のエアドロップ報酬に到達するのに十分なIOTAをステークしていません。"
             }
         },
         "partiallyStakedFunds": {
             "title": "新しい解除したステーク: {amount}",
             "titleNoFunds": "新しい解除したステーク",
-            "preBody": "You have received tokens on a staked wallet.",
+            "preBody": "ステークされたウォレットにトークンを受け取りました。",
             "body": "You need to manually stake these new funds to receive airdrop rewards for them."
         },
         "stakingMinRewards": {
             "title": "Below minimum reward value",
             "titleMinBalance": "{amount} minimum balance required",
-            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
+            "bodyMinBalance": "このウォレットには最低エアドロップ報酬に達するのに十分なIOTAトークンがないため、ステークすることができません。",
             "continue": "Please continue staking for another {duration}.",
-            "bodyBelowMin": "This wallet has not reached the minimum reward value for {airdrop} ({airdropRewardMin}).",
+            "bodyBelowMin": "このウォレットは {airdrop} ({airdropRewardMin} )の最低報酬に達していません。",
             "bodyWillReachMin": "You must stake for another {duration} to reach the minimum.",
             "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
             "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
-            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+            "bodyMinBalanceAirdrop": "このウォレットには、 {airdrop}の最低エアドロップ報酬に達するのに十分なIOTAトークンがありません。"
         }
     },
     "exports": {

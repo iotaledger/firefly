@@ -966,7 +966,7 @@
         "passwordUpdating": "Wagwoord opdatering aan die gang...",
         "passwordSuccess": "Wagwoord suksesvol opgedateer",
         "passwordFailed": "Kon nie wagwoord opdateer nie",
-        "syncing": "Syncing",
+        "syncing": "Sinchroniseer",
         "syncingAccounts": "Sinkroniseer beursie...",
         "exportingStronghold": "Voer Stronghold uit...",
         "exportingStrongholdSuccess": "Die Stronghold is suksesvol uitgevoer",
@@ -1015,13 +1015,13 @@
         "yearsAgo": "{time, plural, one {# jaar} other {# jare}} terug"
     },
     "times": {
-        "second": "{time, plural, one {1 second} other {# seconds}}",
-        "minute": "{time, plural, one {1 minute} other {# minutes}}",
-        "hour": "{time, plural, one {1 hour} other {# hours}}",
-        "day": "{time, plural, one {1 day} other {# days}}",
-        "week": "{time, plural, one {1 week} other {# weeks}}",
-        "month": "{time, plural, one {1 month} other {# months}}",
-        "year": "{time, plural, one {1 year} other {# years}}"
+        "second": "{time, plural, one {1 sekonde} other {# sekondes}}",
+        "minute": "{time, plural, one {1 minuut} other {# minute}}",
+        "hour": "{time, plural, one {1 uur} other {# ure}}",
+        "day": "{time, plural, one {1 dag} other {# dae}}",
+        "week": "{time, plural, one {1 week} other {# weke}}",
+        "month": "{time, plural, one {1 maand} other {# maande}}",
+        "year": "{time, plural, one {1 jaar} other {# jare}}"
     },
     "notifications": {
         "valueTx": "Ontvang {{value}} na {{account}}",
@@ -1181,7 +1181,7 @@
             "http": "Die gebruik van node oor HTTP laat verkeer ongeënkripteer wees en kan 'n sekuriteitsrisiko inhou."
         },
         "participation": {
-            "noAccounts": "You do not have any IOTA."
+            "noAccounts": "Jy hey geen IOTA nie."
         }
     },
     "tooltips": {
@@ -1216,8 +1216,8 @@
             },
             "ended": {
                 "title": "Staking het geëindig",
-                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
-                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
+                "bodyAboveRewardMin": "Assembly en Shimmer belonings sal aan jou beursies uitgedeel word wanneer elk van die onderskeie netwerke begin.",
+                "bodyBelowRewardMin": "Jy het nie genoeg IOTA ingesit om die minimum belonings te bereik nie."
             }
         },
         "partiallyStakedFunds": {
@@ -1229,13 +1229,13 @@
         "stakingMinRewards": {
             "title": "Onder minimum beloningswaarde",
             "titleMinBalance": "{amount} minimum balans benodig",
-            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
+            "bodyMinBalance": "Hierdie beursie het nie genoeg IOTA-tokens om die minimum beloning te bereik nie en kan dus nie ge stake word nie.",
             "continue": "Gaan asseblief voort om vir 'n nog {duration} te stake.",
             "bodyBelowMin": "Hierdie beursie het nie die minimum beloningswaarde bereik vir {airdrop} nie. ({airdropRewardMin}).",
             "bodyWillReachMin": "Jy moet nog vir {duration} stake om die minimum te bereik.",
-            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
-            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
-            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+            "bodyWillNotReachMin": "Jy sal nie die minimum bereik gedurende die oorblywende staking periode nie, tensy jy meer IOTA insit.",
+            "bodyDidNotReachMin": "Jy het nie genoeg IOTA ingesit om die minimum belonings te bereik vir {airdrop} nie ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "Hierdie beursie het nie genoeg IOTA-tokens om die minimum beloning te bereik vir {airdrop}."
         }
     },
     "exports": {

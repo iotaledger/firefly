@@ -966,7 +966,7 @@
         "passwordUpdating": "Aggiornamento password...",
         "passwordSuccess": "Password aggiornata con successo",
         "passwordFailed": "Aggiornamento password non riuscito",
-        "syncing": "Syncing",
+        "syncing": "Sincronizzazione in corso",
         "syncingAccounts": "Sincronizzazione wallet...",
         "exportingStronghold": "Esportazione stronghold...",
         "exportingStrongholdSuccess": "Stronghold esportato con successo",

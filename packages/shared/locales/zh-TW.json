@@ -2,7 +2,7 @@
     "views": {
         "onboarding1": {
             "title": "傳送、接收與管理您的 IOTA 代幣",
-            "body": "Firefly是IOTA的官方錢包。"
+            "body": "Firefly 是 IOTA 的官方錢包。"
         },
         "legal": {
             "title": "隱私政策和服務條款",
@@ -21,7 +21,7 @@
                 "first": "現在，讓我們從您的第一個設定檔名稱開始。",
                 "nonFirst": "現在，讓我們從您的設定檔名稱開始。"
             },
-            "addMore": "您可以在之後添加更多的設定檔",
+            "addMore": "您稍後可以添加更多設定檔。",
             "developer": {
                 "label": "開發者設定檔",
                 "info": "連線到公共和私人的 IOTA 網路"
@@ -95,7 +95,7 @@
             "body1": "在 Recovery Kit 中，按照顯示的確切順序寫下單字。",
             "body2": "將此內容保密並安全地存儲。",
             "body3": "進行書面備份很重要。電腦往往會故障，文件亦可能會損壞。",
-            "revealRecoveryPhrase": "揭示助記詞",
+            "revealRecoveryPhrase": "顯示助記詞",
             "hideRecoveryPhrase": "隱藏助記詞"
         },
         "verifyRecoveryPhrase": {
@@ -109,7 +109,7 @@
             "title": "備份至一個 Stronghold 檔案",
             "body1": "輸入密碼以將您的錢包備份至 Stronghold 檔案。您的密碼將用於加密此備份檔案。",
             "body2": "數位備份之所以重要的原因：",
-            "reason1": "無需輸入助記詞即可輕鬆恢復錢包",
+            "reason1": "無需輸入助記詞即可輕鬆還原錢包",
             "reason2": "將您的錢包導入其他設備",
             "reason3": "恢復您的完整交易記錄"
         },
@@ -232,8 +232,8 @@
             "incorrectSeedVaultPassword": "SeedVault 密碼錯誤。",
             "noDataSeedVault": "在 SeedVault 中找不到資料。",
             "signingBundle": "交易組簽發中",
-            "broadcastingBundle": "交易組廣播中",
-            "miningBundle": "交易組挖掘中",
+            "broadcastingBundle": "廣播交易組",
+            "miningBundle": "挖掘交易組",
             "problemRestoringWallet": "還原您的錢包時出現網路錯誤。 請再試一次。",
             "minimumMigrationAmountSpentAddresses": "每個「已支出地址」的最小遷移數量是 1Mi。如果您的餘額看起來不對，請再次檢查。",
             "tooManyAddressesToMigrate": "您有太多小額地址需要遷移。若您的餘額看起來不對，請再次檢查。",
@@ -257,7 +257,7 @@
             "title": "安全檢查已完成",
             "body1": "我們已經計算出安全風險層級，再度運行這個程序可以降低您的風險層級。",
             "body2": "當您對各項風險層級滿意時，請按「繼續」。",
-            "rerun": "重新評定所選的地址",
+            "rerun": "重新執行所選的地址",
             "continueMigration": "繼續遷移"
         },
         "securingSpentAddresses": {
@@ -419,7 +419,7 @@
             },
             "documentation": {
                 "title": "文獻資料",
-                "description": "查看文獻以獲取工作原理的深入說明"
+                "description": "查看文件以獲取有關工作原理的深入說明"
             },
             "faq": {
                 "title": "常見問題",
@@ -576,7 +576,7 @@
             "title": "{name} 地址記錄",
             "currentBalance": "餘額：{balance}",
             "internal": "內部地址",
-            "external": "入金地址"
+            "external": "存款地址"
         },
         "node": {
             "titleAdd": "增加節點",
@@ -585,8 +585,8 @@
             "titleRemoveAll": "移除所有節點",
             "titleDetails": "節點詳細資訊",
             "titleInfo": "節點資訊",
-            "addingNode": "增加節點中...",
-            "updatingNode": "更新節點中...",
+            "addingNode": "增加節點",
+            "updatingNode": "更新節點",
             "loadingNodeInfo": "節點資訊讀取中...",
             "nodeAddress": "節點地址",
             "optionalUsername": "使用者名稱 (選填)",
@@ -611,7 +611,7 @@
             "title": "切換網路",
             "newNetwork": "新的網路",
             "resetWarning": "變更網路會登出並重置所有帳戶、餘額和此設定檔的交易記錄。",
-            "switchingNetwork": "切換網路中...",
+            "switchingNetwork": "切換網路",
             "typePassword": "輸入密碼以切換到："
         },
         "errorLog": {
@@ -648,16 +648,16 @@
         "riskFunds": {
             "title": "警告：資金在遷移過程中有風險",
             "body1": "強烈建議您在轉移前保管好資金．如果您沒有安全保管資金則其會處於竊盜風險中．",
-            "body2": "建議您為了處於中級風險以上的地址重新運行此步驟"
+            "body2": "建議您，為處於中級風險以上的地址，重新運行此步驟"
         },
         "missingBundle": {
             "title": "警告：資金在遷移過程中有風險",
-            "body": "您有資金處於「已支出地址」中，但是無法搜尋到能確保他們安全的資訊．這可能是發生如果您在很久以前發送交易．您仍舊可以繼續但{value} 在遷移過程中具有風險．",
-            "learnMore": "學習更多關於「已支出地址」",
+            "body": "您有資金處於「已支出地址」中，但是無法搜尋到能確保它們安全所需的資訊。這可能發生於您很久之前所發起的交易。您仍舊可以繼續，但{value} 在遷移過程中具有風險。",
+            "learnMore": "瞭解更多關於「已支出地址」",
             "proceed": "我了解此風險"
         },
         "snapshot": {
-            "title": "正在進行網絡升級",
+            "title": "正在進行網路升級",
             "body": "Chrysalis 網絡升級已經開始。",
             "bodyMigration": "遷移被禁用，直到網路升級完成。",
             "bodyFirefly": "Firefly 在網路更新完成前將無法使用。網路更新後仍可進行資金遷移。"
@@ -719,7 +719,7 @@
         "stakingNotice": {
             "upcomingDate": "質押尚未開始",
             "commencingDate": "質押尚未開始",
-            "body": "在質押正式啟動前預先質押您的資金，您將在質押啟動時自動開始獲得獎勵。",
+            "body": "在質押正式啟動前預先質押你的資金，在質押啟動時你就能自動開始收到質押獎勵。",
             "ok": "好的，我瞭解了"
         },
         "stakingManager": {
@@ -731,7 +731,7 @@
         },
         "stakingConfirmation": {
             "title": "參加空投",
-            "subtitleStake": "您將要質押",
+            "subtitleStake": "您即將質押",
             "subtitleMerge": "您即將合併",
             "bodyStake": "如果不想同時參與兩項空投，您可以在下面選擇退出。您可以隨時解除質押並重新質押以再次加入。",
             "bodyMerge": "你的資金將爲 {airdrop} 質押。要切換你想參與的空投項目，請解除質押此錢包並重新質押。",
@@ -944,7 +944,7 @@
         "confirmed": "已確認",
         "pending": "等待中",
         "noAccounts": "您沒有錢包，請創建一個。",
-        "loadingAccounts": "加載請稍候...",
+        "loadingAccounts": "載入中，請稍候...",
         "addProfile": "添加個人檔案",
         "noRecentHistory": "沒有最近的歷史紀錄",
         "firstSync": "正在同步歷史記錄，這可能需要一段時間...",
@@ -966,7 +966,7 @@
         "passwordUpdating": "正在更新密碼...",
         "passwordSuccess": "成功更新密碼",
         "passwordFailed": "更新密碼失敗",
-        "syncing": "Syncing",
+        "syncing": "同步中",
         "syncingAccounts": "同步錢包中...",
         "exportingStronghold": "正在導出 Stronghold...",
         "exportingStrongholdSuccess": "導出 Stronghold 成功",
@@ -996,7 +996,7 @@
         "legacyNetwork": "舊版網路",
         "capsLock": "大寫鎖定已啟用",
         "version": "版本 {version}",
-        "unknown": "不明",
+        "unknown": "未知",
         "none": "無",
         "staked": "已質押",
         "unstaked": "已解除質押",
@@ -1015,13 +1015,13 @@
         "yearsAgo": "{time, plural, one {# 年} other {# 年}} 前"
     },
     "times": {
-        "second": "{time, plural, one {1 second} other {# seconds}}",
-        "minute": "{time, plural, one {1 minute} other {# minutes}}",
-        "hour": "{time, plural, one {1 hour} other {# hours}}",
-        "day": "{time, plural, one {1 day} other {# days}}",
-        "week": "{time, plural, one {1 week} other {# weeks}}",
-        "month": "{time, plural, one {1 month} other {# months}}",
-        "year": "{time, plural, one {1 year} other {# years}}"
+        "second": "{time, plural, one {1 秒} other {# 秒}}",
+        "minute": "{time, plural, one {1 分鐘} other {# 分鐘}}",
+        "hour": "{time, plural, one {1 小時} other {# 小時}}",
+        "day": "{time, plural, one {1 天} other {# 天}}",
+        "week": "{time, plural, one {1 週} other {# 週}}",
+        "month": "{time, plural, one {1 月} other {# 月}}",
+        "year": "{time, plural, one {1 年} other {# 年}}"
     },
     "notifications": {
         "valueTx": "從 {{account}} 收到 {{value}}",
@@ -1032,7 +1032,7 @@
         "downloadingUpdate": "下載更新中",
         "updateReady": "準備更新",
         "updateError": "更新時發生錯誤，請重試。",
-        "restartInstall": "重新啟動以進行安裝",
+        "restartInstall": "重新安裝",
         "calcMinutesRemaining": "正在計算剩餘時間...",
         "minutesRemaining": "{minutes, plural, one {剩下 1 分鐘} other {剩下 # 分鐘}}",
         "copiedToClipboard": "已複製到剪貼簿",
@@ -1040,7 +1040,7 @@
         "fundsAvailableSoon": "您的資金很快就可以使用",
         "exportTransactionHistory": {
             "success": "{accountAlias} 的交易紀錄已順利儲存到 {filePath}",
-            "error": "無法匯出 {accountAlias} 的交易記錄"
+            "error": "無法匯出帳戶 {accountAlias} 的交易記錄"
         },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "請登入以發起 IOTA 連結",
@@ -1070,7 +1070,7 @@
             "repeats": "像 ’aaa‘ 這樣的重複格式很容易被猜中。",
             "repeats2": "像 ‘abcabcabc’ 這樣重複的格式很容易被猜中。",
             "sequence": "字符序列很容易被猜中。",
-            "years": "最近的年份很容易猜中。",
+            "years": "最近的年份很容易被猜中。",
             "dates": "日期很容易被猜中。",
             "common": "這是很常見的密碼。",
             "similar": "這和常見的密碼相似。",
@@ -1114,7 +1114,7 @@
         },
         "node": {
             "invalid": "請輸入有效的 URL。",
-            "dns": "無法找到此節點的DNS解析。",
+            "dns": "無法找到此節點的 DNS 解析。",
             "timedOut": "連線逾時。",
             "refused": "此連線被拒絕。",
             "handshake": "無法與節點進行連線交握。",
@@ -1181,7 +1181,7 @@
             "http": "透過 HTTP 未加密連接來使用節點，可能會造成安全性風險。"
         },
         "participation": {
-            "noAccounts": "You do not have any IOTA."
+            "noAccounts": "您沒有任何IOTA。"
         }
     },
     "tooltips": {
@@ -1216,8 +1216,8 @@
             },
             "ended": {
                 "title": "質押現已結束",
-                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
-                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
+                "bodyAboveRewardMin": "Assembly 和 Shimmer 獎勵將於各自的網路啟動後，分別發放到您的錢包。",
+                "bodyBelowRewardMin": "您沒有質押足夠的 IOTA 來達到空投獎勵的最低門檻。"
             }
         },
         "partiallyStakedFunds": {
@@ -1229,13 +1229,13 @@
         "stakingMinRewards": {
             "title": "低於最低獎勵門檻",
             "titleMinBalance": "須要最低餘額 {amount}",
-            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
+            "bodyMinBalance": "此錢包的 IOTA 代幣未達最低空投獎勵門檻，故無法質押。",
             "continue": "請再繼續質押 {duration}。",
             "bodyBelowMin": "此錢包未達 {airdrop} ({airdropRewardMin}) 的最低獎勵門檻。",
             "bodyWillReachMin": "您必須再質押 {duration} 才能達到最低門檻。",
-            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
-            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
-            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+            "bodyWillNotReachMin": "除非您增加更多 IOTA，在剩餘的質押期間內您將無法達到最低的獎勵門檻。",
+            "bodyDidNotReachMin": "您沒有質押足夠的IOTA來達到 {airdrop} ({airdropRewardMin}) 的最低獎勵。",
+            "bodyMinBalanceAirdrop": "這個錢包的 IOTA 代幣數量未達 {airdrop} 空投獎勵的最低門檻。"
         }
     },
     "exports": {

@@ -602,7 +602,7 @@
                 "bech32HRP": "Bech32 HRP",
                 "features": "Features",
                 "confirmedMilestoneIndex": "Confirmed milestone index",
-                "pruningIndex": "Pruning index",
+                "pruningIndex": "छंटाई अनुक्रमणिका",
                 "messagesPerSecond": "मेस्सगेस प्रति सेकंड",
                 "referencedRate": "संदर्भित दर"
             }
