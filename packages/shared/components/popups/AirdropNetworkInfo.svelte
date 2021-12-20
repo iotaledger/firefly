@@ -1,9 +1,35 @@
 <script lang="typescript">
-    import { Illustration, Text } from 'shared/components'
+    import { Illustration, Link, Text } from 'shared/components'
+    import { Electron } from 'shared/lib/electron'
     import { localize } from 'shared/lib/i18n'
-    import type { StakingAirdrop } from 'shared/lib/participation/types'
+    import { showAppNotification } from 'shared/lib/notifications'
+    import { StakingAirdrop } from 'shared/lib/participation/types'
+    import { capitalize } from 'shared/lib/utils'
 
     export let airdrop: StakingAirdrop
+
+    const handleLearnMoreClick = (): void => {
+        const url = getLearnMoreUrl()
+        if (!url) {
+            showAppNotification({
+                type: 'error',
+                message: localize('error.participation.cannotVisitAirdropWebsite', {
+                    values: { airdrop: capitalize(airdrop) },
+                }),
+            })
+        }
+        Electron.openUrl(getLearnMoreUrl())
+    }
+    const getLearnMoreUrl = (): string => {
+        switch (airdrop) {
+            case StakingAirdrop.Assembly:
+                return 'https://assembly.sc'
+            case StakingAirdrop.Shimmer:
+                return 'https://shimmer.network'
+            default:
+                return ''
+        }
+    }
 </script>
 
 <div class="mb-5 text-center">
@@ -13,4 +39,5 @@
 <div class="flex flex-col flex-wrap space-y-3">
     <Text type="p">{localize(`popups.${airdrop}-info.body1`)}</Text>
     <Text type="p">{localize(`popups.${airdrop}-info.body2`)}</Text>
+    <Link onClick={handleLearnMoreClick} classes="text-14">{localize('actions.visitWebsite')}</Link>
 </div>
