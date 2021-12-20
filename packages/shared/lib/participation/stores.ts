@@ -144,11 +144,13 @@ export const partiallyUnstakedAmount: Readable<number> = derived(
 
         const _eval = (overview: AccountParticipationOverview): number => {
             const assemblyPartialFunds =
-                overview.assemblyStakedFunds > 0 && overview.assemblyUnstakedFunds > 0
-                    ? overview.assemblyUnstakedFunds
+                overview?.assemblyStakedFunds > 0 && overview?.assemblyUnstakedFunds > 0
+                    ? overview?.assemblyUnstakedFunds
                     : 0
             const shimmerPartialFunds =
-                overview.shimmerStakedFunds > 0 && overview.shimmerUnstakedFunds > 0 ? overview.shimmerUnstakedFunds : 0
+                overview?.shimmerStakedFunds > 0 && overview?.shimmerUnstakedFunds > 0
+                    ? overview?.shimmerUnstakedFunds
+                    : 0
 
             return Math.max(assemblyPartialFunds, shimmerPartialFunds)
         }
