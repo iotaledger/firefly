@@ -77,7 +77,7 @@
     })
 
     const handleLearnMoreClick = (): void => {
-        Electron.openUrl('https://firefly.iota.org')
+        Electron.openUrl('https://blog.iota.org/iota-staking-start/')
     }
 </script>
 
