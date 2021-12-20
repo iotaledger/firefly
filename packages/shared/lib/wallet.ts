@@ -61,6 +61,7 @@ import type {
     WalletAccount,
     WalletState,
 } from './typings/wallet'
+import { deepCopy } from './helpers'
 
 // PARTICIPATION
 import {
@@ -175,6 +176,10 @@ interface IWalletApi {
     verifyMnemonic(
         mnemonic: string,
         callbacks: { onSuccess: (response: Event<string>) => void; onError: (err: ErrorEventPayload) => void }
+    )
+    getAccount(
+        accountId: AccountIdentifier,
+        callbacks: { onSuccess: (response: Event<Account>) => void; onError: (err: ErrorEventPayload) => void }
     )
     getAccounts(callbacks: {
         onSuccess: (response: Event<Account[]>) => void
@@ -846,6 +851,50 @@ function displayParticipationNotification(pendingParticipation: PendingParticipa
 }
 
 /**
+ * NOTE: This method mutates account object
+ * Creates a message pair for internal messages and adds it to the account messages
+ *
+ * @method addMessagesPair
+ *
+ * @param {Account} account
+ *
+ * @returns {void}
+ */
+export function addMessagesPair(account: Account): void {
+    // Only keep messages with a payload
+    account.messages = account.messages.filter((m) => m.payload)
+
+    // The wallet only returns one side of internal transfers
+    // to the same account, so create the other side by first finding
+    // the internal messages
+    const internalMessages = account.messages.filter((m) => getInternalFlag(m.payload))
+
+    for (const internalMessage of internalMessages) {
+        // Check if the message sends to another address in the same account
+        const isSelf = isSelfTransaction(internalMessage.payload, account)
+
+        if (isSelf && !isParticipationPayload(internalMessage.payload)) {
+            // It's a transfer between two addresses in the same account
+            // Try and find the other side of the pair where the message id
+            // would be the same and the incoming flag the opposite
+            const internalIncoming = getIncomingFlag(internalMessage.payload)
+            let pair: Message = internalMessages.find(
+                (m) => m.id === internalMessage.id && getIncomingFlag(m.payload) !== internalIncoming
+            )
+
+            // Can't find the other side of the pair so clone the original
+            // reverse its incoming flag and store it
+            if (!pair) {
+                pair = deepCopy(internalMessage) as Message
+                // Reverse the incoming flag for the other side of the pair
+                setIncomingFlag(pair.payload, !getIncomingFlag(pair.payload))
+                account.messages.push(pair)
+            }
+        }
+    }
+}
+
+/**
  * Initialises event listeners from wallet library
  *
  * @method initialiseListeners
@@ -1044,17 +1093,63 @@ export const initialiseListeners = (): void => {
     api.onBalanceChange({
         onSuccess(response) {
             const {
-                payload: { accountId, address, balanceChange, messageId },
+                payload: { messageId },
             } = response
 
-            updateAccountAfterBalanceChange(accountId, address, balanceChange.received, balanceChange.spent)
+            // TODO(laumair): Some parts of this logic are duplicated from when we initially fetch all accounts;
+            // Make sure this is refactored
 
-            const { balanceOverview } = get(wallet)
-            const overview = get(balanceOverview)
+            // On balance change event, get the updated account objects from wallet-rs db
+            api.getAccounts({
+                onSuccess(response) {
+                    const { accounts } = get(wallet)
 
-            const balance = overview.balanceRaw - balanceChange.spent + balanceChange.received
+                    let completeCount = 0
+                    const totalBalance = {
+                        balance: 0,
+                        incoming: 0,
+                        outgoing: 0,
+                    }
 
-            updateBalanceOverview(balance, overview.incomingRaw, overview.outgoingRaw)
+                    const latestAccounts = []
+
+                    // 1. Iterate on all accounts;
+                    // 2. Get latest metadata for all accounts (to compute the latest balance overview);
+                    // 3. Only update the account for which the balance change event emitted;
+                    // 4. Update balance overview & accounts
+                    for (const _account of response.payload) {
+                        getAccountMeta(_account.id, (metaErr, meta) => {
+                            if (!metaErr) {
+                                // Compute balance overview for each account
+                                totalBalance.balance += meta.balance
+                                totalBalance.incoming += meta.incoming
+                                totalBalance.outgoing += meta.outgoing
+
+                                addMessagesPair(_account)
+
+                                const updatedAccountInfo = prepareAccountInfo(_account, meta)
+
+                                // Keep the messages as is because they get updated through a different event
+                                // Also, we create pairs for internal messages, so best to keep those rather than reimplementing the logic here
+                                latestAccounts.push(updatedAccountInfo)
+
+                                completeCount++
+
+                                if (completeCount === response.payload.length) {
+                                    accounts.update((_accounts) => latestAccounts.sort((a, b) => a.index - b.index))
+
+                                    updateBalanceOverview(
+                                        totalBalance.balance,
+                                        totalBalance.incoming,
+                                        totalBalance.outgoing
+                                    )
+                                }
+                            }
+                        })
+                    }
+                },
+                onError(response) {},
+            })
 
             // Migration
             if (messageId === '0'.repeat(64)) {
