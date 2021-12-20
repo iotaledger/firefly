@@ -105,6 +105,13 @@
                     span {
                         @apply text-gray-500;
                     }
+                    &.darkmode {
+                        @apply bg-gray-700;
+                        @apply bg-opacity-10;
+                        span {
+                            @apply text-gray-700;
+                        }
+                    }
                 }
             }
             &.medium {
