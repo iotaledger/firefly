@@ -33,7 +33,7 @@
 {#if enableTooltip && showTooltip}
     <Tooltip anchor={tooltipAnchor} position={tooltipPosition}>
         <Text type="p" classes="text-gray-900 bold text-center">
-            {localize('general.stakingName', { values: { name } })}
+            {localize('general.staking')}: {name}
         </Text>
     </Tooltip>
 {/if}

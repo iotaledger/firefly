@@ -1005,8 +1005,7 @@
         "unstaking": "Unstaking",
         "notStaked": "Not staked",
         "stakedFunds": "Staked funds",
-        "unstakedFunds": "Unstaked funds",
-        "stakingName": "Staking: {name}"
+        "unstakedFunds": "Unstaked funds"
     },
     "dates": {
         "today": "Today",
