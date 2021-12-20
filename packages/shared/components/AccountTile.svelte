@@ -236,9 +236,6 @@
             &:hover {
                 @apply border-transparent;
             }
-            &:not(:hover) {
-                @apply bg-transparent;
-            }
             &.darkmode {
                 @apply border;
                 @apply border-solid;
@@ -252,9 +249,6 @@
             @apply border;
             @apply border-solid;
             @apply border-gray-200;
-            &:not(:hover) {
-                @apply bg-transparent;
-            }
             &:hover {
                 @apply border-transparent;
             }
