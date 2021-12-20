@@ -12,6 +12,7 @@ import {
 import { selectedAccountId } from 'shared/lib/wallet'
 import { get, readable, writable } from 'svelte/store'
 import { deepLinkRequestActive } from './deepLinking/deepLinking'
+import { closePopup } from './popup'
 import { ProfileType } from './typings/profile'
 
 /**
@@ -312,6 +313,7 @@ export const resetLedgerRoute = (): void => {
 }
 
 export const openSettings = (): void => {
+    closePopup()
     previousDashboardRoute.set(get(dashboardRoute))
     dashboardRoute.set(Tabs.Settings)
     settingsRoute.set(SettingsRoutes.Init)
