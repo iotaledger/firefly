@@ -311,34 +311,19 @@ export const isStakingForAssembly = (participations: Participation[]): boolean =
 export const isStakingPossible = (stakingEventState: ParticipationEventState): boolean =>
     stakingEventState === ParticipationEventState.Commencing || stakingEventState === ParticipationEventState.Holding
 
-const getAirdropRewardMultipler = (airdrop: StakingAirdrop): number => {
-    return airdrop === StakingAirdrop.Assembly
+const getAirdropRewardMultipler = (airdrop: StakingAirdrop): number =>
+    airdrop === StakingAirdrop.Assembly
         ? ASSEMBLY_REWARD_MULTIPLIER
         : airdrop === StakingAirdrop.Shimmer
         ? SHIMMER_REWARD_MULTIPLIER
         : 0
-}
 
 const calculateNumMilestonesUntilMinimumReward = (
     rewardsNeeded: number,
     airdrop: StakingAirdrop,
     amountStaked: number
 ): number => {
-    console.log(
-        `calculateNumMilestonesUntilMinimumReward() - rewardsNeeded: ${rewardsNeeded}, airdrop: ${airdrop}, amountStaked: ${amountStaked}`
-    )
-    console.log(
-        `calculateNumMilestonesUntilMinimumReward() -getAirdropRewardMultipler(airdrop): ${getAirdropRewardMultipler(
-            airdrop
-        )}`
-    )
-
-    let result = (rewardsNeeded * 1_000_000) / (amountStaked * getAirdropRewardMultipler(airdrop))
-    console.log(
-        `(rewardsNeeded * 1_000_000): ${
-            rewardsNeeded * 1_000_000
-        } / (amountStaked * getAirdropRewardMultipler(airdrop)): ${amountStaked * getAirdropRewardMultipler(airdrop)}`
-    )
+    const result = (rewardsNeeded * 1_000_000) / (amountStaked * getAirdropRewardMultipler(airdrop))
     return isNaN(result) ? 0 : result
 }
 
@@ -354,14 +339,12 @@ const getMinimumRewardsRequired = (rewards: number, airdrop: StakingAirdrop): nu
 
 const calculateTimeUntilMinimumReward = (rewards: number, airdrop: StakingAirdrop, amountStaked: number): number => {
     const minRewardsRequired = getMinimumRewardsRequired(rewards, airdrop)
-    console.log(`minRewardsRequired: ${minRewardsRequired}`)
     const numMilestonesUntilMinimumReward = calculateNumMilestonesUntilMinimumReward(
         minRewardsRequired,
         airdrop,
         amountStaked
     )
 
-    console.log(`milestones: ${numMilestonesUntilMinimumReward}`)
     return numMilestonesUntilMinimumReward * SECONDS_PER_MILESTONE * MILLISECONDS_PER_SECOND
 }
 
@@ -383,15 +366,11 @@ export const getTimeUntilMinimumAirdropReward = (
     airdrop: StakingAirdrop,
     format: boolean = false
 ): number | string => {
-    console.log(`account: ${account.alias}, airdrop: ${airdrop}, format: ${format}`)
-
     if (!account) return format ? getBestTimeDuration(0) : 0
 
     const rewards = getCurrentRewardsForAirdrop(account, airdrop)
     const amountStaked = account?.rawIotaBalance
     const timeRequired = calculateTimeUntilMinimumReward(rewards, airdrop, amountStaked)
-
-    console.log(`rewards: ${rewards}, amountStaked: ${amountStaked}, timeRequired: ${timeRequired}`)
 
     return format ? getBestTimeDuration(timeRequired) : timeRequired
 }
@@ -431,6 +410,7 @@ const calculateIotasUntilMinimumReward = (rewards: number, airdrop: StakingAirdr
  * @method getIotasUntilMinimumAirdropReward
  *
  * @param {WalletAccount} account
+ * @param {StakingAirdrop} airdrop
  * @param {boolean} format
  *
  * @returns {number | string}
@@ -484,7 +464,7 @@ export const canAccountReachMinimumAirdrop = (account: WalletAccount, airdrop: S
  *
  * @method getCurrentRewardsForAirdrop
  *
- * @param {AccountParticipationOverview} overview
+ * @param {WalletAccount} account
  * @param {StakingAirdrop} airdrop
  *
  * @returns {number}
@@ -503,7 +483,7 @@ export const getCurrentRewardsForAirdrop = (account: WalletAccount, airdrop: Sta
  *
  * @method getCurrentStakeForAirdrop
  *
- * @param {AccountParticipationOverview} overview
+ * @param {WalletAccount} account
  * @param {StakingAirdrop} airdrop
  *
  * @returns {number}
