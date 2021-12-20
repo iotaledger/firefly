@@ -109,7 +109,7 @@
     }
 
     let tooltipText
-    $: $participationOverview, (tooltipText = getLocalizedTooltipText())
+    $: $participationOverview, (tooltipText = getLocalizedTooltipText()), console.log($participationOverview)
 
     const getLocalizedTooltipText = (): { title: string; body: string[] } => {
         const { accounts } = get(wallet)
@@ -160,9 +160,12 @@
                 }
             } else if (!isAccountStaked(account?.id) && isStakingPossible($stakingEventState)) {
                 const timeNeededShimmer = <number>getTimeUntilMinimumAirdropReward(account, StakingAirdrop.Shimmer)
+                console.log(`shimmer: ${timeNeededShimmer} = ${getBestTimeDuration(timeNeededShimmer)}`)
                 const timeNeededAssembly = <number>getTimeUntilMinimumAirdropReward(account, StakingAirdrop.Assembly)
+                console.log(`assembly: ${timeNeededAssembly} = ${getBestTimeDuration(timeNeededAssembly)}`)
                 const remainingTime =
                     airdrop === StakingAirdrop.Assembly ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
+                console.log(`remainingTime: ${remainingTime}`)
                 const _getBody = () => {
                     let body = []
                     if (isBelowMinimumAssemblyRewards) {
