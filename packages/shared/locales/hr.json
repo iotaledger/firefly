@@ -262,7 +262,7 @@
         },
         "securingSpentAddresses": {
             "title": "Osiguravam iskorištene adrese...",
-            "body1": "Ovaj postupak trajat će {minutes, plural, one {1 minutu} few {# minute} other {# minuta}}.",
+            "body1": "Ovaj postupak trajat će {minutes, plural, one {# minutu} few {# minute} other {# minuta}}.",
             "body2": "Vaša će računalo raditi punom snagom, možda se želite posvetiti nečem drugom dok čekate završetak postupka."
         },
         "transferFragmentedFunds": {
@@ -440,8 +440,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Molimo pričekajte {time, plural, one {1 sekundu} few {# sekunde} other {# sekundi}}",
-            "incorrectAttempts": "{attempts, plural, one {1 neuspjeli pokušaj} few {# neuspjela pokušaja} other {# neuspjelih pokušaja}}"
+            "pleaseWait": "Molimo pričekajte {time, plural, one {# sekundu} few {# sekunde} other {# sekundi}}",
+            "incorrectAttempts": "{attempts, plural, one {# neuspjeli pokušaj} few {# neuspjela pokušaja} other {# neuspjelih pokušaja}}"
         },
         "dashboard": {
             "security": {
@@ -469,7 +469,7 @@
                 },
                 "strongholdBackup": {
                     "title": "Sigurnosna kopija novčanika",
-                    "weeksAgo": "Prije {weeks, plural, one {# tjedna} few {# tjedna} other {# tjedana}}"
+                    "weeksAgo": "Prije {weeks, plural, one {# tjedan} few {# tjedna} other {# tjedana}}"
                 }
             },
             "network": {
@@ -966,7 +966,7 @@
         "passwordUpdating": "Ažuriram lozinku...",
         "passwordSuccess": "Lozinka je uspješno ažurirana",
         "passwordFailed": "Ažuriranje lozinke nije uspjelo",
-        "syncing": "Syncing",
+        "syncing": "Sinkroniziram",
         "syncingAccounts": "Sinkronizacija novčanika...",
         "exportingStronghold": "Izvozim Stronghold...",
         "exportingStrongholdSuccess": "Stronghold je uspješno izvezen",
@@ -1010,18 +1010,18 @@
         "today": "Danas",
         "yesterday": "Jučer",
         "daysAgo": "Prije {time, plural, one {# dan} few {# dana} other {# dana}}",
-        "weeksAgo": "Prije {time, plural, one {# tjedna} few {# tjedna} other {# tjedana}}",
+        "weeksAgo": "Prije {time, plural, one {# tjedan} few {# tjedna} other {# tjedana}}",
         "monthsAgo": "Prije {time, plural, one {# mjesec} few {# mjeseca} other {# mjeseci}}",
         "yearsAgo": "Prije {time, plural, one {# godine} few {# godine} other {# godina}}"
     },
     "times": {
-        "second": "{time, plural, one {1 second} other {# seconds}}",
-        "minute": "{time, plural, one {1 minute} other {# minutes}}",
-        "hour": "{time, plural, one {1 hour} other {# hours}}",
-        "day": "{time, plural, one {1 day} other {# days}}",
-        "week": "{time, plural, one {1 week} other {# weeks}}",
-        "month": "{time, plural, one {1 month} other {# months}}",
-        "year": "{time, plural, one {1 year} other {# years}}"
+        "second": "{time, plural, one {# sekunda} few {# sekunde} other {# sekundi}}",
+        "minute": "{time, plural, one {# minuta} few {# minute} other {# minuta}}",
+        "hour": "{time, plural, one {# sat} few {# sata} other {# sati}}",
+        "day": "{time, plural, one {# dan} few {# dana} other {# dana}}",
+        "week": "{time, plural, one {# tjedan} few {# tjedna} other {# tjedana}}",
+        "month": "{time, plural, one {# mjesec} few {# mjeseca} other {# mjeseci}}",
+        "year": "{time, plural, one {# godina} few {# godine} other {# godina}}"
     },
     "notifications": {
         "valueTx": "Primanje {{value}} na {{account}} u tijeku",
@@ -1055,7 +1055,7 @@
     },
     "error": {
         "profile": {
-            "length": "Ime profila ne smije biti dulje od {length, plural, one {1 znaka} few {# znaka} other {# znakova}}.",
+            "length": "Ime profila ne smije biti dulje od {length, plural, one {# znaka} few {# znaka} other {# znakova}}.",
             "duplicate": "Profil s ovim imenom već postoji.",
             "delete": {
                 "nonEmptyAccounts": "Potrebno je prebaciti sva sredstva prije brisanja profila."
@@ -1076,15 +1076,15 @@
             "similar": "Ovo je preslično često korištenoj lozinki.",
             "word": "Jednu je riječ lako pogoditi.",
             "incorrect": "Lozinka nije točna.",
-            "length": "Lozinka ne smije biti dulja od {length, plural, one {1 znaka} few {# znaka} other {# znakova}}."
+            "length": "Lozinka ne smije biti dulja od {length, plural, one {# znaka} few {# znaka} other {# znakova}}."
         },
         "pincode": {
-            "length": "Vaš PIN mora se sastojati od {length, plural, one {1 znaka} few {# znaka} other {# znakova}}.",
+            "length": "Vaš PIN se mora sastojati od {length, plural, one {# znaka} few {# znaka} other {# znakova}}.",
             "match": "PINovi se ne podudaraju.",
             "incorrect": "Vaš trenutni PIN je netočan."
         },
         "account": {
-            "length": "Ime novčanika ne smije biti dulje od {length, plural, one {1 znaka} few {# znaka} other {# znakova}}.",
+            "length": "Ime novčanika ne smije biti dulje od {length, plural, one {# znaka} few {# znaka} other {# znakova}}.",
             "empty": "Morate upotrijebiti najnoviji novčanik prije no što možete stvoriti još jedan.",
             "notEmpty": "Morate prebaciti sredstva drugdje prije no što možete obrisati novčanik.",
             "duplicate": "Novčanik s ovim imenom već postoji.",
@@ -1097,7 +1097,7 @@
             "syncing": "Došlo je do greške prilikom sinkroniziranja vaših novčanika."
         },
         "send": {
-            "addressLength": "Adrese moraju sadržavati {length, plural, one {1 znak} few {# znaka} other {# znakova}}.",
+            "addressLength": "Adrese moraju sadržavati {length, plural, one {# znak} few {# znaka} other {# znakova}}.",
             "amountTooHigh": "Ovo je više od sredstava koja su vam na raspolaganju.",
             "amountNoFloat": "Ako je jedinica `i`, ne možete koristiti decimalna mjesta.",
             "amountInvalidFormat": "Djeluje da je iznos nevažeći broj.",
@@ -1140,9 +1140,9 @@
             "invalid": "Sigurnosna kopija nije prepoznata.",
             "destination": "Destinacija za sigurnosnu kopiju je nevažeća.",
             "mnemonic": "Fraza za oporavak nije ispravna.",
-            "seedTooShort": "Seed mora imati 81 znak, trenutno ih ima {length, plural, one {jedan} other {#}}",
+            "seedTooShort": "Seed mora imati 81 znak, trenutno ih ima {length, plural, one {#} other {#}}",
             "seedCharacters": "Seed može sadržavati samo slova od A do Z i broj 9",
-            "phraseWordCount": "Vaša fraza za oporavak mora se sastojati od 24 riječi. Trenutno {length, plural, one {je samo jedna} other {ih ima samo #}}.",
+            "phraseWordCount": "Vaša fraza za oporavak mora se sastojati od 24 riječi. Trenutno {length, plural, one {je samo #} other {ih ima samo #}}.",
             "phraseUnrecognizedWord": "Ne prepoznajemo riječ \"{word}\" u vašoj frazi za oporavak",
             "phraseCaseWord": "Riječ \"{word}\" treba započeti malim slovom"
         },
@@ -1181,7 +1181,7 @@
             "http": "Korištenje node-ova preko HTTP-a ostavlja promet nešifriranim i može predstavljati sigurnosni rizik."
         },
         "participation": {
-            "noAccounts": "You do not have any IOTA."
+            "noAccounts": "Nemate niti jedan IOTA token."
         }
     },
     "tooltips": {
@@ -1216,8 +1216,8 @@
             },
             "ended": {
                 "title": "Staking je završio",
-                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
-                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
+                "bodyAboveRewardMin": "Assembly i Shimmer nagrade će biti distribuirane u vaše novčanike nakon pokretanja svake od pripadajućih mreža.",
+                "bodyBelowRewardMin": "Niste stake-ali dovoljno IOTA tokena da bi dosegnuli minimalnu nagradu za airdrop."
             }
         },
         "partiallyStakedFunds": {
@@ -1229,13 +1229,13 @@
         "stakingMinRewards": {
             "title": "Ispod minimalne vrijednosti nagrade",
             "titleMinBalance": "Potrebno minimalno stanje od {amount}",
-            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
+            "bodyMinBalance": "Ovaj novčanik nema dovoljno IOTA tokena za postizanje minimalne nagrade za airdrop, te stoga ne može biti stake-an.",
             "continue": "Molimo nastavite sa staking-om još {duration}.",
             "bodyBelowMin": "Ovaj novčanik nije dosegao minimalnu vrijednost nagrade za {airdrop} ({airdropRewardMin}).",
             "bodyWillReachMin": "Morate stake-ati još {duration} da bi dosegli minimum.",
-            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
-            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
-            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+            "bodyWillNotReachMin": "Nećete dosegnuti minimalni iznos nagrade tijekom preostalog razdoblja staking-a osim ako ne pridodate još IOTA tokena.",
+            "bodyDidNotReachMin": "Niste stake-ali dovoljno IOTA tokena da bi dosegnuli minimalnu vrijednost nagrade za {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "Ovaj novčanik nema dovoljno IOTA tokena za postizanje minimalne airdrop nagrade za {airdrop}."
         }
     },
     "exports": {

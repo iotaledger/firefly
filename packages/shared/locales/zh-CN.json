@@ -7,11 +7,11 @@
         "legal": {
             "title": "隐私政策和服务条款",
             "body": "请查看隐私政策和服务条款。",
-            "checkbox": "我已阅读并接受隐私政策和服务条款"
+            "checkbox": "我已通读并接受隐私政策和服务条款"
         },
         "appearance": {
             "title": "外观",
-            "body": "选择您的App主题"
+            "body": "选择您的应用主题"
         },
         "profile": {
             "title": "新建配置文件",
@@ -35,18 +35,18 @@
         },
         "secure": {
             "title": "保障钱包的安全",
-            "body1": "保存和打印Recovery Kit PDF模板。",
+            "body1": "保存并打印Recovery Kit PDF模板。",
             "body2": "如果您填写Recovery Kit并安全存储它，您就能够恢复您的钱包。"
         },
         "create": {
             "title": "创建一个钱包",
-            "body": "创建一个新钱包。您可以选择一个普通软件钱包，或者如果您有一个Ledger设备，您可以设置一个硬件钱包。",
+            "body": "创建一个全新的钱包。您可以选择创建一个普通软件钱包。如果您有一个Ledger设备，您也可以创建一个硬件钱包。",
             "softwareAccount": {
-                "title": "我想要一个软件钱包",
+                "title": "我希望创建一个软件钱包",
                 "description": "创建一个包含24个单词的恢复助记词"
             },
             "ledgerAccount": {
-                "title": "我想要一个硬件钱包",
+                "title": "我希望创建一个硬件钱包",
                 "description": "需要Ledger Nano S 或 Nano X"
             }
         },
@@ -67,7 +67,7 @@
         "password": {
             "title": "设置密码",
             "body1": "您需要一个强大的密码来保护您的资金。可使用一些单词的组合，并避免常见的短语，名称或日期。",
-            "body2": "建议您在Recovery Kit中写下您的密码。"
+            "body2": "建议您在Recovery Kit中抄写下您的密码。"
         },
         "protect": {
             "title": "Protect your wallet",
@@ -76,7 +76,7 @@
         },
         "pin": {
             "title": "设置PIN码",
-            "body1": "请在下方输入 6 位数字的 PIN 码。您在登录钱包时需要输入 PIN 码。",
+            "body1": "请在下方输入 6 位数字作为 PIN 码。您在登录钱包时会被要求输入您设置的 PIN 码。",
             "body2": "仅限数字"
         },
         "confirmPin": {
@@ -85,13 +85,13 @@
             "body2": "请重新输入您的 PIN 码以继续操作。"
         },
         "backup": {
-            "title": "请备份您的钱包",
-            "body1": "您现在将看到一个恢复密语。请在Recovery Kit中写下它。",
-            "body2": "请勿与任何人分享您的恢复密语。因为该密语可从任何地点访问到您的Token。",
+            "title": "备份您的钱包",
+            "body1": "您现在将看到您的钱包恢复助记词。请将它们抄写在您的Recovery Kit中。",
+            "body2": "请勿与任何人分享您的钱包恢复助记词。因为这些助记词会让别人从任何地方查看并转移走您的代币。",
             "body3": "如果您丢失了恢复密语，您很可能会丢失您的资金。"
         },
         "recoveryPhrase": {
-            "title": "恢复密语",
+            "title": "钱包恢复助记词",
             "body1": "在您的Recovery Kit中，按显示的准确顺序填写单词。",
             "body2": "秘密保管并安全存储",
             "body3": "一个书面备份非常重要。计算机常常失败，文件可能损坏。",
@@ -128,11 +128,11 @@
         },
         "import": {
             "title": "恢复或迁移资金",
-            "body": "如果您已经有一个seed或钱包备份文件，你可以在这里导入。 如果您在旧的IOTA主网持有资金，您将会通过迁移步骤将资金转移到Chrysalis网络。",
-            "importSeed": "我有一个81个字符的seed",
-            "importSeedDescription": "输入seed并将资金迁移到Chrysalis",
+            "body": "如果您已经有一个私钥种子或钱包备份文件，你可以在这里导入。 如果您在旧的IOTA主网持有资金，您将会通过迁移步骤将资金转移到Chrysalis网络。",
+            "importSeed": "我有一个81个字符的私钥种子",
+            "importSeedDescription": "输入私钥种子并将资金迁移到Chrysalis",
             "importMnemonic": "我有一个Fifrefly恢复密语",
-            "importMnemonicDescription": "输入恢复密语来找回您的钱包",
+            "importMnemonicDescription": "输入私钥助记词来恢复您的钱包",
             "importFile": "我有一个备份文件",
             "importFileDescription": "上传Seedvault或Stronghold 文件",
             "importLedger": "我有一个Ledger 备份",
@@ -140,17 +140,17 @@
         },
         "importFromText": {
             "seed": {
-                "title": "键入您的seed以开始迁移",
-                "body": "一个seed由81个字符组成。它用于从旧的的 Trinity 钱包中进行恢复。",
-                "enter": "输入您的seed"
+                "title": "键入您的私钥种子以开始迁移",
+                "body": "一个私钥种子由81个字符组成。它用于从旧的的 Trinity 钱包中进行恢复。",
+                "enter": "输入您的私钥种子"
             },
             "mnemonic": {
-                "title": "输入您的恢复密语",
-                "body": "恢复密语长度为24个单词，单词全部为小写，单词间由空格隔开。这个密语可用于恢复已有的Firefly钱包。",
-                "enter": "请输入您的seed或恢复密语"
+                "title": "输入您的钱包恢复助记词",
+                "body": "恢复助记词包含24个单词，单词全部为小写，单词间由空格隔开。这个密语可用于恢复已有的Firefly钱包。",
+                "enter": "请输入您的私钥种子或助记词"
             },
-            "seedDetected": "检测到81个字符种子",
-            "phraseDetected": "检测到24个单词恢复密语",
+            "seedDetected": "检测到81个字符的私钥种子",
+            "phraseDetected": "检测到24个单词的私钥助记词",
             "checksum": "校验和"
         },
         "importFromFile": {
@@ -280,7 +280,7 @@
             "title": "您的余额",
             "body": "在继续之前请确保您的余额是正确的。如果它看起来不正确，您可以再次检查。",
             "error": "最小迁移金额是 1 Mi。请再次检查您的余额是否正确。",
-            "zeroBalance": "请再试一次。如果您仍然找不到您的余额，您输入的种子可能不正确。",
+            "zeroBalance": "请再试一次。如果您仍然找不到您的余额，您输入的私钥种子可能不正确。",
             "zeroBalanceLedgerLegacy": "请再试一次。如果您仍然找不到您的余额，您可能选择了错误的帐户索引。"
         },
         "settings": {
@@ -771,7 +771,7 @@
         "dismiss": "取消",
         "proceedAnyway": "仍要继续",
         "save": "保存",
-        "importSeed": "导入已有的种子",
+        "importSeed": "导入已有的私钥种子",
         "restoreWallet": "迁移或恢复钱包",
         "restoreWalletDescription": "迁移到 Chrysalis 或恢复现有钱包",
         "createWallet": "创建新钱包",
@@ -876,7 +876,7 @@
         "currentPassword": "当前使用的密码",
         "newPassword": "新的密码",
         "confirmNewPassword": "再次确认新的密码",
-        "yourSeed": "你的种子",
+        "yourSeed": "您的私钥种子",
         "recoveryPhrase": "恢复密语",
         "recentActivity": "最新活动",
         "sent": "已发送",
@@ -1140,8 +1140,8 @@
             "invalid": "备份文件无法识别。",
             "destination": "备份路径无效。",
             "mnemonic": "助记符无效。",
-            "seedTooShort": "种子长度应该是81个字符，而它 {length, plural, one {只有 1} other {是 #}} 个。",
-            "seedCharacters": "种子只能包含字符 A-Z 或 9",
+            "seedTooShort": "私钥种子的长度应该是81个字符，而它 {length, plural, one {只有 1} other {是 #}} 个。",
+            "seedCharacters": "私钥种子只能包含大写字符 A-Z 或数字 9",
             "phraseWordCount": "您的恢复密语中应该有24个单词，目前 {length, plural, one {只有 1}other {是 #}} 个单词。",
             "phraseUnrecognizedWord": "恢复短语中无法识别的单词“{word}”",
             "phraseCaseWord": "单词 \"{word}\" 应为小写"

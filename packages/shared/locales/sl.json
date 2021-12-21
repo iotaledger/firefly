@@ -36,176 +36,176 @@
         "secure": {
             "title": "Zaščiti svojo denarnico",
             "body1": "Shranite in natisnite PDF predlogo kompleta za obnovitev.",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallets."
+            "body2": "Če izpolnite obrazec Recovery Kit in ga varno shranite, boste vedno lahko obnovili svoje denarnice."
         },
         "create": {
             "title": "Ustvari denarnico",
-            "body": "Create a new wallet. You can choose a regular software wallet or if you have a Ledger device you can set up a hardware wallet.",
+            "body": "Ustvarite novo denarnico. Izberete lahko običajno softversko denarnico ali če imate napravo Ledger, lahko nastavite denarnico za strojno opremo.",
             "softwareAccount": {
-                "title": "I want a software wallet",
-                "description": "Create a 24-word Recovery Phrase"
+                "title": "Želim softversko denarnico",
+                "description": "Ustvarite besedno zvezo za obnovitev s 24 besedami"
             },
             "ledgerAccount": {
-                "title": "I want a hardware wallet",
-                "description": "Ledger Nano S or Nano X required"
+                "title": "Želim strojno denarnico",
+                "description": "Potreben je računalnik Ledger Nano S ali Nano X"
             }
         },
         "setupLedger": {
             "progress1": "Povežite svoj Ledger",
             "progress2": "Generiraj naslov",
-            "progress3": "Switch Ledger app",
+            "progress3": "Aplikacija Switch Ledger",
             "progress4": "Prenos sredstev",
-            "watchVideo": "Watch video guide",
-            "videoGuide": "Ledger migration video guide"
+            "watchVideo": "Oglejte si video vodnik",
+            "videoGuide": "Video vodnik za migracijo glavne knjige"
         },
         "ledgerInstallationGuide": {
-            "title": "Have you installed the necessary Ledger apps?",
-            "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
-            "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
-            "action": "Yes, I've installed these apps"
+            "title": "Ali ste namestili potrebne aplikacije Ledger?",
+            "body1": "Preden nadaljujete, morate prek storitve Ledger Live poiskati in namestiti aplikacijo {legacy} in novo aplikacijo IOTA.",
+            "body2": "Prepričajte se, da je vdelana programska oprema računalnika Ledger posodobljena. Vse prednameščene aplikacije je treba posodobiti na najnovejše različice.",
+            "action": "Da, namestil sem te aplikacije"
         },
         "password": {
             "title": "Ustvari geslo",
-            "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
-            "body2": "It is recommended that you write down your password in your Recovery Kit."
+            "body1": "Za zaščito svojih sredstev potrebujete močno geslo. Uporabite kombinacijo besed in se izogibajte pogostim frazam, imenom ali datumom.",
+            "body2": "Priporočljivo je, da si geslo zapišete v komplet za obnovitev."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your profile.",
+            "body1": "Nastavite kodo PIN za prijavo, da lahko v svoj profil vstopite samo vi.",
             "body2": "Ohranite vašo PIN kodo varno!"
         },
         "pin": {
             "title": "Nastavi PIN kodo",
-            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
+            "body1": "Spodaj vnesite šestmestno kodo PIN. Za dostop do svojega profila boste morali navesti kodo PIN.",
             "body2": "Uporabi samo števila"
         },
         "confirmPin": {
             "title": "Preveri tvojo PIN kodo",
-            "body1": "Your PIN keeps your balance and transactions private.",
-            "body2": "Re-enter your PIN code to proceed. "
+            "body1": "Vaš PIN zagotavlja zasebnost vašega stanja in transakcij.",
+            "body2": "Če želite nadaljevati, ponovno vnesite kodo PIN. "
         },
         "backup": {
             "title": "Shrani tvojo denarnico",
-            "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
-            "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
-            "body3": "If you lose your recovery phrase, you may lose your funds."
+            "body1": "Prikazal se bo stavek za obnovitev. Zapišite si jo v svoj komplet za obnovo.",
+            "body2": "Svoju frázu o zotavení nikomu neposkytujte. Môže sa použiť na prístup k vašim tokenom odkiaľkoľvek.",
+            "body3": "Ak stratíte frázu na obnovenie, môžete prísť o svoje finančné prostriedky."
         },
         "recoveryPhrase": {
-            "title": "Recovery phrase",
-            "body1": "In your Recovery Kit, write down the words in the exact order shown.",
-            "body2": "Keep this private and safely stored.",
-            "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
-            "revealRecoveryPhrase": "Reveal recovery phrase",
-            "hideRecoveryPhrase": "Hide recovery phrase"
+            "title": "Besedna zveza za okrevanje",
+            "body1": "V svoj komplet za obnovo zapišite besede v točno določenem vrstnem redu.",
+            "body2": "Naj bo to zasebno in varno shranjeno.",
+            "body3": "Pomembno je imeti pisno varnostno kopijo. Računalniki se pogosto pokvarijo in datoteke se lahko poškodujejo.",
+            "revealRecoveryPhrase": "Razkriti stavek za okrevanje",
+            "hideRecoveryPhrase": "Skrijte stavek za obnovitev"
         },
         "verifyRecoveryPhrase": {
-            "title": "Verify recovery phrase",
-            "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
+            "title": "Kontrola frázy pre obnovenie",
+            "body": "Overíme si, či ste túto frázu zapísali správne. Vyberte jednotlivé slová v očíslovanom poradí.",
             "word": "Beseda",
-            "verified": "Recovery phrase verified",
-            "verifiedBody": "Remember to keep it private and safely stored."
+            "verified": "Preverjena fraza za obnovo",
+            "verifiedBody": "Ne pozabite, da so zasebni in varno shranjeni."
         },
         "backupWallet": {
-            "title": "Back up to a Stronghold file",
-            "body1": "Enter your password to backup your wallets to a Stronghold file. Your password is used to encrypt the backup.",
-            "body2": "Reasons why digital backups are important:",
-            "reason1": "Easily recover your wallets without typing in your recovery phrase",
-            "reason2": "Import your wallets on other devices",
-            "reason3": "Recover your full transaction history"
+            "title": "Varnostna kopija v datoteko Stronghold",
+            "body1": "Vnesite geslo za varnostno kopiranje denarnic v datoteko Stronghold. Vaše geslo se uporabi za šifriranje varnostne kopije.",
+            "body2": "Razlogi, zakaj so digitalne varnostne kopije pomembne:",
+            "reason1": "Enostavno obnovite denarnice, ne da bi vnesli besedno zvezo za obnovitev",
+            "reason2": "Uvozite svoje denarnice v drugih napravah",
+            "reason3": "Obnovite celotno zgodovino transakcij"
         },
         "recoveryPhraseSaved": {
-            "title": "Successfully backed up",
-            "body": "You have backed up your wallets to a Stronghold."
+            "title": "Uspešno varnostno kopiranje",
+            "body": "Svoje denarnice ste varnostno kopirali v Stronghold."
         },
         "congratulations": {
-            "title": "Wallet setup completed",
-            "fundsMigrated": "Funds migrated",
-            "body": "Your new wallet is ready to use.",
-            "softwareMigratedBody": "You have successfully migrated your funds to the new network",
-            "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
-            "exportMigration": "Export migration log and finish setup"
+            "title": "Nastavitev denarnice je končana",
+            "fundsMigrated": "Migracija žetona",
+            "body": "Nova denarnica je pripravljena za uporabo.",
+            "softwareMigratedBody": "Sredstva ste uspešno prenesli v novo omrežje",
+            "fireflyLedgerBody": "Račun Ledger je uspešno obnovljen in zdaj lahko nadaljujete.",
+            "trinityLedgerBody": "Uspešno ste prenesli knjigo Ledger v novo omrežje.",
+            "exportMigration": "Izvozite dnevnik migracije in dokončajte nastavitev"
         },
         "import": {
-            "title": "Recover or migrate funds",
-            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
-            "importSeed": "I have an 81 character seed",
-            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
-            "importMnemonic": "I have a Firefly recovery phrase",
-            "importMnemonicDescription": "Enter your recovery phrase to recover your wallets",
-            "importFile": "I have a file backup",
-            "importFileDescription": "Upload a Seedvault or Stronghold file",
-            "importLedger": "I have a Ledger backup",
-            "importLedgerDescription": "Restore or migrate a Ledger profile"
+            "title": "Obnovitev ali selitev sredstev",
+            "body": "Če imate obstoječe seme ali varnostno datoteko denarnice, jo lahko uvozite tukaj. Če imate starejša sredstva v omrežju, vas bomo seznanili s koraki za prehod na omrežje Chrysalis.",
+            "importSeed": "Imam seme 81 znakov",
+            "importSeedDescription": "Vnesite seme in prenesite sredstva v Chrysalis",
+            "importMnemonic": "Imam stavek za obnovitev Firefly",
+            "importMnemonicDescription": "Vnesite besedno zvezo za obnovitev in obnovite svoje denarnice",
+            "importFile": "Imam varnostno kopijo datoteke",
+            "importFileDescription": "Naložite datoteko Seedvault ali Stronghold",
+            "importLedger": "Imam varnostno kopijo knjige Ledger",
+            "importLedgerDescription": "Obnovitev ali selitev profila glavne knjige"
         },
         "importFromText": {
             "seed": {
-                "title": "Type your seed to commence migration",
-                "body": "A seed consists of 81 characters. This is used to recover from the older Trinity app.",
-                "enter": "Enter your seed"
+                "title": "Vnesite svoje seme za začetek migracije",
+                "body": "Seme je sestavljeno iz 81 znakov. Uporablja se za obnovitev iz starejše aplikacije Trinity.",
+                "enter": "Vnesite svoje seme"
             },
             "mnemonic": {
-                "title": "Type your recovery phrase",
-                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly wallets.",
-                "enter": "Enter your secret recovery phrase"
+                "title": "Vnesite besedno zvezo za obnovitev",
+                "body": "Fraza za obnovitev je dolga 24 besed, vse male tiskane črke, med katerimi so presledki. Uporablja se za obnovitev obstoječih denarnic Firefly.",
+                "enter": "Vnesite svoj skrivni stavek za obnovitev"
             },
-            "seedDetected": "81 character seed detected",
-            "phraseDetected": "24 word recovery phrase detected",
-            "checksum": "Checksum"
+            "seedDetected": "Zaznano seme 81 znakov",
+            "phraseDetected": "24 zaznanih besednih fraz za obnovitev",
+            "checksum": "Kontrolna vsota"
         },
         "importFromFile": {
-            "title": "Restore your wallets using a backup file",
-            "body": "Import a backup file to restore your wallets. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+            "title": "Obnovitev denarnic z uporabo datoteke z varnostno kopijo",
+            "body": "Uvozite varnostno datoteko in obnovite svoje denarnice. Varnostne kopije so lahko Stronghold (.stronghold) ali Trinity SeedVault (.kdbx)."
         },
         "importFromLedger": {
-            "title": "Restore or Migrate your Ledger",
-            "body": "Restore an existing Firefly Ledger profile, or migrate your funds from Trinity.",
-            "haveFireflyLedger": "I have a Firefly Ledger backup",
-            "haveFireflyLedgerDescription": "Restore a Firefly profile",
-            "haveTrinityLedger": "I have a Trinity Ledger backup",
-            "haveTrinityLedgerDescription": "Migrate a Trinity profile"
+            "title": "Obnovitev ali migracija glavne knjige",
+            "body": "Obnovite obstoječi profil Firefly Ledger ali prenesite sredstva iz Trinityja.",
+            "haveFireflyLedger": "Imam varnostno kopijo Firefly Ledger",
+            "haveFireflyLedgerDescription": "Obnovitev profila Firefly",
+            "haveTrinityLedger": "Imam varnostno kopijo knjige Trinity Ledger",
+            "haveTrinityLedgerDescription": "Migracija profila Trinity"
         },
         "connectLedger": {
-            "title": "Connect your Ledger to Firefly",
-            "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed.",
-            "trafficLight1": "Connect and unlock your Ledger with your PIN",
-            "trafficLight2": "Open the new IOTA app on your Ledger",
-            "tips": "Tips if your Ledger isn’t connecting"
+            "title": "Povežite svojo knjigo Ledger z aplikacijo Firefly",
+            "body": "Da bo Firefly našel vašo napravo Ledger, poskrbite, da bo uradna aplikacija Ledger Live zaprta.",
+            "trafficLight1": "Povežite in odklenite svojo knjigo Ledger s kodo PIN",
+            "trafficLight2": "Odprite novo aplikacijo IOTA v svojem računalniku Ledger",
+            "tips": "Nasveti, če se vaša knjiga Ledger ne poveže"
         },
         "restoreFromFireflyLedger": {
-            "title": "Restore Your Ledger Profile",
-            "body": "Press restore to complete the setup process and restore your wallets, balances and transaction history.",
-            "restoring": "Restoring from Ledger..."
+            "title": "Obnovitev profila glavne knjige",
+            "body": "Pritisnite obnovi, da dokončate postopek nastavitve ter obnovite svoje denarnice, stanja in zgodovino transakcij.",
+            "restoring": "Obnovitev iz knjige Ledger..."
         },
         "legacyLedgerIntro": {
-            "title": "Start your Ledger migration using Firefly",
-            "body1": "Firefly will help you to transfer your tokens to the new Chrysalis network.",
-            "body2": "After the migration, you will be able to send and receive your tokens using your Ledger with Firefly.",
-            "readMore": "What to expect from the migration process"
+            "title": "Začnite migracijo Ledgerja z uporabo Fireflyja",
+            "body1": "Firefly vam bo pomagal prenesti žetone v novo omrežje Chrysalis.",
+            "body2": "Po migraciji boste lahko žetone pošiljali in prejemali prek svoje knjige Ledger in Firefly.",
+            "readMore": "Kaj lahko pričakujete od postopka migracije"
         },
         "generateNewLedgerAddress": {
             "title": "Ustvari nov naslov",
-            "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
+            "body": "Za migracijo žetonov v Firefly morate ustvariti nov naslov. Za nadaljevanje kliknite spodnji gumb.",
             "confirmTitle": "Potrditev novega naslova",
-            "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
+            "confirmBody": "Zaradi varnosti primerjajte naslov, ustvarjen v napravi Ledger, s tistim, ki je prikazan spodaj. Če se ujemata, pritisnite oba gumba na napravi Ledger.",
             "confirmedTitle": "Naslov potrjen",
-            "confirmedBody": "You have confirmed that the address in Firefly matches the one on your Ledger device.",
+            "confirmedBody": "Potrdili ste, da se naslov v programu Firefly ujema z naslovom v napravi Ledger.",
             "generating": "Ustvarjanje naslova"
         },
         "switchLedgerApps": {
-            "title": "Switch Ledger apps",
-            "body": "Please switch to the {legacy} app on your Ledger device to continue migration. When ready, press continue."
+            "title": "Preklop aplikacij za glavno knjigo",
+            "body": "Za nadaljevanje migracije preklopite na aplikacijo {legacy} v napravi Ledger. Ko ste pripravljeni, pritisnite gumb Nadaljuj."
         },
         "selectLedgerAccountIndex": {
             "title": "Izberite indeks Ledger računa",
-            "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
+            "body": "Izberite indeks računa v glavni knjigi, ki ste ga uporabili v programu Trinity. Za večino uporabnikov je to privzeti index 0.",
             "accountIndex": "Indeks računa",
             "accountPage": "Stran računa",
             "standard": "Običajen",
             "expert": "Strokovni",
-            "takingAWhile": "This is taking a while...",
-            "notGeneratingAddresses": "Is your Ledger generating addresses?",
-            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
+            "takingAWhile": "To traja kar nekaj časa...",
+            "notGeneratingAddresses": "Ali vaša Ledger ustvarja naslovi?",
+            "reinstallLegacy": "Če ne, odklopite napravo in poskusite znova. Če se težava nadaljuje, boste morda morali znova namestiti aplikacijo {legacy}."
         },
         "importBackupPassword": {
             "body1": "Please enter your backup password.",
@@ -299,11 +299,11 @@
             },
             "helpAndInfo": {
                 "title": "Pomoč in Informacije",
-                "description": "Find the answer to a question or get help with an issue"
+                "description": "Poiščite odgovor na vprašanje ali pomoč pri reševanju težave"
             },
             "profile": {
                 "title": "Profil",
-                "description": "Change your profile name or set an avatar"
+                "description": "spremenite ime svojega profila ali nastavite avatar"
             },
             "sync": {
                 "title": "Sinhroniziraj denarnice",
@@ -312,7 +312,7 @@
             "theme": {
                 "title": "Tema",
                 "description": "",
-                "advice": "Restart the Firefly application for changes to the system theme to take effect"
+                "advice": "Ponovno zaženite aplikacijo Firefly, da bodo spremembe sistemske teme začele veljati"
             },
             "language": {
                 "title": "Jezik",
@@ -320,122 +320,122 @@
             },
             "currency": {
                 "title": "Valuta",
-                "description": "Adjusts balance conversion and updates chart options"
+                "description": "Prilagaja pretvorbo ravnotežja in posodablja možnosti grafikona"
             },
             "notifications": {
                 "title": "Obvestila",
-                "description": "System notifications for transaction events"
+                "description": "Sistemska obvestila o dogodkih transakcij"
             },
             "networkStatus": {
                 "title": "Stanje omrežja",
-                "description": "Displays the status of the node you are currently connected to"
+                "description": "Prikaže stanje vozlišča, s katerim ste trenutno povezani"
             },
             "exportStronghold": {
-                "title": "Export backup",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
+                "title": "Izvoz varnostne kopije",
+                "description": "Izvoz v datoteko Stronghold - popolno šifrirano varnostno kopijo denarnic in najnovejše zgodovine transakcij"
             },
             "appLock": {
-                "title": "Automatic lock",
-                "description": "Inactivity time before your wallets lock and you are logged out"
+                "title": "Samodejno zaklepanje",
+                "description": "Čas neaktivnosti, preden se vaše denarnice zaklenejo in ste odjavljeni"
             },
             "changePassword": {
                 "title": "Zamenjaj geslo",
-                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
+                "description": "Vaše geslo se uporablja za zaščito denarnic. Za zaščito svojih sredstev morate uporabljati močno geslo"
             },
             "changePincode": {
                 "title": "Spremeni PIN kodo",
-                "description": "Your PIN keeps your balance and transactions private",
+                "description": "Vaš PIN ohranja vaše stanje in transakcije zasebne",
                 "currentPincode": "Trenutna koda PIN",
                 "newPincode": "Nova koda PIN",
                 "confirmNewPincode": "Potrdi novo kodo PIN",
                 "action": "Zamenjaj kodo PIN"
             },
             "balanceFinder": {
-                "title": "Balance finder",
-                "description": "Perform an extended search of your addresses for tokens"
+                "title": "Iskalnik ravnotežja",
+                "description": "Izvedite razširjeno iskanje žetonov v naslovih"
             },
             "hiddenAccounts": {
                 "title": "Skrite denarnice",
-                "description": "Selecting this options will show wallets that were previously hidden"
+                "description": "Z izbiro te možnosti se prikažejo denarnice, ki so bile prej skrite"
             },
             "deleteProfile": {
                 "title": "Izbriši profil",
-                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
+                "description": "Izbriše celoten profil, denarnice in zgodovino transakcij. Poskrbite za varnostno kopijo"
             },
             "deepLinks": {
-                "title": "IOTA links",
-                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
+                "title": "Povezave IOTA",
+                "description": "Samodejno izpolnite podatke o transakciji v Firefly, ko kliknete povezavo IOTA"
             },
             "networkConfiguration": {
-                "title": "Network config",
-                "title2": "Network configuration",
+                "title": "Konfiguracija omrežja",
+                "title2": "Konfiguracija",
                 "description": {
-                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
-                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                    "dev": "Nastavitve omrežja se bodo samodejno posodobile glede na trenutno konfiguracijo vozlišča (preklop omrežja bo povzročil ponastavitev stanja denarnice)",
+                    "nonDev": "Omrežne nastavitve se samodejno posodobijo glede na trenutno konfiguracijo vozlišča"
                 },
-                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
-                "resetWallet": "Your wallet state has been reset.",
-                "connectedTo": "Connected to",
+                "switchedNetworks": "Uspešno preklopite omrežje na \"{networkName}\".",
+                "resetWallet": "Stanje vaše denarnice je bilo ponastavljeno.",
+                "connectedTo": "Povezano s",
                 "nodeConfiguration": {
-                    "title": "Node selection",
-                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
-                    "automatic": "Automatic",
-                    "manual": "Manual"
+                    "title": "Izbira vozlišč",
+                    "description": "Če želite konfigurirati nastavitve vozlišč in se povezati s svojim vozlišč(i), izberite \"Ročno\"",
+                    "automatic": "Samodejno",
+                    "manual": "Priročnik"
                 }
             },
             "configureNodeList": {
-                "title": "Node configuration",
-                "description": "Manage the list of nodes you connect to",
+                "title": "Konfiguracija vozlišča",
+                "description": "Upravljanje seznama vozlišč, s katerimi se povezujete",
                 "primaryNode": "Primarni node",
                 "excludeNode": "Izključi node",
                 "includeNode": "Vključi node",
-                "editDetails": "Edit details",
-                "viewInfo": "View info",
+                "editDetails": "Urejanje podrobnosti",
+                "viewInfo": "Oglejte si info",
                 "setAsPrimary": "Nastavi kot primaren",
                 "removeNode": "Izbriši node",
-                "includeOfficialNodeList": "Include official node list",
-                "noNodes": "There are no nodes, unable to connect to the network",
-                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
+                "includeOfficialNodeList": "Vključite uradni seznam vozlišč",
+                "noNodes": "Ni vozlišč, ni mogoče vzpostaviti povezave z omrežjem",
+                "noNodesAuto": "Vozlišč ni, namesto tega se uporabi samodejna izbira"
             },
             "proofOfWork": {
-                "title": "Proof of work",
-                "description": "Complete proof of work locally on your device or outsource to the node"
+                "title": "Dokazilo o delu",
+                "description": "Izvedite dokazilo o delu lokalno v svoji napravi ali ga prenesite v vozlišče"
             },
             "errorLog": {
                 "title": "Dnevnik napak",
-                "description": "View errors to debug an issue"
+                "description": "Prikaži napako za odpravo težave"
             },
             "diagnostics": {
-                "title": "Diagnostics",
-                "description": "View system and application information"
+                "title": "Diagnostika",
+                "description": "Ogled informacij o sistemu in aplikaciji"
             },
             "migrateLedgerIndex": {
-                "title": "Migrate Ledger index",
-                "description": "Migrate another Trinity account index"
+                "title": "Migracija indeksa glavne knjige",
+                "description": "Migracija drugega indeksa računa Trinity"
             },
             "troubleshoot": {
                 "title": "Odpravljanje težav",
-                "description": "Use the troubleshooting wizard to solve common problems"
+                "description": "Za reševanje pogostih težav uporabite čarovnika za odpravljanje težav"
             },
             "documentation": {
                 "title": "Dokumentacija",
-                "description": "View the documentation for in depth explanations of how things work"
+                "description": "Oglejte si dokumentacijo za poglobljene razlage delovanja"
             },
             "faq": {
                 "title": "Pogosta vprašanja",
-                "title2": "Frequently asked questions",
-                "description": "View the FAQs to get help with a common problem or question"
+                "title2": "Pogosto zastavljena vprašanja",
+                "description": "Oglejte si pogosto zastavljena vprašanja in poiščite pomoč pri pogostih težavah ali vprašanjih"
             },
             "discord": {
                 "title": "Discord",
-                "description": "Get help from the IOTA community on Discord"
+                "description": "Pridobite pomoč skupnosti IOTA na Discordu"
             },
             "about": {
-                "title": "About",
+                "title": "Približno",
                 "description": ""
             },
             "reportAnIssue": {
-                "title": "Report an issue",
+                "title": "Prijavite težavo",
                 "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
             }
         },
@@ -541,77 +541,77 @@
             "title": "Current version: {version}",
             "upToDateTitle": "Firefly is up to date",
             "upToDateDescription": "You are running the latest and safest version of Firefly.",
-            "updateAvailable": "Firefly update available",
-            "updateDetails": "Version {version} - {date}",
-            "noAutoUpdate": "Auto-update is disabled in this Windows version, please go to https://firefly.iota.org to download the update."
+            "updateAvailable": "Posodobitev Firefly je na voljo",
+            "updateDetails": "Različica {version} - {date}",
+            "noAutoUpdate": "Samodejno posodabljanje je v tej različici sistema Windows onemogočeno, za prenos posodobitve obiščite spletno mesto https://firefly.iota.org."
         },
         "backup": {
-            "title": "Last backup: {date}",
-            "lastBackup": "You last backed up {date}",
-            "backupDescription": "It is important to back up regularly to ensure you have a copy of your wallets and transaction history.",
-            "backupWarning": "If you lose your backup and recovery phrase you will lose access to your funds.",
-            "notBackedUp": "Not backed up",
-            "notBackedUpDescription": "You have not backed up your wallets",
+            "title": "Zadnja varnostna kopija: {datum}",
+            "lastBackup": "Nazadnje ste naredili varnostno kopijo {datum}",
+            "backupDescription": "Pomembno je, da redno ustvarjate varnostne kopije in si tako zagotovite kopijo svojih denarnic in zgodovine transakcij.",
+            "backupWarning": "Če izgubite fazo varnostnega kopiranja in obnovitve, boste izgubili dostop do svojih sredstev.",
+            "notBackedUp": "Ni varnostnih kopij",
+            "notBackedUpDescription": "Niste naredili varnostne kopije svojih denarnic",
             "saving": "Shranjevanje..."
         },
         "deleteAccount": {
-            "title": "Delete {name}?",
-            "body": "This wallet has no transaction history. It can safely be deleted.",
-            "typePassword": "Type your wallet password to confirm.",
+            "title": "Izbriši {name}?",
+            "body": "Ta denarnica nima zgodovine transakcij. Lahko jo varno izbrišete.",
+            "typePassword": "Za potrditev vnesite geslo za denarnico.",
             "hideAccount": "Izbriši denarnico",
-            "errorTitle": "Unable to delete {name}",
-            "errorBody1": "You cannot delete this wallet, you must have at least one."
+            "errorTitle": "Ni mogoče izbrisati {name}",
+            "errorBody1": "Te denarnice ne morete izbrisati, imeti morate vsaj eno."
         },
         "hideAccount": {
-            "title": "Hide {name}?",
-            "body": "You can find this wallet later by enabling \"Show hidden wallets\" in Advanced Settings.",
-            "typePassword": "Type your wallet password to confirm.",
+            "title": "Skrijte {name}?",
+            "body": "To denarnico lahko kasneje najdete tako, da v naprednih nastavitvah omogočite možnost \"Prikaži skrite denarnice\".",
+            "typePassword": "Za potrditev vnesite geslo za denarnico.",
             "hideAccount": "Skrij denarnico",
-            "errorTitle": "Unable to hide {name}",
-            "errorBody1": "To hide a wallet it must have 0 balance.",
-            "errorBody2": "You currently have {balance} remaining on this wallet. Please move these funds to a different wallet and try again.",
-            "errorBody3": "You cannot hide this wallet, you must have at least one."
+            "errorTitle": "Ni mogoče skriti {name}",
+            "errorBody1": "Če želite skriti denarnico, mora biti v njej 0 sredstev.",
+            "errorBody2": "V tej denarnici imate trenutno še {balance}. Prosimo, da ta sredstva prenesete v drugo denarnico in poskusite znova.",
+            "errorBody3": "Te denarnice ne morete skriti, imeti morate vsaj eno."
         },
         "addressHistory": {
-            "title": "{name} address history",
-            "currentBalance": "Balance: {balance}",
-            "internal": "Internal Address",
-            "external": "Deposit Address"
+            "title": "{name} zgodovina naslovov",
+            "currentBalance": "Ravnotežje: {balance}",
+            "internal": "Notranji naslov",
+            "external": "Naslov depozita"
         },
         "node": {
             "titleAdd": "Dodaj Node",
             "titleUpdate": "Obnovi Node",
             "titleRemove": "Izbriši Node",
-            "titleRemoveAll": "Remove all nodes",
+            "titleRemoveAll": "Odstranitev vseh vozlišč",
             "titleDetails": "Podrobnosti Node",
-            "titleInfo": "Node info",
-            "addingNode": "Adding node",
-            "updatingNode": "Updating node",
-            "loadingNodeInfo": "Loading node info",
-            "nodeAddress": "Node address",
-            "optionalUsername": "Username (optional)",
-            "optionalPassword": "Password (optional)",
-            "optionalJwt": "JSON web token (optional)",
-            "setAsPrimaryNode": "Set as primary node",
-            "removeConfirmation": "Are you sure you want to remove this node?",
-            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "titleInfo": "Infor o vozlišču",
+            "addingNode": "Dodajanje vozlišča",
+            "updatingNode": "Posodabljanje vozlišča",
+            "loadingNodeInfo": "Nalaganje informacij o vozliščih",
+            "nodeAddress": "Naslov vozlišča",
+            "optionalUsername": "Uporabniško ime (neobvezno)",
+            "optionalPassword": "Geslo (neobvezno)",
+            "optionalJwt": "Spletni žeton JSON (neobvezno)",
+            "setAsPrimaryNode": "Nastavljeno kot primarno vozlišče",
+            "removeConfirmation": "Ste prepričani, da želite odstraniti to vozlišče?",
+            "removeAllConfirmation": "Ste prepričani, da želite odstraniti vsa vozlišča?",
             "info": {
                 "url": "URL",
-                "software": "Software",
-                "networkId": "Network ID",
+                "software": "Programska oprema",
+                "networkId": "ID omrežja",
                 "bech32HRP": "Bech32 HRP",
-                "features": "Features",
-                "confirmedMilestoneIndex": "Confirmed milestone index",
-                "pruningIndex": "Pruning index",
-                "messagesPerSecond": "Messages per second",
-                "referencedRate": "Referenced rate"
+                "features": "Značilnosti",
+                "confirmedMilestoneIndex": "Potrjen indeks mejnikov",
+                "pruningIndex": "Indeks obrezovanja",
+                "messagesPerSecond": "Sporočila na sekundo",
+                "referencedRate": "Referenčna stopnja"
             }
         },
         "switchNetwork": {
-            "title": "Switch network",
-            "newNetwork": "New network",
-            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
-            "switchingNetwork": "Switching network",
+            "title": "Omrežje stikal",
+            "newNetwork": "Novo omrežje",
+            "resetWarning": "Če boste spremenili omrežje, se boste odjavili ter ponastavili vse račune, stanja in zgodovino transakcij za ta profil.",
+            "switchingNetwork": "Preklopno omrežje",
             "typePassword": "Type your password to switch to:"
         },
         "errorLog": {
@@ -624,7 +624,7 @@
             "typePassword": "Type your password to confirm."
         },
         "diagnostics": {
-            "title": "Diagnostics",
+            "title": "Diagnostika",
             "node": "Node",
             "platform": "Platform",
             "platformVersion": "Platform Version",
@@ -640,7 +640,7 @@
             "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards."
         },
         "balanceFinder": {
-            "title": "Balance finder",
+            "title": "Iskalnik ravnotežja",
             "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
             "totalWalletBalance": "Skupno stanje",
             "typePassword": "Type your password to allow searching."
@@ -680,7 +680,7 @@
             }
         },
         "ledgerConnectionGuide": {
-            "title": "Tips if your Ledger isn’t connecting",
+            "title": "Nasveti, če se vaša knjiga Ledger ne poveže",
             "steps": {
                 "0": "Make sure Ledger Live is not open on your computer",
                 "1": "Ensure you have unlocked your Ledger device with your PIN",
@@ -710,36 +710,36 @@
             "body": "You can also migrate later in Advanced Settings."
         },
         "exportTransactionHistory": {
-            "title": "Export transaction history",
-            "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
-            "profileName": "Profile name:",
-            "accountName": "Account name:",
-            "typePassword": "Type your password to allow exporting"
+            "title": "Izvoz zgodovine transakcij",
+            "body": "Izvozi zgodovino transakcij za izbrano denarnico. Izvožena datoteka bo v obliki .csv.",
+            "profileName": "Ime profila:",
+            "accountName": "Ime računa:",
+            "typePassword": "Vnesite geslo, da omogočite izvoz"
         },
         "stakingNotice": {
-            "upcomingDate": "Staking has not started yet",
-            "commencingDate": "Staking has not started yet",
-            "body": "By pre-staking your funds before staking starts, you will automatically begin receiving rewards when staking begins.",
-            "ok": "Ok, I understand"
+            "upcomingDate": "Postavljanje Staking se še ni začelo",
+            "commencingDate": "Postavljanje Staking se še ni začelo",
+            "body": "S predhodnim vložkom sredstev pred začetkom stav boš samodejno začel prejemati nagrade, ko se bo Staking začelo.",
+            "ok": "Ok, razumem"
         },
         "stakingManager": {
-            "title": "Staking Management",
-            "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
-            "totalFundsStaked": "Total funds staked",
-            "stakedSuccessfully": "Your funds have been staked for {account}.",
-            "unstakedSuccessfully": "Your funds have been unstaked for {account}."
+            "title": "Staking Upravljanje",
+            "description": "Ko položite denarnico, si pošljete transakcijo, v kateri so ta sredstva označena kot „staked\". Svoje žetone žeton koli prenesete, vendar za polog ne boste več prejeli nagrad.",
+            "totalFundsStaked": "Skupna vložena sredstva",
+            "stakedSuccessfully": "Vaša sredstva so bila staked na {account}.",
+            "unstakedSuccessfully": "Vaša sredstva so bila preklicana za {account}."
         },
         "stakingConfirmation": {
-            "title": "Airdrop Participation",
-            "subtitleStake": "You are about to stake",
-            "subtitleMerge": "You are about to merge",
-            "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
-            "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
-            "estimatedAirdrop": "Estimated rewards"
+            "title": "Udeležba v sistemu Airdrop",
+            "subtitleStake": "Ti so boste približno stake",
+            "subtitleMerge": "Vas so približno do združiti",
+            "bodyStake": "Če ne želite sodelovati v obeh airdrops, se lahko spodaj odjavite. Kadar koli se lahko odjavite in ponovno prijavite ter se ponovno odločite za sodelovanje.",
+            "bodyMerge": "Vaša sredstva bodo staked za {airdrop}. Če želite spremeniti, pri katerih padanjih želite sodelovati, odklenite to denarnico in jo stake zastavite ponovno.",
+            "estimatedAirdrop": "Predvidene premije"
         },
         "shimmer-info": {
-            "title": "About Shimmer",
-            "body1": "Congratulations you have earned SMR tokens as a staking reward. Shimmer is an incentivized staging network to test major upgrades on IOTA.",
+            "title": "O podjetju Shimmer",
+            "body1": "Čestitamo, da ste kot nagrado za vložek prejeli žetone SMR. Shimmer je stimulirano omrežje za testiranje večjih nadgradenj na IOTA.",
             "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
         },
         "assembly-info": {
@@ -784,8 +784,8 @@
         "enterYourPin": "Vnesi PIN kodo",
         "saveBackupFile": "Shrani varnostno kopijo datoteke",
         "iveWrittenRecoveryPhrase": "I’ve written down my recovery phrase",
-        "verifyRecoveryPhrase": "Verify recovery phrase",
-        "revealRecoveryPhrase": "Reveal recovery phrase",
+        "verifyRecoveryPhrase": "Kontrola frázy pre obnovenie",
+        "revealRecoveryPhrase": "Razkriti stavek za okrevanje",
         "importSeedvault": "Import SeedVault",
         "checkAgain": "Preveri Znova",
         "importFromFile": "Import from a file",
@@ -806,7 +806,7 @@
         "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "Enable developer mode",
         "enableSystemNotifications": "Enable system notifications",
-        "exportTransactionHistory": "Export transaction history",
+        "exportTransactionHistory": "Izvoz zgodovine transakcij",
         "localProofOfWork": "Local proof of work",
         "unlock": "Odkleni",
         "updateFirefly": "Posodobi Firefly",
@@ -821,7 +821,7 @@
         "addNode": "Dodaj Node",
         "updateNode": "Posodobi Node",
         "removeNode": "Izbriši node",
-        "removeAllNodes": "Remove all nodes",
+        "removeAllNodes": "Odstranitev vseh vozlišč",
         "hide": "Skrij",
         "hideOthers": "Skrij ostale",
         "showAll": "Prikaži vse",
