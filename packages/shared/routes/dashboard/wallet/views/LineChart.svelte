@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { ChartData, DashboardChartType, WalletChartType } from 'shared/lib/typings/chart'
     import type { Locale } from 'shared/lib/typings/i18n'
-    import { AccountsBalanceHistory, BalanceHistory, WalletAccount } from 'shared/lib/typings/wallet'
+    import type { AccountsBalanceHistory, BalanceHistory, WalletAccount } from 'shared/lib/typings/wallet'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { HistoryDataProps } from 'shared/lib/typings/market'
     import { Chart, Dropdown, Text } from 'shared/components'
@@ -236,7 +236,7 @@
             <span>
                 <Dropdown
                     small
-                    value={locale(`charts.timeframe${TIMEFRAME_MAP[$activeProfile?.settings.chartSelectors.timeframe]}`)}
+                    value={$activeProfile?.settings.chartSelectors.timeframe ? locale(`charts.timeframe${TIMEFRAME_MAP[$activeProfile?.settings.chartSelectors.timeframe]}`) : undefined}
                     items={Object.keys(TIMEFRAME_MAP).map((value) => ({
                         label: locale(`charts.timeframe${TIMEFRAME_MAP[value]}`),
                         value,

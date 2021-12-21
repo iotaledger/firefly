@@ -6,14 +6,14 @@ edition = "2018"
 exclude = ["/bindings", "/api-wrapper"]
 
 [dependencies]
-bee-common = { version = "0.4.1", default-features = false }
-iota-wallet = { git = "https://github.com/iotaledger/wallet.rs", rev = "35828b87b2a15f05b6db56b7743c3de4a6224c85", default-features = false, features = ["stronghold", "ledger-nano", "ledger-nano-simulator"] }
-log = { version = "0.4.14", default-features = false }
-once_cell = { version = "1.8.0", default-features = false }
-serde = { version = "1.0.130", default-features = false }
-serde_json = { version = "1.0.68", default-features = false }
 tokio = { version = "1.12.0", default-features = false }
-riker = { version = "0.4.2", default-features = false }
+once_cell = { version = "1.8.0", default-features = false }
+iota-wallet = { git = "https://github.com/iotaledger/wallet.rs", rev = "054c36fd3281119b22c09da25e175a3d08465873", default-features = false, features = ["stronghold", "ledger-nano", "ledger-nano-simulator", "participation"] }
+serde = { version = "1.0.130", default-features = false, features = ["derive"] }
+serde_json = { version = "1.0.68", default-features = false }
+riker = "0.4.2"
+bee-common = { version = "0.4.1", default-features = false }
+log = { version = "0.4.14", default-features = false }
 
 [dev-dependencies]
 futures = "0.3"

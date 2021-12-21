@@ -1,11 +1,14 @@
 <script lang="typescript">
+    import { onDestroy, onMount } from 'svelte'
+    import { get } from 'svelte/store'
+
     import { Idle, Sidebar } from 'shared/components'
-    import { Settings, Wallet } from 'shared/routes'
+    import { Settings, Staking, Wallet } from 'shared/routes'
     import { loggedIn, logout, sendParams } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { deepLinkRequestActive, parseDeepLink } from 'shared/lib/deepLinking/deepLinking'
-    import { DeepLinkingContexts } from 'shared/lib/typings/deepLinking/deepLinking';
-    import { WalletOperations } from 'shared/lib/typings/deepLinking/walletContext';
+    import { DeepLinkingContexts } from 'shared/lib/typings/deepLinking/deepLinking'
+    import { WalletOperations } from 'shared/lib/typings/deepLinking/walletContext'
     import { Electron } from 'shared/lib/electron'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
@@ -26,9 +29,9 @@
         STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
         wallet,
     } from 'shared/lib/wallet'
-    import { onDestroy, onMount } from 'svelte'
-    import { get } from 'svelte/store'
     import { clearPollNetworkInterval, pollNetworkStatus } from 'shared/lib/networkStatus'
+    import { getParticipationEvents } from 'shared/lib/participation/api'
+    import { clearPollParticipationOverviewInterval, pollParticipationOverview } from 'shared/lib/participation'
 
     export let locale: Locale
     export let mobile
@@ -38,6 +41,7 @@
     const tabs = {
         wallet: Wallet,
         settings: Settings,
+        staking: Staking,
     }
 
     let startInit
@@ -48,14 +52,17 @@
 
     const unsubscribeAccountsLoaded = accountsLoaded.subscribe((val) => {
         if (val) {
+            void getParticipationEvents()
+
             void pollNetworkStatus()
+            void pollParticipationOverview()
         } else {
             clearPollNetworkInterval()
+            clearPollParticipationOverviewInterval()
         }
     })
 
-    // TODO: add missing unsubscribe to onDestroy
-    ongoingSnapshot.subscribe((os) => {
+    const unsubscribeOngoingSnapshot = ongoingSnapshot.subscribe((os) => {
         if (os) {
             openSnapshotPopup()
         }
@@ -114,6 +121,8 @@
 
     onDestroy(() => {
         unsubscribeAccountsLoaded()
+        unsubscribeOngoingSnapshot()
+
         Electron.DeepLinkManager.clearDeepLinkRequest()
         Electron.removeListenersForEvent('deep-link-params')
 

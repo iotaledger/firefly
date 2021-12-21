@@ -14,6 +14,7 @@ import { ErrorType } from '../typings/events'
 import { logError } from './errorLogger'
 import { getErrorMessage } from './walletErrors'
 import { ErrorTypes as ValidatorErrorTypes } from '../typings/validator'
+import { NodePlugin } from '../typings/node'
 
 type CallbacksStore = {
     [id: string]: CallbacksPattern
@@ -40,9 +41,17 @@ const eventsApiToResponseTypeMap = {
     onTransferProgress: ResponseTypes.TransferProgress,
     onLedgerAddressGeneration: ResponseTypes.LedgerAddressGeneration,
     onMigrationProgress: ResponseTypes.MigrationProgress,
+
+    // Staking
+    onStakingOverview: ResponseTypes.StakingOverview,
+    onStakedAccount: ResponseTypes.StakedAccount,
+    onUnstakedAccount: ResponseTypes.UnstakedAccount,
+    onAdditionalFundsStaked: ResponseTypes.AdditionalFundsStaked,
 }
 
 const apiToResponseTypeMap = {
+    ...eventsApiToResponseTypeMap,
+
     removeAccount: ResponseTypes.RemovedAccount,
     createAccount: ResponseTypes.CreatedAccount,
     getAccount: ResponseTypes.ReadAccount,
@@ -78,7 +87,11 @@ const apiToResponseTypeMap = {
     getNodeInfo: ResponseTypes.NodeInfo,
     mineBundle: ResponseTypes.MinedBundle,
     getLegacyAddressChecksum: ResponseTypes.LegacyAddressChecksum,
-    ...eventsApiToResponseTypeMap,
+
+    // Participation
+    getParticipationOverview: ResponseTypes.ParticipationOverview,
+    getParticipationEvents: ResponseTypes.EventsData,
+    participate: ResponseTypes.SentParticipation,
 }
 
 /**
@@ -168,7 +181,7 @@ Wallet.onMessage((message: MessageResponse) => {
         const { onSuccess, onError } = callbacksStore[id]
 
         if (message.type === ResponseTypes.Error) {
-            onError(handleError(message.payload.type, message.payload.error))
+            onError(handleError(message.payload.type, message.payload.error, message.action))
         } else if (message.type === ResponseTypes.Panic) {
             onError(handleError(ErrorType.Panic, message.payload))
         } else {
@@ -213,11 +226,21 @@ const storeCallbacks = (__id: string, type: ResponseTypes, callbacks?: Callbacks
  */
 const handleError = (
     type: ErrorType | ValidatorErrorTypes,
-    error: string
+    error: string,
+    action?: string
 ): { type: ErrorType | ValidatorErrorTypes; error: string } => {
     const newError = { type, message: error, time: Date.now() }
 
-    logError(newError)
+    const hasStatusCode403 = error.includes('Response error with status code 403')
+
+    if (hasStatusCode403) {
+        if (action && action.includes(NodePlugin.Participation)) {
+            newError.message = `${NodePlugin.Participation} not available on your current node. Please try a different node and try again.`
+            logError(newError)
+        }
+    } else {
+        logError(newError)
+    }
 
     // TODO: Add full type list to remove this temporary fix
     const _getError = () => {
@@ -254,6 +277,10 @@ const handleError = (
         }
         if (error.includes('forbidden')) {
             return 'error.node.forbidden'
+        }
+
+        if (hasStatusCode403) {
+            return 'error.node.pluginNotFound'
         }
 
         return getErrorMessage(type)

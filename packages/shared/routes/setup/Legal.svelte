@@ -250,7 +250,9 @@
                         whether express or implied, regarding the App or its use. The IOTA Foundation does not warrant that the
                         use of the App will be uninterrupted or error free and expressly disclaims any representations and
                         warranties as to the merchantability, fitness for a particular purpose, and non-infringement of
-                        third-party rights. No representations or warranties are made that the App or any third-party services
+                        third-party rights, the absence of security flaws or security breaches, bugs, software errors, 
+                        including errors in the technology stacks used, including programming languages and open-source libraries. 
+                        No representations or warranties are made that the App or any third-party services
                         made available through the App will be free from malfunctions, errors, or harmful components. All use of
                         the App is therefore at the sole risk of the User.
                     </Text>
@@ -293,14 +295,26 @@
                             </li>
                             <li>
                                 <Text type="p" secondary classes="mb-4">
+                                    The App may enable features such as voting, participation in token distributions (airdrops) 
+                                    and staking. All such features are provided on an "as available" and an "as is" basis. 
+                                    The IOTA Foundation expressly disclaims any liability for the use of such features and does 
+                                    not warrant or represent that such features are free from errors or interruptions. The IOTA 
+                                    Foundation shall not be liable for lost profits and other indirect damages. Any use of such 
+                                    features is at the sole risk of the User.
+                                </Text>
+                            </li>
+                            <li>
+                                <Text type="p" secondary classes="mb-4">
                                     The IOTA Foundation does not accept any liability for the liabilities of users towards other
                                     users or third parties, such as due to non-fulfilment of concluded contracts.
                                 </Text>
                             </li>
                             <li>
                                 <Text type="p" secondary classes="mb-4">
-                                    The IOTA Foundation does not accept any liability for the loss or misuse of the user's login
-                                    or access data.
+                                    The IOTA Foundation shall not be liable for any loss or theft of the User's digital assets 
+                                    including, but not limited to the loss of the User’s private keys, configuration, 
+                                    installation or transaction errors made by the User, or late execution or late settlement 
+                                    of any transaction.
                                 </Text>
                             </li>
                             <li>

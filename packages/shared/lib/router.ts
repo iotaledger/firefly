@@ -12,6 +12,7 @@ import {
 import { selectedAccountId } from 'shared/lib/wallet'
 import { get, readable, writable } from 'svelte/store'
 import { deepLinkRequestActive } from './deepLinking/deepLinking'
+import { closePopup } from './popup'
 import { ProfileType } from './typings/profile'
 
 /**
@@ -63,6 +64,11 @@ const history = writable<string[]>([])
  * Active dashboard tab
  */
 export const dashboardRoute = writable<Tabs>(Tabs.Wallet)
+
+/**
+ * Previous dashboard tab
+ */
+export const previousDashboardRoute = writable<Tabs>(undefined)
 
 /**
  * Ledger setup route
@@ -304,4 +310,11 @@ export const resetWalletRoute = (): void => {
 export const resetLedgerRoute = (): void => {
     ledgerRoute.set(LedgerRoutes.LegacyIntro)
     ledgerRouteHistory.set([])
+}
+
+export const openSettings = (): void => {
+    closePopup()
+    previousDashboardRoute.set(get(dashboardRoute))
+    dashboardRoute.set(Tabs.Settings)
+    settingsRoute.set(SettingsRoutes.Init)
 }

@@ -38,6 +38,7 @@ import type {
     SignerType,
     SyncAccountOptions,
     SyncedAccount,
+    AccountIdentifier,
 } from './typings/account'
 import type { Address } from './typings/address'
 import type { Actor, GetMigrationAddressResponse } from './typings/bridge'
@@ -60,6 +61,20 @@ import type {
     WalletAccount,
     WalletState,
 } from './typings/wallet'
+import { deepCopy } from './helpers'
+
+// PARTICIPATION
+import {
+    ParticipateResponsePayload,
+    Participation,
+    ParticipationAction,
+    ParticipationEvent,
+    ParticipationOverviewResponse,
+    PendingParticipation,
+} from './participation/types'
+
+import { removePendingParticipations, hasPendingParticipation, getPendingParticipation } from './participation/stores'
+import { getParticipationOverview } from './participation/api'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -161,6 +176,10 @@ interface IWalletApi {
     verifyMnemonic(
         mnemonic: string,
         callbacks: { onSuccess: (response: Event<string>) => void; onError: (err: ErrorEventPayload) => void }
+    )
+    getAccount(
+        accountId: AccountIdentifier,
+        callbacks: { onSuccess: (response: Event<Account>) => void; onError: (err: ErrorEventPayload) => void }
     )
     getAccounts(callbacks: {
         onSuccess: (response: Event<Account[]>) => void
@@ -344,7 +363,7 @@ interface IWalletApi {
     )
     getMigrationAddress(
         prompt: boolean,
-        accountIndex: number,
+        accountIdentifier: AccountIdentifier,
         callbacks: {
             onSuccess: (response: Event<GetMigrationAddressResponse>) => void
             onError: (err: ErrorEventPayload) => void
@@ -384,6 +403,40 @@ interface IWalletApi {
     getLegacyAddressChecksum(
         address: string,
         callbacks: { onSuccess: (response: Event<string>) => void; onError: (err: ErrorEventPayload) => void }
+    )
+
+    // Participation (voting / staking)
+    getParticipationOverview(callbacks: {
+        onSuccess: (response: Event<ParticipationOverviewResponse>) => void
+        onError: (err: ErrorEventPayload) => void
+    })
+    getParticipationEvents(callbacks: {
+        onSuccess: (response: Event<ParticipationEvent[]>) => void
+        onError: (err: ErrorEventPayload) => void
+    })
+    participate(
+        accountId: string,
+        participations: Participation[],
+        callbacks: {
+            onSuccess: (response: Event<ParticipateResponsePayload>) => void
+            onError: (err: ErrorEventPayload) => void
+        }
+    )
+    stopParticipating(
+        accountId: string,
+        eventIds: string[],
+        callbacks: {
+            onSuccess: (response: Event<ParticipateResponsePayload>) => void
+            onError: (err: ErrorEventPayload) => void
+        }
+    )
+    participateWithRemainingFunds(
+        accountId: string,
+        participations: Participation[],
+        callbacks: {
+            onSuccess: (response: Event<ParticipateResponsePayload>) => void
+            onError: (err: ErrorEventPayload) => void
+        }
     )
 }
 
@@ -751,8 +804,15 @@ export const asyncSyncAccountOffline = (account: WalletAccount): Promise<void> =
         })
     })
 
-export const asyncGetNodeInfo = (accountId: string, url?: string, auth?: NodeAuth): Promise<NodeInfo> =>
-    new Promise<NodeInfo>((resolve, reject) => {
+export const asyncGetNodeInfo = (accountId: string, url?: string, auth?: NodeAuth): Promise<NodeInfo> => {
+    if (!url || (!url && !auth)) {
+        const node = get(activeProfile)?.settings?.networkConfig?.nodes.find((n) => n.isPrimary)
+
+        url = node?.url
+        auth = node?.auth
+    }
+
+    return new Promise<NodeInfo>((resolve, reject) => {
         api.getNodeInfo(accountId, url, auth, {
             onSuccess(response) {
                 resolve(response.payload)
@@ -762,6 +822,77 @@ export const asyncGetNodeInfo = (accountId: string, url?: string, auth?: NodeAut
             },
         })
     })
+}
+
+/**
+ * Displays participation (stake/unstake) notification
+ *
+ * @method displayParticipationNotification
+ *
+ * @param {PendingParticipation} pendingParticipation
+ *
+ * @return void
+ */
+function displayParticipationNotification(pendingParticipation: PendingParticipation): void {
+    if (pendingParticipation) {
+        const { accounts } = get(wallet)
+        const account = get(accounts).find((_account) => _account.id === pendingParticipation.accountId)
+
+        showAppNotification({
+            type: 'info',
+            message: localize(
+                `popups.stakingManager.${
+                    pendingParticipation.action === ParticipationAction.Stake ? 'staked' : 'unstaked'
+                }Successfully`,
+                { values: { account: account.alias } }
+            ),
+        })
+    }
+}
+
+/**
+ * NOTE: This method mutates account object
+ * Creates a message pair for internal messages and adds it to the account messages
+ *
+ * @method addMessagesPair
+ *
+ * @param {Account} account
+ *
+ * @returns {void}
+ */
+export function addMessagesPair(account: Account): void {
+    // Only keep messages with a payload
+    account.messages = account.messages.filter((m) => m.payload)
+
+    // The wallet only returns one side of internal transfers
+    // to the same account, so create the other side by first finding
+    // the internal messages
+    const internalMessages = account.messages.filter((m) => getInternalFlag(m.payload))
+
+    for (const internalMessage of internalMessages) {
+        // Check if the message sends to another address in the same account
+        const isSelf = isSelfTransaction(internalMessage.payload, account)
+
+        if (isSelf && !isParticipationPayload(internalMessage.payload)) {
+            // It's a transfer between two addresses in the same account
+            // Try and find the other side of the pair where the message id
+            // would be the same and the incoming flag the opposite
+            const internalIncoming = getIncomingFlag(internalMessage.payload)
+            let pair: Message = internalMessages.find(
+                (m) => m.id === internalMessage.id && getIncomingFlag(m.payload) !== internalIncoming
+            )
+
+            // Can't find the other side of the pair so clone the original
+            // reverse its incoming flag and store it
+            if (!pair) {
+                pair = deepCopy(internalMessage) as Message
+                // Reverse the incoming flag for the other side of the pair
+                setIncomingFlag(pair.payload, !getIncomingFlag(pair.payload))
+                account.messages.push(pair)
+            }
+        }
+    }
+}
 
 /**
  * Initialises event listeners from wallet library
@@ -788,15 +919,15 @@ export const initialiseListeners = (): void => {
      */
     api.onNewTransaction({
         onSuccess(response) {
-            const { accounts } = get(wallet)
-            const account = get(accounts).find((account) => account.id === response.payload.accountId)
-            const { message } = response.payload
+            const { balanceOverview, accounts } = get(wallet)
+            const { accountId, message } = response.payload
+            const account = get(accounts).find((account) => account.id === accountId)
+            if (!account || !message) return
 
             if (message.payload.type === 'Transaction') {
                 const { essence } = message.payload.data
 
                 if (!essence.data.internal) {
-                    const { balanceOverview } = get(wallet)
                     const overview = get(balanceOverview)
 
                     const incoming = essence.data.incoming
@@ -810,23 +941,23 @@ export const initialiseListeners = (): void => {
                 }
 
                 // Update account with new message
-                saveNewMessage(response.payload.accountId, response.payload.message)
+                saveNewMessage(accountId, message)
 
                 const notificationMessage = localize('notifications.valueTx')
-                    .replace('{{value}}', formatUnitBestMatch(message.payload.data.essence.data.value, true, 3))
-                    .replace('{{account}}', account.alias)
+                    .replace('{{value}}', formatUnitBestMatch(message?.payload.data.essence.data.value, true, 3))
+                    .replace('{{account}}', account?.alias)
 
                 showSystemNotification({
                     type: 'info',
                     message: notificationMessage,
-                    contextData: { type: 'valueTx', accountId: account.id },
+                    contextData: { type: 'valueTx', accountId },
                 })
             } else if (message.payload.type === 'Milestone') {
                 // Update account with new message
-                saveNewMessage(response.payload.accountId, response.payload.message)
+                saveNewMessage(accountId, message)
                 processMigratedTransactions(
-                    response.payload.accountId,
-                    [response.payload.message],
+                    accountId,
+                    [message],
 
                     // New transaction will only emit an event for fluid migrations
                     []
@@ -842,9 +973,21 @@ export const initialiseListeners = (): void => {
      * Event listener for transfer confirmation state change
      */
     api.onConfirmationStateChange({
-        onSuccess(response) {
+        async onSuccess(response) {
             const { accounts } = get(wallet)
             const { message } = response.payload
+
+            // Checks if this was a message sent for participating in an event
+            if (hasPendingParticipation(message.id)) {
+                // Instantly pull in latest participation overview.
+                await getParticipationOverview()
+
+                // If it is a message related to any participation event, display a notification
+                displayParticipationNotification(getPendingParticipation(message.id))
+
+                // Remove the pending participation from local store
+                removePendingParticipations([message.id])
+            }
 
             if (message.payload.type === 'Transaction') {
                 const { confirmed } = response.payload
@@ -950,17 +1093,63 @@ export const initialiseListeners = (): void => {
     api.onBalanceChange({
         onSuccess(response) {
             const {
-                payload: { accountId, address, balanceChange, messageId },
+                payload: { messageId },
             } = response
 
-            updateAccountAfterBalanceChange(accountId, address, balanceChange.received, balanceChange.spent)
+            // TODO(laumair): Some parts of this logic are duplicated from when we initially fetch all accounts;
+            // Make sure this is refactored
 
-            const { balanceOverview } = get(wallet)
-            const overview = get(balanceOverview)
+            // On balance change event, get the updated account objects from wallet-rs db
+            api.getAccounts({
+                onSuccess(response) {
+                    const { accounts } = get(wallet)
 
-            const balance = overview.balanceRaw - balanceChange.spent + balanceChange.received
+                    let completeCount = 0
+                    const totalBalance = {
+                        balance: 0,
+                        incoming: 0,
+                        outgoing: 0,
+                    }
 
-            updateBalanceOverview(balance, overview.incomingRaw, overview.outgoingRaw)
+                    const latestAccounts = []
+
+                    // 1. Iterate on all accounts;
+                    // 2. Get latest metadata for all accounts (to compute the latest balance overview);
+                    // 3. Only update the account for which the balance change event emitted;
+                    // 4. Update balance overview & accounts
+                    for (const _account of response.payload) {
+                        getAccountMeta(_account.id, (metaErr, meta) => {
+                            if (!metaErr) {
+                                // Compute balance overview for each account
+                                totalBalance.balance += meta.balance
+                                totalBalance.incoming += meta.incoming
+                                totalBalance.outgoing += meta.outgoing
+
+                                addMessagesPair(_account)
+
+                                const updatedAccountInfo = prepareAccountInfo(_account, meta)
+
+                                // Keep the messages as is because they get updated through a different event
+                                // Also, we create pairs for internal messages, so best to keep those rather than reimplementing the logic here
+                                latestAccounts.push(updatedAccountInfo)
+
+                                completeCount++
+
+                                if (completeCount === response.payload.length) {
+                                    accounts.update((_accounts) => latestAccounts.sort((a, b) => a.index - b.index))
+
+                                    updateBalanceOverview(
+                                        totalBalance.balance,
+                                        totalBalance.incoming,
+                                        totalBalance.outgoing
+                                    )
+                                }
+                            }
+                        })
+                    }
+                },
+                onError(response) {},
+            })
 
             // Migration
             if (messageId === '0'.repeat(64)) {
@@ -1046,78 +1235,6 @@ const updateAllMessagesState = (accounts, messageId, confirmation) => {
     )
 
     return confirmationHasChanged
-}
-
-/**
- * Updates account information after balance change
- *
- * @method updateAccountAfterBalanceChange
- *
- * @param {string} accountId
- * @param {Address} addressMeta
- */
-export const updateAccountAfterBalanceChange = (
-    accountId: string,
-    address: string,
-    receivedBalance: number,
-    spentBalance: number
-): void => {
-    const { accounts } = get(wallet)
-
-    accounts.update((storedAccounts) =>
-        storedAccounts.map((storedAccount) => {
-            if (storedAccount.id === accountId) {
-                const rawIotaBalance = storedAccount.rawIotaBalance - spentBalance + receivedBalance
-
-                const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD
-
-                let updatedAddress = false
-                const updatedAccount = Object.assign<WalletAccount, Partial<WalletAccount>>(storedAccount, {
-                    rawIotaBalance,
-                    balance: formatUnitBestMatch(rawIotaBalance, true, 3),
-                    balanceEquiv: formatCurrency(
-                        convertToFiat(
-                            rawIotaBalance,
-                            get(currencies)[CurrencyTypes.USD],
-                            get(exchangeRates)[activeCurrency]
-                        )
-                    ),
-                    addresses: storedAccount.addresses.map((_address: Address) => {
-                        if (_address.address === address) {
-                            _address.balance += receivedBalance - spentBalance
-                            updatedAddress = true
-                        }
-
-                        return _address
-                    }),
-                })
-
-                // The address could not be found in our current list of addresses
-                // call getAccounts to fill in the missing information
-                if (!updatedAddress) {
-                    api.getAccounts({
-                        onSuccess(accountsResponse) {
-                            const ac = accountsResponse.payload.find((a) => a.id === accountId)
-                            if (ac) {
-                                const addr = ac.addresses.find((ad) => ad.address === address)
-                                if (addr) {
-                                    updatedAccount.addresses.push(addr)
-                                }
-                            }
-                        },
-                        onError(err) {
-                            // Not much we can do with an error here
-                            console.error(err)
-                        },
-                    })
-                }
-
-                return updatedAccount
-            }
-
-            return storedAccount
-        })
-    )
 }
 
 /**
@@ -1632,7 +1749,11 @@ export const processMigratedTransactions = (accountId: string, messages: Message
             if (account) {
                 const _activeProfile = get(activeProfile)
 
-                if (_activeProfile.migratedTransactions && _activeProfile.migratedTransactions.length) {
+                if (
+                    _activeProfile &&
+                    _activeProfile.migratedTransactions &&
+                    _activeProfile.migratedTransactions.length
+                ) {
                     const { funds } = message.payload.data.essence.receipt.data
 
                     const tailTransactionHashes = funds.map((fund) => fund.tailTransactionHash)
@@ -1660,6 +1781,35 @@ export const processMigratedTransactions = (accountId: string, messages: Message
         })
     }
 }
+
+/**
+ * Gets indexation string
+ *
+ * @method getIndexationString
+ *
+ * @param {Payload} payload
+ *
+ * @returns {undefined | string}
+ */
+export const getIndexationString = (payload: Payload): string | undefined => {
+    if (payload && payload.type === 'Transaction') {
+        const indexationPayload = payload.data.essence.data.payload?.data
+        if (!indexationPayload) return undefined
+
+        return String.fromCharCode(...indexationPayload?.index)
+    }
+}
+
+/**
+ * Checks if indexation string corresponds to participation
+ *
+ * @method isParticipationPayload
+ *
+ * @param {Payload} payload
+ *
+ * @returns {boolean}
+ */
+export const isParticipationPayload = (payload: Payload): boolean => getIndexationString(payload) === 'PARTICIPATE'
 
 /**
  * Check if a message was emitted and received by the provided account
@@ -1894,4 +2044,19 @@ const calculateRegularSyncAccountOptions = (profileType: ProfileType, isManualSy
     accountDiscoveryThreshold = isManualSync && _isFirstSessionSync ? 1 : 0
 
     return { gapLimit, accountDiscoveryThreshold }
+}
+
+/**
+ * Determines whether an account has any currently pending transactions.
+ *
+ * @method hasPendingTransactions
+ *
+ * @param {WalletAccount} account
+ *
+ * @returns {boolean}
+ */
+export const hasPendingTransactions = (account: WalletAccount): boolean => {
+    if (!account) return false
+
+    return account?.messages.some((m) => !m.confirmed)
 }
