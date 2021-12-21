@@ -323,7 +323,10 @@ const calculateNumMilestonesUntilMinimumReward = (
     rewardsNeeded: number,
     airdrop: StakingAirdrop,
     amountStaked: number
-): number => (rewardsNeeded * 1_000_000) / (amountStaked * getAirdropRewardMultipler(airdrop))
+): number => {
+    const result = (rewardsNeeded * 1_000_000) / (amountStaked * getAirdropRewardMultipler(airdrop))
+    return isNaN(result) ? 0 : result
+}
 
 const getMinimumRewardsRequired = (rewards: number, airdrop: StakingAirdrop): number => {
     const event = getStakingEventFromAirdrop(airdrop)
@@ -337,11 +340,13 @@ const getMinimumRewardsRequired = (rewards: number, airdrop: StakingAirdrop): nu
 
 const calculateTimeUntilMinimumReward = (rewards: number, airdrop: StakingAirdrop, amountStaked: number): number => {
     const minRewardsRequired = getMinimumRewardsRequired(rewards, airdrop)
-    return (
-        calculateNumMilestonesUntilMinimumReward(minRewardsRequired, airdrop, amountStaked) *
-        SECONDS_PER_MILESTONE *
-        MILLISECONDS_PER_SECOND
+    const numMilestonesUntilMinimumReward = calculateNumMilestonesUntilMinimumReward(
+        minRewardsRequired,
+        airdrop,
+        amountStaked
     )
+
+    return numMilestonesUntilMinimumReward * SECONDS_PER_MILESTONE * MILLISECONDS_PER_SECOND
 }
 
 /**
@@ -406,6 +411,7 @@ const calculateIotasUntilMinimumReward = (rewards: number, airdrop: StakingAirdr
  * @method getIotasUntilMinimumAirdropReward
  *
  * @param {WalletAccount} account
+ * @param {StakingAirdrop} airdrop
  * @param {boolean} format
  *
  * @returns {number | string}
@@ -459,7 +465,7 @@ export const canAccountReachMinimumAirdrop = (account: WalletAccount, airdrop: S
  *
  * @method getCurrentRewardsForAirdrop
  *
- * @param {AccountParticipationOverview} overview
+ * @param {WalletAccount} account
  * @param {StakingAirdrop} airdrop
  *
  * @returns {number}
@@ -468,7 +474,9 @@ export const getCurrentRewardsForAirdrop = (account: WalletAccount, airdrop: Sta
     const overview = get(participationOverview).find((apo) => apo.accountIndex === account?.index)
     if (!overview) return 0
 
-    return airdrop === StakingAirdrop.Assembly ? overview.assemblyRewards : overview.shimmerRewards
+    return airdrop === StakingAirdrop.Assembly
+        ? overview.assemblyRewards + overview.assemblyRewardsBelowMinimum
+        : overview.shimmerRewards + overview.shimmerRewardsBelowMinimum
 }
 
 /**
@@ -476,7 +484,7 @@ export const getCurrentRewardsForAirdrop = (account: WalletAccount, airdrop: Sta
  *
  * @method getCurrentStakeForAirdrop
  *
- * @param {AccountParticipationOverview} overview
+ * @param {WalletAccount} account
  * @param {StakingAirdrop} airdrop
  *
  * @returns {number}
