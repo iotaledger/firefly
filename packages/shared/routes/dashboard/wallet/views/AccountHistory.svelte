@@ -72,8 +72,6 @@
             }
         }
     }
-
-    const getTransactions = (): AccountMessage[] => transactions
 </script>
 
 <div class="h-full p-8 flex flex-col flex-auto flex-grow flex-shrink-0">
