@@ -20,7 +20,7 @@ export const appSettings = persistent<AppSettings>('settings', {
  * e.g. queries on MacOS result in up-to-date information whereas Linux-based platforms
  * result in stale information.
  */
-const isSystemInDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+const SYSTEM_IS_IN_DARKMODE = window.matchMedia('(prefers-color-scheme: dark)').matches
 
 /**
  * Determines if the theme is dark or not based on the current
@@ -31,4 +31,4 @@ const isSystemInDarkMode = window.matchMedia('(prefers-color-scheme: dark)').mat
  * @returns {boolean} True if the app should be in dark mode according to the theme
  */
 export const shouldBeDarkMode = (theme: AppTheme): boolean =>
-    theme === 'system' ? isSystemInDarkMode : theme === 'dark'
+    theme === 'system' ? SYSTEM_IS_IN_DARKMODE : theme === 'dark'

@@ -1,7 +1,8 @@
 <script lang="typescript">
     import { Checkbox, Dropdown, HR, Radio, Text } from 'shared/components'
     import { loggedIn } from 'shared/lib/app'
-    import { appSettings, AppTheme, shouldBeDarkMode } from 'shared/lib/appSettings'
+    import { appSettings, shouldBeDarkMode } from 'shared/lib/appSettings'
+    import { AppTheme } from 'shared/lib/typings/app'
     import { exchangeRates } from 'shared/lib/currency'
     import { locales, setLanguage, _ } from 'shared/lib/i18n'
     import { addProfileCurrencyPriceData } from 'shared/lib/market'
@@ -14,7 +15,7 @@
     let notificationsChecked = $appSettings.notifications
     let hideNetworkStatistics = $activeProfile?.settings.hideNetworkStatistics
 
-    let appTheme: AppTheme = $appSettings.theme
+    let appTheme: AppTheme = $appSettings.theme || 'light'
     $: $appSettings.theme = appTheme
     $: $appSettings.darkMode = shouldBeDarkMode($appSettings.theme)
 
