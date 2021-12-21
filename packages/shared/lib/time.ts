@@ -34,16 +34,18 @@ export const getBestTimeDuration = (millis: number, noDurationUnit: Duration = '
     if (Number.isNaN(millis)) return zeroTime
 
     const inDays = millis / (HOURS_PER_DAY * MINUTES_PER_HOUR * SECONDS_PER_MINUTE * MILLISECONDS_PER_SECOND)
-    if (inDays >= 1) return localize('times.day', { values: { time: Math.floor(inDays) } })
+    if (inDays >= 1) return localize('times.day', { values: { time: inDays > 1 ? Math.ceil(inDays) : inDays } })
 
     const inHours = millis / (MINUTES_PER_HOUR * SECONDS_PER_MINUTE * MILLISECONDS_PER_SECOND)
-    if (inHours >= 1) return localize('times.hour', { values: { time: Math.floor(inHours) } })
+    if (inHours >= 1) return localize('times.hour', { values: { time: inHours > 1 ? Math.ceil(inHours) : inHours } })
 
     const inMinutes = millis / (SECONDS_PER_MINUTE * MILLISECONDS_PER_SECOND)
-    if (inMinutes >= 1) return localize('times.minute', { values: { time: Math.floor(inMinutes) } })
+    if (inMinutes >= 1)
+        return localize('times.minute', { values: { time: inMinutes > 1 ? Math.ceil(inMinutes) : inMinutes } })
 
     const inSeconds = millis / MILLISECONDS_PER_SECOND
-    if (inSeconds >= 1) return localize('times.second', { values: { time: Math.floor(inSeconds) } })
+    if (inSeconds >= 1)
+        return localize('times.second', { values: { time: inSeconds > 1 ? Math.ceil(inSeconds) : inSeconds } })
 
     return zeroTime
 }
