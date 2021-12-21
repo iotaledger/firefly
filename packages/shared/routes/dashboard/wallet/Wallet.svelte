@@ -35,25 +35,21 @@
         getAccountMessages,
         getAccountMeta,
         getAccountsBalanceHistory,
-        getIncomingFlag,
-        getInternalFlag,
         getSyncAccountOptions,
         getTransactions,
         getWalletBalanceHistory,
         hasGeneratedALedgerReceiveAddress,
         initialiseListeners,
         isFirstSessionSync,
-        isSelfTransaction,
         isTransferring,
         prepareAccountInfo,
         processMigratedTransactions,
         removeEventListeners,
         selectedAccountId,
-        setIncomingFlag,
         transferState,
         updateBalanceOverview,
         wallet,
-        isParticipationPayload
+        addMessagesPair
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
     import { derived, Readable, Writable } from 'svelte/store'
@@ -205,38 +201,7 @@
                     let completeCount = 0
                     const newAccounts = []
                     for (const payloadAccount of accountsResponse.payload) {
-                        // Only keep messages with a payload
-                        payloadAccount.messages = payloadAccount.messages.filter((m) => m.payload)
-
-                        // The wallet only returns one side of internal transfers
-                        // to the same account, so create the other side by first finding
-                        // the internal messages
-                        const internalMessages = payloadAccount.messages.filter((m) => getInternalFlag(m.payload))
-
-                        for (const internalMessage of internalMessages) {
-                            // Check if the message sends to another address in the same account
-                            const isSelf = isSelfTransaction(internalMessage.payload, payloadAccount)
-
-                            if (isSelf && !isParticipationPayload(internalMessage.payload)) {
-                                // It's a transfer between two addresses in the same account
-                                // Try and find the other side of the pair where the message id
-                                // would be the same and the incoming flag the opposite
-                                const internalIncoming = getIncomingFlag(internalMessage.payload)
-                                let pair: Message = internalMessages.find(
-                                    (m) =>
-                                        m.id === internalMessage.id && getIncomingFlag(m.payload) !== internalIncoming
-                                )
-
-                                // Can't find the other side of the pair so clone the original
-                                // reverse its incoming flag and store it
-                                if (!pair) {
-                                    pair = deepCopy(internalMessage) as Message
-                                    // Reverse the incoming flag for the other side of the pair
-                                    setIncomingFlag(pair.payload, !getIncomingFlag(pair.payload))
-                                    payloadAccount.messages.push(pair)
-                                }
-                            }
-                        }
+                        addMessagesPair(payloadAccount);
 
                         getAccountMeta(payloadAccount.id, (err, meta) => {
                             if (!err) {

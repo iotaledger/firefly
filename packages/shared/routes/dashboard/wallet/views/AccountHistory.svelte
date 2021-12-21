@@ -72,8 +72,6 @@
             }
         }
     }
-
-    const getTransactions = (): AccountMessage[] => transactions
 </script>
 
 <div class="h-full p-8 flex flex-col flex-auto flex-grow flex-shrink-0">
@@ -101,7 +99,7 @@
     {:else}
         <div class="overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2 scroll-secondary">
             {#if transactions.length}
-                {#each getTransactions() as transaction}
+                {#each transactions as transaction}
                     <ActivityRow
                         onClick={() => handleTransactionClick(transaction)}
                         {...transaction}

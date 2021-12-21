@@ -774,6 +774,8 @@ export default class ValidatorService {
                 .getFirst(),
             [ResponseTypes.CreatedAccount]: this.createBaseValidator().add(new AccountValidator()).getFirst(),
             [ResponseTypes.ReadAccounts]: this.createBaseValidator().add(new AccountListValidator()).getFirst(),
+            [ResponseTypes.ReadAccount]: this.createBaseValidator().add(new AccountValidator()).getFirst(),
+
             [ResponseTypes.Balance]: this.createBaseValidator().add(new PayloadTypeValidator('object')).getFirst(),
             [ResponseTypes.BackupRestored]: this.createBaseValidator().getFirst(),
             [ResponseTypes.BackupSuccessful]: this.createBaseValidator().getFirst(),
