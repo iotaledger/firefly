@@ -83,7 +83,7 @@
             </button>
         {:else}
             <div class="flex flex-1 flex-row justify-between">
-                <Text type="h5">{locale('general.transactions')}</Text>
+                <Text type="h5">{locale('general.transactions')} <span class="text-gray-500">• {transactions.length}</span></Text>
                 {#if !$selectedMessage}
                     <button on:click={handleSyncAccountClick} class:pointer-events-none={$isSyncing}>
                         <Icon
