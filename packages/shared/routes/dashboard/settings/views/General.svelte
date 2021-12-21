@@ -12,12 +12,12 @@
 
     export let locale: Locale
 
-    let notificationsChecked = $appSettings.notifications
+    let notificationsChecked = $appSettings?.notifications
     let hideNetworkStatistics = $activeProfile?.settings.hideNetworkStatistics
 
-    let appTheme: AppTheme = $appSettings.theme || 'light'
+    let appTheme: AppTheme = $appSettings?.theme || $appSettings?.darkMode ? 'dark' : 'light'
     $: $appSettings.theme = appTheme
-    $: $appSettings.darkMode = shouldBeDarkMode($appSettings.theme)
+    $: $appSettings.darkMode = shouldBeDarkMode($appSettings?.theme)
 
     $: $appSettings.notifications = notificationsChecked
     $: updateProfile('settings.hideNetworkStatistics', hideNetworkStatistics)
