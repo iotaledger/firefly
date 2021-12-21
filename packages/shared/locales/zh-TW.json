@@ -109,7 +109,7 @@
             "title": "備份至一個 Stronghold 檔案",
             "body1": "輸入密碼以將您的錢包備份至 Stronghold 檔案。您的密碼將用於加密此備份檔案。",
             "body2": "數位備份之所以重要的原因：",
-            "reason1": "無需輸入助記詞即可輕鬆還原錢包",
+            "reason1": "無需輸入助記詞即可輕鬆恢復錢包",
             "reason2": "將您的錢包導入其他設備",
             "reason3": "恢復您的完整交易記錄"
         },
@@ -142,7 +142,7 @@
             "seed": {
                 "title": "輸入您的種子開始遷移",
                 "body": "種子由 81 個字符組成。這用來把錢包內容從舊版的 Trinity app 還原。",
-                "enter": "輸入您的種子碼"
+                "enter": "輸入您的助記詞"
             },
             "mnemonic": {
                 "title": "輸入您的還原助記詞",
@@ -232,8 +232,8 @@
             "incorrectSeedVaultPassword": "SeedVault 密碼錯誤。",
             "noDataSeedVault": "在 SeedVault 中找不到資料。",
             "signingBundle": "交易組簽發中",
-            "broadcastingBundle": "廣播交易組",
-            "miningBundle": "挖掘交易組",
+            "broadcastingBundle": "交易組廣播中",
+            "miningBundle": "交易組挖掘中",
             "problemRestoringWallet": "還原您的錢包時出現網路錯誤。 請再試一次。",
             "minimumMigrationAmountSpentAddresses": "每個「已支出地址」的最小遷移數量是 1Mi。如果您的餘額看起來不對，請再次檢查。",
             "tooManyAddressesToMigrate": "您有太多小額地址需要遷移。若您的餘額看起來不對，請再次檢查。",
@@ -257,7 +257,7 @@
             "title": "安全檢查已完成",
             "body1": "我們已經計算出安全風險層級，再度運行這個程序可以降低您的風險層級。",
             "body2": "當您對各項風險層級滿意時，請按「繼續」。",
-            "rerun": "重新執行所選的地址",
+            "rerun": "重新評定所選的地址",
             "continueMigration": "繼續遷移"
         },
         "securingSpentAddresses": {
@@ -419,7 +419,7 @@
             },
             "documentation": {
                 "title": "文獻資料",
-                "description": "查看文件以獲取有關工作原理的深入說明"
+                "description": "查看文獻以獲取工作原理的深入說明"
             },
             "faq": {
                 "title": "常見問題",
@@ -458,7 +458,7 @@
                         "legacyConnected": "{legacy} App 開啓",
                         "locked": "鎖定",
                         "mnemonicMismatch": "Ledger 或助記詞錯誤",
-                        "notDetected": "未偵測",
+                        "notDetected": "未偵測到",
                         "otherConnected": "App 已開啟"
                     }
                 },
@@ -611,7 +611,7 @@
             "title": "切換網路",
             "newNetwork": "新的網路",
             "resetWarning": "變更網路會登出並重置所有帳戶、餘額和此設定檔的交易記錄。",
-            "switchingNetwork": "切換網路",
+            "switchingNetwork": "切換網路中...",
             "typePassword": "輸入密碼以切換到："
         },
         "errorLog": {
@@ -648,7 +648,7 @@
         "riskFunds": {
             "title": "警告：資金在遷移過程中有風險",
             "body1": "強烈建議您在轉移前保管好資金．如果您沒有安全保管資金則其會處於竊盜風險中．",
-            "body2": "建議您，為處於中級風險以上的地址，重新運行此步驟"
+            "body2": "此地址為中級風險以上，建議您重新運行此步驟"
         },
         "missingBundle": {
             "title": "警告：資金在遷移過程中有風險",
@@ -719,7 +719,7 @@
         "stakingNotice": {
             "upcomingDate": "質押尚未開始",
             "commencingDate": "質押尚未開始",
-            "body": "在質押正式啟動前預先質押你的資金，在質押啟動時你就能自動開始收到質押獎勵。",
+            "body": "在質押正式啟動前預先質押您的資金，您將在質押啟動時自動開始獲得獎勵。",
             "ok": "好的，我瞭解了"
         },
         "stakingManager": {
@@ -877,7 +877,7 @@
         "newPassword": "新密碼",
         "confirmNewPassword": "確認新密碼",
         "yourSeed": "您的種子",
-        "recoveryPhrase": "助記詞",
+        "recoveryPhrase": "還原助記詞",
         "recentActivity": "近期活動",
         "sent": "已發送",
         "received": "已接收",
@@ -1032,7 +1032,7 @@
         "downloadingUpdate": "下載更新中",
         "updateReady": "準備更新",
         "updateError": "更新時發生錯誤，請重試。",
-        "restartInstall": "重新安裝",
+        "restartInstall": "重新啟動以進行安裝",
         "calcMinutesRemaining": "正在計算剩餘時間...",
         "minutesRemaining": "{minutes, plural, one {剩下 1 分鐘} other {剩下 # 分鐘}}",
         "copiedToClipboard": "已複製到剪貼簿",
@@ -1065,7 +1065,7 @@
             "doNotMatch": "密碼不吻合。",
             "tooWeak": "您的新密碼強度太弱。",
             "row": "直列按鍵組合很容易被猜中。",
-            "pattern": "過短的鍵盤樣式很容易被猜中。",
+            "pattern": "過短的密碼很容易被猜到",
             "names": "常見的名字和姓氏很容易被猜中。",
             "repeats": "像 ’aaa‘ 這樣的重複格式很容易被猜中。",
             "repeats2": "像 ‘abcabcabc’ 這樣重複的格式很容易被猜中。",
@@ -1114,7 +1114,7 @@
         },
         "node": {
             "invalid": "請輸入有效的 URL。",
-            "dns": "無法找到此節點的 DNS 解析。",
+            "dns": "無法找到此節點的DNS解析。",
             "timedOut": "連線逾時。",
             "refused": "此連線被拒絕。",
             "handshake": "無法與節點進行連線交握。",
@@ -1203,7 +1203,7 @@
                 "body": "預先質押您的代幣。一旦開始質押活動，您將自動於每十秒獲得一次質押獎勵。"
             },
             "activeHolding": {
-                "title": "質押現正進行中",
+                "title": "現在質押正在進行中",
                 "body": "恭喜。您將在每10秒獲得獎勵。"
             },
             "inactiveHolding": {
