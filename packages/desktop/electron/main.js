@@ -91,7 +91,7 @@ const defaultWebPreferences = {
     disableBlinkFeatures: 'Auxclick',
     webviewTag: false,
     enableWebSQL: false,
-    devTools: true,
+    devTools: !app.isPackaged,
 }
 
 if (app.isPackaged) {
