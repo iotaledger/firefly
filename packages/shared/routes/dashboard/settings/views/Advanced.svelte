@@ -6,11 +6,12 @@
     import { Electron } from 'shared/lib/electron'
     import { navigateToNewIndexMigration } from 'shared/lib/ledger'
     import {
-    ensureSinglePrimaryNode,getNodeCandidates,
-    getOfficialNetworkConfig,
-    getOfficialNodes,
-    isOfficialNetwork,
-    updateClientOptions
+        ensureSinglePrimaryNode,
+        getNodeCandidates,
+        getOfficialNetworkConfig,
+        getOfficialNodes,
+        isOfficialNetwork,
+        updateClientOptions
     } from 'shared/lib/network'
     import { networkStatus,NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
     import { openPopup } from 'shared/lib/popup'
@@ -116,16 +117,16 @@
                 node,
                 nodes: networkConfig.nodes,
                 network: networkConfig.network,
-                onSuccess: (isNetworkSwitch: boolean, node: Node) => {
-                    const idx = networkConfig.nodes.findIndex((n) => n.url === node.url)
-                    if (idx >= 0) {
-                        if(node.isPrimary) {
-                            networkConfig.nodes = networkConfig.nodes.map((n) => ({ ...n, isPrimary: n.url === node.url }))
+                onSuccess: (isNetworkSwitch: boolean, _node: Node) => {
+                    const editedNodeIndex = networkConfig.nodes.findIndex((n) => n.url === node.url)
+                    if (editedNodeIndex >= 0) {
+                        if(_node.isPrimary) {
+                            networkConfig.nodes = networkConfig.nodes.map((n, idx) => ({ ...n, isPrimary: idx === editedNodeIndex }))
                         } else if (!networkConfig.nodes.some((n) => n.isPrimary)) {
-                            node.isPrimary = true
+                            _node.isPrimary = true
                         }
 
-                        networkConfig.nodes[idx] = node
+                        networkConfig.nodes[editedNodeIndex] = _node
                     }
                 },
             },
@@ -186,9 +187,9 @@
 </script>
 
 <style type="text/scss">
-    .nodes-container {
-        max-height: 338px;
-    }
+  .nodes-container {
+    max-height: 338px;
+  }
 </style>
 
 <div>
