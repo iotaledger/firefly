@@ -83,7 +83,7 @@
             accountToParticipate.set(accountToStake)
             participationAction.set(ParticipationAction.Stake)
 
-            const selections = Object.keys(airdropSelections).filter((as) => airdropSelections[as])
+            const selections = !isPartialStake ? Object.keys(airdropSelections).filter((as) => airdropSelections[as]) : activeAirdrops
             const participations: Participation[] = selections.map(
                 (selection) =>
                     <Participation>{
