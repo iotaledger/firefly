@@ -75,13 +75,11 @@
 
     const filters = ['all', 'incoming', 'outgoing']
     let activeFilterIndex = 0
+
     let searchActive = false
-    $: searchValue = searchActive ? searchValue : ""
-    const handleSearchClick = () => {
-        searchActive = !searchActive
-    }
+    $: searchValue = searchActive ? searchValue : ''
+
     let filteredTransactions = transactions
-    let queryTransactions = transactions
     $: switch (activeFilterIndex) {
         case 0:
             filteredTransactions = transactions
@@ -95,6 +93,8 @@
         default:
             filteredTransactions = transactions
     }
+
+    let queryTransactions = filteredTransactions
     $: if (searchValue) {
         queryTransactions = filteredTransactions.filter(transaction => {
             return transaction?.payload.data?.essence?.data?.value?.toString()?.includes(searchValue) ||
@@ -135,12 +135,12 @@
                         </li>
                     {/each}
                 </ul>
-                <button on:click={handleSearchClick}>
-                    <Icon icon={searchActive ? "close" : "search"} classes="text-gray-500 hover:text-gray-600 dark:text-white dark:hover:text-gray-100
+                <button on:click={() => (searchActive = !searchActive)}>
+                    <Icon icon={searchActive ? 'close' : 'search'} classes="text-gray-500 hover:text-gray-600 dark:text-white dark:hover:text-gray-100
                     cursor-pointer ml-2" />
                 </button>
             </div>
-            <Input classes={searchActive ? "mt-2" : "hidden"} bind:value={searchValue} />
+            <Input classes={searchActive ? 'mt-2' : 'hidden'} bind:value={searchValue} />
         {/if}
     </div>
     {#if $selectedMessage}
