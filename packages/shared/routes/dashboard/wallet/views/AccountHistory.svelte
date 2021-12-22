@@ -1,12 +1,12 @@
 <script lang="typescript">
-    import { ActivityDetail,ActivityRow,Icon,Text } from 'shared/components';
+    import { ActivityDetail,ActivityRow,Icon,Text,Input } from 'shared/components';
     import { displayNotificationForLedgerProfile } from 'shared/lib/ledger';
     import { showAppNotification } from 'shared/lib/notifications';
     import { openPopup } from 'shared/lib/popup';
     import { isLedgerProfile,isSoftwareProfile } from 'shared/lib/profile';
     import type { Locale } from 'shared/lib/typings/i18n';
     import type { AccountMessage } from 'shared/lib/typings/wallet';
-    import { api,isSyncing,selectedAccountId,selectedMessage } from 'shared/lib/wallet';
+    import { api,isSyncing,selectedAccountId,selectedMessage,sendAddressFromTransactionPayload,receiverAddressesFromTransactionPayload } from 'shared/lib/wallet';
 
     export let locale: Locale
 
@@ -72,6 +72,38 @@
             }
         }
     }
+
+    const filters = ['all', 'incoming', 'outgoing']
+    let activeFilterIndex = 0
+    let searchActive = false
+    $: searchValue = searchActive ? searchValue : ""
+    const handleSearchClick = () => {
+        searchActive = !searchActive
+    }
+    let filteredTransactions = transactions
+    let queryTransactions = transactions
+    $: switch (activeFilterIndex) {
+        case 0:
+            filteredTransactions = transactions
+            break
+        case 1:
+            filteredTransactions = transactions.filter(transaction => transaction.payload.data.essence.data.incoming)
+            break
+        case 2:
+            filteredTransactions = transactions.filter(transaction => !transaction.payload.data.essence.data.incoming)
+            break
+        default:
+            filteredTransactions = transactions
+    }
+    $: if (searchValue) {
+        queryTransactions = filteredTransactions.filter(transaction => {
+            return transaction?.payload.data?.essence?.data?.value?.toString()?.includes(searchValue) ||
+                sendAddressFromTransactionPayload(transaction?.payload).includes(searchValue) ||
+                receiverAddressesFromTransactionPayload(transaction?.payload).find(addr => addr.includes(searchValue))
+        })
+    } else {
+        queryTransactions = filteredTransactions
+    }
 </script>
 
 <div class="h-full p-8 flex flex-col flex-auto flex-grow flex-shrink-0">
@@ -83,7 +115,7 @@
             </button>
         {:else}
             <div class="flex flex-1 flex-row justify-between">
-                <Text type="h5">{locale('general.transactions')} <span class="text-gray-500">• {transactions.length}</span></Text>
+                <Text type="h5">{locale('general.transactions')} <span class="text-gray-500">• {queryTransactions.length}</span></Text>
                 {#if !$selectedMessage}
                     <button on:click={handleSyncAccountClick} class:pointer-events-none={$isSyncing}>
                         <Icon
@@ -92,14 +124,31 @@
                     </button>
                 {/if}
             </div>
+            <div class="flex flex-row justify-between text-white mt-4">
+                <ul class="flex flex-row justify-between">
+                    {#each filters as filter, i}
+                        <li on:click={() => activeFilterIndex = i}>
+                            <Text type="p" overrideColor classes="cursor-pointer mr-8 capitalize
+                            {activeFilterIndex === i ? "text-blue-500 border-b-2 border-blue-500 border-solid" : "text-gray-500 hover:text-gray-600"}">
+                                {filter}
+                            </Text>
+                        </li>
+                    {/each}
+                </ul>
+                <button on:click={handleSearchClick}>
+                    <Icon icon={searchActive ? "close" : "search"} classes="text-gray-500 hover:text-gray-600 dark:text-white dark:hover:text-gray-100
+                    cursor-pointer ml-2" />
+                </button>
+            </div>
+            <Input classes={searchActive ? "mt-2" : "hidden"} bind:value={searchValue} />
         {/if}
     </div>
     {#if $selectedMessage}
         <ActivityDetail onBackClick={handleBackClick} {...$selectedMessage} {locale} />
     {:else}
         <div class="overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2 scroll-secondary">
-            {#if transactions.length}
-                {#each transactions as transaction}
+            {#if queryTransactions.length}
+                {#each queryTransactions as transaction}
                     <ActivityRow
                         onClick={() => handleTransactionClick(transaction)}
                         {...transaction}
