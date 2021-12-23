@@ -1248,5 +1248,10 @@
             "date": "Date",
             "time": "Time"
         }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
+        }
     }
 }
