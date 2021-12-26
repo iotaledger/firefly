@@ -262,7 +262,7 @@
         },
         "securingSpentAddresses": {
             "title": "Securing spent addresses...",
-            "body1": "This process will take {minutes, plural, one {1 minute} other {# minutes}}.",
+            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
             "body2": "Your computer will run at full capacity, you may wish to do something else while you wait for this to complete."
         },
         "transferFragmentedFunds": {
@@ -440,8 +440,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Please wait {time, plural, one {1 second} other {# seconds}}",
-            "incorrectAttempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
@@ -1016,13 +1016,13 @@
         "yearsAgo": "{time, plural, one {# year} other {# years}} ago"
     },
     "times": {
-        "second": "{time, plural, one {1 second} other {# seconds}}",
-        "minute": "{time, plural, one {1 minute} other {# minutes}}",
-        "hour": "{time, plural, one {1 hour} other {# hours}}",
-        "day": "{time, plural, one {1 day} other {# days}}",
-        "week": "{time, plural, one {1 week} other {# weeks}}",
-        "month": "{time, plural, one {1 month} other {# months}}",
-        "year": "{time, plural, one {1 year} other {# years}}"
+        "second": "{time, plural, one {# second} other {# seconds}}",
+        "minute": "{time, plural, one {# minute} other {# minutes}}",
+        "hour": "{time, plural, one {# hour} other {# hours}}",
+        "day": "{time, plural, one {# day} other {# days}}",
+        "week": "{time, plural, one {# week} other {# weeks}}",
+        "month": "{time, plural, one {# month} other {# months}}",
+        "year": "{time, plural, one {# year} other {# years}}"
     },
     "notifications": {
         "valueTx": "Receiving {{value}} to {{account}}",
@@ -1035,7 +1035,7 @@
         "updateError": "An error occurred during the update, please try again",
         "restartInstall": "Restart to install",
         "calcMinutesRemaining": "Calculating minutes remaining...",
-        "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}",
+        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "Copied to clipboard",
         "accountsSynchronized": "Wallet synchronization complete",
         "fundsAvailableSoon": "Your funds will become available shortly",
@@ -1056,7 +1056,7 @@
     },
     "error": {
         "profile": {
-            "length": "Your profile name can't be longer than {length, plural, one {1 character} other {# characters}}.",
+            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "duplicate": "A profile with this name already exists.",
             "delete": {
                 "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
@@ -1077,15 +1077,15 @@
             "similar": "This is similar to a common password.",
             "word": "A single word is easy to guess.",
             "incorrect": "Your password is incorrect.",
-            "length": "Your password can't be longer than {length, plural, one {1 character} other {# characters}}."
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "Your PIN must be {length, plural, one {1 digit} other {# digits}} long.",
+            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
             "match": "PINs do not match.",
             "incorrect": "Your current PIN is incorrect."
         },
         "account": {
-            "length": "Your wallet name can't be longer than {length, plural, one {1 character} other {# characters}}.",
+            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "You must use your latest wallet before creating a new one.",
             "notEmpty": "You must transfer your balance before deleting this wallet.",
             "duplicate": "A wallet with this name already exists.",
@@ -1098,7 +1098,7 @@
             "syncing": "There was an error syncing your wallets."
         },
         "send": {
-            "addressLength": "Addresses should be {length, plural, one {1 character} other {# characters}} long.",
+            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
             "amountTooHigh": "This is greater than your available balance.",
             "amountNoFloat": "If units are `i` you cannot use decimal places.",
             "amountInvalidFormat": "The amount appears to be an invalid number.",
@@ -1141,9 +1141,9 @@
             "invalid": "The backup file was not recognised.",
             "destination": "The backup destination was not valid.",
             "mnemonic": "The mnemonic is not valid.",
-            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is 1} other {is #}}",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
             "seedCharacters": "The seed should only contain characters A-Z or 9",
-            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase",
             "phraseCaseWord": "The word \"{word}\" should be lower case"
         },
