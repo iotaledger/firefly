@@ -904,6 +904,7 @@
         "from": "From",
         "to": "To",
         "receiveFunds": "Receive Funds",
+        "address": "Address",
         "myAddress": "My Address",
         "shareAddress": "Share an address",
         "yourAddress": "Your address",
