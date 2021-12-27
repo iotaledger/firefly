@@ -1,4 +1,3 @@
-import { toHexString } from '../utils'
 import { DUST_THRESHOLD, hasPendingTransactions } from '../wallet'
 import type { WalletAccount } from '../typings/wallet'
 
@@ -105,54 +104,4 @@ export const getAccountParticipationAbility = (account: WalletAccount): AccountP
     } else {
         return AccountParticipationAbility.Ok
     }
-}
-
-/**
- * Extracts participations from indexation payload
- * First byte is participations length;
- * Next 32 bytes are event id;
- * Next byte is answers count;
- * The next (n = answer count) bytes are answers
- *
- * @method extractParticipations
- *
- * @param {number[]} array — Indexation payload data
- *
- * @returns {Participation[]}
- */
-function extractParticipations(array: number[]): Participation[] {
-    const eventIdBytes = 32
-
-    // First byte is participation count
-    const participationCount = array[0]
-
-    const _participations = []
-
-    // Start from the second (index = 1) byte
-    let startByteIndex = 1
-
-    Array.from({ length: participationCount }).forEach(() => {
-        // Extract event id
-        const eventId = toHexString(array.slice(startByteIndex, startByteIndex + eventIdBytes))
-
-        // Increment the byte index
-        startByteIndex += eventIdBytes
-
-        const answersCount = array[startByteIndex]
-
-        startByteIndex++
-
-        // Extract answers
-        const answers = []
-        Array.from({ length: answersCount }).forEach((_, idx) => answers.push(array[startByteIndex + idx]))
-
-        _participations.push({
-            eventId,
-            answers,
-        })
-
-        startByteIndex += answersCount
-    })
-
-    return _participations
 }
