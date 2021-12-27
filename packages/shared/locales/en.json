@@ -23,8 +23,8 @@
             },
             "addMore": "You can add more profiles later.",
             "developer": {
-                "label": "Developer profile",
-                "info": "Connect to public and private IOTA networks"
+                "label": "Create as developer profile",
+                "info": "Connect to the devnet or a private network"
             }
         },
         "setup": {
@@ -747,6 +747,10 @@
             "title": "About Assembly",
             "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
             "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are about to create a developer profile",
+            "body": "You are creating a developer profile. You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {

@@ -1,0 +1,26 @@
+<script lang="typescript">
+    import { Text } from 'shared/components'
+
+    export let label: string = ''
+    export let showBlock = false
+
+    const toggleBlockContent = () => {
+        showBlock = !showBlock
+    }
+</script>
+
+<style>
+        
+</style>
+
+<div class="w-full overflow-hidden">
+    <div on:click={toggleBlockContent} class="flex flex-row justify-between w-full overflow-hidden">
+        <div class="grow"><Text type="p" secondary={!showBlock}>{label}</Text></div>
+        <div class="flex-none"><Text type="p" secondary={!showBlock}>{showBlock ? '-' : '+'}</Text></div>
+    </div>
+    {#if showBlock}
+        <div class="w-full overflow-hidden pt-4">
+            <slot />
+        </div>     
+    {/if}
+</div>
