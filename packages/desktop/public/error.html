@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, user-scalable=no" />
+  <title>Firefly Error</title>
+  <style>
+    /* latin-ext */
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url('./assets/fonts/inter/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa25L7SUc.woff2') format('woff2');
+      unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+
+    /* latin */
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url('./assets/fonts/inter/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body,
+    html {
+      width: 100%;
+      height: 100%;
+      user-select: none;
+      -webkit-user-drag: none;
+      overflow: hidden;
+    }
+
+    body {
+      display: flex;
+      justify-content: stretch;
+      color: #ffffff;
+      background-color: #192742;
+      font-size: 11px;
+      font-family: 'Inter';
+    }
+
+    a {
+      color: #108CFF;
+    }
+
+    hr {
+      width: 100%;
+      border: 0;
+      border-top: 1px solid #405985;
+      margin: 1.5rem 0;
+    }
+
+    button {
+      width: 110px;
+      min-height: 30px;
+      background-color: #108CFF;
+      color: #ffffff;
+      border: 0;
+      border-radius: 5px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .content {
+      flex: 1;
+      display: flex;
+      margin: 2rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #app-icon {
+      -webkit-user-drag: none;
+      margin: 1rem 0;
+    }
+
+    #title {
+      margin: 1rem 0;
+    }
+
+    #diagnostics {
+      margin: 1rem 0;
+    }
+
+    #details {
+      margin: 1rem 0;
+      flex: 1;
+      overflow-y: auto;
+      white-space: pre-line;
+      min-height: 50px;
+    }
+
+    .help {
+      color: #C4D1E8;
+      font-size: 0.8rem;
+      line-height: 1.5rem;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: #D8E3F5;
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="content">
+    <img id="app-icon"
+         alt="App icon"
+         height="70"
+         width="70" />
+    <h2>Unfortunately an error has occurred in Firefly.</h2>
+    <hr />
+    <p id="version"></p>
+    <pre id="diagnostics"></pre>
+    <pre id="errorType"></pre>
+    <pre id="details"></pre>
+    <button onclick="javascript:copy()">Copy</button>
+    <hr />
+    <footer>
+      <p class="help">
+        Please visit <a href="#"
+           onclick="javascript:window.error.openUrl('https://discord.iota.org')">https://discord.iota.org</a> to get
+        help from the IOTA community.
+      </p>
+      <p class="help">
+        Alternatively report this problem at <a href="#"
+           onclick="javascript:window.error.openUrl('https://github.com/iotaledger/firefly/issues')">https://github.com/iotaledger/firefly/issues</a>
+      </p>
+    </footer>
+  </div>
+  <!-- https://github.com/electron/electron/issues/2863 -->
+  <script>var exports = exports || {};</script>
+
+  <script>
+    let errorData
+
+    window.error.getData().then((err) => {
+      errorData = err
+      document.getElementById('app-icon').src = errorData.iconPath
+      document.getElementById('version').textContent = `App Version: ${errorData.version}`
+      document.getElementById('diagnostics').textContent = errorData.diagnostics
+      document.getElementById('errorType').textContent = `Error Type: ${errorData.errorType}`
+      document.getElementById('details').textContent = formatError()
+    })
+
+    function formatError() {
+      let formatted = []
+
+      if (errorData.error) {
+        if (errorData.error instanceof Error || errorData.error.stack || errorData.error.message) {
+          if (errorData.error.stack) {
+            formatted.push(errorData.error.stack)
+          } else if (errorData.error.message) {
+            formatted.push(errorData.error.message)
+          }
+        } else if (typeof errorData.error == 'string') {
+          formatted.push(errorData.error)
+        } else {
+          formatted.push(JSON.stringify(errorData.error))
+        }
+      }
+
+      return formatted.join('\r\n')
+    }
+
+    function copy() {
+      let content = `App Version: ${errorData.version}\r\n\r\n`
+      content += errorData.diagnostics + "\r\n\r\n"
+      content += `Error Type: ${errorData.errorType}` + "\r\n\r\n"
+      content += formatError()
+      copyToClipboard(content)
+    }
+
+    function copyToClipboard(input) {
+      try {
+        const textArea = document.createElement('textarea')
+        textArea.value = input
+        document.body.appendChild(textArea)
+
+        if (navigator.userAgent.match(/ipad|iphone/i)) {
+          const range = document.createRange()
+          range.selectNodeContents(textArea)
+          const selection = window.getSelection()
+          selection.removeAllRanges()
+          selection.addRange(range)
+          textArea.setSelectionRange(0, 999999)
+        } else {
+          textArea.select()
+        }
+
+        document.execCommand('copy')
+        document.body.removeChild(textArea)
+      } catch (err) {
+      }
+    }
+  </script>
+</body>
+
+</html>

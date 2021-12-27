@@ -1,0 +1,6 @@
+#!/bin/sh
+
+. "$(dirname "$0")/_/husky.sh"
+. "$(dirname "$0")/common.sh" # Fixes Yarn and Git Bash for Windows 10
+
+yarn pre-commit

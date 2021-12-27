@@ -1,0 +1,7 @@
+files:
+  - source: packages/shared/locales/en.json
+    dest: /packages/shared/locales/en.json
+    translation: /packages/shared/locales/%two_letters_code%.json
+project_id_env: CROWDIN_PROJECT_ID
+api_token_env: CROWDIN_PERSONAL_TOKEN
+preserve_hierarchy: true

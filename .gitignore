@@ -1,11 +1,7 @@
 node_modules
 
 # wallet
-**/example-database
-**/id.db
-
-# stronghold
-snapshot
+**/storage
 
 # misc
 .DS_Store
@@ -15,7 +11,16 @@ snapshot
 .env.production.local
 
 # Build directories
-/public/build/
+**/public/build/
+**/public/assets/fonts
+**/public/assets/illustrations
+**/public/assets/logos
+**/public/assets/sounds
+**/public/assets/patterns
+**/public/assets/animations
+**/public/assets/videos
+
+**/public/locales/
 
 .gradle/
 .idea/
@@ -211,3 +216,12 @@ DerivedData/
 **/xcshareddata/WorkspaceSettings.xcsettings
 
 # End of https://www.gitignore.io/api/xcode,fastlane
+
+## Vercel
+.vercel
+
+## Prettier / ESLint
+**/.eslintcache
+
+# Testing
+**/coverage
