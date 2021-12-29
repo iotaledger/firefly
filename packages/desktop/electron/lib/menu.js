@@ -208,7 +208,7 @@ const buildTemplate = () => {
             {
                 label: state.strings.faq,
                 click: function () {
-                    shell.openExternal('https://firefly.iota.org/faq')
+                    shell.openExternal('https://wiki.iota.org/learn/wallets/firefly/faq-and-troubleshooting')
                 },
             },
             {
