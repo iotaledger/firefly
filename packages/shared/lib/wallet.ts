@@ -2079,7 +2079,5 @@ export const hasValidPendingTransactions = (account: WalletAccount): boolean => 
     })
     const unspentOutputs = account?.addresses.filter((a) => a.balance > 0).flatMap((a) => Object.values(a.outputs))
 
-    return pendingInputs.some((i) =>
-        unspentOutputs.some((o) => o.transactionId === i.data?.metadata?.transactionId)
-    )
+    return pendingInputs.some((i) => unspentOutputs.some((o) => o.transactionId === i.data?.metadata?.transactionId))
 }
