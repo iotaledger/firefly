@@ -2075,10 +2075,11 @@ export const hasValidPendingTransactions = (account: WalletAccount): boolean => 
         if (msg.payload?.type === 'Transaction') {
             return msg.payload?.data?.essence?.data?.inputs
         }
+        return []
     })
     const unspentOutputs = account?.addresses.filter((a) => a.balance > 0).flatMap((a) => Object.values(a.outputs))
 
     return pendingInputs.some((i) =>
-        unspentOutputs.map((o) => o.transactionId).includes(i.data?.metadata?.transactionId)
+        unspentOutputs.some((o) => o.transactionId === i.data?.metadata?.transactionId)
     )
 }
