@@ -262,7 +262,7 @@
         },
         "securingSpentAddresses": {
             "title": "A proteger endereços usados...",
-            "body1": "Este processo levará {minutes, plural, one {1 minuto} other {# minutos}}.",
+            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
             "body2": "O seu computador irá executar com a capacidade máxima. Poderá executar outras tarefas enquanto aguarda a conclusão."
         },
         "transferFragmentedFunds": {
@@ -440,8 +440,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Por favor, aguarde {time, plural, one {1 segundo} other {# segundos}}",
-            "incorrectAttempts": "{attempts, plural, one {1 tentativa incorreta} other {# tentativas incorretas}}"
+            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
@@ -487,7 +487,7 @@
         },
         "staking": {
             "title": "Staking",
-            "welcome": "Welcome to the staking dashboard",
+            "welcome": "Welcome to the staking dashboard!",
             "status": {
                 "upcoming": "Event not started",
                 "commencing": "Pre-staking open",
@@ -1015,13 +1015,13 @@
         "yearsAgo": "{time, plural, one {# ano} other {# anos}} atrás"
     },
     "times": {
-        "second": "{time, plural, one {1 second} other {# seconds}}",
-        "minute": "{time, plural, one {1 minute} other {# minutes}}",
-        "hour": "{time, plural, one {1 hour} other {# hours}}",
-        "day": "{time, plural, one {1 day} other {# days}}",
-        "week": "{time, plural, one {1 week} other {# weeks}}",
-        "month": "{time, plural, one {1 month} other {# months}}",
-        "year": "{time, plural, one {1 year} other {# years}}"
+        "second": "{time, plural, one {# second} other {# seconds}}",
+        "minute": "{time, plural, one {# minute} other {# minutes}}",
+        "hour": "{time, plural, one {# hour} other {# hours}}",
+        "day": "{time, plural, one {# day} other {# days}}",
+        "week": "{time, plural, one {# week} other {# weeks}}",
+        "month": "{time, plural, one {# month} other {# months}}",
+        "year": "{time, plural, one {# year} other {# years}}"
     },
     "notifications": {
         "valueTx": "A receber {{value}} para {{account}}",
@@ -1034,7 +1034,7 @@
         "updateError": "Ocorreu um erro durante a atualização; por favor, tente novamente",
         "restartInstall": "Reinicie para instalar",
         "calcMinutesRemaining": "A calcular minutos restantes...",
-        "minutesRemaining": "{minutes, plural, one {1 minuto restante} other {# minutos restantes}}",
+        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "Copiado para área de transferência",
         "accountsSynchronized": "Sincronização da carteira completa",
         "fundsAvailableSoon": "Your funds will become available shortly",
@@ -1055,7 +1055,7 @@
     },
     "error": {
         "profile": {
-            "length": "O seu nome de perfil não pode ter mais do que {length, plural, one {1 caractere} other {# caracteres}}.",
+            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "duplicate": "Já existe um perfil com este nome.",
             "delete": {
                 "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
@@ -1076,15 +1076,15 @@
             "similar": "Essa palavra-passe é parecida com uma senha comum.",
             "word": "Uma única palavra é fácil de adivinhar.",
             "incorrect": "A sua palavra-passe está incorreta.",
-            "length": "A sua palavra-passe não pode ser maior que {length, plural, one {1 caractere} other {# caracteres}}."
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "O seu PIN deve ser de pelo menos {length, plural, one {1 dígito} other {# dígitos}}.",
+            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
             "match": "Os PINs não coincidem.",
             "incorrect": "O seu PIN atual está incorreto."
         },
         "account": {
-            "length": "O nome da sua carteira não pode ser maior que {length, plural, one {1 caractere} other {# caracteres}}.",
+            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "Deve usar a sua carteira mais recente antes de criar uma nova.",
             "notEmpty": "Deve transferir o seu saldo antes de apagar esta carteira.",
             "duplicate": "Uma carteira com esse nome já existe.",
@@ -1097,7 +1097,7 @@
             "syncing": "There was an error syncing your wallets."
         },
         "send": {
-            "addressLength": "Endereços devem ser de pelo menos {length, plural, one {1 caractere} other {# caracteres}}.",
+            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
             "amountTooHigh": "Isto é maior do que o seu saldo disponível.",
             "amountNoFloat": "Se as unidades são `i`, não pode usar casas decimais.",
             "amountInvalidFormat": "O valor parece ser um número inválido.",
@@ -1140,9 +1140,9 @@
             "invalid": "O arquivo de backup não foi reconhecido.",
             "destination": "O destino do backup não é válido.",
             "mnemonic": "O mnemônico não é válido.",
-            "seedTooShort": "A seed deve conter 81 caracteres, atualmente {length, plural, one {contém 1} other {contém #}}",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
             "seedCharacters": "A seed deve conter apenas caracteres A-Z ou 9",
-            "phraseWordCount": "Deve haver 24 palavras em sua frase de recuperação, atualmente {length, plural, one {há 1} other {há #}}.",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "Palavra \"{word}\" não reconhecida na sua frase de recuperação",
             "phraseCaseWord": "A palavra \"{word}\" deve ser minúscula"
         },

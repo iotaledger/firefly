@@ -262,7 +262,7 @@
         },
         "securingSpentAddresses": {
             "title": "Обезбедување на искористените адреси...",
-            "body1": "Овој процес ќе трае {minutes, plural, one {1 минута} other {# минути}}.",
+            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
             "body2": "Вашиот компјутер ќе работи со целосен капацитет, можеби би сакале да правите нешто друго додека чекате ова да заврши."
         },
         "transferFragmentedFunds": {
@@ -440,8 +440,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Ве молиме почекајте {time, plural, one {1 секунда} other {# секунди}}",
-            "incorrectAttempts": "{attempts, plural, one {1 неточен обид} other {# неточни обиди}}"
+            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
@@ -487,7 +487,7 @@
         },
         "staking": {
             "title": "Staking",
-            "welcome": "Welcome to the staking dashboard",
+            "welcome": "Welcome to the staking dashboard!",
             "status": {
                 "upcoming": "Event not started",
                 "commencing": "Pre-staking open",
@@ -1015,13 +1015,13 @@
         "yearsAgo": "пред {time, plural, one {# година} other {# години}}"
     },
     "times": {
-        "second": "{time, plural, one {1 second} other {# seconds}}",
-        "minute": "{time, plural, one {1 minute} other {# minutes}}",
-        "hour": "{time, plural, one {1 hour} other {# hours}}",
-        "day": "{time, plural, one {1 day} other {# days}}",
-        "week": "{time, plural, one {1 week} other {# weeks}}",
-        "month": "{time, plural, one {1 month} other {# months}}",
-        "year": "{time, plural, one {1 year} other {# years}}"
+        "second": "{time, plural, one {# second} other {# seconds}}",
+        "minute": "{time, plural, one {# minute} other {# minutes}}",
+        "hour": "{time, plural, one {# hour} other {# hours}}",
+        "day": "{time, plural, one {# day} other {# days}}",
+        "week": "{time, plural, one {# week} other {# weeks}}",
+        "month": "{time, plural, one {# month} other {# months}}",
+        "year": "{time, plural, one {# year} other {# years}}"
     },
     "notifications": {
         "valueTx": "Примање {{value}} на {{account}}",
@@ -1034,7 +1034,7 @@
         "updateError": "Се случи грешка за време на ажурирањето, ве молиме пробајте повторно",
         "restartInstall": "Рестартирај за да се инсталира",
         "calcMinutesRemaining": "Пресметување на преостанати минути...",
-        "minutesRemaining": "{minutes, plural, one {Преостанува 1 минута} other {Преостануваат # минути}}",
+        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "Ископирано во clipboard",
         "accountsSynchronized": "Синхронизацијата на паричникот е завршена",
         "fundsAvailableSoon": "Your funds will become available shortly",
@@ -1055,7 +1055,7 @@
     },
     "error": {
         "profile": {
-            "length": "Името на вашиот профил не може биде подолго од {length, plural, one {1 карактер} other {# карактери}}.",
+            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "duplicate": "Профил со ова име веќе постои.",
             "delete": {
                 "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
@@ -1076,15 +1076,15 @@
             "similar": "Ова е лозинка слична на честите лозинки.",
             "word": "Еден збор е лесен за погодување.",
             "incorrect": "Вашата лозинка е погрешна.",
-            "length": "Вашата лозинка не може да биде подолга од {length, plural, one {1 карактер} other {# карактери}}."
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "Вашиот PIN мора да биде {length, plural, one {1 цифра} other {# цифри}} долг.",
+            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
             "match": "PIN-овите не се совпаѓаат.",
             "incorrect": "Вашиот тековен PIN е неточен."
         },
         "account": {
-            "length": "Името на вашиот паричник не може да биде подолго од {length, plural, one {1 карактер} other {# карактери}}.",
+            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "Морате да го искористите вашиот најскорешен паричник пред да направите нов.",
             "notEmpty": "Морате да го пренесете вашиот баланс пред да го избришете овој паричник.",
             "duplicate": "Веќе постои паричник со тоа име.",
@@ -1097,7 +1097,7 @@
             "syncing": "There was an error syncing your wallets."
         },
         "send": {
-            "addressLength": "Адресите треба да се долги {length, plural, one {1 карактер} other {# карактери}}.",
+            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
             "amountTooHigh": "Ова е повеќе од достапниот баланс.",
             "amountNoFloat": "Ако единиците се `i` не можете да користите децимални места.",
             "amountInvalidFormat": "Износот изгледа како невалиден број.",
@@ -1140,9 +1140,9 @@
             "invalid": "Фајлот за резервната копија не може да се прочита.",
             "destination": "Дестинацијата на резервната копија не беше валидна.",
             "mnemonic": "Мнемониката не е валидна.",
-            "seedTooShort": "Seed-от треба да содржи 81 карактер, а {length, plural, one {е 1} other {e #}}",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
             "seedCharacters": "Seed-от треба да се состои само од карактерите A-Z или 9",
-            "phraseWordCount": "Треба да има 24 збора во вашата фраза за опоравување, тековно има {length, plural, one {еден} other {#}}.",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "Непрепознаен збор \"{word}\" во вашата фраза за опоравување",
             "phraseCaseWord": "Зборот \"{word}\" треба да биде напишан со мали букви"
         },

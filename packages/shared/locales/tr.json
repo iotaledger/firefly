@@ -262,7 +262,7 @@
         },
         "securingSpentAddresses": {
             "title": "Kullanılmış adreslerin güvenliği sağlanıyor...",
-            "body1": "Bu işlem {minutes, plural, one {1 dakika} other {# dakika}} sürecektir.",
+            "body1": "Bu süreç alacak {minutes, plural, one {# minute} other {# minutes}}.",
             "body2": "Bilgisayarınız tam kapasitede çalışacak, bu işlemin tamamlanmasını beklerken başka bir şeyler yapabilirsiniz."
         },
         "transferFragmentedFunds": {
@@ -440,8 +440,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Lütfen bekleyin {time, plural,one {1 saniye} other {#saniye}}",
-            "incorrectAttempts": "{attempts, plural,one {1 yanlış deneme}other {yanlış deneme}}"
+            "pleaseWait": "Lütfen bekleyin {time, plural, one {# second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {# yanlış deneme} other {# yanlış denemeler}}"
         },
         "dashboard": {
             "security": {
@@ -487,7 +487,7 @@
         },
         "staking": {
             "title": "Staking",
-            "welcome": "Staking paneline hoş geldiniz",
+            "welcome": "Stake kontrol paneline hoş geldiniz!",
             "status": {
                 "upcoming": "Etkinlik başlamadı",
                 "commencing": "Ön-staking açık",
@@ -1015,13 +1015,13 @@
         "yearsAgo": "{time, plural, one {# yıl} other {# yıl}} önce"
     },
     "times": {
-        "second": "{time, plural, one {1 saniye} other {# saniye}}",
-        "minute": "{time, plural, one {1 dakika} other {# dakika}}",
-        "hour": "{time, plural, one {1 saat} other {# saat}}",
-        "day": "{time, plural, one {1 gün} other {# gün}}",
-        "week": "{time, plural, one {1 hafta} other {# hafta}}",
-        "month": "{time, plural, one {1 ay} other {# ay}}",
-        "year": "{time, plural, one {1 yıl} other {# yıl}}"
+        "second": "{time, plural, one {# ikinci} other {# saniye}}",
+        "minute": "{time, plural, one {# dakika} other {# dakikalar}}",
+        "hour": "{time, plural, one {# saat} other {# saatler}}",
+        "day": "{time, plural, one {# gün} other {# günler}}",
+        "week": "{time, plural, one {# hafta} other {# haftalar}}",
+        "month": "{time, plural, one {# ay} other {# aylar}}",
+        "year": "{time, plural, one {# yıl} other {# yıllar}}\n"
     },
     "notifications": {
         "valueTx": "{{account}} 'a {{value}} alınıyor",
@@ -1034,7 +1034,7 @@
         "updateError": "Davetiye gönderilirken bir hata oluştu, lütfen tekrar deneyin",
         "restartInstall": "Yüklemenizi yeniden başlatın",
         "calcMinutesRemaining": "Kalan dakikalar hesaplanıyor...",
-        "minutesRemaining": "{minutes, plural, one {1 dakika kaldı} other {# dakika kaldı}}",
+        "minutesRemaining": "{minutes, plural, one {# kalan dakika} other {# kalan dakika}}",
         "copiedToClipboard": "Panoya kopyalandı",
         "accountsSynchronized": "Cüzdan senkronizasyonu tamamlandı",
         "fundsAvailableSoon": "Bakiyeniz kısa süre içinde kullanılabilir hale gelecektir",
@@ -1055,7 +1055,7 @@
     },
     "error": {
         "profile": {
-            "length": "Profil adınız {length, plural, one {1 karakter} other {# karakter}} den uzun olamaz.",
+            "length": "Profil adınız şundan uzun olamaz {length, plural, one {# karakter} other {# karakterler}}.",
             "duplicate": "Bu isimde bir profil zaten var.",
             "delete": {
                 "nonEmptyAccounts": "Profilinizi silmeden önce tüm bakiyeleri transfer etmelisiniz."
@@ -1076,15 +1076,15 @@
             "similar": "Bu, yaygın olarak kullanılan bir parolaya benziyor.",
             "word": "Tek bir kelimenin tahmin edilmesi kolaydır.",
             "incorrect": "Şifreniz doğru değil.",
-            "length": "Şifreniz {length, plural, one {1 karakter} other {# karakter}}den daha uzun olamaz."
+            "length": "Şifreniz şundan uzun olamaz {length, plural, one {# karakter} other {# karakterler}}.\n"
         },
         "pincode": {
-            "length": "PINiniz {length, plural, one {1 digit} other {# digits}} uzunluğunda olmalıdır.",
+            "length": "PIN'iniz {length, plural, one {# rakam} other {# rakamlar}} uzunluğunda olmalıdır.",
             "match": "PIN'ler eşleşmiyor.",
             "incorrect": "Mevcut şifreniz yanlış."
         },
         "account": {
-            "length": "Cüzdanınızın adı {length, plural, one {1 karakter} other {# karakter}}den uzun olamaz.",
+            "length": "Cüzdan adınız şundan uzun olamaz {length, plural, one {# karakter} other {# karakterler}}.\n",
             "empty": "Yenisini oluşturmadan önce en son cüzdanınızı kullanmalısınız.",
             "notEmpty": "Bu cüzdanı silmeden önce bakiyenizi transfer etmelisiniz.",
             "duplicate": "Bu isimde bir cüzdan zaten var.",
@@ -1097,7 +1097,7 @@
             "syncing": "Cüzdanlarınız senkronize edilirken bir hata oluştu."
         },
         "send": {
-            "addressLength": "Adresler {length, plural, one {1 karakter} other {# karakter}} uzunluğunda olmalıdır.",
+            "addressLength": "Adresler şu şekilde olmalıdır {length, plural, one {# karakter} other {# karakterler}} long.",
             "amountTooHigh": "Bu, mevcut bakiyenizden daha büyüktür.",
             "amountNoFloat": "Birimler \"i\" ise, ondalık basamakları kullanamazsınız.",
             "amountInvalidFormat": "Miktar geçersiz görünüyor.",
@@ -1140,9 +1140,9 @@
             "invalid": "Yedek dosyası okunamaz.",
             "destination": "Yedekleme noktası geçerli değil.",
             "mnemonic": "Hatırlatıcı geçerli değil.",
-            "seedTooShort": "Seed 81 karakter uzunluğunda olmalıdır, {length, plural, one {is 1} other {is #}}",
+            "seedTooShort": "Tohum 81 karakter uzunluğunda olmalıdır, o {length, plural, one {is #} other {is #}}",
             "seedCharacters": "Seed sadece A-Z veya 9 karakterlerini içeriyor olmalıdır",
-            "phraseWordCount": "Kurtarma cümleniz 24 kelimeden oluşmalıdır, şuan {length, plural, one {is 1} other { #}}.",
+            "phraseWordCount": "Kurtarma ifadenizde 24 kelime olmalıdır, şuan {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "Kurtarma cümlenizde \"{word}\" bilinmeyen kelime",
             "phraseCaseWord": "Bu kelime \"{word}\" küçük harflerden oluşmalıdır"
         },

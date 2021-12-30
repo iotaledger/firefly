@@ -487,7 +487,7 @@
         },
         "staking": {
             "title": "Staking",
-            "welcome": "Dobro došli u nadzornu ploču za staking",
+            "welcome": "Dobro došli u nadzornu ploču za staking!",
             "status": {
                 "upcoming": "Događaj nije započeo",
                 "commencing": "Pred-staking je otvoren",
@@ -999,7 +999,7 @@
         "unknown": "Nepoznato",
         "none": "Nijedan",
         "staked": "Staking pokrenut",
-        "unstaked": "Staking prekinut",
+        "unstaked": "Nije na stake-u",
         "staking": "Staking",
         "unstaking": "Poništenje staking-a",
         "notStaked": "Staking nije pokrenut",
@@ -1034,7 +1034,7 @@
         "updateError": "Došlo je do pogreške tijekom ažuriranja. Molimo, pokušajte ponovo",
         "restartInstall": "Za instalaciju ponovo pokreni aplikaciju",
         "calcMinutesRemaining": "Računam preostalo vrijeme...",
-        "minutesRemaining": "{minutes, plural, one {minuta} few {# minute} other {# minuta}}",
+        "minutesRemaining": "{minutes, plural, one {preostala još # minuta} few {preostale još # minute} other {preostalo još # minuta}}",
         "copiedToClipboard": "Kopirano u međuspremnik",
         "accountsSynchronized": "Sinkronizacija novčanika je završena",
         "fundsAvailableSoon": "Vaša će sredstva biti dostupna uskoro",
@@ -1142,7 +1142,7 @@
             "mnemonic": "Fraza za oporavak nije ispravna.",
             "seedTooShort": "Seed mora imati 81 znak, trenutno ih ima {length, plural, one {#} other {#}}",
             "seedCharacters": "Seed može sadržavati samo slova od A do Z i broj 9",
-            "phraseWordCount": "Vaša fraza za oporavak mora se sastojati od 24 riječi. Trenutno {length, plural, one {je samo #} other {ih ima samo #}}.",
+            "phraseWordCount": "Vaša fraza za oporavak mora se sastojati od 24 riječi. Trenutno ih ima {length, plural, one {samo #} other {samo #}}.",
             "phraseUnrecognizedWord": "Ne prepoznajemo riječ \"{word}\" u vašoj frazi za oporavak",
             "phraseCaseWord": "Riječ \"{word}\" treba započeti malim slovom"
         },
