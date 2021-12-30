@@ -60,7 +60,7 @@
          * be acknowledged anymore.
          */
         mustAcknowledgeGenericParticipationWarning = false
-        mustAcknowledgeGenericParticipationWarning = false
+        mustAcknowledgeBelowMinRewardParticipationWarning = false
     }
 
     function handleCancelClick() {
