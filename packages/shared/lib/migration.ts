@@ -364,7 +364,7 @@ export const mineLedgerBundle = (bundleIndex: number, offset: number): Promise<v
             onSuccess(getAccountsResponse) {
                 api.getMigrationAddress(
                     false,
-                    getAccountsResponse.payload[get(activeProfile).ledgerMigrationCount].id,
+                    getAccountsResponse.payload[get(activeProfile)?.ledgerMigrationCount]?.id,
                     {
                         onSuccess(response) {
                             resolve(response.payload)
