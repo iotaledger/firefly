@@ -22,6 +22,7 @@
                 "nonFirst": "For now, let's start with your profile name."
             },
             "addMore": "You can add more profiles later.",
+            "advancedOptions": "Advanced options",
             "developer": {
                 "label": "Developer profile",
                 "info": "Connect to the devnet or a private network"
