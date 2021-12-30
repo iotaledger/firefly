@@ -29,7 +29,7 @@
         },
         "setup": {
             "title": "Richte eine Wallet ein",
-            "chrysalisTitle": "Chrysalis Netzwerk Update",
+            "chrysalisTitle": "Chrysalis Netzwerk-Update",
             "chrysalisBody": "Ab dem 21. April 2021 können Benutzer ihre Token in das neue Chrysalis-Netzwerk migrieren. Wir empfehlen dir, deine bestehenden Token so schnell wie möglich zu migrieren.",
             "learnMore": "Erfahre mehr über die Migration"
         },
@@ -487,7 +487,7 @@
         },
         "staking": {
             "title": "Staking",
-            "welcome": "Willkommen im Staking-Dashboard",
+            "welcome": "Willkommen im Staking-Dashboard!",
             "status": {
                 "upcoming": "Event hat noch nicht begonnen",
                 "commencing": "Pre-Staking möglich",
@@ -515,7 +515,7 @@
             },
             "airdrops": {
                 "holding": "verbleibend",
-                "commencing": "Bis das Staking begonnen hat",
+                "commencing": "Bis das Staking beginnt",
                 "collectedRewards": "Gesammelte Rewards",
                 "assembly": {
                     "name": "Assembly",
@@ -547,7 +547,7 @@
         },
         "backup": {
             "title": "Letztes Backup: {date}",
-            "lastBackup": "Dein letztes Backup ist vom {date}",
+            "lastBackup": "Letztes Backup erstellt: {date}",
             "backupDescription": "Es ist wichtig, regelmäßig Backups zu erstellen, damit du eine Sicherung deiner Wallets und Transaktionen hast.",
             "backupWarning": "Wenn du dein Backup und die Wiederherstellungsphrase verlierst, verlierst du Zugriff auf dein Guthaben.",
             "notBackedUp": "Kein Backup erstellt",
@@ -658,7 +658,7 @@
         },
         "snapshot": {
             "title": "Laufendes Netzwerk-Upgrade",
-            "body": "Das Chrysalis Netzwerk Upgrade hat begonnen.",
+            "body": "Das Chrysalis Netzwerk-Upgrade hat begonnen.",
             "bodyMigration": "Migration ist deaktiviert, bis sie abgeschlossen ist.",
             "bodyFirefly": "Firefly ist deaktiviert, bis es abgeschlossen ist. Token Migration wird auch danach möglich sein."
         },
@@ -863,7 +863,7 @@
         "howItWorks": "Wie es funktioniert",
         "learnAboutStaking": "Erfahre mehr über Staking",
         "stake": "Staken",
-        "unstake": "Beenden",
+        "unstake": "Staking aufheben",
         "stakeFunds": "Guthaben staken",
         "manageStake": "Staking verwalten",
         "merge": "Staken",
@@ -1079,7 +1079,7 @@
             "length": "Dein Passwort darf nicht länger als {length, plural, one {1 Zeichen} other {# Zeichen}} sein."
         },
         "pincode": {
-            "length": "Deine PIN muss noch {length, plural, one {1 Ziffer} other {# Ziffern}} länger sein.",
+            "length": "Deine PIN muss {length, plural, one {1 Ziffer} other {# Ziffern}} lang sein.",
             "match": "Die PINs stimmen nicht überein.",
             "incorrect": "Deine PIN ist nicht korrekt."
         },
@@ -1097,7 +1097,7 @@
             "syncing": "Beim Synchronisieren deiner Wallets ist ein Fehler aufgetreten."
         },
         "send": {
-            "addressLength": "Adressen sollten noch {length, plural, one {1 Zeichen} other {# Zeichen}} länger sein.",
+            "addressLength": "Adressen sollten {length, plural, one {1 Zeichen} other {# Zeichen}} lang sein.",
             "amountTooHigh": "Das übersteigt dein verfügbares Guthaben.",
             "amountNoFloat": "Wenn Einheiten `i` sind, können keine Dezimalstellen verwendet werden.",
             "amountInvalidFormat": "Der Betrag scheint eine ungültige Zahl zu sein.",
