@@ -8,37 +8,47 @@ import type {
     ReattachmentEventPayload,
     TransactionEventPayload,
     TransferProgressEventPayload,
-    TransferState,
+    TransferState
 } from 'shared/lib/typings/events'
 import type { Payload } from 'shared/lib/typings/message'
 import type {
     AddressInput,
     MigrationBundle,
     MigrationData,
-    SendMigrationBundleResponse,
+    SendMigrationBundleResponse
 } from 'shared/lib/typings/migration'
 import { formatUnitBestMatch } from 'shared/lib/units'
 import { get, writable } from 'svelte/store'
 import { mnemonic } from './app'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
 import { Electron } from './electron'
+import { deepCopy } from './helpers'
 import { localize } from './i18n'
 import { displayNotificationForLedgerProfile } from './ledger'
 import { didInitialiseMigrationListeners } from './migration'
 import { buildClientOptions } from './network'
 import { showAppNotification, showSystemNotification } from './notifications'
+import { getParticipationOverview } from './participation/api'
+import { getPendingParticipation, hasPendingParticipation, removePendingParticipations } from './participation/stores'
+// PARTICIPATION
+import {
+    ParticipateResponsePayload,
+    Participation,
+    ParticipationAction,
+    ParticipationEvent,
+    ParticipationOverviewResponse,
+    PendingParticipation
+} from './participation/types'
 import { openPopup } from './popup'
 import { activeProfile, isLedgerProfile, isStrongholdLocked, updateProfile } from './profile'
 import { walletSetupType } from './router'
 import type {
     Account,
-    Account as BaseAccount,
-    AccountToCreate,
+    Account as BaseAccount, AccountIdentifier, AccountToCreate,
     Balance,
     SignerType,
     SyncAccountOptions,
-    SyncedAccount,
-    AccountIdentifier,
+    SyncedAccount
 } from './typings/account'
 import type { Address } from './typings/address'
 import type { Actor, GetMigrationAddressResponse } from './typings/bridge'
@@ -59,22 +69,10 @@ import type {
     Duration,
     StrongholdStatus,
     WalletAccount,
-    WalletState,
+    WalletState
 } from './typings/wallet'
-import { deepCopy } from './helpers'
 
-// PARTICIPATION
-import {
-    ParticipateResponsePayload,
-    Participation,
-    ParticipationAction,
-    ParticipationEvent,
-    ParticipationOverviewResponse,
-    PendingParticipation,
-} from './participation/types'
 
-import { removePendingParticipations, hasPendingParticipation, getPendingParticipation } from './participation/stores'
-import { getParticipationOverview } from './participation/api'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -841,8 +839,7 @@ function displayParticipationNotification(pendingParticipation: PendingParticipa
         showAppNotification({
             type: 'info',
             message: localize(
-                `popups.stakingManager.${
-                    pendingParticipation.action === ParticipationAction.Stake ? 'staked' : 'unstaked'
+                `popups.stakingManager.${pendingParticipation.action === ParticipationAction.Stake ? 'staked' : 'unstaked'
                 }Successfully`,
                 { values: { account: account.alias } }
             ),
@@ -1148,7 +1145,7 @@ export const initialiseListeners = (): void => {
                         })
                     }
                 },
-                onError(response) {},
+                onError(response) { },
             })
 
             // Migration
@@ -2047,7 +2044,7 @@ const calculateRegularSyncAccountOptions = (profileType: ProfileType, isManualSy
 }
 
 /**
- * Determines whether an account has any currently pending transactions.
+ * Determines whether an account has any pending transactions.
  *
  * @method hasPendingTransactions
  *
@@ -2059,4 +2056,26 @@ export const hasPendingTransactions = (account: WalletAccount): boolean => {
     if (!account) return false
 
     return account?.messages.some((m) => !m.confirmed)
+}
+
+/**
+ * Determines whether an account has any valid pending transactions i.e. transactions that can confirm.
+ *
+ * @method hasValidPendingTransactions
+ *
+ * @param {WalletAccount} account
+ *
+ * @returns {boolean}
+ */
+export const hasValidPendingTransactions = (account: WalletAccount): boolean => {
+    if (!account) return false
+    const pendingMessages = account?.messages.filter((m) => !m.confirmed)
+    const pendingInputs = pendingMessages.flatMap(msg => {
+        if (msg.payload?.type === 'Transaction') {
+            return msg.payload?.data?.essence?.data?.inputs
+        }
+    })
+    const unspentOutputs = account?.addresses.filter((a) => a.balance > 0).flatMap(a => Object.values(a.outputs))
+
+    return pendingInputs.some(i => unspentOutputs.map(o => o.transactionId).includes(i.data?.metadata?.transactionId))
 }
