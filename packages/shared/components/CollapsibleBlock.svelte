@@ -11,7 +11,7 @@
 
 
 <div class="w-full overflow-hidden">
-    <div on:click={toggleBlockContent} class="flex flex-row justify-between w-full overflow-hidden">
+    <div on:click={toggleBlockContent} class="flex flex-row justify-between w-full overflow-hidden cursor-pointer">
         <div class="grow"><Text type="p" secondary={!showBlock}>{label}</Text></div>
         <div class="flex-none"><Text type="p" secondary={!showBlock}>{showBlock ? '-' : '+'}</Text></div>
     </div>
