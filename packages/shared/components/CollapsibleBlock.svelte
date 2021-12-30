@@ -9,9 +9,6 @@
     }
 </script>
 
-<style>
-        
-</style>
 
 <div class="w-full overflow-hidden">
     <div on:click={toggleBlockContent} class="flex flex-row justify-between w-full overflow-hidden">

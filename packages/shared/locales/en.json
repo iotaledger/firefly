@@ -23,7 +23,7 @@
             },
             "addMore": "You can add more profiles later.",
             "developer": {
-                "label": "Create as developer profile",
+                "label": "Developer profile",
                 "info": "Connect to the devnet or a private network"
             }
         },
@@ -749,8 +749,8 @@
             "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
         },
         "confirmDeveloperProfile": {
-            "title": "You are about to create a developer profile",
-            "body": "You are creating a developer profile. You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
