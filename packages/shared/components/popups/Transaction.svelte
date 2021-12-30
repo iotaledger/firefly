@@ -11,7 +11,7 @@
     import type { Locale } from 'shared/lib/typings/i18n'
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
     import { get } from 'svelte/store'
-    import { participationOverview, stakingEventState } from '../../lib/participation/stores'
+    import { participationOverview, stakingEventState } from 'shared/lib/participation/stores'
 
     export let locale: Locale
 
