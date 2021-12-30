@@ -179,10 +179,6 @@
     function handleBalanceFinderClick() {
         openPopup({ type: 'balanceFinder', hideClose: true })
     }
-
-    function handleExportTransactionHistoryClick() {
-        openPopup({ type: 'exportTransactionHistory', hideClose: false })
-    }
 </script>
 
 <style type="text/scss">
