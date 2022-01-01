@@ -134,7 +134,7 @@
                 disabled={busy}
                 submitHandler={handleContinueClick} />
 
-            <CollapsibleBlock label="Advanced options" showBlock={get(newProfile)?.isDeveloperProfile ?? false}> 
+            <CollapsibleBlock label={locale('views.profile.advancedOptions')} showBlock={get(newProfile)?.isDeveloperProfile ?? false}> 
                 <ButtonCheckbox icon="dev" bind:value={isDeveloperProfile}>
                     <div class="text-left">
                         <Text type="p">{locale('views.profile.developer.label')}</Text>
