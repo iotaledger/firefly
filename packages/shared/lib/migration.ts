@@ -21,12 +21,11 @@ import type {
 } from 'shared/lib/typings/migration'
 import { AppRoute, SetupType } from 'shared/lib/typings/routes'
 import Validator from 'shared/lib/validator'
-import { api } from 'shared/lib/wallet'
+import { api, wallet } from 'shared/lib/wallet'
 import { derived, get, writable } from 'svelte/store'
 import { localize } from './i18n'
 import { showAppNotification } from './notifications'
 import { LedgerMigrationProgress } from 'shared/lib/typings/migration'
-import type { Event } from './typings/events'
 
 const LEGACY_ADDRESS_WITHOUT_CHECKSUM_LENGTH = 81
 
@@ -361,12 +360,23 @@ export const findMigrationBundle = (bundleIndex: number): Bundle => {
  */
 export const mineLedgerBundle = (bundleIndex: number, offset: number): Promise<void> =>
     new Promise((resolve, reject) => {
-        api.getMigrationAddress(false, get(activeProfile).ledgerMigrationCount, {
-            onSuccess(response) {
-                resolve(response.payload)
+        api.getAccounts({
+            onSuccess(getAccountsResponse) {
+                api.getMigrationAddress(
+                    false,
+                    getAccountsResponse.payload[get(activeProfile)?.ledgerMigrationCount]?.id,
+                    {
+                        onSuccess(response) {
+                            resolve(response.payload)
+                        },
+                        onError(error) {
+                            reject(error)
+                        },
+                    }
+                )
             },
-            onError(error) {
-                reject(error)
+            onError(getAccountsError) {
+                reject(getAccountsError)
             },
         })
     }).then((address: MigrationAddress) => {
@@ -483,12 +493,23 @@ export const createLedgerMigrationBundle = (
     callback: () => void
 ): Promise<MigrationBundle> =>
     new Promise((resolve, reject) => {
-        api.getMigrationAddress(false, get(activeProfile).ledgerMigrationCount, {
-            onSuccess(response) {
-                resolve(response.payload)
+        api.getAccounts({
+            onSuccess(getAccountsResponse) {
+                api.getMigrationAddress(
+                    false,
+                    getAccountsResponse.payload[get(activeProfile).ledgerMigrationCount].id,
+                    {
+                        onSuccess(response) {
+                            resolve(response.payload)
+                        },
+                        onError(error) {
+                            reject(error)
+                        },
+                    }
+                )
             },
-            onError(error) {
-                reject(error)
+            onError(getAccountsError) {
+                reject(getAccountsError)
             },
         })
     }).then((address: MigrationAddress) => {

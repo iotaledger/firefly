@@ -167,7 +167,8 @@ module.exports = [
             rules: rendererRules,
         },
         mode,
-        plugins: [...rendererPlugins, ...sentryPlugins],
+        // plugins: [...rendererPlugins, ...sentryPlugins],
+        plugins: rendererPlugins,
         devtool: prod ? false : 'cheap-module-source-map',
         devServer: {
             hot: true,
@@ -184,7 +185,8 @@ module.exports = [
             rules: mainRules,
         },
         mode,
-        plugins: [...mainPlugins, ...sentryPlugins],
+        // plugins: [...mainPlugins, ...sentryPlugins],
+        plugins: mainPlugins,
         devtool: prod ? false : 'cheap-module-source-map',
         optimization: {
             nodeEnv: hardcodeNodeEnv ? mode : false,
@@ -207,7 +209,8 @@ module.exports = [
             rules: mainRules,
         },
         mode,
-        plugins: [...preloadPlugins, ...sentryPlugins],
+        // plugins: [...preloadPlugins, ...sentryPlugins],
+        plugins: preloadPlugins,
         devtool: prod ? false : 'cheap-module-source-map',
         optimization: {
             nodeEnv: hardcodeNodeEnv ? mode : false,

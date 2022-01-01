@@ -15,22 +15,22 @@
         },
         "profile": {
             "title": "प्रोफ़ाइल बनाएँ",
-            "profileName": "Profile name",
+            "profileName": "प्रोफ़ाइल नाम",
             "body1": "आप अपने वॉलेट को व्यवस्थित करने और गोपनीयता में सुधार करने के लिए कई उपयोगकर्ता प्रोफ़ाइल बना सकते हैं",
             "body2": {
-                "first": "For now, let's start with your first profile name.",
-                "nonFirst": "For now, let's start with your profile name."
+                "first": "अभी के लिए, चलिए आपके पहले प्रोफ़ाइल नाम से शुरू करते हैं।",
+                "nonFirst": "अभी के लिए, चलिए आपके प्रोफ़ाइल नाम से शुरू करते हैं।"
             },
-            "addMore": "You can add more profiles later.",
+            "addMore": "आप बाद में और प्रोफाइल जोड़ सकते हैं।",
             "developer": {
-                "label": "Developer profile",
-                "info": "Connect to public and private IOTA networks"
+                "label": "डेवलपर प्रोफ़ाइल",
+                "info": "सार्वजनिक और निजी ऐ ओ टा नेटवर्क से कनेक्ट करें"
             }
         },
         "setup": {
             "title": "वॉलेट सेट करें",
             "chrysalisTitle": "क्रिसलिस नेटवर्क अपडेट",
-            "chrysalisBody": "21 अप्रैल से, उपयोगकर्ता नए क्रिसलिस नेटवर्क में अपने टोकन स्थानांतरित कर सकते हैं। हम आपको जल्द से जल्द अपने मौजूदा टोकन को स्थानांतरित करने की सलाह देते हैं|",
+            "chrysalisBody": "21 अप्रैल 2021 से, उपयोगकर्ता अपने टोकन को नए क्रिसलिस नेटवर्क में माइग्रेट कर सकते हैं। हम अनुशंसा करते हैं कि आप अपने मौजूदा टोकन को यथाशीघ्र माइग्रेट करें।",
             "learnMore": "प्रवास के बारे में जानें"
         },
         "secure": {
@@ -56,7 +56,7 @@
             "progress3": "लेजर ऐप स्विच करें",
             "progress4": "धनराशि का ट्रांसफर",
             "watchVideo": "वीडियो गाइड देखें",
-            "videoGuide": "Ledger migration video guide"
+            "videoGuide": "लेज़र प्रवास वीडियो मार्गदर्शक"
         },
         "ledgerInstallationGuide": {
             "title": "क्या आपने आवश्यक लेजर ऐप्स इंस्टॉल किए हैं?",
@@ -123,7 +123,7 @@
             "body": "आपका वॉलेट उपयोग के लिए तैयार है",
             "softwareMigratedBody": "आपने अपने धन को नए नेटवर्क में सफलतापूर्वक स्थानांतरित कर दिया है",
             "fireflyLedgerBody": "आपका लेजर खाता सफलतापूर्वक पुनर्प्राप्त कर लिया गया है और अब आप जारी रख सकते हैं।",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
+            "trinityLedgerBody": "आपने अपने लेजर को नए नेटवर्क में सफलतापूर्वक स्थानांतरित कर दिया है।",
             "exportMigration": "निर्यात माइग्रेशन लॉग और सेटअप फिनिश करिए"
         },
         "import": {
@@ -203,7 +203,7 @@
             "accountPage": "अकाउंट पेज",
             "standard": "मानक",
             "expert": "एक्स्पर्ट",
-            "takingAWhile": "This is taking a while...",
+            "takingAWhile": "इसमें कुछ समय लग रहा है...",
             "notGeneratingAddresses": "क्या आपका लेजर एड्रेस जनरेट कर रहा है?",
             "reinstallLegacy": "यदि नहीं, तो डिवाइस को डिस्कनेक्ट करें और पुनः प्रयास करें। अगर समस्या बनी रहती है, तो आपको {legacy} ऐप को फिर से इंस्टॉल करना पड़ सकता है।"
         },
@@ -236,7 +236,7 @@
             "miningBundle": "माइनिंग बंडल",
             "problemRestoringWallet": "आपके बटुए को पुनर्स्थापित करने में एक नेटवर्क त्रुटि थी। कृपया पुन: प्रयास करें।",
             "minimumMigrationAmountSpentAddresses": "प्रत्येक खर्च किए गए पते की न्यूनतम प्रवास राशि 1 Mi है। यदि आपका बैलेंस सही नहीं दिखता है तो फिर से जांचें।",
-            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
+            "tooManyAddressesToMigrate": "माइग्रेट करने के लिए आपके पास कम बैलेंस वाले बहुत सारे पते हैं। अगर आपका कुल बैलेंस सही नहीं लग रहा है तो दोबारा जांच लें।",
             "cannotMigrateAllYourFunds": "हम आपके सभी फंडों को स्थानांतरित नहीं कर सकते हैं क्योंकि कुछ पते मूल्य में बहुत कम हैं। आप वैसे भी आगे बढ़ सकते हैं। {value} खो जाएगा।",
             "error": "आपके फंड्स को माइग्रेट करने में समस्या थी। कृपया पुन: प्रयास करें"
         },
@@ -262,7 +262,7 @@
         },
         "securingSpentAddresses": {
             "title": "सुरक्षित हो रहा है खर्च किए गए एड्रेस...",
-            "body1": "इस प्रक्रिया में {minutes, plural, one {1 मिनट का समय लगेगा} other {# मिनट्स का समय लगेगा}}.",
+            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
             "body2": "आपका कंप्यूटर पूरी क्षमता से चलेगा, आप इसे पूरा करने के लिए प्रतीक्षा करते समय कुछ और करने की इच्छा कर सकते हैं।"
         },
         "transferFragmentedFunds": {
@@ -312,7 +312,7 @@
             "theme": {
                 "title": "थीम",
                 "description": "",
-                "advice": "Restart the Firefly application for changes to the system theme to take effect"
+                "advice": "प्रभावी होने के लिए सिस्टम थीम में परिवर्तन के लिए फ़ायरफ्लाई एप्लिकेशन को पुनरारंभ करें"
             },
             "language": {
                 "title": "भाषा ",
@@ -336,9 +336,7 @@
             },
             "appLock": {
                 "title": "Automatic lock",
-                "description": "आपकी जेब लॉक होने से पहले निष्क्रियता का समय और आप लॉग आउट हो गए हैं",
-                "durationMinute": "{time, plural, one {1 मिनट} other {# मिनट}}",
-                "durationHour": "{time, plural, one {1 घंटा} other {# घंटे}}"
+                "description": "आपकी जेब लॉक होने से पहले निष्क्रियता का समय और आप लॉग आउट हो गए हैं"
             },
             "changePassword": {
                 "title": "पासवर्ड परिवर्तित करें",
@@ -365,21 +363,21 @@
                 "description": "आपके पूरे प्रोफ़ाइल, वॉलेट और लेनदेन के इतिहास को हटाता है। सुनिश्चित करें कि आपके पास एक बैकअप है।"
             },
             "deepLinks": {
-                "title": "IOTA links",
+                "title": "अयोटा लिंक",
                 "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
             },
             "networkConfiguration": {
-                "title": "Network config",
+                "title": "नेटवर्क विन्यास",
                 "title2": "Network configuration",
                 "description": {
-                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
-                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                    "dev": "आपकी नेटवर्क सेटिंग्स वर्तमान नोड कॉन्फ़िगरेशन के अनुसार स्वचालित रूप से अपडेट हो जाएंगी (नेटवर्क स्विच करने से वॉलेट स्थिति रीसेट हो जाएगी)",
+                    "nonDev": "आपकी नेटवर्क सेटिंग्स वर्तमान नोड कॉन्फ़िगरेशन के अनुसार स्वचालित रूप से अपडेट हो जाएंगी"
                 },
-                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
-                "resetWallet": "Your wallet state has been reset.",
+                "switchedNetworks": "नेटवर्क को \"{नेटवर्क का नाम}\" पर सफलतापूर्वक परिवर्तन किया गया।",
+                "resetWallet": "आपकी वॉलेट स्थिति वापस सामान्य स्थिति कर दी गई है",
                 "connectedTo": "Connected to",
                 "nodeConfiguration": {
-                    "title": "Node selection",
+                    "title": "नोड चयन",
                     "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
                     "automatic": "Automatic",
                     "manual": "Manual"
@@ -392,11 +390,11 @@
                 "excludeNode": "नोड को बाहर करें",
                 "includeNode": "नोड शामिल करें",
                 "editDetails": "Edit details",
-                "viewInfo": "View info",
+                "viewInfo": "जानकारी देखें",
                 "setAsPrimary": "प्राथमिक के रूप में सेट करें",
                 "removeNode": "नोड निकालें",
                 "includeOfficialNodeList": "आधिकारिक नोड सूची शामिल करें",
-                "noNodes": "There are no nodes, unable to connect to the network",
+                "noNodes": "कोई नोड नहीं हैं, नेटवर्क से कनेक्ट करने में असमर्थ हैं",
                 "noNodesAuto": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
@@ -414,10 +412,6 @@
             "migrateLedgerIndex": {
                 "title": "Migrate Ledger index",
                 "description": "एक और ट्रिनिटी खाता अनुक्रमणिका माइग्रेट करें"
-            },
-            "stateExport": {
-                "title": "स्टेट एक्सपोर्ट",
-                "description": "अपने लेनदेन इतिहास को एक .csv फ़ाइल में निर्यात करें"
             },
             "troubleshoot": {
                 "title": "समस्या निवारण",
@@ -446,8 +440,8 @@
             }
         },
         "login": {
-            "pleaseWait": "कृपया {time, plural, one {1 सेकंड} other {# सेकंड}} प्रतीक्षा करें",
-            "incorrectAttempts": "{attempts, plural, one {1 गलत प्रयास} other {# गलत प्रयास}}"
+            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
@@ -489,6 +483,48 @@
             "profileModal": {
                 "allSettings": "सभी सेटिंग्स",
                 "logout": "लॉग आउट"
+            }
+        },
+        "staking": {
+            "title": "Staking",
+            "welcome": "Welcome to the staking dashboard!",
+            "status": {
+                "upcoming": "घटना शुरू नहीं हुई",
+                "commencing": "प्री-स्टेकिंग खुला हे",
+                "holdingActive": "Staking in progress",
+                "holdingInactive": "स्टेकिंग खुला हे",
+                "inactive": "स्टेकिंग आरंभ नहीं हुआ",
+                "ended": "स्टेकिंग समाप्त"
+            },
+            "summary": {
+                "stakedFunds": "जमा धन"
+            },
+            "info": {
+                "upcomingSubheader": "Event has not started",
+                "upcomingHeader": "Check back later",
+                "commencingSubheader": "Get ready for staking",
+                "commencingHeader": "अपने टोकन को प्री-स्टेक करें",
+                "holdingSubheaderHolding": "अब कामाये इनाम",
+                "holdingSubheaderNotHolding": "Earn rewards by staking IOTA",
+                "holdingHeaderHolding": "{duration} left",
+                "holdingHeaderNotHolding": "Stake your tokens!",
+                "endedSubheader": "Staking has now ended",
+                "endedHeader": "Thank you!",
+                "inactiveHeader": "Try changing node",
+                "inactiveSubheader": "स्टेकिंग आरंभ नहीं हुआ"
+            },
+            "airdrops": {
+                "holding": "Remaining",
+                "commencing": "Until staking begins",
+                "collectedRewards": "Collected rewards",
+                "assembly": {
+                    "name": "Assembly",
+                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
+                },
+                "shimmer": {
+                    "name": "Shimmer",
+                    "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
+                }
             }
         }
     },
@@ -538,7 +574,9 @@
         },
         "addressHistory": {
             "title": "{name} खाता पता इतिहास",
-            "currentBalance": "वर्तमान बैलेंस: {balance}"
+            "currentBalance": "Balance: {balance}",
+            "internal": "Internal Address",
+            "external": "Deposit Address"
         },
         "node": {
             "titleAdd": "नया नोड जोड़ें",
@@ -564,7 +602,7 @@
                 "bech32HRP": "Bech32 HRP",
                 "features": "Features",
                 "confirmedMilestoneIndex": "Confirmed milestone index",
-                "pruningIndex": "Pruning index",
+                "pruningIndex": "छंटाई अनुक्रमणिका",
                 "messagesPerSecond": "मेस्सगेस प्रति सेकंड",
                 "referencedRate": "संदर्भित दर"
             }
@@ -598,7 +636,8 @@
         },
         "transaction": {
             "title": "ट्रांसक्शन कन्फर्म करे",
-            "body": "आप {amount} को भेजने वाले हैं"
+            "body": "आप {amount} को भेजने वाले हैं",
+            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards."
         },
         "balanceFinder": {
             "title": "बैलेंस खोजने वाला",
@@ -669,6 +708,44 @@
         "ledgerMigrateIndex": {
             "title": "क्या आपको किसी अन्य ट्रिनिटी खाता अनुक्रमणिका को माइग्रेट करने की आवश्यकता है?",
             "body": "आप बाद में उन्नत सेटिंग्स में भी माइग्रेट कर सकते हैं।"
+        },
+        "exportTransactionHistory": {
+            "title": "Export transaction history",
+            "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
+            "profileName": "Profile name:",
+            "accountName": "Account name:",
+            "typePassword": "Type your password to allow exporting"
+        },
+        "stakingNotice": {
+            "upcomingDate": "Staking has not started yet",
+            "commencingDate": "Staking has not started yet",
+            "body": "By pre-staking your funds before staking starts, you will automatically begin receiving rewards when staking begins.",
+            "ok": "Ok, I understand"
+        },
+        "stakingManager": {
+            "title": "Staking Management",
+            "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
+            "totalFundsStaked": "Total funds staked",
+            "stakedSuccessfully": "Your funds have been staked for {account}.",
+            "unstakedSuccessfully": "Your funds have been unstaked for {account}."
+        },
+        "stakingConfirmation": {
+            "title": "Airdrop Participation",
+            "subtitleStake": "You are about to stake",
+            "subtitleMerge": "You are about to merge",
+            "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
+            "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
+            "estimatedAirdrop": "Estimated rewards"
+        },
+        "shimmer-info": {
+            "title": "About Shimmer",
+            "body1": "Congratulations you have earned SMR tokens as a staking reward. Shimmer is an incentivized staging network to test major upgrades on IOTA.",
+            "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
+        },
+        "assembly-info": {
+            "title": "About Assembly",
+            "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
+            "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
         }
     },
     "charts": {
@@ -724,11 +801,12 @@
         "dropHere": "अपनी फाइल को यहां छोड़ें",
         "syncAll": "सभी सिंक करें",
         "export": "एक्सपोर्ट करे",
+        "exporting": "Exporting",
         "exportNewStronghold": "एक नया स्ट्रॉन्गहोल्ड निर्यात करें",
         "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "डेवलपर मोड सक्षम करें",
         "enableSystemNotifications": "नोटिफिकेशंस सक्षम करें",
-        "exportState": "स्थिति निर्यात करें",
+        "exportTransactionHistory": "Export transaction history",
         "localProofOfWork": "स्थानीय प्रूफ ऑफ़ वर्क",
         "unlock": "अनलॉक करें",
         "updateFirefly": "अपडेट फायरफ्लाई",
@@ -780,7 +858,17 @@
         "searching": "खोज रहे हैं...",
         "closeFirefly": "फायरफ्लाई बंद करे",
         "generateAddress": "नया पता उत्पन्न करें",
-        "migrateAgain": "एक और इंडेक्स माइग्रेट करें"
+        "migrateAgain": "एक और इंडेक्स माइग्रेट करें",
+        "visitWebsite": "Visit website",
+        "howItWorks": "How it works",
+        "learnAboutStaking": "Learn about staking",
+        "stake": "Stake",
+        "unstake": "Unstake",
+        "stakeFunds": "Stake funds",
+        "manageStake": "Manage stake",
+        "merge": "Merge",
+        "mergeFunds": "Merge funds",
+        "done": "Done"
     },
     "general": {
         "password": "पासवर्ड",
@@ -869,6 +957,8 @@
         "transferBroadcasting": "प्रोमोटिंग ट्रांसक्शन",
         "transferComplete": "ट्रांसफर कम्पलीट",
         "generatingReceiveAddress": "प्राप्त पता जनरेट कर रहा है",
+        "broadcasting": "Broadcasting",
+        "confirming": "Confirming",
         "creatingAccount": "वॉलेट बन रहा है, कृपया प्रतीक्षा करें...",
         "updatingAccount": "वॉलेट अपडेट हो रहा है, कृपया प्रतीक्षा करें...",
         "accountSyncing": "वॉलेट सिंक हो रहा है",
@@ -876,6 +966,7 @@
         "passwordUpdating": "पासवर्ड अपडेट हो रहा है...",
         "passwordSuccess": "पासवर्ड सफलतापूर्वक अपडेट किया गया",
         "passwordFailed": "पासवर्ड अपडेट करना विफल",
+        "syncing": "Syncing",
         "syncingAccounts": "सिंकिंग वॉलेट...",
         "exportingStronghold": "निर्यात स्ट्रॉन्गहोल्ड...",
         "exportingStrongholdSuccess": "निर्यातित स्ट्रॉन्गहोल्ड सफलतापूर्वक",
@@ -896,13 +987,24 @@
         "sendingFrom": "{account} से भेजा जा रहा है",
         "receivedTo": "{account} को प्राप्त हुआ",
         "sentFrom": "{account} से भेजा गया",
+        "stakedFor": "Staked for {account}",
+        "unstakedFor": "Unstaked for {account}",
+        "votedFor": "Voted for {account}",
+        "unvotedFor": "Unvoted for {account}",
         "receiving": "प्राप्त हो रहा है",
         "sending": "भेज रहे है",
         "legacyNetwork": "विरासत नेटवर्क",
         "capsLock": "कैप्स लॉक ऑन है",
         "version": "संस्करण {version}",
         "unknown": "Unknown",
-        "none": "None"
+        "none": "None",
+        "staked": "Staked",
+        "unstaked": "Unstaked",
+        "staking": "Staking",
+        "unstaking": "Unstaking",
+        "notStaked": "Not staked",
+        "stakedFunds": "जमा धन",
+        "unstakedFunds": "Unstaked funds"
     },
     "dates": {
         "today": "आज",
@@ -911,6 +1013,15 @@
         "weeksAgo": "{time, plural, one {# सप्ताह} other {# सप्ताह}} पहले",
         "monthsAgo": "{time, plural, one {# महीना} other {# महीना}} पहले",
         "yearsAgo": "{time, plural, one {# साल} other {# साल}} पहले"
+    },
+    "times": {
+        "second": "{time, plural, one {# second} other {# seconds}}",
+        "minute": "{time, plural, one {# minute} other {# minutes}}",
+        "hour": "{time, plural, one {# hour} other {# hours}}",
+        "day": "{time, plural, one {# day} other {# days}}",
+        "week": "{time, plural, one {# week} other {# weeks}}",
+        "month": "{time, plural, one {# month} other {# months}}",
+        "year": "{time, plural, one {# year} other {# years}}"
     },
     "notifications": {
         "valueTx": "{{value}} में {{account}} रिसीव हो रहा है",
@@ -923,10 +1034,14 @@
         "updateError": "अपडेट के दौरान एक त्रुटि हुई, कृपया पुनः प्रयास करें",
         "restartInstall": "स्थापित करने के लिए पुनरारंभ करें",
         "calcMinutesRemaining": "शेष मिनटों की गणना कर रहा है...",
-        "minutesRemaining": "{minutes, plural, one {1 मिनट बचा हुआ} other {# मिनट्स बचा हुआ}}",
+        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "क्लिपबोर्ड में कॉपी हो गया",
         "accountsSynchronized": "वॉलेट तुल्यकालन पूरा",
         "fundsAvailableSoon": "जल्द ही आपके फंड उपलब्ध हो जाएंगे",
+        "exportTransactionHistory": {
+            "success": "Transaction history for {accountAlias} was successfully saved to {filePath}",
+            "error": "Unable to export transaction history for {accountAlias}"
+        },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
             "notEnabled": "IOTA links are not enabled",
@@ -940,8 +1055,11 @@
     },
     "error": {
         "profile": {
-            "length": "आपका प्रोफ़ाइल नाम {length, plural, one {1 अक्षर} other {# अक्षर}} से अधिक लंबा नहीं हो सकता है|",
-            "duplicate": "इस नाम का प्रोफ़ाइल पहले से मौजूद है।"
+            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
+            "duplicate": "इस नाम का प्रोफ़ाइल पहले से मौजूद है।",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "पासवर्ड मैच नहीं करता है।",
@@ -958,15 +1076,15 @@
             "similar": "यह आमतौर पर उपयोग किए जाने वाले पासवर्ड के समान है",
             "word": "अकेले शब्द का अनुमान लगाना आसान है",
             "incorrect": "आपका पासवर्ड गलत है।",
-            "length": "आपका पासवर्ड {length, plural, one {1 वर्ण} other {# अक्षर}} से अधिक लंबा नहीं हो सकता है"
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "आपका पिन {length, plural, one {1 अंक} other {# अंक}} लम्बा होना चाहिए",
+            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
             "match": "पिन मेल नहीं खाता",
             "incorrect": "आपका वर्तमान पिन गलत है"
         },
         "account": {
-            "length": "आपका वॉलेट नाम {length, plural, one {1 वर्ण} other {# अक्षर}} से अधिक लंबा नहीं हो सकता है",
+            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "नया बनाने से पहले आपको अपने नवीनतम वॉलेट का उपयोग करना चाहिए।",
             "notEmpty": "इस वॉलेट को हटाने से पहले आपको अपना बैलेंस ट्रांसफर करना होगा।",
             "duplicate": "इस नाम का एक वॉलेट पहले से मौजूद है।",
@@ -979,7 +1097,7 @@
             "syncing": "आपके वॉलेट को समन्‍वयित करने में त्रुटि हुई थी।"
         },
         "send": {
-            "addressLength": "पते {length, plural, one {1 वर्ण} other {# वर्ण}} लम्बे होने चाहिए",
+            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
             "amountTooHigh": "यह आपके उपलब्ध बैलेंस से अधिक है।",
             "amountNoFloat": "यदि इकाइयाँ `i` हैं तो आप दशमलव स्थानों का उपयोग नहीं कर सकते।",
             "amountInvalidFormat": "राशि अमान्य संख्या प्रतीत होती है",
@@ -1006,7 +1124,8 @@
             "unsynced": "नोड सिंक में नहीं है",
             "noSynced": "कोई सिंक किए गए नोड उपलब्ध नहीं हैं",
             "answer": "Failed to get an answer from all nodes.",
-            "forbidden": "This node connection is forbidden."
+            "forbidden": "This node connection is forbidden.",
+            "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node."
         },
         "network": {
             "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
@@ -1021,9 +1140,9 @@
             "invalid": "बैकअप फ़ाइल को पहचाना नहीं गया था।",
             "destination": "बैकअप गंतव्य मान्य नहीं था।",
             "mnemonic": "अक्षर मान्य नहीं है",
-            "seedTooShort": "बीज 81 वर्ण लंबा होना चाहिए, यह {length, plural, one {1} other {#}} वर्ण लंबा है",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
             "seedCharacters": "सीड में केवल अक्षर A-Z या 9 होना चाहिए",
-            "phraseWordCount": "आपके पुनर्प्राप्ति वाक्यांश में वर्तमान में 24 शब्द होने चाहिए, और अभी सिर्फ {length, plural, one {1} other {#}} शब्द है",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "आपके पुनर्प्राप्ति वाक्यांश में अपरिचित शब्द {word} पाया गया",
             "phraseCaseWord": "शब्द {word} कम मामला होना चाहिए"
         },
@@ -1038,7 +1157,8 @@
             "otherConnected": "आपके लेजर डिवाइस पर गलत ऐप खुला है।",
             "generateAddress": "पता जनरेट करने में त्रुटि हुई थी.",
             "timeout": "आपका लेजर डिवाइस का समय समाप्त हो गया।",
-            "disconnected": "आपका लेजर डिवाइस डिस्कनेक्ट हो गया था।"
+            "disconnected": "आपका लेजर डिवाइस डिस्कनेक्ट हो गया था।",
+            "noStronghold": "Unable to use Stronghold with Ledger profile."
         },
         "popup": {
             "preventClose": "यह पॉपअप बंद करने में असमर्थ है।"
@@ -1048,11 +1168,20 @@
         },
         "crypto": {
             "cannotDecodeBech32": "Unable to decode string as Bech32 address."
+        },
+        "participation": {
+            "cannotUseAccount": "Unable to use the specified account.",
+            "cannotFindStakingEvent": "Unable to find staking event.",
+            "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
+            "invalidStakingEventId": "Invalid staking event ID."
         }
     },
     "warning": {
         "node": {
             "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
+        },
+        "participation": {
+            "noAccounts": "You do not have any IOTA."
         }
     },
     "tooltips": {
@@ -1063,6 +1192,60 @@
             "medium": "मध्यम",
             "low": "कम",
             "veryLow": "बहुत कम"
+        },
+        "stakingIndicator": {
+            "upcoming": {
+                "title": "Staking has not started yet",
+                "body": "Check back later. The staking event has not begun."
+            },
+            "commencing": {
+                "title": "Pre-staking is now open",
+                "body": "Pre-stake your tokens, and once staking begins, you will automatically start receiving rewards every 10 seconds."
+            },
+            "activeHolding": {
+                "title": "Staking is now in progress",
+                "body": "Good job. You will receive rewards every 10 seconds."
+            },
+            "inactiveHolding": {
+                "title": "Staking is now open",
+                "body": "Stake your IOTA tokens to receive rewards every 10 seconds."
+            },
+            "inactive": {
+                "title": "No staking events detected",
+                "body": "Open network configuration in Advanced Settings and make sure the current node has the \"Participation\" feature by clicking \"View Info\"."
+            },
+            "ended": {
+                "title": "Staking has now ended",
+                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
+                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
+            }
+        },
+        "partiallyStakedFunds": {
+            "title": "New unstaked funds: {amount}",
+            "titleNoFunds": "New unstaked funds",
+            "preBody": "You have received tokens on a staked wallet.",
+            "body": "You need to manually stake these new funds to receive airdrop rewards for them."
+        },
+        "stakingMinRewards": {
+            "title": "Below minimum reward value",
+            "titleMinBalance": "{amount} minimum balance required",
+            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
+            "continue": "Please continue staking for another {duration}.",
+            "bodyBelowMin": "This wallet has not reached the minimum reward value for {airdrop} ({airdropRewardMin}).",
+            "bodyWillReachMin": "You must stake for another {duration} to reach the minimum.",
+            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
+            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+        }
+    },
+    "exports": {
+        "transactionHistoryCsv": {
+            "messageId": "संदेश ID",
+            "internal": "Internal",
+            "rawValue": "Raw Value",
+            "formattedValue": "Formatted Value",
+            "date": "तिथि",
+            "time": "Time"
         }
     }
 }

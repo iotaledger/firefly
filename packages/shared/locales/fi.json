@@ -30,7 +30,7 @@
         "setup": {
             "title": "Määritä lompakko",
             "chrysalisTitle": "Chrysalis-verkkopäivitys",
-            "chrysalisBody": "21. huhtikuuta alkaen käyttäjät voivat siirtää varansa uuteen Chrysalis-verkkoon. Suosittelemme, että siirrät olemassaolevat varasi mahdollisimman pian.",
+            "chrysalisBody": "21. huhtikuuta 2021 alkaen käyttäjät voivat siirtää varansa uuteen Chrysalis-verkkoon. Suosittelemme, että siirrät olemassaolevat varasi mahdollisimman pian.",
             "learnMore": "Lue lisää migraatiosta"
         },
         "secure": {
@@ -262,7 +262,7 @@
         },
         "securingSpentAddresses": {
             "title": "Turvataan käytettyjä osoitteita...",
-            "body1": "Tämä prosessi kestää {minutes, plural, one {1 minuutin} other {# minuuttia}}.",
+            "body1": "Tämä prosessi kestää {minutes, plural, one {# minuutin} other {# minuuttia}}.",
             "body2": "Tietokoneesi tulee toimimaan täydellä teholla, saatat haluta tehdä jotain muuta sillä aikaa, kun odotat tämän valmistumista."
         },
         "transferFragmentedFunds": {
@@ -336,9 +336,7 @@
             },
             "appLock": {
                 "title": "Automaattinen lukitus",
-                "description": "Käyttämättömyysaika ennen kuin lompakkosi lukittuvat ja sinut kirjataan ulos",
-                "durationMinute": "{time, plural, one {1 minuutti} other {# minuuttia}}",
-                "durationHour": "{time, plural, one {1 tunti} other {# tuntia}}"
+                "description": "Käyttämättömyysaika ennen kuin lompakkosi lukittuvat ja sinut kirjataan ulos"
             },
             "changePassword": {
                 "title": "Vaihda salasana",
@@ -415,10 +413,6 @@
                 "title": "Siirrä Ledger-indeksi",
                 "description": "Siirrä toinen Trinity-tilin indeksi"
             },
-            "stateExport": {
-                "title": "Tilan vienti",
-                "description": "Vie transaktiohistoriasi .csv-tiedostoon"
-            },
             "troubleshoot": {
                 "title": "Vianmääritys",
                 "description": "Käytä vianmäärityksen avustajaa yleisten ongelmien ratkaisemiseen"
@@ -446,8 +440,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Odota {time, plural, one {1 sekunti} other {# sekuntia}}",
-            "incorrectAttempts": "{attempts, plural, one {1 virheellinen yritys} other {# virheellistä yritystä}}"
+            "pleaseWait": "Odota {time, plural, one {# sekunti} other {# sekuntia}}",
+            "incorrectAttempts": "{attempts, plural, one {# virheellinen yritys} other {# virheellistä yritystä}}"
         },
         "dashboard": {
             "security": {
@@ -489,6 +483,48 @@
             "profileModal": {
                 "allSettings": "Kaikki asetukset",
                 "logout": "Kirjaudu ulos"
+            }
+        },
+        "staking": {
+            "title": "Staking",
+            "welcome": "Tervetuloa staking-käyttöliittymään!",
+            "status": {
+                "upcoming": "Tapahtuma ei ole alkanut",
+                "commencing": "Pre-staking avoinna",
+                "holdingActive": "Staking käynnissä",
+                "holdingInactive": "Staking avoinna",
+                "inactive": "Stakingia ei havaittu",
+                "ended": "Staking päättynyt"
+            },
+            "summary": {
+                "stakedFunds": "Staketut varat"
+            },
+            "info": {
+                "upcomingSubheader": "Tapahtuma ei ole alkanut",
+                "upcomingHeader": "Katso myöhemmin uudelleen",
+                "commencingSubheader": "Valmistaudu stakingiin",
+                "commencingHeader": "Pre-stakea tokenisi!",
+                "holdingSubheaderHolding": "Ansaitaan staking-palkkioita",
+                "holdingSubheaderNotHolding": "Ansaitse palkkioita stakeamalla IOTA:a",
+                "holdingHeaderHolding": "{duration} jäljellä",
+                "holdingHeaderNotHolding": "Stakea tokenisi!",
+                "endedSubheader": "Staking on nyt päättynyt",
+                "endedHeader": "Kiitos!",
+                "inactiveHeader": "Yritä vaihtaa solmua",
+                "inactiveSubheader": "Stakingia ei havaittu"
+            },
+            "airdrops": {
+                "holding": "Jäljellä",
+                "commencing": "Stakingin alkamiseen",
+                "collectedRewards": "Kerätyt palkkiot",
+                "assembly": {
+                    "name": "Assembly",
+                    "description": "Assembly on vapaasti käytettävä ja liityttävä, erittäin skaalautuva moniketjuverkko yhdistettyjen älysopimusten luomiseen ja käyttöönottamiseen. Assembly on web3:n tulevaisuus. "
+                },
+                "shimmer": {
+                    "name": "Shimmer",
+                    "description": "Kannustettu valmisteluverkko IOTA:n merkittävien innovaatioiden edistämiseen. Mitä tahansa tapahtuu, tapahtuu. Miten Shimmer kehittyy, riippuu sinusta."
+                }
             }
         }
     },
@@ -538,7 +574,9 @@
         },
         "addressHistory": {
             "title": "Lompakon {name} osoitehistoria",
-            "currentBalance": "Nykyinen saldo: {balance}"
+            "currentBalance": "Saldo: {balance}",
+            "internal": "Sisäinen osoite",
+            "external": "Talletusosoite"
         },
         "node": {
             "titleAdd": "Lisää solmu",
@@ -598,7 +636,8 @@
         },
         "transaction": {
             "title": "Vahvista transaktio",
-            "body": "Olet lähettämässä {amount} osoitteeseen"
+            "body": "Olet lähettämässä {amount} osoitteeseen",
+            "sendingFromStakedAccount": "Olet lähettämässä siirtoa lompakosta, jota käytetään parhaillaan stakingiin. Tämä saattaa lopettaa stakingin tokeneiltasi. Voit lähettää siirron vapaasti, mutta sinun on ehkä aloitettava staking uudelleen jäljelle jääville tokeneille siirron jälkeen."
         },
         "balanceFinder": {
             "title": "Saldon etsijä",
@@ -669,6 +708,44 @@
         "ledgerMigrateIndex": {
             "title": "Täytyykö sinun siirtää toinen Trinity-tilin indeksi?",
             "body": "Voit myös tehdä migraation myöhemmin lisäasetuksissa."
+        },
+        "exportTransactionHistory": {
+            "title": "Vie transaktiohistoria",
+            "body": "Vie transaktiohistoria valitulle lompakolle. Viety tiedosto on .csv-muotoinen.",
+            "profileName": "Profiilin nimi:",
+            "accountName": "Tilin nimi:",
+            "typePassword": "Syötä salasanasi salliaksesi viennin"
+        },
+        "stakingNotice": {
+            "upcomingDate": "Staking ei ole vielä alkanut",
+            "commencingDate": "Staking ei ole vielä alkanut",
+            "body": "Pre-stakeamalla varasi ennen kuin staking alkaa, alat automaattisesti saada palkkioita, kun staking alkaa.",
+            "ok": "Ok, ymmärrän"
+        },
+        "stakingManager": {
+            "title": "Staking-hallinta",
+            "description": "Kun stakeat lompakon, lähetät itsellesi transaktion, joka merkitsee nämä varat \"staketuiksi\". Voit siirtää tokenit milloin tahansa, mutta et jatka staking-palkkioiden saamista.",
+            "totalFundsStaked": "Staketut varat yhteensä",
+            "stakedSuccessfully": "Sinun varasi ovat stakettu tilille {account}.",
+            "unstakedSuccessfully": "Sinun varasi eivät ole enää stakettu tilille {account}."
+        },
+        "stakingConfirmation": {
+            "title": "Airdrop-osallistuminen",
+            "subtitleStake": "Olet stakeamassa",
+            "subtitleMerge": "Olet yhdistämässä",
+            "bodyStake": "Jos et halua osallistua molempiin airdropeihin, voit jättäytyä pois alla. Voit lopettaa staken ja aloittaa staken uudelleen liittyäksesi takaisin mukaan milloin tahansa.",
+            "bodyMerge": "Sinun varasi tulevat olemaan stakettuna airdropia {airdrop} varten. Vaihtaaksesi mihin airdropeihin haluat osallistua, lopeta stake tästä lompakosta ja stakea uudelleen.",
+            "estimatedAirdrop": "Arvioidut palkkiot"
+        },
+        "shimmer-info": {
+            "title": "Tietoja Shimmeristä",
+            "body1": "Onnittelut, olet ansainnut SMR-tokeneita staking-palkkiona. Shimmer on kannustettu valmisteluverkko IOTA:n merkittävien uudistusten testaamiseen.",
+            "body2": "Tavoitteenamme on käynnistää Shimmer vuonna 2022. Sinun tokenisi tulevat saataville siirrettäväksi, kun verkko käynnistetään."
+        },
+        "assembly-info": {
+            "title": "Tietoja Assemblystä",
+            "body1": "Onnittelut, olet ansainnut ASMB-tokeneita staking-palkkiona. Assembly on moniketjuverkko skaalautuvien älysopimusten käyttöönottoon IOTA:lla.",
+            "body2": "Tavoitteenamme on käynnistää Assembly vuonna 2022. Sinun tokenisi tulevat saataville siirrettäväksi, kun verkko käynnistetään."
         }
     },
     "charts": {
@@ -724,11 +801,12 @@
         "dropHere": "Pudota tiedosto tähän",
         "syncAll": "Synkronoi kaikki",
         "export": "Vie",
+        "exporting": "Viedään",
         "exportNewStronghold": "Vie uuteen Strongholdiin",
         "enableDeepLinks": "Ota IOTA-linkit käyttöön",
         "enableDeveloperMode": "Ota kehittäjätila käyttöön",
         "enableSystemNotifications": "Ota järjestelmäilmoitukset käyttöön",
-        "exportState": "Vie tila",
+        "exportTransactionHistory": "Vie transaktiohistoria",
         "localProofOfWork": "Paikallinen todiste työstä (PoW)",
         "unlock": "Avaa",
         "updateFirefly": "Päivitä Firefly",
@@ -780,7 +858,17 @@
         "searching": "Haetaan...",
         "closeFirefly": "Sulje Firefly",
         "generateAddress": "Luo osoite",
-        "migrateAgain": "Siirrä toinen indeksi"
+        "migrateAgain": "Siirrä toinen indeksi",
+        "visitWebsite": "Vieraile verkkosivulla",
+        "howItWorks": "Kuinka se toimii",
+        "learnAboutStaking": "Lue lisää stakingista",
+        "stake": "Stake",
+        "unstake": "Lopeta stake",
+        "stakeFunds": "Stakea varoja",
+        "manageStake": "Hallinnoi stakea",
+        "merge": "Yhdistä",
+        "mergeFunds": "Yhdistä varoja",
+        "done": "Valmis"
     },
     "general": {
         "password": "Salasana",
@@ -869,6 +957,8 @@
         "transferBroadcasting": "Lähetetään transaktiota",
         "transferComplete": "Siirto valmis",
         "generatingReceiveAddress": "Luodaan vastaanotto-osoitetta",
+        "broadcasting": "Lähetetään",
+        "confirming": "Vahvistetaan",
         "creatingAccount": "Luodaan lompakkoa, odota hetki...",
         "updatingAccount": "Päivitetään lompakkoa, odota hetki...",
         "accountSyncing": "Lompakkoa synkronoidaan",
@@ -876,6 +966,7 @@
         "passwordUpdating": "Päivitetään salasanaa...",
         "passwordSuccess": "Salasanan päivitys onnistui",
         "passwordFailed": "Salasanan päivittäminen epäonnistui",
+        "syncing": "Synkronoidaan",
         "syncingAccounts": "Synkronoidaan lompakkoja...",
         "exportingStronghold": "Viedään Strongholdia...",
         "exportingStrongholdSuccess": "Stronghold viety onnistuneesti",
@@ -896,13 +987,24 @@
         "sendingFrom": "Lähetetään lompakosta {account}",
         "receivedTo": "Vastaanotettu lompakkoon {account}",
         "sentFrom": "Lähetetty lompakosta {account}",
+        "stakedFor": "Stakettu tilille {account}",
+        "unstakedFor": "Ei staketut tilille {account}",
+        "votedFor": "Äänestetty tilille {account}",
+        "unvotedFor": "Äänestys lopetettu tilille {account}",
         "receiving": "Vastaanotetaan",
         "sending": "Lähetetään",
         "legacyNetwork": "Vanha verkko",
         "capsLock": "Caps Lock on päällä",
         "version": "Versio {version}",
         "unknown": "Tuntematon",
-        "none": "Ei mikään"
+        "none": "Ei mikään",
+        "staked": "Stakettu",
+        "unstaked": "Ei stakettu",
+        "staking": "Staking",
+        "unstaking": "Lopetetaan staking",
+        "notStaked": "Ei stakettu",
+        "stakedFunds": "Staketut varat",
+        "unstakedFunds": "Varat ilman stakea"
     },
     "dates": {
         "today": "Tänään",
@@ -911,6 +1013,15 @@
         "weeksAgo": "{time, plural, one {# viikko} other {# viikkoa}} sitten",
         "monthsAgo": "{time, plural, one {# kuukausi} other {# kuukautta}} sitten",
         "yearsAgo": "{time, plural, one {# vuosi} other {# vuotta}} sitten"
+    },
+    "times": {
+        "second": "{time, plural, one {# sekunti} other {# sekuntia}}",
+        "minute": "{time, plural, one {# minuutti} other {# minuuttia}}",
+        "hour": "{time, plural, one {# tunti} other {# tuntia}}",
+        "day": "{time, plural, one {# päivä} other {# päivää}}",
+        "week": "{time, plural, one {# viikko} other {# viikkoa}}",
+        "month": "{time, plural, one {# kuukausi} other {# kuukautta}}",
+        "year": "{time, plural, one {# vuosi} other {# vuotta}}"
     },
     "notifications": {
         "valueTx": "Vastaanotetaan {{value}} lompakkoon {{account}}",
@@ -923,10 +1034,14 @@
         "updateError": "Päivityksen aikana tapahtui virhe, yritä uudelleen",
         "restartInstall": "Käynnistä uudelleen asentaaksesi",
         "calcMinutesRemaining": "Lasketaan jäljellä olevia minuutteja...",
-        "minutesRemaining": "{minutes, plural, one {1 minuutti jäljellä} other {# minuuttia jäljellä}}",
+        "minutesRemaining": "{minutes, plural, one {# minuutti jäljellä} other {# minuuttia jäljellä}}",
         "copiedToClipboard": "Kopioitu leikepöydälle",
         "accountsSynchronized": "Lompakon synkronointi valmis",
         "fundsAvailableSoon": "Varasi ovat käytettävissä pian",
+        "exportTransactionHistory": {
+            "success": "Transaktiohistoria tilille {accountAlias} vietiin onnistuneesti tiedostoon {filePath}",
+            "error": "Ei voida viedä transaktiohistoriaa tilille {accountAlias}"
+        },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "Ole hyvä ja kirjaudu aloittaaksesi IOTA-linkin",
             "notEnabled": "IOTA-linkit eivät ole käytössä",
@@ -940,8 +1055,11 @@
     },
     "error": {
         "profile": {
-            "length": "Profiilisi nimi ei voi olla pidempi kuin {length, plural, one {1 merkki} other {# merkkiä}}.",
-            "duplicate": "Samanniminen profiili on jo olemassa."
+            "length": "Profiilisi nimi ei voi olla pidempi kuin {length, plural, one {# merkki} other {# merkkiä}}.",
+            "duplicate": "Samanniminen profiili on jo olemassa.",
+            "delete": {
+                "nonEmptyAccounts": "Sinun täytyy siirtää kaikki saldot ennen kuin voit poistaa profiilisi."
+            }
         },
         "password": {
             "doNotMatch": "Salasanat eivät täsmää.",
@@ -958,15 +1076,15 @@
             "similar": "Tämä on samankaltainen yleisesti käytetyn salasanan kanssa.",
             "word": "Yksittäinen sana on helppo arvata.",
             "incorrect": "Salasanasi on virheellinen.",
-            "length": "Salasanasi ei voi olla pidempi kuin {length, plural, one {1 merkki} other {# merkkiä}}."
+            "length": "Salasanasi ei voi olla pidempi kuin {length, plural, one {# merkki} other {# merkkiä}}."
         },
         "pincode": {
-            "length": "PIN-koodisi täytyy olla {length, plural, one {1 numeron pituinen} other {# numeroa pitkä}}.",
+            "length": "PIN-koodisi täytyy olla {length, plural, one {# numeron pituinen} other {# numeroa pitkä}}.",
             "match": "PIN-koodit eivät täsmää.",
             "incorrect": "Nykyinen PIN-koodisi on virheellinen."
         },
         "account": {
-            "length": "Lompakkosi nimi ei voi olla pidempi kuin {length, plural, one {1 merkki} other {# merkkiä}}.",
+            "length": "Lompakkosi nimi ei voi olla pidempi kuin {length, plural, one {# merkki} other {# merkkiä}}.",
             "empty": "Sinun täytyy käyttää viimeisintä lompakkoasi ennen uuden luomista.",
             "notEmpty": "Sinun täytyy siirtää saldosi ennen kuin poistat tämän lompakon.",
             "duplicate": "Samanniminen lompakko on jo olemassa.",
@@ -979,7 +1097,7 @@
             "syncing": "Lompakoiden synkronoinnissa tapahtui virhe."
         },
         "send": {
-            "addressLength": "Osoitteiden tulee olla {length, plural, one {1 merkin pituinen} other {# merkkiä pitkä}}.",
+            "addressLength": "Osoitteiden tulee olla {length, plural, one {# merkin pituinen} other {# merkkiä pitkä}}.",
             "amountTooHigh": "Tämä on suurempi kuin käytettävissä oleva saldosi.",
             "amountNoFloat": "Jos yksiköt ovat `i`, et voi käyttää desimaaleja.",
             "amountInvalidFormat": "Summa näyttää olevan virheellinen luku.",
@@ -1006,7 +1124,8 @@
             "unsynced": "Solmu ei ole synkronoitu.",
             "noSynced": "Synkronoituja solmuja ei ole saatavilla.",
             "answer": "Vastauksen saaminen kaikilta solmuilta epäonnistui.",
-            "forbidden": "Tämä solmuyhteys on kielletty."
+            "forbidden": "Tämä solmuyhteys on kielletty.",
+            "pluginNotAvailable": "\"{nodePlugin}\" liitännäinen ei ole saatavilla nykyisellä solmulla."
         },
         "network": {
             "mismatch": "Tämän solmun verkkotunnus on \"{networkId}\", joka ei vastaa nykyistä verkkoa.",
@@ -1021,9 +1140,9 @@
             "invalid": "Varmuuskopiotiedostoa ei tunnistettu.",
             "destination": "Varmuuskopioinnin kohde ei kelpaa.",
             "mnemonic": "Muistisääntö ei kelpaa.",
-            "seedTooShort": "Seed-merkkijonon pitäisi olla 81 merkkiä pitkä, se {length, plural, one {on 1} other {on #}}",
+            "seedTooShort": "Seed-merkkijonon pitäisi olla 81 merkkiä pitkä, se {length, plural, one {on #} other {on #}}",
             "seedCharacters": "Seed-merkkijonon tulisi sisältää vain merkkejä A-Z tai 9",
-            "phraseWordCount": "Palautuslausekkeessasi pitäisi olla 24 sanaa, tällä hetkellä siinä {length, plural, one {on 1} other {on #}}.",
+            "phraseWordCount": "Palautuslausekkeessasi pitäisi olla 24 sanaa, tällä hetkellä siinä {length, plural, one {on #} other {on #}}.",
             "phraseUnrecognizedWord": "Tuntematon sana \"{word}\" palautuslauseessasi",
             "phraseCaseWord": "Sana \"{word}\" tulee olla pienillä kirjaimilla kirjoitettu"
         },
@@ -1038,7 +1157,8 @@
             "otherConnected": "Väärä sovellus on auki Ledger-laitteellasi.",
             "generateAddress": "Osoitetta luotaessa tapahtui virhe.",
             "timeout": "Ledger-laitteesi aikakatkaistiin.",
-            "disconnected": "Yhteys Ledger-laitteeseesi katkaistiin."
+            "disconnected": "Yhteys Ledger-laitteeseesi katkaistiin.",
+            "noStronghold": "Ei voida käyttää Strongholdia Ledger-profiilin kanssa."
         },
         "popup": {
             "preventClose": "Tätä ponnahdusikkunaa ei voi sulkea."
@@ -1048,11 +1168,20 @@
         },
         "crypto": {
             "cannotDecodeBech32": "Merkkijonon dekoodaus Bech32-osoitteena ei onnistu."
+        },
+        "participation": {
+            "cannotUseAccount": "Ei voida käyttää kyseistä tiliä.",
+            "cannotFindStakingEvent": "Ei voida löytää staking-tapahtumaa.",
+            "cannotVisitAirdropWebsite": "Ei voida avata {airdrop} verkkosivua.",
+            "invalidStakingEventId": "Virheellinen staking-tapahtumatunnus."
         }
     },
     "warning": {
         "node": {
             "http": "Solmujen käyttäminen HTTP:n yli jättää liikenteen salaamattomaksi ja voi aiheuttaa turvallisuusriskin."
+        },
+        "participation": {
+            "noAccounts": "Sinulla ei ole yhtään IOTA tokenia."
         }
     },
     "tooltips": {
@@ -1063,6 +1192,60 @@
             "medium": "Keskitasoinen",
             "low": "Matala",
             "veryLow": "Erittäin matala"
+        },
+        "stakingIndicator": {
+            "upcoming": {
+                "title": "Staking ei ole vielä alkanut",
+                "body": "Tarkista myöhemmin uudelleen. Staking-tapahtuma ei ole alkanut."
+            },
+            "commencing": {
+                "title": "Pre-staking on nyt avoinna",
+                "body": "Pre-stakea tokenisi, ja kun staking alkaa, alat automaattisesti saada palkkioita 10 sekunnin välein."
+            },
+            "activeHolding": {
+                "title": "Staking on nyt käynnissä",
+                "body": "Hyvää työtä. Saat palkkioita 10 sekunnin välein."
+            },
+            "inactiveHolding": {
+                "title": "Staking on nyt avoinna",
+                "body": "Stakea IOTA-tokenisi saadaksesi palkkioita 10 sekunnin välein."
+            },
+            "inactive": {
+                "title": "Staking-tapahtumia ei havaittu",
+                "body": "Avaa verkkoasetukset lisäasetuksissa ja varmista, että nykyisellä solmulla on ominaisuus \"Participation\" klikkaamalla \"Näytä tiedot\"."
+            },
+            "ended": {
+                "title": "Staking on nyt päättynyt",
+                "bodyAboveRewardMin": "Assembly- ja Shimmer-palkkiot jaetaan lompakkoihisi, kun verkot käynnistyvät.",
+                "bodyBelowRewardMin": "Et stakennut tarpeeksi IOTA:a saavuttaaksesi airdropin vähimmäispalkkiota."
+            }
+        },
+        "partiallyStakedFunds": {
+            "title": "Uudet varat ilman stakea: {amount}",
+            "titleNoFunds": "Uudet varat ilman stakea",
+            "preBody": "Olet vastaanottanut tokeneita stakettuun lompakkoon.",
+            "body": "Sinun täytyy manuaalisesti staketa nämä uudet varat saadaksesi niistä airdrop-palkkioita."
+        },
+        "stakingMinRewards": {
+            "title": "Vähimmäispalkkioarvon alapuolella",
+            "titleMinBalance": "{amount} vähimmäissaldo vaaditaan",
+            "bodyMinBalance": "Tässä lompakossa ei ole riittävästi IOTA-tokeneita airdrop-palkkioiden vähimmäismäärän saavuttamiseksi ja näin ollen sitä ei voi staketa.",
+            "continue": "Ole hyvä ja jatka stakingia seuraavat {duration}.",
+            "bodyBelowMin": "Tämä lompakko ei ole saavuttanut palkkioiden vähimmäisarvoa airdropille {airdrop} ({airdropRewardMin}).",
+            "bodyWillReachMin": "Sinun täytyy staketa vielä {duration} saavuttaakseksi vähimmäismäärän.",
+            "bodyWillNotReachMin": "Et tule saavuttamaan vähimmäispalkkioarvoa jäljellä olevan staking-jakson aikana, ellet lisää IOTA:a.",
+            "bodyDidNotReachMin": "Et stakennut tarpeeksi IOTA:a saavuttaaksesi vähimmäispalkkioarvoa airdropille {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "Tässä lompakossa ei ole riittävästi IOTA-tokeneita vähimmäispalkkion saavuttamiseksi airdropille {airdrop}."
+        }
+    },
+    "exports": {
+        "transactionHistoryCsv": {
+            "messageId": "Viestitunniste",
+            "internal": "Sisäinen",
+            "rawValue": "Raaka-arvo",
+            "formattedValue": "Muotoiltu arvo",
+            "date": "Päivämäärä",
+            "time": "Aika"
         }
     }
 }

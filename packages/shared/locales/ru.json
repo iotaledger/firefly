@@ -15,7 +15,7 @@
         },
         "profile": {
             "title": "Создать профиль",
-            "profileName": "Profile name",
+            "profileName": "Имя профиля",
             "body1": "Вы можете создать несколько профилей, чтобы организовать ваши кошельки и повысить безопасность.",
             "body2": {
                 "first": "А сейчас, давайте начнем с вашего первого имени профиля.",
@@ -23,14 +23,14 @@
             },
             "addMore": "Вы можете добавить больше профилей позже.",
             "developer": {
-                "label": "Developer profile",
-                "info": "Connect to public and private IOTA networks"
+                "label": "Профиль разработчика",
+                "info": "Подключение к публичным и частным сетям IOTA"
             }
         },
         "setup": {
             "title": "Настройте кошелек",
             "chrysalisTitle": "Обновление сети Chrysalis",
-            "chrysalisBody": "С 21 апреля пользователи могут перенести их токены в новую сеть Chrysalis. Мы рекомендуем вам как можно скорее перенести ваши токены.",
+            "chrysalisBody": "С 21 апреля 2021 года пользователи могут перевести свои токены в новую сеть Chrysalis. Мы рекомендуем вам перевести имеющиеся токены как можно скорее.",
             "learnMore": "Узнайте о миграции"
         },
         "secure": {
@@ -312,7 +312,7 @@
             "theme": {
                 "title": "Внешний Вид",
                 "description": "",
-                "advice": "Restart the Firefly application for changes to the system theme to take effect"
+                "advice": "Перезапустите приложение Firefly, чтобы изменения в теме системы вступили в силу"
             },
             "language": {
                 "title": "Язык",
@@ -328,17 +328,15 @@
             },
             "networkStatus": {
                 "title": "Статус сети",
-                "description": "Displays the status of the node you are currently connected to"
+                "description": "Отображает статус узла, к которому вы в данный момент подключены"
             },
             "exportStronghold": {
-                "title": "Export backup",
+                "title": "Экспортировать резервную копию",
                 "description": "Экспорт в файл Stronghold - полная зашифрованная резервная копия ваших кошельков и последней истории транзакций"
             },
             "appLock": {
-                "title": "Automatic lock",
-                "description": "Время бездействия до блокировки кошелька и выхода из системы",
-                "durationMinute": "{time, plural, one {1 минута} other {# минут}}",
-                "durationHour": "{time, plural, one {1 час} other {# часов}}"
+                "title": "Автоматическая блокировка",
+                "description": "Время бездействия до блокировки кошелька и выхода из системы"
             },
             "changePassword": {
                 "title": "Изменить пароль",
@@ -369,35 +367,35 @@
                 "description": "Автоматически заполнить данные о транзакциях в Firefly при нажатии на ссылку IOTA"
             },
             "networkConfiguration": {
-                "title": "Network config",
-                "title2": "Network configuration",
+                "title": "Конфигурация сети",
+                "title2": "Конфигурация сети",
                 "description": {
-                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
-                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                    "dev": "Ваши сетевые настройки будут обновляться автоматически в соответствии с текущей конфигурацией узла (переключение сети приведет к сбросу состояния кошелька)",
+                    "nonDev": "Ваши сетевые настройки будут обновляться автоматически в соответствии с текущей настройкой узла"
                 },
-                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
-                "resetWallet": "Your wallet state has been reset.",
-                "connectedTo": "Connected to",
+                "switchedNetworks": "Сеть успешно переключена на \"{networkName}\".",
+                "resetWallet": "Состояние вашего кошелька было сброшено.",
+                "connectedTo": "Подключено к",
                 "nodeConfiguration": {
-                    "title": "Node selection",
-                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
-                    "automatic": "Automatic",
-                    "manual": "Manual"
+                    "title": "Выбор узла",
+                    "description": "Выберите \"Вручную\" для настройки параметров узла и подключения к собственному узлу (узлам)",
+                    "automatic": "Автоматически",
+                    "manual": "Вручную"
                 }
             },
             "configureNodeList": {
-                "title": "Node configuration",
-                "description": "Manage the list of nodes you connect to",
+                "title": "Настройка узла",
+                "description": "Управление списком узлов, к которым вы подключаетесь",
                 "primaryNode": "Основной узел",
                 "excludeNode": "Исключить узел",
                 "includeNode": "Включить узел",
-                "editDetails": "Edit details",
-                "viewInfo": "View info",
+                "editDetails": "Изменить детали",
+                "viewInfo": "Посмотреть информацию",
                 "setAsPrimary": "Установить как основной",
                 "removeNode": "Удалить узел",
                 "includeOfficialNodeList": "Включить список официальных узлов",
-                "noNodes": "There are no nodes, unable to connect to the network",
-                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
+                "noNodes": "Нет узлов, не удается подключиться к сети",
+                "noNodesAuto": "Нет узлов, вместо них будет использоваться автоматический выбор"
             },
             "proofOfWork": {
                 "title": "Доказательство Работы (PoW)",
@@ -412,12 +410,8 @@
                 "description": "Просмотр информации о системе и приложении"
             },
             "migrateLedgerIndex": {
-                "title": "Migrate Ledger index",
+                "title": "Мигрировать индекс Ledger",
                 "description": "Миграция другого индекса аккаунта Trinity"
-            },
-            "stateExport": {
-                "title": "Экспортировать Состояние Кошелька",
-                "description": "Экспорт истории транзакций в .csv файл"
             },
             "troubleshoot": {
                 "title": "Диагностика",
@@ -429,7 +423,7 @@
             },
             "faq": {
                 "title": "ЧАВО",
-                "title2": "Frequently asked questions",
+                "title2": "Часто задаваемые вопросы",
                 "description": "Просмотреть часто задаваемые вопросы для получения помощи с общей проблемой или вопросом"
             },
             "discord": {
@@ -446,8 +440,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Пожалуйста подождите {time, plural, one {1 секунду} few {# секунды} other {# секунд}}",
-            "incorrectAttempts": "{attempts, plural, one {1 неправильная попытка} other {# неправильные попытки}}"
+            "pleaseWait": "Пожалуйста подождите {time, plural, one {# секунду} other {# секунд}}",
+            "incorrectAttempts": "{attempts, plural, one {# неправильная попытка} other {# неправильные попытки}}"
         },
         "dashboard": {
             "security": {
@@ -479,16 +473,58 @@
                 }
             },
             "network": {
-                "networkOperational": "Сетевой оператор",
+                "networkOperational": "Сеть исправна",
                 "networkDegraded": "Деградация сети",
                 "networkDown": "Сеть отключена",
                 "status": "Статус",
                 "messagesPerSecond": "Сообщений в секунду",
-                "referencedRate": "Базовая ставка"
+                "referencedRate": "Базовая скорость"
             },
             "profileModal": {
                 "allSettings": "Все настройки",
                 "logout": "Выйти"
+            }
+        },
+        "staking": {
+            "title": "Ставки",
+            "welcome": "Добро пожаловать в панель управления ставками!",
+            "status": {
+                "upcoming": "Событие не началось",
+                "commencing": "Предварительная ставка открыта",
+                "holdingActive": "Ставка в процессе",
+                "holdingInactive": "Ставка открыта",
+                "inactive": "Ставка не обнаружена",
+                "ended": "Ставка завершёна"
+            },
+            "summary": {
+                "stakedFunds": "Ставочные средства"
+            },
+            "info": {
+                "upcomingSubheader": "Событие не началось",
+                "upcomingHeader": "Проверить позже",
+                "commencingSubheader": "Приготовиться к ставке",
+                "commencingHeader": "Сделайте предварительную ставку токенов!",
+                "holdingSubheaderHolding": "Теперь зарабатываем вознаграждения за ставки",
+                "holdingSubheaderNotHolding": "Зарабатывайте вознаграждения, делая ставки IOTA",
+                "holdingHeaderHolding": "Осталось {duration}",
+                "holdingHeaderNotHolding": "Ставьте свои токены!",
+                "endedSubheader": "Ставки завершились",
+                "endedHeader": "Спасибо!",
+                "inactiveHeader": "Попытка изменить узел",
+                "inactiveSubheader": "Ставка не обнаружена"
+            },
+            "airdrops": {
+                "holding": "Остаток",
+                "commencing": "До начала ставок",
+                "collectedRewards": "Собранные выплаты",
+                "assembly": {
+                    "name": "Assembly",
+                    "description": "Assembly - это открытая, высокомасштабируемая многоцепочечная сеть для создания и развертывания составных смарт-контрактов. Assembly - это будущее web3. "
+                },
+                "shimmer": {
+                    "name": "Shimmer",
+                    "description": "Стимулируемая промежуточная сеть для продвижения основных инноваций на IOTA. Все, что происходит, происходит. Как будет развиваться Shimmer, зависит от вас."
+                }
             }
         }
     },
@@ -528,7 +564,7 @@
         },
         "hideAccount": {
             "title": "Скрыть {name}?",
-            "body": "Вы можете найти этот кошелек позже, включив опцию \"Показывать скрытые кошельки\" в расширенных настройках.",
+            "body": "Вы можете найти этот кошелек позже, включив опцию \"Показывать скрытые кошельки\" в дополнительных настройках.",
             "typePassword": "Введите пароль для подтверждения.",
             "hideAccount": "Скрыть кошелек",
             "errorTitle": "Не удается скрыть {name}",
@@ -538,43 +574,45 @@
         },
         "addressHistory": {
             "title": "История адресов: {name}",
-            "currentBalance": "Текущий баланс: {balance}"
+            "currentBalance": "Баланс: {balance}",
+            "internal": "Внутренний адрес",
+            "external": "Адрес пополнения счета"
         },
         "node": {
             "titleAdd": "Добавить узел",
             "titleUpdate": "Обновить узел",
             "titleRemove": "Удалить узел",
-            "titleRemoveAll": "Remove all nodes",
+            "titleRemoveAll": "Удалить все узлы",
             "titleDetails": "Детали узла",
-            "titleInfo": "Node info",
-            "addingNode": "Adding node",
-            "updatingNode": "Updating node",
-            "loadingNodeInfo": "Loading node info",
+            "titleInfo": "Информация об узле",
+            "addingNode": "Добавление узла",
+            "updatingNode": "Обновление узла",
+            "loadingNodeInfo": "Загрузка информации об узле",
             "nodeAddress": "Адрес узла",
             "optionalUsername": "Имя пользователя (опционально)",
             "optionalPassword": "Пароль (опционально)",
-            "optionalJwt": "JSON web token (optional)",
+            "optionalJwt": "JSON веб-токен (необязательно)",
             "setAsPrimaryNode": "Установить как основной узел",
             "removeConfirmation": "Ты уверен, что хотешь удалить этот узел?",
-            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "removeAllConfirmation": "Вы уверены, что хотите удалить все узлы?",
             "info": {
                 "url": "URL",
-                "software": "Software",
-                "networkId": "Network ID",
+                "software": "Программное обеспечение",
+                "networkId": "Сетевой ID",
                 "bech32HRP": "Bech32 HRP",
-                "features": "Features",
-                "confirmedMilestoneIndex": "Confirmed milestone index",
-                "pruningIndex": "Pruning index",
+                "features": "Функции",
+                "confirmedMilestoneIndex": "Подтвержденный индекс этапа",
+                "pruningIndex": "Индекс обрезки",
                 "messagesPerSecond": "Сообщений в секунду",
-                "referencedRate": "Базовая ставка"
+                "referencedRate": "Базовая скорость"
             }
         },
         "switchNetwork": {
-            "title": "Switch network",
-            "newNetwork": "New network",
-            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
-            "switchingNetwork": "Switching network",
-            "typePassword": "Type your password to switch to:"
+            "title": "Переключить сеть",
+            "newNetwork": "Новая сеть",
+            "resetWarning": "Смена сети приведет к выходу из системы и сбросу всех счетов, балансов и истории транзакций для этого профиля.",
+            "switchingNetwork": "Переключение сети",
+            "typePassword": "Введите свой пароль для переключения на:"
         },
         "errorLog": {
             "title": "Журнал ошибок",
@@ -598,7 +636,8 @@
         },
         "transaction": {
             "title": "Подтвердить транзакцию",
-            "body": "Вы собираетесь отправить {amount}"
+            "body": "Вы собираетесь отправить {amount}",
+            "sendingFromStakedAccount": "Вы отправляете перевод с кошелька, который в настоящее время задействован в ставке. Это может привести к тому, что ваши токены не будут зачислены. Не стесняйтесь отправлять перевод, но вам может потребоваться повторный залог оставшихся токенов."
         },
         "balanceFinder": {
             "title": "Определитель баланса",
@@ -668,7 +707,45 @@
         },
         "ledgerMigrateIndex": {
             "title": "Вам нужно перенести другой индекс аккаунта Trinity?",
-            "body": "Вы также можете выполнить миграцию позже в расширенных настройках."
+            "body": "Вы также можете выполнить миграцию позже в дополнительных настройках."
+        },
+        "exportTransactionHistory": {
+            "title": "Экспортировать историю транзакций",
+            "body": "Экспорт истории транзакций для выбранного кошелька. Экспортируемый файл будет иметь формат .csv.",
+            "profileName": "Имя профиля:",
+            "accountName": "Название счёта:",
+            "typePassword": "Введите пароль для разрешения экспорта"
+        },
+        "stakingNotice": {
+            "upcomingDate": "Ставка еще не начата",
+            "commencingDate": "Ставка еще не начата",
+            "body": "Предварительно разместив свои средства до начала ставок, вы автоматически начнете получать вознаграждение, когда начнутся ставки.",
+            "ok": "Хорошо, я понял"
+        },
+        "stakingManager": {
+            "title": "Управление ставками",
+            "description": "Когда вы перевели кошелёк в режим ставки, вы отправляете транзакцию самому себе, помечая эти средства как \"сделанные ставки\". Вы можете перевести токены в любое время, но вы не будете продолжать получать вознаграждение за ставку.",
+            "totalFundsStaked": "Общая сумма поставленных средств",
+            "stakedSuccessfully": "Ваши средства теперь участвуют в стейкинге на {account}.",
+            "unstakedSuccessfully": "Ваши средства были сняты со стейкинга на {account}."
+        },
+        "stakingConfirmation": {
+            "title": "Участие в раздаче",
+            "subtitleStake": "Вы собираетесь принять участие в ставках",
+            "subtitleMerge": "Вы собираетесь объединить",
+            "bodyStake": "Если вы не хотите участвовать в обоих раздачах, вы можете отказаться от участия ниже. Вы можете отозвать и возобновить ставку в любое время.",
+            "bodyMerge": "Ваши средства будут поставлены на {airdrop}. Чтобы изменить, в каких раздачах вы хотите участвовать, отмените ставку этого кошелька и сделайте ее снова.",
+            "estimatedAirdrop": "Предполагаемое вознаграждение"
+        },
+        "shimmer-info": {
+            "title": "О Shimmer",
+            "body1": "Поздравляем, вы заработали токены SMR в качестве вознаграждения за размещение ставок. Shimmer - это стимулируемая сеть для тестирования основных обновлений IOTA.",
+            "body2": "Мы планируем запустить Shimmer в 2022 году. Ваши токены станут доступны для перевода после запуска сети."
+        },
+        "assembly-info": {
+            "title": "О Assembly",
+            "body1": "Поздравляем, вы заработали токены ASMB в качестве вознаграждения за размещение ставок. Assembly - это многоцепочечная сеть для развертывания масштабируемых смарт-контрактов на IOTA.",
+            "body2": "Мы планируем запустить Assembly в 2022 году. Ваши токены станут доступны для перевода после запуска сети."
         }
     },
     "charts": {
@@ -676,7 +753,7 @@
         "outgoingMi": "Исходящие {value}",
         "portoflio": "Портфолио",
         "token": "Токен",
-        "holdings": "Владения",
+        "holdings": "Активы",
         "accountValue": "Стоимость кошелька",
         "accountActivity": "Активность кошелька",
         "timeframe1Hour": "1 час",
@@ -724,11 +801,12 @@
         "dropHere": "Перенесите файл сюда",
         "syncAll": "Синхронизировать все",
         "export": "Экспортировать",
+        "exporting": "Экспортирование",
         "exportNewStronghold": "Экспортировать новый Stronghold",
         "enableDeepLinks": "Включить ссылки IOTA",
-        "enableDeveloperMode": "Активировать режим Разработчика",
+        "enableDeveloperMode": "Включить режим разработчика",
         "enableSystemNotifications": "Включить систему уведомлений",
-        "exportState": "Экспортировать отчет",
+        "exportTransactionHistory": "Экспортировать историю транзакций",
         "localProofOfWork": "Локальное доказательство выполнения работы",
         "unlock": "Разблокировать",
         "updateFirefly": "Обновить Firefly",
@@ -743,7 +821,7 @@
         "addNode": "Добавить узел",
         "updateNode": "Обновить узел",
         "removeNode": "Удалить узел",
-        "removeAllNodes": "Remove all nodes",
+        "removeAllNodes": "Удалить все узлы",
         "hide": "Скрыть",
         "hideOthers": "Скрыть остальные",
         "showAll": "Показать всё",
@@ -780,7 +858,17 @@
         "searching": "Поиск...",
         "closeFirefly": "Закрыть Firefly",
         "generateAddress": "Сгенерировать адрес",
-        "migrateAgain": "Мигрировать другой индекс"
+        "migrateAgain": "Мигрировать другой индекс",
+        "visitWebsite": "Посетить сайт",
+        "howItWorks": "Как это работает",
+        "learnAboutStaking": "Узнайте о ставках",
+        "stake": "Ставка",
+        "unstake": "Вывести",
+        "stakeFunds": "Ставочные средства",
+        "manageStake": "Управление ставкой",
+        "merge": "Объединить",
+        "mergeFunds": "Объединить средства",
+        "done": "Выполнено"
     },
     "general": {
         "password": "Пароль",
@@ -823,9 +911,9 @@
         "stronghold": "Stronghold",
         "language": "Язык",
         "appearance": "Внешний вид",
-        "lightTheme": "Light",
-        "darkTheme": "Dark",
-        "systemTheme": "System",
+        "lightTheme": "Светлая",
+        "darkTheme": "Тёмная",
+        "systemTheme": "Система",
         "balance": "Баланс",
         "accountBalance": "Баланс кошелька",
         "incoming": "Входящие",
@@ -842,7 +930,7 @@
         "transactions": "Транзакции",
         "security": "Настройки Безопасности",
         "accountAddress": "Адрес кошелька",
-        "network": "Network",
+        "network": "Сеть",
         "nodes": "Узлы",
         "wallet": "Кошелёк",
         "help": "Помощь",
@@ -869,6 +957,8 @@
         "transferBroadcasting": "Отправка транзакции",
         "transferComplete": "Передача завершена",
         "generatingReceiveAddress": "Генерирование адреса приема",
+        "broadcasting": "Вещание",
+        "confirming": "Подтверждение",
         "creatingAccount": "Создание кошелька, пожалуйста, подождите...",
         "updatingAccount": "Обновление кошелька, пожалуйста, подождите...",
         "accountSyncing": "Кошелек синхронизируется",
@@ -876,6 +966,7 @@
         "passwordUpdating": "Обновление пароля...",
         "passwordSuccess": "Пароль успешно обновлен",
         "passwordFailed": "Не удалось обновить пароль",
+        "syncing": "Синхронизация",
         "syncingAccounts": "Синхронизация кошельков...",
         "exportingStronghold": "Экспортирование Stronghold...",
         "exportingStrongholdSuccess": "Stronghold успешно экспортирован",
@@ -896,13 +987,24 @@
         "sendingFrom": "Отправка с {account}",
         "receivedTo": "Поступило на {account}",
         "sentFrom": "Отправлено с {account}",
+        "stakedFor": "Поставлено на {account}",
+        "unstakedFor": "Выведено из {account}",
+        "votedFor": "Проголосовано за {account}",
+        "unvotedFor": "За {account} голос отменён",
         "receiving": "Поступление",
         "sending": "Отправление",
         "legacyNetwork": "Устаревшая сеть",
         "capsLock": "Включен Caps Lock",
         "version": "Версия {version}",
         "unknown": "Неизвестно",
-        "none": "None"
+        "none": "Отсутствует",
+        "staked": "Поставлено",
+        "unstaked": "Выведено",
+        "staking": "Ставки",
+        "unstaking": "Выведение",
+        "notStaked": "Не поставлено",
+        "stakedFunds": "Ставочные средства",
+        "unstakedFunds": "Выведеноные средства"
     },
     "dates": {
         "today": "Сегодня",
@@ -911,6 +1013,15 @@
         "weeksAgo": "{time, plural, one {# неделя} other {# недели}} назад",
         "monthsAgo": "{time, plural, one {# месяц} other {# месяцев}} назад",
         "yearsAgo": "{time, plural, one {# год} other {# лет}} назад"
+    },
+    "times": {
+        "second": "{time, plural, one {# секунда} other {# секунд}}",
+        "minute": "{time, plural, one {# минута} other {# минут}}",
+        "hour": "{time, plural, one {# час} other {# часов}}",
+        "day": "{time, plural, one {# день} other {# дней}}",
+        "week": "{time, plural, one {# неделя} other {# недель}}",
+        "month": "{time, plural, one {# месяц} other {# месяца}}",
+        "year": "{time, plural, one {# год} other {# года}}"
     },
     "notifications": {
         "valueTx": "Получение {{value}} в {{account}}",
@@ -923,10 +1034,14 @@
         "updateError": "Во время обновления произошла ошибка, попробуйте ещё раз",
         "restartInstall": "Перезапустите для установки",
         "calcMinutesRemaining": "Вычисление оставшихся минут...",
-        "minutesRemaining": "{minutes, plural, one {Осталась 1 минута} other { Осталось # минут}}",
+        "minutesRemaining": "{minutes, plural, one {# минута осталась} other {# минут осталось}}",
         "copiedToClipboard": "Скопировано в буфер обмена",
         "accountsSynchronized": "Синхронизация кошелька завершена",
         "fundsAvailableSoon": "Ваши средства будут доступны в ближайшее время",
+        "exportTransactionHistory": {
+            "success": "История транзакций для {accountAlias} успешно сохранена в {filePath}",
+            "error": "Невозможно экспортировать историю транзакций для {accountAlias}"
+        },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "Пожалуйста, войдите в систему, чтобы открыть ссылку IOTA",
             "notEnabled": "Ссылки IOTA не включены",
@@ -940,8 +1055,11 @@
     },
     "error": {
         "profile": {
-            "length": "Имя твоего профиля не может быть длиннее {length, plural, one {1 символа} few {# символов} many {# символов} other {# символов}}.",
-            "duplicate": "Профиль с таким именем уже существует."
+            "length": "Имя твоего профиля не может быть длиннее {length, plural, one {# символа} other {# символов}}.",
+            "duplicate": "Профиль с таким именем уже существует.",
+            "delete": {
+                "nonEmptyAccounts": "Перед удалением профиля вы должны перевести все остатки средств."
+            }
         },
         "password": {
             "doNotMatch": "Пароли не совпадают.",
@@ -958,15 +1076,15 @@
             "similar": "Похоже на один из широко распространенных паролей.",
             "word": "Одно слово легко угадать.",
             "incorrect": "Неправильный пароль.",
-            "length": "Твой пароль не может быть длиннее {length, plural, one {1 символа} few {# символов} many {# символов} other {# символов}}."
+            "length": "Твой пароль не может быть длиннее {length, plural, one {1 символа} other {# символов}}."
         },
         "pincode": {
-            "length": "Твой PIN-код должен быть {length, plural, one {1 цифра} few {# цифр} many {# цифр} other {# цифр}}.",
+            "length": "Твой PIN-код должен быть {length, plural, one {# цифра} other {# цифр}}.",
             "match": "PIN-код и подтверждение не совпадают.",
             "incorrect": "Твой PIN-код неверен."
         },
         "account": {
-            "length": "Имя вашего кошелька не может быть длиннее, чем {length, plural, one {1 character} other {# characters}}.",
+            "length": "Имя твоего профиля не может быть длиннее {length, plural, one {# символ} other {# символов}}.",
             "empty": "Вы должны использовать ваш последний кошелёк перед созданием нового.",
             "notEmpty": "Вы должны перевести баланс перед удалением этого кошелька.",
             "duplicate": "Кошелек с таким именем уже существует.",
@@ -979,7 +1097,7 @@
             "syncing": "Произошла ошибка при синхронизации ваших кошельков."
         },
         "send": {
-            "addressLength": "Длина адресов должна быть {length, plural, one {1 символ} other {# символов}}.",
+            "addressLength": "Длина адресов должна быть {length, plural, one {# символ} other {# символов}}.",
             "amountTooHigh": "Это больше, чем твой баланс.",
             "amountNoFloat": "Если единицы измерения 'i', то вы не можете использовать знаки после запятой.",
             "amountInvalidFormat": "Сумма является недопустимым числом.",
@@ -996,23 +1114,24 @@
         },
         "node": {
             "invalid": "Пожалуйста, введите правильный адрес.",
-            "dns": "Could not find DNS resolution for node.",
-            "timedOut": "The connection timed out.",
-            "refused": "The connection was refused.",
-            "handshake": "Could not complete handshake with node.",
-            "invalidCertificate": "Could not connect with invalid certificate.",
-            "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
+            "dns": "Не удалось найти разрешение DNS для узла.",
+            "timedOut": "Соединение прервалось по истечении времени.",
+            "refused": "Соединение было отклонено.",
+            "handshake": "Не удалось завершить рукопожатие с узлом.",
+            "invalidCertificate": "Не удалось подключиться из-за недействительного сертификата.",
+            "https": "Требуется HTTPS; небезопасные соединения по HTTP в настоящее время не поддерживаются.",
             "duplicate": "Этот узел уже был добавлен.",
             "unsynced": "Узел не синхронизирован.",
             "noSynced": "Нет доступных синхронизированных узлов.",
-            "answer": "Failed to get an answer from all nodes.",
-            "forbidden": "This node connection is forbidden."
+            "answer": "Не удалось получить ответ от всех узлов.",
+            "forbidden": "Соединение с этим узлом запрещено.",
+            "pluginNotAvailable": "Плагин \"{nodePlugin}\" недоступен на текущем узле."
         },
         "network": {
-            "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
-            "notReachable": "The network ID for this node could not be retrieved, unable to add node.",
-            "badNodes": "Unable to connect to the network with current node configuration.",
-            "nonEmptyAccount": "You must transfer all balances before switching networks."
+            "mismatch": "Идентификатор сети для этого узла - это \" {networkId}\", что не соответствует текущей сети.",
+            "notReachable": "Не удалось получить ID сети для этого узла, невозможно добавить узел.",
+            "badNodes": "Невозможно подключиться к сети с текущей настройкой узла.",
+            "nonEmptyAccount": "Вы должны перевести все остатки средств, прежде чем переключить сети."
         },
         "global": {
             "generic": "Что-то пошло не так."
@@ -1021,9 +1140,9 @@
             "invalid": "Файл резервной копии не распознан.",
             "destination": "Резервная копия недействительна.",
             "mnemonic": "Мнемоника недействительна.",
-            "seedTooShort": "Ключ должен быть 81 символ длиной, это {length, plural, one {1} other {#}}",
+            "seedTooShort": "Ключ должен быть длиной 81 символ, этот {length, plural, one {длиной #} other {длиной #}}",
             "seedCharacters": "Ключ должен содержать только символы A-Z или 9",
-            "phraseWordCount": "В твоей фразе восстановления должно быть 24 слов, сейчас здесь {length, plural, one {1} few {#} many {#} other {#}}.",
+            "phraseWordCount": "В твоей фразе восстановления должно быть 24 слова, сейчас здесь {length, plural, one {# слово} other {# слов}}.",
             "phraseUnrecognizedWord": "Нераспознанное слово \"{word}\" в твоей фразе восстановления",
             "phraseCaseWord": "Слово \"{word}\" должно быть строчным регистром"
         },
@@ -1038,7 +1157,8 @@
             "otherConnected": "На вашем устройстве Ledger открыто неправильное приложение.",
             "generateAddress": "Произошла ошибка при генерировании адреса.",
             "timeout": "Время работы вашего устройства Ledger истекло.",
-            "disconnected": "Ваше устройство Ledger было отключено."
+            "disconnected": "Ваше устройство Ledger было отключено.",
+            "noStronghold": "Невозможно использовать Stronghold с профилем Ledger."
         },
         "popup": {
             "preventClose": "Это всплывающее окно невозможно закрыть."
@@ -1048,11 +1168,20 @@
         },
         "crypto": {
             "cannotDecodeBech32": "Невозможно декодировать строку как Bech32 адрес."
+        },
+        "participation": {
+            "cannotUseAccount": "Не удается использовать указанный аккаунт.",
+            "cannotFindStakingEvent": "Невозможно найти событие, связанное со ставками.",
+            "cannotVisitAirdropWebsite": "Невозможно открыть веб-сайт {airdrop}.",
+            "invalidStakingEventId": "Неверный ID события ставки."
         }
     },
     "warning": {
         "node": {
-            "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
+            "http": "Использование узлов через HTTP оставляет трафик незашифрованным и может представлять угрозу безопасности."
+        },
+        "participation": {
+            "noAccounts": "У вас нет IOTA."
         }
     },
     "tooltips": {
@@ -1063,6 +1192,60 @@
             "medium": "Средний",
             "low": "Низкий",
             "veryLow": "Очень низкий"
+        },
+        "stakingIndicator": {
+            "upcoming": {
+                "title": "Ставки еще не начались",
+                "body": "Проверьте позже. Ставка еще не началась."
+            },
+            "commencing": {
+                "title": "Предварительные ставки открыты",
+                "body": "Сделайте предварительную ставку, и как только ставка начнется, вы автоматически начнете получать вознаграждение каждые 10 секунд."
+            },
+            "activeHolding": {
+                "title": "В настоящее время происходит ставка",
+                "body": "Хорошая работа. Вы будете получать вознаграждение каждые 10 секунд."
+            },
+            "inactiveHolding": {
+                "title": "Ставки открыты",
+                "body": "Ставьте свои токены IOTA, чтобы получать вознаграждение каждые 10 секунд."
+            },
+            "inactive": {
+                "title": "События, связанные со ставками, не обнаружены",
+                "body": "Откройте конфигурацию сети в разделе \"Дополнительные настройки\" и убедитесь, что текущий узел имеет функцию \"Участие\", нажав \"Просмотр информации\"."
+            },
+            "ended": {
+                "title": "Ставки завершились",
+                "bodyAboveRewardMin": "Начисления Assembly и Shimmer будут распределены по вашим кошелькам после запуска каждой из соответствующих сетей.",
+                "bodyBelowRewardMin": "Вы не сделали достаточно ставок IOTA, чтобы достичь минимального вознаграждения."
+            }
+        },
+        "partiallyStakedFunds": {
+            "title": "Новые выведенные средства: {amount}",
+            "titleNoFunds": "Новые выведенные средства",
+            "preBody": "Вы получили токены на кошелек со ставками.",
+            "body": "Чтобы получить вознаграждение в виде раздач, вам нужно вручную сделать ставку на эти новые средства."
+        },
+        "stakingMinRewards": {
+            "title": "Ниже минимальной суммы вознаграждения",
+            "titleMinBalance": "{amount} минимально необходимый баланс",
+            "bodyMinBalance": "В этом кошельке недостаточно токенов IOTA для достижения минимального вознаграждения, поэтому он не может быть использован.",
+            "continue": "Пожалуйста, продолжайте делать ставки еще на {duration}.",
+            "bodyBelowMin": "Этот кошелек не достиг минимального значения вознаграждения за {airdrop} ({airdropRewardMin}).",
+            "bodyWillReachMin": "Вы должны сделать ставку еще на {duration}, чтобы достичь минимума.",
+            "bodyWillNotReachMin": "Вы не достигнете минимального значения вознаграждения в течение оставшегося периода ставок, если не добавите больше IOTA.",
+            "bodyDidNotReachMin": "Вы сделали недостаточно ставок IOTA, чтобы достичь минимального значения вознаграждения за {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "В этом кошельке недостаточно токенов IOTA для достижения минимального вознаграждения за {airdrop}."
+        }
+    },
+    "exports": {
+        "transactionHistoryCsv": {
+            "messageId": "ID сообщения",
+            "internal": "Внутренний",
+            "rawValue": "Необработанное значение",
+            "formattedValue": "Обработанное значение",
+            "date": "Дата",
+            "time": "Время"
         }
     }
 }

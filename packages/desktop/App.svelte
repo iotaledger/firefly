@@ -1,19 +1,19 @@
 <script lang="typescript">
-    import { Popup,Route,TitleBar,ToastContainer } from 'shared/components'
-    import { loggedIn,mobile } from 'shared/lib/app'
-    import { appSettings,initAppSettings } from 'shared/lib/appSettings'
-    import { getVersionDetails,pollVersion,versionDetails } from 'shared/lib/appUpdater'
-    import { Electron } from 'shared/lib/electron'
-    import { addError } from 'shared/lib/errors'
-    import { goto } from 'shared/lib/helpers'
-    import { dir,isLocaleLoaded,setupI18n,_ } from 'shared/lib/i18n'
-    import { pollMarketData } from 'shared/lib/market'
-    import { showAppNotification } from 'shared/lib/notifications'
-    import { openPopup,popupState } from 'shared/lib/popup'
-    import { cleanupEmptyProfiles,cleanupInProgressProfiles } from 'shared/lib/profile'
-    import { dashboardRoute,initRouter,routerNext,routerPrevious,walletRoute } from 'shared/lib/router'
-    import type { Locale } from 'shared/lib/typings/i18n'
-    import { AppRoute,Tabs } from 'shared/lib/typings/routes'
+    import { Popup,Route,TitleBar,ToastContainer } from 'shared/components';
+    import { loggedIn,mobile } from 'shared/lib/app';
+    import { appSettings,initAppSettings } from 'shared/lib/appSettings';
+    import { getVersionDetails,pollVersion,versionDetails } from 'shared/lib/appUpdater';
+    import { Electron } from 'shared/lib/electron';
+    import { addError } from 'shared/lib/errors';
+    import { goto } from 'shared/lib/helpers';
+    import { dir,isLocaleLoaded,setupI18n,_ } from 'shared/lib/i18n';
+    import { pollMarketData } from 'shared/lib/market';
+    import { showAppNotification } from 'shared/lib/notifications';
+    import { openPopup,popupState } from 'shared/lib/popup';
+    import { cleanupEmptyProfiles,cleanupInProgressProfiles } from 'shared/lib/profile';
+    import { dashboardRoute,initRouter,openSettings,routerNext,routerPrevious,walletRoute } from 'shared/lib/router';
+    import type { Locale } from 'shared/lib/typings/i18n';
+    import { AppRoute,Tabs } from 'shared/lib/typings/routes';
     import {
     Appearance,
     Backup,
@@ -88,7 +88,7 @@
         Electron.onEvent('menu-navigate-settings', () => {
             if ($loggedIn) {
                 if (get(dashboardRoute) !== Tabs.Settings) {
-                    dashboardRoute.set(Tabs.Settings)
+                    openSettings()
                 }
             } else {
                 settings = true

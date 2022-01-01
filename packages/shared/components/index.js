@@ -51,6 +51,9 @@ export { default as ButtonCheckbox } from './ButtonCheckbox.svelte'
 export { default as Animation } from './Animation.svelte'
 export { default as ProgressFlow } from './ProgressFlow.svelte'
 export { default as Video } from './Video.svelte'
+export { default as WalletPill } from './WalletPill.svelte'
+export { default as DeveloperProfileIndicator } from './DeveloperProfileIndicator.svelte'
+export { default as CollapsibleBlock } from './CollapsibleBlock.svelte'
 
 export * from './modals'
 // Charts
@@ -58,3 +61,7 @@ export { default as Chart } from './charts/Index.svelte'
 export { default as BarChart } from './charts/Bar.svelte'
 export { default as LineChart } from './charts/Line.svelte'
 export * as ChartDefaults from './charts/defaults'
+
+// Staking
+export { default as StakingAirdropIndicator } from './StakingAirdropIndicator.svelte'
+export { default as StakingIndicator } from './StakingIndicator.svelte'

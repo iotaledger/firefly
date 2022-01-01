@@ -8,6 +8,7 @@ import { localize } from './i18n'
 import type { ClientOptions } from './typings/client'
 import { get } from 'svelte/store'
 import { activeProfile } from './profile'
+import { pollParticipationOverview } from './participation/participation'
 
 export const CHRYSALIS_MAINNET_ID = 'chrysalis-mainnet'
 export const CHRYSALIS_MAINNET_NAME = 'Chrysalis Mainnet'
@@ -28,13 +29,15 @@ export const CHRYSALIS_DEVNET_BECH32_HRP = 'atoi'
  *
  * @returns {NetworkConfig}
  */
-export const getOfficialNetworkConfig = (type: NetworkType): NetworkConfig => ({
-    network: getOfficialNetwork(type),
-    nodes: getOfficialNodes(type),
-    automaticNodeSelection: true,
-    includeOfficialNodes: true,
-    localPow: true,
-})
+export const getOfficialNetworkConfig = (type: NetworkType): NetworkConfig => {
+    return {
+        network: getOfficialNetwork(type),
+        nodes: setRandomPrimaryNode(getOfficialNodes(type)),
+        automaticNodeSelection: true,
+        includeOfficialNodes: true,
+        localPow: true,
+    }
+}
 
 /**
  * Constructs an official IOTA network object given the type of network
@@ -364,12 +367,16 @@ export const ensureSinglePrimaryNode = (nodes: Node[]): Node[] => {
 
     const numPrimaryNodes = nodes.filter((n) => n.isPrimary).length
     if (numPrimaryNodes === 0) {
-        const randIdx = Math.floor(Math.random() * nodes.length)
-        return nodes.map((n, idx) => ({ ...n, isPrimary: idx === randIdx }))
+        return setRandomPrimaryNode(nodes)
     } else if (numPrimaryNodes === 1) {
         return nodes
     } else if (numPrimaryNodes > 1) {
         const activeNode = nodes.find((n) => n.isPrimary)
         return nodes.map((n, idx) => ({ ...n, isPrimary: n.url === activeNode.url }))
     }
+}
+
+const setRandomPrimaryNode = (nodes: Node[]): Node[] => {
+    const randIdx = Math.floor(Math.random() * nodes.length)
+    return nodes.map((n, idx) => ({ ...n, isPrimary: idx === randIdx }))
 }

@@ -11,10 +11,13 @@
     $: selected = illustrations[illustration]?.[darkModeEnabled ? 'darkmode' : 'lightmode']
 
     const illustrations = {
+        // Misc
         'balance-desktop': {
             lightmode: 'balance-desktop.svg',
             darkmode: 'balance-desktop-darkmode.svg',
         },
+
+        // Ledger
         'ledger-install-new-app-desktop': {
             lightmode: 'onboarding/ledger-install-new-app-desktop.svg',
             darkmode: 'onboarding/ledger-install-new-app-desktop.svg',
@@ -54,6 +57,19 @@
         'ledger-support': {
             lightmode: 'onboarding/ledger-support.svg',
             darkmode: 'onboarding/ledger-support.svg',
+        },
+        // Staking
+        'staking-notice': {
+            lightmode: 'staking/staking-notice.svg',
+            darkmode: 'staking/staking-notice.svg'
+        },
+        'shimmer-info-bg': {
+            lightmode: 'staking/shimmer-info.png',
+            darkmode: 'staking/shimmer-info.png'
+        },
+        'assembly-info-bg': {
+            lightmode: 'staking/assembly-info.png',
+            darkmode: 'staking/assembly-info.png'
         },
     }
 </script>

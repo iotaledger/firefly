@@ -30,7 +30,7 @@
         "setup": {
             "title": "Uzstādi maku",
             "chrysalisTitle": "Chrysalis tīmekļa uzlabojumi",
-            "chrysalisBody": "No 21. aprīļa lietotāji var pārcelt savus līdzekļus uz Chrysalis tīmekli. Mēs rekomendējam nekavēties ar Jūsu līdzekļu pārcelšanu.",
+            "chrysalisBody": "From April 21st 2021, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
             "learnMore": "Uzzini vairāk par pārcelšanu"
         },
         "secure": {
@@ -262,7 +262,7 @@
         },
         "securingSpentAddresses": {
             "title": "Securing spent addresses...",
-            "body1": "This process will take {minutes, plural, one {1 minute} other {# minutes}}.",
+            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
             "body2": "Your computer will run at full capacity, you may wish to do something else while you wait for this to complete."
         },
         "transferFragmentedFunds": {
@@ -336,9 +336,7 @@
             },
             "appLock": {
                 "title": "Automatic lock",
-                "description": "Inactivity time before your wallets lock and you are logged out",
-                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
-                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
+                "description": "Inactivity time before your wallets lock and you are logged out"
             },
             "changePassword": {
                 "title": "Change password",
@@ -415,10 +413,6 @@
                 "title": "Migrate Ledger index",
                 "description": "Migrate another Trinity account index"
             },
-            "stateExport": {
-                "title": "State export",
-                "description": "Export your transaction history to a .csv file"
-            },
             "troubleshoot": {
                 "title": "Troubleshoot",
                 "description": "Use the troubleshooting wizard to solve common problems"
@@ -446,8 +440,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Please wait {time, plural, one {1 second} other {# seconds}}",
-            "incorrectAttempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
@@ -489,6 +483,48 @@
             "profileModal": {
                 "allSettings": "All settings",
                 "logout": "Log out"
+            }
+        },
+        "staking": {
+            "title": "Staking",
+            "welcome": "Welcome to the staking dashboard!",
+            "status": {
+                "upcoming": "Event not started",
+                "commencing": "Pre-staking open",
+                "holdingActive": "Staking in progress",
+                "holdingInactive": "Staking open",
+                "inactive": "Staking not detected",
+                "ended": "Staking ended"
+            },
+            "summary": {
+                "stakedFunds": "Staked funds"
+            },
+            "info": {
+                "upcomingSubheader": "Event has not started",
+                "upcomingHeader": "Check back later",
+                "commencingSubheader": "Get ready for staking",
+                "commencingHeader": "Pre-stake your tokens!",
+                "holdingSubheaderHolding": "Now earning staking rewards",
+                "holdingSubheaderNotHolding": "Earn rewards by staking IOTA",
+                "holdingHeaderHolding": "{duration} left",
+                "holdingHeaderNotHolding": "Stake your tokens!",
+                "endedSubheader": "Staking has now ended",
+                "endedHeader": "Thank you!",
+                "inactiveHeader": "Try changing node",
+                "inactiveSubheader": "Staking not detected"
+            },
+            "airdrops": {
+                "holding": "Remaining",
+                "commencing": "Until staking begins",
+                "collectedRewards": "Collected rewards",
+                "assembly": {
+                    "name": "Assembly",
+                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
+                },
+                "shimmer": {
+                    "name": "Shimmer",
+                    "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
+                }
             }
         }
     },
@@ -538,7 +574,9 @@
         },
         "addressHistory": {
             "title": "{name} address history",
-            "currentBalance": "Current balance: {balance}"
+            "currentBalance": "Balance: {balance}",
+            "internal": "Internal Address",
+            "external": "Deposit Address"
         },
         "node": {
             "titleAdd": "Add a node",
@@ -598,7 +636,8 @@
         },
         "transaction": {
             "title": "Confirm transaction",
-            "body": "You’re about to send {amount} to"
+            "body": "You’re about to send {amount} to",
+            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards."
         },
         "balanceFinder": {
             "title": "Balance finder",
@@ -669,6 +708,44 @@
         "ledgerMigrateIndex": {
             "title": "Do you need to migrate another Trinity account index?",
             "body": "You can also migrate later in Advanced Settings."
+        },
+        "exportTransactionHistory": {
+            "title": "Export transaction history",
+            "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
+            "profileName": "Profile name:",
+            "accountName": "Account name:",
+            "typePassword": "Type your password to allow exporting"
+        },
+        "stakingNotice": {
+            "upcomingDate": "Staking has not started yet",
+            "commencingDate": "Staking has not started yet",
+            "body": "By pre-staking your funds before staking starts, you will automatically begin receiving rewards when staking begins.",
+            "ok": "Ok, I understand"
+        },
+        "stakingManager": {
+            "title": "Staking Management",
+            "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
+            "totalFundsStaked": "Total funds staked",
+            "stakedSuccessfully": "Your funds have been staked for {account}.",
+            "unstakedSuccessfully": "Your funds have been unstaked for {account}."
+        },
+        "stakingConfirmation": {
+            "title": "Airdrop Participation",
+            "subtitleStake": "You are about to stake",
+            "subtitleMerge": "You are about to merge",
+            "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
+            "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
+            "estimatedAirdrop": "Estimated rewards"
+        },
+        "shimmer-info": {
+            "title": "About Shimmer",
+            "body1": "Congratulations you have earned SMR tokens as a staking reward. Shimmer is an incentivized staging network to test major upgrades on IOTA.",
+            "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
+        },
+        "assembly-info": {
+            "title": "About Assembly",
+            "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
+            "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
         }
     },
     "charts": {
@@ -724,11 +801,12 @@
         "dropHere": "Drop your file here",
         "syncAll": "Sync all",
         "export": "Export",
+        "exporting": "Exporting",
         "exportNewStronghold": "Export a new Stronghold",
         "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "Enable developer mode",
         "enableSystemNotifications": "Enable system notifications",
-        "exportState": "Export state",
+        "exportTransactionHistory": "Export transaction history",
         "localProofOfWork": "Local proof of work",
         "unlock": "Unlock",
         "updateFirefly": "Update Firefly",
@@ -780,7 +858,17 @@
         "searching": "Searching...",
         "closeFirefly": "Close Firefly",
         "generateAddress": "Generate address",
-        "migrateAgain": "Migrate another index"
+        "migrateAgain": "Migrate another index",
+        "visitWebsite": "Visit website",
+        "howItWorks": "How it works",
+        "learnAboutStaking": "Learn about staking",
+        "stake": "Stake",
+        "unstake": "Unstake",
+        "stakeFunds": "Stake funds",
+        "manageStake": "Manage stake",
+        "merge": "Merge",
+        "mergeFunds": "Merge funds",
+        "done": "Done"
     },
     "general": {
         "password": "Password",
@@ -869,6 +957,8 @@
         "transferBroadcasting": "Broadcasting transaction",
         "transferComplete": "Transfer complete",
         "generatingReceiveAddress": "Generating receive address",
+        "broadcasting": "Broadcasting",
+        "confirming": "Confirming",
         "creatingAccount": "Creating wallet, please wait...",
         "updatingAccount": "Updating wallet, please wait...",
         "accountSyncing": "Wallet is syncing",
@@ -876,6 +966,7 @@
         "passwordUpdating": "Updating password...",
         "passwordSuccess": "Updated password successfully",
         "passwordFailed": "Updating password failed",
+        "syncing": "Syncing",
         "syncingAccounts": "Syncing wallets...",
         "exportingStronghold": "Exporting Stronghold...",
         "exportingStrongholdSuccess": "Exported Stronghold successfully",
@@ -896,13 +987,24 @@
         "sendingFrom": "Sending from {account}",
         "receivedTo": "Received to {account}",
         "sentFrom": "Sent from {account}",
+        "stakedFor": "Staked for {account}",
+        "unstakedFor": "Unstaked for {account}",
+        "votedFor": "Voted for {account}",
+        "unvotedFor": "Unvoted for {account}",
         "receiving": "Receiving",
         "sending": "Sending",
         "legacyNetwork": "Legacy Network",
         "capsLock": "Caps Lock is on",
         "version": "Version {version}",
         "unknown": "Unknown",
-        "none": "None"
+        "none": "None",
+        "staked": "Staked",
+        "unstaked": "Unstaked",
+        "staking": "Staking",
+        "unstaking": "Unstaking",
+        "notStaked": "Not staked",
+        "stakedFunds": "Staked funds",
+        "unstakedFunds": "Unstaked funds"
     },
     "dates": {
         "today": "Today",
@@ -911,6 +1013,15 @@
         "weeksAgo": "{time, plural, one {# week} other {# weeks}} ago",
         "monthsAgo": "{time, plural, one {# month} other {# months}} ago",
         "yearsAgo": "{time, plural, one {# year} other {# years}} ago"
+    },
+    "times": {
+        "second": "{time, plural, one {# second} other {# seconds}}",
+        "minute": "{time, plural, one {# minute} other {# minutes}}",
+        "hour": "{time, plural, one {# hour} other {# hours}}",
+        "day": "{time, plural, one {# day} other {# days}}",
+        "week": "{time, plural, one {# week} other {# weeks}}",
+        "month": "{time, plural, one {# month} other {# months}}",
+        "year": "{time, plural, one {# year} other {# years}}"
     },
     "notifications": {
         "valueTx": "Receiving {{value}} to {{account}}",
@@ -923,10 +1034,14 @@
         "updateError": "An error occurred during the update, please try again",
         "restartInstall": "Restart to install",
         "calcMinutesRemaining": "Calculating minutes remaining...",
-        "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}",
+        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "Copied to clipboard",
         "accountsSynchronized": "Wallet synchronization complete",
         "fundsAvailableSoon": "Your funds will become available shortly",
+        "exportTransactionHistory": {
+            "success": "Transaction history for {accountAlias} was successfully saved to {filePath}",
+            "error": "Unable to export transaction history for {accountAlias}"
+        },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
             "notEnabled": "IOTA links are not enabled",
@@ -940,8 +1055,11 @@
     },
     "error": {
         "profile": {
-            "length": "Your profile name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "duplicate": "A profile with this name already exists."
+            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
+            "duplicate": "A profile with this name already exists.",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "Passwords do not match.",
@@ -958,15 +1076,15 @@
             "similar": "This is similar to a common password.",
             "word": "A single word is easy to guess.",
             "incorrect": "Your password is incorrect.",
-            "length": "Your password can't be longer than {length, plural, one {1 character} other {# characters}}."
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "Your PIN must be {length, plural, one {1 digit} other {# digits}} long.",
+            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
             "match": "PINs do not match.",
             "incorrect": "Your current PIN is incorrect."
         },
         "account": {
-            "length": "Your wallet name can't be longer than {length, plural, one {1 character} other {# characters}}.",
+            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "You must use your latest wallet before creating a new one.",
             "notEmpty": "You must transfer your balance before deleting this wallet.",
             "duplicate": "A wallet with this name already exists.",
@@ -979,7 +1097,7 @@
             "syncing": "There was an error syncing your wallets."
         },
         "send": {
-            "addressLength": "Addresses should be {length, plural, one {1 character} other {# characters}} long.",
+            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
             "amountTooHigh": "This is greater than your available balance.",
             "amountNoFloat": "If units are `i` you cannot use decimal places.",
             "amountInvalidFormat": "The amount appears to be an invalid number.",
@@ -1006,7 +1124,8 @@
             "unsynced": "The node is not in sync.",
             "noSynced": "No synced nodes are available.",
             "answer": "Failed to get an answer from all nodes.",
-            "forbidden": "This node connection is forbidden."
+            "forbidden": "This node connection is forbidden.",
+            "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node."
         },
         "network": {
             "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
@@ -1021,9 +1140,9 @@
             "invalid": "The backup file was not recognised.",
             "destination": "The backup destination was not valid.",
             "mnemonic": "The mnemonic is not valid.",
-            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is 1} other {is #}}",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
             "seedCharacters": "The seed should only contain characters A-Z or 9",
-            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase",
             "phraseCaseWord": "The word \"{word}\" should be lower case"
         },
@@ -1038,7 +1157,8 @@
             "otherConnected": "The wrong app is open on your Ledger device.",
             "generateAddress": "There was an error generating an address.",
             "timeout": "Your Ledger device timed out.",
-            "disconnected": "Your Ledger device was disconnected."
+            "disconnected": "Your Ledger device was disconnected.",
+            "noStronghold": "Unable to use Stronghold with Ledger profile."
         },
         "popup": {
             "preventClose": "This popup is unable to be closed."
@@ -1048,11 +1168,20 @@
         },
         "crypto": {
             "cannotDecodeBech32": "Unable to decode string as Bech32 address."
+        },
+        "participation": {
+            "cannotUseAccount": "Unable to use the specified account.",
+            "cannotFindStakingEvent": "Unable to find staking event.",
+            "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
+            "invalidStakingEventId": "Invalid staking event ID."
         }
     },
     "warning": {
         "node": {
             "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
+        },
+        "participation": {
+            "noAccounts": "You do not have any IOTA."
         }
     },
     "tooltips": {
@@ -1063,6 +1192,60 @@
             "medium": "Medium",
             "low": "Low",
             "veryLow": "Very low"
+        },
+        "stakingIndicator": {
+            "upcoming": {
+                "title": "Staking has not started yet",
+                "body": "Check back later. The staking event has not begun."
+            },
+            "commencing": {
+                "title": "Pre-staking is now open",
+                "body": "Pre-stake your tokens, and once staking begins, you will automatically start receiving rewards every 10 seconds."
+            },
+            "activeHolding": {
+                "title": "Staking is now in progress",
+                "body": "Good job. You will receive rewards every 10 seconds."
+            },
+            "inactiveHolding": {
+                "title": "Staking is now open",
+                "body": "Stake your IOTA tokens to receive rewards every 10 seconds."
+            },
+            "inactive": {
+                "title": "No staking events detected",
+                "body": "Open network configuration in Advanced Settings and make sure the current node has the \"Participation\" feature by clicking \"View Info\"."
+            },
+            "ended": {
+                "title": "Staking has now ended",
+                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
+                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
+            }
+        },
+        "partiallyStakedFunds": {
+            "title": "New unstaked funds: {amount}",
+            "titleNoFunds": "New unstaked funds",
+            "preBody": "You have received tokens on a staked wallet.",
+            "body": "You need to manually stake these new funds to receive airdrop rewards for them."
+        },
+        "stakingMinRewards": {
+            "title": "Below minimum reward value",
+            "titleMinBalance": "{amount} minimum balance required",
+            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
+            "continue": "Please continue staking for another {duration}.",
+            "bodyBelowMin": "This wallet has not reached the minimum reward value for {airdrop} ({airdropRewardMin}).",
+            "bodyWillReachMin": "You must stake for another {duration} to reach the minimum.",
+            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
+            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+        }
+    },
+    "exports": {
+        "transactionHistoryCsv": {
+            "messageId": "Message ID",
+            "internal": "Internal",
+            "rawValue": "Raw Value",
+            "formattedValue": "Formatted Value",
+            "date": "Date",
+            "time": "Time"
         }
     }
 }

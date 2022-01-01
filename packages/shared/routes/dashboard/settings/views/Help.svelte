@@ -10,7 +10,7 @@
     // }
 
     const handleDocumentationClick = () => {
-        Electron.openUrl('https://chrysalis.docs.iota.org/')
+        Electron.openUrl('https://wiki.iota.org/')
     }
 
     const handleFaqClick = () => {

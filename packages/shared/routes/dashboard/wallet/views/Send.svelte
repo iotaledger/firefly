@@ -7,6 +7,7 @@
         convertToFiat,
         currencies,
         exchangeRates,
+        formatNumber,
         isFiatCurrency,
         parseCurrency,
     } from 'shared/lib/currency'
@@ -16,6 +17,7 @@
         promptUserToConnectLedger,
     } from 'shared/lib/ledger'
     import { displayNotifications, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
+    import { isAccountStaked } from 'shared/lib/participation'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
@@ -28,11 +30,11 @@
         TransferProgressEventType,
         TransferState,
     } from 'shared/lib/typings/events'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import type { NotificationType } from 'shared/lib/typings/notification'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
     import { DUST_THRESHOLD, isTransferring, transferState, wallet } from 'shared/lib/wallet'
@@ -390,6 +392,7 @@
             openPopup({
                 type: 'transaction',
                 props: {
+                    isSendingFromParticpatingAccount: isAccountStaked(from.id),
                     internal: internal || accountAlias,
                     amount: amountRaw,
                     unit,
@@ -437,7 +440,7 @@
 
     const handleMaxClick = () => {
         amount = isFiatCurrency(unit)
-            ? convertToFiat(from.balance, $currencies[CurrencyTypes.USD], $exchangeRates[unit]).toString()
+            ? formatNumber(convertToFiat(from.balance, $currencies[CurrencyTypes.USD], $exchangeRates[unit]))
             : formatUnitPrecision(from.balance, unit, false)
     }
 

@@ -168,6 +168,14 @@ module.exports = {
                 pink: '#FFF3F8',
                 purple: '#EFF0FE',
             },
+            shimmer: {
+                bg: '#020F26',
+                highlight: '#17E1D5',
+            },
+            assembly: {
+                bg: '#08080C',
+                highlight: '#FF3FF2',
+            },
         },
         extend: {
             fontSize: {

@@ -1,11 +1,12 @@
 <script lang="typescript">
-    import { ActivityDetail, ActivityRow, Icon, Text } from 'shared/components'
-    import { displayNotificationForLedgerProfile } from 'shared/lib/ledger'
-    import { showAppNotification } from 'shared/lib/notifications'
-    import { openPopup } from 'shared/lib/popup'
-    import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
-    import type { Locale } from 'shared/lib/typings/i18n'
-    import { api, isSyncing, selectedAccountId, selectedMessage } from 'shared/lib/wallet'
+    import { ActivityDetail,ActivityRow,Icon,Text } from 'shared/components';
+    import { displayNotificationForLedgerProfile } from 'shared/lib/ledger';
+    import { showAppNotification } from 'shared/lib/notifications';
+    import { openPopup } from 'shared/lib/popup';
+    import { isLedgerProfile,isSoftwareProfile } from 'shared/lib/profile';
+    import type { Locale } from 'shared/lib/typings/i18n';
+    import type { AccountMessage } from 'shared/lib/typings/wallet';
+    import { api,isSyncing,selectedAccountId,selectedMessage } from 'shared/lib/wallet';
 
     export let locale: Locale
 

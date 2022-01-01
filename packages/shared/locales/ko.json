@@ -30,7 +30,7 @@
         "setup": {
             "title": "지갑 설정하기",
             "chrysalisTitle": "Chrysalis 네트워크 업데이트",
-            "chrysalisBody": "4 월 21 일부터 사용자는 토큰을 새로운 Chrysalis 네트워크로 마이그레이션 할 수 있습니다. 가능한 한 빨리 기존 토큰을 마이그레이션하는 것이 좋습니다.",
+            "chrysalisBody": "2021년 4월 21일부터 토큰을 새로운 Chrysalis 네트워크로 마이그레이션할 수 있습니다. 보유하고 있는 토큰을 서둘러 마이그레이션할 것을 권장합니다.",
             "learnMore": "마이그레이션에 대해 알아보기"
         },
         "secure": {
@@ -75,7 +75,7 @@
             "body2": "PIN을 안전하게 보관하세요!"
         },
         "pin": {
-            "title": "PIN코드 설정하기",
+            "title": "PIN 번호 설정하기",
             "body1": "프로필에 접근하기 위해 사용할 숫자로 된 6자리 PIN을 입력해 주세요.",
             "body2": "숫자만 입력 가능"
         },
@@ -262,7 +262,7 @@
         },
         "securingSpentAddresses": {
             "title": "지출 주소 잠그는 중...",
-            "body1": "이 프로세스는 {minutes, plural, one {1 분} other {# 분}} 소요됩니다.",
+            "body1": "이 작업에는 {minutes, plural, one {1분} other {#분}}이 소요됩니다.",
             "body2": "컴퓨터가 최대 용량으로 실행됩니다. 이 작업이 완료 될 때까지 기다리는 동안 다른 작업을 수행 할 수 있습니다."
         },
         "transferFragmentedFunds": {
@@ -336,9 +336,7 @@
             },
             "appLock": {
                 "title": "자동 잠금",
-                "description": "지갑이 잠기고 로그아웃 되기 전 비활성 시간",
-                "durationMinute": "{time, plural, one {1 분} other {# 분}}",
-                "durationHour": "{time, plural, one {1 시간} other {# 시간}}"
+                "description": "지갑이 잠기고 로그아웃 되기 전 비활성 시간"
             },
             "changePassword": {
                 "title": "비밀번호 변경하기",
@@ -415,10 +413,6 @@
                 "title": "Ledger 인덱스 마이그레이션",
                 "description": "다른 Trinity 계정 인덱스를 마이그레이션"
             },
-            "stateExport": {
-                "title": "상태 내보내기",
-                "description": "거래 내역을 .csv 파일로 내보내기"
-            },
             "troubleshoot": {
                 "title": "문제 해결",
                 "description": "문제 해결 마법사를 이용하여 일반적인 문제 해결하기"
@@ -446,8 +440,8 @@
             }
         },
         "login": {
-            "pleaseWait": "{time, plural, other {#초간}} 기다리세요",
-            "incorrectAttempts": "{attempts, plural, other {잘못된 시도 #번}}"
+            "pleaseWait": "{time, plural, other {#초}} 동안 기다려주십시오.",
+            "incorrectAttempts": "{attempts, plural, other {잘못된 시도 #회}}"
         },
         "dashboard": {
             "security": {
@@ -489,6 +483,48 @@
             "profileModal": {
                 "allSettings": "전체 설정",
                 "logout": "로그아웃"
+            }
+        },
+        "staking": {
+            "title": "스테이킹",
+            "welcome": "환영합니다. 스테이킹 대시보드입니다!",
+            "status": {
+                "upcoming": "이벤트 실행 전",
+                "commencing": "Pre-staking 시작",
+                "holdingActive": "Staking 진행 중",
+                "holdingInactive": "Staking 시작",
+                "inactive": "Staking 탐지되지 않음",
+                "ended": "Staking 종료"
+            },
+            "summary": {
+                "stakedFunds": "Staking 자금"
+            },
+            "info": {
+                "upcomingSubheader": "이벤트가 시작되지 않았습니다.",
+                "upcomingHeader": "이후에 다시 확인해보세요.",
+                "commencingSubheader": "Staking을 준비하세요.",
+                "commencingHeader": "여러분의 토큰을 pre-stake 하세요!",
+                "holdingSubheaderHolding": "이제 staking 보상 얻기",
+                "holdingSubheaderNotHolding": "IOTA staking을 통해 보상 받기",
+                "holdingHeaderHolding": "{duration} 남음",
+                "holdingHeaderNotHolding": "여러분의 토큰을 staking 하세요!",
+                "endedSubheader": "Staking이 이제 종료되었습니다.",
+                "endedHeader": "감사합니다!",
+                "inactiveHeader": "노드를 바꿔보세요.",
+                "inactiveSubheader": "Staking 탐지되지 않음"
+            },
+            "airdrops": {
+                "holding": "잔여수량",
+                "commencing": "Staking이 시작될때까지",
+                "collectedRewards": "보상 수령",
+                "assembly": {
+                    "name": "Assembly",
+                    "description": "Assembly는 허가가 필요없는 확장성이 매우 높은 다중 체인 네트워크로 composable 스마트 컨트랙트를 빌드하고 배포할수 있습니다. Assembly는 web3의 미래입니다. "
+                },
+                "shimmer": {
+                    "name": "Shimmer",
+                    "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
+                }
             }
         }
     },
@@ -538,7 +574,9 @@
         },
         "addressHistory": {
             "title": "주소 {name} 이력",
-            "currentBalance": "현재 잔액: {balance}"
+            "currentBalance": "잔액: {balance}",
+            "internal": "내부 주소",
+            "external": "입금 주소"
         },
         "node": {
             "titleAdd": "노드 추가",
@@ -598,7 +636,8 @@
         },
         "transaction": {
             "title": "트랜잭션 확인",
-            "body": "{amount} 만큼 보내려고 합니다"
+            "body": "{amount} 만큼 보내려고 합니다",
+            "sendingFromStakedAccount": "현재 staking중인 지갑에서 이체를 하고 있습니다. 이로 인해 여러분의 토큰 staking이 취소될 수 있습니다. 자유로이 이체하시되 그후에 남은 토큰을 다시 staking할 필요가 있을 수 있다는 점을 알아두세요."
         },
         "balanceFinder": {
             "title": "잔고 찾기",
@@ -669,6 +708,44 @@
         "ledgerMigrateIndex": {
             "title": "다른 Trinity 계정 인덱스를 마이그레이션 하시겠습니까?",
             "body": "나중에 고급 설정에서 마이그레이션할 수도 있습니다."
+        },
+        "exportTransactionHistory": {
+            "title": "거래 내역 내보내기",
+            "body": "선택한 지갑의 거래 기록을 내보내세요. 내보낸 파일은 .csv 파일형식으로 저장합니다.",
+            "profileName": "프로필 이름:",
+            "accountName": "계정 이름:",
+            "typePassword": "내보내기를 허용하려면 암호를 입력해주세요"
+        },
+        "stakingNotice": {
+            "upcomingDate": "Staking이 아직 시작되지 않았습니다.",
+            "commencingDate": "Staking이 아직 시작되지 않았습니다.",
+            "body": "여러분의 자금을 staking 전에 pre-staking 하면, staking 시작 시잠에 자동으로 보상을 받기 시작할 것입니다.",
+            "ok": "네. 이해했습니다."
+        },
+        "stakingManager": {
+            "title": "Staking 관리",
+            "description": "지갑을 staking 하면 해당 자금에 staking 표시를 하여 여러분께 보내게됩니다. 자금은 언제든 이체 가능하지만 staking 보상 수령을 계속 받지는 못하게 됩니다.",
+            "totalFundsStaked": "Staking 총 자금",
+            "stakedSuccessfully": "Your funds have been staked for {account}.",
+            "unstakedSuccessfully": "Your funds have been unstaked for {account}."
+        },
+        "stakingConfirmation": {
+            "title": "Airdrop 참여",
+            "subtitleStake": "Staking이 이제 시작됩니다.",
+            "subtitleMerge": "Merge를 곧 시작합니다.",
+            "bodyStake": "만약 두 가지 airdrop에 참여하고 싶지 않다면 아래에서 선택해제할 수 있습니다. 추후에 언제든지 staking 취소 및 재시작할 수 있습니다.",
+            "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
+            "estimatedAirdrop": "예상 보상"
+        },
+        "shimmer-info": {
+            "title": "Shimmer에 대하여",
+            "body1": "Congratulations you have earned SMR tokens as a staking reward. Shimmer is an incentivized staging network to test major upgrades on IOTA.",
+            "body2": "Shimmer의 출발은 2022년을 목표로 하고 있습니다. 여러분의 토큰은 네트워크가 열리면 즉시 전송할 수 있게됩니다."
+        },
+        "assembly-info": {
+            "title": "Assemby에 대하여",
+            "body1": "축하합니다. ASMB 토큰을 staking 보상으로 획득하셨습니다. Assembly는 다중체인 네트워크로 IOTA에서 확장성 있는 스마트 컨트랙트를 배포할 수 있습니다.",
+            "body2": "Assembly의 출발은 2022년을 목표로 하고 있습니다. 여러분의 토큰은 네트워크가 열리면 즉시 전송할 수 있게됩니다."
         }
     },
     "charts": {
@@ -701,9 +778,9 @@
         "createWalletDescription": "Chrysalis에서 실행되는 새로운 지갑 만들기",
         "savePassword": "비밀번호 저장하기",
         "useBiometric": "생체 인증 사용하기",
-        "setupPin": "PIN코드 설정하기",
-        "setPin": "PIN코드 설정",
-        "confirmPin": "PIN코드 확인하기",
+        "setupPin": "PIN 번호 설정하기",
+        "setPin": "PIN 번호 설정하기",
+        "confirmPin": "PIN 번호 확인하기",
         "enterYourPin": "PIN 입력하기",
         "saveBackupFile": "백업 파일 저장하기",
         "iveWrittenRecoveryPhrase": "복원 문구를 옮겨 적었습니다",
@@ -724,11 +801,12 @@
         "dropHere": "파일을 여기로 끌어넣으세요.",
         "syncAll": "모두 동기화하기",
         "export": "내보내기",
+        "exporting": "내보내는 중",
         "exportNewStronghold": "새 Stronghold 내보내기",
         "enableDeepLinks": "IOTA 링크 활성화",
         "enableDeveloperMode": "개발자 모드 활성화하기",
         "enableSystemNotifications": "시스템 알림 켜기",
-        "exportState": "상태 내보내기",
+        "exportTransactionHistory": "거래 내역 내보내기",
         "localProofOfWork": "내 기기로 작업증명",
         "unlock": "잠금 해제",
         "updateFirefly": "Firefly 업데이트",
@@ -780,7 +858,17 @@
         "searching": "검색 중...",
         "closeFirefly": "Firefly 닫기",
         "generateAddress": "주소 생성",
-        "migrateAgain": "다른 인덱스 마이그레이션"
+        "migrateAgain": "다른 인덱스 마이그레이션",
+        "visitWebsite": "웹 사이트 방문",
+        "howItWorks": "작동 방식",
+        "learnAboutStaking": "Staking 배우기",
+        "stake": "Stake",
+        "unstake": "Unstake",
+        "stakeFunds": "Stake funds",
+        "manageStake": "Manage stake",
+        "merge": "병합",
+        "mergeFunds": "자금 병합",
+        "done": "완료"
     },
     "general": {
         "password": "비밀번호",
@@ -869,6 +957,8 @@
         "transferBroadcasting": "거래를 송출하는 중",
         "transferComplete": "전송 완료",
         "generatingReceiveAddress": "받는 주소 생성하기",
+        "broadcasting": "송출 중",
+        "confirming": "Confirming",
         "creatingAccount": "지갑을 만드는 중입니다. 잠시만 기다려 주세요...",
         "updatingAccount": "지갑을 업데이트 중입니다. 잠시만 기다려 주세요...",
         "accountSyncing": "지갑 동기화 중",
@@ -876,6 +966,7 @@
         "passwordUpdating": "비밀번호를 변경합니다...",
         "passwordSuccess": "비밀번호를 성공적으로 변경하였습니다",
         "passwordFailed": "비밀번호를 변경하지 못했습니다",
+        "syncing": "Syncing",
         "syncingAccounts": "지갑 동기화 중...",
         "exportingStronghold": "Stronghold를 내보내는 중...",
         "exportingStrongholdSuccess": "Stronghold를 성공적으로 내보냈습니다",
@@ -896,13 +987,24 @@
         "sendingFrom": "{account} 계정으로 보내는 중",
         "receivedTo": "{account} 계정으로 받음",
         "sentFrom": "{account} 계정으로 보냄",
+        "stakedFor": "Staked for {account}",
+        "unstakedFor": "Unstaked for {account}",
+        "votedFor": "Voted for {account}",
+        "unvotedFor": "Unvoted for {account}",
         "receiving": "받는 중",
         "sending": "보내는 중",
         "legacyNetwork": "예전 네트워크",
         "capsLock": "Caps Lock 켜짐",
         "version": "{version} 버전",
         "unknown": "알 수 없음",
-        "none": "없음"
+        "none": "없음",
+        "staked": "Staked",
+        "unstaked": "Unstaked",
+        "staking": "스테이킹",
+        "unstaking": "Unstaking",
+        "notStaked": "Not staked",
+        "stakedFunds": "Staking 자금",
+        "unstakedFunds": "Unstaked funds"
     },
     "dates": {
         "today": "오늘",
@@ -911,6 +1013,15 @@
         "weeksAgo": "{time, plural, other {#주}} 전",
         "monthsAgo": "{time, plural, other {#개월}} 전",
         "yearsAgo": "{time, plural, other {#년}} 전"
+    },
+    "times": {
+        "second": "{time, plural, other {#초}}",
+        "minute": "{time, plural, other {#분}}",
+        "hour": "{time, plural, other {#시간}}",
+        "day": "{time, plural, other {#일}}",
+        "week": "{time, plural, other {#주}}",
+        "month": "{time, plural, other {#개월}}",
+        "year": "{time, plural, other {#년}}"
     },
     "notifications": {
         "valueTx": "{{account}}에 {{value}}를 받는 중",
@@ -923,10 +1034,14 @@
         "updateError": "업데이트 중 오류가 발생했습니다. 다시 시도해주세요.",
         "restartInstall": "재시작하여 설치",
         "calcMinutesRemaining": "남은 시간 계산중...",
-        "minutesRemaining": "{minutes, plural, other {남은 시간 #분}}",
+        "minutesRemaining": "{minutes, plural, other {#분 남음}}",
         "copiedToClipboard": "클립보드에 복사되었습니다.",
         "accountsSynchronized": "지갑 동기화 완료",
         "fundsAvailableSoon": "자금이 곧 사용가능해질 것입니다.",
+        "exportTransactionHistory": {
+            "success": "{accountAlias}의 거래 내역이 {filePath}에 성공적으로 저장되었습니다",
+            "error": "{accountAlias}의 거래 내역을 내보낼 수 없습니다"
+        },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "IOTA 링크를 시작하려면 로그인하십시오",
             "notEnabled": "IOTA 링크 비활성화됨",
@@ -940,8 +1055,11 @@
     },
     "error": {
         "profile": {
-            "length": "사용자 이름은 {length, plural, other {#글자}} 보다 길 수 없습니다.",
-            "duplicate": "같은 이름의 사용자가 이미 존재합니다"
+            "length": "사용자 이름은 {length, plural, other {#자}}보다 길 수 없습니다.",
+            "duplicate": "같은 이름의 사용자가 이미 존재합니다",
+            "delete": {
+                "nonEmptyAccounts": "프로필을 삭제하기 전 모든 잔액을 전송해야 합니다."
+            }
         },
         "password": {
             "doNotMatch": "비밀번호가 맞지 않습니다.",
@@ -958,7 +1076,7 @@
             "similar": "흔히 사용되는 비밀번호와 유사합니다.",
             "word": "하나의 단어로 구성된 암호는 추측하기 쉽습니다.",
             "incorrect": "비밀번호가 올바르지 않습니다.",
-            "length": "비밀번호는 {length, plural, other {#글자}}를 초과할 없습니다."
+            "length": "비밀번호는 {length, plural, other {#자}}를 초과할 수 없습니다."
         },
         "pincode": {
             "length": "PIN은 {length, plural, other {#자리}}로 구성되어야 합니다.",
@@ -966,7 +1084,7 @@
             "incorrect": "PIN이 잘못되었습니다."
         },
         "account": {
-            "length": "지갑 이름은 {length, plural, one {1 글자} other {# 글자}} 보다 길 수 없습니다.",
+            "length": "지갑 이름은 {length, plural, other {#자}}보다 길 수 없습니다.",
             "empty": "새 지갑을 만들기 전에 아직 사용하지 않은 기존 지갑을 사용해야 합니다.",
             "notEmpty": "이 지갑을 삭제하려면 지갑에 남은 잔고를 비워야 합니다.",
             "duplicate": "같은 이름의 지갑이 이미 있습니다.",
@@ -979,7 +1097,7 @@
             "syncing": "지갑을 동기화하는 중 에러가 발생했습니다."
         },
         "send": {
-            "addressLength": "주소는 {length, plural, other {#글자}}여야 합니다.",
+            "addressLength": "주소는 {length, plural, other {#자}}여야 합니다.",
             "amountTooHigh": "사용 가능한 잔액보다 큽니다.",
             "amountNoFloat": "단위가 'i'이면 소수점을 사용할 수 없습니다.",
             "amountInvalidFormat": "금액에 잘못된 내용이 있습니다.",
@@ -1006,7 +1124,8 @@
             "unsynced": "동기화되지 않은 노드입니다.",
             "noSynced": "사용할 수 있는 동기화된 노드가 없습니다.",
             "answer": "모든 노드로부터 응답을 받을 수 없습니다.",
-            "forbidden": "이 노드 연결은 금지되었습니다."
+            "forbidden": "이 노드 연결은 금지되었습니다.",
+            "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node."
         },
         "network": {
             "mismatch": "노드의 네트워크 ID는 \"{networkId}\"이며, 현재 네트워크에 맞지 않습니다.",
@@ -1021,9 +1140,9 @@
             "invalid": "백업 파일이 인식되지 않았습니다.",
             "destination": "백업 장소가 유효하지 않습니다.",
             "mnemonic": "니모닉이 유효하지 않습니다.",
-            "seedTooShort": "시드의 길이는 81글자여야 합니다. 현재 길이는 {length, plural, other {#글자}}입니다.",
+            "seedTooShort": "시드의 길이는 81자여야 합니다. 현재 길이는 {length, plural, other {#자}}입니다.",
             "seedCharacters": "시드에는 A부터 Z까지의 알파벳과 숫자 9만 포함되어야 합니다.",
-            "phraseWordCount": "복원 문구는 24개의 단어로 이루어지며, 현재 {length, plural, other {#}}개의 단어를 입력하였습니다.",
+            "phraseWordCount": "복원 문구는 단어 24개로 이루어지며, 현재 단어 {length, plural, other {#}}개를 입력하였습니다.",
             "phraseUnrecognizedWord": "복원 문구에 인식할 수 없는 단어 \"{word}\"가 있습니다",
             "phraseCaseWord": "\"{word}\" 단어는 소문자로 입력해주세요."
         },
@@ -1038,7 +1157,8 @@
             "otherConnected": "Ledger 장치에서 잘못된 앱을 열었습니다.",
             "generateAddress": "주소를 생성하는 중 에러가 있었습니다.",
             "timeout": "Ledger 장치가 시간을 초과하였습니다.",
-            "disconnected": "Ledger 장치의 연결이 끊어졌습니다."
+            "disconnected": "Ledger 장치의 연결이 끊어졌습니다.",
+            "noStronghold": "Unable to use Stronghold with Ledger profile."
         },
         "popup": {
             "preventClose": "이 팝업창을 닫을 수 없습니다."
@@ -1048,11 +1168,20 @@
         },
         "crypto": {
             "cannotDecodeBech32": "문자열을 Bech32 주소로 디코드할 수 없습니다."
+        },
+        "participation": {
+            "cannotUseAccount": "Unable to use the specified account.",
+            "cannotFindStakingEvent": "Unable to find staking event.",
+            "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
+            "invalidStakingEventId": "Invalid staking event ID."
         }
     },
     "warning": {
         "node": {
             "http": "HTTP를 기반으로 노드를 이용하는 경우 트래픽이 암호화되지 않으며 보안 위험을 초래할 수 있습니다."
+        },
+        "participation": {
+            "noAccounts": "You do not have any IOTA."
         }
     },
     "tooltips": {
@@ -1063,6 +1192,60 @@
             "medium": "보통",
             "low": "낮음",
             "veryLow": "매우 낮음"
+        },
+        "stakingIndicator": {
+            "upcoming": {
+                "title": "Staking has not started yet",
+                "body": "Check back later. The staking event has not begun."
+            },
+            "commencing": {
+                "title": "Pre-staking is now open",
+                "body": "Pre-stake your tokens, and once staking begins, you will automatically start receiving rewards every 10 seconds."
+            },
+            "activeHolding": {
+                "title": "Staking is now in progress",
+                "body": "Good job. You will receive rewards every 10 seconds."
+            },
+            "inactiveHolding": {
+                "title": "Staking is now open",
+                "body": "Stake your IOTA tokens to receive rewards every 10 seconds."
+            },
+            "inactive": {
+                "title": "No staking events detected",
+                "body": "Open network configuration in Advanced Settings and make sure the current node has the \"Participation\" feature by clicking \"View Info\"."
+            },
+            "ended": {
+                "title": "Staking이 이제 종료되었습니다.",
+                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
+                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
+            }
+        },
+        "partiallyStakedFunds": {
+            "title": "New unstaked funds: {amount}",
+            "titleNoFunds": "New unstaked funds",
+            "preBody": "You have received tokens on a staked wallet.",
+            "body": "You need to manually stake these new funds to receive airdrop rewards for them."
+        },
+        "stakingMinRewards": {
+            "title": "Below minimum reward value",
+            "titleMinBalance": "{amount} minimum balance required",
+            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
+            "continue": "Please continue staking for another {duration}.",
+            "bodyBelowMin": "This wallet has not reached the minimum reward value for {airdrop} ({airdropRewardMin}).",
+            "bodyWillReachMin": "You must stake for another {duration} to reach the minimum.",
+            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
+            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+        }
+    },
+    "exports": {
+        "transactionHistoryCsv": {
+            "messageId": "메시지 ID",
+            "internal": "Internal",
+            "rawValue": "Raw Value",
+            "formattedValue": "Formatted Value",
+            "date": "날짜",
+            "time": "Time"
         }
     }
 }
