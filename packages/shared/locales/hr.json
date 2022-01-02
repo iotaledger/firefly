@@ -22,9 +22,10 @@
                 "nonFirst": "Počnimo s imenom tvojeg profila."
             },
             "addMore": "Kasnije možeš dodati još profila.",
+            "advancedOptions": "Advanced options",
             "developer": {
                 "label": "Profil developera",
-                "info": "Povežite se na javne i privatne IOTA mreže"
+                "info": "Povežite se s devnet-om ili privatnom mrežom"
             }
         },
         "setup": {
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Potvrdi transakciju",
             "body": "Ovim ćete poslati {amount} na račun",
-            "sendingFromStakedAccount": "Šaljete transfer s novčanika koji trenutno stake-a. Ovo može prekinuti stake vaših tokena. Možete slobodno poslati transfer, no možda ćete nakon toga morati ponovno pokrenuti stake vaših preostalih tokena."
+            "sendingFromStakedAccount": "Šaljete transfer s novčanika koji trenutno stake-a. Ovo može prekinuti stake vaših tokena. Možete slobodno poslati transfer, no možda ćete nakon toga morati ponovno pokrenuti stake vaših preostalih tokena.",
+            "sendingFromStakedAccountBelowMinReward": "Šaljete transfer s novčanika koji još nije dostigao minimalnu staking nagradu. Ovo može prekinuti staking vaših tokena, te možete izgubiti staking nagrade na ovom novčaniku."
         },
         "balanceFinder": {
             "title": "Pronalazak sredstava",
@@ -746,6 +748,10 @@
             "title": "O Assembly-u",
             "body1": "Čestitamo, zaradili ste ASMB tokene kao nagradu za staking. Assembly je multi-chain mreža namijenjena implementaciji pametnih ugovora na IOTA-i.",
             "body2": "Cilj nam je pokrenuti Assembly u 2022. Vaši tokeni će postati dostupni za transfer nakon pokretanja Assembly mreže."
+        },
+        "confirmDeveloperProfile": {
+            "title": "Trenutno kreirate developerski profil",
+            "body": "Prema zadanim postavkama bit ćete spojeni na Chrysalis Devnet, te možete ručno mijenjati mreže. Nastavite samo ako znate što radite."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "Od",
         "to": "Za",
         "receiveFunds": "Primi sredstva",
+        "address": "Adresa",
         "myAddress": "Moja adresa",
         "shareAddress": "Podijelite adresu",
         "yourAddress": "Vaša adresa",
@@ -1246,6 +1253,11 @@
             "formattedValue": "Formatirana vrijednost",
             "date": "Datum",
             "time": "Vrijeme"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "Trenutno koristite developerski profil i povezani ste s {networkName}"
         }
     }
 }

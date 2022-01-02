@@ -22,9 +22,10 @@
                 "nonFirst": "Inicialmente, vamos começar com o nome de seu perfil."
             },
             "addMore": "Você pode criar mais perfis posteriormente.",
+            "advancedOptions": "Opções avançadas",
             "developer": {
                 "label": "Perfil Desenvolvedor",
-                "info": "Conectar a redes IOTA públicas e privadas"
+                "info": "Conectar-se a devnet ou a uma rede privada"
             }
         },
         "setup": {
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Confirmar transação",
             "body": "Você está prestes a enviar {amount} para",
-            "sendingFromStakedAccount": "Você está enviando uma transferência de uma carteira que está fazendo staking no momento. Isso pode desvincular seus tokens. Fique à vontade para enviar a transferência, mas você pode ter que reiniciar o staking dos tokens restantes depois."
+            "sendingFromStakedAccount": "Você está enviando uma transferência de uma carteira que está fazendo staking no momento. Isso pode desvincular seus tokens. Fique à vontade para enviar a transferência, mas você pode ter que reiniciar o staking dos tokens restantes depois.",
+            "sendingFromStakedAccountBelowMinReward": "Você está enviando uma transferência de uma carteira que ainda não atingiu as recompensas mínimas de aposta. Isso pode comprometer seus tokens e você pode perder suas recompensas nesta carteira."
         },
         "balanceFinder": {
             "title": "Localizador de saldo",
@@ -746,6 +748,10 @@
             "title": "Sobre o Assembly",
             "body1": "Parabéns, você ganhou tokens ASMB como recompensa de staking. Assembly é uma rede multi-chain para implantar contratos inteligentes escaláveis em IOTA.",
             "body2": "Nosso objetivo é lançar Assembly em 2022. Seus tokens estarão disponíveis para transferência assim que a rede for lançada."
+        },
+        "confirmDeveloperProfile": {
+            "title": "Você está criando um perfil de desenvolvedor",
+            "body": "Você estará conectado a Chrysalis Devnet por padrão e poderá alternar as redes manualmente. Somente continue se você souber o que está fazendo."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "De",
         "to": "Para",
         "receiveFunds": "Receber Fundos",
+        "address": "Endereço",
         "myAddress": "Meu Endereço",
         "shareAddress": "Compartilhar um endereço",
         "yourAddress": "Seu endereço",
@@ -1246,6 +1253,11 @@
             "formattedValue": "Valor Formatado",
             "date": "Data",
             "time": "Horário"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "Você está usando atualmente um perfil de desenvolvedor e está conectado a {networkName}"
         }
     }
 }

@@ -22,9 +22,10 @@
                 "nonFirst": "پہلے، آپ کی پروفائل کے نام سے شروع کرتے ہیں"
             },
             "addMore": "آپ بعد میں مزید پروفائلزبنا سکتے ہیں۔",
+            "advancedOptions": "Advanced options",
             "developer": {
                 "label": "ڈویلپر پروفائل",
-                "info": "پبلک اور پرائیویٹ نیٹورکس سے کنیکٹ کریں"
+                "info": "Connect to the devnet or a private network"
             }
         },
         "setup": {
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "ٹرانزیکشن کی تصدیق",
             "body": "آپ مندرجہ ذیل کو {amount} بھیجنے لگے ہیں",
-            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards."
+            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "بلینس کا متلاشی",
@@ -746,6 +748,10 @@
             "title": "About Assembly",
             "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
             "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "اسکی طرف سے",
         "to": "اس کو",
         "receiveFunds": "فنڈز وصول کریں",
+        "address": "Address",
         "myAddress": "میرا ایڈریس",
         "shareAddress": "ایک ایڈریس شیئر کریں",
         "yourAddress": "آپ کا ایڈریس",
@@ -1246,6 +1253,11 @@
             "formattedValue": "Formatted Value",
             "date": "تاریخ",
             "time": "Time"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }

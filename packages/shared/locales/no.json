@@ -22,9 +22,10 @@
                 "nonFirst": "La oss nå starte med profilnavnet ditt."
             },
             "addMore": "Du kan legge til flere profiler senere.",
+            "advancedOptions": "Advanced options",
             "developer": {
                 "label": "Utviklerprofil",
-                "info": "Koble til offentlige og private IOTA-nettverk"
+                "info": "Connect to the devnet or a private network"
             }
         },
         "setup": {
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Bekreft transaksjon",
             "body": "Du er i ferd med å sende {amount} til",
-            "sendingFromStakedAccount": "Du sender en transaksjon fra en lommebok som for tiden blir staket. Dette kan stanse stakingen av dine tokens. Du kan gjennomføre transaksjonen, men du må kanskje starte staking på nytt for gjenværende tokens."
+            "sendingFromStakedAccount": "Du sender en transaksjon fra en lommebok som for tiden blir staket. Dette kan stanse stakingen av dine tokens. Du kan gjennomføre transaksjonen, men du må kanskje starte staking på nytt for gjenværende tokens.",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "Saldo-finner",
@@ -746,6 +748,10 @@
             "title": "Om Assembly",
             "body1": "Gratulerer, du har tjent ASMB-tokens som belønning for staking. Assembly er et multi-kjede-nettverk for skalerbare smartkontrakter på IOTA.",
             "body2": "Vi sikter oss inn på å lansere Assembly i 2022. Dine tokens vil bli tilgjengelig å transfere når nettverket lanseres."
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "Fra",
         "to": "Til",
         "receiveFunds": "Motta midler",
+        "address": "Address",
         "myAddress": "Min adresse",
         "shareAddress": "Del en adresse",
         "yourAddress": "Din adresse",
@@ -1246,6 +1253,11 @@
             "formattedValue": "Formatert verdi",
             "date": "Dato",
             "time": "Tid"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }

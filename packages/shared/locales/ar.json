@@ -22,9 +22,10 @@
                 "nonFirst": "لنبدأ بالتعرف عليك, ماذا ترغب أن يكون عنوان ملفك الشخصي."
             },
             "addMore": "يمكنك إضافة أشخاص آخرين لاحقا.",
+            "advancedOptions": "الخيارات المتقدمة",
             "developer": {
                 "label": "لمحة شخصية عن مطور البرنامج",
-                "info": "تواصل مع شبكات IOTA العامة والخاصة"
+                "info": "يرجى الاتصال بشبكة المطورين أو بشبكة خاصة"
             }
         },
         "setup": {
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "تأكيد المعاملة",
             "body": "أنت على وشك إرسال {amount} إلى",
-            "sendingFromStakedAccount": "تنبيه: أنت تقوم بتحويل أرصدة من حساب مشارك في فعالية الربح من التخزين في محفظتك, الاستمرار بذلك سيؤدي الى الغاء اشتراكك والخروج من الفعالية. لك كامل الحرية للقيام بذلك. ملاحظة: يمكنك المشاركة بالفعالية لاحقا بالارصدة المتبقية من العملة الرقمية في حسابك وذلك من خلال طلب مشاركة جديد."
+            "sendingFromStakedAccount": "تنبيه: أنت تقوم بتحويل أرصدة من حساب مشارك في فعالية الربح من التخزين في محفظتك, الاستمرار بذلك سيؤدي الى الغاء اشتراكك والخروج من الفعالية. لك كامل الحرية للقيام بذلك. ملاحظة: يمكنك المشاركة بالفعالية لاحقا بالارصدة المتبقية من العملة الرقمية في حسابك وذلك من خلال طلب مشاركة جديد.",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "كشف الرصيد",
@@ -746,6 +748,10 @@
             "title": "معلومات عن شبكة Assembly",
             "body1": "مبروك لقد ربحت عملة ASMB الرقمية كمكافأة لمشاركتك بفعالية الربح من التخزين.\nAssembly هي شبكة مفتوحة ومتاحة للجميع للمشاركة في عمليات بناء عقود ذكية قابلة للتطوير وهي مبنية على شبكة IOTA.",
             "body2": "نحن نتطلع إلى إطلاق شبكة Assembly في عام 2022. سيكون لك حرية التصرف بالعملات الرقمية الخاصة بك بمجرد بدء تشغيل الشبكة."
+        },
+        "confirmDeveloperProfile": {
+            "title": "أنت تقوم بإنشاء ملف تعريف شخصي خاص بالمطورين",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "مِن",
         "to": "الى",
         "receiveFunds": "استلام الأموال",
+        "address": "Address",
         "myAddress": "العنوان الخاص بي",
         "shareAddress": "مشاركة عنوان",
         "yourAddress": "عنوانك",
@@ -1246,6 +1253,11 @@
             "formattedValue": "يرجى تحديد قيمة ملف سجل المعاملات التي ترغب بتصديره بصيغة Csv",
             "date": "التاريخ",
             "time": "الزمن"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }

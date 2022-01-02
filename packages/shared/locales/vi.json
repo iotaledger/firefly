@@ -22,9 +22,10 @@
                 "nonFirst": "Bây giờ, hãy bắt đầu với tên hồ sơ của bạn"
             },
             "addMore": "Bạn có thể thêm nhiều hồ sơ sau này.",
+            "advancedOptions": "Advanced options",
             "developer": {
                 "label": "Hồ sơ nhà phát triển",
-                "info": "Kết nối với các mạng IOTA công khai và riêng tư"
+                "info": "Connect to the devnet or a private network"
             }
         },
         "setup": {
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Xác nhận giao dịch",
             "body": "Bạn sắp gửi {amount} tới",
-            "sendingFromStakedAccount": "Bạn đang gửi một lệnh chuyển từ một ví đang thực hiện đặt đọc. Việc này có thể làm hủy đặt cọc các token của bạn. Hoàn toàn có thể gửi lệnh chuyển tuy nhiên bạn phải cần đặt cọc lại số Token còn lại sau đó."
+            "sendingFromStakedAccount": "Bạn đang gửi một lệnh chuyển từ một ví đang thực hiện đặt đọc. Việc này có thể làm hủy đặt cọc các token của bạn. Hoàn toàn có thể gửi lệnh chuyển tuy nhiên bạn phải cần đặt cọc lại số Token còn lại sau đó.",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "Công cụ tìm kiếm số dư",
@@ -746,6 +748,10 @@
             "title": "Về Assembly",
             "body1": "Xin chúc mừng, bạn đã kiếm được token ASMB làm phần thưởng đặt cọc. Assembly là một mạng đa chuỗi để triển khai các hợp đồng thông minh có thể mở rộng trên IOTA.",
             "body2": "Chúng tôi dự định ra mắt Assembly vào năm 2022. Các token của bạn sẽ có sẵn để chuyển khi mạng khởi chạy."
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "Từ",
         "to": "Đến",
         "receiveFunds": "Tài sản nhận",
+        "address": "Address",
         "myAddress": "Địa chỉ của tôi",
         "shareAddress": "Chia sẻ địa chỉ",
         "yourAddress": "Địa chỉ ví của bạn",
@@ -1246,6 +1253,11 @@
             "formattedValue": "Giá trị đã định dạng",
             "date": "Thời điểm",
             "time": "Thời gian"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }

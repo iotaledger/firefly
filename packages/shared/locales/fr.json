@@ -22,9 +22,10 @@
                 "nonFirst": "Pour l'instant, commençons par nommer votre profil."
             },
             "addMore": "Vous pourrez créer d'autres profils par la suite.",
+            "advancedOptions": "Réglages avancés",
             "developer": {
                 "label": "Profil développeur",
-                "info": "Se connecter aux réseaux IOTA publics et privés"
+                "info": "Se connecter au devnet ou à un réseau privé"
             }
         },
         "setup": {
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Confirmer la transaction",
             "body": "Vous êtes sur le point d'envoyer {amount} à",
-            "sendingFromStakedAccount": "Vous effectuez un transfert depuis un portefeuille où des fonds sont placés. Cela peut entrainer l'annulation du Staking. Vous pouvez effectuer le transfert mais il est possible que vous deviez réitérer l'opération de Staking sur vos jetons restant dans votre portefeuille."
+            "sendingFromStakedAccount": "Vous effectuez un transfert depuis un portefeuille où des fonds sont placés. Cela peut entrainer l'annulation du Staking. Vous pouvez effectuer le transfert mais il est possible que vous deviez réitérer l'opération de Staking sur vos jetons restant dans votre portefeuille.",
+            "sendingFromStakedAccountBelowMinReward": "Vous envoyez un transfert depuis un portefeuille qui n'a pas encore atteint les récompenses de staking minimales. Cela peut libérer vos jetons et vous pouvez perdre vos récompenses de staking sur ce portefeuille."
         },
         "balanceFinder": {
             "title": "Retrouvez vos fonds",
@@ -746,6 +748,10 @@
             "title": "À propos d'Assembly",
             "body1": "Félicitations, vous avez acquis des jetons ASMB en guise de récompense. Assembly est un réseau multi-chaîne pour le déploiement de contrats intelligents évolutifs sur IOTA.",
             "body2": "Nous espérons lancer Assembly en 2022. Vos jetons pourront être transférés une fois le réseau lancé."
+        },
+        "confirmDeveloperProfile": {
+            "title": "Vous êtes en train de créer un profil développeur",
+            "body": "Par défaut, vous serez connecté au réseau Chrysalis Devnet et pourrez changer de réseau manuellement. Ne continuez que si vous savez ce que vous faites."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "De",
         "to": "À",
         "receiveFunds": "Recevoir des fonds",
+        "address": "Adresse",
         "myAddress": "Mon Adresse",
         "shareAddress": "Partager une adresse",
         "yourAddress": "Votre adresse",
@@ -1246,6 +1253,11 @@
             "formattedValue": "Valeur formatée",
             "date": "Date",
             "time": "Date et heure"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "Vous utilisez actuellement un profil développeur et êtes connecté à {networkName}"
         }
     }
 }
